@@ -215416,8 +215416,174 @@ Workshop končí rozhodnutím, jestli vyřazení přechází do tichého provozu
 
 Druhý běžný průchod po vyřazení je test přenositelnosti. První průchod může ještě táhnout čerstvá paměť. Druhý už ukáže, jestli systém opravdu nahradil starou položku. Když ano, nechte ji v klidu. Když ne, opravte cestu, ne historii. Portfolio má být pracovní mapa, ne muzeum každého dobrého nápadu, který kdysi dával smysl.
 
+## Uzavření druhého běžného průchodu po vyřazení zhuštěné portfoliové položky
+
+Druhý běžný průchod má cenu jen tehdy, když se po něm něco opravdu uzavře. Bez uzavření se z něj stane další kontrolní vrstva: tým už sice starou položku vyřadil, ale pořád kolem ní chodí po špičkách, sleduje její stín a čeká, jestli se ještě někde neozve. To není tichý provoz. To je dokumentační doznívání.
+
+Uzavření druhého průchodu proto nemá být dlouhá retrospektiva. Má odpovědět na jednu otázku:
+
+```text
+Může aktuální pracovní místo převzít podobné situace bez zvláštní péče?
+```
+
+Pokud ano, zapište krátký závěr a ukončete mimořádnou pozornost. Pokud ne, pojmenujte přesně, co brání přenositelnosti. Nevracejte se k celé historii vyřazené položky jen proto, že druhý průchod nebyl úplně hladký. Hladkost není cíl; cílem je rozhodnutelnost bez staré pomůcky.
+
+Příklad závěru:
+
+```text
+Druhý běžný průchod potvrdil, že údržba retenčních šablon patří do kanonického indexu standardů. Vyřazenou portfoliovou položku neobnovujeme. Do indexu doplněna jedna vstupní fráze. Další kontrola jen při návratovém signálu.
+```
+
+To je dost. Není potřeba zapisovat, kdo si ještě pamatoval starý název, kdo váhal nebo kdo by si "možná" otevřel archiv. Pokud systém potřebuje zlepšit cestu, opravte cestu. Pokud člověk jen víc přemýšlel, nechte člověka přemýšlet. Dokumentace nemá nahradit úsudek ve všech situacích.
+
+### Čtyři uzavírací stavy
+
+Po druhém průchodu vyberte jeden uzavírací stav:
+
+- Uzavřít do tichého provozu: aktuální místo funguje a další zvláštní kontrola není potřeba.
+- Uzavřít s jednou lokální opravou: průchod potvrdil správný směr, ale jedno místo potřebovalo název, odkaz, příklad nebo vstupní otázku.
+- Uzavřít jako slabou přenositelnost: vyřazení zatím platí, ale aktuální cesta není dost srozumitelná bez historické paměti.
+- Vrátit k revizi vyřazení: vyřazená položka nesla rozhodovací funkci, kterou systém zatím neumí nahradit.
+
+První dva stavy ukončují mimořádnou péči. Třetí stav otevírá malou opravu navigace, ne obnovu staré položky. Čtvrtý stav otevírá revizi rozhodnutí, ale musí být konkrétní: jaká funkce chybí, kde se projevila a proč ji aktuální místo neumí převzít.
+
+Špatný zápis:
+
+```text
+Stará položka se asi vyřadila moc brzy.
+```
+
+Lepší zápis:
+
+```text
+Při druhém průchodu chyběla hranice mezi archivací starých šablon a údržbou aktivního retenčního rytmu. Aktuální index odkazuje na obě oblasti, ale neříká, podle čeho vybrat jednu z nich.
+```
+
+Druhý zápis se dá opravit. První jen vrací nejistotu do hry.
+
+### Co propsat do běžného pracovního místa
+
+Uzavření druhého průchodu se má propsat tam, kde bude příště někdo pracovat. Obvykle stačí jedno z těchto míst:
+
+- kanonický index;
+- aktuální playbook;
+- karta pravidla;
+- onboardingová trasa;
+- changelog dokumentace;
+- krátká poznámka v rozhodovacím logu.
+
+Nepropsávejte závěr všude. Pokud se stejná věta objeví v pěti dokumentech, další revize bude muset nejdřív zjistit, který zápis je pravda. Jeden zdroj pravdy je nudný, ale spolehlivý. A spolehlivost je v provozu lepší než dokumentační konfety.
+
+Praktický postup:
+
+```text
+1. Vyberte jedno aktivní pracovní místo.
+2. Doplňte jednu větu, odkaz nebo příklad.
+3. Zapište do logu, že vyřazená položka zůstává mimo běžný tok.
+4. Nechte archivní stopu beze změny, pokud není nepřesná.
+5. Smažte nebo uzavřete dočasnou kontrolní poznámku k druhému průchodu.
+```
+
+Pokud potřebujete změnit víc míst, zastavte se. Možná jste nenašli lokální opravu, ale slabý systémový vzor. V takovém případě nejdřív pojmenujte vzor a otevřete novou kartu. Nepředstírejte, že pět drobných úprav je pořád jedna drobná úprava. To je jen refaktor rozsahu s falešným knírkem.
+
+### Ukončení zvláštní pozornosti
+
+Zvláštní pozornost je užitečná jen krátce po vyřazení. Pomůže zachytit, jestli stará položka nezmizela příliš rychle. Po druhém běžném průchodu ale musí skončit, jinak se z ní stane trvalá daň za každé minulé rozhodnutí.
+
+Ukončení zvláštní pozornosti znamená:
+
+- žádný třetí průchod jen pro jistotu;
+- žádná evidence toho, kdo ještě používá starý název;
+- žádné pravidelné otevírání archivní stopy;
+- žádné dočasné odkazy v aktivních playboocích;
+- žádné rozšiřování changelogu o historické vysvětlování.
+
+Místo toho nastavte návratový signál. Ten říká, kdy má smysl téma znovu otevřít:
+
+```text
+Téma znovu otevřeme, pokud se ve dvou nezávislých pracovních situacích ukáže, že aktuální index neumí rozlišit mezi aktivním pravidlem a archivní stopou.
+```
+
+Návratový signál chrání klid. Bez něj se tým vrací k tématu při každém pocitu nejistoty. S ním ví, že běžné zaváhání není automaticky důvod k další dokumentační výpravě.
+
+### Privacy-first uzavření druhého průchodu
+
+Privacy-first uzavření je hlavně o tom, co po sobě nenecháte. Druhý průchod občas vytvoří pomocné poznámky, screenshoty, exporty, komentáře ve vlákně nebo pracovní tabulku. Po uzavření zkontrolujte, jestli jsou ještě potřeba.
+
+Ptejte se:
+
+- Potřebujeme uchovat konkrétní jména, nebo stačí stav průchodu?
+- Obsahují pomocné poznámky zákaznické detaily, interní problémy nebo osobní údaje?
+- Nevznikla tabulka "kdo používá co", která sleduje lidi místo kvality trasy?
+- Dá se závěr zkrátit na jednu větu bez ztráty rozhodovací hodnoty?
+- Zůstává archivní stopa oddělená od běžného pracovního toku?
+- Má aktivní místo jen tolik kontextu, kolik člověk potřebuje pro další rozhodnutí?
+
+Privacy-first hodnota není jen o cookies a trackerech. Je i o interní hygieně: nesbírat a nedržet víc pracovních stop, než je potřeba k dobrému rozhodnutí. Čím déle žije pomocná evidence, tím víc začne vypadat jako zdroj pravdy. A pak se jednoho dne někdo rozhoduje podle staré tabulky, která měla zmizet hned po druhém průchodu. Krásná ukázka toho, jak si tým sám vyrobí malý dokumentační strašidelný dům.
+
+### Karta uzavření druhého běžného průchodu
+
+```text
+Vyřazená položka:
+
+Druhý běžný průchod proběhl v situaci:
+
+Aktuální pracovní místo:
+
+Výsledný stav:
+- tichý provoz / jedna lokální oprava / slabá přenositelnost / revize vyřazení
+
+Závěr jednou větou:
+
+Co se propsalo do aktivního místa:
+
+Co se neobnovuje:
+
+Jaká dočasná evidence se maže nebo uzavírá:
+
+Archivní stopa:
+- beze změny / zkrácena / opravena kvůli přesnosti
+
+Návratový signál:
+
+Vlastník uzavření:
+
+Datum:
+```
+
+Karta má být krátká. Pokud ji vyplňujete půl hodiny, pravděpodobně neuzavíráte druhý průchod, ale znovu řešíte celé vyřazení. V takovém případě napište nový problém a vraťte se k rozhodnutí, ne k vyplňování formuláře.
+
+### Mini workshop na 6 minut
+
+Použijte ho hned po druhém průchodu, dokud je situace čerstvá:
+
+1. Řekněte jednou větou, co druhý průchod ověřoval.
+2. Vyberte jeden ze čtyř uzavíracích stavů.
+3. Pokud je potřeba oprava, pojmenujte přesně jedno aktivní místo.
+4. Napište závěr do logu.
+5. Určete návratový signál.
+6. Smažte nebo uzavřete dočasné poznámky.
+
+Workshop nesmí skončit větou "ještě to budeme sledovat". Sledování bez návratového signálu je jen nejistota s kalendářem. Pokud potřebujete sledovat, napište co přesně, proč a kdy to skončí. Pokud to napsat neumíte, nesledujte.
+
+### Checklist uzavření druhého běžného průchodu
+
+- Vybrali jsme jeden uzavírací stav?
+- Je závěr zapsaný jednou praktickou větou?
+- Propsali jsme výsledek jen do jednoho aktivního pracovního místa?
+- Zůstala vyřazená položka mimo běžný tok?
+- Nezaložili jsme třetí kontrolu jen pro pocit jistoty?
+- Má téma konkrétní návratový signál?
+- Uzavřeli jsme nebo smazali dočasné pomocné poznámky?
+- Neuchováváme osobní údaje, jména ani zákaznické detaily bez účelu?
+- Je archivní stopa krátká, přesná a pasivní?
+- Ví tým, co příště použít místo vyřazené položky?
+
+Uzavření druhého průchodu je poslední krok, který má vyřazenou položku ještě aktivně připomínat. Po něm už má pracovat běžný systém: index, aktuální pravidlo, rozhodovací log a návratový signál. Když se staré téma opravdu vrátí, vrátí se přes signál. Když se nevrátí, nechte ho být. Dobrá dokumentace umí nejen vznikat, ale taky odejít ze scény bez dlouhého loučení.
+
 ## Pracovní log
 
+- 2026-06-13: Doplněna úvodní podkapitola o uzavření druhého běžného průchodu po vyřazení zhuštěné portfoliové položky: uzavírací stavy, propsání do pracovního místa, ukončení zvláštní pozornosti, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-13: Doplněna úvodní podkapitola o druhém běžném průchodu po vyřazení zhuštěné portfoliové položky: ověření bez čerstvé historie, čtyři výsledné stavy, tichý provoz, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-06-13: Doplněna úvodní podkapitola o uzavření prvního běžného průchodu po vyřazení zhuštěné portfoliové položky: výsledné závěry, propsání bez návratu staré karty, ukončení zvláštní pozornosti, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-13: Doplněna úvodní podkapitola o prvním běžném průchodu po vyřazení zhuštěné portfoliové položky: test reálné podobné situace, výsledné stavy, práce se starým názvem, privacy-first kontrola, karta, mini workshop a checklist.
