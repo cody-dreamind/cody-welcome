@@ -215891,8 +215891,126 @@ To je dostatečně konkrétní. Neříká všechno, ale říká to, podle čeho 
 
 Převod do ročního tichého rytmu je malý krok, ale hodně vypovídá o zralosti provozu. Nejde o to mít všechno pod dohledem. Jde o to vědět, co dohled ještě potřebuje, co stačí zahlédnout v širší inventuře a co už má zůstat v archivu. Tichý systém není systém bez paměti. Je to systém, který si pamatuje jen tolik, aby mohl dobře rozhodovat.
 
+## První roční zahlédnutí vyřazené položky
+
+Pokud vyřazená položka dostala krátké roční zahlédnutí, první průchod nesmí vypadat jako její návrat do práce. Tohle je nejčastější chyba: tým otevře roční inventuru, uvidí starý název, začne znovu číst historii a najednou se z tiché věty stane poloviční audit. Roční zahlédnutí má být lehčí. Má jen potvrdit, jestli širší systém pořád drží rozhodovací funkci, kvůli které jste téma nechali v inventuře.
+
+Začněte otázkou:
+
+```text
+Pomohlo roční zahlédnutí udělat dnešní rozhodnutí, nebo jen znovu otevřelo starý kontext?
+```
+
+Pokud pomohlo, nechte větu v ročním rytmu. Pokud jen otevřelo starý kontext, zkraťte ji, slučte ji do širší otázky nebo ji vyřaďte z roční inventury úplně. Cílem není udržovat památku na vyřazenou položku. Cílem je zachovat schopnost poznat, že se rozhodovací mezera opravdu vrací.
+
+### Jak roční zahlédnutí projít
+
+Roční zahlédnutí má mít tři kroky:
+
+1. Přečíst aktuální roční otázku, ne původní kartu vyřazené položky.
+2. Podívat se na dnešní pracovní místo, které položku nahradilo.
+3. Rozhodnout, jestli návratový signál nastal, nenastal, nebo je otázka už zbytečná.
+
+Příklad:
+
+```text
+Roční otázka:
+Jsou aktivní a archivní datové stopy v indexu pořád jasně oddělené?
+
+Dnešní pracovní místo:
+Index datových standardů a retenční karta exportů.
+
+Co vidíme:
+Aktivní exporty mají vlastní retenční pravidlo. Archivní stopy jsou pasivní a nevedou novou práci.
+
+Návratový signál:
+Nenastal.
+
+Rozhodnutí:
+Roční otázku ponecháváme, ale nepřidáváme samostatnou položku pro starou vyřazenou šablonu.
+```
+
+Všimněte si, že se neotevřela stará historie. Roční kontrola se dívala na dnešní systém, ne na minulou epizodu. To je správné pořadí.
+
+### Tři výsledky prvního zahlédnutí
+
+Po prvním ročním zahlédnutí vyberte jeden ze tří stavů:
+
+- Ponechat tiché zahlédnutí: otázka pomohla potvrdit důležitou hranici a nezvětšila práci.
+- Sloučit do širší otázky: téma je pořád relevantní, ale samostatná věta je moc historická.
+- Vyřadit z ročního rytmu: otázka už nic nerozhoduje a stačí návratový signál.
+
+Stav `ponechat` nepoužívejte ze setrvačnosti. Napište, jaké rozhodnutí otázka chrání. Například: "pomáhá hlídat, že archivní datové stopy zůstávají pasivní a nevrací se do aktivních retenčních pravidel."
+
+Stav `sloučit` je vhodný, když roční věta pořád míří správným směrem, ale používá příliš úzký nebo starý jazyk. Místo názvu vyřazené položky použijte dnešní rozhodovací funkci.
+
+Stav `vyřadit` je správný, když téma už pokrývá jiné pracovní místo a roční otázka jen připomíná minulost. Vyřazení z ročního rytmu není ztráta paměti. Paměť zůstává v archivu a návratový signál dál říká, kdy se téma vrátí.
+
+### Privacy-first kontrola ročního zahlédnutí
+
+Roční zahlédnutí nesmí tahat do aktivní práce staré podklady. Nepotřebujete screenshoty, původní exporty, jména lidí ani konkrétní zákaznické příklady. Potřebujete jen zjistit, jestli dnešní pracovní místo pořád rozhoduje správně.
+
+Zapište minimum:
+
+```text
+Zůstává:
+Stav roční otázky, dnešní pracovní místo a návratový signál.
+
+Neotevírá se:
+Původní karta vyřazené položky, staré exporty, screenshoty ani osobní poznámky.
+
+Dál nesbíráme:
+Evidence lidí, kteří si starý postup pamatují, ani nové sledování používání dokumentace.
+```
+
+Codyho komentář: roční zahlédnutí je jako podívat se na kompas, ne jako rozbalit starou mapu všech výletů, kde jsme kdy zabloudili. Kompas stačí, když ukazuje směr. Staré mapy nechte v archivu, pokud zrovna nehledáte důkaz, kde přesně se cesta ztratila.
+
+### Karta prvního ročního zahlédnutí
+
+```text
+Vyřazená položka:
+
+Roční otázka:
+
+Aktuální pracovní místo:
+
+Co jsme ověřili:
+
+Návratový signál:
+- nastal / nenastal / není už relevantní
+
+Výsledek:
+- ponechat tiché zahlédnutí / sloučit do širší otázky / vyřadit z ročního rytmu
+
+Důvod:
+
+Co zůstává v archivu:
+
+Co se do ročního rytmu nepřenáší:
+
+Privacy-first úklid:
+
+Vlastník:
+```
+
+### Checklist prvního ročního zahlédnutí
+
+- Začali jsme aktuální roční otázkou, ne starou kartou?
+- Dívali jsme se na dnešní pracovní místo, které položku nahradilo?
+- Víme, jestli návratový signál nastal?
+- Rozhodli jsme mezi ponechat, sloučit a vyřadit?
+- Neponecháváme roční otázku jen ze setrvačnosti?
+- Pokud slučujeme, převádíme historický název na dnešní rozhodovací funkci?
+- Pokud vyřazujeme, zůstává konkrétní návratový signál?
+- Neotevřeli jsme staré exporty, screenshoty ani osobní poznámky bez účelu?
+- Zůstává roční rytmus kratší nebo stejně štíhlý než před kontrolou?
+- Umí tým jednou větou říct, proč se téma příští rok objeví, nebo proč už ne?
+
+První roční zahlédnutí má potvrdit, že vyřazená položka opravdu odešla z běžné práce. Když tichá otázka pořád chrání rozhodování, nechte ji. Když už jen nosí starý název, přepište ji nebo vyřaďte. Dobrý roční rytmus není muzeum minulých pravidel. Je to krátká kontrola toho, zda dnešní systém pořád umí rozhodovat bez zbytečné paměťové zátěže.
+
 ## Pracovní log
 
+- 2026-06-13: Doplněna úvodní podkapitola o prvním ročním zahlédnutí vyřazené položky: ověření dnešního pracovního místa místo staré historie, tři výsledné stavy, privacy-first kontrola, karta a checklist.
 - 2026-06-13: Doplněna úvodní podkapitola o převodu vyřazené portfoliové položky do ročního tichého rytmu: tři možnosti převodu, vynechání ročního rytmu, sloučení do širší otázky, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-13: Doplněna úvodní podkapitola o rychlém potvrzení návratového signálu: tři brány potvrzení, falešné návraty, privacy-first hranice, potvrzovací karta, mini workshop a checklist.
 - 2026-06-13: Doplněna úvodní podkapitola o uzavření druhého běžného průchodu po vyřazení zhuštěné portfoliové položky: uzavírací stavy, propsání do pracovního místa, ukončení zvláštní pozornosti, privacy-first úklid, karta, mini workshop a checklist.
