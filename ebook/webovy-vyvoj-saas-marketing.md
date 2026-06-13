@@ -216759,8 +216759,211 @@ Workshop má skončit bez návratu do staré karty. Pokud ji musíte otevřít, 
 
 První roční inventura bez vyřazené položky má potvrdit, že systém umí žít bez staré opatrnosti. Když ticho funguje, nechte ho tiché. Když se objeví lokální tření, opravte dnešní místo. Když se vrací skutečný problém, vraťte jen nejmenší užitečnou otázku. A pokud se vrací hlavně historie, zavřete archiv a dejte si kávu. Historie nemá řídit provoz jen proto, že má dlouhé poznámky.
 
+## Uzavření první roční inventury bez vyřazené položky
+
+Po první roční inventuře bez vyřazené položky hrozí nenápadná chyba: tým si sice řekne, že ticho funguje, ale nechá si kolem tématu malý servisní obláček. Jedna poznámka v logu, jeden odkaz v interní kartě, jedna opatrná věta v checklistu, "jen kdyby náhodou". Výsledkem je, že položka formálně zmizela, ale pozornost se k ní pořád vrací.
+
+Uzavření má proto udělat víc než jen zapsat výsledek. Má rozhodnout, co se po inventuře stane s dnešním pracovním místem, návratovým signálem a zbytky staré historie.
+
+Začněte větou:
+
+```text
+Po první inventuře bez vyřazené položky necháváme v běžném provozu jen to, co pomáhá dnešnímu rozhodnutí.
+```
+
+Tahle věta je malá brzda proti nostalgii dokumentace. Pokud něco nepomáhá dnešnímu rozhodnutí, patří to buď do archivu, nebo pryč. Aktivní systém nemá být pamětní deska všech starých opatrností. Má být použitelný i pro člověka, který u původního problému nebyl.
+
+### Čtyři uzavírací stavy
+
+Výsledek inventury převeďte do jednoho ze čtyř uzavíracích stavů:
+
+- Ticho potvrzeno: nic se nevrací, nic se nedoplňuje a v běžném rytmu zůstává jen obecná kontrola.
+- Lokální oprava zavřena: drobný nález byl opraven v dnešním pracovním místě a stará položka zůstává mimo rytmus.
+- Návratový signál zpřesněn: problém nebyl v obsahu, ale v tom, že tým nevěděl, kdy by se téma mělo vrátit.
+- Menší otázka obnovena: obecný systém opakovaně selhal a do aktivního rytmu se vrací krátká dnešní otázka bez původní historie.
+
+Stav `ticho potvrzeno` zapisujte co nejkratší větou:
+
+```text
+První roční inventura bez položky: rozhodovací funkce je pokrytá obecnou kontrolou datových stop, stínová práce nevznikla, položku neobnovujeme.
+```
+
+To stačí. Nevyrábějte k tomu novou kartu. Pokud je hlavní výsledek "systém funguje bez další práce", nejlepší další práce je žádná.
+
+Stav `lokální oprava zavřena` potřebuje jen malý záznam o místě opravy:
+
+```text
+Nález:
+V interní poznámce zůstal starý odkaz na archivní export.
+
+Oprava:
+Odkaz odstraněn, obecná kontrola datových stop zůstává beze změny.
+
+Rozhodnutí:
+Vyřazenou položku neobnovujeme.
+```
+
+Stav `návratový signál zpřesněn` je častější, než se zdá. Tým si pamatuje, že něco mělo být hlídané, ale nedokáže říct, jak by se návrat poznal v běžné práci. V takovém případě neopravujte celý checklist. Opravte jen spouštěč:
+
+```text
+Původní signál:
+Když se téma exportů začne znovu objevovat.
+
+Zpřesněný signál:
+Když se archivní export použije jako vstup pro aktivní zákaznické předání, pravidelný report nebo rozhodnutí o produktu.
+```
+
+Stav `menší otázka obnovena` je poslední možnost. Použijte ji jen tehdy, když se při inventuře ukázalo, že obecnější kontrola reálně nechrání rozhodnutí. I pak se nevrací stará položka. Vrací se nová, kratší otázka:
+
+```text
+Nová otázka:
+Je v aktivním pracovním postupu použitý artefakt, který měl zůstat jen v archivu?
+```
+
+To je jiné než obnovit celou historii. Otázka je dnešní, obecná a použitelná bez vysvětlování původního příběhu.
+
+### Co po uzavření uklidit
+
+Uzavření inventury má mít malý úklidový dopad. Nehledejte velký refaktor dokumentace. Projděte jen místa, která se tématu dotýkají:
+
+- roční log nebo revizní záznam;
+- aktivní checklist, pokud obsahuje obecnou kontrolu;
+- kanonické pracovní místo, kde se rozhoduje dnešní situace;
+- archivní karta, pokud se v ní změnil návratový signál;
+- dočasné poznámky, které vznikly při inventuře.
+
+Praktické pravidlo:
+
+```text
+Aktivní dokumentace má nést pravidlo.
+Log má nést výsledek.
+Archiv má nést minulost.
+Dočasné poznámky mají po uzavření zmizet.
+```
+
+Když se tyto role promíchají, vyřazená položka se začne vracet převlekem. Aktivní checklist vysvětluje starý incident, log se používá jako návod, archiv se cituje při běžné práci a dočasná poznámka se po půl roce tváří jako zdroj pravdy. To je přesně ten tichý chaos, kterému mělo vyřazení zabránit.
+
+### Jak uzavřít stínovou práci
+
+Pokud inventura našla stínovou práci, uzavření nemá nikoho nachytat při neoficiálním postupu. Má zjistit, co v systému chybělo.
+
+Postupujte jednoduše:
+
+1. Pojmenujte, jakou jistotu stínová práce dávala.
+2. Najděte nejbližší oficiální místo, které má stejnou jistotu poskytovat.
+3. Doplňte jednu větu, otázku nebo příklad do oficiálního místa.
+4. Zrušte soukromou připomínku, tabulku nebo ruční kontrolu.
+5. Zapište návratový signál, pokud se stejná stínová práce objeví znovu.
+
+Příklad:
+
+```text
+Stínová práce:
+Delivery lead si držel soukromý seznam exportů, které se nesmí používat v nových předávkách.
+
+Co to nahrazovalo:
+V předávacím checklistu chyběla otázka na původ datového artefaktu.
+
+Oficiální oprava:
+Do předávacího checklistu přidána otázka:
+Je každý přiložený datový artefakt aktivní, aktuální a určený pro tuto předávku?
+
+Úklid:
+Soukromý seznam se smaže po kontrole, že neobsahuje jediný zdroj bez náhrady.
+```
+
+Důležité je, aby se soukromý seznam nestal novou přílohou checklistu. Pokud opravdu obsahuje jedinečné znalosti, převeďte je do pravidla nebo anonymního příkladu. Pokud obsahuje jen historické detaily, nepatří do aktivního provozu.
+
+Codyho komentář: stínová práce často vzniká z dobré vůle. Jenže dobrá vůle není architektura systému. Když musí jeden člověk něco držet bokem, systém si právě půjčuje jeho hlavu jako databázi. To je mizerný provozní model a ještě horší privacy-first nápad.
+
+### Privacy-first uzavření inventury
+
+Uzavření první inventury bez položky je vhodný moment na malou datovou dietu. Nejde o právní analýzu. Jde o provozní hygienu: aktivní práce má používat co nejméně starých detailů, zejména pokud obsahují osobní údaje, zákaznické kontexty, screenshoty, exporty nebo interní poznámky.
+
+Zkontrolujte:
+
+- Zmizely dočasné poznámky z inventury, pokud už nemají účel?
+- Nepřenesli jsme starý zákaznický příklad do aktivního checklistu?
+- Nezůstala stínová práce v osobním dokumentu nebo soukromé složce?
+- Je návratový signál postavený na pracovním výstupu, ne na sledování lidí?
+- Víme, kde zůstává archivní stopa, kdo k ní má přístup a kdy se znovu posoudí?
+
+Dobrá privacy-first uzavírací věta:
+
+```text
+Inventura nezavedla novou evidenci. Aktivní pravidlo pracuje s anonymním scénářem, dočasné poznámky byly smazány a archivní karta zůstává jen pro rozhodovací historii s omezeným přístupem.
+```
+
+Špatná věta:
+
+```text
+Pro jistotu si budeme bokem zapisovat, kdo se na starou položku kdy zeptal.
+```
+
+Ta druhá věta vypadá opatrně, ale vyrábí nová data místo lepšího pravidla. Pokud chcete jistotu, upravte pracovní otázku. Nesledujte lidi jen proto, že dokumentace neumí stát rovně.
+
+### Karta uzavření první inventury bez položky
+
+```text
+Vyřazená položka:
+
+Výsledek první inventury:
+- ticho potvrzeno / lokální oprava zavřena / návratový signál zpřesněn / menší otázka obnovena
+
+Dnešní pracovní místo:
+
+Co zůstává v aktivním systému:
+
+Co se nevrací:
+
+Lokální oprava, pokud existuje:
+
+Stínová práce:
+- žádná / uzavřena jak:
+
+Návratový signál po uzavření:
+
+Privacy-first úklid:
+
+Dočasné poznámky odstraněny:
+- ano / ne, proč:
+
+Vlastník:
+
+Datum další běžné kontroly:
+```
+
+Karta má smysl jen u změny. Pokud je výsledek čisté `ticho potvrzeno`, použijte místo ní jednu větu v logu. Karta je nástroj pro uzavření rozhodnutí, ne pamětní list k tomu, že se nic nestalo.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte výsledek první inventury bez položky.
+2. Minuta 2: vyberte jeden ze čtyř uzavíracích stavů.
+3. Minuta 3: určete, co zůstává v aktivním systému.
+4. Minuta 4: určete, co se nevrací ze staré historie.
+5. Minuta 5: proveďte privacy-first úklid dočasných poznámek a případné stínové práce.
+6. Minuta 6: zapište log, nebo kartu, pokud se něco opravdu mění.
+
+Když se tým zasekne, vraťte se k otázce: "Jaké dnešní rozhodnutí tím chráníme?" Pokud odpověď nepřijde, nechte položku zavřenou a zapište jen návratový signál. Nejasná opatrnost není důvod k dalšímu řádku v checklistu.
+
+### Checklist uzavření první inventury bez položky
+
+- Vybrali jsme jeden uzavírací stav?
+- Nevrátili jsme starou položku jen kvůli lokálnímu nálezu?
+- Pokud byla stínová práce, víme, jakou jistotu nahrazovala?
+- Přenesli jsme užitečnou jistotu do oficiálního pracovního místa?
+- Zrušili jsme soukromé připomínky, seznamy nebo ruční kontroly, které už nemají roli?
+- Je návratový signál konkrétní a pozorovatelný v běžné práci?
+- Zůstává aktivní dokumentace bez starých zákaznických detailů, screenshotů a exportů?
+- Mají dočasné poznámky po inventuře jasný konec?
+- Pokud se nic nemění, spokojili jsme se s krátkým logem místo nové karty?
+- Je další běžná kontrola součástí existujícího rytmu, ne nová mimořádná agenda?
+
+Uzavření první roční inventury bez vyřazené položky je test disciplíny. Nejde jen o to, jestli položka chyběla. Jde o to, jestli tým umí nechat zavřenou věc, která už nemá práci. Dobře uzavřená inventura zanechá méně aktivních řádků, jasnější návratový signál, žádné nové zbytečné osobní údaje a klidnější systém.
+
 ## Pracovní log
 
+- 2026-06-13: Doplněna úvodní podkapitola o uzavření první roční inventury bez vyřazené položky: čtyři uzavírací stavy, úklid stínové práce, privacy-first datová dieta, karta, mini workshop a checklist.
 - 2026-06-13: Doplněna úvodní podkapitola o první roční inventuře bez vyřazené položky: ověření rozhodovací funkce bez staré otázky, stínová práce, návratový signál, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-06-13: Doplněna úvodní podkapitola o uzavření druhého ročního zahlédnutí vyřazené položky: tři způsoby uzavření, propsání do systému, privacy-first úklid historických detailů, karta, mini workshop a checklist.
 - 2026-06-13: Doplněna úvodní podkapitola o druhém ročním zahlédnutí vyřazené položky: samostatnost otázky bez původní historie, čtyři výsledné stavy, privacy-first datová dieta, karta, mini workshop a checklist.
