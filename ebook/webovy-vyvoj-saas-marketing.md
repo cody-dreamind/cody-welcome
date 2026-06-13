@@ -216961,8 +216961,159 @@ Když se tým zasekne, vraťte se k otázce: "Jaké dnešní rozhodnutí tím ch
 
 Uzavření první roční inventury bez vyřazené položky je test disciplíny. Nejde jen o to, jestli položka chyběla. Jde o to, jestli tým umí nechat zavřenou věc, která už nemá práci. Dobře uzavřená inventura zanechá méně aktivních řádků, jasnější návratový signál, žádné nové zbytečné osobní údaje a klidnější systém.
 
+## Druhá roční inventura bez vyřazené položky
+
+Druhá roční inventura bez vyřazené položky je jiný test než ta první. První rok často ještě nese čerstvou paměť: lidé vědí, co se vyřadilo, proč se to vyřadilo a kde by to případně hledali. Druhý rok už ukazuje, jestli systém opravdu funguje bez staré opory, nebo jestli se vyřazená položka nenápadně vrátila přes zvyky, soukromé poznámky a "radši si to ještě někam zapíšu".
+
+Nezačínejte archivem. Začněte aktuální prací. Vyberte jednu reálnou situaci, ve které by dřív vyřazená položka mohla pomoct, a projděte ji dnešní cestou. Pokud dnešní cesta stačí, stará položka zůstává zavřená. Pokud nestačí, neznamená to automaticky návrat položky. Znamená to, že máte pojmenovat dnešní slabé místo.
+
+Praktická otázka druhého roku zní:
+
+```text
+Umíme dnešní rozhodnutí udělat bez vyřazené položky, bez soukromé náhrady a bez rozbalení staré historie?
+```
+
+Ta otázka je schválně přísná. Nestačí, že rozhodnutí nakonec nějak vznikne. Pokud člověk mezitím hledá starý export, ptá se původního autora, vytahuje archivní screenshot nebo používá vlastní tabulku bokem, systém sice navenek funguje, ale ve skutečnosti si drží neviditelnou berličku.
+
+### Čtyři signály druhé inventury
+
+Při druhé inventuře sledujte čtyři signály:
+
+- Najitelnost: člověk najde dnešní pracovní místo bez znalosti staré položky.
+- Rozhodnutelnost: dnešní pracovní místo stačí k rozhodnutí, kvůli kterému položka kdysi existovala.
+- Tichost: nikdo nepotřebuje soukromou náhradu, připomínku, kopii ani neformální obchůzku.
+- Datová střídmost: kvůli absenci položky nevznikají nové osobní údaje, exporty ani dodavatelské stopy.
+
+Když projdou všechny čtyři signály, druhý rok potvrzuje, že vyřazení dozrálo. Pokud projdou první dva, ale chybí tichost, problém není v dokumentaci samotné. Problém je v důvěře v dokumentaci. Pokud chybí rozhodnutelnost, hledejte nejmenší větu nebo odkaz, který dnešní pracovní místo doplní. Pokud chybí datová střídmost, zastavte inventuru a nejdřív ukliďte náhradní tok dat.
+
+Příklad:
+
+```text
+Vyřazená položka:
+Samostatná karta starého lead scoringu.
+
+Dnešní situace:
+Obchod řeší, jestli novou poptávku posunout do discovery, nebo ji slušně odmítnout.
+
+Dnešní pracovní místo:
+Kvalifikační pravidlo v sales šabloně.
+
+Výsledek:
+Obchod rozhodl podle segmentu, problému, rozhodovací role a dalšího kroku. Starý scoring nikdo nehledal.
+
+Skrytá náhrada:
+Žádná.
+
+Datová stopa:
+Nepřidávali jsme nové formulářové pole ani obohacování kontaktu.
+
+Rozhodnutí:
+Vyřazená položka zůstává zavřená. Do sales šablony doplníme jen odkaz na aktuální kvalifikační pravidlo, protože jeden člověk ho hledal přes starý název.
+```
+
+Všimněte si rozsahu opravy. Nevrací se scoring, nevzniká nový dashboard a nevytváří se "malá evidence pro jistotu". Stačí přidat lepší směrovku do místa, které už práci nese.
+
+### Kdy starou položku nevracet
+
+Starou položku nevracejte jen proto, že by jednou mohla být užitečná. To platilo i před jejím vyřazením a samo o sobě to nestačilo. Druhá roční inventura má odhalit skutečnou pracovní potřebu, ne oživit starou nostalgii.
+
+Typické slabé důvody pro návrat:
+
+- Někdo si pamatuje, že položka bývala "docela dobrá".
+- Nový člověk nezná historii a ptá se po starém názvu.
+- Jedna situace byla nepohodlná, ale dnešní pracovní místo ji po krátkém vysvětlení uneslo.
+- Chybí odkaz, ne obsah.
+- Chybí vlastník aktuálního místa, ne stará karta.
+- Tým chce jistotu, ale neumí říct, jaké rozhodnutí by stará položka zlepšila.
+
+V těchto případech opravte dnešní cestu. Přidejte směrovku, přepište jednu větu, sjednoťte název, nebo určete vlastníka. Návrat staré položky je až poslední možnost, když dnešní systém opakovaně neumí rozhodnout bez ztráty významu.
+
+Codyho komentář: starý dokument se často tváří jako zkušený veterán. Někdy opravdu drží důležitou paměť. Ale někdy je to jen PDF v maskáčích, které chce zpátky do aktivní služby, protože se mu v archivu nudí. Nechte ho tam, dokud neukáže dnešní práci.
+
+### Privacy-first kontrola druhého roku
+
+Druhý rok je nebezpečný tím, že se náhradní stopy tváří nevinně. Jedna osobní tabulka, pár starých screenshotů, export "jen pro srovnání", soukromý seznam výjimek. Každá z těchto věcí může obsahovat víc osobních nebo obchodně citlivých dat než původní kanonická položka.
+
+Proto při inventuře projděte nejen oficiální dokumentaci, ale i pracovní návyky:
+
+- Nepoužívá někdo starý export jako rychlejší cestu k rozhodnutí?
+- Nevznikl soukromý seznam výjimek, který nahrazuje zrušenou položku?
+- Neposílají se kvůli nejistotě data do dalšího nástroje?
+- Nevrátila se stará otázka do formuláře, i když už nemá jasný účel?
+- Nezůstaly v interních ukázkách reálné zákaznické detaily, které už nejsou potřeba?
+
+Privacy-first výsledek druhé inventury má být ideálně kratší než první. Čím déle je položka zavřená, tím méně důkazů by mělo zůstávat v aktivní práci. Pokud druhý rok vytváří víc kontrolních stop než první, systém si z vyřazení udělal nový dohled. To je drahá verze klidu.
+
+### Karta druhé roční inventury bez položky
+
+```text
+Vyřazená položka:
+
+Dnešní pracovní situace:
+
+Dnešní pracovní místo:
+
+Rozhodnutí, které šlo udělat:
+
+Signály:
+- najitelnost:
+- rozhodnutelnost:
+- tichost:
+- datová střídmost:
+
+Skrytá náhrada:
+- žádná / jaká:
+
+Nejmenší oprava dnešní cesty:
+
+Co se nevrací ze staré položky:
+
+Privacy-first úklid:
+
+Nový nebo potvrzený návratový signál:
+
+Výsledek:
+- vyřazení potvrzeno
+- opravit dnešní cestu
+- uklidit skrytou náhradu
+- otevřít novou menší otázku
+
+Vlastník:
+
+Další kontrola v existujícím rytmu:
+```
+
+Karta nemá být nová trvalá evidence. Je to inventurní záznam. Pokud výsledek zní `vyřazení potvrzeno` a není potřeba žádná oprava, stačí po inventuře ponechat jen krátký log a případně aktualizovaný návratový signál.
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: vyberte jednu dnešní situaci, kde by stará položka kdysi pomohla.
+2. Minuta 2: projděte dnešní pracovní místo bez otevření archivu.
+3. Minuta 3: zapište rozhodnutí, které šlo nebo nešlo udělat.
+4. Minuty 4 až 5: projděte najitelnost, rozhodnutelnost, tichost a datovou střídmost.
+5. Minuta 6: určete nejmenší opravu dnešní cesty, pokud je potřeba.
+6. Minuta 7: zapište, co se nevrací ze staré položky a jaký je návratový signál.
+
+Když workshop skončí větou "možná bychom měli starou věc radši obnovit", vraťte se k rozhodnutí, které dnes nešlo udělat. Pokud žádné konkrétní rozhodnutí nechybělo, neobnovujte nic. Opatrnost bez rozhodnutí je jen přejmenovaný nepořádek.
+
+### Checklist druhé roční inventury bez položky
+
+- Testovali jsme dnešní pracovní situaci, ne vzpomínku na starou položku?
+- Prošli jsme dnešní cestu bez otevření archivu?
+- Šlo udělat konkrétní rozhodnutí?
+- Zkontrolovali jsme najitelnost, rozhodnutelnost, tichost a datovou střídmost?
+- Našli jsme případnou skrytou náhradu a víme, proč vznikla?
+- Opravujeme dnešní pracovní místo místo návratu celé staré položky?
+- Je jasně zapsané, co se ze staré položky nevrací?
+- Uklidili jsme osobní tabulky, exporty, screenshoty nebo příklady, které už nemají účel?
+- Zůstává další kontrola v existujícím rytmu?
+- Má návratový signál dnešní formulaci, které porozumí i člověk bez historie?
+
+Druhá roční inventura bez vyřazené položky má potvrdit dospělost systému. Nejde o obřad nad archivem. Jde o obyčejnou pracovní situaci, ve které se ukáže, že tým umí rozhodovat bez staré opory, bez soukromých náhrad a bez nových datových zbytků. Pokud ano, nechte položku zavřenou. Ticho, které opravdu funguje, je výsledek.
+
 ## Pracovní log
 
+- 2026-06-13: Doplněna úvodní podkapitola o druhé roční inventuře bez vyřazené položky: ověření dnešní cesty bez archivu, skrytých náhrad a nové datové stopy, karta, mini workshop a checklist.
 - 2026-06-13: Doplněna úvodní podkapitola o uzavření první roční inventury bez vyřazené položky: čtyři uzavírací stavy, úklid stínové práce, privacy-first datová dieta, karta, mini workshop a checklist.
 - 2026-06-13: Doplněna úvodní podkapitola o první roční inventuře bez vyřazené položky: ověření rozhodovací funkce bez staré otázky, stínová práce, návratový signál, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-06-13: Doplněna úvodní podkapitola o uzavření druhého ročního zahlédnutí vyřazené položky: tři způsoby uzavření, propsání do systému, privacy-first úklid historických detailů, karta, mini workshop a checklist.
