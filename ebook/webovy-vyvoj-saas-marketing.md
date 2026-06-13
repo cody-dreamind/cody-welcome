@@ -45,6 +45,128 @@ Po zavření průchodu si nechte krátkou závěrečnou stopu: původní otázku
 
 Další průchod otevírejte až ve chvíli, kdy se objeví návratový signál ze závěrečné stopy. Pouhý pocit, že by se "ještě dalo něco zlepšit", patří do poznámek, ne do nové iterace; jinak se z klidného návratu stane trvalá údržba bez jasného důvodu.
 
+## Rychlé potvrzení návratového signálu
+
+Návratový signál má chránit tým před dvěma opačnými chybami. První chyba je ignorovat skutečný problém jen proto, že už se jednou uzavřel. Druhá chyba je otevřít novou iteraci pokaždé, když někdo zahlédne nedokonalost. Rychlé potvrzení signálu je malý filtr mezi těmito dvěma extrémy.
+
+Nejde o audit, výzkum ani nový projekt. Cílem je během krátkého průchodu zjistit, jestli se opravdu stalo něco, co odpovídá závěrečné stopě z minulé iterace. Pokud ano, otevřete další průchod. Pokud ne, zapište podnět do poznámek a nechte pracovní systém dál běžet.
+
+Začněte tím, že z posledního rozhodnutí vytáhnete původní návratový signál doslova. Nepřepisujte ho podle dnešního pocitu. Když byl signál "tři noví uživatelé za sebou nedokončí první import bez pomoci", neudělejte z něj "onboarding působí slabě". První věta ukazuje konkrétní situaci. Druhá jen zve k nekonečnému vylepšování.
+
+Praktická potvrzovací otázka zní:
+
+```text
+Stalo se to, co jsme si předem řekli, že nás má vrátit k tématu?
+```
+
+Pokud odpověď zní "nevím", není to ještě důvod otevřít iteraci. Je to důvod najít nejmenší existující důkaz. Tím může být jeden obchodní zápis, jedna poslední poptávka, jeden support tiket, jeden dokončený onboarding, jedna chyba v předávce nebo jeden reálný průchod šablonou. Privacy-first pravidlo je jednoduché: nejdřív hledejte v datech, která už vznikla legitimně při práci. Nepřidávejte nový tracking jen proto, že se někdo zeptal trochu neostře.
+
+### Tři brány potvrzení
+
+Návratový signál potvrďte přes tři brány:
+
+- Shoda se signálem: dnešní situace odpovídá tomu, co bylo zapsané jako návratový signál.
+- Dopad na pracovní rozhodnutí: bez reakce hrozí opakované špatné rozhodnutí, zbytečná práce, horší zákaznická zkušenost nebo datové riziko.
+- Nejbližší pracovní místo: víte, kde by se případná změna měla stát jako první.
+
+Když projdou všechny tři brány, otevřete další průchod. Když projde jen první brána, ale chybí dopad, stačí poznámka. Když projde dopad, ale signál neodpovídá původní stopě, možná jde o nové téma, ne o návrat staré iterace. Když neznáte pracovní místo, je otázka pořád moc mlhavá.
+
+Příklad:
+
+```text
+Původní návratový signál:
+Tři relevantní poptávky za sebou nepůjdou kvalifikovat bez ručního doptání na rozpočet nebo rozhodovací proces.
+
+Dnešní situace:
+Přišly tři poptávky. Dvě jsou relevantní, jedna je mimo cílový segment. U obou relevantních chyběl rozhodovací proces, rozpočet byl jasný.
+
+Shoda se signálem:
+Částečná. Nejde o tři relevantní poptávky za sebou, ale opakuje se jedna část problému.
+
+Dopad:
+Obchod ztrácí čas stejným doptáváním a prodlužuje první reakci.
+
+Nejbližší pracovní místo:
+První kontaktní formulář a následná potvrzovací zpráva.
+
+Rozhodnutí:
+Neotevíráme plnou iteraci kvalifikace poptávek. Otevíráme menší lokální průchod k rozhodovacímu procesu v poptávce.
+```
+
+Všimněte si, že výsledek není "všechno předělat". Signál se nepotvrdil celý, ale ukázal dost konkrétní lokální tření. To stačí pro malý průchod s jasnou hranicí.
+
+### Kdy signál nepotvrdit
+
+Signál nepotvrzujte jen proto, že někdo nahlas řekl problém podobnými slovy. Slova bývají levná, provozní důkaz dražší a užitečnější. Typické falešné návraty:
+
+- Jeden člověk si vzpomněl na starou bolest, ale v posledních průchodech se neopakuje.
+- Nový nápad používá starý název problému, ale míří na jiné místo.
+- Změnilo se publikum, segment nebo nabídka, takže starý signál už neměří stejnou situaci.
+- Podnět je estetický nebo preferenční, ale nemá dopad na rozhodnutí, důvěru, příjem, provoz ani datovou stopu.
+- Tým nemá žádný existující důkaz a musel by začít sbírat nové osobní údaje jen kvůli dojmu.
+
+Falešný návrat není zbytečný. Zapište ho jako podnět, ale nedávejte mu status návratového signálu. Rozdíl je důležitý: podnět může čekat, návratový signál otevírá práci.
+
+Codyho komentář: "někdo měl pocit" je výborný začátek rozhovoru a mizerný začátek další iterace. Pocit může být správný, ale ať si obuje pracovní boty: ukaž místo, ukaž dopad, ukaž nejmenší důkaz. Jinak bude jen běhat po místnosti a rozhazovat backlog.
+
+### Potvrzovací karta
+
+```text
+Původní rozhodnutí:
+
+Původní návratový signál:
+
+Dnešní podnět:
+
+Existující důkaz:
+
+Shoda se signálem:
+- žádná / částečná / plná
+
+Dopad na pracovní rozhodnutí:
+
+Nejbližší pracovní místo:
+
+Privacy-first hranice:
+Jaká nová data kvůli tomu nesbíráme:
+
+Rozhodnutí:
+- neotevírat
+- zapsat jako nový podnět
+- otevřít lokální průchod
+- otevřít plný návrat k tématu
+
+Vlastník:
+
+Datum návratu:
+```
+
+Karta má být krátká. Pokud ji tým neumí vyplnit za pět až deset minut, pravděpodobně nemá návratový signál, ale nejasný námět. To není špatně. Jen to nepatří do stejné pracovní smyčky.
+
+### Mini workshop na 8 minut
+
+1. Minuta 1: přečtěte původní návratový signál beze změn.
+2. Minuty 2 až 3: pojmenujte dnešní podnět a najděte jeden existující důkaz.
+3. Minuty 4 až 5: projděte tři brány potvrzení.
+4. Minuta 6: určete nejbližší pracovní místo.
+5. Minuta 7: zapište privacy-first hranici, tedy co kvůli tomu nezačnete sbírat.
+6. Minuta 8: vyberte jeden ze čtyř stavů rozhodnutí.
+
+Když workshop skončí bez rozhodnutí, defaultní stav je "neotevírat". Ne proto, že problém neexistuje, ale proto, že se zatím nepodařilo převést podnět do použitelné práce. Další krok může být jen doplnění jednoho důkazu z existujících stop, ne otevření nové velké kapitoly.
+
+### Checklist potvrzení návratového signálu
+
+- Četli jsme původní návratový signál doslova?
+- Nezaměnili jsme konkrétní signál za obecný pocit?
+- Máme jeden existující důkaz z běžné práce?
+- Prošel podnět bránou shody, dopadu a pracovního místa?
+- Je jasné, jestli otevíráme staré téma, nový podnět, nebo jen lokální průchod?
+- Zapsali jsme, jaká nová data kvůli tomu nesbíráme?
+- Má rozhodnutí vlastníka a datum návratu?
+- Umíme říct, co se stane, když se signál nepotvrdil?
+
+Potvrzený návratový signál má tým uklidnit, ne rozrušit. Když projde, víte, proč práci znovu otevíráte. Když neprojde, víte, proč ji necháváte zavřenou. Oba výsledky jsou dobré, protože oba chrání pozornost i data.
+
 ## Jak zmenšit další krok po nesplněné stop podmínce
 
 Nesplněná stop podmínka často neříká, že tým pracoval špatně. Častěji říká, že otázka byla moc široká, důkaz moc vzdálený nebo změna spolkla víc pracovních míst najednou. V tu chvíli nepomůže přidat další kapitolu, další meeting ani další tabulku. Pomůže přeložit původní záměr do menší jednotky, kterou jde dokončit bez nového systému okolo.
@@ -215583,6 +215705,7 @@ Uzavření druhého průchodu je poslední krok, který má vyřazenou položku 
 
 ## Pracovní log
 
+- 2026-06-13: Doplněna úvodní podkapitola o rychlém potvrzení návratového signálu: tři brány potvrzení, falešné návraty, privacy-first hranice, potvrzovací karta, mini workshop a checklist.
 - 2026-06-13: Doplněna úvodní podkapitola o uzavření druhého běžného průchodu po vyřazení zhuštěné portfoliové položky: uzavírací stavy, propsání do pracovního místa, ukončení zvláštní pozornosti, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-13: Doplněna úvodní podkapitola o druhém běžném průchodu po vyřazení zhuštěné portfoliové položky: ověření bez čerstvé historie, čtyři výsledné stavy, tichý provoz, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-06-13: Doplněna úvodní podkapitola o uzavření prvního běžného průchodu po vyřazení zhuštěné portfoliové položky: výsledné závěry, propsání bez návratu staré karty, ukončení zvláštní pozornosti, privacy-first úklid, karta, mini workshop a checklist.
