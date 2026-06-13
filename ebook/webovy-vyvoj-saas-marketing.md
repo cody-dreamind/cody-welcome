@@ -10530,6 +10530,152 @@ Vlastník:
 
 Uzavření druhého běžného použití je poslední brzda proti tomu, aby se oprava změnila v trvalý dohled. Když pravidlo drží, pusťte ho do klidu. Když potřebuje drobné dočištění, udělejte ho u nejbližšího místa. Když se vrací problém, otevřete novou smyčku bez starého dramatického balastu. Hlavní je nenechat tým žít v mlze, kde je všechno skoro hotové, ale nic není opravdu zavřené.
 
+## Jak z uzavřené změny udělat použitelný výřez
+
+Když je změna uzavřená a pravidlo běží v klidu, vzniká ještě jedna praktická otázka: má z toho vzniknout malý výřez pro tým, zákazníka, web, onboarding nebo interní znalostní bázi? Ne každá změna si zaslouží nový článek, šablonu nebo sekci v dokumentaci. Některé mají zůstat jen v rozhodovacím záznamu. Jiné ale stojí za krátké převedení do podoby, kterou někdo opravdu použije.
+
+Použitelný výřez není shrnutí celé historie. Je to malá jednotka, která pomůže v jedné budoucí situaci. Může to být odstavec v onboardingovém dokumentu, krátká odpověď pro obchod, veřejná poznámka u case study, interní checklist, poznámka v rozcestníku nebo jeden příklad do šablony. Důležité je, aby výřez nevyráběl novou práci jen proto, že se něco podařilo uzavřít.
+
+Začněte otázkou:
+
+```text
+Kdo bude příště potřebovat výsledek této změny bez celé její historie?
+```
+
+Pokud neumíte pojmenovat člověka, roli nebo pracovní situaci, výřez zatím nedělejte. Pravděpodobně stačí rozhodovací záznam. Výřez má vzniknout až ve chvíli, kdy chrání něčí příští rozhodnutí, urychluje opakovanou práci nebo zlepšuje předání bez dalšího vysvětlování.
+
+### Tři typy výřezů
+
+První typ je interní pracovní výřez. Ten pomáhá týmu udělat příště stejnou práci bez vzpomínání na původní debatu. Patří sem jedna věta v šabloně, příklad vyplněné karty, stavové pravidlo nebo malý checklist. Interní výřez má být co nejblíž místu, kde práce vzniká. Když lidé vyplňují poptávkovou kartu, nedávejte pravidlo do vzdáleného playbooku. Dejte ho do karty.
+
+Druhý typ je obchodní nebo zákaznický výřez. Ten pomáhá vysvětlit, proč něco děláte určitým způsobem. Typicky jde o krátkou formulaci do nabídky, FAQ, předávacího e-mailu nebo case study. Nemá odhalovat interní zmatky, jména, osobní údaje ani celou kuchyň. Má ukázat princip a přínos: co se změnilo, proč je to užitečné a jak to chrání zákazníka.
+
+Třetí typ je veřejný obsahový výřez. Ten může posloužit jako odstavec do článku, poznámka v e-booku, citovatelný příklad nebo malý samostatný text na webu. Veřejný výřez musí být ještě přísnější: žádná interní data, žádné konkrétní zákaznické detaily bez souhlasu, žádné provozní informace, které by zbytečně odhalovaly slabiny systému. Stačí zobecněný vzor a praktický závěr.
+
+### Co do výřezu patří
+
+Dobrý výřez má čtyři části:
+
+- situaci, ve které se použije;
+- jedno pravidlo nebo doporučení;
+- krátký příklad;
+- hranici, co se kvůli tomu nemá dělat.
+
+Příklad:
+
+```text
+Situace:
+Po druhém běžném použití pravidla už nevzniká zvláštní kontrola.
+
+Pravidlo:
+Pokud pravidlo drží z kanonického místa, další návrat otevíráme jen při předem popsaném návratovém signálu.
+
+Příklad:
+U poptávkového formuláře stačí ověřit, že druhý člověk použil aktuální formulaci bez starých poznámek. Nepřidáváme nový report používání.
+
+Hranice:
+Nesbíráme seznam lidí, kteří pravidlo použili. Stačí výsledek běžné práce a případný návratový signál.
+```
+
+Takový výřez je krátký, ale dá se použít. Nevyžaduje čtení celé původní smyčky a současně drží privacy-first hranici.
+
+### Co z historie nepřenášet
+
+Nejčastější chyba je udělat z výřezu malý pomník celé změny. Tým do něj přenese důvod, průběh, spory, staré varianty, screenshoty, poznámky z ověření a jména lidí, kteří se toho účastnili. Výsledek pak sice vypadá důkladně, ale při příštím použití překáží.
+
+Do výřezu obvykle nepatří:
+
+- časová osa celé opravy;
+- osobní poznámky a citace z interní diskuse;
+- dočasné exporty, screenshoty a pracovní kopie;
+- staré varianty, které už nemají platit;
+- seznam účastníků, pokud není nutný pro odpovědnost;
+- metriky nebo čísla bez jasného rozhodovacího účelu.
+
+Historie má své místo v rozhodovacím záznamu. Výřez má sloužit práci. Pokud si nejste jistí, použijte jednoduchý test: kdyby nový člověk otevřel výřez za tři měsíce, pomůže mu udělat správný krok, nebo ho donutí luštit starý příběh?
+
+Codyho komentář: výřez není firemní pamětní deska. Když se z něj čte jako z archeologického zápisu, je moc dlouhý. Užitečný výřez má člověku říct: "v téhle situaci udělej tohle a nesbírej u toho zbytečná data." Víc poezie až po obědě.
+
+### Privacy-first kontrola výřezu
+
+Před uložením výřezu si dejte krátkou kontrolu:
+
+```text
+Obsahuje výřez osobní údaje?
+
+Obsahuje interní zákaznické detaily?
+
+Obsahuje provozní informaci, která nemusí být veřejná?
+
+Přidává nový důvod něco měřit?
+
+Vzniká kvůli němu nová kopie dat?
+
+Má jasné místo, vlastníka a revizní signál?
+```
+
+Pokud je odpověď na některou z prvních pěti otázek "ano", výřez zkraťte, anonymizujte nebo ho nechte jen interně. Pokud nemá místo, vlastníka ani revizní signál, pravděpodobně vytváří další dokument bez života. To je přesně ten typ obsahu, který později nikdo nechce uklízet, protože všichni tuší, že "tam možná něco důležitého je".
+
+Privacy-first přístup neznamená, že se nesmí sdílet poučení. Znamená to, že sdílíte vzor, rozhodnutí a hranici, ne syrové pracovní stopy. Veřejný nebo interní výřez má být nejmenší užitečná forma poznatku.
+
+### Karta použitelného výřezu
+
+```text
+Uzavřená změna:
+
+Komu má výřez pomoct:
+
+Budoucí situace použití:
+
+Typ výřezu:
+- interní pracovní / obchodní / veřejný obsahový
+
+Jedno pravidlo:
+
+Krátký příklad:
+
+Co z historie nepřenášíme:
+
+Privacy-first hranice:
+
+Kde bude výřez žít:
+
+Kdo je vlastník:
+
+Kdy se má znovu zkontrolovat:
+
+Co výřez smaže nebo nahradí:
+```
+
+Poslední řádek je důležitý. Nový výřez by měl často něco nahradit: starou poznámku, nejasnou větu, opakovanou odpověď, pomocný checklist nebo ruční vysvětlování. Pokud jen přidává další místo bez odstranění starého tření, může být výsledek hezky napsaný, ale provozně zbytečný.
+
+### Mini workshop na 10 minut
+
+1. Minuty 1 až 2: pojmenujte uzavřenou změnu jednou větou.
+2. Minuty 3 až 4: vyberte budoucí situaci, ve které má výřez pomoct.
+3. Minuty 5 až 6: napište jedno pravidlo a jeden příklad.
+4. Minuta 7: vyškrtněte všechno, co je jen historie.
+5. Minuta 8: projděte privacy-first kontrolu.
+6. Minuta 9: určete místo a vlastníka.
+7. Minuta 10: napište, co výřez nahrazuje nebo maže.
+
+Když workshop skončí bez jasného místa použití, výřez nevzniká. Zapište jen odkaz na rozhodovací záznam a vraťte se k běžné práci. Ne každé poučení musí mít vlastní dokument. Některá poučení jsou užitečná právě tím, že zůstanou zavřená.
+
+### Checklist použitelného výřezu
+
+- Víme, komu výřez příště pomůže?
+- Má výřez jednu konkrétní situaci použití?
+- Obsahuje pravidlo, příklad a hranici?
+- Nepřenáší starou historii do běžné práce?
+- Neobsahuje osobní údaje ani zbytečné interní detaily?
+- Nevytváří nový tracking, export nebo kopii dat?
+- Žije co nejblíž pracovnímu místu, kde se použije?
+- Má vlastníka a revizní signál?
+- Nahrazuje něco starého, nebo aspoň snižuje opakované vysvětlování?
+- Umí nový člověk výřez použít bez znalosti původní debaty?
+
+Použitelný výřez je dobrý konec malé smyčky. Změna nezůstane schovaná v historii, ale také se nerozroste do dalšího projektu. Tým získá jednoduchou pracovní pomůcku, zákazník může dostat čistší vysvětlení a data zůstanou tam, kde mají být: pod kontrolou, s účelem a bez zbytečného rozmnožování.
+
 ## Pravidla rukopisu
 
 - Pišu česky, prakticky a bez nafukování.
@@ -217426,3 +217572,4 @@ Uzavření druhého ročního zahlédnutí je dobré místo pro malou dospělost
 - 2026-06-12: Doplněna úvodní podkapitola o druhém běžném použití po převodu reakce: přenositelnost bez čerstvé paměti, poslední lokální dočištění, privacy-first hranice, karta a checklist.
 - 2026-06-12: Doplněna úvodní podkapitola o uzavření druhého běžného použití po převodu reakce: čtyři uzavírací stavy, propsání do běžného pracovního místa, ukončení zvláštní pozornosti, privacy-first úklid, karta a checklist.
 - 2026-06-13: Doplněna krátká úvodní poznámka, aby další průchod rukopisem začínal až z návratového signálu, ne z obecného pocitu dalšího zlepšování.
+- 2026-06-13: Doplněna úvodní podkapitola o převodu uzavřené změny do použitelného výřezu: typy výřezů, co nepřenášet z historie, privacy-first kontrola, karta, mini workshop a checklist.
