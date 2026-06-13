@@ -216594,8 +216594,174 @@ Když se tým neshodne, neprodlužujte workshop. Vyberte dočasný stav "ponecha
 
 Uzavření druhého ročního zahlédnutí je dobré místo pro malou dospělost systému. Ne každá opatrnost musí žít navždy. Některá splnila svůj účel tím, že naučila tým lepší pravidlo, a pak může odejít. Když po ní zůstane čistší checklist, jasnější návratový signál a méně starých dat v aktivním oběhu, byla to dobrá práce.
 
+## První roční inventura bez vyřazené položky
+
+Když po druhém ročním zahlédnutí vyřadíte položku z aktivního rytmu, další roční inventura je první skutečný test ticha. Položka už není v checklistu, nikdo ji nečte jako samostatnou otázku a systém má fungovat bez malé historické berličky. To je správně. Jen je dobré při první inventuře bez ní ověřit, že nezmizela rozhodovací schopnost, ale jen zbytečná připomínka.
+
+Začněte větou:
+
+```text
+Tuhle inventuru neděláme proto, abychom hledali vyřazenou položku. Děláme ji proto, abychom ověřili, že dnešní systém pořád umí rozhodnout situaci, kterou dřív hlídala.
+```
+
+Tohle pořadí je důležité. Pokud začnete otázkou "nechybí nám stará položka?", tým se přirozeně vrátí do minulosti. Pokud začnete dnešní pracovní situací, zůstane kontrola praktická. Nezkoumáte, jestli byl starý řádek milovaný. Zkoumáte, jestli současná mapa práce stačí.
+
+### Co inventura bez položky ověřuje
+
+První roční inventura bez vyřazené položky má tři kontroly:
+
+- Rozhodovací funkce: existuje v dnešním systému místo, které umí rozhodnout stejný typ situace?
+- Návratový signál: ví tým, jak pozná, že se téma má znovu otevřít?
+- Stínová práce: nevznikla neoficiální připomínka, soukromý checklist nebo ruční kontrola, která starou položku potichu nahrazuje?
+
+Příklad:
+
+```text
+Dřívější vyřazená položka:
+Nevrací se archivní exporty do aktivních pracovních postupů?
+
+Dnešní inventura:
+Roční kontrola datových stop obsahuje obecnou otázku:
+Mají aktivní, dočasné a archivní datové stopy jasný účel, vlastníka a retenci?
+
+Co vidíme:
+Jeden starý odkaz na export byl v poznámce, ale nebyl používán jako pracovní vstup.
+
+Rozhodnutí:
+Stará položka nechybí. Obecná otázka stačí. Poznámku zkracujeme a starý odkaz odstraňujeme bez obnovování samostatné kontroly.
+```
+
+Všimněte si drobnosti: i když se našel malý nález, automaticky to neznamená návrat staré položky. Nález může být jen lokální úklid. Návrat staré otázky dává smysl až ve chvíli, kdy obecnější systém neumí rozhodnout, co s tím.
+
+### Čtyři výsledky první inventury bez položky
+
+Po průchodu vyberte jeden ze čtyř stavů:
+
+- Ticho funguje: položka nechybí, rozhodovací funkce žije v obecnějším místě a nevzniká stínová práce.
+- Lokální úklid: objevilo se drobné tření, ale jde opravit v aktuálním pracovním místě bez návratu staré položky.
+- Slabý návratový signál: tým neví, kdy by se téma mělo znovu otevřít; opravte signál, ne checklist.
+- Obnovit menší otázku: obecný systém selhal opakovaně a je potřeba krátká nová otázka, ale ne původní historická položka.
+
+Stav `ticho funguje` je nejlepší výsledek. Zapište ho stručně a nic dalšího nevyrábějte. Systém, který dokáže nevytvořit nový dokument, právě předvedl slušnou dospělost.
+
+Stav `lokální úklid` je běžný. Opravte odkaz, větu, příklad nebo místo v datové mapě. Neotevírejte starou kartu jen proto, že jste našli podobné slovo. Podobnost názvu není důkaz, že se vrátil stejný problém.
+
+Stav `slabý návratový signál` znamená, že problém není v roční inventuře, ale v podmínce návratu. Přepište ji tak, aby byla pozorovatelná bez nové evidence. Například:
+
+```text
+Slabě:
+Když se znovu objeví nejasnost kolem exportů.
+
+Lépe:
+Když se archivní export znovu použije jako vstup v aktivním procesu, zákaznické předávce nebo pravidelném reportu.
+```
+
+Stav `obnovit menší otázku` používejte opatrně. Pokud ji potřebujete, napište ji v dnešním jazyce a bez staré historie. Cílem není vrátit položku z archivu, ale doplnit chybějící hranu do současného systému.
+
+### Jak poznat stínovou práci
+
+Stínová práce je signál, že vyřazení nebylo úplně dokončené. Někdo si drží vlastní tabulku, připomínku v kalendáři, interní poznámku, starý checklist nebo ruční kontrolu, protože aktivní systém mu nedává dost jistoty.
+
+Ptejte se prakticky:
+
+- Kontroluje někdo téma bokem, mimo oficiální rytmus?
+- Vysvětluje se novým lidem stará historie, aby pochopili dnešní pravidlo?
+- Vznikl soukromý seznam výjimek?
+- Odkazuje se v práci na starý artefakt, který už měl být jen v archivu?
+- Má tým pocit, že bez pamětníka by rozhodnutí nebylo bezpečné?
+
+Pokud ano, nevracejte automaticky starou položku. Nejdřív zjistěte, co stínová práce nahrazuje. Možná chybí jen jedna věta v kanonickém místě. Možná návratový signál není dost konkrétní. Možná je archiv moc blízko aktivní dokumentaci. Návrat staré kontroly je až poslední možnost.
+
+Codyho komentář: stínová práce je jako lepík na monitoru, který přežil tři reorganizace. Někdy zachraňuje svět. Častěji jen dokazuje, že oficiální pravidlo neumí říct jednu normální větu.
+
+### Privacy-first kontrola tiché inventury
+
+První inventura bez položky je dobrý moment zkontrolovat, jestli vyřazená historie opravdu zůstala mimo aktivní oběh. Privacy-first hodnota není jen smazat tracker. Je to i schopnost držet staré pracovní detaily tam, kde mají účel, přístup a konec životnosti.
+
+Zkontrolujte:
+
+- Nevrátily se do aktivní dokumentace staré screenshoty, exporty nebo zákaznické příklady?
+- Nevznikla nová evidence jen proto, aby tým "pro jistotu" sledoval vyřazené téma?
+- Není návratový signál postavený na sledování lidí místo pracovního výstupu?
+- Je archivní stopa pasivní a oddělená od běžného checklistu?
+- Dá se lokální nález opravit bez vytahování osobních údajů nebo historických detailů?
+
+Dobrá privacy-first věta:
+
+```text
+Vyřazenou položku nevracíme. Aktivní kontrola pracuje jen s anonymním pracovním scénářem a návratový signál se spouští podle použití archivního exportu v aktivním procesu, ne podle sledování konkrétních lidí.
+```
+
+Špatná věta:
+
+```text
+Budeme si další rok evidovat, kdo si na starý problém vzpomene a v jakých případech.
+```
+
+Druhá věta vytváří novou datovou stopu kvůli nejistotě. To je přesně opačný směr. Pokud potřebujete jistotu, zlepšete pravidlo nebo pracovní místo. Nesbírejte paměť lidí jako náhradní monitoring.
+
+### Karta první inventury bez položky
+
+```text
+Vyřazená položka:
+
+Dnešní obecné pracovní místo:
+
+Rozhodovací funkce, která měla přežít:
+
+Co inventura ukázala:
+
+Výsledek:
+- ticho funguje / lokální úklid / slabý návratový signál / obnovit menší otázku
+
+Stínová práce:
+- žádná / nalezena kde:
+
+Lokální oprava, pokud existuje:
+
+Návratový signál po kontrole:
+
+Co se nevrací z archivu:
+
+Privacy-first úklid:
+
+Vlastník:
+
+Datum další běžné kontroly nebo důvod bez další kontroly:
+```
+
+Kartu vyplňujte jen tehdy, když inventura něco mění. Pokud ticho funguje a žádná stínová práce nevznikla, stačí krátká věta v ročním logu. Nepřidávejte kartu k tématu, jehož hlavní výsledek je "není co řešit". To by bylo krásně absurdní, tedy přesně ten typ absurdity, který dokumentace umí vyrábět po večerech.
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: přečtěte dnešní obecnou otázku, ne starou vyřazenou položku.
+2. Minuta 2: pojmenujte rozhodovací funkci, která měla přežít.
+3. Minuty 3 až 4: zkontrolujte jeden reálný pracovní průchod nebo anonymní scénář.
+4. Minuta 5: najděte případnou stínovou práci.
+5. Minuta 6: vyberte jeden ze čtyř výsledků.
+6. Minuta 7: zapište lokální opravu, návratový signál nebo větu "ticho funguje".
+
+Workshop má skončit bez návratu do staré karty. Pokud ji musíte otevřít, napište proč. "Nikdo si nepamatuje, co to znamenalo" není důvod k obnově položky. Je to důvod přepsat dnešní otázku tak, aby fungovala bez pamětníků.
+
+### Checklist první inventury bez položky
+
+- Začali jsme dnešním pracovním místem, ne starou položkou?
+- Umíme říct, jaká rozhodovací funkce měla po vyřazení přežít?
+- Ověřili jsme jeden reálný průchod nebo anonymní scénář?
+- Nezaměnili jsme lokální nález za návrat celého tématu?
+- Hledali jsme stínovou práci mimo oficiální rytmus?
+- Pokud stínová práce existuje, víme, co nahrazuje?
+- Je návratový signál konkrétní a pozorovatelný bez nové evidence?
+- Nevrátili jsme do aktivní dokumentace staré osobní údaje, exporty, screenshoty nebo zákaznické detaily?
+- Pokud obnovujeme otázku, je menší, dnešní a bez historického balastu?
+- Pokud ticho funguje, odolali jsme nutkání vyrábět další kartu?
+- Má log jednu jasnou větu o výsledku inventury?
+
+První roční inventura bez vyřazené položky má potvrdit, že systém umí žít bez staré opatrnosti. Když ticho funguje, nechte ho tiché. Když se objeví lokální tření, opravte dnešní místo. Když se vrací skutečný problém, vraťte jen nejmenší užitečnou otázku. A pokud se vrací hlavně historie, zavřete archiv a dejte si kávu. Historie nemá řídit provoz jen proto, že má dlouhé poznámky.
+
 ## Pracovní log
 
+- 2026-06-13: Doplněna úvodní podkapitola o první roční inventuře bez vyřazené položky: ověření rozhodovací funkce bez staré otázky, stínová práce, návratový signál, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-06-13: Doplněna úvodní podkapitola o uzavření druhého ročního zahlédnutí vyřazené položky: tři způsoby uzavření, propsání do systému, privacy-first úklid historických detailů, karta, mini workshop a checklist.
 - 2026-06-13: Doplněna úvodní podkapitola o druhém ročním zahlédnutí vyřazené položky: samostatnost otázky bez původní historie, čtyři výsledné stavy, privacy-first datová dieta, karta, mini workshop a checklist.
 - 2026-06-13: Doplněna úvodní podkapitola o uzavření prvního ročního zahlédnutí vyřazené položky: čtyři uzavírací stavy, propsání do aktivního místa, privacy-first úklid, karta, mini workshop a checklist.
