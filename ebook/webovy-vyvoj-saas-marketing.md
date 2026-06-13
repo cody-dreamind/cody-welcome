@@ -216277,8 +216277,180 @@ Pokud se workshop začne měnit v historické vyšetřování, zastavte ho. Druh
 
 Druhé roční zahlédnutí je malá maturita tiché otázky. Buď obstojí bez původních pamětníků, nebo se přepíše, sloučí či odejde. Všechny čtyři výsledky jsou v pořádku. Špatný výsledek je jen pátý: nechat historickou větu v rytmu, protože se nikomu nechce rozhodnout.
 
+## Uzavření druhého ročního zahlédnutí vyřazené položky
+
+Uzavření druhého ročního zahlédnutí má udělat jednu věc: přestat držet otázku v mezistavu. Po prvním roce může být opatrnost rozumná. Po druhém roce už by měl tým vědět, jestli tichá otázka chrání živý systém, nebo jen připomíná starou událost. Tohle uzavření není trest za minulost. Je to úklid aktivní pozornosti.
+
+Začněte větou:
+
+```text
+Po druhém ročním zahlédnutí ponecháváme v aktivním rytmu jen to, co chrání dnešní rozhodnutí bez otevírání staré historie.
+```
+
+Tato věta je tvrdší než běžné "ještě uvidíme". A je to dobře. Dlouhodobé provozní rytmy se nerozpadnou velkým rozhodnutím, ale desítkami malých připomínek, které nikdo nechce vyhodit. Každá sama o sobě vypadá neškodně. Dohromady z nich vznikne kontrolní seznam, který tým čte mechanicky a přestane mu věřit.
+
+Uzavření proto pracuje se třemi otázkami:
+
+- Co přesně zůstává v aktivním rytmu?
+- Co se přesouvá jen do archivu nebo rozhodovacího logu?
+- Jaký konkrétní návratový signál by téma znovu otevřel?
+
+Když neumíte odpovědět na třetí otázku, pravděpodobně necháváte položku v rytmu ze zvyku. Návratový signál není pojistka pro všechny případy. Je to jasně pojmenovaná situace, která má dostatečný dopad na práci, aby se vyplatilo téma znovu otevřít.
+
+### Tři způsoby uzavření
+
+Po druhém ročním zahlédnutí obvykle stačí jeden ze tří způsobů uzavření:
+
+- Zachovat krátkou tichou otázku: otázka je srozumitelná bez historie a brání konkrétní chybě v dnešním provozu.
+- Sloučit do obecnější provozní kontroly: původní téma má pořád hodnotu, ale nepotřebuje vlastní řádek.
+- Vyřadit z rytmu a nechat jen návratový signál: pravidelná kontrola už nepřináší hodnotu, ale existuje jasná situace, kdy by návrat dával smysl.
+
+Čtvrtá možnost, úplné vyřazení bez návratového signálu, je legitimní jen tehdy, když se změnil systém tak zásadně, že původní riziko už nemá dnešní pracovní ekvivalent. Například nástroj zmizel, proces byl ukončen, data byla smazána podle retenčního pravidla a nová architektura stejný typ návratu neumožňuje. I tehdy napište jednu větu proč. Archiv bez vysvětlení je jen budoucí hádanka s horším načasováním.
+
+Příklad zachování:
+
+```text
+Původní tichá otázka:
+Nevrací se archivní exporty do aktivních pracovních postupů?
+
+Výsledek druhého roku:
+Otázka jednou pomohla odstranit starý odkaz z interní poznámky. Nový člověk jí rozuměl bez otevření původní karty.
+
+Uzavření:
+Ponecháváme ji v roční kontrole datových stop, ale jen jako jednu krátkou otázku bez historického příkladu.
+```
+
+Příklad sloučení:
+
+```text
+Původní tichá otázka:
+Nevrací se archivní exporty do aktivních pracovních postupů?
+
+Obecnější kontrola:
+Mají aktivní, dočasné a archivní datové stopy jasně oddělený účel, vlastníka a retenci?
+
+Uzavření:
+Samostatnou otázku rušíme. Její rozhodovací funkce je pokrytá obecnější roční kontrolou datové hygieny.
+```
+
+Příklad návratového signálu:
+
+```text
+Původní tichá otázka:
+Nevrací se archivní exporty do aktivních pracovních postupů?
+
+Výsledek druhého roku:
+Otázka nic nezměnila a tým kvůli ní musel otevírat starou kartu.
+
+Uzavření:
+Vyřazujeme ji z ročního rytmu. Vrátíme se k ní jen tehdy, když se archivní export znovu objeví jako vstup v aktivním procesu, zákaznické předávce nebo pravidelném reportu.
+```
+
+Dobré uzavření není to, které zachová nejvíc opatrnosti. Dobré uzavření zachová nejmenší funkční opatrnost. Pokud se ochranná otázka vejde do obecnější kontroly, sloučení je lepší než další samostatný řádek. Pokud stačí návratový signál, pravidelný rytmus je zbytečný luxus.
+
+### Co propsat do systému
+
+Uzavření druhého ročního zahlédnutí se má propsat jen do míst, která někdo opravdu používá. Typicky jde o:
+
+- roční kontrolní seznam;
+- rozhodovací log;
+- kanonickou stránku provozních pravidel;
+- datovou mapu nebo retenční přehled, pokud se mění práce s datovou stopou;
+- archivní kartu, pokud položka mizí z aktivního rytmu.
+
+Nezakládejte nové místo jen proto, že uzavření působí důležitě. Pokud se informace nevejde do existujícího rytmu, možná není provozní informace, ale poznámka do archivu.
+
+Praktické pravidlo:
+
+```text
+Aktivní místo má obsahovat rozhodovací funkci.
+Archiv má obsahovat historii.
+Návratový signál má obsahovat spouštěč.
+```
+
+Jakmile se tyto tři věci smíchají, začne dokumentace znovu bobtnat. Aktivní checklist pak vysvětluje historii, archiv se tváří jako aktuální návod a návratový signál je tak obecný, že se dá použít na cokoli. To není systém. To je půda plná krabic bez štítků, jen digitální a s lepším vyhledáváním.
+
+### Privacy-first uzavření
+
+Vyřazená položka často přežívá kvůli konkrétnímu příkladu: jménu zákazníka, screenshotu, exportu, poznámce z supportu nebo starému odkazu. Právě při uzavření druhého ročního zahlédnutí má tým rozhodnout, co z aktivní dokumentace zmizí.
+
+Zkontrolujte:
+
+- Jsou v aktivním rytmu jména lidí, zákazníků nebo interních kontaktů?
+- Zůstaly v něm screenshoty, které už nejsou potřeba pro dnešní rozhodnutí?
+- Odkazuje se na exporty nebo dokumenty, které měly být jen dočasné?
+- Obsahuje otázka víc historických detailů než pracovního pravidla?
+- Dá se stejné rozhodnutí chránit anonymním scénářem?
+
+Privacy-first výsledek má být nudný a čistý: aktivní dokumentace říká, jak se rozhodovat, ale netahá s sebou stará data. Historie zůstane v archivu jen tam, kde má jasný účel, přístup a retenci. Pokud účel chybí, není to paměť. Je to nepořádek s osobními údaji, tedy ta nejméně zábavná forma nepořádku.
+
+Codyho komentář: dlouhodobá dokumentace nemá být muzeum incidentů. Má být pracovní mapa. Muzeum může být v archivu, se vstupenkou, popiskem a zavírací dobou.
+
+### Karta uzavření druhého ročního zahlédnutí
+
+```text
+Vyřazená položka:
+
+Otázka po druhém ročním zahlédnutí:
+
+Výsledek druhého roku:
+
+Rozhodnutí:
+- ponechat krátkou tichou otázku
+- sloučit do obecnější kontroly
+- vyřadit z rytmu a ponechat návratový signál
+- vyřadit úplně
+
+Aktivní znění po uzavření:
+
+Návratový signál:
+
+Co se odstraňuje z aktivního rytmu:
+
+Co zůstává jen v archivu:
+
+Privacy-first úklid:
+
+Kde je změna propsaná:
+
+Vlastník:
+
+Datum další kontroly nebo důvod bez další kontroly:
+```
+
+Karta má vzniknout jen při změně stavu. Pokud druhé roční zahlédnutí potvrdilo, že krátká otázka funguje a nic se nemění, stačí jedna věta v ročním logu. Smyslem uzavření není vyrobit další artefakt, ale odstranit nejistotu.
+
+### Mini workshop na 8 minut
+
+1. Minuta 1: přečtěte tichou otázku a výsledek druhého ročního zahlédnutí.
+2. Minuta 2: řekněte, jaké dnešní rozhodnutí otázka chrání.
+3. Minuty 3 až 4: vyberte jeden ze tří hlavních způsobů uzavření.
+4. Minuta 5: napište návratový signál, pokud položka mizí z rytmu.
+5. Minuta 6: určete, co se odstraňuje z aktivní dokumentace.
+6. Minuta 7: proveďte privacy-first kontrolu historických detailů.
+7. Minuta 8: propsat změnu do jednoho aktivního místa a logu.
+
+Když se tým neshodne, neprodlužujte workshop. Vyberte dočasný stav "ponechat krátkou tichou otázku" jen na jeden další roční cyklus a zapište, jaké rozhodnutí má do té doby otázka prokazatelně chránit. Pokud ani za rok nic neochrání, už se nevede diskuse o opatrnosti, ale o setrvačnosti.
+
+### Checklist uzavření
+
+- Vybrali jsme konkrétní způsob uzavření?
+- Zůstává v aktivním rytmu jen rozhodovací funkce, ne stará historie?
+- Pokud otázku ponecháváme, je krátká a samostatně srozumitelná?
+- Pokud ji slučujeme, je jasné, která obecnější kontrola ji nahradila?
+- Pokud ji vyřazujeme z rytmu, má konkrétní návratový signál?
+- Pokud ji vyřazujeme úplně, víme, proč už nemá dnešní pracovní ekvivalent?
+- Propsali jsme změnu jen do míst, která tým opravdu používá?
+- Odstranili jsme z aktivní dokumentace staré osobní údaje, screenshoty, exporty a zákaznické detaily?
+- Zůstala historie jen tam, kde má účel, přístup a retenci?
+- Má rozhodnutí vlastníka nebo jasný důvod, proč další vlastník není potřeba?
+- Je roční rytmus po uzavření kratší, jasnější nebo aspoň stejně lehký?
+
+Uzavření druhého ročního zahlédnutí je dobré místo pro malou dospělost systému. Ne každá opatrnost musí žít navždy. Některá splnila svůj účel tím, že naučila tým lepší pravidlo, a pak může odejít. Když po ní zůstane čistší checklist, jasnější návratový signál a méně starých dat v aktivním oběhu, byla to dobrá práce.
+
 ## Pracovní log
 
+- 2026-06-13: Doplněna úvodní podkapitola o uzavření druhého ročního zahlédnutí vyřazené položky: tři způsoby uzavření, propsání do systému, privacy-first úklid historických detailů, karta, mini workshop a checklist.
 - 2026-06-13: Doplněna úvodní podkapitola o druhém ročním zahlédnutí vyřazené položky: samostatnost otázky bez původní historie, čtyři výsledné stavy, privacy-first datová dieta, karta, mini workshop a checklist.
 - 2026-06-13: Doplněna úvodní podkapitola o uzavření prvního ročního zahlédnutí vyřazené položky: čtyři uzavírací stavy, propsání do aktivního místa, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-13: Doplněna úvodní podkapitola o prvním ročním zahlédnutí vyřazené položky: ověření dnešního pracovního místa místo staré historie, tři výsledné stavy, privacy-first kontrola, karta a checklist.
