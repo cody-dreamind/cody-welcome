@@ -214610,8 +214610,141 @@ Pokud se během workshopu objeví další nápady na úpravy portfolia, dejte je
 
 Uzavření druhého použití má být tiché, skoro nudné. To je známka zdraví. Zkratka prokázala, že umí přenést rozhodovací smysl bez podpůrného lešení, dostala případnou poslední opravu a může se vrátit do portfoliové paměti jako normální pracovní položka. Další pozornost si zaslouží až ve chvíli, kdy se ozve nový návratový signál.
 
+## Kdy zhuštěnou portfoliovou položku vyřadit
+
+Zhuštěná portfoliová položka má pomáhat rozhodování, ne sbírat zásluhy za to, že kdysi pomohla. Pokud už pravidlo, karta nebo krátký záznam nevede práci, nešetří čas, nesnižuje riziko ani nepřipomíná užitečný návratový signál, je čas zvážit vyřazení. Ne každá dobrá paměť má zůstat živá navždy. Některá má skončit jako krátká historická stopa, některá má zmizet úplně.
+
+Vyřazení není selhání. Je to běžná údržba portfolia rozhodnutí. Tým tím říká: tato položka splnila účel, současný systém ji už nepotřebuje a její další udržování by přidávalo víc šumu než hodnoty.
+
+Začněte otázkou:
+
+```text
+Kdybychom tuto položku dnes odstranili z aktivního portfolia, jaké rozhodnutí by se tím zhoršilo?
+```
+
+Pokud neumíte odpovědět konkrétně, položka pravděpodobně nepatří do aktivní vrstvy. Možná patří do archivu. Možná se má sloučit s jiným pravidlem. A možná nemá zůstat vůbec.
+
+### Čtyři důvody pro vyřazení
+
+Položku vyřaďte nebo přesuňte z aktivní vrstvy hlavně ve čtyřech situacích:
+
+- Původní pracovní situace už neexistuje.
+- Položka je plně nahrazená novým kanonickým pravidlem.
+- Návratový signál se dlouho neobjevil a jeho riziko převzal jiný běžný rytmus.
+- Položka při review vytváří víc otázek než rozhodnutí.
+
+Příklad:
+
+```text
+Položka:
+Pravidlo pro dočasné ruční třídění slabých podnětů z review šablon.
+
+Co se změnilo:
+Review šablony už mají vlastníka, stav podnětu a návratový signál přímo v kanonickém rozcestníku.
+
+Rozhodnutí:
+Položku vyřadit z aktivního portfolia.
+
+Co zůstává:
+Jedna archivní věta, že ruční třídění bylo nahrazené rozcestníkem.
+
+Co mizí:
+Samostatná karta ručního třídění, dočasné příklady a staré poznámky z ověřování.
+```
+
+Takové vyřazení neztrácí užitečnou historii. Jen ji přesouvá do správné vrstvy: z aktivního pravidla do stručné paměti.
+
+### Vyřadit, archivovat, nebo sloučit
+
+Nepoužívejte slovo "vyřadit" pro všechno. Vyberte jeden ze tří stavů:
+
+- Vyřadit: položka už nemá pracovní ani historickou hodnotu.
+- Archivovat: položka už nevede práci, ale vysvětluje důležité minulé rozhodnutí.
+- Sloučit: položka má hodnotu, ale má žít jako část jiného kanonického pravidla.
+
+Rozdíl je praktický. Vyřazenou položku už člověk nemá potkat. Archivovanou položku může najít, ale nesmí podle ní začít novou práci. Sloučená položka zmizí jako samostatný zdroj pravdy a její užitečná část se přesune do aktuálního místa.
+
+Krátká rozhodovací věta:
+
+```text
+Tuto položku [vyřazujeme / archivujeme / slučujeme], protože [důvod]. Aktivní práci dál vede [kanonické místo].
+```
+
+Pokud věta nejde napsat jednoduše, rozhodnutí ještě není čisté. Možná se snažíte vyřadit položku, která pořád drží důležitou hranici. Nebo naopak archivujete něco, co už jen zabírá místo.
+
+### Privacy-first vyřazení
+
+Vyřazení je dobrá chvíle pro datový úklid. Staré portfoliové položky často obsahují příklady, dočasné poznámky, výřezy z review, screenshoty, exporty nebo jména vlastníků z doby, kdy se pravidlo ověřovalo. Pokud položka odchází z aktivní vrstvy, tyto stopy si musí znovu zasloužit existenci.
+
+Zeptejte se:
+
+- Stačí ponechat anonymizovaný důvod rozhodnutí?
+- Musí zůstat konkrétní příklad, nebo ho lze převést na typ situace?
+- Nezůstává u položky export, screenshot nebo pracovní kopie bez účelu?
+- Je jasné, kde nově žije návratový signál?
+- Nevzniká druhý zdroj pravdy jen proto, že se bojíme smazat starou kartu?
+
+Privacy-first zápis:
+
+```text
+Po vyřazení ponecháváme:
+
+Mažeme nebo anonymizujeme:
+
+Aktivní pravidlo nově žije:
+
+Návratový signál nově hlídá:
+
+Dál nesbíráme:
+```
+
+Codyho komentář: nejčistší portfoliová položka je někdy ta, která už v portfoliu není. Splnila práci, předala poučení a nezůstala sedět v aktivní vrstvě jen proto, že kdysi vypadala důležitě. To je takový dokumentační důchod, akorát bez dortu.
+
+### Karta vyřazení položky
+
+```text
+Položka:
+
+Současný stav:
+
+Důvod vyřazení:
+
+Rozhodnutí:
+- vyřadit / archivovat / sloučit
+
+Kanonické místo po rozhodnutí:
+
+Co se přesouvá:
+
+Co se maže nebo anonymizuje:
+
+Co už dál nesledujeme:
+
+Návratový signál, pokud zůstává:
+
+Vlastník:
+
+Datum:
+```
+
+### Checklist vyřazení
+
+- Víme, jaké rozhodnutí položka původně podporovala?
+- Ověřili jsme, jestli tato situace pořád existuje?
+- Má položka pracovní hodnotu, historickou hodnotu, nebo žádnou hodnotu?
+- Vybrali jsme jasný stav: vyřadit, archivovat, nebo sloučit?
+- Existuje jedno kanonické místo, které po vyřazení vede práci?
+- Nezůstává položka jako druhý zdroj pravdy?
+- Přesunuli jsme jen užitečný detail, ne celou starou historii?
+- Smazali nebo anonymizovali jsme dočasné podklady bez účelu?
+- Je návratový signál buď přesunutý, nebo vědomě zrušený?
+- Umí tým jednou větou říct, proč položka už nepatří do aktivního portfolia?
+
+Vyřazení zhuštěné portfoliové položky je zdravý konec. Aktivní paměť má být dost krátká na to, aby se dala používat, a dost přesná na to, aby chránila důležitá rozhodnutí. Všechno ostatní patří do archivu, do sloučeného pravidla, nebo pryč.
+
 ## Pracovní log
 
+- 2026-06-13: Doplněna úvodní podkapitola o vyřazení zhuštěné portfoliové položky: důvody pro vyřazení, rozlišení vyřadit/archivovat/sloučit, privacy-first úklid, karta a checklist.
 - 2026-06-12: Doplněna úvodní podkapitola o uzavření druhého použití zhuštěné portfoliové položky: uzavírací stavy, propsání bez rozbalení historie, ukončení zvláštní pozornosti, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-12: Doplněna úvodní podkapitola o druhém použití zhuštěné portfoliové položky: přenositelnost bez čerstvé historie, poslední lokální oprava, slabé kanonické místo, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-12: Doplněna úvodní podkapitola o uzavření prvního použití zhuštěné portfoliové položky: výsledné stavy, lokální oprava, návrat do běžného rytmu, privacy-first úklid, karta, mini workshop a checklist.
