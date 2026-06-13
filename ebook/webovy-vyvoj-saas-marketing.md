@@ -215703,8 +215703,197 @@ Workshop nesmí skončit větou "ještě to budeme sledovat". Sledování bez n�
 
 Uzavření druhého průchodu je poslední krok, který má vyřazenou položku ještě aktivně připomínat. Po něm už má pracovat běžný systém: index, aktuální pravidlo, rozhodovací log a návratový signál. Když se staré téma opravdu vrátí, vrátí se přes signál. Když se nevrátí, nechte ho být. Dobrá dokumentace umí nejen vznikat, ale taky odejít ze scény bez dlouhého loučení.
 
+## Převod vyřazené portfoliové položky do ročního tichého rytmu
+
+Po uzavřeném druhém běžném průchodu má tým ještě jednu malou povinnost: rozhodnout, jestli vyřazená položka zůstane jen v archivu, nebo jestli se její téma má jednou ročně letmo zahlédnout v širší inventuře portfolia. Tohle není třetí kontrola. Je to úklid pozornosti. Téma se buď připojí k běžnému ročnímu rytmu, nebo zůstane mimo něj a vrátí se jen přes konkrétní návratový signál.
+
+Rozdíl je důležitý. Pokud každou vyřazenou položku automaticky přidáte do ročního seznamu, portfolio se začne tvářit jako hřbitov dobrých rozhodnutí. Každý rok někdo čte staré názvy, staré důvody a staré obavy. Místo inventury vznikne nostalgická prohlídka dokumentace. Pokud ale do ročního rytmu nepustíte nic, můžete ztratit slabé téma, které sice nepotřebuje vlastní kartu, ale má smysl zahlédnout vedle podobných pravidel.
+
+Praktická otázka zní:
+
+```text
+Pomůže roční inventura tomuto tématu něco rozhodnout, nebo by jen udržovala vzpomínku?
+```
+
+Když pomůže rozhodnout, převeďte téma do ročního tichého rytmu. Když jen udržuje vzpomínku, nechte ho v archivu a držte návratový signál. Archiv není ostuda. Ostuda je aktivní seznam, který se tváří jako řízení rizika, ale ve skutečnosti jen dokola čte starý kontext.
+
+### Tři možnosti převodu
+
+Po uzavřeném druhém průchodu vyberte jednu ze tří možností:
+
+- Bez ročního rytmu: vyřazená položka je jen v archivu a vrací se pouze přes návratový signál.
+- Sloučení do širší roční otázky: téma se nevrací vlastním názvem, ale je zahrnuté v obecnější kontrole podobných pravidel.
+- Krátké roční zahlédnutí: téma má jednu větu v portfoliovém indexu, která se při roční inventuře jen potvrdí nebo nechá být.
+
+První možnost je výchozí. Použijte ji vždy, když aktuální pracovní místo funguje, archivní stopa je pasivní a návratový signál je konkrétní. Druhá možnost dává smysl, když vyřazená položka patřila do skupiny podobných provozních pravidel. Třetí možnost používejte střídmě: jen když téma nese riziko, které se může vrátit pomalu a bez jednoho ostrého incidentu.
+
+Příklad bez ročního rytmu:
+
+```text
+Vyřazená položka "retenční šablona pro staré exporty" zůstává v archivu. Aktivní rozhodování probíhá v indexu datových standardů. Návratový signál: dvě nezávislé situace, ve kterých tým neumí rozhodnout, jestli export patří do aktivní retence nebo do archivní stopy.
+```
+
+Příklad sloučení do širší otázky:
+
+```text
+Téma starých retenčních šablon se nevede samostatně. Při roční inventuře datových standardů se v otázce "jsou aktivní a archivní datové stopy jasně oddělené?" zahlédne i tato oblast.
+```
+
+Příklad krátkého ročního zahlédnutí:
+
+```text
+Roční zahlédnutí: ověřit, že aktivní index datových standardů stále odděluje pravidla pro živé exporty od archivních stop. Bez samostatné karty, bez evidence použití.
+```
+
+Všimněte si, že ve všech třech zápisech chybí staré detaily. Nejsou tam jména lidí, názvy klientů, screenshoty ani výpis všech předchozích úprav. Roční rytmus má chránit rozhodovací schopnost, ne otevírat album s procesními fotkami.
+
+### Kdy roční rytmus vynechat
+
+Roční rytmus vynechte, když platí aspoň dvě z těchto vět:
+
+- Aktuální pracovní místo už téma přebralo bez ztráty smyslu.
+- Návratový signál je konkrétní a měřitelný bez nové evidence.
+- Archivní stopa je krátká, přesná a pasivní.
+- Téma nemá pomalé riziko, které by se vracelo bez viditelného signálu.
+- Roční inventura už obsahuje širší otázku, která podobné situace zachytí.
+- Přidání samostatné věty by prodloužilo inventuru víc, než by zlepšilo rozhodování.
+
+Tady je Codyho komentář: nejčastější chyba není vyřadit moc. Nejčastější chyba je vyřadit formálně a pak téma dál nosit v ročním batohu. Tým má pocit, že je opatrný, ale reálně jen platí úrok z minulého rozhodnutí. Pokud pravidlo opravdu odešlo z běžného provozu, dovolte mu odejít i z běžné pozornosti.
+
+Vynechání ročního rytmu ale neznamená zapomenutí. Znamená jasné rozhodnutí:
+
+```text
+Téma není součástí roční inventury. Vrací se jen při návratovém signálu.
+```
+
+Tahle věta je silnější než deset neurčitých připomínek v kalendáři. Říká, kdy téma znovu otevřít, a zároveň chrání tým před dalším procházením věcí, které už nemají co rozhodnout.
+
+### Jak téma sloučit bez návratu staré položky
+
+Sloučení do širší roční otázky je užitečné, ale snadno se pokazí. Špatné sloučení přenese starý název do nového seznamu. Dobré sloučení přenese jen rozhodovací hranu.
+
+Špatně:
+
+```text
+Zkontrolovat starou položku "retenční šablona pro staré exporty".
+```
+
+Lépe:
+
+```text
+Ověřit, že pravidla pro aktivní datové exporty a archivní stopy jsou v indexu stále oddělená.
+```
+
+Druhá věta se dá použít i pro nové situace. První věta táhne tým zpět k historickému artefaktu. Cílem roční inventury není dokazovat, že staré vyřazení bylo správné. Cílem je zachytit, jestli dnešní systém pořád umí rozhodovat.
+
+Při sloučení použijte jednoduchý postup:
+
+```text
+1. Napište původní rozhodovací funkci jednou větou.
+2. Vyškrtněte historický název vyřazené položky.
+3. Najděte širší roční otázku, která tuto funkci přirozeně pokrývá.
+4. Doplňte nejvýše jednu větu nebo jeden příklad.
+5. Do logu napište, že stará položka se neobnovuje.
+```
+
+Pokud širší otázku nenajdete, nezakládejte ji automaticky. Možná téma do ročního rytmu nepatří. Nová otázka má vzniknout jen tehdy, když pomůže více než jedné situaci. Jinak jste jen staré téma převlékli za obecný standard a tváříte se, že je to architektura.
+
+### Privacy-first roční tichý rytmus
+
+Roční tichý rytmus má být datově hubený. Nepotřebuje seznam účastníků, historii diskusí ani důkazy z jednotlivých průchodů. Potřebuje jen tolik kontextu, aby další člověk dokázal odpovědět na roční otázku.
+
+Zkontrolujte:
+
+- Nevrací roční zápis osobní údaje, které už byly z běžného provozu odstraněné?
+- Nepřenáší do aktivního indexu zákaznické příklady, které patří jen do archivu?
+- Nevzniká nová evidence toho, kdo si ještě pamatuje starý postup?
+- Je archivní stopa oddělená od aktivního pracovního místa?
+- Stačí pro roční inventuru jedna obecná otázka místo konkrétní historie?
+- Má téma návratový signál bez nutnosti průběžného sledování lidí nebo klientů?
+
+Privacy-first provoz v Evropě není jen o tom, kde běží server. Je to i schopnost říct: tuhle pracovní stopu už nepotřebujeme v aktivní vrstvě. Čím méně historických detailů nosíte do ročních rutin, tím menší je riziko, že se z pomocné dokumentace stane nechtěná databáze interních rozhodnutí, osobních stop a zákaznických souvislostí.
+
+Dobrá roční věta:
+
+```text
+Při roční inventuře ověřit, že aktivní a archivní datové stopy mají oddělené rozhodovací pravidlo.
+```
+
+Špatná roční věta:
+
+```text
+Znovu projít starý případ s exporty u klienta X a ověřit, jestli tým pořád používá nový postup.
+```
+
+První věta chrání princip. Druhá věta zbytečně oživuje konkrétní historii, konkrétního klienta a konkrétní používání. Pokud potřebujete skutečný důkaz, použijte anonymizovaný pracovní scénář. Pokud nepotřebujete důkaz, nepředstírejte ho.
+
+### Karta převodu do ročního tichého rytmu
+
+```text
+Vyřazená položka:
+
+Aktuální pracovní místo, které ji nahradilo:
+
+Rozhodovací funkce jednou větou:
+
+Volba po druhém průchodu:
+- bez ročního rytmu / sloučeno do širší otázky / krátké roční zahlédnutí
+
+Roční otázka, pokud existuje:
+
+Co se do ročního rytmu nepřenáší:
+
+Archivní stopa:
+- pasivní / zkrácena / opravena kvůli přesnosti
+
+Návratový signál:
+
+Privacy-first úklid:
+- pomocné poznámky smazány / osobní údaje odstraněny / zákaznické detaily anonymizovány / bez nové evidence
+
+Datum převodu:
+```
+
+Karta má hlavně zabránit polovičatému stavu. Buď téma patří do ročního rytmu, nebo ne. Buď se sloučí do širší otázky, nebo ne. Nechcete větu "zatím necháme v seznamu a uvidíme". To je přesně ten typ věty, ze které za rok vyroste zbytečná inventurní položka a nikdo si nebude pamatovat, proč tam je.
+
+### Mini workshop na 7 minut
+
+Použijte ho hned po uzavření druhého běžného průchodu:
+
+1. Připomeňte jednou větou, co vyřazená položka dřív rozhodovala.
+2. Řekněte, které aktivní místo tuto funkci dnes přebírá.
+3. Vyberte jednu ze tří možností převodu.
+4. Pokud volíte roční rytmus, napište jednu obecnou roční otázku.
+5. Pokud roční rytmus vynecháváte, napište návratový signál.
+6. Smažte nebo uzavřete pomocné poznámky, které už nemají účel.
+7. Zapište výsledek do pracovního logu.
+
+Workshop má skončit větou, která jde vložit do logu:
+
+```text
+Vyřazená položka se nepřevádí do samostatného ročního rytmu; její rozhodovací funkci pokrývá obecná roční otázka k oddělení aktivních a archivních datových stop.
+```
+
+To je dostatečně konkrétní. Neříká všechno, ale říká to, podle čeho se bude příště jednat. A to je pointa provozní dokumentace: neukázat, kolik toho víme, ale pomoct dalšímu kroku proběhnout bez zbytečného přehrabování.
+
+### Checklist převodu do ročního tichého rytmu
+
+- Rozhodli jsme, jestli téma vůbec patří do ročního rytmu?
+- Nepřidali jsme samostatnou roční kontrolu jen ze zvyku?
+- Umíme popsat rozhodovací funkci bez historického názvu vyřazené položky?
+- Pokud téma zůstává v ročním rytmu, je zapsané jako obecná otázka?
+- Pokud téma v ročním rytmu není, má konkrétní návratový signál?
+- Zůstává archivní stopa pasivní a mimo běžný pracovní tok?
+- Nepřenášíme do roční inventury osobní údaje, zákaznické detaily ani staré screenshoty?
+- Ví tým, které aktuální pracovní místo má použít místo vyřazené položky?
+- Je pomocná evidence po druhém průchodu uzavřená nebo smazaná?
+- Má pracovní log jednu jasnou větu o výsledku převodu?
+
+Převod do ročního tichého rytmu je malý krok, ale hodně vypovídá o zralosti provozu. Nejde o to mít všechno pod dohledem. Jde o to vědět, co dohled ještě potřebuje, co stačí zahlédnout v širší inventuře a co už má zůstat v archivu. Tichý systém není systém bez paměti. Je to systém, který si pamatuje jen tolik, aby mohl dobře rozhodovat.
+
 ## Pracovní log
 
+- 2026-06-13: Doplněna úvodní podkapitola o převodu vyřazené portfoliové položky do ročního tichého rytmu: tři možnosti převodu, vynechání ročního rytmu, sloučení do širší otázky, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-13: Doplněna úvodní podkapitola o rychlém potvrzení návratového signálu: tři brány potvrzení, falešné návraty, privacy-first hranice, potvrzovací karta, mini workshop a checklist.
 - 2026-06-13: Doplněna úvodní podkapitola o uzavření druhého běžného průchodu po vyřazení zhuštěné portfoliové položky: uzavírací stavy, propsání do pracovního místa, ukončení zvláštní pozornosti, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-13: Doplněna úvodní podkapitola o druhém běžném průchodu po vyřazení zhuštěné portfoliové položky: ověření bez čerstvé historie, čtyři výsledné stavy, tichý provoz, privacy-first kontrola, karta, mini workshop a checklist.
