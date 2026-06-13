@@ -216008,8 +216008,139 @@ Vlastník:
 
 První roční zahlédnutí má potvrdit, že vyřazená položka opravdu odešla z běžné práce. Když tichá otázka pořád chrání rozhodování, nechte ji. Když už jen nosí starý název, přepište ji nebo vyřaďte. Dobrý roční rytmus není muzeum minulých pravidel. Je to krátká kontrola toho, zda dnešní systém pořád umí rozhodovat bez zbytečné paměťové zátěže.
 
+## Uzavření prvního ročního zahlédnutí vyřazené položky
+
+První roční zahlédnutí je hotové až ve chvíli, kdy z něj zůstane jeden uzavřený stav. Nestačí říct "vypadá to dobře" nebo "příští rok se na to mrkneme". Taková věta nechává téma viset mezi archivem a aktivní prací. Uzavření má rozhodnout, jestli roční otázka zůstává beze změny, mění se na širší větu, nebo z ročního rytmu mizí.
+
+Začněte jednoduchou uzavírací větou:
+
+```text
+Po prvním ročním zahlédnutí s vyřazenou položkou děláme toto:
+```
+
+Za dvojtečku napište jen jednu věc. Ne seznam možností, ne "zatím ponechat a uvidíme", ne odkaz na debatu. Pokud tým neumí vybrat jeden stav, roční zahlédnutí nebylo dokončené. Vraťte se k aktuálnímu pracovnímu místu a zeptejte se, jaké rozhodnutí má roční otázka příští rok chránit.
+
+### Čtyři uzavírací stavy
+
+Použijte jeden ze čtyř stavů:
+
+- Ponechat beze změny: roční otázka pomohla, nezvětšila práci a pořád chrání konkrétní rozhodovací hranici.
+- Zkrátit nebo přepsat: otázka je užitečná, ale nese moc starého kontextu, názvů nebo vysvětlení.
+- Sloučit do širší inventury: samostatná věta je zbytečná, ale rozhodovací funkce patří do obecnější roční kontroly.
+- Vyřadit z ročního rytmu: otázka už nic nerozhoduje a návratový signál stačí.
+
+Stav `ponechat` musí mít důvod v přítomném čase. Ne "loni nám to pomohlo", ale "pomáhá oddělit aktivní datové stopy od archivních stop". Roční otázka má pracovat pro další rozhodnutí, ne pro obhajobu minulého úklidu.
+
+Stav `zkrátit nebo přepsat` je vhodný, když věta pořád míří správně, ale čte se jako poznámka pro lidi, kteří byli u původní změny. Přepište ji tak, aby jí rozuměl nový člověk bez znalosti historie.
+
+Stav `sloučit` použijte tehdy, když téma nemá nést vlastní řádek. Například stará otázka k jedné retenční šabloně se může stát součástí obecné kontroly, jestli jsou aktivní a archivní datové stopy pořád oddělené.
+
+Stav `vyřadit` je správný, když aktuální systém téma pokrývá a samostatná roční otázka jen připomíná starý příběh. Vyřazení musí zachovat návratový signál. Jinak se z něj stane zapomenutí, ne řízené ztišení.
+
+### Co propsat a co nechat být
+
+Po výběru stavu upravte jen nejbližší pracovní místo. Typicky to bude portfoliový index, roční kontrolní seznam, retenční mapa, provozní standard nebo rozhodovací log. Neotevírejte starou kartu vyřazené položky jen proto, abyste ji "pro jistotu" ještě zkrášlili. Pokud je archivní stopa pasivní, přesná a neobsahuje zbytečná data, nechte ji být.
+
+Dobré propsání:
+
+```text
+Roční inventura datových standardů nově obsahuje jednu obecnou otázku:
+Jsou aktivní exporty a archivní stopy pořád oddělené pravidlem i odpovědností?
+Starou samostatnou položku neobnovujeme.
+```
+
+Slabé propsání:
+
+```text
+Ponecháváme starou položku a příští rok se rozhodneme znovu.
+```
+
+Druhá věta nic neuzavírá. Jen odkládá stejný problém do dalšího roku. Pokud nemáte jistotu, zmenšete rozhodnutí: ponechte otázku na jeden další roční cyklus, ale napište přesný signál, který ji příště vyřadí nebo sloučí. I dočasné ponechání musí mít konec.
+
+### Privacy-first uzavření
+
+Uzavření ročního zahlédnutí je dobrý moment pro datovou dietu. Zkontrolujte, jestli se do aktivního ročního rytmu omylem nevrátily staré osobní poznámky, zákaznické příklady, screenshoty nebo seznamy lidí, kteří se původní práce účastnili. Roční inventura nemá být historická databáze.
+
+Minimum, které obvykle stačí:
+
+```text
+Aktivně zůstává:
+Jedna roční otázka nebo žádná.
+
+V archivu zůstává:
+Krátká pasivní stopa původního rozhodnutí.
+
+Do aktivního rytmu nepřenášíme:
+Staré exporty, konkrétní zákaznické detaily, jména lidí, screenshoty ani pomocné poznámky.
+
+Návratový signál:
+Konkrétní situace, která téma znovu otevře.
+```
+
+Pokud musíte ponechat příklad, anonymizujte ho na pracovní scénář. "U klienta X jsme řešili export objednávek" změňte na "u zákaznického exportu vznikla nejistota, jestli jde o aktivní pracovní data nebo archivní stopu". Pro rozhodování to stačí a zbytek patří mimo běžnou dokumentaci.
+
+Codyho komentář: roční uzavření má být nudné. Nudné v dobrém smyslu. Žádný dramatický návrat starého tématu, žádné archeologické dobrodružství v poznámkách, žádné "když už jsme tady". Jen jedna věta, jeden stav, jeden úklid. Dokumentace, která umí být nudná, většinou funguje.
+
+### Karta uzavření ročního zahlédnutí
+
+```text
+Vyřazená položka:
+
+Roční otázka před kontrolou:
+
+Aktuální pracovní místo:
+
+Co první roční zahlédnutí ukázalo:
+
+Uzavírací stav:
+- ponechat beze změny / zkrátit nebo přepsat / sloučit do širší inventury / vyřadit z ročního rytmu
+
+Nové znění roční otázky, pokud zůstává:
+
+Návratový signál, pokud otázka mizí nebo se slučuje:
+
+Co se propsalo do aktivního místa:
+
+Co zůstává jen v archivu:
+
+Privacy-first úklid:
+
+Vlastník:
+
+Příští kontrola:
+```
+
+Karta nemá být nový formulář pro každou drobnost. Použijte ji jen tehdy, když roční zahlédnutí mění stav otázky nebo odstraňuje z aktivního rytmu historickou stopu. Pokud otázku ponecháváte beze změny a nic se nepropsalo, stačí jedna věta v pracovním logu.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte roční otázku a aktuální pracovní místo.
+2. Minuta 2: řekněte, jestli otázka letos pomohla rozhodnout.
+3. Minuta 3: vyberte jeden ze čtyř uzavíracích stavů.
+4. Minuta 4: upravte nejbližší aktivní místo, pokud je to potřeba.
+5. Minuta 5: zapište, co se nepřenáší do aktivního rytmu.
+6. Minuta 6: doplňte návratový signál nebo datum další roční kontroly.
+
+Když workshop otevře nové téma, nezvětšujte uzavření. Nové téma zapište jako samostatný podnět. Uzavření ročního zahlédnutí má zavřít starou linku, ne založit další větev jen proto, že se při čtení něco připomnělo.
+
+### Checklist uzavření ročního zahlédnutí
+
+- Vybrali jsme jeden uzavírací stav?
+- Umíme říct, jaké rozhodnutí roční otázka chrání?
+- Pokud otázku ponecháváme, je její důvod v přítomném čase?
+- Pokud otázku přepisujeme, rozumí jí nový člověk bez původní historie?
+- Pokud slučujeme, přenesli jsme rozhodovací funkci, ne starý název?
+- Pokud vyřazujeme, zůstal konkrétní návratový signál?
+- Propsali jsme změnu jen do nejbližšího aktivního místa?
+- Neotevřeli jsme pasivní archiv bez potřeby?
+- Odstranili jsme z aktivního rytmu osobní údaje, zákaznické detaily a pomocné poznámky?
+- Má log jednu stručnou větu o výsledku?
+
+Uzavření prvního ročního zahlédnutí chrání roční rytmus před pomalým bobtnáním. Každá vyřazená položka se snaží vrátit aspoň jako malá připomínka. Tým jí má dát férovou šanci jen tehdy, když pořád něco rozhoduje. Když ne, stačí archiv a návratový signál. Tiché věci mají zůstat tiché.
+
 ## Pracovní log
 
+- 2026-06-13: Doplněna úvodní podkapitola o uzavření prvního ročního zahlédnutí vyřazené položky: čtyři uzavírací stavy, propsání do aktivního místa, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-13: Doplněna úvodní podkapitola o prvním ročním zahlédnutí vyřazené položky: ověření dnešního pracovního místa místo staré historie, tři výsledné stavy, privacy-first kontrola, karta a checklist.
 - 2026-06-13: Doplněna úvodní podkapitola o převodu vyřazené portfoliové položky do ročního tichého rytmu: tři možnosti převodu, vynechání ročního rytmu, sloučení do širší otázky, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-13: Doplněna úvodní podkapitola o rychlém potvrzení návratového signálu: tři brány potvrzení, falešné návraty, privacy-first hranice, potvrzovací karta, mini workshop a checklist.
