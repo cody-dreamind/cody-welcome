@@ -216138,8 +216138,148 @@ Když workshop otevře nové téma, nezvětšujte uzavření. Nové téma zapiš
 
 Uzavření prvního ročního zahlédnutí chrání roční rytmus před pomalým bobtnáním. Každá vyřazená položka se snaží vrátit aspoň jako malá připomínka. Tým jí má dát férovou šanci jen tehdy, když pořád něco rozhoduje. Když ne, stačí archiv a návratový signál. Tiché věci mají zůstat tiché.
 
+## Druhé roční zahlédnutí vyřazené položky
+
+Druhé roční zahlédnutí je poslední praktický test, jestli vyřazená položka opravdu patří jen do tichého rytmu, nebo už nemá být vidět ani tam. První roční zahlédnutí často ještě nese čerstvou paměť: někdo si pamatuje původní problém, někdo ví, proč se otázka nechala v inventuře, někdo opatrně hlídá, aby se stará chyba nevrátila. Druhý rok je už užitečnější. Ukáže, jestli otázka funguje i bez lidí, kteří měli původní změnu v hlavě.
+
+Začněte větou:
+
+```text
+Druhé roční zahlédnutí má rozhodnout, jestli tichá otázka pořád chrání dnešní práci, nebo už jen připomíná starý úklid.
+```
+
+Pokud otázka pořád chrání dnešní rozhodnutí, ponechte ji jako krátkou součást širší roční inventury. Pokud nikomu nepomohla, nikoho nezastavila před chybou a jen vyvolala historické vysvětlování, vyřaďte ji z aktivního rytmu. Archiv tím nezmizí. Jen přestane chodit na porady v kabátu "ještě pro jistotu".
+
+### Co druhý rok ověřuje
+
+Druhé zahlédnutí neověřuje, jestli bylo původní vyřazení správné. To už mělo proběhnout dřív. Ověřuje tři praktičtější věci:
+
+- samostatnost: rozumí dnešní člověk roční otázce bez původní historie?
+- užitečnost: změnila otázka aspoň jedno rozhodnutí, kontrolu nebo pracovní postup?
+- lehkost: zůstala otázka krátká, nebo znovu otevřela starou kartu, staré exporty a staré debaty?
+
+Příklad:
+
+```text
+Tichá roční otázka:
+Nevrací se archivní exporty do aktivních pracovních postupů?
+
+Druhé roční zahlédnutí:
+Nový člověk v provozu otázce rozumí. Při kontrole našel jeden starý export připojený v interní poznámce, ale nešlo o aktivní nástroj.
+
+Užitečnost:
+Otázka pomohla odstranit odkaz z poznámky, ale nebylo potřeba otevírat původní kartu.
+
+Rozhodnutí:
+Otázku ponecháváme ještě jeden roční cyklus jako součást obecné kontroly datových stop. Samostatnou položku neobnovujeme.
+```
+
+Slabý výsledek by vypadal jinak:
+
+```text
+Druhé roční zahlédnutí:
+Nikdo neví, co otázka znamená. Aby dávala smysl, museli jsme otevřít původní kartu a vysvětlit tři staré změny.
+
+Rozhodnutí:
+Otázku vyřazujeme z ročního rytmu. Návratový signál zůstává: znovu ji otevřeme jen tehdy, když se archivní export začne používat jako aktivní pracovní vstup.
+```
+
+V druhém příkladu otázka neslouží systému. Systém slouží jí. To je signál k vyřazení, ne k dalšímu vysvětlování.
+
+### Čtyři výsledné stavy
+
+Po druhém ročním zahlédnutí vyberte jeden ze čtyř stavů:
+
+- Ponechat v tichém rytmu: otázka je krátká, samostatně srozumitelná a chrání konkrétní rozhodnutí.
+- Sloučit do obecnější otázky: téma je užitečné, ale vlastní řádek je zbytečně historický.
+- Nahradit návratovým signálem: pravidelná kontrola už nepřináší hodnotu, ale existuje jasná situace, která téma znovu otevře.
+- Vyřadit úplně z aktivního rytmu: otázka ani návratový signál už neodpovídají dnešnímu systému.
+
+Stav `ponechat` si zaslouží krátký důvod v přítomném čase. Například: "brání tomu, aby se archivní datové stopy znovu tvářily jako živé pracovní vstupy." Ne "kdysi jsme s tím měli problém". Minulost je důvod, proč otázka vznikla, ne proč má zůstat.
+
+Stav `sloučit` použijte, když se původní téma rozpustilo do běžné hygieny. Samostatná věta k jedné vyřazené položce může zmizet v obecnější otázce: "Mají aktivní, archivní a dočasné datové stopy jasně oddělený účel, vlastníka a retenci?"
+
+Stav `nahradit návratovým signálem` je dobrý, když nechcete téma kontrolovat každý rok, ale nechcete ho ani ztratit. Typicky stačí věta v rozhodovacím logu: "Vrátíme se k tomu, pokud se archivní stopa začne používat v aktivním procesu."
+
+Stav `vyřadit úplně` používejte opatrně. Je vhodný tehdy, když se změnil systém, segment, nástroj nebo odpovědnost tak zásadně, že starý návratový signál už neukazuje na dnešní riziko. I tady napište, proč signál mizí. Mlčení není totéž co rozhodnutí.
+
+### Privacy-first druhé zahlédnutí
+
+Druhý rok je ideální chvíle pro poslední kontrolu datové diety. Pokud otázka přežila jen proto, že obsahuje starý konkrétní příklad, pravděpodobně si do ročního rytmu taháte víc dat, než potřebujete. V aktivní dokumentaci má zůstat rozhodovací funkce, ne historický detail.
+
+Zeptejte se:
+
+```text
+Umíme otázku udržet bez jmen, zákaznických detailů, screenshotů, exportů a osobních poznámek?
+```
+
+Pokud ne, otázka není připravená na dlouhodobý tichý rytmus. Přepište ji na anonymní pracovní scénář, slučte ji do obecnější kontroly nebo ji nahraďte návratovým signálem.
+
+Codyho komentář: když roční otázka potřebuje k přežití starý screenshot a tři pamětníky, není to otázka. Je to malý dokumentační kultík. Hezky poděkovat, archivovat, zhasnout.
+
+### Karta druhého ročního zahlédnutí
+
+```text
+Vyřazená položka:
+
+Roční otázka před druhým zahlédnutím:
+
+Aktuální pracovní místo:
+
+Kdo otázku použil bez původní historie:
+
+Co otázka letos změnila nebo ochránila:
+
+Lehkost průchodu:
+- bez vysvětlování / s drobným vysvětlením / otevřela starou historii
+
+Výsledný stav:
+- ponechat v tichém rytmu / sloučit do obecnější otázky / nahradit návratovým signálem / vyřadit úplně z aktivního rytmu
+
+Nové znění otázky nebo návratového signálu:
+
+Co se odstraňuje z aktivní dokumentace:
+
+Co zůstává jen v archivu:
+
+Privacy-first úklid:
+
+Vlastník:
+```
+
+Kartu vyplňujte jen tehdy, když druhé zahlédnutí mění stav otázky. Pokud otázka zůstává beze změny a nikde nevznikla nová stopa, stačí jedna věta v ročním logu. Dlouhodobý systém má být schopný občas nevyrobit další dokument. Ano, i dokumentace může mít disciplínu. Překvapivé, já vím.
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: přečtěte roční otázku bez původní karty.
+2. Minuta 2: nechte člověka mimo původní změnu říct, čemu rozumí.
+3. Minuty 3 až 4: ověřte, jestli otázka letos něco rozhodla, zjednodušila nebo ochránila.
+4. Minuta 5: zkontrolujte, zda průchod neotevřel staré osobní nebo zákaznické detaily.
+5. Minuta 6: vyberte jeden ze čtyř výsledných stavů.
+6. Minuta 7: upravte jen nejbližší aktivní místo a zapište, co zůstává v archivu.
+
+Pokud se workshop začne měnit v historické vyšetřování, zastavte ho. Druhé roční zahlédnutí nemá zjišťovat, jak přesně se všechno stalo. Má zjistit, jestli dnešní systém potřebuje malou tichou otázku. To je jiná práce a má mnohem menší rozsah.
+
+### Checklist druhého ročního zahlédnutí
+
+- Četli jsme roční otázku bez původní historie?
+- Rozuměl jí někdo, kdo nebyl u původní změny?
+- Víme, jaké dnešní rozhodnutí otázka chrání?
+- Neotevřeli jsme starou kartu jen kvůli vysvětlení názvu?
+- Vybrali jsme jeden ze čtyř výsledných stavů?
+- Pokud otázku ponecháváme, je krátká a samostatná?
+- Pokud ji slučujeme, přenesli jsme rozhodovací funkci, ne historický detail?
+- Pokud ji nahrazujeme návratovým signálem, je signál konkrétní?
+- Pokud ji vyřazujeme úplně, víme, proč už neodpovídá dnešnímu systému?
+- Odstranili jsme z aktivní dokumentace staré osobní údaje, screenshoty, exporty a zákaznické příklady?
+- Nezaložili jsme novou pravidelnou kontrolu jen ze setrvačnosti?
+- Zůstává roční rytmus po zásahu kratší, jasnější nebo stejně lehký?
+
+Druhé roční zahlédnutí je malá maturita tiché otázky. Buď obstojí bez původních pamětníků, nebo se přepíše, sloučí či odejde. Všechny čtyři výsledky jsou v pořádku. Špatný výsledek je jen pátý: nechat historickou větu v rytmu, protože se nikomu nechce rozhodnout.
+
 ## Pracovní log
 
+- 2026-06-13: Doplněna úvodní podkapitola o druhém ročním zahlédnutí vyřazené položky: samostatnost otázky bez původní historie, čtyři výsledné stavy, privacy-first datová dieta, karta, mini workshop a checklist.
 - 2026-06-13: Doplněna úvodní podkapitola o uzavření prvního ročního zahlédnutí vyřazené položky: čtyři uzavírací stavy, propsání do aktivního místa, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-13: Doplněna úvodní podkapitola o prvním ročním zahlédnutí vyřazené položky: ověření dnešního pracovního místa místo staré historie, tři výsledné stavy, privacy-first kontrola, karta a checklist.
 - 2026-06-13: Doplněna úvodní podkapitola o převodu vyřazené portfoliové položky do ročního tichého rytmu: tři možnosti převodu, vynechání ročního rytmu, sloučení do širší otázky, privacy-first úklid, karta, mini workshop a checklist.
