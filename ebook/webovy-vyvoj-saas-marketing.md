@@ -217261,8 +217261,131 @@ Pokud workshop potřebuje víc než osm minut, pravděpodobně neuzavíráte dru
 
 Dobře uzavřená druhá roční inventura zmenšuje systém. To je její hlavní přínos. Po dvou letech už stará položka nemá dostávat pravidelný prostor jen proto, že kdysi pomohla. Buď její rozhodovací funkce žije jinde, nebo se vrátí až při konkrétním návratovém signálu. V obou případech vyhrává klidnější práce a menší datová stopa.
 
+## Návrat signálu po vyřazení z ročního rytmu
+
+Když položka odejde i z ročního rytmu, systém si vydechne. To je dobře. Neznamená to ale, že se téma už nikdy nesmí vrátit. Znamená to jen, že se nesmí vrátit z paměti, nostalgie nebo opatrnosti bez konkrétního důvodu. Po vyřazení z ročního rytmu má návrat vyšší laťku: musí přijít z dnešní práce, ne ze starého archivu.
+
+První otázka proto nezní "měli jsme to přece kdysi v dokumentaci?". Zní:
+
+```text
+Které dnešní rozhodnutí nejde udělat bez funkce, kterou stará položka kdysi plnila?
+```
+
+Pokud na otázku neumíte odpovědět konkrétním pracovním místem, položku neotevírejte. Zapište podnět a nechte ho čekat. Po dvou letech tichého provozu si starý dokument nezaslouží návrat jen proto, že někomu chybí známá formulace.
+
+Typický návratový signál po vyřazení z ročního rytmu může vypadat takto:
+
+```text
+Ve dvou posledních kvalifikacích poptávky po sobě nedokázal obchod rozhodnout prioritu podle aktuální šablony a musel hledat historické pravidlo.
+```
+
+To už je signál. Má počet, místo, rozhodnutí a dopad. Naopak věta "možná bychom měli vrátit starý scoring" je jen návrh bez důkazu. Může být užitečný, ale nejdřív musí projít dnešní prací.
+
+### Tři brány návratu po dlouhém klidu
+
+Po vyřazení z ročního rytmu projděte tři brány:
+
+- Dnešní rozhodnutí: existuje konkrétní rozhodnutí, které aktuální systém neumí udělat.
+- Opakování: nejde o jednorázovou výjimku, ale o vzor, který se objevil aspoň ve dvou podobných pracovních situacích.
+- Nejmenší funkce: víte, jakou malou funkci staré položky potřebujete, aniž byste obnovili celý starý dokument.
+
+Když projdou všechny tři brány, otevřete novou malou otázku. Neotevírejte starou položku. To je důležitý rozdíl: signál může ukázat, že chybí funkce, ale nemusí znamenat návrat původní struktury, tabulky, checklistu nebo datové stopy.
+
+Příklad:
+
+```text
+Dnešní rozhodnutí:
+Obchod neví, jestli má poptávku s nejasným rozhodovatelem poslat do rychlé kvalifikace, nebo ji nejdřív vrátit na doplnění kontextu.
+
+Opakování:
+Stalo se to u tří relevantních poptávek během jednoho měsíce.
+
+Nejmenší funkce:
+Potřebujeme jednu větu v sales šabloně: když chybí rozhodovací role, nejdřív se doptáváme na proces, nepočítáme automaticky prioritu.
+
+Co neobnovujeme:
+Starou scoring tabulku, historické váhy, export poptávek ani samostatné review scoringu.
+```
+
+Výsledek je malá oprava dnešní šablony. Starý scoring zůstává zavřený. Tým získá rozhodovací funkci bez návratu starého systému.
+
+### Jak nechat archiv zavřený
+
+Archiv může pomoct pochopit historii, ale nemá být první pracovní nástroj. Pokud se po dlouhém klidu objeví signál, nejdřív napište dnešní problém vlastními slovy. Teprve potom se zeptejte, jestli archiv obsahuje užitečné poučení.
+
+Praktické pravidlo:
+
+- Nejdřív popište dnešní rozhodnutí bez historického názvu.
+- Potom určete nejbližší pracovní místo.
+- Pak napište nejmenší funkci, která chybí.
+- Až nakonec, pokud je to opravdu potřeba, otevřete archiv jen kvůli jedné lekci.
+
+Když archiv otevřete, neberte z něj celé bloky textu. Vezměte poučení a přepište ho do dnešního jazyka. Staré názvy často přinášejí staré návyky: staré role, staré metriky, staré exporty, staré výjimky. To je přesně to, co jste vyřazením uklidili.
+
+Privacy-first poznámka: návrat přes archiv je rizikový hlavně tím, že může znovu vytáhnout staré příklady, screenshoty, zákaznické detaily nebo exporty. Pokud potřebujete historické poučení, stačí zobecněná věta. Nepřenášejte staré osobní nebo obchodní stopy do nové práce jen proto, že byly po ruce.
+
+### Karta návratu po vyřazení z ročního rytmu
+
+```text
+Dnešní podnět:
+
+Pracovní místo:
+
+Rozhodnutí, které nejde udělat:
+
+Opakování:
+- jednorázové / opakované / zatím nevíme
+
+Nejmenší chybějící funkce:
+
+Co ze staré položky neobnovujeme:
+
+Potřebujeme archiv?
+- ne
+- ano, jen kvůli této jedné lekci:
+
+Nová malá otázka:
+
+Privacy-first hranice:
+Jaká stará data, screenshoty, exporty nebo příklady nepřenášíme:
+
+Vlastník:
+
+Datum návratu:
+```
+
+Karta má chránit před reflexem "vrátit dokument". Pokud nejde vyplnit rozhodnutí, opakování a nejmenší funkci, návrat není připravený. V takovém případě stačí poznámka v běžném pracovním místě a žádná změna systému.
+
+### Mini workshop na 9 minut
+
+1. Minuta 1: pojmenujte dnešní podnět bez starého názvu položky.
+2. Minuty 2 až 3: určete pracovní místo a rozhodnutí, které nejde udělat.
+3. Minuty 4 až 5: ověřte, jestli jde o opakovaný vzor, nebo jednorázovou výjimku.
+4. Minuta 6: napište nejmenší chybějící funkci.
+5. Minuta 7: výslovně napište, co ze staré položky neobnovujete.
+6. Minuta 8: proveďte privacy-first kontrolu archivu a starých stop.
+7. Minuta 9: rozhodněte, jestli vzniká nová malá otázka, nebo jen poznámka.
+
+Když workshop začne debatou o tom, jak se stará položka kdysi jmenovala, zastavte ho. Název není signál. Signál je dnešní rozhodnutí, které nejde udělat.
+
+### Checklist návratu po dlouhém klidu
+
+- Vychází podnět z dnešní práce, ne ze vzpomínky?
+- Umíme pojmenovat konkrétní rozhodnutí, které nejde udělat?
+- Vidíme opakování, nebo jen jednu výjimku?
+- Hledáme nejmenší chybějící funkci, ne návrat celého dokumentu?
+- Popsali jsme problém dnešním jazykem?
+- Otevřeli jsme archiv až po formulaci dnešního problému?
+- Nepřenášíme staré screenshoty, exporty, zákaznické detaily ani osobní poznámky?
+- Je jasné, co ze staré položky zůstává zavřené?
+- Pokud vzniká nová otázka, má pracovní místo, vlastníka a datum návratu?
+- Pokud signál neprošel, zůstala jen poznámka bez nové systémové práce?
+
+Návrat signálu po dlouhém klidu není porážka vyřazení. Je to test, jestli systém umí znovu použít poučení bez obnovení starého balastu. Nejlepší výsledek často není návrat dokumentu, ale jedna přesná věta v dnešní šabloně. To je praktické, levné a datově střídmé. Přesně tak má vypadat dospělý privacy-first provoz.
+
 ## Pracovní log
 
+- 2026-06-15: Doplněna úvodní podkapitola o návratu signálu po vyřazení z ročního rytmu: tři brány návratu, práce bez reflexu obnovit starý dokument, privacy-first hranice archivu, karta, mini workshop a checklist.
 - 2026-06-15: Doplněna úvodní podkapitola o uzavření druhé roční inventury bez vyřazené položky: čtyři uzavírací stavy, vyřazení z pravidelného rytmu, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-13: Doplněna úvodní podkapitola o druhé roční inventuře bez vyřazené položky: ověření dnešní cesty bez archivu, skrytých náhrad a nové datové stopy, karta, mini workshop a checklist.
 - 2026-06-13: Doplněna úvodní podkapitola o uzavření první roční inventury bez vyřazené položky: čtyři uzavírací stavy, úklid stínové práce, privacy-first datová dieta, karta, mini workshop a checklist.
