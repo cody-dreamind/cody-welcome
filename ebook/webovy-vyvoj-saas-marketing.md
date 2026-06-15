@@ -217111,8 +217111,159 @@ Když workshop skončí větou "možná bychom měli starou věc radši obnovit"
 
 Druhá roční inventura bez vyřazené položky má potvrdit dospělost systému. Nejde o obřad nad archivem. Jde o obyčejnou pracovní situaci, ve které se ukáže, že tým umí rozhodovat bez staré opory, bez soukromých náhrad a bez nových datových zbytků. Pokud ano, nechte položku zavřenou. Ticho, které opravdu funguje, je výsledek.
 
+## Uzavření druhé roční inventury bez vyřazené položky
+
+Uzavření druhé roční inventury je místo, kde se má přestat dokazovat, že vyřazení bylo správné. Pokud systém dva roky funguje bez staré položky, bez soukromých náhrad a bez rozbalování archivu, položka už není "nedávno vyřazená". Je prostě mimo aktivní provoz.
+
+To neznamená, že archiv musíte smazat. Znamená to, že ho přestanete brát jako pracovní pojistku. V živém systému má zůstat jen to, co dnes pomáhá rozhodovat, předávat práci nebo snižovat riziko. Zbytek patří do archivu s jasným kontextem, krátkou retenční poznámkou a bez dalšího pravidelného obcházení.
+
+Uzavírací otázka zní:
+
+```text
+Co po druhé roční inventuře zůstává v živé práci a co už má být jen archivní stopa?
+```
+
+Pokud odpověď nejde napsat jednou větou, inventura pravděpodobně otevřela víc témat najednou. Nezavírejte je jednou velkou kartou. Vyberte stav hlavní položky a případné nové tření převeďte do samostatné malé otázky.
+
+### Čtyři uzavírací stavy
+
+Po druhé roční inventuře vyberte jeden ze čtyř stavů:
+
+- Vyřazení dozrálo: dnešní pracovní cesta stačí, nevznikla skrytá náhrada a stará položka opouští i roční pozornost.
+- Opravit dnešní cestu: položka se nevrací, ale dnešní pracovní místo potřebuje jednu směrovku, větu, vlastnictví nebo odkaz.
+- Uklidit náhradní stopu: hlavní pravidlo funguje, ale někde bokem vznikla tabulka, export, poznámka nebo zvyk, který musí pryč nebo do oficiálního místa.
+- Otevřít novou menší otázku: stará položka se nevrací celá, ale dnešní systém opakovaně neumí rozhodnout jednu konkrétní věc.
+
+Stav `vyřazení dozrálo` je cílový. Nevyžaduje další kartu, další workshop ani novou připomínku v kalendáři. Stačí krátký log, úklid inventurních poznámek a případné odstranění roční otázky z checklistu.
+
+Stav `opravit dnešní cestu` neznamená návrat staré historie. Opravuje se nejbližší aktivní místo. Pokud lidé hledají starý název, přidejte přesměrování v indexu. Pokud chybí věta v šabloně, doplňte větu. Pokud není jasný vlastník, určete vlastníka. Neobnovujte dokument, který by jen znovu vysvětloval, proč kdysi existoval.
+
+Stav `uklidit náhradní stopu` je privacy-first priorita. Skrytá náhrada bývá horší než starý kanonický dokument, protože nemá retenci, vlastníka ani jasný účel. Typicky vznikne z dobré vůle: někdo si chce pomoct, a tak si vede lokální seznam výjimek. Po druhé inventuře už to není nevinná pomoc, ale signál, že oficiální cesta není dost důvěryhodná nebo dost pohodlná.
+
+Stav `otevřít novou menší otázku` používejte jen tehdy, když umíte pojmenovat dnešní rozhodnutí, které nejde udělat. Ne "vrátit starý scoring", ale třeba "v sales šabloně chybí pravidlo pro poptávky bez rozhodovací role". Nová otázka má začít v dnešní práci, ne v archivní nostalgii.
+
+### Příklad uzavření
+
+```text
+Vyřazená položka:
+Samostatná karta starého lead scoringu.
+
+Výsledek druhé roční inventury:
+Kvalifikace poptávky proběhla podle dnešní sales šablony. Starý scoring nikdo nepotřeboval.
+
+Nález:
+Nový člověk hledal výraz "lead score", protože ho slyšel v obchodním hovoru.
+
+Uzavírací stav:
+Opravit dnešní cestu.
+
+Akce:
+Do interního indexu doplníme alias "lead score" směrem na aktuální kvalifikační pravidlo. Starou scoring kartu neobnovujeme.
+
+Co se maže nebo zavírá:
+Dočasná poznámka z inventury a jeden odkaz na archivní screenshot v osobních poznámkách.
+
+Návratový signál:
+Dvě podobné kvalifikace po sobě nepůjdou rozhodnout podle aktuální šablony bez dotazu na původní historii.
+```
+
+Takové uzavření je malé, ale dospělé. Neignoruje tření, jen ho nepovyšuje na návrat starého systému. Dnešní cesta dostane lepší směrovku a archiv zůstane archivem.
+
+### Co odstranit z pravidelného rytmu
+
+Po druhé úspěšné inventuře se zeptejte, zda má položka ještě zůstávat v ročním checklistu. Často nemá. Pokud ji každý rok čtete jen proto, abyste znovu potvrdili, že není potřeba, z roční inventury se stává malý rituál bez rozhodovací hodnoty.
+
+Odstranit můžete:
+
+- samostatnou roční otázku k vyřazené položce;
+- dočasný odkaz na historický dokument v aktivním indexu;
+- inventurní poznámky, které jen opakují rozhodnutí z prvního roku;
+- osobní připomínky typu "nezapomenout zkontrolovat starou věc";
+- ukázky se starými zákaznickými detaily, pokud už nemají aktivní účel.
+
+Ponechat můžete:
+
+- krátkou archivní stopu s datem vyřazení a důvodem;
+- obecnější roční otázku, která chrání stejnou rozhodovací funkci bez starého názvu;
+- návratový signál formulovaný dnešním jazykem;
+- odkaz z archivního indexu, pokud má jasnou retenční a bezpečnostní hranici.
+
+Privacy-first pravidlo: co nepotřebujete pro dnešní rozhodnutí, nepřenášejte do živého rytmu jen kvůli pocitu jistoty. Zvlášť ne screenshoty, exporty, seznamy kontaktů, interní konverzace nebo příklady s reálnými lidmi. Archiv nemá být skladiště nejistoty.
+
+Codyho komentář: druhá roční inventura je dobrý moment říct "díky za službu" a zavřít dveře. Ne dramaticky, žádné fanfáry. Prostě přestat nosit starý dokument na každé review jako talisman proti špatným rozhodnutím.
+
+### Karta uzavření druhé roční inventury bez položky
+
+```text
+Vyřazená položka:
+
+Výsledek druhé roční inventury:
+
+Uzavírací stav:
+- vyřazení dozrálo
+- opravit dnešní cestu
+- uklidit náhradní stopu
+- otevřít novou menší otázku
+
+Co zůstává v živé práci:
+
+Co odchází z pravidelného rytmu:
+
+Nejmenší oprava, pokud existuje:
+
+Skrytá náhrada a její uzavření:
+
+Archivní stopa:
+- kde leží:
+- proč zůstává:
+- co v ní nesmí být:
+
+Návratový signál dnešním jazykem:
+
+Privacy-first úklid:
+
+Vlastník:
+
+Datum další kontroly:
+- žádná samostatná / součást obecné roční inventury / konkrétní návratový signál
+```
+
+Kartu držte jen tehdy, když se něco mění. Pokud je výsledek čisté dozrání vyřazení, stačí log:
+
+```text
+Druhá roční inventura potvrdila, že vyřazená položka není potřeba v živém rytmu. Zůstává jen archivní stopa a obecný návratový signál.
+```
+
+### Mini workshop na 8 minut
+
+1. Minuta 1: přečtěte výsledek druhé roční inventury jednou větou.
+2. Minuta 2: vyberte jeden ze čtyř uzavíracích stavů.
+3. Minuty 3 až 4: určete, co zůstává v živé práci a co odchází z pravidelného rytmu.
+4. Minuta 5: zapište nejmenší opravu nebo úklid skryté náhrady.
+5. Minuta 6: formulujte návratový signál dnešním jazykem.
+6. Minuta 7: proveďte privacy-first úklid dočasných poznámek, exportů a osobních stop.
+7. Minuta 8: rozhodněte, zda vzniká karta, nebo stačí krátký log.
+
+Pokud workshop potřebuje víc než osm minut, pravděpodobně neuzavíráte druhou inventuru, ale otevíráte nové téma. V tom případě zavřete inventuru nejmenším poctivým stavem a nové téma dejte do samostatné otázky.
+
+### Checklist uzavření druhé roční inventury
+
+- Vybrali jsme jeden hlavní uzavírací stav?
+- Nevrátili jsme starou položku jen proto, že někdo použil její starý název?
+- Víme, co zůstává v živé práci?
+- Víme, co odchází z pravidelného rytmu?
+- Pokud vznikla oprava, týká se dnešního pracovního místa, ne celé staré historie?
+- Pokud existovala skrytá náhrada, má jasné uzavření nebo oficiální domov?
+- Archivní stopa neobsahuje zbytečné osobní údaje, screenshoty, exporty ani zákaznické detaily?
+- Návratový signál je formulovaný dnešním jazykem?
+- Další kontrola je buď součástí obecné roční inventury, nebo nevzniká vůbec?
+- Pokud se nic nemění, nezaložili jsme zbytečnou kartu jen kvůli pocitu poctivosti?
+
+Dobře uzavřená druhá roční inventura zmenšuje systém. To je její hlavní přínos. Po dvou letech už stará položka nemá dostávat pravidelný prostor jen proto, že kdysi pomohla. Buď její rozhodovací funkce žije jinde, nebo se vrátí až při konkrétním návratovém signálu. V obou případech vyhrává klidnější práce a menší datová stopa.
+
 ## Pracovní log
 
+- 2026-06-15: Doplněna úvodní podkapitola o uzavření druhé roční inventury bez vyřazené položky: čtyři uzavírací stavy, vyřazení z pravidelného rytmu, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-13: Doplněna úvodní podkapitola o druhé roční inventuře bez vyřazené položky: ověření dnešní cesty bez archivu, skrytých náhrad a nové datové stopy, karta, mini workshop a checklist.
 - 2026-06-13: Doplněna úvodní podkapitola o uzavření první roční inventury bez vyřazené položky: čtyři uzavírací stavy, úklid stínové práce, privacy-first datová dieta, karta, mini workshop a checklist.
 - 2026-06-13: Doplněna úvodní podkapitola o první roční inventuře bez vyřazené položky: ověření rozhodovací funkce bez staré otázky, stínová práce, návratový signál, privacy-first kontrola, karta, mini workshop a checklist.
