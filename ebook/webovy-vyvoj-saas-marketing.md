@@ -217975,8 +217975,168 @@ Když se workshop začne rozšiřovat do debaty o celé staré metodice, vraťte
 
 Druhé běžné použití je dobrý konec dlouhého návratu. Po něm už má být jasné, jestli dnešní funkce stojí sama. Pokud ano, nechte ji pracovat. Pokud ne, opravte nejbližší místo nebo otevřete nejmenší chybějící funkci. Starý systém zůstává zavřený, dokud dnešní práce opravdu neukáže, že potřebuje víc než jednu přesnou větu.
 
+## Uzavření druhého běžného použití po návratu z dlouhého klidu
+
+Druhé běžné použití po návratu z dlouhého klidu je poslední místo, kde má téma ještě nárok na zvláštní pozornost. Pokud se po něm práce znovu tváří jako otevřená revize, něco se pokazilo: buď výsledek není dost jasný, nebo tým neumí odlišit dnešní funkci od staré historie. Uzavření má udělat právě toto rozlišení.
+
+Začněte jednou větou:
+
+```text
+Po druhém běžném použití dnešní funkce:
+```
+
+Do věty nedávejte historii. Nepište, kdy položka vznikla, proč byla vyřazena ani kolik debat se kolem ní vedlo. Pište jen dnešní výsledek: obstála, potřebuje jednu lokální opravu, má slabé pracovní místo, nebo stále chybí nejmenší funkce. Zbytek patří do archivu nebo do rozhodovacího logu, ne do živého pravidla.
+
+Příklad:
+
+```text
+Po druhém běžném použití dnešní funkce:
+Sales šablona stačí pro poptávku bez jasné rozhodovací role, pokud obsahuje doplňující otázku a jeden neutrální příklad follow-up e-mailu.
+
+Proto teď:
+Ponecháváme šablonu jako kanonické místo, zvláštní kontrolu končíme a starý scoring neobnovujeme.
+
+Další návrat nastane jen když:
+Tři relevantní poptávky za sebou nepůjdou kvalifikovat bez hledání historického scoringu nebo ručního vysvětlení mimo šablonu.
+```
+
+Takový zápis je malý, ale zavírá hodně dveří. Říká, co funguje, co se nemění a co by muselo nastat, aby mělo smysl téma znovu otevřít.
+
+### Čtyři uzavírací stavy
+
+Po druhém běžném použití vyberte jeden uzavírací stav:
+
+- Převést do tichého provozu: funkce obstála bez čerstvého vysvětlení a bez návratu starého systému.
+- Dopsat poslední lokální opravu: funkce obstála, ale jedno konkrétní místo ještě brání plynulému použití.
+- Přesunout do správného pracovního místa: pravidlo je dobré, ale lidé ho přirozeně hledají jinde.
+- Otevřít novou malou smyčku: druhé použití potvrdilo chybějící funkci, kterou dnešní pravidlo nepokrývá.
+
+`Převést do tichého provozu` znamená, že končí zvláštní péče. Neplánujte třetí kontrolu, pokud není navázaná na konkrétní návratový signál. Tichý provoz neznamená zapomenout. Znamená nechat pravidlo pracovat stejně jako ostatní běžná pravidla.
+
+`Dopsat poslední lokální opravu` použijte jen tehdy, když oprava sedí na jedno místo: větu, odkaz, příklad, název sekce nebo krátké upozornění v checklistu. Jakmile oprava potřebuje nový dokument, nový rytmus nebo nový report, už to není poslední lokální oprava.
+
+`Přesunout do správného pracovního místa` je stav pro situaci, kdy se pravidlo opakovaně hledá špatně. V takovém případě nepřepisujte pořád stejný obsah. Opravte trasu práce. Přidejte odkaz z formuláře do šablony, přejmenujte sekci, smažte starou kopii nebo posuňte pravidlo blíž k okamžiku rozhodnutí.
+
+`Otevřít novou malou smyčku` je nejvzácnější stav. Použijte ho, když druhé běžné použití ukáže skutečnou chybějící funkci, ne jen nostalgii po staré metodice. Nová smyčka musí mít vlastní otázku, vlastní rozsah a vlastní stop podmínku. Nesmí začínat větou "vrátíme původní systém a pak uvidíme".
+
+Codyho komentář: po druhém použití už by téma nemělo sedět uprostřed kanceláře s cedulkou "ještě mě sledujte". Buď umí pracovat normálně, nebo potřebuje jednu přesnou opravu. Všechno mezi tím je většinou jen nervozita v pracovním kabátě.
+
+### Co propsat do živého systému
+
+Uzavření druhého použití má tři vrstvy:
+
+- Živé pracovní místo: aktuální pravidlo, příklad, odkaz nebo hranice použití.
+- Rozhodovací log: krátký závěr, proč zvláštní pozornost končí nebo proč vzniká malá smyčka.
+- Archiv: minimum historického kontextu, pokud je potřeba vysvětlit, proč se starý systém neobnovuje.
+
+Do živého pracovního místa nepatří celá cesta návratu. Člověk, který pravidlo použije za tři měsíce, nepotřebuje znát všechny předchozí kontroly. Potřebuje jasně vidět, co má udělat, kdy pravidlo stačí a kdy má spustit návratový signál.
+
+Praktické pravidlo:
+
+```text
+Do živého místa patří to, co pomůže dalšímu použití.
+Do logu patří to, co pomůže pochopit rozhodnutí.
+Do archivu patří jen to, co má právní, provozní nebo historickou hodnotu.
+Všechno ostatní se maže, anonymizuje nebo zkracuje.
+```
+
+Pokud se tým neumí rozhodnout, kam informace patří, zeptejte se, kdo ji použije příště a v jakém rozhodnutí. Když neumíte odpovědět, informace pravděpodobně nemá zůstat v aktivní trase.
+
+### Ukončení zvláštní pozornosti
+
+Nejtěžší část uzavření je často přestat hlídat. Tým má po dlouhém návratu pocit, že když už se téma jednou probudilo, mělo by se ještě chvíli sledovat. To je pochopitelné, ale často škodlivé. Zvláštní pozornost vytváří vlastní práci: připomínky, mini reporty, extra meetingy, ruční kontroly a opatrné otázky, které by bez ní nevznikly.
+
+Ukončení napište výslovně:
+
+```text
+Zvláštní pozornost končí.
+Dál se téma objevuje jen v běžném pracovním rytmu nebo při návratovém signálu.
+```
+
+Pak odstraňte připomínky, dočasné tasky, provizorní komentáře a pomocné seznamy. Pokud některý z nich stále vypadá užitečně, musí se přepsat do kanonického pracovního místa. Dočasná opora, která zůstane viset vedle systému, se časem změní v druhý zdroj pravdy.
+
+### Privacy-first uzavření druhého použití
+
+Po druhém použití už obvykle není důvod držet pracovní detaily z návratu. Zůstat má jen to, co přímo pomáhá dalšímu rozhodnutí. To je dobrý okamžik pro poslední datovou dietu.
+
+Projďte tyto otázky:
+
+- Zůstává v živém místě jen aktuální pravidlo, neutrální příklad a návratový signál?
+- Nezůstaly někde kopie starých zákaznických detailů, screenshotů, exportů nebo osobních poznámek?
+- Nepřidali jsme sledování používání pravidla jen proto, že téma bylo kdysi citlivé?
+- Lze historický příklad nahradit syntetickým nebo zobecněným příkladem?
+- Má archiv jasný důvod, vlastníka a přístupové omezení?
+
+Privacy-first uzavření není jen mazání. Někdy stačí přepsat konkrétní příklad do obecného tvaru. Místo skutečného zákazníka napište "poptávka bez rozhodovací role". Místo screenshotu použijte textový vzor. Místo exportu nechte jednovětý závěr. Pravidlo zůstane použitelné a datová stopa se zmenší.
+
+### Karta uzavření druhého běžného použití
+
+```text
+Uzavřený návrat:
+
+Dnešní funkce:
+
+Druhé běžné použití ukázalo:
+
+Uzavírací stav:
+- převést do tichého provozu
+- dopsat poslední lokální opravu
+- přesunout do správného pracovního místa
+- otevřít novou malou smyčku
+
+Co se propisuje do živého pracovního místa:
+
+Co patří jen do rozhodovacího logu:
+
+Co zůstává v archivu a proč:
+
+Co ze starého systému dál neobnovujeme:
+
+Jaká zvláštní pozornost končí:
+
+Co mažeme, anonymizujeme nebo zkracujeme:
+
+Návratový signál:
+
+Vlastník:
+
+Datum dalšího návratu:
+```
+
+Karta má být krátká. Pokud při jejím vyplnění vzniká nová metodika, zastavte se. Uzavíráte druhé použití, ne stavíte další patro systému.
+
+### Mini workshop na 8 minut
+
+1. Minuta 1: přečtěte výsledek druhého běžného použití.
+2. Minuta 2: vyberte jeden ze čtyř uzavíracích stavů.
+3. Minuty 3 až 4: rozhodněte, co patří do živého místa, logu a archivu.
+4. Minuta 5: napište, co ze starého systému dál neobnovujete.
+5. Minuta 6: zrušte zvláštní pozornost, pokud funkce obstála.
+6. Minuta 7: proveďte privacy-first úklid pracovních stop.
+7. Minuta 8: zapište návratový signál a vlastníka.
+
+Když se workshop začne rozpadat do detailů staré historie, vraťte se k dnešní funkci. Uzavření druhého použití neodpovídá na otázku, jestli byla minulost oprávněná. Odpovídá na otázku, co má od zítřka platit v běžné práci.
+
+### Checklist uzavření druhého běžného použití
+
+- Má druhé použití jeden uzavírací stav?
+- Je jasné, co se propisuje do živého pracovního místa?
+- Oddělili jsme živé pravidlo, rozhodovací log a archiv?
+- Nevracíme starý dokument, tabulku, review rytmus ani datovou stopu jako pomocnou oporu?
+- Pokud dopisujeme opravu, je opravdu lokální?
+- Pokud přesouváme pravidlo, opravujeme trasu práce místo dalšího přepisování?
+- Pokud otevíráme novou smyčku, má menší rozsah než starý systém?
+- Je zvláštní pozornost výslovně ukončená?
+- Smazali, anonymizovali nebo zkrátili jsme dočasné pracovní stopy?
+- Má archiv jasný důvod a není jen skladištěm obav?
+- Existuje konkrétní návratový signál místo další kontroly ze zvyku?
+- Ví vlastník, kdy má téma nechat být?
+
+Uzavření druhého běžného použití je okamžik, kdy se dlouhý návrat definitivně přestane chovat jako projekt. Dnešní funkce buď přejde do tichého provozu, nebo dostane jednu malou opravu, přesun či novou úzkou smyčku. Starý systém zůstává zavřený. Práce má pokračovat lehčeji než před návratem, ne s další vrstvou opatrnosti navíc.
+
 ## Pracovní log
 
+- 2026-06-15: Doplněna úvodní podkapitola o uzavření druhého běžného použití po návratu z dlouhého klidu: uzavírací stavy, propsání do živého systému, ukončení zvláštní pozornosti, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-15: Doplněna úvodní podkapitola o druhém běžném použití po uzavřeném návratu z dlouhého klidu: přenositelnost bez čerstvého vysvětlení, čtyři výsledné stavy, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-15: Doplněna úvodní podkapitola o uzavření prvního běžného použití po návratu z dlouhého klidu: čtyři uzavírací stavy, propsání do pracovního místa, úklid starých podkladů, mezistav, privacy-first hranice, karta a checklist.
 - 2026-06-15: Doplněna úvodní podkapitola o prvním běžném použití po uzavřeném návratu z dlouhého klidu: ověření samostatnosti nové funkce, čtyři výsledné stavy, privacy-first kontrola, karta, mini workshop a checklist.
