@@ -217526,8 +217526,140 @@ Když se workshop zasekne na debatě, jestli byla stará položka "vlastně dobr
 
 Dobré uzavření návratu po dlouhém klidu má paradoxní výsledek: téma se vrátí, ale starý systém ne. Do dnešní práce se dostane jen funkce, která opravdu chyběla. Všechno ostatní zůstane v archivu, nebo zmizí. To není ztráta paměti. To je dospělá práce s pamětí.
 
+## První běžné použití po uzavřeném návratu z dlouhého klidu
+
+Uzavření návratu po dlouhém klidu ještě není důkaz, že změna opravdu sedí v běžné práci. Je to jen dobře zavřená smyčka: víte, co se mění, kam se to propsalo a co ze starého systému se nevrací. První běžné použití ověřuje něco jiného. Ukazuje, jestli nová drobná funkce funguje bez zvláštní péče, bez historického vysvětlování a bez toho, aby někdo znovu otevřel archiv "jen pro jistotu".
+
+Tento průchod má být krátký. Nevracejte se k celé debatě, proč položka kdysi vznikla, proč odešla z ročního rytmu ani jak se signál potvrdil. Vezměte aktuální pracovní místo a sledujte jeden reálný průchod. Pokud se změna týkala sales šablony, použijte ji v další kvalifikaci. Pokud šlo o onboardingový checklist, použijte ho při dalším onboardingu. Pokud šlo o provozní runbook, nechte ho projít při nejbližší relevantní provozní situaci nebo malém drillu.
+
+První otázka zní:
+
+```text
+Stačí nová dnešní funkce sama o sobě, nebo se práce pořád opírá o starý systém?
+```
+
+Slovo "sama" je důležité. Pokud člověk při použití nové věty okamžitě potřebuje dohledat starou tabulku, starý screenshot nebo starý komentář v archivu, uzavření ještě není stabilní. Neznamená to automaticky, že se má archiv vrátit. Znamená to, že dnešní funkce možná nebyla přepsaná dost srozumitelně.
+
+### Co první použití ověřuje
+
+První běžné použití ověřuje tři věci:
+
+- Samostatnost: člověk umí použít nové pravidlo bez znalosti staré historie.
+- Umístění: pravidlo je na místě, kde ho práce přirozeně hledá.
+- Hranici: starý dokument, review rytmus, tabulka ani datová stopa se nevrací zadními dveřmi.
+
+Když selže samostatnost, opravte formulaci. Když selže umístění, přesuňte nebo propojte kanonické místo. Když selže hranice, zapište přesně, kudy se starý systém pokusil vrátit, a zavřete jen tento vstup. Nedělejte z toho novou velkou revizi.
+
+Příklad:
+
+```text
+Změna po uzavřeném návratu:
+Do sales šablony jsme přidali větu, že poptávka bez jasné rozhodovací role nejdřív dostane doplňující otázku na proces.
+
+První použití:
+Obchodník větu našel, ale při formulaci otázky hledal starý scoring, protože nová šablona neobsahovala příklad e-mailu.
+
+Výsledek:
+Funkce je správná, ale chybí lokální příklad. Přidáváme jeden neutrální vzor doplňující otázky bez zákaznických detailů.
+
+Co neobnovujeme:
+Scoring tabulku, historické váhy ani export poptávek.
+```
+
+To je zdravé první použití. Ukázalo malé tření a opravilo ho na stejném místě. Neotevřelo historii, nevyrobilo nový reporting a nepřidalo sledování lidí.
+
+### Čtyři výsledné stavy
+
+Po prvním běžném použití vyberte jeden ze čtyř stavů:
+
+- Stabilní: změna se použila bez zvláštní pomoci a práce nepotřebovala archiv.
+- Lokálně nedotažené: funkce je správná, ale chybí formulace, příklad, odkaz nebo lepší umístění.
+- Slabé kanonické místo: lidé hledají pravidlo jinde, takže problém není ve funkci, ale v navigaci pracovního systému.
+- Falešně uzavřené: práce pořád potřebuje část starého systému, kterou uzavření nepřepsalo do dnešního jazyka.
+
+Stabilní stav uzavřete krátkým logem a další kontrolu nechte až na návratový signál. Lokálně nedotažený stav opravte hned jednou drobnou úpravou. Slabé kanonické místo řešte jako navigační opravu, ne jako návrat staré položky. Falešně uzavřený stav vraťte jen k nejmenší chybějící funkci; ne k celé historii.
+
+Codyho komentář: jestli po první běžné situaci všichni řeknou "funguje to, ale radši si necháme starou tabulku po ruce", tak to nefunguje. To je jako říct, že nový klíč od dveří je skvělý, jen si pro jistotu pokaždé berete i páčidlo.
+
+### Privacy-first kontrola prvního použití
+
+První běžné použití nesmí být záminka pro nové plošné měření. Často stačí krátký ruční zápis: použito, stačilo, nestačilo, co se upravilo. U interních pravidel a šablon je přesnost důležitá, ale přesnost neznamená víc osobních údajů.
+
+Zeptejte se:
+
+- Zapisujeme jen výsledek použití, ne zbytečné detaily člověka, zákazníka nebo konverzace?
+- Nepřidáváme nový analytický event tam, kde stačí ruční kontrola několika průchodů?
+- Nevznikl dočasný export, screenshot nebo kopie starého příkladu, kterou můžeme hned smazat?
+- Nepřenášíme historické zákaznické detaily do nového příkladu jen proto, že byly názorné?
+- Je jasné, kdy se další kontrola zastaví?
+
+Pokud potřebujete příklad, napište syntetický nebo zobecněný. Příklad má učit rozhodnutí, ne recyklovat starý zákaznický příběh. Privacy-first provoz není alergie na důkazy. Je to disciplína vzít jen takový důkaz, který je potřeba pro práci, a nic navíc.
+
+### Karta prvního běžného použití po uzavřeném návratu
+
+```text
+Uzavřený návrat:
+
+Kanonické pracovní místo:
+
+Nová dnešní funkce:
+
+První běžná situace:
+
+Použil člověk funkci bez archivu?
+- ano
+- částečně
+- ne
+
+Výsledný stav:
+- stabilní
+- lokálně nedotažené
+- slabé kanonické místo
+- falešně uzavřené
+
+Nejmenší oprava:
+
+Co ze staré položky dál neobnovujeme:
+
+Privacy-first úklid:
+Jaké dočasné poznámky, exporty, screenshoty nebo citlivé příklady mažeme nebo zkracujeme:
+
+Další návratový signál:
+
+Vlastník:
+
+Datum návratu:
+```
+
+Kartu vyplňujte jen tehdy, když první použití něco odhalilo. Pokud bylo stabilní a bez tření, stačí jedna věta v běžném logu. Cílem není přidat další šablonu do systému. Cílem je ověřit, že uzavřený návrat se opravdu proměnil v normální práci.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: pojmenujte uzavřený návrat a kanonické pracovní místo.
+2. Minuty 2 až 3: projděte první reálné použití bez otevírání historie.
+3. Minuta 4: vyberte jeden ze čtyř výsledných stavů.
+4. Minuta 5: napište nejmenší opravu nebo potvrzení stability.
+5. Minuta 6: proveďte privacy-first úklid a zapište návratový signál.
+
+Pokud workshop potřebuje víc času, pravděpodobně se z prvního použití stala nová revize starého systému. Zastavte ji. První použití má ověřit dnešní funkci, ne znovu soudit minulost.
+
+### Checklist prvního běžného použití
+
+- Ověřovali jsme reálné pracovní použití, ne vzpomínku na starý proces?
+- Použil člověk novou funkci bez otevření archivu?
+- Je pravidlo na místě, kde ho práce přirozeně hledá?
+- Pokud něco chybělo, byla to jedna lokální věc?
+- Neobnovili jsme starý dokument, tabulku, review rytmus ani datovou stopu?
+- Pokud vznikl příklad, je zobecněný nebo syntetický?
+- Smazali jsme dočasné exporty, screenshoty a poznámky, které už nejsou potřeba?
+- Víme, jestli stačí krátký log, lokální oprava, navigační oprava nebo návrat k nejmenší chybějící funkci?
+- Má další kontrola konkrétní návratový signál místo obecného "ještě se na to podíváme"?
+
+První běžné použití má uzavřený návrat odlehčit. Když projde, téma se vrací do tichého provozu. Když neprojde, opraví se nejbližší dnešní místo. V obou případech zůstává starý systém zavřený, dokud dnešní práce opravdu neprokáže, že potřebuje něco víc.
+
 ## Pracovní log
 
+- 2026-06-15: Doplněna úvodní podkapitola o prvním běžném použití po uzavřeném návratu z dlouhého klidu: ověření samostatnosti nové funkce, čtyři výsledné stavy, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-06-15: Doplněna úvodní podkapitola o uzavření návratu signálu po vyřazení z ročního rytmu: čtyři uzavírací stavy, propsání do dnešního pracovního místa, privacy-first úklid archivu, karta, mini workshop a checklist.
 - 2026-06-15: Doplněna úvodní podkapitola o návratu signálu po vyřazení z ročního rytmu: tři brány návratu, práce bez reflexu obnovit starý dokument, privacy-first hranice archivu, karta, mini workshop a checklist.
 - 2026-06-15: Doplněna úvodní podkapitola o uzavření druhé roční inventury bez vyřazené položky: čtyři uzavírací stavy, vyřazení z pravidelného rytmu, privacy-first úklid, karta, mini workshop a checklist.
