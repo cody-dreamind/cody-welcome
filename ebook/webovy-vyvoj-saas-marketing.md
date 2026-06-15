@@ -217799,8 +217799,185 @@ Datum dalšího návratu:
 
 Uzavření prvního běžného použití má jeden zdravý výsledek: dnešní funkce buď zůstane jako normální součást práce, nebo se poctivě zmenší, zastaví či přerámuje. Ve všech případech platí stejná hranice: starý systém se nevrací celý jen proto, že se jednou ukázala potřeba něčeho, co se mu vzdáleně podobá.
 
+## Druhé běžné použití po uzavřeném návratu z dlouhého klidu
+
+První běžné použití ukáže, jestli nová funkce vůbec přežije kontakt s prací. Druhé běžné použití ověřuje něco tiššího a často důležitějšího: jestli funkce funguje i bez čerstvé paměti na poslední opravu. U prvního použití si lidé ještě pamatují, proč se věta přidala, co se nesmí vracet a kde leží hranice starého systému. U druhého použití už se ukáže, jestli pravidlo opravdu žije v pracovním místě, nebo jen v hlavách těch, kteří byli u poslední změny.
+
+Druhé použití neotevírejte jako další review. Nezačínejte historií, proč položka kdysi odešla z ročního rytmu. Vezměte nejbližší přirozenou situaci a položte jednoduchou otázku:
+
+```text
+Použil někdo dnešní funkci správně, aniž by potřeboval čerstvé vysvětlení z posledního návratu?
+```
+
+Pokud ano, funkce může přejít do tichého provozu. Pokud ne, opravte nejbližší pracovní místo. Druhé použití nemá dokazovat, že byl celý proces dokonalý. Má ukázat, jestli změna stojí sama, když už kolem ní není mimořádná pozornost.
+
+### Co druhé použití ověřuje
+
+Sledujte tři věci:
+
+- Přenositelnost: změnu použije i člověk, který nebyl u původní opravy.
+- Nízké tření: pravidlo není schované, přepsané jinou šablonou ani závislé na osobním vysvětlení.
+- Stabilní hranici: starý dokument, tabulka, report ani archivní příklad se nevrací jako pracovní opora.
+
+Přenositelnost je hlavní rozdíl proti prvnímu použití. Pokud druhý člověk nebo druhá podobná situace potřebuje stejné vysvětlení znovu, nemáte stabilní pravidlo, ale ústní tradici. Tu lze opravit. Většinou stačí jedna lepší věta, příklad nebo přesunutí pravidla blíž k místu práce.
+
+Příklad:
+
+```text
+Uzavřený návrat:
+Sales šablona obsahuje pravidlo pro poptávku bez jasné rozhodovací role.
+
+První použití:
+Obchodník pravidlo použil a doplnili jsme neutrální vzor e-mailu.
+
+Druhé použití:
+Jiný obchodník vzor našel, položil doplňující otázku a nepotřeboval starý scoring.
+
+Výsledek:
+Přenositelné. Zvláštní pozornost končí.
+
+Co dál nesbíráme:
+Neevidujeme, kdo vzor použil. Stačí běžný výsledek kvalifikace a návratový signál.
+```
+
+Tady není potřeba další úprava. Přesně v tom je hodnota druhého použití: umí říct "už stačí".
+
+### Čtyři výsledné stavy
+
+Po druhém běžném použití vyberte jeden stav:
+
+- Přenositelné: funkce obstála bez čerstvého vysvětlení a bez starého systému.
+- Poslední lokální dočištění: funkce obstála, ale jedno místo pořád zbytečně drhne.
+- Slabé pracovní místo: pravidlo je dobré, ale lidé ho nehledají tam, kde má žít.
+- Chybějící funkce přetrvává: druhé použití znovu ukázalo, že dnešní oprava nepokrývá nejmenší potřebnou funkci.
+
+`Přenositelné` znamená konec zvláštní pozornosti. Zapište krátký log, smažte dočasné poznámky a vraťte se do normální práce. Nepřidávejte třetí kontrolu jen proto, že to působí pečlivě. Pečlivost bez stop podmínky je jen dobře oblečené zdržování.
+
+`Poslední lokální dočištění` použijte, když je funkce správná, ale jedna věta, odkaz nebo příklad ještě překáží. Oprava má být menší než poslední doplnění. Pokud kvůli ní znovu otevíráte celý návrat, není lokální.
+
+`Slabé pracovní místo` znamená, že pravidlo je napsané dobře, ale žije mimo přirozenou trasu práce. V takovém případě nepřepisujte obsah pořád dokola. Opravte navigaci: odkaz v šabloně, název sekce, umístění v checklistu nebo duplicitní starou kopii, která lidi mate.
+
+`Chybějící funkce přetrvává` je důvod otevřít novou malou otázku, ne obnovit starý systém. Popište přesně, co chybí po dvou běžných použitích. Když neumíte chybějící funkci pojmenovat jednou větou, nejste připraveni na novou smyčku.
+
+Codyho komentář: druhé použití je test, jestli pravidlo umí chodit bez držení za ruku. Když po něm pořád někdo volá "kde je ta stará tabulka?", neznamená to automaticky, že tabulka byla geniální. Často to znamená, že nová věta je schovaná jak účtenka v zimní bundě.
+
+### Jak uzavřít druhé použití
+
+Uzavření napište rovnou do pracovního místa nebo jeho logu:
+
+```text
+Po druhém běžném použití je stav:
+
+Funkce zůstává:
+
+Co se ještě mění:
+
+Co ze starého systému se dál neobnovuje:
+
+Další návrat nastane jen když:
+```
+
+Krátký příklad:
+
+```text
+Po druhém běžném použití je stav:
+Přenositelné.
+
+Funkce zůstává:
+Sales šablona s doplňující otázkou na rozhodovací proces.
+
+Co se ještě mění:
+Nic.
+
+Co ze starého systému se dál neobnovuje:
+Scoring tabulka, historické váhy, export poptávek a samostatné review scoringu.
+
+Další návrat nastane jen když:
+Tři relevantní poptávky za sebou nepůjdou kvalifikovat bez hledání historického pravidla.
+```
+
+Tohle je dost. Není potřeba nový dokument, nová metrika ani další hlídání. Pokud druhé použití ukázalo stabilitu, největší práce je přestat pracovat.
+
+### Privacy-first úklid po druhém použití
+
+Druhé použití je vhodný okamžik na poslední datový úklid. Během návratu mohly vzniknout pomocné poznámky, pracovní kopie staré položky, dočasné ukázky, screenshoty nebo ruční seznamy situací. Po druhém použití už mají buď jasný účel, nebo mají zmizet.
+
+Použijte jednoduché třídění:
+
+- Zůstává: aktuální pravidlo, jeden neutrální příklad a návratový signál.
+- Přepisuje se: užitečné poučení do kanonického pracovního místa.
+- Maže nebo anonymizuje se: dočasné poznámky, screenshoty, exporty, osobní komentáře a historické zákaznické detaily.
+- Dál se nesbírá: evidence používání pravidla, pokud nevznikla z konkrétního návratového signálu.
+
+Privacy-first pointa není v tom, že tým nic neví. Pointa je, že ví přesně to, co potřebuje pro další rozhodnutí, a nenechává kolem sebe staré důkazy jen proto, že se kdysi hodily při opravě.
+
+### Karta druhého běžného použití
+
+```text
+Uzavřený návrat:
+
+Dnešní funkce:
+
+Kanonické pracovní místo:
+
+Druhé běžné použití:
+
+Použil ji někdo bez čerstvého vysvětlení?
+- ano / částečně / ne
+
+Výsledný stav:
+- přenositelné
+- poslední lokální dočištění
+- slabé pracovní místo
+- chybějící funkce přetrvává
+
+Jedna případná oprava:
+
+Co se propisuje do pracovního místa:
+
+Co ze starého systému dál neobnovujeme:
+
+Co mažeme nebo anonymizujeme:
+
+Co už dál nesledujeme:
+
+Návratový signál:
+
+Vlastník:
+```
+
+Kartu nepoužívejte automaticky. Pokud druhé použití prostě potvrdilo stabilitu, stačí krátký log. Karta má smysl jen tehdy, když druhé použití odhalilo dočištění, slabé místo nebo přetrvávající chybějící funkci.
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: pojmenujte dnešní funkci a pracovní místo.
+2. Minuty 2 až 3: projděte druhé běžné použití bez otevírání historie.
+3. Minuta 4: určete jeden ze čtyř výsledných stavů.
+4. Minuta 5: napište jednu případnou opravu nebo potvrzení stability.
+5. Minuta 6: zapište, co ze starého systému dál neobnovujete.
+6. Minuta 7: proveďte privacy-first úklid a nastavte návratový signál.
+
+Když se workshop začne rozšiřovat do debaty o celé staré metodice, vraťte ho k jedné otázce: obstála dnešní funkce v druhém běžném použití? Všechno ostatní je jiné téma.
+
+### Checklist druhého běžného použití
+
+- Proběhlo druhé použití v reálné práci, ne v umělém review?
+- Použil funkci člověk nebo situace bez čerstvé paměti na poslední opravu?
+- Neotevřeli jsme archiv jako první pracovní nástroj?
+- Je jasné, jestli je stav přenositelnost, lokální dočištění, slabé místo nebo přetrvávající chybějící funkce?
+- Pokud něco doplňujeme, je to jedna lokální oprava?
+- Pokud je problém v místě, opravujeme navigaci, ne celý obsah?
+- Pokud chybí funkce, popsali jsme ji menší než starý systém?
+- Ukončili jsme zvláštní pozornost, pokud funkce obstála?
+- Smazali nebo anonymizovali jsme dočasné stopy z návratu?
+- Nepřidali jsme dlouhodobé sledování používání pravidla bez konkrétního důvodu?
+- Má budoucí návrat konkrétní signál?
+
+Druhé běžné použití je dobrý konec dlouhého návratu. Po něm už má být jasné, jestli dnešní funkce stojí sama. Pokud ano, nechte ji pracovat. Pokud ne, opravte nejbližší místo nebo otevřete nejmenší chybějící funkci. Starý systém zůstává zavřený, dokud dnešní práce opravdu neukáže, že potřebuje víc než jednu přesnou větu.
+
 ## Pracovní log
 
+- 2026-06-15: Doplněna úvodní podkapitola o druhém běžném použití po uzavřeném návratu z dlouhého klidu: přenositelnost bez čerstvého vysvětlení, čtyři výsledné stavy, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-15: Doplněna úvodní podkapitola o uzavření prvního běžného použití po návratu z dlouhého klidu: čtyři uzavírací stavy, propsání do pracovního místa, úklid starých podkladů, mezistav, privacy-first hranice, karta a checklist.
 - 2026-06-15: Doplněna úvodní podkapitola o prvním běžném použití po uzavřeném návratu z dlouhého klidu: ověření samostatnosti nové funkce, čtyři výsledné stavy, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-06-15: Doplněna úvodní podkapitola o uzavření návratu signálu po vyřazení z ročního rytmu: čtyři uzavírací stavy, propsání do dnešního pracovního místa, privacy-first úklid archivu, karta, mini workshop a checklist.
