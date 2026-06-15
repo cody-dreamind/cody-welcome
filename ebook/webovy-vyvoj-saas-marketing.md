@@ -218134,8 +218134,180 @@ Když se workshop začne rozpadat do detailů staré historie, vraťte se k dne�
 
 Uzavření druhého běžného použití je okamžik, kdy se dlouhý návrat definitivně přestane chovat jako projekt. Dnešní funkce buď přejde do tichého provozu, nebo dostane jednu malou opravu, přesun či novou úzkou smyčku. Starý systém zůstává zavřený. Práce má pokračovat lehčeji než před návratem, ne s další vrstvou opatrnosti navíc.
 
+## Převod uzavřeného návratu do tichého provozu
+
+Uzavřený návrat po dlouhém klidu ještě není hotový, dokud se z něj nestane obyčejná součást práce. Poslední chyba v takové smyčce bývá nenápadná: tým sice řekne, že starý systém zůstává zavřený, ale nechá kolem nové funkce stát malý ochranný plot. Přibude připomínka v kalendáři, dočasná poznámka v chatu, ruční kontrola na poradě nebo "pro jistotu" ponechaný archivní odkaz.
+
+Tichý provoz znamená něco jiného. Pravidlo má být dostupné ve správném pracovním místě, má mít návratový signál a nemá kolem sebe vlastní servisní aparát. Kdo ho použije za měsíc, nemá poznat, že šlo o návrat z dlouhé historie. Má jen dostat jasnou oporu pro dnešní rozhodnutí.
+
+Začněte převodovou větou:
+
+```text
+Od teď se tato funkce používá jako běžná součást:
+
+Najdete ji v:
+
+Vracíme se k ní jen když:
+```
+
+Příklad:
+
+```text
+Od teď se tato funkce používá jako běžná součást:
+kvalifikace poptávky v první odpovědi.
+
+Najdete ji v:
+sales šabloně "První reakce na poptávku" v sekci Rozhodovací role.
+
+Vracíme se k ní jen když:
+tři relevantní poptávky za sebou nepůjdou kvalifikovat bez hledání starého scoringu nebo ručního vysvětlení mimo šablonu.
+```
+
+Takový zápis je schválně nudný. Tichý provoz nepotřebuje slavnostní jazyk, potřebuje najitelnost, hranici a stopku proti zbytečnému návratu staré péče.
+
+### Co musí zůstat vidět
+
+V tichém provozu mají zůstat vidět jen tři věci:
+
+- Aktuální pravidlo: co má člověk udělat při běžné práci.
+- Hranice použití: kdy pravidlo stačí a kdy už nestačí.
+- Návratový signál: co konkrétně musí nastat, aby se téma znovu otevřelo.
+
+Všechno ostatní je podpůrná historie. Může mít místo v rozhodovacím logu nebo archivu, ale nemá stát v cestě člověku, který potřebuje rychle pracovat. Pokud musí uživatel před použitím pravidla číst příběh jeho vzniku, pravidlo ještě není převedené do tichého provozu.
+
+Praktická zkouška:
+
+```text
+Najde nový člověk pravidlo bez odkazu z poslední diskuse?
+Pochopí ho bez znalosti starého systému?
+Umí podle něj udělat další krok bez extra vysvětlení?
+Ví, kdy pravidlo nepoužít?
+```
+
+Když odpověď na některou otázku zní "ne", nedoplňujte další historii. Opravte pracovní místo: název, odkaz, krátký příklad, hranici nebo checklist.
+
+### Co musí zmizet
+
+Do tichého provozu obvykle nepatří:
+
+- dočasné kontrolní úkoly po návratu;
+- zvláštní meetingové body bez návratového signálu;
+- staré odkazy v navigaci, které vedou na archivní verzi;
+- kopie šablony v chatu, dokumentu nebo poznámkách;
+- ruční seznam výjimek, který už nemá vlastníka;
+- screenshoty a exporty použité jen k ověření návratu;
+- komentáře typu "zatím sledujeme", pokud není jasné co a proč.
+
+Smazání těchto věcí není ztráta opatrnosti. Je to odstranění přechodového lešení. Pokud má některá dočasná opora stále hodnotu, musí se přepsat do živého pravidla nebo rozhodovacího logu. Pokud hodnotu nemá, drží jen pracovní dluh.
+
+Codyho komentář: nejhorší forma "tichého provozu" je tichá výjimka, o které všichni vědí, ale nikdo ji nevlastní. To není provoz, to je malý neviditelný batoh. A batohy mají tu nepříjemnou vlastnost, že časem ztěžknou.
+
+### Převod do jednoho pracovního místa
+
+Převod do tichého provozu má končit jedním kanonickým místem. Ne třemi odkazy, dvěma šablonami a poznámkou "aktuální je asi tahle". Vyberte místo, kde člověk pravidlo přirozeně potřebuje:
+
+- formulář, pokud rozhodnutí vzniká při sběru vstupu;
+- sales šablona, pokud rozhodnutí vzniká při první odpovědi;
+- onboarding checklist, pokud rozhodnutí vzniká při předání zákazníka;
+- produktový runbook, pokud rozhodnutí vzniká při provozní výjimce;
+- redakční brief, pokud rozhodnutí vzniká při přípravě obsahu.
+
+Pak odstraňte nebo přesměrujte staré cesty. Nechte nejkratší možnou navigaci: z místa práce na pravidlo, z pravidla na návratový signál, z návratového signálu do rozhodovacího logu. Archiv má být dostupný jen tehdy, když je k němu důvod, ne jako běžná součást použití.
+
+### Návratový signál místo další kontroly
+
+Tichý provoz nesmí stát na pravidelném kontrolování ze zvyku. Pokud se pravidlo má znovu otevřít, musí existovat signál z reálné práce. Ten má být konkrétní, pozorovatelný a menší než původní starý systém.
+
+Slabý návratový signál:
+
+```text
+Když se zase ukáže, že kvalifikace není ideální.
+```
+
+Použitelný návratový signál:
+
+```text
+Tři relevantní poptávky za sebou nepůjdou kvalifikovat bez ručního vysvětlení rozhodovací role mimo sales šablonu.
+```
+
+Rozdíl je v akci. První věta zve k debatě. Druhá věta říká, co se musí stát, kde to poznáte a proč se vracíte právě k tomuto pravidlu.
+
+### Privacy-first tichý provoz
+
+Tichý provoz má být datově lehčí než návratová smyčka. Po uzavření už nepotřebujete většinu dočasných důkazů. Zůstat má jen minimum pro budoucí rozhodnutí.
+
+Projďte krátký úklid:
+
+- Nahraďte skutečné zákaznické příklady neutrálním vzorem, pokud detail není nezbytný.
+- Smažte exporty, screenshoty a pracovní kopie, které sloužily jen k ověření.
+- Omezte přístupy k archivu na lidi, kteří ho opravdu potřebují.
+- Nepřidávejte analytiku používání pravidla, pokud nemáte konkrétní rozhodovací otázku.
+- U návratového signálu používejte agregované nebo ručně ověřené pracovní situace dřív než nový tracking.
+
+Privacy-first hodnota se tady ukazuje velmi prakticky: dobré pravidlo nepotřebuje sledovat každé použití. Potřebuje jasně říct, kdy má tým zpozornět. Méně měření často znamená i méně rušení.
+
+### Karta převodu do tichého provozu
+
+```text
+Uzavřený návrat:
+
+Dnešní pravidlo nebo funkce:
+
+Kanonické pracovní místo:
+
+Kdo pravidlo typicky použije:
+
+Hranice použití:
+
+Návratový signál:
+
+Co zůstává v živém místě:
+
+Co patří jen do rozhodovacího logu:
+
+Co se archivuje a proč:
+
+Co mažeme, anonymizujeme nebo přesměrováváme:
+
+Jaká zvláštní pozornost končí:
+
+Kdo vlastní běžnou údržbu:
+```
+
+Karta se má vejít na jednu obrazovku. Pokud ne, nejspíš se snažíte převést do tichého provozu víc než jednu věc.
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: přečtěte jednovětý závěr uzavřeného návratu.
+2. Minuta 2: určete jedno kanonické pracovní místo.
+3. Minuta 3: napište aktuální pravidlo a hranici použití.
+4. Minuta 4: zformulujte návratový signál.
+5. Minuta 5: vyberte, co zůstává v živém místě, logu a archivu.
+6. Minuta 6: smažte nebo přesměrujte dočasné stopy.
+7. Minuta 7: ukončete zvláštní pozornost a určete běžného vlastníka.
+
+Když workshop narazí na spor, nevracejte se k celé historii. Zeptejte se, které jedno pracovní místo bude zítra potřebovat použitelné pravidlo. Tichý provoz se rozhoduje podle budoucí práce, ne podle nejhlasitější vzpomínky.
+
+### Checklist převodu do tichého provozu
+
+- Má uzavřený návrat jednu převodovou větu?
+- Je vybrané jedno kanonické pracovní místo?
+- Najde nový člověk pravidlo bez poslední diskuse?
+- Je pravidlo srozumitelné bez znalosti starého systému?
+- Je hranice použití viditelná přímo u pravidla?
+- Existuje konkrétní návratový signál místo další kontroly ze zvyku?
+- Zmizely dočasné tasky, meetingové body, kopie a provizorní odkazy?
+- Je jasně oddělené živé místo, rozhodovací log a archiv?
+- Prošli jsme privacy-first úklid dočasných důkazů?
+- Nepřidali jsme nový tracking jen kvůli uklidnění týmu?
+- Má pravidlo běžného vlastníka, ne zvláštního hlídače?
+- Umíme říct, co se teď nechává být?
+
+Převod do tichého provozu je dobrý konec návratové smyčky. Nevyhrává tím nejdokonalejší dokument, ale nejmenší pravidlo, které stojí ve správném místě, má jasný návratový signál a nezanechává za sebou zbytečnou datovou stopu. Když se to povede, tým o tématu přestane mluvit ne proto, že ho ignoruje, ale proto, že už zase normálně funguje.
+
 ## Pracovní log
 
+- 2026-06-15: Doplněna úvodní podkapitola o převodu uzavřeného návratu do tichého provozu: kanonické pracovní místo, návratový signál, odstranění dočasné péče, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-15: Doplněna úvodní podkapitola o uzavření druhého běžného použití po návratu z dlouhého klidu: uzavírací stavy, propsání do živého systému, ukončení zvláštní pozornosti, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-15: Doplněna úvodní podkapitola o druhém běžném použití po uzavřeném návratu z dlouhého klidu: přenositelnost bez čerstvého vysvětlení, čtyři výsledné stavy, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-15: Doplněna úvodní podkapitola o uzavření prvního běžného použití po návratu z dlouhého klidu: čtyři uzavírací stavy, propsání do pracovního místa, úklid starých podkladů, mezistav, privacy-first hranice, karta a checklist.
