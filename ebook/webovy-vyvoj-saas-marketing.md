@@ -217383,8 +217383,152 @@ Když workshop začne debatou o tom, jak se stará položka kdysi jmenovala, zas
 
 Návrat signálu po dlouhém klidu není porážka vyřazení. Je to test, jestli systém umí znovu použít poučení bez obnovení starého balastu. Nejlepší výsledek často není návrat dokumentu, ale jedna přesná věta v dnešní šabloně. To je praktické, levné a datově střídmé. Přesně tak má vypadat dospělý privacy-first provoz.
 
+## Uzavření návratu signálu po vyřazení z ročního rytmu
+
+Když se signál po dlouhém klidu potvrdí, pořád ještě nejste ve fázi "vracíme starou položku". Jste ve fázi uzavření návratu. To je krátký průchod, který rozhodne, co se z dnešního signálu stane: malá oprava, nová otázka, pouhé poučení, nebo žádná změna. Bez tohoto kroku se tým snadno zasekne v mezistavu. Starý dokument už nechce zpátky, ale nová práce ještě nemá jasný domov.
+
+Uzavření začněte větou:
+
+```text
+Dnešní signál jsme prověřili a jeho nejmenší použitelný výsledek je:
+```
+
+Do této věty nepatří historie, emoce ani seznam všeho, co se kdysi dělalo. Patří do ní výsledek pro dnešní práci. Pokud se do jedné věty nevejde, pravděpodobně pořád držíte v ruce víc než jeden problém.
+
+Příklad:
+
+```text
+Dnešní signál jsme prověřili a jeho nejmenší použitelný výsledek je:
+Do sales šablony přidáváme pravidlo, že poptávka bez jasné rozhodovací role nejdřív dostane doplňující otázku na proces, ne interní prioritu.
+```
+
+To je uzavřený návrat. Neříká "obnovujeme scoring". Neříká "vracíme starou tabulku". Říká, jaká malá funkce se propisuje do aktuálního pracovního místa.
+
+### Čtyři uzavírací stavy
+
+Návrat signálu po vyřazení z ročního rytmu uzavřete jedním ze čtyř stavů:
+
+- Bez změny: signál se při kontrole rozpadl na jednorázovou výjimku nebo starý jazyk bez dnešního dopadu.
+- Lokální oprava: chyběla jedna věta, odkaz, hranice nebo rozhodovací pravidlo v aktuálním pracovním místě.
+- Nová malá otázka: dnešní problém je skutečný, ale potřebuje samostatný průchod, protože nejde vyřešit jednou úpravou.
+- Nový standard: opakování je silné, dopad vysoký a chybějící funkce se týká více pracovních míst; i tehdy ale vzniká nový standard dnešním jazykem, ne návrat staré položky.
+
+Výchozí stav je bez změny. Ne proto, že změny jsou špatné, ale proto, že po dlouhém klidu musí být návrat užitečnější než samotné ticho. Tichý provoz je hodnota. Rozbíjejte ho jen kvůli jasnému rozhodnutí, které se v dnešní práci opravdu opakuje.
+
+Codyho komentář: starý dokument má někdy auru "moudrého předka". Fajn, pozdravit, poděkovat, nezvat ho hned bydlet zpátky do šablony. Pokud z něj potřebujete jednu větu, vezměte jednu větu. Když si vezmete celý kufr, nebuďte překvapení, že se vám v chodbě zase válí starý proces.
+
+### Co se propisuje a kam
+
+Po výběru uzavíracího stavu určete jedno kanonické místo. To je místo, kde bude dnešní práce změnu hledat jako první. Může to být sales šablona, formulář, onboardingový checklist, provozní runbook, mapa nabídky, zákaznický handoff nebo rozhodovací log. Nemá to být archivní karta staré položky.
+
+Pravidlo propsání:
+
+- Lokální oprava jde do pracovního místa, kde se chyba stala.
+- Nová malá otázka jde do běžného backlogu nebo rozhodovacího logu, ne do zvláštního "návratu staré věci".
+- Nový standard dostane nový název podle dnešní funkce.
+- Bez změny zůstane jen krátký log, aby se podnět zbytečně nevracel.
+
+Příklad propsání:
+
+```text
+Uzavírací stav:
+Lokální oprava.
+
+Kanonické místo:
+Sales šablona pro první kvalifikaci poptávky.
+
+Přidáváme:
+Jednu rozhodovací větu k nejasné rozhodovací roli.
+
+Nezakládáme:
+Novou scoring tabulku, měsíční scoring review, export poptávek ani archivní složku.
+
+Návratový signál:
+Tři relevantní poptávky za sebou znovu nepůjdou kvalifikovat bez hledání historického pravidla.
+```
+
+Takový zápis uzavírá návrat a současně chrání staré vyřazení. Tým ví, co se změnilo, kam se dívat a kdy se k tématu znovu vrátit.
+
+### Privacy-first uzavření návratu
+
+Návrat po dlouhém klidu často svádí k tomu, že tým otevře staré příklady, exporty a screenshoty "pro jistotu". Při uzavření udělejte opačný pohyb: vezměte jen rozhodovací funkci a staré stopy nechte zavřené.
+
+Privacy-first uzavření má čtyři otázky:
+
+- Jakou informaci skutečně potřebujeme pro dnešní rozhodnutí?
+- Dá se poučení zapsat bez zákaznických detailů, osobních údajů a starých screenshotů?
+- Vznikl během kontroly dočasný export nebo poznámka, kterou můžeme hned smazat?
+- Nevytváří nová oprava potřebu nového trackingu, když stačí ruční kontrola několika dalších průchodů?
+
+Pokud lokální oprava potřebuje ověření, použijte co nejmenší signál. Například dvě nebo tři další podobné situace v běžné práci. Nepřidávejte analytický event jen proto, že chcete mít pocit přesnosti. U rozhodovacích pravidel často stačí krátký zápis: použito, stačilo, nestačilo.
+
+### Karta uzavření návratu po dlouhém klidu
+
+```text
+Dnešní signál:
+
+Původní stav návratu:
+- nepotvrzený / potvrzený částečně / potvrzený plně
+
+Uzavírací stav:
+- bez změny
+- lokální oprava
+- nová malá otázka
+- nový standard
+
+Nejmenší použitelný výsledek:
+
+Kanonické pracovní místo:
+
+Co přesně měníme:
+
+Co ze staré položky pořád neobnovujeme:
+
+Privacy-first úklid:
+Jaké staré nebo dočasné stopy mažeme, zkracujeme nebo necháváme zavřené:
+
+Ověření:
+Jak poznáme při dalším běžném použití, že výsledek stačí:
+
+Nový návratový signál:
+
+Vlastník:
+
+Datum návratu:
+```
+
+Karta má být poslední dokument této malé smyčky, ne začátek další složky. Pokud po jejím vyplnění vznikne pět dalších karet, uzavření se změnilo v obnovu systému. Vraťte se k nejmenšímu použitelnému výsledku a zbytek dejte mimo rozsah.
+
+### Mini workshop na 8 minut
+
+1. Minuta 1: přečtěte dnešní signál a pracovní místo.
+2. Minuta 2: vyberte jeden ze čtyř uzavíracích stavů.
+3. Minuty 3 až 4: napište nejmenší použitelný výsledek jednou větou.
+4. Minuta 5: určete kanonické pracovní místo.
+5. Minuta 6: napište, co ze staré položky neobnovujete.
+6. Minuta 7: proveďte privacy-first úklid starých a dočasných stop.
+7. Minuta 8: zapište ověření a nový návratový signál.
+
+Když se workshop zasekne na debatě, jestli byla stará položka "vlastně dobrá", přepněte otázku. Neřešte kvalitu historie. Řešte, jaké dnešní rozhodnutí má být po uzavření snazší.
+
+### Checklist uzavření návratu po dlouhém klidu
+
+- Vybrali jsme jeden uzavírací stav?
+- Umíme výsledek říct jednou pracovní větou?
+- Propsali jsme změnu do dnešního kanonického místa, ne do starého archivu?
+- Neobnovili jsme starý dokument, tabulku, review rytmus ani datovou stopu omylem?
+- Pokud vznikla lokální oprava, je opravdu lokální?
+- Pokud vznikla nová malá otázka, má vlastní rozsah a nezačíná historií?
+- Pokud vzniká nový standard, má nový název podle dnešní funkce?
+- Smazali nebo zkrátili jsme dočasné poznámky, exporty a citlivé příklady z kontroly?
+- Ověření používá existující pracovní situace místo nového plošného trackingu?
+- Má uzavření vlastníka, datum návratu a nový návratový signál?
+
+Dobré uzavření návratu po dlouhém klidu má paradoxní výsledek: téma se vrátí, ale starý systém ne. Do dnešní práce se dostane jen funkce, která opravdu chyběla. Všechno ostatní zůstane v archivu, nebo zmizí. To není ztráta paměti. To je dospělá práce s pamětí.
+
 ## Pracovní log
 
+- 2026-06-15: Doplněna úvodní podkapitola o uzavření návratu signálu po vyřazení z ročního rytmu: čtyři uzavírací stavy, propsání do dnešního pracovního místa, privacy-first úklid archivu, karta, mini workshop a checklist.
 - 2026-06-15: Doplněna úvodní podkapitola o návratu signálu po vyřazení z ročního rytmu: tři brány návratu, práce bez reflexu obnovit starý dokument, privacy-first hranice archivu, karta, mini workshop a checklist.
 - 2026-06-15: Doplněna úvodní podkapitola o uzavření druhé roční inventury bez vyřazené položky: čtyři uzavírací stavy, vyřazení z pravidelného rytmu, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-13: Doplněna úvodní podkapitola o druhé roční inventuře bez vyřazené položky: ověření dnešní cesty bez archivu, skrytých náhrad a nové datové stopy, karta, mini workshop a checklist.
