@@ -217657,8 +217657,151 @@ Pokud workshop potřebuje víc času, pravděpodobně se z prvního použití st
 
 První běžné použití má uzavřený návrat odlehčit. Když projde, téma se vrací do tichého provozu. Když neprojde, opraví se nejbližší dnešní místo. V obou případech zůstává starý systém zavřený, dokud dnešní práce opravdu neprokáže, že potřebuje něco víc.
 
+## Jak uzavřít první běžné použití po návratu z dlouhého klidu
+
+První běžné použití po návratu z dlouhého klidu má smysl jen tehdy, když po něm vznikne jasný stav. Jinak se ze zkoušky nové dnešní funkce stane další měkký mezistav: něco jsme použili, něco možná fungovalo, někde zůstala poznámka a při příštím průchodu se znovu otevře otázka, jestli starý systém přece jen nepotřebujeme. Uzavření má tomu zabránit.
+
+Začněte krátkou větou:
+
+```text
+Po prvním běžném použití víme, že:
+Proto teď:
+Starý systém dál:
+Další návrat nastane jen když:
+```
+
+Příklad:
+
+```text
+Po prvním běžném použití víme, že:
+Nová věta v sales šabloně stačí k položení doplňující otázky na rozhodovací proces.
+
+Proto teď:
+Ponecháváme sales šablonu jako kanonické místo a doplňujeme jen jeden neutrální příklad e-mailu.
+
+Starý systém dál:
+Neobnovujeme scoring tabulku, historické váhy ani export poptávek.
+
+Další návrat nastane jen když:
+Ve třech relevantních poptávkách po sobě nebude doplňující otázka stačit k určení dalšího kroku.
+```
+
+Takový zápis je důležitější než dlouhé hodnocení. Říká, co platí po prvním použití, co se mění a co zůstává zavřené. Bez této věty se starý systém snadno vrátí jako "jen pro jistotu" příloha.
+
+### Čtyři uzavírací stavy
+
+Po prvním běžném použití vyberte jeden stav:
+
+- Potvrdit dnešní funkci: použití proběhlo bez archivu a bez zvláštní pomoci.
+- Lokálně doplnit: funkce je správná, ale chybí jedna věta, příklad, odkaz nebo lepší umístění.
+- Zastavit návrat: použití ukázalo, že návrat nebyl potřeba a dnešní funkce nepřidává hodnotu.
+- Otevřít nejmenší chybějící funkci: práce pořád potřebuje něco ze starého systému, ale jen úzký výřez.
+
+`Potvrdit dnešní funkci` znamená konec zvláštní pozornosti. Nezakládejte další kontrolu jen proto, že návrat byl kdysi dlouho zavřený. Pokud funkce obstála, patří do běžného pracovního místa a další návrat má spustit jen konkrétní signál.
+
+`Lokálně doplnit` je nejčastější stav. Chybí příklad, odkaz nebo formulace. Doplněk má být menší než původní návrat. Pokud kvůli němu otevíráte starý dokument, starý rytmus nebo starou datovou stopu, už nejde o lokální doplnění.
+
+`Zastavit návrat` použijte, když první použití ukáže, že se tým spletl v interpretaci signálu. Nová funkce nezlepšila práci, nebo řešila situaci, která se dá zavřít stávajícím pravidlem. V takovém případě ji neudržujte jen proto, že už byla napsaná. Zapište, proč se návrat zastavuje, a ukliďte pracovní stopu.
+
+`Otevřít nejmenší chybějící funkci` je nejsilnější stav. Neznamená obnovit starý systém. Znamená pojmenovat přesně tu část, kterou dnešní práce opravdu postrádá. Může to být jeden příklad, jedna role, jedno retenční pravidlo nebo jedna výjimka. Starý balík se nevrací celý.
+
+### Co propsat do pracovního místa
+
+Uzavření má být vidět tam, kde člověk příště pracuje. Pokud první použití potvrdilo novou sales větu, upravte sales šablonu. Pokud šlo o onboardingový checklist, upravte checklist. Pokud šlo o provozní runbook, upravte runbook. Rozhodovací log je důležitý, ale sám o sobě nestačí.
+
+Do pracovního místa přeneste jen:
+
+- aktuální větu nebo pravidlo;
+- jeden případný příklad;
+- hranici, co se neobnovuje ze starého systému;
+- návratový signál;
+- privacy-first poznámku, pokud práce vytváří data, export nebo přístup.
+
+Nepřenášejte celou historii. Člověk, který šablonu použije za měsíc, nepotřebuje vědět, jak dlouho byla položka v klidu, kolikrát se zvažovalo její vyřazení ani kdo měl tehdy pochybnosti. Potřebuje vědět, co má udělat teď.
+
+### Úklid po prvním použití
+
+První použití často vytvoří drobné pomocné stopy: poznámku z ověření, starý příklad otevřený pro porovnání, screenshot, kopii části archivu nebo dočasný komentář. Po uzavření rozhodněte, co z nich má zůstat.
+
+Jednoduché třídění:
+
+- Zůstává: aktuální pravidlo, návratový signál a stručný anonymizovaný závěr.
+- Přepisuje se: užitečný příklad, pokud ho lze zobecnit a vložit do pracovního místa.
+- Maže se: pracovní kopie, screenshoty, exporty, osobní poznámky a historické podklady bez dalšího účelu.
+- Archivuje se: jen minimum nutné pro pochopení, proč se starý systém neobnovil.
+
+Privacy-first pravidlo: pokud první použití potvrdilo, že stačí dnešní funkce, staré podklady mají ještě menší důvod zůstávat po ruce. Nechte paměť rozhodnutí, ne zásobník důkazů.
+
+### Kdy uzavření odložit
+
+Uzavření neodkládejte jen proto, že by se ještě dalo něco vylepšit. Odložení dává smysl jen ve třech situacích:
+
+- první použití neproběhlo v dost reálné práci;
+- není jasné, jestli chybí lokální doplněk, nebo nejmenší funkce ze starého systému;
+- změna má bezpečnostní, právní, zákaznický nebo datový dopad, který potřebuje vlastníka s mandátem.
+
+Mezistav napište ostře:
+
+```text
+Uzavření odkládáme, protože:
+Chybí:
+Kdo rozhodne:
+Do kdy:
+Co zatím neobnovujeme ze starého systému:
+Jaká data zatím nesbíráme:
+```
+
+Mezistav bez vlastníka a termínu je jen starý chaos v čisté košili. Pokud nemáte vlastníka, raději návrat zastavte nebo zmenšete otázku.
+
+### Karta uzavření prvního použití
+
+```text
+Uzavřený návrat:
+
+První běžné použití:
+
+Výsledek:
+- potvrdit dnešní funkci / lokálně doplnit / zastavit návrat / otevřít nejmenší chybějící funkci
+
+Co se propsalo do pracovního místa:
+
+Co ze starého systému dál neobnovujeme:
+
+Pokud doplňujeme, jaká je jedna lokální úprava:
+
+Pokud zastavujeme návrat, proč:
+
+Pokud otevíráme chybějící funkci, jak přesně zní:
+
+Návratový signál:
+
+Privacy-first úklid:
+
+Co mažeme, anonymizujeme nebo archivujeme:
+
+Vlastník:
+
+Datum dalšího návratu:
+```
+
+### Checklist uzavření prvního použití
+
+- Má první běžné použití jeden jasný výsledný stav?
+- Je dnešní funkce propsaná do pracovního místa, ne jen do logu?
+- Je jasné, co ze starého systému se dál neobnovuje?
+- Pokud doplňujeme, je doplněk opravdu lokální?
+- Pokud návrat zastavujeme, je zapsané proč?
+- Pokud otevíráme chybějící funkci, je menší než starý systém?
+- Má další návrat konkrétní signál?
+- Smazali jsme nebo anonymizovali pracovní kopie, screenshoty, exporty a osobní poznámky?
+- Nepřidali jsme nový tracker, report ani evidenci používání šablony?
+- Umí nový člověk použít aktuální pravidlo bez znalosti staré historie?
+
+Uzavření prvního běžného použití má jeden zdravý výsledek: dnešní funkce buď zůstane jako normální součást práce, nebo se poctivě zmenší, zastaví či přerámuje. Ve všech případech platí stejná hranice: starý systém se nevrací celý jen proto, že se jednou ukázala potřeba něčeho, co se mu vzdáleně podobá.
+
 ## Pracovní log
 
+- 2026-06-15: Doplněna úvodní podkapitola o uzavření prvního běžného použití po návratu z dlouhého klidu: čtyři uzavírací stavy, propsání do pracovního místa, úklid starých podkladů, mezistav, privacy-first hranice, karta a checklist.
 - 2026-06-15: Doplněna úvodní podkapitola o prvním běžném použití po uzavřeném návratu z dlouhého klidu: ověření samostatnosti nové funkce, čtyři výsledné stavy, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-06-15: Doplněna úvodní podkapitola o uzavření návratu signálu po vyřazení z ročního rytmu: čtyři uzavírací stavy, propsání do dnešního pracovního místa, privacy-first úklid archivu, karta, mini workshop a checklist.
 - 2026-06-15: Doplněna úvodní podkapitola o návratu signálu po vyřazení z ročního rytmu: tři brány návratu, práce bez reflexu obnovit starý dokument, privacy-first hranice archivu, karta, mini workshop a checklist.
