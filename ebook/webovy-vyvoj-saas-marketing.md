@@ -221533,8 +221533,173 @@ Pokud workshop sklouzne k debatě o celé původní otázce, vraťte se k druhé
 
 Druhé běžné použití je hotové ve chvíli, kdy víte, jestli pravidlo opravdu přešlo do provozu. Buď drží a nepotřebuje další pozornost, nebo potřebuje poslední lokální dotažení, přesnější rozsah, případně novou otázku pro nový vzor. Ve všech případech je cílem stejná věc: méně zvláštní péče, méně datové stopy a jasnější pracovní místo pro dalšího člověka.
 
+## Uzavření druhého běžného použití po převodu nové otázky do rytmu
+
+Druhé běžné použití má ukončit přechodovou pozornost. Pokud po něm tým pořád neví, zda pravidlo běží samo, něco zůstalo nedotažené: buď nebyl výsledek dost jasně pojmenovaný, nebo se z druhého použití nenápadně stala další otevřená iterace. Uzavření proto nezačínejte novým plánem. Začněte rozhodnutím, co druhé použití skutečně ukázalo.
+
+Použijte čtyři otázky:
+
+```text
+Co mělo druhé použití ověřit:
+
+Co se při něm reálně stalo:
+
+Jaký stav z toho vyplývá:
+- ponechat v rytmu
+- poslední lokálně dotáhnout
+- zúžit rozsah
+- otevřít nový vzor
+
+Co tím přestáváme zvlášť sledovat:
+```
+
+Příklad:
+
+```text
+Co mělo druhé použití ověřit:
+Jestli follow-up šablona umí pracovat s novou rozhodovací otázkou bez návratu ke starému scoringu.
+
+Co se reálně stalo:
+Šablona fungovala. Obchodník bez čerstvého kontextu použil správnou otázku, ale v interní předávací poznámce pořád chybělo místo pro rozhodovací horizont.
+
+Stav:
+Poslední lokálně dotáhnout.
+
+Co tím přestáváme zvlášť sledovat:
+Follow-up šablonu už nehlídáme jako přechodový problém. Dolaďujeme jen předávací poznámku.
+```
+
+Dobré uzavření oddělí výsledek pravidla od posledního zbytku práce. Když funguje šablona a drhne předávací poznámka, neotevírejte znovu celou otázku follow-upu. Když drží rozsah pro jeden segment, ale ne pro druhý, nepřepisujte celé pravidlo. Když se objeví nový vzor, dejte mu vlastní otázku místo toho, aby se přilepil ke starému příběhu.
+
+### Čtyři uzavírací stavy
+
+Po druhém běžném použití vyberte jeden stav a udělejte jen odpovídající akci:
+
+- Ponechat v rytmu: pravidlo fungovalo bez zvláštní nápovědy a bez návratu staré datové stopy.
+- Poslední lokálně dotáhnout: jedno živé místo mate práci, ale není potřeba otevírat širší téma.
+- Zúžit rozsah: pravidlo je užitečné jen pro přesněji vymezenou situaci.
+- Otevřít nový vzor: tření se opakuje mimo původní otázku a zaslouží si vlastní malý průchod.
+
+U stavu "ponechat v rytmu" nedělejte další kontrolu jen pro dobrý pocit. Zapište návratový signál a ukončete zvláštní pozornost. Pravidlo se má dál potkat s týmem v běžném review, ne ve speciálním dohledovém režimu.
+
+U lokálního dotažení opravte jedno místo a napište, proč je to poslední lokální oprava. Pokud se po ní ukáže další podobný zbytek, už nejde o lokální dotažení. Je to signál, že pracovní místo nebo pravidlo není dost přenositelné.
+
+U zúžení rozsahu přepište hranici přímo tam, kde člověk pravidlo používá. Nestačí mít poznámku v logu. Pokud pravidlo platí jen pro nové poptávky z webu, musí to být vidět ve formuláři, šabloně, kartě nebo checklistu, ne v dlouhém vysvětlení vzadu.
+
+U nového vzoru se vraťte k nejmenší otázce. Neříkejte "otevíráme znovu celé téma kvalifikace". Řekněte například: "ověříme, jestli předávací poznámka potřebuje jedno povinné místo pro rozhodovací horizont". Nový vzor má začínat úzce, jinak si jen půjčí energii staré práce a přinese nový nepořádek.
+
+### Co propsat do živého místa
+
+Uzavření druhého použití má být vidět v místě, kde se bude pravidlo používat příště. Podle výsledku to může být:
+
+- krátká věta v šabloně;
+- nová hranice v checklistu;
+- změna stavu v backlogu;
+- odstranění staré poznámky z pracovního dokumentu;
+- archivace dočasné kontrolní karty;
+- návratový signál u původního rozhodnutí.
+
+Nepropagujte do živého místa celou historii. Člověk při běžné práci nepotřebuje vědět, kolik debat předcházelo jedné větě. Potřebuje vědět, co má udělat teď, kdy pravidlo neplatí a kde najde návratový signál, pokud se problém vrátí.
+
+Praktická věta pro živé místo může vypadat takto:
+
+```text
+Při follow-upu používej aktuální rozhodovací otázku z kvalifikační karty. Staré scoringové údaje podle velikosti firmy nebo rozpočtu do prvního follow-upu nevracej; pokud ani po otázce nejde určit prioritu u pěti relevantních poptávek, otevři návratový signál.
+```
+
+Je to delší než název úkolu, ale kratší než historie rozhodnutí. Obsahuje akci, hranici i návrat. To je přesně role živého místa.
+
+### Privacy-first uzavření
+
+Druhé použití často vzniká z reálné práce: obchodního hovoru, support tiketu, onboardingového průchodu nebo interní předávky. Při uzavření proto zkontrolujte, jaké stopy po ověření zůstávají. Dlouhodobě má zůstat rozhodnutí, ne osobní detaily, které ho náhodou pomohly odhalit.
+
+Zeptejte se:
+
+```text
+Který důkaz ještě potřebujeme pro budoucí rozhodnutí?
+Který důkaz už můžeme zkrátit na obecný typ tření?
+Kterou dočasnou kopii, tabulku nebo poznámku můžeme smazat?
+Co díky uzavření dál nesbíráme?
+```
+
+Příklad privacy-first závěru:
+
+```text
+Zůstává jen obecná pracovní stopa: v předávací poznámce chybělo místo pro rozhodovací horizont. Mažeme kopii konkrétního follow-upu z dočasné kontroly. Nepřidáváme nové CRM pole, scoring ani export poptávek.
+```
+
+Tím se z ověření stane poučení, ne nový archiv osobních údajů. Privacy-first provoz se pozná právě v těchto malých úklidech: tým si nechá schopnost rozhodovat, ale nevláčí s sebou víc dat, než opravdu potřebuje.
+
+### Karta uzavření druhého běžného použití
+
+```text
+Převedená otázka:
+
+Jednovětý závěr:
+
+Druhé běžné použití:
+
+Výsledek druhého použití:
+- pravidlo drží
+- poslední lokální dotažení
+- zúžit rozsah
+- nový vzor
+
+Uzavírací stav:
+- ponechat v rytmu
+- lokálně dotáhnout
+- zúžit pracovní hranici
+- otevřít novou otázku
+
+Co se propisuje do živého místa:
+
+Kde přesně:
+
+Co se ruší nebo archivuje:
+
+Co se maže, zkracuje nebo anonymizuje:
+
+Co už dál nevedeme jako zvláštní kontrolu:
+
+Návratový signál:
+
+Vlastník:
+
+Datum:
+```
+
+Karta nemá být další dokument, který bude někdo udržovat. Má uzavřít přechod. Po jejím vyplnění by mělo být jasné, kde žije aktuální pravidlo, co se smazalo z dočasných podkladů a podle čeho se téma může vrátit.
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: přečtěte výsledek druhého běžného použití.
+2. Minuta 2: vyberte jeden uzavírací stav.
+3. Minuty 3 až 4: určete živé místo a přesnou větu nebo hranici, která se do něj propíše.
+4. Minuta 5: rozhodněte, co se ruší, archivuje, zkracuje nebo anonymizuje.
+5. Minuta 6: napište, co už dál nebude zvláštní kontrola.
+6. Minuta 7: zapište návratový signál a vlastníka.
+
+Pokud se během workshopu objeví chuť otevřít další související téma, zapište ho jako možný nový vzor a dokončete uzavření. Druhé běžné použití má zavřít jednu smyčku. Nová otázka může začít hned potom, ale nemá se tvářit jako součást stejného uzavření.
+
+### Checklist uzavření druhého běžného použití
+
+- Vybrali jsme jeden uzavírací stav?
+- Je jasné, jestli pravidlo zůstává v rytmu, dotahuje se lokálně, zužuje se, nebo otevírá nový vzor?
+- Propsali jsme aktuální závěr do živého pracovního místa?
+- Nepropsali jsme do živého místa zbytečnou historii rozhodnutí?
+- Pokud jde o lokální dotažení, má jedno konkrétní místo a hranici?
+- Pokud zužujeme rozsah, pozná hranici člověk před použitím pravidla?
+- Pokud otevíráme nový vzor, má vlastní otázku a nepřebírá celý starý rozsah?
+- Zrušili jsme zvláštní kontrolu, pokud už není potřeba?
+- Smazali, zkrátili nebo anonymizovali jsme dočasné důkazy?
+- Je zapsané, jaká nová data, pole, exporty, trackery nebo dodavatelé nevznikají?
+- Má pravidlo návratový signál místo trvalého dohledu?
+
+Uzavření druhého běžného použití je hotové, když pravidlo už nepotřebuje doprovodné lešení. Buď stojí v běžném rytmu, čeká na jednu poslední lokální opravu, má přesnější hranici, nebo z něj vznikla nová samostatná otázka. V každém případě má po uzavření zůstat méně aktivních vláken, méně dočasných stop a jasnější pracovní instrukce pro člověka, který u původního rozhodnutí nebyl.
+
 ## Pracovní log
 
+- 2026-06-16: Doplněna úvodní podkapitola o uzavření druhého běžného použití po převodu nové otázky do rytmu: čtyři uzavírací stavy, propsání do živého místa, ukončení zvláštní kontroly, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-16: Doplněna úvodní podkapitola o druhém běžném použití po převodu nové otázky do rytmu: přenositelnost bez čerstvého kontextu, čtyři výsledné stavy, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-06-16: Doplněna úvodní podkapitola o uzavření prvního běžného použití po převodu nové otázky do rytmu: uzavírací stavy, propsání do živého místa, oddělení archivu od pracovní instrukce, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-16: Doplněna úvodní podkapitola o prvním běžném použití po převodu nové otázky do rytmu: normální pracovní průchod, čtyři výsledné stavy, lokální dotažení, privacy-first datová střídmost, karta, mini workshop a checklist.
