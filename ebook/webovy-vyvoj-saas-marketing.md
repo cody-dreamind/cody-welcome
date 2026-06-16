@@ -219047,8 +219047,120 @@ Privacy-first hranice je jednoduchá: po falešném poplachu neuchovávejte suro
 
 Minimální zápis má zvláštní sílu: dovolí týmu nic nepřidat. Stabilní pravidlo zůstane stabilní, okolí se uklidí a falešný poplach se nepřevleče za nový backlogový dluh.
 
+## První běžné použití po falešném poplachu
+
+Falešný poplach je opravdu uzavřený až ve chvíli, kdy se stejná trasa znovu použije bez toho, aby se tým automaticky vracel k obavě z minulého zmatku. Minimální zápis říká, proč trasu neměníte. První běžné použití ověřuje, jestli ten zápis umí zůstat malý i v provozu.
+
+Neplánujte kvůli tomu zvláštní kontrolní akci. Počkejte na nejbližší přirozenou situaci: další poptávku, další publikaci, další měsíční review, další předání šablony nebo další supportní třídění. Cílem není znovu dokazovat, že poplach byl falešný. Cílem je zjistit, jestli se uklizené okolí chová normálně.
+
+Použijte jednu otázku:
+
+```text
+Proběhla stejná pracovní trasa bez návratu ke starému falešnému poplachu?
+```
+
+Pokud ano, není co rozšiřovat. Zapište krátké "bez změny" a nechte pravidlo dál žít. Pokud ne, nejdřív rozlišujte, jestli se vrátil zdroj falešného poplachu, nebo vznikl nový skutečný signál. To jsou dvě různé věci. Archivní kopie, která se znovu objevila v odkazu, je pořád úklid. Opakovaná nejistota v aktuální kanonické trase už může být návratový signál.
+
+Příklad:
+
+```text
+Minimální zápis po poplachu:
+Trasu neměníme. Poplach vznikl kvůli archivní kopii šablony. Příště se vrátíme jen když stejný zmatek vznikne i při použití aktuální kanonické šablony.
+
+První běžné použití:
+Nový člověk použil aktuální šablonu při měsíčním review.
+
+Co se stalo:
+Šablonu našel správně, starý odkaz se neobjevil a podnět skončil jako "neotevírat".
+
+Rozhodnutí:
+Bez změny. Falešný poplach uzavřený, žádný nový proces nevzniká.
+```
+
+Tohle je ideální konec: systém se použil, nevrátil se do obranného režimu a tým nepřidal další kontrolní vrstvu. Ano, nejhezčí provozní výsledek bývá často text "bez změny". Není to nudné. Je to levné, srozumitelné a nenechává za sebou nepořádek.
+
+### Tři výsledky prvního použití
+
+Po prvním běžném použití vyberte jeden ze tří stavů:
+
+- Bez změny: trasa proběhla normálně a falešný poplach se nevrátil.
+- Dočistit okolí: pravidlo funguje, ale zůstala jedna stará stopa, která může znovu plést.
+- Otevřít návratový signál: problém vznikl v aktuální kanonické trase, ne ve starém okolí.
+
+Stav "dočistit okolí" má být přísně lokální. Smažte jednu starou kopii, opravte jeden odkaz, přejmenujte jeden archiv, zavřete jednu duplicitní kartu. Pokud se vám úklid rozroste na více míst, zastavte se a napište novou pracovní otázku. Možná už nejde o dočištění poplachu, ale o slabý informační systém.
+
+Stav "otevřít návratový signál" nepoužívejte jen proto, že někdo znervózněl. Musí se stát přesně to, co jste napsali v minimálním zápisu nebo v návratovém signálu. Když si nejste jistí, default je dočistit okolí a počkat na další běžný důkaz.
+
+### Co nedělat po prvním použití
+
+Po falešném poplachu je tým často citlivější než obvykle. To svádí k preventivním opatřením, která vypadají zodpovědně, ale ve skutečnosti jen prodlužují život poplachu.
+
+Nedělejte automaticky:
+
+- nový checklist jen pro tuto trasu;
+- pravidelné hlídání, jestli se poplach nevrací;
+- dashboard pro výskyt podobných podnětů;
+- školení celého týmu kvůli jedné archivní kopii;
+- dlouhý zápis historie, pokud stačí rozhodovací věta;
+- nový tracker, event nebo osobní evidenci používání pravidla.
+
+Pokud trasa funguje, nechte ji fungovat. Dobrý provoz nepotřebuje památník ke každému zmatku, který se podařilo uklidit.
+
+Codyho komentář: falešný poplach má po sobě zanechat méně práce, ne víc. Když po něm vzniknou tři nové rituály, poplach možná nebyl falešný, ale vy jste mu právě pořídili kancelář.
+
+### Privacy-first první použití
+
+Privacy-first hranice je jednoduchá: při prvním běžném použití po falešném poplachu nepřidávejte nová data, pokud se skutečně nespustil návratový signál. Většinou stačí jeden provozní záznam:
+
+```text
+První běžné použití po falešném poplachu proběhlo bez změny. Starý odkaz se nevrátil. Dočasné podklady smazané.
+```
+
+Neponechávejte screenshoty, exporty, interní komentáře ani zákaznické příklady jen proto, že vás poplach předtím vyrušil. Pokud je potřeba učební příklad, zkraťte ho na anonymní vzor. Pokud není potřeba, smažte ho. U evropského privacy-first provozu má být první reflex po uklidnění: zmenšit stopu, ne pojistit nejistotu dalším sběrem.
+
+### Karta prvního použití po falešném poplachu
+
+```text
+Původní falešný poplach:
+
+Minimální zápis říkal:
+
+První běžná situace:
+
+Co se stalo:
+
+Výsledek:
+- bez změny
+- dočistit okolí
+- otevřít návratový signál
+
+Jedna úklidová akce, pokud je potřeba:
+
+Co výslovně nepřidáváme:
+
+Jaká data nebo podklady mažeme:
+
+Kdy se téma znovu otevře:
+```
+
+Kartu použijte jen tehdy, když hrozí, že se poplach vrátí do debaty. Pokud první použití proběhlo úplně normálně, stačí jedna věta v logu. Karta není povinný formulář; je to brzda proti zbytečnému rozšiřování.
+
+### Checklist prvního použití po falešném poplachu
+
+- Proběhlo ověření v běžné práci, ne jako mimořádná kontrola?
+- Použili jsme aktuální kanonickou trasu, ne archiv?
+- Víme, jestli se poplach nevrátil, vrátil jako stará stopa, nebo spustil skutečný návratový signál?
+- Pokud je potřeba úklid, je omezený na jedno nejbližší místo?
+- Nevznikl nový proces, dashboard, školení ani pravidelné hlídání bez opakovaného důvodu?
+- Zapsali jsme, co výslovně nepřidáváme?
+- Smazali nebo anonymizovali jsme dočasné podklady?
+- Je jasné, kdy se téma znovu otevře?
+
+První běžné použití po falešném poplachu má týmu vrátit důvěru v normální práci. Ne tím, že všechno znovu zkontroluje, ale tím, že ukáže: trasa funguje, okolí je uklizené a žádný nový dluh nevznikl. Pokud se ukáže skutečný signál, otevře se vědomě. Pokud ne, dobrý výsledek je klid.
+
 ## Pracovní log
 
+- 2026-06-16: Doplněna úvodní podkapitola o prvním běžném použití po falešném poplachu: běžná trasa bez mimořádné kontroly, tři výsledné stavy, privacy-first úklid, karta a checklist.
 - 2026-06-16: Doplněna úvodní podkapitola o minimálním zápisu po falešném poplachu: tři věty rozhodnutí, jedna úklidová akce, privacy-first mazání podkladů a checklist.
 - 2026-06-16: Doplněna úvodní podkapitola o uzavření druhé tiché kontroly po převodu do běžného provozu: čtyři uzavírací stavy, převod do běžného rytmu, ukončení zvláštní péče, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-16: Doplněna úvodní podkapitola o druhé tiché kontrole po převodu do běžného provozu: přenositelnost bez čerstvého vysvětlení, čtyři výsledné stavy, lokální hrany pravidla, privacy-first hranice, karta, mini workshop a checklist.
