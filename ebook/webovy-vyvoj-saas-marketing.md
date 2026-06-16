@@ -219158,8 +219158,173 @@ Kartu použijte jen tehdy, když hrozí, že se poplach vrátí do debaty. Pokud
 
 První běžné použití po falešném poplachu má týmu vrátit důvěru v normální práci. Ne tím, že všechno znovu zkontroluje, ale tím, že ukáže: trasa funguje, okolí je uklizené a žádný nový dluh nevznikl. Pokud se ukáže skutečný signál, otevře se vědomě. Pokud ne, dobrý výsledek je klid.
 
+## Uzavření prvního běžného použití po falešném poplachu
+
+První běžné použití po falešném poplachu má ještě jednu povinnost: musí skončit. Pokud se jen řekne "vypadá to dobře" a téma zůstane v hlavě týmu jako něco, co je potřeba dál opatrně sledovat, poplach se ve skutečnosti neuzavřel. Jen se z hlasitého vyrušení stal tichý dohled.
+
+Uzavření má být krátké. Nehodnotí celou historii poplachu, nevrací se k původním obavám a nepíše nový provozní standard. Odpovídá na jednu otázku:
+
+```text
+Co po prvním běžném použití už neděláme navíc?
+```
+
+Dobrá odpověď často zní: nehlídáme trasu zvlášť, nepřidáváme kontrolní tabulku, nevracíme starou kartu do backlogu, nemažeme další části systému naslepo a nesbíráme žádné nové důkazy. Stabilní trasa se vrací do běžného rytmu.
+
+Příklad:
+
+```text
+Původní poplach:
+Zdálo se, že měsíční review posílá slabé podněty do aktivní práce.
+
+Minimální zápis:
+Trasu neměníme. Poplach vznikl kvůli archivní kopii šablony.
+
+První běžné použití:
+Aktuální šablona správně vedla slabý podnět do stavu "neotevírat".
+
+Uzavření:
+Falešný poplach je uzavřený. Archivní kopie je označená jako neplatná, další zvláštní kontrola nevzniká a trasa zůstává v běžném měsíčním review.
+```
+
+Všimněte si, že závěr nepřidává další vrstvu jistoty. Právě naopak: odstraňuje mimořádnou pozornost, protože už není potřeba. To je hlavní výsledek uzavření.
+
+### Čtyři uzavírací stavy
+
+Po prvním běžném použití vyberte jeden stav:
+
+- Uzavřít bez změny: trasa fungovala a poplach se nevrátil.
+- Uzavřít po lokálním úklidu: trasa fungovala, ale jedna stará stopa ještě mohla mást.
+- Nechat jedno běžné ověření: výsledek je dobrý, ale podmínka návratu byla těsně na hraně a tým potřebuje jeden přirozený průchod navíc.
+- Otevřít návratový signál: problém se objevil v aktuální kanonické trase, ne ve starém okolí.
+
+Stav "nechat jedno běžné ověření" používejte opatrně. Musí mít jasný konec:
+
+```text
+Ještě jednou ověříme při nejbližším běžném měsíčním review. Pokud se stejný problém neobjeví v aktuální šabloně, téma zavíráme bez další kontroly.
+```
+
+Slabá varianta zní:
+
+```text
+Budeme to sledovat.
+```
+
+Ta věta je past. Neříká, kdo sleduje, co přesně sleduje, kdy přestane a jaké rozhodnutí tím změní. Vypadá zodpovědně, ale často jen nechává poplach žít déle, než si zaslouží.
+
+### Co propsat a co nechat být
+
+Po uzavření prvního použití upravte jen nejbližší místo, které opravdu ovlivní další práci:
+
+- označte archivní kopii jako neplatnou;
+- opravte jeden odkaz na kanonickou šablonu;
+- zavřete duplicitní kartu;
+- zkraťte starou poznámku, která vypadala jako pravidlo;
+- dopište jednu větu do rozhodovacího logu.
+
+Nepřepisujte celou dokumentaci jen proto, že jste se jí právě dotkli. Falešný poplach má vést k přesnému úklidu, ne k preventivnímu úklidovému tažení. Pokud při úklidu narazíte na další problém, zapište ho jako nový podnět. Nepřibalujte ho automaticky do uzavření poplachu.
+
+Dobrá uzavírací věta:
+
+```text
+První běžné použití proběhlo bez návratu poplachu. Starý odkaz je označený jako archiv, trasa zůstává beze změny a další zvláštní kontrola nevzniká.
+```
+
+Slabá uzavírací věta:
+
+```text
+Asi dobré, raději to necháme otevřené.
+```
+
+Druhá věta nemá rozhodnutí. Jen prodlužuje stav napětí. Pokud něco necháváte otevřené, napište přesně co, proč a kdy skončí. Jinak to není opatrnost, ale mlha.
+
+### Privacy-first uzavření
+
+Uzavření po falešném poplachu je ideální chvíle pro datový úklid. Poplach často vytvoří dočasné podklady: screenshot, export, kopii šablony, komentář v chatu, pracovní tabulku nebo anonymizovaný příklad. Některé z nich mohly být užitečné při ověření. Po uzavření ale zůstávají užitečné jen tehdy, když podporují další konkrétní rozhodnutí.
+
+Zapište si:
+
+```text
+Po uzavření mažeme nebo zkracujeme:
+Dál nesbíráme:
+Kanonicky zůstává jen:
+```
+
+Příklad:
+
+```text
+Po uzavření mažeme nebo zkracujeme:
+Dočasný screenshot staré šablony a pracovní komentář v chatu.
+
+Dál nesbíráme:
+Žádnou evidenci toho, kdo šablonu použil správně nebo špatně.
+
+Kanonicky zůstává jen:
+Jedna věta v pracovním logu a označená archivní kopie.
+```
+
+Tento zápis drží privacy-first hodnotu prakticky. Tým si neponechává osobní ani provozní detaily jen proto, že na chvíli pomohly vyřešit nejistotu. Po rozhodnutí zůstává minimum: závěr, kanonické místo a případný návratový signál.
+
+Codyho komentář: falešný poplach je jako návštěva servisu, kde se ukáže, že auto je v pořádku a pískal jen zapomenutý držák v kufru. Správný výsledek není založit "oddělení pro pískání". Správný výsledek je vyndat držák, zapsat co to bylo a normálně jet dál.
+
+### Karta uzavření prvního použití
+
+```text
+Původní falešný poplach:
+
+První běžné použití:
+
+Výsledek:
+- bez změny
+- lokální úklid
+- jedno běžné ověření
+- návratový signál
+
+Uzavírací věta:
+
+Co se mění v pracovním místě:
+
+Co výslovně necháváme beze změny:
+
+Co už samostatně nehlídáme:
+
+Jaké dočasné podklady mažeme nebo zkracujeme:
+
+Jaká data dál nesbíráme:
+
+Kdy se téma znovu otevře:
+```
+
+Kartu vyplňte jen do takové hloubky, jakou si situace zaslouží. U čistého výsledku "bez změny" stačí často tři řádky. U lokálního úklidu doplňte konkrétní místo. U návratového signálu založte novou smyčku a nepředstírejte, že jde pořád jen o uzavření poplachu.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: napište, co se při prvním běžném použití stalo.
+2. Minuta 2: vyberte jeden ze čtyř uzavíracích stavů.
+3. Minuta 3: určete, jestli se mění pracovní místo, nebo jen log.
+4. Minuta 4: napište, co už samostatně nehlídáte.
+5. Minuta 5: smažte nebo zkraťte dočasné podklady.
+6. Minuta 6: potvrďte návratový signál pro příště.
+
+Pokud se během workshopu objeví návrh "pojďme rovnou zkontrolovat i podobné trasy", zastavte ho jako nový podnět. Možná je dobrý. Ale nepatří do uzavření jednoho falešného poplachu, dokud nemá vlastní důkaz a pracovní otázku.
+
+### Checklist uzavření prvního použití
+
+- Víme, jak dopadlo první běžné použití po poplachu?
+- Vybrali jsme jeden uzavírací stav?
+- Je jasné, jestli trasu zavíráme, lokálně uklízíme, jednou ověřujeme, nebo otevíráme návratový signál?
+- Má případné další ověření jasnou koncovou podmínku?
+- Propsali jsme změnu jen do nejbližšího pracovního místa?
+- Neotevřeli jsme audit podobných tras bez vlastního důvodu?
+- Je zapsané, co už samostatně nehlídáme?
+- Smazali nebo zkrátili jsme dočasné podklady?
+- Nevzniklo osobní měření, dashboard ani nový proces jen kvůli minulé obavě?
+- Zůstává kanonicky jen závěr, pracovní místo a návratový signál?
+
+Uzavření prvního běžného použití po falešném poplachu má být tiché a rozhodné. Když trasa funguje, nechte ji fungovat. Když zůstala jedna stará stopa, ukliďte ji. Když se objevil skutečný signál, otevřete novou smyčku. Hlavně nenechte falešný poplach, aby si po sobě nenápadně nechal vlastní malý proces.
+
 ## Pracovní log
 
+- 2026-06-16: Doplněna úvodní podkapitola o uzavření prvního běžného použití po falešném poplachu: čtyři uzavírací stavy, lokální úklid, ukončení zvláštního hlídání, privacy-first mazání podkladů, karta, mini workshop a checklist.
 - 2026-06-16: Doplněna úvodní podkapitola o prvním běžném použití po falešném poplachu: běžná trasa bez mimořádné kontroly, tři výsledné stavy, privacy-first úklid, karta a checklist.
 - 2026-06-16: Doplněna úvodní podkapitola o minimálním zápisu po falešném poplachu: tři věty rozhodnutí, jedna úklidová akce, privacy-first mazání podkladů a checklist.
 - 2026-06-16: Doplněna úvodní podkapitola o uzavření druhé tiché kontroly po převodu do běžného provozu: čtyři uzavírací stavy, převod do běžného rytmu, ukončení zvláštní péče, privacy-first úklid, karta, mini workshop a checklist.
