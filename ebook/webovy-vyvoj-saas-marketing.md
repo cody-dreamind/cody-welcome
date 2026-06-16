@@ -219483,8 +219483,171 @@ Pokud workshop otevře nové téma, nezpracovávejte ho uvnitř druhého použit
 
 Druhé běžné použití po falešném poplachu je hranice mezi uklidněním a zbytečnou opatrností. Když trasa funguje i podruhé, pusťte ji z ruky. Uložte minimum, ukliďte podklady a nechte práci pokračovat bez dalšího stínu staré chyby. Pokud se objeví nový signál, otevřete ho čistě. Pokud ne, dobrý provoz se pozná i podle toho, že umí přestat kontrolovat.
 
+## Uzavření druhého běžného použití po falešném poplachu
+
+Druhé běžné použití po falešném poplachu končí teprve ve chvíli, kdy po něm nezůstane zvláštní režim. Nestačí říct "vypadá to dobře". Je potřeba rozhodnout, co zůstává v běžném pracovním místě, co se maže, co se přepisuje do návratového signálu a co už tým nebude samostatně hlídat. Jinak se z falešného poplachu stane malá stálá agenda, která se tváří jako opatrnost.
+
+Uzavírací otázka zní:
+
+```text
+Co musí po druhém běžném použití zůstat, aby práce pokračovala normálně, a co už je jen stopa po starém poplachu?
+```
+
+Normální provoz neznamená, že tým zapomene na poučení. Znamená, že poučení je v místě, kde se práce opravdu dělá. Pokud je správná věta v šabloně, stav v rozhodovacím logu a návratový signál jasně pojmenovaný, nepotřebujete ještě zvláštní připomínku, samostatný dokument ani měsíční kontrolu "jestli se to zase nestalo".
+
+Příklad:
+
+```text
+Původní falešný poplach:
+Zdálo se, že slabé podněty z review automaticky končí jako aktivní úkoly.
+
+Druhé běžné použití:
+Jiný vlastník použil aktuální šablonu bez připomenutí starého poplachu.
+
+Výsledek:
+Podnět bez shody s návratovým signálem skončil stavem neotevírat.
+
+Uzavření:
+Téma přechází do tichého provozu. V aktuální šabloně zůstává jedna rozhodovací věta. Mažeme dočasné porovnání staré a nové trasy. Dál nesledujeme použití po konkrétních lidech.
+```
+
+Všimněte si, že uzavření má čtyři části: stav, kanonické místo, úklid a datovou hranici. Když některá chybí, téma se snadno vrátí špatným způsobem. Bez stavu není jasné, jestli je hotovo. Bez kanonického místa lidé hledají staré poznámky. Bez úklidu zůstane šum. Bez datové hranice začne tým pro jistotu sbírat víc důkazů, než potřebuje.
+
+### Čtyři uzavírací stavy
+
+Po druhém běžném použití vyberte jeden ze čtyř uzavíracích stavů:
+
+- Uzavřeno do tichého provozu: pravidlo fungovalo podruhé bez zvláštního vysvětlení.
+- Uzavřeno po lokálním dočištění: pravidlo fungovalo, ale jedna stopa musela zmizet nebo se zpřesnit.
+- Uzavřeno jako slabý přenos: problém nebyl v rozhodnutí, ale v tom, že kanonické místo neumělo samo nést význam.
+- Neuzavřeno, otevřít návratový signál: aktuální trasa znovu ukázala problém, který odpovídá předem zapsané návratové podmínce.
+
+"Uzavřeno do tichého provozu" je nejčistší výsledek. Zůstává jen živé pracovní místo a návratový signál. V logu stačí krátká věta. Tým se k tématu nevrací jen proto, že o něm nedávno mluvil.
+
+"Uzavřeno po lokálním dočištění" použijte, když druhé použití fungovalo, ale v okolí zůstala drobnost: starý odkaz v indexu, nejasný název stavu, archivní poznámka působící jako aktuální pravidlo nebo duplicitní karta. Oprava musí být jedna a musí mít jasný konec.
+
+"Uzavřeno jako slabý přenos" znamená, že starý poplach se nevrátil, ale pravidlo se nepřenáší dost samostatně. V takovém případě neotvírejte celou historii. Opravte první větu, stavovou volbu, název šablony nebo odkaz, který člověka posílá na správné místo.
+
+"Neuzavřeno, otevřít návratový signál" je výjimka. Použijte ji jen tehdy, když máte aktuální důkaz, nejbližší pracovní místo a shodu s návratovou podmínkou. Pokud někdo jen řekne "tohle mi připomíná minule", ještě to není návrat. To je maximálně podnět k poznámce.
+
+### Co propsat do pracovního místa
+
+Uzavření má skončit v místě, kde příští člověk začne práci. Ne v dlouhém logu, ne ve vlákně chatu a ne v osobní paměti toho, kdo poplach řešil. Prakticky to bývá jedno z těchto míst:
+
+- rozhodovací šablona;
+- checklist pro review;
+- karta nabídky;
+- provozní runbook;
+- onboardingový krok;
+- index pracovních standardů;
+- krátký changelog u dané trasy.
+
+Do tohoto místa nepatří celá historie poplachu. Patří tam jen věta, která pomůže příště udělat správné rozhodnutí. Dobrá věta:
+
+```text
+Podnět bez shody se zapsaným návratovým signálem končí stavem neotevírat.
+```
+
+Slabá věta:
+
+```text
+Pozor na situace podobné minulému poplachu.
+```
+
+Druhá věta nutí člověka znát minulost. První věta mu dává aktuální pravidlo. To je rozdíl mezi týmovým systémem a interní pověstí, která se předává šeptem u kafe.
+
+Codyho komentář: pokud pravidlo nejde napsat bez odkazu na drama z minulosti, pravděpodobně ještě není pravidlem. Je to historka s ambicí řídit provoz. Historky jsou fajn, ale ať nelezou do šablon v pracovních botách.
+
+### Privacy-first úklid po uzavření
+
+Falešné poplachy často vytvářejí zbytečné stopy. Lidé si ukládají screenshoty, kopírují příklady, dělají pomocné tabulky, označují konkrétní chyby a nechávají vedle sebe starou i novou verzi postupu. Během ověřování to může být užitečné. Po druhém běžném použití už je to často jen riziko a šum.
+
+Po uzavření projděte čtyři otázky:
+
+- Které podklady byly potřeba jen pro vysvětlení poplachu?
+- Které příklady obsahují zákaznické, osobní nebo interně citlivé detaily?
+- Které poznámky by mohly příště působit jako paralelní návod?
+- Které informace stačí zkrátit na závěr bez detailů?
+
+Privacy-first výsledek není "nechat všechno pro jistotu". Výsledek je mít dost informací pro příští správné rozhodnutí a co nejméně dat navíc. Pokud stačí věta v šabloně a návratový signál, smažte pomocnou tabulku. Pokud potřebujete zachovat příklad, anonymizujte ho a odstraňte detaily, které nejsou nutné pro rozhodnutí.
+
+Krátký uzavírací zápis může vypadat takto:
+
+```text
+Druhé běžné použití potvrdilo tichý provoz. V šabloně zůstává rozhodovací věta k návratovému signálu. Mažeme dočasné screenshoty a pomocné porovnání staré trasy. Dál nesbíráme použití podle osob.
+```
+
+Tenhle zápis je nudný správným způsobem. Nechává tým pracovat, drží rozhodnutí na správném místě a nebuduje si malý pomník z dočasných podkladů.
+
+### Karta uzavření druhého použití
+
+```text
+Původní falešný poplach:
+
+Druhé běžné použití:
+
+Co se stalo:
+
+Uzavírací stav:
+- tichý provoz
+- lokální dočištění
+- slabý přenos
+- otevřít návratový signál
+
+Kanonické pracovní místo:
+
+Jedna věta, která tam zůstává:
+
+Co mažeme nebo zkracujeme:
+
+Jaké příklady anonymizujeme:
+
+Co už samostatně nehlídáme:
+
+Jaká data dál nesbíráme:
+
+Návratový signál pro příště:
+
+Vlastník uzavření:
+
+Datum:
+```
+
+Karta má být krátká. Pokud se z ní stane stránka vysvětlování, je to signál, že se snažíte uzavřít příliš mnoho věcí najednou. Zmenšete rozsah na jednu trasu, jedno pracovní místo a jeden návratový signál.
+
+### Mini workshop na 8 minut
+
+1. Minuta 1: přečtěte výsledek druhého běžného použití.
+2. Minuta 2: vyberte jeden uzavírací stav.
+3. Minuta 3: určete kanonické pracovní místo.
+4. Minuta 4: napište jednu větu, která tam zůstane.
+5. Minuta 5: označte dočasné podklady ke smazání nebo zkrácení.
+6. Minuta 6: pojmenujte, jaká data dál nesbíráte.
+7. Minuta 7: potvrďte návratový signál pro příště.
+8. Minuta 8: zapište stručný log a ukončete zvláštní pozornost.
+
+Když se během workshopu objeví nová otázka, zapište ji mimo kartu. Uzavření druhého použití není vhodné místo pro rozšiřování systému. Je to místo, kde se systém uklidí po tom, co ukázal, že funguje.
+
+### Checklist uzavření druhého použití
+
+- Víme, co se při druhém běžném použití stalo?
+- Vybrali jsme jeden uzavírací stav?
+- Je jasné kanonické pracovní místo pro příští použití?
+- Zůstává v něm jedna praktická věta místo historie poplachu?
+- Opravili jsme jen lokální dočištění, pokud bylo potřeba?
+- Neotevřeli jsme audit podobných situací bez vlastního důkazu?
+- Smazali nebo zkrátili jsme dočasné podklady?
+- Anonymizovali jsme příklady, které mají zůstat?
+- Je zapsané, co už samostatně nehlídáme?
+- Nevzniklo měření použití podle osob ani nový preventivní dashboard?
+- Má téma návratový signál pro případ skutečného návratu?
+- Umí tým říct, že falešný poplach už není aktivní práce?
+
+Uzavření druhého běžného použití je malý test provozní dospělosti. Nejde jen o to, že problém nenastal. Jde o to, že tým umí přestat nést jeho stín. Dobré pravidlo zůstane v pracovním místě. Dočasné důkazy zmizí. Návratový signál čeká v klidu. A práce jde dál bez toho, aby se z opatrnosti stala další položka v kalendáři.
+
 ## Pracovní log
 
+- 2026-06-16: Doplněna úvodní podkapitola o uzavření druhého běžného použití po falešném poplachu: uzavírací stavy, propsání jedné věty do kanonického místa, privacy-first úklid dočasných podkladů, karta, mini workshop a checklist.
 - 2026-06-16: Doplněna úvodní podkapitola o druhém běžném použití po falešném poplachu: přenositelnost bez čerstvého vysvětlení, čtyři výsledné stavy, slabý přenos, privacy-first úklid podkladů, karta, mini workshop a checklist.
 - 2026-06-16: Doplněna úvodní podkapitola o uzavření prvního běžného použití po falešném poplachu: čtyři uzavírací stavy, lokální úklid, ukončení zvláštního hlídání, privacy-first mazání podkladů, karta, mini workshop a checklist.
 - 2026-06-16: Doplněna úvodní podkapitola o prvním běžném použití po falešném poplachu: běžná trasa bez mimořádné kontroly, tři výsledné stavy, privacy-first úklid, karta a checklist.
