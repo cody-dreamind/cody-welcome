@@ -219007,8 +219007,49 @@ Když workshop skončí větou "potřebujeme ještě víc jistoty", ptejte se, j
 
 Uzavřená druhá tichá kontrola má zanechat lehčí systém než předtím. Pravidlo buď funguje v běžné práci, nebo se z něj stala nová jasně pojmenovaná otázka. V obou případech zmizí mimořádná pozornost, staré pomocné stopy a neurčitý pocit, že by se na to "někdy mělo kouknout". To je malá výhra, ale přesně z těchhle malých výher se skládá provoz, který se dá dlouhodobě udržet.
 
+## Minimální zápis po falešném poplachu
+
+Falešný poplach by neměl zanechat nový proces. Měl by zanechat jen tolik paměti, aby se stejný omyl nemusel příště znovu vyšetřovat. Pokud se ukáže, že stabilní pravidlo funguje a problém byl ve starém odkazu, archivní kopii nebo neplatné poznámce, hlavním výstupem není nová kapitola. Hlavním výstupem je krátký zápis a uklizené okolí.
+
+Použijte tři věty:
+
+```text
+Trasu neměníme, protože:
+Poplach vznikl kvůli:
+Příště se vrátíme jen když:
+```
+
+Příklad:
+
+```text
+Trasu neměníme, protože:
+Aktuální šablona měsíčního review vede slabý podnět ke správnému stavu bez nového úkolu.
+
+Poplach vznikl kvůli:
+Archivní kopii šablony, která nebyla označená jako neplatná a pořád visela v rozcestníku.
+
+Příště se vrátíme jen když:
+Stejný zmatek vznikne i při použití aktuální kanonické šablony.
+```
+
+K zápisu přidejte jednu úklidovou akci. Ne seznam přání, ne audit všech podobných míst. Jednu akci, která odstraní skutečný zdroj zmatku: přesměrovat odkaz, označit archiv, smazat pracovní kopii, zavřít duplicitní kartu nebo zkrátit poznámku, která vypadala jako platné pravidlo.
+
+Privacy-first hranice je jednoduchá: po falešném poplachu neuchovávejte surové důkazy jen pro pocit bezpečí. Pokud stačí anonymizovaná věta v logu, smažte screenshot, export, kopii šablony i interní poznámku, která už nepodporuje žádné rozhodnutí.
+
+### Checklist minimálního zápisu
+
+- Je jasně napsané, že stabilní trasu neměníme?
+- Je pojmenovaný konkrétní zdroj falešného poplachu?
+- Existuje jedna úklidová akce v okolí trasy?
+- Je návratový signál pro příště užší než obecné "když se to zopakuje"?
+- Nevzniká nová karta, proces ani měření bez opakovaného vzoru?
+- Jsou pracovní podklady smazané nebo anonymizované po zapsání závěru?
+
+Minimální zápis má zvláštní sílu: dovolí týmu nic nepřidat. Stabilní pravidlo zůstane stabilní, okolí se uklidí a falešný poplach se nepřevleče za nový backlogový dluh.
+
 ## Pracovní log
 
+- 2026-06-16: Doplněna úvodní podkapitola o minimálním zápisu po falešném poplachu: tři věty rozhodnutí, jedna úklidová akce, privacy-first mazání podkladů a checklist.
 - 2026-06-16: Doplněna úvodní podkapitola o uzavření druhé tiché kontroly po převodu do běžného provozu: čtyři uzavírací stavy, převod do běžného rytmu, ukončení zvláštní péče, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-16: Doplněna úvodní podkapitola o druhé tiché kontrole po převodu do běžného provozu: přenositelnost bez čerstvého vysvětlení, čtyři výsledné stavy, lokální hrany pravidla, privacy-first hranice, karta, mini workshop a checklist.
 - 2026-06-16: Doplněna úvodní podkapitola o uzavření první tiché kontroly po převodu do běžného provozu: čtyři uzavírací stavy, propsání do živého systému, úklid dočasných stop, privacy-first výsledná stopa, karta, mini workshop a checklist.
