@@ -220343,8 +220343,138 @@ Co smažeme, zkrátíme nebo anonymizujeme po ověření:
 
 Širší vzor je dobrý důvod otevřít novou otázku, ale špatný důvod ztratit disciplínu. Když mu dáte vlastní kartu, malý rozsah a privacy-first hranici, může z něj vzniknout lepší pracovní pravidlo. Když ho necháte přirůst ke staré opravě, vznikne jen dlouhá karta, které se časem začne každý trochu bát.
 
+## Ověření nové otázky po širším vzoru při prvním reálném průchodu
+
+Nová otázka po širším vzoru se nemá ověřovat samostatným velkým workshopem, pokud k tomu není vážný důvod. Nejlepší první ověření je reálný pracovní průchod, ve kterém by se problém stejně ukázal: předání leadu, úprava landing page, příprava nabídky, onboarding zákazníka, review šablony nebo rozhodnutí o další produktové iteraci.
+
+Ověřujete jednu věc: jestli nová otázka pomohla najít společnou příčinu a nejmenší společnou opravu. Neověřujete celý systém. Neověřujete všechny role. Neověřujete, jestli by se neměla přepsat celá metodika. To by byl starý dobrý projekt v kabátě "jen to rychle zkontrolujeme". Hezký kabát, pořád projekt.
+
+Začněte krátkou větou:
+
+```text
+Při tomto reálném průchodu ověřujeme:
+
+Nová otázka má pomoct rozhodnout:
+
+Stačí nám důkaz z těchto pracovních míst:
+
+Průchod skončí, až:
+
+Co při tomto ověření výslovně neřešíme:
+```
+
+Příklad:
+
+```text
+Při tomto reálném průchodu ověřujeme:
+Jestli tři šablony pro práci s leadem odkazují na stejné kvalifikační pravidlo.
+
+Nová otázka má pomoct rozhodnout:
+Kde bude kanonický zdroj pravdy pro kvalifikaci leadu.
+
+Stačí nám důkaz z těchto pracovních míst:
+Discovery šablona, předávací checklist a onboardingová karta.
+
+Průchod skončí, až:
+Při jednom předání leadu člověk najde aktuální pravidlo bez staré scoringové věty a bez ručního vysvětlování historie.
+
+Co neřešíme:
+Neřešíme automatický scoring, nové CRM pole, segmentaci všech leadů ani úpravu webového formuláře.
+```
+
+Tento zápis chrání dvě hranice najednou. První hranice je pracovní: ověření se odehrává tam, kde má změna žít. Druhá hranice je datová: tým si předem řekne, že nebude vyrábět nový sběr jen proto, aby měl pocit jistoty. Pokud stačí projít tři existující pracovní artefakty, není potřeba sledovat chování lidí v nástroji ani exportovat osobní historii komunikace.
+
+### Čtyři výsledky prvního průchodu
+
+První reálný průchod může skončit čtyřmi rozumnými výsledky:
+
+- Otázka pomohla: společná příčina je jasná a nejmenší společná oprava se dá udělat.
+- Otázka je moc široká: průchod odhalil více možných příčin a je potřeba ji zúžit.
+- Otázka míří vedle: tření existuje, ale nevychází ze širšího vzoru, který jste popsali.
+- Otázka není potřeba: lokální oprava stačila a širší vzor se při reálné práci nepotvrdil.
+
+"Otázka pomohla" neznamená, že je hotová celá oprava. Znamená to, že víte, kde je společná příčina a jaký nejmenší zásah má smysl udělat jako další. Typicky to bude jeden kanonický odkaz, odstranění duplicity, sjednocení jedné pracovní věty nebo přepsání předávacího místa.
+
+"Otázka je moc široká" je signál ke zmenšení, ne k přidání další analýzy. Pokud jste chtěli řešit "sjednocení kvalifikace leadů" a průchod ukázal problém jen v předání mezi obchodem a delivery, zapište novou otázku užším jazykem. Třeba: "Jak má předávací checklist odkazovat na kvalifikační pravidlo bez kopírování jeho obsahu?"
+
+"Otázka míří vedle" je poctivý výsledek, když se ukáže, že problém není ve společném zdroji pravdy, ale třeba ve špatném pojmenování jednoho pole nebo v chybějícím vlastníkovi šablony. V takovém případě neohýbejte důkaz, aby původní hypotéza přežila. Upravte otázku nebo ji zavřete.
+
+"Otázka není potřeba" je nejpříjemnější nudný výsledek. Znamená to, že širší vzor byl možná jen dozvuk staré opravy nebo ojedinělá kolize. Nechte původní lokální opravu uzavřenou a nezakládejte nový systém jen proto, že jste už měli připravenou kartu.
+
+### Jak poznat dostatečný důkaz
+
+Dostatečný důkaz pro první průchod je malý a konkrétní. Může vypadat takto:
+
+- člověk při běžném předání našel správné pravidlo bez vysvětlení;
+- dvě pomocné šablony odkazují na stejné kanonické místo;
+- stará věta už se při práci nepoužila;
+- tým umí říct, která duplicita se má odstranit jako první;
+- není potřeba přidat nové pole, export nebo tracking.
+
+Nedostatečný důkaz je naopak obecný pocit, že "by se to mělo sjednotit", nebo seznam všech míst, kde by šlo něco zlepšit. První průchod nemá vyrobit mapu celé krajiny. Má ukázat, jestli nová otázka vede na skutečnou společnou příčinu.
+
+Privacy-first poznámka: když první průchod nestačí, nepřeskakujte hned na kvantitativní měření. Nejdřív zkontrolujte, jestli byla otázka správně zúžená a jestli jste vybrali reálná pracovní místa. Nový sběr dat má přijít až ve chvíli, kdy bez něj nejde rozhodnout, a i tehdy má mít jasný účel, retenci a vlastníka.
+
+### Karta prvního průchodu nové otázky
+
+```text
+Nová pracovní otázka:
+
+Širší vzor, který ověřujeme:
+
+Reálný průchod:
+
+Pracovní místa použitá jako důkaz:
+
+Co se při průchodu stalo:
+
+Výsledek:
+- otázka pomohla
+- otázka je moc široká
+- otázka míří vedle
+- otázka není potřeba
+
+Nejmenší další krok:
+
+Co neotevíráme:
+
+Jaká data kvůli tomu nesbíráme:
+
+Co po ověření smažeme, zkrátíme nebo anonymizujeme:
+
+Vlastník:
+
+Datum návratu:
+```
+
+Karta má být vyplnitelná z jednoho průchodu. Pokud do ní začnete přepisovat historii celého problému, vraťte se ke kartě nové otázky a nechte tady jen výsledek ověření. Historie může být užitečná, ale první průchod potřebuje hlavně dnešní důkaz.
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: přečtěte novou pracovní otázku a stop podmínku.
+2. Minuty 2 až 3: projděte jedno reálné pracovní místo, kde se otázka měla projevit.
+3. Minuty 4 až 5: určete, který ze čtyř výsledků platí.
+4. Minuta 6: zapište nejmenší další krok nebo rozhodnutí otázku zavřít.
+5. Minuta 7: zapište privacy-first úklid a věci mimo rozsah.
+
+Když se tým během workshopu začne hádat o celou strategii, zastavte ho u pracovního místa. Otázka není "jak má fungovat celý systém", ale "co tento průchod ukázal o širším vzoru". To je menší otázka. A menší otázka se dá dokončit dřív, než vychladne káva.
+
+### Checklist prvního průchodu nové otázky
+
+- Ověřovali jsme otázku při reálné práci, ne v abstraktní debatě?
+- Zůstala původní lokální oprava uzavřená?
+- Použili jsme jen pracovní místa, která už při běžné práci existují?
+- Vybrali jsme jeden ze čtyř výsledků průchodu?
+- Máme nejmenší další krok, nebo jasné rozhodnutí otázku zavřít?
+- Neotevřeli jsme celý systém kvůli jednomu průchodu?
+- Nepřidali jsme nové měření, export ani osobní kontrolu lidí bez nutnosti?
+- Víme, co po ověření smažeme, zkrátíme nebo anonymizujeme?
+
+První reálný průchod má novou otázku zkrotit. Když pomůže, pokračujte nejmenší společnou opravou. Když nepomůže, zúžte ji, přesměrujte nebo zavřete. Všechny čtyři výsledky jsou lepší než pátý nepojmenovaný stav: "ještě to necháme otevřené a uvidíme". Tam se otázky chodí tvářit jako práce, i když už dávno jen zabírají místo.
+
 ## Pracovní log
 
+- 2026-06-16: Doplněna úvodní podkapitola o ověření nové otázky po širším vzoru při prvním reálném průchodu: čtyři výsledky, dostatečný důkaz, privacy-first hranice, karta, mini workshop a checklist.
 - 2026-06-16: Doplněna úvodní podkapitola o otevření nové otázky po širším vzoru: rozlišení od lokální opravy, nejmenší společná oprava, stop podmínka, privacy-first brzda, karta a checklist.
 - 2026-06-16: Doplněna úvodní podkapitola o prvním běžném průchodu po uzavřeném zásahu: samostatnost bez zvláštní péče, tři signály normálního průchodu, čtyři výsledné stavy, privacy-first datová střídmost, karta, mini workshop a checklist.
 - 2026-06-16: Doplněna úvodní podkapitola o uzavření ověřeného zásahu do běžné práce: tři vrstvy uzavření, čtyři uzavírací stavy, privacy-first datový úklid, karta, mini workshop a checklist.
