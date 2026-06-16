@@ -220618,8 +220618,154 @@ Když se tým v minutě 2 zasekne mezi dvěma stavy, vyberte menší. Zúžení 
 
 Dobré uzavření poznáte podle toho, že další člověk nemusí vědět, jak byla otázka objevena, aby dokázal použít její výsledek. Vidí aktuální stav, další krok nebo důvod zavření a hranici, kdy se má téma vrátit. To stačí. Zbytek historie může klidně spát, nejlépe bez zbytečných osobních dat pod polštářem.
 
+## Převod uzavřené nové otázky do běžného rytmu
+
+Uzavřená nová otázka po širším vzoru nemá zůstat jako zvláštní projektový ostrov. Pokud průchod skončil opravou, zúžením, přesměrováním nebo zavřením, další práce je převést tento stav do běžného rytmu týmu. Jinak bude otázka dál viset v hlavách lidí jako něco "skoro hotového" a při dalším plánování se znovu otevře bez jasného důvodu.
+
+Převod do běžného rytmu znamená tři malé kroky: výsledek má jedno pracovní místo, jedno místo kontroly a jeden návratový signál. Nic víc. Nezakládáte nový dlouhodobý report, nový meeting ani novou vrstvu dokumentace. Cílem je, aby se závěr použil při normální práci bez toho, že ho někdo musí pokaždé slavnostně připomenout.
+
+Začněte zápisem:
+
+```text
+Uzavřená nová otázka:
+
+Uzavírací stav:
+- oprava / zúžení / přesměrování / zavření
+
+Běžný rytmus, kam výsledek patří:
+
+Pracovní místo, kde se použije:
+
+Kontrola, při které se znovu zahlédne:
+
+Návratový signál:
+
+Co už dál nevedeme jako zvláštní agendu:
+```
+
+Příklad:
+
+```text
+Uzavřená nová otázka:
+Jak má předávací checklist odkazovat na kvalifikační pravidlo bez kopírování starého scoringu.
+
+Uzavírací stav:
+Zúžení otázky a jedna oprava předávacího checklistu.
+
+Běžný rytmus:
+Měsíční review obchodního předání.
+
+Pracovní místo:
+Předávací checklist pro relevantní lead.
+
+Kontrola:
+Při prvním měsíčním review zkontrolujeme jeden reálný předávací průchod.
+
+Návratový signál:
+Dva předávací průchody za sebou znovu použijí starou scoringovou větu nebo obejdou kanonickou kartu.
+
+Co už dál nevedeme:
+Nevedeme zvláštní seznam všech šablon s kvalifikačními formulacemi.
+```
+
+Takový převod je záměrně nudný. Dává závěru místo v provozu, ale nedělá z něj novou disciplínu. Pokud se pravidlo osvědčí, bude žít v běžném rytmu. Pokud se neosvědčí, návratový signál ho znovu vytáhne na světlo. Mezitím není potřeba držet kolem něj speciální pozornost.
+
+### Tři způsoby převodu podle uzavíracího stavu
+
+Každý uzavírací stav potřebuje trochu jiný převod:
+
+- Oprava: přepište jedno pracovní místo a přidejte kontrolu při nejbližším běžném použití.
+- Zúžení: uložte užší otázku jako aktuální stav a starší širší formulaci zavřete.
+- Přesměrování: přesuňte důkaz do rozhodovacího logu a nové pracovní místo otevřete jako samostatnou malou otázku.
+- Zavření: nechte jen důvod zavření a návratový signál, žádnou aktivní kartu.
+
+U opravy je hlavní riziko přidat další dohled. Tým má chuť hlídat, jestli oprava funguje ve všech situacích. To je lákavé, ale často zbytečné. Stačí první běžné použití a pak normální rytmus, například měsíční review.
+
+U zúžení je hlavní riziko ponechat starou širokou otázku otevřenou vedle nové. To vytváří dvojí realitu: lidé pracují podle užší otázky, ale v backlogu pořád straší širší téma. Starou formulaci zavřete nebo označte jako nahrazenou.
+
+U přesměrování je hlavní riziko přenést s sebou starý kontext. Nová otázka má dostat jen důkaz, který ji opravdu podporuje. Nemá zdědit celý příběh původního vzoru, protože by pak byla těžká už při narození. Ano, dokumenty se taky umí narodit unavené.
+
+U zavření je hlavní riziko "ještě si to necháme po ruce". Pokud otázka nemá aktivní důvod, nepotřebuje aktivní kartu. Stačí záznam, proč se zavřela, a signál, který by ji znovu otevřel.
+
+### Co přesunout a co uklidit
+
+Převod do běžného rytmu má mít viditelný úklid. Bez něj se z uzavřené otázky stane další vrstva poznámek, která časem začne konkurovat aktuálnímu pravidlu.
+
+Přesuňte jen:
+
+- jednovětý závěr;
+- aktuální pracovní pravidlo nebo odkaz na něj;
+- návratový signál;
+- vlastníka běžné kontroly.
+
+Ukliďte:
+
+- dočasné porovnávací tabulky;
+- screenshoty starých formulací;
+- výpisky z konkrétních obchodních situací, pokud už nejsou potřeba;
+- duplicitní karty ve starém backlogu;
+- pomocné komentáře, které vysvětlují historii místo současného použití.
+
+Privacy-first pravidlo je jednoduché: běžný rytmus nemá nést víc dat než samotné rozhodnutí potřebuje. Pokud pro další použití stačí věta "používej kanonickou kvalifikační kartu", není důvod nechávat vedle ní ukázky konkrétních leadů, osobní poznámky z hovorů nebo exporty starých průchodů.
+
+### Karta převodu do běžného rytmu
+
+```text
+Uzavřená otázka:
+
+Uzavírací stav:
+
+Jednovětý závěr:
+
+Běžný rytmus:
+
+Pracovní místo:
+
+Co se v pracovním místě mění:
+
+Co zůstává zavřené:
+
+Návratový signál:
+
+Vlastník kontroly:
+
+Nejbližší běžná kontrola:
+
+Co mažeme, slučujeme nebo anonymizujeme:
+
+Jaká data kvůli převodu dál nesbíráme:
+```
+
+Karta má být poslední zvláštní záznam před návratem do normálu. Pokud po jejím vyplnění vzniknou tři další úkoly, něco je špatně: buď otázka nebyla uzavřená, nebo se převod snaží suplovat širší projekt. V takovém případě se vraťte o krok zpět a znovu vyberte uzavírací stav.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte jednovětý závěr uzavřené otázky.
+2. Minuta 2: vyberte běžný rytmus, kam závěr patří.
+3. Minuta 3: určete jedno pracovní místo, kde se závěr použije.
+4. Minuta 4: zapište návratový signál.
+5. Minuta 5: pojmenujte, co už nebude zvláštní agenda.
+6. Minuta 6: zapište privacy-first úklid podkladů.
+
+Když během šesti minut nejde najít běžný rytmus, závěr možná ještě není provozně hotový. Neznamená to automaticky další analýzu. Znamená to najít nejbližší pracovní místo: šablonu, checklist, kartu, review nebo rozhodovací log. Rytmus se má opřít o práci, která už existuje.
+
+### Checklist převodu do běžného rytmu
+
+- Má uzavřená otázka jeden jasný uzavírací stav?
+- Existuje jednovětý závěr oddělený od historie?
+- Víme, do jakého běžného rytmu výsledek patří?
+- Je určené jedno pracovní místo, kde se závěr použije?
+- Nezůstává starší širší otázka otevřená vedle nové podoby?
+- Má téma návratový signál místo trvalého dohledu?
+- Uklidili jsme dočasné podklady, duplicitní karty a staré formulace?
+- Nepřenášíme do běžného rytmu osobní data, exporty nebo poznámky, které už nemají účel?
+- Ví vlastník kontroly, kdy se má výsledek poprvé zahlédnout v normální práci?
+
+Převod do běžného rytmu je hotový ve chvíli, kdy závěr nepotřebuje zvláštní pozornost, aby přežil. Je na správném místě, má jednoduchý návratový signál a nenese s sebou zbytečnou datovou stopu. To je přesně ten druh malého provozního pořádku, který nikdo neoslaví, ale všichni na něm za měsíc vydělají trochu klidu.
+
 ## Pracovní log
 
+- 2026-06-16: Doplněna úvodní podkapitola o převodu uzavřené nové otázky do běžného rytmu: pracovní místo, kontrolní rytmus, návratový signál, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-16: Doplněna úvodní podkapitola o uzavření prvního průchodu nové otázky po širším vzoru: čtyři uzavírací stavy, propsání do kanonického místa, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-16: Doplněna úvodní podkapitola o ověření nové otázky po širším vzoru při prvním reálném průchodu: čtyři výsledky, dostatečný důkaz, privacy-first hranice, karta, mini workshop a checklist.
 - 2026-06-16: Doplněna úvodní podkapitola o otevření nové otázky po širším vzoru: rozlišení od lokální opravy, nejmenší společná oprava, stop podmínka, privacy-first brzda, karta a checklist.
