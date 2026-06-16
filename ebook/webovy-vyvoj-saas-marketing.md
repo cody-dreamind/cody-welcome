@@ -10815,6 +10815,131 @@ Když se tým zasekne v debatě o formulaci, vraťte se k výsledku. Otázka nez
 
 První použití výřezu má chránit tým před tichým hromaděním "užitečných" poznámek. Když výřez funguje, zůstane u pracovního místa. Když potřebuje drobnou úpravu, opraví se jen nejbližší tření. Když nefunguje, vrátí se do historie. Všechny tři výsledky jsou zdravější než nekonečná knihovna textů, které nikdo nechce smazat a málokdo opravdu používá.
 
+## Jak uzavřít použitelný výřez po ověření
+
+Ověřený výřez potřebuje poslední krátké uzavření. Bez něj zůstane viset mezi třemi stavy: trochu dokumentace, trochu pravidlo a trochu stará poznámka. To je nebezpečné hlavně proto, že lidé pak nevědí, jestli ho mají používat, upravit, ignorovat nebo dál hlídat. Uzavření má udělat jednoduchou věc: říct, jaký je další život výřezu.
+
+Začněte výsledkem prvního reálného použití. Neptejte se, jestli je výřez hezky napsaný. Ptejte se, co se stalo při práci. Pomohl člověku udělat správný krok? Byl na správném místě? Nevyžadoval původní historii? Nevytvořil novou pomocnou evidenci? Dodržel datovou hranici? Teprve podle těchto odpovědí rozhodněte, zda výřez stabilizovat, lokálně opravit, vrátit do rozhodovacího záznamu nebo nahradit jinou formou.
+
+Praktická uzavírací věta zní:
+
+```text
+Po prvním použití má výřez tento stav a tento další život:
+```
+
+Pokud větu neumíte dokončit, výřez ještě není uzavřený. Možná chybí vlastník, možná se neví, kde má bydlet, možná ho první použití neprověřilo dost reálně. V takové chvíli nedělejte druhou verzi naslepo. Nejdřív dopište, co přesně brání rozhodnutí.
+
+### Čtyři uzavírací stavy
+
+Stav "stabilizovat" použijte, když výřez splnil účel a nepotřebuje další zvláštní péči. Stabilizace znamená, že výřez zůstává u pracovního místa, má vlastníka a návratový signál. Neznamená to, že se kolem něj vytvoří nový review proces. Když krátké pravidlo pomohlo obchodníkovi odpovědět bez zbytečného sběru dat, stačí ho nechat v obchodní šabloně a vrátit se k němu až ve chvíli, kdy někdo opakovaně narazí na stejnou hranu.
+
+Stav "lokálně opravit" použijte, když pravidlo funguje, ale drhne jedna drobnost: umístění, formulace, chybějící příklad nebo nejasná hranice. Oprava má být menší než výřez. Pokud kvůli ní přepisujete celou kapitolu, pravděpodobně už neuzavíráte výřez, ale otevíráte novou smyčku. Lokální oprava má mít jednu větu: co měníme, proč a kde.
+
+Stav "vrátit do historie" použijte, když výřez při práci nepomohl nebo vyrobil novou datovou stopu. V takovém případě není potřeba ho heroicky zachraňovat. Odstraňte ho z pracovního místa, ponechte poučení v rozhodovacím záznamu a napište, proč se z něj nestává pravidlo. To je čistší než držet v provozu text, který lidé obcházejí.
+
+Stav "nahradit jinou formou" použijte, když poznatek platí, ale výřez není správný nosič. Někdy nemá vzniknout odstavec, ale jedna otázka v checklistu. Jindy nemá vzniknout interní poznámka, ale krátká formulace do zákaznického e-mailu. A někdy je nejlepší formou změna přímo v rozhraní, aby člověk nemusel číst nic bokem.
+
+### Co propsat do stabilního místa
+
+Do stabilního místa nepřenášejte ověřovací kartu celou. Stačí minimum, které pomůže příští práci:
+
+- finální pravidlo nebo doporučení;
+- jeden krátký příklad použití;
+- hranice, co se kvůli tomu nesbírá nebo nedělá;
+- návratový signál;
+- vlastník nebo pracovní role, která výřez drží.
+
+Příklad:
+
+```text
+Pravidlo:
+U poptávek na detailní sledování chování nejdřív navrhujeme menší rozhodovací důkaz z existujících signálů.
+
+Příklad:
+Místo nahrávání návštěvnických session projdeme poslední relevantní poptávky a ověříme, která otázka brání rozhodnutí.
+
+Hranice:
+Nepřidáváme nový tracker ani export osobních dat jen kvůli dojmu, že "by se to mohlo hodit".
+
+Návratový signál:
+Tři po sobě jdoucí relevantní poptávky nejde vyhodnotit bez stejné chybějící informace.
+```
+
+Tohle je použitelné. Neobsahuje celou historii, ale chrání rozhodnutí, příklad i privacy-first hranici.
+
+### Úklid po uzavření
+
+Uzavření výřezu má vždy obsahovat malý úklid. Pokud výřez zůstává v provozu, smažte nebo archivujte dočasné verze. Pokud se přesouvá na jiné místo, odstraňte starý odkaz nebo ho nahraďte směrovkou. Pokud se vrací do historie, sundejte ho z pracovního místa, aby ho další člověk nepovažoval za platné pravidlo.
+
+Typický úklid:
+
+- odstranit dočasný návrh výřezu z poznámek;
+- sloučit dvě podobné formulace do jedné;
+- zrušit pomocnou kopii, která vznikla při ověřování;
+- doplnit do stabilního místa datum posledního uzavření;
+- zapsat návratový signál tam, kde se výřez používá;
+- vymazat konkrétní příklady, které už nemají účel.
+
+Privacy-first poznámka: úklid není administrativní drobnost. Právě tady se rozhoduje, jestli se z užitečného poznatku nestane nová vrstva dat, kopií a polozapomenutých dokumentů. Ověření má skončit menší stopou, ne větší.
+
+### Karta uzavření výřezu
+
+```text
+Název výřezu:
+
+Výsledek prvního použití:
+
+Uzavírací stav:
+- stabilizovat / lokálně opravit / vrátit do historie / nahradit jinou formou
+
+Finální pracovní místo:
+
+Co se propisuje:
+
+Co z ověření nepřenášíme:
+
+Co mažeme nebo archivujeme:
+
+Privacy-first hranice:
+
+Návratový signál:
+
+Vlastník:
+
+Datum další kontroly nebo podmínka návratu:
+```
+
+Karta má být krátká. Její smysl není dokumentovat všechno, co se stalo. Její smysl je zabránit tomu, aby ověřený výřez dál zabíral pozornost jako otevřená práce.
+
+### Mini workshop na 8 minut
+
+1. Minuta 1: přečtěte výsledek prvního použití.
+2. Minuty 2 až 3: vyberte jeden ze čtyř uzavíracích stavů.
+3. Minuta 4: určete finální pracovní místo.
+4. Minuta 5: napište, co se propisuje a co zůstává v historii.
+5. Minuta 6: projděte privacy-first hranici a úklid kopií.
+6. Minuta 7: napište návratový signál.
+7. Minuta 8: určete vlastníka a zavřete ověřovací stopu.
+
+Když se workshop protáhne, pravděpodobně se neřeší uzavření, ale nová otázka. Tu zapište zvlášť. Výřez má po ověření buď dostat stabilní místo, jednu lokální opravu, návrat do historie, nebo jinou formu. Nemá se změnit v další debatu o celém systému.
+
+Codyho komentář: dobrý výřez po uzavření trochu zmizí z pozornosti. Ne proto, že je nedůležitý, ale proto, že začal dělat práci. Nejlepší interní pravidla nejsou ta, kolem kterých tým pořád tančí. Jsou to ta, která člověk potká přesně tam, kde je potřebuje.
+
+### Checklist uzavření výřezu
+
+- Vyšli jsme z prvního reálného použití, ne z dojmu autora?
+- Vybrali jsme jeden uzavírací stav?
+- Je jasné, kde výřez bude dál žít?
+- Přenesli jsme jen pravidlo, příklad, hranici a návratový signál?
+- Nechali jsme ověřovací historii v rozhodovacím záznamu?
+- Smazali nebo archivovali jsme dočasné kopie?
+- Nevzniká nový tracking, export ani seznam používání?
+- Má výřez vlastníka nebo jasnou pracovní roli?
+- Má návratový signál, ne trvalou zvláštní kontrolu?
+- Umí tým říct, co se stane, když výřez přestane pomáhat?
+
+Uzavření výřezu je malý, ale důležitý konec. Změna prošla smyčkou, vznikla použitelná forma, proběhlo první ověření a teď musí přestat být projektem. Když se to podaří, tým získá čistou pracovní pomůcku. Když ne, jen přibude další kus textu, který bude jednou někdo uklízet s povzdechem a kávou v ruce.
+
 ## Pravidla rukopisu
 
 - Pišu česky, prakticky a bez nafukování.
@@ -221772,3 +221897,4 @@ Převod do běžného rytmu je hotový ve chvíli, kdy závěr nepotřebuje zvl�
 - 2026-06-13: Doplněna úvodní podkapitola o převodu uzavřené změny do použitelného výřezu: typy výřezů, co nepřenášet z historie, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-06-16: Doplněna úvodní podkapitola o ověření použitelného výřezu při prvním reálném použití: očekávaný výsledek, čtyři výsledné stavy, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-06-16: Doplněna krátká úvodní poznámka k první větě po návratovém signálu, aby další krok začínal důvodem místo novým seznamem úkolů.
+- 2026-06-16: Doplněna úvodní podkapitola o uzavření použitelného výřezu po ověření: čtyři uzavírací stavy, stabilní pracovní místo, úklid kopií, privacy-first hranice, karta, mini workshop a checklist.
