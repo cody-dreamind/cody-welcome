@@ -219922,8 +219922,144 @@ Když se tým během workshopu začne bavit o dalších podobných místech, zas
 
 Ověření jednoho zásahu má uklidnit systém po návratu. Pokud zásah funguje, nechte ho splynout s běžnou prací. Pokud nefunguje, máte přesnější důvod pro další malý krok. A pokud otevře jiné téma, nechte ho stát ve frontě jako nový podnět. Nejhorší varianta je udělat z každého ověření nový trvalý režim kontroly. To by nebyla disciplína, jen administrativní ozvěna nervozity.
 
+## Uzavření ověřeného zásahu do běžné práce
+
+Když se jeden zásah po návratovém signálu ověří, další práce není automaticky další oprava. Často je to obyčejné uzavření: nechat změnu tam, kde má pomáhat, odstranit dočasnou pozornost a zapsat jen tolik, aby se tým uměl vrátit, pokud se problém opravdu zopakuje.
+
+Uzavření má odpovědět na jednoduchou otázku:
+
+```text
+Co po ověření zůstává v běžné práci a co už má zmizet?
+```
+
+Bez této otázky se z malého zásahu snadno stane stálý režim. Tým přidá jednu větu do šablony, pak ještě připomínku do review, potom pomocnou tabulku, pak kontrolní úkol a najednou se původní drobná oprava tváří jako nový proces. Fungující zásah ale nepotřebuje vlastní doprovodný aparát. Má být součástí běžného pracovního místa.
+
+Příklad:
+
+```text
+Ověřený zásah:
+Do měsíční review šablony jsme přidali otázku, zda dnešní situace odpovídá doslovnému návratovému signálu.
+
+Výsledek ověření:
+Při dalším review otázka pomohla neotevřít staré téma kvůli novému podnětu bez důkazu.
+
+Co zůstává:
+Jedna otázka v měsíční review šabloně.
+
+Co mizí:
+Pomocná karta ověření, dočasný výpis starých rozhodnutí a zvláštní připomínka v týdenní agendě.
+
+Návratový signál:
+Dvě review za sebou znovu zamění nový podnět bez důkazu za návrat starého tématu.
+```
+
+Všimněte si, že uzavření není oslava ani velká retrospektiva. Je to úklid po práci. Zásah splnil účel, takže se přestane hlídat jako novinka. Zůstane jen jeho praktický výsledek a návratový signál pro případ, že by se problém vrátil.
+
+### Tři vrstvy uzavření
+
+Uzavření ověřeného zásahu má tři vrstvy:
+
+- Pracovní vrstva: co přesně zůstává v šabloně, formuláři, textu, procesu nebo dokumentu.
+- Paměťová vrstva: jaká jedna věta v logu stačí pro budoucí orientaci.
+- Datová vrstva: co smažete, zkrátíte, anonymizujete nebo necháte vypršet.
+
+Pracovní vrstva má být aktuální pravda, ne popis historie. Nepište do šablony "po návratovém signálu jsme přidali otázku". Napište rovnou otázku. Lidé, kteří budou šablonu používat za měsíc, nepotřebují znát drama jejího vzniku. Potřebují dobré rozhodovací místo.
+
+Paměťová vrstva má být krátká. Typicky:
+
+```text
+2026-06-16: Po ověření ponechána kontrolní otázka v měsíční review šabloně; pomocné podklady odstraněny, návratový signál zůstává dvě opakovaná špatná rozlišení.
+```
+
+To stačí. Pokud je log delší než samotná změna, pravděpodobně v něm ukládáte úzkost místo informace. Codyho komentář: historie je užitečná, ale nemá sedět na klíně každému, kdo chce jen vyplnit šablonu.
+
+Datová vrstva je místo, kde privacy-first přístup dělá praktickou práci. Po ověření už nepotřebujete pomocné exporty, ruční seznamy konkrétních případů, záznamy diskusí ani identifikovatelné příklady, pokud nejsou nutné pro další rozhodnutí. Zvlášť u webu, SaaS a marketingu platí: jakmile důkaz splnil účel, buď ho zkraťte na anonymizovaný vzor, nebo ho smažte podle retenčního pravidla.
+
+### Čtyři uzavírací stavy
+
+Po ověření zásahu vyberte jeden ze čtyř stavů:
+
+- Uzavřeno do běžné práce: zásah funguje a zůstává jen v kanonickém pracovním místě.
+- Uzavřeno s lokálním dotažením: zásah funguje, ale před uzavřením opravíte jednu drobnou hranu.
+- Neuzavřeno, vrátit se k důvodu: zásah nepomohl a je potřeba znovu přečíst první větu po návratu.
+- Uzavřeno, nový podnět zvlášť: zásah funguje, ale ukázal jiné téma, které nepatří do této karty.
+
+"Uzavřeno do běžné práce" je nejlepší výsledek. Ne proto, že by všechno bylo dokonalé, ale proto, že původní návratový signál už má přiměřenou odpověď. Další kontrola by byla jen péče navíc.
+
+"Uzavřeno s lokálním dotažením" povoluje poslední malý úklid. Například přejmenovat stav, přesunout větu blíž k rozhodnutí nebo odstranit starý odkaz, který po ověření zbytečně mate. Po tomto dotažení ale kartu zavřete. Nedělejte z posledního úklidu novou smyčku.
+
+"Neuzavřeno, vrátit se k důvodu" je poctivý výsledek, když zásah minul problém. Neznamená "zkusíme ještě jednu drobnost". Znamená návrat k první větě po návratovém signálu: byl důvod formulovaný přesně, nebo jsme opravovali vedlejší projev?
+
+"Uzavřeno, nový podnět zvlášť" chrání rozsah. Když ověření ukáže jiné téma, zapište ho jako nový podnět, ale nezvětšujte aktuální kartu. Jeden zásah má právo skončit, i když svět mezitím ukázal další nedokonalost. Svět to dělá rád, potvora jedna.
+
+### Karta uzavření ověřeného zásahu
+
+```text
+Ověřený zásah:
+
+Původní důvod návratu:
+
+Výsledek ověření:
+- funguje
+- funguje s drobným dotažením
+- nepomohl
+- otevřel jinou otázku
+
+Uzavírací stav:
+- uzavřeno do běžné práce
+- uzavřeno s lokálním dotažením
+- neuzavřeno, vrátit se k důvodu
+- uzavřeno, nový podnět zvlášť
+
+Co zůstává v pracovním místě:
+
+Co mizí z dočasných podkladů:
+
+Co se zapíše do logu jednou větou:
+
+Jaká data mažeme, zkracujeme nebo anonymizujeme:
+
+Návratový signál pro příště:
+
+Co výslovně neotevíráme:
+
+Vlastník uzavření:
+
+Datum:
+```
+
+Karta nemá dokazovat, že tým pracoval hodně. Má ukázat, že zásah je buď bezpečně zavřený, nebo přesně víte, proč zavřený není. To je rozdíl mezi praktickou disciplínou a administrativní poezií.
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: přečtěte ověřený zásah a výsledek ověření.
+2. Minuta 2: vyberte jeden uzavírací stav.
+3. Minuta 3: napište, co zůstává v pracovním místě.
+4. Minuta 4: napište, co mizí z dočasných podkladů.
+5. Minuta 5: zkraťte log na jednu větu.
+6. Minuta 6: určete datový úklid a návratový signál.
+7. Minuta 7: potvrďte, co výslovně neotevíráte.
+
+Když se workshop zasekne, pravděpodobně se snažíte současně uzavřít zásah a otevřít nové téma. Rozdělte to. Uzavření patří k ověřenému zásahu. Nové téma patří do fronty podnětů, kde si musí zasloužit vlastní práci.
+
+### Checklist uzavření ověřeného zásahu
+
+- Víme, jak dopadlo ověření jednoho zásahu?
+- Vybrali jsme jeden uzavírací stav?
+- Zůstává změna v jednom kanonickém pracovním místě?
+- Přepsali jsme pracovní místo do aktuálního pravidla, ne do historického vysvětlení?
+- Je log zkrácený na jednu orientační větu?
+- Odstranili jsme dočasnou kartu, export, seznam nebo připomínku, pokud už splnily účel?
+- Zkrátili nebo anonymizovali jsme příklady, které musí zůstat?
+- Máme návratový signál pro případ skutečného opakování?
+- Je jasné, co výslovně neotevíráme?
+- Nevznikl nový trvalý kontrolní režim jen kvůli uzavření?
+
+Dobré uzavření je nudné v tom nejlepším smyslu. Zásah se stal součástí běžné práce, pomocné stopy zmizely a tým má jasný signál, kdy se k tématu vrátit. Pokud po uzavření zůstane víc věcí než před zásahem, zkontrolujte, jestli jste omylem nevytvořili systém pro hlídání systému. Ty bývají velmi pilné a velmi málo užitečné.
+
 ## Pracovní log
 
+- 2026-06-16: Doplněna úvodní podkapitola o uzavření ověřeného zásahu do běžné práce: tři vrstvy uzavření, čtyři uzavírací stavy, privacy-first datový úklid, karta, mini workshop a checklist.
 - 2026-06-16: Doplněna úvodní podkapitola o ověření jednoho zásahu při dalším reálném použití: čtyři výsledky ověření, privacy-first hranice, karta, mini workshop a checklist.
 - 2026-06-16: Doplněna úvodní podkapitola o převodu první věty po návratovém signálu do jednoho zásahu: výběr pracovního místa, čtyři typy zásahu, privacy-first hranice, karta, mini workshop a checklist.
 - 2026-06-16: Doplněna úvodní podkapitola o uzavření druhého běžného použití po falešném poplachu: uzavírací stavy, propsání jedné věty do kanonického místa, privacy-first úklid dočasných podkladů, karta, mini workshop a checklist.
