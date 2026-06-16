@@ -219787,8 +219787,144 @@ Když workshop skončí bez jedné konkrétní změny, nedělejte širší zása
 
 Převod první věty do jednoho zásahu je místo, kde se návratový signál promění v práci. Ne ve velkou práci, ne v preventivní úklid celého systému, ale v přesnou změnu tam, kde se rozhodnutí opravdu láme. Když se zásah povede, další použití bude klidnější. Když ne, budete mít konkrétní důkaz pro další malou smyčku. Obojí je lepší než velký návrat řízený jen nervozitou.
 
+## Ověření jednoho zásahu při dalším reálném použití
+
+Jeden zásah po návratovém signálu není hotový ve chvíli, kdy se zapíše do šablony, pracovního místa nebo pravidla. Hotový je až ve chvíli, kdy projde dalším reálným použitím bez mimořádné péče. Jinak tým neví, jestli změna opravdu pomohla práci, nebo jen vypadala dobře při úpravě textu.
+
+Ověření má být úzké. Nejde o audit celé smyčky, historické porovnání všech podobných rozhodnutí ani měření výkonu lidí. Jde o jednu otázku:
+
+```text
+Pomohl konkrétní zásah v místě, kvůli kterému vznikl?
+```
+
+Pokud byl zásah "zpřesnit otázku před otevřením návratu", ověřujete jen to, jestli otázka při dalším review pomohla rozlišit návratový signál od podnětu. Neověřujete celý review proces, kvalitu všech rozhodnutí ani to, zda by se neměly přepsat další části rukopisu. To by byl nový rozsah.
+
+Příklad:
+
+```text
+Zásah:
+Do měsíční review šablony jsme přidali otázku: odpovídá dnešní situace doslovnému návratovému signálu?
+
+Reálné použití:
+Při dalším review tým řešil podnět k úpravě formuláře.
+
+Ověření:
+Otázka pomohla poznat, že nejde o návrat starého problému, ale o nový podnět bez důkazu.
+
+Rozhodnutí:
+Zásah funguje. Neotevíráme další úpravy šablony. Do logu zůstane jen jedna věta.
+
+Privacy-first výsledek:
+Nevzniká nový seznam podnětů podle lidí, nový dashboard ani záznam hlasování.
+```
+
+Důležité je slovo "pomohla". Zásah nemusí udělat práci za tým. Stačí, když sníží nejasnost v konkrétním místě. Dobrá otázka nezaručí správné rozhodnutí navždy; pomůže v daném průchodu vybrat lepší stav bez zbytečného rozšiřování.
+
+### Čtyři výsledky ověření
+
+Po dalším reálném použití vyberte jeden ze čtyř výsledků:
+
+- Funguje: zásah pomohl a není potřeba další práce.
+- Funguje s drobným dotažením: zásah pomohl, ale jedno slovo, odkaz nebo umístění pořád vytváří malé tření.
+- Nepomohl: zásah neřešil místo, kde problém vznikl.
+- Otevřel jinou otázku: zásah fungoval lokálně, ale ukázal samostatné téma mimo původní rozsah.
+
+"Funguje" znamená, že zásah můžete nechat v běžném pracovním místě a ukončit zvláštní pozornost. Neznamená to, že pravidlo je dokonalé. Znamená to, že pro původní návratový signál stačí.
+
+"Funguje s drobným dotažením" povoluje jen lokální opravu. Typicky přepsat jednu větu, přesunout příklad o odstavec výš nebo změnit název stavu. Pokud se chystáte přidat novou sekci, nový formulář nebo další rozhodovací větev, už nejde o drobné dotažení.
+
+"Nepomohl" je užitečný výsledek. Říká, že první zásah byl vedle. V takové chvíli nevrstvěte další drobnou opravu na stejné místo jen proto, aby původní nápad přežil. Vraťte se k první větě po návratovém signálu a zkontrolujte, jestli dobře popsala důvod návratu.
+
+"Otevřel jinou otázku" je časté u webu, SaaS i marketingu. Třeba úprava otázky ve formuláři pomůže kvalifikaci, ale současně ukáže, že zákazníci nerozumí názvu služby. To není selhání zásahu. Je to nový podnět. Zapište ho mimo aktuální kartu a nechte projít vlastním návratovým signálem nebo prioritizací.
+
+### Co při ověření nesledovat
+
+Ověření jednoho zásahu má nízkou datovou stopu. Pokud kvůli němu vznikne nový tracking, export, tabulka nebo osobní hodnocení, nejspíš jste udělali z malého ověření zbytečný systém.
+
+Nesledujte:
+
+- kdo přesně udělal chybu před zásahem;
+- kolikrát kdo použil novou větu;
+- všechny podobné případy zpětně;
+- osobní skóre dodržování šablony;
+- nové eventy v analytice jen kvůli jedné textové úpravě;
+- nahrávky obrazovky nebo detailní chování uživatelů, pokud stačí výsledek pracovního průchodu.
+
+Sledujte jen výsledek v místě práce. Například: rozhodnutí bylo jasnější, stav byl vybrán bez dodatečného vysvětlování, starý odkaz už nikoho nesvedl, formulářová otázka nevedla k dalšímu ručnímu doptávání, nebo se ukázalo, že zásah mířil vedle.
+
+Privacy-first poznámka: malé zásahy mají velkou výhodu právě v tom, že se dají ověřit z běžné práce. Nepotřebují nové sledovací vrstvy. Pokud je potřebují, buď je zásah moc široký, nebo ověřujete něco jiného než původní důvod návratu.
+
+### Karta ověření jednoho zásahu
+
+```text
+Původní návratový signál:
+
+První věta po návratu:
+
+Provedený zásah:
+
+Pracovní místo:
+
+Další reálné použití:
+
+Co mělo být snazší:
+
+Co se reálně stalo:
+
+Výsledek:
+- funguje
+- funguje s drobným dotažením
+- nepomohl
+- otevřel jinou otázku
+
+Rozhodnutí:
+
+Co teď neměníme:
+
+Jaká data jsme kvůli ověření nesbírali:
+
+Co smažeme nebo zkrátíme:
+
+Návratový signál pro příště:
+
+Vlastník:
+
+Datum zápisu:
+```
+
+Karta má být kratší než samotná změna. Pokud ověření zabere víc energie než zásah, systém se převrátil vzhůru nohama. U malého zásahu stačí jeden reálný průchod a pár vět. Nehledejte jistotu, kterou malá úprava nemá dodat.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte provedený zásah a pracovní místo.
+2. Minuta 2: popište další reálné použití.
+3. Minuta 3: řekněte, co mělo být díky zásahu snazší.
+4. Minuta 4: vyberte jeden ze čtyř výsledků.
+5. Minuta 5: zapište rozhodnutí a co teď neměníte.
+6. Minuta 6: určete, co smažete nebo zkrátíte a jaký signál by téma znovu otevřel.
+
+Když se tým během workshopu začne bavit o dalších podobných místech, zastavte to do jedné poznámky. Ověření jednoho zásahu není mapování celé rodiny problémů. Pokud podobná místa opravdu bolí, objeví se v dalších reálných průchodech a budou mít vlastní důkaz.
+
+### Checklist ověření jednoho zásahu
+
+- Ověřujeme opravdu jeden konkrétní zásah?
+- Proběhlo ověření při reálném použití, ne v umělé debatě?
+- Víme, co mělo být díky zásahu snazší?
+- Vybrali jsme jeden ze čtyř výsledků?
+- Nezaměnili jsme drobné dotažení za novou širší práci?
+- Pokud zásah nepomohl, vracíme se k důvodu návratu místo vrstvení oprav?
+- Novou otázku zapisujeme mimo aktuální kartu?
+- Nevznikl nový tracker, export, dashboard ani osobní dohled?
+- Použili jsme jen běžné pracovní signály?
+- Je zapsané, co teď neměníme?
+- Smažeme nebo zkrátíme pomocné podklady po ověření?
+- Má téma návratový signál pro příště?
+
+Ověření jednoho zásahu má uklidnit systém po návratu. Pokud zásah funguje, nechte ho splynout s běžnou prací. Pokud nefunguje, máte přesnější důvod pro další malý krok. A pokud otevře jiné téma, nechte ho stát ve frontě jako nový podnět. Nejhorší varianta je udělat z každého ověření nový trvalý režim kontroly. To by nebyla disciplína, jen administrativní ozvěna nervozity.
+
 ## Pracovní log
 
+- 2026-06-16: Doplněna úvodní podkapitola o ověření jednoho zásahu při dalším reálném použití: čtyři výsledky ověření, privacy-first hranice, karta, mini workshop a checklist.
 - 2026-06-16: Doplněna úvodní podkapitola o převodu první věty po návratovém signálu do jednoho zásahu: výběr pracovního místa, čtyři typy zásahu, privacy-first hranice, karta, mini workshop a checklist.
 - 2026-06-16: Doplněna úvodní podkapitola o uzavření druhého běžného použití po falešném poplachu: uzavírací stavy, propsání jedné věty do kanonického místa, privacy-first úklid dočasných podkladů, karta, mini workshop a checklist.
 - 2026-06-16: Doplněna úvodní podkapitola o druhém běžném použití po falešném poplachu: přenositelnost bez čerstvého vysvětlení, čtyři výsledné stavy, slabý přenos, privacy-first úklid podkladů, karta, mini workshop a checklist.
