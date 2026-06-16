@@ -220183,8 +220183,169 @@ Když workshop vyvolá chuť přidat další kontrolní bod, nejdřív se zeptej
 
 První běžný průchod po uzavřeném zásahu má ukázat, jestli systém umí žít bez berliček. Když ano, nejlepší další práce je žádná další práce v tomto tématu. Když ne, opravte nejbližší slabé místo. A když se objeví něco nového, dejte tomu vlastní cestu. Jedna uzavřená karta nemá nést celý svět, i když se občas tváří, že by to s trochou kofeinu zvládla.
 
+## Jak otevřít novou otázku po širším vzoru
+
+Širší vzor po uzavřeném zásahu je užitečný jen tehdy, když ho tým nepoplete s dalším kolem stejné opravy. Pokud první nebo druhé běžné použití ukáže, že problém není v jednom místě, ale opakuje se v celé trase, nevytahujte automaticky starou kartu. Otevřete novou otázku. Starý zásah už splnil svou práci: ukázal, kde lokální oprava nestačí.
+
+Začněte větou:
+
+```text
+Původní zásah zůstává:
+
+Širší vzor je:
+
+Nejde už o lokální opravu, protože:
+
+Nová pracovní otázka zní:
+
+Nejbližší místo, kde ji ověříme:
+
+Co kvůli tomu znovu neotevíráme:
+
+Jaká data kvůli tomu nesbíráme:
+```
+
+Tato věta drží hranici mezi dvěma typy práce. Lokální oprava říká: jedno místo neslo starou stopu, opravíme ho. Širší vzor říká: stejný typ tření se objevuje na více místech, takže potřebujeme pochopit společnou příčinu. To není selhání lokální opravy. Je to signál, že oprava byla dost malá na to, aby odhalila skutečný tvar problému.
+
+Příklad:
+
+```text
+Původní zásah zůstává:
+Discovery šablona už správně nevede obchod ke scoringu podle velikosti firmy.
+
+Širší vzor je:
+Různé obchodní a delivery šablony mají jiné zdroje pravdy pro kvalifikaci leadu.
+
+Nejde už o lokální opravu, protože:
+Stará stopa se nevrátila jen v CRM poznámce. Objevila se i v onboardingové šabloně a v předávacím checklistu.
+
+Nová pracovní otázka:
+Které jedno místo má být kanonickým zdrojem pravdy pro kvalifikaci leadu a jak na něj ostatní šablony odkazují?
+
+Nejbližší ověření:
+Projít tři pracovní místa, která tým opravdu použije při nejbližším předání leadu.
+
+Co znovu neotevíráme:
+Neotevíráme automatický lead scoring ani nové formulářové údaje.
+
+Jaká data nesbíráme:
+Nepřidáváme velikost firmy, rozpočet, automatické obohacení profilu ani osobní hodnocení obchodníka.
+```
+
+Všimněte si, že nová otázka nemíří na "sjednocení všeho". To je moc široké a skoro vždycky vyrobí dokument, který bude žít vedle skutečné práce. Otázka míří na jeden zdroj pravdy a tři reálná pracovní místa. To je dost velké na odhalení vzoru a dost malé na dokončení.
+
+### Kdy je vzor opravdu širší
+
+Za širší vzor považujte situaci, kdy platí aspoň dvě z těchto věcí:
+
+- stejná chyba se objevila ve více pracovních místech;
+- lidé používají různé zdroje pravdy pro stejný typ rozhodnutí;
+- lokální oprava jednoho místa by jen přesunula problém jinam;
+- chyba vzniká při předání mezi rolemi, ne uvnitř jedné šablony;
+- k opravě by bylo potřeba vysvětlovat historii opakovaně dalším lidem.
+
+Jedna stará poznámka není širší vzor. Jeden nejasný odkaz také ne. Širší vzor začíná tam, kde problém ukazuje na chybějící pravidlo, slabý zdroj pravdy nebo špatnou předávací trasu. Pokud si nejste jistí, udělejte ještě jednu lokální kontrolu. Ale nastavte stop podmínku: pokud se stejný typ tření objeví podruhé na jiném místě, lokální opravy končí a otevírá se nová otázka.
+
+### Nejmenší společná oprava
+
+Když se vzor potvrdí, neptejte se hned, jak opravit všechna místa. Ptejte se, jaká je nejmenší společná oprava, která sníží opakování. Často to nebude velká revize procesu, ale jedna z těchto věcí:
+
+- určit jeden kanonický zdroj pravdy;
+- přepsat jednu pracovní větu do přítomného času;
+- odstranit duplicitní šablonu, která už nemá vlastní účel;
+- přidat odkaz z pomocných míst na kanonické místo;
+- zkrátit starý rozhodovací záznam, aby nemíchal historii s aktuálním pravidlem;
+- pojmenovat roli, která pravidlo udržuje.
+
+Nejmenší společná oprava má být vidět při dalším běžném použití. Pokud její dopad poznáte až po velkém auditu, je pravděpodobně moc abstraktní. Dobrá oprava se projeví tak, že člověk v konkrétní situaci najde správné pravidlo rychleji, nepoužije starou stopu a nevytvoří nový údaj jen proto, že si není jistý.
+
+### Hranice nové otázky
+
+Nová otázka po širším vzoru potřebuje pevnou hranici, jinak se z ní stane tichý systémový projekt. Zapište tři věci:
+
+```text
+Řešíme:
+
+Neřešíme:
+
+Zastavíme se, až:
+```
+
+Příklad:
+
+```text
+Řešíme:
+Kanonické místo pro pravidlo kvalifikace leadu a odkazy ze tří používaných šablon.
+
+Neřešíme:
+Celý CRM proces, scoring, formulářová pole, automatizaci předání ani revizi všech obchodních dokumentů.
+
+Zastavíme se, až:
+Při dalším běžném předání leadu člověk najde aktuální pravidlo v kanonickém místě a dvě pomocné šablony na něj odkazují bez staré scoringové věty.
+```
+
+Stop podmínka má být pracovní, ne dokumentační. "Máme hotový přehled všech šablon" nestačí. "Při dalším předání člověk použije správné místo bez staré věty" už říká, že změna žije v práci.
+
+### Privacy-first brzda
+
+Širší vzor svádí k širšímu sběru dat. Tým má pocit, že když je problém systémový, potřebuje víc důkazů, víc exportů a víc sledování. Někdy ano, ale výchozí odpověď má být úspornější: nejdřív projít existující pracovní místa a odstranit z nich nejasnost.
+
+Privacy-first brzda zní:
+
+```text
+Než přidáme nové měření, projdeme tři existující pracovní stopy, které už vznikly při běžné práci.
+```
+
+Těmi stopami mohou být šablony, checklisty, rozhodovací záznamy, anonymizované poznámky z předání nebo konfigurace formuláře. Nemusí to být osobní historie lidí ani kompletní export z CRM. Pokud k rozhodnutí stačí zjistit, že tři živé šablony ukazují na různé pravidlo, nepotřebujete sledovat, kdo kterou šablonu otevřel a kolikrát.
+
+Codyho komentář: systémový problém nemusí dostat systémový aparát. Někdy mu stačí jedna poctivá věta na správném místě a dvě smazané věty na špatných místech. Ano, je to méně dramatické. Přesně proto to má šanci přežít pondělí.
+
+### Karta nové otázky po širším vzoru
+
+```text
+Původní uzavřený zásah:
+
+Kde se objevil širší vzor:
+
+Jaký typ tření se opakuje:
+
+Proč nestačí lokální oprava:
+
+Nová pracovní otázka:
+
+Nejmenší společná oprava:
+
+První tři pracovní místa, kde ji ověříme:
+
+Co znovu neotevíráme:
+
+Stop podmínka:
+
+Vlastník:
+
+Návratový signál:
+
+Privacy-first hranice:
+
+Co smažeme, zkrátíme nebo anonymizujeme po ověření:
+```
+
+### Checklist nové otázky
+
+- Je jasné, že původní lokální oprava zůstává uzavřená?
+- Popsali jsme opakující se typ tření, ne jen další jednotlivou chybu?
+- Má nová otázka jedno nejbližší pracovní místo?
+- Vybrali jsme nejmenší společnou opravu místo auditu všeho?
+- Je zapsané, co znovu neotevíráme?
+- Má práce stop podmínku poznatelnou při běžném použití?
+- Nevyžaduje první ověření nový tracker, export ani osobní kontrolu lidí?
+- Víme, které dočasné podklady po ověření smažeme, zkrátíme nebo anonymizujeme?
+
+Širší vzor je dobrý důvod otevřít novou otázku, ale špatný důvod ztratit disciplínu. Když mu dáte vlastní kartu, malý rozsah a privacy-first hranici, může z něj vzniknout lepší pracovní pravidlo. Když ho necháte přirůst ke staré opravě, vznikne jen dlouhá karta, které se časem začne každý trochu bát.
+
 ## Pracovní log
 
+- 2026-06-16: Doplněna úvodní podkapitola o otevření nové otázky po širším vzoru: rozlišení od lokální opravy, nejmenší společná oprava, stop podmínka, privacy-first brzda, karta a checklist.
 - 2026-06-16: Doplněna úvodní podkapitola o prvním běžném průchodu po uzavřeném zásahu: samostatnost bez zvláštní péče, tři signály normálního průchodu, čtyři výsledné stavy, privacy-first datová střídmost, karta, mini workshop a checklist.
 - 2026-06-16: Doplněna úvodní podkapitola o uzavření ověřeného zásahu do běžné práce: tři vrstvy uzavření, čtyři uzavírací stavy, privacy-first datový úklid, karta, mini workshop a checklist.
 - 2026-06-16: Doplněna úvodní podkapitola o ověření jednoho zásahu při dalším reálném použití: čtyři výsledky ověření, privacy-first hranice, karta, mini workshop a checklist.
