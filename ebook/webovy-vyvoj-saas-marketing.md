@@ -1632,6 +1632,136 @@ Datum:
 
 První běžné předání má dát pravidlu klid, ne další pozornost. Když obstojí, nechte ho pracovat. Když neobstojí, opravte přesně místo, kde selhalo. A když ukáže širší vzor, otevřete novou otázku bez toho, aby se stará lokální oprava tvářila jako nekonečný seriál.
 
+## Jak vrátit ověřené pravidlo do běžného revizního rytmu
+
+Ověřené pravidlo má po prvním běžném předání přestat být zvláštní událostí. Pokud dál žije jako "ta oprava, kterou musíme hlídat", tým platí zbytečnou pozornost za problém, který už měl skončit. Návrat do běžného revizního rytmu znamená, že pravidlo má své kanonické místo, běžnou kontrolu a návratový signál. Nemá vlastní miniprojekt, vlastní mimořádný report ani člověka, který ho připomíná jen proto, že se kdysi opravovalo.
+
+Začněte jednoduchou větou:
+
+```text
+Pravidlo prošlo běžným použitím a dál se kontroluje jen v rytmu, ve kterém se kontroluje celé pracovní místo.
+```
+
+Tato věta je důležitější, než vypadá. Ukončuje zvláštní péči. Tým tím říká: pravidlo už není dočasná oprava, ale normální součást práce. Pokud se někdy znovu otevře, nebude to kvůli staré historii, ale kvůli novému signálu.
+
+### Vyberte správný rytmus
+
+Ne každé pravidlo patří do stejné kontroly. Rytmus má odpovídat místu, kde pravidlo žije:
+
+- Denní nebo týdenní rytmus: operační šablony, které se používají často a přímo ovlivňují zákaznickou práci.
+- Měsíční rytmus: obchodní, marketingové nebo supportní postupy, kde se změny projeví přes více průchodů.
+- Kvartální rytmus: strategická pravidla, datové hranice, indexy šablon a standardy, které nemá smysl otevírat po každém drobném tření.
+- Ad hoc návrat: pravidla, která se mají otevřít jen při konkrétním návratovém signálu.
+
+Příklad:
+
+```text
+Pravidlo:
+Při kvalifikaci leadu používáme rozhodovací horizont, problém a očekávaný výsledek.
+
+Kanonické místo:
+Obchodní discovery šablona.
+
+Běžný rytmus:
+Měsíční review obchodních šablon.
+
+Návratový signál:
+U tří relevantních poptávek za sebou obchod nedokáže určit prioritu ani po použití šablony.
+
+Co už neděláme:
+Nevedeme zvláštní kontrolní seznam k bývalému lead scoringu.
+```
+
+Když pravidlo nemá přirozený rytmus, nevytvářejte nový jen kvůli němu. Raději se zeptejte, jestli pracovní místo, kde pravidlo bydlí, vůbec má vlastníka a běžnou údržbu. Chybějící rytmus často neříká "toto pravidlo potřebuje extra kontrolu". Říká "toto pracovní místo ještě není dobře spravované".
+
+### Co se má přesunout a co skončit
+
+Návrat do běžného rytmu má dva pohyby. Něco přesunete do stabilního místa a něco ukončíte.
+
+Přesunout:
+
+- aktuální pracovní větu;
+- návratový signál;
+- vlastníka nebo roli;
+- privacy-first hranici;
+- krátký odkaz na rozhodovací záznam, pokud je potřeba.
+
+Ukončit:
+
+- mimořádnou kontrolu po opravě;
+- dočasnou kartu ověření;
+- pracovní kopie šablon;
+- exporty a screenshoty z ověření;
+- připomínky v chatu, které už neslouží dalšímu rozhodnutí.
+
+Privacy-first poznámka: právě tady se často zapomíná na úklid. Tým pravidlo stabilizuje, ale nechá za sebou staré exporty, screenshoty nebo kopie šablon "pro jistotu". Jenže jistota bez účelu je datový nepořádek v lepším kabátě. Pokud podklad nepomáhá dalšímu rozhodnutí, má se zkrátit, anonymizovat nebo smazat podle domluvené retence.
+
+### Kdy návrat do rytmu ještě nedělat
+
+Pravidlo ještě nevracejte do běžného rytmu, pokud:
+
+- první běžné předání proběhlo jen díky člověku, který znal celou historii;
+- kanonické místo není jasné nebo existují dvě aktivní verze pravidla;
+- privacy-first hranice není vidět tam, kde se reálně pracuje s daty;
+- lokální oprava má vlastníka, ale ještě neproběhlo její ověření;
+- návratový signál je tak obecný, že by otevřel téma při každém pocitu tření.
+
+V takové situaci není problém v tom, že pravidlo potřebuje víc hlídání. Problém je, že ještě není stabilní. Opravte nejdřív zdroj pravdy, formulaci nebo datovou hranici. Teprve potom rušte zvláštní pozornost.
+
+Codyho komentář: "necháme to ještě chvíli pod dohledem" zní zodpovědně, ale často to znamená "nevíme, kam to patří". Dohled není náhrada za domov pravidla. Je to jen dražší způsob, jak odložit úklid.
+
+### Karta návratu do běžného rytmu
+
+```text
+Pravidlo:
+
+Kanonické pracovní místo:
+
+První běžné použití dopadlo:
+- drží / drží s drobným třením / lokální oprava ověřena
+
+Běžný revizní rytmus:
+
+Role nebo vlastník:
+
+Návratový signál:
+
+Co se přesouvá do stabilního místa:
+
+Co ukončujeme:
+
+Co mažeme, zkracujeme nebo anonymizujeme:
+
+Privacy-first hranice:
+
+Datum návratu do běžného rytmu:
+```
+
+### Mini workshop na 10 minut
+
+1. Minuty 1 až 2: přečtěte stabilní pracovní větu a kanonické místo.
+2. Minuty 3 až 4: potvrďte, že první běžné použití nebo lokální oprava drží.
+3. Minuty 5 až 6: vyberte běžný revizní rytmus a vlastníka.
+4. Minuty 7 až 8: zapište návratový signál a privacy-first hranici.
+5. Minuty 9 až 10: ukončete mimořádnou kontrolu a napište, co se uklízí.
+
+Workshop nemá otevřít historii pravidla. Má jen převést ověřenou změnu do běžného provozu. Pokud se během něj objeví nová otázka, zapište ji mimo tuto kartu. Návrat do rytmu má zůstat úzký.
+
+### Checklist návratu do běžného rytmu
+
+- Má pravidlo jedno kanonické pracovní místo?
+- Bylo ověřené při běžném použití, ne jen v dokumentu?
+- Je jasné, jaký běžný revizní rytmus ho dál ponese?
+- Má pravidlo vlastníka nebo roli, ne nejasné "tým"?
+- Je návratový signál konkrétní a rozpoznatelný?
+- Je privacy-first hranice vidět v místě, kde vznikají data?
+- Ukončili jsme mimořádnou kontrolu, která už nemá účel?
+- Uklidili jsme dočasné exporty, screenshoty, kopie nebo komentáře?
+- Nevytvořili jsme nový report jen proto, aby se pravidlo cítilo důležitě?
+- Umí tým říct jednou větou, kdy se pravidlo znovu otevře?
+
+Dobře vrácené pravidlo je skoro neviditelné. Člověk podle něj pracuje, najde ho ve správném místě a neřeší, jakou cestou se tam dostalo. To je cíl stabilizace: ne aby oprava navždy svítila, ale aby běžná práce byla o kousek jasnější a datově čistší.
+
 Praktický filtr na výběr jedné kapitoly:
 
 1. Kdybychom vyřešili jen tuto věc, co se zlepší pro zákazníka?
@@ -221898,3 +222028,4 @@ Převod do běžného rytmu je hotový ve chvíli, kdy závěr nepotřebuje zvl�
 - 2026-06-16: Doplněna úvodní podkapitola o ověření použitelného výřezu při prvním reálném použití: očekávaný výsledek, čtyři výsledné stavy, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-06-16: Doplněna krátká úvodní poznámka k první větě po návratovém signálu, aby další krok začínal důvodem místo novým seznamem úkolů.
 - 2026-06-16: Doplněna úvodní podkapitola o uzavření použitelného výřezu po ověření: čtyři uzavírací stavy, stabilní pracovní místo, úklid kopií, privacy-first hranice, karta, mini workshop a checklist.
+- 2026-06-16: Doplněna úvodní podkapitola o návratu ověřeného předávacího pravidla do běžného revizního rytmu: výběr rytmu, ukončení mimořádné kontroly, privacy-first úklid, karta, mini workshop a checklist.
