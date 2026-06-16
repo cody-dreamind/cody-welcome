@@ -45,6 +45,8 @@ Po zavření průchodu si nechte krátkou závěrečnou stopu: původní otázku
 
 Další průchod otevírejte až ve chvíli, kdy se objeví návratový signál ze závěrečné stopy. Pouhý pocit, že by se "ještě dalo něco zlepšit", patří do poznámek, ne do nové iterace; jinak se z klidného návratu stane trvalá údržba bez jasného důvodu.
 
+Když návratový signál opravdu přijde, první odpovědí nemá být nový seznam úkolů. Nejdřív napište jednu větu, co se změnilo proti poslednímu záznamu, a teprve potom vyberte nejmenší další krok. Tím se návrat opírá o důvod, ne o čerstvý pocit naléhavosti.
+
 ## Rychlé potvrzení návratového signálu
 
 Návratový signál má chránit tým před dvěma opačnými chybami. První chyba je ignorovat skutečný problém jen proto, že už se jednou uzavřel. Druhá chyba je otevřít novou iteraci pokaždé, když někdo zahlédne nedokonalost. Rychlé potvrzení signálu je malý filtr mezi těmito dvěma extrémy.
@@ -220000,3 +220002,4 @@ Uzavřená druhá tichá kontrola má zanechat lehčí systém než předtím. P
 - 2026-06-13: Doplněna krátká úvodní poznámka, aby další průchod rukopisem začínal až z návratového signálu, ne z obecného pocitu dalšího zlepšování.
 - 2026-06-13: Doplněna úvodní podkapitola o převodu uzavřené změny do použitelného výřezu: typy výřezů, co nepřenášet z historie, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-06-16: Doplněna úvodní podkapitola o ověření použitelného výřezu při prvním reálném použití: očekávaný výsledek, čtyři výsledné stavy, privacy-first kontrola, karta, mini workshop a checklist.
+- 2026-06-16: Doplněna krátká úvodní poznámka k první větě po návratovém signálu, aby další krok začínal důvodem místo novým seznamem úkolů.
