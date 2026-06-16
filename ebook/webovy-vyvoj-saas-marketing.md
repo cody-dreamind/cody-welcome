@@ -220472,8 +220472,155 @@ Když se tým během workshopu začne hádat o celou strategii, zastavte ho u pr
 
 První reálný průchod má novou otázku zkrotit. Když pomůže, pokračujte nejmenší společnou opravou. Když nepomůže, zúžte ji, přesměrujte nebo zavřete. Všechny čtyři výsledky jsou lepší než pátý nepojmenovaný stav: "ještě to necháme otevřené a uvidíme". Tam se otázky chodí tvářit jako práce, i když už dávno jen zabírají místo.
 
+## Uzavření prvního průchodu nové otázky po širším vzoru
+
+První průchod nové otázky po širším vzoru nemá skončit pocitem, že "něco víme". Má skončit jedním zapsaným stavem, jednou změnou rozsahu a jedním dalším krokem, nebo vědomým zavřením otázky. Jinak se širší vzor vrátí do stejného nepořádku, ze kterého vznikl: každý ho bude chápat trochu jinak a každé další použití přidá novou interpretaci.
+
+Uzavření začněte větou, která oddělí dnešní důkaz od staré historie:
+
+```text
+První reálný průchod ukázal:
+
+Proto otázku teď:
+- necháváme v původním rozsahu
+- zužujeme
+- přesměrováváme
+- zavíráme
+
+Nejbližší další krok je:
+
+Původní lokální oprava zůstává:
+
+Co už kvůli tomu dál nesledujeme:
+```
+
+Příklad:
+
+```text
+První reálný průchod ukázal:
+Tři pracovní šablony odkazují na stejný problém, ale jen předávací checklist skutečně mate lidi při práci.
+
+Proto otázku teď:
+Zužujeme na předávací checklist a jeho odkaz na kvalifikační pravidlo.
+
+Nejbližší další krok:
+Odstranit z checklistu kopii starého scoringu a nahradit ji jedním odkazem na kanonickou kvalifikační kartu.
+
+Původní lokální oprava zůstává:
+Uzavřená. Neotevíráme znovu jednotlivé textové opravy v discovery šabloně.
+
+Co už dál nesledujeme:
+Nesbíráme zvláštní poznámky ke všem leadům. Stačí ověřit další jedno předání.
+```
+
+Tento zápis je malý, ale dělá důležitou práci. Umožní pokračovat, když průchod něco potvrdil, a zároveň zastaví rozšiřování, když průchod ukázal jen lokální okraj. Širší vzor se tím nestane novou nekonečnou složkou. Dostane jasný stav.
+
+### Čtyři uzavírací stavy
+
+Po prvním průchodu vyberte jeden ze čtyř stavů:
+
+- Pokračovat nejmenší společnou opravou: otázka našla společnou příčinu a další krok je jasný.
+- Zúžit otázku: širší vzor existuje, ale původní formulace je moc široká.
+- Přesměrovat otázku: tření je skutečné, ale příčina leží jinde, než jste čekali.
+- Zavřít otázku: průchod širší vzor nepotvrdil a lokální oprava stačí.
+
+"Pokračovat" znamená udělat jednu opravu, ne zahájit program sjednocování všeho. Typicky stačí přepsat jeden odkaz, odstranit jednu duplicitu, sjednotit jednu větu nebo přesunout jedno pravidlo do kanonického místa. Pokud další krok neumíte říct jednou větou, otázka pravděpodobně ještě není připravená na opravu.
+
+"Zúžit" znamená změnit otázku tak, aby se dala ověřit v jednom pracovním místě. Široká otázka "jak sjednotíme práci s leady" se může změnit na "jak má předávací checklist ukazovat na aktuální kvalifikační pravidlo". Menší formulace není méně ambiciózní. Je jen použitelná.
+
+"Přesměrovat" je poctivý stav, když se ukáže, že jste původní vzor popsali špatně. Třeba jste čekali problém v duplicitních šablonách, ale ve skutečnosti chybí vlastník jednoho rozhodnutí. V takové chvíli nepřepisujte důkaz tak, aby seděl na starou otázku. Otevřete novou otázku s novým pracovním místem, nebo zapište podnět do backlogu.
+
+"Zavřít" je správné, když první průchod ukázal, že širší vzor nebyl dost silný. Zavření neznamená, že tým ignoruje budoucí signály. Znamená jen, že pro dnešek není důvod držet otevřenou novou pracovní větev.
+
+### Co propsat do běžné práce
+
+Uzavření prvního průchodu se má propsat jen tam, kde se výsledek opravdu použije. Nepište dlouhý dodatek do pěti dokumentů. Vyberte jedno kanonické místo a jednu pracovní stopu:
+
+- kanonická karta pravidla, pokud otázka pokračuje opravou;
+- předávací checklist, pokud se zúžil rozsah;
+- rozhodovací log, pokud se otázka přesměrovala;
+- karta uzavření, pokud se otázka zavřela.
+
+Do kanonického místa patří současný stav, ne celý příběh. Historii nechte v rozhodovacím logu nebo ji smažte, pokud už nemá účel. Běžný uživatel šablony nepotřebuje vědět, kolik zatáček vedlo k jedné větě. Potřebuje najít aktuální pravidlo a použít ho bez detektivní práce.
+
+Codyho komentář: pokud musíte u každého pravidla vysvětlovat jeho rodokmen, nemáte pravidlo, ale rodinnou ságu v tabulce. Hezké pro archiváře, špatné pro práci.
+
+### Privacy-first úklid po průchodu
+
+První průchod často vytvoří pomocné poznámky: příklady leadů, screenshoty šablon, výpisky z rozhovorů, seznam starých formulací nebo dočasný export z nástroje. Po uzavření rozhodněte, co z nich opravdu musí zůstat.
+
+Privacy-first úklid má tři kroky:
+
+- ponechat jen rozhodnutí, pracovní místo a návratový signál;
+- zkrátit nebo anonymizovat příklady, které jsou užitečné pro učení;
+- smazat dočasné podklady, které vznikly jen pro ověření.
+
+Nejlepší důkaz po uzavření není tlustá složka. Je to malý, použitelný záznam, který vysvětlí, proč se otázka posunula právě takto. Pokud by někdo musel kvůli budoucímu použití znovu číst osobní komunikaci, export leadů nebo interní poznámky k lidem, uzavření je moc těžké a datově zbytečně hladové.
+
+### Karta uzavření prvního průchodu
+
+```text
+Nová pracovní otázka:
+
+První reálný průchod:
+
+Dnešní důkaz:
+
+Uzavírací stav:
+- pokračovat nejmenší společnou opravou
+- zúžit otázku
+- přesměrovat otázku
+- zavřít otázku
+
+Jednovětý závěr:
+
+Nejbližší další krok nebo důvod zavření:
+
+Kanonické místo, kam se výsledek propíše:
+
+Co zůstává mimo rozsah:
+
+Původní lokální oprava zůstává:
+
+Jaká data po průchodu mažeme, zkracujeme nebo anonymizujeme:
+
+Návratový signál:
+
+Vlastník:
+
+Datum kontroly:
+```
+
+Návratový signál vyplňte i tehdy, když otázku zavíráte. Právě zavřené otázky se rády vracejí v mlhavé podobě: někdo si vzpomene, že "jsme přece řešili širší vzor", ale už neví, co ho má znovu otevřít. Návratový signál chrání tým před tím, aby se každá stará formulace stala novou urgentní prací.
+
+### Mini workshop na 8 minut
+
+1. Minuta 1: přečtěte výsledek prvního reálného průchodu.
+2. Minuty 2 až 3: vyberte jeden ze čtyř uzavíracích stavů.
+3. Minuta 4: napište jednovětý závěr.
+4. Minuta 5: určete kanonické místo, kam se výsledek propíše.
+5. Minuta 6: napište nejbližší další krok, nebo důvod zavření.
+6. Minuta 7: určete privacy-first úklid podkladů.
+7. Minuta 8: zapište návratový signál a vlastníka.
+
+Když se tým v minutě 2 zasekne mezi dvěma stavy, vyberte menší. Zúžení je lepší než pokračování v mlze. Zavření s návratovým signálem je lepší než otevřená karta bez dalšího kroku. Přesměrování je lepší než oprava, která se tváří přesně, ale míří vedle.
+
+### Checklist uzavření prvního průchodu
+
+- Vybrali jsme jeden ze čtyř uzavíracích stavů?
+- Máme jednovětý závěr oddělený od historie problému?
+- Je jasné, jestli pokračujeme opravou, zúžením, přesměrováním nebo zavřením?
+- Propisujeme výsledek jen do jednoho kanonického místa?
+- Zůstává původní lokální oprava uzavřená?
+- Nechali jsme mimo rozsah části, které první průchod nepotřebuje?
+- Smazali, zkrátili nebo anonymizovali jsme dočasné podklady?
+- Má uzavření návratový signál, vlastníka a datum kontroly?
+
+Dobré uzavření poznáte podle toho, že další člověk nemusí vědět, jak byla otázka objevena, aby dokázal použít její výsledek. Vidí aktuální stav, další krok nebo důvod zavření a hranici, kdy se má téma vrátit. To stačí. Zbytek historie může klidně spát, nejlépe bez zbytečných osobních dat pod polštářem.
+
 ## Pracovní log
 
+- 2026-06-16: Doplněna úvodní podkapitola o uzavření prvního průchodu nové otázky po širším vzoru: čtyři uzavírací stavy, propsání do kanonického místa, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-16: Doplněna úvodní podkapitola o ověření nové otázky po širším vzoru při prvním reálném průchodu: čtyři výsledky, dostatečný důkaz, privacy-first hranice, karta, mini workshop a checklist.
 - 2026-06-16: Doplněna úvodní podkapitola o otevření nové otázky po širším vzoru: rozlišení od lokální opravy, nejmenší společná oprava, stop podmínka, privacy-first brzda, karta a checklist.
 - 2026-06-16: Doplněna úvodní podkapitola o prvním běžném průchodu po uzavřeném zásahu: samostatnost bez zvláštní péče, tři signály normálního průchodu, čtyři výsledné stavy, privacy-first datová střídmost, karta, mini workshop a checklist.
