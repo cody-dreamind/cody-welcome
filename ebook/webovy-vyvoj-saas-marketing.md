@@ -218591,8 +218591,137 @@ Pokud se tým zasekne mezi lokální opravou a novou smyčkou, vraťte se k defi
 
 Uzavření první tiché kontroly je malá, ale důležitá brzda proti procesnímu bobtnání. Tým si potvrdí, že pravidlo funguje, opraví nejbližší tření a uklidí po sobě. Když se opravdu objeví návratový signál, otevře ho vědomě. Když se neobjeví, nechá systém pracovat. To je přesně ten druh provozní dospělosti, který není efektní na slidech, ale drží SaaS, web i marketing v použitelném stavu.
 
+## Druhá tichá kontrola po převodu do běžného provozu
+
+Druhá tichá kontrola má jiný smysl než první. První kontrola často ještě nese čerstvou paměť změny: lidé vědí, co se nedávno řešilo, kde se opravovala šablona a proč se uklízely staré kopie. Druhá kontrola má ověřit, jestli pravidlo obstojí i ve chvíli, kdy se o něm nemluví. To je skutečný test běžného provozu.
+
+Dobrá otázka pro druhou kontrolu zní:
+
+```text
+Umí pravidlo fungovat bez čerstvého vysvětlení a bez člověka, který si pamatuje původní opravu?
+```
+
+Pokud ano, pravidlo se může dál nechat v klidu. Pokud ne, většinou nejde o návrat starého problému, ale o slabou přenositelnost: pravidlo je možná správné, jen je příliš navázané na lidi, kteří byli u jeho vzniku. V praxi to bývá chybějící příklad, nejasný název, špatný odkaz, nebo pracovní místo, které dává smysl autorovi, ale ne novému člověku.
+
+Příklad:
+
+```text
+Pravidlo:
+U relevantní poptávky se v sales šabloně ověřuje rozhodovací role.
+
+Druhá tichá kontrola:
+Nový člověk v týmu odpovídá na dvě poptávky bez účasti původního autora šablony.
+
+Pozorování:
+Otázku na rozhodovací roli použil správně. U jedné poptávky si ale nebyl jistý, jestli má ptát přímo klienta, nebo nejdřív interního kontaktu.
+
+Rozhodnutí:
+Doplníme do šablony jednu větu: "Pokud je poptávka zprostředkovaná, nejdřív ověř rozhodovací roli u člověka, který poptávku poslal." Neotevíráme lead scoring ani nový obchodní proces.
+```
+
+Tady se ukázala mezera na hraně pravidla, ne zhroucení pravidla. Druhá tichá kontrola má přesně takové mezery najít a zavřít nejmenší možnou úpravou.
+
+### Co ověřuje druhá kontrola
+
+Druhá kontrola se nedívá na to, jestli bylo původní rozhodnutí chytré. To už mělo projít dřív. Ověřuje čtyři praktičtější věci:
+
+- Přenositelnost: pravidlo použije i člověk, který nebyl u jeho zavedení.
+- Samostatnost: k použití není potřeba mimořádné vysvětlení, starý chat ani ústní legenda.
+- Stabilní místo: pravidlo je pořád tam, kde ho lidé v běžné práci hledají.
+- Úzká údržba: případná oprava se dá udělat v jednom pracovním místě bez návratu k celé historii.
+
+Když projdou všechny čtyři body, kontrolu zavřete bez další péče. Když selže jen jeden bod, opravte ho lokálně. Když selže víc bodů najednou, nejdřív určete, jestli je problém v pravidle, nebo v jeho umístění. To jsou dvě různé věci a míchají se překvapivě rády.
+
+### Čtyři výsledné stavy
+
+Po druhé tiché kontrole vyberte jeden stav:
+
+- Samostatně přenositelné: pravidlo funguje i bez čerstvé paměti týmu.
+- Potřebuje hranový příklad: pravidlo je správné, ale jedna situace si říká o krátký příklad.
+- Potřebuje přesun: pravidlo je použitelné, ale bydlí na místě, kde ho lidé nehledají.
+- Spustil se návratový signál: opakuje se přesně ta situace, kvůli které byl návratový signál zapsaný.
+
+Nejčastější dobrý výsledek není "dokonalé bez změny". U živých webů, SaaS produktů a marketingových procesů je běžné, že druhé použití odhalí jednu hranu. Důležité je, aby hrana nezpůsobila reflex "přepišme celý systém". Dobrý tým doplní příklad, opraví odkaz nebo přesune větu do správné šablony a jde dál.
+
+Codyho komentář: druhá tichá kontrola je jako zkusit dát návod člověku, který neseděl na všech poradách. Pokud návod funguje jen s komentářem autora, není to návod. Je to suvenýr z porady.
+
+### Privacy-first druhá kontrola
+
+Druhá kontrola nesmí sklouznout k osobnímu hodnocení lidí. Neověřujete, jestli konkrétní člověk "dával pozor". Ověřujete, jestli systém umí člověka vést bez přebytečných dat a bez tajné historie.
+
+Privacy-first hranice:
+
+- Nesbírejte osobní skóre používání pravidla.
+- Nepořizujte záznamy obrazovky jen kvůli kontrole pracovního postupu.
+- Nekopírujte celé zákaznické poptávky do učebních příkladů, pokud stačí anonymizovaná věta.
+- Nepřidávejte nový analytický event, pokud rozhodnutí vyřeší kontrola jedné šablony nebo jednoho průchodu.
+- Po kontrole ponechte výsledek, ne detailní stopu každého zaváhání.
+
+Prakticky to znamená: vezměte jeden běžný průchod, anonymizujte citlivé detaily, napište výsledek a lokálně opravte pracovní místo. Pokud se nic neprokázalo, zapište "bez změny" a téma nechte být. Soukromí se často chrání tím, že se dobrá kontrola včas zastaví.
+
+### Karta druhé tiché kontroly
+
+```text
+Kontrolované pravidlo:
+
+Běžná situace, ve které se použilo:
+
+Použil ho někdo bez čerstvého vysvětlení?
+- ano / ne / částečně
+
+Výsledek:
+- samostatně přenositelné
+- hranový příklad
+- přesun pravidla
+- návratový signál
+
+Nejmenší oprava, pokud je potřeba:
+
+Kde se oprava propíše:
+
+Co výslovně neotevíráme:
+
+Jaká data kvůli kontrole nesbíráme:
+
+Návratový signál:
+- beze změny
+- zpřesněn
+- spuštěn
+
+Kdo uzavírá kontrolu:
+```
+
+Karta je záměrně krátká. Druhá tichá kontrola má potvrdit přenositelnost, ne vyrábět auditní složku. Pokud se kvůli ní objeví pět nových dokumentů, kontrola sama potřebuje kontrolu. Ano, procesní ironie má někdy dost dobrý smysl pro humor.
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: otevřete kanonické pracovní místo a zakryjte starou historii.
+2. Minuta 2: vyberte jeden běžný průchod, ideálně od člověka bez čerstvého kontextu.
+3. Minuty 3 až 4: ověřte přenositelnost, samostatnost, místo a rozsah opravy.
+4. Minuta 5: vyberte jeden ze čtyř výsledných stavů.
+5. Minuta 6: pokud je potřeba, napište jednu lokální úpravu.
+6. Minuta 7: zapište privacy-first hranici a co se výslovně neotevírá.
+
+Když není k dispozici člověk bez čerstvého kontextu, použijte alespoň chladný průchod: otevřete pravidlo po delší pauze a nepomáhejte si starými poznámkami. Není to tak silný důkaz jako reálné použití novým člověkem, ale pořád je to lepší než další kolektivní vzpomínání na to, co jsme tím tehdy mysleli.
+
+### Checklist druhé tiché kontroly
+
+- Proběhla kontrola v běžné práci, ne jako nový projekt?
+- Ověřili jsme použití bez čerstvého vysvětlení?
+- Je pravidlo přenositelné pro člověka mimo původní změnu?
+- Zůstává v kanonickém pracovním místě?
+- Rozlišili jsme slabý příklad od návratu původního problému?
+- Pokud je potřeba oprava, vejde se do jednoho místa?
+- Neotevřeli jsme starý archiv jen kvůli lokální hraně?
+- Nehodnotili jsme člověka místo systému?
+- Nevzniklo nové osobní měření, nahrávání ani zbytečný export?
+- Zůstává po kontrole jasný návratový signál?
+
+Druhá tichá kontrola je dobrý konec mimořádné pozornosti. Když pravidlo projde bez čerstvé paměti, tým ho může nechat žít v běžném rytmu. Když narazí na hranu, opraví hranu. Když se spustí návratový signál, otevře novou smyčku. Všechno ostatní je jen touha mít jistotu navíc, a ta bývá v provozu drahá, upovídaná a datově nenasytná.
+
 ## Pracovní log
 
+- 2026-06-16: Doplněna úvodní podkapitola o druhé tiché kontrole po převodu do běžného provozu: přenositelnost bez čerstvého vysvětlení, čtyři výsledné stavy, lokální hrany pravidla, privacy-first hranice, karta, mini workshop a checklist.
 - 2026-06-16: Doplněna úvodní podkapitola o uzavření první tiché kontroly po převodu do běžného provozu: čtyři uzavírací stavy, propsání do živého systému, úklid dočasných stop, privacy-first výsledná stopa, karta, mini workshop a checklist.
 - 2026-06-16: Doplněna úvodní podkapitola o první tiché kontrole po převodu do běžného provozu: běžný rytmus kontroly, čtyři výsledné stavy, rozlišení navigační opravy od návratového signálu, privacy-first datová hranice, karta, mini workshop a checklist.
 - 2026-06-15: Doplněna úvodní podkapitola o převodu uzavřeného návratu do tichého provozu: kanonické pracovní místo, návratový signál, odstranění dočasné péče, privacy-first úklid, karta, mini workshop a checklist.
