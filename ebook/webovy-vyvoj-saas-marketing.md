@@ -219322,8 +219322,170 @@ Pokud se během workshopu objeví návrh "pojďme rovnou zkontrolovat i podobné
 
 Uzavření prvního běžného použití po falešném poplachu má být tiché a rozhodné. Když trasa funguje, nechte ji fungovat. Když zůstala jedna stará stopa, ukliďte ji. Když se objevil skutečný signál, otevřete novou smyčku. Hlavně nenechte falešný poplach, aby si po sobě nenápadně nechal vlastní malý proces.
 
+## Druhé běžné použití po falešném poplachu
+
+Druhé běžné použití po falešném poplachu už nemá dokazovat minulost. Má ověřit, že se tým opravdu vrátil do normálního rytmu. První použití uklidnilo bezprostřední obavu. Druhé použití ukazuje, jestli se pravidlo přeneslo i do další situace bez čerstvého vysvětlování, opatrného dohledu a skrytého "raději se na to ještě podívejme".
+
+Neplánujte kvůli tomu samostatný audit. Počkejte na další přirozený průchod stejné trasy. Může to být další měsíční review, další poptávka, další publikace článku, další kontrola onboardingové šablony nebo další předání úkolu novému člověku. Podstatné je, aby situace vznikla běžnou prací. Jakmile z ní uděláte mimořádnou kontrolu, zase prodlužujete život poplachu.
+
+Otázka pro druhé použití je jednoduchá:
+
+```text
+Proběhla stejná trasa podruhé bez toho, aby potřebovala zvláštní vysvětlení kvůli starému poplachu?
+```
+
+Pokud ano, téma může odejít do tichého provozu. To znamená: žádná zvláštní karta, žádné další připomínání, žádný nový dashboard, žádné sledování lidí, kteří trasu používají. Zůstane jen kanonické pracovní místo, případný návratový signál a krátký log, že druhý běžný průchod proběhl bez návratu problému.
+
+Příklad:
+
+```text
+Původní poplach:
+Zdálo se, že slabé podněty z měsíčního review končí v aktivní práci.
+
+První běžné použití:
+Aktuální šablona správně vedla slabý podnět do stavu "neotevírat".
+
+Druhé běžné použití:
+Jiný vlastník použil stejnou šablonu při dalším review bez připomenutí starého poplachu.
+
+Co se stalo:
+Podnět byl vyhodnocen podle aktuální šablony, starý odkaz se neobjevil a nevznikl nový úkol.
+
+Rozhodnutí:
+Téma přechází do tichého provozu. Další zvláštní ověření nevzniká.
+```
+
+Všimněte si drobnosti: druhé použití má ideálně proběhnout bez stejného člověka, který řešil poplach. Pokud pravidlo funguje jen tehdy, když u toho stojí původní opravář a v hlavě drží celou historii, není to ještě běžný provoz. Je to osobní paměť maskovaná jako proces.
+
+### Čtyři výsledky druhého použití
+
+Po druhém běžném použití vyberte jeden ze čtyř stavů:
+
+- Tichý provoz: trasa fungovala podruhé a starý poplach už nepotřebuje pozornost.
+- Poslední lokální dočištění: trasa funguje, ale zůstala jedna drobná stopa v okolí.
+- Slabý přenos: trasa funguje s původním vlastníkem, ale další člověk potřeboval staré vysvětlení.
+- Nový signál: problém se objevil v aktuální kanonické trase a odpovídá návratovému signálu.
+
+Stav "tichý provoz" je cíl. Znamená, že už neexistuje zvláštní pracovní režim pro daný poplach. Pokud se téma někdy vrátí, musí přijít přes nový signál, ne přes starou nervozitu.
+
+"Poslední lokální dočištění" smí být opravdu poslední a lokální. Opravte jeden popisek, jeden odkaz, jednu archivní značku nebo jednu poznámku. Pokud dočištění vyžaduje projít celý systém, není to dočištění po poplachu. Je to nová otázka kvality informační architektury a zaslouží si vlastní průchod.
+
+"Slabý přenos" je zajímavější. Ukazuje, že pravidlo možná není zapsané dost jasně pro člověka, který u poplachu nebyl. Neznamená to automaticky, že se poplach vrátil. Znamená to, že kanonické místo neumí samo nést rozhodnutí. V takovém případě opravte nejmenší vysvětlující hranu: název šablony, první větu, stavovou volbu nebo odkaz na správné místo.
+
+"Nový signál" použijte jen tehdy, když problém vznikl v aktuální trase a přesně odpovídá návratové podmínce. Pokud jen někdo použil staré slovo, ale pracovní důkaz chybí, nejde o nový signál. Jde o šum nebo slabý přenos.
+
+### Jak poznat slabý přenos
+
+Slabý přenos poznáte podle toho, že člověk udělá práci správně až po dodatečném vysvětlení, které není v kanonickém místě. Typické věty:
+
+- "Aha, já myslel, že po tom poplachu to máme raději vždycky otevřít."
+- "Nevěděl jsem, která šablona je ta aktuální."
+- "V logu jsem viděl starý závěr, ale nebylo jasné, jestli pořád platí."
+- "Použil jsem správný postup, protože mi ho někdo připomněl, ne protože byl zřejmý."
+
+Tohle není důvod zakládat školení. Je to důvod opravit místo, kde se má rozhodnutí samo vysvětlit. Přidejte jednu větu do aktuální šablony, označte starý odkaz jako archiv, přesuňte návratový signál blíž k místu použití nebo zkraťte log tak, aby nepůsobil jako paralelní návod.
+
+Dobrá oprava slabého přenosu:
+
+```text
+Do aktuální šablony měsíčního review doplňujeme první větu:
+"Slabý podnět bez shody se zapsaným návratovým signálem končí stavem neotevírat."
+```
+
+Slabá oprava:
+
+```text
+Připomeneme týmu, aby si dával pozor na podobné situace.
+```
+
+Druhá věta nevytváří lepší pracovní místo. Jen přesouvá odpovědnost do paměti lidí. To je drahé, křehké a u privacy-first provozu často vede k tomu, že se pro jistotu začne sbírat víc důkazů, než je potřeba.
+
+### Privacy-first hranice druhého použití
+
+Druhé použití je poslední dobrá příležitost zmenšit stopu po falešném poplachu. Pokud trasa funguje, smažte nebo zkraťte všechno, co bylo potřeba jen pro ověření:
+
+- pracovní screenshoty staré šablony;
+- dočasné exporty;
+- kopie zákaznických nebo interních příkladů;
+- komentáře v chatu, které už nenesou rozhodnutí;
+- osobní poznámky o tom, kdo se při poplachu spletl;
+- provizorní tabulky k porovnání staré a aktuální trasy.
+
+Kanonicky má zůstat jen minimum: rozhodovací věta, aktuální pracovní místo, případný návratový signál a stručný log. Všechno ostatní je po druhém normálním průchodu spíš datový prach než hodnota.
+
+Zápis může být krátký:
+
+```text
+Druhé běžné použití proběhlo bez návratu poplachu. Téma přechází do tichého provozu. Mažeme dočasné porovnání staré šablony, dál nesbíráme žádné použití po osobách.
+```
+
+Takový závěr je praktický a evropsky střízlivý: práce je hotová, data jsou uklizená, lidé nejsou zbytečně sledovaní a systém se nesnaží vypadat chytřejší tím, že si nechává všechno navždy.
+
+Codyho komentář: když po druhém normálním průchodu pořád chcete držet zvláštní hlídání, zeptejte se, co by vás vlastně uklidnilo. Pokud odpověď zní "ještě pár průchodů", nejspíš už neměříte riziko, ale nepohodlí. To patří do rozhodnutí, ne do další tabulky.
+
+### Karta druhého použití po falešném poplachu
+
+```text
+Původní falešný poplach:
+
+Uzavření prvního použití říkalo:
+
+Druhá běžná situace:
+
+Použil trasu někdo bez čerstvého vysvětlení?
+- ano / ne
+
+Co se stalo:
+
+Výsledek:
+- tichý provoz
+- poslední lokální dočištění
+- slabý přenos
+- nový signál
+
+Jedna změna v pracovním místě, pokud je potřeba:
+
+Co už samostatně nehlídáme:
+
+Jaké dočasné podklady mažeme nebo zkracujeme:
+
+Jaká data dál nesbíráme:
+
+Kdy se téma znovu otevře:
+```
+
+Karta nemá být povinná pro každé drobné použití. Použijte ji, když se poplach nedávno řešil, když se trasa předává dalšímu člověku nebo když hrozí, že se staré obavy vrátí do plánování. U čistého výsledku stačí krátký zápis v logu.
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: pojmenujte druhou běžnou situaci.
+2. Minuta 2: ověřte, jestli proběhla bez čerstvého vysvětlení starého poplachu.
+3. Minuta 3: vyberte jeden ze čtyř výsledků.
+4. Minuta 4: pokud jde o slabý přenos, najděte jedno kanonické místo k opravě.
+5. Minuta 5: napište, co už samostatně nehlídáte.
+6. Minuta 6: smažte nebo zkraťte dočasné podklady.
+7. Minuta 7: potvrďte návratový signál nebo převeďte téma do tichého provozu.
+
+Pokud workshop otevře nové téma, nezpracovávejte ho uvnitř druhého použití. Zapište ho jako nový podnět s vlastní otázkou. Druhé použití má uzavřít návrat do normálu, ne být bránou pro další přilepené opravy.
+
+### Checklist druhého použití po falešném poplachu
+
+- Proběhlo druhé použití v běžné práci?
+- Nepotřebovalo zvláštní vysvětlení kvůli starému poplachu?
+- Víme, jestli jde o tichý provoz, poslední lokální dočištění, slabý přenos, nebo nový signál?
+- Pokud opravujeme slabý přenos, měníme jedno kanonické pracovní místo, ne paměť lidí?
+- Nevznikl nový audit podobných tras bez vlastního důkazu?
+- Je jasné, co už samostatně nehlídáme?
+- Smazali nebo zkrátili jsme dočasné podklady po ověření?
+- Nesbíráme nové osobní údaje, použití po lidech ani preventivní důkazy?
+- Má návratový signál jasnou podobu pro případ, že se téma opravdu vrátí?
+- Umí tým říct, že falešný poplach je po druhém použití mimo aktivní práci?
+
+Druhé běžné použití po falešném poplachu je hranice mezi uklidněním a zbytečnou opatrností. Když trasa funguje i podruhé, pusťte ji z ruky. Uložte minimum, ukliďte podklady a nechte práci pokračovat bez dalšího stínu staré chyby. Pokud se objeví nový signál, otevřete ho čistě. Pokud ne, dobrý provoz se pozná i podle toho, že umí přestat kontrolovat.
+
 ## Pracovní log
 
+- 2026-06-16: Doplněna úvodní podkapitola o druhém běžném použití po falešném poplachu: přenositelnost bez čerstvého vysvětlení, čtyři výsledné stavy, slabý přenos, privacy-first úklid podkladů, karta, mini workshop a checklist.
 - 2026-06-16: Doplněna úvodní podkapitola o uzavření prvního běžného použití po falešném poplachu: čtyři uzavírací stavy, lokální úklid, ukončení zvláštního hlídání, privacy-first mazání podkladů, karta, mini workshop a checklist.
 - 2026-06-16: Doplněna úvodní podkapitola o prvním běžném použití po falešném poplachu: běžná trasa bez mimořádné kontroly, tři výsledné stavy, privacy-first úklid, karta a checklist.
 - 2026-06-16: Doplněna úvodní podkapitola o minimálním zápisu po falešném poplachu: tři věty rozhodnutí, jedna úklidová akce, privacy-first mazání podkladů a checklist.
