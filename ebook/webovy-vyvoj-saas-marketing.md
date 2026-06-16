@@ -218431,8 +218431,169 @@ Když tým během workshopu začne řešit starou historii, vraťte ho k aktuál
 
 První tichá kontrola je úspěšná hlavně tehdy, když po ní zůstane klid. Pravidlo je na místě, lidé ho umí použít a stará historie zůstává zavřená. Pokud se ukáže drobné tření, opraví se tam, kde člověk opravdu pracuje. Pokud se ukáže návratový signál, otevře se nová smyčka vědomě, ne ze zvyku.
 
+## Uzavření první tiché kontroly po převodu do běžného provozu
+
+První tichá kontrola nemá skončit větou "někdo se na to podíval". To je jen kontrolní pohyb, ne uzavření. Uzavření znamená, že tým ví, co se po kontrole mění, co se výslovně nemění a jestli pravidlo zůstává v běžném provozu bez zvláštní péče.
+
+Dobrá uzavírací otázka zní:
+
+```text
+Jaký je nejmenší trvalý výsledek této kontroly?
+```
+
+Nejmenší trvalý výsledek může být překvapivě nudný. Třeba "bez změny". Nebo jedna upravená věta v šabloně. Nebo smazaná stará kopie v interním chatu. Nebo potvrzený návratový signál, který se už řeší jako nová smyčka. Důležité je, aby po uzavření nezůstal plovoucí pocit, že "by se k tomu někdy mělo vrátit". To je přesně typ neviditelného dluhu, který později sežere půl porady a ještě se tváří jako odpovědnost.
+
+Příklad:
+
+```text
+Kontrola:
+Nová sales šablona s otázkou na rozhodovací roli.
+
+Zjištění:
+Šablona funguje. Jedna stará kopie v chatu vedla k přeskočení otázky.
+
+Uzavření:
+Mažeme starou kopii, do kanonické šablony doplňujeme jeden příklad věty a kontrolu zavíráme jako navigační opravu.
+
+Co neotevíráme:
+Neobnovujeme starý lead scoring.
+Nepřidáváme měření každého použití šablony.
+Neděláme školení pro celý tým.
+
+Návratový signál:
+Zůstává stejný: tři relevantní poptávky za sebou nepůjdou kvalifikovat bez ručního vysvětlení rozhodovací role mimo sales šablonu.
+```
+
+Tohle je zdravé uzavření. Vyřeší reálné tření, ale nepředstírá, že každé tření je systémový incident. Zachová návratový signál, ale nedovolí mu stát se záminkou pro permanentní dohled.
+
+### Čtyři uzavírací stavy
+
+Po první tiché kontrole zvolte jeden uzavírací stav:
+
+- Zavřeno bez změny: pravidlo funguje v běžné práci a není potřeba žádný zásah.
+- Zavřeno po lokální opravě: problém byl v cestě, kopii, příkladu nebo drobné formulaci.
+- Ponecháno v tichém sledování: existuje malé tření, ale zatím nenaplňuje návratový signál.
+- Převedeno do nové smyčky: návratový signál se opravdu spustil a téma potřebuje samostatné řešení.
+
+Stav "ponecháno v tichém sledování" používejte opatrně. Není to parkoviště pro nerozhodnost. Musí mít jasnou podmínku, kdy se buď zavře, nebo převede do nové smyčky. Pokud podmínku neumíte napsat jednou větou, pravděpodobně jen odkládáte rozhodnutí.
+
+Praktická hranice:
+
+```text
+Tiché sledování:
+Při příštím běžném review ověříme, jestli se stará kopie šablony znovu objevila v aktivním použití.
+
+Není tiché sledování:
+Budeme průběžně sledovat, jestli s tím nejsou problémy.
+```
+
+První věta má pracovní místo, událost a konec. Druhá věta má mlhu, která se bude v kalendáři tvářit jako proces.
+
+### Co propsat do živého systému
+
+Uzavření má zanechat stopu tam, kde lidé pracují. Ne v samostatném dokumentu, který nikdo neotevře, pokud zrovna nemá chuť na archeologii.
+
+Podle výsledku propsat jen to nejbližší:
+
+- Bez změny: krátký zápis do rozhodovacího logu nebo changelogu pravidla.
+- Lokální oprava: upravit kanonickou šablonu, checklist, text formuláře, onboardingovou poznámku nebo odkaz.
+- Tiché sledování: přidat jednu kontrolní větu do nejbližšího běžného review.
+- Nová smyčka: založit nové pracovní rozhodnutí s dnešním důkazem, ne s celým historickým archivem.
+
+Nedělejte z uzavření novou dokumentační vrstvu. Když se kvůli kontrole šablony narodí kontrolní tabulka kontrolních tabulek, proces sice vypadá dospěle, ale jen proto, že si vzal sako o tři čísla větší.
+
+Codyho komentář: dobré uzavření poznáte podle toho, že se po něm člověk vrátí k práci, ne k vysvětlování uzavření. Pokud musíte půl hodiny popisovat, co vlastně znamená "zavřeno", není to zavřeno.
+
+### Úklid po tiché kontrole
+
+Po uzavření projděte tři malé úklidy:
+
+- Dočasné poznámky: smažte nebo zkraťte pracovní poznámky, které už splnily účel.
+- Staré cesty: odstraňte odkazy na kopie, které vedly mimo kanonické místo.
+- Přechodné důkazy: ponechte jen shrnutý výsledek, pokud detailní podklad není dál nutný.
+
+Úklid je součást uzavření, ne bonus pro chvíli, kdy bude jednou klid. Klid nepřijde, když si každá kontrola nechá na stole vlastní hromádku "pro jistotu". U privacy-first provozu to platí dvojnásob: zbytečné podklady nejsou jen nepořádek, ale i zbytečná datová stopa.
+
+### Privacy-first uzavření
+
+Privacy-first uzavření má jednoduché pravidlo: výsledku má zůstat dost, detailů co nejméně.
+
+Dobrá výsledná stopa:
+
+```text
+2026-06-16: První tichá kontrola sales šablony. Výsledek: lokální navigační oprava. Smazána stará kopie v chatu, doplněn příklad do kanonické šablony. Návratový signál beze změny.
+```
+
+Slabá výsledná stopa:
+
+```text
+Export všech použití šablony, jména lidí, screenshoty konverzací, kopie zákaznických poptávek a tři komentáře k tomu, kdo kdy co přehlédl.
+```
+
+První zápis stačí pro další rozhodnutí. Druhý zápis vytváří datový batoh, který nikdo nechce nosit, ale všichni se bojí ho odložit. U evropského privacy-first provozu má být výchozí reflex opačný: ponechat rozhodovací hodnotu, odstranit osobní a zákaznický detail, který už není potřeba.
+
+### Karta uzavření první tiché kontroly
+
+```text
+Kontrolované pravidlo:
+
+Výsledek první tiché kontroly:
+- bez změny
+- lokální oprava
+- tiché sledování
+- nová smyčka
+
+Co se trvale mění:
+
+Co se výslovně nemění:
+
+Kde je propsaná změna:
+
+Jaký dočasný podklad mažeme nebo zkracujeme:
+
+Návratový signál:
+- zůstává stejný
+- zpřesňuje se
+- spustil novou smyčku
+
+Kdy se k tématu vrátíme:
+
+Kdo uzavření vlastní:
+```
+
+Karta má pomoct zavřít kontrolu, ne vyrábět další práci. Pokud je výsledek "bez změny", vyplňte klidně jen první tři řádky a krátký zápis do logu. Disciplína není v délce zápisu. Disciplína je v tom, že po zápisu už tým ví, co se děje dál.
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: napište výsledek kontroly jednou větou.
+2. Minuta 2: vyberte jeden ze čtyř uzavíracích stavů.
+3. Minuta 3: určete nejbližší živé místo, kam se výsledek propíše.
+4. Minuta 4: napište, co se výslovně neotevírá.
+5. Minuta 5: zkraťte nebo smažte dočasné podklady.
+6. Minuta 6: potvrďte návratový signál.
+7. Minuta 7: určete, jestli má téma další datum, nebo je opravdu zavřené.
+
+Pokud se tým zasekne mezi lokální opravou a novou smyčkou, vraťte se k definici návratového signálu. Nespustil se? Pak opravte lokální místo. Spustil se? Pak založte novou smyčku a nepřibalujte do ní celý archiv jen proto, že je po ruce.
+
+### Checklist uzavření první tiché kontroly
+
+- Máme jednu větu, která shrnuje výsledek kontroly?
+- Vybrali jsme konkrétní uzavírací stav?
+- Je jasné, co se trvale mění?
+- Je jasné, co se výslovně neotevírá?
+- Propsali jsme změnu do živého pracovního místa?
+- Nezaložili jsme zbytečnou novou dokumentační vrstvu?
+- U tichého sledování existuje jasná koncová podmínka?
+- Při nové smyčce používáme dnešní důkaz místo celého historického archivu?
+- Smazali nebo zkrátili jsme dočasné podklady?
+- Zůstala po kontrole minimální a užitečná datová stopa?
+- Ví vlastník, kdy se téma znovu otevře a kdy se nechává být?
+
+Uzavření první tiché kontroly je malá, ale důležitá brzda proti procesnímu bobtnání. Tým si potvrdí, že pravidlo funguje, opraví nejbližší tření a uklidí po sobě. Když se opravdu objeví návratový signál, otevře ho vědomě. Když se neobjeví, nechá systém pracovat. To je přesně ten druh provozní dospělosti, který není efektní na slidech, ale drží SaaS, web i marketing v použitelném stavu.
+
 ## Pracovní log
 
+- 2026-06-16: Doplněna úvodní podkapitola o uzavření první tiché kontroly po převodu do běžného provozu: čtyři uzavírací stavy, propsání do živého systému, úklid dočasných stop, privacy-first výsledná stopa, karta, mini workshop a checklist.
 - 2026-06-16: Doplněna úvodní podkapitola o první tiché kontrole po převodu do běžného provozu: běžný rytmus kontroly, čtyři výsledné stavy, rozlišení navigační opravy od návratového signálu, privacy-first datová hranice, karta, mini workshop a checklist.
 - 2026-06-15: Doplněna úvodní podkapitola o převodu uzavřeného návratu do tichého provozu: kanonické pracovní místo, návratový signál, odstranění dočasné péče, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-15: Doplněna úvodní podkapitola o uzavření druhého běžného použití po návratu z dlouhého klidu: uzavírací stavy, propsání do živého systému, ukončení zvláštní pozornosti, privacy-first úklid, karta, mini workshop a checklist.
