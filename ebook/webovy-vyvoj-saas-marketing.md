@@ -218305,8 +218305,135 @@ Když workshop narazí na spor, nevracejte se k celé historii. Zeptejte se, kte
 
 Převod do tichého provozu je dobrý konec návratové smyčky. Nevyhrává tím nejdokonalejší dokument, ale nejmenší pravidlo, které stojí ve správném místě, má jasný návratový signál a nezanechává za sebou zbytečnou datovou stopu. Když se to povede, tým o tématu přestane mluvit ne proto, že ho ignoruje, ale proto, že už zase normálně funguje.
 
+## První tichá kontrola po převodu do běžného provozu
+
+Tichý provoz neznamená, že se k pravidlu už nikdy nepodíváte. Znamená, že se na něj nedíváte mimořádným režimem. První tichá kontrola má proto proběhnout jako součást běžné práce: při dalším měsíčním review, při kontrole šablon, při obchodním průchodu, při supportním třídění nebo při redakční údržbě. Nemá vzniknout nový projekt jen proto, že se tým bojí pustit ruku z nedávno opraveného místa.
+
+Cíl kontroly je jednoduchý:
+
+```text
+Funguje pravidlo v běžném rytmu bez zvláštní péče?
+```
+
+Pokud ano, nechte ho být. Pokud ne, opravte nejbližší pracovní místo. Neotevírejte celou návratovou historii, dokud se nepotvrdí návratový signál. Tichá kontrola má chránit běžný provoz, ne znovu vyrábět drama kolem starého tématu.
+
+Příklad:
+
+```text
+Pravidlo:
+V sales šabloně je doplněná otázka na rozhodovací roli.
+
+Běžný rytmus:
+Měsíční review prvních odpovědí na poptávky.
+
+Pozorování:
+Obchod otázku použil u tří relevantních poptávek. U jedné ji přeskočil, protože šablona byla otevřená ze staré kopie v chatu.
+
+Rozhodnutí:
+Neotevíráme návrat ke starému scoringu. Mažeme starou kopii v chatu a v kanonické šabloně přidáváme krátký příklad odpovědi.
+
+Návratový signál zůstává:
+Tři relevantní poptávky za sebou nepůjdou kvalifikovat bez ručního vysvětlení rozhodovací role mimo sales šablonu.
+```
+
+Všimněte si rozdílu mezi opravou cesty a návratem problému. Jedna stará kopie v chatu je špatná navigace. Není to důkaz, že původní starý systém má vstát z archivu a zase chodit po poradách.
+
+### Co kontrolovat a co nechat být
+
+První tichá kontrola se má dívat jen na aktuální pracovní stopu. Stačí čtyři otázky:
+
+- Našel člověk pravidlo v kanonickém pracovním místě?
+- Použil ho bez znalosti návratové historie?
+- Nevznikla bokem stará kopie, náhradní tabulka nebo ruční obcházka?
+- Zůstal návratový signál pořád konkrétní a použitelný?
+
+Nechte být všechno, co nesouvisí s těmito otázkami. Nekontrolujte celý archiv, neporovnávejte všechny staré verze, nepřepisujte historii rozhodnutí a nepřidávejte nové metriky jen proto, že "už se na to díváte". Tichá kontrola má být krátká právě proto, aby se nestala maskovanou druhou návratovou iterací.
+
+### Čtyři výsledné stavy
+
+Po kontrole vyberte jeden stav:
+
+- Funguje tiše: pravidlo je najitelné, použitelné a nevyžaduje zvláštní péči.
+- Potřebuje navigační opravu: pravidlo je správné, ale člověk k němu šel přes špatnou cestu.
+- Potřebuje drobné zpřesnění: pravidlo je na správném místě, ale chybí příklad, hranice nebo jasnější formulace.
+- Spustil se návratový signál: nejde o lokální tření, ale o předem popsanou opakovanou situaci z běžné práce.
+
+První tři stavy řešte v rámci běžné údržby. Čtvrtý stav je jediný důvod otevřít novou návratovou smyčku. To je důležitá disciplína: když každé malé tření označíte za návrat signálu, tichý provoz nikdy nezačne.
+
+Codyho komentář: tichá kontrola je servisní pohled, ne detektivní seriál. Když najdete povolený šroubek, utáhněte šroubek. Nevyhlašujte vyšetřovací komisi k dějinám celé židle.
+
+### Privacy-first tichá kontrola
+
+Privacy-first pravidlo je tady velmi praktické: kontrolujte z existujících pracovních stop. Typicky stačí jedna šablona, jeden poslední průchod, jeden support tiket, jedna poptávka nebo jeden zápis z review. Nepřidávejte nahrávání obrazovky, sledování kliků ani osobní skóre používání pravidla.
+
+Krátká datová hranice:
+
+- Nepotřebujeme vědět, kdo pravidlo četl, pokud rozhodnutí stojí na kvalitě pracovního místa.
+- Nepotřebujeme měřit každé použití, pokud máme konkrétní návratový signál.
+- Nepotřebujeme kopírovat zákaznické detaily do příkladů, pokud stačí anonymizovaný vzor.
+- Nepotřebujeme držet dočasné exporty, pokud už rozhodnutí prošlo do běžného místa.
+
+Dobrá tichá kontrola má po sobě zanechat méně dat než návratová smyčka. Ideální výsledek je jedna věta v logu, jedna malá oprava pracovního místa nebo žádná změna.
+
+### Karta první tiché kontroly
+
+```text
+Kontrolované pravidlo:
+
+Běžný rytmus, ve kterém kontrola proběhla:
+
+Kanonické pracovní místo:
+
+Reálný průchod nebo důkaz:
+
+Výsledek:
+- funguje tiše
+- navigační oprava
+- drobné zpřesnění
+- návratový signál
+
+Co opravujeme, pokud něco:
+
+Co výslovně neotevíráme:
+
+Návratový signál zůstává / mění se:
+
+Jaká data kvůli kontrole nesbíráme:
+
+Kdo zapisuje výsledek:
+```
+
+Karta nemá být nová administrativa. Je to pojistka proti tomu, aby se z malé kontroly stal velký návrat. Pokud výsledek zní "funguje tiše", stačí vyplnit jen pracovní místo, důkaz a větu "bez změny".
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: otevřete kanonické pracovní místo, ne archiv.
+2. Minuta 2: vyberte jeden reálný průchod z běžné práce.
+3. Minuta 3: odpovězte na čtyři kontrolní otázky.
+4. Minuta 4: vyberte jeden ze čtyř výsledných stavů.
+5. Minuta 5: pokud je potřeba, udělejte jen nejbližší navigační nebo textovou opravu.
+6. Minuta 6: zapište, co se neotevírá, a nechte návratový signál pracovat dál.
+
+Když tým během workshopu začne řešit starou historii, vraťte ho k aktuálnímu pracovnímu místu. Otázka není "proč jsme to tehdy celé řešili". Otázka je "umí to dnes někdo použít bez zvláštní péče".
+
+### Checklist první tiché kontroly
+
+- Proběhla kontrola v běžném rytmu, ne jako nový mimořádný projekt?
+- Dívali jsme se na kanonické pracovní místo místo archivu?
+- Máme jeden reálný průchod nebo důkaz z běžné práce?
+- Ověřili jsme najitelnost, použitelnost, absenci obcházek a návratový signál?
+- Rozlišili jsme navigační chybu od návratu původního problému?
+- Udělali jsme jen nejbližší opravu, pokud byla potřeba?
+- Neotevřeli jsme celou historii kvůli jednomu tření?
+- Nepřidali jsme nový tracking ani osobní měření používání pravidla?
+- Zapsali jsme, co výslovně neotevíráme?
+- Víme, kdy se téma znovu otevře přes návratový signál?
+
+První tichá kontrola je úspěšná hlavně tehdy, když po ní zůstane klid. Pravidlo je na místě, lidé ho umí použít a stará historie zůstává zavřená. Pokud se ukáže drobné tření, opraví se tam, kde člověk opravdu pracuje. Pokud se ukáže návratový signál, otevře se nová smyčka vědomě, ne ze zvyku.
+
 ## Pracovní log
 
+- 2026-06-16: Doplněna úvodní podkapitola o první tiché kontrole po převodu do běžného provozu: běžný rytmus kontroly, čtyři výsledné stavy, rozlišení navigační opravy od návratového signálu, privacy-first datová hranice, karta, mini workshop a checklist.
 - 2026-06-15: Doplněna úvodní podkapitola o převodu uzavřeného návratu do tichého provozu: kanonické pracovní místo, návratový signál, odstranění dočasné péče, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-15: Doplněna úvodní podkapitola o uzavření druhého běžného použití po návratu z dlouhého klidu: uzavírací stavy, propsání do živého systému, ukončení zvláštní pozornosti, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-15: Doplněna úvodní podkapitola o druhém běžném použití po uzavřeném návratu z dlouhého klidu: přenositelnost bez čerstvého vysvětlení, čtyři výsledné stavy, privacy-first úklid, karta, mini workshop a checklist.
