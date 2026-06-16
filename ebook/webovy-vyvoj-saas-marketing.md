@@ -221349,8 +221349,193 @@ Když se tým zasekne mezi lokálním dotažením a novým návratovým signále
 
 Uzavření prvního běžného použití je dobré tehdy, když po něm zůstane méně zvláštní péče než před ním. Výsledek buď klidně žije v rytmu, čeká na jednu malou lokální opravu, má přesnější pracovní rozsah, nebo se z něj oddělil nový signál. V každém případě má tým vědět, kde je aktuální pravda a které dočasné stopy už může bez nostalgie uklidit.
 
+## Druhé běžné použití po převodu nové otázky do rytmu
+
+První běžné použití ukáže, jestli nová otázka přežila přechod z mimořádné péče do práce. Druhé běžné použití ukáže něco trochu jiného: jestli pravidlo funguje i ve chvíli, kdy už nikdo nemá čerstvě v hlavě celý příběh vzniku. To je důležitý rozdíl. První průchod často nese zbytkovou pozornost autora změny, týmu nebo člověka, který byl u předchozí debaty. Druhý průchod už víc připomíná skutečný provoz.
+
+Nejde o další kontrolní režim. Druhé použití má být přirozený okamžik v běžném rytmu: další předání leadu, další kontrola šablony, další onboardingový krok, další revize obsahu nebo další práce s kvalifikační kartou. Cílem je ověřit, jestli pravidlo zůstalo najitelné, použitelné a datově střídmé bez toho, že kolem něj pořád stojí malý doprovodný proces.
+
+Začněte krátkým zápisem:
+
+```text
+Převedená otázka:
+
+Jednovětý závěr:
+
+Co se po prvním použití změnilo:
+
+Druhé běžné použití:
+
+Použil pravidlo někdo bez čerstvého kontextu:
+
+Co šlo samo:
+
+Kde vzniklo tření:
+
+Výsledek:
+- pravidlo drží
+- potřebuje poslední lokální dotažení
+- rozsah je pořád moc široký
+- ukázal se nový vzor
+
+Co tím uzavíráme:
+```
+
+Příklad:
+
+```text
+Převedená otázka:
+Jak má follow-up šablona odkazovat na kvalifikační kartu bez kopírování starého scoringu.
+
+Jednovětý závěr:
+Follow-up má použít aktuální rozhodovací otázku a nevracet staré skórování podle velikosti firmy.
+
+Co se po prvním použití změnilo:
+Přepsala se jedna stará věta ve follow-up šabloně.
+
+Druhé běžné použití:
+Obchodník připravil follow-up po dalším discovery hovoru.
+
+Použil pravidlo někdo bez čerstvého kontextu:
+Ano, nepodílel se na původním uzavření.
+
+Co šlo samo:
+Našel aktuální šablonu a nepřidal velikost firmy ani rozpočet jako nové pole.
+
+Kde vzniklo tření:
+V interní poznámce k předání pořád nebylo jasné, kam zapsat rozhodovací horizont.
+
+Výsledek:
+Potřebuje poslední lokální dotažení.
+
+Co tím uzavíráme:
+Follow-up šablona drží. Dolaďujeme jen předávací poznámku, neotevíráme scoring.
+```
+
+Druhé použití má být nemilosrdně praktické. Pokud pravidlo drží, nechte ho být. Pokud se objeví poslední lokální zbytek, opravte ho. Pokud se ukáže, že pravidlo pořád míří na moc široké místo, zúžte ho. Pokud se objeví nový vzor, oddělte ho od původní otázky. Vše ostatní je provozní poezie, a té už má většina týmů v backlogu až dost.
+
+### Co je jiné než při prvním použití
+
+Při druhém použití sledujete hlavně přenositelnost:
+
+- jestli pravidlo použije i člověk, který nebyl u původního rozhodnutí;
+- jestli pracovní místo obsahuje aktuální závěr, ne jen odkaz do historie;
+- jestli první lokální oprava opravdu odstranila starou stopu;
+- jestli se pravidlo nepoužívá mimo svůj původní rozsah;
+- jestli kvůli nejistotě nevzniká nové pole, export, poznámka nebo kontrolní tabulka.
+
+První použití často odpovídá na otázku: "Dá se to použít?" Druhé použití odpovídá na otázku: "Dá se to použít opakovaně bez zvláštní péče?" Pokud ne, problém nemusí být velký. Možná jen chybí jedna věta v pracovním místě. Ale právě druhý průchod pomůže odlišit drobnou nedotaženost od pravidla, které není dost samostatné.
+
+Neposuzujte pravidlo podle toho, jestli si lidé pamatují, proč vzniklo. To není jejich práce. Jejich práce je najít aktuální instrukci a udělat podle ní správný krok. Historie má být dostupná v archivu, ale běžné použití se má opírat o živé místo, které odpovídá na otázku "co teď".
+
+### Čtyři výsledné stavy
+
+Po druhém použití vyberte jeden stav:
+
+- Pravidlo drží: druhý průchod proběhl bez zvláštní nápovědy a bez návratu staré stopy.
+- Poslední lokální dotažení: jedno konkrétní místo ještě mate práci, ale závěr je správný.
+- Zúžit rozsah: pravidlo funguje jen pro užší situaci, než jak bylo zapsané.
+- Nový vzor: tření se opakuje napříč více místy nebo ukazuje jiný problém.
+
+U stavu "pravidlo drží" ukončete zvláštní pozornost. Zapište, že druhé běžné použití proběhlo, a nechte pravidlo v běžném rytmu. Nepřidávejte třetí kontrolu jen pro klid duše. Klid duše se má opírat o návratový signál, ne o nekonečný dohled.
+
+U posledního lokálního dotažení opravte jedno místo a napište, že jde o poslední lokální opravu před návratem do běžného rytmu. Pokud se po ní objeví další podobné místo, už to není lokální. Je to kandidát na nový vzor.
+
+U zúžení rozsahu přepište hranici přímo do pracovního místa. Nestačí zapsat do logu, že pravidlo platí jen pro enterprise leady, první měsíc onboardingu nebo jeden typ kampaně. Člověk to musí poznat při práci dřív, než pravidlo použije špatně.
+
+U nového vzoru nelepte problém zpět na původní otázku. Původní otázka mohla být uzavřená dobře a druhé použití jen ukázalo sousední slabinu. To je důvod pro novou malou otázku, ne pro návrat celé historie.
+
+### Privacy-first kontrola druhého použití
+
+Druhé použití nesmí vytvořit trvalé sledování jen proto, že tým ověřuje přenositelnost. Většinou stačí krátký anonymní zápis:
+
+```text
+Druhé použití proběhlo v běžném předání leadu. Pravidlo bylo nalezené v aktuální šabloně. Nevzniklo nové pole ani export.
+```
+
+Nepotřebujete uchovávat kopii celého e-mailu, jméno zákazníka, screenshot CRM ani detailní přepis hovoru. Pokud je potřeba důkaz, zkraťte ho na pracovní stopu: "interní poznámka neměla místo pro rozhodovací horizont". To stačí pro opravu a nevyrábí to další datový dluh.
+
+Privacy-first otázka:
+
+```text
+Stačí nám pro rozhodnutí typ tření, nebo opravdu potřebujeme konkrétní osobní detail?
+```
+
+Ve většině provozních situací stačí typ tření. Konkrétní detail patří do krátkodobého řešení incidentu, ne do dlouhodobého pracovního logu. Jakmile se detail změní na obecné pravidlo, osobní stopu smažte, zkraťte nebo anonymizujte.
+
+Codyho komentář: druhé použití je skvělý test toho, jestli pravidlo stojí na vlastních nohách. Když k němu musíte přibalit instruktáž, tabulku a historický výklad, není to pravidlo. Je to malý interní seriál.
+
+### Karta druhého běžného použití
+
+```text
+Převedená otázka:
+
+Jednovětý závěr:
+
+První použití skončilo stavem:
+
+Co se od prvního použití propsalo:
+
+Druhé běžné použití:
+
+Použité pracovní místo:
+
+Použil ho člověk bez čerstvého kontextu:
+- ano / ne / částečně
+
+Výsledek:
+- pravidlo drží
+- poslední lokální dotažení
+- zúžit rozsah
+- nový vzor
+
+Co šlo samo:
+
+Kde vzniklo tření:
+
+Co teď upravujeme:
+
+Co už znovu neotevíráme:
+
+Jaká data, pole, exporty nebo trackery nevznikají:
+
+Co mažeme, zkracujeme nebo anonymizujeme:
+
+Návratový signál pro další otevření:
+```
+
+Karta má pomoct zavřít přechod z "ověřujeme" do "běží". Pokud po druhém použití karta sama vyvolá potřebu další karty, zeptejte se, jestli se už neobjevil nový vzor. Dobrá karta má snižovat počet otevřených vláken, ne jim dávat lepší názvy.
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: přečtěte jednovětý závěr a stav po prvním použití.
+2. Minuta 2: popište druhé běžné použití bez historického výkladu.
+3. Minuta 3: určete, zda pravidlo použil někdo bez čerstvého kontextu.
+4. Minuty 4 až 5: vyberte jeden ze čtyř výsledných stavů.
+5. Minuta 6: napište jednu opravu, zúžení, nebo potvrzení návratu do rytmu.
+6. Minuta 7: zapište privacy-first úklid a návratový signál.
+
+Pokud workshop sklouzne k debatě o celé původní otázce, vraťte se k druhému použití. Téma není "jak jsme se sem dostali". Téma je "co se stalo při běžném použití a co s tím teď děláme".
+
+### Checklist druhého běžného použití
+
+- Proběhlo druhé použití v normálním pracovním rytmu?
+- Použil pravidlo někdo bez čerstvého kontextu původní změny?
+- Je vidět, jestli první lokální oprava drží?
+- Vybrali jsme jeden ze čtyř výsledných stavů?
+- Pokud pravidlo drží, ukončili jsme zvláštní pozornost?
+- Pokud jde o poslední lokální dotažení, má jedno konkrétní pracovní místo?
+- Pokud zúžujeme rozsah, pozná hranici člověk před použitím pravidla?
+- Pokud vznikl nový vzor, oddělili jsme ho od původní otázky?
+- Nevytvořili jsme kvůli ověření nový tracker, export, CRM pole ani kontrolní tabulku?
+- Zkrátili nebo anonymizovali jsme dočasné důkazy?
+- Má pravidlo jasný návratový signál místo trvalého dohledu?
+
+Druhé běžné použití je hotové ve chvíli, kdy víte, jestli pravidlo opravdu přešlo do provozu. Buď drží a nepotřebuje další pozornost, nebo potřebuje poslední lokální dotažení, přesnější rozsah, případně novou otázku pro nový vzor. Ve všech případech je cílem stejná věc: méně zvláštní péče, méně datové stopy a jasnější pracovní místo pro dalšího člověka.
+
 ## Pracovní log
 
+- 2026-06-16: Doplněna úvodní podkapitola o druhém běžném použití po převodu nové otázky do rytmu: přenositelnost bez čerstvého kontextu, čtyři výsledné stavy, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-06-16: Doplněna úvodní podkapitola o uzavření prvního běžného použití po převodu nové otázky do rytmu: uzavírací stavy, propsání do živého místa, oddělení archivu od pracovní instrukce, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-16: Doplněna úvodní podkapitola o prvním běžném použití po převodu nové otázky do rytmu: normální pracovní průchod, čtyři výsledné stavy, lokální dotažení, privacy-first datová střídmost, karta, mini workshop a checklist.
 - 2026-06-16: Doplněna úvodní podkapitola o převodu uzavřené nové otázky do běžného rytmu: pracovní místo, kontrolní rytmus, návratový signál, privacy-first úklid, karta, mini workshop a checklist.
