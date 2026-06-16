@@ -221018,8 +221018,171 @@ Když během šesti minut nejde najít běžný rytmus, závěr možná ještě 
 
 Převod do běžného rytmu je hotový ve chvíli, kdy závěr nepotřebuje zvláštní pozornost, aby přežil. Je na správném místě, má jednoduchý návratový signál a nenese s sebou zbytečnou datovou stopu. To je přesně ten druh malého provozního pořádku, který nikdo neoslaví, ale všichni na něm za měsíc vydělají trochu klidu.
 
+## První běžné použití po převodu nové otázky do rytmu
+
+Převod nové otázky do běžného rytmu je rozhodnutí na papíře. První běžné použití ukáže, jestli se z něj opravdu stal pracovní návyk. Nejde o další audit ani o opakování celého předchozího průchodu. Jde o jednu normální situaci, ve které má člověk použít nové pravidlo, šablonu, checklist nebo odkaz bez toho, že vedle něj stojí autor změny a šeptá mu nápovědu do ucha.
+
+Smysl prvního použití je jednoduchý: ověřit, jestli závěr přežil přechod z mimořádné pozornosti do běžné práce. Pokud ano, necháte ho v rytmu. Pokud ne, opravíte nejbližší pracovní místo. Pokud se ukáže širší problém, neotevíráte ho automaticky; nejdřív pojmenujete nový návratový signál.
+
+Začněte zápisem:
+
+```text
+Převedená otázka:
+
+Jednovětý závěr:
+
+Běžná situace, ve které se závěr poprvé použil:
+
+Kdo ho použil:
+
+Co šlo bez nápovědy:
+
+Kde vzniklo tření:
+
+Výsledek:
+- funguje v rytmu
+- potřebuje lokální dotažení
+- potřebuje zúžit pracovní místo
+- ukázal se nový návratový signál
+
+Nejmenší další krok:
+```
+
+Příklad:
+
+```text
+Převedená otázka:
+Jak má předávací checklist odkazovat na kvalifikační pravidlo bez kopírování starého scoringu.
+
+Jednovětý závěr:
+Checklist má odkazovat na kanonickou kvalifikační kartu a neopisovat scoringové věty.
+
+Běžná situace:
+Obchod předával relevantní lead do delivery po discovery callu.
+
+Co šlo bez nápovědy:
+Člověk našel kvalifikační kartu a použil aktuální formulaci rozhodovacího procesu.
+
+Kde vzniklo tření:
+Ve staré šabloně follow-up e-mailu zůstala jedna věta ze scoringu.
+
+Výsledek:
+Potřebuje lokální dotažení.
+
+Nejmenší další krok:
+Přepsat jednu větu ve follow-up šabloně a nepřidávat další kontrolní tabulku.
+```
+
+Všimněte si, že výsledek není "opravit celý obchodní proces". První použití našlo konkrétní zbytek starého systému v jednom pracovním místě. To je dobrý nález, protože se dá opravit bez rozšiřování práce.
+
+### Co při prvním použití sledovat
+
+Sledujte jen to, co ukazuje použitelnost závěru v normální práci:
+
+- jestli člověk najde správné pracovní místo bez vysvětlování;
+- jestli rozumí jednovětému závěru bez historie celé změny;
+- jestli použije aktuální pravidlo místo staré kopie;
+- jestli ví, kam zapsat výsledek běžné kontroly;
+- jestli nevznikne potřeba nové evidence jen kvůli nejistotě.
+
+Nesledujte osobní výkon člověka jako hlavní téma. Pokud se někdo splete, první otázka není "proč to neví", ale "kde mu systém podstrčil špatnou nebo nejasnou stopu". Běžné použití testuje pracovní prostředí, ne charakter uživatele. To je dobrá zpráva, protože prostředí se obvykle opravuje snáz než lidé.
+
+### Čtyři výsledné stavy
+
+Po prvním použití vyberte jeden ze čtyř stavů:
+
+- Funguje v rytmu: závěr se použil bez mimořádné nápovědy a nevzniklo významné tření.
+- Lokální dotažení: jedna šablona, věta, odkaz nebo karta ještě mate práci.
+- Zúžení pracovního místa: závěr je správný, ale používá se na příliš širokém místě.
+- Nový návratový signál: objevilo se opakované nebo silnější tření, které už nesouvisí jen s převodem.
+
+U stavu "funguje v rytmu" nedělejte nic navíc. Zapište výsledek a nechte téma běžet. Pokušení přidat ještě jednu kontrolu je pochopitelné, ale často zbytečné. Když pravidlo funguje, nepotřebuje doprovodný orchestr.
+
+U lokálního dotažení opravte nejbližší místo a znovu ho zahlédněte při dalším přirozeném použití. Neotevírejte starou analýzu. Potřebujete opravit větu, odkaz, pořadí polí nebo instrukci, ne znovu procházet celý příběh vzniku otázky.
+
+U zúžení pracovního místa přepište rozsah použití. Typicky zjistíte, že závěr patří jen do jednoho typu leadu, jedné fáze onboardingu, jedné varianty nabídky nebo jednoho interního review. Zúžení není neúspěch. Je to přesnější provozní tvar.
+
+U nového návratového signálu se zastavte. Nechte původní převod uzavřený a napište samostatnou větu, co se právě ukázalo. Nový signál má dostat vlastní hranici, jinak se nalepí na starou otázku a začne ji nafukovat.
+
+### Privacy-first použití
+
+První běžné použití má být datově střídmé. Většinou stačí jeden krátký záznam o průchodu, ne sběr nových eventů, nahrávání obrazovek nebo uchovávání detailních poznámek z konkrétní zákaznické situace.
+
+Privacy-first pravidlo:
+
+```text
+Dokážeme rozhodnout o použitelnosti pravidla bez nové osobní datové stopy?
+```
+
+Pokud ano, novou stopu nevytvářejte. Pokud potřebujete příklad, zkraťte ho na pracovní podstatu: "starý scoring zůstal ve follow-up šabloně" místo kopie celého e-mailu s osobními údaji. Pokud potřebujete zachovat důkaz, anonymizujte ho hned při zápisu, ne až "někdy při úklidu". Někdy při úklidu je v praxi jen hezčí název pro nikdy.
+
+Codyho komentář: dobré pravidlo se pozná i podle toho, že kvůli jeho ověření nemusíte stavět malou sledovací věž. Když k prvnímu použití potřebujete nový dashboard, možná netestujete pravidlo, ale vlastní nervozitu.
+
+### Karta prvního běžného použití
+
+```text
+Převedená otázka:
+
+Jednovětý závěr:
+
+Běžný rytmus:
+
+První reálné použití:
+
+Použité pracovní místo:
+
+Výsledek:
+- funguje v rytmu
+- lokální dotažení
+- zúžení pracovního místa
+- nový návratový signál
+
+Co šlo bez nápovědy:
+
+Kde vzniklo tření:
+
+Nejmenší další krok:
+
+Co neotevíráme znovu:
+
+Jakou novou datovou stopu nevytváříme:
+
+Co mažeme, zkracujeme nebo anonymizujeme:
+
+Datum dalšího přirozeného zahlédnutí:
+```
+
+Karta má být krátká a provozní. Pokud se do ní nevejde bez dlouhého vysvětlování, pravděpodobně se do prvního použití vrátila celá historie předchozí otázky. V takovém případě oddělte záznam z použití od archivní historie. Člověk v běžné práci potřebuje vědět, co má dělat teď, ne jak složitě jste se k tomu dostali.
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: přečtěte jednovětý závěr převedené otázky.
+2. Minuta 2: popište první reálné použití bez interpretací.
+3. Minuty 3 až 4: určete, co šlo bez nápovědy a kde vzniklo tření.
+4. Minuta 5: vyberte jeden ze čtyř výsledných stavů.
+5. Minuta 6: napište nejmenší další krok nebo potvrďte, že žádný není.
+6. Minuta 7: zapište privacy-first úklid a datum dalšího přirozeného zahlédnutí.
+
+Když workshop skončí sporem o to, jestli jde o lokální dotažení nebo nový návratový signál, použijte jednoduchou hranici: jeden konkrétní zbytek starého systému je lokální dotažení; opakované tření napříč více místy je kandidát na nový signál. Kandidát ještě není projekt. Je to jen důvod napsat lepší otázku.
+
+### Checklist prvního běžného použití
+
+- Proběhlo ověření v normální pracovní situaci, ne ve speciálně připraveném testu?
+- Použil závěr někdo bez mimořádné nápovědy autora změny?
+- Je jasné, které pracovní místo bylo použito?
+- Rozlišili jsme chybu pracovního místa od chyby člověka?
+- Vybrali jsme jeden ze čtyř výsledných stavů?
+- Pokud jde jen o lokální dotažení, zůstává oprava opravdu lokální?
+- Pokud se ukázal nový signál, nelepíme ho zpátky na starou otázku?
+- Nevytvořili jsme kvůli ověření novou zbytečnou datovou stopu?
+- Zkrátili, smazali nebo anonymizovali jsme dočasné příklady?
+- Víme, kdy se výsledek znovu přirozeně zahlédne v běžném rytmu?
+
+První běžné použití je hotové ve chvíli, kdy víte, jestli závěr umí žít bez zvláštní péče. Buď ano a necháte ho v klidu pracovat, nebo potřebuje jednu drobnou opravu, nebo ukázal novou otázku s vlastní hranicí. Všechny tři výsledky jsou užitečné. Neužitečné je jen tvářit se, že převod do rytmu je hotový, aniž by ho někdo poprvé použil v reálné práci.
+
 ## Pracovní log
 
+- 2026-06-16: Doplněna úvodní podkapitola o prvním běžném použití po převodu nové otázky do rytmu: normální pracovní průchod, čtyři výsledné stavy, lokální dotažení, privacy-first datová střídmost, karta, mini workshop a checklist.
 - 2026-06-16: Doplněna úvodní podkapitola o převodu uzavřené nové otázky do běžného rytmu: pracovní místo, kontrolní rytmus, návratový signál, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-16: Doplněna úvodní podkapitola o uzavření prvního průchodu nové otázky po širším vzoru: čtyři uzavírací stavy, propsání do kanonického místa, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-16: Doplněna úvodní podkapitola o ověření nové otázky po širším vzoru při prvním reálném průchodu: čtyři výsledky, dostatečný důkaz, privacy-first hranice, karta, mini workshop a checklist.
