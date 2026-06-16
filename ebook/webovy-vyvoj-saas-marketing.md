@@ -219645,8 +219645,151 @@ Když se během workshopu objeví nová otázka, zapište ji mimo kartu. Uzavře
 
 Uzavření druhého běžného použití je malý test provozní dospělosti. Nejde jen o to, že problém nenastal. Jde o to, že tým umí přestat nést jeho stín. Dobré pravidlo zůstane v pracovním místě. Dočasné důkazy zmizí. Návratový signál čeká v klidu. A práce jde dál bez toho, aby se z opatrnosti stala další položka v kalendáři.
 
+## Převod první věty po návratovém signálu do jednoho zásahu
+
+První věta po návratovém signálu má pojmenovat důvod návratu. Sama o sobě ale ještě nic neopravuje. Je to startovní čára, ne hotová práce. Po ní musí přijít malý převod: z důvodu na jeden konkrétní zásah, který jde udělat bez otevření celé historie, bez nového měřicího aparátu a bez toho, aby se z návratu stal další miniprojekt.
+
+Praktická otázka zní:
+
+```text
+Jaký nejmenší zásah odpovídá důvodu návratu a ve kterém pracovním místě se má stát?
+```
+
+Slovo "odpovídá" je tady důležité. Pokud návratový signál říká, že lidé špatně rozlišují dva stavy v rozhodovací kartě, nejmenší zásah není audit všech karet. Je to úprava názvu stavu, doplnění jedné rozhodovací věty nebo přesunutí příkladu blíž k volbě, kde chyba vzniká. Pokud se ukáže, že jedna úprava nestačí, další krok vznikne až po ověření, ne preventivně.
+
+Příklad:
+
+```text
+První věta:
+Téma se vrací, protože dvě po sobě jdoucí review zaměnila podnět bez důkazu za návratový signál.
+
+Nejmenší zásah:
+Do šablony review přidáme před volbu "otevřít návrat" jednu kontrolní otázku: odpovídá dnešní situace doslovnému návratovému signálu?
+
+Pracovní místo:
+Měsíční review šablona.
+
+Ověření:
+Při dalším review se sleduje jen to, zda otázka pomohla vybrat stav bez dodatečného vysvětlování.
+
+Mimo rozsah:
+Nepřepisujeme celý rozhodovací log, nepřidáváme nový dashboard a nekontrolujeme staré review zpětně.
+```
+
+Tento převod chrání tým před typickou reakcí po návratu: "když už jsme to otevřeli, pojďme to vzít pořádně". Pořádně často znamená příliš široce. Dobrá první reakce má být spíš přesná než velká. Míří na místo, kde se signál projevil, a nechává všechno ostatní zavřené.
+
+### Čtyři typy zásahu
+
+Po první větě obvykle stačí jeden ze čtyř typů zásahu:
+
+- Zpřesnit větu: upravit formulaci pravidla, otázky, stavu nebo nápovědy.
+- Přesunout oporu: dát existující příklad, odkaz nebo rozhodovací otázku blíž k místu použití.
+- Odstranit rušení: smazat nebo označit starou stopu, která se plete s aktuálním pravidlem.
+- Zúžit volbu: ubrat stav, sloučit dvě podobné možnosti nebo jasně popsat rozdíl mezi nimi.
+
+Když se nevejdete do jednoho z těchto zásahů, pravděpodobně jste přeskočili z návratového signálu do širšího problému. To může být legitimní, ale vyžaduje novou pracovní otázku. Neschovávejte ji pod "malou úpravu". Malá úprava má mít jeden domov, jeden výsledek a jeden způsob ověření.
+
+Zpřesnění věty je vhodné, když lidé rozumí místu práce, ale zakopávají o formulaci. Typický příklad je stav "čeká na důkaz", který část týmu chápe jako "už se má něco dělat". Zásah: přepsat stav na "neotevírat bez důkazu" a doplnit krátký příklad.
+
+Přesun opory pomáhá, když správné vysvětlení někde existuje, ale není u rozhodnutí. Tým pak pracuje podle paměti, ne podle systému. Zásah: přesunout jednu ukázkovou větu přímo do šablony, ne odkazovat na dlouhou kapitolu nebo archiv.
+
+Odstranění rušení je nejlepší, když problém nevznikl slabým pravidlem, ale starou stopou. Typicky archivní tabulka, starý odkaz v indexu nebo kopie šablony v interním chatu. Zásah: označit jako archiv, přesměrovat na kanonické místo nebo smazat, pokud už není důvod ji držet.
+
+Zúžení volby patří na situace, kdy jsou dvě možnosti prakticky nerozlišitelné. Pokud se tým opakovaně rozhoduje mezi "lokální dočištění" a "slabý přenos" a výsledek práce je stejný, možná nepotřebuje dvě volby. Potřebuje jednu jasnou volbu a poznámku, kdy už jde o skutečný návratový signál.
+
+Codyho komentář: když první reakce po návratu vypadá jako reorganizace celé knihovny, někdo se právě lekl. To je lidské. Ale produkt, web ani marketing se nelepší leknutím. Zlepšují se jedním dobrým zásahem na správném místě.
+
+### Privacy-first hranice zásahu
+
+Návratový signál svádí k tomu, aby tým začal sbírat víc důkazů. "Ať víme jistě." Jenže jistota navíc často znamená víc osobních údajů, víc sledování a víc pomocných exportů, které pak nikdo neuklidí. První zásah má proto začínat datovou hranicí.
+
+Před provedením si napište:
+
+```text
+Kvůli tomuto zásahu nesbíráme:
+Použijeme jen existující důkaz:
+Po ověření smažeme nebo zkrátíme:
+```
+
+Prakticky to může vypadat takto:
+
+```text
+Kvůli tomuto zásahu nesbíráme:
+Nové eventy podle konkrétních lidí ani nahrávky obrazovky.
+
+Použijeme jen existující důkaz:
+Dva anonymizované záznamy z posledních review.
+
+Po ověření smažeme nebo zkrátíme:
+Pomocný výpis rozhodnutí zkrátíme na jednu větu v logu.
+```
+
+Privacy-first přístup tady není brzda práce. Je to ochrana proti falešné přesnosti. Když stačí upravit jednu otázku v šabloně, nepotřebujete znát každý pohyb lidí kolem šablony. Potřebujete vědět, jestli příští reálné použití dopadne lépe.
+
+### Karta jednoho zásahu
+
+```text
+První věta po návratu:
+
+Důvod návratu:
+
+Nejbližší pracovní místo:
+
+Typ zásahu:
+- zpřesnit větu
+- přesunout oporu
+- odstranit rušení
+- zúžit volbu
+
+Konkrétní změna:
+
+Co výslovně neotevíráme:
+
+Existující důkaz:
+
+Jaká nová data nesbíráme:
+
+Ověření při dalším použití:
+
+Co po ověření smažeme nebo zkrátíme:
+
+Vlastník:
+
+Datum návratu:
+```
+
+Karta má držet rozsah. Pokud do pole "konkrétní změna" píšete tři odstavce, zásah je moc velký. Pokud neumíte určit pracovní místo, návratový signál je pořád moc abstraktní. Pokud neumíte říct, co neotevíráte, pravděpodobně se rozsah za chvíli rozleze.
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: přečtěte první větu po návratovém signálu.
+2. Minuta 2: určete nejbližší pracovní místo.
+3. Minuta 3: vyberte jeden ze čtyř typů zásahu.
+4. Minuta 4: napište konkrétní změnu jednou větou.
+5. Minuta 5: zapište, co výslovně neotevíráte.
+6. Minuta 6: pojmenujte privacy-first hranici a existující důkaz.
+7. Minuta 7: určete ověření při dalším reálném použití.
+
+Když workshop skončí bez jedné konkrétní změny, nedělejte širší zásah "aspoň něco". Vraťte se k první větě a zkontrolujte, jestli opravdu popisuje důvod návratu. Často se ukáže, že věta je pořád jen pocit v pracovním kabátě.
+
+### Checklist převodu do zásahu
+
+- Máme první větu, která popisuje důvod návratu?
+- Vybrali jsme jedno nejbližší pracovní místo?
+- Patří zásah do jednoho ze čtyř typů?
+- Je konkrétní změna napsaná jednou větou?
+- Je jasné, co výslovně neotevíráme?
+- Používáme existující důkaz místo nového sledování?
+- Zapsali jsme, jaká data kvůli zásahu nesbíráme?
+- Víme, co po ověření smažeme nebo zkrátíme?
+- Je ověření navázané na další reálné použití, ne na umělý audit?
+- Má zásah vlastníka a datum návratu?
+
+Převod první věty do jednoho zásahu je místo, kde se návratový signál promění v práci. Ne ve velkou práci, ne v preventivní úklid celého systému, ale v přesnou změnu tam, kde se rozhodnutí opravdu láme. Když se zásah povede, další použití bude klidnější. Když ne, budete mít konkrétní důkaz pro další malou smyčku. Obojí je lepší než velký návrat řízený jen nervozitou.
+
 ## Pracovní log
 
+- 2026-06-16: Doplněna úvodní podkapitola o převodu první věty po návratovém signálu do jednoho zásahu: výběr pracovního místa, čtyři typy zásahu, privacy-first hranice, karta, mini workshop a checklist.
 - 2026-06-16: Doplněna úvodní podkapitola o uzavření druhého běžného použití po falešném poplachu: uzavírací stavy, propsání jedné věty do kanonického místa, privacy-first úklid dočasných podkladů, karta, mini workshop a checklist.
 - 2026-06-16: Doplněna úvodní podkapitola o druhém běžném použití po falešném poplachu: přenositelnost bez čerstvého vysvětlení, čtyři výsledné stavy, slabý přenos, privacy-first úklid podkladů, karta, mini workshop a checklist.
 - 2026-06-16: Doplněna úvodní podkapitola o uzavření prvního běžného použití po falešném poplachu: čtyři uzavírací stavy, lokální úklid, ukončení zvláštního hlídání, privacy-first mazání podkladů, karta, mini workshop a checklist.
