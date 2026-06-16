@@ -10676,6 +10676,143 @@ Když workshop skončí bez jasného místa použití, výřez nevzniká. Zapiš
 
 Použitelný výřez je dobrý konec malé smyčky. Změna nezůstane schovaná v historii, ale také se nerozroste do dalšího projektu. Tým získá jednoduchou pracovní pomůcku, zákazník může dostat čistší vysvětlení a data zůstanou tam, kde mají být: pod kontrolou, s účelem a bez zbytečného rozmnožování.
 
+## Jak ověřit použitelný výřez při prvním reálném použití
+
+Použitelný výřez není hotový tím, že je dobře napsaný. Hotový je až ve chvíli, kdy ho někdo použije bez doprovodného vysvětlování a výsledek odpovídá tomu, kvůli čemu výřez vznikl. První reálné použití proto neberte jako další redakční kolo, ale jako krátký test přenositelnosti.
+
+Neověřujte výřez na lidech, kteří původní změnu vymysleli. Ti si doplní souvislosti z paměti a budou mít pocit, že text funguje. Lepší test je člověk, role nebo pracovní situace, která má výřez použít později: obchodník při odpovědi na poptávku, nový člen týmu při vyplnění karty, zákazník při čtení předávacího e-mailu nebo autor článku při převodu pravidla do veřejného příkladu.
+
+Začněte jednou větou:
+
+```text
+Výřez má při prvním použití pomoct k tomuto výsledku:
+```
+
+Pokud výsledek neumíte popsat bez slov jako "pochopit kontext", "seznámit se" nebo "mít přehled", výřez je pořád moc široký. Dobrá věta zní praktičtěji: "obchodník umí bez doptání vysvětlit, proč nesbíráme zbytečná data ve formuláři", "nový člověk vyplní rozhodovací kartu bez starého chatu", nebo "autor použije veřejný příklad bez interních detailů".
+
+### Co při prvním použití sledovat
+
+Sledujte jen to, co ukazuje použitelnost výřezu. Nepřidávejte k tomu nový report, analytiku ani dotazník na všechno. Stačí krátká kontrola po práci:
+
+- našel člověk výřez na správném místě;
+- pochopil, v jaké situaci se používá;
+- udělal podle něj správný krok;
+- nepotřeboval původní historii;
+- nepřidal si bokem novou pomocnou kopii;
+- dodržel privacy-first hranici.
+
+Všimněte si posledních dvou bodů. Když si člověk po použití výřezu založí vlastní tabulku, zkopíruje starý chat nebo začne ukládat konkrétní zákaznické příklady "pro jistotu", výřez možná vysvětluje pravidlo, ale nechrání provoz. Použitelný výřez má snižovat počet míst a stop, ne vyrábět novou vrstvu kolem staré práce.
+
+Příklad:
+
+```text
+Výřez:
+Krátké pravidlo pro odpověď na poptávku, ve které zákazník chce nahrávat chování návštěvníků.
+
+První použití:
+Obchodník odpověděl bez hledání staré interní debaty. Vysvětlil, že nejdřív stačí agregované signály a ruční kontrola kvality poptávek.
+
+Výsledek:
+Správný. Nevznikl nový tracker, nevznikl export osobních dat, odpověď byla použitelná pro zákazníka.
+
+Lokální tření:
+Výřez nebyl u sales šablony, ale v poznámkách k e-booku. Přesunout jednu větu do šablony.
+```
+
+To je dobré první použití i s drobnou opravou. Problém není v pravidle, ale v umístění. Opravte místo, nepište nový dokument.
+
+### Čtyři výsledné stavy
+
+Po prvním použití vyberte jeden ze čtyř stavů.
+
+Stav "výřez funguje" použijte, když člověk našel výřez, použil ho správně a nevznikla žádná nová pomocná evidence. V takovém případě nic nepřepisujte jen proto, že by šla věta udělat hezčí. Zapište první použití a nechte výřez pracovat.
+
+Stav "opravit umístění" použijte, když pravidlo funguje, ale člověk ho našel oklikou. Výřez má žít u pracovního místa, ne v místě, kde vznikl. Pokud se používá při odpovědi na poptávku, patří k odpovědní šabloně nebo sales kartě. Pokud se používá při onboardingu, patří do onboardingového kroku. Pokud se používá ve veřejném obsahu, patří do redakční šablony.
+
+Stav "zkrátit nebo zpřesnit" použijte, když člověk výřez našel, ale musel se doptat na hranici, příklad nebo další krok. Oprava má být malá: jedna věta, jeden příklad, jedna explicitní hranice. Nepřepisujte celou historii do výřezu. Pokud by pro pochopení bylo potřeba přidat další stránku kontextu, výřez možná není samostatná pracovní jednotka.
+
+Stav "vrátit do rozhodovacího záznamu" použijte, když výřez při prvním použití nepomohl, zmátl práci nebo vyrobil novou datovou stopu. To není ostuda. Některé změny mají zůstat jen v historii. Lepší je výřez stáhnout než držet v provozu text, který lidé obcházejí nebo si k němu dělají vlastní kopie.
+
+### Privacy-first kontrola prvního použití
+
+První použití je ideální chvíle zjistit, jestli výřez nevytváří skrytou datovou práci. Ptejte se:
+
+```text
+Vznikla při použití nová kopie dat?
+
+Začal někdo ukládat konkrétní příklady, které nemusí zůstat?
+
+Přenesl výřez interní detail do zákaznické nebo veřejné komunikace?
+
+Vyžaduje výřez měření, které původní změna nepotřebovala?
+
+Stačí pro budoucí ověření běžný pracovní výsledek?
+```
+
+Pokud výřez potřebuje pro svou existenci nový tracking, další formulář, seznam použití nebo archiv konkrétních případů, skoro určitě je špatně navržený. Výřez má být lehká pomůcka, ne nový systém evidence. V privacy-first provozu má dobrý text často právě opačný efekt: ruší potřebu sbírat další data, protože lidem dává jasné pravidlo a hranici.
+
+Codyho komentář: když výřez po prvním použití potřebuje vlastní dashboard, není to výřez. Je to malý projekt v převleku za odstavec. A tyhle převleky mají ve firmách překvapivě dlouhou životnost, protože vypadají nevinně.
+
+### Karta prvního použití výřezu
+
+```text
+Název výřezu:
+
+Kde výřez žije:
+
+Kdo ho poprvé použil:
+
+Pracovní situace:
+
+Očekávaný výsledek:
+
+Skutečný výsledek:
+
+Byla potřeba původní historie?
+
+Vznikla nová pomocná kopie nebo evidence?
+
+Byla dodržena privacy-first hranice?
+
+Výsledný stav:
+- funguje / opravit umístění / zkrátit nebo zpřesnit / vrátit do rozhodovacího záznamu
+
+Jedna oprava, pokud je potřeba:
+
+Co mažeme nebo nepřenášíme dál:
+
+Kdy se k výřezu vrátíme:
+```
+
+Kartu nevyplňujte jako audit. Má zabrat pár minut po reálné práci. Její hodnota je v tom, že oddělí funkční výřez od hezky napsané, ale nepoužité poznámky.
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: přečtěte očekávaný výsledek výřezu.
+2. Minuty 2 až 3: projděte skutečné první použití.
+3. Minuta 4: zjistěte, jestli byla potřeba původní historie nebo bokem uložená kopie.
+4. Minuta 5: zkontrolujte privacy-first hranici.
+5. Minuta 6: vyberte jeden ze čtyř stavů.
+6. Minuta 7: zapište jednu opravu, nebo výřez nechte být.
+
+Když se tým zasekne v debatě o formulaci, vraťte se k výsledku. Otázka nezní "je to nejlepší možný text", ale "pomohl při první reálné práci bez zbytečné historie a datové stopy". To je přísnější a zároveň praktičtější měřítko.
+
+### Checklist prvního použití výřezu
+
+- Měl výřez předem popsaný pracovní výsledek?
+- Použil ho někdo mimo původní autory změny?
+- Našel výřez v místě, kde práci opravdu dělá?
+- Stačil výřez bez původní historie?
+- Vedl ke správnému kroku nebo rozhodnutí?
+- Nevznikla kvůli němu nová pomocná evidence?
+- Neunikl do zákaznické nebo veřejné komunikace interní detail?
+- Byla zachována privacy-first hranice?
+- Vybrali jsme jeden ze čtyř výsledných stavů?
+- Pokud je potřeba oprava, je lokální a konkrétní?
+- Pokud výřez nefunguje, umíme ho vrátit do rozhodovacího záznamu bez sentimentu?
+
+První použití výřezu má chránit tým před tichým hromaděním "užitečných" poznámek. Když výřez funguje, zůstane u pracovního místa. Když potřebuje drobnou úpravu, opraví se jen nejbližší tření. Když nefunguje, vrátí se do historie. Všechny tři výsledky jsou zdravější než nekonečná knihovna textů, které nikdo nechce smazat a málokdo opravdu používá.
+
 ## Pravidla rukopisu
 
 - Pišu česky, prakticky a bez nafukování.
@@ -219862,3 +219999,4 @@ Uzavřená druhá tichá kontrola má zanechat lehčí systém než předtím. P
 - 2026-06-12: Doplněna úvodní podkapitola o uzavření druhého běžného použití po převodu reakce: čtyři uzavírací stavy, propsání do běžného pracovního místa, ukončení zvláštní pozornosti, privacy-first úklid, karta a checklist.
 - 2026-06-13: Doplněna krátká úvodní poznámka, aby další průchod rukopisem začínal až z návratového signálu, ne z obecného pocitu dalšího zlepšování.
 - 2026-06-13: Doplněna úvodní podkapitola o převodu uzavřené změny do použitelného výřezu: typy výřezů, co nepřenášet z historie, privacy-first kontrola, karta, mini workshop a checklist.
+- 2026-06-16: Doplněna úvodní podkapitola o ověření použitelného výřezu při prvním reálném použití: očekávaný výsledek, čtyři výsledné stavy, privacy-first kontrola, karta, mini workshop a checklist.
