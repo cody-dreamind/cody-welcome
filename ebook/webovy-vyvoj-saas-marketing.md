@@ -221180,8 +221180,178 @@ Když workshop skončí sporem o to, jestli jde o lokální dotažení nebo nov�
 
 První běžné použití je hotové ve chvíli, kdy víte, jestli závěr umí žít bez zvláštní péče. Buď ano a necháte ho v klidu pracovat, nebo potřebuje jednu drobnou opravu, nebo ukázal novou otázku s vlastní hranicí. Všechny tři výsledky jsou užitečné. Neužitečné je jen tvářit se, že převod do rytmu je hotový, aniž by ho někdo poprvé použil v reálné práci.
 
+## Uzavření prvního běžného použití po převodu nové otázky do rytmu
+
+První běžné použití po převodu nové otázky do rytmu není hotové tím, že někdo vyplní kartu. Hotové je až ve chvíli, kdy tým ví, co se má stát dál se samotným výsledkem. Jinak se z prvního použití stane jen další poznámka vedle původní otázky, převodové karty a starého pracovního místa. Papírů přibude, práce se neuklidní a pravidlo začne žít ve dvou verzích: jedné napsané a druhé používané.
+
+Uzavření má proto jednoduchý cíl: rozhodnout, jestli výsledek necháte v běžném rytmu, opravíte jedno pracovní místo, zúžíte rozsah použití, nebo otevřete nový návratový signál. Každá z těchto cest má jiné následky. Když je smícháte, vznikne přesně ten typ neurčitého provozního bahna, ve kterém se za měsíc všichni ptají, proč tu máme tři podobné checklisty a žádný z nich není autoritativní.
+
+Začněte zápisem:
+
+```text
+První běžné použití ukázalo:
+
+Výsledný stav:
+- ponechat v rytmu
+- lokálně dotáhnout
+- zúžit pracovní místo
+- otevřít nový návratový signál
+
+Jedna věc, která se propisuje:
+
+Jedna věc, která se uklízí:
+
+Co už dál nesledujeme zvlášť:
+
+Datum dalšího přirozeného zahlédnutí:
+```
+
+Příklad:
+
+```text
+První běžné použití ukázalo:
+Kanonická kvalifikační karta se našla bez nápovědy, ale ve follow-up šabloně zůstala stará scoringová věta.
+
+Výsledný stav:
+Lokálně dotáhnout.
+
+Jedna věc, která se propisuje:
+Přepsat větu ve follow-up šabloně tak, aby odkazovala na kvalifikační kartu místo kopírování scoringu.
+
+Jedna věc, která se uklízí:
+Smazat dočasnou poznámku se starým zněním scoringové věty.
+
+Co už dál nesledujeme zvlášť:
+Nezakládáme přehled všech e-mailových šablon, protože problém se objevil jen v jedné.
+
+Datum dalšího přirozeného zahlédnutí:
+Při dalším předání relevantního leadu do delivery.
+```
+
+Všimněte si, že uzavření neříká "provedeme audit šablon". Říká "opravíme jednu šablonu". To je rozdíl mezi pracovním uzavřením a únikovou cestou do další analýzy. Analýza se často tváří zodpovědně, ale když po jednom konkrétním nálezu otevře deset nových míst, je to jen dražší forma nerozhodnosti.
+
+### Čtyři uzavírací stavy
+
+Po prvním běžném použití vyberte jeden uzavírací stav:
+
+- Ponechat v rytmu: závěr se použil přirozeně a není potřeba žádná oprava.
+- Lokálně dotáhnout: jedno pracovní místo má zbytek starého pravidla, nejasnou větu nebo špatný odkaz.
+- Zúžit pracovní místo: závěr funguje, ale jen v menším rozsahu, než jste původně zapsali.
+- Otevřít nový návratový signál: objevilo se tření, které se opakuje nebo míří mimo původní převedenou otázku.
+
+U stavu "ponechat v rytmu" je nejtěžší neudělat nic navíc. Zapište výsledek, nechte závěr v kanonickém pracovním místě a zavřete zvláštní kartu prvního použití. Pokud se v týmu ozve touha ještě to dvakrát preventivně zkontrolovat, vraťte se k návratovému signálu. Preventivní hlídání bez signálu není kvalita, ale úzkost s tabulkou.
+
+U lokálního dotažení opravte nejbližší místo a nechte opravu projít dalším přirozeným použitím. Neotevírejte původní otázku, pokud problém není širší. Lokální dotažení má být malé a viditelné: jedna věta, jeden odkaz, jedno pole, jeden stav v checklistu, jedna instrukce v šabloně.
+
+U zúžení pracovního místa přepište rozsah přímo tam, kde lidé pracují. Nestačí napsat do logu, že pravidlo platí jen pro určitý typ leadu, nabídky nebo onboardingu. Právě pracovní místo musí zabránit tomu, aby člověk pravidlo použil moc široce. Dobré zúžení je takové, které uživatel pozná před akcí, ne až při zpětném vysvětlování.
+
+U nového návratového signálu oddělte starou otázku od nového tématu. První běžné použití mohlo ukázat něco hodnotného, ale to neznamená, že se původní převod nepovedl. Napište nový signál samostatně a starý závěr nechte zavřený, pokud opravdu fungoval v rozsahu, pro který byl určen.
+
+### Co propsat do živého místa
+
+Uzavření se má projevit v jednom živém místě. Může to být checklist, šablona, rozhodovací log, onboardingová karta, interní návod, stránka v administraci nebo jedna věta v briefu. Důležité je, aby šlo o místo, které člověk potká při práci, ne o archivní záznam, který si přečte jen někdo při retrospektivě.
+
+Propisujte jen to, co mění budoucí chování:
+
+- aktuální pravidlo;
+- opravenou větu nebo odkaz;
+- zúžený rozsah použití;
+- návratový signál;
+- datum nebo situaci dalšího přirozeného zahlédnutí.
+
+Nepropisujte celou historii vzniku otázky. Historie patří do archivu, pokud má ještě účel. Živé místo má být krátké, použitelné a bez archeologické vrstvy. Když člověk při práci musí číst tři odstavce, aby pochopil jednu větu, systém mu nepomáhá. Jen ho nutí platit časovou daň za minulou nejistotu.
+
+Praktické pravidlo:
+
+```text
+Živé místo má odpovědět na otázku: co mám udělat teď?
+Archiv má odpovědět na otázku: proč jsme se tak rozhodli?
+```
+
+Tyto dvě otázky nemíchejte. Když archivní důvody nalepíte do pracovního checklistu, checklist ztěžkne. Když aktuální pravidlo necháte jen v archivu, lidé ho při práci minou.
+
+### Privacy-first uzavření
+
+Uzavření prvního použití je vhodná chvíle pro malý datový úklid. Dočasné příklady, screenshoty, exporty, kopie e-mailů, poznámky z hovoru nebo osobní detaily zákaznické situace často vzniknou jen proto, aby tým pochopil tření. Jakmile je rozhodnutí hotové, většina těchto podkladů už nemá v pracovním systému co dělat.
+
+Privacy-first otázka zní:
+
+```text
+Která stopa je ještě potřeba pro budoucí rozhodnutí, a kterou držíme jen ze zvyku?
+```
+
+Potřebná stopa může být krátká a anonymní: "stará scoringová věta zůstala ve follow-up šabloně". Nepotřebná stopa je kompletní e-mail, jméno leadu, screenshot interní poznámky nebo kopie konkrétního obchodního průchodu, pokud už z něj zbývá jen poučení o šabloně. Čím rychleji zredukujete důkaz na pracovní podstatu, tím menší datový dluh si odnesete do běžného rytmu.
+
+Codyho komentář: když se z každé drobné opravy stane malý archiv osobních detailů, nebudujete lepší provoz. Budujete muzeum náhodných stop. A muzea jsou fajn, jen ne v checklistu pro obchod.
+
+### Karta uzavření prvního běžného použití
+
+```text
+Převedená otázka:
+
+Jednovětý závěr:
+
+První běžné použití:
+
+Výsledek použití:
+- funguje v rytmu
+- lokální dotažení
+- zúžení pracovního místa
+- nový návratový signál
+
+Uzavírací stav:
+- ponechat v rytmu
+- lokálně dotáhnout
+- zúžit pracovní místo
+- otevřít nový návratový signál
+
+Co se propisuje do živého místa:
+
+Kde přesně se to propisuje:
+
+Co se uklízí z dočasných podkladů:
+
+Co už dál nevedeme jako zvláštní agendu:
+
+Návratový signál nebo další přirozené zahlédnutí:
+
+Vlastník:
+
+Datum:
+```
+
+Karta má uzavřít přechodovou pozornost. Pokud po jejím vyplnění vznikne potřeba další zvláštní karty, zkontrolujte, jestli jste omylem neotevřeli nový problém bez hranice. Někdy je to správně, ale musí to být vědomý nový signál, ne nenápadné pokračování staré nejistoty.
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: přečtěte jednovětý závěr a výsledek prvního běžného použití.
+2. Minuta 2: vyberte jeden uzavírací stav.
+3. Minuty 3 až 4: určete jedno živé místo, kam se výsledek propíše.
+4. Minuta 5: napište, co se maže, slučuje, zkracuje nebo anonymizuje.
+5. Minuta 6: pojmenujte, co už dál nebude zvláštní agenda.
+6. Minuta 7: zapište návratový signál nebo datum dalšího přirozeného zahlédnutí.
+
+Když se tým zasekne mezi lokálním dotažením a novým návratovým signálem, položte si otázku, zda problém zmizí opravou jednoho místa. Pokud ano, dotáhněte lokálně. Pokud ne, napište nový signál, ale starou otázku znovu neotevírejte automaticky.
+
+### Checklist uzavření prvního běžného použití
+
+- Vybrali jsme jeden uzavírací stav?
+- Nezaměnili jsme lokální dotažení za nový projekt?
+- Je jasné, do kterého živého místa se výsledek propisuje?
+- Odpovídá živé místo na otázku "co mám udělat teď"?
+- Zůstala historie rozhodnutí mimo pracovní instrukci?
+- Pokud zúžujeme rozsah, pozná to člověk před použitím pravidla?
+- Pokud otevíráme nový signál, má vlastní hranici a nelepí se na starou otázku?
+- Uklidili jsme dočasné podklady, které už nemají účel?
+- Zkrátili nebo anonymizovali jsme příklady z reálných situací?
+- Víme, co už dál nevedeme jako zvláštní agendu?
+- Existuje návratový signál nebo další přirozené zahlédnutí místo trvalého dohledu?
+
+Uzavření prvního běžného použití je dobré tehdy, když po něm zůstane méně zvláštní péče než před ním. Výsledek buď klidně žije v rytmu, čeká na jednu malou lokální opravu, má přesnější pracovní rozsah, nebo se z něj oddělil nový signál. V každém případě má tým vědět, kde je aktuální pravda a které dočasné stopy už může bez nostalgie uklidit.
+
 ## Pracovní log
 
+- 2026-06-16: Doplněna úvodní podkapitola o uzavření prvního běžného použití po převodu nové otázky do rytmu: uzavírací stavy, propsání do živého místa, oddělení archivu od pracovní instrukce, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-16: Doplněna úvodní podkapitola o prvním běžném použití po převodu nové otázky do rytmu: normální pracovní průchod, čtyři výsledné stavy, lokální dotažení, privacy-first datová střídmost, karta, mini workshop a checklist.
 - 2026-06-16: Doplněna úvodní podkapitola o převodu uzavřené nové otázky do běžného rytmu: pracovní místo, kontrolní rytmus, návratový signál, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-16: Doplněna úvodní podkapitola o uzavření prvního průchodu nové otázky po širším vzoru: čtyři uzavírací stavy, propsání do kanonického místa, privacy-first úklid, karta, mini workshop a checklist.
