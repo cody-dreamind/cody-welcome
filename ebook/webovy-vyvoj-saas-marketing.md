@@ -220057,8 +220057,135 @@ Když se workshop zasekne, pravděpodobně se snažíte současně uzavřít zá
 
 Dobré uzavření je nudné v tom nejlepším smyslu. Zásah se stal součástí běžné práce, pomocné stopy zmizely a tým má jasný signál, kdy se k tématu vrátit. Pokud po uzavření zůstane víc věcí než před zásahem, zkontrolujte, jestli jste omylem nevytvořili systém pro hlídání systému. Ty bývají velmi pilné a velmi málo užitečné.
 
+## První běžný průchod po uzavřeném zásahu
+
+Uzavřený zásah se opravdu osvědčí až v prvním běžném průchodu, kdy kolem něj už nestojí zvláštní pozornost. Nejde o další ověřovací kolo. Jde o obyčejné použití pracovního místa, ve kterém má nová věta, otázka, odkaz nebo zúžená volba pomáhat stejně samozřejmě jako zbytek systému.
+
+Kontrolní otázka zní:
+
+```text
+Použilo se upravené pracovní místo normálně, bez návratu do mimořádného režimu?
+```
+
+Slovo "normálně" je tady zásadní. Pokud se tým před použitím znovu vrací k celé historii návratového signálu, hledá staré podklady, svolává zvláštní review nebo si bokem vede pomocnou tabulku, zásah ještě nesplynul s prací. Možná je užitečný, ale pořád kolem sebe táhne provozní zbytek. Ten je potřeba buď odstranit, nebo přiznat, že uzavření bylo předčasné.
+
+Příklad:
+
+```text
+Uzavřený zásah:
+V měsíční review šabloně zůstala kontrolní otázka, zda dnešní situace odpovídá doslovnému návratovému signálu.
+
+První běžný průchod:
+Tým při review řešil nový podnět k úpravě formuláře.
+
+Co se stalo:
+Otázka pomohla rychle poznat, že nejde o návrat starého problému. Nikdo neotevíral starou kartu ani pomocný výpis rozhodnutí.
+
+Výsledek:
+Zásah je součástí běžné práce. Do logu stačí jedna věta; žádná další kontrola nevzniká.
+```
+
+Tento průchod má být lehký. Nemá dokazovat, že změna vydrží navždy. Má jen ukázat, jestli se dá použít bez autora původního zásahu, bez čerstvého vysvětlení a bez neviditelné podpory v pozadí. Pokud ano, nechte ji být. Stabilní pravidlo se pozná i podle toho, že po něm není potřeba pořád sahat.
+
+### Tři signály normálního průchodu
+
+Při prvním běžném průchodu sledujte jen tři signály:
+
+- Samostatnost: člověk nebo tým použil pracovní místo bez dodatečného vysvětlování původní historie.
+- Přiměřenost: zásah pomohl přesně tam, kde měl, a nerozšířil rozhodování na další témata.
+- Datová střídmost: nevznikl nový záznam, tracker, export ani osobní dohled jen proto, že zásah je čerstvý.
+
+Samostatnost neznamená, že nikdo nesmí položit otázku. Znamená, že otázka míří na dnešní rozhodnutí, ne na archeologii starého zásahu. Když se někdo ptá "co znamená tento stav v dnešním případě", je to běžná práce. Když se ptá "proč jsme to tehdy přidali a kde je původní karta", systém pořád závisí na historii.
+
+Přiměřenost chrání rozsah. Upravená otázka má pomoct vybrat stav, ne otevřít revizi všech stavů. Přesunutý příklad má zrychlit rozhodnutí, ne spustit přepis celé šablony. Pokud se při běžném průchodu objeví větší téma, zapište ho zvlášť. Aktuální průchod nechte dokončit.
+
+Datová střídmost je privacy-first pojistka. První běžné použití často svádí k větě "pojďme si to ještě pro jistotu sledovat". Pokud zásah funguje v práci, další sledování většinou nepřidá hodnotu. Přidá údržbu, přístupy, retenci a drobný pocit, že bez tabulky není realita skutečná. Realita je skutečná i bez tabulky, bohužel i v pondělí.
+
+### Čtyři výsledky prvního běžného průchodu
+
+Po průchodu vyberte jeden ze čtyř výsledků:
+
+- Splynulo s prací: zásah funguje bez zvláštní péče a není potřeba další krok.
+- Potřebuje jedno lokální odlehčení: zásah funguje, ale kolem něj zůstala jedna zbytečná stopa, připomínka nebo starý odkaz.
+- Uzavření bylo předčasné: bez historie nebo autora zásahu pracovní místo pořád nefunguje samostatně.
+- Objevil se nový podnět: zásah funguje, ale dnešní použití ukázalo jiné téma mimo původní kartu.
+
+"Splynulo s prací" je cílový stav. Zapište ho stručně a nechte téma přejít do klidu. Nepřidávejte druhý běžný průchod jen proto, že první dopadl dobře. Když má systém návratový signál, další kontrola přijde až s ním.
+
+"Potřebuje jedno lokální odlehčení" znamená úklid, ne novou iteraci. Typicky smazat starou připomínku z agendy, odstranit archivní odkaz ze šablony nebo zkrátit vysvětlující poznámku. Odlehčení má ubrat váhu, ne přidat další pravidlo.
+
+"Uzavření bylo předčasné" je poctivý výsledek. Neznamená, že zásah byl špatný. Znamená, že nebyl dost připravený na běžný provoz. Vraťte se ke kartě uzavření a zkontrolujte, co mělo zůstat v pracovním místě a co se omylem nechalo jen v hlavách lidí.
+
+"Objevil se nový podnět" nepatří do stejné karty. Zásah může být uzavřený a zároveň se může objevit nové téma. To není rozpor. To je normální práce: po hezkém uzavření se prostě objeví další reálná situace.
+
+### Karta prvního běžného průchodu
+
+```text
+Uzavřený zásah:
+
+Pracovní místo:
+
+První běžné použití:
+
+Použilo se bez zvláštní péče?
+- ano / částečně / ne
+
+Co pomohlo:
+
+Co ještě táhlo starou historii:
+
+Výsledek:
+- splynulo s prací
+- potřebuje jedno lokální odlehčení
+- uzavření bylo předčasné
+- objevil se nový podnět
+
+Rozhodnutí:
+
+Co teď výslovně nepřidáváme:
+
+Jaká data kvůli tomuto průchodu nesbíráme:
+
+Co smažeme, zkrátíme nebo necháme vypršet:
+
+Návratový signál:
+
+Datum:
+```
+
+Karta je krátká záměrně. Pokud první běžný průchod vyžaduje dlouhý zápis, není běžný. Buď je pracovní místo pořád nejasné, nebo se tým snaží přes jednu uzavřenou úpravu vyřešit větší systémovou nejistotu.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: pojmenujte uzavřený zásah a pracovní místo.
+2. Minuta 2: popište první běžné použití.
+3. Minuta 3: řekněte, jestli se použilo bez zvláštní péče.
+4. Minuta 4: vyberte jeden ze čtyř výsledků.
+5. Minuta 5: určete případné lokální odlehčení nebo návrat k uzavírací kartě.
+6. Minuta 6: zapište, co nepřidáváte, jaká data nesbíráte a jaký signál téma znovu otevře.
+
+Když workshop vyvolá chuť přidat další kontrolní bod, nejdřív se zeptejte, jaký konkrétní problém by tím kontrolní bod řešil. Pokud odpověď zní "budeme si jistější", nestačí to. Jistota bez rozhodovacího účelu je drahá dekorace.
+
+### Checklist prvního běžného průchodu
+
+- Použili jsme upravené pracovní místo v reálné situaci?
+- Nepotřebovali jsme k tomu autora zásahu ani původní historii?
+- Pomohl zásah přesně tam, kde měl?
+- Nerozšířil průchod rozhodování na další témata?
+- Vybrali jsme jeden ze čtyř výsledků?
+- Pokud zůstala stará stopa, jde o jedno lokální odlehčení?
+- Pokud uzavření bylo předčasné, vracíme se ke kartě uzavření místo vrstvení nových oprav?
+- Nový podnět zapisujeme mimo aktuální kartu?
+- Nevzniká nový dashboard, export, tracker ani osobní dohled?
+- Je jasné, co teď výslovně nepřidáváme?
+- Smažeme, zkrátíme nebo necháme vypršet dočasné podklady?
+- Zůstává návratový signál místo další pravidelné kontroly?
+
+První běžný průchod po uzavřeném zásahu má ukázat, jestli systém umí žít bez berliček. Když ano, nejlepší další práce je žádná další práce v tomto tématu. Když ne, opravte nejbližší slabé místo. A když se objeví něco nového, dejte tomu vlastní cestu. Jedna uzavřená karta nemá nést celý svět, i když se občas tváří, že by to s trochou kofeinu zvládla.
+
 ## Pracovní log
 
+- 2026-06-16: Doplněna úvodní podkapitola o prvním běžném průchodu po uzavřeném zásahu: samostatnost bez zvláštní péče, tři signály normálního průchodu, čtyři výsledné stavy, privacy-first datová střídmost, karta, mini workshop a checklist.
 - 2026-06-16: Doplněna úvodní podkapitola o uzavření ověřeného zásahu do běžné práce: tři vrstvy uzavření, čtyři uzavírací stavy, privacy-first datový úklid, karta, mini workshop a checklist.
 - 2026-06-16: Doplněna úvodní podkapitola o ověření jednoho zásahu při dalším reálném použití: čtyři výsledky ověření, privacy-first hranice, karta, mini workshop a checklist.
 - 2026-06-16: Doplněna úvodní podkapitola o převodu první věty po návratovém signálu do jednoho zásahu: výběr pracovního místa, čtyři typy zásahu, privacy-first hranice, karta, mini workshop a checklist.
