@@ -218719,8 +218719,158 @@ Když není k dispozici člověk bez čerstvého kontextu, použijte alespoň ch
 
 Druhá tichá kontrola je dobrý konec mimořádné pozornosti. Když pravidlo projde bez čerstvé paměti, tým ho může nechat žít v běžném rytmu. Když narazí na hranu, opraví hranu. Když se spustí návratový signál, otevře novou smyčku. Všechno ostatní je jen touha mít jistotu navíc, a ta bývá v provozu drahá, upovídaná a datově nenasytná.
 
+## Uzavření druhé tiché kontroly po převodu do běžného provozu
+
+Druhá tichá kontrola má skončit jasněji než první. Po první kontrole je ještě v pořádku nechat krátké tiché sledování, protože tým právě zjišťuje, jestli se pravidlo přeneslo z mimořádné péče do normální práce. Po druhé kontrole už by ale měla vzniknout jedna ze dvou věcí: buď pravidlo opravdu žije samo, nebo existuje konkrétní důvod otevřít novou smyčku. Mezistav "ještě se na to občas podíváme" je většinou jen návrat do skrytého dohledu.
+
+Dobrá uzavírací otázka zní:
+
+```text
+Co po druhé tiché kontrole už nemusíme samostatně hlídat?
+```
+
+Pokud na ni neumíte odpovědět, kontrola pravděpodobně nebyla uzavřená. Možná jste našli hranu pravidla, možná slabé kanonické místo, možná skutečný návratový signál. Všechny tři situace jsou legitimní. Problém nastává až ve chvíli, kdy se nerozhodne nic a téma dál tiše visí v provozu jako drobný stínový proces.
+
+Příklad:
+
+```text
+Kontrolované pravidlo:
+U relevantní poptávky se ověřuje rozhodovací role v sales šabloně.
+
+Druhá tichá kontrola:
+Nový člověk použil šablonu bez vysvětlení autora.
+
+Výsledek:
+Pravidlo je samostatně přenositelné. Jedna hranová situace se zprostředkovanou poptávkou byla doplněna příkladem.
+
+Uzavření:
+Samostatnou tichou kontrolu končíme. Pravidlo zůstává v běžném měsíčním review sales šablon. Neotevíráme lead scoring, nové CRM pole ani další měření používání šablony.
+```
+
+To je dobrý konec. Něco se ověřilo, jedna hrana se opravila a zvláštní pozornost skončila. Pravidlo má dál své běžné místo, ale už nepotřebuje vlastní malý servisní život.
+
+### Čtyři uzavírací stavy
+
+Po druhé tiché kontrole vyberte jeden stav:
+
+- Uzavřít do běžného rytmu: pravidlo je samostatně přenositelné a nepotřebuje další zvláštní kontrolu.
+- Uzavřít s jednou lokální úpravou: pravidlo drží, ale jedna hrana se musí propsat do kanonického místa.
+- Převést do nové smyčky: kontrola spustila skutečný návratový signál a je potřeba samostatné rozhodnutí.
+- Sloučit do širší rutiny: pravidlo není tak důležité, aby mělo vlastní rytmus, ale patří do existujícího review.
+
+Stav "uzavřít s jednou lokální úpravou" má mít velmi krátký dojezd. Upravte jedno místo, zapište výsledek a skončete. Pokud úprava potřebuje druhé a třetí místo, už nejde o lokální opravu. V tom případě ji přepište na novou pracovní otázku, aby se z drobného uzavření nestal nepojmenovaný audit.
+
+Stav "sloučit do širší rutiny" je užitečný hlavně u pravidel, která se ukázala jako zdravá, ale příliš malá na vlastní kontrolu. Typicky jde o jednu větu v obchodní šabloně, jeden krok v publikačním checklistu nebo jednu hranici v onboardingovém postupu. Pravidlo nezmizí. Jen přestane zabírat samostatnou pozornost.
+
+### Co propsat po uzavření
+
+Po uzavření druhé kontroly upravte jen místa, která budou lidé skutečně používat:
+
+- kanonickou šablonu nebo checklist;
+- stav původní karty, pokud ještě existuje;
+- návratový signál u pravidla;
+- nejbližší běžné review, do kterého pravidlo patří;
+- krátkou poznámku o tom, co se už zvlášť nehlídá.
+
+Nepřepisujte celou historii. Po druhé tiché kontrole už tým nepotřebuje vědět, kdo co navrhl v první verzi a které varianty se cestou zavřely. Potřebuje vědět, jak má pracovat teď, kdy se má k tématu vrátit a co kvůli tomu nemá začít sbírat.
+
+Dobrá uzavírací věta:
+
+```text
+Pravidlo zůstává v sales šabloně a přechází do běžného měsíčního review. Samostatné tiché kontroly končí; návratový signál je opakovaná nejistota u rozhodovací role i po použití hranového příkladu.
+```
+
+Slabá uzavírací věta:
+
+```text
+Ještě to budeme sledovat.
+```
+
+Druhá věta neříká, kdo, kde, proč ani kdy skončí. Vypadá opatrně, ale ve skutečnosti vyrábí mlhu. A mlha je v provozu drahá, protože v ní lidé zakládají nové tabulky.
+
+### Privacy-first uzavření
+
+Uzavření druhé tiché kontroly je dobrý moment pro datový úklid. Pokud pravidlo funguje, nepotřebujete další důkazovou vrstvu. Pokud se otevřela nová smyčka, přeneste do ní jen aktuální rozhodovací důkaz, ne celý balík historických stop.
+
+Zapište si:
+
+```text
+Díky uzavření druhé tiché kontroly dál nesbíráme:
+```
+
+Příklady:
+
+- nesbíráme osobní skóre používání šablony;
+- neexportujeme zákaznické poptávky do nové kontrolní tabulky;
+- nenahráváme pracovní průchody jen kvůli ověření pravidla;
+- nezakládáme nový dashboard pro jednu větu v checklistu;
+- nenecháváme dočasné kopie příkladů v chatu, pokud už je příklad v kanonickém místě.
+
+Privacy-first provoz se často nepozná podle velkého gesta. Pozná se podle toho, že po dobrém ověření umíte přestat ověřovat. Data, která už nepomáhají rozhodnutí, nemají zůstávat jen proto, že jejich smazání nikdo nenapsal do úkolu.
+
+Codyho komentář: druhá tichá kontrola je poslední slušná chvíle říct "stačí". Kdo ji mine, často si omylem pořídí nový proces převlečený za opatrnost. A procesy bez konce jsou zvláštní forma drahého nábytku: zabírají místo, občas do nich někdo narazí a nikdo si není jistý, kdo je vlastně objednal.
+
+### Karta uzavření druhé tiché kontroly
+
+```text
+Kontrolované pravidlo:
+
+Výsledek druhé tiché kontroly:
+- samostatně přenositelné
+- lokální hrana
+- potřeba přesunu
+- návratový signál
+
+Uzavírací stav:
+- běžný rytmus
+- jedna lokální úprava
+- nová smyčka
+- sloučení do širší rutiny
+
+Co se mění:
+
+Co se výslovně už nehlídá:
+
+Kde je pravidlo po uzavření:
+
+Návratový signál:
+
+Jaká data, exporty nebo dočasné poznámky uklízíme:
+
+Jaká data dál nesbíráme:
+
+Vlastník uzavření:
+```
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: napište výsledek druhé kontroly jednou větou.
+2. Minuta 2: vyberte uzavírací stav.
+3. Minuta 3: určete, kde pravidlo bude žít dál.
+4. Minuta 4: napište, co už samostatně nehlídáte.
+5. Minuta 5: ukliďte dočasné stopy nebo určete jejich vlastníka.
+6. Minuta 6: potvrďte návratový signál a privacy-first hranici.
+
+Když workshop skončí větou "potřebujeme ještě víc jistoty", ptejte se, jaké rozhodnutí by ta jistota změnila. Pokud žádné, nejde o potřebu jistoty. Jde o zvyk držet otevřenou práci déle, než je užitečné.
+
+### Checklist uzavření druhé tiché kontroly
+
+- Máme jasný výsledek druhé kontroly?
+- Vybrali jsme jeden uzavírací stav?
+- Víme, jestli pravidlo končí ve zvláštní péči, nebo se převádí do běžného rytmu?
+- Je případná lokální úprava opravdu jen v jednom místě?
+- Pokud vznikla nová smyčka, má vlastní otázku a nepřebírá celý historický archiv?
+- Je návratový signál viditelný v kanonickém pracovním místě?
+- Zapsali jsme, co už samostatně nehlídáme?
+- Uklidili jsme dočasné poznámky, exporty nebo kopie příkladů?
+- Nevzniklo nové osobní měření, dashboard ani sledování kvůli pravidlu, které už funguje?
+- Umí vlastník jednou větou říct, kdy se téma znovu otevře?
+
+Uzavřená druhá tichá kontrola má zanechat lehčí systém než předtím. Pravidlo buď funguje v běžné práci, nebo se z něj stala nová jasně pojmenovaná otázka. V obou případech zmizí mimořádná pozornost, staré pomocné stopy a neurčitý pocit, že by se na to "někdy mělo kouknout". To je malá výhra, ale přesně z těchhle malých výher se skládá provoz, který se dá dlouhodobě udržet.
+
 ## Pracovní log
 
+- 2026-06-16: Doplněna úvodní podkapitola o uzavření druhé tiché kontroly po převodu do běžného provozu: čtyři uzavírací stavy, převod do běžného rytmu, ukončení zvláštní péče, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-16: Doplněna úvodní podkapitola o druhé tiché kontrole po převodu do běžného provozu: přenositelnost bez čerstvého vysvětlení, čtyři výsledné stavy, lokální hrany pravidla, privacy-first hranice, karta, mini workshop a checklist.
 - 2026-06-16: Doplněna úvodní podkapitola o uzavření první tiché kontroly po převodu do běžného provozu: čtyři uzavírací stavy, propsání do živého systému, úklid dočasných stop, privacy-first výsledná stopa, karta, mini workshop a checklist.
 - 2026-06-16: Doplněna úvodní podkapitola o první tiché kontrole po převodu do běžného provozu: běžný rytmus kontroly, čtyři výsledné stavy, rozlišení navigační opravy od návratového signálu, privacy-first datová hranice, karta, mini workshop a checklist.
