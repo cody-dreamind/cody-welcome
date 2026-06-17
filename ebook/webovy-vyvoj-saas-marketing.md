@@ -223680,8 +223680,132 @@ Když workshop skončí bez výsledku, defaultní stav je "opravit jedno pracovn
 
 První kvartální kontrola je úspěšná, když pravidlo buď klidně pokračuje, nebo dostane malou přesnou opravu. Není úspěšná proto, že tým našel deset nápadů. Je úspěšná proto, že po ní všichni vědí, jestli pravidlo pořád pomáhá dnešní práci a jak má žít do dalšího návratu.
 
+## Uzavření první kvartální kontroly pravidla
+
+Kvartální kontrola nemá zůstat otevřená jako poznámka typu "ještě se k tomu vrátíme". Pokud kontrola proběhla, musí po ní vzniknout jednoduchý provozní stav: pravidlo pokračuje, přechází do delšího rytmu, opravuje se jedno pracovní místo, nebo se otevírá údržbová karta. Bez uzavření se i dobrá kontrola změní v další vrstvu dohledu.
+
+Začněte tím, že výsledek přepíšete do jedné věty:
+
+```text
+Po první kvartální kontrole pravidlo:
+```
+
+Věta má být konkrétní. "Pravidlo je asi v pořádku" nestačí. Lepší zápis:
+
+```text
+Po první kvartální kontrole pravidlo zůstává v kvartálním rytmu; opravujeme jen starou kopii šablony case study a dál nesbíráme žádné údaje o práci autorů.
+```
+
+Takový závěr říká tři věci najednou: co se děje s pravidlem, kde je jediná akce a jaká datová hranice zůstává zavřená. Tým nemusí znovu číst celou kontrolu, aby pochopil, co má platit od zítřka.
+
+### Čtyři uzavírací stavy
+
+Po první kvartální kontrole vyberte jeden ze čtyř uzavíracích stavů:
+
+- Stabilní pravidlo: pravidlo zůstává v rytmu beze změny a další kontrola je podle plánu.
+- Stabilní pravidlo s lokální opravou: pravidlo drží, ale jedno pracovní místo potřebuje drobnou opravu.
+- Delší klidový rytmus: pravidlo je nízkorizikové a další kontrola může být půlroční.
+- Údržbová karta: pravidlo už nestačí dnešní práci a potřebuje samostatnou malou údržbu.
+
+Nejrizikovější stav je ten, který není pojmenovaný. Když tým řekne "něco ještě doladíme", nikdo neví, jestli jde o lokální opravu, nebo údržbovou kartu. Doladění bez stavu je obvykle otevřená práce v převleku za drobnost. A převleky patří do divadla, ne do provozního systému.
+
+Lokální oprava má mít jedno místo: jednu šablonu, jeden odkaz, jeden checklist, jeden brief, jednu větu v pracovním návodu. Jakmile oprava potřebuje víc míst, více vlastníků nebo nové rozhodnutí o rozsahu, už to není lokální oprava. Je to údržbová karta.
+
+### Přepsání výsledku do pracovního místa
+
+Uzavření není hotové, dokud výsledek nežije tam, kde lidé pravidlo používají. Nestačí mít zápis z kontroly. Pokud pravidlo bydlí v šabloně, upravte šablonu. Pokud bydlí v briefu, upravte brief. Pokud bydlí v checklistu, upravte checklist. Záznam z kontroly má být stopa rozhodnutí, ne hlavní místo použití.
+
+Praktický postup:
+
+- zapište jednovětý výsledek kontroly;
+- proveďte jednu schválenou lokální opravu, pokud existuje;
+- zkontrolujte, že kanonické pracovní místo ukazuje aktuální pravidlo;
+- smažte nebo označte staré kopie, které by pravidlo mohly znovu rozbít;
+- nastavte další plánovanou kontrolu nebo návratový signál.
+
+Pokud je výsledkem delší klidový rytmus, dejte pozor na jazyk. Nepište "už to neřešíme". Správnější věta je: "Pravidlo je stabilní, proto stačí půlroční kontrola nebo dřívější návrat při konkrétním signálu." To chrání tým před dvěma extrémy: neustálým hlídáním i úplným zapomenutím.
+
+### Privacy-first uzavření
+
+Každé uzavření kvartální kontroly má obsahovat malý datový úklid. Ne proto, že by každé pravidlo bylo právní riziko, ale proto, že provozní pravidla často nechávají za sebou pomocné tabulky, exporty, kopie příkladů a dočasné poznámky.
+
+Při uzavření si položte tři otázky:
+
+- Co vzniklo jen kvůli kontrole a už to nepotřebujeme?
+- Co musí zůstat jako zdroj pravdy nebo auditní stopa rozhodnutí?
+- Co výslovně nebudeme sbírat při další kontrole?
+
+Příklad:
+
+```text
+Kvůli kontrole jsme si vypsali tři poslední case studies a poznámku ke staré šabloně.
+Zůstává jen jednovětý závěr v rozhodovacím záznamu a opravená šablona.
+Mažeme pracovní seznam kontrolovaných výstupů.
+Dál nesbíráme informace o tom, kdo a kdy šablonu otevřel.
+```
+
+Privacy-first hodnota tady není v tom, že se tváříme asketicky. Je v tom, že každý další rytmus začíná s čistším stolem. Příští kontrola má zkoumat pravidlo, ne archeologii starých pomocných souborů.
+
+### Karta uzavření kvartální kontroly
+
+```text
+Pravidlo:
+
+Kanonické pracovní místo:
+
+Výsledek kvartální kontroly:
+
+Uzavírací stav:
+- stabilní pravidlo
+- stabilní pravidlo s lokální opravou
+- delší klidový rytmus
+- údržbová karta
+
+Jedna věta po uzavření:
+
+Lokální oprava, pokud existuje:
+
+Co se propsalo do pracovního místa:
+
+Co mažeme, archivujeme nebo označujeme jako staré:
+
+Co dál nesbíráme:
+
+Další rytmus nebo návratový signál:
+
+Vlastník:
+```
+
+Karta má uzavřít kontrolu, ne otevírat novou dokumentační větev. Pokud se při vyplňování objeví víc než jedna lokální oprava, zastavte se a rozhodněte, jestli už nejde o údržbovou kartu. Tím ochráníte rozsah i datovou stopu.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte výsledek první kvartální kontroly.
+2. Minuta 2: vyberte jeden ze čtyř uzavíracích stavů.
+3. Minuta 3: napište jednovětý závěr po uzavření.
+4. Minuta 4: potvrďte, kam se závěr propíše v pracovním místě.
+5. Minuta 5: určete, co se maže, archivuje nebo označuje jako staré.
+6. Minuta 6: zapište další rytmus, návratový signál a vlastníka.
+
+Když workshop skončí bez jednovětého závěru, kontrola není uzavřená. Neznamená to, že musíte pokračovat v debatě hodinu. Znamená to, že výsledek kontroly nebyl dost rozhodovací a je potřeba vybrat stav: ponechat, opravit jedno místo, prodloužit rytmus, nebo otevřít údržbu.
+
+### Checklist uzavření kvartální kontroly
+
+- Má kontrola jeden jasný uzavírací stav?
+- Umíme výsledek říct jednou větou?
+- Je jasné, jestli jde o lokální opravu, nebo údržbovou kartu?
+- Propsal se výsledek do kanonického pracovního místa?
+- Uklidili jsme staré kopie, poznámky nebo pomocné seznamy?
+- Je zapsané, co dál nesbíráme?
+- Má pravidlo další rytmus nebo návratový signál?
+- Ví vlastník, co má udělat před další kontrolou?
+- Nezůstala po kontrole otevřená obecná poznámka bez rozhodnutí?
+
+Uzavřená kvartální kontrola má být nenápadná. Pravidlo po ní buď pokračuje, dostane jednu přesnou opravu, přejde do delšího klidu, nebo si zaslouží údržbovou kartu. Všechno ostatní je jen mlha, která vypadá jako pečlivost, ale ve skutečnosti zhoršuje práci příštímu člověku.
+
 ## Pracovní log
 
+- 2026-06-17: Doplněna úvodní podkapitola o uzavření první kvartální kontroly pravidla: čtyři uzavírací stavy, propsání výsledku do pracovního místa, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-17: Doplněna úvodní podkapitola o první kvartální kontrole pravidla po delším klidovém rytmu: tři kontrolní otázky, čtyři výsledky, privacy-first datová stopa, karta, mini workshop a checklist.
 - 2026-06-17: Doplněna úvodní podkapitola o uzavření prvního běžného použití po kontrole kontextu výřezu: čtyři uzavírací stavy, vypnutí mimořádné péče, privacy-first úklid stop, karta, mini workshop a checklist.
 - 2026-06-17: Doplněna úvodní podkapitola o uzavření druhé měsíční kontroly do delšího klidového rytmu: kvartální nebo půlroční režim, údržbová karta, návratový signál, privacy-first úklid, karta, mini workshop a checklist.
