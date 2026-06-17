@@ -47,6 +47,8 @@ Další průchod otevírejte až ve chvíli, kdy se objeví návratový signál 
 
 Když návratový signál opravdu přijde, první odpovědí nemá být nový seznam úkolů. Nejdřív napište jednu větu, co se změnilo proti poslednímu záznamu, a teprve potom vyberte nejmenší další krok. Tím se návrat opírá o důvod, ne o čerstvý pocit naléhavosti.
 
+Starý kontext přenášejte jen v rozsahu, který je pořád pravdivý. Pokud se změnil segment, nabídka, vlastník nebo pracovní místo, napište to do první věty návratu. Jinak tým snadno řeší dnešní situaci pravidlem, které vzniklo pro včerejší problém.
+
 ## Rychlé potvrzení návratového signálu
 
 Návratový signál má chránit tým před dvěma opačnými chybami. První chyba je ignorovat skutečný problém jen proto, že už se jednou uzavřel. Druhá chyba je otevřít novou iteraci pokaždé, když někdo zahlédne nedokonalost. Rychlé potvrzení signálu je malý filtr mezi těmito dvěma extrémy.
@@ -223401,3 +223403,4 @@ První měsíční kontrola v tichém provozu je test dospělosti pravidla. Dosp
 - 2026-06-16: Doplněna krátká úvodní poznámka k první větě po návratovém signálu, aby další krok začínal důvodem místo novým seznamem úkolů.
 - 2026-06-16: Doplněna úvodní podkapitola o uzavření použitelného výřezu po ověření: čtyři uzavírací stavy, stabilní pracovní místo, úklid kopií, privacy-first hranice, karta, mini workshop a checklist.
 - 2026-06-16: Doplněna úvodní podkapitola o návratu ověřeného předávacího pravidla do běžného revizního rytmu: výběr rytmu, ukončení mimořádné kontroly, privacy-first úklid, karta, mini workshop a checklist.
+- 2026-06-17: Doplněna krátká úvodní poznámka, aby se při návratu k tématu přenášel jen stále platný kontext.
