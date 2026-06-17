@@ -11638,6 +11638,155 @@ Když workshop začne hledat lepší obecné pravidlo pro celou dokumentaci, zas
 
 Uzavření prvního běžného použití je hotové, když výřez nepotřebuje doprovod. Buď funguje a mlčí, nebo dostal jednu malou opravu, nebo se vedle něj otevřela nová otázka bez tahání staré historie za sebou. Tím se pracovní pomůcka vrací tam, kam patří: do práce, ne do nekonečné kontroly.
 
+## Druhé běžné použití po kontrole kontextu výřezu
+
+Druhé běžné použití je nenápadný test přenositelnosti. První použití ještě často těží z čerstvé paměti lidí, kteří kontrolu kontextu zavírali. Druhé použití už většinou proběhne později, v jiné malé situaci, možná s jiným člověkem a bez pocitu, že se kolem výřezu něco zvláštního dělo. Právě tam se ukáže, jestli se výřez opravdu vrátil do běžné práce.
+
+Nejde o druhou revizi stejného textu. Cílem není hledat další lepší formulace, ale ověřit, jestli po prvním uzavření nezůstalo skryté tření: špatné umístění, slabý název, chybějící hrana, starý odkaz nebo datový zbytek, který se při prvním použití ještě neprojevil.
+
+Začněte otázkou:
+
+```text
+Použil výřez někdo podruhé bez čerstvého vysvětlení a bez návratu ke kontrole kontextu?
+```
+
+Když odpověď zní ano, výřez pravděpodobně patří do běžného rytmu. Když odpověď zní "ano, ale", opravte jen to "ale". Když odpověď zní ne, neznamená to automaticky, že je výřez špatný. Možná pořád bydlí na špatném místě nebo předpokládá znalost, kterou má jen původní autor.
+
+### Co druhé použití ověřuje
+
+První vrstva je samostatnost. Člověk nemusel vědět, proč výřez vznikl, kdo ho psal ani jaká debata mu předcházela. Pokud se bez historie nedá použít, není to ještě pracovní pomůcka. Je to zkratka pro lidi, kteří byli u vzniku.
+
+Druhá vrstva je přenos do podobné situace. Druhé použití nemusí být stejné jako první, ale musí být dost podobné, aby výřez mířil na stejný typ rozhodnutí. Například veřejný obsahový brief a veřejná případová studie mohou sdílet pravidlo pro zobecněné privacy-first příklady. Interní sales poznámka a automatizované skórování leadů už ale možná potřebují jinou hranici.
+
+Třetí vrstva je absence mimořádné péče. Pokud druhé použití znovu vytáhne kontrolní kartu, staré varianty a ruční dohled, výřez se ještě nestal obyčejnou součástí práce. Buď je moc křehký, nebo tým nemá odvahu ho nechat fungovat.
+
+Praktický příklad:
+
+```text
+Výřez:
+Veřejné materiály používají obecný privacy-first příklad; interní sales formulace zůstává jen v interní šabloně.
+
+První použití:
+Článek použil obecný příklad bez interních detailů.
+
+Druhé použití:
+Case study potřebovala vysvětlit stejný princip, ale autor znovu hledal interní sales poznámku.
+
+Výsledek:
+Výřez není problém. Slabé je pracovní místo pro case studies. Doplní se jedna věta do šablony případové studie a interní sales poznámka se neodkazuje z veřejné trasy.
+```
+
+Takový závěr je malý, ale užitečný. Neopravuje celý systém. Jen zavírá mezeru mezi dvěma podobnými veřejnými použitími.
+
+### Čtyři výsledné stavy
+
+Stav "převést do běžného rytmu" použijte, když druhé použití proběhlo samostatně, bez staré historie a bez nové datové stopy. Výřez už nepotřebuje zvláštní sledování. Stačí, aby jeho návratový signál zůstal v kanonickém pracovním místě.
+
+Stav "dočistit druhé pracovní místo" použijte, když výřez fungoval v původní trase, ale druhá podobná trasa k němu vede špatně. Typicky chybí odkaz ze šablony, název v rozcestníku, krátká instrukce v briefu nebo rozhodovací věta v checklistu. Oprava patří do druhého pracovního místa, ne do výřezu samotného.
+
+Stav "doplnit přenosovou hranici" použijte, když druhé použití ukáže, kde výřez končí. Například: "Toto pravidlo platí pro veřejné texty, ne pro interní kvalifikaci leadů" nebo "Při automatizovaném použití pravidla se nesmí ukládat konkrétní zákaznický příklad." Hranice má zabránit rozšíření výřezu do špatného kontextu.
+
+Stav "otevřít samostatné pravidlo" použijte, když druhé použití opakovaně ukazuje, že podobná situace už není jen varianta stejného výřezu. Pak nedělejte z původního výřezu univerzální pravidlo pro všechno. Otevřete nové, úzké pravidlo s vlastním pracovním místem, vlastní hranicí a vlastním návratovým signálem.
+
+### Slabý přenos bez dramatu
+
+Slabý přenos je běžný. Neznamená, že kontrola kontextu selhala. Znamená, že první uzavření ještě neodhalilo všechny cesty, kterými se výřez používá. Důležité je nereagovat příliš velkou opravou.
+
+Slabý přenos poznáte podle těchto signálů:
+
+- člověk výřez našel, ale nebyl si jistý, jestli platí i pro jeho situaci;
+- použil správný princip, ale šel pro potvrzení do staré historie;
+- vytvořil pracovní kopii, protože nevěděl, kde má být veřejná nebo interní verze;
+- doplnil do zápisu konkrétní příklad, který měl zůstat obecný;
+- otevřel vedlejší otázku, která patří do jiného pravidla.
+
+Na slabý přenos reagujte jednou nejbližší úpravou. Často stačí lepší název, věta "platí pro", věta "neplatí pro", nebo přesun odkazu z obecného rozcestníku do konkrétní šablony. Pokud oprava potřebuje víc než jednu větu a jedno místo, nejspíš už nejde o přenos, ale o novou otázku.
+
+Codyho komentář: druhé použití je dobrý test dospělosti pomůcky. Když funguje jen za přítomnosti původního autora, není to pomůcka, ale společenská událost s Markdownem. Hezké, ale hůř škálovatelné.
+
+### Privacy-first kontrola druhého použití
+
+Druhé použití často svádí k tomu, že si tým začne ukládat "příklady pro příště". To je pochopitelné, ale ne vždy rozumné. Pokud je cílem jen zpřesnit pracovní hranici, většinou nepotřebujete konkrétní zákaznický detail, screenshot, export ani seznam všech míst, kde se výřez objevil.
+
+Ptejte se:
+
+```text
+Stačí nám obecná věta o druhém použití?
+
+Nevznikla nová kopie interního nebo zákaznického příkladu?
+
+Nezačal výřez putovat do kanálu, kde ho uvidí širší publikum?
+
+Neukládáme důkaz jen proto, že druhé použití působí jako kontrola?
+
+Je jasné, jaká data díky této úpravě dál nesbíráme?
+```
+
+Pokud druhé použití vyžaduje příklad, anonymizujte ho do vzoru. Místo "zákazník X chtěl Y" napište "veřejný materiál nesmí používat interní kvalifikační formulaci". První věta ukládá detail. Druhá pomáhá rozhodovat.
+
+### Karta druhého běžného použití
+
+```text
+Název výřezu:
+
+Stav po prvním běžném použití:
+
+Druhá běžná situace:
+
+Kdo výřez použil:
+
+Použil ho bez čerstvého vysvětlení?
+
+Byla situace podobná, nebo už šlo o jiný kontext?
+
+Vznikla potřeba staré historie, kopie nebo mimořádné kontroly?
+
+Výsledný stav:
+- převést do běžného rytmu
+- dočistit druhé pracovní místo
+- doplnit přenosovou hranici
+- otevřít samostatné pravidlo
+
+Jedna úprava:
+
+Co zůstává mimo rozsah:
+
+Jaká data kvůli tomu nesbíráme:
+
+Návratový signál:
+
+Vlastník:
+```
+
+Kartu použijte jen tehdy, když druhé použití něco ukázalo. Pokud výřez fungoval úplně tiše, karta může být zbytečná. Stačí, že výřez zůstává v kanonickém místě a běžný rytmus ho zachytí až při dalším skutečném návratovém signálu.
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: pojmenujte druhou běžnou situaci použití.
+2. Minuta 2: ověřte, jestli člověk výřez použil bez čerstvého vysvětlení.
+3. Minuta 3: rozhodněte, jestli šlo o podobnou situaci, nebo nový kontext.
+4. Minuta 4: zkontrolujte, jestli se neotevřela stará historie nebo nová kopie.
+5. Minuta 5: vyberte jeden ze čtyř výsledných stavů.
+6. Minuta 6: napište jednu úpravu, pokud je potřeba.
+7. Minuta 7: potvrďte návratový signál a privacy-first hranici.
+
+Když workshop začne přepisovat původní kontrolu kontextu, vraťte ho k druhému použití. Otázka nezní "jak by výřez vypadal ideálně". Otázka zní "co se stalo při druhém běžném použití a jaká je nejmenší oprava".
+
+### Checklist druhého běžného použití
+
+- Proběhlo druhé použití v reálné práci?
+- Použil výřez někdo bez čerstvé paměti z kontroly kontextu?
+- Byla situace dost podobná, aby výřez dával smysl?
+- Nevrátil se tým ke starým variantám nebo původní historii?
+- Nevznikla nová kopie výřezu, screenshot, export nebo pomocná tabulka?
+- Pokud drhlo druhé pracovní místo, opravili jsme cestu místo obsahu?
+- Pokud chyběla hranice, doplnili jsme jednu krátkou větu?
+- Pokud šlo o nový kontext, oddělili jsme ho jako samostatné pravidlo?
+- Zůstává datová stopa stejná nebo menší?
+- Je jasné, jaký návratový signál výřez znovu otevře?
+
+Druhé běžné použití je hotové, když výřez obstojí bez čerstvého doprovodu. Buď se může přesunout do běžného rytmu, nebo dostane jednu přesnou opravu, nebo se vedle něj otevře nové pravidlo. Všechny tři výsledky jsou lepší než držet výřez v polovičním stavu, kde je pořád "skoro hotový" a potichu žádá další pozornost.
+
 ## Pravidla rukopisu
 
 - Pišu česky, prakticky a bez nafukování.
@@ -224415,3 +224564,4 @@ Uzavření druhé měsíční kontroly je hotové, když pravidlo ztratí zvlá�
 - 2026-06-17: Doplněna krátká úvodní poznámka, aby se při návratu k tématu přenášel jen stále platný kontext.
 - 2026-06-17: Doplněna úvodní podkapitola o ověření použitelného výřezu po změně kontextu: typy změn, mini test platnosti, privacy-first kontrola, karta, workshop a checklist.
 - 2026-06-17: Doplněna úvodní podkapitola o prvním běžném použití po uzavřené kontrole kontextu výřezu: najitelnost, rozhodnutelnost, klid bez mimořádné péče, privacy-first hranice, karta, mini workshop a checklist.
+- 2026-06-17: Doplněna úvodní podkapitola o druhém běžném použití po kontrole kontextu výřezu: přenositelnost bez čerstvého vysvětlení, slabý přenos, privacy-first kontrola, karta, mini workshop a checklist.
