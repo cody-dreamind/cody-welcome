@@ -224657,8 +224657,190 @@ Když workshop narazí na větší problém, neprodlužujte ho. Uzavřete půlro
 
 Uzavření první půlroční kontroly je povedené, když po něm pravidlo potřebuje méně pozornosti, ne víc. Buď klidně pokračuje, dostane jednu lokální opravu, vrátí se do častějšího rytmu, nebo zmizí do širšího standardu. Ve všech případech tým odchází s jasným pracovním stavem a bez nové datové zátěže.
 
+## Druhá půlroční kontrola pravidla po roce klidu
+
+Druhá půlroční kontrola je jiná než první. První ověřuje, jestli pravidlo přežilo přechod do delšího rytmu. Druhá už se ptá tvrději: má pravidlo po roce klidného provozu pořád samostatnou hodnotu, nebo se změnilo v běžnou hygienu, kterou není potřeba držet jako samostatný revizní bod?
+
+Začněte větou:
+
+```text
+Po roce klidného provozu kontrolujeme pravidlo proto, abychom rozhodli:
+```
+
+Za dvojtečku patří jedno rozhodnutí, ne obecná revize. Například:
+
+```text
+Po roce klidného provozu kontrolujeme pravidlo proto, abychom rozhodli, jestli má datová věta u formulářů zůstat samostatným půlročním pravidlem, nebo se má sloučit do běžného publikačního checklistu.
+```
+
+Tím se druhá půlroční kontrola oddělí od běžného "koukneme, jestli je všechno v pořádku". Kontrola má zjistit stav pravidla v systému. Nemá hledat nové nápady, nové metriky ani novou vrstvu dohledu.
+
+### Co je po roce důležité
+
+Po roce klidu už nestačí ověřit, že pravidlo někde existuje. Důležité jsou čtyři vrstvy:
+
+- samostatná rozhodovací hodnota pravidla;
+- opakovatelnost bez původního autora;
+- cena držení pravidla v samostatném rytmu;
+- datová stopa, kterou pravidlo nebo jeho kontrola stále vytváří.
+
+Samostatná hodnota znamená, že pravidlo pořád chrání konkrétní rozhodnutí. Pokud jen opakuje něco, co už spolehlivě řeší širší checklist, onboarding role nebo publikační šablona, možná má zmizet jako samostatná položka.
+
+Opakovatelnost bez autora ukáže, jestli pravidlo funguje jako systém, nebo jako paměť několika lidí. Vyberte jeden hotový výstup z posledních měsíců a ověřte, jestli člověk mimo původní změnu najde pravidlo tam, kde má, a použije ho bez vysvětlovací historie.
+
+Cena držení pravidla je praktická otázka. Každé samostatné pravidlo zabírá místo v indexu, review rytmu, onboardingu a týmové pozornosti. Pokud pravidlo po roce nic nového nerozhoduje, jeho další držení může vytvářet víc šumu než ochrany.
+
+Datová stopa je poslední brzda. Některá pravidla byla původně vytvořená právě proto, aby tým nesbíral zbytečná data. Po roce ověřte, jestli kontrola pravidla sama nezačala vyrábět nové tabulky, screenshoty, výjimky nebo kopie zákaznických příkladů.
+
+### Čtyři výsledky druhé půlroční kontroly
+
+Po druhé půlroční kontrole vyberte jeden ze čtyř stavů:
+
+- potvrdit další půlroční rytmus;
+- sloučit pravidlo do širšího pracovního standardu;
+- převést pravidlo do roční inventury;
+- vyřadit pravidlo a ponechat jen návratový signál.
+
+Potvrzení dalšího půlročního rytmu použijte, když pravidlo stále chrání rozhodnutí, které by bez něj snadno vypadlo. Typicky jde o pravidla s dopadem na důvěru zákazníka, datovou minimalizaci, bezpečnostní hranici nebo veřejnou komunikaci.
+
+Sloučení je vhodné, když pravidlo funguje, ale už nemá důvod žít samostatně. Například datová věta u formulářů může po roce patřit přímo do publikačního checklistu landing page. Hodnota zůstává, samostatný revizní bod mizí.
+
+Roční inventura dává smysl u pravidel, která jsou stabilní, ale pořád stojí za občasnou kontrolu v balíku dalších standardů. Tým je neřeší půlročně, ale jednou ročně se ptá, jestli portfolio pravidel není příliš těžké, duplicitní nebo datově špinavé.
+
+Vyřazení pravidla je v pořádku, když pravidlo už nechrání žádné živé rozhodnutí. Nesmí ale zmizet beze stopy. Nechte po něm návratový signál: konkrétní situaci, která by téma znovu otevřela.
+
+Praktický příklad:
+
+```text
+Pravidlo:
+U každého formuláře uvádíme krátkou datovou větu.
+
+Zjištění po roce:
+Všechny nové formuláře vznikají přes aktuální landing page šablonu. Publikační checklist už datovou větu obsahuje. Samostatné pravidlo nikdo nehledá; lidé používají checklist.
+
+Rozhodnutí:
+Sloučit pravidlo do publikačního checklistu a odstranit ho ze samostatné půlroční kontroly.
+
+Návratový signál:
+Dvě veřejné stránky s formulářem po sobě vyjdou bez datové věty, nebo vznikne nový typ formuláře mimo landing page šablonu.
+
+Privacy-first výsledek:
+Nedržíme samostatné kontrolní exporty formulářů. Ověření zůstává součástí běžného publikačního průchodu.
+```
+
+Tohle je dobrý konec pravidla. Ne proto, že by přestalo být důležité, ale protože se jeho hodnota přesunula do běžné práce.
+
+### Jak sloučit bez ztráty ochrany
+
+Sloučení pravidla nesmí být mazání s hezkým názvem. Před sloučením zkontrolujte tři věci:
+
+- širší standard obsahuje stejnou rozhodovací hranici;
+- člověk při běžné práci narazí na pravidlo ve správný okamžik;
+- návratový signál po sloučení zůstane viditelný.
+
+Pokud širší standard jen obecně říká "zkontrolovat privacy", pravidlo neslučujte. To je slabší ochrana. Sloučení je bezpečné až ve chvíli, kdy širší standard obsahuje konkrétní pracovní větu, například:
+
+```text
+U formuláře je veřejně napsané, jaká data sbíráme a k čemu je použijeme.
+```
+
+Tahle věta je lepší než samostatná historická poznámka, protože se objeví přímo v místě práce. Člověk nemusí vědět, že před rokem existovalo zvláštní pravidlo. Stačí, že při publikaci narazí na jasnou hranici.
+
+Codyho komentář: pravidlo, které musí přežít díky pamětní cedulce v archivu, není pravidlo. Je to nostalgie s odrážkami. Buď ho dejte do pracovního místa, nebo ho nechte důstojně odejít.
+
+### Privacy-first uzavření druhé půlroční kontroly
+
+Druhá půlroční kontrola má často nejlepší privacy-first výsledek v tom, že něco přestane existovat. Může zmizet samostatná evidence, staré kontrolní karty, kopie výstupů, dočasné exporty nebo zvláštní poznámky s příklady.
+
+Při uzavření si napište:
+
+```text
+Díky druhé půlroční kontrole už dál nedržíme:
+```
+
+A doplňte konkrétní položky:
+
+- samostatný seznam kontrolovaných formulářů;
+- screenshoty starých stránek;
+- kopie zákaznických příkladů v kontrolních poznámkách;
+- zvláštní připomínku v kalendáři, pokud ji nahrazuje roční inventura;
+- duplicitní pravidlo v indexu standardů.
+
+Neznamená to mazat důkaz, který tým ještě potřebuje pro odpovědnost nebo audit. Znamená to odstranit pracovní stopy, které už neslouží živému rozhodnutí. U citlivějších příkladů stačí ponechat zobecněnou větu: "Jedna stará kopie šablony obcházela datovou větu; odkaz byl nahrazen aktuální šablonou."
+
+### Karta druhé půlroční kontroly
+
+```text
+Pravidlo:
+
+Kanonické pracovní místo:
+
+Rozhodnutí, kvůli kterému kontrolu děláme:
+
+Co pravidlo po roce pořád chrání:
+
+Kde se pravidlo objevuje v běžné práci:
+
+Použil by ho člověk bez původního kontextu?
+- ano / částečně / ne
+
+Cena samostatného držení pravidla:
+
+Datová stopa kontroly:
+
+Výsledek:
+- potvrdit půlroční rytmus
+- sloučit do širšího standardu
+- převést do roční inventury
+- vyřadit a ponechat návratový signál
+
+Co se mění v pracovním místě:
+
+Co se maže, slučuje nebo zobecňuje:
+
+Potvrzený návratový signál:
+
+Co dál nesbíráme ani neměříme:
+
+Vlastník:
+
+Datum další kontroly nebo inventury:
+```
+
+Karta má být kratší než původní historie pravidla. Pokud se při druhé půlroční kontrole musíte vracet přes celý příběh vzniku, je to signál, že pravidlo není dobře usazené v pracovním místě. V takovém případě nejdřív opravte pracovní větu a teprve potom rozhodujte o rytmu.
+
+### Mini workshop na 8 minut
+
+1. Minuta 1: napište rozhodnutí, kvůli kterému druhou půlroční kontrolu děláte.
+2. Minuta 2: ověřte, co pravidlo po roce pořád chrání.
+3. Minuty 3 až 4: projděte jedno kanonické místo a jeden hotový výstup.
+4. Minuta 5: určete cenu samostatného držení pravidla.
+5. Minuta 6: vyberte jeden ze čtyř výsledků.
+6. Minuta 7: zapište změnu v pracovním místě a návratový signál.
+7. Minuta 8: smažte, slučte nebo zobecněte dočasné kontrolní stopy.
+
+Když se tým nedokáže shodnout mezi sloučením a dalším půlročním rytmem, nechte pravidlo ještě jeden půlrok samostatné, ale napište přesnou otázku pro příště. Bez ní bude další kontrola jen opakovat stejnou debatu.
+
+### Checklist druhé půlroční kontroly
+
+- Kontrola míří na jedno rozhodnutí o stavu pravidla?
+- Víme, co pravidlo po roce pořád chrání?
+- Ověřili jsme kanonické místo a aspoň jeden hotový výstup?
+- Zkusili jsme pravidlo číst očima člověka bez původního kontextu?
+- Je jasná cena samostatného držení pravidla?
+- Vybrali jsme jeden ze čtyř výsledků?
+- Pokud pravidlo slučujeme, zůstává jeho rozhodovací hranice v běžném pracovním místě?
+- Pokud pravidlo vyřazujeme, zůstává konkrétní návratový signál?
+- Pokud pravidlo převádíme do roční inventury, víme, kdo ji vlastní?
+- Uklidili jsme duplicitní záznamy, dočasné exporty a citlivé příklady?
+- Nepřidali jsme nový monitoring lidí, dokumentů ani chování?
+- Je další kontrola nebo inventura zapsaná jen tam, kde ji tým skutečně najde?
+
+Druhá půlroční kontrola je hotová, když pravidlo přestane být zvláštní starost a dostane správný tvar pro další rok. Někdy zůstane samostatné, někdy se sloučí, někdy přejde do roční inventury a někdy skončí. Důležité je, aby po něm zůstala ochrana rozhodnutí, ne hromada dokumentačního sedimentu.
+
 ## Pracovní log
 
+- 2026-06-17: Doplněna úvodní podkapitola o druhé půlroční kontrole pravidla po roce klidu: samostatná hodnota pravidla, sloučení do širšího standardu, převod do roční inventury, privacy-first úklid kontrolních stop, karta, mini workshop a checklist.
 - 2026-06-17: Doplněna úvodní podkapitola o uzavření první půlroční kontroly pravidla: uzavírací stavy, propsání do pracovního místa, privacy-first úklid dočasných podkladů, karta, mini workshop a checklist.
 - 2026-06-17: Doplněna úvodní podkapitola o první půlroční kontrole pravidla v klidovém rytmu: konkrétní kontrolní otázka, ověření kanonického místa a hotových výstupů, čtyři výsledné stavy, privacy-first hranice, karta, mini workshop a checklist.
 - 2026-06-17: Doplněna úvodní podkapitola o převodu pravidla po druhé kvartální kontrole do půlročního rytmu: podmínky převodu, návratový signál, privacy-first úklid stop, karta, mini workshop a checklist.
