@@ -221958,8 +221958,151 @@ Pokud workshop začne řešit, jak pravidlo ještě vylepšit, zastavte se. Uzav
 
 Uzavření prvního běžného review je hotové ve chvíli, kdy pravidlo přestane být zvláštní událost. Zůstane pracovní věta, návratový signál a čisté kanonické místo. Dočasné stopy zmizí. Tým má méně věcí na hlídání a stejnou schopnost poznat, kdy se má téma vrátit. To je přesně ten druh drobné provozní výhry, která nevypadá dramaticky, ale dlouhodobě drží systém použitelný.
 
+## Druhé běžné review po zavření mimořádné kontroly
+
+Druhé běžné review je první chvíle, kdy se ukáže, jestli pravidlo opravdu splynulo s provozem. První review ještě často nese čerstvou paměť původní opravy. Lidé si pamatují, proč pravidlo vzniklo, kde se tehdy uklízelo a jaký starý návrh se měl držet zavřený. Druhé review už má být obyčejnější. Pravidlo by mělo fungovat bez toho, aby ho někdo chránil historickým výkladem.
+
+Neotevírejte druhé review jako kontrolu staré opravy. Otevřete ho jako normální kontrolu pracovního místa, ve kterém pravidlo žije. Rozdíl je malý na papíře a velký v hlavě týmu. Pokud se review pořád točí kolem minulého incidentu, pravidlo ještě není stabilní. Pokud se točí kolem aktuální práce, návrat do rytmu se povedl.
+
+Začněte otázkou:
+
+```text
+Použilo se pravidlo v běžném rytmu i bez mimořádné pozornosti, a zůstalo přitom srozumitelné, datově střídmé a připravené na návratový signál?
+```
+
+Když odpověď zní ano, není potřeba přidávat další kontrolu. Druhé review může pravidlo pustit do tichého provozu. To neznamená, že se na něj už nikdy nikdo nepodívá. Znamená to, že se kontroluje jen spolu s celým pracovním místem: šablonou, formulářem, obchodním postupem, onboardingem nebo provozním checklistem.
+
+### Tři vrstvy druhého review
+
+V druhém review se nedívejte na všechno. Stačí tři vrstvy:
+
+- Samostatnost: pravidlo šlo použít bez člověka, který znal původní opravu.
+- Čistota: staré dočasné poznámky, kopie, exporty nebo kontrolní připomínky se nevrátily.
+- Návratový signál: tým pořád ví, co by pravidlo znovu otevřelo, ale nepoužívá signál jako záminku k obecnému vylepšování.
+
+Příklad:
+
+```text
+Pravidlo:
+Při kvalifikaci leadu používáme rozhodovací horizont, problém a očekávaný výsledek. Velikost firmy nepoužíváme jako automatické skóre.
+
+Druhé běžné review:
+Proběhlo při měsíční kontrole obchodních šablon.
+
+Samostatnost:
+Nový obchodník našel pravidlo v discovery šabloně bez znalosti původní opravy.
+
+Čistota:
+V CRM už není stará scoringová poznámka ani dočasná tabulka z ověřování.
+
+Návratový signál:
+Zůstává stejný: opakovaně nepůjde určit priorita relevantních poptávek ani po nové otázce.
+
+Rozhodnutí:
+Pravidlo pouštíme do tichého provozu. Další kontrola jen v běžném měsíčním review.
+```
+
+Tady není co oslavovat ani rozšiřovat. A právě proto je výsledek dobrý. Pravidlo funguje jako součást práce, ne jako památník jedné minulé opravy.
+
+### Čtyři výsledky druhého review
+
+Po druhém review vyberte jeden stav:
+
+- Pustit do tichého provozu: pravidlo se používá samostatně, bez starých stop a bez nové datové zátěže.
+- Dočistit poslední provozní hranu: pravidlo funguje, ale jedno místo pořád potřebuje drobnou formulaci, odkaz nebo úklid.
+- Sloučit s běžnou údržbou: pravidlo je v pořádku, ale patří do širšího existujícího review, ne do samostatné poznámky.
+- Otevřít nový podnět: review ukázalo problém, který není stará oprava ani lokální hrana, ale nová pracovní otázka.
+
+Stav "pustit do tichého provozu" je plnohodnotný výsledek. Nepřidávejte k němu větu "ještě jednou ověříme pro jistotu". Pokud pravidlo prošlo dvěma běžnými průchody, další zvláštní ověření už často nechrání kvalitu. Jen udržuje minulost při životě.
+
+U dočištění poslední hrany si dejte pozor, aby se z jedné drobnosti nestal nový audit. Oprava má mít jedno místo a jeden výsledek. Například přepsat odkaz v onboardingové šabloně, odstranit starou poznámku z issue nebo zkrátit pracovní větu, která je pořád moc historická.
+
+Sloučení s běžnou údržbou je vhodné ve chvíli, kdy pravidlo nepotřebuje vlastní pozornost, ale má smysl ho vidět při pravidelném review celé oblasti. Například pravidlo pro formuláře patří do měsíční kontroly landing pages. Pravidlo pro retenci exportů patří do provozního úklidu po kampaních. Pravidlo pro obchodní kvalifikaci patří do review discovery šablon.
+
+Nový podnět otevřete jen tehdy, když review ukáže něco, co má vlastní důkaz. Ne "možná bychom mohli šablonu udělat hezčí". Spíš "dvě různá pracovní místa používají jiný zdroj pravdy pro stejný typ předání". To už není dozvuk staré opravy, ale nový problém s vlastní hranicí.
+
+### Privacy-first kontrola druhého review
+
+Druhé review je dobrý moment na poslední kontrolu datového ocasu. Ptejte se hlavně:
+
+- nezůstala někde dočasná kopie exportu z původního ověření;
+- nepřežila připomínka, která lidi vede ke zbytečnému sběru údajů;
+- nevznikl nový kontrolní seznam lidí, kteří "dodržují pravidlo";
+- není návratový signál sledovaný větším měřením, než pravidlo potřebuje;
+- nezůstala stará výjimka bez data návratu.
+
+Privacy-first provoz není jen menší sběr na začátku. Je to i schopnost po ověření přestat držet pomocné důkazy. Pokud se pravidlo osvědčilo, nepotřebujete k němu navždy ukládat původní export, screenshot formuláře ani detailní poznámku z konkrétního obchodního hovoru. Stačí pracovní pravidlo, návratový signál a krátká stopa rozhodnutí.
+
+Codyho komentář: jestli pravidlo po dvou běžných průchodech pořád potřebuje vlastní hlídací tabulku, možná nemáte pravidlo. Možná máte malý administrativní závazek, který se tváří jako péče o kvalitu. Hezké to není, udržovat se to nemá.
+
+### Karta druhého běžného review
+
+```text
+Pravidlo:
+
+Kanonické pracovní místo:
+
+Běžný revizní rytmus:
+
+Druhé review proběhlo při:
+
+Samostatnost:
+- použitelné bez historického kontextu / potřebuje pomoc / nejasné
+
+Čistota pracovních stop:
+- čisté / jedna hrana / širší nepořádek
+
+Návratový signál:
+
+Výsledek:
+- pustit do tichého provozu
+- dočistit poslední provozní hranu
+- sloučit s běžnou údržbou
+- otevřít nový podnět
+
+Jedna akce, pokud je potřeba:
+
+Co zůstává zavřené:
+
+Co mažeme, zkracujeme nebo anonymizujeme:
+
+Jaká data dál nesbíráme:
+
+Další kontrola:
+```
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: otevřete kanonické místo pravidla, ne starý ověřovací zápis.
+2. Minuta 2: ověřte, jestli pravidlo použil člověk bez čerstvého kontextu.
+3. Minuta 3: najděte případné staré stopy nebo dočasné podklady.
+4. Minuta 4: přečtěte návratový signál a zkontrolujte, že není moc obecný.
+5. Minuta 5: vyberte jeden ze čtyř výsledků.
+6. Minuta 6: zapište jednu akci nebo "bez akce, tichý provoz".
+7. Minuta 7: napište privacy-first výsledek a ukončete mimořádnou pozornost.
+
+Workshop nesmí přerůst do přepisování historie. Pokud se objeví větší téma, založte nový podnět a vraťte druhé review k uzavření. Jinak se z běžného rytmu znovu stane zvláštní péče, jen s jiným názvem.
+
+### Checklist druhého běžného review
+
+- Proběhlo review v normálním rytmu pracovního místa?
+- Pravidlo šlo najít bez znalosti původní opravy?
+- Použil ho člověk nebo role, která nebyla závislá na čerstvé paměti týmu?
+- Nevrátila se stará šablona, poznámka, export nebo připomínka?
+- Je návratový signál pořád konkrétní a užitečný?
+- Vybrali jsme jeden výsledek druhého review?
+- Pokud pravidlo drží, pustili jsme ho do tichého provozu bez další zvláštní kontroly?
+- Pokud je potřeba oprava, má jedno pracovní místo a nepřerůstá v audit?
+- Pokud vznikl nový podnět, je oddělený od původní opravy?
+- Uklidili jsme dočasné důkazy, které už nemají účel?
+- Nevznikl nový tracker, kontrolní tabulka lidí, export ani delší retence?
+- Ví tým, kdy se pravidlo znovu otevře a kdy ho má nechat být?
+
+Druhé běžné review má jednoduchý cíl: potvrdit, že pravidlo už nepotřebuje příběh okolo. Když obstojí, nechte ho být normální součástí práce. Když neobstojí, opravte přesné místo selhání nebo otevřete nový podnět. Obojí je lepší než držet pravidlo napůl jako hotovou věc a napůl jako věčný návrat k minulosti.
+
 ## Pracovní log
 
+- 2026-06-17: Doplněna úvodní podkapitola o druhém běžném review po zavření mimořádné kontroly: samostatnost pravidla, čistota pracovních stop, návratový signál, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-17: Doplněna úvodní podkapitola o uzavření prvního běžného review po návratu pravidla do rytmu: uzavírací stavy, vypnutí zvláštní kontroly, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-17: Doplněna úvodní podkapitola o prvním běžném review po návratu pravidla do rytmu: tři kontrolní vrstvy, čtyři výsledky review, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-16: Doplněna úvodní podkapitola o uzavření druhého běžného použití po převodu nové otázky do rytmu: čtyři uzavírací stavy, propsání do živého místa, ukončení zvláštní kontroly, privacy-first úklid, karta, mini workshop a checklist.
