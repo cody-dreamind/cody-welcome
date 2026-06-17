@@ -225025,8 +225025,145 @@ Když workshop ukáže, že pravidlo má zůstat samostatné, ale nikdo neumí �
 
 Uzavření druhé půlroční kontroly je konec jedné dlouhé smyčky. Pravidlo buď pokračuje, ztratí samostatný obal, přejde do roční inventury, nebo odejde z aktivní práce. Ve všech případech má po něm zůstat méně šumu, jasnější pracovní místo a menší datová stopa.
 
+## První roční inventura po uzavření půlročního pravidla
+
+Když pravidlo projde dvěma půlročními kontrolami a dostane nový stav, další návrat už nemá vypadat jako pokračování stejné opravy. Má vypadat jako roční inventura: krátké portfolio rozhodnutí, která zůstala po delší době živá, sloučená, vyřazená nebo převedená do běžné práce.
+
+Roční inventura se neptá, jestli bylo pravidlo kdysi užitečné. To už víme. Ptá se:
+
+```text
+Pomáhá současný stav pravidla ještě snižovat tření, riziko nebo datovou stopu, nebo už jen udržuje paměť staré práce?
+```
+
+Tahle otázka je záměrně nepohodlná. Dlouhodobě udržovaný systém se totiž nezanáší jen špatnými pravidly. Často se zanáší pravidly, která byla správná, splnila účel a potom v systému zůstala déle, než bylo potřeba. Roční inventura má taková pravidla neodsoudit, ale zařadit: živé, sloučené, archivní, nebo připravené k vyřazení.
+
+### Co vzít do inventury
+
+Neberte všechno. Vezměte jen pravidla, která v posledním roce prošla jedním z těchto stavů:
+
+- zůstala po druhé půlroční kontrole samostatná;
+- sloučila se do širšího checklistu nebo standardu;
+- přešla do roční inventury;
+- byla vyřazena, ale má návratový signál;
+- opakovaně vytvořila falešný poplach, lokální dočištění nebo potřebu vysvětlování.
+
+U každého pravidla si připravte jen tři důkazy:
+
+```text
+Kde dnes pravidlo nebo jeho ochrana žije:
+Kdy se naposledy použilo v reálné práci:
+Jaká datová stopa kvůli němu nebo jeho kontrole pořád vzniká:
+```
+
+Pokud důkaz nejde rychle najít, je to samo o sobě signál. Buď pravidlo nežije v pracovním místě, nebo je rozhodovací paměť moc rozptýlená. Roční inventura nemá tenhle problém zakrýt další tabulkou. Má vybrat jednu nejbližší opravu: najít kanonické místo, zkrátit paměť, sloučit duplicitu, nebo pravidlo vyřadit.
+
+### Čtyři roční stavy
+
+Každému pravidlu dejte jeden ze čtyř stavů:
+
+- Živé: pořád chrání rozhodnutí a má jasné pracovní místo.
+- Vstřebané: jeho ochrana žije v běžném checklistu, šabloně nebo rytmu.
+- Archivní: má historickou hodnotu, ale nemá vést novou práci.
+- K vyřazení: už nechrání živé rozhodnutí a návratový signál stačí.
+
+Stav `živé` používejte úsporně. Pokud je pravidlo živé, musí být jasné, co by se bez něj pokazilo. Nestačí, že "je dobré ho mít". Dobrá věc bez aktivního rozhodovacího účelu je často jen kulturně přijatelný šum.
+
+Stav `vstřebané` je výhra. Znamená, že pravidlo se stalo součástí normální práce. Už nepotřebuje vlastní položku v revizi, protože člověk na něj narazí při publikaci stránky, založení formuláře, přípravě nabídky nebo kontrole šablony.
+
+Stav `archivní` říká: pravidlo vysvětluje minulost, ale neřídí přítomnost. Archivní záznam má být krátký, označený a nesmí vypadat jako aktivní checklist.
+
+Stav `k vyřazení` je nejpřísnější. Použijte ho, když pravidlo už nemá samostatnou ochranu ani historickou hodnotu pro běžnou práci. Neznamená to smazat všechno beze stopy. Znamená to nechat jen návratový signál a uklidit pracovní zbytky.
+
+### Příklad roční inventury
+
+```text
+Pravidlo:
+U formulářů vždy uvádíme datovou větu.
+
+Současný stav:
+Vstřebané.
+
+Kde dnes žije:
+Publikační checklist landing page a šablona formuláře.
+
+Poslední reálné použití:
+Nová stránka služby prošla publikací bez samostatné kontroly pravidla; checklist datovou větu obsahoval.
+
+Datová stopa:
+Nevzniká samostatný export formulářů ani screenshotová kontrola.
+
+Rozhodnutí:
+Pravidlo zůstává jen jako bod checklistu. Samostatný záznam v roční inventuře se příště kontroluje pouze jako součást kontroly checklistu.
+
+Návratový signál:
+Dvě nové stránky s formulářem po sobě vyjdou bez datové věty, nebo vznikne nový typ formuláře mimo šablonu.
+```
+
+Tady není potřeba pravidlo znovu rozepisovat. Jeho ochrana funguje. Roční inventura jen potvrzuje, že samostatná paměť už není hlavní nosič hodnoty.
+
+### Privacy-first inventura
+
+Roční inventura má být tvrdá na zbytečné stopy. Pravidla, která vznikla kvůli soukromí, často po sobě nechávají nejvíc kontrolních materiálů: seznamy, screenshoty, staré exporty, kopie formulářů, poznámky z auditů a výjimky.
+
+Ptejte se:
+
+- Držíme podklad, protože pomáhá dalšímu rozhodnutí, nebo jen proto, že kdysi dokazoval opatrnost?
+- Dá se konkrétní příklad nahradit anonymizovaným vzorem?
+- Nevzniká kvůli inventuře nová evidence lidí, dokumentů nebo použití pravidel?
+- Není starý privacy-first checklist viditelnější než aktuální pracovní šablona?
+- Můžeme místo další kontroly zlepšit samotné pracovní místo?
+
+Codyho komentář: privacy-first provoz se nepozná podle toho, že má nejvíc dokumentů o soukromí. Pozná se podle toho, že správná datová hranice vyskočí člověku pod ruku přesně ve chvíli, kdy by jinak vytvořil zbytečný údaj.
+
+### Karta roční inventury
+
+```text
+Pravidlo:
+
+Stav po poslední půlroční kontrole:
+
+Kde dnes pravidlo nebo jeho ochrana žije:
+
+Poslední reálné použití:
+
+Roční stav:
+- živé / vstřebané / archivní / k vyřazení
+
+Důvod stavu:
+
+Co se mění v pracovním místě:
+
+Co se slučuje, archivuje nebo maže:
+
+Návratový signál:
+
+Privacy-first úklid:
+
+Co dál nesbíráme ani neměříme:
+
+Vlastník:
+
+Další kontrola:
+```
+
+### Checklist roční inventury
+
+- Kontrolujeme pravidlo podle současného pracovního místa, ne podle staré historie?
+- Má pravidlo jeden ze čtyř ročních stavů?
+- Víme, kdy se naposledy reálně použilo?
+- Pokud je živé, víme, jaké rozhodnutí pořád chrání?
+- Pokud je vstřebané, je ochrana opravdu v checklistu, šabloně nebo rytmu?
+- Pokud je archivní, nemůže omylem vést novou práci?
+- Pokud je k vyřazení, zůstává konkrétní návratový signál?
+- Uklidili jsme dočasné exporty, screenshoty, kopie a citlivé příklady?
+- Nevznikla nová evidence používání pravidel nebo lidí?
+- Je další kontrola jen tam, kde opravdu pomůže rozhodnout?
+
+Roční inventura má zmenšit systém, ne ho oslavit. Nejlepší výsledek často není nové pravidlo, ale čistší pracovní místo: méně samostatných kontrol, méně starých stop, jasnější návratové signály a ochrana soukromí zabudovaná přímo tam, kde vzniká práce.
+
 ## Pracovní log
 
+- 2026-06-17: Doplněna úvodní podkapitola o první roční inventuře po uzavření půlročního pravidla: čtyři roční stavy, ověření současného pracovního místa, privacy-first úklid stop, karta a checklist.
 - 2026-06-17: Doplněna úvodní podkapitola o uzavření druhé půlroční kontroly pravidla: čtyři uzavírací stavy, propsání do pracovních míst, vyřazení bez ztráty paměti, privacy-first úklid stop, karta, mini workshop a checklist.
 - 2026-06-17: Doplněna úvodní podkapitola o druhé půlroční kontrole pravidla po roce klidu: samostatná hodnota pravidla, sloučení do širšího standardu, převod do roční inventury, privacy-first úklid kontrolních stop, karta, mini workshop a checklist.
 - 2026-06-17: Doplněna úvodní podkapitola o uzavření první půlroční kontroly pravidla: uzavírací stavy, propsání do pracovního místa, privacy-first úklid dočasných podkladů, karta, mini workshop a checklist.
