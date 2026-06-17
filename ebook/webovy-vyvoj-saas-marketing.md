@@ -222693,8 +222693,137 @@ Pokud v šesti minutách neumíte najít žádný reálný průchod, neznamená 
 
 První měsíční kontrola v tichém provozu je test dospělosti pravidla. Dospělé pravidlo nepotřebuje fanfáry, dohled ani detailní deník. Stačí, že se dá najít, použít a opustit bez zbytečné datové stopy. To je v malém týmu často větší výhra než další sofistikovaný proces.
 
+## Uzavření první měsíční kontroly pravidla v tichém provozu
+
+První měsíční kontrola končí dobře jen tehdy, když po ní pravidlo nezíská novou zvláštní agendu. Smyslem uzavření není dodat kontrole vážnost, ale rozhodnout, co přesně se má stát dál: nic, jedna lokální oprava, krátké posílení samostatnosti, nebo otevření návratového signálu.
+
+Začněte větou:
+
+```text
+První měsíční kontrolu uzavíráme tímto stavem:
+```
+
+Za dvojtečku patří jeden stav, ne odstavec dojmů. Pokud tým potřebuje napsat dlouhé vysvětlení, většinou ještě neuzavírá kontrolu, ale znovu ji rozebírá. Uzavření má být pracovní zápis, který nový člověk pochopí bez celé historie.
+
+Příklad:
+
+```text
+První měsíční kontrolu uzavíráme stavem bez akce.
+Pravidlo se použilo ve dvou reálných průchodech, kanonické místo je čisté a návratový signál nenastal.
+Další kontrola proběhne v běžném měsíčním review šablon.
+```
+
+Tři věty stačí. Říkají výsledek, důvod a další rytmus. Neobsahují nový tracker, novou tabulku ani úkol "sledovat, jestli se něco nestane". Pokud se něco má stát, musí to být konkrétní akce nebo návratový signál.
+
+### Čtyři uzavírací stavy
+
+Použijte stejné čtyři stavy jako při kontrole, ale přeložte je do uzavírací akce:
+
+- Bez akce: pravidlo zůstává v tichém provozu a další zmínka patří až do běžného review.
+- Lokální dočištění: jedna konkrétní duplicita, starý odkaz, dlouhé vysvětlení nebo skrytá připomínka se uklidí do určeného termínu.
+- Posílení samostatnosti: pravidlo funguje jen s neformální podporou, takže se upraví jeho pracovní místo, název, příklad nebo napojení na workflow.
+- Návratový signál: nastala předem popsaná situace a otevírá se nová iterace podle pravidel návratu, ne další měsíční kontrola.
+
+Bez akce zapisujte stručně. Dobrý tichý provoz nepotřebuje odměnu v podobě další práce. Stačí vědět, že pravidlo zůstává použitelné a datově střídmé.
+
+Lokální dočištění nesmí spolknout víc než jedno pracovní místo. Pokud najdete tři staré kopie, dvě šablony a rozpadlý onboardingový odkaz, už neuzavíráte jednu kontrolu. Otevíráte malý úklid zdroje pravdy a první měsíční kontrola je jen důkaz, který ho spustil.
+
+Posílení samostatnosti má být praktická úprava, ne školení o historii. Přepište název, zkraťte pravidlo, přidejte jeden příklad, přesuňte odkaz do místa, kde lidé opravdu pracují. Když potřebujete dlouhé vysvětlení, pravidlo je pravděpodobně pořád moc těžké.
+
+Návratový signál je jiný režim. Jakmile nastal, neprodlužujte měsíční kontrolu. Otevřete návrat se stop podmínkou, vlastníkem a jedním pracovním místem. Jinak se z tichého provozu stane permanentní výjimka, jen s hezčím názvem.
+
+### Co propsat po uzavření
+
+Po uzavření se má změnit jen místo, které má nést výsledek:
+
+- U stavu bez akce stačí krátká věta v měsíčním review.
+- U lokálního dočištění patří akce do stejného pracovního místa, kde duplicita nebo starý odkaz vznikl.
+- U posílení samostatnosti patří změna do kanonického pravidla, ne do komentáře vedle něj.
+- U návratového signálu patří zápis do nové iterace a v měsíčním review zůstane jen odkaz na ni.
+
+Tím chráníte systém před tichým větvením. Nejhorší výsledek první měsíční kontroly není malá chyba v pravidle. Horší je situace, kdy se oprava popíše na třech místech a nikdo neví, která věta je živá.
+
+Codyho komentář: tichý provoz se pozná podle toho, že se o něm dá mluvit krátce. Jakmile pravidlo potřebuje pamětní desku, slavnostní zápis a tři vysvětlující poznámky, není tiché. Jen šeptá hodně nahlas.
+
+### Privacy-first uzavření
+
+Při uzavření první měsíční kontroly zkontrolujte hlavně to, co po kontrole nezůstane. Dočasné poznámky, exporty, kopie odpovědí, screenshoty, ruční seznamy a připomínky mají krátkou životnost. Pokud nepodporují další konkrétní akci, smažte je, anonymizujte nebo přepište do obecného závěru.
+
+Praktické pravidlo:
+
+```text
+Když výsledek kontroly umíme říct bez osobních detailů, osobní detaily do uzavření nepatří.
+```
+
+Místo "Petr zapomněl u klienta X použít otázku Y" často stačí "v jednom průchodu chyběla otázka na rozhodovací horizont". První věta zbytečně fixuje člověka a klienta do interní paměti. Druhá ponechá pracovní důkaz a sníží datovou stopu.
+
+U stavu bez akce nemažte kanonické pravidlo ani běžný review záznam, ale odstraňte pomocné kontrolní materiály, pokud vznikly jen kvůli prvnímu měsíci. U lokálního dočištění smažte starou kopii až po propsání opravy do živého místa. U posílení samostatnosti zkontrolujte, jestli jste nevytvořili novou paralelní nápovědu, která bude za měsíc zastaralá. U návratového signálu přeneste jen minimální potřebný důkaz do nové iterace.
+
+### Karta uzavření první měsíční kontroly
+
+```text
+Pravidlo:
+
+Kanonické pracovní místo:
+
+Výsledek první měsíční kontroly:
+- bez akce
+- lokální dočištění
+- posílení samostatnosti
+- návratový signál
+
+Uzavírací věta:
+
+Jedna akce, pokud je potřeba:
+
+Kam se výsledek propisuje:
+
+Co se po uzavření nemaří další kontrolou:
+
+Co mažeme, anonymizujeme nebo slučujeme:
+
+Návratový signál zůstává:
+
+Další běžný rytmus:
+
+Vlastník:
+
+Datum:
+```
+
+Karta má zmizet do běžného záznamu. Pokud ji necháte jako samostatný dokument, po čase začne působit jako další pravidlo. To je přesně ten typ administrativní vegetace, který si malý tým pěstuje nechtěně a potom se diví, že mu stíní výhled.
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: přečtěte výsledek první měsíční kontroly.
+2. Minuta 2: vyberte jeden uzavírací stav.
+3. Minuta 3: napište uzavírací větu do běžného review.
+4. Minuta 4: určete jednu akci, nebo napište "bez akce".
+5. Minuta 5: zkontrolujte kanonické místo a smažte nebo slučte dočasné stopy.
+6. Minuta 6: potvrďte návratový signál a další běžný rytmus.
+7. Minuta 7: ověřte, že nevznikl nový tracker, export ani samostatná kontrolní agenda.
+
+Když workshop skončí větou "musíme to ještě sledovat", vraťte se o krok zpět. Co přesně chcete sledovat, kde už se to přirozeně projeví a jaký návratový signál stačí? Pokud odpověď nemáte, nezakládejte monitoring. Zapište nejistotu jako poznámku a nechte pravidlo v běžném rytmu.
+
+### Checklist uzavření první měsíční kontroly
+
+- Vybrali jsme jeden uzavírací stav?
+- Umíme výsledek říct jednou až třemi větami?
+- Je jasné, jestli se nedělá nic, uklízí jedno místo, posiluje samostatnost, nebo otevírá návratový signál?
+- Propsali jsme výsledek do běžného review nebo kanonického pracovního místa?
+- Nevznikla nová zvláštní agenda pro tichý provoz?
+- Má případná akce jednoho vlastníka a jedno pracovní místo?
+- Uklidili jsme dočasné poznámky, exporty, kopie a připomínky bez dalšího účelu?
+- Nepřenášíme osobní detaily tam, kde stačí obecný pracovní důkaz?
+- Zůstává návratový signál konkrétní a srozumitelný?
+- Ví tým, kdy se k pravidlu vrátí v běžném rytmu?
+- Pokud nastal návratový signál, otevřeli jsme samostatnou iteraci místo prodlužování kontroly?
+
+Uzavření první měsíční kontroly je hotové, když pravidlo může znovu ztichnout. Buď se neděje nic, nebo se uklidí jedna věc, nebo se otevře jasně oddělený návrat. Všechny tři zdravé varianty mají společný rys: nenechávají za sebou mlhu, dočasné dokumenty a nové sledování jen proto, že tým měl chuť být opatrný.
+
 ## Pracovní log
 
+- 2026-06-17: Doplněna úvodní podkapitola o uzavření první měsíční kontroly pravidla v tichém provozu: čtyři uzavírací stavy, propsání výsledku, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-17: Doplněna úvodní podkapitola o uzavření kontroly kontextu výřezu: pět uzavíracích stavů, propsání do kanonického místa, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-17: Doplněna úvodní podkapitola o první měsíční kontrole pravidla v tichém provozu: tři kontrolní otázky, čtyři výsledky, privacy-first hranice, karta, mini workshop a checklist.
 - 2026-06-17: Doplněna úvodní podkapitola o uzavření druhého běžného review do tichého provozu: čtyři uzavírací stavy, úklid dočasných stop, privacy-first hranice, karta, mini workshop a checklist.
