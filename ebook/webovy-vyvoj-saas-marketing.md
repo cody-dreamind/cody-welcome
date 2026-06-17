@@ -222246,8 +222246,144 @@ Pokud se během workshopu objeví chuť pravidlo přepracovat celé, vraťte se 
 
 Uzavření druhého běžného review je hotové, když se pravidlo přestane chovat jako projekt. Má své místo, svůj rytmus, svůj návratový signál a čistou datovou stopu. Tým ho nemusí uctívat, hlídat ani vysvětlovat přes historii. Prostě ho použije, a když se objeví skutečný signál, ví, jak se k němu vrátit.
 
+## První měsíční kontrola pravidla v tichém provozu
+
+Tichý provoz neznamená, že pravidlo zmizelo z odpovědnosti. Znamená, že se kontroluje jen tam, kde už běžná práce stejně má rytmus. První měsíční kontrola po uzavření druhého review má proto ověřit jednu věc: pravidlo žije jako obyčejná součást systému, ne jako skrytý malý projekt s vlastní pozorností, tabulkou a drobnou nervozitou okolo.
+
+Začněte větou:
+
+```text
+Pravidlo je v tichém provozu a dnes kontrolujeme jen to, jestli zůstalo použitelné bez zvláštní péče.
+```
+
+Tato věta je brzda. Když ji tým přeskočí, snadno se první měsíční kontrola změní v návrat k celé historii pravidla. To není potřeba. Historie už byla zpracovaná při uzavření. Teď se díváte jen na běžný měsíc: jestli pravidlo někdo použil, jestli pracovní místo pořád dává smysl, jestli nevznikly nové datové zbytky a jestli se neobjevil skutečný návratový signál.
+
+Příklad:
+
+```text
+Pravidlo:
+Discovery šablona se ptá na rozhodovací horizont a očekávaný výsledek.
+
+Běžný rytmus:
+Měsíční review obchodních šablon.
+
+Měsíční kontrola:
+Ve třech posledních relevantních poptávkách otázka nechyběla. Jeden obchodník ji zkrátil vlastními slovy, ale význam zůstal stejný.
+
+Datová stopa:
+Nevzniklo nové CRM pole ani export odpovědí. Poznámky zůstaly jen u konkrétních obchodních případů.
+
+Návratový signál:
+Nenastal. Poptávky šly prioritizovat.
+
+Rozhodnutí:
+Pravidlo zůstává v tichém provozu. Bez akce.
+```
+
+Všimněte si, že kontrola nehledá dokonalost. Jeden člověk může použít vlastní formulaci, pokud zachová pracovní smysl. Tichý provoz má unést běžné variace. Kdyby každá odchylka spustila opravu, pravidlo by se nikdy nestalo normální prací.
+
+### Tři otázky měsíční kontroly
+
+První měsíční kontrolu udržte na třech otázkách:
+
+- Použilo se pravidlo v běžné práci bez připomínání historie?
+- Zůstalo pravidlo na správném kanonickém místě a bez duplicit?
+- Nevznikla kolem něj nová zbytečná data, evidence nebo kontrola lidí?
+
+První otázka chrání použitelnost. Pokud pravidlo funguje jen tehdy, když u něj stojí člověk, který si pamatuje původní problém, není v tichém provozu. Je pořád v režimu neformální podpory.
+
+Druhá otázka chrání zdroj pravdy. Pravidlo se může rozpadnout i bez velké chyby: někdo zkopíruje starou šablonu, přidá vysvětlení do Slacku, připne poznámku do projektu nebo nechá dočasný checklist vedle živého dokumentu. Po měsíci se to ještě dá uklidit levně. Po půl roce už se z toho stává archeologie s kávou a lehkým zoufalstvím.
+
+Třetí otázka chrání privacy-first provoz. Kontrola pravidla nemá vyrábět sledování lidí, automatické vyhodnocování každého kroku ani nové exporty. Pokud potřebujete důkaz, hledejte nejdřív v existujících pracovních stopách: v konkrétním obchodním případu, v support tiketu, v changelogu šablony nebo v běžném review záznamu.
+
+### Čtyři výsledky první měsíční kontroly
+
+Po kontrole vyberte jeden stav:
+
+- Bez akce: pravidlo funguje, návratový signál nenastal a datová stopa zůstává čistá.
+- Lokální dočištění: jedno místo je nejasné, duplicitní nebo historicky zatížené.
+- Slabý tichý provoz: pravidlo se používá, ale jen díky neformálním připomínkám.
+- Návratový signál: nastala situace, která odpovídá předem zapsanému důvodu pro znovuotevření.
+
+"Bez akce" je nejlepší výsledek a má být krátce zapsaný. Nepřidávejte k němu další opatření. Když je tichý provoz v pořádku, další práce spočívá v tom, že se žádná další práce nevymyslí. Tady se produktivita tváří podezřele pasivně, ale funguje.
+
+Lokální dočištění má mít jedno místo a jednu akci. Například smazat starou kopii šablony, přejmenovat odkaz, zkrátit vysvětlení nebo odstranit dočasnou připomínku z měsíční agendy. Pokud je míst víc, už nejde o lokální dočištění. Je to slabé kanonické místo nebo nový úklidový podnět.
+
+Slabý tichý provoz znamená, že pravidlo ještě není samostatné. Lidé ho používají, ale hlavně proto, že si ho někdo hlídá bokem. Tady nepomůže přidat další kontrolu. Nejdřív najděte, co brání samostatnosti: špatný název, skryté umístění, moc dlouhý text, nejasný příklad nebo chybějící vazba na běžný workflow.
+
+Návratový signál otevřete jen tehdy, když opravdu odpovídá původnímu zápisu. Ne každé drhnutí je návrat starého problému. Pokud se objeví nové téma, zapište ho jako nový podnět a tiché pravidlo nechte zavřené.
+
+### Karta první měsíční kontroly
+
+```text
+Pravidlo:
+
+Kanonické pracovní místo:
+
+Běžný měsíční rytmus:
+
+Kdo pravidlo použil nebo kde se objevilo:
+
+Použitelnost bez historie:
+- ano / částečně / ne
+
+Zdroj pravdy:
+- čistý / jedna duplicita / nejasný
+
+Datová stopa:
+- beze změny / uklidit jednu stopu / vzniká riziko
+
+Návratový signál:
+- nenastal / částečně se podobá / nastal
+
+Výsledek:
+- bez akce
+- lokální dočištění
+- slabý tichý provoz
+- návratový signál
+
+Jedna akce, pokud je potřeba:
+
+Co zůstává zavřené:
+
+Co nemaříme novým měřením, exportem ani kontrolou lidí:
+
+Další běžná kontrola:
+```
+
+Karta nemá být nový dokument na věčné časy. Stačí krátký záznam v běžném měsíčním review. Pokud kvůli tichému provozu zakládáte samostatnou evidenci tichého provozu, systém se právě tiše směje. A má proč.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: otevřete jen kanonické místo pravidla a běžný review záznam.
+2. Minuta 2: najděte jeden reálný průchod z posledního měsíce.
+3. Minuta 3: ověřte, jestli pravidlo fungovalo bez historického vysvětlování.
+4. Minuta 4: zkontrolujte duplicity, staré připomínky a pomocné kopie.
+5. Minuta 5: vyberte jeden ze čtyř výsledků.
+6. Minuta 6: zapište privacy-first hranici a případnou jednu akci.
+
+Pokud v šesti minutách neumíte najít žádný reálný průchod, neznamená to automaticky problém. Možná se za měsíc jen nestala situace, ve které se pravidlo používá. V takovém případě zapište "bez průchodu, bez akce" a kontrolu opakujte až v dalším běžném rytmu. Nevymýšlejte umělý test jen proto, aby bylo co vyplnit.
+
+### Checklist první měsíční kontroly
+
+- Kontrolovali jsme pravidlo v běžném měsíčním rytmu, ne ve zvláštním režimu?
+- Otevřeli jsme kanonické místo místo starých ověřovacích poznámek?
+- Našli jsme reálný průchod, nebo jsme poctivě zapsali, že žádný nebyl?
+- Fungovalo pravidlo bez připomínání původní historie?
+- Nevznikla duplicita šablony, odkazu, poznámky nebo checklistu?
+- Nevede kontrola k novému sledování lidí nebo zákazníků?
+- Použili jsme existující pracovní stopy místo nového trackingu?
+- Vybrali jsme jeden ze čtyř výsledků?
+- Pokud je potřeba dočištění, má jedno pracovní místo?
+- Pokud je tichý provoz slabý, pojmenovali jsme překážku samostatnosti?
+- Pokud nastal návratový signál, odpovídá původnímu zápisu?
+- Pokud nenastal, nechali jsme pravidlo dál v klidu?
+
+První měsíční kontrola v tichém provozu je test dospělosti pravidla. Dospělé pravidlo nepotřebuje fanfáry, dohled ani detailní deník. Stačí, že se dá najít, použít a opustit bez zbytečné datové stopy. To je v malém týmu často větší výhra než další sofistikovaný proces.
+
 ## Pracovní log
 
+- 2026-06-17: Doplněna úvodní podkapitola o první měsíční kontrole pravidla v tichém provozu: tři kontrolní otázky, čtyři výsledky, privacy-first hranice, karta, mini workshop a checklist.
 - 2026-06-17: Doplněna úvodní podkapitola o uzavření druhého běžného review do tichého provozu: čtyři uzavírací stavy, úklid dočasných stop, privacy-first hranice, karta, mini workshop a checklist.
 - 2026-06-17: Doplněna úvodní podkapitola o druhém běžném review po zavření mimořádné kontroly: samostatnost pravidla, čistota pracovních stop, návratový signál, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-17: Doplněna úvodní podkapitola o uzavření prvního běžného review po návratu pravidla do rytmu: uzavírací stavy, vypnutí zvláštní kontroly, privacy-first úklid, karta, mini workshop a checklist.
