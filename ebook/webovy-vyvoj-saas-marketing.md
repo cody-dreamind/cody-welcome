@@ -223944,8 +223944,152 @@ Když workshop skončí zjištěním, že pravidlo nikdo nepoužil, automaticky 
 
 Druhá kvartální kontrola je hotová, když tým ví, jestli pravidlo přežilo bez čerstvé paměti. Pokud ano, nechte ho dál žít klidně. Pokud ne, opravte nejbližší pracovní místo nebo otevřete malou údržbovou kartu. Hlavní disciplína je nepřidat pravidlu novou vrstvu dohledu jen proto, že jste ho po třech měsících znovu zahlédli.
 
+## Uzavření druhé kvartální kontroly pravidla
+
+Druhá kvartální kontrola má smysl jen tehdy, když po ní pravidlo nezůstane v mezistavu. Mezistav vypadá nenápadně: všichni vědí, že se něco našlo, někdo možná opraví starý brief, někde existuje poznámka, že se k tomu tým vrátí. Jenže právě tak vzniká provozní mlha. Kontrola se tváří hotově, ale pravidlo pořád táhne za sebou otevřený ocásek.
+
+Začněte uzavření větou:
+
+```text
+Po druhé kvartální kontrole pravidlo odteď:
+```
+
+Věta má skončit jedním provozním stavem, ne dalším popisem zjištění. Například:
+
+```text
+Po druhé kvartální kontrole pravidlo dál běží v kvartálním rytmu; opravujeme jen starý obchodní brief a žádné nové sledování používání šablon nezavádíme.
+```
+
+Tahle věta je krátká, ale drží tři hranice: pravidlo pokračuje, jedna akce má jasné místo a privacy-first režim se nerozšiřuje. Když tým neumí větu napsat bez odboček, kontrola ještě není uzavřená. Pravděpodobně se míchá chyba pravidla, stará kopie, slabá navigace a chuť "ještě to trochu pohlídat".
+
+### Čtyři uzavírací stavy po druhém kvartálu
+
+Po druhé kvartální kontrole vyberte jeden ze čtyř stavů:
+
+- Stabilní pokračování: pravidlo funguje bez čerstvé paměti a další kontrola zůstává ve stejném rytmu.
+- Lokální úklid kopie: pravidlo drží, ale jedna stará kopie, odkaz nebo brief se musí odstranit, označit nebo přesměrovat.
+- Přesun pravidla blíž práci: pravidlo je správné, ale kanonické místo neodpovídá tomu, odkud lidé reálně začínají.
+- Údržbová karta: pravidlo už se opakovaně míjí s dnešní realitou a potřebuje samostatný malý zásah.
+
+Stabilní pokračování má být opravdu stabilní. Neznamená "ještě měsíc se na to koukneme bokem". Znamená, že pravidlo pokračuje podle domluveného rytmu a dřívější návrat nastane jen při zapsaném návratovém signálu.
+
+Lokální úklid kopie je nejčastější stav. Starý dokument přežil, protože lidé pracují z odkazů, záložek, osobních složek a předchozích projektů. Odpovědí není další školení. Odpovědí je udělat staré místo neškodné: smazat ho, označit jako archiv, přesměrovat na kanonickou verzi nebo do něj vložit krátkou větu "tato šablona je nahrazená".
+
+Přesun pravidla blíž práci je potřeba tehdy, když se ukáže, že oficiální zdroj pravdy sice existuje, ale lidé ho v běžném průchodu nepotkají. Pak není fér říkat, že pravidlo selhalo. Selhala jeho trasa. Krátká verze pravidla má být tam, kde rozhodnutí vzniká; delší vysvětlení může zůstat v rozhodovací paměti.
+
+Údržbová karta patří jen na opakované tření. Pokud jedna stará kopie způsobila jeden výpadek, uklidíte kopii. Pokud se ale pravidlo opakovaně obchází, nehodí se k novému segmentu nebo nutí lidi doplňovat údaje, které při práci nemají, otevřete údržbu. Údržba má jedno pracovní místo a jedno ověření, ne návrat do celé historie pravidla.
+
+### Jak uzavřít bez nového dohledu
+
+Při uzavření druhé kvartální kontroly si dejte pozor na větu "budeme to raději sledovat". Někdy je oprávněná, ale často jen maskuje nejistotu. Pokud pravidlo potřebuje sledování, napište přesně jaké rozhodnutí má sledování umožnit a jaká existující pracovní stopa k tomu stačí. Pokud to napsat neumíte, nezavádějte nový dohled.
+
+Privacy-first uzavření používá tento pořádek:
+
+- nejdřív opravit nebo uklidit pracovní místo;
+- potom zapsat návratový signál;
+- až nakonec zvažovat měření, a jen pokud bez něj nejde udělat rozhodnutí.
+
+V praxi většinou stačí kontrola hotových artefaktů v příštím běžném review. Pokud opravujete starý obchodní brief, nemusíte měřit, kdo ho otevřel. Stačí při dalším použití ověřit, jestli nová poptávková stránka vznikla z aktuálního briefu a obsahuje potřebnou datovou větu.
+
+Codyho komentář: "budeme to sledovat" je často věta, kterou si tým kupuje pocit kontroly na splátky. První splátka je nová tabulka, druhá je zapomenutý export a třetí je otázka, proč máme tolik míst, kde nikdo neví, co je pravda.
+
+### Co se má propsat do systému
+
+Uzavření druhé kvartální kontroly má změnit jen místa, která budou lidé reálně používat:
+
+- kanonickou šablonu nebo brief;
+- archivní kopii, pokud může mást;
+- rozhodovací záznam s jednovětým výsledkem;
+- další plánovaný rytmus nebo návratový signál;
+- případnou údržbovou kartu, pokud lokální oprava nestačí.
+
+Nepřepisujte všechny související dokumenty jen proto, že jste je při kontrole zahlédli. Každý přepis má riziko nové chyby. Pokud dokument není pracovní místo, stačí ho označit jako archiv nebo ho nechat být. Cílem není vytvořit dokonale uklizené muzeum pravidla. Cílem je, aby příští člověk při práci narazil na správnou verzi a nemusel znát archeologii.
+
+Praktický příklad uzavření:
+
+```text
+Výsledek kontroly:
+Pravidlo funguje u produktových stránek, ale pilotní landing page vznikla ze starého obchodního briefu.
+
+Uzavírací stav:
+Lokální úklid kopie.
+
+Akce:
+Starý obchodní brief označit jako archiv a přidat odkaz na aktuální brief.
+
+Jednovětý závěr:
+Pravidlo dál běží v kvartálním rytmu; slabé místo byla stará kopie briefu, ne samotné pravidlo.
+
+Privacy-first hranice:
+Nesledujeme autory ani otevření dokumentů. Příště kontrolujeme jen hotovou landing page a použitý brief, pokud vznikne relevantní případ.
+```
+
+Takový zápis brání přestřelení. Tým ví, že neotevírá celý proces, nehoní viníka a nepřidává monitoring. Jen zavírá jednu starou cestu, která vedla mimo pravidlo.
+
+### Karta uzavření druhé kvartální kontroly
+
+```text
+Pravidlo:
+
+Kanonické pracovní místo:
+
+Výsledek druhé kvartální kontroly:
+
+Uzavírací stav:
+- stabilní pokračování
+- lokální úklid kopie
+- přesun pravidla blíž práci
+- údržbová karta
+
+Jednovětý závěr po uzavření:
+
+Jedna akce:
+
+Kde se akce propíše:
+
+Co mažeme, označujeme jako archiv nebo přesměrováváme:
+
+Co neotevíráme z původní historie:
+
+Co dál nesbíráme ani neměříme:
+
+Další rytmus nebo návratový signál:
+
+Vlastník:
+```
+
+Kartu držte krátkou. Pokud jedna akce nejde napsat do jednoho řádku, rozdělte situaci: buď jde o údržbovou kartu, nebo se do uzavření pašuje další téma. Uzavření má být poslední krok kontroly, ne začátek nového projektu s lepším názvem.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte výsledek druhé kvartální kontroly.
+2. Minuta 2: vyberte jeden ze čtyř uzavíracích stavů.
+3. Minuta 3: napište jednovětý závěr po uzavření.
+4. Minuta 4: určete jednu akci a pracovní místo, kam se propíše.
+5. Minuta 5: označte, co se maže, archivuje nebo přesměrovává.
+6. Minuta 6: zapište, co dál nesbíráte, a potvrďte další rytmus nebo návratový signál.
+
+Když se workshop zasekne na tom, jestli pravidlo přesunout blíž práci, použijte jednoduchý test: kde by příští rozumný člověk začal, kdyby neznal historii? Pokud odpověď není kanonické místo, pravidlo se má přiblížit k reálnému začátku práce, nebo má reálný začátek práce jasně odkazovat na pravidlo.
+
+### Checklist uzavření druhé kvartální kontroly
+
+- Máme jeden uzavírací stav?
+- Umíme výsledek říct jednou větou?
+- Rozlišili jsme slabou kopii, slabé pracovní místo a skutečnou údržbu pravidla?
+- Má akce jedno pracovní místo a jednoho vlastníka?
+- Označili jsme staré kopie, odkazy nebo briefy, které mohou mást?
+- Nepřidali jsme nový dohled nad používáním dokumentů?
+- Pracujeme s hotovými artefakty místo sledování lidí?
+- Propsal se závěr do místa, kde pravidlo někdo příště použije?
+- Je jasné, co z původní historie neotevíráme?
+- Je zapsané, co dál nesbíráme ani neměříme?
+- Má pravidlo další rytmus nebo návratový signál?
+
+Uzavření druhé kvartální kontroly je hotové, když kontrola nezanechá samostatný stínový proces. Buď pravidlo pokračuje, jedna stará stopa se uklidí, pravidlo se přesune blíž práci, nebo vznikne malá údržbová karta. Vše ostatní je jen způsob, jak si z kontroly odnést víc práce, než kolik skutečně našla.
+
 ## Pracovní log
 
+- 2026-06-17: Doplněna úvodní podkapitola o uzavření druhé kvartální kontroly pravidla: čtyři uzavírací stavy, uzavření bez nového dohledu, propsání do pracovních míst, privacy-first hranice, karta, mini workshop a checklist.
 - 2026-06-17: Doplněna úvodní podkapitola o druhé kvartální kontrole pravidla po stabilním uzavření: fungování bez čerstvé paměti, staré kopie, slabá pracovní místa, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-06-17: Doplněna úvodní podkapitola o uzavření první kvartální kontroly pravidla: čtyři uzavírací stavy, propsání výsledku do pracovního místa, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-17: Doplněna úvodní podkapitola o první kvartální kontrole pravidla po delším klidovém rytmu: tři kontrolní otázky, čtyři výsledky, privacy-first datová stopa, karta, mini workshop a checklist.
