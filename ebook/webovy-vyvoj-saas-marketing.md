@@ -224369,8 +224369,155 @@ Když se workshop začne měnit v další kontrolu pravidla, vraťte ho k převo
 
 Převod do půlročního rytmu je hotový, když pravidlo zůstává viditelné v práci, ale mizí kolem něj mimořádná pozornost. Tým ví, proč ho nechává v klidu, kdy se k němu vrátí a co by ho otevřelo dřív. To je přesně ten typ pořádku, který nevypadá efektně, ale šetří budoucí energii i data.
 
+## První půlroční kontrola pravidla v klidovém rytmu
+
+První půlroční kontrola má jednu hlavní otázku: vydrželo pravidlo půl roku jako součást práce, nebo jen půl roku nebylo vidět, že nefunguje? To jsou dvě velmi rozdílné situace. Stabilní pravidlo se objevuje v hotových výstupech, šablonách, rozhodnutích a předáních. Zapomenuté pravidlo jen tiše leží v dokumentaci a čeká, až si někdo vzpomene.
+
+Začněte větou:
+
+```text
+Pravidlo po půl roce kontrolujeme proto, abychom zjistili:
+```
+
+Za dvojtečku nepatří obecné "jestli je pořád aktuální". To je příliš široké a většinou vede k debatě o všem. Lepší je konkrétní kontrolní otázka:
+
+```text
+Pravidlo po půl roce kontrolujeme proto, abychom zjistili, jestli se datová věta u formulářů stále objevuje na veřejných stránkách bez ručního připomínání.
+```
+
+Taková věta určuje pracovní místo, očekávaný důkaz i hranici. Tým nekontroluje celý web, všechny formuláře, všechny briefy ani všechny lidi. Kontroluje jeden slib pravidla v hotových výstupech.
+
+### Co při půlroční kontrole opravdu ověřit
+
+Půlroční kontrola má být klidná, ale ne povrchní. Ověřte tři vrstvy:
+
+- viditelnost pravidla v kanonickém pracovním místě;
+- stopu pravidla v několika hotových výstupech;
+- návratový signál, který měl pravidlo otevřít dřív.
+
+První vrstva odpovídá na otázku, jestli pravidlo pořád existuje tam, kde ho člověk při práci hledá. Druhá vrstva ukáže, jestli se pravidlo skutečně používá. Třetí vrstva chrání tým před falešným klidem: pokud se návratový signál během půl roku objevil a nikdo nereagoval, problém není v pravidle samotném, ale v jeho napojení na provoz.
+
+Praktický příklad:
+
+```text
+Pravidlo:
+U každého nového formuláře musí být krátká věta, jaká data sbíráme a proč.
+
+Kanonické místo:
+Šablona landing page a checklist před publikací.
+
+Hotové výstupy:
+Tři poslední veřejné stránky s formulářem.
+
+Návratový signál:
+Dvě stránky po sobě vyjdou bez datové věty, nebo vznikne nový typ formuláře.
+
+Zjištění:
+Šablona pravidlo obsahuje. Dvě ze tří stránek datovou větu mají. Třetí stránka ji nemá, protože vznikla z kopie starého návrhu mimo aktuální šablonu.
+
+Rozhodnutí:
+Pravidlo zůstává v půlročním rytmu, ale stará kopie návrhu se označí jako archiv a odkaz v obchodním briefu se přepne na aktuální šablonu.
+```
+
+Výsledek není panika ani velký audit. Pravidlo funguje, ale jedna stará cesta ho obešla. To stačí na lokální úklid, ne na návrat do kvartálního rytmu.
+
+### Čtyři výsledné stavy
+
+Po první půlroční kontrole vyberte jeden ze čtyř stavů:
+
+- pravidlo zůstává v půlročním rytmu beze změny;
+- pravidlo zůstává v půlročním rytmu po jedné lokální opravě;
+- pravidlo se vrací do kvartálního rytmu, protože půlroční klid byl moc dlouhý;
+- pravidlo se slučuje s jiným pravidlem nebo se vyřazuje, protože už nemá samostatnou rozhodovací hodnotu.
+
+První stav použijte jen tehdy, když pravidlo obstálo v pracovním místě i ve výstupech. Druhý stav je nejčastější a úplně zdravý: najdete jednu starou kopii, slabý odkaz nebo chybějící větu v šabloně. Třetí stav je vhodný, když se problém opakoval nebo návratový signál nebyl zachycený. Čtvrtý stav patří pravidlům, která se časem proměnila v samozřejmou součást širšího procesu, nebo naopak přestala rozhodovat o čemkoli konkrétním.
+
+Pozor na pátý nepsaný stav: "ještě to probereme". Ten do kontroly nepatří. Pokud neumíte vybrat jeden ze čtyř stavů, zmenšete kontrolu na jedno pracovní místo a jeden výstup. Půlroční kontrola nemá vyrábět mlhu, má ji rozpustit.
+
+### Privacy-first kontrola bez špehování
+
+Půlroční rytmus svádí k nápadu "pojďme to mezitím měřit". Odolejte. Pokud pravidlo potřebuje půl roku tichého monitoringu, nejspíš není dost stabilní na půlroční rytmus. Pro kontrolu používejte hotové artefakty, které už vznikly při běžné práci:
+
+- publikované stránky;
+- aktuální šablony;
+- poslední schválené briefy;
+- checklisty před publikací;
+- anonymizované nebo zobecněné příklady, pokud je potřeba ukázat typ chyby.
+
+Nesledujte, kdo dokument otevřel, kdo kolikrát použil šablonu, jak dlouho byl v nástroji nebo kudy přesně prošel. To jsou často pohodlná data, ale špatná otázka. Pravidlo má být vidět ve výsledku práce. Pokud není, hledejte slabé pracovní místo, ne slabého člověka.
+
+Codyho komentář: půlroční kontrola není detektivka o tom, kdo zapomněl kliknout na správný checklist. Je to servisní prohlídka systému. Když se rozsvítí kontrolka, opravte vedení kabelu; neinstalujte kameru nad každou ruku.
+
+### Karta první půlroční kontroly
+
+```text
+Pravidlo:
+
+Kanonické pracovní místo:
+
+Důvod půlroční kontroly jednou větou:
+
+Co mělo být po půl roce vidět:
+
+Kontrolované hotové výstupy:
+
+Stav kanonického místa:
+
+Objevil se návratový signál před kontrolou?
+- ne / ano / nevíme
+
+Pokud ano, kde měl být zachycen:
+
+Výsledek kontroly:
+- ponechat půlroční rytmus beze změny
+- ponechat po jedné lokální opravě
+- vrátit do kvartálního rytmu
+- sloučit nebo vyřadit
+
+Lokální oprava, pokud existuje:
+
+Co se propisuje do pracovního místa:
+
+Co dál nesbíráme ani neměříme:
+
+Datum další kontroly:
+
+Vlastník:
+```
+
+Karta záměrně neobsahuje prostor pro dlouhou historii. Historie už pomohla pravidlo vytvořit, ale půlroční kontrola má pracovat s dnešním stavem. Pokud potřebujete starý příběh vyprávět znovu, je to signál, že pravidlo není dost srozumitelné v kanonickém místě.
+
+### Mini workshop na 8 minut
+
+1. Minuta 1: přečtěte pravidlo a důvod půlroční kontroly.
+2. Minuta 2: otevřete kanonické pracovní místo a ověřte, jestli pravidlo najde člověk bez starého kontextu.
+3. Minuty 3 až 4: projděte několik hotových výstupů, kde se pravidlo mělo projevit.
+4. Minuta 5: ověřte, jestli se během půl roku objevil návratový signál.
+5. Minuta 6: vyberte jeden ze čtyř výsledných stavů.
+6. Minuta 7: zapište jednu lokální opravu nebo potvrďte, že žádná není.
+7. Minuta 8: zapište vlastníka, další datum a privacy-first hranici.
+
+Když workshop začne řešit nové nápady, dejte je mimo kartu. Nový nápad může být užitečný, ale první půlroční kontrola má odpovědět na otázku, jestli staré pravidlo pořád plní svůj slib. Nové nápady patří do samostatné iterace s vlastní stop podmínkou.
+
+### Checklist první půlroční kontroly
+
+- Má kontrola jednu konkrétní otázku?
+- Ověřili jsme kanonické pracovní místo místo celé historické dokumentace?
+- Podívali jsme se na hotové výstupy, ne na dojmy?
+- Je jasné, jestli se návratový signál objevil před plánovanou kontrolou?
+- Vybrali jsme jeden ze čtyř výsledných stavů?
+- Pokud je potřeba oprava, míří do jednoho pracovního místa?
+- Nevracíme pravidlo do častějšího rytmu jen kvůli jedné staré kopii?
+- Neslučujeme nebo nevyřazujeme pravidlo jen proto, že je nudné?
+- Nepřidali jsme monitoring lidí, čtení dokumentů ani nové trackery?
+- Zapsali jsme, co dál nesbíráme ani neměříme?
+- Má další kontrola datum a vlastníka?
+
+První půlroční kontrola je hotová, když tým ví, jestli pravidlo opravdu žilo v práci. Někdy vyjde čistě a pokračuje dál. Někdy stačí uklidit jednu starou cestu. Někdy se ukáže, že půl roku je moc dlouho. Někdy pravidlo ztratí samostatný smysl. Všechny tyhle výsledky jsou užitečné, pokud vedou k jednomu jasnému rozhodnutí místo k dalšímu neviditelnému dohledu.
+
 ## Pracovní log
 
+- 2026-06-17: Doplněna úvodní podkapitola o první půlroční kontrole pravidla v klidovém rytmu: konkrétní kontrolní otázka, ověření kanonického místa a hotových výstupů, čtyři výsledné stavy, privacy-first hranice, karta, mini workshop a checklist.
 - 2026-06-17: Doplněna úvodní podkapitola o převodu pravidla po druhé kvartální kontrole do půlročního rytmu: podmínky převodu, návratový signál, privacy-first úklid stop, karta, mini workshop a checklist.
 - 2026-06-17: Doplněna úvodní podkapitola o uzavření druhé kvartální kontroly pravidla: čtyři uzavírací stavy, uzavření bez nového dohledu, propsání do pracovních míst, privacy-first hranice, karta, mini workshop a checklist.
 - 2026-06-17: Doplněna úvodní podkapitola o druhé kvartální kontrole pravidla po stabilním uzavření: fungování bez čerstvé paměti, staré kopie, slabá pracovní místa, privacy-first kontrola, karta, mini workshop a checklist.
