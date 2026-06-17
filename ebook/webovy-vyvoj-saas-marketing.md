@@ -224515,8 +224515,151 @@ Když workshop začne řešit nové nápady, dejte je mimo kartu. Nový nápad m
 
 První půlroční kontrola je hotová, když tým ví, jestli pravidlo opravdu žilo v práci. Někdy vyjde čistě a pokračuje dál. Někdy stačí uklidit jednu starou cestu. Někdy se ukáže, že půl roku je moc dlouho. Někdy pravidlo ztratí samostatný smysl. Všechny tyhle výsledky jsou užitečné, pokud vedou k jednomu jasnému rozhodnutí místo k dalšímu neviditelnému dohledu.
 
+## Uzavření první půlroční kontroly pravidla
+
+Půlroční kontrola sama o sobě ještě není hotová práce. Hotová je až ve chvíli, kdy se její výsledek promítne do rytmu, pracovního místa a jedné srozumitelné věty pro tým. Bez uzavření zůstane kontrola jako další vrstva poznámek: někdo ji četl, někdo s ní souhlasil, ale při další práci se stejně začne znovu od otázky "tak co jsme minule vlastně zjistili".
+
+Uzavření začněte větou:
+
+```text
+Po první půlroční kontrole s pravidlem děláme toto:
+```
+
+Za dvojtečku patří jeden stav, ne odstavec vysvětlování. Například:
+
+```text
+Po první půlroční kontrole s pravidlem děláme toto:
+Ponecháváme ho v půlročním rytmu, ale archivujeme starou kopii briefu, která obcházela aktuální šablonu.
+```
+
+Tato věta je důležitější než dlouhá kontrolní karta. Karta pomáhá rozhodnout, ale uzavírací věta pomáhá pokračovat. Má být tak jasná, aby ji člověk našel v pracovním místě a rovnou věděl, jestli má něco dělat jinak.
+
+### Čtyři uzavírací stavy
+
+Po první půlroční kontrole uzavírejte jen jedním ze čtyř stavů:
+
+- ponechat pravidlo v půlročním rytmu;
+- ponechat pravidlo v půlročním rytmu po lokálním úklidu;
+- vrátit pravidlo do kvartálního rytmu;
+- sloučit nebo vyřadit pravidlo.
+
+Ponechání bez změny je vhodné, když pravidlo bylo vidět v kanonickém místě i v hotových výstupech a návratový signál se neobjevil. Neznamená to, že pravidlo je navždy dokonalé. Znamená to jen, že další pozornost teď nepřinese lepší rozhodnutí.
+
+Ponechání po lokálním úklidu použijte, když pravidlo funguje, ale jedna stará cesta ho obešla. Typicky jde o starý brief, kopii šablony, neaktuální odkaz v interní poznámce nebo příklad, který přežil mimo zdroj pravdy. Uzavření má v takovém případě opravit cestu, ne znovu otevřít celé pravidlo.
+
+Návrat do kvartálního rytmu zvolte, když půlroční interval nechal problém opakovat. Varovné signály jsou hlavně dva: návratový signál se objevil a nikdo ho nezachytil, nebo se stejná chyba objevila ve více pracovních místech. Tady nejde o trest za slabé pravidlo. Jde o přiznání, že systém ještě potřebuje častější servisní kontrolu.
+
+Sloučení nebo vyřazení patří pravidlu, které už nemá samostatnou rozhodovací hodnotu. Buď se stalo přirozenou součástí širšího procesu, nebo naopak přestalo chránit něco konkrétního. Obojí je normální. Dokumentace nemá být muzeum starých starostí.
+
+### Co uzavřením opravdu změnit
+
+Uzavření první půlroční kontroly má změnit maximálně tři věci:
+
+- revizní rytmus;
+- kanonické pracovní místo;
+- jednu starou nebo slabou cestu, která pravidlo obchází.
+
+Pokud uzavření potřebuje měnit víc věcí, pravděpodobně nejde o uzavření kontroly, ale o novou iteraci. Tu si otevřete zvlášť. Půlroční kontrola má zavřít stav pravidla, ne pod záminkou úklidu přepsat celý provozní systém.
+
+Praktický příklad:
+
+```text
+Zjištění:
+Pravidlo o datové větě u formulářů funguje v aktuální šabloně landing page. Jedna starší obchodní kopie briefu ale pořád odkazuje na šablonu bez datové věty.
+
+Uzavírací stav:
+Ponechat půlroční rytmus po lokálním úklidu.
+
+Změna v pracovním místě:
+V obchodním briefu se starý odkaz nahrazuje aktuální šablonou.
+
+Co se nemění:
+Nepřidáváme nové kontrolní pole do CRM, neměníme celý publikační checklist a neotevíráme audit všech formulářů.
+```
+
+Všimněte si poslední části. "Co se nemění" není alibismus. Je to ochrana rozsahu. Bez ní by malý úklid snadno vyrostl do velké revize a tým by příště půlroční kontrolu odkládal, protože si ji spojí s hromadou vedlejší práce.
+
+### Privacy-first uzavření
+
+Uzavření půlroční kontroly má odstranit mimořádnou pozornost, ne ji převléct za nenápadný monitoring. Po uzavření si proto napište, co dál nesbíráte:
+
+- nebudete sledovat jednotlivé autory šablon;
+- nebudete měřit otevření interních dokumentů;
+- nebudete přidávat nové analytické eventy jen kvůli kontrole pravidla;
+- nebudete kopírovat reálné zákaznické údaje do ukázkových karet;
+- nebudete držet dočasné exporty déle, než potřebujete pro uzavření.
+
+Privacy-first provoz není jen výběr evropského hostingu a opatrnost u nástrojů. Je to i disciplína při interní práci. Každá kontrola má tendenci vyrábět nové stopy: screenshoty, exporty, pracovní kopie, komentáře, seznamy výjimek. Když je po rozhodnutí neuklidíte, máte sice lepší pocit z evidence, ale horší datovou hygienu.
+
+Codyho komentář: kontrola, která po sobě nechá tři nové tabulky a neurčitý "budeme sledovat", není uzavření. To je jen kontrola v převleku za domácí úkol. Poctivé uzavření má být trochu nudné: jedna věta, jedna změna, jeden úklid.
+
+### Karta uzavření první půlroční kontroly
+
+```text
+Pravidlo:
+
+Výsledek první půlroční kontroly:
+
+Uzavírací stav:
+- ponechat půlroční rytmus
+- ponechat půlroční rytmus po lokálním úklidu
+- vrátit do kvartálního rytmu
+- sloučit nebo vyřadit
+
+Jednovětý závěr pro tým:
+
+Co se mění v kanonickém pracovním místě:
+
+Co se mění v revizním rytmu:
+
+Lokální úklid, pokud existuje:
+
+Co výslovně neotevíráme:
+
+Jaké dočasné podklady mažeme nebo zobecňujeme:
+
+Co dál nesbíráme ani neměříme:
+
+Nový nebo potvrzený návratový signál:
+
+Datum další kontroly:
+
+Vlastník:
+```
+
+Karta má fungovat jako uzávěrka, ne jako nový provozní dokument. Pokud v ní vzniká několik úkolů, vyberte jeden nutný pro uzavření a zbytek dejte do běžného backlogu jako samostatné podněty. Půlroční kontrola nesmí být tajný způsob, jak obejít prioritizaci.
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: přečtěte výsledek půlroční kontroly a vyberte jeden uzavírací stav.
+2. Minuta 2: napište jednovětý závěr pro tým.
+3. Minuta 3: určete, co se mění v kanonickém pracovním místě.
+4. Minuta 4: potvrďte revizní rytmus a návratový signál.
+5. Minuta 5: vyberte jeden lokální úklid, pokud je potřeba.
+6. Minuta 6: zapište, co výslovně neotevíráte a co dál neměříte.
+7. Minuta 7: smažte nebo zobecněte dočasné podklady a zapište vlastníka další kontroly.
+
+Když workshop narazí na větší problém, neprodlužujte ho. Uzavřete půlroční kontrolu stavem "vrátit do kvartálního rytmu" nebo otevřete samostatnou iteraci s vlastní stop podmínkou. Nejhorší varianta je nechat půlroční kontrolu napůl zavřenou a napůl otevřenou, protože pak nebude jasné, kdo má při další práci rozhodovat.
+
+### Checklist uzavření první půlroční kontroly
+
+- Vybrali jsme jeden ze čtyř uzavíracích stavů?
+- Má tým jednovětý závěr, který jde přepsat do pracovního místa?
+- Neměníme víc než rytmus, kanonické místo a případně jednu slabou cestu?
+- Je jasné, co se výslovně neotevírá?
+- Pokud zůstává půlroční rytmus, víme proč častější kontrola není potřeba?
+- Pokud se pravidlo vrací do kvartálního rytmu, víme jaký signál půlroční klid nezachytil?
+- Pokud se pravidlo slučuje nebo vyřazuje, neztrácíme tím žádnou konkrétní ochranu rozhodnutí?
+- Uklidili jsme dočasné exporty, kopie a pracovní příklady?
+- Nepřidali jsme monitoring lidí, dokumentů ani nové analytické eventy?
+- Je návratový signál po uzavření konkrétní a viditelný v pracovním místě?
+- Má další kontrola vlastníka a datum?
+
+Uzavření první půlroční kontroly je povedené, když po něm pravidlo potřebuje méně pozornosti, ne víc. Buď klidně pokračuje, dostane jednu lokální opravu, vrátí se do častějšího rytmu, nebo zmizí do širšího standardu. Ve všech případech tým odchází s jasným pracovním stavem a bez nové datové zátěže.
+
 ## Pracovní log
 
+- 2026-06-17: Doplněna úvodní podkapitola o uzavření první půlroční kontroly pravidla: uzavírací stavy, propsání do pracovního místa, privacy-first úklid dočasných podkladů, karta, mini workshop a checklist.
 - 2026-06-17: Doplněna úvodní podkapitola o první půlroční kontrole pravidla v klidovém rytmu: konkrétní kontrolní otázka, ověření kanonického místa a hotových výstupů, čtyři výsledné stavy, privacy-first hranice, karta, mini workshop a checklist.
 - 2026-06-17: Doplněna úvodní podkapitola o převodu pravidla po druhé kvartální kontrole do půlročního rytmu: podmínky převodu, návratový signál, privacy-first úklid stop, karta, mini workshop a checklist.
 - 2026-06-17: Doplněna úvodní podkapitola o uzavření druhé kvartální kontroly pravidla: čtyři uzavírací stavy, uzavření bez nového dohledu, propsání do pracovních míst, privacy-first hranice, karta, mini workshop a checklist.
