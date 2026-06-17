@@ -221824,8 +221824,143 @@ Když se během šesti minut objeví potřeba řešit širší téma, nezvětšu
 
 První běžné review je úspěšné, když pravidlo zůstane obyčejné. Obyčejnost je v provozu vysoká meta: znamená, že tým ví, kde pravidlo žije, kdy ho kontrolovat, kdy ho znovu otevřít a jaká data kvůli němu pořád nesbírat.
 
+## Uzavření prvního běžného review po návratu pravidla do rytmu
+
+První běžné review nemá zůstat jako poznámka, která se bude znovu otevírat při každém dalším plánování. Má skončit jasným stavem pravidla. Buď pravidlo běží dál bez zvláštní pozornosti, nebo se uklízí poslední pracovní stopa, nebo se zpřesní živá věta, nebo vznikne nový návratový signál. Cokoliv mezi tím je provozní mlha: vypadá opatrně, ale ve skutečnosti jen odkládá rozhodnutí.
+
+Uzavření začněte jednou větou:
+
+```text
+Po prvním běžném review pravidlo:
+- zůstává v rytmu
+- potřebuje poslední úklid
+- potřebuje zpřesnit pracovní větu
+- otevírá nový návratový signál
+```
+
+Tato věta je důležitější než dlouhý zápis. Nutí tým vybrat stav, který má následky. Když napíšete "ještě budeme sledovat", většinou jste neuzavřeli nic. Když napíšete "zůstává v rytmu a zvláštní kontrolu rušíme", práce se uklidní. Když napíšete "zpřesňujeme pracovní větu v kvalifikační kartě", víte, kde má vzniknout jedna konkrétní změna.
+
+Příklad:
+
+```text
+Review ukázalo:
+Pravidlo pro rozhodovací horizont se používá v discovery šabloně bez starého scoringu.
+
+Stav:
+Zůstává v rytmu.
+
+Jedna uzavírací akce:
+Mažeme dočasnou poznámku z review dokumentu, která připomínala kontrolu scoringu.
+
+Co už dál neděláme:
+Nevedeme samostatnou kontrolu follow-up šablony kvůli starému scoringu.
+
+Návratový signál:
+Vrátíme se jen tehdy, když u dvaceti relevantních poptávek po sobě obchod nedokáže určit prioritu ani po otázce na rozhodovací horizont.
+
+Privacy-first výsledek:
+Nepřidáváme nové CRM pole, export ani automatické obohacování kontaktu.
+```
+
+Všimněte si, že dobré uzavření může obsahovat smazání, ne novou práci. To je zdravé. Když review potvrdí, že pravidlo běží, největší hodnota často není další úprava, ale ukončení dočasné pozornosti.
+
+### Uzavírací rozhodnutí
+
+Po prvním běžném review vyberte jeden ze čtyř stavů:
+
+- Zavřít do rytmu: pravidlo funguje, zvláštní kontrola končí a další návrat se řídí běžným revizním rytmem nebo návratovým signálem.
+- Uklidit poslední stopu: pravidlo funguje, ale zůstala jedna dočasná poznámka, starý odkaz, kopie šablony nebo kontrolní karta.
+- Zpřesnit živou větu: pravidlo platí, ale pracovní formulace je moc historická, dlouhá nebo nejasná pro člověka bez kontextu.
+- Otevřít nový signál: review ukázalo opakované tření, které už nepatří do původního pravidla a potřebuje vlastní malý průchod.
+
+U stavu "zavřít do rytmu" napište, co tím přestáváte dělat. Například: "rušíme zvláštní měsíční kontrolu scoringové věty". Bez této věty se zvláštní péče často vrátí jen proto, že ji nikdo výslovně nevypnul.
+
+U poslední stopy opravte nebo smažte pouze konkrétní věc. Pokud je stop víc, nejdřív je spočítejte a pojmenujte jako samostatný úklidový podnět. Neprodlužujte uzavření review do tichého auditu celého systému.
+
+U zpřesnění živé věty přepisujte pro člověka při práci. Věta má říkat, co udělat teď, ne vyprávět, proč kdysi vznikla. "Při prvním follow-upu používej rozhodovací otázku z kvalifikační karty" je pracovní instrukce. "Po zrušení starého scoringu jsme se rozhodli..." je archivní vysvětlení.
+
+U nového signálu oddělte původní pravidlo od nového problému. Pokud discovery otázka funguje, ale předávací poznámka opakovaně mate delivery, neotevíráte znovu discovery. Otevíráte malou otázku předávací poznámky.
+
+### Co vypnout po uzavření
+
+Uzavření review má téměř vždy něco vypnout. Typicky:
+
+- dočasnou kontrolní kartu;
+- připnutou poznámku v issue;
+- kopii staré šablony;
+- ruční tabulku pro ověřování;
+- připomínku v kalendáři;
+- zvláštní komentář v týdenním review;
+- pracovní export vytvořený jen pro ověření.
+
+Vypnutí neznamená ztrátu paměti. Rozhodnutí zůstává v kanonickém místě a návratový signál říká, kdy se má téma znovu otevřít. Vypnutí znamená, že tým už nemusí platit další pozorností za něco, co bylo ověřené.
+
+Privacy-first dopad je přímý: co vypnete, to často přestane sbírat, kopírovat nebo držet data. Malá dočasná tabulka může působit nevinně, ale po třech měsících už nikdo neví, proč existuje, kdo ji smí číst a kdy se má smazat. Lepší je uklidit ji ve chvíli, kdy splnila účel.
+
+### Karta uzavření review
+
+```text
+Pravidlo:
+
+Kanonické pracovní místo:
+
+První běžné review ukázalo:
+
+Uzavírací stav:
+- zavřít do rytmu
+- uklidit poslední stopu
+- zpřesnit živou větu
+- otevřít nový signál
+
+Jedna uzavírací akce:
+
+Co vypínáme nebo mažeme:
+
+Co zůstává jako aktuální pracovní věta:
+
+Co zůstává zavřené:
+
+Návratový signál:
+
+Jaká data, pole, exporty, trackery nebo dodavatelé dál nevznikají:
+
+Vlastník:
+
+Datum:
+```
+
+Karta má být poslední zápis přechodové péče. Pokud po ní potřebujete další pravidelnou kontrolu, napište proč. Pokud odpověď zní "pro jistotu", vraťte se k návratovému signálu. Jistota bez signálu je jen drahá verze neklidu.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte výsledek prvního běžného review.
+2. Minuta 2: vyberte jeden uzavírací stav.
+3. Minuta 3: napište jednu uzavírací akci nebo větu "bez akce, zavřít do rytmu".
+4. Minuta 4: určete, co se vypíná, maže, zkracuje nebo archivuje.
+5. Minuta 5: zkontrolujte aktuální pracovní větu a návratový signál.
+6. Minuta 6: zapište privacy-first výsledek.
+
+Pokud workshop začne řešit, jak pravidlo ještě vylepšit, zastavte se. Uzavření review není brainstorming. Je to dveřník: pustí dál jen práci, která má jasný stav a důvod. Zbytek nechá venku, kde neškodí.
+
+### Checklist uzavření prvního běžného review
+
+- Vybrali jsme jeden uzavírací stav?
+- Je jasné, jestli pravidlo opravdu zůstává v rytmu?
+- Má případná oprava jedno konkrétní pracovní místo?
+- Přepsali jsme živou větu do přítomného času, pokud byla moc historická?
+- Oddělili jsme nový signál od původního pravidla?
+- Výslovně jsme vypnuli zvláštní kontrolu, pokud už nemá účel?
+- Smazali, zkrátili nebo archivovali jsme dočasné podklady?
+- Zůstává rozhodnutí v kanonickém místě, ne v pomocné poznámce?
+- Má pravidlo návratový signál místo trvalého dohledu?
+- Je napsané, jaká nová data, pole, exporty, trackery nebo dodavatelé nevznikají?
+- Ví člověk při dalším použití, co má udělat, bez čtení historie?
+
+Uzavření prvního běžného review je hotové ve chvíli, kdy pravidlo přestane být zvláštní událost. Zůstane pracovní věta, návratový signál a čisté kanonické místo. Dočasné stopy zmizí. Tým má méně věcí na hlídání a stejnou schopnost poznat, kdy se má téma vrátit. To je přesně ten druh drobné provozní výhry, která nevypadá dramaticky, ale dlouhodobě drží systém použitelný.
+
 ## Pracovní log
 
+- 2026-06-17: Doplněna úvodní podkapitola o uzavření prvního běžného review po návratu pravidla do rytmu: uzavírací stavy, vypnutí zvláštní kontroly, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-17: Doplněna úvodní podkapitola o prvním běžném review po návratu pravidla do rytmu: tři kontrolní vrstvy, čtyři výsledky review, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-16: Doplněna úvodní podkapitola o uzavření druhého běžného použití po převodu nové otázky do rytmu: čtyři uzavírací stavy, propsání do živého místa, ukončení zvláštní kontroly, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-16: Doplněna úvodní podkapitola o druhém běžném použití po převodu nové otázky do rytmu: přenositelnost bez čerstvého kontextu, čtyři výsledné stavy, privacy-first kontrola, karta, mini workshop a checklist.
