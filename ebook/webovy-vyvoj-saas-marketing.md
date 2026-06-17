@@ -222821,8 +222821,153 @@ Když workshop skončí větou "musíme to ještě sledovat", vraťte se o krok 
 
 Uzavření první měsíční kontroly je hotové, když pravidlo může znovu ztichnout. Buď se neděje nic, nebo se uklidí jedna věc, nebo se otevře jasně oddělený návrat. Všechny tři zdravé varianty mají společný rys: nenechávají za sebou mlhu, dočasné dokumenty a nové sledování jen proto, že tým měl chuť být opatrný.
 
+## Druhá měsíční kontrola pravidla v tichém provozu
+
+Druhá měsíční kontrola má jiný úkol než první. První kontrola ověřovala, jestli pravidlo přežilo přesun do tichého provozu. Druhá kontrola ověřuje, jestli pravidlo funguje i bez čerstvé paměti na přesun. Tým už by neměl řešit, jak pravidlo vzniklo, proč se stabilizovalo ani kdo ho posledně zachraňoval. Měl by ho umět najít, použít a nechat být.
+
+Začněte větou:
+
+```text
+Dnes nekontrolujeme historii pravidla, ale jeho druhý běžný měsíc bez zvláštní péče.
+```
+
+Tahle věta je důležitá, protože po první měsíční kontrole bývá tým pořád trochu ostražitý. Někdo si pamatuje starou chybu, někdo si pamatuje opravu a někdo má dobrý úmysl "raději ještě chvíli hlídat". Jenže právě tím se tichý provoz kazí. Pokud pravidlo pořád potřebuje hlídání, není tiché. Pokud ho hlídáte jen ze zvyku, vyrábíte proces navíc.
+
+Praktický příklad:
+
+```text
+Pravidlo:
+Každá nová produktová hypotéza má před pilotem jednu větu očekávaného zákaznického výsledku.
+
+První měsíc:
+Pravidlo se použilo ve dvou případech a zůstalo v kanonické šabloně.
+
+Druhý měsíc:
+Vznikla jedna nová hypotéza. Věta výsledku byla vyplněná bez připomínání, ale v interní poznámce zůstal starý odkaz na původní ověřovací kartu.
+
+Rozhodnutí:
+Pravidlo drží. Uklidit jeden starý odkaz a dál nekontrolovat mimo běžné měsíční review.
+```
+
+Výsledek není nová akce na pravidlo. Je to jen drobný úklid staré navigace. Druhý měsíc má často ukázat přesně tento typ zbytku: pravidlo už funguje, ale kolem něj ještě leží malý kus historie, který může později mást.
+
+### Co je ve druhé kontrole jiné
+
+Druhá měsíční kontrola se liší ve třech věcech:
+
+- Méně se ptá na zavedení pravidla a víc na samostatnost v normální práci.
+- Méně řeší první použití a víc opakovatelnou cestu k pravidlu.
+- Méně toleruje dočasné poznámky, protože po dvou měsících už dočasnost začíná být trvalá.
+
+U samostatnosti sledujte, jestli pravidlo použil člověk, který si nepamatuje celý příběh. Nemusí to být nový člen týmu. Stačí někdo, kdo nebyl u poslední opravy, nečetl předchozí kontrolu a přesto našel správné místo. Pokud pravidlo funguje jen pro pamětníky, není to pravidlo, ale interní historka s odkazem.
+
+U opakovatelné cesty sledujte, odkud se k pravidlu přichází. Může to být šablona nabídky, review agenda, onboardingový checklist, CRM pole, support runbook nebo redakční brief. Důležité je, aby cesta vedla přes místo práce, ne přes starý zápis kontroly. Starý zápis je důkaz, ne navigace.
+
+U dočasných poznámek buďte přísnější než první měsíc. Jedna přechodová připomínka po zavedení pravidla je normální. Přechodová připomínka, která přežila dvě kontroly, už se stává druhým zdrojem pravdy. Smažte ji, slučte ji, nebo z ní udělejte vědomou součást kanonického místa. Nenechávejte ji plavat vedle.
+
+### Čtyři výsledky druhé měsíční kontroly
+
+Po druhé kontrole vyberte jeden stav:
+
+- Drží bez zvláštní péče: pravidlo se používá v běžné práci, cesta je jasná a datová stopa se nerozrostla.
+- Drží s jedním historickým zbytkem: pravidlo funguje, ale je potřeba uklidit jednu starou poznámku, kopii, odkaz nebo připomínku.
+- Slabá přenositelnost: pravidlo funguje pro lidi, kteří znají historii, ale nový nebo méně zapojený člověk by pravděpodobně selhal.
+- Návrat do údržby: problém není návratovým signálem celé původní otázky, ale pravidlo potřebuje menší údržbovou opravu v kanonickém místě.
+
+Stav "drží bez zvláštní péče" má být nudný. Zapište ho jednou větou a dál nic nevymýšlejte. Tichý provoz se má umět unést bez pocitu, že dobrý výsledek musíme odměnit další tabulkou.
+
+Stav "drží s jedním historickým zbytkem" je nejběžnější. Neznamená, že pravidlo je slabé. Znamená, že systém po sobě ještě neuklidil obal od poslední opravy. Akce má být malá: odstranit starý odkaz, přepsat jednu poznámku, smazat dočasnou kartu, zkrátit vysvětlení u šablony.
+
+Slabá přenositelnost je vážnější. Tady pravidlo možná drží jen díky tomu, že tým sdílí paměť. Oprava nemá být školení. Oprava má být blíž pracovnímu místu: lepší název, jasnější příklad, kratší formulace, umístění do správné šablony nebo viditelnější rozhodovací otázka.
+
+Návrat do údržby používejte pro situaci, kdy pravidlo není rozbité, ale opakovaně vytváří drobné tření. Neotevírejte kvůli tomu celou původní historii. Otevřete jednu údržbovou kartu s jedním pracovním místem a krátkým ověřením v dalším běžném použití.
+
+Codyho komentář: druhá měsíční kontrola je jako podívat se, jestli rostlina fakt roste, nebo jestli ji jen někdo tajně každé ráno podpírá špejlí. Špejle není zlo. Jen by neměla předstírat, že je kmen.
+
+### Privacy-first hranice druhé kontroly
+
+Druhá měsíční kontrola nesmí sklouznout k měření poslušnosti lidí. Nepotřebujete vědět, kdo přesně pravidlo použil kolikrát, jak dlouho mu to trvalo ani jestli otevřel správný dokument na první pokus. Potřebujete vědět, jestli běžná pracovní stopa ukazuje, že pravidlo vede k lepšímu rozhodnutí bez nové datové zátěže.
+
+Stačí kontrolovat existující artefakty:
+
+- jeden dokončený obchodní případ;
+- jednu novou produktovou hypotézu;
+- jednu support odpověď;
+- jeden redakční brief;
+- jednu měsíční review poznámku;
+- jednu aktualizovanou šablonu.
+
+Nevytvářejte nový monitoring jen proto, že chcete mít jistotu. Jistota je drahá měna a v privacy-first provozu se neplatí daty lidí, pokud stačí pracovní důkaz.
+
+### Karta druhé měsíční kontroly
+
+```text
+Pravidlo:
+
+Kanonické pracovní místo:
+
+Jaký běžný průchod z druhého měsíce kontrolujeme:
+
+Použil pravidlo někdo bez čerstvé znalosti historie:
+- ano / částečně / ne / nebylo možné ověřit
+
+Cesta k pravidlu:
+- přes pracovní místo / přes starou kontrolu / přes člověka / nejasná
+
+Historické zbytky:
+- žádné / jeden uklidit / více zbytků
+
+Datová stopa:
+- beze změny / jedna stopa k úklidu / vzniká nové riziko
+
+Výsledek:
+- drží bez zvláštní péče
+- drží s jedním historickým zbytkem
+- slabá přenositelnost
+- návrat do údržby
+
+Jedna akce:
+
+Co neotevíráme z původní historie:
+
+Jaká nová data kvůli kontrole nesbíráme:
+
+Další běžný rytmus:
+```
+
+Pokud karta skončí výsledkem "nebylo možné ověřit", nepřidávejte zvláštní test. Zapište, že ve druhém měsíci nebyl přirozený průchod, a vraťte se až při další běžné příležitosti. Tiché pravidlo nemá být nucené na scénu jen proto, že má dneska kontrolní termín.
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: otevřete kanonické místo pravidla, ne starou ověřovací historii.
+2. Minuta 2: najděte jeden přirozený průchod z druhého měsíce.
+3. Minuta 3: ověřte, odkud se člověk k pravidlu dostal.
+4. Minuta 4: najděte případné historické zbytky.
+5. Minuta 5: zkontrolujte, jestli nevzniklo nové měření, export nebo kontrola lidí.
+6. Minuta 6: vyberte jeden ze čtyř výsledků.
+7. Minuta 7: zapište jednu akci nebo výslovné "bez akce".
+
+Když se workshop začne vracet k debatě, proč pravidlo kdysi vzniklo, zastavte ho. Historie patří do rozhodovací paměti, ne do každé měsíční kontroly. Druhá kontrola má ukázat, jestli současné pravidlo žije v současné práci.
+
+### Checklist druhé měsíční kontroly
+
+- Kontrolovali jsme druhý běžný měsíc, ne původní historii pravidla?
+- Otevřeli jsme kanonické pracovní místo jako první?
+- Našli jsme přirozený průchod, nebo poctivě zapsali, že zatím nebyl?
+- Ověřili jsme, jestli pravidlo funguje i bez čerstvé paměti na zavedení?
+- Vede cesta k pravidlu přes místo práce, ne přes starou kontrolní poznámku?
+- Uklidili jsme historické zbytky, které se začaly tvářit jako druhý zdroj pravdy?
+- Nezaložili jsme nové sledování lidí, zákazníků ani používání šablony?
+- Vybrali jsme jeden ze čtyř výsledků?
+- Má případná akce jedno pracovní místo a jednoho vlastníka?
+- Pokud je přenositelnost slabá, opravujeme pravidlo v místě práce místo školení o historii?
+- Pokud pravidlo drží, nechali jsme ho opravdu ztichnout?
+
+Druhá měsíční kontrola je hotová, když pravidlo buď dál běží bez zvláštní péče, nebo dostane jednu přesnou údržbovou opravu. Všechno ostatní je podezření, že tým používá kontrolu jako záminku k návratu do starého příběhu. Starý příběh může být užitečný, ale nemá sedět u každého pracovního stolu.
+
 ## Pracovní log
 
+- 2026-06-17: Doplněna úvodní podkapitola o druhé měsíční kontrole pravidla v tichém provozu: samostatnost bez čerstvé historie, přenositelnost, úklid historických zbytků, privacy-first hranice, karta, mini workshop a checklist.
 - 2026-06-17: Doplněna úvodní podkapitola o uzavření první měsíční kontroly pravidla v tichém provozu: čtyři uzavírací stavy, propsání výsledku, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-17: Doplněna úvodní podkapitola o uzavření kontroly kontextu výřezu: pět uzavíracích stavů, propsání do kanonického místa, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-17: Doplněna úvodní podkapitola o první měsíční kontrole pravidla v tichém provozu: tři kontrolní otázky, čtyři výsledky, privacy-first hranice, karta, mini workshop a checklist.
