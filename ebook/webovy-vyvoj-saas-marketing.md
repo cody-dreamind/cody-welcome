@@ -223803,8 +223803,150 @@ Když workshop skončí bez jednovětého závěru, kontrola není uzavřená. N
 
 Uzavřená kvartální kontrola má být nenápadná. Pravidlo po ní buď pokračuje, dostane jednu přesnou opravu, přejde do delšího klidu, nebo si zaslouží údržbovou kartu. Všechno ostatní je jen mlha, která vypadá jako pečlivost, ale ve skutečnosti zhoršuje práci příštímu člověku.
 
+## Druhá kvartální kontrola pravidla po stabilním uzavření
+
+Druhá kvartální kontrola je první chvíle, kdy se ukáže, jestli delší rytmus opravdu funguje bez skryté péče. První kvartální kontrola často ještě nese dozvuk předchozího zavádění: lidé si pamatují důvod pravidla, vědí, kdo ho prosadil, a snadno doplní chybějící kontext z hlavy. Druhá kontrola už má být nudnější a tím užitečnější. Pravidlo buď žije v pracovním místě, nebo se začne prozrazovat, že přežívá jen díky paměti několika lidí.
+
+Začněte větou:
+
+```text
+Kontrolujeme, jestli pravidlo funguje bez čerstvé paměti z minulé kontroly.
+```
+
+Tahle věta mění optiku. Neptáte se, jestli bylo pravidlo kdysi rozumné. Neptáte se ani, jestli ho ještě někdo umí obhájit. Ptáte se, jestli se podle něj dá dnes pracovat v normálním rytmu, s běžnými lidmi, běžnými výstupy a bez malé přednášky před každým použitím.
+
+Praktický příklad:
+
+```text
+Pravidlo:
+Každá produktová stránka má před publikací jednu větu o tom, jaká data formulář sbírá a proč.
+
+Stav po první kvartální kontrole:
+Pravidlo zůstalo v kvartálním rytmu. Opravila se stará kopie publikační šablony.
+
+Druhá kvartální kontrola:
+Od té doby vznikly dvě produktové stránky a jedna landing page pro pilot. Obě produktové stránky pravidlo použily. Landing page použila starší brief z obchodní složky a věta o datech chyběla.
+
+Rozhodnutí:
+Pravidlo jako takové drží, ale obchodní brief je slabé pracovní místo. Neotevíráme celé pravidlo; opravujeme jen brief pro pilotní landing page.
+
+Privacy-first hranice:
+Nesledujeme jednotlivé autory ani počet otevření šablony. Kontrolujeme hotové veřejné výstupy a používané šablony.
+```
+
+Důležité je, že výsledek neříká "proces publikace je rozbitý". Říká přesněji: jedno pracovní místo stojí mimo trasu pravidla. To je opravitelné bez dalšího systému, bez nové evidence a bez návratu ke všem historickým diskusím.
+
+### Co je jiné než minule
+
+Druhá kvartální kontrola má tři odlišnosti proti první:
+
+- Méně čerstvé paměti: lidé už si nemusí pamatovat detaily zavedení pravidla.
+- Více reálných průchodů: pravidlo se mohlo použít v různých situacích, ne jen v prvních pečlivě sledovaných případech.
+- Větší riziko skrytých kopií: staré briefy, šablony a checklisty se po čase znovu objeví v provozu.
+
+Právě třetí bod bývá nejzrádnější. Tým opraví kanonické místo, ale někdo si vytáhne starý dokument z osobní složky, starý odkaz z chatu nebo kopii šablony z minulého projektu. Není to morální selhání. Je to normální provozní tření. Odpovědí nemá být kárání lidí, ale zmenšení počtu míst, kde může stará verze pravidla přežít.
+
+Při druhé kontrole proto nehledejte jen chyby ve výstupech. Hledejte cestu, kterou výstup vznikl. Pokud dobrý člověk s dobrým úmyslem použil špatnou kopii, problém je ve zdroji pravdy, ne v člověku.
+
+### Čtyři výsledky druhé kvartální kontroly
+
+Po druhé kvartální kontrole vyberte jeden ze čtyř stavů:
+
+- Stabilní rytmus pokračuje: pravidlo funguje i bez čerstvé paměti a další kontrola zůstává podle plánu.
+- Oprava slabé kopie: pravidlo drží, ale jedna stará šablona, brief nebo odkaz se musí odstranit, označit nebo přesměrovat.
+- Zpřesnění pracovního místa: pravidlo je správné, ale lidé ho hledají na jiném místě, než kde oficiálně bydlí.
+- Údržbová karta: pravidlo se opakovaně míjí s novou realitou a lokální oprava už by jen lepila symptom.
+
+Stav "oprava slabé kopie" je u druhé kvartální kontroly velmi častý a naprosto legitimní. Neznamená, že pravidlo selhalo. Znamená, že systém má ještě jeden starý vstup, který nebyl při první kontrole vidět. Oprava má být praktická: smazat kopii, přepsat odkaz, přidat poznámku "nepoužívat", nebo přesunout lidi na kanonické místo.
+
+Stav "zpřesnění pracovního místa" je jemnější. Někdy pravidlo sice existuje, ale v místě, kam lidé při práci přirozeně nechodí. Například datová věta pro formuláře bydlí v právním checklistu, zatímco autoři začínají z obsahového briefu. V takové situaci nemusí být řešením další právní instrukce. Lepší je dát krátkou verzi pravidla přímo do obsahového briefu a právní checklist nechat jako oporu pro složitější případy.
+
+Codyho komentář: když lidé pravidlo nepoužívají, protože ho při práci nepotkají, není to neposlušnost. Je to UX problém interního systému. Ano, i interní procesy mají UX. Bohužel bez hezkých animací, takže se to hůř prodává.
+
+### Privacy-first kontrola druhého kvartálu
+
+Druhá kvartální kontrola nesmí vyrábět nový dohled jen proto, že tým chce jistotu. Pokud chcete vědět, jestli se pravidlo používá, začněte od hotových artefaktů: publikovaných stránek, odeslaných nabídek, uzavřených tiketů, dokončených checklistů nebo posledních verzí šablon. Teprve když z nich nejde rozhodnout, zvažte nejmenší doplňující otázku.
+
+Privacy-first postup:
+
+- zkontrolujte výstupy, které už existují z běžné práce;
+- nepřidávejte sledování otevření dokumentů, pokud stačí kontrola hotových výstupů;
+- neporovnávejte výkon jednotlivců, pokud řešíte kvalitu pravidla;
+- u starých kopií řešte odstranění nebo označení, ne detailní pátrání po tom, kdo je kdy použil;
+- po kontrole smažte pomocné seznamy, které vznikly jen kvůli rozhodnutí.
+
+Smyslem je chránit dvě věci najednou: použitelnost pravidla a důvěru v pracovní systém. Pokud každá kontrola pravidla končí novým sledováním lidí, tým se naučí pravidla obcházet nebo je používat jen před kontrolou. To je drahé, křehké a přesně opačné než privacy-first provoz.
+
+### Karta druhé kvartální kontroly
+
+```text
+Pravidlo:
+
+Kanonické pracovní místo:
+
+Výsledek první kvartální kontroly:
+
+Kde se pravidlo od té doby použilo:
+
+Použilo se bez čerstvé paměti z minulé kontroly?
+- ano
+- částečně
+- ne
+
+Objevila se stará kopie, starý odkaz nebo slabé pracovní místo?
+
+Nejmenší existující důkaz:
+
+Výsledek druhé kvartální kontroly:
+- stabilní rytmus pokračuje
+- oprava slabé kopie
+- zpřesnění pracovního místa
+- údržbová karta
+
+Jedna akce:
+
+Co mažeme, označujeme nebo přesměrováváme:
+
+Co dál nesbíráme:
+
+Další rytmus nebo návratový signál:
+
+Vlastník:
+```
+
+Karta má oddělit pravidlo od jeho okolních stop. Pokud pravidlo funguje, ale našla se slabá kopie, neopravujte pravidlo. Opravte kopii. Pokud pravidlo nefunguje ani v kanonickém místě, pak teprve otevřete údržbovou kartu. Tohle rozlišení šetří hodiny debat a hlavně chrání stabilní části systému před zbytečným přepisováním.
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: přečtěte pravidlo, jeho pracovní místo a výsledek první kvartální kontroly.
+2. Minuta 2: najděte dva až tři reálné výstupy od poslední kontroly.
+3. Minuta 3: ověřte, jestli se pravidlo použilo bez čerstvého vysvětlení.
+4. Minuta 4: hledejte staré kopie, staré odkazy nebo slabá pracovní místa.
+5. Minuta 5: vyberte jeden ze čtyř výsledků druhé kontroly.
+6. Minuta 6: napište jednu akci a určete, co se maže, označuje nebo přesměrovává.
+7. Minuta 7: zapište privacy-first hranici, další rytmus a vlastníka.
+
+Když workshop skončí zjištěním, že pravidlo nikdo nepoužil, automaticky ho nepřepisujte. Nejdřív se zeptejte, jestli nastala situace, ve které se použít mělo. Pokud ne, pravidlo může být pořád v pořádku; jen nemělo příležitost pracovat. V takovém případě stačí ponechat rytmus nebo nastavit návratový signál pro první relevantní použití.
+
+### Checklist druhé kvartální kontroly
+
+- Kontrolovali jsme fungování bez čerstvé paměti z minulé kontroly?
+- Našli jsme reálné výstupy nebo rozhodnutí od posledního kvartálu?
+- Rozlišili jsme chybu pravidla od staré kopie nebo slabého pracovního místa?
+- Pokud existuje slabá kopie, víme, jestli ji mažeme, označujeme nebo přesměrováváme?
+- Neotevřeli jsme celou historii jen kvůli jedné staré šabloně?
+- Nepřidali jsme osobní sledování používání dokumentů?
+- Pracujeme s hotovými artefakty místo monitoringu lidí?
+- Má výsledek jeden ze čtyř stavů?
+- Má akce vlastníka a jasné pracovní místo?
+- Je zapsané, co dál nesbíráme?
+- Má pravidlo další rytmus nebo návratový signál?
+
+Druhá kvartální kontrola je hotová, když tým ví, jestli pravidlo přežilo bez čerstvé paměti. Pokud ano, nechte ho dál žít klidně. Pokud ne, opravte nejbližší pracovní místo nebo otevřete malou údržbovou kartu. Hlavní disciplína je nepřidat pravidlu novou vrstvu dohledu jen proto, že jste ho po třech měsících znovu zahlédli.
+
 ## Pracovní log
 
+- 2026-06-17: Doplněna úvodní podkapitola o druhé kvartální kontrole pravidla po stabilním uzavření: fungování bez čerstvé paměti, staré kopie, slabá pracovní místa, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-06-17: Doplněna úvodní podkapitola o uzavření první kvartální kontroly pravidla: čtyři uzavírací stavy, propsání výsledku do pracovního místa, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-17: Doplněna úvodní podkapitola o první kvartální kontrole pravidla po delším klidovém rytmu: tři kontrolní otázky, čtyři výsledky, privacy-first datová stopa, karta, mini workshop a checklist.
 - 2026-06-17: Doplněna úvodní podkapitola o uzavření prvního běžného použití po kontrole kontextu výřezu: čtyři uzavírací stavy, vypnutí mimořádné péče, privacy-first úklid stop, karta, mini workshop a checklist.
