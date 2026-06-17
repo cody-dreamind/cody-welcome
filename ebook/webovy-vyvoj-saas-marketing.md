@@ -224232,8 +224232,146 @@ Když se workshop zasekne na tom, jestli pravidlo přesunout blíž práci, pou�
 
 Uzavření druhé kvartální kontroly je hotové, když kontrola nezanechá samostatný stínový proces. Buď pravidlo pokračuje, jedna stará stopa se uklidí, pravidlo se přesune blíž práci, nebo vznikne malá údržbová karta. Vše ostatní je jen způsob, jak si z kontroly odnést víc práce, než kolik skutečně našla.
 
+## Převod pravidla po druhé kvartální kontrole do půlročního rytmu
+
+Po druhé kvartální kontrole může být pravidlo dost stabilní na delší klid. To neznamená, že ho přestanete vlastnit. Znamená to, že už nepotřebuje pravidelnou blízkou pozornost a má se znovu otevřít jen v předem popsaných situacích. Půlroční rytmus je vhodný pro pravidla, která se v běžné práci osvědčila, nemají čerstvou údržbovou kartu a jejich selhání by bylo vidět v hotových výstupech.
+
+Začněte větou:
+
+```text
+Pravidlo po druhé kvartální kontrole převádíme do půlročního rytmu, protože:
+```
+
+Za dvojtečku patří konkrétní důvod, ne pocit úlevy. Například:
+
+```text
+Pravidlo po druhé kvartální kontrole převádíme do půlročního rytmu, protože se použilo ve třech běžných výstupech, stará kopie briefu byla odstraněná a další kontrola nemá měnit rozhodnutí dřív než za půl roku.
+```
+
+Tahle věta drží stabilitu. Tým ví, že pravidlo není zapomenuté, jen už nepotřebuje častý dohled. Rozdíl je důležitý: zapomenuté pravidlo hnije v dokumentaci, stabilní pravidlo pracuje v tichu a má jasný návratový signál.
+
+### Kdy je půlroční rytmus vhodný
+
+Do půlročního rytmu převádějte jen pravidla, která splní tři podmínky:
+
+- pravidlo bylo použité v reálné práci bez čerstvého vysvětlení;
+- poslední kontrola skončila jedním uzavíracím stavem, ne otevřenou debatou;
+- případná oprava mířila do jednoho pracovního místa a je dokončená.
+
+Pokud některá podmínka chybí, nechte pravidlo v kvartálním rytmu nebo otevřete údržbovou kartu. Půlroční rytmus není odměna za to, že už vás kontrola nebaví. Je to provozní rozhodnutí, že častější kontrola by nejspíš nepřinesla lepší výsledek.
+
+Praktický příklad:
+
+```text
+Pravidlo:
+Každá veřejná šablona má u formulářů krátkou větu, jaká data se sbírají a proč.
+
+Stav po druhé kvartální kontrole:
+Pravidlo funguje u produktových stránek i landing pages. Starý obchodní brief byl označený jako archiv.
+
+Rozhodnutí:
+Převádíme do půlročního rytmu.
+
+Návratový signál:
+Dvě veřejné stránky po sobě vyjdou bez datové věty, nebo vznikne nový typ formuláře, který pravidlo nepokrývá.
+
+Privacy-first hranice:
+Nesledujeme autory, otevření briefů ani cestu v dokumentech. Při půlroční kontrole projdeme jen hotové veřejné výstupy a aktuální šablony.
+```
+
+Všimněte si, že půlroční rytmus neříká "už nikdy neřešit". Říká "neřešit bez důvodu". To je malý rozdíl v textu a velký rozdíl v provozu.
+
+### Co změnit při převodu
+
+Převod do půlročního rytmu má změnit jen několik míst:
+
+- rozhodovací záznam pravidla;
+- kalendář nebo revizní rytmus, pokud ho tým používá;
+- kanonické pracovní místo, pokud obsahuje poznámku o kontrole;
+- návratový signál viditelný u pravidla;
+- údržbový backlog, pokud v něm zůstala stará položka jen kvůli kontrole.
+
+Neměňte všechny dokumenty, které pravidlo kdy zmínily. Pokud starý dokument není pracovní místo, stačí ho nechat být nebo označit jako archiv při nejbližším úklidu. Cílem převodu není rozeslat zprávu celému světu, že pravidlo dospělo. Cílem je, aby příští člověk věděl, kdy se k němu vrátit.
+
+Při převodu zároveň smažte nebo zavřete pomocné stopy z kvartálních kontrol. Typicky jde o dočasné seznamy výstupů, poznámky k ověření, screenshoty starých briefů nebo úkoly typu "ještě pohlídat příště". Pokud už sloužily rozhodnutí, nemají dál ležet jako falešný zdroj pravdy.
+
+Privacy-first poznámka: čím delší rytmus, tím menší má být průběžná datová stopa. Půlroční kontrola nemá sbírat data půl roku dopředu. Má se opřít o existující pracovní výstupy v okamžiku kontroly. Jinak si z klidového režimu vyrobíte tichý monitoring s hezčím názvem.
+
+### Kdy půlroční rytmus odmítnout
+
+Převod odmítněte, když:
+
+- poslední kontrola skončila slovy "ještě uvidíme";
+- pravidlo drží jen díky jednomu člověku, který ostatním doplňuje kontext;
+- existuje víc starých kopií a není jasné, která se opravdu používá;
+- pravidlo se dotýká nové nabídky, nového segmentu nebo nového typu dat;
+- selhání pravidla by nebylo vidět v hotovém výstupu;
+- tým chce půlroční rytmus hlavně proto, aby nemusel uzavřít dnešní problém.
+
+V takových situacích je lepší menší poctivá oprava než delší klid. Půlroční rytmus má snížit zbytečnou práci, ne zakrýt slabé místo. Pokud pravidlo neumí samostatně žít tři měsíce, půl roku mu nepomůže; jen dá problému víc času, aby se rozlezl do dalších šablon.
+
+Codyho komentář: dlouhý rytmus je dobrý sluha a mizerná výmluva. Když pravidlo funguje, dejte mu klid. Když nefunguje, neposílejte ho na půlroční dovolenou s kufrem plným neuzavřených poznámek.
+
+### Karta převodu do půlročního rytmu
+
+```text
+Pravidlo:
+
+Kanonické pracovní místo:
+
+Výsledek druhé kvartální kontroly:
+
+Důvod převodu do půlročního rytmu:
+
+Dokončená lokální oprava, pokud existovala:
+
+Co se mění v revizním rytmu:
+
+Co se propisuje do pracovního místa:
+
+Co zavíráme z kvartálních kontrol:
+
+Co dál nesbíráme ani neměříme:
+
+Návratový signál před půlroční kontrolou:
+
+Datum příští plánované kontroly:
+
+Vlastník:
+```
+
+Karta má být stručná. Pokud se do ní nevejde důvod převodu a návratový signál, pravidlo pravděpodobně není připravené na delší rytmus. Bez těchto dvou věcí by půlroční kontrola začínala od nuly, a to je přesně práce, které se snažíte vyhnout.
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: přečtěte jednovětý závěr druhé kvartální kontroly.
+2. Minuta 2: ověřte tři podmínky pro půlroční rytmus.
+3. Minuta 3: napište důvod převodu jednou větou.
+4. Minuta 4: potvrďte návratový signál před půlroční kontrolou.
+5. Minuta 5: určete, co se změní v pracovním místě a revizním rytmu.
+6. Minuta 6: zavřete nebo smažte pomocné stopy z kvartálních kontrol.
+7. Minuta 7: zapište vlastníka a datum příští plánované kontroly.
+
+Když se workshop začne měnit v další kontrolu pravidla, vraťte ho k převodu. Stav pravidla už byl rozhodnutý ve druhé kvartální kontrole. Teď se řeší jen provozní rytmus, návratový signál a úklid stop.
+
+### Checklist převodu do půlročního rytmu
+
+- Máme jasný důvod, proč častější kontrola nepřinese lepší rozhodnutí?
+- Bylo pravidlo použité bez čerstvého vysvětlení?
+- Je poslední lokální oprava dokončená?
+- Nezůstala otevřená údržbová karta, která by převod blokovala?
+- Je návratový signál konkrétnější než "když bude problém"?
+- Víme, kde bude pravidlo při příští práci viditelné?
+- Změnili jsme revizní rytmus jen v kanonickém místě?
+- Uklidili jsme pomocné stopy z kvartálních kontrol?
+- Nepřidali jsme průběžný monitoring lidí ani dokumentů?
+- Má půlroční kontrola vlastníka a datum?
+
+Převod do půlročního rytmu je hotový, když pravidlo zůstává viditelné v práci, ale mizí kolem něj mimořádná pozornost. Tým ví, proč ho nechává v klidu, kdy se k němu vrátí a co by ho otevřelo dřív. To je přesně ten typ pořádku, který nevypadá efektně, ale šetří budoucí energii i data.
+
 ## Pracovní log
 
+- 2026-06-17: Doplněna úvodní podkapitola o převodu pravidla po druhé kvartální kontrole do půlročního rytmu: podmínky převodu, návratový signál, privacy-first úklid stop, karta, mini workshop a checklist.
 - 2026-06-17: Doplněna úvodní podkapitola o uzavření druhé kvartální kontroly pravidla: čtyři uzavírací stavy, uzavření bez nového dohledu, propsání do pracovních míst, privacy-first hranice, karta, mini workshop a checklist.
 - 2026-06-17: Doplněna úvodní podkapitola o druhé kvartální kontrole pravidla po stabilním uzavření: fungování bez čerstvé paměti, staré kopie, slabá pracovní místa, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-06-17: Doplněna úvodní podkapitola o uzavření první kvartální kontroly pravidla: čtyři uzavírací stavy, propsání výsledku do pracovního místa, privacy-first úklid, karta, mini workshop a checklist.
