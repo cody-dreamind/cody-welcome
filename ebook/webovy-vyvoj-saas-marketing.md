@@ -11498,6 +11498,146 @@ Když workshop začne řešit sousední šablony, staré rozhodnutí nebo celý 
 
 První běžné použití po uzavřené kontrole kontextu má být nudné. To je kompliment. Znamená to, že výřez se vrátil do práce, ne do věčné údržby. Když pomohl, nechte ho dýchat. Když drhnul, opravte nejbližší tření. Když odhalil novou otázku, otevřete ji zvlášť a neschovávejte ji do staré kontroly.
 
+## Uzavření prvního běžného použití po kontrole kontextu výřezu
+
+První běžné použití po kontrole kontextu má skončit malým rozhodnutím. Ne proto, že by každá pracovní pomůcka potřebovala ceremoniál, ale proto, že po první reálné situaci často vznikne pokušení nechat výřez ještě chvíli "pod dohledem". Tím se z uzavřené kontroly znovu stává otevřená práce, jen s tišším názvem.
+
+Uzavření prvního běžného použití odpovídá na tři otázky:
+
+```text
+Obstál výřez v běžné práci?
+
+Je potřeba jedna nejbližší oprava?
+
+Může se mimořádná pozornost vypnout?
+```
+
+Když odpověď na první otázku zní ano, nehledejte další práci. Zapište výsledek jen tehdy, pokud tým potřebuje stopu pro další návrat. Když odpověď zní částečně, opravte nejbližší tření: umístění, jednu přenosovou větu, název nebo odkaz. Když odpověď zní ne, neprodlužujte starou kontrolu kontextu. Otevřete novou úzkou otázku s vlastním pracovním místem a vlastním návratovým signálem.
+
+### Čtyři uzavírací stavy
+
+Stav "nechat v klidu" použijte, když výřez pomohl bez vysvětlování, bez hledání historie a bez nových pomocných stop. To je nejlepší výsledek. Nevyžaduje další měření, report ani revizní schůzku. Výřez se prostě vrací do běžného provozu.
+
+Stav "dočistit pracovní místo" použijte, když výřez fungoval, ale nebyl tam, kde ho člověk přirozeně hledal. Oprava patří do navigace, šablony, názvu, interního odkazu nebo rozcestníku. Obsah výřezu zůstává stejný, protože problém byl v cestě k němu.
+
+Stav "doplnit jednu hranu" použijte, když výřez vedl správně, ale v první běžné situaci chyběla drobná ochranná věta. Například: "Ve veřejném použití nezmiňuj interní obchodní příklady" nebo "Při použití v automatizaci zůstává ruční výjimka pro nejasné případy." Jedna hrana nesmí přerůst do nové podkapitoly. Pokud potřebujete tři odstavce, už to není hrana, ale nové téma.
+
+Stav "oddělit novou otázku" použijte, když první použití ukázalo jiný problém než ten, kvůli kterému se kontroloval výřez. Třeba se ukáže, že tým nemá jasné pravidlo pro veřejné příklady, nebo že šablona obsahuje víc starých formulací. To může být důležité, ale nepatří to do uzavření prvního použití. Starý výřez zavřete a nové téma otevřete samostatně.
+
+### Co se po uzavření vypíná
+
+Po prvním běžném použití vypněte všechno, co patřilo jen k mimořádné péči:
+
+- dočasné poznámky k poslední kontrole kontextu;
+- pracovní kopie výřezu, které sloužily jen k porovnání;
+- ruční připomínky typu "ještě to sledujme";
+- zvláštní reporting použití výřezu;
+- odkazy do historie, pokud nejsou potřeba pro dnešní práci.
+
+Nevypíná se návratový signál. Ten má zůstat, ale má být vidět v běžném pracovním místě, ne v samostatné kontrolní agendě. Rozdíl je praktický: návratový signál čeká na konkrétní situaci, zatímco mimořádná péče si práci hledá sama.
+
+Příklad:
+
+```text
+Výřez:
+Veřejné materiály používají obecný privacy-first příklad, interní sales šablona drží konkrétní kvalifikační formulaci.
+
+První běžné použití:
+Člověk připravoval článek a našel veřejnou formulaci v obsahovém briefu. Nepotřeboval interní sales poznámku.
+
+Výsledek:
+Nechat v klidu.
+
+Co vypínáme:
+Dočasné porovnání interní a veřejné verze.
+
+Návratový signál:
+Veřejný materiál znovu použije interní sales formulaci nebo zákaznický detail.
+```
+
+Výsledek je krátký, protože problém se opravdu zavřel. Čím méně textu uzavření potřebuje, tím pravděpodobněji se výřez vrátil do normální práce.
+
+### Privacy-first uzavření prvního použití
+
+První použití po kontextové kontrole je nenápadné místo, kde vznikají zbytečné stopy. Někdo si chce uložit ukázku "pro jistotu", někdo zkopíruje interní příklad do komentáře, někdo založí tabulku použití. Většina těchto stop pomůže jen pocitu kontroly, ne práci.
+
+Při uzavření se ptejte:
+
+```text
+Zůstala někde pracovní kopie výřezu?
+
+Obsahuje zápis konkrétní zákaznický, osobní nebo interní detail?
+
+Stačí pro budoucí návrat obecný signál místo detailního důkazu?
+
+Nevzniká nová evidence jen proto, že výřez byl nedávno opraven?
+
+Je aktivní pracovní místo čistší nebo alespoň stejně střídmé jako před kontrolou?
+```
+
+Pokud potřebujete ponechat stopu, zkraťte ji na rozhodovací větu. Například místo konkrétního výpisu z poptávky stačí: "Veřejný text nesmí používat interní kvalifikační příklad." Privacy-first uzavření není o mazání paměti. Je o tom, aby paměť neobsahovala víc detailů, než potřebuje další správné rozhodnutí.
+
+Codyho komentář: dobré uzavření poznáte podle toho, že z něj nevznikne nová pracovní fronta. Výřez je na místě, jedna drobnost je opravená nebo není co opravovat, staré kopie zmizely. V provozu je to skoro podezřele klidné. Přesně tak to má chutnat.
+
+### Karta uzavření prvního běžného použití
+
+```text
+Název výřezu:
+
+První běžná situace:
+
+Výsledek použití:
+- nechat v klidu
+- dočistit pracovní místo
+- doplnit jednu hranu
+- oddělit novou otázku
+
+Jedna oprava, pokud je potřeba:
+
+Co vypínáme z mimořádné péče:
+
+Co mažeme, slučujeme nebo anonymizujeme:
+
+Kanonické pracovní místo po uzavření:
+
+Návratový signál:
+
+Vlastník:
+
+Datum:
+```
+
+Kartu nevyplňujte mechanicky pokaždé. Pokud výřez fungoval úplně tiše, často stačí žádný zápis nebo jedna věta v pracovním logu. Kartu použijte ve chvíli, kdy po prvním použití vznikla oprava, úklid stop nebo nová otázka. Jinak by evidence byla větší než samotná práce, což je dokumentační komedie v jednom dějství.
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: pojmenujte první běžnou situaci použití.
+2. Minuta 2: řekněte, jestli výřez pomohl bez původní historie.
+3. Minuta 3: vyberte jeden ze čtyř uzavíracích stavů.
+4. Minuta 4: napište nejmenší opravu, pokud je potřeba.
+5. Minuta 5: vypněte dočasnou péči a ruční připomínky.
+6. Minuta 6: ukliďte kopie, citlivé příklady a pomocné zápisy.
+7. Minuta 7: potvrďte kanonické místo a návratový signál.
+
+Když workshop začne hledat lepší obecné pravidlo pro celou dokumentaci, zastavte ho. To je jiná práce. Uzavření prvního běžného použití má rozhodnout, jestli konkrétní výřez po kontrole kontextu zase normálně slouží.
+
+### Checklist uzavření prvního použití
+
+- Víme, v jaké běžné situaci byl výřez použit?
+- Vybrali jsme jeden uzavírací stav?
+- Pokud výřez fungoval, nechali jsme ho bez nové agendy?
+- Pokud drhlo umístění, opravili jsme cestu místo obsahu?
+- Pokud chyběla hrana, doplnili jsme jen jednu krátkou větu?
+- Pokud se ukázala nová otázka, oddělili jsme ji od staré kontroly?
+- Vypnuli jsme mimořádnou péči, ruční připomínky a dočasné sledování?
+- Uklidili jsme pracovní kopie, citlivé příklady a pomocné zápisy?
+- Zůstává návratový signál v běžném pracovním místě?
+- Nevznikla nová evidence, kterou neumíme obhájit pracovním rozhodnutím?
+- Má výřez po uzavření jasné kanonické místo?
+- Umíme jednou větou říct, kdy se k němu vrátit?
+
+Uzavření prvního běžného použití je hotové, když výřez nepotřebuje doprovod. Buď funguje a mlčí, nebo dostal jednu malou opravu, nebo se vedle něj otevřela nová otázka bez tahání staré historie za sebou. Tím se pracovní pomůcka vrací tam, kam patří: do práce, ne do nekonečné kontroly.
+
 ## Pravidla rukopisu
 
 - Pišu česky, prakticky a bez nafukování.
@@ -223249,6 +223389,7 @@ Uzavření druhé měsíční kontroly je hotové, když pravidlo ztratí zvlá�
 
 ## Pracovní log
 
+- 2026-06-17: Doplněna úvodní podkapitola o uzavření prvního běžného použití po kontrole kontextu výřezu: čtyři uzavírací stavy, vypnutí mimořádné péče, privacy-first úklid stop, karta, mini workshop a checklist.
 - 2026-06-17: Doplněna úvodní podkapitola o uzavření druhé měsíční kontroly do delšího klidového rytmu: kvartální nebo půlroční režim, údržbová karta, návratový signál, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-17: Doplněna úvodní podkapitola o druhé měsíční kontrole pravidla v tichém provozu: samostatnost bez čerstvé historie, přenositelnost, úklid historických zbytků, privacy-first hranice, karta, mini workshop a checklist.
 - 2026-06-17: Doplněna úvodní podkapitola o uzavření první měsíční kontroly pravidla v tichém provozu: čtyři uzavírací stavy, propsání výsledku, privacy-first úklid, karta, mini workshop a checklist.
