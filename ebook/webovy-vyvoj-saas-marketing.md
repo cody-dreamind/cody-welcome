@@ -223536,8 +223536,153 @@ Pokud workshop skončí debatou mezi kvartálním a půlročním rytmem, vyberte
 
 Uzavření druhé měsíční kontroly je hotové, když pravidlo ztratí zvláštní zacházení a získá klidový rytmus s jasným návratovým signálem. Tým tím neříká, že pravidlo bude navždy správné. Říká jen, že už není potřeba držet ho na stole každý měsíc. A to je přesně ten druh provozní nudy, za který se v dobrém systému platí zlatem.
 
+## První kvartální kontrola pravidla po delším klidovém rytmu
+
+První kvartální kontrola po delším klidovém rytmu není návrat do zaváděcího režimu. Je to krátké ověření, že pravidlo pořád patří do běžné práce, neztratilo pracovní místo a nezačalo potichu vyrábět vedlejší škody. Pokud se z kvartální kontroly stane malý audit všeho, co s pravidlem kdy souviselo, tým právě znovu otevřel historii, kterou už jednou uzavřel.
+
+Začněte větou:
+
+```text
+Kontrolujeme životaschopnost pravidla v dnešní práci, ne celý příběh jeho vzniku.
+```
+
+Tahle věta je brzda proti přehnané péči. Pravidlo prošlo zavedením, běžným použitím, měsíčními kontrolami a převodem do delšího rytmu. Teď už má dostat jen tolik pozornosti, kolik odpovídá jeho riziku a dopadu. Cílem kvartální kontroly není vymyslet lepší verzi pravidla, ale rozhodnout, jestli současná verze pořád pomáhá.
+
+Praktický příklad:
+
+```text
+Pravidlo:
+Každá nová case study má před publikací jeden konkrétní obchodní důkaz a jednu větu o datové hranici.
+
+Kanonické místo:
+Šablona case study a publikační checklist.
+
+První kvartální kontrola:
+Vznikly tři nové case studies. Dvě pravidlo použily bez dotazu. U třetí chyběla věta o datové hranici, protože autor vycházel ze staré kopie šablony.
+
+Rozhodnutí:
+Pravidlo zůstává v kvartálním rytmu. Opraví se jen stará kopie šablony v redakční složce. Neotevíráme celý proces case studies.
+
+Privacy-first hranice:
+Nesbíráme detailní časy práce autorů. Kontrolujeme jen hotové veřejné texty a šablonu, ze které vycházejí.
+```
+
+Výsledek je úzký a praktický. Jedno tření, jedno pracovní místo, jedna oprava. Tým neřeší znovu positioning, metriky, rozhovory se zákazníkem ani celý obsahový systém. To všechno může být důležité, ale není to automaticky součást první kvartální kontroly pravidla.
+
+### Tři otázky kvartální kontroly
+
+Kvartální kontrolu držte u tří otázek:
+
+- Použilo se pravidlo v reálné práci bez mimořádného vysvětlování?
+- Sedí pravidlo k současnému pracovnímu místu, segmentu a nabídce?
+- Nevytvořilo pravidlo novou datovou stopu, ruční evidenci nebo zbytečný dohled?
+
+První otázka testuje samostatnost. Pokud pravidlo funguje jen tehdy, když ho někdo připomene na poradě, ještě nežije v pracovním systému. Možná chybí v šabloně, možná je moc dlouhé, možná je schované v dokumentu, kam nikdo při práci nechodí. Oprava má začít v místě použití, ne v dalším vysvětlovacím textu.
+
+Druhá otázka testuje kontext. Pravidlo mohlo vzniknout pro starší segment, jiný typ nabídky nebo jednodušší workflow. Pokud se změnila cílová skupina, prodejní proces, produktová hranice nebo odpovědnost role, pravidlo nemusí být špatné. Jen možná přestalo odpovídat situaci, ve které má rozhodovat.
+
+Třetí otázka chrání privacy-first provoz. Některá pravidla začnou nenápadně růst do měření lidí: kdo pravidlo použil, kdy ho otevřel, kolik minut nad ním strávil, jak často se vrátil. Pro většinu pracovních pravidel to není potřeba. Stačí kontrolovat výstupy, rozhodnutí a datové zbytky, ne chování jednotlivců.
+
+### Čtyři výsledky první kvartální kontroly
+
+Po kontrole vyberte jeden ze čtyř stavů:
+
+- Ponechat v kvartálním rytmu: pravidlo funguje, má pracovní místo a nejsou vidět nové zbytky.
+- Převést do půlročního rytmu: pravidlo je stabilní, nízkorizikové a okolní proces se mění pomalu.
+- Opravit jedno pracovní místo: pravidlo drží, ale jedna šablona, odkaz, formulář nebo brief ho oslabuje.
+- Otevřít údržbovou kartu: pravidlo se opakovaně míjí s realitou nebo vytváří novou ruční práci.
+
+Nejčastější dobrý výsledek je první nebo třetí. Buď pravidlo prostě drží, nebo má jeden malý kaz v trase. Převod do půlročního rytmu dává smysl až ve chvíli, kdy je pravidlo opravdu nízkorizikové a tým by kvartální kontrolou jen potvrzoval totéž. Údržbová karta je naopak signál, že se pravidlo nemá jen kosmeticky přepsat, ale znovu zasadit do práce.
+
+Pozor na falešnou potřebu "vylepšit formulaci". Pokud pravidlo funguje, lidé ho používají a výstupy jsou srozumitelné, nepřepisujte ho jen proto, že by šlo napsat elegantněji. Jazyk pravidla má být dost dobrý pro práci, ne krásný pro interní galerii procesů.
+
+### Co při kvartální kontrole neotevírat
+
+První kvartální kontrola má silné pokušení vrátit se ke všemu, co bylo kdysi kolem pravidla zajímavé. Proto si předem napište, co není součástí kontroly:
+
+- původní debata, pokud se neobjevil návratový signál;
+- celý proces, pokud tření leží v jedné šabloně;
+- nové metriky, pokud stačí zkontrolovat existující výstupy;
+- nové nástroje, pokud problém vyřeší odkaz, text nebo pořadí kroků;
+- osobní sledování používání, pokud rozhodnutí jde udělat z hotových pracovních artefaktů.
+
+Tím se kontrola nezmenšuje na povrchní průchod. Naopak se chrání její rozhodovací síla. Když je rozsah úzký, tým umí říct "ponechat", "opravit jedno místo" nebo "otevřít údržbu" bez toho, aby se rozpadl do pěti paralelních témat.
+
+Codyho komentář: kvartální kontrola není výroční sraz všech starých rozhodnutí. Když pozvete každý historický důvod zpátky ke stolu, nesmíte se divit, že se nevejde aktuální práce.
+
+### Karta první kvartální kontroly
+
+```text
+Pravidlo:
+
+Kanonické pracovní místo:
+
+Aktuální rytmus:
+- kvartální
+- půlroční
+- jiný:
+
+Kde se pravidlo od poslední kontroly reálně použilo:
+
+Použilo se bez mimořádného vysvětlení?
+- ano
+- částečně
+- ne
+
+Změnil se kontext, segment, nabídka nebo odpovědnost role?
+
+Nejmenší existující důkaz:
+
+Datová stopa po pravidlu:
+Co zůstalo oprávněně:
+Co mažeme nebo anonymizujeme:
+Co dál nesbíráme:
+
+Výsledek kontroly:
+- ponechat v kvartálním rytmu
+- převést do půlročního rytmu
+- opravit jedno pracovní místo
+- otevřít údržbovou kartu
+
+Jedna akce:
+
+Vlastník:
+
+Návratový signál před další plánovanou kontrolou:
+```
+
+Karta má zůstat krátká. Pokud se nevejde na jednu obrazovku, pravděpodobně do ní píšete historii místo rozhodnutí. Historie patří do archivu. Živá karta má pomoci člověku za tři měsíce pochopit, co platí a co má zkontrolovat.
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: přečtěte pravidlo a jeho kanonické pracovní místo.
+2. Minuta 2: najděte jeden až tři reálné výstupy, kde se pravidlo použilo.
+3. Minuta 3: odpovězte, jestli se pravidlo použilo bez mimořádného vysvětlování.
+4. Minuta 4: ověřte, jestli se nezměnil segment, nabídka, role nebo pracovní místo.
+5. Minuta 5: projděte datovou stopu a určete, co se maže, anonymizuje nebo dál nesbírá.
+6. Minuta 6: vyberte jeden ze čtyř výsledků kontroly.
+7. Minuta 7: zapište jednu akci, vlastníka a návratový signál.
+
+Když workshop skončí bez výsledku, defaultní stav je "opravit jedno pracovní místo" jen tehdy, když je tření konkrétní. Pokud konkrétní není, ponechte pravidlo v rytmu a zapište návratový signál, který by příště otevřel údržbu. Mlžný pocit nemá automaticky dostat vlastní úkol.
+
+### Checklist první kvartální kontroly
+
+- Kontrolovali jsme současnou životaschopnost pravidla, ne celou historii jeho vzniku?
+- Našli jsme reálný výstup nebo rozhodnutí z běžné práce?
+- Ověřili jsme, zda se pravidlo použilo bez mimořádného vysvětlení?
+- Zkontrolovali jsme změny segmentu, nabídky, role nebo pracovního místa?
+- Vybrali jsme jeden ze čtyř výsledků kontroly?
+- Pokud něco opravujeme, je to jedno konkrétní pracovní místo?
+- Neotevřeli jsme nové metriky nebo osobní sledování jen kvůli kontrole?
+- Uklidili jsme dočasné datové zbytky po pravidlu?
+- Zapsali jsme, co dál nesbíráme?
+- Má další kontrola rytmus nebo návratový signál, ne neurčité "někdy se na to podíváme"?
+
+První kvartální kontrola je úspěšná, když pravidlo buď klidně pokračuje, nebo dostane malou přesnou opravu. Není úspěšná proto, že tým našel deset nápadů. Je úspěšná proto, že po ní všichni vědí, jestli pravidlo pořád pomáhá dnešní práci a jak má žít do dalšího návratu.
+
 ## Pracovní log
 
+- 2026-06-17: Doplněna úvodní podkapitola o první kvartální kontrole pravidla po delším klidovém rytmu: tři kontrolní otázky, čtyři výsledky, privacy-first datová stopa, karta, mini workshop a checklist.
 - 2026-06-17: Doplněna úvodní podkapitola o uzavření prvního běžného použití po kontrole kontextu výřezu: čtyři uzavírací stavy, vypnutí mimořádné péče, privacy-first úklid stop, karta, mini workshop a checklist.
 - 2026-06-17: Doplněna úvodní podkapitola o uzavření druhé měsíční kontroly do delšího klidového rytmu: kvartální nebo půlroční režim, údržbová karta, návratový signál, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-17: Doplněna úvodní podkapitola o druhé měsíční kontrole pravidla v tichém provozu: samostatnost bez čerstvé historie, přenositelnost, úklid historických zbytků, privacy-first hranice, karta, mini workshop a checklist.
