@@ -11238,6 +11238,150 @@ Poslední minuta je důležitá. Bez ní se kontrola kontextu snadno změní v a
 
 Kontrola kontextu je dobrý způsob, jak udržet pracovní pomůcky živé bez toho, aby se z nich stal nekonečný dokumentační projekt. Starý výřez nemusí být věčný. Stačí, když je po každé podstatné změně pořád pravdivý, použitelný a datově střídmý.
 
+## Jak uzavřít kontrolu kontextu výřezu
+
+Kontrola kontextu nemá zůstat otevřená jen proto, že se kolem výřezu změnilo víc věcí najednou. Jejím cílem je rozhodnout, co se stane s konkrétní pracovní pomůckou: zůstane stejná, dostane lokální opravu, rozdělí se, odejde do historie, nebo se nahradí jinou formou. Jakmile je tento stav jasný, kontrola má skončit.
+
+Uzavření je důležité hlavně proto, že změna kontextu působí intelektuálně nebezpečně lákavě. Tým začne jedním výřezem, pak si všimne starého příkladu, pak sousední šablony, pak neaktuálního odkazu, pak celého rozcestníku. Za chvíli se z ověření jedné pracovní věty stane tichý redesign dokumentace. Ten možná někdy bude potřeba, ale nemá se maskovat jako drobná kontrola.
+
+Začněte uzavírací větou:
+
+```text
+Kontrolu kontextu uzavíráme stavem:
+Výřez dál žije zde:
+Další práce se otevře jen pokud:
+```
+
+Tři řádky drží hranici. První říká výsledek. Druhý brání ztrátě zdroje pravdy. Třetí chrání tým před tím, aby se ke stejné kontrole vracel pokaždé, když někdo zahlédne další nedokonalost.
+
+### Pět uzavíracích stavů
+
+První stav je beze změny. Mini test platnosti prošel, privacy-first hranice drží a výřez pořád pomáhá ve stejné pracovní situaci. Tady nepište akční plán. Zapište jen výsledek, návratový signál a nechte výřez pracovat.
+
+Druhý stav je lokální oprava. Jedna část výřezu už neodpovídá novému kontextu, ale pracovní pomůcka jako celek zůstává správně. Typicky se upraví příklad, jedna věta o publiku, odkaz na pracovní místo, nebo hranice dat, se kterými výřez počítá. Lokální oprava má být menší než kontrola, která ji našla.
+
+Třetí stav je rozdělení. Jeden výřez se začal používat ve dvou různých situacích a jedna formulace už nemůže poctivě sloužit oběma. Například interní sales výřez a veřejný článek potřebují stejný princip, ale jinou míru detailu. Rozdělení není selhání. Je to prevence toho, aby jedna věta slibovala dvě různé práce.
+
+Čtvrtý stav je návrat do historie. Výřez byl užitečný v minulém kontextu, ale dnes nemá aktivní pracovní místo. Nemažte ho jen proto, že zestárl, pokud stále vysvětluje rozhodnutí. Přesuňte ho do rozhodovacího záznamu, archivu nebo changelogu a z aktivní trasy odstraňte jeho pracovní roli.
+
+Pátý stav je nahrazení jinou formou. Někdy už textový výřez nestačí. Potřebujete checklist, rozhodovací kartu, krátký příklad ve formuláři, interní FAQ nebo jednu větu přímo v nástroji. Nahrazení ale neznamená přidat další kopii. Znamená určit novou kanonickou formu a starý výřez buď odkázat, nebo uklidit.
+
+### Co propsat a co nechat být
+
+Po výběru stavu přeneste jen to, co mění běžnou práci:
+
+- aktuální pracovní větu výřezu;
+- místo, kde výřez dál žije;
+- vlastníka nebo roli, která ho udržuje;
+- návratový signál;
+- privacy-first hranici, pokud se dotýká dat, viditelnosti nebo retence.
+
+Nepřenášejte celý průběh kontroly. Do aktivního výřezu nepatří debata, kdo měl jaký názor, proč se kontrola otevřela, kolik variant existovalo a jaké pomocné příklady se zvažovaly. To patří do rozhodovacího záznamu, pokud to má vůbec dál existovat.
+
+Příklad:
+
+```text
+Stav:
+Rozdělit.
+
+Aktivní výřezy:
+Interní sales výřez zůstává v kvalifikační šabloně.
+Veřejný výřez vzniká jako obecná věta v článku o privacy-first analytice.
+
+Co se nepřenáší:
+Interní příklady z obchodních poznámek, staré formulace pro discovery a dočasné porovnání variant.
+
+Návratový signál:
+Někdo znovu použije interní sales formulaci ve veřejném materiálu.
+```
+
+Takový zápis je dostatečně konkrétní pro práci a dost krátký pro údržbu. Nechává historii tam, kde pomáhá, ale nepouští ji do aktivního materiálu.
+
+### Privacy-first uzavření
+
+Kontrola kontextu často vytvoří nové stopy: kopii výřezu, porovnání variant, screenshot původního místa, ukázku zákaznické situace, výpis z CRM, poznámky z review nebo dočasný dokument. Při uzavření rozhodněte, co s nimi. Výchozí volba je jednoduchá: pokud stopa dál nerozhoduje, smažte ji nebo zkraťte na anonymní závěr.
+
+Zeptejte se:
+
+```text
+Zůstala někde kopie starého výřezu bez aktivního účelu?
+
+Obsahuje kontrola zákaznické, osobní nebo interně citlivé detaily?
+
+Je potřeba ponechat důkaz, nebo stačí rozhodovací věta?
+
+Nevznikl nový dokument, který bude konkurovat kanonickému místu?
+
+Má nový nebo opravený výřez stejnou nebo menší datovou stopu než původní?
+```
+
+Pokud výsledek kontroly zvyšuje datovou stopu, musí pro to být pracovní důvod. "Pro jistotu" není důvod. "Abychom při veřejné distribuci neukazovali interní obchodní formulaci" už důvod je. Rozdíl je v tom, že druhá věta chrání konkrétní riziko a dá se uzavřít.
+
+Codyho komentář: uzavřená kontrola kontextu má být nudná. Výřez je na správném místě, staré kopie neleží v koutě, návratový signál je napsaný a nikdo nemusí zakládat další tabulku. Nuda je v provozu často luxusní stav. Jen se hůř prodává na poradách, což je možná její nejlepší vlastnost.
+
+### Karta uzavření kontroly kontextu
+
+```text
+Název výřezu:
+
+Co se kontrolovalo:
+
+Výsledek:
+- beze změny
+- lokální oprava
+- rozdělení
+- návrat do historie
+- nahrazení jinou formou
+
+Kanonické pracovní místo po uzavření:
+
+Jedna změna v aktivním výřezu:
+
+Co se nepropsalo do aktivního výřezu:
+
+Co se smazalo, anonymizovalo, archivovalo nebo sloučilo:
+
+Privacy-first výsledek:
+
+Návratový signál:
+
+Vlastník:
+
+Datum:
+```
+
+Karta má být poslední stopa kontroly, ne začátek další evidence. Pokud je výsledek beze změny, vyplňte ji velmi krátce. Pokud vznikla oprava nebo rozdělení, karta má ukázat, kde je nový zdroj pravdy a co už nemá být používáno.
+
+### Mini workshop na 8 minut
+
+1. Minuta 1: přečtěte rozhodnutí z kontroly kontextu.
+2. Minuta 2: vyberte jeden z pěti uzavíracích stavů.
+3. Minuta 3: určete kanonické pracovní místo po uzavření.
+4. Minuta 4: napište jednu změnu, která se opravdu propsala.
+5. Minuta 5: napište, co z historie nepatří do aktivního výřezu.
+6. Minuta 6: ukliďte kopie, dočasné poznámky a citlivé příklady.
+7. Minuta 7: nastavte návratový signál.
+8. Minuta 8: zapište vlastníka a zavřete kontrolu.
+
+Když workshop vyrobí víc než jednu změnu, rozdělte výsledek. Jedna změna patří k uzavření kontroly. Ostatní jsou nové podněty, úklidový backlog nebo širší revize. Smíchání všech tří věcí je rychlá cesta k tomu, že se kontrola nikdy opravdu nezavře.
+
+### Checklist uzavření kontroly kontextu
+
+- Vybrali jsme jeden uzavírací stav?
+- Je jasné, kde výřez dál žije?
+- Pokud je výřez beze změny, nevymysleli jsme zbytečnou další akci?
+- Pokud je lokálně opravený, je oprava opravdu lokální?
+- Pokud se výřez rozdělil, má každá verze jiné pracovní místo?
+- Pokud jde do historie, zmizel z aktivní pracovní trasy?
+- Pokud byl nahrazen jinou formou, nevznikla jen další kopie?
+- Přenesli jsme do aktivního místa jen aktuální pracovní větu, hranici a návratový signál?
+- Uklidili jsme dočasné kopie, screenshoty, exporty a citlivé příklady?
+- Zůstala datová stopa stejná nebo menší?
+- Má výřez vlastníka nebo jasnou odpovědnou roli?
+- Ví tým, jaký signál kontrolu znovu otevře?
+
+Uzavření kontroly kontextu je hotové, když výřez znovu působí obyčejně. Buď dál slouží, nebo má opravené místo, nebo už netvrdí, že je aktivní. To je celé kouzlo. Žádná slavnostní pečeť, jen méně nejasností a méně zbytečných stop.
+
 ## Pravidla rukopisu
 
 - Pišu česky, prakticky a bez nafukování.
@@ -222551,6 +222695,7 @@ První měsíční kontrola v tichém provozu je test dospělosti pravidla. Dosp
 
 ## Pracovní log
 
+- 2026-06-17: Doplněna úvodní podkapitola o uzavření kontroly kontextu výřezu: pět uzavíracích stavů, propsání do kanonického místa, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-17: Doplněna úvodní podkapitola o první měsíční kontrole pravidla v tichém provozu: tři kontrolní otázky, čtyři výsledky, privacy-first hranice, karta, mini workshop a checklist.
 - 2026-06-17: Doplněna úvodní podkapitola o uzavření druhého běžného review do tichého provozu: čtyři uzavírací stavy, úklid dočasných stop, privacy-first hranice, karta, mini workshop a checklist.
 - 2026-06-17: Doplněna úvodní podkapitola o druhém běžném review po zavření mimořádné kontroly: samostatnost pravidla, čistota pracovních stop, návratový signál, privacy-first úklid, karta, mini workshop a checklist.
