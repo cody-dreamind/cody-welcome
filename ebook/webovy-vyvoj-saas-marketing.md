@@ -221697,8 +221697,136 @@ Pokud se během workshopu objeví chuť otevřít další související téma, z
 
 Uzavření druhého běžného použití je hotové, když pravidlo už nepotřebuje doprovodné lešení. Buď stojí v běžném rytmu, čeká na jednu poslední lokální opravu, má přesnější hranici, nebo z něj vznikla nová samostatná otázka. V každém případě má po uzavření zůstat méně aktivních vláken, méně dočasných stop a jasnější pracovní instrukce pro člověka, který u původního rozhodnutí nebyl.
 
+## První běžné review po návratu pravidla do rytmu
+
+Když se pravidlo po druhém běžném použití vrátí do normálního rytmu, první review nemá znovu dokazovat, že oprava byla správná. To už se stalo. Úkolem prvního běžného review je ověřit, že pravidlo nepřitahuje mimořádnou pozornost, drží své pracovní místo a nevytváří nové pomocné evidence jen proto, že kdysi vzniklo jako oprava.
+
+Začněte krátkou otázkou:
+
+```text
+Chová se pravidlo v běžném review jako normální součást pracovního místa, nebo se kolem něj znovu tvoří zvláštní péče?
+```
+
+Pokud odpověď zní "normální součást", review má být rychlé. Zkontrolujte aktuální pracovní větu, návratový signál a datovou hranici. Pokud se nic zásadního nezměnilo, pravidlo nechte být. Není potřeba vymýšlet další zlepšení jen proto, že jste se k němu po měsíci dostali. Revizní rytmus není výzva k neustálému ladění.
+
+Pokud se kolem pravidla znovu objevila zvláštní péče, nejdřív zjistěte proč. Někdy je to jen starý zvyk: někdo si pořád vede kontrolní poznámku, i když už nemá účel. Někdy je to signál, že pravidlo není dost srozumitelné pro nové použití. A někdy se opravdu změnila realita, takže původní návratový signál už není dost přesný. Tyto situace nepatří do jednoho pytle, jinak tým začne opravovat proces, i když stačilo smazat jednu dočasnou tabulku.
+
+### Tři kontrolní vrstvy
+
+První běžné review po návratu pravidla projděte ve třech vrstvách:
+
+- Pracovní vrstva: člověk najde pravidlo v místě, kde ho používá, a nemusí znát historii opravy.
+- Rozhodovací vrstva: pravidlo má stále jasný důvod, návratový signál a stav původního většího návrhu.
+- Datová vrstva: nevznikly nové údaje, exporty, kontrolní tabulky, screenshoty nebo dodavatelské účty jen kvůli tomu, že pravidlo bylo dřív citlivé.
+
+Příklad:
+
+```text
+Pravidlo:
+Při kvalifikaci leadu se ptáme na rozhodovací horizont, problém a očekávaný výsledek. Velikost firmy nepoužíváme jako automatické skóre.
+
+Běžné review:
+Měsíční kontrola obchodní discovery šablony.
+
+Pracovní vrstva:
+Šablona obsahuje aktuální otázky a obchod ji používá bez staré poznámky ke scoringu.
+
+Rozhodovací vrstva:
+Původní návrh automatického scoringu zůstává zavřený. Návratový signál je dvacet relevantních poptávek, u kterých ani nové otázky nepomohou určit prioritu.
+
+Datová vrstva:
+Nevzniklo nové CRM pole, ruční skóre ani export firemních profilů.
+
+Rozhodnutí:
+Pravidlo ponecháváme v běžném rytmu. Mažeme poslední dočasnou kontrolní poznámku z review.
+```
+
+Všimněte si, že review neskončilo novým úkolem. To je často nejlepší výsledek. Pravidlo funguje, starý větší návrh se nevrátil a datová stopa nenarostla. Hotovo. Ano, takhle nudně může vypadat dobrá správa produktu. Nudné věci často platí faktury za ty zajímavé.
+
+### Čtyři výsledky prvního review
+
+Po review vyberte jeden stav:
+
+- Ponechat v rytmu: pravidlo funguje jako běžná součást práce a nepotřebuje úpravu.
+- Uklidit poslední stopu: pravidlo drží, ale zůstala jedna dočasná poznámka, kopie nebo kontrolní karta.
+- Zpřesnit pracovní větu: pravidlo je platné, ale formulace je pro běžné použití moc historická nebo moc dlouhá.
+- Otevřít nový návratový signál: objevilo se opakované tření, které odpovídá předem dané podmínce nebo jasně mění realitu.
+
+Stav "ponechat v rytmu" je plnohodnotné rozhodnutí. Není to lenost. Je to vědomé odmítnutí práce, která by nepřinesla lepší produkt ani čistší provoz.
+
+U stavu "uklidit poslední stopu" opravte jen stopu, ne pravidlo. Typicky půjde o starý komentář v issue, dočasnou checklistovou položku, kopii šablony z ověřování nebo poznámku ve review dokumentu. Pokud při úklidu najdete další tři podobné stopy, už to není poslední stopa. Zapište nový podnět a nepředstírejte, že pořád děláte malý úklid.
+
+U zpřesnění pracovní věty přepisujte do přítomného času. "Po předchozí opravě bychom měli nepoužívat velikost firmy" je historické bludiště. "Velikost firmy nepoužíváme jako automatické skóre" je pracovní pravidlo.
+
+Návratový signál otevírejte opatrně. Jedno nepohodlné použití není návrat. Návrat je až opakovaný, předem pojmenovaný nebo jasně doložený problém, který mění rozhodnutí. Tady se hodí zdravá provozní brzda: pokud neumíte napsat, co se změnilo proti poslednímu uzavření, pravděpodobně ještě nemáte návratový signál.
+
+### Karta prvního běžného review
+
+```text
+Pravidlo:
+
+Kanonické pracovní místo:
+
+Běžný revizní rytmus:
+
+Co mělo review ověřit:
+
+Pracovní vrstva:
+
+Rozhodovací vrstva:
+
+Datová vrstva:
+
+Výsledek:
+- ponechat v rytmu
+- uklidit poslední stopu
+- zpřesnit pracovní větu
+- otevřít návratový signál
+
+Jedna akce, pokud je potřeba:
+
+Co zůstává zavřené:
+
+Co mažeme, zkracujeme nebo anonymizujeme:
+
+Jaká data dál nesbíráme:
+
+Další běžné review:
+```
+
+Karta má být krátká. Pokud se rozroste na dlouhé vysvětlení, nejspíš do review taháte historii opravy místo aktuálního stavu pravidla. Historie má zůstat dohledatelná, ale nemá řídit běžný provoz pokaždé, když se pravidlo objeví v kontrole.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: najděte kanonické pracovní místo pravidla.
+2. Minuta 2: ověřte, že pracovní věta jde použít bez historického výkladu.
+3. Minuta 3: zkontrolujte stav původního většího návrhu a návratový signál.
+4. Minuta 4: projděte dočasné stopy, které vznikly při ověřování.
+5. Minuta 5: vyberte jeden ze čtyř výsledků review.
+6. Minuta 6: zapište jednu akci nebo větu "bez akce, ponechat v rytmu".
+
+Když se během šesti minut objeví potřeba řešit širší téma, nezvětšujte workshop. Zapište nový podnět a dokončete review pravidla. První běžné review má potvrdit návrat do rytmu, ne být zadními dveřmi pro novou strategickou debatu.
+
+### Checklist prvního běžného review
+
+- Proběhlo review v normálním rytmu pracovního místa?
+- Ověřovali jsme aktuální pravidlo, ne celou historii opravy?
+- Našel by pravidlo člověk bez čerstvé paměti původního rozhodnutí?
+- Má původní větší návrh stále jasný stav?
+- Je návratový signál konkrétní a viditelný?
+- Vybrali jsme jeden výsledek review?
+- Pokud pravidlo drží, nechali jsme ho v rytmu bez nové zvláštní kontroly?
+- Pokud uklízíme stopu, je to opravdu jedna konkrétní stopa?
+- Pokud zpřesňujeme větu, mluví přítomným časem a patří do živého místa?
+- Pokud otevíráme návratový signál, je doložený změnou proti poslednímu uzavření?
+- Smazali, zkrátili nebo anonymizovali jsme dočasné podklady bez dalšího účelu?
+- Nevznikl nový tracker, export, pole, dashboard ani kontrola lidí?
+
+První běžné review je úspěšné, když pravidlo zůstane obyčejné. Obyčejnost je v provozu vysoká meta: znamená, že tým ví, kde pravidlo žije, kdy ho kontrolovat, kdy ho znovu otevřít a jaká data kvůli němu pořád nesbírat.
+
 ## Pracovní log
 
+- 2026-06-17: Doplněna úvodní podkapitola o prvním běžném review po návratu pravidla do rytmu: tři kontrolní vrstvy, čtyři výsledky review, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-16: Doplněna úvodní podkapitola o uzavření druhého běžného použití po převodu nové otázky do rytmu: čtyři uzavírací stavy, propsání do živého místa, ukončení zvláštní kontroly, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-16: Doplněna úvodní podkapitola o druhém běžném použití po převodu nové otázky do rytmu: přenositelnost bez čerstvého kontextu, čtyři výsledné stavy, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-06-16: Doplněna úvodní podkapitola o uzavření prvního běžného použití po převodu nové otázky do rytmu: uzavírací stavy, propsání do živého místa, oddělení archivu od pracovní instrukce, privacy-first úklid, karta, mini workshop a checklist.
