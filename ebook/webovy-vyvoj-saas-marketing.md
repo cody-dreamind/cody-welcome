@@ -223081,8 +223081,175 @@ Když se workshop začne vracet k debatě, proč pravidlo kdysi vzniklo, zastavt
 
 Druhá měsíční kontrola je hotová, když pravidlo buď dál běží bez zvláštní péče, nebo dostane jednu přesnou údržbovou opravu. Všechno ostatní je podezření, že tým používá kontrolu jako záminku k návratu do starého příběhu. Starý příběh může být užitečný, ale nemá sedět u každého pracovního stolu.
 
+## Uzavření druhé měsíční kontroly do delšího klidového rytmu
+
+Po druhé měsíční kontrole má tým udělat jednu důležitou věc: přestat se tvářit, že pravidlo je pořád čerstvá změna. Pokud pravidlo prošlo dvěma běžnými měsíci, našlo si cestu do pracovního místa a nevytvořilo novou datovou zátěž, další kontrola už nemá být měsíční rituál. Má se přesunout do delšího klidového rytmu, typicky kvartálního nebo půlročního.
+
+Začněte větou:
+
+```text
+Pravidlo po dvou běžných měsících nepovažujeme za projekt, ale za součást provozu.
+```
+
+Tahle věta chrání tým před únavou ze zbytečné péče. Dobré pravidlo nemá mít kolem sebe trvalý doprovod. Má být v místě práce, má být dost krátké, aby se použilo bez vysvětlování, a má mít jasný návratový signál pro chvíli, kdy přestane stačit. Pokud po dvou měsících pořád potřebuje mimořádné sledování, neuzavírejte ho do klidového rytmu. Otevřete malou údržbovou kartu a opravte konkrétní slabé místo.
+
+Praktický příklad:
+
+```text
+Pravidlo:
+Každá nová landing page má před publikací jednu větu, komu pomáhá a co má čtenář udělat dál.
+
+Druhá měsíční kontrola:
+Pravidlo bylo použité u dvou stránek. Obě věty vznikly v redakčním briefu, ne v dodatečné kontrole. Starý odkaz na původní zaváděcí poznámku zůstal v checklistu.
+
+Uzavření:
+Odstranit starý odkaz z checklistu. Pravidlo zůstává v redakčním briefu. Další kontrola proběhne v kvartálním review obsahu, pokud se dřív neobjeví návratový signál.
+
+Návratový signál:
+Dvě nové landing page za sebou budou publikované bez jasné věty pro čtenáře, nebo obchod nebude umět říct, pro koho stránka je.
+```
+
+Výsledek je klidný. Nezakládá se nový report, nepřidává se další povinný sloupec a nevzniká samostatná agenda. Pravidlo se jen přesouvá z režimu "ověřujeme, jestli přežilo" do režimu "vrátíme se, až bude důvod".
+
+### Čtyři uzavírací stavy
+
+Po druhé měsíční kontrole vyberte jeden ze čtyř uzavíracích stavů:
+
+- Převést do kvartálního rytmu: pravidlo drží, používá se v běžné práci a stačí ho zkontrolovat při širším review oblasti.
+- Převést do půlročního rytmu: pravidlo je stabilní, má nízké riziko a změny v okolním procesu jsou pomalé.
+- Nechat v měsíčním rytmu ještě jednou: pravidlo drží, ale poslední kontrola našla slabší přenositelnost nebo jeden neuklizený zbytek, který se musí ověřit.
+- Otevřít údržbovou kartu: pravidlo se sice používá, ale opakovaně vyrábí tření v jednom pracovním místě.
+
+Kvartální rytmus se hodí pro pravidla, která ovlivňují rozhodnutí s obchodním nebo produktovým dopadem: kvalifikace poptávek, prioritizace roadmapy, vydávání kampaní, práce s case studies, incidentní provoz nebo dodavatelské změny. Tady je dobré pravidelně ověřit, že pravidlo pořád odpovídá realitě trhu, nabídky a týmu.
+
+Půlroční rytmus se hodí pro pravidla, která jsou jednoduchá, málo riziková a žijí v pomaleji se měnícím pracovním místě. Typicky jde o názvosloví, strukturu briefu, interní šablonu, redakční pořadí kroků nebo drobnou kontrolu před publikací. Když se nic podstatného nemění, není důvod každý měsíc přehrabovat dobře fungující věc.
+
+Měsíční rytmus prodlužte jen vědomě. Napište, co přesně se má ještě ověřit, a kdy měsíční režim končí. "Ještě jeden měsíc pro jistotu" není plán. Použitelný zápis zní: "Ještě jednou ověříme, jestli se nový člověk dostane k pravidlu přes šablonu, ne přes dotaz na kolegu."
+
+Údržbová karta patří jen na konkrétní tření. Neotevírá původní historii, nevrací celý projekt a neřeší všechny související šablony. Má jedno pracovní místo, jednu akci a jedno ověření v nejbližším běžném průchodu.
+
+### Co se zapisuje při převodu
+
+Při převodu do delšího rytmu nezapisujte román o tom, jak pravidlo vzniklo. Zapište minimum, které pomůže budoucímu člověku rozhodnout, jestli je čas se vrátit:
+
+- kde pravidlo bydlí;
+- jaký rytmus teď platí;
+- kdo rytmus vlastní;
+- jaký návratový signál otevře dřívější kontrolu;
+- co se po druhé měsíční kontrole uklidilo;
+- jaká data kvůli pravidlu dál nesbíráte.
+
+Nejdůležitější je návratový signál. Bez něj se delší rytmus snadno změní v zapomenutí. Se signálem je to klidový režim s pojistkou. Tým nemusí pravidlo pořád hlídat, ale ví, jak pozná, že se má vrátit.
+
+Příklad krátkého zápisu:
+
+```text
+Pravidlo:
+Produktová hypotéza má před pilotem jednu větu zákaznického výsledku.
+
+Kanonické místo:
+Šablona pilotní karty.
+
+Nový rytmus:
+Kvartální produktové review.
+
+Vlastník:
+Produktový lead.
+
+Návratový signál:
+Dvě pilotní karty za sebou budou obsahovat funkční popis řešení, ale ne zákaznický výsledek.
+
+Úklid po druhé měsíční kontrole:
+Smazán starý odkaz na ověřovací poznámku.
+
+Privacy-first hranice:
+Nesledujeme osobní používání šablony. Kontrolujeme jen hotové pilotní karty v běžném review.
+```
+
+Takový zápis stačí. Když je potřeba víc historie, má být dohledatelná v rozhodovací paměti, ne nalepená na každém živém pravidle.
+
+### Privacy-first převod do klidu
+
+Převod do delšího rytmu je dobrý okamžik zkontrolovat, jestli po zavádění pravidla nezůstaly datové zbytky. Hledejte hlavně:
+
+- dočasné exporty z ověřování;
+- kopie formulářů nebo briefů s reálnými osobními údaji;
+- záznamy o tom, kdo pravidlo použil a kdy;
+- pomocné tabulky, které už nemají účel;
+- staré screenshoty zákaznických nebo interních dat;
+- poznámky, které obsahují konkrétní osoby, i když by stačil anonymizovaný příklad.
+
+Privacy-first uzavření neznamená všechno smazat naslepo. Znamená ponechat jen data, která mají jasný účel, vlastníka a retenční důvod. Pokud pro pravidlo stačí anonymizovaný příklad, nepřenášejte dál živé údaje. Pokud stačí agregovaný signál, nenechávejte detailní stopu lidí. Pokud stačí jedna karta rozhodnutí, nemažte ji ve třech kopiích po různých nástrojích.
+
+Codyho komentář: pravidlo, které potřebuje po dvou měsících vlastní dohledový systém, možná není pravidlo. Možná je to malý procesní nábytek, o který všichni zakopávají a nikdo nechce přiznat, že stojí uprostřed chodby.
+
+### Karta převodu do delšího rytmu
+
+```text
+Pravidlo:
+
+Kanonické pracovní místo:
+
+Výsledek druhé měsíční kontroly:
+- drží bez zvláštní péče
+- drží s jedním historickým zbytkem
+- slabá přenositelnost
+- návrat do údržby
+
+Uzavírací stav:
+- kvartální rytmus
+- půlroční rytmus
+- ještě jedna měsíční kontrola
+- údržbová karta
+
+Proč tento rytmus stačí:
+
+Vlastník rytmu:
+
+Návratový signál pro dřívější kontrolu:
+
+Jedna poslední úklidová akce:
+
+Co neotevíráme z původní historie:
+
+Jaká data mažeme, anonymizujeme nebo dál nesbíráme:
+
+Kde je zapsaný další termín nebo spouštěč:
+```
+
+Karta má být poslední aktivní stopa přechodu. Jakmile je vyplněná a úklidová akce hotová, pravidlo nemá mít zvláštní status. Pokud ho tým dál označuje jako "nové", "ověřované" nebo "to po té opravě", převod ještě není dokončený jazykově. Přepište název a popis tak, aby pravidlo působilo jako normální součást práce.
+
+### Mini workshop na 8 minut
+
+1. Minuta 1: přečtěte výsledek druhé měsíční kontroly.
+2. Minuta 2: rozhodněte, jestli pravidlo potřebuje kvartální, půlroční, ještě jeden měsíční nebo údržbový režim.
+3. Minuta 3: pojmenujte kanonické pracovní místo a vlastníka rytmu.
+4. Minuta 4: napište návratový signál pro dřívější kontrolu.
+5. Minuta 5: vyberte jednu poslední úklidovou akci.
+6. Minuta 6: projděte datové zbytky po zavádění pravidla.
+7. Minuta 7: zapište, co z původní historie neotevíráte.
+8. Minuta 8: potvrďte, kde bude další termín nebo spouštěč vidět v běžné práci.
+
+Pokud workshop skončí debatou mezi kvartálním a půlročním rytmem, vyberte kratší rytmus jen tehdy, když existuje konkrétní riziko. Pokud je důvod jen pocit, že "by bylo dobré to mít pod kontrolou", zvolte delší rytmus a napište jasný návratový signál. Kontrola bez důvodu je jen dražší forma nejistoty.
+
+### Checklist převodu do delšího rytmu
+
+- Přestali jsme pravidlo označovat jako čerstvou změnu?
+- Vybrali jsme jeden ze čtyř uzavíracích stavů?
+- Je jasné, proč stačí kvartální, půlroční, ještě jeden měsíční nebo údržbový režim?
+- Má pravidlo kanonické pracovní místo a vlastníka rytmu?
+- Zapsali jsme návratový signál pro dřívější kontrolu?
+- Uklidili jsme poslední historický zbytek, pokud existoval?
+- Neotevřeli jsme původní historii jen proto, že jsme ji při uzavírání znovu viděli?
+- Zkontrolovali jsme dočasné exporty, kopie, osobní údaje a pomocné tabulky?
+- Víme, jaká data kvůli pravidlu dál nesbíráme?
+- Je další kontrola vidět v běžném review, ne v samostatné dozorové agendě?
+
+Uzavření druhé měsíční kontroly je hotové, když pravidlo ztratí zvláštní zacházení a získá klidový rytmus s jasným návratovým signálem. Tým tím neříká, že pravidlo bude navždy správné. Říká jen, že už není potřeba držet ho na stole každý měsíc. A to je přesně ten druh provozní nudy, za který se v dobrém systému platí zlatem.
+
 ## Pracovní log
 
+- 2026-06-17: Doplněna úvodní podkapitola o uzavření druhé měsíční kontroly do delšího klidového rytmu: kvartální nebo půlroční režim, údržbová karta, návratový signál, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-17: Doplněna úvodní podkapitola o druhé měsíční kontrole pravidla v tichém provozu: samostatnost bez čerstvé historie, přenositelnost, úklid historických zbytků, privacy-first hranice, karta, mini workshop a checklist.
 - 2026-06-17: Doplněna úvodní podkapitola o uzavření první měsíční kontroly pravidla v tichém provozu: čtyři uzavírací stavy, propsání výsledku, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-17: Doplněna úvodní podkapitola o uzavření kontroly kontextu výřezu: pět uzavíracích stavů, propsání do kanonického místa, privacy-first úklid, karta, mini workshop a checklist.
