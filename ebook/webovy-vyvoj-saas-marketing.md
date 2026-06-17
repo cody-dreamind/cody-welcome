@@ -11382,6 +11382,122 @@ Když workshop vyrobí víc než jednu změnu, rozdělte výsledek. Jedna změna
 
 Uzavření kontroly kontextu je hotové, když výřez znovu působí obyčejně. Buď dál slouží, nebo má opravené místo, nebo už netvrdí, že je aktivní. To je celé kouzlo. Žádná slavnostní pečeť, jen méně nejasností a méně zbytečných stop.
 
+## První běžné použití po uzavřené kontrole kontextu výřezu
+
+Po uzavřené kontrole kontextu přichází nenápadný, ale důležitý moment: někdo výřez znovu použije při normální práci. Ne při workshopu, ne při revizi dokumentace, ne pod dohledem člověka, který ho právě upravil. Prostě v běžné situaci, kde má pracovní pomůcka pomoct rychleji a čistěji rozhodnout.
+
+Cílem prvního běžného použití není znovu dokazovat, že kontrola kontextu byla správná. To už se rozhodlo. Cílem je zjistit, jestli uzavření opravdu převedlo výřez zpět do práce. Pokud se po první běžné situaci znovu otevírá historie, hledají se staré varianty nebo vznikají nové kopie, kontrola se možná formálně zavřela, ale prakticky pořád tahá za rukáv.
+
+Začněte krátkou otázkou:
+
+```text
+Pomohl výřez po uzavřené kontrole kontextu udělat běžnou práci bez návratu mimořádné péče?
+```
+
+Tato otázka je schválně úzká. Neptá se, jestli je výřez dokonalý, jestli by šel napsat lépe nebo jestli se kolem něj nedá postavit nový standard. Ptá se, jestli v prvním normálním použití obstál jako obyčejná pracovní pomůcka.
+
+### Co při prvním použití sledovat
+
+Sledujte jen tři věci.
+
+První je najitelnost. Člověk našel výřez tam, kde práci opravdu dělá? Pokud musel hledat v historii, ptát se autora nebo sahat do rozhodovacího záznamu, problém není nutně v obsahu. Možná výřez po uzavření nedostal správné pracovní místo.
+
+Druhá je rozhodnutelnost. Pomohl výřez udělat krok, kvůli kterému existuje? Například zvolit menší důkaz místo nového trackingu, oddělit interní a veřejnou formulaci, nebo rozhodnout, že starý příklad už nepatří do aktivní šablony. Pokud výřez jen připomněl téma, ale nenasměroval rozhodnutí, je moc měkký.
+
+Třetí je klid. Použití nemá obnovit mimořádnou kontrolu. Když si tým po každém použití řekne "radši to ještě zkontrolujeme", výřez možná nefunguje jako pravidlo, ale jako varovná cedule bez jasné akce. To je lepší než nic, ale horší než pracovní pomůcka.
+
+### Čtyři výsledné stavy
+
+Stav "funguje v běžné práci" použijte, když člověk výřez našel, použil a nepotřeboval k tomu původní historii ani další kontrolu. Zapište jen krátký výsledek a nechte výřez být. Nejhorší reakce na fungující pomůcku je vymyslet jí nový report.
+
+Stav "opravit umístění" použijte, když obsah pomohl, ale člověk ho nenašel v přirozeném pracovním místě. Opravte odkaz, šablonu, rozcestník nebo název. Nepřepisujte výřez jen proto, že byl špatně uložený.
+
+Stav "doplnit jednu přenosovou větu" použijte, když výřez skoro fungoval, ale v novém kontextu chyběla drobná hrana. Typicky věta typu: "Ve veřejném materiálu nepoužívej interní sales příklad" nebo "Při automatizovaném použití pravidla musí zůstat ruční výjimka." Přenosová věta má být kratší než původní výřez.
+
+Stav "otevřít novou úzkou otázku" použijte, když první běžné použití ukáže, že problém už není v samotném výřezu. Například se změnil proces, přibylo nové publikum, nebo výřez naráží na rozhodnutí, které nikdy nebylo vyjasněné. V takovém případě neprodlužujte kontrolu kontextu. Zavřete ji a otevřete novou smyčku s vlastní otázkou.
+
+### Privacy-first hranice prvního použití
+
+První běžné použití nesmí vytvořit nový zvyk sběru dat. Nepotřebujete seznam všech použití výřezu, screenshoty pracovních situací ani export zákaznických příkladů. Stačí výsledek běžné práce a krátký zápis, pokud se ukázalo tření.
+
+Ptejte se:
+
+```text
+Stačí nám výsledek běžné práce?
+
+Vznikla kvůli použití nová kopie zákaznických nebo osobních dat?
+
+Nevrátili jsme do aktivní trasy historii, kterou jsme při uzavření nechali stranou?
+
+Nezačínáme sledovat použití výřezu jen kvůli pocitu jistoty?
+```
+
+Pokud odpověď ukáže novou datovou stopu, nejdřív ji zkraťte. Může stačit anonymizovat příklad, smazat dočasnou kopii, nahradit konkrétní zákaznickou situaci obecným vzorem nebo přepsat výřez tak, aby nevyžadoval další dokladování.
+
+Codyho komentář: první použití po uzavření je jako návrat do normálního provozu. Když u něj tým vytáhne laboratorní plášť, tabulku a tři nové sloupce v evidenci, možná se bojí nechat pravidlo dospět. Pomůcka má pomáhat, ne žádat o průběžné ujišťování.
+
+### Karta prvního běžného použití
+
+```text
+Název výřezu:
+
+Stav po kontrole kontextu:
+
+Kde výřez žije:
+
+První běžná situace použití:
+
+Kdo ho použil:
+
+Našel výřez bez původní historie?
+
+Pomohl udělat rozhodnutí nebo krok?
+
+Byla potřeba mimořádná kontrola?
+
+Vznikla nová datová nebo pomocná stopa?
+
+Výsledný stav:
+- funguje v běžné práci
+- opravit umístění
+- doplnit jednu přenosovou větu
+- otevřít novou úzkou otázku
+
+Jedna oprava, pokud je potřeba:
+
+Co z historie dál neotevíráme:
+
+Návratový signál:
+```
+
+Karta má být krátká a často vůbec nemusí vzniknout. Pokud výřez funguje tiše a bez tření, stačí poznámka v pracovním logu nebo žádný další zápis. Kartu použijte hlavně tehdy, když první běžné použití ukázalo drobnou opravu, datovou stopu nebo riziko návratu mimořádné péče.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte stav, kterým skončila kontrola kontextu.
+2. Minuta 2: popište první běžnou situaci použití.
+3. Minuta 3: ověřte najitelnost, rozhodnutelnost a klid.
+4. Minuta 4: zkontrolujte, jestli nevznikla nová datová stopa.
+5. Minuta 5: vyberte jeden ze čtyř výsledných stavů.
+6. Minuta 6: napište jednu opravu, nebo výřez nechte být.
+
+Když workshop začne řešit sousední šablony, staré rozhodnutí nebo celý proces, zastavte ho. To jsou možná platná témata, ale nejsou to první běžné použití tohoto výřezu. Úzký průchod chrání pozornost i kvalitu rozhodnutí.
+
+### Checklist prvního běžného použití
+
+- Použil výřez někdo v reálné pracovní situaci?
+- Našel ho bez pomoci autora a bez původní historie?
+- Vedl výřez ke konkrétnímu kroku nebo rozhodnutí?
+- Nebylo nutné znovu otevírat kontrolu kontextu?
+- Nevznikla nová pomocná evidence, screenshot, export nebo kopie?
+- Pokud výřez drhl, je oprava menší než výřez samotný?
+- Pokud chyběla přenosová věta, umíme ji napsat jednou větou?
+- Pokud se ukázal širší problém, oddělili jsme ho jako novou úzkou otázku?
+- Nevrátili jsme do aktivní trasy citlivé nebo zastaralé příklady?
+- Má výřez po prvním použití jasný návratový signál místo další mimořádné kontroly?
+
+První běžné použití po uzavřené kontrole kontextu má být nudné. To je kompliment. Znamená to, že výřez se vrátil do práce, ne do věčné údržby. Když pomohl, nechte ho dýchat. Když drhnul, opravte nejbližší tření. Když odhalil novou otázku, otevřete ji zvlášť a neschovávejte ji do staré kontroly.
+
 ## Pravidla rukopisu
 
 - Pišu česky, prakticky a bez nafukování.
@@ -223990,3 +224106,4 @@ Druhá měsíční kontrola je hotová, když pravidlo buď dál běží bez zvl
 - 2026-06-16: Doplněna úvodní podkapitola o návratu ověřeného předávacího pravidla do běžného revizního rytmu: výběr rytmu, ukončení mimořádné kontroly, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-17: Doplněna krátká úvodní poznámka, aby se při návratu k tématu přenášel jen stále platný kontext.
 - 2026-06-17: Doplněna úvodní podkapitola o ověření použitelného výřezu po změně kontextu: typy změn, mini test platnosti, privacy-first kontrola, karta, workshop a checklist.
+- 2026-06-17: Doplněna úvodní podkapitola o prvním běžném použití po uzavřené kontrole kontextu výřezu: najitelnost, rozhodnutelnost, klid bez mimořádné péče, privacy-first hranice, karta, mini workshop a checklist.
