@@ -224838,8 +224838,196 @@ Když se tým nedokáže shodnout mezi sloučením a dalším půlročním rytme
 
 Druhá půlroční kontrola je hotová, když pravidlo přestane být zvláštní starost a dostane správný tvar pro další rok. Někdy zůstane samostatné, někdy se sloučí, někdy přejde do roční inventury a někdy skončí. Důležité je, aby po něm zůstala ochrana rozhodnutí, ne hromada dokumentačního sedimentu.
 
+## Uzavření druhé půlroční kontroly pravidla
+
+Druhá půlroční kontrola rozhoduje o tom, jak má pravidlo žít další rok. Uzavření této kontroly je poslední krok: převést výsledek do pracovního místa, rytmu a krátké paměti tak, aby se k němu tým nemusel vracet přes celou historii. Pokud kontrola skončí jen poznámkou "sloučit někdy" nebo "asi ponechat", pravidlo zůstane viset v systému jako otevřená starost.
+
+Začněte větou:
+
+```text
+Po druhé půlroční kontrole pravidlo odteď:
+```
+
+Za dvojtečku patří jeden provozní stav. Například:
+
+```text
+Po druhé půlroční kontrole pravidlo odteď žije jako bod v publikačním checklistu, ne jako samostatná půlroční kontrola.
+```
+
+Tahle věta má být tak jasná, aby ji šlo vložit do rozhodovacího záznamu, kanonické šablony i krátké zprávy týmu. Pokud potřebuje tři odstavce vysvětlování, kontrola ještě nerozhodla dost přesně.
+
+### Čtyři uzavírací stavy
+
+Uzavření druhé půlroční kontroly používejte jen se čtyřmi stavy:
+
+- Samostatné pravidlo pokračuje: pravidlo pořád chrání živé rozhodnutí a zůstává ve svém rytmu.
+- Pravidlo se slučuje: ochrana zůstává, ale samostatný revizní bod mizí do širšího pracovního standardu.
+- Pravidlo jde do roční inventury: pravidlo je stabilní, ale stačí ho kontrolovat jako součást portfolia standardů.
+- Pravidlo se vyřazuje: samostatná ochrana už není potřeba, zůstává jen návratový signál.
+
+Každý stav musí změnit konkrétní pracovní místo. Samostatné pokračování potvrdí rytmus a návratový signál. Sloučení upraví širší standard. Roční inventura přepíše revizní kalendář. Vyřazení odstraní položku z aktivního indexu a ponechá jen stopu, která vysvětluje, kdy se téma vrátí.
+
+Příklad:
+
+```text
+Výsledek kontroly:
+Pravidlo o datové větě u formulářů už spolehlivě žije v publikačním checklistu.
+
+Uzavírací stav:
+Pravidlo se slučuje.
+
+Jednovětý závěr:
+Samostatné pravidlo rušíme; ochrana zůstává jako povinný bod publikačního checklistu u každého formuláře.
+
+Návratový signál:
+Dvě veřejné stránky s formulářem po sobě vyjdou bez datové věty, nebo vznikne nový typ formuláře mimo checklist.
+```
+
+Důležité je, že sloučení neruší hodnotu pravidla. Ruší jen samostatný obal, který už nepřidává rozhodovací hodnotu.
+
+### Co propsat do pracovních míst
+
+Po uzavření aktualizujte jen místa, která tým opravdu používá:
+
+- kanonický checklist, šablonu nebo playbook;
+- index pravidel nebo rozhodovací log;
+- revizní kalendář;
+- archivní poznámku, pokud by stará verze mohla mást;
+- návratový signál v místě, kde se podobná práce znovu začne.
+
+Nepřepisujte celou historii pravidla. Po roce klidu je největší riziko přemíra vysvětlování. Člověk, který příště připravuje formulář, nepotřebuje znát všechna kontrolní okna. Potřebuje vidět aktuální pracovní větu, například:
+
+```text
+U každého formuláře veřejně vysvětlujeme, jaká data sbíráme a k jakému účelu.
+```
+
+Historie může zůstat v rozhodovacím logu, ale nemá překážet v běžné práci. Pokud se k ní člověk musí vracet při každém použití, pravidlo není uzavřené. Je jen schované pod vrstvou dokumentace.
+
+### Vyřazení bez ztráty paměti
+
+Vyřazení pravidla neznamená smazat stopu tak, že nikdo nepochopí, proč kdysi existovalo. Znamená to odstranit ho z aktivní práce a ponechat malý historický záznam:
+
+```text
+Vyřazené pravidlo:
+
+Proč vzniklo:
+
+Proč už nežije jako samostatné pravidlo:
+
+Kde je jeho ochrana nahrazená:
+
+Co by téma znovu otevřelo:
+
+Co po vyřazení mažeme nebo anonymizujeme:
+```
+
+Příklad:
+
+```text
+Vyřazené pravidlo:
+Samostatná půlroční kontrola datové věty u formulářů.
+
+Proč vzniklo:
+První verze webu měla víc formulářových variant a hrozilo, že se vysvětlení sběru dat nebude propsané všude.
+
+Proč už nežije jako samostatné pravidlo:
+Všechny nové formuláře vznikají přes jednu publikační šablonu, která datovou větu obsahuje.
+
+Kde je ochrana nahrazená:
+Publikační checklist landing page.
+
+Co by téma znovu otevřelo:
+Nový typ formuláře mimo checklist nebo dvě stránky za sebou bez datové věty.
+
+Co po vyřazení mažeme nebo anonymizujeme:
+Dočasné kontrolní seznamy formulářů a screenshoty starých variant.
+```
+
+Tento záznam stačí. Není potřeba držet staré kontrolní tabulky jen proto, že pravidlo bývalo důležité. Důležitost pravidla se má projevit v současném pracovním místě, ne v muzeu jeho kontrol.
+
+### Privacy-first uzavření
+
+Druhá půlroční kontrola často odhalí pracovní stopy, které už nemají účel: seznamy kontrolovaných výstupů, kopie šablon, screenshoty, exporty, staré výjimky nebo komentáře s konkrétními zákaznickými příklady. Uzavření je správná chvíle je zkrátit, anonymizovat nebo smazat.
+
+Položte si pět otázek:
+
+- Potřebujeme tento podklad pro další rozhodnutí, nebo jen dokládá historii?
+- Dá se detail nahradit agregovanou větou?
+- Neobsahuje záznam osobní nebo zákaznické údaje, které už nejsou nutné?
+- Nevznikl během kontroly nový seznam, který by se mohl omylem stát zdrojem pravdy?
+- Je návratový signál zapsaný bez potřeby dalšího průběžného sledování?
+
+Privacy-first závěr napište pozitivně:
+
+```text
+Díky uzavření už dál nedržíme samostatné kontrolní exporty formulářů. V rozhodovacím logu zůstává jen agregovaný závěr a návratový signál.
+```
+
+Codyho komentář: nejhezčí výsledek roční údržby je někdy to, že něco přestane mít vlastní připomínku v kalendáři. Ne proto, že by na tom nezáleželo. Protože se to konečně stalo normální součástí práce.
+
+### Karta uzavření druhé půlroční kontroly
+
+```text
+Pravidlo:
+
+Výsledek druhé půlroční kontroly:
+
+Uzavírací stav:
+- samostatné pravidlo pokračuje
+- pravidlo se slučuje
+- pravidlo jde do roční inventury
+- pravidlo se vyřazuje
+
+Jednovětý závěr:
+
+Kde bude pravidlo nebo jeho ochrana dál žít:
+
+Co se mění v indexu, checklistu nebo revizním rytmu:
+
+Co archivujeme, slučujeme nebo mažeme:
+
+Návratový signál:
+
+Co dál nesbíráme ani neměříme:
+
+Vlastník:
+
+Datum další kontroly nebo inventury:
+```
+
+Karta má uzavřít rok práce s pravidlem. Pokud se do ní nevejde výsledek bez dlouhé historie, vraťte se k jednovětému závěru. Nejspíš se stále snažíte současně uzavřít pravidlo, vysvětlit jeho původ a otevřít další téma.
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: přečtěte výsledek druhé půlroční kontroly.
+2. Minuta 2: vyberte jeden ze čtyř uzavíracích stavů.
+3. Minuta 3: napište jednovětý závěr.
+4. Minuta 4: určete pracovní místo, kde pravidlo nebo jeho ochrana dál žije.
+5. Minuta 5: aktualizujte rytmus, index nebo checklist.
+6. Minuta 6: zapište návratový signál a privacy-first úklid.
+7. Minuta 7: určete vlastníka a další kontrolu, pokud má ještě existovat.
+
+Když workshop ukáže, že pravidlo má zůstat samostatné, ale nikdo neumí říct proč, neponechávejte ho ze zvyku. Dejte mu buď jasnou ochrannou roli, nebo ho slučte do místa, kde se podle něj opravdu pracuje.
+
+### Checklist uzavření druhé půlroční kontroly
+
+- Má pravidlo po kontrole jeden uzavírací stav?
+- Existuje jednovětý závěr použitelný pro tým?
+- Víme, kde pravidlo nebo jeho ochrana dál žije?
+- Pokud pravidlo slučujeme, zůstává jeho rozhodovací hranice v běžné práci?
+- Pokud pravidlo vyřazujeme, zůstává konkrétní návratový signál?
+- Pokud pravidlo pokračuje samostatně, víme, jaké rozhodnutí pořád chrání?
+- Aktualizovali jsme index, checklist nebo revizní rytmus?
+- Uklidili jsme dočasné kontrolní seznamy, screenshoty, exporty nebo citlivé příklady?
+- Nepřidali jsme nový monitoring lidí, dokumentů ani používání šablon?
+- Je jasné, co dál nesbíráme ani neměříme?
+- Má další kontrola vlastníka, pokud pravidlo dál žije?
+
+Uzavření druhé půlroční kontroly je konec jedné dlouhé smyčky. Pravidlo buď pokračuje, ztratí samostatný obal, přejde do roční inventury, nebo odejde z aktivní práce. Ve všech případech má po něm zůstat méně šumu, jasnější pracovní místo a menší datová stopa.
+
 ## Pracovní log
 
+- 2026-06-17: Doplněna úvodní podkapitola o uzavření druhé půlroční kontroly pravidla: čtyři uzavírací stavy, propsání do pracovních míst, vyřazení bez ztráty paměti, privacy-first úklid stop, karta, mini workshop a checklist.
 - 2026-06-17: Doplněna úvodní podkapitola o druhé půlroční kontrole pravidla po roce klidu: samostatná hodnota pravidla, sloučení do širšího standardu, převod do roční inventury, privacy-first úklid kontrolních stop, karta, mini workshop a checklist.
 - 2026-06-17: Doplněna úvodní podkapitola o uzavření první půlroční kontroly pravidla: uzavírací stavy, propsání do pracovního místa, privacy-first úklid dočasných podkladů, karta, mini workshop a checklist.
 - 2026-06-17: Doplněna úvodní podkapitola o první půlroční kontrole pravidla v klidovém rytmu: konkrétní kontrolní otázka, ověření kanonického místa a hotových výstupů, čtyři výsledné stavy, privacy-first hranice, karta, mini workshop a checklist.
