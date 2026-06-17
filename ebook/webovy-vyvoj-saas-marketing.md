@@ -11787,6 +11787,151 @@ Když workshop začne přepisovat původní kontrolu kontextu, vraťte ho k druh
 
 Druhé běžné použití je hotové, když výřez obstojí bez čerstvého doprovodu. Buď se může přesunout do běžného rytmu, nebo dostane jednu přesnou opravu, nebo se vedle něj otevře nové pravidlo. Všechny tři výsledky jsou lepší než držet výřez v polovičním stavu, kde je pořád "skoro hotový" a potichu žádá další pozornost.
 
+## Uzavření druhého běžného použití po kontrole kontextu výřezu
+
+Druhé běžné použití otevře poslední praktickou otázku: co s výřezem dál? Pokud po něm zůstane jen poznámka "fungovalo" nebo "ještě trochu doladit", tým má pořád otevřenou smyčku. Uzavření druhého použití má z výsledku udělat stabilní stav: výřez buď běží tiše, dostal jednu lokální opravu, získal přenosovou hranici, nebo se vedle něj otevřelo nové samostatné pravidlo.
+
+Nejde o slavnostní review. Jde o krátké uklizení, aby druhé použití nepřidalo další vrstvu mimořádné péče. Když pomůcka obstála dvakrát, nemá se z ní stát věčný pacient dokumentace. Má se vrátit do práce a znovu se otevřít až tehdy, když přijde skutečný návratový signál.
+
+Začněte větou:
+
+```text
+Po druhém běžném použití výřez:
+- necháváme v běžném rytmu
+- opravujeme v jednom pracovním místě
+- doplňujeme o jednu přenosovou hranici
+- oddělujeme od nového samostatného pravidla
+```
+
+Tato věta je důležitější než dlouhý zápis. Nutí tým vybrat stav. Bez ní se snadno stane, že všichni souhlasí s výsledkem, ale nikdo neví, jestli je hotovo, nebo se má ještě něco hlídat.
+
+### Čtyři uzavírací stavy
+
+Stav "nechat v běžném rytmu" použijte, když druhé použití proběhlo samostatně a bez nové otázky. V takové chvíli nedopisujte další vysvětlení jen proto, že máte čerstvou pozornost. Výřez už splnil test přenosu. Zůstává v kanonickém místě, návratový signál zůstává platný a zvláštní kontrola končí.
+
+Stav "opravit jedno pracovní místo" použijte, když problém nebyl ve výřezu, ale v cestě k němu. Například šablona případové studie neměla odkaz na správnou formulaci, onboardingový checklist používal starý název, nebo interní rozcestník vedl lidi přes zbytečně obecnou kapitolu. Oprava patří tam, kde člověk reálně pracuje, ne do další abstraktní vrstvy.
+
+Stav "doplnit přenosovou hranici" použijte, když druhé použití ukázalo riziko příliš širokého výkladu. Hranice má být krátká a rozhodovací. Například:
+
+```text
+Platí pro veřejné texty a šablony. Neplatí pro interní kvalifikaci leadů ani pro automatické skórování.
+```
+
+Taková věta chrání výřez před nafouknutím. Člověk nemusí znát historii, aby poznal, kde pravidlo končí.
+
+Stav "otevřít nové pravidlo" použijte, když druhé použití ukázalo jiný typ rozhodnutí. Tady je potřeba disciplína: nové pravidlo nesmí být přilepené k původnímu výřezu jako dodatek "a ještě také". Dostane vlastní otázku, pracovní místo, privacy-first hranici a návratový signál. Původní výřez tím zůstává menší a použitelnější.
+
+### Co uklidit při uzavření
+
+Uzavření druhého použití má vždycky malý úklidový krok. Ne proto, že dokumentace miluje pořádek, i když někteří Markdown nadšenci by se hádali. Důvod je praktičtější: druhé použití často vytvoří pomocné stopy, které po uzavření už nemají hodnotu.
+
+Projít stačí tato místa:
+
+- pracovní kopie výřezu;
+- dočasné komentáře v dokumentu nebo briefu;
+- staré odkazy na kontrolu kontextu;
+- screenshoty, exporty nebo konkrétní zákaznické příklady;
+- interní poznámky, které by se mohly omylem dostat do veřejné trasy;
+- připomínky v úkolech, které měly hlídat jen druhé použití.
+
+Pokud výřez zůstává v běžném rytmu, pomocné stopy smažte nebo shrňte do jedné obecné věty. Pokud se opravuje jedno pracovní místo, nechte jen záznam změny na tomto místě. Pokud vzniká nové pravidlo, přeneste do něj pouze obecný vzor, ne celou historii původního výřezu.
+
+Privacy-first zásada je jednoduchá: důkaz, který už neslouží rozhodnutí, nemá zůstat jen pro pocit jistoty. U textových výřezů to platí dvojnásob, protože konkrétní příklady mají tendenci cestovat. Jednou jsou v interní poznámce, za měsíc v prezentaci, za půl roku v onboardingovém materiálu, a najednou se všichni tváří překvapeně, že data mají nožičky. Nemají. Jen jsme jim nechali moc dveří.
+
+### Uzavírací karta
+
+```text
+Název výřezu:
+
+Druhé běžné použití:
+
+Výsledek druhého použití:
+
+Uzavírací stav:
+- nechat v běžném rytmu
+- opravit jedno pracovní místo
+- doplnit přenosovou hranici
+- otevřít nové pravidlo
+
+Jedna provedená úprava:
+
+Kanonické místo po uzavření:
+
+Co končí:
+- mimořádná kontrola
+- pracovní kopie
+- dočasné připomínky
+- staré odkazy
+
+Co zůstává:
+
+Návratový signál:
+
+Jaká data po uzavření nemažeme jen kvůli pohodlí, ale opravdu potřebujeme:
+
+Jaká data po uzavření mažeme nebo zobecňujeme:
+
+Vlastník:
+
+Datum uzavření:
+```
+
+Karta má potvrdit stav, ne vyrábět dokumentaci o dokumentaci. Pokud je výřez bez opravy a bez nové otázky, může být karta velmi krátká. Stačí název, uzavírací stav, kanonické místo a návratový signál.
+
+### Příklad uzavření
+
+```text
+Název výřezu:
+Veřejné materiály používají obecný privacy-first příklad.
+
+Druhé běžné použití:
+Autor případové studie použil princip bez interní sales poznámky, ale hledal potvrzení v původní kontrolní kartě.
+
+Výsledek:
+Výřez je správný, slabé je pracovní místo pro case studies.
+
+Uzavírací stav:
+Opravit jedno pracovní místo.
+
+Jedna provedená úprava:
+Do šablony případové studie doplněna věta: "Používej obecný privacy-first příklad; interní kvalifikační formulace sem nepatří."
+
+Co končí:
+Kontrolní karta druhého použití a odkaz na původní sales poznámku.
+
+Co zůstává:
+Výřez v kanonickém místě a návratový signál pro veřejné materiály.
+```
+
+Všimněte si, že se nepřepisuje celý výřez. Druhé použití neukázalo chybu principu, ale chybějící lokální oporu. Oprava proto míří do šablony případové studie. To je přesně ta nudná, užitečná práce, která šetří budoucí porady.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte výsledek druhého běžného použití.
+2. Minuta 2: vyberte jeden uzavírací stav.
+3. Minuta 3: pojmenujte jednu provedenou nebo potřebnou úpravu.
+4. Minuta 4: potvrďte kanonické místo a návratový signál.
+5. Minuta 5: smažte, zobecněte nebo zavřete pomocné stopy.
+6. Minuta 6: zapište, co končí a co zůstává v běžném rytmu.
+
+Když se workshop začne ptát, jestli by výřez nešel využít i v dalších pěti situacích, zastavte ho. To je nový rozvoj, ne uzavření druhého použití. Tady se zavírá jedna smyčka.
+
+### Checklist uzavření druhého použití
+
+- Vybrali jsme jeden uzavírací stav?
+- Nepřepisujeme výřez jen proto, že jsme ho znovu četli?
+- Pokud drhlo pracovní místo, opravili jsme pracovní místo místo obecného pravidla?
+- Pokud chyběla hranice, doplnili jsme jednu krátkou rozhodovací větu?
+- Pokud vzniklo nové pravidlo, oddělili jsme ho od původního výřezu?
+- Zůstalo kanonické místo jasné?
+- Končí mimořádná kontrola, pokud už není potřeba?
+- Uklidili jsme pracovní kopie, staré odkazy a dočasné připomínky?
+- Zobecnili jsme konkrétní příklady, které nemusí zůstat v detailu?
+- Je návratový signál pořád viditelný v běžné práci?
+- Umíme říct, co se má stát při dalším skutečném návratu?
+
+Uzavření druhého běžného použití je hotové, když výřez nepotřebuje čerstvou paměť, mimořádnou péči ani ochranné poznámky kolem sebe. Zůstane jen pracovní pomůcka, její místo a návratový signál. Všechno ostatní má buď vlastní nové pravidlo, nebo míří do koše, kde už dávno čeká pár starých "jen dočasných" exportů.
+
 ## Pravidla rukopisu
 
 - Pišu česky, prakticky a bez nafukování.
@@ -225120,3 +225265,4 @@ Uzavření druhé kvartální kontroly je hotové, když kontrola nezanechá sam
 - 2026-06-17: Doplněna úvodní podkapitola o ověření použitelného výřezu po změně kontextu: typy změn, mini test platnosti, privacy-first kontrola, karta, workshop a checklist.
 - 2026-06-17: Doplněna úvodní podkapitola o prvním běžném použití po uzavřené kontrole kontextu výřezu: najitelnost, rozhodnutelnost, klid bez mimořádné péče, privacy-first hranice, karta, mini workshop a checklist.
 - 2026-06-17: Doplněna úvodní podkapitola o druhém běžném použití po kontrole kontextu výřezu: přenositelnost bez čerstvého vysvětlení, slabý přenos, privacy-first kontrola, karta, mini workshop a checklist.
+- 2026-06-17: Doplněna úvodní podkapitola o uzavření druhého běžného použití po kontrole kontextu výřezu: čtyři uzavírací stavy, úklid pracovních stop, privacy-first zobecnění příkladů, karta, mini workshop a checklist.
