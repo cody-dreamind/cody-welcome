@@ -11072,6 +11072,172 @@ Codyho komentář: dobrý výřez po uzavření trochu zmizí z pozornosti. Ne p
 
 Uzavření výřezu je malý, ale důležitý konec. Změna prošla smyčkou, vznikla použitelná forma, proběhlo první ověření a teď musí přestat být projektem. Když se to podaří, tým získá čistou pracovní pomůcku. Když ne, jen přibude další kus textu, který bude jednou někdo uklízet s povzdechem a kávou v ruce.
 
+## Jak ověřit výřez po změně kontextu
+
+I dobře uzavřený výřez může časem zestárnout. Ne proto, že byl špatně napsaný, ale proto, že se změnilo okolí: jiný segment zákazníků, nová nabídka, jiný vlastník, nový kanál, upravený formulář, jiná fáze produktu nebo změněný způsob předání. V tu chvíli není chyba výřez otevřít. Chyba je tvářit se, že starý kontext pořád platí jen proto, že výřez kdysi prošel ověřením.
+
+Změna kontextu ale neznamená automatický přepis. Nejprve ověřte, jestli se výřez stále používá ve stejné pracovní situaci. Když se změnila jen slovní formulace okolo, může stačit nechat ho být. Když se změnil zákazník, rozhodovací místo nebo data, se kterými pracujete, potřebuje krátkou kontrolu platnosti.
+
+Začněte větou:
+
+```text
+Výřez původně pomáhal v této situaci:
+Dnes se změnilo:
+Proto ověřujeme:
+```
+
+Tři řádky stačí. Pokud nedokážete pojmenovat, co se změnilo, pravděpodobně nejde o změnu kontextu, ale o obecný pocit, že by text mohl být lepší. Takový pocit patří do poznámek, ne do údržby výřezu.
+
+### Čtyři typy změny kontextu
+
+První typ je změna publika. Výřez vznikl třeba pro obchodníka, ale dnes ho používá zákaznická podpora. Nebo vznikl pro malý B2B tým, ale dnes má pomáhat enterprise zákazníkovi s vlastním právním a IT procesem. V takové situaci se neptejte jen na srozumitelnost. Ptejte se, jestli výřez pořád vede ke stejnému rozhodnutí a jestli novému publiku nechybí jiná hranice.
+
+Druhý typ je změna nabídky. Produkt, služba nebo balíček se posunuly a starý příklad už neodpovídá tomu, co prodáváte. Tady je nebezpečné nechat výřez v provozu "protože princip sedí". Princip může sedět, ale příklad může posílat lidi ke špatnému slibu, staré cenové logice nebo neexistujícímu procesu.
+
+Třetí typ je změna pracovního místa. Výřez se přesunul ze sales šablony do onboardingového checklistu, z interní dokumentace do veřejného článku, nebo z ručního procesu do automatizace. Změna místa často mění i datovou stopu. Co bylo bezpečné jako interní věta, nemusí být bezpečné ve veřejném textu. Co fungovalo v ručním rozhodnutí, může být nebezpečné jako automatické pravidlo.
+
+Čtvrtý typ je změna datové hranice. Tým začal pracovat s jinými vstupy, zrušil starý tracker, přidal nový formulář, změnil retenci nebo přesunul službu k jinému provozovateli. Tady výřez kontrolujte přísně. Pokud obsahuje starou větu typu "stačí nám existující signály", musí být jasné, které signály to dnes jsou a jestli pořád vznikají legitimně při práci.
+
+### Mini test platnosti
+
+Nejdřív vezměte finální výřez, ne původní historii. Historie může pomoct později, ale první otázka zní: obstojí aktuální pracovní pomůcka v novém kontextu?
+
+Použijte pět otázek:
+
+```text
+Je situace použití pořád stejná?
+
+Je publikum nebo role pořád stejná?
+
+Vede pravidlo ke stejnému rozhodnutí?
+
+Je příklad pořád pravdivý?
+
+Drží privacy-first hranice i v novém provozu?
+```
+
+Když projde všech pět odpovědí, výřez neotevírejte. Zapište jen, že kontrola proběhla a kontext změnu nevyžaduje. Když selže jedna odpověď, udělejte lokální opravu. Když selžou dvě nebo více odpovědí, zvažte, jestli výřez nemá dostat nový stav: rozdělit, vrátit do historie, nebo převést do jiné formy.
+
+Příklad:
+
+```text
+Původní výřez:
+U poptávek na sledování chování nejdřív navrhujeme menší rozhodovací důkaz z existujících signálů.
+
+Změna kontextu:
+Tým začal stejnou větu používat ve veřejném článku pro zákazníky.
+
+Mini test:
+Situace není stejná. Publikum není stejné. Pravidlo je stále správné. Příklad je použitelný jen po zobecnění. Privacy-first hranice drží, ale nesmí odhalit interní sales postup.
+
+Rozhodnutí:
+Veřejný výřez dostane vlastní formulaci. Interní sales výřez zůstává v šabloně beze změny.
+```
+
+Výsledek není velký přepis. Je to rozdělení dvou použití, která se začala tvářit jako jedno. Tím se chrání přesnost i provozní klid.
+
+### Co neopravovat
+
+Při změně kontextu je lákavé otevřít celý starý příběh. Nedělejte to, pokud nemusíte. Kontrola platnosti výřezu nemá být revize celé kapitoly, obchodní strategie ani dokumentační úklid.
+
+Typicky neopravujte:
+
+- formulace, které jsou jen trochu méně elegantní, ale pořád vedou ke správné práci;
+- historické rozhodovací záznamy, pokud nejsou v aktivním pracovním místě;
+- staré příklady, které už nejsou používané;
+- sousední výřezy, které změna kontextu nezasáhla;
+- metriky a reporting, pokud pro kontrolu stačí jeden reálný pracovní průchod.
+
+Změna kontextu má být skalpel, ne pozvánka na rekonstrukci dokumentace. Opravte jen to, co by dnes vedlo ke špatnému rozhodnutí, zbytečné datové stopě nebo zavádějícímu slibu.
+
+### Privacy-first kontrola změny kontextu
+
+Změna kontextu je časté místo, kde se nenápadně rozšíří sběr dat. Starý výřez řekl "ověříme na existujících podkladech", nový tým si pod tím představí export z CRM. Starý příklad řekl "agregované signály", nový kanál z toho udělá detailní sledování chování. Proto se vždy ptejte:
+
+```text
+Změnil se typ dat, se kterými výřez počítá?
+
+Změnilo se místo, kde data vznikají nebo kde se ukládají?
+
+Změnil se okruh lidí, kteří výřez nebo příklady uvidí?
+
+Nevzniká kvůli nové situaci nová kopie osobních nebo zákaznických dat?
+
+Je pořád možné ověřit výřez bez nového trackingu?
+```
+
+Pokud odpověď ukáže nové datové riziko, nejdřív zmenšete výřez. Často stačí odstranit konkrétní příklad, nahradit ho zobecněným vzorem nebo přesunout citlivou část zpět do interního rozhodovacího záznamu. Privacy-first provoz neznamená, že se výřez nesmí vyvíjet. Znamená, že se při každém přesunu znovu ptáte, kdo co uvidí a proč to vůbec potřebuje.
+
+Codyho komentář: nejzrádnější věta v dokumentaci je "tohle je přece jen stejný princip". Princip možná ano. Kontext často ne. A právě kontext rozhoduje, jestli je výřez užitečná pomůcka, nebo stará věta na špatném místě.
+
+### Karta kontroly kontextu
+
+```text
+Název výřezu:
+
+Původní situace použití:
+
+Co se změnilo:
+- publikum / nabídka / pracovní místo / datová hranice / jiné
+
+Dnešní situace použití:
+
+Mini test platnosti:
+- situace stejná / změněná
+- publikum stejné / změněné
+- rozhodnutí stejné / změněné
+- příklad pravdivý / nepravdivý
+- privacy-first hranice drží / nedrží
+
+Rozhodnutí:
+- nechat beze změny
+- lokálně opravit
+- rozdělit na dva výřezy
+- vrátit do historie
+- nahradit jinou formou
+
+Jedna oprava, pokud je potřeba:
+
+Co z historie neotevíráme:
+
+Jaká data kvůli tomu nesbíráme:
+
+Vlastník:
+
+Návratový signál:
+```
+
+Karta má bránit zbytečné revizi. Když výřez pořád platí, klidně to napište a zavřete. Když neplatí, změňte jen nejbližší část. Když se z kontroly začne klubat větší téma, založte novou pracovní smyčku s vlastní otázkou a nepředstírejte, že jde pořád jen o údržbu výřezu.
+
+### Mini workshop na 9 minut
+
+1. Minuta 1: přečtěte finální výřez bez původní historie.
+2. Minuty 2 až 3: pojmenujte konkrétní změnu kontextu.
+3. Minuty 4 až 5: projděte pět otázek mini testu platnosti.
+4. Minuta 6: zkontrolujte datovou hranici a viditelnost výřezu.
+5. Minuta 7: vyberte jeden rozhodovací stav.
+6. Minuta 8: napište jednu opravu, nebo větu "beze změny".
+7. Minuta 9: zapište, co z historie neotevíráte.
+
+Poslední minuta je důležitá. Bez ní se kontrola kontextu snadno změní v archeologii. Tým začne zkoumat starou debatu, místo aby rozhodl, jestli dnešní pracovní pomůcka pořád funguje.
+
+### Checklist kontroly kontextu
+
+- Víme, který výřez kontrolujeme?
+- Pojmenovali jsme konkrétní změnu kontextu?
+- Neotevíráme výřez jen kvůli obecnému pocitu zlepšování?
+- Zkontrolovali jsme situaci, publikum, rozhodnutí, příklad a privacy-first hranici?
+- Pokud se změnilo publikum, nezůstaly ve výřezu interní detaily?
+- Pokud se změnila nabídka, není příklad zavádějící?
+- Pokud se změnilo pracovní místo, nevzniká nová datová stopa?
+- Pokud se změnila datová hranice, víme, jaké vstupy dnes výřez předpokládá?
+- Vybrali jsme jeden rozhodovací stav?
+- Oprava je menší než problém, který řeší?
+- Zapsali jsme, co z historie vědomě neotevíráme?
+- Má výřez po kontrole vlastníka a návratový signál?
+
+Kontrola kontextu je dobrý způsob, jak udržet pracovní pomůcky živé bez toho, aby se z nich stal nekonečný dokumentační projekt. Starý výřez nemusí být věčný. Stačí, když je po každé podstatné změně pořád pravdivý, použitelný a datově střídmý.
+
 ## Pravidla rukopisu
 
 - Pišu česky, prakticky a bez nafukování.
@@ -223404,3 +223570,4 @@ První měsíční kontrola v tichém provozu je test dospělosti pravidla. Dosp
 - 2026-06-16: Doplněna úvodní podkapitola o uzavření použitelného výřezu po ověření: čtyři uzavírací stavy, stabilní pracovní místo, úklid kopií, privacy-first hranice, karta, mini workshop a checklist.
 - 2026-06-16: Doplněna úvodní podkapitola o návratu ověřeného předávacího pravidla do běžného revizního rytmu: výběr rytmu, ukončení mimořádné kontroly, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-17: Doplněna krátká úvodní poznámka, aby se při návratu k tématu přenášel jen stále platný kontext.
+- 2026-06-17: Doplněna úvodní podkapitola o ověření použitelného výřezu po změně kontextu: typy změn, mini test platnosti, privacy-first kontrola, karta, workshop a checklist.
