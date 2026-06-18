@@ -225371,8 +225371,174 @@ Když workshop skončí bez jednovětého závěru, pravidlo neuzavírejte hroma
 
 Uzavření roční inventury má po sobě zanechat méně aktivních věcí než inventura otevřela. To je dobrý výsledek. Pravidla, která chrání reálnou práci, zůstanou blízko rozhodnutí. Pravidla, která splnila účel, se vstřebají, archivují nebo odejdou. A tým si odnese čistší systém místo další vrstvy opatrně pojmenovaného nepořádku.
 
+## První běžné použití po uzavřené roční inventuře
+
+Uzavřená roční inventura ještě musí projít jedním obyčejným použitím. Ne proto, aby se z ní stal další kontrolní režim, ale aby tým ověřil, že nové stavy pravidel opravdu fungují v běžné práci. Pravidlo, které bylo vstřebané do checklistu, má člověk najít v checklistu. Archivní pravidlo nemá vyskočit jako aktivní instrukce. Vyřazené pravidlo se nemá vrátit do plánování jen proto, že někdo našel starou kartu.
+
+První běžné použití začněte bez velkého ceremoniálu. Vyberte nejbližší situaci, ve které by se některý výsledek inventury přirozeně projevil: publikace stránky s formulářem, úprava sales šablony, plánování obsahu, onboarding nového člena týmu nebo měsíční review standardů.
+
+Kontrolní otázka zní:
+
+```text
+Když se po inventuře objevila běžná pracovní situace, navedl člověka aktuální zdroj pravdy správně bez návratu starého inventurního režimu?
+```
+
+Pokud ano, inventura se opravdu zavřela. Pokud ne, neznamená to automaticky, že roční závěr byl špatný. Často jen zůstala jedna stará stopa: odkaz v backlogu, archivní poznámka bez štítku, duplicitní checklist nebo komentář, který pořád vypadá jako aktivní úkol.
+
+### Co při prvním použití sledovat
+
+Sledujte jen čtyři věci:
+
+- Zdroj pravdy: člověk narazil na aktuální checklist, šablonu, index nebo archiv.
+- Stav pravidla: bylo jasné, zda je pravidlo živé, vstřebané, archivní nebo vyřazené.
+- Chování: člověk udělal běžný pracovní krok bez otevírání staré inventury.
+- Datová stopa: kvůli nejasnosti nevznikl nový export, kopie, evidence nebo sledování.
+
+Příklad:
+
+```text
+Situace:
+Marketing připravuje novou landing page s kontaktním formulářem.
+
+Výsledek roční inventury:
+Pravidlo o datové větě je vstřebané do publikačního checklistu.
+
+Co se stalo:
+Editor otevřel publikační checklist, našel bod k vysvětlení sběru dat a formulář upravil bez hledání staré samostatné kontroly.
+
+Výsledek:
+První běžné použití drží.
+
+Privacy-first dopad:
+Nevznikl nový seznam formulářů ani ruční evidence kontrol. Ochrana žije přímo v publikační práci.
+```
+
+Příklad lokálního tření:
+
+```text
+Situace:
+Obchod upravuje discovery šablonu.
+
+Výsledek roční inventury:
+Staré pravidlo k lead scoringu bylo archivní, aktuální ochrana žije jen v otázce na rozhodovací horizont.
+
+Co se stalo:
+V backlogu pořád zůstala karta "dopracovat automatický scoring" bez poznámky, že je archivní.
+
+Výsledek:
+Neotevíráme scoring. Opravujeme stav jedné backlogové karty a doplňujeme odkaz na aktuální šablonu.
+```
+
+Tady není důvod znovu svolávat inventuru. Problém neleží v rozhodnutí, ale v jednom pracovním místě, které ještě nese starý stav.
+
+### Tři výsledky prvního použití
+
+Po prvním použití vyberte jeden ze tří výsledků:
+
+- Drží: aktuální stav pravidla vedl práci bez zvláštní péče.
+- Lokálně dočistit: rozhodnutí je správné, ale jedno místo pořád mate.
+- Znovu otevřít inventurní závěr: běžné použití ukázalo, že roční stav neodpovídá realitě.
+
+`Drží` znamená konec zvláštní pozornosti. Zapište krátkou větu do pracovního logu nebo changelogu a nechte pravidlo dál žít tam, kam bylo při inventuře přesunuté.
+
+`Lokálně dočistit` znamená opravit jedno místo. Typicky přepsat stav karty, odstranit starý odkaz, označit archiv, doplnit návratový signál nebo smazat dočasný podklad. Neznamená to otevírat další audit.
+
+`Znovu otevřít inventurní závěr` používejte jen tehdy, když běžné použití ukázalo skutečný rozpor. Například pravidlo bylo označené jako vstřebané, ale žádný používaný checklist ho ve skutečnosti neobsahuje. Nebo pravidlo bylo vyřazené, ale tým bez něj opakovaně dělá rozhodnutí, které zvyšuje riziko nebo datovou stopu.
+
+### Jak opravit lokální tření
+
+Lokální dočištění má mít jednu větu rozsahu:
+
+```text
+Opravujeme pouze:
+Znovu neotevíráme:
+```
+
+Příklad:
+
+```text
+Opravujeme pouze:
+Stav staré backlogové karty k lead scoringu a odkaz na aktuální discovery šablonu.
+
+Znovu neotevíráme:
+Automatický scoring, nové pole ve formuláři ani obohacování kontaktů.
+```
+
+Tato věta chrání práci před nenápadným návratem starého rozsahu. Když se při opravě objeví druhé a třetí místo se stejným problémem, zastavte se a napište novou otázku. Možná nejde o lokální tření, ale o slabý zdroj pravdy po inventuře.
+
+### Privacy-first kontrola prvního použití
+
+První použití po roční inventuře nesmí vytvořit novou kontrolní infrastrukturu. Nezavádějte evidenci, kdo použil checklist. Nevytvářejte nový dashboard pravidel. Neukládejte screenshoty jen proto, že ověřujete, zda se závěr propsal.
+
+Stačí minimální záznam:
+
+```text
+Použitá situace:
+Výsledek:
+Jedna oprava, pokud vznikla:
+Co dál nesbíráme ani neměříme:
+```
+
+Privacy-first hodnota je právě v tom, že systém funguje bez dodatečného dohledu. Pokud po inventuře potřebujete sledovat každé použití pravidla, možná pravidlo nežije ve správném pracovním místě.
+
+Codyho komentář: dobrá roční inventura se pozná podle toho, že další člověk nemusí vědět, že nějaká roční inventura proběhla. Prostě otevře správnou šablonu a udělá správnou věc. Krása. Trochu nudná, ale velmi použitelná.
+
+### Karta prvního použití po roční inventuře
+
+```text
+Pravidlo nebo skupina pravidel:
+
+Výsledek roční inventury:
+- živé / vstřebané / archivní / vyřazené
+
+Běžná pracovní situace:
+
+Kde měl člověk najít aktuální stav:
+
+Co se reálně stalo:
+
+Výsledek:
+- drží / lokálně dočistit / znovu otevřít inventurní závěr
+
+Lokální oprava, pokud existuje:
+
+Co znovu neotevíráme:
+
+Co uklízíme:
+
+Co dál nesbíráme ani neměříme:
+
+Datum dalšího běžného rytmu:
+```
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: pojmenujte jednu běžnou situaci po inventuře.
+2. Minuta 2: najděte aktuální zdroj pravdy.
+3. Minuta 3: ověřte, zda stav pravidla vedl práci bez historie.
+4. Minuta 4: vyberte výsledek: drží, lokálně dočistit, nebo znovu otevřít.
+5. Minuta 5: napište případnou jednu lokální opravu a co znovu neotevíráte.
+6. Minuta 6: zapište, jaká nová data ani měření kvůli tomu nevznikají.
+
+Workshop má skončit rychle. Pokud se táhne, pravděpodobně neověřujete první běžné použití, ale znovu diskutujete inventurní stav. To je jiné téma a má mít vlastní stop podmínku.
+
+### Checklist prvního použití po roční inventuře
+
+- Vybrali jsme jednu běžnou pracovní situaci, ne nový audit?
+- Našel člověk aktuální zdroj pravdy tam, kde pracuje?
+- Bylo jasné, zda je pravidlo živé, vstřebané, archivní nebo vyřazené?
+- Nevrátila se stará inventurní tabulka jako aktivní návod?
+- Pokud vzniklo tření, víme, zda jde o lokální dočištění nebo skutečný rozpor?
+- Opravujeme jen jedno místo, pokud stačí lokální zásah?
+- Zapsali jsme, co znovu neotevíráme?
+- Nevznikla nová evidence používání pravidel, lidí, dokumentů ani klikání?
+- Je jasné, kdy se pravidlo vrací do běžného rytmu bez zvláštní pozornosti?
+
+První běžné použití má potvrdit, že roční inventura nezůstala jako dokument nad prací, ale propsala se do práce samotné. Když drží, není potřeba další kontrolní vrstva. Když drhne, opravte nejbližší místo. A když se ukáže skutečný rozpor, otevřete nový závěr vědomě, ne jako tajný návrat starého systému.
+
 ## Pracovní log
 
+- 2026-06-18: Doplněna úvodní podkapitola o prvním běžném použití po uzavřené roční inventuře: ověření zdroje pravdy, tři výsledky použití, lokální dočištění, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-06-18: Doplněna úvodní podkapitola o uzavření první roční inventury po půlročním pravidle: uzavírací výsledky, změny pracovních míst, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-17: Doplněna úvodní podkapitola o první roční inventuře po uzavření půlročního pravidla: čtyři roční stavy, ověření současného pracovního místa, privacy-first úklid stop, karta a checklist.
 - 2026-06-17: Doplněna úvodní podkapitola o uzavření druhé půlroční kontroly pravidla: čtyři uzavírací stavy, propsání do pracovních míst, vyřazení bez ztráty paměti, privacy-first úklid stop, karta, mini workshop a checklist.
