@@ -227707,8 +227707,167 @@ Workshop má skončit rozhodnutím, ne náladou. Pokud tým neumí vybrat stav, 
 
 Ověření uzavření druhého návratového signálu má být poslední lehký dotek, ne další kapitola života pravidla. Když drží, vraťte ho do běžného rytmu. Když nedrží, opravte přesně zjištěné místo. A když ukáže novou smyčku, otevřete ji čistě, s vlastním důvodem a bez tahání starých dat za sebou.
 
+## Návrat do tichého provozu po ověření druhého návratového signálu
+
+Když se uzavření druhého návratového signálu ověřilo při dalším přirozeném použití, přichází nenápadný, ale důležitý krok: vrátit pravidlo do tichého provozu. Tichý provoz neznamená, že se o věc nikdo nestará. Znamená, že už nepotřebuje zvláštní pozornost, mimořádné kontroly, samostatné poznámky ani opakované připomínání na každé schůzce.
+
+Tohle je místo, kde se dobrý tým liší od týmu, který má rád procesy trochu moc. Dobrý tým ověřenou věc uklidí, nechá ji bydlet v běžném pracovním místě a nastaví návratový signál. Procesově přehřátý tým kolem ní postaví nový rituál, protože "se to osvědčilo". Jenže všechno, co se osvědčilo, nemusí být nová agenda. Někdy je nejlepší důkaz kvality právě to, že pravidlo může zmizet do normální práce.
+
+Začněte uzavírací větou:
+
+```text
+Ověření drží, proto pravidlo vracíme do tichého provozu a mimořádnou pozornost ukončujeme.
+```
+
+Pokud ověření nedrželo, tuto část nepoužívejte. Vraťte se k výslednému stavu z ověření: jedno dočištění, slabý přenos nebo nová smyčka. Tichý provoz je odměna za stabilní chování, ne koberec, pod který se zamete nepohodlná nejistota.
+
+### Co znamená tichý provoz
+
+Tichý provoz má čtyři praktické znaky:
+
+- Pravidlo má jedno kanonické místo: šablonu, checklist, rozhodovací kartu, runbook, brief nebo zdroj pravdy.
+- Běžný člověk ho umí použít bez znalosti celé historie návratových signálů.
+- Kontrola probíhá jen v existujícím rytmu: měsíční review, kvartální revize, běžné předání nebo další přirozené použití.
+- Návrat se otevře jen při konkrétním návratovém signálu, ne při obecném pocitu, že by se "na to někdo mohl podívat".
+
+Tiché pravidlo proto nesmí být tajné. Musí být viditelné tam, kde ho člověk potřebuje. Rozdíl je v tom, že už se kolem něj nevede mimořádná debata. Když někdo navrhuje nové formulářové pole, najde datovou otázku přímo v šabloně. Když někdo předává obsah do publikace, najde privacy-first kontrolu v publikačním checklistu. Když někdo spouští novou automatizaci, najde hranici lidské kontroly v provozní kartě.
+
+Praktický příklad:
+
+```text
+Ověřený závěr:
+Nové údaje ve formuláři musí mít zapsaný účel, rozhodnutí, retenční hranici a vlastníka.
+
+Tichý provoz:
+Pravidlo zůstává jen v šabloně datové karty a v checklistu před spuštěním formuláře.
+
+Co rušíme:
+Samostatnou poznámku "hlídat formulářová pole po druhém signálu".
+
+Návratový signál:
+Nové pole se objeví bez účelu, nebo tým neumí říct, jaké rozhodnutí podle údaje udělá.
+```
+
+Tím se pravidlo neoslabuje. Naopak se zbavuje berliček. Pokud funguje jen tehdy, když si všichni pamatují poslední drama, není to pravidlo. Je to týmová historka v pracovním převleku.
+
+### Tři věci odstranit
+
+Při návratu do tichého provozu odstraňte tři druhy zbytků.
+
+První jsou mimořádné připomínky. Patří sem dočasné položky v agendě, ruční kontrolní tabulky, komentáře typu "ještě sledovat", samostatné kartičky bez vlastního rozhodnutí nebo staré poznámky v chatu. Pokud pravidlo drží, tyto zbytky už jen šumí.
+
+Druhé jsou duplicitní opory. Stejná věta často skončí v checklistu, šabloně, rozhodovacím logu, komentáři v ticketu a ještě v interní poznámce. Vyberte jedno kanonické místo a ostatní buď smažte, zkraťte na odkaz, nebo archivujte jako historii. Duplicitní opora vypadá bezpečně, dokud se nezačne lišit. Pak tým neví, která verze platí.
+
+Třetí jsou staré důkazy. Ověření druhého signálu mohlo použít příklady, pracovní kopie, anonymizované výřezy, interní poznámky nebo dočasné srovnání. Po návratu do tichého provozu si nechte jen závěr, který má budoucí hodnotu. Osobní údaje, screenshoty, exporty a kopie ponechte v původním systému, anonymizujte nebo smažte podle retenčních pravidel.
+
+Krátká úklidová věta může vypadat takto:
+
+```text
+Zachováváme pravidlo v kanonické šabloně, mažeme dočasnou kontrolní poznámku a do rozhodovací paměti přenášíme jen zobecněný závěr bez osobních údajů.
+```
+
+### Návratový signál místo další kontroly
+
+Největší chyba po úspěšném ověření je přidat další kontrolu "pro jistotu". Pokud nebyl nalezen nový důvod, jistota se tím často nezvýší. Jen vznikne další místo, kde někdo musí něco potvrdit.
+
+Lepší je napsat návratový signál:
+
+```text
+Téma znovu otevíráme jen tehdy, když:
+```
+
+Za dvojtečku patří pozorovatelná situace. Ne nálada, ne hypotéza, ne "až bude čas". Dobré návratové signály:
+
+- Nové pracovní místo použije pravidlo bez účelu nebo vlastníka.
+- Člověk mimo původní diskusi pravidlo nenajde v kanonickém místě.
+- Při běžném použití vznikne nový údaj, export nebo tracker bez rozhodovací potřeby.
+- Dvě různé šablony začnou dávat odlišné pokyny pro stejnou situaci.
+- Zákazník nebo tým opakovaně narazí na stejnou hranici, kterou pravidlo mělo vysvětlit.
+
+Špatné návratové signály:
+
+- "Podíváme se na to příště."
+- "Až bude víc dat."
+- "Kdyby se to někomu nezdálo."
+- "Jednou za čas zkontrolovat."
+
+Ty špatné signály nejsou signály. Jsou to otevřené dveře pro budoucí rozplizlost. Ano, někdy je potřeba plánovaná revize. Ale ta má patřit do existujícího rytmu, ne vzniknout jako zvláštní hlídka nad pravidlem, které právě prokázalo, že funguje.
+
+### Karta návratu do tichého provozu
+
+```text
+Pravidlo nebo pracovní místo:
+
+Druhý návratový signál:
+
+Výsledek ověření:
+- drží / jedno dočištění uzavřeno / slabý přenos opraven / nová smyčka oddělena
+
+Kanonické místo, kde pravidlo zůstává:
+
+Co rušíme:
+- mimořádné připomínky:
+- duplicitní opory:
+- dočasné důkazy:
+
+Co ponecháváme:
+
+Co výslovně nepřenášíme:
+
+Návratový signál:
+Téma znovu otevíráme jen tehdy, když:
+
+Privacy-first úklid:
+- co mažeme:
+- co anonymizujeme:
+- co necháváme v původním zdroji:
+- jaký zobecněný závěr přenášíme:
+
+Běžný revizní rytmus, ve kterém se pravidlo může znovu objevit:
+
+Vlastník:
+
+Datum:
+```
+
+Karta má být krátká. Pokud se z ní stane nová dokumentace o celé historii pravidla, něco se pokazilo. Návrat do tichého provozu má historii uzavřít, ne znovu vyprávět.
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: přečtěte výsledek ověření druhého signálu.
+2. Minuta 2: potvrďte jedno kanonické místo pravidla.
+3. Minuta 3: napište, které mimořádné připomínky rušíte.
+4. Minuta 4: vyberte duplicitní opory k odstranění nebo nahrazení odkazem.
+5. Minuta 5: udělejte privacy-first úklid dočasných důkazů.
+6. Minuta 6: napište konkrétní návratový signál.
+7. Minuta 7: určete běžný rytmus, ve kterém se pravidlo může znovu potkat s realitou.
+
+Workshop končí větou, ne plánem dalších schůzek:
+
+```text
+Pravidlo je zpět v tichém provozu; další práce vznikne až při návratovém signálu nebo v běžném revizním rytmu.
+```
+
+Pokud někdo navrhne ještě jednu kontrolu, zeptejte se: "Jaký konkrétní návratový signál už nastal?" Pokud žádný, kontrolu nezakládejte. Je to tvrdé, ale zdravé. Práce se má vracet kvůli realitě, ne kvůli neklidu.
+
+### Checklist návratu do tichého provozu
+
+- Ověření druhého návratového signálu má uzavřený výsledek?
+- Pravidlo má jedno kanonické místo?
+- Člověk mimo původní diskusi ho dokáže použít bez celé historie?
+- Zrušili jsme mimořádné připomínky, které už nemají účel?
+- Odstranili jsme nebo nahradili odkazem duplicitní opory?
+- Necháváme v rozhodovací paměti jen zobecněný závěr, ne osobní údaje nebo pracovní kopie?
+- Máme konkrétní návratový signál místo neurčité další kontroly?
+- Víme, v jakém běžném rytmu se pravidlo může znovu objevit?
+- Neotevíráme starý rozsah jen proto, že jsme u tématu zrovna byli?
+- Je jasné, kdo vlastní kanonické místo pravidla?
+
+Tichý provoz je zdravý konec malé systémové práce. Pravidlo nezmizí, jen přestane vyžadovat pozornost navíc. A to je často největší úspora: tým nemusí pokaždé dokazovat, že se poučil. Stačí, když poučení tiše vede další běžný krok.
+
 ## Pracovní log
 
+- 2026-06-18: Doplněna úvodní podkapitola o návratu do tichého provozu po ověření druhého návratového signálu: kanonické místo pravidla, rušení mimořádných připomínek, návratový signál místo další kontroly, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-18: Doplněna úvodní podkapitola o ověření uzavření druhého návratového signálu při dalším přirozeném použití: čtyři výsledné stavy, privacy-first ověření bez nového sledování, karta, mini workshop a checklist.
 - 2026-06-18: Doplněna úvodní podkapitola o uzavření druhého návratového signálu po tichém provozu: uzavření podle výsledného stavu, přenos pravidla, zrušení mimořádného sledování, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-18: Doplněna úvodní podkapitola o druhém návratovém signálu po tichém provozu: porovnání s prvním signálem, čtyři výsledné stavy, přenos pravidla do dalšího pracovního místa, privacy-first práce s opakováním, karta, mini workshop a checklist.
