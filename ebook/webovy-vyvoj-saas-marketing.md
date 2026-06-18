@@ -228454,8 +228454,180 @@ Pokud tuto větu neumíte doplnit, neuzavírejte. Buď nemáte jasno ve výsledk
 
 Uzavřené druhé použití má být nenápadné. V ideálním případě po něm zůstane přesnější pracovní místo, jedna věta v paměti a méně dočasných stop než před ověřením. To je dobrý obchod: pravidlo je použitelnější, tým klidnější a datová stopa menší.
 
+## Stabilní klid po uzavření druhého běžného použití
+
+Po uzavření druhého běžného použití přichází zvláštní moment. Pravidlo fungovalo, lokální opravy jsou hotové, návratový signál existuje a nikde nehoří červená kontrolka. Právě tady má tým často tendenci přidat ještě jednu "pojistnou" kontrolu. Vypadá to rozumně: když už jsme tomu věnovali pozornost, tak ať nám to neuteče. Jenže tím se tichý provoz zase mění v trvalý dohled.
+
+Stabilní klid je stav, kdy pravidlo zůstává dostupné, ale nevyžaduje vlastní agendu. Není to zapomenutí. Je to vědomé rozhodnutí, že další práce vznikne až z reálného signálu, ne z potřeby mít o všem pravidelný pocit kontroly.
+
+Začněte větou:
+
+```text
+Po druhém běžném použití necháváme pravidlo ve stabilním klidu a další práci otevřeme pouze při signálu:
+```
+
+Za tuto větu doplňte konkrétní situaci. Například:
+
+```text
+Po druhém běžném použití necháváme pravidlo ve stabilním klidu a další práci otevřeme pouze při signálu: dva nové formuláře za sebou začnou sbírat údaje bez pojmenovaného rozhodnutí.
+```
+
+Nebo:
+
+```text
+Po druhém běžném použití necháváme pravidlo ve stabilním klidu a další práci otevřeme pouze při signálu: nový člověk pravidlo nenajde v běžném pracovním místě a musí se ptát v chatu.
+```
+
+Tato věta je malá pojistka proti údržbové inflaci. Tým ví, že pravidlo nezmizelo, ale zároveň nemusí vyrábět další schůzku, tabulku ani kontrolní rituál.
+
+### Co ve stabilním klidu zůstává
+
+Ve stabilním klidu mají zůstat jen tři věci:
+
+- Kanonické pracovní místo: odkaz, šablona, checklist nebo index, kde člověk pravidlo opravdu použije.
+- Krátká rozhodovací paměť: jedna až tři věty, co poslední ověření potvrdilo.
+- Návratový signál: přesná situace, která téma znovu otevře.
+
+Všechno ostatní je podezřelé. Pokud po uzavření pořád existuje "pomocná tabulka", "dočasný export", "sledovací kanál", "kontrolní poznámka" nebo "ještě se občas podíváme", stabilní klid ve skutečnosti nenastal. Máte jen měkce pojmenovaný dohled.
+
+Praktický příklad:
+
+```text
+Pravidlo:
+Marketingový formulář sbírá jen údaje, které slouží k pojmenovanému rozhodnutí.
+
+Kanonické místo:
+Checklist před publikací formuláře.
+
+Rozhodovací paměť:
+Dvě běžná použití potvrdila, že tým dokáže zkrátit pole bez samostatného privacy review. Pravidlo zatím nepřenášíme na interní CRM poznámky.
+
+Návratový signál:
+Vrátíme se, pokud dva nové formuláře za sebou přidají pole bez zapsaného účelu.
+```
+
+Tohle stačí. Když pravidlo potřebuje víc podpěr, možná ještě není ve stabilním klidu. Když potřebuje méně, tím lépe; klid není soutěž v dokumentaci.
+
+### Co ze stabilního klidu odstranit
+
+Odstraňujte hlavně opory, které vznikly jen kvůli ověřování. Typicky:
+
+- kontrolní kopie starých formulářů;
+- screenshoty před a po, pokud už z nich nezůstává rozhodovací hodnota;
+- chatové připomínky typu "nezapomeňte na nové pravidlo";
+- ruční seznamy lidí, kteří mají pravidlo zkontrolovat;
+- zvláštní měření nebo eventy vytvořené jen pro ověřovací období.
+
+Odstranění neznamená smazat historii rozhodnutí. Znamená odlišit stopu, která pomáhá budoucí práci, od stopy, která jen dokazuje, že se tým snažil. Budoucí práce nepotřebuje archiv snahy. Potřebuje najít správné pravidlo v okamžiku, kdy ho má použít.
+
+Pokud se bojíte něco smazat, položte si otázku:
+
+```text
+Kdyby se k tématu za tři měsíce vrátil nový člověk, pomůže mu tato stopa udělat rozhodnutí, nebo ho jen zatíží historií ověřování?
+```
+
+Jestli pomůže, zobecněte ji a dejte do rozhodovací paměti. Jestli zatíží, ukliďte ji podle retenčního pravidla. Ano, mazání "pro jistotu" podkladů je emocionálně méně uspokojivé než jejich hromadění. Ale právě proto je to disciplína, ne koníček.
+
+### Stabilní klid není zákaz změn
+
+Stabilní klid neříká, že se pravidlo nesmí nikdy změnit. Říká jen, že změna potřebuje důvod. Ten důvod může přijít z nového segmentu, nového formuláře, nového produktu, legislativní změny, bezpečnostního incidentu nebo opakovaného tření v běžné práci. Co ale nestačí, je neurčitý pocit, že by pravidlo mohlo být "ještě lepší".
+
+Rozlišujte tři situace:
+
+- Nový signál: otevřete malou smyčku podle návratového signálu.
+- Nový kontext: nejdřív zkontrolujte, co ze starého pravidla pořád platí.
+- Nový nápad: zapište ho do backlogu, ale neotevírejte stabilní pravidlo bez signálu.
+
+Třetí bod je nejtěžší. Chytré týmy mají hodně dobrých nápadů a právě proto musí mít dobré brzdy. Nápad může být užitečný, ale pokud nemá pracovní místo, důvod a ověření, nemá automatické právo rušit stabilní klid.
+
+Codyho komentář: stabilní klid je manažersky nevděčný, protože se špatně prodává v reportu. "Nic jsme nepřidali, nic jsme nesledovali a systém fungoval" zní skoro podezřele. Přitom je to často přesně ten výsledek, kvůli kterému má smysl dělat provozní disciplínu.
+
+### Privacy-first stabilizace
+
+Privacy-first stabilní klid má jednoduchou ambici: po uzavření pravidla má zůstat méně datové stopy, než kolik vzniklo při ověřování. Pokud ověřování přidalo nové měření, exporty nebo kopie osobních údajů, stabilizace je musí buď zrušit, nebo jasně zdůvodnit.
+
+Použijte trojici otázek:
+
+```text
+Co jsme při ověřování sbírali jen dočasně?
+
+Co musí zůstat pro budoucí rozhodnutí?
+
+Co můžeme nahradit zobecněným závěrem?
+```
+
+Příklad:
+
+```text
+Dočasně jsme porovnávali vyplněná pole u pěti poptávek. Pro budoucí rozhodnutí nepotřebujeme konkrétní osoby ani celé zprávy. Do rozhodovací paměti ukládáme pouze zobecněný závěr: nový formulář umí kvalifikovat poptávku bez telefonního čísla v prvním kroku.
+```
+
+Takový zápis drží hodnotu důkazu a zároveň netahá osobní údaje do další vrstvy dokumentace. To je praktická privacy-first práce: ne jen hezké prohlášení v patičce webu, ale každodenní odmítnutí zbytečné datové lenosti.
+
+### Karta stabilního klidu
+
+```text
+Pravidlo nebo pracovní místo:
+
+Poslední uzavřené použití:
+
+Kanonické místo, kde pravidlo zůstává:
+
+Rozhodovací paměť, která zůstává:
+
+Co po ověření odstraňujeme:
+
+Co výslovně dál nesledujeme:
+
+Co výslovně nerozšiřujeme:
+
+Návratový signál:
+
+Privacy-first úklid:
+
+Vlastník kanonického místa:
+
+Datum:
+```
+
+Karta stabilního klidu má být poslední zápis před tichem. Pokud po ní vzniká další agenda, vraťte se k otázce, jestli opravdu uzavíráte, nebo jen měníte název kontrolního režimu.
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: přečtěte uzavření druhého běžného použití.
+2. Minuta 2: ověřte, kde pravidlo zůstává dostupné.
+3. Minuta 3: zkraťte rozhodovací paměť na jednu až tři věty.
+4. Minuta 4: napište návratový signál.
+5. Minuta 5: vyberte dočasné stopy k odstranění.
+6. Minuta 6: pojmenujte, co dál nesledujete a nerozšiřujete.
+7. Minuta 7: určete vlastníka kanonického místa.
+
+Workshop končí větou:
+
+```text
+Pravidlo je ve stabilním klidu; další práce nezačne revizí, ale pouze návratovým signálem.
+```
+
+Pokud se někdo během workshopu snaží přidat novou kontrolu, nepřete se o nástroj. Zeptejte se, jaký konkrétní signál má kontrola zachytit a proč nestačí běžné pracovní místo. Když odpověď není jasná, kontrola je pravděpodobně jen převlečená nejistota.
+
+### Checklist stabilního klidu
+
+- Máme jedno kanonické místo, kde pravidlo zůstává dostupné?
+- Zkrátili jsme rozhodovací paměť na praktický závěr?
+- Necháváme další práci vzniknout až z návratového signálu?
+- Odstranili jsme dočasné exporty, screenshoty, kopie a pomocné tabulky?
+- Zrušili jsme mimořádné připomínky, kanály nebo ruční dohled?
+- Víme, co pravidlo teď výslovně nerozšiřuje?
+- Nepřidáváme nové měření jen proto, že jsme pravidlo právě uzavřeli?
+- Nahradili jsme osobní údaje zobecněným závěrem všude, kde to stačí?
+- Má kanonické místo vlastníka?
+- Umíme říct, při jaké konkrétní situaci se k pravidlu vrátíme?
+
+Stabilní klid je jeden z nejpraktičtějších výsledků dobrého provozu. Nezní dramaticky, ale šetří pozornost, omezuje datovou stopu a chrání tým před věčným dolaďováním něčeho, co už funguje dost dobře. A "dost dobře" je v provozu často velmi vysoká laťka, jen nemá vlastní ohňostroj.
+
 ## Pracovní log
 
+- 2026-06-18: Doplněna úvodní podkapitola o stabilním klidu po uzavření druhého běžného použití: kanonické místo pravidla, rozhodovací paměť, návratový signál, odstranění dočasných opor, privacy-first stabilizace, karta, mini workshop a checklist.
 - 2026-06-18: Doplněna úvodní podkapitola o uzavření druhého běžného použití po návratu do tichého provozu: uzavírací stavy, propsání výsledku do pracovního místa, zúžení rozsahu pravidla, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-18: Doplněna úvodní podkapitola o druhém běžném použití po návratu do tichého provozu: přenositelnost pravidla, samostatnost bez mimořádné připomínky, nerozšiřování úzkého pravidla, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-18: Doplněna úvodní podkapitola o prvním běžném použití po návratu do tichého provozu: najitelnost pravidla, rozhodnutelnost, lokální nápověda, zkrácení, privacy-first úklid, karta, mini workshop a checklist.
