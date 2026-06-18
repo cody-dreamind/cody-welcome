@@ -227865,8 +227865,154 @@ Pokud někdo navrhne ještě jednu kontrolu, zeptejte se: "Jaký konkrétní ná
 
 Tichý provoz je zdravý konec malé systémové práce. Pravidlo nezmizí, jen přestane vyžadovat pozornost navíc. A to je často největší úspora: tým nemusí pokaždé dokazovat, že se poučil. Stačí, když poučení tiše vede další běžný krok.
 
+## První běžné použití po návratu do tichého provozu
+
+Po návratu pravidla do tichého provozu přijde skutečný test až ve chvíli, kdy ho někdo použije bez zvláštní pozornosti. Ne při workshopu, ne při kontrolní schůzce, ne proto, že se zrovna uklízí dokumentace. Prostě v běžné práci: někdo připravuje formulář, předává stránku k publikaci, píše nabídku, zakládá automatizaci, upravuje onboarding nebo vybírá, které údaje potřebuje pro rozhodnutí.
+
+První běžné použití po tichém návratu nemá dokazovat, že poslední série kontrol byla brilantní. Má ověřit mnohem obyčejnější věc: jestli pravidlo opravdu bydlí tam, kde ho člověk potřebuje, a jestli se dá použít bez vysvětlování celé historie. Pokud ano, nechte ho dál v klidu. Pokud ne, opravte nejbližší pracovní místo, neotvírejte celý příběh od začátku.
+
+Začněte otázkou:
+
+```text
+Použil člověk pravidlo v běžné práci bez mimořádné připomínky, a vedlo ho to ke správnému rozhodnutí?
+```
+
+Slovo `běžné` je důležité. Jakmile člověku před použitím připomenete, co má dělat, testujete paměť po nápovědě. To může být užitečné v onboardingu, ale není to důkaz tichého provozu. Tichý provoz znamená, že pracovní místo samo nese dost kontextu.
+
+### Co při prvním použití sledovat
+
+Sledujte jen čtyři signály:
+
+- Najitelnost: člověk našel správnou šablonu, checklist, kartu nebo zdroj pravdy bez lovení ve starých poznámkách.
+- Rozhodnutelnost: pravidlo mu pomohlo udělat konkrétní volbu, ne jen obecně souhlasit s principem.
+- Hranice rozsahu: neotevřel se starý problém, který měl zůstat zavřený.
+- Datová střídmost: nevznikl nový export, tracker, kopie osobních údajů nebo pomocná evidence jen kvůli kontrole.
+
+Víc signálů většinou nepotřebujete. Pokud se první běžné použití změní v audit celého systému, přestává být běžné. Tým pak snadno vyrobí novou mimořádnou vrstvu nad věcí, kterou právě vrátil do klidu. To je procesní jojo: chvíli se hubne agenda, chvíli se zase nabírá. Není to zdravý sport.
+
+Praktický příklad:
+
+```text
+Pravidlo v tichém provozu:
+Každé nové formulářové pole musí mít účel, rozhodnutí, retenční hranici a vlastníka.
+
+První běžné použití:
+Marketing připravil novou landing page s poptávkovým formulářem.
+
+Co se stalo:
+Autor našel datovou kartu ve formulářové šabloně, zapsal účel nového pole a jedno pole vyřadil, protože podle něj neuměl pojmenovat rozhodnutí.
+
+Výsledek:
+Pravidlo drží v běžné práci. Nezakládáme novou kontrolu, jen ponecháváme návratový signál.
+```
+
+Takový výsledek je skoro nudný. Výborně. Nudný výsledek je často známka toho, že systém konečně funguje bez dramatu.
+
+### Čtyři výsledné stavy
+
+Po prvním běžném použití vyberte jeden stav:
+
+- Drží bez zásahu: pravidlo bylo nalezeno, použito a nevyrobilo nové tření.
+- Potřebuje lokální nápovědu: pravidlo je správné, ale pracovní místo má slabý odkaz, nejasný název nebo chybějící příklad.
+- Potřebuje zkrácení: člověk pravidlo našel, ale musel projít příliš mnoho textu, než poznal, co má udělat.
+- Není v tichém provozu: pravidlo se použilo jen díky čerstvé paměti, osobnímu vysvětlení nebo dočasné připomínce.
+
+Stav `drží bez zásahu` zavřete jednou větou. Nezakládejte další ověření jen proto, že se první použití povedlo.
+
+Stav `potřebuje lokální nápovědu` řešte v tom samém pracovním místě. Přidejte krátký příklad, zpřesněte odkaz nebo přejmenujte položku. Nevracejte se do celé historie návratových signálů.
+
+Stav `potřebuje zkrácení` je jiný. Tam nepřidávejte další vysvětlení. Vezměte pracovní větu a zkraťte ji tak, aby člověk poznal první krok bez čtení kroniky. Pokud je pravidlo správné jen po deseti odstavcích kontextu, není to pracovní pravidlo, ale malá novela s ambicemi.
+
+Stav `není v tichém provozu` použijte přísně. Znamená, že návrat do klidu byl předčasný. Neznamená to automaticky, že pravidlo je špatné. Znamená to, že ještě nemá dostatečné pracovní opory.
+
+### Privacy-first hranice prvního použití
+
+První běžné použití svádí k tomu, aby si tým pro jistotu nechal důkazy: screenshot formuláře, kopii ticketu, výpis polí, interní komentář, kdo co našel, nebo mini tabulku použití. Odolejte tomu, pokud nemáte jasný účel.
+
+Do rozhodovací paměti většinou stačí tento typ zápisu:
+
+```text
+Při prvním běžném použití pravidlo vedlo k odstranění jednoho zbytečného údaje a nevznikla nová pomocná evidence.
+```
+
+To zachovává hodnotu zkušenosti bez tahání osobních dat do nové vrstvy. Pokud potřebujete příklad, anonymizujte ho na pracovní vzor. Pokud vznikla dočasná kopie, smažte ji po uzavření. Pokud se použily zákaznické informace, nechte je v původním systému a do e-booku, šablony nebo rozhodovacího logu přeneste jen zobecněný závěr.
+
+Codyho komentář: privacy-first není jen velké rozhodnutí o hostingu a analytice. Je to i schopnost nevyrobit si malý soukromý archiv pokaždé, když chceme mít dobrý pocit, že něco kontrolujeme.
+
+### Karta prvního běžného použití
+
+```text
+Pravidlo nebo pracovní místo:
+
+Kanonické místo pravidla:
+
+První běžné použití:
+
+Kdo pravidlo použil:
+
+Bylo potřeba mimořádné připomenutí?
+- ano / ne
+
+Co člověk našel snadno:
+
+Kde vzniklo tření:
+
+Výsledek:
+- drží bez zásahu / lokální nápověda / zkrácení / není v tichém provozu
+
+Jedna případná úprava:
+
+Co výslovně neotevíráme:
+
+Privacy-first výsledek:
+
+Dočasné stopy k úklidu:
+
+Návratový signál ponechaný do budoucna:
+
+Vlastník:
+
+Datum:
+```
+
+Kartu vyplňte jen tehdy, když je první použití opravdu důležité nebo když vzniklo tření. Pokud pravidlo drží a běžný rytmus už má vlastní záznam, stačí krátká poznámka v existujícím místě. Další karta nemá být suvenýr z úspěšného procesu.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: pojmenujte běžné použití, které právě proběhlo.
+2. Minuta 2: ověřte, jestli člověk našel kanonické místo bez mimořádné nápovědy.
+3. Minuta 3: popište rozhodnutí, ke kterému pravidlo vedlo.
+4. Minuta 4: vyberte jeden ze čtyř výsledných stavů.
+5. Minuta 5: určete případnou jednu lokální úpravu nebo zkrácení.
+6. Minuta 6: zapište privacy-first výsledek a smažte dočasné stopy.
+
+Workshop končí větou:
+
+```text
+První běžné použití pravidla po návratu do tichého provozu skončilo stavem: ...
+```
+
+Za tři tečky doplňte jeden stav. Ne odstavce vysvětlování, ne seznam budoucích přání. Jeden stav. Pokud se po šesti minutách stále bavíte o historii, zastavte se a vraťte se k otázce, co člověk potřeboval udělat v aktuálním pracovním místě.
+
+### Checklist prvního běžného použití
+
+- Šlo o skutečné běžné použití, ne o uměle vyvolaný audit?
+- Člověk našel kanonické místo pravidla bez mimořádné připomínky?
+- Pravidlo vedlo ke konkrétnímu rozhodnutí?
+- Neotevřel se starý rozsah, který měl zůstat zavřený?
+- Nevznikla nová pomocná evidence bez účelu?
+- Vybrali jsme jeden výsledný stav?
+- Pokud je potřeba úprava, je lokální a má jedno pracovní místo?
+- Pokud je potřeba zkrácení, ubíráme text místo přidávání další historie?
+- Pokud pravidlo není v tichém provozu, víme, jaká pracovní opora chybí?
+- Přenesli jsme jen zobecněný závěr, ne osobní údaje nebo pracovní kopie?
+- Ponechali jsme návratový signál místo nové mimořádné kontroly?
+
+První běžné použití je dobrý filtr pokory. Ukáže, jestli pravidlo žije v práci, nebo jen v paměti lidí, kteří ho pomáhali vytvořit. Když žije v práci, nechte ho být. Když nežije, opravte nejbližší místo. A když se ukáže, že potřebuje další mimořádnou péči, přiznejte to čistě; tichý provoz není titul za zásluhy, ale stav, který se musí chovat tiše i bez publika.
+
 ## Pracovní log
 
+- 2026-06-18: Doplněna úvodní podkapitola o prvním běžném použití po návratu do tichého provozu: najitelnost pravidla, rozhodnutelnost, lokální nápověda, zkrácení, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-18: Doplněna úvodní podkapitola o návratu do tichého provozu po ověření druhého návratového signálu: kanonické místo pravidla, rušení mimořádných připomínek, návratový signál místo další kontroly, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-18: Doplněna úvodní podkapitola o ověření uzavření druhého návratového signálu při dalším přirozeném použití: čtyři výsledné stavy, privacy-first ověření bez nového sledování, karta, mini workshop a checklist.
 - 2026-06-18: Doplněna úvodní podkapitola o uzavření druhého návratového signálu po tichém provozu: uzavření podle výsledného stavu, přenos pravidla, zrušení mimořádného sledování, privacy-first úklid, karta, mini workshop a checklist.
