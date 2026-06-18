@@ -226435,8 +226435,141 @@ Když tým v šesté minutě neví, co dál, výchozí stav není "nechat otevř
 
 Uzavření prvního klidového rytmu má jednoduchý účel: zabránit tomu, aby se klid proměnil v další práci. Stabilní pravidlo má pokračovat bez fanfár. Slabé místo má dostat přesnou opravu. Skutečný návratový signál má dostat novou iteraci. Všechno ostatní patří do poznámek, ne do provozního závazku.
 
+## Druhý klidový rytmus po roční inventuře
+
+První klidový rytmus po roční inventuře ověřuje, že pravidlo umí přejít z mimořádného režimu zpět do normální práce. Druhý klidový rytmus ověřuje ještě důležitější věc: jestli pravidlo funguje i bez čerstvé paměti z inventury. Tým už si nepamatuje všechny důvody, proč se pravidlo ponechalo, zkrátilo nebo přesunulo. V ruce má jen běžné pracovní místo, návratový signál a vlastní rytmus údržby.
+
+To je správně. Pravidlo, které potřebuje neustálé vysvětlování roční inventury, není doopravdy stabilní. Možná je dobré, ale pořád stojí na historickém kontextu. Druhý klidový rytmus má ukázat, jestli se z něj stal normální provozní návyk.
+
+Začněte otázkou:
+
+```text
+Dokáže pravidlo projít druhým běžným rytmem bez návratu k roční inventuře, bez nové mimořádné péče a bez rozšíření datové stopy?
+```
+
+Pokud ano, pravidlo může zůstat v klidu. Pokud ne, neotevírejte hned celou roční inventuru. Nejdřív zjistěte, co přesně selhalo: pracovní místo, rytmus, vlastník, návratový signál, nebo samotné pravidlo.
+
+### Co druhý rytmus ověřuje
+
+Druhý klidový rytmus sleduje čtyři věci:
+
+- Přenositelnost: pravidlo použije někdo, kdo se neopírá o čerstvý kontext inventury.
+- Samostatnost: kanonické pracovní místo stačí bez starého inventurního zápisu.
+- Rytmus: kontrola proběhne v domluveném běžném cyklu, ne díky ruční připomínce.
+- Datová střídmost: nevznikne nový tracker, export, osobní evidence ani pomocná tabulka.
+
+Příklad:
+
+```text
+Pravidlo:
+U nového formulářového pole musí být jasný účel, vlastník a retenční hranice.
+
+Druhý klidový rytmus:
+Další kvartální kontrola formulářů po roční inventuře.
+
+Co se stalo:
+Nová landing page použila šablonu formuláře správně. Vlastník zapsal účel pole i retenci přímo do formulářové karty. Nikdo neotevíral roční inventuru.
+
+Výsledek:
+Pravidlo je přenositelné a zůstává v klidu.
+
+Privacy-first dopad:
+Nevznikl nový export formulářových průchodů ani evidence lidí, kteří checklist použili.
+```
+
+Všimněte si, že výsledek není "udělat další kontrolu". Výsledek je "nechat pravidlo pokračovat". Druhý rytmus má přinést důvěru, ne další dohled.
+
+### Čtyři výsledné stavy
+
+Po druhém klidovém rytmu vyberte jeden stav:
+
+- Drží v klidu: pravidlo funguje bez staré inventury a bez mimořádné péče.
+- Dočistit pracovní místo: pravidlo platí, ale jedno místo pořád odkazuje na starý kontext.
+- Zpřesnit rytmus: pravidlo je dobré, ale běžný rytmus ho nenese spolehlivě.
+- Otevřít návratový signál: předem popsaná situace opravdu nastala.
+
+`Drží v klidu` znamená konec zvláštní pozornosti. Zapište stav jednou větou a nepřidávejte další kontrolu jen proto, že druhý rytmus dopadl dobře.
+
+`Dočistit pracovní místo` použijte, když je chyba lokální. Například rozcestník pořád ukazuje na starý inventurní zápis, šablona má historický příklad, nebo checklist používá jazyk "po inventuře jsme rozhodli" místo přítomného pravidla. Opravte konkrétní místo a nechte rytmus běžet.
+
+`Zpřesnit rytmus` použijte, když pravidlo nemá dobrý provozní háček. Třeba kvartální kontrola existuje jen v teorii, vlastník není jasný, nebo se pravidlo připomíná až tehdy, když někdo narazí na problém. V takové situaci neupravujte hlavně text pravidla. Upravte rytmus, vlastníka nebo místo, kde se kontrola přirozeně spouští.
+
+`Otevřít návratový signál` použijte jen tehdy, když se stalo to, co bylo předem popsané jako důvod návratu. Ne když se objevil dobrý nápad. Ne když by šlo text napsat hezčeji. Ne když se někdo jednou zeptal. Návratový signál musí mít provozní dopad.
+
+### Karta druhého klidového rytmu
+
+```text
+Pravidlo:
+
+Kanonické pracovní místo:
+
+Běžný rytmus:
+
+Co z roční inventury mělo zůstat:
+
+Co už se nemělo otevírat:
+
+Druhý běžný průchod:
+
+Použil tým kanonické místo bez starého kontextu?
+- ano / ne
+
+Vznikla mimořádná péče?
+- ano / ne
+
+Návratový signál:
+- nenastal / částečný podnět / nastal
+
+Výsledek:
+- drží v klidu / dočistit pracovní místo / zpřesnit rytmus / otevřít návratový signál
+
+Jedna akce, pokud existuje:
+
+Co výslovně neotevíráme:
+
+Co dál nesbíráme, neměříme ani neexportujeme:
+
+Další běžný návrat:
+```
+
+### Privacy-first kontrola
+
+Druhý klidový rytmus je přesně místo, kde se dá zbytečně vytvořit dohled nad týmem. Tým chce mít jistotu, že pravidlo opravdu drží, a snadno sklouzne k evidenci lidí, kteří checklist použili, screenshotům průchodů, novým dashboardům nebo ručním tabulkám.
+
+To většinou nepotřebujete. Ověřujte výsledek práce:
+
+- vznikl správný pracovní výstup;
+- pravidlo bylo najitelné v kanonickém místě;
+- nebylo potřeba otevřít starou inventuru;
+- nevznikla nová kopie dat, nový export ani nový externí nástroj.
+
+Zápis může být krátký:
+
+```text
+Pravidlo prošlo druhým klidovým rytmem. Kanonické místo stačilo, návratový signál nenastal a nevzniká nová evidence používání. Dočasné poznámky z kontroly mažeme po zapsání tohoto závěru.
+```
+
+Codyho komentář: když pravidlo projde druhým klidovým rytmem, neodměňujte ho dalším dohledem. To je jako dát někomu za samostatnost nového dozorce. Vypadá to pečlivě, ale pointa utekla oknem.
+
+### Checklist druhého klidového rytmu
+
+- Proběhl druhý rytmus jako běžná práce, ne jako speciální test?
+- Použil tým kanonické pracovní místo bez roční inventury?
+- Je jasné, co z inventury zůstává platné?
+- Je jasné, co se ze starého kontextu už neotevírá?
+- Nevznikla ruční připomínka, pomocná tabulka ani nový report?
+- Pokud je potřeba údržba, týká se jednoho konkrétního místa?
+- Pokud je slabý rytmus, opravujeme rytmus místo přepisování pravidla?
+- Pokud nastal návratový signál, má nová iterace vlastní stop podmínku?
+- Nevzniká sledování lidí, klikání v dokumentaci ani nový export?
+- Uklidili jsme dočasné poznámky z kontroly?
+- Umí vlastník říct, proč pravidlo zůstává v klidu, nebo proč se opravdu otevírá?
+
+Druhý klidový rytmus je dobrý okamžik pro střídmost. Když pravidlo drží, nechte ho v normálním provozu. Když drhne jedno místo, opravte jedno místo. Když se opravdu vrátí signál, otevřete novou smyčku. Tím roční inventura nezůstane jako stín nad každou další kontrolou, ale jako užitečné rozhodnutí, které se propsalo do práce.
+
 ## Pracovní log
 
+- 2026-06-18: Doplněna úvodní podkapitola o druhém klidovém rytmu po roční inventuře: přenositelnost pravidla bez čerstvé paměti, čtyři výsledné stavy, karta kontroly, privacy-first hranice a checklist.
 - 2026-06-18: Doplněna úvodní podkapitola o uzavření prvního klidového rytmu po roční inventuře: čtyři uzavírací stavy, práce s částečným podnětem, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-18: Doplněna úvodní podkapitola o prvním klidovém rytmu po uzavřené roční inventuře: kontrola běžného rytmu, návratový signál, lokální údržba, slabý rytmus, privacy-first datová brzda, karta, mini workshop a checklist.
 - 2026-06-18: Doplněna úvodní podkapitola o uzavření druhého běžného použití po roční inventuře: čtyři uzavírací stavy, karta uzavření, lokální dočištění, návrat do klidového rytmu, privacy-first uzavření a checklist.
