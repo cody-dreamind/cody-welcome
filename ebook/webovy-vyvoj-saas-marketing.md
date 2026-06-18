@@ -49,6 +49,8 @@ Když návratový signál opravdu přijde, první odpovědí nemá být nový se
 
 Starý kontext přenášejte jen v rozsahu, který je pořád pravdivý. Pokud se změnil segment, nabídka, vlastník nebo pracovní místo, napište to do první věty návratu. Jinak tým snadno řeší dnešní situaci pravidlem, které vzniklo pro včerejší problém.
 
+Do stejné první poznámky přidejte i jednu věc, kterou ze starého kontextu nepřenášíte. Může to být starý příklad, dočasný vlastník, dávno uzavřená výjimka nebo měření, které už neodpovídá dnešní práci. Tím chráníte návrat před nenápadným balastem: používáte minulost jako oporu, ne jako batoh plný všeho, co se kdy řešilo.
+
 ## Rychlé potvrzení návratového signálu
 
 Návratový signál má chránit tým před dvěma opačnými chybami. První chyba je ignorovat skutečný problém jen proto, že už se jednou uzavřel. Druhá chyba je otevřít novou iteraci pokaždé, když někdo zahlédne nedokonalost. Rychlé potvrzení signálu je malý filtr mezi těmito dvěma extrémy.
@@ -227171,3 +227173,4 @@ Uzavření druhého běžného použití převádí roční inventuru z režimu 
 - 2026-06-17: Doplněna úvodní podkapitola o prvním běžném použití po uzavřené kontrole kontextu výřezu: najitelnost, rozhodnutelnost, klid bez mimořádné péče, privacy-first hranice, karta, mini workshop a checklist.
 - 2026-06-17: Doplněna úvodní podkapitola o druhém běžném použití po kontrole kontextu výřezu: přenositelnost bez čerstvého vysvětlení, slabý přenos, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-06-17: Doplněna úvodní podkapitola o uzavření druhého běžného použití po kontrole kontextu výřezu: čtyři uzavírací stavy, úklid pracovních stop, privacy-first zobecnění příkladů, karta, mini workshop a checklist.
+- 2026-06-18: Doplněna krátká úvodní poznámka, aby se při návratu k tématu zapsalo i to, co se ze starého kontextu záměrně nepřenáší.
