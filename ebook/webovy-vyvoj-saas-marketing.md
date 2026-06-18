@@ -225161,8 +225161,219 @@ Další kontrola:
 
 Roční inventura má zmenšit systém, ne ho oslavit. Nejlepší výsledek často není nové pravidlo, ale čistší pracovní místo: méně samostatných kontrol, méně starých stop, jasnější návratové signály a ochrana soukromí zabudovaná přímo tam, kde vzniká práce.
 
+## Uzavření první roční inventury po půlročním pravidle
+
+Roční inventura sama o sobě ještě nic neuklidí. Udělá viditelné stavy pravidel, ukáže zbytečné stopy a pojmenuje, kde ochrana opravdu žije. Uzavření inventury je krok, který z těchto zjištění udělá hotový provozní stav. Bez něj zůstane tým s tabulkou, která sice vypadá jako práce, ale příští člověk pořád neví, jestli má pravidlo použít, sloučit, archivovat nebo ignorovat.
+
+Uzavření začněte větou:
+
+```text
+Po roční inventuře pravidlo odteď:
+```
+
+Za ni doplňte jeden stav a jedno pracovní místo. Například:
+
+```text
+Po roční inventuře pravidlo odteď žije jen jako bod v publikačním checklistu. Samostatný inventurní záznam ponecháváme v archivu a další návrat otevře jen nový formulář mimo šablonu.
+```
+
+Taková věta je krátká, ale dělá tři věci najednou: říká aktuální stav, ukazuje zdroj pravdy a brání tomu, aby se inventura příště otevřela jen ze zvyku.
+
+### Čtyři uzavírací výsledky
+
+Roční inventuru uzavírejte jedním ze čtyř výsledků:
+
+- potvrdit jako živé pravidlo;
+- uzavřít jako vstřebané pravidlo;
+- převést do archivu;
+- vyřadit z aktivní paměti a ponechat návratový signál.
+
+Potvrdit jako živé pravidlo dává smysl jen tehdy, když pravidlo pořád chrání konkrétní rozhodnutí. Musí být jasné, co by se bez něj pokazilo. Například: bez pravidla o datové větě u nového typu formuláře by tým mohl znovu publikovat sběr údajů bez srozumitelného účelu. Pokud takový dopad neumíte pojmenovat, pravidlo možná není živé, jen sympatické.
+
+Uzavřít jako vstřebané pravidlo je nejlepší výsledek pro mnoho privacy-first opatření. Ochrana nezmizí, ale přestane potřebovat vlastní obal. Pravidlo žije v checklistu, šabloně, rozcestníku nebo běžném rytmu. Člověk ho potká při práci, ne při čtení historie.
+
+Převést do archivu použijte, když pravidlo vysvětluje minulost, ale nemá řídit přítomnost. Archivní záznam má být označený, krátký a nesmí vypadat jako aktivní instrukce. Jinak bude za půl roku někdo statečně plnit starý checklist, který už jen straší v rohu dokumentace.
+
+Vyřadit z aktivní paměti použijte, když pravidlo už nechrání živé rozhodnutí a ani archivní detail nepomůže běžné práci. Nechte jen návratový signál. Tím neztrácíte paměť; ztrácíte přítěž.
+
+### Co se musí změnit po uzavření
+
+Každý uzavírací výsledek má změnit aspoň jedno místo. Pokud se nezmění nic, inventura nebyla uzavřená, jen přečtená.
+
+U živého pravidla aktualizujte:
+
+- kanonické místo pravidla;
+- vlastníka;
+- další kontrolní rytmus;
+- návratový signál;
+- nejbližší pracovní situaci, kde se pravidlo používá.
+
+U vstřebaného pravidla aktualizujte:
+
+- checklist nebo šablonu, kde ochrana dál žije;
+- index pravidel, aby neukazoval na samostatnou aktivní položku;
+- archivní poznámku, že samostatný obal skončil;
+- případné staré odkazy.
+
+U archivního pravidla aktualizujte:
+
+- označení archivu;
+- krátký důvod, proč pravidlo už neřídí práci;
+- odkaz na aktuální zdroj pravdy, pokud existuje;
+- hranici, kdy se téma může vrátit.
+
+U vyřazeného pravidla aktualizujte:
+
+- aktivní index, ze kterého pravidlo zmizí;
+- návratový signál;
+- úklid pracovních kopií, exportů a starých připomínek;
+- krátký rozhodovací záznam, aby vyřazení nevypadalo jako omyl.
+
+Příklad:
+
+```text
+Výsledek inventury:
+Pravidlo o datové větě u formulářů je vstřebané.
+
+Změna v pracovním místě:
+Publikační checklist obsahuje bod "u formuláře vysvětli data a účel".
+
+Změna v indexu:
+Samostatné pravidlo přesunuto z aktivních pravidel do archivních rozhodnutí.
+
+Návratový signál:
+Nový typ formuláře mimo checklist nebo dvě stránky po sobě bez datové věty.
+
+Úklid:
+Mazat dočasné screenshoty starých formulářů, ponechat jen agregovaný závěr.
+```
+
+Tohle je uzavření. Není efektní, ale příští člověk ví, kde má začít.
+
+### Neuzavírejte inventuru hromadně
+
+Roční inventura může obsahovat víc pravidel, ale uzavření dělejte po jednotlivých pravidlech nebo po malých skupinách se stejným stavem. Hromadná věta "všechno ponechat" je pohodlná a skoro vždycky slabá. Schová rozdíl mezi pravidlem, které opravdu chrání rozhodnutí, a pravidlem, které jen nikdo nechtěl vyhodit.
+
+Praktický limit:
+
+```text
+Jedna uzavírací dávka = pravidla se stejným stavem, stejným pracovním místem a stejným vlastníkem.
+```
+
+Pokud se liší vlastník, pracovní místo nebo typ úklidu, udělejte samostatné uzavření. Jinak se stane klasika: něco se mělo smazat, něco sloučit, něco potvrdit, ale ve výsledku se jen přidá další poznámka do tabulky. Tabulka pak vypadá důležitě a systém je pořád stejně zanesený. To je byrokracie v hezkém svetru.
+
+### Privacy-first uzavření inventury
+
+Roční inventura má skončit menší datovou stopou než začala. Pokud po ní zůstane víc seznamů, exportů a screenshotů, něco se pokazilo. Cílem není dokázat, že tým byl opatrný. Cílem je, aby opatrnost byla zabudovaná do běžné práce a nezanechávala zbytečné vedlejší důkazy.
+
+Po uzavření každého pravidla napište:
+
+```text
+Ponecháváme:
+
+Slučujeme:
+
+Archivujeme:
+
+Mažeme nebo anonymizujeme:
+
+Dál nesbíráme:
+```
+
+Příklad:
+
+```text
+Ponecháváme:
+Aktuální bod v publikačním checklistu a návratový signál.
+
+Slučujeme:
+Samostatnou poznámku o datové větě do obecné části "formuláře a data".
+
+Archivujeme:
+Jednovětý důvod, proč pravidlo vzniklo.
+
+Mažeme nebo anonymizujeme:
+Screenshoty starých formulářů a seznam kontrolovaných URL.
+
+Dál nesbíráme:
+Ruční evidenci každého formuláře, kdo ho kontroloval a kdy otevřel checklist.
+```
+
+Pokud si tým chce něco ponechat "pro jistotu", musí říct, jaké budoucí rozhodnutí tím podklad usnadní. Když odpověď neexistuje, nejde o jistotu. Jde o odložený úklid.
+
+Codyho komentář: privacy-first údržba není sbírání důkazů, že jsme privacy-first. To by byla taková hezká malá pastička z dobrých úmyslů. Privacy-first údržba je schopnost smazat pomocné stopy ve chvíli, kdy ochrana už žije v samotném procesu.
+
+### Karta uzavření roční inventury
+
+```text
+Pravidlo nebo skupina pravidel:
+
+Roční stav:
+- živé / vstřebané / archivní / k vyřazení
+
+Uzavírací výsledek:
+- potvrdit jako živé
+- uzavřít jako vstřebané
+- převést do archivu
+- vyřadit z aktivní paměti
+
+Jednovětý závěr:
+
+Kde ochrana dál žije:
+
+Co se mění v pracovním místě:
+
+Co se mění v indexu nebo revizním rytmu:
+
+Co zůstává jen v historii:
+
+Co mažeme nebo anonymizujeme:
+
+Co dál nesbíráme ani neměříme:
+
+Návratový signál:
+
+Vlastník:
+
+Datum další kontroly, pokud existuje:
+```
+
+Karta má být pracovní, ne slavnostní. Pokud ji nejde vyplnit bez dlouhého vysvětlování, vraťte se k ročnímu stavu. Pravděpodobně není jasné, jestli pravidlo opravdu žije, je vstřebané, archivní, nebo k vyřazení.
+
+### Mini workshop na 9 minut
+
+1. Minuta 1: vyberte jedno pravidlo nebo malou skupinu se stejným stavem.
+2. Minuta 2: přečtěte roční stav a ověřte, že pořád sedí.
+3. Minuta 3: napište jednovětý závěr.
+4. Minuta 4: určete pracovní místo, kde ochrana dál žije nebo končí.
+5. Minuta 5: rozhodněte změnu v indexu, checklistu nebo rytmu.
+6. Minuta 6: napište návratový signál.
+7. Minuta 7: rozdělte podklady na ponechat, archivovat, smazat nebo anonymizovat.
+8. Minuta 8: určete vlastníka a další kontrolu, pokud má existovat.
+9. Minuta 9: zkontrolujte, že nevznikla nová evidence používání pravidla.
+
+Když workshop skončí bez jednovětého závěru, pravidlo neuzavírejte hromadnou poznámkou. Dejte mu stav "potřebuje rozhodnutí" a vyberte nejmenší další otázku. Lepší je přiznat jednu nejasnou položku než kontaminovat celý index mlhavým uzavřením.
+
+### Checklist uzavření roční inventury
+
+- Má každé pravidlo jeden uzavírací výsledek?
+- Je jednovětý závěr použitelný v pracovním místě?
+- Víme, kde ochrana dál žije, nebo proč končí?
+- Změnil se konkrétní checklist, index, šablona, rytmus nebo archiv?
+- Nepoužili jsme hromadné uzavření pro pravidla s různými vlastníky nebo místy?
+- Pokud pravidlo zůstává živé, víme, jaké rozhodnutí chrání?
+- Pokud je vstřebané, je ochrana opravdu v běžné práci?
+- Pokud je archivní, nemůže omylem řídit současný postup?
+- Pokud je vyřazené, zůstává konkrétní návratový signál?
+- Uklidili jsme dočasné exporty, screenshoty, staré kopie a citlivé příklady?
+- Nevznikla nová evidence lidí, klikání, dokumentů ani používání pravidel?
+- Má další kontrola vlastníka a důvod, nebo byla vědomě ukončená?
+
+Uzavření roční inventury má po sobě zanechat méně aktivních věcí než inventura otevřela. To je dobrý výsledek. Pravidla, která chrání reálnou práci, zůstanou blízko rozhodnutí. Pravidla, která splnila účel, se vstřebají, archivují nebo odejdou. A tým si odnese čistší systém místo další vrstvy opatrně pojmenovaného nepořádku.
+
 ## Pracovní log
 
+- 2026-06-18: Doplněna úvodní podkapitola o uzavření první roční inventury po půlročním pravidle: uzavírací výsledky, změny pracovních míst, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-17: Doplněna úvodní podkapitola o první roční inventuře po uzavření půlročního pravidla: čtyři roční stavy, ověření současného pracovního místa, privacy-first úklid stop, karta a checklist.
 - 2026-06-17: Doplněna úvodní podkapitola o uzavření druhé půlroční kontroly pravidla: čtyři uzavírací stavy, propsání do pracovních míst, vyřazení bez ztráty paměti, privacy-first úklid stop, karta, mini workshop a checklist.
 - 2026-06-17: Doplněna úvodní podkapitola o druhé půlroční kontrole pravidla po roce klidu: samostatná hodnota pravidla, sloučení do širšího standardu, převod do roční inventury, privacy-first úklid kontrolních stop, karta, mini workshop a checklist.
