@@ -429,6 +429,142 @@ Datum kontroly:
 
 Dobré uzavření rozpadu kontextu má zvláštní efekt: tým se po něm necítí chytřejší, ale klidnější. Ví, co už není pravda, co ještě pravda je a kde se smí udělat první další krok. To většinou stačí. Produktová práce nepotřebuje každý týden novou filozofii. Často potřebuje jen čistý stůl a jednu přesnou větu.
 
+## První průchod z nového výchozího bodu
+
+Nový výchozí bod je užitečný až ve chvíli, kdy z něj vznikne první malý průchod. Jinak zůstane jen uklizenou poznámkou: hezky oddělí starou historii od dnešní reality, ale ještě nic nezmění v produktu, webu, obchodě ani provozu. První průchod má proto jednoduchý úkol: ověřit, že nový výchozí bod opravdu vede k lepšímu pracovnímu rozhodnutí.
+
+Nezačínejte velkou změnou. Po rozpadu kontextu bývá tým citlivý na prázdné místo a snadno ho zaplní ambicí. První průchod má být naopak malý, konkrétní a trochu nudný. Vyberte jedno pracovní místo, jeden důkaz a jednu stop podmínku. Když se to nevejde do jedné věty, nejspíš už znovu otevíráte větší téma, než nový výchozí bod dovoluje.
+
+Začněte zápisem:
+
+```text
+Nový výchozí bod je:
+
+První průchod uděláme jen na:
+
+Ověříme:
+
+Stop podmínka je:
+
+Mimo rozsah zůstává:
+```
+
+Příklad:
+
+```text
+Nový výchozí bod je:
+Návštěvník před formulářem nerozlišuje audit, dlouhodobý vývoj a úvodní konzultaci.
+
+První průchod uděláme jen na:
+Textu nad poptávkovým formulářem.
+
+Ověříme:
+Jestli umí obchod u dalších pěti relevantních poptávek poznat očekávaný typ spolupráce bez dalšího vysvětlování základní nabídky.
+
+Stop podmínka je:
+Pět relevantních poptávek projde bez ručního vysvětlování rozdílu mezi auditem a dlouhodobým vývojem, nebo se opakovaně ukáže jedna konkrétní nejasnost.
+
+Mimo rozsah zůstává:
+Neměníme samotný formulář, ceník, reference ani segmentovou architekturu webu.
+```
+
+Takový první průchod je dost malý na provedení a dost konkrétní na vyhodnocení. Zároveň chrání tým před tím, aby z nového výchozího bodu hned udělal redesign celé cesty. Ano, je lákavé opravit všechno, když už jste otevřeli staré téma. Ale produktová práce není úklid sklepa o víkendu. Když vezmete do ruky všechno najednou, na konci držíte hlavně únavu.
+
+### Tři pravidla prvního průchodu
+
+První průchod po novém výchozím bodu držte třemi pravidly:
+
+- Jedno pracovní místo: stránka, e-mail, formulář, onboardingový krok, šablona, obchodní skript nebo report.
+- Jeden očekávaný výsledek: co má být po průchodu snazší, jasnější, rychlejší nebo méně rizikové.
+- Jedna hranice mimo rozsah: co se výslovně nemění, i kdyby to při práci vypadalo lákavě.
+
+Když se během průchodu objeví další problém, nezachraňujte ho bokem. Zapište ho jako samostatný podnět a vraťte se k původní stop podmínce. První průchod má potvrdit nový výchozí bod, ne sestavit nový backlog.
+
+### Jak vybrat důkaz
+
+Důkaz má vzniknout z běžné práce, ne z nového sledovacího aparátu. Pro web a SaaS typicky stačí:
+
+- několik posledních relevantních poptávek bez osobních detailů;
+- jeden reálný obchodní rozhovor shrnutý do pracovního závěru;
+- průchod onboardingem na testovacím účtu;
+- supportní otázky převedené do anonymizovaného vzoru;
+- ruční kontrola jedné šablony nebo jednoho e-mailu.
+
+Privacy-first pravidlo: pokud můžete rozhodnout ze zobecněného závěru, nekopírujte původní osobní údaje. Nepotřebujete celou zprávu zákazníka, když pro rozhodnutí stačí věta "zájemce nerozlišil audit a dlouhodobou spolupráci". Data mají nést důkaz, ne atmosféru.
+
+### Čtyři výsledky prvního průchodu
+
+Po prvním průchodu vyberte jeden ze čtyř výsledků:
+
+- Výchozí bod drží: pracovní místo i důkaz potvrdily, že nový směr je použitelný.
+- Výchozí bod je správný, ale krok byl moc široký: zmenšete další průchod na menší místo nebo užší důkaz.
+- Výchozí bod je slabý: víte, že starý kontext neplatil, ale nový zápis ještě není dost přesný.
+- Žádná práce není potřeba: staré rozhodnutí bylo správně archivované a dnešní provoz neukazuje důvod pokračovat.
+
+Výsledek `žádná práce není potřeba` není prohra. Je to dobrý konec. Znamená, že tým uklidil starý kontext, ověřil nový výchozí bod a nenašel důvod vyrábět další změnu. V privacy-first provozu je to často nejlepší možný výsledek: méně práce, méně dat, méně zbytečných stop.
+
+### Karta prvního průchodu
+
+```text
+Téma:
+
+Nový výchozí bod:
+
+První pracovní místo:
+
+Očekávaný výsledek:
+
+Nejmenší důkaz:
+
+Stop podmínka:
+
+Mimo rozsah:
+
+Privacy-first hranice:
+Jaká data nekopírujeme, nesbíráme nebo rovnou zobecníme:
+
+Výsledek:
+- výchozí bod drží
+- krok byl moc široký
+- výchozí bod je slabý
+- žádná další práce není potřeba
+
+Další krok nebo uzavření:
+
+Vlastník:
+
+Datum kontroly:
+```
+
+Karta má být pracovní, ne slavnostní. Pokud z ní vznikne dokument na půl hodiny, první průchod už je moc velký. Udržte ji tak krátkou, aby se dala vyplnit hned po průchodu a použít při příštím návratu bez dlouhého vysvětlování.
+
+### Mini workshop na 9 minut
+
+1. Minuta 1: přečtěte nový výchozí bod.
+2. Minuty 2 až 3: vyberte jedno pracovní místo.
+3. Minuty 4 až 5: napište očekávaný výsledek a stop podmínku.
+4. Minuta 6: určete nejmenší existující důkaz.
+5. Minuta 7: napište, co zůstává mimo rozsah.
+6. Minuta 8: zapište privacy-first hranici.
+7. Minuta 9: určete vlastníka a datum kontroly.
+
+Pokud se tým během devíti minut nedohodne na pracovním místě, neprodlužujte workshop. Závěr je "výchozí bod je ještě slabý" a další krok je zpřesnit jednu větu výchozího bodu, ne otevřít práci bez místa.
+
+### Checklist prvního průchodu
+
+- Máme jeden nový výchozí bod, ne nový strategický dokument?
+- Vybrali jsme přesně jedno pracovní místo?
+- Víme, jaký výsledek má být po průchodu snazší nebo jasnější?
+- Používáme nejmenší existující důkaz z běžné práce?
+- Máme stop podmínku, která průchod uzavře?
+- Je napsané, co zůstává mimo rozsah?
+- Nepřidáváme nové sledování ani kvalifikační pole jen kvůli nejistotě?
+- Zobecňujeme osobní údaje všude, kde stačí pracovní závěr?
+- Umíme po průchodu vybrat jeden ze čtyř výsledků?
+- Víme, jestli následuje další malý krok, zpřesnění výchozího bodu, nebo klid?
+
+První průchod z nového výchozího bodu má být důkazem disciplíny. Neřeší všechno, co se po rozpadu kontextu ukázalo. Řeší jen první místo, kde se dá poznat, jestli nový zápis stojí na zemi. Když projde, máte pevnější směr. Když neprojde, máte malou opravu místo velkého omylu.
+
 ## Rychlé potvrzení návratového signálu
 
 Návratový signál má chránit tým před dvěma opačnými chybami. První chyba je ignorovat skutečný problém jen proto, že už se jednou uzavřel. Druhá chyba je otevřít novou iteraci pokaždé, když někdo zahlédne nedokonalost. Rychlé potvrzení signálu je malý filtr mezi těmito dvěma extrémy.
@@ -229862,3 +229998,4 @@ První návrat po stabilním klidu je test disciplíny. Ne test toho, jestli pra
 - 2026-06-18: Doplněna úvodní podkapitola o kontrole přeneseného kontextu při návratu k tématu: platný a neplatný kontext, typy změn, privacy-first práce se starými stopami, karta, workshop a checklist.
 - 2026-06-18: Doplněna úvodní podkapitola o rozpadu přeneseného kontextu: kdy staré rozhodnutí archivovat, přerámovat otázku nebo získat novou základní realitu, včetně privacy-first hranic, karty a checklistu.
 - 2026-06-18: Doplněna úvodní podkapitola o uzavření rozpadu kontextu do nového výchozího bodu: oddělení historie, dnešní jistoty a dalšího kroku, privacy-first úklid stop, karta a checklist.
+- 2026-06-18: Doplněna úvodní podkapitola o prvním průchodu z nového výchozího bodu: jedno pracovní místo, nejmenší důkaz, stop podmínka, privacy-first hranice, karta, workshop a checklist.
