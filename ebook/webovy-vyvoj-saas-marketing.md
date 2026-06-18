@@ -226967,8 +226967,166 @@ Codyho komentář: dobré pravidlo poznáte i podle toho, že kolem sebe nepotř
 
 Uzavřený druhý klidový rytmus má být skoro nudný. Pravidlo se používá, tým ví kde ho najít, návratový signál existuje a kolem nezůstává zvláštní kontrolní aparát. To je dobrý konec dlouhé smyčky: práce nezmizela, jen přestala vyžadovat zvláštní pozornost.
 
+## První návratový signál po tichém provozu
+
+Když pravidlo prošlo druhým klidovým rytmem a vrátilo se do normálního provozu, další důležitá chvíle přijde až tehdy, když se opravdu objeví návratový signál. Ne připomínka, že by se pravidlo "dalo ještě zlepšit". Ne pocit, že stará inventura byla tak pěkně udělaná, že by stálo za to ji otevřít znovu. Skutečný návratový signál je předem zapsaná situace, která říká: pravidlo už možná nestačí dnešní práci.
+
+První reakce po tichém provozu má být klidná a malá. Tým už nemá kolem pravidla mimořádnou kontrolu, takže návrat nesmí automaticky obnovit celý starý aparát. Cílem není znovu spustit roční inventuru, postavit nový dashboard ani vytáhnout všechny staré podklady. Cílem je ověřit, jestli dnešní situace opravdu odpovídá návratovému signálu, a pokud ano, otevřít nejmenší novou smyčku.
+
+Začněte větou:
+
+```text
+Toto je návratový signál, protože se stalo:
+```
+
+Potom doplňte konkrétní událost. Ne interpretaci, ne obavu, ne obecný stav. Konkrétní událost:
+
+```text
+Toto je návratový signál, protože se u tří nových formulářových polí za sebou nepodařilo dohledat účel a retenční hranici v kanonické kartě formuláře.
+```
+
+Taková věta má dvě výhody. Zaprvé brání tomu, aby se z návratu stal rozhovor o všem, co se kolem pravidla kdy řešilo. Zadruhé ukazuje nejbližší pracovní místo: karta formuláře, ne celá dokumentace, ne celý web a ne celá datová mapa.
+
+### Tři otázky před otevřením nové smyčky
+
+Než otevřete práci, položte tři otázky:
+
+- Odpovídá dnešní situace původnímu návratovému signálu?
+- Stačí k rozhodnutí aktuální pracovní důkaz, nebo opravdu potřebujeme otevřít historii?
+- Kde je nejmenší místo, ve kterém může vzniknout oprava?
+
+První otázka chrání před falešným návratem. Pokud návratový signál říkal "tři pole bez účelu" a dnes řešíte jen to, že někdo chce jiný text nápovědy, nejde o návrat starého pravidla. Může to být dobrý podnět, ale nepatří do stejné smyčky.
+
+Druhá otázka chrání před zbytečným vytahováním starých důkazů. Pokud dnešní problém vidíte v aktuální kartě, nepotřebujete kopírovat staré screenshoty ani exporty. Historie má pomáhat, když bez ní nejde rozlišit příčinu. Nemá se otevírat ze zvyku.
+
+Třetí otázka chrání rozsah. Návratový signál nemusí znamenat, že pravidlo celé selhalo. Někdy jen ukáže, že jedno pracovní místo ztratilo oporu: chybí pole v šabloně, vlastník nevidí rozhodovací větu, nebo se nový typ práce nevejde do starého příkladu.
+
+### Čtyři výsledné stavy
+
+Po rychlém ověření vyberte jeden ze čtyř stavů:
+
+- Falešný návrat: situace se podobá starému tématu, ale neodpovídá návratovému signálu.
+- Lokální tření: signál se částečně potvrdil, ale oprava patří do jednoho pracovního místa.
+- Skutečný návrat pravidla: signál se potvrdil a pravidlo potřebuje novou smyčku.
+- Rozpad kontextu: signál se sice tváří povědomě, ale změnila se nabídka, publikum, provoz nebo data natolik, že staré pravidlo už neměří dnešní realitu.
+
+Falešný návrat zapište jako podnět a nechte pravidlo v klidu. Je užitečné vědět, že někdo narazil na příbuzné téma, ale není nutné kvůli tomu obnovovat kontrolní režim.
+
+Lokální tření řešte přímo tam, kde vzniklo. Například doplňte jednu otázku do šablony, zpřesněte název pole, přepište jeden příklad nebo přidejte rozhodovací větu do místa, kde člověk pravidlo používá. Po opravě nastavte jednoduché ověření při dalším přirozeném použití.
+
+Skutečný návrat pravidla si zaslouží novou smyčku, ale pořád ne návrat ke všemu starému. Otevřete novou kartu, napište novou stop podmínku a vyberte aktuální důkaz. Starý záznam může sloužit jako kontext, ne jako povinná trasa.
+
+Rozpad kontextu neřešte opravou pravidla. Nejdřív pojmenujte, co se změnilo. Pokud například pravidlo vzniklo pro jednoduché kontaktní formuláře a dnes řešíte produktový onboarding s rolemi, starý návratový signál může být slabý. V takové situaci je lepší přerámovat otázku než záplatovat pravidlo, které pracuje pro jiný svět.
+
+### Příklad prvního návratu
+
+```text
+Pravidlo:
+Každé nové formulářové pole musí mít účel, vlastníka a retenční hranici.
+
+Návratový signál:
+Tři nová pole za sebou nemají v kartě formuláře dohledatelný účel nebo retenci.
+
+Dnešní událost:
+U nové pilotní landing page chybí účel u dvou polí. Retence je zapsaná správně. Třetí pole zatím nepřibylo.
+
+Stav:
+Lokální tření.
+
+Nejmenší oprava:
+Do šablony formulářové karty doplníme pomocnou otázku: "Jaké rozhodnutí bez tohoto pole nejde udělat?"
+
+Co neotevíráme:
+Neotevíráme roční inventuru formulářů, nepřidáváme nový schvalovací krok a nekopírujeme staré formulářové exporty.
+
+Ověření:
+Při dalším novém formulářovém poli vlastník vyplní účel bez doptání.
+```
+
+Příklad je záměrně malý. Signál se nepotvrdil celý, ale ukázal slabé místo. Kdyby tým rovnou obnovil velkou kontrolu, zaplatil by za dvě chybějící věty celou procesní složenkou. Takhle opraví místo, kde tření vzniklo.
+
+### Privacy-first reakce
+
+První návrat po tichém provozu svádí k tomu, že tým začne znovu sbírat důkazy "pro jistotu". To je přesně chvíle, kdy privacy-first hodnota potřebuje pevnou brzdu.
+
+Výchozí pravidlo:
+
+```text
+Použijeme jen aktuální pracovní stopu, která už vznikla legitimně. Nová data sbíráme až tehdy, když bez nich nejde udělat rozhodnutí, a jen v minimálním rozsahu.
+```
+
+V praxi to znamená:
+
+- místo exportu všech formulářů otevřete jen aktuální kartu, kde problém vznikl;
+- místo sledování lidí v dokumentaci zkontrolujte, jestli je pracovní místo samo o sobě srozumitelné;
+- místo kopírování zákaznických zpráv napište zobecněný závěr bez osobních údajů;
+- místo nového eventu v analytice použijte ruční kontrolu dalšího přirozeného průchodu, pokud to pro rozhodnutí stačí.
+
+Privacy-first reakce není pomalejší. Často je rychlejší, protože tým nemusí vymýšlet nový sběr, nový přístup, novou retenci a nové vysvětlení, proč si data nechává. Menší důkaz nutí otázku zpřesnit. A zpřesněná otázka je pro práci cennější než velká tabulka s nejistým účelem.
+
+Codyho komentář: návratový signál není siréna k evakuaci celého systému. Je to klepnutí na konkrétní dveře. Otevřete ty dveře, podívejte se dovnitř a teprve potom rozhodněte, jestli je potřeba volat větší poradu.
+
+### Karta prvního návratového signálu po tichém provozu
+
+```text
+Pravidlo:
+
+Kanonické pracovní místo:
+
+Původní návratový signál:
+
+Dnešní událost:
+
+Existující důkaz:
+
+Shoda se signálem:
+- žádná / částečná / plná
+
+Výsledný stav:
+- falešný návrat / lokální tření / skutečný návrat pravidla / rozpad kontextu
+
+Nejmenší pracovní místo opravy:
+
+Co neotevíráme:
+
+Jaká nová data kvůli tomu nesbíráme:
+
+Ověření při dalším přirozeném použití:
+
+Vlastník:
+
+Datum návratu:
+```
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: přečtěte původní návratový signál doslova.
+2. Minuta 2: napište dnešní událost jednou konkrétní větou.
+3. Minuty 3 až 4: porovnejte událost se signálem a vyberte míru shody.
+4. Minuta 5: určete výsledný stav.
+5. Minuta 6: napište, co neotevíráte a jaká nová data nesbíráte.
+6. Minuta 7: určete nejmenší opravu nebo rozhodněte, že se práce neotevírá.
+
+Pokud sedm minut nestačí, pravděpodobně nemáte návratový signál, ale větší nejasnost. V takovém případě neprodlužujte workshop. Zapište stav "nejasné", určete jeden existující důkaz, který chybí, a vraťte se až s ním.
+
+### Checklist prvního návratového signálu po tichém provozu
+
+- Četli jsme původní návratový signál beze změn?
+- Popsali jsme dnešní událost konkrétně, ne jako obecný pocit?
+- Použili jsme aktuální existující důkaz místo nového sběru dat?
+- Rozlišili jsme falešný návrat, lokální tření, skutečný návrat pravidla a rozpad kontextu?
+- Neotevřeli jsme starou inventuru jen proto, že existuje?
+- Vybrali jsme nejmenší pracovní místo případné opravy?
+- Zapsali jsme, co výslovně neotevíráme?
+- Zapsali jsme, jaká nová data kvůli návratu nesbíráme?
+- Má případná nová smyčka vlastní stop podmínku?
+- Ví vlastník, co se ověří při dalším přirozeném použití?
+
+První návratový signál po tichém provozu je test dospělosti pravidla. Pokud tým dokáže reagovat malým přesným krokem, pravidlo opravdu žije v provozu. Pokud hned vytáhne starou inventuru, možná pravidlo ještě pořád stojí na staré péči. Dobrá reakce pozná rozdíl a nechá práci růst jen tam, kde je skutečný důvod.
+
 ## Pracovní log
 
+- 2026-06-18: Doplněna úvodní podkapitola o prvním návratovém signálu po tichém provozu: ověření shody se signálem, čtyři výsledné stavy, lokální oprava, privacy-first reakce, karta, mini workshop a checklist.
 - 2026-06-18: Doplněna úvodní podkapitola o uzavření druhého klidového rytmu bez nové kontroly: odstranění mimořádných opor, uzavírací karta, situace kdy rytmus neuzavírat, privacy-first úklid důkazů a checklist.
 - 2026-06-18: Doplněna úvodní podkapitola o druhém klidovém rytmu po roční inventuře: přenositelnost pravidla bez čerstvé paměti, čtyři výsledné stavy, karta kontroly, privacy-first hranice a checklist.
 - 2026-06-18: Doplněna úvodní podkapitola o uzavření prvního klidového rytmu po roční inventuře: čtyři uzavírací stavy, práce s částečným podnětem, privacy-first úklid, karta, mini workshop a checklist.
