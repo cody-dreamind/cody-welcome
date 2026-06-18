@@ -51,6 +51,135 @@ Starý kontext přenášejte jen v rozsahu, který je pořád pravdivý. Pokud s
 
 Do stejné první poznámky přidejte i jednu věc, kterou ze starého kontextu nepřenášíte. Může to být starý příklad, dočasný vlastník, dávno uzavřená výjimka nebo měření, které už neodpovídá dnešní práci. Tím chráníte návrat před nenápadným balastem: používáte minulost jako oporu, ne jako batoh plný všeho, co se kdy řešilo.
 
+## Kontrola přeneseného kontextu při návratu k tématu
+
+Když se tým vrací k tématu po týdnech nebo měsících, největší riziko často není zapomenutí. Horší je poloviční paměť: všichni si pamatují název problému, ale každý si pod ním nese jiný starý kontext. Jeden člověk pořád řeší původní segment, druhý už myslí na novou nabídku, třetí si pamatuje starou výjimku a čtvrtý má v hlavě poslední incident. Výsledek vypadá jako shoda, ale práce se rozjede do čtyř směrů.
+
+Kontrola přeneseného kontextu je krátký krok před otevřením další iterace. Jejím cílem není přepsat historii ani znovu analyzovat celý problém. Cílem je říct: co z minula pořád platí, co už neplatí a co zatím nevíme. Teprve potom má smysl vybrat další pracovní krok.
+
+Začněte třemi větami:
+
+```text
+Z minula stále přenášíme:
+
+Z minula už nepřenášíme:
+
+Nejsme si jistí:
+```
+
+Tyto tři věty stačí na většinu návratů. Pokud je neumíte napsat, problém pravděpodobně není v samotné práci, ale v nejasné paměti. V takovém případě neotevírejte novou změnu. Nejdřív najděte poslední rozhodovací záznam, kartu iterace, pull request, obchodní poznámku nebo support tiket, který vysvětluje původní stav. Bez toho by tým pracoval s dojmem a dojem je výborný sluha pro rozhovor, ale mizerný zdroj pravdy.
+
+Praktický příklad:
+
+```text
+Téma:
+Homepage slabě kvalifikuje poptávky.
+
+Z minula stále přenášíme:
+Primární segment jsou zakladatelé B2B SaaS v Evropě. Chceme méně obecných poptávek a lepší první kontext pro obchod.
+
+Z minula už nepřenášíme:
+Starý příklad s agenturními weby. Nabídka se mezitím zúžila na SaaS produktové týmy. Nepřenášíme ani dočasnou výjimku, kdy obchod ručně volal každému leadu do 24 hodin.
+
+Nejsme si jistí:
+Jestli problém pořád vzniká na homepage, nebo až v potvrzovací zprávě po formuláři.
+
+Rozhodnutí:
+Neotevíráme redesign homepage. Projdeme jen formulář a potvrzovací zprávu u posledních pěti relevantních poptávek podle existujících obchodních poznámek.
+```
+
+Všimněte si, že návrat tím není pomalejší. Naopak. Tým si odřízne staré příklady, zmenší pracovní místo a vyhne se tomu, aby z jedné nejistoty udělal redesign půlky webu. To je přesně ten typ nudné disciplíny, která šetří týdny práce. Ano, nuda je někdy luxusní productivity hack v pracovních botách.
+
+### Čtyři typy kontextu
+
+Při návratu rozlišujte čtyři typy kontextu:
+
+- Kontext nabídky: co dnes slibujete zákazníkovi a jaký problém opravdu prodáváte.
+- Kontext publika: pro koho je změna určená, kdo už není cílový uživatel a kdo je jen hlasitá výjimka.
+- Kontext provozu: jaký proces, nástroj, vlastník nebo týmový rytmus se od posledního rozhodnutí změnil.
+- Kontext dat: jaké důkazy máte legitimně k dispozici a jaké staré metriky, exporty nebo příklady už nemají platit.
+
+Ne každý návrat potřebuje projít všechny čtyři typy do hloubky. Stačí u každého říct "platí", "neplatí" nebo "nevíme". Stav "nevíme" není ostuda. Je to ochrana před sebevědomým nesmyslem. Pokud se rozhodnutí opírá o nejasný kontext, zapište to přímo do karty a zmenšete další krok tak, aby nejasnost neohrozila celý výsledek.
+
+### Privacy-first kontrola
+
+Přenesený kontext často obsahuje staré pracovní stopy: exporty z analytiky, screenshoty formulářů, kopie tiketů, ukázky e-mailů, poznámky z callů nebo dočasné tabulky. Při návratu se snadno stane, že se tyto stopy znovu otevřou "jen pro jistotu" a začnou žít déle, než měly.
+
+Privacy-first pravidlo je jednoduché: do další iterace přeneste jen důkaz, který má jasný účel pro dnešní rozhodnutí. Zbytek buď smažte podle retenčních pravidel, anonymizujte, nebo nechte zavřený v původním zdroji pravdy. Nepřesouvejte osobní údaje do nové tabulky jen proto, že se s ní bude pohodlněji pracovat. Pohodlí není strategie, jen rychlá půjčka s úrokem v budoucím úklidu.
+
+Krátká kontrolní otázka:
+
+```text
+Potřebujeme tento konkrétní údaj pro dnešní rozhodnutí, nebo nám stačí zobecněný závěr?
+```
+
+Ve většině obsahových, marketingových a produktových návratů stačí zobecněný závěr. Místo kopírování celé zákaznické zprávy napište například: "Tři relevantní poptávky nerozlišily mezi technickým auditem a dlouhodobým vývojem." Takový zápis chrání smysl důkazu a současně zbytečně netahá osobní data do další pracovní vrstvy.
+
+### Karta přeneseného kontextu
+
+```text
+Téma návratu:
+
+Původní rozhodnutí nebo pravidlo:
+
+Návratový signál:
+
+Co se od té doby změnilo:
+- nabídka:
+- publikum:
+- provoz:
+- data:
+
+Z minula stále přenášíme:
+
+Z minula už nepřenášíme:
+
+Nejsme si jistí:
+
+Nejbližší pracovní místo:
+
+Privacy-first hranice:
+Které staré stopy neotevíráme, nekopírujeme nebo anonymizujeme:
+
+Rozhodnutí:
+- pokračovat původní trasou
+- otevřít menší lokální krok
+- nejdřív ověřit nejasný kontext
+- návrat neotevírat
+
+Vlastník:
+
+Datum kontroly:
+```
+
+Karta nemá být dokument pro archiváře s červenou tužkou. Má být pracovní brzda před tím, než tým pustí do světa starý předpoklad v novém kabátě. Vyplňte ji jen tak podrobně, aby šlo udělat další rozhodnutí.
+
+### Mini workshop na 12 minut
+
+1. Minuty 1 až 2: přečtěte původní rozhodnutí a návratový signál.
+2. Minuty 3 až 5: napište, co se změnilo v nabídce, publiku, provozu a datech.
+3. Minuty 6 až 7: vyberte, co z minula stále přenášíte.
+4. Minuty 8 až 9: napište jednu věc, kterou z minula výslovně nepřenášíte.
+5. Minuta 10: pojmenujte nejbližší pracovní místo.
+6. Minuta 11: udělejte privacy-first kontrolu starých stop.
+7. Minuta 12: vyberte jeden rozhodovací stav.
+
+Když se tým zasekne na tom, co z minula platí, nehlasujte. Hlasování nevyrobí realitu, jen rozpočítá nejistotu. Vyberte nejmenší existující důkaz a otevřete ověřovací krok. Pokud důkaz nemáte, napište "nevíme" a zmenšete rozsah další práce.
+
+### Checklist kontroly kontextu
+
+- Máme po ruce původní rozhodnutí nebo pravidlo?
+- Pojmenovali jsme návratový signál, kvůli kterému se k tématu vracíme?
+- Zkontrolovali jsme změnu nabídky, publika, provozu a dat?
+- Napsali jsme, co z minula stále platí?
+- Napsali jsme aspoň jednu věc, kterou z minula výslovně nepřenášíme?
+- Oddělili jsme jistý kontext od nejasného?
+- Vybrali jsme nejbližší pracovní místo místo obecného návratu k tématu?
+- Nepřenášíme staré osobní údaje, exporty nebo screenshoty bez jasného účelu?
+- Umíme říct, jestli pokračujeme původní trasou, otevíráme menší krok, ověřujeme nejasnost, nebo návrat zavíráme?
+
+Dobře udělaná kontrola přeneseného kontextu je krátká a trochu přísná. Nechce po týmu velkou analýzu, ale odmítá pracovat s mlhou. Díky tomu se stará zkušenost stane použitelnou oporou, ne nenápadným zdrojem dalších zbytečných úkolů.
+
 ## Rychlé potvrzení návratového signálu
 
 Návratový signál má chránit tým před dvěma opačnými chybami. První chyba je ignorovat skutečný problém jen proto, že už se jednou uzavřel. Druhá chyba je otevřít novou iteraci pokaždé, když někdo zahlédne nedokonalost. Rychlé potvrzení signálu je malý filtr mezi těmito dvěma extrémy.
@@ -227616,3 +227745,4 @@ Druhý klidový rytmus je dobrý okamžik pro střídmost. Když pravidlo drží
 - 2026-06-17: Doplněna úvodní podkapitola o druhém běžném použití po kontrole kontextu výřezu: přenositelnost bez čerstvého vysvětlení, slabý přenos, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-06-17: Doplněna úvodní podkapitola o uzavření druhého běžného použití po kontrole kontextu výřezu: čtyři uzavírací stavy, úklid pracovních stop, privacy-first zobecnění příkladů, karta, mini workshop a checklist.
 - 2026-06-18: Doplněna krátká úvodní poznámka, aby se při návratu k tématu zapsalo i to, co se ze starého kontextu záměrně nepřenáší.
+- 2026-06-18: Doplněna úvodní podkapitola o kontrole přeneseného kontextu při návratu k tématu: platný a neplatný kontext, typy změn, privacy-first práce se starými stopami, karta, workshop a checklist.
