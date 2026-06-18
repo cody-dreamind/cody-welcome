@@ -228173,8 +228173,165 @@ Tahle věta je schválně trochu přísná. Nutí tým říct nejen co funguje, 
 
 Druhé běžné použití je dobrý moment pro střízlivost. Když pravidlo drží, nechte ho dál tiše pracovat. Když drží jen úzce, pojmenujte jeho skutečný rozsah. Když potřebuje malou oporu, doplňte ji tam, kde práce vzniká. A když se ukáže, že tichý provoz byl předčasný, vraťte se o krok zpět bez dramatu. Cílem není mít pravidlo s krásnou historií. Cílem je mít pracovní rozhodnutí, které pomáhá i ve chvíli, kdy se na něj nikdo zrovna nedívá.
 
+## Jak uzavřít druhé běžné použití po návratu do tichého provozu
+
+Druhé běžné použití má smysl jen tehdy, když po něm tým něco zavře. Ne nutně velkou změnu. Často právě naopak: zavře mimořádnou pozornost, zavře pokušení pravidlo rozšířit, zavře dočasné podklady a nechá v systému jen to, co bude užitečné při dalším přirozeném použití. Pokud druhé použití skončí jen dalším "ještě se na to podíváme", tichý provoz se pomalu mění zpět v kontrolní režim.
+
+Uzavření začněte jednou větou:
+
+```text
+Druhé běžné použití ukázalo, že pravidlo teď:
+```
+
+Za dvojtečku doplňte jeden stav, ne odstavec historie. Například:
+
+```text
+Druhé běžné použití ukázalo, že pravidlo teď drží pro poptávkové i onboardingové formuláře, ale nerozšiřujeme ho na CRM poznámky.
+```
+
+Nebo:
+
+```text
+Druhé běžné použití ukázalo, že pravidlo je úzké a má zůstat jen u poptávkových formulářů.
+```
+
+Taková věta je důležitější než dlouhý zápis. Dává týmu jasný výsledek a chrání ho před dvěma lákadly: vyrábět další kontrolu, když pravidlo funguje, nebo z fungujícího pravidla udělat univerzální standard bez dostatečného důkazu.
+
+### Čtyři uzavírací stavy
+
+Po druhém běžném použití vyberte jeden uzavírací stav:
+
+- Vrátit do tichého provozu: pravidlo drží a není potřeba žádná úprava.
+- Uzavřít s lokální opravou: pravidlo drží, ale jedno pracovní místo potřebuje odkaz, příklad, název nebo zkrácení.
+- Zúžit rozsah pravidla: pravidlo funguje jen pro menší třídu práce, než se předpokládalo.
+- Vrátit do omezeného ověření: druhé použití ukázalo, že tichý provoz byl předčasný.
+
+Stav `vrátit do tichého provozu` je nejčistší. Zapište výsledek, ponechte návratový signál a skončete. Nepřidávejte měsíční dohled jen proto, že se vám podařilo něco ověřit. Dobře fungující pravidlo nepotřebuje trofejní proces.
+
+Stav `uzavřít s lokální opravou` použijte, když problém vznikl jen v jednom pracovním místě. Typicky chyběl odkaz ze šablony, příklad používal starý jazyk nebo název karty neodpovídal tomu, jak tým práci hledá. Oprava má bydlet tam, kde člověk narazil, ne v abstraktním centrálním pravidle.
+
+Stav `zúžit rozsah pravidla` je správný, když druhé použití ukázalo hranici. Neberte to jako neúspěch. Úzké pravidlo, které tým používá správně, je lepší než široké pravidlo, které se musí pokaždé vysvětlovat. Přepište název, první větu nebo index tak, aby pravidlo neslibovalo víc, než skutečně unese.
+
+Stav `vrátit do omezeného ověření` použijte jen tehdy, když druhé použití potřebovalo mimořádnou péči. Omezené ověření neznamená restart celé historie. Znamená vybrat jednu chybějící oporu a znovu ji ověřit v nejbližším přirozeném použití.
+
+### Co propsat a co nechat být
+
+Uzavření druhého použití má tři vrstvy:
+
+- Pracovní místo: šablona, formulář, checklist, onboardingový krok nebo kanonický index, kde člověk pravidlo hledal.
+- Rozhodovací paměť: krátká věta, která říká, co druhé použití ukázalo.
+- Návratový signál: situace, která téma znovu otevře, pokud se klid později rozbije.
+
+Do pracovního místa propisujte jen to, co člověku pomůže při další práci. Pokud druhé použití odhalilo chybějící odkaz, přidejte odkaz. Pokud ukázalo zbytečně dlouhou instrukci, zkraťte ji. Pokud potvrdilo, že pravidlo drží, často není potřeba měnit nic.
+
+Do rozhodovací paměti nepatří surové podklady. Patří tam zobecněný závěr:
+
+```text
+Pravidlo se podruhé použilo bez mimořádné připomínky a vedlo k omezení sběru údajů na pojmenované rozhodnutí.
+```
+
+To stačí. Není potřeba ukládat screenshoty, interní komentáře, celé formuláře ani jména lidí, kteří pravidlo použili. Pokud se chcete z druhého použití učit, učte se ze vzoru, ne z hromadění stop.
+
+Návratový signál ponechte klidný a konkrétní. Například:
+
+```text
+K pravidlu se vrátíme, pokud dvě další přirozená použití za sebou vyžadují osobní vysvětlení nebo novou pomocnou evidenci.
+```
+
+Takový signál chrání pravidlo před neustálou údržbou. Zároveň dává týmu jasnou větu, kdy se k němu opravdu vrátit.
+
+### Privacy-first uzavření
+
+Druhé použití po návratu do tichého provozu často vyprodukuje dočasné stopy: porovnání dvou formulářů, poznámku v chatu, export polí, screenshot nebo tabulku "pro jistotu". Uzavření není hotové, dokud se nerozhodne, co se s těmito stopami stane.
+
+Použijte krátkou úklidovou otázku:
+
+```text
+Která stopa je nutná pro budoucí rozhodnutí a která vznikla jen při ověření?
+```
+
+Nutná stopa se má zobecnit a uložit do rozhodovací paměti. Ověřovací stopa se má smazat, vrátit do původního systému nebo nechat vypršet podle retenčního pravidla. Nezakládejte novou složku s důkazy jen proto, že druhé použití proběhlo dobře. Dobré ověření má systém zjednodušit, ne vytvořit památeční vitrínu.
+
+Privacy-first výsledek může znít třeba takto:
+
+```text
+Po druhém použití zůstává v pravidle jen zobecněný závěr. Dočasné porovnání formulářů mažeme a žádné nové údaje ani eventy nepřidáváme.
+```
+
+Codyho komentář: nejlevnější datový úklid je ten, při kterém se žádný nový archiv ani nezaloží. Překvapivě málo lidí tleská, ale budoucí vy si za to koupí mentální kafe.
+
+### Uzavírací karta
+
+```text
+Pravidlo nebo pracovní místo:
+
+První běžné použití:
+
+Druhé běžné použití:
+
+Co druhé použití potvrdilo:
+
+Co druhé použití nepotvrdilo:
+
+Uzavírací stav:
+- vrátit do tichého provozu / uzavřít s lokální opravou / zúžit rozsah pravidla / vrátit do omezeného ověření
+
+Jedna případná úprava:
+
+Co propisujeme do pracovního místa:
+
+Co necháváme jen v rozhodovací paměti:
+
+Co výslovně nerozšiřujeme:
+
+Privacy-first úklid:
+
+Návratový signál:
+
+Vlastník:
+
+Datum:
+```
+
+Karta má být krátká. Pokud v ní vzniká dlouhý příběh, pravděpodobně nezavíráte druhé použití, ale znovu otevíráte starou historii. Vraťte se k otázce, co druhé použití opravdu změnilo v dnešní práci.
+
+### Mini workshop na 8 minut
+
+1. Minuta 1: přečtěte výsledek druhého běžného použití.
+2. Minuta 2: pojmenujte, co se potvrdilo a co se nepotvrdilo.
+3. Minuta 3: vyberte jeden uzavírací stav.
+4. Minuta 4: rozhodněte, jestli je potřeba jedna lokální úprava.
+5. Minuta 5: napište, co výslovně nerozšiřujete.
+6. Minuta 6: určete, co se propíše do pracovního místa a co zůstane jen v rozhodovací paměti.
+7. Minuta 7: proveďte privacy-first úklid dočasných stop.
+8. Minuta 8: ponechte nebo zpřesněte návratový signál.
+
+Workshop končí větou:
+
+```text
+Druhé běžné použití uzavíráme stavem: ...; další práce vznikne až při signálu: ...
+```
+
+Pokud tuto větu neumíte doplnit, neuzavírejte. Buď nemáte jasno ve výsledku, nebo se snažíte do jedné uzávěrky schovat novou otázku.
+
+### Checklist uzavření druhého běžného použití
+
+- Máme jednu větu výsledku druhého použití?
+- Vybrali jsme jeden uzavírací stav?
+- Pokud pravidlo drží, nepřidáváme novou kontrolní vrstvu?
+- Pokud je potřeba oprava, je lokální a má jedno pracovní místo?
+- Pokud je pravidlo úzké, přepsali jsme jeho rozsah tak, aby nepřehánělo?
+- Pokud tichý provoz neudržel, vracíme jen omezené ověření, ne celou historii?
+- Víme, co propsat do pracovního místa a co nechat jen v rozhodovací paměti?
+- Zapsali jsme, co pravidlo teď výslovně nerozšiřuje?
+- Uklidili jsme dočasné podklady, screenshoty, exporty nebo porovnávací tabulky?
+- Ponechali jsme konkrétní návratový signál místo nové pravidelné kontroly?
+
+Uzavřené druhé použití má být nenápadné. V ideálním případě po něm zůstane přesnější pracovní místo, jedna věta v paměti a méně dočasných stop než před ověřením. To je dobrý obchod: pravidlo je použitelnější, tým klidnější a datová stopa menší.
+
 ## Pracovní log
 
+- 2026-06-18: Doplněna úvodní podkapitola o uzavření druhého běžného použití po návratu do tichého provozu: uzavírací stavy, propsání výsledku do pracovního místa, zúžení rozsahu pravidla, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-18: Doplněna úvodní podkapitola o druhém běžném použití po návratu do tichého provozu: přenositelnost pravidla, samostatnost bez mimořádné připomínky, nerozšiřování úzkého pravidla, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-18: Doplněna úvodní podkapitola o prvním běžném použití po návratu do tichého provozu: najitelnost pravidla, rozhodnutelnost, lokální nápověda, zkrácení, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-18: Doplněna úvodní podkapitola o návratu do tichého provozu po ověření druhého návratového signálu: kanonické místo pravidla, rušení mimořádných připomínek, návratový signál místo další kontroly, privacy-first úklid, karta, mini workshop a checklist.
