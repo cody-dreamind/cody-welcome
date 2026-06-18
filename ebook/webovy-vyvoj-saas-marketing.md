@@ -226820,8 +226820,156 @@ Codyho komentář: když pravidlo projde druhým klidovým rytmem, neodměňujte
 
 Druhý klidový rytmus je dobrý okamžik pro střídmost. Když pravidlo drží, nechte ho v normálním provozu. Když drhne jedno místo, opravte jedno místo. Když se opravdu vrátí signál, otevřete novou smyčku. Tím roční inventura nezůstane jako stín nad každou další kontrolou, ale jako užitečné rozhodnutí, které se propsalo do práce.
 
+## Jak uzavřít druhý klidový rytmus bez nové kontroly
+
+Druhý klidový rytmus se snadno přepíše na třetí, čtvrtý a pátý. Tým si zvykne, že pravidlo "ještě raději zkontroluje", protože to působí odpovědně. Jenže pokud pravidlo prošlo druhým běžným rytmem bez staré inventury, bez mimořádné péče a bez nové datové stopy, další speciální kontrola už často nepřidává jistotu. Přidává jen další vrstvu práce.
+
+Uzavření druhého klidového rytmu proto není další audit. Je to rozhodnutí, že pravidlo už patří do normálního provozu a nepotřebuje vlastní ochranné lešení. Zapište ho jednou větou:
+
+```text
+Pravidlo prošlo druhým klidovým rytmem a zůstává v běžném provozu bez samostatné kontroly.
+```
+
+Tato věta má být jednoduchá. Pokud k ní potřebujete dlouhé vysvětlení, možná rytmus ještě není opravdu uzavřený. V takovém případě nejdřív pojmenujte, co brání zavření: slabé pracovní místo, nejasný vlastník, chybějící návratový signál, nebo strach pustit starou inventuru z ruky.
+
+Praktický příklad:
+
+```text
+Pravidlo:
+Každé nové formulářové pole musí mít účel, vlastníka a retenční hranici.
+
+Druhý klidový rytmus:
+Kvartální kontrola formulářů po roční inventuře.
+
+Co se potvrdilo:
+Nová landing page použila kanonickou šablonu. Vlastník zapsal účel a retenci přímo do karty formuláře. Nikdo nepotřeboval otevřít roční inventuru.
+
+Uzavření:
+Pravidlo zůstává v běžném kvartálním rytmu. Rušíme zvláštní poznámku "zkontrolovat po inventuře".
+
+Privacy-first výsledek:
+Nevzniká evidence lidí, kteří pravidlo použili, ani nový export formulářových průchodů.
+```
+
+Smysl uzavření je odstranit poslední mimořádnou oporu. Pokud ji necháte v systému "pro jistotu", pravidlo sice funguje, ale tým pořád platí pozorností za starý režim.
+
+### Co po uzavření odstranit
+
+Po druhém klidovém rytmu zkontrolujte, jestli kolem pravidla nezůstaly dočasné pomůcky. Typicky:
+
+- připomínka v kalendáři, která měla platit jen pro ověření po inventuře;
+- poznámka v backlogu, že se má pravidlo ještě jednou ručně projít;
+- pomocná tabulka s kontrolními průchody;
+- komentář v dokumentaci, který odkazuje na starý inventurní zápis;
+- dočasná odpovědnost člověka, který měl pravidlo hlídat jen při převodu;
+- uložené screenshoty, exporty nebo pracovní kopie použité při ověření.
+
+Každou takovou pomůcku rozdělte do tří stavů:
+
+- Smazat: pomůcka měla sloužit jen k ověření a už nemá pracovní účel.
+- Přepsat do běžného místa: informace je pořád platná, ale má být v šabloně, checklistu nebo procesu.
+- Ponechat jako historický záznam: závěr má hodnotu pro dohledatelnost, ale nesmí dál spouštět práci.
+
+Nejčastější chyba je nechat dočasnou pomůcku napůl živou. Není v aktivní práci, ale pořád někde čeká a tváří se jako důležitý signál. Za pár týdnů ji někdo najde a otevře téma znovu, protože "to tady přece máme poznamenané". Dočasná poznámka bez aktuálního účelu je jen budoucí zmatek s lepším pravopisem.
+
+### Uzavírací karta
+
+```text
+Pravidlo:
+
+Kanonické pracovní místo:
+
+Druhý klidový rytmus:
+
+Co se potvrdilo:
+
+Co už nepotřebuje mimořádnou kontrolu:
+
+Co mažeme:
+
+Co přepisujeme do běžného místa:
+
+Co necháváme jen jako historický záznam:
+
+Návratový signál:
+
+Privacy-first výsledek:
+Jaká evidence, exporty, trackery nebo kopie díky uzavření nevznikají:
+
+Vlastník běžného rytmu:
+
+Další kontrola:
+- žádná mimořádná / běžný rytmus / otevřít jen při návratovém signálu
+```
+
+Karta nemá zakládat nový proces. Je to poslední zápis před tím, než pravidlo přestane být zvláštní událost. Pokud po vyplnění karty vznikne další seznam úkolů, zkontrolujte, jestli opravdu uzavíráte rytmus, nebo jen vyrábíte nový dohled.
+
+### Kdy druhý rytmus neuzavírat
+
+Druhý klidový rytmus neuzavírejte, pokud se objeví některý z těchto signálů:
+
+- tým pravidlo použil jen díky ruční připomínce;
+- kanonické pracovní místo nebylo najitelné bez staré inventury;
+- výsledek závisel na jednom člověku, který držel kontext v hlavě;
+- pravidlo sice prošlo, ale vznikla nová pomocná evidence;
+- návratový signál nastal, jen ho tým nechce otevřít, protože by to pokazilo hezké uzavření.
+
+V takové situaci nepište "uzavřeno". Vyberte menší stav: dočistit pracovní místo, zpřesnit rytmus, nebo otevřít návratový signál. Uzavření má popisovat realitu, ne přání mít konečně hotovo.
+
+Příklad slabého uzavření:
+
+```text
+Pravidlo prošlo, protože ho připomněl člověk, který dělal roční inventuru.
+```
+
+To není klidový provoz. To je stará péče v civilním oblečení.
+
+Lepší zápis:
+
+```text
+Druhý rytmus neuzavíráme. Pravidlo funguje, ale jen díky ruční připomínce původního vlastníka. Nejmenší další krok je přidat kontrolní otázku do existující kvartální šablony a zrušit osobní připomínku.
+```
+
+Tím tým neprodlužuje mimořádný režim. Jen přesune oporu z člověka do pracovního místa.
+
+### Privacy-first uzavření
+
+Uzavření druhého klidového rytmu je dobrý okamžik pro úklid důkazů. Pokud jste při ověřování používali pracovní poznámky, screenshoty, anonymizované souhrny nebo ruční tabulku, rozhodněte, co má zůstat. Výchozí odpověď nemá být "necháme to pro jistotu". Výchozí odpověď má být: ponecháme jen závěr, který je potřeba pro budoucí rozhodnutí.
+
+Krátká formulace:
+
+```text
+Po uzavření ponecháváme jen rozhodovací závěr a návratový signál. Dočasné kontrolní poznámky mažeme, protože už neslouží žádnému aktivnímu rozhodnutí.
+```
+
+Pokud některý důkaz ponecháváte, napište proč:
+
+```text
+Anonymizovaný souhrn tří průchodů ponecháváme u rozhodnutí, protože vysvětluje hranici pravidla. Neobsahuje osobní údaje ani kopie původních formulářů.
+```
+
+Tato disciplína drží privacy-first hodnotu v provozu. Nejde jen o to, kde běží server. Jde i o to, kolik pracovních stop si necháváte poté, co už splnily účel. Data, která nepotřebujete, nejsou důkaz pečlivosti. Jsou budoucí úklid převlečený za jistotu.
+
+Codyho komentář: dobré pravidlo poznáte i podle toho, že kolem sebe nepotřebuje malou ochranku. Když ho po druhém klidovém rytmu pořád někdo hlídá baterkou, možná nehlídá pravidlo, ale vlastní nervozitu. Ta se do backlogu zapisuje špatně, ale umí zabrat překvapivě hodně místa.
+
+### Checklist uzavření druhého klidového rytmu
+
+- Proběhl druhý rytmus bez otevření staré inventury?
+- Použil tým kanonické pracovní místo bez mimořádného vysvětlování?
+- Nevznikla nová ruční evidence, export, tracker ani pomocná tabulka?
+- Zrušili jsme dočasné připomínky a kontrolní poznámky?
+- Přepsali jsme platné části do běžného pracovního místa?
+- Nechali jsme historické záznamy jen tam, kde vysvětlují rozhodnutí?
+- Má pravidlo jasný návratový signál pro budoucnost?
+- Ví vlastník, že další kontrola běží už jen v běžném rytmu?
+- Smazali jsme nebo anonymizovali dočasné důkazy, které už nemají účel?
+- Umí tým jednou větou říct, proč pravidlo zůstává v klidu?
+
+Uzavřený druhý klidový rytmus má být skoro nudný. Pravidlo se používá, tým ví kde ho najít, návratový signál existuje a kolem nezůstává zvláštní kontrolní aparát. To je dobrý konec dlouhé smyčky: práce nezmizela, jen přestala vyžadovat zvláštní pozornost.
+
 ## Pracovní log
 
+- 2026-06-18: Doplněna úvodní podkapitola o uzavření druhého klidového rytmu bez nové kontroly: odstranění mimořádných opor, uzavírací karta, situace kdy rytmus neuzavírat, privacy-first úklid důkazů a checklist.
 - 2026-06-18: Doplněna úvodní podkapitola o druhém klidovém rytmu po roční inventuře: přenositelnost pravidla bez čerstvé paměti, čtyři výsledné stavy, karta kontroly, privacy-first hranice a checklist.
 - 2026-06-18: Doplněna úvodní podkapitola o uzavření prvního klidového rytmu po roční inventuře: čtyři uzavírací stavy, práce s částečným podnětem, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-18: Doplněna úvodní podkapitola o prvním klidovém rytmu po uzavřené roční inventuře: kontrola běžného rytmu, návratový signál, lokální údržba, slabý rytmus, privacy-first datová brzda, karta, mini workshop a checklist.
