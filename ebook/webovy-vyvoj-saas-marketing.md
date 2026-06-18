@@ -226128,8 +226128,140 @@ Privacy-first uzavření není jen úklid. Je to potvrzení, že se tým naučil
 
 Uzavření druhého běžného použití převádí roční inventuru z režimu "čerstvě ověřeno" do režimu "běžně použitelné". Když se to podaří, pravidlo už nepotřebuje zvláštní péči. Potřebuje jen dobré pracovní místo, jasný návratový signál a disciplínu nepřidávat další kontrolu pokaždé, když text funguje přesně tak, jak má.
 
+## První klidový rytmus po uzavřené roční inventuře
+
+Po uzavření druhého běžného použití nastává nebezpečně obyčejná fáze: pravidlo má prostě žít. Tady se ukáže, jestli tým opravdu věří vlastnímu uzavření, nebo jestli si jen změnil název mimořádné kontroly na "běžný rytmus". První klidový rytmus po roční inventuře proto nemá znovu hodnotit celé pravidlo. Má potvrdit, že pravidlo funguje v normálním kalendáři, s normální pozorností a bez návratu starých podkladů.
+
+Začněte větou:
+
+```text
+Po roční inventuře pravidlo kontrolujeme jen v běžném rytmu a jen podle předem zapsaného návratového signálu.
+```
+
+Tato věta má praktickou funkci. Zastaví reflex "když už jsme tady, ještě zkontrolujme všechno". Právě tím se z klidového rytmu stává nový audit. Pokud roční inventura skončila, druhé použití obstálo a pravidlo má návratový signál, není potřeba znovu otevírat historii. Stačí ověřit, že se běžný rytmus opravdu drží.
+
+Příklad:
+
+```text
+Pravidlo:
+U každého formuláře je věta, proč údaj sbíráme a jak dlouho ho držíme.
+
+Roční inventura:
+Pravidlo zůstalo živé a přesunulo se do publikačního checklistu.
+
+Druhé běžné použití:
+Nový člen týmu upravil produktovou stránku bez znalosti inventurní debaty.
+
+První klidový rytmus:
+Kvartální kontrola formulářů našla dvě nové stránky. Obě mají datovou větu, bez nového pole a bez externího měření.
+
+Rozhodnutí:
+Pravidlo zůstává v klidovém rytmu. Bez akce.
+```
+
+Dobrý výsledek je krátký. Neobsahuje tabulku všech formulářů, screenshoty, jména lidí ani detaily konkrétních poptávek. Stačí vědět, že pravidlo bylo v běžné práci použitelné a že návratový signál nenastal.
+
+### Co v klidovém rytmu kontrolovat
+
+Kontrolujte jen tři věci:
+
+- Jestli pravidlo žije v pracovním místě, kde ho lidé opravdu potřebují.
+- Jestli se nevrátil starý problém popsaný návratovým signálem.
+- Jestli kolem pravidla nevzniká nová datová nebo procesní stopa.
+
+První bod je o použitelnosti. Pravidlo může být formálně správné a přesto prakticky mrtvé, pokud leží v archivu místo v šabloně, briefu, checklistu nebo provozním rytmu. Klidový rytmus nemá dokazovat, že dokument existuje. Má ukázat, že se dá použít bez obřadu.
+
+Druhý bod je o disciplíně. Návratový signál je hranice mezi běžnou údržbou a novou prací. Pokud signál nenastal, neotevírejte téma jen kvůli tomu, že jste si při kontrole všimli drobného nápadu. Zapište ho jako podnět, pokud stojí za to, ale nenechte ho unést celé pravidlo.
+
+Třetí bod je privacy-first brzda. Po roční inventuře se často objeví pokušení "pro jistotu" měřit používání pravidla: kdo otevřel dokument, kdo kliknul na checklist, kdo vyplnil pole. To je většinou špatný obchod. Vyměníte klidné pravidlo za dohled. Místo toho použijte hotové pracovní výstupy, které už vznikají: publikovanou stránku, uzavřený ticket, aktualizovanou šablonu, záznam v běžném review.
+
+### Čtyři výsledky prvního klidového rytmu
+
+Po prvním klidovém rytmu vyberte jeden stav:
+
+- Zůstává v klidu: pravidlo funguje, návratový signál nenastal a datová stopa se nerozšířila.
+- Lokální údržba: jedno pracovní místo potřebuje drobnou opravu, ale pravidlo jako celek drží.
+- Slabý rytmus: pravidlo je správné, ale běžný rytmus ho nenese spolehlivě.
+- Návratový signál: nastala předem popsaná situace a má se otevřít nová iterace.
+
+`Zůstává v klidu` je plnohodnotný výsledek. Nepřidávejte mu úkol jen proto, aby kontrola působila produktivně. Někdy je nejlepší práce ta, která chrání systém před novou prací. Ano, zní to podezřele, ale v provozu je to často přesně ono.
+
+`Lokální údržba` patří k jedné malé věci: starý odkaz, nepřesný název, duplicitní kopie, chybějící věta v checklistu. Opravte ji v místě, kde vznikla. Nedělejte z ní revizi celého pravidla.
+
+`Slabý rytmus` je jiný problém. Pravidlo může být dobré, ale rytmus ho nenese: kontrola se zapomíná, vlastník není jasný, pravidlo se neobjevuje ve správném review, nebo se pořád řeší bokem v chatu. Tady neopravujte pravidlo samotné. Opravte jeho napojení na rytmus.
+
+`Návratový signál` má spustit novou iteraci se stop podmínkou, vlastníkem a jedním pracovním místem. Neprodlužujte klidovou kontrolu do miniprojektu. Jakmile signál nastal, změnil se režim práce.
+
+### Karta prvního klidového rytmu
+
+```text
+Pravidlo:
+
+Kanonické pracovní místo:
+
+Klidový rytmus:
+- měsíční / kvartální / půlroční / roční / jiný
+
+Co z roční inventury zůstává platné:
+
+Co z roční inventury záměrně nepřenášíme:
+
+Reálný pracovní průchod nebo stav:
+
+Návratový signál:
+- nenastal / částečně se podobá / nastal
+
+Datová stopa:
+- beze změny / jedna stopa k úklidu / rozšířila se
+
+Výsledek:
+- zůstává v klidu
+- lokální údržba
+- slabý rytmus
+- návratový signál
+
+Jedna akce, pokud je potřeba:
+
+Co znovu neotevíráme:
+
+Co dál neměříme, neexportujeme ani nesledujeme:
+
+Další běžný návrat:
+```
+
+Karta má být lehká. Pokud její vyplnění trvá déle než samotná kontrola pravidla, karta se stala problémem. Zkraťte ji na pět vět: co jsme kontrolovali, co se stalo, jaký je stav, co případně opravujeme a kdy se vracíme.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: otevřete kanonické pracovní místo, ne archiv roční inventury.
+2. Minuta 2: pojmenujte běžný rytmus, ve kterém se kontrola děje.
+3. Minuta 3: najděte jeden reálný průchod nebo poctivě zapište, že žádný nebyl.
+4. Minuta 4: porovnejte stav s návratovým signálem.
+5. Minuta 5: zkontrolujte, jestli nevznikla nová datová nebo procesní stopa.
+6. Minuta 6: vyberte jeden ze čtyř výsledků a zavřete kontrolu.
+
+Když nebyl žádný reálný průchod, nedělejte umělou simulaci jen kvůli pocitu poctivosti. Zapište "bez průchodu, bez akce" a vraťte se až v dalším běžném rytmu nebo při návratovém signálu. Prázdné období je také informace: pravidlo možná není často potřeba, ale to samo o sobě není chyba.
+
+### Checklist prvního klidového rytmu
+
+- Kontrola proběhla v běžném rytmu, ne ve zvláštním režimu po inventuře?
+- Otevřeli jsme aktuální pracovní místo místo starých inventurních podkladů?
+- Víme, co z roční inventury zůstává platné?
+- Víme, co z roční inventury záměrně nepřenášíme?
+- Ověřili jsme návratový signál, ne obecný pocit zlepšování?
+- Pokud nebyl reálný průchod, zapsali jsme "bez průchodu, bez akce"?
+- Pokud vznikla lokální údržba, má přesně jedno pracovní místo?
+- Pokud je slabý rytmus, opravujeme rytmus, ne celé pravidlo?
+- Pokud nastal návratový signál, otevíráme novou iteraci se stop podmínkou?
+- Nevzniklo měření používání dokumentů, lidí, klikání ani nová exportní tabulka?
+- Uklidili jsme případné dočasné poznámky, které nemají další účel?
+- Pravidlo může po kontrole znovu odejít do klidu?
+
+První klidový rytmus po roční inventuře je malá zkouška důvěry. Pokud pravidlo funguje, nedávejte mu novou pozornost jako odměnu. Dejte mu klid. Když nefunguje, opravte přesné místo nebo otevřete návratový signál. Všechno mezi tím je většinou jen administrativní mlha s lepším názvem.
+
 ## Pracovní log
 
+- 2026-06-18: Doplněna úvodní podkapitola o prvním klidovém rytmu po uzavřené roční inventuře: kontrola běžného rytmu, návratový signál, lokální údržba, slabý rytmus, privacy-first datová brzda, karta, mini workshop a checklist.
 - 2026-06-18: Doplněna úvodní podkapitola o uzavření druhého běžného použití po roční inventuře: čtyři uzavírací stavy, karta uzavření, lokální dočištění, návrat do klidového rytmu, privacy-first uzavření a checklist.
 - 2026-06-18: Doplněna úvodní podkapitola o druhém běžném použití po uzavřené roční inventuře: přenositelnost bez čerstvé paměti, čtyři výsledné stavy, slabý přenos, skrytá historie, privacy-first hranice, karta, mini workshop a checklist.
 - 2026-06-18: Doplněna úvodní podkapitola o uzavření prvního běžného použití po roční inventuře: uzavírací věta, tři stavy výsledku, lokální dočištění, práce se skutečným rozporem, privacy-first úklid, karta, mini workshop a checklist.
