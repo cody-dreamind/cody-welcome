@@ -228625,8 +228625,182 @@ Pokud se někdo během workshopu snaží přidat novou kontrolu, nepřete se o n
 
 Stabilní klid je jeden z nejpraktičtějších výsledků dobrého provozu. Nezní dramaticky, ale šetří pozornost, omezuje datovou stopu a chrání tým před věčným dolaďováním něčeho, co už funguje dost dobře. A "dost dobře" je v provozu často velmi vysoká laťka, jen nemá vlastní ohňostroj.
 
+## První návratový signál po stabilním klidu
+
+Stabilní klid jednou skončí. Ne proto, že by se tým nudil, ale proto, že přijde skutečný návratový signál: nové pracovní místo pravidlo mine, nový člověk ho nenajde, změna nabídky posune jeho význam, nebo se dvakrát za sebou objeví stejné tření. V takové chvíli není cílem stabilní klid bránit za každou cenu. Cílem je otevřít nejmenší smyčku, která odpovídá signálu, a nenechat z jednoho podnětu vyrůst návrat celé kontrolní mašiny.
+
+První otázka zní:
+
+```text
+Je to opravdu návratový signál, který jsme si nechali pro stabilní klid, nebo jen nový nápad, šum či lokální chyba?
+```
+
+Tahle otázka šetří hodně energie. Když ji přeskočíte, každý zajímavý podnět začne vypadat jako důvod k revizi. Tým pak znovu zavádí tabulky, schůzky a kontroly, které právě uklidil. Stabilní klid se tím nezlomí najednou. Rozpadne se potichu, po jedné "malé jistotě".
+
+### Rozlište čtyři typy podnětu
+
+Po prvním podnětu vyberte jeden typ:
+
+- Šum: jeden izolovaný případ bez dopadu na pravidlo.
+- Lokální chyba: pravidlo je v pořádku, ale konkrétní pracovní místo mělo slabý odkaz, nejasný název nebo chybějící příklad.
+- Návratový signál: nastala situace, kterou jste si předem určili jako důvod k návratu.
+- Změna kontextu: pravidlo možná pořád dává smysl, ale změnila se nabídka, publikum, provoz, data nebo odpovědnost.
+
+`Šum` nechte být. Zapište ho jen tehdy, když by jinak vyvolal opakovanou debatu. Jeden člověk jednou nenajde checklist, protože hledal ve špatném projektu, ještě neznamená, že checklist selhal.
+
+`Lokální chyba` patří do nejbližšího pracovního místa. Pokud odkaz v šabloně vede na starý název, opravte odkaz. Pokud příklad používá dávno opuštěné slovo, přepište příklad. Neotvírejte stabilní pravidlo, když stačí opravit ceduli na dveřích.
+
+`Návratový signál` otevře malou smyčku. Ne celou historii. Vezměte signál, porovnejte ho s posledním stabilním zápisem a rozhodněte, jestli pravidlo drží, potřebuje lokální opravu, má užší rozsah, nebo se má vrátit do omezeného ověření.
+
+`Změna kontextu` je nejcitlivější. Tady nejdřív neřešte pravidlo, ale přenesený kontext. Co z posledního stabilního zápisu pořád platí? Co už neplatí? Co nevíte? Teprve potom má smysl vybírat úpravu.
+
+### Příklad návratu po klidu
+
+```text
+Stabilní pravidlo:
+Marketingový formulář sbírá jen údaje, které slouží k pojmenovanému rozhodnutí.
+
+Návratový signál:
+Dva nové formuláře za sebou přidají pole bez zapsaného účelu.
+
+Co se stalo:
+Jeden nový formulář přidal pole "telefon" bez účelu. Druhý formulář zatím neexistuje.
+
+Výsledek:
+Není to návratový signál. Je to lokální chyba ve schvalovacím checklistu konkrétní landing page.
+
+Jedna úprava:
+Do checklistu před publikací doplnit otázku: "Umíme u každého pole říct rozhodnutí, které bez něj neuděláme?"
+
+Co neotevíráme:
+Nepřepisujeme celé pravidlo pro formuláře a nezavádíme nové měření polí.
+```
+
+Stejný příklad by vypadal jinak, kdyby se chyba objevila u dvou formulářů za sebou. Pak už by šlo o předem pojmenovaný návratový signál a smyčka by se otevřela. Rozdíl není v dramatičnosti případu, ale v tom, jestli splnil návratovou podmínku.
+
+### Nejmenší smyčka návratu
+
+Když podnět opravdu splní návratový signál, držte smyčku malou:
+
+1. Přečtěte poslední kartu stabilního klidu.
+2. Ověřte, jak přesně signál nastal.
+3. Pojmenujte nejbližší pracovní místo.
+4. Vyberte jeden výsledný stav.
+5. Proveďte jednu úpravu nebo vědomě nechte pravidlo beze změny.
+6. Ukliďte dočasné stopy.
+7. Vraťte pravidlo do klidu, nebo ho dejte do omezeného ověření.
+
+Nejbližší pracovní místo je brzda proti přehánění. Pokud signál vznikl v jednom formuláři, začněte formulářem. Pokud vznikl při předání novému člověku, začněte onboardingovou trasou. Pokud vznikl v indexu, začněte indexem. Až když malá smyčka ukáže širší vzor, má smysl zasáhnout pravidlo samotné.
+
+Codyho komentář: návratový signál není pozvánka na velkolepou procesní renesanci. Je to zvonek u dveří. Otevřete, zjistěte kdo tam je, a když je to jen kurýr s jedním balíkem, nestavte kvůli tomu nové logistické centrum.
+
+### Privacy-first reakce na signál
+
+Návrat po stabilním klidu svádí ke sběru důkazů. Tým má pocit, že když se téma po dlouhé době vrátilo, musí si uložit víc podkladů, aby "tentokrát" nic neuniklo. To je pochopitelné, ale často zbytečné.
+
+Použijte tři hranice:
+
+```text
+Nezakládáme novou evidenci, dokud nevíme, jaké rozhodnutí má podpořit.
+
+Nekopírujeme osobní údaje mimo původní systém, pokud stačí zobecněný závěr.
+
+Nesbíráme další eventy jen proto, že se pravidlo po klidu ozvalo.
+```
+
+Praktický zápis může být velmi krátký:
+
+```text
+Návratový signál se nepotvrdil. Šlo o lokální chybu odkazu ve formulářovém checklistu. Do paměti ukládáme jen zobecněný závěr, dočasný screenshot mažeme.
+```
+
+Nebo:
+
+```text
+Návratový signál se potvrdil u dvou formulářů. Otevíráme omezené ověření datové karty, bez nového trackingu a bez kopírování vyplněných odpovědí mimo CRM.
+```
+
+Privacy-first hodnota je tady v omezení reakce. Když se pravidlo vrací po klidu, nepotřebuje automaticky větší datovou stopu. Potřebuje přesnější otázku.
+
+### Karta prvního návratového signálu po stabilním klidu
+
+```text
+Pravidlo nebo pracovní místo:
+
+Poslední karta stabilního klidu:
+
+Ponechaný návratový signál:
+
+Aktuální podnět:
+
+Typ podnětu:
+- šum / lokální chyba / návratový signál / změna kontextu
+
+Jak přesně signál nastal:
+
+Nejbližší pracovní místo:
+
+Co z posledního stabilního zápisu stále platí:
+
+Co už nepřenášíme:
+
+Výsledek:
+- nechat být / lokálně opravit / otevřít malou smyčku / zkontrolovat kontext / vrátit do omezeného ověření
+
+Jedna případná úprava:
+
+Co výslovně neotevíráme:
+
+Privacy-first hranice:
+
+Dočasné stopy k úklidu:
+
+Nový nebo ponechaný návratový signál:
+
+Vlastník:
+
+Datum:
+```
+
+Karta má hlavně zabránit tomu, aby se návratový signál proměnil v obecnou revizi. Pokud vyplňujete tři odstavce historie, zastavte se. Pravděpodobně řešíte víc než první signál po stabilním klidu.
+
+### Mini workshop na 8 minut
+
+1. Minuta 1: přečtěte poslední kartu stabilního klidu.
+2. Minuta 2: pojmenujte aktuální podnět jednou větou.
+3. Minuta 3: vyberte typ podnětu: šum, lokální chyba, návratový signál nebo změna kontextu.
+4. Minuta 4: určete nejbližší pracovní místo.
+5. Minuta 5: napište, co výslovně neotevíráte.
+6. Minuta 6: vyberte jeden výsledný stav.
+7. Minuta 7: rozhodněte o jedné úpravě nebo o vědomém nezasahování.
+8. Minuta 8: proveďte privacy-first úklid dočasných stop.
+
+Workshop končí větou:
+
+```text
+První podnět po stabilním klidu je: ...; reakce je: ...; pravidlo teď neotevíráme v rozsahu: ...
+```
+
+Tři doplnění stačí. Typ podnětu, reakce a zavřený rozsah. Když tým potřebuje víc, může to být signál, že nejde o první návrat, ale o změnu kontextu. V takovém případě nepředstírejte malou opravu a nejdřív zkontrolujte, co ze starého pravidla ještě platí.
+
+### Checklist prvního návratového signálu po stabilním klidu
+
+- Porovnali jsme podnět s návratovým signálem ze stabilního klidu?
+- Rozlišili jsme šum, lokální chybu, skutečný návratový signál a změnu kontextu?
+- Neotevíráme celé pravidlo kvůli jednomu izolovanému případu?
+- Pokud jde o lokální chybu, opravujeme nejbližší pracovní místo?
+- Pokud jde o návratový signál, otevíráme nejmenší možnou smyčku?
+- Pokud jde o změnu kontextu, nejdřív kontrolujeme přenesený kontext?
+- Napsali jsme, co výslovně neotevíráme?
+- Nepřidáváme novou kontrolní vrstvu jen proto, že se téma po klidu ozvalo?
+- Nepřesouváme osobní údaje, screenshoty nebo exporty mimo původní zdroj bez jasného účelu?
+- Máme po uzavření ponechaný nebo zpřesněný návratový signál?
+
+První návrat po stabilním klidu je test disciplíny. Ne test toho, jestli pravidlo umíte znovu rozebrat do šroubku. Dobrý tým pozná, kdy má otevřít malou smyčku, kdy má opravit ceduli, kdy má zkontrolovat kontext a kdy má prostě nechat věc být. Právě to drží provoz klidný: ne absence signálů, ale schopnost odpovědět jim přesně a bez zbytečné datové stopy.
+
 ## Pracovní log
 
+- 2026-06-18: Doplněna úvodní podkapitola o prvním návratovém signálu po stabilním klidu: rozlišení šumu, lokální chyby, skutečného signálu a změny kontextu, nejmenší návratová smyčka, privacy-first reakce, karta, mini workshop a checklist.
 - 2026-06-18: Doplněna úvodní podkapitola o stabilním klidu po uzavření druhého běžného použití: kanonické místo pravidla, rozhodovací paměť, návratový signál, odstranění dočasných opor, privacy-first stabilizace, karta, mini workshop a checklist.
 - 2026-06-18: Doplněna úvodní podkapitola o uzavření druhého běžného použití po návratu do tichého provozu: uzavírací stavy, propsání výsledku do pracovního místa, zúžení rozsahu pravidla, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-18: Doplněna úvodní podkapitola o druhém běžném použití po návratu do tichého provozu: přenositelnost pravidla, samostatnost bez mimořádné připomínky, nerozšiřování úzkého pravidla, privacy-first úklid, karta, mini workshop a checklist.
