@@ -226259,8 +226259,185 @@ Když nebyl žádný reálný průchod, nedělejte umělou simulaci jen kvůli p
 
 První klidový rytmus po roční inventuře je malá zkouška důvěry. Pokud pravidlo funguje, nedávejte mu novou pozornost jako odměnu. Dejte mu klid. Když nefunguje, opravte přesné místo nebo otevřete návratový signál. Všechno mezi tím je většinou jen administrativní mlha s lepším názvem.
 
+## Uzavření prvního klidového rytmu po roční inventuře
+
+První klidový rytmus po roční inventuře nestačí jen provést. Musí se také zavřít. Jinak se z něj stane nové poloviční patro mezi inventurou a běžným provozem: pravidlo už nemá mimořádnou péči, ale někdo pořád čeká, jestli se ještě nemá něco doplnit, přeměřit nebo "raději zkontrolovat". Uzavření je právě okamžik, kdy tým řekne, že klidový rytmus buď opravdu nese pravidlo dál, nebo má přesně pojmenovanou jednu další akci.
+
+Začněte krátkou větou:
+
+```text
+Po prvním klidovém rytmu pravidlo:
+Výsledek uzavíráme jako:
+Další návrat nastane jen:
+```
+
+Příklad:
+
+```text
+Po prvním klidovém rytmu pravidlo:
+Zůstává v publikačním checklistu a ve formulářové šabloně. Během kvartální kontroly nevznikl návratový signál.
+
+Výsledek uzavíráme jako:
+Zůstává v klidu.
+
+Další návrat nastane jen:
+Při dalším běžném kvartálním review nebo když vznikne nový formulář bez věty o účelu dat.
+```
+
+Takový zápis je nudný záměrně. Neobsahuje nové úkoly, pokud nejsou potřeba. Neotevírá roční inventuru, pokud se neobjevil širší rozpor. Nezakládá měření používání checklistu, pokud stačí hotový výstup práce. Klidový rytmus má dokazovat, že systém funguje bez dalšího divadla.
+
+### Čtyři uzavírací stavy
+
+Po prvním klidovém rytmu vyberte jeden stav:
+
+- Uzavřít bez akce: pravidlo funguje, návratový signál nenastal a datová stopa se nerozšířila.
+- Uzavřít s lokální údržbou: pravidlo funguje, ale jedno pracovní místo potřebuje drobnou opravu.
+- Přepsat rytmus: pravidlo je dobré, ale běžný rytmus ho nenese spolehlivě.
+- Otevřít návratový signál: předem popsaná situace nastala a má vzniknout nová iterace.
+
+`Uzavřít bez akce` je výsledek, který týmy často podceňují. Přitom je to známka zdravého provozu: pravidlo se použilo, nic se nerozbilo, nebylo potřeba sbírat další data a tým může pokračovat. Do logu patří jedna věta, ne nový projekt.
+
+`Uzavřít s lokální údržbou` použijte, když kontrola našla malé tření. Například jeden checklist má starý název formuláře, šablona odkazuje na archivní poznámku nebo se v jednom dokumentu opakuje věta z inventury, která už dnes mate. Opravte konkrétní místo a zavřete. Neberte lokální údržbu jako pozvánku k přepsání celé sady pravidel.
+
+`Přepsat rytmus` je správné, když pravidlo samo dává smysl, ale nemá stabilní provozní háček. Možná kvartální kontrola formulářů ve skutečnosti neexistuje. Možná vlastník není jasný. Možná se kontrola děje až při problému, ne v domluveném rytmu. Pak neopravujte pravidlo; opravte kalendář, vlastnictví nebo místo, kde se pravidlo připomíná.
+
+`Otevřít návratový signál` znamená konec klidové kontroly a začátek nové iterace. Jakmile signál nastal, nepřidávejte další otázky do stejného zápisu. Otevřete samostatnou kartu se stop podmínkou, jedním pracovním místem a jasnou privacy-first hranicí.
+
+### Uzavírací karta
+
+```text
+Pravidlo:
+
+Kanonické pracovní místo:
+
+Klidový rytmus:
+
+Co jsme ověřili:
+
+Návratový signál:
+- nenastal / částečný podnět / nastal
+
+Datová stopa:
+- beze změny / lokální úklid / rozšíření k zastavení
+
+Uzavírací stav:
+- bez akce
+- lokální údržba
+- přepsat rytmus
+- otevřít návratový signál
+
+Jedna změna, pokud existuje:
+
+Co výslovně neotevíráme:
+
+Co dál nesbíráme, neměříme ani neexportujeme:
+
+Kde je výsledek zapsaný:
+
+Další návrat:
+```
+
+Vyplněný příklad:
+
+```text
+Pravidlo:
+U nového formulářového pole musí být jasný účel, vlastník a retenční hranice.
+
+Kanonické pracovní místo:
+Šablona formuláře a publikační checklist landing page.
+
+Klidový rytmus:
+Kvartální kontrola formulářů.
+
+Co jsme ověřili:
+Dvě nové úpravy formulářů použily šablonu správně. Nevzniklo nové povinné pole bez účelu.
+
+Návratový signál:
+Nenastal.
+
+Datová stopa:
+Beze změny.
+
+Uzavírací stav:
+Bez akce.
+
+Jedna změna, pokud existuje:
+Žádná.
+
+Co výslovně neotevíráme:
+Neotevíráme strategii kvalifikace leadů ani roční inventuru formulářových pravidel.
+
+Co dál nesbíráme, neměříme ani neexportujeme:
+Nesledujeme používání checklistu podle lidí, neděláme nový dashboard a neexportujeme formulářové průchody.
+
+Kde je výsledek zapsaný:
+V běžném kvartálním review formulářů.
+
+Další návrat:
+Při dalším kvartálním review nebo při novém poli bez účelu a retence.
+```
+
+### Částečný podnět není návratový signál
+
+Nejčastější chyba při uzavírání klidového rytmu je zaměnit částečný podnět za návratový signál. Někdo si všimne, že by šablona šla napsat líp, že jeden člověk hledal odkaz o minutu déle, nebo že starý příklad by mohl být elegantnější. To může být užitečná poznámka, ale není to automaticky návrat pravidla.
+
+Částečný podnět zavřete jednou ze tří cest:
+
+- Zapsat a nechat: podnět nemá dopad na rozhodnutí ani práci.
+- Opravit lokálně: stačí jedna věta, odkaz nebo přesun.
+- Převést na návratový signál: jen pokud odpovídá předem zapsané hranici nebo ukazuje jasný provozní dopad.
+
+Codyho komentář: "šlo by to napsat hezčeji" je věčný zdroj práce, kdybychom mu dali klíče od skladu. Pusťte ho dovnitř jen tehdy, když přinese konkrétní pracovní dopad. Jinak ať počká venku s ostatními nápady, které mají pěkné boty a žádný úkol.
+
+### Privacy-first uzavření
+
+Uzavření klidového rytmu je dobré místo pro malý datový úklid. Pokud během kontroly vznikly pracovní poznámky, kopie formulářů, screenshoty, exporty nebo interní komentáře, ponechte jen výsledek, který má rozhodovací hodnotu. Většina surových podkladů nemá po uzavření další účel.
+
+Minimum, které obvykle stačí:
+
+```text
+Zůstává:
+Stav pravidla, uzavírací stav, případná lokální oprava, návratový signál a další běžný rytmus.
+
+Maže se nebo zkracuje:
+Dočasné pracovní poznámky, kopie, screenshoty, detailní příklady a surové exporty.
+
+Nevzniká:
+Nový tracker používání pravidla, osobní evidence kontroly, dashboard pro dokumentaci ani automatické hlídání čtení checklistů.
+```
+
+Pokud potřebujete příklad zachovat, zobecněte ho. Místo konkrétní poptávky napište "nový formulář neměl retenční větu". Místo jména člověka napište roli nebo pracovní situaci. Cílem je udržet poučení, ne konzervovat osobní nebo zákaznický detail.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte výsledek prvního klidového rytmu.
+2. Minuta 2: porovnejte ho s návratovým signálem.
+3. Minuta 3: vyberte jeden ze čtyř uzavíracích stavů.
+4. Minuta 4: napište jednu změnu, pokud existuje.
+5. Minuta 5: zapište, co neotevíráte a co dál neměříte.
+6. Minuta 6: určete další běžný návrat a ukliďte dočasné podklady.
+
+Když tým v šesté minutě neví, co dál, výchozí stav není "nechat otevřené". Výchozí stav je "bez akce", pokud nenastal návratový signál ani konkrétní lokální údržba. Otevřený klidový rytmus je podezřelá věc: buď je klidový, nebo něco opravdu nastalo.
+
+### Checklist uzavření prvního klidového rytmu
+
+- Má první klidový rytmus jeden uzavírací stav?
+- Nezaměnili jsme částečný podnět za návratový signál?
+- Pokud pravidlo funguje, uzavíráme bez nové práce?
+- Pokud stačí lokální údržba, víme přesně které pracovní místo se mění?
+- Pokud je slabý rytmus, opravujeme rytmus místo samotného pravidla?
+- Pokud nastal návratový signál, otevíráme novou iteraci mimo tuto kontrolu?
+- Je zapsané, co výslovně neotevíráme?
+- Nevzniká dohled nad používáním dokumentů nebo lidí?
+- Uklidili jsme dočasné poznámky, kopie, screenshoty a exporty?
+- Zůstává jen výsledek s rozhodovací hodnotou?
+- Ví tým, kdy se pravidlo vrátí v dalším běžném rytmu?
+
+Uzavření prvního klidového rytmu má jednoduchý účel: zabránit tomu, aby se klid proměnil v další práci. Stabilní pravidlo má pokračovat bez fanfár. Slabé místo má dostat přesnou opravu. Skutečný návratový signál má dostat novou iteraci. Všechno ostatní patří do poznámek, ne do provozního závazku.
+
 ## Pracovní log
 
+- 2026-06-18: Doplněna úvodní podkapitola o uzavření prvního klidového rytmu po roční inventuře: čtyři uzavírací stavy, práce s částečným podnětem, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-18: Doplněna úvodní podkapitola o prvním klidovém rytmu po uzavřené roční inventuře: kontrola běžného rytmu, návratový signál, lokální údržba, slabý rytmus, privacy-first datová brzda, karta, mini workshop a checklist.
 - 2026-06-18: Doplněna úvodní podkapitola o uzavření druhého běžného použití po roční inventuře: čtyři uzavírací stavy, karta uzavření, lokální dočištění, návrat do klidového rytmu, privacy-first uzavření a checklist.
 - 2026-06-18: Doplněna úvodní podkapitola o druhém běžném použití po uzavřené roční inventuře: přenositelnost bez čerstvé paměti, čtyři výsledné stavy, slabý přenos, skrytá historie, privacy-first hranice, karta, mini workshop a checklist.
