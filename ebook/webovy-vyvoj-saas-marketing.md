@@ -225754,8 +225754,213 @@ Když se tým zasekne u čtvrté nebo páté minuty, pravděpodobně nemá jasno
 
 Uzavření prvního běžného použití má roční inventuru konečně pustit z ruky. Pokud pravidlo drží, vraťte ho do klidového rytmu. Pokud drhne jedna stopa, ukliďte ji. Pokud se ukázal skutečný rozpor, otevřete malé nové rozhodnutí. V každém případě by po uzavření mělo být méně zvláštní péče, méně pomocných podkladů a jasnější pracovní místo.
 
+## Druhé běžné použití po uzavřené roční inventuře
+
+Druhé běžné použití po uzavřené roční inventuře má jiný účel než první. První použití ověřilo, že inventurní závěr vůbec dopadl do práce. Druhé má ověřit, že závěr funguje i bez čerstvé paměti, bez autora inventury a bez toho, aby někdo týmu připomínal, co se minulý týden rozhodlo.
+
+To je důležitý rozdíl. První průchod často ještě nese vůni čerstvého rozhodnutí. Lidé vědí, kde se co uklízelo, kdo přepsal checklist a proč se starý dokument archivoval. Druhý průchod už má být obyčejnější. Když pravidlo opravdu žije ve správném pracovním místě, člověk nemusí znát historii; stačí mu aktuální instrukce.
+
+Kontrolní otázka zní:
+
+```text
+Dokáže druhá běžná pracovní situace použít výsledek roční inventury bez znalosti inventurní historie?
+```
+
+Pokud ano, roční inventura je stabilně vstřebaná. Pokud ne, nejdřív hledejte problém v přenositelnosti pracovního místa, ne v obsahu inventury. Často nejde o špatné rozhodnutí, ale o to, že aktuální pravidlo je srozumitelné jen lidem, kteří byli u jeho vzniku. To je běžná nemoc interních dokumentů: pro pamětníky jasné, pro ostatní trochu věštecká poezie.
+
+### Co je ve druhém použití nové
+
+Druhé použití sleduje čtyři věci:
+
+- Přenositelnost: pravidlo použije člověk, který nebyl u inventury nebo si ji nepamatuje.
+- Samostatnost: pracovní místo vede k rozhodnutí bez doplňujícího vysvětlování.
+- Stabilitu stavu: živé, vstřebané, archivní a vyřazené položky se znovu nemíchají.
+- Datovou střídmost: kvůli nejistotě nevzniká nová evidence, kopie, screenshot ani sledování lidí.
+
+Příklad:
+
+```text
+Situace:
+Nový člen týmu připravuje aktualizaci produktové stránky.
+
+Výsledek roční inventury:
+Pravidlo o vysvětlení dat ve formuláři bylo vstřebané do publikačního checklistu.
+
+Co se stalo při druhém použití:
+Člověk otevřel checklist, našel bod k datové větě, upravil text u formuláře a nepotřeboval hledat původní inventurní zápis.
+
+Výsledek:
+Druhé použití drží. Pravidlo je přenositelné.
+
+Privacy-first dopad:
+Nevznikla nová evidence, kdo checklist použil. Stačil běžný pracovní výstup.
+```
+
+Příklad slabého přenosu:
+
+```text
+Situace:
+Obchod upravuje šablonu follow-up e-mailu po discovery hovoru.
+
+Výsledek roční inventury:
+Staré pravidlo o automatickém lead scoringu bylo archivní.
+
+Co se stalo:
+Šablona sice neobsahuje scoring, ale poznámka "vyhodnotit kvalitu leadu podle starého modelu" zůstala ve vysvětlivce. Člověk bez historie neví, jestli ji má použít.
+
+Výsledek:
+Neotevíráme scoring. Opravujeme vysvětlivku ve follow-up šabloně a doplňujeme jednu aktuální větu o kvalifikaci bez automatického skóre.
+```
+
+Slabý přenos není důkaz, že inventura selhala. Je to důkaz, že jedno pracovní místo pořád nese historický jazyk. Opravte jazyk, ne celou minulost.
+
+### Čtyři výsledky druhého použití
+
+Po druhém použití vyberte jeden ze čtyř stavů:
+
+- Stabilní: pravidlo funguje i bez čerstvé paměti.
+- Slabý přenos: pravidlo je správné, ale text nebo odkaz potřebuje doplnit.
+- Skrytá historie: pracovní místo pořád nutí lidi chápat starý kontext.
+- Nový rozpor: druhé použití ukázalo, že závěr inventury neodpovídá běžné práci.
+
+`Stabilní` znamená, že zvláštní pozornost končí. Není potřeba třetí ověření jen proto, že druhé dopadlo dobře. Pravidlo se vrací do běžného ročního, půlročního nebo týmového rytmu podle toho, kde má žít.
+
+`Slabý přenos` znamená lokální úpravu formulace. Typicky doplnit jednu větu, přejmenovat stav, odstranit historický odkaz nebo přesunout rozhodovací pravidlo do místa, kde člověk opravdu pracuje.
+
+`Skrytá historie` je vážnější. Znamená, že dokument sice formálně ukazuje aktuální stav, ale člověk mu rozumí jen přes staré debaty, staré názvy nebo staré výjimky. Tady nestačí opravit slovo. Je potřeba přepsat pravidlo tak, aby začínalo dnešní pracovní situací.
+
+`Nový rozpor` používejte opatrně. Nastává tehdy, když druhé použití ukáže, že inventurní závěr byl věcně špatně: například pravidlo označené jako vyřazené je ve skutečnosti nutné pro bezpečné rozhodnutí, nebo pravidlo označené jako vstřebané nemá žádné skutečné pracovní místo.
+
+### Jak opravit slabý přenos
+
+Slabý přenos opravujte jedním z těchto zásahů:
+
+- přepsat historickou větu do přítomného času;
+- doplnit jedno rozhodovací kritérium přímo do checklistu;
+- nahradit odkaz na starou inventuru odkazem na aktuální zdroj pravdy;
+- odstranit příklad, který bez kontextu svádí ke starému postupu;
+- přejmenovat stav tak, aby nezněl jako aktivní úkol.
+
+Rozsah zapište takto:
+
+```text
+Slabý přenos se projevil v:
+
+Člověk bez historie mohl pochopit špatně:
+
+Opravujeme pouze:
+
+Po opravě má být jasné:
+
+Co znovu neotevíráme:
+```
+
+Příklad:
+
+```text
+Slabý přenos se projevil v:
+Follow-up šabloně po discovery hovoru.
+
+Člověk bez historie mohl pochopit špatně:
+Že má znovu používat starý automatický scoring.
+
+Opravujeme pouze:
+Jednu vysvětlivku u kvalifikace leadu.
+
+Po opravě má být jasné:
+Kvalitu leadu posuzujeme podle rozhodovacího horizontu, rozpočtu a reálné bolesti, ne podle automatického skóre.
+
+Co znovu neotevíráme:
+Scoringový model, nová CRM pole ani obohacování kontaktů.
+```
+
+Takový zásah je malý, ale velmi užitečný. Nezvyšuje složitost systému, jen odstraňuje potřebu znát staré příběhy.
+
+### Privacy-first hranice druhého použití
+
+Druhé použití po inventuře nesmí zavést nový dohled nad tím, jak lidé používají dokumentaci. Nepotřebujete měřit, kdo otevřel checklist. Nepotřebujete heatmapu interní wiki. Nepotřebujete export historie úprav jako důkaz, že se pravidlo použilo.
+
+Stačí tři klidné stopy:
+
+```text
+Běžná situace:
+Výsledek druhého použití:
+Jedna lokální úprava, pokud vznikla:
+```
+
+Pokud musíte doložit, že pravidlo funguje, použijte pracovní výstup, který by vznikl tak jako tak: publikovanou stránku, upravenou šablonu, uzavřený ticket, rozhodovací záznam nebo aktualizovaný checklist. Nevyrábějte nový důkaz jen kvůli pocitu jistoty.
+
+Codyho komentář: interní dokumentace nemá být escape room. Když člověk potřebuje znát tři staré debaty, aby pochopil jednu větu v checklistu, není to znalostní báze, ale archeologie s horším občerstvením. Přepište větu pro dnešní práci a nechte vykopávky v archivu.
+
+### Karta druhého použití po roční inventuře
+
+```text
+Pravidlo nebo skupina pravidel:
+
+Výsledek roční inventury:
+- živé / vstřebané / archivní / vyřazené
+
+Druhá běžná pracovní situace:
+
+Kdo pravidlo použil:
+- pamětník / člověk bez čerstvé historie / nový člen týmu
+
+Kde měl najít aktuální pravidlo:
+
+Co pochopil správně:
+
+Co bylo nejasné:
+
+Výsledek:
+- stabilní
+- slabý přenos
+- skrytá historie
+- nový rozpor
+
+Lokální úprava, pokud stačí:
+
+Nové malé rozhodnutí, pokud nestačí:
+
+Co znovu neotevíráme:
+
+Co dál nesbíráme ani neměříme:
+
+Kde pravidlo dál žije:
+
+Datum běžného návratu:
+```
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: pojmenujte druhou běžnou situaci po inventuře.
+2. Minuta 2: ověřte, zda člověk potřeboval znát historii rozhodnutí.
+3. Minuta 3: určete výsledek: stabilní, slabý přenos, skrytá historie, nebo nový rozpor.
+4. Minuta 4: při slabém přenosu napište jednu lokální úpravu.
+5. Minuta 5: při skryté historii přepište pravidlo do dnešní pracovní situace.
+6. Minuta 6: při rozporu určete nejmenší nové rozhodnutí.
+7. Minuta 7: zapište, co kvůli tomu dál nesbíráte ani neměříte.
+
+Workshop má hlídat přenositelnost, ne výkon člověka. Pokud někdo pravidlo nepochopil, první otázka nemá znít "proč si to nepamatuješ". Má znít "co v pracovním místě chybí, aby to šlo pochopit bez paměti".
+
+### Checklist druhého použití po roční inventuře
+
+- Ověřili jsme druhou běžnou situaci, ne nový audit?
+- Použil pravidlo člověk bez čerstvé inventurní paměti?
+- Bylo pravidlo jasné v aktuálním pracovním místě?
+- Nevyžadoval dokument znalost starých debat, starých názvů nebo archivních výjimek?
+- Rozlišili jsme stabilitu, slabý přenos, skrytou historii a nový rozpor?
+- Pokud stačí lokální úprava, víme přesně která věta, odkaz nebo stav se mění?
+- Pokud jde o skrytou historii, přepisujeme pravidlo pro dnešní práci?
+- Pokud jde o rozpor, otevíráme jen nejmenší nové rozhodnutí?
+- Je jasné, co znovu neotevíráme?
+- Nevzniká měření používání dokumentů, lidí, klikání ani kontrolních průchodů?
+- Ví tým, kde pravidlo dál žije a kdy se k němu má vrátit běžným rytmem?
+
+Druhé běžné použití je dobrý test dospělosti pravidla. Když funguje bez čerstvé paměti, může odejít do klidového rytmu. Když nefunguje, obvykle nepotřebuje další velkou inventuru, ale lepší větu, čistší odkaz nebo konečně opuštění historického jazyka.
+
 ## Pracovní log
 
+- 2026-06-18: Doplněna úvodní podkapitola o druhém běžném použití po uzavřené roční inventuře: přenositelnost bez čerstvé paměti, čtyři výsledné stavy, slabý přenos, skrytá historie, privacy-first hranice, karta, mini workshop a checklist.
 - 2026-06-18: Doplněna úvodní podkapitola o uzavření prvního běžného použití po roční inventuře: uzavírací věta, tři stavy výsledku, lokální dočištění, práce se skutečným rozporem, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-18: Doplněna úvodní podkapitola o prvním běžném použití po uzavřené roční inventuře: ověření zdroje pravdy, tři výsledky použití, lokální dočištění, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-06-18: Doplněna úvodní podkapitola o uzavření první roční inventury po půlročním pravidle: uzavírací výsledky, změny pracovních míst, privacy-first úklid, karta, mini workshop a checklist.
