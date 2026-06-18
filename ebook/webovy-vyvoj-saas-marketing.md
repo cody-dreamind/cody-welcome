@@ -227124,8 +227124,147 @@ Pokud sedm minut nestačí, pravděpodobně nemáte návratový signál, ale vě
 
 První návratový signál po tichém provozu je test dospělosti pravidla. Pokud tým dokáže reagovat malým přesným krokem, pravidlo opravdu žije v provozu. Pokud hned vytáhne starou inventuru, možná pravidlo ještě pořád stojí na staré péči. Dobrá reakce pozná rozdíl a nechá práci růst jen tam, kde je skutečný důvod.
 
+## Jak uzavřít první návratový signál po tichém provozu
+
+První návratový signál po tichém provozu nesmí zůstat jen jako otevřená poznámka. Jakmile tým ověří, jestli šlo o falešný návrat, lokální tření, skutečný návrat pravidla nebo rozpad kontextu, potřebuje smyčku zavřít. Jinak se pravidlo začne tvářit jako znovu podezřelé a tichý provoz skončí ne proto, že selhal, ale proto, že nikdo neudělal poslední uzavírací krok.
+
+Uzavření má odpovědět na jednoduchou otázku:
+
+```text
+Co se po návratovém signálu opravdu změnilo a co se naopak dál nechává v klidu?
+```
+
+Pokud na otázku neumíte odpovědět jednou nebo dvěma větami, pravděpodobně jste ještě nerozlišili stav signálu. Neuzavírejte mlhu. Nejdřív se vraťte k původnímu návratovému signálu, dnešní události a nejbližšímu pracovnímu místu.
+
+### Uzavření podle výsledného stavu
+
+Každý ze čtyř stavů má jiný závěr.
+
+`Falešný návrat` uzavřete větou, že pravidlo zůstává v tichém provozu a opravuje se jen okolní stopa, pokud nějaká vznikla. Například starý odkaz, archivní šablona nebo duplicitní poznámka. Hlavní pravidlo se nemění.
+
+`Lokální tření` uzavřete malou opravou a jedním přirozeným ověřením. Oprava má žít v místě, kde tření vzniklo: v kartě, šabloně, popisku, checklistu nebo formulaci návratového signálu. Nezakládejte nový revizní režim, pokud stačí další běžné použití.
+
+`Skutečný návrat pravidla` uzavřete založením nové smyčky. To znamená novou pracovní otázku, stop podmínku, vlastníka, ověření a datovou hranici. Staré rozhodnutí zůstává jako kontext, ne jako povinnost otevřít celou historii.
+
+`Rozpad kontextu` uzavřete přerámováním. Nepřepisujte pravidlo tak, aby silou pokrylo nový svět. Napište, co se změnilo v nabídce, publiku, provozu nebo datech, a založte novou otázku až podle dnešní reality.
+
+Praktický příklad:
+
+```text
+Pravidlo:
+Každé nové formulářové pole musí mít účel, vlastníka a retenční hranici.
+
+Návratový signál:
+Tři nová pole za sebou nemají dohledatelný účel nebo retenci.
+
+Co se stalo:
+U dvou polí chyběl účel, retence byla zapsaná a třetí pole zatím nepřibylo.
+
+Výsledný stav:
+Lokální tření.
+
+Uzavření:
+Do šablony formulářové karty doplňujeme jednu pomocnou otázku: "Jaké rozhodnutí bez tohoto pole nejde udělat?" Pravidlo zůstává v tichém provozu.
+
+Ověření:
+Při dalším novém poli vlastník vyplní účel bez doptání.
+
+Co neotevíráme:
+Neotevíráme roční inventuru, nový schvalovací proces ani export starých formulářů.
+```
+
+Tento závěr je dostatečně konkrétní. Říká, co se mění, co se nemění a jak se pozná, že lokální oprava stačila.
+
+### Zapište nový stav pravidla
+
+Po uzavření návratového signálu musí pravidlo dostat nový stav. Bez toho bude při dalším použití nejasné, jestli je pořád stabilní, lokálně opravené, znovu otevřené nebo nahrazené novou otázkou.
+
+Použijte jeden z pěti stavů:
+
+- Stabilní beze změny: signál se nepotvrdil a pravidlo dál běží v tichém provozu.
+- Stabilní po lokální opravě: pravidlo platí, ale jedno pracovní místo bylo dočištěné.
+- Otevřená nová smyčka: signál se potvrdil a pravidlo potřebuje nové ověření.
+- Přerámováno: původní pravidlo už není správný rámec pro dnešní situaci.
+- Archivováno nebo nahrazeno: pravidlo už nemá vést práci, protože ho nahradilo lepší kanonické místo.
+
+Stav pište tam, kde člověk pravidlo příště najde. Nestačí ho nechat v poznámce z kontroly. Pokud je kanonické místo formulářová karta, nový stav musí být vidět u formulářové karty. Pokud je kanonické místo provozní checklist, stav patří do checklistu nebo jeho rozhodovacího záznamu.
+
+### Ukliďte mimořádnou stopu
+
+Návratový signál po tichém provozu často vytvoří dočasné stopy: krátkou poznámku z kontroly, kopii šablony, screenshot, výřez z backlogu, export nebo komentář v chatu. Po uzavření rozhodněte, co s nimi.
+
+Výchozí pravidlo:
+
+```text
+Ponecháme rozhodovací závěr, návratový signál a případnou lokální opravu. Dočasné podklady mažeme nebo anonymizujeme, pokud už neslouží dalšímu rozhodnutí.
+```
+
+U privacy-first provozu je to podstatná část práce. Uzavřený návrat nemá po sobě nechávat víc dat než samotné pravidlo. Pokud k rozhodnutí stačí věta "u dvou polí chyběl účel", neukládejte kopii celé formulářové komunikace. Pokud stačí anonymizovaný popis staré šablony, nedržte screenshot s interními poznámkami.
+
+Codyho komentář: návratový signál je jako kontrolka na palubce. Když zkontrolujete kapalinu a zjistíte, že šlo o uvolněný kontakt, nevyměníte celé auto. Opravíte kontakt, zapíšete závěr a nevozíte s sebou kufr diagnostických papírů dalších pět let.
+
+### Karta uzavření návratového signálu
+
+```text
+Pravidlo:
+
+Kanonické pracovní místo:
+
+Původní návratový signál:
+
+Dnešní událost:
+
+Výsledný stav:
+- stabilní beze změny / stabilní po lokální opravě / otevřená nová smyčka / přerámováno / archivováno nebo nahrazeno
+
+Co se mění:
+
+Co zůstává v klidu:
+
+Nejbližší ověření, pokud je potřeba:
+
+Co výslovně neotevíráme:
+
+Privacy-first výsledek:
+Jaká data, exporty, trackery nebo pracovní kopie nevznikají nebo mizí:
+
+Kde je nový stav zapsaný:
+
+Vlastník:
+
+Datum dalšího návratu jen pokud je potřeba:
+```
+
+### Mini workshop na 9 minut
+
+1. Minuta 1: přečtěte výsledný stav z ověření návratového signálu.
+2. Minuty 2 až 3: napište, co se mění a co zůstává v klidu.
+3. Minuta 4: určete nový stav pravidla.
+4. Minuta 5: zapište nejbližší ověření, pokud je potřeba.
+5. Minuta 6: napište, co výslovně neotevíráte.
+6. Minuty 7 až 8: rozhodněte, které dočasné podklady smažete nebo anonymizujete.
+7. Minuta 9: zapište stav do kanonického pracovního místa.
+
+Workshop má skončit zápisem, ne dalším seznamem témat. Pokud vznikne nový nápad mimo původní návratový signál, dejte ho do samostatné karty změny. Nelepte ho na uzavření.
+
+### Checklist uzavření prvního návratového signálu
+
+- Má návratový signál vybraný jasný výsledný stav?
+- Je napsané, co se po kontrole opravdu mění?
+- Je napsané, co dál zůstává v tichém provozu?
+- Dostal kanonický záznam pravidla nový stav?
+- Pokud šlo o lokální tření, má oprava jedno pracovní místo a jedno přirozené ověření?
+- Pokud vznikla nová smyčka, má stop podmínku, vlastníka a datovou hranici?
+- Pokud se rozpadl kontext, nepřepisujeme staré pravidlo pro novou realitu silou?
+- Je jasné, co výslovně neotevíráme?
+- Smazali jsme nebo anonymizovali dočasné podklady, které už nemají účel?
+- Nevznikl kvůli uzavření nový tracker, export ani mimořádný kontrolní režim?
+
+Dobře uzavřený návratový signál vrátí pravidlu klid, nebo otevře novou smyčku s jasnou hranicí. Obě možnosti jsou v pořádku. Špatná možnost je mezistav: pravidlo už není úplně stabilní, ale nová práce taky nezačala. Právě takové mezistavy dlouhé rukopisy unavují. Uzavření je způsob, jak jim včas zavřít dveře.
+
 ## Pracovní log
 
+- 2026-06-18: Doplněna úvodní podkapitola o uzavření prvního návratového signálu po tichém provozu: stavy uzavření, nový stav pravidla, úklid mimořádných stop, privacy-first karta, mini workshop a checklist.
 - 2026-06-18: Doplněna úvodní podkapitola o prvním návratovém signálu po tichém provozu: ověření shody se signálem, čtyři výsledné stavy, lokální oprava, privacy-first reakce, karta, mini workshop a checklist.
 - 2026-06-18: Doplněna úvodní podkapitola o uzavření druhého klidového rytmu bez nové kontroly: odstranění mimořádných opor, uzavírací karta, situace kdy rytmus neuzavírat, privacy-first úklid důkazů a checklist.
 - 2026-06-18: Doplněna úvodní podkapitola o druhém klidovém rytmu po roční inventuře: přenositelnost pravidla bez čerstvé paměti, čtyři výsledné stavy, karta kontroly, privacy-first hranice a checklist.
