@@ -227566,8 +227566,150 @@ Když workshop začne rozšiřovat téma na celý systém pravidel, zastavte ho.
 
 Uzavření druhého návratového signálu je okamžik, kdy se opakování promění buď v malou stabilní opravu, nebo v poctivě ohraničenou novou práci. Obojí je zdravé. Nezdravé je nechat druhý signál žít jako neurčité napětí v týmu. To pak není opatrnost, ale jen backlog ve společenském oblečení.
 
+## Jak ověřit uzavření druhého návratového signálu při dalším přirozeném použití
+
+Uzavřený druhý návratový signál ještě nepotřebuje nový audit, ale zaslouží si jedno klidné ověření v práci. Ne proto, aby tým znovu otevřel celou historii. Proto, aby se ukázalo, jestli uzavírací rozhodnutí opravdu pomohlo v místě, kde má pomáhat. Pokud se druhý signál uzavřel jako lokální dočištění, přenos pravidla, nová smyčka nebo oddělená otázka, první další přirozené použití má potvrdit, že tento stav není jen dobře napsaná věta.
+
+Přirozené použití znamená situaci, která by nastala i bez speciální kontroly: další návrh formuláře, další obchodní předání, další publikace stránky, další práce se šablonou, další revize datové karty nebo další plánování změny. Nevyrábějte umělou zkoušku. Umělá zkouška často měří, kdo si pamatuje poslední debatu, ne jestli pracovní systém vede člověka správně.
+
+Začněte otázkou:
+
+```text
+Když se stejné pracovní místo použilo znovu, vedlo uzavření druhého signálu k očekávanému chování bez návratu staré nejistoty?
+```
+
+Pokud odpověď zní ano, uzavření drží a mimořádná pozornost končí. Pokud odpověď zní ne, nerozšiřujte automaticky téma. Nejdřív určete, co selhalo: samotné uzavírací rozhodnutí, místo propsání, přenos do dalšího pracovního místa, nebo návratový signál.
+
+### Co při ověření sledovat
+
+Sledujte jen čtyři věci:
+
+- Pracovní místo: člověk použil správnou šablonu, kartu, pravidlo nebo zdroj pravdy.
+- Chování: udělal krok, který odpovídá uzavíracímu rozhodnutí.
+- Hranice: neotevřel starý rozsah, který měl zůstat zavřený.
+- Datová stopa: nevzniklo nové pole, export, tracker, kopie nebo osobní poznámka bez jasného účelu.
+
+Tyto čtyři signály stačí. Pokud při ověření začnete hodnotit i celkovou kvalitu procesu, výkon člověka, roadmapu, strategii nabídky a všechny staré varianty pravidla, už neověřujete uzavření druhého signálu. Otevíráte nové téma bez hranice.
+
+Příklad:
+
+```text
+Uzavření druhého signálu:
+Pravidlo pro účel formulářového pole jsme přenesli i do onboardingového kroku.
+
+Další přirozené použití:
+Tým navrhoval novou otázku v onboardingovém průchodu.
+
+Co se stalo:
+Autor kroku použil datovou kartu, zapsal účel údaje a nepřidal nový analytický event.
+
+Výsledek:
+Uzavření drží.
+
+Co končí:
+Mimořádné sledování druhého signálu.
+
+Co zůstává:
+Běžné review onboardingových kroků a návratový signál, pokud by se znovu objevila otázka bez účelu a datové hranice.
+```
+
+Tento výsledek nepotřebuje další ceremonii. Stačí zapsat, že uzavření drží, a uklidit dočasné poznámky. Dobrá práce se pozná i podle toho, že umí skončit bez pamětní desky.
+
+### Čtyři výsledky ověření
+
+Po dalším přirozeném použití vyberte jeden ze čtyř stavů:
+
+- Drží: uzavření se propsalo do práce a stará nejistota se nevrátila.
+- Potřebuje jedno dočištění: rozhodnutí je správné, ale jedno pracovní místo pořád nese starou stopu nebo nejasný odkaz.
+- Ukazuje slabý přenos: pravidlo funguje v původním místě, ale při přenosu do dalšího místa člověk potřeboval příliš mnoho historie.
+- Otevírá novou smyčku: objevila se skutečná příčina, kterou uzavření druhého signálu neřeší.
+
+Stav `potřebuje jedno dočištění` řešte na stejném místě. Nepřidávejte novou kartu, pokud stačí opravit odkaz, zkrátit větu nebo odstranit starou poznámku.
+
+Stav `ukazuje slabý přenos` je jiný. Tam problém neleží v jedné překlepnuté větě, ale v tom, že pravidlo není přenositelné bez původního příběhu. V takovém případě nepřenášejte víc historie. Přepište pravidlo do menší pracovní věty pro nové místo.
+
+Stav `otevírá novou smyčku` použijte jen tehdy, když se objevil nový důkaz, ne jen nepohodlí. Nová smyčka má mít vlastní otázku, stop podmínku a datové minimum. Nemá zdědit celý balík emocí ze druhého signálu.
+
+### Privacy-first ověření bez nového sledování
+
+Ověření uzavření druhého signálu má být datově lehké. Ve většině případů stačí krátký zápis z přirozeného použití:
+
+```text
+Při dalším použití pravidlo vedlo k očekávanému kroku, starý rozsah se neotevřel a nevznikl nový údaj.
+```
+
+Nepotřebujete screenshot, nahrávku, export všech polí ani kontrolní tabulku lidí, kteří pravidlo použili. Pokud potřebujete příklad, anonymizujte ho na vzor chování. Pokud vznikla pracovní kopie, smažte ji po uzavření. Pokud se v ověření objevila osobní data, ponechte je v původním systému a do rozhodovací paměti přeneste jen zobecněný závěr.
+
+Codyho komentář: ověřit, že věc drží, neznamená postavit kolem ní plot, turniket a návštěvní knihu. Někdy stačí podívat se, že dveře jdou otevřít, a pak je přestat dramaticky kontrolovat.
+
+### Karta ověření uzavření druhého signálu
+
+```text
+Pravidlo nebo pracovní místo:
+
+Druhý návratový signál:
+
+Uzavírací rozhodnutí:
+
+Další přirozené použití:
+
+Co mělo proběhnout jinak:
+
+Co se reálně stalo:
+
+Výsledek:
+- drží / jedno dočištění / slabý přenos / nová smyčka
+
+Pokud drží, co ukončujeme:
+
+Pokud dočišťujeme, které jedno místo upravujeme:
+
+Pokud je přenos slabý, jakou pracovní větu zjednodušíme:
+
+Pokud vzniká nová smyčka, jaká je její otázka a stop podmínka:
+
+Co výslovně neotevíráme:
+
+Privacy-first výsledek:
+
+Co mažeme, zkracujeme nebo anonymizujeme:
+
+Vlastník:
+
+Datum:
+```
+
+### Mini workshop na 8 minut
+
+1. Minuta 1: přečtěte uzavírací rozhodnutí druhého signálu.
+2. Minuty 2 až 3: popište další přirozené použití a reálný výsledek.
+3. Minuta 4: vyberte jeden ze čtyř stavů.
+4. Minuta 5: napište, co výslovně neotevíráte.
+5. Minuta 6: určete případné jedno dočištění nebo zjednodušení přenosu.
+6. Minuta 7: zapište privacy-first výsledek a úklid stop.
+7. Minuta 8: ukončete mimořádnou pozornost, nebo založte novou smyčku se stop podmínkou.
+
+Workshop má skončit rozhodnutím, ne náladou. Pokud tým neumí vybrat stav, vraťte se k otázce, jestli šlo opravdu o přirozené použití. Možná testujete něco, co v běžné práci ještě nenastalo.
+
+### Checklist ověření uzavření druhého signálu
+
+- Ověřovali jsme při přirozeném použití, ne při umělém auditu?
+- Víme, jaké uzavírací rozhodnutí se mělo projevit?
+- Použil člověk správné pracovní místo nebo zdroj pravdy?
+- Neotevřel se starý rozsah, který měl zůstat zavřený?
+- Nevznikl nový údaj, export, tracker nebo pomocná evidence bez účelu?
+- Vybrali jsme jeden stav: drží, jedno dočištění, slabý přenos, nebo nová smyčka?
+- Pokud jde o dočištění, má jedno konkrétní místo?
+- Pokud jde o slabý přenos, zjednodušujeme pracovní větu místo přidávání historie?
+- Pokud vzniká nová smyčka, má vlastní otázku, stop podmínku a datové minimum?
+- Uklidili jsme dočasné podklady z ověření?
+- Umí tým říct, kdy mimořádná pozornost končí?
+
+Ověření uzavření druhého návratového signálu má být poslední lehký dotek, ne další kapitola života pravidla. Když drží, vraťte ho do běžného rytmu. Když nedrží, opravte přesně zjištěné místo. A když ukáže novou smyčku, otevřete ji čistě, s vlastním důvodem a bez tahání starých dat za sebou.
+
 ## Pracovní log
 
+- 2026-06-18: Doplněna úvodní podkapitola o ověření uzavření druhého návratového signálu při dalším přirozeném použití: čtyři výsledné stavy, privacy-first ověření bez nového sledování, karta, mini workshop a checklist.
 - 2026-06-18: Doplněna úvodní podkapitola o uzavření druhého návratového signálu po tichém provozu: uzavření podle výsledného stavu, přenos pravidla, zrušení mimořádného sledování, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-18: Doplněna úvodní podkapitola o druhém návratovém signálu po tichém provozu: porovnání s prvním signálem, čtyři výsledné stavy, přenos pravidla do dalšího pracovního místa, privacy-first práce s opakováním, karta, mini workshop a checklist.
 - 2026-06-18: Doplněna úvodní podkapitola o uzavření prvního návratového signálu po tichém provozu: stavy uzavření, nový stav pravidla, úklid mimořádných stop, privacy-first karta, mini workshop a checklist.
