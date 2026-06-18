@@ -180,6 +180,130 @@ Když se tým zasekne na tom, co z minula platí, nehlasujte. Hlasování nevyro
 
 Dobře udělaná kontrola přeneseného kontextu je krátká a trochu přísná. Nechce po týmu velkou analýzu, ale odmítá pracovat s mlhou. Díky tomu se stará zkušenost stane použitelnou oporou, ne nenápadným zdrojem dalších zbytečných úkolů.
 
+## Když se přenesený kontext rozpadne
+
+Někdy kontrola přeneseného kontextu neřekne "pokračujte menším krokem". Řekne nepříjemnější věc: původní kontext už nedrží. Segment se změnil, nabídka se posunula, vlastník odešel, stará data nemají platit, proces je jinde a návratový signál vznikl v úplně jiné realitě. V tu chvíli není bezpečné navázat na starou iteraci, ani kdyby se její název tvářil povědomě.
+
+Rozpad kontextu neznamená, že minulá práce byla špatná. Znamená jen, že její závěry nemají automatické právo vést dnešní rozhodnutí. Starý záznam může zůstat užitečný jako historie, ale nesmí se vydávat za aktuální mapu. Mapa z loňska je fajn, dokud podle ní nehledáte dveře v domě, který mezitím někdo přestavěl.
+
+Začněte větou:
+
+```text
+Původní rozhodnutí už nepřenášíme jako pravidlo, protože se změnilo:
+```
+
+Potom doplňte jednu až tři konkrétní změny. Ne obecné "situace je jiná", ale přesný rozdíl:
+
+```text
+Původní rozhodnutí už nepřenášíme jako pravidlo, protože se změnilo:
+- cílový segment: místo agenturních webů řešíme B2B SaaS týmy;
+- pracovní místo: problém už nevzniká na homepage, ale v potvrzovací zprávě po formuláři;
+- data: staré poptávky jsou z období před úpravou nabídky a neměří dnešní slib.
+```
+
+Tento zápis má dva účely. Zaprvé chrání tým před tím, aby ze starého závěru udělal dogma. Zadruhé chrání minulou práci před zbytečným přepisováním. Nemusíte tvrdit, že byla špatná. Stačí říct, že už neplatí jako vodítko pro dnešní krok.
+
+### Tři stavy po rozpadu kontextu
+
+Když se kontext rozpadne, vyberte jeden ze tří stavů:
+
+- Archivovat původní rozhodnutí: závěr byl dobrý pro starou situaci, ale dnešní práci už nevede.
+- Přerámovat návrat: problém je pořád příbuzný, ale potřebuje novou otázku a nové pracovní místo.
+- Získat novou základní realitu: nevíte dost na nové rozhodnutí a stará data už nestačí.
+
+Stav `archivovat` použijte, když staré rozhodnutí nemá dnešní dopad. Například staré pravidlo pro formulář služby, která už se neprodává, nemá být aktivní jen proto, že bylo kdysi pečlivě ověřené.
+
+Stav `přerámovat` použijte, když problém pořád existuje, ale jinak. Třeba kvalita poptávek je stále téma, ale už nejde o délku formuláře. Jde o to, že nový segment nerozumí rozdílu mezi auditem a dlouhodobou spoluprací.
+
+Stav `získat novou základní realitu` použijte, když staré důkazy propadly a nové zatím nemáte. V takovém případě neotevírejte velkou změnu. Vezměte jeden nejmenší důkaz z dnešní práce: poslední tři relevantní poptávky, jeden obchodní hovor, jednu supportní otázku, jeden průchod onboardingem nebo jednu aktuální šablonu.
+
+### Příklad přerámování
+
+```text
+Původní rozhodnutí:
+Zkrátit poptávkový formulář, protože příliš mnoho polí odrazovalo relevantní zájemce.
+
+Co se změnilo:
+Nabídka se zúžila na SaaS produktové týmy a formulář už je krátký. Nové tření vzniká v tom, že zájemci neumí vybrat mezi technickým auditem a dlouhodobým vývojem.
+
+Stav:
+Přerámovat návrat.
+
+Nová otázka:
+Kde má návštěvník nejdřív poznat, jestli potřebuje audit, dlouhodobý vývoj, nebo zatím jen konzultaci?
+
+Nejbližší pracovní místo:
+Blok nad formulářem a potvrzovací zpráva po odeslání.
+
+Co archivujeme:
+Staré rozhodnutí o délce formuláře zůstává jako historický důkaz, ale neotevíráme další zkracování polí.
+
+Privacy-first hranice:
+Nepřidáváme nové kvalifikační pole ani scoring. Nejprve použijeme anonymizované obchodní poznámky z posledních relevantních poptávek.
+```
+
+Všimněte si, že přerámování není návrat na začátek. Tým si ponechá užitečnou historii, ale nepřenese z ní špatné vodítko. Dnešní otázka se posune blíž místu, kde reálně vzniká tření.
+
+### Co nedělat
+
+Když se kontext rozpadne, nedělejte tři věci.
+
+Nezachraňujte staré rozhodnutí další výjimkou. Pokud je výjimek víc než pravidla, pravidlo už možná neplatí.
+
+Nesbírejte nová data jen proto, abyste staré rozhodnutí obhájili. Cílem není dokázat, že minulý závěr pořád žije. Cílem je udělat dobré dnešní rozhodnutí.
+
+Neslučujte starý a nový kontext do jedné mlhavé karty. Věta "řešíme kvalitu poptávek obecně" je příliš široká. Oddělte starý závěr, dnešní změnu a nejbližší pracovní místo.
+
+Codyho komentář: nejhorší druh nostalgie v produktu je ta, která se tváří jako disciplína. "Už jsme to přece rozhodli" může být užitečná věta. Ale jen dokud pořád mluví o stejném světě.
+
+### Karta rozpadu kontextu
+
+```text
+Původní rozhodnutí:
+
+Původní pracovní místo:
+
+Co se změnilo:
+- nabídka:
+- publikum:
+- provoz:
+- data:
+
+Proč původní rozhodnutí nepřenášíme jako pravidlo:
+
+Stav:
+- archivovat / přerámovat / získat novou základní realitu
+
+Nová pracovní otázka, pokud existuje:
+
+Nejbližší pracovní místo:
+
+Co zůstává jen jako historická paměť:
+
+Jaký nejmenší dnešní důkaz použijeme:
+
+Privacy-first hranice:
+
+Vlastník:
+
+Datum návratu:
+```
+
+### Checklist rozpadu kontextu
+
+- Umíme říct, co přesně se od původního rozhodnutí změnilo?
+- Oddělili jsme změnu nabídky, publika, provozu a dat?
+- Je jasné, proč staré rozhodnutí nepřenášíme jako dnešní pravidlo?
+- Vybrali jsme stav: archivovat, přerámovat, nebo získat novou základní realitu?
+- Nepřidáváme výjimky jen proto, abychom zachránili starý závěr?
+- Má nová otázka konkrétní pracovní místo?
+- Používáme nejmenší aktuální důkaz místo nového sledování?
+- Zůstává starý závěr dohledatelný jako historie, ale nevede dnešní práci?
+- Je zapsané, jaká data kvůli návratu nesbíráme?
+- Ví tým, kdy se k přerámované otázce vrátit?
+
+Rozpad kontextu je nepříjemný jen tehdy, když ho tým bere jako selhání. Ve skutečnosti je to dobrá kontrolka: staré rozhodnutí už nemá řídit novou situaci. Když to zapíšete včas, ušetříte si redesigny, které řeší včerejší problém, a data, která vznikla jen proto, že se někdo snažil podepřít starou mapu.
+
 ## Rychlé potvrzení návratového signálu
 
 Návratový signál má chránit tým před dvěma opačnými chybami. První chyba je ignorovat skutečný problém jen proto, že už se jednou uzavřel. Druhá chyba je otevřít novou iteraci pokaždé, když někdo zahlédne nedokonalost. Rychlé potvrzení signálu je malý filtr mezi těmito dvěma extrémy.
@@ -227746,3 +227870,4 @@ Druhý klidový rytmus je dobrý okamžik pro střídmost. Když pravidlo drží
 - 2026-06-17: Doplněna úvodní podkapitola o uzavření druhého běžného použití po kontrole kontextu výřezu: čtyři uzavírací stavy, úklid pracovních stop, privacy-first zobecnění příkladů, karta, mini workshop a checklist.
 - 2026-06-18: Doplněna krátká úvodní poznámka, aby se při návratu k tématu zapsalo i to, co se ze starého kontextu záměrně nepřenáší.
 - 2026-06-18: Doplněna úvodní podkapitola o kontrole přeneseného kontextu při návratu k tématu: platný a neplatný kontext, typy změn, privacy-first práce se starými stopami, karta, workshop a checklist.
+- 2026-06-18: Doplněna úvodní podkapitola o rozpadu přeneseného kontextu: kdy staré rozhodnutí archivovat, přerámovat otázku nebo získat novou základní realitu, včetně privacy-first hranic, karty a checklistu.
