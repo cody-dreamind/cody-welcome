@@ -228010,8 +228010,172 @@ Za tři tečky doplňte jeden stav. Ne odstavce vysvětlování, ne seznam budou
 
 První běžné použití je dobrý filtr pokory. Ukáže, jestli pravidlo žije v práci, nebo jen v paměti lidí, kteří ho pomáhali vytvořit. Když žije v práci, nechte ho být. Když nežije, opravte nejbližší místo. A když se ukáže, že potřebuje další mimořádnou péči, přiznejte to čistě; tichý provoz není titul za zásluhy, ale stav, který se musí chovat tiše i bez publika.
 
+## Druhé běžné použití po návratu do tichého provozu
+
+První běžné použití po návratu do tichého provozu říká, jestli pravidlo umí projít realitou bez slavnostního doprovodu. Druhé běžné použití říká něco trochu jiného: jestli pravidlo není závislé na jedné šťastné situaci, jednom člověku nebo jednom typu práce. Teprve tady se ukáže, jestli je pravidlo opravdu součástí systému, nebo jen dobře uklizená vzpomínka na poslední opravu.
+
+Druhé použití nemá být velký audit. Nehledejte každý roh, kde by pravidlo mohlo teoreticky selhat. Vezměte další přirozenou situaci, která by pravidlo měla potkat sama od sebe: další landing page, další změnu formuláře, další onboardingový krok, další předání nabídky, další úpravu šablony nebo další rozhodnutí o tom, jaký údaj sbírat. Pokud musíte druhé použití složitě vyvolávat, pravidlo možná ještě není v běžném rytmu.
+
+Začněte otázkou:
+
+```text
+Objevilo se pravidlo podruhé v přirozené práci a pomohlo i bez podpory lidí, kteří řešili poslední návrat?
+```
+
+V té otázce jsou dvě brzdy. `Podruhé` znamená, že nechcete znovu hodnotit stejný případ s jinými slovy. `Bez podpory lidí` znamená, že pravidlo nemá držet jen díky tomu, že u práce sedí někdo s čerstvou pamětí. Pokud ho použije jiný člověk, jiný tým nebo stejný tým po delší pauze, dostanete mnohem lepší důkaz přenositelnosti.
+
+### Co druhé použití ověřuje
+
+Druhé použití sleduje čtyři věci:
+
+- Přenositelnost: pravidlo funguje i mimo první konkrétní scénář.
+- Samostatnost: člověk nepotřebuje osobní vysvětlení od autora poslední opravy.
+- Střídmost: pravidlo nevyvolává novou kontrolní vrstvu jen proto, že existuje.
+- Hranici klidu: po použití nevzniká automaticky další mimořádná práce.
+
+První použití často ověří najitelnost. Druhé použití ověřuje odolnost. To je praktický rozdíl. Pravidlo může být dobře pojmenované a přesto nepřenositelné: člověk ho najde, ale umí ho použít jen v původním příkladu. Nebo je přenositelné, ale moc těžké: funguje, jen když se někdo prokouše dlouhou historií. Obojí je signál k malé opravě, ne k novému velkému kolečku.
+
+Praktický příklad:
+
+```text
+Pravidlo v tichém provozu:
+Při přidání nového údaje do formuláře se zapisuje účel, rozhodnutí, retence a vlastník.
+
+První běžné použití:
+Marketing vyřadil zbytečné pole z poptávkové landing page.
+
+Druhé běžné použití:
+Produktový tým upravil onboardingový formulář a použil stejnou datovou kartu bez připomínky od marketingu.
+
+Výsledek:
+Pravidlo je přenositelné mezi dvěma pracovními místy. Není potřeba nová kontrola, jen ponechat kartu v kanonické šabloně.
+```
+
+Tady není důležité, že oba formuláře vypadají podobně. Důležité je, že pravidlo vedlo ke stejnému typu rozhodnutí v jiné pracovní situaci. To je přesně ten důkaz, který má cenu ponechat jako zobecněný závěr.
+
+### Čtyři výsledné stavy
+
+Po druhém běžném použití vyberte jeden stav:
+
+- Přenos drží: pravidlo pomohlo i v druhé přirozené situaci a nevyrobilo novou agendu.
+- Přenos drží s lokální úpravou: pravidlo je správné, ale druhé pracovní místo potřebuje vlastní krátký odkaz, příklad nebo pojmenování.
+- Přenos je úzký: pravidlo funguje jen pro původní typ práce a nemá se vydávat za širší standard.
+- Tichý provoz byl předčasný: pravidlo se podruhé použilo jen díky mimořádné péči, staré paměti nebo ručnímu připomenutí.
+
+Stav `přenos drží` je nejjednodušší. Zavřete ho krátkým záznamem a nic dalšího nepřidávejte. Pokud systém funguje tiše, nedělejte kolem toho malý festival procesů. Ticho je pointa.
+
+Stav `přenos drží s lokální úpravou` řešte u druhého pracovního místa. Nezasahujte do kanonického pravidla, pokud problém vznikl jen tím, že onboardingová šablona neměla odkaz na datovou kartu nebo sales checklist používal jiné slovo pro stejnou věc.
+
+Stav `přenos je úzký` je užitečný a často podceňovaný. Znamená, že pravidlo není špatné, jen má menší rozsah. Přepište jeho název nebo popis tak, aby nelhalo. Místo "pravidlo pro formuláře" může být přesnější "pravidlo pro poptávkové formuláře". Méně ambiciózní pravidlo, které se používá správně, je lepší než široké pravidlo, které tým pokaždé tajně překládá.
+
+Stav `tichý provoz byl předčasný` neznamená návrat do paniky. Znamená, že chybí pracovní opora. Vyberte jednu: odkaz v šabloně, krátký příklad, lepší název, zkrácená karta nebo jasnější vlastník. Potom pravidlo vraťte do omezeného ověření. Neotevírejte znovu celou historii návratových signálů, pokud se nerozpadl samotný smysl pravidla.
+
+### Kdy pravidlo nerozšiřovat
+
+Druhé použití svádí k rozšiřování. Když pravidlo fungovalo dvakrát, tým má chuť ho použít všude. To je pochopitelné, ale ne vždycky zdravé. Pravidlo pro poptávkové formuláře nemusí být hned pravidlem pro všechny databázové sloupce, CRM poznámky, supportní tagy a interní reporty. Stejný princip může inspirovat další práci, ale inspirace ještě není standard.
+
+Před rozšířením se zeptejte:
+
+```text
+Viděli jsme druhé použití ve stejné třídě práce, nebo opravdu v nové třídě práce?
+```
+
+Stejná třída práce může být například druhý formulář na webu. Nová třída práce může být onboarding v produktu nebo ruční obchodní kvalifikace. Pokud máte jen druhý případ ve stejné třídě, pravidlo spíš stabilizujte. Pokud máte případ v nové třídě, můžete uvažovat o širším principu, ale pořád ho zapište opatrně: co se přenáší a co zůstává lokální.
+
+Codyho komentář: každý dobrý standard má malé ego. Když se snaží být všude, začne lidem překážet i tam, kde původně pomáhal. A pak se všichni tváří, že ho používají, zatímco v praxi ho obcházejí jako mokrou podlahu v kanceláři.
+
+### Privacy-first hranice druhého použití
+
+Druhé použití často láká ke srovnávání: první formulář, druhý formulář, kdo co udělal, která pole se odstranila, jaké poznámky vznikly. Pro učení stačí méně. Do rozhodovací paměti přeneste vzor, ne kopie.
+
+Použitelný zápis:
+
+```text
+Pravidlo se přeneslo z poptávkové landing page do onboardingového formuláře. V obou případech vedlo k omezení sběru údajů na rozhodnutí, která tým umí pojmenovat.
+```
+
+Nepotřebujete k tomu ukládat screenshoty, celé znění polí, jména zákazníků ani konkrétní odpovědi. Pokud druhé použití odhalilo problém, popište ho zobecněně: "druhé pracovní místo nemělo odkaz na datovou kartu" místo kopírování interního komentáře. Pokud vznikly dočasné exporty nebo porovnávací tabulky, po uzavření je smažte nebo vraťte do původního zdroje podle retenčního pravidla.
+
+Privacy-first přínos druhého použití je v tom, že tým ověřuje pravidlo bez toho, aby kvůli ověření rozšiřoval datovou stopu. To je malá, ale důležitá disciplína: netestovat střídmost pomocí nového hromadění dat. Ano, je to přesně tak absurdní, jak to zní.
+
+### Karta druhého běžného použití
+
+```text
+Pravidlo nebo pracovní místo:
+
+Kanonické místo pravidla:
+
+První běžné použití, na které navazujeme:
+
+Druhé běžné použití:
+
+Je to stejná třída práce, nebo nová třída práce?
+
+Byla potřeba mimořádná připomínka?
+- ano / ne
+
+Co se přeneslo bez změny:
+
+Co bylo lokální pro druhé místo:
+
+Výsledek:
+- přenos drží / přenos drží s lokální úpravou / přenos je úzký / tichý provoz byl předčasný
+
+Jedna případná úprava:
+
+Co výslovně nerozšiřujeme:
+
+Privacy-first výsledek:
+
+Dočasné stopy k úklidu:
+
+Návratový signál do budoucna:
+
+Vlastník:
+
+Datum:
+```
+
+Karta má chránit rozsah. Největší hodnota často není v tom, co rozšíříte, ale v tom, co po druhém úspěchu nerozšíříte. Dvě použití jsou dobrý signál, ne univerzální licence.
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: pojmenujte první a druhé běžné použití.
+2. Minuta 2: určete, jestli jde o stejnou nebo novou třídu práce.
+3. Minuta 3: ověřte, jestli druhé použití proběhlo bez mimořádné připomínky.
+4. Minuta 4: napište, co se přeneslo beze změny.
+5. Minuta 5: napište, co bylo lokální pro druhé místo.
+6. Minuta 6: vyberte jeden výsledný stav.
+7. Minuta 7: zapište privacy-first výsledek a jednu věc, kterou teď nerozšiřujete.
+
+Workshop končí větou:
+
+```text
+Druhé běžné použití skončilo stavem: ...; pravidlo teď nerozšiřujeme na: ...
+```
+
+Tahle věta je schválně trochu přísná. Nutí tým říct nejen co funguje, ale i kde končí aktuální důkaz. Bez té druhé části se z každého povedeného pravidla rychle stane obecný princip, který nikdo neumí přesně použít.
+
+### Checklist druhého běžného použití
+
+- Druhé použití vzniklo v přirozené práci, ne jako umělý audit?
+- Navazuje na první běžné použití, ale neopakuje ho jen jinými slovy?
+- Víme, jestli šlo o stejnou nebo novou třídu práce?
+- Pravidlo použil člověk nebo tým bez mimořádné připomínky?
+- Umíme říct, co se přeneslo beze změny?
+- Umíme říct, co bylo lokální pro druhé pracovní místo?
+- Vybrali jsme jeden výsledný stav?
+- Pokud je potřeba úprava, je opravdu nejmenší možná?
+- Nepřepisujeme úzké pravidlo na široký standard jen proto, že dvakrát pomohlo?
+- Nepřidáváme novou kontrolní vrstvu k pravidlu, které má zůstat v klidu?
+- Do paměti přenášíme zobecněný závěr, ne screenshoty, exporty nebo osobní údaje?
+- Zapsali jsme jednu věc, kterou teď výslovně nerozšiřujeme?
+
+Druhé běžné použití je dobrý moment pro střízlivost. Když pravidlo drží, nechte ho dál tiše pracovat. Když drží jen úzce, pojmenujte jeho skutečný rozsah. Když potřebuje malou oporu, doplňte ji tam, kde práce vzniká. A když se ukáže, že tichý provoz byl předčasný, vraťte se o krok zpět bez dramatu. Cílem není mít pravidlo s krásnou historií. Cílem je mít pracovní rozhodnutí, které pomáhá i ve chvíli, kdy se na něj nikdo zrovna nedívá.
+
 ## Pracovní log
 
+- 2026-06-18: Doplněna úvodní podkapitola o druhém běžném použití po návratu do tichého provozu: přenositelnost pravidla, samostatnost bez mimořádné připomínky, nerozšiřování úzkého pravidla, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-18: Doplněna úvodní podkapitola o prvním běžném použití po návratu do tichého provozu: najitelnost pravidla, rozhodnutelnost, lokální nápověda, zkrácení, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-18: Doplněna úvodní podkapitola o návratu do tichého provozu po ověření druhého návratového signálu: kanonické místo pravidla, rušení mimořádných připomínek, návratový signál místo další kontroly, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-18: Doplněna úvodní podkapitola o ověření uzavření druhého návratového signálu při dalším přirozeném použití: čtyři výsledné stavy, privacy-first ověření bez nového sledování, karta, mini workshop a checklist.
