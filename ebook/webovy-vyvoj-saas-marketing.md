@@ -227262,8 +227262,174 @@ Workshop má skončit zápisem, ne dalším seznamem témat. Pokud vznikne nový
 
 Dobře uzavřený návratový signál vrátí pravidlu klid, nebo otevře novou smyčku s jasnou hranicí. Obě možnosti jsou v pořádku. Špatná možnost je mezistav: pravidlo už není úplně stabilní, ale nová práce taky nezačala. Právě takové mezistavy dlouhé rukopisy unavují. Uzavření je způsob, jak jim včas zavřít dveře.
 
+## Druhý návratový signál po tichém provozu
+
+Druhý návratový signál je důležitější než první. První může být náhoda, nejasnost, slabé místo v jedné šabloně nebo prostě člověk, který si spletl staré pravidlo s dnešní prací. Druhý už ukazuje vzorec. Ne nutně selhání, ale opakovanou hranu, kterou je potřeba pojmenovat dřív, než se z ní stane nová tichá rutina.
+
+Nejhorší reakce je automaticky říct: "Už podruhé, takže otevíráme celou kontrolu." Druhá nejhorší reakce je mávnout rukou: "Minule jsme to přece uzavřeli." Správná reakce je mezi tím. Porovnejte druhý signál s prvním, najděte podobnost a rozdíl, a teprve potom rozhodněte, jestli jde o opakované lokální tření, skutečný návrat pravidla, nebo novou otázku mimo původní pravidlo.
+
+Začněte krátkým porovnáním:
+
+```text
+První návrat:
+
+Druhé dnešní znamení:
+
+Co je stejné:
+
+Co je jiné:
+
+Co z toho plyne pro pravidlo:
+```
+
+Tento zápis je jednoduchý, ale chrání tým před dvěma zkratkami. Stejné slovo v popisu neznamená stejný problém. A jiné místo v systému neznamená automaticky jiný problém. Druhý signál se musí číst přes práci, kterou lidé opravdu dělali.
+
+### Tři porovnávací otázky
+
+Před rozhodnutím položte tři otázky:
+
+- Opakuje se stejná příčina, nebo jen podobný příznak?
+- Objevilo se tření ve stejném pracovním místě, nebo se přeneslo jinam?
+- Stačila minule lokální oprava, nebo jen odložila hlubší nejasnost?
+
+První otázka odděluje podstatu od vzhledu. Pokud se dvakrát objeví chybějící účel formulářového pole, může jít o stejnou příčinu: šablona se ptá moc obecně. Ale může jít i o dva různé příběhy: jednou vlastník nevěděl, co vyplnit, podruhé pole vzniklo mimo obvyklý proces.
+
+Druhá otázka ukazuje, jestli pravidlo drží jen v jednom místě. Pokud se oprava udělala ve formulářové kartě, ale podobné tření se objeví v onboardingu, může být problém v širším slovníku, ne v jedné šabloně. To ještě neznamená velkou inventuru. Znamená to, že nejmenší oprava možná neleží tam, kde se signál ozval.
+
+Třetí otázka je nejnepříjemnější, ale nejcennější. Lokální oprava je dobrá jen tehdy, když odstraní příčinu lokálního tření. Pokud minule jen přidala pomocnou větu a dnes se tým znovu ptá na stejnou hranici, možná jste nepřidali pravidlo, ale hezčí cedulku k nejasnosti.
+
+### Čtyři výsledné stavy druhého signálu
+
+Po porovnání vyberte jeden ze čtyř stavů:
+
+- Opakované lokální tření: příčina je malá, ale oprava z prvního signálu nebyla dostatečně propsaná.
+- Přenos pravidla do dalšího místa: pravidlo funguje, ale potřebuje stejnou oporu i v druhém pracovním místě.
+- Skutečný návrat pravidla: druhý signál potvrzuje, že staré pravidlo už nestačí a potřebuje novou smyčku.
+- Nová otázka mimo pravidlo: druhý signál se podobá starému tématu, ale ve skutečnosti otevírá jiné rozhodnutí.
+
+`Opakované lokální tření` řešte dotažením původní opravy. Nezakládejte druhý paralelní zápis. Najděte původní kanonické místo a doplňte do něj to, co minule zůstalo moc implicitní: příklad, rozhodovací větu, vlastníka, nebo hranici "kdy neřešit".
+
+`Přenos pravidla do dalšího místa` nastává, když je pravidlo správné, ale žije jen v jedné části práce. Typicky se to stane u SaaS provozu: privacy-first otázka je dobře popsaná pro formuláře, ale chybí v produktovém onboardingu, v importu dat nebo v zákaznické podpoře. V takovém případě neopravujte pravidlo. Přeneste jeho nejmenší použitelnou část do druhého místa.
+
+`Skutečný návrat pravidla` vyžaduje novou smyčku. Druhý signál ukazuje, že nejde o slabou nápovědu ani špatný odkaz, ale o pravidlo, které už neměří dnešní situaci. Nová smyčka má mít vlastní otázku, stop podmínku a datovou hranici. Staré rozhodnutí nepřepisujte potichu.
+
+`Nová otázka mimo pravidlo` je častá past. Tým vidí známé slovo, například "retence", "souhlas", "měření" nebo "vlastník", a předpokládá, že jde o stejnou práci. Jenže nová otázka může být obchodní, produktová nebo marketingová. Pokud řešíte, zda má mít nový lead magnet vlastní follow-up, není to automaticky návrat pravidla o formulářových polích. Možná je to otázka hodnoty nabídky.
+
+### Příklad druhého signálu
+
+```text
+Pravidlo:
+Každé nové formulářové pole musí mít účel, vlastníka a retenční hranici.
+
+První návrat:
+U dvou polí na pilotní landing page chyběl účel. Doplnili jsme do formulářové karty otázku: "Jaké rozhodnutí bez tohoto pole nejde udělat?"
+
+Druhý signál:
+V produktovém onboardingu vznikl krok s volitelnou otázkou na velikost týmu. Účel je popsaný v produktové poznámce, ale není propsaný do datové karty.
+
+Co je stejné:
+Nový údaj o člověku má být připojený k rozhodnutí a retenční hranici.
+
+Co je jiné:
+Nejde o marketingový formulář, ale o onboarding uvnitř produktu.
+
+Výsledný stav:
+Přenos pravidla do dalšího místa.
+
+Nejmenší oprava:
+Do šablony onboardingového kroku přidáme stejnou rozhodovací otázku a odkaz na datovou kartu. Nezakládáme novou inventuru všech onboardingových polí.
+
+Ověření:
+Při dalším onboardingovém kroku je účel zapsaný v datové kartě bez ručního připomenutí.
+```
+
+Tady druhý signál neříká, že pravidlo selhalo. Říká, že pravidlo bylo uvězněné v jednom typu práce. Oprava je proto přenosová, ne revizní. Tým vezme funkční rozhodovací otázku a dá ji tam, kde lidé opravdu navrhují nový údaj.
+
+### Privacy-first práce s opakováním
+
+Druhý signál často svádí k tomu, že tým začne sbírat víc důkazů, aby "už to bylo pořádně". Jenže opakování samo o sobě není oprávnění k plošnému sběru. Privacy-first postup je opačný: čím víc se problém opakuje, tím přesněji musíte vědět, jaký minimální důkaz stačí.
+
+Použijte větu:
+
+```text
+K rozhodnutí o druhém signálu potřebujeme porovnat jen první uzavření, dnešní pracovní stopu a kanonické místo pravidla.
+```
+
+To obvykle stačí. Nepotřebujete export všech formulářů, seznam všech uživatelů, nový analytický event ani sledování toho, kdo kartu otevřel. Potřebujete vědět, jestli se příčina opakuje a kde má vzniknout nejmenší oprava.
+
+Pokud druhý signál vede ke skutečnému návratu pravidla, nastavte datovou hranici hned při otevření nové smyčky:
+
+```text
+Nová smyčka smí používat jen anonymizované příklady polí, aktuální šablonu a rozhodovací závěry. Nepracuje s kopiemi zákaznických zpráv ani s historickými exporty formulářů.
+```
+
+Tím tým chrání dvě věci najednou: soukromí lidí a vlastní pozornost. Velké sběry často vypadají seriózně, ale ve skutečnosti rozmazávají otázku. Malý přesný důkaz nutí napsat, co se opravdu rozhoduje.
+
+Codyho komentář: druhý signál není důkaz, že se všechno bortí. Je to důkaz, že se něco opakuje. To je velký rozdíl. Když si ho tým pohlídá, neudělá z každého opakování procesní festival s občerstvením a tabulkou navíc.
+
+### Karta druhého návratového signálu
+
+```text
+Pravidlo:
+
+Kanonické pracovní místo:
+
+První návrat a jeho uzavření:
+
+Druhý dnešní signál:
+
+Co je stejné:
+
+Co je jiné:
+
+Opakuje se příčina, nebo jen příznak:
+
+Výsledný stav:
+- opakované lokální tření / přenos pravidla do dalšího místa / skutečný návrat pravidla / nová otázka mimo pravidlo
+
+Nejmenší oprava nebo nová smyčka:
+
+Co výslovně neotevíráme:
+
+Jaká nová data nesbíráme:
+
+Ověření při dalším přirozeném použití:
+
+Vlastník:
+
+Datum:
+```
+
+### Mini workshop na 8 minut
+
+1. Minuta 1: přečtěte první návrat a jeho uzavření.
+2. Minuta 2: napište druhý signál jednou konkrétní větou.
+3. Minuty 3 až 4: napište, co je stejné a co je jiné.
+4. Minuta 5: rozhodněte, jestli se opakuje příčina, nebo jen příznak.
+5. Minuta 6: vyberte jeden ze čtyř výsledných stavů.
+6. Minuta 7: napište nejmenší opravu nebo hranici nové smyčky.
+7. Minuta 8: doplňte, co neotevíráte a jaká nová data nesbíráte.
+
+Pokud workshop sklouzne k debatě o všech historických případech, vraťte se k porovnání prvního a druhého signálu. Druhý signál není roční inventura v převleku. Je to porovnání dvou konkrétních událostí.
+
+### Checklist druhého návratového signálu
+
+- Máme přečtené první uzavření, ne jen vzpomínku na něj?
+- Popsali jsme druhý signál konkrétní událostí?
+- Rozlišili jsme stejnou příčinu od podobného příznaku?
+- Víme, jestli se tření objevilo ve stejném pracovním místě, nebo jinde?
+- Nepřepsali jsme pravidlo jen proto, že se objevilo stejné slovo?
+- Vybrali jsme jeden ze čtyř výsledných stavů?
+- Pokud jde o přenos, přenášíme jen nejmenší použitelnou část pravidla?
+- Pokud jde o skutečný návrat, má nová smyčka stop podmínku a datovou hranici?
+- Pokud jde o novou otázku, oddělili jsme ji od původního pravidla?
+- Nepřidali jsme nový tracker, export ani plošné měření jen kvůli opakování?
+
+Druhý návratový signál má tým naučit rozpoznat vzorec bez paniky. Někdy potvrdí, že pravidlo potřebuje novou smyčku. Někdy jen ukáže, že dobrá věta zůstala na špatném místě. V obou případech je výhra stejná: rozhodnutí je menší, přesnější a nenechá za sebou datový nepořádek.
+
 ## Pracovní log
 
+- 2026-06-18: Doplněna úvodní podkapitola o druhém návratovém signálu po tichém provozu: porovnání s prvním signálem, čtyři výsledné stavy, přenos pravidla do dalšího pracovního místa, privacy-first práce s opakováním, karta, mini workshop a checklist.
 - 2026-06-18: Doplněna úvodní podkapitola o uzavření prvního návratového signálu po tichém provozu: stavy uzavření, nový stav pravidla, úklid mimořádných stop, privacy-first karta, mini workshop a checklist.
 - 2026-06-18: Doplněna úvodní podkapitola o prvním návratovém signálu po tichém provozu: ověření shody se signálem, čtyři výsledné stavy, lokální oprava, privacy-first reakce, karta, mini workshop a checklist.
 - 2026-06-18: Doplněna úvodní podkapitola o uzavření druhého klidového rytmu bez nové kontroly: odstranění mimořádných opor, uzavírací karta, situace kdy rytmus neuzavírat, privacy-first úklid důkazů a checklist.
