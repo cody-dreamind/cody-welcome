@@ -225958,8 +225958,177 @@ Workshop má hlídat přenositelnost, ne výkon člověka. Pokud někdo pravidlo
 
 Druhé běžné použití je dobrý test dospělosti pravidla. Když funguje bez čerstvé paměti, může odejít do klidového rytmu. Když nefunguje, obvykle nepotřebuje další velkou inventuru, ale lepší větu, čistší odkaz nebo konečně opuštění historického jazyka.
 
+## Uzavření druhého běžného použití po roční inventuře
+
+Druhé běžné použití po roční inventuře nesmí zůstat jen jako poznámka "dopadlo dobře" nebo "něco drhlo". Je to poslední kontrola, která říká, jestli se inventurní rozhodnutí opravdu vstřebalo do běžné práce. Když ji neuzavřete, pravidlo může zůstat v podivném mezistavu: už není čerstvá inventurní změna, ale ještě nemá klid běžného provozu.
+
+Uzavření má být krátké. Nevracejte se k celé roční inventuře, pokud druhé použití řešilo jen jednu šablonu, jeden formulář nebo jeden rozhodovací záznam. Cílem je říct, co se po druhém použití stane s pravidlem dál: zůstane stabilní, dostane lokální opravu, otevře malé nové rozhodnutí, nebo se vrátí do inventurní paměti jako rozpor.
+
+Začněte větou:
+
+```text
+Po druhém běžném použití víme:
+Proto pravidlo:
+Do běžného rytmu se vrací jako:
+Znovu se otevře jen když:
+```
+
+Příklad:
+
+```text
+Po druhém běžném použití víme:
+Pravidlo o datové větě u formuláře použil nový člen týmu bez znalosti roční inventury.
+
+Proto pravidlo:
+Zůstává stabilní.
+
+Do běžného rytmu se vrací jako:
+Součást publikačního checklistu pro nové a upravované landing page.
+
+Znovu se otevře jen když:
+U dvou dalších formulářů bude chybět vysvětlení účelu sbíraných údajů nebo vznikne nové pole bez retenční věty.
+```
+
+Takový zápis neoslavuje inventuru. Převádí ji do provozu. Tým nemusí vědět, jak dlouhá byla původní debata. Stačí mu vědět, co platí, kde to žije a kdy se k tomu vrátit.
+
+### Čtyři uzavírací stavy
+
+Po druhém použití použijte jeden ze čtyř stavů:
+
+- Vrátit do klidového rytmu: pravidlo je srozumitelné i bez čerstvé paměti a nepotřebuje zvláštní pozornost.
+- Lokálně dočistit: pravidlo platí, ale jedno pracovní místo nese starý jazyk, slabý odkaz nebo historickou výjimku.
+- Otevřít malé nové rozhodnutí: druhé použití ukázalo problém uvnitř pravidla, ale rozsah jde udržet na jedné otázce.
+- Vrátit do roční inventury: objevilo se něco, co mění stav celé skupiny pravidel a nemá se řešit drobnou opravou.
+
+`Vrátit do klidového rytmu` je nejlepší výsledek a nemá se kazit další kontrolou pro jistotu. Pokud pravidlo funguje v druhém běžném použití, zvláštní pozornost končí. Dál ho nese rytmus pracovního místa: měsíční review šablon, kvartální kontrola standardů nebo další roční inventura.
+
+`Lokálně dočistit` je užitečné, když se problém dá odstranit jednou větou nebo jedním odkazem. Nepoužívejte ho jako záminku k přepsání celé části. Pokud stará vysvětlivka mate, přepište vysvětlivku. Pokud archivní výjimka vypadá aktivně, označte ji jako archivní. Pokud odkaz vede na inventurní záznam místo na aktuální šablonu, přesměrujte odkaz.
+
+`Otevřít malé nové rozhodnutí` patří tam, kde druhé použití ukáže skutečnou otázku. Například pravidlo říká, že telefon v prvním formuláři nesbíráme, ale u nového typu bezpečnostní konzultace se opakovaně ukazuje, že telefon zrychluje domluvu termínu. To není důvod vrátit telefon všude. Je to důvod otevřít malou výjimku s důvodem, ověřením a retenční hranicí.
+
+`Vrátit do roční inventury` používejte jen při širším rozporu. Například když se ukáže, že více pravidel označených jako vstřebaná ve skutečnosti nemá pracovní domov. To už není lokální chyba. To je signál, že roční inventura příliš optimisticky vyhodnotila stav systému.
+
+### Uzavírací zápis
+
+Použijte krátkou kartu:
+
+```text
+Pravidlo nebo skupina pravidel:
+
+Druhé běžné použití:
+
+Výsledek druhého použití:
+- stabilní / slabý přenos / skrytá historie / nový rozpor
+
+Uzavírací stav:
+- klidový rytmus / lokálně dočistit / malé nové rozhodnutí / vrátit do roční inventury
+
+Co se mění:
+
+Co se nemění:
+
+Kde pravidlo dál žije:
+
+Návratový signál:
+
+Privacy-first výsledek:
+
+Kdo drží kontext:
+
+Datum dalšího běžného návratu:
+```
+
+Vyplněný příklad:
+
+```text
+Pravidlo nebo skupina pravidel:
+Datová věta u formulářů na landing page.
+
+Druhé běžné použití:
+Nový člen týmu upravoval produktovou stránku podle publikačního checklistu.
+
+Výsledek druhého použití:
+Stabilní.
+
+Uzavírací stav:
+Vrátit do klidového rytmu.
+
+Co se mění:
+Nic v pravidle. Do logu doplňujeme, že druhé použití proběhlo bez čerstvé inventurní paměti.
+
+Co se nemění:
+Neotevíráme formulářovou strategii ani nepřidáváme nové měření používání checklistu.
+
+Kde pravidlo dál žije:
+Publikační checklist a šablona formuláře.
+
+Návratový signál:
+Dva nové formuláře bez vysvětlení účelu dat nebo nová povinná položka bez jasné retence.
+
+Privacy-first výsledek:
+Nevzniká evidence používání checklistu. Stačí hotová úprava stránky a anonymizovaný záznam v logu.
+
+Kdo drží kontext:
+Owner publikačního checklistu.
+
+Datum dalšího běžného návratu:
+Při nejbližší kvartální kontrole formulářů nebo při návratovém signálu.
+```
+
+### Kdy uzavření neprodlužovat
+
+Uzavření druhého použití neprodlužujte, pokud:
+
+- pravidlo bylo použité správně a nevznikl nový rozpor;
+- lokální oprava je zřejmá a nevyžaduje další rozhodování;
+- nový postřeh nesouvisí s původní inventurní otázkou;
+- ověření by vyžadovalo nové sledování lidí nebo dokumentace;
+- tým jen cítí, že by bylo dobré "ještě něco zkontrolovat".
+
+V těchto případech je lepší udělat malý zápis a skončit. Stabilní pravidlo má dostat klid. Lokální oprava má být opravena. Nový nápad má počkat na vlastní kartu změny. To je méně dramatické než další review, ale mnohem zdravější pro dlouhý rukopis i týmovou pozornost.
+
+Codyho komentář: druhé použití je poslední místo, kde má inventurní změna ukázat občanku. Když ji ukáže a všechno sedí, nechte ji projít. Nedělejte z každého pravidla člověka na letišti, kterého kontrolujete ještě u brány, v letadle a po přistání.
+
+### Privacy-first uzavření
+
+Uzavření druhého použití má být datově lehké. Nepotřebujete ukládat osobní historii použití, screenshoty checklistu ani jména lidí, kteří pravidlo použili. Důležitý je výsledek práce a stav pravidla.
+
+Minimum:
+
+```text
+Zůstává:
+Stav pravidla, pracovní místo, návratový signál a anonymizovaný výsledek druhého použití.
+
+Maže se:
+Dočasné poznámky, pracovní kopie, screenshoty a surové podklady z kontroly.
+
+Nevzniká:
+Měření používání dokumentace, osobní evidence čtenářů ani nový kontrolní dashboard.
+```
+
+Pokud se při druhém použití objevil rozpor, anonymizujte ho do typu problému. Není potřeba ukládat konkrétní poptávku, zákaznické jméno ani interní chat, pokud pro rozhodnutí stačí věta "nový typ konzultace opakovaně potřeboval rychlou telefonickou domluvu termínu".
+
+Privacy-first uzavření není jen úklid. Je to potvrzení, že se tým naučil používat pravidlo bez toho, aby kolem něj postavil nový dohledový aparát.
+
+### Checklist uzavření druhého použití
+
+- Je jasné, co druhé běžné použití ověřovalo?
+- Má pravidlo jeden uzavírací stav?
+- Pokud se vrací do klidového rytmu, víme, který rytmus ho dál nese?
+- Pokud jde o lokální dočištění, víme přesně, která věta, odkaz nebo pracovní stopa se mění?
+- Pokud vzniká malé nové rozhodnutí, má vlastní otázku a hranici rozsahu?
+- Pokud se téma vrací do roční inventury, je jasné, proč nestačí lokální oprava?
+- Je napsané, co se znovu neotevírá?
+- Zůstává pravidlo v kanonickém pracovním místě, ne jen v logu?
+- Nevzniklo nové sledování používání dokumentů nebo lidí?
+- Jsou dočasné podklady smazané, zkrácené nebo anonymizované?
+- Má tým konkrétní návratový signál pro další otevření?
+
+Uzavření druhého běžného použití převádí roční inventuru z režimu "čerstvě ověřeno" do režimu "běžně použitelné". Když se to podaří, pravidlo už nepotřebuje zvláštní péči. Potřebuje jen dobré pracovní místo, jasný návratový signál a disciplínu nepřidávat další kontrolu pokaždé, když text funguje přesně tak, jak má.
+
 ## Pracovní log
 
+- 2026-06-18: Doplněna úvodní podkapitola o uzavření druhého běžného použití po roční inventuře: čtyři uzavírací stavy, karta uzavření, lokální dočištění, návrat do klidového rytmu, privacy-first uzavření a checklist.
 - 2026-06-18: Doplněna úvodní podkapitola o druhém běžném použití po uzavřené roční inventuře: přenositelnost bez čerstvé paměti, čtyři výsledné stavy, slabý přenos, skrytá historie, privacy-first hranice, karta, mini workshop a checklist.
 - 2026-06-18: Doplněna úvodní podkapitola o uzavření prvního běžného použití po roční inventuře: uzavírací věta, tři stavy výsledku, lokální dočištění, práce se skutečným rozporem, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-18: Doplněna úvodní podkapitola o prvním běžném použití po uzavřené roční inventuře: ověření zdroje pravdy, tři výsledky použití, lokální dočištění, privacy-first kontrola, karta, mini workshop a checklist.
