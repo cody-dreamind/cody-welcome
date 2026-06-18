@@ -304,6 +304,131 @@ Datum návratu:
 
 Rozpad kontextu je nepříjemný jen tehdy, když ho tým bere jako selhání. Ve skutečnosti je to dobrá kontrolka: staré rozhodnutí už nemá řídit novou situaci. Když to zapíšete včas, ušetříte si redesigny, které řeší včerejší problém, a data, která vznikla jen proto, že se někdo snažil podepřít starou mapu.
 
+## Uzavření rozpadu kontextu do nového výchozího bodu
+
+Když se přenesený kontext rozpadne, tým má tendenci udělat dvě věci najednou: archivovat staré rozhodnutí a rovnou otevřít nové velké téma. Jenže mezi těmito kroky chybí malý, ale důležitý mezistav. Nejdřív potřebujete nový výchozí bod: krátký zápis, který říká, co už dnes neplatí, co naopak víte jistě a z jakého místa se smí začít další práce.
+
+Nový výchozí bod není nová strategie. Je to pracovní podlaha po úklidu starého kontextu. Bez ní tým snadno vyplní prázdné místo čerstvými domněnkami. V praxi pak vznikne situace, kdy se sice správně opustí staré rozhodnutí, ale nová iterace se opře o první hlasitou hypotézu. To je jen výměna staré mlhy za novou. Elegantní asi jako přejmenovat bordel na "dynamický backlog".
+
+Začněte čtyřmi větami:
+
+```text
+Staré rozhodnutí už nepoužíváme jako pravidlo.
+
+Jako historii si z něj necháváme:
+
+Dnešní jistý výchozí bod je:
+
+Další práce smí začít jen od:
+```
+
+Tyto věty záměrně oddělují historii, jistotu a další krok. Historie může být užitečná, ale není povolenka k pokračování. Jistý výchozí bod musí být malý a pravdivý. Další práce musí mít konkrétní vstup, jinak se návrat okamžitě nafoukne.
+
+### Co může být nový výchozí bod
+
+Nový výchozí bod může mít několik podob:
+
+- Aktuální pracovní místo: například "blok nad poptávkovým formulářem", ne "celý web".
+- Ověřená změna nabídky: například "prodáváme audit pro SaaS týmy", ne "děláme digitální služby".
+- Jedna dnešní skutečnost z provozu: například "obchod ručně doptává rozhodovací proces", ne "leady jsou horší".
+- Jedna privacy-first hranice: například "nepřidáváme další kvalifikační pole, dokud nevyužijeme existující obchodní poznámky".
+
+Výchozí bod nemá být ambiciózní. Má být pevný. Čím menší a přesnější je, tím menší je riziko, že se z rozpadu starého kontextu stane tajný restart celé oblasti.
+
+Praktický příklad:
+
+```text
+Staré rozhodnutí:
+Zkrátit poptávkový formulář, protože příliš mnoho polí odrazovalo relevantní zájemce.
+
+Staré rozhodnutí už nepoužíváme jako pravidlo.
+
+Jako historii si z něj necháváme:
+Formulář nemá sbírat údaje, které obchod neumí okamžitě použít.
+
+Dnešní jistý výchozí bod je:
+Návštěvník před formulářem nerozlišuje audit, dlouhodobý vývoj a úvodní konzultaci.
+
+Další práce smí začít jen od:
+Textu nad formulářem a potvrzovací zprávy po odeslání. Formulář samotný zatím neměníme.
+
+Privacy-first hranice:
+Nepřidáváme nové tracking události ani povinná pole. Použijeme anonymizované shrnutí posledních obchodních poznámek.
+```
+
+Tento zápis chrání tým před nenápadným skokem. Staré rozhodnutí se nezahodí celé, protože obsahuje užitečný princip o datové střídmosti. Zároveň ale nevede dnešní práci, protože dnešní tření je jinde.
+
+### Tři závěry po uzavření
+
+Po uzavření rozpadu kontextu vyberte jeden ze tří závěrů:
+
+- Klid: starý kontext se rozpadl, ale není potřeba otevírat novou práci.
+- Malý nový průchod: existuje jasné pracovní místo a nejmenší ověřitelný krok.
+- Nová základní realita: nejdřív potřebujete jeden aktuální důkaz, než uděláte změnu.
+
+Závěr `klid` je podceňovaný. Někdy stačí staré rozhodnutí archivovat a nic dalšího nedělat. Například stará poznámka k nabídce, která už neexistuje, nepotřebuje navazující projekt. Potřebuje přestat strašit v aktivním seznamu.
+
+Závěr `malý nový průchod` použijte, když se rozpad starého kontextu proměnil v jasné dnešní pracovní místo. Typicky jde o jednu stránku, jeden e-mail, jednu šablonu, jeden supportní krok nebo jeden obchodní rozhovor.
+
+Závěr `nová základní realita` použijte, když víte jen to, že starý kontext neplatí. To samo o sobě nestačí na změnu. Stačí to na velmi malý průchod realitou: jeden aktuální rozhovor, jeden test trasy, jeden anonymizovaný výřez z posledních poptávek nebo jedna kontrola existujícího procesu.
+
+### Privacy-first uzavření
+
+Rozpad kontextu je dobrý okamžik na datový úklid. Staré exporty, screenshoty, kopie zpráv a dočasné tabulky často přežijí jen proto, že se kolem nich kdysi vedla důležitá debata. Jakmile rozhodnutí přestane platit jako pravidlo, zeptejte se:
+
+```text
+Které pracovní stopy pořád potřebujeme jako důkaz a které už držíme jen ze zvyku?
+```
+
+Pokud stopa slouží jen jako historická ilustrace, zvažte zobecnění. Místo celé zákaznické zprávy napište větu: "Dva relevantní zájemci nerozlišili typ spolupráce před formulářem." Pokud stopa obsahuje osobní údaje a nemá aktivní účel, vraťte ji do původního systému, anonymizujte, nebo smažte podle retenčních pravidel. Privacy-first provoz není jen o tom, co nesbíráte. Je i o tom, co po sobě nenecháte ležet, když už to nepotřebujete.
+
+### Karta nového výchozího bodu
+
+```text
+Téma:
+
+Staré rozhodnutí nebo pravidlo:
+
+Proč už ho nepoužíváme jako pravidlo:
+
+Co si z něj necháváme jako historii nebo princip:
+
+Dnešní jistý výchozí bod:
+
+Co zatím nevíme:
+
+Další povolené pracovní místo:
+
+Co výslovně neotevíráme:
+
+Závěr:
+- klid / malý nový průchod / nová základní realita
+
+Nejmenší další důkaz nebo krok:
+
+Privacy-first úklid:
+Které staré stopy mažeme, anonymizujeme, nebo necháváme zavřené:
+
+Vlastník:
+
+Datum kontroly:
+```
+
+### Checklist uzavření rozpadu
+
+- Je jasné, které staré rozhodnutí už nepoužíváme jako pravidlo?
+- Nechali jsme si z něj jen užitečný princip nebo historickou poznámku?
+- Máme jednu větu dnešního jistého výchozího bodu?
+- Oddělili jsme, co víme, od toho, co jen tušíme?
+- Vybrali jsme závěr: klid, malý nový průchod, nebo nová základní realita?
+- Má další krok konkrétní pracovní místo?
+- Je zapsané, co teď výslovně neotevíráme?
+- Nevyrábíme nové měření, dokud nevyužijeme existující legitimní důkazy?
+- Uklidili jsme staré pracovní stopy podle jejich dnešního účelu?
+- Ví vlastník, kdy se k novému výchozímu bodu vrátit?
+
+Dobré uzavření rozpadu kontextu má zvláštní efekt: tým se po něm necítí chytřejší, ale klidnější. Ví, co už není pravda, co ještě pravda je a kde se smí udělat první další krok. To většinou stačí. Produktová práce nepotřebuje každý týden novou filozofii. Často potřebuje jen čistý stůl a jednu přesnou větu.
+
 ## Rychlé potvrzení návratového signálu
 
 Návratový signál má chránit tým před dvěma opačnými chybami. První chyba je ignorovat skutečný problém jen proto, že už se jednou uzavřel. Druhá chyba je otevřít novou iteraci pokaždé, když někdo zahlédne nedokonalost. Rychlé potvrzení signálu je malý filtr mezi těmito dvěma extrémy.
@@ -229390,3 +229515,4 @@ Uzavřené druhé použití má být nenápadné. V ideálním případě po ně
 - 2026-06-18: Doplněna krátká úvodní poznámka, aby se při návratu k tématu zapsalo i to, co se ze starého kontextu záměrně nepřenáší.
 - 2026-06-18: Doplněna úvodní podkapitola o kontrole přeneseného kontextu při návratu k tématu: platný a neplatný kontext, typy změn, privacy-first práce se starými stopami, karta, workshop a checklist.
 - 2026-06-18: Doplněna úvodní podkapitola o rozpadu přeneseného kontextu: kdy staré rozhodnutí archivovat, přerámovat otázku nebo získat novou základní realitu, včetně privacy-first hranic, karty a checklistu.
+- 2026-06-18: Doplněna úvodní podkapitola o uzavření rozpadu kontextu do nového výchozího bodu: oddělení historie, dnešní jistoty a dalšího kroku, privacy-first úklid stop, karta a checklist.
