@@ -230578,8 +230578,177 @@ Když se workshop začne rozlévat do debaty o celé oblasti, vraťte se k uzav�
 
 Dobré uzavření prvního návratu z tiché údržby má nevděčnou roli: brání tomu, aby se užitečné pravidlo zase stalo projektem. Když pravidlo funguje, nechá ho pracovat. Když potřebuje drobnou oporu, doplní ji na správné místo. Když se opravdu objeví návratový signál, otevře jen malou smyčku. Všechno ostatní nechá být, což je v digitálním provozu často nejpodceňovanější forma rozumu.
 
+## První běžné použití po uzavření návratu z tiché údržby
+
+Po uzavření prvního návratu z tiché údržby přichází nenápadný, ale důležitý test: dokáže pravidlo zase fungovat jako obyčejná součást práce? Ne jako téma, ne jako výjimka, ne jako položka v interním dramatu s vlastní hudbou. Prostě jako pravidlo, které někdo použije při běžném rozhodnutí a pak jde dál.
+
+První běžné použití má ověřit, že uzavření návratu nezanechalo skrytou zvláštní péči. Pokud tým po každém použití pravidla pořád čeká na potvrzení původního autora, hledá starou kartu nebo se bojí rozhodnout bez dodatečného vysvětlení, tichá údržba se ve skutečnosti neobnovila. Jen jste ji přejmenovali na normální provoz a doufali, že si toho nikdo nevšimne.
+
+Začněte jednoduchou větou:
+
+```text
+Pravidlo po uzavřeném návratu používáme dnes v této běžné situaci:
+```
+
+Do věty patří konkrétní pracovní místo. Například návrh formulářového pole, úprava onboardingového e-mailu, výběr měřené události, doplnění prodejního textu nebo rozhodnutí, jestli založit novou automatizaci. Nepište "pracujeme s kvalitou leadů". Napište "rozhodujeme, zda na nové landing page přidat pole velikost týmu". Běžné použití musí mít místo, kde se dá pozorovat.
+
+### Co první běžné použití ověřuje
+
+Ověřují se tři věci:
+
+- najitelnost: člověk najde pravidlo tam, kde ho při práci přirozeně potřebuje;
+- rozhodnutelnost: pravidlo pomůže udělat ano, ne nebo menší další krok;
+- klid: použití neotevře mimořádnou kontrolu, pokud k tomu není návratový signál.
+
+Najitelnost je praktická, ne teoretická. Nestačí, že pravidlo někde existuje. Pokud ho člověk najde jen přes starý Slack thread, náhodný odkaz v dokumentaci nebo paměť kolegy, není najitelné. Najitelné pravidlo by mělo ležet u formuláře, šablony, checklistu, briefu nebo karty, kde se rozhodnutí opravdu dělá.
+
+Rozhodnutelnost znamená, že pravidlo není jen hezky znějící zásada. Musí zúžit práci. Dobré pravidlo řekne: toto pole nepřidávejte, protože nemění další krok; tento údaj stačí zobecnit; tuto nápovědu dejte přímo k šabloně; tuto otázku odložte mimo aktuální změnu. Pokud po přečtení pravidla tým pořád neví, co udělat, nejspíš chybí pracovní hranice.
+
+Klid znamená, že správné použití nevyrábí nový proces. Pravidlo nemá po každém použití posílat tým do review, pokud se neobjevil zapsaný návratový signál. Tady se často láme disciplína: lidé mají chuť "raději to ještě zkontrolovat", protože minule se kolem pravidla něco řešilo. Jenže právě proto jste návrat uzavírali. Běžný provoz musí znovu unést běžná rozhodnutí.
+
+### Čtyři výsledky použití
+
+Po prvním běžném použití vyberte jeden stav:
+
+- pravidlo fungovalo bez změny;
+- pravidlo fungovalo, ale pracovní místo potřebuje drobnou nápovědu;
+- pravidlo bylo najitelné, ale nerozhodnutelné;
+- objevil se skutečný návratový signál.
+
+Stav `pravidlo fungovalo bez změny` je ideální konec. Zapište rozhodnutí do pracovního místa a dál nic neotevírejte. Pokud šlo o formulář, poznámka patří ke kartě formuláře. Pokud šlo o onboardingový e-mail, poznámka patří k dané šabloně. Kanonické pravidlo zůstává v klidu.
+
+Stav `drobná nápověda` použijte, když člověk pravidlo našel a použil, ale v konkrétním místě mu chyběla jedna opora. Třeba krátká věta, že "lepší segmentace" sama nestačí jako důvod pro sběr nového údaje. Nápovědu doplňte jen do pracovního místa. Nepřepisujte celé pravidlo, pokud problém vznikl jen v jedné šabloně.
+
+Stav `najitelné, ale nerozhodnutelné` znamená, že pravidlo je na správném místě, ale neumí vést konkrétní rozhodnutí. V takovém případě neotevírejte hned širokou revizi. Nejdřív napište, která část rozhodnutí zůstala nejasná. Chybí příklad? Kritérium? Stop podmínka? Hranice dat? Teprve potom otevřete malou opravu pravidla.
+
+Stav `skutečný návratový signál` použijte jen tehdy, když se naplnila podmínka z uzavření návratu. Pokud bylo zapsáno "vrátíme se, když dva po sobě jdoucí návrhy polí neumí říct dopad na další obchodní krok" a přesně to nastalo, nejde o běžné použití. Jde o návratový signál. Otevřete malou smyčku s jedním pracovním místem a stop podmínkou.
+
+### Praktický příklad
+
+```text
+Pravidlo:
+Nový údaj do formuláře přidáváme jen tehdy, když mění konkrétní další krok.
+
+Běžná situace:
+Marketing navrhl na landing page přidat pole "počet zaměstnanců".
+
+Použití pravidla:
+Tým se ptá, jak odpověď změní další obchodní krok. Odpověď zní: zatím nijak, jen by nám to pomohlo lépe si lead představit.
+
+Výsledek:
+Pravidlo fungovalo bez změny.
+
+Rozhodnutí:
+Pole nepřidáváme. Pokud obchod později prokáže, že podle velikosti týmu volí jiný follow-up, otevře se samostatný návrh pole.
+
+Co se neotevírá:
+Nepřidáváme scoring, nepřepisujeme celý formulář, neprocházíme staré leady.
+
+Privacy-first stopa:
+Zůstává jen rozhodnutí u landing page. Nekopírujeme zákaznická data ani historické CRM poznámky.
+```
+
+Příklad je záměrně obyčejný. Běžné použití pravidla nemá působit jako velký metodický výkon. Má snížit počet zbytečných polí, rozhodnout o konkrétním návrhu a nechat tým pokračovat. Když takové rozhodnutí působí skoro nudně, pravděpodobně je správně navržené.
+
+### Kdy neotevírat další kontrolu
+
+Další kontrolu neotevírejte jen proto, že:
+
+- někdo pravidlo použil poprvé po delší době;
+- rozhodnutí bylo trochu nepohodlné;
+- někdo navrhl "pojďme to pro jistotu změřit";
+- pravidlo odmítlo oblíbený nápad;
+- v minulosti kolem pravidla existovala výjimka.
+
+Nepohodlí není návratový signál. Občas jen znamená, že pravidlo dělá svoji práci a chrání tým před lákavou zkratkou. Pokud chcete přesto něco zapsat, napište jednu větu k pracovnímu místu: "Pravidlo použito, změna se neotevírá." Víc není potřeba.
+
+Codyho komentář: dobré pravidlo někdy působí nevděčně, protože brání vzniku práce, která by vypadala produktivně. To je v pořádku. Nejlevnější feature je pořád ta, kterou nemusíte stavět, měřit, vysvětlovat, udržovat a za rok mazat.
+
+### Privacy-first hranice
+
+První běžné použití po uzavřeném návratu často svádí k hledání starých důkazů. Tým si řekne: "Podívejme se na minulé poptávky, ať máme jistotu." Někdy to dává smysl. Často ale stačí dnešní pracovní otázka a kanonické pravidlo. Pokud pravidlo říká, že nový údaj musí měnit další krok, nepotřebujete kopírovat deset starých leadů, abyste zjistili, že dnešní návrh žádný další krok nemění.
+
+Použijte minimální datovou stopu:
+
+- dnešní návrh nebo rozhodnutí;
+- odkaz na kanonické pravidlo;
+- zobecněný důvod výsledku;
+- návratový signál jen tehdy, pokud opravdu vznikl.
+
+Osobní údaje, celé e-maily, CRM exporty a screenshoty nepřenášejte do nové vrstvy práce bez jasného účelu. Pokud potřebujete příklad, anonymizujte ho a zkraťte na rozhodovací jádro. "Navržené pole neměnilo follow-up" často stačí. "Konkrétní zákazník X napsal Y a obchodník Z odpověděl..." už je většinou zbytečné.
+
+### Karta prvního běžného použití po uzavřeném návratu
+
+```text
+Pravidlo:
+
+Kanonické místo pravidla:
+
+Dnešní běžná situace:
+
+Kdo pravidlo použil:
+
+Výsledek použití:
+- fungovalo bez změny
+- fungovalo, ale pracovní místo potřebuje drobnou nápovědu
+- najitelné, ale nerozhodnutelné
+- skutečný návratový signál
+
+Rozhodnutí:
+
+Co se mění:
+
+Co se nemění:
+
+Co výslovně neotevíráme:
+
+Pokud vzniká nápověda, přesná věta nebo příklad:
+
+Pokud vzniká oprava pravidla, nejmenší nejasnost:
+
+Pokud vzniká návratový signál, pracovní místo a stop podmínka:
+
+Privacy-first stopa:
+Co zůstává:
+Co nepřenášíme:
+Co anonymizujeme nebo zobecňujeme:
+
+Datum:
+```
+
+Kartu vyplňujte jen tehdy, když běžné použití přineslo nápovědu, nejasnost nebo návratový signál. Pokud pravidlo fungovalo bez změny, stačí krátký zápis u pracovního místa. Administrativa nemá růst rychleji než užitek, jinak se z dobrého pravidla stane malý formulářový kult. A těch už internet viděl dost.
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: pojmenujte běžnou pracovní situaci.
+2. Minuta 2: najděte kanonické pravidlo bez pomoci původního autora.
+3. Minuty 3 až 4: použijte pravidlo a napište rozhodnutí.
+4. Minuta 5: vyberte jeden ze čtyř výsledků použití.
+5. Minuta 6: zapište, co se výslovně neotevírá.
+6. Minuta 7: udělejte privacy-first kontrolu datové stopy.
+
+Pokud se během sedmi minut nedostanete k rozhodnutí, nezvětšujte workshop. Zapište, proč pravidlo nebylo rozhodnutelné, a otevřete samostatnou malou opravu. Delší debata často jen maskuje fakt, že pravidlo nemá dost ostrou hranu.
+
+### Checklist prvního běžného použití
+
+- Pojmenovali jsme konkrétní pracovní místo?
+- Našli jsme pravidlo tam, kde ho člověk přirozeně potřebuje?
+- Pomohlo pravidlo udělat rozhodnutí?
+- Neotevíráme mimořádnou kontrolu jen ze zvyku?
+- Vybrali jsme jeden výsledek použití?
+- Pokud pravidlo fungovalo, necháváme ho v klidu?
+- Pokud chyběla nápověda, doplňujeme jen jednu malou oporu?
+- Pokud pravidlo nebylo rozhodnutelné, popsali jsme nejmenší nejasnost?
+- Pokud vznikl návratový signál, sedí na předem zapsanou podmínku?
+- Zapsali jsme, co se výslovně neotevírá?
+- Držíme datovou stopu na minimu potřebném pro rozhodnutí?
+- Nepřenášíme osobní údaje, CRM exporty ani staré screenshoty bez jasného účelu?
+
+První běžné použití po uzavřeném návratu má vrátit pravidlo do obyčejné práce. Když pravidlo pomůže rozhodnout a nic dalšího nevznikne, je to úspěch. Když odhalí jednu malou nejasnost, opravte ji u pracovního místa. Když se objeví skutečný návratový signál, otevřete malou smyčku. Všechno ostatní je šum, který se nemusí stát projektem jen proto, že zrovna zaklepal na dveře.
+
 ## Pracovní log
 
+- 2026-06-19: Doplněna úvodní podkapitola o prvním běžném použití po uzavření návratu z tiché údržby: najitelnost, rozhodnutelnost, klid bez mimořádné kontroly, čtyři výsledky, privacy-first hranice, karta, workshop a checklist.
 - 2026-06-19: Doplněna úvodní podkapitola o uzavření prvního návratu z tiché údržby: uzavírací stavy, lokální nápověda, malá smyčka při potvrzeném signálu, privacy-first úklid, karta, workshop a checklist.
 - 2026-06-19: Doplněna úvodní podkapitola o prvním přirozeném návratu z tiché údržby: rozlišení běžného použití, lokální nápovědy a skutečného návratového signálu, privacy-first hranice, karta, mini workshop a checklist.
 - 2026-06-19: Doplněna úvodní podkapitola o tiché údržbě po uzavření druhého běžného použití: kanonické pravidlo, konec mimořádné péče, privacy-first úklid důkazů, karta, mini workshop a checklist.
