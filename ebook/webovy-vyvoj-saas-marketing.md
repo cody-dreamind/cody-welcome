@@ -232549,8 +232549,161 @@ Pokud se ukáže, že druhá situace není stejný typ rozhodnutí, workshop hne
 
 Druhé běžné použití po uzavřeném ověření je test přenositelnosti. Když pravidlo pomůže i podruhé a nepotřebuje kolem sebe mimořádnou péči, nechte ho v běžném provozu. Když ukáže jednu slabou hranu, opravte jednu hranu. Když ukáže jinou otázku, otevřete jinou otázku. Tím se pravidla nestávají objemnějšími, ale užitečnějšími.
 
+## Uzavření druhého běžného použití po uzavřeném ověření pravidla
+
+Druhé běžné použití ukáže, jestli pravidlo umí fungovat bez čerstvé paměti a bez lidí, kteří ho pomáhali zavírat. Uzavření druhého použití má udělat poslední praktické rozhodnutí: pravidlo buď necháte v běžném provozu, doplníte jednu slabou hranu, zúžíte jeho rozsah, nebo otevřete novou otázku. Nic mezi tím nemá zůstat jako mlhavý úkol "ještě sledovat".
+
+Tahle fáze je drobná, ale důležitá. Pokud ji přeskočíte, tým si z druhého použití odnese jen pocit. Jeden člověk bude mít za to, že pravidlo už je stabilní. Druhý si bude pamatovat slabou výjimku. Třetí začne potichu sbírat další příklady. Čtvrtý se vrátí k původní historii, protože si není jistý. A najednou máte místo pravidla malý klub nepřiznaných interpretací.
+
+Začněte větou:
+
+```text
+Po druhém běžném použití pravidlo uzavíráme jako:
+```
+
+Potom doplňte jeden stav:
+
+```text
+Po druhém běžném použití pravidlo uzavíráme jako:
+Stabilní pravidlo v běžném provozu. Druhá situace potvrdila přenositelnost, další kontrola se otevírá jen při návratovém signálu.
+```
+
+Tato věta má být krátká a rozhodná. Neříká všechno, co se stalo. Říká, co odteď platí pro práci. Historie patří do logu, ne do každého dalšího rozhodnutí.
+
+### Čtyři uzavírací stavy
+
+Po druhém běžném použití vyberte jeden ze čtyř stavů:
+
+- Stabilní pravidlo: druhé použití potvrdilo přenositelnost a pravidlo nepotřebuje změnu.
+- Stabilní pravidlo s jednou hranicí: pravidlo funguje, ale kanonické místo potřebuje jednu rozhodovací větu, příklad nebo výjimku.
+- Užší pravidlo: druhá situace ukázala, že pravidlo platí jen pro menší typ rozhodnutí, než tým čekal.
+- Nová otázka: druhá situace nebyla stejný typ rozhodnutí a nemá se lepit na původní pravidlo.
+
+Stav `stabilní pravidlo` zavřete bez úprav. Zapište, že druhé použití proběhlo v běžné práci a další návrat se spouští až návratovým signálem. Nepřidávejte další kontrolní rytmus jen proto, že chcete mít jistotu. Pokud pravidlo obstálo podruhé, jeho další test je normální provoz.
+
+U stavu `stabilní pravidlo s jednou hranicí` upravte kanonické místo co nejmenším zásahem. Typicky stačí věta typu: "Pokud údaj nemění další krok zákazníka, nepatří do povinného formuláře před prvním kontaktem." Nebo krátký příklad hranice. Nepřenášejte do pravidla celý příběh, kdo to navrhl, proč se o tom mluvilo a jak dlouho debata trvala. To je zajímavé pro archeology firemní dokumentace, méně pro člověka, který má příště rozhodnout.
+
+U stavu `užší pravidlo` neberte zúžení jako prohru. Dobré úzké pravidlo je lepší než široké pravidlo s pěti výjimkami a jednou tajnou ústní tradicí. Napište, pro jaký typ rozhodnutí platí, a co už pod něj nepatří. Zbytek otevřete jen tehdy, když existuje samostatný návratový signál.
+
+U stavu `nová otázka` oddělte podobné téma od stejného rozhodnutí. Když pravidlo řeší povinná pole ve formuláři a druhá situace se týká technického dotazníku před discovery, možná jde o příbuzné téma, ale jiné pracovní místo. Původní pravidlo nezvětšujte. Napište novou otázku, nový nejbližší krok a nový privacy-first limit.
+
+### Praktický příklad uzavření
+
+```text
+Pravidlo:
+Před prvním lidským kontaktem přidáváme do formuláře jen údaj, který mění další krok zákazníka.
+
+Druhé běžné použití:
+Produktový tým chtěl povinné pole "používaný stack". Podle pravidla se pole nepřidalo do formuláře, ale vznikla volitelná otázka v přípravě discovery.
+
+Uzavírací stav:
+Stabilní pravidlo s jednou hranicí.
+
+Jedna úprava kanonického místa:
+Technický kontext, který pomáhá až přípravě discovery, nepatří jako povinné pole do prvního poptávkového formuláře.
+
+Co neotevíráme:
+Lead scoring, kompletní discovery proces, staré poptávky ani nový technický dotazník.
+
+Návratový signál:
+K pravidlu se vracíme až ve chvíli, kdy dvě další formulářové situace nedokážou rozlišit, jestli údaj mění další krok zákazníka.
+```
+
+Tento zápis je malý, ale použitelný. Další člověk uvidí pravidlo, jednu doplněnou hranici a jasný návratový signál. Nemusí otevírat starou debatu, nemusí číst rozhodovací log a nemusí znovu řešit, jestli se kvůli jednomu poli mění celý formulář.
+
+### Co propsat do kanonického místa
+
+Do kanonického místa po druhém použití patří jen tři typy informací:
+
+- aktuální znění pravidla;
+- jedna rozhodovací hranice nebo příklad, pokud druhé použití ukázalo slabé místo;
+- návratový signál, který říká, kdy se pravidlo znovu otevírá.
+
+Nepatří tam chronologie debat, jména lidí, kopie zákaznických zpráv, screenshoty starých formulářů ani seznam všech nápadů, které se během použití objevily. Tyto věci mohou mít místo v krátkém rozhodovacím logu, pokud opravdu pomohou pozdější kontrole. Ale běžné pracovní místo musí zůstat lehké.
+
+Kanonické místo má odpovědět na otázku: "Co mám udělat příště v podobné situaci?" Pokud na ni odpovídá až po třech odkazech a dvou interních poznámkách, není kanonické. Je to jen mapa k mapě. A to už je turistika, ne produktivita.
+
+### Privacy-first uzavření
+
+Uzavření druhého použití je vhodný okamžik pro úklid stop. Druhé použití často vytvoří krátké poznámky, kopie formulářů, pracovní komentáře nebo příklady ze zákaznické komunikace. Než pravidlo necháte v běžném provozu, rozhodněte, co opravdu zůstává.
+
+Použijte tři otázky:
+
+```text
+Co musí zůstat, aby šlo pravidlo příště použít?
+Co může zůstat jen v anonymizovaném závěru?
+Co smažeme nebo necháme zavřené v původním zdroji pravdy?
+```
+
+Ve většině případů má zůstat jen pravidlo, jedna hranice a návratový signál. Pokud potřebujete příklad, popište typ situace, ne konkrétní osobu nebo zákazníka. Místo "firma X chtěla vyplnit Y" napište "technický kontext pomáhal až discovery, ne prvnímu rozhodnutí o kontaktu". Smysl zůstane, datová stopa se zmenší.
+
+Privacy-first provoz není o tom, že si tým zakáže učit se z reality. Je o tom, že se učí z reality bez zbytečného přenášení osobních údajů do dalších pracovních vrstev. Závěr má být přenosný. Surová stopa má mít krátký život.
+
+### Karta uzavření druhého běžného použití
+
+```text
+Pravidlo:
+
+Kanonické místo:
+
+Druhé běžné použití ukázalo:
+
+Uzavírací stav:
+- stabilní pravidlo
+- stabilní pravidlo s jednou hranicí
+- užší pravidlo
+- nová otázka
+
+Co měníme v kanonickém místě:
+
+Co zůstává jen v rozhodovacím logu:
+
+Co výslovně neotevíráme:
+
+Privacy-first úklid:
+Ponecháváme:
+Anonymizujeme:
+Mažeme nebo neotevíráme:
+
+Návratový signál:
+
+Další běžný rytmus:
+
+Datum:
+```
+
+Karta je hotová ve chvíli, kdy z ní jde udělat další praktické rozhodnutí. Pokud ji vyplňujete déle než samotné použití pravidla, pravděpodobně do ní taháte věci, které patří jinam. Pravidlo po druhém použití nemá dostat batoh. Má dostat čistou cedulku.
+
+### Mini workshop na 8 minut
+
+1. Minuta 1: přečtěte aktuální znění pravidla a výsledek druhého použití.
+2. Minuta 2: vyberte jeden ze čtyř uzavíracích stavů.
+3. Minuty 3 až 4: napište nejvýše jednu změnu kanonického místa.
+4. Minuta 5: napište, co se výslovně neotevírá.
+5. Minuta 6: zkraťte nebo anonymizujte příklad.
+6. Minuta 7: určete návratový signál.
+7. Minuta 8: smažte nebo zavřete dočasné pracovní stopy.
+
+Když se během workshopu objeví nové téma, napište ho jako samostatnou otázku a workshop dokončete. Uzavření druhého použití není brána pro vše, co tým napadlo cestou. Je to poslední krok jedné smyčky.
+
+### Checklist uzavření
+
+- Vybrali jsme jeden ze čtyř uzavíracích stavů?
+- Nepřidali jsme další kontrolu bez skutečného návratového signálu?
+- Propsali jsme do kanonického místa jen aktuální pravidlo, jednu hranici a návratový signál?
+- Pokud se pravidlo zúžilo, napsali jsme přesně, pro jaký typ rozhodnutí platí?
+- Pokud vznikla nová otázka, oddělili jsme ji od původního pravidla?
+- Nenechali jsme v běžném pracovním místě starou historii, jména lidí ani zákaznické detaily?
+- Zkrátili jsme příklad na anonymizovaný typ situace?
+- Uklidili jsme dočasné poznámky, screenshoty, exporty nebo kopie?
+- Výslovně jsme napsali, co se teď neotevírá?
+- Ví další člověk, kdy pravidlo použít a kdy se k němu znovu vrátit?
+
+Uzavření druhého běžného použití je konec mimořádné péče o pravidlo. Buď funguje, a potom má pracovat v klidu. Nebo potřebuje jednu hranici, a potom dostane jednu hranici. Nebo se ukázalo jako užší, a potom ho zúžíte. Nebo odkrylo novou otázku, a potom ji otevřete zvlášť. Všechno ostatní je jen elegantní způsob, jak si schovat nerozhodnutí do dokumentace.
+
 ## Pracovní log
 
+- 2026-06-19: Doplněna úvodní podkapitola o uzavření druhého běžného použití po uzavřeném ověření pravidla: čtyři uzavírací stavy, praktický příklad, propsání do kanonického místa, privacy-first úklid, karta, workshop a checklist.
 - 2026-06-19: Doplněna úvodní podkapitola o druhém běžném použití po uzavřeném ověření pravidla: přenositelnost, samostatnost, klid, čtyři výsledné stavy, praktický příklad, privacy-first stopa, karta, workshop a checklist.
 - 2026-06-19: Doplněna úvodní podkapitola o uzavření prvního běžného použití po uzavřeném ověření pravidla: čtyři uzavírací stavy, praktický příklad, propsání do kanonického místa, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-19: Doplněna úvodní podkapitola o prvním běžném použití po uzavřeném ověření pravidla: čtyři výsledky použití, praktický příklad formulářového rozhodnutí, lokální opravy, privacy-first hranice, karta, mini workshop a checklist.
