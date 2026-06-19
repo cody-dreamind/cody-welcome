@@ -231743,8 +231743,154 @@ Když se tým nedohodne na kanonickém místě, pravidlo ještě není připrave
 
 Dobré předání do týmové paměti je nenápadné. Nikdo by po něm neměl mít pocit, že vznikl nový systém. Naopak: staré podklady zmizí z cesty, pravidlo sedí na jednom místě a další člověk se může rozhodnout bez pátrání. To je přesně ten druh produktivity, který není vidět na nástěnce, ale je příjemně cítit v každém dalším malém rozhodnutí.
 
+## Ověření pravidla po předání do týmové paměti
+
+Předání pravidla do týmové paměti ještě neznamená, že pravidlo opravdu žije. Znamená jen, že má správné místo. Skutečné ověření přijde až ve chvíli, kdy ho někdo použije bez autora původní změny, bez připomínky v chatu a bez návratu ke starému rozhodovacímu vláknu.
+
+Toto ověření nemá být nová kontrolní vrstva. Je to jeden přirozený pracovní průchod, ve kterém si všimnete tří věcí: člověk pravidlo našel, pochopil hranici použitelnosti a dokázal podle něj udělat nebo odmítnout konkrétní krok. Pokud se to stane, pravidlo může zůstat v běžném rytmu. Pokud ne, neopravujte hned celý systém. Nejdřív zjistěte, kde přesně se přenos zlomil.
+
+Začněte větou:
+
+```text
+Při prvním použití po předání ověřujeme:
+```
+
+Nepopisujte tím kvalitu celé týmové paměti. Popisujte jednu situaci. Například:
+
+```text
+Při prvním použití po předání ověřujeme:
+Jestli obchod dokáže podle checklistu poptávkového formuláře rozhodnout, zda nová otázka opravdu mění další krok zákazníka.
+```
+
+Taková věta chrání rozsah. Kdyby zněla "ověřit znalostní bázi", tým otevře navigaci, štítky, strukturu, staré odkazy a najednou řeší knihovnu místo jedné pracovní situace. Ano, úklid znalostní báze je lákavý sport, ale většinou se tváří jako práce právě ve chvíli, kdy nechcete rozhodnout jednu konkrétní věc.
+
+### Čtyři výsledky ověření
+
+Po prvním použití vyberte jeden ze čtyř výsledků:
+
+- Pravidlo funguje: člověk ho našel, pochopil a použil bez zvláštní pomoci.
+- Slabá najitelnost: pravidlo je napsané dobře, ale v pracovním toku není vidět.
+- Slabá rozhodovací hrana: člověk pravidlo našel, ale nepoznal, kde platí a kde už ne.
+- Špatné kanonické místo: pravidlo žije v dokumentu, který lidé v dané situaci přirozeně neotevírají.
+
+Výsledek `pravidlo funguje` zavřete krátkým záznamem a nic dalšího nepřidávejte. Pravidlo nepotřebuje medaili, potřebuje klid.
+
+U `slabé najitelnosti` upravte vstup do pravidla, ne jeho obsah. Přidejte odkaz do checklistu, jednovětou připomínku do šablony nebo jasnější název položky v indexu. Pokud obsah začnete přepisovat jen proto, že ho lidé nenašli, mícháte dohledatelnost s kvalitou rozhodnutí.
+
+U `slabé rozhodovací hrany` doplňte jeden příklad nebo jednu hranici neplatnosti. Typicky stačí věta "neplatí pro bezpečnostní incidenty" nebo "platí jen při sběru nového údaje od zákazníka". Neotevírejte staré důkazy, pokud k tomu není skutečný návratový signál.
+
+U `špatného kanonického místa` pravidlo přesuňte tam, kde práce reálně začíná. Staré místo nenechte jako plnou kopii. Dejte tam krátký odkaz nebo poznámku, že zdroj pravdy se přesunul. Dvě rovnocenná kanonická místa jsou jen elegantnější způsob, jak si vyrobit budoucí rozpor.
+
+### Praktický příklad
+
+```text
+Pravidlo:
+O nový údaj žádáme jen tehdy, když podle něj měníme konkrétní další krok.
+
+Kanonické místo:
+Checklist poptávkového formuláře.
+
+První použití po předání:
+Obchod chce přidat otázku "jaký nástroj používáte na projektové řízení".
+
+Výsledek:
+Slabá rozhodovací hrana.
+
+Co se stalo:
+Pravidlo bylo nalezené, ale nebylo jasné, jestli se vztahuje i na obchodní kvalifikaci před prvním hovorem.
+
+Jedna oprava:
+Doplnit hranici: pravidlo platí pro každou novou otázku před prvním lidským kontaktem. Po prvním hovoru se nové otázky řídí sales poznámkou a ne formulářem.
+
+Co neotevíráme:
+Staré poptávky, interní debatu o délce formuláře ani redesign celé vstupní stránky.
+```
+
+Všimněte si, že oprava je malá. Neřeší všechny otázky obchodu, neotevírá nové scoringové schéma a nesbírá další data "pro jistotu". Jen doplňuje hranici, která chyběla při reálném použití.
+
+### Privacy-first ověření
+
+Ověření pravidla po předání svádí k tomu, že tým začne sledovat, kdo co četl, kdo otevřel jaký dokument a kdo udělal jaké rozhodnutí. To je zbytečně těžká datová stopa pro problém, který jde většinou ověřit lehčeji.
+
+Stačí pracovní důkaz: výsledek konkrétního rozhodnutí, krátká poznámka vlastníka nebo anonymizovaný příklad použití. Nezavádějte osobní analytiku dokumentace, screenshoty chování lidí ani exporty z nástrojů, pokud k tomu nemáte jasný provozní důvod. Privacy-first týmová paměť nemá dokazovat výkon jednotlivců. Má ukázat, jestli pravidlo pomáhá práci.
+
+Krátká kontrolní otázka:
+
+```text
+Potřebujeme vědět, kdo pravidlo otevřel, nebo nám stačí vědět, zda podle něj šlo rozhodnout?
+```
+
+Ve většině případů stačí druhá část. Pokud podle pravidla nešlo rozhodnout, opravte pravidlo nebo jeho umístění. Ne člověka.
+
+### Karta ověření po předání
+
+```text
+Pravidlo:
+
+Kanonické místo:
+
+První pracovní situace po předání:
+
+Kdo pravidlo použil:
+Role stačí, jméno jen pokud je nutné pro vlastnictví opravy.
+
+Ověřujeme:
+- najitelnost:
+- rozhodnutelnost:
+- hranici platnosti:
+- klid bez návratu ke starým poznámkám:
+
+Výsledek:
+- pravidlo funguje
+- slabá najitelnost
+- slabá rozhodovací hrana
+- špatné kanonické místo
+
+Jedna oprava, pokud je potřeba:
+
+Co výslovně neotevíráme:
+
+Privacy-first stopa:
+Jaký nejmenší důkaz ponecháváme:
+Co mažeme nebo necháváme zavřené:
+
+Návratový signál:
+
+Datum:
+```
+
+Tuto kartu použijte jen jednou po předání, případně znovu až při skutečném návratovém signálu. Pokud ji začnete vyplňovat po každém použití, z pravidla se stane mikromanagement v kostýmu kvality. To není systémová disciplína, to je jen tabulka s lepším PR.
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: vyberte první reálnou pracovní situaci po předání.
+2. Minuta 2: otevřete kanonické místo stejně, jako by ho otevíral člověk v běžné práci.
+3. Minuta 3: zkuste podle pravidla rozhodnout bez starých poznámek.
+4. Minuta 4: pojmenujte výsledek: funguje, slabá najitelnost, slabá hrana, nebo špatné místo.
+5. Minuta 5: napište maximálně jednu opravu.
+6. Minuta 6: zkontrolujte, že nevytváříte novou osobní nebo zákaznickou datovou stopu.
+7. Minuta 7: zapište návratový signál a vraťte pravidlo do běžného rytmu.
+
+Pokud workshop vyrobí tři opravy, vyberte jen tu, která bránila rozhodnutí v první pracovní situaci. Ostatní patří do poznámek nebo do samostatného návratového signálu. První ověření po předání má potvrdit přenos pravidla, ne z něj udělat redesign týmové paměti.
+
+### Checklist ověření po předání
+
+- Ověřujeme jednu konkrétní pracovní situaci, ne celou znalostní bázi?
+- Použil pravidlo někdo jiný než autor poslední změny?
+- Našel pravidlo bez připomínky ve starých poznámkách?
+- Šlo podle pravidla rozhodnout?
+- Byla jasná hranice, kde pravidlo neplatí?
+- Pokud se něco zlomilo, víme, jestli šlo o najitelnost, rozhodovací hranu nebo špatné kanonické místo?
+- Děláme nejvýše jednu lokální opravu?
+- Nepřidáváme sledování lidí ani zbytečné exporty jen kvůli ověření?
+- Zapsali jsme nejmenší důkaz a odstranili pomocné stopy?
+- Má pravidlo po ověření jasný návratový signál a běžný rytmus?
+
+Dobré ověření po předání je krátké a trochu suché. Jeho smyslem není dokázat, že dokumentace je krásná. Smyslem je zjistit, jestli další člověk dokáže v reálné práci udělat lepší rozhodnutí s menší datovou stopou. Pokud ano, nechte pravidlo pracovat v tichu.
+
 ## Pracovní log
 
+- 2026-06-19: Doplněna úvodní podkapitola o ověření pravidla po předání do týmové paměti: první reálné použití, čtyři výsledky ověření, privacy-first stopa, karta, mini workshop a checklist.
 - 2026-06-19: Doplněna úvodní podkapitola o předání uzavřeného pravidla do týmové paměti: kanonické místo, handoff jednou větou, hranice použitelnosti, privacy-first úklid starých stop, karta, mini workshop a checklist.
 - 2026-06-19: Doplněna úvodní podkapitola o uzavření druhého běžného použití po návratu z tiché údržby: uzavírací stavy, propsání do kanonického místa, zrušení zvláštní pozornosti, privacy-first úklid, karta, workshop a checklist.
 - 2026-06-19: Doplněna úvodní podkapitola o druhém běžném použití po uzavření návratu z tiché údržby: test přenositelnosti bez autora, hranice použitelnosti, privacy-first přenos dat, karta, workshop a checklist.
