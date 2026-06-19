@@ -231249,8 +231249,195 @@ Pokud workshop potřebuje víc času, nejdřív zjistěte proč. Možná pravidl
 
 Druhé běžné použití má dát pravidlu poslední klidnou zkoušku po návratu z tiché údržby. Když se přenese bez změny, vraťte ho do normálního rytmu. Když potřebuje hranici, doplňte jednu přesnou větu. Když narazí na slabou formulaci, opravte nejmenší rozhodovací hranu. A když se opravdu objeví nový návratový signál, otevřete malou smyčku. Víc z toho nedělejte. Dobré pravidlo má po druhém použití hlavně zmizet z centra pozornosti a zůstat užitečné tam, kde se skutečně pracuje.
 
+## Uzavření druhého běžného použití po návratu z tiché údržby
+
+Po druhém běžném použití už pravidlo nemá zůstávat ve zvláštním světle. Buď se přeneslo a může pracovat tiše, nebo ukázalo přesně pojmenované tření, které patří do jedné malé opravy. Nejhorší výsledek je mezistav: tým cítí, že už je vlastně hotovo, ale nechá si otevřenou další kontrolu "pro jistotu". Taková jistota bývá jen elegantní způsob, jak nevěřit vlastnímu uzavření.
+
+Uzavření druhého použití má proto tři cíle. Za prvé říct, jestli se pravidlo vrací do běžného rytmu. Za druhé propsat poslední lokální úpravu tam, kde ji lidé opravdu najdou. Za třetí odstranit dočasnou pozornost, pomocné poznámky a surové důkazy, které byly užitečné během návratu, ale nemají žít dál.
+
+Začněte větou:
+
+```text
+Po druhém běžném použití pravidlo uzavíráme takto:
+```
+
+Tato věta má být krátká. Pokud potřebujete dlouhé vysvětlování, pravděpodobně ještě neuzavíráte, ale doháníte chybějící rozhodnutí. V takovém případě se vraťte o krok zpět: vyberte výsledek druhého použití a napište, co přesně z něj plyne pro kanonické místo pravidla.
+
+### Čtyři uzavírací stavy
+
+Po druhém běžném použití vyberte jeden ze čtyř stavů:
+
+- uzavřít beze změny;
+- uzavřít s doplněnou hranicí použitelnosti;
+- uzavřít s opravenou rozhodovací větou;
+- neuzavírat a otevřít malou návratovou smyčku.
+
+Stav `uzavřít beze změny` použijte, když pravidlo obstálo v odlišné pracovní situaci bez autora, bez starých důkazů a bez nové nápovědy. V takovém případě nedopisujte další varování. Stačí zapsat, že druhé použití proběhlo, a odstranit zvláštní kontrolu z rytmu práce. Pravidlo se tím nestává zapomenutým. Jen se vrací tam, kam patří: do běžného pracovního místa.
+
+Stav `uzavřít s doplněnou hranicí použitelnosti` použijte, když princip fungoval, ale nebylo jasné, kde končí. Hranici napište jednou větou a uložte ji ke kanonickému pravidlu. Nezakládejte novou paralelní verzi v poznámkách z workshopu. Paralelní verze jsou roztomilé asi dvě minuty; potom začnou vyrábět otázku, která z nich je pravda.
+
+Stav `uzavřít s opravenou rozhodovací větou` použijte, když druhé použití neodhalilo nový problém, ale slabý jazyk. Oprava má být malá a konkrétní. Nemá z pravidla udělat univerzální esej. Pokud původní věta mluvila jen o formulářovém poli a druhé použití řešilo onboardingový e-mail, rozšiřte jazyk na "žádost o údaj nebo odpověď". Nerozšiřujte tím povolený sběr dat.
+
+Stav `neuzavírat a otevřít malou návratovou smyčku` patří jen situaci, kdy se objevil opakovaný vzor s dopadem. Jeden nepohodlný příklad nestačí. Jeden člověk, který by chtěl pravidlo obejít, také nestačí. Návratová smyčka dává smysl až tehdy, když dvě odlišná pracovní místa narážejí na stejnou nerozhodnutelnou hranu a tato hrana ovlivňuje zákaznický výsledek, provozní riziko, příjem nebo datovou stopu.
+
+### Praktický příklad uzavření
+
+```text
+Pravidlo:
+O nový údaj nebo odpověď žádáme jen tehdy, když podle ní měníme konkrétní další krok.
+
+Druhé běžné použití:
+Onboardingový e-mail chtěl přidat otázku na používaný projektový nástroj.
+
+Výsledek druhého použití:
+Pravidlo se přeneslo bez změny.
+
+Uzavření:
+Otázku nepřidáváme. Pravidlo se vrací do běžného rytmu bez další kontroly.
+
+Co se propsalo:
+U šablony onboardingového e-mailu je stručná poznámka: "Nepřidávat kontextové otázky, pokud podle odpovědi neměníme onboardingový krok."
+
+Co se ruší:
+Rušíme dočasnou kontrolu tohoto pravidla v příštím review.
+
+Co se neotevírá:
+Neděláme audit všech onboardingových otázek, neexportujeme CRM a nezakládáme katalog zákaznických nástrojů.
+
+Privacy-first výsledek:
+Nevznikl nový sběr dat ani nová retenční povinnost.
+```
+
+Příklad je záměrně nudný. Dobré uzavření po druhém použití často nemá být dramatické. Má odstranit zbytečnou práci, potvrdit hranici a nechat tým pokračovat. Pokud by každé uzavření působilo jako malý ceremoniál, brzy by lidé začali obcházet samotný proces. A měli by k tomu lidsky dost pochopitelný důvod.
+
+### Co propsat do kanonického místa
+
+Do kanonického místa pravidla patří jen věci, které pomohou dalšímu člověku rozhodnout bez historické přednášky:
+
+- aktuální rozhodovací věta;
+- případná hranice použitelnosti;
+- jeden krátký příklad správného použití;
+- návratový signál, pokud pravidlo nemá zůstat v úplném klidu;
+- datum poslední věcné úpravy.
+
+Nepatří tam celý příběh návratu, seznam lidí v diskusi, surové zákaznické zprávy, screenshoty starých formulářů ani interní debata o tom, kdo měl pravdu. Kanonické místo má nést rozhodnutí, ne drama. Drama si nechte maximálně do retrospektivy, a i tam jen v dávce, která něco zlepší.
+
+Pokud se doplňuje hranice použitelnosti, napište ji jako pravidlo pro budoucí rozhodnutí:
+
+```text
+Platí pro:
+
+Neplatí pro:
+
+Vlastní režim mají:
+```
+
+Tento tvar brání tomu, aby se hranice proměnila v mlhavou poznámku. "Platí většinou i pro onboarding" není hranice. "Platí pro formuláře, onboardingové e-maily a ruční žádosti o informaci od zákazníka" už hranice je. Stejně důležité je napsat, co má vlastní režim: bezpečnostní logy, účetnictví, technická diagnostika nebo právně povinné záznamy nesmí omylem spadnout pod pravidlo, které vzniklo pro marketingové a produktové žádosti.
+
+### Úklid zvláštní pozornosti
+
+Uzavření druhého použití musí odstranit dočasnou vrstvu práce. Zvláštní pozornost byla užitečná během návratu z tiché údržby, ale po uzavření začne překážet. Typicky jde o připomínku v kalendáři, položku v review agendě, pomocnou kartu, poznámky z testu, dočasný export nebo seznam příkladů.
+
+Použijte jednoduché pravidlo:
+
+```text
+Co nepomáhá příštímu běžnému rozhodnutí, to po uzavření nemažeme z historie bezhlavě, ale odstraníme z aktivní pracovní trasy.
+```
+
+Historie může zůstat v rozhodovacím logu, pokud má jasný účel. Aktivní trasa ale nemá nést všechno, co se kdy řešilo. Jinak se i malé pravidlo začne tvářit jako systém, který potřebuje průvodce, checklist, školení a jednoho člověka, který ví, kam se kliká. To není zralost. To je procesní karaoke.
+
+### Privacy-first uzavření
+
+Privacy-first uzavření se ptá hlavně na to, jestli po druhém použití nezůstala zbytečná datová stopa. Během návratu mohl tým otevřít anonymizované příklady, pracovní screenshoty, stručné poznámky z obchodního rozhovoru nebo seznam návrhů. Po uzavření už většina těchto věcí nemá být aktivní oporou pravidla.
+
+Zkontrolujte čtyři položky:
+
+- surové vstupy: co se dá smazat, vrátit do původního zdroje nebo nahradit zobecněným závěrem;
+- pomocné kopie: co vzniklo jen pro workshop nebo ověření;
+- přístupy: kdo měl dočasně vidět podklady a už je nepotřebuje;
+- retence: jestli nová nebo upravená poznámka nevytváří nový důvod držet data déle.
+
+V rozhodovacím záznamu většinou stačí věta:
+
+```text
+Pro budoucí použití zůstává jen zobecněný důvod rozhodnutí; surové příklady se nepřenášejí do kanonického pravidla.
+```
+
+Tahle věta je malá, ale důležitá. Chrání tým před tím, aby si kvůli jedné dobré lekci vytvořil další sklad starých dat. Privacy-first provoz není jen o tom, jak data sbíráte. Je stejně tak o tom, jestli umíte po práci zavřít dveře a nezapomenout v místnosti krabici s věcmi, které už nikdo nepotřebuje.
+
+### Karta uzavření druhého běžného použití
+
+```text
+Pravidlo:
+
+Kanonické místo:
+
+Druhé běžné použití:
+
+Výsledek druhého použití:
+
+Uzavírací stav:
+- uzavřít beze změny
+- uzavřít s doplněnou hranicí použitelnosti
+- uzavřít s opravenou rozhodovací větou
+- neuzavírat a otevřít malou návratovou smyčku
+
+Co se propsalo do kanonického místa:
+
+Co se propsalo do pracovního místa:
+
+Co se ruší ze zvláštní pozornosti:
+
+Co zůstává v běžném rytmu:
+
+Co se výslovně neotevírá:
+
+Privacy-first úklid:
+Surové vstupy:
+Pomocné kopie:
+Přístupy:
+Retence:
+
+Návratový signál, pokud zůstává:
+
+Vlastník:
+
+Datum:
+```
+
+Kartu nepoužívejte jako povinný rituál pro každé drobné rozhodnutí. Použijte ji tehdy, když druhé použití vedlo k úpravě pravidla, hranice nebo aktivního rytmu. Pokud se pravidlo přeneslo bez změny a nic dalšího nevzniklo, stačí krátký záznam u pracovního místa a jedna věta v rozhodovacím logu.
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: přečtěte výsledek druhého běžného použití.
+2. Minuta 2: vyberte jeden uzavírací stav.
+3. Minuty 3 až 4: napište, co se propsalo do kanonického místa a pracovního místa.
+4. Minuta 5: vyškrtněte zvláštní kontrolu, pokud už není potřeba.
+5. Minuta 6: proveďte privacy-first úklid surových vstupů a pomocných kopií.
+6. Minuta 7: napište, co se výslovně neotevírá.
+
+Když se tým v minutě dvě nedokáže shodnout na uzavíracím stavu, nehlasujte o pocitu hotovosti. Vraťte se k výsledku druhého použití a napište chybějící důkaz jednou větou. Pokud důkaz nemáte, neuzavírejte ani nerozšiřujte pravidlo. Otevřete nejmenší smyčku s jasnou stop podmínkou.
+
+### Checklist uzavření druhého běžného použití
+
+- Vybrali jsme jeden uzavírací stav?
+- Víme, jestli se pravidlo vrací do běžného rytmu?
+- Pokud doplňujeme hranici použitelnosti, je v kanonickém místě jednou jasnou větou?
+- Pokud opravujeme rozhodovací větu, opravujeme jazyk, ne nenápadně rozsah sběru dat?
+- Pokud otevíráme návratovou smyčku, máme opakovaný vzor a stop podmínku?
+- Propsali jsme rozhodnutí tam, kde ho příští člověk opravdu najde?
+- Odstranili jsme zvláštní kontrolu, pokud už není potřeba?
+- Nezakládáme další review jen ze zvyku?
+- Zůstává v aktivní pracovní trase jen to, co pomůže příštímu běžnému rozhodnutí?
+- Uklidili jsme pomocné poznámky, dočasné kopie a surové příklady?
+- Nepřenášíme osobní nebo obchodně citlivé detaily do kanonického pravidla?
+- Je jasně zapsané, co se výslovně neotevírá?
+
+Uzavření druhého běžného použití je konec zvláštní péče. Pravidlo buď znovu umí pracovat samo, nebo si zaslouží jednu malou opravu s jasným důvodem. V obou případech má tým odejít s menším množstvím aktivní práce, ne s dalším ocáskem kontroly. Dobře zavřená smyčka není ta, která všechno vysvětlí. Je to ta, která příště dovolí rozhodnout rychleji, s menší datovou stopou a bez hledání člověka, který si pamatuje poslední drama.
+
 ## Pracovní log
 
+- 2026-06-19: Doplněna úvodní podkapitola o uzavření druhého běžného použití po návratu z tiché údržby: uzavírací stavy, propsání do kanonického místa, zrušení zvláštní pozornosti, privacy-first úklid, karta, workshop a checklist.
 - 2026-06-19: Doplněna úvodní podkapitola o druhém běžném použití po uzavření návratu z tiché údržby: test přenositelnosti bez autora, hranice použitelnosti, privacy-first přenos dat, karta, workshop a checklist.
 - 2026-06-19: Doplněna úvodní podkapitola o uzavření prvního běžného použití po návratu z tiché údržby: čtyři uzavírací stavy, lokální nápověda, oprava rozhodovací hrany, privacy-first úklid, karta, workshop a checklist.
 - 2026-06-19: Doplněna úvodní podkapitola o prvním běžném použití po uzavření návratu z tiché údržby: najitelnost, rozhodnutelnost, klid bez mimořádné kontroly, čtyři výsledky, privacy-first hranice, karta, workshop a checklist.
