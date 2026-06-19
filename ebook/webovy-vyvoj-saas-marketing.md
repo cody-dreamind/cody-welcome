@@ -230091,8 +230091,148 @@ Druhé běžné použití uzavíráme jako návrat do stabilního klidu, do kano
 
 Uzavření druhého běžného použití je malé administrativní gesto s velkým provozním dopadem. Říká týmu: pravidlo funguje, víme kde žije, víme kdy se k němu vrátit a teď ho necháme pracovat potichu. To je přesně ten druh klidu, který dobrý SaaS potřebuje. Ne klid bez problémů, ale klid bez zbytečného šťourání.
 
+## Tichá údržba po uzavření druhého běžného použití
+
+Když pravidlo obstálo i při druhém běžném použití, není dalším krokem třetí kontrola. Dalším krokem je tichá údržba: pravidlo zůstává dostupné v pracovním místě, ale nevyrábí vlastní agendu. Tým ho používá, když na něj přirozeně narazí. Nevolá kvůli němu schůzku, nezakládá měření a neptá se každý týden, jestli je pořád užitečné.
+
+Tichá údržba je důležitá hlavně u webu, SaaS a marketingu, kde se snadno plete pečlivost s neustálou aktivitou. Dobré pravidlo má snížit rozhodovací tření, ne vytvořit další provozní rituál. Pokud pravidlo po dvou běžných použitích pořád potřebuje mimořádnou pozornost, pravděpodobně ještě není pravidlem. Je to nedokončená oprava, experiment nebo slabě popsané rozhodnutí.
+
+Začněte větou:
+
+```text
+Pravidlo přechází do tiché údržby: používáme ho v ..., znovu ho otevřeme jen při ..., a průběžně nesledujeme ...
+```
+
+Příklad:
+
+```text
+Pravidlo přechází do tiché údržby: používáme ho při změnách poptávkového formuláře, znovu ho otevřeme jen při dvou opakovaných nejasnostech o nutnosti sbíraného údaje, a průběžně nesledujeme každý jednotlivý návrh nového pole.
+```
+
+Tahle věta má praktický efekt. Určuje místo použití, návratový signál i věc, kterou tým nebude hlídat. Bez třetí části se tichá údržba snadno změní ve skrytou kontrolu. A skrytá kontrola je jen schůzka, která se zatím stydí za svůj kalendář.
+
+### Co v tiché údržbě zůstává
+
+V tiché údržbě mají zůstat jen tři věci:
+
+- kanonické pravidlo v místě, kde se podle něj opravdu rozhoduje;
+- návratový signál, který pravidlo znovu otevře;
+- minimální příklad nebo poznámka, pokud pomáhá novému člověku pravidlo použít bez původní historie.
+
+Všechno ostatní je podezřelé. Staré ověřovací karty, screenshoty, poznámky z workshopu, exporty a meziverze textů už splnily účel. Pokud nejsou potřeba pro audit, podporu nebo zákonnou evidenci, nemají zůstávat jako pracovní opora. Tým má vědět, co platí dnes, ne listovat stopami toho, jak se k tomu kdysi došlo.
+
+Praktická otázka:
+
+```text
+Kdyby k pravidlu přišel nový člověk za měsíc, najde v pracovním místě dost informací pro rozhodnutí bez čtení historie?
+```
+
+Pokud ano, historie může ztichnout. Pokud ne, neopravujte to tím, že přidáte odkaz na celý starý proces. Přidejte jednu jasnější větu do kanonického místa.
+
+### Co už není práce
+
+Po uzavření druhého běžného použití už není práce:
+
+- znovu dokazovat, že pravidlo funguje;
+- kontrolovat každé běžné použití;
+- rozšiřovat pravidlo na sousední oblast bez nového signálu;
+- držet dočasnou tabulku "pro jistotu";
+- vracet se k původní debatě, když dnešní situaci umí rozhodnout aktuální pravidlo.
+
+Tohle je tvrdší, než vypadá. Týmy často milují právě ta pravidla, která jim pomohla z nepřehledné situace. Pak kolem nich nechají malé muzeum důkazů, poznámek a opatrných kontrol. Jenže pravidlo, které se nedá používat bez vlastního muzea, není lehké provozní pravidlo. Je to exponát.
+
+Codyho komentář: dobrý proces má někdy udělat tu nejméně efektní věc na světě. Přestat se předvádět.
+
+### Privacy-first tichá údržba
+
+Privacy-first hodnota se v tiché údržbě projevuje velmi prakticky: neskladujte důkazy déle, než mají účel. Pokud pravidlo vzniklo třeba kvůli formulářům, leadům, onboardingovým problémům nebo zákaznickým zprávám, je lákavé nechat si všechny pracovní příklady. Jenže po uzavření už obvykle stačí zobecněný závěr.
+
+Použijte pravidlo:
+
+```text
+Do tiché údržby patří rozhodovací pravidlo, ne surovina, ze které vzniklo.
+```
+
+Příklad přepisu:
+
+```text
+Neponechávat:
+Screenshot konkrétní poptávky se jménem, firmou a interní poznámkou obchodníka.
+
+Ponechat:
+Anonymizovaný příklad: "U změny formuláře se nejdřív ptáme, zda údaj mění další krok obchodu. Pokud ne, nesbíráme ho."
+```
+
+Tím se pravidlo nezhorší. Naopak se zlepší, protože už nestojí na jednom starém případu. Stojí na rozhodovacím principu, který se dá použít znovu bez tahání osobních údajů do další debaty.
+
+### Karta tiché údržby
+
+```text
+Karta tiché údržby
+
+Pravidlo / pracovní místo:
+
+Kanonická věta, která platí:
+
+Kde se pravidlo používá:
+
+Návratový signál:
+Pravidlo znovu otevřeme jen tehdy, když:
+
+Co výslovně nesledujeme:
+
+Co zůstává jako minimální příklad:
+
+Co mažeme, anonymizujeme nebo necháváme zavřené:
+
+Nejbližší běžný rytmus, ve kterém se pravidlo přirozeně potká s prací:
+
+Vlastník pracovního místa:
+
+Datum:
+```
+
+Karta tiché údržby má být krátká. Pokud se z ní stává další dokument, je to signál, že pravidlo ještě není dost jednoduché nebo že se tým bojí opravdu zavřít mimořádnou péči. V takovém případě neprodlužujte kartu. Zkraťte pravidlo.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte kanonickou větu pravidla.
+2. Minuta 2: ověřte, kde se pravidlo přirozeně používá.
+3. Minuta 3: napište návratový signál jednou větou.
+4. Minuta 4: napište, co se výslovně nebude sledovat.
+5. Minuta 5: vyberte jeden minimální anonymizovaný příklad, pokud je opravdu potřeba.
+6. Minuta 6: smažte, anonymizujte nebo zavřete dočasné pracovní stopy.
+
+Workshop končí větou:
+
+```text
+Pravidlo necháváme v tiché údržbě v ..., vrátíme se k němu jen při ..., a po dnešku už nesledujeme ...
+```
+
+Například:
+
+```text
+Pravidlo necháváme v tiché údržbě v checklistu formulářových změn, vrátíme se k němu jen při opakovaném sporu o nutnost sběru nového údaje, a po dnešku už nesledujeme jednotlivé návrhy polí, které checklist normálně rozhodne.
+```
+
+### Checklist tiché údržby
+
+- Je pravidlo uložené v místě, kde se podle něj opravdu pracuje?
+- Umí nový člověk pravidlo použít bez čtení původní historie?
+- Má pravidlo jasný návratový signál?
+- Je napsané, co se výslovně nebude dál sledovat?
+- Neplánujeme třetí kontrolu jen proto, že druhá dopadla dobře?
+- Nešíříme pravidlo na sousední oblast bez nového návratového signálu?
+- Zůstává jen minimální anonymizovaný příklad, pokud je opravdu užitečný?
+- Smazali jsme, anonymizovali nebo zavřeli dočasné pracovní důkazy?
+- Nepřenášíme do tiché údržby osobní údaje, screenshoty nebo exporty bez účelu?
+- Je jasné, v jakém běžném rytmu se pravidlo přirozeně potká s prací?
+
+Tichá údržba je stav, kdy pravidlo konečně dělá svoji práci bez dramatu. Není to zapomenutí. Je to důvěra podmíněná jasným návratovým signálem. Když se signál objeví, vrátíte se. Když se neobjeví, necháte pravidlo sloužit a nebudete mu pořádat kontrolní festival jen proto, že existuje.
+
 ## Pracovní log
 
+- 2026-06-19: Doplněna úvodní podkapitola o tiché údržbě po uzavření druhého běžného použití: kanonické pravidlo, konec mimořádné péče, privacy-first úklid důkazů, karta, mini workshop a checklist.
 - 2026-06-19: Doplněna úvodní podkapitola o uzavření druhého běžného použití po návratu do stabilního klidu: uzavírací stavy, zákaz další kontroly, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-19: Zpřesněna závěrečná poznámka po druhém běžném použití pravidla o zákaz další kontroly bez skutečného návratového signálu.
 - 2026-06-19: Doplněna úvodní podkapitola o druhém běžném použití po návratu do stabilního klidu: přenositelnost pravidla, čtyři výsledné stavy, příklad formulářového rozhodnutí, privacy-first hranice, karta, mini workshop a checklist.
