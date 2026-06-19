@@ -229121,8 +229121,173 @@ Tři části věty drží disciplínu. Typ uzavření, aktuální stav pravidla 
 
 Uzavření prvního návratu po stabilním klidu má být malé a přesné. Nejde o velkou retrospektivu. Jde o to nenechat první podnět znovu roztočit provozní kolotoč, který už jednou ztichl. Dobré uzavření řekne: co jsme zjistili, co jsme případně opravili, co neotevíráme a kdy se k tomu smíme vrátit. Všechno ostatní je jen administrativní konfeta.
 
+## Ověření uzavření prvního návratu při dalším běžném použití
+
+Uzavření prvního návratu po stabilním klidu vypadá dobře na papíře. Skutečná zkouška přijde až při dalším běžném použití pravidla. Někdo připraví nový formulář, upraví onboarding, zakládá další automatizaci, píše nabídku nebo předává šablonu kolegovi. Neví o poslední debatě, nečetl celý archiv a nikdo mu nestojí za zády s připomínkou. Právě tehdy se ukáže, jestli uzavření opravdu zapadlo do provozu.
+
+Ověření má odpovědět na jednu otázku:
+
+```text
+Funguje pravidlo po uzavření prvního návratu samo v běžném pracovním místě?
+```
+
+Slovo `samo` neznamená bez vlastníka. Znamená bez mimořádné péče. Pokud pravidlo funguje jen díky tomu, že si někdo čerstvě pamatuje poslední incident, není ještě stabilní. Pokud ho člověk najde v kanonickém místě, použije ho na rozhodnutí a nevytvoří zbytečnou datovou stopu, uzavření drží.
+
+### Čtyři výsledky ověření
+
+Po dalším běžném použití vyberte jeden ze čtyř výsledků:
+
+- Drží bez změny: pravidlo bylo použito správně a není potřeba nic upravit.
+- Jedno lokální dočištění: uzavření bylo správné, ale jedno pracovní místo potřebuje drobnou opravu.
+- Slabé uzavření: člověk pravidlo použil jen díky doplňujícímu vysvětlení, staré poznámce nebo ruční pomoci.
+- Nový návratový signál: objevila se situace, kterou původní uzavření nepokrývá.
+
+`Drží bez změny` je nejlepší výsledek a také nejkratší. Napište jednu větu, že pravidlo obstálo při běžném použití, a další práci neotevírejte. Tady se často láme disciplína: tým má chuť ještě něco vylepšit, protože je zrovna u tématu. Jenže klid je výsledek, ne promarněná příležitost.
+
+`Jedno lokální dočištění` použijte, když problém nebyl v pravidle, ale v jeho okraji. Chyběl odkaz v checklistu, starý příklad měl nepřesný název, karta měla zbytečně dlouhou větu nebo šablona nevedla člověka k rozhodnutí dost rychle. Opravte konkrétní místo a znovu neotevírejte celou smyčku.
+
+`Slabé uzavření` je vážnější. Znamená, že formálně bylo uzavřeno, ale pravidlo se do běžné práce nedostalo dost dobře. Typický signál: člověk se ptal "kde to vlastně je", použil starou kopii, potřeboval vysvětlení od původního vlastníka nebo si založil pomocnou tabulku, protože kanonické místo mu nestačilo. Tady neupravujte obsah naslepo. Nejprve opravte přenos: kde pravidlo bydlí, jak je pojmenované a jak se dostane do ruky ve správném okamžiku.
+
+`Nový návratový signál` otevřete jen tehdy, když běžné použití ukázalo novou otázku. Nepleťte si ji s drobným třením. Nová otázka má vlastní důvod, vlastní pracovní místo a vlastní stop podmínku. Původní uzavření tím automaticky neselhává; jen se ukázalo, že vedle něj existuje další hrana systému.
+
+### Praktický příklad
+
+```text
+Původní pravidlo:
+Nové pole ve formuláři musí mít zapsaný rozhodovací účel.
+
+Uzavření prvního návratu:
+Lokální oprava publikačního checklistu landing page.
+
+Další běžné použití:
+Tým připravil novou stránku pro konzultaci a přidal pole "velikost týmu".
+
+Výsledek:
+Jedno lokální dočištění.
+
+Co se stalo:
+Autor pole účel zapsal, ale checklist ho nutil psát dlouhou větu. V praxi stačí krátká vazba: údaj -> rozhodnutí.
+
+Úprava:
+V checklistu měníme instrukci z "popište účel pole" na "napište: podle tohoto údaje rozhodneme ...".
+
+Co neotevíráme:
+Neděláme audit všech formulářů, nepřidáváme nové měření opuštění pole a neměníme hlavní pravidlo.
+
+Privacy-first výsledek:
+Do rozhodovací paměti ukládáme jen zobecněný závěr. Nepřenášíme vyplněné hodnoty z formuláře ani screenshot s osobními údaji.
+```
+
+Příklad je malý, a to je dobře. Ověření nemá být detektivní seriál na pokračování. Má říct, jestli se uzavření v reálném provozu chová zdravě.
+
+### Jak poznat slabé uzavření
+
+Slabé uzavření se často netváří jako chyba. Vypadá jako ochotná pomoc:
+
+- někdo pošle odkaz na správnou šablonu do chatu;
+- původní vlastník vysvětlí, co se minule myslelo;
+- tým použije starý screenshot jako připomínku;
+- vznikne vedlejší checklist "jen pro jistotu";
+- pravidlo se použije správně, ale jen proto, že si člověk pamatuje poslední debatu.
+
+To všechno může krátkodobě zachránit práci, ale dlouhodobě to znamená, že pravidlo pořád není dost dobře usazené. Oprava slabého uzavření proto nemá přidat další vysvětlení bokem. Má posílit kanonické místo. Přejmenujte kartu, zkraťte první větu, přesuňte odkaz do pracovního checklistu, smažte starou kopii nebo doplňte jeden rozhodovací příklad přímo tam, kde se pravidlo používá.
+
+Codyho komentář: když pravidlo potřebuje průvodce s baterkou pokaždé, když ho někdo použije, není tajemné. Je špatně zaparkované.
+
+### Privacy-first ověření
+
+Při ověřování dalšího použití nesbírejte víc dat jen proto, že chcete mít "důkaz". Důkazem často stačí pracovní výsledek: formulář byl spuštěn bez zbytečného pole, onboardingová karta vedla ke správnému rozhodnutí, nabídka nepřidala nový tracker, nebo automatizace zůstala v rámci schváleného účelu.
+
+Použijte tuto hranici:
+
+```text
+Ověřujeme výsledek rozhodnutí, ne osobní údaje za rozhodnutím.
+```
+
+U webu to znamená neukládat kopie vyplněných formulářů, pokud stačí zapsat, že každé pole mělo účel. U SaaS produktu to znamená nepřidávat nové eventy kvůli jednomu ověření, pokud stačí ručně projít konkrétní pracovní krok. U marketingu to znamená nepřesouvat leady do pomocné tabulky, když problém byl ve formulaci checklistu.
+
+Krátký zápis může vypadat takto:
+
+```text
+Ověření proběhlo na jednom běžném použití šablony. Neukládáme zákaznická data ani screenshoty; ponecháváme jen závěr, že instrukce vedla k rozhodnutí bez další pomoci.
+```
+
+### Karta ověření uzavření
+
+```text
+Pravidlo nebo pracovní místo:
+
+Uzavření prvního návratu:
+
+Další běžné použití:
+
+Kdo pravidlo použil:
+- původní vlastník / člověk mimo původní debatu / nový člověk v týmu
+
+Použil kanonické místo bez mimořádné připomínky?
+- ano / ne
+
+Výsledek:
+- drží bez změny / jedno lokální dočištění / slabé uzavření / nový návratový signál
+
+Co se stalo:
+
+Jedna případná úprava:
+
+Co výslovně neotevíráme:
+
+Privacy-first hranice:
+
+Jaké dočasné stopy mažeme nebo nevytváříme:
+
+Nový nebo ponechaný návratový signál:
+
+Vlastník:
+
+Datum:
+```
+
+Karta má být krátká. Pokud se rozroste, pravděpodobně už neověřujete uzavření, ale otevíráte nové téma. To může být správně, ale pak ho pojmenujte novou otázkou a oddělte od původní smyčky.
+
+### Mini workshop na 8 minut
+
+1. Minuta 1: přečtěte jednověté uzavření prvního návratu.
+2. Minuta 2: popište další běžné použití.
+3. Minuta 3: ověřte, zda člověk našel kanonické místo bez mimořádné připomínky.
+4. Minuta 4: vyberte jeden ze čtyř výsledků.
+5. Minuta 5: napište případné jedno lokální dočištění.
+6. Minuta 6: rozhodněte, co výslovně neotevíráte.
+7. Minuta 7: zapište privacy-first hranici a úklid stop.
+8. Minuta 8: ponechte, zpřesněte nebo otevřete návratový signál.
+
+Workshop končí větou:
+
+```text
+Uzavření prvního návratu se při běžném použití projevilo jako: ...; další práce je: ...; rozsah, který neotevíráme, je: ...
+```
+
+Když druhé pole věty vyjde "žádná další práce", je to platný výsledek. Nenuťte proces vyrábět práci jen proto, že se sešli lidé a otevřeli dokument.
+
+### Checklist ověření uzavření
+
+- Ověřovali jsme při běžném použití, ne při umělém auditu?
+- Víme, jaké uzavření prvního návratu se mělo projevit?
+- Použil pravidlo člověk bez mimořádné připomínky?
+- Bylo kanonické místo snadno najitelné?
+- Vedlo pravidlo ke konkrétnímu rozhodnutí?
+- Vybrali jsme jeden výsledek: drží, lokální dočištění, slabé uzavření, nebo nový návratový signál?
+- Pokud jde o lokální dočištění, má přesně jedno pracovní místo?
+- Pokud jde o slabé uzavření, opravujeme přenos pravidla místo přidávání bokovky?
+- Pokud jde o nový návratový signál, má vlastní otázku a stop podmínku?
+- Napsali jsme, co výslovně neotevíráme?
+- Nevytvořili jsme nové exporty, screenshoty, eventy nebo pomocné tabulky bez jasného účelu?
+- Uklidili jsme dočasné podklady z ověření?
+
+Ověření uzavření prvního návratu je krátký dotek reality. Buď ukáže, že pravidlo se vrátilo do klidu, nebo odhalí jedno místo, které ještě drhne. V obou případech má tým odolat pokušení znovu otevřít celý příběh. Dobré pravidlo se nepozná podle toho, že kolem něj vzniká čím dál víc péče. Pozná se podle toho, že další člověk udělá správné rozhodnutí a po práci nezůstane zbytečný datový nepořádek.
+
 ## Pracovní log
 
+- 2026-06-19: Doplněna úvodní podkapitola o ověření uzavření prvního návratu při dalším běžném použití: čtyři výsledky ověření, slabé uzavření, privacy-first hranice, karta, mini workshop a checklist.
 - 2026-06-19: Doplněna úvodní podkapitola o uzavření prvního návratového signálu po stabilním klidu: pět uzavíracích stavů, lokální oprava versus omezené ověření, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-18: Doplněna úvodní podkapitola o prvním návratovém signálu po stabilním klidu: rozlišení šumu, lokální chyby, skutečného signálu a změny kontextu, nejmenší návratová smyčka, privacy-first reakce, karta, mini workshop a checklist.
 - 2026-06-18: Doplněna úvodní podkapitola o stabilním klidu po uzavření druhého běžného použití: kanonické místo pravidla, rozhodovací paměť, návratový signál, odstranění dočasných opor, privacy-first stabilizace, karta, mini workshop a checklist.
