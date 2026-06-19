@@ -232066,8 +232066,159 @@ Když workshop narazí na spor, zda pravidlo vůbec platí, nejde už o uzavřen
 
 Uzavření ověření po předání je poslední kontrolní bod před tím, než pravidlo začne normálně žít. Dobrý výsledek není obsáhlý report, ale menší tření v příštím rozhodnutí. Když další člověk ví, kde pravidlo najít, co přesně říká a kdy ho znovu otevřít, práce je hotová.
 
+## První běžné použití po uzavřeném ověření pravidla
+
+Po uzavření ověření pravidla po předání přichází nejméně efektní, ale velmi důležitá fáze: první normální použití bez zvláštní pozornosti. Tým už nemá vyplňovat ověřovací kartu, vracet se k autorovi změny ani kontrolovat staré poznámky. Má prostě pracovat a pravidlo má být jednou z běžných opor rozhodnutí.
+
+Smyslem této podkapitoly není vytvořit další kontrolu. Smyslem je poznat, jestli se pravidlo opravdu stalo součástí pracovního prostředí. Pokud při prvním běžném použití někdo musí znovu vysvětlovat původní historii, pravidlo ještě není v klidu. Pokud se rozhodnutí udělá rychleji, s menší nejistotou a bez sběru nových zbytečných dat, pravidlo začalo fungovat jako součást systému.
+
+Začněte větou:
+
+```text
+Při prvním běžném použití po uzavřeném ověření sledujeme jen:
+```
+
+Potom doplňte jednu věc, která má být vidět v práci:
+
+```text
+Při prvním běžném použití po uzavřeném ověření sledujeme jen:
+Zda tým dokáže podle kanonického pravidla odmítnout nové formulářové pole bez návratu k rozhodovacímu logu.
+```
+
+Tato věta má držet rozsah při zemi. Neověřujete znalostní bázi, proces obchodu, kvalitu marketingu ani celou privacy strategii firmy. Ověřujete, jestli jedno pravidlo v jedné běžné situaci přestalo potřebovat doprovod.
+
+### Čtyři výsledky prvního běžného použití
+
+Po použití vyberte jeden ze čtyř výsledků:
+
+- Pravidlo je součást běžné práce: člověk ho použil bez mimořádné podpory a rozhodnutí bylo jasné.
+- Pravidlo funguje, ale okolní pracovní místo šumí: rozhodnutí šlo udělat, jen ho zdržel starý odkaz, zbytečná poznámka nebo vedlejší šablona.
+- Pravidlo se používá, ale s návratem k historii: lidé sice dojdou ke správnému závěru, ale pořád potřebují staré vysvětlení.
+- Pravidlo se v běžné práci ztratilo: při skutečné situaci ho nikdo přirozeně neotevřel ani nepoužil.
+
+Výsledek `pravidlo je součást běžné práce` zavřete bez opravy. Zapište jen krátkou provozní stopu, pokud ji opravdu potřebujete pro rytmus další kontroly. Hlavně nepřidávejte novou metriku jen proto, že se něco povedlo. Dobré pravidlo nemá dostat kameru do kanceláře jako odměnu.
+
+U výsledku `okolní pracovní místo šumí` neopravujte pravidlo. Ukliďte okolí. Odstraňte starý odkaz, smažte neplatnou poznámku, přejmenujte položku v checklistu nebo zkraťte větu, která se plete do rozhodnutí. Pokud pravidlo funguje, ale jeho okolí překáží, je to úklid pracovního místa, ne nová produktová smyčka.
+
+U výsledku `návrat k historii` zkontrolujte, co přesně v pravidle chybí. Často stačí doplnit jednu hranici nebo příklad. Pokud lidé pořád otevírají starý log, protože se bojí rozhodnout, kanonické pravidlo možná nepůsobí dost samostatně. Nepřenášejte do něj ale celou historii; přeneste jen větu, která rozhodnutí odemkne.
+
+U výsledku `pravidlo se ztratilo` nejdřív ověřte pracovní trasu. Možná pravidlo sedí v hezkém dokumentu, ale práce začíná v šabloně, ticketu, formuláři nebo obchodní poznámce. Přesuňte vstup blíž k místu práce. Teprve když ani to nepomůže, otevřete menší smyčku k umístění pravidla.
+
+### Praktický příklad
+
+```text
+Pravidlo:
+Před prvním lidským kontaktem přidáváme do formuláře jen údaj, který mění další krok zákazníka.
+
+První běžné použití:
+Marketing navrhl přidat povinné pole "roční rozpočet", aby se lépe třídily poptávky.
+
+Co se stalo:
+Obchod podle checklistu rozhodl, že údaj před prvním kontaktem nemění další krok zákazníka. Rozpočet se může řešit až v následném rozhovoru, pokud je relevantní.
+
+Výsledek:
+Pravidlo je součást běžné práce.
+
+Co neotevíráme:
+Lead scoring, redesign formuláře, staré poptávky ani nové sledování kvality leadů.
+
+Provozní stopa:
+Pravidlo použito bez návratu k rozhodovacímu logu; další kontrola až při návratovém signálu.
+```
+
+Všimněte si, že výsledek neoslavuje proces. Jen říká, že rozhodnutí proběhlo bez zbytečného sběru dat a bez návratu do historie. To je přesně ten okamžik, kdy má tým přestat přidávat péči a nechat pravidlo pracovat.
+
+### Co opravit a co nechat být
+
+Při prvním běžném použití je lákavé vylepšit všechno, čeho si někdo všimne. Nedělejte to. Tato fáze má tři povolené zásahy:
+
+- odstranit jednu starou stopu, která vede mimo aktuální pravidlo;
+- doplnit jednu rozhodovací větu, pokud bez ní lidé sahají po historii;
+- přiblížit odkaz na pravidlo k pracovnímu místu, kde situace vzniká.
+
+Všechno ostatní patří do poznámek nebo do nové samostatné otázky. Pokud se při běžném použití objeví širší problém, nezabalujte ho do údržby pravidla. Napište novou otázku, nový návratový signál a nové pracovní místo. Jinak se z běžného použití stane tichý tunel pro změny, které nikdo vědomě neschválil.
+
+Codyho komentář: pravidlo, které po prvním běžném použití okamžitě dostane tři nové přílohy, nejspíš nebylo uzavřené. Nebo má tým alergii na klid. Obojí se dá léčit menším rozsahem a méně tabulkami.
+
+### Privacy-first hranice
+
+První běžné použití po uzavřeném ověření nesmí vytvořit novou datovou vrstvu jen proto, že chcete mít jistotu. Nepotřebujete sledovat, kdo pravidlo otevřel, jak dlouho ho četl, kdo se v jaké minutě rozhodl ani kolikrát se někdo podíval do checklistu.
+
+Stačí nejmenší provozní důkaz:
+
+```text
+Podle pravidla šlo rozhodnout bez starého logu.
+```
+
+Nebo:
+
+```text
+Pravidlo se v běžné trase nenašlo; vstup přesouváme do šablony ticketu.
+```
+
+Tyto věty neobsahují osobní data, neukládají zákaznické detaily a přesto pomáhají dalšímu rozhodnutí. Pokud potřebujete příklad, anonymizujte ho na úroveň situace. Nechte pryč jména, e-maily, konkrétní obchodní částky a vše, co není nutné pro pochopení pravidla.
+
+### Karta prvního běžného použití po uzavřeném ověření
+
+```text
+Pravidlo:
+
+Kanonické místo:
+
+První běžná pracovní situace:
+
+Sledovali jsme jen:
+
+Výsledek:
+- pravidlo je součást běžné práce
+- pravidlo funguje, ale okolní pracovní místo šumí
+- pravidlo se používá, ale s návratem k historii
+- pravidlo se v běžné práci ztratilo
+
+Jedna lokální oprava, pokud je potřeba:
+
+Co výslovně neotevíráme:
+
+Privacy-first stopa:
+Co ponecháváme:
+Co mažeme nebo vůbec neotevíráme:
+
+Návratový signál:
+
+Datum:
+```
+
+Kartu používejte jen tehdy, když pravidlo ovlivňuje víc lidí nebo víc pracovních míst. U jednoduchého pravidla stačí jedna věta v rozhodovacím logu. Karta je pomocník pro jasnost, ne vstupenka do další administrativní atrakce.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: pojmenujte první běžnou pracovní situaci.
+2. Minuta 2: otevřete pravidlo běžnou cestou, ne přes starý chat nebo autora změny.
+3. Minuta 3: rozhodněte podle pravidla.
+4. Minuta 4: vyberte jeden ze čtyř výsledků.
+5. Minuta 5: proveďte nejvýše jednu lokální opravu, pokud je nutná.
+6. Minuta 6: zapište, co se neotevírá, a smažte nebo nechte zavřené pomocné stopy.
+
+Pokud se během šesti minut ukáže, že problém je větší, workshop nepřetahujte. Zapište návratový signál a otevřete novou malou smyčku později. První běžné použití má ukázat stav pravidla, ne opravit celou organizaci.
+
+### Checklist prvního běžného použití
+
+- Šlo o skutečnou běžnou pracovní situaci?
+- Použil tým pravidlo bez autora poslední změny?
+- Vedla běžná pracovní trasa ke kanonickému místu?
+- Šlo podle pravidla rozhodnout bez starého logu?
+- Pokud něco drhlo, víme, jestli šlo o okolní šum, návrat k historii, nebo ztracené pravidlo?
+- Provedli jsme nejvýše jednu lokální opravu?
+- Neotevřeli jsme širší téma bez vlastního návratového signálu?
+- Nepřidali jsme sledování lidí, nové exporty ani zákaznická data?
+- Zůstala po použití jen nejmenší provozní stopa?
+- Víme, kdy se pravidlo znovu otevře a kdy má zůstat v klidu?
+
+První běžné použití po uzavřeném ověření je test klidu. Když pravidlo pomůže rozhodnout a nezanechá po sobě novou administrativu, systém se zlepšil. Ne proto, že vznikl další dokument, ale proto, že další malé rozhodnutí proběhlo rychleji, čistěji a s menší datovou stopou.
+
 ## Pracovní log
 
+- 2026-06-19: Doplněna úvodní podkapitola o prvním běžném použití po uzavřeném ověření pravidla: čtyři výsledky použití, praktický příklad formulářového rozhodnutí, lokální opravy, privacy-first hranice, karta, mini workshop a checklist.
 - 2026-06-19: Doplněna úvodní podkapitola o uzavření ověření pravidla po předání do týmové paměti: čtyři uzavírací stavy, kanonické znění, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-19: Doplněna úvodní podkapitola o ověření pravidla po předání do týmové paměti: první reálné použití, čtyři výsledky ověření, privacy-first stopa, karta, mini workshop a checklist.
 - 2026-06-19: Doplněna úvodní podkapitola o předání uzavřeného pravidla do týmové paměti: kanonické místo, handoff jednou větou, hranice použitelnosti, privacy-first úklid starých stop, karta, mini workshop a checklist.
