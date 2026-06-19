@@ -228934,8 +228934,196 @@ Tři doplnění stačí. Typ podnětu, reakce a zavřený rozsah. Když tým pot
 
 První návrat po stabilním klidu je test disciplíny. Ne test toho, jestli pravidlo umíte znovu rozebrat do šroubku. Dobrý tým pozná, kdy má otevřít malou smyčku, kdy má opravit ceduli, kdy má zkontrolovat kontext a kdy má prostě nechat věc být. Právě to drží provoz klidný: ne absence signálů, ale schopnost odpovědět jim přesně a bez zbytečné datové stopy.
 
+## Uzavření prvního návratového signálu po stabilním klidu
+
+První návratový signál po stabilním klidu se nesmí nechat viset otevřený. Jakmile tým rozliší, jestli šlo o šum, lokální chybu, skutečný návratový signál nebo změnu kontextu, potřebuje smyčku zase zavřít. Jinak se stabilní klid tiše změní v nový mezistav: pravidlo už není úplně v klidu, ale nikdo neví, jestli se znovu ověřuje, opravuje, nebo jen čeká na další debatu.
+
+Uzavření začíná jednou větou:
+
+```text
+První návrat po stabilním klidu uzavíráme jako: ...
+```
+
+Za dvojtečku doplňte jeden z pěti stavů:
+
+- Bez zásahu: podnět byl šum a pravidlo zůstává v klidu.
+- Lokální oprava: pravidlo drží, upravilo se jen nejbližší pracovní místo.
+- Malá smyčka uzavřena: návratový signál se potvrdil, proběhla jedna úprava a pravidlo se vrací do klidu.
+- Omezené ověření: signál ukázal riziko, ale ještě ne důvod přepsat pravidlo.
+- Kontrola kontextu: změnila se situace a před úpravou pravidla je potřeba ověřit, co ze starého zápisu pořád platí.
+
+Tato věta je důležitější než dlouhý zápis. Když stav neumíte vybrat, pravděpodobně jste první návrat ještě neuzavřeli. Možná jste jen nashromáždili pozorování a dali jim hezký nadpis. To je lidské, ale provozně nebezpečné: neuzavřený signál láká tým k dalším kontrolám, dalším exportům a dalším "raději ještě jednou".
+
+### Jak uzavřít jednotlivé stavy
+
+`Bez zásahu` uzavřete krátce. Zapište, proč podnět nesplnil návratový signál, a nechte pravidlo ve stabilním klidu. Nezakládejte kartu pro sledování jednoho izolovaného případu. Pokud se někdo bojí, že se podnět ztratí, doplňte do zápisu návratovou podmínku: "Vracíme se pouze, pokud se stejný problém objeví znovu v dalším běžném použití."
+
+`Lokální oprava` uzavřete v místě, kde chyba vznikla. Opravte odkaz, název, příklad, pořadí kroku nebo krátkou nápovědu. Do pravidla samotného sahat nemusíte. Dobrý test lokální opravy zní: kdyby nový člověk otevřel jen konkrétní pracovní místo, vyřešila by oprava jeho problém? Pokud ano, pravidlo nechte v klidu.
+
+`Malá smyčka uzavřena` použijte, když se návratový signál opravdu potvrdil a jedna omezená úprava stačila. Tady se hodí zapsat před a po:
+
+```text
+Před:
+Schvalovací checklist formuláře nevyžadoval účel každého pole.
+
+Po:
+Checklist obsahuje otázku, jaké rozhodnutí bez daného pole neuděláme.
+```
+
+Takový zápis je malý, ale přenosný. Tým nemusí znovu číst celou historii formulářů; vidí konkrétní změnu a důvod, proč se pravidlo vrací do klidu.
+
+`Omezené ověření` je stav pro situace, kdy první návrat něco naznačil, ale ještě není fér dělat trvalou změnu. Ověření musí mít pevný rozsah: jedno pracovní místo, jedno časové okno, jeden vlastník a jedna stop podmínka. Bez toho se z omezeného ověření stane nová trvalá kontrola, jen s lepším názvem. A lepší název neuklidí provoz, pouze se tváří důležitěji v kalendáři.
+
+`Kontrola kontextu` použijte, když se změnila nabídka, publikum, proces, data nebo odpovědnost. V tom případě první návrat neuzavírejte úpravou pravidla. Uzavřete ho rozhodnutím, že pravidlo se teď neposuzuje samo o sobě, ale přes platnost starého kontextu. To je rozdíl mezi opravou mapy a zjištěním, jestli ještě stojíte ve stejném městě.
+
+### Praktický příklad
+
+```text
+Pravidlo:
+Každý veřejný formulář sbírá jen údaje s jasným rozhodovacím účelem.
+
+Ponechaný návratový signál:
+Dva nové formuláře za sebou přidají pole bez zapsaného účelu.
+
+Aktuální podnět:
+Nová landing page přidala pole "telefon" bez účelu.
+
+Rozlišení:
+Lokální chyba. Jde o první případ a formulář vznikl zkopírováním starší šablony.
+
+Uzavření:
+První návrat po stabilním klidu uzavíráme jako lokální opravu.
+
+Jedna úprava:
+V publikačním checklistu landing page doplněna otázka: "Umíme u každého pole říct rozhodnutí, které bez něj neuděláme?"
+
+Co neotevíráme:
+Nepřepisujeme pravidlo pro formuláře, nezavádíme nový audit všech formulářů a nepřidáváme tracking opuštění polí.
+
+Privacy-first úklid:
+Screenshot formuláře po opravě mažeme. V záznamu necháváme jen zobecněný závěr bez osobních údajů.
+
+Ponechaný návratový signál:
+Vracíme se pouze, pokud se stejné tření objeví u dalšího nového formuláře.
+```
+
+Všimněte si, že příklad chrání rozsah. Tým opravil skutečné místo problému, ale nevytvořil z jednoho formuláře důvod k velké revizi. To je přesně rozdíl mezi pozorností a nervozitou.
+
+### Kdy pravidlo nevracet do klidu
+
+Někdy uzavření prvního signálu neznamená návrat do stabilního klidu. Pravidlo nevracejte do klidu, pokud platí aspoň jedna z těchto situací:
+
+- Signál se potvrdil a oprava nebyla ověřená v reálném použití.
+- Podnět ukázal změnu kontextu, kterou tým zatím nerozlišil.
+- Oprava vyžaduje změnu ve více pracovních místech, ale nevíte, které je kanonické.
+- Vznikla nová datová stopa a není jasné, kdo ji uklidí.
+- Tým si není jistý, jestli opravuje pravidlo, šablonu, onboarding, nebo jen jednu instanci.
+
+V těchto případech zapište omezený mezistav, ne falešný klid:
+
+```text
+Pravidlo nevracíme do stabilního klidu. Otevíráme omezené ověření v jednom pracovním místě do: ...
+```
+
+Mezistav musí mít datum konce. Bez data konce je to jen nová police, na kterou odkládáte neuzavřenou práci.
+
+### Privacy-first uzavření
+
+Uzavření prvního návratu je vhodný okamžik pro úklid podkladů. Nečekejte na kvartální revizi. Podklady vznikly kvůli konkrétnímu signálu, takže jejich účel končí ve chvíli, kdy je signál uzavřený nebo převedený do omezeného ověření.
+
+Projít stačí čtyři otázky:
+
+```text
+Které podklady jsme vytvořili jen kvůli tomuto návratu?
+
+Které z nich obsahují osobní údaje, zákaznický kontext nebo interní poznámky?
+
+Stačí pro budoucí práci zobecněný závěr místo kopie původního důkazu?
+
+Kdo smaže nebo vrátí do původního zdroje to, co už nemá další účel?
+```
+
+U marketingu to často znamená smazat screenshoty formulářů, pomocné tabulky s leady nebo kopie odpovědí. U SaaS produktu to může znamenat neexportovat uživatelské události mimo analytický nástroj, pokud stačí říct, že "dvě onboardingové trasy skončily u stejného kroku". U interních šablon to může znamenat nepřenášet jména lidí do zápisu, když problém byl ve struktuře předání.
+
+Codyho komentář: privacy-first úklid není obřad pro právní oddělení. Je to obyčejná provozní hygiena. Když po sobě nenecháváte zbytečné kopie, máte méně rizik, méně bordelu a méně budoucích otázek typu "proč tu máme tabulku s názvem final-final-oprava-2".
+
+### Karta uzavření prvního návratu
+
+```text
+Pravidlo nebo pracovní místo:
+
+Původní stav stabilního klidu:
+
+Aktuální podnět:
+
+Vybraný typ podnětu:
+- šum / lokální chyba / návratový signál / změna kontextu
+
+Uzavírací stav:
+- bez zásahu / lokální oprava / malá smyčka uzavřena / omezené ověření / kontrola kontextu
+
+Jednověté uzavření:
+
+Co se změnilo:
+
+Co výslovně neotevíráme:
+
+Co se vrací do klidu:
+
+Co zůstává v omezeném ověření:
+
+Privacy-first úklid:
+
+Dočasné stopy odstraněné nebo ponechané s účelem:
+
+Nový nebo ponechaný návratový signál:
+
+Vlastník:
+
+Datum další kontroly, pouze pokud existuje omezené ověření:
+```
+
+Karta má mít krátké odpovědi. Pokud u `Co se změnilo` píšete celý příběh, vraťte se k nejbližšímu pracovnímu místu. Uzavření má čtenáři říct, co má dělat příště, ne ho provést archivem všech pochybností.
+
+### Mini workshop na 9 minut
+
+1. Minuta 1: přečtěte kartu prvního návratového signálu.
+2. Minuta 2: potvrďte typ podnětu.
+3. Minuta 3: vyberte uzavírací stav.
+4. Minuta 4: napište jednověté uzavření.
+5. Minuta 5: pojmenujte jednu provedenou nebo neprovedenou úpravu.
+6. Minuta 6: napište, co výslovně neotevíráte.
+7. Minuta 7: rozhodněte, jestli se pravidlo vrací do klidu, nebo do omezeného ověření.
+8. Minuta 8: proveďte privacy-first úklid dočasných stop.
+9. Minuta 9: ponechte, zpřesněte nebo zrušte návratový signál.
+
+Workshop končí větou:
+
+```text
+První návrat uzavíráme jako: ...; pravidlo teď je ve stavu: ...; další návrat nastane pouze když: ...
+```
+
+Tři části věty drží disciplínu. Typ uzavření, aktuální stav pravidla a konkrétní podmínka dalšího návratu. Když věta nejde napsat, není hotovo.
+
+### Checklist uzavření prvního návratu
+
+- Vybrali jsme jeden uzavírací stav?
+- Umíme říct jednou větou, co se stalo a co to mění?
+- Pokud šlo o šum, nezakládáme novou sledovací agendu?
+- Pokud šlo o lokální chybu, opravili jsme nejbližší pracovní místo místo celého pravidla?
+- Pokud se návratový signál potvrdil, uzavřeli jsme jen nejmenší smyčku?
+- Pokud jde o změnu kontextu, neprovádíme úpravu pravidla před kontrolou přeneseného kontextu?
+- Napsali jsme, co výslovně neotevíráme?
+- Rozhodli jsme, jestli se pravidlo vrací do klidu, nebo do omezeného ověření?
+- Má omezené ověření konec, vlastníka a stop podmínku?
+- Uklidili jsme dočasné screenshoty, exporty, kopie a osobní údaje bez dalšího účelu?
+- Ponechali jsme nebo zpřesnili návratový signál tak, aby ho poznal i člověk mimo původní debatu?
+
+Uzavření prvního návratu po stabilním klidu má být malé a přesné. Nejde o velkou retrospektivu. Jde o to nenechat první podnět znovu roztočit provozní kolotoč, který už jednou ztichl. Dobré uzavření řekne: co jsme zjistili, co jsme případně opravili, co neotevíráme a kdy se k tomu smíme vrátit. Všechno ostatní je jen administrativní konfeta.
+
 ## Pracovní log
 
+- 2026-06-19: Doplněna úvodní podkapitola o uzavření prvního návratového signálu po stabilním klidu: pět uzavíracích stavů, lokální oprava versus omezené ověření, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-18: Doplněna úvodní podkapitola o prvním návratovém signálu po stabilním klidu: rozlišení šumu, lokální chyby, skutečného signálu a změny kontextu, nejmenší návratová smyčka, privacy-first reakce, karta, mini workshop a checklist.
 - 2026-06-18: Doplněna úvodní podkapitola o stabilním klidu po uzavření druhého běžného použití: kanonické místo pravidla, rozhodovací paměť, návratový signál, odstranění dočasných opor, privacy-first stabilizace, karta, mini workshop a checklist.
 - 2026-06-18: Doplněna úvodní podkapitola o uzavření druhého běžného použití po návratu do tichého provozu: uzavírací stavy, propsání výsledku do pracovního místa, zúžení rozsahu pravidla, privacy-first úklid, karta, mini workshop a checklist.
