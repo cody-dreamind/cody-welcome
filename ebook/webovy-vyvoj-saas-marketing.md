@@ -565,6 +565,153 @@ Pokud se tým během devíti minut nedohodne na pracovním místě, neprodlužuj
 
 První průchod z nového výchozího bodu má být důkazem disciplíny. Neřeší všechno, co se po rozpadu kontextu ukázalo. Řeší jen první místo, kde se dá poznat, jestli nový zápis stojí na zemi. Když projde, máte pevnější směr. Když neprojde, máte malou opravu místo velkého omylu.
 
+## Uzavření prvního průchodu z nového výchozího bodu
+
+První průchod po novém výchozím bodu nesmí zůstat viset jako další poznámka v systému. Jeho smysl je uzavřít nejistotu: potvrdit, zmenšit, zpřesnit nebo klidně zastavit další práci. Pokud po průchodu vznikne jen seznam nápadů, tým sice něco zjistil, ale ještě nerozhodl.
+
+Uzavření začněte návratem ke stop podmínce. Nepište nejdřív dojmy, návrhy ani přání. Vezměte původní větu a porovnejte ji s tím, co se opravdu stalo.
+
+```text
+Původní stop podmínka:
+
+Co se při průchodu stalo:
+
+Výsledek vůči stop podmínce:
+- splněna
+- částečně splněna
+- nesplněna
+- ukázala se jako špatně nastavená
+```
+
+Teprve potom má smysl rozhodnout, co dál. Bez tohoto kroku se první průchod snadno zvrhne v pocitové vyhodnocení. Jeden člověk si všimne nového problému, druhý si zapamatuje pozitivní signál, třetí chce rovnou upravit další stránku. Všichni mluví o stejné iteraci, ale každý drží jiný konec provazu.
+
+Praktický příklad:
+
+```text
+Nový výchozí bod:
+Návštěvník před formulářem nerozlišuje audit, dlouhodobý vývoj a úvodní konzultaci.
+
+První pracovní místo:
+Text nad poptávkovým formulářem.
+
+Stop podmínka:
+Pět relevantních poptávek projde bez ručního vysvětlování rozdílu mezi auditem a dlouhodobým vývojem, nebo se opakovaně ukáže jedna konkrétní nejasnost.
+
+Co se stalo:
+Čtyři relevantní poptávky přišly s jasným očekáváním. U jedné bylo potřeba dovysvětlit rozdíl mezi auditem a dlouhodobou spoluprací.
+
+Výsledek:
+Částečně splněna. Výchozí bod drží, ale text ještě slabě vysvětluje hranici mezi krátkým auditem a pokračující spoluprací.
+
+Rozhodnutí:
+Neotevíráme formulář ani ceník. Upravíme pouze jednu větu v textu nad formulářem a ověříme ji při dalších třech relevantních poptávkách.
+```
+
+Dobré uzavření neříká jen "fungovalo" nebo "nefungovalo". Říká, jak přesně se první průchod promítne do další práce. Čím menší je rozhodnutí, tím snáz se udrží v provozu a tím menší datovou stopu po sobě nechá.
+
+### Čtyři uzavírací stavy
+
+Po prvním průchodu vyberte jeden ze čtyř stavů:
+
+- Uzavřít do klidu: stop podmínka je splněná a není důvod otevírat další krok.
+- Udělat lokální dotažení: výchozí bod drží, ale jedno konkrétní místo potřebuje drobnou opravu.
+- Zpřesnit výchozí bod: průchod ukázal, že původní nová věta byla moc široká, nepřesná nebo smíchaná ze dvou problémů.
+- Vrátit se k základní realitě: průchod neprokázal dost a tým nemá spolehlivý dnešní důkaz.
+
+Stav `uzavřít do klidu` používejte častěji, než je pohodlné. Pokud první průchod splnil účel, další práce není odměna za pečlivost. Je to nový náklad. V SaaS, marketingu i provozu se snadno plete energie týmu s hodnotou pro zákazníka. Někdy je nejlepší výsledek prostě přestat sahat na věc, která už je dost dobrá.
+
+Stav `lokální dotažení` použijte jen tehdy, když umíte ukázat přesné místo opravy. Jedna věta, jeden popisek, jeden e-mail, jeden krok onboardingu, jeden řádek v interní šabloně. Pokud oprava potřebuje více míst, pravděpodobně už nejde o dotažení, ale o novou iteraci.
+
+Stav `zpřesnit výchozí bod` je vhodný, když se ukáže, že původní věta míchala dvě různé věci. Například "návštěvník nerozumí nabídce" může po průchodu znamenat dvě odlišné situace: nerozumí rozdílu mezi službami, nebo nerozumí tomu, pro koho služba není. Každá z nich vede na jiné pracovní místo.
+
+Stav `vrátit se k základní realitě` použijte, když průchod nedal věrohodný důkaz. Třeba proto, že žádná relevantní poptávka nepřišla, testovací onboarding nebyl realistický, nebo tým vyhodnocoval staré příklady, které už neodpovídají dnešní nabídce.
+
+### Privacy-first uzavření
+
+Po každém prvním průchodu ukliďte pracovní stopy. To neznamená všechno smazat naslepo. Znamená to rozhodnout, co má dál legitimní účel.
+
+Položte si tři otázky:
+
+- Potřebujeme původní detail, nebo stačí zobecněný závěr?
+- Má pracovní stopa jasného vlastníka a místo, kde smí zůstat?
+- Víme, kdy ji znovu otevřeme, archivujeme nebo odstraníme?
+
+U marketingových a produktových průchodů často stačí shrnutí bez osobních údajů. Místo kopírování celé poptávky napište: "U jedné z pěti relevantních poptávek nebyla jasná hranice mezi auditem a dlouhodobou spoluprací." Takový záznam nese rozhodovací hodnotu a současně netahá zákaznické detaily do další vrstvy dokumentace.
+
+Pokud jste během průchodu vytvořili pomocnou tabulku, screenshot, export, kopii zprávy nebo dočasný dokument, uzavřete jeho stav hned. Dočasné pracovní artefakty mají zvláštní talent stát se trvalými, hlavně když se jmenují `final-final-v2`. Ano, název souboru někdy prozradí psychologický stav týmu přesněji než retro.
+
+### Karta uzavření prvního průchodu
+
+```text
+Téma:
+
+Nový výchozí bod:
+
+První pracovní místo:
+
+Původní stop podmínka:
+
+Co se při průchodu stalo:
+
+Výsledek vůči stop podmínce:
+- splněna
+- částečně splněna
+- nesplněna
+- špatně nastavená
+
+Uzavírací stav:
+- uzavřít do klidu
+- lokální dotažení
+- zpřesnit výchozí bod
+- vrátit se k základní realitě
+
+Rozhodnutí jednou větou:
+
+Co se propíše do kanonického pracovního místa:
+
+Co zůstává mimo rozsah:
+
+Privacy-first úklid:
+Které detaily zobecníme, které pomocné stopy odstraníme a co zůstává jako zdroj pravdy:
+
+Návratový signál:
+
+Vlastník:
+
+Datum kontroly:
+```
+
+Karta má zachytit konec, ne otevřít novou administrativu. Pokud ji vyplňujete déle než samotný průchod, karta už neplní službu. Zkraťte ji na rozhodovací větu, stav, jedno pracovní místo a privacy-first úklid.
+
+### Mini workshop na 10 minut
+
+1. Minuty 1 až 2: přečtěte nový výchozí bod, pracovní místo a stop podmínku.
+2. Minuty 3 až 4: napište, co se opravdu stalo.
+3. Minuty 5 až 6: vyberte výsledek vůči stop podmínce.
+4. Minuta 7: vyberte jeden uzavírací stav.
+5. Minuta 8: napište rozhodnutí jednou větou.
+6. Minuta 9: určete, co se propíše do kanonického místa a co zůstává mimo rozsah.
+7. Minuta 10: udělejte privacy-first úklid pracovních stop.
+
+Když se tým nedohodne mezi lokálním dotažením a zpřesněním výchozího bodu, zvolte zpřesnění. Lokální oprava bez jasné věty často jen zalepí místo, kterému tým pořád nerozumí.
+
+### Checklist uzavření
+
+- Porovnali jsme výsledek s původní stop podmínkou?
+- Oddělili jsme skutečný průběh od dojmů a nových nápadů?
+- Vybrali jsme jeden ze čtyř uzavíracích stavů?
+- Umíme rozhodnutí napsat jednou větou?
+- Pokud děláme lokální dotažení, víme přesně kde?
+- Pokud zpřesňujeme výchozí bod, víme, která část původní věty byla slabá?
+- Pokud se vracíme k základní realitě, víme, jaký nejmenší dnešní důkaz chybí?
+- Propsali jsme výsledek do kanonického pracovního místa?
+- Zapsali jsme, co zůstává mimo rozsah?
+- Uklidili jsme dočasné dokumenty, kopie, screenshoty nebo exporty?
+- Zobecnili jsme osobní údaje všude, kde detail není nutný pro další rozhodnutí?
+- Máme jasný návratový signál místo automatické další kontroly?
+
+Uzavření prvního průchodu je okamžik, kdy se nový výchozí bod buď stane použitelným pravidlem, nebo se poctivě zmenší. Obě varianty jsou dobré. Špatná je jen třetí možnost: nechat průchod otevřený, přilepit k němu nové nápady a tvářit se, že tomu říkáme iterace.
+
 ## Rychlé potvrzení návratového signálu
 
 Návratový signál má chránit tým před dvěma opačnými chybami. První chyba je ignorovat skutečný problém jen proto, že už se jednou uzavřel. Druhá chyba je otevřít novou iteraci pokaždé, když někdo zahlédne nedokonalost. Rychlé potvrzení signálu je malý filtr mezi těmito dvěma extrémy.
@@ -231016,3 +231163,4 @@ Uzavření druhého běžného použití je malé administrativní gesto s velk�
 - 2026-06-18: Doplněna úvodní podkapitola o rozpadu přeneseného kontextu: kdy staré rozhodnutí archivovat, přerámovat otázku nebo získat novou základní realitu, včetně privacy-first hranic, karty a checklistu.
 - 2026-06-18: Doplněna úvodní podkapitola o uzavření rozpadu kontextu do nového výchozího bodu: oddělení historie, dnešní jistoty a dalšího kroku, privacy-first úklid stop, karta a checklist.
 - 2026-06-18: Doplněna úvodní podkapitola o prvním průchodu z nového výchozího bodu: jedno pracovní místo, nejmenší důkaz, stop podmínka, privacy-first hranice, karta, workshop a checklist.
+- 2026-06-19: Doplněna úvodní podkapitola o uzavření prvního průchodu z nového výchozího bodu: vyhodnocení stop podmínky, čtyři uzavírací stavy, privacy-first úklid, karta, workshop a checklist.
