@@ -12595,6 +12595,139 @@ Když se workshop začne ptát, jestli by výřez nešel využít i v dalších 
 
 Uzavření druhého běžného použití je hotové, když výřez nepotřebuje čerstvou paměť, mimořádnou péči ani ochranné poznámky kolem sebe. Zůstane jen pracovní pomůcka, její místo a návratový signál. Všechno ostatní má buď vlastní nové pravidlo, nebo míří do koše, kde už dávno čeká pár starých "jen dočasných" exportů.
 
+## Návrat k výřezu po delším klidu
+
+Když výřez nějakou dobu funguje tiše, je to dobré znamení. Neznamená to ale, že se ho už nikdy nedotknete. Web, SaaS, marketing i provoz se mění: přijde nový segment, jiný typ poptávek, nová šablona, jiný člověk v roli nebo prostě další běžná situace, která ukáže, že stará pracovní pomůcka už nemá úplně stejný okraj.
+
+Návrat po delším klidu má být opatrnější než běžná údržba. Tým už většinou nemá čerstvou paměť, proč výřez vznikl. Zůstává jen kanonické místo, návratový signál a pár stop v pracovním systému. To je správně. Cílem není vyhrabat celou historii, ale zjistit, jestli dnešní signál opravdu patří k tomuto výřezu.
+
+Začněte jednou větou:
+
+```text
+K výřezu se vracíme, protože se stalo:
+```
+
+Do této věty nepište obecný pocit. Napište konkrétní situaci. "Lidé asi nerozumí privacy-first příkladům" je mlha. "Dvě nové veřejné case studies použily interní kvalifikační formulaci místo obecného příkladu" už je návratový signál, se kterým se dá pracovat.
+
+### Nejdřív ověřte, jestli jde o stejný výřez
+
+Po delším klidu se často stane, že nový podnět používá starý slovník, ale míří na jiné rozhodnutí. Výřez pro veřejné texty se najednou používá jako argument pro interní sales proces. Checklist pro první poptávku se tváří jako pravidlo pro onboarding zákazníka. Poznámka k formuláři se přenese do automatizace, kde už má úplně jiné dopady.
+
+Proto projděte tři otázky:
+
+- Řeší dnešní podnět stejný typ rozhodnutí jako původní výřez?
+- Vznikl problém ve stejném nebo přirozeně sousedním pracovním místě?
+- Stačí případná oprava zachovat výřez malý, nebo by z něj udělala univerzální pravidlo?
+
+Když odpověď na třetí otázku zní "udělalo by to univerzální pravidlo", zastavte se. Pravděpodobně nejde o návrat výřezu, ale o novou samostatnou pracovní pomůcku. To není tragédie. Tragédie je přilepit nový problém ke starému textu jen proto, že je zrovna po ruce.
+
+Praktický příklad:
+
+```text
+Původní výřez:
+Veřejné materiály používají obecný privacy-first příklad; interní sales formulace zůstává v interní šabloně.
+
+Dnešní signál:
+Nová landing page pro audit používá anonymizovaný příklad správně, ale navazuje na interní kvalifikační otázku v CTA textu.
+
+Ověření:
+Jde pořád o veřejný text a hranici mezi veřejným příkladem a interní kvalifikací.
+
+Rozhodnutí:
+Neotevíráme nové pravidlo. Doplníme přenosovou hranici k CTA textům: veřejné CTA nesmí přebírat interní kvalifikační formulace.
+```
+
+Tady návrat k výřezu dává smysl. Problém je sousední, konkrétní a oprava zůstává malá. Kdyby se ale stejný signál objevil v automatickém lead scoringu, už by šlo o jiné rozhodnutí: zpracování dat, kvalifikaci a provozní riziko. Tam má vzniknout samostatné pravidlo.
+
+### Čtyři stavy návratu po klidu
+
+Stav "nechat zavřené" použijte, když se signál nepotvrdil. Někdo si vzpomněl na starou bolest, ale v reálné práci se neopakuje. Zapište podnět, neotevírejte výřez a nepřidávejte preventivní text. Preventivní poznámky jsou plevel dokumentace: rostou rychle, sklízí se pomalu.
+
+Stav "doplnit jednu hranu" použijte, když výřez pořád platí, ale dnešní situace ukázala chybějící okraj. Hrana má být krátká: "platí pro", "neplatí pro", "při tomto použití nejdřív anonymizuj", "tady otevři samostatné pravidlo". Jedna hrana stačí. Pokud potřebujete čtyři, výřez už možná nese moc váhy.
+
+Stav "opravit pracovní trasu" použijte, když problém není v samotném výřezu, ale v tom, jak se k němu člověk dostane. Chybí odkaz ve správné šabloně, starý rozcestník vede přes neaktuální část, název je moc obecný nebo výřez není vidět v momentu rozhodnutí. V takovém případě neopravujte obsah, ale cestu.
+
+Stav "oddělit nové pravidlo" použijte, když se po klidu ukáže příbuzný, ale samostatný problém. Nové pravidlo má dostat vlastní pracovní místo, vlastní privacy-first hranici a vlastní návratový signál. Původní výřez tím chráníte před bobtnáním.
+
+### Privacy-first návrat
+
+Návrat po delším klidu často svádí k tomu otevřít staré podklady: původní poptávky, poznámky z hovorů, interní screenshoty, pracovní exporty nebo historické verze textu. Nedělejte z toho archeologickou expedici, pokud ji nepotřebujete pro dnešní rozhodnutí.
+
+Pravidlo:
+
+```text
+Nejdřív použij kanonický výřez, návratový signál a dnešní obecný důkaz.
+Starou historii otevři jen tehdy, když bez ní nejde rozhodnout stav návratu.
+```
+
+Ve většině případů stará historie není potřeba. Stačí vědět, co výřez dnes říká, kde bydlí a jaký dnešní signál se objevil. Pokud přece jen musíte otevřít detail, zapište si předem účel a po rozhodnutí ho znovu zavřete. Kopírování starých zákaznických detailů do nové karty je pohodlné asi pět minut. Pak z toho vznikne další místo, které musíte hlídat.
+
+### Karta návratu po klidu
+
+```text
+Název výřezu:
+
+Kanonické místo:
+
+Původní návratový signál:
+
+Dnešní signál:
+
+Existující dnešní důkaz:
+
+Jde o stejný typ rozhodnutí?
+- ano / ne / částečně
+
+Kde problém vznikl:
+
+Stav návratu:
+- nechat zavřené
+- doplnit jednu hranu
+- opravit pracovní trasu
+- oddělit nové pravidlo
+
+Jedna provedená úprava:
+
+Co neotevíráme ze staré historie:
+
+Jaká data kvůli návratu nesbíráme ani nekopírujeme:
+
+Nový nebo potvrzený návratový signál:
+
+Vlastník:
+
+Datum kontroly:
+```
+
+Karta má chránit před dvěma chybami: automatickým otevřením staré práce a automatickým ignorováním nového signálu. Vyplňte ji jen tak podrobně, aby šlo vybrat jeden stav. Pokud potřebujete dlouhou analýzu, pravděpodobně už nejste u výřezu, ale u nového pravidla nebo širší revize.
+
+### Mini workshop na 8 minut
+
+1. Minuta 1: přečtěte kanonický výřez a původní návratový signál.
+2. Minuty 2 až 3: pojmenujte dnešní signál a jeden existující důkaz.
+3. Minuta 4: rozhodněte, jestli jde o stejný typ rozhodnutí.
+4. Minuta 5: určete pracovní místo, kde problém vznikl.
+5. Minuta 6: vyberte jeden ze čtyř stavů návratu.
+6. Minuta 7: napište jednu úpravu nebo potvrzení, že výřez zůstává zavřený.
+7. Minuta 8: zavřete privacy-first otázku: co kvůli tomu neotevíráte, nekopírujete a nesbíráte.
+
+Když se tým během workshopu začne vracet ke všem starým důvodům vzniku výřezu, zastavte ho. Po delším klidu nepotřebujete rekonstruovat minulost. Potřebujete rozhodnout, jestli dnešní signál patří ke stejné pracovní pomůcce.
+
+### Checklist návratu po klidu
+
+- Máme konkrétní dnešní signál, ne obecný pocit?
+- Četli jsme původní návratový signál, než jsme otevřeli práci?
+- Ověřili jsme, jestli jde o stejný typ rozhodnutí?
+- Víme, ve kterém pracovním místě problém vznikl?
+- Vybrali jsme jeden ze čtyř stavů návratu?
+- Pokud doplňujeme hranu, je to jedna krátká rozhodovací věta?
+- Pokud opravujeme trasu, opravujeme místo použití místo obsahu výřezu?
+- Pokud vzniká nové pravidlo, oddělili jsme ho od původního výřezu?
+- Neotevíráme staré osobní údaje, screenshoty nebo exporty bez jasného účelu?
+- Zůstává návratový signál viditelný pro další běžnou práci?
+
+Návrat k výřezu po delším klidu je dobrý test toho, jestli pracovní systém opravdu drží. Pokud umí rozlišit starý signál, nový problém a falešný návrat bez velké porady, máte pomůcku, která žije v práci. Pokud pokaždé potřebuje historický výklad autora, je čas zlepšit kanonické místo, ne přidávat další vysvětlující vrstvu.
+
 ## Pravidla rukopisu
 
 - Pišu česky, prakticky a bez nafukování.
@@ -232195,3 +232328,4 @@ Druhé běžné použití má dát pravidlu poslední klidnou zkoušku po návra
 - 2026-06-18: Doplněna úvodní podkapitola o uzavření rozpadu kontextu do nového výchozího bodu: oddělení historie, dnešní jistoty a dalšího kroku, privacy-first úklid stop, karta a checklist.
 - 2026-06-18: Doplněna úvodní podkapitola o prvním průchodu z nového výchozího bodu: jedno pracovní místo, nejmenší důkaz, stop podmínka, privacy-first hranice, karta, workshop a checklist.
 - 2026-06-19: Doplněna úvodní podkapitola o uzavření prvního průchodu z nového výchozího bodu: vyhodnocení stop podmínky, čtyři uzavírací stavy, privacy-first úklid, karta, workshop a checklist.
+- 2026-06-19: Doplněna úvodní podkapitola o návratu k výřezu po delším klidu: ověření stejného typu rozhodnutí, čtyři stavy návratu, privacy-first práce bez otevírání starých stop, karta, workshop a checklist.
