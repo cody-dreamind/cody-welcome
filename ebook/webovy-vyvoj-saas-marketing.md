@@ -2427,6 +2427,151 @@ Workshop nemá otevřít historii pravidla. Má jen převést ověřenou změnu 
 
 Dobře vrácené pravidlo je skoro neviditelné. Člověk podle něj pracuje, najde ho ve správném místě a neřeší, jakou cestou se tam dostalo. To je cíl stabilizace: ne aby oprava navždy svítila, ale aby běžná práce byla o kousek jasnější a datově čistší.
 
+## Jak udělat první běžné review po návratu pravidla do rytmu
+
+Když se pravidlo vrátí do běžného revizního rytmu, další kontrola má být opravdu běžná. To zní samozřejmě, ale právě tady se často vrací stará mimořádná péče zadními dveřmi. Tým si řekne, že pravidlo už je stabilní, a pak mu při prvním měsíčním review věnuje polovinu schůzky, vytáhne staré podklady a znovu probere původní chybu. Výsledek je paradoxní: pravidlo sice formálně žije v normálním rytmu, ale chová se jako citlivý pacient na pozorování.
+
+První běžné review má ověřit jen to, jestli pravidlo obstálo jako součást práce. Ne jestli byla původní oprava zajímavá, ne jestli by šla udělat elegantněji, ne jestli by k ní šel postavit nový systém. Stačí projít stejné otázky, které byste položili i ostatním pravidlům v daném pracovním místě:
+
+```text
+Použilo se pravidlo v běžné práci?
+
+Pomohlo rozhodnout nebo předat práci?
+
+Zůstala datová hranice zachovaná?
+
+Objevil se návratový signál, nebo jen drobné tření?
+```
+
+Pokud se odpovědi vejdou do několika vět, review plní účel. Pokud z něj vzniká rekonstrukce celé historie, pravděpodobně ještě neumíte pustit původní opravu z ruky. To je lidské, ale provozně drahé. Historie má být dohledatelná, ne neustále přítomná u stolu.
+
+### Co při prvním review kontrolovat
+
+Držte se čtyř kontrolních bodů:
+
+- Použití: pravidlo bylo v uplynulém období aspoň jednou relevantní, nebo se jen čekalo na situaci.
+- Srozumitelnost: člověk ho použil bez vysvětlování původní opravy.
+- Rozhodovací hodnota: pravidlo pomohlo udělat nebo předat konkrétní krok.
+- Datová střídmost: nevznikl nový údaj, export, tracker, screenshot ani ruční seznam jen proto, že si tým nebyl jistý.
+
+Příklad:
+
+```text
+Pravidlo:
+Při kvalifikaci leadu předáváme rozhodovací horizont, problém a očekávaný výsledek. Velikost firmy nepoužíváme jako automatické skóre.
+
+Review období:
+První měsíční review obchodních šablon po návratu pravidla do rytmu.
+
+Použití:
+Pravidlo se použilo u šesti relevantních poptávek.
+
+Srozumitelnost:
+Obchod i delivery pracovaly z jedné discovery šablony. Nikdo neotevíral starou poznámku ke scoringu.
+
+Rozhodovací hodnota:
+U čtyř poptávek šel další krok určit hned. U dvou chyběl jasný termín technické konzultace.
+
+Datová střídmost:
+Nevzniklo nové CRM pole ani automatické obohacování kontaktu.
+
+Rozhodnutí:
+Pravidlo drží. Do šablony jen doplníme místo pro domluvený další krok. Neotevíráme lead scoring.
+```
+
+Všimněte si, že review našlo drobné tření, ale neudělalo z něj návrat k původnímu tématu. Chybějící termín technické konzultace je lokální dočištění šablony. Není to důkaz, že se má znovu stavět scoring.
+
+### Tři stavy po prvním běžném review
+
+Po review vyberte jeden ze tří stavů:
+
+- Pravidlo drží: zůstává v běžném rytmu bez zvláštní pozornosti.
+- Pravidlo drží s lokálním dočištěním: opraví se jedno místo a další kontrola proběhne v normálním rytmu.
+- Pravidlo ukazuje návratový signál: nastalo přesně to, co mělo téma znovu otevřít.
+
+Stav `pravidlo drží` má být nejkratší. Zapište jednu větu a pokračujte k dalším položkám review. Stabilní pravidlo nepotřebuje odměnu v podobě dalšího času.
+
+Stav `lokální dočištění` použijte, když pravidlo funguje, ale jedno pracovní místo potřebuje drobnou úpravu. Typicky jde o chybějící pole pro další krok, nejasný odkaz, starý komentář nebo příliš dlouhou větu v šabloně. Dočištění má mít jasné místo a nesmí otevřít původní větší návrh.
+
+Stav `návratový signál` použijte jen tehdy, když se naplnila předem zapsaná podmínka. Ne když někdo našel nové zlepšení. Ne když pravidlo působí trochu neobratně. Ne když se objevila jiná zajímavá otázka. Návratový signál má být konkrétní, rozpoznatelný a spojený s dopadem na práci.
+
+Codyho komentář: první běžné review je test dospělosti pravidla. Když kolem něj pořád chodíte po špičkách, pravidlo ještě není v běžném provozu. Je jen v lepším oblečení.
+
+### Privacy-first review
+
+Při prvním běžném review se snadno vrátí chuť "pro jistotu" přidat měření. Třeba počet použití šablony, kontrolní checklist lidí, export poptávek nebo nové CRM pole. Než to uděláte, položte si tři otázky:
+
+- Potřebujeme nový údaj pro rozhodnutí, nebo jen pro pocit kontroly?
+- Nestačí zobecněný závěr z běžné práce?
+- Nevznikne větší datová stopa než hodnota samotného pravidla?
+
+U stabilizovaných pravidel často stačí krátká review věta:
+
+```text
+V období review se pravidlo použilo v běžné práci, stará stopa se nevrátila a nevznikl nový údaj.
+```
+
+Pokud věta není pravdivá, zapište přesně, která část selhala. Neukládejte surové podklady jen proto, abyste si byli jistější. Jistota má vyrůst z dobrého pracovního místa, ne z hromady kopií.
+
+### Karta prvního běžného review
+
+```text
+Pravidlo:
+
+Kanonické pracovní místo:
+
+Běžný revizní rytmus:
+
+Review období:
+
+Kde se pravidlo použilo:
+
+Co fungovalo:
+
+Kde vzniklo tření:
+
+Výsledek:
+- drží / lokální dočištění / návratový signál
+
+Pokud jde o lokální dočištění, jedno místo opravy:
+
+Pokud jde o návratový signál, čím je doložený:
+
+Co neotevíráme:
+
+Privacy-first výsledek:
+
+Co mažeme, zkracujeme nebo necháváme zavřené:
+
+Další kontrola:
+```
+
+### Mini workshop na 8 minut
+
+1. Minuta 1: přečtěte aktuální pravidlo a návratový signál.
+2. Minuty 2 až 3: pojmenujte jedno reálné použití v období review.
+3. Minuty 4 až 5: určete, jestli pravidlo pomohlo rozhodnutí nebo předání práce.
+4. Minuta 6: zkontrolujte, jestli nevznikla nová datová stopa.
+5. Minuta 7: vyberte jeden ze tří stavů.
+6. Minuta 8: zapište lokální dočištění, nebo potvrďte návrat do běžného rytmu.
+
+Pokud se během osmi minut začne řešit původní historie opravy, zastavte se a vraťte se k aktuálnímu pravidlu. Review běžného pravidla nemá znovu dokazovat, proč se kdysi opravovalo.
+
+### Checklist prvního běžného review
+
+- Kontrolujeme pravidlo ve stejném rytmu jako jeho pracovní místo?
+- Nepřidali jsme mimořádnou agendu jen kvůli historii opravy?
+- Máme jedno reálné použití nebo jasný důvod, proč se pravidlo zatím nepoužilo?
+- Víme, jestli pravidlo drží, potřebuje lokální dočištění, nebo ukazuje návratový signál?
+- Rozlišili jsme drobné tření od návratového signálu?
+- Pokud dočišťujeme, opravujeme jedno konkrétní místo?
+- Pokud otevíráme návrat, opíráme se o předem zapsaný signál?
+- Nevzniklo nové měření, pole, export ani kontrola lidí jen kvůli pocitu jistoty?
+- Uklidili jsme dočasné podklady z review?
+- Zůstává pravidlo po review v běžném rytmu, pokud k mimořádné péči není důvod?
+
+První běžné review má být konec mimořádnosti. Pokud pravidlo drží, nechte ho být. Pokud potřebuje drobné dočištění, udělejte ho bez rozšiřování tématu. A pokud se opravdu objevil návratový signál, otevřete novou práci vědomě, ne jako přívěsek staré opravy.
+
 Praktický filtr na výběr jedné kapitoly:
 
 1. Kdybychom vyřešili jen tuto věc, co se zlepší pro zákazníka?
@@ -233790,3 +233935,4 @@ Uzavření druhého běžného použití je konec mimořádné péče o pravidlo
 - 2026-06-19: Doplněna úvodní podkapitola o uzavření prvního průchodu z nového výchozího bodu: vyhodnocení stop podmínky, čtyři uzavírací stavy, privacy-first úklid, karta, workshop a checklist.
 - 2026-06-19: Doplněna úvodní podkapitola o návratu k výřezu po delším klidu: ověření stejného typu rozhodnutí, čtyři stavy návratu, privacy-first práce bez otevírání starých stop, karta, workshop a checklist.
 - 2026-06-19: Doplněna úvodní podkapitola o uzavření návratu k výřezu po delším klidu: čtyři uzavírací stavy, praktický příklad, privacy-first úklid, karta, mini workshop a checklist.
+- 2026-06-19: Doplněna úvodní podkapitola o prvním běžném review po návratu pravidla do rytmu: kontrolní body, stavy review, privacy-first datová střídmost, karta, mini workshop a checklist.
