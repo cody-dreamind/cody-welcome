@@ -232216,8 +232216,166 @@ Pokud se během šesti minut ukáže, že problém je větší, workshop nepřet
 
 První běžné použití po uzavřeném ověření je test klidu. Když pravidlo pomůže rozhodnout a nezanechá po sobě novou administrativu, systém se zlepšil. Ne proto, že vznikl další dokument, ale proto, že další malé rozhodnutí proběhlo rychleji, čistěji a s menší datovou stopou.
 
+## Uzavření prvního běžného použití po uzavřeném ověření pravidla
+
+Po prvním běžném použití pravidla je potřeba udělat ještě jednu věc: nenechat výsledek viset ve vzduchu. Tým už ověřil, jestli pravidlo v běžné práci pomohlo, drhlo, potřebovalo historii, nebo se ztratilo. Teď má výsledek zavřít tak, aby z něj nevznikla další poloviční rutina.
+
+Uzavření není nový audit. Je to krátké rozhodnutí, co se po prvním použití mění, co zůstává stejné a kdy se k pravidlu znovu vrátíte. Pokud tuto chvíli přeskočíte, snadno se stane, že každý člověk odejde s jiným dojmem. Jeden si myslí, že pravidlo funguje. Druhý čeká doplnění příkladu. Třetí začne pro jistotu sbírat další data. Čtvrtý otevře starý log a jsme zpátky v muzeu rozhodnutí.
+
+Začněte větou:
+
+```text
+Po prvním běžném použití pravidlo uzavíráme takto:
+```
+
+Potom doplňte jeden konkrétní stav:
+
+```text
+Po prvním běžném použití pravidlo uzavíráme takto:
+Pravidlo zůstává v běžném rytmu beze změny; při příštím návrhu nového formulářového pole se má použít stejná rozhodovací věta a starý log se neotevírá.
+```
+
+Tato věta je důležitější než dlouhý zápis. Má zabránit tomu, aby se z dobrého prvního použití stalo nekonečné "ještě to raději chvíli sledujme". Sledování bez jasného návratového signálu je jen odložené rozhodnutí s lepším účesem.
+
+### Čtyři uzavírací stavy
+
+Po prvním běžném použití vyberte jeden ze čtyř stavů:
+
+- Uzavřít beze změny: pravidlo pomohlo rozhodnout a nevyžaduje další péči.
+- Uzavřít s jedním úklidem okolí: pravidlo funguje, ale pracovní místo potřebuje drobný úklid.
+- Uzavřít s jedním doplněním pravidla: pravidlo je správné, ale chyběla mu jedna hranice nebo jeden příklad.
+- Neuzavírat jako běžné pravidlo: pravidlo se ztratilo nebo vyžadovalo tolik historie, že je potřeba nová malá smyčka.
+
+Stav `uzavřít beze změny` používejte odvážně. Když pravidlo splnilo účel, největší služba je nechat ho být. Zapište jen návratový signál a hotovo. Dobré pravidlo nepotřebuje po každém použití slavnostní ceremoniál.
+
+Stav `uzavřít s jedním úklidem okolí` patří situaci, kdy pravidlo fungovalo, ale překážel mu starý odkaz, duplicitní poznámka, špatný název položky nebo vedlejší šablona. Opravte okolí, ne pravidlo. Pokud přepisujete pravidlo kvůli tomu, že někdo otevřel starou kopii, řešíte příznak na špatném místě.
+
+Stav `uzavřít s jedním doplněním pravidla` použijte, když se rozhodnutí povedlo až po návratu k historii. Doplňte jen tu větu, která historii nahrazuje v běžném provozu. Neimportujte celý původní příběh. Kanonické pravidlo má být samostatné, ne tlustší.
+
+Stav `neuzavírat jako běžné pravidlo` použijte, když se pravidlo při běžné práci nenašlo, vyvolalo spor o smysl, nebo bez autora změny nešlo rozhodnout. To není drobné doladění. Otevřete novou malou otázku: kde má pravidlo žít, jakou situaci má opravdu řešit, nebo jestli je vůbec ještě platné.
+
+### Praktický příklad
+
+```text
+Pravidlo:
+Před prvním lidským kontaktem přidáváme do formuláře jen údaj, který mění další krok zákazníka.
+
+První běžné použití:
+Obchod odmítl nové povinné pole "roční rozpočet", protože další krok zákazníka se tím před prvním kontaktem nemění.
+
+Co drhlo:
+V marketingovém checklistu zůstala stará poznámka "doplnit rozpočtové pole u větších projektů".
+
+Uzavírací stav:
+Uzavřít s jedním úklidem okolí.
+
+Jedna oprava:
+Odstranit starou poznámku z marketingového checklistu a nechat odkaz na kanonické pravidlo.
+
+Co neotevíráme:
+Lead scoring, redesign formuláře, nové kvalifikační otázky ani staré poptávky.
+
+Návratový signál:
+K tématu se vracíme až ve chvíli, kdy tým dvakrát po sobě nedokáže podle pravidla rozhodnout, zda nový údaj mění další krok zákazníka.
+```
+
+Příklad je úmyslně obyčejný. Většina dobré údržby systému není dramatická. Někde se smaže stará věta, někde se doplní hranice, někde se tým dohodne, že nic dalšího nedělá. Právě takové malé uzávěry drží web, SaaS i marketing v provozní čistotě.
+
+### Co propsat do kanonického místa
+
+Do kanonického místa po uzavření prvního běžného použití patří jen tři typy změn:
+
+- přesnější znění pravidla, pokud bez něj lidé sahali po historii;
+- opravený odkaz nebo pracovní vstup, pokud se pravidlo v běžné trase špatně hledalo;
+- návratový signál, pokud dosud nebyl dost konkrétní.
+
+Nepatří tam komentáře typu "při prvním použití to dopadlo dobře", dlouhý popis workshopu ani seznam lidí, kteří se účastnili rozhodnutí. Tyto informace mohou být v rozhodovacím logu, pokud mají provozní význam. Kanonické místo má nést pravidlo pro další práci, ne zápis z toho, jak jste ho dostali do formy.
+
+Pokud doplňujete příklad, napište ho jako modelovou situaci, ne jako zákaznickou historku. Místo "u klienta X jsme řešili pole Y" napište "u povinného pole, které nemění další krok, se otázka přesouvá až do lidského rozhovoru". Další člověk nepotřebuje znát konkrétního zákazníka; potřebuje poznat rozhodovací hranu.
+
+### Privacy-first uzavření
+
+Uzavření prvního běžného použití je dobrý okamžik pro malý úklid datové stopy. Podívejte se, co vzniklo během ověřování pravidla: poznámky, kopie checklistů, screenshoty, exporty, ukázky zákaznických zpráv, pracovní tabulky nebo dočasné komentáře.
+
+U každé stopy položte otázku:
+
+```text
+Potřebujeme tuto konkrétní stopu pro budoucí rozhodnutí, nebo stačí zobecněná věta v pravidle?
+```
+
+Ve většině případů stačí zobecněná věta. Pokud pravidlo funguje, staré podklady nemají dál cestovat po týmu. Smažte je podle interního retenčního pravidla, nechte je v původním zdroji pravdy, nebo je nahraďte anonymizovaným závěrem.
+
+Privacy-first provoz není jen o tom, že se na web nepřidá zbytečný tracker. Je to i schopnost po malé pracovní smyčce uklidit důkazy, které už nepotřebujete. Data mají sloužit rozhodnutí, ne přežívat jako suvenýr z každé porady.
+
+### Karta uzavření prvního běžného použití
+
+```text
+Pravidlo:
+
+Kanonické místo:
+
+První běžné použití:
+
+Výsledek použití:
+
+Uzavírací stav:
+- uzavřít beze změny
+- uzavřít s jedním úklidem okolí
+- uzavřít s jedním doplněním pravidla
+- neuzavírat jako běžné pravidlo
+
+Jedna změna, pokud je potřeba:
+
+Co se propsalo do kanonického místa:
+
+Co zůstává jen v rozhodovacím logu:
+
+Co výslovně neotevíráme:
+
+Privacy-first úklid:
+Co mažeme:
+Co ponecháváme:
+Co anonymizujeme:
+
+Návratový signál:
+
+Další běžný rytmus:
+
+Datum:
+```
+
+Kartu nezakládejte automaticky pro každou drobnost. Pokud pravidlo použil jeden člověk v jedné jednoduché situaci a nic se nemění, stačí krátký log. Karta se hodí až ve chvíli, kdy pravidlo ovlivňuje víc rolí, víc šablon nebo víc pracovních míst.
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: přečtěte výsledek prvního běžného použití.
+2. Minuta 2: vyberte jeden uzavírací stav.
+3. Minuta 3: napište jednu větu uzavření.
+4. Minuta 4: proveďte nejvýše jednu opravu pravidla nebo okolí.
+5. Minuta 5: určete, co se propsalo do kanonického místa a co zůstává jen v logu.
+6. Minuta 6: ukliďte pomocné stopy podle privacy-first hranice.
+7. Minuta 7: zapište návratový signál a běžný rytmus další kontroly.
+
+Když se workshop zasekne na tom, zda pravidlo vlastně platí, nepřetahujte ho. Zapište, že první běžné použití nelze uzavřít jako běžné pravidlo, a otevřete novou malou smyčku. Uzavírací workshop nemá suplovat produktovou debatu, která potřebuje vlastní otázku.
+
+### Checklist uzavření
+
+- Vybrali jsme jeden uzavírací stav?
+- Nezaměnili jsme úklid okolí za úpravu pravidla?
+- Pokud lidé sahali po historii, doplnili jsme jen jednu rozhodovací hranici?
+- Pokud se pravidlo ztratilo, otevřeli jsme novou malou otázku místo kosmetické opravy?
+- Propsali jsme do kanonického místa jen to, co pomůže dalšímu rozhodnutí?
+- Nechali jsme průběh ověřování v logu, ne v běžném pracovním textu?
+- Výslovně jsme napsali, co se neotevírá?
+- Uklidili jsme pomocné poznámky, kopie, exporty nebo screenshoty?
+- Neponecháváme osobní údaje nebo zákaznické detaily bez jasného účelu?
+- Má pravidlo návratový signál, který pozná i člověk mimo původní rozhodnutí?
+
+Uzavření prvního běžného použití je drobná brzda proti věčnému dolaďování. Když pravidlo funguje, nechte ho pracovat. Když potřebuje jednu opravu, udělejte jednu. Když nefunguje jako běžné pravidlo, přiznejte to a otevřete novou malou smyčku. Všechno mezi tím je jen administrativní mlha v hezčím svetru.
+
 ## Pracovní log
 
+- 2026-06-19: Doplněna úvodní podkapitola o uzavření prvního běžného použití po uzavřeném ověření pravidla: čtyři uzavírací stavy, praktický příklad, propsání do kanonického místa, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-19: Doplněna úvodní podkapitola o prvním běžném použití po uzavřeném ověření pravidla: čtyři výsledky použití, praktický příklad formulářového rozhodnutí, lokální opravy, privacy-first hranice, karta, mini workshop a checklist.
 - 2026-06-19: Doplněna úvodní podkapitola o uzavření ověření pravidla po předání do týmové paměti: čtyři uzavírací stavy, kanonické znění, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-19: Doplněna úvodní podkapitola o ověření pravidla po předání do týmové paměti: první reálné použití, čtyři výsledky ověření, privacy-first stopa, karta, mini workshop a checklist.
