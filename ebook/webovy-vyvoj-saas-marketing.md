@@ -229621,8 +229621,186 @@ To je zdravý konec. Žádné konfety, žádný nový dashboard, žádná tajná
 
 První běžné použití po návratu do stabilního klidu je malý test samostatnosti. Když dopadne dobře, není potřeba ho opakovat jen pro dobrý pocit. Pravidlo se má vrátit do pozadí a pomáhat v běžné práci. Nejlepší provozní pravidla nejsou ta, o kterých tým často mluví. Jsou to ta, která tiše zabrání špatnému rozhodnutí přesně ve chvíli, kdy by jinak prošlo.
 
+## Druhé běžné použití po návratu do stabilního klidu
+
+První běžné použití po návratu do stabilního klidu ukazuje, že pravidlo ještě funguje v jedné přirozené situaci. Druhé běžné použití je přísnější, protože už nesmí těžit z čerstvé pozornosti týmu. Pokud pravidlo obstojí i podruhé, mělo by se vrátit do normálního rytmu a přestat si říkat o zvláštní péči.
+
+Nejde o druhou kontrolu stejné věci. To by byl převlečený audit, a tyhle převleky mají v provozu až podezřele dobrý kostým. Druhé použití má ověřit přenositelnost: funguje pravidlo i v jiné situaci, u jiného člověka, v jiném typu výstupu nebo aspoň s menším odstupem od původního návratu?
+
+Dobré druhé použití má tři vlastnosti:
+
+- vzniklo přirozeně v práci, ne proto, že někdo chtěl mít hezký zápis;
+- člověk našel pravidlo v kanonickém pracovním místě, ne ve starém chatu nebo v hlavě původního autora;
+- pravidlo pomohlo rozhodnout bez toho, aby se znovu otevírala celá historie návratového signálu.
+
+Příklad ze SaaS provozu: po stabilizaci pravidla pro přidávání nových polí do registračního formuláře ho tým poprvé použil při úpravě onboardingové otázky. Druhé běžné použití může přijít při změně poptávkového formuláře. Neptáme se znovu, jestli původní rozhodnutí bylo chytré. Ptáme se, jestli pravidlo pořád vede k rozumnému rozhodnutí: pole má jasný účel, má vlastníka, má retenční hranici a existuje plán, co se s údajem stane po použití.
+
+### Co druhé použití ověřuje
+
+Druhé běžné použití ověřuje hlavně samostatnost pravidla mimo jeho původní kontext. Proto se vyplatí sledovat čtyři věci.
+
+První je najitelnost. Pokud pravidlo funguje jen tehdy, když někdo ví, že existuje, není to pravidlo. Je to ústní tradice s Markdownovým kostýmem. V praxi stačí jednoduchý test: našel by ho člověk, který řeší danou pracovní situaci, bez znalosti poslední interní debaty?
+
+Druhá je rozhodnutelnost. Pravidlo nemá jen ozdobit dokumentaci. Má pomoct vybrat další krok. Pokud po přečtení pravidla stále zůstává pět stejně pravděpodobných možností, pravidlo je moc obecné nebo je uložené na špatném místě.
+
+Třetí je přiměřenost rozsahu. Druhé použití často svádí k rozšíření pravidla na sousední oblast. To může být správně, ale jen pokud je podobnost skutečná. Když pravidlo pro formulář najednou začne řídit analytiku, CRM a support, pravděpodobně jste omylem založili malou ústavu. Provozní pravidlo má být úzké, dokud nemá důkaz, že širší vzor opravdu existuje.
+
+Čtvrtá je datová střídmost. Každé použití pravidla může vytvářet nové poznámky, screenshoty, exporty a příklady. Druhé použití má potvrdit, že pravidlo funguje, ne založit sbírku osobních údajů pro budoucí muzeum špatných nápadů. Zapisujte závěr, ne celý román událostí.
+
+### Čtyři výsledné stavy
+
+Po druhém běžném použití vyberte jeden ze čtyř stavů.
+
+**1. Pravidlo obstálo samostatně.** Člověk ho našel, použil a rozhodl bez mimořádného vysvětlování. Není potřeba žádná další akce. Do pracovního logu stačí krátká věta, že pravidlo obstálo i při druhém běžném použití.
+
+**2. Pravidlo potřebuje drobné zpřesnění v místě použití.** Rozhodnutí bylo správné, ale člověk ztratil čas na malém nejasném slově, chybějícím příkladu nebo špatném odkazu. Oprava patří do kanonického pracovního místa, ne do nové metodiky. Ideální změna je tak malá, že ji budoucí čtenář skoro nepozná, jen se mu lépe pracuje.
+
+**3. Pravidlo je příliš závislé na původní historii.** Tým ho použil jen proto, že si pamatoval předchozí návratový signál. To není selhání, ale není to stabilní klid. Přepište pravidlo do přítomného času: co má člověk udělat dnes, podle čeho se rozhodne a co nemá otevírat.
+
+**4. Objevil se nový návratový signál.** Druhé použití ukázalo rozpor, který nejde opravit lokální větou. Například pravidlo pro sběr údajů ve formuláři koliduje s novým obchodním procesem, nebo stejná otázka vzniká ve více místech najednou. V takovém případě nezvětšujte druhé použití. Zavřete ho jako signál a otevřete samostatnou nejmenší smyčku.
+
+Codyho komentář: Nejčastější chyba je vydávat stav 3 za stav 1. Tým si pravidlo pamatuje, takže se zdá, že funguje. Jenže nový člověk by skončil ve starém chatu, v polovičním screenshotu a v trapném "tohle přece všichni víme". Ne, nevíme. Proto máme kanonická místa.
+
+### Příklad druhého použití
+
+Představte si privacy-first SaaS, který má pravidlo:
+
+```text
+Nové pole do formuláře přidáváme jen tehdy, když má jasné rozhodnutí, vlastníka, retenční dobu a místo, kde se údaj po použití smaže nebo zobecní.
+```
+
+První běžné použití proběhlo u onboardingového formuláře. Druhé nastane u formuláře pro stažení praktického checklistu. Marketing chce přidat pole "velikost firmy", protože by se hodilo pro segmentaci.
+
+Zdravý průchod vypadá takto:
+
+1. Tým najde pravidlo u formulářových změn, ne v obecném privacy dokumentu.
+2. Napíše rozhodnutí, které má údaj umožnit: například rozlišit, zda checklist poslat v krátké nebo rozšířené verzi.
+3. Určí vlastníka údaje: kdo rozhodne, jestli se pole po experimentu ruší.
+4. Určí retenční hranici: jak dlouho se údaj drží a v jaké podobě.
+5. Zkontroluje, zda stejné rozhodnutí nejde udělat méně invazivně: třeba dobrovolnou volbou verze checklistu místo sběru profilu firmy.
+6. Zapíše výsledek do formulářové změny a smaže pracovní poznámky, které obsahují konkrétní kontakty nebo nepotřebné segmentační detaily.
+
+Možný závěr:
+
+```text
+Druhé běžné použití potvrdilo pravidlo. Pole "velikost firmy" nepřidáváme, protože rozhodnutí lze vyřešit přímou volbou verze checklistu. Do formuláře přidáváme jen volbu "kratší / podrobnější verze". Žádné nové profilové údaje nesbíráme.
+```
+
+Tohle je malý, ale důležitý rozdíl. Marketing pořád dostane použitelný signál. Uživatel nemusí odevzdat další údaj. Provoz má méně dat k ochraně. A právník v dálce tiše odkládá kávu.
+
+### Kdy pravidlo nerozšiřovat
+
+Druhé použití často působí jako důkaz, že pravidlo má být obecnější. Pozor. Dvě použití nejsou automaticky vzor pro celý podnik. Rozšíření zvažte až ve chvíli, kdy druhé použití ukáže společnou příčinu, ne jen podobnou náladu.
+
+Pravidlo nerozšiřujte, když:
+
+- druhé použití řeší jen stejnou věc v jiném kabátě;
+- podobnost stojí na osobní paměti jednoho člověka;
+- nový rozsah by přidal více výjimek než jasnosti;
+- rozšíření by vyžadovalo nové sledování lidí, nové exporty nebo nové povinné reporty;
+- stačí přidat jeden příklad do stávajícího pracovního místa.
+
+Praktická brzda:
+
+```text
+Pokud rozšíření pravidla neumíme popsat jednou větou a ověřit jedním příštím použitím, nerozšiřujeme ho teď.
+```
+
+Tahle věta chrání tým před dobře míněnou dokumentační inflací. Ano, dokumentace taky umí přibrat. Většinou potichu a po večerech.
+
+### Privacy-first hranice druhého použití
+
+Privacy-first přístup u druhého běžného použití znamená, že nevytváříte novou datovou vrstvu jen proto, abyste dokázali, že pravidlo funguje. Stačí provozní závěr.
+
+Držte čtyři hranice:
+
+- nepřidávejte nové osobní údaje do šablony ověření;
+- neukládejte screenshoty formulářů s reálnými kontakty, pokud stačí anonymizovaný příklad;
+- nesbírejte individuální chování týmu, když potřebujete jen vědět, zda pravidlo bylo použitelné;
+- po uzavření smažte dočasné pracovní podklady nebo je přepište na zobecněný závěr.
+
+U evropského privacy-first provozu je tohle praktická výhoda, ne asketické cvičení. Menší datová stopa znamená méně rizika, méně vysvětlování a méně míst, která se musí udržovat. Když údaj nepotřebujete, nemusíte ho chránit, migrovat, mazat ani omlouvat. Tohle je jedna z mála provozních pravd, která nezní sexy, ale šetří nervy.
+
+### Karta druhého běžného použití po stabilním klidu
+
+```text
+Karta druhého běžného použití po stabilním klidu
+
+Pravidlo / pracovní místo:
+
+Druhá přirozená situace:
+
+Kdo pravidlo použil:
+
+Našel pravidlo bez mimořádné podpory?
+- ano / částečně / ne
+
+Jaké rozhodnutí pravidlo umožnilo:
+
+Výsledek:
+- pravidlo obstálo samostatně
+- stačí drobné zpřesnění v místě použití
+- pravidlo je závislé na původní historii
+- objevil se nový návratový signál
+
+Nejmenší další krok:
+
+Co nerozšiřujeme:
+
+Privacy-first úklid:
+Které dočasné podklady mažeme, anonymizujeme nebo převádíme na zobecněný závěr:
+
+Vlastník:
+
+Datum:
+```
+
+Karta má sloužit rozhodnutí, ne evidenci pocitů. Pokud začnete vyplňovat, kdo měl jaký názor v jaké části meetingu, zastavte se. Druhé použití nepotřebuje stenografii. Potřebuje vědět, jestli pravidlo funguje i bez čerstvé berličky.
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: pojmenujte druhou přirozenou situaci a ověřte, že nevznikla uměle kvůli kontrole.
+2. Minuta 2: najděte kanonické pracovní místo pravidla.
+3. Minuta 3: napište rozhodnutí, které pravidlo umožnilo.
+4. Minuta 4: zkontrolujte, zda použití nevyžadovalo původní historii nebo mimořádné vysvětlení.
+5. Minuta 5: vyberte jeden ze čtyř výsledných stavů.
+6. Minuta 6: zapište, co výslovně nerozšiřujete.
+7. Minuta 7: proveďte privacy-first úklid dočasných podkladů.
+
+Workshop končí větou:
+
+```text
+Při druhém běžném použití pravidlo ..., další krok je ..., a nerozšiřujeme ...
+```
+
+Například:
+
+```text
+Při druhém běžném použití pravidlo zabránilo zbytečnému sběru segmentačního údaje, další krok je přidat jeden příklad k formulářovým změnám, a nerozšiřujeme pravidlo na celou analytiku.
+```
+
+To je dobrý výstup. Je konkrétní, úzký a zavřený. Přesně takové provozní věty drží SaaS pohromadě lépe než velké manifesty.
+
+### Checklist druhého běžného použití
+
+- Nastala druhá situace přirozeně v práci?
+- Je dostatečně jiná, aby ověřila přenositelnost pravidla?
+- Našel člověk pravidlo v kanonickém pracovním místě?
+- Pomohlo pravidlo k jasnému rozhodnutí?
+- Nepotřebovalo pravidlo původní historii, starý chat nebo ústní dovysvětlení?
+- Vybrali jsme jeden ze čtyř výsledných stavů?
+- Pokud je potřeba oprava, je lokální a malá?
+- Pokud se objevil nový návratový signál, nezvětšujeme kvůli němu tuto iteraci?
+- Je jasně napsané, co teď nerozšiřujeme?
+- Nevznikly nové osobní údaje, screenshoty nebo exporty bez účelu?
+- Dočasné podklady jsou smazané, anonymizované nebo převedené na zobecněný závěr?
+- Je jasné, zda se pravidlo vrací do stabilního klidu, nebo čeká na samostatnou malou opravu?
+
+Druhé běžné použití po návratu do stabilního klidu je konečně docela nudná disciplína. A to je dobře. Provoz nepotřebuje neustále dokazovat, že žije. Potřebuje pravidla, která se najdou, použijí a potom zase ztichnou. Když pravidlo obstojí i podruhé, dejte mu pokoj. Vraťte ho do běžného rytmu a věnujte pozornost až skutečnému návratovému signálu.
+
 ## Pracovní log
 
+- 2026-06-19: Doplněna úvodní podkapitola o druhém běžném použití po návratu do stabilního klidu: přenositelnost pravidla, čtyři výsledné stavy, příklad formulářového rozhodnutí, privacy-first hranice, karta, mini workshop a checklist.
 - 2026-06-19: Doplněna úvodní podkapitola o prvním běžném použití po návratu do stabilního klidu: najitelnost pravidla, použití bez mimořádné podpory, čtyři výsledky, privacy-first hranice, karta, mini workshop a checklist.
 - 2026-06-19: Doplněna úvodní podkapitola o návratu do stabilního klidu po ověření uzavření: kanonické místo, běžný kontrolní okamžik, odstranění mimořádné péče, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-19: Doplněna úvodní podkapitola o ověření uzavření prvního návratu při dalším běžném použití: čtyři výsledky ověření, slabé uzavření, privacy-first hranice, karta, mini workshop a checklist.
