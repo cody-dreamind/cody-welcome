@@ -231605,8 +231605,147 @@ Když se tým v minutě dvě nedokáže shodnout na uzavíracím stavu, nehlasuj
 
 Uzavření druhého běžného použití je konec zvláštní péče. Pravidlo buď znovu umí pracovat samo, nebo si zaslouží jednu malou opravu s jasným důvodem. V obou případech má tým odejít s menším množstvím aktivní práce, ne s dalším ocáskem kontroly. Dobře zavřená smyčka není ta, která všechno vysvětlí. Je to ta, která příště dovolí rozhodnout rychleji, s menší datovou stopou a bez hledání člověka, který si pamatuje poslední drama.
 
+## Předání uzavřeného pravidla do týmové paměti
+
+Když se pravidlo po druhém běžném použití vrátí do normálního rytmu, ještě zbývá jeden malý krok: předat ho do týmové paměti tak, aby ho další člověk našel a použil bez doprovodného výkladu. Nejde o nový review cyklus ani o slavnostní dokumentaci. Jde o stručné zařazení výsledku na správné místo.
+
+Týmová paměť má pomáhat v okamžiku rozhodování. Pokud člověk řeší formulář, onboardingový e-mail, supportní odpověď nebo marketingovou stránku, nemá pátrat v historii návratů. Má najít aktuální pravidlo, hranici použitelnosti a jeden příklad. Všechno ostatní může zůstat v rozhodovacím logu, ale nemá stát mezi člověkem a prací.
+
+Začněte větou:
+
+```text
+Odteď se tímto pravidlem řídíme v:
+```
+
+Tato věta donutí tým vybrat konkrétní pracovní místa. "V marketingu" je moc široké. "V poptávkovém formuláři, onboardingovém e-mailu a ručních žádostech o doplňující informace" už je použitelné. Díky tomu další člověk ví, kdy má pravidlo otevřít a kdy se má řídit jiným režimem.
+
+Praktický příklad:
+
+```text
+Pravidlo:
+O nový údaj žádáme jen tehdy, když podle něj měníme konkrétní další krok.
+
+Odteď se tímto pravidlem řídíme v:
+Poptávkovém formuláři, onboardingovém e-mailu a ručním doptávání obchodu.
+
+Krátký příklad:
+Nepřidáváme otázku na používaný projektový nástroj, pokud odpověď nezmění první onboardingový krok.
+
+Neplatí pro:
+Účetnictví, bezpečnostní logy, zákonné povinnosti a technickou diagnostiku incidentu.
+
+Návratový signál:
+Dvě odlišná pracovní místa narazí na situaci, kdy tým nedokáže rozhodnout, jestli je nový údaj opravdu nutný pro další krok.
+```
+
+Tento zápis není dlouhý, ale řeší čtyři věci najednou: kde pravidlo platí, jak vypadá v praxi, kde neplatí a co ho může znovu otevřít. To je pro týmovou paměť často víc než dost. Další odstavce by možná působily důkladně, ale při běžné práci by překážely jako židle uprostřed chodby.
+
+### Kam pravidlo uložit
+
+Pravidlo patří na nejbližší kanonické místo, ne do poznámek z posledního workshopu. Typicky to bude:
+
+- šablona formuláře nebo její dokumentace;
+- checklist pro úpravy landing page;
+- onboardingový playbook;
+- supportní nebo obchodní šablona;
+- rozhodovací index pro privacy-first práci s daty;
+- interní znalostní báze k danému procesu.
+
+Pokud pravidlo dopadá na víc míst, nezakládejte všude plnou kopii. Vložte krátký odkaz nebo jednovětou připomínku a jedno kanonické místo určete jako zdroj pravdy. Kopie pravidel stárnou různou rychlostí a potom tým neřeší problém zákazníka, ale archeologii vlastních poznámek. To je dobrodružství, které nikomu nechybělo.
+
+### Co předat a co nepředat
+
+Do týmové paměti předejte jen rozhodovací minimum:
+
+- aktuální znění pravidla;
+- pracovní místa, kde pravidlo platí;
+- hranici, kde pravidlo neplatí;
+- jeden krátký příklad správného použití;
+- návratový signál;
+- datum poslední věcné změny.
+
+Nepředávejte surové důkazy, celé zákaznické zprávy, screenshoty, dočasné exporty, osobní poznámky z debaty ani dlouhou historii, proč někdo původně nesouhlasil. Tyto věci mohou být užitečné v rozhodovacím logu, pokud mají jasný účel a retenční pravidlo. V kanonickém pracovním místě ale mají dělat prostor rozhodnutí, ne ho zaplavit.
+
+Privacy-first pravidlo je tady velmi přímé: týmová paměť má nést zobecněnou lekci, ne balík starých dat. Pokud příklad potřebuje zákaznický kontext, napište ho anonymně a obecně. Místo "firma X z oboru Y napsala..." stačí "relevantní zákazník neuměl podle formuláře poznat, jestli odpověď změní další krok". Smysl zůstane, datová stopa se zmenší.
+
+### Handoff jednou větou
+
+Po uložení pravidla napište handoff jednou větou:
+
+```text
+Pravidlo je od dneška kanonicky v [místo] a při [situace] se používá místo starých poznámek z návratu.
+```
+
+Příklad:
+
+```text
+Pravidlo je od dneška kanonicky v checklistu poptávkového formuláře a při přidávání nových otázek se používá místo poznámek z návratu z tiché údržby.
+```
+
+Tato věta je malá, ale důležitá. Uzavírá přechod z mimořádné péče do běžné práce. Kdo příště otevře staré poznámky, nemá dostat další kontext. Má dostat odkaz na kanonické místo. Tím se chrání pozornost týmu i kvalita pravidla.
+
+### Karta předání do týmové paměti
+
+```text
+Pravidlo:
+
+Kanonické místo:
+
+Platí pro:
+
+Neplatí pro:
+
+Krátký příklad správného použití:
+
+Co se odstraňuje z aktivní pracovní trasy:
+
+Co zůstává jen v rozhodovacím logu:
+
+Privacy-first úklid:
+Surové vstupy:
+Pomocné kopie:
+Osobní nebo obchodně citlivé detaily:
+
+Handoff jednou větou:
+
+Návratový signál:
+
+Vlastník:
+
+Datum:
+```
+
+Karta má být poslední uklízecí nástroj, ne nový proces. Použijte ji, když pravidlo ovlivňuje víc než jedno pracovní místo nebo když hrozí, že se tým bude vracet ke starým poznámkám. U drobného pravidla stačí aktualizovat kanonické místo a přidat handoff větu.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte uzavřené pravidlo.
+2. Minuta 2: vyberte jedno kanonické místo.
+3. Minuta 3: napište, kde pravidlo platí a kde neplatí.
+4. Minuta 4: přidejte jeden krátký příklad.
+5. Minuta 5: odstraňte z aktivní trasy staré poznámky, pomocné kopie a surové důkazy.
+6. Minuta 6: napište handoff větu a návratový signál.
+
+Když se tým nedohodne na kanonickém místě, pravidlo ještě není připravené na předání. Nezakládejte dočasné místo "než se rozhodne". Dočasné místo má podivnou schopnost přežít déle než projektový plán. Nejdřív určete zdroj pravdy, teprve potom pravidlo předávejte.
+
+### Checklist předání
+
+- Má pravidlo jedno kanonické místo?
+- Je jasné, ve kterých pracovních situacích platí?
+- Je napsané, kde neplatí nebo kde má vlastní režim?
+- Obsahuje týmová paměť jeden krátký příklad místo dlouhé historie?
+- Nepřenášíme do kanonického místa surové důkazy ani osobní údaje?
+- Odstranili jsme staré poznámky z aktivní pracovní trasy?
+- Zůstává rozhodovací log dohledatelný, ale neplete se do běžné práce?
+- Má handoff jednu větu, kterou lze poslat týmu?
+- Je jasný návratový signál pro budoucí otevření?
+- Ví vlastník, kde se pravidlo při další změně aktualizuje?
+
+Dobré předání do týmové paměti je nenápadné. Nikdo by po něm neměl mít pocit, že vznikl nový systém. Naopak: staré podklady zmizí z cesty, pravidlo sedí na jednom místě a další člověk se může rozhodnout bez pátrání. To je přesně ten druh produktivity, který není vidět na nástěnce, ale je příjemně cítit v každém dalším malém rozhodnutí.
+
 ## Pracovní log
 
+- 2026-06-19: Doplněna úvodní podkapitola o předání uzavřeného pravidla do týmové paměti: kanonické místo, handoff jednou větou, hranice použitelnosti, privacy-first úklid starých stop, karta, mini workshop a checklist.
 - 2026-06-19: Doplněna úvodní podkapitola o uzavření druhého běžného použití po návratu z tiché údržby: uzavírací stavy, propsání do kanonického místa, zrušení zvláštní pozornosti, privacy-first úklid, karta, workshop a checklist.
 - 2026-06-19: Doplněna úvodní podkapitola o druhém běžném použití po uzavření návratu z tiché údržby: test přenositelnosti bez autora, hranice použitelnosti, privacy-first přenos dat, karta, workshop a checklist.
 - 2026-06-19: Doplněna úvodní podkapitola o uzavření prvního běžného použití po návratu z tiché údržby: čtyři uzavírací stavy, lokální nápověda, oprava rozhodovací hrany, privacy-first úklid, karta, workshop a checklist.
