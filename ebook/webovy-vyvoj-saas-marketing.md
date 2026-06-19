@@ -229285,8 +229285,170 @@ Když druhé pole věty vyjde "žádná další práce", je to platný výsledek
 
 Ověření uzavření prvního návratu je krátký dotek reality. Buď ukáže, že pravidlo se vrátilo do klidu, nebo odhalí jedno místo, které ještě drhne. V obou případech má tým odolat pokušení znovu otevřít celý příběh. Dobré pravidlo se nepozná podle toho, že kolem něj vzniká čím dál víc péče. Pozná se podle toho, že další člověk udělá správné rozhodnutí a po práci nezůstane zbytečný datový nepořádek.
 
+## Návrat do stabilního klidu po ověření uzavření
+
+Když ověření uzavření prvního návratu dopadne dobře, práce ještě není úplně hotová. Tým musí udělat poslední malý krok: vrátit pravidlo zpět do stabilního klidu. Bez tohoto kroku zůstává téma zbytečně v hlavě jako "něco, co teď sledujeme", i když už pro mimořádnou pozornost není důvod. A mimořádná pozornost, která nemá důvod, je jen dražší forma rozptýlení.
+
+Návrat do stabilního klidu neznamená, že pravidlo zmizí z paměti. Znamená, že se znovu používá běžným způsobem: v kanonickém místě, ve standardním rytmu, bez zvláštního sledování, bez pomocných tabulek a bez potřeby vysvětlovat starou historii pokaždé, když se objeví podobná situace.
+
+Začněte větou:
+
+```text
+Ověření ukázalo, že pravidlo může zpět do stabilního klidu, protože:
+```
+
+Za `protože` napište jeden konkrétní důkaz. Ne pocit, že "už je to dobré". Například:
+
+```text
+Ověření ukázalo, že pravidlo může zpět do stabilního klidu, protože nový člověk v týmu použil publikační checklist bez mimořádné připomínky a nepřidal do formuláře pole bez rozhodovacího účelu.
+```
+
+Tato věta stačí. Nemusíte znovu shrnovat celý návrat, původní problém ani všechny opravy. Stabilní klid má být krátký zápis, ne pamětní deska.
+
+### Co vrátit do běžného rytmu
+
+Při návratu do stabilního klidu vraťte do běžného rytmu tři věci:
+
+- Kanonické místo: kde pravidlo bydlí a odkud ho lidé opravdu používají.
+- Kontrolní okamžik: kdy se pravidlo přirozeně potká s prací.
+- Návratový signál: co by muselo nastat, aby se téma znovu otevřelo.
+
+Kanonické místo musí být jedno. Pokud pravidlo žije v dokumentu, checklistu, šabloně i připnuté zprávě v chatu, stabilní klid je jen iluze. Vyberte zdroj pravdy a ostatní odkazy buď smažte, nebo je převeďte na jasné odkazy do zdroje pravdy.
+
+Kontrolní okamžik nemá být nový meeting. Má být přirozené místo v práci: před publikací landing page, při návrhu nového pole, při prvním průchodu onboardingem, při spuštění automatizace nebo při přípravě kampaně. Pokud kvůli pravidlu potřebujete samostatnou kontrolní ceremonii, možná ještě není stabilní.
+
+Návratový signál má zůstat konkrétní. Špatný signál zní "když se objeví problém s formulářem". Lepší signál zní "dvakrát za sebou vznikne nové pole bez zapsaného rozhodovacího účelu". První věta zve ke každé drobné debatě. Druhá chrání klid a zároveň nenechá skutečný problém zmizet.
+
+### Co odstranit po návratu do klidu
+
+Po návratu do stabilního klidu odstraňte mimořádnou péči, která byla užitečná jen během návratu:
+
+- dočasné pomocné seznamy;
+- kopie starých příkladů;
+- připnuté připomínky v chatu;
+- ruční sledování jednoho okraje pravidla;
+- pracovní exporty a screenshoty použité jen pro ověření;
+- poznámky, které dublují kanonické místo.
+
+Neodstraňujte historii rozhodnutí, pokud má pořád hodnotu jako záznam. Odstraňte jen věci, které by lidi lákaly pracovat mimo zdroj pravdy. Historie patří do rozhodovací paměti. Pomocné artefakty patří po použití do koše, případně do anonymizovaného shrnutí. Ano, koš je technický nástroj produktové disciplíny. Málo se o tom mluví, protože nezní dost strategicky.
+
+### Příklad návratu do stabilního klidu
+
+```text
+Téma:
+Nová pole ve formulářích musí mít rozhodovací účel.
+
+Ověření uzavření:
+Nový člověk použil checklist při přípravě konzultační landing page a zapsal účel pole bez doplňujícího vysvětlení.
+
+Rozhodnutí:
+Pravidlo vracíme do stabilního klidu.
+
+Kanonické místo:
+Publikační checklist landing page.
+
+Kontrolní okamžik:
+Před publikací stránky nebo změnou formuláře.
+
+Co odstraňujeme:
+Dočasnou poznámku v chatu, starý screenshot formuláře a pomocný seznam otázek z ověřovacího průchodu.
+
+Co neotevíráme:
+Neděláme audit všech formulářů, nepřidáváme nové měření opuštění polí a neměníme obecné pravidlo pro sběr dat.
+
+Návratový signál:
+Dvě nová pole po sobě nebudou mít zapsané rozhodnutí, které se podle nich má udělat.
+
+Privacy-first výsledek:
+V rozhodovací paměti necháváme jen zobecněný závěr. Neuchováváme vyplněná data ani screenshoty s obsahem formuláře.
+```
+
+Příklad ukazuje důležitou věc: návrat do klidu neznamená "už se o to nikdy nestaráme". Znamená "staráme se o to normálně". Pokud se objeví návratový signál, téma se může znovu otevřít. Do té doby nemá dostávat zvláštní péči.
+
+### Privacy-first klid
+
+Privacy-first provoz se nepozná jen podle toho, že nepřidáváte zbytečné trackery. Pozná se i podle toho, že po ověřovací práci uklízíte datovou stopu. Jakmile je pravidlo zpět ve stabilním klidu, zeptejte se:
+
+```text
+Které důkazy potřebujeme pro budoucí rozhodnutí a které už jen dokazují, že jsme byli pečliví?
+```
+
+Pečlivost není důvod držet osobní data. Pokud stačí zobecněná věta, nechte si zobecněnou větu. Pokud byl screenshot potřeba jen pro lokální opravu checklistu, smažte ho nebo vraťte do původního systému podle retenčních pravidel. Pokud vznikla pomocná tabulka, zavřete ji a nepoužívejte ji jako nový zdroj pravdy.
+
+Dobré privacy-first uzavření může vypadat takto:
+
+```text
+Po návratu do stabilního klidu mažeme dočasné screenshoty a pomocný seznam. V kanonickém checklistu zůstává jen pravidlo a v rozhodovací paměti anonymizovaný závěr z ověření.
+```
+
+Tím tým chrání dvě věci najednou: klid práce a klid dat.
+
+### Karta návratu do stabilního klidu
+
+```text
+Téma nebo pravidlo:
+
+Ověření uzavření ukázalo:
+
+Rozhodnutí:
+- vracíme do stabilního klidu / ještě necháváme lokální dočištění / otevíráme nový návratový signál
+
+Kanonické místo:
+
+Běžný kontrolní okamžik:
+
+Co po ověření odstraňujeme:
+
+Co výslovně neotevíráme:
+
+Návratový signál pro příště:
+
+Privacy-first úklid:
+Které dočasné stopy mažeme, anonymizujeme nebo necháváme zavřené:
+
+Vlastník:
+
+Datum:
+```
+
+Karta je krátká schválně. Jakmile návrat do klidu vyžaduje dlouhé vysvětlování, pravděpodobně ještě nejste v klidu. Buď chybí kanonické místo, nebo pravidlo pořád potřebuje lokální dočištění.
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: přečtěte výsledek ověření uzavření.
+2. Minuta 2: rozhodněte, zda pravidlo může zpět do stabilního klidu.
+3. Minuta 3: potvrďte jedno kanonické místo.
+4. Minuta 4: určete běžný kontrolní okamžik.
+5. Minuta 5: napište, co po ověření odstraňujete.
+6. Minuta 6: zapište privacy-first úklid.
+7. Minuta 7: ponechte nebo zpřesněte návratový signál.
+
+Workshop končí větou:
+
+```text
+Pravidlo je zpět ve stabilním klidu; bydlí v ..., kontroluje se při ..., dočasné stopy ... a znovu ho otevřeme pouze když ...
+```
+
+Pokud tuto větu neumíte napsat, nenahrazujte ji delší debatou. Najděte chybějící část: kanonické místo, kontrolní okamžik, úklid stop nebo návratový signál.
+
+### Checklist návratu do stabilního klidu
+
+- Máme konkrétní důkaz, že uzavření obstálo při běžném použití?
+- Rozhodli jsme, že pravidlo může zpět do stabilního klidu?
+- Existuje jedno kanonické místo?
+- Je jasné, při jakém běžném pracovním okamžiku se pravidlo použije?
+- Odstranili jsme mimořádné připomínky, pomocné seznamy a staré kopie?
+- Neotevíráme audit, redesign ani nové měření jen proto, že jsme téma měli zrovna otevřené?
+- Zůstává návratový signál konkrétní a poznatelný?
+- Uklízíme dočasné screenshoty, exporty a pracovní tabulky?
+- Necháváme v paměti jen zobecněný závěr tam, kde osobní data nejsou potřeba?
+- Ví vlastník, že další péče probíhá už jen v běžném rytmu?
+
+Návrat do stabilního klidu je nenápadný konec dobré smyčky. Tým neoslavuje velkou změnu, jen přestane dávat mimořádnou pozornost věci, která už zase funguje normálně. Právě tím se zlepšení stane součástí provozu místo dalšího projektu, který pořád někomu svítí v hlavě.
+
 ## Pracovní log
 
+- 2026-06-19: Doplněna úvodní podkapitola o návratu do stabilního klidu po ověření uzavření: kanonické místo, běžný kontrolní okamžik, odstranění mimořádné péče, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-19: Doplněna úvodní podkapitola o ověření uzavření prvního návratu při dalším běžném použití: čtyři výsledky ověření, slabé uzavření, privacy-first hranice, karta, mini workshop a checklist.
 - 2026-06-19: Doplněna úvodní podkapitola o uzavření prvního návratového signálu po stabilním klidu: pět uzavíracích stavů, lokální oprava versus omezené ověření, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-18: Doplněna úvodní podkapitola o prvním návratovém signálu po stabilním klidu: rozlišení šumu, lokální chyby, skutečného signálu a změny kontextu, nejmenší návratová smyčka, privacy-first reakce, karta, mini workshop a checklist.
