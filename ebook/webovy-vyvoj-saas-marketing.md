@@ -230940,8 +230940,185 @@ Pokud se během workshopu objeví potřeba řešit víc než jedno pracovní mí
 
 Dobře uzavřené první běžné použití je malý návrat k normálu. Pokud pravidlo funguje, nechte ho pracovat tiše. Pokud potřebuje jednu oporu, doplňte ji tam, kde vzniklo tření. Pokud se opravdu ukáže slabá hrana, opravte ji tak úzce, aby nerozbila zbytek systému. A pokud se ozve skutečný návratový signál, otevřete malou smyčku s jasnou stop podmínkou. To je celé. Víc procesu by tady bylo jen drahé balení na malý šroubek.
 
+## Druhé běžné použití po uzavření návratu z tiché údržby
+
+Druhé běžné použití je test přenositelnosti. První použití po uzavřeném návratu často ještě nese čerstvou paměť: lidé si pamatují, proč se pravidlo řešilo, kdo ho zavíral a kde leží doplněná nápověda. Druhé použití už by mělo fungovat bez téhle doznívající pozornosti. Pravidlo má být najitelné, použitelné a dost klidné na to, aby ho zvládl i člověk, který u předchozího návratu nebyl.
+
+Nejde o druhou kontrolu stejné věci. Pokud při prvním použití pravidlo odmítlo nové pole ve formuláři, druhé použití nemá znovu dokazovat totéž. Má ukázat, jestli pravidlo obstojí v jiné běžné situaci: třeba u onboardingového e-mailu, u kampaně, u interní automatizace nebo u šablony pro obchodní follow-up. Přenositelnost se nepozná tím, že tým zopakuje stejný příklad. Pozná se tím, že princip pomůže i tam, kde má práce trochu jiný tvar.
+
+Začněte větou:
+
+```text
+Pravidlo používáme podruhé po uzavřeném návratu v této odlišné běžné situaci:
+```
+
+Slovo `odlišné` je důležité. Pokud se druhé použití odehrává ve stejném místě a na stejném typu rozhodnutí, možná nejde o přenositelnost, ale jen o prodloužené hlídání prvního použití. To může být užitečné jen tehdy, když to bylo výslovně zapsané jako návratový signál nebo stop podmínka. Jinak se pravidlo zbytečně drží v mimořádném režimu.
+
+### Co druhé použití ověřuje
+
+Druhé běžné použití ověřuje tři věci:
+
+- přenos bez autora: pravidlo použije někdo, kdo ho nevytvořil ani naposledy neopravoval;
+- přenos do sousedního místa: pravidlo pomůže v jiné, ale příbuzné pracovní situaci;
+- přenos bez nové evidence: tým nepotřebuje vytahovat staré důkazy, aby udělal dnešní rozhodnutí.
+
+Přenos bez autora je nejpraktičtější test kvality. Pokud pravidlo funguje jen tehdy, když u toho sedí člověk s historickou pamětí, není to pravidlo. Je to ústní tradice s dobrým PR. Zdravé pravidlo musí umět říct dost i bez průvodce: co se rozhoduje, jaká hranice platí, kdy věc neotevírat a kdy už naopak vzniká návratový signál.
+
+Přenos do sousedního místa neznamená, že pravidlo cpete všude. Znamená to, že ho zkusíte tam, kde má stejný rozhodovací princip. Pravidlo pro přidávání údajů do formuláře může pomoci i u onboardingového e-mailu, pokud otázka zní: "Sbíráme nebo žádáme něco, co nemění další krok?" Nemusí ale řídit cenotvorbu, produktovou roadmapu ani hiring. Každé pravidlo má hranici použitelnosti a druhé použití ji má zpřesnit, ne nafouknout.
+
+Přenos bez nové evidence chrání privacy-first provoz. Když pravidlo říká, že nový údaj musí měnit další krok, druhé použití by nemělo automaticky spouštět procházení historických leadů, export CRM nebo kopírování zákaznických zpráv do nové tabulky. Nejprve použijte dnešní pracovní otázku. Teprve když pravidlo bez dalšího důkazu nejde rozumně použít, zapište přesně, jaký minimální důkaz chybí.
+
+### Čtyři výsledky druhého použití
+
+Po druhém běžném použití vyberte jeden stav:
+
+- pravidlo se přeneslo bez změny;
+- pravidlo se přeneslo, ale potřebuje hranici použitelnosti;
+- pravidlo narazilo na slabou rozhodovací větu;
+- druhé použití ukázalo skutečný nový návratový signál.
+
+Stav `pravidlo se přeneslo bez změny` znamená, že člověk pravidlo našel, použil ho v odlišné situaci a rozhodnutí bylo dost jasné. V takovém případě už není důvod držet téma v žádném zvláštním režimu. Zapište rozhodnutí u pracovního místa a nechte pravidlo v běžném rytmu.
+
+Stav `potřebuje hranici použitelnosti` použijte, když pravidlo fungovalo, ale nebylo jasné, kam ještě sahá. Typicky se objeví věta: "Platí tohle i pro onboardingový e-mail, nebo jen pro formulář?" Odpověď nemá být dlouhá metodika. Stačí doplnit hranici: "Pravidlo platí pro jakýkoli sběr nebo žádost o informaci od zákazníka; neplatí pro interní technické logy, které mají vlastní retenční pravidla."
+
+Stav `slabá rozhodovací věta` znamená, že princip je správný, ale formulace neumí vést druhé místo k rozhodnutí. Například věta "údaj musí měnit další krok" může být v onboardingovém e-mailu příliš úzká, protože nejde o údaj ve formuláři, ale o požadavek na odpověď. Oprava má rozšířit jazyk, ne rozsah sběru: "O informaci žádáme jen tehdy, když podle odpovědi měníme další krok, personalizujeme nezbytný postup nebo snižujeme riziko chybného nastavení."
+
+Stav `skutečný nový návratový signál` použijte opatrně. Druhé použití samo o sobě není signál. Signál vzniká až tehdy, když se ukáže opakovaný vzor, který pravidlo neumí rozhodnout a který má dopad na zákazníka, příjem, provozní riziko nebo datovou stopu. Pokud jen jeden člověk chtěl pravidlo obejít, je to běžné tření. Pokud dvě odlišná pracovní místa za sebou nedokážou podle pravidla rozhodnout stejný typ požadavku, už to může být důvod pro malou návratovou smyčku.
+
+### Praktický příklad
+
+```text
+Pravidlo:
+O nový údaj nebo odpověď žádáme jen tehdy, když podle ní měníme konkrétní další krok.
+
+První použití:
+Landing page neotevřela pole "počet zaměstnanců", protože odpověď neměnila follow-up.
+
+Druhé použití:
+Onboardingový e-mail navrhuje otázku "Jaký nástroj dnes používáte na projektové řízení?"
+
+Použití pravidla:
+Tým se ptá, jestli odpověď mění další krok. Pokud zákazník odpoví Trello, Linear nebo žádný nástroj, onboarding zatím pokračuje stejně. Otázka tedy jen zvyšuje pocit kontextu, ale nemění postup.
+
+Výsledek:
+Pravidlo se přeneslo bez změny.
+
+Rozhodnutí:
+Otázku do onboardingového e-mailu nepřidáváme. Pokud později vzniknou dvě různé onboardingové trasy podle typu nástroje, otevře se samostatný návrh.
+
+Co se neotevírá:
+Neděláme průzkum všech zákaznických nástrojů, nepřidáváme tagování do CRM a neměníme celý onboarding.
+
+Privacy-first stopa:
+Zůstává jen rozhodnutí u šablony e-mailu. Nesbíráme nový údaj "pro jistotu".
+```
+
+Příklad ukazuje, že stejné pravidlo může pracovat v jiném kanálu, aniž by rozšiřovalo datový apetit produktu. To je přesně smysl privacy-first přenositelnosti: princip cestuje, data ne.
+
+### Jak doplnit hranici použitelnosti
+
+Když druhé použití ukáže nejasnou hranici, doplňte ji do kanonického místa pravidla jednou větou. Nepište novou kapitolu, pokud stačí krátká mez. Dobrá hranice říká, kde pravidlo platí, kde neplatí a co má vlastní režim.
+
+Příklad:
+
+```text
+Hranice použitelnosti:
+Pravidlo platí pro formuláře, onboardingové e-maily, kvalifikační otázky a ruční žádosti o informace od zákazníka. Neplatí pro bezpečnostní logy, účetní povinnosti a technickou diagnostiku, které mají vlastní účel, retenční lhůtu a přístupová pravidla.
+```
+
+Taková věta chrání dvě věci najednou. Zákaznická data se nezačnou sbírat kvůli vágnímu "lepší by bylo vědět víc" a zároveň se pravidlo nepoužije tam, kde existuje jiný legitimní provozní nebo právní důvod. Privacy-first neznamená zavřít oči před provozem. Znamená mít přesný účel, minimální rozsah a jasné místo, kde se rozhodnutí dá dohledat.
+
+### Privacy-first přenositelnost
+
+Druhé použití je dobrý okamžik pro kontrolu, jestli se z pravidla nestává záminka k dalšímu sběru. Tým může říct: "Když pravidlo platí i pro onboarding, měli bychom si o zákaznících držet víc kontextu, ať umíme rozhodovat rychleji." To zní prakticky, ale často je to jen elegantně oblečené hromadění dat.
+
+Použijte tři otázky:
+
+```text
+Mění požadovaná informace další krok?
+
+Stačí nám odpověď použít v daném okamžiku bez dlouhodobého ukládání?
+
+Umíme rozhodnutí zapsat zobecněně bez osobních nebo obchodně citlivých detailů?
+```
+
+Pokud první odpověď zní ne, informaci nechtějte. Pokud první odpověď zní ano, druhá otázka řeší retenci: možná stačí odpověď použít v aktuálním průchodu a neukládat ji do CRM. Pokud musí zůstat, napište účel, vlastníka, přístup a mazací pravidlo. Třetí otázka hlídá týmovou paměť: budoucí člověk obvykle nepotřebuje vidět surovou zákaznickou odpověď, aby pochopil, proč pravidlo vzniklo.
+
+Codyho komentář: "mohlo by se hodit" je nejdražší datová strategie, protože vypadá skoro zadarmo. Jenže každý zbytečný údaj chce vysvětlení, ochranu, retenci, přístupová práva a jednou i úklid. Gratuluji, právě jste si pořídili administrativní dluh s úrokem za compliance.
+
+### Karta druhého běžného použití
+
+```text
+Pravidlo:
+
+Kanonické místo:
+
+První běžné použití bylo:
+
+Druhé odlišné pracovní místo:
+
+Kdo pravidlo použil bez původního autora:
+
+Rozhodnutí:
+
+Výsledek druhého použití:
+- přeneslo se bez změny
+- přeneslo se, ale potřebuje hranici použitelnosti
+- narazilo na slabou rozhodovací větu
+- ukázalo skutečný nový návratový signál
+
+Pokud doplňujeme hranici, přesná věta:
+
+Pokud opravujeme rozhodovací větu, původní nejasnost:
+
+Pokud vzniká návratový signál, opakovaný vzor a stop podmínka:
+
+Co se výslovně neotevírá:
+
+Privacy-first stopa:
+Co zůstává:
+Co nesbíráme:
+Co neukládáme dlouhodobě:
+Co anonymizujeme nebo zobecňujeme:
+
+Datum:
+```
+
+Kartu použijte hlavně tehdy, když vzniká hranice, oprava formulace nebo návratový signál. Pokud se pravidlo přeneslo bez změny, stačí stručný zápis u druhého pracovního místa. Cílem druhého použití není vyrábět dokumentaci o dokumentaci. Cílem je potvrdit, že pravidlo už zase unese běžný provoz.
+
+### Mini workshop na 8 minut
+
+1. Minuta 1: pojmenujte pravidlo a jeho kanonické místo.
+2. Minuta 2: vyberte druhé odlišné pracovní místo.
+3. Minuta 3: nechte pravidlo použít člověka, který nebyl u posledního uzavření.
+4. Minuty 4 až 5: napište rozhodnutí a důvod.
+5. Minuta 6: vyberte jeden ze čtyř výsledků.
+6. Minuta 7: doplňte hranici nebo slabou větu jen tehdy, pokud opravdu chybí.
+7. Minuta 8: zapište privacy-first stopu a co se výslovně neotevírá.
+
+Pokud workshop potřebuje víc času, nejdřív zjistěte proč. Možná pravidlo není najitelné. Možná druhé místo není příbuzné. Možná se tým snaží pravidlem vyřešit strategickou otázku, která patří jinam. V každém případě nezvětšujte workshop automaticky. Zapište překážku a otevřete nejmenší odpovídající opravu.
+
+### Checklist druhého běžného použití
+
+- Je druhé použití opravdu odlišné od prvního?
+- Použil pravidlo někdo bez čerstvé historické paměti?
+- Našel pravidlo v kanonickém místě bez osobního navádění?
+- Pomohlo pravidlo rozhodnout v sousední pracovní situaci?
+- Neopakujeme jen první kontrolu pod jiným názvem?
+- Vybrali jsme jeden výsledek druhého použití?
+- Pokud chyběla hranice použitelnosti, doplnili jsme ji jednou krátkou větou?
+- Pokud selhala rozhodovací věta, popsali jsme přesnou nejasnost?
+- Pokud vznikl návratový signál, je opakovaný a má dopad, ne jen zajímavý?
+- Neotevíráme širší revizi pravidla bez jasné stop podmínky?
+- Nežádáme nový údaj jen proto, že by se mohl někdy hodit?
+- Rozhodnutí jde zapsat zobecněně bez surových osobních dat?
+- Víme, co zůstává u pracovního místa a co se neukládá dlouhodobě?
+
+Druhé běžné použití má dát pravidlu poslední klidnou zkoušku po návratu z tiché údržby. Když se přenese bez změny, vraťte ho do normálního rytmu. Když potřebuje hranici, doplňte jednu přesnou větu. Když narazí na slabou formulaci, opravte nejmenší rozhodovací hranu. A když se opravdu objeví nový návratový signál, otevřete malou smyčku. Víc z toho nedělejte. Dobré pravidlo má po druhém použití hlavně zmizet z centra pozornosti a zůstat užitečné tam, kde se skutečně pracuje.
+
 ## Pracovní log
 
+- 2026-06-19: Doplněna úvodní podkapitola o druhém běžném použití po uzavření návratu z tiché údržby: test přenositelnosti bez autora, hranice použitelnosti, privacy-first přenos dat, karta, workshop a checklist.
 - 2026-06-19: Doplněna úvodní podkapitola o uzavření prvního běžného použití po návratu z tiché údržby: čtyři uzavírací stavy, lokální nápověda, oprava rozhodovací hrany, privacy-first úklid, karta, workshop a checklist.
 - 2026-06-19: Doplněna úvodní podkapitola o prvním běžném použití po uzavření návratu z tiché údržby: najitelnost, rozhodnutelnost, klid bez mimořádné kontroly, čtyři výsledky, privacy-first hranice, karta, workshop a checklist.
 - 2026-06-19: Doplněna úvodní podkapitola o uzavření prvního návratu z tiché údržby: uzavírací stavy, lokální nápověda, malá smyčka při potvrzeném signálu, privacy-first úklid, karta, workshop a checklist.
