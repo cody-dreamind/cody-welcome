@@ -230230,8 +230230,156 @@ Pravidlo necháváme v tiché údržbě v checklistu formulářových změn, vr�
 
 Tichá údržba je stav, kdy pravidlo konečně dělá svoji práci bez dramatu. Není to zapomenutí. Je to důvěra podmíněná jasným návratovým signálem. Když se signál objeví, vrátíte se. Když se neobjeví, necháte pravidlo sloužit a nebudete mu pořádat kontrolní festival jen proto, že existuje.
 
+## První přirozený návrat z tiché údržby
+
+Tichá údržba jednou narazí na realitu. Někdo upraví formulář, přepíše onboardingový e-mail, založí novou landing page, změní nabídku, přidá integraci nebo se v obchodním rozhovoru objeví otázka, kvůli které pravidlo původně vzniklo. To ještě neznamená, že se pravidlo znovu otevírá. Znamená to jen, že se poprvé po ztišení potkalo s běžnou prací.
+
+První přirozený návrat z tiché údržby má jeden úkol: rozlišit, jestli pravidlo normálně slouží, nebo jestli se objevil návratový signál. Rozdíl je zásadní. Normální použití pravidla nemá vyrábět review. Návratový signál naopak nemá zapadnout jen proto, že tým chtěl mít klid. Tichý provoz není zákaz přemýšlení. Je to zákaz zbytečného přemýšlení bez signálu.
+
+Začněte krátkým zápisem:
+
+```text
+Pravidlo bylo v tiché údržbě pro:
+
+Dnešní pracovní situace je:
+
+Stalo se něco, co odpovídá návratovému signálu?
+
+Nejmenší odpověď je:
+```
+
+Příklad:
+
+```text
+Pravidlo bylo v tiché údržbě pro:
+Každé nové pole ve formuláři musí mít jasný dopad na další krok obchodu.
+
+Dnešní pracovní situace:
+Marketing chce přidat pole "velikost týmu" do poptávkového formuláře pro novou segmentovou stránku.
+
+Stalo se něco, co odpovídá návratovému signálu?
+Ne. Nejde o opakovaný spor ani o nejasnost pravidla. Pravidlo jde použít přímo.
+
+Nejmenší odpověď:
+Zeptat se, jak přesně údaj změní další obchodní krok. Pokud odpověď není konkrétní, pole nepřidávat.
+```
+
+V takovém případě neotevírejte novou iteraci. Pravidlo přesně k tomuhle existuje. Použijte ho, zapište výsledek do běžného pracovního místa jen tehdy, pokud vzniklo rozhodnutí, a pokračujte dál. Kdyby každé použití pravidla vyžadovalo malý obřad, tichá údržba by byla jen kontrola s lepším PR.
+
+### Tři možné výsledky návratu
+
+Po prvním přirozeném návratu vyberte jeden ze tří výsledků:
+
+- Běžné použití: pravidlo stačilo a není potřeba nic měnit.
+- Lokální nápověda: pravidlo platí, ale v pracovním místě chybí drobný příklad, který by zrychlil příští použití.
+- Skutečný návratový signál: situace odpovídá předem zapsanému signálu a pravidlo se má znovu otevřít.
+
+`Běžné použití` je nejčastější a nejlepší výsledek. Pravidlo se potkalo s prací, rozhodlo ji a nezanechalo po sobě novou agendu. Tak má vypadat dobrá provozní disciplína.
+
+`Lokální nápověda` použijte opatrně. Přidat jednu větu nebo jeden anonymizovaný příklad je v pořádku, pokud tím odstraníte opakované mikro-tření. Nepřidávejte ale další vysvětlení jen proto, že někdo pravidlo použil poprvé pomaleji. První pomalé použití není chyba systému, pokud druhé už půjde normálně.
+
+`Skutečný návratový signál` vyžaduje návrat k původní kartě tiché údržby. Neotevírejte celou historii. Přečtěte jen kanonickou větu, návratový signál a pracovní místo. Pak rozhodněte nejmenší další krok.
+
+### Jak poznat skutečný návratový signál
+
+Skutečný návratový signál má tři znaky:
+
+- odpovídá formulaci, která byla zapsaná při přechodu do tiché údržby;
+- má dopad na rozhodnutí, zákaznickou zkušenost, provozní riziko nebo datovou stopu;
+- ukazuje na konkrétní pracovní místo, kde se má reakce stát.
+
+Pokud chybí první znak, nejspíš jde o nový podnět. Pokud chybí druhý, jde možná jen o preferenci. Pokud chybí třetí, problém je zatím moc mlhavý. V žádném z těchto případů není potřeba rozbalovat starou iteraci.
+
+Praktický příklad skutečného signálu:
+
+```text
+Návratový signál:
+Pravidlo otevřeme, pokud se dvakrát za sebou objeví spor, jestli nový formulářový údaj opravdu mění další krok obchodu.
+
+Dnešní situace:
+U dvou segmentových stránek po sobě marketing navrhl nové pole, obchod nedokázal říct, jak ho použije, a přesto pole zůstalo v návrhu.
+
+Výsledek:
+Skutečný návratový signál. Neřešíme celý formulářový systém. Otevíráme jen předávku mezi marketingem a obchodem u návrhu nového pole.
+```
+
+Tento zápis chrání rozsah. Signál se potvrdil, ale reakce zůstává lokální. Není důvod hned měnit všechny formuláře, CRM, segmentaci ani reporting. Ano, backlog si rád přisedne ke každému otevřenému tématu jako člověk, který slyšel slovo "workshop". Nepouštějte ho ke stolu bez pozvánky.
+
+### Privacy-first odpověď
+
+První návrat z tiché údržby je rizikový pro data, protože tým má chuť "pro jistotu" znovu otevřít staré důkazy. Většinou to není potřeba. Pokud pravidlo stačí použít, nepátrejte v původních zákaznických zprávách, starých exportech ani screenshotech. Dnešní rozhodnutí má vycházet z dnešní pracovní situace a kanonického pravidla.
+
+Použijte brzdu:
+
+```text
+Potřebujeme starý detail pro dnešní rozhodnutí, nebo stačí pravidlo a dnešní pracovní situace?
+```
+
+Ve většině případů stačí pravidlo. Staré detaily otevírejte jen tehdy, když se potvrdil návratový signál a bez původního kontextu nejde rozlišit, jestli se problém opravdu opakuje. I potom nejdřív hledejte zobecněný záznam, ne surová data.
+
+U formulářů, analytiky, supportu a obchodu platí jednoduché pravidlo: do návratu si nepřinášejte víc osobních údajů, než je nutné pro nejbližší rozhodnutí. Když stačí věta "dvakrát po sobě nebylo jasné, jak obchod použije nové pole", nepotřebujete kopírovat konkrétní leady ani interní poznámky.
+
+### Karta prvního návratu z tiché údržby
+
+```text
+Pravidlo v tiché údržbě:
+
+Kanonické pracovní místo:
+
+Původní návratový signál:
+
+Dnešní pracovní situace:
+
+Výsledek:
+- běžné použití
+- lokální nápověda
+- skutečný návratový signál
+
+Nejmenší odpověď:
+
+Co se propíše do pracovního místa:
+
+Co výslovně neotevíráme:
+
+Privacy-first hranice:
+Které staré důkazy, exporty, screenshoty nebo osobní údaje neotevíráme:
+
+Vlastník:
+
+Datum:
+```
+
+Kartu vyplňujte jen při nejasnosti. Pokud pravidlo fungovalo úplně běžně, stačí rozhodnutí v pracovním místě. Cílem není evidovat každý dotyk pravidla, ale nepromeškat první skutečný signál po tichém období.
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: přečtěte kanonické pravidlo a původní návratový signál.
+2. Minuta 2: popište dnešní pracovní situaci bez historie.
+3. Minuty 3 až 4: vyberte výsledek: běžné použití, lokální nápověda, nebo skutečný návratový signál.
+4. Minuta 5: napište nejmenší odpověď.
+5. Minuta 6: určete, co se výslovně neotevírá.
+6. Minuta 7: zapište privacy-first hranici starých stop.
+
+Když se tým nedohodne, jestli jde o lokální nápovědu nebo návratový signál, vraťte se k přesnému znění signálu. Pokud dnešní situace nesedí, nedávejte jí status návratu. Zapište ji jako podnět nebo udělejte jednu lokální nápovědu. Přesnost tady není byrokracie. Je to pojistka proti tomu, aby se klidový režim rozpadl při prvním hlasitějším "možná".
+
+### Checklist prvního návratu
+
+- Četli jsme původní návratový signál doslova?
+- Popsali jsme dnešní situaci bez otevírání celé historie?
+- Rozlišili jsme běžné použití, lokální nápovědu a skutečný návratový signál?
+- Pokud pravidlo stačilo, nevyrábíme novou kontrolu?
+- Pokud chybí jen nápověda, doplňujeme nejvýš jednu větu nebo anonymizovaný příklad?
+- Pokud se potvrdil návratový signál, máme konkrétní pracovní místo?
+- Je jasné, co výslovně neotevíráme?
+- Neotevíráme staré osobní údaje, exporty ani screenshoty bez nutnosti?
+- Stačí pro rozhodnutí zobecněný závěr místo surových dat?
+- Má výsledek vlastníka jen tehdy, když vzniká další krok?
+
+První přirozený návrat z tiché údržby je test dospělosti pravidla. Buď se ukáže, že pravidlo prostě slouží, a tým ho nechá pracovat. Nebo se ukáže, že návratový signál je skutečný, a tým otevře jen nejmenší potřebnou smyčku. Obě varianty drží klid. Rozdíl je v tom, že jedna nechává věc běžet a druhá ji opravuje bez zbytečného hluku.
+
 ## Pracovní log
 
+- 2026-06-19: Doplněna úvodní podkapitola o prvním přirozeném návratu z tiché údržby: rozlišení běžného použití, lokální nápovědy a skutečného návratového signálu, privacy-first hranice, karta, mini workshop a checklist.
 - 2026-06-19: Doplněna úvodní podkapitola o tiché údržbě po uzavření druhého běžného použití: kanonické pravidlo, konec mimořádné péče, privacy-first úklid důkazů, karta, mini workshop a checklist.
 - 2026-06-19: Doplněna úvodní podkapitola o uzavření druhého běžného použití po návratu do stabilního klidu: uzavírací stavy, zákaz další kontroly, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-19: Zpřesněna závěrečná poznámka po druhém běžném použití pravidla o zákaz další kontroly bez skutečného návratového signálu.
