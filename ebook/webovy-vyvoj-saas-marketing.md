@@ -12728,6 +12728,176 @@ Když se tým během workshopu začne vracet ke všem starým důvodům vzniku v
 
 Návrat k výřezu po delším klidu je dobrý test toho, jestli pracovní systém opravdu drží. Pokud umí rozlišit starý signál, nový problém a falešný návrat bez velké porady, máte pomůcku, která žije v práci. Pokud pokaždé potřebuje historický výklad autora, je čas zlepšit kanonické místo, ne přidávat další vysvětlující vrstvu.
 
+## Uzavření návratu k výřezu po delším klidu
+
+Návrat k výřezu po delším klidu nemá zůstat otevřený jen proto, že se tým znovu dotkl staré pracovní pomůcky. Jakmile vyberete stav návratu, potřebujete ho uzavřít do jedné konkrétní změny, potvrzení nebo oddělení nového pravidla. Jinak se z opatrného návratu stane trvalá servisní poznámka, která se bude připomínat při každém dalším použití.
+
+Uzavření má být krátké a pevné. Říká, co se stalo s původním výřezem, co se propsalo do pracovního místa, co se neotevírá a kdy se k tématu smí znovu vrátit. Bez toho se tým snadno nechá vláčet čerstvým dojmem: jednou je výřez prý zastaralý, podruhé prý stačí doplnit větu, potřetí někdo navrhne novou šablonu. Všechno to může být pravda, ale ne najednou.
+
+Začněte větou:
+
+```text
+Návrat k výřezu po klidu uzavíráme tímto stavem:
+```
+
+Za dvojtečku doplňte jeden z výsledků. Pokud se věta nedá napsat bez dlouhého vysvětlování, návrat ještě není připravený k uzavření. Vraťte se k předchozí kartě a zkontrolujte, jestli jste opravdu rozhodli, zda jde o stejný typ rozhodnutí, stejné pracovní místo a malou úpravu.
+
+### Čtyři uzavírací stavy
+
+Použijte jeden ze čtyř stavů:
+
+- zavřít beze změny;
+- zavřít s jednou doplněnou hranou;
+- zavřít opravou pracovní trasy;
+- zavřít oddělením nového pravidla.
+
+Stav `zavřít beze změny` použijte, když se dnešní signál nepotvrdil nebo nepatřil k původnímu výřezu. To není promarněná práce. Je to dobrý výsledek, protože tým neotevřel pomůcku jen kvůli pocitu. Zapište, proč výřez zůstává zavřený, a nechte ho dál v klidu.
+
+Stav `zavřít s jednou doplněnou hranou` použijte, když původní výřez pořád platí, ale dnešní situace ukázala chybějící okraj. Hrana má být rozhodovací, ne vysvětlující. Dobrá hrana říká třeba: "Platí i pro CTA texty ve veřejných materiálech" nebo "Neplatí pro interní kvalifikační otázky v sales šabloně." Slabá hrana říká: "Dávat pozor na formulace." To je připomínka, ne pravidlo.
+
+Stav `zavřít opravou pracovní trasy` použijte, když výřez byl správný, ale člověk ho nenašel ve chvíli rozhodnutí. Pak neupravujte obsah jen proto, aby byl hlasitější. Opravte místo, odkud se k němu chodí: odkaz v šabloně, název v indexu, krátkou nápovědu u pracovního kroku nebo pořadí položek v rozcestníku.
+
+Stav `zavřít oddělením nového pravidla` použijte, když dnešní signál ukázal příbuzný, ale samostatný problém. Původní výřez tím neprohrál. Jen odmítl nést práci, která mu nepatří. Nové pravidlo musí dostat vlastní pracovní místo, vlastní stop podmínku a vlastní privacy-first hranici.
+
+### Praktický příklad
+
+```text
+Původní výřez:
+Veřejné materiály používají obecný privacy-first příklad. Interní sales formulace zůstává v interní šabloně.
+
+Dnešní signál:
+Landing page pro audit nepřevzala interní příklad, ale v CTA použila interní kvalifikační otázku.
+
+Rozhodnutí návratu:
+Jde o stejný typ rozhodnutí, protože problém vznikl ve veřejném textu a na hranici mezi veřejným příkladem a interní kvalifikací.
+
+Uzavírací stav:
+Zavřít s jednou doplněnou hranou.
+
+Doplněná hrana:
+Veřejné CTA může pojmenovat další krok, ale nesmí přebírat interní kvalifikační otázky ze sales šablon.
+
+Co se neotevírá:
+Neměníme celý copywriting landing page, neauditujeme všechny sales šablony a nezakládáme nové pravidlo pro lead scoring.
+
+Privacy-first výsledek:
+Nevzniká nové pole, nový tracker ani nová kopie interní kvalifikační logiky ve veřejné vrstvě.
+```
+
+Příklad je malý schválně. Dobře uzavřený návrat k výřezu nemá vyvolat pocit, že se právě přepsal systém. Má odstranit jednu nejistotu a vrátit práci do normálního rytmu. Pokud se po uzavření otevřelo pět dalších témat, pravděpodobně jste zavřeli špatnou věc nebo jste dovolili, aby se výřez proměnil v univerzální magnet na související nápady.
+
+### Co propsat a co nechat být
+
+Do kanonického místa výřezu patří jen výsledek, který pomůže dalšímu člověku rozhodnout bez návratu k celé historii:
+
+- potvrzení, že výřez zůstává beze změny;
+- jedna nová hrana, pokud opravdu vznikla;
+- opravený odkaz nebo název pracovní trasy;
+- odkaz na samostatné nové pravidlo, pokud bylo oddělené;
+- nový nebo potvrzený návratový signál.
+
+Nepatří tam podrobná kronika diskuse, citace zákaznických zpráv, screenshoty starých návrhů, interní debata o tom, kdo co přehlédl, ani seznam všech nápadů, které během návratu zazněly. Kanonické místo není archiv pocitů. Je to pracovní nástroj. Má z něj být vidět, jak rozhodnout příště, ne jak dlouho trvalo rozhodnout dnes.
+
+Codyho komentář: pokud po každém návratu dopíšete do výřezu tři varovné odstavce, výřez možná přežije, ale nikdo ho nebude používat. Krátká rozhodovací hrana porazí dlouhé vysvětlení skoro pokaždé. Ano, dokumentace má taky svůj kalorický příjem. Když ji překrmíte, přestane se hýbat.
+
+### Privacy-first uzavření
+
+Návrat po delším klidu často vytvoří dočasné stopy: poznámku z workshopu, anonymizovaný příklad, pracovní screenshot, výpis starých odkazů nebo krátké srovnání verzí. Při uzavření zkontrolujte, co z toho má zůstat aktivní.
+
+Použijte čtyři otázky:
+
+```text
+Potřebuje příští člověk surový podklad, nebo mu stačí zobecněný závěr?
+
+Vznikla během návratu nová kopie osobních, obchodních nebo interních dat?
+
+Má doplněná hrana vlastní důvod sbírat nebo držet data?
+
+Je jasné, kdy se k výřezu znovu vrátíme?
+```
+
+Ve většině případů má zůstat jen zobecněný závěr. Pokud výřez řeší veřejné texty, budoucí člověk nepotřebuje kopii interní sales otázky ani screenshot CRM. Stačí věta: "Veřejné CTA nesmí přebírat interní kvalifikační otázky." Tím se zachová rozhodovací hodnota a současně nevznikne další místo, které by muselo hlídat přístupy, retenci a kontext.
+
+Pokud návrat přece jen otevřel citlivý podklad, zapište jeho účel a uzavření:
+
+```text
+Podklad byl použit jen k rozhodnutí dnešní hrany. Do kanonického výřezu se nepřenáší. V aktivní pracovní trase zůstává jen zobecněný závěr.
+```
+
+Tahle věta je nudná, ale užitečná. Chrání tým před pozdějším "to jsme si sem jen odložili". Hodně datových problémů nezačíná zlým úmyslem. Začíná odloženou pomocnou kopií, kterou už nikdo nepovažuje za cizí.
+
+### Karta uzavření návratu po klidu
+
+```text
+Název výřezu:
+
+Kanonické místo:
+
+Dnešní signál:
+
+Stav návratu z předchozí kontroly:
+- nechat zavřené
+- doplnit jednu hranu
+- opravit pracovní trasu
+- oddělit nové pravidlo
+
+Uzavírací stav:
+- zavřít beze změny
+- zavřít s jednou doplněnou hranou
+- zavřít opravou pracovní trasy
+- zavřít oddělením nového pravidla
+
+Jedna provedená změna nebo potvrzení:
+
+Co se propsalo do kanonického místa:
+
+Co se propsalo do pracovního místa:
+
+Co se výslovně neotevírá:
+
+Co ze staré historie zůstává zavřené:
+
+Privacy-first úklid:
+Surové podklady:
+Pomocné kopie:
+Nový sběr dat:
+Retence:
+
+Nový nebo potvrzený návratový signál:
+
+Vlastník:
+
+Datum kontroly:
+```
+
+Kartu používejte jen tehdy, když návrat opravdu něco mění nebo když hrozí, že se k němu tým bude vracet ze zvyku. Pokud se signál nepotvrdil a výřez zůstává zavřený, často stačí jedna věta v rozhodovacím logu. Praktický systém nemá sbírat formuláře za dobré chování.
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: přečtěte stav návratu z předchozí kontroly.
+2. Minuta 2: vyberte jeden uzavírací stav.
+3. Minuty 3 až 4: napište jednu změnu, potvrzení nebo oddělení nového pravidla.
+4. Minuta 5: určete, co se propsalo do kanonického místa a pracovního místa.
+5. Minuta 6: zavřete privacy-first úklid dočasných stop.
+6. Minuta 7: napište, co se výslovně neotevírá a kdy vznikne další návratový signál.
+
+Když workshop začne řešit širší souvislosti, zeptejte se: "Pomáhá to uzavřít dnešní návrat, nebo otevíráme nové téma?" Pokud otevíráte nové téma, napište ho bokem a vraťte se k uzavíracímu stavu. Ne každá dobrá myšlenka si zaslouží vstup do aktuální smyčky.
+
+### Checklist uzavření návratu po klidu
+
+- Vybrali jsme jeden uzavírací stav?
+- Pokud výřez zůstává beze změny, zapsali jsme proč?
+- Pokud doplňujeme hranu, je to jedna rozhodovací věta?
+- Pokud opravujeme trasu, opravili jsme místo použití, ne zbytečně obsah?
+- Pokud oddělujeme nové pravidlo, má vlastní pracovní místo a stop podmínku?
+- Propsali jsme výsledek tam, kde ho příští člověk najde?
+- Neudělali jsme z jednoho návratu širší revizi bez důvodu?
+- Zavřeli jsme staré podklady, které nebyly potřeba pro budoucí rozhodnutí?
+- Zůstává v kanonickém místě zobecněný závěr místo surových dat?
+- Víme, jaký konkrétní signál by výřez znovu otevřel?
+
+Uzavření návratu po delším klidu je malý test dospělosti pracovního systému. Umí se dotknout staré pomůcky, rozhodnout jednu věc a zase ji nechat pracovat? Pokud ano, máte proces, který pomáhá. Pokud ne, máte sbírku otevřených dveří. A otevřené dveře jsou fajn na větrání, horší na provoz.
+
 ## Pravidla rukopisu
 
 - Pišu česky, prakticky a bez nafukování.
@@ -232516,3 +232686,4 @@ Uzavření druhého běžného použití je konec zvláštní péče. Pravidlo b
 - 2026-06-18: Doplněna úvodní podkapitola o prvním průchodu z nového výchozího bodu: jedno pracovní místo, nejmenší důkaz, stop podmínka, privacy-first hranice, karta, workshop a checklist.
 - 2026-06-19: Doplněna úvodní podkapitola o uzavření prvního průchodu z nového výchozího bodu: vyhodnocení stop podmínky, čtyři uzavírací stavy, privacy-first úklid, karta, workshop a checklist.
 - 2026-06-19: Doplněna úvodní podkapitola o návratu k výřezu po delším klidu: ověření stejného typu rozhodnutí, čtyři stavy návratu, privacy-first práce bez otevírání starých stop, karta, workshop a checklist.
+- 2026-06-19: Doplněna úvodní podkapitola o uzavření návratu k výřezu po delším klidu: čtyři uzavírací stavy, praktický příklad, privacy-first úklid, karta, mini workshop a checklist.
