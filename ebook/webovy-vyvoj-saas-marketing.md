@@ -231888,8 +231888,187 @@ Pokud workshop vyrobí tři opravy, vyberte jen tu, která bránila rozhodnutí 
 
 Dobré ověření po předání je krátké a trochu suché. Jeho smyslem není dokázat, že dokumentace je krásná. Smyslem je zjistit, jestli další člověk dokáže v reálné práci udělat lepší rozhodnutí s menší datovou stopou. Pokud ano, nechte pravidlo pracovat v tichu.
 
+## Uzavření ověření pravidla po předání do týmové paměti
+
+Ověření pravidla po předání má skončit rozhodnutím, ne dalším sledováním. Jakmile proběhne první reálné použití, tým potřebuje vědět, co se má stát dál: pravidlo zůstává v klidu, opravuje se jedna lokální věc, přesouvá se kanonické místo, nebo se otevírá nová malá smyčka. Bez tohoto uzavření se ověření snadno promění v neformální dohled nad každým dalším použitím.
+
+Uzavření napište hned po prvním ověření. Nečekejte na další tři příklady jen proto, že by to působilo jistěji. Pokud první použití ukázalo jasnou chybu, opravte ji. Pokud neukázalo nic zásadního, pravidlo vraťte do běžného rytmu a další návrat připusťte až podle návratového signálu.
+
+Začněte větou:
+
+```text
+Po ověření pravidla po předání rozhodujeme:
+```
+
+Potom doplňte jeden výsledek:
+
+```text
+Po ověření pravidla po předání rozhodujeme:
+Pravidlo zůstává v běžném rytmu; při prvním použití šlo najít, pochopit i použít bez návratu ke starým poznámkám.
+```
+
+Nebo:
+
+```text
+Po ověření pravidla po předání rozhodujeme:
+Necháváme pravidlo platit, ale doplňujeme jednu hranici neplatnosti, protože obchod při prvním použití nevěděl, jestli se pravidlo vztahuje i na otázky po prvním hovoru.
+```
+
+Taková věta je malá, ale důležitá. Odděluje ověření od údržby. Tým ví, že kontrola proběhla, co se z ní stalo a proč se teď neotevírá širší téma.
+
+### Čtyři uzavírací stavy
+
+Po ověření vyberte jeden ze čtyř stavů:
+
+- Zavřít do běžného rytmu: pravidlo fungovalo bez zvláštní pomoci.
+- Dočistit vstup: pravidlo je správné, ale v pracovním toku potřebuje lepší odkaz, název nebo viditelnější místo vstupu.
+- Doplnit rozhodovací hranu: pravidlo bylo nalezené, ale chyběla jedna hranice platnosti nebo neplatnosti.
+- Přesunout zdroj pravdy: pravidlo je užitečné, ale jeho kanonické místo neodpovídá reálnému začátku práce.
+
+Stav `zavřít do běžného rytmu` je nejčistší výsledek. Neznamená, že pravidlo je navždy dokonalé. Znamená, že nepotřebuje mimořádnou péči. Zapište datum ověření, nejmenší důkaz a návratový signál. Potom přestaňte pravidlo hlídat.
+
+Stav `dočistit vstup` použijte, když se člověk rozhodnout dokázal, ale pravidlo našel až přes zkratku, chat nebo paměť někoho jiného. Oprava má být u vstupu: odkaz z checklistu, přesnější název v indexu, krátká věta v šabloně nebo odstranění starého odkazu, který vedl jinam. Neměňte obsah pravidla, pokud obsah nebyl problém.
+
+Stav `doplnit rozhodovací hranu` použijte, když pravidlo bylo na správném místě, ale v reálné situaci se ukázala nejasná hranice. Doplňte jeden příklad, jednu výjimku nebo jednu větu neplatnosti. Neotevírejte celou historii pravidla. První ověření neříká, že staré rozhodnutí bylo špatné; říká jen, že jedna hrana nebyla dost čitelná.
+
+Stav `přesunout zdroj pravdy` použijte opatrně. Přesun má smysl jen tehdy, když se ukáže, že současné kanonické místo lidé v dané pracovní situaci přirozeně neotevírají. Po přesunu nechte na starém místě krátkou směrovku, ne plnou kopii. Kopie vypadají přátelsky v den vzniku a protivně v den, kdy se rozcházejí.
+
+### Praktický příklad uzavření
+
+```text
+Pravidlo:
+O nový údaj ve formuláři žádáme jen tehdy, když podle něj měníme další krok.
+
+Kanonické místo:
+Checklist poptávkového formuláře.
+
+Ověřovací situace:
+Obchod navrhl přidat otázku na velikost týmu před prvním hovorem.
+
+Výsledek ověření:
+Slabá rozhodovací hrana.
+
+Uzavírací stav:
+Doplnit rozhodovací hranu.
+
+Jedna oprava:
+Doplnit větu: pokud údaj slouží jen k lepší přípravě obchodníka, patří do poznámky po prvním kontaktu, ne do veřejného formuláře.
+
+Co neotevíráme:
+Celou strukturu formuláře, staré poptávky, scoring leadů ani nový reporting.
+
+Návratový signál:
+Někdo navrhne další povinné pole před prvním lidským kontaktem.
+```
+
+Tento zápis uzavírá ověření bez dramat. Pravidlo zůstává, hrana se doplní a tým ví, kdy se k tématu vrátit. Hlavně se z jedné nejasnosti nestane debata o tom, jestli má formulář vůbec existovat. To by byla slušná ukázka toho, jak z drobné šroubovací práce udělat bagr.
+
+### Co propsat do kanonického místa
+
+Do kanonického místa propsujte jen výsledek, který pomůže dalšímu člověku rozhodnout rychleji. Typicky stačí:
+
+- aktuální znění pravidla;
+- jedna hranice platnosti;
+- jedna hranice neplatnosti;
+- jeden krátký příklad;
+- odkaz na rozhodovací log, pokud je potřeba dohledat původ.
+
+Nepřidávejte do kanonického místa celý ověřovací záznam. Ten patří do rozhodovacího logu nebo pracovního archivu. Kanonické místo má být tenké a použitelné. Když do něj přenesete celý příběh, další člověk ho bude muset znovu číst, filtrovat a odhadovat, která část je pravidlo a která už jen historie.
+
+Dobrá kanonická věta může vypadat takto:
+
+```text
+Před prvním lidským kontaktem přidáváme do formuláře jen údaj, který mění další krok zákazníka; údaje pro pohodlnější přípravu obchodu patří až do interní poznámky po kontaktu.
+```
+
+To stačí. Kdo chce znát pozadí, má najít log. Kdo potřebuje rozhodnout, má dostat pravidlo.
+
+### Privacy-first uzavření
+
+Uzavření ověření je vhodný okamžik pro úklid datové stopy. Při ověřování se často objeví pomocné poznámky, kopie části formuláře, screenshoty, výřezy z interních diskusí nebo anonymizované příklady. Některé mají hodnotu pro rozhodovací log, většina ne.
+
+Použijte pravidlo nejmenší použitelné stopy:
+
+```text
+Ponecháváme jen důkaz, bez kterého by další člověk nerozuměl uzavření.
+```
+
+V praxi to často znamená ponechat obecný popis situace a smazat surové podklady. Místo kopie konkrétní poptávky napište: "Při návrhu nového povinného pole nebylo jasné, zda údaj mění další krok, nebo jen připravuje obchodníka." Smysl zůstane, osobní data neputují dál a budoucí čtenář nemusí luštit starý kontext.
+
+Pokud ověření ukázalo potřebu přesunout zdroj pravdy, zkontrolujte také staré odkazy. Privacy-first úklid není jen mazání osobních údajů. Je to i omezení zbytečných míst, kde se pravidlo může rozmnožit, zestárnout a začít produkovat špatná rozhodnutí.
+
+### Karta uzavření ověření po předání
+
+```text
+Pravidlo:
+
+Kanonické místo před ověřením:
+
+První ověřovací situace:
+
+Výsledek ověření:
+- pravidlo funguje
+- slabá najitelnost
+- slabá rozhodovací hrana
+- špatné kanonické místo
+
+Uzavírací stav:
+- zavřít do běžného rytmu
+- dočistit vstup
+- doplnit rozhodovací hranu
+- přesunout zdroj pravdy
+
+Jedna provedená oprava:
+
+Aktuální kanonické znění:
+
+Co jsme výslovně neotevřeli:
+
+Privacy-first úklid:
+Co ponecháváme:
+Co mažeme nebo necháváme zavřené:
+Kde nesmí vzniknout kopie:
+
+Návratový signál:
+
+Běžný rytmus další kontroly:
+
+Datum:
+```
+
+Karta má být poslední stopa zvláštní péče. Jakmile je vyplněná, pravidlo se vrací do běžné práce. Pokud ho za týden znovu otevřete bez návratového signálu, nejspíš neřešíte kvalitu pravidla, ale nervozitu z toho, že jste ho pustili z ruky.
+
+### Mini workshop na 8 minut
+
+1. Minuta 1: přečtěte kartu ověření po předání.
+2. Minuta 2: vyberte jeden uzavírací stav.
+3. Minuta 3: napište jednu větu rozhodnutí po ověření.
+4. Minuta 4: proveďte nejvýše jednu lokální opravu.
+5. Minuta 5: zapište aktuální kanonické znění pravidla.
+6. Minuta 6: určete, co se výslovně neotevírá.
+7. Minuta 7: uklidte pomocné stopy a zkontrolujte, že nevzniká nová kopie pravidla.
+8. Minuta 8: napište návratový signál a běžný rytmus další kontroly.
+
+Když workshop narazí na spor, zda pravidlo vůbec platí, nejde už o uzavření ověření. Zastavte workshop a otevřete novou malou rozhodovací smyčku s vlastní otázkou. Uzavírací karta nemá nést spor, který patří jinam.
+
+### Checklist uzavření ověření
+
+- Vybrali jsme jeden ze čtyř uzavíracích stavů?
+- Je jasné, zda pravidlo končí v běžném rytmu, nebo potřebuje jednu lokální opravu?
+- Neopravujeme obsah, když problém byl jen v najitelnosti?
+- Nepřesouváme zdroj pravdy bez důkazu, že staré místo lidé v práci neotevírají?
+- Propsali jsme do kanonického místa jen aktuální pravidlo, hranici a krátký příklad?
+- Nechali jsme historii v rozhodovacím logu místo v běžném pracovním textu?
+- Uklidili jsme pomocné poznámky, screenshoty, kopie a surové podklady?
+- Nepřidáváme sledování lidí ani zákaznická data jen kvůli pocitu jistoty?
+- Zapsali jsme, co se výslovně neotevírá?
+- Má pravidlo jasný návratový signál a běžný rytmus další kontroly?
+
+Uzavření ověření po předání je poslední kontrolní bod před tím, než pravidlo začne normálně žít. Dobrý výsledek není obsáhlý report, ale menší tření v příštím rozhodnutí. Když další člověk ví, kde pravidlo najít, co přesně říká a kdy ho znovu otevřít, práce je hotová.
+
 ## Pracovní log
 
+- 2026-06-19: Doplněna úvodní podkapitola o uzavření ověření pravidla po předání do týmové paměti: čtyři uzavírací stavy, kanonické znění, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-19: Doplněna úvodní podkapitola o ověření pravidla po předání do týmové paměti: první reálné použití, čtyři výsledky ověření, privacy-first stopa, karta, mini workshop a checklist.
 - 2026-06-19: Doplněna úvodní podkapitola o předání uzavřeného pravidla do týmové paměti: kanonické místo, handoff jednou větou, hranice použitelnosti, privacy-first úklid starých stop, karta, mini workshop a checklist.
 - 2026-06-19: Doplněna úvodní podkapitola o uzavření druhého běžného použití po návratu z tiché údržby: uzavírací stavy, propsání do kanonického místa, zrušení zvláštní pozornosti, privacy-first úklid, karta, workshop a checklist.
