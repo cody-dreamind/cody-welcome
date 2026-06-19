@@ -229446,8 +229446,184 @@ Pokud tuto větu neumíte napsat, nenahrazujte ji delší debatou. Najděte chyb
 
 Návrat do stabilního klidu je nenápadný konec dobré smyčky. Tým neoslavuje velkou změnu, jen přestane dávat mimořádnou pozornost věci, která už zase funguje normálně. Právě tím se zlepšení stane součástí provozu místo dalšího projektu, který pořád někomu svítí v hlavě.
 
+## První běžné použití po návratu do stabilního klidu
+
+Po návratu do stabilního klidu přichází ještě jeden užitečný okamžik: první běžné použití pravidla bez čerstvé mimořádné pozornosti. Není to nová kontrolní fáze a nemá z toho vzniknout další projekt. Je to obyčejný pracovní průchod, ve kterém se ukáže, jestli se pravidlo opravdu vrátilo do normálního provozu, nebo jestli tým jen uklidil tabulky a v hlavách pořád drží skrytý dohled.
+
+První běžné použití poznáte podle toho, že se pravidlo potká s reálnou prací samo od sebe. Někdo připravuje landing page, mění formulář, posílá onboardingový e-mail, upravuje supportní šablonu, spouští malou kampaň nebo předává interní checklist novému člověku. Téma se neotevírá proto, že "bychom se měli podívat, jestli to funguje". Otevírá se proto, že práce normálně přišla na místo, kde pravidlo bydlí.
+
+Začněte větou:
+
+```text
+Toto je první běžné použití po návratu do stabilního klidu; pravidlo použijeme pouze v jeho kanonickém místě a bez mimořádné podpory.
+```
+
+Tato věta chrání rozsah. Jakmile ji nenapíšete, hrozí, že se z běžného použití stane maskovaná revize. Tým začne znovu vytahovat staré příklady, otevírat dočasné poznámky a ptát se, jestli by se neměla opravit ještě sousední část. To může být někdy užitečné, ale není to běžné použití. To je nový návratový signál a patří do vlastní smyčky.
+
+### Co první běžné použití ověřuje
+
+První běžné použití po návratu do stabilního klidu ověřuje tři věci:
+
+- Jestli je pravidlo najitelné bez čerstvé paměti z poslední iterace.
+- Jestli se dá použít bez mimořádného vysvětlení původní historie.
+- Jestli po použití nevzniká nová datová stopa jen kvůli pocitu kontroly.
+
+Najitelnost je nejpraktičtější test. Pokud člověk ví, že pravidlo existuje, ale musí lovit poslední chat, starý pull request nebo poznámku z workshopu, pravidlo není ve stabilním klidu. Je v archeologickém režimu. A archeologie je krásná disciplína, jen ne ideální provozní model pro SaaS tým.
+
+Použitelnost bez historie je druhý test. Pravidlo má dávat smysl v přítomném pracovním místě. Nemusí vyprávět celý příběh, proč vzniklo. Pokud někdo potřebuje vědět všechny detaily původního návratového signálu, aby pravidlo použil správně, kanonické místo je pravděpodobně moc slabé nebo příliš abstraktní.
+
+Datová střídmost je třetí test. Běžné použití nemá automaticky vyrábět nové screenshoty, exporty, kopie zákaznických zpráv ani tabulku "pro jistotu". Pokud potřebujete důkaz, zapište nejmenší zobecněný závěr. Pokud důkaz nepotřebujete, nenechte ho vzniknout. Ne každá dobrá práce si zaslouží vlastní dokumentační suvenýr.
+
+### Čtyři výsledky prvního běžného použití
+
+Po prvním běžném použití vyberte jeden ze čtyř výsledků.
+
+První výsledek: pravidlo obstálo. Člověk ho našel, použil a výsledek odpovídá záměru. V takovém případě neotevírejte další úpravy. Zapište krátkou poznámku a nechte pravidlo dál v klidu.
+
+```text
+Pravidlo obstálo při prvním běžném použití. Bez mimořádné podpory vedlo k rozhodnutí nepřidat nové pole do formuláře, protože pole nemělo jasný rozhodovací účel.
+```
+
+Druhý výsledek: pravidlo je najitelné, ale potřebuje malé lokální zpřesnění. Třeba je v checklistu správně, ale jedna věta svádí k příliš širokému výkladu. V takovém případě opravte jen tuto větu. Neotevírejte celý checklist.
+
+Třetí výsledek: pravidlo se použilo jen díky čerstvé paměti. Někdo věděl, kde je, protože byl u poslední iterace. To není stabilní klid. Udělejte lokální opravu kanonického místa: lepší název, lepší odkaz, kratší formulaci, jasnější kontrolní otázku. Potom počkejte na další přirozené použití.
+
+Čtvrtý výsledek: běžné použití odhalilo nový návratový signál. Například pravidlo samo funguje, ale objevila se nová situace, kterou nepokrývá. V takovém případě nerozšiřujte pravidlo rovnou. Zapište signál, oddělte ho od původního tématu a otevřete novou malou smyčku jen tehdy, když má konkrétní pracovní místo.
+
+### Praktický příklad
+
+```text
+Téma:
+Nová pole ve formulářích musí mít rozhodovací účel.
+
+První běžné použití:
+Produktový tým připravuje registrační formulář pro pilotní SaaS modul.
+
+Kanonické místo:
+Checklist formulářů v publikačním procesu.
+
+Co se stalo:
+Tým našel pravidlo bez dotazu, u pole "velikost firmy" zapsal rozhodnutí, které se podle něj má udělat, a u pole "telefon" žádné rozhodnutí nenašel.
+
+Výsledek:
+Pravidlo obstálo. Pole "telefon" se nepřidává.
+
+Co neměníme:
+Nerozšiřujeme pravidlo na celý obchodní proces, neděláme audit starých formulářů a nepřidáváme sledování opuštění pole.
+
+Privacy-first výsledek:
+V pracovním zápisu zůstává jen zobecněný závěr. Neukládáme testovací vyplněná data ani screenshot formuláře.
+```
+
+Příklad je záměrně malý. Dobré první běžné použití nemá dokazovat všechno. Má ukázat, že pravidlo umí pracovat bez toho, aby kolem něj tým znovu stavěl lešení.
+
+### Kdy běžné použití neprotahovat
+
+Největší riziko této fáze je přílišná pečlivost. Tým má čerstvě za sebou návratový signál, uzavření, ověření a návrat do klidu. Mozek si zvykne, že téma je důležité, a začne hledat další místa, kde by se pravidlo mohlo "ještě pro jistotu" prověřit.
+
+Zastavte se, když platí aspoň jedna z těchto vět:
+
+- Pravidlo se použilo a neobjevil se návratový signál.
+- Lokální tření má opravu na stejném místě a nepotřebuje širší analýzu.
+- Nový nápad nesouvisí s původním pravidlem, jen se objevil ve stejné pracovní chvíli.
+- Chybí konkrétní pracovní místo pro další krok.
+- Další kontrola by vyžadovala nové osobní údaje, exporty nebo sledování bez jasného rozhodovacího účelu.
+
+Codyho komentář: v provozu existuje zvláštní druh prokrastinace, který vypadá jako odpovědnost. Říká si "ještě to raději zkontrolujeme". Někdy je to moudré. Často je to jen elegantní způsob, jak nenechat hotovou věc být hotovou.
+
+### Privacy-first hranice
+
+První běžné použití po návratu do klidu má pracovat s minimem nové stopy. Nepotřebujete měřit každé kliknutí, nahrávat průchod formulářem ani ukládat celý obsah testovacího vyplnění. Pokud pravidlo řeší omezení sběru dat, bylo by dost komické ověřovat ho tím, že si vyrobíte další zbytečná data. Komické, ale bohužel velmi lidské.
+
+Použijte tento filtr:
+
+```text
+Stačí nám pro uzavření běžného použití pozorování, nebo opravdu potřebujeme nový důkaz?
+```
+
+Ve většině případů stačí pozorování. Například:
+
+```text
+Při přípravě formuláře tým odstranil jedno pole bez rozhodovacího účelu a nepřidal žádný nový sběr dat.
+```
+
+To je dost. Není potřeba držet screenshot formuláře, kopii interní debaty ani testovací záznamy. Pokud přece jen vznikne pomocný podklad, dejte mu krátkou životnost a jasný účel. Po lokální opravě ho smažte, anonymizujte nebo vraťte do původního zdroje pravdy podle pravidel týmu.
+
+### Karta prvního běžného použití po stabilním klidu
+
+```text
+Téma nebo pravidlo:
+
+Kanonické místo:
+
+První běžné použití nastalo při:
+
+Použil pravidlo někdo bez mimořádné podpory?
+- ano / částečně / ne
+
+Co pravidlo pomohlo rozhodnout:
+
+Výsledek:
+- pravidlo obstálo
+- stačí lokální zpřesnění
+- pravidlo stálo na čerstvé paměti
+- objevil se nový návratový signál
+
+Nejmenší další krok:
+
+Co výslovně neotevíráme:
+
+Privacy-first hranice:
+Které nové stopy nevytváříme, mažeme nebo necháváme jen jako zobecněný závěr:
+
+Vlastník:
+
+Datum:
+```
+
+Karta má být krátká. Pokud se nevejde na jednu obrazovku, pravděpodobně do ní cpete historii, která patří do starého rozhodovacího záznamu. První běžné použití má odpovědět na jednoduchou otázku: funguje pravidlo normálně, nebo ještě potřebuje malou opravu?
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: pojmenujte běžnou pracovní situaci, ve které se pravidlo objevilo.
+2. Minuta 2: ověřte, že člověk našel kanonické místo bez mimořádné podpory.
+3. Minuta 3: napište, co pravidlo pomohlo rozhodnout.
+4. Minuta 4: vyberte jeden ze čtyř výsledků.
+5. Minuta 5: zapište, co výslovně neotevíráte.
+6. Minuta 6: proveďte privacy-first úklid nebo potvrďte, že žádná nová stopa nevznikla.
+
+Workshop končí větou:
+
+```text
+Při prvním běžném použití pravidlo ..., další krok je ..., a neotevíráme ...
+```
+
+Například:
+
+```text
+Při prvním běžném použití pravidlo zabránilo přidání pole bez rozhodovacího účelu, další krok není potřeba, a neotevíráme audit starých formulářů.
+```
+
+To je zdravý konec. Žádné konfety, žádný nový dashboard, žádná tajná tabulka. Jen pravidlo, které udělalo práci a může zase mlčet.
+
+### Checklist prvního běžného použití
+
+- Nastalo použití v přirozené pracovní situaci, ne v umělé kontrole?
+- Použil někdo pravidlo z kanonického místa?
+- Nebylo potřeba znovu vysvětlovat celou historii návratového signálu?
+- Pomohlo pravidlo k jednomu konkrétnímu rozhodnutí?
+- Vybrali jsme jeden ze čtyř výsledků?
+- Pokud je potřeba oprava, je lokální a patří do stejného pracovního místa?
+- Nerozšiřujeme pravidlo jen proto, že jsme u něj zrovna byli?
+- Neotevíráme audit, nové měření ani redesign bez návratového signálu?
+- Nevznikají nové screenshoty, exporty nebo osobní údaje bez jasného účelu?
+- Je jasné, zda pravidlo zůstává ve stabilním klidu, nebo čeká na další přirozené použití po lokální opravě?
+
+První běžné použití po návratu do stabilního klidu je malý test samostatnosti. Když dopadne dobře, není potřeba ho opakovat jen pro dobrý pocit. Pravidlo se má vrátit do pozadí a pomáhat v běžné práci. Nejlepší provozní pravidla nejsou ta, o kterých tým často mluví. Jsou to ta, která tiše zabrání špatnému rozhodnutí přesně ve chvíli, kdy by jinak prošlo.
+
 ## Pracovní log
 
+- 2026-06-19: Doplněna úvodní podkapitola o prvním běžném použití po návratu do stabilního klidu: najitelnost pravidla, použití bez mimořádné podpory, čtyři výsledky, privacy-first hranice, karta, mini workshop a checklist.
 - 2026-06-19: Doplněna úvodní podkapitola o návratu do stabilního klidu po ověření uzavření: kanonické místo, běžný kontrolní okamžik, odstranění mimořádné péče, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-19: Doplněna úvodní podkapitola o ověření uzavření prvního návratu při dalším běžném použití: čtyři výsledky ověření, slabé uzavření, privacy-first hranice, karta, mini workshop a checklist.
 - 2026-06-19: Doplněna úvodní podkapitola o uzavření prvního návratového signálu po stabilním klidu: pět uzavíracích stavů, lokální oprava versus omezené ověření, privacy-first úklid, karta, mini workshop a checklist.
