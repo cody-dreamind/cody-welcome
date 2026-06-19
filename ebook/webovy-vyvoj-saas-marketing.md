@@ -232373,8 +232373,185 @@ Když se workshop zasekne na tom, zda pravidlo vlastně platí, nepřetahujte ho
 
 Uzavření prvního běžného použití je drobná brzda proti věčnému dolaďování. Když pravidlo funguje, nechte ho pracovat. Když potřebuje jednu opravu, udělejte jednu. Když nefunguje jako běžné pravidlo, přiznejte to a otevřete novou malou smyčku. Všechno mezi tím je jen administrativní mlha v hezčím svetru.
 
+## Druhé běžné použití po uzavřeném ověření pravidla
+
+První běžné použití ukáže, jestli pravidlo umí přežít první kontakt s realitou po uzavřeném ověření. Druhé běžné použití ověřuje něco trochu jiného: jestli pravidlo funguje i bez čerstvé paměti, bez energie posledního workshopu a bez člověka, který má pořád v hlavě celou historii. Právě tady se často pozná rozdíl mezi dobře předaným pravidlem a pravidlem, které jen chvíli těžilo z pozornosti týmu.
+
+Druhé použití nemá být další audit. Má přijít přirozeně, až se podobná situace objeví znovu. Pokud tým kvůli němu zakládá schůzku, vyrábí nový formulář nebo obchází lidi s otázkou "už to používáte?", pravděpodobně z něj dělá mimořádnou kontrolu. Smyslem je nechat práci běžet a potom si všimnout, jestli pravidlo pomohlo i podruhé.
+
+Začněte větou:
+
+```text
+Při druhém běžném použití ověřujeme jen:
+```
+
+Potom doplňte jednu konkrétní vlastnost pravidla:
+
+```text
+Při druhém běžném použití ověřujeme jen:
+Zda jiný člověk dokáže podle stejného pravidla rozhodnout o novém formulářovém poli bez návratu k autorovi změny nebo starému rozhodovacímu logu.
+```
+
+Tato věta chrání druhé použití před nafouknutím. Neověřujete kompletní proces, celou nabídku ani kvalitu všech šablon. Ověřujete přenositelnost jednoho pravidla v další normální pracovní situaci.
+
+### Co druhé použití opravdu testuje
+
+Druhé použití testuje tři věci:
+
+- Přenositelnost: pravidlo dokáže použít někdo jiný než člověk, který ho pomáhal zavírat.
+- Samostatnost: pravidlo obsahuje dost kontextu pro rozhodnutí, ale netahá s sebou celou historii.
+- Klid: po použití nevzniká nová kontrolní rutina, nová tabulka ani nové sledování lidí.
+
+Pokud všechny tři věci drží, pravidlo je blízko stabilnímu provozu. Tým ho může nechat v běžném rytmu a vracet se k němu až podle návratového signálu. To je zdravý výsledek: méně vysvětlování, méně dočasných poznámek, méně opakovaných debat.
+
+Když drží jen část, opravujte jen tu část. Pokud je problém v přenositelnosti, přidejte rozhodovací hranici nebo příklad. Pokud je problém v samostatnosti, vyhoďte z kanonického místa historii, která mate další použití. Pokud je problém v klidu, zrušte mimořádné sledování a nechte pravidlo dýchat. Ano, i dokumentace občas potřebuje méně péče, ne víc vitamínů.
+
+### Čtyři výsledky druhého běžného použití
+
+Po druhém použití vyberte jeden ze čtyř výsledků:
+
+- Pravidlo je přenositelné: použil ho jiný člověk nebo jiný pracovní kontext bez mimořádné podpory.
+- Pravidlo je použitelné, ale má slabou hranu: rozhodnutí proběhlo, jen bylo potřeba dovysvětlit jednu hranici.
+- Pravidlo funguje jen s čerstvou pamětí: lidé ho umí použít, ale pořád sahají po historii, autorovi nebo starém workshopu.
+- Pravidlo v druhé situaci neplatí: nová situace ukázala, že původní pravidlo mělo užší rozsah, než tým předpokládal.
+
+Výsledek `pravidlo je přenositelné` zavřete bez další práce. Zapište jen krátkou stopu, že druhé použití proběhlo v běžné trase. Nepřidávejte další kontrolu. Pokud pravidlo uspělo podruhé, jeho další odměnou je klid.
+
+U výsledku `slabá hrana` doplňte jednu větu do kanonického místa. Typicky jde o výjimku, rozhodovací otázku nebo příklad hranice. Nepřepisujte celé pravidlo. Pokud se při druhém použití ukázalo jen to, že jedna věta chybí, nedělejte z toho rekonstrukci kuchyně kvůli šuplíku.
+
+U výsledku `funguje jen s čerstvou pamětí` se vraťte k předání. Problém nemusí být ve věcné správnosti pravidla, ale v tom, že kanonické místo stále závisí na nepsaném vysvětlení. Přepište pravidlo do samostatného tvaru: situace, rozhodovací věta, hranice, příklad, návratový signál. Starý log nechte jako historii, ne jako opěrnou berli.
+
+U výsledku `v druhé situaci neplatí` nezachraňujte pravidlo výjimkami. Zapište užší rozsah a otevřete novou malou smyčku jen pro situaci, která se ukázala jako jiná. Dobré pravidlo smí být úzké. Horší je pravidlo tak široké, že pod něj spadne všechno a nevede nic.
+
+### Praktický příklad
+
+```text
+Pravidlo:
+Před prvním lidským kontaktem přidáváme do formuláře jen údaj, který mění další krok zákazníka.
+
+První běžné použití:
+Obchod odmítl povinné pole "roční rozpočet" a přesunul otázku do následného rozhovoru.
+
+Druhé běžné použití:
+Produktový tým navrhl přidat povinné pole "používaný stack", aby se lépe připravilo technické discovery.
+
+Co se stalo:
+Jiný člověk použil stejné pravidlo. Pole se nepřidalo jako povinné před prvním kontaktem, protože samo o sobě neměnilo další krok zákazníka. Tým místo toho doplnil volitelnou otázku do přípravné šablony pro discovery.
+
+Výsledek:
+Pravidlo je přenositelné.
+
+Co neotevíráme:
+Nový scoring leadů, povinné technické dotazníky, staré obchodní poznámky ani další sledování formuláře.
+
+Návratový signál:
+K pravidlu se vracíme až ve chvíli, kdy dvě po sobě jdoucí situace nedokážou rozlišit, jestli údaj mění další krok zákazníka.
+```
+
+Příklad ukazuje důležitou věc: druhé použití nemusí skončit stejnou akcí jako první. Poprvé tým otázku přesunul do rozhovoru, podruhé do přípravné šablony. Stejné pravidlo vedlo k jinému praktickému kroku, protože pracovní místo bylo jiné. To je v pořádku. Pravidlo nemá vyrábět stejné výstupy, ale lepší rozhodnutí.
+
+### Hranice mezi pravidlem a novou otázkou
+
+Druhé použití často odhalí, že tým do jednoho pravidla schoval dvě podobné, ale různé otázky. Například:
+
+- Máme sbírat více údajů před prvním kontaktem?
+- Kde má zákazník předat technický kontext, který pomůže discovery?
+
+První otázka patří formuláři. Druhá může patřit přípravné šabloně, obchodnímu hovoru nebo onboardingovému dotazníku. Pokud je smícháte, tým začne hádat, jestli každé nové pole "ještě patří do pravidla". Lepší je pravidlo zúžit a druhou otázku otevřít samostatně.
+
+Použijte jednoduchý test:
+
+```text
+Řeší druhé použití stejný typ rozhodnutí, nebo jen podobné téma?
+```
+
+Pokud jde o stejný typ rozhodnutí, pravidlo může stačit. Pokud jde jen o podobné téma, neohýbejte ho. Napište novou pracovní otázku a vyberte nové nejbližší pracovní místo. Podobnost slov není totéž co stejná rozhodovací situace.
+
+### Privacy-first hranice druhého použití
+
+Druhé běžné použití je lákavý okamžik pro sběr "trochu víc dat", protože tým chce vědět, jestli pravidlo drží. Držte se minima. Nepotřebujete sledovat jednotlivé lidi, ukládat kompletní zákaznické zprávy ani vytvářet export všech formulářových odpovědí.
+
+Stačí provozní věta:
+
+```text
+Pravidlo použil jiný člověk v další běžné situaci bez návratu k historii.
+```
+
+Nebo:
+
+```text
+Druhá situace nebyla stejný typ rozhodnutí; pravidlo zužujeme na formulář před prvním kontaktem a technický kontext otevíráme jako samostatnou otázku.
+```
+
+Takové věty dávají týmu paměť bez zbytečných osobních údajů. Pokud potřebujete příklad, popište typ situace, ne konkrétního zákazníka. Udržujte pracovní stopu krátkou, anonymizovanou a navázanou na rozhodnutí.
+
+### Karta druhého běžného použití
+
+```text
+Pravidlo:
+
+Kanonické místo:
+
+První běžné použití bylo uzavřeno jako:
+
+Druhá běžná pracovní situace:
+
+Ověřovali jsme jen:
+
+Výsledek:
+- pravidlo je přenositelné
+- pravidlo je použitelné, ale má slabou hranu
+- pravidlo funguje jen s čerstvou pamětí
+- pravidlo v druhé situaci neplatí
+
+Jedna změna, pokud je potřeba:
+
+Zúžený rozsah pravidla, pokud se ukázal:
+
+Co výslovně neotevíráme:
+
+Privacy-first stopa:
+Co ponecháváme:
+Co mažeme nebo neotevíráme:
+Co anonymizujeme:
+
+Návratový signál:
+
+Datum:
+```
+
+Kartu nepoužívejte jako docházku k pravidlu. Nepište do ní jména lidí jen proto, že někdo pravidlo použil. Role nebo pracovní situace obvykle stačí: obchod, marketing, produkt, support, příprava discovery, úprava formuláře, revize checklistu.
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: pojmenujte druhou běžnou pracovní situaci.
+2. Minuta 2: ověřte, zda jde o stejný typ rozhodnutí jako u pravidla.
+3. Minuta 3: použijte kanonické pravidlo bez starého logu.
+4. Minuta 4: vyberte jeden ze čtyř výsledků.
+5. Minuta 5: proveďte nejvýše jednu úpravu hranice, samostatnosti nebo rozsahu.
+6. Minuta 6: napište, co se výslovně neotevírá.
+7. Minuta 7: zapište privacy-first stopu a návratový signál.
+
+Pokud se ukáže, že druhá situace není stejný typ rozhodnutí, workshop hned zkraťte. Nechte původní pravidlo v jeho rozsahu a otevřete novou otázku zvlášť. Sedm minut stačí na rozlišení; na novou smyčku si vyhraďte samostatný průchod.
+
+### Checklist druhého běžného použití
+
+- Přišlo druhé použití přirozeně, ne jako uměle vyvolaná kontrola?
+- Použil pravidlo někdo jiný, jiná role nebo jiný pracovní kontext?
+- Ověřili jsme, že jde o stejný typ rozhodnutí, ne jen podobné téma?
+- Šlo pravidlo použít bez autora změny a starého rozhodovacího logu?
+- Vybrali jsme jeden ze čtyř výsledků?
+- Pokud chyběla hranice, doplnili jsme jen jednu větu nebo příklad?
+- Pokud pravidlo záviselo na čerstvé paměti, přepsali jsme ho do samostatnějšího tvaru?
+- Pokud druhá situace nepatřila do rozsahu pravidla, zúžili jsme pravidlo místo hromadění výjimek?
+- Nepřidali jsme sledování lidí, exporty zákaznických dat ani novou kontrolní rutinu?
+- Zůstala po použití jen krátká, anonymizovaná a rozhodovací stopa?
+
+Druhé běžné použití po uzavřeném ověření je test přenositelnosti. Když pravidlo pomůže i podruhé a nepotřebuje kolem sebe mimořádnou péči, nechte ho v běžném provozu. Když ukáže jednu slabou hranu, opravte jednu hranu. Když ukáže jinou otázku, otevřete jinou otázku. Tím se pravidla nestávají objemnějšími, ale užitečnějšími.
+
 ## Pracovní log
 
+- 2026-06-19: Doplněna úvodní podkapitola o druhém běžném použití po uzavřeném ověření pravidla: přenositelnost, samostatnost, klid, čtyři výsledné stavy, praktický příklad, privacy-first stopa, karta, workshop a checklist.
 - 2026-06-19: Doplněna úvodní podkapitola o uzavření prvního běžného použití po uzavřeném ověření pravidla: čtyři uzavírací stavy, praktický příklad, propsání do kanonického místa, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-19: Doplněna úvodní podkapitola o prvním běžném použití po uzavřeném ověření pravidla: čtyři výsledky použití, praktický příklad formulářového rozhodnutí, lokální opravy, privacy-first hranice, karta, mini workshop a checklist.
 - 2026-06-19: Doplněna úvodní podkapitola o uzavření ověření pravidla po předání do týmové paměti: čtyři uzavírací stavy, kanonické znění, privacy-first úklid, karta, mini workshop a checklist.
