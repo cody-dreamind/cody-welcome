@@ -229800,8 +229800,153 @@ Druhé běžné použití po návratu do stabilního klidu je konečně docela n
 
 Po druhém dobrém použití si proto napište i zákaz další kontroly: kdy pravidlo znovu otevřete a co naopak nebude důvodem k návratu. Bez téhle věty se stabilní klid snadno změní v pravidelnou kontrolu pro kontrolu.
 
+## Uzavření druhého běžného použití po návratu do stabilního klidu
+
+Druhé běžné použití po návratu do stabilního klidu má jasný konec: pravidlo buď zůstává v klidu, dostane drobnou lokální opravu, nebo se z něj oddělí nový návratový signál. Nejhorší výsledek je čtvrtá, nepojmenovaná varianta: "ještě to budeme sledovat". To většinou znamená, že tým nechce rozhodnout, a tak si pořídí malý interní seriál o stejné věci.
+
+Uzavření má proto udělat tři věci. Zaprvé říct, co druhé použití opravdu prokázalo. Zadruhé propsat výsledek do kanonického pracovního místa, aby další člověk nemusel hledat poslední debatu. Zatřetí zavřít mimořádnou pozornost: žádná další kontrola, pokud nenastane předem popsaný návratový signál.
+
+Začněte větou:
+
+```text
+Po druhém běžném použití pravidlo ..., proto ho ...
+```
+
+Příklady:
+
+```text
+Po druhém běžném použití pravidlo obstálo samostatně, proto ho vracíme do stabilního klidu a neplánujeme další kontrolu.
+```
+
+```text
+Po druhém běžném použití pravidlo pomohlo rozhodnout, ale chyběl jeden příklad u formulářových změn, proto doplňujeme příklad a další ověření neotevíráme.
+```
+
+```text
+Po druhém běžném použití pravidlo narazilo na nový návratový signál v obchodním procesu, proto uzavíráme toto použití a otevíráme samostatnou malou smyčku jen pro obchodní dopad.
+```
+
+Tahle věta je důležitější než dlouhý zápis. Když ji neumíte napsat, výsledek druhého použití ještě není jasný. Neřešte to další kontrolou. Vraťte se ke čtyřem výsledným stavům a vyberte jeden.
+
+### Tři způsoby uzavření
+
+**1. Návrat do stabilního klidu.** Použijte ho, když pravidlo fungovalo samostatně. Do kanonického místa přidejte maximálně krátkou poznámku typu "ověřeno i při druhém běžném použití". Nezakládejte novou kartu údržby. Právě jste dokázali, že pravidlo nepotřebuje zvláštní péči.
+
+**2. Lokální dočištění bez nové smyčky.** Použijte ho, když pravidlo fungovalo, ale někde drhlo malé slovo, odkaz nebo příklad. Oprava musí být tak úzká, aby se dala udělat přímo ve stejném pracovním místě. Jakmile kvůli ní otevíráte novou stránku, nové měření nebo nový workshop, už nejde o lokální dočištění.
+
+**3. Oddělení nového návratového signálu.** Použijte ho, když druhé použití ukázalo skutečný rozpor mimo původní rozsah. Tento rozpor nelepte na uzavření druhého použití. Zapište ho jako nový signál, dejte mu vlastní pracovní místo a u starého pravidla jasně napište, že jeho druhé použití je uzavřené.
+
+Rozdíl mezi druhým a třetím stavem je praktický: lokální dočištění zlepšuje použitelnost stejného pravidla, nový návratový signál otevírá jinou otázku. Když si nejste jistí, zeptejte se: "Stačí upravit jednu větu v místě použití?" Pokud ano, nekomplikujte to. Pokud ne, oddělte novou smyčku.
+
+### Zákaz další kontroly
+
+Po uzavření napište i zákaz další kontroly. Ne proto, aby tým nic neviděl, ale aby se stabilní klid nezměnil v nekonečné hlídání. Dobrá věta má dvě části: kdy se vrátíme a co není důvodem k návratu.
+
+```text
+Pravidlo znovu otevřeme jen tehdy, když ...
+Za důvod k návratu nepovažujeme ...
+```
+
+Příklad:
+
+```text
+Pravidlo znovu otevřeme jen tehdy, když dvě různé formulářové změny za sebou narazí na nejasnost, zda je údaj opravdu nutný pro rozhodnutí.
+Za důvod k návratu nepovažujeme jednotlivý nápad přidat nové pole, pokud ho pravidlo umí normálně posoudit.
+```
+
+Tím se tým chrání před falešným poplachem. Jedna běžná žádost není návratový signál. Je to běžné použití pravidla. Kdyby každé použití otevíralo novou kontrolu, pravidlo by nebylo pomůcka, ale administrativní ruční brzda. A ty umí jezdit pořádně draze, i když se tváří nenápadně.
+
+### Privacy-first uzavření
+
+Uzavření druhého použití je dobré místo pro úklid datové stopy. Druhé použití často vytvoří pracovní poznámky: návrh změny, komentář v úkolu, screenshot, příklad formuláře, krátký export nebo shrnutí obchodního dopadu. Ne všechno má zůstat.
+
+Použijte jednoduché pravidlo:
+
+```text
+Do stabilního klidu přenášíme pravidlo a zobecněný závěr, ne pracovní důkazy s osobními údaji.
+```
+
+Prakticky to znamená:
+
+- ponechte kanonickou větu pravidla;
+- ponechte jeden anonymizovaný příklad, pokud zlepšuje rozhodování;
+- smažte nebo zavřete dočasné podklady, které už splnily účel;
+- nepřidávejte novou evidenci jen proto, že se uzavření povedlo;
+- pokud byl použit reálný zákaznický příklad, přepište ho na vzor bez identifikovatelných detailů.
+
+Privacy-first provoz není jen o tom, co nesbírat na webu. Je i o tom, co zbytečně netahat do týmové paměti. Čím méně historických stop pravidlo potřebuje, tím lépe se udržuje a tím menší je riziko, že se staré pracovní údaje budou vracet při každé budoucí debatě.
+
+### Karta uzavření druhého použití
+
+```text
+Karta uzavření druhého běžného použití
+
+Pravidlo / pracovní místo:
+
+Co druhé použití prokázalo:
+
+Uzavírací stav:
+- návrat do stabilního klidu
+- lokální dočištění bez nové smyčky
+- oddělení nového návratového signálu
+
+Co zapisujeme do kanonického místa:
+
+Co mažeme, anonymizujeme nebo nepřenášíme:
+
+Zákaz další kontroly:
+Pravidlo znovu otevřeme jen tehdy, když:
+
+Za důvod k návratu nepovažujeme:
+
+Pokud vznikl nový signál, jeho samostatné pracovní místo:
+
+Vlastník:
+
+Datum:
+```
+
+Karta má být závěrečná, ne rozjezdová. Pokud se v ní začne objevovat pět dalších úkolů, vraťte se k uzavíracímu stavu. Buď jde o lokální dočištění, nebo o samostatný návratový signál. Obojí se dá zapsat bez toho, aby se původní větev znovu nafoukla.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte závěr druhého běžného použití.
+2. Minuta 2: vyberte jeden ze tří uzavíracích stavů.
+3. Minuta 3: napište jednu větu do kanonického pracovního místa.
+4. Minuta 4: určete, které pracovní podklady se mažou, anonymizují nebo nepřenášejí.
+5. Minuta 5: napište zákaz další kontroly.
+6. Minuta 6: pokud vznikl nový signál, oddělte ho do samostatného pracovního místa.
+
+Workshop končí větou:
+
+```text
+Druhé běžné použití uzavíráme jako ..., do kanonického místa píšeme ..., a další kontrolu otevíráme jen při ...
+```
+
+Například:
+
+```text
+Druhé běžné použití uzavíráme jako návrat do stabilního klidu, do kanonického místa píšeme anonymizovaný příklad volby checklistu místo profilového pole, a další kontrolu otevíráme jen při opakované nejasnosti ve dvou různých formulářových změnách.
+```
+
+### Checklist uzavření
+
+- Vybrali jsme jeden jasný uzavírací stav?
+- Umíme jednou větou říct, co druhé použití prokázalo?
+- Propsali jsme výsledek do kanonického pracovního místa?
+- Pokud je potřeba oprava, je skutečně lokální?
+- Pokud vznikl nový signál, oddělili jsme ho od uzavírané větve?
+- Napsali jsme, kdy se pravidlo znovu otevře?
+- Napsali jsme, co naopak není důvodem k návratu?
+- Smazali jsme, anonymizovali nebo zavřeli dočasné pracovní podklady?
+- Nepřenášíme do stabilního klidu osobní údaje, screenshoty nebo exporty bez účelu?
+- Nezakládáme další kontrolu jen proto, že pravidlo bylo právě vidět?
+
+Uzavření druhého běžného použití je malé administrativní gesto s velkým provozním dopadem. Říká týmu: pravidlo funguje, víme kde žije, víme kdy se k němu vrátit a teď ho necháme pracovat potichu. To je přesně ten druh klidu, který dobrý SaaS potřebuje. Ne klid bez problémů, ale klid bez zbytečného šťourání.
+
 ## Pracovní log
 
+- 2026-06-19: Doplněna úvodní podkapitola o uzavření druhého běžného použití po návratu do stabilního klidu: uzavírací stavy, zákaz další kontroly, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-19: Zpřesněna závěrečná poznámka po druhém běžném použití pravidla o zákaz další kontroly bez skutečného návratového signálu.
 - 2026-06-19: Doplněna úvodní podkapitola o druhém běžném použití po návratu do stabilního klidu: přenositelnost pravidla, čtyři výsledné stavy, příklad formulářového rozhodnutí, privacy-first hranice, karta, mini workshop a checklist.
 - 2026-06-19: Doplněna úvodní podkapitola o prvním běžném použití po návratu do stabilního klidu: najitelnost pravidla, použití bez mimořádné podpory, čtyři výsledky, privacy-first hranice, karta, mini workshop a checklist.
