@@ -230746,8 +230746,203 @@ Pokud se během sedmi minut nedostanete k rozhodnutí, nezvětšujte workshop. Z
 
 První běžné použití po uzavřeném návratu má vrátit pravidlo do obyčejné práce. Když pravidlo pomůže rozhodnout a nic dalšího nevznikne, je to úspěch. Když odhalí jednu malou nejasnost, opravte ji u pracovního místa. Když se objeví skutečný návratový signál, otevřete malou smyčku. Všechno ostatní je šum, který se nemusí stát projektem jen proto, že zrovna zaklepal na dveře.
 
+## Uzavření prvního běžného použití po uzavření návratu z tiché údržby
+
+První běžné použití po uzavřeném návratu nestačí jen provést. Je potřeba ho také správně zavřít, aby se z něj nestal nový stínový režim. Tým se snadno nechá zlákat větou: "Dobře, pravidlo fungovalo, ještě to párkrát pohlídáme." To zní rozumně, ale často tím znovu zavádí mimořádnou péči, kterou se předchozí kroky snažily ukončit.
+
+Uzavření má odpovědět na jednu otázku:
+
+```text
+Může se pravidlo po tomto běžném použití vrátit do tichého provozu, nebo vznikl konkrétní důvod pro malou opravu?
+```
+
+Nejde o hodnocení celé oblasti. Nehodnotíte, jestli je formulář perfektní, onboarding ideální nebo marketingová šablona navždy hotová. Hodnotíte jen to, co se stalo při jednom běžném použití pravidla po uzavřeném návratu. Pokud rozsah udržíte takhle malý, uzavření trvá pár minut. Pokud ho pustíte na volno, velmi rychle se převlékne za strategickou debatu a začne po stole rozhazovat úkoly.
+
+Začněte větou:
+
+```text
+První běžné použití uzavíráme jako:
+```
+
+Potom vyberte jeden stav. Jedno použití má mít jeden hlavní závěr. Pokud máte pocit, že se hodí dva stavy najednou, obvykle mícháte výsledek použití s novým podnětem. Výsledek zavřete tady. Podnět zapište vedle a otevřete ho až s vlastním důvodem.
+
+### Čtyři uzavírací stavy
+
+Použijte jeden ze čtyř stavů:
+
+- návrat do tichého provozu;
+- lokální doplnění nápovědy;
+- malá oprava rozhodovací hrany;
+- otevření nové návratové smyčky.
+
+Stav `návrat do tichého provozu` použijte, když pravidlo pomohlo rozhodnout, pracovní místo bylo dostatečné a nevznikla nejasnost. V takovém případě nezakládejte další kontrolu. Zapište výsledek u pracovního místa a pravidlo nechte být. Je lákavé udělat si drobnou poznámku "ověřit při příštím použití", ale pokud k tomu není návratový signál, jen vyrábíte budoucí práci.
+
+Stav `lokální doplnění nápovědy` použijte, když pravidlo fungovalo, ale v jednom konkrétním místě chyběla malá opora. Může to být věta v šabloně, příklad u pole, krátký odkaz na kanonické pravidlo nebo vysvětlení, proč se nějaký údaj nesbírá. Lokální nápověda nesmí přepsat princip. Má jen snížit tření v místě, kde člověk rozhoduje.
+
+Stav `malá oprava rozhodovací hrany` použijte, když pravidlo bylo najitelné, ale nedokázalo rozhodnout. Tady už nejde jen o nápovědu. Chybí kritérium, hranice, příklad nebo stop podmínka. Oprava má být malá a měřitelná: doplnit jednu rozhodovací otázku, jeden negativní příklad nebo jednu větu, kdy pravidlo nepoužít. Neotevírejte celé pravidlo, pokud selhala jen jedna hrana.
+
+Stav `otevření nové návratové smyčky` použijte jen tehdy, když se naplnila předem zapsaná návratová podmínka. To je důležité. Návratová smyčka se neotevírá proto, že se někomu pravidlo nelíbí, že rozhodnutí bylo nepohodlné nebo že se objevila nová zajímavá otázka. Otevírá se proto, že nastal signál, se kterým pravidlo samo počítalo.
+
+### Praktický příklad
+
+```text
+Pravidlo:
+Nový údaj do formuláře přidáváme jen tehdy, když mění konkrétní další krok.
+
+První běžné použití:
+Marketing navrhl pole "počet zaměstnanců". Tým podle pravidla zjistil, že odpověď zatím nemění follow-up.
+
+Výsledek použití:
+Pravidlo fungovalo bez změny.
+
+Uzavírací stav:
+Návrat do tichého provozu.
+
+Zápis u pracovního místa:
+Pole "počet zaměstnanců" nepřidáváme. Důvod: neexistuje navazující rozhodnutí, které by odpověď změnila.
+
+Co se neotevírá:
+Nepřidáváme další kvalifikační pole, neprocházíme staré leady, nevyrábíme nový scoring.
+
+Návratový signál:
+Vrátíme se jen tehdy, když obchod u dvou relevantních poptávek za sebou doloží, že bez velikosti týmu nemůže zvolit další krok.
+```
+
+Tento příklad ukazuje důležitou věc: uzavření může přidat návratový signál, aniž by otevřelo práci hned teď. To je zdravý kompromis. Tým nepředstírá, že téma nemůže být důležité později, ale zároveň kvůli dnešnímu neurčitému pocitu nezačne sbírat další osobní údaj.
+
+### Jak zavřít lokální nápovědu
+
+Lokální nápovědu zavírejte u místa, kde vzniklo tření. Pokud člověk váhal v šabloně formuláře, doplňte větu do šablony formuláře. Pokud se zasekl v checklistu kampaně, doplňte ji tam. Nepřidávejte ji do tří dokumentů "pro jistotu". Každá kopie je budoucí rozpor v čekárně.
+
+Dobrá lokální nápověda má tři vlastnosti:
+
+- je krátká;
+- používá jazyk konkrétní práce;
+- nevyžaduje znalost historie.
+
+Špatná nápověda zní jako interní archeologie: "Podle rozhodnutí z minulé iterace, které reagovalo na návratový signál po tiché údržbě..." To možná potěší autora systému, ale člověk v běžné práci potřebuje něco jiného: "Pole přidejte jen tehdy, když podle odpovědi změníte další follow-up."
+
+Codyho komentář: pokud nápověda potřebuje rodokmen, není to nápověda. Je to muzeum procesu s cedulkou u exponátu.
+
+### Jak zavřít malou opravu rozhodovací hrany
+
+Když pravidlo nebylo rozhodnutelné, nejdřív popište přesnou mezeru. Nepište "pravidlo je nejasné". Napište například:
+
+```text
+Nejasnost:
+Pravidlo říká, že údaj musí měnit další krok, ale neříká, jestli se počítá i ruční priorizace leadů bez změny follow-upu.
+```
+
+Potom doplňte nejmenší hranu:
+
+```text
+Doplnění pravidla:
+Ruční priorizace sama o sobě nestačí. Údaj přidáváme až tehdy, když podle něj měníme odpověď, směrování, čas reakce, nabídku nebo navazující otázku.
+```
+
+Opravu zavřete až ve chvíli, kdy ji umíte použít na původní situaci. Pokud doplněná věta stále nevede k rozhodnutí, oprava je větší než jedna hrana a potřebuje samostatnou malou smyčku. To není katastrofa. Jen to nebalte do rychlého uzavření, protože by se nejasnost vrátila při dalším použití a tvářila se překvapeně.
+
+### Privacy-first uzavření
+
+Uzavření prvního běžného použití má držet datovou stopu ještě menší než samotné použití. V ideálním případě zůstane jen rozhodnutí, odkaz na pravidlo a zobecněný důvod. Pokud doplňujete nápovědu nebo opravujete hranu, nepotřebujete k tomu kopírovat celé zákaznické zprávy, CRM exporty ani historické screenshoty.
+
+Privacy-first otázka zní:
+
+```text
+Co musí zůstat, aby příští člověk pochopil rozhodnutí, a co je jen důkazová přítěž?
+```
+
+Zachovejte:
+
+- rozhodnutí u pracovního místa;
+- krátký důvod;
+- případnou doplněnou větu nápovědy;
+- návratový signál, pokud existuje;
+- datum a vlastníka, pokud změna upravuje pravidlo.
+
+Nechte mimo nový záznam:
+
+- osobní údaje z leadů nebo zákaznických zpráv;
+- celé e-maily a interní poznámky;
+- screenshoty formulářů, pokud stačí popis pole;
+- dočasné pracovní tabulky;
+- staré výjimky, které dnešní rozhodnutí nepoužívá.
+
+Pokud potřebujete příklad pro budoucí učení, anonymizujte ho do rozhodovací věty. Místo "firma X s 18 lidmi chtěla Y" napište: "Navržený údaj neměnil follow-up, jen zvyšoval subjektivní jistotu při čtení leadu." Takový záznam učí pravidlo a současně netahá do další vrstvy osobní ani obchodně citlivá data.
+
+### Karta uzavření prvního běžného použití
+
+```text
+Pravidlo:
+
+Kanonické místo:
+
+První běžné použití:
+
+Výsledek použití:
+
+Uzavírací stav:
+- návrat do tichého provozu
+- lokální doplnění nápovědy
+- malá oprava rozhodovací hrany
+- otevření nové návratové smyčky
+
+Rozhodnutí:
+
+Co se zapisuje u pracovního místa:
+
+Co se mění v pravidle nebo nápovědě:
+
+Co se nemění:
+
+Co výslovně neotevíráme:
+
+Návratový signál:
+
+Privacy-first stopa:
+Co zůstává:
+Co mažeme nebo necháváme v původním zdroji:
+Co anonymizujeme:
+
+Vlastník:
+
+Datum:
+```
+
+Kartu nepoužívejte pokaždé mechanicky. Pokud pravidlo fungovalo a nic dalšího nevzniklo, stačí krátký zápis u pracovního místa. Karta je užitečná hlavně tehdy, když vzniká nápověda, oprava hrany nebo návratová smyčka. Jinak by se z uzavření stala administrativa, která se tváří jako disciplína a potichu požírá čas.
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: přečtěte výsledek prvního běžného použití.
+2. Minuta 2: vyberte jeden uzavírací stav.
+3. Minuta 3: napište rozhodnutí u pracovního místa.
+4. Minuta 4: určete, co se nemění a co se výslovně neotevírá.
+5. Minuta 5: pokud je potřeba, doplňte jednu nápovědu nebo jednu rozhodovací hranu.
+6. Minuta 6: zapište návratový signál, ale jen pokud má smysl.
+7. Minuta 7: udělejte privacy-first úklid stop.
+
+Pokud se během workshopu objeví potřeba řešit víc než jedno pracovní místo, uzavřete dnešní použití a větší téma zapište jako samostatný podnět. Uzavření nemá být vstupní brána do nového projektu. Má říct, jestli se pravidlo vrací do klidu, potřebuje drobnou oporu, nebo opravdu otevírá malou smyčku.
+
+### Checklist uzavření prvního běžného použití
+
+- Vybrali jsme jeden uzavírací stav?
+- Nezakládáme další kontrolu, pokud pravidlo fungovalo?
+- Je rozhodnutí zapsané u konkrétního pracovního místa?
+- Pokud doplňujeme nápovědu, je lokální a krátká?
+- Pokud opravujeme hranu, popsali jsme přesnou nejasnost?
+- Ověřili jsme, že opravená hrana rozhodne původní situaci?
+- Pokud otevíráme návratovou smyčku, sedí na předem zapsaný signál?
+- Zapsali jsme, co se nemění?
+- Zapsali jsme, co se výslovně neotevírá?
+- Nenecháváme pravidlo v mimořádné péči jen ze zvyku?
+- Uklidili jsme dočasné poznámky, screenshoty, exporty a kopie důkazů?
+- Stačí budoucímu čtenáři zobecněný důvod místo osobních nebo obchodně citlivých dat?
+
+Dobře uzavřené první běžné použití je malý návrat k normálu. Pokud pravidlo funguje, nechte ho pracovat tiše. Pokud potřebuje jednu oporu, doplňte ji tam, kde vzniklo tření. Pokud se opravdu ukáže slabá hrana, opravte ji tak úzce, aby nerozbila zbytek systému. A pokud se ozve skutečný návratový signál, otevřete malou smyčku s jasnou stop podmínkou. To je celé. Víc procesu by tady bylo jen drahé balení na malý šroubek.
+
 ## Pracovní log
 
+- 2026-06-19: Doplněna úvodní podkapitola o uzavření prvního běžného použití po návratu z tiché údržby: čtyři uzavírací stavy, lokální nápověda, oprava rozhodovací hrany, privacy-first úklid, karta, workshop a checklist.
 - 2026-06-19: Doplněna úvodní podkapitola o prvním běžném použití po uzavření návratu z tiché údržby: najitelnost, rozhodnutelnost, klid bez mimořádné kontroly, čtyři výsledky, privacy-first hranice, karta, workshop a checklist.
 - 2026-06-19: Doplněna úvodní podkapitola o uzavření prvního návratu z tiché údržby: uzavírací stavy, lokální nápověda, malá smyčka při potvrzeném signálu, privacy-first úklid, karta, workshop a checklist.
 - 2026-06-19: Doplněna úvodní podkapitola o prvním přirozeném návratu z tiché údržby: rozlišení běžného použití, lokální nápovědy a skutečného návratového signálu, privacy-first hranice, karta, mini workshop a checklist.
