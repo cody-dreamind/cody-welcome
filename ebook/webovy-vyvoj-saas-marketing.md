@@ -230377,8 +230377,210 @@ Když se tým nedohodne, jestli jde o lokální nápovědu nebo návratový sign
 
 První přirozený návrat z tiché údržby je test dospělosti pravidla. Buď se ukáže, že pravidlo prostě slouží, a tým ho nechá pracovat. Nebo se ukáže, že návratový signál je skutečný, a tým otevře jen nejmenší potřebnou smyčku. Obě varianty drží klid. Rozdíl je v tom, že jedna nechává věc běžet a druhá ji opravuje bez zbytečného hluku.
 
+## Uzavření prvního návratu z tiché údržby
+
+První návrat z tiché údržby nesmí zůstat viset jako poznámka "ještě se uvidí". Jakmile tým rozlišil běžné použití, lokální nápovědu nebo skutečný návratový signál, potřebuje návrat zavřít. Jinak se tichá údržba začne pomalu měnit v poloviční dohled: pravidlo sice formálně běží, ale někde vedle něj zůstane otevřená nejistota, ke které se každý vrací jinak.
+
+Uzavření návratu má být krátké. Nejde o novou retrospektivu, ale o potvrzení, co se stalo, co se mění a co se dál nesleduje. Nejlepší výsledek je často nudný: pravidlo se použilo, rozhodnutí padlo, nic dalšího nevzniká. Nudné uzavření je v provozu nádherná věc. Znamená, že systém funguje bez toho, aby si za každé použití účtoval další schůzku.
+
+Začněte jednou větou:
+
+```text
+První návrat z tiché údržby uzavíráme jako:
+```
+
+Potom vyberte jeden stav:
+
+- běžné použití bez změny;
+- lokální nápovědu propsanou do pracovního místa;
+- potvrzený návratový signál a otevření malé smyčky;
+- planý signál, který se neotevírá;
+- nový podnět mimo původní pravidlo.
+
+Stav `běžné použití bez změny` znamená, že pravidlo stačilo. Zapište jen rozhodnutí tam, kde se práce opravdu odehrála. Pokud se řešilo nové pole ve formuláři, výsledek patří k návrhu formuláře, ne do nové stránky dokumentace. Kanonické pravidlo zůstává beze změny.
+
+Stav `lokální nápověda` znamená, že pravidlo platí, ale v pracovním místě chyběla drobná opora. Doplnit se má nejmenší možná věc: jedna věta, jeden anonymizovaný příklad, jeden odkaz na kanonické místo nebo jedna otázka v šabloně. Jakmile úprava potřebuje vlastní vysvětlování, už to možná není nápověda, ale nová malá smyčka.
+
+Stav `potvrzený návratový signál` znamená, že se opravdu stalo to, co bylo při tiché údržbě zapsané jako důvod návratu. V tom případě neotevírejte celé téma. Otevřete jen nejbližší pracovní místo, kde se signál projevil. Pokud se dvakrát po sobě nepodařilo obhájit nové formulářové pole, neřešte celý CRM systém. Řešte předávku návrhu pole mezi marketingem a obchodem.
+
+Stav `planý signál` použijte, když se situace tvářila podobně, ale po kontrole nesedí na původní návratový signál. To není chyba. Dobře napsané pravidlo má občas odmítnout práci. Uzavřete návrat větou, proč se neotevírá, a nepřidávejte novou kontrolu jen proto, že už jste se u tématu zastavili.
+
+Stav `nový podnět mimo původní pravidlo` použijte, když dnešní situace ukázala něco užitečného, ale nesouvisí s pravidlem v tiché údržbě. Takový podnět nelepte k původní kartě. Buď ho odložte do běžného backlogu, nebo z něj udělejte samostatnou otázku s vlastním pracovním místem. Míchání nových podnětů do starých pravidel je rychlá cesta k dokumentaci, která všechno zná a ničemu nepomáhá.
+
+### Příklad uzavření
+
+```text
+Pravidlo v tiché údržbě:
+Každé nové pole ve formuláři musí mít jasný dopad na další obchodní krok.
+
+Dnešní situace:
+U nové segmentové landing page padl návrh přidat pole "velikost týmu".
+
+Výsledek návratu:
+Běžné použití bez změny.
+
+Rozhodnutí:
+Pole nepřidáváme, protože obchod neumí říct, jak odpověď změní další krok. Segmentaci zatím řešíme textem stránky a následným kvalifikačním e-mailem.
+
+Co se propíše:
+Rozhodnutí do karty landing page. Kanonické pravidlo se nemění.
+
+Co se výslovně neotevírá:
+Neotevíráme redesign formuláře, změnu CRM ani nové kvalifikační skóre.
+
+Privacy-first hranice:
+Nekopírujeme staré leady ani obchodní poznámky. Pro rozhodnutí stačila dnešní otázka a kanonické pravidlo.
+```
+
+Tento zápis je malý, ale užitečný. Chrání pravidlo před zbytečnou editací, tým před rozšířením práce a data před dalším kopírováním. Zároveň nezamlčí rozhodnutí: až se někdo za měsíc zeptá, proč tam pole není, odpověď bude u landing page, kde ji bude hledat.
+
+### Jak zavřít lokální nápovědu
+
+U lokální nápovědy si dejte pozor na tiché bobtnání. Věta "doplníme jeden příklad" se umí během deseti minut proměnit v přepis pravidla, doplnění FAQ, nový checklist a malý interní workshop. To už není nápověda. To je práce, která se převlékla za drobnost, aby prošla dveřmi.
+
+Lokální nápovědu zavřete takto:
+
+```text
+Chybějící nápověda:
+
+Doplněná věta nebo příklad:
+
+Kde přesně je doplněná:
+
+Co už dál neupravujeme:
+
+Kdy se k tomu vrátíme:
+```
+
+Příklad:
+
+```text
+Chybějící nápověda:
+U formulářového pravidla nebylo jasné, že "lepší segmentace" sama o sobě nestačí jako důvod pro nové pole.
+
+Doplněná věta:
+Nový údaj přidáváme jen tehdy, když mění konkrétní další krok, ne jen pocitově zpřesňuje segmentaci.
+
+Kde přesně je doplněná:
+U šablony návrhu nového formulářového pole.
+
+Co už dál neupravujeme:
+Kanonické pravidlo, CRM pole ani staré formuláře.
+
+Kdy se k tomu vrátíme:
+Pouze pokud se stejná nejasnost objeví při dalším návrhu pole.
+```
+
+Po doplnění nápovědy už nevytvářejte zvláštní ověřovací režim. Nápověda se ověří přirozeně při dalším použití stejného pracovního místa. Pokud se nepoužije, nevadí. Ne každá drobná opora potřebuje vlastní kontrolní rituál. Některé věci prostě mají ležet u práce a čekat, až budou potřeba.
+
+### Jak otevřít malou smyčku při potvrzeném signálu
+
+Když se návratový signál potvrdí, uzavření prvního návratu zároveň otevírá novou malou smyčku. To zní jako protimluv, ale není. Uzavíráte zjištění "ano, signál nastal" a teprve potom otevíráte nejmenší opravu.
+
+Malá smyčka musí mít tři hranice:
+
+- jedno pracovní místo;
+- jednu otázku;
+- jednu stop podmínku.
+
+Příklad:
+
+```text
+Pracovní místo:
+Šablona návrhu nového formulářového pole.
+
+Otázka:
+Umí šablona donutit autora návrhu říct, jak nový údaj změní další obchodní krok?
+
+Stop podmínka:
+Do šablony doplníme jednu povinnou větu "Tento údaj změní další krok tak, že..." a použijeme ji při nejbližším návrhu pole.
+```
+
+Všimněte si, že smyčka neříká "zlepšíme kvalifikaci leadů". To by bylo moc široké. Říká, kde se práce stane, jakou otázku odpoví a kdy se zastaví. Přesně tak má vypadat návrat z klidu: žádný ohňostroj, jen malá oprava na místě, kde pravidlo narazilo.
+
+### Privacy-first uzavření
+
+Uzavření prvního návratu je vhodná chvíle uklidit datovou stopu. Během návratu mohly vzniknout dočasné poznámky, screenshoty návrhů, výřezy z CRM, anonymizované příklady nebo odkazy na staré rozhodovací karty. Nenechávejte je žít jen proto, že "by se mohly hodit". Tato věta je datový sklad v mikině.
+
+Použijte tři otázky:
+
+- Co musí zůstat jako důkaz rozhodnutí?
+- Co stačí zobecnit do jedné věty?
+- Co smažeme, zavřeme nebo necháme v původním zdroji pravdy?
+
+U běžného použití většinou zůstává jen rozhodnutí v pracovním místě. U lokální nápovědy zůstává nová věta nebo anonymizovaný příklad. U potvrzeného návratového signálu může zůstat karta malé smyčky, ale i ta má obsahovat minimum dat. Pokud nepotřebujete jména zákazníků, konkrétní e-maily ani celé obchodní poznámky, nechte je tam, kde mají retenční pravidla a oprávnění.
+
+Codyho komentář: privacy-first provoz není o tom, že si tým zaváže oči a odmítne důkazy. Je o tom, že si neplete důkaz s hromadou surových stop. Dobrý závěr má nést smysl situace, ne batoh osobních údajů.
+
+### Karta uzavření prvního návratu
+
+```text
+Pravidlo v tiché údržbě:
+
+Dnešní pracovní situace:
+
+Uzavírací stav:
+- běžné použití bez změny
+- lokální nápověda propsaná do pracovního místa
+- potvrzený návratový signál a otevření malé smyčky
+- planý signál, který se neotevírá
+- nový podnět mimo původní pravidlo
+
+Rozhodnutí:
+
+Co se mění:
+
+Co se nemění:
+
+Co výslovně neotevíráme:
+
+Nejbližší pracovní místo, pokud vzniká další krok:
+
+Stop podmínka, pokud vzniká malá smyčka:
+
+Privacy-first úklid:
+Co zůstává:
+Co zobecňujeme:
+Co mažeme, zavíráme nebo necháváme v původním zdroji:
+
+Vlastník:
+
+Datum:
+```
+
+Kartu nepoužívejte pro každé obyčejné použití pravidla. Použijte ji, když vzniká nápověda, potvrzený signál, planý signál nebo nový podnět. Běžné použití bez změny má zůstat lehké; jinak by pravidlo sice fungovalo, ale tým by platil administrativní daň za každé správné rozhodnutí.
+
+### Mini workshop na 8 minut
+
+1. Minuta 1: přečtěte výsledek prvního návratu z tiché údržby.
+2. Minuta 2: vyberte jeden uzavírací stav.
+3. Minuty 3 až 4: napište rozhodnutí a co se výslovně neotevírá.
+4. Minuta 5: pokud jde o nápovědu, napište přesnou větu nebo příklad.
+5. Minuta 6: pokud jde o návratový signál, určete jedno pracovní místo a stop podmínku malé smyčky.
+6. Minuta 7: udělejte privacy-first úklid dočasných stop.
+7. Minuta 8: zapište výsledek do místa, kde ho příští člověk přirozeně najde.
+
+Když se workshop začne rozlévat do debaty o celé oblasti, vraťte se k uzavíracímu stavu. Tato schůzka nemá řešit, jak má firma obecně pracovat s formuláři, onboardingem nebo obchodem. Má zavřít jeden návrat z tiché údržby. Všechno větší patří do nové otázky s vlastním rozsahem.
+
+### Checklist uzavření návratu
+
+- Vybrali jsme jeden uzavírací stav?
+- Je jasné, jestli se pravidlo mění, zůstává, nebo otevírá malou smyčku?
+- Pokud šlo o běžné použití, nevyrábíme další kontrolu?
+- Pokud doplňujeme nápovědu, je to opravdu jen jedna malá opora v pracovním místě?
+- Pokud se potvrdil návratový signál, má reakce jedno pracovní místo a stop podmínku?
+- Pokud šlo o planý signál, napsali jsme, proč se neotevírá?
+- Pokud vznikl nový podnět, nelepíme ho k původnímu pravidlu?
+- Zapsali jsme, co se výslovně neotevírá?
+- Uklidili jsme dočasné poznámky, exporty, screenshoty a kopie důkazů?
+- Stačí zůstat u zobecněného závěru místo surových osobních dat?
+- Je výsledek uložený tam, kde ho příští člověk přirozeně najde?
+
+Dobré uzavření prvního návratu z tiché údržby má nevděčnou roli: brání tomu, aby se užitečné pravidlo zase stalo projektem. Když pravidlo funguje, nechá ho pracovat. Když potřebuje drobnou oporu, doplní ji na správné místo. Když se opravdu objeví návratový signál, otevře jen malou smyčku. Všechno ostatní nechá být, což je v digitálním provozu často nejpodceňovanější forma rozumu.
+
 ## Pracovní log
 
+- 2026-06-19: Doplněna úvodní podkapitola o uzavření prvního návratu z tiché údržby: uzavírací stavy, lokální nápověda, malá smyčka při potvrzeném signálu, privacy-first úklid, karta, workshop a checklist.
 - 2026-06-19: Doplněna úvodní podkapitola o prvním přirozeném návratu z tiché údržby: rozlišení běžného použití, lokální nápovědy a skutečného návratového signálu, privacy-first hranice, karta, mini workshop a checklist.
 - 2026-06-19: Doplněna úvodní podkapitola o tiché údržbě po uzavření druhého běžného použití: kanonické pravidlo, konec mimořádné péče, privacy-first úklid důkazů, karta, mini workshop a checklist.
 - 2026-06-19: Doplněna úvodní podkapitola o uzavření druhého běžného použití po návratu do stabilního klidu: uzavírací stavy, zákaz další kontroly, privacy-first úklid, karta, mini workshop a checklist.
