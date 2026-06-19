@@ -229798,8 +229798,11 @@ To je dobrý výstup. Je konkrétní, úzký a zavřený. Přesně takové provo
 
 Druhé běžné použití po návratu do stabilního klidu je konečně docela nudná disciplína. A to je dobře. Provoz nepotřebuje neustále dokazovat, že žije. Potřebuje pravidla, která se najdou, použijí a potom zase ztichnou. Když pravidlo obstojí i podruhé, dejte mu pokoj. Vraťte ho do běžného rytmu a věnujte pozornost až skutečnému návratovému signálu.
 
+Po druhém dobrém použití si proto napište i zákaz další kontroly: kdy pravidlo znovu otevřete a co naopak nebude důvodem k návratu. Bez téhle věty se stabilní klid snadno změní v pravidelnou kontrolu pro kontrolu.
+
 ## Pracovní log
 
+- 2026-06-19: Zpřesněna závěrečná poznámka po druhém běžném použití pravidla o zákaz další kontroly bez skutečného návratového signálu.
 - 2026-06-19: Doplněna úvodní podkapitola o druhém běžném použití po návratu do stabilního klidu: přenositelnost pravidla, čtyři výsledné stavy, příklad formulářového rozhodnutí, privacy-first hranice, karta, mini workshop a checklist.
 - 2026-06-19: Doplněna úvodní podkapitola o prvním běžném použití po návratu do stabilního klidu: najitelnost pravidla, použití bez mimořádné podpory, čtyři výsledky, privacy-first hranice, karta, mini workshop a checklist.
 - 2026-06-19: Doplněna úvodní podkapitola o návratu do stabilního klidu po ověření uzavření: kanonické místo, běžný kontrolní okamžik, odstranění mimořádné péče, privacy-first úklid, karta, mini workshop a checklist.
