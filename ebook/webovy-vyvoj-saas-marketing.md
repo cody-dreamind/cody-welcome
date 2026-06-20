@@ -235053,8 +235053,143 @@ Pokud se workshop začne měnit v debatu o celém pravidle, zastavte ho. Buď se
 
 Druhé běžné použití po servisní poznámce je poslední kontrola přenositelnosti malé údržby. Pokud drží, nechte ji odejít do ticha. Každá další kontrola bez návratového signálu už nepřidává jistotu, jen hluk. A hluk je v provozu skoro vždycky dražší, než vypadá.
 
+## Uzavření druhého běžného použití po servisní poznámce
+
+Po druhém běžném použití po servisní poznámce už tým nemá sbírat další jistotu. Má vybrat stav, uklidit po malé údržbě a vrátit pravidlo do normálního provozu. Pokud druhé použití proběhlo bez čerstvé paměti autora opravy, bez vysvětlování historie a bez nového tření, servisní větev končí. Tečka. Ne malá tečka s poznámkou pod čarou, která za měsíc naroste na další tabulku.
+
+Uzavírací otázka zní:
+
+```text
+Může opravené pracovní místo dál fungovat bez toho, aby si tým pamatoval servisní poznámku?
+```
+
+Pokud ano, nechte servisní poznámku zmizet z aktivní pozornosti. V pracovním místě má zůstat jen opravený odkaz, jasnější věta, čistší šablona nebo odstraněná pomocná stopa. V historii může zůstat krátký log. Nic víc. Servisní poznámka není nový standard, není výukový modul a není důvod založit pravidelnou kontrolu.
+
+### Čtyři uzavírací stavy
+
+Po druhém použití vyberte jeden ze čtyř stavů:
+
+- Zavřít bez další akce: oprava je přenositelná, pracovní místo drží a nikdo nepotřebuje znát historii.
+- Dočistit stejné místo: oprava funguje, ale zůstala jedna drobná viditelná stopa, například starý komentář, pomocný nadpis nebo duplicitní odkaz.
+- Přepsat jako nový návratový signál: druhé použití ukázalo problém v samotném pravidle, ne v servisní poznámce.
+- Archivovat servisní větev jako neplatnou: oprava vycházela z předpokladu, který při druhém použití neplatí, a není rozumné ji dál držet.
+
+Stav `zavřít bez další akce` je nejlepší výsledek a zároveň nejtěžší na disciplínu. Tým má tendenci přidat "ještě jednu kontrolu", protože malá oprava právě fungovala a mohla by se přece ověřit ještě líp. Jenže u servisních poznámek další kontrola často nevyrábí spolehlivost. Vyrábí závislost na tom, že každá drobná údržba dostane vlastní život.
+
+Stav `dočistit stejné místo` použijte jen tehdy, když je zbytek opravdu lokální. Například v šabloně zůstal komentář "ověřit nový odkaz", který už nemá platit. Nebo na konci checklistu zůstala servisní věta, která měla být jen dočasná. Dočištění nesmí měnit pravidlo. Pokud mění rozhodovací logiku, už nejde o servis.
+
+Stav `přepsat jako nový návratový signál` použijte, když se ukáže, že malá oprava jen odkryla hlubší problém. Třeba druhé použití najde správný odkaz, ale člověk pořád neví, jestli má použít sales šablonu, support šablonu nebo produktovou kartu. To není problém odkazu. To je problém rozhodovací hrany. Zapište ho jako nový návratový signál a servisní poznámku zavřete s výsledkem, že odhalila jiné téma.
+
+Stav `archivovat servisní větev jako neplatnou` použijte vzácně, ale bez sentimentu. Pokud se ukáže, že servisní poznámka vznikla ze staré kopie, neaktuálního pracovního místa nebo z podnětu, který patřil jinému pravidlu, nelepte na ni další opravu. Zavřete ji jako chybnou větev, upravte pouze aktivní kanonické místo, pokud je to potřeba, a smažte pomocné kopie.
+
+### Praktický příklad
+
+```text
+Servisní poznámka:
+V checklistu před odesláním nabídky vedl odkaz na starou ukázku předávacího balíčku.
+
+První použití:
+Odkaz byl opraven a obchodník našel správnou ukázku bez vysvětlování.
+
+Druhé použití:
+Jiný člověk o týden později použil stejný checklist, našel správnou ukázku a nemusel znát historii opravy.
+
+Výsledek:
+Zavřít bez další akce.
+
+Zápis:
+Opravený odkaz je přenositelný v běžném použití. Neotevíráme strukturu checklistu ani další obchodní šablony.
+```
+
+Tento zápis je krátký záměrně. Neobsahuje jméno obchodníka, zákaznický kontext, screenshot checklistu ani kopii nabídky. Pro rozhodnutí stačí, že opravené pracovní místo fungovalo ve druhém běžném použití. Privacy-first přístup tady není slavnostní nápis na zdi. Je to obyčejná schopnost neukládat data, která nepotřebujete.
+
+### Co propsat do pracovního místa
+
+Do pracovního místa patří jen finální stav. Ne historie servisní poznámky.
+
+Ponechte:
+
+- opravený odkaz, název, větu nebo pořadí kroku;
+- kanonickou verzi šablony, pokud se šablona měnila;
+- jedno aktuální pravidlo, podle kterého se má pracovat;
+- krátký changelog, pokud ho dané pracovní místo běžně používá.
+
+Neponechávejte:
+
+- dočasné komentáře typu "opraveno po servisní poznámce";
+- duplicitní kopie staré a nové verze pro jistotu;
+- screenshoty nebo exporty, které jen dokazují, že oprava proběhla;
+- osobní nebo zákaznické detaily z běžného použití;
+- novou kontrolní vrstvu vytvořenou pouze kvůli této servisní poznámce.
+
+Pracovní místo má po uzavření působit klidněji než před údržbou. Pokud je po uzavření delší, složitější nebo potřebuje víc vysvětlivek, zkontrolujte, jestli jste opravdu zavřeli servisní poznámku, nebo jste nenápadně přidali nový proces.
+
+### Karta uzavření druhého použití
+
+```text
+Servisní poznámka:
+
+Opravené pracovní místo:
+
+Druhé běžné použití:
+
+Bylo použitelné bez autora opravy:
+ano / ne
+
+Bylo použitelné bez znalosti historie:
+ano / ne
+
+Výsledek:
+- zavřít bez další akce
+- dočistit stejné místo
+- přepsat jako nový návratový signál
+- archivovat servisní větev jako neplatnou
+
+Co zůstává v kanonickém místě:
+
+Co uklízíme:
+
+Co výslovně neotevíráme:
+
+Privacy-first poznámka:
+Které důkazy, kopie nebo osobní detaily neukládáme:
+
+Zápis do logu:
+```
+
+Kartu používejte jen u servisních poznámek, které měly aspoň malé riziko záměny s návratovým signálem. U prostého mrtvého odkazu stačí jedna věta v logu. Když na každou drobnou opravu vyplníte kartu, brzy budete potřebovat servisní poznámku k systému servisních poznámek. To je přesně ten typ kancelářské poezie, který radši nepišme.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: připomeňte původní servisní poznámku jednou větou.
+2. Minuta 2: popište druhé běžné použití bez citlivých detailů.
+3. Minuta 3: ověřte, jestli použití nebylo závislé na autorovi opravy.
+4. Minuta 4: vyberte jeden ze čtyř uzavíracích stavů.
+5. Minuta 5: určete, co zůstává v pracovním místě a co se uklízí.
+6. Minuta 6: napište větu do logu a jednu věc, kterou teď neotevíráte.
+
+Pokud workshop potřebuje víc než šest minut, je pravděpodobné, že už neuzavíráte servisní poznámku. Zastavte se a přejmenujte práci. Buď jde o větší návratový signál, nebo o slabé kanonické místo, nebo o nejasný vlastnický proces. Všechny tři věci si zaslouží vlastní smyčku. Žádná z nich se nemá tvářit jako "jen ještě drobný úklid".
+
+### Checklist uzavření druhého použití
+
+- Proběhlo druhé použití v běžné situaci, ne v umělém testu?
+- Použil pracovní místo někdo nebo nějaká situace bez čerstvé paměti na opravu?
+- Nebylo potřeba vysvětlovat historii servisní poznámky?
+- Zůstala rozhodovací logika pravidla stejná?
+- Vybrali jsme jeden ze čtyř uzavíracích stavů?
+- Pokud oprava drží, nezakládáme další kontrolu?
+- Pokud je potřeba dočištění, týká se jen stejného pracovního místa?
+- Pokud se ukázal větší problém, zapsali jsme ho jako nový návratový signál?
+- Uklidili jsme dočasné komentáře, kopie, screenshoty nebo pomocné záznamy?
+- Neuložili jsme osobní, zákaznické nebo interní detaily, které nejsou potřeba pro rozhodnutí?
+- V logu je krátký obecný závěr?
+- Napsali jsme, co teď výslovně neotevíráme?
+
+Uzavření druhého běžného použití po servisní poznámce má být nenápadné. Malá oprava se ověřila, pracovní místo je čistší a pravidlo se vrací do klidu. Když se tým naučí takové věci zavírat bez dalších vrstev, získá jednu podstatnou provozní výhodu: údržba přestane být zdrojem práce navíc.
+
 ## Pracovní log
 
+- 2026-06-20: Doplněna úvodní podkapitola o uzavření druhého běžného použití po servisní poznámce: čtyři uzavírací stavy, praktický příklad, kanonické propsání, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-20: Doplněna úvodní podkapitola o druhém běžném použití po servisní poznámce: přenositelnost bez čerstvé paměti, čtyři výsledky použití, úklid viditelné servisní stopy, privacy-first zápis, karta, mini workshop a checklist.
 - 2026-06-20: Doplněna úvodní podkapitola o uzavření prvního běžného použití po servisní poznámce: čtyři uzavírací stavy, praktický příklad, úklid servisních stop, privacy-first uzavření, karta, mini workshop a checklist.
 - 2026-06-20: Doplněna úvodní podkapitola o prvním běžném použití po uzavřené servisní poznámce: najitelnost, rozhodnutelnost, tichost opravy, čtyři výsledky použití, privacy-first záznam, karta, mini workshop a checklist.
