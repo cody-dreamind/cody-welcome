@@ -235495,8 +235495,164 @@ Pokud se workshop začne točit kolem původní opravy, zastavte ho. Buď stará
 
 První běžné review po návratu servisní větve do klidu má potvrdit, že údržba opravdu skončila. Nejlepší výsledek je skoro nudný: pracovní místo se použije, nic zvláštního se nestane a stará servisní historie zůstane zavřená. V provozu je to krásně praktická nuda. Přesně ten druh nudy, který šetří čas, data i nervy.
 
+## Uzavření prvního běžného review po servisní větvi
+
+Po prvním běžném review po servisní větvi je snadné udělat dvě opačné chyby. První chyba je tvářit se, že samotné review nic neznamená, protože se "jenom koukalo". Druhá chyba je udělat z review nový malý projekt, protože se při něm objevilo pár poznámek. Uzavření review má proto jednoduchý úkol: převést výsledek na jeden stav, jednu případnou lokální změnu a jasné rozhodnutí, co už dál nesledujete.
+
+Začněte větou:
+
+```text
+První běžné review po servisní větvi uzavíráme stavem:
+```
+
+Do věty doplňte jeden ze čtyř stavů z předchozí kapitoly: klid potvrzen, lokální navigační oprava, nový návratový signál nebo chybný návrat do klidu. Nepřidávejte pátý stav typu "ještě uvidíme". To není stav, ale odložená nejistota v tričku s nápisem proces.
+
+Uzavření má být krátké. Pokud review potvrdilo klid, stačí jedna věta v běžném logu. Pokud našlo lokální navigační opravu, proveďte ji v kanonickém místě a zapište, že servisní větev zůstává zavřená. Pokud vznikl nový návratový signál, založte ho odděleně a nepřilepujte k němu historii opravy. Pokud byl návrat do klidu chybný, vraťte se k jednomu kanonickému místu a neopravujte celý okolní systém jen proto, že jste našli jednu špatnou stopu.
+
+### Čtyři uzavírací stavy
+
+- Klid potvrzen: review nevyvolalo změnu, pracovní místo funguje v běžném rytmu a další návrat vznikne jen podle běžného rytmu nebo skutečného signálu.
+- Lokální navigační oprava uzavřena: opraven je odkaz, název, umístění nebo jedna pomocná věta, ale rozhodovací logika zůstává stejná.
+- Nový návratový signál oddělen: review ukázalo nový problém, který má vlastní otázku, vlastní pracovní místo a vlastní hranici dat.
+- Chybný návrat do klidu opraven: původní uzavření bylo slabé, proto se opraví kanonické místo a znovu se ověří nejmenším běžným použitím.
+
+U stavu `klid potvrzen` nepište dlouhou obhajobu. Čím víc vět potřebujete k vysvětlení, proč je něco v klidu, tím větší je šance, že v klidu není. Dobrá uzavírací věta zní například:
+
+```text
+Review potvrdilo, že rozcestník vede k aktuální šabloně bez otevření servisní historie; servisní větev zůstává zavřená.
+```
+
+U stavu `lokální navigační oprava uzavřena` oddělte navigaci od pravidla. Když přejmenujete odkaz z "Předání" na "Předání po auditu", neměníte rozhodnutí, jen snižujete tření v cestě. Taková oprava nepotřebuje nový workshop ani novou kontrolu. Potřebuje provést, zapsat a pustit.
+
+U stavu `nový návratový signál oddělen` napište novou otázku tak, aby šla řešit bez znalosti servisní větve. Pokud nová otázka zní srozumitelně jen lidem, kteří znají původní opravu, ještě ji nemáte dost oddělenou.
+
+U stavu `chybný návrat do klidu opraven` buďte přísní na rozsah. Chybný návrat neznamená, že se má otevřít celá servisní větev od začátku. Znamená to, že jeden výsledek nebyl správně propsaný do zdroje pravdy nebo že jste zavřeli špatné místo. Opravte zdroj pravdy, ne vlastní pocit bezpečí.
+
+### Praktický příklad
+
+```text
+Situace:
+Po servisní opravě obchodního rozcestníku proběhlo první běžné měsíční review.
+
+Výsledek review:
+Aktuální šablona je dostupná ze správného rozcestníku. Jeden odkaz má ale starý název "Audit handoff", zatímco ostatní položky jsou česky.
+
+Uzavírací stav:
+Lokální navigační oprava uzavřena.
+
+Změna:
+Odkaz přejmenován na "Předání po auditu".
+
+Co zůstává zavřené:
+Servisní větev s původně chybným odkazem, staré screenshoty a původní servisní poznámka.
+
+Další návrat:
+Jen pokud někdo v běžném použití znovu nerozliší šablonu pro audit a šablonu pro retainer.
+```
+
+Tento příklad je úmyslně malý. V praxi právě malé věci často rozhodují, jestli systém zůstane udržovatelný. Když každé přejmenování odkazu dostane vlastní projektový obřad, lidé se brzy naučí drobné opravy raději nehlásit. A pak se v dokumentaci zabydlí tichý nepořádek, který nikdo nevlastní, protože všichni byli příliš procesně dospělí. Gratuluji, vyrobili jste chaos v košili.
+
+### Co propsat do logu
+
+Log po uzavření review má odpovědět na čtyři otázky:
+
+- Jaký stav review uzavírá?
+- Změnilo se kanonické pracovní místo?
+- Zůstává servisní větev zavřená?
+- Jaký je další návratový signál nebo běžný rytmus?
+
+Dobře:
+
+```text
+První běžné review po servisní větvi potvrdilo klid. Rozcestník vede k aktuální šabloně, servisní historie zůstává zavřená a další návrat patří jen do běžného měsíčního review nebo při opakovaném tření v použití.
+```
+
+Slabě:
+
+```text
+Zkontrolováno, zatím vypadá OK.
+```
+
+Druhá věta není úplně špatná, jen skoro nic nenese. Neříká, co bylo kontrolováno, co zůstává zavřené ani podle čeho se má tým vrátit. Takový log je paměťová žvýkačka: chvíli něco chutná, pak už jen překáží.
+
+### Privacy-first uzavření
+
+Uzavření review je dobré místo pro druhý úklid dat. První úklid proběhl při návratu servisní větve do klidu. Review ale mohlo vytvořit nové dočasné stopy: poznámku v dokumentu, screenshot aktuální cesty, export seznamu šablon, interní zprávu s konkrétním příkladem nebo komentář u úkolu.
+
+Po uzavření se zeptejte:
+
+```text
+Která nová stopa vznikla jen proto, abychom review provedli, a nemusí zůstat po uzavření?
+```
+
+Pokud stačí obecný závěr, nepřenášejte detaily dál. Místo ukládání screenshotu cesty napište: "Aktuální rozcestník vede ke správné šabloně bez servisní poznámky." Místo kopírování interní zprávy napište: "Nový člověk našel šablonu podle názvu v rozcestníku." Osobní údaje, zákaznické kontexty a interní konverzace nepatří do logu jen proto, že se při review mihly kolem.
+
+Codyho komentář: privacy-first přístup není o tom, že si tým zakáže důkazy. Je o tom, že si nechává jen důkazy, které ještě pracují. Důkaz, který už jen sedí v rohu a čeká, až jednou někoho napadne ho zneužít, není asset. Je to budoucí úklid s horším načasováním.
+
+### Karta uzavření prvního běžného review
+
+```text
+Pracovní místo:
+
+Původní servisní větev:
+
+Výsledek review:
+- klid potvrzen
+- lokální navigační oprava
+- nový návratový signál
+- chybný návrat do klidu
+
+Uzavírací stav:
+
+Co se změnilo v kanonickém místě:
+
+Co zůstává zavřené:
+
+Co vzniká odděleně, pokud něco:
+
+Privacy-first úklid:
+Které dočasné stopy z review mažeme, anonymizujeme nebo neukládáme:
+
+Další návrat:
+Podle běžného rytmu nebo při tomto signálu:
+
+Vlastník:
+
+Datum:
+```
+
+Kartu použijte hlavně tehdy, když review něco našlo. Pokud jen potvrdilo klid, stačí krátký log. Nenuťte tým vyplňovat formulář pokaždé, když systém funguje. To by byla velmi sofistikovaná cesta, jak trestat dobrý provoz.
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: přečtěte výsledek běžného review.
+2. Minuta 2: vyberte jeden ze čtyř uzavíracích stavů.
+3. Minuta 3: pokud je potřeba lokální navigační oprava, určete jedno kanonické místo.
+4. Minuta 4: pokud vznikl nový návratový signál, napište ho bez odkazu na servisní historii.
+5. Minuta 5: pojmenujte, co zůstává zavřené.
+6. Minuta 6: proveďte privacy-first úklid dočasných stop z review.
+7. Minuta 7: zapište další návratový signál nebo běžný rytmus.
+
+Pokud se v minutě 2 tým nemůže shodnout na stavu, neřešte to hlasováním. Vraťte se k pracovnímu místu a napište, co se v něm skutečně změnilo. Stav má popisovat realitu, ne vyhrát popularitu.
+
+### Checklist uzavření review
+
+- Vybrali jsme jeden uzavírací stav místo neurčitého "uvidíme"?
+- Pokud review potvrdilo klid, nezaložili jsme zbytečný nový úkol?
+- Pokud stačila lokální navigační oprava, provedli jsme ji v kanonickém místě?
+- Pokud vznikl nový návratový signál, oddělili jsme ho od servisní historie?
+- Pokud byl návrat do klidu chybný, opravujeme jedno správné místo místo celého okolí?
+- Zapsali jsme, co zůstává zavřené?
+- Má log jasný další návratový signál nebo běžný rytmus?
+- Odstranili jsme dočasné poznámky, screenshoty, exporty nebo interní detaily vzniklé jen pro review?
+- Nepřenášíme do logu osobní nebo zákaznické údaje, které nejsou nutné pro další rozhodnutí?
+- Je uzavření krátké natolik, aby se z review nestal nový projekt?
+
+Dobré uzavření prvního běžného review je skoro neviditelná práce. Přepne téma do správného stavu, udělá malou opravu, pokud je opravdu potřeba, a zbytek nechá být. V SaaS provozu je to cennější, než se tváří: tým se učí, že údržba může končit, ne jen měnit název.
+
 ## Pracovní log
 
+- 2026-06-20: Doplněna úvodní podkapitola o uzavření prvního běžného review po servisní větvi: čtyři uzavírací stavy, praktický příklad, log, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-20: Doplněna úvodní podkapitola o prvním běžném review po návratu servisní větve do klidu: najitelnost, použitelnost, klid bez zvláštní péče, čtyři výsledky review, privacy-first zápis, karta, mini workshop a checklist.
 - 2026-06-20: Doplněna úvodní podkapitola o návratu do klidového provozu po uzavřené servisní větvi: kanonické pracovní místo, odstranění aktivních servisních stop, návratový signál, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-20: Doplněna úvodní podkapitola o uzavření druhého běžného použití po servisní poznámce: čtyři uzavírací stavy, praktický příklad, kanonické propsání, privacy-first úklid, karta, mini workshop a checklist.
