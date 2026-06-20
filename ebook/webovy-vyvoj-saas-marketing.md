@@ -236506,8 +236506,169 @@ Pokud se tým nedokáže shodnout na existujícím rytmu, nevytvářejte nový a
 
 Delší klidový rytmus je dobrý konec malé opravy. Ne proto, že by sliboval věčný pořádek, ale protože dává týmu jasnou dohodu: dokud nepřijde konkrétní signál, tahle věc už nevyžaduje zvláštní pozornost. Pravidlo se vrací do práce, servisní historie do logu a tým může řešit něco, co opravdu potřebuje živou energii.
 
+## První běžná kontrola v delším klidovém rytmu
+
+Delší klidový rytmus se opravdu ověří až při první běžné kontrole. Ne při speciálním review, ne při slavnostním návratu k servisní větvi, ale v normálním provozním rytmu, do kterého pracovní místo patří. Právě tam se ukáže, jestli se oprava stala součástí systému, nebo jestli pořád žije jen díky tomu, že si někdo pamatuje její historii.
+
+První běžná kontrola nemá znovu otevírat servisní větev. Má udělat tichý test: najdeme kanonické místo, pravidlo je použitelné, návratový signál se nespustil a staré pracovní stopy se nevrátily do aktivní práce. Pokud tohle projde, klidový rytmus drží. Pokud ne, neznamená to automaticky novou velkou iteraci. Znamená to vybrat nejmenší důvod, proč klid nefungoval.
+
+Začněte čtyřmi větami:
+
+```text
+Běžná kontrola probíhá v rámci:
+
+Pracovní místo jsme našli v:
+
+Návratový signál:
+- nastal / nenastal / nejde poznat
+
+Servisní historii:
+- neotevíráme / otevřeli jsme omylem / museli jsme otevřít kvůli nejasnosti
+```
+
+Tyto věty oddělují běžnou údržbu od staré servisní péče. Když se během kontroly ukáže drobná kosmetika, nezapisujte ji hned jako návrat servisní větve. Nejprve se zeptejte, jestli brání běžnému rozhodnutí. Pokud ne, patří do běžného backlogu nebo do poznámek, ne do servisní historie.
+
+Praktický příklad:
+
+```text
+Běžná kontrola probíhá v rámci:
+Kvartální kontroly obchodních šablon.
+
+Pracovní místo jsme našli v:
+Kanonickém rozcestníku sales materiálů.
+
+Návratový signál:
+Nenastal. Nikdo při posledních dvou předáních nezaměnil auditní šablonu za retainer šablonu.
+
+Servisní historii:
+Neotevíráme. Starý log stačil jako krátké vysvětlení, ale nebyl potřeba pro rozhodnutí.
+
+Rozhodnutí:
+Klidový rytmus drží. V rozcestníku opravíme jen překlep v názvu jedné šablony jako běžnou drobnou údržbu, bez návratu k servisní větvi.
+```
+
+Všimněte si hranice: překlep je oprava, ale není důkaz, že servisní větev selhala. Kdyby tým kvůli každému malému nálezu znovu otevíral starou historii, klidový rytmus by byl jen hezčí název pro trvalý dohled.
+
+### Tři otázky první běžné kontroly
+
+První běžnou kontrolu držte na třech otázkách:
+
+- Najitelnost: najde člověk kanonické pracovní místo bez staré servisní poznámky?
+- Použitelnost: umí podle něj udělat běžné rozhodnutí bez vysvětlování autora opravy?
+- Klid: nenastal návratový signál a nevrátily se staré pomocné stopy do aktivní práce?
+
+Když projde najitelnost i použitelnost, ale ne klid, otevřete jen ten konkrétní návratový signál. Když neprojde najitelnost, opravte navigaci nebo odkaz na kanonické místo. Když neprojde použitelnost, doplňte pravidlo tam, kde se reálně používá. Každý výsledek má jiné pracovní místo; neslučujte je do jedné mlhavé poznámky "rozbilo se předání".
+
+### Čtyři výsledky kontroly
+
+Po první běžné kontrole vyberte jeden ze čtyř výsledků:
+
+- Klid drží: pracovní místo je najitelné, použitelné a návratový signál nenastal.
+- Slabá navigace: pravidlo funguje, ale lidé ho hledají přes starou servisní stopu nebo osobní paměť.
+- Slabé pravidlo: kanonické místo existuje, ale bez autora opravy z něj nejde udělat běžné rozhodnutí.
+- Skutečný návrat: nastal konkrétní návratový signál, který byl předem zapsaný.
+
+Stav `klid drží` nevyžaduje další servisní práci. Stačí krátký log v běžné kontrole.
+
+Stav `slabá navigace` řešte úpravou cesty, ne přepisem pravidla. Typicky pomůže jeden odkaz, lepší název v rozcestníku nebo odstranění staré kopie.
+
+Stav `slabé pravidlo` řešte v kanonickém místě. Pokud tým stále potřebuje vysvětlení autora opravy, pravidlo ještě není dost samostatné.
+
+Stav `skutečný návrat` řešte podle návratového signálu. Otevírejte jen tu část, která se opravdu vrátila. Pokud signál mluvil o záměně dvou šablon, neotevírejte celý sales proces, dokud k tomu nemáte samostatný důvod.
+
+### Privacy-first kontrola klidu
+
+První běžná kontrola v delším rytmu často svádí k tomu, že si tým "pro jistotu" otevře staré screenshoty, exporty nebo interní zprávy z původní servisní větve. Nedělejte z jistoty zvyk. Nejdřív zkuste rozhodnout z kanonického místa a běžného provozního signálu.
+
+Privacy-first otázka zní:
+
+```text
+Potřebujeme starý detail pro dnešní rozhodnutí, nebo jen hledáme pocit jistoty?
+```
+
+Pokud stačí dnešní provozní závěr, starý detail neotvírejte. Do logu napište obecnou větu:
+
+```text
+První kvartální kontrola proběhla bez návratového signálu; pracovní místo je najitelné a použitelné bez servisní historie.
+```
+
+To je dost. Není potřeba přidávat jména, interní konverzace, přesné ukázky poptávek ani kopie starých podkladů. Klidový rytmus má snižovat datovou stopu i mentální stopu. Když kvůli každé kontrole znovu rozbalíte celý archiv, privacy-first provoz zůstane jen hezká cedulka na přeplněné skříni.
+
+### Karta první běžné kontroly v delším klidu
+
+```text
+Pracovní místo:
+
+Delší klidový rytmus:
+
+Běžná kontrola proběhla v rámci:
+
+Kanonické místo:
+
+Najitelnost:
+- drží / slabá
+
+Použitelnost:
+- drží / slabá
+
+Návratový signál:
+- nenastal / nastal / nejde poznat
+
+Servisní historii:
+- neotevíráme / otevřeli jsme omylem / museli jsme otevřít
+
+Výsledek:
+- klid drží
+- slabá navigace
+- slabé pravidlo
+- skutečný návrat
+
+Rozhodnutí jednou větou:
+
+Co se případně opraví v běžném rytmu:
+
+Co zůstává zavřené:
+
+Privacy-first zápis:
+Jaký obecný závěr stačí bez starých detailů:
+
+Vlastník:
+
+Datum další běžné kontroly:
+```
+
+Kartu zkraťte, pokud běžná kontrola proběhla hladce. Pro výsledek `klid drží` obvykle stačí kanonické místo, věta rozhodnutí a privacy-first zápis. Plná karta je užitečná hlavně tehdy, když se objevila slabá navigace, slabé pravidlo nebo skutečný návrat.
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: otevřete běžnou kontrolu, do které pracovní místo patří.
+2. Minuta 2: najděte kanonické místo bez staré servisní poznámky.
+3. Minuta 3: ověřte, jestli podle něj jde udělat běžné rozhodnutí.
+4. Minuta 4: zkontrolujte návratový signál.
+5. Minuta 5: napište, jestli servisní historii necháváte zavřenou.
+6. Minuta 6: vyberte jeden ze čtyř výsledků.
+7. Minuta 7: zapište obecný privacy-first závěr.
+
+Když se tým během sedmi minut začne bavit o původní opravě místo o dnešním pracovním místě, zastavte se. To je signál slabé navigace nebo slabého pravidla, ne důvod k historické debatě.
+
+### Checklist první běžné kontroly
+
+- Proběhla kontrola v existujícím běžném rytmu?
+- Našli jsme kanonické pracovní místo bez staré servisní poznámky?
+- Umí člověk podle místa udělat běžné rozhodnutí?
+- Zkontrolovali jsme konkrétní návratový signál?
+- Neotevřeli jsme servisní historii jen pro pocit jistoty?
+- Pokud se objevila drobná kosmetika, nechali jsme ji v běžné údržbě?
+- Pokud selhala navigace, víme, kterou cestu opravit?
+- Pokud selhalo pravidlo, víme, kterou větu nebo šablonu zpřesnit?
+- Pokud nastal návratový signál, otevíráme jen jeho přesný rozsah?
+- Stačí logu obecný závěr bez osobních a interních detailů?
+
+První běžná kontrola v delším klidu je dobrý test dospělosti pracovního systému. Když drží, nemusíte si připomínat starou opravu, abyste udělali dnešní rozhodnutí. Když nedrží, problém se dá pojmenovat přesně: cesta, pravidlo, nebo skutečný návrat. To je mnohem užitečnější než neurčité "měli bychom to zase projít".
+
 ## Pracovní log
 
+- 2026-06-20: Doplněna úvodní podkapitola o první běžné kontrole v delším klidovém rytmu: ověření kanonického místa bez servisní historie, čtyři výsledky kontroly, privacy-first zápis, karta, mini workshop a checklist.
 - 2026-06-20: Doplněna úvodní podkapitola o delším klidovém rytmu po měsíční kontrole servisní větve: převod do existujícího revizního rytmu, návratový signál bez servisní historie, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-20: Doplněna úvodní podkapitola o uzavření měsíční kontroly po servisní větvi: čtyři uzavírací stavy, praktické příklady, privacy-first zápis, karta, mini workshop a checklist.
 - 2026-06-20: Doplněna úvodní podkapitola o měsíční kontrole po definitivním uzavření servisní větve: ověření kanonického místa, starých objížděk, nového tření, privacy-first zápisu, karty, mini workshopu a checklistu.
