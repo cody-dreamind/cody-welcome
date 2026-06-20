@@ -2572,6 +2572,8 @@ Pokud se během osmi minut začne řešit původní historie opravy, zastavte se
 
 První běžné review má být konec mimořádnosti. Pokud pravidlo drží, nechte ho být. Pokud potřebuje drobné dočištění, udělejte ho bez rozšiřování tématu. A pokud se opravdu objevil návratový signál, otevřete novou práci vědomě, ne jako přívěsek staré opravy.
 
+Když review skončí jen krátkou servisní poznámkou, napište ji rovnou k místu, kde pravidlo běžně používáte. Nevytvářejte samostatný projekt, pokud se nemění rozhodnutí, vlastník ani datová stopa. Smyslem poznámky je odstranit drobné tření, ne dát staré opravě nový životopis.
+
 Praktický filtr na výběr jedné kapitoly:
 
 1. Kdybychom vyřešili jen tuto věc, co se zlepší pro zákazníka?
@@ -234803,3 +234805,4 @@ Dobře uzavřené první běžné použití je tiché. Nenechá za sebou nový p
 - 2026-06-19: Doplněna úvodní podkapitola o návratu k výřezu po delším klidu: ověření stejného typu rozhodnutí, čtyři stavy návratu, privacy-first práce bez otevírání starých stop, karta, workshop a checklist.
 - 2026-06-19: Doplněna úvodní podkapitola o uzavření návratu k výřezu po delším klidu: čtyři uzavírací stavy, praktický příklad, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-19: Doplněna úvodní podkapitola o prvním běžném review po návratu pravidla do rytmu: kontrolní body, stavy review, privacy-first datová střídmost, karta, mini workshop a checklist.
+- 2026-06-20: Doplněna krátká úvodní poznámka k servisní poznámce po prvním běžném review, aby drobné dočištění zůstalo lokální.
