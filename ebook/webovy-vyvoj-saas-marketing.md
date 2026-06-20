@@ -236666,8 +236666,177 @@ Když se tým během sedmi minut začne bavit o původní opravě místo o dneš
 
 První běžná kontrola v delším klidu je dobrý test dospělosti pracovního systému. Když drží, nemusíte si připomínat starou opravu, abyste udělali dnešní rozhodnutí. Když nedrží, problém se dá pojmenovat přesně: cesta, pravidlo, nebo skutečný návrat. To je mnohem užitečnější než neurčité "měli bychom to zase projít".
 
+## Uzavření první běžné kontroly v delším klidovém rytmu
+
+První běžná kontrola v delším klidu má hodnotu až tehdy, když se opravdu uzavře. Nestačí říct, že "to vypadá v pohodě" nebo že "se k tomu vrátíme příště". Uzavření má rozhodnout, jestli se pracovní místo dál drží v normálním rytmu, jestli potřebuje lokální opravu, nebo jestli se objevil skutečný návratový signál.
+
+Začněte tím, že výsledek kontroly přeložíte do jedné pracovní věty:
+
+```text
+Po první běžné kontrole v delším klidu rozhodujeme:
+```
+
+Věta musí obsahovat stav, pracovní místo a hranici další práce. Pokud obsahuje jen pocit, ještě není hotová. Dobrý zápis zní například:
+
+```text
+Po první běžné kontrole v delším klidu rozhodujeme:
+Kanonický rozcestník sales šablon je najitelný a použitelný bez servisní historie; klid drží a další kontrola proběhne až v běžném kvartálním rytmu.
+```
+
+Nebo:
+
+```text
+Po první běžné kontrole v delším klidu rozhodujeme:
+Pravidlo je správné, ale lidé ho stále hledají přes starý servisní komentář; opravíme jen odkaz v rozcestníku a servisní větev zůstává zavřená.
+```
+
+Rozdíl je důležitý. V prvním případě se nedělá nic navíc. Ve druhém vzniká drobná údržba navigace. Ani jeden výsledek neznamená automatické otevření celé historie.
+
+### Čtyři uzavírací stavy
+
+Po první běžné kontrole vyberte jeden ze čtyř stavů:
+
+- Uzavřít do klidu: kontrola potvrdila najitelnost, použitelnost i neaktivní návratový signál.
+- Opravit cestu: pracovní pravidlo drží, ale cesta k němu je slabá.
+- Opravit pravidlo: cesta je v pořádku, ale z kanonického místa nejde bez vysvětlování udělat běžné rozhodnutí.
+- Otevřít návrat: nastal konkrétní návratový signál, který byl předem zapsaný.
+
+Stav `uzavřít do klidu` je nejkratší. Nepište z něj novou kartu, nový úkol ani novou kontrolu jen proto, že je příjemné mít pocit péče. Stačí log v běžném review.
+
+Stav `opravit cestu` má upravit navigaci, ne obsah pravidla. Typicky jde o jeden odkaz, název položky, rozcestník nebo odstranění staré kopie, která lidi vede mimo kanonické místo.
+
+Stav `opravit pravidlo` patří do kanonického místa. Pokud člověk musí hledat autora staré opravy, aby pochopil dnešní rozhodnutí, pravidlo ještě není samostatné.
+
+Stav `otevřít návrat` používejte jen při skutečné shodě s návratovým signálem. Když se objevilo nové tření, ale neodpovídá původnímu signálu, založte novou otázku. Starou servisní větev neoživujte jen proto, že má podobný název.
+
+### Praktický příklad
+
+```text
+Pracovní místo:
+Rozcestník obchodních šablon.
+
+Běžná kontrola:
+Kvartální review sales materiálů.
+
+Výsledek kontroly:
+Kanonické místo je najitelné. Šablona se použila dvakrát bez vysvětlování autora opravy. Návratový signál nenastal.
+
+Uzavírací stav:
+Uzavřít do klidu.
+
+Rozhodnutí:
+Servisní větev zůstává zavřená. Rozcestník dál běží v kvartálním review bez zvláštní kontroly.
+
+Co se nedělá:
+Neotevíráme starý komentář, nekopírujeme původní screenshoty a nezakládáme zvláštní měření používání šablony.
+```
+
+Druhý příklad:
+
+```text
+Výsledek kontroly:
+Pravidlo funguje, ale nový člen týmu ho našel přes starou servisní poznámku, ne přes rozcestník.
+
+Uzavírací stav:
+Opravit cestu.
+
+Rozhodnutí:
+Do rozcestníku doplníme jeden přímý odkaz a starou servisní poznámku necháme jen v logu. Pravidlo samotné neměníme.
+```
+
+Takové uzavření je malé a přesné. Neřeší znovu kvalitu pravidla, protože problém nebyl v pravidle. Řeší cestu. To je nudné, ale nuda tady šetří tým před tím, aby z jedné chybějící cedule udělal rekonstrukci celé budovy.
+
+### Co propsat do běžného rytmu
+
+Uzavření první běžné kontroly se má propsat jen do míst, která budou lidé opravdu používat:
+
+- do běžného review logu, pokud klid drží;
+- do rozcestníku nebo navigace, pokud selhala cesta;
+- do kanonického pravidla, pokud selhala použitelnost;
+- do návratové karty, pokud nastal skutečný návratový signál.
+
+Nepřepisujte všechna místa najednou. Každý zápis má mít důvod. Když klid drží, často stačí jedna věta v logu:
+
+```text
+První běžná kontrola po přechodu do delšího klidu proběhla bez návratového signálu; kanonické místo je najitelné a použitelné.
+```
+
+Tato věta je lepší než dlouhý záznam s historií opravy. Budoucímu člověku říká, že systém fungoval v běžném rytmu, a zároveň ho netahá do starých detailů.
+
+### Privacy-first uzavření
+
+Uzavírací pravidlo je jednoduché: čím klidnější výsledek, tím méně detailů má zůstat v aktivní pracovní stopě. Pokud kontrola proběhla dobře, nepotřebujete přikládat ukázky, screenshoty, interní zprávy ani exporty. Stačí obecný závěr.
+
+Položte si tři otázky:
+
+- Který detail je nutný pro další rozhodnutí?
+- Který detail držíme jen jako pocit jistoty?
+- Která stará stopa má po uzavření zůstat zavřená?
+
+U stavu `uzavřít do klidu` by odpověď měla být skoro vždy stručná: žádný starý detail není potřeba. U stavů `opravit cestu` a `opravit pravidlo` stačí popsat tření bez osobních nebo interních detailů. U stavu `otevřít návrat` použijte jen důkaz potřebný pro potvrzení signálu a zbytek nechte v původním zdroji pravdy.
+
+Privacy-first provoz se nepozná podle toho, že tým nikdy nic neotevře. Pozná se podle toho, že po uzavření ví, co už znovu neotvírat.
+
+### Karta uzavření první běžné kontroly
+
+```text
+Pracovní místo:
+
+Běžný rytmus:
+
+Výsledek první běžné kontroly:
+
+Uzavírací stav:
+- uzavřít do klidu
+- opravit cestu
+- opravit pravidlo
+- otevřít návrat
+
+Rozhodnutí jednou větou:
+
+Co se propíše do běžného rytmu:
+
+Co zůstává zavřené:
+
+Privacy-first uzavření:
+Jaký obecný závěr stačí a které staré stopy neotevíráme:
+
+Vlastník:
+
+Datum další běžné kontroly nebo návratový signál:
+```
+
+Kartu používejte celou jen tehdy, když kontrola něco našla. Pokud klid drží, napište z ní jen rozhodnutí jednou větou, kanonické místo a privacy-first závěr. Karta nemá být trest za to, že systém funguje.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte výsledek první běžné kontroly.
+2. Minuta 2: vyberte jeden ze čtyř uzavíracích stavů.
+3. Minuta 3: napište rozhodnutí jednou větou.
+4. Minuta 4: určete jediné místo, kam se výsledek propíše.
+5. Minuta 5: napište, co zůstává zavřené.
+6. Minuta 6: udělejte privacy-first uzavření starých stop.
+
+Když se workshop začne větvit do nových nápadů, vraťte se k otázce: "Co je potřeba uzavřít po první běžné kontrole?" Nový nápad může být dobrý, ale nepatří do uzavření staré klidové větve.
+
+### Checklist uzavření první běžné kontroly
+
+- Vybrali jsme jeden ze čtyř uzavíracích stavů?
+- Umíme rozhodnutí napsat jednou větou?
+- Pokud klid drží, nezakládáme další zvláštní kontrolu?
+- Pokud opravujeme cestu, neměníme zbytečně pravidlo?
+- Pokud opravujeme pravidlo, děláme to v kanonickém místě?
+- Pokud otevíráme návrat, odpovídá opravdu předem zapsanému návratovému signálu?
+- Propsali jsme výsledek jen do jednoho potřebného pracovního místa?
+- Zapsali jsme, co zůstává zavřené?
+- Neotevíráme staré screenshoty, exporty, zprávy nebo komentáře jen pro pocit jistoty?
+- Stačí budoucímu čtenáři obecný závěr bez osobních a interních detailů?
+
+Uzavření první běžné kontroly má udělat hlavně jednu věc: zabránit tomu, aby se klid proměnil v nekonečnou péči. Když systém funguje, nechte ho fungovat. Když nefunguje, opravte přesně tu část, která selhala. Všechno ostatní je jen hezky oblečená prokrastinace s vlastní kartičkou.
+
 ## Pracovní log
 
+- 2026-06-20: Doplněna úvodní podkapitola o uzavření první běžné kontroly v delším klidovém rytmu: čtyři uzavírací stavy, propsání do běžného rytmu, privacy-first uzavření, karta, mini workshop a checklist.
 - 2026-06-20: Doplněna úvodní podkapitola o první běžné kontrole v delším klidovém rytmu: ověření kanonického místa bez servisní historie, čtyři výsledky kontroly, privacy-first zápis, karta, mini workshop a checklist.
 - 2026-06-20: Doplněna úvodní podkapitola o delším klidovém rytmu po měsíční kontrole servisní větve: převod do existujícího revizního rytmu, návratový signál bez servisní historie, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-20: Doplněna úvodní podkapitola o uzavření měsíční kontroly po servisní větvi: čtyři uzavírací stavy, praktické příklady, privacy-first zápis, karta, mini workshop a checklist.
