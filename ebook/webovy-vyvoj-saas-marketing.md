@@ -233710,8 +233710,171 @@ Když se workshop zasekne na tom, jestli "raději ještě jednou zkontrolovat", 
 
 Dobře uzavřené první běžné použití je tiché. Nenechá za sebou nový projekt, pokud není potřeba. Nechá za sebou jen jasný stav, uklizené stopy a pravidlo, které může dál pracovat bez zvláštního dohledu.
 
+## Druhé běžné použití po uzavření první reakce
+
+První běžné použití ověřuje, že pravidlo po uzavřené reakci vůbec funguje mimo mimořádnou pozornost. Druhé běžné použití ověřuje něco jemnějšího: jestli pravidlo funguje i ve chvíli, kdy už kolem něj není čerstvá paměť, autor rozhodnutí, ani pocit, že se "zrovna testuje". To je důležitý rozdíl. První použití často projde díky tomu, že si všichni pamatují poslední debatu. Druhé použití ukáže, jestli pravidlo opravdu stojí samo.
+
+Druhé použití neplánujte jako velké review. V ideálním případě ho prostě zachytíte při další normální práci: další poptávka, další úprava stránky, další onboardingový průchod, další supportní odpověď, další interní předání. Pokud musíte druhé použití uměle vyrábět, možná pravidlo ještě nemá přirozené pracovní místo, nebo se používá tak zřídka, že nepotřebuje další provozní péči.
+
+Začněte krátkým zápisem:
+
+```text
+Pravidlo jsme použili podruhé v běžné situaci:
+
+Použil ho:
+
+Bez čerstvého vysvětlení dokázal:
+
+Zasekl se na:
+
+Výsledek:
+```
+
+Tento zápis má chránit před hezkým, ale prázdným závěrem "asi to drží". Druhé použití má ukázat přenositelnost. Neptáte se jen, jestli pravidlo fungovalo. Ptáte se, jestli ho zvládl použít člověk, který neměl v hlavě celou historii první reakce.
+
+### Co druhé použití testuje
+
+Druhé běžné použití testuje čtyři věci:
+
+- Najitelnost: člověk ví, kde pravidlo hledat, nebo ho najde v místě, kde práci opravdu dělá.
+- Rozhodnutelnost: pravidlo pomůže vybrat další krok, ne jen zopakuje obecný princip.
+- Přenositelnost: pravidlo nevyžaduje autora původní reakce ani ústní dovysvětlení.
+- Klid: použití pravidla neotevře automaticky nové review, novou tabulku ani nové měření.
+
+Pokud druhé použití selže na najitelnosti, často stačí opravit odkaz, název nebo umístění. Pokud selže na rozhodnutelnosti, pravidlo je možná moc obecné. Pokud selže na přenositelnosti, chybí mu hrana, příklad nebo negativní případ. Pokud selže na klidu, tým si z pravidla udělal nenápadný alarm a potřebuje zpřesnit návratový signál.
+
+Praktický příklad:
+
+```text
+Pravidlo:
+Před prvním lidským kontaktem přidáváme do formuláře jen údaj, který mění další krok zákazníka.
+
+Druhé běžné použití:
+Nový člověk v obchodě řešil poptávku, kde chyběla informace o velikosti firmy.
+
+Co zvládl bez čerstvého vysvětlení:
+Nepřidal nové povinné pole a rozhodl, že se na velikost firmy zeptá až v discovery.
+
+Kde se zasekl:
+Nebyl si jistý, jestli stejná logika platí i pro informaci o rozhodovacím procesu.
+
+Výsledek:
+Pravidlo je najitelné a použitelné, ale potřebuje jednu rozhodovací hranu pro údaje, které mění prioritu reakce.
+```
+
+Tady není potřeba otevřít velkou smyčku o kvalifikaci leadů. Stačí doplnit hranici: údaj patří do formuláře jen tehdy, když bez něj nejde bezpečně vybrat další krok; pokud jen zpřesní obchodní rozhovor, patří do discovery. To je malá oprava s velkým uklidňujícím účinkem.
+
+### Čtyři výsledky druhého použití
+
+Po druhém běžném použití vyberte jeden ze čtyř výsledků:
+
+- Drží samostatně: pravidlo bylo najitelné, rozhodnutelné a nepřineslo nové tření.
+- Potřebuje poslední lokální hranu: pravidlo funguje, ale jeden typ situace ještě potřebuje přesnější větu.
+- Ukázalo slabé kanonické místo: problém není v pravidle, ale v tom, kde nebo jak je uložené.
+- Otevřelo nový návratový signál: druhé použití potvrdilo opakovaný problém, který už nejde zavřít lokálním dotažením.
+
+Výsledek `drží samostatně` znamená, že pravidlo může odejít zpět do běžného rytmu. Nepřidávejte třetí kontrolu jen proto, že dvě použití dopadla dobře. To je jako nechat zdravého člověka každý den měřit teplotu, protože včera neměl horečku. Technicky to jde, ale produktivita u toho tiše pláče do rukávu.
+
+Výsledek `poslední lokální hrana` použijte opatrně. Slovo poslední je důležité. Pokud se po druhém použití ukáže další drobná nejasnost, opravte ji jen tehdy, když je opravdu ve stejném pracovním místě a stejném typu rozhodnutí. Jakmile se oprava rozlézá do dalších částí procesu, nejde o hranu pravidla, ale o novou otázku.
+
+Výsledek `slabé kanonické místo` je častý u týmů, které mají dobrá pravidla, ale špatnou navigaci. Pravidlo existuje, jen je schované v komentáři, staré kartě, zápisu ze schůzky nebo dokumentu, který nikdo neotevírá při skutečné práci. V takovém případě nepřepisujte pravidlo. Přesuňte nebo propojte ho do místa, kde se rozhodnutí děje.
+
+Výsledek `nový návratový signál` patří jen situacím, kde druhé použití ukáže opakovaný dopad: stejná chyba, stejná nejistota, stejné ruční obcházení, stejný datový problém. Příbuzný nápad není návratový signál. Je to podnět a může počkat.
+
+### Privacy-first kontrola druhého použití
+
+Druhé použití svádí k tomu, že si tým začne schovávat více příkladů "pro jistotu". Nedělejte z používání pravidla sbírku zákaznických stop. Cílem není vytvořit galerii případů, ale ověřit, že pravidlo pomáhá rozhodnout.
+
+Stačí odpovědět na tři otázky:
+
+```text
+Jaký zobecněný závěr z druhého použití potřebujeme?
+Který konkrétní detail už pro další rozhodnutí nepotřebujeme?
+Kde zůstává zdroj pravdy, pokud by bylo nutné se k případu vrátit?
+```
+
+Například místo kopie celé poptávky zapište:
+
+```text
+Druhé použití potvrdilo, že velikost firmy nemusí být povinné pole před prvním kontaktem. U rozhodovacího procesu doplňujeme hranu: pokud bez údaje nejde vybrat další krok, patří do vstupní brány; jinak až do discovery.
+```
+
+Takový záznam stačí pro pravidlo, tým i budoucí návrat. Zároveň nevytahuje osobní údaje do další vrstvy dokumentace. Privacy-first provoz není asketická póza. Je to schopnost nechat důkaz v původním systému a do pravidla přenést jen rozhodovací smysl.
+
+### Karta druhého běžného použití
+
+```text
+Pravidlo:
+
+Kanonické místo:
+
+První běžné použití bylo uzavřeno stavem:
+
+Druhé běžné použití:
+
+Kdo pravidlo použil:
+
+Co zvládl bez čerstvého vysvětlení:
+
+Kde vzniklo tření:
+
+Výsledek:
+- drží samostatně
+- potřebuje poslední lokální hranu
+- ukázalo slabé kanonické místo
+- otevřelo nový návratový signál
+
+Rozhodnutí jednou větou:
+
+Co se mění v kanonickém místě:
+
+Co výslovně neotevíráme:
+
+Privacy-first záznam:
+Zobecněný závěr:
+Detaily, které nekopírujeme:
+Zdroj pravdy, pokud je potřeba návrat:
+
+Další návratový signál nebo návrat do klidu:
+
+Vlastník:
+
+Datum:
+```
+
+Karta má být stručná, protože druhé použití už není mimořádná událost. Pokud z ní vznikne složitý protokol, pravidlo ještě není v běžném rytmu, jen se kolem něj změnil název rituálu.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: připomeňte uzavření prvního běžného použití.
+2. Minuta 2: popište druhé použití jednou větou.
+3. Minuta 3: určete, co šlo bez čerstvého vysvětlení.
+4. Minuta 4: pojmenujte jedno tření, pokud existuje.
+5. Minuta 5: vyberte jeden ze čtyř výsledků.
+6. Minuta 6: zapište privacy-first závěr a rozhodnutí, co se neotevírá.
+
+Když se tým začne vracet k celé historii první reakce, zastavte to. Druhé použití nemá být archeologie. Má ukázat, jestli dnešní pravidlo funguje v dnešní práci.
+
+### Checklist druhého běžného použití
+
+- Šlo opravdu o běžnou pracovní situaci, ne o umělý test?
+- Použil pravidlo někdo bez čerstvého vysvětlení celé historie?
+- Bylo pravidlo najitelné v místě, kde se rozhodnutí dělá?
+- Pomohlo vybrat další krok?
+- Víme, jestli šlo o samostatné fungování, lokální hranu, slabé kanonické místo, nebo nový návratový signál?
+- Pokud doplňujeme hranu, je jen jedna a patří do stejného pracovního místa?
+- Pokud je slabé kanonické místo, opravujeme navigaci místo přepisování celého pravidla?
+- Neotevíráme novou smyčku kvůli příbuznému nápadu?
+- Stačí nám zobecněný závěr místo kopie konkrétní zákaznické stopy?
+- Víme, které detaily nekopírujeme do týmové paměti?
+- Zapsali jsme, co výslovně neotevíráme?
+- Má pravidlo po druhém použití návratový signál, nebo se vrací do klidu?
+
+Druhé běžné použití je malý test dospělosti pravidla. Když drží, nechte ho pracovat. Když potřebuje jednu hranu, doplňte ji a zavřete. Když se ukáže slabé místo uložení, opravte cestu k pravidlu. A když se opravdu vrátí původní problém, otevřete novou smyčku bez toho, abyste kvůli ní tahali do popředí všechny staré stopy.
+
 ## Pracovní log
 
+- 2026-06-20: Doplněna úvodní podkapitola o druhém běžném použití po uzavření první reakce: test přenositelnosti bez čerstvé paměti, čtyři výsledky, privacy-first záznam, karta, workshop a checklist.
 - 2026-06-20: Doplněna úvodní podkapitola o uzavření prvního běžného použití po uzavření první reakce: čtyři uzavírací stavy, praktický příklad, kanonické propsání, privacy-first úklid, karta, workshop a checklist.
 - 2026-06-20: Doplněna úvodní podkapitola o prvním běžném použití po uzavření první reakce po dlouhodobém klidu: najitelnost, rozhodnutelnost, samostatnost, čtyři výsledky použití, privacy-first hranice, karta, workshop a checklist.
 - 2026-06-20: Doplněna úvodní podkapitola o uzavření první reakce po dlouhodobém klidu: čtyři uzavírací stavy, praktický příklad, propsání do kanonického místa, privacy-first úklid, karta, mini workshop a checklist.
