@@ -234206,8 +234206,177 @@ Když se workshop začne natahovat, nejspíš se do něj přimíchalo nové tém
 
 Dlouhodobý klid je dobrý výsledek. Není to lenost, je to provozní disciplína. Tým má vědět, kdy se k pravidlu vrátit, ale nemá ho neustále kontrolovat jen proto, že existuje. Dobře zavřené pravidlo pracuje potichu, dokud mu realita nedá důvod znovu promluvit.
 
+## Servisní poznámka po návratu do dlouhodobého klidu
+
+Po návratu pravidla do dlouhodobého klidu se občas stane drobná věc: někdo si všimne formulace, která by šla říct jasněji, najde odkaz na starší vysvětlení, narazí na neaktuální příklad nebo během běžné práce zahlédne malou nápovědu, která by pravidlo zpřístupnila novému člověku. To ještě není návratový signál. Je to servisní poznámka.
+
+Servisní poznámka má pomoci pravidlu zůstat použitelné, aniž by se znovu otevřela celá rozhodovací historie. Je to rozdíl mezi dotažením štítku na dveřích a přestavbou místnosti. Obojí může být někdy potřeba, ale plést si je dohromady je drahý sport. A malý tým většinou nemá rozpočet na olympiádu v přepisování pravidel.
+
+Začněte větou:
+
+```text
+Toto je servisní poznámka, ne návrat pravidla, protože:
+```
+
+Potom doplňte konkrétní důvod. Například:
+
+```text
+Toto je servisní poznámka, ne návrat pravidla, protože:
+pravidlo při běžném použití drží, jen odkaz v pracovním místě vede na starší vysvětlení.
+```
+
+Tato věta je užitečná hlavně proto, že chrání rozsah. Bez ní se z drobné opravy odkazu může stát debata, jestli celé pravidlo ještě odpovídá strategii, jestli nemáme změnit formulář, jestli by se neměl přidat nový dotazník a jestli by se to celé nemělo měřit jinak. Možná někdy ano. Ale ne v servisní poznámce.
+
+### Co patří do servisní poznámky
+
+Do servisní poznámky patří jen úpravy, které nemění rozhodovací logiku pravidla. Typicky:
+
+- oprava názvu, odkazu nebo umístění krátkého znění pravidla;
+- zpřesnění věty, která byla pravdivá, ale hůř se četla;
+- odstranění staré poznámky, která už jen mate;
+- doplnění jednoho příkladu použití bez změny hranic pravidla;
+- sjednocení pojmenování mezi pracovním místem a znalostní bází;
+- úklid dočasné stopy, která zůstala po uzavření.
+
+Naopak sem nepatří změna podmínky, kdy se pravidlo používá, nový návratový signál, nová povinná data, změna vlastníka, nový kontrolní rytmus ani úprava, která ovlivní zákaznickou cestu. Jakmile poznámka sahá na rozhodnutí, přestává být servisní. V tu chvíli ji buď odložte jako podnět, nebo ji otevřete jako novou malou smyčku podle návratového signálu.
+
+Praktický filtr:
+
+```text
+Kdybychom tuto poznámku provedli, rozhodl by se někdo příště jinak?
+```
+
+Pokud odpověď zní ano, není to servisní poznámka. Pokud odpověď zní ne, ale člověk pravidlo snáz najde, pochopí nebo použije, servisní poznámka dává smysl.
+
+### Praktický příklad
+
+```text
+Pravidlo v klidu:
+Před prvním lidským kontaktem přidáváme do formuláře jen údaj, který mění další krok zákazníka.
+
+Servisní nález:
+V obchodním checklistu je odkaz na staré vysvětlení pravidla z ověřovací fáze. Nový člověk se přes něj dostane k dlouhé historii místo ke krátkému znění v aktuální šabloně.
+
+Servisní poznámka:
+Neotevíráme pravidlo. Opravíme odkaz v obchodním checklistu tak, aby vedl na aktuální krátké znění pravidla v šabloně poptávkového formuláře.
+
+Co se nemění:
+Hranice použití, návratový signál, formulářová pole, obchodní proces ani měření.
+
+Ověření:
+Při příštím běžném použití checklistu nový člověk najde aktuální pravidlo bez hledání v historii.
+```
+
+Všimněte si, že servisní poznámka má ověření, ale ne velký test. Stačí jeden běžný průchod nebo kontrola odkazu. Cílem není znovu prokazovat hodnotu pravidla. Cílem je odstranit drobnou překážku, aby pravidlo mohlo dál pracovat potichu.
+
+### Hranice lokální opravy
+
+Servisní poznámka musí mít ostré hrany. Nejjednodušší je napsat tři krátké řádky:
+
+```text
+Opravujeme:
+
+Neměníme:
+
+Ověříme jedním průchodem:
+```
+
+Příklad:
+
+```text
+Opravujeme:
+Odkaz v obchodním checklistu.
+
+Neměníme:
+Znění pravidla, návratový signál, pole formuláře ani sales proces.
+
+Ověříme jedním průchodem:
+Otevřeme checklist z místa, kde ho používá obchod, a zkontrolujeme, že vede na aktuální krátké znění pravidla.
+```
+
+Pokud do řádku "Opravujeme" napíšete víc než jedno pracovní místo, poznámka už bobtná. Rozdělte ji. Jedna servisní poznámka má opravit jednu věc na jednom místě. Když se stejný problém objeví na třech místech, může to být signál slabého kanonického místa, ale to je už samostatná otázka. Nevyřeší se tím, že do jedné poznámky nacpete všechno, co se tváří podobně.
+
+### Privacy-first servis
+
+Servisní poznámka je malá, ale i malá poznámka může zbytečně roznášet data. Častá chyba: někdo pro vysvětlení drobné úpravy zkopíruje zákaznický příklad, screenshot formuláře, interní komentář nebo kus e-mailu. Přitom servisní oprava většinou potřebuje jen obecný popis tření.
+
+Použijte pravidlo:
+
+```text
+Servisní poznámka má ukázat místo opravy, ne znovu přenášet důkaz.
+```
+
+Místo kopie konkrétní poptávky napište:
+
+```text
+Při běžném použití checklistu nebylo zřejmé, který odkaz je aktuální.
+```
+
+To stačí. Pokud někdy opravdu potřebujete původní důkaz, odkažte na zdroj pravdy a nechte osobní nebo obchodně citlivé detaily tam. Servisní poznámka nemá být nový archiv. Má být účtenka za malou opravu.
+
+### Karta servisní poznámky
+
+```text
+Pravidlo v dlouhodobém klidu:
+
+Kanonické pracovní místo:
+
+Servisní nález:
+
+Proč nejde o návratový signál:
+
+Opravujeme:
+
+Neměníme:
+
+Privacy-first hranice:
+Jaký důkaz nepřenášíme:
+Jaký obecný závěr stačí:
+
+Ověření jedním průchodem:
+
+Výsledek:
+- opraveno a zavřeno
+- opraveno, ale čeká na jedno běžné ověření
+- nejde o servisní poznámku, předat jako podnět
+- objevil se návratový signál, otevřít samostatnou smyčku
+
+Vlastník:
+
+Datum:
+```
+
+Kartu neukládejte vedle pravidla jako další vrstvu, pokud to není potřeba. Po uzavření má zůstat opravené pracovní místo a krátká stopa v pracovním logu. Jinak se servisní poznámky časem promění v drobný prach kolem každého pravidla. Prach je nenápadný, ale jednou za čas začne dusit.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: pojmenujte servisní nález jednou větou.
+2. Minuta 2: napište, proč nejde o návratový signál.
+3. Minuta 3: určete jediné pracovní místo opravy.
+4. Minuta 4: napište, co se výslovně nemění.
+5. Minuta 5: proveďte privacy-first kontrolu důkazů.
+6. Minuta 6: ověřte opravu jedním běžným průchodem nebo určete nejbližší přirozené ověření.
+
+Když workshop potřebuje víc času, pravděpodobně řešíte víc než servisní poznámku. To není špatně, jen to pojmenujte správně. Malé věci mají zůstat malé právě proto, aby velké věci dostaly vlastní prostor.
+
+### Checklist servisní poznámky
+
+- Drží původní pravidlo dál v dlouhodobém klidu?
+- Umíme jednou větou říct, proč nejde o návratový signál?
+- Opravujeme jen jedno pracovní místo?
+- Neměníme rozhodovací logiku, hranici použití ani návratový signál?
+- Nezasahujeme do zákaznické cesty, formulářových polí, měření ani vlastnictví procesu?
+- Stačí k opravě obecný popis tření místo konkrétních zákaznických dat?
+- Nepřenášíme screenshoty, e-maily, exporty ani interní komentáře bez jasného účelu?
+- Má oprava jednoduché ověření jedním běžným průchodem?
+- Víme, kam poznamenat výsledek bez zakládání nové trvalé vrstvy?
+- Pokud poznámka přerostla, předali jsme ji jako podnět nebo návratovou smyčku místo rozšiřování servisní opravy?
+
+Servisní poznámka je malý nástroj pro provozní klid. Udržuje pravidlo čitelné, dostupné a bez zbytečných stop, ale nenechá z každé drobnosti vyrůst nový projekt. To je přesně ten typ neokázalé disciplíny, díky které privacy-first provoz není těžký batoh, ale normální způsob práce.
+
 ## Pracovní log
 
+- 2026-06-20: Doplněna úvodní podkapitola o servisní poznámce po návratu do dlouhodobého klidu: rozlišení drobné lokální opravy od návratového signálu, hranice opravy, privacy-first servis, karta, mini workshop a checklist.
 - 2026-06-20: Doplněna úvodní podkapitola o návratu do dlouhodobého klidu po uzavření druhého běžného použití: kanonické pracovní místo, návratový signál, praktický příklad, privacy-first úklid, karta, workshop a checklist.
 - 2026-06-20: Doplněna úvodní podkapitola o uzavření druhého běžného použití po uzavření první reakce: čtyři uzavírací stavy, praktický příklad, kanonické propsání, privacy-first úklid, karta, workshop a checklist.
 - 2026-06-20: Doplněna úvodní podkapitola o druhém běžném použití po uzavření první reakce: test přenositelnosti bez čerstvé paměti, čtyři výsledky, privacy-first záznam, karta, workshop a checklist.
