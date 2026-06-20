@@ -235323,8 +235323,181 @@ Pokud v minutě 4 neumíte napsat návratový signál, neznamená to, že musít
 
 Návrat do klidového provozu je dobrý konec malé údržby. Pracovní místo je čistší, tým nemusí nosit v hlavě historii opravy a další pozornost čeká až na skutečný signál. To je přesně ten druh tiché provozní disciplíny, která nevypadá jako velká věc, dokud ji nemáte. Pak najednou zjistíte, že méně věcí zůstává rozdělaných jen proto, že je nikdo neuměl pustit.
 
+## První běžné review po návratu servisní větve do klidu
+
+Jakmile se servisní větev vrátí do klidového provozu, nemá dostat vlastní slavnostní kontrolu. Přesto se může stát, že se její pracovní místo objeví v běžném review: při měsíční kontrole kanonického indexu, při úklidu obchodních šablon, při revizi onboardingové trasy nebo při provozním pohledu na interní playbooky. To je v pořádku. Důležité je, aby se review chovalo k opravenému místu jako k normální součásti systému, ne jako k čerstvě zahojené ráně, kterou všichni opatrně obcházejí.
+
+První běžné review po návratu do klidu ověřuje jedinou otázku:
+
+```text
+Funguje opravené pracovní místo v běžném rytmu stejně obyčejně jako ostatní místa?
+```
+
+Slovo "obyčejně" je tady záměrné. Neptáte se, jestli byla servisní oprava skvělá, elegantní nebo jestli by šla rozšířit na další části systému. Ptáte se, jestli už nepotřebuje zvláštní pozornost. Pokud ano, nechte ji být. Pokud ne, pojmenujte přesně, co se v běžném rytmu ukázalo: slabá najitelnost, nejasná věta, stará kopie, chybějící vlastník nebo skutečný návratový signál.
+
+Začněte krátkým zápisem:
+
+```text
+V běžném review kontrolujeme:
+
+Servisní větev zůstává zavřená, pokud:
+
+Nový signál vzniká jen tehdy, když:
+
+Do review nepřenášíme:
+```
+
+Tento zápis brání tomu, aby se běžné review změnilo v archeologii servisní opravy. Review má ověřit současný stav pracovního místa. Historie je užitečná jen tehdy, když vysvětluje návratový signál. Jinak je to šum v bundě s kapucí.
+
+### Tři vrstvy běžného review
+
+Projíždějte opravené pracovní místo ve třech vrstvách:
+
+- Najitelnost: člověk najde aktuální místo bez cesty přes starý odkaz, komentář nebo autora opravy.
+- Použitelnost: místo vede k rozhodnutí nebo dokončení úkolu bez vysvětlování servisní historie.
+- Klid: po použití nevzniká nová kontrola, nová evidence ani potřeba sledovat opravu zvlášť.
+
+Najitelnost je první filtr. Pokud člověk v běžném review sáhne po staré kopii, problém nemusí být v obsahu pravidla. Může být v rozcestníku, názvu souboru, interním odkazu nebo v tom, že stará servisní poznámka zůstala viditelnější než aktuální pracovní místo. V takové situaci opravte cestu, ne celé pravidlo.
+
+Použitelnost je druhý filtr. Opravené místo má pomoci udělat práci. Pokud ho člověk najde, ale pořád neví, co vybrat, kam navázat nebo co zapsat, nejde už o servisní větev. Jde o slabou rozhodovací hranu. Tu nepřilepujte zpět k servisní poznámce. Otevřete nový návratový signál s vlastním pracovním místem.
+
+Klid je třetí filtr. Pokud review skončí větou "radši to budeme ještě měsíc sledovat", zeptejte se, co přesně se má stát. Jestli nemáte konkrétní návratový signál, nevytvářejte hlídku. Oprava, která prošla dvěma běžnými použitími a jedním běžným review, si nezaslouží další kameru nad stolem. Zaslouží si ticho.
+
+### Praktický příklad
+
+```text
+Situace:
+Obchodní rozcestník obsahuje aktuální odkaz na šablonu předání po auditu. Servisní větev byla dříve uzavřena, protože druhé běžné použití potvrdilo najitelnost šablony.
+
+Běžné review:
+Při měsíční kontrole obchodních šablon tým otevřel rozcestník a použil odkaz bez znalosti staré opravy.
+
+Výsledek:
+Najitelnost drží. Použitelnost drží. Nevznikla nová potřeba sledovat opravu.
+
+Rozhodnutí:
+Servisní větev zůstává zavřená. V logu review stačí věta: "Šablona předání po auditu je v rozcestníku použitelná bez historické poznámky."
+
+Co neotevíráme:
+Neprocházíme staré screenshoty, neřešíme původní chybný odkaz a nezakládáme samostatnou kontrolu servisních oprav.
+```
+
+Jiný výsledek může vypadat takto:
+
+```text
+Výsledek review:
+Aktuální odkaz je správný, ale nový člověk nevěděl, jestli použít šablonu předání po auditu, nebo šablonu předání po retaineru.
+
+Rozhodnutí:
+Servisní větev zůstává zavřená. Vzniká nový návratový signál k rozhodovací hraně mezi dvěma šablonami.
+
+Nejbližší pracovní místo:
+Rozcestník šablon, konkrétně dvě popisné věty u šablon pro audit a retainer.
+```
+
+Všimněte si, že stará servisní oprava se neotevřela znovu. Jen pomohla odhalit, že dnešní problém je jinde. To je zdravé. Staré téma nemusí ožít pokaždé, když se v jeho okolí objeví nové tření.
+
+### Čtyři výsledky review
+
+Po běžném review vyberte jeden ze čtyř výsledků:
+
+- Klid potvrzen: pracovní místo funguje bez zvláštní péče a servisní větev zůstává zavřená.
+- Lokální navigační oprava: stačí upravit odkaz, název, umístění nebo jednu pomocnou větu.
+- Nový návratový signál: review ukázalo problém mimo servisní větev, typicky slabou rozhodovací hranu nebo změněný kontext.
+- Chybný návrat do klidu: ukázalo se, že servisní větev byla zavřená předčasně nebo na špatném kanonickém místě.
+
+Stav `klid potvrzen` má být nejkratší. Nepřidávejte k němu úkol. Stačí běžný log review, pokud ho daný rytmus stejně vede.
+
+Stav `lokální navigační oprava` použijte, když se nemění rozhodovací logika. Například rozcestník má správnou šablonu, ale název odkazu je pořád méně jasný než názvy ostatních položek. Opravte název a nechte servisní větev zavřenou.
+
+Stav `nový návratový signál` použijte, když review ukáže otázku, která má vlastní důvod a vlastní pracovní místo. Nepište ji jako "pokračování servisní opravy". Tím byste jen míchali údržbu, produktové rozhodnutí a týmovou paměť do jedné kaše.
+
+Stav `chybný návrat do klidu` použijte vzácně. Třeba když se zjistí, že oprava byla propsaná do kopie, zatímco kanonické místo zůstalo špatně. V takovém případě neopravujte pět následků. Vraťte se k jednomu správnému kanonickému místu, zavřete chybnou stopu a zopakujte nejmenší běžné použití.
+
+### Privacy-first review
+
+Běžné review po servisní větvi nesmí obnovit datovou stopu, kterou jste právě uklidili. Nepotřebujete vytahovat původní screenshoty, staré zákaznické příklady, interní chaty ani seznam lidí, kteří na opravu narazili. Review se má opřít o aktuální pracovní průchod.
+
+Stačí zapsat obecný výsledek:
+
+```text
+Aktuální rozcestník dovedl člověka ke správné šabloně bez otevření staré servisní poznámky.
+```
+
+To je lepší než:
+
+```text
+Při kontrole uživatel X otevřel dokument Y pro zákazníka Z a nepoužil starý screenshot z opravy.
+```
+
+Druhá věta možná působí konkrétněji, ale nese zbytečné detaily. Privacy-first provoz není soutěž v tom, kdo si nechá víc důkazů pro případný budoucí argument. Je to schopnost rozhodnout z dostatečného signálu a nepřidávat data, která nemění další krok.
+
+### Karta běžného review po servisní větvi
+
+```text
+Pracovní místo:
+
+Původně uzavřená servisní větev:
+
+Běžný rytmus review:
+
+Najitelnost:
+- drží / drhne
+
+Použitelnost:
+- drží / drhne
+
+Klid:
+- bez zvláštní péče / vzniká nová péče
+
+Výsledek:
+- klid potvrzen
+- lokální navigační oprava
+- nový návratový signál
+- chybný návrat do klidu
+
+Co se mění v pracovním místě:
+
+Co zůstává zavřené:
+
+Privacy-first zápis:
+Jaký obecný závěr stačí a které staré důkazy znovu neotevíráme:
+
+Datum dalšího návratu:
+Jen podle běžného rytmu nebo návratového signálu:
+```
+
+Kartu nevyplňujte pokaždé. Použijte ji tam, kde hrozí záměna mezi běžným review a znovuotevřením servisní historie. U triviálního potvrzení klidu stačí jedna věta v běžném logu.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: otevřete aktuální pracovní místo, ne starou servisní poznámku.
+2. Minuta 2: ověřte najitelnost v běžné cestě.
+3. Minuta 3: ověřte, jestli místo vede k rozhodnutí bez historického vysvětlování.
+4. Minuta 4: zkontrolujte, jestli nevzniká nová zvláštní péče.
+5. Minuta 5: vyberte jeden ze čtyř výsledků review.
+6. Minuta 6: zapište privacy-first závěr a věc, kterou znovu neotevíráte.
+
+Pokud se workshop začne točit kolem původní opravy, zastavte ho. Buď stará historie není potřeba, nebo se objevil nový návratový signál. V obou případech se review nemá natahovat. Má změnit stav práce.
+
+### Checklist běžného review po servisní větvi
+
+- Kontrolujeme aktuální pracovní místo, ne historii servisní opravy?
+- Prošla najitelnost bez starých odkazů, komentářů nebo ručního vysvětlení?
+- Vedlo pracovní místo k rozhodnutí nebo dokončení úkolu?
+- Nevznikla nová pravidelná kontrola jen kvůli staré servisní větvi?
+- Vybrali jsme jeden ze čtyř výsledků review?
+- Pokud stačí lokální navigační oprava, neměníme rozhodovací logiku?
+- Pokud vznikl nový návratový signál, oddělili jsme ho od servisní větve?
+- Pokud byl návrat do klidu chybný, vracíme se k jednomu kanonickému místu?
+- Nepřenášíme zpět screenshoty, exporty, interní chaty ani osobní detaily z původní opravy?
+- Má další návrat důvod v běžném rytmu nebo konkrétním návratovém signálu?
+
+První běžné review po návratu servisní větve do klidu má potvrdit, že údržba opravdu skončila. Nejlepší výsledek je skoro nudný: pracovní místo se použije, nic zvláštního se nestane a stará servisní historie zůstane zavřená. V provozu je to krásně praktická nuda. Přesně ten druh nudy, který šetří čas, data i nervy.
+
 ## Pracovní log
 
+- 2026-06-20: Doplněna úvodní podkapitola o prvním běžném review po návratu servisní větve do klidu: najitelnost, použitelnost, klid bez zvláštní péče, čtyři výsledky review, privacy-first zápis, karta, mini workshop a checklist.
 - 2026-06-20: Doplněna úvodní podkapitola o návratu do klidového provozu po uzavřené servisní větvi: kanonické pracovní místo, odstranění aktivních servisních stop, návratový signál, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-20: Doplněna úvodní podkapitola o uzavření druhého běžného použití po servisní poznámce: čtyři uzavírací stavy, praktický příklad, kanonické propsání, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-20: Doplněna úvodní podkapitola o druhém běžném použití po servisní poznámce: přenositelnost bez čerstvé paměti, čtyři výsledky použití, úklid viditelné servisní stopy, privacy-first zápis, karta, mini workshop a checklist.
