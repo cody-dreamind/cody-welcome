@@ -232846,8 +232846,157 @@ Když se během workshopu objeví nové téma, napište ho jako samostatnou otá
 
 Uzavření druhého běžného použití je konec mimořádné péče o pravidlo. Buď funguje, a potom má pracovat v klidu. Nebo potřebuje jednu hranici, a potom dostane jednu hranici. Nebo se ukázalo jako užší, a potom ho zúžíte. Nebo odkrylo novou otázku, a potom ji otevřete zvlášť. Všechno ostatní je jen elegantní způsob, jak si schovat nerozhodnutí do dokumentace.
 
+## Dlouhodobý klid po stabilizaci pravidla
+
+Když pravidlo prošlo ověřením, prvním běžným použitím a druhým běžným použitím, nastává nejtěžší část celé smyčky: nic zvláštního nepřidávat. Tým má často pocit, že po tolika kontrolách by měl vzniknout nový rytmus, dashboard, měsíční revize nebo aspoň malá tabulka "pro jistotu". Jenže stabilní pravidlo se nepozná podle toho, že kolem něj stojí dohledová věž. Pozná se podle toho, že ho lidé použijí v normální práci a nikdo kvůli tomu nemusí svolat procesní seanci.
+
+Dlouhodobý klid není zanedbání. Je to vědomý stav provozu. Pravidlo zůstává v kanonickém místě, má jasný návratový signál a další pozornost dostane až tehdy, když se signál opravdu objeví. Do té doby se nevyrábí další důkazy jen proto, aby tým měl příjemný pocit kontroly.
+
+Začněte větou:
+
+```text
+Pravidlo po stabilizaci necháváme v dlouhodobém klidu, dokud nenastane:
+```
+
+Potom doplňte jeden konkrétní návratový signál:
+
+```text
+Pravidlo po stabilizaci necháváme v dlouhodobém klidu, dokud nenastane:
+Dvě formulářové situace za sebou, ve kterých tým nedokáže podle pravidla rozhodnout, jestli nový údaj mění další krok zákazníka.
+```
+
+Tato věta chrání pravidlo před dvěma opačnými chybami. První chyba je zapomenutí: pravidlo někde existuje, ale nikdo neví, kdy ho použít. Druhá chyba je přehnaná péče: pravidlo se pořád kontroluje, i když k tomu není důvod. Dobrý dlouhodobý klid drží střed. Pravidlo je dostupné, ale není středem pozornosti.
+
+### Co v klidu zůstává
+
+V dlouhodobém klidu mají zůstat jen tři věci:
+
+- kanonické znění pravidla;
+- jedna hranice použitelnosti nebo krátký příklad, pokud pomáhá rozhodování;
+- návratový signál, který říká, kdy se pravidlo znovu otevírá.
+
+Všechno ostatní má buď odejít do rozhodovacího logu, nebo zmizet. Do běžného pracovního místa nepatří stará chronologie, screenshoty z ověřování, citace zákaznických zpráv, seznam debat ani poznámky typu "ještě sledovat". Pokud pravidlo potřebuje k přežití tyto podpěry, nejspíš ještě není stabilní. Pokud je nepotřebuje, nechte ho pracovat bez nich.
+
+Praktický příklad:
+
+```text
+Kanonické pravidlo:
+Před prvním lidským kontaktem přidáváme do formuláře jen údaj, který mění další krok zákazníka.
+
+Hranice:
+Technický kontext, který pomáhá až přípravě discovery, nepatří jako povinné pole do prvního formuláře.
+
+Návratový signál:
+Dvě po sobě jdoucí situace, kde tým nedokáže rozhodnout, jestli údaj mění další krok zákazníka.
+```
+
+To stačí. Člověk, který pravidlo příště použije, nepotřebuje vědět, že vzniklo po třech workshopech, dvou opravách a jedné debatě o CRM. Potřebuje vědět, co má udělat teď.
+
+### Co nechat mimo pravidelnou kontrolu
+
+Dlouhodobý klid má aktivně odmítat zbytečnou údržbu. Nepřidávejte pravidlo do měsíčního review jen proto, že existuje. Nepřidávejte metriky jen proto, že je umíte spočítat. Nepřidávejte povinnost hlásit každé použití jen proto, že chcete mít přehled. To je krásná cesta k tomu, aby se užitečné pravidlo změnilo v administrativní poplatek za vlastní existenci.
+
+Místo pravidelné kontroly si napište, co se nekontroluje:
+
+```text
+V dlouhodobém klidu nekontrolujeme:
+- každé použití pravidla;
+- počet situací, kde pravidlo pomohlo;
+- historické podklady z ověřování;
+- staré varianty pravidla;
+- osobní poznámky z rozhodovací debaty.
+```
+
+Tento zápis je překvapivě užitečný. Týmu dovolí nepracovat. A nepracovat na věci, která už funguje, je někdy nejvyšší forma produktivity. Ano, trochu nudná. Ale nudná jako dobře nastavená záloha: nikdo o ní nechce mluvit každý pátek, dokud dělá svoji práci.
+
+### Kdy klid přerušit
+
+Klid se nepřerušuje pocitem, že by se pravidlo "mohlo ještě vylepšit". Přerušuje se až signálem. Signál má být pozorovatelný v běžné práci a má ukazovat, že pravidlo ztratilo rozhodovací hodnotu, ne že někoho napadl nový detail.
+
+Typické důvody pro přerušení:
+
+- Stejný typ rozhodnutí opakovaně nejde podle pravidla uzavřít.
+- Pracovní místo se změnilo tak, že pravidlo už není vidět nebo nedává smysl.
+- Nabídka, segment nebo proces se posunuly a původní hranice použitelnosti je nepravdivá.
+- Pravidlo vede k horšímu zákaznickému kroku, i když je formálně dodržené.
+- Tým začal obcházet pravidlo tichou výjimkou, kterou nikdo neumí vysvětlit.
+
+Všimněte si, že žádný z těchto důvodů není "máme čas na údržbu". Čas sám o sobě není návratový signál. Čas je jen okno, ve kterém můžete reagovat, když se skutečný signál objeví.
+
+### Privacy-first klid
+
+Dlouhodobý klid je dobrá chvíle pro datovou střídmost. Pokud už pravidlo funguje, není důvod držet staré pracovní stopy jen pro pocit bezpečí. Pomocné exporty, kopie formulářů, screenshoty, syrové zákaznické zprávy nebo interní komentáře mají mít krátký život a jasný účel. Jakmile účel skončí, nemají se potichu měnit v archiv.
+
+Privacy-first otázka pro klid zní:
+
+```text
+Co musí zůstat, aby šlo pravidlo použít bez otevírání osobních nebo historických stop?
+```
+
+Odpověď má být krátká. V ideálním případě zůstává jen anonymizované pravidlo, hranice a návratový signál. Pokud je potřeba příklad, popište typ situace bez osob, firem, konkrétních zpráv a časových detailů, které nejsou nutné pro rozhodnutí.
+
+Codyho komentář: dlouhodobý klid je místo, kde se pozná, jestli tým opravdu věří vlastnímu pravidlu. Když pravidlo po stabilizaci pořád obkládáte kontrolami, možná nevěříte pravidlu. Možná věříte jen kontrole. A to je dražší náboženství.
+
+### Karta dlouhodobého klidu
+
+```text
+Pravidlo:
+
+Kanonické místo:
+
+Aktuální znění:
+
+Hranice použitelnosti:
+
+Návratový signál:
+
+Co v klidu zůstává:
+
+Co už nekontrolujeme:
+
+Co neotevíráme bez návratového signálu:
+
+Privacy-first úklid:
+Ponecháváme:
+Anonymizujeme:
+Mažeme nebo necháváme zavřené:
+
+Kdo ví, kde pravidlo najít:
+
+Datum zavření do klidu:
+```
+
+Karta nemá vytvořit další provozní rituál. Je to zavírací záznam. Po jejím vyplnění by mělo být jasné, že pravidlo žije v běžné práci, ne v dočasném ověřovacím režimu.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte stabilní znění pravidla.
+2. Minuta 2: napište jednu hranici použitelnosti.
+3. Minuta 3: potvrďte konkrétní návratový signál.
+4. Minuta 4: napište, co už se pravidelně nekontroluje.
+5. Minuta 5: ukliďte nebo anonymizujte staré pracovní stopy.
+6. Minuta 6: ověřte, že další člověk ví, kde pravidlo najde.
+
+Pokud během šesti minut zjistíte, že návratový signál neumíte napsat, pravidlo ještě nezavírejte do dlouhodobého klidu. Vraťte se o krok zpět a zúžte jeho rozsah nebo doplňte jednu rozhodovací hranici. Klid bez návratového signálu není klid. Je to zapomenutí s lepším názvem.
+
+### Checklist dlouhodobého klidu
+
+- Má pravidlo jedno kanonické místo?
+- Je aktuální znění pravidla srozumitelné bez starého rozhodovacího logu?
+- Má pravidlo jednu jasnou hranici použitelnosti nebo příklad?
+- Je návratový signál konkrétní a pozorovatelný v běžné práci?
+- Víme, co už nebudeme pravidelně kontrolovat?
+- Neotevřeli jsme nový dashboard, tabulku nebo review jen pro pocit jistoty?
+- Uklidili jsme pomocné exporty, screenshoty, kopie a syrové poznámky?
+- Zůstává případný příklad anonymizovaný a přenosný?
+- Ví další člověk, kde pravidlo najít a kdy ho použít?
+- Umíme říct, že další akce nastane až při návratovém signálu?
+
+Dlouhodobý klid je závěrečná disciplína stabilizovaného pravidla. Nechává tým používat to, co už funguje, bez další vrstvy dozoru. Když signál přijde, otevřete malou návratovou smyčku. Když nepřijde, nechte pravidlo sloužit. Produktivita někdy znamená nepřidat nic. Hrozné, já vím. Ale účinné.
+
 ## Pracovní log
 
+- 2026-06-20: Doplněna úvodní podkapitola o dlouhodobém klidu po stabilizaci pravidla: kanonické znění, návratový signál, omezení zbytečných kontrol, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-19: Doplněna úvodní podkapitola o uzavření druhého běžného použití po uzavřeném ověření pravidla: čtyři uzavírací stavy, praktický příklad, propsání do kanonického místa, privacy-first úklid, karta, workshop a checklist.
 - 2026-06-19: Doplněna úvodní podkapitola o druhém běžném použití po uzavřeném ověření pravidla: přenositelnost, samostatnost, klid, čtyři výsledné stavy, praktický příklad, privacy-first stopa, karta, workshop a checklist.
 - 2026-06-19: Doplněna úvodní podkapitola o uzavření prvního běžného použití po uzavřeném ověření pravidla: čtyři uzavírací stavy, praktický příklad, propsání do kanonického místa, privacy-first úklid, karta, mini workshop a checklist.
