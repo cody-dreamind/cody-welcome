@@ -235650,8 +235650,186 @@ Pokud se v minutě 2 tým nemůže shodnout na stavu, neřešte to hlasováním.
 
 Dobré uzavření prvního běžného review je skoro neviditelná práce. Přepne téma do správného stavu, udělá malou opravu, pokud je opravdu potřeba, a zbytek nechá být. V SaaS provozu je to cennější, než se tváří: tým se učí, že údržba může končit, ne jen měnit název.
 
+## Druhé běžné review po uzavřené servisní větvi
+
+Druhé běžné review je místo, kde se ukáže, jestli se servisní větev opravdu rozpustila v normálním provozu. První review ještě může nést čerstvou paměť: lidé si pamatují, co se opravovalo, proč se to zavíralo a kde byla původní chyba. Druhé review už by mělo fungovat bez této paměti. Pracovní místo má obstát proto, že je dobře uložené, jasně pojmenované a použitelné, ne proto, že se kolem něj pořád drží poslední oprava jako neviditelná poznámka.
+
+Základní otázka zní:
+
+```text
+Funguje pracovní místo i ve druhém běžném review bez servisního kontextu?
+```
+
+Pokud ano, neoslavujte to novým procesem. Zapište krátký závěr a nechte téma v běžném rytmu. Pokud ne, nerozšiřujte automaticky servisní větev. Nejdřív rozlište, jestli se vrátil původní problém, vzniklo nové lokální tření, nebo jen zůstala viditelná stará servisní stopa.
+
+Druhé review má být přísnější než první v jedné věci: už netoleruje skryté berličky. Věta "ono se to používá dobře, protože Jana ví, co tím bylo myšleno" není potvrzení klidu. Je to signál, že pravidlo pořád spoléhá na člověka místo na pracovní místo. Jana může být skvělá, ale dokumentace postavená na Janině paměti je SaaS verze lepicí pásky na produkčním serveru.
+
+### Co při druhém review sledovat
+
+Sledujte pět věcí:
+
+- Samostatnost: pracovní místo použije i člověk, který nebyl u servisní opravy.
+- Stejnost cesty: tým jde přes běžný rozcestník, šablonu nebo proces, ne přes starý komentář.
+- Stabilita významu: názvy, popisy a rozhodovací hrany znamenají totéž jako při prvním review.
+- Absence skryté péče: nikdo bokem nepřipomíná, že "tahle část je po opravě citlivá".
+- Datová střídmost: nevznikají nové důkazy jen proto, aby se potvrdilo, že stará oprava pořád drží.
+
+Samostatnost je nejdůležitější. Pokud pracovní místo funguje jen pro původní účastníky opravy, není hotové. V takovém případě neopravujte celý systém. Vyberte nejmenší místo, kde paměť člověka supluje text: název odkazu, popis šablony, první větu karty, umístění v indexu nebo chybějící hranici mezi dvěma podobnými možnostmi.
+
+Stejnost cesty chrání před nenápadným návratem starých kopií. Někdy tým tvrdí, že pravidlo používá, ale ve skutečnosti chodí přes oblíbený starý odkaz, připnutou zprávu nebo lokální kopii dokumentu. To není stabilita. To je jen dobře maskovaná objížďka. Druhé review má objížďku odhalit a odstranit z aktivní cesty.
+
+Stabilita významu je praktická ochrana před rozmazáním pravidla. Jestli se během dvou review změnil význam názvu, slibu nebo rozhodovací hrany, zapište to jako nový návratový signál. Nesnažte se to schovat pod servisní větev. Servis řešil konkrétní opravu; změna významu je nové téma.
+
+### Praktický příklad
+
+```text
+Pracovní místo:
+Rozcestník obchodních šablon.
+
+Servisní větev:
+Původně se opravoval chybný odkaz na šablonu předání po auditu.
+
+První běžné review:
+Odkaz byl použitelný, jen se přejmenoval z "Audit handoff" na "Předání po auditu".
+
+Druhé běžné review:
+Nový obchodník našel šablonu přes běžný rozcestník, bez staré servisní poznámky a bez dotazu na autora opravy.
+
+Výsledek:
+Samostatnost drží. Cesta drží. Nevznikla skrytá péče.
+
+Rozhodnutí:
+Servisní větev zůstává zavřená. Další návrat patří jen do běžného měsíčního review nebo při opakovaném tření v rozlišení šablon.
+```
+
+Jiný výsledek:
+
+```text
+Druhé běžné review:
+Nový obchodník našel šablonu, ale vybral ji i pro retainer, protože popis auditu a retaineru je v rozcestníku příliš podobný.
+
+Výsledek:
+Servisní větev se neotevírá. Vzniká nový návratový signál: slabá hranice mezi předáním po auditu a předáním po retaineru.
+
+Nejbližší pracovní místo:
+Dvě popisné věty v rozcestníku obchodních šablon.
+
+Privacy-first hranice:
+Nepřidáváme nové CRM pole ani osobní sledování použití šablon. Stačí obecný závěr z review.
+```
+
+Rozdíl je důležitý. V druhém příkladu se problém objevil poblíž staré opravy, ale není to stará oprava. Pokud byste ho přilepili zpět k servisní větvi, vznikne blátivý záznam: trochu historie, trochu navigace, trochu produktového rozhodnutí a trochu týmového onboardingu. Takové záznamy se špatně zavírají, protože nikdo neví, co přesně mají vyřešit.
+
+### Čtyři výsledky druhého review
+
+Po druhém běžném review vyberte jeden ze čtyř výsledků:
+
+- Klid potvrzen podruhé: pracovní místo funguje bez servisní paměti a zůstává v běžném rytmu.
+- Poslední lokální dočištění: našlo se jedno malé místo, které pořád spoléhá na starý kontext.
+- Nový návratový signál: review ukázalo nové tření s vlastním pracovním místem.
+- Skrytá servisní péče odhalena: tým sice tvrdil, že větev je zavřená, ale v praxi ji pořád ručně hlídal.
+
+Stav `klid potvrzen podruhé` je nejsilnější ukončení. Po něm už servisní větev nemá mít žádnou zvláštní stopu v aktivní práci. Zůstane jen stručný historický log, pokud ho tým potřebuje.
+
+Stav `poslední lokální dočištění` použijte opatrně. Druhé review nemá vyrábět další dlouhou řadu drobných úprav. Pokud se dá oprava udělat jednou větou, jedním odkazem nebo přesunem do správného místa, udělejte ji. Pokud potřebuje víc, pravděpodobně nejde o lokální dočištění, ale o nový návratový signál.
+
+Stav `nový návratový signál` musí mít vlastní otázku. Například: "Jak má obchodník rozlišit audit od retaineru při předání?" To je lepší než "pokračujeme v opravě šablony předání", protože nová věta ukazuje dnešní rozhodnutí.
+
+Stav `skrytá servisní péče odhalena` je nepříjemný, ale užitečný. Znamená, že proces vypadal uzavřeně jen na papíře. Někdo pořád ručně připomínal správný odkaz, kontroloval každý průchod, držel starou poznámku připnutou v chatu nebo předem opravoval chyby, než se projevily. V takovém případě nehledejte viníka. Pojmenujte berličku a nahraďte ji úpravou v kanonickém místě.
+
+### Privacy-first druhé review
+
+Druhé review často svádí k porovnávání s prvním: kdo co otevřel, kdo se ptal, kdo použil špatnou šablonu, kdo si pamatoval starý kontext. Tady je potřeba brzdit. Cílem není vytvořit osobní historii používání pravidla. Cílem je zjistit, jestli pracovní místo funguje.
+
+Dobře:
+
+```text
+Druhé review potvrdilo, že nový člověk najde šablonu přes běžný rozcestník bez servisní poznámky.
+```
+
+Slabě:
+
+```text
+Petr v úterý otevřel dokument A, potom se ptal Jany, a ta mu poslala starý komentář z úkolu B.
+```
+
+Druhá věta může být užitečná jako dočasná pracovní stopa během opravy. Po rozhodnutí ji ale nepřenášejte do dlouhodobého logu, pokud k tomu není jasný důvod. Stačí zobecněný závěr: "Pracovní místo pořád spoléhalo na ruční vysvětlení." To nese podstatu a netahá s sebou osobní detaily.
+
+### Karta druhého běžného review
+
+```text
+Pracovní místo:
+
+Původní servisní větev:
+
+Běžný rytmus review:
+
+Kdo použil pracovní místo bez servisního kontextu:
+Stačí role nebo obecný popis, ne osobní detail:
+
+Samostatnost:
+- drží / drhne
+
+Stejnost cesty:
+- běžná cesta / stará objížďka
+
+Stabilita významu:
+- drží / mění se
+
+Skrytá péče:
+- nevzniká / vzniká
+
+Výsledek:
+- klid potvrzen podruhé
+- poslední lokální dočištění
+- nový návratový signál
+- skrytá servisní péče odhalena
+
+Co se případně mění v kanonickém místě:
+
+Co zůstává zavřené:
+
+Privacy-first zápis:
+Jaký obecný závěr stačí a které osobní nebo zákaznické detaily neukládáme:
+
+Další návrat:
+Jen běžný rytmus nebo konkrétní návratový signál:
+```
+
+Karta je užitečná hlavně při tření. Pokud druhé review jen potvrdí klid, stačí krátký log. Formulář nemá být daň za to, že věci fungují.
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: otevřete aktuální pracovní místo přes běžnou cestu.
+2. Minuta 2: ověřte, jestli ho použije člověk bez servisního kontextu.
+3. Minuta 3: zkontrolujte, jestli tým nejde přes starou objížďku.
+4. Minuta 4: pojmenujte případnou skrytou servisní péči.
+5. Minuta 5: vyberte jeden ze čtyř výsledků druhého review.
+6. Minuta 6: pokud vznikl nový signál, napište ho jako samostatnou otázku.
+7. Minuta 7: zapište privacy-first závěr a smažte nebo nezakládejte nepotřebné detaily.
+
+Když se workshop začne vracet k původní opravě, položte otázku: "Co z toho potřebujeme pro dnešní rozhodnutí?" Pokud odpověď není jasná, vraťte se k aktuálnímu pracovnímu místu. Historie má pomáhat, ne moderovat schůzku.
+
+### Checklist druhého běžného review
+
+- Používáme aktuální pracovní místo přes běžnou cestu?
+- Umí ho použít člověk, který nebyl u servisní opravy?
+- Nevede práce přes starý komentář, připnutou zprávu, lokální kopii nebo autora opravy?
+- Znamenají názvy a popisy totéž jako při prvním review?
+- Nevzniká skrytá ruční péče, která drží opravu nad vodou?
+- Vybrali jsme jeden ze čtyř výsledků druhého review?
+- Pokud klid drží podruhé, nezakládáme další zvláštní kontrolu?
+- Pokud je potřeba poslední lokální dočištění, má jedno kanonické místo?
+- Pokud vznikl nový návratový signál, oddělili jsme ho od servisní historie?
+- Pokud se objevila skrytá péče, nahrazujeme ji úpravou pracovního místa místo ručního hlídání?
+- Stačí nám obecný privacy-first závěr bez osobních, zákaznických nebo interních detailů?
+- Je další návrat navázaný na běžný rytmus nebo konkrétní signál?
+
+Druhé běžné review je dobrá zkouška provozní dospělosti. Neptá se, jestli tým umí opravit chybu. Ptá se, jestli umí opravu pustit z ruky, aniž by se pomalu vrátila jako skrytá péče. Když pracovní místo obstojí i bez čerstvé paměti, máte hotovo. Ne navždy, jasně. Software a dokumentace nejsou mramor. Ale pro tenhle cyklus hotovo, což je v praxi ta nejdůležitější jednotka klidu.
+
 ## Pracovní log
 
+- 2026-06-20: Doplněna úvodní podkapitola o druhém běžném review po uzavřené servisní větvi: samostatnost bez servisní paměti, skrytá péče, čtyři výsledky review, privacy-first zápis, karta, mini workshop a checklist.
 - 2026-06-20: Doplněna úvodní podkapitola o uzavření prvního běžného review po servisní větvi: čtyři uzavírací stavy, praktický příklad, log, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-20: Doplněna úvodní podkapitola o prvním běžném review po návratu servisní větve do klidu: najitelnost, použitelnost, klid bez zvláštní péče, čtyři výsledky review, privacy-first zápis, karta, mini workshop a checklist.
 - 2026-06-20: Doplněna úvodní podkapitola o návratu do klidového provozu po uzavřené servisní větvi: kanonické pracovní místo, odstranění aktivních servisních stop, návratový signál, privacy-first úklid, karta, mini workshop a checklist.
