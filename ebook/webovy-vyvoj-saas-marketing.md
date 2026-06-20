@@ -232994,8 +232994,194 @@ Pokud během šesti minut zjistíte, že návratový signál neumíte napsat, pr
 
 Dlouhodobý klid je závěrečná disciplína stabilizovaného pravidla. Nechává tým používat to, co už funguje, bez další vrstvy dozoru. Když signál přijde, otevřete malou návratovou smyčku. Když nepřijde, nechte pravidlo sloužit. Produktivita někdy znamená nepřidat nic. Hrozné, já vím. Ale účinné.
 
+## První návratový signál po dlouhodobém klidu
+
+Dlouhodobý klid nekončí tím, že někoho napadne pravidlo vylepšit. Končí až ve chvíli, kdy se objeví signál, který byl předem pojmenovaný, nebo signál, který je mu velmi podobný a ukazuje na stejnou rozhodovací slabinu. První reakce má být malá, přesná a trochu podezřívavá: nejdřív ověřte, jestli jde opravdu o návrat pravidla, a teprve potom otevírejte změnu.
+
+Největší riziko po dlouhém klidu je přehnaný návrat energie. Tým si řekne "aha, pravidlo se ozvalo" a začne znovu číst historii, vytahovat staré exporty, přepisovat šablony a plánovat revizi celého procesu. Jenže první signál po klidu často neznamená, že se pravidlo rozpadlo. Může to být lokální výjimka, změna pracovního místa, špatně pojmenovaná hrana, nebo jen situace, kterou pravidlo nikdy nemělo pokrývat.
+
+Začněte větou:
+
+```text
+Signál po dlouhodobém klidu otevíráme jen v rozsahu:
+```
+
+Potom doplňte nejbližší pracovní místo a jednu otázku:
+
+```text
+Signál po dlouhodobém klidu otevíráme jen v rozsahu:
+formulářové rozhodnutí u poslední sporné poptávky.
+
+Otázka:
+Selhalo pravidlo, nebo jsme narazili na situaci mimo jeho hranici použitelnosti?
+```
+
+Tato věta chrání klid před tím, aby se z prvního signálu stala celková revize. Pokud nevíte, co přesně otevíráte, neotevírejte nic. Nejdřív napište pracovní místo, pak otázku, pak teprve hledejte důkaz.
+
+### Rozlišit signál od rušení
+
+První signál po klidu rozdělte do jedné ze čtyř kategorií:
+
+- Lokální rušení: někdo pravidlo nenašel, špatně si ho přečetl nebo řešil atypickou situaci.
+- Chybějící hrana: pravidlo funguje, ale jedna hranice použitelnosti potřebuje přesnější formulaci.
+- Změněný kontext: nabídka, segment, formulář, proces nebo vlastník se změnil natolik, že pravidlo už nemluví o stejné práci.
+- Skutečný návrat problému: opakuje se původní typ nerozhodnosti a pravidlo už nepomáhá uzavřít další krok.
+
+Lokální rušení nevyžaduje novou smyčku. Stačí opravit nejbližší pracovní místo: odkaz, popisek, krátký příklad nebo umístění pravidla. Chybějící hrana vyžaduje malou textovou úpravu pravidla. Změněný kontext vyžaduje kontrolu přeneseného kontextu. Skutečný návrat problému teprve otevírá novou návratovou iteraci.
+
+Praktický příklad:
+
+```text
+Původní návratový signál:
+Dvě po sobě jdoucí situace, kde tým nedokáže rozhodnout, jestli údaj mění další krok zákazníka.
+
+Pozorovaný signál:
+Obchod přidal do formuláře pole "velikost týmu", protože u jedné poptávky chyběl kontext.
+
+Kategorie:
+Lokální rušení.
+
+Proč:
+Nejde o dvě po sobě jdoucí nerozhodné situace. Jde o jeden případ, kde šlo kontext doplnit v discovery.
+
+Reakce:
+Do hranice použitelnosti doplnit větu: "Kontext, který stačí získat v discovery, nepřidáváme jako povinné pole před prvním kontaktem."
+```
+
+Všimněte si, že reakce je malá. Nepřepisuje celé pravidlo, nepřidává scoring a nevrací tým do staré debaty o formulářích. Jen vyčistí hranu, která mohla svádět k obcházení.
+
+### Nejmenší důkaz
+
+Po dlouhodobém klidu nepotřebujete velký důkazní balík. Potřebujete nejmenší důkaz, který potvrdí kategorii signálu. Obvykle stačí jedna konkrétní pracovní situace, dvě krátké věty od člověka, který pravidlo použil, a porovnání s původním návratovým signálem.
+
+Nepoužívejte staré podklady jen proto, že existují. Pokud první signál vznikl dnes, začněte dnešní realitou. Starou historii otevřete až ve chvíli, kdy musíte ověřit, jestli se vrací stejný typ problému. I tehdy stačí rozhodovací záznam, ne kompletní archiv debat.
+
+Krátký zápis:
+
+```text
+Co se stalo:
+
+Kde se to stalo:
+
+Které pravidlo mělo pomoct:
+
+Jaký byl původní návratový signál:
+
+Je dnešní situace stejný typ signálu?
+- ano
+- ne
+- nevíme
+
+Nejmenší důkaz:
+
+Kategorie signálu:
+
+Jedna reakce:
+```
+
+Pokud v řádku "nejmenší důkaz" potřebujete citovat zákaznickou zprávu, zastavte se. Ve většině případů stačí zobecněný popis: "zákazník potřeboval rozlišit audit a dlouhodobou spolupráci" místo kopie konkrétního e-mailu. Důkaz má pomoci rozhodnutí, ne roznést osobní data do další pracovní vrstvy.
+
+### Čtyři reakce na první signál
+
+Po zařazení signálu vyberte jednu reakci:
+
+- Zavřít jako rušení: pravidlo se nemění, jen se doplní odkaz nebo vysvětlení v pracovním místě.
+- Dočistit hranu: pravidlo zůstává stejné, ale přibude jedna věta k hranici použitelnosti.
+- Ověřit změněný kontext: nezasahuje se do pravidla, dokud není jasné, co se změnilo v nabídce, publiku, provozu nebo datech.
+- Otevřít návratovou iteraci: signál odpovídá původnímu návratovému signálu a opakuje se dostatečně jasně, aby stálo za to pravidlo znovu prověřit.
+
+Reakce musí být jedna. Kombinace "trochu zavřít, trochu upravit, trochu prověřit a trochu otevřít novou iteraci" je jen slušně oblečený chaos. Vyberte stav, udělejte odpovídající krok a zapište návratový bod.
+
+Codyho komentář: první signál po dlouhém klidu je jako notifikace z nástroje, který celý měsíc mlčel. Nejdřív zjistěte, jestli říká něco důležitého. Teprve potom kvůli ní přestavujte pracovní systém. Ano, dramatické reakce vypadají aktivněji. Ale aktivita bez rozlišení je jen drahá forma nervozity.
+
+### Privacy-first návrat
+
+První návrat po klidu má mít přísnější datovou hygienu než běžná práce. Důvod je jednoduchý: staré podklady už nemají aktivní účel a nové podklady ho ještě nemají prokázaný. Mezi těmito dvěma stavy se snadno vyrábí zbytečný datový nepořádek.
+
+Použijte tři pravidla:
+
+- Neotevírejte syrové staré stopy, dokud nevíte, že dnešní signál odpovídá původnímu problému.
+- Nový důkaz zapisujte zobecněně, pokud konkrétní osobní údaj nemění rozhodnutí.
+- Pokud vznikne dočasná poznámka, dejte jí hned účel a datum úklidu.
+
+Privacy-first otázka:
+
+```text
+Umíme zařadit signál bez kopírování osobních údajů, screenshotů nebo interních komentářů?
+```
+
+Pokud odpověď zní ano, nechte data zavřená. Pokud zní ne, napište proč konkrétní údaj potřebujete, kdo k němu má mít přístup a kdy se pomocná stopa smaže nebo anonymizuje.
+
+### Karta prvního signálu po klidu
+
+```text
+Pravidlo:
+
+Kanonické místo:
+
+Původní návratový signál:
+
+Dnešní pozorovaný signál:
+
+Nejbližší pracovní místo:
+
+Je to stejný typ problému?
+- ano
+- ne
+- nevíme
+
+Kategorie:
+- lokální rušení
+- chybějící hrana
+- změněný kontext
+- skutečný návrat problému
+
+Nejmenší důkaz:
+
+Jedna reakce:
+
+Co výslovně neotevíráme:
+
+Privacy-first hranice:
+Jaké staré stopy neotevíráme:
+Jaké nové údaje nezapisujeme:
+Kdy uklidíme dočasnou poznámku:
+
+Další návratový bod:
+```
+
+Karta má zabránit tomu, aby první signál po klidu přepsal celé pravidlo. Dobrý výsledek může být i "nic neměníme, jen jsme potvrdili, že šlo o rušení". To není pasivita. To je ochrana stabilního systému před zbytečným pohybem.
+
+### Mini workshop na 8 minut
+
+1. Minuta 1: přečtěte původní návratový signál.
+2. Minuta 2: popište dnešní signál jednou větou.
+3. Minuty 3 až 4: určete nejbližší pracovní místo a nejmenší důkaz.
+4. Minuta 5: zařaďte signál do jedné ze čtyř kategorií.
+5. Minuta 6: vyberte jednu reakci.
+6. Minuta 7: napište, co výslovně neotevíráte.
+7. Minuta 8: proveďte privacy-first kontrolu starých a nových stop.
+
+Když workshop skončí bez kategorie, neotevírejte úpravu pravidla. Stav "nevíme" znamená, že potřebujete menší ověřovací otázku, ne větší debatu. Nejbližší dobrý krok může být jen projít jednu další přirozenou situaci a znovu porovnat, jestli jde o stejný typ problému.
+
+### Checklist prvního signálu po klidu
+
+- Porovnali jsme dnešní signál s původním návratovým signálem?
+- Pojmenovali jsme nejbližší pracovní místo?
+- Pracujeme s nejmenším důkazem, ne s celou historií pravidla?
+- Zařadili jsme signál jako lokální rušení, chybějící hranu, změněný kontext nebo skutečný návrat problému?
+- Vybrali jsme jednu reakci místo balíku neurčitých úprav?
+- Zapsali jsme, co výslovně neotevíráme?
+- Neotevřeli jsme staré exporty, screenshoty ani syrové zprávy bez jasného účelu?
+- Nový důkaz je zobecněný, pokud konkrétní údaj nemění rozhodnutí?
+- Má dočasná poznámka účel a datum úklidu?
+- Víme, jestli pravidlo zůstává v klidu, dostane lokální dočištění, čeká na kontrolu kontextu, nebo otevírá návratovou iteraci?
+
+První návratový signál po dlouhodobém klidu má být malý test reality. Není to pozvánka k velkému úklidu ani k návratu staré agendy. Pokud signál potvrzuje skutečný návrat problému, otevřete smyčku. Pokud ne, nechte pravidlo dál sloužit. Stabilní systém se pozná i podle toho, že umí nereagovat na každé zašustění.
+
 ## Pracovní log
 
+- 2026-06-20: Doplněna úvodní podkapitola o prvním návratovém signálu po dlouhodobém klidu: rozlišení rušení, chybějící hrany, změněného kontextu a skutečného návratu problému, nejmenší důkaz, privacy-first návrat, karta, workshop a checklist.
 - 2026-06-20: Doplněna úvodní podkapitola o dlouhodobém klidu po stabilizaci pravidla: kanonické znění, návratový signál, omezení zbytečných kontrol, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-19: Doplněna úvodní podkapitola o uzavření druhého běžného použití po uzavřeném ověření pravidla: čtyři uzavírací stavy, praktický příklad, propsání do kanonického místa, privacy-first úklid, karta, workshop a checklist.
 - 2026-06-19: Doplněna úvodní podkapitola o druhém běžném použití po uzavřeném ověření pravidla: přenositelnost, samostatnost, klid, čtyři výsledné stavy, praktický příklad, privacy-first stopa, karta, workshop a checklist.
