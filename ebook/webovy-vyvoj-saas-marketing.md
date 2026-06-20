@@ -233530,8 +233530,187 @@ Když workshop začne řešit staré návrhy, zastavte ho otázkou: "Je to nutn�
 
 První běžné použití po uzavření první reakce je malý návrat k normálu. Jeho úkolem není dokázat, že tým měl pravdu. Jeho úkolem je ukázat, jestli pravidlo zase pomáhá práci bez zvláštní pozornosti. Když ano, nechte ho pracovat. Když ne, opravte nejmenší místo, které brání samostatnému rozhodnutí.
 
+## Uzavření prvního běžného použití po uzavření první reakce
+
+První běžné použití po uzavření první reakce nesmí zůstat viset jako poznámka typu "vypadá to dobře". To je příjemná věta do chatu, ale slabý provozní závěr. Pokud jste pravidlo znovu použili v normální práci, uzavřete výsledek tak, aby další člověk věděl, jestli pravidlo pokračuje v klidu, potřebuje malé dotažení, nebo se má otevřít další smyčka.
+
+Uzavření má být menší než samotné první použití. Nevracíte se k celé historii návratového signálu. Neotevíráte znovu diskusi, proč pravidlo vzniklo. Jen převádíte výsledek prvního použití do jednoho provozního stavu.
+
+Začněte větou:
+
+```text
+První běžné použití uzavíráme stavem:
+```
+
+Potom doplňte jeden stav a jednu větu důvodu:
+
+```text
+První běžné použití uzavíráme stavem:
+funguje v klidu.
+
+Důvod:
+Pravidlo bylo najitelné v kanonickém místě, obchod podle něj rozhodl bez autora původní reakce a nevznikla potřeba měnit formulář ani otevírat nové sledování.
+```
+
+Tím se z pozorování stane rozhodnutí. Rozdíl je malý na papíře a velký v provozu. Pozorování říká, co se stalo. Rozhodnutí říká, co se teď nebude zbytečně dělat.
+
+### Čtyři uzavírací stavy
+
+Po prvním běžném použití vyberte jeden ze čtyř uzavíracích stavů:
+
+- Zavřít do klidu: pravidlo fungovalo samostatně a není potřeba žádná změna.
+- Zavřít po lokálním dotažení: jedna drobná oprava pracovního místa je hotová a pravidlo se vrací do běžného provozu.
+- Vrátit k uzavření první reakce: první použití ukázalo, že samotné uzavření nepředalo dost kontextu.
+- Otevřít novou návratovou smyčku: první použití potvrdilo skutečný návrat původního problému nebo selhání uzavřené reakce.
+
+Stav `zavřít do klidu` používejte častěji, než je týmům pohodlné. Pokud pravidlo fungovalo, nepřidávejte další kontrolní krok jen proto, že jste u tématu nedávno byli. Každá zbytečná kontrola učí tým, že pravidlo není opravdu stabilní.
+
+Stav `zavřít po lokálním dotažení` použijte, když oprava už proběhla a nemá důvod žít jako samostatný úkol. Typicky šlo o doplnění odkazu, zkrácení příkladu, přesun jedné věty do šablony nebo přepsání interní formulace do jazyka role, která pravidlo používá. Závěr má říct, že dotažení je hotové, ne že se k němu někdy vrátíte se slavnostní fanfárou.
+
+Stav `vrátit k uzavření první reakce` použijte, když problém není v pravidle, ale v tom, jak byla první reakce uzavřena. Člověk třeba musel dohledat starý kontext, ptal se autora rozhodnutí, nebo nevěděl, jestli doplněná hrana platí i pro jeho situaci. V takovém případě neopravujte celé pravidlo. Opravte uzavření: doplňte chybějící hranici, odkaz nebo příklad, který měl být součástí předání do běžné práce.
+
+Stav `otevřít novou návratovou smyčku` je pro skutečné návraty, ne pro příbuzné nápady. Použijte ho jen tehdy, když první běžné použití jasně ukázalo, že uzavřená reakce problém nevyřešila, nebo že se původní návratový signál opakuje. Pokud se jen objevilo jiné téma, zapište ho jako samostatný podnět a aktuální použití zavřete.
+
+### Praktický příklad uzavření
+
+```text
+Pravidlo:
+Před prvním lidským kontaktem přidáváme do formuláře jen údaj, který mění další krok zákazníka.
+
+První běžné použití:
+Obchod řešil poptávku bez informace o velikosti týmu. Pravidlo vedlo k rozhodnutí zeptat se až v discovery a nepřidávat nové povinné pole.
+
+Výsledek prvního použití:
+Funguje v klidu.
+
+Uzavření:
+Zavřít do klidu.
+
+Co se mění:
+Nic.
+
+Co výslovně neotevíráme:
+Nové pole ve formuláři, lead scoring, historické poptávky ani další kontrolní review.
+
+Další návratový signál:
+Dvě po sobě jdoucí relevantní poptávky neumožní vybrat další obchodní krok bez informace, kterou formulář dnes nesbírá.
+```
+
+Všimněte si, že závěr neoslavuje proces. Prostě chrání klid. To je v provozu často cennější než další chytrá úprava. Chytré úpravy mají nepříjemný zvyk rozmnožovat se, když jim necháte volný večer v backlogu.
+
+### Co propsat do kanonického místa
+
+Při uzavření prvního běžného použití nepište do kanonického pravidla celý příběh. Kanonické místo má nést současné rozhodovací vodítko, ne archeologickou vrstvu posledních debat.
+
+Propsat má smysl jen tři typy věcí:
+
+- novou rozhodovací hranu, která bude pomáhat i příště;
+- zkrácený příklad, pokud bez něj pravidlo zůstává příliš abstraktní;
+- stop větu, která brání opakovanému otevírání stejného tématu bez signálu.
+
+Příklad stop věty:
+
+```text
+Téma znovu neotevíráme jen kvůli chybějící informaci v jedné poptávce; návratový signál vzniká až ve chvíli, kdy chybějící údaj opakovaně brání výběru dalšího kroku.
+```
+
+Taková věta je užitečná, protože chrání tým před návratem přes pocit. Nezakazuje změnu. Jen říká, jaký důkaz má změnu spustit.
+
+### Privacy-first uzavření
+
+Uzavření prvního běžného použití je dobré místo pro úklid čerstvých pracovních stop. Při použití pravidla často vznikne krátká poznámka, screenshot, kopie zprávy, výřez z formuláře nebo interní komentář. Pokud se z toho nestal nutný důkaz pro další rozhodnutí, nenechávejte to v dlouhodobé paměti.
+
+Použijte tři otázky:
+
+```text
+Co z tohoto použití musí zůstat, aby příští člověk rozhodl stejně?
+Stačí zobecněný závěr místo konkrétní zákaznické stopy?
+Má dočasný podklad jasné datum úklidu?
+```
+
+Ve většině případů má zůstat jen zobecněný závěr. Například:
+
+```text
+Jedna relevantní poptávka neobsahovala údaj, který šel bezpečně doplnit v discovery. Pravidlo proto zůstává beze změny.
+```
+
+To je dost pro rozhodování a málo pro zbytečné hromadění dat. Privacy-first provoz není jen výběr evropského hostingu a méně trackerů. Je to i schopnost neukládat pracovní detaily, které už splnily účel.
+
+### Karta uzavření prvního běžného použití
+
+```text
+Pravidlo:
+
+Kanonické místo:
+
+Uzavření první reakce:
+
+První běžné použití:
+
+Výsledek prvního použití:
+- funguje v klidu
+- potřebuje lokální dotažení
+- uzavření bylo slabé
+- otevřel se skutečný návrat
+
+Uzavírací stav:
+- zavřít do klidu
+- zavřít po lokálním dotažení
+- vrátit k uzavření první reakce
+- otevřít novou návratovou smyčku
+
+Jedna věta důvodu:
+
+Co se mění v kanonickém místě:
+
+Co výslovně neotevíráme:
+
+Privacy-first úklid:
+Ponecháváme:
+Mažeme nebo neukládáme:
+Datum úklidu dočasných podkladů:
+
+Další návratový signál:
+
+Vlastník:
+
+Datum:
+```
+
+Karta je hotová ve chvíli, kdy uzavření nevyžaduje další vysvětlení. Pokud po jejím vyplnění pořád potřebujete ústně dodat "ale ono to bylo trochu složitější", buď je karta moc stručná, nebo se snažíte zavřít víc věcí najednou.
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: přečtěte výsledek prvního běžného použití.
+2. Minuta 2: vyberte jeden ze čtyř uzavíracích stavů.
+3. Minuta 3: napište jednu větu důvodu.
+4. Minuta 4: rozhodněte, jestli se mění kanonické místo.
+5. Minuta 5: napište, co výslovně neotevíráte.
+6. Minuta 6: proveďte privacy-first úklid pracovních stop.
+7. Minuta 7: nastavte další návratový signál nebo potvrďte návrat do klidu.
+
+Když se workshop zasekne na tom, jestli "raději ještě jednou zkontrolovat", vraťte se k návratovému signálu. Pokud signál neexistuje, další kontrola není opatrnost. Je to údržba nejistoty. A nejistota má tu vlastnost, že když jí dáte vlastní proces, začne se tvářit jako důležitá kolegyně.
+
+### Checklist uzavření prvního běžného použití
+
+- Vybrali jsme jeden uzavírací stav?
+- Má uzavření jednu větu důvodu?
+- Je jasné, jestli pravidlo pokračuje v klidu, nebo se něco skutečně otevírá?
+- Pokud proběhlo lokální dotažení, je hotové a omezené na jedno pracovní místo?
+- Pokud bylo uzavření slabé, víme přesně, co chybělo pro samostatné použití?
+- Neotevřeli jsme novou návratovou smyčku kvůli příbuznému, ale jinému tématu?
+- Propsali jsme do kanonického místa jen rozhodovací hranu, příklad nebo stop větu?
+- Zapsali jsme, co výslovně neotevíráme?
+- Neponecháváme čerstvé zákaznické nebo osobní detaily bez jasného účelu?
+- Stačí pro týmovou paměť zobecněný závěr?
+- Má dočasný podklad datum úklidu?
+- Existuje další návratový signál, nebo pravidlo opravdu odchází zpět do klidu?
+
+Dobře uzavřené první běžné použití je tiché. Nenechá za sebou nový projekt, pokud není potřeba. Nechá za sebou jen jasný stav, uklizené stopy a pravidlo, které může dál pracovat bez zvláštního dohledu.
+
 ## Pracovní log
 
+- 2026-06-20: Doplněna úvodní podkapitola o uzavření prvního běžného použití po uzavření první reakce: čtyři uzavírací stavy, praktický příklad, kanonické propsání, privacy-first úklid, karta, workshop a checklist.
 - 2026-06-20: Doplněna úvodní podkapitola o prvním běžném použití po uzavření první reakce po dlouhodobém klidu: najitelnost, rozhodnutelnost, samostatnost, čtyři výsledky použití, privacy-first hranice, karta, workshop a checklist.
 - 2026-06-20: Doplněna úvodní podkapitola o uzavření první reakce po dlouhodobém klidu: čtyři uzavírací stavy, praktický příklad, propsání do kanonického místa, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-20: Doplněna úvodní podkapitola o prvním návratovém signálu po dlouhodobém klidu: rozlišení rušení, chybějící hrany, změněného kontextu a skutečného návratu problému, nejmenší důkaz, privacy-first návrat, karta, workshop a checklist.
