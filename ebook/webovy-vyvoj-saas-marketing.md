@@ -234870,8 +234870,192 @@ Pokud se workshop protáhne, zastavte se u otázky, proč. Buď chybí jasný v�
 
 Uzavření prvního běžného použití po servisní poznámce je malé gesto provozní dospělosti. Tým uzná, že drobná oprava proběhla, uklidí po ní a nepředstírá, že každá údržba potřebuje vlastní pomník. Pravidlo se vrací do klidu, pracovní místo je čistší a datová stopa menší. To je nenápadný, ale velmi slušný výsledek.
 
+## Druhé běžné použití po servisní poznámce
+
+Druhé běžné použití po servisní poznámce ověřuje jinou věc než první. První použití ukáže, jestli oprava vůbec funguje. Druhé ukáže, jestli funguje i bez čerstvé paměti na to, co se opravovalo. To je důležitý rozdíl. Mnoho drobných úprav projde první kontrolou jen proto, že u ní stojí člověk, který ji právě udělal a v hlavě drží celou historii.
+
+Druhé použití má odpovědět na jednu otázku:
+
+```text
+Použije další běžná situace opravené pracovní místo bez toho, aby někdo musel připomínat servisní poznámku?
+```
+
+Nejde o nový audit pravidla. Nejde ani o hledání další optimalizace. Jde o přenositelnost malé údržby. Pokud oprava odkazu, popisku, nápovědy nebo šablony funguje i podruhé, může se servisní téma opravdu ztratit z aktivní pozornosti. Pokud podruhé znovu potřebuje vysvětlení, první uzavření bylo nejspíš moc rychlé.
+
+### Co se při druhém použití sleduje
+
+Sledujte jen tři vrstvy:
+
+- přenositelnost: člověk nebo situace nemusí znát historii servisní poznámky;
+- samostatnost: pracovní místo vede k rozhodnutí bez dodatečné nápovědy;
+- klid: oprava neotevírá další debatu o pravidle, procesu nebo zákaznické cestě.
+
+Tyto vrstvy jsou záměrně úzké. Druhé použití nemá měřit výkon procesu, kvalitu leadů, rychlost týmu ani spokojenost zákazníků. Pokud takové otázky vzniknou, zapište je stranou. Servisní poznámka je dobré místo pro údržbu jedné pracovní hrany, ne pro přestavbu celé dílny.
+
+Praktická kontrolní věta:
+
+```text
+Druhé použití bylo běžné, samostatné a bez návratu k historii opravy.
+```
+
+Když tu větu neumíte napsat, pojmenujte, která část chybí. Nebylo použití běžné? Pak ještě nemáte ověření. Nebylo samostatné? Pak pracovní místo možná potřebuje lokální dočištění. Vracelo se k historii opravy? Pak servisní stopa pořád příliš svítí.
+
+### Čtyři výsledky druhého použití
+
+Po druhém použití vyberte jeden ze čtyř výsledků:
+
+```text
+Drží v klidu:
+Oprava se přenesla do další běžné situace a není potřeba žádná další akce.
+
+Potřebuje poslední lokální dočištění:
+Pravidlo jako takové drží, ale jedno malé místo pořád zbytečně ruší.
+
+Servisní stopa je moc viditelná:
+Lidé se vrací ke kartě, komentáři nebo historii opravy, i když aktuální pracovní místo už má stačit.
+
+Objevil se návratový signál:
+Druhé použití ukázalo problém, který nejde vyřešit lokálním servisem.
+```
+
+Výsledek `drží v klidu` znamená konec servisní větve. Výsledek `potřebuje poslední lokální dočištění` dovoluje jednu malou opravu stejného místa, ne další sérii servisních kontrol. Výsledek `servisní stopa je moc viditelná` říká, že problém není v pravidle, ale v neuklizeném okolí. Výsledek `objevil se návratový signál` mění typ práce: servis končí a začíná nová návratová smyčka.
+
+### Praktický příklad
+
+```text
+Servisní poznámka:
+Opravit odkaz v obchodním checklistu na aktuální pravidlo pro poptávkový formulář.
+
+První běžné použití:
+Odkaz fungoval a člověk pravidlo našel bez vysvětlení.
+
+Druhé běžné použití:
+Jiný člen týmu použil checklist u další poptávky. Otevřel aktuální pravidlo, použil ho pro stejný typ rozhodnutí a neřešil, proč se odkaz dřív opravoval.
+
+Výsledek:
+Drží v klidu.
+
+Zápis:
+Servisní oprava odkazu se přenesla do druhého běžného použití; pracovní místo zůstává beze změny.
+
+Co neotevíráme:
+Nerevidujeme kvalifikaci poptávek, formulář ani obchodní šablony.
+
+Privacy-first hranice:
+Neukládáme konkrétní poptávky ani jména lidí. Stačí obecný závěr, že pracovní cesta drží.
+```
+
+Kdyby druhé použití skončilo tím, že člověk našel správný odkaz, ale musel se ptát, kterou část pravidla použít, nejde už o odkaz. Je to slabá rozhodovací hrana. V takovém případě nelepte další vysvětlivku do servisní poznámky. Otevřete samostatný návratový signál s novou otázkou.
+
+### Jak poznat příliš viditelnou servisní stopu
+
+Příliš viditelná servisní stopa vypadá nenápadně. Někdo při běžném použití řekne: "To je ta oprava z minula?" Jiný hledá starou kartu, protože neví, jestli je pracovní místo už finální. Další nechá v checklistu komentář "opraveno", který po týdnu působí jako varování. Všechno to jsou malé signály, že údržba nebyla uklizená do ticha.
+
+V takové situaci neopravujte pravidlo. Upravte okolí:
+
+- smažte dočasný komentář, který už nemá pracovní funkci;
+- přesuňte detail opravy do logu místo aktivního checklistu;
+- nechte v kanonickém místě jen aktuální znění;
+- zavřete servisní kartu, pokud pořád svítí mezi aktivními úkoly;
+- odstraňte připomínku, která nemá jasný návratový signál.
+
+Codyho komentář: dobrá údržba není ta, o které všichni vědí. Dobrá údržba je ta, po které lidé normálně pracují a nemají pocit, že chodí kolem čerstvě natřeného zábradlí.
+
+### Privacy-first kontrola druhého použití
+
+Druhé použití svádí k tomu, že si tým chce nechat "ještě jeden důkaz". U servisní poznámky je to většinou zbytečné. Pokud potřebujete zapsat výsledek, držte se obecného závěru a neukládejte nové osobní nebo zákaznické detaily.
+
+Stačí například:
+
+```text
+Druhé běžné použití potvrdilo, že opravené pracovní místo drží bez připomínání servisní historie.
+```
+
+Nestačí:
+
+```text
+Kopie konkrétní poptávky, screenshot interního chatu a jméno člověka, který opravu použil.
+```
+
+Privacy-first provoz se nepozná jen podle velkých rozhodnutí o analytice nebo hostingu. Pozná se i podle toho, že tým nevyrábí malé zbytečné archivy kolem každého drobného ověření. Minimum dat není póza. Je to provozní hygiena.
+
+### Karta druhého použití
+
+```text
+Servisní poznámka:
+
+Pracovní místo:
+
+První běžné použití uzavřeno jak:
+
+Druhé běžné použití:
+
+Kdo potřeboval znát historii opravy:
+- nikdo
+- někdo, popsat proč:
+
+Pozorování:
+- přenositelnost:
+- samostatnost:
+- klid:
+
+Výsledek:
+- drží v klidu
+- potřebuje poslední lokální dočištění
+- servisní stopa je moc viditelná
+- objevil se návratový signál
+
+Jedna věta do logu:
+
+Co případně dočišťujeme:
+
+Co uklízíme z okolí servisní poznámky:
+
+Co výslovně neotevíráme:
+
+Privacy-first zápis:
+Jaký obecný závěr stačí:
+Jaké detaily neukládáme:
+
+Vlastník:
+
+Datum:
+```
+
+Kartu použijte jen tehdy, když druhé použití nebylo úplně triviální. Pokud všechno drží, stačí jedna věta v pracovním logu. Karta má pomoci rozlišit stav, ne vyrábět další povinnou dokumentaci.
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: připomeňte si uzavírací větu po prvním použití.
+2. Minuta 2: popište druhé běžné použití bez detailů, které nejsou potřeba.
+3. Minuta 3: ověřte přenositelnost, samostatnost a klid.
+4. Minuta 4: vyberte jeden ze čtyř výsledků.
+5. Minuta 5: napište jednu větu do logu.
+6. Minuta 6: ukliďte viditelnou servisní stopu, pokud překáží.
+7. Minuta 7: napište, co výslovně neotevíráte.
+
+Pokud se workshop začne měnit v debatu o celém pravidle, zastavte ho. Buď se objevil návratový signál, nebo tým ztratil hranici mezi servisem a redesignem. Obojí se dá řešit, ale ne pod hlavičkou druhého běžného použití.
+
+### Checklist druhého použití
+
+- Proběhlo druhé použití v normální pracovní situaci?
+- Nebylo závislé na člověku, který servisní poznámku psal?
+- Našlo se aktuální pracovní místo bez hledání v historii opravy?
+- Vedlo pracovní místo k rozhodnutí bez dodatečné nápovědy?
+- Neotevřela se znovu rozhodovací logika pravidla?
+- Vybrali jsme jeden ze čtyř výsledků?
+- Pokud pravidlo drží, nezakládáme další kontrolu?
+- Pokud je potřeba dočištění, drží se jednoho lokálního místa?
+- Pokud servisní stopa pořád svítí, uklízíme okolí místo změny pravidla?
+- Pokud vznikl návratový signál, oddělili jsme ho od servisní větve?
+- Zapsali jsme jen obecný závěr bez zbytečných osobních, zákaznických nebo interních detailů?
+- Napsali jsme, co teď výslovně neotevíráme?
+
+Druhé běžné použití po servisní poznámce je poslední kontrola přenositelnosti malé údržby. Pokud drží, nechte ji odejít do ticha. Každá další kontrola bez návratového signálu už nepřidává jistotu, jen hluk. A hluk je v provozu skoro vždycky dražší, než vypadá.
+
 ## Pracovní log
 
+- 2026-06-20: Doplněna úvodní podkapitola o druhém běžném použití po servisní poznámce: přenositelnost bez čerstvé paměti, čtyři výsledky použití, úklid viditelné servisní stopy, privacy-first zápis, karta, mini workshop a checklist.
 - 2026-06-20: Doplněna úvodní podkapitola o uzavření prvního běžného použití po servisní poznámce: čtyři uzavírací stavy, praktický příklad, úklid servisních stop, privacy-first uzavření, karta, mini workshop a checklist.
 - 2026-06-20: Doplněna úvodní podkapitola o prvním běžném použití po uzavřené servisní poznámce: najitelnost, rozhodnutelnost, tichost opravy, čtyři výsledky použití, privacy-first záznam, karta, mini workshop a checklist.
 - 2026-06-20: Doplněna úvodní podkapitola o uzavření servisní poznámky po návratu do dlouhodobého klidu: lokální ověření, čtyři uzavírací stavy, praktický příklad, privacy-first úklid, karta, mini workshop a checklist.
