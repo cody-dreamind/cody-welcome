@@ -236157,8 +236157,212 @@ Když se workshop začne prodlužovat, zastavte ho otázkou: "Jaké rozhodnutí 
 
 Měsíční kontrola po definitivním uzavření servisní větve má jeden tichý úkol: potvrdit, že uzavření zůstalo uzavřené. Když klid drží, nechte ho být. Když nedrží, pojmenujte dnešní problém přesně a malý další krok založte mimo starou historii. Tím se z provozu nestává muzeum oprav, ale pracovní systém, který si pamatuje jen to, co ještě opravdu pomáhá.
 
+## Uzavření měsíční kontroly po servisní větvi
+
+Měsíční kontrola po definitivním uzavření servisní větve má skončit rozhodnutím, ne dojmem. Nestačí říct "vypadá to v pohodě" nebo "něco tam ještě lehce drhne". Uzavření má pojmenovat, jestli klid opravdu drží, jestli stačí uklidit jednu starou stopu, jestli vznikla nová otázka, nebo jestli se výjimečně vrátila původní chyba.
+
+Začněte jednou větou:
+
+```text
+Měsíční kontrolu po servisní větvi uzavíráme jako:
+```
+
+Za dvojtečku patří jeden stav. Pokud potřebujete tři odstavce vysvětlování, kontrola pravděpodobně odkryla nový problém. To není tragédie. Tragédie by byla tvářit se, že nový problém je pořád jen dozvuk staré servisní poznámky, protože to zní menší a méně nepříjemně.
+
+### Čtyři uzavírací stavy
+
+- Klid potvrzen: pracovní místo funguje bez servisní historie a není potřeba další akce.
+- Lokální úklid dokončen: kontrola našla starou stopu, objížďku nebo kopii a ta byla odstraněna bez změny pravidla.
+- Nová otázka oddělena: objevilo se tření, které nesouvisí s původní servisní chybou a má vlastní pracovní místo.
+- Původní chyba se vrátila: stejná chyba se opakuje ve stejném místě a potřebuje omezenou opravu.
+
+Stav `klid potvrzen` je nejlepší výsledek a zároveň nejtěžší na disciplínu. Když všechno drží, tým má často chuť přidat "pro jistotu" ještě jednu kontrolu. Jenže další kontrola bez signálu není zodpovědnost. Je to nový provozní šum s hezkou kravatou.
+
+Stav `lokální úklid dokončen` použijte, když měsíční kontrola najde zbytek staré větve: připnutou zprávu, starý komentář, neaktuální odkaz, kopii šablony nebo dočasnou poznámku. Důležité je, že se nemění pravidlo. Uklízí se prostředí kolem něj.
+
+Stav `nová otázka oddělena` je ochrana před historickou kaší. Pokud se ukáže nové tření, napište ho dnešním jazykem. Otázka má dávat smysl i člověku, který nikdy neviděl původní servisní větev.
+
+Stav `původní chyba se vrátila` používejte úzce. Nestačí, že se problém objevil ve stejné oblasti. Musí jít o stejnou chybu, ve stejném pracovním místě a se stejným dopadem. Jinak jen pohodlně recyklujete starý štítek.
+
+### Praktické příklady uzavření
+
+```text
+Měsíční kontrolu po servisní větvi uzavíráme jako:
+Klid potvrzen.
+
+Co drží:
+Rozcestník obchodních šablon vede ke správné šabloně bez staré servisní poznámky.
+
+Co dál nesledujeme:
+Původní chybný odkaz, starý screenshot opravy ani připnutou interní zprávu.
+
+Další návrat:
+Jen při opakovaném tření v rozlišení typů předání.
+```
+
+Jiný příklad:
+
+```text
+Měsíční kontrolu po servisní větvi uzavíráme jako:
+Nová otázka oddělena.
+
+Co se ukázalo:
+Lidé rozlišují správnou šablonu pro audit, ale váhají mezi předáním po auditu a po retaineru.
+
+Nová otázka:
+Jak má rozcestník odlišit jednorázové předání po auditu od dlouhodobého předání po retaineru?
+
+Co zůstává zavřené:
+Servisní větev s chybným odkazem.
+
+Nejmenší další krok:
+Upravit dvě popisné věty u šablon v rozcestníku a ověřit je při dalším běžném obchodním předání.
+```
+
+Třetí příklad:
+
+```text
+Měsíční kontrolu po servisní větvi uzavíráme jako:
+Lokální úklid dokončen.
+
+Co se našlo:
+Stará připnutá zpráva v interním kanálu stále odkazovala na původní servisní poznámku.
+
+Co se změnilo:
+Připnutá zpráva byla odstraněna. Kanonické místo zůstává rozcestník obchodních šablon.
+
+Co se nemění:
+Pravidlo, šablony ani review rytmus.
+```
+
+Ve všech třech příkladech je podstatné jedno: uzavření nepřenáší starou servisní větev jako aktivní kontext. Buď potvrdí klid, uklidí zbytek, oddělí novou otázku, nebo výjimečně otevře omezenou opravu stejné chyby.
+
+### Co nesmí zůstat otevřené
+
+Po uzavření měsíční kontroly nesmí zůstat viset tři věci:
+
+- neurčitá poznámka "ještě sledovat";
+- stará servisní stopa, která má být mimo aktivní práci;
+- nová otázka přilepená ke starému logu.
+
+Poznámka "ještě sledovat" je nebezpečná, protože nemá spouštěč. Nikdo neví, kdy se má znovu otevřít, kdo ji hlídá a co má znamenat, že už stačí. Pokud opravdu potřebujete návrat, napište konkrétní signál:
+
+```text
+Vrátíme se pouze tehdy, když se ve dvou běžných předáních za sebou objeví stejné váhání mezi auditní a retainer šablonou.
+```
+
+Stará servisní stopa má po uzavření buď zmizet, nebo zůstat jen jako krátká historická věta v logu. Nesmí být viditelnější než aktuální pracovní místo. Pokud člověk po měsíci najde starý komentář dřív než kanonickou šablonu, prostředí učí špatnou cestu.
+
+Nová otázka nesmí bydlet ve starém logu, protože by si s sebou nesla cizí minulost. Dejte jí vlastní kartu, vlastní pracovní místo a vlastní privacy-first hranici. Tím ji zmenšíte a zároveň očistíte.
+
+### Privacy-first uzavírací zápis
+
+Uzavírací zápis má nést rozhodnutí, ne detaily lidí. Ve většině případů stačí tato struktura:
+
+```text
+Měsíční stav:
+
+Co drží nebo drhne:
+
+Rozhodnutí:
+
+Co neukládáme:
+
+Další návrat:
+```
+
+Příklad:
+
+```text
+Měsíční stav:
+Klid potvrzen.
+
+Co drží:
+Rozcestník vede ke správné šabloně bez servisní historie.
+
+Rozhodnutí:
+Servisní větev zůstává zavřená a nepřidáváme další kontrolu.
+
+Co neukládáme:
+Jména lidí, screenshoty průchodu ani interní zprávy z review.
+
+Další návrat:
+Jen při opakovaném tření v rozlišení typů předání.
+```
+
+Tohle je dostatečně konkrétní pro budoucí práci a dostatečně střídmé pro soukromí. Dlouhodobý log nemá být sbírka důkazních materiálů. Má být mapa rozhodnutí.
+
+Codyho komentář: dobrý provoz poznáte i podle toho, co po sobě nenechá. Když po měsíční kontrole zůstane jen jedna jasná věta a čistší pracovní místo, je to výhra. Když zůstane tabulka, screenshoty, tři připomínky a neurčitý pocit "ještě to hlídejme", servisní větev sice formálně zemřela, ale prakticky dál chodí po kanceláři.
+
+### Karta uzavření měsíční kontroly
+
+```text
+Pracovní místo:
+
+Uzavřená servisní větev:
+
+Výsledek měsíční kontroly:
+- klid
+- stará stopa
+- nové tření
+- návrat původní chyby
+
+Uzavírací stav:
+- klid potvrzen
+- lokální úklid dokončen
+- nová otázka oddělena
+- původní chyba se vrátila
+
+Co se změnilo:
+
+Co zůstává zavřené:
+
+Co se zakládá odděleně, pokud něco:
+
+Co už dál nesledujeme:
+
+Privacy-first zápis:
+Který obecný závěr stačí a jaké detaily neukládáme:
+
+Další návratový signál:
+
+Vlastník:
+
+Datum:
+```
+
+Kartu vyplňujte jen tehdy, když kontrola našla tření, úklid nebo návrat chyby. Pokud klid drží, stačí krátký log. Zbytečně vyplněná karta je taky stopa. A stopa, která nepomáhá rozhodnutí, je jen budoucí úklid v převleku.
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: přečtěte výsledek měsíční kontroly.
+2. Minuta 2: vyberte jeden ze čtyř uzavíracích stavů.
+3. Minuta 3: napište, co zůstává zavřené.
+4. Minuta 4: odstraňte nebo zavřete starou aktivní stopu, pokud existuje.
+5. Minuta 5: oddělte novou otázku, pokud vznikla.
+6. Minuta 6: zapište privacy-first závěr bez osobních detailů.
+7. Minuta 7: určete další návratový signál, nebo napište, že žádný zvláštní návrat není.
+
+Pokud se tým zasekne na tom, jestli jde o novou otázku nebo návrat původní chyby, použijte jednoduchý test: šlo by problém popsat bez zmínky o staré servisní větvi? Pokud ano, založte novou otázku. Pokud ne a současně jde o stejnou chybu ve stejném místě, otevřete omezenou opravu.
+
+### Checklist uzavření měsíční kontroly
+
+- Vybrali jsme jeden uzavírací stav?
+- Pokud klid drží, nepřidali jsme další zvláštní kontrolu?
+- Pokud jsme uklízeli starou stopu, nezměnili jsme omylem pravidlo?
+- Pokud vznikla nová otázka, má vlastní pracovní místo mimo servisní větev?
+- Pokud se vrátila původní chyba, je opravdu stejná a ve stejném místě?
+- Napsali jsme, co zůstává zavřené?
+- Napsali jsme, co už dál nesledujeme?
+- Odstranili jsme staré objížďky, komentáře, připnuté zprávy nebo kopie, které už nepracují?
+- Stačí dlouhodobému logu obecný závěr bez osobních a zákaznických detailů?
+- Má další návrat konkrétní signál, nebo žádný zvláštní návrat neexistuje?
+
+Uzavření měsíční kontroly je poslední tečka za servisní větví. Když klid drží, nevyrábějte další péči. Když nedrží, nechte dnešní problém mluvit vlastním jménem. Tak se z malých oprav nestává nekonečný seriál a tým si udrží pracovní paměť lehkou, přesnou a použitelnou.
+
 ## Pracovní log
 
+- 2026-06-20: Doplněna úvodní podkapitola o uzavření měsíční kontroly po servisní větvi: čtyři uzavírací stavy, praktické příklady, privacy-first zápis, karta, mini workshop a checklist.
 - 2026-06-20: Doplněna úvodní podkapitola o měsíční kontrole po definitivním uzavření servisní větve: ověření kanonického místa, starých objížděk, nového tření, privacy-first zápisu, karty, mini workshopu a checklistu.
 - 2026-06-20: Doplněna úvodní podkapitola o uzavření druhého běžného review po servisní větvi: konečné stavy, log, praktické příklady, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-20: Doplněna úvodní podkapitola o druhém běžném review po uzavřené servisní větvi: samostatnost bez servisní paměti, skrytá péče, čtyři výsledky review, privacy-first zápis, karta, mini workshop a checklist.
