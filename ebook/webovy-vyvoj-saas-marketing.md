@@ -236360,8 +236360,155 @@ Pokud se tým zasekne na tom, jestli jde o novou otázku nebo návrat původní 
 
 Uzavření měsíční kontroly je poslední tečka za servisní větví. Když klid drží, nevyrábějte další péči. Když nedrží, nechte dnešní problém mluvit vlastním jménem. Tak se z malých oprav nestává nekonečný seriál a tým si udrží pracovní paměť lehkou, přesnou a použitelnou.
 
+## Delší klidový rytmus po měsíční kontrole servisní větve
+
+Když měsíční kontrola po servisní větvi potvrdí klid, další logický krok není další kontrola. Další logický krok je dát pracovnímu místu delší klidový rytmus. To znamená: pravidlo zůstává v běžném systému, servisní historie zůstává zavřená a návrat se spustí jen tehdy, když přijde skutečný signál z provozu.
+
+Delší klidový rytmus není ignorování. Je to úmyslné snížení pozornosti. Tým říká: "Tahle věc funguje dost dobře na to, aby už nepotřebovala zvláštní péči." Bez takového kroku se i úspěšná údržba promění v trvalý drobný závazek. A trvalé drobné závazky jsou nenápadný způsob, jak si zaplnit kalendář péčí o věci, které už žádnou péči nepotřebují.
+
+Začněte větou:
+
+```text
+Po měsíční kontrole přechází pracovní místo do delšího klidového rytmu.
+```
+
+Potom doplňte tři hranice:
+
+```text
+Běžně se kontroluje jen v rámci:
+
+Zvláštní návrat spustí pouze:
+
+Servisní historii znovu neotevíráme kvůli:
+```
+
+Praktický příklad:
+
+```text
+Po měsíční kontrole přechází rozcestník obchodních šablon do delšího klidového rytmu.
+
+Běžně se kontroluje jen v rámci:
+Kvartální kontroly obchodních šablon.
+
+Zvláštní návrat spustí pouze:
+Dvě běžná předání za sebou narazí na stejné váhání mezi auditní a retainer šablonou.
+
+Servisní historii znovu neotevíráme kvůli:
+Jednorázovému dotazu, kosmetické připomínce k názvu nebo tomu, že někdo našel starý screenshot opravy.
+```
+
+Tím se z uzavřené servisní větve nestane aktivní agenda v provozu. Zůstane po ní jen čisté pracovní místo, běžný rytmus a návratový signál, který mluví o dnešní práci, ne o staré opravě.
+
+### Co patří do delšího klidu
+
+Do delšího klidového rytmu patří jen to, co má běžný provoz skutečně unést:
+
+- Kanonické pracovní místo: aktuální stránka, šablona, rozcestník, checklist nebo pravidlo.
+- Běžný revizní rytmus: například měsíční, kvartální nebo půlroční kontrola, která už existuje.
+- Jeden návratový signál: konkrétní situace, která ukáže, že se téma má znovu otevřít.
+- Krátký historický log: jedna věta, která vysvětlí, proč servisní větev skončila.
+
+Nepatří sem samostatná servisní agenda, dočasné hlídání, připomínka "raději ještě zkontrolovat", ani osobní znalost autora opravy. Pokud delší klid závisí na tom, že si někdo pamatuje starou servisní poznámku, není to klid. Je to jen ruční péče v civilu.
+
+Běžný revizní rytmus vyberte podle toho, kde pracovní místo přirozeně žije. Obchodní šablona může patřit do kvartální revize sales materiálů. Onboardingový krok do měsíční kontroly aktivace. Interní privacy-first checklist do půlročního auditu pracovních stop. Nevytvářejte nový rytmus jen proto, že servisní větev existovala. To by byla odměna za údržbu v podobě další údržby. Produktivní asi jako tisknout e-mail, abyste měli jistotu, že je digitální.
+
+### Jak zapsat návratový signál
+
+Návratový signál musí být poznatelný bez znalosti servisní historie. Špatný signál zní:
+
+```text
+Vrátit se, když se zase objeví problém ze servisní větve.
+```
+
+Taková věta nutí tým otevřít starý log a hádat, co přesně tím autor myslel. Lepší signál zní:
+
+```text
+Vrátit se, když dva lidé v běžném obchodním předání za sebou použijí auditní šablonu pro retainer.
+```
+
+Druhý signál je konkrétní, provozní a dnešní. Neptá se, jestli stará oprava pořád žije. Ptá se, jestli se v běžné práci opakuje rozhodovací chyba.
+
+Návratový signál držte úzký. Nemá pokrýt všechny možné budoucí problémy s pracovním místem. Má chránit právě tu hranici, která po servisní větvi dává smysl. Pokud později vznikne jiné tření, založí se jiná otázka. Klidový rytmus není pojišťovna pro všechno, co by se jednou mohlo pokazit.
+
+### Privacy-first klid
+
+Delší klid je dobrý okamžik odstranit poslední zbytečné stopy. Zeptejte se:
+
+```text
+Co po servisní větvi ještě držíme jen proto, že se to tehdy hodilo?
+```
+
+Typicky půjde o screenshoty, exporty, kopie starých šablon, interní zprávy, komentáře v dokumentech nebo dočasné kontrolní úkoly. Pokud už neslouží dnešnímu rozhodnutí, nepatří do delšího klidu. Buď je smažte podle retenčních pravidel, anonymizujte, nebo je nechte zavřené v původním zdroji pravdy.
+
+Dlouhodobý zápis má nést obecný závěr:
+
+```text
+Rozcestník po měsíci funguje bez servisní historie. Další návrat jen při opakovaném váhání mezi auditní a retainer šablonou.
+```
+
+To stačí. Nepotřebujete jména lidí, screenshot cesty, přesné časy použití ani kopii interní konverzace. Privacy-first provoz není jen o velkých právních gestech. Je to každodenní odmítnutí ukládat detaily, které už nepomáhají rozhodnutí.
+
+### Karta delšího klidového rytmu
+
+```text
+Pracovní místo:
+
+Uzavřená servisní větev:
+
+Výsledek měsíční kontroly:
+
+Kanonické místo pro běžnou práci:
+
+Delší běžný rytmus:
+- měsíční / kvartální / půlroční / jiný existující rytmus
+
+Návratový signál:
+
+Co už dál nesledujeme:
+
+Co výslovně neotevíráme:
+
+Privacy-first úklid:
+Které staré stopy mažeme, anonymizujeme nebo necháváme zavřené:
+
+Krátký log pro budoucí čtení:
+
+Vlastník:
+
+Datum další běžné kontroly:
+```
+
+Kartu používejte jen tehdy, když je potřeba předat klid do konkrétního existujícího rytmu. Pokud jde o drobné pracovní místo a měsíční kontrola potvrdila čistý klid, stačí jedna věta v logu. I dobré karty mají náklady. Nejlevnější dokument je ten, který nevznikne, když není potřeba.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte uzavření měsíční kontroly.
+2. Minuta 2: vyberte existující běžný rytmus, do kterého pracovní místo patří.
+3. Minuta 3: napište jeden konkrétní návratový signál.
+4. Minuta 4: určete, co už dál nesledujete.
+5. Minuta 5: ukliďte nebo zavřete staré servisní stopy.
+6. Minuta 6: zapište krátký privacy-first log.
+
+Pokud se tým nedokáže shodnout na existujícím rytmu, nevytvářejte nový automaticky. Nejdřív se zeptejte, jestli pracovní místo vůbec potřebuje pravidelnou kontrolu. Některé věci po uzavření prostě jen žijí v kanonickém místě a vrátí se až při signálu. To není lajdáctví. To je úspora pozornosti.
+
+### Checklist delšího klidu
+
+- Má pracovní místo po měsíční kontrole jasný kanonický domov?
+- Převádíme ho do existujícího rytmu místo nové servisní kontroly?
+- Je návratový signál konkrétní a popsatelný bez staré servisní historie?
+- Víme, co už dál nesledujeme?
+- Zůstává původní servisní větev zavřená?
+- Nepřenášíme do klidu staré screenshoty, exporty, komentáře nebo interní zprávy bez účelu?
+- Stačí budoucímu čtenáři jedna krátká věta, proč klid drží?
+- Pokud vznikne jiné tření, má být založené jako nová otázka, ne jako oživení servisní větve?
+- Je jasné, kdo pracovní místo vlastní v běžném rytmu?
+- Nezaložili jsme novou evidenci jen proto, že jsme ukončili starou?
+
+Delší klidový rytmus je dobrý konec malé opravy. Ne proto, že by sliboval věčný pořádek, ale protože dává týmu jasnou dohodu: dokud nepřijde konkrétní signál, tahle věc už nevyžaduje zvláštní pozornost. Pravidlo se vrací do práce, servisní historie do logu a tým může řešit něco, co opravdu potřebuje živou energii.
+
 ## Pracovní log
 
+- 2026-06-20: Doplněna úvodní podkapitola o delším klidovém rytmu po měsíční kontrole servisní větve: převod do existujícího revizního rytmu, návratový signál bez servisní historie, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-20: Doplněna úvodní podkapitola o uzavření měsíční kontroly po servisní větvi: čtyři uzavírací stavy, praktické příklady, privacy-first zápis, karta, mini workshop a checklist.
 - 2026-06-20: Doplněna úvodní podkapitola o měsíční kontrole po definitivním uzavření servisní větve: ověření kanonického místa, starých objížděk, nového tření, privacy-first zápisu, karty, mini workshopu a checklistu.
 - 2026-06-20: Doplněna úvodní podkapitola o uzavření druhého běžného review po servisní větvi: konečné stavy, log, praktické příklady, privacy-first úklid, karta, mini workshop a checklist.
