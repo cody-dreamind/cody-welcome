@@ -235187,8 +235187,145 @@ Pokud workshop potřebuje víc než šest minut, je pravděpodobné, že už neu
 
 Uzavření druhého běžného použití po servisní poznámce má být nenápadné. Malá oprava se ověřila, pracovní místo je čistší a pravidlo se vrací do klidu. Když se tým naučí takové věci zavírat bez dalších vrstev, získá jednu podstatnou provozní výhodu: údržba přestane být zdrojem práce navíc.
 
+## Návrat do klidového provozu po uzavřené servisní větvi
+
+Po uzavření druhého běžného použití po servisní poznámce přichází poslední krok, který je paradoxně nejméně vidět: vrátit opravené pracovní místo do klidového provozu. Ne jako další kapitolu údržby, ne jako novou kontrolní rutinu, ale jako normální součást práce. Servisní větev splnila svůj účel. Oprava drží, rozhodovací logika se nezměnila a tým už nepotřebuje vědět, že nějaká servisní poznámka existovala.
+
+Klidový provoz znamená, že pracovní místo znovu funguje jako obyčejný nástroj. Člověk otevře checklist, šablonu, rozcestník, předávací kartu nebo interní poznámku a použije ji bez zvláštní opatrnosti. Nemusí se ptát, jestli je to ta opravená verze. Nemusí hledat komentář k historii změny. Nemusí si pamatovat, kdo opravu dělal a proč. Pokud se k práci musí přibalit vysvětlení servisní větve, ještě není klidová.
+
+Uzavírací věta zní:
+
+```text
+Servisní větev je zavřená; v běžném provozu zůstává jen opravené pracovní místo a návratový signál pro skutečný problém.
+```
+
+Tahle věta je malá, ale chrání tým před jednou častou chybou: z úspěšné drobné opravy se nesmí stát nový rituál. Když oprava jednou zafungovala, tým má chuť ji hlídat. Jenže hlídání každé malé opravy požírá pozornost, kterou by bylo lepší nechat na skutečné změny v nabídce, zákaznickém chování, provozu nebo datech. Ne každá vyřešená věc si zaslouží pomníček. Někdy jí stačí uklizený stůl.
+
+### Co po návratu zůstává
+
+V klidovém provozu zůstávají jen tři věci:
+
+- kanonické pracovní místo v aktuálním znění;
+- krátký obecný log, pokud je pro daný systém běžný;
+- návratový signál, který by znovu otevřel téma jen při reálném tření.
+
+Kanonické pracovní místo je místo, kam člověk opravdu sahá při práci. Ne archivní kopie, ne starý komentář, ne dočasný dokument z opravy. Pokud se opravoval odkaz v obchodním checklistu, kanonické místo je obchodní checklist. Pokud se opravovala věta v onboardingové šabloně, kanonické místo je onboardingová šablona. Pokud se opravoval rozcestník interních playbooků, kanonické místo je rozcestník. Zní to samozřejmě, ale právě samozřejmé věci se v provozu nejčastěji zanesou nánosem "pro jistotu".
+
+Krátký log má odpovědět jen na otázku, co se změnilo. Ne kdo přesně narazil na problém, ne jaká zákaznická situace k tomu vedla, ne jak vypadaly všechny mezikroky. Stačí například:
+
+```text
+Uzavřena servisní oprava odkazu v obchodním checklistu. Druhé běžné použití potvrdilo, že aktuální šablona je najitelná bez znalosti historie.
+```
+
+Návratový signál má být konkrétní. Ne "když bude něco divné", protože divné je v týmu skoro všechno aspoň jednou týdně, včetně kalendáře a sdílených názvů souborů. Lepší signál:
+
+```text
+Téma znovu otevřeme, pokud dva lidé v různých situacích nenajdou stejnou kanonickou šablonu bez ručního vysvětlení.
+```
+
+Takový signál nehlídá servisní poznámku. Hlídá skutečný provozní problém: najitelnost a přenositelnost pracovního místa.
+
+### Co se má odstranit z aktivní pozornosti
+
+Po návratu do klidového provozu odstraňte z aktivní pozornosti všechno, co patřilo jen k opravě:
+
+- dočasné komentáře u šablony;
+- pomocné kopie vytvořené při kontrole;
+- interní připomínky typu "ještě sledovat";
+- screenshoty, exporty nebo ukázky použité jen jako důkaz opravy;
+- úkoly, které existují pouze proto, že někdo nechtěl servisní větev pustit z ruky.
+
+Neznamená to mazat historii bez rozmyslu. Znamená to nepřenášet pracovní bordel do budoucnosti. Historie změny může zůstat v logu nebo verzování. Aktivní pracovní místo ale nemá nést celou opravu na zádech. Když tým při každém použití vidí vrstvu starých servisních poznámek, začne časem pracovat opatrněji, pomaleji a méně samostatně.
+
+### Praktický příklad
+
+```text
+Situace:
+V interním rozcestníku byl starý odkaz na šablonu pro předání po auditu.
+
+Servisní větev:
+Odkaz byl opraven, první použití potvrdilo správnou šablonu a druhé použití ověřilo, že ji najde i člověk bez znalosti opravy.
+
+Návrat do klidového provozu:
+V rozcestníku zůstává jen aktuální odkaz a běžný název šablony. Dočasný komentář "ověřeno po opravě" se maže. Pomocný screenshot staré verze se neukládá do znalostní báze. V logu zůstává jedna věta.
+
+Návratový signál:
+Téma se znovu otevře jen tehdy, pokud se ve dvou samostatných předáních ukáže, že lidé nevědí, kterou předávací šablonu použít.
+
+Co neotevíráme:
+Neřešíme redesign celého rozcestníku, neměníme strukturu předávacích balíčků a nezakládáme měsíční kontrolu odkazů kvůli jedné uzavřené opravě.
+```
+
+Všimněte si hranice. Pokud se příště ukáže, že lidé obecně nerozumí rozdílu mezi šablonami, nebude to návrat servisní poznámky. Bude to nové téma o rozhodovací hraně v rozcestníku. Servisní větev tím zpětně neožívá. Jen po sobě nechala čistší pracovní místo, takže nový problém půjde pojmenovat přesněji.
+
+### Privacy-first klid
+
+Privacy-first návrat do klidového provozu je hlavně o tom, že po opravě nezůstane víc dat, než bylo potřeba před ní. Servisní větev často vzniká z konkrétní situace: někdo hledal šablonu pro zákazníka, otevřel starý odkaz, ukázal screenshot, přeposlal interní konverzaci nebo přidal poznámku do úkolu. To všechno může být užitečné při opravě. Po opravě to ale nemá automaticky žít dál.
+
+Použijte jednoduché pravidlo:
+
+```text
+Co bylo potřeba jen k ověření opravy, nepatří do klidového provozu.
+```
+
+Do klidového provozu proto nepřenášejte osobní jména, zákaznické příklady, screenshoty nástrojů, výřezy z e-mailů ani kopie dokumentů, pokud nejsou nutné pro další rozhodnutí. Zapište zobecněný závěr. Například: "Druhé použití potvrdilo najitelnost aktuální šablony." To stačí. Uložit dvě konkrétní zákaznické situace by bylo možná pohodlné pro vyprávění, ale zbytečné pro provoz.
+
+Codyho komentář: dobrý privacy-first provoz často nevypadá dramaticky. Vypadá jako schopnost říct "tohle už nepotřebujeme" a opravdu to nepřibalit do dalšího dokumentu. Ano, je to méně efektní než nový dashboard. Taky je to levnější, čistší a za půl roku vám to neudělá informační skládku s visačkou "pro jistotu".
+
+### Karta návratu do klidového provozu
+
+```text
+Uzavřená servisní větev:
+
+Kanonické pracovní místo:
+
+Co zůstává v pracovním místě:
+
+Co mizí z aktivní pozornosti:
+
+Krátký log:
+
+Návratový signál:
+
+Co výslovně neotevíráme:
+
+Privacy-first úklid:
+Které pomocné důkazy, kopie, screenshoty nebo osobní detaily neukládáme:
+
+Datum dalšího návratu:
+Jen při návratovém signálu / konkrétní datum, pokud ho vyžaduje běžný provozní rytmus:
+```
+
+Pole `datum dalšího návratu` nevyplňujte automaticky. U servisních větví je správná výchozí odpověď často "jen při návratovém signálu". Pevné datum má smysl jen tehdy, když už existuje běžný provozní rytmus, například měsíční review kanonického indexu. Nevytvářejte nový kalendář jen proto, že jedna oprava úspěšně skončila.
+
+### Mini workshop na 5 minut
+
+1. Minuta 1: pojmenujte uzavřenou servisní větev jednou větou.
+2. Minuta 2: určete kanonické pracovní místo a finální stav, který v něm zůstává.
+3. Minuta 3: vyberte dočasné komentáře, kopie nebo důkazy, které se odstraní z aktivní pozornosti.
+4. Minuta 4: napište návratový signál a věc, kterou teď výslovně neotevíráte.
+5. Minuta 5: proveďte privacy-first úklid a zapište krátký log.
+
+Pokud v minutě 4 neumíte napsat návratový signál, neznamená to, že musíte založit další kontrolu. Často to znamená opak: problém je uzavřený a nemá jasný důvod se vracet. V takovém případě napište "návrat jen při opakovaném tření v běžném použití" a pusťte větev z ruky.
+
+### Checklist návratu do klidového provozu
+
+- Je servisní větev opravdu uzavřená po druhém běžném použití?
+- Víme, které kanonické pracovní místo zůstává aktivní?
+- Zůstává v něm jen finální opravený stav, ne historie opravy?
+- Odstranili jsme dočasné komentáře, pomocné kopie a kontrolní poznámky?
+- Nevznikla nová pravidelná kontrola bez návratového signálu?
+- Máme krátký obecný log bez zbytečných osobních nebo zákaznických detailů?
+- Pojmenovali jsme konkrétní návratový signál pro skutečné budoucí tření?
+- Zapsali jsme, co teď výslovně neotevíráme?
+- Nepřenášíme do klidového provozu screenshoty, exporty nebo interní konverzace použité jen při opravě?
+- Je jasné, že další návrat otevře nový problém, ne starou servisní větev?
+
+Návrat do klidového provozu je dobrý konec malé údržby. Pracovní místo je čistší, tým nemusí nosit v hlavě historii opravy a další pozornost čeká až na skutečný signál. To je přesně ten druh tiché provozní disciplíny, která nevypadá jako velká věc, dokud ji nemáte. Pak najednou zjistíte, že méně věcí zůstává rozdělaných jen proto, že je nikdo neuměl pustit.
+
 ## Pracovní log
 
+- 2026-06-20: Doplněna úvodní podkapitola o návratu do klidového provozu po uzavřené servisní větvi: kanonické pracovní místo, odstranění aktivních servisních stop, návratový signál, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-20: Doplněna úvodní podkapitola o uzavření druhého běžného použití po servisní poznámce: čtyři uzavírací stavy, praktický příklad, kanonické propsání, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-20: Doplněna úvodní podkapitola o druhém běžném použití po servisní poznámce: přenositelnost bez čerstvé paměti, čtyři výsledky použití, úklid viditelné servisní stopy, privacy-first zápis, karta, mini workshop a checklist.
 - 2026-06-20: Doplněna úvodní podkapitola o uzavření prvního běžného použití po servisní poznámce: čtyři uzavírací stavy, praktický příklad, úklid servisních stop, privacy-first uzavření, karta, mini workshop a checklist.
