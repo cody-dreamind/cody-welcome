@@ -234539,8 +234539,180 @@ Když se během workshopu objeví debata o strategii, segmentu, formulářových
 
 Dobře zavřená servisní poznámka po sobě nechá lepší pracovní místo a méně šumu. To je malý, ale důležitý princip provozu: údržba má systém zjednodušovat. Pokud po ní přibylo vysvětlování, vrstev nebo citlivých kopií, nebyla to údržba, ale nenápadně otevřený nový projekt.
 
+## První běžné použití po uzavřené servisní poznámce
+
+Uzavřená servisní poznámka se má při dalším běžném použití ztratit z pozornosti. Člověk otevře checklist, šablonu, stránku nebo pravidlo a prostě pracuje. Nemá přemýšlet, že tu nedávno proběhla oprava odkazu, zpřesnění formulace nebo úklid staré stopy. Pokud musí někdo vysvětlovat, co se opravilo, servisní poznámka možná nebyla zavřená tak dobře, jak vypadala.
+
+První běžné použití po uzavření proto není nová kontrolní etapa. Je to krátké pozorování v reálné práci. Cílem je poznat, jestli oprava opravdu zmizela do provozu, nebo jestli po sobě nechala další drobný odpor.
+
+Začněte větou:
+
+```text
+Po uzavřené servisní poznámce používáme stejné pracovní místo takto:
+```
+
+Potom popište běžnou situaci bez servisní optiky:
+
+```text
+Po uzavřené servisní poznámce používáme stejné pracovní místo takto:
+obchodník otevře checklist před odpovědí na poptávku a z odkazu přejde rovnou na aktuální krátké znění pravidla.
+```
+
+Tato věta je užitečná, protože vrací pozornost k práci, ne k opravě. Servisní poznámka byla jen prostředek. Pokud se po ní tým pořád baví hlavně o tom, jak proběhla oprava, oprava ještě zabírá víc místa, než si zaslouží.
+
+### Co při prvním použití sledovat
+
+Sledujte jen tři věci:
+
+- Najitelnost: člověk najde aktuální pravidlo, odkaz, šablonu nebo nápovědu bez hledání v historii.
+- Rozhodnutelnost: pracovní místo mu pomůže udělat stejné rozhodnutí jako před opravou, jen s menším třením.
+- Tichost opravy: použití nevyžaduje vysvětlení, proč se něco nedávno měnilo.
+
+Nesledujte celou výkonnost pravidla, dopad na konverze, spokojenost zákazníků ani širší provozní důsledky. To nejsou otázky prvního běžného použití po servisní poznámce. Pokud se objeví, zapište je stranou jako samostatný podnět. Malá oprava není vstupenka do všeobecného auditu, i kdyby se tvářila sympaticky a mávala vám poznámkovým blokem.
+
+Praktický filtr:
+
+```text
+Potřebujeme pro toto použití vědět, že proběhla servisní oprava?
+```
+
+Správná odpověď je většinou ne. Uživatel pracovního místa má vidět aktuální stav, ne zákulisí opravy. Historie má zůstat dohledatelná v logu, ale nemá stát v cestě běžnému rozhodnutí.
+
+### Praktický příklad
+
+```text
+Uzavřená servisní poznámka:
+Opraven odkaz v obchodním checklistu na aktuální krátké znění pravidla pro poptávkový formulář.
+
+První běžné použití:
+Nový člověk připravuje odpověď na poptávku. Otevře checklist, klikne na odkaz a najde krátké pravidlo bez hledání v ověřovací historii.
+
+Co pozorujeme:
+Najitelnost drží. Rozhodnutí se nezměnilo. Člověk nepotřeboval vysvětlení servisní opravy.
+
+Co neotevíráme:
+Neměníme znění pravidla, formulář, sales proces, návratový signál ani měření.
+
+Privacy-first hranice:
+Do záznamu nepřenášíme konkrétní poptávku ani jméno zákazníka. Stačí obecný závěr: checklist vedl na správné místo při běžném použití.
+
+Výsledek:
+Servisní oprava se chová jako součást běžného provozu. Pravidlo zůstává v dlouhodobém klidu.
+```
+
+Všimněte si, že příklad neoslavuje opravu. Jen potvrzuje, že nepřekáží. To je u servisní poznámky dobrý výsledek. Údržba má být vidět hlavně tím, že se o ní nemusí mluvit.
+
+### Čtyři výsledky prvního běžného použití
+
+Po prvním použití vyberte jeden ze čtyř výsledků:
+
+```text
+Oprava zmizela do provozu:
+Pracovní místo funguje bez zvláštního vysvětlování. Pravidlo zůstává v klidu.
+
+Potřebuje poslední lokální dotažení:
+Rozhodovací logika drží, ale jedno slovo, odkaz nebo umístění ještě způsobuje malé tření.
+
+Servisní stopa je moc viditelná:
+Lidé se při běžném použití pořád vracejí k historii opravy. Je potřeba zjednodušit pracovní místo nebo log.
+
+Objevil se návratový signál:
+Použití ukázalo problém s pravidlem, hranicí použití, daty nebo zákaznickou cestou. To už není servis.
+```
+
+Výsledek `oprava zmizela do provozu` je ideál. Nevyžaduje další akci. Výsledek `poslední lokální dotažení` dovoluje jednu drobnou opravu na stejném místě. Výsledek `servisní stopa je moc viditelná` znamená, že jste sice opravili tření, ale nechali kolem něj moc vysvětlování. Výsledek `objevil se návratový signál` patří do samostatné smyčky, ne do servisního dočištění.
+
+Codyho komentář: nejlepší servisní oprava je trochu nevděčná. Nikdo ji nepochválí, protože nikdo nezakopne. To je přesně ta úroveň slávy, kterou provozní hygiena potřebuje.
+
+### Privacy-first záznam po použití
+
+První běžné použití po servisní poznámce svádí k tomu, že si tým nechá "důkaz pro jistotu". Screenshot správného odkazu, kopii poptávky, jméno člověka, který pravidlo použil, nebo kus interního chatu. Většinou to není potřeba.
+
+Záznam má odpovědět jen na otázku:
+
+```text
+Fungovalo opravené pracovní místo při běžném použití bez dalšího vysvětlování?
+```
+
+Stačí krátká věta:
+
+```text
+Checklist při běžném použití vedl na aktuální krátké pravidlo; žádná další akce.
+```
+
+Pokud se objevilo tření, zapište ho obecně:
+
+```text
+Odkaz už je správný, ale popisek odkazu pořád naznačuje starou ověřovací historii.
+```
+
+Takový záznam chrání užitečný poznatek a současně nevyrábí novou datovou stopu. Privacy-first provoz není posedlost mazáním všeho. Je to návyk ptát se, kolik detailu dnešní rozhodnutí opravdu potřebuje.
+
+### Karta prvního použití po servisní poznámce
+
+```text
+Uzavřená servisní poznámka:
+
+Pracovní místo:
+
+Běžná situace použití:
+
+Co mělo být po opravě snazší:
+
+Pozorování:
+- najitelnost:
+- rozhodnutelnost:
+- tichost opravy:
+
+Výsledek:
+- oprava zmizela do provozu
+- potřebuje poslední lokální dotažení
+- servisní stopa je moc viditelná
+- objevil se návratový signál
+
+Co výslovně neotevíráme:
+
+Privacy-first záznam:
+Jaký obecný závěr stačí:
+Jaká data nekopírujeme:
+
+Další krok nebo klid:
+
+Vlastník:
+
+Datum:
+```
+
+Kartu použijte jen u servisních poznámek, které měly reálný dopad na práci někoho dalšího. U opravy překlepu nebo mrtvého odkazu stačí jedna věta v logu. Když se ke každé drobnosti zakládá karta, údržba začne vyrábět víc práce, než kolik jí šetří.
+
+### Mini workshop na 5 minut
+
+1. Minuta 1: otevřete opravené pracovní místo v běžné situaci.
+2. Minuta 2: ověřte najitelnost aktuálního pravidla nebo šablony.
+3. Minuta 3: zkontrolujte, že rozhodnutí zůstalo stejné.
+4. Minuta 4: zapište, jestli oprava vyžadovala vysvětlení.
+5. Minuta 5: vyberte výsledek a zapište obecný privacy-first závěr.
+
+Pokud pět minut nestačí, pravděpodobně nejde o běžné použití po servisní poznámce. Buď je pracovní místo pořád nejasné, nebo se objevil větší návratový signál. V obou případech je lepší změnit typ práce než prodlužovat servisní kontrolu.
+
+### Checklist prvního běžného použití
+
+- Použili jsme opravené pracovní místo v normální situaci?
+- Našel člověk aktuální pravidlo, odkaz nebo šablonu bez hledání v historii?
+- Pomohlo pracovní místo ke stejnému rozhodnutí jako před opravou?
+- Nevyžadovalo použití vysvětlení servisní historie?
+- Neotevřeli jsme znovu rozhodovací logiku, návratový signál ani zákaznickou cestu?
+- Vybrali jsme jeden ze čtyř výsledků použití?
+- Pokud stačí klid, nevyrábíme další kontrolu?
+- Pokud je potřeba dotažení, drží se jednoho lokálního místa?
+- Pokud se objevil návratový signál, oddělili jsme ho od servisní poznámky?
+- Zapsali jsme jen obecný závěr bez zbytečných osobních, zákaznických nebo interních detailů?
+
+První běžné použití po uzavřené servisní poznámce má potvrdit, že údržba opravdu zjednodušila práci. Když oprava zmizí do provozu, nechte ji zmizet. Dlouhodobý klid není prázdnota. Je to známka, že pravidlo už nepotřebuje pozornost, aby dělalo svou práci.
+
 ## Pracovní log
 
+- 2026-06-20: Doplněna úvodní podkapitola o prvním běžném použití po uzavřené servisní poznámce: najitelnost, rozhodnutelnost, tichost opravy, čtyři výsledky použití, privacy-first záznam, karta, mini workshop a checklist.
 - 2026-06-20: Doplněna úvodní podkapitola o uzavření servisní poznámky po návratu do dlouhodobého klidu: lokální ověření, čtyři uzavírací stavy, praktický příklad, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-20: Doplněna úvodní podkapitola o servisní poznámce po návratu do dlouhodobého klidu: rozlišení drobné lokální opravy od návratového signálu, hranice opravy, privacy-first servis, karta, mini workshop a checklist.
 - 2026-06-20: Doplněna úvodní podkapitola o návratu do dlouhodobého klidu po uzavření druhého běžného použití: kanonické pracovní místo, návratový signál, praktický příklad, privacy-first úklid, karta, workshop a checklist.
