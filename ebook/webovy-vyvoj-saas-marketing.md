@@ -233179,8 +233179,179 @@ Když workshop skončí bez kategorie, neotevírejte úpravu pravidla. Stav "nev
 
 První návratový signál po dlouhodobém klidu má být malý test reality. Není to pozvánka k velkému úklidu ani k návratu staré agendy. Pokud signál potvrzuje skutečný návrat problému, otevřete smyčku. Pokud ne, nechte pravidlo dál sloužit. Stabilní systém se pozná i podle toho, že umí nereagovat na každé zašustění.
 
+## Uzavření první reakce po dlouhodobém klidu
+
+První reakce na signál po dlouhodobém klidu má krátký život. Buď potvrdí, že šlo o rušení, dočistí jednu hranu, pošle tým do kontroly změněného kontextu, nebo otevře novou návratovou iteraci. Co nemá udělat: zůstat viset jako neurčitá poznámka "ještě sledovat". Takové poznámky vypadají nevinně, ale v praxi vytvářejí tichý dluh. Nikdo neví, jestli je pravidlo pořád v klidu, jestli už se opravuje, nebo jestli se jen čeká na další záminku k debatě.
+
+Uzavření první reakce proto není další analýza. Je to rozhodnutí, co odteď platí. Tým má po něm vědět, jestli se vrací k dlouhodobému klidu, jestli v kanonickém místě přibyla jedna hranice, jestli je potřeba samostatná kontrola kontextu, nebo jestli se opravdu otevřela nová smyčka. Cokoliv mezi tím je jen procesní mlha s lepším fontem.
+
+Začněte větou:
+
+```text
+První reakci po dlouhodobém klidu uzavíráme jako:
+```
+
+Potom doplňte jeden výsledek:
+
+```text
+První reakci po dlouhodobém klidu uzavíráme jako:
+lokální rušení. Pravidlo se nemění, jen doplňujeme odkaz na kanonické místo do šablony obchodního handoffu.
+```
+
+Tato věta má být použitelná bez zbytku historie. Když ji za týden přečte člověk, který u návratu nebyl, musí poznat tři věci: co se stalo s pravidlem, kde se změna projeví a kdy se téma znovu otevře.
+
+### Čtyři uzavírací stavy
+
+Po první reakci vyberte jeden ze čtyř stavů:
+
+- Návrat do klidu: signál byl lokální rušení a pravidlo zůstává beze změny.
+- Jedna lokální hrana: pravidlo funguje, ale kanonické místo potřebuje jednu větu, příklad nebo odkaz.
+- Kontrola kontextu: dnešní situace naznačuje, že se změnila nabídka, publikum, proces nebo pracovní místo.
+- Nová návratová smyčka: signál odpovídá původnímu návratovému signálu a opravdu ukazuje na návrat problému.
+
+Stav `návrat do klidu` je nejčistší uzavření. Zapište, proč se pravidlo nemění, a vraťte ho do běžného provozu. Nepřidávejte další pozorování jen proto, že se něco jednou ozvalo. Pokud šlo o špatný odkaz, nejasné umístění nebo atypickou situaci, opravte nejbližší pracovní místo a nechte pravidlo dál spát svým užitečným pracovním spánkem.
+
+Stav `jedna lokální hrana` použijte, když pravidlo obstálo, ale člověk při jeho použití narazil na slabě popsanou hranici. Úprava má být malá a rozhodovací. Ne "zlepšit vysvětlení formulářových polí", ale jedna věta typu: "Kontext, který stačí získat v discovery, nepřidáváme jako povinné pole před prvním kontaktem." Jakmile potřebujete tři odstavce, pravděpodobně už nečistíte hranu, ale otevíráte novou otázku.
+
+Stav `kontrola kontextu` není úprava pravidla. Je to brzda. Pokud se změnil segment, nabídka, workflow nebo vlastník, nelepte dnešní realitu na staré pravidlo. Nejdřív napište, co se změnilo, co z původního kontextu stále platí a co výslovně nepřenášíte. Teprve potom rozhodujte, jestli pravidlo upravit, zúžit, archivovat nebo nahradit.
+
+Stav `nová návratová smyčka` si nechte pro situace, kde se opravdu vrací původní problém. Nestačí podobné téma. Musí jít o stejný typ nerozhodnosti, stejnou rozhodovací slabinu nebo opakovaný vzor, kvůli kterému byl návratový signál pojmenovaný. Jinak by se každá příbuzná potíž tvářila jako důkaz, že pravidlo selhalo. A to je pohodlné, ale ne přesné.
+
+### Praktický příklad
+
+```text
+Pravidlo:
+Před prvním lidským kontaktem přidáváme do formuláře jen údaj, který mění další krok zákazníka.
+
+Původní návratový signál:
+Dvě po sobě jdoucí situace, kde tým nedokáže rozhodnout, jestli údaj mění další krok zákazníka.
+
+Pozorovaný signál:
+Obchod chtěl přidat povinné pole "velikost týmu", protože u jedné poptávky chyběl kontext.
+
+První reakce:
+Porovnali jsme situaci s návratovým signálem. Nešlo o dvě po sobě jdoucí nerozhodné situace, ale o jeden případ, který se dal vyřešit v discovery.
+
+Uzavírací stav:
+Jedna lokální hrana.
+
+Změna kanonického místa:
+Kontext, který stačí získat v discovery, nepřidáváme jako povinné pole před prvním kontaktem.
+
+Co neotevíráme:
+Celý formulář, lead scoring, staré poptávky ani nový dotazník.
+
+Další návratový bod:
+K pravidlu se vracíme až při původním návratovém signálu nebo při změně nabídky, která změní význam prvního kontaktu.
+```
+
+Příklad ukazuje důležitou věc: reakce něco změnila, ale nerozjela novou agendu. Tým získal přesnější hranu, nezvětšil formulář, neotevřel staré podklady a nezměnil jednorázovou nejistotu v trvalou kontrolu. To je dobrý výsledek. Trochu nenápadný, jasně. Ale produktivita často nosí pracovní montérky, ne konferenční cedulku.
+
+### Co propsat a co nechat být
+
+Po uzavření první reakce propsujte jen věci, které změní příští rozhodnutí:
+
+- aktuální stav pravidla;
+- jednu lokální úpravu pracovního místa, pokud vznikla;
+- důvod, proč se pravidlo vrací do klidu nebo proč se otevírá další smyčka;
+- návratový bod, který zabrání trvalému sledování bez důvodu.
+
+Nepropsujte do kanonického místa celé vysvětlení, kdo signál přinesl, jak proběhla debata, kdo měl jaký pocit a jaké varianty padly na stole. Tyto informace mohou být užitečné v rozhodovacím logu, ale běžné pracovní místo mají zbytečně zatížit. Kanonické místo má příště pomoci rozhodnout, ne přehrát seriál z minulého týdne.
+
+Pokud uzavření vede ke kontrole kontextu, nepište do pravidla předčasnou úpravu. Napište jen přechodový stav:
+
+```text
+Pravidlo zatím neměníme. Nejdřív ověříme, jestli se změnila nabídka, publikum, provoz nebo pracovní místo. Do té doby nepřidáváme nové formulářové pole ani nový scoring.
+```
+
+Takový zápis chrání tým před poloviční změnou. Pravidlo není opravené, ale ani volně rozbité. Má jasný mezistav a hranici, co se teď nedělá.
+
+### Privacy-first uzavření
+
+První reakce po dlouhodobém klidu často svádí k otevření starých stop. Tým chce mít jistotu, takže hledá staré screenshoty, exporty, zákaznické zprávy, komentáře v úkolech a historické návrhy. Jenže pokud uzavření končí návratem do klidu nebo jednou lokální hranou, většina těchto stop nemá nový účel.
+
+Použijte krátký úklid:
+
+```text
+Co zůstává v kanonickém místě:
+
+Co zůstává jen v rozhodovacím logu:
+
+Co mažeme, anonymizujeme nebo necháváme zavřené:
+
+Jaký nový údaj jsme záměrně nezačali sbírat:
+```
+
+U privacy-first provozu není cílem mít prázdnou paměť. Cílem je mít použitelnou paměť bez zbytečných osobních údajů a bez kopií, které přežijí svůj účel. Pokud stačí napsat "jedna poptávka potřebovala kontext až pro discovery", neukládejte celou zprávu zákazníka. Pokud stačí rozhodovací hrana, neukládejte screenshot formuláře s reálnými daty. A pokud jste si vytvořili dočasnou poznámku, dejte jí datum úklidu hned, ne až v okamžiku, kdy se stane součástí firemního podloží.
+
+### Karta uzavření první reakce
+
+```text
+Pravidlo:
+
+Kanonické místo:
+
+Původní návratový signál:
+
+Pozorovaný signál:
+
+První reakce:
+
+Uzavírací stav:
+- návrat do klidu
+- jedna lokální hrana
+- kontrola kontextu
+- nová návratová smyčka
+
+Co se mění v kanonickém místě:
+
+Co zůstává jen v rozhodovacím logu:
+
+Co výslovně neotevíráme:
+
+Privacy-first úklid:
+Ponecháváme:
+Anonymizujeme:
+Mažeme nebo necháváme zavřené:
+Nově nesbíráme:
+
+Další návratový bod:
+
+Datum:
+```
+
+Karta je hotová ve chvíli, kdy se dá říct, co má další člověk udělat příště. Pokud karta končí větou "budeme sledovat", doplňte konkrétní signál. Pokud konkrétní signál neumíte napsat, nejspíš nemáte sledovat nic. Máte uzavřít reakci a vrátit pravidlo do klidu.
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: přečtěte pozorovaný signál a původní návratový signál.
+2. Minuta 2: zopakujte první reakci jednou větou.
+3. Minuta 3: vyberte jeden ze čtyř uzavíracích stavů.
+4. Minuta 4: napište nejvýše jednu změnu kanonického místa.
+5. Minuta 5: napište, co výslovně neotevíráte.
+6. Minuta 6: proveďte privacy-first úklid pracovních stop.
+7. Minuta 7: určete další návratový bod nebo potvrďte návrat do klidu.
+
+Když workshop odhalí dvě různé otázky, nerozšiřujte uzavření. Jednu použijte pro aktuální stav a druhou zapište jako samostatný podnět. Uzavření první reakce má zavřít reakci, ne adoptovat všechny příbuzné problémy, které se přišly podívat oknem.
+
+### Checklist uzavření první reakce
+
+- Vybrali jsme jeden uzavírací stav?
+- Je jasné, jestli se pravidlo vrací do klidu, dostává jednu hranu, čeká na kontrolu kontextu, nebo otevírá novou smyčku?
+- Nepřidali jsme trvalé sledování bez konkrétního návratového bodu?
+- Pokud měníme kanonické místo, je změna nejvýše jedna rozhodovací věta, příklad nebo odkaz?
+- Pokud se změnil kontext, zdrželi jsme se předčasné úpravy pravidla?
+- Zapsali jsme, co výslovně neotevíráme?
+- Neotevřeli jsme staré exporty, screenshoty nebo syrové zprávy bez jasného účelu?
+- Zůstává případný důkaz zobecněný, pokud konkrétní osobní údaj nemění rozhodnutí?
+- Má dočasná poznámka datum úklidu nebo jasné místo v rozhodovacím logu?
+- Ví další člověk, co má udělat při příští podobné situaci?
+
+Dobré uzavření první reakce po dlouhodobém klidu je malé, ale rozhodné. Buď pravidlo nechá dál pracovat, nebo mu doplní jednu hranu, nebo pošle tým do kontrolované kontextové práce, nebo otevře novou smyčku. Hlavně nenechá první signál proměnit ve věčné "ještě uvidíme". To je věta, která se tváří rozumně, ale často jen pronajímá nerozhodnutí další pracovní době.
+
 ## Pracovní log
 
+- 2026-06-20: Doplněna úvodní podkapitola o uzavření první reakce po dlouhodobém klidu: čtyři uzavírací stavy, praktický příklad, propsání do kanonického místa, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-20: Doplněna úvodní podkapitola o prvním návratovém signálu po dlouhodobém klidu: rozlišení rušení, chybějící hrany, změněného kontextu a skutečného návratu problému, nejmenší důkaz, privacy-first návrat, karta, workshop a checklist.
 - 2026-06-20: Doplněna úvodní podkapitola o dlouhodobém klidu po stabilizaci pravidla: kanonické znění, návratový signál, omezení zbytečných kontrol, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-19: Doplněna úvodní podkapitola o uzavření druhého běžného použití po uzavřeném ověření pravidla: čtyři uzavírací stavy, praktický příklad, propsání do kanonického místa, privacy-first úklid, karta, workshop a checklist.
