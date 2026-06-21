@@ -238900,8 +238900,174 @@ Pokud během workshopu narazíte na nový nápad, napište ho mimo revizi. Prvn�
 
 První běžná revize má standardu sundat poslední cedulku "nové". Buď ukáže, že pravidlo drží, nebo najde jednu přesnou opravu. V obou případech má skončit klidně. Standard, který potřebuje po každé revizi další speciální dohled, ještě není standard. Je to rozpracované pravidlo s hezkým názvem.
 
+## Uzavření první běžné revize po předání standardu
+
+První běžná revize po předání standardu nemá zůstat jako poznámka typu "zkontrolováno". Jejím skutečným výstupem je nový provozní stav: standard buď dál běží beze změny, dostane jednu lokální opravu, zpřesní se jeho rozhodovací hrana, nebo se otevře malá návratová smyčka. Bez uzavření se revize snadno stane jen dalším pozorováním v systému. Tým něco viděl, něco si řekl, ale běžná práce neví, co z toho platí.
+
+Uzavření začněte návratem k výsledku revize:
+
+```text
+Výsledek první běžné revize:
+
+Co jsme ověřili:
+
+Co se má změnit:
+
+Co se výslovně nemá měnit:
+
+Kam se závěr propíše:
+```
+
+Těchto pět řádků stačí k tomu, aby se revize nepřelila do mlhavého "měli bychom to ještě sledovat". Sledování bez důvodu je jen práce převlečená za opatrnost. Pokud standard drží, napište to a vraťte ho do rytmu. Pokud drží skoro, opravte nejbližší pracovní místo. Pokud nevede k rozhodnutí, zpřesněte jednu hranu. Pokud nastal návratový signál, otevřete novou malou smyčku s vlastním rozsahem.
+
+Praktický příklad:
+
+```text
+Standard:
+Archivní šablona má v názvu "Archiv" a první řádek odkazuje na aktuální zdroj pravdy.
+
+Výsledek první běžné revize:
+Standard je najitelný a použitelný, ale v jedné starší šabloně chybí pracovní kotva.
+
+Co jsme ověřili:
+Při dvou použitích lidé našli aktuální zdroj pravdy. Jednou museli přejít přes index, protože samotná šablona neměla první řádek s odkazem.
+
+Co se má změnit:
+Doplníme první řádek do konkrétní starší šablony.
+
+Co se nemá měnit:
+Nepřepisujeme celý standard, neotevíráme archivní strategii a nekontrolujeme všechny historické šablony ručně.
+
+Kam se závěr propíše:
+Do starší šablony a do krátkého záznamu v logu první běžné revize.
+```
+
+Všimněte si, že uzavření není velké. Revize našla lokální chybějící kotvu, ne špatný standard. Proto je oprava lokální. Tým nezvětšuje práci jen proto, že otevřel kontrolní okno. To je zdravá disciplína: reagovat přesně na to, co se ukázalo, a zbytek nechat zavřený.
+
+### Čtyři uzavírací stavy
+
+Po první běžné revizi vyberte jeden ze čtyř stavů:
+
+- Vrátit do rytmu: standard drží a nepotřebuje změnu ani mimořádnou pozornost.
+- Lokálně opravit kotvu: standard je správný, ale jedno pracovní místo ho neukazuje včas.
+- Zpřesnit rozhodovací hranu: standard je najitelný, ale člověk při použití nepozná hranici správného rozhodnutí.
+- Otevřít návratovou smyčku: nastal návratový signál a standard potřebuje nový malý průchod.
+
+Stav `vrátit do rytmu` má být nejkratší. Zapište jednovětý závěr a nepřidávejte další kontrolu navíc. Běžný rytmus už existuje právě proto, aby standardy nemusely žít v permanentním dohledu.
+
+Stav `lokálně opravit kotvu` použijte, když člověk standard musel hledat mimo místo, kde pracoval. Oprava má patřit do šablony, checklistu, formuláře, indexu nebo procesu, ne do dlouhého vysvětlení historie standardu.
+
+Stav `zpřesnit rozhodovací hranu` použijte, když standard zní správně, ale při reálném použití nechává dvě rozumné interpretace. Dobrá oprava je jedna přesnější věta, příklad hraniční situace nebo explicitní "toto už do standardu nepatří".
+
+Stav `otevřít návratovou smyčku` použijte jen tehdy, když se potvrdil návratový signál. Jedna stará poznámka, chybějící odkaz nebo nejistota nového člověka obvykle nejsou návratový signál. Jsou to opravy předání nebo kotvy.
+
+### Co se propisuje a co se uklízí
+
+Uzavření revize má vždy dvě části: propsání a úklid.
+
+Propsání říká, kde bude závěr vidět při další práci:
+
+- v kanonickém místě standardu;
+- v pracovním místě, kde se standard používá;
+- v revizním logu;
+- v backlogu nebo indexu, pokud se mění stav související položky.
+
+Úklid říká, co už nemá dál žít:
+
+- dočasná revizní poznámka;
+- ruční připomínka k první revizi;
+- kopie starého příkladu;
+- screenshot nebo export použitý jen pro kontrolu;
+- starý odkaz, který by člověka vedl mimo aktuální zdroj pravdy.
+
+Neuklízejte kanonický závěr. Uklízí se pomocné stopy, ne paměť týmu. Rozdíl je praktický: zdroj pravdy má zůstat dostupný, ale nemá být obalený starým materiálem, který se při další práci může tvářit jako aktuální instrukce.
+
+### Privacy-first uzavření
+
+První běžná revize často používá příklady z reálné práce. Při uzavření se rozhodněte, jestli je potřebujete dál držet v detailu. Většinou ne.
+
+Dobrá uzavírací věta:
+
+```text
+Pro další provoz stačí zobecněný závěr: standard byl použit ve dvou pracovních situacích a jedna starší šablona potřebovala doplnit pracovní kotvu. Původní screenshoty a pracovní komentáře dál nekopírujeme.
+```
+
+Takový zápis drží důkaz, ale nepřenáší víc dat, než je potřeba. Pokud revize pracovala se zákaznickou zprávou, interním chatem nebo exportem, nechte detail v původním systému nebo ho smažte podle retenčních pravidel. Do provozní dokumentace patří závěr, ne celá cesta, kterou jste k němu došli.
+
+Codyho komentář: nejlepší revizní úklid je ten, který nikdo neoslaví. Prostě zmizí jedna dočasná poznámka, jeden starý odkaz a jedno pokušení sbírat další data. Nudné? Ano. Účinné? Taky ano. Provozní hygiena bohužel nemá soundtrack, ale šetří budoucí nervy.
+
+### Karta uzavření první běžné revize
+
+```text
+Standard:
+
+Běžný revizní rytmus:
+
+Výsledek první běžné revize:
+- vrátit do rytmu
+- lokálně opravit kotvu
+- zpřesnit rozhodovací hranu
+- otevřít návratovou smyčku
+
+Co jsme ověřili:
+
+Rozhodnutí jednou větou:
+
+Co se propisuje do kanonického místa:
+
+Co se propisuje do pracovního místa:
+
+Co se propisuje do revizního logu:
+
+Co výslovně neotevíráme:
+
+Co uklízíme:
+
+Privacy-first závěr:
+Který zobecněný závěr stačí:
+Které původní podklady nekopírujeme:
+Které dočasné stopy mažeme nebo necháváme zavřené:
+
+Návratový signál:
+
+Vlastník další běžné revize:
+
+Datum další běžné revize:
+```
+
+Karta má uzavřít revizi, ne vyrobit další vrstvu řízení. Pokud se po jejím vyplnění objeví pět nových úkolů, vraťte se k uzavíracímu stavu. Buď šlo o větší návratovou smyčku, nebo revize začala suplovat plánování. Obojí je jiný typ práce.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte výsledek první běžné revize.
+2. Minuta 2: vyberte jeden uzavírací stav.
+3. Minuta 3: napište rozhodnutí jednou větou.
+4. Minuta 4: určete, co se propíše do kanonického a pracovního místa.
+5. Minuta 5: určete, co se uklízí nebo nechává zavřené.
+6. Minuta 6: zapište privacy-first závěr a datum další běžné revize.
+
+Když tým během workshopu začne řešit druhý standard, starou strategii nebo úplně nový nástroj, zapište to mimo tuto kartu. Uzavření revize má chránit rozsah stejně přísně jako samotný standard.
+
+### Checklist uzavření první běžné revize
+
+- Vybrali jsme jeden uzavírací stav?
+- Umíme rozhodnutí napsat jednou větou?
+- Pokud standard drží, vrací se do běžného rytmu bez další mimořádné kontroly?
+- Pokud chybí kotva, opravujeme nejbližší pracovní místo?
+- Pokud chybí rozhodovací hrana, zpřesňujeme jednu větu nebo hranici?
+- Pokud nastal návratový signál, otevíráme samostatnou malou smyčku?
+- Je jasné, co se propisuje do kanonického místa?
+- Je jasné, co se propisuje do pracovního místa?
+- Uklízíme dočasné poznámky, screenshoty, exporty nebo staré odkazy, které už nemají účel?
+- Ukládáme zobecněný závěr místo surových podkladů všude, kde to stačí?
+- Je zapsané, co výslovně neotevíráme?
+- Má standard další běžný revizní termín nebo návratový signál?
+
+Uzavřená první běžná revize má standardu dát klidný status. Buď dál funguje jako obyčejné pravidlo, nebo dostane přesnou opravu a vrátí se zpět do rytmu. Nejhorší výsledek je nechat standard v polozkušebním režimu, kde už se tváří jako běžný provoz, ale pořád kolem něj někdo nosí baterku a kontrolní tabulku.
+
 ## Pracovní log
 
+- 2026-06-21: Doplněna úvodní podkapitola o uzavření první běžné revize po předání standardu: čtyři uzavírací stavy, propsání závěru do pracovních míst, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-21: Doplněna úvodní podkapitola o první běžné revizi po předání standardu: najitelnost, použitelnost, klid bez mimořádné péče, čtyři výsledky revize, privacy-first hranice, karta, mini workshop a checklist.
 - 2026-06-21: Doplněna úvodní podkapitola o předání ověřeného standardu do běžného provozního rytmu: kanonické a pracovní místo, revizní rytmus, handoff týmu, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-21: Doplněna úvodní podkapitola o uzavření druhého použití nového standardu: čtyři uzavírací stavy, praktické příklady, propsání do běžného provozu, privacy-first uzavření, karta, mini workshop a checklist.
