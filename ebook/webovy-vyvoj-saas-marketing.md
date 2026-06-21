@@ -237310,8 +237310,207 @@ Když se tým během workshopu začne bavit o dalším zlepšení, vraťte ho k 
 
 Uzavření druhé běžné kontroly je okamžik, kdy tým přestane pravidlo doprovázet za ruku. Buď pravidlo chodí samo, nebo víte přesně, která malá část mu ještě překáží. Oba výsledky jsou použitelné. Nepoužitelný je jen stav mezi: pravidlo vypadá stabilně, ale tým mu dál nenápadně nosí batoh.
 
+## Když delší klidový rytmus drží celé období
+
+Když pravidlo projde druhou běžnou kontrolou a potom vydrží celé další období bez mimořádné péče, tým má před sebou příjemně nudné rozhodnutí: nechat ho dál být. Vypadá to skoro jako ne-práce, ale u dlouhého rukopisu, webu, SaaS i provozních pravidel je právě tohle jeden z nejlepších výsledků. Stabilní věc nemá pořád dokazovat, že je stabilní. Má tiše pomáhat další práci.
+
+Delší klidový rytmus může být měsíc, kvartál, jedno publikační období, několik běžných použití šablony nebo jeden celý prodejní cyklus. Důležitá není přesná délka. Důležité je, že pravidlo během tohoto období nevyrobilo opakované tření, duplicitní šablonu, návrat staré chyby ani novou datovou stopu.
+
+Začněte větou:
+
+```text
+Pravidlo drželo celé období bez mimořádné péče, proto ho necháváme v běžném rytmu a neotevíráme další kontrolu.
+```
+
+Tato věta má chránit tým před dvěma pokušeními. První pokušení je přidat další kontrolu "pro jistotu", protože pravidlo bylo kdysi problémové. Druhé pokušení je otevřít širší vylepšení jen proto, že je zrovna klid. Klid není prázdné místo v kalendáři. Klid je výsledek dobrého rozhodnutí.
+
+### Co ověřit na konci období
+
+Na konci delšího klidového rytmu neprovádějte audit. Udělejte jen krátkou kontrolu čtyř otázek:
+
+- Použilo se pravidlo v běžné práci bez vysvětlování historie?
+- Nevznikla duplicitní šablona, karta, export nebo druhý zdroj pravdy?
+- Neobjevil se návratový signál, který by opravňoval nové otevření?
+- Zůstala datová stopa stejná nebo menší?
+
+Pokud jsou odpovědi klidné, pravidlo zůstává v rytmu. Neplánujte novou zvláštní kontrolu. Neprodlužujte ověřovací režim. Nezakládejte "malý follow-up", pokud nemá konkrétní pracovní důvod. Ano, odolat follow-upu je někdy heroický výkon v kardiganu.
+
+Příklad:
+
+```text
+Pravidlo:
+Archivní šablony musí mít stav, datum archivace a odkaz na aktuální zdroj pravdy.
+
+Období:
+Jeden měsíční cyklus běžné údržby znalostní báze.
+
+Co se stalo:
+Dvě archivní šablony byly nalezené přes rozcestník, ale obě jasně vedly na aktuální zdroj pravdy. Nikdo nepoužil archiv jako aktivní šablonu.
+
+Návratový signál:
+Nenastal.
+
+Rozhodnutí:
+Pravidlo necháváme v běžném měsíčním rytmu. Nezavádíme další zvláštní kontrolu archivů.
+
+Privacy-first výsledek:
+Nevznikl žádný nový seznam použití šablon, screenshot ani osobní evidence čtenářů.
+```
+
+Tento zápis je krátký, ale dělá důležitou práci. Říká, že klid byl ověřený běžným provozem, ne jen tím, že si na problém nikdo nevzpomněl.
+
+### Rozlišujte klid a neviditelnost
+
+Klid neznamená, že se pravidlo nepoužilo. Může znamenat, že se použilo bez tření. Neviditelnost znamená, že nikdo neví, jestli se použilo, protože pravidlo je schované, pracovní situace nenastala, nebo tým nemá žádnou běžnou stopu.
+
+Rozlišení:
+
+- Klid: pravidlo se použilo nebo bylo k dispozici v přirozeném rytmu a nevznikl problém.
+- Neviditelnost: pravidlo možná existuje, ale není jasné, jestli ho někdo našel, potřeboval nebo obešel.
+- Neaktuálnost: pracovní situace, kvůli které pravidlo vzniklo, už zmizela nebo se přesunula jinam.
+
+Pokud jde o klid, pravidlo nechte být. Pokud jde o neviditelnost, neotevírejte hned obsah pravidla. Nejdřív zjistěte, jestli má správný domov. Pokud jde o neaktuálnost, zvažte archivaci nebo sloučení.
+
+Praktická otázka:
+
+```text
+Máme důkaz klidného použití, nebo jen absenci stížností?
+```
+
+Absence stížností je slabý signál. Klidné použití je silnější. Stačí jednoduchá provozní stopa: šablona byla použita, formulář vznikl podle pravidla, rozcestník dovedl člověka na správné místo, měsíční review neotevřelo starý problém.
+
+### Kdy pravidlo povýšit na výchozí standard
+
+Pokud pravidlo drží celé období a používá se opakovaně, může přestat být "pravidlem po opravě" a stát se výchozím standardem. To neznamená napsat nový dokument. Znamená to odstranit z textu poslední zbytky historického jazyka a nechat pravidlo bydlet tam, kde vzniká nová práce.
+
+Povýšení na standard dává smysl, když:
+
+- pravidlo se použilo víckrát bez návratu starého problému;
+- nový člověk ho našel bez vysvětlování;
+- výjimky jsou jasně popsané nebo žádné nejsou;
+- privacy-first hranice je vidět v místě, kde vznikají data;
+- neexistuje aktivní paralelní šablona nebo starý postup.
+
+Příklad přepisu:
+
+```text
+Původně:
+Po opravě starých archivních šablon kontrolujeme, že každá ukazuje na aktuální verzi.
+
+Jako standard:
+Archivní šablona vždy začíná stavem "Archiv, nepoužívat pro novou práci" a odkazem na aktuální zdroj pravdy.
+```
+
+První věta mluví o minulém problému. Druhá vede budoucí práci. To je přesně posun, který chcete.
+
+### Kdy pravidlo naopak archivovat
+
+Někdy celé období drží ne proto, že je pravidlo skvělé, ale proto, že situace přestala existovat. Třeba migrační pravidlo pro staré šablony po dokončení migrace, dočasné pravidlo pro pilotní landing page nebo postup pro ruční kontrolu, kterou už nahradil jednodušší kanonický proces.
+
+Archivujte pravidlo, když:
+
+- pracovní situace už nenastává;
+- pravidlo jen připomíná starou fázi;
+- novější standard pokrývá stejnou potřebu jednodušeji;
+- další ponechání by vytvářelo zbytečnou otázku "platí to ještě?";
+- pravidlo kvůli sobě drží staré podklady, výjimky nebo přístupy.
+
+Archivace nemá být mazání paměti. Má být jasný stav:
+
+```text
+Pravidlo archivujeme, protože původní přechodová situace skončila. Pro novou práci platí [aktuální standard]. Historický důvod zůstává v rozhodovacím logu bez pracovních podkladů.
+```
+
+### Privacy-first konec klidového období
+
+Na konci delšího klidu se často ukáže, že už není potřeba držet ani poslední ověřovací stopy. Pokud pravidlo drželo celé období, pomocné poznámky z dřívějších kontrol většinou splnily účel.
+
+Projít stačí čtyři hromádky:
+
+- Ponechat: aktuální pravidlo, návratový signál, výjimky a datum běžné revize.
+- Zkrátit: rozhodovací paměť, pokud obsahuje zbytečnou historii opravy.
+- Smazat nebo anonymizovat: dočasné poznámky, screenshoty, exporty, osobní trasy a pracovní kopie.
+- Zavřít: připomínky, které existovaly jen kvůli ověřovacímu režimu.
+
+Privacy-first věta:
+
+```text
+Po klidovém období ponecháváme jen aktuální pravidlo a návratový signál. Ověřovací podklady mažeme nebo zkracujeme na anonymizovaný závěr, protože už nepodporují žádné aktivní rozhodnutí.
+```
+
+Tím se klid promění v menší systém, ne ve větší archiv.
+
+### Karta klidového období
+
+```text
+Pravidlo nebo trasa:
+
+Běžný rytmus:
+
+Sledované období:
+
+Kde se pravidlo použilo:
+
+Návratový signál nastal:
+- ano / ne
+
+Vznikla mimořádná péče:
+- ano / ne
+
+Vznikla nová datová stopa:
+- ano / ne
+
+Stav po období:
+- ponechat v běžném rytmu
+- povýšit na výchozí standard
+- lokálně doplnit domov pravidla
+- archivovat nebo sloučit
+
+Rozhodnutí jednou větou:
+
+Co výslovně neotevíráme:
+
+Privacy-first úklid:
+
+Návratový signál pro příště:
+
+Vlastník:
+
+Datum další běžné revize:
+```
+
+### Mini workshop na 8 minut
+
+1. Minuta 1: přečtěte pravidlo, běžný rytmus a návratový signál.
+2. Minuty 2 až 3: ověřte, jestli pravidlo bylo v období použité nebo jen neviditelné.
+3. Minuta 4: zkontrolujte duplicity, mimořádnou péči a datovou stopu.
+4. Minuta 5: vyberte stav po období.
+5. Minuta 6: napište rozhodnutí jednou větou.
+6. Minuta 7: uzavřete privacy-first podklady.
+7. Minuta 8: potvrďte datum další běžné revize.
+
+Pokud se během workshopu objeví nový nápad na vylepšení, nelepte ho na klidové uzavření. Zapište ho bokem jako kandidáta. Klidové období se má uzavřít, ne použít jako záminka pro další rozpracování.
+
+### Checklist klidového období
+
+- Víme, jaké období kontrolujeme?
+- Má pravidlo konkrétní běžný rytmus?
+- Rozlišili jsme klidné použití od pouhé absence stížností?
+- Nenastal návratový signál?
+- Nevznikla duplicitní šablona, karta, export nebo druhý zdroj pravdy?
+- Nevznikla mimořádná péče, která by se tvářila jako běžná práce?
+- Je jasné, jestli pravidlo ponecháváme, povyšujeme na standard, lokálně doplňujeme, nebo archivujeme?
+- Je rozhodnutí napsané jednou větou?
+- Neotevíráme širší zlepšování jen proto, že je klid?
+- Smazali nebo anonymizovali jsme ověřovací podklady, které už nemají účel?
+- Zůstává privacy-first hranice viditelná v místě, kde vznikají data?
+- Má pravidlo návratový signál a datum další běžné revize?
+
+Když delší klidový rytmus drží, nejlepší výsledek často nevypadá jako výsledek. Nic se nerozšiřuje, nic se neměří navíc, žádná nová karta nevzniká. Jen se potvrdí, že pravidlo umí být obyčejnou součástí práce. To je u provozního textu vysoká meta: užitečný, dohledatelný a dost klidný na to, aby se kolem něj nemusel stavět další proces.
+
 ## Pracovní log
 
+- 2026-06-21: Doplněna úvodní podkapitola o tom, co dělat, když delší klidový rytmus drží celé období: rozlišení klidu a neviditelnosti, povýšení pravidla na standard, archivace neaktuálních pravidel, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-21: Doplněna úvodní podkapitola o uzavření druhé běžné kontroly v delším klidovém rytmu: čtyři uzavírací stavy, stabilní klid bez další zvláštní péče, privacy-first uzavření, karta, mini workshop a checklist.
 - 2026-06-21: Doplněna úvodní podkapitola o druhé běžné kontrole v delším klidovém rytmu: samostatnost bez čerstvé servisní paměti, čtyři výsledky kontroly, privacy-first hranice, karta, mini workshop a checklist.
 - 2026-06-20: Doplněna úvodní podkapitola o uzavření první běžné kontroly v delším klidovém rytmu: čtyři uzavírací stavy, propsání do běžného rytmu, privacy-first uzavření, karta, mini workshop a checklist.
