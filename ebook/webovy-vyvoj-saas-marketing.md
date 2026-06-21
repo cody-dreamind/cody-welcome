@@ -239377,8 +239377,191 @@ Pokud během workshopu není žádné reálné použití, nedělejte simulaci je
 
 Druhá běžná revize je dobrý test dospělosti standardu. Když pravidlo funguje i bez příběhu svého vzniku, může konečně žít normálním provozním životem. Když ne, není potřeba se zlobit na tým. Stačí najít místo, kde se pravidlo pořád opírá o paměť člověka, a opravit právě to.
 
+## Uzavření druhé běžné revize po předání standardu
+
+Druhá běžná revize po předání standardu má skončit jasným provozním stavem. Nestačí říct, že "revize proběhla". Tým má po ní vědět, jestli standard zůstává v běžném rytmu, potřebuje lokální opravu, má slabý návratový signál, nebo se z něj stala práce, která už nepatří pod původní standard.
+
+Uzavření začněte jednou větou:
+
+```text
+Po druhé běžné revizi standardu rozhodujeme, jestli pravidlo dál žije samo v běžném rytmu, nebo potřebuje jednu přesně omezenou změnu.
+```
+
+Tato věta je malá brzda proti dvěma častým chybám. První chyba je uzavřít revizi příliš měkce: "vypadá to dobře, uvidíme". Druhá chyba je opačná: kvůli jednomu slabému místu otevřít nový projekt. Dobré uzavření je konkrétní a neokázalé. Řekne, co se děje se standardem, co se nemění a podle čeho se k němu tým příště vrátí.
+
+Praktický příklad:
+
+```text
+Standard:
+Archivní šablona má v názvu "Archiv" a první řádek odkazuje na aktuální zdroj pravdy.
+
+Výsledek druhé revize:
+Standard byl použit bez čerstvé paměti z předání. Nový člověk našel aktuální zdroj pravdy přímo v archivní šabloně.
+
+Uzavírací stav:
+Standard zůstává v běžném rytmu.
+
+Rozhodnutí:
+Neměníme standard ani revizní frekvenci. Návratový signál zůstává: archivní šablona byla použita jako aktuální zdroj pravdy.
+
+Co neotevíráme:
+Neděláme plošný audit starých šablon, nepřidáváme další kontrolní tabulku a nehledáme původní diskuzi o zavedení standardu.
+
+Privacy-first závěr:
+Stačí zobecněný zápis o jednom použití. Neukládáme screenshot, chat ani kopii konkrétní pracovní komunikace.
+```
+
+Všimněte si, že uzavření je kratší než revize. To je správně. Revize hledá důkaz, uzavření převádí důkaz do provozního stavu. Pokud uzavření bobtná, pravděpodobně se do něj dostalo nové téma, které má mít vlastní kartu.
+
+### Čtyři uzavírací stavy
+
+Po druhé běžné revizi vyberte jeden ze čtyř stavů:
+
+- Ponechat v běžném rytmu: standard funguje bez čerstvé paměti a bez skryté péče.
+- Udělat poslední lokální opravu: standard drží, ale jedno pracovní místo ještě potřebuje zpřesnit.
+- Přepsat návratový signál: pravidlo funguje, ale signál pro další návrat je moc široký, slabý nebo pozdní.
+- Otevřít samostatnou smyčku: revize našla problém, který už není lokální oprava standardu.
+
+Stav `ponechat v běžném rytmu` je nejkratší. Zapište rozhodnutí a nechte standard pracovat. Nepřidávejte další mimořádnou kontrolu jen proto, že revize dopadla dobře. Dobře dopadlá revize má práci zmenšit, ne vyrobit další dozor.
+
+Stav `udělat poslední lokální opravu` použijte jen tehdy, když přesně víte, kde oprava bydlí. Například první řádek šablony, název položky v indexu, jedna věta v checklistu nebo odkaz v pracovním místě. Pokud opravu neumíte pojmenovat jedním místem, není lokální.
+
+Stav `přepsat návratový signál` je vhodný, když standard funguje, ale tým neví, kdy se k němu vracet. Typický slabý signál zní "někdo se zeptal na pravidlo". Lepší signál zní "člověk použil archivní šablonu jako aktuální zdroj pravdy" nebo "při běžném průchodu se musel rozhodnout podle původního autora místo kanonického místa".
+
+Stav `otevřít samostatnou smyčku` použijte, když druhá revize odhalila širší vzor. Například problém není v archivní šabloně, ale v tom, že tým nemá jasný zdroj pravdy pro celé kampaně. To už není oprava standardu. Je to nové pracovní téma a zaslouží si vlastní otázku, stop podmínku a privacy-first hranici.
+
+### Jak uzavřít lokální opravu
+
+Lokální oprava po druhé revizi má být poslední, ne první díl nového seriálu. Zapište ji ve tvaru:
+
+```text
+Opravíme pouze:
+
+Protože:
+
+Ověříme při:
+
+Zpět do běžného rytmu se vrací:
+```
+
+Příklad:
+
+```text
+Opravíme pouze:
+První řádek archivní šablony, aby odkaz na aktuální zdroj pravdy byl před historickým kontextem.
+
+Protože:
+Nový člověk odkaz našel, ale až po přečtení staré poznámky.
+
+Ověříme při:
+Dalším běžném použití archivní šablony.
+
+Zpět do běžného rytmu se vrací:
+Standard i revizní frekvence. Neotevíráme plošnou kontrolu všech archivů.
+```
+
+Takový zápis udrží opravu na místě. Tým ví, proč vznikla, kde končí a kdy se už nemá chovat jako mimořádná agenda.
+
+### Privacy-first uzavření
+
+Uzavření druhé revize má být datově skromné. Po dvou běžných revizích už standard nepotřebuje tlustý spis důkazů. Potřebuje dohledatelný závěr, který nepřenáší zbytečné osobní ani provozní detaily.
+
+Použijte tři otázky:
+
+```text
+Stačí pro uzavření zobecněný důkaz?
+
+Které podklady jsme otevřeli jen kvůli revizi a můžeme je zavřít nebo smazat?
+
+Nevznikla z revize nová datová stopa, která nemá jasný účel?
+```
+
+Ve většině případů stačí zápis typu:
+
+```text
+Standard byl od první revize použit jednou bez pomoci původního autora. Návratový signál nenastal.
+```
+
+Pokud nastal problém, pořád pište pracovně a zobecněně:
+
+```text
+Při použití šablony člověk našel pravidlo až přes původního autora, protože kanonický odkaz nebyl v prvním viditelném bloku.
+```
+
+Není potřeba ukládat screenshot chatu, jméno člověka ani celý průběh komunikace. Důkaz má stačit pro rozhodnutí. Nemá být památník malé provozní epizody.
+
+### Karta uzavření druhé běžné revize
+
+```text
+Standard:
+
+Kanonické místo:
+
+Výsledek druhé běžné revize:
+
+Vybraný uzavírací stav:
+- ponechat v běžném rytmu
+- udělat poslední lokální opravu
+- přepsat návratový signál
+- otevřít samostatnou smyčku
+
+Rozhodnutí jednou větou:
+
+Pokud je oprava:
+Opravíme pouze:
+Ověříme při:
+
+Pokud se přepisuje návratový signál:
+Starý signál:
+Nový signál:
+
+Pokud vzniká samostatná smyčka:
+Nová pracovní otázka:
+Nejbližší pracovní místo:
+Stop podmínka:
+
+Co výslovně neotevíráme:
+
+Privacy-first závěr:
+Zobecněný důkaz, který stačí:
+Podklady, které dál nekopírujeme:
+Dočasné stopy k úklidu:
+
+Další běžný revizní bod nebo návratový signál:
+```
+
+Karta má být poslední stránka dané revizní smyčky. Pokud z ní vznikne několik úkolů, zastavte se a rozdělte je. Standard buď zůstává v rytmu, dostane jednu lokální opravu, má nový návratový signál, nebo předá širší problém do samostatné smyčky. Všechno najednou je jen hezčí název pro neuzavřeno.
+
+### Mini workshop na 5 minut
+
+1. Minuta 1: přečtěte výsledek druhé běžné revize.
+2. Minuta 2: vyberte jeden ze čtyř uzavíracích stavů.
+3. Minuta 3: napište rozhodnutí jednou větou a co se výslovně neotevírá.
+4. Minuta 4: zapište privacy-first závěr a úklid dočasných stop.
+5. Minuta 5: určete další běžný revizní bod nebo návratový signál.
+
+Pokud se tým nedokáže shodnout na jednom uzavíracím stavu, revize ještě není uzavřená. Neřešte to hlasováním. Vraťte se k výsledku druhé revize a pojmenujte, co přesně nevíte: jestli standard fungoval bez paměti, jestli oprava zůstala lokální, nebo jestli návratový signál dává smysl.
+
+### Checklist uzavření druhé revize
+
+- Má druhá běžná revize jasný výsledek?
+- Vybrali jsme právě jeden uzavírací stav?
+- Pokud standard drží, nepřidáváme mu další mimořádnou kontrolu?
+- Pokud je potřeba oprava, bydlí v jednom konkrétním pracovním místě?
+- Pokud je slabý návratový signál, přepsali jsme signál místo přidání sledování?
+- Pokud vznikl širší problém, oddělili jsme ho do samostatné smyčky?
+- Je rozhodnutí napsané jednou větou?
+- Je jasné, co výslovně neotevíráme?
+- Stačí pro uzavření zobecněný důkaz?
+- Uklidili jsme podklady otevřené jen kvůli revizi?
+- Nevznikla boční tabulka, ruční připomínka nebo nový tichý dohled?
+- Ví tým, kdy se ke standardu vrátit příště?
+
+Uzavření druhé běžné revize je chvíle, kdy standard přestává být čerstvě předaná věc a stává se normální součástí práce. Když drží, nechte ho být. Když potřebuje opravu, udělejte jednu. Když ukáže větší problém, nepředstírejte, že jde pořád o stejný standard. Tak se provoz udržuje klidný: ne tím, že se nic nemění, ale tím, že každá změna má správnou velikost.
+
 ## Pracovní log
 
+- 2026-06-21: Doplněna úvodní podkapitola o uzavření druhé běžné revize po předání standardu: čtyři uzavírací stavy, lokální oprava, přepis návratového signálu, samostatná smyčka, privacy-first uzavření, karta, mini workshop a checklist.
 - 2026-06-21: Doplněna úvodní podkapitola o druhé běžné revizi po předání standardu: přenositelnost bez čerstvé paměti, lokální rozsah oprav, skrytá péče, přesnost návratového signálu, privacy-first zápis, karta, mini workshop a checklist.
 - 2026-06-21: Doplněna úvodní podkapitola o uzavření první běžné revize po předání standardu: čtyři uzavírací stavy, propsání závěru do pracovních míst, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-21: Doplněna úvodní podkapitola o první běžné revizi po předání standardu: najitelnost, použitelnost, klid bez mimořádné péče, čtyři výsledky revize, privacy-first hranice, karta, mini workshop a checklist.
