@@ -240220,8 +240220,184 @@ Pokud se tým neshodne na stavu, nehlasujte o pocitu. Vraťte se k návratovému
 
 Uzavření první periodické kontroly chrání dlouhodobý klid před drobným bobtnáním. Standard buď dál funguje, dostane jednu lokální opravu, počká se slabým signálem, nebo se otevře jako nové téma. Všechny čtyři výsledky jsou v pořádku. Špatný je jen pátý, nepojmenovaný: něco jsme zkontrolovali, něco si poznamenali, něco možná příště uděláme a nikdo přesně neví, jestli standard pořád spí, nebo už zase pracuje přesčas.
 
+## Druhá periodická kontrola standardu v dlouhodobém klidu
+
+Druhá periodická kontrola je méně nápadná než první, ale často důležitější. První kontrola ještě potvrzuje, že standard přežil přechod do klidu. Druhá už ukazuje, jestli se z klidu nestala jen zdvořilá fikce. Standard má být pořád najitelný, použitelný a bez mimořádné péče, ale zároveň nesmí být tak neviditelný, že ho nikdo nepoužívá ani neví, že existuje.
+
+Začněte větou:
+
+```text
+Standard kontrolujeme podruhé v periodickém rytmu; nehledáme zlepšení, hledáme důkaz, že klid pořád odpovídá realitě.
+```
+
+Tato věta brání dvěma opačným chybám. První chyba je otevřít standard jen proto, že ho znovu vidíte. Druhá chyba je odmávat kontrolu, protože "minule to bylo dobré". Dlouhodobý klid není jednorázové razítko. Je to stav, který má být levný na údržbu, ale pořád pravdivý.
+
+Praktický příklad:
+
+```text
+Standard:
+Archivní šablona má první řádek s odkazem na aktuální zdroj pravdy.
+
+První periodická kontrola:
+Klid potvrzen. Standard byl nalezen a použit bez dotazu na původního autora.
+
+Druhá periodická kontrola:
+Standard se během dalšího období objevil při kontrole staré kampaně. Člověk přešel z archivní šablony na aktuální zdroj pravdy bez ruční pomoci.
+
+Pozorování:
+Standard pořád funguje v pracovním místě. Nevznikla nová boční evidence ani připomínka.
+
+Rozhodnutí:
+Klid pokračuje. Neměníme standard, nepřidáváme kontrolu a do logu zapisujeme jen zobecněný závěr.
+```
+
+Všimněte si, že druhá kontrola nemusí přinést žádnou akci. To není prázdný výstup. Je to informace, že standard se udržel mimo režim zvláštní péče. U provozních pravidel je někdy největší úspěch právě to, že nevyžadují další schůzku, tabulku ani lidskou paměť navíc.
+
+### Co ověřit podruhé
+
+Druhá periodická kontrola má čtyři otázky:
+
+- Je standard pořád na kanonickém místě?
+- Byl od minulé kontroly použit nebo aspoň přirozeně dostupný v pracovním místě?
+- Nevznikla skrytá ruční péče mimo standard?
+- Nezměnil se kontext tak, že návratový signál už nemá správný tvar?
+
+První otázka je rychlá. Pokud standard zmizel z indexu, změnil název nebo se přesunul do jiné složky bez odkazu, nejde o návrat problému. Je to lokální navigační chyba. Opravte ji na nejbližším místě a neotevírejte celé téma.
+
+Druhá otázka je jemnější. Standard nemusí být použit každý měsíc. Některá pravidla se použijí jen při specifické situaci. Pokud situace nenastala, nekreslete z toho velké závěry. Zeptejte se jen, jestli by člověk standard našel, kdyby situace nastala. Někdy stačí test pracovního místa: otevřít šablonu, checklist nebo index a ověřit, že cesta ke standardu pořád existuje.
+
+Třetí otázka hledá skrytou ruční péči. Pokud někdo po každé kontrole neoficiálně posílá připomínku, udržuje bokem seznam výjimek nebo novým lidem standard vysvětluje v chatu, klid nedrží. Neznamená to hned, že standard je špatně. Znamená to, že část práce pořád nebydlí ve správném místě.
+
+Čtvrtá otázka kontroluje návratový signál. Třeba původní signál zněl: "někdo použije archivní šablonu jako aktuální zdroj pravdy". Pokud se mezitím změnil způsob práce se šablonami a archivní šablony už lidé neotevírají přímo, signál může být zastaralý. Standard může dál dávat smysl, ale návratový signál potřebuje přepsat do dnešní situace.
+
+### Čtyři výsledky druhé kontroly
+
+Po druhé periodické kontrole vyberte jeden ze čtyř výsledků:
+
+- Klid drží: standard zůstává beze změny a další kontrola proběhne v běžném rytmu.
+- Navigace zeslábla: standard je pořád správný, ale cesta k němu se zhoršila.
+- Skrytá péče se vrátila: standard funguje jen díky ručnímu připomínání mimo zdroj pravdy.
+- Kontext se posunul: pravidlo možná drží, ale návratový signál nebo pracovní místo už neodpovídá dnešní práci.
+
+Stav `klid drží` zavřete jednou větou. Nepřidávejte "pro jistotu" další sledování. Jestli má standard běžný rytmus, právě jste ho použili.
+
+Stav `navigace zeslábla` řešte jako lokální opravu. Doplňte odkaz, přejmenujte položku, odstraňte duplicitní starou kopii nebo přesuňte krátkou nápovědu do pracovního místa. Neměňte obsah standardu, pokud problém je jen v tom, že se k němu hůř dochází.
+
+Stav `skrytá péče se vrátila` je varovnější. Tady nestačí říct lidem, aby přestali připomínat. Nejdřív zjistěte, co ruční péče nahrazuje: chybějící kotvu, nejasnou hranu, špatný název, nebo slabý onboarding. Potom opravte nejmenší místo, které ruční péči opravdu odstraní.
+
+Stav `kontext se posunul` neznamená automaticky přepsat standard. Znamená oddělit dvě věci: jestli standard pořád chrání správné rozhodnutí a jestli návratový signál pořád popisuje dnešní riziko. Často stačí přepsat návratový signál, ne celý standard.
+
+### Privacy-first kontrola druhého klidu
+
+Druhá periodická kontrola nesmí z dlouhodobého klidu udělat sledování lidí. Pokud zjišťujete, jestli standard funguje, většinou nepotřebujete jména, přesné časy, screenshoty ani kopie interních komentářů. Potřebujete vědět, jestli standard vedl práci bez mimořádné péče.
+
+Dobrá věta do logu:
+
+```text
+Standard byl v období dostupný v pracovním místě a nevyžadoval ruční připomínku. Návratový signál nenastal.
+```
+
+Když se objevila skrytá péče, i tehdy se dá zapisovat střídmě:
+
+```text
+Ve dvou běžných situacích se objevila ruční připomínka mimo zdroj pravdy. Detailní chaty nekopírujeme; stačí závěr, že pracovní kotva není dost viditelná.
+```
+
+Tím zachováte smysl důkazu bez toho, aby se provozní kontrola změnila v archiv lidí a jejich chyb. Privacy-first provoz není jen o nástrojích. Je to i schopnost napsat dostatečný závěr místo hromadění detailů.
+
+Codyho komentář: druhá kontrola klidu je test dospělosti týmu. Neptá se, jestli umíte pravidlo opravit. Ptá se, jestli umíte pravidlo nechat být, když funguje. To je překvapivě těžká dovednost, protože "nic neměnit" se v pracovním kalendáři tváří podezřele. Ale někdy je to přesně ta nejlepší změna.
+
+### Karta druhé periodické kontroly
+
+```text
+Standard:
+
+Kanonické místo:
+
+Periodický rytmus:
+
+Výsledek první periodické kontroly:
+
+Původní návratový signál:
+
+Co se změnilo od minulé kontroly:
+- pracovní místo:
+- kontext:
+- vlastnictví:
+- související šablony nebo indexy:
+
+Kontrola kanonického místa:
+
+Kontrola pracovního místa:
+
+Kontrola skryté ruční péče:
+
+Kontrola návratového signálu:
+
+Vybraný výsledek:
+- klid drží
+- navigace zeslábla
+- skrytá péče se vrátila
+- kontext se posunul
+
+Rozhodnutí jednou větou:
+
+Pokud je potřeba lokální oprava:
+Jedno místo:
+Hotová oprava:
+
+Pokud se vrací skrytá péče:
+Co ruční péče nahrazuje:
+Nejmenší oprava ve zdroji pravdy:
+
+Pokud se posunul kontext:
+Co zůstává platné:
+Co přepisujeme v návratovém signálu:
+
+Co po kontrole nevzniká:
+
+Privacy-first závěr:
+Zobecněný zápis:
+Detaily, které neukládáme:
+
+Další běžný rytmus:
+```
+
+Karta je delší než samotná dobrá kontrola. To nevadí. Použijte jen části, které odpovídají situaci. Pokud klid drží, stačí vyplnit několik řádků. Karta má být zábradlí pro složitější případy, ne povinný formulář pro každou klidnou kontrolu.
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: přečtěte závěr první periodické kontroly a návratový signál.
+2. Minuta 2: ověřte kanonické místo standardu.
+3. Minuta 3: ověřte pracovní místo nebo přirozenou cestu ke standardu.
+4. Minuta 4: zeptejte se, jestli nevznikla ruční připomínka, boční tabulka nebo neoficiální dohled.
+5. Minuta 5: zkontrolujte, jestli návratový signál pořád sedí na dnešní kontext.
+6. Minuta 6: vyberte jeden ze čtyř výsledků.
+7. Minuta 7: napište rozhodnutí, privacy-first závěr a další běžný rytmus.
+
+Pokud se během workshopu objeví návrh na širší úpravu standardu, vraťte se k výsledku. Širší úprava patří jen ke skutečnému posunu kontextu nebo návratu problému. Jinak je to jen chuť využít otevřené okno. Otevřené okno je fajn na vzduch, ne na vyhazování půlky nábytku.
+
+### Checklist druhé periodické kontroly
+
+- Kontrolujeme standard podruhé v běžném rytmu, ne ve zvláštním režimu?
+- Máme před sebou závěr první periodické kontroly?
+- Je standard pořád na kanonickém místě?
+- Existuje přirozená cesta ze skutečného pracovního místa?
+- Neopírá se standard o skrytou ruční připomínku nebo boční evidenci?
+- Ověřili jsme, jestli návratový signál pořád odpovídá dnešní práci?
+- Rozlišili jsme slabou navigaci od slabého obsahu standardu?
+- Pokud se vrátila skrytá péče, víme, co přesně nahrazuje?
+- Pokud se posunul kontext, nepřepisujeme automaticky celý standard?
+- Vybrali jsme jeden ze čtyř výsledků kontroly?
+- Zapsali jsme jen zobecněný důkaz potřebný pro další provoz?
+- Neuchováváme jména, screenshoty, chaty ani exporty bez jasného účelu?
+- Nevznikla nová kontrola jen proto, že jsme standard znovu otevřeli?
+
+Druhá periodická kontrola má potvrdit, že dlouhodobý klid není zapomenutí ani skrytý dohled. Buď standard dál běží jako obyčejné pravidlo, nebo se ukáže přesné místo, kde se klid začal tvářit lépe, než ve skutečnosti funguje. V obou případech je výstup malý: jedna věta, jedna lokální oprava, nebo jedna nová smyčka, pokud se opravdu změnil kontext.
+
 ## Pracovní log
 
+- 2026-06-21: Doplněna úvodní podkapitola o druhé periodické kontrole standardu v dlouhodobém klidu: ověření kanonického a pracovního místa, skrytá ruční péče, posun kontextu, privacy-first zápis, karta, mini workshop a checklist.
 - 2026-06-21: Doplněna úvodní podkapitola o uzavření první periodické kontroly standardu: čtyři uzavírací stavy, lokální dočištění, slabý signál, privacy-first uzavření, karta, mini workshop a checklist.
 - 2026-06-21: Doplněna úvodní podkapitola o první periodické kontrole standardu v dlouhodobém klidu: ověření kanonického místa, použití bez čerstvé paměti, rozlišení slabého a skutečného návratového signálu, privacy-first zápis, karta, mini workshop a checklist.
 - 2026-06-21: Doplněna úvodní podkapitola o návratu standardu do dlouhodobého klidu: kanonické místo, pracovní kotva, návratový signál, úklid servisního lešení, privacy-first klid, karta, mini workshop a checklist.
