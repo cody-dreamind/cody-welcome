@@ -237143,8 +237143,176 @@ Když se v šesté minutě ukáže, že tým chce otevřít staré podklady, zas
 
 Druhá běžná kontrola je dobrá právě tím, že se nesnaží být zajímavá. Má potvrdit, že pravidlo už nepotřebuje zvláštní péči, nebo přesně pojmenovat jedno slabé místo. Když se z ní stane nový rozbor historie, klid ještě nedozrál. Když skončí krátkou větou v logu, možná právě udělala svou práci nejlépe.
 
+## Uzavření druhé běžné kontroly v delším klidovém rytmu
+
+Druhá běžná kontrola v delším klidovém rytmu má po sobě nechat jasný konec. Ne proto, aby tým slavnostně zatleskal pravidlu, které prostě funguje. Spíš proto, aby se z úspěšné kontroly nestala nenápadná pozvánka k další kontrole, dalšímu doladění a dalšímu dokumentu. Když pravidlo přežije druhou běžnou kontrolu bez čerstvé servisní paměti, je čas ho nechat žít v normálním rytmu.
+
+Uzavření začněte jednoduchou větou:
+
+```text
+Druhá běžná kontrola ukázala:
+
+Proto pravidlo:
+
+Další zvláštní péče:
+
+Návratový signál:
+```
+
+Příklad:
+
+```text
+Druhá běžná kontrola ukázala:
+Rozcestník obchodních šablon použil nový člen týmu bez dotazu na autora servisní opravy.
+
+Proto pravidlo:
+Zůstává v běžném kvartálním review sales materiálů.
+
+Další zvláštní péče:
+Žádná. Nezakládáme servisní úkol ani doplňkový checklist.
+
+Návratový signál:
+Dva běžné review cykly po sobě najdou stejnou šablonu přes starý komentář, kopii nebo dotaz na původního autora.
+```
+
+Tento zápis je malý, ale důležitý. Říká, že kontrola něco rozhodla. Bez něj se může stát, že tým bude pravidlo dál hlídat jen proto, že ho chvíli hlídal předtím. To je provozní setrvačnost v saku: vypadá zodpovědně, ale jen nosí práci z minulého týdne do dalšího kalendáře.
+
+### Čtyři uzavírací stavy
+
+Po druhé běžné kontrole vyberte jeden ze čtyř stavů:
+
+- Stabilní klid: pravidlo funguje samo a zůstává pouze v běžném rytmu.
+- Jedna navigační oprava: pravidlo je dobré, ale cesta k němu potřebuje poslední lokální úpravu.
+- Krátké zpřesnění pravidla: cesta je dobrá, ale kanonické znění neumí vést jednu běžnou situaci.
+- Návrat do menší servisní větve: skrytá péče pořád existuje a musí se nahradit jedním pracovním místem.
+
+Stav `stabilní klid` má být nejčastější. Pokud druhá kontrola dopadla dobře, nechte pravidlo být. Přidejte log, potvrďte návratový signál a nepřidávejte nové pravidelné review mimo existující rytmus.
+
+Stav `jedna navigační oprava` použijte, když lidé pořád chodí k pravidlu špatnou cestou, ale samotné pravidlo funguje. Typická oprava je přejmenovat odkaz, odstranit starou kopii, doplnit větu v rozcestníku nebo přesunout odkaz do místa, kde ho tým opravdu hledá. Neotevírejte obsah pravidla, pokud problém leží jen v navigaci.
+
+Stav `krátké zpřesnění pravidla` použijte, když člověk pravidlo najde, ale narazí na jednu nejasnou hranu. Například neví, kdy použít šablonu pro audit a kdy šablonu pro dlouhodobou spolupráci. Oprava má být v kanonickém místě a má změnit jednu rozhodovací větu, ne přepsat celou historii.
+
+Stav `návrat do menší servisní větve` použijte jen tehdy, když druhá kontrola odhalí skrytou ruční podporu. Někdo třeba před každým review posílá připomínku, ručně opravuje vstupy nebo drží bokem soukromý tahák. V takovém případě pravidlo není stabilní. Neotevírejte ale celou původní větev. Otevřete jen místo, které má skrytou péči nahradit.
+
+### Jak napsat konec bez dalšího úkolu
+
+U stabilního klidu stačí krátký uzavírací záznam:
+
+```text
+Druhá běžná kontrola potvrdila stabilní klid. Pravidlo je najitelné a použitelné bez čerstvé servisní paměti, zůstává v běžném rytmu a staré podklady se neotevírají.
+```
+
+Tento záznam má tři funkce. Potvrzuje výsledek, ukončuje mimořádnou pozornost a chrání staré podklady před zbytečným návratem. Když někdo za měsíc navrhne další kontrolu "pro jistotu", záznam ukáže, že jistota už byla získaná v běžném použití.
+
+Pokud je potřeba malá oprava, uzavření musí být stejně úzké:
+
+```text
+Druhá běžná kontrola našla slabou cestu k pravidlu. Opravíme jen odkaz v rozcestníku a při příštím běžném review ověříme, že tým nepoužil starou kopii. Znění pravidla, šablona ani metriky zůstávají mimo rozsah.
+```
+
+Všimněte si formulace "jen odkaz". To není kosmetická přísnost. Je to ochrana před tím, aby se navigační oprava proměnila v obsahový redesign. Když má uzavření správně fungovat, musí říct nejen co se mění, ale i co se nemění.
+
+### Privacy-first uzavření
+
+Druhá běžná kontrola často svádí k tomu, aby tým ještě naposledy otevřel staré důkazy a "ujistil se". V privacy-first provozu je lepší opačný reflex: pokud pravidlo funguje v běžné práci, staré důkazy zůstávají zavřené.
+
+Do uzavření proto napište:
+
+```text
+Pro uzavření stačí:
+
+Zůstává zavřené:
+
+Mažeme nebo anonymizujeme:
+
+Nově nesbíráme:
+```
+
+Příklad:
+
+```text
+Pro uzavření stačí:
+Záznam, že šablona prošla druhým běžným review bez dotazu na autora a bez skryté ruční kontroly.
+
+Zůstává zavřené:
+Původní servisní komentáře, screenshoty a exporty poptávek.
+
+Mažeme nebo anonymizujeme:
+Dočasnou poznámku s konkrétními příklady přepíšeme na obecný závěr.
+
+Nově nesbíráme:
+Osobní měření používání šablony ani další eventy v analytice.
+```
+
+Privacy-first uzavření není právní dekorace na konci dokumentu. Je to provozní pravidlo: když rozhodnutí nepotřebuje detail, detail se nemá znovu tahat do práce. Čím méně stop kolem stabilního pravidla zůstává, tím menší je budoucí úklid i riziko, že někdo starý materiál použije v novém kontextu špatně.
+
+### Karta uzavření druhé běžné kontroly
+
+```text
+Pracovní místo:
+
+Běžný rytmus:
+
+Co ukázala druhá běžná kontrola:
+
+Uzavírací stav:
+- stabilní klid
+- jedna navigační oprava
+- krátké zpřesnění pravidla
+- návrat do menší servisní větve
+
+Rozhodnutí jednou větou:
+
+Co zůstává v běžném rytmu:
+
+Co se případně opraví:
+
+Co výslovně neotevíráme:
+
+Privacy-first uzavření:
+Jaký důkaz stačí, co zůstává zavřené, co mažeme nebo anonymizujeme a co nově nesbíráme:
+
+Návratový signál:
+
+Vlastník:
+
+Datum dalšího běžného rytmu:
+```
+
+Kartu nevyplňujte jako román o tom, jak bylo pravidlo statečné. Pokud je stav `stabilní klid`, zkraťte ji na rozhodovací větu, privacy-first uzavření a návratový signál. Delší karta je potřeba jen tehdy, když druhá kontrola našla slabinu.
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: přečtěte výsledek druhé běžné kontroly.
+2. Minuta 2: vyberte jeden uzavírací stav.
+3. Minuta 3: napište rozhodnutí jednou větou.
+4. Minuta 4: určete, co zůstává v běžném rytmu.
+5. Minuta 5: napište, co výslovně neotevíráte.
+6. Minuta 6: uzavřete privacy-first stopu.
+7. Minuta 7: potvrďte návratový signál.
+
+Když se tým během workshopu začne bavit o dalším zlepšení, vraťte ho k otázce: "Ukázala druhá kontrola problém, nebo jen možnost něco vylepšit?" Možnost zlepšení patří do poznámek. Problém s dopadem patří do další práce.
+
+### Checklist uzavření
+
+- Porovnali jsme druhou kontrolu s tím, co měla ověřit?
+- Vybrali jsme jeden uzavírací stav?
+- Umíme rozhodnutí napsat jednou větou?
+- Pokud je klid potvrzen, nepřidáváme další zvláštní kontrolu?
+- Pokud opravujeme cestu, neměníme zbytečně pravidlo?
+- Pokud zpřesňujeme pravidlo, děláme to v kanonickém místě?
+- Pokud se vrací servisní větev, zmenšili jsme ji na jedno pracovní místo?
+- Je jasné, co zůstává v běžném rytmu?
+- Je napsané, co výslovně neotevíráme?
+- Stačí nám obecný důkaz bez osobních údajů?
+- Zavřeli jsme staré servisní podklady, screenshoty, exporty a dočasné poznámky?
+- Máme návratový signál místo automatického dalšího hlídání?
+
+Uzavření druhé běžné kontroly je okamžik, kdy tým přestane pravidlo doprovázet za ruku. Buď pravidlo chodí samo, nebo víte přesně, která malá část mu ještě překáží. Oba výsledky jsou použitelné. Nepoužitelný je jen stav mezi: pravidlo vypadá stabilně, ale tým mu dál nenápadně nosí batoh.
+
 ## Pracovní log
 
+- 2026-06-21: Doplněna úvodní podkapitola o uzavření druhé běžné kontroly v delším klidovém rytmu: čtyři uzavírací stavy, stabilní klid bez další zvláštní péče, privacy-first uzavření, karta, mini workshop a checklist.
 - 2026-06-21: Doplněna úvodní podkapitola o druhé běžné kontrole v delším klidovém rytmu: samostatnost bez čerstvé servisní paměti, čtyři výsledky kontroly, privacy-first hranice, karta, mini workshop a checklist.
 - 2026-06-20: Doplněna úvodní podkapitola o uzavření první běžné kontroly v delším klidovém rytmu: čtyři uzavírací stavy, propsání do běžného rytmu, privacy-first uzavření, karta, mini workshop a checklist.
 - 2026-06-20: Doplněna úvodní podkapitola o první běžné kontrole v delším klidovém rytmu: ověření kanonického místa bez servisní historie, čtyři výsledky kontroly, privacy-first zápis, karta, mini workshop a checklist.
