@@ -237646,8 +237646,170 @@ Pokud se během workshopu objeví nový nápad na vylepšení, nelepte ho na kli
 
 Když delší klidový rytmus drží, nejlepší výsledek často nevypadá jako výsledek. Nic se nerozšiřuje, nic se neměří navíc, žádná nová karta nevzniká. Jen se potvrdí, že pravidlo umí být obyčejnou součástí práce. To je u provozního textu vysoká meta: užitečný, dohledatelný a dost klidný na to, aby se kolem něj nemusel stavět další proces.
 
+## Uzavření klidového období do běžného standardu
+
+Po delším klidovém období přichází poslední nenápadný krok: rozhodnout, jestli pravidlo zůstává běžným standardem, archivuje se, nebo potřebuje poslední lokální doplnění domova. Bez tohoto kroku může klid paradoxně vyrobit novou nejasnost. Pravidlo funguje, nikdo ho neřeší, ale pořád má kolem sebe historické poznámky, servisní jazyk a staré ověřovací podklady. Tým pak neví, jestli jde o aktivní standard, dočasné pravidlo po opravě, nebo dokument, který jen nikdo neuklidil.
+
+Uzavření do běžného standardu nemá být další kontrola kvality. Je to přepis stavu. Z textu, šablony nebo procesní poznámky zmizí dočasná historie a zůstane jen to, co má vést budoucí práci. Když pravidlo drželo celé období, nepotřebuje dál vyprávět příběh své opravy. Potřebuje být stručné, najitelné a použitelné bez pamětníka u stolu.
+
+Začněte větou:
+
+```text
+Klidové období je uzavřené. Pro další práci platí už jen běžný standard, ne servisní historie.
+```
+
+Tahle věta je malá, ale užitečná. Odděluje pracovní pravidlo od deníku jeho vzniku. Deník může zůstat v rozhodovacím logu, pokud má hodnotu pro budoucí audit nebo učení. Nemá ale překážet člověku, který chce jen udělat dnešní práci správně.
+
+### Tři možné konce klidového období
+
+Na konci klidového období vyberte jeden ze tří konců:
+
+- Převést do standardu: pravidlo se používá, pracovní situace pořád existuje a standard je užitečný pro budoucí práci.
+- Archivovat jako historickou stopu: pracovní situace skončila nebo ji pokrývá novější jednodušší pravidlo.
+- Doplnit domov pravidla: pravidlo funguje, ale není dost dobře najitelné, propojené nebo pojmenované.
+
+Stav `převést do standardu` použijte, když je pravidlo pořád živé. Příklad: každý nový obsahový brief musí mít čtenářskou otázku, rozhodovací výstup a privacy-first hranici. To už není reakce na starý problém s rozbíhavými články. To je prostě standard tvorby obsahu.
+
+Stav `archivovat` použijte, když pravidlo splnilo přechodovou roli. Například dočasná kontrola starých formulářů po migraci už nemá dál žít v aktivním checklistu, pokud migrace skončila a nový formulářový standard pokrývá celý provoz.
+
+Stav `doplnit domov pravidla` použijte opatrně. Není to povolenka k přepsání pravidla. Znamená to opravit jeho umístění: odkaz v rozcestníku, název šablony, stav dokumentu, nebo krátkou větu v kanonickém místě. Pokud potřebujete měnit obsah pravidla, pravděpodobně už nejde o uzavření klidu, ale o novou lokální úpravu.
+
+### Přepis do přítomného času
+
+Nejjednodušší test standardu je jazyk. Pokud věta pořád mluví o minulé opravě, není ještě připravená pro běžné použití.
+
+Slabý zápis:
+
+```text
+Po servisní opravě kontrolujeme, že staré výřezy neobsahují duplicitní instrukce.
+```
+
+Standard:
+
+```text
+Použitelný výřez obsahuje jen aktuální instrukci a odkaz na kanonické místo. Starší duplicitní instrukce zůstávají v archivu.
+```
+
+První věta je závislá na historii. Druhá vede člověka, který historii nezná. To je rozdíl mezi záznamem o opravě a standardem.
+
+Při přepisu si hlídejte tři věci:
+
+- Pravidlo říká, co platí teď.
+- Pravidlo ukazuje, kde je zdroj pravdy.
+- Pravidlo obsahuje návratový signál, ne další automatickou kontrolu.
+
+Pokud standard potřebuje vysvětlení delší než samotné pravidlo, rozdělte text. Krátké pravidlo dejte do pracovního místa. Historické vysvětlení nechte v rozhodovacím logu. Člověk, který chce pracovat, nemá povinnost číst archeologii jen proto, aby vyplnil jednu šablonu.
+
+### Praktický příklad
+
+```text
+Původní servisní větev:
+Po opravě zmatených archivních šablon sledujeme, jestli lidé nepoužívají archiv jako aktivní zdroj.
+
+Klidové období:
+Dva měsíční cykly údržby proběhly bez chybného použití archivu. Archivní šablony byly nalezené jen přes rozcestník a vždy vedly na aktuální zdroj pravdy.
+
+Uzavírací stav:
+Převést do standardu.
+
+Standard:
+Archivní šablona začíná stavem "Archiv, nepoužívat pro novou práci" a odkazem na aktuální zdroj pravdy.
+
+Co zůstává v logu:
+Důvod, proč se stav archivních šablon zpřísnil.
+
+Co mažeme nebo zkracujeme:
+Dočasné kontrolní poznámky z ověřovacího období.
+
+Návratový signál:
+Někdo použije archivní šablonu pro novou práci, nebo vznikne druhý zdroj pravdy bez jasného stavu.
+```
+
+Výsledek je čistý: aktivní standard je krátký, historická paměť je dohledatelná a ověřovací režim skončil. Není potřeba třetí zvláštní kontrola, protože standard už nežije v rekonvalescenci. Ano, i dokumentace má někdy přestat chodit na kontroly a prostě jít do práce.
+
+### Privacy-first uzavření standardu
+
+Převod do standardu je vhodný okamžik na poslední datové zmenšení. V ověřovacím období mohly vzniknout pomocné poznámky, anonymizované příklady, screenshoty pracovních míst, seznamy kontrol nebo dočasné exporty. Jakmile je standard stabilní, většina těchto stop už nemá aktivní účel.
+
+Použijte jednoduché pravidlo:
+
+```text
+Ve standardu necháváme pravidlo. V logu necháváme důvod. Pomocné důkazy držíme jen tehdy, když mají jasný budoucí účel.
+```
+
+To znamená:
+
+- Neponechávejte osobní údaje jen proto, že byly součástí původního příkladu.
+- Neudržujte tabulku ověřování, pokud se ověřovací režim uzavřel.
+- Nezakládejte nové měření používání standardu, pokud stačí běžný návratový signál.
+- Nechte viditelnou privacy-first hranici v místě, kde podle standardu vznikají data.
+
+Standard má zjednodušovat práci i datovou stopu. Pokud po jeho zavedení zůstane víc dokumentů, víc kontrol a víc pomocných souborů než před ním, něco se nepovedlo. Ne každá úspěšná oprava si zaslouží památník.
+
+### Karta uzavření do standardu
+
+```text
+Pravidlo nebo trasa:
+
+Klidové období:
+
+Co potvrdilo stabilitu:
+
+Uzavírací stav:
+- převést do standardu
+- archivovat jako historickou stopu
+- doplnit domov pravidla
+
+Standardní znění pro budoucí práci:
+
+Kanonické místo:
+
+Co zůstává jen v rozhodovacím logu:
+
+Co mažeme, anonymizujeme nebo zavíráme:
+
+Co výslovně neotevíráme:
+
+Návratový signál:
+
+Vlastník:
+
+Datum běžné revize:
+```
+
+Karta má být poslední stopa po zvláštním režimu, ne nový pravidelný formulář. Jakmile je vyplněná, další práce se řídí standardem a běžným rytmem.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte pravidlo a výsledek klidového období.
+2. Minuta 2: vyberte uzavírací stav.
+3. Minuta 3: přepište pravidlo do přítomného času.
+4. Minuta 4: určete kanonické místo a co zůstává jen v logu.
+5. Minuta 5: uzavřete pomocné podklady a privacy-first stopu.
+6. Minuta 6: potvrďte návratový signál a běžnou revizi.
+
+Když se tým během workshopu začne vracet k tomu, proč problém kdysi vznikl, zastavte ho. Historie patří do logu. Standard má odpovědět na otázku: "Co má udělat člověk příště?"
+
+### Checklist uzavření do standardu
+
+- Víme, které klidové období uzavíráme?
+- Vybrali jsme jeden ze tří konců?
+- Je pravidlo napsané v přítomném čase?
+- Zmizel ze standardu servisní nebo opravářský jazyk?
+- Má pravidlo jasné kanonické místo?
+- Zůstává historický důvod dohledatelný, ale nebrzdí běžnou práci?
+- Odstranili jsme zvláštní kontrolní režim?
+- Nezaložili jsme nové měření bez rozhodovacího důvodu?
+- Smazali, anonymizovali nebo zavřeli pomocné podklady?
+- Je privacy-first hranice vidět tam, kde vznikají data?
+- Má standard návratový signál místo dalšího automatického hlídání?
+- Ví vlastník, kdy proběhne nejbližší běžná revize?
+
+Uzavření klidového období do standardu je dobrý konec dlouhé smyčky. Ne proto, že by bylo slavnostní, ale protože ubírá starou péči. Pravidlo už nepotřebuje doprovod, servisní poznámky ani mimořádné hlídání. Stačí mu dobré místo, krátké znění a jasný signál, který ho jednou případně vrátí na stůl.
+
 ## Pracovní log
 
+- 2026-06-21: Doplněna úvodní podkapitola o uzavření klidového období do běžného standardu: tři možné konce, přepis do přítomného času, praktický příklad, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-21: Doplněna úvodní podkapitola o tom, co dělat, když delší klidový rytmus drží celé období: rozlišení klidu a neviditelnosti, povýšení pravidla na standard, archivace neaktuálních pravidel, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-21: Doplněna úvodní podkapitola o uzavření druhé běžné kontroly v delším klidovém rytmu: čtyři uzavírací stavy, stabilní klid bez další zvláštní péče, privacy-first uzavření, karta, mini workshop a checklist.
 - 2026-06-21: Doplněna úvodní podkapitola o druhé běžné kontrole v delším klidovém rytmu: samostatnost bez čerstvé servisní paměti, čtyři výsledky kontroly, privacy-first hranice, karta, mini workshop a checklist.
