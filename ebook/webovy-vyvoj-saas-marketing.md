@@ -3006,6 +3006,142 @@ Když se tým hádá o historii, vraťte se k minutě 3. Otázka nezní "jak jsm
 
 Dobrá návratová věta není literární výkon. Je to malá operační pojistka. Chrání tým před tím, aby se nechal unést známým tématem, a nutí ho říct: proč teď, kde přesně, podle jakého signálu a s jakou datovou zdrženlivostí. Když to věta neumí, další práce bude pravděpodobně moc široká.
 
+## Jak převést přepsanou návratovou větu do prvního malého kroku
+
+Přepsaná návratová věta ještě není hotová práce. Je to dobrý startovní blok. Říká, proč se k tématu vracíte, kde se má práce stát a jaké nejmenší rozhodnutí má vzniknout. Další riziko je, že tým po dobrém přepisu stejně skočí do starého rozsahu: "Když už jsme u onboardingového e-mailu, pojďme projít celý onboarding." Ne. Přepsaná věta má zúžit první krok, ne elegantně otevřít celý archiv.
+
+První malý krok napište tak, aby šel dokončit v jednom krátkém pracovním průchodu:
+
+```text
+Na základě návratové věty teď uděláme:
+
+Pracovní místo:
+
+Jedna úprava nebo ověření:
+
+Co tím NEotevíráme:
+
+Jak poznáme, že první krok stačí:
+```
+
+Příklad:
+
+```text
+Návratová věta:
+Vracíme se k prvnímu e-mailu po registraci, protože dva noví uživatelé za sebou nedokončili import bez dotazu na podporu, a potřebujeme rozhodnout, jestli e-mail vysvětluje první krok dost konkrétně.
+
+První malý krok:
+Projít jen první e-mail a obrazovku importu. Ověřit, jestli oba používají stejný název akce a jestli uživatel vidí jeden nejbližší krok.
+
+Co neotevíráme:
+Celý onboarding, produktovou navigaci, nové e-mailové série ani automatizované skórování uživatelů.
+
+Stop podmínka:
+Do 30 minut vznikne buď jedna textová úprava, nebo rozhodnutí, že problém není v e-mailu a další krok musí mít nový důvod.
+```
+
+Tento zápis je malý schválně. Pokud první krok neumíte zavřít bez redesignu, nového měření nebo velkého workshopu, návratová věta byla možná lepší než původní, ale pořád není dost úzká.
+
+### Čtyři typy prvního kroku
+
+Po přepsání návratové věty obvykle stačí jeden ze čtyř typů kroku:
+
+- Ověřit soulad: dvě pracovní místa si protiřečí a potřebujete zjistit, kde vzniká tření.
+- Opravit jednu větu: problém je ve slibu, instrukci, popisku, CTA nebo názvu kroku.
+- Doplnit jeden důkaz: čtenář chápe akci, ale chybí mu důvěra, příklad nebo hranice rozsahu.
+- Zavřít návrat: dnešní signál nestačí a téma se nemá otevírat.
+
+Nejpodezřelejší je krok, který začíná slovy "projít celé". Projít celý web, celý onboarding, celý pricing nebo všechny šablony může být někdy správně, ale ne jako první reakce na návratovou větu. První krok má odpovědět na jednu otázku: drží dnešní důvod na konkrétním místě?
+
+### Praktický příklad z marketingu
+
+```text
+Přepsaná návratová věta:
+Vracíme se k části "Co dostanete po auditu", protože poslední tři obchodní hovory strávily příliš mnoho času vysvětlováním rozdílu mezi nálezem, doporučením a implementací, a potřebujeme rozhodnout, jestli stránka dost konkrétně odděluje výstup auditu od navazující práce.
+```
+
+Slabý první krok:
+
+```text
+Předěláme stránku služby a připravíme nový ceník.
+```
+
+Lepší první krok:
+
+```text
+Upravíme jen blok "Co dostanete po auditu": přidáme tři konkrétní výstupy, jednu větu co audit neobsahuje a odkaz na navazující implementaci jako samostatný další krok.
+```
+
+Tím se práce drží u dnešního důvodu. Možná se později ukáže, že ceník opravdu potřebuje změnu. Ale první signál zatím říká něco menšího: lidé nerozlišují výstup a navazující práci. Řešte nejdřív to.
+
+### Privacy-first hranice prvního kroku
+
+První malý krok po návratové větě má být datově střídmý. Většinou nepotřebuje nový analytický event, nahrávání obrazovky, heatmapu, automatickou segmentaci ani export obchodních poznámek do nové tabulky. Stačí pracovat s existujícím signálem a uložit jen zobecněný závěr.
+
+Dobrá privacy-first věta:
+
+```text
+Použijeme souhrn z posledních tří relevantních hovorů; nebudeme kopírovat jména, citace ani celé poznámky mimo CRM.
+```
+
+Ještě lepší je, když první krok sníží datovou stopu. Například odstraní z formuláře zbytečné pole, zkrátí interní poznámku na rozhodovací závěr nebo přestane používat dočasný export, který vznikl jen kvůli staré kontrole. Malý krok má čistit práci, ne si zakládat vlastní šuplík podkladů.
+
+### Karta prvního kroku po návratové větě
+
+```text
+Přepsaná návratová věta:
+
+Dnešní pracovní místo:
+
+První malý krok:
+
+Typ kroku:
+- ověřit soulad
+- opravit jednu větu
+- doplnit jeden důkaz
+- zavřít návrat
+
+Co výslovně neotevíráme:
+
+Stop podmínka:
+
+Očekávaný výstup:
+
+Privacy-first hranice:
+
+Kde bude výsledek uložený:
+
+Kdy se rozhodne o dalším kroku:
+```
+
+Karta má zabránit dvěma chybám. První chyba je, že dobrá návratová věta skončí bez akce. Druhá chyba je, že se z ní stane záminka pro velkou práci. Karta drží prostředek: jeden krok, jeden výstup, jedna hranice.
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: přečtěte přepsanou návratovou větu.
+2. Minuta 2: ukažte prstem na jedno pracovní místo, kde se krok stane.
+3. Minuta 3: vyberte typ prvního kroku.
+4. Minuta 4: napište jednu věc, kterou výslovně neotevíráte.
+5. Minuta 5: nastavte stop podmínku.
+6. Minuta 6: zapište privacy-first hranici.
+7. Minuta 7: určete, kde bude výsledek uložený.
+
+Když se během workshopu objeví staré téma, které v návratové větě není, napište ho stranou a nechte zavřené. Není to ztracený nápad. Je to jen nápad, který si musí počkat na vlastní důvod.
+
+### Checklist prvního kroku
+
+- Navazuje první krok přímo na přepsanou návratovou větu?
+- Je vybrané jedno konkrétní pracovní místo?
+- Vejde se krok do krátkého pracovního průchodu?
+- Je jasné, jestli ověřujeme soulad, opravujeme větu, doplňujeme důkaz, nebo návrat zavíráme?
+- Je napsané, co teď výslovně neotevíráme?
+- Má krok stop podmínku?
+- Nepřidáváme nové sledování, exporty, kopie citlivých poznámek ani dočasné tabulky?
+- Ukládáme výsledek tam, kde se bude opravdu používat?
+- Pokud krok nestačí, vznikne nový důvod pro další krok místo automatického rozšíření původního rozsahu?
+
+Přepsaná návratová věta má být začátek malé odpovědi, ne slavnostní klíč od skladu starých nápadů. Když první krok zůstane malý, tým rychle zjistí, jestli dnešní důvod drží. A když nedrží, zavře návrat levně, bez nové vrstvy procesů a bez další hromádky dat.
+
 Praktický filtr na výběr jedné kapitoly:
 
 1. Kdybychom vyřešili jen tuto věc, co se zlepší pro zákazníka?
@@ -241219,3 +241355,4 @@ Uzavření první periodické kontroly chrání dlouhodobý klid před drobným 
 - 2026-06-21: Doplněna úvodní podkapitola o ověření uzavřené servisní poznámky při dalším běžném použití: tři kontrolní otázky, čtyři výsledky ověření, privacy-first záznam, karta, mini workshop a checklist.
 - 2026-06-21: Doplněna krátká úvodní poznámka, aby návratová věta začínala dnešním důvodem návratu místo opisování starého rozhodnutí.
 - 2026-06-21: Doplněna úvodní podkapitola o přepisu návratové věty do dnešního důvodu: konkrétní pracovní místo, návratový signál, nejmenší rozhodnutí, privacy-first hranice, karta, workshop a checklist.
+- 2026-06-21: Doplněna úvodní podkapitola o převodu přepsané návratové věty do prvního malého kroku: typy kroků, praktický příklad, privacy-first hranice, karta, mini workshop a checklist.
