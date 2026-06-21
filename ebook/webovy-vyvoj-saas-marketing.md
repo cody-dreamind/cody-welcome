@@ -238313,8 +238313,229 @@ Workshop nesmí skončit přáním "sledovat dál". Buď druhé použití standa
 
 Druhé použití nového standardu je dobrá chvíle na klidnou přísnost. Jeden úspěch může být náhoda, dvě běžná použití už ukazují vzor. Když vzor drží, nechte standard pracovat. Když drhne, opravte nejbližší kotvu. A když se pravidlo začne tvářit univerzálně, připomeňte mu hranice. Standard má pomáhat rozhodovat, ne kolonizovat každou podobně znějící situaci.
 
+## Uzavření druhého použití nového standardu
+
+Druhé použití standardu je poslední dobrý okamžik, kdy ještě dává smysl věnovat mu krátkou zvláštní pozornost. Po něm by standard měl buď přejít do běžného rytmu, dostat jednu lokální opravu, nebo otevřít jasně ohraničenou návratovou smyčku. Pokud po druhém použití zůstane "budeme sledovat", standard není uzavřený. Jen jste mu přidali stínový dohled, který se bude tvářit jako péče a chovat jako další práce.
+
+Uzavření začněte jednou větou:
+
+```text
+Po druhém běžném použití standardu rozhodujeme, jestli standard přechází do běžného rytmu, potřebuje lokální kotvu, zpřesnění hranice, nebo malou návratovou smyčku.
+```
+
+Tato věta chrání rozsah. Nevrací se k celé historii vzniku standardu. Neotevírá audit všech souvisejících dokumentů. Nepřidává nový proces jen proto, že někdo při druhém použití narazil na drobné tření. Uzavírá konkrétní otázku: umí standard fungovat opakovaně v běžné práci?
+
+Praktický zápis může vypadat takto:
+
+```text
+Standard:
+Archivní šablona má v názvu "Archiv" a první řádek odkazuje na aktuální zdroj pravdy.
+
+Druhé použití:
+Jiný člověk použil standard při přípravě kampaně.
+
+Výsledek:
+Standard je přenositelný, ale odkaz na aktuální zdroj pravdy byl v jedné archivní šabloně až pod dlouhou poznámkou.
+
+Uzavírací stav:
+Lokální kotva.
+
+Rozhodnutí:
+Přesunout odkaz na první řádek této šablony. Standard se jinak nemění a neotevíráme audit všech kampaní.
+```
+
+Všimněte si, že uzavření nejde po největším možném zlepšení. Jde po nejmenším rozhodnutí, které odpovídá tomu, co se opravdu stalo. To je rozdíl mezi disciplínou a procesním křečkem v kolečku. Jeden řeší práci. Druhý běhá, dokud se mu zdá, že produktivita má zvuk.
+
+### Čtyři uzavírací stavy
+
+Po druhém použití vyberte jeden ze čtyř uzavíracích stavů:
+
+- Převést do běžného rytmu: standard byl přenositelný a nepotřebuje zvláštní péči.
+- Dotáhnout lokální kotvu: standard je správný, ale jedno pracovní místo ho špatně nese.
+- Zpřesnit hranici použití: standard se používá i tam, kam nepatří, nebo lidé nerozeznají okrajové případy.
+- Otevřít malou návratovou smyčku: druhé použití ukázalo opakovanou chybu rozhodnutí, kterou lokální oprava nevyřeší.
+
+Stav `převést do běžného rytmu` je nejčistší konec. Zapište, že standard drží po dvou běžných použitích, a vraťte ho do existující revize: měsíční, kvartální, release review, obsahové retro nebo jiný rytmus, který tým už používá. Nepřidávejte třetí mimořádnou kontrolu jen ze strachu, že se něco pokazí. Strach není roadmapa, jen hlasitý interní notifikační systém.
+
+Stav `dotáhnout lokální kotvu` použijte, když problém nevznikl v pravidle, ale v jeho dostupnosti. Typicky chybí odkaz, název je nejasný, příklad je moc nízko, šablona má starý úvod nebo standard není vidět v místě rozhodnutí. Oprava má být v pracovním místě, ne v celé metodice.
+
+Stav `zpřesnit hranici použití` použijte, když se standard začíná roztahovat mimo původní účel. Užitečná pravidla to dělají ráda: tým je vezme jako kladivo a každá podobná situace najednou vypadá jako hřebík. Zpřesnění hranice má říct, kdy pravidlo platí, kdy neplatí a jak poznat rozdíl.
+
+Stav `otevřít malou návratovou smyčku` použijte jen tehdy, když druhé použití ukázalo skutečnou opakovanou hranu. Nejde o to, že někdo musel jednou hledat odkaz. Jde o to, že standard opakovaně vede k chybnému rozhodnutí, zbytečnému sběru dat, nejasné odpovědnosti nebo práci mimo správné místo.
+
+### Praktické příklady uzavření
+
+První příklad: standard drží.
+
+```text
+Pozorování:
+Druhý člověk použil standard bez znalosti jeho historie a našel aktuální zdroj pravdy.
+
+Uzavírací stav:
+Převést do běžného rytmu.
+
+Rozhodnutí:
+Standard zůstává v kanonickém indexu a vrací se až při kvartální kontrole standardů nebo při návratovém signálu.
+
+Co neotevíráme:
+Nepřidáváme další ruční kontrolu archivních šablon.
+```
+
+Druhý příklad: chybí lokální kotva.
+
+```text
+Pozorování:
+Standard fungoval, ale člověk ho našel až po dotazu v chatu.
+
+Uzavírací stav:
+Dotáhnout lokální kotvu.
+
+Rozhodnutí:
+Přidat odkaz na standard přímo do šablony, kde rozhodnutí vzniká.
+
+Co neotevíráme:
+Nepřepisujeme standard a neauditujeme celý knowledge base.
+```
+
+Třetí příklad: pravidlo se šíří mimo účel.
+
+```text
+Pozorování:
+Tým použil archivní pravidlo na živý pracovní dokument jen proto, že měl staré datum v názvu.
+
+Uzavírací stav:
+Zpřesnit hranici použití.
+
+Rozhodnutí:
+Doplnit jednu větu: archivní stav určuje výslovný štítek a odkaz na aktuální zdroj pravdy, ne stáří názvu.
+
+Co neotevíráme:
+Neměníme pravidla pro všechny starší pracovní dokumenty.
+```
+
+Čtvrtý příklad: návratová smyčka.
+
+```text
+Pozorování:
+Ve dvou běžných použitích lidé zaměnili archivní šablonu za aktuální, protože kanonický index obsahuje duplicitní názvy.
+
+Uzavírací stav:
+Otevřít malou návratovou smyčku.
+
+Rozhodnutí:
+Neřešíme všechny šablony. Ověříme jen duplicity názvů v části indexu, kde vznikla chyba, a zvolíme jedno kanonické pojmenování.
+```
+
+Rozdíl mezi třetím a čtvrtým příkladem je důležitý. Hranici použití opravíte ve standardu jednou větou. Návratová smyčka vzniká až ve chvíli, kdy se chyba opakuje v samotném systému, ne jen v jednom okrajovém použití.
+
+### Co propsat do běžného provozu
+
+Po uzavření druhého použití standardu propisujte jen to, co má skutečně žít dál:
+
+- Jednovětý závěr do pracovního logu nebo kanonického indexu.
+- Lokální opravu v místě, kde vzniklo tření.
+- Zpřesněnou hranici přímo do standardu, pokud se pravidlo šířilo mimo účel.
+- Malou návratovou kartu, pokud vznikla potvrzená opakovaná hrana.
+- Návratový signál, který řekne, kdy se standard znovu otevře.
+
+Nepropisujte celou historii druhého použití. Standard nepotřebuje batoh plný vysvětlivek. Potřebuje být použitelný člověkem, který přijde později, otevře správné místo a udělá rozhodnutí bez přednášky o minulosti.
+
+Dobrá uzavírací věta vypadá třeba takto:
+
+```text
+Standard po druhém běžném použití drží; vrací se do kvartální revize a znovu se otevře jen při opakované záměně archivní a aktuální šablony.
+```
+
+Nebo:
+
+```text
+Standard drží, ale doplňujeme lokální kotvu v šabloně kampaně; širší audit kampaní neotevíráme.
+```
+
+Taková věta má dvě části: co se stalo a co se neděje. Druhá část je stejně důležitá jako první. Bez ní si každý může domyslet vlastní navazující práci, a najednou máte ze stabilního standardu malý procesní festival.
+
+### Privacy-first uzavření
+
+Po druhém použití standardu bývá lákavé uložit oba příklady jako důkaz. Nedělejte z toho výchozí chování. Privacy-first uzavření se ptá:
+
+```text
+Stačí pro další použití standardu zobecněný závěr, nebo opravdu potřebujeme původní podklad?
+```
+
+Ve většině případů stačí zobecněný závěr. Místo screenshotu staré šablony napište: "Odkaz na aktuální zdroj pravdy byl až pod dlouhou poznámkou." Místo kopie chatu napište: "Člověk našel standard až po dotazu, protože odkaz nebyl v pracovním místě." Místo ukládání zákaznického příkladu napište pracovní vzor bez osobních údajů.
+
+Původní podklad ponechte jen tehdy, když bez něj nejde provést konkrétní opravu nebo audit. I tehdy ho držte v původním systému, s jasným účelem a co nejkratší dobou použití. Nekopírujte ho do nové tabulky, do chatu ani do dalšího dokumentu jen proto, že se s tím pohodlně pracuje. Pohodlné kopie jsou datový dluh v tričku "jen dočasně".
+
+### Karta uzavření druhého použití standardu
+
+```text
+Standard:
+
+Kanonické místo:
+
+První použití stručně:
+
+Druhé použití stručně:
+
+Výsledek druhého použití:
+
+Uzavírací stav:
+- převést do běžného rytmu
+- dotáhnout lokální kotvu
+- zpřesnit hranici použití
+- otevřít malou návratovou smyčku
+
+Rozhodnutí:
+
+Co se propisuje do standardu, indexu nebo pracovního místa:
+
+Co výslovně neotevíráme:
+
+Návratový signál:
+
+Privacy-first uzavření:
+Jaký zobecněný závěr stačí:
+Které podklady nekopírujeme:
+Které dočasné stopy mažeme nebo necháváme zavřené:
+
+Vlastník:
+
+Datum další běžné revize:
+```
+
+Karta nemá být důkaz, že tým pilně pracoval. Má být brzda proti tomu, aby se z druhého použití stal nekonečný dohled. Pokud standard drží, uzavřete ho. Pokud drhne, opravte nejbližší místo. Pokud selhává hranice, zpřesněte ji. Pokud se opakuje chyba, otevřete malou smyčku s vlastním návratovým signálem.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte standard a jednovětý výsledek druhého použití.
+2. Minuta 2: vyberte jeden ze čtyř uzavíracích stavů.
+3. Minuta 3: napište rozhodnutí jednou větou.
+4. Minuta 4: určete, co se propíše a co se výslovně neotevírá.
+5. Minuta 5: zapište návratový signál nebo běžný revizní rytmus.
+6. Minuta 6: udělejte privacy-first uzavření podkladů.
+
+Pokud se workshop nevejde do šesti minut, nejspíš neuzavíráte druhé použití, ale otevíráte nové téma. To může být v pořádku, jen to tak pojmenujte. Nové téma potřebuje vlastní otázku, vlastní stop podmínku a vlastní datovou hranici.
+
+### Checklist uzavření druhého použití standardu
+
+- Popsali jsme druhé použití bez návratu k celé historii standardu?
+- Vybrali jsme přesně jeden uzavírací stav?
+- Pokud standard drží, vrací se do běžného rytmu bez další zvláštní kontroly?
+- Pokud chyběla kotva, opravujeme jen nejbližší pracovní místo?
+- Pokud se standard šířil mimo účel, zpřesnili jsme hranici použití?
+- Pokud přišel návratový signál, otevřeli jsme jen malou potvrzenou smyčku?
+- Má rozhodnutí jednovětý zápis?
+- Je jasné, co se propisuje do standardu, indexu nebo pracovního místa?
+- Je jasné, co výslovně neotevíráme?
+- Ukládáme zobecněný závěr místo surových podkladů všude, kde to stačí?
+- Nekopírujeme osobní údaje, chaty, screenshoty ani exporty bez konkrétního účelu?
+- Má standard návratový signál nebo běžný revizní rytmus?
+
+Uzavření druhého použití je chvíle, kdy standard přestává být novinka. Buď se stane obyčejnou součástí práce, nebo dostane malou přesnou opravu. Obojí je dobrý výsledek. Špatný výsledek je nechat kolem něj viset zvláštní pozornost jen proto, že je čerstvý. Čerstvost není důvod k trvalému hlídání. Důvodem je až signál z běžné práce.
+
 ## Pracovní log
 
+- 2026-06-21: Doplněna úvodní podkapitola o uzavření druhého použití nového standardu: čtyři uzavírací stavy, praktické příklady, propsání do běžného provozu, privacy-first uzavření, karta, mini workshop a checklist.
 - 2026-06-21: Doplněna úvodní podkapitola o druhém použití nového standardu v běžné práci: přenositelnost, opakovatelnost, pracovní kotva, hranice použití, privacy-first zápis, karta, mini workshop a checklist.
 - 2026-06-21: Doplněna úvodní podkapitola o uzavření prvního použití nového standardu: čtyři uzavírací stavy, praktické příklady, privacy-first uzavření, karta, mini workshop a checklist.
 - 2026-06-21: Doplněna úvodní podkapitola o prvním použití nového standardu v běžné práci: tři otázky použití, čtyři výsledky, praktický příklad, privacy-first zápis, karta, mini workshop a checklist.
