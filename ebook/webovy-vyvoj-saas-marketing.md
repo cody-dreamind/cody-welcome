@@ -238136,8 +238136,186 @@ Workshop nesmí skončit větou "ještě se na to podíváme". To není uzavřen
 
 Uzavření prvního použití nového standardu je malá brána zpět do normální práce. Když standard drží, nechte ho být. Když potřebuje drobnou opravu, udělejte ji tam, kde vzniklo tření. Když se objevil skutečný návratový signál, otevřete jen tu část, která selhala. Dobrý standard nemá po prvním použití vyrábět další ceremonii; má uvolnit ruce pro práci, kvůli které vznikl.
 
+## Druhé použití nového standardu v běžné práci
+
+První použití nového standardu často ještě nese teplo čerstvé změny. Lidé si pamatují, proč pravidlo vzniklo, kdo ho přepsal a kde se o něm mluvilo. Druhé použití je proto cennější test přenositelnosti. Už nejde jen o to, jestli standard fungoval jednou. Jde o to, jestli dokáže pomoci i ve chvíli, kdy kolem něj není čerstvá pozornost.
+
+Druhé použití neotevírejte jako další speciální audit. Použijte ho jako krátkou kontrolu běžného provozu:
+
+```text
+Standard byl použit podruhé v běžné práci. Ověřujeme jen přenositelnost, nevracíme se k celé historii vzniku.
+```
+
+Tahle věta je důležitá, protože brání dvěma opačným chybám. První chyba je ignorovat druhé použití úplně a předpokládat, že jeden úspěch stačí navždy. Druhá chyba je rozjet z druhého použití nový projekt zlepšování. Správná reakce je menší: podívat se, jestli standard funguje i bez čerstvé paměti, a případně opravit jen nejbližší místo tření.
+
+### Co druhé použití ověřuje
+
+Druhé použití sleduje tři věci:
+
+- Přenositelnost: použil standard někdo, kdo nebyl u jeho zavírání?
+- Opakovatelnost: vedl standard ke stejnému typu rozhodnutí jako poprvé?
+- Klid: nevznikla kolem standardu nová mimořádná péče, ruční dohled nebo datová sbírka?
+
+Přenositelnost je nejsilnější signál. Pokud standard funguje jen pro člověka, který si pamatuje původní servisní větev, není to ještě standard. Je to poznámka pro zasvěcené. V praxi to často znamená, že pravidlo potřebuje lepší název, kratší úvod, konkrétnější příklad nebo odkaz na správné pracovní místo.
+
+Opakovatelnost neznamená, že výsledek musí být identický. Znamená, že standard vede stejný typ rozhodnutí. Pokud poprvé pomohl rozlišit archivní šablonu od aktuálního zdroje pravdy a podruhé pomohl udělat totéž u jiné šablony, standard se opakuje dobře. Pokud podruhé člověk začal řešit úplně jinou otázku, standard možná není dost úzce pojmenovaný.
+
+Klid je provozní signál. Po druhém použití by neměl vzniknout nový kontrolní rituál. Pokud tým standard používá, ale pokaždé si k tomu zakládá pomocnou poznámku, posílá screenshoty do chatu nebo žádá původního autora o potvrzení, běžný provoz ještě nenastal. Standard možná funguje obsahově, ale organizačně pořád chodí o berlích.
+
+### Čtyři výsledky druhého použití
+
+Po druhém použití vyberte jeden ze čtyř výsledků:
+
+- Standard je přenositelný: fungoval i bez čerstvé historie a zůstává v běžném rytmu.
+- Chybí lepší pracovní kotva: pravidlo je správné, ale lidé ho pořád hledají nebo používají pozdě.
+- Standard se rozšiřuje mimo původní situaci: používá se na případy, pro které nebyl určen.
+- Přišel skutečný návratový signál: druhé použití odhalilo opakovanou hranu, kterou standard neumí vyřešit.
+
+Stav `standard je přenositelný` uzavřete jednou větou. Nepřidávejte třetí speciální kontrolu. Druhé úspěšné použití obvykle stačí k tomu, aby standard zůstal v normálním revizním rytmu. Další pozornost má přijít až z návratového signálu, ne z nervozity.
+
+Stav `chybí lepší pracovní kotva` řešte lokálně. Standard může být věcně dobrý, ale špatně zasazený. Typická oprava je přesun odkazu do šablony, přidání krátké věty k formuláři, změna názvu v rozcestníku nebo doplnění příkladu přímo tam, kde člověk rozhoduje.
+
+Stav `standard se rozšiřuje mimo původní situaci` je častý u užitečných pravidel. Jakmile něco funguje, tým to začne používat všude. To nemusí být špatně, ale nesmí se to stát potichu. Pokud pravidlo pro archivní obsahové šablony najednou řídí i obchodní dokumenty, napište novou otázku: je to stejný typ rozhodnutí, nebo jen podobně znějící problém?
+
+Stav `přišel skutečný návratový signál` vyžaduje otevřít malou smyčku. Skutečný signál je opakovaná chyba rozhodnutí, zbytečné sbírání dat, nejasná odpovědnost nebo situace, kde standard vede lidi špatně. Samotný dotaz, kde dokument leží, je většinou jen slabá kotva, ne návratový signál.
+
+### Praktický příklad
+
+```text
+Standard:
+Archivní šablona má v názvu "Archiv" a první řádek odkazuje na aktuální zdroj pravdy.
+
+První použití:
+Nový člen týmu našel starý obsahový brief a přešel na aktuální verzi.
+
+Druhé použití:
+Jiný člověk připravuje podklad pro kampaň a najde starou šablonu kampaně.
+
+Pozorování:
+Šablona má štítek "Archiv", ale odkaz na aktuální zdroj pravdy je až pod dlouhou poznámkou.
+
+Výsledek:
+Chybí lepší pracovní kotva.
+
+Nejmenší oprava:
+Přesunout odkaz na aktuální zdroj pravdy na první řádek archivní šablony kampaně.
+
+Co neotevíráme:
+Neprovádíme audit všech kampaní a nepřepisujeme pravidla archivace.
+```
+
+V tomto příkladu standard neselhal. Člověk pochopil, že pracuje s archivem. Drhlo jen místo, kde měl najít aktuální zdroj pravdy. Proto je správná oprava malá a lokální. Kdyby tým místo toho otevřel "celkovou revizi kampaní", vyrobil by si větší práci, než jakou problém ospravedlňuje. Takové procesní kulturistice se raději vyhněte; svaly vypadají dobře, ale účet platí kalendář.
+
+Jiný výsledek by vypadal takto:
+
+```text
+Pozorování:
+Druhý člověk použil archivní pravidlo na rozpracovaný návrh, který archivní nebyl, protože název dokumentu obsahoval staré datum.
+
+Výsledek:
+Standard se rozšiřuje mimo původní situaci.
+
+Rozhodnutí:
+Do standardu doplnit jednu větu: archivní stav určuje štítek a odkaz na aktuální zdroj pravdy, ne stáří názvu dokumentu.
+
+Co neotevíráme:
+Neměníme pravidla pro všechny rozpracované dokumenty.
+```
+
+Tady nejde o návrat k celé servisní větvi. Jde o zúžení hranice: co je archiv a co je jen starší pracovní dokument. Jedna věta ve standardu může zabránit tomu, aby se užitečné pravidlo změnilo v univerzální kladivo.
+
+### Privacy-first druhé použití
+
+Druhé použití svádí k porovnávání. Tým chce vidět první i druhý průchod vedle sebe, a tak začne kopírovat příklady, chaty, screenshoty nebo pracovní podklady. Privacy-first přístup říká: porovnávejte závěry, ne surové stopy.
+
+Použijte jednoduché pravidlo:
+
+```text
+Pro druhé použití ukládáme jen rozdíl proti prvnímu použití a rozhodnutí, které z něj plyne.
+```
+
+Prakticky to znamená:
+
+- Pokud standard drží, stačí jedna věta v běžném logu.
+- Pokud chybí kotva, zapište místo tření a provedenou lokální opravu.
+- Pokud se standard šíří mimo původní situaci, zapište hranici použití, ne celý příklad.
+- Pokud přišel návratový signál, otevřete malou kartu s minimálním důkazem.
+
+Nekopírujte celé zákaznické zprávy, interní chaty ani screenshoty jen proto, že druhé použití bylo poučné. Užitečnost poznatku se dá často zachovat zobecněnou větou: "Druhý člověk zaměnil starší pracovní dokument za archiv, protože hranice archivního stavu nebyla napsaná přímo ve standardu." To stačí k opravě a netahá to do další vrstvy víc dat, než je potřeba.
+
+### Karta druhého použití standardu
+
+```text
+Standard:
+
+Kanonické místo:
+
+První použití stručně:
+
+Druhé běžné použití:
+
+Kdo standard použil podruhé:
+
+Byl u zavírání standardu?
+- ne
+- ano
+- nevíme / není podstatné
+
+Výsledek druhého použití:
+- standard je přenositelný
+- chybí lepší pracovní kotva
+- standard se rozšiřuje mimo původní situaci
+- přišel skutečný návratový signál
+
+Rozdíl proti prvnímu použití:
+
+Nejmenší případná oprava:
+
+Co výslovně neotevíráme:
+
+Privacy-first zápis:
+Jaký zobecněný závěr stačí:
+Které podklady nekopírujeme:
+
+Rozhodnutí:
+
+Návratový signál pro další otevření:
+```
+
+Karta má být krátká. Pokud ji vyplňujete půl hodiny, pravděpodobně už neřešíte druhé použití, ale širší problém ve znalostní bázi, procesu nebo vlastnictví. To může být legitimní téma, ale patří do nové smyčky s vlastní otázkou a stop podmínkou.
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: připomeňte jednou větou standard a první použití.
+2. Minuta 2: popište druhé použití bez historie a vysvětlování.
+3. Minuta 3: ověřte, jestli standard použil člověk bez čerstvé paměti.
+4. Minuta 4: vyberte jeden ze čtyř výsledků.
+5. Minuta 5: pokud je potřeba oprava, zmenšete ji na pracovní kotvu, hranici nebo malou návratovou kartu.
+6. Minuta 6: zapište privacy-first rozdíl bez kopírování podkladů.
+7. Minuta 7: potvrďte, co se neotevírá a kdy se standard vrátí do běžného rytmu.
+
+Workshop nesmí skončit přáním "sledovat dál". Buď druhé použití standard potvrzuje, vyžaduje lokální opravu, zpřesňuje hranici, nebo otevírá návratový signál. Pokud žádný z těchto stavů neumíte vybrat, zmenšete otázku: co přesně se při druhém použití stalo jinak než poprvé?
+
+### Checklist druhého použití standardu
+
+- Proběhlo druhé použití v běžné práci, ne v umělém testu?
+- Použil standard někdo bez čerstvé znalosti jeho historie?
+- Vedl standard ke stejnému typu rozhodnutí jako poprvé?
+- Nevznikl kolem použití nový ruční dohled nebo speciální kontrola?
+- Vybrali jsme jeden ze čtyř výsledků?
+- Pokud chyběla kotva, opravili jsme nejbližší pracovní místo?
+- Pokud se standard rozšiřuje, pojmenovali jsme hranici použití?
+- Pokud přišel návratový signál, otevřeli jsme jen potvrzenou hranu?
+- Zapsali jsme rozdíl proti prvnímu použití, ne celý příběh?
+- Nekopírovali jsme chaty, screenshoty, zákaznické zprávy ani exporty bez účelu?
+- Je jasné, co výslovně neotevíráme?
+- Vrací se standard do běžného rytmu, pokud nepotřebuje malou opravu nebo návratovou smyčku?
+
+Druhé použití nového standardu je dobrá chvíle na klidnou přísnost. Jeden úspěch může být náhoda, dvě běžná použití už ukazují vzor. Když vzor drží, nechte standard pracovat. Když drhne, opravte nejbližší kotvu. A když se pravidlo začne tvářit univerzálně, připomeňte mu hranice. Standard má pomáhat rozhodovat, ne kolonizovat každou podobně znějící situaci.
+
 ## Pracovní log
 
+- 2026-06-21: Doplněna úvodní podkapitola o druhém použití nového standardu v běžné práci: přenositelnost, opakovatelnost, pracovní kotva, hranice použití, privacy-first zápis, karta, mini workshop a checklist.
 - 2026-06-21: Doplněna úvodní podkapitola o uzavření prvního použití nového standardu: čtyři uzavírací stavy, praktické příklady, privacy-first uzavření, karta, mini workshop a checklist.
 - 2026-06-21: Doplněna úvodní podkapitola o prvním použití nového standardu v běžné práci: tři otázky použití, čtyři výsledky, praktický příklad, privacy-first zápis, karta, mini workshop a checklist.
 - 2026-06-21: Doplněna úvodní podkapitola o uzavření klidového období do běžného standardu: tři možné konce, přepis do přítomného času, praktický příklad, privacy-first úklid, karta, mini workshop a checklist.
