@@ -2723,6 +2723,142 @@ Pokud se během sedmi minut objeví víc než jedno místo opravy, neprodlužujt
 
 Dobře uzavřená servisní poznámka má skoro zmizet. Ne proto, že by nebyla důležitá, ale proto, že udělala přesně svou práci: odstranila malé tření, nezvětšila rozsah, nepřidala data a nechala pravidlo dál fungovat jako běžnou součást provozu.
 
+## Ověření uzavřené servisní poznámky při dalším běžném použití
+
+Uzavřená servisní poznámka ještě není důvod k oslavnému kolečku kolem tabule. Je to spíš slíbený klid: opravili jsme jedno malé tření a tvrdíme, že pravidlo může dál fungovat bez mimořádné péče. Nejbližší běžné použití je chvíle, kdy se ukáže, jestli to byla pravda.
+
+Ověření nemá být nový audit. Nemá znovu otevírat původní review, historii opravy ani velkou otázku, ze které pravidlo kdysi vzniklo. Má odpovědět na tři obyčejné otázky:
+
+```text
+Našel člověk opravené místo bez vysvětlování?
+
+Pomohla oprava dokončit běžný krok?
+
+Zůstala servisní poznámka zavřená bez nové datové stopy?
+```
+
+Pokud na všechny tři otázky odpovíte ano, servisní poznámka splnila práci. Zapište krátký výsledek a nechte pravidlo v běžném rytmu. Ano, opravdu. Ne každá úprava si zaslouží vlastní životopis, pamětní desku a tři follow-upy.
+
+Příklad:
+
+```text
+Pravidlo:
+Při kvalifikaci leadu předáváme rozhodovací horizont, problém a očekávaný výsledek.
+
+Uzavřená servisní poznámka:
+Do discovery šablony jsme doplnili řádek "další domluvený krok".
+
+Další běžné použití:
+Nová relevantní poptávka po technickém auditu.
+
+Ověření:
+Obchod vyplnil další krok přímo v šabloně. Delivery dostalo jasný termín navazující konzultace. Nikdo neotevíral starý scoring ani nepřidával nové CRM pole.
+
+Výsledek:
+Servisní poznámka je potvrzeně zavřená. Pravidlo zůstává v běžném měsíčním review.
+```
+
+Všimněte si, že ověření není dlouhé. Stačí konkrétní pracovní průchod, jeden závěr a potvrzení, že oprava nezvětšila datovou stopu.
+
+### Čtyři výsledky ověření
+
+Po dalším běžném použití vyberte jeden ze čtyř výsledků:
+
+- Potvrzeně zavřeno: oprava pomohla, pravidlo drží a nevznikla nová stopa.
+- Ještě jednou lokálně dočistit: stejné místo pořád trochu mate, ale pravidlo ani rozsah se nemění.
+- Převést na širší vzor: stejné tření se ukázalo i jinde a už nejde o jednu servisní poznámku.
+- Otevřít návratový signál: běžné použití ukázalo přesně dopad, kvůli kterému se mělo téma znovu otevřít.
+
+Stav `potvrzeně zavřeno` je konec. Nepište další úkol "sledovat dál", pokud nemáte předem zapsaný důvod. Běžný rytmus už existuje právě od toho.
+
+Stav `ještě jednou lokálně dočistit` použijte opatrně. Jedna drobná oprava navíc je v pořádku, pokud zůstává u stejného místa. Napište ale stop podmínku:
+
+```text
+Pokud se stejné tření vrátí i po této úpravě, servisní režim končí a otevřeme novou otázku.
+```
+
+Bez této věty se ze "ještě jednou" snadno stane trvalé šťourání. A trvalé šťourání je jen backlog v převleku.
+
+Stav `širší vzor` použijte, když problém už není v jednom řádku šablony, ale v tom, že pravidlo nemá dobrý domov na více pracovních místech. Třeba obchodní šablona už je opravená, ale stejné chybějící pole pro další krok se objevilo v handoff dokumentu a supportní poznámce. To už není servisní dočištění. To je otázka: kde všude má pravidlo žít, aby se tým nemusel spoléhat na paměť?
+
+Stav `návratový signál` použijte jen tehdy, když běžné použití ukázalo předem pojmenovaný problém. Pokud jste si například zapsali, že téma otevřete při třech nekvalifikovaných poptávkách za sebou, jedna nejasná poznámka v šabloně není návratový signál. Je to možná tření, možná náhoda, možná pondělí. Rozhoduje původní podmínka, ne chuť znovu řešit známé téma.
+
+### Privacy-first ověření
+
+Ověření uzavřené servisní poznámky má být téměř beze stopy. Nepotřebujete nový tracker, nové pole, screenshot každého použití ani tabulku "servisních dopadů". Většinou stačí jedna věta u kanonického pracovního místa:
+
+```text
+Ověřeno při dalším běžném použití: opravené místo vedlo práci správně, stará poznámka se neotevřela a nevznikl nový údaj.
+```
+
+Pokud ověření potřebuje příklad, zobecněte ho. Nepřepisujte osobní údaje zákazníka, celý e-mail ani interní poznámku z hovoru. Zapište pracovní závěr:
+
+```text
+Relevantní poptávka měla po opravě jasný další krok.
+```
+
+To je pro rozhodnutí dost. Privacy-first provoz často není o velkých právních gestech, ale o drobné zdrženlivosti: nevyrábět data, když stačí závěr.
+
+### Karta ověření servisní poznámky
+
+```text
+Pravidlo:
+
+Kanonické pracovní místo:
+
+Uzavřená servisní poznámka:
+
+Další běžné použití:
+
+Co člověk udělal bez vysvětlování:
+
+Kde oprava pomohla:
+
+Kde ještě vzniklo tření:
+
+Výsledek:
+- potvrzeně zavřeno
+- ještě jednou lokálně dočistit
+- převést na širší vzor
+- otevřít návratový signál
+
+Co znovu neotevíráme:
+
+Privacy-first výsledek:
+
+Co mažeme, zkracujeme nebo necháváme zavřené:
+
+Další stav pravidla:
+```
+
+Tahle karta má smysl jen v případě, že výsledek není úplně samozřejmý. Když je servisní poznámka potvrzeně zavřená a žádné tření nevzniklo, stačí krátká věta v changelogu pracovního místa. Kartu použijte hlavně tehdy, když potřebujete rozlišit lokální dočištění od širšího vzoru.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte uzavřenou servisní poznámku a původní pravidlo.
+2. Minuta 2: pojmenujte nejbližší běžné použití, na kterém se ověřovala.
+3. Minuta 3: řekněte, jestli člověk našel opravené místo bez vysvětlování.
+4. Minuta 4: ověřte, jestli oprava pomohla dokončit pracovní krok.
+5. Minuta 5: zkontrolujte, jestli nevznikla nová datová stopa.
+6. Minuta 6: vyberte jeden ze čtyř výsledků a zapište další stav pravidla.
+
+Když se workshop začne stáčet k původní historii, zastavte ho otázkou: "Co nám ukázalo poslední běžné použití?" Pokud odpověď není konkrétní, nemáte důvod otevírat širší práci.
+
+### Checklist ověření
+
+- Ověřujeme servisní poznámku při běžném použití, ne zvláštním auditem?
+- Je jasné, které pravidlo a které pracovní místo kontrolujeme?
+- Našel člověk opravené místo bez připomínání staré historie?
+- Pomohla oprava dokončit nebo předat konkrétní krok?
+- Rozlišili jsme potvrzené zavření, lokální dočištění, širší vzor a návratový signál?
+- Pokud dočišťujeme ještě jednou, máme stop podmínku?
+- Pokud vidíme širší vzor, nepřepisujeme další místa potichu?
+- Pokud otevíráme návratový signál, odpovídá předem zapsané podmínce?
+- Nevzniklo nové měření, CRM pole, export, screenshot ani kopie citlivého podkladu?
+- Zůstává závěr u kanonického pracovního místa a dočasné stopy se uklidily?
+
+Dobré ověření uzavřené servisní poznámky je nudné. A to je dobře. Znamená to, že pravidlo už zase patří do práce, ne do péče. Cílem není mít krásně zdokumentovanou opravu. Cílem je, aby se další člověk dostal přes stejné místo hladce, bez starých poznámek a bez nové hromádky dat.
+
 Praktický filtr na výběr jedné kapitoly:
 
 1. Kdybychom vyřešili jen tuto věc, co se zlepší pro zákazníka?
@@ -238627,3 +238763,4 @@ Když delší klidový rytmus drží, nejlepší výsledek často nevypadá jako
 - 2026-06-19: Doplněna úvodní podkapitola o prvním běžném review po návratu pravidla do rytmu: kontrolní body, stavy review, privacy-first datová střídmost, karta, mini workshop a checklist.
 - 2026-06-20: Doplněna krátká úvodní poznámka k servisní poznámce po prvním běžném review, aby drobné dočištění zůstalo lokální.
 - 2026-06-21: Doplněna úvodní podkapitola o uzavření servisní poznámky po prvním běžném review: hranice opravy, ověření při dalším použití, privacy-first uzavření, karta, mini workshop a checklist.
+- 2026-06-21: Doplněna úvodní podkapitola o ověření uzavřené servisní poznámky při dalším běžném použití: tři kontrolní otázky, čtyři výsledky ověření, privacy-first záznam, karta, mini workshop a checklist.
