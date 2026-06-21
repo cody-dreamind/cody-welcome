@@ -239210,8 +239210,176 @@ Když tým během workshopu začne řešit druhý standard, starou strategii neb
 
 Uzavřená první běžná revize má standardu dát klidný status. Buď dál funguje jako obyčejné pravidlo, nebo dostane přesnou opravu a vrátí se zpět do rytmu. Nejhorší výsledek je nechat standard v polozkušebním režimu, kde už se tváří jako běžný provoz, ale pořád kolem něj někdo nosí baterku a kontrolní tabulku.
 
+## Druhá běžná revize po předání standardu
+
+Druhá běžná revize po předání standardu je test přenositelnosti v čase. První revize ještě často těží z čerstvé paměti: lidé si pamatují, proč standard vznikl, kdo ho prosadil a kde se při zavádění zasekl. Druhá revize už má být obyčejnější. Má ukázat, jestli standard obstojí i ve chvíli, kdy kolem něj není příběh, jen pracovní situace a zdroj pravdy.
+
+Začněte větou:
+
+```text
+Standard kontrolujeme podruhé v běžném rytmu; nespoléháme na paměť zavedení, ale na to, že pravidlo samo vede práci.
+```
+
+Tato věta chrání revizi před návratem do historie. Pokud se tým musí při druhé revizi vracet k tomu, kdo co kdysi vysvětloval, standard pravděpodobně pořád stojí na lidech víc než na pracovním místě. To není tragédie, ale je to signál. Standard má být najitelný, použitelný a dost ostrý i pro člověka, který nebyl u jeho vzniku.
+
+Praktický příklad:
+
+```text
+Standard:
+Archivní šablona má v názvu "Archiv" a první řádek odkazuje na aktuální zdroj pravdy.
+
+První běžná revize:
+Doplnili jsme pracovní kotvu do jedné starší šablony.
+
+Druhá běžná revize:
+Při kontrole staré kampaně nový člověk našel aktuální zdroj pravdy přímo v archivní šabloně. Nemusel hledat původní rozhodnutí ani se ptát autora.
+
+Pozorování:
+Standard funguje bez čerstvé paměti. Lokální oprava z první revize se přenesla do reálné práce.
+
+Rozhodnutí:
+Standard zůstává beze změny v běžném revizním rytmu.
+
+Co neotevíráme:
+Neprocházíme všechny staré kampaně a nevyrábíme nový audit archivních šablon.
+```
+
+Druhá revize má ráda krátké odpovědi. Pokud standard drží, nepotřebuje velké dokazování. Stačí jeden nebo dva reálné průchody a jasný závěr. Tým tím potvrzuje, že standard už není "novinka, kterou hlídáme", ale běžná součást provozu.
+
+### Co druhá revize ověřuje
+
+Druhá běžná revize má čtyři kontrolní otázky:
+
+- Funguje standard bez čerstvé paměti z předání?
+- Zůstala lokální oprava z první revize opravdu lokální?
+- Nevznikla nová boční péče mimo běžný rytmus?
+- Je návratový signál pořád přesný, nebo se ukázal jako příliš široký?
+
+První otázka je hlavní. Pokud člověk standard použije jen díky tomu, že mu někdo připomene původní příběh, standard se ještě nepřenesl. Potřebuje lepší kotvu, jasnější název nebo kratší pravidlo v místě práce.
+
+Druhá otázka chrání rozsah. První revize často najde drobnou opravu: doplnit odkaz, zpřesnit větu, upravit šablonu. Druhá revize kontroluje, jestli se z této opravy nestal nenápadný projekt. Pokud kvůli jedné kotvě vznikla nová tabulka, série připomínek a ruční kontrola starých dokumentů, oprava se vymkla.
+
+Třetí otázka hledá skrytou péči. Standard může vypadat dobře v dokumentaci, ale v provozu ho pořád podpírá někdo, kdo "radši jednou za čas koukne". Pokud taková péče existuje, zapište ji. Buď ji zrušte, nebo přiznejte, že standard ještě není samostatný.
+
+Čtvrtá otázka se týká návratového signálu. Někdy se při druhé revizi ukáže, že původní signál je moc citlivý. Například každá otázka nového člověka nemá otevírat standard; někdy je to jen normální onboarding. Návratový signál má poznat návrat problému, ne běžný dotaz.
+
+### Čtyři výsledky druhé běžné revize
+
+Po druhé běžné revizi vyberte jeden ze čtyř výsledků:
+
+- Standard drží bez čerstvé paměti: zůstává beze změny v rytmu.
+- Přenos je slabý: člověk pravidlo našel nebo použil jen díky starému vysvětlení.
+- Oprava z první revize narostla: lokální zásah vytvořil novou boční agendu.
+- Návratový signál je nepřesný: spouští moc často, pozdě nebo na špatném místě.
+
+Stav `standard drží bez čerstvé paměti` je ideální a krátký. Zapište závěr, že pravidlo prošlo druhou běžnou revizí, a nechte ho být. Další mimořádná kontrola by byla jen odměna za dobré chování ve formě nové práce, což je provozní humor z kategorie "radši ne".
+
+Stav `přenos je slabý` řešte v pracovním místě, ne v historii. Zeptejte se, kde měl člověk standard najít, a opravte právě tuto cestu. Může jít o název v indexu, první řádek šablony, odkaz v checklistu nebo jasnější hranici ve formulaci.
+
+Stav `oprava z první revize narostla` znamená, že lokální zásah přestal být lokální. Vraťte ho zpět do jedné změny, nebo ho převeďte na samostatnou smyčku. Neschovávejte novou agendu pod starý standard.
+
+Stav `návratový signál je nepřesný` řešte přepsáním signálu, ne přidáním dalšího sledování. Dobrý návratový signál má být rozpoznatelný v běžné práci: například "archivní šablona byla použita jako aktuální zdroj pravdy", ne "někdo se zeptal na archiv".
+
+### Privacy-first druhá revize
+
+Druhá revize má být datově ještě střídmější než první. Už nehledáte důkaz, že standard může fungovat. Ověřujete, jestli funguje v běžném rytmu. Většinou stačí tento typ zápisu:
+
+```text
+Standard byl od první revize použit jednou bez dotazu na původního autora. Návratový signál nenastal.
+```
+
+Není potřeba přikládat screenshot použití, kopii chatu ani export z nástroje. Pokud revize ukáže slabý přenos, popište pracovní tření zobecněně:
+
+```text
+Člověk našel pravidlo až přes původního autora, protože v šabloně chyběl odkaz na kanonické místo.
+```
+
+Takový zápis stačí pro rozhodnutí a netahá do dokumentace zbytečné osobní ani provozní detaily. Privacy-first provoz není o tom, že nikdy nepoužijete důkaz. Je o tom, že nepřenesete víc důkazů, než dnešní rozhodnutí opravdu potřebuje.
+
+### Karta druhé běžné revize standardu
+
+```text
+Standard:
+
+Běžný revizní rytmus:
+
+Kanonické místo:
+
+Výsledek první běžné revize:
+
+Co se od první revize mělo změnit:
+
+Reálné použití od první revize:
+1.
+2.
+
+Kontrola bez čerstvé paměti:
+Použil člověk standard bez znalosti historie vzniku?
+
+Kontrola lokální opravy:
+Zůstala oprava z první revize lokální?
+
+Kontrola skryté péče:
+Vznikla boční tabulka, ruční připomínka nebo neoficiální dohled?
+
+Kontrola návratového signálu:
+Nastal / nenastal:
+Je signál přesný?
+
+Výsledek druhé revize:
+- standard drží bez čerstvé paměti
+- přenos je slabý
+- oprava z první revize narostla
+- návratový signál je nepřesný
+
+Rozhodnutí jednou větou:
+
+Jedna úprava, pokud je potřeba:
+
+Co výslovně neotevíráme:
+
+Privacy-first závěr:
+Který zobecněný důkaz stačí:
+Které původní podklady neotevíráme:
+Které dočasné stopy mažeme nebo necháváme zavřené:
+
+Další běžná revize:
+```
+
+Karta má udržet druhou revizi malou. Pokud se při ní otevře větší téma, napište ho zvlášť. Druhá revize nesmí být záminka k tomu, aby se z obyčejného standardu stal nový projekt.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte výsledek první běžné revize.
+2. Minuta 2: najděte jedno reálné použití od první revize.
+3. Minuta 3: ověřte, jestli standard fungoval bez čerstvé paměti z předání.
+4. Minuta 4: zkontrolujte, jestli lokální oprava zůstala lokální.
+5. Minuta 5: ověřte skrytou péči a návratový signál.
+6. Minuta 6: vyberte výsledek druhé revize a napište jednověté rozhodnutí.
+
+Pokud během workshopu není žádné reálné použití, nedělejte simulaci jen proto, aby karta nevypadala prázdně. Zapište, že standard zatím neměl příležitost k použití, a vraťte se při nejbližším běžném průchodu. Umělý test může být užitečný při zavádění, ale v běžném rytmu má větší cenu skutečná práce.
+
+### Checklist druhé běžné revize
+
+- Probíhá revize v běžném rytmu, ne jako pokračování zkušebního režimu?
+- Máme aspoň jedno reálné použití od první revize, nebo jsme jasně zapsali, že zatím nenastalo?
+- Dokázal člověk standard najít bez znalosti historie vzniku?
+- Vedl standard k rozhodnutí bez původního autora?
+- Zůstala případná oprava z první revize lokální?
+- Nevznikla boční tabulka, ruční připomínka nebo tichý dohled?
+- Ověřili jsme, jestli návratový signál nastal?
+- Je návratový signál dost přesný pro další období?
+- Vybrali jsme jeden ze čtyř výsledků druhé revize?
+- Pokud je potřeba oprava, patří do nejbližšího pracovního místa?
+- Neotevíráme staré podklady jen kvůli připomenutí historie?
+- Ukládáme zobecněný důkaz místo screenshotů, chatů nebo exportů, kde to stačí?
+- Má standard další běžný revizní bod, nebo jasný návratový signál?
+
+Druhá běžná revize je dobrý test dospělosti standardu. Když pravidlo funguje i bez příběhu svého vzniku, může konečně žít normálním provozním životem. Když ne, není potřeba se zlobit na tým. Stačí najít místo, kde se pravidlo pořád opírá o paměť člověka, a opravit právě to.
+
 ## Pracovní log
 
+- 2026-06-21: Doplněna úvodní podkapitola o druhé běžné revizi po předání standardu: přenositelnost bez čerstvé paměti, lokální rozsah oprav, skrytá péče, přesnost návratového signálu, privacy-first zápis, karta, mini workshop a checklist.
 - 2026-06-21: Doplněna úvodní podkapitola o uzavření první běžné revize po předání standardu: čtyři uzavírací stavy, propsání závěru do pracovních míst, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-21: Doplněna úvodní podkapitola o první běžné revizi po předání standardu: najitelnost, použitelnost, klid bez mimořádné péče, čtyři výsledky revize, privacy-first hranice, karta, mini workshop a checklist.
 - 2026-06-21: Doplněna úvodní podkapitola o předání ověřeného standardu do běžného provozního rytmu: kanonické a pracovní místo, revizní rytmus, handoff týmu, privacy-first úklid, karta, mini workshop a checklist.
