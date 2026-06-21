@@ -237976,8 +237976,169 @@ Workshop se má zastavit u prvního rozhodnutí. Pokud během něj vzniknou tři
 
 První běžné použití nového standardu má být krátké, praktické a trochu přísné na rozsah. Když standard drží, nechte ho pracovat. Když drhne, opravte nejbližší místo. A když opravdu selže, vraťte na stůl jen tu část, která selhala. Zbytek smyčky už byl uzavřený, tak ho zbytečně nevytahujte zpátky na světlo.
 
+## Uzavření prvního použití nového standardu
+
+První použití nového standardu má po sobě zanechat jasný konec. Nestačí říct "vyzkoušeno". Tým potřebuje vědět, jestli se standard vrací do běžného rytmu beze změny, dostává jednu lokální opravu, potřebuje přepsat historické znění, nebo se opravdu otevírá návratový signál. Bez uzavření vznikne šedá zóna: všichni tuší, že se něco použilo, ale nikdo neví, jestli je pravidlo už normální součást práce.
+
+Uzavření proto začněte jednou větou:
+
+```text
+První běžné použití standardu skončilo stavem:
+```
+
+Za dvojtečku doplňte jeden stav, ne odstavec dojmů. Pokud potřebujete dlouhé vysvětlování, pravděpodobně ještě neuzavíráte. Teprve se snažíte pochopit, co se stalo. To je v pořádku, ale nemíchejte poznávání s uzavřením. Uzavření má zanechat provozní rozhodnutí, podle kterého se příště pracuje.
+
+### Čtyři uzavírací stavy
+
+Použijte stejné čtyři stavy jako při vyhodnocení prvního použití, ale převeďte je do konkrétního konce:
+
+- Standard drží: zůstává v běžném rytmu a nevzniká žádná další kontrola.
+- Chyběla lokální orientace: opravuje se jen cesta ke standardu.
+- Znění bylo moc historické: přepisuje se jedna část standardu do dnešní akce.
+- Přišel návratový signál: otevírá se nová malá smyčka jen pro potvrzený problém.
+
+Stav `standard drží` uzavřete nejstručněji. Do pracovního logu stačí napsat, kdy a v jaké situaci standard pomohl. Nepřidávejte nové formuláře, nové měření ani druhé speciální ověření. Když standard funguje, nejlepší další krok je nechat ho chvíli nebýt zajímavý.
+
+Stav `chyběla lokální orientace` uzavřete navigační opravou. Může to být lepší název dokumentu, odkaz z rozcestníku, přesunutí aktuální verze nad archiv, doplnění štítku "aktuální", nebo zkrácení cesty v šabloně. Uzavření nastane až ve chvíli, kdy je cesta opravená. Nečekejte na dokonalý redesign znalostní báze. Tady se zavírá jedna cesta, ne celé informační město.
+
+Stav `znění bylo moc historické` uzavřete přepisem do přítomného času. Odstraňte slova, která nutí čtenáře znát starý incident, původní servisní poznámku nebo důvod dávné opravy. Standard má člověku říct, co má udělat dnes. Historie může zůstat v rozhodovacím logu, ale nemá stát uprostřed běžného postupu jako starý kufr v chodbě.
+
+Stav `přišel návratový signál` je jediný, který může otevřít další práci. I tady ale platí omezení rozsahu. Neotevírá se celý standard. Otevírá se jen ta hrana, která při prvním použití selhala. Pokud standard fungoval pro archivní šablony, ale selhal u starého formuláře, neřešte najednou všechny archivy. Začněte formulářem.
+
+### Praktický příklad uzavření
+
+```text
+Standard:
+Archivní šablona má v názvu "Archiv" a první řádek odkazuje na aktuální zdroj pravdy.
+
+První použití:
+Nový člen týmu našel starý obsahový brief přes interní vyhledávání.
+
+Pozorování:
+Pochopil, že brief je archivní, ale aktuální zdroj pravdy našel až po dotazu v chatu.
+
+Uzavírací stav:
+Chyběla lokální orientace.
+
+Uzavření:
+Přejmenovali jsme aktuální brief na "Aktuální obsahový brief" a v rozcestníku jsme ho přesunuli nad archivní materiály.
+
+Co neotevíráme:
+Nepřepisujeme pravidla archivace a nezakládáme audit všech starých šablon.
+
+Privacy-first zápis:
+Do logu ukládáme jen zobecněné pozorování. Nekopírujeme chat ani screenshot výsledků vyhledávání.
+```
+
+Tento zápis je užitečný právě tím, že je malý. Říká, co se stalo, jaký stav byl vybrán, jaká oprava proběhla a co se záměrně neotevřelo. Příště se tým nemusí ptát, jestli se má vracet k celé archivaci. Nemá. Opravila se jen orientace.
+
+Stejný příklad by mohl skončit i stavem `standard drží`:
+
+```text
+Pozorování:
+Člověk našel archivní šablonu, přešel na aktuální zdroj pravdy a dokončil brief bez dotazu.
+
+Uzavírací stav:
+Standard drží.
+
+Uzavření:
+Zapsána jedna věta do běžného logu. Standard zůstává v normálním revizním rytmu.
+
+Co neotevíráme:
+Nepřidáváme další kontrolu prvních použití.
+```
+
+Rozdíl mezi těmito dvěma zápisy je malý, ale provozně zásadní. V prvním případě existovala konkrétní cesta, kterou bylo potřeba opravit. Ve druhém by další práce byla jen péče navíc. A péče navíc se umí tvářit zodpovědně, i když ve skutečnosti jen rozmnožuje proces.
+
+### Privacy-first uzavření
+
+Uzavření prvního použití standardu má snížit datovou stopu, ne ji prodloužit. Po prvním použití často zůstávají pomocné poznámky, screenshoty, kopie chatu, dočasné kontrolní dokumenty nebo ruční seznamy "pro jistotu". Pokud už podle nich nevzniká oprava, nemají dál žít.
+
+Použijte tři otázky:
+
+- Stačí pro budoucí práci zobecněný závěr?
+- Potřebujeme konkrétní podklad k provedení lokální opravy?
+- Má podklad jasné místo, vlastníka a dobu uchování?
+
+Když je odpověď na první otázku ano, konkrétní podklady nekopírujte. Když je potřeba podklad pro opravu, držte ho u opravy, ne v obecném logu. A pokud neumíte říct vlastníka ani dobu uchování, podklad pravděpodobně nemá v další vrstvě co dělat.
+
+Praktický privacy-first zápis může znít takto:
+
+```text
+Pro uzavření stačí zobecněné pozorování: nový člověk našel správný zdroj pravdy až po dotazu. Chat nekopírujeme. Oprava je přesun odkazu v rozcestníku.
+```
+
+Takový zápis zachovává smysl důkazu a současně neprodlužuje život datům, která nejsou potřeba. Privacy-first provoz není o tom, že se nikdy nic nezapíše. Je o tom, že se zapisuje jen to, co má práci vést.
+
+### Karta uzavření prvního použití standardu
+
+```text
+Standard:
+
+Kanonické místo:
+
+První běžná pracovní situace:
+
+Vybraný uzavírací stav:
+- standard drží
+- chyběla lokální orientace
+- znění bylo moc historické
+- přišel návratový signál
+
+Jednovětý závěr:
+
+Provedená lokální oprava, pokud byla potřeba:
+
+Co zůstává v běžném rytmu:
+
+Co výslovně neotevíráme:
+
+Privacy-first uzavření:
+Jaký zobecněný závěr stačí:
+Které podklady nemažeme, protože jsou potřeba pro opravu:
+Které podklady mažeme, anonymizujeme nebo necháváme zavřené:
+
+Návratový signál pro další otevření:
+
+Vlastník:
+
+Datum další běžné revize:
+```
+
+Karta se má vyplnit jen v rozsahu, který pomůže příště. Pokud standard drží, většina polí může zůstat prázdná a stačí jednovětý log. Pokud byla potřeba oprava, karta chrání tým před tím, aby opravu potichu nafoukl.
+
+### Mini workshop na 8 minut
+
+1. Minuta 1: přečtěte standard a popište první běžné použití jednou větou.
+2. Minuta 2: vyberte jeden uzavírací stav.
+3. Minuta 3: napište jednovětý závěr.
+4. Minuty 4 až 5: pokud je potřeba oprava, zmenšete ji na nejbližší pracovní místo.
+5. Minuta 6: napište, co výslovně neotevíráte.
+6. Minuta 7: udělejte privacy-first uzavření podkladů.
+7. Minuta 8: potvrďte návratový signál a další běžnou revizi.
+
+Workshop nesmí skončit větou "ještě se na to podíváme". To není uzavření, to je odklad s lepším slovníkem. Pokud nevíte, který stav vybrat, zapište "zatím neuzavřeno" a otevřete nejmenší ověřovací krok. Když stav vybrat umíte, zavřete ho rovnou.
+
+### Checklist uzavření
+
+- Popsali jsme první běžné použití jednou větou?
+- Vybrali jsme přesně jeden uzavírací stav?
+- Pokud standard drží, nevznikla další mimořádná kontrola?
+- Pokud chyběla orientace, opravili jsme jen cestu ke standardu?
+- Pokud bylo znění historické, přepsali jsme ho do dnešní akce?
+- Pokud přišel návratový signál, otevřeli jsme jen potvrzenou hranu?
+- Má uzavření jednovětý závěr v běžném logu?
+- Je jasné, co výslovně neotevíráme?
+- Zůstává historie v rozhodovacím logu, ne v běžném postupu?
+- Stačí pro budoucí práci zobecněný závěr?
+- Nekopírujeme chaty, zprávy, screenshoty ani exporty bez účelu?
+- Ví vlastník, kdy proběhne další běžná revize?
+
+Uzavření prvního použití nového standardu je malá brána zpět do normální práce. Když standard drží, nechte ho být. Když potřebuje drobnou opravu, udělejte ji tam, kde vzniklo tření. Když se objevil skutečný návratový signál, otevřete jen tu část, která selhala. Dobrý standard nemá po prvním použití vyrábět další ceremonii; má uvolnit ruce pro práci, kvůli které vznikl.
+
 ## Pracovní log
 
+- 2026-06-21: Doplněna úvodní podkapitola o uzavření prvního použití nového standardu: čtyři uzavírací stavy, praktické příklady, privacy-first uzavření, karta, mini workshop a checklist.
 - 2026-06-21: Doplněna úvodní podkapitola o prvním použití nového standardu v běžné práci: tři otázky použití, čtyři výsledky, praktický příklad, privacy-first zápis, karta, mini workshop a checklist.
 - 2026-06-21: Doplněna úvodní podkapitola o uzavření klidového období do běžného standardu: tři možné konce, přepis do přítomného času, praktický příklad, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-21: Doplněna úvodní podkapitola o tom, co dělat, když delší klidový rytmus drží celé období: rozlišení klidu a neviditelnosti, povýšení pravidla na standard, archivace neaktuálních pravidel, privacy-first úklid, karta, mini workshop a checklist.
