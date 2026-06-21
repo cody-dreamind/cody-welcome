@@ -240709,8 +240709,169 @@ Když se tým během workshopu začne bavit o celém portfoliu standardů, zasta
 
 Přechod do výroční revize je dobré znamení. Standard už nepotřebuje zvláštní péči, ale pořád má majitele, místo a návratový signál. Takhle vypadá klidný provoz: ne jako zapomenutí, ale jako záměrně menší pozornost s jasně napsanými hranicemi.
 
+## První výroční revize standardu
+
+První výroční revize standardu není slavnostní inventura všeho, co se za rok stalo. Je to krátká kontrola, jestli standard pořád pomáhá práci, kvůli které vznikl. Pokud se z ní stane velký audit, tým si vyrobí přesně ten typ provozní tíhy, kterému se přechodem do výročního rytmu snažil vyhnout.
+
+Začněte od kanonického místa, ne od vzpomínek. Najděte aktuální znění standardu, datum posledního přechodu do výroční revize a návratový signál mimo plán. Teprve potom se ptejte, jestli se standard během roku opravdu používal, jestli ho lidé našli ve správném pracovním místě a jestli jeho pravidlo nestárne rychleji než samotný rytmus.
+
+Použijte tři vstupní otázky:
+
+```text
+Kde standard dnes žije:
+
+Kde se má v práci použít:
+
+Jaký signál by ho měl otevřít mimo výroční rytmus:
+```
+
+Pokud na některou otázku neumíte odpovědět bez dlouhého hledání, nezačínejte revizi obsahu. Nejdřív opravte najitelnost. Výroční revize má kontrolovat standard, ne archeologické schopnosti týmu.
+
+Praktický příklad:
+
+```text
+Standard:
+Archivní šablona kampaně má na prvním řádku odkaz na aktuální zdroj pravdy.
+
+Kde standard žije:
+Kanonický index týmových standardů a samotná archivní šablona.
+
+Kde se používá:
+Při uzavření kampaně a při návratu k historickým kampaním.
+
+Návratový signál mimo rytmus:
+Někdo použije archivní šablonu jako aktivní zdroj pro novou práci.
+
+Výroční zjištění:
+Standard se našel, ale v jedné starší šabloně chybí věta "aktuální postup je zde".
+
+Rozhodnutí:
+Neotevíráme celý archivní proces. Dočišťujeme jednu starou šablonu a standard necháváme ve výročním rytmu.
+```
+
+Dobrý výsledek výroční revize může být velmi malý. Jedna opravená navigace, jeden přepsaný návratový signál, jedno rozhodnutí nechat pravidlo být. Cílem není dokázat, že se kolem standardu něco dělo. Cílem je ověřit, jestli pořád stojí na správném místě a jestli jeho datová stopa neroste jen ze zvyku.
+
+### Co při výroční revizi opravdu kontrolovat
+
+První výroční revize má čtyři kontrolní vrstvy:
+
+- Použitelnost: standard jde najít tam, kde člověk přirozeně pracuje.
+- Platnost: pravidlo pořád odpovídá dnešní nabídce, týmu, procesu a nástrojům.
+- Návratový signál: je dost konkrétní a poznatelný i pro člověka, který nebyl u původního rozhodnutí.
+- Datová střídmost: standard nevyžaduje staré exporty, screenshoty, osobní příklady ani boční evidenci, která už nemá aktivní účel.
+
+Nepotřebujete dokazovat každé použití standardu během roku. Stačí vybrat jeden až tři reálné průchody, pokud existují, a ověřit, že podle pravidla šlo pracovat bez mimořádného vysvětlování. Pokud žádný průchod neexistuje, není to automaticky problém. Možná standard chrání vzácnou situaci. V takovém případě zkontrolujte, jestli má pořád smysl být v aktivním indexu, nebo patří do archivu.
+
+Privacy-first pravidlo: výroční revize nesmí být důvodem vytáhnout staré osobní detaily jen proto, že je někdo kdysi uložil jako důkaz. Pokud pro rozhodnutí stačí věta "standard nebyl během roku potřeba" nebo "standard byl použit při dvou archivacích bez ruční pomoci", nepřidávejte kopie zpráv, jména lidí ani screenshoty. Dlouhý rytmus si zaslouží krátkou paměť.
+
+### Čtyři výsledky první výroční revize
+
+Po kontrole vyberte jeden ze čtyř stavů:
+
+- Ponechat beze změny: standard je platný, najitelný a nepotřebuje novou péči.
+- Dočistit lokálně: standard drží, ale jedno pracovní místo, odkaz, název nebo příklad je potřeba opravit.
+- Změnit rytmus: standard stárne rychleji, než výroční kontrola dovoluje, nebo se opírá o oblast s častými změnami.
+- Archivovat nebo otevřít novou smyčku: standard už neodpovídá dnešní realitě, nebo se ukázal nový problém mimo původní rozsah.
+
+Stav `ponechat beze změny` je legitimní výsledek. Pokud standard funguje, neodměňujte ho novou administrativou. Napište jen závěr, další datum revize a potvrzení, že návratový signál zůstává platný.
+
+Stav `dočistit lokálně` použijte, když problém neleží v pravidle, ale v jeho okolí. Typicky jde o chybějící odkaz, starý název v indexu, zastaralý příklad, duplicitní poznámku nebo šablonu, která neobsahuje aktuální větu. Lokální dočištění nesmí být převlečený redesign standardu.
+
+Stav `změnit rytmus` je důležitý u oblastí, které stárnou rychle: bezpečnost, právní povinnosti, dodavatelé, ceníky, integrační limity, technické platformy nebo privacy nastavení. Pokud standard pracuje s takovou oblastí, roční rytmus může být moc pomalý. Neznamená to, že má vzniknout velký audit. Znamená to nastavit kratší kontrolu podle reálného rizika.
+
+Stav `archivovat nebo otevřít novou smyčku` použijte, když standard už nevede dnešní práci. Archivujte ho, pokud jeho situace zmizela. Otevřete novou smyčku, pokud se změnil kontext a potřebujete nové rozhodnutí. Tyto dvě věci nemíchejte: archivace zavírá staré pravidlo, nová smyčka otevírá nový problém.
+
+Codyho komentář: výroční revize má být jako technická kontrola dobře udržovaného auta. Ne jako rozhodnutí, že když už jsme otevřeli kapotu, rovnou přestavíme motor, lak i garáž. Občas stačí dolít kapalinu a jet dál.
+
+### Karta první výroční revize
+
+```text
+Standard:
+
+Kanonické místo:
+
+Pracovní místo použití:
+
+Datum přechodu do výroční revize:
+
+Původní návratový signál mimo rytmus:
+
+Co se během roku skutečně stalo:
+
+Použitelnost:
+- najitelný / slabá navigace / nenalezený
+
+Platnost:
+- platí / potřebuje lokální dočištění / kontext se změnil
+
+Datová stopa:
+Jaké staré důkazy nebo pracovní stopy už nemají aktivní účel:
+
+Výsledek:
+- ponechat beze změny
+- dočistit lokálně
+- změnit rytmus
+- archivovat nebo otevřít novou smyčku
+
+Rozhodnutí jednou větou:
+
+Pokud dočišťujeme:
+Jedno pracovní místo:
+
+Pokud měníme rytmus:
+Nový rytmus a důvod:
+
+Pokud archivujeme nebo otevíráme smyčku:
+Co se zavírá:
+Nová pracovní otázka:
+
+Návratový signál pro další období:
+
+Privacy-first závěr:
+Zobecněný důkaz:
+Detaily, které neuchováváme:
+Stopy, které mažeme, zavíráme nebo necháváme v původním zdroji pravdy:
+
+Vlastník:
+
+Datum další revize:
+```
+
+Karta má udržet revizi krátkou. Pokud se nevejde na jednu obrazovku, pravděpodobně neřešíte první výroční revizi jednoho standardu, ale portfoliový úklid. To je platná práce, jen má mít vlastní otázku a vlastní rozsah.
+
+### Mini workshop na 10 minut
+
+1. Minuty 1 až 2: najděte kanonické místo, pracovní místo a návratový signál.
+2. Minuty 3 až 4: ověřte jeden až tři reálné průchody, nebo napište, že během roku žádný nebyl.
+3. Minuta 5: rozhodněte, jestli je standard najitelný.
+4. Minuta 6: rozhodněte, jestli pravidlo pořád platí.
+5. Minuta 7: zkontrolujte datovou stopu a staré pracovní důkazy.
+6. Minuta 8: vyberte jeden ze čtyř výsledků.
+7. Minuta 9: napište rozhodnutí jednou větou.
+8. Minuta 10: určete další rytmus, návratový signál a privacy-first úklid.
+
+Když během workshopu vznikne spor o samotný smysl standardu, nepokračujte v revizi. Zapište výsledek `otevřít novou smyčku`, ale jen pokud umíte napsat novou pracovní otázku. Pokud ji neumíte, standard nechte beze změny a přidejte návratový signál, který otázku otevře až při skutečném dopadu.
+
+### Checklist první výroční revize
+
+- Našli jsme kanonické místo standardu bez dlouhého hledání?
+- Víme, kde se standard používá v běžné práci?
+- Máme původní návratový signál mimo výroční rytmus?
+- Ověřili jsme reálné použití, pokud během roku existovalo?
+- Rozlišili jsme slabou navigaci od slabého obsahu standardu?
+- Zkontrolovali jsme, jestli standard nestárne rychleji než roční rytmus?
+- Vybrali jsme jeden výsledek: ponechat, dočistit, změnit rytmus, archivovat nebo otevřít smyčku?
+- Pokud dočišťujeme, upravujeme jen jedno konkrétní pracovní místo?
+- Pokud měníme rytmus, máme důvod v riziku, ne v pocitu nejistoty?
+- Pokud archivujeme, víme, co se zavírá a kde zůstává historická stopa?
+- Neukládáme osobní detaily, screenshoty, staré exporty ani kopie interních zpráv bez aktivního účelu?
+- Má další revize vlastníka, datum a návratový signál?
+
+První výroční revize je úspěšná, když po ní standard buď klidně pokračuje, nebo se jasně přesune do menší opravy, kratšího rytmu či archivu. Neúspěch není najít problém. Neúspěch je nechat po revizi víc mlhy než před ní. Standard má po roce buď stát pevněji, nebo slušně uvolnit místo.
+
 ## Pracovní log
 
+- 2026-06-21: Doplněna úvodní podkapitola o první výroční revizi standardu: kontrola kanonického a pracovního místa, čtyři výsledné stavy, privacy-first úklid důkazů, karta, mini workshop a checklist.
 - 2026-06-21: Doplněna úvodní podkapitola o přechodu z periodické kontroly do výroční revize standardu: podmínky pro delší rytmus, úklid dočasné péče, návratový signál, privacy-first závěr, karta, mini workshop a checklist.
 - 2026-06-21: Doplněna úvodní podkapitola o uzavření druhé periodické kontroly standardu: čtyři uzavírací stavy, práce se skrytou péčí, věta o tom, co po kontrole nevzniká, privacy-first závěr, karta, mini workshop a checklist.
 - 2026-06-21: Doplněna úvodní podkapitola o druhé periodické kontrole standardu v dlouhodobém klidu: ověření kanonického a pracovního místa, skrytá ruční péče, posun kontextu, privacy-first zápis, karta, mini workshop a checklist.
