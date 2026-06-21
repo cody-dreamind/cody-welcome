@@ -51,6 +51,8 @@ Starý kontext přenášejte jen v rozsahu, který je pořád pravdivý. Pokud s
 
 Do stejné první poznámky přidejte i jednu věc, kterou ze starého kontextu nepřenášíte. Může to být starý příklad, dočasný vlastník, dávno uzavřená výjimka nebo měření, které už neodpovídá dnešní práci. Tím chráníte návrat před nenápadným balastem: používáte minulost jako oporu, ne jako batoh plný všeho, co se kdy řešilo.
 
+Pokud první poznámka pořád zní jako opis starého rozhodnutí, zastavte se a napište ji z pohledu dnešní práce. Dobrá návratová věta nezačíná tím, co tým kdysi řešil, ale tím, proč se k tématu vrací právě teď.
+
 ## Kontrola přeneseného kontextu při návratu k tématu
 
 Když se tým vrací k tématu po týdnech nebo měsících, největší riziko často není zapomenutí. Horší je poloviční paměť: všichni si pamatují název problému, ale každý si pod ním nese jiný starý kontext. Jeden člověk pořád řeší původní segment, druhý už myslí na novou nabídku, třetí si pamatuje starou výjimku a čtvrtý má v hlavě poslední incident. Výsledek vypadá jako shoda, ale práce se rozjede do čtyř směrů.
@@ -238764,3 +238766,4 @@ Když delší klidový rytmus drží, nejlepší výsledek často nevypadá jako
 - 2026-06-20: Doplněna krátká úvodní poznámka k servisní poznámce po prvním běžném review, aby drobné dočištění zůstalo lokální.
 - 2026-06-21: Doplněna úvodní podkapitola o uzavření servisní poznámky po prvním běžném review: hranice opravy, ověření při dalším použití, privacy-first uzavření, karta, mini workshop a checklist.
 - 2026-06-21: Doplněna úvodní podkapitola o ověření uzavřené servisní poznámky při dalším běžném použití: tři kontrolní otázky, čtyři výsledky ověření, privacy-first záznam, karta, mini workshop a checklist.
+- 2026-06-21: Doplněna krátká úvodní poznámka, aby návratová věta začínala dnešním důvodem návratu místo opisování starého rozhodnutí.
