@@ -2861,6 +2861,151 @@ Když se workshop začne stáčet k původní historii, zastavte ho otázkou: "C
 
 Dobré ověření uzavřené servisní poznámky je nudné. A to je dobře. Znamená to, že pravidlo už zase patří do práce, ne do péče. Cílem není mít krásně zdokumentovanou opravu. Cílem je, aby se další člověk dostal přes stejné místo hladce, bez starých poznámek a bez nové hromádky dat.
 
+## Jak přepsat návratovou větu do dnešního důvodu
+
+Když se tým po čase vrací k tématu, první věta rozhodne, jestli začne pracovat s dnešní realitou, nebo s ozvěnou starého rozhodnutí. Slabá návratová věta opisuje minulost: "Vracíme se k formuláři, protože jsme ho řešili v květnu." Silnější věta říká dnešní důvod: "Vracíme se k potvrzovací zprávě po formuláři, protože poslední tři relevantní poptávky nevěděly, jaký bude další krok."
+
+Rozdíl je drobný, ale prakticky obrovský. První věta otevírá historii. Druhá věta otevírá konkrétní práci. Historie může být užitečná, ale nemá sedět za volantem. Za volantem má sedět dnešní signál, dnešní pracovní místo a dnešní rozhodnutí.
+
+Použijte tento malý přepisovací vzorec:
+
+```text
+Vracíme se k [konkrétní pracovní místo],
+protože dnes vidíme [návratový signál],
+a potřebujeme rozhodnout [nejmenší další krok].
+```
+
+Příklad:
+
+```text
+Slabě:
+Vracíme se k onboardingové šabloně, protože jsme ji už dřív upravovali.
+
+Lépe:
+Vracíme se k prvnímu e-mailu po registraci, protože dva noví uživatelé za sebou nedokončili import bez dotazu na podporu, a potřebujeme rozhodnout, jestli e-mail vysvětluje první krok dost konkrétně.
+```
+
+Všimněte si, že lepší věta neříká "opravíme onboarding". Říká, kde se práce stane, proč právě teď a jak malé rozhodnutí má vzniknout. To je rozdíl mezi praktickým návratem a návratem do mlhy.
+
+### Tři brzdy proti opisování historie
+
+Při přepisu návratové věty použijte tři brzdy:
+
+- Nezačínejte názvem staré iniciativy, ale dnešním pracovním místem.
+- Nepište "už jsme to řešili", napište, co se teď projevilo.
+- Neotevírejte celý původní rozsah, pojmenujte nejmenší rozhodnutí.
+
+Špatná věta často zní uhlazeně, protože má v sobě známá slova z minulosti. Právě proto je nebezpečná. Tým přikývne, protože téma poznává, ale nikdo ještě neví, co se má skutečně změnit.
+
+Přepište ji přes konkrétní sloveso:
+
+```text
+Dnes potřebujeme rozhodnout:
+- zkrátit / ponechat / přesunout / vysvětlit / ověřit / zavřít
+```
+
+Pokud věta neobsahuje takové sloveso, je pravděpodobně pořád moc obecná.
+
+### Příklad z prodejního webu
+
+```text
+Slabě:
+Vracíme se k homepage, protože kvalita leadů byla historicky slabá.
+
+Lépe:
+Vracíme se k bloku "Pro koho je spolupráce", protože poslední čtyři poptávky nerozlišily mezi jednorázovým auditem a dlouhodobým vývojem, a potřebujeme rozhodnout, jestli blok jasněji oddělí oba typy spolupráce.
+```
+
+Tahle věta pořád může vést k úpravě homepage, ale nezačíná redesignem. Začíná jedním blokem a jednou nejistotou. Pokud se ukáže, že problém je jinde, tým to zjistí levněji.
+
+Další praktická varianta:
+
+```text
+Slabě:
+Vracíme se k pricingu, protože zákazníci se ptají na cenu.
+
+Lépe:
+Vracíme se k části "Co je v ceně", protože poslední dva kvalifikované hovory strávily první třetinu vysvětlováním rozsahu dodávky, a potřebujeme rozhodnout, jestli stránka oddělí fixní výstup od volitelných navazujících prací.
+```
+
+Tady nejde hned o změnu ceny. Jde o vysvětlení rozsahu. To je častá úspora: správně napsaná návratová věta zabrání týmu řešit dražší otázku, než jakou skutečně ukázal signál.
+
+### Privacy-first přepis
+
+Návratová věta má nést důvod, ne citlivý podklad. Nepište do ní jména lidí, celé citace ze supportu, interní poznámky z hovoru ani detaily, které nejsou nutné pro rozhodnutí. Věta má být použitelná v týmu bez toho, aby zbytečně rozšiřovala datovou stopu.
+
+Místo:
+
+```text
+Klient Novák z firmy X napsal, že nerozumí...
+```
+
+pište:
+
+```text
+Jedna relevantní enterprise poptávka nerozlišila mezi auditem a implementací.
+```
+
+Pokud potřebujete přesný zdroj, nechte ho v původním systému s oprávněným přístupem a do návratové věty napište jen odkaz na kanonické místo nebo zobecněný závěr. V praxi často stačí:
+
+```text
+Zdroj signálu:
+obchodní poznámky za poslední dva kvalifikované hovory, bez kopírování osobních údajů do této karty.
+```
+
+Privacy-first provoz není jen o tom, že nepřidáte tracker. Je i o tom, že nepřenášíte osobní data do každé pracovní poznámky, kde by byla pohodlná, ale zbytečná.
+
+### Karta přepisu návratové věty
+
+```text
+Původní věta:
+
+Co je v ní jen historie:
+
+Dnešní návratový signál:
+
+Konkrétní pracovní místo:
+
+Nejmenší rozhodnutí:
+
+Co z minulosti nepřenášíme:
+
+Privacy-first hranice:
+
+Přepsaná návratová věta:
+
+První další krok:
+```
+
+Karta má být krátká. Pokud ji vyplňujete déle než několik minut, nejspíš se nesnažíte přepsat větu, ale znovu analyzovat celé téma. To je jiná práce a měla by mít vlastní důvod.
+
+### Mini workshop na 8 minut
+
+1. Minuta 1: přečtěte původní návratovou větu nahlas.
+2. Minuta 2: škrtněte slova, která jen připomínají minulou iniciativu.
+3. Minuta 3: pojmenujte dnešní signál jednou větou.
+4. Minuta 4: vyberte jedno pracovní místo.
+5. Minuta 5: napište nejmenší rozhodnutí, které má vzniknout.
+6. Minuta 6: zapište, co z minulosti nepřenášíte.
+7. Minuta 7: ověřte privacy-first hranici.
+8. Minuta 8: napište finální návratovou větu a první další krok.
+
+Když se tým hádá o historii, vraťte se k minutě 3. Otázka nezní "jak jsme to tehdy mysleli", ale "co dnes spustilo návrat". Pokud dnešní signál neumíte říct, návrat zatím neotevírejte. Starý pocit není důkaz, jen nostalgie s pracovním kalendářem.
+
+### Checklist návratové věty
+
+- Začíná věta dnešním pracovním místem, ne názvem staré iniciativy?
+- Je v ní konkrétní návratový signál?
+- Umí člověk mimo původní rozhodnutí poznat, proč se téma otevírá právě teď?
+- Je nejmenší další krok rozhodnutí, ne obecné "podívat se na to"?
+- Je jasné, co z minulého kontextu nepřenášíme?
+- Neobsahuje věta zbytečné osobní údaje, citace nebo interní detaily?
+- Zůstává přesný zdroj v původním systému, pokud je potřeba?
+- Dá se věta použít jako začátek malé pracovní iterace?
+- Pokud věta neobstojí, umíme návrat zavřít bez pocitu viny?
+
+Dobrá návratová věta není literární výkon. Je to malá operační pojistka. Chrání tým před tím, aby se nechal unést známým tématem, a nutí ho říct: proč teď, kde přesně, podle jakého signálu a s jakou datovou zdrženlivostí. Když to věta neumí, další práce bude pravděpodobně moc široká.
+
 Praktický filtr na výběr jedné kapitoly:
 
 1. Kdybychom vyřešili jen tuto věc, co se zlepší pro zákazníka?
@@ -240194,3 +240339,4 @@ Uzavřená první běžná revize má standardu dát klidný status. Buď dál f
 - 2026-06-21: Doplněna úvodní podkapitola o uzavření servisní poznámky po prvním běžném review: hranice opravy, ověření při dalším použití, privacy-first uzavření, karta, mini workshop a checklist.
 - 2026-06-21: Doplněna úvodní podkapitola o ověření uzavřené servisní poznámky při dalším běžném použití: tři kontrolní otázky, čtyři výsledky ověření, privacy-first záznam, karta, mini workshop a checklist.
 - 2026-06-21: Doplněna krátká úvodní poznámka, aby návratová věta začínala dnešním důvodem návratu místo opisování starého rozhodnutí.
+- 2026-06-21: Doplněna úvodní podkapitola o přepisu návratové věty do dnešního důvodu: konkrétní pracovní místo, návratový signál, nejmenší rozhodnutí, privacy-first hranice, karta, workshop a checklist.
