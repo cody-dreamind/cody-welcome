@@ -240562,8 +240562,156 @@ Když se tým během šesti minut nedohodne, nepokračujte delší debatou v rá
 
 Uzavření druhé periodické kontroly je malý test provozní dospělosti. Dobrý tým umí standard opravit, když je slabý. Ještě lepší tým ho umí nechat být, když funguje. A nejlepší tým pozná rozdíl bez toho, aby kolem každého klidného pravidla postavil nové lešení z připomínek, tabulek a preventivních kontrol.
 
+## Přechod z periodické kontroly do výroční revize standardu
+
+Když standard projde dvěma periodickými kontrolami bez návratu problému, bez skryté ruční péče a bez nového kontextu, je čas přestat ho kontrolovat stejně často. Ne proto, že by přestal být důležitý. Právě naopak: stal se součástí běžného provozu. Pravidlo, které pořád potřebuje zvláštní pozornost, ještě není standard. Standard, který funguje, má být najitelný, používaný a občas ověřený, ale nemá kolem sebe vytvářet malý kult kontrolních rituálů.
+
+Přechod do výroční revize je jednoduché rozhodnutí: standard zůstává kanonický, ale jeho další aktivní kontrola se váže na delší rytmus nebo na jasný návratový signál. Tým tím získá dvě věci. Zaprvé uvolní pozornost pro živější problémy. Zadruhé zabrání tomu, aby z každého dobrého pravidla vznikla administrativní rostlinka, kterou někdo musí každý měsíc zalévat tabulkou.
+
+Začněte zápisem:
+
+```text
+Standard po dvou periodických kontrolách:
+
+Stav:
+- drží bez zvláštní péče
+- drží po lokálním dočištění
+- potřebuje novou smyčku
+- má být archivován
+
+Rozhodnutí:
+
+Další revizní rytmus:
+
+Návratový signál mimo rytmus:
+
+Co po přechodu rušíme:
+```
+
+Většina dobrých případů bude nudná:
+
+```text
+Standard po dvou periodických kontrolách:
+Archivní šablona má první řádek s odkazem na aktuální zdroj pravdy.
+
+Stav:
+Drží bez zvláštní péče.
+
+Rozhodnutí:
+Standard přechází do výroční revize týmových standardů.
+
+Další revizní rytmus:
+Jednou ročně při portfoliové revizi standardů, nebo dřív při návratovém signálu.
+
+Návratový signál mimo rytmus:
+Někdo použije archivní šablonu jako aktivní zdroj pro novou práci.
+
+Co po přechodu rušíme:
+Měsíční ruční kontrolu, zvláštní poznámku v review agendě a dočasnou evidenci ověření.
+```
+
+Tady je důležité slovo `rušíme`. Přechod do výroční revize není jen přidání dalšího termínu do budoucnosti. Je to také úklid staré pozornosti. Pokud necháte aktivní měsíční připomínku, dočasný checklist a boční poznámku "ještě sledovat", standard se formálně přesunul, ale prakticky pořád sedí v čekárně. A čekárna je místo, kde se provozní klid mění v nenápadné šustění.
+
+### Kdy je výroční rytmus vhodný
+
+Výroční revize se hodí pro standardy, které splňují čtyři podmínky:
+
+- Mají jasné kanonické místo.
+- Mají přirozenou cestu z pracovního místa, kde se používají.
+- Po dvou periodických kontrolách nevyžadují skrytou ruční péči.
+- Je u nich pojmenovaný návratový signál, který by kontrolu otevřel dřív.
+
+Pokud některá podmínka chybí, nepřesouvejte standard do výročního rytmu jen proto, že už vás nebaví ho kontrolovat. Únava není provozní důkaz. V takovém případě udělejte nejmenší lokální opravu: doplňte odkaz, zpřesněte název v indexu, přepište návratový signál nebo uzavřete boční poznámku, která pořád drží standard při životě.
+
+Výroční rytmus není vhodný pro standardy, které se opírají o rychle se měnící externí povinnosti, bezpečnostní pravidla, právní texty, ceníky, integrační limity nebo aktuální nástroje. U nich nastavte revizi podle rychlosti stárnutí. Privacy, bezpečnost a právní části nemají čekat rok jen proto, že ostatní standardy mohou.
+
+Codyho komentář: výroční revize je pro stabilní pravidla, ne pro věci, které se tváří stabilně jen proto, že se na ně nikdo dlouho nepodíval. Prach není důkaz zralosti, jen velmi tichý projektový manažer.
+
+### Co se při přechodu uklízí
+
+Přechod do výroční revize má vždy obsahovat malý úklid:
+
+- zrušit dočasné připomínky, které vznikly během ověřování standardu;
+- odstranit boční tabulky, pokud už nenesou aktivní rozhodnutí;
+- zavřít servisní karty, které měly jen hlídat první a druhé použití;
+- ponechat v kanonickém místě pouze aktuální pravidlo, návratový signál a datum další revize;
+- zapsat do pracovního logu jen zobecněný závěr.
+
+Neuklízejte historii tak, že ztratíte důvod pravidla. Stačí krátký kontext: proč standard existuje, kde se používá a kdy se má znovu otevřít. Nepotřebujete celý příběh servisní větve, seznam lidí u kontrol ani screenshoty starých stavů.
+
+Privacy-first hranice je tady přímočará: čím delší rytmus, tím méně detailů má cestovat dál. Výroční revize nepotřebuje osobní stopy z běžných použití. Potřebuje vědět, že standard fungoval, kde je jeho zdroj pravdy a jak poznat návrat problému.
+
+### Karta přechodu do výroční revize
+
+```text
+Standard:
+
+Kanonické místo:
+
+Pracovní místo, odkud se standard používá:
+
+Výsledek první periodické kontroly:
+
+Výsledek druhé periodické kontroly:
+
+Rozhodnutí:
+- přechází do výroční revize
+- zůstává v kratším rytmu
+- otevírá novou smyčku
+- archivuje se
+
+Proč je zvolený rytmus přiměřený:
+
+Návratový signál mimo plánovanou revizi:
+
+Co po přechodu rušíme:
+
+Co zůstává v kanonickém místě:
+
+Privacy-first úklid:
+Zobecněný závěr:
+Detaily, které neuchováváme:
+Dočasné stopy, které mažeme nebo zavíráme:
+
+Vlastník:
+
+Datum výroční revize:
+```
+
+Karta má chránit před dvěma chybami. První chyba je nechat standard v příliš časté kontrole, i když funguje. Druhá chyba je hodit ho do ročního sklepa bez návratového signálu. Dobré rozhodnutí je mezi tím: méně aktivní péče, ale jasná cesta zpět, když se opravdu něco změní.
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: přečtěte výsledky první a druhé periodické kontroly.
+2. Minuta 2: ověřte kanonické místo a pracovní cestu ke standardu.
+3. Minuta 3: zeptejte se, jestli standard pořád potřebuje ruční připomínku nebo boční evidenci.
+4. Minuta 4: vyberte stav: výroční revize, kratší rytmus, nová smyčka, archivace.
+5. Minuta 5: napište návratový signál mimo plánovanou revizi.
+6. Minuta 6: určete, které dočasné kontroly, poznámky a stopy se ruší.
+7. Minuta 7: zapište privacy-first závěr a datum další revize.
+
+Když se tým během workshopu začne bavit o celém portfoliu standardů, zastavte to. To je samostatná revize. Tady rozhodujete o jednom standardu po dvou klidných kontrolách. Jedna věc, jeden rytmus, jeden návratový signál.
+
+### Checklist přechodu do výroční revize
+
+- Má standard za sebou dvě periodické kontroly?
+- Byly výsledky obou kontrol jasně uzavřené?
+- Je standard na kanonickém místě?
+- Je cesta ze skutečného pracovního místa pořád přirozená?
+- Nevyžaduje standard skrytou ruční péči, připomínky ani boční tabulku?
+- Je výroční rytmus přiměřený rychlosti stárnutí tématu?
+- Nejde o oblast, která potřebuje kratší revizi kvůli právu, bezpečnosti, cenám, nástrojům nebo externím povinnostem?
+- Máme návratový signál, který otevře kontrolu dřív než za rok?
+- Zrušili jsme dočasné připomínky a servisní evidenci?
+- Zůstává v kanonickém místě důvod pravidla, aktuální znění a datum další revize?
+- Uložili jsme jen zobecněný závěr bez osobních detailů, screenshotů a kopií interních komentářů?
+- Je jasné, kdo vlastní další výroční revizi?
+
+Přechod do výroční revize je dobré znamení. Standard už nepotřebuje zvláštní péči, ale pořád má majitele, místo a návratový signál. Takhle vypadá klidný provoz: ne jako zapomenutí, ale jako záměrně menší pozornost s jasně napsanými hranicemi.
+
 ## Pracovní log
 
+- 2026-06-21: Doplněna úvodní podkapitola o přechodu z periodické kontroly do výroční revize standardu: podmínky pro delší rytmus, úklid dočasné péče, návratový signál, privacy-first závěr, karta, mini workshop a checklist.
 - 2026-06-21: Doplněna úvodní podkapitola o uzavření druhé periodické kontroly standardu: čtyři uzavírací stavy, práce se skrytou péčí, věta o tom, co po kontrole nevzniká, privacy-first závěr, karta, mini workshop a checklist.
 - 2026-06-21: Doplněna úvodní podkapitola o druhé periodické kontrole standardu v dlouhodobém klidu: ověření kanonického a pracovního místa, skrytá ruční péče, posun kontextu, privacy-first zápis, karta, mini workshop a checklist.
 - 2026-06-21: Doplněna úvodní podkapitola o uzavření první periodické kontroly standardu: čtyři uzavírací stavy, lokální dočištění, slabý signál, privacy-first uzavření, karta, mini workshop a checklist.
