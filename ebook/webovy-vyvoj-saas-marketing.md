@@ -2574,6 +2574,155 @@ První běžné review má být konec mimořádnosti. Pokud pravidlo drží, nec
 
 Když review skončí jen krátkou servisní poznámkou, napište ji rovnou k místu, kde pravidlo běžně používáte. Nevytvářejte samostatný projekt, pokud se nemění rozhodnutí, vlastník ani datová stopa. Smyslem poznámky je odstranit drobné tření, ne dát staré opravě nový životopis.
 
+## Jak uzavřít servisní poznámku po prvním běžném review
+
+Servisní poznámka je nejmenší možná reakce na drobné tření. Pravidlo drží, první běžné review neukázalo návratový signál, ale jedno místo potřebuje drobnou úpravu: zkrátit větu, opravit odkaz, doplnit pole pro další krok, odstranit starý komentář nebo přesunout poznámku blíž k šabloně. Pokud se servisní poznámka neuzavře rychle, začne se tvářit jako nový úkol. A nový úkol začne nenápadně tahat historii, rozsah i datovou stopu zpět do práce.
+
+Servisní poznámku proto neberte jako malý backlog. Berte ji jako úklid po běžném review. Má mít jedno místo, jednu změnu, jedno ověření a konec. Jakmile potřebuje víc míst, více vlastníků nebo novou definici hotovo, už to není servisní poznámka, ale nová pracovní otázka.
+
+Začněte krátkým zápisem:
+
+```text
+Pravidlo drží:
+
+Servisní tření:
+
+Jedno místo opravy:
+
+Konkrétní úprava:
+
+Co znovu neotevíráme:
+
+Jaká data kvůli tomu nesbíráme:
+```
+
+Příklad:
+
+```text
+Pravidlo drží:
+Při kvalifikaci leadu používáme rozhodovací horizont, problém a očekávaný výsledek.
+
+Servisní tření:
+V šabloně chybí místo pro domluvený další krok po prvním hovoru.
+
+Jedno místo opravy:
+Obchodní discovery šablona.
+
+Konkrétní úprava:
+Doplníme řádek "další domluvený krok" pod výsledek hovoru.
+
+Co znovu neotevíráme:
+Neotevíráme lead scoring, nová CRM pole ani automatické obohacování kontaktů.
+
+Jaká data kvůli tomu nesbíráme:
+Nevzniká nové pole pro velikost firmy, rozpočet ani interní skóre leadu.
+```
+
+Tento zápis je malý záměrně. Servisní poznámka nemá znovu dokazovat celé pravidlo. Má odstranit tření, které brání jeho běžnému použití.
+
+### Tři hranice servisní poznámky
+
+Servisní poznámka se drží pohromadě díky třem hranicím:
+
+- Hranice místa: opravuje se jedno pracovní místo, ne celý proces.
+- Hranice rozhodnutí: původní pravidlo zůstává platné, pokud se neobjevil návratový signál.
+- Hranice dat: kvůli opravě nevzniká nový sběr, export, tracker ani dodavatelský tok.
+
+Když některá hranice praskne, zastavte se. Pokud se ukáže druhé místo se stejnou chybou, možná máte širší vzor. Pokud někdo chce kvůli servisní poznámce přidat nový údaj, možná se vrací starý návrh jinými dveřmi. Pokud se začne debatovat o tom, jestli pravidlo vůbec platí, už nejste u servisní poznámky, ale u návratového signálu nebo nové otázky.
+
+Praktická kontrola:
+
+```text
+Můžeme tuto opravu udělat bez změny pravidla, bez nového datového toku a bez nové schůzky?
+```
+
+Pokud ano, udělejte ji a zavřete. Pokud ne, pojmenujte nový stav a nepředstírejte, že jde pořád o drobnost.
+
+### Jak poznat, že oprava stačila
+
+Servisní poznámku ověřte při nejbližším běžném použití stejného místa. Nezakládejte kvůli tomu zvláštní audit. Stačí se podívat, jestli člověk při práci narazil na opravenou verzi a jestli ho už netáhla zpět ke starému tření.
+
+Tři možné výsledky:
+
+- Stačilo: opravené místo vedlo člověka správně a pravidlo zůstává v běžném rytmu.
+- Nedotažené: stejné místo pořád mate, takže se opraví ještě jednou s jasnou stop podmínkou.
+- Širší vzor: stejné tření se ukázalo v dalším pracovním místě a je potřeba otevřít novou otázku.
+
+U stavu `stačilo` neplánujte další kontrolu jen pro jistotu. To by servisní poznámku změnilo ve skrytou mimořádnou péči. U stavu `nedotažené` opravte stejné místo, ale napište hranici: pokud se problém vrátí i po další opravě, už nejde o servis. U stavu `širší vzor` nepokračujte tichým přepisováním dalších míst. Otevřete novou kartu s otázkou, kde všude pravidlo nemá dobrý domov nebo kde se stará stopa opakuje.
+
+### Privacy-first uzavření
+
+Servisní poznámka má být datově lehká. Její ideální výsledek je opravené pracovní místo a žádná nová stopa navíc. Pokud kvůli ověření vznikla dočasná poznámka, screenshot, kopie šablony nebo komentář v chatu, po uzavření ji smažte, zkraťte nebo převeďte do kanonického místa.
+
+Do uzavření napište jednu větu:
+
+```text
+Díky servisní opravě dál nesbíráme:
+```
+
+Příklad:
+
+```text
+Díky servisní opravě dál nesbíráme velikost firmy ani automatické skóre leadu. Oprava pouze doplnila místo pro další krok v existující discovery šabloně.
+```
+
+Tato věta chrání servisní opravu před přerodem v nový měřicí plán. Pokud oprava opravdu jen zlepšuje použitelnost pravidla, nemá zvyšovat množství dat. Když data přibývají, musí být vidět proč a musí existovat samostatné rozhodnutí.
+
+### Karta uzavření servisní poznámky
+
+```text
+Pravidlo:
+
+Běžné review ukázalo:
+
+Servisní poznámka:
+
+Jedno opravené místo:
+
+Konkrétní změna:
+
+Ověření při dalším použití:
+
+Výsledek:
+- stačilo / nedotažené / širší vzor
+
+Co znovu neotevíráme:
+
+Co uklízíme:
+
+Jaká data dál nesbíráme:
+
+Návrat do běžného rytmu:
+- ano / po jedné opravě / ne, otevíráme novou otázku
+```
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: přečtěte platné pravidlo a výsledek běžného review.
+2. Minuta 2: pojmenujte jedno servisní tření.
+3. Minuta 3: vyberte jedno pracovní místo opravy.
+4. Minuta 4: napište konkrétní úpravu a co znovu neotevíráte.
+5. Minuta 5: zapište privacy-first hranici.
+6. Minuta 6: určete nejbližší běžné použití pro ověření.
+7. Minuta 7: rozhodněte, kdy se poznámka zavře.
+
+Pokud se během sedmi minut objeví víc než jedno místo opravy, neprodlužujte workshop. Zapište servisní poznámku jako širší vzor a otevřete novou otázku. Krátké servisní okno není místo pro tichý audit.
+
+### Checklist servisní poznámky
+
+- Navazuje poznámka na pravidlo, které při review drželo?
+- Opravuje jedno konkrétní pracovní místo?
+- Je jasné, jaká změna se provede?
+- Zůstává původní pravidlo platné?
+- Je zapsané, co znovu neotevíráme?
+- Nevzniká nový údaj, export, tracker, dashboard ani dodavatel?
+- Ověří se oprava při nejbližším běžném použití?
+- Umíme rozlišit stav stačilo, nedotažené a širší vzor?
+- Uklidíme dočasné poznámky nebo kopie po uzavření?
+- Vrací se pravidlo po opravě do běžného rytmu bez zvláštní péče?
+
+Dobře uzavřená servisní poznámka má skoro zmizet. Ne proto, že by nebyla důležitá, ale proto, že udělala přesně svou práci: odstranila malé tření, nezvětšila rozsah, nepřidala data a nechala pravidlo dál fungovat jako běžnou součást provozu.
+
 Praktický filtr na výběr jedné kapitoly:
 
 1. Kdybychom vyřešili jen tuto věc, co se zlepší pro zákazníka?
@@ -238110,3 +238259,4 @@ Druhá běžná kontrola je dobrá právě tím, že se nesnaží být zajímav�
 - 2026-06-19: Doplněna úvodní podkapitola o uzavření návratu k výřezu po delším klidu: čtyři uzavírací stavy, praktický příklad, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-19: Doplněna úvodní podkapitola o prvním běžném review po návratu pravidla do rytmu: kontrolní body, stavy review, privacy-first datová střídmost, karta, mini workshop a checklist.
 - 2026-06-20: Doplněna krátká úvodní poznámka k servisní poznámce po prvním běžném review, aby drobné dočištění zůstalo lokální.
+- 2026-06-21: Doplněna úvodní podkapitola o uzavření servisní poznámky po prvním běžném review: hranice opravy, ověření při dalším použití, privacy-first uzavření, karta, mini workshop a checklist.
