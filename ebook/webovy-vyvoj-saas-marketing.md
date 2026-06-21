@@ -239890,8 +239890,203 @@ Pokud se během workshopu objeví chuť standard přepsat, zeptejte se: "Nastal 
 
 První periodická kontrola je test dospělosti standardu. Pokud drží, nechte ho držet. Pokud potřebuje drobný úklid, udělejte ho lokálně. Pokud se objeví návratový signál, otevřete novou smyčku poctivě a s malým rozsahem. Nejhorší výsledek je nenápadný mezistav: standard prý zůstává v klidu, ale tým kolem něj znovu nosí židličku, deku a termosku s kávou. Takový klid není klid. Je to hlídka v převleku.
 
+## Uzavření první periodické kontroly standardu
+
+První periodická kontrola má smysl jen tehdy, když se po ní standard opravdu vrátí do správného stavu. Nestačí říct "zkontrolováno". Tým musí vědět, jestli klid pokračuje, jestli se udělalo jedno lokální dočištění, jestli se slabý signál jen zapisuje pro příští rytmus, nebo jestli už nastal skutečný návrat a začíná nová smyčka.
+
+Uzavření kontroly je krátké rozhodnutí, ne další revize. Právě tady se často nenápadně rozjede práce navíc: někdo při kontrole uvidí lepší formulaci, jiný si vzpomene na starou výjimku a třetí navrhne přidat měření, aby "bylo jasno". Jasno ale nevzniká tím, že kolem klidného standardu přidáte další světla. Vzniká tím, že vyberete jeden výsledek a podle něj uklidíte pracovní stopu.
+
+Začněte čtyřmi řádky:
+
+```text
+Kontrolovaný standard:
+
+Výsledek periodické kontroly:
+
+Rozhodnutí:
+
+Co po kontrole nevzniká:
+```
+
+Poslední řádek je důležitý. Uzavření nemá jen říct, co se stalo. Má také říct, co se z kontroly nestává: nová servisní větev, ruční dohled, další export, nové sledování, úprava pravidla bez návratového signálu nebo neformální úkol pro člověka, který byl zrovna po ruce. Jinak se první periodická kontrola tváří jako lehká rutina, ale za sebou nechá další drobnou povinnost. A drobné povinnosti jsou v týmu jako šroubky v kapse: jednotlivě nic, dohromady divný hluk při každém kroku.
+
+Praktický příklad:
+
+```text
+Kontrolovaný standard:
+Archivní šablona má první řádek s odkazem na aktuální zdroj pravdy.
+
+Výsledek periodické kontroly:
+Klid potvrzen. Standard je v indexu, byl použit bez dotazu na původního autora a návratový signál nenastal.
+
+Rozhodnutí:
+Standard zůstává v dlouhodobém klidu a další kontrola proběhne jen v běžném měsíčním rytmu.
+
+Co po kontrole nevzniká:
+Nevzniká zvláštní připomínka, nová tabulka použití, přepis standardu ani dodatečné sledování lidí, kteří šablonu otevřeli.
+
+Privacy-first závěr:
+Do provozní paměti stačí zobecněná věta o použití bez dotazu. Konkrétní jména, screenshoty a odkazy na interní dokumenty neukládáme.
+```
+
+Takové uzavření je možná méně dramatické než "pojďme to ještě vylepšit", ale přesně proto funguje. Kontrola potvrdila klid a klid má pokračovat. Když z každého potvrzení uděláte další zlepšování, tým se naučí, že nic nikdy není hotové. To je spolehlivý způsob, jak z produktivity vyrobit únavu s hezkým názvem.
+
+### Čtyři uzavírací stavy
+
+Po první periodické kontrole vyberte jeden ze čtyř uzavíracích stavů:
+
+- Potvrzený klid: standard drží, návratový signál nenastal a nic se nemění.
+- Zavřené lokální dočištění: jedna drobná oprava byla provedena a nemění logiku standardu.
+- Zapsaný slabý signál: opakované tření ještě neotevírá standard, ale má jasnou hranici pro příští kontrolu.
+- Otevřený skutečný návrat: návratový signál nastal a vzniká nová, malá smyčka mimo periodickou kontrolu.
+
+Stav `potvrzený klid` má být nejkratší. Napište jednu větu a skončete. Nepřidávejte další kontrolní bod jen proto, že je příjemné mít pocit dozoru. Pokud standard funguje, další péče se má odehrát v existujícím rytmu.
+
+Stav `zavřené lokální dočištění` použijte jen tehdy, když je oprava hotová během uzavření a vejde se do jednoho pracovního místa. Typicky jde o odkaz, název, duplicitní kopii, starou poznámku nebo chybějící položku v indexu. Pokud oprava mění rozhodovací pravidlo, už to není dočištění.
+
+Stav `zapsaný slabý signál` je mezistav s brzdou. Zapište pozorování a hranici pro skutečný návrat, ale nezačínejte novou práci. Například: "Dvakrát se objevil dotaz na umístění standardu; skutečný návrat nastane, pokud se dotaz zopakuje při další kontrole nebo pokud standard nebude nalezen z pracovního místa." Slabý signál bez hranice je jen povolení být nervózní.
+
+Stav `otevřený skutečný návrat` ukončuje periodickou kontrolu. Od této chvíle už nejde o kontrolu klidu, ale o novou smyčku. Zapište novou otázku, nejbližší pracovní místo, nejmenší důkaz a privacy-first hranici. Nepřepisujte standard bokem, protože zrovna "máte otevřeno". To je přesně moment, kdy vznikají opravy bez kontextu.
+
+### Lokální dočištění bez nové větve
+
+Lokální dočištění po periodické kontrole má splnit tři podmínky:
+
+- Nemění rozhodovací logiku standardu.
+- Bydlí na jednom konkrétním místě.
+- Po provedení nepotřebuje zvláštní ověřovací režim.
+
+Příklad dobrého dočištění:
+
+```text
+Problém:
+Standard je správný, ale v indexu má starý název.
+
+Dočištění:
+Přejmenovat položku v indexu, aby odpovídala kanonickému názvu.
+
+Uzavření:
+Index ukazuje na správné místo. Standard zůstává v dlouhodobém klidu.
+```
+
+Příklad, který už není dočištění:
+
+```text
+Problém:
+Lidé nevědí, kdy použít archivní šablonu a kdy aktuální zdroj pravdy.
+
+Není to dočištění:
+Přepsat rozhodovací pravidlo při periodické kontrole.
+
+Správný další krok:
+Otevřít skutečný návrat se samostatnou otázkou: "Kde má člověk poznat hranici mezi archivní šablonou a aktuálním zdrojem pravdy?"
+```
+
+Rozdíl je v dopadu. První případ opravuje navigaci ke standardu. Druhý případ mění schopnost standard použít. To už si zaslouží vlastní malou smyčku, jinak tým schová skutečnou změnu pod nenápadné "jen jsme to při kontrole upravili".
+
+### Privacy-first uzavření kontroly
+
+Uzavření periodické kontroly má odstranit datovou chuť sbírat důkazy pro jistotu. U každého zápisu se zeptejte:
+
+```text
+Potřebujeme tento detail pro budoucí použití standardu, nebo jen pro pocit, že kontrola byla důkladná?
+```
+
+Provozní paměť obvykle potřebuje výsledek, ne detailní stopu. Stačí:
+
+```text
+Standard byl v běžném rytmu nalezen a použit bez dotazu. Návratový signál nenastal.
+```
+
+Není potřeba:
+
+```text
+Kdo přesně standard otevřel, kdy ho otevřel, v jakém interním dokumentu pracoval, screenshot jeho obrazovky, kopie komentáře z chatu a ruční tabulka dalších použití.
+```
+
+Výjimku udělejte jen pro zdroj pravdy nebo anonymizovaný vzor, který přímo pomáhá standard použít. I tam držte rozsah malý. Privacy-first uzavření není snaha všechno zahodit. Je to rozhodnutí nenechat po malé kontrole větší datový stín, než kontrola potřebuje.
+
+Codyho komentář: když kontrola standardu vyrobí víc záznamů než samotný standard, někde se vám proces převlékl za archiváře. Archivář je užitečný člověk, ale nemá sedět v každé produktové židli.
+
+### Karta uzavření první periodické kontroly
+
+```text
+Standard:
+
+Kanonické místo:
+
+Periodický rytmus:
+
+Výsledek kontroly:
+- potvrzený klid
+- zavřené lokální dočištění
+- zapsaný slabý signál
+- otevřený skutečný návrat
+
+Rozhodnutí jednou větou:
+
+Pokud je potvrzený klid:
+Co zůstává beze změny:
+Kdy se standard znovu objeví v běžném rytmu:
+
+Pokud je zavřené lokální dočištění:
+Jedno pracovní místo:
+Hotová oprava:
+Proč nemění logiku standardu:
+
+Pokud je zapsaný slabý signál:
+Pozorování:
+Hranice pro skutečný návrat:
+Co zatím neděláme:
+
+Pokud je otevřený skutečný návrat:
+Nová otázka:
+Nejbližší pracovní místo:
+Nejmenší důkaz:
+Privacy-first hranice nové smyčky:
+
+Co po kontrole nevzniká:
+
+Privacy-first závěr:
+Zobecněný zápis, který stačí:
+Detaily, které neukládáme:
+
+Vlastník:
+
+Další běžný rytmus:
+```
+
+Karta má být závěrečný zápis, ne nový pracovní prostor. Pokud při jejím vyplňování vzniká hodně textu, je to signál, že periodická kontrola už odhalila návrat. V takovém případě kartu zavřete stavem `otevřený skutečný návrat` a pokračujte v nové smyčce s menším rozsahem.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte výsledek periodické kontroly a původní návratový signál.
+2. Minuta 2: vyberte jeden ze čtyř uzavíracích stavů.
+3. Minuta 3: napište rozhodnutí jednou větou.
+4. Minuta 4: určete, co po kontrole nevzniká.
+5. Minuta 5: zapište privacy-first závěr.
+6. Minuta 6: potvrďte další běžný rytmus nebo otevření nové smyčky.
+
+Pokud se tým neshodne na stavu, nehlasujte o pocitu. Vraťte se k návratovému signálu. Buď nastal, nenastal, nebo máte slabý signál s hranicí pro příště. Tři možnosti stačí. Všechno ostatní je většinou chuť něco dělat, protože kontrola připomněla staré téma.
+
+### Checklist uzavření první periodické kontroly
+
+- Vybrali jsme jeden uzavírací stav?
+- Je rozhodnutí napsané jednou větou?
+- Pokud je klid potvrzen, nevznikla žádná nová zvláštní kontrola?
+- Pokud proběhlo lokální dočištění, zůstalo na jednom pracovním místě?
+- Pokud máme slabý signál, má jasnou hranici pro skutečný návrat?
+- Pokud nastal skutečný návrat, otevřeli jsme samostatnou malou smyčku?
+- Napsali jsme, co po kontrole výslovně nevzniká?
+- Ukládáme jen zobecněný důkaz potřebný pro provozní paměť?
+- Neuchováváme jména, screenshoty, chaty, exporty ani interní odkazy bez aktivního účelu?
+- Vrací se standard do běžného rytmu, nebo je poctivě vyňat do nové smyčky?
+
+Uzavření první periodické kontroly chrání dlouhodobý klid před drobným bobtnáním. Standard buď dál funguje, dostane jednu lokální opravu, počká se slabým signálem, nebo se otevře jako nové téma. Všechny čtyři výsledky jsou v pořádku. Špatný je jen pátý, nepojmenovaný: něco jsme zkontrolovali, něco si poznamenali, něco možná příště uděláme a nikdo přesně neví, jestli standard pořád spí, nebo už zase pracuje přesčas.
+
 ## Pracovní log
 
+- 2026-06-21: Doplněna úvodní podkapitola o uzavření první periodické kontroly standardu: čtyři uzavírací stavy, lokální dočištění, slabý signál, privacy-first uzavření, karta, mini workshop a checklist.
 - 2026-06-21: Doplněna úvodní podkapitola o první periodické kontrole standardu v dlouhodobém klidu: ověření kanonického místa, použití bez čerstvé paměti, rozlišení slabého a skutečného návratového signálu, privacy-first zápis, karta, mini workshop a checklist.
 - 2026-06-21: Doplněna úvodní podkapitola o návratu standardu do dlouhodobého klidu: kanonické místo, pracovní kotva, návratový signál, úklid servisního lešení, privacy-first klid, karta, mini workshop a checklist.
 - 2026-06-21: Doplněna úvodní podkapitola o uzavření druhé běžné revize po předání standardu: čtyři uzavírací stavy, lokální oprava, přepis návratového signálu, samostatná smyčka, privacy-first uzavření, karta, mini workshop a checklist.
