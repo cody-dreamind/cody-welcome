@@ -236834,8 +236834,169 @@ Když se workshop začne větvit do nových nápadů, vraťte se k otázce: "Co 
 
 Uzavření první běžné kontroly má udělat hlavně jednu věc: zabránit tomu, aby se klid proměnil v nekonečnou péči. Když systém funguje, nechte ho fungovat. Když nefunguje, opravte přesně tu část, která selhala. Všechno ostatní je jen hezky oblečená prokrastinace s vlastní kartičkou.
 
+## Druhá běžná kontrola v delším klidovém rytmu
+
+Druhá běžná kontrola je test, jestli se pravidlo opravdu odstěhovalo z mimořádné péče do normálního provozu. První kontrola často ještě nese čerstvou paměť poslední opravy. Lidé si pamatují, proč vznikla, kde se o ní mluvilo a kdo ji dotahoval. Druhá kontrola už má být obyčejnější: pravidlo by mělo být najitelné, použitelné a rozhodnutelné bez toho, aby někdo vytahoval servisní historii.
+
+Nezačínejte otázkou, jestli by šlo pravidlo zase vylepšit. Šlo. Skoro vždycky jde něco vylepšit. Správná otázka druhé kontroly zní:
+
+```text
+Funguje pracovní místo samo i bez čerstvé paměti poslední opravy?
+```
+
+Pokud odpověď zní ano, další práce není potřeba. Pokud odpověď zní ne, nejdřív zjistěte, která část selhala: cesta k pravidlu, samotné znění pravidla, nebo návratový signál. Teprve potom vybírejte zásah. Druhá kontrola nemá být tajný restart celého tématu. Má ověřit, že klid drží i po další běžné obrátce.
+
+Praktický příklad:
+
+```text
+Pracovní místo:
+Rozcestník obchodních šablon.
+
+Delší klidový rytmus:
+Kvartální review sales materiálů.
+
+První běžná kontrola:
+Šablona byla najitelná a použitelná, jen se doplnil přímý odkaz v rozcestníku.
+
+Druhá běžná kontrola:
+Nový člen týmu použil šablonu z rozcestníku bez dotazu na autora původní opravy. Návratový signál nenastal.
+
+Rozhodnutí:
+Pravidlo zůstává v běžném kvartálním review. Servisní větev se neotevírá a staré podklady zůstávají zavřené.
+```
+
+Všimněte si, že výsledek neobsahuje nový plán. To je dobře. Druhá kontrola má často skončit nudnou větou, že systém funguje. Nuda je tady známka zdraví, ne nedostatku ambice.
+
+### Tři věci, které druhá kontrola ověřuje
+
+Druhou běžnou kontrolu držte u tří vrstev:
+
+- Samostatnost: člověk umí pravidlo použít bez vysvětlování staré opravy.
+- Přenositelnost: pravidlo funguje i pro někoho, kdo nebyl u původního rozhodnutí.
+- Klid: návratový signál nenastal a kolem pravidla nevzniká skrytá mimořádná péče.
+
+Samostatnost ověříte jednoduchou otázkou: musel někdo hledat starý komentář, autora opravy, screenshot nebo konverzaci? Pokud ano, pravidlo možná není dost samostatné, i když se nakonec použilo správně.
+
+Přenositelnost ověřte přes běžnou roli, ne přes autora. Pokud pravidlo umí použít jen člověk, který ho psal, není to pravidlo. Je to poznámka s lepším sebevědomím.
+
+Klid ověřte podle toho, jestli kolem pravidla nevznikají malé pomocné berličky: extra připomínka v chatu, ruční kontrola navíc, neoficiální kopie v dokumentu, dočasný export nebo další mini checklist. Pokud tyto věci vznikají, druhá kontrola má pojmenovat slabé místo, ne tvářit se, že klid drží.
+
+### Čtyři výsledky druhé kontroly
+
+Po druhé kontrole vyberte jeden ze čtyř výsledků:
+
+- Klid potvrzen: pravidlo funguje bez čerstvé paměti a zůstává v běžném rytmu.
+- Slabá cesta: pravidlo je dobré, ale lidé ho pořád hledají přes starou stopu nebo vedlejší místo.
+- Slabé pravidlo: cesta je jasná, ale znění pravidla neumí vést běžné rozhodnutí.
+- Skrytá péče: formálně je pravidlo v klidu, ale někdo ho pořád podpírá ručně.
+
+Výsledek `klid potvrzen` uzavřete jednou větou v běžném logu. Nepřidávejte další kontrolu jen proto, že dvě kontroly dopadly dobře. To by byl zvláštní druh odměny: systém funguje, tak mu přidáme práci.
+
+Výsledek `slabá cesta` řešte navigací. Opravte odkaz, název, rozcestník nebo starou kopii. Neměňte pravidlo jen proto, že k němu lidé chodí špatnými dveřmi.
+
+Výsledek `slabé pravidlo` řešte v kanonickém místě. Věta pravidla má říct, kdy ho použít, jaké rozhodnutí vede a co zůstává mimo rozsah. Pokud musí člověk hledat historický důvod, pravidlo ještě není hotové pro běžnou práci.
+
+Výsledek `skrytá péče` berte vážně. Někdo možná pravidlo zachraňuje ručně a systém jen vypadá stabilně. V takovém případě nezakládejte hned novou velkou iteraci. Nejdřív napište, jaká skrytá pomoc probíhá a které jedno pracovní místo ji má nahradit.
+
+### Privacy-first kontrola
+
+Druhá běžná kontrola nesmí znovu vytáhnout staré důkazy jen ze zvědavosti. Pokud klid drží, stačí obecný závěr. Nepřikládejte staré poptávky, screenshoty, exporty, přepisy hovorů ani interní zprávy. Tyto stopy už splnily svůj účel při původní opravě.
+
+Použijte krátkou brzdu:
+
+```text
+Pro druhou kontrolu nám stačí:
+
+Znovu neotevíráme:
+
+Nově nesbíráme:
+```
+
+Příklad:
+
+```text
+Pro druhou kontrolu nám stačí:
+Záznam, že šablona byla použita v běžném kvartálním review bez dotazu na autora.
+
+Znovu neotevíráme:
+Starý servisní komentář, původní screenshoty ani export poptávek.
+
+Nově nesbíráme:
+Měření používání šablony po lidech, další formulářové pole ani nový interní dashboard.
+```
+
+Tato brzda je malá, ale praktická. Chrání tým před tím, aby z kontroly klidu udělal nový sběr dat. Privacy-first provoz se pozná i podle toho, že umí pracovat s dostatečně malým důkazem.
+
+### Karta druhé běžné kontroly
+
+```text
+Pracovní místo:
+
+Běžný rytmus:
+
+Co potvrdila první běžná kontrola:
+
+Druhá běžná kontrola:
+
+Výsledek:
+- klid potvrzen
+- slabá cesta
+- slabé pravidlo
+- skrytá péče
+
+Rozhodnutí jednou větou:
+
+Co se případně opraví:
+
+Co zůstává zavřené:
+
+Privacy-first hranice:
+Jaký obecný důkaz stačí, co znovu neotevíráme a co nově nesbíráme:
+
+Vlastník:
+
+Další běžný rytmus nebo návratový signál:
+```
+
+Kartu vyplňujte celou jen tehdy, když druhá kontrola najde slabinu. Pokud je výsledek `klid potvrzen`, stačí log:
+
+```text
+Druhá běžná kontrola potvrdila, že pravidlo funguje bez čerstvé servisní paměti; zůstává v běžném rytmu a staré podklady se neotevírají.
+```
+
+Takový záznam je krátký, ale budoucímu týmu řekne všechno podstatné: pravidlo přežilo další běžné použití, není potřeba mimořádná péče a staré důkazy nemají znovu vstupovat do práce.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte výsledek první běžné kontroly.
+2. Minuta 2: ověřte, jestli pravidlo někdo použil bez čerstvé servisní paměti.
+3. Minuta 3: vyberte jeden ze čtyř výsledků druhé kontroly.
+4. Minuta 4: napište rozhodnutí jednou větou.
+5. Minuta 5: určete, co zůstává zavřené.
+6. Minuta 6: zapište privacy-first hranici.
+
+Když se v šesté minutě ukáže, že tým chce otevřít staré podklady, zastavte se a zeptejte se, jaké rozhodnutí bez nich nejde udělat. Pokud žádné, staré podklady nechte zavřené. Kontrola klidu nemá být archeologie.
+
+### Checklist druhé běžné kontroly
+
+- Víme, co přesně potvrdila první běžná kontrola?
+- Ověřili jsme samostatnost pravidla bez čerstvé servisní paměti?
+- Ověřili jsme přenositelnost pro člověka, který nebyl u původní opravy?
+- Zkontrolovali jsme, že nevzniká skrytá mimořádná péče?
+- Vybrali jsme jeden ze čtyř výsledků?
+- Pokud je slabá cesta, opravujeme navigaci místo pravidla?
+- Pokud je slabé pravidlo, opravujeme kanonické znění místo starých komentářů?
+- Pokud je skrytá péče, pojmenovali jsme jedno pracovní místo, které ji má nahradit?
+- Pokud klid drží, nepřidáváme další zvláštní kontrolu?
+- Zapsali jsme, co zůstává zavřené?
+- Stačí nám obecný důkaz bez osobních údajů, exportů a screenshotů?
+- Nezavádíme nové měření jen kvůli kontrole klidu?
+
+Druhá běžná kontrola je dobrá právě tím, že se nesnaží být zajímavá. Má potvrdit, že pravidlo už nepotřebuje zvláštní péči, nebo přesně pojmenovat jedno slabé místo. Když se z ní stane nový rozbor historie, klid ještě nedozrál. Když skončí krátkou větou v logu, možná právě udělala svou práci nejlépe.
+
 ## Pracovní log
 
+- 2026-06-21: Doplněna úvodní podkapitola o druhé běžné kontrole v delším klidovém rytmu: samostatnost bez čerstvé servisní paměti, čtyři výsledky kontroly, privacy-first hranice, karta, mini workshop a checklist.
 - 2026-06-20: Doplněna úvodní podkapitola o uzavření první běžné kontroly v delším klidovém rytmu: čtyři uzavírací stavy, propsání do běžného rytmu, privacy-first uzavření, karta, mini workshop a checklist.
 - 2026-06-20: Doplněna úvodní podkapitola o první běžné kontrole v delším klidovém rytmu: ověření kanonického místa bez servisní historie, čtyři výsledky kontroly, privacy-first zápis, karta, mini workshop a checklist.
 - 2026-06-20: Doplněna úvodní podkapitola o delším klidovém rytmu po měsíční kontrole servisní větve: převod do existujícího revizního rytmu, návratový signál bez servisní historie, privacy-first úklid, karta, mini workshop a checklist.
