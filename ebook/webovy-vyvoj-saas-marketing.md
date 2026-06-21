@@ -237807,8 +237807,178 @@ Když se tým během workshopu začne vracet k tomu, proč problém kdysi vznikl
 
 Uzavření klidového období do standardu je dobrý konec dlouhé smyčky. Ne proto, že by bylo slavnostní, ale protože ubírá starou péči. Pravidlo už nepotřebuje doprovod, servisní poznámky ani mimořádné hlídání. Stačí mu dobré místo, krátké znění a jasný signál, který ho jednou případně vrátí na stůl.
 
+## První použití nového standardu v běžné práci
+
+Jakmile se pravidlo přepíše do běžného standardu, přichází malý, ale důležitý test: první použití bez zvláštního zacházení. Tým už nemá pracovat s pocitem, že sleduje čerstvě uzavřenou opravu. Má prostě udělat běžnou práci a standard má přitom pomoct přesně tak, jak slibuje.
+
+Tohle je jiný druh ověření než předchozí servisní kontroly. Neptáte se, jestli stará oprava ještě drží. Ptáte se, jestli člověk, který neřešil celou historii, dokáže podle nového standardu udělat dnešní úkol bez zbytečného vysvětlování, lovení kontextu a otevírání archivních poznámek.
+
+Začněte větou:
+
+```text
+Standard používáme v běžné práci. Neotevíráme servisní historii, pokud k tomu nepřišel návratový signál.
+```
+
+Tahle věta chrání dvě věci najednou. Chrání standard před tím, aby se kolem něj dál chodilo po špičkách. A chrání tým před tím, aby z prvního použití udělal nový audit. První běžné použití není generálka před premiérou. Premiéra už proběhla. Teď jde o normální provoz.
+
+### Tři otázky prvního použití
+
+Při prvním běžném použití sledujte jen tři otázky:
+
+- Najde člověk standard tam, kde ho při práci přirozeně hledá?
+- Rozhodne se podle něj bez čtení servisní historie?
+- Vznikne při použití menší datová stopa než při starém mimořádném režimu?
+
+První otázka je o domově pravidla. Pokud člověk standard najde jen proto, že mu někdo pošle přímý odkaz v chatu, domov pravidla pořád není dost dobrý. Standard musí být v pracovním místě: v šabloně, rozcestníku, checklistu, briefu, issue šabloně nebo provozní kartě, kde rozhodnutí opravdu vzniká.
+
+Druhá otázka je o samostatnosti. Standard, který potřebuje ústní dovysvětlení, ještě není standard. Možná je správný, ale není dost přenosný. Oprava pak nemá mířit do dalších kontrol, ale do znění jedné věty, názvu pole, odkazu na zdroj pravdy nebo příkladu správného vyplnění.
+
+Třetí otázka je privacy-first brzda. Po převodu do standardu má zmizet mimořádné sbírání důkazů. Pokud první běžné použití pořád vytváří screenshoty, kopie zákaznických zpráv, pomocné tabulky nebo extra kontrolní poznámky, servisní režim ve skutečnosti neskončil. Jen se přejmenoval, což je oblíbený trik procesů, které nechtějí jít domů.
+
+### Čtyři výsledky prvního použití
+
+Po prvním běžném použití vyberte jeden ze čtyř výsledků:
+
+- Standard drží: práce proběhla bez zvláštní pomoci a není potřeba nic měnit.
+- Chybí lokální orientace: pravidlo je správné, ale člověk ho hledal na špatném místě nebo pozdě.
+- Znění je moc historické: pravidlo pořád odkazuje na starý problém místo dnešní akce.
+- Objevil se návratový signál: použití ukázalo skutečný problém, který standard neumí pokrýt.
+
+Stav `standard drží` je nejlepší a zároveň nejméně dramatický. Zapište jednu větu do běžného logu a skončete. Nepřidávejte další ověření jen proto, že první použití dopadlo dobře. Úspěšný standard nepotřebuje oslavu ve formě nové kontrolní rutiny.
+
+Stav `chybí lokální orientace` řešte přes nejmenší možnou navigační opravu. Přidejte odkaz, přejmenujte sekci, doplňte stav dokumentu, upravte rozcestník. Neměňte samotné pravidlo, pokud problém byl jen v nalezení.
+
+Stav `znění je moc historické` znamená, že se do standardu dostal servisní jazyk. Opravte jednu větu do přítomného času. Například místo "po opravě kontrolujeme staré exporty" napište "pro nové rozhodnutí používáme jen aktuální agregovaný závěr; staré exporty zůstávají zavřené". To je menší, čistší a lidem to nevnucuje archeologii.
+
+Stav `objevil se návratový signál` používejte opatrně. Ne každý dotaz je návratový signál. Pokud někdo jen neví, kde standard najít, je to orientace. Pokud ale standard vede k chybnému rozhodnutí, nutí sbírat zbytečná data, nebo neřeší reálnou pracovní situaci, pak se standard vrací na stůl.
+
+### Praktický příklad
+
+```text
+Standard:
+Archivní šablona začíná stavem "Archiv, nepoužívat pro novou práci" a odkazem na aktuální zdroj pravdy.
+
+První běžné použití:
+Nový člen týmu připravuje obsahový brief a najde starou šablonu přes interní vyhledávání.
+
+Pozorování:
+Šablona má stav "Archiv" i odkaz na aktuální brief. Člověk použije aktuální zdroj pravdy bez dotazu.
+
+Výsledek:
+Standard drží.
+
+Zápis:
+První běžné použití archivní šablony proběhlo bez servisní pomoci. Standard zůstává v běžném rytmu.
+
+Co neděláme:
+Nevytváříme seznam všech budoucích použití archivních šablon.
+```
+
+Stejná situace by ale mohla dopadnout jinak:
+
+```text
+Pozorování:
+Člověk našel aktuální zdroj pravdy až po dotazu, protože archivní šablona byla ve vyhledávání výš než aktivní brief.
+
+Výsledek:
+Chybí lokální orientace.
+
+Nejmenší oprava:
+Upravit název archivní šablony na "Archiv - starý obsahový brief" a v rozcestníku přesunout aktuální brief nad archiv.
+
+Co neotevíráme:
+Nepřepisujeme celý standard archivace.
+```
+
+Rozdíl je důležitý. V obou případech se pracuje se stejným standardem. V prvním drží. Ve druhém potřebuje jen lepší cestu k použití. Ani jeden případ automaticky neznamená, že se má znovu otevřít celá servisní větev.
+
+### Privacy-first první použití
+
+První běžné použití nového standardu často láká ke sběru "pro jistotu". Tým chce vědět, jestli standard opravdu funguje, a tak si začne ukládat víc stop, než je potřeba. U privacy-first provozu je lepší opačný reflex: ověřit funkčnost s co nejmenší stopou.
+
+Praktické pravidlo:
+
+```text
+Pro první běžné použití stačí výsledek práce a jedna rozhodovací věta. Podklady nekopírujeme, pokud nejsou nezbytné pro opravu.
+```
+
+To znamená:
+
+- Nepřidávejte nové sledování používání standardu, pokud nemáte konkrétní rozhodovací otázku.
+- Nekopírujte zákaznické zprávy do kontrolního logu, když stačí zobecněné pozorování.
+- Neuchovávejte screenshoty pracovních míst jen proto, že první použití bylo první.
+- Pokud vznikne oprava, zapište důvod, ne celý datový materiál kolem něj.
+
+Codyho komentář: dobrý standard má po prvním použití působit trochu nudně. Člověk našel správné místo, udělal práci, nevznikla nová tabulka a nikdo nemusel vyprávět původní příběh. To není málo. To je přesně ten druh provozní kvality, který se nevyfotí hezky na slide, ale ušetří týmům roky drobného tření.
+
+### Karta prvního běžného použití standardu
+
+```text
+Standard:
+
+Kanonické místo:
+
+První běžná pracovní situace:
+
+Kdo standard použil:
+
+Musel znát servisní historii?
+- ne
+- trochu, chybí orientace
+- ano, znění není samostatné
+
+Výsledek:
+- standard drží
+- chybí lokální orientace
+- znění je moc historické
+- objevil se návratový signál
+
+Nejmenší případná oprava:
+
+Co výslovně neotevíráme:
+
+Privacy-first zápis:
+Jaký minimální důkaz stačí a co nekopírujeme:
+
+Rozhodnutí:
+
+Datum další běžné revize:
+```
+
+Kartu vyplňujte jen tehdy, když první použití přineslo poznatek. Pokud standard drží a běžný log už zachytil jednu větu, karta může zůstat prázdná. Formulář není odměna za dobrou práci.
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: pojmenujte standard a první běžnou pracovní situaci.
+2. Minuta 2: zkontrolujte, jestli byl standard nalezen v přirozeném pracovním místě.
+3. Minuta 3: ověřte, jestli šel použít bez servisní historie.
+4. Minuta 4: vyberte jeden ze čtyř výsledků.
+5. Minuta 5: pokud je potřeba oprava, zmenšete ji na nejbližší pracovní místo.
+6. Minuta 6: udělejte privacy-first záznam bez kopírování zbytečných podkladů.
+7. Minuta 7: potvrďte, co výslovně neotevíráte.
+
+Workshop se má zastavit u prvního rozhodnutí. Pokud během něj vzniknou tři další nápady, napište je bokem a vraťte se ke stop podmínce: ověřit první běžné použití standardu. Všechno ostatní je jiná práce.
+
+### Checklist prvního použití standardu
+
+- Použili jsme standard v běžné pracovní situaci, ne v dalším testovacím režimu?
+- Našel ho člověk v přirozeném pracovním místě?
+- Šel použít bez vysvětlení servisní historie?
+- Je znění v přítomném čase a vede dnešní akci?
+- Vybrali jsme jeden ze čtyř výsledků?
+- Pokud byla potřeba oprava, zůstala lokální?
+- Nerozšířili jsme standard jen proto, že byl čerstvý?
+- Nevzniklo nové sledování bez rozhodovací otázky?
+- Zapsali jsme jen minimální důkaz potřebný pro rozhodnutí?
+- Nekopírovali jsme osobní údaje nebo pracovní podklady bez účelu?
+- Potvrdili jsme, co výslovně neotevíráme?
+- Zůstává standard v běžném rytmu, pokud nepřišel skutečný návratový signál?
+
+První běžné použití nového standardu má být krátké, praktické a trochu přísné na rozsah. Když standard drží, nechte ho pracovat. Když drhne, opravte nejbližší místo. A když opravdu selže, vraťte na stůl jen tu část, která selhala. Zbytek smyčky už byl uzavřený, tak ho zbytečně nevytahujte zpátky na světlo.
+
 ## Pracovní log
 
+- 2026-06-21: Doplněna úvodní podkapitola o prvním použití nového standardu v běžné práci: tři otázky použití, čtyři výsledky, praktický příklad, privacy-first zápis, karta, mini workshop a checklist.
 - 2026-06-21: Doplněna úvodní podkapitola o uzavření klidového období do běžného standardu: tři možné konce, přepis do přítomného času, praktický příklad, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-21: Doplněna úvodní podkapitola o tom, co dělat, když delší klidový rytmus drží celé období: rozlišení klidu a neviditelnosti, povýšení pravidla na standard, archivace neaktuálních pravidel, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-21: Doplněna úvodní podkapitola o uzavření druhé běžné kontroly v delším klidovém rytmu: čtyři uzavírací stavy, stabilní klid bez další zvláštní péče, privacy-first uzavření, karta, mini workshop a checklist.
