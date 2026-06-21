@@ -240395,8 +240395,176 @@ Pokud se během workshopu objeví návrh na širší úpravu standardu, vraťte 
 
 Druhá periodická kontrola má potvrdit, že dlouhodobý klid není zapomenutí ani skrytý dohled. Buď standard dál běží jako obyčejné pravidlo, nebo se ukáže přesné místo, kde se klid začal tvářit lépe, než ve skutečnosti funguje. V obou případech je výstup malý: jedna věta, jedna lokální oprava, nebo jedna nová smyčka, pokud se opravdu změnil kontext.
 
+## Uzavření druhé periodické kontroly standardu
+
+Druhá periodická kontrola se má uzavřít ještě přísněji než první. V té první tým často teprve zjišťuje, jestli standard přežil přesun do dlouhodobého klidu. Ve druhé už jde o něco jemnějšího: jestli se z pravidla nestala položka, která sice formálně existuje, ale reálně potřebuje ruční připomínky, tiché opravy nebo čerstvou paměť lidí kolem.
+
+Uzavření proto nezačínejte otázkou "co ještě můžeme zlepšit". Začněte otázkou:
+
+```text
+Co druhá kontrola změnila na stavu standardu?
+```
+
+Odpověď musí být jedna ze čtyř možností: nic, navigaci, skrytou péči, nebo kontext. Pokud se do odpovědi nevejdete, kontrola pravděpodobně otevřela nové téma a nemá se uzavírat jako běžná periodická rutina.
+
+Krátký zápis může vypadat takto:
+
+```text
+Standard:
+Archivní šablona má první řádek s odkazem na aktuální zdroj pravdy.
+
+Výsledek druhé kontroly:
+Klid drží. Standard byl dostupný z pracovního místa a nevyžadoval ruční připomínku.
+
+Rozhodnutí:
+Standard zůstává v běžném periodickém rytmu bez nové zvláštní péče.
+
+Co po kontrole nevzniká:
+Nevzniká audit použití, nový tracker, připomínkovací tabulka ani přepis pravidla.
+
+Privacy-first závěr:
+Do logu ukládáme jen zobecněný závěr. Neuchováváme jména, screenshoty ani kopie interních komentářů.
+```
+
+Takový závěr není chudý. Je přesně tak velký, jak má být. Druhá kontrola potvrdila, že standard stojí na vlastních nohou, a tým mu nemusí držet kabát pokaždé, když se objeví v provozu.
+
+### Čtyři uzavírací stavy
+
+Po druhé periodické kontrole vyberte jeden uzavírací stav:
+
+- Klid potvrzen: standard je na správném místě, cesta k němu funguje a návratový signál nenastal.
+- Navigace dočištěna: standard je správný, ale bylo potřeba opravit cestu k němu.
+- Skrytá péče převedena do pravidla: kontrola našla ruční připomínání nebo boční evidenci a nejmenší oprava ji přesunula do zdroje pravdy.
+- Kontext otevřen jako nová smyčka: pracovní situace se změnila natolik, že nestačí lokální oprava ani přepis návratového signálu.
+
+Stav `klid potvrzen` uzavírejte nejkratší větou. Nepřidávejte další kontrolu jen proto, že kontrola dobře dopadla. Dobře dopadlá kontrola nemá vyrábět práci. Má potvrdit, že stávající rytmus stačí.
+
+Stav `navigace dočištěna` použijte, když problém nebyl v obsahu standardu, ale v cestě. Třeba špatný název v indexu, chybějící odkaz z pracovního checklistu nebo stará duplicita, která člověka posílá jinam. Uzavření má říct, co přesně se opravilo a proč to nemění pravidlo.
+
+Stav `skrytá péče převedena do pravidla` je citlivější. Pokud někdo standard pravidelně připomíná bokem, nepište do závěru "připomínat důsledněji". To jen legalizuje ruční práci navíc. Zeptejte se, co připomínka nahrazuje. Možná chybí věta ve šabloně, odkaz v indexu, vlastník v provozní kartě nebo hranice použití. Uzavření má přesunout tuhle oporu do pracovního místa.
+
+Stav `kontext otevřen jako nová smyčka` použijte, když se změnil způsob práce, publikum, nabídka, odpovědnost nebo zdroj pravdy. Periodická kontrola tím končí. Další práce už není dočištění standardu, ale nový malý průchod s vlastní otázkou, stop podmínkou a privacy-first hranicí.
+
+### Příklad s návratem skryté péče
+
+```text
+Standard:
+Při archivaci kampaně se do první poznámky přidává odkaz na aktuální zdroj pravdy.
+
+Co ukázala druhá kontrola:
+Standard je v indexu, ale marketing lead po každé archivaci ručně píše do chatu připomínku, aby tým nepoužil starou šablonu jako aktivní.
+
+Uzavírací stav:
+Skrytá péče převedena do pravidla.
+
+Rozhodnutí:
+Do archivní šablony doplňujeme první větu "Toto je archivní záznam, aktuální postup je zde: [odkaz]". Ruční připomínky v chatu končí.
+
+Co neotevíráme:
+Nepřepisujeme celý archivní proces, neděláme audit všech kampaní a nezavádíme sledování použití šablony.
+
+Privacy-first závěr:
+Neukládáme kopie chatů ani jména lidí, kteří připomínku potřebovali. Stačí zobecněný závěr, že pracovní kotva nebyla dost viditelná.
+```
+
+Tady se neřeší výkon lidí. Řeší se slabé pracovní místo. To je důležitý rozdíl. Privacy-first provoz chrání i tým: nesbírá detaily o tom, kdo si co nepamatoval, když stačí opravit místo, které paměť vyžadovalo.
+
+### Co po druhé kontrole výslovně nevzniká
+
+Každé uzavření druhé kontroly má obsahovat větu o tom, co nevzniká. Bez ní se kontrola snadno promění v drobné povinnosti okolo standardu.
+
+Typicky nevzniká:
+
+- nový dashboard používání standardu;
+- ruční tabulka lidí, kteří pravidlo otevřeli;
+- další mimořádná kontrola mimo existující rytmus;
+- kopie interních komentářů jako důkaz;
+- plošný audit všech podobných standardů;
+- nový nástroj jen kvůli jedné slabé navigaci.
+
+Pokud se něco takového zdá nutné, zkontrolujte, jestli už nejde o novou smyčku. Periodická kontrola má hlídat životnost standardu. Nemá se stát nenápadnou továrnou na dohled.
+
+### Karta uzavření druhé periodické kontroly
+
+```text
+Standard:
+
+Kanonické místo:
+
+Periodický rytmus:
+
+Výsledek první periodické kontroly:
+
+Výsledek druhé periodické kontroly:
+
+Uzavírací stav:
+- klid potvrzen
+- navigace dočištěna
+- skrytá péče převedena do pravidla
+- kontext otevřen jako nová smyčka
+
+Rozhodnutí jednou větou:
+
+Pokud je klid potvrzen:
+Co zůstává beze změny:
+Další běžný rytmus:
+
+Pokud je navigace dočištěna:
+Jedno opravené místo:
+Proč se nemění obsah standardu:
+
+Pokud byla skrytá péče převedena:
+Jaká ruční péče se objevila:
+Co přesně ji ve zdroji pravdy nahrazuje:
+
+Pokud se otevírá nová smyčka:
+Nová pracovní otázka:
+Nejbližší pracovní místo:
+Stop podmínka:
+
+Co po kontrole nevzniká:
+
+Privacy-first závěr:
+Zobecněný důkaz:
+Detaily, které neukládáme:
+
+Vlastník:
+
+Datum dalšího běžného rytmu nebo nové smyčky:
+```
+
+Karta má jednu práci: zabránit tomu, aby se druhá kontrola uzavřela mlhavě. Když je klid, napište klid. Když je lokální oprava, napište opravu. Když je skrytá péče, převeďte ji do pravidla. Když se změnil kontext, otevřete novou smyčku. Nepotřebujete pátý šuplík pro "uvidíme". Ten bývá plný práce, která nemá vlastníka.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte výsledek druhé periodické kontroly.
+2. Minuta 2: vyberte jeden ze čtyř uzavíracích stavů.
+3. Minuta 3: napište rozhodnutí jednou větou.
+4. Minuta 4: pokud je oprava potřeba, určete přesně jedno pracovní místo.
+5. Minuta 5: napište, co po kontrole nevzniká.
+6. Minuta 6: zapište privacy-first závěr a další rytmus.
+
+Když se tým během šesti minut nedohodne, nepokračujte delší debatou v rámci periodické kontroly. Zapište stav `kontext otevřen jako nová smyčka`, ale jen pokud umíte pojmenovat novou otázku. Pokud ji neumíte, uzavřete kontrolu jako slabý podnět bez akce a vraťte se k němu až při dalším skutečném signálu.
+
+### Checklist uzavření druhé kontroly
+
+- Vybrali jsme jeden uzavírací stav?
+- Je jasné, jestli se mění nic, navigace, skrytá péče, nebo kontext?
+- Pokud klid drží, nevzniká žádná nová zvláštní péče?
+- Pokud jsme opravili navigaci, neměníme obsah standardu bokem?
+- Pokud se vrátila skrytá péče, víme, co přesně nahrazovala?
+- Pokud se posunul kontext, otevíráme novou malou smyčku místo tichého přepisu?
+- Je rozhodnutí napsané jednou větou?
+- Je zapsané, co po kontrole nevzniká?
+- Stačí pro provozní paměť zobecněný důkaz?
+- Neukládáme jména, screenshoty, chaty, exporty ani interní odkazy bez aktivního účelu?
+- Vrací se standard do běžného rytmu, nebo má nová smyčka vlastní otázku a stop podmínku?
+
+Uzavření druhé periodické kontroly je malý test provozní dospělosti. Dobrý tým umí standard opravit, když je slabý. Ještě lepší tým ho umí nechat být, když funguje. A nejlepší tým pozná rozdíl bez toho, aby kolem každého klidného pravidla postavil nové lešení z připomínek, tabulek a preventivních kontrol.
+
 ## Pracovní log
 
+- 2026-06-21: Doplněna úvodní podkapitola o uzavření druhé periodické kontroly standardu: čtyři uzavírací stavy, práce se skrytou péčí, věta o tom, co po kontrole nevzniká, privacy-first závěr, karta, mini workshop a checklist.
 - 2026-06-21: Doplněna úvodní podkapitola o druhé periodické kontrole standardu v dlouhodobém klidu: ověření kanonického a pracovního místa, skrytá ruční péče, posun kontextu, privacy-first zápis, karta, mini workshop a checklist.
 - 2026-06-21: Doplněna úvodní podkapitola o uzavření první periodické kontroly standardu: čtyři uzavírací stavy, lokální dočištění, slabý signál, privacy-first uzavření, karta, mini workshop a checklist.
 - 2026-06-21: Doplněna úvodní podkapitola o první periodické kontrole standardu v dlouhodobém klidu: ověření kanonického místa, použití bez čerstvé paměti, rozlišení slabého a skutečného návratového signálu, privacy-first zápis, karta, mini workshop a checklist.
