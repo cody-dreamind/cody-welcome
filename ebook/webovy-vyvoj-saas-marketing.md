@@ -238533,8 +238533,212 @@ Pokud se workshop nevejde do šesti minut, nejspíš neuzavíráte druhé použi
 
 Uzavření druhého použití je chvíle, kdy standard přestává být novinka. Buď se stane obyčejnou součástí práce, nebo dostane malou přesnou opravu. Obojí je dobrý výsledek. Špatný výsledek je nechat kolem něj viset zvláštní pozornost jen proto, že je čerstvý. Čerstvost není důvod k trvalému hlídání. Důvodem je až signál z běžné práce.
 
+## Předání ověřeného standardu do běžného provozního rytmu
+
+Když standard projde druhým běžným použitím a uzavření neotevře novou smyčku, přichází nenápadně důležitý krok: předat ho do běžného provozního rytmu. Ne jako slavnostní novinku. Ne jako projekt s vlastním dohledem. Prostě jako pravidlo, které má odteď bydlet tam, kde lidé reálně pracují.
+
+Předání začněte větou:
+
+```text
+Standard je po dvou běžných použitích ověřený a přechází do běžného provozního rytmu bez zvláštní kontroly mimo návratový signál.
+```
+
+Tato věta je malá, ale praktická. Říká týmu, že už nemá kolem standardu chodit po špičkách. Zároveň neříká, že se standard nikdy nesmí změnit. Říká jen, že další změna musí přijít z běžné práce: z opakovaného tření, návratového signálu, pravidelné revize nebo změny kontextu. Ne z pocitu, že by se "ještě dalo něco vylepšit", protože ten pocit má v produktové práci doživotní permanentku.
+
+Praktický příklad:
+
+```text
+Standard:
+Archivní šablona má v názvu "Archiv" a první řádek odkazuje na aktuální zdroj pravdy.
+
+Ověření:
+Standard prošel dvěma běžnými použitími. Druhé použití nevyžadovalo vysvětlování historie.
+
+Předání:
+Standard zůstává v kanonickém indexu a kontroluje se v kvartálním review standardů.
+
+Návratový signál:
+Standard se znovu otevře, pokud se archivní šablona dvakrát za sebou použije jako aktuální zdroj pravdy.
+
+Co končí:
+Končí zvláštní sledování nového standardu a ruční dotazování po každém použití.
+```
+
+Všimněte si posledního řádku. Předání není hotové, dokud neskončí starý mimořádný režim. Pokud standard formálně převedete do provozu, ale někdo ho dál bokem sleduje, připomíná, kontroluje a vysvětluje, nevznikl standard. Vznikla závislost na člověku, který se tváří jako dokumentace.
+
+### Tři místa předání
+
+Ověřený standard potřebuje obvykle tři jednoduchá místa:
+
+- Kanonické místo: kde standard žije jako aktuální pravidlo.
+- Pracovní místo: kde člověk standard reálně použije při rozhodnutí.
+- Revizní rytmus: kdy se standard znovu kontroluje bez mimořádné agendy.
+
+Kanonické místo může být index standardů, playbook, rozhodovací šablona, provozní runbook nebo jiný zdroj pravdy. Důležité je, aby bylo jedno. Pokud standard existuje ve třech dokumentech, tým nebude používat standard, ale hádat verzi. To je oblíbený sport znalostních bází, ale špatný způsob provozu.
+
+Pracovní místo je konkrétnější. Je to formulář, šablona, checklist, pull request šablona, onboardingový krok, CRM pole, support makro nebo jiný bod, kde člověk stojí před rozhodnutím. Standard, který žije jen v indexu a není vidět v pracovním místě, je jako cedule v suterénu: technicky existuje, prakticky pomáhá jen lidem s baterkou a volným odpolednem.
+
+Revizní rytmus určuje, kdy se standard znovu otevře bez dramatu. Může to být měsíční obsahové review, kvartální audit standardů, release retrospektiva nebo roční provozní kontrola. Nepřidávejte nový rytmus, pokud už existuje vhodný. Cílem je standard začlenit, ne vyrobit další schůzku s názvem, který bude za měsíc v kalendáři vypadat podezřele.
+
+### Co odstranit po předání
+
+Předání do běžného provozu má i úklidovou část. Odstraňte nebo zavřete věci, které dávaly smysl jen během ověřování:
+
+- Dočasnou ověřovací kartu, pokud už její závěr žije v kanonickém místě.
+- Pomocné poznámky z prvního a druhého použití.
+- Duplicitní odkazy na starou verzi standardu.
+- Ruční připomínky v chatu nebo úkolech, které nahrazoval mimořádný dohled.
+- Surové podklady, pokud pro další provoz stačí zobecněný závěr.
+
+Nejčastější chyba je nechat všechny tyto věci "pro jistotu". Jenže jistota se tím nezvýší. Zvýší se počet míst, kde může někdo najít starou informaci a vzít ji vážně. Pokud standard drží, nepotřebuje kolem sebe muzeum vlastního vzniku.
+
+Dobrá úklidová věta zní:
+
+```text
+Z ověřování ponecháváme jen jednovětý závěr v kanonickém indexu; dočasné poznámky z prvních dvou použití nebudeme dál kopírovat ani používat jako provozní návod.
+```
+
+Tím nezahazujete zkušenost. Jen ji převádíte do tvaru, který má v provozu pracovat. Historie může zůstat v git logu, changelogu nebo původním rozhodovacím záznamu. Nemusí se nastěhovat do každé šablony jako příbuzný, který přijel na víkend a zůstal čtyři roky.
+
+### Praktický handoff týmu
+
+Předání týmu má být krátké. Nepotřebuje prezentaci, pokud nejde o standard s velkým dopadem. Stačí zpráva ve formátu:
+
+```text
+Standard:
+
+Kde je:
+
+Kde se používá:
+
+Co se změnilo v běžné práci:
+
+Kdy se znovu otevře:
+
+Co už nemusíme hlídat:
+```
+
+Příklad:
+
+```text
+Standard:
+Archivní šablony musí na prvním řádku odkazovat na aktuální zdroj pravdy.
+
+Kde je:
+Kanonický index týmových standardů, část "Obsahové a marketingové šablony".
+
+Kde se používá:
+Při úpravě starší kampaně, článku, case study nebo playbooku.
+
+Co se změnilo v běžné práci:
+Při otevření archivní šablony nejdřív kontrolujeme první řádek, ne datum v názvu.
+
+Kdy se znovu otevře:
+Při opakované záměně archivní šablony za aktuální zdroj pravdy.
+
+Co už nemusíme hlídat:
+Neděláme ruční kontrolu po každém použití standardu.
+```
+
+Takový handoff má jednu výhodu: člověk nemusí znát celou cestu, která ke standardu vedla. Dostane místo, použití, změnu, návratový signál a konec mimořádné péče. To je přesně ten rozsah, ve kterém standard může začít žít bez svého původního autora.
+
+### Privacy-first předání
+
+Při předání standardu často vzniká chuť přibalit příklady. Příklady jsou užitečné, ale musí být očištěné. Pokud standard vznikl z konkrétní zákaznické zprávy, interního incidentu, chatu nebo exportu, nepřenášejte původní stopu do běžné dokumentace. V běžném provozu většinou stačí pracovní vzor:
+
+```text
+Místo původní zprávy:
+"Zákazník nerozlišil archivní a aktuální šablonu."
+
+Místo screenshotu:
+"Odkaz na aktuální zdroj pravdy nebyl vidět v prvním rozhodovacím kroku."
+
+Místo exportu:
+"Ve dvou použitích vznikla stejná záměna názvu."
+```
+
+Privacy-first předání má dvě otázky:
+
+```text
+Co musí člověk vědět, aby standard správně použil?
+
+Který původní údaj k tomu už nepotřebuje?
+```
+
+Pokud druhá odpověď existuje, údaj do provozní dokumentace nepatří. Nejde o tajnůstkářství. Jde o obyčejnou hygienu: čím méně osobních, zákaznických nebo interně citlivých stop taháte do opakované práce, tím menší dluh si nesete do budoucích revizí.
+
+### Karta předání do běžného rytmu
+
+```text
+Standard:
+
+Kanonické místo:
+
+Pracovní místo:
+
+Ověření:
+První běžné použití:
+Druhé běžné použití:
+
+Rozhodnutí o předání:
+
+Běžný revizní rytmus:
+
+Návratový signál:
+
+Co se propisuje do kanonického místa:
+
+Co se propisuje do pracovního místa:
+
+Co končí:
+Která zvláštní kontrola, připomínka nebo ověřovací karta se zavírá:
+
+Co výslovně neotevíráme:
+
+Privacy-first úklid:
+Který zobecněný závěr stačí:
+Které původní podklady nekopírujeme:
+Které dočasné stopy mažeme nebo necháváme zavřené:
+
+Vlastník běžné revize:
+
+Datum nejbližší běžné revize:
+```
+
+Karta nemá standard znovu schvalovat. Má jen dokončit přechod z ověřování do provozu. Pokud při vyplňování zjistíte, že nevíte kanonické místo, pracovní místo nebo návratový signál, standard ještě není připravený na klidný provoz. Vraťte se o krok zpět a nedělejte z nejistoty běžné pravidlo.
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: přečtěte jednovětý závěr po druhém použití.
+2. Minuta 2: určete kanonické místo standardu.
+3. Minuta 3: určete pracovní místo, kde se standard používá.
+4. Minuta 4: vyberte existující běžný revizní rytmus.
+5. Minuta 5: napište návratový signál.
+6. Minuta 6: zavřete zvláštní kontrolu nebo ověřovací kartu.
+7. Minuta 7: udělejte privacy-first úklid podkladů.
+
+Pokud tým začne během workshopu debatovat o nové variantě standardu, zastavte to a napište ji jako samostatný podnět. Předání není prostor pro další rozšiřování. Je to administrativně nudný, ale důležitý konec: standard přestává být téma a začíná být nástroj.
+
+### Checklist předání standardu
+
+- Má standard po druhém použití jasný uzavírací stav?
+- Je rozhodnuto, že přechází do běžného rytmu a nepotřebuje zvláštní dohled?
+- Má jedno kanonické místo?
+- Je viditelný v pracovním místě, kde se reálně používá?
+- Zapadá do existujícího revizního rytmu místo nového procesu?
+- Má návratový signál pro znovuotevření?
+- Zavřeli jsme dočasnou ověřovací kartu nebo ruční připomínku?
+- Odstranili jsme duplicitní odkazy na starou verzi standardu?
+- Zapsali jsme týmu krátký handoff bez celé historie vzniku?
+- Uložili jsme zobecněný závěr místo surových podkladů všude, kde to stačí?
+- Nekopírujeme zákaznické zprávy, chaty, screenshoty ani exporty do běžné dokumentace bez konkrétního účelu?
+- Je jasné, kdo standard uvidí při nejbližší běžné revizi?
+
+Dobrý standard poznáte podle toho, že po předání trochu zmizí z pozornosti. Ne proto, že by byl zanedbaný, ale proto, že dělá svoji práci v místě, kde má. Pokud se k němu tým vrátí, má to být kvůli návratovému signálu nebo běžné revizi. Ne kvůli tomu, že se nikdo neodvážil ukončit jeho zkušební režim.
+
 ## Pracovní log
 
+- 2026-06-21: Doplněna úvodní podkapitola o předání ověřeného standardu do běžného provozního rytmu: kanonické a pracovní místo, revizní rytmus, handoff týmu, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-21: Doplněna úvodní podkapitola o uzavření druhého použití nového standardu: čtyři uzavírací stavy, praktické příklady, propsání do běžného provozu, privacy-first uzavření, karta, mini workshop a checklist.
 - 2026-06-21: Doplněna úvodní podkapitola o druhém použití nového standardu v běžné práci: přenositelnost, opakovatelnost, pracovní kotva, hranice použití, privacy-first zápis, karta, mini workshop a checklist.
 - 2026-06-21: Doplněna úvodní podkapitola o uzavření prvního použití nového standardu: čtyři uzavírací stavy, praktické příklady, privacy-first uzavření, karta, mini workshop a checklist.
