@@ -238736,8 +238736,173 @@ Pokud tým začne během workshopu debatovat o nové variantě standardu, zastav
 
 Dobrý standard poznáte podle toho, že po předání trochu zmizí z pozornosti. Ne proto, že by byl zanedbaný, ale proto, že dělá svoji práci v místě, kde má. Pokud se k němu tým vrátí, má to být kvůli návratovému signálu nebo běžné revizi. Ne kvůli tomu, že se nikdo neodvážil ukončit jeho zkušební režim.
 
+## První běžná revize po předání standardu
+
+Předání standardu do běžného provozního rytmu není konec odpovědnosti. Je to konec mimořádné péče. První běžná revize má ověřit přesně tohle: jestli standard opravdu funguje bez svého původního příběhu, bez zvláštního hlídání a bez člověka, který všem připomíná, proč vznikl.
+
+Revizi začněte větou:
+
+```text
+Standard kontrolujeme v běžném rytmu, ne proto, že je nový, ale proto, že sem patří jako každé jiné provozní pravidlo.
+```
+
+Tato věta drží rozsah. Pokud revizi otevřete jako "ještě jednou se podívejme na nový standard", tým se snadno vrátí do zkušebního režimu. Začne znovu vyprávět historii, hledat staré podklady a přidávat další výjimky. První běžná revize má být obyčejnější: najít standard v kanonickém místě, podívat se na jedno nebo dvě reálná použití od předání, zkontrolovat návratový signál a rozhodnout, jestli standard zůstává v rytmu beze změny.
+
+Praktický příklad:
+
+```text
+Standard:
+Archivní šablona má v názvu "Archiv" a první řádek odkazuje na aktuální zdroj pravdy.
+
+Běžný rytmus:
+Kvartální review týmových standardů.
+
+Od předání:
+Standard byl použit při úpravě starší case study a při kontrole staré kampaně.
+
+Pozorování:
+V obou případech člověk našel aktuální zdroj pravdy bez dotazu na původního autora.
+
+Návratový signál:
+Nenastal. Archivní šablona nebyla použita jako aktuální zdroj pravdy.
+
+Rozhodnutí:
+Standard zůstává beze změny v běžném kvartálním review.
+
+Co neotevíráme:
+Nepřepisujeme historii vzniku standardu a nevracíme do dokumentace staré screenshoty.
+```
+
+Všimněte si, že dobrý výsledek revize může být krátký. Není potřeba vyrábět akci jen proto, že se sešel review slot. Pokud standard drží, nejpraktičtější změna je žádná změna. Ano, je to trochu nevděčné. Proces, který funguje, neumí dělat dramatické efekty. Zato umí nekrást čas.
+
+### Tři kontrolní body revize
+
+První běžná revize po předání má tři kontrolní body:
+
+- Najitelnost: člověk našel standard v kanonickém místě bez starého kontextu.
+- Použitelnost: standard vedl k rozhodnutí v pracovním místě bez dalšího vysvětlování.
+- Klid: nevznikla mimořádná kontrola, boční tabulka ani neoficiální připomínka.
+
+Najitelnost neznamená, že každý zná název standardu nazpaměť. Znamená, že v situaci, pro kterou standard existuje, je cesta k pravidlu přirozená. Pokud člověk řeší archivní šablonu, má standard najít přes index šablon, poznámku v šabloně nebo pracovní checklist. Nemá lovit starý chat, kde se kdysi rozhodlo, co je správně.
+
+Použitelnost ověřuje, jestli standard vede k rozhodnutí. Slabý standard často zní rozumně, ale v praxi člověku neřekne, co má udělat. Například "udržujte šablony aktuální" je přání. "Archivní šablona musí na prvním řádku odkazovat na aktuální zdroj pravdy" už je pravidlo, které se dá použít.
+
+Klid je nejméně viditelný, ale důležitý. Pokud po předání standardu pořád existuje neoficiální dohled, standard se ve skutečnosti nepředal. Tým má dokument, ale rozhodnutí pořád drží člověk. První běžná revize má takovou závislost najít a buď ji odstranit, nebo přiznat, že standard ještě není dost samostatný.
+
+### Čtyři výsledky první běžné revize
+
+Po revizi vyberte jeden ze čtyř výsledků:
+
+- Standard drží: zůstává beze změny v běžném rytmu.
+- Chybí pracovní kotva: pravidlo je správné, ale člověk ho v konkrétním pracovním místě snadno mine.
+- Chybí rozhodovací ostrost: standard je najitelný, ale při použití nechává moc prostoru pro výklad.
+- Nastal návratový signál: problém, kvůli kterému standard existuje, se vrátil v potvrzené podobě.
+
+Stav `standard drží` je plnohodnotný výsledek. Zapište ho a skončete. Nepřidávejte další kontrolu jen proto, že první revize byla rychlá.
+
+Stav `chybí pracovní kotva` řešte nejbližším pracovním místem. Pokud člověk musel standard hledat v indexu, přidejte krátkou referenci do šablony, checklistu nebo procesu, kde rozhodnutí vzniká. Nepřepisujte celý standard.
+
+Stav `chybí rozhodovací ostrost` znamená, že pravidlo potřebuje přesnější formulaci. Opravte jednu větu tak, aby šlo rozlišit správné a špatné použití. Nepřidávejte tři odstavce vysvětlování, pokud stačí jasnější hranice.
+
+Stav `nastal návratový signál` neznamená automaticky redesign standardu. Znamená otevřít malou ověřovací smyčku: co se přesně stalo, v jakém pracovním místě, s jakým dopadem a jestli jde o stejný problém, nebo nový kontext.
+
+### Privacy-first revize
+
+První běžná revize svádí k tomu otevřít všechno, co se při zavádění standardu nasbíralo. To většinou není potřeba. Pokud kontrolujete, jestli standard fungoval v běžné práci, často stačí zobecněný záznam:
+
+```text
+Standard byl použit ve dvou pracovních situacích bez dotazu na původního autora.
+```
+
+Není nutné kopírovat konkrétní zákaznické zprávy, interní chaty, screenshoty ani exporty, pokud z nich nevzniká nové rozhodnutí. Revize má pracovat s minimem důkazů, které odpoví na aktuální otázku. Otázka nezní "připomeňme si všechno, co se stalo". Otázka zní "funguje standard v běžném rytmu?".
+
+Dobrá privacy-first hranice:
+
+```text
+Pro revizi použijeme jen počet a typ pracovních situací; původní podklady z ověřování neotevíráme, protože dnešní rozhodnutí nevyžaduje detailní obsah.
+```
+
+Codyho komentář: nejčistší revize je často ta, po které v systému nepřibude žádný nový artefakt kromě jedné věty v logu. To není lenost. To je provozní sebeovládání. Když kvůli každé kontrole vznikne další dokument, tým nakonec neprovozuje standardy, ale dokumentuje dokumentování. A to je sport, ve kterém se nedá vyhrát, jen potit v tabulkách.
+
+### Karta první běžné revize standardu
+
+```text
+Standard:
+
+Běžný revizní rytmus:
+
+Kanonické místo:
+
+Pracovní místo:
+
+Použití od předání:
+1.
+2.
+
+Kontrola najitelnosti:
+
+Kontrola použitelnosti:
+
+Kontrola klidu:
+Vznikla mimořádná kontrola, boční tabulka nebo neoficiální připomínka?
+
+Návratový signál:
+Nastal / nenastal:
+Pokud nastal, kde a jak:
+
+Výsledek revize:
+- standard drží
+- chybí pracovní kotva
+- chybí rozhodovací ostrost
+- nastal návratový signál
+
+Jedna úprava, pokud je potřeba:
+
+Co výslovně neotevíráme:
+
+Privacy-first hranice:
+Které původní podklady neotevíráme:
+Jaký zobecněný závěr stačí:
+
+Zápis do logu:
+
+Vlastník další běžné revize:
+```
+
+Karta má zabránit dvěma extrémům. První extrém je revizi odbýt dojmem, že "asi dobrý". Druhý extrém je udělat z revize nový malý projekt. Karta drží střed: pár konkrétních otázek, jeden výsledek, případně jedna lokální úprava.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: najděte standard v kanonickém místě.
+2. Minuta 2: pojmenujte jedno až dvě použití od předání.
+3. Minuta 3: ověřte, jestli člověk standard našel bez starého vysvětlování.
+4. Minuta 4: ověřte, jestli standard vedl k rozhodnutí v pracovním místě.
+5. Minuta 5: zkontrolujte, jestli nevznikla mimořádná péče mimo běžný rytmus.
+6. Minuta 6: vyberte jeden výsledek revize a napište jednovětý log.
+
+Pokud během workshopu narazíte na nový nápad, napište ho mimo revizi. První běžná revize není brainstorming standardů. Je to kontrola, jestli předaný standard umí žít obyčejným životem.
+
+### Checklist první běžné revize
+
+- Kontrolujeme standard v běžném rytmu, ne ve zvláštním zkušebním režimu?
+- Našli jsme standard v jednom kanonickém místě?
+- Viděli jsme aspoň jedno reálné použití od předání?
+- Dokázal člověk standard použít bez znalosti historie jeho vzniku?
+- Vedl standard ke konkrétnímu rozhodnutí?
+- Nevznikla boční tabulka, ruční připomínka nebo neoficiální dohled?
+- Ověřili jsme, jestli nastal návratový signál?
+- Vybrali jsme jeden ze čtyř výsledků revize?
+- Pokud je potřeba úprava, je lokální a má nejbližší pracovní místo?
+- Pokud standard drží, nepřidáváme další kontrolu navíc?
+- Používáme zobecněný závěr místo surových podkladů, kde to stačí?
+- Neotevíráme staré zákaznické zprávy, screenshoty, chaty ani exporty bez jasného důvodu?
+- Má revize jednovětý zápis do logu?
+
+První běžná revize má standardu sundat poslední cedulku "nové". Buď ukáže, že pravidlo drží, nebo najde jednu přesnou opravu. V obou případech má skončit klidně. Standard, který potřebuje po každé revizi další speciální dohled, ještě není standard. Je to rozpracované pravidlo s hezkým názvem.
+
 ## Pracovní log
 
+- 2026-06-21: Doplněna úvodní podkapitola o první běžné revizi po předání standardu: najitelnost, použitelnost, klid bez mimořádné péče, čtyři výsledky revize, privacy-first hranice, karta, mini workshop a checklist.
 - 2026-06-21: Doplněna úvodní podkapitola o předání ověřeného standardu do běžného provozního rytmu: kanonické a pracovní místo, revizní rytmus, handoff týmu, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-21: Doplněna úvodní podkapitola o uzavření druhého použití nového standardu: čtyři uzavírací stavy, praktické příklady, propsání do běžného provozu, privacy-first uzavření, karta, mini workshop a checklist.
 - 2026-06-21: Doplněna úvodní podkapitola o druhém použití nového standardu v běžné práci: přenositelnost, opakovatelnost, pracovní kotva, hranice použití, privacy-first zápis, karta, mini workshop a checklist.
