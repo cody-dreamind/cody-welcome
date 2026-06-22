@@ -241690,8 +241690,132 @@ Když se tým nedohodne mezi lokální opravou a novou smyčkou, zeptejte se, je
 
 Uzavření druhého běžného použití po výroční revizi je poslední brzda proti tomu, aby se z úspěšného standardu stal trvale sledovaný vedlejší projekt. Když funguje, nechte ho pracovat potichu. Když zadrhne, opravte nejmenší skutečné místo. A když se ukáže nový problém, dejte mu vlastní smyčku místo toho, abyste ho přivázali k hotové revizi.
 
+## Návrat standardu do dlouhodobého klidu po výroční revizi
+
+Po výroční revizi, prvním běžném použití a druhém běžném použití přichází moment, který týmy často pokazí právě tím, že jsou poctivé. Chtějí si výsledek ještě pojistit, přidají další kontrolu, nechají otevřenou poznámku, vytvoří malý dashboard, nebo si slíbí, že se k tomu "brzy vrátí". Jenže pokud standard prošel revizí a dvěma běžnými použitími, další mimořádná péče už většinou není kvalita. Je to neochota pustit hotovou věc z ruky.
+
+Návrat do dlouhodobého klidu znamená: standard má jasné kanonické místo, funguje v běžné pracovní cestě, má pojmenovaný návratový signál a nepotřebuje mezi tím zvláštní dohled. Není zapomenutý. Jen se neplete do práce pokaždé, když někdo otevře backlog.
+
+Začněte větou:
+
+```text
+Standard se vrací do dlouhodobého klidu, protože:
+```
+
+Věta musí být opřená o poslední uzavření. Ne "už jsme tomu dali dost času", ale třeba:
+
+```text
+Standard se vrací do dlouhodobého klidu, protože po výroční revizi obstál ve dvou běžných použitích bez ruční nápovědy a bez nové datové stopy.
+```
+
+Tím se klid nestává pocitem. Je to rozhodnutí s důvodem, který dokáže přečíst i člověk, který u revize nebyl.
+
+### Co znamená dlouhodobý klid
+
+Dlouhodobý klid není pasivita. Je to provozní stav s hranicemi:
+
+- standard se používá v běžné práci, ne v kontrolním režimu;
+- další revize se spouští jen podle rytmu nebo návratového signálu;
+- dočasné poznámky z revize jsou uklizené;
+- pracovní cesta ukazuje na aktuální kanonické místo;
+- tým ví, co se po uzavření už nesleduje.
+
+Dobře nastavený klid má jednu příjemnou vlastnost: nevyžaduje, aby si lidé pamatovali historii posledních oprav. Stačí, že najdou aktuální pravidlo v místě, kde ho opravdu potřebují. Pokud standard funguje jen díky tomu, že někdo v týmu pořád ví, "jak jsme to mysleli", ještě není v klidu. Je jen dobře hlídaný.
+
+Praktický příklad:
+
+```text
+Standard:
+Při každé nové marketingové šabloně se ukládá jen kanonický odkaz, ne kopie zákaznických příkladů.
+
+Důvod návratu do klidu:
+Po výroční revizi šablonu dvakrát použili lidé mimo původní revizní tým. Oba našli pravidlo z pracovního checklistu a nepotřebovali interní vysvětlení.
+
+Klidový stav:
+Standard zůstává v roční revizi. Nevzniká měsíční kontrola šablon ani evidence každého použití.
+
+Návratový signál:
+Téma se otevře, pokud někdo znovu uloží kopii zákaznického příkladu do nové šablony nebo pokud pracovní checklist přestane ukazovat na aktuální kanonické místo.
+```
+
+Tohle je zdravý konec. Výsledek je konkrétní, ale nepřidává novou administrativu. Provoz má vědět, kdy se standard vrací, ne každý týden dokazovat, že ještě existuje.
+
+### Tři věci, které se při návratu zavírají
+
+Při návratu do dlouhodobého klidu zavřete tři vrstvy.
+
+První je mimořádná pozornost. Pokud jste po výroční revizi měli dočasné sledování, dodatečný checklist, poznámku v plánování nebo připomínku v kalendáři, zrušte ji. Ponechte jen běžný rytmus a návratový signál.
+
+Druhá je pracovní historie. Z kanonického místa nechte zmizet poznámky, které vysvětlují, jak se ke standardu došlo, pokud nejsou potřeba pro dnešní použití. Historie může zůstat v changelogu nebo rozhodovacím záznamu, ale nemá stát v cestě člověku, který chce udělat práci.
+
+Třetí je datová stopa. Dočasné exporty, screenshoty, kopie tiketů, přepisy chatů a pracovní tabulky z revize nemají pokračovat jen proto, že "by se možná někdy hodily". Pokud stačí zobecněný závěr, uchovejte závěr. Detail smažte, anonymizujte, nebo ho nechte v původním zdroji podle retenčních pravidel.
+
+Codyho komentář: tady se často láme rozdíl mezi dobrým provozem a úzkostným provozem. Dobrý provoz má návratový signál. Úzkostný provoz má otevřenou poznámku navždy, protože co kdyby. "Co kdyby" je skvělý sluha při návrhu incidentního plánu, ale mizerný šéf každodenní práce.
+
+### Klidová karta standardu
+
+```text
+Standard:
+
+Kanonické místo:
+
+Pracovní místa, odkud se standard používá:
+
+Proč se vrací do dlouhodobého klidu:
+
+Poslední ověřené použití:
+
+Běžný revizní rytmus:
+
+Návratový signál:
+
+Co po návratu do klidu nevzniká:
+
+Co se ruší:
+- dočasné kontroly:
+- dočasné poznámky:
+- dočasné datové stopy:
+
+Privacy-first úklid:
+Které detaily neuchováváme, protože stačí zobecněný závěr:
+
+Vlastník:
+
+Datum další běžné revize:
+```
+
+Karta má být krátká. Pokud se mění v rozsáhlý dokument, pravděpodobně do ní cpete historii revize místo klidového stavu. Dlouhodobý klid potřebuje hlavně tři údaje: kde standard žije, kdy se znovu otevře a co se mezitím nesleduje.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte poslední uzavření druhého běžného použití.
+2. Minuta 2: napište jednu větu, proč se standard vrací do klidu.
+3. Minuta 3: potvrďte kanonické místo a pracovní místa použití.
+4. Minuta 4: zapište návratový signál a běžný revizní rytmus.
+5. Minuta 5: napište, co po návratu do klidu nevzniká.
+6. Minuta 6: zrušte dočasné kontroly a ukliďte datové stopy.
+
+Pokud se během workshopu objeví nový problém, neřešte ho v klidové kartě. Buď je to lokální oprava pracovní cesty, nebo nová malá smyčka. Klidová karta není parkoviště nápadů. Je to závěrečný doklad, že standard může zase pracovat bez doprovodu.
+
+### Checklist návratu do dlouhodobého klidu
+
+- Máme jednovětý důvod, proč se standard vrací do klidu?
+- Opírá se důvod o reálné běžné použití, ne o pocit, že už se tomu věnujeme dlouho?
+- Je jasné kanonické místo standardu?
+- Vedou pracovní místa na aktuální verzi, ne na staré kopie?
+- Je stanovený běžný revizní rytmus?
+- Je návratový signál konkrétní a rozpoznatelný i bez paměti poslední revize?
+- Napsali jsme, co po návratu do klidu nevzniká?
+- Zrušili jsme mimořádné kontroly, které už nemají účel?
+- Uklidili jsme dočasné poznámky, exporty, screenshoty, kopie a komentáře?
+- Uchováváme jen zobecněný závěr tam, kde původní detail není potřeba?
+- Ví vlastník, že jeho práce není standard sledovat pořád, ale vrátit se k němu při rytmu nebo signálu?
+
+Návrat do dlouhodobého klidu je dobrá zpráva. Znamená, že standard už nepotřebuje zvláštní péči, aby byl užitečný. V privacy-first provozu je to dvojnásob cenné: méně dohledu, méně zbytečných stop, méně interního šumu. Pravidlo zůstává dostupné, ale tým se může věnovat skutečné práci.
+
 ## Pracovní log
 
+- 2026-06-22: Doplněna úvodní podkapitola o návratu standardu do dlouhodobého klidu po výroční revizi: klidový stav, zavření mimořádné pozornosti, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-22: Doplněna úvodní podkapitola o uzavření druhého běžného použití po výroční revizi standardu: čtyři uzavírací stavy, propsání do kanonického místa, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-22: Doplněna úvodní podkapitola o druhém běžném použití po výroční revizi standardu: přenositelnost bez čerstvé paměti, čtyři výsledky, privacy-first záznam, karta, mini workshop a checklist.
 - 2026-06-22: Doplněna úvodní podkapitola o uzavření prvního běžného použití po výroční revizi standardu: uzavírací stavy, propsání do kanonického místa, privacy-first uzavření, karta, mini workshop a checklist.
