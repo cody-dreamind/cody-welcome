@@ -240869,8 +240869,162 @@ Když během workshopu vznikne spor o samotný smysl standardu, nepokračujte v 
 
 První výroční revize je úspěšná, když po ní standard buď klidně pokračuje, nebo se jasně přesune do menší opravy, kratšího rytmu či archivu. Neúspěch není najít problém. Neúspěch je nechat po revizi víc mlhy než před ní. Standard má po roce buď stát pevněji, nebo slušně uvolnit místo.
 
+## Uzavření první výroční revize standardu
+
+Výroční revize standardu nekončí tím, že tým vyplní kartu a shodne se, že "něco by se mělo udělat". Končí až ve chvíli, kdy je výsledek propsaný do správného místa, staré pracovní stopy mají jasný osud a další rytmus je jednoznačný. Bez uzavření se i dobrá revize změní v měkký závěr, který se za měsíc vrátí jako nejasná poznámka v hlavě někoho z týmu. To je nejdražší typ poznámky: tváří se zdarma, ale platí se za ni opakovaným vysvětlováním.
+
+Uzavření má být kratší než samotná revize. Neopisujte znovu celý kontext. Napište jen výsledek, jeho dopad na kanonické místo a nejbližší další rytmus.
+
+Použijte tři věty:
+
+```text
+Výroční revizi uzavíráme stavem:
+
+Do kanonického místa se propisuje:
+
+Další kontrola nastane:
+```
+
+Příklad:
+
+```text
+Výroční revizi uzavíráme stavem:
+Dočistit lokálně.
+
+Do kanonického místa se propisuje:
+Standard zůstává platný. V archivní šabloně doplňujeme první řádek s odkazem na aktuální zdroj pravdy.
+
+Další kontrola nastane:
+Za rok, nebo dřív, pokud někdo použije archivní šablonu jako aktivní postup pro novou práci.
+```
+
+Takový zápis je nudně přesný, což je tady kompliment. Tým ví, že se standard nemění, ví, která jedna věc se opravuje, a ví, jaký signál má revizi otevřít mimo plán. Nevzniká z toho nový projekt, nové měření ani další schůzka s názvem "ještě si to ujasníme". Takové schůzky jsou často jen dražší způsob, jak nepřepsat jednu větu.
+
+### Čtyři uzavírací stavy
+
+Uzavření musí odpovídat výsledku revize:
+
+- Ponecháno beze změny: standard zůstává v ročním rytmu, návratový signál platí a do kanonického místa se dopíše jen datum revize.
+- Lokálně dočištěno: standard se nemění, ale jedno pracovní místo, odkaz, název nebo příklad se opraví a po opravě se uzavře bez další smyčky.
+- Rytmus změněn: standard zůstává aktivní, ale další kontrola bude kratší, protože téma stárne rychleji než roční rytmus.
+- Archivováno nebo předáno do nové smyčky: starý standard přestává řídit práci, případně vzniká nová pracovní otázka s vlastním rozsahem.
+
+Nejčastější chyba je smíchat `lokálně dočištěno` a `nová smyčka`. Chybějící odkaz není důvod přepsat standard. Naopak změna nabídky, nástroje nebo odpovědnosti se nemá maskovat jako "jen opravíme wording". Uzavírací stav má chránit rozsah práce, ne ho elegantně rozmazat.
+
+### Propsání do kanonického místa
+
+Po uzavření zkontrolujte, kam se výsledek opravdu zapisuje. U standardu typicky existují tři vrstvy:
+
+- Kanonické místo: kde žije aktuální znění standardu.
+- Pracovní místo: kde člověk standard použije v běžné práci.
+- Historická stopa: kde zůstává krátký záznam, proč byl standard ponechán, opraven, zrychlen nebo archivován.
+
+Do kanonického místa nepatří kompletní příběh revize. Patří tam aktuální pravidlo, datum revize, další rytmus a návratový signál. Do pracovního místa patří jen to, co člověk potřebuje při použití. Historická stopa má být krátká: rozhodnutí jednou větou, zobecněný důkaz a odkaz na kartu revize, pokud ji tým opravdu potřebuje uchovat.
+
+Praktický příklad:
+
+```text
+Kanonické místo:
+Standard zůstává platný. Další revize: 2027-06. Návratový signál: archivní šablona se použije jako aktivní postup.
+
+Pracovní místo:
+Archivní šablona má na prvním řádku odkaz "Aktuální postup je zde".
+
+Historická stopa:
+Výroční revize 2026: standard byl použit bez ruční pomoci, v jedné starší šabloně chyběla navigační věta. Opraveno lokálně.
+```
+
+Tři vrstvy znamenají tři různé úrovně detailu. Když dáte všechno všude, nikdo už nepozná, co je pravidlo, co je poznámka a co je dávno uzavřený důkaz.
+
+### Privacy-first uzavření
+
+Výroční revize často otevře staré podklady: příklady, exporty, screenshoty, komentáře, kopie šablon nebo poznámky z reálné práce. Při uzavření se rozhoduje, co z nich opravdu zůstane. Výchozí pravidlo je přísné:
+
+```text
+Do dalšího období přenášíme závěr, ne surový materiál.
+```
+
+Pokud se standard ponechává beze změny, většinou stačí věta typu "standard byl během roku použit bez ruční pomoci". Pokud se lokálně dočišťuje, stačí "v jedné starší šabloně chyběl odkaz na aktuální postup". Pokud se mění rytmus, napište důvod bez zbytečných detailů: "téma se mění častěji kvůli externím úpravám nástroje" místo sbírky screenshotů a interních komentářů.
+
+Staré pracovní stopy rozdělte do tří košů:
+
+- Smazat: dočasné kopie, exporty a screenshoty, které už nemají aktivní účel.
+- Zobecnit: konkrétní příklady s osobními nebo interními detaily, ze kterých stačí pracovní závěr.
+- Nechat v původním zdroji pravdy: podklady, které mají vlastní legitimní retenci a není potřeba je kopírovat do revizní karty.
+
+Privacy-first provoz není o tom, že tým nesmí mít paměť. Je o tom, že paměť nemá být sklad všeho, co se kdy dalo přiložit jako důkaz. Dobrá paměť je krátká, dohledatelná a účelová.
+
+### Karta uzavření výroční revize
+
+```text
+Standard:
+
+Výsledek výroční revize:
+- ponecháno beze změny
+- lokálně dočištěno
+- rytmus změněn
+- archivováno nebo předáno do nové smyčky
+
+Rozhodnutí jednou větou:
+
+Co se propsalo do kanonického místa:
+
+Co se propsalo do pracovního místa:
+
+Historická stopa:
+Zobecněný důkaz:
+
+Co po revizi nevzniká:
+
+Privacy-first úklid:
+Smazat:
+Zobecnit:
+Nechat v původním zdroji pravdy:
+
+Další rytmus:
+
+Návratový signál mimo rytmus:
+
+Vlastník:
+
+Datum další kontroly:
+```
+
+Řádek `Co po revizi nevzniká` je překvapivě užitečný. Napište do něj například: "Nevzniká nový audit archivu", "Nevzniká nové tracking měření" nebo "Nevzniká další schvalovací krok". Tým tím zavře dveře, které by jinak zůstaly pootevřené jen proto, že se o nich během revize mluvilo.
+
+### Mini workshop na 8 minut
+
+1. Minuta 1: přečtěte výsledek výroční revize.
+2. Minuta 2: napište rozhodnutí jednou větou.
+3. Minuta 3: určete, co se propíše do kanonického místa.
+4. Minuta 4: určete, jestli se mění pracovní místo.
+5. Minuta 5: napište, co po revizi výslovně nevzniká.
+6. Minuta 6: rozdělte staré pracovní stopy na smazat, zobecnit a nechat v původním zdroji.
+7. Minuta 7: potvrďte další rytmus a návratový signál.
+8. Minuta 8: určete vlastníka uzavření.
+
+Když se během uzavření otevře nové téma, nezapisujte ho do stejné karty jako další úkol. Buď má vlastní pracovní otázku a vlastní smyčku, nebo zůstane jako poznámka mimo rozsah. Výroční revize standardu má skončit stabilním stavem, ne novým šuplíkem neurčitých možností.
+
+### Checklist uzavření výroční revize
+
+- Máme jeden jasný uzavírací stav?
+- Je rozhodnutí napsané jednou větou?
+- Víme, co se mění v kanonickém místě?
+- Víme, co se mění v pracovním místě?
+- Oddělili jsme historickou stopu od aktuálního pravidla?
+- Napsali jsme, co po revizi výslovně nevzniká?
+- Neotevíráme novou smyčku bez nové pracovní otázky?
+- Smazali jsme nebo označili dočasné pracovní stopy bez aktivního účelu?
+- Zobecnili jsme důkazy místo kopírování osobních nebo interních detailů?
+- Je další rytmus přiměřený zjištěnému stavu standardu?
+- Má standard návratový signál mimo plánovanou kontrolu?
+- Ví vlastník, co přesně má po uzavření ještě udělat?
+
+Dobře uzavřená výroční revize je tichá. V kanonickém místě je aktuální pravidlo, v pracovním místě je správná navigace, v historii je krátký důvod a staré podklady netečou do dalšího roku jen ze zvyku. Standard tím nezíská větší slávu, ale získá něco praktičtějšího: schopnost fungovat další období bez toho, aby kolem sebe vyráběl zbytečnou péči.
+
 ## Pracovní log
 
+- 2026-06-22: Doplněna úvodní podkapitola o uzavření první výroční revize standardu: uzavírací stavy, propsání do kanonického a pracovního místa, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-21: Doplněna úvodní podkapitola o první výroční revizi standardu: kontrola kanonického a pracovního místa, čtyři výsledné stavy, privacy-first úklid důkazů, karta, mini workshop a checklist.
 - 2026-06-21: Doplněna úvodní podkapitola o přechodu z periodické kontroly do výroční revize standardu: podmínky pro delší rytmus, úklid dočasné péče, návratový signál, privacy-first závěr, karta, mini workshop a checklist.
 - 2026-06-21: Doplněna úvodní podkapitola o uzavření druhé periodické kontroly standardu: čtyři uzavírací stavy, práce se skrytou péčí, věta o tom, co po kontrole nevzniká, privacy-first závěr, karta, mini workshop a checklist.
