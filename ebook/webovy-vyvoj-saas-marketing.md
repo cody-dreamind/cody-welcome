@@ -241813,8 +241813,128 @@ Pokud se během workshopu objeví nový problém, neřešte ho v klidové kartě
 
 Návrat do dlouhodobého klidu je dobrá zpráva. Znamená, že standard už nepotřebuje zvláštní péči, aby byl užitečný. V privacy-first provozu je to dvojnásob cenné: méně dohledu, méně zbytečných stop, méně interního šumu. Pravidlo zůstává dostupné, ale tým se může věnovat skutečné práci.
 
+## První lehká kontrola po dlouhodobém klidu
+
+Dlouhodobý klid neznamená, že standard už nikdy neuvidíte. Znamená, že se k němu nevracíte ze zvyku, ale jen v předem určeném rytmu nebo při jasném návratovém signálu. První lehká kontrola po klidu je proto schválně malá. Nezkoumá celou historii standardu, neobnovuje mimořádnou péči a nesnaží se dokázat, že staré rozhodnutí bylo geniální. Jen ověřuje, jestli standard pořád stojí na místě, kde ho lidé potřebují.
+
+Dobrá kontrola začíná otázkou:
+
+```text
+Funguje standard v běžné práci pořád bez zvláštního vysvětlování?
+```
+
+Pokud odpověď nezjistíte z jednoho nebo dvou nedávných běžných použití, kontrola je příliš široká. Neotevírejte všechny staré záznamy. Vyberte nejbližší živé místo: poslední použitou šablonu, jeden dokončený onboarding, jednu publikovanou stránku, jeden supportní postup nebo jednu marketingovou kampaň. Standard má obstát v normálním provozu, ne v archeologii.
+
+Praktický příklad:
+
+```text
+Standard:
+U nové landing page se do analytics posílají jen agregované události bez osobních údajů.
+
+Lehká kontrola:
+Podíváme se na poslední publikovanou landing page a ověříme tři věci:
+- checklist stále vede na aktuální privacy-first analytické pravidlo;
+- implementace nepřidala nový tracker ani zbytečný identifikátor;
+- vlastník stránky věděl, kde pravidlo najít bez ruční nápovědy.
+
+Výsledek:
+Standard drží. Nevzniká nová revize analytiky. Jen doplníme odkaz z publikačního checklistu, protože byl o jedno kliknutí dál, než je zdravé.
+```
+
+Všimněte si poslední věty. Kontrola našla drobné tření, ale neudělala z něj novou kapitolu života. Oprava patří do místa práce, ne do velkého návratu standardu.
+
+### Tři kontrolní body
+
+První lehká kontrola po klidu má tři body.
+
+První bod je najitelnost. Člověk, který standard používá, ho musí najít z přirozeného pracovního místa. Pokud musí hledat v historii rozhodnutí, v chatu nebo v hlavě původního autora, standard není klidný. Je schovaný.
+
+Druhý bod je rozhodnutelnost. Standard musí pomoci udělat konkrétní volbu. Pokud říká jen "myslete na soukromí", je to plakát, ne pracovní pravidlo. Dobré pravidlo řekne třeba: "do nové šablony nekopírujeme zákaznické citace s identifikátory; použijeme zobecněný závěr a kanonický odkaz na schválený zdroj."
+
+Třetí bod je datová střídmost. Kontrola nesmí sama vytvořit větší datovou stopu než problém, který řeší. Nepořizujte nové screenshoty, exporty a tabulky jen proto, že kontrolujete standard. Pokud stačí poznámka "poslední použití prošlo bez nové osobní stopy", napište ji takhle krátce. Ano, i kontrola má držet dietu. Firemní dokumentace bez jojo efektu, nádhera.
+
+### Čtyři výsledky lehké kontroly
+
+Po kontrole vyberte jeden ze čtyř výsledků:
+
+- Drží beze změny: standard je najitelný, rozhodnutelný a nevytváří zbytečnou datovou stopu.
+- Drží s lokálním třením: standard funguje, ale jedno pracovní místo potřebuje drobnou opravu odkazu, formulace nebo umístění.
+- Slábne pracovní cesta: standard je správný, ale lidé se k němu nedostanou přirozeně.
+- Objevil se návratový signál: problém odpovídá předem popsanému spouštěči a zaslouží si novou malou smyčku.
+
+Rozdíl mezi třením a návratovým signálem je důležitý. Tření říká: "opravte nejbližší dveře." Návratový signál říká: "otevřete nové malé rozhodnutí." Když tyto dvě věci smícháte, budete zbytečně svolávat revize kvůli špatně umístěnému odkazu. To je excelentní způsob, jak unavit tým a tvářit se u toho procesně.
+
+### Karta lehké kontroly po klidu
+
+```text
+Standard:
+
+Kanonické místo:
+
+Proč kontrolu otevíráme:
+- běžný rytmus
+- návratový signál
+
+Kontrolované běžné použití:
+
+Najitelnost:
+Našel člověk standard z pracovního místa bez zvláštní nápovědy?
+
+Rozhodnutelnost:
+Pomohl standard udělat konkrétní volbu?
+
+Datová střídmost:
+Vznikla při použití nebo kontrole zbytečná datová stopa?
+
+Výsledek:
+- drží beze změny
+- drží s lokálním třením
+- slábne pracovní cesta
+- objevil se návratový signál
+
+Nejmenší další krok:
+
+Co výslovně neotevíráme:
+
+Privacy-first poznámka:
+Které detaily neukládáme, protože stačí zobecněný závěr:
+
+Vlastník:
+
+Datum dalšího rytmu nebo návratového signálu:
+```
+
+Karta má zavřít kontrolu, ne otevřít nový archiv. Pokud se nevejde na jednu obrazovku, pravděpodobně do ní zapisujete důkazní materiál místo rozhodnutí. U standardů v klidu stačí stopa, která vysvětlí, proč se pokračuje beze změny nebo proč vzniká jedna malá oprava.
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: pojmenujte standard a důvod kontroly.
+2. Minuta 2: vyberte jedno nedávné běžné použití.
+3. Minuty 3 až 4: ověřte najitelnost a rozhodnutelnost v pracovním místě.
+4. Minuta 5: zkontrolujte datovou střídmost.
+5. Minuta 6: vyberte jeden ze čtyř výsledků.
+6. Minuta 7: napište nejmenší další krok a co výslovně neotevíráte.
+
+Pokud se tým zasekne u toho, zda kontrolovat víc použití, vraťte se k důvodu kontroly. Běžný rytmus obvykle stačí ověřit jedním reprezentativním použitím. Návratový signál může potřebovat druhé použití pro srovnání, ale pořád nejde o audit celé historie.
+
+### Checklist lehké kontroly po klidu
+
+- Otevíráme kontrolu kvůli rytmu nebo konkrétnímu návratovému signálu?
+- Vybrali jsme jedno nebo dvě běžná použití místo celé historie?
+- Ověřili jsme, že standard jde najít z pracovního místa?
+- Pomáhá standard udělat konkrétní rozhodnutí?
+- Nevznikla při použití nebo kontrole zbytečná osobní datová stopa?
+- Rozlišili jsme lokální tření od skutečného návratového signálu?
+- Vybrali jsme jeden ze čtyř výsledků kontroly?
+- Pokud je potřeba oprava, míří na nejbližší pracovní místo?
+- Napsali jsme, co výslovně neotevíráme?
+- Zůstává standard po kontrole v klidu, pokud se nepotvrdil návratový signál?
+
+První lehká kontrola po dlouhodobém klidu má být skoro nenápadná. Když standard drží, potvrďte to a nechte ho dál pracovat. Když drhne cesta, opravte cestu. Když se opravdu objeví návratový signál, otevřete novou malou smyčku s vlastní stop podmínkou. Všechno ostatní je jen elegantně oblečená prokrastinace.
+
 ## Pracovní log
 
+- 2026-06-22: Doplněna úvodní podkapitola o první lehké kontrole po dlouhodobém klidu: najitelnost, rozhodnutelnost, datová střídmost, čtyři výsledky, karta, mini workshop a checklist.
 - 2026-06-22: Doplněna úvodní podkapitola o návratu standardu do dlouhodobého klidu po výroční revizi: klidový stav, zavření mimořádné pozornosti, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-22: Doplněna úvodní podkapitola o uzavření druhého běžného použití po výroční revizi standardu: čtyři uzavírací stavy, propsání do kanonického místa, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-22: Doplněna úvodní podkapitola o druhém běžném použití po výroční revizi standardu: přenositelnost bez čerstvé paměti, čtyři výsledky, privacy-first záznam, karta, mini workshop a checklist.
