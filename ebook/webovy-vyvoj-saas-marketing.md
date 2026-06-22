@@ -242873,8 +242873,203 @@ Pokud workshop potřebuje víc času, nejspíš už neřešíte první běžnou 
 
 První běžná kontrola po převodu do dlouhodobého rytmu je test dospělosti standardu. Neptá se, jestli by šel ještě vylepšit. To jde skoro vždycky, a právě proto je to nebezpečná otázka. Ptá se, jestli standard funguje v normální práci, bez mimořádné péče a bez zbytečných datových stop. Pokud ano, nejlepší další krok je klid.
 
+## Uzavření první běžné kontroly po převodu do dlouhodobého rytmu
+
+První běžná kontrola po převodu do dlouhodobého rytmu má skončit stejně čistě, jako začala: jedním výsledkem, jedním zápisem a jasným rozhodnutím, co se dál nedělá. Pokud kontrola potvrdila, že standard funguje v normální práci, není potřeba k němu přidávat další pojistku. Pokud našla lokální tření, opravte ho v nejbližším pracovním místě. A pokud se ukázal skutečný návratový signál, oddělte ho od kontroly a otevřete novou malou smyčku.
+
+Největší riziko této fáze je nenápadné prodloužení mimořádné péče. Tým si řekne: "Ještě jednou se na to podíváme příště." Někdy je to rozumné, ale často je to jen strach zavřít práci, která už splnila účel. Dlouhodobý rytmus má standardu vrátit normální život. Uzavření kontroly proto nesmí vytvořit druhý stínový rytmus vedle něj.
+
+Začněte větou:
+
+```text
+Po první běžné kontrole standard:
+```
+
+Potom doplňte jeden stav. Například:
+
+```text
+Po první běžné kontrole standard:
+Zůstává v kvartálním rytmu, protože byl najitelný, rozhodnutelný a nevznikla kolem něj skrytá ruční péče.
+```
+
+Nebo:
+
+```text
+Po první běžné kontrole standard:
+Zůstává v dlouhodobém rytmu, ale publikační trasa dostane jednu lokální otázku k vloženým formulářům.
+```
+
+Tato věta je malá pojistka proti rozpliznutí. Uzavření nemá popsat všechno, co by se dalo zlepšit. Má pojmenovat, jaký stav po kontrole platí.
+
+### Čtyři uzavírací stavy
+
+Po první běžné kontrole vyberte jeden uzavírací stav:
+
+- Zavřít bez změny: standard funguje v dohodnutém rytmu.
+- Zavřít s lokální opravou cesty: pravidlo je dobré, ale člověk ho špatně našel.
+- Zavřít s lokální oporou rozhodnutí: pravidlo je najitelné, ale v jednom místě chyběla otázka, příklad nebo hranice.
+- Zavřít kontrolu a otevřít novou smyčku: objevil se návratový signál, který přesahuje lokální opravu.
+
+Stav `zavřít bez změny` je nejkratší a často nejlepší. Zapište závěr, ponechte standard v rytmu a smažte dočasné pracovní stopy. Nepřidávejte další kontrolu jen proto, že kontrola dopadla dobře. To by byl hezky zabalený způsob, jak trestat fungující práci další administrativou.
+
+Stav `zavřít s lokální opravou cesty` použijte, když člověk pravidlo neuměl najít nebo skončil u staré kopie. Oprava patří do navigace: odkaz, název, kotva, rozcestník, checklist, nebo odstranění zavádějícího místa. Obsah standardu nechte být, pokud problém nevznikl v něm.
+
+Stav `zavřít s lokální oporou rozhodnutí` použijte, když standard sice člověk našel, ale v jednom konkrétním místě si nebyl jistý. Přidejte jednu pracovní oporu: otázku, příklad, stop podmínku nebo negativní hranici. Oporu pište tak, aby pomohla při dalším použití bez vysvětlování od autora.
+
+Stav `zavřít kontrolu a otevřít novou smyčku` použijte jen tehdy, když kontrola odhalila změnu reality. Třeba nový typ datového toku, nové publikum, novou integrační cestu, nebo opakované obcházení pravidla. Takový signál si zaslouží vlastní otázku a vlastní stop podmínku. Běžná kontrola nemá nést celý nový problém na zádech.
+
+### Praktický příklad
+
+```text
+Standard:
+Privacy-first publikační checklist.
+
+Výsledek první běžné kontroly:
+Editor checklist našel, rozhodl podle něj správně a nepřenášel zákaznická data do pracovní poznámky.
+
+Uzavírací stav:
+Zavřít bez změny.
+
+Závěr:
+Checklist funguje v běžné publikační trase bez mimořádné péče.
+
+Co zůstává:
+Kanonické místo checklistu, kvartální kontrola publikačních standardů a návratový signál pro nový externí datový tok.
+
+Co rušíme:
+Dočasnou poznámku z první běžné kontroly.
+
+Co neotevíráme:
+Revizi analytiky, redesign formulářů ani nové měření používání checklistu.
+```
+
+Všimněte si, že příklad je skoro nudný. To je správně. Uzavření dobré kontroly nemá být kreativní dílna. Má potvrdit, že standard zvládl běžnou práci a může dál žít tam, kam byl převeden.
+
+Horší varianta může vypadat takto:
+
+```text
+Standard:
+Privacy-first publikační checklist.
+
+Výsledek první běžné kontroly:
+Editor checklist našel, ale u vloženého formuláře potřeboval ruční připomenutí, že vzniká nový datový tok.
+
+Uzavírací stav:
+Zavřít s lokální oporou rozhodnutí.
+
+Lokální oprava:
+Do části "formuláře a vložené prvky" doplnit otázku:
+"Vzniká tímto prvkem nový datový tok, identifikátor nebo předání dat mimo náš běžný provoz?"
+
+Jak poznáme, že stačí:
+Při další běžné publikaci editor rozhodne bez ručního připomenutí.
+
+Co neotevíráme:
+Celý checklist, výběr analytických nástrojů ani audit všech existujících formulářů.
+```
+
+Tady kontrola neskončila bez práce, ale práce zůstala lokální. Jedna chybějící otázka se neopravuje workshopem o strategii dat. Opravuje se jednou otázkou přesně tam, kde člověk váhal. Ano, tohle je ta nevděčná disciplína, která vypadá malá a šetří velké množství budoucího chaosu.
+
+### Privacy-first uzavření
+
+Uzavření první běžné kontroly je vhodný okamžik pro úklid dočasných stop. Během kontroly mohly vzniknout poznámky, screenshoty, krátké exporty, komentáře v dokumentu nebo ukázky reálných pracovních situací. Ne všechny patří do dlouhodobé paměti.
+
+Použijte jednoduché pravidlo:
+
+```text
+Do rozhodovací paměti ukládáme závěr a případnou lokální opravu. Důkazy necháváme v původním systému, anonymizujeme nebo mažeme, pokud už nemají samostatný účel.
+```
+
+To platí i pro příklady. Pokud potřebujete ukázku ponechat, zobecněte ji. Místo kopie konkrétní zákaznické zprávy napište: "při publikaci stránky vznikla nejistota u vloženého formuláře". Místo screenshotu nastavení napište: "editor potřeboval rozhodnout, zda formulář předává data mimo běžný provoz". Cílem je zachovat poučení, ne rozmnožit citlivé podklady.
+
+Privacy-first uzavření má tři otázky:
+
+- Jaký závěr potřebujeme zachovat pro další práci?
+- Který podklad už pro tento závěr nepotřebujeme?
+- Kde zůstává původní zdroj, pokud se k němu někdy bude muset vrátit oprávněný člověk?
+
+Pokud na druhou otázku odpovíte "všechno si necháme pro jistotu", vraťte se k účelu kontroly. Běžná kontrola nemá být archiv důkazů. Má být pracovní signál, že standard drží, potřebuje lokální oporu, nebo otevírá novou smyčku.
+
+### Karta uzavření první běžné kontroly
+
+```text
+Standard:
+
+Dlouhodobý rytmus:
+
+Kontrolované běžné použití:
+
+Výsledek kontroly:
+- rytmus drží
+- cesta drhne
+- rozhodnutí drhne
+- návratový signál
+
+Uzavírací stav:
+- zavřít bez změny
+- zavřít s lokální opravou cesty
+- zavřít s lokální oporou rozhodnutí
+- zavřít kontrolu a otevřít novou smyčku
+
+Jednovětý závěr:
+
+Pokud vzniká lokální oprava:
+Kde přesně:
+Co se mění:
+Jak poznáme, že oprava stačí:
+
+Pokud vzniká nová smyčka:
+Návratový signál:
+Nová pracovní otázka:
+Nejmenší důkaz:
+Stop podmínka:
+
+Co zůstává v dlouhodobém rytmu:
+
+Co po kontrole výslovně neotevíráme:
+
+Privacy-first uzavření:
+Jaký závěr ukládáme:
+Které podklady mažeme, anonymizujeme nebo necháváme v původním systému:
+Kdo má k původnímu zdroji oprávněný přístup:
+
+Vlastník:
+
+Datum uzavření:
+```
+
+Karta je záměrně kompatibilní s předchozí kontrolou. Nemá vytvářet nový typ dokumentace. Má jen dovést první běžnou kontrolu do stavu, ve kterém je jasné, jestli standard pokračuje v klidu, dostal drobnou oporu, nebo si zaslouží samostatnou smyčku.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte výsledek první běžné kontroly.
+2. Minuta 2: vyberte jeden uzavírací stav.
+3. Minuta 3: napište jednovětý závěr.
+4. Minuta 4: určete lokální opravu, novou smyčku, nebo vědomý klid.
+5. Minuta 5: napište, co po kontrole výslovně neotevíráte.
+6. Minuta 6: ukliďte dočasné podklady a potvrďte dlouhodobý rytmus.
+
+Když se během workshopu objeví víc oprav, jedna z nich je pravděpodobně nový problém. Vyberte tu, která patří k ověřovanému pracovnímu místu, a zbytek zapište jako podnět mimo uzavření. Uzavření má chránit rytmus, ne ukazovat, kolik nápadů tým ještě vymyslí.
+
+### Checklist uzavření první běžné kontroly
+
+- Vybrali jsme jeden uzavírací stav?
+- Máme jednovětý závěr bez nutnosti znát celý průběh kontroly?
+- Pokud rytmus drží, nevzniká další mimořádná kontrola?
+- Pokud drhla cesta, opravujeme jen cestu ke kanonickému místu?
+- Pokud drhlo rozhodnutí, přidáváme jen jednu lokální oporu?
+- Pokud vznikl návratový signál, oddělili jsme ho do nové smyčky?
+- Napsali jsme, co po kontrole výslovně neotevíráme?
+- Zůstává standard v jasném dlouhodobém rytmu?
+- Ukládáme jen závěr a nezbytnou lokální opravu?
+- Mažeme, anonymizujeme nebo necháváme v původním systému dočasné podklady bez dalšího účelu?
+- Ví vlastník, kdy se standard znovu objeví v běžné práci?
+
+Dobré uzavření první běžné kontroly má trochu paradoxní chuť: poctivě jste se podívali, jestli standard funguje, a výsledkem často je, že nic dalšího neděláte. To není lenost. To je provozní dospělost. Standard, který funguje bez speciální pozornosti, má dostat prostor pracovat. A tým má dostat prostor řešit věci, které opravdu změnily realitu.
+
 ## Pracovní log
 
+- 2026-06-22: Doplněna úvodní podkapitola o uzavření první běžné kontroly po převodu standardu do dlouhodobého rytmu: čtyři uzavírací stavy, lokální opravy, oddělení nové smyčky, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-22: Doplněna úvodní podkapitola o první běžné kontrole po převodu standardu do dlouhodobého rytmu: kontrola najitelnosti, rozhodnutelnosti a skryté péče, čtyři výsledky, privacy-first zápis, karta, mini workshop a checklist.
 - 2026-06-22: Doplněna úvodní podkapitola o převodu uzavřené druhé lehké kontroly do dlouhodobého rytmu: výběr běžného, delšího nebo signálního rytmu, ukončení dočasné péče, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-22: Doplněna úvodní podkapitola o uzavření druhé lehké kontroly po dlouhodobém klidu: uzavírací stavy, negativní hranice rozsahu, privacy-first uzavření, karta, mini workshop a checklist.
