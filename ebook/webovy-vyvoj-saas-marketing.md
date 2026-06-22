@@ -3144,6 +3144,154 @@ Když se během workshopu objeví staré téma, které v návratové větě nen�
 
 Přepsaná návratová věta má být začátek malé odpovědi, ne slavnostní klíč od skladu starých nápadů. Když první krok zůstane malý, tým rychle zjistí, jestli dnešní důvod drží. A když nedrží, zavře návrat levně, bez nové vrstvy procesů a bez další hromádky dat.
 
+## Jak otestovat hranici prvního kroku před spuštěním
+
+I dobře napsaný první malý krok může být pořád moc široký. Na papíře vypadá rozumně: jedno pracovní místo, jedna stop podmínka, jedna privacy-first hranice. Pak ale někdo řekne "když už to otevíráme" a během pěti minut se do kroku přilepí další stránka, další e-mail, další metrika a jeden malý nápad do budoucna. To není špatná vůle. To je běžná gravitace práce.
+
+Proto má první krok před spuštěním projít krátkým testem hranice. Nejde o schvalovací proces. Jde o poslední kontrolu, jestli krok opravdu odpovídá dnešnímu důvodu návratu, nebo jestli se z něj stala pohodlná záminka pro širší úklid.
+
+Použijte tři otázky:
+
+```text
+Kdybychom udělali jen tento krok, odpovíme na dnešní návratový signál?
+
+Kdybychom neudělali nic dalšího, zůstane výsledek použitelný?
+
+Která část kroku už patří do samostatného budoucího rozhodnutí?
+```
+
+Pokud první odpověď zní "ne", krok je špatně vybraný. Pokud druhá odpověď zní "ne", krok je závislý na skrytém rozsahu. Pokud třetí odpověď neumíte napsat, pravděpodobně jste budoucí práci nechali potichu uvnitř aktuálního kroku.
+
+### Příklad z onboardingového e-mailu
+
+Návratová věta:
+
+```text
+Vracíme se k prvnímu e-mailu po registraci, protože dva noví uživatelé za sebou nedokončili import bez dotazu na podporu, a potřebujeme rozhodnout, jestli e-mail vysvětluje první krok dost konkrétně.
+```
+
+Slabě ohraničený první krok:
+
+```text
+Projít první e-mail, obrazovku importu, onboardingovou sérii a připravit návrh nového průchodu.
+```
+
+Lépe ohraničený první krok:
+
+```text
+Porovnat jen první e-mail a obrazovku importu. Pokud používají jiný název akce nebo e-mail neříká jeden nejbližší krok, upravit text e-mailu. Onboardingovou sérii teď neotevíráme.
+```
+
+Rozdíl není v ambici. Rozdíl je v testovatelnosti. Lepší krok lze udělat, ověřit a zavřít. Slabší krok otevírá tolik míst najednou, že výsledek bude těžké připsat jedné změně. A když nejde poznat, co pomohlo, tým má tendenci přidávat další změny. Tak vzniká pracná mlha s pěkným názvem projektu.
+
+### Hraniční věta
+
+Před spuštěním kroku napište jednu hraniční větu:
+
+```text
+Tento krok končí ve chvíli, kdy:
+
+Tento krok se nerozšiřuje ani když:
+```
+
+Příklad:
+
+```text
+Tento krok končí ve chvíli, kdy první e-mail a obrazovka importu používají stejný název akce a e-mail říká jeden nejbližší krok.
+
+Tento krok se nerozšiřuje ani když během kontroly najdeme další slabé místo v onboardingové sérii; to dostane vlastní návratový signál.
+```
+
+Druhá věta je důležitější, než vypadá. Tým totiž obvykle neumí zastavit práci ve chvíli, kdy najde další užitečný problém. Jenže každý další problém je zároveň nový závazek. Hraniční věta chrání aktuální krok před tím, aby se z něj stal kontejner pro všechno, co je zrovna vidět.
+
+### Když krok nejde ohraničit
+
+Někdy test hranice ukáže, že první krok neumíte zmenšit bez ztráty smyslu. To je signál, že návratový důvod možná není dost přesný. Místo aby tým začal větší práci, vraťte se o jeden stupeň zpět a přepište návratovou větu.
+
+Typické varovné signály:
+
+- Pracovní místo je pořád celé: "homepage", "onboarding", "pricing", "CRM", "automatizace".
+- Stop podmínka popisuje aktivitu, ne výsledek: "projít", "podívat se", "zanalyzovat".
+- Ověření vyžaduje nové měření, i když návratový signál už existuje.
+- Krok nemá jasné "neotevíráme".
+- Výsledek by nebyl použitelný bez dalších dvou navazujících změn.
+
+V takovém případě krok nezvětšujte. Zmenšete otázku:
+
+```text
+Místo:
+Zlepšit onboarding.
+
+Zkuste:
+Umí první e-mail a první obrazovka pojmenovat stejný nejbližší krok?
+```
+
+Tohle je nudnější otázka. Výborně. Nudnější otázky se často dají zavřít. Velké otázky umí zvednout energii v místnosti, ale malé otázky častěji změní produkt.
+
+### Privacy-first hranice před spuštěním
+
+Test hranice má i datovou část. Před spuštěním si řekněte, jaký nejmenší důkaz stačí. Pokud už návratový signál existuje v obchodních poznámkách, supportu nebo běžném provozním záznamu, nekopírujte ho do nové tabulky jen proto, že se s ní bude pohodlněji pracovat.
+
+Dobrá formulace:
+
+```text
+Pro tento krok stačí zobecněný závěr ze dvou supportních dotazů. Nepřenášíme celé zprávy, jména, e-maily ani screenshoty do pracovní karty.
+```
+
+Ještě lepší je, když první krok odstraní nepotřebnou datovou potřebu. Například vysvětlí rozsah služby tak jasně, že obchod nemusí ručně doptávat citlivé informace hned v prvním kontaktu. Privacy-first provoz není jen úklid po práci. Je to návrh práce tak, aby zbytečná data vůbec nevznikala.
+
+### Karta testu hranice
+
+```text
+Přepsaná návratová věta:
+
+Navržený první krok:
+
+Odpovídá krok přímo na dnešní návratový signál?
+
+Co bude hotovo, i kdybychom neudělali nic dalšího?
+
+Tento krok končí ve chvíli, kdy:
+
+Tento krok se nerozšiřuje ani když:
+
+Co patří do samostatného budoucího rozhodnutí:
+
+Nejmenší důkaz, se kterým pracujeme:
+
+Privacy-first hranice:
+
+Výsledek uložíme do:
+```
+
+Kartu vyplňujte před prací, ne po ní. Po práci už si tým snadno zpětně vysvětlí, proč se rozsah rozrostl. Před prací je hranice nepříjemně jasná, a právě proto užitečná.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte návratovou větu a navržený první krok.
+2. Minuta 2: odpovězte, jestli krok přímo řeší dnešní signál.
+3. Minuta 3: napište, co bude hotovo bez dalších navazujících změn.
+4. Minuta 4: doplňte větu "tento krok se nerozšiřuje ani když".
+5. Minuta 5: určete nejmenší důkaz a privacy-first hranici.
+6. Minuta 6: rozhodněte, jestli krok spustit, zmenšit, nebo vrátit k přepisu návratové věty.
+
+Pokud workshop trvá déle, skoro jistě už neověřujete hranici, ale řešíte obsah změny. To je jiný režim. Nejdřív zavřete hranici, potom pracujte.
+
+### Checklist hranice prvního kroku
+
+- Odpovídá první krok přímo na dnešní návratový signál?
+- Je jasné jedno pracovní místo?
+- Umíme říct, co bude hotovo bez dalších navazujících změn?
+- Má krok větu "končí ve chvíli, kdy"?
+- Má krok větu "nerozšiřuje se ani když"?
+- Oddělili jsme budoucí nápady od aktuálního rozhodnutí?
+- Nepotřebujeme pro krok nové sledování, export nebo kopii citlivých dat?
+- Stačí nám zobecněný závěr místo detailních osobních údajů?
+- Víme, kam se uloží výsledek?
+- Pokud krok nejde ohraničit, vracíme ho k přepisu místo rozšiřování?
+
+Dobrá hranice není brzda ambice. Je to ochrana před tím, aby se ambice rozpustila v neurčité práci. Když první krok projde testem hranice, tým může pracovat rychleji, protože ví, kde má skončit. A to je v produktu, marketingu i provozu překvapivě vzácná superschopnost bez pláštěnky.
+
 Praktický filtr na výběr jedné kapitoly:
 
 1. Kdybychom vyřešili jen tuto věc, co se zlepší pro zákazníka?
@@ -243080,3 +243228,4 @@ První lehká kontrola po dlouhodobém klidu má být skoro nenápadná. Když s
 - 2026-06-21: Doplněna úvodní podkapitola o přepisu návratové věty do dnešního důvodu: konkrétní pracovní místo, návratový signál, nejmenší rozhodnutí, privacy-first hranice, karta, workshop a checklist.
 - 2026-06-21: Doplněna úvodní podkapitola o převodu přepsané návratové věty do prvního malého kroku: typy kroků, praktický příklad, privacy-first hranice, karta, mini workshop a checklist.
 - 2026-06-22: Doplněna krátká úvodní poznámka, aby se z první návratové věty rovnou odvodila hranice dalšího kroku.
+- 2026-06-22: Doplněna úvodní podkapitola o testu hranice prvního kroku před spuštěním: tři kontrolní otázky, hraniční věta, varovné signály širokého kroku, privacy-first práce s důkazy, karta, mini workshop a checklist.
