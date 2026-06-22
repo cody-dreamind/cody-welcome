@@ -243984,8 +243984,156 @@ Když workshop začne vymýšlet nový report, vraťte se k otázce z úvodu: co
 
 Dobré uzavření první kontroly po zmenšení je krátké, ale rozhodné. Tým ví, že standard nezmizel, jen přestal vyžadovat zvláštní doprovod. A pokud se ukázalo, že zvláštní doprovod ještě trochu potřebuje, vrací se jen přesně ohraničený kus pomoci, ne celá stará výprava s batohem plným tabulek.
 
+## Druhá kontrola po zmenšení revizní stopy
+
+První kontrola po zmenšení revizní stopy ověřila, jestli standard přežije bez starého lešení. Druhá kontrola má jiný úkol: zjistit, jestli se nový, lehčí režim nestal závislý na čerstvé paměti lidí, kteří ho právě uzavřeli. První průchod může dopadnout dobře jen proto, že všichni ještě vědí, co se rušilo, proč se to rušilo a kde hledat nový návratový signál. Druhá kontrola ukazuje, jestli pravidlo opravdu žije v provozu.
+
+Neotevírejte při ní celou historii zmenšení. Stačí porovnat dvě věci:
+
+```text
+Co mělo po první kontrole zůstat v běžném provozu:
+
+Co se při další běžné situaci opravdu stalo:
+```
+
+Pokud se odpovědi potkají, standard může zůstat v klidu. Pokud ne, hledejte nejmenší selhání. Druhá kontrola není soud nad tím, jestli byl celý standard dobrý nápad. Je to test, jestli po odlehčení nezmizela orientace, vlastnictví nebo privacy-first hranice.
+
+Praktický příklad:
+
+```text
+Standard:
+Před publikací nové landing page se kontroluje, jestli stránka nepřidává nový externí datový tok.
+
+Po první kontrole zůstalo:
+Publikační checklist, zpřesněný návratový signál a kvartální review webových standardů. Samostatná evidence použití checklistu nevzniká.
+
+Druhá běžná situace:
+Jiný editor připravil stránku s novým formulářem. Checklist našel, návratový signál rozpoznal a před publikací otevřel datovou kontrolu formulářového toku.
+
+Výsledek:
+Zmenšená revizní stopa drží i bez čerstvé paměti původního týmu. Standard zůstává v běžném rytmu.
+```
+
+Tady je důležité slovo "jiný". Druhá kontrola má větší hodnotu, když ji prověří jiný člověk, jiný typ stránky, jiný týden nebo jiný běžný kontext. Nemusí jít o dramaticky odlišnou situaci. Stačí, aby pravidlo neprojelo jen po stopě poslední schůzky.
+
+### Co při druhé kontrole porovnat
+
+Druhá kontrola stojí na pěti otázkách:
+
+- Našel člověk standard bez odkazu z posledního review?
+- Poznal, kdy návratový signál nastal nebo nenastal?
+- Vzniklo rozhodnutí v pracovním místě, ne bokem v chatu?
+- Nevznikla nová evidence, která nahrazuje zrušenou revizní stopu?
+- Zůstala privacy-first hranice viditelná tam, kde vznikají nebo tečou data?
+
+Pokud některá odpověď selže, nesahat hned po velké opravě. Většinou stačí drobné dočištění. Chybí-li odkaz, opravte odkaz. Je-li signál příliš obecný, přepište signál. Vzniká-li evidence bokem, zjistěte, co v pracovním místě nebylo dost jasné, a teprve potom náhražku ukliďte.
+
+Druhá kontrola je také dobrý test vlastnictví. Pokud pravidlo funguje jen tehdy, když ho drží jeden konkrétní člověk v hlavě, revizní stopa se nezmenšila. Jen se přesunula z dokumentu do člověka. To je sice levné na papíře, ale drahé při první dovolené.
+
+### Čtyři výsledky druhé kontroly
+
+Po druhé kontrole vyberte jeden ze čtyř výsledků:
+
+- Zmenšení je stabilní: standard je najitelný, rozhodnutelný a nevyrábí novou evidenci ani po dalším použití.
+- Chybí poslední lokální dočištění: pravidlo drží, ale jedno pracovní místo potřebuje drobnou navigační nebo textovou úpravu.
+- Běžný rytmus je slabý: standard je správný, ale není jasné, kdy a kdo ho v běžném provozu drží.
+- Zmenšení neobstálo: bez zvláštní péče se pravidlo ztrácí, obchází nebo nahrazuje ruční kontrolou.
+
+Stav `zmenšení je stabilní` znamená, že další zvláštní kontrola nemá vzniknout. Zapište závěr a nechte standard žít v běžném rytmu nebo podle návratového signálu.
+
+Stav `chybí poslední lokální dočištění` řešte jednou úpravou v místě, kde se chyba ukázala. Nepřidávejte nové školení, pokud stačí přejmenovat položku checklistu.
+
+Stav `běžný rytmus je slabý` je častý u standardů, které mají dobrý obsah, ale špatné vlastnictví. Pak neopravujte text pravidla, ale provozní kotvu: kdo standard potká, v jakém rytmu a kde se z kontrolního závěru stane rozhodnutí.
+
+Stav `zmenšení neobstálo` použijte, když se pravidlo bez zvláštní péče reálně nepoužije. Vraťte nejmenší dočasnou oporu s jasnou stop podmínkou. Nevracejte všechno, co jste předtím uklidili. Panika je špatný architekt procesů, i když má někdy velmi přesvědčivý hlas.
+
+### Privacy-first kontrola druhého průchodu
+
+Při druhé kontrole už obvykle není důvod držet detailní důkazy. Pokud pravidlo prošlo dalším použitím, stačí krátký závěr:
+
+```text
+Druhá kontrola po zmenšení: standard byl použit v běžném pracovním místě, návratový signál byl rozpoznán a nevznikla nová pomocná evidence.
+```
+
+Pokud se objevil problém, ukládejte jen tolik detailu, kolik je potřeba pro opravu. U formulářů, obchodních poznámek, supportních zpráv nebo analytických výstupů preferujte zobecnění:
+
+```text
+Stačí:
+Při novém formulářovém toku nebylo jasné, kdo kontroluje externí datový tok.
+
+Nestačí bez důvodu:
+Kopie celé interní konverzace, screenshot formuláře s osobními údaji a seznam lidí, kteří si nebyli jistí.
+```
+
+Privacy-first provoz se nepozná podle toho, že nikdy nic nezapíše. Pozná se podle toho, že zapisuje závěr ve správném místě a nenechává vedle něj hromadu pomocných stop "kdyby náhodou".
+
+### Karta druhé kontroly po zmenšení
+
+```text
+Standard:
+
+Kanonické pracovní místo:
+
+Co mělo po první kontrole zůstat v běžném provozu:
+
+Druhá běžná situace:
+
+Kdo nebo co prověřilo přenositelnost bez čerstvé paměti:
+
+Byl standard nalezen bez zvláštní pomoci:
+
+Byl návratový signál rozpoznatelný:
+
+Vzniklo rozhodnutí v pracovním místě:
+
+Vznikla nová pomocná evidence:
+
+Výsledek druhé kontroly:
+- zmenšení je stabilní
+- chybí poslední lokální dočištění
+- běžný rytmus je slabý
+- zmenšení neobstálo
+
+Jedna oprava nebo žádná:
+
+Co dál nesledujeme zvlášť:
+
+Privacy-first závěr:
+
+Další běžný rytmus nebo dočasná stop podmínka:
+```
+
+Karta má zůstat krátká. Pokud se při jejím vyplňování začne opisovat historie zavádění standardu, vraťte se k první otázce: co mělo po první kontrole zůstat v běžném provozu a co se při další běžné situaci opravdu stalo?
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte závěr první kontroly po zmenšení.
+2. Minuta 2: popište druhou běžnou situaci.
+3. Minuta 3: ověřte najitelnost standardu a návratového signálu.
+4. Minuta 4: zkontrolujte, jestli rozhodnutí vzniklo v pracovním místě.
+5. Minuta 5: najděte případnou novou pomocnou evidenci.
+6. Minuta 6: vyberte jeden výsledek a zapište další rytmus nebo stop podmínku.
+
+Když workshop otevře otázku, jestli by se podobně neměly zkontrolovat všechny standardy, zapište ji stranou. Druhá kontrola po zmenšení má uzavřít přenositelnost jednoho pravidla, ne spustit plošnou inventuru jen proto, že se tým na chvíli cítil zodpovědně.
+
+### Checklist druhé kontroly
+
+- Porovnali jsme závěr první kontroly s další běžnou situací?
+- Prověřil standard někdo nebo něco mimo čerstvou paměť posledního review?
+- Našel člověk standard v kanonickém pracovním místě?
+- Byl návratový signál konkrétní a použitelný?
+- Vzniklo rozhodnutí tam, kde se pracuje, ne v nové boční poznámce?
+- Nevznikla nová evidence jako náhrada za zrušenou revizní stopu?
+- Pokud chybí dočištění, je omezené na jedno pracovní místo?
+- Pokud je slabý rytmus, opravujeme vlastnictví a provozní kotvu?
+- Pokud zmenšení neobstálo, vracíme jen nejmenší dočasnou péči se stop podmínkou?
+- Ponecháváme jen závěr a nezbytný detail, ne surové podklady bez účelu?
+
+Druhá kontrola po zmenšení revizní stopy je dobrý konec jedné dlouhé smyčky. Standard už nepotřebuje zvláštní doprovod, ale tým si ověřil, že nezmizel v tichu. Když kontrola dopadne dobře, nejlepší další akce je žádná zvláštní akce. V provozu je to někdy nejvyšší forma elegance: systém funguje a nikdo kvůli tomu nemusí zakládat další tabulku.
+
 ## Pracovní log
 
+- 2026-06-22: Doplněna úvodní podkapitola o druhé kontrole po zmenšení revizní stopy: přenositelnost bez čerstvé paměti, čtyři výsledky, privacy-first omezení důkazů, karta, mini workshop a checklist.
 - 2026-06-22: Doplněna úvodní podkapitola o uzavření první kontroly po zmenšení revizní stopy: čtyři uzavírací stavy, hranice proti nové evidenci, praktický příklad, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-22: Doplněna úvodní podkapitola o první kontrole po zmenšení revizní stopy: ověření běžného rytmu bez zvláštní péče, čtyři výsledky, privacy-first kontrola nové pomocné evidence, karta, mini workshop a checklist.
 - 2026-06-22: Doplněna úvodní podkapitola o zmenšení revizní stopy po opakovaně klidném standardu: co ponechat, co ukončit, kdy stopu nezmenšovat, privacy-first úklid, karta, mini workshop a checklist.
