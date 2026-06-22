@@ -243657,8 +243657,176 @@ Když workshop začne obnovovat staré ověřovací podklady, zastavte ho. Prvn�
 
 První kontrola po zmenšení revizní stopy chrání tým před dvěma extrémy. První je zapomenout na standard úplně. Druhý je nechat kolem stabilního pravidla běžet kontrolní aparát navždy. Dobrá kontrola najde prostředek: pravidlo je vidět tam, kde se pracuje, ale už kolem sebe nevyrábí administrativní ozvěnu.
 
+## Uzavření první kontroly po zmenšení revizní stopy
+
+První kontrola po zmenšení revizní stopy má smysl až ve chvíli, kdy se uzavře. Jinak z ní snadno vznikne přesně ta pomocná agenda, které se tým chtěl zbavit. Někdo si založí poznámku "ještě sledovat", někdo jiný přidá připomínku do kalendáře a za měsíc máte zpátky malý kontrolní aparát. Jen se už nejmenuje revizní stopa, ale "pro jistotu". To je oblíbený firemní převlek pro práci, která se neuměla rozloučit.
+
+Uzavření má odpovědět na jednu větu:
+
+```text
+Co po první kontrole zůstává v běžném provozu a co už dál nesledujeme zvlášť?
+```
+
+Tato věta je důležitější než dlouhý zápis z kontroly. Pokud ji neumíte napsat, kontrola není hotová. Možná jste zjistili výsledek, ale ještě jste ho nepřevedli do provozního stavu. A právě tam se rozhoduje, jestli zmenšení opravdu ulevilo týmu, nebo jen přesunulo neklid na další místo.
+
+### Čtyři uzavírací stavy
+
+Po první kontrole vyberte jeden ze čtyř uzavíracích stavů:
+
+- Zavřít bez další akce: zmenšení drží a standard zůstává jen v běžném rytmu.
+- Zavřít po lokální opravě: pravidlo funguje, ale pracovní místo dostalo drobné zpřesnění.
+- Zavřít se zpřesněným návratovým signálem: pravidlo funguje, ale signál byl příliš vágní.
+- Vrátit malou dočasnou péči: zmenšení bylo předčasné a standard ještě potřebuje krátký doprovod.
+
+Stav `zavřít bez další akce` je nejlepší výsledek. Neznamená "nic jsme neudělali". Znamená, že jste ověřili běžný provoz a odmítli vyrábět další práci. Zápis může být krátký:
+
+```text
+První kontrola po zmenšení revizní stopy: standard byl použit v běžném publikačním checklistu, nevznikla nová pomocná evidence, návratový signál nenastal. Zůstává běžný kvartální rytmus.
+```
+
+Stav `zavřít po lokální opravě` použijte, když se ukázal malý problém v navigaci nebo formulaci. Například odkaz na standard byl ve správném dokumentu, ale pod názvem, který nový člověk nenašel. Oprava patří do pracovního místa, ne do nové metodiky.
+
+Stav `zavřít se zpřesněným návratovým signálem` použijte, když tým chápe pravidlo, ale neumí poznat, kdy se k němu vrátit. Slabý signál obvykle zní obecně: "při problému", "když to začne zlobit", "při změně webu". Silnější signál popisuje viditelnou událost:
+
+```text
+Návratový signál:
+Při přidání nového externího skriptu, nového formuláře, nového exportu dat nebo nového místa, kde se sbírá osobní údaj.
+```
+
+Stav `vrátit malou dočasnou péči` použijte opatrně. Nesmí to být návrat ke všem starým kontrolám. Vraťte jen nejmenší oporu, která řeší potvrzené selhání. Pokud člověk standard nenašel, nepotřebujete měsíční audit. Potřebujete jeden odkaz v checklistu a možná jedno ověření při dalším použití.
+
+### Co se nesmí po uzavření rozrůst
+
+Po uzavření první kontroly si dejte pozor na tři nenápadná rozšíření:
+
+- další kontrola bez návratového signálu;
+- nová evidence jen proto, že kontrola proběhla;
+- rozšíření standardu na sousední problém, který se během kontroly mihnul kolem.
+
+První rozšíření vypadá rozumně: "Ještě jednou se na to podíváme." Pokud ale zmenšení drželo a návratový signál nenastal, další kontrola je jen odložená nedůvěra. Nechte standard v běžném rytmu.
+
+Druhé rozšíření je administrativní past. Tým zrušil revizní stopu, ověřil, že funguje, a potom si založil tabulku kontrol po zmenšení. Gratuluju, právě jste vynalezli revizní stopu s horším názvem. Stačí jeden závěr v kanonickém místě nebo v changelogu standardu.
+
+Třetí rozšíření je produktově lákavé. Během kontroly se ukáže, že sousední checklist má podobný problém, jiný standard má slabší signál nebo onboarding nemá aktuální příklad. Zapište to stranou jako nový podnět. Nelepte to na uzavření první kontroly. Jedna kontrola má zavřít jednu smyčku.
+
+### Praktický příklad
+
+```text
+Standard:
+Před publikací nové landing page se kontroluje, jestli stránka nepřidává nový externí datový tok.
+
+Zmenšení revizní stopy:
+Samostatná měsíční připomínka skončila. Pravidlo zůstalo jen v publikačním checklistu a v kvartálním review webových standardů.
+
+První kontrola:
+Nová stránka byla publikována bez externího měřicího skriptu. Editor našel kontrolu v publikačním checklistu bez připomenutí. Nevznikla nová pomocná evidence.
+
+Drobný nález:
+Návratový signál v checklistu zněl "při změně dat". To bylo moc obecné.
+
+Uzavření:
+Zavřít se zpřesněným návratovým signálem.
+
+Nový signál:
+Téma se znovu otevře při přidání nového formuláře, externího skriptu, nové exportní tabulky nebo nové integrace, která dostává data návštěvníků.
+
+Co dál nesledujeme:
+Nezakládáme samostatnou evidenci použití checklistu. Další kontrola proběhne jen v běžném kvartálním review nebo při návratovém signálu.
+```
+
+Všimněte si, že se tím neotevřel nový privacy audit celého webu. To by byl jiný úkol. Tady se jen uzavřela první kontrola po zmenšení a zpřesnil se signál, aby běžný provoz věděl, kdy má zvednout ruku.
+
+### Privacy-first uzavření
+
+Privacy-first uzavření má dvě části: úklid důkazů a omezení nové stopy. U první kontroly po zmenšení většinou nepotřebujete ukládat surové podklady. Stačí výsledek, pracovní místo a případná lokální oprava.
+
+Pište závěr tak, aby neobsahoval osobní data ani zbytečné detaily:
+
+```text
+Ponecháváme:
+Agregovaný závěr, že standard byl použit v běžném publikačním procesu a nevznikl nový externí datový tok.
+
+Neponecháváme:
+Screenshoty interního checklistu, kopie zákaznických zpráv ani ruční seznam lidí, kteří kontrolu provedli.
+```
+
+Pokud kontrola pracovala s reálným formulářem, e-mailem nebo analytickým výstupem, zeptejte se ještě jednou:
+
+```text
+Potřebujeme uložit důkaz samotný, nebo stačí závěr, který z něj vyplynul?
+```
+
+Ve většině případů stačí závěr. Když potřebujete důkaz kvůli auditu nebo právnímu důvodu, uložte ho tam, kde patří, s jasnou retencí a přístupem jen pro lidi, kteří ho opravdu potřebují. Nevkládejte ho do obecné pracovní poznámky. Obecné poznámky jsou velmi dobré v tom, že se tváří nevinně a pak přežijí tři reorganizace.
+
+### Karta uzavření první kontroly po zmenšení
+
+```text
+Standard:
+
+Kanonické pracovní místo:
+
+Co bylo při zmenšení ukončeno:
+
+Výsledek první kontroly:
+- zmenšení drží
+- chybí drobná navigace
+- návratový signál je slabý
+- zmenšení bylo předčasné
+
+Uzavírací stav:
+- zavřít bez další akce
+- zavřít po lokální opravě
+- zavřít se zpřesněným návratovým signálem
+- vrátit malou dočasnou péči
+
+Co se propisuje do pracovního místa:
+
+Co dál nesledujeme zvlášť:
+
+Návratový signál:
+
+Další běžný rytmus nebo dočasná stop podmínka:
+
+Privacy-first závěr:
+Které podklady mažeme, anonymizujeme nebo vůbec nekopírujeme:
+
+Vlastník:
+
+Datum další běžné kontroly, pokud existuje:
+```
+
+Kartu vyplňte krátce. Její účel není vytvořit novou vrstvu dokumentace, ale dát uzavření dost pevný tvar, aby se k němu tým nemusel vracet ze strachu, že něco zapomněl.
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: přečtěte závěr první kontroly po zmenšení.
+2. Minuta 2: vyberte jeden uzavírací stav.
+3. Minuta 3: určete, co se propisuje do pracovního místa.
+4. Minuta 4: napište, co dál nesledujete zvlášť.
+5. Minuta 5: potvrďte návratový signál nebo ho zpřesněte.
+6. Minuta 6: proveďte privacy-first úklid podkladů.
+7. Minuta 7: zapište vlastníka a další běžný rytmus, pokud má existovat.
+
+Když workshop začne vymýšlet nový report, vraťte se k otázce z úvodu: co po první kontrole zůstává v běžném provozu a co už dál nesledujeme zvlášť? Pokud nový report není odpovědí na potvrzené selhání, je to jen nostalgie po kontrole v tabulkové košili.
+
+### Checklist uzavření
+
+- Vybrali jsme jeden ze čtyř uzavíracích stavů?
+- Je jasné, jestli zmenšení drží, potřebuje lokální opravu, přesnější signál, nebo malou dočasnou péči?
+- Neobnovili jsme celý starý revizní režim kvůli jedné drobné slabině?
+- Propsali jsme případnou opravu do kanonického pracovního místa?
+- Napsali jsme, co dál nesledujeme zvlášť?
+- Je návratový signál konkrétní a viditelný v běžné práci?
+- Nevznikl nový report, tabulka nebo připomínka bez jasné stop podmínky?
+- Oddělili jsme sousední nápady od uzavření této smyčky?
+- Ponecháváme jen závěr kontroly místo surových osobních nebo provozních podkladů?
+- Má vlastník jasno, kdy se standard znovu objeví v běžném rytmu?
+
+Dobré uzavření první kontroly po zmenšení je krátké, ale rozhodné. Tým ví, že standard nezmizel, jen přestal vyžadovat zvláštní doprovod. A pokud se ukázalo, že zvláštní doprovod ještě trochu potřebuje, vrací se jen přesně ohraničený kus pomoci, ne celá stará výprava s batohem plným tabulek.
+
 ## Pracovní log
 
+- 2026-06-22: Doplněna úvodní podkapitola o uzavření první kontroly po zmenšení revizní stopy: čtyři uzavírací stavy, hranice proti nové evidenci, praktický příklad, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-22: Doplněna úvodní podkapitola o první kontrole po zmenšení revizní stopy: ověření běžného rytmu bez zvláštní péče, čtyři výsledky, privacy-first kontrola nové pomocné evidence, karta, mini workshop a checklist.
 - 2026-06-22: Doplněna úvodní podkapitola o zmenšení revizní stopy po opakovaně klidném standardu: co ponechat, co ukončit, kdy stopu nezmenšovat, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-22: Doplněna úvodní podkapitola o uzavření druhé běžné kontroly do provozního klidu: uzavírací věty, příklady klidu a zúžení standardu, privacy-first úklid, karta, mini workshop a checklist.
