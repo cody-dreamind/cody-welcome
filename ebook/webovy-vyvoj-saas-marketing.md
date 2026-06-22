@@ -243523,8 +243523,143 @@ Pokud se během šesti minut objeví debata o tom, zda standard vůbec funguje, 
 
 Dobré zmenšení revizní stopy je tichý úspěch. Standard zůstává, ale kolem něj ubude kontrolního prachu. Tým má pořád pravidlo, návratový signál a rytmus. Nemá už však zvláštní administrativu, která vznikla jen proto, že pravidlo kdysi potřebovalo doprovod.
 
+## První kontrola po zmenšení revizní stopy
+
+Po zmenšení revizní stopy přichází malý, ale důležitý test: jestli standard opravdu funguje i bez bývalého lešení. Tým už nemá speciální kartu, dočasnou připomínku ani ruční seznam prvních použití. Zůstalo jen kanonické pracovní místo, běžný rytmus a návratový signál. První kontrola po zmenšení má ověřit, zda to stačí.
+
+Tato kontrola nemá znovu rozbalit celou historii zavádění. Pokud se po zmenšení stopy okamžitě vrátíte ke starým tabulkám, screenshotům a debatám, zmenšení bylo jen kosmetické. Cílem je odpovědět na praktičtější otázku:
+
+```text
+Dokáže standard žít v běžném rytmu bez zvláštní péče?
+```
+
+Když ano, nechte ho být. Když ne, neobnovujte automaticky celé staré ověřování. Najděte nejmenší místo, kde zmenšení selhalo: chybějící odkaz v šabloně, nejasný návratový signál, slabé vlastnictví rytmu nebo zapomenutou privacy-first hranici.
+
+### Co při první kontrole ověřit
+
+První kontrola po zmenšení revizní stopy stojí na čtyřech otázkách:
+
+- Našel člověk standard tam, kde pracuje, bez staré pomocné poznámky?
+- Vedl standard k rozhodnutí, nebo jen k pocitu, že by se mělo něco zkontrolovat?
+- Byl návratový signál dost konkrétní, aby se poznalo, že nenastal?
+- Nevznikla nová ruční evidence jako náhrada za zrušenou starou evidenci?
+
+Poslední otázka je často nejdůležitější. Tým někdy zruší jednu tabulku a potichu si založí jinou, protože se bojí ztratit kontrolu. To není zmenšení stopy. To je přesunutí neklidu na nové místo s horším názvem.
+
+Příklad:
+
+```text
+Standard:
+Při publikaci landing page se kontroluje nový externí datový tok.
+
+Zmenšená stopa:
+Zůstává publikační checklist a kvartální review webových standardů. Samostatná měsíční poznámka skončila.
+
+První kontrola po zmenšení:
+Editor publikoval novou stránku a použil checklist bez připomenutí. Nevznikl nový externí skript. Nikdo nezaložil novou evidenci použití checklistu.
+
+Výsledek:
+Zmenšení drží. Standard zůstává jen v běžném publikačním rytmu.
+```
+
+Tady není potřeba slavnostní závěr. Stačí krátký provozní zápis. Pokud standard skutečně přešel do běžného rytmu, nejlepší výsledek je nudný. Nuda je v provozu často známka toho, že systém konečně přestal tahat za rukáv.
+
+### Čtyři výsledky první kontroly
+
+Po první kontrole vyberte jeden ze čtyř stavů:
+
+- Zmenšení drží: standard je najitelný, rozhodnutelný a nevzniká nová ruční evidence.
+- Chybí drobná navigace: pravidlo platí, ale pracovní místo potřebuje jeden odkaz, nadpis nebo přesnější pojmenování.
+- Návratový signál je slabý: tým neví, kdy se má k pravidlu vrátit, a proto se raději dívá na všechno.
+- Zmenšení bylo předčasné: bez zvláštní péče se pravidlo nepoužije nebo se používá jinak, než bylo zamýšleno.
+
+Stav `zmenšení drží` nevyžaduje další projekt. Zapište závěr a nechte standard v běžném rytmu.
+
+Stav `chybí drobná navigace` řešte lokální opravou v pracovním místě. Nepište novou metodiku; přidejte odkaz, přesuňte checklist, zpřesněte název pole nebo doplňte jednu větu.
+
+Stav `návratový signál je slabý` opravte na úrovni signálu. Místo "při problému s daty" napište třeba "při přidání nového externího skriptu, nového formulářového toku nebo nové exportní tabulky".
+
+Stav `zmenšení bylo předčasné` není ostuda. Znamená jen, že stabilizace nebyla hotová. Vraťte jednu nejmenší dočasnou kontrolu, ale s datem ukončení a přesnou stop podmínkou. Neobnovujte celý starý režim jen proto, že se první pokus nepovedl.
+
+### Privacy-first kontrola po zmenšení
+
+Privacy-first hodnota zmenšení se ukáže až po první kontrole. Nestačí říct, že jste smazali pomocné podklady. Je potřeba ověřit, že nevznikly nové náhražky:
+
+- nový spreadsheet pro "jistotu";
+- kopie zákaznických zpráv mimo původní systém;
+- screenshoty formulářů v chatu;
+- ruční seznam použití checklistu;
+- nové poznámky s osobními údaji bez jasného účelu.
+
+Použijte krátkou větu:
+
+```text
+Po zmenšení revizní stopy nevznikla nová pomocná evidence; ponecháváme jen závěr první běžné kontroly.
+```
+
+Pokud nová evidence vznikla, nepovažujte to automaticky za chybu člověka. Často je to signál, že pracovní místo pořád nevysvětluje, co se má stát. Opravte nejdřív pracovní místo a až potom mažte náhražku. Jinak tým znovu vyrobí stejnou věc, jen o složku vedle.
+
+### Karta první kontroly po zmenšení stopy
+
+```text
+Standard:
+
+Kanonické pracovní místo:
+
+Co bylo při zmenšení ukončeno:
+
+První běžná situace po zmenšení:
+
+Našel člověk standard bez zvláštní pomoci:
+
+Vzniklo rozhodnutí:
+
+Nastal návratový signál:
+
+Vznikla nová pomocná evidence:
+
+Výsledek kontroly:
+- zmenšení drží
+- chybí drobná navigace
+- návratový signál je slabý
+- zmenšení bylo předčasné
+
+Lokální oprava, pokud je potřeba:
+
+Privacy-first závěr:
+
+Další běžný rytmus nebo dočasná stop podmínka:
+```
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: připomeňte, co se při zmenšení revizní stopy ukončilo.
+2. Minuta 2: popište první běžnou situaci po zmenšení.
+3. Minuta 3: ověřte najitelnost standardu bez zvláštní pomoci.
+4. Minuta 4: zkontrolujte, jestli vzniklo rozhodnutí a jestli nenastal návratový signál.
+5. Minuta 5: najděte případnou novou pomocnou evidenci.
+6. Minuta 6: vyberte jeden ze čtyř výsledků a zapište další rytmus.
+
+Když workshop začne obnovovat staré ověřovací podklady, zastavte ho. První kontrola po zmenšení má ověřit dnešní provoz, ne znovu soudit celé zavedení standardu. Starou historii otevřete jen tehdy, když bez ní nejde rozhodnout, zda zmenšení bylo předčasné.
+
+### Checklist první kontroly po zmenšení
+
+- Víme, co bylo při zmenšení revizní stopy ukončeno?
+- Ověřili jsme konkrétní první běžnou situaci po zmenšení?
+- Našel člověk standard bez dočasné připomínky nebo staré pomocné karty?
+- Vedl standard k rozhodnutí v pracovním místě?
+- Byl návratový signál dost konkrétní?
+- Nevznikla nová pomocná evidence jako náhrada za zrušenou starou evidenci?
+- Pokud chybí navigace, opravujeme jen pracovní místo?
+- Pokud je slabý signál, zpřesňujeme signál místo obnovy celé kontroly?
+- Pokud bylo zmenšení předčasné, vracíme jen nejmenší dočasnou péči s datem ukončení?
+- Ponecháváme jen závěr kontroly, ne surové podklady bez dalšího účelu?
+
+První kontrola po zmenšení revizní stopy chrání tým před dvěma extrémy. První je zapomenout na standard úplně. Druhý je nechat kolem stabilního pravidla běžet kontrolní aparát navždy. Dobrá kontrola najde prostředek: pravidlo je vidět tam, kde se pracuje, ale už kolem sebe nevyrábí administrativní ozvěnu.
+
 ## Pracovní log
 
+- 2026-06-22: Doplněna úvodní podkapitola o první kontrole po zmenšení revizní stopy: ověření běžného rytmu bez zvláštní péče, čtyři výsledky, privacy-first kontrola nové pomocné evidence, karta, mini workshop a checklist.
 - 2026-06-22: Doplněna úvodní podkapitola o zmenšení revizní stopy po opakovaně klidném standardu: co ponechat, co ukončit, kdy stopu nezmenšovat, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-22: Doplněna úvodní podkapitola o uzavření druhé běžné kontroly do provozního klidu: uzavírací věty, příklady klidu a zúžení standardu, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-22: Doplněna úvodní podkapitola o druhé běžné kontrole v dlouhodobém rytmu: porovnání se závěrem první kontroly, čtyři výsledky, privacy-first kontrola, karta, mini workshop a checklist.
