@@ -3292,6 +3292,166 @@ Pokud workshop trvá déle, skoro jistě už neověřujete hranici, ale řešít
 
 Dobrá hranice není brzda ambice. Je to ochrana před tím, aby se ambice rozpustila v neurčité práci. Když první krok projde testem hranice, tým může pracovat rychleji, protože ví, kde má skončit. A to je v produktu, marketingu i provozu překvapivě vzácná superschopnost bez pláštěnky.
 
+## Spuštění prvního malého kroku po testu hranice
+
+Když první krok projde testem hranice, je lákavé konečně "začít pořádně pracovat". Právě tady se ale malý krok často rozpadne. Tým už má dobrý důvod, vybrané pracovní místo, stop podmínku i privacy-first hranici, ale při samotném spuštění přidá ještě jednu konzultaci, jednu kontrolní tabulku, jednu vedlejší úpravu a jedno měření "pro jistotu". Výsledek pak není první malý krok, ale malá verze velkého projektu. A malá verze velkého projektu umí být stejně nepřehledná jako velká, jen se hůř přiznává.
+
+Spuštění prvního kroku proto berte jako provozní manévr, ne jako kreativní brainstorming. Cíl není vymyslet nejlepší možnou variantu celé oblasti. Cíl je provést přesně ten krok, který prošel hranicí, a po něm vybrat jeden uzavírací stav.
+
+Začněte větou:
+
+```text
+Teď provádíme jen tento krok:
+```
+
+Potom ji doplňte tak konkrétně, aby podle ní šel krok zastavit:
+
+```text
+Teď provádíme jen tento krok:
+Porovnáme první e-mail po registraci s první obrazovkou importu a sjednotíme název nejbližší akce. Neotevíráme další e-maily, navigaci produktu ani nové měření.
+```
+
+Tato věta má být vidět tam, kde se pracuje: v kartě úkolu, pull requestu, redakční poznámce, komentáři u šablony nebo krátkém zápisu k obchodní úpravě. Nestačí, že ji někdo řekl na schůzce. Mluvená hranice je měkká. Zapsaná hranice umí být otravně užitečná.
+
+### Tři pravidla spuštění
+
+Při spuštění držte tři jednoduchá pravidla:
+
+- Neměňte pracovní místo po cestě.
+- Nepřidávejte nový důkaz, pokud stačí původní návratový signál.
+- Neřešte sousední nález ve stejné kartě.
+
+První pravidlo chrání soustředění. Pokud jste vybrali první e-mail, zůstaňte u prvního e-mailu. Když během práce zjistíte, že problém je možná až na druhé obrazovce, nezvětšujte krok automaticky. Zapište to jako možný další signál a nejdřív dokončete nebo zavřete aktuální krok.
+
+Druhé pravidlo chrání data. První malý krok obvykle nepotřebuje novou analytiku, nový export ani nové kopie zákaznických zpráv. Pokud už návratový signál stačil k otevření kroku, často stačí i k jeho prvnímu provedení. Nový důkaz přidejte jen tehdy, když bez něj nejde rozhodnout o výsledku kroku.
+
+Třetí pravidlo chrání uzavření. Sousední nález může být pravdivý a důležitý. To z něj ale nedělá součást dnešního kroku. Dnešní krok má mít vlastní konec. Sousední nález má dostat vlastní větu, vlastní návratový signál a vlastní hranici, až na něj přijde řada.
+
+### Co má vzniknout při práci
+
+První malý krok má typicky vyrobit jeden z těchto výstupů:
+
+- textovou úpravu na jednom místě;
+- sjednocení názvu, CTA, instrukce nebo příkladu mezi dvěma místy;
+- doplnění jednoho konkrétního důkazu;
+- odstranění jedné zbytečné otázky, pole, exportu nebo poznámky;
+- rozhodnutí, že návrat se tímto krokem nepotvrdil.
+
+Všimněte si, že poslední výstup je plnohodnotný. Když krok ukáže, že problém neleží ve vybraném místě, není to prohra. Je to levné zúžení nejistoty. Praktická práce není jen vyrábět změny. Praktická práce je i umět neudělat změnu, která by jen přidala hluk.
+
+Příklad:
+
+```text
+Návratový signál:
+Dva noví uživatelé nedokončili import bez dotazu na podporu.
+
+Spuštěný krok:
+Porovnat první e-mail a první obrazovku importu.
+
+Výsledek:
+E-mail používá "nahrajte data", obrazovka používá "importovat soubor". Sjednocujeme na "importovat soubor" a přidáváme jednu větu: "Začněte importem CSV souboru z účetního systému."
+
+Co neřešíme:
+Další e-mail, produktové menu, automatické připomínky ani scoring aktivace.
+```
+
+Tento výsledek je malý, ale uzavřený. Tým ví, co změnil, proč to změnil a co nezměnil. To je víc než polovina kvality.
+
+### Privacy-first spuštění
+
+Při spuštění si hlídejte, aby se pracovní stopa nezvětšila jen proto, že někdo chce mít "lepší kontext". Lepší kontext často znamená víc kopií, víc citací, víc screenshotů a víc osobních údajů mimo původní systém. U prvního kroku je to skoro vždy přepal.
+
+Použijte krátký záznam:
+
+```text
+Pracujeme se zobecněným signálem:
+
+Nekopírujeme:
+
+Po dokončení ponecháme:
+```
+
+Příklad:
+
+```text
+Pracujeme se zobecněným signálem:
+Dva noví uživatelé se ptali na první import.
+
+Nekopírujeme:
+Jména, e-maily, celé supportní zprávy ani screenshoty účtů.
+
+Po dokončení ponecháme:
+Závěr kroku, změněný text e-mailu a informaci, že úprava vznikla kvůli nejasnému prvnímu importu.
+```
+
+Tím se zachová užitečný důvod bez zbytečné datové stopy. Privacy-first provoz není jen právní opatrnost. Je to také způsob, jak udržet týmovou paměť čistou. Méně surových podkladů znamená méně budoucího vysvětlování, kdo k čemu směl a proč to pořád leží ve sdílené složce.
+
+### Karta spuštění prvního kroku
+
+```text
+Návratová věta:
+
+Schválená hranice kroku:
+
+Teď provádíme jen tento krok:
+
+Pracovní místo:
+
+Kdo krok provádí:
+
+Co se smí změnit:
+
+Co se nesmí otevřít:
+
+Původní návratový signál:
+
+Potřebujeme nový důkaz:
+- ne
+- ano, protože:
+
+Privacy-first stopa:
+Pracujeme se:
+Nekopírujeme:
+Po dokončení ponecháme:
+
+Očekávaný výstup:
+
+Uzavírací stav po dokončení:
+- změna provedena
+- změna neprovedena, důvod nepotvrzen
+- krok zúžen a dokončen
+- krok zastaven, protože hranice neplatí
+```
+
+Karta má být pracovní zábradlí, ne nový rituál. Pokud je krok opravdu malý, vyplnění zabere méně času než debata o tom, co všechno by se při něm ještě mohlo udělat. A pokud zabere víc, možná krok malý není.
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: přečtěte schválenou hranici kroku.
+2. Minuta 2: napište větu "teď provádíme jen tento krok".
+3. Minuta 3: určete, co se smí změnit.
+4. Minuta 4: napište, co se nesmí otevřít ani při zajímavém nálezu.
+5. Minuta 5: potvrďte, jestli stačí původní návratový signál.
+6. Minuta 6: zapište privacy-first stopu.
+7. Minuta 7: určete očekávaný výstup a uzavírací stav.
+
+Když se během workshopu objeví potřeba nového výzkumu, nové analytiky nebo širšího rozhodnutí, neberte to automaticky jako blokaci. Nejdřív se zeptejte, jestli je to nutné pro dnešní malý krok, nebo jen užitečné pro budoucí širší práci. Užitečné není totéž co nutné. To je jedna z vět, které by si produktové týmy mohly nechat vytisknout na vnitřní stranu notebooku. Decentně, samozřejmě. Nejsme cirkus.
+
+### Checklist spuštění
+
+- Je vidět věta "teď provádíme jen tento krok"?
+- Zůstává pracovní místo stejné jako v testu hranice?
+- Víme, co se smí změnit?
+- Víme, co se nesmí otevřít ani při zajímavém nálezu?
+- Stačí původní návratový signál, nebo máme jasný důvod pro nový důkaz?
+- Nepřidáváme nové sledování, export, screenshoty ani kopie osobních údajů bez nutnosti?
+- Je výstup uložený tam, kde se bude používat?
+- Má krok jeden uzavírací stav?
+- Umíme přijmout i výsledek "změna neprovedena, důvod nepotvrzen"?
+- Oddělili jsme sousední nálezy do samostatných podnětů?
+
+Dobré spuštění prvního malého kroku má klidný charakter. Žádná velká sláva, žádné rozšiřování fronty, žádný nový dashboard. Jen přesná práce na jednom místě, krátký záznam a jasné uzavření. Tak se z návratového signálu nestane velký projekt, ale použitelná změna.
+
 Praktický filtr na výběr jedné kapitoly:
 
 1. Kdybychom vyřešili jen tuto věc, co se zlepší pro zákazníka?
@@ -244984,3 +245144,4 @@ Dobré uzavření první kontroly po zmenšení je krátké, ale rozhodné. Tým
 - 2026-06-21: Doplněna úvodní podkapitola o převodu přepsané návratové věty do prvního malého kroku: typy kroků, praktický příklad, privacy-first hranice, karta, mini workshop a checklist.
 - 2026-06-22: Doplněna krátká úvodní poznámka, aby se z první návratové věty rovnou odvodila hranice dalšího kroku.
 - 2026-06-22: Doplněna úvodní podkapitola o testu hranice prvního kroku před spuštěním: tři kontrolní otázky, hraniční věta, varovné signály širokého kroku, privacy-first práce s důkazy, karta, mini workshop a checklist.
+- 2026-06-22: Doplněna úvodní podkapitola o spuštění prvního malého kroku po testu hranice: pravidla spuštění, očekávané výstupy, privacy-first stopa, karta, mini workshop a checklist.
