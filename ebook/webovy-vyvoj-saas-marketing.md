@@ -242238,8 +242238,163 @@ Když se tým během workshopu začne hádat o širší pravidlo, zastavte se u 
 
 Uzavření první lehké kontroly má být prakticky nudné. A to je kompliment. Dobře fungující standard nepotřebuje velké finále, jen čistý záznam, drobnou opravu tam, kde je potřeba, a klid od zbytečného dohledu. Čím méně dramatu po kontrole vznikne, tím víc energie zůstane na práci, kvůli které standard existuje.
 
+## Druhá lehká kontrola po dlouhodobém klidu
+
+První lehká kontrola po dlouhodobém klidu ověřuje, že standard pořád existuje v živé práci. Druhá lehká kontrola má jiný úkol: zjistit, jestli standard funguje i bez čerstvé paměti z předchozí kontroly. Nejde o větší audit. Jde o malý test přenositelnosti. Když pravidlo přežije druhé běžné použití bez toho, aby někdo musel vysvětlovat jeho historii, pravděpodobně už opravdu patří do provozu, ne do zvláštní péče.
+
+Druhou kontrolu neotevírejte hned další den. Má smysl až po dalším přirozeném použití, kdy tým standard potká v normální práci: při publikaci stránky, úpravě formuláře, přípravě kampaně, předání šablony, onboardingovém kroku nebo kontrole integračního nastavení. Pokud kontrolu spustíte jen proto, že "by bylo dobré se na to podívat", vyrábíte si dohled nad pravidlem, které má být v klidu. To je administrativní fitness bez svalů.
+
+Začněte jednoduchou větou:
+
+```text
+Druhou lehkou kontrolu otevíráme, protože standard byl znovu použit v:
+```
+
+Potom doplňte konkrétní pracovní místo. Ne "marketing", ale "publikační checklist nové produktové stránky". Ne "SaaS onboarding", ale "krok pozvání prvního člena týmu". Čím přesnější místo, tím menší riziko, že se druhá kontrola rozleze do obecného přemýšlení o celém systému.
+
+Praktický příklad:
+
+```text
+Standard:
+Produktové stránky používají přímé odkazy, RSS a agregované měření bez osobních identifikátorů.
+
+Druhé běžné použití:
+Nová stránka pro technický audit SaaS onboardingů.
+
+Otázka druhé lehké kontroly:
+Našel editor standard bez vysvětlování, rozhodl podle něj konkrétní měřicí a distribuční volby a nevznikla nová zbytečná datová stopa?
+
+Výsledek:
+Standard fungoval. Editor použil kanonický checklist, nepřidal social share skripty, měření zůstalo agregované a odkaz na RSS byl ve stejné publikační části jako minule.
+```
+
+Takový zápis je krátký, ale důležitý. Potvrzuje, že standard není jen vzpomínka na poslední revizi. Je najitelný, použitelný a dost konkrétní i pro další průchod.
+
+### Co druhá kontrola opravdu ověřuje
+
+Druhá lehká kontrola má tři vrstvy:
+
+- Samostatnost: člověk pravidlo najde a použije bez autora poslední opravy.
+- Stabilitu pracovního místa: pravidlo je pořád tam, kde se rozhodnutí reálně dělá.
+- Datovou střídmost: kontrola ani použití nevyrábí nové osobní údaje, exporty nebo kopie důkazů bez jasného účelu.
+
+Samostatnost je nejdůležitější. Pokud standard funguje jen tehdy, když u něj stojí člověk, který ho napsal, ještě to není standard. Je to poznámka s osobním technickým supportem. Druhá kontrola má tento support tiše vypnout a podívat se, jestli pravidlo stojí samo.
+
+Stabilita pracovního místa chrání před pomalým rozpadem navigace. Pravidlo může být obsahově správné, ale pokud ho lidé hledají v chatu, staré šabloně nebo v hlavě kolegy, je provozně slabé. Druhá kontrola proto nehodnotí jen text pravidla. Hodnotí trasu k pravidlu v okamžiku, kdy ho někdo potřebuje.
+
+Datová střídmost drží privacy-first hodnotu i při údržbě. Kontrola nemá být záminka k tomu, aby někdo pořídil screenshoty, stáhl exporty nebo kopíroval zákaznické zprávy "pro jistotu". Pokud stačí říct, že stránka nepřidala nový tracker, neukládejte celý technický výpis stránky. Pokud stačí zobecněný závěr z obchodní poznámky, nekopírujte osobní údaje do kontrolní karty.
+
+### Čtyři výsledky druhé lehké kontroly
+
+Po kontrole vyberte jeden ze čtyř výsledků:
+
+- Standard drží samostatně: použití proběhlo bez nápovědy a bez lokální opravy.
+- Standard drží, ale cesta je křehká: pravidlo bylo použité správně, ale hledalo se přes starou stopu nebo náhodnou připomínku.
+- Standard potřebuje drobnou lokální oporu: obsah je správný, ale jedno pracovní místo potřebuje odkaz, příklad nebo přesnější formulaci.
+- Objevil se návratový signál: opakuje se problém, který už nespadá do lehké kontroly a potřebuje novou malou smyčku.
+
+Stav `standard drží samostatně` je ideální konec. Zapište ho a nechte standard dál v klidu. Nepřidávejte další kontrolu jen proto, že dobrý výsledek potěšil. Dobrý standard nemá být pod dozorem jako nová rostlina na parapetu; po zakořenění má prostě dělat práci.
+
+Stav `cesta je křehká` použijte, když pravidlo funguje, ale jen díky náhodě. Například editor ho našel ve starém vlákně, protože si pamatoval název předchozí kontroly. Oprava má mířit na navigaci: odkaz v checklistu, kotvu ve znalostní bázi, název sekce, nebo odstranění staré kopie.
+
+Stav `drobná lokální opora` je vhodný, když druhé použití ukáže malý nedostatek v pracovním místě. Třeba pravidlo říká "nepřidávat osobní identifikátory", ale publikační checklist neobsahuje konkrétní otázku pro embedded formulář. Přidejte jednu otázku tam, kde se rozhoduje. Nepřepisujte celý privacy-first standard.
+
+Stav `návratový signál` vyžaduje disciplínu. Pokud se opakovaně ukazuje, že standard neumí rozhodnout nový typ situace, lehkou kontrolu uzavřete a otevřete samostatnou malou smyčku. Nová smyčka má vlastní otázku, důkaz a stop podmínku. Nemá se schovat do poznámky z kontroly, protože pak nebude jasné, kdy skončila kontrola a kdy začala nová práce.
+
+### Privacy-first stopa druhé kontroly
+
+U druhé kontroly stačí většinou uložit tři věci:
+
+```text
+Které použití jsme kontrolovali:
+
+Jaký výsledek jsme vybrali:
+
+Jakou datovou stopu jsme nevytvořili:
+```
+
+Třetí řádek je záměrně viditelný. Privacy-first provoz se nepozná jen podle toho, co je napsané v zásadách. Pozná se podle drobných situací, kdy tým odmítne pohodlný, ale zbytečný detail. Zápis "neukládáme screenshot stránky, protože závěr stačí popsat jednou větou" je malá, ale zdravá provozní stopa.
+
+Příklad:
+
+```text
+Které použití jsme kontrolovali:
+Publikaci stránky pro SaaS audit.
+
+Jaký výsledek jsme vybrali:
+Standard drží samostatně.
+
+Jakou datovou stopu jsme nevytvořili:
+Neukládáme export měření ani screenshot nastavení. Stačí závěr, že stránka nepřidala nový tracker, používá agregované měření a odkazuje na RSS.
+```
+
+Takový záznam pomáhá i budoucímu týmu. Uvidí, že kontrola proběhla, ale nebude po ní dědit zbytečný balík podkladů.
+
+### Karta druhé lehké kontroly
+
+```text
+Standard:
+
+Druhé běžné použití:
+
+Kdo použil standard bez čerstvé nápovědy:
+
+Kde byl standard nalezen:
+
+Rozhodnutí, které podle něj vzniklo:
+
+Výsledek:
+- drží samostatně
+- cesta je křehká
+- potřebuje drobnou lokální oporu
+- objevil se návratový signál
+
+Nejmenší další krok, pokud existuje:
+
+Co výslovně neotevíráme:
+
+Privacy-first stopa:
+Jaký závěr ukládáme:
+Které detaily neukládáme:
+Kde zůstává původní zdroj:
+
+Vlastník:
+
+Datum dalšího běžného rytmu nebo návratového signálu:
+```
+
+Karta má potvrdit samostatnost standardu, ne připravit další audit. Pokud po jejím vyplnění vzniká víc než jeden další krok, vraťte se k výsledku. Buď nejde o lehkou kontrolu, nebo se do ní přimíchala nová smyčka, která si zaslouží vlastní hranice.
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: pojmenujte druhé běžné použití.
+2. Minuta 2: ověřte, odkud člověk standard našel.
+3. Minuta 3: řekněte, jaké rozhodnutí podle standardu vzniklo.
+4. Minuta 4: vyberte jeden ze čtyř výsledků.
+5. Minuta 5: určete nejmenší další krok, pokud nějaký existuje.
+6. Minuta 6: napište, co výslovně neotevíráte.
+7. Minuta 7: zkraťte datovou stopu na závěr a odmítněte zbytečné detaily.
+
+Když se během sedmi minut ukáže, že nikdo neumí říct, odkud se standard našel, neprodlužujte kontrolu do obecné debaty. Výsledek je "cesta je křehká" a další krok je opravit trasu ke kanonickému místu. Tečka. Víc filozofie by bylo jen luxusní mlžení.
+
+### Checklist druhé lehké kontroly
+
+- Kontrolujeme skutečné druhé použití, ne abstraktní pocit, že by se standard měl znovu projít?
+- Je pracovní místo konkrétní?
+- Použil standard někdo bez čerstvého vysvětlování autora nebo správce?
+- Našel standard z běžné pracovní trasy?
+- Vzniklo podle standardu konkrétní rozhodnutí?
+- Rozlišili jsme křehkou cestu od slabého obsahu pravidla?
+- Pokud je potřeba oprava, je opravdu nejmenší možná?
+- Napsali jsme, co výslovně neotevíráme?
+- Nevytváříme nové exporty, screenshoty nebo kopie osobních údajů jen kvůli kontrole?
+- Umíme říct, kdy se standard znovu uvidí: v běžném rytmu, nebo až při návratovém signálu?
+
+Druhá lehká kontrola je test dospělosti standardu. Když pravidlo obstojí bez čerstvé nápovědy, nedávejte mu další školení. Nechte ho pracovat. Když drhne cesta, opravte cestu. Když se objeví skutečný návratový signál, otevřete novou malou smyčku a dejte jí vlastní hranice. Tím se dlouhodobý klid nestane zapomenutím, ale praktickým provozním stavem.
+
 ## Pracovní log
 
+- 2026-06-22: Doplněna úvodní podkapitola o druhé lehké kontrole po dlouhodobém klidu: samostatnost standardu bez čerstvé nápovědy, stabilita pracovní cesty, privacy-first stopa, čtyři výsledky, karta, mini workshop a checklist.
 - 2026-06-22: Doplněna úvodní podkapitola o uzavření první lehké kontroly po dlouhodobém klidu: uzavírací stavy, lokální oprava, privacy-first stopa, karta, mini workshop a checklist.
 - 2026-06-22: Doplněna úvodní podkapitola o první lehké kontrole po dlouhodobém klidu: najitelnost, rozhodnutelnost, datová střídmost, čtyři výsledky, karta, mini workshop a checklist.
 - 2026-06-22: Doplněna úvodní podkapitola o návratu standardu do dlouhodobého klidu po výroční revizi: klidový stav, zavření mimořádné pozornosti, privacy-first úklid, karta, mini workshop a checklist.
