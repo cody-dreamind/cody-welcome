@@ -3452,6 +3452,184 @@ Když se během workshopu objeví potřeba nového výzkumu, nové analytiky neb
 
 Dobré spuštění prvního malého kroku má klidný charakter. Žádná velká sláva, žádné rozšiřování fronty, žádný nový dashboard. Jen přesná práce na jednom místě, krátký záznam a jasné uzavření. Tak se z návratového signálu nestane velký projekt, ale použitelná změna.
 
+## Uzavření prvního malého kroku po spuštění
+
+Spuštěný první krok není hotový ve chvíli, kdy se "něco změnilo". Hotový je až ve chvíli, kdy tým umí říct, jaký stav po kroku nastal, co se propsalo do pracovního místa, co zůstává zavřené a kdy má smysl se k tématu znovu vrátit. Bez uzavření se i malá úprava začne chovat jako otevřený proces: někdo ještě čeká na dojem, někdo přidá další kontrolu, někdo začne hlídat vedlejší nález a za týden už nikdo neví, jestli krok skončil, nebo jen ztichl.
+
+Uzavření má být stejně malé jako samotný krok. Není to retrospektiva projektu. Je to pracovní tečka, která chrání tým před dvěma opačnými chybami: před předčasným vítězstvím a před nekonečným dolaďováním. Předčasné vítězství říká "něco jsme upravili, hotovo". Nekonečné dolaďování říká "když už jsme tady, ještě se podíváme na další tři věci". Dobré uzavření říká: víme, co se stalo, víme, co z toho plyne, a víme, co teď neděláme.
+
+Začněte jednou větou:
+
+```text
+Po prvním kroku je stav:
+```
+
+Potom vyberte jeden ze čtyř stavů:
+
+- změna provedena a stačí ji nechat běžet;
+- změna provedena, ale potřebuje jeden malý ověřovací okamžik;
+- změna neprovedena, protože návratový důvod se nepotvrdil;
+- krok se zastavil, protože hranice přestala platit.
+
+Tato čtveřice je důležitá proto, že ne každý první krok má skončit dalším úkolem. Někdy stačí změnu propsat a nechat ji v běžné práci. Někdy je fér domluvit jeden přirozený kontrolní okamžik, třeba při dalším supportním dotazu nebo příštím obchodním hovoru. Někdy krok ukáže, že problém neležel tam, kde jste čekali. A někdy se během práce ukáže, že hranice byla špatně nastavená a pokračování by už bylo jiným rozhodnutím.
+
+### Příklad z potvrzovací zprávy
+
+Návratová věta:
+
+```text
+Vracíme se k potvrzovací zprávě po poptávkovém formuláři, protože poslední dvě relevantní poptávky nevěděly, jestli po auditu následuje implementace automaticky, a potřebujeme rozhodnout, jestli zpráva dost jasně odděluje audit od navazující práce.
+```
+
+První malý krok:
+
+```text
+Upravit jen potvrzovací zprávu: doplnit větu, že audit končí předáním nálezu a doporučení, a navazující implementace se domlouvá samostatně.
+```
+
+Dobré uzavření:
+
+```text
+Po prvním kroku je stav:
+Změna provedena a potřebuje jeden malý ověřovací okamžik.
+
+Propsáno:
+Potvrzovací zpráva má novou větu o hranici auditu a navazující implementaci.
+
+Neotevíráme:
+Ceník, stránku služby, obchodní skript ani nové kvalifikační pole.
+
+Ověření:
+Při dalších třech relevantních poptávkách si obchod zapíše jen zobecněně, jestli se stejná nejasnost objevila znovu.
+```
+
+Všimněte si, že ověření nepřidává nový formulář, scoring ani tabulku s osobními údaji. Jen používá přirozený obchodní okamžik a ukládá stručný závěr. To je přesně rozdíl mezi ověřením a špehováním práce. Jedno pomáhá rozhodnout, druhé vyrábí další datový nábytek do místnosti, která už je plná.
+
+### Co propsat do pracovního místa
+
+Po uzavření prvního kroku se má změna objevit tam, kde ji tým opravdu použije. Pokud jste upravili e-mail, zdroj pravdy je e-mailová šablona nebo její správa. Pokud jste změnili text na webu, zdroj pravdy je stránka, komponenta, CMS nebo pull request. Pokud jste zavřeli návrat bez změny, zdroj pravdy je rozhodovací karta nebo pracovní log, ne nová boční poznámka.
+
+Minimální záznam má čtyři části:
+
+```text
+Co jsme změnili nebo potvrdili:
+
+Proč:
+
+Co zůstává zavřené:
+
+Kdy se k tomu vrátíme:
+```
+
+Příklad:
+
+```text
+Co jsme změnili nebo potvrdili:
+Sjednotili jsme název první akce na "importovat soubor" v e-mailu i na obrazovce importu.
+
+Proč:
+Dva noví uživatelé se ptali na první import a texty používaly různá slova.
+
+Co zůstává zavřené:
+Další onboardingové e-maily, produktové menu, připomínky a aktivační scoring.
+
+Kdy se k tomu vrátíme:
+Až se stejná nejasnost objeví v dalším supportním dotazu nebo při běžném review onboardingu.
+```
+
+Takový zápis je krátký, ale nenechává práci viset. Zároveň neotevírá druhou fázi jen proto, že první krok proběhl. To je zdravé. Hotová malá změna nemá automaticky právo na pokračování.
+
+### Když výsledek není potvrzení
+
+První krok může skončit i tím, že se návratový důvod nepotvrdí. Třeba zjistíte, že e-mail a obrazovka už používají stejný název, potvrzovací zpráva hranici služby vysvětluje dobře, nebo zákaznický dotaz vznikl kvůli výjimce mimo běžný tok. V takové chvíli je lákavé najít jiné místo, kde "by se stejně dalo něco zlepšit". Nechte to být.
+
+Použijte uzavírací větu:
+
+```text
+Návratový důvod se v tomto pracovním místě nepotvrdil; další místo neotevíráme bez nového signálu.
+```
+
+Tohle není lenost. Je to provozní hygiena. Když každý nepotvrzený návrat vede k hledání dalšího problému, tým se naučí, že žádný krok nejde zavřít. A to je drahé i u drobností, protože mentální účetnictví otevřených věcí se sčítá.
+
+### Privacy-first uzavření
+
+Na konci prvního kroku zkontrolujte datovou stopu. Právě při uzavírání často vznikají zbytečné kopie: screenshot před a po, export podpory, výtah z CRM, dočasná tabulka s příklady, záznam hovoru "pro jistotu". Některé důkazy mohou být legitimní, ale u prvního malého kroku většinou stačí stručný závěr.
+
+Použijte tři otázky:
+
+- Co musí zůstat, aby šlo rozhodnutí později pochopit?
+- Co můžeme nahradit zobecněným závěrem?
+- Co vzniklo jen jako pracovní pomůcka a má se po uzavření smazat?
+
+Praktická věta:
+
+```text
+Ponecháváme rozhodovací závěr a finální text; surové poznámky, screenshoty a dočasný export po uzavření nepřenášíme do dalšího místa.
+```
+
+Privacy-first uzavření není jen o menším riziku. Je i o lepší paměti. Když v záznamu zůstane jen důvod, výsledek a hranice, další člověk rychle pochopí, co se stalo. Když tam zůstane deset surových podkladů, další člověk dostane domácí úkol, ne paměť.
+
+### Karta uzavření prvního kroku
+
+```text
+Návratová věta:
+
+Spuštěný první krok:
+
+Výsledek kroku:
+
+Uzavírací stav:
+- změna provedena a stačí ji nechat běžet
+- změna provedena, ale potřebuje jeden malý ověřovací okamžik
+- změna neprovedena, protože návratový důvod se nepotvrdil
+- krok zastaven, protože hranice přestala platit
+
+Co se propsalo do pracovního místa:
+
+Co výslovně zůstává zavřené:
+
+Sousední nálezy, které neřešíme v této kartě:
+
+Privacy-first uzavření:
+Ponecháváme:
+Zobecňujeme:
+Mažeme nebo nepřenášíme:
+
+Návratový signál pro další otevření:
+
+Vlastník:
+
+Datum kontroly, pokud je opravdu potřeba:
+```
+
+Datum kontroly nevyplňujte automaticky. Pokud krok stačí nechat běžet, další kontrola má vzniknout až z návratového signálu. Automatická kontrola bez důvodu je jen kalendářová daň za to, že se tým bojí říct hotovo.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte návratovou větu a spuštěný krok.
+2. Minuta 2: pojmenujte výsledek jednou větou.
+3. Minuta 3: vyberte jeden uzavírací stav.
+4. Minuta 4: napište, co se propsalo do pracovního místa a co zůstává zavřené.
+5. Minuta 5: udělejte privacy-first uzavření datové stopy.
+6. Minuta 6: určete návratový signál nebo řekněte, že další kontrola teď nevzniká.
+
+Pokud se workshop začne měnit v plánování další změny, zastavte ho. Další změna může být dobrý nápad, ale nejdřív zavřete současný krok. Otevřený krok a nový nápad v jedné debatě jsou výborný recept na mlhu s agendou.
+
+### Checklist uzavření
+
+- Umíme jednou větou říct, jaký výsledek první krok přinesl?
+- Vybrali jsme jeden ze čtyř uzavíracích stavů?
+- Je výsledek propsaný do pracovního místa, ne jen do poznámky ze schůzky?
+- Je jasné, co zůstává zavřené?
+- Nepřevádíme sousední nález automaticky do stejné práce?
+- Pokud změna potřebuje ověření, je to jeden přirozený ověřovací okamžik?
+- Pokud se návratový důvod nepotvrdil, zavřeli jsme krok bez hledání náhradního problému?
+- Ponecháváme jen nezbytný závěr a finální podobu změny?
+- Smazali jsme nebo nepřenášíme dočasné pracovní podklady bez dalšího účelu?
+- Má další otevření konkrétní návratový signál?
+
+Uzavření prvního malého kroku má jednu tichou výhodu: učí tým důvěřovat malým dokončeným věcem. Ne každá dobrá práce musí mít pokračování, dashboard a dvouhodinové review. Někdy je nejlepší výsledek ten, který se propsal na správné místo, uklidil po sobě data a nechal tým jít dál. Skoro podezřele dospělé, já vím.
+
 Praktický filtr na výběr jedné kapitoly:
 
 1. Kdybychom vyřešili jen tuto věc, co se zlepší pro zákazníka?
@@ -244133,6 +244311,7 @@ Druhá kontrola po zmenšení revizní stopy je dobrý konec jedné dlouhé smy�
 
 ## Pracovní log
 
+- 2026-06-22: Doplněna úvodní podkapitola o uzavření prvního malého kroku po spuštění: čtyři uzavírací stavy, propsání do pracovního místa, práce s nepotvrzeným důvodem, privacy-first uzavření, karta, mini workshop a checklist.
 - 2026-06-22: Doplněna úvodní podkapitola o druhé kontrole po zmenšení revizní stopy: přenositelnost bez čerstvé paměti, čtyři výsledky, privacy-first omezení důkazů, karta, mini workshop a checklist.
 - 2026-06-22: Doplněna úvodní podkapitola o uzavření první kontroly po zmenšení revizní stopy: čtyři uzavírací stavy, hranice proti nové evidenci, praktický příklad, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-22: Doplněna úvodní podkapitola o první kontrole po zmenšení revizní stopy: ověření běžného rytmu bez zvláštní péče, čtyři výsledky, privacy-first kontrola nové pomocné evidence, karta, mini workshop a checklist.
