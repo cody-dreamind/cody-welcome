@@ -243067,8 +243067,161 @@ Když se během workshopu objeví víc oprav, jedna z nich je pravděpodobně no
 
 Dobré uzavření první běžné kontroly má trochu paradoxní chuť: poctivě jste se podívali, jestli standard funguje, a výsledkem často je, že nic dalšího neděláte. To není lenost. To je provozní dospělost. Standard, který funguje bez speciální pozornosti, má dostat prostor pracovat. A tým má dostat prostor řešit věci, které opravdu změnily realitu.
 
+## Druhá běžná kontrola v dlouhodobém rytmu
+
+Druhá běžná kontrola je jiný typ testu než první. První kontrola se ptala, jestli standard po převodu do dlouhodobého rytmu vůbec obstojí v normální práci. Druhá kontrola se ptá, jestli se z něj opravdu stal běžný provozní návyk, nebo jestli se kolem něj potichu vrací mimořádná péče, staré výjimky a skryté pomocné poznámky.
+
+Neotevírejte ji dřív jen proto, že je standard důležitý. Druhá kontrola má přijít v dohodnutém rytmu nebo při návratovém signálu. Pokud ji tým udělá hned po první, většinou neověří dlouhodobost. Ověří jen to, že si všichni ještě pamatují poslední opravu. To je milé, ale provozní důkaz z toho není.
+
+Začněte větou:
+
+```text
+Druhá běžná kontrola ověřuje, jestli standard fungoval opakovaně bez mimořádné péče, duplicit a nové datové stopy.
+```
+
+Tato věta drží rozsah. Kontrola nemá hledat všechny možné optimalizace standardu. Má zjistit, jestli první uzavření opravdu stačilo a jestli se standard dokáže udržet v běžném rytmu.
+
+### Co při druhé kontrole porovnat
+
+Vezměte poslední závěr z první běžné kontroly a porovnejte ho s realitou od té doby. Neporovnávejte standard s ideálem. Porovnávejte slib s tím, jak se pracovalo.
+
+Tři otázky stačí:
+
+```text
+Použil se standard od první kontroly aspoň jednou v běžné práci?
+
+Potřeboval někdo mimořádné vysvětlení, opravu nebo ruční dohled?
+
+Vznikla nová duplicita, výjimka, export, tracker nebo stará stopa v nové podobě?
+```
+
+Příklad:
+
+```text
+Standard:
+Privacy-first publikační checklist.
+
+Závěr první kontroly:
+Checklist zůstává v kvartálním rytmu. Do části o vložených formulářích byla doplněna jedna otázka na nový datový tok.
+
+Druhá běžná kontrola:
+Checklist se použil při dvou nových stránkách. Editor otázku u formuláře našel bez připomenutí. U jedné stránky vznikla krátká poznámka k externímu embed prvku, ale ne nový datový export.
+
+Výsledek:
+Standard drží opakovaně. Není potřeba další oprava ani mimořádné sledování.
+```
+
+Tady je důležité nepodlehnout chuti "ještě to trochu vylepšit". Pokud standard fungoval, nechte ho fungovat. Dlouhodobý rytmus není soutěž o nejvíc úprav. Je to systém, který má rozhodnout, kdy změna opravdu dává smysl.
+
+### Čtyři výsledky druhé běžné kontroly
+
+Po druhé kontrole vyberte jeden ze čtyř výsledků:
+
+- Potvrdit dlouhodobý rytmus: standard fungoval opakovaně a nepotřebuje zvláštní pozornost.
+- Udělat poslední lokální dočištění: standard drží, ale jedno místo pořád vytváří malé tření.
+- Otevřít návratový signál: objevilo se opakované tření, které odpovídá předem zapsané podmínce.
+- Zúžit nebo archivovat standard: standard se v běžné práci nepoužívá, nebo jeho cena převyšuje přínos.
+
+Výsledek `potvrdit dlouhodobý rytmus` by měl být krátký. Zapište, že standard drží, a další kontrolu nechte až v běžném cyklu. Nepřidávejte "ještě jednu jistotu". Jistota bez účelu je jen administrativní polštář.
+
+Výsledek `poslední lokální dočištění` použijte jen jednou. Pokud stejné místo drhne i po druhé kontrole, nejde už o drobnou opravu. Buď je slabé kanonické místo, nebo standard neodpovídá reálné práci. V takovém případě otevřete návratový signál nebo zúžení standardu.
+
+Výsledek `zúžit nebo archivovat standard` je legitimní. Někdy se ukáže, že standard vznikl pro situaci, která už není běžná. Neudržujte ho aktivní jen proto, že byl dobře napsaný. Dobře napsané pravidlo, které nikdo nepotřebuje, je pořád zátěž.
+
+### Privacy-first kontrola druhé běžné kontroly
+
+Druhá kontrola má být ještě střídmější než první. Pokud standard už prošel prvním použitím, nepotřebujete znovu sbírat velké důkazy. Stačí krátký provozní závěr:
+
+```text
+Od první kontroly se standard použil dvakrát, nevyžadoval mimořádnou pomoc a nevytvořil nový datový tok.
+```
+
+Pokud se objevilo tření, popište ho anonymizovaně a věcně:
+
+```text
+U jednoho vloženého prvku nebylo jasné, zda předává data externímu nástroji.
+```
+
+Nepište do rozhodovacího záznamu jména lidí, celé zákaznické příklady, screenshoty nastavení ani exporty. Původní zdroje mají zůstat tam, kde mají oprávněný přístup a retenční pravidlo. Do dlouhodobé paměti patří závěr, ne hromada důkazů.
+
+Privacy-first otázka pro druhou kontrolu:
+
+```text
+Můžeme standard potvrdit, zúžit nebo otevřít bez nového sběru dat?
+```
+
+Pokud odpověď zní ne, nejdřív se ptejte, jestli je kontrola moc široká. U dlouhodobých pravidel je často lepší zmenšit otázku než zavádět nové měření.
+
+### Karta druhé běžné kontroly
+
+```text
+Standard:
+
+Dlouhodobý rytmus:
+
+Závěr první běžné kontroly:
+
+Co se od té doby stalo:
+
+Použití v běžné práci:
+
+Mimořádná pomoc nebo skrytá péče:
+
+Duplicity, výjimky nebo staré stopy:
+
+Datová stopa:
+
+Výsledek:
+- potvrdit dlouhodobý rytmus
+- poslední lokální dočištění
+- otevřít návratový signál
+- zúžit nebo archivovat standard
+
+Jednovětý závěr:
+
+Co se mění, pokud vůbec něco:
+
+Co po kontrole výslovně neotevíráme:
+
+Privacy-first úklid:
+Které podklady mažeme, anonymizujeme nebo necháváme v původním systému:
+
+Další běžná kontrola:
+
+Vlastník:
+```
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte závěr první běžné kontroly.
+2. Minuta 2: pojmenujte jedno až tři běžná použití od té doby.
+3. Minuta 3: zkontrolujte mimořádnou pomoc, duplicity a staré stopy.
+4. Minuta 4: zkontrolujte datovou stopu.
+5. Minuta 5: vyberte jeden ze čtyř výsledků.
+6. Minuta 6: napište jednovětý závěr a co neotevíráte.
+
+Pokud workshop začne řešit nový typ standardu, novou šablonu nebo celý obsahový systém, zastavte ho. To může být dobré téma, ale není to druhá běžná kontrola. Druhá kontrola má potvrdit, dočistit, otevřít jasný návrat, nebo zúžit standard. Nic víc.
+
+### Checklist druhé běžné kontroly
+
+- Proběhla kontrola v dohodnutém rytmu nebo při skutečném návratovém signálu?
+- Vycházíme ze závěru první běžné kontroly?
+- Máme aspoň jedno reálné použití standardu, nebo jasný důvod, proč žádné nebylo?
+- Zjistili jsme, jestli standard potřeboval mimořádnou pomoc?
+- Zkontrolovali jsme, jestli nevznikla duplicita, výjimka nebo stará stopa v nové podobě?
+- Vybrali jsme jeden ze čtyř výsledků?
+- Pokud dočišťujeme, je to opravdu poslední lokální dočištění?
+- Pokud otevíráme návratový signál, odpovídá předem zapsané podmínce?
+- Pokud standard zužujeme nebo archivujeme, je jasné, co tím přestane být aktivní?
+- Nepřidali jsme kvůli kontrole nový tracker, export, dashboard ani osobní evidenci?
+- Ukládáme jen závěr a potřebnou změnu, ne surové podklady?
+- Zůstává další kontrola v normálním rytmu?
+
+Druhá běžná kontrola je dobrý filtr proti přehnané péči. Když standard funguje dvakrát za sebou bez speciálního vysvětlování, pravděpodobně nepotřebuje další pozornost. Potřebuje důvěru. A důvěra v provozu často znamená docela obyčejnou věc: nechat fungující pravidlo na pokoji, dokud se neobjeví skutečný signál.
+
 ## Pracovní log
 
+- 2026-06-22: Doplněna úvodní podkapitola o druhé běžné kontrole v dlouhodobém rytmu: porovnání se závěrem první kontroly, čtyři výsledky, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-06-22: Doplněna úvodní podkapitola o uzavření první běžné kontroly po převodu standardu do dlouhodobého rytmu: čtyři uzavírací stavy, lokální opravy, oddělení nové smyčky, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-22: Doplněna úvodní podkapitola o první běžné kontrole po převodu standardu do dlouhodobého rytmu: kontrola najitelnosti, rozhodnutelnosti a skryté péče, čtyři výsledky, privacy-first zápis, karta, mini workshop a checklist.
 - 2026-06-22: Doplněna úvodní podkapitola o převodu uzavřené druhé lehké kontroly do dlouhodobého rytmu: výběr běžného, delšího nebo signálního rytmu, ukončení dočasné péče, privacy-first úklid, karta, mini workshop a checklist.
