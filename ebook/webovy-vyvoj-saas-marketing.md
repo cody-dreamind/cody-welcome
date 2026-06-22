@@ -241536,8 +241536,163 @@ Když se během workshopu ukáže, že nikdo neumí říct, kde standard vlastn�
 
 Druhé běžné použití po výroční revizi je test přenositelnosti. Pokud standard funguje i bez čerstvé paměti, nechte ho v klidu. Pokud zadrhne, opravte nejbližší cestu nebo jednu větu. A pokud se opravdu vrací problém, otevřete novou malou smyčku s krátkou pamětí. Standard má sloužit práci, ne držet tým v nekonečném režimu "ještě to radši sledujme".
 
+## Uzavření druhého běžného použití po výroční revizi
+
+Druhé běžné použití po výroční revizi má po sobě nechat jasný konec. Buď standard obstál a vrací se do klidu, nebo se ukázalo malé tření, které se dá lokálně opravit, nebo se otevřel skutečný návratový signál. Nejhorší výsledek je mlhavé "budeme to sledovat". To zní odpovědně, ale většinou jen přesune rozhodnutí do budoucího plánování, kde bude stát víc pozornosti.
+
+Uzavření začněte jednou větou:
+
+```text
+Druhé běžné použití ukázalo:
+```
+
+Věta má být konkrétní a provozní. Ne "standard asi funguje", ale "standard použil jiný člověk bez čerstvé revizní paměti a našel aktuální postup z pracovního checklistu". Ne "něco drhne", ale "druhé použití znovu narazilo na starý odkaz v kampanové šabloně". Takový zápis rovnou ukazuje, jestli se má zavřít, opravit cesta, upravit věta, nebo otevřít nová smyčka.
+
+Praktický příklad:
+
+```text
+Standard:
+Archivní šablona kampaně má na prvním řádku odkaz na aktuální zdroj pravdy.
+
+Druhé běžné použití ukázalo:
+Jiný člověk našel aktuální postup z archivní šablony bez dotazu v chatu.
+
+Rozhodnutí:
+Standard se uzavírá do výročního rytmu. Nevzniká další kontrola, evidence použití ani nová tabulka šablon.
+
+Návratový signál:
+Téma se znovu otevře jen tehdy, když někdo použije archivní šablonu jako aktivní zdroj nebo znovu narazí na chybějící odkaz na aktuální postup.
+```
+
+Tohle je dobrý konec. Není dramatický, nevyrábí nový úkol a nepřidává důkazní muzeum. Jen potvrzuje, že standard po výroční revizi zvládl dvě běžná použití a může se vrátit do normálního rytmu. Ano, je to trochu suché. Suché konce jsou v provozu často nejlepší, protože po nich nikdo nemusí mopovat další administrativu.
+
+### Čtyři uzavírací stavy
+
+Po druhém běžném použití vyberte jeden ze čtyř stavů:
+
+- Uzavřít do výročního rytmu: standard obstál i bez čerstvé paměti a nepotřebuje další mimořádnou péči.
+- Lokálně opravit pracovní cestu: obsah standardu platí, ale lidé k němu přicházejí špatnou cestou.
+- Zpřesnit rozhodovací větu: standard je najitelný, ale jedna formulace nedokáže sama vést rozhodnutí.
+- Otevřít novou malou smyčku: druhé použití potvrdilo návratový signál nebo nový kontext, který už nejde opravit lokálně.
+
+Stav `uzavřít do výročního rytmu` použijte, když druhé použití proběhlo bez nápovědy, bez přepisování historie a bez nové datové stopy. Výstupem je jen krátký záznam a návrat k nastavenému rytmu.
+
+Stav `lokálně opravit pracovní cestu` použijte, když se opakuje navigační problém. Typicky starý odkaz, špatné místo v indexu, neaktuální poznámka v checklistu nebo nejasný název šablony. Opravte cestu, ne pravidlo. Po opravě neplánujte velký audit, pokud se problém neukazuje i jinde.
+
+Stav `zpřesnit rozhodovací větu` patří situaci, kdy lidé standard najdou, ale pořád se ptají, jak ho použít. V takovém případě nevyrábějte nový proces. Upravte jednu větu, která má oddělit použití od nepoužití. Pokud jedna věta nestačí, standard už možná neřeší jednu jasnou situaci a zaslouží si novou malou smyčku.
+
+Stav `otevřít novou malou smyčku` použijte až tehdy, když druhé použití ukáže opakovaný problém s dopadem. Například standard pořád vede k chybné předávce, používá starý zdroj pravdy, nebo nutí tým sbírat data, která už nemají účel. Nová smyčka má mít vlastní otázku, pracovní místo a stop podmínku. Nepřilepujte ji k výroční revizi jako další "drobnost".
+
+### Co se propíše po uzavření
+
+Po uzavření druhého použití se do kanonického místa propisuje jen to, co pomůže příštímu člověku. Typicky:
+
+- potvrzení, že standard zůstává ve výročním rytmu;
+- jedna oprava odkazu nebo pracovního místa;
+- jedna zpřesněná rozhodovací věta;
+- návratový signál pro další otevření;
+- věta o tom, co po uzavření nevzniká.
+
+Nepřidávejte historii obou použití, seznam účastníků, screenshoty ani komentáře z chatu. Budoucí člověk nepotřebuje vědět, kdo přesně se ptal. Potřebuje vědět, odkud standard vzít, kdy ho použít a co má dělat, když narazí na signál.
+
+Dobrá propisovací věta:
+
+```text
+Standard zůstává ve výročním rytmu; po druhém běžném použití nevzniká žádná mimořádná kontrola. Návratový signál je opakované použití archivní šablony jako aktivního zdroje.
+```
+
+Slabá propisovací věta:
+
+```text
+Druhé použití dopadlo dobře, zatím budeme sledovat.
+```
+
+První věta uzavírá. Druhá jen nechává otevřené dveře a doufá, že jimi nikdo nepřinese další práci.
+
+### Privacy-first uzavření
+
+Uzavření druhého použití je vhodný moment odstranit poslední zbytky mimořádné péče po výroční revizi. Pokud vznikla dočasná poznámka, kontrolní seznam, export, kopie šablony nebo interní ukázka, rozhodněte hned, jestli má zůstat. Většinou nemá.
+
+Použijte tři otázky:
+
+```text
+Pomůže tento detail příštímu běžnému použití?
+
+Je tento detail uložený v kanonickém místě, nebo jen v dočasné pracovní stopě?
+
+Potřebujeme původní detail, nebo stačí zobecněný závěr?
+```
+
+Pokud stačí zobecněný závěr, nepřenášejte detail. Místo kopie interního komentáře napište: "Druhé použití proběhlo bez ruční nápovědy." Místo screenshotu starého odkazu napište: "Opraven odkaz z pracovního checklistu na aktuální zdroj pravdy." Privacy-first provoz tím zůstává praktický: ukládá rozhodnutí, ne vedlejší příběhy.
+
+### Karta uzavření druhého použití po výroční revizi
+
+```text
+Standard:
+
+Datum výroční revize:
+
+Závěr prvního běžného použití:
+
+Závěr druhého běžného použití jednou větou:
+
+Uzavírací stav:
+- uzavřít do výročního rytmu
+- lokálně opravit pracovní cestu
+- zpřesnit rozhodovací větu
+- otevřít novou malou smyčku
+
+Rozhodnutí:
+
+Co se propisuje do kanonického místa:
+
+Co se propisuje do pracovního místa:
+
+Co po uzavření nevzniká:
+
+Návratový signál:
+
+Privacy-first úklid:
+Které dočasné poznámky, kopie, screenshoty, exporty nebo komentáře neuchováváme:
+
+Vlastník:
+
+Další rytmus:
+```
+
+Kartu nevyplňujte jako kroniku. Má zachytit konečný stav, nejbližší pracovní dopad a datový úklid. Pokud se do ní nevejde rozhodnutí jednou větou, pravděpodobně ještě neuzavíráte druhé použití, ale otevíráte novou otázku.
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: přečtěte závěr druhého běžného použití.
+2. Minuta 2: vyberte jeden uzavírací stav.
+3. Minuta 3: napište rozhodnutí jednou větou.
+4. Minuta 4: určete, co se propíše do kanonického nebo pracovního místa.
+5. Minuta 5: napište, co po uzavření nevzniká.
+6. Minuta 6: zapište návratový signál.
+7. Minuta 7: ukliďte dočasné pracovní stopy a potvrďte další rytmus.
+
+Když se tým nedohodne mezi lokální opravou a novou smyčkou, zeptejte se, jestli problém vyžaduje nové pracovní rozhodnutí. Pokud ne, opravte lokální cestu. Pokud ano, otevřete novou smyčku s vlastní stop podmínkou a přestaňte ji vydávat za údržbu standardu.
+
+### Checklist uzavření
+
+- Máme závěr druhého použití napsaný jednou konkrétní větou?
+- Vybrali jsme jeden uzavírací stav?
+- Pokud standard obstál, vrátili jsme ho do výročního rytmu bez další mimořádné péče?
+- Pokud drhla cesta, opravujeme nejbližší pracovní místo místo celého pravidla?
+- Pokud selhala věta, víme, kterou jednu formulaci zpřesnit?
+- Pokud se potvrdil návratový signál, otevíráme novou malou smyčku se stop podmínkou?
+- Propsali jsme jen informace, které pomohou příštímu běžnému použití?
+- Napsali jsme, co po uzavření nevzniká?
+- Uklidili jsme dočasné poznámky, kopie, screenshoty, exporty nebo chatové komentáře?
+- Zobecnili jsme interní i zákaznické detaily všude, kde stačí rozhodovací závěr?
+- Je jasný další rytmus a vlastník?
+
+Uzavření druhého běžného použití po výroční revizi je poslední brzda proti tomu, aby se z úspěšného standardu stal trvale sledovaný vedlejší projekt. Když funguje, nechte ho pracovat potichu. Když zadrhne, opravte nejmenší skutečné místo. A když se ukáže nový problém, dejte mu vlastní smyčku místo toho, abyste ho přivázali k hotové revizi.
+
 ## Pracovní log
 
+- 2026-06-22: Doplněna úvodní podkapitola o uzavření druhého běžného použití po výroční revizi standardu: čtyři uzavírací stavy, propsání do kanonického místa, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-22: Doplněna úvodní podkapitola o druhém běžném použití po výroční revizi standardu: přenositelnost bez čerstvé paměti, čtyři výsledky, privacy-first záznam, karta, mini workshop a checklist.
 - 2026-06-22: Doplněna úvodní podkapitola o uzavření prvního běžného použití po výroční revizi standardu: uzavírací stavy, propsání do kanonického místa, privacy-first uzavření, karta, mini workshop a checklist.
 - 2026-06-22: Doplněna úvodní podkapitola o prvním běžném použití po výroční revizi standardu: čtyři výsledky použití, privacy-first záznam, karta, mini workshop a checklist.
