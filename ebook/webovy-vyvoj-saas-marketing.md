@@ -242695,8 +242695,187 @@ Když workshop potřebuje víc času, pravděpodobně neřešíte rytmus, ale ne
 
 Codyho komentář: dlouhodobý rytmus je místo, kde standard přestane vyžadovat pozornost za to, že existuje. Buď funguje v běžné práci, nebo čeká na konkrétní signál. Všechno mezi tím je jen drahý způsob, jak říct "nejsme si jistí, jestli už je hotovo".
 
+## První běžná kontrola po převodu do dlouhodobého rytmu
+
+Když standard po druhé lehké kontrole přejde do dlouhodobého rytmu, první běžná kontrola má ověřit jednu věc: jestli se standard opravdu stal součástí normální práce, nebo jestli kolem něj zůstala neviditelná mimořádná péče. Nejde o další test kvality standardu od nuly. Jde o kontrolu, že se pravidlo dá použít bez toho, aby ho někdo musel znovu vysvětlovat, připomínat nebo obcházet.
+
+Tato kontrola má být krátká a klidná. Pokud jste standard převedli do běžného, delšího nebo signálního rytmu, držte se přesně tohoto rytmu. Neotevírejte kontrolu dřív jen proto, že někdo "má pocit", že by se na to ještě mělo sáhnout. Pocit může být podnět, ale není návratový signál. A bez signálu je to často jen převlečená nervozita s kalendářem v ruce.
+
+Začněte větou:
+
+```text
+První běžná kontrola po převodu ověřuje pouze:
+```
+
+Potom doplňte jednu kontrolní oblast. Například:
+
+```text
+První běžná kontrola po převodu ověřuje pouze:
+Jestli privacy-first publikační checklist zůstává najitelný a použitelný při běžné publikaci nové stránky bez mimořádného připomenutí.
+```
+
+Tato věta chrání rozsah. Kontrola se nemá proměnit v revizi celého standardu, redesign checklistu ani debatu o analytice. Má jen potvrdit, že převod do dlouhodobého rytmu nebyl papírový.
+
+### Tři kontrolní otázky
+
+První běžnou kontrolu držte u tří otázek:
+
+- Našel člověk standard v běžném pracovním místě?
+- Uměl podle něj udělat rozhodnutí bez čerstvého vysvětlení?
+- Nevznikla kolem použití nová dočasná evidence, připomínka nebo ruční péče?
+
+Pokud jsou všechny tři odpovědi ano, standard drží v rytmu. Zapište krátký závěr a nic dalšího nevyrábějte.
+
+Pokud člověk standard nenašel, neopravujte zatím obsah pravidla. Opravte cestu. Nejbližší pracovní místo má ukazovat na kanonické místo standardu tak přirozeně, aby ho člověk nemusel lovit v historii chatu, starém dokumentu nebo hlavě kolegy.
+
+Pokud člověk standard našel, ale neuměl rozhodnout, nejdřív zjistěte, jestli chybí jedna lokální opora, nebo jestli standard narazil na nový typ situace. Jedna chybějící otázka v checklistu je lokální oprava. Nový typ integrace, datového toku nebo zákaznického vstupu už může být návratový signál.
+
+Pokud kolem použití vznikla ruční péče, zapište ji bez obviňování. Skrytá péče je užitečný důkaz. Ukazuje, že standard možná funguje jen proto, že někdo pořád stojí vedle něj a drží ho za loket. To není tragédie, ale není to dlouhodobý rytmus.
+
+### Praktický příklad
+
+```text
+Standard:
+Privacy-first publikační checklist.
+
+Dlouhodobý rytmus:
+Kvartální kontrola publikačních a analytických standardů.
+
+První běžná kontrola:
+Nová landing page pro produktovou konzultaci.
+
+Kontrolní otázky:
+Našel editor checklist v publikační trase? Ano.
+Uměl rozhodnout bez čerstvého vysvětlení? Částečně.
+Vznikla mimořádná péče? Ano, produktový člověk ručně připomněl otázku k vloženému formuláři.
+
+Závěr:
+Standard drží obsahově, ale pracovní místo potřebuje jednu lokální oporu u vložených formulářů.
+
+Rozhodnutí:
+Nepřepisujeme celý standard. Do publikačního checklistu přidáme jednu otázku: "Vzniká vložením formuláře nový externí datový tok nebo osobní identifikátor?"
+
+Co neotevíráme:
+Analytickou strategii, výběr nástrojů ani obecnou revizi formulářů.
+```
+
+Příklad je záměrně malý. Kontrola našla slabinu, ale nerozšířila ji do velkého projektu. Lokální opora vzniká přesně tam, kde se rozhoduje. Standard zůstává v dlouhodobém rytmu a nová smyčka nevzniká, protože problém není v principu pravidla, ale v jedné chybějící pracovní otázce.
+
+### Čtyři výsledky první běžné kontroly
+
+Po kontrole vyberte jeden výsledek:
+
+- Rytmus drží: standard je najitelný, rozhodnutelný a bez skryté péče.
+- Cesta drhne: standard je dobrý, ale pracovní trasa k němu potřebuje opravu.
+- Rozhodnutí drhne: standard je najitelný, ale pracovní místo potřebuje jednu lokální oporu.
+- Objevil se návratový signál: problém přesahuje cestu i lokální oporu a potřebuje novou smyčku.
+
+Výsledek `rytmus drží` má skončit nejkratším zápisem. Nepřidávejte další kontrolu za odměnu. Standard už je v rytmu; nechte ho tam.
+
+Výsledek `cesta drhne` řešte navigačně. Přidejte odkaz, přesuňte kotvu, smažte starou kopii, zkraťte název nebo opravte místo, kde člověk pravidlo hledá. Nesahejte na pravidlo samotné, pokud problém vznikl jen při hledání.
+
+Výsledek `rozhodnutí drhne` řešte v pracovním místě. Přidejte jednu otázku, jeden příklad nebo jednu hranici. Neotevírejte celý standard, dokud není jasné, že lokální opora nestačí.
+
+Výsledek `návratový signál` oddělte od kontroly. Kontrolu uzavřete, zapište signál a otevřete novou malou smyčku s vlastní otázkou, důkazem a stop podmínkou. Jinak se z běžné kontroly stane servisní kufr na všechno, co se zrovna našlo.
+
+### Privacy-first kontrola běžné kontroly
+
+První běžná kontrola po převodu do dlouhodobého rytmu nemá rozšiřovat datovou stopu standardu. Ve většině případů stačí uložit tento typ závěru:
+
+```text
+Kontrolované použití:
+
+Výsledek:
+
+Rozhodnutí:
+
+Podklady, které neukládáme:
+```
+
+Řádek `podklady, které neukládáme` je důležitý. Pokud jste při kontrole viděli zákaznickou zprávu, interní poznámku, screenshot nastavení nebo ukázku formuláře, neznamená to automaticky, že patří do rozhodovací paměti. Pro běžnou kontrolu často stačí zobecněná věta: "editor potřeboval ruční připomenutí u vloženého formuláře". Původní podklad má zůstat ve svém systému, ne cestovat do další dokumentace.
+
+Privacy-first provoz se pozná právě v takových malých okamžicích. Ne až při velké právní revizi, ale ve chvíli, kdy si tým řekne: pro rozhodnutí nám stačí závěr, ne kopie důkazu.
+
+### Karta první běžné kontroly
+
+```text
+Standard:
+
+Dlouhodobý rytmus:
+
+Kontrolované běžné použití:
+
+Kontrola ověřuje pouze:
+
+Našel člověk standard v běžném pracovním místě?
+
+Uměl podle něj rozhodnout bez čerstvého vysvětlení?
+
+Nevznikla skrytá mimořádná péče?
+
+Výsledek:
+- rytmus drží
+- cesta drhne
+- rozhodnutí drhne
+- návratový signál
+
+Pokud vzniká lokální oprava:
+Kde přesně:
+Co se mění:
+Jak poznáme, že stačí:
+
+Pokud vzniká návratový signál:
+Nová otázka:
+Nejmenší důkaz:
+Stop podmínka:
+
+Co po této kontrole neotevíráme:
+
+Privacy-first zápis:
+Jaký závěr ukládáme:
+Které podklady neukládáme:
+Kde zůstává původní zdroj:
+
+Další rytmus nebo návratový signál:
+
+Vlastník:
+
+Datum kontroly:
+```
+
+Karta má pomoci hlavně v horších výsledcích. Když rytmus drží, vyplňte ji úsporně a zavřete. Když drhne cesta nebo rozhodnutí, karta zabrání tomu, aby se lokální oprava nafoukla. Když se objeví návratový signál, karta ho oddělí od běžné kontroly a nedovolí mu sníst celý rytmus.
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: pojmenujte kontrolované běžné použití.
+2. Minuta 2: napište, co kontrola ověřuje pouze.
+3. Minuty 3 až 4: odpovězte na tři kontrolní otázky.
+4. Minuta 5: vyberte jeden výsledek.
+5. Minuta 6: určete lokální opravu, návratový signál, nebo klid.
+6. Minuta 7: zapište privacy-first závěr a podklady, které neukládáte.
+
+Pokud workshop potřebuje víc času, nejspíš už neřešíte první běžnou kontrolu. Zastavte se a pojmenujte nový problém zvlášť. Běžná kontrola má chránit dlouhodobý rytmus, ne sloužit jako záminka k otevření všeho, co se během ní připomnělo.
+
+### Checklist první běžné kontroly
+
+- Kontrolujeme standard až v dohodnutém dlouhodobém rytmu nebo při skutečném signálu?
+- Má kontrola jednu větu, co ověřuje pouze?
+- Ověřili jsme najitelnost standardu v běžném pracovním místě?
+- Ověřili jsme rozhodnutelnost bez čerstvého vysvětlení?
+- Zjistili jsme, jestli nevznikla skrytá mimořádná péče?
+- Vybrali jsme jeden ze čtyř výsledků?
+- Pokud drhne cesta, opravujeme jen cestu ke kanonickému místu?
+- Pokud drhne rozhodnutí, přidáváme jen jednu lokální oporu?
+- Pokud vznikl návratový signál, otevíráme samostatnou smyčku?
+- Napsali jsme, co po kontrole výslovně neotevíráme?
+- Neukládáme osobní údaje, screenshoty, exporty ani zákaznické citace bez jasného účelu?
+- Zůstává standard po kontrole v jasném rytmu?
+
+První běžná kontrola po převodu do dlouhodobého rytmu je test dospělosti standardu. Neptá se, jestli by šel ještě vylepšit. To jde skoro vždycky, a právě proto je to nebezpečná otázka. Ptá se, jestli standard funguje v normální práci, bez mimořádné péče a bez zbytečných datových stop. Pokud ano, nejlepší další krok je klid.
+
 ## Pracovní log
 
+- 2026-06-22: Doplněna úvodní podkapitola o první běžné kontrole po převodu standardu do dlouhodobého rytmu: kontrola najitelnosti, rozhodnutelnosti a skryté péče, čtyři výsledky, privacy-first zápis, karta, mini workshop a checklist.
 - 2026-06-22: Doplněna úvodní podkapitola o převodu uzavřené druhé lehké kontroly do dlouhodobého rytmu: výběr běžného, delšího nebo signálního rytmu, ukončení dočasné péče, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-22: Doplněna úvodní podkapitola o uzavření druhé lehké kontroly po dlouhodobém klidu: uzavírací stavy, negativní hranice rozsahu, privacy-first uzavření, karta, mini workshop a checklist.
 - 2026-06-22: Doplněna úvodní podkapitola o druhé lehké kontrole po dlouhodobém klidu: samostatnost standardu bez čerstvé nápovědy, stabilita pracovní cesty, privacy-first stopa, čtyři výsledky, karta, mini workshop a checklist.
