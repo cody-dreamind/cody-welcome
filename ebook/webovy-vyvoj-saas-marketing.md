@@ -242570,8 +242570,134 @@ Když se v minutě 4 objeví dvě opravy, vyberte jednu nejbližší pracovnímu
 
 Uzavření druhé lehké kontroly je dobrý okamžik pro zdrženlivost. Pokud standard funguje, největší služba je nechat ho pracovat. Pokud potřebuje malou oporu, dejte mu ji přesně tam, kde se rozhoduje. A pokud se objeví skutečný návratový signál, nesnažte se ho schovat do servisní poznámky. Otevřete novou malou smyčku a držte ji stejně čistou jako všechny předchozí.
 
+## Převod uzavřené druhé lehké kontroly do dlouhodobého rytmu
+
+Uzavřená druhá lehká kontrola má ještě jeden praktický dozvuk: standard musí znovu zapadnout do dlouhodobého rytmu tak, aby kolem něj nevznikla nová mimořádná péče. Kontrola něco ověřila, případně drobně opravila cestu, ale teď musí být jasné, co se bude dít dál. Jinak tým snadno ponechá vedle standardu další připomínku, dočasnou kartu nebo mentální poznámku "ještě na to kouknout". A přesně z těchto malých zbytků později vzniká provozní šum.
+
+Převod do dlouhodobého rytmu není nová kapitola správy standardu. Je to krátké rozhodnutí: standard zůstává v běžném rytmu, posouvá se do delšího rytmu, nebo čeká jen na návratový signál. Všechny tři možnosti jsou v pořádku. Špatná je čtvrtá možnost: nechat ho v neurčitém stavu mezi hotovo a "pro jistotu sledovat".
+
+Začněte větou:
+
+```text
+Po druhé lehké kontrole standard dál žije v rytmu:
+```
+
+Potom doplňte jeden konkrétní rytmus. Například měsíční review šablon, kvartální kontrolu standardů, výroční revizi, nebo návrat pouze při signálu. Pokud neumíte rytmus pojmenovat, pravděpodobně standard ještě nemá dobrý domov. V takovém případě není odpovědí další kontrola, ale oprava vlastnictví nebo kanonického místa.
+
+Praktický příklad:
+
+```text
+Standard:
+Privacy-first publikační checklist.
+
+Výsledek druhé lehké kontroly:
+Standard drží samostatně při publikaci nové produktové stránky.
+
+Dlouhodobý rytmus:
+Zůstává v kvartální kontrole publikačních a analytických standardů.
+
+Návratový signál:
+Nová stránka přidá externí skript, formulářové pole nebo datový tok, který checklist neumí rozhodnout.
+
+Co po kontrole rušíme:
+Dočasnou kartu druhé lehké kontroly a pracovní poznámku z ověření.
+```
+
+Tento zápis říká dvě důležité věci. Standard funguje, takže nepotřebuje další mimořádné sledování. Zároveň má konkrétní návratový signál, takže tým nebude ignorovat skutečnou změnu reality. Klid neznamená slepotu. Klid znamená, že víte, kdy se znovu dívat.
+
+### Tři možné rytmy
+
+Po uzavřené druhé lehké kontrole vyberte jeden ze tří rytmů:
+
+- Běžný rytmus: standard se kontroluje spolu s pracovním místem, kde žije.
+- Delší rytmus: standard je stabilní a stačí mu kvartální, půlroční nebo roční návrat.
+- Signální rytmus: standard se neotevírá podle kalendáře, ale jen při konkrétním návratovém signálu.
+
+`Běžný rytmus` použijte u pravidel, která se často dotýkají zákaznické práce, formulářů, publikace, supportu nebo obchodního předání. Tady je lepší, když standard občas projde spolu s běžnou údržbou pracovního místa.
+
+`Delší rytmus` použijte u standardů, které po několika použitích drží a nemění se s každým menším vstupem. Typicky jde o šablony rozhodovacích záznamů, archivní pravidla, strukturu playbooku nebo ediční zásady.
+
+`Signální rytmus` použijte tehdy, když kalendář nepřidává hodnotu. Pokud standard řeší vzácnou situaci, například reaktivaci archivovaného materiálu nebo návrat po falešném poplachu, dává větší smysl otevřít ho až při skutečném signálu.
+
+### Zrušte dočasnou péči
+
+Po převodu do dlouhodobého rytmu musí zmizet věci, které patřily jen ke kontrole:
+
+- dočasná karta ověření;
+- pracovní komentáře a screenshoty;
+- kopie šablony vytvořená pro test;
+- připomínka "zkontrolovat ještě jednou", pokud nemá návratový signál;
+- osobní poznámky z průchodu;
+- exporty nebo seznamy, které už nepodporují žádné rozhodnutí.
+
+Neznamená to mazat rozhodovací paměť. Znamená to ponechat závěr a odstranit podklady, které už závěr jen zbytečně obklopují. Dobrá provozní paměť je krátká a použitelná. Špatná provozní paměť je složka s důkazy, mezi kterými nikdo nenajde rozhodnutí.
+
+Privacy-first pravidlo je jednoduché:
+
+```text
+Po převodu do dlouhodobého rytmu zůstává rozhodovací závěr, kanonické místo, návratový signál a datová hranice. Dočasné podklady se mažou nebo anonymizují.
+```
+
+Pokud si tým chce nějaký podklad ponechat, musí říct proč. "Pro jistotu" nestačí. Jistota bez účelu je jen dlouhodobější nepořádek.
+
+### Karta převodu do dlouhodobého rytmu
+
+```text
+Standard:
+
+Výsledek druhé lehké kontroly:
+
+Kanonické pracovní místo:
+
+Zvolený dlouhodobý rytmus:
+- běžný / delší / signální
+
+Proč tento rytmus stačí:
+
+Návratový signál:
+
+Co ukončujeme:
+
+Co zůstává v rozhodovací paměti:
+
+Privacy-first úklid:
+Co mažeme, anonymizujeme nebo necháváme v původním systému:
+
+Vlastník:
+
+Datum dalšího běžného návratu nebo signálu:
+```
+
+Kartu vyplňujte úsporně. Pokud se mění vlastník, kanonické místo nebo samotné pravidlo, nejde jen o převod do rytmu. To už je nová změna standardu a potřebuje vlastní smyčku.
+
+### Mini workshop na 5 minut
+
+1. Minuta 1: přečtěte výsledek druhé lehké kontroly.
+2. Minuta 2: vyberte dlouhodobý rytmus.
+3. Minuta 3: napište návratový signál.
+4. Minuta 4: určete, co po kontrole rušíte nebo mažeme.
+5. Minuta 5: potvrďte vlastníka a místo, kde zůstává rozhodovací závěr.
+
+Když workshop potřebuje víc času, pravděpodobně neřešíte rytmus, ale nejasný standard. Nepřekrývejte to. Zapište problém zvlášť a převod do rytmu dokončete jen tehdy, pokud standard opravdu drží.
+
+### Checklist převodu do dlouhodobého rytmu
+
+- Má standard po druhé lehké kontrole jasný stav?
+- Vybrali jsme jeden dlouhodobý rytmus?
+- Je zřejmé, proč standard nepotřebuje další mimořádnou péči?
+- Má návratový signál konkrétní pracovní podobu?
+- Je kanonické místo pořád platné a najitelné?
+- Zrušili jsme dočasné karty, poznámky, kopie nebo připomínky bez účelu?
+- Zůstává rozhodovací paměť krátká a použitelná?
+- Nevzniká nové měření, export ani evidence používání standardu?
+- Jsou dočasné podklady smazané, anonymizované nebo ponechané jen v původním systému s oprávněným přístupem?
+- Ví vlastník, kdy se standard znovu uvidí?
+
+Codyho komentář: dlouhodobý rytmus je místo, kde standard přestane vyžadovat pozornost za to, že existuje. Buď funguje v běžné práci, nebo čeká na konkrétní signál. Všechno mezi tím je jen drahý způsob, jak říct "nejsme si jistí, jestli už je hotovo".
+
 ## Pracovní log
 
+- 2026-06-22: Doplněna úvodní podkapitola o převodu uzavřené druhé lehké kontroly do dlouhodobého rytmu: výběr běžného, delšího nebo signálního rytmu, ukončení dočasné péče, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-22: Doplněna úvodní podkapitola o uzavření druhé lehké kontroly po dlouhodobém klidu: uzavírací stavy, negativní hranice rozsahu, privacy-first uzavření, karta, mini workshop a checklist.
 - 2026-06-22: Doplněna úvodní podkapitola o druhé lehké kontrole po dlouhodobém klidu: samostatnost standardu bez čerstvé nápovědy, stabilita pracovní cesty, privacy-first stopa, čtyři výsledky, karta, mini workshop a checklist.
 - 2026-06-22: Doplněna úvodní podkapitola o uzavření první lehké kontroly po dlouhodobém klidu: uzavírací stavy, lokální oprava, privacy-first stopa, karta, mini workshop a checklist.
