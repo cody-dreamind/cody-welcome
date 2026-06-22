@@ -53,6 +53,8 @@ Do stejné první poznámky přidejte i jednu věc, kterou ze starého kontextu 
 
 Pokud první poznámka pořád zní jako opis starého rozhodnutí, zastavte se a napište ji z pohledu dnešní práce. Dobrá návratová věta nezačíná tím, co tým kdysi řešil, ale tím, proč se k tématu vrací právě teď.
 
+Z první návratové věty rovnou odvoďte hranici dalšího kroku. Pokud věta míří na potvrzovací e-mail, nezačínejte zároveň přepisovat homepage, formulář i obchodní skript. Návrat má nejdřív opravit místo, kde se dnešní důvod opravdu ukázal; širší vzor si zaslouží vlastní návratový signál.
+
 ## Kontrola přeneseného kontextu při návratu k tématu
 
 Když se tým vrací k tématu po týdnech nebo měsících, největší riziko často není zapomenutí. Horší je poloviční paměť: všichni si pamatují název problému, ale každý si pod ním nese jiný starý kontext. Jeden člověk pořád řeší původní segment, druhý už myslí na novou nabídku, třetí si pamatuje starou výjimku a čtvrtý má v hlavě poslední incident. Výsledek vypadá jako shoda, ale práce se rozjede do čtyř směrů.
@@ -242678,3 +242680,4 @@ Druhé běžné použití po výroční revizi je test přenositelnosti. Pokud s
 - 2026-06-21: Doplněna krátká úvodní poznámka, aby návratová věta začínala dnešním důvodem návratu místo opisování starého rozhodnutí.
 - 2026-06-21: Doplněna úvodní podkapitola o přepisu návratové věty do dnešního důvodu: konkrétní pracovní místo, návratový signál, nejmenší rozhodnutí, privacy-first hranice, karta, workshop a checklist.
 - 2026-06-21: Doplněna úvodní podkapitola o převodu přepsané návratové věty do prvního malého kroku: typy kroků, praktický příklad, privacy-first hranice, karta, mini workshop a checklist.
+- 2026-06-22: Doplněna krátká úvodní poznámka, aby se z první návratové věty rovnou odvodila hranice dalšího kroku.
