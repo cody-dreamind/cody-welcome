@@ -243390,8 +243390,142 @@ Když workshop potřebuje víc času, je to signál. Buď druhá kontrola neměl
 
 Uzavření druhé běžné kontroly je dobré místo, kde se tým učí nechat standardy dospět. Některé zůstanou v klidu, některé dostanou poslední malou opravu, některé otevřou novou otázku a některé se zúží nebo odejdou do archivu. Všechny čtyři výsledky jsou zdravé, pokud jsou vědomé. Nezdravé je jen držet všechno napůl otevřené, protože zavřený stav působí moc definitivně.
 
+## Zmenšení revizní stopy po opakovaně klidném standardu
+
+Když standard projde více běžnými kontrolami bez návratového signálu, nastává zvláštní druh práce: přestat ho kontrolovat tak podrobně. Stabilní pravidlo nemá navždy nést stopu svého zavádění. Pokud se po každém klidném review pořád vyplňuje stejná karta, opisuje stejná privacy-first věta a někdo ručně hlídá stejnou šablonu, standard sice funguje, ale kolem něj zůstalo servisní lešení.
+
+Zmenšení revizní stopy neznamená přestat se o pravidlo starat. Znamená přesunout péči z mimořádné kontroly do normálního provozního místa. Tým tím říká: pravidlo je dost stabilní, aby se kontrolovalo spolu s celou oblastí, ne jako samostatná položka pokaždé, když se otevře kalendář.
+
+Začněte otázkou:
+
+```text
+Co kolem tohoto standardu pořád kontrolujeme jen proto, že jsme to kontrolovali při zavádění?
+```
+
+Pokud odpověď existuje, je čas revizní stopu zmenšit. Typicky půjde o dočasnou kartu, zvláštní připomínku, ruční kontrolní bod, pomocný seznam příkladů nebo samostatný review zápis, který už nepřidává nové rozhodnutí.
+
+### Co zůstává a co končí
+
+Po opakovaně klidném standardu ponechte jen tři věci:
+
+- kanonické pravidlo v pracovním místě;
+- konkrétní návratový signál;
+- běžný rytmus oblasti, ve které pravidlo žije.
+
+Ukončit můžete všechno, co vzniklo kvůli zavádění, ověřování nebo prvnímu předání:
+
+- samostatné kontrolní karty bez nového nálezu;
+- dočasné připomínky v chatu nebo kalendáři;
+- pracovní kopie šablon;
+- pomocné exporty a screenshoty;
+- ruční seznamy použití, pokud už nevedou k rozhodnutí.
+
+Příklad:
+
+```text
+Standard:
+Při publikaci nové landing page se kontroluje, jestli nepřibyl nový externí datový tok.
+
+Opakovaný výsledek:
+Tři běžné kontroly po sobě neukázaly návratový signál. Editor našel checklist v publikační šabloně a nevznikl nový tracker ani export.
+
+Zůstává:
+Publikační checklist, kvartální review webových standardů a návratový signál "nový externí skript nebo formulářový tok".
+
+Končí:
+Samostatná měsíční poznámka k tomuto jednomu pravidlu a pomocná tabulka prvních použití.
+
+Privacy-first výsledek:
+Neukládáme další záznamy o použití checklistu. Ponecháváme jen agregovaný závěr, že pravidlo prošlo třemi běžnými kontrolami.
+```
+
+Tady se neztrácí kontrola. Jen se přestává platit za mimořádnost, která už nemá účel.
+
+### Kdy stopu nezmenšovat
+
+Revizní stopu nezmenšujte, pokud standard sice formálně drží, ale pořád potřebuje skrytou pomoc. Varovné signály:
+
+- pravidlo funguje jen u lidí, kteří byli u jeho zavedení;
+- kanonické místo existuje, ale nový člověk ho nenajde bez odkazu;
+- návratový signál je pořád moc obecný;
+- privacy-first hranice není vidět tam, kde vznikají data;
+- při každém použití vzniká ruční poznámka mimo zdroj pravdy;
+- standard má otevřenou výjimku bez data návratu.
+
+V takové situaci není problém v příliš velké revizní stopě. Problém je v nedokončené stabilizaci. Nejdřív opravte pracovní místo, návratový signál nebo datovou hranici. Teprve potom rušte zvláštní kontrolu.
+
+### Privacy-first zmenšení
+
+Zmenšení revizní stopy je samo o sobě privacy-first krok. Méně pomocných karet, exportů, screenshotů a ručních seznamů znamená méně míst, kde mohou zůstat data bez účelu. Důležité ale je nepřehodit uklizení za zapomenutí.
+
+Použijte krátký zápis:
+
+```text
+Ponecháváme:
+Aktuální pravidlo, návratový signál a agregovaný závěr posledních kontrol.
+
+Mažeme nebo anonymizujeme:
+Pomocné poznámky, kopie, exporty a příklady z ověřování.
+
+Už nesbíráme:
+Samostatné záznamy o každém běžném použití pravidla.
+```
+
+Pokud se kvůli pravidlu dřív držely konkrétní pracovní důkazy, zeptejte se, jestli ještě pomáhají dalšímu rozhodnutí. Pokud ne, nechte v rozhodovací paměti jen závěr. Detail patří do původního systému s vlastním účelem a retencí, nebo má zmizet.
+
+### Karta zmenšení revizní stopy
+
+```text
+Standard:
+
+Kanonické pracovní místo:
+
+Kolik běžných kontrol proběhlo bez návratového signálu:
+
+Co zůstává v běžném rytmu:
+
+Co ukončujeme:
+
+Co mažeme, zkracujeme nebo anonymizujeme:
+
+Návratový signál:
+
+Co už nesbíráme:
+
+Kdo drží běžný rytmus:
+
+Datum další standardní kontroly:
+```
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte aktuální standard a poslední dva kontrolní závěry.
+2. Minuta 2: potvrďte, že nenastal návratový signál.
+3. Minuta 3: určete, co zůstává v běžném rytmu.
+4. Minuta 4: napište, která mimořádná kontrola končí.
+5. Minuta 5: proveďte privacy-first úklid pomocných stop.
+6. Minuta 6: zapište návratový signál a další standardní kontrolu.
+
+Pokud se během šesti minut objeví debata o tom, zda standard vůbec funguje, nezmenšujte stopu. Otevřete nejdřív běžné review standardu. Zmenšení revizní stopy je vhodné až tehdy, když je klid opravdu doložený, ne jen předpokládaný.
+
+### Checklist zmenšení revizní stopy
+
+- Prošel standard opakovanou běžnou kontrolou bez návratového signálu?
+- Je kanonické pracovní místo jasné a používané?
+- Víme, jaký běžný rytmus pravidlo dál nese?
+- Ukončili jsme samostatné připomínky, které už nepřidávají rozhodnutí?
+- Nezůstává skrytá ruční pomoc, bez které by pravidlo nefungovalo?
+- Je návratový signál konkrétní a viditelný v pracovním místě?
+- Mažeme nebo anonymizujeme pomocné poznámky, exporty a pracovní kopie?
+- Ponecháváme jen agregovaný závěr místo surových podkladů?
+- Nevzniká nový report jen proto, abychom dokázali, že už nemusíme reportovat?
+- Ví vlastník, kdy se pravidlo znovu objeví v normálním rytmu?
+
+Dobré zmenšení revizní stopy je tichý úspěch. Standard zůstává, ale kolem něj ubude kontrolního prachu. Tým má pořád pravidlo, návratový signál a rytmus. Nemá už však zvláštní administrativu, která vznikla jen proto, že pravidlo kdysi potřebovalo doprovod.
+
 ## Pracovní log
 
+- 2026-06-22: Doplněna úvodní podkapitola o zmenšení revizní stopy po opakovaně klidném standardu: co ponechat, co ukončit, kdy stopu nezmenšovat, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-22: Doplněna úvodní podkapitola o uzavření druhé běžné kontroly do provozního klidu: uzavírací věty, příklady klidu a zúžení standardu, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-22: Doplněna úvodní podkapitola o druhé běžné kontrole v dlouhodobém rytmu: porovnání se závěrem první kontroly, čtyři výsledky, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-06-22: Doplněna úvodní podkapitola o uzavření první běžné kontroly po převodu standardu do dlouhodobého rytmu: čtyři uzavírací stavy, lokální opravy, oddělení nové smyčky, privacy-first úklid, karta, mini workshop a checklist.
