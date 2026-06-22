@@ -241022,8 +241022,164 @@ Když se během uzavření otevře nové téma, nezapisujte ho do stejné karty 
 
 Dobře uzavřená výroční revize je tichá. V kanonickém místě je aktuální pravidlo, v pracovním místě je správná navigace, v historii je krátký důvod a staré podklady netečou do dalšího roku jen ze zvyku. Standard tím nezíská větší slávu, ale získá něco praktičtějšího: schopnost fungovat další období bez toho, aby kolem sebe vyráběl zbytečnou péči.
 
+## První běžné použití po výroční revizi standardu
+
+Po výroční revizi přichází nenápadný, ale důležitý test: první běžné použití standardu. Nejde o další revizi. Jde o to, jestli standard po roční kontrole opravdu funguje v práci, pro kterou existuje. Pokud tým po uzavření revize pořád potřebuje autora pravidla, staré poznámky nebo vysvětlení z porad, revize možná skončila formálně, ale standard ještě není samostatný.
+
+První běžné použití má proběhnout v normální situaci. Nepřipravujte pro něj speciální schůzku, nový formulář ani kontrolní rituál. Vezměte nejbližší reálný okamžik, kdy by člověk standard použil tak jako jakýkoli jiný provozní postup: při uzavření kampaně, předání šablony, kontrole formuláře, publikaci obsahu nebo návratu k archivnímu materiálu.
+
+Před použitím si položte tři krátké otázky:
+
+```text
+Našel člověk standard z přirozeného pracovního místa?
+
+Stačilo aktuální znění bez staré revizní historie?
+
+Vedlo pravidlo k rozhodnutí, nebo k nové debatě o jeho smyslu?
+```
+
+Pokud jsou odpovědi klidné, nechte standard být. Nepřidávejte poznámku "funguje" do pěti míst. Stačí malý záznam u výroční revize nebo v běžném pracovním logu. Standard nemá být odměněn tím, že kolem něj vznikne další evidence.
+
+Praktický příklad:
+
+```text
+Situace:
+Tým uzavírá starší obsahovou kampaň a potřebuje zkontrolovat archivní šablonu.
+
+Standard po výroční revizi:
+Archivní šablona má na prvním řádku odkaz na aktuální zdroj pravdy.
+
+První běžné použití:
+Člověk otevře archivní šablonu, najde odkaz na aktuální postup a nepoužije starou šablonu jako aktivní zdroj.
+
+Výsledek:
+Standard funguje bez mimořádné péče.
+
+Záznam:
+První běžné použití po výroční revizi proběhlo bez ruční nápovědy. Další kontrola zůstává výroční, nebo dřív při návratovém signálu.
+```
+
+Všimněte si, že příklad neukládá jména, screenshoty ani kopie kampaně. Pro rozhodnutí stačí vědět, že člověk našel aktuální postup a starý materiál nepoužil jako zdroj pravdy. To je přesně ta úroveň paměti, která pomáhá provozu a současně zbytečně neroztahuje datovou stopu.
+
+### Čtyři výsledky prvního použití
+
+Po prvním běžném použití vyberte jeden ze čtyř výsledků:
+
+- Čisté použití: standard byl nalezen, pochopen a použit bez mimořádné pomoci.
+- Lokální navigační tření: standard platí, ale cesta k němu je slabá, odkaz je schovaný nebo název neodpovídá pracovní situaci.
+- Slabé znění po revizi: standard je najitelný, ale aktuální text nevede k rozhodnutí bez doplňujícího vysvětlení.
+- Skutečný návratový signál: při běžném použití se objevil problém, který odpovídá návratovému signálu nebo ukazuje změněný kontext.
+
+Stav `čisté použití` uzavřete bez nové práce. Zapište jen krátký závěr a nechte další rytmus beze změny.
+
+Stav `lokální navigační tření` opravte tam, kde vzniklo. Doplňte odkaz, přepište název, sjednoťte popisek nebo odstraňte starou zkratku. Neměňte obsah standardu, pokud problém leží v cestě k němu.
+
+Stav `slabé znění po revizi` je vážnější, ale pořád nemusí znamenat novou velkou smyčku. Nejprve opravte jednu rozhodovací větu v kanonickém místě. Pokud ani potom standard nevede k rozhodnutí, otevřete malou smyčku se stop podmínkou.
+
+Stav `skutečný návratový signál` neřešte jako běžné doladění. Zapište, který signál se naplnil, jaký je nejmenší důkaz a jaké jedno pracovní místo se má otevřít. Historii výroční revize používejte jen jako kontext, ne jako zásobník starých podkladů.
+
+Codyho komentář: první použití po revizi je dobrý detektor divadla. Pokud standard vypadá krásně v kartě, ale v práci se k němu nikdo nedostane bez průvodce, nemáte standard. Máte dokument s lepším sebevědomím než distribucí.
+
+### Privacy-first hranice
+
+První běžné použití po výroční revizi svádí k tomu, aby tým "pro jistotu" uložil důkaz. Jenže důkaz má být přiměřený rozhodnutí. Pokud standard funguje, nepotřebujete uchovat celý průchod. Pokud je potřeba opravit navigaci, nepotřebujete kopii interní komunikace. Pokud se objeví skutečný návratový signál, stačí zobecněný popis dopadu a odkaz na kanonické místo, ne export starých dat.
+
+Použijte jednoduché pravidlo:
+
+```text
+Ukládáme výsledek použití, ne surový průběh práce.
+```
+
+Do záznamu proto pište například:
+
+```text
+Stačí:
+Standard byl nalezen z pracovního místa a vedl k rozhodnutí bez ruční nápovědy.
+
+Nestačí:
+Uložit screenshot šablony, chat s dotazem, kopii kampaně a seznam lidí, kteří u použití byli.
+```
+
+Výjimka existuje jen tehdy, když bez konkrétního podkladu nejde rozhodnout o opravě. I tehdy držte podklad v původním zdroji pravdy, zkraťte citlivé detaily a do karty přeneste jen závěr. Privacy-first provoz není asketismus pro radost. Je to způsob, jak nedělat z každého provozního testu nový archiv osobních a interních stop.
+
+### Karta prvního běžného použití po výroční revizi
+
+```text
+Standard:
+
+Datum poslední výroční revize:
+
+Běžná pracovní situace:
+
+Kanonické místo:
+
+Pracovní místo, odkud měl člověk standard najít:
+
+Výsledek použití:
+- čisté použití
+- lokální navigační tření
+- slabé znění po revizi
+- skutečný návratový signál
+
+Co se stalo jednou větou:
+
+Pokud jde o navigační tření:
+Jedna lokální oprava:
+
+Pokud jde o slabé znění:
+Jedna rozhodovací věta k úpravě:
+
+Pokud jde o návratový signál:
+Naplněný signál:
+Nejmenší důkaz:
+Nejbližší pracovní místo:
+
+Co po tomto použití nevzniká:
+
+Privacy-first záznam:
+Zobecněný výsledek:
+Detaily, které neukládáme:
+Podklady, které zůstávají v původním zdroji pravdy:
+
+Další rytmus:
+
+Vlastník:
+```
+
+Řádek `Co po tomto použití nevzniká` chrání tým před běžnou provozní přehnaností. Po čistém použití nevzniká nová kontrola. Po navigačním tření nevzniká redesign standardu. Po slabém znění nevzniká portfoliový audit všech standardů. Po návratovém signálu nevzniká sběr starých důkazů bez jasné otázky.
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: pojmenujte běžnou pracovní situaci, ve které se standard použil.
+2. Minuta 2: ověřte, jestli člověk našel standard z přirozeného pracovního místa.
+3. Minuta 3: zeptejte se, jestli aktuální znění vedlo k rozhodnutí bez staré historie.
+4. Minuta 4: vyberte jeden ze čtyř výsledků použití.
+5. Minuta 5: pokud je potřeba oprava, určete přesně jedno místo zásahu.
+6. Minuta 6: napište, co po použití nevzniká.
+7. Minuta 7: zapište privacy-first závěr a další rytmus.
+
+Když se během workshopu začne řešit celá výroční revize znovu, zastavte to. První běžné použití není odvolací soud. Je to provozní test jednoho standardu v jedné situaci. Pokud test ukáže skutečný návratový signál, otevřete novou malou smyčku. Pokud ne, vraťte standard do klidu.
+
+### Checklist prvního běžného použití
+
+- Proběhlo použití v reálné pracovní situaci, ne ve speciálním testu?
+- Našel člověk standard z přirozeného pracovního místa?
+- Stačilo aktuální znění bez vysvětlování staré revize?
+- Vedlo pravidlo ke konkrétnímu rozhodnutí?
+- Rozlišili jsme navigační tření od slabého obsahu standardu?
+- Pokud opravujeme navigaci, měníme jen nejbližší pracovní místo?
+- Pokud upravujeme znění, měníme jednu rozhodovací větu, ne celý standard bokem?
+- Pokud se naplnil návratový signál, otevíráme samostatnou malou smyčku?
+- Napsali jsme, co po použití výslovně nevzniká?
+- Ukládáme zobecněný výsledek místo surového průběhu práce?
+- Neuchováváme screenshoty, chaty, exporty, jména ani interní detaily bez aktivního účelu?
+- Zůstává další rytmus standardu jasný?
+
+První běžné použití po výroční revizi má být malé a obyčejné. Právě proto je užitečné. Ukáže, jestli standard žije v práci, nebo jen v dokumentaci. Když funguje, nechte ho fungovat. Když se zasekne, opravte nejbližší místo. A když se opravdu vrátil problém, otevřete novou smyčku s malým rozsahem a krátkou pamětí.
+
 ## Pracovní log
 
+- 2026-06-22: Doplněna úvodní podkapitola o prvním běžném použití po výroční revizi standardu: čtyři výsledky použití, privacy-first záznam, karta, mini workshop a checklist.
 - 2026-06-22: Doplněna úvodní podkapitola o uzavření první výroční revize standardu: uzavírací stavy, propsání do kanonického a pracovního místa, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-21: Doplněna úvodní podkapitola o první výroční revizi standardu: kontrola kanonického a pracovního místa, čtyři výsledné stavy, privacy-first úklid důkazů, karta, mini workshop a checklist.
 - 2026-06-21: Doplněna úvodní podkapitola o přechodu z periodické kontroly do výroční revize standardu: podmínky pro delší rytmus, úklid dočasné péče, návratový signál, privacy-first závěr, karta, mini workshop a checklist.
