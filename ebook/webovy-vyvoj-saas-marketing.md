@@ -242392,8 +242392,187 @@ Když se během sedmi minut ukáže, že nikdo neumí říct, odkud se standard 
 
 Druhá lehká kontrola je test dospělosti standardu. Když pravidlo obstojí bez čerstvé nápovědy, nedávejte mu další školení. Nechte ho pracovat. Když drhne cesta, opravte cestu. Když se objeví skutečný návratový signál, otevřete novou malou smyčku a dejte jí vlastní hranice. Tím se dlouhodobý klid nestane zapomenutím, ale praktickým provozním stavem.
 
+## Uzavření druhé lehké kontroly po dlouhodobém klidu
+
+Druhá lehká kontrola má skončit rychleji, než začala. Její smysl není vyrábět další vrstvu dohledu, ale potvrdit, jestli standard po delším klidu pořád funguje v normální práci. Jakmile máte výsledek, zavřete kontrolu do jedné srozumitelné věty, jedné případné lokální opravy a jasného rozhodnutí, kdy se standard znovu uvidí.
+
+Nejčastější chyba v této fázi je odměnit dobrý výsledek další kontrolou. Tým vidí, že standard funguje, a hned ho napadne: "Tak se na něj podíváme ještě příště." Jenže pokud kontrola nenašla návratový signál, další mimořádná péče je zbytečná. Standard nemá být trvale hlídaný projekt. Má být pracovní pravidlo, které lidem pomáhá rozhodovat bez schůzky.
+
+Začněte uzavírací větou:
+
+```text
+Druhou lehkou kontrolu uzavíráme se stavem:
+```
+
+Potom doplňte jeden ze čtyř stavů. Nepřidávejte k němu dlouhé vysvětlení, pokud není potřeba pro další práci. Dobrý uzavírací zápis má být pochopitelný i za tři měsíce, ale nemá z něj být kronika všeho, co se při kontrole řeklo.
+
+Praktický příklad:
+
+```text
+Druhou lehkou kontrolu uzavíráme se stavem:
+Standard drží samostatně.
+
+Závěr:
+Při publikaci nové produktové stránky editor našel privacy-first publikační standard v běžném checklistu, nepřidal social share skripty, nechal měření agregované a nepotřeboval čerstvé vysvětlení od autora standardu.
+
+Další krok:
+Žádný mimořádný krok. Standard zůstává v běžném publikačním rytmu a znovu se otevře jen při návratovém signálu.
+```
+
+Takový závěr je malý, ale provozně cenný. Říká, že pravidlo funguje, kde fungovalo a proč se teď nemá otevírat další práce. To je přesně ten druh zápisu, který chrání tým před nekonečným laděním dobrých věcí. Ano, i dobré věci se dají rozvrtat. Stačí dost energie a málo stop pravidel.
+
+### Čtyři uzavírací stavy
+
+Po druhé lehké kontrole vyberte jeden uzavírací stav:
+
+- Zavřít bez změny: standard drží samostatně a další mimořádná kontrola nevzniká.
+- Zavřít s lokální opravou cesty: pravidlo je správné, ale najitelnost potřebuje jedno dočištění.
+- Zavřít s lokální oporou pracovního místa: pravidlo je správné, ale konkrétní checklist, šablona nebo formulář potřebuje jednu doplňující otázku.
+- Zavřít a otevřít novou smyčku: kontrola potvrdila návratový signál, který už není pouhé tření.
+
+Stav `zavřít bez změny` je výsledek, který si zaslouží největší disciplínu. Nic neopravujte jen proto, že jste zrovna u standardu. Zapište důkaz samostatnosti a vraťte pravidlo do klidu.
+
+Stav `lokální oprava cesty` použijte, když člověk standard použil správně, ale dostal se k němu přes náhodnou trasu. Oprava má být navigační: doplnit odkaz z kanonického checklistu, přejmenovat sekci, odstranit starou kopii, nebo přidat krátkou kotvu z místa, kde se rozhodnutí běžně dělá.
+
+Stav `lokální opora pracovního místa` použijte, když cesta ke standardu funguje, ale samotné pracovní místo nechává jednu opakovanou nejasnost. Například publikační checklist sice odkazuje na privacy-first pravidlo, ale u vložených formulářů chybí otázka: "Vzniká tím nový osobní identifikátor nebo externí datový tok?" V takovém případě nepřepisujte standard. Přidejte otázku do checklistu, kde se rozhoduje.
+
+Stav `nová smyčka` použijte jen tehdy, když druhá kontrola ukáže skutečný návrat problému. Třeba standard opakovaně neumí rozhodnout nový typ integrace, nový typ zákaznického vstupu nebo novou hranici mezi marketingem a produktem. Pak kontrolu zavřete a novou smyčku otevřete zvlášť: s vlastní otázkou, důkazem, stop podmínkou a privacy-first hranicí.
+
+### Co se po uzavření nemá stát
+
+Po druhé lehké kontrole nevzniká automaticky:
+
+- nová pravidelná kontrola jen proto, že kontrola proběhla dobře;
+- plošná revize celého standardu;
+- další kopie pravidla v prezentaci, dokumentu nebo chatu;
+- sběr nových screenshotů, exportů nebo zákaznických příkladů pro jistotu;
+- změna vlastníka, pokud standard funguje v běžném rytmu;
+- rozšíření standardu na sousední oblast bez samostatné otázky.
+
+Tento seznam je důležitější, než vypadá. Uzavírání často selže ne proto, že tým neví, co udělat, ale proto, že neřekne, co teď nedělá. Malý úspěšný test pak nenápadně otevře tři vedlejší témata. Na konci týdne nikdo neví, proč se vlastně začalo přepisovat něco, co původně fungovalo.
+
+Pište proto i negativní hranici:
+
+```text
+Po této kontrole neotevíráme:
+```
+
+Příklad:
+
+```text
+Po této kontrole neotevíráme:
+Celý privacy-first publikační standard, analytickou strategii ani šablonu produktové stránky. Kontrola řešila jen samostatnost standardu při druhém použití.
+```
+
+Tato věta je malá brzda proti rozšiřování rozsahu. Není defenzivní. Je provozně dospělá.
+
+### Privacy-first uzavření
+
+Uzavření druhé lehké kontroly má uložit co nejméně dat. Ve většině případů stačí:
+
+```text
+Kontrolované použití:
+
+Výsledek:
+
+Závěr:
+
+Nevytvořená nebo smazaná stopa:
+```
+
+Řádek `nevytvořená nebo smazaná stopa` drží privacy-first hodnotu v praktickém provozu. Pokud jste se při kontrole rozhodli neukládat export měření, nepořizovat screenshot nastavení nebo necitovat zákaznickou zprávu, napište to. Tým si tím buduje návyk, že dobrý důkaz nemusí znamenat větší datový batoh.
+
+Příklad:
+
+```text
+Kontrolované použití:
+Publikace stránky pro SaaS onboarding audit.
+
+Výsledek:
+Zavřít bez změny.
+
+Závěr:
+Editor použil standard samostatně z publikačního checklistu a stránka nepřidala nový externí tracker ani osobní identifikátor.
+
+Nevytvořená nebo smazaná stopa:
+Neukládáme screenshot nastavení analytiky ani export návštěvnosti. Pro rozhodnutí stačí agregovaný závěr v této kartě.
+```
+
+Pokud kontrola pracovala s citlivějšími podklady, například se zákaznickou zprávou, support tiketem nebo interní obchodní poznámkou, ukládejte jen zobecněný závěr. Původní zdroj má zůstat ve svém systému s odpovídajícími přístupy a retenčními pravidly. E-book, checklist ani týmová karta nemají být skladištěm osobních dat převlečeným za produktivitu.
+
+### Karta uzavření druhé lehké kontroly
+
+```text
+Standard:
+
+Kontrolované druhé použití:
+
+Uzavírací stav:
+- bez změny
+- lokální oprava cesty
+- lokální opora pracovního místa
+- nová smyčka
+
+Jednovětý závěr:
+
+Pokud vzniká lokální oprava:
+Kde přesně:
+Co se mění:
+Kdo to udělá:
+Jak poznáme, že stačí:
+
+Pokud vzniká nová smyčka:
+Nová otázka:
+Nejmenší důkaz:
+Stop podmínka:
+Co zůstává mimo rozsah:
+
+Co po této kontrole neotevíráme:
+
+Privacy-first uzavření:
+Jaký závěr ukládáme:
+Které podklady neukládáme:
+Kde zůstává původní zdroj:
+Kdy se dočasné podklady mažou:
+
+Další běžný rytmus nebo návratový signál:
+
+Vlastník:
+
+Datum uzavření:
+```
+
+Karta je delší než samotný běžný záznam, protože pokrývá i horší varianty. V dobrém případě vyplníte jen několik řádků. Pokud vyplňujete všechno, pravděpodobně už nejste v lehké kontrole, ale v nové smyčce. To není problém, jen to pojmenujte. Zmatek začíná až ve chvíli, kdy se nová smyčka tváří jako drobná poznámka.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte výsledek druhé lehké kontroly.
+2. Minuta 2: vyberte jeden uzavírací stav.
+3. Minuta 3: napište jednovětý závěr.
+4. Minuta 4: určete jednu lokální opravu, nebo výslovně napište, že žádná nevzniká.
+5. Minuta 5: napište, co po kontrole neotevíráte.
+6. Minuta 6: zkraťte datovou stopu a určete další běžný rytmus nebo návratový signál.
+
+Když se v minutě 4 objeví dvě opravy, vyberte jednu nejbližší pracovnímu místu. Druhou zapište jako podnět, ne jako součást uzavření. Uzavření má zavřít kontrolu, ne potichu naplánovat menší sprint.
+
+### Checklist uzavření druhé lehké kontroly
+
+- Vybrali jsme jeden uzavírací stav?
+- Je jednovětý závěr pochopitelný bez znalosti schůzky?
+- Pokud standard drží, nevyrábíme další mimořádnou kontrolu?
+- Pokud drhne cesta, opravujeme jen trasu ke kanonickému místu?
+- Pokud drhne pracovní místo, přidáváme jen jednu lokální oporu?
+- Pokud se objevil návratový signál, otevíráme samostatnou smyčku s vlastní hranicí?
+- Napsali jsme, co po této kontrole výslovně neotevíráme?
+- Neukládáme screenshoty, exporty, zákaznické citace ani osobní údaje bez jasného účelu?
+- Je zřejmé, kde zůstává původní zdroj pravdy?
+- Víme, kdy se standard znovu objeví v běžném rytmu nebo při návratovém signálu?
+
+Uzavření druhé lehké kontroly je dobrý okamžik pro zdrženlivost. Pokud standard funguje, největší služba je nechat ho pracovat. Pokud potřebuje malou oporu, dejte mu ji přesně tam, kde se rozhoduje. A pokud se objeví skutečný návratový signál, nesnažte se ho schovat do servisní poznámky. Otevřete novou malou smyčku a držte ji stejně čistou jako všechny předchozí.
+
 ## Pracovní log
 
+- 2026-06-22: Doplněna úvodní podkapitola o uzavření druhé lehké kontroly po dlouhodobém klidu: uzavírací stavy, negativní hranice rozsahu, privacy-first uzavření, karta, mini workshop a checklist.
 - 2026-06-22: Doplněna úvodní podkapitola o druhé lehké kontrole po dlouhodobém klidu: samostatnost standardu bez čerstvé nápovědy, stabilita pracovní cesty, privacy-first stopa, čtyři výsledky, karta, mini workshop a checklist.
 - 2026-06-22: Doplněna úvodní podkapitola o uzavření první lehké kontroly po dlouhodobém klidu: uzavírací stavy, lokální oprava, privacy-first stopa, karta, mini workshop a checklist.
 - 2026-06-22: Doplněna úvodní podkapitola o první lehké kontrole po dlouhodobém klidu: najitelnost, rozhodnutelnost, datová střídmost, čtyři výsledky, karta, mini workshop a checklist.
