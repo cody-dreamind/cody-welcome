@@ -241177,8 +241177,195 @@ Když se během workshopu začne řešit celá výroční revize znovu, zastavte
 
 První běžné použití po výroční revizi má být malé a obyčejné. Právě proto je užitečné. Ukáže, jestli standard žije v práci, nebo jen v dokumentaci. Když funguje, nechte ho fungovat. Když se zasekne, opravte nejbližší místo. A když se opravdu vrátil problém, otevřete novou smyčku s malým rozsahem a krátkou pamětí.
 
+## Uzavření prvního běžného použití po výroční revizi
+
+První běžné použití po výroční revizi se nemá táhnout za standardem jako nová kontrolní vrstva. Jeho smysl je prostý: potvrdit, že standard po ročním úklidu obstál v běžné práci, nebo přesně pojmenovat nejbližší místo opravy. Jakmile to víte, použití uzavřete.
+
+Nejčastější chyba je, že tým z jednoho běžného průchodu udělá malou vyšetřovací komisi. Začne sbírat další příklady, ptát se lidí na dojmy, vracet se ke staré revizi a vyrábět nové podklady "pro jistotu". Tím se standard zbytečně vrací do mimořádného režimu. Pokud první použití stačilo k rozhodnutí, uzavřete ho stejnou přísností, s jakou byste zavřeli drobný provozní tiket.
+
+Uzavírací věta má odpovědět na čtyři věci:
+
+```text
+Co se při běžném použití ukázalo?
+
+Jaký je výsledek?
+
+Co se přesně mění, pokud se něco mění?
+
+Co po tomto použití nevzniká?
+```
+
+Praktický příklad:
+
+```text
+Situace:
+Po výroční revizi se použil standard pro archivaci staré kampaně.
+
+Výsledek:
+Člověk našel aktuální postup z archivní šablony a nepoužil starý dokument jako zdroj pravdy.
+
+Uzavření:
+První běžné použití po výroční revizi je čisté. Standard zůstává ve výročním rytmu. Nevzniká nová kontrola ani úprava textu.
+```
+
+Jiný příklad s lokální opravou:
+
+```text
+Situace:
+Člověk standard našel až přes starý odkaz v interní poznámce.
+
+Výsledek:
+Obsah standardu platí, problém je v navigaci.
+
+Uzavření:
+Opraven odkaz v interní poznámce na kanonické místo. Standard se nepřepisuje. Nevzniká audit všech archivních poznámek, jen návratový signál, pokud se stejná navigační chyba zopakuje.
+```
+
+Třetí příklad s návratovým signálem:
+
+```text
+Situace:
+Při použití standardu se ukázalo, že pracovní situace už neodpovídá roční revizi.
+
+Výsledek:
+Nejde o slabý odkaz ani špatnou větu. Změnil se kontext.
+
+Uzavření:
+První použití se zavírá jako návratový signál. Otevírá se samostatná malá smyčka pro nové pracovní místo. Staré podklady z výroční revize se nepřenášejí, pokud nejsou nutné pro dnešní rozhodnutí.
+```
+
+### Čtyři uzavírací stavy
+
+Použijte stejnou logiku jako u předchozího použití, ale přepište ji do konce:
+
+- Čisté použití: standard zůstává v běžném nebo výročním rytmu a nic dalšího nevzniká.
+- Lokální navigační oprava: opraví se nejbližší pracovní místo a standard se nechá obsahově beze změny.
+- Jedna úprava rozhodovací věty: v kanonickém místě se zpřesní věta, která měla vést k rozhodnutí.
+- Otevření návratové smyčky: běžné použití ukázalo změněný kontext, takže vzniká nová malá otázka se stop podmínkou.
+
+Stav `čisté použití` uzavřete jednou větou. Nepotřebuje workshop, zápis z porady ani novou šablonu.
+
+Stav `lokální navigační oprava` uzavřete až po tom, co odkaz, název nebo pracovní kotvu opravdu opravíte. Karta nesmí skončit větou "někdo by měl". Buď je oprava hotová, nebo karta zůstává otevřená.
+
+Stav `jedna úprava rozhodovací věty` držte tvrdě úzký. Upravuje se jen věta, která v běžném použití selhala. Pokud při tom objevíte deset dalších nápadů, patří do backlogu nebo do samostatné otázky, ne do tohoto uzavření.
+
+Stav `otevření návratové smyčky` není selhání uzavření. Naopak. Dobré uzavření umí říct: "Tohle už není dočištění po výroční revizi, tohle je nová realita." Tím chrání standard před nekonečným lepením starých předpokladů.
+
+Codyho komentář: dobré uzavření je nudné v tom nejlepším smyslu. Neprodává drama, nezvětšuje rozsah a nedělá z každé drobnosti proces. Jen řekne, co se ví, co se změnilo a kde se má práce zastavit. Ano, skoro podezřele dospělé.
+
+### Co propsat do kanonického místa
+
+Do kanonického místa nepatří celý příběh prvního použití. Patří tam jen výsledek, který mění budoucí práci.
+
+Propsat můžete:
+
+- aktualizovaný odkaz z pracovního místa,
+- zpřesněnou rozhodovací větu,
+- novou návratovou podmínku,
+- krátkou poznámku, že standard po výroční revizi obstál v běžném použití,
+- datum další běžné nebo výroční kontroly.
+
+Nepropsujte:
+
+- jména lidí, kteří použitím prošli,
+- kopie interních zpráv,
+- screenshoty pracovních nástrojů,
+- staré revizní debaty,
+- všechny mezikroky, které nebyly potřeba pro rozhodnutí.
+
+Kanonické místo má pomáhat dalšímu člověku, ne archivovat všechno, co se kolem standardu stalo. Pokud další člověk potřebuje vědět jen to, že odkaz je správný a věta vede k rozhodnutí, nedávejte mu román. Od toho je tu e-book, a i ten už se občas tváří jako posilovna pro scrollbar.
+
+### Privacy-first uzavření
+
+Privacy-first uzavření je hlavně o tom, že po běžném použití nevznikne nová datová sběrna. Uložte minimum, které pomůže budoucímu rozhodnutí. Všechno ostatní nechte v původním systému, nebo to neukládejte vůbec.
+
+Použijte tento filtr:
+
+```text
+Pomůže uložený detail při dalším použití standardu?
+
+Je detail nutný pro opravu, kterou právě děláme?
+
+Má detail aktivní retenční důvod?
+
+Dokážeme stejný závěr uložit obecněji?
+```
+
+Pokud odpověď zní ne, detail do uzavření nepatří. U navigační chyby stačí napsat, že starý odkaz v interní poznámce vedl mimo kanonické místo. Není nutné ukládat celou poznámku. U slabého znění stačí citovat nebo přepsat jednu rozhodovací větu. Není nutné kopírovat celý standard do nové karty. U návratového signálu stačí popsat změnu kontextu a nejmenší důkaz. Není nutné otevírat archiv starých podkladů, dokud není jasné proč.
+
+### Karta uzavření prvního běžného použití
+
+```text
+Standard:
+
+Datum výroční revize:
+
+Běžná pracovní situace:
+
+Výsledek prvního použití:
+- čisté použití
+- lokální navigační oprava
+- jedna úprava rozhodovací věty
+- otevření návratové smyčky
+
+Uzavírací věta:
+
+Co se mění:
+
+Kde je změna propsaná:
+
+Co po tomto použití nevzniká:
+
+Pokud vzniká návratová smyčka:
+Nová pracovní otázka:
+Nejmenší důkaz:
+Stop podmínka:
+
+Privacy-first uzavření:
+Ukládáme:
+Neukládáme:
+Podklady, které zůstávají v původním zdroji:
+Retenční poznámka:
+
+Další rytmus standardu:
+
+Vlastník:
+```
+
+Řádek `Co se mění` může klidně říct `nic`. To je legitimní výsledek. Pokud standard fungoval, nejlepší změna je často žádná změna. Zapište to výslovně, protože jinak se v týmu snadno objeví neurčitý pocit, že když už se něco kontrolovalo, mělo by se něco upravit. Nemělo. Údržba není kreativní kroužek.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte výsledek prvního běžného použití.
+2. Minuta 2: vyberte jeden ze čtyř uzavíracích stavů.
+3. Minuta 3: určete, zda se mění kanonické místo, pracovní místo, nebo nic.
+4. Minuta 4: napište uzavírací větu a větu o tom, co nevzniká.
+5. Minuta 5: proveďte privacy-first filtr uložených detailů.
+6. Minuta 6: určete další rytmus standardu a vlastníka.
+
+Pokud během workshopu někdo navrhne širší audit, zastavte se u otázky: "Je to nutné pro uzavření tohoto prvního použití?" Pokud ne, návrh zapište bokem nebo ho nechte být. Workshop má zavřít jednu věc, ne otevřít pět elegantních odboček, které se budou tvářit produktivně a za měsíc budou smutně koukat z backlogu.
+
+### Checklist uzavření
+
+- Máme jasně pojmenovaný výsledek prvního běžného použití?
+- Vybrali jsme jeden uzavírací stav?
+- Pokud bylo použití čisté, nechali jsme standard bez nové práce?
+- Pokud šlo o navigaci, opravili jsme nejbližší pracovní místo místo přepisování standardu?
+- Pokud šlo o slabé znění, upravili jsme jen jednu rozhodovací větu?
+- Pokud se objevil návratový signál, otevřeli jsme samostatnou malou smyčku?
+- Napsali jsme uzavírací větu?
+- Napsali jsme, co po tomto použití nevzniká?
+- Propsali jsme jen změny, které pomáhají budoucímu použití?
+- Neuložili jsme jména, chaty, screenshoty ani exporty bez aktivního účelu?
+- Zůstaly podklady v původním zdroji pravdy?
+- Je další rytmus standardu jasný?
+- Ví vlastník, jestli má ještě něco udělat?
+
+Uzavření prvního běžného použití po výroční revizi je malý provozní podpis pod tím, že standard zase patří do běžné práce. Když prošel, nezvedejte kolem něj další péči. Když potřeboval lokální opravu, opravte ji a zavřete. Když ukázal nový kontext, otevřete novou malou smyčku bez tahání starých stop. Tak se z roční revize nestane nekonečný servisní seriál.
+
 ## Pracovní log
 
+- 2026-06-22: Doplněna úvodní podkapitola o uzavření prvního běžného použití po výroční revizi standardu: uzavírací stavy, propsání do kanonického místa, privacy-first uzavření, karta, mini workshop a checklist.
 - 2026-06-22: Doplněna úvodní podkapitola o prvním běžném použití po výroční revizi standardu: čtyři výsledky použití, privacy-first záznam, karta, mini workshop a checklist.
 - 2026-06-22: Doplněna úvodní podkapitola o uzavření první výroční revize standardu: uzavírací stavy, propsání do kanonického a pracovního místa, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-21: Doplněna úvodní podkapitola o první výroční revizi standardu: kontrola kanonického a pracovního místa, čtyři výsledné stavy, privacy-first úklid důkazů, karta, mini workshop a checklist.
