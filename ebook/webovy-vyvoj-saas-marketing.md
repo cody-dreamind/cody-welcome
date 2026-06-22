@@ -241363,8 +241363,180 @@ Pokud během workshopu někdo navrhne širší audit, zastavte se u otázky: "Je
 
 Uzavření prvního běžného použití po výroční revizi je malý provozní podpis pod tím, že standard zase patří do běžné práce. Když prošel, nezvedejte kolem něj další péči. Když potřeboval lokální opravu, opravte ji a zavřete. Když ukázal nový kontext, otevřete novou malou smyčku bez tahání starých stop. Tak se z roční revize nestane nekonečný servisní seriál.
 
+## Druhé běžné použití po výroční revizi standardu
+
+Druhé běžné použití po výroční revizi má ověřit něco jiného než první. První použití ukáže, jestli standard po revizi vůbec funguje v reálné práci. Druhé použití ukáže, jestli funguje i bez čerstvé paměti z uzavření. To je důležitý rozdíl. Tým si po revizi často ještě pamatuje, co se měnilo, kde leží kanonické místo a proč se některé staré stopy uklidily. O pár týdnů později už standard musí obstát sám.
+
+Neplánujte druhé použití jako kontrolní akci. Počkejte na další přirozenou situaci, ve které by standard měl být použitý. Pokud taková situace dlouho nepřichází, nechte standard v klidu a vraťte se k němu až v dalším plánovaném rytmu nebo při návratovém signálu. Druhé použití není povinný testovací obřad. Je to obyčejný průchod, kterého si všimnete jen proto, že ověřuje přenositelnost po výroční revizi.
+
+Začněte třemi otázkami:
+
+```text
+Použil standard člověk nebo tým, který nebyl přímo u výroční revize?
+
+Našel standard ze stejného pracovního místa jako při prvním použití?
+
+Vedlo pravidlo k rozhodnutí bez připomínání staré revizní debaty?
+```
+
+Pokud odpovědi drží, standard se může vrátit do tichého výročního rytmu. Není potřeba přidávat další průběžné ověřování. Druhé čisté použití je silný signál, že standard není závislý na autorovi, nedávné schůzce ani jedné zapamatované opravě.
+
+Praktický příklad:
+
+```text
+Standard:
+Archivní šablona kampaně má na prvním řádku odkaz na aktuální zdroj pravdy.
+
+První použití po revizi:
+Obsahový tým našel aktuální postup a starou šablonu nepoužil jako aktivní zdroj.
+
+Druhé běžné použití:
+Jiný člověk uzavírá další kampaň, otevře archivní šablonu, najde aktuální postup a pokračuje bez dotazu v chatu.
+
+Výsledek:
+Standard je přenositelný bez čerstvé paměti z revize.
+
+Rozhodnutí:
+Standard zůstává ve výročním rytmu. Nevzniká další kontrola ani evidence použití.
+```
+
+Tady je lákavé napsat "ověřeno dvakrát" a založit hezkou tabulku. Nedělejte to, pokud tabulka nemá jasný provozní účel. Pro budoucí práci stačí věta, že standard obstál i při druhém běžném použití bez mimořádné pomoci. Čím méně provozních trofejí ukládáte, tím méně jich budete muset za rok uklízet.
+
+### Čtyři výsledky druhého použití
+
+Po druhém běžném použití vyberte jeden ze čtyř výsledků:
+
+- Přenositelnost potvrzena: standard použil někdo bez čerstvé revizní paměti a nepotřeboval pomoc.
+- Opakované navigační tření: cesta ke standardu znovu zadrhla, i když obsah pravidla platí.
+- Závislost na tichém vysvětlení: standard se formálně našel, ale rozhodnutí pořád vyžadovalo něčí doplňující komentář.
+- Návratový signál potvrzen: problém se neopakuje jako drobné tření, ale jako skutečný návrat původního nebo nového kontextu.
+
+Stav `přenositelnost potvrzena` uzavírejte velmi krátce. Standard zůstává v nastaveném rytmu, do kanonického místa se nic nepřidává a tým neruší klid dalším sledováním.
+
+Stav `opakované navigační tření` je signál, že první lokální oprava možná netrefila správné místo. Neznamená to automaticky slabý standard. Zeptejte se, odkud lidé skutečně přicházejí: z indexu, checklistu, šablony, staré poznámky, nebo z odkazu v nástroji. Opravte nejbližší pracovní cestu, ne celý obsah.
+
+Stav `závislost na tichém vysvětlení` je vážnější. Pokud standard potřebuje člověka, který ho ústně dopoví, není dost rozhodovací. Upravte jednu větu, která má vyjasnit hranici použití. Když ani to nestačí, otevřete novou malou smyčku. Neschovávejte trvalé vysvětlování za větu "tým už ví, jak to myslíme". Tým se mění, paměť se ředí a nepsaná pravidla mají životnost jogurtu v batohu.
+
+Stav `návratový signál potvrzen` použijte, když druhé použití ukáže opakovaný nebo systémový problém. V takovém případě už nejde o údržbu po výroční revizi. Otevírá se nová otázka s vlastním pracovním místem, stop podmínkou a privacy-first hranicí.
+
+### Co druhé použití nemá dělat
+
+Druhé běžné použití není malá výroční revize číslo dvě. Nemá znovu hodnotit celý standard, hledat všechny podobné případy ani dokazovat, že se standard používá dost často. Má odpovědět na jednu otázku: funguje pravidlo i bez čerstvé paměti z poslední revize?
+
+Proto po druhém použití typicky nevzniká:
+
+- nová tabulka všech použití standardu;
+- další mimořádná kontrola mimo výroční rytmus;
+- průzkum mezi lidmi, jestli standard "vnímají dobře";
+- sběr screenshotů jako důkaz;
+- audit všech šablon nebo příbuzných standardů;
+- přepis pravidla jen proto, že se při použití objevil nový nápad.
+
+Pokud se některá z těchto věcí zdá nutná, nejdřív napište pracovní otázku. Bez ní jde pravděpodobně jen o preventivní práci, která se tváří odpovědně, ale ve skutečnosti bere čas standardům, které opravdu hoří.
+
+### Privacy-first záznam
+
+U druhého použití platí ještě přísnější datová střídmost než u prvního. Pokud standard obstál dvakrát, není důvod ukládat víc detailů. Zapište výsledek, ne průběh. Nepřenášejte do záznamu jména lidí, interní komentáře, kopie kampaní, screenshoty nástrojů ani obsah zákaznických dat.
+
+Dobrá věta vypadá takto:
+
+```text
+Standard obstál při druhém běžném použití bez ruční nápovědy a zůstává ve výročním rytmu.
+```
+
+Pokud se opakovalo tření, pište zobecněně:
+
+```text
+Druhé použití znovu narazilo na starý odkaz v pracovním checklistu. Opravuje se cesta z checklistu, obsah standardu se nemění.
+```
+
+Tento zápis stačí pro rozhodnutí a nezakládá novou datovou kapsu. Privacy-first provoz není jen o zákaznických datech. Je i o tom, že tým zbytečně nearchivuje interní mikropříběhy, které k budoucí práci nic nepřidají.
+
+### Karta druhého běžného použití po výroční revizi
+
+```text
+Standard:
+
+Datum výroční revize:
+
+Závěr prvního běžného použití:
+
+Druhá běžná pracovní situace:
+
+Použil standard někdo bez čerstvé revizní paměti:
+- ano
+- ne
+- nevíme
+
+Výsledek druhého použití:
+- přenositelnost potvrzena
+- opakované navigační tření
+- závislost na tichém vysvětlení
+- návratový signál potvrzen
+
+Co se ukázalo jednou větou:
+
+Pokud se potvrdila přenositelnost:
+Co zůstává beze změny:
+Další rytmus:
+
+Pokud se opakovalo navigační tření:
+Kde přesně vzniklo:
+Jedna oprava pracovního místa:
+
+Pokud standard potřeboval tiché vysvětlení:
+Která rozhodovací věta selhala:
+Jedna úprava věty nebo nová malá otázka:
+
+Pokud se potvrdil návratový signál:
+Naplněný signál:
+Nejmenší důkaz:
+Nová pracovní otázka:
+Stop podmínka:
+
+Co po druhém použití nevzniká:
+
+Privacy-first záznam:
+Ukládáme:
+Neukládáme:
+Podklady ponechané v původním zdroji pravdy:
+
+Vlastník:
+```
+
+Kartu vyplňujte jen tak hluboko, jak výsledek potřebuje. U čistého použití stačí pár řádků. Celá karta je pro situace, kdy se objeví tření nebo návratový signál. Neberte prázdné řádky jako pozvánku k administrativnímu cvičení. Formulář nemá hlad; nemusíte ho krmit.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: pojmenujte druhou běžnou pracovní situaci.
+2. Minuta 2: ověřte, jestli použití proběhlo bez čerstvé paměti z revize.
+3. Minuta 3: vyberte jeden ze čtyř výsledků.
+4. Minuta 4: pokud je problém lokální, určete přesně jedno pracovní místo nebo jednu větu.
+5. Minuta 5: napište, co po druhém použití nevzniká.
+6. Minuta 6: zapište privacy-first závěr a další rytmus.
+
+Když se během workshopu ukáže, že nikdo neumí říct, kde standard vlastně žije, nezůstávejte v debatě o druhém použití. To je slabá najitelnost, ne filozofická otázka. Opravte kanonické místo nebo pracovní cestu a teprve při dalším přirozeném použití ověřte, jestli změna drží.
+
+### Checklist druhého použití
+
+- Šlo o skutečnou pracovní situaci, ne speciálně vyrobený test?
+- Proběhlo použití s menší čerstvou pamětí z výroční revize než poprvé?
+- Našel člověk standard z přirozeného pracovního místa?
+- Vedlo pravidlo k rozhodnutí bez doplňujícího tichého vysvětlení?
+- Rozlišili jsme slabou navigaci od slabého znění?
+- Pokud se tření opakuje, víme, zda se opakuje stejné místo nebo nová cesta?
+- Pokud standard potřebuje vysvětlení, víme, která rozhodovací věta selhala?
+- Pokud se naplnil návratový signál, otevíráme novou smyčku místo dalšího lepení?
+- Napsali jsme, co po druhém použití nevzniká?
+- Ukládáme jen zobecněný výsledek potřebný pro další rytmus?
+- Neuchováváme jména, screenshoty, chaty, exporty ani interní detaily bez aktivního účelu?
+- Je jasné, zda standard zůstává ve výročním rytmu, potřebuje lokální opravu, nebo otevírá novou otázku?
+
+Druhé běžné použití po výroční revizi je test přenositelnosti. Pokud standard funguje i bez čerstvé paměti, nechte ho v klidu. Pokud zadrhne, opravte nejbližší cestu nebo jednu větu. A pokud se opravdu vrací problém, otevřete novou malou smyčku s krátkou pamětí. Standard má sloužit práci, ne držet tým v nekonečném režimu "ještě to radši sledujme".
+
 ## Pracovní log
 
+- 2026-06-22: Doplněna úvodní podkapitola o druhém běžném použití po výroční revizi standardu: přenositelnost bez čerstvé paměti, čtyři výsledky, privacy-first záznam, karta, mini workshop a checklist.
 - 2026-06-22: Doplněna úvodní podkapitola o uzavření prvního běžného použití po výroční revizi standardu: uzavírací stavy, propsání do kanonického místa, privacy-first uzavření, karta, mini workshop a checklist.
 - 2026-06-22: Doplněna úvodní podkapitola o prvním běžném použití po výroční revizi standardu: čtyři výsledky použití, privacy-first záznam, karta, mini workshop a checklist.
 - 2026-06-22: Doplněna úvodní podkapitola o uzavření první výroční revize standardu: uzavírací stavy, propsání do kanonického a pracovního místa, privacy-first úklid, karta, mini workshop a checklist.
