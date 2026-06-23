@@ -248108,8 +248108,203 @@ Když se tým během workshopu snaží ještě "pro jistotu" přidat další kon
 
 Uzavření druhé standardní kontroly je okamžik, kdy tým přestane dokazovat, že pravidlo funguje, a začne mu znovu věřit jako běžné součásti práce. To není rezignace na kvalitu. Je to kvalitní správa pozornosti. Standard, který prošel kontrolou a umí žít bez mimořádného dohledu, si zaslouží klid. Tým taky.
 
+## První slabý signál po návratu standardu do dlouhodobého klidu
+
+Dlouhodobý klid není kouzelné pole kolem pravidla. I dobře uzavřený standard může po čase poslat slabý signál: někdo se zeptá na hranici, v jedné šabloně se objeví stará formulace, nový člověk neví, kde pravidlo najít, nebo zákaznická situace lehce připomene starý problém. Slabý signál ale ještě není návratový signál. Pokud s ním tým zachází jako s plným návratem, rozbije si klid hned v první zatáčce.
+
+Cílem první reakce není otevřít novou revizi. Cílem je rychle rozlišit:
+
+```text
+Je to jen drobné zachvění běžného provozu, nebo skutečný důvod znovu otevřít standard?
+```
+
+Tohle rozlišení musí být krátké. Když se z první reakce stane malý audit, standard se fakticky vrátil do mimořádné péče, jen pod jiným názvem. A to je přesně ten moment, kdy by měl někdo v týmu zvednout obočí. Ideálně dřív, než vznikne sdílená tabulka s názvem "jen pro jistotu".
+
+### Slabý signál versus návratový signál
+
+Slabý signál je jednotlivá situace, která ukazuje tření, ale ještě nedokazuje, že standard selhal. Typicky:
+
+- člověk se jednou zeptá, kde pravidlo najde;
+- v jedné kopii staré šablony zůstane neaktuální věta;
+- nový člen týmu potřebuje krátké vysvětlení hranice;
+- jeden zákaznický případ je podobný starému problému, ale ve skutečnosti spadá do existující výjimky;
+- někdo si všimne, že by pravidlo šlo napsat hezčím jazykem.
+
+Návratový signál je naproti tomu situace, kterou jste si při uzavření klidu předem pojmenovali jako důvod k novému otevření. Má konkrétní podobu: dva nezávislé pokusy obejít pravidlo, opakované použití staré šablony v reálných výstupech, nový typ nabídky, který pravidlo neumí obsloužit, nebo rozhodnutí, které bez rozšíření hranice nejde bezpečně udělat.
+
+První otázka tedy nezní "co všechno bychom mohli zlepšit", ale:
+
+```text
+Naplnilo se přesně to, co jsme si popsali jako návratový signál?
+```
+
+Pokud ne, pracujte se signálem lokálně. Pokud ano, uzavřete první reakci a otevřete novou smyčku odděleně. Nemíchejte oba režimy do jednoho záznamu, protože tím rozmažete hranici mezi provozní údržbou a skutečnou změnou pravidla.
+
+### Tři rychlé kontroly
+
+První slabý signál projděte třemi kontrolami:
+
+- Kontrola místa: vzniklo tření v pravidle, nebo jen v cestě k pravidlu?
+- Kontrola opakování: je to první jednotlivý případ, nebo opakovaný vzor?
+- Kontrola dopadu: brání signál správnému rozhodnutí, nebo jen zpomalil orientaci?
+
+Když tření vzniklo v cestě k pravidlu, opravte cestu. Přidejte odkaz, změňte název v indexu, smažte starý odkaz, přesuňte nápovědu blíž k formuláři. Neotevírejte obsah standardu, pokud problém byl v navigaci.
+
+Když jde o první jednotlivý případ, zapište ho jako pozorování a nechte standard běžet. Jedna otázka není trend. Jedna chyba v kopii není důkaz, že pravidlo potřebuje novou kapitolu. Je to jen provozní škrábanec, ne požár ve strojovně.
+
+Když signál opravdu brání správnému rozhodnutí, zkontrolujte návratový signál. Pokud se shoduje s předem popsanou hranicí, otevřete novou smyčku. Pokud se neshoduje, udělejte nejmenší lokální rozhodnutí a k návratovému signálu přidejte poznámku až při další běžné kontrole.
+
+### Praktický příklad
+
+```text
+Standard:
+U běžných lead magnetů nenutíme zájemce k telefonátu.
+
+Návratový signál:
+Téma znovu otevřeme, pokud se ve dvou různých kampaních objeví návrh povinného telefonního čísla mimo jasně označený obchodní formulář.
+
+Slabý signál:
+Nový marketér se u jedné landing page ptá, jestli může do formuláře přidat telefon, protože stará kampaň ho měla.
+
+Kontrola místa:
+Problém není v pravidle. Problém je, že stará kampaň je pořád najitelná jako příklad.
+
+Kontrola opakování:
+Jde o první dotaz po uzavření klidu.
+
+Kontrola dopadu:
+Rozhodnutí jde udělat z aktuální šablony: telefon se nepřidává.
+
+Nejmenší krok:
+Do interního indexu přidat označení, že stará kampaň není aktuální vzor. Standard neměnit.
+```
+
+Tady by bylo lákavé otevřít debatu o formulářích, lead kvalitě, obchodním follow-upu a bůhvíčem dalším. Ale signál nic takového neříká. Říká jen: starý příklad pořád svítí tam, kde ho nový člověk může splést s aktuálním pravidlem. Oprava je proto úklid navigace, ne redesign standardu.
+
+Jiný příklad:
+
+```text
+Slabý signál:
+Ve dvou různých nových kampaních se nezávisle objevil návrh povinného telefonu u lead magnetu.
+
+Kontrola:
+To odpovídá předem popsanému návratovému signálu.
+
+Rozhodnutí:
+Neřešíme to jako lokální údržbu. První reakci uzavíráme a otevíráme novou smyčku k formulářové hranici pro kampaně.
+```
+
+Rozdíl není v hlasitosti signálu, ale v jeho shodě s předem domluvenou hranicí. Tým si tím chrání klid i odpovědnost: nezametá skutečný návrat pod koberec, ale ani z každého dotazu nedělá procesní seriál na pokračování.
+
+### Privacy-first reakce
+
+Slabé signály svádějí ke sběru "pro jistotu". Někdo uloží screenshot, někdo zkopíruje zákaznickou zprávu, někdo vytáhne starý export, aby měl kontext. Jenže první slabý signál většinou nepotřebuje bohatý důkaz. Potřebuje malý, zobecněný zápis.
+
+Stačí:
+
+```text
+Co se stalo:
+
+Kde se to stalo:
+
+Je to návratový signál?
+- ano
+- ne
+
+Nejmenší reakce:
+
+Co nesbíráme ani nekopírujeme:
+```
+
+Příklad privacy-first zápisu:
+
+```text
+Nový marketér se ptal na telefon u lead magnetu, protože našel starou kampaň. Není to návratový signál. Opravujeme označení staré kampaně v interním indexu. Nekopírujeme formulářová data ani starý export; stačí zobecněný závěr.
+```
+
+Pokud musíte použít konkrétní pracovní stopu, nechte ji ve zdroji pravdy. Do reakce nepřenášejte osobní údaje, celé zprávy ani screenshoty formulářů, pokud nerozhodují o dalším kroku. Privacy-first provoz není jen ochrana před regulací. Je to i ochrana před tím, aby se z drobného dotazu stala malá datová archeologie.
+
+Codyho komentář: slabý signál je jako kontrolka, která problikne a zhasne. Je rozumné se podívat, jestli nejede motor bez oleje. Není rozumné kvůli tomu rozebrat půl auta na parkovišti. Ano, právě jsem z pravidla udělal auto. Promiňte, ale funguje to.
+
+### Karta prvního slabého signálu
+
+```text
+Standard v dlouhodobém klidu:
+
+Datum signálu:
+
+Kde se signál objevil:
+
+Co se stalo jednou větou:
+
+Předem popsaný návratový signál:
+
+Shoda s návratovým signálem:
+- ano
+- ne
+- nevíme
+
+Kontrola místa:
+- problém v pravidle
+- problém v cestě k pravidlu
+- problém ve staré stopě
+- jen dotaz nebo orientační tření
+
+Kontrola opakování:
+- první jednotlivý případ
+- opakovaný vzor
+- nevíme
+
+Kontrola dopadu:
+- rozhodnutí šlo udělat z aktuálního standardu
+- rozhodnutí nešlo udělat bezpečně
+
+Výsledek:
+- žádná změna, jen záznam
+- lokální údržba pracovní trasy
+- úklid staré stopy
+- otevřít novou smyčku
+
+Nejmenší další krok:
+
+Co výslovně neotevíráme:
+
+Privacy-first hranice:
+
+Kdy se k tomu vrátíme:
+```
+
+Kartu používejte jen tehdy, když slabý signál může snadno vyvolat zbytečnou debatu. U úplně banálních dotazů stačí krátký zápis v běžném logu. Smyslem karty není evidovat každý povzdech systému. Smyslem je zabránit tomu, aby jeden nejasný povzdech otevřel starou smyčku bez důvodu.
+
+### Mini workshop na 5 minut
+
+1. Minuta 1: napište slabý signál jednou větou.
+2. Minuta 2: porovnejte ho s předem popsaným návratovým signálem.
+3. Minuta 3: určete, jestli problém vznikl v pravidle, cestě k pravidlu nebo staré stopě.
+4. Minuta 4: vyberte nejmenší reakci.
+5. Minuta 5: napište, co výslovně nesbíráte, nekopírujete a neotevíráte.
+
+Pokud se během pěti minut neumíte shodnout, neprodlužujte workshop na hodinu. Zapište stav `nevíme`, vyberte jeden nejmenší důkaz z aktuální práce a otevřete krátké ověření. Nevracejte se automaticky k celé historii standardu.
+
+### Checklist první reakce na slabý signál
+
+- Víme, jaký standard je v dlouhodobém klidu?
+- Máme po ruce předem popsaný návratový signál?
+- Popsali jsme aktuální signál jednou větou?
+- Ověřili jsme, jestli se návratový signál opravdu naplnil?
+- Rozlišili jsme problém v pravidle od problému v cestě k pravidlu?
+- Zkontrolovali jsme, jestli jde o jednotlivý případ nebo opakovaný vzor?
+- Neotevřeli jsme starou historii jen kvůli orientačnímu dotazu?
+- Vybrali jsme nejmenší reakci?
+- Zapsali jsme, co výslovně neotevíráme?
+- Nevytváříme nový export, screenshot nebo kopii osobních dat bez jasného důvodu?
+- Pokud se signál shoduje s návratovým signálem, otevíráme novou smyčku odděleně?
+
+První slabý signál po návratu standardu do dlouhodobého klidu je zkouška disciplíny. Tým má ukázat, že umí reagovat, aniž by znovu spustil mimořádný režim. Dobrý výsledek může být velmi malý: opravený odkaz, archivovaný starý příklad, jedna věta v logu, nebo vědomé rozhodnutí nic neměnit. Když standard zůstane klidný i po prvním zachvění, dlouhodobý klid přestává být přáním a začíná být provozní realitou.
+
 ## Pracovní log
 
+- 2026-06-23: Doplněna úvodní podkapitola o prvním slabém signálu po návratu standardu do dlouhodobého klidu: rozlišení slabého a návratového signálu, tři rychlé kontroly, praktické příklady, privacy-first reakce, karta, mini workshop a checklist.
 - 2026-06-23: Doplněna úvodní podkapitola o uzavření druhé standardní kontroly do dlouhodobého klidu: čtyři uzavírací stavy, uzavírací věta, praktický příklad, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-23: Doplněna úvodní podkapitola o druhé standardní kontrole po návratu do běžného rytmu: test samostatnosti standardu, porovnání posledního běžného použití, úklid staré mimořádné stopy, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-06-23: Doplněna úvodní podkapitola o uzavření první standardní kontroly po návratu do běžného rytmu: čtyři uzavírací stavy, lokální údržba trasy, drobné zpřesnění, privacy-first úklid podkladů, karta, mini workshop a checklist.
