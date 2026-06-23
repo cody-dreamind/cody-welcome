@@ -247402,8 +247402,190 @@ Když se workshop zasekne na novém nápadu, napište ho mimo kartu. Uzavření 
 
 Dobře uzavřené druhé použití má být tiché. Tým si nemá odnést velkou prezentaci, ale klidné pravidlo, které ví, kde bydlí, kdy platí a kdy se má znovu otevřít. Codyho komentář: největší hodnota takového uzavření je často v tom, že odvážně nepřidá další proces. V provozu je někdy nejlepší automatizace ta, kterou nemusíte stavět, protože jste konečně napsali jednu dobrou větu.
 
+## První standardní kontrola po návratu do běžného rytmu
+
+Když se standard po uzavřeném návratu a dvou běžných použitích vrátí do normálního rytmu, práce nekončí tím, že ho tým navždy nechá být. Končí jen zvláštní režim. Standard má dál žít v běžné správě: v měsíčním review, kvartální kontrole, ročním auditu nebo v jiném rytmu, který už existuje. První standardní kontrola je první chvíle, kdy se pravidlo nehodnotí jako čerstvě opravené, ale jako obyčejná součást provozu.
+
+To je drobný, ale důležitý rozdíl. Čerstvě opravenému pravidlu tým často věnuje víc pozornosti, než si přizná. Všichni si pamatují, proč se měnilo, a někdo ho potichu hlídá. Ve standardní kontrole už by tahle paměť neměla být potřeba. Kontrola se neptá: "fungovala naše oprava?" Ptá se: "patří toto pravidlo pořád do běžné práce v této podobě?"
+
+Začněte větou:
+
+```text
+Standard kontrolujeme už v běžném rytmu, ne v návratové smyčce.
+```
+
+Tahle věta chrání rozsah. Pokud ji tým nepřijme, snadno začne znovu rozebírat celou historii návratu, první použití, druhé použití, původní incident a všechny nápady, které se po cestě objevily. To není kontrola. To je recyklace starého stresu v novém obalu.
+
+### Tři otázky standardní kontroly
+
+První standardní kontrola potřebuje jen tři otázky:
+
+- Plní pravidlo pořád svůj praktický účel?
+- Je pořád ve správném pracovním místě?
+- Zůstává jeho datová stopa přiměřená dnešnímu rozhodování?
+
+První otázka míří na účel. Standard může být bezchybný v textu a přesto už slabý v provozu. Třeba pravidlo pro formulář pořád říká správnou větu o telefonu, ale nabídka se mezitím změnila a formulář se používá v jiném obchodním toku. V takové situaci není problém v gramatice pravidla. Problém je v tom, že pravidlo už nehlídá stejné rozhodnutí.
+
+Druhá otázka míří na pracovní místo. Pravidlo má být tam, kde člověk rozhoduje. Pokud se reálná práce přesunula ze šablony landing page do produktového checklistu, standard nemá zůstat schovaný v původním dokumentu jen proto, že tam historicky vznikl. Kanonický zdroj pravdy může zůstat stejný, ale vstup do něj musí být v aktuální pracovní trase.
+
+Třetí otázka míří na privacy-first provoz. Běžná kontrola nemá vyrábět nové sledování, pokud stačí pracovní pozorování. Pokud pravidlo funguje, není potřeba přidávat event, report ani tabulku "pro jistotu". Pokud nefunguje, nejdřív zjistěte, jestli problém nejde vyřešit lepší větou, odkazem nebo hranicí. Nové měření je až další krok, ne reflex.
+
+### Praktický příklad
+
+```text
+Standard:
+Ve výchozím formuláři landing page nesbíráme telefon.
+
+Návrat po dlouhodobém klidu:
+Auditní landing page má výjimku pro volitelný telefon, protože kvalifikační hovor je součást nabídky.
+
+Dvě běžná použití:
+Konzultační sprint i workshopová landing page použily formulář bez telefonu a auditní výjimku nepřenesly.
+
+První standardní kontrola:
+Marketingový tým během měsíčního review ověřil, že nové landing pages pořád vycházejí ze stejné šablony. Pravidlo zůstává v šabloně i v checklistu před publikací. Mimořádné sledování není aktivní a není potřeba ho zavádět.
+
+Rozhodnutí:
+Standard zůstává beze změny. Další kontrola proběhne v běžném měsíčním review, ne jako samostatná návratová karta.
+```
+
+Tady se nic dramatického nestalo, a právě proto je příklad užitečný. Dobrá standardní kontrola často potvrdí, že pravidlo může dál pracovat bez speciální pozornosti. Ne každé review musí objevit problém. Někdy je nejlepší výsledek věta: "Platí, nic nepřidáváme."
+
+Jiný výsledek může vypadat takto:
+
+```text
+Zjištění:
+Pravidlo je správné, ale tým začal nové landing pages zakládat přes produktový checklist, kde odkaz na formulářový standard chybí.
+
+Rozhodnutí:
+Do produktového checklistu doplnit odkaz na kanonické pravidlo. Standard samotný neměníme a návratovou smyčku neotevíráme.
+```
+
+To je typická lokální údržba. Pravidlo neselhává. Selhává cesta k němu. Oprava patří do pracovní trasy, ne do obsahu standardu.
+
+### Čtyři výsledky první standardní kontroly
+
+Po kontrole vyberte jeden ze čtyř výsledků:
+
+- Standard zůstává beze změny.
+- Standard potřebuje lokální údržbu pracovní trasy.
+- Standard potřebuje drobné zpřesnění účelu nebo hranice.
+- Naplnil se návratový signál a otevírá se nová smyčka.
+
+Výsledek `standard zůstává beze změny` je plnohodnotný výsledek. Zapište ho krátce a nepřidávejte preventivní práci. Když se z každé úspěšné kontroly stane ještě jedna kontrola, standard nikdy opravdu neodpočívá.
+
+Výsledek `lokální údržba pracovní trasy` použijte, když pravidlo platí, ale lidé ho hledají špatnou cestou. Oprava má být v navigaci, checklistu, šabloně, názvu odkazu nebo onboardingové trase. Neotevírejte obsah pravidla, pokud problém vznikl jen mezi člověkem a pravidlem.
+
+Výsledek `drobné zpřesnění účelu nebo hranice` použijte, když se pracovní realita nepatrně posunula. Například výjimka pořád dává smysl, ale je potřeba doplnit, že platí jen pro placený audit, ne pro každý diagnostický rozhovor. Zpřesnění má být jedna věta. Pokud potřebuje víc, už nejde o drobnost.
+
+Výsledek `otevřít novou smyčku` používejte jen při naplněném návratovém signálu. Třeba když dva různé typy landing page začaly přebírat auditní výjimku bez jasného účelu. V takové chvíli má smysl otevřít novou kartu, protože problém už není lokální údržba. Je to návrat stejného rizika.
+
+### Privacy-first kontrola
+
+První standardní kontrola má být datově lehká. V ideálním případě stačí:
+
+- aktuální pracovní místo;
+- poslední běžný záznam o použití pravidla;
+- stav odkazu nebo šablony;
+- návratový signál z předchozího uzavření.
+
+Neotevírejte staré zákaznické zprávy, exporty, screenshoty ani nahrávky jen proto, že kontrola "by měla být důkladná". Důkladnost bez účelu je jen dražší forma zvědavosti. Pokud pravidlo kontrolujete v běžném rytmu, používejte běžné důkazy.
+
+Krátká privacy-first věta do zápisu:
+
+```text
+Kontrola použila jen aktuální pracovní trasu a poslední zobecněný záznam použití. Staré podklady z návratové smyčky jsme neotevírali.
+```
+
+Pokud staré podklady otevřít musíte, napište proč a po kontrole je znovu zavřete:
+
+```text
+Starý screenshot jsme otevřeli jen kvůli ověření názvu odkazu v původní šabloně. Do standardní kontroly zůstává pouze závěr: odkaz byl přejmenován, screenshot se nepřenáší.
+```
+
+Codyho komentář: privacy-first provoz se často láme právě v takových malých návratech. Ne ve velkém strategickém rozhodnutí, ale ve větě "otevřeme si to radši celé". Radši ne. Otevřete jen tolik, kolik potřebujete k rozhodnutí. Vaše budoucí já, právník i zákazník vám nepošlou děkovný dopis, ale aspoň nebudou muset řešit zbytečný nepořádek.
+
+### Karta první standardní kontroly
+
+```text
+Standard:
+
+Kanonické pracovní místo:
+
+Rytmus kontroly:
+- měsíční
+- kvartální
+- roční
+- jiný:
+
+Kontrolovaná běžná situace:
+
+Plní pravidlo pořád svůj účel?
+- ano
+- ne
+- částečně
+
+Je pravidlo ve správné pracovní trase?
+- ano
+- ne
+- částečně
+
+Stačily běžné důkazy bez otevření staré historie?
+- ano
+- ne, proč:
+
+Výsledek kontroly:
+- standard zůstává beze změny
+- lokální údržba pracovní trasy
+- drobné zpřesnění účelu nebo hranice
+- otevřít novou smyčku
+
+Nejmenší další krok:
+
+Co výslovně neměníme:
+
+Privacy-first výsledek:
+
+Návratový signál:
+
+Vlastník:
+
+Datum další běžné kontroly:
+```
+
+Karta nemá být nový rituál. Pokud kontrola proběhla bez tření, stačí z ní jedna věta v běžném logu. Celou kartu použijte tehdy, když potřebujete rozlišit lokální údržbu od nové smyčky. Jinak by se z nástroje proti zmatku stal další zmatek s nadpisem.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte aktuální pravidlo a návratový signál.
+2. Minuta 2: pojmenujte běžnou situaci, ve které se pravidlo kontroluje.
+3. Minuta 3: ověřte, jestli pravidlo pořád plní účel.
+4. Minuta 4: ověřte, jestli je pravidlo ve správné pracovní trase.
+5. Minuta 5: proveďte privacy-first kontrolu použitých důkazů.
+6. Minuta 6: vyberte jeden výsledek a zapište nejmenší další krok.
+
+Když se workshop začne měnit v revizi celé oblasti, vraťte ho k jedné kontrolované situaci. Standardní kontrola není strategický offsite. Je to krátké zastavení v běžném rytmu, aby pravidlo nezestárlo potichu nebo se nezačalo používat mimo svůj účel.
+
+### Checklist první standardní kontroly
+
+- Kontrolujeme standard už v běžném rytmu, ne ve zvláštním režimu?
+- Máme jedno konkrétní pracovní místo, kde se pravidlo opravdu používá?
+- Víme, jaký praktický účel má pravidlo dnes plnit?
+- Ověřili jsme, že pracovní trasa k pravidlu odpovídá současnému způsobu práce?
+- Nepřenášíme do kontroly starou návratovou historii bez jasného důvodu?
+- Pokud pravidlo funguje, necháváme ho beze změny?
+- Pokud chybí odkaz nebo název, opravujeme pracovní trasu místo obsahu pravidla?
+- Pokud se posunul účel, stačí jedna věta zpřesnění?
+- Otevíráme novou smyčku jen při naplněném návratovém signálu?
+- Zapsali jsme, co výslovně neměníme?
+- Zůstává z kontroly jen přiměřený, zobecněný důkaz?
+- Má standard jasné datum další běžné kontroly?
+
+První standardní kontrola po návratu do běžného rytmu má potvrdit jednu věc: standard už nepotřebuje zvláštní péči, ale pořád potřebuje normální odpovědnost. To je zdravý stav. Pravidlo není zapomenuté, není rozpitvané a není ověšené novými reporty. Prostě žije tam, kde má, a tým ví, kdy ho znovu otevřít.
+
 ## Pracovní log
 
+- 2026-06-23: Doplněna úvodní podkapitola o první standardní kontrole po návratu do běžného rytmu: běžný revizní režim, účel pravidla, pracovní trasa, privacy-first důkazy, karta, mini workshop a checklist.
 - 2026-06-23: Doplněna úvodní podkapitola o uzavření druhého běžného použití po uzavřeném návratu z dlouhodobého klidu: uzavírací stavy, propsání do pracovního místa, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-23: Doplněna úvodní podkapitola o druhém běžném použití po uzavřeném návratu z dlouhodobého klidu: přenositelnost bez čerstvé nápovědy, stabilita hranice, čtyři výsledky, privacy-first minimum dat, karta, mini workshop a checklist.
 - 2026-06-23: Doplněna úvodní podkapitola o uzavření prvního běžného použití po uzavřeném návratu z dlouhodobého klidu: čtyři uzavírací stavy, lokální oprava, propsání do pracovního místa, privacy-first úklid, karta, mini workshop a checklist.
