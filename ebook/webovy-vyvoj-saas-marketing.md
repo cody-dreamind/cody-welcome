@@ -244746,8 +244746,180 @@ Pokud během workshopu vznikne nový nápad na zlepšení standardu, nezahrnujte
 
 Převod do běžné správy je hotový, když nový člověk najde jednoduché pravidlo, vlastník najde důvod a nikdo nemusí otevírat staré pomocné stopy, aby udělal běžné rozhodnutí. To je dobrý konec dlouhé smyčky: standard zůstává použitelný, historie zůstává přiměřeně dohledatelná a data neleží po okolí jen proto, že se kdysi hodila při kontrole.
 
+## První běžné použití standardu po převodu do správy
+
+Po převodu standardu do běžné správy přichází malá, ale důležitá zkouška: použije ho někdo při normální práci bez toho, aby se opíral o celou historii revizní smyčky? Tady se ukáže, jestli převod opravdu zjednodušil provoz, nebo jen přesunul starý kontext do jiné poličky.
+
+První běžné použití nemá být nový audit standardu. Je to obyčejná pracovní situace, ve které se standard přirozeně objeví: publikace landing page, úprava formuláře, předání šablony novému člověku, změna onboardingového e-mailu, výběr analytické události nebo kontrola dodavatele. Pokud kvůli prvnímu použití svoláváte zvláštní schůzku, pravděpodobně už zase vyrábíte mimořádnou péči.
+
+Začněte jednou větou:
+
+```text
+Standard dnes používáme při:
+```
+
+Věta musí pojmenovat skutečné pracovní místo. Ne "kontrola privacy-first pravidel", ale například:
+
+```text
+Standard dnes používáme při:
+Schválení nové poptávkové stránky pro produktizovaný audit SaaS provozu.
+```
+
+Tím se test drží při zemi. Neptáte se, jestli je standard obecně krásný, ale jestli pomůže v konkrétní práci.
+
+### Tři otázky prvního použití
+
+Při prvním běžném použití si položte jen tři otázky:
+
+- Najde člověk standard tam, kde ho potřebuje?
+- Rozhodne podle něj bez vysvětlování staré historie?
+- Vznikne jen nezbytná datová stopa?
+
+První otázka testuje umístění. Pokud standard leží v archivu revizní smyčky, ale člověk ho hledá u publikačního checklistu, převod ještě není hotový. Oprava má být lokální: přesuňte odkaz, přepište název nebo přidejte jednu větu do pracovního místa.
+
+Druhá otázka testuje použitelnost. Pokud člověk musí číst rozhodovací záznam, aby pochopil běžné pravidlo, pracovní věta je pořád moc historická. Rozhodovací paměť má vysvětlovat důvod, ne nahrazovat návod.
+
+Třetí otázka testuje privacy-first dopad. První použití často svádí k tomu, že si tým začne dělat "pro jistotu" novou evidenci. To je přesně moment, kdy se má ozvat brzda. Pokud standard funguje, nepotřebuje vedle sebe tabulku všech svých použití. Stačí běžný pracovní výsledek a návratový signál.
+
+### Čtyři výsledky prvního použití
+
+Po prvním běžném použití vyberte jeden ze čtyř výsledků:
+
+- Funguje bez zásahu: standard byl nalezen, použit a nezanechal zbytečnou stopu.
+- Potřebuje lokální navigační opravu: pravidlo je dobré, ale člověk ho nenašel v pravý moment.
+- Potřebuje zpřesnit pracovní větu: pravidlo je na správném místě, ale při rozhodnutí není dost konkrétní.
+- Otevřel nový návratový signál: první použití ukázalo problém, který už nejde opravit jen drobným dočištěním.
+
+Nejčastější zdravý výsledek není dramatický úspěch, ale první varianta: standard prostě posloužil a práce šla dál. To je možná méně epické než velká optimalizace, ale výrazně užitečnější. Codyho komentář: dobrý provoz často vypadá podezřele nenápadně. Když se o pravidle nemusí mluvit, možná konečně dělá svou práci.
+
+U navigační opravy držte rozsah tvrdě u místa použití. Přidejte odkaz do checklistu, přejmenujte nadpis, posuňte standard do kanonického indexu nebo opravte jednu formulaci v rozcestníku. Neotevírejte celou strukturu dokumentace.
+
+U zpřesnění pracovní věty měňte jen větu, podle které se rozhoduje. Historii nechte být. Pokud pravidlo zní "zkontrolovat formulář z pohledu dat", přepište ho třeba na:
+
+```text
+Před spuštěním formuláře ověříme účel každého pole, příjemce dat, retenční pravidlo a to, jestli formulář neposílá údaje mimo schválené nástroje.
+```
+
+To je pořád jedna pracovní věta, ale už vede ruku.
+
+Nový návratový signál otevřete jen tehdy, když problém přesahuje první použití. Například: standard řeší formuláře, ale nový use case ukázal, že stejná datová hranice chybí i u importů do SaaS produktu. To už není drobná navigace; to je kandidát na novou malou iteraci.
+
+### Praktický příklad
+
+Tým převedl standard pro privacy-first kontrolu marketingových formulářů do běžné správy. První přirozené použití přijde při publikaci nové landing page pro workshop.
+
+Zápis může vypadat takto:
+
+```text
+Standard dnes používáme při:
+Schválení formuláře na landing page workshopu.
+
+Co se stalo:
+Editor našel pravidlo v publikačním checklistu. Podle pracovní věty ověřil účel pole "telefon", příjemce dat a retenci.
+
+Výsledek:
+Potřebuje zpřesnit pracovní větu.
+
+Proč:
+Pravidlo říká "ověřit externí datový tok", ale neříká, kam zapsat výsledek, když žádný nový tok nevzniká.
+
+Lokální oprava:
+Do pracovní věty přidáváme: "Pokud nový tok nevzniká, stačí poznámka `bez nového externího toku` v publikačním checklistu."
+
+Co neotevíráme:
+Nepřidáváme novou evidenci všech formulářů.
+Nepřenášíme staré screenshoty z revizní smyčky.
+Neotevíráme znovu rozhodnutí o celé marketingové datové mapě.
+```
+
+Všimněte si důležité věci: oprava je malá, ale odstraňuje tření v reálném použití. Tým nevyrobil novou tabulku, protože by to bylo pohodlné. Udržel stopu v místě, kde už práce probíhá.
+
+### Privacy-first hranice prvního použití
+
+První použití po převodu má mít co nejkratší datovou stopu. Cílem není dokázat, že standard existuje, ale bezpečně dokončit práci. Proto si předem řekněte:
+
+- kde vznikne záznam o výsledku;
+- jestli záznam obsahuje osobní údaje;
+- jestli stačí zobecněná poznámka;
+- kdo má záznam vidět;
+- kdy se pomocná stopa smaže nebo přestane používat.
+
+U marketingu a webu často stačí věta v publikačním checklistu. U SaaS produktu může stačit odkaz na issue, kde se řeší konkrétní datový tok. U zákaznické práce často stačí anonymizovaný závěr v předávacím záznamu. Surové zprávy, screenshoty a exporty nechte v původním zdroji pravdy, pokud pro dnešní rozhodnutí nepotřebujete jejich kopii.
+
+Kontrolní otázka:
+
+```text
+Dokáže další člověk pochopit výsledek prvního použití bez toho, abychom kopírovali osobní nebo zákaznické detaily?
+```
+
+Pokud ano, nekopírujte je. To není askeze, to je levnější budoucí úklid.
+
+### Karta prvního běžného použití
+
+```text
+Standard:
+
+Kanonické pracovní místo:
+
+První běžné použití při:
+
+Kdo standard použil:
+
+Našel standard bez pomoci?
+
+Šlo podle něj rozhodnout bez historie revizní smyčky?
+
+Jaký pracovní výsledek vznikl:
+
+Datová stopa:
+Kde je výsledek zapsaný a proč:
+
+Výsledek použití:
+- funguje bez zásahu
+- lokální navigační oprava
+- zpřesnění pracovní věty
+- nový návratový signál
+
+Lokální oprava, pokud je potřeba:
+
+Co neotevíráme:
+
+Návratový signál:
+
+Datum:
+```
+
+Kartu vyplňte jen při prvním použití nebo tehdy, když návratový signál opravdu přijde. Nedělejte z ní další periodickou povinnost. Standard má sloužit práci, ne vyrábět vlastní papírování v digitálním kostýmu.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: pojmenujte skutečné pracovní místo prvního použití.
+2. Minuta 2: ověřte, jestli člověk standard našel bez vysvětlování.
+3. Minuta 3: zkontrolujte, jestli pracovní věta stačila k rozhodnutí.
+4. Minuta 4: vyberte jeden ze čtyř výsledků.
+5. Minuta 5: pokud je potřeba oprava, zapište nejmenší lokální změnu.
+6. Minuta 6: zkontrolujte datovou stopu a napište, co neotevíráte.
+
+Když se v minutě 4 objeví chuť otevřít širší revizi, zastavte se. Širší revize má začít až návratovým signálem, ne pocitem, že by se při té příležitosti dalo uklidit ještě deset dalších věcí. Dalo. Vždycky se dá. To neznamená, že se má.
+
+### Checklist prvního použití
+
+- Použili jsme standard při skutečné práci, ne v umělém testu?
+- Je jasné pracovní místo prvního použití?
+- Našel člověk standard bez staré revizní historie?
+- Stačila pracovní věta k rozhodnutí?
+- Vybrali jsme jeden ze čtyř výsledků?
+- Pokud vznikla oprava, je lokální a nejmenší možná?
+- Neotevřeli jsme novou evidenci jen proto, abychom měli pocit kontroly?
+- Zapsali jsme výsledek tam, kde práce už běží?
+- Nekopírujeme osobní údaje, zákaznické zprávy, screenshoty ani exporty bez jasného účelu?
+- Napsali jsme, co teď výslovně neotevíráme?
+
+První běžné použití po převodu je hotové, když standard pomohl dokončit reálnou práci a nezatáhl za sebou starou revizní stopu. Pokud fungoval, nechte ho být. Pokud drhnul, opravte nejbližší místo. Pokud otevřel nový návratový signál, založte novou malou iteraci až potom. Tím zůstane správa standardů praktická, úsporná a pořád trochu alergická na zbytečné tabulky, jak se na slušný privacy-first provoz patří.
+
 ## Pracovní log
 
+- 2026-06-23: Doplněna úvodní podkapitola o prvním běžném použití standardu po převodu do správy: ověření najitelnosti a rozhodnutelnosti bez revizní historie, čtyři výsledné stavy, privacy-first stopa, karta, mini workshop a checklist.
 - 2026-06-23: Doplněna úvodní podkapitola o převodu uzavřené revizní smyčky do běžné správy standardu: rozdělení živého pravidla, rozhodovací paměti a úklidu pomocných stop, privacy-first hranice, karta, mini workshop a checklist.
 - 2026-06-23: Doplněna úvodní podkapitola o uzavření druhé kontroly po zmenšení revizní stopy: čtyři uzavírací stavy, uzavírací věta, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-22: Doplněna úvodní podkapitola o prvním běžném ověření po uzavření malého kroku: tři kontrolní otázky, čtyři výsledky ověření, privacy-first záznam, karta, mini workshop a checklist.
