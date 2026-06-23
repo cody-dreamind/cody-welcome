@@ -246714,6 +246714,172 @@ Když se tým v minutě 3 nedohodne, zapište jen "reakce není uzavřená" a vr
 
 Uzavření prvního návratu po dlouhodobém klidu má vrátit standard do rozumného stavu. Buď se nic nemění, nebo se změní jedno malé místo, nebo se přidá jedna hrana, nebo se nové téma oddělí stranou. Všechny čtyři výsledky jsou v pořádku, pokud po nich zůstane čisté pravidlo, konkrétní stopa a méně otevřených dat, ne víc.
 
+## První běžné použití po uzavřeném návratu z dlouhodobého klidu
+
+Po uzavření prvního návratu po dlouhodobém klidu přichází nenápadně důležitý moment: standard se má znovu použít v běžné práci. Bez mimořádné schůzky, bez člověka, který všem připomíná čerstvé rozhodnutí, a bez nové složky pomocných poznámek. Pokud pravidlo funguje jen první týden po opravě, ještě není zpátky v provozu. Je jen dobře hlídané.
+
+První běžné použití ověřuje, jestli uzavření návratu skutečně vrátilo standard do klidu. Nezkoumá znovu celou historii. Nehledá, jestli by se nedalo vylepšit dalších pět věcí. Dívá se na jednu reálnou situaci a ptá se: našel člověk správné pravidlo, pochopil jeho hranici a dokázal podle něj rozhodnout bez návratu k mimořádné péči?
+
+Začněte větou:
+
+```text
+Standard byl po uzavřeném návratu použit v této běžné situaci:
+```
+
+Například:
+
+```text
+Standard byl po uzavřeném návratu použit v této běžné situaci: produktový tým připravoval novou landing page pro konzultační sprint a použil formulářovou šablonu bez dodatečné konzultace s obchodem.
+```
+
+Taková věta drží ověření v konkrétním místě. Neříká "formuláře se používají dobře". Říká, kde se pravidlo potkalo s realitou. To stačí. První běžné použití není audit celého systému, ale malý test, jestli uzavřený návrat nezůstal jen v zápisu.
+
+### Co první běžné použití ověřuje
+
+Ověřte tři věci:
+
+- Najitelnost: člověk našel kanonické pravidlo bez ptaní se původního autora.
+- Rozhodnutelnost: pravidlo vedlo k jasnému rozhodnutí, ne k nové debatě.
+- Klid: použití nevyžadovalo otevření staré historie, exportů ani mimořádného režimu.
+
+Najitelnost je často podceňovaná. Pokud pravidlo existuje, ale člověk ho najde jen podle starého názvu v chatu, systém nefunguje. Oprava nemusí být velká. Někdy stačí přejmenovat odkaz, přesunout krátkou poznámku blíž k šabloně nebo doplnit jednu větu do checklistu.
+
+Rozhodnutelnost je druhý filtr. Dobrý standard nemusí odpovědět na každý detail, ale musí říct, co udělat v typické situaci a kdy eskalovat. Pokud se při běžném použití znovu otevře debata o smyslu pravidla, uzavření návratu bylo pravděpodobně slabé nebo se objevila nová hrana.
+
+Klid je privacy-first i provozní metrika. Když tým kvůli běžnému použití znovu vytahuje staré poptávky, screenshoty, exporty nebo zákaznické zprávy, standard ještě není soběstačný. Možná potřebuje lepší příklad, jasnější výjimku nebo zkrácenou rozhodovací větu.
+
+### Praktický příklad
+
+```text
+Standard:
+Kontaktní formulář na landing page nesbírá telefon v prvním kroku.
+
+Uzavřený návrat:
+Auditní landing page může mít volitelné pole telefon, pokud vedle pole jasně vysvětlí účel krátkého kvalifikačního hovoru. Výchozí formulář ostatních landing pages se nemění.
+
+Běžná situace:
+Tým připravuje landing page pro konzultační sprint.
+
+Použití:
+Tým zvolil výchozí formulář bez telefonu, protože konzultační sprint nemá domluvený telefonický kvalifikační krok. Do interní poznámky napsal, že auditní výjimku nepřenáší.
+
+Výsledek:
+Standard fungoval samostatně. Nebylo potřeba otevřít staré poptávky ani volat obchod kvůli výkladu pravidla.
+```
+
+Všimněte si drobnosti: tým výslovně napsal, co nepřenáší. To je malá věta, ale velká ochrana. Lokální výjimka pro auditní landing page se nerozleze do všech dalších formulářů jen proto, že je čerstvá a pohodlně po ruce.
+
+### Čtyři výsledky prvního běžného použití
+
+Po prvním běžném použití vyberte jeden ze čtyř výsledků:
+
+- Standard běží klidně: pravidlo bylo najitelné, rozhodnutelné a nepotřebovalo další zásah.
+- Chybí pracovní odkaz: pravidlo platí, ale člověk ho musel hledat přes staré poznámky nebo jiného člověka.
+- Chybí rozhodovací hrana: pravidlo je najitelné, ale nová situace ukázala nejasnou výjimku.
+- Návrat nebyl uzavřený: běžné použití znovu otevřelo stejnou mimořádnou péči jako první návrat.
+
+Výsledek `standard běží klidně` je důvod nic dalšího nepřidávat. Zapište jednu větu a nechte standard pracovat. Úspěšné použití není pozvánka k dalšímu ladění.
+
+Výsledek `chybí pracovní odkaz` řešte v místě použití. Neopravujte celý standard, pokud problém vznikl jen tím, že šablona neměla odkaz na kanonické pravidlo. Přidejte odkaz, upravte název nebo přesuňte krátkou rozhodovací větu blíž k práci.
+
+Výsledek `chybí rozhodovací hrana` vyžaduje opatrnost. Hrana má pomoct příštímu rozhodnutí, ne otevřít sbírku zvláštních případů. Pokud nemáte důkaz, že se situace bude opakovat, napište ji jako pozorování a nastavte návratový signál.
+
+Výsledek `návrat nebyl uzavřený` je nejdůležitější nehezká varianta. Znamená, že předchozí uzavření možná jen pojmenovalo problém, ale neodstranilo důvod mimořádné péče. V takovém případě nepřidávejte další lokální opravy. Vraťte se ke kartě uzavření návratu a vyjasněte jeden chybějící výstup.
+
+### Privacy-first kontrola běžného použití
+
+Při prvním běžném použití po uzavřeném návratu se ptejte:
+
+```text
+Stačilo nám kanonické pravidlo a aktuální pracovní situace?
+```
+
+Pokud ano, zapište jen zobecněný výsledek. Pokud ne, doplňte, proč bylo nutné otevřít další data. Tohle není byrokracie pro radost z tabulek. Je to brzda proti tomu, aby se historické pracovní stopy vracely do provozu pokaždé, když si někdo není jistý.
+
+Praktické pravidlo:
+
+- Kanonické pravidlo a aktuální pracovní situace jsou v pořádku.
+- Zobecněná poznámka z minulého návratu je v pořádku.
+- Staré osobní údaje, celé zákaznické zprávy, exporty a screenshoty otevírejte jen při jasném rozhodovacím důvodu.
+- Pokud je otevřete, po použití je znovu zavřete, smažte kopie nebo ponechte jen anonymizovaný závěr.
+
+Codyho komentář: když standard potřebuje při běžném použití malý archeologický výkop, nejspíš není standard. Je to poznámka, která se tváří statečně. Dopřejte jí lepší pracovní místo, ne další vrstvu vysvětlivek.
+
+### Karta prvního běžného použití po návratu
+
+```text
+Standard:
+
+Uzavřený návrat:
+
+Kanonické pracovní místo:
+
+Běžná situace použití:
+
+Kdo pravidlo použil:
+
+Bylo pravidlo najitelné bez původního autora?
+- ano
+- ne
+- částečně
+
+Vedlo pravidlo k rozhodnutí?
+- ano
+- ne
+- částečně
+
+Bylo potřeba otevřít starou historii?
+- ne
+- ano, proč:
+
+Výsledek prvního běžného použití:
+- standard běží klidně
+- chybí pracovní odkaz
+- chybí rozhodovací hrana
+- návrat nebyl uzavřený
+
+Nejmenší další krok:
+
+Co výslovně neměníme:
+
+Privacy-first výsledek:
+
+Návratový signál:
+
+Vlastník:
+
+Datum kontroly:
+```
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: přečtěte uzavřený návrat a kanonické pracovní místo.
+2. Minuta 2: popište běžnou situaci použití jednou větou.
+3. Minuta 3: ověřte najitelnost pravidla.
+4. Minuta 4: ověřte rozhodnutelnost pravidla.
+5. Minuta 5: zkontrolujte, zda bylo potřeba otevřít starou historii.
+6. Minuta 6: vyberte jeden ze čtyř výsledků.
+7. Minuta 7: zapište nejmenší další krok nebo větu, proč se nic nemění.
+
+Pokud tým v minutě 6 vybere víc výsledků najednou, rozdělte je. Nejprve uzavřete nejmenší provozní opravu. Širší vzor otevřete až tehdy, když se znovu objeví návratový signál. První běžné použití nemá ambici vyřešit všechno, co se kolem standardu dá zlepšit.
+
+### Checklist prvního běžného použití
+
+- Je popsaná konkrétní běžná situace, ne obecný dojem?
+- Víme, kdo pravidlo použil a kde ho našel?
+- Šlo pravidlo použít bez původního autora?
+- Vedlo pravidlo k rozhodnutí bez nové mimořádné schůzky?
+- Neotevřeli jsme starou historii jen ze zvyku?
+- Pokud jsme otevřeli starší podklady, je napsané proč?
+- Rozlišili jsme chybějící odkaz od chybějící rozhodovací hrany?
+- Pokud standard běží klidně, odolali jsme pokušení ho dál ladit?
+- Pokud návrat nebyl uzavřený, vracíme se ke kartě uzavření místo přidávání dalších oprav?
+- Je jasné, co se výslovně nemění?
+- Zůstala privacy-first hranice viditelná v pracovním místě?
+- Má standard po použití jasný návratový signál?
+
+První běžné použití po uzavřeném návratu je malá zkouška soběstačnosti. Standard nemá dokazovat, že je dokonalý. Má ukázat, že běžný člověk ve správné situaci najde pravidlo, rozhodne podle něj a nezvětší datovou stopu jen proto, že se kdysi řešil podobný problém. Když to zvládne, nechte ho být. Klid je taky výstup.
+
 ## Pracovní log
 
 - 2026-06-23: Doplněna úvodní podkapitola o uzavření prvního návratu po dlouhodobém klidu: čtyři uzavírací stavy, lokální oprava, doplnění hrany, oddělení nového tématu, privacy-first uzavření, karta, mini workshop a checklist.
@@ -247892,3 +248058,4 @@ Uzavření prvního návratu po dlouhodobém klidu má vrátit standard do rozum
 - 2026-06-22: Doplněna úvodní podkapitola o testu hranice prvního kroku před spuštěním: tři kontrolní otázky, hraniční věta, varovné signály širokého kroku, privacy-first práce s důkazy, karta, mini workshop a checklist.
 - 2026-06-22: Doplněna úvodní podkapitola o spuštění prvního malého kroku po testu hranice: pravidla spuštění, očekávané výstupy, privacy-first stopa, karta, mini workshop a checklist.
 - 2026-06-23: Doplněna úvodní podkapitola o uzavření prvního běžného ověření malého kroku: výsledné stavy, propsání do pracovního místa, ukončení mimořádné péče, privacy-first uzavření, karta, mini workshop a checklist.
+- 2026-06-23: Doplněna úvodní podkapitola o prvním běžném použití po uzavřeném návratu z dlouhodobého klidu: najitelnost, rozhodnutelnost, klid bez otevírání historie, privacy-first kontrola, karta, mini workshop a checklist.
