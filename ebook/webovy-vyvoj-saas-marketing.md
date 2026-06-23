@@ -246126,8 +246126,174 @@ Když se během workshopu objeví chuť "raději ještě jednou projít všechno
 
 Druhá běžná správa je dobrá hlavně tím, že chrání standard před návratem do režimu projektu. Buď potvrdí, že pravidlo funguje v normální práci, nebo ukáže jednu úzkou opravu. V obou případech má skončit s menší stopou, než s jakou začala.
 
+## Uzavření druhé běžné správy standardu
+
+Druhá běžná správa standardu se má uzavřít rychleji než první. První správa ještě ověřovala, jestli se standard po opravách a přesunech opravdu stal běžnou součástí práce. Druhá už má tvrdší metr: buď pravidlo fungovalo bez mimořádné paměti, nebo přesně víme, kde se přenos zasekl. Pokud po druhé správě pořád potřebujete dlouhý dohled, standard ještě není standard. Je to jen dobře oblečená pracovní hypotéza.
+
+Začněte uzavírací otázkou:
+
+```text
+Co po druhé běžné správě zůstává jako běžné pravidlo a co se uzavírá jako dočasná péče?
+```
+
+Tato otázka nutí oddělit dvě věci, které se v týmech často lepí k sobě. První je samotný standard: krátké pravidlo, kanonické místo, pracovní kotva a návratový signál. Druhá je revizní lešení: karty, dočasné poznámky, kontrolní komentáře, screenshoty a ruční seznamy, které pomohly ověřit přenos. Standard může zůstat. Lešení má po uzavření zmizet nebo se ztenčit na jednu poznámku v changelogu.
+
+### Čtyři uzavírací stavy
+
+Po druhé běžné správě vyberte jeden ze čtyř stavů:
+
+- Uzavřít do běžné správy: standard se přenesl, další rytmus je normální a nevzniká žádná zvláštní kontrola.
+- Udělat poslední lokální kotvu: standard platí, ale jedno pracovní místo ještě potřebuje odkaz, větu nebo pořadí kroků.
+- Zpřesnit rozhodovací hranu: standard je najitelný, ale hraniční situace potřebuje jednu jasnější větu.
+- Otevřít samostatné téma: správa našla problém mimo hranici standardu a nesmí ho schovat do údržby.
+
+Stav `uzavřít do běžné správy` je nejlepší výsledek a zároveň nejméně dramatický. Napište, kde standard bydlí, kdy se znovu běžně kontroluje a co se už nebude sledovat zvlášť. Nepřidávejte další checkpoint jen proto, že máte čerstvý důkaz. Důkaz má uvolnit pozornost, ne ji připoutat k dalšímu kalendáři.
+
+Stav `poslední lokální kotva` použijte, když se přenos nezasekl v pravidle, ale v cestě k němu. Typicky člověk začíná práci v issue šabloně, ale standard žije ve wiki. Oprava není přepsat wiki. Oprava je přidat odkaz nebo krátkou pracovní větu tam, kde práce opravdu začíná.
+
+Stav `zpřesnit rozhodovací hranu` použijte, když člověk standard našel, ale nebylo jasné, co má udělat ve výjimce. Hrana má být krátká. Pokud potřebuje tři odstavce, možná už nejde o hranu standardu, ale o nové rozhodovací téma.
+
+Stav `samostatné téma` je ochrana rozsahu. Druhá správa může odhalit skutečně důležitou věc: slabé předání mezi obchodem a delivery, nejasnou nabídku, špatnou šablonu briefu nebo přebytečnou datovou stopu v jiném procesu. To neznamená, že se má správa standardu natáhnout. Znamená to, že standard uzavřete a nové téma otevřete s vlastní otázkou.
+
+### Uzavírací věta
+
+Uzavření napište jednou větou:
+
+```text
+Po druhé běžné správě standardu je stav:
+```
+
+Příklady:
+
+```text
+Po druhé běžné správě standardu je stav: uzavřít do běžné správy. Standard pro třípolový formulář je v checklistu nové landing page, editor ho použil bez čerstvé nápovědy a další kontrola proběhne jen v měsíční správě šablon.
+```
+
+```text
+Po druhé běžné správě standardu je stav: poslední lokální kotva. Pravidlo platí, ale issue šablona pro novou stránku neodkazuje na checklist; doplňujeme jen tento odkaz a neotevíráme formulářový standard.
+```
+
+```text
+Po druhé běžné správě standardu je stav: zpřesnit rozhodovací hranu. Standard zůstává, ale doplňujeme větu, že telefon do prvního formuláře nepatří ani u rychlých auditů, pokud neexistuje schválená výjimka s datem návratu.
+```
+
+Uzavírací věta má být dost konkrétní, aby podle ní šlo zavřít dočasné úkoly. Pokud po jejím přečtení stále nevíte, co se má smazat, kam vede další kontrola a co se neotevírá, věta je moc měkká. Přepište ji z pohledu člověka, který bude standard používat za měsíc a nebude si pamatovat dnešní debatu.
+
+### Co po druhé správě zůstává
+
+Po druhé správě má zůstat jen to, co pomáhá budoucí práci:
+
+- aktuální formulace standardu;
+- kanonické pracovní místo;
+- jedna pracovní kotva v místě, kde práce začíná;
+- návratový signál;
+- běžný rytmus správy;
+- krátký závěr, že druhá správa proběhla a jak dopadla.
+
+Všechno ostatní musí obhájit existenci. Staré revizní karty, pomocné seznamy, kopie příkladů, screenshoty, exporty a dočasné komentáře mají zmizet, zobecnit se nebo zůstat v původním systému. Pokud je necháte ležet vedle standardu, další člověk nebude vědět, jestli jsou pořád aktivní. A když si tým není jistý, začne pro jistotu kontrolovat víc. Takhle vzniká procesní prach.
+
+Praktická věta pro úklid:
+
+```text
+Po druhé správě ponecháváme jen standard, kotvu, návratový signál a závěr; ověřovací podklady nevedeme jako další pracovní vrstvu.
+```
+
+Tato věta je drobná, ale účinná. Chrání standard před tím, aby měl vedle sebe vlastní malý archiv důkazů. Důkaz po uzavření nemá být druhý standard.
+
+### Privacy-first uzavření
+
+Druhá správa často svádí k tomu, aby tým schoval surové podklady "pro příště". Jenže příště většinou nepotřebujete celou poptávku, screenshot formuláře ani kopii interního komentáře. Potřebujete vědět, co standard udělal, kde se použil a jestli stačil k rozhodnutí.
+
+Privacy-first uzavření proto rozdělte takto:
+
+```text
+Ponecháváme:
+Krátký závěr správy, aktuální pravidlo, kanonické místo a návratový signál.
+
+Zobecňujeme:
+Příklady použití, pokud jsou užitečné jako vzor.
+
+Nepřenášíme dál:
+Osobní údaje, konkrétní zákaznické zprávy, screenshoty, exporty, chatové kopie a ruční kontrolní seznamy.
+```
+
+Když potřebujete zachovat důkaz pro audit nebo právní důvod, nelepte ho do pracovního standardu. Nechte ho v původním systému, s odpovídající retencí a přístupem. Pracovní standard má nést rozhodovací paměť, ne skladiště dat.
+
+Codyho komentář: dobrý standard po druhé správě působí trochu obyčejně. Má místo, větu, hranici a rytmus. Když k němu potřebujete ještě složku "důkazy_final_final", něco se nepovedlo. Buď standard není dost jasný, nebo tým plete jistotu s hromaděním stop.
+
+### Karta uzavření druhé běžné správy
+
+```text
+Standard:
+
+Závěr druhé běžné správy:
+
+Uzavírací stav:
+- uzavřít do běžné správy
+- poslední lokální kotva
+- zpřesnit rozhodovací hranu
+- otevřít samostatné téma
+
+Uzavírací věta:
+
+Kanonické pracovní místo:
+
+Pracovní kotva:
+
+Co po správě zůstává:
+
+Co ukončujeme:
+
+Pokud je poslední lokální kotva, jedno místo opravy:
+
+Pokud zpřesňujeme hranu, nová věta pravidla:
+
+Pokud otevíráme samostatné téma, jeho hranice:
+
+Privacy-first uzavření:
+Ponecháváme:
+Zobecňujeme:
+Nepřenášíme dál:
+
+Návratový signál:
+
+Další běžný rytmus:
+
+Vlastník:
+```
+
+Karta má být krátká. Pokud se rozroste, pravděpodobně do ní píšete nové téma místo uzavření správy. V takovém případě kartu rozdělte: jednu větu nechte pro uzavření standardu a samostatnou kartu otevřete pro nový problém.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte závěr druhé běžné správy.
+2. Minuta 2: vyberte jeden uzavírací stav.
+3. Minuta 3: napište uzavírací větu.
+4. Minuta 4: určete, co po správě zůstává a co se ukončuje.
+5. Minuta 5: proveďte privacy-first rozdělení podkladů.
+6. Minuta 6: potvrďte návratový signál, běžný rytmus a vlastníka.
+
+Když se tým zasekne na tom, jestli má standard dost důkazů, vraťte se k přirozenému použití. Druhá správa nepotřebuje dokonalý statistický případ. Potřebuje vědět, jestli standard přežil normální práci bez čerstvé nápovědy a bez nové datové stopy. To je pro tento typ uzavření dost.
+
+### Checklist uzavření druhé správy
+
+- Vybrali jsme jeden ze čtyř uzavíracích stavů?
+- Umíme výsledek napsat jednou uzavírací větou?
+- Pokud standard drží, vrací se do běžného rytmu bez mimořádné péče?
+- Pokud chybí kotva, opravujeme jen místo, kde práce začíná?
+- Pokud je slabá rozhodovací hrana, doplňujeme jednu jasnou větu místo nového výkladu?
+- Pokud vzniklo samostatné téma, má vlastní hranici a nesveze se na správě standardu?
+- Je jasné, co po správě zůstává v kanonickém pracovním místě?
+- Ukončili jsme dočasné revizní karty, komentáře, seznamy a pomocné připomínky?
+- Nepřenášíme dál osobní údaje, screenshoty, exporty ani kopie zákaznických zpráv?
+- Zobecnili jsme užitečné příklady na pracovní vzor?
+- Má standard návratový signál, běžný rytmus a vlastníka?
+
+Uzavření druhé běžné správy je hotové, když standard nepotřebuje omluvu ani doprovod. Buď se vrací do běžné správy jako klidné pravidlo, nebo zanechá jednu poslední lokální opravu. V obou případech má po sobě uklidit. Čistý standard je ten, který pomáhá příštímu člověku rozhodnout, ne ten, který mu předá celý kufr historických důvodů.
+
 ## Pracovní log
 
+- 2026-06-23: Doplněna úvodní podkapitola o uzavření druhé běžné správy standardu: čtyři uzavírací stavy, uzavírací věta, rozlišení trvalého pravidla a dočasné péče, privacy-first úklid podkladů, karta, mini workshop a checklist.
 - 2026-06-23: Doplněna úvodní podkapitola o druhé běžné správě standardu po uzavření první správy: přirozené použití, přenositelnost bez čerstvé nápovědy, čtyři výsledky, privacy-first minimum dat, karta, mini workshop a checklist.
 - 2026-06-23: Doplněna úvodní podkapitola o uzavření první běžné správy standardu: čtyři uzavírací stavy, uzavírací věta, propsání do stabilního místa, privacy-first úklid důkazů, karta, mini workshop a checklist.
 - 2026-06-23: Doplněna úvodní podkapitola o první běžné správě standardu po uzavření druhého použití: kontrola kanonického místa, lokální správa tření, privacy-first hranice, karta a checklist.
