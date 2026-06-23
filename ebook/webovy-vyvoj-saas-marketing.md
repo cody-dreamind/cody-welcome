@@ -245096,8 +245096,193 @@ Když se v páté minutě ukáže, že neumíte napsat konkrétní návratový s
 
 Uzavření prvního běžného použití je hotové, když standard po reálné práci nezůstane viset ve zvláštním režimu. Buď se vrátí do běžného rytmu, dostane malou opravu, otevře přesný návratový signál, nebo dostane krátkou oporu s jasným koncem. Všechno ostatní je jen procesní šum. A šum má v privacy-first provozu krátkou životnost, protože zabírá pozornost i data.
 
+## Druhé běžné použití standardu po převodu do správy
+
+Druhé běžné použití standardu je nenápadnější než první, ale často důležitější. První použití ještě žije z čerstvé paměti převodu. Lidé si pamatují, proč se standard uklízel, kde se přesunul a jaké drobné opravy vznikly. Druhé použití už testuje něco jiného: jestli standard obstojí bez čerstvého vysvětlení.
+
+Proto druhé použití neplánujte jako slavnostní kontrolu. Vyberte přirozenou pracovní situaci, která přijde až potom, co první uzavření opravdu skončilo. Může to být další landing page, další formulář, další import kontaktů, další onboardingový e-mail, další revize dodavatele nebo další produktová změna se stejnou datovou hranicí. Důležité je, aby člověk nepoužíval standard proto, že ho právě někdo připomněl, ale proto, že patří do běžné práce.
+
+Začněte krátkou větou:
+
+```text
+Standard se podruhé používá při:
+```
+
+Věta má pojmenovat konkrétní pracovní místo, ne obecný proces:
+
+```text
+Standard se podruhé používá při:
+Publikaci nové registrační stránky pro pilotní SaaS účet.
+```
+
+Tím se test drží při zemi. Neověřujete krásu dokumentace. Ověřujete, jestli pravidlo pomůže v další normální situaci, když už kolem něj není zvláštní pozornost.
+
+### Co druhé použití ověřuje
+
+Druhé použití má tři praktické kontroly:
+
+- přenositelnost: funguje standard i v podobné, ale ne totožné situaci;
+- samostatnost: použije ho člověk bez vysvětlování první revizní smyčky;
+- stopovou střídmost: nevzniká nová pomocná evidence jen proto, že je standard pořád trochu nový.
+
+Přenositelnost neznamená, že standard musí pokrýt všechno. Znamená, že jeho pracovní věta je dost jasná, aby šla použít i o krok vedle. Pokud standard pro marketingové formuláře pomůže i u registrační stránky, je to dobrý signál. Pokud ale narazí na úplně jiný datový tok, nezachraňujte ho natahováním. Zapište návratový signál a nechte původní standard v jeho hranicích.
+
+Samostatnost je tvrdší test. Pokud člověk standard najde jen díky tomu, že mu někdo pošle odkaz v chatu, pracovní místo ještě není dost dobré. Pokud ho sice najde, ale musí číst starý rozhodovací záznam, pracovní věta pořád nese moc historie. Oprava má být zase lokální: název, odkaz, jedna věta, jedno místo zápisu výsledku.
+
+Stopová střídmost hlídá, aby se druhé použití nezměnilo v začátek evidence "pro jistotu". Užitečný standard nemusí mít vlastní deníček každého doteku. Potřebuje viditelný návratový signál, běžný revizní rytmus a krátký zápis výsledku tam, kde práce už probíhá.
+
+### Praktický příklad
+
+Standard říká, že před spuštěním formuláře se ověřuje účel každého pole, příjemce dat, retence a externí datový tok. První běžné použití proběhlo na landing page workshopu a vedlo k doplnění volby `bez nového externího toku` do publikačního checklistu.
+
+Druhé použití přijde při registrační stránce pro pilotní SaaS účet:
+
+```text
+Standard se podruhé používá při:
+Publikaci registrační stránky pro pilotní SaaS účet.
+
+Co se stalo:
+Editor našel pravidlo v publikačním checklistu. U běžných polí rozhodl podle standardu, ale narazil na volitelné pole "název týmu", které není čistě marketingové ani osobní v běžném smyslu.
+
+Výsledek:
+Standard je přenositelný, ale potřebuje lokální zpřesnění pracovní věty.
+
+Lokální oprava:
+Do pracovní věty přidáváme: "U polí, která popisují organizaci nebo tým, ověřte také, zda nejsou později používána k profilování účtu mimo původní účel registrace."
+
+Co neotevíráme:
+Nepřepisujeme celý standard pro SaaS onboarding.
+Nezakládáme novou tabulku registračních polí.
+Neotvíráme staré screenshoty z první revizní smyčky.
+
+Návratový signál:
+Pokud se stejná otázka objeví u importu nebo integrace, otevřít samostatnou malou iteraci pro produktová identifikační data.
+```
+
+Všimněte si hranice. Druhé použití neříká "standard pokrývá celý SaaS datový model". Říká jen, že standard umí projít dalším podobným místem a že jedna pracovní věta potřebovala zpřesnit. To je přesně velikost opravy, která drží provoz použitelný.
+
+### Čtyři výsledky druhého použití
+
+Po druhém běžném použití vyberte jeden ze čtyř výsledků:
+
+- Drží bez další práce: standard byl nalezen, použit a nepřidal novou stopu.
+- Drží po lokálním zpřesnění: pravidlo funguje, ale jedno pracovní místo potřebuje přesnější větu, odkaz nebo volbu.
+- Hranice standardu je užší, než jsme mysleli: standard zůstává platný, ale nesmí se natahovat na nový typ situace.
+- Vznikl nový návratový signál: druhé použití ukázalo opakující se hranu, která si zaslouží samostatnou malou iteraci.
+
+Stav `drží bez další práce` je nejlepší konec. Neznamená, že se nic nestalo. Znamená, že se standard stal součástí práce a nevyžádal si zvláštní režim. Takový výsledek zapište jednou větou a nechte standard v běžném rytmu.
+
+Stav `drží po lokálním zpřesnění` použijte, když je problém přesně u jednoho místa. Opravte pracovní větu, checklist nebo název. Nepřepisujte rozhodovací historii. Další člověk potřebuje lepší návod, ne prohlídku starého uvažování.
+
+Stav `hranice standardu je užší` je zdravá brzda. Standard nemusí růst pokaždé, když potká sousední situaci. Pokud pravidlo pro marketingový formulář narazí na produktový import, může výsledek znít:
+
+```text
+Standard necháváme pro marketingové a registrační formuláře. Produktové importy otevíráme jen při samostatném návratovém signálu.
+```
+
+Stav `vznikl nový návratový signál` použijte až ve chvíli, kdy se problém opakuje nebo má jasný dopad. Jedna zvláštnost nemusí být nová kapitola provozu. Dvě podobné zvláštnosti v různých místech už mohou ukazovat vzor.
+
+### Privacy-first kontrola druhého použití
+
+Druhé použití je dobrý okamžik zkontrolovat, jestli se kolem standardu nenápadně nehromadí nové stopy. Typické podezřelé věci:
+
+- kopie formulářových payloadů v pracovních poznámkách;
+- screenshoty administrace vložené do chatů;
+- exporty polí "jen pro porovnání";
+- nová tabulka všech použití standardu;
+- osobní nebo zákaznické detaily v příkladech, kde stačí zobecněný závěr.
+
+Použijte otázku:
+
+```text
+Co z druhého použití musí zůstat, aby další člověk rozhodl stejně, a co je jen surový materiál z kontroly?
+```
+
+V pracovním místě nechte závěr, ne suroviny. Například:
+
+```text
+Ponecháváme:
+Registrační stránka neotevírá nový externí tok. Pole "název týmu" má ověřený účel v rámci vytvoření účtu.
+
+Neponecháváme:
+Testovací registraci, screenshot administrace, export pole z formuláře ani chatovou diskuzi o názvu týmu.
+```
+
+Pokud se ukáže, že některý podklad má legitimní účel, patří do systému s přístupy, retencí a vlastníkem. Ne do volné poznámky u standardu. Privacy-first správa standardů stojí na tom, že tým umí oddělit důkaz od pohodlné kopie.
+
+### Karta druhého běžného použití
+
+```text
+Standard:
+
+Kanonické pracovní místo:
+
+Druhé běžné použití při:
+
+Je situace stejného typu jako první použití?
+
+Našel člověk standard bez připomenutí?
+
+Stačila pracovní věta bez čtení historie?
+
+Co bylo rozhodnuto:
+
+Výsledek druhého použití:
+- drží bez další práce
+- drží po lokálním zpřesnění
+- hranice standardu je užší
+- vznikl nový návratový signál
+
+Lokální zpřesnění, pokud je potřeba:
+
+Hranice standardu:
+Na co standard dál platí a na co ho nenatahujeme:
+
+Datová stopa:
+Kde zůstává závěr a které surové podklady nepřenášíme:
+
+Co neotevíráme:
+
+Návratový signál:
+
+Vlastník:
+
+Datum:
+```
+
+Kartu vyplňte stručně a jen tehdy, když druhé použití skutečně něco ukázalo. Pokud standard drží bez další práce, stačí jedna věta v běžném pracovním záznamu. Cílem druhého použití není vyrábět důkazní šanon. Cílem je zjistit, jestli standard umí žít bez čerstvé asistence.
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: pojmenujte druhé skutečné pracovní použití.
+2. Minuta 2: ověřte, jestli člověk standard našel bez připomenutí.
+3. Minuta 3: zkontrolujte, jestli pracovní věta stačila bez historie.
+4. Minuta 4: určete, zda je situace pořád uvnitř hranice standardu.
+5. Minuta 5: vyberte jeden ze čtyř výsledků.
+6. Minuta 6: pokud je potřeba, napište nejmenší lokální zpřesnění nebo návratový signál.
+7. Minuta 7: ukliďte datovou stopu a napište, co neotevíráte.
+
+Když se tým hádá, jestli je druhá situace ještě uvnitř standardu, nerozhodujte podle toho, co by se hodilo pokrýt. Rozhodujte podle původního pracovního slibu standardu. Pokud slib mluví o marketingových formulářích, produktový import je nejspíš sousední téma, ne automatické rozšíření.
+
+### Checklist druhého použití
+
+- Proběhlo druhé použití při skutečné práci?
+- Bylo dost vzdálené od prvního použití, aby nešlo jen o čerstvou paměť?
+- Našel člověk standard bez připomenutí?
+- Stačila pracovní věta bez otevření revizní historie?
+- Ověřili jsme, jestli je situace uvnitř hranice standardu?
+- Vybrali jsme jeden ze čtyř výsledků?
+- Pokud vznikla oprava, je lokální a nejmenší možná?
+- Pokud standard narazil na nový typ situace, nenatahujeme ho bez návratového signálu?
+- Ponecháváme závěr místo surových osobních, zákaznických nebo provozních podkladů?
+- Nezakládáme evidenci každého použití bez jasného rozhodovacího účelu?
+- Napsali jsme, co teď výslovně neotevíráme?
+
+Druhé běžné použití je hotové, když standard buď tiše obstojí, nebo ukáže přesnou hranici další práce. Obojí je dobrý výsledek. Tiše fungující standard šetří pozornost. Přesně pojmenovaná hranice šetří budoucí zmatek. A obojí šetří data, protože tým nemusí sbírat víc, než opravdu potřebuje k dalšímu rozhodnutí.
+
 ## Pracovní log
 
+- 2026-06-23: Doplněna úvodní podkapitola o druhém běžném použití standardu po převodu do správy: ověření přenositelnosti bez čerstvé paměti, hranice standardu, privacy-first stopová střídmost, karta, mini workshop a checklist.
 - 2026-06-23: Doplněna úvodní podkapitola o uzavření prvního běžného použití standardu po převodu do správy: čtyři uzavírací stavy, hranice proti nové smyčce, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-23: Doplněna úvodní podkapitola o prvním běžném použití standardu po převodu do správy: ověření najitelnosti a rozhodnutelnosti bez revizní historie, čtyři výsledné stavy, privacy-first stopa, karta, mini workshop a checklist.
 - 2026-06-23: Doplněna úvodní podkapitola o převodu uzavřené revizní smyčky do běžné správy standardu: rozdělení živého pravidla, rozhodovací paměti a úklidu pomocných stop, privacy-first hranice, karta, mini workshop a checklist.
