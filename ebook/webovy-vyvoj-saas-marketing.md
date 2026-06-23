@@ -245970,8 +245970,165 @@ Pokud se během workshopu začne znovu řešit historie vzniku standardu, vraťt
 
 Uzavření první běžné správy je malé, ale důležité. Říká týmu, že standard se buď opravdu stal běžnou součástí práce, nebo že má přesně pojmenovaný problém. Obě varianty jsou užitečné. Neužitečný je jen neurčitý mezistav, ve kterém standard pořád žije napůl jako oprava, napůl jako pravidlo a napůl jako téma pro další schůzku. Ano, tři půlky. Přesně tak vypadá špatně zavřený proces.
 
+## Druhá běžná správa standardu po uzavření první správy
+
+Druhá běžná správa standardu je test, jestli se z první správy nestal jen hezký zápis, který nikdo při další práci nepoužil. První správa mohla dopadnout čistě: standard drží, lokální servis je zavřený, zdroj pravdy je vybraný a další rytmus je jasný. Druhá správa má ověřit, jestli se tento závěr opravdu přenesl do normální práce bez čerstvé paměti lidí, kteří ho psali.
+
+Nezačínejte otázkou, co všechno by se dalo zlepšit. Začněte kratší otázkou:
+
+```text
+Použil se standard od první správy aspoň jednou tak, jak byl uzavřený?
+```
+
+Pokud ne, druhá správa nemá co hodnotit. Zapište, že standard zatím neměl přirozené použití, a nechte ho v běžném rytmu. Nevyrábějte umělý test jen proto, aby tabulka vypadala aktivně. Standardy mají sloužit práci, ne dokazovat vlastní existenci jako malý interní úřad.
+
+Pokud se standard použil, druhá správa kontroluje tři věci:
+
+- Zda člověk našel správné kanonické místo bez připomínky od autora.
+- Zda podle standardu udělal rozhodnutí bez otevírání staré revizní historie.
+- Zda po použití nevznikla nová pomocná evidence, export nebo ruční kontrola, která vrací mimořádnou péči zadními dveřmi.
+
+To je záměrně úzké. Druhá správa není revize celé oblasti. Je to kontrola přenositelnosti uzavřeného standardu v reálném provozu.
+
+### Praktický příklad
+
+```text
+Standard:
+Nová landing page používá kontaktní formulář jen se třemi poli: e-mail, stručný kontext a volitelné URL.
+
+Závěr první správy:
+Standard drží. Kanonické místo je checklist nové landing page. Další kontrola proběhne při běžné měsíční správě šablon.
+
+Co se stalo od první správy:
+Vznikla jedna nová stránka pro produktizovaný audit.
+
+Druhá správa:
+Editor stránky našel checklist bez vysvětlení v chatu, použil správný formulář a nevytvořil nový export vyplněných polí.
+
+Výsledek:
+Standard je přenositelný. Zůstává v běžné správě, bez nové mimořádné kontroly.
+```
+
+Všimněte si, že dobrý výsledek je nudný. Nikdo nemusí přepisovat pravidlo, přidávat dashboard ani svolávat revizi formulářů. Vznikl důkaz, že standard funguje i mimo hlavu původního autora. To je přesně ten druh tiché kvality, kterou malé týmy potřebují.
+
+### Čtyři výsledky druhé správy
+
+Po druhé běžné správě vyberte jeden ze čtyř výsledků:
+
+- Přenos drží: standard byl použitelný bez čerstvé nápovědy a nevznikla nová datová stopa.
+- Chybí pracovní kotva: standard je správný, ale člověk nevěděl, kde ho v běžné práci najít.
+- Rozhodovací hrana je slabá: standard byl nalezený, ale neřekl dost jasně, co udělat v hraniční situaci.
+- Správa odhalila nový problém: nejde o přenos standardu, ale o samostatnou otázku mimo jeho hranici.
+
+Výsledek `přenos drží` uzavřete jednou větou a další kontrolu neurychlujte. Pokud standard fungoval v běžném použití, nepotřebuje odměnu v podobě další schůzky.
+
+Výsledek `chybí pracovní kotva` řešte lokálně. Nejčastější oprava je odkaz z místa, kde práce začíná: šablona issue, checklist nové stránky, obchodní brief, onboardingová karta nebo interní rozcestník. Nezakládejte nový dokument, pokud stačí jeden odkaz na kanonické místo.
+
+Výsledek `rozhodovací hrana je slabá` znamená, že standard má doplnit hranici, ne celý výklad. Typicky stačí věta typu:
+
+```text
+Telefon do prvního formuláře nepatří; výjimka musí mít vlastníka, důvod a datum návratu.
+```
+
+Výsledek `nový problém` oddělte od správy. Například druhá správa formulářového standardu může ukázat, že obchod neumí rozlišit audit a dlouhodobou spolupráci. To je důležité, ale není to chyba formulářového standardu. Otevřete novou otázku s vlastním pracovním místem a správu standardu uzavřete bez přilepeného batohu.
+
+### Privacy-first kontrola druhé správy
+
+Druhá správa má sklony vyrábět dokazování. Někdo chce porovnat staré a nové formuláře, vytáhnout všechny poptávky, udělat screenshoty vyplnění nebo přidat měření každého pole. Většinou je to víc dat, než rozhodnutí potřebuje.
+
+Privacy-first minimum pro druhou správu:
+
+```text
+Potřebujeme vědět:
+- jestli standard šel najít;
+- jestli podle něj šlo rozhodnout;
+- jestli po použití nevznikla zbytečná datová stopa.
+
+Nepotřebujeme:
+- kopie konkrétních poptávek;
+- screenshoty osobních údajů;
+- nové sledování chování jednotlivých lidí;
+- export historie jen kvůli potvrzení, že pravidlo drží.
+```
+
+Pokud potřebujete příklad, zobecněte ho. Místo kopie leadu napište: "Nová stránka použila správný třípolový formulář a nevyžádala telefon." To pro rozhodnutí stačí. Surové podklady zůstávají v původních systémech a nepřenášejí se do další vrstvy týmové paměti.
+
+Codyho komentář: čím klidněji standard funguje, tím méně dat si zaslouží sbírat kolem sebe. Dobrý proces nemá za sebou ohon pomocných tabulek. Má jasné místo, jasné pravidlo a dost slušnosti odejít ze scény, když není potřeba.
+
+### Karta druhé běžné správy
+
+```text
+Standard:
+
+Závěr první běžné správy:
+
+Přirozené použití od první správy:
+- ano
+- ne
+
+Kde práce začala:
+
+Našel člověk kanonické místo bez čerstvé nápovědy:
+- ano
+- ne
+
+Šlo podle standardu rozhodnout:
+- ano
+- ne
+
+Vznikla nová pomocná evidence nebo datová stopa:
+- ne
+- ano, jaká:
+
+Výsledek:
+- přenos drží
+- chybí pracovní kotva
+- rozhodovací hrana je slabá
+- správa odhalila nový problém
+
+Jedna lokální úprava, pokud je potřeba:
+
+Co výslovně neotevíráme:
+
+Privacy-first závěr:
+Co ponecháváme:
+Co zobecňujeme:
+Co nekopírujeme, nemaříme ani nově neměříme:
+
+Další běžný rytmus:
+```
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: přečtěte závěr první běžné správy.
+2. Minuta 2: určete jedno přirozené použití standardu od té doby.
+3. Minuta 3: ověřte, kde člověk práci začal a jestli našel kanonické místo.
+4. Minuta 4: ověřte, jestli standard stačil k rozhodnutí.
+5. Minuta 5: zkontrolujte, jestli nevznikla nová pomocná evidence nebo datová stopa.
+6. Minuta 6: vyberte jeden ze čtyř výsledků.
+7. Minuta 7: napište závěr a další běžný rytmus.
+
+Když se během workshopu objeví chuť "raději ještě jednou projít všechno", vraťte se k přirozenému použití. Druhá správa má ověřit přenos uzavřeného standardu, ne otevřít kontrolní sezónu.
+
+### Checklist druhé běžné správy
+
+- Navazujeme na konkrétní závěr první správy?
+- Proběhlo od první správy přirozené použití standardu?
+- Pokud neproběhlo, nezahajujeme umělý test jen kvůli aktivitě?
+- Víme, kde práce začala?
+- Našel člověk kanonické místo bez autora nebo mimořádné připomínky?
+- Stačil standard k rozhodnutí v běžné situaci?
+- Pokud nestačil, opravujeme jen pracovní kotvu nebo rozhodovací hranu?
+- Oddělili jsme nový problém od správy standardu?
+- Nevznikl nový export, tracker, screenshotová složka ani ruční kontrolní seznam?
+- Zobecnili jsme příklady místo kopírování osobních údajů?
+- Vrací se standard po správě do běžného rytmu bez zvláštní péče?
+
+Druhá běžná správa je dobrá hlavně tím, že chrání standard před návratem do režimu projektu. Buď potvrdí, že pravidlo funguje v normální práci, nebo ukáže jednu úzkou opravu. V obou případech má skončit s menší stopou, než s jakou začala.
+
 ## Pracovní log
 
+- 2026-06-23: Doplněna úvodní podkapitola o druhé běžné správě standardu po uzavření první správy: přirozené použití, přenositelnost bez čerstvé nápovědy, čtyři výsledky, privacy-first minimum dat, karta, mini workshop a checklist.
 - 2026-06-23: Doplněna úvodní podkapitola o uzavření první běžné správy standardu: čtyři uzavírací stavy, uzavírací věta, propsání do stabilního místa, privacy-first úklid důkazů, karta, mini workshop a checklist.
 - 2026-06-23: Doplněna úvodní podkapitola o první běžné správě standardu po uzavření druhého použití: kontrola kanonického místa, lokální správa tření, privacy-first hranice, karta a checklist.
 - 2026-06-23: Doplněna úvodní podkapitola o uzavření druhého běžného použití standardu po převodu do správy: čtyři uzavírací stavy, propsání do pracovního místa, privacy-first úklid dočasných podkladů, karta, mini workshop a checklist.
