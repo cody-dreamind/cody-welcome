@@ -247761,8 +247761,357 @@ Když se tým během workshopu začne vracet k otázce, proč standard kdysi vzn
 
 Uzavření první standardní kontroly je malé provozní rozhodnutí s velkým vedlejším efektem: chrání tým před nekonečným dohledem nad věcí, která už se vrátila do normálu. Dobrý standard má být viditelný při práci, ne pořád slavnostně kontrolovaný. Když víte, co platí, co se změnilo a co by otevřelo další návrat, můžete ho nechat zase dělat jeho nudnou práci. Nuda tady není problém. Nuda je známka toho, že systém konečně přestal tahat za rukáv.
 
+## Druhá standardní kontrola po návratu do běžného rytmu
+
+Druhá standardní kontrola má jiný úkol než první. První kontrola ověřila, že se pravidlo dokáže vrátit do běžného rytmu. Druhá kontrola ověřuje, jestli se kolem pravidla nezačala znovu tiše stavět mimořádná péče. To je častější, než se zdá. Tým formálně řekne "standard je v normálu", ale v praxi ho někdo dál kontroluje bokem, drží si vlastní tabulku, ptá se na každý nový případ nebo nechává starou návratovou kartu připnutou v pracovním prostoru.
+
+Druhá kontrola proto není další hlubší audit. Je to test provozní samostatnosti. Ptá se:
+
+```text
+Umí standard žít v běžném rytmu bez skryté výjimky, skrytého hlídání a skryté datové stopy?
+```
+
+Pokud odpověď zní ano, druhá kontrola má být krátká. Pokud odpověď zní ne, nejdřív zjistěte, jestli problém vzniká v pravidle, v pracovní trase, nebo ve zvyku týmu držet starou starost při životě. Poslední možnost je nepříjemná, ale prakticky důležitá. Někdy už není potřeba opravovat systém. Je potřeba přestat pečovat o minulý problém jako o domácí projekt.
+
+### Co druhá kontrola porovnává
+
+Druhá standardní kontrola porovnává tři vrstvy:
+
+- stav pravidla při první standardní kontrole;
+- stav pravidla v posledním běžném použití;
+- množství pozornosti, které pravidlo dnes vyžaduje.
+
+První vrstva chrání kontinuitu. Nevracejte se k původnímu incidentu, pokud návratový signál nebyl naplněn. Stačí vědět, s čím první kontrola skončila: beze změny, po lokální údržbě trasy, po drobném zpřesnění nebo otevřením nové smyčky.
+
+Druhá vrstva přináší realitu. Vezměte jedno poslední běžné použití pravidla a ověřte, jestli člověk dokázal rozhodnout bez zvláštního vysvětlení. Pokud ano, pravidlo pravděpodobně funguje. Pokud ne, nepřidávejte hned nový proces. Zeptejte se, kde přesně člověk ztratil jistotu: nenašel pravidlo, nerozuměl hranici, nebo narazil na nový typ situace?
+
+Třetí vrstva hlídá provozní cenu. I správné pravidlo může být drahé, když kolem něj zůstane moc opatrnosti. Pokud se při každém použití píše zbytečná poznámka, vzniká screenshot nebo se čeká na schválení člověka, který už nemá být v cestě, standard není v běžném rytmu. Jen se tak tváří.
+
+### Praktický příklad
+
+```text
+Standard:
+Ve výchozím formuláři landing page nesbíráme telefon.
+
+Stav po první standardní kontrole:
+Pravidlo zůstalo beze změny. Produktový checklist byl opraven tak, aby odkazoval na kanonickou formulářovou šablonu.
+
+Poslední běžné použití:
+Tým založil landing page pro workshop. Použil výchozí formulář bez telefonu, bez dotazu na původní auditní výjimku.
+
+Pozornost:
+Nevznikl žádný screenshot, žádná mimořádná tabulka a žádné schválení navíc.
+
+Rozhodnutí druhé standardní kontroly:
+Standard je samostatný v běžném rytmu. Další kontrola zůstává součástí měsíčního review.
+```
+
+Tady je dobrý výsledek skoro nudný. Pravidlo se použilo, nikdo kolem něj nestavěl lešení a tým nemusel otevírat starou historii. To je přesně stav, který chcete. Ne každé pravidlo má produkovat novou poznámku. Některá pravidla mají jen dobře zmizet do práce.
+
+Jiný příklad:
+
+```text
+Poslední běžné použití:
+Landing page pro konzultaci byla správně bez telefonu, ale marketér si pro jistotu otevřel starou návratovou kartu a opsal z ní původní příklad.
+
+Zjištění:
+Pravidlo je správné a pracovní trasa funguje. Problém je starý zvyk používat návratovou kartu jako nápovědu.
+
+Rozhodnutí:
+Návratovou kartu přesunout do archivu. V pracovním checklistu zůstane jen aktuální jednověté pravidlo a návratový signál.
+```
+
+Tohle není chyba člověka. Je to chyba prostředí, které pořád nabízí starý podklad jako pohodlnou berličku. Privacy-first provoz tady pomáhá i produktivitě: méně starých stop znamená méně příležitostí rozhodovat podle minulého kontextu, který už nemá být v cestě.
+
+### Čtyři výsledky druhé standardní kontroly
+
+Po druhé kontrole vyberte jeden výsledek:
+
+- Standard je samostatný v běžném rytmu.
+- Standard funguje, ale stará mimořádná stopa svádí k návratu.
+- Standard potřebuje poslední údržbu pracovní trasy.
+- Naplnil se návratový signál a otevírá se nová smyčka.
+
+Výsledek `standard je samostatný v běžném rytmu` znamená, že není potřeba nic přidávat. Zapište jednu větu a nechte pravidlo dál běžet v normálním review. To je dobrý konec.
+
+Výsledek `stará mimořádná stopa svádí k návratu` použijte, když lidé pořád otevírají starou kartu, starý export, starý komentář nebo starou tabulku, přestože aktuální pracovní místo stačí. Oprava není nové školení. Oprava je uklidit starou stopu, archivovat ji nebo z ní nechat jen zobecněný závěr.
+
+Výsledek `poslední údržba pracovní trasy` použijte, když pravidlo funguje, ale cesta k němu je pořád trochu nepohodlná. Typicky chybí odkaz v jedné šabloně, starý název v checklistu nebo krátká nápověda v místě rozhodnutí. Oprava má být lokální a poslední. Pokud potřebujete třetí a čtvrtou "poslední" údržbu, už nejde o poslední údržbu, ale o slabý standard.
+
+Výsledek `otevřít novou smyčku` patří jen situaci, kde se naplnil návratový signál. Například dvě různé šablony začaly přenášet auditní výjimku mimo placený audit, nebo nový obchodní tok vytvořil opravdu jiný typ rozhodnutí. V takovém případě druhou kontrolu uzavřete a novou smyčku otevřete odděleně.
+
+### Privacy-first kontrola samostatnosti
+
+Druhá standardní kontrola má být ještě střídmější než první. Nepotřebuje velkou důkazní složku. Potřebuje zjistit, jestli standard funguje bez přebytečné datové stopy.
+
+Stačí si položit čtyři otázky:
+
+- Museli jsme otevřít staré podklady, nebo stačilo aktuální pracovní místo?
+- Vznikl při běžném použití nový důkaz jen ze zvyku?
+- Zůstává někde stará návratová karta jako praktická nápověda?
+- Umíme zanechat jen aktuální pravidlo, návratový signál a datum další běžné kontroly?
+
+Krátký privacy-first zápis může znít:
+
+```text
+Druhá standardní kontrola použila jen aktuální checklist a poslední běžné použití. Starou návratovou kartu archivujeme; do pracovního místa zůstává pouze aktuální pravidlo a návratový signál.
+```
+
+Pokud starou stopu zatím nejde zavřít, napište konkrétní důvod:
+
+```text
+Starou kartu ponecháváme ještě do dalšího měsíčního review jen kvůli převodu jednoho příkladu do kanonického checklistu. Po převodu karta nepokračuje jako pracovní nápověda.
+```
+
+Codyho komentář: když má tým pocit, že "pro jistotu" nechá staré podklady po ruce, většinou tím nekupuje jistotu. Kupuje si budoucí zmatek. Starý kontext je užitečný v archivu, ne jako tichý spoluautor každého nového rozhodnutí.
+
+### Karta druhé standardní kontroly
+
+```text
+Standard:
+
+Stav po první standardní kontrole:
+
+Poslední běžné použití:
+
+Použil člověk aktuální pracovní místo bez otevření staré historie?
+- ano
+- ne, co otevřel:
+
+Vznikla při použití mimořádná pozornost nebo nový důkaz?
+- ne
+- ano, jaký:
+
+Je stará návratová stopa pořád viditelná v pracovní trase?
+- ne
+- ano, kde:
+
+Výsledek druhé standardní kontroly:
+- standard je samostatný v běžném rytmu
+- stará mimořádná stopa svádí k návratu
+- poslední údržba pracovní trasy
+- otevřít novou smyčku
+
+Nejmenší další krok:
+
+Co archivujeme, mažeme nebo zkracujeme:
+
+Co výslovně nepřidáváme:
+
+Návratový signál:
+
+Datum další běžné kontroly:
+```
+
+Kartu nevyplňujte automaticky pro každý standard v organizaci. Použijte ji tam, kde pravidlo nedávno prošlo návratem a hrozí, že kolem něj zůstane skrytá péče. Pokud standard běží klidně, stačí záznam v běžném review.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte stav po první standardní kontrole.
+2. Minuta 2: vyberte jedno poslední běžné použití pravidla.
+3. Minuta 3: ověřte, jestli člověk použil aktuální pracovní místo bez staré historie.
+4. Minuta 4: najděte případnou mimořádnou pozornost nebo nový důkaz.
+5. Minuta 5: rozhodněte, jestli starou stopu archivovat, zkrátit nebo ponechat s jasným důvodem.
+6. Minuta 6: vyberte jeden výsledek a zapište další běžný termín.
+
+Když workshop začne hledat další optimalizace, vraťte ho k samostatnosti standardu. Druhá standardní kontrola nemá z pravidla udělat lepší pravidlo. Má potvrdit, že pravidlo nepotřebuje speciální péči.
+
+### Checklist druhé standardní kontroly
+
+- Porovnali jsme stav po první standardní kontrole s posledním běžným použitím?
+- Kontrolujeme samostatnost pravidla, ne původní incident?
+- Stačilo aktuální pracovní místo bez otevření staré historie?
+- Nevznikla nová tabulka, screenshot, schválení nebo poznámka jen ze zvyku?
+- Pokud někdo otevřel starou kartu, víme proč?
+- Umíme starou mimořádnou stopu archivovat, zkrátit nebo odstranit?
+- Pokud je potřeba údržba pracovní trasy, je opravdu poslední a lokální?
+- Novou smyčku otevíráme jen při naplněném návratovém signálu?
+- Zapsali jsme, co výslovně nepřidáváme?
+- Zůstává další kontrola v běžném rytmu?
+- Má standard pořád jasného vlastníka a pracovní místo?
+
+Druhá standardní kontrola je dobrý test dospělosti pravidla. Pokud pravidlo funguje jen s člověkem, který si pamatuje celou historii, ještě není standard. Pokud funguje z aktuálního pracovního místa, bez staré karty a bez dalšího dohledu, může konečně žít obyčejný provozní život. A obyčejný provozní život je pro dobré pravidlo kompliment.
+
+## Uzavření druhé standardní kontroly do dlouhodobého klidu
+
+Uzavření druhé standardní kontroly má jeden hlavní úkol: zabránit tomu, aby se z dobré kontroly stal nový pravidelný rituál bez důvodu. Když standard prošel druhým běžným ověřením, funguje z aktuálního pracovního místa a nepotřebuje starou historii jako berličku, není potřeba mu přidávat další zvláštní dohled. Potřebuje klid.
+
+Dlouhodobý klid neznamená, že se pravidlo ztratí z dohledu. Znamená, že se vrací do běžného provozního rytmu a znovu se otevře až podle jasného návratového signálu. Tohle rozlišení je důležité. Bez něj tým často udělá přesný opak dobré správy: poctivě ověřené pravidlo začne kontrolovat častěji než pravidla, která nikdy žádným ověřením neprošla. To je administrativní komedie, jen bez potlesku.
+
+Uzavírací otázka zní:
+
+```text
+Co musí zůstat viditelné, aby standard fungoval, a co má zmizet, aby kolem něj nepokračovala mimořádná péče?
+```
+
+Viditelné má zůstat aktuální pravidlo, pracovní místo, vlastník a návratový signál. Zmizet mají dočasné tabulky, staré karty, pomocné screenshoty, ruční připomínky a poznámky, které už nemají rozhodovací hodnotu. Pokud něco zůstává jen proto, že "by se to mohlo hodit", je to kandidát na archiv nebo zkrácení.
+
+### Čtyři uzavírací stavy
+
+Po druhé standardní kontrole vyberte jeden uzavírací stav:
+
+- Uzavřít do dlouhodobého klidu.
+- Uzavřít po úklidu staré mimořádné stopy.
+- Uzavřít po poslední lokální údržbě pracovní trasy.
+- Neuzavírat a otevřít novou smyčku.
+
+Stav `uzavřít do dlouhodobého klidu` použijte, když pravidlo funguje z aktuálního pracovního místa, poslední běžné použití nevyžadovalo zvláštní pomoc a staré podklady už nejsou v pracovní trase. Zápis má být krátký:
+
+```text
+Standard prošel druhou kontrolou samostatnosti. Zůstává v běžném měsíčním review; mimořádnou kontrolu ukončujeme.
+```
+
+Stav `uzavřít po úklidu staré mimořádné stopy` použijte, když je pravidlo v pořádku, ale prostředí pořád nabízí starý kontext. Typicky visí odkaz na návratovou kartu v checklistu, někdo má připnutou pomocnou tabulku, nebo v šabloně zůstal komentář "ověřit podle starého incidentu". Tady standard neměňte. Uklidíte cestu.
+
+Stav `uzavřít po poslední lokální údržbě pracovní trasy` patří situaci, kdy člověk pravidlo použil správně, ale cesta k němu byla zbytečně nepohodlná. Například se musel prokliknout přes starý index, odkaz měl nejasný název nebo nápověda nebyla u formuláře, kde rozhodnutí vzniká. Údržba má být drobná, místní a ověřitelná při dalším běžném použití.
+
+Stav `neuzavírat a otevřít novou smyčku` použijte jen tehdy, když se naplnil návratový signál nebo druhá kontrola odhalila nový typ problému. Neotevírejte novou smyčku kvůli pocitu, že by šlo pravidlo ještě vylepšit. Pocit patří do poznámek. Smyčka patří k důvodu.
+
+### Jak napsat uzavírací větu
+
+Dobrá uzavírací věta má tři části:
+
+- co se potvrdilo;
+- co končí;
+- co by pravidlo znovu otevřelo.
+
+Příklad:
+
+```text
+Druhá standardní kontrola potvrdila, že formulářové pravidlo funguje z aktuální šablony bez staré návratové karty; mimořádnou kontrolu končíme a pravidlo znovu otevřeme jen při dvou různých pokusech přidat telefon mimo placený audit.
+```
+
+Ta věta je delší než slogan, ale kratší než zápis z porady. Hlavně má provozní zuby. Člověk ví, co platí, co už nemá dělat a jaký signál má váhu.
+
+Slabá verze by zněla:
+
+```text
+Vypadá to dobře, budeme dál sledovat.
+```
+
+Tohle není uzavření. To je mlha v reflexní vestě. "Dál sledovat" je užitečné jen tehdy, když víte kdo, kde, jak často a kvůli čemu. Pokud to nevíte, pravděpodobně jen držíte při životě mimořádnou pozornost, která měla skončit.
+
+### Praktický příklad
+
+```text
+Standard:
+U běžných lead magnetů nabízíme stažení bez povinného obchodního telefonátu.
+
+Druhá standardní kontrola:
+Poslední dvě landing pages použily aktuální šablonu. Formulář sbírá jen e-mail a volitelné pole pro kontext. Starý export z původní kampaně už nikdo neotevřel.
+
+Zjištění:
+Pravidlo je samostatné. V jedné interní poznámce ale zůstal odkaz na starý "telefonní follow-up" postup.
+
+Uzavírací stav:
+Uzavřít po úklidu staré mimořádné stopy.
+
+Nejmenší krok:
+Odstranit odkaz ze staré interní poznámky a ponechat jen kanonickou formulářovou šablonu.
+
+Uzavírací věta:
+Standard lead magnetů funguje z aktuální šablony bez starého telefonního postupu; mimořádnou kontrolu končíme a téma znovu otevřeme jen při návrhu povinného telefonu mimo jasně označený obchodní formulář.
+```
+
+Všimněte si, že závěr neříká "nikdy nesbírat telefon". Říká, kde telefon nepatří a co by spustilo návrat. Praktický standard nemá být dogma. Má být hranice, kterou lidé umí použít bez vyvolávání poradního ducha minulého incidentu.
+
+### Privacy-first úklid při uzavření
+
+Uzavření druhé standardní kontroly je vhodný okamžik na malý úklid datové stopy. Ne proto, že by každý záznam byl nebezpečný. Protože nepotřebné pracovní kopie zvyšují budoucí zmatek a zbytečně drží informace mimo zdroj pravdy.
+
+Projděte čtyři místa:
+
+- pracovní checklist nebo šablonu;
+- návratovou kartu a pomocné poznámky;
+- dočasné exporty, screenshoty nebo kopie zpráv;
+- odkazy v interním indexu, které mohou lidi vracet do starého kontextu.
+
+U každého místa rozhodněte:
+
+```text
+Zůstává aktivní:
+
+Jde do archivu:
+
+Maže se nebo zkracuje:
+
+Zobecňuje se bez osobních údajů:
+```
+
+Privacy-first uzavření může vypadat takto:
+
+```text
+Aktivní zůstává pouze kanonická formulářová šablona a jednovětý návratový signál. Starou návratovou kartu přesouváme do archivu bez pracovního odkazu. Dočasný export nepřenášíme; závěr je zapsaný zobecněně bez osobních údajů.
+```
+
+Codyho komentář: dobrý úklid není posedlost čistotou. Je to způsob, jak týmu nechat méně míst, kde může omylem najít zastaralou pravdu a tvářit se, že je pořád aktuální.
+
+### Karta uzavření druhé standardní kontroly
+
+```text
+Standard:
+
+Výsledek druhé standardní kontroly:
+
+Uzavírací stav:
+- uzavřít do dlouhodobého klidu
+- uzavřít po úklidu staré mimořádné stopy
+- uzavřít po poslední lokální údržbě pracovní trasy
+- neuzavírat a otevřít novou smyčku
+
+Co se potvrdilo:
+
+Co tímto končí:
+
+Co zůstává aktivní v běžné práci:
+
+Co archivujeme, mažeme nebo zkracujeme:
+
+Co výslovně nepřidáváme:
+
+Návratový signál:
+
+Kde bude standard dál kontrolovaný v běžném rytmu:
+
+Vlastník:
+
+Datum další běžné kontroly:
+```
+
+Karta má být poslední karta zvláštního režimu. Pokud po ní vzniknou ještě tři další "uzavírací" dokumenty, standard se neuzavírá. Jen měníte tvar údržby. V takovém případě se vraťte k otázce, co přesně brání klidu.
+
+### Mini workshop na 8 minut
+
+1. Minuta 1: přečtěte výsledek druhé standardní kontroly.
+2. Minuta 2: vyberte jeden uzavírací stav.
+3. Minuta 3: napište, co se potvrdilo.
+4. Minuta 4: napište, co tímto končí.
+5. Minuta 5: projděte staré pracovní stopy a vyberte, co uklidit.
+6. Minuta 6: napište návratový signál jednou konkrétní větou.
+7. Minuta 7: určete běžné místo další kontroly.
+8. Minuta 8: smažte nebo archivujte odkazy, které by lidi vracely do mimořádného režimu.
+
+Když se tým během workshopu snaží ještě "pro jistotu" přidat další kontrolní schůzku, zeptejte se, jaký návratový signál by ji spustil. Pokud žádný nemá, nejde o kontrolu. Jde o neochotu pustit problém z ruky.
+
+### Checklist uzavření do klidu
+
+- Vybrali jsme jeden uzavírací stav?
+- Umíme říct, co se druhou kontrolou potvrdilo?
+- Víme, která mimořádná péče tím končí?
+- Zůstává aktivní jen aktuální pravidlo, pracovní místo, vlastník a návratový signál?
+- Uklidili jsme staré odkazy, které by vracely tým do minulého kontextu?
+- Nepřidali jsme novou schůzku, tabulku nebo ruční hlídání bez jasného signálu?
+- Pokud je potřeba lokální údržba, je opravdu poslední a na jednom pracovním místě?
+- Novou smyčku otevíráme jen při naplněném návratovém signálu?
+- Zobecnili jsme důkazy tam, kde nepotřebujeme osobní údaje?
+- Je jasné, kde bude standard dál žít v běžném rytmu?
+
+Uzavření druhé standardní kontroly je okamžik, kdy tým přestane dokazovat, že pravidlo funguje, a začne mu znovu věřit jako běžné součásti práce. To není rezignace na kvalitu. Je to kvalitní správa pozornosti. Standard, který prošel kontrolou a umí žít bez mimořádného dohledu, si zaslouží klid. Tým taky.
+
 ## Pracovní log
 
+- 2026-06-23: Doplněna úvodní podkapitola o uzavření druhé standardní kontroly do dlouhodobého klidu: čtyři uzavírací stavy, uzavírací věta, praktický příklad, privacy-first úklid, karta, mini workshop a checklist.
+- 2026-06-23: Doplněna úvodní podkapitola o druhé standardní kontrole po návratu do běžného rytmu: test samostatnosti standardu, porovnání posledního běžného použití, úklid staré mimořádné stopy, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-06-23: Doplněna úvodní podkapitola o uzavření první standardní kontroly po návratu do běžného rytmu: čtyři uzavírací stavy, lokální údržba trasy, drobné zpřesnění, privacy-first úklid podkladů, karta, mini workshop a checklist.
 - 2026-06-23: Doplněna úvodní podkapitola o první standardní kontrole po návratu do běžného rytmu: běžný revizní režim, účel pravidla, pracovní trasa, privacy-first důkazy, karta, mini workshop a checklist.
 - 2026-06-23: Doplněna úvodní podkapitola o uzavření druhého běžného použití po uzavřeném návratu z dlouhodobého klidu: uzavírací stavy, propsání do pracovního místa, privacy-first úklid, karta, mini workshop a checklist.
