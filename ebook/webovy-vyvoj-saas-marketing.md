@@ -245467,8 +245467,167 @@ Když se tým na druhé minutě nedokáže shodnout mezi `poslední lokální zp
 
 Uzavření druhého běžného použití je hotové, když standard přestane být novinka. Buď prostě funguje, nebo má přesně pojmenovanou hranici. V obou případech se vrací do normálního provozu bez zvláštní péče, bez nových tabulek a bez datové stopáže navíc. To je nudný výsledek v tom nejlepším smyslu: pravidlo pomáhá, tým ví co dělat a nikdo nemusí sbírat důkazy jen proto, aby se cítil bezpečněji.
 
+## První běžná správa standardu po uzavření druhého použití
+
+Jakmile standard projde druhým běžným použitím a vrátí se do normálního provozu, další kontrola už nemá dokazovat, že poslední oprava byla dobrá. Má se chovat jako běžná správa pracovního standardu: krátce ověřit, jestli standard pořád pomáhá rozhodnutí, jestli je na správném místě a jestli kolem něj nevznikla nová datová nebo administrativní stopa.
+
+Začněte jednoduchou větou:
+
+```text
+Tento standard už nespravujeme jako čerstvou opravu, ale jako běžné pracovní pravidlo.
+```
+
+Tato věta je důležitá hlavně pro týmovou disciplínu. Pokud při první běžné správě znovu otevřete celou historii vzniku standardu, vracíte ho zpět do režimu zvláštní péče. Historie má být dohledatelná, ale běžná správa má začínat aktuálním pravidlem, aktuálním pracovním místem a aktuálním návratovým signálem.
+
+Praktické otázky:
+
+- Je standard pořád najitelný tam, kde člověk začíná práci?
+- Vede k rozhodnutí bez čtení revizní historie?
+- Neobjevila se lokální výjimka, která by měla vlastníka nebo datum návratu?
+- Nevznikl nový export, ruční seznam, screenshot nebo kontrolní tabulka jen kvůli standardu?
+- Je návratový signál pořád dost konkrétní, aby nespouštěl kontrolu při každém slabém tření?
+
+Pokud na otázky odpovíte ano, správa může skončit jednou větou. Standard drží, další kontrola proběhne v běžném rytmu. To je plnohodnotný výsledek. Ne každá správa má vyrobit změnu.
+
+### Příklad běžné správy
+
+```text
+Standard:
+První kontaktní formulář služby sbírá jen e-mail, stručný kontext a volitelné URL.
+
+Běžný rytmus:
+Měsíční kontrola šablon landing page.
+
+Co jsme zkontrolovali:
+Nová šablona používá stejný formulář, starší aktivní stránka nemá povinný telefon a checklist pro nové stránky odkazuje na kanonickou komponentu.
+
+Výsledek:
+Standard drží.
+
+Co neotevíráme:
+Neotevíráme historii zkracování formuláře, enterprise výjimku ani nový analytický plán.
+
+Privacy-first výsledek:
+Nevzniká nový export poptávek ani měření vyplňování polí. Zůstává jen poznámka, že aktivní šablony standard dodržují.
+```
+
+Všimněte si, že správa nezkoumá všechno. Neprochází celý web, všechny staré kampaně ani všechny historické formuláře. Dívá se na pracovní místa, ze kterých vzniká nová práce nebo kde standard pořád aktivně sbírá data. To stačí. Perfektní inventura je už jiný typ práce a potřebuje vlastní důvod.
+
+### Kdy správa otevře změnu
+
+Běžná správa může otevřít změnu, ale jen pokud najde konkrétní tření. Typicky:
+
+- kanonické místo je správné, ale rozcestník vede na starou verzi;
+- standard funguje pro běžnou službu, ale výjimka nemá datum návratu;
+- šablona dodržuje pravidlo, ale pomocný checklist pořád žádá zbytečný údaj;
+- návratový signál je tak široký, že z něj vzniká pravidelná nervozita místo užitečné kontroly.
+
+V takovém případě neotevírejte celý standard. Otevřete nejmenší pracovní místo:
+
+```text
+Standard drží, ale běžná správa našla tření v:
+
+Upravíme jen:
+
+Neotevíráme:
+
+Ověříme při:
+```
+
+Příklad:
+
+```text
+Standard drží, ale běžná správa našla tření v:
+Checklist nové landing page pořád obsahuje řádek "doplnit telefon, pokud je potřeba rychlý kontakt".
+
+Upravíme jen:
+Checklist. Větu nahradíme pravidlem, že telefon patří až do navazující domluvy, pokud neplatí schválená výjimka.
+
+Neotevíráme:
+Formulář, analytiku ani celý sales proces.
+
+Ověříme při:
+Příští nové landing page.
+```
+
+Tohle je lokální správa, ne nová produktová iniciativa. Malé tření se opraví v místě, kde by se znovu přeneslo do práce.
+
+### Privacy-first správa standardu
+
+Standardy často stárnou právě v datových detailech. Někde zůstane pole, které už nemá účel. Jinde běží event, který kdysi pomohl ověřit změnu. V další šabloně je odkaz na export, který měl být dávno smazaný. Běžná správa má tyto věci chytat dřív, než se z nich stane auditní dluh.
+
+Privacy-first kontrola při správě:
+
+```text
+Jaký údaj standard dovoluje sbírat:
+
+Kde údaj vzniká:
+
+Kdo ho používá:
+
+Kdy má zmizet nebo být anonymizovaný:
+
+Co už dnes neslouží žádnému rozhodnutí:
+```
+
+Pokud na některou otázku neumíte odpovědět jednoduše, nezvyšujte dohled. Zmenšete standard nebo doplňte chybějící hranici. Nejlepší správa standardu často není nová kontrola, ale odstranění starého sběru, který už nikdo neumí obhájit.
+
+Codyho komentář: standard bez správy je jako formulář bez vlastníka. Chvíli vypadá nevinně, pak začne sbírat pole, o kterých nikdo neví, proč existují. A jednoho dne vám někdo řekne "to tam bylo vždycky". To je věta, po které má privacy-first provoz preventivně zpozornět.
+
+### Karta první běžné správy standardu
+
+```text
+Standard:
+
+Kanonické pracovní místo:
+
+Běžný rytmus:
+
+Co jsme zkontrolovali:
+
+Výsledek:
+- drží
+- lokálně upravit
+- zpřesnit výjimku
+- otevřít novou otázku
+
+Pokud lokálně upravit, které jedno místo:
+
+Pokud zpřesnit výjimku, jaká je nová hranice:
+
+Co neotevíráme:
+
+Privacy-first kontrola:
+Jaká data dál sbíráme:
+Jaká data už nesbíráme:
+Co mažeme, anonymizujeme nebo necháváme v původním zdroji:
+
+Návratový signál:
+
+Vlastník:
+
+Další běžná kontrola:
+```
+
+### Checklist první běžné správy
+
+- Spravujeme standard jako běžné pravidlo, ne jako čerstvou opravu?
+- Začali jsme kanonickým pracovním místem místo revizní historií?
+- Je standard pořád najitelný pro člověka, který u jeho vzniku nebyl?
+- Vede standard k rozhodnutí bez dalšího vysvětlování?
+- Zkontrolovali jsme aktivní šablony nebo místa, ze kterých vzniká nová práce?
+- Neotevřeli jsme historické části, které už nemají vliv na provoz?
+- Pokud vznikla změna, je lokální a má jedno pracovní místo?
+- Má každá výjimka vlastníka, důvod a návratový signál?
+- Nevznikl nový tracker, export, screenshot ani ruční seznam jen kvůli správě?
+- Je zapsané, jaká data díky správě dál nesbíráme nebo uklízíme?
+- Zůstává další kontrola v běžném rytmu?
+
+První běžná správa standardu má potvrdit, že standard umí žít bez mimořádné péče. Když drží, nechte ho být. Když drhne, opravte nejbližší pracovní místo. A když ukáže větší problém, otevřete novou otázku s vlastním rozsahem. Tím standard zůstane živý, ale nezačne si pro sebe brát víc pozornosti, než kolik vrací práci.
+
 ## Pracovní log
 
+- 2026-06-23: Doplněna úvodní podkapitola o první běžné správě standardu po uzavření druhého použití: kontrola kanonického místa, lokální správa tření, privacy-first hranice, karta a checklist.
 - 2026-06-23: Doplněna úvodní podkapitola o uzavření druhého běžného použití standardu po převodu do správy: čtyři uzavírací stavy, propsání do pracovního místa, privacy-first úklid dočasných podkladů, karta, mini workshop a checklist.
 - 2026-06-23: Doplněna úvodní podkapitola o druhém běžném použití standardu po převodu do správy: ověření přenositelnosti bez čerstvé paměti, hranice standardu, privacy-first stopová střídmost, karta, mini workshop a checklist.
 - 2026-06-23: Doplněna úvodní podkapitola o uzavření prvního běžného použití standardu po převodu do správy: čtyři uzavírací stavy, hranice proti nové smyčce, privacy-first úklid, karta, mini workshop a checklist.
