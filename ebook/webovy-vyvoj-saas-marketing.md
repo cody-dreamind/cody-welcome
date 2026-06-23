@@ -248302,8 +248302,195 @@ Pokud se během pěti minut neumíte shodnout, neprodlužujte workshop na hodinu
 
 První slabý signál po návratu standardu do dlouhodobého klidu je zkouška disciplíny. Tým má ukázat, že umí reagovat, aniž by znovu spustil mimořádný režim. Dobrý výsledek může být velmi malý: opravený odkaz, archivovaný starý příklad, jedna věta v logu, nebo vědomé rozhodnutí nic neměnit. Když standard zůstane klidný i po prvním zachvění, dlouhodobý klid přestává být přáním a začíná být provozní realitou.
 
+## Uzavření první reakce na slabý signál
+
+První reakce na slabý signál má být krátká. Stejně důležité je ale její uzavření. Bez uzavření zůstane v týmu viset malý otazník: možná se nic nestalo, možná jsme něco přehlédli, možná bychom se k tomu měli ještě vrátit. Takový otazník je nenápadný, ale umí požírat pozornost při každé další podobné situaci.
+
+Uzavření první reakce neznamená, že tým signál shodí ze stolu. Znamená, že si vybere jeden stav a podle něj se zachová. Slabý signál buď zůstane běžnou provozní poznámkou, promění se v lokální údržbu, potvrdí předem popsaný návratový signál, nebo odhalí, že návratový signál byl napsaný příliš mlhavě.
+
+Začněte uzavírací větou:
+
+```text
+První reakci uzavíráme jako:
+```
+
+Potom doplňte jeden z těchto stavů:
+
+- bez změny standardu;
+- lokální údržba cesty ke standardu;
+- úklid staré stopy;
+- otevření nové smyčky podle návratového signálu;
+- zpřesnění návratového signálu bez změny standardu.
+
+Vyberte jen jeden stav. Pokud vyberete dva, pravděpodobně mícháte provozní údržbu a novou změnu. To se občas stane, ale nemá to zůstat v jednom záznamu. Lokální opravu zavřete lokálně. Novou smyčku otevřete jako samostatnou kartu s vlastní otázkou, vlastním pracovním místem a vlastním omezením rozsahu.
+
+### Pět uzavíracích stavů
+
+Stav `bez změny standardu` použijte, když signál nebránil rozhodnutí a neodpovídal návratovému signálu. Typicky někdo položil orientační otázku, našel pravidlo, rozhodl správně a žádná další práce nevznikla. Zápis může být krátký:
+
+```text
+Dotaz na hranici formuláře se vyřešil podle aktuální šablony. Není to návratový signál. Standard neměníme.
+```
+
+Stav `lokální údržba cesty ke standardu` použijte, když pravidlo fungovalo, ale bylo špatně najitelné. Opravte odkaz, název v indexu, popisek v šabloně nebo místo, kde člověk pravidlo hledal. Neotevírejte obsah pravidla jen proto, že cesta k němu byla trochu zarostlá.
+
+Stav `úklid staré stopy` použijte, když slabý signál vznikl ze staré kampaně, staré šablony, starého screenshotu nebo historického příkladu, který se tváří jako aktuální vzor. Tady není potřeba debatovat o pravidle. Je potřeba starou stopu označit, archivovat nebo odstranit z pracovního místa, kde mate lidi.
+
+Stav `otevření nové smyčky podle návratového signálu` použijte, když se skutečně naplnila předem domluvená hranice. V takovém případě první reakci nezvětšujte. Uzavřete ji větou, že návratový signál je naplněný, a další práci přeneste do nové malé smyčky. Tím zůstane čisté, co byl signál a co už je změnová práce.
+
+Stav `zpřesnění návratového signálu bez změny standardu` použijte opatrně. Hodí se, když slabý signál ukáže, že návratový signál je napsaný tak obecně, že tým neumí poznat jeho naplnění. Neznamená to přepsat pravidlo. Znamená to zpřesnit větu typu "když se to bude opakovat" na konkrétnější hranici: "když se ve dvou různých kampaních objeví povinný telefon mimo obchodní formulář".
+
+### Praktický příklad uzavření
+
+```text
+Standard:
+U lead magnetu nesbíráme telefon, pokud telefon nemění další krok pro zájemce.
+
+Slabý signál:
+Nový marketér našel starou landing page, kde telefon povinný byl, a zeptal se, jestli ji má použít jako vzor.
+
+První reakce:
+Aktuální standard rozhodnutí pokrývá. Telefon se nepřidává.
+
+Uzavírací stav:
+Úklid staré stopy.
+
+Nejmenší krok:
+Starou landing page označit v interním indexu jako historický příklad, ne jako aktuální vzor.
+
+Co neotevíráme:
+Neměníme formulářový standard, neotevíráme debatu o lead scoringu, neprocházíme všechny staré kampaně.
+
+Privacy-first hranice:
+Nekopírujeme staré leady ani formulářové exporty. Stačí označení staré stránky a zobecněný záznam v logu.
+```
+
+Takové uzavření je malé, ale důležité. Tým ví, že signál nezmizel v mlze, a zároveň ví, že z něj nevzniká nový projekt. Starý příklad přestane mást lidi a standard dál zůstává v klidu.
+
+Jiný příklad:
+
+```text
+Slabý signál:
+Ve dvou nezávislých kampaních vznikl návrh povinného telefonu u lead magnetu.
+
+Předem popsaný návratový signál:
+Téma znovu otevřeme, pokud se ve dvou různých kampaních objeví návrh povinného telefonu mimo jasně označený obchodní formulář.
+
+Uzavírací stav:
+Otevření nové smyčky podle návratového signálu.
+
+Nejmenší další krok:
+Otevřít samostatnou kartu k formulářové hranici pro kampaně. První pracovní místo je návrh formuláře, ne celý marketingový funnel.
+
+Co neotevíráme:
+Neřešíme obecnou kvalitu všech leadů ani přestavbu kampaní.
+
+Privacy-first hranice:
+Použijeme jen anonymizované popisy dvou návrhů. Nepřenášíme osobní údaje zájemců ani historické exporty.
+```
+
+Tady by bylo špatně tvářit se, že jde jen o další drobný dotaz. Předem domluvená hranice se naplnila, takže uzavření první reakce má být jasné: lokální údržba nestačí, otevírá se nová malá smyčka. Malá je důležité slovo. Návratový signál není pozvánka k tomu, aby se znovu otevřelo všechno, co se kdy kolem formulářů řešilo.
+
+### Co propsat do pracovního místa
+
+Po uzavření první reakce udělejte jednu drobnou aktualizaci tam, kde bude další člověk pracovat. Ne tam, kde se o problému diskutovalo. Pokud signál vznikl v checklistu landing page, patří drobná oprava do checklistu. Pokud vznikl v interním indexu, patří do indexu. Pokud vznikl ve staré šabloně, patří označení do šablony nebo k jejímu odkazu.
+
+Uzavírací záznam by měl obsahovat:
+
+```text
+Kde se bude další člověk s pravidlem potkávat:
+
+Co tam uvidí jinak:
+
+Která stará stopa už ho nemá mást:
+
+Kdy se téma opravdu znovu otevře:
+```
+
+Tento zápis brání dvěma častým chybám. První chyba je opravit jen záznam v logu, který nikdo při práci neuvidí. Druhá chyba je opravit pracovní místo tak široce, že si tým nechtěně vytvoří novou údržbovou větev. Dobrá oprava je vidět právě tam, kde vzniklo tření, a nikde jinde zbytečně nekřičí.
+
+### Privacy-first uzavření
+
+Uzavření reakce je dobrý moment na úklid datové stopy. Slabý signál často vytvoří drobné dočasné artefakty: odkaz na starou stránku, kopii formuláře, screenshot, poznámku z chatu, výřez zákaznické zprávy nebo rychlou tabulku pro porovnání. Pokud už jste vybrali uzavírací stav, projděte tyto artefakty a zeptejte se:
+
+```text
+Potřebujeme tuto konkrétní stopu pro další rozhodnutí, nebo stačí zobecněný závěr?
+```
+
+U stavu `bez změny standardu` většinou stačí jedna věta v logu. U lokální údržby stačí odkaz na opravené pracovní místo. U úklidu staré stopy stačí záznam, co bylo označeno nebo archivováno. U nové smyčky stačí přenést jen minimum důkazů, které vysvětluje, proč se smyčka otevírá.
+
+Nejhorší varianta je nechat po slabém signálu víc dat než před ním. To je provozně drahé a privacy-first špatně. Standard má po uzavření buď zůstat klidný, nebo se otevřít v nové, omezené smyčce. Nemá za sebou nechávat drobný sklad dočasných důkazů.
+
+Codyho komentář: pokud kvůli jednomu slabému signálu vznikne víc dokumentace než kvůli původnímu standardu, systém vám poslal jiný signál. Ne o formuláři. O tom, že máte příliš velkou chuť vyrábět papírování. Papírování je někdy užitečné, ale tady má sedět vzadu a být zticha.
+
+### Karta uzavření první reakce
+
+```text
+Standard:
+
+Slabý signál:
+
+Předem popsaný návratový signál:
+
+Naplnil se návratový signál?
+- ano
+- ne
+- nevíme
+
+Uzavírací stav:
+- bez změny standardu
+- lokální údržba cesty ke standardu
+- úklid staré stopy
+- otevření nové smyčky podle návratového signálu
+- zpřesnění návratového signálu bez změny standardu
+
+Uzavírací věta:
+
+Nejbližší pracovní místo:
+
+Co se v pracovním místě mění:
+
+Co výslovně neotevíráme:
+
+Co uklízíme nebo zobecňujeme:
+
+Privacy-first hranice:
+
+Kdy se téma znovu otevře:
+```
+
+Karta má být krátká. Pokud ji neumíte vyplnit bez rozsáhlé analýzy, pravděpodobně už nejste v uzavření první reakce, ale v nové smyčce. To není problém, jen to pojmenujte správně a oddělte od původního záznamu.
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: přečtěte slabý signál a předem popsaný návratový signál.
+2. Minuta 2: rozhodněte, jestli se návratový signál naplnil.
+3. Minuta 3: vyberte jeden uzavírací stav.
+4. Minuta 4: napište uzavírací větu.
+5. Minuta 5: určete nejbližší pracovní místo, kam patří drobná oprava nebo odkaz na novou smyčku.
+6. Minuta 6: napište, co výslovně neotevíráte.
+7. Minuta 7: smažte, archivujte nebo zobecněte dočasné podklady, které už nejsou potřeba.
+
+Když se tým neshodne na stavu, neřešte to hlasováním. Vraťte se k předem popsanému návratovému signálu. Buď se naplnil, nebo ne. Pokud to z věty nejde poznat, výsledek není "uděláme velký audit". Výsledek je "zpřesníme návratový signál a standard zatím neměníme", pokud dnešní rozhodnutí šlo bezpečně udělat.
+
+### Checklist uzavření první reakce
+
+- Vybrali jsme přesně jeden uzavírací stav?
+- Napsali jsme uzavírací větu?
+- Rozlišili jsme lokální údržbu od otevření nové smyčky?
+- Pokud se návratový signál naplnil, otevřeli jsme novou smyčku odděleně?
+- Pokud se nenaplnil, nechali jsme standard v klidu?
+- Opravujeme nejbližší pracovní místo, ne abstraktní dokument někde bokem?
+- Zapsali jsme, co výslovně neotevíráme?
+- Uklidili jsme starou stopu, pokud právě ona vyvolala signál?
+- Nepřenášíme do další práce osobní údaje, screenshoty nebo exporty bez jasného účelu?
+- Zůstává jasné, kdy se téma opravdu znovu otevře?
+
+Uzavření první reakce na slabý signál chrání standard před dvěma extrémy. Na jedné straně před ignorováním drobného tření, které by se mohlo časem vrátit. Na druhé straně před přehnanou péčí, která znovu otevře všechno při prvním šustnutí. Dobře uzavřená reakce nechá po sobě jen to, co další člověk opravdu potřebuje: jasný stav, opravené pracovní místo, uklizenou stopu a hranici pro skutečný návrat.
+
 ## Pracovní log
 
+- 2026-06-23: Doplněna úvodní podkapitola o uzavření první reakce na slabý signál: uzavírací stavy, praktické příklady, propsání do pracovního místa, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-23: Doplněna úvodní podkapitola o prvním slabém signálu po návratu standardu do dlouhodobého klidu: rozlišení slabého a návratového signálu, tři rychlé kontroly, praktické příklady, privacy-first reakce, karta, mini workshop a checklist.
 - 2026-06-23: Doplněna úvodní podkapitola o uzavření druhé standardní kontroly do dlouhodobého klidu: čtyři uzavírací stavy, uzavírací věta, praktický příklad, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-23: Doplněna úvodní podkapitola o druhé standardní kontrole po návratu do běžného rytmu: test samostatnosti standardu, porovnání posledního běžného použití, úklid staré mimořádné stopy, privacy-first kontrola, karta, mini workshop a checklist.
