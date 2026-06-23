@@ -246880,8 +246880,188 @@ Pokud tým v minutě 6 vybere víc výsledků najednou, rozdělte je. Nejprve uz
 
 První běžné použití po uzavřeném návratu je malá zkouška soběstačnosti. Standard nemá dokazovat, že je dokonalý. Má ukázat, že běžný člověk ve správné situaci najde pravidlo, rozhodne podle něj a nezvětší datovou stopu jen proto, že se kdysi řešil podobný problém. Když to zvládne, nechte ho být. Klid je taky výstup.
 
+## Uzavření prvního běžného použití po uzavřeném návratu z dlouhodobého klidu
+
+Po prvním běžném použití je potřeba udělat ještě jeden malý krok: uzavřít výsledek tak, aby z něj nevznikla nová mimořádná péče. Tohle je nenápadné místo, kde se standardy často znovu rozjedou do šířky. Někdo napíše "fungovalo", někdo jiný doplní "ještě bychom mohli", třetí člověk přidá nový příklad a za týden je z klidného pravidla další malý projekt. Přesně ten typ projektu, který si tým vyrobí sám, i když má kalendář plný už bez něj.
+
+Uzavření prvního běžného použití má odpovědět na jednoduchou otázku:
+
+```text
+Může se standard po tomto použití vrátit do běžného rytmu beze změny, s jednou lokální opravou, nebo potřebuje znovu otevřít návratovou smyčku?
+```
+
+Odpověď musí být konkrétní. Nestačí "vypadá to dobře" ani "ještě uvidíme". Dobré uzavření řekne, co se stalo v jednom pracovním místě, co se přenáší do standardu, co se nepřenáší a kdy se k tématu vrátit. Cílem není vytěžit z prvního použití maximum poznámek. Cílem je udržet standard použitelný.
+
+Začněte větou:
+
+```text
+První běžné použití uzavíráme takto:
+```
+
+Například:
+
+```text
+První běžné použití uzavíráme takto: výchozí formulář bez telefonu fungoval pro konzultační sprint bez další podpory. Do šablony doplňujeme jen odkaz na kanonické pravidlo a auditní výjimku nepřenášíme do ostatních landing pages.
+```
+
+Tahle věta je krátká, ale dělá tři užitečné věci. Potvrzuje výsledek, omezuje rozsah změny a brání tomu, aby se čerstvá výjimka stala novým nepsaným pravidlem.
+
+### Čtyři uzavírací stavy
+
+Po prvním běžném použití vyberte jeden ze čtyř stavů:
+
+- Uzavřít beze změny: standard byl najitelný, rozhodnutelný a datově střídmý.
+- Uzavřít s lokální opravou: standard platí, ale jedno pracovní místo potřebuje odkaz, název nebo krátkou nápovědu.
+- Vrátit k uzavření návratu: použití znovu otevřelo stejnou nejistotu, kterou měl předchozí návrat vyřešit.
+- Otevřít nové téma stranou: objevila se jiná otázka, která nepatří do uzavření tohoto použití.
+
+Stav `uzavřít beze změny` je nejlepší nudný výsledek. Zapište jednu větu, návratový signál a skončete. Nepřidávejte další příklady jen proto, že máte čerstvou pozornost týmu. Pokud pravidlo fungovalo, další editace by mohla zvýšit šum.
+
+Stav `uzavřít s lokální opravou` použijte, když problém nebyl v pravidle, ale v jeho pracovním umístění. Typicky chyběl odkaz ze šablony, název v indexu byl starý, checklist používal jiný pojem než kanonická karta nebo člověk musel dohledat pravidlo přes chat. Oprava má být malá a viditelná v místě použití.
+
+Stav `vrátit k uzavření návratu` použijte, když se běžné použití znovu opřelo o stejnou mimořádnou péči jako původní návrat. To není důvod přidat další poznámku na konec standardu. Je to signál, že předchozí uzavření nedodalo dost jasné rozhodovací pravidlo, nebo že se do něj nepřenesl správný výstup.
+
+Stav `otevřít nové téma stranou` chrání rozsah. Když se při použití objeví jiná užitečná otázka, napište ji jako samostatný podnět s vlastní stop podmínkou. Nelepte ji na uzavření prvního použití jen proto, že vznikla ve stejné místnosti.
+
+### Praktický příklad
+
+```text
+Standard:
+Výchozí landing page pro konzultační sprint používá kontaktní formulář bez telefonu.
+
+První běžné použití:
+Produktový tým připravil novou landing page a použil formulář bez telefonu. Pravidlo našel přes starou poznámku v rozhodovacím logu, ne přes šablonu landing page.
+
+Uzavírací stav:
+Uzavřít s lokální opravou.
+
+Lokální oprava:
+Do šablony landing page doplnit odkaz na kanonické pravidlo "Telefon ve formuláři" a jednu větu: "Telefon patří jen do auditní výjimky s vysvětleným účelem hovoru."
+
+Co nepřenášíme:
+Nepřenášíme auditní výjimku jako výchozí vzor pro konzultační sprint.
+
+Privacy-first výsledek:
+Neotevíráme staré poptávky ani zákaznické zprávy. Stačí záznam, že tým pravidlo našel přes špatné místo.
+
+Návratový signál:
+Další člověk při přípravě landing page znovu nenajde pravidlo přes šablonu, nebo začne přidávat telefon bez jasného účelu.
+```
+
+Všimněte si, že oprava není "přepsat formulářovou strategii". Oprava je jeden odkaz a jedna věta v pracovním místě. Standard tak získá lepší najitelnost bez toho, aby tým otevřel širší diskusi o všech formulářích.
+
+### Co propsat a co nechat být
+
+Do kanonického místa propsujte jen výsledek, který pomůže příštímu běžnému použití. Typicky:
+
+- stabilní rozhodovací větu;
+- odkaz na správné pravidlo;
+- název výjimky;
+- hranici, kdy výjimku nepřenášet;
+- návratový signál.
+
+Do kanonického místa nepatří celý příběh prvního použití, seznam všech nápadů z debaty ani kopie starých důkazů. Tyto věci mohou zůstat v pracovním záznamu, pokud mají účel, ale nemají zatěžovat člověka, který za měsíc potřebuje jen udělat správné rozhodnutí.
+
+Krátký filtr:
+
+```text
+Pomůže tato věta příštímu člověku rozhodnout bez dalšího vysvětlování?
+```
+
+Pokud ne, nepatří do standardu. Možná patří do poznámek, možná do backlogu, možná nikam. Všechno nemusí přežít jen proto, že to někdo napsal.
+
+### Privacy-first uzavření
+
+Uzavření prvního běžného použití je dobrý moment pro malý datový úklid. Pokud jste při ověření otevřeli starší podklady, zapište, co z nich zůstává a co se zavírá. Často stačí zobecněný závěr:
+
+```text
+Zůstává závěr: pravidlo bylo najitelné jen přes starý rozhodovací log.
+Nezůstávají kopie screenshotů, zákaznických zpráv ani exporty.
+```
+
+Privacy-first provoz není jen o tom, jaké nástroje používáte. Je i o tom, jestli staré pracovní stopy nezůstávají v oběhu ze zvyku. Po uzavření prvního použití má být jasné, kde žije pravidlo, kde žije stručný záznam výsledku a které pomocné podklady už nemají dál cestovat týmem.
+
+Pokud k rozhodnutí stačila aktuální pracovní situace, napište to výslovně. Je to drobný, ale užitečný zvyk:
+
+```text
+K uzavření stačila aktuální pracovní situace a kanonické pravidlo. Starou historii jsme neotevírali.
+```
+
+Takový zápis posiluje normu, že běžné použití nemá automaticky vytahovat stará data.
+
+### Karta uzavření prvního běžného použití
+
+```text
+Standard:
+
+Uzavřený návrat:
+
+První běžné použití:
+
+Výsledek použití:
+- najitelné
+- rozhodnutelné
+- datově střídmé
+- chybí odkaz
+- chybí rozhodovací hrana
+- návrat nebyl skutečně uzavřený
+
+Uzavírací stav:
+- uzavřít beze změny
+- uzavřít s lokální opravou
+- vrátit k uzavření návratu
+- otevřít nové téma stranou
+
+Uzavírací věta:
+
+Co se propisuje do pracovního místa:
+
+Co se výslovně nepropisuje:
+
+Co výslovně neměníme:
+
+Privacy-first úklid:
+
+Návratový signál:
+
+Vlastník:
+
+Datum další kontroly:
+```
+
+Karta má být krátká. Pokud se z ní stává zápis na dvě stránky, pravděpodobně do ní taháte nové téma, starou historii nebo debatu, která patří jinam. Uzavření prvního použití má standard uklidnit, ne mu přilepit další batoh.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte větu z prvního běžného použití.
+2. Minuta 2: vyberte jeden uzavírací stav.
+3. Minuta 3: napište uzavírací větu.
+4. Minuta 4: určete, co se propíše do pracovního místa.
+5. Minuta 5: napište, co se výslovně nemění a jak se uklidí data.
+6. Minuta 6: nastavte návratový signál.
+
+Když se tým v minutě 2 hádá mezi lokální opravou a novým tématem, zvolte menší krok pro uzavření a nové téma oddělte. Jedna karta nemá nést dva druhy práce. Jinak se v ní míchá uzavírání, plánování a přání, což je výborný recept na rozhodovací guláš.
+
+### Checklist uzavření prvního běžného použití
+
+- Máme popsané jedno konkrétní první běžné použití?
+- Vybrali jsme přesně jeden uzavírací stav?
+- Pokud standard běžel klidně, nepřidáváme zbytečnou úpravu?
+- Pokud chyběl odkaz nebo název, opravujeme jen pracovní místo?
+- Pokud chyběla rozhodovací hrana, víme, jestli patří do tohoto standardu?
+- Pokud se vrátila stejná mimořádná péče, vracíme se ke kartě uzavření návratu?
+- Oddělili jsme nové téma od uzavření prvního použití?
+- Je napsané, co se propisuje do kanonického místa?
+- Je napsané, co se výslovně nepropisuje?
+- Neotevíráme staré osobní údaje, exporty nebo screenshoty bez jasného důvodu?
+- Pokud jsme pomocné podklady otevřeli, víme, co se po uzavření smaže, zavře nebo anonymizuje?
+- Má standard po uzavření jasný návratový signál?
+
+Dobré uzavření prvního běžného použití je skoro neviditelné. Neoslavuje standard, nevyrábí nový projekt a nesbírá další data do zásoby. Jen potvrdí, že pravidlo po návratu obstálo v běžné práci, případně opraví jedno místo, které mu bránilo v klidném použití. To stačí. Ne každý dobrý výsledek potřebuje fanfáry; některé potřebují jen čistý zápis a zavřené složky.
+
 ## Pracovní log
 
+- 2026-06-23: Doplněna úvodní podkapitola o uzavření prvního běžného použití po uzavřeném návratu z dlouhodobého klidu: čtyři uzavírací stavy, lokální oprava, propsání do pracovního místa, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-23: Doplněna úvodní podkapitola o uzavření prvního návratu po dlouhodobém klidu: čtyři uzavírací stavy, lokální oprava, doplnění hrany, oddělení nového tématu, privacy-first uzavření, karta, mini workshop a checklist.
 - 2026-06-23: Doplněna úvodní podkapitola o prvním návratovém signálu po dlouhodobém klidu: konkrétní situace, čtyři první otázky, výsledky návratu, privacy-first neotevírání starých stop, karta, mini workshop a checklist.
 - 2026-06-23: Doplněna úvodní podkapitola o převodu uzavřené správy standardu do dlouhodobého klidu: aktivní prvky klidu, podmínky kdy klid nespouštět, privacy-first úklid, karta, mini workshop a checklist.
