@@ -247059,8 +247059,171 @@ Když se tým v minutě 2 hádá mezi lokální opravou a novým tématem, zvolt
 
 Dobré uzavření prvního běžného použití je skoro neviditelné. Neoslavuje standard, nevyrábí nový projekt a nesbírá další data do zásoby. Jen potvrdí, že pravidlo po návratu obstálo v běžné práci, případně opraví jedno místo, které mu bránilo v klidném použití. To stačí. Ne každý dobrý výsledek potřebuje fanfáry; některé potřebují jen čistý zápis a zavřené složky.
 
+## Druhé běžné použití po uzavřeném návratu z dlouhodobého klidu
+
+První běžné použití po uzavřeném návratu říká, jestli standard po dlouhém klidu vůbec obstál mimo mimořádnou péči. Druhé běžné použití říká něco trochu jiného: jestli standard funguje i bez čerstvé paměti prvního ověření. To je důležitý rozdíl. První použití má často v týmu ještě dozvuk. Lidé si pamatují, že se něco nedávno řešilo, vědí, kde hledat kartu, a dávají si větší pozor. Druhé použití už víc připomíná normální provoz.
+
+Druhé běžné použití proto neberte jako další audit. Berte ho jako krátkou kontrolu přenositelnosti. Standard má znovu projít reálnou situací, ale tentokrát bez toho, aby se opíral o čerstvé vysvětlování, mimořádnou připomínku nebo člověka, který u návratu byl od začátku.
+
+Začněte otázkou:
+
+```text
+Použil by člověk standard stejně, kdyby nevěděl, že se nedávno uzavíral návrat po dlouhém klidu?
+```
+
+Pokud odpověď zní ano, standard se opravdu vrací do běžného života. Pokud ne, ještě nejspíš stojí na paměti týmu, ne na svém pracovním místě. A paměť týmu je skvělá věc, dokud se někdo neodhlásí na dovolenou, nepřijde nový člověk nebo se stejná situace objeví v pátek odpoledne. Pak je najednou jasné, že "všichni víme" znamenalo hlavně "někdo to zatím držel v hlavě".
+
+### Co druhé použití ověřuje
+
+Druhé běžné použití sleduje čtyři signály:
+
+- Přenositelnost: pravidlo použije i člověk, který nebyl u původního návratu.
+- Samostatnost: pracovní místo obsahuje dost informací bez dohledávání staré historie.
+- Stabilitu hranice: lokální výjimka se nerozšíří do nového výchozího pravidla.
+- Datovou střídmost: použití znovu neotevírá staré podklady ani nevyrábí nové měření.
+
+Přenositelnost je nejdůležitější. Pokud druhé použití zvládne jen původní vlastník, pravidlo možná funguje, ale není dobře předané. To není důvod k velké reorganizaci. Často stačí zkrátit rozhodovací větu, přidat odkaz do šablony nebo doplnit příklad situace, kdy výjimku nepřenášet.
+
+Samostatnost znamená, že člověk nemusí číst celý příběh návratu. Má najít aktuální pravidlo, hranici a případný návratový signál. Historie má být dohledatelná, ale nemá být povinným čtením pro běžné použití.
+
+Stabilita hranice chrání standard před pomalým rozléváním. Pokud první použití přidalo lokální opravu, druhé použití ověřuje, jestli zůstala lokální. Typicky: auditní landing page smí mít volitelné telefonní pole, ale konzultační sprint ho dál nepřebírá jako výchozí formulář.
+
+Datová střídmost je poslední pojistka. Pokud druhé použití potřebuje staré exporty, screenshoty nebo zákaznické zprávy, standard se pořád neopírá o dost jasnou pracovní větu. Běžné použití má stát na pravidle a aktuální situaci, ne na historickém kufru podkladů.
+
+### Praktický příklad
+
+```text
+Standard:
+Telefon ve formuláři se nesbírá ve výchozím prvním kroku.
+
+Uzavřený návrat po dlouhodobém klidu:
+Auditní landing page může mít volitelné telefonní pole, pokud vysvětluje účel kvalifikačního hovoru. Ostatní landing pages výjimku nepřebírají.
+
+První běžné použití:
+Konzultační sprint použil formulář bez telefonu a do šablony se doplnil odkaz na kanonické pravidlo.
+
+Druhé běžné použití:
+Nový člověk připravuje landing page pro workshop. V šabloně najde odkaz na pravidlo, použije formulář bez telefonu a zapíše, že auditní výjimka se nepřenáší, protože workshop nemá telefonický kvalifikační krok.
+
+Výsledek:
+Standard je přenositelný. Není potřeba otevírat staré poptávky, auditní výjimku ani nové měření formuláře.
+```
+
+Tady je důležité, že druhé použití nezkoumá, jestli by telefon někdy mohl být užitečný. Mohlo by být užitečné skoro všechno, když se na to díváte dost dlouho. Druhé použití se ptá jen na to, jestli standard funguje v další běžné situaci a drží hranici bez čerstvé asistence.
+
+### Čtyři výsledky druhého použití
+
+Po druhém běžném použití vyberte jeden ze čtyř výsledků:
+
+- Standard je přenositelný: pravidlo fungovalo bez čerstvé nápovědy a zůstává v běžném rytmu.
+- Chybí poslední lokální dočištění: pravidlo drží, ale jedno místo pořád potřebuje krátkou opravu.
+- Hranice se rozlévá: výjimka nebo lokální oprava se začíná používat jako obecné pravidlo.
+- Návratová smyčka se musí otevřít znovu: stejný problém se vrátil podle předem zapsaného signálu.
+
+Výsledek `standard je přenositelný` je konec zvláštní pozornosti. Zapište krátkou větu a nechte standard v běžném rytmu. Nepřidávejte třetí kontrolu jen proto, že druhá dopadla dobře. To by byl krásný příklad toho, jak se z úspěchu vyrábí práce navíc.
+
+Výsledek `poslední lokální dočištění` použijte jen pro jedno konkrétní pracovní místo. Například šablona má správný odkaz, ale název odkazu je pořád starý. Opravte název a uzavřete. Pokud se najdou dvě další místa, už nejde o poslední lokální dočištění, ale o širší vzor.
+
+Výsledek `hranice se rozlévá` je varování. Neznamená automaticky, že standard je špatný. Znamená, že lokální výjimka není dost jasně označená, nebo že pracovní místo neříká, kdy ji nepoužít. První reakce má být zpřesnit hranici, ne přepsat celé pravidlo.
+
+Výsledek `návratová smyčka se musí otevřít znovu` používejte jen tehdy, když se naplnil návratový signál. Ne když se objevilo drobné tření. Ne když někdo navrhl lepší formulaci. Návratová smyčka je dražší režim práce a má si ho zasloužit konkrétním důkazem.
+
+### Privacy-first kontrola
+
+Druhé běžné použití má být ještě datově lehčí než první. Pokud standard opravdu funguje, nepotřebujete žádné nové surové podklady. Stačí zapsat zobecněný výsledek:
+
+```text
+Druhé běžné použití proběhlo bez otevření staré historie, bez nových údajů ve formuláři a bez přenosu auditní výjimky do jiného typu landing page.
+```
+
+Když druhé použití ukáže problém, držte důkaz co nejblíž původnímu systému. Neexportujte zákaznické zprávy do nové karty, pokud stačí věta: "nový člověk nenašel pravidlo přes šablonu". Neukládejte screenshot formuláře, pokud stačí odkaz na kanonické místo a popis opravy. Data mají pomáhat rozhodnout, ne zdobit zápis.
+
+Privacy-first minimum:
+
+```text
+Zůstává:
+stav druhého použití, případná lokální oprava, návratový signál.
+
+Nezůstává:
+kopie starých podkladů, screenshoty, osobní údaje, pomocné exporty a nové sledování použití pravidla.
+```
+
+Pokud se hranice rozlévá, nesnažte se ji hlídat novým trackerem. Zpřesněte pravidlo tam, kde člověk rozhoduje. Lepší věta v šabloně je často účinnější než nový report. A navíc neposílá data na výlet, což je v Evropě příjemně nudná, ale správná vlastnost.
+
+### Karta druhého běžného použití
+
+```text
+Standard:
+
+Uzavřený návrat po dlouhodobém klidu:
+
+První běžné použití uzavřeno stavem:
+
+Druhé běžné použití:
+
+Kdo pravidlo použil:
+- role, ne nutně jméno
+
+Našel člověk pravidlo bez čerstvé nápovědy?
+- ano / ne / částečně
+
+Použil pravidlo bez otevření staré historie?
+- ano / ne / částečně
+
+Zůstala výjimka nebo lokální oprava ve své hranici?
+- ano / ne / částečně
+
+Výsledek:
+- standard je přenositelný
+- poslední lokální dočištění
+- hranice se rozlévá
+- otevřít návratovou smyčku
+
+Nejmenší další krok:
+
+Co výslovně neměníme:
+
+Privacy-first výsledek:
+
+Návratový signál:
+
+Vlastník:
+
+Datum další běžné kontroly:
+```
+
+Kartu použijte jen v rozsahu, který pomůže příštímu rozhodnutí. Když standard prošel bez tření, stačí z ní jedna krátká věta v pracovním logu standardu. Celou kartu vytahujte hlavně tehdy, když potřebujete rozlišit lokální dočištění od rozlévající se hranice.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte závěr prvního běžného použití.
+2. Minuta 2: popište druhé běžné použití jednou větou.
+3. Minuta 3: ověřte, jestli pravidlo fungovalo bez čerstvé nápovědy.
+4. Minuta 4: zkontrolujte, jestli se výjimka nerozšířila mimo hranici.
+5. Minuta 5: vyberte jeden ze čtyř výsledků.
+6. Minuta 6: zapište nejmenší další krok nebo potvrďte návrat do běžného rytmu.
+
+Když workshop začne řešit, jestli by šlo standard vylepšit obecně, vraťte se k druhému použití. Otázka není "co všechno by šlo udělat lépe". Otázka je "fungovalo pravidlo podruhé bez čerstvé podpory". To je menší otázka. Proto je užitečná.
+
+### Checklist druhého běžného použití
+
+- Máme popsané jedno konkrétní druhé běžné použití?
+- Použil pravidlo člověk nebo role bez čerstvého vysvětlování?
+- Bylo kanonické místo najitelné přímo z pracovní trasy?
+- Nebylo potřeba otevírat staré exporty, screenshoty nebo zákaznické zprávy?
+- Zůstala lokální výjimka ve své hranici?
+- Rozlišili jsme poslední lokální dočištění od širšího rozlévání hranice?
+- Pokud standard fungoval, nepřidáváme další mimořádnou kontrolu?
+- Pokud hranice selhala, zpřesňujeme pracovní větu dřív než přidáme měření?
+- Je jasné, co se výslovně nemění?
+- Zůstává privacy-first záznam stručný a bez osobních detailů?
+- Má standard po druhém použití jasný návratový signál?
+
+Druhé běžné použití je dobrý konec návratu po dlouhodobém klidu. Ne proto, že by standard navždy zabetonovalo, ale proto, že ukáže, že pravidlo už nepotřebuje čerstvé držení za ruku. Když projde, vraťte ho do normálního rytmu a přestaňte kolem něj chodit po špičkách. Standard má sloužit práci, ne sbírat péči jako kancelářská rostlina.
+
 ## Pracovní log
 
+- 2026-06-23: Doplněna úvodní podkapitola o druhém běžném použití po uzavřeném návratu z dlouhodobého klidu: přenositelnost bez čerstvé nápovědy, stabilita hranice, čtyři výsledky, privacy-first minimum dat, karta, mini workshop a checklist.
 - 2026-06-23: Doplněna úvodní podkapitola o uzavření prvního běžného použití po uzavřeném návratu z dlouhodobého klidu: čtyři uzavírací stavy, lokální oprava, propsání do pracovního místa, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-23: Doplněna úvodní podkapitola o uzavření prvního návratu po dlouhodobém klidu: čtyři uzavírací stavy, lokální oprava, doplnění hrany, oddělení nového tématu, privacy-first uzavření, karta, mini workshop a checklist.
 - 2026-06-23: Doplněna úvodní podkapitola o prvním návratovém signálu po dlouhodobém klidu: konkrétní situace, čtyři první otázky, výsledky návratu, privacy-first neotevírání starých stop, karta, mini workshop a checklist.
