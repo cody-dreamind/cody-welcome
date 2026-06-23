@@ -3776,6 +3776,186 @@ Pokud se během pěti minut začnete bavit o dalších stránkách, dalších e-
 
 První běžné ověření je dobré právě tím, že je nenápadné. Změna se potká s realitou, tým zapíše krátký závěr a práce se vrátí do normálního rytmu. Když se nic nerozbije a není potřeba další mimořádná péče, neznamená to, že ověření bylo zbytečné. Znamená to, že malý krok byl opravdu malý, uzavřený a použitelný. Což je v praxi podezřele vzácná kombinace.
 
+## Uzavření prvního běžného ověření malého kroku
+
+První běžné ověření je potřeba zavřít stejně pečlivě jako samotný malý krok. Jinak se z něj stane tichý meziúkol: někdo si pamatuje, že se mělo něco sledovat, někdo čeká na další příklad a někdo začne při každém podobném kontaktu sbírat víc informací, než bylo potřeba. Ověření pak sice vzniklo kvůli zmenšení nejistoty, ale samo vytvoří další nejistotu v provozu. Hezký obrat, jen trochu drahý.
+
+Uzavření ověření odpovídá na čtyři otázky:
+
+- Nastala běžná situace, ve které šlo krok ověřit?
+- Jaký výsledek ověření opravdu nastal?
+- Co se tím mění v pracovním místě?
+- Kdy se k tématu smíme vrátit znovu?
+
+Začněte větou:
+
+```text
+První běžné ověření uzavíráme stavem:
+```
+
+Potom vyberte jeden stav:
+
+- potvrzeno v běžném provozu;
+- potvrzeno s jedním lokálním dočištěním;
+- nepotvrzeno, problém leží jinde;
+- neuzavřeno, protože běžná situace ještě nenastala.
+
+Stav `potvrzeno v běžném provozu` znamená, že změna se použila bez mimořádné péče a stejný návratový signál se nevrátil. V takové chvíli nepřidávejte další kontrolu jen proto, že by se "hodilo mít jistotu". Jistota v produktu roste používáním, ne nekonečným zapisováním.
+
+Stav `potvrzeno s jedním lokálním dočištěním` znamená, že krok funguje, ale jedno místo potřebuje drobnou úpravu ve stejné hranici. Například potvrzovací zpráva už dobře odděluje audit od implementace, ale chybí v ní konkrétní očekávání další odpovědi. Dočištění smí upravit stejnou zprávu. Nesmí se proměnit v redesign celé obchodní cesty.
+
+Stav `nepotvrzeno, problém leží jinde` je platný výsledek, ne trapná mezistanice. Pokud ověření ukáže, že upravený e-mail nebyl zdroj nejasnosti, zavřete tuto větev. Nové místo otevřete jen tehdy, když má vlastní návratový signál a hranici.
+
+Stav `neuzavřeno, protože běžná situace ještě nenastala` používejte střídmě. Neznamená to, že tým má začít situaci uměle vyrábět. Znamená to jen, že ověření zatím nemá důkaz. Nastavte jednoduchou stop podmínku: například "vrátíme se při další relevantní poptávce, nejpozději při běžném měsíčním review; pokud situace nenastane, karta se zavře bez závěru".
+
+### Praktický příklad
+
+```text
+Uzavřený malý krok:
+Potvrzovací zpráva po poptávkovém formuláři nově říká, že audit končí předáním nálezu a navazující implementace se domlouvá samostatně.
+
+Běžná situace:
+Přišla první relevantní poptávka po úpravě zprávy.
+
+Výsledek:
+Zájemce v odpovědi rozlišil audit a navazující implementaci bez dalšího doptávání.
+
+První běžné ověření uzavíráme stavem:
+Potvrzeno v běžném provozu.
+
+Co se mění:
+Text zůstává ve zprávě. Další kontrolu neplánujeme.
+
+Co zůstává zavřené:
+Ceník, stránka služby, formulářová pole, obchodní skript a nové měření.
+
+Návratový signál:
+Téma otevřeme znovu až ve chvíli, kdy se stejná nejasnost objeví u další relevantní poptávky nebo při běžném review obchodních poznámek.
+```
+
+Tento zápis je dostatečně krátký, aby ho tým opravdu použil, a dostatečně konkrétní, aby se neztratil význam. Neobsahuje osobní údaje zájemce, necituje e-mail a nepřenáší obchodní poznámky mimo jejich původní místo. Přesto říká, proč změna zůstává.
+
+### Co propsat po uzavření
+
+Po uzavření ověření se má propsat jen to, co bude užitečné při další práci:
+
+- stav ověření;
+- případné lokální dočištění;
+- návratový signál pro další otevření;
+- potvrzení, že mimořádná péče končí.
+
+Nepropsujte celé pozadí. Nepřidávejte "pro jistotu" seznam všech poptávek, screenshoty CRM ani export podpory. Pokud další člověk potřebuje pochopit rozhodnutí, má najít závěr. Pokud potřebuje auditovat původní podklad, má jít do původního systému s odpovídajícím oprávněním. To je privacy-first rozdíl mezi týmovou pamětí a kopírováním dat do každé poznámky.
+
+Krátká uzavírací věta:
+
+```text
+Ověření potvrzuje, že změna funguje v běžném provozu; mimořádné sledování končí a další otevření vyžaduje nový návratový signál.
+```
+
+Pokud je potřeba lokální dočištění:
+
+```text
+Ověření potvrzuje směr změny, ale otevírá jedno lokální dočištění ve stejném pracovním místě: doplnit očekávaný čas další odpovědi. Ostatní části obchodní cesty zůstávají zavřené.
+```
+
+Pokud se problém nepotvrdil:
+
+```text
+Ověření nepotvrdilo původní pracovní místo. Tuto větev zavíráme bez změny další oblasti; nové místo se smí otevřít jen s vlastním návratovým signálem.
+```
+
+### Privacy-first uzavření ověření
+
+Ověření často svádí k tomu, že tým začne shromažďovat příklady "pro příště". U malého kroku to skoro nikdy není nutné. Stačí ponechat zobecněný závěr, finální podobu změny a návratový signál. Surové zprávy, jména, e-maily, telefonní čísla, screenshoty účtů nebo interní poznámky mají zůstat ve zdrojových systémech, pokud mají vlastní legitimní účel.
+
+Použijte tři řádky:
+
+```text
+Ponecháváme:
+
+Nepřenášíme:
+
+Mimořádné sledování:
+končí / pokračuje jen do:
+```
+
+Příklad:
+
+```text
+Ponecháváme:
+Závěr, že první relevantní poptávka po úpravě rozlišila audit a implementaci bez dalšího vysvětlování.
+
+Nepřenášíme:
+Celý e-mail, kontaktní údaje, obchodní poznámky ani screenshot CRM.
+
+Mimořádné sledování:
+Končí. Další otevření vznikne jen při opakování stejné nejasnosti.
+```
+
+Privacy-first uzavření není přívěsek k procesu. Je to způsob, jak zabránit tomu, aby každá malá změna vyráběla vlastní hromádku osobních dat. Malý krok má mít malou datovou stopu. Jinak není malý, jen se tak tváří.
+
+### Karta uzavření prvního běžného ověření
+
+```text
+Uzavřený malý krok:
+
+Běžná situace pro ověření:
+
+Nastala situace?
+- ano / ne
+
+Výsledek ověření:
+- potvrzeno v běžném provozu
+- potvrzeno s jedním lokálním dočištěním
+- nepotvrzeno, problém leží jinde
+- neuzavřeno, protože běžná situace ještě nenastala
+
+Co se propsalo do pracovního místa:
+
+Co případně dočistíme lokálně:
+
+Co výslovně neotevíráme:
+
+Mimořádná péče:
+- končí
+- pokračuje jen do:
+
+Privacy-first uzavření:
+Ponecháváme:
+Nepřenášíme:
+Mažeme nebo necháváme ve zdrojovém systému:
+
+Další návratový signál:
+
+Vlastník:
+```
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte uzavřený malý krok a běžnou situaci pro ověření.
+2. Minuta 2: řekněte, jestli situace opravdu nastala.
+3. Minuta 3: vyberte jeden výsledek ověření.
+4. Minuta 4: napište, co se propisuje a co zůstává zavřené.
+5. Minuta 5: ukončete nebo omezte mimořádnou péči.
+6. Minuta 6: zapište privacy-first závěr a další návratový signál.
+
+Když workshop začne hledat další problém, vraťte ho k poslední otázce: jaký návratový signál by nové téma muselo mít? Pokud odpověď neexistuje, nové téma patří do poznámek, ne do této karty.
+
+### Checklist uzavření ověření
+
+- Vybrali jsme jeden jasný výsledek ověření?
+- Pokud běžná situace nenastala, nevyrábíme ji uměle?
+- Propisujeme výsledek do pracovního místa, kde se bude používat?
+- Končí mimořádná péče, pokud už není potřeba?
+- Pokud je potřeba dočištění, zůstává lokální?
+- Pokud problém leží jinde, neotevíráme ho bez nové hranice?
+- Má další otevření konkrétní návratový signál?
+- Ponecháváme jen závěr a nezbytný kontext?
+- Nepřenášíme osobní údaje, surové zprávy, screenshoty ani exporty mimo původní systém?
+- Je jasné, kdo uzavření drží?
+
+Dobře uzavřené ověření je konec mimořádné pozornosti, ne začátek nové správy. Změna buď funguje a vrací se do běžného provozu, potřebuje jedno malé dočištění, ukázala, že tudy cesta nevede, nebo zatím čeká na běžnou situaci. Každý z těchto výsledků je užitečný, pokud po sobě nezanechá roztaženou práci a zbytečná data.
+
 Praktický filtr na výběr jedné kapitoly:
 
 1. Kdybychom vyřešili jen tuto věc, co se zlepší pro zákazníka?
@@ -246962,3 +247142,4 @@ Uzavření první běžné správy je malé, ale důležité. Říká týmu, že
 - 2026-06-22: Doplněna krátká úvodní poznámka, aby se z první návratové věty rovnou odvodila hranice dalšího kroku.
 - 2026-06-22: Doplněna úvodní podkapitola o testu hranice prvního kroku před spuštěním: tři kontrolní otázky, hraniční věta, varovné signály širokého kroku, privacy-first práce s důkazy, karta, mini workshop a checklist.
 - 2026-06-22: Doplněna úvodní podkapitola o spuštění prvního malého kroku po testu hranice: pravidla spuštění, očekávané výstupy, privacy-first stopa, karta, mini workshop a checklist.
+- 2026-06-23: Doplněna úvodní podkapitola o uzavření prvního běžného ověření malého kroku: výsledné stavy, propsání do pracovního místa, ukončení mimořádné péče, privacy-first uzavření, karta, mini workshop a checklist.
