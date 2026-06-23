@@ -245625,8 +245625,174 @@ Další běžná kontrola:
 
 První běžná správa standardu má potvrdit, že standard umí žít bez mimořádné péče. Když drží, nechte ho být. Když drhne, opravte nejbližší pracovní místo. A když ukáže větší problém, otevřete novou otázku s vlastním rozsahem. Tím standard zůstane živý, ale nezačne si pro sebe brát víc pozornosti, než kolik vrací práci.
 
+## Jak uzavřít první běžnou správu standardu
+
+První běžná správa standardu nesmí zůstat otevřená jako další dlouhodobá kontrola. Jejím účelem bylo ověřit, jestli standard po předchozích převodech, použitích a úklidech opravdu funguje jako normální součást práce. Pokud po správě zůstane jen neurčitá poznámka "sledovat dál", tým znovu vytvořil mimořádnou péči, jen pod klidnějším názvem.
+
+Uzavření první běžné správy má proto odpovědět na jednoduchou otázku:
+
+```text
+Může standard po této správě pokračovat v běžném rytmu bez zvláštní pozornosti?
+```
+
+Pokud ano, napište to přímo a ukončete dočasné kontrolní stopy. Pokud ne, vyberte přesný důvod: lokální oprava, slabý zdroj pravdy, širší vzor nebo skutečný návratový signál. Nechte správu skončit jedním stavem, ne směsí dojmů.
+
+### Čtyři uzavírací stavy
+
+Po první běžné správě vyberte jeden ze čtyř stavů:
+
+- Standard drží: pravidlo je najitelné, použitelné a nepotřebuje zvláštní péči.
+- Lokální servis: jedno pracovní místo potřebuje drobnou opravu, ale standard jako celek platí.
+- Slabý domov standardu: pravidlo sice dává smysl, ale jeho kanonické místo není dost jasné.
+- Otevřít novou otázku: správa ukázala opakované tření, které už není údržba jednoho standardu.
+
+Stav `standard drží` má být nejkratší. Zapište jednu větu, vraťte standard do běžného rytmu a ukliďte dočasné poznámky. Neplánujte další mimořádnou kontrolu jen proto, že kontrola dopadla dobře. Dobře dopadlá kontrola není argument pro další kontrolu. Je to argument pro klid.
+
+Stav `lokální servis` použijte, když je problém opravdu u jednoho místa: starý odkaz, nepřesná věta v šabloně, chybějící návratový signál v checklistu nebo pomocná poznámka, která už nemá platit. Servis musí mít jedno místo a jeden výstup. Jakmile potřebuje mapu více míst, už to není servis.
+
+Stav `slabý domov standardu` je vhodný, když lidé standard používají, ale pořád není jasné, kde by ho měli najít. Typicky existuje rozhodovací záznam, šablona, interní wiki a komentář v ticketu, které říkají skoro totéž jinými slovy. Uzavření pak nemá přidat další dokument. Má vybrat jeden zdroj pravdy a ostatní místa zkrátit, odkázat nebo uklidit.
+
+Stav `nová otázka` použijte až ve chvíli, kdy správa odhalí problém mimo hranici standardu. Například nejde jen o to, že jedna obchodní šablona má starý odkaz. Ukáže se, že tým nemá jednotný způsob, jak předává rozhodnutí mezi obchodem a delivery. To už je nové pracovní téma s vlastním rozsahem, ne prodloužení správy.
+
+### Uzavírací věta
+
+Každé uzavření napište jednou větou:
+
+```text
+Po první běžné správě standardu je stav:
+```
+
+Příklady:
+
+```text
+Po první běžné správě standardu je stav: standard drží. Discovery šablona je kanonické místo, stará kontrolní karta se zavírá a další kontrola proběhne v běžném měsíčním review.
+```
+
+```text
+Po první běžné správě standardu je stav: lokální servis. Pravidlo platí, ale v onboardingové šabloně chybí odkaz na aktuální discovery šablonu; opravujeme jen tento odkaz a neotevíráme kvalifikační proces.
+```
+
+```text
+Po první běžné správě standardu je stav: slabý domov standardu. Stejné pravidlo žije ve třech místech, proto vybíráme discovery šablonu jako zdroj pravdy a ostatní dvě místa zkracujeme na odkaz.
+```
+
+Uzavírací věta má být dost konkrétní, aby podle ní šlo uklidit práci. Pokud zní "standard ještě budeme sledovat", není uzavřená. Napište, kdo ho sleduje, proč, do kdy a jaký signál sledování ukončí. Nebo přiznejte, že standard ještě není připravený na běžný rytmus.
+
+### Co propsat a co ukončit
+
+Uzavření první běžné správy má dva pohyby: něco se propíše do stabilního místa a něco skončí.
+
+Propsat:
+
+- aktuální pracovní větu standardu;
+- kanonické místo, kde standard bydlí;
+- běžný revizní rytmus;
+- návratový signál;
+- privacy-first hranici.
+
+Ukončit:
+
+- dočasnou kontrolní kartu;
+- mimořádné připomínky v chatu;
+- pracovní kopie šablon;
+- exporty a screenshoty z ověření;
+- staré formulace, které naznačují, že větší návrh je pořád otevřený.
+
+Když něco ukončujete, napište to pozitivně. Ne jen "smazáno". Lepší věta zní:
+
+```text
+Dočasnou kontrolní kartu zavíráme, protože aktuální pravidlo je v discovery šabloně a další návrat řídí konkrétní signál.
+```
+
+Tým pak chápe, že nejde o mazání paměti. Jde o přesun paměti na správné místo a odstranění pomocných stop, které už nemají pracovní účel.
+
+### Privacy-first uzavření správy
+
+První běžná správa často pracuje s důkazy z reálného používání: poznámkami z hovoru, příklady z CRM, komentáři v issue, screenshoty šablon nebo ručním seznamem tření. Na konci správy musí být jasné, co z toho zůstává.
+
+Použijte tři hromádky:
+
+- Zůstává: aktuální standard, kanonické místo, návratový signál a krátký závěr správy.
+- Zobecňuje se: konkrétní příklady, které stačí převést na pracovní vzor.
+- Mizí nebo zůstává v původním zdroji: osobní údaje, screenshoty, exporty, kopie zpráv a dočasné kontrolní seznamy.
+
+Praktická věta:
+
+```text
+Po správě ponecháváme jen závěr a aktuální pravidlo; příklady z použití zobecňujeme a surové podklady nepřenášíme mimo původní pracovní systémy.
+```
+
+Tohle je malá věta s velkým dopadem. Brání tomu, aby každá údržba standardu vyráběla další archiv citlivých detailů. Privacy-first provoz se pozná i podle toho, že důkaz po rozhodnutí zeštíhlí na smysl, ne že si ho tým schová celý "pro jistotu".
+
+### Karta uzavření první běžné správy
+
+```text
+Standard:
+
+Kanonické pracovní místo:
+
+Co první běžná správa kontrolovala:
+
+Výsledek:
+- standard drží
+- lokální servis
+- slabý domov standardu
+- otevřít novou otázku
+
+Uzavírací věta:
+
+Co se propisuje do stabilního místa:
+
+Co ukončujeme:
+
+Pokud je lokální servis, jedno místo opravy:
+
+Pokud je slabý domov, nový zdroj pravdy:
+
+Pokud otevíráme novou otázku, její hranice:
+
+Privacy-first uzavření:
+Ponecháváme:
+Zobecňujeme:
+Mažeme nebo necháváme v původním zdroji:
+
+Návratový signál:
+
+Další běžný rytmus:
+```
+
+Karta má pomoci hlavně v situaci, kdy správa nedopadne čistým stavem `standard drží`. Pokud drží, často stačí uzavírací věta a krátká poznámka v changelogu pracovního místa. Kartu použijte tehdy, když je potřeba rozlišit servis, slabý domov a novou otázku.
+
+### Mini workshop na 8 minut
+
+1. Minuta 1: přečtěte standard a jeho kanonické místo.
+2. Minuty 2 až 3: shrňte, co první běžná správa opravdu zjistila.
+3. Minuta 4: vyberte jeden ze čtyř uzavíracích stavů.
+4. Minuta 5: napište uzavírací větu.
+5. Minuta 6: určete, co se propíše a co skončí.
+6. Minuta 7: udělejte privacy-first úklid důkazů.
+7. Minuta 8: potvrďte návratový signál a další běžný rytmus.
+
+Pokud se během workshopu začne znovu řešit historie vzniku standardu, vraťte se k otázce, co ukázala první běžná správa. Historie je užitečná jen tehdy, když vysvětluje dnešní stav. Pokud jen zabírá místo, patří do archivu nebo pryč.
+
+### Checklist uzavření správy
+
+- Vybrali jsme jeden uzavírací stav?
+- Umíme stav napsat jednou větou?
+- Pokud standard drží, ukončili jsme mimořádnou péči?
+- Pokud jde o lokální servis, má oprava jedno pracovní místo?
+- Pokud je problém v domově standardu, vybrali jsme jeden zdroj pravdy?
+- Pokud vzniká nová otázka, má vlastní hranici a nesveze se na správě?
+- Propsali jsme aktuální pravidlo, návratový signál a běžný rytmus do stabilního místa?
+- Ukončili jsme dočasné karty, komentáře, kopie nebo kontrolní seznamy bez dalšího účelu?
+- Zobecnili jsme příklady a nepřenášíme osobní údaje mimo původní zdroje?
+- Nevznikl nový tracker, export, dashboard ani kontrola lidí jen kvůli uzavření správy?
+
+Uzavření první běžné správy je malé, ale důležité. Říká týmu, že standard se buď opravdu stal běžnou součástí práce, nebo že má přesně pojmenovaný problém. Obě varianty jsou užitečné. Neužitečný je jen neurčitý mezistav, ve kterém standard pořád žije napůl jako oprava, napůl jako pravidlo a napůl jako téma pro další schůzku. Ano, tři půlky. Přesně tak vypadá špatně zavřený proces.
+
 ## Pracovní log
 
+- 2026-06-23: Doplněna úvodní podkapitola o uzavření první běžné správy standardu: čtyři uzavírací stavy, uzavírací věta, propsání do stabilního místa, privacy-first úklid důkazů, karta, mini workshop a checklist.
 - 2026-06-23: Doplněna úvodní podkapitola o první běžné správě standardu po uzavření druhého použití: kontrola kanonického místa, lokální správa tření, privacy-first hranice, karta a checklist.
 - 2026-06-23: Doplněna úvodní podkapitola o uzavření druhého běžného použití standardu po převodu do správy: čtyři uzavírací stavy, propsání do pracovního místa, privacy-first úklid dočasných podkladů, karta, mini workshop a checklist.
 - 2026-06-23: Doplněna úvodní podkapitola o druhém běžném použití standardu po převodu do správy: ověření přenositelnosti bez čerstvé paměti, hranice standardu, privacy-first stopová střídmost, karta, mini workshop a checklist.
