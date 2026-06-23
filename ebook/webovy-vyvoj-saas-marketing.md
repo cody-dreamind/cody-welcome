@@ -244917,8 +244917,188 @@ Když se v minutě 4 objeví chuť otevřít širší revizi, zastavte se. Šir�
 
 První běžné použití po převodu je hotové, když standard pomohl dokončit reálnou práci a nezatáhl za sebou starou revizní stopu. Pokud fungoval, nechte ho být. Pokud drhnul, opravte nejbližší místo. Pokud otevřel nový návratový signál, založte novou malou iteraci až potom. Tím zůstane správa standardů praktická, úsporná a pořád trochu alergická na zbytečné tabulky, jak se na slušný privacy-first provoz patří.
 
+## Uzavření prvního běžného použití standardu po převodu do správy
+
+První běžné použití standardu po převodu do správy je jen polovina zkoušky. Druhá polovina je jeho uzavření. Tady se rozhoduje, jestli standard opravdu zůstane běžným pracovním pravidlem, nebo se kolem něj znovu začne stavět malá kontrolní konstrukce. První použití často vyvolá chuť "ještě to chvíli sledovat". Někdy je to rozumné. Častěji je to ale jen stará nejistota v novém kabátě.
+
+Uzavření má odpovědět na jednu praktickou otázku:
+
+```text
+Co po prvním běžném použití měníme v pracovním místě a co necháváme bez další péče?
+```
+
+Pokud odpověď zní "všechno budeme dál pozorovat", uzavření se nepovedlo. Standard byl převeden do správy právě proto, aby nepotřeboval mimořádný dohled při každém doteku. Pokud první použití ukázalo drobné tření, opravte drobné tření. Pokud ukázalo větší problém, založte novou malou iteraci. Pokud neukázalo nic zásadního, nechte standard pracovat.
+
+### Čtyři uzavírací stavy
+
+Po prvním běžném použití vyberte jeden ze čtyř stavů:
+
+- Zavřít do běžného rytmu: standard byl nalezen, použit a nevznikla zbytečná datová stopa.
+- Zavřít po lokální opravě: standard funguje, ale pracovní místo potřebovalo jeden odkaz, název, větu nebo poznámku.
+- Zavřít s novým návratovým signálem: použití ukázalo hranu, která přesahuje lokální opravu.
+- Vrátit do krátkého ověření: standard se bez čerstvé pomoci nepoužil správně a je potřeba jedna omezená kontrola navíc.
+
+Stav `zavřít do běžného rytmu` znamená, že se neděje nic dramatického. To je dobře. Zápis může být krátký:
+
+```text
+První běžné použití standardu proběhlo při schválení nové landing page. Standard byl nalezen v publikačním checklistu, vedl k rozhodnutí a nevznikla nová pomocná evidence. Zůstává běžný kvartální rytmus.
+```
+
+Stav `zavřít po lokální opravě` použijte, když je problém přesně ohraničený. Například člověk pravidlo našel, ale až po otevření vedlejšího dokumentu. Nebo pravidlo vedlo k rozhodnutí, ale chyběla věta, kam zapsat výsledek. Oprava patří do místa použití. Nezakládejte nový dokument o tom, jak správně používat dokument.
+
+Stav `zavřít s novým návratovým signálem` použijte tehdy, když první použití odhalilo nový typ situace. Třeba standard řeší marketingové formuláře, ale v praxi se ukázalo, že stejná datová hranice chybí i u importu kontaktů do SaaS administrace. To není důvod přepsat všechno hned. Je to důvod založit novou malou otázku:
+
+```text
+Nový návratový signál:
+Při prvním importu osobních údajů mimo marketingový formulář ověřit, zda existuje stejné minimum: účel, příjemce, retence, přístup a místo zápisu výsledku.
+```
+
+Stav `vrátit do krátkého ověření` používejte nejopatrněji. Krátké ověření není návrat ke staré revizní smyčce. Je to jedna omezená opora se stop podmínkou:
+
+```text
+Dočasná opora:
+Při příštím jednom publikování stránky ověřit, jestli editor najde pravidlo bez odkazu z chatu. Pokud ano, opora končí.
+```
+
+Bez stop podmínky se z opory rychle stane nový zvyk. A nový zvyk bez účelu je jen procesní nábytek, o který budou všichni zakopávat.
+
+### Co se propisuje a co ne
+
+Uzavření prvního použití má rozlišit tři věci:
+
+- pracovní úpravu, která patří do kanonického místa;
+- rozhodovací závěr, který patří do paměti standardu;
+- podklady, které se nemají kopírovat dál.
+
+Do pracovního místa patří jen to, co pomůže dalšímu člověku použít standard. Může to být přesnější věta, lepší název, odkaz v checklistu nebo jedno pole pro výsledek. Do rozhodovací paměti patří stručný důvod, proč se pravidlo po prvním použití změnilo nebo nezměnilo. Podklady jako screenshoty, exporty, kopie zpráv nebo pracovní komentáře obvykle nepatří nikam nově. Buď zůstanou v původním zdroji pravdy s vlastní retencí, nebo se smažou.
+
+Praktický příklad:
+
+```text
+První použití:
+Editor použil standard při schválení formuláře na landing page.
+
+Zjištění:
+Standard vedl k rozhodnutí, ale nebylo jasné, jak zapsat výsledek, když nový externí tok nevzniká.
+
+Propis do pracovního místa:
+Do publikačního checklistu přidat volbu "bez nového externího toku".
+
+Rozhodovací paměť:
+První použití ukázalo potřebu jasného zápisu negativního výsledku.
+
+Nepropagujeme dál:
+Screenshot checklistu, interní chat o formulaci ani kopii testovacího odeslání formuláře.
+```
+
+Tím zůstane oprava užitečná a stopa krátká. Další člověk nepotřebuje vidět celý porod drobné věty. Potřebuje vědět, co má při publikaci udělat.
+
+### Hranice proti nové smyčce
+
+Po prvním použití se často objeví tři lákadla:
+
+- udělat ještě jednu kontrolu bez konkrétního důvodu;
+- začít evidovat každé další použití standardu;
+- přilepit k uzavření sousední nápad, který se zrovna objevil.
+
+První lákadlo zní bezpečně, ale většinou jen odkládá důvěru. Pokud standard fungoval a návratový signál nenastal, další mimořádná kontrola není bezpečnost. Je to malá daň za neschopnost pustit hotovou věc z ruky.
+
+Druhé lákadlo je horší. Evidence každého použití standardu má smysl jen tehdy, když sama vede k rozhodnutí. Pokud se zapisuje jen proto, aby někdo "měl přehled", zeptejte se, jaké rozhodnutí z přehledu vznikne a kdy evidence skončí. Když odpověď není jasná, evidence nemá být založena.
+
+Třetí lákadlo je produktově nejzrádnější. Během prvního použití si všimnete, že vedlejší checklist má starý název, onboarding obsahuje podobnou mezeru nebo jiná šablona nemá privacy-first větu. Zapište podnět, ale nelepte ho na uzavření. První použití standardu má uzavřít jednu smyčku. Další nápady patří do fronty podle návratových signálů.
+
+### Privacy-first uzavření
+
+Privacy-first uzavření prvního použití má jednoduché pravidlo: ponechte závěr, ne surový provozní materiál. Závěr má říct, co bylo rozhodnuto, kde pravidlo dál žije a kdy se má znovu otevřít. Nemá obsahovat osobní údaje, kopie zákaznických zpráv, plné formulářové payloady ani screenshoty interních systémů.
+
+Použijte krátkou kontrolu:
+
+```text
+Potřebuje další člověk pro použití standardu tento konkrétní podklad, nebo mu stačí zobecněný závěr?
+```
+
+Ve většině případů stačí zobecněný závěr:
+
+```text
+Ponecháváme:
+Závěr, že standard byl použit při publikaci stránky a neotevřel nový externí datový tok.
+
+Neponecháváme:
+Testovací odeslání formuláře, screenshot administrace ani chatovou diskuzi o kontrole.
+```
+
+Pokud podklad má legitimní účel, například bezpečnostní audit nebo smluvní povinnost, neukládejte ho do obecné pracovní poznámky. Nechte ho v systému, který má přístupy, retenci a vlastníka. Privacy-first provoz není o tom, že si tým nesmí nic pamatovat. Je o tom, že si pamatuje správnou úroveň detailu na správném místě.
+
+### Karta uzavření prvního běžného použití
+
+```text
+Standard:
+
+Kanonické pracovní místo:
+
+První běžné použití při:
+
+Výsledek prvního použití:
+- fungovalo bez zásahu
+- potřebovalo lokální navigační opravu
+- potřebovalo zpřesnit pracovní větu
+- otevřelo nový návratový signál
+
+Uzavírací stav:
+- zavřít do běžného rytmu
+- zavřít po lokální opravě
+- zavřít s novým návratovým signálem
+- vrátit do krátkého ověření
+
+Co se propisuje do pracovního místa:
+
+Co zůstává jen v rozhodovací paměti:
+
+Co se dál zvlášť nesleduje:
+
+Co neotevíráme:
+
+Návratový signál nebo stop podmínka krátkého ověření:
+
+Privacy-first úklid:
+Které podklady mažeme, anonymizujeme nebo necháváme jen v původním zdroji pravdy:
+
+Vlastník:
+
+Datum dalšího běžného rytmu, pokud existuje:
+```
+
+Karta má být krátká. Pokud se do ní nevejde odpověď bez dlouhého vysvětlování, možná neuzavíráte první použití, ale otevíráte novou iteraci. To je v pořádku, jen to pojmenujte správně.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte výsledek prvního běžného použití.
+2. Minuta 2: vyberte uzavírací stav.
+3. Minuta 3: napište, co se propisuje do pracovního místa.
+4. Minuta 4: napište, co se dál zvlášť nesleduje a co neotevíráte.
+5. Minuta 5: potvrďte návratový signál nebo stop podmínku krátkého ověření.
+6. Minuta 6: ukliďte datovou stopu podle privacy-first pravidla.
+
+Když se v páté minutě ukáže, že neumíte napsat konkrétní návratový signál, nepřidávejte sledování "pro jistotu". Vraťte se k pracovnímu místu a napište, jaká viditelná událost by měla standard znovu otevřít. Bez viditelné události budete sledovat náladu, ne provoz.
+
+### Checklist uzavření
+
+- Vybrali jsme jeden uzavírací stav?
+- Je jasné, zda standard zůstává v běžném rytmu, dostal lokální opravu, otevřel nový signál, nebo potřebuje krátké ověření?
+- Propsali jsme případnou změnu do kanonického pracovního místa?
+- Nezakládáme evidenci každého dalšího použití bez rozhodovacího účelu?
+- Oddělili jsme sousední nápady od uzavření této smyčky?
+- Napsali jsme, co teď výslovně neotevíráme?
+- Má návratový signál konkrétní viditelnou událost?
+- Pokud vracíme krátké ověření, má stop podmínku?
+- Ponecháváme závěr místo surových osobních nebo zákaznických podkladů?
+- Ví vlastník, kdy se standard znovu objeví v běžném rytmu?
+
+Uzavření prvního běžného použití je hotové, když standard po reálné práci nezůstane viset ve zvláštním režimu. Buď se vrátí do běžného rytmu, dostane malou opravu, otevře přesný návratový signál, nebo dostane krátkou oporu s jasným koncem. Všechno ostatní je jen procesní šum. A šum má v privacy-first provozu krátkou životnost, protože zabírá pozornost i data.
+
 ## Pracovní log
 
+- 2026-06-23: Doplněna úvodní podkapitola o uzavření prvního běžného použití standardu po převodu do správy: čtyři uzavírací stavy, hranice proti nové smyčce, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-23: Doplněna úvodní podkapitola o prvním běžném použití standardu po převodu do správy: ověření najitelnosti a rozhodnutelnosti bez revizní historie, čtyři výsledné stavy, privacy-first stopa, karta, mini workshop a checklist.
 - 2026-06-23: Doplněna úvodní podkapitola o převodu uzavřené revizní smyčky do běžné správy standardu: rozdělení živého pravidla, rozhodovací paměti a úklidu pomocných stop, privacy-first hranice, karta, mini workshop a checklist.
 - 2026-06-23: Doplněna úvodní podkapitola o uzavření druhé kontroly po zmenšení revizní stopy: čtyři uzavírací stavy, uzavírací věta, privacy-first úklid, karta, mini workshop a checklist.
