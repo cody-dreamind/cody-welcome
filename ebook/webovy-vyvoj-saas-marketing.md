@@ -244598,8 +244598,157 @@ Když se tým nedohodne mezi běžným rytmem a dočasnou oporou, nepřidávejte
 
 Uzavření druhé kontroly je malá provozní zkouška důvěry. Když standard funguje, nechte ho fungovat. Když potřebuje opravu, opravte nejmenší místo. A když potřebuje dočasnou oporu, dejte jí jasný konec. Tím zůstane proces lehký, data uklizená a tým nebude udržovat zvláštní péči jen proto, že kdysi pomohla.
 
+## Převod uzavřené revizní smyčky do běžné správy standardu
+
+Uzavřená revizní smyčka má po sobě zanechat běžně spravovaný standard, ne malý pomník dobře odvedené kontroly. Pokud tým po druhé kontrole pořád drží staré karty, pomocné tabulky, zvláštní připomínky a vysvětlující poznámky, smyčka sice formálně skončila, ale provozně dál zabírá místo. Převod do běžné správy je poslední úklid: říká, co zůstává jako živé pravidlo, co se mění na historickou paměť a co může zmizet.
+
+Začněte třemi větami:
+
+```text
+Živé pravidlo dál zůstává:
+
+Historická paměť je:
+
+Po revizní smyčce už nepotřebujeme:
+```
+
+Tyto věty pomáhají rozlišit standard od stop po jeho zlepšování. Standard má být snadno použitelný v práci. Historická paměť má být dohledatelná, pokud někdo potřebuje pochopit důvod. Pomocné stopy mají zmizet, pokud už nemají účel. Bez tohoto rozlišení se běžná správa rychle změní v archivní hobby s pracovním názvem "pro jistotu".
+
+Příklad:
+
+```text
+Živé pravidlo dál zůstává:
+Před publikací nové landing page kontrolujeme, jestli stránka nepřidává nový externí datový tok.
+
+Historická paměť je:
+Rozhodovací záznam, proč jsme zrušili samostatnou evidenci každého použití checklistu.
+
+Po revizní smyčce už nepotřebujeme:
+Dočasnou tabulku kontrol, screenshoty prvních průchodů ani chatové připomínky k bývalé mimořádné péči.
+```
+
+Tento převod není kosmetika. Když živé pravidlo zůstane smíchané s historií, nový člověk při běžné práci nepozná, co má dělat teď a co je jen stopa po minulé opravě. A když pomocné stopy zůstanou ležet vedle pravidla, časem se začnou tvářit jako druhý zdroj pravdy.
+
+### Tři vrstvy po uzavření
+
+Po uzavření revizní smyčky rozdělte materiál do tří vrstev:
+
+- Pracovní vrstva: aktuální pravidlo, checklist, šablona nebo proces, podle kterého se dnes pracuje.
+- Rozhodovací vrstva: stručný důvod, proč pravidlo vypadá právě takto a jaký signál ho znovu otevře.
+- Odpadní vrstva: dočasné podklady, kopie, screenshoty, exporty, staré varianty a poznámky, které už nemají rozhodovací účel.
+
+Pracovní vrstva má být nejkratší. Člověk v ní nemá číst historii, ale použít pravidlo. Rozhodovací vrstva může být o něco delší, protože vysvětluje důvod. Odpadní vrstva nemá být romanticky archivovaná. Pokud nemá právní, provozní nebo rozhodovací účel, patří pryč podle retenčních pravidel.
+
+Privacy-first princip je tady jednoduchý: po revizní smyčce neuchovávejte podklady jen proto, že vznikly při poctivé práci. Poctivá práce není automatický důvod pro trvalé uložení dat. Stačí zachovat závěr, datovou hranici a návratový signál.
+
+### Co přepsat do běžné správy
+
+Do běžné správy standardu patří jen to, co bude někdo skutečně používat:
+
+- aktuální pracovní věta;
+- kanonické místo pravidla;
+- vlastník nebo role;
+- běžný revizní rytmus;
+- návratový signál;
+- privacy-first hranice;
+- odkaz na rozhodovací záznam, pokud je potřeba.
+
+Nepatří tam celý příběh revizní smyčky, všechny varianty, jména účastníků, staré dočasné tabulky ani podrobný popis toho, jak se standard kdysi ladil. Tyto věci mohou být užitečné v rozhodovací paměti, ale nemají zatěžovat pracovní místo.
+
+Dobrá pracovní věta:
+
+```text
+Před publikací stránky s novým formulářem ověřujeme účel sběru, příjemce dat, retenční pravidlo a případný externí datový tok.
+```
+
+Slabá pracovní věta:
+
+```text
+Po posledním zmenšení revizní stopy a druhé kontrole jsme se shodli, že bychom měli dál pamatovat na kontrolu formulářů.
+```
+
+Druhá věta je sice pravdivá, ale nutí člověka prokousat se historií. První věta rovnou říká, co dělat.
+
+### Kdy starou stopu ještě neuklízet
+
+Neuklízejte bezhlavě. Některé stopy mají pořád účel:
+
+- rozhodovací záznam vysvětlující, proč byla zrušena původní evidence;
+- právní nebo bezpečnostní podklad, který má vlastní retenční pravidlo;
+- odkaz na incident nebo změnu, která ovlivňuje dnešní standard;
+- anonymizovaný příklad, který pomáhá novému člověku pochopit hranici pravidla.
+
+Rozdíl je v účelu. "Mohlo by se hodit" nestačí. "Ukazuje, proč nesbíráme rozpočet v prvním formuláři" už účel má. I tak ale často stačí zobecnění místo surového podkladu.
+
+Praktická kontrolní otázka:
+
+```text
+Kdybychom tuto stopu smazali nebo zobecnili, ztratíme schopnost pravidlo použít, vysvětlit nebo bezpečně revidovat?
+```
+
+Pokud odpověď zní ne, stopa pravděpodobně nepatří k živému standardu.
+
+### Karta převodu do běžné správy
+
+```text
+Standard:
+
+Uzavřená revizní smyčka:
+
+Živé pravidlo:
+
+Kanonické pracovní místo:
+
+Rozhodovací paměť:
+Co ponecháváme a proč:
+
+Co uklízíme:
+
+Co zobecňujeme:
+
+Běžný vlastník nebo role:
+
+Běžný revizní rytmus:
+
+Návratový signál:
+
+Privacy-first hranice:
+
+Datum převodu:
+```
+
+Kartu používejte jen jako převodní pomůcku. Po převodu nemá vzniknout další pravidelně vyplňovaný formulář. Cílem je zmenšit počet míst, kde standard žije, ne založit nové.
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: přečtěte uzavírací větu poslední kontroly.
+2. Minuta 2: napište živé pravidlo v přítomném čase.
+3. Minuta 3: určete kanonické pracovní místo.
+4. Minuta 4: vyberte, co zůstane v rozhodovací paměti.
+5. Minuta 5: napište, co se smaže, zkrátí nebo anonymizuje.
+6. Minuta 6: potvrďte vlastníka, rytmus a návratový signál.
+7. Minuta 7: zkontrolujte privacy-first hranici v místě, kde vznikají data.
+
+Pokud během workshopu vznikne nový nápad na zlepšení standardu, nezahrnujte ho do převodu. Převod uzavřené smyčky není další iterace. Je to úklid po ní.
+
+### Checklist převodu
+
+- Je živé pravidlo napsané v přítomném čase?
+- Má pravidlo jedno kanonické pracovní místo?
+- Je rozhodovací paměť oddělená od pracovního místa?
+- Víme, které dočasné podklady mažeme, zkracujeme nebo anonymizujeme?
+- Zůstává jen tolik historie, kolik je potřeba pro pochopení a bezpečnou revizi?
+- Má standard vlastníka nebo roli?
+- Je běžný revizní rytmus jasný a nepřidává mimořádnou péči?
+- Je návratový signál viditelný tam, kde se standard používá?
+- Nevznikl nový dokument jen proto, abychom uklidili starý dokument?
+- Je privacy-first hranice součástí živého pravidla, ne jen poznámka v archivu?
+
+Převod do běžné správy je hotový, když nový člověk najde jednoduché pravidlo, vlastník najde důvod a nikdo nemusí otevírat staré pomocné stopy, aby udělal běžné rozhodnutí. To je dobrý konec dlouhé smyčky: standard zůstává použitelný, historie zůstává přiměřeně dohledatelná a data neleží po okolí jen proto, že se kdysi hodila při kontrole.
+
 ## Pracovní log
 
+- 2026-06-23: Doplněna úvodní podkapitola o převodu uzavřené revizní smyčky do běžné správy standardu: rozdělení živého pravidla, rozhodovací paměti a úklidu pomocných stop, privacy-first hranice, karta, mini workshop a checklist.
 - 2026-06-23: Doplněna úvodní podkapitola o uzavření druhé kontroly po zmenšení revizní stopy: čtyři uzavírací stavy, uzavírací věta, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-22: Doplněna úvodní podkapitola o prvním běžném ověření po uzavření malého kroku: tři kontrolní otázky, čtyři výsledky ověření, privacy-first záznam, karta, mini workshop a checklist.
 - 2026-06-22: Doplněna úvodní podkapitola o uzavření prvního malého kroku po spuštění: čtyři uzavírací stavy, propsání do pracovního místa, práce s nepotvrzeným důvodem, privacy-first uzavření, karta, mini workshop a checklist.
