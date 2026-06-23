@@ -245282,8 +245282,194 @@ Když se tým hádá, jestli je druhá situace ještě uvnitř standardu, nerozh
 
 Druhé běžné použití je hotové, když standard buď tiše obstojí, nebo ukáže přesnou hranici další práce. Obojí je dobrý výsledek. Tiše fungující standard šetří pozornost. Přesně pojmenovaná hranice šetří budoucí zmatek. A obojí šetří data, protože tým nemusí sbírat víc, než opravdu potřebuje k dalšímu rozhodnutí.
 
+## Uzavření druhého běžného použití standardu po převodu do správy
+
+Druhé běžné použití standardu je poslední místo, kde má smysl držet kolem převodu zvýšenou pozornost. Pokud standard obstál i podruhé, nemá zůstat v polovičním ověřovacím režimu. Buď se vrátí do běžné správy, dostane poslední lokální zpřesnění, zúží si hranici, nebo otevře samostatný návratový signál. Uzavření druhého použití má právě tohle rozhodnout.
+
+Nejhorší výsledek není drobná chyba ve standardu. Horší je neurčitý stav: "ještě to budeme sledovat". Taková věta zní opatrně, ale často znamená, že nikdo neví, co přesně by mělo další sledování změnit. V privacy-first provozu je to drahá věta. Vyrábí pozornost, záznamy, pomocné poznámky a někdy i zbytečné kopie dat, aniž by přidala lepší rozhodnutí.
+
+Začněte uzavírací větou:
+
+```text
+Po druhém běžném použití standard:
+```
+
+Doplňte jen jeden stav:
+
+```text
+Po druhém běžném použití standard:
+vracíme do běžné správy bez další zvláštní kontroly.
+```
+
+Nebo:
+
+```text
+Po druhém běžném použití standard:
+ponecháváme v běžné správě, ale do pracovního checklistu přidáváme jednu lokální větu k organizačním identifikátorům.
+```
+
+Tato věta má být krátká, protože uzavírá smyčku. Pokud se rozroste do odstavce s několika podmínkami, pravděpodobně neuzavíráte druhé použití. Otevíráte novou větev. To není zakázané, jen to nesmí zůstat maskované jako "ještě malá poznámka".
+
+### Čtyři uzavírací stavy
+
+Po druhém běžném použití vyberte jeden ze čtyř stavů:
+
+- Běžná správa: standard obstál, další zvláštní péče končí.
+- Poslední lokální zpřesnění: standard obstál, ale jedno pracovní místo dostane malou úpravu.
+- Zúžená hranice: standard zůstává platný jen pro přesněji popsaný typ situace.
+- Nový návratový signál: druhé použití ukázalo opakující se hranu, která už nepatří do této smyčky.
+
+Stav `běžná správa` použijte, když člověk standard našel, použil a nevznikla nová pomocná stopa. Do pracovního záznamu stačí věta:
+
+```text
+Standard po druhém běžném použití drží bez úprav; vrací se do měsíční správy checklistů.
+```
+
+Tím končí zvláštní pozornost. Nepřidávejte další kontrolní okno jen proto, že standard je čerstvý. Čerstvost není riziko sama o sobě. Riziko je konkrétní tření, ne kalendářová nervozita.
+
+Stav `poslední lokální zpřesnění` použijte, když druhé použití ukázalo drobný nedostatek v místě, kde se standard používá. Typicky jde o název položky, jeden odkaz, jednu volbu v checklistu nebo jednu vysvětlující větu. Oprava má žít v pracovním místě, ne v rozhodovací historii.
+
+Stav `zúžená hranice` použijte, když standard narazil na sousední situaci, pro kterou nebyl určen. Uzavření pak nevypadá jako rozšíření, ale jako ochrana rozsahu:
+
+```text
+Standard dál platí pro marketingové a registrační formuláře. Produktové importy nejsou jeho součástí a otevřou se jen při samostatném návratovém signálu.
+```
+
+Tohle je zdravé. Standard, který umí říct "sem už nepatřím", bývá užitečnější než standard, který se snaží pohltit každou příbuznou situaci.
+
+Stav `nový návratový signál` použijte až tehdy, když se opakuje stejný typ hrany nebo má jasný dopad na zákazníka, provoz, obchodní rozhodnutí nebo datovou stopu. Návratový signál nesmí znít "ještě to probereme". Musí popsat viditelnou událost:
+
+```text
+Pokud se otázka organizačních identifikátorů objeví i u importu nebo integrace, otevřít malou iteraci pro produktová identifikační data.
+```
+
+### Co propsat do pracovního místa
+
+Uzavření druhého použití má zanechat co nejméně stop, ale jednu věc udělat přesně: propsat aktuální pravidlo do místa, kde ho další člověk opravdu použije. Ne do staré poznámky, ne do chatu, ne do přílohy rozhodovacího záznamu. Do pracovního checklistu, šablony, runbooku, briefu, indexu nebo formulářového standardu.
+
+Ptejte se:
+
+```text
+Kde bude další člověk stát, až bude standard potřebovat?
+```
+
+Pokud odpověď zní "v revizní historii", standard ještě není dobře uzavřený. Revizní historie má vysvětlovat, proč se něco změnilo. Nemá být provozním rozhraním pro každé další rozhodnutí. Další člověk potřebuje živou pracovní větu:
+
+```text
+Před spuštěním formuláře ověřte účel každého pole, příjemce dat, retenci a externí tok. U polí popisujících organizaci nebo tým ověřte, zda se později nepoužívají k profilování účtu mimo původní účel.
+```
+
+Taková věta obsahuje dnešní pravidlo bez toho, aby čtenáře nutila číst celou cestu, která k němu vedla. Historie zůstává dohledatelná, ale není brzdou běžné práce.
+
+### Co nechat jen v paměti
+
+Do rozhodovací paměti patří důvod změny, výsledek druhého použití a případný návratový signál. Nepatří tam surové podklady, pokud už nemají aktivní účel. To platí dvojnásob u všeho, co obsahuje osobní údaje, zákaznický kontext, interní obchodní poznámky nebo provozní screenshoty.
+
+Praktické rozdělení:
+
+```text
+Do pracovního místa:
+Aktuální věta standardu a odkaz na běžný revizní rytmus.
+
+Do rozhodovací paměti:
+Druhé použití potvrdilo přenositelnost na registrační stránku; lokálně doplněna věta k organizačním identifikátorům.
+
+Nepřenášíme:
+Testovací registraci, screenshot administrace, chatovou diskusi ani export polí.
+```
+
+Codyho komentář: dobrá týmová paměť není hromada důkazů. Je to schopnost znovu udělat podobné rozhodnutí bez toho, aby člověk musel hrabat v archeologii. Archeologie je fajn pro muzea. Pro SaaS provoz je lepší krátká věta, která ví, kde bydlí.
+
+### Privacy-first uzavření
+
+Při uzavření druhého použití udělejte malý datový úklid. Ne jako velký audit, ale jako poslední zametení po smyčce. Zeptejte se:
+
+```text
+Které podklady vznikly jen kvůli druhému použití a po uzavření už nemají pracovní účel?
+```
+
+Typické podklady k uzavření:
+
+- pracovní screenshoty formuláře;
+- dočasné testovací registrace;
+- exporty polí nebo payloadů;
+- kopie zákaznických vět v poznámkách;
+- pomocné tabulky porovnávající starou a novou variantu;
+- chatové shrnutí s osobními nebo provozními detaily.
+
+Pokud podklad není potřeba pro další rozhodnutí, nechte v záznamu jen zobecněný závěr. Pokud podklad potřeba je, přesuňte ho do správného systému s vlastníkem, přístupy a retencí. Nenechávejte ho u standardu jako pohodlnou přílohu. Pohodlná příloha dnes je bezpečnostní otázka za půl roku. Velmi nenápadná, velmi otravná.
+
+### Karta uzavření druhého použití
+
+```text
+Standard:
+
+Kanonické pracovní místo:
+
+Druhé běžné použití proběhlo při:
+
+Výsledek druhého použití:
+
+Uzavírací stav:
+- běžná správa
+- poslední lokální zpřesnění
+- zúžená hranice
+- nový návratový signál
+
+Uzavírací věta:
+
+Co se propsalo do pracovního místa:
+
+Co zůstává jen v rozhodovací paměti:
+
+Co neotevíráme:
+
+Co dál zvlášť nesledujeme:
+
+Návratový signál, pokud vznikl:
+
+Privacy-first úklid:
+Které dočasné podklady mažeme, anonymizujeme nebo necháváme v původním zdroji pravdy:
+
+Běžný revizní rytmus:
+
+Vlastník:
+
+Datum:
+```
+
+Karta má být uzavírací, ne diagnostická. Pokud do ní začnete dopisovat nové otázky, přesuňte je do samostatné návratové karty. Tady se má zavřít druhé použití standardu, ne otevřít nové patro řízení.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte výsledek druhého běžného použití.
+2. Minuta 2: vyberte jeden uzavírací stav.
+3. Minuta 3: napište uzavírací větu.
+4. Minuta 4: určete, co se propsalo do kanonického pracovního místa.
+5. Minuta 5: napište, co neotevíráte a co dál zvlášť nesledujete.
+6. Minuta 6: proveďte privacy-first úklid dočasných podkladů.
+
+Když se tým na druhé minutě nedokáže shodnout mezi `poslední lokální zpřesnění` a `nový návratový signál`, zvolte menší krok. Lokální zpřesnění je vratné a levné. Nový návratový signál má smysl až ve chvíli, kdy víte, co přesně se má znovu objevit.
+
+### Checklist uzavření
+
+- Vybrali jsme jeden ze čtyř uzavíracích stavů?
+- Máme krátkou uzavírací větu?
+- Propsali jsme aktuální pravidlo do místa, kde ho další člověk opravdu použije?
+- Nevyžadujeme čtení revizní historie pro běžné použití standardu?
+- Pokud vznikla oprava, je lokální a poslední pro tuto smyčku?
+- Pokud se zúžila hranice, je napsané, na co standard neplatí?
+- Pokud vznikl návratový signál, popisuje viditelnou událost?
+- Nezakládáme další sledování bez jasného rozhodovacího účelu?
+- Uklidili jsme dočasné screenshoty, exporty, kopie zpráv a pomocné tabulky?
+- Ponechali jsme závěr místo surových osobních, zákaznických nebo provozních podkladů?
+- Ví vlastník, do jakého běžného revizního rytmu standard patří?
+
+Uzavření druhého běžného použití je hotové, když standard přestane být novinka. Buď prostě funguje, nebo má přesně pojmenovanou hranici. V obou případech se vrací do normálního provozu bez zvláštní péče, bez nových tabulek a bez datové stopáže navíc. To je nudný výsledek v tom nejlepším smyslu: pravidlo pomáhá, tým ví co dělat a nikdo nemusí sbírat důkazy jen proto, aby se cítil bezpečněji.
+
 ## Pracovní log
 
+- 2026-06-23: Doplněna úvodní podkapitola o uzavření druhého běžného použití standardu po převodu do správy: čtyři uzavírací stavy, propsání do pracovního místa, privacy-first úklid dočasných podkladů, karta, mini workshop a checklist.
 - 2026-06-23: Doplněna úvodní podkapitola o druhém běžném použití standardu po převodu do správy: ověření přenositelnosti bez čerstvé paměti, hranice standardu, privacy-first stopová střídmost, karta, mini workshop a checklist.
 - 2026-06-23: Doplněna úvodní podkapitola o uzavření prvního běžného použití standardu po převodu do správy: čtyři uzavírací stavy, hranice proti nové smyčce, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-23: Doplněna úvodní podkapitola o prvním běžném použití standardu po převodu do správy: ověření najitelnosti a rozhodnutelnosti bez revizní historie, čtyři výsledné stavy, privacy-first stopa, karta, mini workshop a checklist.
