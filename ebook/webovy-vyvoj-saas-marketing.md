@@ -246427,8 +246427,154 @@ Pokud během pěti minut neumíte říct návratový signál, standard ještě n
 
 Dlouhodobý klid je dobrý konec standardizační smyčky. Neznamená, že pravidlo je navždy pravda. Znamená, že se z něj stala běžná pracovní výchozí pozice. A to je přesně místo, kam má dobrá iterace dojít: jasné pravidlo, malá datová stopa, uklizené důkazy a další pozornost jen tehdy, když pro ni přijde skutečný signál.
 
+## První návratový signál po dlouhodobém klidu
+
+Dřív nebo později se i dobrý standard z dlouhodobého klidu ozve. Někdo narazí na hranu, v nové situaci se pravidlo použije nejistě, zákaznický vstup zopakuje starý vzor, nebo běžný revizní rytmus ukáže, že se okolnosti posunuly. Důležité je nepodlehnout reflexu: "standard se rozbil, otevřeme celou historii". Jeden návratový signál ještě není důkaz, že se vrací celý problém.
+
+První reakce po klidu má být menší než původní standardizační smyčka. Cílem je zjistit, jestli jde o skutečný návrat, lokální výjimku, slabě popsanou hranu, nebo jen šum z jedné situace. Pokud tým hned otevře staré exporty, poznámky, revizní karty a původní debaty, z klidného standardu se znovu stane aktivní projekt. To je drahé a často zbytečné.
+
+Začněte větou:
+
+```text
+Návratový signál se objevil v této konkrétní situaci:
+```
+
+Věta musí pojmenovat pracovní místo a důvod. Například:
+
+```text
+Návratový signál se objevil v této konkrétní situaci: u nové landing page pro produktový audit obchod třikrát ručně doplňoval telefon, i když standard formuláře počítá jen s e-mailem, kontextem a volitelným URL.
+```
+
+Tím se signál drží v realitě. Neřešíte "formuláře obecně". Řešíte konkrétní místo, kde standard narazil.
+
+### Čtyři první otázky
+
+Při prvním návratu po klidu položte čtyři otázky:
+
+- Je situace stejného typu, pro který standard vznikl?
+- Je problém v pravidle, v jeho nalezení, v jeho výjimce, nebo mimo něj?
+- Stačí k rozhodnutí aktuální pracovní stopa, nebo je potřeba nový důkaz?
+- Ohrozí reakce privacy-first hranici, pokud začneme sbírat víc dat?
+
+Tyto otázky drží rozsah. Pokud se ukáže, že situace není stejného typu, standard pravděpodobně není rozbitý. Jen se ho někdo snaží použít na jiný problém. Pokud je problém v nalezení pravidla, nepotřebujete měnit pravidlo; potřebujete opravit pracovní místo. Pokud je problém ve výjimce, doplňte hranu. Pokud je problém mimo standard, otevřete nové téma a starý standard nechte v klidu.
+
+Praktický příklad:
+
+```text
+Standard:
+Kontaktní formulář na landing page nesbírá telefon v prvním kroku.
+
+Signál:
+Obchod třikrát ručně žádal telefon u poptávek na produktový audit.
+
+Kontrola typu situace:
+Jde pořád o první kontakt z landing page, takže situace spadá pod standard.
+
+Kontrola problému:
+Nejde o obecné rozbití pravidla. Tření vzniká jen u nabídky, kde je první reakce plánovaná jako krátký kvalifikační hovor.
+
+Rozhodnutí:
+Neměníme výchozí formulář. Doplňujeme lokální výjimku pro produktový audit: telefon může být volitelný, pokud je vedle pole jasně řečeno, proč je potřeba.
+
+Privacy-first hranice:
+Telefon nesmí být povinný a nesmí se použít pro marketingové obvolávání bez výslovného účelu.
+```
+
+Všimněte si, že standard zůstává v klidu. Otevřela se jen lokální hrana. To je rozdíl mezi údržbou systému a panickým návratem do projektu.
+
+### Čtyři výsledky prvního návratu
+
+Po první kontrole vyberte jeden ze čtyř výsledků:
+
+- Lokální šum: signál je jednorázový a nevyžaduje změnu.
+- Oprava pracovního místa: pravidlo platí, ale je špatně najitelné, pojmenované nebo vložené do šablony.
+- Doplnění hrany: pravidlo platí, ale potřebuje jasnou výjimku nebo rozhodovací větev.
+- Nové téma: signál ukazuje na jiný problém a standard se nemá otevírat.
+
+Výsledek "lokální šum" není ignorování. Zapište krátký důvod a návratový signál nechte původní. Výsledek "oprava pracovního místa" musí být malý: odkaz, text v checklistu, název šablony, jedna věta u komponenty. Výsledek "doplnění hrany" má změnit standard jen tam, kde se nová situace opravdu opakuje nebo má jasný provozní důvod. Výsledek "nové téma" potřebuje vlastní otázku a vlastní stop podmínku; nepřilepujte ho k existujícímu standardu jen proto, že se objevil poblíž.
+
+### Co neotevírat automaticky
+
+Při prvním návratu po klidu automaticky neotevírejte:
+
+- původní ověřovací exporty;
+- staré zákaznické zprávy;
+- kompletní revizní historii;
+- všechny šablony stejného typu;
+- nový měřicí režim;
+- obecnou diskuzi o strategii standardu.
+
+Otevřete jen to, co potřebujete pro dnešní rozhodnutí. Pokud stačí aktuální pracovní poznámka a kanonické pravidlo, staré důkazy nechte zavřené. Privacy-first provoz není jen o tom, kde data leží. Je i o tom, kolikrát je zbytečně vytáhnete zpět do práce.
+
+### Karta prvního návratu po klidu
+
+```text
+Standard:
+
+Datum převodu do dlouhodobého klidu:
+
+Kanonické pracovní místo:
+
+Původní návratový signál:
+
+Dnešní konkrétní signál:
+
+Kde se objevil:
+
+Je to stejný typ situace?
+- ano
+- ne
+- nevíme
+
+První diagnóza:
+- lokální šum
+- oprava pracovního místa
+- doplnění hrany
+- nové téma
+
+Nejmenší reakce:
+
+Co neotevíráme ze staré historie:
+
+Privacy-first hranice:
+
+Jak poznáme, že reakce stačila:
+
+Vlastník:
+
+Datum kontroly:
+```
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: přečtěte kanonický standard a původní návratový signál.
+2. Minuta 2: popište dnešní konkrétní situaci jednou větou.
+3. Minuta 3: rozhodněte, jestli jde o stejný typ situace.
+4. Minuta 4: vyberte první diagnózu.
+5. Minuta 5: navrhněte nejmenší reakci.
+6. Minuta 6: určete, co ze staré historie neotevíráte.
+7. Minuta 7: zapište privacy-first hranici a datum kontroly.
+
+Když se tým v minutě 3 neshodne, nerozšiřujte debatu. Zapište "nevíme" a vyberte nejmenší důkaz z dnešní práce. Starou historii otevírejte až tehdy, když bez ní nejde rozlišit typ situace.
+
+### Checklist prvního návratu po klidu
+
+- Je dnešní signál popsaný konkrétní pracovní situací?
+- Porovnali jsme ho s původním návratovým signálem?
+- Rozlišili jsme stejný typ situace od nového problému?
+- Vybrali jsme jednu ze čtyř diagnóz?
+- Reakce je menší než původní standardizační smyčka?
+- Neotevíráme staré exporty, zprávy nebo revizní historii bez jasného důvodu?
+- Pokud doplňujeme výjimku, má jasnou hranici a účel?
+- Pokud jde o nové téma, má vlastní otázku a stop podmínku?
+- Privacy-first hranice zůstává viditelná v pracovním místě?
+- Je jasné, kdy se výsledek znovu zkontroluje?
+
+První návratový signál po dlouhodobém klidu má být zkouška disciplíny. Standard se má umět ozvat, aniž by tým znovu vytáhl celý starý kufr. Klidný systém reaguje přesně: malý signál, malá diagnóza, malá reakce a jen tolik dat, kolik je opravdu potřeba. To není lenost. To je údržba, která nezapálí půlku kalendáře kvůli jedné kontrolce.
+
 ## Pracovní log
 
+- 2026-06-23: Doplněna úvodní podkapitola o prvním návratovém signálu po dlouhodobém klidu: konkrétní situace, čtyři první otázky, výsledky návratu, privacy-first neotevírání starých stop, karta, mini workshop a checklist.
 - 2026-06-23: Doplněna úvodní podkapitola o převodu uzavřené správy standardu do dlouhodobého klidu: aktivní prvky klidu, podmínky kdy klid nespouštět, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-23: Doplněna úvodní podkapitola o uzavření druhé běžné správy standardu: čtyři uzavírací stavy, uzavírací věta, rozlišení trvalého pravidla a dočasné péče, privacy-first úklid podkladů, karta, mini workshop a checklist.
 - 2026-06-23: Doplněna úvodní podkapitola o druhé běžné správě standardu po uzavření první správy: přirozené použití, přenositelnost bez čerstvé nápovědy, čtyři výsledky, privacy-first minimum dat, karta, mini workshop a checklist.
