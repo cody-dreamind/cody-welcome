@@ -246572,8 +246572,151 @@ Když se tým v minutě 3 neshodne, nerozšiřujte debatu. Zapište "nevíme" a 
 
 První návratový signál po dlouhodobém klidu má být zkouška disciplíny. Standard se má umět ozvat, aniž by tým znovu vytáhl celý starý kufr. Klidný systém reaguje přesně: malý signál, malá diagnóza, malá reakce a jen tolik dat, kolik je opravdu potřeba. To není lenost. To je údržba, která nezapálí půlku kalendáře kvůli jedné kontrolce.
 
+## Uzavření prvního návratu po dlouhodobém klidu
+
+První návrat po dlouhodobém klidu je hotový až ve chvíli, kdy tým ví, co se se standardem stalo. Nestačí říct "podívali jsme se na to" nebo "asi to byla výjimka". Uzavření má převést první diagnózu do jednoho jasného stavu: standard zůstává v klidu, potřebuje lokální opravu, doplňuje se mu hrana, nebo se vedle něj otevírá nové téma.
+
+Nejdřív se vraťte k dnešnímu konkrétnímu signálu. Bez toho se uzavření snadno změní v obecnou debatu o pravidle. Ta bývá lákavá, protože každý má k pravidlům názor. Bohužel názor není údržba. Údržba je krátká věta, která říká, co se mění a co se záměrně nemění.
+
+Začněte zápisem:
+
+```text
+Dnešní signál byl:
+
+První diagnóza byla:
+
+Nejmenší reakce byla:
+
+Výsledek reakce je:
+```
+
+Praktický příklad:
+
+```text
+Dnešní signál byl:
+U landing page pro produktový audit obchod třikrát ručně žádal telefon.
+
+První diagnóza byla:
+Doplnění hrany. Výchozí pravidlo pro formulář platí, ale audit má lokální důvod pro volitelný telefon.
+
+Nejmenší reakce byla:
+Doplnili jsme do šablony auditní landing page volitelné pole telefon s vysvětlením účelu. Výchozí formulář ostatních landing pages se nemění.
+
+Výsledek reakce je:
+Standard zůstává v dlouhodobém klidu, ale má jednu lokální výjimku pro auditní landing page.
+```
+
+Takové uzavření je nudně přesné. A přesně proto funguje. Neotevírá znovu celý standard, ale ani nezametá signál pod koberec. Dává budoucímu člověku jasnou stopu: tady jsme něco viděli, takhle jsme to vyložili, tolik jsme změnili a dál jsme nešli.
+
+### Čtyři uzavírací stavy
+
+Po první reakci vyberte jeden ze čtyř stavů:
+
+- Návrat byl šum: nezmění se standard ani pracovní místo, pouze se zapíše důvod neakce.
+- Standard drží, opravilo se pracovní místo: pravidlo platí, ale zlepšila se jeho najitelnost, odkaz, název, pořadí nebo formulace v šabloně.
+- Standard drží s doplněnou hranou: přibyla jasná výjimka, rozhodovací větev nebo varovná věta.
+- Vzniká nové téma: signál nepatří do standardu a dostává vlastní otázku, vlastní stop podmínku a vlastní pracovní místo.
+
+Stav `návrat byl šum` musí mít důvod. Ne "neřešíme", ale například: "šlo o jednorázovou poptávku mimo cílový segment a stejný vzor se neobjevil v běžném použití standardu". Krátké ne je v pořádku. Mlžné ne je jen odložená práce.
+
+Stav `opravilo se pracovní místo` má být opravdu lokální. Pokud kvůli jednomu návratu přepisujete celý standard, nejspíš reagujete víc na nepohodlí než na důkaz. Opravte místo, kde se člověk rozhoduje: text u komponenty, odkaz v checklistu, název šablony, krátkou poznámku v obchodním skriptu.
+
+Stav `doplněná hrana` použijte jen tehdy, když výjimka pomůže příštímu rozhodnutí. Hrana není sbírka všech zvláštních případů. Je to věta, která zlepší rozhodování bez rozšíření datové stopy.
+
+Stav `nové téma` je ochrana před bobtnáním standardu. Když signál ukazuje na jiný problém, necpěte ho do existujícího pravidla jen proto, že se objevil poblíž. Standard má zůstat malý a použitelný. Nové téma ať si zaslouží vlastní otázku.
+
+### Privacy-first uzavření
+
+Při uzavření prvního návratu po klidu zkontrolujte, jaká data se kvůli reakci znovu otevřela. Pokud tým použil jen aktuální pracovní poznámku a kanonické pravidlo, skvělé. Pokud musel otevřít starší podklady, napište proč a co se s nimi po uzavření stane.
+
+Použijte tři věty:
+
+```text
+Pro uzavření jsme použili:
+
+Po uzavření ponecháváme:
+
+Po uzavření znovu zavíráme nebo mažeme:
+```
+
+Ve většině případů má po uzavření zůstat jen zobecněný závěr. Nechte si větu "auditní landing page může mít volitelný telefon s vysvětlením účelu". Nenechávejte v aktivním prostoru kopie poptávek, screenshoty formulářů ani ruční tabulku, pokud už neslouží k dalšímu rozhodnutí.
+
+Codyho komentář: jestli standard potřebuje po každém návratu hromadu historických příloh, není to standard. Je to proces s batohem. A batohy jsou fajn na výlet, ne na každé kliknutí ve formuláři.
+
+### Karta uzavření prvního návratu
+
+```text
+Standard:
+
+Datum dlouhodobého klidu:
+
+Dnešní signál:
+
+První diagnóza:
+- lokální šum
+- oprava pracovního místa
+- doplnění hrany
+- nové téma
+
+Nejmenší reakce:
+
+Výsledek reakce:
+
+Uzavírací stav:
+- návrat byl šum
+- standard drží, opravilo se pracovní místo
+- standard drží s doplněnou hranou
+- vzniká nové téma
+
+Co se mění v kanonickém místě:
+
+Co se výslovně nemění:
+
+Co ze staré historie zůstalo zavřené:
+
+Privacy-first uzavření:
+Použili jsme:
+Ponecháváme:
+Zavíráme, mažeme nebo zobecňujeme:
+
+Návratový signál po uzavření:
+
+Vlastník:
+
+Datum kontroly:
+```
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte dnešní signál a první diagnózu.
+2. Minuta 2: popište nejmenší reakci, která se opravdu stala.
+3. Minuta 3: vyberte uzavírací stav.
+4. Minuta 4: napište, co se mění a co se výslovně nemění.
+5. Minuta 5: uzavřete privacy-first stopu.
+6. Minuta 6: potvrďte návratový signál, vlastníka a datum kontroly.
+
+Když se tým v minutě 3 nedohodne, zapište jen "reakce není uzavřená" a vraťte se k nejmenšímu důkazu. Nepřidávejte další opravy bokem. Neuzavřený návrat nepotřebuje víc aktivity; potřebuje jasnější výsledek.
+
+### Checklist uzavření návratu
+
+- Je dnešní signál pořád popsaný konkrétní pracovní situací?
+- Porovnali jsme výsledek s první diagnózou?
+- Vybrali jsme jeden ze čtyř uzavíracích stavů?
+- Pokud šlo o šum, máme stručný důvod neakce?
+- Pokud se opravilo pracovní místo, zůstala oprava lokální?
+- Pokud se doplnila hrana, pomáhá příštímu rozhodnutí bez nového sběru dat?
+- Pokud vzniklo nové téma, má vlastní otázku a stop podmínku?
+- Je napsané, co se výslovně nemění?
+- Zůstala stará historie zavřená, pokud nebyla nezbytná?
+- Uklidili jsme dočasné poznámky, screenshoty, exporty a kopie zpráv?
+- Je jasný návratový signál po uzavření?
+- Ví vlastník, kdy se standard znovu otevře?
+
+Uzavření prvního návratu po dlouhodobém klidu má vrátit standard do rozumného stavu. Buď se nic nemění, nebo se změní jedno malé místo, nebo se přidá jedna hrana, nebo se nové téma oddělí stranou. Všechny čtyři výsledky jsou v pořádku, pokud po nich zůstane čisté pravidlo, konkrétní stopa a méně otevřených dat, ne víc.
+
 ## Pracovní log
 
+- 2026-06-23: Doplněna úvodní podkapitola o uzavření prvního návratu po dlouhodobém klidu: čtyři uzavírací stavy, lokální oprava, doplnění hrany, oddělení nového tématu, privacy-first uzavření, karta, mini workshop a checklist.
 - 2026-06-23: Doplněna úvodní podkapitola o prvním návratovém signálu po dlouhodobém klidu: konkrétní situace, čtyři první otázky, výsledky návratu, privacy-first neotevírání starých stop, karta, mini workshop a checklist.
 - 2026-06-23: Doplněna úvodní podkapitola o převodu uzavřené správy standardu do dlouhodobého klidu: aktivní prvky klidu, podmínky kdy klid nespouštět, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-23: Doplněna úvodní podkapitola o uzavření druhé běžné správy standardu: čtyři uzavírací stavy, uzavírací věta, rozlišení trvalého pravidla a dočasné péče, privacy-first úklid podkladů, karta, mini workshop a checklist.
