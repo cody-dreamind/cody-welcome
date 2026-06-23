@@ -246291,8 +246291,145 @@ Když se tým zasekne na tom, jestli má standard dost důkazů, vraťte se k p�
 
 Uzavření druhé běžné správy je hotové, když standard nepotřebuje omluvu ani doprovod. Buď se vrací do běžné správy jako klidné pravidlo, nebo zanechá jednu poslední lokální opravu. V obou případech má po sobě uklidit. Čistý standard je ten, který pomáhá příštímu člověku rozhodnout, ne ten, který mu předá celý kufr historických důvodů.
 
+## Převod uzavřené správy standardu do dlouhodobého klidu
+
+Když druhá běžná správa standardu dopadne dobře, další krok nemá být třetí správa. Má to být klid. Standard prošel běžným použitím, přežil bez čerstvé paměti autora, má kanonické místo, návratový signál a uklizené pomocné stopy. Pokud ho tým dál hlídá zvláštním režimem, vlastně mu nevěří. A když standardu nevěříte ani po dvou běžných správách, nejspíš jste neuzavřeli standard, ale jen odložili nejistotu do kalendáře.
+
+Dlouhodobý klid neznamená zapomenout. Znamená přestat se standardem zacházet jako s čerstvou změnou. Zůstává v pracovním místě, kontroluje se v běžném rytmu dané oblasti a znovu se otevře až při návratovém signálu. Tím se šetří pozornost týmu a zároveň se chrání rozhodovací paměť: pravidlo je dostupné, ale nevyžaduje speciální péči.
+
+Začněte větou:
+
+```text
+Standard převádíme do dlouhodobého klidu, protože:
+```
+
+Věta musí obsahovat důvod, ne jen přání. Například:
+
+```text
+Standard převádíme do dlouhodobého klidu, protože byl použitý ve dvou běžných správách bez čerstvé nápovědy, kanonické místo je jasné a návratový signál je zapsaný v šabloně.
+```
+
+Takový zápis říká, že klid není únava. Je to stav po ověření.
+
+### Co v klidu zůstává aktivní
+
+Dlouhodobý klid má držet čtyři aktivní prvky:
+
+- kanonické pravidlo v místě, kde se podle něj pracuje;
+- návratový signál, který otevře nové rozhodnutí;
+- běžný revizní rytmus celé oblasti;
+- vlastník nebo role, která umí pravidlo při signálu znovu vzít do ruky.
+
+Všechno ostatní má zůstat mimo aktivní práci. Neudržujte zvláštní seznam kontrol, pokud už standard není v mimořádném režimu. Nechte zmizet dočasné připomínky. Neplánujte další schůzku jen proto, že se klid zdá podezřele jednoduchý. Jednoduchost po ověření je cíl, ne mezera v procesu.
+
+Praktický příklad:
+
+```text
+Standard:
+První kontaktní formulář sbírá e-mail, stručný kontext a volitelné URL.
+
+Kanonické místo:
+Checklist nové landing page a výchozí komponenta formuláře.
+
+Dlouhodobý klid:
+Standard se dál kontroluje jen při měsíční správě šablon nebo při vytvoření nové landing page.
+
+Návratový signál:
+U pěti relevantních poptávek za sebou obchod prokazatelně potřebuje telefon už pro první odpověď.
+
+Co už neděláme:
+Nevedeme samostatný formulářový dohled a nevracíme do aktivní práce export z původního ověření.
+```
+
+### Kdy klid ještě nespouštět
+
+Standard ještě nepřevádějte do dlouhodobého klidu, pokud:
+
+- kanonické místo není jasné;
+- existují dvě aktivní šablony se stejným typem pravidla;
+- návratový signál je obecný, například "když to začne drhnout";
+- privacy-first hranice není vidět tam, kde vznikají data;
+- dočasné podklady z ověření pořád leží v pracovním prostoru;
+- vlastník neví, kdy má pravidlo znovu otevřít.
+
+V takovém případě neprodlužujte dohled automaticky. Opravte chybějící podmínku. Často stačí jedna lokální kotva, přejmenování šablony, doplnění návratového signálu nebo úklid exportu. Klid se nemá zasloužit dlouhým čekáním. Má se zasloužit jasným stavem.
+
+### Privacy-first klid
+
+Privacy-first hodnota dlouhodobého klidu je v tom, že standard nezůstane obalený starými důkazy. Po převodu do klidu zkontrolujte, že aktivní pracovní místo neobsahuje surové podklady, které už sloužily jen k ověření. Ponechte závěr, ne materiál.
+
+Použijte krátké rozdělení:
+
+```text
+V klidu ponecháváme:
+Aktuální pravidlo, návratový signál a agregovaný důvod.
+
+V klidu neuchováváme:
+Dočasné exporty, screenshoty, kopie zákaznických zpráv, ruční kontrolní tabulky a staré komentáře bez účelu.
+
+Při návratu znovu ověříme:
+Jestli nový signál opravdu vyžaduje nové údaje, nebo stačí existující pracovní poznámky.
+```
+
+Tím se zabrání časté chybě: standard už je klidný, ale kolem něj zůstane datový nepořádek z doby, kdy se ověřoval. To je jako uklidit stůl a nechat pod ním krabici s nápisem "možná důležité". Možná. Ale spíš budoucí práce pro někoho, kdo si vytáhne kratší sirku.
+
+### Karta převodu do dlouhodobého klidu
+
+```text
+Standard:
+
+Proč je připravený na klid:
+
+Kanonické pracovní místo:
+
+Běžný revizní rytmus:
+
+Návratový signál:
+
+Vlastník nebo role:
+
+Co zůstává aktivní:
+
+Co ukončujeme:
+
+Privacy-first úklid:
+Ponecháváme:
+Zobecňujeme:
+Mažeme nebo necháváme ve zdrojovém systému:
+
+Co se nesmí znovu otevřít bez signálu:
+
+Datum převodu do klidu:
+```
+
+### Mini workshop na 5 minut
+
+1. Minuta 1: přečtěte závěr druhé běžné správy.
+2. Minuta 2: potvrďte kanonické místo a běžný rytmus.
+3. Minuta 3: přečtěte návratový signál a vlastníka.
+4. Minuta 4: rozhodněte, co se ukončuje a uklízí.
+5. Minuta 5: zapište převod do dlouhodobého klidu.
+
+Pokud během pěti minut neumíte říct návratový signál, standard ještě není připravený na klid. Neotevírejte velkou debatu. Doplňte signál a vraťte se ke kartě.
+
+### Checklist dlouhodobého klidu
+
+- Prošel standard dvěma běžnými správami nebo srovnatelným normálním použitím?
+- Má jedno kanonické pracovní místo?
+- Je návratový signál konkrétní a rozpoznatelný?
+- Je jasné, v jakém běžném rytmu se pravidlo dál kontroluje?
+- Má standard vlastníka nebo roli, která ho umí znovu otevřít?
+- Končí zvláštní dohled, který už nemá účel?
+- Jsou dočasné exporty, screenshoty, kopie a kontrolní seznamy uklizené?
+- Zůstává privacy-first hranice viditelná v místě, kde vznikají data?
+- Neotevírá se další kontrola jen proto, že tým nechce pustit čerstvou změnu z ruky?
+- Ví další člověk, kdy standard použít a kdy ho znovu otevřít?
+
+Dlouhodobý klid je dobrý konec standardizační smyčky. Neznamená, že pravidlo je navždy pravda. Znamená, že se z něj stala běžná pracovní výchozí pozice. A to je přesně místo, kam má dobrá iterace dojít: jasné pravidlo, malá datová stopa, uklizené důkazy a další pozornost jen tehdy, když pro ni přijde skutečný signál.
+
 ## Pracovní log
 
+- 2026-06-23: Doplněna úvodní podkapitola o převodu uzavřené správy standardu do dlouhodobého klidu: aktivní prvky klidu, podmínky kdy klid nespouštět, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-23: Doplněna úvodní podkapitola o uzavření druhé běžné správy standardu: čtyři uzavírací stavy, uzavírací věta, rozlišení trvalého pravidla a dočasné péče, privacy-first úklid podkladů, karta, mini workshop a checklist.
 - 2026-06-23: Doplněna úvodní podkapitola o druhé běžné správě standardu po uzavření první správy: přirozené použití, přenositelnost bez čerstvé nápovědy, čtyři výsledky, privacy-first minimum dat, karta, mini workshop a checklist.
 - 2026-06-23: Doplněna úvodní podkapitola o uzavření první běžné správy standardu: čtyři uzavírací stavy, uzavírací věta, propsání do stabilního místa, privacy-first úklid důkazů, karta, mini workshop a checklist.
