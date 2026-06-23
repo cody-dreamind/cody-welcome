@@ -247221,8 +247221,190 @@ Když workshop začne řešit, jestli by šlo standard vylepšit obecně, vraťt
 
 Druhé běžné použití je dobrý konec návratu po dlouhodobém klidu. Ne proto, že by standard navždy zabetonovalo, ale proto, že ukáže, že pravidlo už nepotřebuje čerstvé držení za ruku. Když projde, vraťte ho do normálního rytmu a přestaňte kolem něj chodit po špičkách. Standard má sloužit práci, ne sbírat péči jako kancelářská rostlina.
 
+## Uzavření druhého běžného použití po uzavřeném návratu z dlouhodobého klidu
+
+Druhé běžné použití po návratu z dlouhodobého klidu je poslední místo, kde má tým právo ptát se, jestli standard ještě potřebuje zvláštní pozornost. Pokud se i tady ukáže, že pravidlo funguje bez čerstvé nápovědy, bez původního vlastníka a bez otevírání staré historie, další mimořádná péče už většinou nepomáhá. Jen prodlužuje přechodový režim.
+
+Uzavření druhého použití má proto jednu jednoduchou ambici: převést standard zpět do normálního provozu, nebo přesně pojmenovat poslední malou překážku. Neotevírá znovu celý návrat. Neřeší, jestli by pravidlo mohlo být ideálnější. A hlavně neproměňuje úspěšné ověření v další kontrolní sérii. Když se dveře dají otevřít běžnou klikou, není potřeba k nim přidávat návod, alarm a tříčlennou komisi.
+
+Začněte uzavírací větou:
+
+```text
+Druhé běžné použití ukázalo, že standard je / není přenositelný bez mimořádné péče, protože:
+```
+
+Za dvojtečku doplňte jeden konkrétní důvod. Ne celý příběh. Například: "nový člověk našel pravidlo v šabloně a nepřenesl auditní výjimku na workshopovou landing page." Nebo: "pravidlo bylo správné, ale odkaz ve formulářové šabloně pořád mířil na starý popis." Taková věta stačí k rozhodnutí, co se má stát dál.
+
+### Čtyři uzavírací stavy
+
+Po druhém běžném použití vyberte jeden ze čtyř uzavíracích stavů:
+
+- Vrátit standard do běžného rytmu.
+- Zavřít po jedné lokální opravě.
+- Zpřesnit hranici výjimky.
+- Znovu otevřít návratovou smyčku.
+
+Stav `vrátit standard do běžného rytmu` použijte, když pravidlo prošlo bez pomoci. V takovém případě už nepište další kontrolu "pro jistotu". Stačí aktualizovat pracovní log standardu, nechat platný návratový signál a ukončit zvláštní pozornost. Tým má dostat jasný signál, že pravidlo je zase součástí běžné práce.
+
+Stav `zavřít po jedné lokální opravě` použijte, když standard fungoval, ale jedno pracovní místo pořád brzdí použití. Typicky chybí odkaz v šabloně, starý název v navigaci, nejasný popisek u rozhodovacího pole nebo drobná kolize mezi dvěma dokumenty. Oprava má být tak malá, aby se dala popsat jednou větou. Pokud potřebuje vlastní plán, není lokální.
+
+Stav `zpřesnit hranici výjimky` použijte, když se výjimka začala šířit mimo původní účel. Tady není první reakcí zákaz nebo nový proces. První reakcí je věta, která říká, kdy výjimka platí a kdy se nepřenáší. Dobrá hranice je praktická: člověk podle ní pozná, co má udělat v nejbližším pracovním místě.
+
+Stav `znovu otevřít návratovou smyčku` použijte jen tehdy, když se naplnil předem zapsaný návratový signál. Pokud se signál nenaplnil, ale někdo má nový nápad, patří do backlogu nebo do samostatné karty. Návratová smyčka není univerzální koš na zajímavé postřehy. Je to režim pro situaci, kdy starý problém opravdu znovu klepe na dveře.
+
+### Praktický příklad
+
+```text
+Standard:
+Telefon ve výchozím formuláři nesbíráme.
+
+Výjimka po návratu z klidu:
+Auditní landing page může mít volitelný telefon, protože kvalifikační hovor je součástí nabídky.
+
+Druhé běžné použití:
+Nový člověk připravil landing page pro workshop. Použil šablonu bez telefonu, našel odkaz na pravidlo a do poznámky napsal, že auditní výjimku nepřenáší.
+
+Uzavírací stav:
+Vrátit standard do běžného rytmu.
+
+Zápis:
+Standard je přenositelný bez mimořádné péče. Auditní výjimka zůstala ve své hranici, workshopová landing page nepřidává telefon a další kontrola není potřeba.
+
+Návratový signál:
+Znovu otevřít jen tehdy, když dva různé typy landing page začnou přebírat auditní výjimku bez jasného účelu.
+```
+
+Stejný příklad může dopadnout jinak:
+
+```text
+Druhé běžné použití:
+Nový člověk použil správný formulář bez telefonu, ale šablonu našel přes starý dokument a málem převzal auditní variantu.
+
+Uzavírací stav:
+Zavřít po jedné lokální opravě.
+
+Nejmenší oprava:
+V pracovní šabloně nahradit starý odkaz na formulář za kanonické pravidlo.
+
+Co neměníme:
+Neměníme samotný standard, nepřidáváme nové měření a neotevíráme staré poptávky.
+```
+
+Rozdíl je malý, ale důležitý. V prvním případě se zvláštní pozornost ukončuje hned. Ve druhém se ještě opraví jeden vstup do pravidla. Ani jeden případ nevyžaduje nový audit formulářů, nové dotazníky ani sběr osobních údajů.
+
+### Co propsat do pracovního místa
+
+Uzavření druhého použití se má propsat tam, kde člověk pravidlo příště opravdu použije. Nejen do dlouhého logu, který čtou tři lidé a jeden z nich je budoucí archeolog. Pracovní místo může být šablona landing page, checklist před publikací, karta nabídky, interní playbook, onboardingový krok nebo rozhodovací tabulka.
+
+Do pracovního místa patří:
+
+- aktuální pravidlo v přítomném čase;
+- hranice výjimky, pokud existuje;
+- návratový signál;
+- odkaz na kanonický zdroj pravdy;
+- poznámka, co se po druhém použití už nehlídá mimořádně.
+
+Do pracovního místa naopak nepatří celý příběh návratu. Ten může zůstat v historii. Běžný uživatel pravidla nepotřebuje vědět, kolik schůzek a poznámek k němu vedlo. Potřebuje poznat, co má udělat teď a kdy má zvednout ruku.
+
+Praktická pracovní věta:
+
+```text
+Ve výchozím formuláři telefon nesbíráme. Výjimka platí jen pro auditní landing page s kvalifikačním hovorem; ostatní stránky ji nepřebírají bez nové rozhodovací karty.
+```
+
+To je lepší než odstavec vysvětlující celou historii. Historie je užitečná pro audit a učení. Pravidlo je užitečné pro práci. Když se tyto dvě vrstvy smíchají, vznikne dokument, který je zároveň moc dlouhý pro použití a moc stručný pro historii. To je působivý způsob, jak prohrát oba zápasy najednou.
+
+### Privacy-first uzavření
+
+Uzavření druhého použití je dobrý okamžik pro poslední úklid pracovních stop. Cílem není smazat historii rozhodnutí. Cílem je nenechat kolem běžného pravidla ležet dočasné podklady, které už nemají účel.
+
+Zkontrolujte tři věci:
+
+- Pomocné podklady: existují exporty, screenshoty, kopie zákaznických zpráv nebo pracovní tabulky vytvořené jen pro návrat z klidu?
+- Přístupy: mají dočasní účastníci, konzultanti nebo testovací účty pořád přístup k materiálům, které už nepotřebují?
+- Měření: neběží kolem pravidla mimořádné sledování, které mělo skončit po druhém běžném použití?
+
+Privacy-first uzavření napište stručně:
+
+```text
+Po druhém běžném použití zůstává jen stav standardu, návratový signál a odkaz na kanonické pravidlo. Pomocné exporty se mažou, screenshoty se nepřenášejí a mimořádné sledování se vypíná.
+```
+
+Pokud potřebujete zachovat důkaz, zachovejte zobecněný závěr místo surového materiálu. Například: "nový člověk našel pravidlo přes šablonu bez pomoci" je dostatečný důkaz přenositelnosti. Není potřeba ukládat záznam obrazovky, jméno člověka ani kopii konkrétní poptávky. Privacy-first provoz často není o velkém právním gestu, ale o drobném odmítnutí sbírat víc, než rozhodnutí potřebuje.
+
+### Karta uzavření druhého běžného použití
+
+```text
+Standard:
+
+Uzavřený návrat po dlouhodobém klidu:
+
+První běžné použití:
+
+Druhé běžné použití:
+
+Uzavírací věta:
+
+Uzavírací stav:
+- vrátit standard do běžného rytmu
+- zavřít po jedné lokální opravě
+- zpřesnit hranici výjimky
+- znovu otevřít návratovou smyčku
+
+Co se propisuje do pracovního místa:
+
+Co zůstává jen v historii:
+
+Co výslovně neměníme:
+
+Privacy-first úklid:
+- co mažeme:
+- co anonymizujeme:
+- co ponecháváme jako zobecněný závěr:
+- jaké mimořádné měření vypínáme:
+
+Návratový signál:
+
+Vlastník běžného rytmu:
+
+Datum další standardní kontroly:
+```
+
+Karta má být krátká. Pokud ji vyplňujete déle než samotné druhé použití, pravděpodobně znovu otevíráte minulost. Zastavte se a vraťte se k uzavírací větě. Ta má nést rozhodnutí; karta má jen zabránit tomu, aby se rozhodnutí ztratilo.
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: přečtěte závěr druhého běžného použití.
+2. Minuta 2: napište jednu uzavírací větu.
+3. Minuta 3: vyberte jeden ze čtyř uzavíracích stavů.
+4. Minuta 4: určete, co se propíše do pracovního místa.
+5. Minuta 5: napište, co zůstává jen v historii a co se nemění.
+6. Minuta 6: proveďte privacy-first úklid pracovních stop.
+7. Minuta 7: potvrďte návratový signál a datum další běžné kontroly.
+
+Když se workshop zasekne na novém nápadu, napište ho mimo kartu. Uzavření druhého použití není brainstorming. Je to závora na konci zvláštního režimu. Nápady mohou žít dál, ale nemají držet otevřené pravidlo, které už se prokázalo v běžné práci.
+
+### Checklist uzavření druhého běžného použití
+
+- Máme popsané druhé běžné použití jednou konkrétní větou?
+- Vybrali jsme přesně jeden uzavírací stav?
+- Pokud standard fungoval, ukončili jsme mimořádnou pozornost?
+- Pokud je potřeba oprava, je opravdu lokální a jednovětá?
+- Pokud se rozlévá výjimka, zpřesnili jsme hranici tam, kde člověk rozhoduje?
+- Otevíráme návratovou smyčku jen při naplněném návratovém signálu?
+- Propsali jsme aktuální pravidlo do pracovního místa v přítomném čase?
+- Oddělili jsme pracovní pravidlo od historického příběhu návratu?
+- Zapsali jsme, co výslovně neměníme?
+- Uklidili jsme pomocné exporty, screenshoty, dočasné tabulky a mimořádné měření?
+- Zachováváme jen zobecněný důkaz, pokud surová data nejsou nutná?
+- Má standard po uzavření jasného vlastníka běžného rytmu?
+- Je další kontrola standardní, ne mimořádná?
+
+Dobře uzavřené druhé použití má být tiché. Tým si nemá odnést velkou prezentaci, ale klidné pravidlo, které ví, kde bydlí, kdy platí a kdy se má znovu otevřít. Codyho komentář: největší hodnota takového uzavření je často v tom, že odvážně nepřidá další proces. V provozu je někdy nejlepší automatizace ta, kterou nemusíte stavět, protože jste konečně napsali jednu dobrou větu.
+
 ## Pracovní log
 
+- 2026-06-23: Doplněna úvodní podkapitola o uzavření druhého běžného použití po uzavřeném návratu z dlouhodobého klidu: uzavírací stavy, propsání do pracovního místa, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-23: Doplněna úvodní podkapitola o druhém běžném použití po uzavřeném návratu z dlouhodobého klidu: přenositelnost bez čerstvé nápovědy, stabilita hranice, čtyři výsledky, privacy-first minimum dat, karta, mini workshop a checklist.
 - 2026-06-23: Doplněna úvodní podkapitola o uzavření prvního běžného použití po uzavřeném návratu z dlouhodobého klidu: čtyři uzavírací stavy, lokální oprava, propsání do pracovního místa, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-23: Doplněna úvodní podkapitola o uzavření prvního návratu po dlouhodobém klidu: čtyři uzavírací stavy, lokální oprava, doplnění hrany, oddělení nového tématu, privacy-first uzavření, karta, mini workshop a checklist.
