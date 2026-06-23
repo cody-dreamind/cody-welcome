@@ -247583,8 +247583,187 @@ Když se workshop začne měnit v revizi celé oblasti, vraťte ho k jedné kont
 
 První standardní kontrola po návratu do běžného rytmu má potvrdit jednu věc: standard už nepotřebuje zvláštní péči, ale pořád potřebuje normální odpovědnost. To je zdravý stav. Pravidlo není zapomenuté, není rozpitvané a není ověšené novými reporty. Prostě žije tam, kde má, a tým ví, kdy ho znovu otevřít.
 
+## Uzavření první standardní kontroly po návratu do běžného rytmu
+
+První standardní kontrola má cenu teprve tehdy, když skončí jasným stavem. Jinak se z ní stane další opatrné kolečko kolem pravidla, které už mělo být zpátky v běžném provozu. Uzavření říká, jestli standard zůstává klidně běžet, potřebuje malou údržbu trasy, dostane jednu přesnější větu, nebo se opravdu otevírá nová smyčka.
+
+Nejdůležitější je neplést si uzavření s novou analýzou. Kontrola už proběhla. Teď nemáte znovu dokazovat, proč pravidlo vzniklo, kdo ho kdy porušil a jaké všechny varianty by šly zlepšit. Máte převést výsledek do jednoho provozního závěru, který tým najde při další běžné práci.
+
+Začněte čtyřmi větami:
+
+```text
+Kontrola ukázala:
+
+Proto standard:
+
+Do běžné práce se propíše:
+
+Další návrat otevře jen:
+```
+
+Tyto věty drží uzavření při zemi. První popisuje zjištění, druhá stav standardu, třetí praktické propsání a čtvrtá návratový signál. Pokud čtvrtou větu neumíte napsat, kontrola pravděpodobně neskončila. Jen se přesunula do tichého čekání, až ji někdo znovu vytáhne.
+
+### Čtyři uzavírací stavy
+
+Po první standardní kontrole vyberte jeden ze čtyř stavů:
+
+- Nechat standard v klidu.
+- Uzavřít lokální údržbu pracovní trasy.
+- Propsat jedno drobné zpřesnění.
+- Otevřít novou návratovou smyčku.
+
+Stav `nechat standard v klidu` použijte, když pravidlo pořád plní účel, lidé ho najdou v běžném pracovním místě a kontrola nepotřebovala starou historii. Uzavření může být jediná věta v logu. Nepřidávejte další review jen proto, že kontrola dopadla dobře. To by bylo jako dávat zdravému procesu preventivně sádru.
+
+Stav `uzavřít lokální údržbu pracovní trasy` použijte, když se opravoval odkaz, název položky, místo v checklistu, onboardingová poznámka nebo jiná navigace k pravidlu. Standard samotný se nemění. Uzavření má potvrdit, že cesta k němu je opět použitelná a že dočasná oprava nezůstala jako další paralelní zdroj pravdy.
+
+Stav `propsat jedno drobné zpřesnění` patří situaci, kdy pravidlo zůstává správné, ale jeho hranice potřebuje přesnější formulaci. Drobné znamená opravdu drobné: jedna věta, jeden příklad, jedna výjimka nebo jeden zákaz přenosu výjimky. Pokud zpřesnění mění účel pravidla, nejde o drobnost a patří do nové smyčky.
+
+Stav `otevřít novou návratovou smyčku` použijte jen tehdy, když se naplnil návratový signál. Třeba když se výjimka začala opakovaně kopírovat do jiných formulářů, lidé standard obcházejí v novém pracovním toku, nebo datová stopa pravidla znovu roste bez jasného účelu. V takovém případě kontrolu uzavřete a novou smyčku otevřete zvlášť. Nemíchejte záznam kontroly a záznam nového problému do jednoho dokumentu.
+
+### Praktický příklad
+
+```text
+Standard:
+Ve výchozím formuláři landing page nesbíráme telefon.
+
+Výsledek první standardní kontroly:
+Pravidlo pořád plní účel. Nové landing pages používají správnou šablonu. Jeden produktový checklist ale odkazoval na starší formulářovou poznámku.
+
+Uzavírací stav:
+Uzavřít lokální údržbu pracovní trasy.
+
+Do běžné práce se propíše:
+Produktový checklist odkazuje na kanonické pravidlo ve formulářové šabloně.
+
+Co se nemění:
+Neměníme formulář, nepřidáváme telefon, neotevíráme novou analýzu kvalifikace poptávek.
+
+Další návrat otevře:
+Dvě různé landing pages použijí telefon mimo schválenou auditní výjimku.
+```
+
+Tento výsledek je záměrně malý. Problém nebyl v pravidle, ale v cestě k pravidlu. Kdyby tým začal upravovat celý standard, vyrobil by práci z místa, kde stačil jeden odkaz. To je přesně ta tichá forma plýtvání, která vypadá zodpovědně, dokud se nesečte za měsíc.
+
+Jiný příklad:
+
+```text
+Výsledek kontroly:
+Auditní výjimka pro volitelný telefon je správná, ale lidé ji začali popisovat jako "u auditů telefon dává smysl".
+
+Uzavírací stav:
+Propsat jedno drobné zpřesnění.
+
+Zpřesnění:
+Volitelný telefon je povolený jen u placeného auditu, kde je kvalifikační hovor součástí nabídky.
+
+Co se nemění:
+Standardní formulář pro konzultace, workshopy a obecné poptávky zůstává bez telefonu.
+```
+
+Zpřesnění tady neotevírá nový projekt. Jen brání tomu, aby se výjimka začala šířit pod pohodlným slovem "audit". Slova jsou v provozu levná, ale umí draze rozšířit sběr dat.
+
+### Co zavřít v pracovních stopách
+
+Uzavření standardní kontroly má uklidit tři typy stop:
+
+- kontrolní poznámku;
+- případné dočasné podklady;
+- cestu k dalšímu návratu.
+
+Kontrolní poznámka má zůstat krátká. Stačí stav, rozhodnutí a další běžný termín. Dočasné podklady mají buď zmizet, nebo se vrátit do zdroje pravdy. Pokud jste během kontroly otevřeli starý screenshot, kopii šablony nebo výpis použití pravidla, nepřenášejte ho do běžného logu, pokud pro to není jasný účel.
+
+Cesta k dalšímu návratu musí být konkrétní. "Zkontrolovat znovu později" není návratový signál. Lepší je: "Otevřít novou smyčku, pokud dvě různé šablony přenesou auditní výjimku mimo placený audit." Takový signál dává týmu jasnou hranici a zároveň nevyžaduje nové sledování.
+
+### Privacy-first uzavření
+
+Privacy-first uzavření se ptá na jednu věc: co musí z kontroly opravdu zůstat, aby tým příště rozhodl lépe?
+
+Většinou stačí:
+
+- zobecněný výsledek kontroly;
+- odkaz na kanonické pravidlo;
+- případně jedna věta zpřesnění;
+- návratový signál.
+
+Nestačí-li to, napište proč. Pokud ponecháváte podrobnější důkaz, musí mít účel, vlastníka a retenční hranici. Bez toho se z běžné kontroly stane nový archiv drobných provozních stop. A malé archivy jsou pořád archivy. Jen se tváří roztomileji, dokud je nemusíte uklízet.
+
+Krátká uzavírací věta může znít:
+
+```text
+Z kontroly zůstává jen zobecněný závěr a opravený odkaz v checklistu. Starý screenshot šablony se nepřenáší do dalšího logu.
+```
+
+Pokud kontrola vedla k nové smyčce, oddělte její datovou stopu:
+
+```text
+Standardní kontrolu uzavíráme. Nová smyčka začne samostatnou kartou a použije jen aktuální běžné příklady, ne staré podklady z původního návratu.
+```
+
+Tím chráníte historii před zbytečným znovupoužitím. Starý důkaz mohl být dobrý pro staré rozhodnutí, ale to neznamená, že má automaticky cestovat do každé další kontroly.
+
+### Karta uzavření standardní kontroly
+
+```text
+Standard:
+
+Běžný rytmus kontroly:
+
+Co kontrola ukázala:
+
+Uzavírací stav:
+- nechat standard v klidu
+- uzavřít lokální údržbu pracovní trasy
+- propsat jedno drobné zpřesnění
+- otevřít novou návratovou smyčku
+
+Rozhodnutí jednou větou:
+
+Co se propíše do běžného pracovního místa:
+
+Co výslovně neměníme:
+
+Které dočasné podklady zavíráme, mažeme nebo vracíme do zdroje pravdy:
+
+Privacy-first výsledek:
+
+Návratový signál:
+
+Datum další běžné kontroly:
+```
+
+Kartu používejte jen tam, kde samotná věta nestačí. Pokud standard zůstává beze změny a kontrola neměla tření, zapište výsledek do běžného logu a jděte od toho. Administrativa nemá být daň za to, že věci fungují.
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: přečtěte výsledek standardní kontroly.
+2. Minuta 2: vyberte jeden uzavírací stav.
+3. Minuta 3: napište rozhodnutí jednou větou.
+4. Minuta 4: určete, co se propíše do pracovního místa.
+5. Minuta 5: napište, co se výslovně nemění.
+6. Minuta 6: zavřete dočasné podklady a privacy-first stopu.
+7. Minuta 7: zapište návratový signál a další běžný termín.
+
+Když se tým během workshopu začne vracet k otázce, proč standard kdysi vznikl, zastavte ho. Ta otázka patří do nové smyčky jen při naplněném návratovém signálu. Uzavření první standardní kontroly má ukončit zvláštní pozornost, ne jí dát nový kabát.
+
+### Checklist uzavření standardní kontroly
+
+- Vybrali jsme jeden uzavírací stav?
+- Umíme výsledek napsat jednou větou?
+- Je jasné, jestli se mění standard, pracovní trasa, nebo nic?
+- Pokud šlo jen o odkaz nebo checklist, neotevřeli jsme obsah pravidla?
+- Pokud šlo o zpřesnění, vejde se do jedné věty?
+- Novou smyčku otevíráme jen při naplněném návratovém signálu?
+- Zapsali jsme, co výslovně neměníme?
+- Uklidili jsme dočasné podklady z kontroly?
+- Zůstává z kontroly jen přiměřený a zobecněný důkaz?
+- Má standard datum další běžné kontroly?
+- Má návratový signál konkrétní podobu, ne jen obecné "pohlídat"?
+
+Uzavření první standardní kontroly je malé provozní rozhodnutí s velkým vedlejším efektem: chrání tým před nekonečným dohledem nad věcí, která už se vrátila do normálu. Dobrý standard má být viditelný při práci, ne pořád slavnostně kontrolovaný. Když víte, co platí, co se změnilo a co by otevřelo další návrat, můžete ho nechat zase dělat jeho nudnou práci. Nuda tady není problém. Nuda je známka toho, že systém konečně přestal tahat za rukáv.
+
 ## Pracovní log
 
+- 2026-06-23: Doplněna úvodní podkapitola o uzavření první standardní kontroly po návratu do běžného rytmu: čtyři uzavírací stavy, lokální údržba trasy, drobné zpřesnění, privacy-first úklid podkladů, karta, mini workshop a checklist.
 - 2026-06-23: Doplněna úvodní podkapitola o první standardní kontrole po návratu do běžného rytmu: běžný revizní režim, účel pravidla, pracovní trasa, privacy-first důkazy, karta, mini workshop a checklist.
 - 2026-06-23: Doplněna úvodní podkapitola o uzavření druhého běžného použití po uzavřeném návratu z dlouhodobého klidu: uzavírací stavy, propsání do pracovního místa, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-23: Doplněna úvodní podkapitola o druhém běžném použití po uzavřeném návratu z dlouhodobého klidu: přenositelnost bez čerstvé nápovědy, stabilita hranice, čtyři výsledky, privacy-first minimum dat, karta, mini workshop a checklist.
