@@ -244453,8 +244453,154 @@ Když workshop otevře otázku, jestli by se podobně neměly zkontrolovat všec
 
 Druhá kontrola po zmenšení revizní stopy je dobrý konec jedné dlouhé smyčky. Standard už nepotřebuje zvláštní doprovod, ale tým si ověřil, že nezmizel v tichu. Když kontrola dopadne dobře, nejlepší další akce je žádná zvláštní akce. V provozu je to někdy nejvyšší forma elegance: systém funguje a nikdo kvůli tomu nemusí zakládat další tabulku.
 
+## Uzavření druhé kontroly po zmenšení revizní stopy
+
+Druhá kontrola po zmenšení revizní stopy má smysl jen tehdy, když se opravdu uzavře. Jinak z ní vznikne podivný mezistav: tým si ověřil, že lehčí režim funguje, ale pořád se k němu chová jako k dočasnému experimentu. Výsledek je horší než před zmenšením, protože starou revizní stopu jste sice uklidili, ale v hlavě lidí zůstala nová nejistota.
+
+Uzavření začněte krátkým porovnáním:
+
+```text
+Po první kontrole mělo zůstat:
+
+Druhá běžná situace ukázala:
+
+Závěr:
+```
+
+Tyto tři věty jsou důležitější než dlouhá zpráva. Mají říct, jestli standard zůstává v běžném rytmu, potřebuje poslední lokální opravu, vrací se mu dočasná opora, nebo se musí znovu ukotvit vlastnictví. Bez závěru se i dobrá kontrola promění v další otevřenou poznámku.
+
+Praktický příklad:
+
+```text
+Po první kontrole mělo zůstat:
+Publikační checklist, kvartální review standardů a návratový signál pro nové externí datové toky.
+
+Druhá běžná situace ukázala:
+Editor checklist našel bez pomoci, rozpoznal nový formulářový tok a otevřel datovou kontrolu ve správném pracovním místě. Nevznikla nová pomocná tabulka.
+
+Závěr:
+Zmenšení revizní stopy je uzavřené. Standard zůstává v běžném publikačním rytmu a další zvláštní kontrola nevzniká.
+```
+
+Všimněte si poslední věty. Neříká jen, že kontrola dopadla dobře. Říká, co se po ní nestane. To je v provozu stejně důležité jako samotné rozhodnutí. Když výslovně nezavřete zvláštní režim, někdo ho časem znovu otevře "pro jistotu". A "pro jistotu" je často jen dražší název pro nedůvěru v dobře napsané pravidlo.
+
+### Čtyři uzavírací stavy
+
+Po druhé kontrole vyberte jeden ze čtyř uzavíracích stavů:
+
+- Uzavřít do běžného rytmu: standard funguje bez zvláštní opory a další samostatná kontrola nevzniká.
+- Udělat poslední lokální dočištění: stačí jedna úprava v kanonickém nebo pracovním místě a potom se zvláštní režim zavře.
+- Opravit provozní kotvu: obsah standardu je správný, ale není jasné vlastnictví, rytmus nebo místo rozhodnutí.
+- Vrátit dočasnou oporu: zmenšení zatím neobstálo a pravidlo potřebuje nejmenší možnou dočasnou podporu se stop podmínkou.
+
+Stav `uzavřít do běžného rytmu` je cílový stav. Zapište ho stručně a odolejte pokušení přidat "ještě jednu kontrolu za měsíc". Pokud návratový signál existuje a běžný rytmus funguje, další kontrola by nebyla disciplína, ale nový náklad.
+
+Stav `poslední lokální dočištění` použijte jen pro opravu, která má jasné místo. Například přejmenovat položku checklistu, doplnit odkaz na kanonický standard nebo upravit jednu větu návratového signálu. Pokud potřebujete školení, nový proces a změnu šablony, už nejde o poslední dočištění.
+
+Stav `opravit provozní kotvu` patří situacím, kdy pravidlo není špatné, ale nemá pevné místo v práci. Tým ví, co by měl dělat, jen není jasné kdy, kdo nebo kde to rozhodnutí uzavírá. V takovém případě nepřepisujte celý standard. Přidejte mu kotvu: vlastník, rytmus, pracovní místo nebo okamžik v běžném procesu.
+
+Stav `vrátit dočasnou oporu` používejte opatrně. Není to návrat ke staré revizní stopě. Je to nejmenší pomoc, která umožní standardu znovu dozrát. Musí mít stop podmínku, jinak jste jen vyměnili starou tabulku za novou a tváříte se u toho velmi procesně. Což zní profesionálně, ale pořád je to jen tabulka v novém kabátě.
+
+### Uzavírací věta
+
+Každé uzavření napište jednou větou. Dobrá věta obsahuje stav, pracovní místo a hranici další péče:
+
+```text
+Standard zůstává v běžném publikačním checklistu; další samostatná kontrola nevzniká a návrat otevře jen nový externí datový tok.
+```
+
+Nebo:
+
+```text
+Před uzavřením doplníme odkaz na kanonický standard do šablony landing page; po této úpravě končí zvláštní sledování zmenšené revizní stopy.
+```
+
+Slabá uzavírací věta zní třeba takto:
+
+```text
+Budeme to dál sledovat.
+```
+
+To není závěr, ale mlha s kalendářem. Chybí pracovní místo, chybí důvod návratu a chybí hranice, kdy sledování skončí. Pokud takovou větu napíšete, vraťte se k uzavíracím stavům a vyberte jeden z nich.
+
+### Privacy-first uzavření
+
+Po uzavření druhé kontroly smažte nebo zobecněte pracovní stopy, které už nemají účel. U standardů kolem webu, marketingu a SaaS provozu se často objeví pomocné screenshoty, kopie formulářů, výřezy analytiky, poznámky z obchodních situací nebo odkazy na interní diskuze. Nenechávejte je žít jen proto, že pomohly při kontrole.
+
+Stačí uchovat závěr:
+
+```text
+Druhá kontrola potvrdila, že standard byl použit v běžném publikačním procesu bez nové pomocné evidence. Návratový signál zůstává nový externí datový tok.
+```
+
+Detailní podklady ponechte jen tam, kde jsou původním zdrojem pravdy a mají vlastní retenční pravidla. Nekopírujte je do e-booku, checklistu ani další tabulky. Privacy-first provoz není asketické cvičení. Je to jednoduchá provozní hygiena: závěr patří do pracovního místa, surové detaily zůstávají tam, kde pro ně existuje důvod.
+
+Codyho komentář: nejčistší proces je často ten, který po sobě umí uklidit. Ne proto, že by se styděl za práci, ale proto, že ví, kdy už práce skončila.
+
+### Karta uzavření druhé kontroly po zmenšení
+
+```text
+Standard:
+
+Kanonické pracovní místo:
+
+Závěr první kontroly po zmenšení:
+
+Co ukázala druhá běžná situace:
+
+Uzavírací stav:
+- uzavřít do běžného rytmu
+- poslední lokální dočištění
+- opravit provozní kotvu
+- vrátit dočasnou oporu
+
+Uzavírací věta:
+
+Co se propíše do pracovního místa:
+
+Co se dál zvlášť nesleduje:
+
+Návratový signál:
+
+Privacy-first úklid:
+Které pomocné stopy mažeme, zobecňujeme nebo necháváme jen v původním zdroji pravdy:
+
+Vlastník:
+
+Datum dalšího běžného rytmu nebo stop podmínka dočasné opory:
+```
+
+Karta není pozvánka k nové kontrole. Je to tečka. Pokud vyplnění karty vyrobí další tři úkoly, zkontrolujte, jestli jste omylem neotevřeli nové téma místo uzavření staré smyčky.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte závěr první kontroly a výsledek druhé běžné situace.
+2. Minuta 2: vyberte jeden uzavírací stav.
+3. Minuta 3: napište uzavírací větu.
+4. Minuta 4: určete, co se propíše do pracovního místa a co se dál zvlášť nesleduje.
+5. Minuta 5: zapište návratový signál nebo stop podmínku dočasné opory.
+6. Minuta 6: ukliďte pomocné stopy podle privacy-first pravidla.
+
+Když se tým nedohodne mezi běžným rytmem a dočasnou oporou, nepřidávejte oporu automaticky. Nejdřív pojmenujte konkrétní selhání, které by bez opory nastalo. Pokud ho neumíte napsat, pravděpodobně potřebujete důvěřovat běžnému rytmu.
+
+### Checklist uzavření druhé kontroly
+
+- Porovnali jsme závěr první kontroly s druhou běžnou situací?
+- Vybrali jsme jeden uzavírací stav?
+- Má uzavírací věta pracovní místo, hranici další péče a návratový signál?
+- Pokud děláme poslední dočištění, je opravdu lokální?
+- Pokud opravujeme provozní kotvu, víme, jestli chybí vlastník, rytmus nebo místo rozhodnutí?
+- Pokud vracíme dočasnou oporu, má stop podmínku?
+- Zapsali jsme, co se dál zvlášť nesleduje?
+- Nevznikla nová revizní stopa jen jako náhrada za tu zrušenou?
+- Uklidili jsme pomocné screenshoty, exporty, kopie zpráv nebo dočasné tabulky?
+- Ponechali jsme surové detaily jen v původním zdroji pravdy, pokud mají legitimní účel?
+
+Uzavření druhé kontroly je malá provozní zkouška důvěry. Když standard funguje, nechte ho fungovat. Když potřebuje opravu, opravte nejmenší místo. A když potřebuje dočasnou oporu, dejte jí jasný konec. Tím zůstane proces lehký, data uklizená a tým nebude udržovat zvláštní péči jen proto, že kdysi pomohla.
+
 ## Pracovní log
 
+- 2026-06-23: Doplněna úvodní podkapitola o uzavření druhé kontroly po zmenšení revizní stopy: čtyři uzavírací stavy, uzavírací věta, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-22: Doplněna úvodní podkapitola o prvním běžném ověření po uzavření malého kroku: tři kontrolní otázky, čtyři výsledky ověření, privacy-first záznam, karta, mini workshop a checklist.
 - 2026-06-22: Doplněna úvodní podkapitola o uzavření prvního malého kroku po spuštění: čtyři uzavírací stavy, propsání do pracovního místa, práce s nepotvrzeným důvodem, privacy-first uzavření, karta, mini workshop a checklist.
 - 2026-06-22: Doplněna úvodní podkapitola o druhé kontrole po zmenšení revizní stopy: přenositelnost bez čerstvé paměti, čtyři výsledky, privacy-first omezení důkazů, karta, mini workshop a checklist.
