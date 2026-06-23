@@ -732,6 +732,8 @@ Stalo se to, co jsme si předem řekli, že nás má vrátit k tématu?
 
 Pokud odpověď zní "nevím", není to ještě důvod otevřít iteraci. Je to důvod najít nejmenší existující důkaz. Tím může být jeden obchodní zápis, jedna poslední poptávka, jeden support tiket, jeden dokončený onboarding, jedna chyba v předávce nebo jeden reálný průchod šablonou. Privacy-first pravidlo je jednoduché: nejdřív hledejte v datech, která už vznikla legitimně při práci. Nepřidávejte nový tracking jen proto, že se někdo zeptal trochu neostře.
 
+Stav "nevím" si zároveň zaslouží vlastní hranici. Nesmí se z něj stát pohodlné parkoviště, kde podnět čeká, dokud si ho někdo znovu všimne. Zapište, jaký nejmenší důkaz by nejistotu změnil na rozhodnutí, a kdy přestanete hledat. Pokud důkaz do té doby nevznikne z běžné práce, téma neotevírejte.
+
 ### Tři brány potvrzení
 
 Návratový signál potvrďte přes tři brány:
