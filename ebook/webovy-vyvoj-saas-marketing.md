@@ -248827,8 +248827,196 @@ Když se v minutě 4 ukáže, že pracovní místo nejde určit, neuzavírejte. 
 
 Uzavření prvního běžného použití je konec malé zkoušky důvěry. Pokud standard obstál, dejte mu klid. Pokud se ukázala lokální chyba, opravte ji a zavřete. Pokud se objevilo nové téma, otevřete ho čistě a odděleně. Největší hodnota tohoto kroku není v dalším textu, ale v tom, že tým umí přestat hlídat věc, která už znovu funguje.
 
+## Druhé běžné použití po uzavřené reakci na slabý signál
+
+První běžné použití ukáže, jestli uzavřená reakce na slabý signál obstála hned po úklidu. Druhé běžné použití ověřuje tvrdší věc: jestli standard funguje i ve chvíli, kdy už kolem něj není čerstvá pozornost. Lidé si nepamatují poslední workshop, nikdo nevysvětluje, proč se stará stopa uklidila, a pracovní místo má samo vést k dobrému rozhodnutí.
+
+Tohle je přesně okamžik, kdy se ukáže rozdíl mezi skutečně uzavřenou reakcí a reakcí, která držela jen proto, že ji někdo ještě hlídal. Pokud druhé použití projde bez mimořádné nápovědy, standard se může vrátit do klidného rytmu. Pokud neprojde, máte konkrétní důkaz, že problém není v jednorázovém použití, ale v přenositelnosti pravidla.
+
+Začněte větou:
+
+```text
+Druhé běžné použití ověřuje, jestli standard funguje bez čerstvé paměti na slabý signál a bez skryté ruční péče.
+```
+
+Tato věta chrání rozsah. Nezkoumáte celý standard. Nevracíte se k původní debatě. Neprocházíte všechny historické příklady. Berete druhou přirozenou situaci a ptáte se, jestli člověk dokáže použít aktuální pracovní místo stejně klidně jako při prvním použití.
+
+### Co druhé použití ověřuje
+
+Druhé běžné použití má čtyři kontrolní vrstvy:
+
+- Přenositelnost: standard funguje i pro člověka nebo situaci, která nebyla u prvního použití.
+- Stabilitu hranice: pravidlo stále rozlišuje, kdy zůstat v klidu a kdy otevřít novou smyčku.
+- Nepřítomnost skryté péče: nikdo potichu nedoplňuje chybějící kontext ručně.
+- Čistotu pracovního místa: aktuální šablona, index nebo checklist nevyžadují návrat do logu.
+
+Přenositelnost je nejdůležitější. První použití mohl udělat člověk, který měl slabý signál ještě v hlavě. Druhé použití by mělo ideálně proběhnout v trochu jiné, ale pořád příbuzné situaci. Například první lead magnet byl checklist, druhý je krátký e-mailový kurz. První použití řešil marketér, druhé řeší někdo z obchodu nebo customer success. Ne proto, abyste dělali složitý test rolí, ale abyste zjistili, jestli pravidlo nestojí na jedné čerstvé vzpomínce.
+
+Stabilita hranice znamená, že tým pozná rozdíl mezi běžnou variací a skutečným návratovým signálem. Když se u druhého použití objeví nová drobná otázka, nemusí to hned znamenat, že je standard rozbitý. Možná stačí použít existující hranici. Pokud ale lidé znovu váhají nad stejnou věcí, kvůli které vznikl slabý signál, je potřeba přiznat, že uzavření nebylo dostatečné.
+
+Nepřítomnost skryté péče je zrádná. Někdy standard na papíře funguje jen proto, že jeden zkušený člověk před každým použitím pošle "jen rychlou poznámku". To není běžný provoz, to je ruční záplata v hezkém svetru. Druhé použití má ukázat, jestli by rozhodnutí vzniklo i bez této neviditelné služby.
+
+Čistota pracovního místa je praktická kontrola. Pokud druhý člověk musí otevřít pracovní log, aby pochopil, proč starý příklad neplatí, standard ještě nežije tam, kde má. Log může vysvětlit historii, ale nemá být každodenní navigací.
+
+### Praktický příklad
+
+```text
+Standard:
+U lead magnetu nesbíráme telefon, pokud telefon nemění další krok pro zájemce.
+
+Uzavřená reakce na slabý signál:
+Historická landing page s povinným telefonem byla označená jako archivní příklad a aktuální šablona dostala odkaz v interním indexu.
+
+První běžné použití:
+Nový checklist pro SaaS onboarding. Telefon se nepřidal, aktuální šablona stačila.
+
+Druhé běžné použití:
+Krátký e-mailový kurz k validaci SaaS nápadu.
+
+Ověření:
+Tým najde aktuální šablonu, starou landing page neotevírá jako vzor a rozhodne stejně: telefon se nepřidává, protože další krok je samostatné čtení kurzu, ne obchodní kvalifikace.
+
+Výsledek:
+Standard je přenositelný. Slabý signál se nevrátil.
+```
+
+Tady je dobré zastavit. Ne proto, že by nebylo možné pravidlo ještě vylepšit, ale protože druhé běžné použití splnilo svůj účel. Standard fungoval v další situaci bez mimořádné péče. Další práce by měla vzniknout až z nového návratového signálu, ne z obecné touhy mít jistotu na věčné časy. Věčné časy jsou mimochodem špatný sprint.
+
+Jiný výsledek:
+
+```text
+Druhé běžné použití:
+Tým připravuje e-mailový kurz a obchodník znovu vytáhne starou landing page jako argument, že telefon "jsme přece u lead magnetů někdy sbírali".
+
+Ověření:
+Archivní označení existuje, ale v interním indexu jsou historické a aktuální příklady pořád vedle sebe bez jasného rozlišení.
+
+Výsledek:
+Nejde o novou obchodní hranici. Starý příklad pořád mate pracovní místo.
+
+Rozhodnutí:
+Neotevíráme formulářovou strategii. Opravíme strukturu indexu: aktuální vzory budou oddělené od archivních příkladů.
+```
+
+Tento druhý výsledek není katastrofa. Je to užitečný nález. Pravidlo možná bylo správné, ale pracovní místo ho nedokázalo ochránit před starou stopou. Nejmenší dobrá oprava je proto v indexu, ne v samotném standardu.
+
+### Čtyři výsledky druhého použití
+
+Po druhém běžném použití vyberte jeden ze čtyř výsledků:
+
+- Stabilní klid: druhé použití proběhlo samostatně a standard se vrací do běžného rytmu.
+- Poslední lokální dočištění: objevilo se jedno konkrétní tření v cestě, názvu, odkazu nebo rozlišení aktuálních a historických příkladů.
+- Slabý přenos: pravidlo funguje jen s čerstvým vysvětlením nebo pomocí zkušeného člověka.
+- Skutečný návratový signál: druhé použití znovu ukázalo stejný typ problému, který měl být po reakci v klidu.
+
+Výsledek `stabilní klid` znamená konec zvláštní pozornosti. Neplánujte třetí kontrolu jen proto, že první dvě dopadly dobře. Dvě běžná použití po slabém signálu obvykle stačí k tomu, aby se standard vrátil do běžného provozu.
+
+Výsledek `poslední lokální dočištění` držte opravdu poslední. Opravte jedno místo a zapište, že po opravě se téma nehlídá zvlášť. Pokud se po druhém použití objeví chuť přidat celý nový kontrolní proces, zeptejte se, jaký konkrétní důkaz to vyžaduje. Bez důkazu je to jen procesní neklid.
+
+Výsledek `slabý přenos` je signál, že standard možná není dost samonosný. Neznamená to automaticky velký přepis. Začněte otázkou: co člověk potřeboval vědět navíc, aby rozhodl správně? Pokud jde o jednu chybějící větu, doplňte ji. Pokud jde o celou skrytou historii, možná je potřeba standard zjednodušit nebo rozdělit.
+
+Výsledek `skutečný návratový signál` znamená, že zvláštní větev končí a začíná nová smyčka. Nepokračujte v opravování slabého signálu pod stejnou kartou. Pojmenujte nový návrat, pracovní místo a první nejmenší důkaz. Starou reakci uzavřete jako nedostatečnou pro běžný provoz, ale nechte její historii stručnou.
+
+### Privacy-first kontrola druhého použití
+
+Druhé použití často svádí k porovnávání: první landing page, druhá landing page, interní komentáře, screenshoty, verze formuláře, obchodní poznámky. To může rychle vyrobit víc datové stopy než samotný problém potřebuje.
+
+Privacy-first minimum pro druhé použití zní:
+
+```text
+Druhé použití proběhlo na e-mailovém kurzu k validaci SaaS nápadu. Standard byl použit bez čerstvé nápovědy, historický příklad se neotevřel jako vzor a telefon se nepřidal. Neukládáme kopie stránky ani interní komentáře; pro další práci stačí závěr o přenositelnosti.
+```
+
+Pokud druhé použití ukáže problém, pořád není nutné kopírovat všechno. Uložte typ tření, pracovní místo a rozhodnutí. Staré příklady označte nebo přesuňte v kanonickém systému, ale nevytvářejte novou složku screenshotů jen proto, aby bylo vidět, že jste uklízeli. Úklid, který po sobě nechá větší hromadu stop, je jen stěhování nepořádku s lepším názvem.
+
+### Karta druhého běžného použití
+
+```text
+Standard nebo pracovní trasa:
+
+Původní slabý signál:
+
+Uzavřená reakce:
+
+První běžné použití a výsledek:
+
+Druhé běžné použití:
+
+Kdo standard použil:
+
+Jak se lišilo od prvního použití:
+
+Ověření přenositelnosti:
+- fungovalo bez čerstvé paměti
+- fungovalo s drobnou nápovědou
+- nefungovalo bez skryté péče
+
+Ověření hranice:
+- hranice byla jasná
+- hranice potřebuje jednu větu
+- naplnil se návratový signál
+
+Stav pracovního místa:
+- aktuální místo stačilo
+- chyběl odkaz nebo popisek
+- historické a aktuální příklady se pletou
+
+Výsledek:
+- stabilní klid
+- poslední lokální dočištění
+- slabý přenos
+- skutečný návratový signál
+
+Nejmenší další krok:
+
+Co výslovně neotevíráme:
+
+Privacy-first záznam:
+
+Datum nebo signál dalšího návratu:
+```
+
+Kartu použijte jednou. Pokud ji tým začne vyplňovat u každého dalšího použití, slabý signál se ve skutečnosti nikdy nezavřel. Cílem druhého použití je uvolnit standard zpět do normální práce, ne založit novou evidenci běžných situací.
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: připomeňte si původní slabý signál a uzavřenou reakci.
+2. Minuta 2: pojmenujte první běžné použití a jeho výsledek.
+3. Minuta 3: vyberte druhé přirozené použití, které není jen opakováním stejné situace.
+4. Minuta 4: ověřte, jestli standard fungoval bez čerstvé paměti a skryté pomoci.
+5. Minuta 5: zkontrolujte, jestli pracovní místo nepletlo historické a aktuální příklady.
+6. Minuta 6: vyberte jeden ze čtyř výsledků.
+7. Minuta 7: napište privacy-first záznam a věc, kterou výslovně neotevíráte.
+
+Pokud se workshop zasekne na debatě o původním slabém signálu, vraťte ho k dnešní otázce:
+
+```text
+Teď neobhajujeme starou reakci. Ověřujeme, jestli druhé běžné použití funguje bez její čerstvé paměti.
+```
+
+Tahle věta šetří čas. Historie už byla zapsaná. Dnešní práce má rozhodnout, jestli standard může zpět do klidu, nebo jestli potřebuje konkrétní další krok.
+
+### Checklist druhého běžného použití
+
+- Vybrali jsme druhé přirozené použití, ne další umělý test?
+- Liší se aspoň trochu od prvního použití člověkem, situací nebo pracovním kontextem?
+- Standard byl najitelný bez otevření starého logu?
+- Rozhodnutí šlo udělat bez čerstvého vysvětlení původního slabého signálu?
+- Neproběhla skrytá ruční péče, která by výsledek přikrášlila?
+- Historické a aktuální příklady byly jasně oddělené?
+- Rozlišili jsme běžnou variaci od skutečného návratového signálu?
+- Vybrali jsme jeden ze čtyř výsledků?
+- Pokud vzniklo dočištění, je poslední a lokální?
+- Pokud je přenos slabý, víme, jaká konkrétní věta nebo pracovní hrana chyběla?
+- Pokud se naplnil návratový signál, otevíráme novou smyčku odděleně?
+- Neukládáme kopie stránek, interní komentáře, osobní údaje ani exporty bez jasného účelu?
+- Je jasné, jestli standard končí ve stabilním klidu, lokální opravě, slabém přenosu, nebo nové smyčce?
+
+Druhé běžné použití je dobrý konec zvláštní pozornosti. Když projde, standard nepotřebuje další péči, jen běžný rytmus. Když neprojde, máte konečně přesné místo, kde se přenos láme. V obou případech je výsledek užitečný: buď se systém uklidní, nebo se další práce zmenší na konkrétní hranici místo mlhavého pocitu, že "to ještě není ono".
+
 ## Pracovní log
 
+- 2026-06-24: Doplněna úvodní podkapitola o druhém běžném použití po uzavřené reakci na slabý signál: přenositelnost bez čerstvé paměti, stabilita hranice, skrytá péče, privacy-first záznam, karta, mini workshop a checklist.
 - 2026-06-24: Doplněna úvodní podkapitola o uzavření prvního běžného použití po uzavřené reakci na slabý signál: uzavírací stavy, praktické příklady, propsání do pracovního místa, privacy-first záznam, karta, mini workshop a checklist.
 - 2026-06-24: Doplněna úvodní podkapitola o prvním běžném použití po uzavřené reakci na slabý signál: ověření najitelnosti, rozhodnutelnosti, čistoty stop a klidu režimu, praktické příklady, privacy-first záznam, karta, mini workshop a checklist.
 - 2026-06-23: Doplněna úvodní podkapitola o uzavření první reakce na slabý signál: uzavírací stavy, praktické příklady, propsání do pracovního místa, privacy-first úklid, karta, mini workshop a checklist.
