@@ -251757,8 +251757,184 @@ Pokud workshop začne řešit metriky, formuláře, obchodní kvalifikaci a land
 
 Druhá standardní kontrola po uzavřeném návratu po tichém provozu má potvrdit samostatnost. Ne slávu pravidla, ne krásu procesu, ne týmovou paměť. Jen to, že správné rozhodnutí přežije běžný den, běžného člověka a běžné pokušení vyřešit nejistotu dalším sběrem dat. Pokud ano, pravidlo si zaslouží klid. Pokud ne, zaslouží si jednu přesnou opravu.
 
+## Uzavření druhé standardní kontroly po uzavřeném návratu po tichém provozu
+
+Druhá standardní kontrola má skončit rychleji než první. Pokud se po ní pořád rozbíhá dlouhá debata, kontrola pravděpodobně neověřovala samostatnost pravidla, ale znovu otevřela starý návrat. To může být někdy správně, ale nesmí se to tvářit jako běžná údržba. Uzavření druhé kontroly proto musí jasně říct, jestli pravidlo přechází do klidu, dostává jednu lokální opravu, nebo se z něj odděluje nový návratový signál.
+
+Začněte větou:
+
+```text
+Druhou standardní kontrolu uzavíráme jako:
+- stabilní samostatnost / lokální dočištění / slabý přenos / nový návratový signál
+```
+
+Tato věta je důležitější než dlouhý zápis. Donutí tým vybrat stav místo toho, aby do kontroly přidával další pozorování. Pozorování mohou být užitečná, ale uzavření potřebuje rozhodnutí: co se teď mění, co zůstává v běžném rytmu a co se výslovně neotevírá.
+
+### Čtyři uzavírací stavy
+
+Použijte jeden ze čtyř stavů:
+
+- Stabilní samostatnost: pravidlo se použilo bez mimořádné pomoci, staré historie a nové datové vrstvy.
+- Lokální dočištění: pravidlo drží, ale jedno okolní místo potřebuje malou opravu.
+- Slabý přenos: pravidlo je správné, ale člověk mimo původní kontext potřebuje doplnit rozhodovací hranu.
+- Nový návratový signál: kontrola ukázala problém, který už nepatří do údržby tohoto pravidla.
+
+U stabilní samostatnosti nedělejte nic dalšího. Zapište výsledek do běžného rytmu a nechte pravidlo být. To je často nejtěžší část, protože lidé mají po dobré kontrole chuť přidat ještě "malé zlepšení". Pokud pravidlo funguje, malé zlepšení je jen nový zásah bez důvodu.
+
+U lokálního dočištění opravte nejbližší okolní místo. Příklad: starý odkaz v poznámce, matoucí název šablony, věta v checklistu, která vybízí k většímu sběru dat, nebo duplicitní stránka, která přežila poslední úklid. Neotevírejte pravidlo samotné, pokud chyba neleží v pravidle.
+
+U slabého přenosu doplňte jeden rozhodovací příklad nebo proti-příklad. Neopisujte historii. Člověk nepotřebuje vědět, jak pravidlo vzniklo, pokud mu stačí poznat, kdy ho použít. Dobrý doplněk je krátká věta typu: "Pokud nejde o potvrzený problém s kvalifikací, nepřidáváme nové pole do formuláře; nejdřív ověřujeme slib stránky a zdroj návštěvnosti."
+
+U nového návratového signálu druhou kontrolu zavřete a otevřete samostatnou návratovou kartu. Není fér nutit údržbovou kontrolu, aby nesla nový problém. Tak vznikají dokumenty, které mají v názvu "kontrola", ale uvnitř jsou tři projekty v kabátu poznámek.
+
+### Praktický příklad
+
+```text
+Pravidlo:
+Lead magnet formulář sbírá jen e-mail a volitelný kontext problému.
+
+Výsledek druhé standardní kontroly:
+Slabý přenos.
+
+Co se stalo:
+Nový člověk použil správnou šablonu, ale v poznámce k distribuci navrhl doplnit telefon, pokud bude málo reakcí.
+
+Rozhodnutí:
+Do kanonické šablony doplňujeme jednu rozhodovací větu: nízký počet reakcí nejdřív řešíme slibem, distribucí a kvalitou publika; nové osobní údaje přidáváme jen při potvrzeném rozhodovacím důvodu.
+
+Co neotevíráme:
+Neměníme formulář, nezavádíme lead scoring, nevracíme starou debatu o telefonním poli a nespouštíme nové sledování chování na stránce.
+
+Další rytmus:
+Pravidlo zůstává v běžné měsíční kontrole šablon.
+```
+
+V příkladu není problém v tom, že by pravidlo selhalo. Problém je v přenosu hranice. Stačí tedy doplnit rozhodovací větu, ne rozjet nový marketingový audit. A hlavně: nízký počet reakcí se automaticky nepřekládá jako "sbírejme víc údajů". Někdy to znamená, že nabídka není jasná, distribuční kanál je slabý, nebo checklist slibuje něco, co cílový člověk zrovna nepotřebuje.
+
+### Co propsat do pracovního systému
+
+Po uzavření druhé kontroly se musí změnit jen místa, která budou příště opravdu použita:
+
+- kanonická šablona, pokud se doplnila rozhodovací hrana;
+- rozcestník, pokud se ukázal špatný odkaz nebo název;
+- běžný review zápis, pokud pravidlo přechází do klidu;
+- návratová karta, pokud vznikl nový signál.
+
+Nepropagujte výsledek do všech okolních dokumentů jen proto, že existují. Každý další zápis je budoucí údržba. Pokud změna není potřeba pro příští rozhodnutí, nechte ji mimo systém.
+
+Dobrá uzavírací věta:
+
+```text
+Pravidlo zůstává v měsíční kontrole šablon; do kanonické šablony přibyla jedna věta proti automatickému přidávání osobních údajů při nízké odezvě.
+```
+
+Slabá uzavírací věta:
+
+```text
+Budeme opatrnější při dalších lead magnetech.
+```
+
+První věta říká kde, co a proč. Druhá věta jen přidává kolektivní záměr. Záměr bez pracovního místa je hezký, ale v provozu se rychle vypaří.
+
+### Privacy-first uzavření
+
+Uzavření druhé standardní kontroly je vhodné místo pro poslední úklid datové stopy po návratu. Ptejte se:
+
+```text
+Co jsme kvůli kontrole otevřeli jen dočasně?
+
+Co už splnilo účel?
+
+Co se dá nahradit anonymizovaným závěrem?
+
+Co by se nemělo stát novou trvalou evidencí?
+```
+
+Pokud kontrola pracovala s příkladem konkrétní poptávky, ponechte v záznamu jen typ situace. Pokud vznikl screenshot staré šablony, smažte ho nebo ho označte podle retenčních pravidel. Pokud někdo navrhl sledovat, kdo pravidlo používá správně, zastavte to hned. Cílem je použitelné pravidlo, ne dohled nad lidmi.
+
+Do uzavření přidejte jednu větu:
+
+```text
+Po druhé kontrole dál neuchováváme:
+```
+
+Příklad:
+
+```text
+Po druhé kontrole dál neuchováváme screenshoty formuláře ani jména lidí, kteří narazili na nejasnost. Zůstává jen anonymizovaný typ situace, doplněná věta v šabloně a návratový signál.
+```
+
+Codyho komentář: privacy-first provoz se často láme právě v těchto nudných koncích. Všichni už chtějí jít dál, takže po sobě nechají dočasné výstupy. Jenže dočasný výstup, který nikdo neuklidí, je trvalý výstup s horší dokumentací. Paráda, jen s horším účesem.
+
+### Karta uzavření druhé standardní kontroly
+
+```text
+Pravidlo:
+
+Kanonické pracovní místo:
+
+Druhá standardní kontrola proběhla v rytmu:
+
+Výsledek:
+- stabilní samostatnost
+- lokální dočištění
+- slabý přenos
+- nový návratový signál
+
+Rozhodnutí jednou větou:
+
+Co se mění v kanonickém místě:
+
+Co se uklízí nebo anonymizuje:
+
+Co výslovně neotevíráme:
+
+Privacy-first závěr:
+Jaká nová data, pole, exporty, screenshoty, trackery nebo osobní evidence nevznikají:
+
+Další běžný rytmus:
+
+Návratový signál mimo běžný rytmus:
+
+Vlastník:
+
+Datum:
+```
+
+U stabilní samostatnosti kartu zkraťte. Stačí pravidlo, výsledek, další rytmus a privacy-first závěr. Plnou kartu použijte tehdy, když se něco mění nebo když hrozí, že z kontroly zůstane víc stop, než kolik si výsledek zaslouží.
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: přečtěte výsledek druhé standardní kontroly.
+2. Minuta 2: vyberte jeden uzavírací stav.
+3. Minuta 3: napište rozhodnutí jednou větou.
+4. Minuta 4: určete, jestli se mění kanonické místo, nebo jen review zápis.
+5. Minuta 5: zapište, co se uklízí, anonymizuje nebo nechává zavřené.
+6. Minuta 6: potvrďte další běžný rytmus a návratový signál.
+7. Minuta 7: smažte nebo označte dočasné pracovní stopy, které už splnily účel.
+
+Pokud se během workshopu objeví nápad na širší změnu, napište ho jako podnět stranou. Workshop uzavírá druhou kontrolu. Není to místo pro nový plán, i kdyby zněl rozumně a tvářil se jako drobnost. Drobnosti mají zvláštní schopnost chodit ve skupinách.
+
+### Checklist uzavření druhé standardní kontroly
+
+- Má druhá standardní kontrola jeden jasný výsledek?
+- Vybrali jsme jeden uzavírací stav?
+- Pokud je pravidlo stabilní, necháváme ho opravdu v klidu?
+- Pokud je potřeba lokální dočištění, mění se jen nejbližší pracovní místo?
+- Pokud je přenos slabý, doplňujeme jen rozhodovací hranu, ne historii?
+- Pokud vznikl nový návratový signál, oddělili jsme ho do samostatné karty?
+- Je jasné, co se propisuje do kanonického místa?
+- Je zapsané, co se výslovně neotevírá?
+- Uklidili jsme dočasné screenshoty, exporty, poznámky nebo osobní příklady?
+- Nevzniká nový tracker, report ani evidence lidí kvůli kontrole pravidla?
+- Má další kontrola normální rytmus?
+- Ví tým, jaký signál by pravidlo otevřel mimo tento rytmus?
+
+Uzavření druhé standardní kontroly má ukončit mimořádnou gravitaci posledního návratu. Pravidlo buď stojí samo, nebo potřebuje jednu přesnou oporu, nebo ukázalo nový signál, který si zaslouží vlastní smyčku. V každém případě by po uzavření mělo zůstat méně otevřených stop, ne víc. To je dobrý provoz: jasnější rozhodnutí, menší datová stopa a žádný nový proces jen proto, že jsme měli chvíli pocit, že by se něco mělo hlídat.
+
 ## Pracovní log
 
+- 2026-06-24: Doplněna úvodní podkapitola o uzavření druhé standardní kontroly po uzavřeném návratu po tichém provozu: uzavírací stavy, praktický příklad, propsání do pracovního systému, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-24: Doplněna úvodní podkapitola o druhé standardní kontrole po uzavřeném návratu po tichém provozu: samostatnost pravidla, zbytkové tření, slabá přenositelnost, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-06-24: Doplněna úvodní podkapitola o uzavření první standardní kontroly po uzavřeném návratu po tichém provozu: uzavírací stavy, praktický příklad, propsání do kanonického místa, privacy-first uzavření, karta, mini workshop a checklist.
 - 2026-06-24: Doplněna úvodní podkapitola o první standardní kontrole po uzavřeném návratu po tichém provozu: běžný rytmus, kontrolní otázky, historické stopy, privacy-first úklid, karta, mini workshop a checklist.
