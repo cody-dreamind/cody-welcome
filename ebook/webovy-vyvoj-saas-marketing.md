@@ -250752,8 +250752,194 @@ Pokud workshop začne znovu analyzovat celé pravidlo, vraťte se k otázce: co 
 
 Uzavření prvního běžného použití po návratu je malá tečka za celou smyčkou. Pravidlo se vrátilo z tichého provozu, zvládlo signál, znovu se použilo a teď má buď klid, nebo jednu přesnou opravu. To je dobrý provozní výsledek. Ne proto, že je dramatický, ale protože další člověk už nemusí znovu řešit stejnou starou otázku.
 
+## Druhé běžné použití po uzavření návratu po tichém provozu
+
+Druhé běžné použití je lepší test než první. První použití bývá ještě čerstvé: někdo si pamatuje návrat, uzavírací větu, starou stopu i důvod, proč se pravidlo nemělo otevírat celé. Druhé použití už často přijde v normálním rytmu, s jiným člověkem, jiným úkolem nebo jiným pracovním kontextem. Právě tam se ukáže, jestli pravidlo opravdu stojí samo, nebo jen přežilo díky čerstvé paměti týmu.
+
+Nejde o další audit. Nejde ani o dokazování, že předchozí uzavření bylo bezchybné. Cílem je ověřit přenositelnost: umí pravidlo pomoci dalšímu rozhodnutí bez toho, aby se znovu otevírala historie návratu?
+
+Začněte větou:
+
+```text
+Druhé běžné použití ověřuje, jestli pravidlo funguje bez čerstvé paměti na předchozí návrat.
+```
+
+Potom pojmenujte konkrétní pracovní situaci. Například:
+
+```text
+Tým připravuje další lead magnet, tentokrát pro SaaS checklist po auditu.
+```
+
+Pokud při popisu situace pořád potřebujete vysvětlovat starý návrat, pravidlo ještě není dost přenositelné. Dobré pracovní pravidlo má být srozumitelné v místě práce. Historie může být dohledatelná, ale nemá být nutná pro běžné rozhodnutí.
+
+### Co přesně druhé použití ověřuje
+
+Druhé použití ověřuje čtyři věci:
+
+- Najitelnost: člověk najde pravidlo tam, kde opravdu pracuje.
+- Rozhodnutelnost: pravidlo vede k jednomu praktickému rozhodnutí.
+- Přiměřenost: pravidlo nevyvolá zbytečnou kontrolu, schůzku nebo sběr dat.
+- Přenositelnost: pravidlo funguje i pro lehce jiný úkol stejného typu.
+
+Najitelnost neznamená, že pravidlo existuje někde v dokumentaci. Znamená, že ho člověk potká ve správném okamžiku. Pokud autor landing page musí otevřít rozhodovací log, starý review zápis a onboardingovou poznámku, pravidlo je uložené, ale nepracuje.
+
+Rozhodnutelnost znamená, že pravidlo umí říct "teď ano", "teď ne" nebo "nejdřív ověř tuto jednu věc". Pokud po přečtení pravidla vznikne jen debata, jestli by se neměla udělat širší analýza, pravidlo je možná zajímavé, ale slabé pro provoz.
+
+Přiměřenost chrání tým před návratem mimořádné opatrnosti. Druhé použití nemá kvůli starému návratu sbírat nové důkazy, pokud dnešní rozhodnutí žádné nepotřebuje. Privacy-first provoz není o tom, že ke každé opatrnosti založíte tabulku. Je o tom, že víte, kdy žádnou tabulku nezakládat.
+
+Přenositelnost je hlavní bod. Pokud pravidlo fungovalo jen pro přesně stejný lead magnet, přesně stejný formulář a přesně stejného autora, není to ještě standard. Je to lokální oprava. Standard začíná ve chvíli, kdy pomůže i v další podobné situaci bez ústního vysvětlování.
+
+### Praktický příklad
+
+```text
+Pravidlo:
+U lead magnetu nesbíráme telefon, pokud telefon nemění další krok pro zájemce.
+
+První běžné použití:
+Checklist k technickému auditu. Telefon nebyl sbírán, starý brief byl opraven.
+
+Druhé běžné použití:
+SaaS checklist po auditu. Jiný autor připravuje novou landing page podle aktuální šablony.
+
+Co se stalo:
+Autor našel pravidlo přímo v šabloně formuláře. Ponechal e-mail a volitelné textové pole pro kontext. Telefon nepřidal, protože další krok je zaslání checklistu a případný dobrovolný follow-up.
+
+Výsledek:
+Pravidlo je přenositelné pro další lead magnet stejného typu. Neotevíráme starý návrat ani původní debatu o telefonu.
+```
+
+Tento výsledek je důležitý právě proto, že není dramatický. Další člověk udělal menší datovou stopu bez porady. To je v praxi mnohem cennější než krásná strategie, která pokaždé potřebuje autora strategie v místnosti.
+
+### Když druhé použití ukáže slabý přenos
+
+Slabý přenos vypadá nenápadně. Pravidlo se použije, ale člověk potřebuje dodatečné vysvětlení, ptá se na starý kontext, obchází pracovní místo nebo si není jistý výjimkou. V takové chvíli neotevírejte celé pravidlo. Nejdřív opravte přenos.
+
+Typické slabiny:
+
+- pravidlo je v kanonickém dokumentu, ale chybí v šabloně;
+- příklad je příliš navázaný na starý incident;
+- výjimka je popsaná jako právnická mlha;
+- pracovní místo odkazuje na starý název nabídky;
+- privacy-first důvod je zapsaný jako zákaz, ne jako rozhodovací kritérium.
+
+Lokální oprava má být malá:
+
+```text
+Slabina:
+Autor nechápal, kdy je telefon legitimní výjimka.
+
+Oprava:
+Do šablony doplňujeme větu: Telefon sbíráme jen tehdy, když bez něj nejde splnit nejbližší domluvený krok pro zájemce; jinak zůstává volitelný nebo se nesbírá vůbec.
+
+Co neotevíráme:
+Neotevíráme původní debatu o všech formulářích ani staré exporty poptávek.
+```
+
+Dobrá oprava přenosu zmenšuje potřebu vysvětlování. Špatná oprava přidá další odstavec historie a doufá, že nový člověk bude mít čas ho číst. Nebude. A když bude, stejně tím jen zaplatíte za slabé pracovní místo.
+
+### Privacy-first kontrola druhého použití
+
+Druhé použití je vhodný moment ověřit, že privacy-first závěr nezůstal jen v minulém záznamu. Položte si tři otázky:
+
+```text
+Stačilo pravidlo bez starých podkladů?
+
+Nevznikl nový povinný údaj jen kvůli pohodlí týmu?
+
+Je případná výjimka opřená o dnešní nejbližší krok, ne o starou obavu?
+```
+
+Příklad dobrého závěru:
+
+```text
+Stačilo aktuální pravidlo v šabloně.
+Telefon nevznikl jako nový povinný údaj.
+Výjimku neřešíme, protože dnešní nejbližší krok je zaslání checklistu.
+```
+
+Příklad slabého závěru:
+
+```text
+Telefon raději přidáme, kdyby se později hodil obchodu.
+```
+
+Slovo "kdyby" je v datové stopě varovná kontrolka. Pokud údaj nemá jasný účel pro dnešní krok, nesbírejte ho. Budoucí pohodlí není dostatečný důvod pro současné osobní údaje.
+
+Codyho komentář: privacy-first rozhodování je často jen schopnost říct "tohle se nám možná někdy bude hodit" a přeložit si to jako "takže to teď nepotřebujeme". Není to tak efektní jako dashboard, ale má to lepší poměr hodnota/nepořádek.
+
+### Karta druhého běžného použití
+
+```text
+Pravidlo:
+
+První běžné použití uzavřeno stavem:
+
+Druhá běžná situace:
+
+Kdo pravidlo použil:
+- stejný člověk
+- jiný člověk
+- jiný tým
+
+Výsledek:
+- přenos funguje
+- slabá najitelnost
+- slabá rozhodnutelnost
+- zbytečná mimořádná kontrola
+- vznikl nový typ otázky
+
+Nejmenší oprava, pokud je potřeba:
+
+Co výslovně neotevíráme:
+
+Privacy-first kontrola:
+Stačilo aktuální pravidlo?
+Vznikl nový údaj?
+Má případná výjimka dnešní účel?
+
+Rozhodnutí:
+- ponechat v tichém provozu
+- lokálně zlepšit přenos
+- otevřít nové téma mimo starý návrat
+
+Vlastník:
+
+Datum:
+```
+
+Kartu použijte hlavně tehdy, když druhé použití něco ukázalo. Pokud pravidlo fungovalo hladce, často stačí krátká poznámka v pracovním místě nebo vůbec nic. Tichý provoz nemá vyrábět důkazy o každém tichém průchodu.
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: pojmenujte druhou běžnou situaci.
+2. Minuta 2: ověřte, jestli pravidlo použil člověk bez čerstvé paměti na návrat.
+3. Minuta 3: zkontrolujte najitelnost v pracovním místě.
+4. Minuta 4: napište rozhodnutí, které pravidlo umožnilo.
+5. Minuta 5: určete, jestli nevznikla zbytečná kontrola nebo nový údaj.
+6. Minuta 6: vyberte nejmenší opravu přenosu, pokud je potřeba.
+7. Minuta 7: potvrďte, co se dál neotevírá.
+
+Pokud se workshop zvrhne v debatu o původním incidentu, vraťte se k druhé situaci. Otázka není "co jsme kdysi řešili", ale "umí dnešní pracovní místo vést dnešní rozhodnutí".
+
+### Checklist druhého běžného použití
+
+- Byla druhá situace skutečně běžná, ne uměle připravený test?
+- Použil pravidlo někdo bez čerstvé paměti na starý návrat?
+- Našel pravidlo v místě práce?
+- Vedlo pravidlo ke konkrétnímu rozhodnutí?
+- Fungovalo i pro lehce jiný úkol stejného typu?
+- Nevznikla kvůli starému návratu zbytečná mimořádná kontrola?
+- Neotevřeli jsme staré exporty, screenshoty, poptávky ani interní poznámky bez nutnosti?
+- Nevznikl nový povinný údaj jen kvůli pohodlí týmu?
+- Pokud přenos drhnul, opravujeme nejbližší pracovní místo místo celého pravidla?
+- Pokud vzniklo nové téma, oddělili jsme ho od starého návratu?
+- Víme, co zůstává v tichém provozu?
+
+Druhé běžné použití uzavírá otázku, jestli pravidlo stojí na dokumentaci, nebo na čerstvé paměti lidí. Když funguje bez vysvětlování, nechte ho dál pracovat v klidu. Když drhne, opravte přenos v nejbližším pracovním místě. A když se objeví nový problém, dejte mu vlastní rámec. Starý návrat už odvedl svou práci; není potřeba ho tahat do každého dalšího rozhodnutí.
+
 ## Pracovní log
 
+- 2026-06-24: Doplněna úvodní podkapitola o druhém běžném použití po uzavření návratu po tichém provozu: test přenositelnosti bez čerstvé paměti, slabý přenos, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-06-24: Doplněna úvodní podkapitola o uzavření prvního běžného použití po uzavření návratu po tichém provozu: uzavírací stavy, lokální oprava staré stopy, privacy-first uzavření, karta, mini workshop a checklist.
 - 2026-06-24: Doplněna úvodní podkapitola o prvním běžném použití po uzavření návratu po tichém provozu: použitelnost pravidla, klid po návratu, lokální dotažení, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-06-24: Doplněna úvodní podkapitola o uzavření prvního návratu po tichém provozu: uzavírací stavy, propsání do pracovního systému, privacy-first úklid, karta, mini workshop a checklist.
