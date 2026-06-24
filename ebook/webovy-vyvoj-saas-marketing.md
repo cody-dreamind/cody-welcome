@@ -251412,8 +251412,178 @@ Když se workshop stočí k debatě, jestli starý návrat byl správně, zastav
 
 První standardní kontrola po uzavřeném návratu po tichém provozu má jednoduchý úkol: ověřit, že se pravidlo zase stalo obyčejnou součástí práce. Ne hvězdou retrospektivy, ne památníkem starého problému, ne zdrojem dalších datových koleček. Prostě pravidlem, které je tam, kde má být, a pomáhá rozhodnout bez zbytečného hluku.
 
+## Uzavření první standardní kontroly po uzavřeném návratu po tichém provozu
+
+První standardní kontrola má hodnotu jen tehdy, když po ní vznikne jasný konec. Pokud kontrola skončí větou "ještě to budeme sledovat", tým se nenápadně vrací do mimořádného režimu. Tiché pravidlo se znovu stane tématem, kolem kterého se chodí po špičkách, sbírají se drobné důkazy a každá běžná odchylka vypadá podezřele.
+
+Uzavření proto začněte jednou větou:
+
+```text
+Po první standardní kontrole je stav pravidla:
+```
+
+Za větu nedávejte pocit, ale výsledek kontroly. Například:
+
+```text
+Po první standardní kontrole je stav pravidla:
+Pravidlo je v kanonickém pracovním místě, použilo se bez mimořádné nápovědy a neotevíráme další kontrolní smyčku.
+```
+
+Nebo:
+
+```text
+Po první standardní kontrole je stav pravidla:
+Pravidlo funguje, ale v připnutém vlákně zůstala stará dočasná poznámka, kterou mažeme, aby se nevracela jako alternativní instrukce.
+```
+
+Dobrá uzavírací věta říká tři věci najednou: co je dnešní stav, co se případně mění a co se výslovně neotevírá. Bez třetí části se z každé kontroly snadno stane pozvánka k dalšímu vylepšování. A další vylepšování je někdy jen práce, která přišla v hezké košili a tváří se jako kvalita.
+
+### Čtyři uzavírací stavy
+
+Po první standardní kontrole vyberte jeden ze čtyř stavů:
+
+- Stabilní klid: pravidlo je použitelné, najitelné a bez starých stop, které by mátly práci.
+- Úklid historické stopy: pravidlo funguje, ale jedna stará poznámka, kopie, šablona nebo odkaz ještě zbytečně přežívá.
+- Lokální údržba: pravidlo je správné, ale jedno pracovní místo potřebuje drobné zpřesnění, aby lidé nemuseli sahat do historie.
+- Nový návratový signál: kontrola neuzavírá běžný stav, protože se ukázal konkrétní důvod otevřít novou návratovou smyčku.
+
+Stav `stabilní klid` je nejčistší výsledek. Nepřidávejte mu další úkol jen proto, že kontrola proběhla. Pokud pravidlo funguje, nejlepší další krok je nechat ho pracovat.
+
+Stav `úklid historické stopy` použijte, když problém není v pravidle, ale v okolním nepořádku. Typicky jde o starý odkaz v chatu, dočasnou tabulku, kopii šablony, poznámku v úkolu nebo komentář v dokumentu. Tady není potřeba nová iterace. Stačí odstranit nebo označit jednu stopu, která by mohla vrátit starý způsob práce.
+
+Stav `lokální údržba` použijte opatrně. Patří sem jedna drobná úprava kanonického místa: doplnit větu, přejmenovat pole, odstranit starý příklad, zpřesnit hranici. Pokud údržba potřebuje změnit více míst, už to není lokální údržba, ale nový návrat nebo širší revize.
+
+Stav `nový návratový signál` použijte pouze tehdy, když kontrola ukáže konkrétní opakovaný důvod. Ne "mohlo by to být lepší", ale "dvě běžné použití za sebou skončila stejným ručním dovysvětlením v potvrzovacím e-mailu". Signál musí mít pracovní místo, dopad a nejmenší další krok.
+
+### Praktický příklad
+
+```text
+Pravidlo:
+Lead magnet má používat krátký formulář bez telefonu a bez povinného budgetu.
+
+Výsledek první standardní kontroly:
+Dva nové lead magnety použily správný formulář. Marketing ho našel v kanonické šabloně bez mimořádné nápovědy.
+
+Nález:
+Ve starém plánovacím dokumentu zůstala poznámka "u dražších materiálů zvážit telefon".
+
+Uzavírací stav:
+Úklid historické stopy.
+
+Rozhodnutí:
+Mažeme starou poznámku z plánovacího dokumentu a neotevíráme změnu formuláře ani nové měření.
+
+Privacy-first závěr:
+Nepřidáváme telefonní pole, nevytváříme nový lead scoring a nekopírujeme historické poptávky do další tabulky.
+
+Návratový signál:
+K tématu se vrátíme pouze pokud obchod u tří relevantních leadů za sebou nedokáže navázat bez ručního doptání na kontaktní kanál.
+```
+
+Všimněte si, že řešení není "udělejme revizi všech formulářů". Kontrola našla jednu starou stopu, tak se uklidí jedna stará stopa. Pravidlo zůstává v klidu.
+
+### Co propsat po uzavření
+
+Po uzavření první standardní kontroly se výsledek propisuje jen do míst, která mají reálný provozní účel:
+
+- do kanonického pracovního místa, pokud se změnila formulace pravidla;
+- do běžného review, pokud jde jen o krátký záznam stabilního stavu;
+- do úklidu staré stopy, pokud se mazal odkaz, poznámka, kopie nebo dočasný podklad;
+- do návratového signálu, pokud kontrola opravdu otevřela novou smyčku.
+
+Nepropisujte výsledek do všech historických dokumentů. Staré záznamy mají zůstat historií, ne živou administrativou. Pokud je potřeba zabránit omylu, stačí u staré stopy krátká poznámka "nahrazeno kanonickým pravidlem" nebo její odstranění podle toho, jak tým pracuje s archivem.
+
+### Privacy-first uzavření
+
+Uzavření kontroly je vhodný okamžik na datovou střídmost. Zeptejte se:
+
+```text
+Která stopa po kontrole má ještě rozhodovací účel?
+```
+
+Pokud kontrola jen potvrdila stabilní pravidlo, často není potřeba držet žádné nové detaily. Stačí jedna věta v review. Pokud kontrola našla historickou stopu, zapište její úklid bez kopírování osobních údajů nebo obchodních detailů. Pokud vznikl nový návratový signál, popište ho jako vzor chování, ne jako sbírku jednotlivých zákaznických zpráv.
+
+Příklad dobrého privacy-first zápisu:
+
+```text
+Při kontrole jsme odstranili starou poznámku k telefonnímu poli. Není potřeba ukládat konkrétní poptávky; rozhodnutí se opírá o to, že poslední dva lead magnety použily správnou kanonickou šablonu.
+```
+
+Příklad slabého zápisu:
+
+```text
+Pro jistotu si zkopírujeme poslední poptávky do kontrolní tabulky a za měsíc se k nim vrátíme.
+```
+
+Druhý zápis vyrábí novou datovou stopu bez jasného účelu. To je přesně místo, kde privacy-first provoz šetří budoucí práci: ne tím, že by odmítal rozhodování, ale tím, že odmítá zbytečné kopie.
+
+### Karta uzavření první standardní kontroly
+
+```text
+Pravidlo:
+
+Kanonické pracovní místo:
+
+Výsledek první standardní kontroly:
+
+Uzavírací stav:
+- stabilní klid
+- úklid historické stopy
+- lokální údržba
+- nový návratový signál
+
+Rozhodnutí jednou větou:
+
+Co se propsalo do kanonického místa:
+
+Jaká historická stopa se odstranila nebo označila:
+
+Co výslovně neotevíráme:
+
+Privacy-first závěr:
+Jaké detaily nekopírujeme, nesbíráme nebo mažeme:
+
+Návratový signál:
+
+Další běžná kontrola:
+
+Vlastník:
+
+Datum:
+```
+
+Kartu nevyplňujte pro každý klidný výsledek. Pokud je všechno stabilní a nic se nemění, stačí krátká věta v běžném review. Karta je užitečná hlavně tehdy, když se něco uklízí, zpřesňuje nebo odděluje od nového návratového signálu.
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: přečtěte výsledek první standardní kontroly.
+2. Minuta 2: vyberte jeden uzavírací stav.
+3. Minuta 3: napište rozhodnutí jednou větou.
+4. Minuta 4: určete, jestli se něco propisuje do kanonického místa.
+5. Minuta 5: ukliďte nebo označte jednu historickou stopu, pokud existuje.
+6. Minuta 6: zapište, co se výslovně neotevírá a jaké detaily nesbíráte.
+7. Minuta 7: potvrďte návratový signál a další běžnou kontrolu.
+
+Když se během workshopu objeví debata o větší úpravě, přerušte ji otázkou: "Je to výsledek této kontroly, nebo nový podnět?" Pokud je to nový podnět, patří do samostatného záznamu. Uzavření kontroly nemá nést všechno, co si tým právě uvědomil.
+
+### Checklist uzavření první standardní kontroly
+
+- Máme jednu větu výsledku kontroly?
+- Vybrali jsme jeden uzavírací stav?
+- Pokud je stav stabilní klid, nevyrábíme další úkol jen pro pocit péče?
+- Pokud uklízíme historickou stopu, víme přesně kterou?
+- Pokud děláme lokální údržbu, mění se jen jedno pracovní místo?
+- Pokud vznikl nový návratový signál, má pracovní místo, dopad a nejmenší další krok?
+- Je jasné, co se propíše do kanonického místa a co zůstává jen historií?
+- Zapsali jsme, co se výslovně neotevírá?
+- Nevznikla nová kopie osobních údajů, poptávek, screenshotů nebo exportů?
+- Má další kontrola běžný rytmus místo mimořádné péče?
+
+Uzavření první standardní kontroly má pravidlu vrátit obyčejnost. Buď je stabilní, nebo potřebuje jeden malý úklid, nebo ukázalo nový konkrétní signál. Všechno ostatní je většinou jen šum s hezkou ambicí. A šum se nemá povyšovat na proces.
+
 ## Pracovní log
 
+- 2026-06-24: Doplněna úvodní podkapitola o uzavření první standardní kontroly po uzavřeném návratu po tichém provozu: uzavírací stavy, praktický příklad, propsání do kanonického místa, privacy-first uzavření, karta, mini workshop a checklist.
 - 2026-06-24: Doplněna úvodní podkapitola o první standardní kontrole po uzavřeném návratu po tichém provozu: běžný rytmus, kontrolní otázky, historické stopy, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-24: Doplněna úvodní podkapitola o uzavření druhého běžného použití po uzavření návratu po tichém provozu: uzavírací stavy, ukončení zvláštní pozornosti, privacy-first uzavření, karta, mini workshop a checklist.
 - 2026-06-24: Doplněna úvodní podkapitola o druhém běžném použití po uzavření návratu po tichém provozu: test přenositelnosti bez čerstvé paměti, slabý přenos, privacy-first kontrola, karta, mini workshop a checklist.
