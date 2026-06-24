@@ -57,6 +57,142 @@ Z první návratové věty rovnou odvoďte hranici dalšího kroku. Pokud věta 
 
 Když se z hranice dalšího kroku ukáže, že dnes není co opravovat, zapište to stejně pečlivě jako změnu. Věta "teď neotevíráme nový krok, protože návratový signál nepotvrdil problém" je užitečný výsledek: chrání tým před prací z návyku a zároveň nechává jasnou stopu, kdy se k tématu vrátit.
 
+## Záznam neotevřeného kroku
+
+Neotevřený krok je zvláštní typ výsledku. Na první pohled vypadá jako nic: žádný commit, žádná nová obrazovka, žádný upravený formulář, žádný nový report. Ve skutečnosti ale může být velmi cenný, pokud zabrání práci, která by jen rozšířila rozsah, přidala data bez účelu nebo znovu otevřela starý problém bez dnešního důvodu.
+
+Tým si ho musí zapsat jinak než běžný úkol. Nestačí napsat "nebudeme řešit". To zní jako únava nebo odklad. Dobrý záznam neotevřeného kroku říká: jaký podnět přišel, proč nevzniká nová práce, jaký signál by rozhodnutí změnil a jaká data díky tomu nesbíráme. Tím se z nečinnosti stane vědomé rozhodnutí. Ano, pořád je to nejméně efektní typ produktové práce. Ale někdy je nejvyšší forma produktivity slušně zavřít dveře a nepředstírat, že za nimi čeká strategie.
+
+Začněte čtyřmi větami:
+
+```text
+Podnět byl:
+
+Dnešní důkaz nestačí k otevření práce, protože:
+
+Teď proto neotevíráme:
+
+K tématu se vrátíme pouze pokud:
+```
+
+Praktický příklad:
+
+```text
+Podnět byl:
+Obchod navrhl přidat do poptávkového formuláře pole pro rozpočet.
+
+Dnešní důkaz nestačí k otevření práce, protože:
+U posledních pěti relevantních poptávek problém nevznikl v rozpočtu, ale v nejasném cíli projektu a rozhodovacím procesu.
+
+Teď proto neotevíráme:
+Nové povinné pole, lead scoring ani další export poptávek.
+
+K tématu se vrátíme pouze pokud:
+Tři relevantní poptávky za sebou nepůjdou kvalifikovat bez ručního doptání na rozpočet.
+```
+
+Takový zápis je krátký, ale chrání několik věcí najednou. Obchod ví, že podnět nezmizel do vzduchu. Produkt ví, že nemá sahat do formuláře jen kvůli pocitu. Marketing ví, že nemusí přepisovat stránku. A privacy-first provoz má jasnou stopu, proč se nezačala sbírat další obchodní informace.
+
+### Rozlišujte tři důvody neotevření
+
+Neotevřený krok obvykle spadá do jedné ze tří kategorií:
+
+- Signál se nepotvrdil: podnět zní povědomě, ale existující důkaz neukazuje opakovaný problém.
+- Dopad je příliš malý: změna by něco zlepšila jen okrajově, zatímco by přidala práci, riziko nebo datovou stopu.
+- Pracovní místo není jasné: tým ví, že něco drhne, ale neví, jestli se má sáhnout na web, onboarding, obchodní skript, e-mail nebo interní proces.
+
+Každá kategorie vede k jiné větě. U nepotvrzeného signálu napište, jaký důkaz chybí. U malého dopadu napište, proč cena změny neodpovídá přínosu. U nejasného pracovního místa napište, že se neotevírá implementace, ale maximálně krátké zpřesnění otázky.
+
+Příklad rozdílu:
+
+```text
+Signál se nepotvrdil:
+Neotevíráme změnu ceníku, protože poslední tři obchodní rozhovory se nezasekly na ceně, ale na rozsahu služby.
+
+Dopad je příliš malý:
+Neotevíráme novou variantu hero textu, protože současná stránka už správně kvalifikuje poptávky a změna by teď nepřinesla rozhodovací hodnotu.
+
+Pracovní místo není jasné:
+Neotevíráme úpravu onboardingu, dokud nevíme, jestli problém vzniká v prvním e-mailu, v importu dat, nebo v očekávání nastaveném před registrací.
+```
+
+Tím se vyhnete univerzální větě "necháme být". Ta sice zní úsporně, ale za měsíc nikomu nevysvětlí, jestli byl problém slabý, nedoložený, nebo jen špatně umístěný.
+
+### Privacy-first hodnota neotevřeného kroku
+
+Neotevřený krok je často nejlepší privacy-first rozhodnutí. Nepřidat pole, nezapnout heatmapu, nezačít nahrávat relace, neposlat data dalšímu nástroji a nevytvořit nový export není absence práce. Je to aktivní ochrana provozu.
+
+U každého neotevřeného kroku si položte otázku:
+
+```text
+Jaká data by začala vznikat, kdybychom tento krok otevřeli?
+```
+
+Pokud odpověď obsahuje nové osobní údaje, obchodní údaje, behaviorální sledování, delší retenci nebo nového dodavatele, zapište to přímo do rozhodnutí. Ne proto, aby se tým změny bál. Proto, aby si uvědomil celou cenu.
+
+Příklad:
+
+```text
+Díky neotevření kroku nesbíráme rozpočet v prvním kontaktu, nevytváříme nový scoring leadů a neposíláme poptávky do dalšího marketingového nástroje. Pokud se problém později potvrdí, nejdřív ověříme, zda stačí upravit otázku na cíl projektu.
+```
+
+Takový zápis je silnější než obecné "chráníme soukromí". Ukazuje konkrétní provozní dopad. Privacy-first přístup pak není plakát na zdi, ale série malých rozhodnutí, která brání hromadění zbytečných dat.
+
+### Karta neotevřeného kroku
+
+```text
+Téma:
+
+Podnět:
+
+Kdo ho přinesl nebo kde vznikl:
+
+Existující důkaz:
+
+Důvod neotevření:
+- signál se nepotvrdil
+- dopad je příliš malý
+- pracovní místo není jasné
+
+Co teď výslovně neotevíráme:
+
+Jaká data, trackery, exporty nebo pole díky tomu nepřidáváme:
+
+Co by téma znovu otevřelo:
+
+Kde je rozhodnutí uložené:
+
+Vlastník:
+
+Datum návratu, pokud existuje:
+```
+
+Karta nemá být hřbitov nápadů. Má být krátká pojistka proti tomu, aby se stejný podnět vracel bez nového důvodu. Pokud se téma vrátí, tým hned vidí, co se minule nepotvrdilo a jaký signál byl domluvený.
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: přečtěte podnět jednou větou.
+2. Minuty 2 až 3: najděte nejmenší existující důkaz.
+3. Minuta 4: vyberte důvod neotevření.
+4. Minuta 5: napište, co se teď výslovně neotevírá.
+5. Minuta 6: zapište, jaká data díky tomu nezačnou vznikat.
+6. Minuta 7: určete návratový signál nebo napište, že žádný návrat teď neplánujete.
+
+Když se během sedmi minut ukáže, že důkaz je silnější, než tým čekal, změňte stav. Neotevřený krok není dogma. Je to filtr. Pokud filtr zachytí skutečný problém, otevřete nejmenší možný průchod a zapište hranici. Pokud nezachytí nic, nechte věc zavřenou.
+
+### Checklist neotevřeného kroku
+
+- Je podnět popsaný konkrétně, ne jako obecná nespokojenost?
+- Máme existující důkaz, nebo jasně víme, že chybí?
+- Vybrali jsme důvod neotevření?
+- Je zapsané, co teď výslovně neotevíráme?
+- Je jasné, jaká data, pole, trackery nebo exporty díky tomu nepřidáváme?
+- Má téma návratový signál, nebo je vědomě zavřené bez další kontroly?
+- Je rozhodnutí uložené u pracovního místa, kde se podnět pravděpodobně znovu objeví?
+- Umí tým za měsíc poznat, jestli přišel nový důvod, nebo jen starý pocit v novém kabátě?
+
+Neotevřený krok má být malý, přesný a dohledatelný. Když ho zapíšete dobře, neztrácíte nápad. Ztrácíte jen povinnost dělat práci, která si zatím nezasloužila existovat. To je fér obchod.
+
 ## Kontrola přeneseného kontextu při návratu k tématu
 
 Když se tým vrací k tématu po týdnech nebo měsících, největší riziko často není zapomenutí. Horší je poloviční paměť: všichni si pamatují název problému, ale každý si pod ním nese jiný starý kontext. Jeden člověk pořád řeší původní segment, druhý už myslí na novou nabídku, třetí si pamatuje starou výjimku a čtvrtý má v hlavě poslední incident. Výsledek vypadá jako shoda, ale práce se rozjede do čtyř směrů.
@@ -252481,3 +252617,4 @@ První standardní kontrola po uzavřeném návratu po tichém provozu má jedno
 - 2026-06-23: Doplněna úvodní podkapitola o uzavření prvního běžného ověření malého kroku: výsledné stavy, propsání do pracovního místa, ukončení mimořádné péče, privacy-first uzavření, karta, mini workshop a checklist.
 - 2026-06-23: Doplněna úvodní podkapitola o prvním běžném použití po uzavřeném návratu z dlouhodobého klidu: najitelnost, rozhodnutelnost, klid bez otevírání historie, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-06-24: Doplněna krátká úvodní poznámka, aby hranice dalšího kroku uměla skončit i vědomým neotevřením nové práce.
+- 2026-06-24: Doplněna úvodní podkapitola o záznamu neotevřeného kroku: důvody neotevření, privacy-first hodnota, karta, mini workshop a checklist.
