@@ -249590,8 +249590,180 @@ Pokud se tým v minutě 2 nemůže shodnout na stavu, vraťte se k nejkratšímu
 
 Uzavření první standardní kontroly je okamžik, kdy se ukáže, jestli tým umí nechat dobré pravidlo znovu ztichnout. Ne každá kontrola má skončit změnou. Někdy má skončit jen přesnou větou, uklizeným pracovním místem a vědomým rozhodnutím, že další práce nezačíná. To není pasivita. To je provozní dospělost, která šetří pozornost, data i energii na věci, kde se opravdu něco mění pro zákazníka.
 
+## Druhá standardní kontrola po uzavřené reakci na slabý signál
+
+První standardní kontrola po slabém signálu říká hlavně to, jestli se pravidlo dokázalo vrátit do běžného rytmu bez mimořádné péče. Druhá standardní kontrola má jiný úkol: ověřit, jestli se klid udržel i bez čerstvé paměti na původní signál. Tým už nemá být v režimu "pamatujeme si, proč jsme to řešili". Má být v režimu "pracovní místo vede správné rozhodnutí samo".
+
+Druhou kontrolu nespouštějte hned další den. Dejte jí přirozený odstup: další měsíční review, další běžný publikační cyklus, další audit šablon nebo další situaci, kdy se pravidlo použije bez zvláštního upozornění. Smysl není vyrobit další kontrolní schůzku. Smysl je podívat se na pravidlo ve chvíli, kdy by stejně mělo fungovat.
+
+Začněte větou:
+
+```text
+Druhá standardní kontrola ověřuje, jestli [standard nebo trasa] funguje v běžném rytmu i bez čerstvé paměti na původní slabý signál.
+```
+
+Tahle věta chrání rozsah. Nekontrolujete celou historii slabého signálu, všechny staré příklady ani kompletní oblast. Kontrolujete jednu věc: jestli se pravidlo přeneslo z dočasné pozornosti do normální práce. Pokud během kontroly najdete nové téma, zapište ho stranou. Druhá kontrola nemá být zadními dveřmi pro nový audit.
+
+### Co druhá kontrola porovnává
+
+Druhá standardní kontrola porovnává tři vrstvy:
+
+- pracovní místo: jestli člověk najde správné pravidlo tam, kde opravdu pracuje;
+- běžný rytmus: jestli se pravidlo objeví v existující kontrole bez ručního připomenutí;
+- datová stopa: jestli tým k rozhodnutí nepotřebuje znovu otevírat staré podklady, screenshoty, exporty nebo osobní údaje.
+
+Každou vrstvu zapište jednou větou. Nehledejte román, hledejte provozní pravdu:
+
+```text
+Pracovní místo:
+Aktuální šablona lead magnetu obsahuje rozhodovací větu u formulářových polí.
+
+Běžný rytmus:
+Měsíční review marketingových šablon obsahuje lead magnety jako běžnou položku.
+
+Datová stopa:
+Pro kontrolu stačil aktuální stav šablony a review agenda; staré landing pages a obchodní poznámky jsme neotevírali.
+```
+
+Pokud některá věta nejde napsat, je to signál. Ne nutně problém, ale signál. Možná pravidlo funguje, ale není v indexu. Možná je v indexu, ale review ho neumí zachytit. Možná review funguje, ale tým pořád sahá po starých důkazech, protože rozhodovací věta není dost jasná. Druhá kontrola má takové rozdíly pojmenovat dřív, než se z nich stane tichá závislost na paměti jednoho člověka.
+
+### Praktický příklad
+
+```text
+Standard:
+U lead magnetu nesbíráme telefon, pokud telefon nemění další krok pro zájemce.
+
+Původní slabý signál:
+Tým našel starou landing page s povinným telefonem a nebylo jasné, jestli jde o aktuální vzor, nebo historickou výjimku.
+
+Uzavřená reakce:
+Archivní landing page byla označená jako historický příklad. Aktuální šablona dostala rozhodovací větu. Měsíční review marketingových šablon výslovně zahrnuje lead magnety.
+
+Druhá standardní kontrola:
+Při dalším měsíčním review vznikl nový lead magnet pro e-book. Tým použil aktuální šablonu, nepřidal telefon a nemusel otevírat starou kartu slabého signálu.
+
+Výsledek:
+Standard funguje v běžném rytmu bez čerstvé paměti. Další zvláštní kontrolu neplánujeme.
+```
+
+V tomhle příkladu je nejdůležitější poslední věta. Druhá kontrola neskončila novou prací, protože nic nového neukázala. To je legitimní výsledek. Kdyby tým z každé dobré kontroly vyrobil další kontrolu, trestal by sám sebe za to, že systém funguje. To je zvláštní druh byrokratického fitness: člověk se hodně hýbe a nikam nedojde.
+
+### Čtyři výsledky druhé standardní kontroly
+
+Po druhé standardní kontrole vyberte jeden ze čtyř výsledků:
+
+- Potvrzený klid: standard funguje v pracovním místě i běžném rytmu bez mimořádné paměti.
+- Poslední lokální dotažení: standard funguje, ale jedno konkrétní místo ještě potřebuje drobnou opravu.
+- Slabý rytmus: pravidlo je správné, ale běžný rytmus ho pořád neumí spolehlivě zachytit.
+- Nový návratový signál: objevilo se nové rozhodovací tření, které nesouvisí jen s původním slabým signálem.
+
+`Potvrzený klid` znamená, že téma může zůstat v normálním provozu. Neplánujte třetí zvláštní kontrolu jen proto, že dvě předchozí dopadly dobře. Ponechte návratový signál a zavřete mimořádnou pozornost.
+
+`Poslední lokální dotažení` použijte, když se ukáže drobnost typu nejasný název v indexu, chybějící odkaz v review agendě nebo starý příklad, který sice neškodí, ale mohl by dalšího člověka zmást. Dotažení musí mít jedno pracovní místo a jedno ověření. Jakmile potřebuje vlastní projekt, už to není lokální dotažení.
+
+`Slabý rytmus` je výsledek pro situaci, kdy pravidlo samo o sobě drží, ale systém ho neumí nést. Typicky se kontrola povede jen proto, že ji někdo ručně připomněl. V takovém případě neopravujte obsah pravidla. Opravte rytmus: agendu review, index, šablonu kontroly nebo vlastnictví.
+
+`Nový návratový signál` je nejvážnější výsledek. Použijte ho, když druhá kontrola odkryje nové rozhodovací tření, které už nejde uzavřít jako dozvuk původního slabého signálu. Například se ukáže, že telefon u lead magnetu je jen část širší otázky: kdy vůbec navazovat automatizovaný obchodní call. To je nová smyčka, ne pokračování staré reakce.
+
+### Privacy-first kontrola samostatnosti
+
+Druhá standardní kontrola je dobré místo pro kontrolu datové střídmosti. Pokud pravidlo opravdu funguje, tým by k jeho použití neměl znovu otevírat staré osobní údaje, exporty z analytiky, screenshoty formulářů ani interní komentáře. Stabilní pravidlo má být rozhodnutelné z aktuálního pracovního místa.
+
+Použijte tři otázky:
+
+```text
+Stačí nám aktuální šablona, index nebo review agenda?
+
+Musíme otevírat staré důkazy, nebo jen chceme mít příjemný pocit jistoty?
+
+Pokud starý důkaz opravdu potřebujeme, dá se nahradit anonymizovaným závěrem?
+```
+
+Dobrá privacy-first odpověď vypadá například takto:
+
+```text
+Pro druhou kontrolu stačí aktuální šablona lead magnetu a měsíční review agenda. Neotevíráme staré landing pages, formulářové exporty ani obchodní poznámky. Z původního slabého signálu ponecháváme jen zobecněný závěr: archivní příklady nesmí vypadat jako aktuální vzor.
+```
+
+To je přesně ten rozdíl mezi užitečnou pamětí a datovým nepořádkem. Užitečná paměť drží závěr. Datový nepořádek drží všechno, protože se to jednou "možná bude hodit". V privacy-first provozu není "možná" dost dobrý účel.
+
+### Karta druhé standardní kontroly
+
+```text
+Standard nebo pracovní trasa:
+
+Původní slabý signál:
+
+Uzavřená reakce:
+
+Výsledek první standardní kontroly:
+
+Běžný rytmus druhé kontroly:
+
+Pracovní místo, kde kontrola proběhla:
+
+Kontrola pracovního místa:
+
+Kontrola běžného rytmu:
+
+Kontrola datové stopy:
+
+Výsledek:
+- potvrzený klid
+- poslední lokální dotažení
+- slabý rytmus
+- nový návratový signál
+
+Nejkratší důkaz:
+
+Co se případně opravuje:
+
+Co výslovně neotevíráme:
+
+Privacy-first záznam:
+
+Návratový signál pro budoucnost:
+
+Vlastník:
+
+Datum:
+```
+
+Karta má být krátká. Pokud začne přerůstat do detailního reportu, pravděpodobně do ní taháte historii, která už do druhé kontroly nepatří. Druhá kontrola má ověřit samostatnost pravidla, ne znovu obhajovat, proč vzniklo.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: pojmenujte standard a běžný rytmus, ve kterém se kontroluje.
+2. Minuta 2: ověřte, jestli je pravidlo najitelné v pracovním místě.
+3. Minuta 3: ověřte, jestli se pravidlo objevilo v rytmu bez ručního připomenutí.
+4. Minuta 4: zapište, jaké staré podklady jste nemuseli otevřít.
+5. Minuta 5: vyberte jeden ze čtyř výsledků.
+6. Minuta 6: napište návratový signál a rozhodněte, jestli mimořádná pozornost končí.
+
+Pokud se během workshopu objeví nové téma, napište ho na samostatný řádek a vraťte se k otázce druhé kontroly. Nové téma může být důležité. Jen nemusí hned sežrat pracovní rámec, ve kterém jste byli skoro hotoví. Práce umí být překvapivě hladová, když ji krmíte každým nápadem.
+
+### Checklist druhé standardní kontroly
+
+- Proběhla kontrola v přirozeném běžném rytmu, ne jako extra schůzka ze strachu?
+- Je jasné, jaký standard nebo pracovní trasa se kontroluje?
+- Navazujeme na výsledek první standardní kontroly?
+- Ověřili jsme pracovní místo, kde další člověk pravidlo skutečně používá?
+- Ověřili jsme, že běžný rytmus pravidlo zachytí bez ručního připomenutí?
+- Ověřili jsme, že k rozhodnutí nepotřebujeme staré osobní údaje, screenshoty, exporty ani interní komentáře?
+- Vybrali jsme přesně jeden výsledek: potvrzený klid, poslední lokální dotažení, slabý rytmus, nebo nový návratový signál?
+- Pokud jde o potvrzený klid, neplánujeme další zvláštní kontrolu?
+- Pokud jde o lokální dotažení, má jedno pracovní místo a jedno ověření?
+- Pokud jde o slabý rytmus, opravujeme rytmus místo přepisování dobrého pravidla?
+- Pokud jde o nový návratový signál, oddělili jsme ho do nové smyčky?
+- Zapsali jsme, co výslovně neotevíráme?
+- Privacy-first záznam obsahuje jen minimum potřebné pro budoucí rozhodnutí?
+- Je jasné, kdy se téma znovu otevře?
+
+Druhá standardní kontrola je malý test provozní dospělosti. Pravidlo už nemá být zajímavé. Má být použitelné. Když funguje, nechte ho pracovat potichu. Když nefunguje, opravte nejbližší skutečnou příčinu. A když k rozhodnutí nepotřebujete staré podklady, nechte je zavřené. V evropském privacy-first provozu je tohle jedna z nejpraktičtějších forem respektu: nedělat zbytečnou práci s cizími daty jen proto, že máme chuť se ještě jednou ujistit.
+
 ## Pracovní log
 
+- 2026-06-24: Doplněna úvodní podkapitola o druhé standardní kontrole po uzavřené reakci na slabý signál: ověření samostatnosti pravidla bez čerstvé paměti, čtyři výsledky, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-06-24: Doplněna úvodní podkapitola o uzavření první standardní kontroly po uzavřené reakci na slabý signál: uzavírací stavy, praktické příklady, propsání do pracovního systému, privacy-first záznam, karta, mini workshop a checklist.
 - 2026-06-24: Doplněna úvodní podkapitola o první standardní kontrole po uzavřené reakci na slabý signál: běžný rytmus kontroly, samostatnost pracovního místa, návratový signál, privacy-first záznam, karta, mini workshop a checklist.
 - 2026-06-24: Doplněna úvodní podkapitola o uzavření druhého běžného použití po uzavřené reakci na slabý signál: uzavírací stavy, praktické příklady, propsání do pracovního místa, privacy-first úklid, karta, mini workshop a checklist.
