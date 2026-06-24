@@ -252220,8 +252220,175 @@ Pokud se ve třetí minutě ukáže, že signál není potvrzený, workshop kon�
 
 První návrat z klidu má být krátký a přísný. Buď potvrdí, že klid pořád platí, nebo opraví jedno místo, nebo otevře novou smyčku s jasnou hranicí. Co nemá dělat: budit starý projekt ze spánku jen proto, že se někde objevil podobný podnět. Dobrý provoz poznáte podle toho, že i návrat umí zůstat malý.
 
+## Uzavření prvního návratu z klidu po druhé standardní kontrole
+
+Návrat z klidu není hotový ve chvíli, kdy tým vybere jeden ze čtyř výsledků. Hotový je až tehdy, když je jasné, co se vrací do klidu, co se opravilo v aktuálním pracovním místě, co se otevírá jako nová smyčka a jaké staré podklady zůstávají zavřené. Bez tohoto uzavření se z prvního návratu snadno stane malý háček: nikdo už aktivně nepracuje, ale všichni si nechají otevřenou poznámku "radši ještě sledovat". A to je přesně ten typ tiché práce, který umí sežrat kapacitu bez jediného dramatického incidentu.
+
+Uzavření začněte krátkou větou:
+
+```text
+První návrat z klidu uzavíráme jako:
+
+Do běžného provozu se propisuje:
+
+Zůstává zavřené:
+```
+
+První řádek pojmenuje výsledek. Druhý řádek říká, co se má změnit v místě, kde tým opravdu pracuje. Třetí řádek chrání původní klid: staré historie, dočasné kontroly, výjimky, exporty a nápady, které návrat nepotvrdil, se nemají nenápadně vracet do aktivního provozu.
+
+Praktický příklad:
+
+```text
+První návrat z klidu uzavíráme jako:
+Slabý přenos pravidla.
+
+Do běžného provozu se propisuje:
+V šabloně lead magnetu zůstává jedna hraniční věta k tomu, kdy je telefonní číslo oprávněné pole.
+
+Zůstává zavřené:
+Celý formulářový standard, scoring leadů, staré exporty poptávek a mimořádná kontrola každého nového formuláře.
+```
+
+Takový zápis je drobný, ale velmi užitečný. Člověk, který přijde k tématu za měsíc, hned vidí, že pravidlo se nerozpadlo. Jen potřebovalo lepší přenos do jednoho místa. To je úplně jiný závěr než "zase řešíme formuláře".
+
+### Čtyři uzavírací stavy
+
+Uzavření musí odpovídat výsledku návratu:
+
+- Falešný návrat: zapište, proč se signál nepotvrdil, a vraťte téma do klidu bez nové kontroly.
+- Lokální dočištění: proveďte jednu opravu v nejbližším pracovním místě a uzavřete návrat po jejím propsání.
+- Slabý přenos: zlepšete najitelnost, pojmenování nebo příklad pravidla a domluvte jedno přirozené ověření.
+- Skutečné znovuotevření: založte novou malou smyčku se stop podmínkou a nepředstírejte, že jde pořád jen o údržbu.
+
+U falešného návratu je nejdůležitější nepřidat práci "pro jistotu". Pokud se signál nepotvrdil, není potřeba nový dashboard, zvláštní značka v backlogu ani pravidelná připomínka. Stačí jasný záznam, že klid platí.
+
+U lokálního dočištění hlídejte, aby oprava zůstala opravdu lokální. Pokud návrat ukázal nejasnou větu v jedné šabloně, neopravujte zároveň web, obchodní prezentaci, CRM pole a onboarding. Jedna chyba v jednom pracovním místě není mandát na úpravu celého systému.
+
+U slabého přenosu se neptejte jen "je pravidlo správné?", ale "umí ho někdo najít a použít bez člověka, který ho minule psal?" Pokud ne, problém možná není v obsahu pravidla, ale v názvu, umístění, příkladu nebo vstupní větě.
+
+U skutečného znovuotevření buďte poctiví. Jakmile se změnila nabídka, publikum, provozní realita nebo datová mapa, starý klid už nemusí platit. V takovém případě nezavírejte návrat kosmetickou opravou. Otevřete novou smyčku, ale jen v nejmenším rozsahu, který odpovídá dnešnímu důvodu.
+
+### Co propsat zpět do provozu
+
+Po uzavření návratu mají zůstat jen tři typy stop:
+
+- aktuální změna v pracovním místě, pokud nějaká vznikla,
+- krátký rozhodovací záznam u kanonického pravidla,
+- návratový signál pro další případ, pokud se mění.
+
+Všechno ostatní musí mít dobrý důvod. Dočasná poznámka z workshopu, kopie příkladu, seznam variant, screenshot starého formuláře nebo ruční checklist "na příště" se nemá stát novou provozní vrstvou. Pokud není potřeba pro další běžné použití, nepatří do aktivního systému.
+
+Dobrá závěrečná věta vypadá takto:
+
+```text
+Po uzavření návratu zůstává aktivní jen upravená šablona a krátký záznam u kanonického pravidla; pracovní poznámky z návratu mažeme nebo archivujeme podle retenčního pravidla.
+```
+
+Codyho komentář: když se po každém návratu nechá jedna malá kontrola navíc, za půl roku máte krásnou sbírku malých kontrol navíc. Nikdo si nepamatuje, kdo je chtěl, nikdo je nemiluje, ale všichni je opatrně obcházejí, protože co kdyby byly důležité. To není řízení kvality. To je kancelářský kompost.
+
+### Privacy-first uzavření
+
+Privacy-first uzavření prvního návratu má jednoduchý cíl: neprobudit stará data, když jste probouzeli jen staré téma. Návrat mohl pracovat s aktuálním zobecněným důkazem, kanonickým pravidlem a jedním pracovním místem. Po uzavření by neměla vzniknout nová datová vrstva, která bude čekat na další nejistotu.
+
+Zapište si čtyři věty:
+
+```text
+Pro rozhodnutí jsme použili:
+
+Do aktivního provozu ponecháváme:
+
+Mažeme nebo necháváme zavřené:
+
+Nová data, trackery, pole ani exporty nepřidáváme, protože:
+```
+
+Příklad:
+
+```text
+Pro rozhodnutí jsme použili:
+Zobecněný signál ze tří nových lead magnetů a aktuální šablonu formuláře.
+
+Do aktivního provozu ponecháváme:
+Upravenou hraniční větu v šabloně a krátký záznam u kanonického pravidla.
+
+Mažeme nebo necháváme zavřené:
+Pracovní poznámky z návratu a staré exporty poptávek z předchozí kontroly.
+
+Nová data, trackery, pole ani exporty nepřidáváme, protože:
+Pro další běžné použití stačí jasnější pravidlo v šabloně.
+```
+
+Tohle je malý provozní návyk, ale dělá velký rozdíl. Tým si zvyká, že každé znovuotevření tématu neznamená automatické znovuotevření dat. V evropském privacy-first provozu je to zdravý reflex: nejdřív rozhodnout, jak má práce vypadat; teprve potom se ptát, jestli vůbec potřebujeme další údaje.
+
+### Karta uzavření prvního návratu z klidu
+
+```text
+Téma:
+
+Původní stav klidu:
+
+Návratový signál:
+
+Výsledek prvního návratu:
+- falešný návrat
+- lokální dočištění
+- slabý přenos
+- skutečné znovuotevření
+
+Co se mění v pracovním místě:
+
+Co se nemění:
+
+Co se vrací do klidu:
+
+Co se otevírá jako nová smyčka, pokud něco:
+
+Kanonické místo záznamu:
+
+Aktivní podklady po uzavření:
+
+Podklady k úklidu nebo ponechání zavřené:
+
+Návratový signál pro příště:
+
+Vlastník:
+
+Datum:
+```
+
+Karta má být krátká. Pokud potřebuje dlouhou přílohu, návrat z klidu pravděpodobně nebyl dost zúžený nebo se už opravdu změnil na novou smyčku. V tom případě je lepší přiznat nový pracovní režim než schovávat větší práci pod název "uzavření".
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte výsledek prvního návratu.
+2. Minuta 2: napište, co přesně se mění v jednom pracovním místě.
+3. Minuta 3: napište, co výslovně zůstává zavřené.
+4. Minuta 4: rozhodněte, jestli se mění návratový signál pro příště.
+5. Minuta 5: proveďte privacy-first úklid podkladů.
+6. Minuta 6: zapište uzavření ke kanonickému pravidlu nebo založte novou smyčku, pokud návrat ukázal skutečnou změnu.
+
+Neprodlužujte workshop jen proto, že téma bývalo velké. Uzavíráte dnešní návrat, ne celou historii rozhodnutí. Pokud se objeví větší otázka, napište ji jako samostatný podnět a nechte ji projít vlastní bránou.
+
+### Checklist uzavření prvního návratu z klidu
+
+- Je jasně pojmenovaný výsledek návratu?
+- Odpovídá uzavření tomuto výsledku, místo aby přidávalo opatrnou práci navíc?
+- Je zapsané jedno pracovní místo, kde se něco mění?
+- Je výslovně zapsané, co se nemění a co zůstává zavřené?
+- Vrací se falešný návrat opravdu do klidu bez nové kontroly?
+- Zůstává lokální dočištění lokální?
+- Má slabý přenos jedno přirozené ověření při dalším použití?
+- Má skutečné znovuotevření novou smyčku se stop podmínkou?
+- Nezůstaly v aktivním provozu staré exporty, screenshoty nebo pracovní kopie bez účelu?
+- Je u kanonického pravidla krátký záznam, který pochopí i člověk mimo původní tým?
+- Je jasné, jaký signál by téma znovu otevřel příště?
+- Nevzniklo nové pole, tracker, export nebo report jen kvůli nejistotě?
+
+Uzavření prvního návratu z klidu má chránit dvě věci najednou: schopnost reagovat, když se opravdu něco změnilo, a schopnost zůstat v klidu, když se nic zásadního nezměnilo. Dobře vedený tým nepotřebuje starou práci držet při životě preventivně. Stačí mu jasný signál, malé rozhodnutí a čistý konec.
+
 ## Pracovní log
 
+- 2026-06-24: Doplněna úvodní podkapitola o uzavření prvního návratu z klidu po druhé standardní kontrole: uzavírací stavy, propsání změn do provozu, privacy-first úklid podkladů, karta, mini workshop a checklist.
 - 2026-06-24: Doplněna úvodní podkapitola o prvním návratu z klidu po druhé standardní kontrole: návratový signál, tři brány návratu, čtyři výsledky, privacy-first práce s důkazy, karta, mini workshop a checklist.
 - 2026-06-24: Doplněna úvodní podkapitola o přechodu do klidu po druhé standardní kontrole: důkaz pro klid, ukončení mimořádné péče, rozlišení klidu od odkladu, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-24: Doplněna úvodní podkapitola o uzavření druhé standardní kontroly po uzavřeném návratu po tichém provozu: uzavírací stavy, praktický příklad, propsání do pracovního systému, privacy-first úklid, karta, mini workshop a checklist.
