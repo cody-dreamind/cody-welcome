@@ -248488,8 +248488,189 @@ Když se tým neshodne na stavu, neřešte to hlasováním. Vraťte se k předem
 
 Uzavření první reakce na slabý signál chrání standard před dvěma extrémy. Na jedné straně před ignorováním drobného tření, které by se mohlo časem vrátit. Na druhé straně před přehnanou péčí, která znovu otevře všechno při prvním šustnutí. Dobře uzavřená reakce nechá po sobě jen to, co další člověk opravdu potřebuje: jasný stav, opravené pracovní místo, uklizenou stopu a hranici pro skutečný návrat.
 
+## První běžné použití po uzavřené reakci na slabý signál
+
+Uzavřená reakce na slabý signál ještě není důkaz, že systém zůstal klidný. Je to jen rozhodnutí, jak se zachovat po prvním zachvění. Skutečná zkouška přijde při dalším běžném použití: člověk vezme standard, šablonu nebo pracovní trasu a použije ji bez toho, aby měl čerstvě v hlavě celou debatu kolem slabého signálu.
+
+Cílem prvního běžného použití není znovu kontrolovat celou reakci. Cílem je ověřit, že uzavření po sobě nechalo dost jasnou stopu pro normální práci. Pokud byl problém ve starém odkazu, další člověk má najít aktuální cestu. Pokud byl problém ve staré šabloně, nemá ji omylem použít jako vzor. Pokud se otevřela nová smyčka, běžné použití nemá předstírat, že se nic nestalo.
+
+Začněte jednoduchou větou:
+
+```text
+Při prvním běžném použití ověřujeme, jestli uzavření slabého signálu stačí pro samostatné rozhodnutí bez mimořádné nápovědy.
+```
+
+Slovo `běžné` je důležité. Nepřipravujte speciální test, kde všichni vědí, co se má dokazovat. Použijte nejbližší přirozenou situaci: novou landing page, další lead magnet, běžnou kontrolu interního indexu, onboarding nového člověka, nebo další obchodní materiál, kde se standard přirozeně používá. Umělý test je někdy užitečný, ale tady by mohl přikrášlit realitu. Potřebujete vědět, jestli pravidlo funguje ve všedním provozu.
+
+### Co první běžné použití ověřuje
+
+První běžné použití po uzavřené reakci ověřuje čtyři věci:
+
+- Najitelnost: člověk najde aktuální standard nebo pracovní trasu bez hledání ve staré historii.
+- Rozhodnutelnost: standard mu stačí k rozhodnutí v konkrétní situaci.
+- Čistotu stop: stará stopa, která vyvolala slabý signál, už nemate další práci.
+- Klid režimu: tým nemusí znovu otevírat mimořádnou péči jen proto, aby běžné použití prošlo.
+
+Pokud selže najitelnost, neopravujte rovnou pravidlo. Nejdřív opravte cestu: index, odkaz, název, umístění v šabloně, nebo krátkou nápovědu u pracovního místa. Špatně najitelné pravidlo není nutně špatné pravidlo.
+
+Pokud selže rozhodnutelnost, zkontrolujte, jestli jde o hranu, kterou měl standard pokrývat. Když ano, může být potřeba drobné zpřesnění. Když ne, možná se právě naplnil návratový signál a téma patří do nové smyčky. To není prohra uzavření. Je to přesně důvod, proč návratový signál existuje.
+
+Pokud selže čistota stop, pravděpodobně jste uzavřeli reakci v logu, ale ne v místě, kde lidé opravdu pracují. To je časté. Log může být perfektní, ale pokud starý příklad pořád visí v interním indexu jako aktuální vzor, další člověk se zasekne úplně stejně.
+
+Pokud selže klid režimu, tým se možná bojí pustit standard z ruky. V takovém případě neprodlužujte mimořádné hlídání automaticky. Napište, čeho se tým bojí, a porovnejte to s návratovým signálem. Pokud obava není podložená pracovním důkazem, patří do poznámky, ne do další kontroly.
+
+### Praktický příklad
+
+```text
+Standard:
+U lead magnetu nesbíráme telefon, pokud telefon nemění další krok pro zájemce.
+
+Uzavřená reakce na slabý signál:
+Nový marketér našel starou landing page s povinným telefonem. Reakce byla uzavřená jako úklid staré stopy. Starou stránku jsme v interním indexu označili jako historický příklad, ne jako aktuální vzor.
+
+První běžné použití:
+Tým připravuje další lead magnet k checklistu pro SaaS onboarding.
+
+Ověření:
+Marketér najde aktuální šablonu, starou landing page vidí označenou jako historickou a rozhodne bez další schůzky: telefon se nepřidává.
+
+Výsledek:
+Uzavření stačí. Standard zůstává v dlouhodobém klidu.
+```
+
+Tady není potřeba další kontrolní kolečko. Běžné použití prošlo. Pravidlo bylo najitelné, rozhodnutí šlo udělat, stará stopa nemátla a tým nepotřeboval mimořádnou nápovědu. Hotovo.
+
+Jiný výsledek může vypadat takto:
+
+```text
+První běžné použití:
+Tým připravuje další lead magnet.
+
+Ověření:
+Marketér najde aktuální šablonu, ale obchod namítne, že u konkrétní kampaně telefon mění další krok, protože navazuje placený audit s omezenou kapacitou.
+
+Výsledek:
+Nejde o starou stopu. Jde o novou hranici mezi lead magnetem a obchodním formulářem.
+
+Rozhodnutí:
+Neopravujeme uzavřenou reakci. Otevíráme novou malou smyčku k hranici formuláře pro kampaně s placeným auditem.
+```
+
+Tady by bylo chybou označit první uzavření za špatné. První uzavření řešilo starý příklad, který mátl nového člověka. Nová situace je jiná: mění se obchodní krok po formuláři. Proto má dostat vlastní kartu, vlastní otázku a vlastní privacy-first hranici.
+
+### Čtyři výsledky prvního běžného použití
+
+Po prvním běžném použití vyberte jeden ze čtyř výsledků:
+
+- Uzavření stačí: standard zůstává v klidu a nic dalšího se nemění.
+- Lokální dočištění: pravidlo funguje, ale je potřeba opravit cestu, popisek nebo starou stopu.
+- Otevřít novou smyčku: běžné použití naplnilo návratový signál nebo ukázalo novou rozhodovací hranici.
+- Zpřesnit návratový signál: tým neumí poznat, jestli aktuální situace hranici naplnila, ale standard zatím umožnil bezpečné rozhodnutí.
+
+Výsledek `uzavření stačí` je plnohodnotný výsledek. Nepřidávejte práci jen proto, že je divné "neudělat nic". Někdy je nejlepší provozní rozhodnutí právě to, že systém prošel běžnou situací bez potřeby další péče.
+
+Výsledek `lokální dočištění` držte malý. Když stačí přejmenovat položku v indexu, nepřepisujte celou kapitolu standardu. Když stačí označit jednu historickou šablonu, neprocházejte všechny kampaně za poslední rok. Lokální dočištění má odstranit konkrétní tření z prvního použití, ne hledat další možné tření v okolí.
+
+Výsledek `otevřít novou smyčku` zapište odděleně. První běžné použití tím končí a další práce začíná jako nová iterace. Díky tomu se neztratí rozdíl mezi ověřením uzavřené reakce a změnou standardu.
+
+Výsledek `zpřesnit návratový signál` použijte jen tehdy, když rozhodnutí šlo bezpečně udělat, ale hranice návratu byla napsaná moc vágně. Pokud rozhodnutí bezpečně udělat nešlo, nejste ve zpřesnění signálu. Jste v nové smyčce nebo v lokálním problému standardu.
+
+### Privacy-first kontrola prvního použití
+
+První běžné použití svádí k tomu, aby si tým uložil důkaz, že standard funguje. To zní nevinně, ale snadno z toho vznikne zbytečná datová stopa: screenshot nové landing page, kopie formuláře, výřez interní konverzace, obchodní poznámka s osobními údaji, nebo malá tabulka "pro příště".
+
+Privacy-first varianta je kratší:
+
+```text
+První běžné použití proběhlo na nové landing page pro SaaS onboarding. Aktuální šablona stačila k rozhodnutí, telefon se nepřidává, starý historický příklad už nemátl. Neuchováváme screenshot ani formulářová data; stačí tento zobecněný záznam.
+```
+
+Uložte jen to, co bude potřeba při dalším rozhodnutí. Většinou stačí zobecněný závěr, pracovní místo a výsledek. Pokud běžné použití otevře novou smyčku, přeneste do ní jen minimum důkazů: co se stalo, proč to naplnilo hranici a kde se má začít. Osobní údaje, celé zprávy a exporty nechte ve zdroji pravdy, pokud nejsou nezbytné.
+
+Codyho komentář: když systém funguje, nemusíte ho fotit ze všech stran. Stačí vědět, že další člověk prošel správnou cestou a nezakopl o starý kabel. Kabel pak ukliďte. Nedělejte z toho dokumentární seriál.
+
+### Karta prvního běžného použití
+
+```text
+Standard nebo pracovní trasa:
+
+Uzavřená reakce na slabý signál:
+
+První běžné použití:
+
+Kdo použil standard:
+
+Kde se rozhodovalo:
+
+Ověření najitelnosti:
+- našel aktuální místo samostatně
+- potřeboval drobnou nápovědu
+- nenašel aktuální místo
+
+Ověření rozhodnutelnosti:
+- rozhodnutí šlo udělat ze standardu
+- chyběla lokální hrana
+- naplnil se návratový signál
+
+Ověření čistoty stop:
+- stará stopa už nemátla
+- stará stopa pořád mate
+- není relevantní
+
+Výsledek:
+- uzavření stačí
+- lokální dočištění
+- otevřít novou smyčku
+- zpřesnit návratový signál
+
+Nejmenší další krok:
+
+Co výslovně neotevíráme:
+
+Privacy-first hranice:
+
+Datum dalšího návratu, pokud nějaký je:
+```
+
+Kartu nevyplňujte automaticky u každého použití standardu. Patří jen k prvnímu běžnému použití po uzavřené reakci, případně k situaci, kde bylo riziko návratu do mimořádné péče. Jakmile standard projde, vraťte se k běžnému rytmu. Trvalá karta pro každé použití by byla jen mimořádná péče v novém kabátě.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: pojmenujte první běžné použití, na kterém se uzavření ověřuje.
+2. Minuta 2: ověřte, jestli člověk našel aktuální pracovní místo bez staré historie.
+3. Minuta 3: ověřte, jestli šlo udělat rozhodnutí ze standardu.
+4. Minuta 4: zkontrolujte, jestli stará stopa z původního slabého signálu znovu nemátla.
+5. Minuta 5: vyberte jeden ze čtyř výsledků.
+6. Minuta 6: napište privacy-first záznam a co výslovně neotevíráte.
+
+Když se během workshopu začne řešit širší téma, zastavte ho větou:
+
+```text
+Tohle může být nová smyčka, ale není to ověření prvního běžného použití.
+```
+
+Tato věta není brzda zlepšování. Je to ochrana pracovního režimu. Jedna situace má uzavřít jednu otázku. Další otázka si zaslouží vlastní začátek.
+
+### Checklist prvního běžného použití
+
+- Vybrali jsme přirozené běžné použití, ne umělý test?
+- Víme, jaká reakce na slabý signál byla uzavřená?
+- Ověřili jsme, že aktuální standard nebo pracovní trasa jsou najitelné?
+- Šlo podle nich udělat konkrétní rozhodnutí?
+- Starý příklad, odkaz, šablona nebo screenshot už nemate další práci?
+- Neotevřeli jsme mimořádnou péči jen kvůli ověřování?
+- Vybrali jsme jeden ze čtyř výsledků?
+- Pokud je potřeba dočištění, je opravdu lokální?
+- Pokud se naplnil návratový signál, otevíráme novou smyčku odděleně?
+- Zapsali jsme, co výslovně neotevíráme?
+- Stačí nám zobecněný záznam místo kopírování osobních údajů, screenshotů nebo exportů?
+- Vrací se standard po ověření zpět do běžného klidu?
+
+První běžné použití po uzavřené reakci je malý, ale užitečný test důvěry. Ukáže, jestli tým opravdu uklidil pracovní místo, nebo jen napsal hezké uzavření do logu. Když použití projde, nechte standard znovu dýchat v běžném rytmu. Když neprojde, opravte nejbližší místo nebo otevřete novou malou smyčku. Hlavně z toho nedělejte nekonečnou hlídku nad pravidlem, které už jednou dostalo šanci vrátit se do klidu.
+
 ## Pracovní log
 
+- 2026-06-24: Doplněna úvodní podkapitola o prvním běžném použití po uzavřené reakci na slabý signál: ověření najitelnosti, rozhodnutelnosti, čistoty stop a klidu režimu, praktické příklady, privacy-first záznam, karta, mini workshop a checklist.
 - 2026-06-23: Doplněna úvodní podkapitola o uzavření první reakce na slabý signál: uzavírací stavy, praktické příklady, propsání do pracovního místa, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-23: Doplněna úvodní podkapitola o prvním slabém signálu po návratu standardu do dlouhodobého klidu: rozlišení slabého a návratového signálu, tři rychlé kontroly, praktické příklady, privacy-first reakce, karta, mini workshop a checklist.
 - 2026-06-23: Doplněna úvodní podkapitola o uzavření druhé standardní kontroly do dlouhodobého klidu: čtyři uzavírací stavy, uzavírací věta, praktický příklad, privacy-first úklid, karta, mini workshop a checklist.
