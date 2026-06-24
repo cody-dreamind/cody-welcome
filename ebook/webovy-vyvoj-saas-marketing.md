@@ -250593,8 +250593,168 @@ Pokud v šesté minutě vzniknou tři úkoly, zastavte se. První běžné použ
 
 První běžné použití po uzavřeném návratu má být klidná kontrola reality. Když pravidlo funguje, nechte ho fungovat. Když drhne, opravte nejbližší pracovní místo. Když se vrací stará stopa, uklidte zdroj. A když se objeví opravdu nové téma, dejte mu vlastní malý rámec. Tak zůstane systém použitelný, marketing nerozjede další zbytečný proces a data zůstanou přesně tam, kde mají být: jen tam, kde mají jasný účel.
 
+## Uzavření prvního běžného použití po uzavření návratu po tichém provozu
+
+První běžné použití po uzavřeném návratu má hodnotu až ve chvíli, kdy se zavře. Jinak v systému zůstane nenápadná otázka: fungovalo to, nebo to jen prošlo bez komentáře? Ticho může znamenat stabilitu, ale také přehlédnuté tření. Uzavření proto nemá být další kontrolní vrstva. Má jen říct, jaký stav nastal a co se už nemá dál hlídat.
+
+Začněte jednoduchou větou:
+
+```text
+První běžné použití po uzavřeném návratu uzavíráme stavem:
+```
+
+Potom vyberte jeden stav:
+
+- funguje běžně a vrací se do tichého provozu;
+- funguje, ale potřebuje jedno lokální dotažení;
+- nefunguje kvůli staré stopě v pracovním místě;
+- ukázalo nové téma, které nepatří do starého návratu.
+
+Stav `funguje běžně` má být krátký. Pravidlo se použilo, člověk našel správné místo, nevznikla nová datová stopa a nebylo potřeba otevírat historii. V takové chvíli nepřidávejte druhé ověření jen proto, že je příjemné mít jistotu. Jistota už vznikla tím, že se pravidlo použilo v normální práci.
+
+Stav `lokální dotažení` použijte, když pravidlo drží, ale jedno místo pořád trochu překáží. Typicky chybí odkaz v šabloně, jedna rozhodovací věta, kratší vysvětlení výjimky nebo odstranění staré poznámky. Dotažení má zůstat u stejného pracovního místa. Jakmile sahá do více tras, už to není uzavření běžného použití, ale nová údržbová otázka.
+
+Stav `stará stopa` použijte, když se vrátí něco, co mělo být po předchozím návratu uklizené: starý brief, neplatná karta, archivní formulář, duplicitní checklist nebo automatizace, která pořád vytváří starý údaj. V takovém případě neotevírejte pravidlo. Opravte zdroj staré stopy a zapište, proč pravidlo zůstává platné.
+
+Stav `nové téma` použijte opatrně. To, že se při běžném použití objeví zajímavý nápad, ještě neznamená návrat staré práce. Nové téma potřebuje vlastní návratový signál, vlastní pracovní místo a vlastní privacy-first hranici.
+
+### Praktický příklad
+
+```text
+Pravidlo:
+U lead magnetu nesbíráme telefon, pokud telefon nemění další krok pro zájemce.
+
+První běžné použití:
+Nová landing page pro checklist k technickému auditu.
+
+Co se stalo:
+Autor našel aktuální šablonu, ponechal jen e-mail a stručný kontext. V interním briefu ale zůstala stará věta "telefon doplnit pro rychlejší spojení".
+
+Uzavírací stav:
+Nefunguje kvůli staré stopě v pracovním místě.
+
+Rozhodnutí:
+Pravidlo zůstává platné. Upravujeme interní brief a neotevíráme znovu debatu o telefonu v prvním formuláři.
+
+Privacy-first výsledek:
+Telefon nevzniká jako povinný údaj. Starý brief se upraví, aby příště starý sběr znovu nevyvolal.
+```
+
+Všimněte si, že problém není v pravidle. Problém je v cestě, kterou člověk při práci použil. Kdyby tým otevřel pravidlo, zbytečně by znovu řešil starou otázku. Správná reakce je menší a nudnější: opravit brief.
+
+### Co propsat po uzavření
+
+Po uzavření prvního běžného použití zapište jen to, co pomůže příštímu použití:
+
+- stav použití;
+- lokální opravu, pokud vznikla;
+- potvrzení, že staré podklady zůstaly zavřené;
+- další návratový signál, pokud je potřeba;
+- co se výslovně neotevírá.
+
+Krátká uzavírací věta může znít:
+
+```text
+Pravidlo prošlo prvním běžným použitím po uzavřeném návratu. Lokální stará stopa byla opravena, pravidlo zůstává v tichém provozu a další otevření vyžaduje nový návratový signál.
+```
+
+Pokud vše fungovalo bez tření, ještě kratší:
+
+```text
+Pravidlo fungovalo v běžném použití bez otevření historie a bez nové datové stopy. Další zvláštní kontrolu neplánujeme.
+```
+
+### Privacy-first uzavření
+
+Uzavření prvního běžného použití nesmí samo vyrobit datový nepořádek. Nepotřebujete screenshot nové stránky, kopii starého briefu, seznam lidí, kteří pravidlo četli, ani tabulku "dodržení pravidla". Stačí pracovní závěr.
+
+Použijte tři řádky:
+
+```text
+Ponecháváme:
+
+Neotevíráme:
+
+Mažeme nebo opravujeme:
+```
+
+Příklad:
+
+```text
+Ponecháváme:
+Závěr, že nová landing page použila aktuální formulářové pravidlo.
+
+Neotevíráme:
+Staré exporty poptávek ani původní debatu o telefonu.
+
+Mažeme nebo opravujeme:
+Starou větu v interním briefu, která telefon znovu vyžadovala.
+```
+
+Tento zápis je dostatečný. Privacy-first provoz nemá dokazovat každou správnou práci dalším sběrem dat. Má udržet rozhodnutí použitelné a stopu přiměřenou.
+
+### Karta uzavření běžného použití
+
+```text
+Pravidlo:
+
+První běžné použití:
+
+Co se stalo:
+
+Uzavírací stav:
+- funguje běžně
+- lokální dotažení
+- stará stopa
+- nové téma
+
+Rozhodnutí:
+
+Co se mění v pracovním místě:
+
+Co výslovně neotevíráme:
+
+Privacy-first uzavření:
+Ponecháváme:
+Neotevíráme:
+Mažeme nebo opravujeme:
+
+Další návratový signál:
+
+Vlastník:
+
+Datum:
+```
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte pravidlo a běžnou situaci, ve které se použilo.
+2. Minuta 2: napište, co se reálně stalo.
+3. Minuta 3: vyberte jeden uzavírací stav.
+4. Minuta 4: určete nejbližší pracovní místo opravy, pokud je potřeba.
+5. Minuta 5: zapište, co se neotevírá a jaké staré podklady zůstávají zavřené.
+6. Minuta 6: potvrďte návrat do tichého provozu, nebo založte nové téma s vlastní hranicí.
+
+Pokud workshop začne znovu analyzovat celé pravidlo, vraťte se k otázce: co přesně ukázalo první běžné použití? Pokud odpověď zní jen "možná bychom se měli podívat i na...", nejde o uzavření. Jde o nový nápad.
+
+### Checklist uzavření běžného použití
+
+- Víme, v jaké běžné situaci se pravidlo použilo?
+- Popsali jsme skutečný průběh bez návratu do celé historie?
+- Vybrali jsme jeden uzavírací stav?
+- Pokud pravidlo fungovalo, ukončili jsme zvláštní pozornost?
+- Pokud drhlo, opravujeme nejbližší pracovní místo?
+- Pokud se vrátila stará stopa, uklízíme její zdroj místo otevírání pravidla?
+- Pokud se objevilo nové téma, oddělili jsme ho od starého návratu?
+- Neotevřeli jsme staré exporty, screenshoty, poptávky ani interní poznámky bez nutnosti?
+- Zapsali jsme, co ponecháváme, co neotevíráme a co mažeme nebo opravujeme?
+- Má další otevření konkrétní návratový signál?
+
+Uzavření prvního běžného použití po návratu je malá tečka za celou smyčkou. Pravidlo se vrátilo z tichého provozu, zvládlo signál, znovu se použilo a teď má buď klid, nebo jednu přesnou opravu. To je dobrý provozní výsledek. Ne proto, že je dramatický, ale protože další člověk už nemusí znovu řešit stejnou starou otázku.
+
 ## Pracovní log
 
+- 2026-06-24: Doplněna úvodní podkapitola o uzavření prvního běžného použití po uzavření návratu po tichém provozu: uzavírací stavy, lokální oprava staré stopy, privacy-first uzavření, karta, mini workshop a checklist.
 - 2026-06-24: Doplněna úvodní podkapitola o prvním běžném použití po uzavření návratu po tichém provozu: použitelnost pravidla, klid po návratu, lokální dotažení, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-06-24: Doplněna úvodní podkapitola o uzavření prvního návratu po tichém provozu: uzavírací stavy, propsání do pracovního systému, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-24: Doplněna úvodní podkapitola o prvním návratovém signálu po tichém provozu: rozlišení staré stopy, slabé formulace, nového signálu a změny kontextu, privacy-first návrat, karta, mini workshop a checklist.
