@@ -250258,8 +250258,186 @@ Když se tým začne hádat o původní rozhodnutí, vraťte ho k dnešní situa
 
 První návrat po tichém provozu má být přesný, ne dramatický. Někdy jen uklidí starou stopu. Někdy zpřesní větu v kanonickém místě. Někdy opravdu otevře nový malý průchod. Ve všech případech ale platí stejné pravidlo: neplašte celý systém kvůli jednomu signálu, dokud nevíte, co přesně signalizuje.
 
+## Uzavření prvního návratu po tichém provozu
+
+První návrat po tichém provozu je hotový až ve chvíli, kdy tým rozhodne, co se po něm vrací zpět do klidu, co se opraví lokálně a co se opravdu mění v další malou iteraci. Bez uzavření se z návratu stane poloviční poplach: pravidlo už není úplně tiché, ale nikdo neví, jestli se s ním má něco dělat.
+
+Uzavření začněte tím, že zopakujete původní rozhodnutí z karty návratu. Nehledejte novou formulaci, dokud není jasné, co se vlastně potvrdilo.
+
+```text
+Původní návratový signál byl:
+
+Dnešní situace byla vyhodnocena jako:
+- stará stopa
+- slabá formulace
+- skutečný nový signál
+- změna kontextu
+
+Uzavření:
+```
+
+Tři řádky stačí k tomu, aby se tým neschoval za obecnou větu "něco se musí zlepšit". Po tichém provozu je důležité zachovat přesnost. Pokud se vrátila stará kopie šablony, neotevíráte pravidlo. Pokud se ukázala slabá rozhodovací věta, neopravujete celý systém. Pokud se objevil skutečný nový signál, neřešíte ho jako úklid starého nepořádku.
+
+Praktický příklad:
+
+```text
+Pravidlo v tichém provozu:
+U lead magnetu nesbíráme telefon, pokud telefon nemění další krok pro zájemce.
+
+Dnešní situace:
+Nová landing page obsahovala povinný telefon, protože autor použil starou kopii briefu.
+
+Vyhodnocení:
+Stará stopa.
+
+Uzavření:
+Odstraňujeme starý brief, aktualizujeme odkaz v onboardingové poznámce a pravidlo zůstává v tichém provozu. Neotevíráme debatu o telefonu u všech lead magnetů.
+```
+
+Tento závěr je malý, ale důležitý. Chrání tým před tím, aby každý návratový signál znamenal nový projekt. Zároveň nezametá problém pod koberec: stará stopa se opravdu uklidí a kanonické místo se zpevní.
+
+### Pět uzavíracích stavů
+
+Po prvním návratu po tichém provozu vyberte jeden z pěti stavů:
+
+- Vrátit do tichého provozu: signál se nepotvrdil, nebo šlo jen o neplatný podnět.
+- Lokálně uklidit: pravidlo drží, ale vrátila se stará stopa, kopie, odkaz nebo šablona.
+- Zpřesnit kanonické místo: pravidlo drží, ale rozhodovací věta je slabá nebo špatně najitelná.
+- Otevřít malý návrat: nový signál je skutečný, má dopad a má jedno pracovní místo.
+- Spustit kontrolu kontextu: změnila se nabídka, publikum, proces nebo data tak, že staré pravidlo nemusí měřit stejnou situaci.
+
+Stav `vrátit do tichého provozu` používejte bez výčitek. Pokud se signál nepotvrdil, není potřeba vyrábět kontrolu jen proto, že jste se na pravidlo jednou podívali.
+
+Stav `lokálně uklidit` má mít jasný konec: odstranit starou kopii, opravit odkaz, zneplatnit starou šablonu, přepsat onboardingovou poznámku nebo zrušit zapomenutou automatizaci. Jakmile lokální úklid vyžaduje debatu o pravidle samotném, pravděpodobně jste v jiném stavu.
+
+Stav `zpřesnit kanonické místo` použijte, když problém není v pravidle, ale v jeho použitelnosti. Typicky chybí příklad, hraniční věta, jasné "kdy ano / kdy ne" nebo viditelné umístění v pracovní šabloně.
+
+Stav `otevřít malý návrat` patří jen skutečnému novému signálu. Musí mít důkaz, dopad a pracovní místo. Bez těchto tří věcí je to zatím podnět, ne návrat.
+
+Stav `spustit kontrolu kontextu` je brzda proti falešné kontinuitě. Pokud se změnil segment nebo nabídka, nedává smysl předstírat, že starý návratový signál pořád znamená totéž. Nejdřív zkontrolujte přenesený kontext.
+
+### Co propsat zpět
+
+Uzavření se musí propsat jen tam, kde pomůže příští práci. Ne všude. Dobrá propagace závěru po prvním návratu má tři vrstvy:
+
+- Kanonické pracovní místo: aktuální pravidlo, případně jedna zpřesněná věta.
+- Úklidové místo: odstraněná nebo opravená stará stopa, aby se znovu nevracela do práce.
+- Rozhodovací paměť: krátký záznam, proč se pravidlo neotevřelo celé nebo proč se otevřel jen malý návrat.
+
+Pokud se výsledek týká jen staré stopy, necpěte ho do pravidla jako novou výjimku. Zapište úklid tam, kde stopa vznikla. Pravidlo má zůstat jednoduché. Jinak se z něj stane sbírka historických varování, která nový člověk stejně nepoužije.
+
+Příklad zápisu:
+
+```text
+Kanonické místo:
+Pravidlo beze změny.
+
+Úklid:
+Starý brief `lead-magnet-2025` archivován a odkaz v onboardingové poznámce nahrazen aktuální šablonou.
+
+Rozhodovací paměť:
+První návrat po tichém provozu byl stará stopa, ne nový signál k pravidlu.
+```
+
+Takový zápis je nudný správným způsobem. Příště tým uvidí, že se problém vyřešil u zdroje, a nebude znovu otevírat stejnou debatu.
+
+### Privacy-first uzavření
+
+Při uzavření prvního návratu po tichém provozu platí přísné pravidlo: nový záznam nesmí oživit starou datovou stopu bez důvodu. Pokud jste kvůli návratu nahlédli do podkladu, který obsahuje osobní údaje, uzavřete jeho další osud hned.
+
+Použijte krátkou kontrolu:
+
+```text
+Co jsme kvůli návratu otevřeli:
+
+Co z toho dál potřebujeme:
+
+Co stačí zobecnit:
+
+Co zavíráme, mažeme nebo necháváme v původním zdroji pravdy:
+```
+
+V mnoha případech má být odpověď jednoduchá: "Neotevřeli jsme žádné osobní údaje." To je nejlepší výsledek. Pokud stačil anonymizovaný souhrn, nevracejte do dokumentace konkrétní zprávy, jména, e-maily ani screenshoty. Účelem uzavření je zmenšit nejistotu, ne rozšířit archiv.
+
+Codyho komentář: po tichém provozu je každé znovuotevření starých dat trochu jako vytáhnout krabici ze sklepa. Možná v ní něco je, ale nejdřív se zeptejte, jestli tu krabici fakt potřebujete nosit do obýváku.
+
+### Karta uzavření návratu po tichém provozu
+
+```text
+Pravidlo v tichém provozu:
+
+Původní návratový signál:
+
+Dnešní situace:
+
+Vyhodnocení návratu:
+- stará stopa
+- slabá formulace
+- skutečný nový signál
+- změna kontextu
+
+Uzavírací stav:
+- vrátit do tichého provozu
+- lokálně uklidit
+- zpřesnit kanonické místo
+- otevřít malý návrat
+- spustit kontrolu kontextu
+
+Rozhodnutí jednou větou:
+
+Co se mění v kanonickém pracovním místě:
+
+Co uklízíme mimo kanonické místo:
+
+Co zůstává dál v tichém provozu:
+
+Co výslovně neotevíráme:
+
+Privacy-first úklid:
+Které podklady zobecníme, zavřeme, anonymizujeme nebo smažeme:
+
+Návratový signál pro další otevření:
+
+Vlastník:
+
+Datum:
+```
+
+Karta nemá být povinný formulář pro každé malé zachvění. Použijte ji ve chvíli, kdy byl tichý provoz opravdu přerušen a tým potřebuje nechat stopu, proč se pravidlo vrací do klidu, mění lokálně, nebo otevírá nový průchod.
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: přečtěte pravidlo, původní návratový signál a dnešní situaci.
+2. Minuta 2: potvrďte, jestli šlo o starou stopu, slabou formulaci, nový signál nebo změnu kontextu.
+3. Minuta 3: vyberte jeden uzavírací stav.
+4. Minuta 4: napište rozhodnutí jednou větou.
+5. Minuta 5: určete, co se propíše do kanonického místa a co se uklidí jinde.
+6. Minuta 6: napište, co zůstává v tichém provozu a co se neotevírá.
+7. Minuta 7: udělejte privacy-first úklid podkladů.
+
+Když workshop skončí větou "měli bychom to celé znovu promyslet", pravděpodobně jste nevybrali správný stav. Buď je to změna kontextu, a pak spusťte kontrolu kontextu, nebo je to jen nejasný pocit, a pak pravidlo vraťte do tichého provozu s poznámkou, jaký důkaz by musel přijít příště.
+
+### Checklist uzavření návratu
+
+- Víme, jestli se původní návratový signál potvrdil?
+- Rozlišili jsme starou stopu, slabou formulaci, nový signál a změnu kontextu?
+- Vybrali jsme jeden uzavírací stav?
+- Umíme rozhodnutí napsat jednou větou?
+- Pokud pravidlo vracíme do tichého provozu, víme proč?
+- Pokud lokálně uklízíme, víme přesně jakou starou stopu?
+- Pokud zpřesňujeme kanonické místo, měníme jen rozhodovací oporu, ne celé pravidlo?
+- Pokud otevíráme malý návrat, má jedno pracovní místo a nejmenší důkaz?
+- Pokud se změnil kontext, nezkoušíme staré pravidlo násilím zachránit výjimkou?
+- Propsali jsme výsledek jen do míst, kde pomůže příští práci?
+- Uklidili jsme podklady bez zbytečného kopírování osobních údajů?
+- Zůstalo jasné, co dál běží v tichém provozu?
+- Má další návratový signál konkrétní podobu?
+
+Uzavření prvního návratu po tichém provozu je malá zkouška zralosti systému. Dobré pravidlo se umí na chvíli probudit, podívat se na signál a zase se vrátit do klidu, pokud není důvod dělat víc. A když důvod je, otevře se jen tak široce, jak dnešní důkaz opravdu vyžaduje. Přesně tím se z privacy-first provozu nestává brzda, ale způsob, jak držet práci čistou, rozhodnutelnou a bez zbytečných stop.
+
 ## Pracovní log
 
+- 2026-06-24: Doplněna úvodní podkapitola o uzavření prvního návratu po tichém provozu: uzavírací stavy, propsání do pracovního systému, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-24: Doplněna úvodní podkapitola o prvním návratovém signálu po tichém provozu: rozlišení staré stopy, slabé formulace, nového signálu a změny kontextu, privacy-first návrat, karta, mini workshop a checklist.
 - 2026-06-24: Doplněna úvodní podkapitola o tichém provozu po uzavření druhé standardní kontroly: pracovní místo, návratový signál, tiché kontroly, privacy-first klid, karta, mini workshop a checklist.
 - 2026-06-24: Doplněna úvodní podkapitola o uzavření druhé standardní kontroly po uzavřené reakci na slabý signál: uzavírací stavy, propsání do pracovního systému, privacy-first úklid, karta, mini workshop a checklist.
