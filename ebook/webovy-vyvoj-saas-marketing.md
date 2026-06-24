@@ -249211,8 +249211,188 @@ Pokud takový důkaz není, uzavřete klid. Pokud existuje, pravděpodobně už 
 
 Uzavření druhého běžného použití je chvíle, kdy tým přestane stát u standardu se svítilnou. Buď standard funguje a může zpět do normální práce, nebo nefunguje a další krok má být přesnější, ne delší. V obou případech je dobrý výsledek ten, který zmenší nejistotu, uklidí zbytečné stopy a nechá příštímu člověku jasnější pracovní místo.
 
+## První standardní kontrola po uzavřené reakci na slabý signál
+
+Když reakce na slabý signál projde dvěma běžnými použitími a uzavře se, nemá se kolem ní dál chodit po špičkách. Standard se vrací do normálního rytmu. To ale neznamená, že se na něj už nikdy nikdo nepodívá. Znamená to jen, že další kontrola nemá být mimořádná, emoční ani historická. Má proběhnout stejně jako kontrola jakéhokoli jiného pracovního pravidla.
+
+První standardní kontrola po uzavřené reakci má ověřit jednu věc: jestli se z opraveného místa nestal nový malý ostrov zvláštní péče. Pokud tým pořád otevírá starou kartu, připomíná původní slabý signál nebo kontroluje každý lead magnet ručně, reakce sice formálně skončila, ale provozně pořád sedí u stolu. To je přesně ten druh procesu, který se tváří jako opatrnost a ve skutečnosti jen vysává pozornost. Opatrnost je fajn. Nekonečné hlídání jedné staré modřiny už je horší sport.
+
+Začněte kontrolní větou:
+
+```text
+Standard kontrolujeme v běžném rytmu, ne proto, že bychom znovu otevírali slabý signál.
+```
+
+Tahle věta je důležitá. Odděluje běžné review od návratu problému. Nezkoumáte, jestli byla stará reakce "dost dobrá" z pohledu dnešní nervozity. Kontrolujete, jestli současné pracovní místo pořád vede k dobrému rozhodnutí, jestli se nepřidala skrytá ruční práce a jestli privacy-first hranice zůstala součástí běžného provozu.
+
+### Co první standardní kontrola ověřuje
+
+První standardní kontrola po uzavřené reakci má čtyři jednoduché vrstvy:
+
+- Použití v rytmu: standard se kontroluje v pravidelném review, ne v extra schůzce kvůli starému slabému signálu.
+- Samostatnost pracovního místa: člověk najde aktuální pravidlo bez pracovního logu a bez historického vysvětlování.
+- Stabilitu návratového signálu: tým ví, co by téma znovu otevřelo, ale běžné variace tím nepřifukuje.
+- Datovou střídmost: pro kontrolu stačí závěr z běžné práce, ne nové exporty, screenshoty a seznamy lidí.
+
+Použití v rytmu chrání tým před mikrořízeními. Pokud se standard vrátí do běžného provozu, jeho kontrola má přijít ve stejném okně jako ostatní podobná pravidla: třeba v měsíčním review šablon, kvartálním auditu nabídek nebo pravidelné kontrole lead magnetů. Jakmile pro něj vytvoříte speciální ceremonii, slabý signál vlastně pořád vyhrává.
+
+Samostatnost pracovního místa je praktický test. Otevřete místo, kde má pravidlo žít: interní index, šablonu, checklist, kanonickou stránku nebo rozhodovací kartu. Pokud v něm člověk najde aktuální pravidlo a rozlišení archivních příkladů, je to dobré. Pokud musí otevřít starou kartu reakce, aby pochopil, co se děje, pravidlo ještě není dost přenesené do běžného provozu.
+
+Stabilita návratového signálu brání dvěma extrémům. První extrém je ignorovat skutečný návrat jen proto, že už se přece "uzavřelo". Druhý extrém je otevřít novou smyčku při každé malé odchylce. Dobré pravidlo říká, co je běžná variace a co už je signál. Například: jiný typ lead magnetu není návratový signál; opakované váhání, jestli telefon mění další krok pro zájemce, už návratový signál být může.
+
+Datová střídmost je součást provozní hygieny. Standardní kontrola nemá vyrobit víc důkazů, než kolik potřebuje k rozhodnutí. Ve většině případů stačí zapsat: "V posledních dvou použitích se telefon nepřidal bez důvodu a archivní příklady se neotevíraly jako vzor." To je pracovní závěr. Nepotřebujete k němu kopie formulářů, e-mailů ani interních komentářů.
+
+### Praktický příklad
+
+```text
+Standard:
+U lead magnetu nesbíráme telefon, pokud telefon nemění další krok pro zájemce.
+
+Uzavřená reakce na slabý signál:
+Archivní landing page s povinným telefonem byla oddělena od aktuálních vzorů a šablona dostala krátkou rozhodovací větu.
+
+Běžný rytmus:
+Měsíční kontrola marketingových šablon.
+
+Kontrola:
+Tým otevře interní index lead magnetů. Aktuální šablona je nahoře, archivní příklady jsou oddělené a rozhodovací věta je pochopitelná bez staré karty.
+
+Zjištění:
+Od posledního uzavření vznikly dva nové materiály. Telefon se nepřidal, protože další krok byl samostatné čtení a dobrovolná odpověď na e-mail.
+
+Rozhodnutí:
+Standard zůstává v klidu. Neotevíráme novou smyčku, nepřidáváme kontrolní pole a neukládáme kopie stránek. Do review poznámky stačí závěr, že pracovní místo pořád vede k rozhodnutí.
+```
+
+Jiný výsledek:
+
+```text
+Kontrola:
+Aktuální šablona je správná, ale v interním indexu vznikla nová sekce "inspirace", kde se stará landing page znovu objevila bez archivního štítku.
+
+Zjištění:
+Standard není rozbitý. Rozbilo se umístění starého příkladu.
+
+Rozhodnutí:
+Opravíme jen štítek v sekci inspirace a doplníme pravidlo, že archivní příklady nesmí být v inspirační části bez označení. Neotevíráme znovu otázku telefonu u lead magnetů.
+```
+
+Tady je rozdíl mezi standardní kontrolou a návratem problému. Problém není v rozhodovací hranici. Problém je v jednom místě, kam se starý příklad potichu vrátil bez kontextu. Nejmenší dobrá akce je opravit štítek a cestu, ne rozjet další debatu o datech ve formulářích.
+
+### Čtyři výsledky první standardní kontroly
+
+Po kontrole vyberte jeden ze čtyř výsledků:
+
+- Klid v běžném rytmu: standard je najitelný, samostatný a nevyžaduje žádnou zvláštní péči.
+- Lokální údržba pracovního místa: pravidlo drží, ale jedno místo potřebuje štítek, odkaz, řazení nebo kratší větu.
+- Slabý běžný rytmus: standard je správný, ale kontrola ukázala, že ho tým neumí zahrnout do normálního review bez zvláštní připomínky.
+- Nový návratový signál: objevilo se stejné rozhodovací tření, které mělo být po uzavření stabilní.
+
+Výsledek `klid v běžném rytmu` znamená, že neděláte nic navíc. Zapište krátký závěr a nechte standard být. Dobrý provoz často vypadá neokázale: žádný nový úkol, žádná nová metrika, žádný heroický zásah. Jen pravidlo, které funguje.
+
+Výsledek `lokální údržba pracovního místa` použijte, když je potřeba opravit cestu k pravidlu, ne pravidlo samotné. Omezte zásah na jedno místo. Pokud je problém v názvu šablony, neměňte rovnou celý index. Pokud chybí archivní štítek, nepřepisujte formulářovou strategii.
+
+Výsledek `slabý běžný rytmus` je jiný. Tady standard možná funguje, ale neumí se sám dostat do normální kontroly. Například marketingové šablony mají měsíční review, ale lead magnety v něm nejsou zahrnuté. Nejmenší oprava pak není v obsahu pravidla, ale v rytmu: přidat jednu položku do existujícího review, ne vytvořit nový kontrolní proces.
+
+Výsledek `nový návratový signál` použijte střídmě a jasně. Musí jít o skutečné opakování rozhodovacího tření, ne o běžnou variaci. Pokud se tým znovu nedokáže rozhodnout, jestli telefon mění další krok pro zájemce, otevřete novou smyčku. Pokud jen vznikl nový typ materiálu, který standard zvládá, zůstaňte v klidu.
+
+### Privacy-first kontrola
+
+První standardní kontrola po slabém signálu nesmí znovu otevřít starou datovou stopu jen proto, že je po ruce. To, že archivní landing page existuje, ještě neznamená, že ji musíte znovu screenshotovat, exportovat nebo přikládat do review.
+
+Dobrá privacy-first poznámka:
+
+```text
+Kontrola proběhla v měsíčním review marketingových šablon. Standard byl najitelný a použitelný bez staré karty. Neukládáme kopie lead magnetů ani interní komentáře; ponecháváme jen závěr o funkčním pracovním místě a návratový signál.
+```
+
+Poznámka pro lokální údržbu:
+
+```text
+Opravujeme archivní štítek v inspirační části indexu. Neukládáme screenshoty staré landing page, protože pro rozhodnutí stačí záznam typu tření: archivní příklad byl viditelný bez označení.
+```
+
+Privacy-first provoz není asketická soutěž v tom, kdo má nejméně informací. Je to disciplína, že držíte jen takový důkaz, který opravdu pomáhá příštímu rozhodnutí. Všechno ostatní je budoucí úklid v převleku za pečlivost.
+
+### Karta první standardní kontroly
+
+```text
+Standard nebo pracovní trasa:
+
+Uzavřená reakce na slabý signál:
+
+Běžný rytmus kontroly:
+
+Kontrolované pracovní místo:
+
+Šlo pravidlo najít bez starého logu:
+- ano / ne
+
+Byla potřeba zvláštní připomínka původního slabého signálu:
+- ne / ano, jaká
+
+Co se při běžném použití ukázalo:
+
+Návratový signál:
+- nenaplněn
+- částečně nejasný
+- naplněn
+
+Výsledek kontroly:
+- klid v běžném rytmu
+- lokální údržba pracovního místa
+- slabý běžný rytmus
+- nový návratový signál
+
+Nejmenší další krok:
+
+Co výslovně neotevíráme:
+
+Privacy-first záznam:
+
+Vlastník:
+
+Datum další běžné kontroly nebo návratový signál:
+```
+
+Karta má zůstat lehká. Pokud ji vyplňujete déle než samotnou kontrolu, ztratila smysl. Standardní review má snižovat provozní tření, ne vyrábět malý auditní román.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: připomeňte si standard a běžný rytmus kontroly.
+2. Minuta 2: otevřete aktuální pracovní místo, ne starý log.
+3. Minuta 3: ověřte, jestli pravidlo funguje bez zvláštní připomínky slabého signálu.
+4. Minuta 4: porovnejte běžné použití s návratovým signálem.
+5. Minuta 5: vyberte jeden ze čtyř výsledků.
+6. Minuta 6: napište nejmenší další krok, věc mimo rozsah a privacy-first záznam.
+
+Když se debata stočí k tomu, proč starý slabý signál vlastně vznikl, vraťte ji k pracovní větě:
+
+```text
+Dnes nekontrolujeme historii reakce. Kontrolujeme, jestli současné pracovní místo funguje v běžném rytmu.
+```
+
+Historie zůstává dohledatelná, ale nemá ovládat standardní kontrolu. Jinak se z každého review stane malý návrat do minulosti, a to je výborný způsob, jak se tvářit produktivně bez dopadu na dnešní práci.
+
+### Checklist první standardní kontroly
+
+- Kontrola proběhla v běžném rytmu, ne jako mimořádná reakce na starý slabý signál?
+- Otevřeli jsme aktuální pracovní místo místo historického logu?
+- Šlo pravidlo najít a použít bez čerstvého vysvětlení?
+- Je jasné, co je běžná variace a co návratový signál?
+- Nevytvořili jsme novou zvláštní kontrolu bez důkazu?
+- Pokud je potřeba údržba, míří na jedno konkrétní místo?
+- Pokud je slabý běžný rytmus, opravujeme existující review místo nového procesu?
+- Pokud se naplnil návratový signál, otevíráme novou smyčku odděleně?
+- Neuchováváme screenshoty, exporty, osobní údaje ani interní komentáře bez jasného účelu?
+- Zapsali jsme, co výslovně neotevíráme?
+- Má další kontrola datum v běžném rytmu nebo jasný návratový signál?
+
+První standardní kontrola je návrat k normálnosti. Má ukázat, že slabý signál už není speciální událost, ale jen jedna uzavřená lekce promítnutá do pracovního místa. Když kontrola dopadne klidně, nejlepší další krok je často žádný. A to je v dobře vedeném SaaS, marketingu i provozu úplně legitimní výhra: méně rituálů, méně datových stop, víc energie na práci, která opravdu mění zákaznický výsledek.
+
 ## Pracovní log
 
+- 2026-06-24: Doplněna úvodní podkapitola o první standardní kontrole po uzavřené reakci na slabý signál: běžný rytmus kontroly, samostatnost pracovního místa, návratový signál, privacy-first záznam, karta, mini workshop a checklist.
 - 2026-06-24: Doplněna úvodní podkapitola o uzavření druhého běžného použití po uzavřené reakci na slabý signál: uzavírací stavy, praktické příklady, propsání do pracovního místa, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-24: Doplněna úvodní podkapitola o druhém běžném použití po uzavřené reakci na slabý signál: přenositelnost bez čerstvé paměti, stabilita hranice, skrytá péče, privacy-first záznam, karta, mini workshop a checklist.
 - 2026-06-24: Doplněna úvodní podkapitola o uzavření prvního běžného použití po uzavřené reakci na slabý signál: uzavírací stavy, praktické příklady, propsání do pracovního místa, privacy-first záznam, karta, mini workshop a checklist.
