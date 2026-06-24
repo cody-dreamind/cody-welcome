@@ -249014,8 +249014,206 @@ Tahle věta šetří čas. Historie už byla zapsaná. Dnešní práce má rozho
 
 Druhé běžné použití je dobrý konec zvláštní pozornosti. Když projde, standard nepotřebuje další péči, jen běžný rytmus. Když neprojde, máte konečně přesné místo, kde se přenos láme. V obou případech je výsledek užitečný: buď se systém uklidní, nebo se další práce zmenší na konkrétní hranici místo mlhavého pocitu, že "to ještě není ono".
 
+## Uzavření druhého běžného použití po uzavřené reakci na slabý signál
+
+Druhé běžné použití je poslední místo, kde má smysl držet téma pod zvláštní lupou. Pokud standard fungoval i bez čerstvé paměti, uzavřete větev a vraťte ji do běžného rytmu. Pokud nefungoval, neprodlužujte ověřování jen proto, že "ještě jeden průchod by mohl dopadnout lépe". Třetí průchod bez rozhodnutí bývá často jen elegantní způsob, jak neříct, že standard pořád není dost samostatný.
+
+Uzavření má udělat tři věci: pojmenovat výsledek, rozhodnout o nejmenší další akci a uklidit zvláštní pozornost. Nejde o slavnostní retrospektivu. Jde o krátkou brzdu, která zabrání dvěma častým chybám: nekonečnému hlídání něčeho, co už funguje, a naopak tichému návratu do provozu u pravidla, které se bez pomoci pořád láme.
+
+Začněte uzavírací větou:
+
+```text
+Po druhém běžném použití standard končí ve stavu:
+```
+
+Za dvojtečku doplňte jeden ze čtyř stavů: stabilní klid, poslední lokální dočištění, slabý přenos, nebo skutečný návratový signál. Nepište směs typu "spíš klid, ale ještě to budeme sledovat". Taková věta ve skutečnosti neuzavírá nic. Pokud potřebujete sledování, nejspíš nejde o stabilní klid. Pokud nepotřebujete sledování, nechte standard dýchat.
+
+### Čtyři uzavírací stavy
+
+Stav `stabilní klid` použijte, když druhé použití proběhlo samostatně, pracovní místo stačilo a starý slabý signál se nevrátil. Uzavření je krátké:
+
+```text
+Po druhém běžném použití standard končí ve stabilním klidu. Pravidlo bylo použito bez čerstvé paměti na původní slabý signál, historické příklady se neotevřely jako vzor a další zvláštní kontrolu neplánujeme. Další návrat spustí až nový návratový signál.
+```
+
+Tady je důležité nepřidat zbytečný "pro jistotu" úkol. Stabilní klid znamená, že standard žije v běžném pracovním místě. Pokud se k němu vrátíte, tak kvůli nové situaci, ne kvůli nervozitě.
+
+Stav `poslední lokální dočištění` použijte, když pravidlo v zásadě fungovalo, ale jedno místo ještě zbytečně drhlo. Třeba chyběl odkaz v indexu, archivní příklad nebyl dost zřetelně označený, nebo název šablony zněl podobně jako stará verze. Uzavření pak musí obsahovat přesné místo a stop pravidlo:
+
+```text
+Po druhém běžném použití standard končí posledním lokálním dočištěním. Opravíme jen rozlišení aktuálních a archivních příkladů v interním indexu. Neotevíráme formulářovou strategii ani další revizi lead magnetů. Po úpravě se standard vrací do běžného rytmu.
+```
+
+Slovo `poslední` není dekorace. Pokud po této opravě vznikne další tření stejného typu, už nejde o lokální dočištění. Je to slabý přenos nebo návratový signál a zaslouží si vlastní kartu.
+
+Stav `slabý přenos` použijte, když standard fungoval jen díky nápovědě, zkušenému člověku nebo znalosti staré historie. Tady není cílem přidat další kontrolní krok, ale najít, co standardu chybí, aby unesl běžnou práci:
+
+```text
+Po druhém běžném použití standard končí ve slabém přenosu. Uživatel potřeboval dodatečné vysvětlení, proč archivní landing page není vzor. Nejmenší další krok je doplnit jednu rozhodovací větu do aktuální šablony a ověřit ji při nejbližším přirozeném použití.
+```
+
+Slabý přenos neznamená ostudu. Znamená, že znalost pořád sedí víc v hlavách lidí než v pracovním místě. Oprava má proto mířit do místa, kde se rozhoduje, ne do delšího školení.
+
+Stav `skutečný návratový signál` použijte, když se druhé použití znovu dotklo stejného problému, který měl být uzavřený. Tady už neprodlužujte větev slabého signálu:
+
+```text
+Po druhém běžném použití uzavíráme reakci jako nedostatečnou pro běžný provoz. Naplnil se návratový signál: tým znovu nedokázal rozlišit, kdy telefon u lead magnetu mění další krok pro zájemce. Otevíráme novou smyčku s pracovním místem v aktuální šabloně lead magnetu, ne v historii staré landing page.
+```
+
+Tento stav má být nepříjemně jasný. Starou větev zavřete, novou otevřete odděleně a nepřenášejte do ní celou historii. Vezměte jen důvod návratu, pracovní místo a nejmenší důkaz.
+
+### Praktický příklad uzavření
+
+```text
+Standard:
+U lead magnetu nesbíráme telefon, pokud telefon nemění další krok pro zájemce.
+
+Původní slabý signál:
+Starý archivní příklad s povinným telefonem mátl tým při přípravě nových lead magnetů.
+
+Uzavřená reakce:
+Archivní landing page dostala označení "historický příklad" a aktuální šablona byla přesunuta na začátek interního indexu.
+
+První běžné použití:
+Checklist pro SaaS onboarding. Telefon se nepřidal, šablona stačila.
+
+Druhé běžné použití:
+E-mailový kurz k validaci SaaS nápadu. Tým znovu našel aktuální šablonu, starou landing page neotevřel jako vzor a rozhodl bez dodatečné nápovědy.
+
+Uzavření:
+Stabilní klid. Zvláštní kontrolu lead magnetů ukončujeme. Do pracovního místa zůstává jen aktuální šablona, archivní příklad zůstává mimo běžnou trasu. Další návrat spustí až situace, kdy tým znovu nebude umět rozhodnout, jestli telefon mění další krok pro zájemce.
+```
+
+Všimněte si, že uzavření neříká "telefon nikdy nesbíráme". To by bylo nové pravidlo, a ještě k tomu zbytečně tvrdé. Říká jen, že konkrétní standard funguje pro konkrétní rozhodovací situaci. Pokud se později objeví lead magnet, kde telefon opravdu mění další krok, může vzniknout nová smyčka. Ale nevzniká teď preventivně.
+
+Jiný příklad:
+
+```text
+Druhé běžné použití:
+Obchodník připravuje partnerský checklist a znovu použije starou landing page jako argument pro povinný telefon.
+
+Zjištění:
+Archivní stránka je označená správně, ale interní index má sekci "lead magnety" řazenou podle data vzniku. Historický příklad je proto pořád nad aktuální šablonou.
+
+Uzavření:
+Poslední lokální dočištění. Změníme řazení indexu: aktuální vzory budou nahoře, archivní příklady dole v oddělené části. Neotevíráme formuláře, scoring ani obchodní kvalifikaci.
+```
+
+Tohle je přesně dobrý malý závěr. Problém není v pravidle, ale v cestě k pravidlu. Opravte cestu a nerozebírejte znovu celou filozofii sběru kontaktů. Filozofie má ráda dlouhé debaty, ale uživatel potřebuje najít správnou šablonu.
+
+### Co propsat do běžného pracovního místa
+
+Po uzavření druhého běžného použití se do běžného pracovního místa propisuje jen to, co bude člověk potřebovat při příštím rozhodnutí. Typicky:
+
+- aktuální pravidlo v přítomném čase;
+- odkaz na kanonickou šablonu nebo index;
+- krátká rozhodovací věta;
+- návratový signál, který má znovu otevřít téma;
+- stav archivních příkladů, pokud se pletly s aktuálními vzory.
+
+Naopak nepropisujte celý příběh slabého signálu, jména lidí, interní komentáře, screenshoty staré stránky ani debatu, která k uzavření vedla. Historie může zůstat v pracovním logu, ale běžné pracovní místo má být lehké. Když z něj uděláte muzeum všech minulých důvodů, příští člověk nebude rozhodovat rychleji. Bude jen zdvořile listovat archeologií.
+
+Dobrá krátká věta v pracovním místě může znít:
+
+```text
+Telefon u lead magnetu přidáváme jen tehdy, když přímo mění další krok pro zájemce; archivní příklady s povinným telefonem nejsou aktuální vzor.
+```
+
+To stačí. Věta dává hranici, chrání před starým příkladem a nevyžaduje znalost celé historie.
+
+### Privacy-first uzavření
+
+Uzavření druhého běžného použití je vhodný okamžik pro úklid datové stopy. Pokud standard prošel, nepotřebujete držet pomocné podklady. Pokud neprošel, pořád nepotřebujete držet všechno. Rozdíl je jen v tom, jaký minimální důkaz ponecháte pro další práci.
+
+Privacy-first záznam pro stabilní klid:
+
+```text
+Druhé použití potvrdilo přenositelnost standardu. Neukládáme kopie landing pages, interní komentáře ani seznam konkrétních kontaktů. V běžném pracovním místě zůstává jen rozhodovací věta a návratový signál.
+```
+
+Privacy-first záznam pro slabý přenos:
+
+```text
+Druhé použití ukázalo slabý přenos v rozhodovací větě šablony. Pro další krok ukládáme jen typ tření a pracovní místo. Nepřenášíme screenshoty, osobní údaje ani interní komentáře z přípravy lead magnetu.
+```
+
+Tohle pravidlo je malé, ale důležité: uzavření nemá vyrábět nový archiv důkazů jen proto, že tým udělal dobrou práci. Čím lépe je standard vyjasněný, tím méně historických stop potřebuje pro běžné použití.
+
+### Karta uzavření druhého běžného použití
+
+```text
+Standard nebo pracovní trasa:
+
+Původní slabý signál:
+
+Uzavřená reakce:
+
+První běžné použití:
+
+Druhé běžné použití:
+
+Výsledek druhého použití:
+- stabilní klid
+- poslední lokální dočištění
+- slabý přenos
+- skutečný návratový signál
+
+Uzavírací věta:
+
+Co propisujeme do běžného pracovního místa:
+
+Co výslovně nepropisujeme:
+
+Co uklízíme:
+
+Návratový signál pro budoucnost:
+
+Privacy-first záznam:
+
+Vlastník uzavření:
+
+Datum:
+```
+
+Karta je úmyslně krátká. Pokud potřebujete přidat pět dalších polí, možná už neuzavíráte druhé použití, ale otevíráte novou provozní oblast. To může být legitimní, jen to má mít vlastní důvod a vlastní hranici.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte výsledek druhého běžného použití.
+2. Minuta 2: vyberte jeden ze čtyř uzavíracích stavů.
+3. Minuta 3: napište uzavírací větu.
+4. Minuta 4: určete, co se propíše do běžného pracovního místa.
+5. Minuta 5: určete, co se uklidí nebo výslovně nepropisuje.
+6. Minuta 6: napište návratový signál pro budoucnost a privacy-first záznam.
+
+Když se někdo snaží přidat další kontrolní kolo, vraťte workshop k otázce:
+
+```text
+Jaký konkrétní důkaz říká, že dvě běžná použití nestačí?
+```
+
+Pokud takový důkaz není, uzavřete klid. Pokud existuje, pravděpodobně už nejste ve stavu stabilního klidu a musíte vybrat jeden z dalších tří stavů.
+
+### Checklist uzavření druhého běžného použití
+
+- Vybrali jsme jeden jasný uzavírací stav?
+- Nepoužili jsme mlhavou formulaci typu "ještě budeme sledovat" bez důvodu?
+- Pokud je výsledek stabilní klid, ukončili jsme zvláštní pozornost?
+- Pokud jde o lokální dočištění, je opravdu poslední a omezené na jedno pracovní místo?
+- Pokud jde o slabý přenos, víme, jaká konkrétní věta nebo hrana chybí?
+- Pokud jde o návratový signál, otevíráme novou smyčku odděleně?
+- Propsali jsme do běžného pracovního místa jen to, co pomůže příštímu rozhodnutí?
+- Nepropsali jsme do pracovního místa celou historii slabého signálu?
+- Uklidili jsme pomocné podklady, které už nemají jasný účel?
+- Neuchováváme screenshoty, interní komentáře, osobní údaje ani exporty jen pro pocit jistoty?
+- Máme napsaný návratový signál pro budoucí otevření tématu?
+- Je jasné, kdo uzavření provedl a kde zůstává kanonické pravidlo?
+
+Uzavření druhého běžného použití je chvíle, kdy tým přestane stát u standardu se svítilnou. Buď standard funguje a může zpět do normální práce, nebo nefunguje a další krok má být přesnější, ne delší. V obou případech je dobrý výsledek ten, který zmenší nejistotu, uklidí zbytečné stopy a nechá příštímu člověku jasnější pracovní místo.
+
 ## Pracovní log
 
+- 2026-06-24: Doplněna úvodní podkapitola o uzavření druhého běžného použití po uzavřené reakci na slabý signál: uzavírací stavy, praktické příklady, propsání do pracovního místa, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-24: Doplněna úvodní podkapitola o druhém běžném použití po uzavřené reakci na slabý signál: přenositelnost bez čerstvé paměti, stabilita hranice, skrytá péče, privacy-first záznam, karta, mini workshop a checklist.
 - 2026-06-24: Doplněna úvodní podkapitola o uzavření prvního běžného použití po uzavřené reakci na slabý signál: uzavírací stavy, praktické příklady, propsání do pracovního místa, privacy-first záznam, karta, mini workshop a checklist.
 - 2026-06-24: Doplněna úvodní podkapitola o prvním běžném použití po uzavřené reakci na slabý signál: ověření najitelnosti, rozhodnutelnosti, čistoty stop a klidu režimu, praktické příklady, privacy-first záznam, karta, mini workshop a checklist.
