@@ -249392,8 +249392,207 @@ Historie zůstává dohledatelná, ale nemá ovládat standardní kontrolu. Jina
 
 První standardní kontrola je návrat k normálnosti. Má ukázat, že slabý signál už není speciální událost, ale jen jedna uzavřená lekce promítnutá do pracovního místa. Když kontrola dopadne klidně, nejlepší další krok je často žádný. A to je v dobře vedeném SaaS, marketingu i provozu úplně legitimní výhra: méně rituálů, méně datových stop, víc energie na práci, která opravdu mění zákaznický výsledek.
 
+## Uzavření první standardní kontroly po uzavřené reakci na slabý signál
+
+První standardní kontrola po uzavřené reakci má být běžná, ale její uzavření nesmí být ledabylé. Pokud kontrolu jen odbydete větou "všechno dobré", tým později nepozná, jestli standard opravdu fungoval, jestli se něco lokálně opravilo, nebo jestli se jen nikomu nechtělo otevírat další práci. Uzavření má dát jasný stav a zároveň nevrátit slabý signál zpátky do mimořádné péče.
+
+Začněte uzavírací větou:
+
+```text
+První standardní kontrolu uzavíráme jako [stav], protože [konkrétní důkaz z běžného rytmu]; další návrat nastane jen při [návratový signál].
+```
+
+Tahle věta je malá, ale hodně užitečná. Nutí tým říct tři věci najednou: jaký je stav, o co se rozhodnutí opírá a kdy se téma znovu otevře. Bez třetí části se z kontroly snadno stane trvalé pozorování. Bez druhé části zase jen uklidňující dojem.
+
+Dobrá uzavírací věta může vypadat takto:
+
+```text
+První standardní kontrolu uzavíráme jako klid v běžném rytmu, protože měsíční review marketingových šablon našlo aktuální rozhodovací větu bez staré karty a dva nové lead magnety ji použily bez přidání telefonu; další návrat nastane jen při opakovaném váhání, jestli telefon mění další krok pro zájemce.
+```
+
+To je dost. Není potřeba přikládat screenshoty, kopírovat formuláře ani psát retrospektivu. Kontrola splnila účel: standard funguje v normálním místě a tým ví, kdy se k němu vrátit.
+
+### Čtyři uzavírací stavy
+
+Po první standardní kontrole vyberte jeden ze čtyř uzavíracích stavů:
+
+- Uzavřít do běžného klidu: standard je najitelný, použitelný a běžný rytmus ho udrží bez zvláštní připomínky.
+- Uzavřít lokální údržbu: standard drží, ale jedno konkrétní pracovní místo bylo opravené a kontrola tím končí.
+- Převést do úpravy rytmu: standard je v pořádku, ale běžné review ho neumělo zachytit bez ručního připomenutí.
+- Oddělit nový návratový signál: kontrola ukázala skutečné rozhodovací tření a další práce začíná jako nová smyčka.
+
+Stav `uzavřít do běžného klidu` je nejčistší výsledek. Znamená, že standard prošel normální kontrolou, nepotřebuje nový dohled a do pracovního logu patří jen krátký závěr. Neplánujte další speciální kontrolu "pro jistotu". Pokud se má pravidlo vrátit, vrátí se přes návratový signál, ne přes nervozitu.
+
+Stav `uzavřít lokální údržbu` použijte, když kontrola odhalila malou chybu v cestě, názvu, štítku, odkazu nebo popisku. Uzavření je hotové až tehdy, když je opravené právě to místo, kde by další člověk pracoval. Nestačí napsat do logu, že se má později upravit index. To je jen přeložená nepořádnost.
+
+Stav `převést do úpravy rytmu` je jemnější. Standard může být dobrý, ale pokud se do běžného review dostal jen proto, že si někdo pamatoval původní slabý signál, problém je v rytmu. Oprava pak nemíří na obsah standardu, ale na mechanismus review: přidat jednu položku do existující agendy, doplnit odkaz do kanonického indexu nebo sjednotit název kategorie.
+
+Stav `oddělit nový návratový signál` použijte jen tehdy, když kontrola opravdu ukázala rozhodovací tření, které standard nemá dál nést v tichosti. Nová smyčka musí být oddělená. První standardní kontrolu uzavřete a teprve potom založte novou otázku. Jinak se starý slabý signál, běžná kontrola a nová práce slepí do jednoho chuchvalce. A chuchvalec není proces, jen proces po horší noci.
+
+### Praktický příklad klidného uzavření
+
+```text
+Standard:
+U lead magnetu nesbíráme telefon, pokud telefon nemění další krok pro zájemce.
+
+Uzavřená reakce na slabý signál:
+Historická landing page s povinným telefonem byla označená jako archivní příklad a aktuální šablona dostala rozhodovací větu.
+
+První standardní kontrola:
+Měsíční review marketingových šablon.
+
+Zjištění:
+Aktuální šablona je v indexu, archivní příklady jsou oddělené a dva nové lead magnety použily pravidlo bez mimořádné nápovědy.
+
+Uzavírací stav:
+Uzavřít do běžného klidu.
+
+Uzavírací věta:
+První standardní kontrolu uzavíráme jako běžný klid, protože standard byl použitelný v měsíčním review bez staré karty a bez nové zvláštní kontroly.
+```
+
+Tady se nic dalšího nepřidává. Pokud má tým chuť udělat "ještě malý audit všech lead magnetů", zastavte se a zeptejte se, jaký důkaz to vyžaduje. Pokud žádný, audit je jen neklid v pracovním obleku. Ne každý neklid si zaslouží backlog.
+
+### Praktický příklad úpravy rytmu
+
+```text
+Standard:
+U lead magnetu nesbíráme telefon bez jasného navazujícího kroku.
+
+Kontrola:
+Standard funguje, ale do měsíčního review se dostal jen díky člověku, který si pamatoval původní slabý signál. V agendě review nejsou lead magnety uvedené.
+
+Uzavírací stav:
+Převést do úpravy rytmu.
+
+Uzavírací věta:
+První standardní kontrolu uzavíráme jako úpravu rytmu: pravidlo drží, ale měsíční review marketingových šablon musí výslovně zahrnovat lead magnety, aby standard nebyl závislý na paměti jednoho člověka.
+
+Nejmenší další krok:
+Do agendy měsíčního review přidat jednu položku: "lead magnety a formulářová pole".
+```
+
+Všimněte si, že se nepřepisuje standard. Problém není v pravidle, ale v cestě, jak se pravidlo dostává do běžné kontroly. Dobrá oprava je proto nudná a malá. Přesně tak má vypadat.
+
+### Co se propisuje do pracovního systému
+
+Uzavření první standardní kontroly může zůstat v pracovním logu jen tehdy, když je výsledkem čistý klid a pracovní místo se nemění. Jakmile vznikne lokální údržba, úprava rytmu nebo nová smyčka, musí se propsat do systému, kde bude další člověk opravdu pracovat.
+
+Propisujte jen nejbližší nutnou věc:
+
+- do šablony: krátkou rozhodovací větu nebo opravený odkaz;
+- do indexu: štítek, řazení nebo jasné oddělení archivních příkladů;
+- do review agendy: jednu položku, která zajistí běžný rytmus;
+- do nové karty smyčky: otázku, pracovní místo a návratový signál;
+- do pracovního logu: uzavírací větu a privacy-first minimum.
+
+Nepropisujte celou historii slabého signálu do šablony. Další člověk nepotřebuje číst, kdo kdy našel starou landing page a proč se o tom vedla debata. Potřebuje poznat, co má udělat dnes. Historie patří do logu, rozhodnutí do pracovního místa.
+
+Dobrá kontrolní otázka:
+
+```text
+Kdyby nový člověk otevřel jen pracovní místo, poznal by správné pravidlo bez čtení celé historie?
+```
+
+Pokud ano, uzavření je pravděpodobně hotové. Pokud ne, opravte pracovní místo, ne pracovní log. Log je paměť. Pracovní místo je nástroj.
+
+### Privacy-first uzavření
+
+Při uzavření první standardní kontroly platí jednoduché pravidlo: čím víc se standard vrací do klidu, tím méně důkazů potřebujete držet. Pokud kontrola dopadla dobře, stačí zobecněný závěr. Pokud ukázala lokální údržbu, stačí typ tření a opravené místo. Pokud otevírá novou smyčku, přeneste jen minimum pro první rozhodnutí.
+
+Privacy-first záznam pro klid:
+
+```text
+Kontrola proběhla v běžném měsíčním review. Standard byl najitelný a použitelný bez staré karty. Neukládáme kopie formulářů, screenshoty landing pages ani interní komentáře; ponecháváme jen uzavírací větu a návratový signál.
+```
+
+Privacy-first záznam pro lokální údržbu:
+
+```text
+Opraven byl archivní štítek u jednoho historického příkladu. Neukládáme screenshot staré stránky ani seznam konkrétních kampaní; pro další práci stačí záznam, že archivní příklad nesmí být v inspirační části bez označení.
+```
+
+Privacy-first záznam pro novou smyčku:
+
+```text
+Kontrola ukázala nové rozhodovací tření u placeného auditu navázaného na lead magnet. Do nové smyčky přenášíme jen otázku formulářové hranice a anonymizovaný popis situace. Nepřenášíme osobní údaje zájemců ani interní obchodní komentáře.
+```
+
+Codyho komentář: dobré uzavření se pozná i podle toho, kolik po něm zůstane věcí na úklid. Ideálně skoro nic. Pokud po každé kontrole vznikne složka s podklady, tabulka s výjimkami a tři nové odkazy "pro jistotu", nevyrábíte jistotu. Vyrábíte budoucí archeologii.
+
+### Karta uzavření první standardní kontroly
+
+```text
+Standard nebo pracovní trasa:
+
+Uzavřená reakce na slabý signál:
+
+Běžný rytmus kontroly:
+
+Pracovní místo, kde kontrola proběhla:
+
+Nejkratší důkaz z kontroly:
+
+Uzavírací stav:
+- uzavřít do běžného klidu
+- uzavřít lokální údržbu
+- převést do úpravy rytmu
+- oddělit nový návratový signál
+
+Uzavírací věta:
+
+Co se propisuje do pracovního místa:
+
+Co se propisuje do běžného rytmu:
+
+Co výslovně neotevíráme:
+
+Co uklízíme nebo neuchováváme:
+
+Privacy-first záznam:
+
+Návratový signál pro budoucnost:
+
+Vlastník:
+
+Datum:
+```
+
+Karta má sloužit k uzavření, ne k rozšíření tématu. Pokud během vyplňování přibývají nové otázky, napište je mimo kartu. Potom vyberte, jestli některá opravdu naplňuje návratový signál. Většina čerstvých nápadů může počkat. Uzavření není ideální chvíle pro kreativní rozjezd, i když mozek rád předstírá opak.
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: přečtěte výsledek první standardní kontroly.
+2. Minuta 2: vyberte jeden ze čtyř uzavíracích stavů.
+3. Minuta 3: napište uzavírací větu s konkrétním důkazem.
+4. Minuta 4: určete, co se propíše do pracovního místa.
+5. Minuta 5: určete, jestli je potřeba upravit běžný rytmus review.
+6. Minuta 6: napište, co výslovně neotevíráte.
+7. Minuta 7: udělejte privacy-first záznam a smažte nebo nechte zavřené zbytečné podklady.
+
+Pokud se tým v minutě 2 nemůže shodnout na stavu, vraťte se k nejkratšímu důkazu. Co kontrola opravdu ukázala? Jestli ukázala jen to, že jeden odkaz byl špatně, je to lokální údržba. Jestli ukázala, že review nemá pravidlo v agendě, je to úprava rytmu. Jestli ukázala stejné rozhodovací tření, je to nový návratový signál. A jestli neukázala nic z toho, je to klid. Někdy je největší disciplína dovolit klidu být klidem.
+
+### Checklist uzavření první standardní kontroly
+
+- Máme pojmenovaný běžný rytmus, ve kterém kontrola proběhla?
+- Vybrali jsme přesně jeden uzavírací stav?
+- Uzavírací věta obsahuje konkrétní důkaz, ne jen dojem?
+- Pokud je výsledek klid, nepřidali jsme další zvláštní kontrolu?
+- Pokud šlo o lokální údržbu, opravili jsme konkrétní pracovní místo?
+- Pokud byl problém v rytmu, upravujeme existující review místo vytváření nového procesu?
+- Pokud se objevil nový návratový signál, oddělili jsme ho do nové smyčky?
+- Propsali jsme rozhodnutí tam, kde další člověk opravdu pracuje?
+- Nenechali jsme důležité vysvětlení jen v pracovním logu?
+- Zapsali jsme, co výslovně neotevíráme?
+- Neukládáme screenshoty, exporty, osobní údaje ani interní komentáře bez jasného účelu?
+- Je jasné, kdy se standard znovu otevře?
+- Má uzavření vlastníka a datum?
+
+Uzavření první standardní kontroly je okamžik, kdy se ukáže, jestli tým umí nechat dobré pravidlo znovu ztichnout. Ne každá kontrola má skončit změnou. Někdy má skončit jen přesnou větou, uklizeným pracovním místem a vědomým rozhodnutím, že další práce nezačíná. To není pasivita. To je provozní dospělost, která šetří pozornost, data i energii na věci, kde se opravdu něco mění pro zákazníka.
+
 ## Pracovní log
 
+- 2026-06-24: Doplněna úvodní podkapitola o uzavření první standardní kontroly po uzavřené reakci na slabý signál: uzavírací stavy, praktické příklady, propsání do pracovního systému, privacy-first záznam, karta, mini workshop a checklist.
 - 2026-06-24: Doplněna úvodní podkapitola o první standardní kontrole po uzavřené reakci na slabý signál: běžný rytmus kontroly, samostatnost pracovního místa, návratový signál, privacy-first záznam, karta, mini workshop a checklist.
 - 2026-06-24: Doplněna úvodní podkapitola o uzavření druhého běžného použití po uzavřené reakci na slabý signál: uzavírací stavy, praktické příklady, propsání do pracovního místa, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-24: Doplněna úvodní podkapitola o druhém běžném použití po uzavřené reakci na slabý signál: přenositelnost bez čerstvé paměti, stabilita hranice, skrytá péče, privacy-first záznam, karta, mini workshop a checklist.
