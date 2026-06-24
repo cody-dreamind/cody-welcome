@@ -251112,8 +251112,173 @@ Pokud v páté minutě neumíte říct, co se ukončuje, je možné, že jste po
 
 Uzavření druhého běžného použití je dobrý okamžik přestat pravidlo doprovázet. Pokud už dvakrát fungovalo, má zase pracovat samo. Pokud nefungovalo, opravte nejbližší místo, ne celou historii. A pokud se ukázalo nové téma, dejte mu vlastní malý rámec. Tak se z návratu po tichém provozu nestane nekonečná péče, ale uzavřená smyčka, která nechává tým pracovat s menším odpadem v datech i v hlavě.
 
+## První standardní kontrola po uzavřeném návratu po tichém provozu
+
+Když pravidlo projde návratem po tichém provozu, prvním běžným použitím, druhým běžným použitím a jejich uzavřením, nemá se kolem něj dál držet zvláštní pozornost. Přesto má smysl udělat jednu standardní kontrolu v normálním rytmu. Ne proto, abyste znovu otevírali starý návrat, ale proto, abyste ověřili, že se pravidlo opravdu vrátilo do běžné správy.
+
+Standardní kontrola se liší od návratového režimu jednou věcí: nezačíná incidentem, slabým signálem ani čerstvou nejistotou. Začíná kalendářem, běžným review nebo pravidelnou údržbou pracovního místa. Pokud do ní vstoupíte jako do dalšího vyšetřování, zase z ní uděláte mimořádnou péči. A mimořádná péče, která se tváří jako rutina, je provozní lepidlo na botách. Člověk s ní dojde daleko, ale každý krok je zbytečně ulepený.
+
+Začněte větou:
+
+```text
+Pravidlo kontrolujeme v běžném rytmu, ne kvůli novému návratovému signálu.
+```
+
+Tato věta vypadá trochu úředně, ale chrání rozsah. Říká týmu, že nejde o nový problém. Jde o krátké ověření, že pravidlo po návratu nezůstalo závislé na staré historii, dočasných poznámkách nebo člověku, který si pamatuje všechny předchozí zákruty.
+
+### Tři otázky standardní kontroly
+
+První standardní kontrola potřebuje jen tři otázky:
+
+- Je pravidlo pořád v kanonickém pracovním místě?
+- Používá se bez mimořádné nápovědy?
+- Nevznikla kolem něj nová zbytečná datová stopa?
+
+První otázka kontroluje najitelnost. Pravidlo nemá žít v uzavírací kartě, starém vlákně, poznámce z workshopu nebo v hlavě jednoho člověka. Má být tam, kde člověk skutečně pracuje: v šabloně formuláře, briefu, checklistu, sales kartě, provozním runbooku nebo redakčním postupu.
+
+Druhá otázka kontroluje samostatnost. Pokud se při každém použití pořád ozývá "pozor, tohle jsme řešili při tom starém návratu", pravidlo ještě není v normálním provozu. Možná funguje, ale pořád s doprovodem. Standardní kontrola má rozhodnout, jestli doprovod ukončit, nebo jestli pracovní místo potřebuje jednu poslední lokální větu.
+
+Třetí otázka kontroluje datovou střídmost. Návraty po tichém provozu často zanechají malé pomocné stopy: starý screenshot, anonymizovaný příklad, dočasný checklist, export, poznámku v úkolu nebo odkaz na původní rozhodnutí. Některé jsou užitečné. Některé jen zabírají místo a připomínají lidem, aby se báli věci, která už je vyřešená.
+
+### Praktický příklad
+
+```text
+Pravidlo:
+U lead magnetu nesbíráme telefon, pokud telefon nemění další krok pro zájemce.
+
+Stav po druhém běžném použití:
+Pravidlo funguje, formulace volitelného textového pole byla lokálně zpřesněna a starý návrat se neotevírá.
+
+Standardní kontrola:
+Kontrolujeme měsíční šablonu pro nové obsahové materiály.
+
+Co vidíme:
+Pravidlo je v šabloně formuláře. Autor ho použil bez vysvětlování. V briefu ale zůstala stará poznámka "ověřit telefon podle návratu z května".
+
+Rozhodnutí:
+Starou poznámku mažeme. Pravidlo zůstává jen v aktuální šabloně formuláře. Další otevření vyžaduje nový návratový signál, například opakované situace, kdy absence telefonu prokazatelně znemožní slíbený další krok.
+```
+
+V tomto příkladu se nic velkého nepřepisuje. Kontrola jen odstraňuje historickou pojistku, která by při dalším použití mohla znovu otevřít starou debatu. To je dobrý výsledek: méně textu, méně opatrnostních rituálů, stejné pravidlo.
+
+### Čtyři výsledky kontroly
+
+Po první standardní kontrole vyberte jeden ze čtyř výsledků:
+
+- pravidlo je stabilní a kontrola se uzavírá;
+- pravidlo je stabilní, ale mažeme jednu historickou stopu;
+- pravidlo funguje, ale potřebuje drobnou lokální údržbu;
+- kontrola odhalila nový návratový signál.
+
+Stav `stabilní` použijte, když je pravidlo najitelné, používá se bez doprovodu a nevznikla kolem něj nová datová stopa. V takové chvíli nedělejte další akci. Zapište krátký závěr a nechte pravidlo v běžném rytmu.
+
+Stav `mažeme historickou stopu` použijte, když pravidlo funguje, ale někde zůstala stará připomínka, odkaz, poznámka nebo pomocný příklad. Mazání není kosmetika. Je to ochrana před tím, aby se tým při dalším použití omylem vrátil do starého režimu.
+
+Stav `drobná lokální údržba` použijte, když pracovní místo potřebuje malé zpřesnění: přejmenovat pole, přesunout jednu větu, doplnit odkaz, odstranit duplicitní instrukci nebo sjednotit formulaci s aktuálním slibem nabídky. Údržba má zůstat lokální. Pokud potřebujete upravit tři šablony a dva procesy, už to není standardní kontrola, ale nová pracovní iterace.
+
+Stav `nový návratový signál` použijte opatrně. Nestačí, že někdo řekl "možná by se to dalo udělat jinak". Návratový signál musí ukazovat konkrétní problém v běžné práci: opakované selhání, ztrátu rozhodnutelnosti, rozpad kontextu, nové právní nebo provozní omezení, nebo změnu nabídky, kvůli které staré pravidlo už nevede správný krok.
+
+Codyho komentář: dobrá standardní kontrola má často nudný výsledek. "Všechno drží, mažeme jednu starou poznámku." Krása. Ne každá iterace musí znít jako trailer k akčnímu filmu. Někdy vyhraje ten, kdo zavře dveře a nenamontuje na ně další tři cedule.
+
+### Privacy-first kontrola běžného rytmu
+
+V privacy-first provozu je první standardní kontrola vhodný okamžik na úklid důkazů, ne na jejich rozšiřování. Nezakládejte novou tabulku jen proto, že chcete ukázat, že pravidlo funguje. Pokud se pravidlo používá v běžném pracovním místě, důkazem často stačí samotný výsledek práce a krátká poznámka v review.
+
+Použijte tento filtr:
+
+```text
+Potřebujeme novou stopu pro rozhodnutí, nebo jen hledáme pocit jistoty po starém návratu?
+```
+
+Pokud odpověď zní "pocit jistoty", novou stopu nezakládejte. Raději smažte starou dočasnou poznámku, která už nemá účel. Pokud důkaz opravdu potřebujete, zapište ho zobecněně a bez osobních údajů:
+
+```text
+Při měsíční kontrole byly připraveny dva nové lead magnety. Oba použily aktuální formulář bez telefonu a bez mimořádné konzultace.
+```
+
+Takový zápis je dostačující pro provozní rozhodnutí a netahá do další vrstvy jména, e-maily, poptávky ani interní komentáře. Privacy-first práce není sbírání důkazů do vitríny. Je to schopnost rozhodnout s nejmenším množstvím dat, které ještě drží smysl.
+
+### Karta první standardní kontroly
+
+```text
+Pravidlo:
+
+Běžný rytmus kontroly:
+- týdenní
+- měsíční
+- kvartální
+- jiný:
+
+Kontrolujeme kvůli:
+- běžnému review
+- údržbě pracovního místa
+- kontrole po uzavřeném návratu
+
+Nový návratový signál:
+- ano
+- ne
+
+Kanonické pracovní místo:
+
+Je pravidlo najitelné bez staré historie?
+
+Použilo se bez mimořádné nápovědy?
+
+Zůstala někde historická stopa bez účelu?
+
+Výsledek kontroly:
+- pravidlo je stabilní
+- mažeme jednu historickou stopu
+- děláme drobnou lokální údržbu
+- vzniká nový návratový signál
+
+Rozhodnutí:
+
+Co se mění:
+
+Co výslovně neotevíráme:
+
+Privacy-first závěr:
+
+Další běžná kontrola:
+
+Vlastník:
+
+Datum:
+```
+
+Kartu používejte jen tehdy, když kontrola něco mění nebo když potřebujete jasně oddělit běžné review od nového návratu. Pokud je pravidlo stabilní a žádná historická stopa nezůstala, stačí krátká věta v běžném review. Formulář pro každý klidný výsledek je jen papírový fitness náramek: vypadá aktivně, ale ještě to neznamená, že se tým pohnul správným směrem.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: pojmenujte pravidlo a běžný rytmus kontroly.
+2. Minuta 2: potvrďte, že kontrola nevznikla z nového návratového signálu.
+3. Minuta 3: ověřte kanonické pracovní místo.
+4. Minuta 4: zkontrolujte, jestli se pravidlo použilo bez mimořádné nápovědy.
+5. Minuta 5: najděte jednu historickou stopu bez účelu, pokud existuje.
+6. Minuta 6: vyberte výsledek kontroly a zapište nejmenší rozhodnutí.
+
+Když se workshop stočí k debatě, jestli starý návrat byl správně, zastavte ho. První standardní kontrola nehodnotí historii. Hodnotí dnešní provozní stav. Starý návrat už prošel svou smyčkou; pokud se má otevřít znovu, potřebuje nový konkrétní signál.
+
+### Checklist první standardní kontroly
+
+- Kontrolujeme pravidlo v běžném rytmu, ne kvůli čerstvému poplachu?
+- Je pravidlo v kanonickém pracovním místě?
+- Najde ho člověk bez znalosti starého návratu?
+- Použilo se bez mimořádné nápovědy?
+- Nezůstala v systému dočasná poznámka, která už nemá účel?
+- Nesbíráme nové důkazy jen pro pocit jistoty?
+- Pokud vznikla datová stopa, je zobecněná a má jasný účel?
+- Pokud je potřeba oprava, zůstává lokální?
+- Pokud se ukázal nový problém, oddělili jsme ho jako nový návratový signál?
+- Víme, co se po kontrole výslovně neotevírá?
+- Má další kontrola normální rytmus místo mimořádné péče?
+
+První standardní kontrola po uzavřeném návratu po tichém provozu má jednoduchý úkol: ověřit, že se pravidlo zase stalo obyčejnou součástí práce. Ne hvězdou retrospektivy, ne památníkem starého problému, ne zdrojem dalších datových koleček. Prostě pravidlem, které je tam, kde má být, a pomáhá rozhodnout bez zbytečného hluku.
+
 ## Pracovní log
 
+- 2026-06-24: Doplněna úvodní podkapitola o první standardní kontrole po uzavřeném návratu po tichém provozu: běžný rytmus, kontrolní otázky, historické stopy, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-24: Doplněna úvodní podkapitola o uzavření druhého běžného použití po uzavření návratu po tichém provozu: uzavírací stavy, ukončení zvláštní pozornosti, privacy-first uzavření, karta, mini workshop a checklist.
 - 2026-06-24: Doplněna úvodní podkapitola o druhém běžném použití po uzavření návratu po tichém provozu: test přenositelnosti bez čerstvé paměti, slabý přenos, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-06-24: Doplněna úvodní podkapitola o uzavření prvního běžného použití po uzavření návratu po tichém provozu: uzavírací stavy, lokální oprava staré stopy, privacy-first uzavření, karta, mini workshop a checklist.
