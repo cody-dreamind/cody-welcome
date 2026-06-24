@@ -252070,8 +252070,159 @@ Pokud v minutě 2 není důkaz jasný, workshop nekončí klidem. Vrátí se o k
 
 Přechod do klidu je malá, ale důležitá tečka. Pravidlo tím přestává být nedávná oprava a stává se normální součástí práce. Když to tým zvládne, nevzniká třetí kontrola, čtvrtá poznámka ani pátý podklad. Zůstane jen lepší výchozí stav, méně datového nepořádku a jasný signál, který téma otevře, až to bude mít skutečný důvod.
 
+## První návrat z klidu po druhé standardní kontrole
+
+Klid není záruka, že se téma už nikdy nevrátí. Je to jen dohoda, že se nevrací bez důvodu. První návrat po klidu je proto citlivý: tým může snadno sklouznout k tomu, že otevře celou starou historii, obnoví mimořádnou kontrolu a začne znovu dokazovat věci, které už byly uzavřené. Tím by se z klidu stala jen pauza mezi dvěma koly stejné údržby.
+
+Dobře vedený návrat začíná opačně. Neptá se: "Co všechno jsme o tom kdy věděli?" Ptá se: "Který domluvený signál se právě objevil a jaký nejmenší krok z něj plyne?" Pokud odpověď neumíte napsat jednou větou, nejspíš ještě nejde o návrat z klidu, ale o nový pocit, šum nebo snahu znovu se ujistit.
+
+Začněte zápisem:
+
+```text
+Téma se vrací z klidu, protože se objevil tento signál:
+
+Neotevíráme znovu celou historii, jen:
+```
+
+První řádek musí odkazovat na signál, který byl domluvený při přechodu do klidu, nebo jasně vysvětlit, proč je dnešní signál silnější než původní návratová podmínka. Druhý řádek chrání rozsah práce. Bez něj se návrat rychle rozroste do rekapitulace starých debat, hledání starých screenshotů a neklidného přepisování pravidla, které možná pořád funguje.
+
+Praktický příklad:
+
+```text
+Téma se vrací z klidu, protože se u tří nových lead magnetů znovu objevilo telefonní číslo jako navržené povinné pole.
+
+Neotevíráme znovu celou historii, jen ověříme, jestli aktuální šablona lead magnetu dost jasně říká, která pole jsou povolená a proč.
+```
+
+To je dobrý návrat. Nezačíná obecným "zase máme problém s formuláři". Začíná konkrétním signálem a jedním pracovním místem. Díky tomu může tým rychle zjistit, jestli stačí opravit formulaci v šabloně, nebo jestli se opravdu rozpadlo pravidlo.
+
+### Tři brány návratu
+
+Před otevřením práce projděte tři brány:
+
+- Signál: odpovídá dnešní podnět domluvenému návratovému signálu, nebo je to jen podobné téma?
+- Místo: víme, kde se problém projevil v aktuální práci?
+- Rozsah: stačí zkontrolovat jedno pravidlo, šablonu, formulář, e-mail nebo rozhodovací kartu?
+
+Pokud neprojde první brána, téma se nevrací z klidu. Zapište podnět jako slabý signál nebo ho nechte bez akce. Pokud neprojde druhá brána, neotevírejte implementaci; nejdřív zpřesněte pracovní místo. Pokud neprojde třetí brána, zmenšete krok, dokud se nevejde do jedné konkrétní kontroly.
+
+Codyho komentář: nejhorší návrat z klidu je ten, který se tváří jako odpovědnost, ale ve skutečnosti jen znovu zapíná starou nervozitu. Odpovědnost je vědět, co se opravdu změnilo. Nervozita je chtít pro jistotu otevřít všechno.
+
+### Čtyři výsledky prvního návratu
+
+Po krátké kontrole by měl vzniknout jeden ze čtyř výsledků:
+
+- Falešný návrat: signál se nepotvrdil a pravidlo zůstává v klidu.
+- Lokální dočištění: pravidlo platí, ale jedno pracovní místo potřebuje jasnější větu, příklad nebo hranici.
+- Slabý přenos: pravidlo je správné, ale lidé ho bez čerstvé paměti nenajdou nebo nepoužijí.
+- Skutečné znovuotevření: pravidlo už neodpovídá aktuální nabídce, provozu, publiku nebo datové realitě.
+
+Každý výsledek má jinou reakci. U falešného návratu stačí záznam a návrat do klidu. U lokálního dočištění opravte jen nejbližší pracovní místo. U slabého přenosu zlepšete navigaci, pojmenování nebo příklad, ne celé pravidlo. U skutečného znovuotevření založte novou malou smyčku s vlastní stop podmínkou.
+
+Příklad rozhodnutí:
+
+```text
+Výsledek:
+Slabý přenos.
+
+Co měníme:
+Do šablony lead magnetu přidáváme jednu hraniční větu: "Telefon nesbíráme v prvním kontaktu, pokud není nezbytný pro slíbený výstup."
+
+Co neměníme:
+Neotevíráme celý formulářový standard, CRM pole ani scoring leadů.
+
+Jak ověříme:
+Při dalším novém lead magnetu zkontrolujeme, jestli tým použil šablonu bez ručního vysvětlování.
+```
+
+### Privacy-first návrat z klidu
+
+První návrat z klidu svádí k tomu, že tým začne lovit staré podklady. To je často zbytečné a datově drahé. Pokud pravidlo bylo uzavřené správně, pro návrat by měly stačit tři věci: kanonické pravidlo, návratový signál a aktuální pracovní důkaz.
+
+Neobnovujte staré exporty, staré zákaznické zprávy ani screenshoty jen proto, že existují. Nejdřív si položte otázku:
+
+```text
+Stačí nám pro dnešní rozhodnutí aktuální zobecněný důkaz?
+```
+
+Ve většině případů stačí. Místo kopírování konkrétních leadů napište: "U tří nových lead magnetů se znovu navrhlo povinné telefonní číslo." Tým dostane rozhodovací hodnotu a nevznikne další vrstva osobních ani obchodních údajů.
+
+Privacy-first věta do návratu:
+
+```text
+Pro návrat používáme jen aktuální zobecněný důkaz a kanonické pravidlo. Staré podklady z předchozí kontroly neobnovujeme; pokud bude nutné pravidlo znovuotevřít, založíme novou kartu s vlastním účelem a retenční hranicí.
+```
+
+Tahle věta je malá brzda proti datovému archeologickému výletu. A ano, archeologie je skvělá, když hledáte keramiku. Méně skvělá, když v marketingové složce vykopete tři roky starý export kontaktů.
+
+### Karta prvního návratu z klidu
+
+```text
+Téma:
+
+Kanonické pravidlo nebo pracovní místo:
+
+Domluvený návratový signál:
+
+Dnešní podnět:
+
+Proč podnět signál potvrzuje nebo nepotvrzuje:
+
+Nejmenší pracovní místo ke kontrole:
+
+Výsledek:
+- falešný návrat
+- lokální dočištění
+- slabý přenos
+- skutečné znovuotevření
+
+Co měníme:
+
+Co výslovně neměníme:
+
+Jaká data používáme:
+
+Jaká stará data neobnovujeme:
+
+Jak ověříme výsledek:
+
+Vlastník:
+
+Datum:
+```
+
+Karta nemá být nová složka pro dlouhou historii. Má být krátký most mezi klidem a jedním rozhodnutím. Pokud se začne plnit odkazy na staré poznámky, staré exporty a staré debaty, je to signál, že návrat není dost zúžený.
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: přečtěte kanonické pravidlo a domluvený návratový signál.
+2. Minuta 2: napište dnešní podnět jednou větou.
+3. Minuta 3: rozhodněte, jestli podnět opravdu potvrzuje návratový signál.
+4. Minuta 4: vyberte nejmenší pracovní místo ke kontrole.
+5. Minuta 5: určete jeden ze čtyř výsledků návratu.
+6. Minuta 6: zapište, co se mění a co výslovně zůstává zavřené.
+7. Minuta 7: proveďte privacy-first kontrolu dat, která se při návratu používají.
+
+Pokud se ve třetí minutě ukáže, že signál není potvrzený, workshop končí falešným návratem. To není prohra. Je to přesně důvod, proč byl klid definovaný signálem, ne pocitem.
+
+### Checklist prvního návratu z klidu
+
+- Vrací se téma kvůli konkrétnímu signálu, ne kvůli obecnému neklidu?
+- Sedí dnešní podnět na návratový signál z posledního uzavření?
+- Je jasné jedno nejmenší pracovní místo ke kontrole?
+- Neotevíráme starou historii jen proto, že existuje?
+- Vybrali jsme jeden ze čtyř výsledků návratu?
+- Je zapsané, co se mění a co výslovně nemění?
+- Používáme aktuální zobecněný důkaz místo zbytečných osobních nebo obchodních detailů?
+- Neobnovujeme staré exporty, screenshoty ani zákaznické zprávy bez nového účelu?
+- Má výsledek ověření při dalším běžném použití?
+- Ví vlastník, jestli se pravidlo vrací do klidu, dostává lokální opravu, nebo otevírá novou smyčku?
+
+První návrat z klidu má být krátký a přísný. Buď potvrdí, že klid pořád platí, nebo opraví jedno místo, nebo otevře novou smyčku s jasnou hranicí. Co nemá dělat: budit starý projekt ze spánku jen proto, že se někde objevil podobný podnět. Dobrý provoz poznáte podle toho, že i návrat umí zůstat malý.
+
 ## Pracovní log
 
+- 2026-06-24: Doplněna úvodní podkapitola o prvním návratu z klidu po druhé standardní kontrole: návratový signál, tři brány návratu, čtyři výsledky, privacy-first práce s důkazy, karta, mini workshop a checklist.
 - 2026-06-24: Doplněna úvodní podkapitola o přechodu do klidu po druhé standardní kontrole: důkaz pro klid, ukončení mimořádné péče, rozlišení klidu od odkladu, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-24: Doplněna úvodní podkapitola o uzavření druhé standardní kontroly po uzavřeném návratu po tichém provozu: uzavírací stavy, praktický příklad, propsání do pracovního systému, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-24: Doplněna úvodní podkapitola o druhé standardní kontrole po uzavřeném návratu po tichém provozu: samostatnost pravidla, zbytkové tření, slabá přenositelnost, privacy-first kontrola, karta, mini workshop a checklist.
