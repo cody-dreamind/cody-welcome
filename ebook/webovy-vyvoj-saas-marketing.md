@@ -55,6 +55,8 @@ Pokud první poznámka pořád zní jako opis starého rozhodnutí, zastavte se 
 
 Z první návratové věty rovnou odvoďte hranici dalšího kroku. Pokud věta míří na potvrzovací e-mail, nezačínejte zároveň přepisovat homepage, formulář i obchodní skript. Návrat má nejdřív opravit místo, kde se dnešní důvod opravdu ukázal; širší vzor si zaslouží vlastní návratový signál.
 
+Když se z hranice dalšího kroku ukáže, že dnes není co opravovat, zapište to stejně pečlivě jako změnu. Věta "teď neotevíráme nový krok, protože návratový signál nepotvrdil problém" je užitečný výsledek: chrání tým před prací z návyku a zároveň nechává jasnou stopu, kdy se k tématu vrátit.
+
 ## Kontrola přeneseného kontextu při návratu k tématu
 
 Když se tým vrací k tématu po týdnech nebo měsících, největší riziko často není zapomenutí. Horší je poloviční paměť: všichni si pamatují název problému, ale každý si pod ním nese jiný starý kontext. Jeden člověk pořád řeší původní segment, druhý už myslí na novou nabídku, třetí si pamatuje starou výjimku a čtvrtý má v hlavě poslední incident. Výsledek vypadá jako shoda, ale práce se rozjede do čtyř směrů.
@@ -250583,3 +250585,4 @@ První standardní kontrola je návrat k normálnosti. Má ukázat, že slabý s
 - 2026-06-22: Doplněna úvodní podkapitola o spuštění prvního malého kroku po testu hranice: pravidla spuštění, očekávané výstupy, privacy-first stopa, karta, mini workshop a checklist.
 - 2026-06-23: Doplněna úvodní podkapitola o uzavření prvního běžného ověření malého kroku: výsledné stavy, propsání do pracovního místa, ukončení mimořádné péče, privacy-first uzavření, karta, mini workshop a checklist.
 - 2026-06-23: Doplněna úvodní podkapitola o prvním běžném použití po uzavřeném návratu z dlouhodobého klidu: najitelnost, rozhodnutelnost, klid bez otevírání historie, privacy-first kontrola, karta, mini workshop a checklist.
+- 2026-06-24: Doplněna krátká úvodní poznámka, aby hranice dalšího kroku uměla skončit i vědomým neotevřením nové práce.
