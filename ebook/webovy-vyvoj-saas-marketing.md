@@ -249907,8 +249907,185 @@ Pokud se tým nedohodne na uzavíracím stavu, vraťte se o krok zpět a napišt
 
 Uzavření druhé standardní kontroly má týmu vrátit normální rytmus. Po dobré kontrole nemá následovat další vrstva dohledu, ale klidné používání. Po nálezu nemá následovat velký audit, ale přesná oprava skutečné příčiny. A po každém uzavření má zůstat menší datová stopa než před ním. To je praktická forma evropského privacy-first provozu: méně zbytečné paměti, více rozhodnutí, která unesou sama sebe.
 
+## Tichý provoz po uzavření druhé standardní kontroly
+
+Po uzavření druhé standardní kontroly přichází nenápadná, ale důležitá fáze: tichý provoz. Pravidlo už nemá mít vlastní zvláštní režim, vlastní hlídací kartu ani člověka, který ho každému připomíná. Má prostě fungovat tam, kde tým pracuje. Pokud se k němu lidé vracejí jen proto, že se někdo bojí ho pustit z ruky, pravidlo sice možná pomáhá, ale pořád spotřebovává víc pozornosti, než by mělo.
+
+Tichý provoz neznamená zapomenutí. Znamená, že standard má jasné pracovní místo, návratový signál a běžný rytmus kontroly. Všechno ostatní se zavírá. To je rozdíl mezi zralým pravidlem a dlouhou poznámkou, která se tváří jako proces. Zralé pravidlo pomáhá rozhodnout. Poznámka bez konce pomáhá hlavně vyrábět další poznámky, což je sport, ve kterém firmy překvapivě často trénují na olympiádu.
+
+Začněte jednou větou:
+
+```text
+Od teď pravidlo žije jen v [pracovní místo] a vracíme se k němu pouze při [návratový signál].
+```
+
+Tahle věta je malá smlouva s budoucím týmem. Říká, kde se pravidlo používá, a zároveň říká, kdy se znovu neotevírá. Pokud ji neumíte napsat, druhá standardní kontrola možná ještě není opravdu uzavřená. Chybí buď pracovní místo, nebo návratový signál, nebo odvaha přestat hlídat věc, která už funguje.
+
+### Co v tichém provozu zůstává
+
+V tichém provozu mají zůstat jen čtyři prvky:
+
+- aktuální pravidlo na pracovním místě;
+- běžný rytmus, ve kterém se pravidlo přirozeně potká s realitou;
+- návratový signál;
+- krátká privacy-first poznámka, co se už nemá znovu otevírat.
+
+Všechno ostatní je kandidát na úklid. Staré karty slabého signálu, screenshoty, exporty, dočasné tabulky, pracovní kopie šablon a dlouhá vysvětlení mají zůstat jen tehdy, pokud mají aktivní účel. "Možná se budou hodit" není účel. Je to jen pohodlně oblečená nejistota.
+
+Praktický zápis může vypadat takto:
+
+```text
+Pravidlo:
+U lead magnetu nesbíráme telefon, pokud telefon nemění další krok pro zájemce.
+
+Pracovní místo:
+Aktuální šablona lead magnetu a kontrolní bod v měsíčním marketingovém review.
+
+Návratový signál:
+Téma znovu otevřeme, pokud se v aktivní šabloně objeví povinný telefon bez jasného obchodního účelu.
+
+Privacy-first hranice:
+Neotevíráme staré formulářové exporty ani screenshoty archivních landing pages. Stačí zobecněný závěr: archivní příklady nesmí vypadat jako aktuální vzor.
+```
+
+Takový zápis je krátký, ale použitelný. Nový člověk najde pravidlo, rozumí hranici a nemusí číst detektivku o tom, jak tým k závěru došel. Historie může zůstat dohledatelná v archivu rozhodnutí, ale nemá překážet v běžné práci.
+
+### Tři tiché kontroly
+
+Tichý provoz nepotřebuje extra schůzku. Potřebuje jen tři nenápadné kontroly v běžném rytmu:
+
+- Najitelnost: člověk najde pravidlo tam, kde pracuje.
+- Rozhodnutelnost: pravidlo stačí k rozhodnutí bez vysvětlování původní historie.
+- Datová střídmost: k použití pravidla není potřeba otevírat staré osobní údaje nebo dočasné důkazy.
+
+Tyto kontroly můžete udělat při běžném review, při tvorbě nové šablony, při onboardingu nového člena týmu nebo při údržbě dokumentace. Není nutné z toho dělat samostatný proces. Pokud pravidlo potřebuje samostatný proces pokaždé, když se ho někdo dotkne, ještě není v tichém provozu.
+
+Příklad:
+
+```text
+Situace:
+Nový člověk připravuje landing page pro stažení checklistu.
+
+Najitelnost:
+V aktuální šabloně lead magnetu vidí pravidlo k telefonu.
+
+Rozhodnutelnost:
+Dokáže rozhodnout, že telefon nebude povinný, protože další krok je stažení materiálu a volitelný e-mail follow-up.
+
+Datová střídmost:
+Nepotřebuje otevírat staré formulářové exporty ani původní kartu slabého signálu.
+
+Výsledek:
+Pravidlo funguje v tichém provozu. Nic dalšího neotevíráme.
+```
+
+Tady je klíčové poslední rozhodnutí. Když kontrola dopadne dobře, nepište novou kartu jen proto, abyste měli důkaz, že kontrola dopadla dobře. Stačí běžný záznam v review nebo vůbec nic, pokud pravidlo splnilo svou práci bez tření. Ne každá dobrá věc potřebuje pamětní desku.
+
+### Kdy tichý provoz nepředstírat
+
+Někdy tým uzavře druhou standardní kontrolu, ale tichý provoz ještě není pravda. Poznáte to podle několika signálů:
+
+- pravidlo se pořád používá jen díky konkrétnímu člověku;
+- pracovní místo obsahuje odkaz, ale ne rozhodovací větu;
+- běžný rytmus kontroluje existenci dokumentu, ale ne jeho použitelnost;
+- tým k běžnému rozhodnutí znovu otevírá staré exporty, screenshoty nebo zákaznické zprávy;
+- každý nový člověk potřebuje ústní vysvětlení, aby pravidlo použil správně.
+
+V takové situaci neříkejte "tichý provoz" jen proto, že už nechcete další práci. Řekněte přesně, co chybí, a otevřete poslední lokální dotažení. Rozdíl je v rozsahu: neděláte nový audit pravidla, jen doplňujete chybějící oporu, aby pravidlo mohlo být opravdu samostatné.
+
+Dobrá věta pro takový stav:
+
+```text
+Tichý provoz ještě nepotvrzujeme, protože pravidlo je sice v indexu, ale pracovní šablona neobsahuje rozhodovací větu. Doplníme jen tuto větu a ověříme ji při příštím použití.
+```
+
+To je pořád malá oprava. Jakmile se z ní začne stávat přepis celé dokumentace, vraťte se k otázce: co přesně brání tichému provozu? Opravujte tu překážku, ne všechno, co vás při cestě napadne.
+
+### Privacy-first klid
+
+Tichý provoz je silný privacy-first moment. Čím méně pravidlo potřebuje staré důkazy, tím menší datovou stopu musí tým držet při životě. Zralý standard má unést závěr bez toho, aby se pokaždé tahaly zpět celé původní podklady.
+
+Použijte tuto krátkou brzdu:
+
+```text
+Kdyby dnes pravidlo použil nový člověk, jaký nejmenší legitimní kontext potřebuje?
+```
+
+Odpověď by měla být krátká. Například:
+
+```text
+Potřebuje znát účel pole v lead magnetu, další krok pro zájemce a pravidlo, že telefon sbíráme jen při jasném obchodním účelu. Nepotřebuje staré exporty ani konkrétní zákaznické zprávy.
+```
+
+Pokud odpověď vyžaduje osobní údaje, zastavte se. Možná pravidlo není dost dobře zobecněné. Možná v něm chybí rozhodovací hrana. Nebo si tým jen zvykl opírat jistotu o data, která už aktivně nepotřebuje. V privacy-first provozu je dobré se ptát nepříjemně jednoduše: chráníme zákazníka, nebo jen krmíme vlastní nervozitu?
+
+Codyho komentář: dobrý evropský provoz není jen o tom, kde běží servery. Je i o tom, kolik starých stop si tým nechává po kapsách. Nejčistší data jsou často ta, která po uzavření práce vůbec dál nenosíte.
+
+### Karta tichého provozu
+
+```text
+Standard nebo pracovní trasa:
+
+Kanonické pracovní místo:
+
+Běžný rytmus, ve kterém pravidlo žije:
+
+Jednověté pravidlo pro použití:
+
+Návratový signál:
+
+Co už nehlídáme zvláštním režimem:
+
+Co zůstává dohledatelné jen jako historie:
+
+Co mažeme, anonymizujeme nebo necháváme zavřené:
+
+První běžná situace, ve které se tichý provoz může projevit:
+
+Kontrola najitelnosti:
+
+Kontrola rozhodnutelnosti:
+
+Kontrola datové střídmosti:
+
+Vlastník pracovního místa:
+
+Datum:
+```
+
+Kartu používejte jen při přechodu do tichého provozu nebo když se tým nemůže shodnout, jestli už mimořádná pozornost opravdu končí. Nepřidávejte ji ke každému pravidlu automaticky. Když máte kartu tichého provozu pro všechno, tichý provoz přestává být tichý a začíná být další katalog povinností.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: napište jednověté pravidlo a kanonické pracovní místo.
+2. Minuta 2: napište návratový signál.
+3. Minuta 3: určete, co už nebude mít zvláštní režim.
+4. Minuta 4: určete, co zůstává jen jako historický záznam.
+5. Minuta 5: proveďte privacy-first úklid starých stop.
+6. Minuta 6: pojmenujte první běžnou situaci, ve které se pozná, že pravidlo funguje samo.
+
+Pokud v minutě 3 zjistíte, že tým nechce zrušit žádnou zvláštní kontrolu, nejste v tichém provozu. Jste pořád v dozoru. To není tragédie, jen to pojmenujte pravdivě a najděte nejmenší překážku, která brání samostatnosti pravidla.
+
+### Checklist tichého provozu
+
+- Má pravidlo jedno kanonické pracovní místo?
+- Je pravidlo zapsané jako rozhodovací věta, ne jen jako odkaz na historii?
+- Víme, v jakém běžném rytmu se pravidlo přirozeně potká s realitou?
+- Máme konkrétní návratový signál?
+- Ukončili jsme mimořádnou pozornost, pokud druhá standardní kontrola potvrdila klid?
+- Neplánujeme další zvláštní kontrolu jen ze zvyku?
+- Ví nový člověk pravidlo použít bez ústního vysvětlení původního slabého signálu?
+- Nepotřebujeme k běžnému použití staré exporty, screenshoty, zákaznické zprávy ani dočasné tabulky?
+- Zůstává historie dohledatelná, ale necpeme ji do každého pracovního místa?
+- Uklidili jsme staré stopy podle retenčních pravidel?
+- Je jasné, co se teď výslovně neotevírá?
+- Má pracovní místo vlastníka?
+
+Tichý provoz je dobrý konec jedné dlouhé smyčky. Ne proto, že by se už nikdy nic nestalo, ale protože tým ví, co má dělat bez zvláštního hlídání, a zároveň ví, kdy se má vrátit. To je praktická dospělost webu, SaaS i marketingu: pravidla nejsou památníky minulých problémů, ale malé opory pro dnešní práci. Když unesou rozhodnutí, nechte je pracovat v klidu.
+
 ## Pracovní log
 
+- 2026-06-24: Doplněna úvodní podkapitola o tichém provozu po uzavření druhé standardní kontroly: pracovní místo, návratový signál, tiché kontroly, privacy-first klid, karta, mini workshop a checklist.
 - 2026-06-24: Doplněna úvodní podkapitola o uzavření druhé standardní kontroly po uzavřené reakci na slabý signál: uzavírací stavy, propsání do pracovního systému, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-24: Doplněna úvodní podkapitola o druhé standardní kontrole po uzavřené reakci na slabý signál: ověření samostatnosti pravidla bez čerstvé paměti, čtyři výsledky, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-06-24: Doplněna úvodní podkapitola o uzavření první standardní kontroly po uzavřené reakci na slabý signál: uzavírací stavy, praktické příklady, propsání do pracovního systému, privacy-first záznam, karta, mini workshop a checklist.
