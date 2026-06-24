@@ -248668,8 +248668,168 @@ Tato věta není brzda zlepšování. Je to ochrana pracovního režimu. Jedna s
 
 První běžné použití po uzavřené reakci je malý, ale užitečný test důvěry. Ukáže, jestli tým opravdu uklidil pracovní místo, nebo jen napsal hezké uzavření do logu. Když použití projde, nechte standard znovu dýchat v běžném rytmu. Když neprojde, opravte nejbližší místo nebo otevřete novou malou smyčku. Hlavně z toho nedělejte nekonečnou hlídku nad pravidlem, které už jednou dostalo šanci vrátit se do klidu.
 
+## Uzavření prvního běžného použití po uzavřené reakci na slabý signál
+
+První běžné použití po uzavřené reakci má smysl jen tehdy, když se také zavře. Jinak se z něj stane nenápadná kontrolní fronta: někdo čeká, jestli se ještě něco ukáže, někdo jiný už používá standard jako hotový a třetí člověk mezitím drží v hlavě starou výjimku. Uzavření má dát všem stejnou odpověď: co se ověřilo, co se případně dočistilo a kdy se téma znovu otevře.
+
+Začněte jednou větou:
+
+```text
+První běžné použití uzavíráme takto: [stav], protože [nejkratší důkaz z běžného použití].
+```
+
+Tato věta nesmí být obecné "vypadá to dobře". Má ukázat konkrétní pracovní situaci. Například: "První běžné použití uzavíráme jako klid, protože nový lead magnet šel připravit podle aktuální šablony bez staré landing page a bez další schůzky." To je dostatečné. Není potřeba dokazovat, že standard obstojí navždy. Stačí uzavřít situaci, kvůli které jste ho po slabém signálu znovu zkontrolovali.
+
+### Čtyři uzavírací stavy
+
+Po prvním běžném použití vyberte jeden ze čtyř uzavíracích stavů:
+
+- Vrátit do klidu: použití prošlo, standard je najitelný, rozhodnutí šlo udělat a stará stopa už nemate.
+- Zavřít lokální dočištění: použití ukázalo malou chybu v cestě, popisku nebo historickém příkladu a tato chyba je opravená.
+- Oddělit novou smyčku: běžné použití otevřelo nové téma, které už není součástí původní reakce na slabý signál.
+- Nechat otevřený jen návratový signál: standard teď stačil, ale hranice návratu byla vágní a je potřeba ji zpřesnit pro příště.
+
+Stav `vrátit do klidu` má být nejkratší. Napište uzavírací větu, zapište privacy-first minimum a přestaňte téma hlídat. Když tým po úspěšném použití přidá další kontrolu "pro jistotu", ve skutečnosti tím říká, že standardu pořád nevěří. Pokud k nedůvěře nemá pracovní důkaz, není to úkol.
+
+Stav `zavřít lokální dočištění` použijte, když jste během použití opravili přesně jednu věc: název v indexu, odkaz na aktuální šablonu, označení starého příkladu, krátkou poznámku u pracovního místa. Po opravě ověřte jen to, že dané místo už nemate. Neotevírejte audit všech podobných míst, pokud první použití neukázalo opakovaný vzor.
+
+Stav `oddělit novou smyčku` je důležitý pro zachování čistoty. Nová smyčka může být rozumná a užitečná, ale nesmí se tvářit jako pokračování uzavření. Má vlastní otázku, vlastní hranici a vlastní pracovní místo. Původní uzavření tím není zrušené; jen splnilo svou práci a předalo nové téma dál.
+
+Stav `nechat otevřený jen návratový signál` je úzký mezistav. Použijte ho tehdy, když dnešní práce prošla, ale tým si všiml, že věta pro budoucí návrat není dost rozpoznatelná. V takovém případě neupravujte standard. Upravte jen signál, podle kterého se příště pozná, že nejde o šum.
+
+### Praktický příklad uzavření
+
+```text
+Standard:
+U lead magnetu nesbíráme telefon, pokud telefon nemění další krok pro zájemce.
+
+Původní slabý signál:
+Nový marketér našel historickou landing page s povinným telefonem a nebylo jasné, jestli je to aktuální vzor.
+
+Uzavřená reakce:
+Historická landing page byla označená jako archivní příklad a aktuální šablona dostala odkaz v interním indexu.
+
+První běžné použití:
+Nový checklist pro SaaS onboarding.
+
+Výsledek použití:
+Marketér našel aktuální šablonu, telefon nepřidal a nepotřeboval další vysvětlení.
+
+Uzavírací stav:
+Vrátit do klidu.
+
+Uzavírací věta:
+První běžné použití uzavíráme jako klid, protože aktuální šablona stačila k rozhodnutí bez staré historie a bez mimořádné nápovědy.
+```
+
+Tady není co dál zlepšovat. Přidat další revizi by bylo jen pracovní svědomí převlečené za proces. Standard se vrací do běžného rytmu a další návrat nastane až tehdy, když se objeví popsaný návratový signál.
+
+Jiný příklad:
+
+```text
+První běžné použití:
+Tým připravuje lead magnet navázaný na placený audit s omezenou kapacitou.
+
+Co se ukázalo:
+Telefon možná mění další krok, protože obchod potřebuje rychle potvrdit vhodnost auditu. To není stará historická stopa, ale nová hranice mezi volným lead magnetem a obchodním formulářem.
+
+Uzavírací stav:
+Oddělit novou smyčku.
+
+Uzavírací věta:
+První běžné použití uzavíráme jako oddělenou novou smyčku: původní slabý signál byl uklizený, ale placený audit otevírá samostatnou otázku kvalifikačního formuláře.
+```
+
+Tento zápis chrání obě věci najednou. Původní standard není zbytečně rozbitý a nová obchodní situace nezmizí pod kobercem. Jen dostane vlastní malý začátek.
+
+### Co propsat do pracovního místa
+
+Uzavření nesmí zůstat jen v logu. Pokud první běžné použití něco změnilo, propisuje se do místa, kde další člověk opravdu pracuje:
+
+- do interního indexu, pokud problém byl v najitelnosti;
+- do šablony, pokud problém byl v rozhodovací hraně;
+- do popisku historického příkladu, pokud problém byl ve staré stopě;
+- do nové karty smyčky, pokud se otevřelo nové téma;
+- do návratového signálu, pokud byla hranice moc vágní.
+
+Nepropsané uzavření je poloviční uzavření. Tým si ho možná přečetl, ale pracovní trasa se nezměnila. Příště pak nový člověk narazí na stejné místo a bude to vypadat jako nový problém, i když šlo jen o nedotažený zápis.
+
+Dobré pravidlo: pokud by další člověk musel číst pracovní log, aby standard použil správně, uzavření ještě není hotové. Log má být stopa pro autora a týmovou paměť. Běžné rozhodnutí má žít v šabloně, indexu, checklistu nebo pracovním místě, které člověk použije bez archeologické výpravy.
+
+### Privacy-first uzavření
+
+Při uzavření prvního běžného použití obvykle nepotřebujete ukládat surové důkazy. Stačí zobecněný záznam:
+
+```text
+První běžné použití proběhlo na novém lead magnetu pro SaaS onboarding. Aktuální šablona stačila k rozhodnutí, historický příklad už nemátl a telefon se nepřidal. Neuchováváme screenshot landing page ani interní konverzaci; pro budoucí návrat stačí tento závěr.
+```
+
+Pokud vznikla nová smyčka, nepřenášejte do ní víc dat, než potřebuje první rozhodnutí. Neberte celé zprávy, exporty, formulářová data ani osobní údaje jen proto, že "by se mohly hodit". Přeneste jen pracovní závěr: jaká hranice se objevila, kde se projevila a co se má ověřit jako první.
+
+Codyho komentář: nejlepší privacy-first úklid je ten, který nevyrábí další hromádku na uklizení. Když stačí jedna anonymní věta, neukládejte tři screenshoty, pět poznámek a tabulku s názvem "dočasně". Dočasné tabulky mají zvláštní talent stát se firemním folklorem.
+
+### Karta uzavření prvního běžného použití
+
+```text
+Standard nebo pracovní trasa:
+
+Uzavřená reakce na slabý signál:
+
+První běžné použití:
+
+Nejkratší důkaz z použití:
+
+Uzavírací stav:
+- vrátit do klidu
+- zavřít lokální dočištění
+- oddělit novou smyčku
+- nechat otevřený jen návratový signál
+
+Uzavírací věta:
+
+Co jsme propsali do pracovního místa:
+
+Co výslovně neotevíráme:
+
+Pokud vzniká nová smyčka, její první otázka:
+
+Privacy-first záznam:
+
+Datum dalšího návratu nebo návratový signál:
+```
+
+Karta má být krátká. Pokud je delší než samotné rozhodnutí, pravděpodobně se do ní snažíte nacpat novou analýzu. V takovém případě kartu zavřete a založte novou smyčku. Uzavírací karta není kufr pro všechno, co se během použití objevilo.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte výsledek prvního běžného použití.
+2. Minuta 2: vyberte jeden uzavírací stav.
+3. Minuta 3: napište uzavírací větu s nejkratším důkazem.
+4. Minuta 4: určete, co se musí propsat do skutečného pracovního místa.
+5. Minuta 5: napište, co výslovně neotevíráte.
+6. Minuta 6: udělejte privacy-first záznam bez zbytečných příloh.
+
+Když se v minutě 4 ukáže, že pracovní místo nejde určit, neuzavírejte. To je signál, že tým možná neví, kde standard opravdu žije. Nejmenší další krok pak není obsahová úprava, ale nalezení nebo vytvoření kanonického pracovního místa.
+
+### Checklist uzavření prvního běžného použití
+
+- Máme pojmenované první běžné použití?
+- Vybrali jsme přesně jeden uzavírací stav?
+- Uzavírací věta obsahuje konkrétní důkaz z použití?
+- Pokud použití prošlo, vracíme standard do klidu bez další mimořádné kontroly?
+- Pokud byla potřeba oprava, zůstala lokální?
+- Pokud vzniklo nové téma, oddělili jsme ho do nové smyčky?
+- Pokud byl slabý návratový signál, zpřesnili jsme jen signál, ne celý standard?
+- Propsali jsme výsledek do místa, kde člověk opravdu pracuje?
+- Napsali jsme, co výslovně neotevíráme?
+- Neukládáme screenshoty, exporty, osobní údaje ani interní konverzace bez jasného účelu?
+- Je jasné, kdy se téma znovu otevře?
+
+Uzavření prvního běžného použití je konec malé zkoušky důvěry. Pokud standard obstál, dejte mu klid. Pokud se ukázala lokální chyba, opravte ji a zavřete. Pokud se objevilo nové téma, otevřete ho čistě a odděleně. Největší hodnota tohoto kroku není v dalším textu, ale v tom, že tým umí přestat hlídat věc, která už znovu funguje.
+
 ## Pracovní log
 
+- 2026-06-24: Doplněna úvodní podkapitola o uzavření prvního běžného použití po uzavřené reakci na slabý signál: uzavírací stavy, praktické příklady, propsání do pracovního místa, privacy-first záznam, karta, mini workshop a checklist.
 - 2026-06-24: Doplněna úvodní podkapitola o prvním běžném použití po uzavřené reakci na slabý signál: ověření najitelnosti, rozhodnutelnosti, čistoty stop a klidu režimu, praktické příklady, privacy-first záznam, karta, mini workshop a checklist.
 - 2026-06-23: Doplněna úvodní podkapitola o uzavření první reakce na slabý signál: uzavírací stavy, praktické příklady, propsání do pracovního místa, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-23: Doplněna úvodní podkapitola o prvním slabém signálu po návratu standardu do dlouhodobého klidu: rozlišení slabého a návratového signálu, tři rychlé kontroly, praktické příklady, privacy-first reakce, karta, mini workshop a checklist.
