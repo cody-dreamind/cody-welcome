@@ -251932,8 +251932,147 @@ Pokud se během workshopu objeví nápad na širší změnu, napište ho jako po
 
 Uzavření druhé standardní kontroly má ukončit mimořádnou gravitaci posledního návratu. Pravidlo buď stojí samo, nebo potřebuje jednu přesnou oporu, nebo ukázalo nový signál, který si zaslouží vlastní smyčku. V každém případě by po uzavření mělo zůstat méně otevřených stop, ne víc. To je dobrý provoz: jasnější rozhodnutí, menší datová stopa a žádný nový proces jen proto, že jsme měli chvíli pocit, že by se něco mělo hlídat.
 
+## Přechod do klidu po druhé standardní kontrole
+
+Po druhé standardní kontrole je největší riziko nenápadné. Tým sice formálně uzavřel kontrolu, ale nechá za sebou drobnou mimořádnou pozornost: někdo si dá připomínku do kalendáře, někdo nechá otevřenou poznámku "ještě sledovat", někdo při dalším review znovu vytáhne starý signál, protože ho má pořád v hlavě. Pravidlo pak vypadá stabilně, ale provozně pořád stojí na čerstvé paměti.
+
+Přechod do klidu je krátký krok, který říká: zvláštní pozornost končí, pravidlo žije v běžném pracovním místě a další návrat musí přijít přes signál, ne přes zvyk hlídat. Není to oslava hotového procesu. Je to odstranění poslední provizorní lešeniny.
+
+Začněte větou:
+
+```text
+Po druhé standardní kontrole necháváme pravidlo v klidu, protože:
+```
+
+Pokud ji neumíte doplnit konkrétním důkazem, klid ještě nenastal. Možná je potřeba lokální dočištění, možná slabý přenos, možná nový návratový signál. Pokud ji ale doplnit umíte, další speciální kontrola už nepotřebuje existovat.
+
+Příklad:
+
+```text
+Po druhé standardní kontrole necháváme pravidlo v klidu, protože:
+nový lead magnet vznikl z aktuální šablony, telefon se nevrátil do formuláře, tým nemusel otevírat historickou kartu a review použilo běžnou agendu.
+```
+
+Taková věta je dostatečný konec. Není potřeba přidávat třetí kontrolu, nový report ani malou tabulku "pro jistotu". Jistota tady nevznikne dalším hlídáním. Vznikla tím, že pravidlo prošlo běžnou prací bez mimořádné opory.
+
+### Co po přechodu do klidu zrušit
+
+Klid není jen stav v hlavě. Musí se projevit v pracovním systému. Projděte proto poslední dočasné stopy a rozhodněte, co skončí:
+
+- mimořádná připomínka v kalendáři;
+- otevřený komentář typu "ještě sledovat";
+- dočasná karta kontroly;
+- pomocný export nebo screenshot z ověření;
+- seznam starých příkladů, který už byl převeden do kanonického pravidla;
+- ruční ping člověku, který hlídal přenos pravidla.
+
+Neodstraňujte kanonické pravidlo, návratový signál ani běžný review rytmus. Maže se jen zvláštní péče. To je rozdíl mezi zdravým klidem a zapomenutím.
+
+Praktický zápis:
+
+```text
+Zůstává:
+Kanonická šablona, návratový signál a měsíční review.
+
+Končí:
+Mimořádná připomínka po slabém signálu a dočasná karta druhé kontroly.
+
+Nepřenášíme dál:
+Screenshot staré landing page ani pracovní komentáře z ověření.
+```
+
+### Jak poznat, že klid není odklad
+
+Klid se může snadno splést s odkladem. Rozdíl je v návratovém signálu.
+
+Klid říká:
+
+```text
+Pravidlo funguje a vrátíme se jen při konkrétním signálu.
+```
+
+Odklad říká:
+
+```text
+Nevíme, jestli pravidlo funguje, ale teď to nechceme řešit.
+```
+
+První věta je dobrý provoz. Druhá je dluh. Pokud jste ve skutečnosti jen unavení z tématu, neoznačujte ho jako klid. Zapište, co chybí k rozhodnutí, a nastavte nejmenší další ověření. Klid má být důsledek evidence, ne úleva z toho, že se nikomu nechce pokračovat.
+
+### Privacy-first klid
+
+Privacy-first klid znamená, že po kontrole nezůstane víc dat, než potřebuje budoucí rozhodnutí. Ponechte krátký závěr, aktuální pravidlo a návratový signál. Všechno ostatní má buď zůstat ve zdrojovém systému s vlastním účelem, nebo zmizet.
+
+Použijte tři otázky:
+
+- Který podklad by budoucí tým opravdu potřeboval k rozhodnutí?
+- Který podklad byl užitečný jen během kontroly?
+- Který podklad obsahuje osobní, obchodní nebo interní detail, který stačí nahradit zobecněným závěrem?
+
+Dobrá privacy-first věta:
+
+```text
+Ponecháváme jen závěr, že pravidlo prošlo druhou standardní kontrolou bez návratu starého tření. Dočasné podklady z kontroly dál neuchováváme; pro budoucí návrat stačí kanonické pravidlo a signál.
+```
+
+Codyho komentář: klid bez úklidu je jen nepořádek, který zrovna nikdo neotevřel. Vypadá tiše, ale pořád čeká na dalšího člověka, který ho najde a začne se ptát, jestli to náhodou nebylo důležité.
+
+### Karta přechodu do klidu
+
+```text
+Pravidlo:
+
+Druhá standardní kontrola dopadla:
+
+Důkaz pro klid:
+
+Kanonické pracovní místo:
+
+Běžný rytmus, ve kterém pravidlo zůstává:
+
+Návratový signál:
+
+Co ukončujeme:
+
+Co ponecháváme:
+
+Co mažeme, anonymizujeme nebo necháváme ve zdrojovém systému:
+
+Co výslovně neotevíráme:
+
+Vlastník:
+
+Datum:
+```
+
+### Mini workshop na 5 minut
+
+1. Minuta 1: přečtěte výsledek druhé standardní kontroly.
+2. Minuta 2: napište jeden konkrétní důkaz, že pravidlo může do klidu.
+3. Minuta 3: potvrďte kanonické místo, běžný rytmus a návratový signál.
+4. Minuta 4: zrušte mimořádné připomínky, karty nebo komentáře.
+5. Minuta 5: udělejte privacy-first úklid podkladů.
+
+Pokud v minutě 2 není důkaz jasný, workshop nekončí klidem. Vrátí se o krok zpět k uzavření druhé kontroly. To je v pořádku. Horší by bylo napsat "klid" jen proto, aby tabulka vypadala uzavřeně.
+
+### Checklist přechodu do klidu
+
+- Máme konkrétní důkaz, že pravidlo prošlo druhou standardní kontrolou?
+- Je jasné kanonické pracovní místo?
+- Zůstává pravidlo v běžném rytmu, ne ve zvláštní kontrole?
+- Má další otevření konkrétní návratový signál?
+- Zrušili jsme mimořádné připomínky, komentáře a pomocné karty?
+- Necháváme jen závěr, pravidlo a signál, ne surové podklady?
+- Smazali jsme nebo anonymizovali dočasné exporty, screenshoty a pracovní kopie?
+- Je zapsané, co výslovně neotevíráme?
+- Nezaměnili jsme klid za odklad bez důkazu?
+- Ví vlastník, že další kontrola proběhne už jen v běžném rytmu?
+
+Přechod do klidu je malá, ale důležitá tečka. Pravidlo tím přestává být nedávná oprava a stává se normální součástí práce. Když to tým zvládne, nevzniká třetí kontrola, čtvrtá poznámka ani pátý podklad. Zůstane jen lepší výchozí stav, méně datového nepořádku a jasný signál, který téma otevře, až to bude mít skutečný důvod.
+
 ## Pracovní log
 
+- 2026-06-24: Doplněna úvodní podkapitola o přechodu do klidu po druhé standardní kontrole: důkaz pro klid, ukončení mimořádné péče, rozlišení klidu od odkladu, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-24: Doplněna úvodní podkapitola o uzavření druhé standardní kontroly po uzavřeném návratu po tichém provozu: uzavírací stavy, praktický příklad, propsání do pracovního systému, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-24: Doplněna úvodní podkapitola o druhé standardní kontrole po uzavřeném návratu po tichém provozu: samostatnost pravidla, zbytkové tření, slabá přenositelnost, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-06-24: Doplněna úvodní podkapitola o uzavření první standardní kontroly po uzavřeném návratu po tichém provozu: uzavírací stavy, praktický příklad, propsání do kanonického místa, privacy-first uzavření, karta, mini workshop a checklist.
