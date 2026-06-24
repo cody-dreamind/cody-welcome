@@ -252386,8 +252386,157 @@ Neprodlužujte workshop jen proto, že téma bývalo velké. Uzavíráte dnešn�
 
 Uzavření prvního návratu z klidu má chránit dvě věci najednou: schopnost reagovat, když se opravdu něco změnilo, a schopnost zůstat v klidu, když se nic zásadního nezměnilo. Dobře vedený tým nepotřebuje starou práci držet při životě preventivně. Stačí mu jasný signál, malé rozhodnutí a čistý konec.
 
+## První běžné použití po uzavření prvního návratu z klidu
+
+Po uzavření prvního návratu z klidu přichází malý, ale důležitý test: použije se pravidlo v běžné práci bez mimořádné pozornosti? Ne ve workshopu, ne při revizi, ne s člověkem, který má celou historii v hlavě. Prostě v normálním provozu, kdy někdo sáhne po šabloně, rozhodovacím pravidle, formuláři, checklistu nebo pracovním výřezu a má podle něj udělat konkrétní krok.
+
+První běžné použití po návratu nemá dokazovat, že systém je dokonalý. Má ověřit, že uzavření návratu nezanechalo skrytou závislost na čerstvé paměti. Pokud pravidlo funguje jen proto, že si tým pamatuje poslední debatu, není ještě zpátky v klidu. Je jen dobře vysvětlené lidem, kteří u toho zrovna byli. To je užitečné, ale trochu podezřele křehké. Jako návod nalepený na dveřích, který dává smysl jen autorovi a jednomu svědkovi.
+
+Začněte třemi otázkami:
+
+```text
+Našel člověk správné pracovní místo bez dodatečné navigace?
+
+Dokázal podle něj udělat rozhodnutí bez návratu do staré historie?
+
+Zůstaly zavřené podklady opravdu zavřené?
+```
+
+Tyto otázky jsou schválně obyčejné. Neptají se, jestli je pravidlo elegantní, kompletní nebo strategicky hluboké. Ptají se, jestli přežije běžné použití. V provozu je to často důležitější než perfektní formulace.
+
+Praktický příklad:
+
+```text
+Situace:
+Marketing připravuje nový lead magnet a potřebuje rozhodnout, jestli má formulář obsahovat telefonní číslo.
+
+Správné pracovní místo:
+Šablona lead magnetu s hraniční větou pro oprávněná pole.
+
+Výsledek běžného použití:
+Člověk našel šablonu, použil hraniční větu a rozhodl, že telefonní číslo teď nepatří do prvního kontaktu. Nepotřeboval otevřít staré exporty poptávek ani poznámky z návratu.
+
+Závěr:
+Pravidlo se po návratu chová jako běžná součást práce. Další mimořádnou kontrolu nepřidáváme.
+```
+
+Tady je důležité, že úspěch není "vyrobili jsme ideální formulář". Úspěch je, že pravidlo pomohlo udělat střídmé rozhodnutí v konkrétním místě a neprobudilo starou datovou stopu.
+
+### Čtyři výsledky prvního běžného použití
+
+První běžné použití po uzavřeném návratu může skončit čtyřmi stavy:
+
+- Samostatné použití: člověk najde správné místo, rozhodne a nepotřebuje starý kontext.
+- Slabá navigace: pravidlo je správné, ale špatně se hledá nebo jeho název neodpovídá pracovní situaci.
+- Slabé rozhodnutí: místo je najitelné, ale pravidlo nedává dost jasnou hranici pro aktuální volbu.
+- Návrat není uzavřený: běžná práce znovu potřebuje staré podklady, mimořádné vysvětlení nebo nový důkaz.
+
+U samostatného použití nic nepřidávejte. Zapište krátký výsledek a nechte pravidlo v klidu. Přidat novou kontrolu po úspěchu je lákavé, protože působí zodpovědně, ale ve skutečnosti tím často trestáte pravidlo za to, že fungovalo.
+
+U slabé navigace neopravujte obsah pravidla. Opravte cestu k němu: název, odkaz z pracovního místa, jednořádkový popis v indexu nebo příklad v šabloně. Pokud člověk neumí najít správnou věc, nepomůže mu delší vysvětlení uvnitř věci, kterou nenašel.
+
+U slabého rozhodnutí zpřesněte jednu hraniční větu. Neotevírejte celý standard. Typicky stačí doplnit příklad, negativní příklad nebo větu "toto už do tohoto pravidla nepatří".
+
+U stavu `návrat není uzavřený` buďte poctiví. Pokud se běžná práce bez starých podkladů neobejde, předchozí uzavření bylo předčasné nebo změna narazila na širší vzor. V takovém případě nelepte na pravidlo další poznámku bokem. Otevřete malou smyčku se stop podmínkou a napište, co přesně se ukázalo až v běžném použití.
+
+### Co sledovat bez špehování
+
+První běžné použití není důvod spouštět nové měření, nahrávat obrazovky nebo sledovat chování týmu v nástroji. Stačí pracovní záznam od člověka, který pravidlo použil. Ideálně tři krátké věty:
+
+```text
+Potřeboval jsem rozhodnout:
+
+Použil jsem:
+
+Zasekl jsem se na:
+```
+
+Pokud se nezasekl, třetí věta zní jednoduše: "Nezasekl jsem se." To je platný signál. Nemusíte z něj vyrábět metriky. Jedna klidná věta v rozhodovacím záznamu je často lepší než tabulka, která bude půl roku žít jen proto, že ji nikdo nechce smazat.
+
+Privacy-first pravidlo pro tuto fázi:
+
+```text
+Ověřujeme použitelnost pravidla, ne chování člověka.
+```
+
+To znamená: nezapisujte, kdo udělal chybu, pokud to není nutné pro vlastnictví opravy. Zapište, kde pravidlo nepomohlo. Neuchovávejte citlivé pracovní příklady, pokud stačí zobecněný popis. Nepřenášejte zákaznické zprávy do nové kontrolní poznámky. Pokud potřebujete příklad, anonymizujte ho a zkraťte na rozhodovací jádro.
+
+Příklad privacy-first zápisu:
+
+```text
+Při přípravě nového lead magnetu nebylo jasné, jestli telefon patří do prvního kroku. Šablona nakonec pomohla rozhodnout, že ne. Nepřenášíme konkrétní poptávky ani staré exporty; stačí závěr, že pro první hodnotový obsah není telefon potřebný údaj.
+```
+
+Takový zápis nechává v systému to podstatné: rozhodovací hranici. Nechává venku to, co by se snadno změnilo v zbytečný archiv osobních nebo obchodních dat.
+
+### Karta prvního běžného použití po návratu
+
+```text
+Téma:
+
+Uzavřený návrat, ze kterého vycházíme:
+
+Běžná pracovní situace:
+
+Kdo pravidlo použil nebo jaká role ho použila:
+
+Správné pracovní místo:
+
+Našel ho člověk bez pomoci?
+
+Jaké rozhodnutí podle něj udělal:
+
+Potřeboval otevřít starou historii nebo podklady?
+
+Výsledek:
+- samostatné použití
+- slabá navigace
+- slabé rozhodnutí
+- návrat není uzavřený
+
+Nejmenší oprava, pokud existuje:
+
+Co výslovně nepřidáváme:
+
+Privacy-first poznámka:
+
+Vlastník:
+
+Datum:
+```
+
+Karta má zůstat lehká. Pokud se začne plnit dlouhým popisem minulého návratu, neověřujete běžné použití. Znovu otevíráte historii. Vraťte se k otázce, která jediná teď stojí za odpověď: dá se pravidlo použít bez mimořádné paměti?
+
+### Mini workshop na 5 minut
+
+1. Minuta 1: pojmenujte běžnou pracovní situaci, kde se pravidlo použilo.
+2. Minuta 2: ověřte, jestli člověk našel správné pracovní místo bez pomoci.
+3. Minuta 3: zapište rozhodnutí, které podle pravidla udělal.
+4. Minuta 4: vyberte jeden ze čtyř výsledků.
+5. Minuta 5: proveďte privacy-first kontrolu a zavřete zbytečné podklady.
+
+Pět minut stačí, protože nejde o novou revizi. Jde o kontrolu, jestli se pravidlo po návratu opravdu vrátilo do běžného života. Pokud pět minut nestačí, je to samo o sobě signál: pravidlo možná není dost samostatné nebo se návrat ve skutečnosti neuzavřel.
+
+### Checklist prvního běžného použití
+
+- Použilo se pravidlo v běžné pracovní situaci, ne ve speciálním review?
+- Našel člověk správné pracovní místo bez dodatečného vysvětlení?
+- Dokázal podle pravidla udělat konkrétní rozhodnutí?
+- Nepotřeboval otevřít staré exporty, poznámky, screenshoty nebo zákaznické zprávy?
+- Vybrali jsme jeden ze čtyř výsledků?
+- U samostatného použití nepřidáváme novou kontrolu jen pro jistotu?
+- U slabé navigace opravujeme cestu k pravidlu, ne celé pravidlo?
+- U slabého rozhodnutí zpřesňujeme jednu hraniční větu?
+- U neuzavřeného návratu otevíráme malou smyčku se stop podmínkou?
+- Zapisujeme použitelnost pravidla, ne výkon konkrétního člověka?
+- Stačí nám zobecněný pracovní závěr místo kopírování citlivých podkladů?
+- Je jasné, jestli pravidlo zůstává v klidu, dostává lokální opravu, nebo se znovu otevírá?
+
+První běžné použití po uzavřeném návratu je dobrá zkouška pokory. Ukáže, jestli tým opravdu uzavřel práci, nebo jen napsal pěkný závěr na konec poslední schůzky. Když pravidlo obstojí, nechte ho pracovat. Když neobstojí, opravte nejmenší místo, které bránilo použití. A když se ukáže, že návrat byl větší, než vypadal, pojmenujte to otevřeně. Malé pravdivé znovuotevření je lepší než velká hromada drobných výjimek.
+
 ## Pracovní log
 
+- 2026-06-24: Doplněna úvodní podkapitola o prvním běžném použití po uzavření prvního návratu z klidu: samostatnost pravidla, slabá navigace, slabé rozhodnutí, privacy-first ověření, karta, mini workshop a checklist.
 - 2026-06-24: Doplněna úvodní podkapitola o uzavření prvního návratu z klidu po druhé standardní kontrole: uzavírací stavy, propsání změn do provozu, privacy-first úklid podkladů, karta, mini workshop a checklist.
 - 2026-06-24: Doplněna úvodní podkapitola o prvním návratu z klidu po druhé standardní kontrole: návratový signál, tři brány návratu, čtyři výsledky, privacy-first práce s důkazy, karta, mini workshop a checklist.
 - 2026-06-24: Doplněna úvodní podkapitola o přechodu do klidu po druhé standardní kontrole: důkaz pro klid, ukončení mimořádné péče, rozlišení klidu od odkladu, privacy-first úklid, karta, mini workshop a checklist.
