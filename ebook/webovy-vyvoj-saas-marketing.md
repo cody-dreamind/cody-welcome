@@ -250083,8 +250083,184 @@ Pokud v minutě 3 zjistíte, že tým nechce zrušit žádnou zvláštní kontro
 
 Tichý provoz je dobrý konec jedné dlouhé smyčky. Ne proto, že by se už nikdy nic nestalo, ale protože tým ví, co má dělat bez zvláštního hlídání, a zároveň ví, kdy se má vrátit. To je praktická dospělost webu, SaaS i marketingu: pravidla nejsou památníky minulých problémů, ale malé opory pro dnešní práci. Když unesou rozhodnutí, nechte je pracovat v klidu.
 
+## První návratový signál po tichém provozu
+
+Tichý provoz jednou skončí. Ne proto, že by selhal, ale proto, že se objeví signál, kvůli kterému má smysl pravidlo znovu otevřít. To je normální. Dobrý standard není beton. Je to dohoda, která platí, dokud pomáhá práci a dokud se nezmění realita, pro kterou vznikla.
+
+První návrat po tichém provozu je citlivý okamžik. Tým může udělat dvě chyby. První: ignorovat signál, protože pravidlo už bylo přece uzavřené. Druhá: otevřít celou historii a znovu řešit všechno od začátku. Správná reakce je menší: potvrdit, jestli signál opravdu odpovídá návratové podmínce, a otevřít jen nejbližší pracovní místo.
+
+Začněte větou:
+
+```text
+Tichý provoz otevíráme jen proto, že nastal tento návratový signál:
+```
+
+Pokud větu neumíte doplnit konkrétně, nejde zatím o návrat. Možná jde o podnět, dojem, starou obavu nebo nový nápad. To všechno může být užitečné, ale nemá to automaticky právo zrušit klid pravidla.
+
+### Tři rychlé otázky
+
+Před otevřením práce si položte tři otázky:
+
+- Je dnešní situace stejný typ signálu, který byl zapsaný při přechodu do tichého provozu?
+- Má signál dopad na skutečné rozhodnutí, zákaznický krok, obchod, provoz nebo datovou stopu?
+- Víme, které jedno pracovní místo má být zkontrolované jako první?
+
+Když odpověď na první otázku zní ne, pravděpodobně jde o nové téma. Když chybí dopad, stačí poznámka. Když neznáte pracovní místo, otázka je zatím moc široká a má se nejdřív zmenšit.
+
+Příklad:
+
+```text
+Pravidlo v tichém provozu:
+U lead magnetu nesbíráme telefon, pokud telefon nemění další krok pro zájemce.
+
+Návratový signál:
+Téma znovu otevřeme, pokud se v aktivní šabloně objeví povinný telefon bez jasného obchodního účelu.
+
+Dnešní situace:
+Nová landing page pro checklist obsahuje povinný telefon, protože autor použil starou kopii šablony.
+
+Rozhodnutí:
+Neotevíráme celé pravidlo. Otevíráme lokální opravu zdroje šablony a kontrolu, odkud se stará kopie vzala.
+```
+
+Tady signál neříká, že pravidlo je špatně. Říká, že tichý provoz potkal starý artefakt. To je úklidový problém, ne strategická debata o lead magnetech.
+
+### Rozlišujte návrat pravidla a návrat nepořádku
+
+Mnoho prvních návratů po tichém provozu nejsou návraty pravidla. Jsou to návraty nepořádku. Starý odkaz, stará kopie, zapomenutá automatizace, neaktuální onboardingová poznámka nebo dokument, který někdo vytáhl z osobní složky. V takové chvíli se neptejte "má pravidlo pořád platit?" Nejdřív se ptejte "proč se stará stopa dostala zpět do práce?"
+
+Použijte jednoduché rozlišení:
+
+- Stará stopa: opravte pracovní místo a nechte pravidlo v klidu.
+- Slabá formulace: doplňte jednu rozhodovací větu v kanonickém místě.
+- Skutečný nový signál: otevřete malý návrat k pravidlu.
+- Změna kontextu: vraťte se ke kontrole přeneseného kontextu.
+
+Příklad staré stopy:
+
+```text
+Nový člověk použil starý brief, který požaduje telefon.
+```
+
+Reakce:
+
+```text
+Opravujeme brief a odstraňujeme starou kopii. Pravidlo zůstává v tichém provozu.
+```
+
+Příklad skutečného signálu:
+
+```text
+U pěti relevantních enterprise poptávek za sebou obchod nedokázal domluvit první hovor bez telefonu, přestože šablona byla správná.
+```
+
+Reakce:
+
+```text
+Otevíráme malý návrat pro enterprise výjimku. Základní pravidlo pro běžné lead magnety zůstává zavřené.
+```
+
+Rozdíl je zásadní. První případ je úklid. Druhý případ je nová práce.
+
+### Privacy-first návrat
+
+První návrat po tichém provozu nesmí automaticky otevřít staré podklady. To, že se pravidlo vrací do pozornosti, neznamená, že tým má znovu vytahovat exporty, screenshoty, zákaznické zprávy a dočasné tabulky z původní iterace.
+
+Začněte nejmenším legitimním důkazem:
+
+```text
+Pro potvrzení návratu použijeme:
+
+Nepotřebujeme otevírat:
+
+Pokud se návrat potvrdí, uložíme jen:
+```
+
+Příklad:
+
+```text
+Pro potvrzení návratu použijeme:
+Souhrn posledních pěti relevantních enterprise poptávek a informaci, zda telefon reálně zrychlil první domluvu.
+
+Nepotřebujeme otevírat:
+Staré exporty z původního testu formuláře, celé e-maily ani screenshoty CRM.
+
+Pokud se návrat potvrdí, uložíme jen:
+Anonymizovaný závěr, jestli enterprise výjimka potřebuje telefon v prvním kroku.
+```
+
+Privacy-first návrat chrání pravidlo před panikou. Tým se může učit z nového signálu, ale nemusí kvůli tomu obnovit starou datovou stopu. Staré důkazy patří zpět do hry jen tehdy, když mají konkrétní účel pro dnešní rozhodnutí a stále se smí použít.
+
+Codyho komentář: návratový signál není kouzelné heslo "otevři archiv". Je to spíš klepnutí na dveře. Nejdřív se podívejte kukátkem, kdo tam je, a teprve potom pouštějte dovnitř staré tabulky.
+
+### Karta prvního návratu po tichém provozu
+
+```text
+Pravidlo v tichém provozu:
+
+Kanonické pracovní místo:
+
+Původní návratový signál:
+
+Dnešní situace:
+
+Shoda se signálem:
+- žádná / částečná / plná
+
+Jde o:
+- starou stopu
+- slabou formulaci
+- skutečný nový signál
+- změnu kontextu
+
+Nejbližší pracovní místo:
+
+Rozhodnutí:
+- neotevírat
+- lokálně uklidit
+- zpřesnit kanonické místo
+- otevřít malý návrat
+- spustit kontrolu kontextu
+
+Privacy-first hranice:
+Co neotevíráme, nekopírujeme ani znovu nesbíráme:
+
+Vlastník:
+
+Datum návratu:
+```
+
+### Mini workshop na 8 minut
+
+1. Minuta 1: přečtěte pravidlo v tichém provozu a původní návratový signál.
+2. Minuty 2 až 3: pojmenujte dnešní situaci bez staré historie.
+3. Minuta 4: určete shodu se signálem.
+4. Minuta 5: rozhodněte, jestli jde o starou stopu, slabou formulaci, nový signál nebo změnu kontextu.
+5. Minuta 6: vyberte nejbližší pracovní místo.
+6. Minuta 7: zapište privacy-first hranici.
+7. Minuta 8: vyberte rozhodnutí a vlastníka.
+
+Když se tým začne hádat o původní rozhodnutí, vraťte ho k dnešní situaci. První návrat po tichém provozu nemá znovu soudit celou minulost. Má rozhodnout, co přesně dnešní signál znamená.
+
+### Checklist prvního návratu
+
+- Četli jsme původní návratový signál doslova?
+- Popsali jsme dnešní situaci bez přepisování podle starých obav?
+- Rozlišili jsme starou stopu, slabou formulaci, nový signál a změnu kontextu?
+- Vybrali jsme nejbližší pracovní místo?
+- Neotevíráme celé pravidlo kvůli jednomu neuklizenému artefaktu?
+- Pokud jde o nový signál, má vlastní malý rozsah?
+- Pokud jde o změnu kontextu, vracíme se ke kontrole přeneseného kontextu?
+- Používáme nejmenší legitimní důkaz?
+- Neotevíráme staré exporty, screenshoty, zákaznické zprávy ani dočasné tabulky bez konkrétního účelu?
+- Má rozhodnutí vlastníka a datum návratu?
+- Je jasné, co zůstává dál v tichém provozu?
+
+První návrat po tichém provozu má být přesný, ne dramatický. Někdy jen uklidí starou stopu. Někdy zpřesní větu v kanonickém místě. Někdy opravdu otevře nový malý průchod. Ve všech případech ale platí stejné pravidlo: neplašte celý systém kvůli jednomu signálu, dokud nevíte, co přesně signalizuje.
+
 ## Pracovní log
 
+- 2026-06-24: Doplněna úvodní podkapitola o prvním návratovém signálu po tichém provozu: rozlišení staré stopy, slabé formulace, nového signálu a změny kontextu, privacy-first návrat, karta, mini workshop a checklist.
 - 2026-06-24: Doplněna úvodní podkapitola o tichém provozu po uzavření druhé standardní kontroly: pracovní místo, návratový signál, tiché kontroly, privacy-first klid, karta, mini workshop a checklist.
 - 2026-06-24: Doplněna úvodní podkapitola o uzavření druhé standardní kontroly po uzavřené reakci na slabý signál: uzavírací stavy, propsání do pracovního systému, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-24: Doplněna úvodní podkapitola o druhé standardní kontrole po uzavřené reakci na slabý signál: ověření samostatnosti pravidla bez čerstvé paměti, čtyři výsledky, privacy-first kontrola, karta, mini workshop a checklist.
