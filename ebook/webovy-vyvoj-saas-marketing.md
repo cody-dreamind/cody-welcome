@@ -250435,8 +250435,167 @@ Když workshop skončí větou "měli bychom to celé znovu promyslet", pravděp
 
 Uzavření prvního návratu po tichém provozu je malá zkouška zralosti systému. Dobré pravidlo se umí na chvíli probudit, podívat se na signál a zase se vrátit do klidu, pokud není důvod dělat víc. A když důvod je, otevře se jen tak široce, jak dnešní důkaz opravdu vyžaduje. Přesně tím se z privacy-first provozu nestává brzda, ale způsob, jak držet práci čistou, rozhodnutelnou a bez zbytečných stop.
 
+## První běžné použití po uzavření návratu po tichém provozu
+
+Po uzavření návratu po tichém provozu přichází jednoduchá zkouška: zvládne se pravidlo zase použít normálně? Ne v retrospektivě, ne v mimořádném review, ne při slavnostním čtení karty. V běžné práci, ve chvíli, kdy někdo připravuje stránku, upravuje formulář, píše onboardingový e-mail, mění šablonu nabídky nebo rozhoduje o tom, jaký údaj opravdu potřebuje.
+
+Cílem prvního běžného použití není znovu dokazovat, že uzavření bylo správné. Cílem je ověřit, že návrat nezanechal v systému rozbitou pozornost. Po návratu se totiž snadno stane, že tým pravidlo používá opatrněji než dřív, přidává vysvětlivky, otevírá historii "pro jistotu" nebo nechává u pracovního místa varování, které už není potřeba. To není klid. To je tichý provoz s nalepenou cedulí "pozor, možná výbuch".
+
+Začněte jednou větou:
+
+```text
+Pravidlo po uzavřeném návratu používáme běžně v této situaci:
+```
+
+Pokud větu neumíte doplnit bez odkazu na starý incident, návrat možná není opravdu uzavřený. Běžné použití má být popsatelné dnešní prací. Například: "Nový lead magnet pro checklist má projít aktuální šablonou formuláře." Ne: "Po tom, co jsme kdysi řešili telefon u starého formuláře, se znovu díváme, jestli se to nestalo." První věta otevírá práci. Druhá otevírá pamětní síň.
+
+### Tři kontrolní body
+
+Při prvním běžném použití po uzavřeném návratu zkontrolujte tři věci:
+
+- Použitelnost: člověk umí pravidlo použít bez čtení uzavírací karty.
+- Klid: návrat nezanechal zvláštní kontrolu, která už nemá aktivní účel.
+- Čistotu stop: k rozhodnutí není potřeba otevírat staré podklady, které měly zůstat zavřené.
+
+Použitelnost poznáte podle toho, že pracovní místo obsahuje rozhodovací větu, ne jen odkaz na historii. Když někdo tvoří landing page, má vidět pravidlo v šabloně nebo checklistu, kde skutečně pracuje. Nemá hledat, ve kterém měsíčním review se řešila stará kopie briefu.
+
+Klid poznáte podle toho, že se práce nedělá v mimořádném režimu. Pokud nový lead magnet prochází běžnou kontrolou formuláře, je to v pořádku. Pokud se kvůli němu svolává zvláštní schůzka jen proto, že se kdysi vrátila stará stopa, pravidlo se do klidu ještě nevrátilo.
+
+Čistotu stop poznáte podle toho, že tým nepotřebuje staré exporty, screenshoty, e-maily ani dočasné tabulky. Stačí mu aktuální pravidlo, dnešní pracovní místo a případně zobecněný závěr z minulého návratu.
+
+### Praktický příklad
+
+```text
+Pravidlo:
+U lead magnetu nesbíráme telefon, pokud telefon nemění další krok pro zájemce.
+
+Uzavřený návrat:
+Minulý návrat byl stará stopa. Starý brief byl archivován a odkaz v onboardingové poznámce opraven.
+
+Běžná situace:
+Tým připravuje novou landing page pro checklist k technickému auditu.
+
+Použití:
+Autor najde aktuální šablonu, rozhodne, že telefon nebude povinný, a ponechá jen e-mail pro zaslání materiálu.
+
+Výsledek:
+Pravidlo funguje běžně. Neotevíráme uzavírací kartu ani staré formulářové podklady.
+```
+
+Všimněte si, že výsledek není "provedli jsme kontrolu pravidla". Výsledek je "pravidlo pomohlo udělat konkrétní rozhodnutí". To je mnohem lepší test. Pravidlo není dobré proto, že existuje dokumentace. Je dobré proto, že někdo při práci zvolí správnou menší datovou stopu bez další porady.
+
+### Když první použití drhne
+
+Drhnutí po uzavřeném návratu neznamená automaticky, že se pravidlo má znovu otevřít. Nejdřív určete typ tření:
+
+- Chybí odkaz na kanonické místo: opravte odkaz.
+- Chybí rozhodovací věta: doplňte jednu větu do pracovního místa.
+- Zůstala mimořádná kontrola: zrušte ji nebo převeďte do běžného rytmu.
+- Znovu se objevila stará stopa: uklidte její zdroj.
+- Dnešní situace je jiný typ problému: otevřete nové téma, ne starý návrat.
+
+Příklad lokálního dotažení:
+
+```text
+Tření:
+Autor našel správné pravidlo až přes rozhodovací log, ne v šabloně landing page.
+
+Rozhodnutí:
+Neotevíráme pravidlo. Do šablony landing page doplníme jednu rozhodovací větu a odkaz na kanonické místo.
+
+Ověření:
+Při příští tvorbě lead magnetu nový autor najde pravidlo přímo v šabloně.
+```
+
+Tady není potřeba velký audit dokumentace. Stačí opravit místo, kde se práce skutečně zasekla. Pokud se z malé opravy začne stávat přepis celé marketingové knihovny, vraťte se k otázce: co přesně bránilo prvnímu běžnému použití?
+
+### Privacy-first kontrola prvního použití
+
+První běžné použití po uzavřeném návratu je dobrý moment ověřit, že se privacy-first závěr opravdu propsal do práce. Položte si tři otázky:
+
+```text
+Použili jsme jen aktuální pracovní pravidlo?
+
+Otevřeli jsme nějaké staré podklady?
+
+Vznikla nová datová stopa, která má jasný účel a konec?
+```
+
+Ideální odpověď je nudná:
+
+```text
+Použili jsme jen aktuální pravidlo v šabloně.
+Staré podklady jsme neotevřeli.
+Nevznikla žádná nová datová stopa.
+```
+
+Když kvůli prvnímu použití vznikne nová poznámka, ať je krátká a účelová. Například: "Šablona landing page doplněna o rozhodovací větu k telefonu." Nepřidávejte do ní osobní údaje, konkrétní zákaznické zprávy ani kopie starých formulářů. Běžné použití má snižovat potřebu starých dat, ne zakládat další archivní vrstvu.
+
+Codyho komentář: privacy-first se pozná hlavně v okamžiku, kdy by bylo pohodlné říct "radši se ještě podíváme do starého exportu". Někdy ano. Ale pokud dnešní pravidlo stačí, starý export si může dál spokojeně neexistovat v aktivní práci. To je krásně levná forma bezpečnosti.
+
+### Karta prvního běžného použití
+
+```text
+Pravidlo po uzavřeném návratu:
+
+Kanonické pracovní místo:
+
+Běžná situace:
+
+Použití pravidla:
+
+Výsledek:
+- funguje běžně
+- potřebuje lokální dotažení
+- zůstala mimořádná kontrola
+- vrátila se stará stopa
+- objevilo se nové téma
+
+Co se mění, pokud něco:
+
+Co výslovně neotevíráme:
+
+Privacy-first kontrola:
+Které staré podklady jsme neotevřeli:
+Jaká nová stopa vznikla a kdy skončí:
+
+Vlastník pracovního místa:
+
+Datum:
+```
+
+Kartu použijte jen tehdy, když první běžné použití něco ukáže. Pokud pravidlo prostě fungovalo a nevzniklo tření, stačí nechat ho být. Všechny úspěšné běžné průchody nemusí mít vlastní diplom. Dokumentace má pomáhat práci, ne sbírat čárky za poslušnost.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: pojmenujte běžnou situaci, ve které se pravidlo použilo.
+2. Minuta 2: ověřte, jestli člověk našel pravidlo v pracovním místě.
+3. Minuta 3: napište, jaké rozhodnutí pravidlo umožnilo.
+4. Minuta 4: určete, jestli zůstal klid, nebo vzniklo lokální tření.
+5. Minuta 5: zkontrolujte, jestli se neotevřely staré podklady.
+6. Minuta 6: buď téma nechte v klidu, nebo zapište jedno lokální dotažení.
+
+Pokud v šesté minutě vzniknou tři úkoly, zastavte se. První běžné použití má chránit samostatnost pravidla. Když z něj děláte nový projekt, možná řešíte jiný problém než samotné použití.
+
+### Checklist prvního běžného použití
+
+- Popsali jsme běžnou situaci bez opakování staré historie?
+- Našel člověk pravidlo tam, kde pracoval?
+- Stačila rozhodovací věta k praktickému rozhodnutí?
+- Nezůstala po uzavřeném návratu zbytečná mimořádná kontrola?
+- Pokud vzniklo tření, určili jsme jeho nejmenší příčinu?
+- Neotevřeli jsme celé pravidlo kvůli chybějícímu odkazu nebo staré kopii?
+- Pokud se objevilo nové téma, oddělili jsme ho od starého návratu?
+- Nepotřebovali jsme staré exporty, screenshoty, zákaznické zprávy ani dočasné tabulky?
+- Vznikla nová datová stopa jen tehdy, když má jasný účel?
+- Víme, co se po tomto použití výslovně neotevírá?
+- Má případné lokální dotažení vlastníka a nejbližší ověření?
+
+První běžné použití po uzavřeném návratu má být klidná kontrola reality. Když pravidlo funguje, nechte ho fungovat. Když drhne, opravte nejbližší pracovní místo. Když se vrací stará stopa, uklidte zdroj. A když se objeví opravdu nové téma, dejte mu vlastní malý rámec. Tak zůstane systém použitelný, marketing nerozjede další zbytečný proces a data zůstanou přesně tam, kde mají být: jen tam, kde mají jasný účel.
+
 ## Pracovní log
 
+- 2026-06-24: Doplněna úvodní podkapitola o prvním běžném použití po uzavření návratu po tichém provozu: použitelnost pravidla, klid po návratu, lokální dotažení, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-06-24: Doplněna úvodní podkapitola o uzavření prvního návratu po tichém provozu: uzavírací stavy, propsání do pracovního systému, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-24: Doplněna úvodní podkapitola o prvním návratovém signálu po tichém provozu: rozlišení staré stopy, slabé formulace, nového signálu a změny kontextu, privacy-first návrat, karta, mini workshop a checklist.
 - 2026-06-24: Doplněna úvodní podkapitola o tichém provozu po uzavření druhé standardní kontroly: pracovní místo, návratový signál, tiché kontroly, privacy-first klid, karta, mini workshop a checklist.
