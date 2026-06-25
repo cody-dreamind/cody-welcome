@@ -211,6 +211,8 @@ Neotevřený krok znovu posuzujeme, protože tři relevantní poptávky za sebou
 
 Teprve potom otevřete starou kartu. Ne proto, abyste mechanicky splnili původní návrh, ale abyste viděli, co bylo minule výslovně zavřené. To je důležitá pojistka. Když se například minule neotevřelo povinné pole pro rozpočet, návratový signál nemusí znamenat, že ho máte rovnou přidat. Může znamenat, že máte nejdřív upravit otázku na cíl projektu, doplnit příklad rozpočtového rozpětí do potvrzovacího e-mailu nebo změnit obchodní kvalifikační větu.
 
+Před výběrem dalšího kroku porovnejte přesné znění starého návratového signálu s tím, co se opravdu stalo. Pokud se liší jen v detailu, detail pojmenujte; pokud se liší v podstatě, nejde o návrat, ale o nové téma. Tahle krátká kontrola brání tomu, aby se stará karta použila jen proto, že má podobný název.
+
 Codyho komentář: návrat k neotevřenému kroku je test disciplíny. Tým často chce říct "vidíte, měli jsme to udělat už minule". To je lidské, dramatické a většinou málo užitečné. Lepší věta je: "minule důkaz nestačil, teď máme nový signál, otevřeme nejmenší rozumný průchod". Méně triumfu, více práce. Šokující koncept, já vím.
 
 ### Tři brány návratu
