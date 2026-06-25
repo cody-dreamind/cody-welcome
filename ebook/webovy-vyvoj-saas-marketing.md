@@ -193,6 +193,156 @@ Když se během sedmi minut ukáže, že důkaz je silnější, než tým čekal
 
 Neotevřený krok má být malý, přesný a dohledatelný. Když ho zapíšete dobře, neztrácíte nápad. Ztrácíte jen povinnost dělat práci, která si zatím nezasloužila existovat. To je fér obchod.
 
+## Návrat k neotevřenému kroku
+
+Neotevřený krok se někdy vrátí. To není chyba původního rozhodnutí. Dobrý záznam nemá téma navždy zamknout do sklepa; má zajistit, že se otevře až ve chvíli, kdy přijde lepší důvod než minule. Rozdíl je v tom, že návrat neznamená automatické spuštění původního návrhu. Znamená novou kontrolu: jestli se opravdu objevil návratový signál, jestli pořád platí stejná pracovní otázka a jestli lze otevřít menší krok než ten, který byl minule zamítnutý.
+
+Začněte proto větou:
+
+```text
+Neotevřený krok znovu posuzujeme, protože se objevil tento návratový signál:
+```
+
+Do věty nepatří obecný pocit, že "už bychom to měli řešit". Patří tam pozorování, které by pochopil i člověk mimo původní debatu:
+
+```text
+Neotevřený krok znovu posuzujeme, protože tři relevantní poptávky za sebou nešlo kvalifikovat bez ručního doptání na rozpočet.
+```
+
+Teprve potom otevřete starou kartu. Ne proto, abyste mechanicky splnili původní návrh, ale abyste viděli, co bylo minule výslovně zavřené. To je důležitá pojistka. Když se například minule neotevřelo povinné pole pro rozpočet, návratový signál nemusí znamenat, že ho máte rovnou přidat. Může znamenat, že máte nejdřív upravit otázku na cíl projektu, doplnit příklad rozpočtového rozpětí do potvrzovacího e-mailu nebo změnit obchodní kvalifikační větu.
+
+Codyho komentář: návrat k neotevřenému kroku je test disciplíny. Tým často chce říct "vidíte, měli jsme to udělat už minule". To je lidské, dramatické a většinou málo užitečné. Lepší věta je: "minule důkaz nestačil, teď máme nový signál, otevřeme nejmenší rozumný průchod". Méně triumfu, více práce. Šokující koncept, já vím.
+
+### Tři brány návratu
+
+Před otevřením práce projděte tři krátké brány:
+
+- Stejný problém: návratový signál se týká stejné potíže, ne jen podobného nápadu.
+- Stejné nebo jasně změněné pracovní místo: víte, jestli se má sahat na formulář, e-mail, webovou stránku, onboarding, obchodní skript nebo interní proces.
+- Menší první krok: umíte otevřít variantu, která je užší než původně zamítnutý návrh.
+
+Pokud první brána neprojde, nejde o návrat. Je to nové téma s povědomým názvem. Založte novou kartu a starý záznam jen odkažte jako související historii.
+
+Pokud neprojde druhá brána, neotevírejte implementaci. Otevřete jen zpřesnění pracovního místa. Třeba projít tři poslední poptávky a rozhodnout, jestli problém vzniká ve formuláři, v potvrzovací zprávě nebo až v obchodním follow-upu.
+
+Pokud neprojde třetí brána, vraťte se ke zmenšení. Návratový signál není povolenka k velké změně. Je to povolenka k opatrnému ověření.
+
+### Praktický příklad
+
+Původní neotevřený krok:
+
+```text
+Podnět:
+Přidat do poptávkového formuláře povinné pole pro rozpočet.
+
+Důvod neotevření:
+Poslední relevantní poptávky se nezasekly na rozpočtu, ale na nejasném cíli projektu.
+
+K tématu se vrátíme pouze pokud:
+Tři relevantní poptávky za sebou nepůjdou kvalifikovat bez ručního doptání na rozpočet.
+```
+
+Návrat:
+
+```text
+Návratový signál:
+Tři relevantní poptávky za sebou nešlo kvalifikovat bez ručního doptání na rozpočet.
+
+Co zůstává zavřené:
+Povinné pole pro rozpočet v prvním formuláři a automatický lead scoring.
+
+Co otevíráme:
+Jednu volitelnou otázku v potvrzovací zprávě: "Pokud už máte rámcový rozpočet nebo rozhodovací limit, odpovězte na tento e-mail a doplňte ho."
+
+Ověření:
+U dalších pěti relevantních poptávek sledujeme pouze to, zda odpověď ušetřila jedno ruční doptání.
+```
+
+Všimněte si, že návratový signál byl uznaný, ale původní široký návrh zůstal zavřený. Tým otevřel nejbližší místo, kde problém opravdu bolí, a nepřidal nové povinné osobní ani obchodní údaje do prvního kontaktu. To je přesně privacy-first práce v praxi: reagovat na důkaz, ale nezačít sbírat víc dat jen proto, že se téma konečně vrátilo.
+
+### Privacy-first hranice návratu
+
+Návrat k neotevřenému kroku je rizikový, protože tým už má připravený starý nápad. Stačí málo a vrátí se celý balík: nové pole, nový export, nová automatizace, nový tag v CRM, nový dashboard a nové vysvětlování, proč to všechno "přece potřebujeme". Ne, nepotřebujete. Potřebujete jen tolik dat, kolik obslouží dnešní rozhodnutí.
+
+Při návratu si napište:
+
+```text
+Původně jsme díky neotevření nesbírali:
+
+Nově opravdu potřebujeme:
+
+Po ověření smažeme nebo zavřeme:
+```
+
+Třetí řádek je důležitý. Pokud otevřete dočasnou poznámku, ruční štítek nebo krátké kontrolní okno, rovnou určete, kdy skončí. Bez toho se i malý návrat umí změnit v trvalý zdroj dat, který už nikdo nepoužívá, ale všichni se tváří, že je součástí provozu. Tak vznikají datové půdy. Vypadá to prakticky, dokud tam někdo nemusí uklízet.
+
+### Karta návratu k neotevřenému kroku
+
+```text
+Původní neotevřený krok:
+
+Kde je původní záznam:
+
+Návratový signál:
+
+Je to stejný problém?
+- ano
+- ne, je to nové téma
+- nevíme, nejdřív zpřesnit
+
+Nejbližší pracovní místo:
+
+Co zůstává výslovně zavřené:
+
+Nejmenší otevřený krok:
+
+Jak poznáme, že krok stačil:
+
+Jaká data pořád nesbíráme:
+
+Jaká dočasná data vzniknou a kdy skončí:
+
+Vlastník:
+
+Datum kontroly:
+
+Rozhodnutí po kontrole:
+- zavřít bez změny
+- ponechat lokální opravu
+- otevřít nový menší krok
+- založit nové téma
+```
+
+Karta má chránit dvě věci najednou: aby se oprávněný návrat nezametl pod koberec a aby se s ním nevrátil celý původní rozsah. Pokud vyplnění karty trvá déle než samotné rozhodnutí, zkraťte ji. Smyslem není papírování, ale klidná hranice práce.
+
+### Mini workshop na 10 minut
+
+1. Minuty 1 až 2: přečtěte původní neotevřený krok a návratový signál.
+2. Minuta 3: rozhodněte, jestli jde o stejný problém.
+3. Minuta 4: určete nejbližší pracovní místo.
+4. Minuta 5: napište, co z původního návrhu zůstává zavřené.
+5. Minuty 6 až 7: vyberte nejmenší otevřený krok.
+6. Minuta 8: napište, jaká data pořád nesbíráte.
+7. Minuta 9: určete kontrolní okno.
+8. Minuta 10: zapište vlastníka a rozhodovací stav po kontrole.
+
+Když se tým během workshopu začne hádat o původní rozhodnutí, vraťte se k signálu. Otázka nezní "kdo měl pravdu minule". Otázka zní "co dnes víme navíc a jak malý krok z toho plyne". Minulá pravda je špatný projektový manažer, pokud se tváří jako dnešní důkaz.
+
+### Checklist návratu
+
+- Máme původní záznam neotevřeného kroku?
+- Je návratový signál konkrétní a rozpoznatelný?
+- Ověřili jsme, že jde o stejný problém, ne jen podobný nápad?
+- Pojmenovali jsme nejbližší pracovní místo?
+- Napsali jsme, co z původního návrhu zůstává zavřené?
+- Otevřeli jsme menší krok než původně zamítnutý rozsah?
+- Víme, jak poznáme, že menší krok stačil?
+- Zapsali jsme, jaká data pořád nesbíráme?
+- Mají dočasné poznámky, exporty nebo štítky jasný konec?
+- Je po kontrole jasné, jestli krok zavřít, ponechat lokálně, zmenšit znovu, nebo založit nové téma?
+
+Návrat k neotevřenému kroku má být střízlivý. Uzná nový důkaz, ale neoslavuje starý nápad. Díky tomu tým neztrácí citlivost na reálné signály a zároveň si neotevírá staré dveře jen proto, že tentokrát někdo hlasitěji zaklepal.
+
 ## Kontrola přeneseného kontextu při návratu k tématu
 
 Když se tým vrací k tématu po týdnech nebo měsících, největší riziko často není zapomenutí. Horší je poloviční paměť: všichni si pamatují název problému, ale každý si pod ním nese jiný starý kontext. Jeden člověk pořád řeší původní segment, druhý už myslí na novou nabídku, třetí si pamatuje starou výjimku a čtvrtý má v hlavě poslední incident. Výsledek vypadá jako shoda, ale práce se rozjede do čtyř směrů.
@@ -254111,3 +254261,4 @@ Druhé běžné použití je dobré místo pro zdrženlivost. Pokud pravidlo obs
 - 2026-06-23: Doplněna úvodní podkapitola o prvním běžném použití po uzavřeném návratu z dlouhodobého klidu: najitelnost, rozhodnutelnost, klid bez otevírání historie, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-06-24: Doplněna krátká úvodní poznámka, aby hranice dalšího kroku uměla skončit i vědomým neotevřením nové práce.
 - 2026-06-24: Doplněna úvodní podkapitola o záznamu neotevřeného kroku: důvody neotevření, privacy-first hodnota, karta, mini workshop a checklist.
+- 2026-06-25: Doplněna úvodní podkapitola o návratu k neotevřenému kroku: návratový signál, tři brány návratu, menší otevřený krok, privacy-first hranice, karta, workshop a checklist.
