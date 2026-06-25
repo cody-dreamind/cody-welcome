@@ -252706,8 +252706,199 @@ Když workshop potřebuje víc než šest minut, pravděpodobně neuzavíráte p
 
 Uzavření prvního běžného použití je drobný konec, který šetří velké množství budoucího šumu. Když pravidlo funguje, nechte ho v klidu. Když drhne, opravte nejmenší místo. Když se ukáže, že návrat nebyl uzavřený, otevřete malou smyčku a přiznejte to. Všechny tři reakce jsou lepší než nekonečný stav "ještě to sledujeme", který většinou znamená jen "nevíme, kdo to má zavřít".
 
+## Druhé běžné použití po uzavření prvního návratu z klidu
+
+Druhé běžné použití je test, který už nemá výhodu čerstvého uzavření. První člověk mohl mít v hlavě poslední diskusi, pamatovat si důvod změny nebo vědět, kde se skrývá správná karta. Druhý průchod je poctivější: ukazuje, jestli pravidlo opravdu žije v pracovním místě, nebo jen doběhlo na energii posledního návratu.
+
+Nejde o další audit. Jde o obyčejné použití v podobné, ale ne totožné situaci. Pokud se pravidlo týkalo lead magnet formuláře, druhé použití může být jiný obsahový materiál, jiný segment nebo jiný člověk v marketingu. Pokud šlo o onboardingový e-mail, druhé použití může být další produktová větev. Důležité je, aby se neověřovala stejná scéna se stejným člověkem a stejnou pamětí. To by nebylo druhé použití. To by bylo opakování prvního záběru, jen s větší jistotou a menší informační hodnotou.
+
+Začněte jednoduchou větou:
+
+```text
+Druhé použití ověřuje, jestli pravidlo funguje bez čerstvé paměti prvního návratu v této pracovní situaci:
+```
+
+Potom doplňte situaci tak konkrétně, aby šlo poznat rozdíl od prvního použití:
+
+```text
+První použití:
+Nový lead magnet pro zakladatele SaaS a rozhodnutí, jestli sbírat telefon.
+
+Druhé použití:
+Pozvánka na technický audit pro produktový tým a rozhodnutí, jestli do formuláře přidat velikost týmu.
+```
+
+Rozdíl nemusí být velký. Stačí, aby pravidlo muselo udělat vlastní práci. Pokud druhé použití jen kopíruje první výsledek, nic moc jste nezjistili. Pokud je ale podobné natolik, že pravidlo má pořád platit, a jiné natolik, že se ukáže jeho přenositelnost, jste přesně na správném místě.
+
+### Co druhé použití ověřuje
+
+Druhé běžné použití ověřuje tři věci:
+
+- Přenositelnost: pravidlo se dá použít i v příbuzné situaci, ne jen v původním příkladu.
+- Samostatnost: člověk nepotřebuje autora pravidla, starou debatu ani mimořádné vysvětlení.
+- Střídmost: použití nevede k novému sběru dat, dalšímu trackeru nebo kopírování starých podkladů jen pro jistotu.
+
+Přenositelnost neznamená univerzálnost. Dobrý pracovní standard nemá řešit všechno. Má jasně říct, kde platí a kde už ne. Druhé použití proto nemá pravidlo roztahovat, ale potvrdit jeho užitečnou hranici.
+
+Praktická kontrola:
+
+```text
+Patří druhá situace do stejného typu rozhodnutí?
+
+Je rozdíl proti první situaci pojmenovaný?
+
+Umí pravidlo říct ano, ne, nebo "toto už sem nepatří"?
+```
+
+Pokud na třetí otázku pravidlo neumí odpovědět, nejde hned o selhání. Možná jen narazilo na okraj, který má být výslovně zavřený. Takový okraj je cenný. Ušetří budoucím lidem cestu do stejné mlhy.
+
+### Praktický příklad
+
+```text
+Uzavřený návrat:
+Po návratu z klidu jsme potvrdili pravidlo, že první kontakt u hodnotového obsahu nemá sbírat údaje, které nejsou nutné pro doručení hodnoty nebo okamžité rozhodnutí.
+
+První běžné použití:
+U lead magnetu jsme nepřidali telefonní číslo, protože hodnota šla doručit e-mailem.
+
+Druhé běžné použití:
+U pozvánky na technický audit někdo navrhl přidat velikost týmu.
+
+Použití pravidla:
+Velikost týmu není nutná pro doručení pozvánky ani pro první rozhodnutí. Pokud obchod potřebuje kontext později, zeptá se v navazujícím rozhovoru.
+
+Výsledek:
+Pravidlo se přeneslo. Formulář zůstává krátký a nepřidáváme nové pole.
+
+Co se propíše:
+Do šablony přidáme negativní příklad: "Velikost týmu nepatří do prvního kroku, pokud neslouží k okamžitému výběru správné služby."
+```
+
+Tady druhé použití nevedlo k novému projektu. Jen ukázalo, že pravidlo má dostatečně silnou hranici i mimo první příklad. To je ideální výsledek. Žádná fanfára, žádná nová tabulka, žádná potřeba vyrábět dashboard. Jen tichý důkaz, že jedna věta funguje i podruhé.
+
+### Čtyři výsledky druhého běžného použití
+
+Druhé použití může skončit čtyřmi stavy:
+
+- Přenesené použití: pravidlo funguje v příbuzné situaci bez další pomoci.
+- Slabý okraj: pravidlo funguje, ale chybí mu věta, kde jeho platnost končí.
+- Falešná příbuznost: druhá situace vypadala podobně, ale patří do jiného rozhodovacího typu.
+- Návratová smyčka se znovu otevírá: druhé použití znovu potřebuje starý kontext, nové důkazy nebo širší zásah.
+
+U přeneseného použití nechte pravidlo v klidu. Můžete doplnit jeden krátký příklad, pokud pomůže dalšímu člověku, ale nepřidávejte novou kontrolu. Druhé samostatné použití je silný signál, že pravidlo se vrací do normálního rytmu.
+
+U slabého okraje doplňte větu "toto už sem nepatří". Například:
+
+```text
+Toto pravidlo řeší první kontakt u hodnotového obsahu. Neřeší kvalifikaci placené konzultace, kde je rozsah týmu nutný pro přípravu nabídky.
+```
+
+Taková věta je lepší než rozšíření pravidla. Rozšíření svádí k tomu, aby jeden standard postupně sežral sousední rozhodnutí. Hraniční věta naopak drží pravidlo malé a použitelné.
+
+U falešné příbuznosti nic neopravujte uvnitř pravidla. Zapište, že druhá situace patří jinam, a odkažte na správné pracovní místo. Pokud správné místo neexistuje, neznamená to automaticky, že máte přepsat původní pravidlo. Znamená to, že máte zvážit nový malý výřez.
+
+U znovuotevřené návratové smyčky se vraťte ke stop podmínce. Pokud druhé použití potřebuje staré obchodní poznámky, nové sledování nebo zásah do více míst, pravidlo možná nebylo uzavřené tak pevně, jak se zdálo. Otevřete malou smyčku jen pro konkrétní tření, ne celé téma.
+
+### Privacy-first kontrola přenositelnosti
+
+Druhé použití svádí k porovnávání. Tým chce vědět, jestli se první a druhý případ podobají, a rychle sahá po starých detailech. Tady je potřeba být přísný: porovnáváte rozhodovací typ, ne kompletní zákaznickou historii.
+
+Použijte tento filtr:
+
+```text
+Jaký nejmenší zobecněný popis prvního případu stačí k porovnání s druhým?
+```
+
+Ve většině případů stačí věta:
+
+```text
+První případ byl první kontakt u hodnotového obsahu, kde pro doručení stačil e-mail.
+```
+
+Není potřeba kopírovat konkrétní poptávku, původní e-mail, interní poznámku ani export. Pokud druhé použití potřebuje víc detailů, je možné, že nejde o běžné použití, ale o nové rozhodování. To není ostuda. Jen to pojmenujte správně.
+
+Privacy-first pravidlo pro druhé použití:
+
+```text
+Přenášíme typ rozhodnutí, ne staré osobní nebo obchodní detaily.
+```
+
+Codyho komentář: když pravidlo neumí přežít bez starých detailů, možná to není pravidlo. Možná je to jen poznámka z jedné schůzky v kabátě procesního standardu. A kabát procesu umí leccos schovat, jen ne dlouhodobě.
+
+### Karta druhého běžného použití
+
+```text
+Téma:
+
+Uzavřený návrat, ze kterého vycházíme:
+
+První běžné použití jednou větou:
+
+Druhá běžná pracovní situace:
+
+V čem je podobná první situaci:
+
+V čem je jiná:
+
+Jaké rozhodnutí bylo potřeba udělat:
+
+Použité pracovní místo:
+
+Potřeboval člověk čerstvou paměť, autora pravidla nebo staré podklady?
+
+Výsledek:
+- přenesené použití
+- slabý okraj
+- falešná příbuznost
+- návratová smyčka se znovu otevírá
+
+Nejmenší propsání, pokud existuje:
+
+Co výslovně neotevíráme:
+
+Privacy-first poznámka:
+Které staré detaily nepřenášíme a jaký zobecněný závěr stačí:
+
+Vlastník:
+
+Datum:
+```
+
+Karta má ukázat přenos, ne vyrábět novou historii. Pokud se do ní dostává dlouhý popis prvního návratu, zastavte se. Druhé použití nemá být archivní pátrání. Má být pracovní test, jestli pravidlo obstojí v dalším rozumně příbuzném kroku.
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: napište první použití jednou větou.
+2. Minuta 2: popište druhou pracovní situaci.
+3. Minuta 3: napište, v čem jsou si situace podobné a v čem se liší.
+4. Minuta 4: použijte pravidlo bez otevírání starých detailů.
+5. Minuta 5: vyberte jeden ze čtyř výsledků.
+6. Minuta 6: určete nejmenší propsání nebo napište, že žádné není potřeba.
+7. Minuta 7: proveďte privacy-first kontrolu přenesených stop.
+
+Sedm minut stačí, pokud jde opravdu o druhé běžné použití. Pokud se workshop začne měnit v debatu o segmentu, nabídce, obchodním procesu nebo nových datech, zastavte ho a změňte typ práce. Druhé použití není schovaný prostor pro strategii. Strategie si zaslouží vlastní stůl, ne přespání na gauči u checklistu.
+
+### Checklist druhého běžného použití
+
+- Je druhá situace podobná první jen typem rozhodnutí, ne jen povrchním názvem?
+- Je rozdíl mezi první a druhou situací jasně popsaný?
+- Použilo se pravidlo bez autora, čerstvé paměti a starých podkladů?
+- Umělo pravidlo říct rozhodnutí, hranici, nebo že situace patří jinam?
+- Vybrali jsme jeden ze čtyř výsledků?
+- U přeneseného použití nepřidáváme novou kontrolu jen proto, že to vyšlo?
+- U slabého okraje doplňujeme hraniční větu, ne rozšíření celého pravidla?
+- U falešné příbuznosti přesouváme situaci do správného pracovního místa?
+- U znovuotevřené smyčky otevíráme jen konkrétní tření se stop podmínkou?
+- Porovnáváme rozhodovací typ, ne staré osobní nebo obchodní detaily?
+- Stačí nám zobecněný závěr z prvního použití?
+- Je jasné, co výslovně neotevíráme?
+- Ví tým, zda pravidlo po druhém použití zůstává v klidu, dostane lokální hranu, nebo se znovu otevírá?
+
+Druhé běžné použití je dobré místo pro zdrženlivost. Pokud pravidlo obstojí, největší služba je nechat ho být. Pokud narazí na okraj, doplňte okraj. Pokud se ukáže, že druhá situace patří jinam, nechte původní pravidlo malé. A pokud se návratová smyčka opravdu znovu otevře, otevřete ji poctivě a úzce. V každém případě se snažte, aby po druhém použití zůstalo méně mlhy, ne víc dokumentace.
+
 ## Pracovní log
 
+- 2026-06-25: Doplněna úvodní podkapitola o druhém běžném použití po uzavření prvního návratu z klidu: přenositelnost bez čerstvé paměti, slabý okraj pravidla, falešná příbuznost, privacy-first porovnání, karta, mini workshop a checklist.
 - 2026-06-25: Doplněna úvodní podkapitola o uzavření prvního běžného použití po uzavření prvního návratu z klidu: uzavírací stavy, propsání do kanonického pracovního místa, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-24: Doplněna úvodní podkapitola o prvním běžném použití po uzavření prvního návratu z klidu: samostatnost pravidla, slabá navigace, slabé rozhodnutí, privacy-first ověření, karta, mini workshop a checklist.
 - 2026-06-24: Doplněna úvodní podkapitola o uzavření prvního návratu z klidu po druhé standardní kontrole: uzavírací stavy, propsání změn do provozu, privacy-first úklid podkladů, karta, mini workshop a checklist.
