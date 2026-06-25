@@ -253537,8 +253537,157 @@ Pokud se během sedmi minut rozjedou dvě různá témata, zastavte workshop a j
 
 Uzavření první standardní kontroly je malá administrativní brzda s velkým efektem. Brání tomu, aby se fungující pravidla pořád znovu dokazovala, aby lokální navigační problém přerostl v přepis obsahu a aby každá kontrola po sobě nechala malý sklad dat. Dobrý konec kontroly je krátký, konkrétní a trochu přísný. Co má žít, žije. Co se má opravit, má vlastní místo. Co nemá důvod existovat, odchází.
 
+## Druhá standardní kontrola po uzavřené první kontrole
+
+Druhá standardní kontrola nemá být pokračováním první. To je častá chyba: tým si řekne, že první kontrola něco uklidila, a druhou použije jako záminku otevřít všechny poznámky, které se do první nevešly. Jenže tím se z kontrolního rytmu stane pomalý backlog. Druhá kontrola má ověřit něco užšího: jestli pravidlo po prvním uzavření opravdu funguje bez zvláštní péče, bez starých pomůcek a bez lidí, kteří si ještě pamatují původní debatu.
+
+Základní otázka zní:
+
+```text
+Umí pravidlo projít další běžnou situací bez návratu k první kontrole?
+```
+
+Pokud odpověď zní ano, nechte pravidlo v běžném provozu. Nepřidávejte další vrstvy vysvětlování. Pokud odpověď zní ne, hledejte nejbližší důvod selhání: cesta, znění pravidla, sousední pracovní místo, nebo skutečný nový návratový signál. Druhá kontrola není soud nad celým systémem. Je to krátký test, jestli první uzavření opravdu odstranilo mimořádnou pozornost.
+
+### Co druhá kontrola sleduje
+
+Druhá standardní kontrola má tři praktické testy:
+
+- Samostatnost: použil někdo pravidlo bez autora, bez předchozího vysvětlování a bez otevření staré kontroly?
+- Přenositelnost: fungovalo pravidlo v podobné běžné situaci, ne jen v přesně stejném příkladu jako minule?
+- Klid stop: nevznikl kvůli použití nový export, pomocná tabulka, duplicitní checklist nebo soukromá poznámka mimo kanonické místo?
+
+Samostatnost je nejdůležitější. Pravidlo, které funguje jen s autorem v místnosti, není pravidlo. Je to ústní tradice s hezčím názvem. Přenositelnost ověřuje, že text není přilepený k jednomu historickému příkladu. Klid stop hlídá privacy-first provoz: když každé použití pravidla vyrobí novou vedlejší evidenci, pravidlo možná zjednodušilo rozhodnutí, ale zhoršilo datovou hygienu.
+
+Praktický příklad:
+
+```text
+Pravidlo:
+Doplňující otázky na rozpočet patří až do follow-upu, ne do prvního formuláře.
+
+Druhá standardní kontrola:
+Nový člověk v obchodě použil sales kartu u další poptávky. Neotevřel starou kontrolu, nepřidal pole do formuláře a nepoužil pomocnou tabulku. Jen si všiml, že sales karta neříká, kam zapsat odpověď zákazníka.
+
+Výsledek:
+Pravidlo je samostatné a přenositelné. Potřebuje pouze lokální doplnění věty v sales kartě: "Odpověď z follow-upu patří do existující poznámky u poptávky, ne do nové tabulky."
+```
+
+Všimněte si hranice. Neotevírá se formulář, lead scoring ani nový CRM proces. Opravuje se jen místo, kde při druhém použití vzniklo drobné tření. Přesně tak má druhá kontrola vypadat: ne dramaticky, ale užitečně.
+
+### Čtyři výsledky druhé kontroly
+
+Po druhé standardní kontrole vybírejte jeden ze čtyř výsledků:
+
+- Klid potvrzen: pravidlo funguje samostatně a není potřeba další mimořádná péče.
+- Poslední lokální doplnění: pravidlo funguje, ale jedno pracovní místo potřebuje krátkou větu, odkaz nebo rozlišení.
+- Slabá přenositelnost: pravidlo fungovalo v původní situaci, ale druhý běžný průchod ukázal, že je příliš úzké nebo navázané na starý příklad.
+- Nový návratový signál: druhé použití ukázalo opakovaný problém, který nevyřeší lokální doplnění.
+
+U `klidu potvrzeného` je správný další krok žádný další krok. Zapište výsledek a přesuňte pravidlo do dlouhodobého rytmu. Pokud má tým chuť udělat ještě jednu kontrolu "pro jistotu", napište si, čeho se bojí. Možná nejde o kvalitu pravidla, ale o strach pustit téma z ruky.
+
+U `posledního lokálního doplnění` opravte jen nejbližší pracovní místo. Typicky jde o větu v šabloně, popisek v indexu, příklad v sales kartě nebo rozhodovací hranici v checklistu. Doplnění má být tak malé, aby nezměnilo slib pravidla.
+
+U `slabé přenositelnosti` buďte přísnější. Nepřepisujte pravidlo rovnou do obecnější podoby, pokud nevíte, co přesně se nepřeneslo. Nejdřív napište rozdíl mezi první a druhou situací. Třeba: první kontrola řešila inbound poptávku z webu, druhá se týká doporučení od existujícího zákazníka. To může být související, ale nemusí to být stejné pravidlo.
+
+U `nového návratového signálu` ukončete druhou kontrolu a otevřete novou malou smyčku. Nepřilepujte nový problém na starou kontrolu jen proto, že jste ho našli při kontrole. Kontrola našla signál; samotná práce má mít vlastní kartu, stop podmínku a privacy-first hranici.
+
+### Privacy-first kontrola druhého průchodu
+
+Druhá kontrola je výborné místo na úklid drobných provozních návyků. Pokud pravidlo přežilo druhé běžné použití, nemá kolem sebe potřebovat dočasné podpěry. Zeptejte se:
+
+- Zůstala po prvním uzavření nějaká pracovní kopie, která už není potřeba?
+- Použil někdo pro jistotu nový seznam případů, screenshoty, export nebo soukromý dokument?
+- Obsahuje druhá kontrola osobní, obchodní nebo behaviorální data, která nejsou nutná pro rozhodnutí?
+- Stačí ponechat zobecněnou větu o výsledku místo detailů jednotlivých případů?
+
+Dobrá privacy-first věta po druhé kontrole může znít:
+
+```text
+Druhá kontrola potvrdila samostatné použití pravidla. Ponecháváme jen rozhodovací větu a drobné doplnění v sales kartě; dočasné poznámky z obou kontrol mažeme, protože další provoz nepotřebuje detaily jednotlivých poptávek.
+```
+
+Tohle není kosmetika. Čím víc pravidel tým zavádí, tím větší riziko vzniká z jejich vedlejších stop. Každá pomocná tabulka je malý slib budoucí údržby. Každý export je otázka retence. Každá soukromá kopie je budoucí rozpor v tom, co vlastně platí. Druhá kontrola má tenhle nepořádek zachytit dřív, než se začne tvářit jako proces.
+
+### Karta druhé standardní kontroly
+
+```text
+Téma:
+
+Pravidlo nebo standard:
+
+Kde je kanonické místo:
+
+Výsledek první standardní kontroly:
+
+Druhá běžná situace:
+
+Použil pravidlo někdo bez autora nebo mimo původní kontext?
+- ano
+- ne
+- nevíme
+
+Výsledek druhé kontroly:
+- klid potvrzen
+- poslední lokální doplnění
+- slabá přenositelnost
+- nový návratový signál
+
+Co se ukázalo při použití:
+
+Nejmenší oprava, pokud existuje:
+
+Co výslovně neotevíráme:
+
+Jaké pracovní stopy mažeme nebo archivujeme:
+
+Jaká data dál nesbíráme:
+
+Rozhodnutí o rytmu:
+- přesunout do dlouhodobého rytmu
+- ověřit lokální doplnění při dalším použití
+- otevřít samostatnou malou smyčku
+
+Vlastník:
+
+Datum dalšího návratu, pokud existuje:
+```
+
+Karta má být krátká. Pokud druhá kontrola potřebuje dlouhé vysvětlování, pravděpodobně neověřujete pravidlo, ale řešíte nové téma. To není zakázané, jen tomu dejte správný název. Staré pravidlo nechte projít kontrolou a nový problém založte zvlášť.
+
+### Mini workshop na 8 minut
+
+1. Minuta 1: přečtěte výsledek první standardní kontroly.
+2. Minuta 2: popište druhou běžnou situaci.
+3. Minuta 3: odpovězte, jestli pravidlo fungovalo bez autora a staré historie.
+4. Minuta 4: určete výsledek druhé kontroly.
+5. Minuta 5: napište nejmenší opravu, pokud existuje.
+6. Minuta 6: zapište, co se výslovně neotevírá.
+7. Minuta 7: ukliďte dočasné pracovní stopy.
+8. Minuta 8: rozhodněte, jestli pravidlo přechází do dlouhodobého rytmu, nebo vzniká samostatná malá smyčka.
+
+Když se workshop začne měnit v diskusi o tom, jak by pravidlo vypadalo pro úplně jiný segment, zastavte ho. Druhá kontrola nemá rozšiřovat ambice pravidla. Má ověřit, jestli první uzavření funguje v běžném provozu. Nový segment je nové téma. Ano, i když má stejný název v kalendáři. Kalendář není architektura.
+
+### Checklist druhé standardní kontroly
+
+- Navazujeme na uzavřenou první standardní kontrolu, ne na otevřený seznam poznámek?
+- Máme druhou běžnou situaci, ne uměle vyrobený test?
+- Použil pravidlo někdo bez autora nebo bez starého vysvětlování?
+- Ověřili jsme přenositelnost mimo původní příklad?
+- Rozlišili jsme lokální doplnění, slabou přenositelnost a nový návratový signál?
+- U potvrzeného klidu nepřidáváme další mimořádnou kontrolu?
+- U lokálního doplnění měníme jen jedno pracovní místo?
+- U slabé přenositelnosti nejdřív popisujeme rozdíl situací, ne přepisujeme celé pravidlo?
+- U nového návratového signálu zakládáme samostatnou malou smyčku?
+- Je jasně napsané, co se výslovně neotevírá?
+- Uklidili jsme pracovní kopie, exporty, seznamy a soukromé poznámky, které už nemají účel?
+- Stačí pro další provoz kanonické místo, rozhodovací věta a případné lokální doplnění?
+- Ví tým, jestli pravidlo přechází do dlouhodobého rytmu, nebo má ještě jedno konkrétní ověření?
+
+Druhá standardní kontrola je test dospělosti pravidla. První kontrola často ještě nese energii původní opravy. Druhá už ukazuje, jestli pravidlo umí žít bez doprovodu. Pokud ano, pusťte ho do klidného rytmu. Pokud ne, opravte nejbližší místo nebo otevřete novou malou smyčku. Hlavně z druhé kontroly nedělejte další sklad historických poznámek. Těch už digitální svět vyrobil dost, fakt nemusíme přikládat.
+
 ## Pracovní log
 
+- 2026-06-25: Doplněna úvodní podkapitola o druhé standardní kontrole po uzavřené první kontrole: samostatnost pravidla, přenositelnost, klid pracovních stop, výsledné stavy, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-25: Doplněna úvodní podkapitola o uzavření první standardní kontroly po uzavření druhého běžného použití: uzavírací stavy, praktický příklad, propsání do kanonického místa, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-25: Doplněna úvodní podkapitola o první standardní kontrole po uzavření druhého běžného použití: kontrolní otázky, čtyři výsledky, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-06-25: Doplněna úvodní podkapitola o uzavření druhého běžného použití po uzavření prvního návratu z klidu: uzavírací stavy, propsání do kanonického místa, privacy-first úklid podkladů, karta, mini workshop a checklist.
