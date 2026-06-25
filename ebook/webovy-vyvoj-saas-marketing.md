@@ -254483,8 +254483,151 @@ Když se workshop začne rozšiřovat, položte jednoduchou otázku: "Uzavírám
 
 Uzavření první běžné kontroly má být krátké a rozhodné. Buď pravidlo dál běží v rytmu, nebo se lokálně dočistí, nebo se zpřesní jeho návratový signál, nebo se otevře nová malá smyčka. Jakmile je stav jasný, nechte pravidlo vrátit do práce. Dlouhodobý rytmus není o tom, že se věci pořád kontrolují. Je o tom, že se správné věci kontrolují ve správný okamžik a zbytek má konečně pokoj.
 
+## Druhá běžná kontrola po uzavřené první kontrole
+
+Druhá běžná kontrola je méně dramatická než první. A přesně proto je užitečná. První kontrola často ověřuje, jestli pravidlo vůbec přežilo návrat do provozu. Druhá kontrola už ukazuje něco cennějšího: jestli pravidlo funguje i ve chvíli, kdy kolem něj není čerstvá pozornost, nikdo ho zvlášť nehlídá a tým má zase běžný pracovní chaos. Tedy realita, ne slavnostní demo.
+
+Neotevírejte ji jen proto, že v kalendáři svítí další revize. Otevřete ji tehdy, když nastal domluvený rytmus nebo konkrétní návratový signál z uzavření první kontroly. Pokud první kontrola skončila stavem "pravidlo běží, další kontrola za měsíc", druhá kontrola nemá hledat novou strategii. Má odpovědět na jednu otázku:
+
+```text
+Použilo se pravidlo od poslední kontroly samostatně, bez mimořádné péče a bez nových vedlejších stop?
+```
+
+Ta otázka drží rozsah. Neptáte se, jestli by šlo pravidlo vylepšit, automatizovat, přepsat, rozšířit na další tým nebo přetavit do nového dashboardu. Ptáte se, jestli dál slouží v místě, pro které vzniklo. Pokud ano, druhá kontrola má být krátká. Pokud ne, má přesně pojmenovat tření, ale pořád neotevírat všechno najednou.
+
+Praktický příklad:
+
+```text
+Pravidlo:
+U relevantních poptávek obchod používá volitelnou větu v potvrzovacím e-mailu pro doplnění rámcového rozpočtu.
+
+Výsledek první kontroly:
+Věta pomohla u čtyř z pěti poptávek. Povinné pole ve formuláři zůstalo zavřené.
+
+Druhá běžná kontrola:
+Za další měsíc přišly tři relevantní poptávky. Obchod větu použil dvakrát bez připomínky. U třetí poptávky ji nepoužil, protože rozpočet byl jasný už ze zadání.
+```
+
+V takové situaci není potřeba zakládat další optimalizační projekt. Pravidlo funguje, protože ho člověk použil tehdy, kdy dávalo smysl, a nepoužil ho tehdy, kdy by bylo zbytečné. To je dobrý signál. Proces, který se umí nepoužít, když není potřeba, je často zdravější než proces, který se tváří povinně za každého počasí.
+
+### Co druhá kontrola ověřuje
+
+Druhá kontrola má tři vrstvy:
+
+- Samostatnost: lidé pravidlo najdou a použijí bez připomínání autora původní změny.
+- Přiměřenost: pravidlo pomáhá v pracovním místě, kde má pomáhat, a neroztahuje se do okolí.
+- Datová střídmost: nevznikly nové poznámky, exporty, štítky, pole nebo reporty, které nebyly součástí rozhodnutí.
+
+Samostatnost je nejdůležitější. Pokud pravidlo funguje jen tehdy, když je u toho člověk, který ho napsal, nejde ještě o pravidlo. Je to osobní nápověda s dobrým marketingem. Druhá kontrola má zjistit, jestli už práce stojí na systému, nebo pořád na paměti konkrétního člověka.
+
+Přiměřenost chrání před nenápadným růstem. Volitelná věta v e-mailu se nemá po měsíci proměnit v povinný formulář, interní scoring a nový report jen proto, že někomu jednou pomohla. Pokud se má pravidlo rozšířit, musí k tomu existovat nový důkaz a samostatná pracovní otázka.
+
+Datová střídmost je privacy-first pojistka. Druhá kontrola je dobrý okamžik podívat se, jestli po první kontrole nezůstaly dočasné poznámky, ruční tabulka nebo interní tagy. Když je nikdo nepotřeboval pro rozhodnutí, ukliďte je. Dlouhodobý provoz nemá být muzeum ověřovacích stop.
+
+### Čtyři výsledky druhé kontroly
+
+Po druhé kontrole vyberte jeden stav:
+
+- Pravidlo je stabilní: funguje samostatně, bez nových datových stop a bez zvláštní pozornosti.
+- Pravidlo potřebuje lokální zpřesnění: lidé ho našli, ale jedna věta, příklad nebo umístění mate.
+- Pravidlo je příliš těžké: používá se jen s námahou, vyžaduje dodatečné vysvětlování nebo vytváří ruční práci.
+- Objevil se nový problém: kontrola ukázala téma, které nesouvisí s původním pravidlem a zaslouží si vlastní kartu.
+
+Stav "pravidlo je stabilní" uzavřete bez další akce. Maximálně zapište datum a návratový signál. Stabilní věc nepotřebuje oslavu v podobě dalšího úkolu. Stačí ji nechat pracovat.
+
+Lokální zpřesnění držte opravdu lokální. Pokud se například ukáže, že obchod neví, kdy volitelnou rozpočtovou větu použít, doplňte do pracovního místa jednu rozhodovací větu: "Použij ji jen u poptávek, kde je rozsah jasný, ale chybí rámcový limit." To je dočištění, ne nový proces.
+
+Příliš těžké pravidlo je signál ke zjednodušení, ne k větší kontrole. Když lidé pravidlo obcházejí, nepřidávejte další povinný check. Zkraťte ho, přesuňte blíž k práci nebo z něj udělejte volitelnou pomůcku. Proces, který potřebuje hlídače, často není zralý proces. Je to jen dobře formátovaný problém.
+
+Nový problém oddělte. Pokud druhá kontrola rozpočtové věty ukáže, že lidé nerozumí rozdílu mezi typy služeb, není to důvod přepisovat pravidlo o rozpočtu. Je to nové téma pro stránku nabídky, sales materiál nebo onboarding poptávky.
+
+### Privacy-first kontrola bez nového sledování
+
+Druhá běžná kontrola svádí k větě: "Pojďme si to pro jistotu začít měřit." Opatrně. Pokud k rozhodnutí stačí projít několik přirozených pracovních stop, nepřidávejte novou analytiku. Nejlepší kontrola je často ta, která využije data, která už vznikají kvůli samotné práci: e-mailové vlákno, ticket, záznam rozhodnutí, ruční poznámku u obchodního hovoru.
+
+Použijte tři otázky:
+
+```text
+Jaký důkaz už přirozeně existuje?
+
+Stačí k rozhodnutí vzorek z běžné práce?
+
+Co bychom začali sbírat navíc a proč by to bylo oprávněné?
+```
+
+Pokud na třetí otázku neumíte odpovědět jednou konkrétní větou, nová evidence nevzniká. Ne proto, že data jsou špatná. Data bez rozhodnutí jsou špatná. To je rozdíl, který šetří čas, soukromí i nervy při úklidu.
+
+Codyho komentář: druhá kontrola je test dospělosti týmu. Nejde o to vymyslet další vylepšení, aby schůzka vypadala produktivně. Jde o to říct "funguje, necháme být" stejně sebevědomě jako "tady je potřeba malá oprava". Ticho po dobrém pravidle není nuda. Je to návratnost investice.
+
+### Karta druhé běžné kontroly
+
+```text
+Pravidlo nebo pracovní místo:
+
+Výsledek první kontroly:
+
+Domluvený rytmus nebo návratový signál:
+
+Co se od první kontroly reálně stalo:
+
+Použilo se pravidlo samostatně?
+- ano
+- částečně
+- ne
+
+Vznikla nová ruční práce nebo datová stopa?
+
+Výsledek druhé kontroly:
+- pravidlo je stabilní
+- pravidlo potřebuje lokální zpřesnění
+- pravidlo je příliš těžké
+- objevil se nový problém
+
+Co měníme v kanonickém pracovním místě:
+
+Co výslovně neotevíráme:
+
+Co mažeme, slučujeme nebo přestáváme sledovat:
+
+Další rytmus nebo návratový signál:
+
+Vlastník:
+```
+
+Karta má být krátká. Pokud k ní potřebujete dlouhou přílohu, pravděpodobně nekontrolujete pravidlo, ale řešíte nové téma. V takovém případě uzavřete kontrolu a nové téma založte zvlášť.
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: přečtěte výsledek první kontroly a domluvený rytmus.
+2. Minuta 2: napište, co se od té doby reálně stalo.
+3. Minuta 3: rozhodněte, jestli se pravidlo použilo samostatně.
+4. Minuta 4: ověřte, jestli nevznikla nová ruční práce nebo datová stopa.
+5. Minuta 5: vyberte jeden ze čtyř výsledků.
+6. Minuta 6: napište, co se mění a co se výslovně neotevírá.
+7. Minuta 7: určete další rytmus nebo návratový signál.
+
+Sedm minut stačí, pokud držíte otázku. Pokud nestačí, nejspíš se snažíte druhou kontrolou vyřešit víc než stabilitu pravidla. Zastavte to. Dlouhodobý rytmus má chránit práci před rozpliznutím, ne mu dávat hezký název.
+
+### Checklist druhé běžné kontroly
+
+- Vycházíme z výsledku první kontroly, ne z nového obecného pocitu?
+- Víme, jaký rytmus nebo návratový signál druhou kontrolu spustil?
+- Popsali jsme skutečné použití pravidla od poslední kontroly?
+- Ověřili jsme samostatnost bez připomínání autora změny?
+- Nepřidali jsme novou evidenci, pokud stačil přirozený pracovní důkaz?
+- Vybrali jsme přesně jeden výsledek druhé kontroly?
+- Pokud pravidlo funguje, umíme ho nechat být?
+- Pokud je potřeba lokální zpřesnění, zůstává opravdu v jednom pracovním místě?
+- Pokud je pravidlo příliš těžké, zjednodušujeme ho místo přidávání kontroly?
+- Pokud se objevil nový problém, oddělili jsme ho od původního pravidla?
+- Uklidili jsme dočasné poznámky, štítky, exporty nebo sledování?
+- Je další rytmus nebo návratový signál konkrétní?
+
+Druhá běžná kontrola má potvrdit, že pravidlo umí žít bez zvláštní pozornosti. Když to potvrdí, nechte ho v klidu běžet. Když ne, udělejte nejmenší opravu v místě, kde tření vzniklo. To je méně efektní než velká revize, ale podstatně užitečnější pro web, SaaS i tým, který chce pracovat bez zbytečných datových stínů.
+
 ## Pracovní log
 
+- 2026-06-25: Doplněna úvodní podkapitola o druhé běžné kontrole po uzavřené první kontrole: samostatnost pravidla, přiměřenost, privacy-first kontrola bez nového sledování, karta, mini workshop a checklist.
 - 2026-06-25: Doplněna úvodní podkapitola o uzavření první běžné kontroly v dlouhodobém rytmu: uzavírací stavy, praktický příklad, práce s rytmem, privacy-first úklid datové stopy, karta, mini workshop a checklist.
 - 2026-06-25: Doplněna úvodní podkapitola o uzavření návratu k neotevřenému kroku: čtyři uzavírací stavy, praktický příklad, privacy-first úklid dočasné datové stopy, karta, mini workshop a checklist.
 - 2026-06-25: Doplněna úvodní podkapitola o první běžné kontrole v dlouhodobém rytmu: ověření pravidla v reálné práci, čtyři výsledky kontroly, praktický příklad, privacy-first kontrola bez nového sledování, karta, mini workshop a checklist.
