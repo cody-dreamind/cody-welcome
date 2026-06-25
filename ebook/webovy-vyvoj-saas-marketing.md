@@ -255134,8 +255134,201 @@ Pokud se tým během workshopu začne vracet k celé historii pravidla, zastavte
 
 První návrat z klidového režimu je test, jestli tým věří vlastním hranicím. Dobře napsané pravidlo nemá zabránit reakci na realitu. Má zabránit reakci na každý šum. Když návratový signál nenastal, klid pokračuje. Když nastal lokálně, otevřete malé místo. Když změnil realitu, vraťte se ke kontextu. Všechno ostatní je většinou jen stará debata v novém kabátě.
 
+## Uzavření prvního návratu z klidového režimu
+
+První návrat z klidového režimu je potřeba zavřít stejně pečlivě, jako se otevíral. Nestačí říct "vyřešeno" nebo "necháme být". Tým musí vědět, jestli klid opravdu pokračuje, jestli vznikla lokální oprava, nebo jestli se pravidlo posouvá do nové kontextové kontroly. Bez uzavření se z prvního návratu stane šedá zóna: někdo si pamatuje podnět, někdo lokální krok, někdo starou debatu a nikdo přesně neví, co odteď platí.
+
+Uzavírací věta má být krátká:
+
+```text
+První návrat z klidu uzavíráme takto:
+```
+
+A za ní musí následovat jeden ze tří praktických závěrů:
+
+```text
+Klid pokračuje, protože návratový signál nenastal.
+```
+
+```text
+Klid pokračuje s lokální opravou v jednom pracovním místě.
+```
+
+```text
+Klid končí a otevíráme kontrolu kontextu, protože se změnila realita kolem pravidla.
+```
+
+Tahle věta je důležitější než delší rozbor. Při dalším návratu se tým nebude ptát, kdo měl jaký pocit. Uvidí stav. A stav je v provozu často užitečnější než krásná argumentace, která se po dvou týdnech změní v mlhavou legendu z kalendářové pozvánky.
+
+### Tři uzavírací stavy
+
+První stav je `klid pokračuje`. Použijte ho, když podnět byl reálný, ale nedosáhl domluvené hranice. Do záznamu patří konkrétní důvod, proč se klid neotevřel. Například jedna slabší poptávka nestačí, pokud návratový signál mluví o dvou relevantních poptávkách za sebou. Zároveň napište, že nepřidáváte nové pole, měření, export ani ruční kontrolní tabulku.
+
+Druhý stav je `lokální oprava`. Použijte ho, když návratový signál nastal, ale problém se ukázal v jednom pracovním místě. Oprava má zůstat tam: v potvrzovacím e-mailu, jedné šabloně, jednom onboardingovém kroku, jednom obchodním skriptu nebo jedné interní poznámce. Klidové pravidlo se tím nemění celé. Jen dostane malou lokální oporu.
+
+Třetí stav je `kontrola kontextu`. Použijte ho, když návratový signál ukazuje, že pravidlo možná vzniklo pro jiný svět: jiný segment, jinou nabídku, jiný provoz, jiného vlastníka nebo jinou datovou realitu. V takovém případě neopravujte pravidlo rovnou. Nejdřív zkontrolujte, co se změnilo. Jinak byste mohli jen přelepit staré rozhodnutí novou výjimkou.
+
+Codyho komentář: pokud se tým při uzavření nemůže shodnout na jednom z těchto tří stavů, pravděpodobně neuzavírá návrat, ale znovu otevírá strategii. To se může stát. Jen tomu neříkejte "rychlé dočištění". Rychlé dočištění, které potřebuje půl hodiny filozofie, je normálně schovaná nová práce. Překvapivé asi jako faktura za "malou úpravu".
+
+### Praktický příklad
+
+Kanonické pravidlo v klidu:
+
+```text
+Rozpočet doptáváme ve follow-upu, ne v prvním formuláři.
+```
+
+Návratový signál:
+
+```text
+Dvě relevantní poptávky za sebou nepůjdou kvalifikovat bez stejného ručního doptání na rozpočet.
+```
+
+První podnět:
+
+```text
+Jedna relevantní poptávka neobsahovala rozpočet a obchod musel poslat doplňující otázku.
+```
+
+Uzavření:
+
+```text
+Stav:
+Klid pokračuje.
+
+Proč:
+Návratový signál nenastal. Máme jednu relevantní poptávku, ne dvě za sebou.
+
+Co neměníme:
+Nepřidáváme rozpočet do formuláře, nezavádíme lead scoring a nevytváříme novou tabulku pro sledování rozpočtů.
+
+Co ponecháváme:
+Poznámku u konkrétního obchodního vlákna. Do rozhodovací paměti zapisujeme jen zobecněný závěr.
+
+Nový stav pravidla:
+Pravidlo zůstává v klidovém režimu beze změny.
+```
+
+Jiný výsledek:
+
+```text
+Stav:
+Lokální oprava.
+
+Proč:
+Návratový signál nastal u dvou relevantních poptávek a obě se zasekly v potvrzovací zprávě, ne ve formuláři.
+
+Co měníme:
+Do potvrzovací zprávy přidáváme jednu volitelnou větu k rámcovému rozpočtu nebo rozhodovacímu limitu.
+
+Co neměníme:
+Formulář, CRM atributy, scoring ani marketingové automatizace.
+
+Ověření:
+U dalších tří relevantních poptávek sledujeme pouze to, zda potvrzovací věta ušetřila stejné ruční doptání.
+```
+
+V obou příkladech je uzavření užitečné, protože brání tichému rozšíření rozsahu. První výsledek nechá klid běžet. Druhý dovolí malou opravu, ale nenechá ji předstírat, že je novou strategií kvalifikace leadů.
+
+### Privacy-first uzavření
+
+Uzavření prvního návratu z klidu musí vždy uklidit datovou stopu. První návrat často pracuje s konkrétními obchodními vlákny, supportními zprávami, poznámkami nebo ručním ověřením. Tyto podklady jsou užitečné pro rozhodnutí, ale nemají se automaticky stát novou vrstvou evidence.
+
+Použijte tři řádky:
+
+```text
+Pro rozhodnutí jsme použili:
+
+Do běžného provozu nepřenášíme:
+
+Po uzavření zůstává jen:
+```
+
+Příklad:
+
+```text
+Pro rozhodnutí jsme použili:
+Zobecněné shrnutí dvou obchodních vláken.
+
+Do běžného provozu nepřenášíme:
+Kopie e-mailů, nový atribut rozpočtu, event otevření zprávy ani samostatný export poptávek.
+
+Po uzavření zůstává jen:
+Jedna věta v rozhodovacím logu a upravená potvrzovací šablona.
+```
+
+Tohle je malý zápis, ale má velkou hodnotu. Ukazuje, že tým umí reagovat na signál bez toho, aby si kvůli každé reakci vytvořil další datový závazek. Privacy-first provoz není asketismus. Je to schopnost říct: pro rozhodnutí stačil závěr, nepotřebujeme si nechávat celý původní materiál jako suvenýr.
+
+### Karta uzavření prvního návratu z klidu
+
+```text
+Téma:
+
+Kanonické pravidlo v klidovém režimu:
+
+Domluvený návratový signál:
+
+Aktuální podnět:
+
+Uzavírací stav:
+- klid pokračuje
+- lokální oprava
+- kontrola kontextu
+
+Proč tento stav:
+
+Co se mění:
+
+Co zůstává beze změny:
+
+Co výslovně neotevíráme:
+
+Jaká data nebo pracovní stopy jsme použili:
+
+Co do běžného provozu nepřenášíme:
+
+Co po uzavření zůstává jako jediný záznam:
+
+Nový nebo potvrzený návratový signál:
+
+Vlastník:
+
+Datum další kontroly, pokud existuje:
+```
+
+Karta má být krátká. Pokud se začne plnit jako projektový plán, návrat už přerostl klidový režim a zaslouží si vlastní iteraci. Dobré uzavření má hlavně potvrdit stav pravidla a uklidit dočasné stopy.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte kanonické pravidlo, návratový signál a aktuální podnět.
+2. Minuta 2: vyberte jeden uzavírací stav.
+3. Minuta 3: napište, co se mění a co zůstává beze změny.
+4. Minuta 4: napište, co výslovně neotevíráte.
+5. Minuta 5: proveďte privacy-first úklid použitých podkladů.
+6. Minuta 6: potvrďte návratový signál nebo určete, že další kontrola není potřeba.
+
+Když se šest minut protáhne, zastavte se u otázky, který stav vlastně vybíráte. Nejčastější příčina natahování není složitý zápis, ale neochota říct, že klid pokračuje. Tým má někdy pocit, že když už se podnět objevil, musí se "něco udělat". Nemusí. Někdy je nejprofesionálnější výsledek přesně zapsané nic navíc.
+
+### Checklist uzavření prvního návratu z klidu
+
+- Vybrali jsme přesně jeden uzavírací stav?
+- Je jasné, proč klid pokračuje, vzniká lokální oprava, nebo se otevírá kontrola kontextu?
+- Napsali jsme, co se mění?
+- Napsali jsme, co zůstává beze změny?
+- Je výslovně uvedené, co neotevíráme?
+- Nezměnili jsme kanonické pravidlo jen kvůli jednomu slabému podnětu?
+- Pokud vznikla lokální oprava, zůstává v jednom pracovním místě?
+- Pokud se mění realita, otevíráme kontrolu kontextu místo rychlé záplaty?
+- Uklidili jsme dočasné poznámky, kopie, exporty nebo ruční sledování?
+- Stačí pro rozhodovací paměť zobecněný závěr místo osobních detailů?
+- Je potvrzený návratový signál pro další otevření?
+- Ví vlastník, jestli má hlídat další kontrolu, nebo pravidlo zůstává v klidu bez mimořádné péče?
+
+Uzavření prvního návratu z klidového režimu je malá pojistka proti tomu, aby se klid změnil v trvalou polopohotovost. Tým tím získá jasný stav, menší datovou stopu a lepší důvěru ve vlastní hranice. A to je přesně provozní typ zralosti, který se špatně prodává v prezentaci, ale velmi dobře funguje v úterý odpoledne, když někdo navrhne "jen pro jistotu" další tabulku.
+
 ## Pracovní log
 
+- 2026-06-25: Doplněna úvodní podkapitola o uzavření prvního návratu z klidového režimu: tři uzavírací stavy, praktické příklady, privacy-first úklid podkladů, karta, mini workshop a checklist.
 - 2026-06-25: Doplněna úvodní podkapitola o prvním návratu z klidového režimu: rozlišení podnětu a návratového signálu, lokální otevření, kontrola změněné reality, privacy-first práce bez nového sledování, karta, mini workshop a checklist.
 - 2026-06-25: Doplněna úvodní podkapitola o převodu po druhé běžné kontrole do klidového režimu: typy převodu, kanonické pravidlo, návratový signál, negativní věta proti novému dohledu, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-25: Doplněna úvodní podkapitola o uzavření druhé běžné kontroly po uzavřené první kontrole: uzavírací stavy, praktický příklad, propsání do kanonického místa, privacy-first úklid, karta, mini workshop a checklist.
