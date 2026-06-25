@@ -254310,8 +254310,182 @@ Když workshop nemá žádný skutečný průchod, nenuťte ho. Zapište, že ko
 
 První běžná kontrola je dobrá, když po ní tým nemá víc práce, než měl před ní, pokud k tomu nepřišel skutečný důvod. Pravidlo buď dál tiše funguje, dostane malou lokální opravu, má přesnější návratový signál, nebo se otevře úzká smyčka s jasným důkazem. Všechno ostatní je jen chuť ještě chvíli sahat na systém, který už možná dělá přesně to, co má.
 
+## Uzavření první běžné kontroly v dlouhodobém rytmu
+
+První běžná kontrola sama o sobě nestačí. Její hodnota vznikne až ve chvíli, kdy tým jasně řekne, co se po kontrole stává s pravidlem, rytmem a pracovními stopami. Bez uzavření zůstane kontrola viset jako malý otevřený závazek. Nikdo přesně neví, jestli pravidlo funguje, jestli se má vrátit do klidu, jestli vznikla lokální oprava, nebo jestli se jen odložila debata na příště.
+
+Uzavření začněte jednou větou:
+
+```text
+První běžnou kontrolu uzavíráme takto:
+```
+
+Do věty doplňte výsledek, další stav rytmu a hranici datové stopy. Například:
+
+```text
+První běžnou kontrolu uzavíráme takto:
+Pravidlo se použilo v jedné relevantní poptávce bez otevření staré historie, rytmus ponecháváme beze změny a z kontrolního zápisu necháváme jen agregovanou poznámku v měsíčním review.
+```
+
+Nebo:
+
+```text
+První běžnou kontrolu uzavíráme takto:
+Pravidlo je správné, ale člověk sáhl po staré kopii v osobních poznámkách, proto mažeme kopii, doplňujeme aktivní větu do sales karty a neotevíráme formulář ani nový report.
+```
+
+Dobrá uzavírací věta má tři části: co se opravdu stalo, co se teď mění nebo nemění a jaká stopa po kontrole zůstane. Pokud některá část chybí, tým si ji domyslí. A domýšlení je v provozu drahé, protože každý člověk si stejný tichý závěr přeloží trochu jinak.
+
+### Čtyři uzavírací stavy
+
+Po první běžné kontrole vyberte jeden ze čtyř uzavíracích stavů:
+
+- Vrátit do rytmu beze změny: pravidlo funguje nebo se zatím nepotkalo s relevantní situací.
+- Uzavřít lokální dočištění: pravidlo je správné, ale upravilo se jedno pracovní místo.
+- Potvrdit zpřesněný návratový signál: hlavní pravidlo zůstává, mění se jen spouštěč budoucího návratu.
+- Otevřít samostatnou malou smyčku: kontrola ukázala nový konkrétní důkaz, který už nepatří do běžného uzavření.
+
+`Vrátit do rytmu beze změny` je nejlehčí stav. Zapište, že kontrola nevyvolala změnu, a vraťte pravidlo do průběžného, periodického nebo signálního režimu. Nepřidávejte další připomínku jen proto, že kontrola proběhla. Když se nic důležitého nezměnilo, největší hodnota je nechat systém klidně běžet.
+
+`Uzavřít lokální dočištění` použijte, když kontrola našla malé tření: starou kopii, špatně umístěnou větu, nejasný odkaz, duplicitní šablonu nebo příliš dlouhou formulaci. Lokální dočištění má skončit ve stejném pracovním místě, kde vzniklo. Pokud obchodník hledal pravidlo v osobních poznámkách, neznamená to, že máte přepsat celý obchodní proces. Znamená to, že kanonická karta má být snazší než osobní zkratka.
+
+`Potvrdit zpřesněný návratový signál` se hodí, když pravidlo funguje, ale tým při kontrole zjistil, že neví přesně, kdy ho znovu otevřít. V takovém případě neměňte pravidlo. Změňte jen budoucí spouštěč. Místo "když se opakuje problém s rozpočtem" napište "když dvě relevantní poptávky za sebou nejdou kvalifikovat bez stejného ručního doptání na rozpočet".
+
+`Otevřít samostatnou malou smyčku` použijte jen tehdy, když kontrola přinesla konkrétní nový důkaz. Důkaz musí být natolik jasný, že by obstál i bez nálady z review. Například dvě po sobě jdoucí situace, kde pravidlo vedlo k chybné odpovědi, nebo jedno opakované tření, které nejde opravit přesunutím věty. V takové chvíli uzavřete první běžnou kontrolu a nové téma založte zvlášť. Nemíchejte závěr kontroly s novým problémem.
+
+### Praktický příklad uzavření
+
+```text
+Pravidlo:
+Doplňující otázky na rozpočet patří až do follow-upu, ne do prvního formuláře.
+
+První běžná kontrola:
+V měsíčním review se objevily dvě relevantní poptávky. U jedné se pravidlo použilo správně. U druhé obchodník našel starou kopii odpovědi v osobních poznámkách a málem podle ní navrhl nové pole ve formuláři.
+
+Uzavírací stav:
+Uzavřít lokální dočištění.
+
+Co měníme:
+Mažeme starou kopii v osobních poznámkách a do sales karty doplňujeme jednu aktivní větu: "Rozpočet doptáváme ve follow-upu, ne v prvním formuláři."
+
+Co zůstává beze změny:
+Dlouhodobý rytmus zůstává průběžný se stručnou kontrolou v měsíčním review.
+
+Co výslovně neotevíráme:
+Formulář, lead scoring, nový report rozpočtů ani export poptávek.
+
+Privacy-first uzavření:
+Do rozhodovacího logu zapisujeme jen zobecněnou poznámku, že byla odstraněna stará kopie. Neuchováváme obsah konkrétní poptávky ani osobní pracovní poznámku.
+```
+
+Příklad je malý, ale v tom je jeho síla. Kontrola zachytila chování, které by časem mohlo vytvořit paralelní proces. Uzavření ho vrátilo do kanonického místa a zároveň odmítlo větší změnu, která by přidala data i práci. Přesně tak má první běžná kontrola zestárnout: jako drobný zásah, který zabránil zbytečnému rozvětvení.
+
+### Co se má po uzavření stát s rytmem
+
+Po uzavření napište, jestli se dlouhodobý rytmus mění. Většinou by se měnit neměl. První kontrola je často jen důkaz, že pravidlo umí žít mimo projektový režim. Změna rytmu má smysl pouze tehdy, když kontrola ukázala, že původní rytmus neodpovídá realitě.
+
+Použijte jednu z vět:
+
+```text
+Rytmus ponecháváme beze změny.
+
+Rytmus ponecháváme, ale zpřesňujeme návratový signál.
+
+Rytmus dočasně zužujeme na jedno pracovní místo do dalšího běžného použití.
+
+Rytmus uzavíráme a otevíráme samostatnou malou smyčku.
+```
+
+Pozor na nenápadné zesílení rytmu. Když první kontrola najde malé tření, tým často přidá další kontrolu "pro jistotu". Jenže tím trestá pravidlo za to, že bylo vůbec kontrolované. Pokud stačí opravit kanonické místo, opravte kanonické místo. Nepřidávejte nový dohled.
+
+Codyho komentář: kontrola, která po sobě vždycky zanechá další kontrolu, není kontrola. Je to stroj na kalendářní špagety. A špagety v kalendáři jsou sice možná moderní kuchyně, ale mizerný provozní model.
+
+### Privacy-first uzavření bez datového ocasu
+
+První běžná kontrola často pracuje s drobnými pracovními stopami: poznámkou z review, příkladem z poptávky, odkazem na starou kopii, krátkým exportem nebo interní poznámkou člověka, který pravidlo použil. Tyto stopy nesmí po uzavření zůstat jen proto, že se zrovna hodily při kontrole.
+
+Při uzavření napište:
+
+```text
+Pro kontrolu jsme použili:
+
+Po uzavření ponecháváme:
+
+Po uzavření mažeme, slučujeme nebo zobecňujeme:
+```
+
+Pokud ponecháváte detailní údaj, napište proč. Pokud ho nepotřebujete pro další rozhodnutí, nechte v logu jen zobecněný závěr. U obchodních a produktových kontrol často stačí věta typu: "Jedna stará osobní kopie obešla kanonickou sales kartu." Nepotřebujete jméno zákazníka, celý e-mail, konkrétní částku ani screenshot. Důkaz má nést rozhodnutí, ne suvenýr z provozu.
+
+Privacy-first uzavření je zvlášť důležité u pravidel, která původně vznikla proto, aby tým nesbíral víc dat. Byla by slušná ironie, kdyby se kolem kontroly datově střídmého pravidla začaly hromadit nové kopie a exporty. Slušná ironie je dobrá do komentáře, horší do auditu.
+
+### Karta uzavření první běžné kontroly
+
+```text
+Téma:
+
+Pravidlo nebo standard:
+
+Dlouhodobý rytmus:
+
+Co ukázala první běžná kontrola:
+
+Uzavírací stav:
+- vrátit do rytmu beze změny
+- uzavřít lokální dočištění
+- potvrdit zpřesněný návratový signál
+- otevřít samostatnou malou smyčku
+
+Co se mění v kanonickém pracovním místě:
+
+Co zůstává beze změny:
+
+Co výslovně neotevíráme:
+
+Stav rytmu po uzavření:
+
+Pro kontrolu jsme použili:
+
+Po uzavření ponecháváme:
+
+Po uzavření mažeme, slučujeme nebo zobecňujeme:
+
+Vlastník:
+
+Další kontrola nebo návratový signál:
+```
+
+Karta má být závěrečná, ne živá nástěnka. Jakmile ji vyplníte, aktivní pravidlo má zůstat v kanonickém místě a kontrolní detaily se mají uklidit. Pokud se na kartu začnou lepit další poznámky, pravděpodobně jste otevřeli novou smyčku, ale bojíte se ji tak pojmenovat.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte výsledek první běžné kontroly.
+2. Minuta 2: vyberte jeden uzavírací stav.
+3. Minuta 3: napište, co se mění v kanonickém pracovním místě.
+4. Minuta 4: napište, co výslovně neotevíráte.
+5. Minuta 5: rozhodněte, jestli se mění rytmus nebo návratový signál.
+6. Minuta 6: ukliďte datovou stopu: co zůstává, co se maže, co se zobecňuje.
+
+Když se workshop začne rozšiřovat, položte jednoduchou otázku: "Uzavíráme kontrolu, nebo otevíráme nové téma?" Obě odpovědi jsou v pořádku. Špatně je jen dělat obojí v jedné mlhavé poznámce.
+
+### Checklist uzavření první běžné kontroly
+
+- Máme jednu uzavírací větu?
+- Vybrali jsme přesně jeden uzavírací stav?
+- Je jasné, jestli se pravidlo vrací do rytmu, nebo vzniká samostatná smyčka?
+- Pokud šlo jen o lokální dočištění, zůstala oprava v jednom pracovním místě?
+- Pokud se zpřesnil návratový signál, zůstalo hlavní pravidlo beze změny?
+- Pokud otevíráme malou smyčku, máme konkrétní nový důkaz?
+- Je zapsané, co výslovně neotevíráme?
+- Nepřidali jsme novou kontrolu jen kvůli pocitu jistoty?
+- Uklidili jsme pracovní stopy použité při kontrole?
+- Ponecháváme jen údaje, které mají jasný účel pro další rozhodnutí?
+- Je finální stav zapsaný tam, kde ho najde člověk při běžné práci?
+
+Uzavření první běžné kontroly má být krátké a rozhodné. Buď pravidlo dál běží v rytmu, nebo se lokálně dočistí, nebo se zpřesní jeho návratový signál, nebo se otevře nová malá smyčka. Jakmile je stav jasný, nechte pravidlo vrátit do práce. Dlouhodobý rytmus není o tom, že se věci pořád kontrolují. Je o tom, že se správné věci kontrolují ve správný okamžik a zbytek má konečně pokoj.
+
 ## Pracovní log
 
+- 2026-06-25: Doplněna úvodní podkapitola o uzavření první běžné kontroly v dlouhodobém rytmu: uzavírací stavy, praktický příklad, práce s rytmem, privacy-first úklid datové stopy, karta, mini workshop a checklist.
 - 2026-06-25: Doplněna úvodní podkapitola o uzavření návratu k neotevřenému kroku: čtyři uzavírací stavy, praktický příklad, privacy-first úklid dočasné datové stopy, karta, mini workshop a checklist.
 - 2026-06-25: Doplněna úvodní podkapitola o první běžné kontrole v dlouhodobém rytmu: ověření pravidla v reálné práci, čtyři výsledky kontroly, praktický příklad, privacy-first kontrola bez nového sledování, karta, mini workshop a checklist.
 - 2026-06-25: Doplněna úvodní podkapitola o přechodu do dlouhodobého rytmu po uzavřené druhé standardní kontrole: typy rytmu, aktivní pracovní věta, návratový signál, archivace, privacy-first omezení dat, karta, mini workshop a checklist.
