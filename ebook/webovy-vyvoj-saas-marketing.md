@@ -255326,8 +255326,161 @@ Když se šest minut protáhne, zastavte se u otázky, který stav vlastně vyb�
 
 Uzavření prvního návratu z klidového režimu je malá pojistka proti tomu, aby se klid změnil v trvalou polopohotovost. Tým tím získá jasný stav, menší datovou stopu a lepší důvěru ve vlastní hranice. A to je přesně provozní typ zralosti, který se špatně prodává v prezentaci, ale velmi dobře funguje v úterý odpoledne, když někdo navrhne "jen pro jistotu" další tabulku.
 
+## První běžné použití po uzavření prvního návratu z klidového režimu
+
+Po uzavření prvního návratu z klidového režimu přichází nenápadný, ale důležitý test: první běžné použití. Nejde o další mimořádnou kontrolu. Nejde ani o oslavné kolečko, že pravidlo "přežilo návrat". Jde o obyčejnou pracovní situaci, ve které se ukáže, jestli tým opravdu ví, co odteď platí.
+
+První běžné použití má proběhnout tam, kde pravidlo normálně žije: v poptávkovém formuláři, potvrzovacím e-mailu, obchodním follow-upu, onboardingovém kroku, supportní odpovědi nebo interním review. Pokud kvůli němu svoláváte speciální schůzku a vytahujete celou historii rozhodnutí, klidový režim se ještě nevrátil do provozu. Jen jste ho přejmenovali na "běžná agenda", což je oblíbený sport týmů, které mají rády pořádek hlavně v názvech.
+
+Začněte jednou větou:
+
+```text
+Po uzavřeném návratu používáme pravidlo běžně v tomto pracovním místě:
+```
+
+Do věty patří konkrétní místo, ne obecná oblast. "Obchod" je moc široké. "Potvrzovací e-mail po odeslání poptávky" už je pracovní místo. "Onboarding" je mlha. "První import dat po registraci" už se dá použít.
+
+### Co se při prvním běžném použití ověřuje
+
+Ověřují se tři věci:
+
+- Najitelnost: člověk najde aktuální pravidlo bez lovení ve starých poznámkách.
+- Rozhodnutelnost: pravidlo mu pomůže udělat dnešní rozhodnutí bez nové debaty.
+- Klid: použití nevyrobí novou datovou stopu, kontrolní tabulku nebo mimořádný reporting.
+
+Najitelnost je první filtr. Pokud tým neví, kde je aktuální znění pravidla, uzavření návratu nebylo dokončené. Možná existuje správná věta v logu, ale nežije v pracovním místě. To je častá chyba: rozhodnutí je zapsané, jen není tam, kde ho člověk potřebuje při práci.
+
+Rozhodnutelnost je druhý filtr. Pravidlo nemusí odpovědět na všechny budoucí otázky. Musí ale stačit pro dnešní situaci. Pokud člověk po přečtení pravidla pořád neví, jestli poptávku kvalifikovat přes follow-up, upravit šablonu, nebo znovu otevřít formulář, pravidlo je slabé. Ne široce špatné. Jen slabé v místě, kde se má používat.
+
+Klid je třetí filtr. Běžné použití nemá automaticky zapínat zvláštní dohled. Pokud někdo navrhne "budeme si teď pro jistotu všechny případy měsíc zapisovat", zeptejte se, jaké rozhodnutí tím chce udělat. Pokud odpověď není konkrétní, nejde o ověření. Je to nervozita převlečená za provozní disciplínu.
+
+### Praktický příklad
+
+Pravidlo po uzavřeném návratu:
+
+```text
+Rozpočet dál nedáváme do prvního formuláře. V potvrzovací zprávě zůstává volitelná věta k rámcovému rozpočtu nebo rozhodovacímu limitu.
+```
+
+První běžné použití:
+
+```text
+Přišla nová relevantní poptávka. Formulář neobsahuje rozpočet. Potvrzovací zpráva odešla s volitelnou větou.
+```
+
+Dobré uzavření použití:
+
+```text
+Pravidlo bylo najitelné v šabloně potvrzovací zprávy. Obchod nemusel otevírat starou debatu o povinném poli. Nepřidáváme nový atribut, scoring ani tabulku. Poptávku kvalifikujeme běžným follow-upem, pokud zákazník rozpočet sám nedoplní.
+```
+
+Slabé uzavření použití:
+
+```text
+Pravidlo jsme našli až ve starém logu. Šablona potvrzovací zprávy měla starou verzi. Pro jistotu si budeme měsíc ručně zapisovat všechny poptávky bez rozpočtu.
+```
+
+Druhý zápis je užitečný právě proto, že není hezký. Ukazuje, kde je problém: ne v principu pravidla, ale v jeho propsání do pracovního místa. Oprava proto nemá znít "otevřeme celou otázku rozpočtu". Má znít "aktualizujeme šablonu a smažeme starou variantu".
+
+### Čtyři výsledky prvního běžného použití
+
+První výsledek je `běžně použito`. Pravidlo bylo na správném místě, člověk podle něj rozhodl a nevznikla nová mimořádná agenda. Zapište jednu větu do pracovního logu jen tehdy, pokud je to součást běžného rytmu. Jinak není potřeba nic dalšího. Klid znamená i schopnost nepřidat záznam tam, kde nepřináší hodnotu.
+
+Druhý výsledek je `slabá najitelnost`. Pravidlo je správné, ale není v pracovním místě. Otevřete lokální opravu navigace: odkaz, šablonu, poznámku u procesu, pojmenování dokumentu nebo odstranění staré kopie. Nerozšiřujte obsah pravidla jen proto, že ho někdo nenašel.
+
+Třetí výsledek je `slabá rozhodnutelnost`. Pravidlo je najitelné, ale člověk podle něj neumí rozhodnout dnešní okrajový případ. Opravte hranu pravidla jednou větou nebo přidejte jeden příklad. Neotevírejte znovu celý návrat, pokud nejde o návratový signál.
+
+Čtvrtý výsledek je `skrytá mimořádná péče`. Pravidlo se sice použilo, ale jen díky tomu, že někdo ručně hlídal situaci, připomněl kontext nebo vedl bokem pomocnou evidenci. To je varování. Neznamená hned, že pravidlo selhalo. Znamená to, že se ještě nevrátilo do normálního provozu.
+
+### Privacy-first kontrola
+
+První běžné použití po návratu je přesně chvíle, kdy se z dočasné opatrnosti může stát trvalé sledování. Proto položte tři otázky:
+
+```text
+Použili jsme jen data, která už vznikají v běžném procesu?
+
+Vznikla kvůli použití nová kopie, export, tag, atribut, event nebo ruční tabulka?
+
+Umíme výsledek zapsat bez osobních detailů a bez kopírování původních zpráv?
+```
+
+Pokud odpověď na druhou otázku zní ano, napište proč. Někdy je krátká dočasná evidence oprávněná, ale musí mít konec, vlastníka a rozhodovací účel. Bez toho je to jen malý datový dluh. A malé datové dluhy mají protivný zvyk vyrůst v provozní plevel, který pak nikdo nechce vytrhat, protože "už tam přece je".
+
+Praktický privacy-first zápis:
+
+```text
+Pro první běžné použití jsme použili běžnou poptávku a existující potvrzovací šablonu. Nevytváříme export poptávek bez rozpočtu, nový CRM atribut ani měření otevření e-mailu. Do rozhodovací paměti stačí zobecněná věta: šablona byla najitelná a pravidlo šlo použít bez mimořádné podpory.
+```
+
+### Karta prvního běžného použití po uzavřeném návratu
+
+```text
+Téma:
+
+Pravidlo po uzavřeném návratu:
+
+Pracovní místo běžného použití:
+
+Dnešní situace:
+
+Výsledek použití:
+- běžně použito
+- slabá najitelnost
+- slabá rozhodnutelnost
+- skrytá mimořádná péče
+
+Co člověk našel bez pomoci:
+
+Jaké rozhodnutí pravidlo umožnilo:
+
+Co bylo potřeba dovysvětlit, pokud něco:
+
+Co se mění, pokud něco:
+
+Co výslovně neotevíráme:
+
+Jaká data jsme použili:
+
+Jaká nová data, exporty, tagy nebo trackery nepřidáváme:
+
+Co po použití smažeme, sloučíme nebo necháme v původním systému:
+
+Vlastník lokální opravy, pokud existuje:
+
+Datum další běžné kontroly, pokud existuje:
+```
+
+Karta nemá vznikat pokaždé. Použijte ji hlavně tehdy, když první běžné použití odhalí slabou najitelnost, slabou rozhodnutelnost nebo skrytou mimořádnou péči. Pokud pravidlo prostě funguje, nechte ho fungovat. To je vzácný a krásně nudný stav.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: pojmenujte pracovní místo běžného použití.
+2. Minuta 2: přečtěte aktuální znění pravidla po uzavřeném návratu.
+3. Minuta 3: ověřte najitelnost bez staré historie.
+4. Minuta 4: ověřte, jaké rozhodnutí pravidlo umožnilo.
+5. Minuta 5: proveďte privacy-first kontrolu datové stopy.
+6. Minuta 6: vyberte výsledek a případnou jednu lokální opravu.
+
+Pokud workshop vyrobí víc než jednu opravu, vyberte tu nejbližší pracovnímu místu. První běžné použití nemá být úklid celého systému. Má potvrdit, že pravidlo po návratu opravdu přešlo zpátky do práce.
+
+### Checklist prvního běžného použití
+
+- Použili jsme pravidlo v reálném pracovním místě, ne na speciální schůzce?
+- Našel člověk aktuální znění bez starých poznámek?
+- Pomohlo pravidlo udělat dnešní rozhodnutí?
+- Nevznikla nová debata o celém původním tématu?
+- Pokud něco drhlo, víme, jestli šlo o najitelnost, rozhodnutelnost nebo skrytou mimořádnou péči?
+- Opravujeme nejbližší pracovní místo místo celé historie?
+- Je jasné, co výslovně neotevíráme?
+- Nepřidali jsme nový tracker, export, CRM atribut, ruční tabulku ani dlouhou retenční stopu?
+- Stačí pro paměť zobecněný závěr místo kopie konkrétní komunikace?
+- Ví tým, jestli pravidlo zůstává v klidu, potřebuje lokální opravu, nebo čeká na další běžnou kontrolu?
+
+První běžné použití po uzavřeném návratu má být nudné. Pokud je dramatické, něco ještě není propsané do provozu. Dobrá zpráva: to není katastrofa, jen malý ukazatel práce. Opravte nejbližší místo, ukliďte dočasné stopy a nechte pravidlo znovu dělat to, kvůli čemu existuje: pomáhat rozhodnout bez zbytečné debaty a bez zbytečných dat.
+
 ## Pracovní log
 
+- 2026-06-25: Doplněna úvodní podkapitola o prvním běžném použití po uzavření prvního návratu z klidového režimu: najitelnost, rozhodnutelnost, klid bez mimořádné péče, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-06-25: Doplněna úvodní podkapitola o uzavření prvního návratu z klidového režimu: tři uzavírací stavy, praktické příklady, privacy-first úklid podkladů, karta, mini workshop a checklist.
 - 2026-06-25: Doplněna úvodní podkapitola o prvním návratu z klidového režimu: rozlišení podnětu a návratového signálu, lokální otevření, kontrola změněné reality, privacy-first práce bez nového sledování, karta, mini workshop a checklist.
 - 2026-06-25: Doplněna úvodní podkapitola o převodu po druhé běžné kontrole do klidového režimu: typy převodu, kanonické pravidlo, návratový signál, negativní věta proti novému dohledu, privacy-first úklid, karta, mini workshop a checklist.
