@@ -254965,8 +254965,178 @@ Když během workshopu někdo navrhne nový pravidelný report, vraťte se k ot�
 
 Převod do klidového režimu je dobrý konec malé provozní smyčky. Pravidlo má místo, signál a paměť. Nemá kolem sebe nový dohled, nové měření ani novou administrativu. Tým tím získá něco nenápadného, ale cenného: funkční pravidlo, které nevyžaduje pozornost, dokud se realita opravdu nezmění.
 
+## První návrat z klidového režimu
+
+Klidový režim není kouzelný trezor. Dřív nebo později přijde podnět, který vypadá jako důvod znovu otevřít pravidlo: nová poptávka se zasekla, zákazník se zeptal na starou věc, obchodní tým narazil na výjimku nebo někdo navrhne "jen malou úpravu". První návrat z klidu rozhoduje, jestli tým umí pravidlo používat dospěle, nebo jestli každé zaklepání promění v další kontrolní kolečko.
+
+Začněte tím, že neotevřete historii. Otevřete návratový signál. To je zásadní rozdíl. Historie vysvětlí, proč pravidlo existuje, ale návratový signál říká, kdy se smí znovu pracovat. Pokud podnět návratový signál nesplňuje, není to návrat z klidu. Je to poznámka, výjimka nebo nové téma.
+
+První věta má znít:
+
+```text
+Klidový režim znovu posuzujeme, protože se objevil tento návratový signál:
+```
+
+Pokud tu větu neumíte doplnit konkrétním pozorováním, nepokračujte do implementace. Napište jen:
+
+```text
+Podnět zaznamenáváme, ale klidový režim neotevíráme, protože návratový signál nenastal.
+```
+
+To není odmítnutí reality. To je ochrana před tím, aby se z každé zajímavé výjimky stal nový pracovní režim.
+
+### Tři typy prvního návratu
+
+První návrat z klidu obvykle spadá do jedné ze tří kategorií:
+
+- Signál nenastal: podnět je reálný, ale nesplňuje domluvenou hranici pro otevření.
+- Signál nastal lokálně: pravidlo zadrhlo v jednom pracovním místě a stačí nejmenší oprava.
+- Signál mění realitu: opakovaně se ukazuje, že pravidlo už neodpovídá dnešní nabídce, publiku, provozu nebo datům.
+
+U první kategorie jen zapište podnět a nechte klid běžet. Například jedna poptávka bez rozpočtu není důvod přidat povinné pole, pokud návratový signál říká "dvě relevantní poptávky za sebou nepůjdou kvalifikovat bez stejného ručního doptání".
+
+U druhé kategorie otevřete nejbližší pracovní místo. Pokud se zadrhla jedna šablona e-mailu, neopravujte formulář, CRM ani homepage. Opravte šablonu a ověřte, jestli tím návrat končí.
+
+U třetí kategorie nezkoušejte pravidlo rychle zalepit. Nejdřív proveďte kontrolu přeneseného kontextu: zda pořád platí segment, nabídka, vlastník, pracovní místo a důkaz. Pokud se změnil svět kolem pravidla, neřešíte lokální návrat, ale nový výchozí bod.
+
+### Praktický příklad
+
+Klidové pravidlo:
+
+```text
+Rozpočet doptáváme ve follow-upu, ne v prvním formuláři.
+```
+
+Návratový signál:
+
+```text
+Dvě relevantní poptávky za sebou nepůjdou kvalifikovat bez stejného ručního doptání na rozpočet.
+```
+
+Podnět:
+
+```text
+Jedna nová poptávka neobsahovala rozpočet a obchod musel dopsat doplňující otázku.
+```
+
+Závěr:
+
+```text
+Klidový režim neotevíráme. Návratový signál nenastal, protože jde o jednu poptávku. Nepřidáváme pole do formuláře, nový tag v CRM ani ruční tabulku. Podnět necháváme jen jako poznámku u obchodního vlákna.
+```
+
+Jiný podnět:
+
+```text
+Dvě relevantní poptávky za sebou nešlo kvalifikovat bez stejného doptání na rozpočet a obě se zasekly v potvrzovací zprávě.
+```
+
+Závěr:
+
+```text
+Klidový režim otevíráme lokálně. Neměníme formulář. Otevíráme jen potvrzovací zprávu a zkusíme jednu jasnější volitelnou větu k rámcovému rozpočtu. Ověření proběhne na dalších třech relevantních poptávkách.
+```
+
+V obou příkladech tým reaguje na realitu, ale nevyrábí automaticky další sběr dat. První výsledek nechává klid být. Druhý otevře malý krok. Ani jeden nepotřebuje velký návrat staré debaty.
+
+### Privacy-first návrat z klidu
+
+První návrat z klidu je citlivý, protože pokušení přidat dohled je velké. Tým si řekne: "Když už se to jednou vrátilo, raději to začneme sledovat." Jenže návratový signál už je sledování. Pokud je dobře napsaný, nepotřebujete k němu nový tracker, export ani dashboard.
+
+Při prvním návratu napište:
+
+```text
+Pro posouzení návratu použijeme:
+
+Kvůli návratu nezačínáme sbírat:
+
+Po uzavření návratu smažeme, sloučíme nebo necháme v původním systému:
+```
+
+Příklad:
+
+```text
+Pro posouzení návratu použijeme:
+Anonymizované shrnutí dvou obchodních vláken.
+
+Kvůli návratu nezačínáme sbírat:
+Samostatný rozpočtový atribut, event otevření potvrzovacího e-mailu ani export poptávek do nové tabulky.
+
+Po uzavření návratu smažeme, sloučíme nebo necháme v původním systému:
+Pomocné poznámky z vyhodnocení sloučíme do jedné věty v rozhodovacím logu; původní obchodní vlákna nekopírujeme.
+```
+
+Tím se z návratu nestane nenápadný začátek nového datového režimu. Klid může být přerušený, ale pořád zůstává privacy-first.
+
+### Karta prvního návratu z klidového režimu
+
+```text
+Téma:
+
+Kanonické pravidlo v klidu:
+
+Domluvený návratový signál:
+
+Aktuální podnět:
+
+Návratový signál nastal?
+- ne
+- ano, lokálně
+- ano, mění realitu
+
+Nejbližší pracovní místo, pokud návrat otevíráme:
+
+Co výslovně neotevíráme:
+
+Nejmenší krok, pokud existuje:
+
+Jak poznáme, že krok stačil:
+
+Pro posouzení použijeme:
+
+Kvůli návratu nezačínáme sbírat:
+
+Co po uzavření smažeme, sloučíme nebo necháme v původním systému:
+
+Vlastník:
+
+Datum kontroly:
+```
+
+Karta je záměrně přísná. Neptá se "co všechno bychom mohli zlepšit". Ptá se, jestli klidový režim opravdu dostal důvod skončit. Pokud ne, nejlepší výsledek je krátký zápis a žádná práce navíc.
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: přečtěte kanonické pravidlo a návratový signál.
+2. Minuta 2: popište aktuální podnět jednou větou.
+3. Minuta 3: rozhodněte, jestli návratový signál nastal.
+4. Minuta 4: pokud nastal, určete nejbližší pracovní místo.
+5. Minuta 5: napište, co výslovně neotevíráte.
+6. Minuta 6: proveďte privacy-first kontrolu datové stopy.
+7. Minuta 7: zapište stav: neotevřít, otevřít lokální krok, nebo provést kontrolu kontextu.
+
+Pokud se tým během workshopu začne vracet k celé historii pravidla, zastavte to. Historie patří do rozhodovací paměti, ne do každého návratu. První návrat má porovnat dnešní podnět s domluveným signálem a vybrat nejmenší odpověď.
+
+### Checklist prvního návratu z klidu
+
+- Máme po ruce kanonické pravidlo v klidovém režimu?
+- Je návratový signál konkrétní a rozpoznatelný?
+- Popisujeme aktuální podnět jako pozorování, ne jako hotové řešení?
+- Ověřili jsme, jestli návratový signál opravdu nastal?
+- Pokud nenastal, umíme klid nechat běžet bez nové práce?
+- Pokud nastal lokálně, otevíráme jen nejbližší pracovní místo?
+- Pokud signál mění realitu, nespouštíme opravu bez kontroly kontextu?
+- Je napsané, co výslovně neotevíráme?
+- Nepřidáváme report, event, export, tag ani tabulku jen kvůli prvnímu návratu?
+- Používáme anonymizované nebo zobecněné důkazy, pokud stačí pro rozhodnutí?
+- Víme, co po uzavření návratu smažeme, sloučíme nebo necháme v původním systému?
+- Umí tým říct, jestli klid pokračuje, vzniká lokální krok, nebo se otevírá nový výchozí bod?
+
+První návrat z klidového režimu je test, jestli tým věří vlastním hranicím. Dobře napsané pravidlo nemá zabránit reakci na realitu. Má zabránit reakci na každý šum. Když návratový signál nenastal, klid pokračuje. Když nastal lokálně, otevřete malé místo. Když změnil realitu, vraťte se ke kontextu. Všechno ostatní je většinou jen stará debata v novém kabátě.
+
 ## Pracovní log
 
+- 2026-06-25: Doplněna úvodní podkapitola o prvním návratu z klidového režimu: rozlišení podnětu a návratového signálu, lokální otevření, kontrola změněné reality, privacy-first práce bez nového sledování, karta, mini workshop a checklist.
 - 2026-06-25: Doplněna úvodní podkapitola o převodu po druhé běžné kontrole do klidového režimu: typy převodu, kanonické pravidlo, návratový signál, negativní věta proti novému dohledu, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-25: Doplněna úvodní podkapitola o uzavření druhé běžné kontroly po uzavřené první kontrole: uzavírací stavy, praktický příklad, propsání do kanonického místa, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-25: Doplněna úvodní podkapitola o druhé běžné kontrole po uzavřené první kontrole: samostatnost pravidla, přiměřenost, privacy-first kontrola bez nového sledování, karta, mini workshop a checklist.
