@@ -253375,8 +253375,171 @@ Karta má být kratší než samotné pravidlo. Pokud se rozrůstá, pravděpodo
 
 První standardní kontrola je malá pojistka, že uzavřené pravidlo opravdu přešlo do provozu. Když potvrdí klid, nechte ho klidným. Když najde tření, opravte nejbližší místo. Když najde návratový signál, otevřete úzkou smyčku. Hlavní výhra je, že kontrola nezvětšuje systém jen proto, že se systém naučil fungovat.
 
+## Uzavření první standardní kontroly po uzavření druhého běžného použití
+
+První standardní kontrola má hodnotu teprve ve chvíli, kdy ji někdo opravdu uzavře. Bez uzavření se z ní stane další poznámka v systému: všichni matně vědí, že se něco kontrolovalo, ale nikdo neví, jestli pravidlo zůstává v klidu, potřebuje lokální opravu, nebo otevřelo novou smyčku. To je přesně ten typ provozního mlžení, který vypadá neškodně, dokud se k tématu za měsíc nevrátí tři lidé se třemi verzemi pravdy.
+
+Uzavření má odpovědět na jednu větu:
+
+```text
+Co po první standardní kontrole zůstává v běžném provozu, co se drobně opravuje a co výslovně neotevíráme?
+```
+
+Tahle věta je důležitější než délka záznamu. Pokud ji neumíte napsat, kontrola nejspíš neskončila rozhodnutím. Vraťte se k výsledku kontroly a vyberte jeden stav. Ne pět poznámek, ne "někdy bychom měli", ne směs dobrých nápadů. Jeden stav.
+
+### Čtyři uzavírací stavy
+
+Po první standardní kontrole vybírejte mezi čtyřmi uzavíracími stavy:
+
+- Klid potvrzen: pravidlo zůstává v běžném rytmu bez další mimořádné kontroly.
+- Lokální oprava cesty: opravuje se jen najitelnost, odkaz, označení archivu nebo krátká navigační věta.
+- Hrana sousedního místa: doplňuje se jedna rozhodovací věta do navazující šablony, sales karty, onboardingového kroku nebo interního procesu.
+- Nová úzká smyčka: opakované tření je dost konkrétní na samostatný malý krok se stop podmínkou.
+
+U `klidu potvrzeného` je hlavní práce přestat pracovat. Zapište výsledek a nechte pravidlo žít v normálním rytmu. Nepřidávejte kontrolu kontroly. Pokud se tým bojí pravidlo pustit, zapište tento strach jako samostatné tření: možná problém není v pravidle, ale v důvěře v kanonické pracovní místo.
+
+U `lokální opravy cesty` se nesmí měnit obsah pravidla. Když lidé používají starý odkaz, přesměrujte nebo archivujte staré místo. Když hledají šablonu pod jiným názvem, upravte index. Když se pletou dvě podobné položky, doplňte rozlišovací větu. Neotevírejte novou verzi pravidla jen proto, že někdo šel špatnými dveřmi.
+
+U `hrany sousedního místa` je nutné držet hranici. Pokud pravidlo pro první kontakt funguje, ale obchodní follow-up potřebuje doplnit otázku, nemá se kvůli tomu měnit první formulář. Opravte místo, kde tření vzniká. Jinak se každá sousední potřeba začne vracet do původního pravidla a z malého standardu bude nafukovací matrace pro celý proces.
+
+U `nové úzké smyčky` nepřenášejte do další práce celý balík historie. Vezměte jen dnešní důkaz, jedno pracovní místo, stop podmínku a privacy-first hranici. Stará kontrola se tím uzavírá; nová smyčka začíná. To jsou dvě různé věci, i když mají podobný název.
+
+### Praktický příklad
+
+```text
+První standardní kontrola:
+Pravidlo pro první kontakt u hodnotového obsahu je v kanonické šabloně a formulář nesbírá zbytečné údaje. Obchod si ale vede poznámku s doplňkovou otázkou pro follow-up.
+
+Uzavírací stav:
+Hrana sousedního místa.
+
+Rozhodnutí:
+Pravidlo prvního kontaktu zůstává beze změny. Do sales karty doplníme jednu větu: "Doplňující otázky na rozpočet nebo velikost týmu patří až do navazujícího rozhovoru, pokud první kontakt doručil hodnotu a zákazník projevil zájem pokračovat."
+
+Co výslovně neotevíráme:
+Nové pole ve formuláři, lead scoring, export poptávek ani nový marketingový nástroj.
+
+Privacy-first poznámka:
+Kontrole stačila kanonická šablona a jedna zobecněná poznámka z review. Nesbíráme další údaje v prvním kontaktu a nezavádíme nové sledování kvalifikace.
+```
+
+Tento výsledek je malý, ale čistý. Původní pravidlo neotevírá zbytečný sběr dat. Obchod dostává praktickou hranu. Marketing nemusí přepisovat celý formulář. A tým má jasnou stopu, proč se z kontroly nestal nový projekt. Ano, skoro nudné. Přesně proto to pravděpodobně přežije další měsíc.
+
+### Co propsat zpět
+
+Po uzavření první standardní kontroly stačí propsat tři věci:
+
+- stav pravidla po kontrole,
+- případnou nejmenší opravu a její pracovní místo,
+- věci, které se výslovně neotevírají.
+
+Do kanonického pravidla patří jen výsledek, který bude někdo potřebovat při další práci. Nepište tam celou historii kontroly, pokud historie nic nerozhoduje. Staré poznámky, příklady a pracovní seznamy patří do archivu nebo pryč. Kanonické místo má být použitelné, ne dokumentárně věrné každé zatáčce.
+
+Do changelogu nebo pracovní paměti stačí krátká věta:
+
+```text
+První standardní kontrola potvrdila pravidlo v běžném provozu; doplněna byla pouze hrana follow-upu v sales kartě, bez změny formuláře a bez nového sběru dat.
+```
+
+Taková věta zvládne dvě věci najednou. Ukáže, co se změnilo, a zároveň zavře lákavé boční dveře. Příště se nikdo nemusí ptát, jestli se má přidat pole do formuláře "protože jsme to přece řešili". Řešili. A rozhodli.
+
+### Privacy-first uzavření
+
+Uzavření kontroly je poslední šance uklidit provozní stopy, které vznikly jen kvůli ověření. Pokud jste si pro kontrolu udělali dočasný export, pomocnou tabulku, screenshot, seznam případů nebo kopii šablony, rozhodněte, jestli má po uzavření ještě účel. Ve většině případů nemá.
+
+Použijte tři otázky:
+
+- Jaký podklad je nutné ponechat, aby byl závěr dohledatelný?
+- Co bylo jen pracovní lešení pro kontrolu?
+- Obsahuje některý podklad osobní, obchodní nebo behaviorální data, která už nepotřebujeme?
+
+Privacy-first uzavření neznamená, že smažete důkaz rozhodnutí. Znamená, že ponecháte nejmenší užitečnou stopu. Typicky stačí rozhodovací věta, odkaz na kanonické místo a zobecněná poznámka o tom, co se nesbírá. Detailní seznam případů, jména lidí nebo zákaznické údaje jsou často zbytečné.
+
+Dobrá závěrečná privacy-first věta vypadá takto:
+
+```text
+Po uzavření ponecháváme jen rozhodovací záznam a upravenou sales kartu. Dočasné poznámky z kontroly mažeme, protože závěr nevyžaduje osobní ani obchodní detaily jednotlivých poptávek.
+```
+
+Tím chráníte nejen soukromí, ale i budoucí práci. Čím méně zbytečných stop zůstane kolem pravidla, tím menší je šance, že je někdo později začne považovat za další zdroj pravdy.
+
+### Karta uzavření první standardní kontroly
+
+```text
+Téma:
+
+Pravidlo nebo standard:
+
+Datum první standardní kontroly:
+
+Výsledek kontroly:
+- klid potvrzen
+- lokální navigace drhne
+- sousední místo potřebuje hranu
+- skutečný návratový signál
+
+Uzavírací stav:
+- klid potvrzen
+- lokální oprava cesty
+- hrana sousedního místa
+- nová úzká smyčka
+
+Rozhodnutí jednou větou:
+
+Co zůstává v běžném provozu:
+
+Nejmenší oprava, pokud existuje:
+
+Pracovní místo opravy:
+
+Co výslovně neotevíráme:
+
+Co se propisuje do kanonického místa:
+
+Co archivujeme nebo mažeme:
+
+Privacy-first poznámka:
+
+Vlastník:
+
+Datum dalšího návratu, pokud existuje:
+```
+
+Karta má uzavírat, ne prodlužovat. Pokud do ní píšete víc než jednu malou opravu, nejspíš jste pod jednu kontrolu schovali několik rozhodnutí. Rozdělte je. Jedna kontrola může najít víc pozorování, ale uzavření má nést jeden hlavní závěr.
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: přečtěte výsledek první standardní kontroly.
+2. Minuta 2: vyberte jeden ze čtyř uzavíracích stavů.
+3. Minuta 3: napište rozhodnutí jednou větou.
+4. Minuta 4: určete, co zůstává v běžném provozu.
+5. Minuta 5: vyberte nejmenší opravu, pokud opravdu existuje.
+6. Minuta 6: napište, co se výslovně neotevírá.
+7. Minuta 7: ukliďte privacy-first stopu a určete, co zůstává jako dohledatelný záznam.
+
+Pokud se během sedmi minut rozjedou dvě různá témata, zastavte workshop a jedno odložte. Rychlost tady není sportovní disciplína. Sedm minut funguje jen tehdy, když držíte jednu větev. Jakmile se kontrola rozštěpí, potřebujete nejdřív rozhodnout, která větev patří k uzavření a která má vlastní smyčku.
+
+### Checklist uzavření první standardní kontroly
+
+- Vybrali jsme jeden uzavírací stav?
+- Umíme rozhodnutí napsat jednou větou?
+- Je jasné, co zůstává v běžném provozu?
+- U potvrzeného klidu nepřidáváme další mimořádnou kontrolu?
+- U lokální opravy měníme cestu, ne obsah pravidla?
+- U sousední hrany opravujeme správné pracovní místo, ne původní pravidlo?
+- U nové úzké smyčky máme jedno pracovní místo, stop podmínku a dnešní důkaz?
+- Je výslovně zapsané, co neotevíráme?
+- Propsali jsme jen nutný závěr do kanonického místa?
+- Archivovali nebo smazali jsme pracovní podklady, které už nemají účel?
+- Nezůstaly nám po kontrole nové exporty, kopie, seznamy nebo sledování lidí?
+- Stačí pro dohledatelnost rozhodovací věta, odkaz na kanonické místo a zobecněná privacy-first poznámka?
+- Ví tým, kdy se k tématu vrátit, nebo že se teď nevrací vůbec?
+
+Uzavření první standardní kontroly je malá administrativní brzda s velkým efektem. Brání tomu, aby se fungující pravidla pořád znovu dokazovala, aby lokální navigační problém přerostl v přepis obsahu a aby každá kontrola po sobě nechala malý sklad dat. Dobrý konec kontroly je krátký, konkrétní a trochu přísný. Co má žít, žije. Co se má opravit, má vlastní místo. Co nemá důvod existovat, odchází.
+
 ## Pracovní log
 
+- 2026-06-25: Doplněna úvodní podkapitola o uzavření první standardní kontroly po uzavření druhého běžného použití: uzavírací stavy, praktický příklad, propsání do kanonického místa, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-25: Doplněna úvodní podkapitola o první standardní kontrole po uzavření druhého běžného použití: kontrolní otázky, čtyři výsledky, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-06-25: Doplněna úvodní podkapitola o uzavření druhého běžného použití po uzavření prvního návratu z klidu: uzavírací stavy, propsání do kanonického místa, privacy-first úklid podkladů, karta, mini workshop a checklist.
 - 2026-06-25: Doplněna úvodní podkapitola o druhém běžném použití po uzavření prvního návratu z klidu: přenositelnost bez čerstvé paměti, slabý okraj pravidla, falešná příbuznost, privacy-first porovnání, karta, mini workshop a checklist.
