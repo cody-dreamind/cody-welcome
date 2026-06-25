@@ -253838,8 +253838,172 @@ Pokud workshop nedokáže do sedmi minut vybrat uzavírací stav, pravděpodobn�
 
 Uzavření druhé standardní kontroly je bod, kde se pravidlo buď vrací do normálního života, nebo se poctivě oddělí nový problém. Obojí je v pořádku. Špatný výsledek je jen jeden: nechat zvláštní kontrolu pootevřenou bez důvodu. To vytváří procesní mlhu, datové zbytky a pocit, že práce pořád není hotová. Když je hotová, zavřete ji. Když není, dejte nové práci vlastní hranici.
 
+## Přechod do dlouhodobého rytmu po uzavřené druhé standardní kontrole
+
+Po uzavřené druhé standardní kontrole nastává nenápadný, ale důležitý okamžik: pravidlo přestává být projekt a stává se součástí běžného provozu. To zní skoro nudně, což je dobře. Cílem většiny dobrých pravidel není trvale poutat pozornost týmu, ale tiše pomáhat v rozhodnutí, které by se jinak znovu rozjíždělo od nuly.
+
+Přechod do dlouhodobého rytmu proto nezačínejte otázkou, co ještě vylepšit. Začněte otázkou:
+
+```text
+Kde se toto pravidlo přirozeně potká s běžnou prací?
+```
+
+Pokud odpověď neznáte, pravidlo možná ještě není připravené na klid. Dlouhodobý rytmus není kalendářní připomínka nalepená na dokument. Je to nejbližší běžné místo, kde se pravidlo stejně použije, ověří nebo přirozeně obejde. U obchodního pravidla to může být měsíční review poptávek. U produktové šablony plánování iterace. U privacy-first pravidla revize datové mapy nebo dodavatelský úklid. U obsahového pravidla redakční sprint.
+
+Nejhorší varianta je založit zvláštní pravidelnou schůzku jen proto, že se něco právě uzavřelo. Tým si tím často vyrobí nový provozní dluh: pravidlo sice funguje, ale okolo něj vznikne malý rituál, který nikdo nechce zrušit, protože se tváří odpovědně. Dlouhodobý rytmus má pravidlo připojit k existující práci, ne mu stavět vlastní kancelář s cedulkou.
+
+Stavová věta může znít:
+
+```text
+Pravidlo přechází do dlouhodobého rytmu a bude se kontrolovat pouze při měsíčním review obchodních rozhovorů nebo při návratovém signálu.
+```
+
+Věta má dvě části. První říká, kde pravidlo žije. Druhá říká, kdy se znovu otevře mimo rytmus. Bez druhé části se dlouhodobý rytmus snadno zvrhne v trvalou otevřenost. Bez první části zase pravidlo zmizí do archivu a tým po něm sáhne až ve chvíli, kdy už je pozdě.
+
+### Tři typy dlouhodobého rytmu
+
+Vyberte jeden ze tří typů rytmu:
+
+- Průběžný rytmus: pravidlo se ověřuje při každém běžném použití, ale bez samostatného zápisu, pokud nic nedrhne.
+- Periodický rytmus: pravidlo se krátce kontroluje v existujícím měsíčním, kvartálním nebo ročním review.
+- Signální rytmus: pravidlo se neotevírá podle kalendáře, ale pouze když přijde jasný návratový signál.
+
+`Průběžný rytmus` se hodí pro jednoduchá pravidla vložená přímo do pracovního místa. Například věta v sales kartě: "Rozpočet se doptává ve follow-upu, ne v prvním formuláři." Když obchodník kartu použije a nic nedrhne, nevzniká žádný nový záznam. Pokud drhne, zapíše se jen konkrétní tření.
+
+`Periodický rytmus` se hodí pro pravidla, která se dotýkají většího systému: ceníku, nabídky, datové mapy, dodavatelů, SEO struktury nebo onboardingové trasy. Nemusí se kontrolovat pořád, ale neměla by roky ležet bez pohledu. Důležité je, aby periodická kontrola byla součástí už existujícího review. Samostatný "meeting pro pravidlo" je skoro vždycky podezřelý.
+
+`Signální rytmus` je nejlepší pro pravidla, která jsou stabilní a nemají vysoké riziko stárnutí. Tým je znovu otevře až ve chvíli, kdy přijde předem popsaný signál. Třeba: tři relevantní poptávky za sebou nejdou kvalifikovat bez ručního doptání na stejnou informaci. Signál musí být konkrétní, jinak se z něj stane obecné "někomu se zdá".
+
+Codyho komentář: pokud si nejste jistí, vyberte nejméně náročný rytmus, který pořád chrání rozhodnutí. Většina týmů nepotřebuje více kontrol. Potřebuje méně mlhy. To je rozdíl, který kalendář sám nepochopí, protože kalendář je bezcitná tabulka času.
+
+### Praktický příklad
+
+```text
+Pravidlo:
+Doplňující otázky na rozpočet patří až do follow-upu, ne do prvního formuláře.
+
+Kanonické místo:
+Sales karta pro první odpověď na relevantní poptávku.
+
+Výsledek druhé standardní kontroly:
+Pravidlo použil nový člověk bez autora původní úpravy. Nepřidal pole do formuláře, odpověď zapsal do existující poznámky a nepotřeboval otevřít starou historii.
+
+Dlouhodobý rytmus:
+Průběžný rytmus v sales kartě a krátká otázka při měsíčním review obchodních rozhovorů: "obešli jsme pravidlo, nebo pořád stačí?"
+
+Návratový signál:
+Tři relevantní poptávky za sebou nejdou kvalifikovat bez ručního doptání na rozpočet.
+
+Co neotevíráme:
+Nové pole formuláře, automatický lead scoring, samostatný report rozpočtů ani export poptávek.
+
+Privacy-first úklid:
+Dočasné poznámky z kontrol se mažou. V rozhodovacím logu zůstává jen zobecněná věta o pravidle a návratový signál.
+```
+
+Příklad ukazuje důležitou věc: dlouhodobý rytmus neznamená, že tým přestane vidět realitu. Znamená, že realitu sleduje v místě, kde se už přirozeně děje práce. Když se pravidlo obejde, někdo si toho všimne. Když funguje, nikdo kvůli tomu nevyrábí další tabulku.
+
+### Co zůstává aktivní a co patří do archivu
+
+Po přechodu do dlouhodobého rytmu rozdělte materiály na tři skupiny:
+
+- Aktivní pracovní věta: krátké pravidlo v kanonickém místě.
+- Provozní spouštěč: rytmus nebo návratový signál, podle kterého se pravidlo znovu otevře.
+- Historická stopa: stručný rozhodovací záznam, proč pravidlo vzniklo a co se výslovně neotevírá.
+
+Aktivní pracovní věta má být tak krátká, aby ji člověk použil v běžném tempu. Pokud musí číst tři odstavce historie, pravidlo není v provozu; je v muzeu. Historická stopa má být dostupná, ale nemá překážet v práci. Její účel je chránit tým před opakováním stejné debaty, ne zatěžovat každé použití.
+
+Provozní spouštěč napište přesně. Ne "když se to bude opakovat", ale "když se tři relevantní poptávky za sebou nedají kvalifikovat bez stejného doptání". Ne "když poklesne výkon", ale "když dva měsíce po sobě klesne dokončení prvního importu pod domluvenou hranici a support potvrdí stejnou příčinu". Čím konkrétnější spouštěč, tím menší riziko, že se pravidlo otevře kvůli náladě.
+
+Archivujte jen tolik, kolik má účel. Někdy stačí jeden řádek v rozhodovacím logu. Někdy je potřeba uchovat odkaz na kartu změny. Detaily jednotlivých zákazníků, screenshoty, exporty nebo pracovní kopie ale do dlouhodobé aktivní stopy většinou nepatří.
+
+### Privacy-first dlouhodobý rytmus
+
+Privacy-first hodnota dlouhodobého rytmu je v tom, že snižuje potřebu dokazovat pořád totéž novými daty. Když pravidlo funguje, nemá se okolo něj sbírat další evidence jen pro pocit jistoty. Místo toho držte tři zásady:
+
+- Měřte jen signál, který umí změnit rozhodnutí.
+- Držte důkaz co nejblíž existujícímu pracovnímu místu.
+- Po ověření mažte nebo zobecňujte podklady, které obsahují zbytečné detaily.
+
+U obchodního pravidla často stačí agregovaná poznámka v review, ne export všech poptávek. U onboardingového pravidla stačí počet dokončených prvních kroků a pár anonymizovaných tření ze supportu, ne nahrávání relací. U obsahového pravidla stačí přímá zpětná vazba, RSS odběry, kliky z vlastních kanálů nebo kvalita poptávek, ne invazivní sledování čtenáře po celém webu.
+
+Dobrá privacy-first věta může znít:
+
+```text
+Pravidlo budeme kontrolovat jen v existujícím měsíčním review. Nebudeme kvůli němu zavádět nové tracking eventy, heatmapy, exporty ani samostatnou evidenci jednotlivých zákaznických případů.
+```
+
+Taková věta chrání dvě věci najednou: soukromí lidí a pozornost týmu. Data mají pomáhat rozhodnutí, ne uklidňovat nervozitu. Pokud rozhodnutí nejde změnit podle konkrétního signálu, signál pravděpodobně nestojí za sběr.
+
+### Karta přechodu do dlouhodobého rytmu
+
+```text
+Téma:
+
+Pravidlo nebo standard:
+
+Kanonické pracovní místo:
+
+Výsledek druhé standardní kontroly:
+
+Typ dlouhodobého rytmu:
+- průběžný
+- periodický
+- signální
+
+Kde se pravidlo přirozeně potká s běžnou prací:
+
+Aktivní pracovní věta:
+
+Provozní spouštěč nebo návratový signál:
+
+Co zůstává v rozhodovacím logu:
+
+Co se přesouvá do archivu:
+
+Co se maže nebo zobecňuje:
+
+Co výslovně neotevíráme:
+
+Jaká data dál nesbíráme:
+
+Vlastník:
+
+Datum další běžné kontroly, pokud existuje:
+```
+
+Karta má uzavřít přechod, ne vytvořit nový paralelní systém. Jakmile ji vyplníte, aktivní práce má bydlet v kanonickém místě a v existujícím rytmu. Pokud se karta stane místem, kam tým průběžně lepí nové poznámky, vraťte ji zpět do jednoho záznamu a nové podněty posílejte do samostatné malé smyčky.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte uzavírací větu druhé standardní kontroly.
+2. Minuta 2: vyberte typ dlouhodobého rytmu.
+3. Minuta 3: určete přirozené pracovní místo, kde se pravidlo potká s realitou.
+4. Minuta 4: napište aktivní pracovní větu a návratový signál.
+5. Minuta 5: rozdělte materiály na aktivní větu, rozhodovací log a archiv.
+6. Minuta 6: napište, jaká data, exporty nebo sledování kvůli rytmu nepřidáváte.
+
+Když se workshop zasekne na výběru rytmu, použijte nejjednodušší otázku: "Kde by se problém projevil, kdyby pravidlo přestalo fungovat?" Tam pravděpodobně patří kontrola. Pokud odpověď zní "nikde", pravidlo možná není dost propojené s prací, nebo už není potřeba.
+
+### Checklist přechodu do dlouhodobého rytmu
+
+- Navazujeme na opravdu uzavřenou druhou standardní kontrolu?
+- Máme jednu aktivní pracovní větu v kanonickém místě?
+- Vybrali jsme průběžný, periodický nebo signální rytmus?
+- Je rytmus napojený na existující práci, ne na novou samostatnou ceremonii?
+- Je jasné, kdy se pravidlo znovu otevře mimo běžný rytmus?
+- Je návratový signál konkrétní a rozpoznatelný i bez původní historie?
+- Oddělili jsme aktivní pracovní větu od historického rozhodovacího záznamu?
+- Uklidili jsme dočasné kopie, exporty, screenshoty, seznamy a soukromé poznámky?
+- Nezavádíme kvůli dlouhodobému rytmu nové sledování, které nemění rozhodnutí?
+- Ví vlastník, kde se pravidlo kontroluje a kdy má novou smyčku otevřít?
+- Umí tým pravidlo používat bez návratu ke všem starým kontrolám?
+
+Dlouhodobý rytmus je dobrý, když je skoro neviditelný. Pravidlo je po ruce, když ho člověk potřebuje. Návratový signál je jasný, když se realita změní. Staré podklady nepřekážejí. A tým nemá pocit, že musí dokazovat každé malé rozhodnutí znovu jen proto, aby se cítil zodpovědně. Zodpovědnost není v počtu kontrol. Je v tom, že správná kontrola přijde na správném místě a zbytek nechá být.
+
 ## Pracovní log
 
+- 2026-06-25: Doplněna úvodní podkapitola o přechodu do dlouhodobého rytmu po uzavřené druhé standardní kontrole: typy rytmu, aktivní pracovní věta, návratový signál, archivace, privacy-first omezení dat, karta, mini workshop a checklist.
 - 2026-06-25: Doplněna úvodní podkapitola o uzavření druhé standardní kontroly po uzavřené první kontrole: uzavírací stavy, propsání do kanonického místa, ukončení mimořádné péče, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-25: Doplněna úvodní podkapitola o druhé standardní kontrole po uzavřené první kontrole: samostatnost pravidla, přenositelnost, klid pracovních stop, výsledné stavy, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-25: Doplněna úvodní podkapitola o uzavření první standardní kontroly po uzavření druhého běžného použití: uzavírací stavy, praktický příklad, propsání do kanonického místa, privacy-first úklid, karta, mini workshop a checklist.
