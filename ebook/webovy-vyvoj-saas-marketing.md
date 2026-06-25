@@ -254001,8 +254001,171 @@ Když se workshop zasekne na výběru rytmu, použijte nejjednodušší otázku:
 
 Dlouhodobý rytmus je dobrý, když je skoro neviditelný. Pravidlo je po ruce, když ho člověk potřebuje. Návratový signál je jasný, když se realita změní. Staré podklady nepřekážejí. A tým nemá pocit, že musí dokazovat každé malé rozhodnutí znovu jen proto, aby se cítil zodpovědně. Zodpovědnost není v počtu kontrol. Je v tom, že správná kontrola přijde na správném místě a zbytek nechá být.
 
+## První běžná kontrola v dlouhodobém rytmu
+
+První běžná kontrola v dlouhodobém rytmu je test, jestli se pravidlo opravdu odstěhovalo z projektového režimu do normální práce. Nemá dokazovat, že tým umí vyplnit další kartu. Má ověřit, že pravidlo člověk najde, použije a uzavře bez návratu ke všem starým debatám.
+
+Začněte proto krátkou otázkou:
+
+```text
+Potkalo se pravidlo s běžnou prací tak, jak jsme očekávali?
+```
+
+Pokud ano, kontrola má být skoro nudná. Vezmete jeden skutečný průchod, porovnáte ho s aktivní pracovní větou a zapíšete jen výjimku nebo drobnou úpravu. Pokud ne, nejde hned o selhání pravidla. Možná se pracovní situace ještě neobjevila. Možná se objevila jinde, než tým čekal. Možná pravidlo funguje, ale není v místě, kam člověk při práci sahá.
+
+První běžná kontrola nesmí být skrytý redesign. Je lákavé využít review k tomu, že se znovu otevře formulář, sales skript, onboarding, datová mapa i celý starý kontext. Nedělejte to. Kontrola má odpovědět na jednu otázku: jestli dlouhodobý rytmus drží pravidlo živé bez mimořádné péče.
+
+Dobrá kontrolní věta zní například:
+
+```text
+Při měsíčním review jsme našli jeden běžný průchod, kde se pravidlo použilo bez otevření staré historie; ponecháváme rytmus beze změny.
+```
+
+Nebo:
+
+```text
+Pravidlo se s běžnou prací nepotkalo, protože za měsíc nepřišla žádná relevantní poptávka; rytmus neměníme a další kontrolu necháváme až na návratový signál.
+```
+
+Obě věty jsou užitečné. První potvrzuje, že pravidlo funguje v provozu. Druhá brání zbytečnému vrtání do něčeho, co zatím nemělo příležitost ukázat realitu.
+
+### Čtyři výsledky první běžné kontroly
+
+Po první kontrole vyberte jeden ze čtyř stavů:
+
+- Ponechat rytmus: pravidlo se použilo nebo nebyl důvod ho otevírat; dlouhodobý rytmus zůstává stejný.
+- Dočistit pracovní místo: pravidlo je správné, ale člověk ho hledal na špatném místě, v nejasné formulaci nebo ve staré kopii.
+- Zpřesnit návratový signál: pravidlo funguje, ale spouštěč návratu je příliš vágní, široký nebo nepoznatelný bez původního autora.
+- Otevřít malou smyčku: kontrola ukázala skutečné opakované tření, které nejde vyřešit drobným dočištěním.
+
+`Ponechat rytmus` je plnohodnotný výsledek. Neznamená, že se nic nestalo. Znamená, že systém unesl běžnou práci bez další vrstvy řízení.
+
+`Dočistit pracovní místo` je lokální oprava. Přesunete jednu větu do správné šablony, odstraníte starou kopii, doplníte odkaz v indexu nebo zkrátíte formulaci. Neotvíráte původní problém.
+
+`Zpřesnit návratový signál` použijte, když tým sice chápe pravidlo, ale neví přesně, kdy se má znovu ozvat realita. Z "když se opakuje problém s kvalifikací" udělejte třeba "když dvě relevantní poptávky za sebou nejdou kvalifikovat bez stejného ručního doptání".
+
+`Otevřít malou smyčku` patří jen tam, kde se objevil nový důkaz. Ne jeden názor. Ne pocit. Ne věta "možná bychom mohli". Nový důkaz znamená konkrétní běžnou situaci, ve které pravidlo nedalo člověku dost opory nebo vedlo k horšímu rozhodnutí.
+
+Codyho komentář: nejčastější chyba první běžné kontroly je přidat péči tam, kde funguje klid. Tým vidí, že pravidlo pomohlo, a řekne si: "výborně, uděláme kolem toho pravidelný report". To je produktivní verze sebesabotáže v elegantním svetru. Když něco funguje bez reportu, važte si toho.
+
+### Praktický příklad
+
+```text
+Pravidlo:
+Doplňující otázky na rozpočet patří až do follow-upu, ne do prvního formuláře.
+
+Dlouhodobý rytmus:
+Průběžný rytmus v sales kartě a krátká otázka při měsíčním review obchodních rozhovorů.
+
+První běžná kontrola:
+V review byly dvě relevantní poptávky. U jedné obchodník použil sales kartu a rozpočet doptal ve follow-upu. U druhé sáhl po staré kopii odpovědi v osobních poznámkách.
+
+Výsledek:
+Dočistit pracovní místo.
+
+Co měníme:
+Starou kopii v osobních poznámkách mažeme a do sales karty doplňujeme jednu aktivní větu: "Pokud rozpočet chybí, doptáváme ho ve follow-upu, ne v prvním formuláři."
+
+Co neotevíráme:
+Formulář, lead scoring, nový report rozpočtů ani změnu kvalifikačního procesu.
+
+Privacy-first úklid:
+Do review zůstává jen agregovaná poznámka, že jedna stará kopie byla odstraněna. Neuchováváme konkrétní obsah poptávky ani osobní pracovní poznámku.
+```
+
+Příklad je schválně malý. První běžná kontrola často nemá vést k velké změně. Její hodnota je v tom, že zachytí drobné tření dřív, než z něj vznikne paralelní pracovní cesta. Staré kopie, soukromé poznámky a obcházení kanonického místa jsou nebezpečné právě tím, že zpočátku vypadají neškodně.
+
+### Privacy-first kontrola bez nového sledování
+
+Při první běžné kontrole si dejte pozor na větu:
+
+```text
+Abychom měli jistotu, začneme to víc měřit.
+```
+
+Někdy je měření správná odpověď. Často je to ale jen dražší forma nejistoty. Pokud kontrolujete pravidlo, které má žít v dlouhodobém rytmu, nejdřív použijte existující pracovní stopy: review poznámku, anonymizovaný support signál, rozhodovací log, sales kartu, issue s výsledkem, nebo přímou zpětnou vazbu od člověka, který pravidlo použil.
+
+Nové eventy, heatmapy, nahrávání relací, exporty formulářů nebo detailní sledování obchodníků jsou poslední možnost, ne výchozí reakce. Privacy-first provoz se nepozná podle toho, že nikdy nic neměří. Pozná se podle toho, že každé měření má jasnou rozhodovací otázku, omezenou retenci a nejmenší rozumný rozsah.
+
+Kontrolní věta může být:
+
+```text
+První běžnou kontrolu děláme z existujícího měsíčního review. Nepřidáváme nové eventy, neexportujeme jednotlivé poptávky a neukládáme osobní poznámky mimo kanonický záznam.
+```
+
+Pokud bez nového sběru dat neumíte kontrolu udělat, napište nejdřív, jaké rozhodnutí by nové měření změnilo. Když odpověď zní jen "budeme mít lepší přehled", je to slabé. Lepší přehled bez rozhodnutí je často jen další police na provozní prach.
+
+### Karta první běžné kontroly
+
+```text
+Téma:
+
+Pravidlo nebo standard:
+
+Dlouhodobý rytmus:
+
+Kanonické pracovní místo:
+
+Kontrolované běžné použití nebo důvod, proč zatím nenastalo:
+
+Co člověk opravdu udělal:
+
+Porovnání s aktivní pracovní větou:
+
+Výsledek kontroly:
+- ponechat rytmus
+- dočistit pracovní místo
+- zpřesnit návratový signál
+- otevřít malou smyčku
+
+Co teď měníme:
+
+Co výslovně neotevíráme:
+
+Jaká data, exporty, trackery nebo poznámky nepřidáváme:
+
+Co mažeme, slučujeme nebo zobecňujeme:
+
+Kde zůstává finální záznam:
+
+Vlastník:
+
+Další kontrola nebo návratový signál:
+```
+
+Karta má být krátká. Pokud se z ní stává zápis z velké retrospektivy, pravděpodobně jste místo první běžné kontroly otevřeli novou pracovní smyčku. To může být správně, ale pak to pojmenujte a zmenšete. Pravidlo nesmí nést cizí batoh jen proto, že bylo zrovna po ruce.
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: připomeňte aktivní pracovní větu a dlouhodobý rytmus.
+2. Minuta 2: vyberte jedno skutečné běžné použití, nebo napište, že zatím nenastalo.
+3. Minuty 3 až 4: porovnejte skutečný průchod s pravidlem.
+4. Minuta 5: vyberte jeden ze čtyř výsledků kontroly.
+5. Minuta 6: napište, co teď výslovně neotevíráte.
+6. Minuta 7: udělejte privacy-first úklid záznamu: co zůstává, co se maže, co se zobecňuje.
+
+Když workshop nemá žádný skutečný průchod, nenuťte ho. Zapište, že kontrola nenastala, protože se neobjevila relevantní situace. Potom se vraťte k dlouhodobému rytmu nebo návratovému signálu. Vynucené příklady jsou špatná data v kostýmu zodpovědnosti.
+
+### Checklist první běžné kontroly
+
+- Kontrolujeme skutečné běžné použití, ne hypotetickou debatu?
+- Víme, kde mělo pravidlo žít?
+- Porovnali jsme realitu s aktivní pracovní větou?
+- Vybrali jsme jeden výsledný stav kontroly?
+- Pokud pravidlo funguje, nepřidáváme kolem něj zbytečný report?
+- Pokud drhne jen pracovní místo, opravujeme jen pracovní místo?
+- Pokud je slabý návratový signál, zpřesňujeme signál místo celé historie?
+- Pokud otevíráme malou smyčku, máme konkrétní nový důkaz?
+- Je zapsané, co teď výslovně neotevíráme?
+- Nepřidáváme nové sledování jen kvůli pocitu jistoty?
+- Uklidili jsme staré kopie, osobní poznámky, exporty nebo dočasné záznamy?
+- Zůstává finální záznam v kanonickém místě, ne v paralelním dokumentu?
+
+První běžná kontrola je dobrá, když po ní tým nemá víc práce, než měl před ní, pokud k tomu nepřišel skutečný důvod. Pravidlo buď dál tiše funguje, dostane malou lokální opravu, má přesnější návratový signál, nebo se otevře úzká smyčka s jasným důkazem. Všechno ostatní je jen chuť ještě chvíli sahat na systém, který už možná dělá přesně to, co má.
+
 ## Pracovní log
 
+- 2026-06-25: Doplněna úvodní podkapitola o první běžné kontrole v dlouhodobém rytmu: ověření pravidla v reálné práci, čtyři výsledky kontroly, praktický příklad, privacy-first kontrola bez nového sledování, karta, mini workshop a checklist.
 - 2026-06-25: Doplněna úvodní podkapitola o přechodu do dlouhodobého rytmu po uzavřené druhé standardní kontrole: typy rytmu, aktivní pracovní věta, návratový signál, archivace, privacy-first omezení dat, karta, mini workshop a checklist.
 - 2026-06-25: Doplněna úvodní podkapitola o uzavření druhé standardní kontroly po uzavřené první kontrole: uzavírací stavy, propsání do kanonického místa, ukončení mimořádné péče, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-25: Doplněna úvodní podkapitola o druhé standardní kontrole po uzavřené první kontrole: samostatnost pravidla, přenositelnost, klid pracovních stop, výsledné stavy, privacy-first úklid, karta, mini workshop a checklist.
