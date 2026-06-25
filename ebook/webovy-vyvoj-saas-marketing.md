@@ -345,6 +345,153 @@ Když se tým během workshopu začne hádat o původní rozhodnutí, vraťte se
 
 Návrat k neotevřenému kroku má být střízlivý. Uzná nový důkaz, ale neoslavuje starý nápad. Díky tomu tým neztrácí citlivost na reálné signály a zároveň si neotevírá staré dveře jen proto, že tentokrát někdo hlasitěji zaklepal.
 
+## Uzavření návratu k neotevřenému kroku
+
+Návrat k neotevřenému kroku nekončí tím, že tým otevře malý test. Končí až ve chvíli, kdy je jasné, co test změnil a co naopak zůstává zavřené. Bez uzavření se z opatrného návratu stane nový mezistav: něco jsme zkusili, něco víme, ale nikdo neřekl, jestli původní návrh pořád neplatí. A mezistavy mají jednu nepříjemnou vlastnost. Rády vypadají jako práce, zatímco potichu vyrábějí další výjimky.
+
+Uzavření začněte stejnou disciplínou jako návrat. Nejdřív přečtěte původní neotevřený krok, potom malý krok, který jste opravdu spustili, a nakonec důkaz z kontrolního okna. Nehodnoťte celou historii tématu. Hodnoťte jen otázku, kvůli které se návrat otevřel.
+
+Dobrá uzavírací věta zní například:
+
+```text
+Návrat k neotevřenému kroku uzavíráme takto:
+Volitelná otázka v potvrzovacím e-mailu stačila u čtyř z pěti poptávek, takže povinné pole pro rozpočet ve formuláři zůstává zavřené a otázku ponecháváme jen jako ruční obchodní pomůcku.
+```
+
+V té větě jsou tři důležité části: výsledek malého kroku, stav původního návrhu a místo, kde případná změna zůstává. Když některá část chybí, tým si ji začne domýšlet. Obchod může slyšet "rozpočet funguje, dejme ho do formuláře". Produkt může slyšet "už to neřešíme". Provoz může slyšet "vznikl nový údaj, ale nikdo neví, jak dlouho ho držíme". Jedna přesná věta tomu zabrání lépe než další schůzka.
+
+### Čtyři uzavírací stavy
+
+Po kontrole malého kroku vyberte jeden ze čtyř stavů:
+
+- Zavřít bez změny: návratový signál se ukázal jako slabý, jednorázový nebo špatně umístěný.
+- Ponechat lokální opravu: malý krok pomohl, ale jen v konkrétním pracovním místě.
+- Otevřít nový menší krok: problém se potvrdil, ale původní návrh je pořád zbytečně široký.
+- Založit nové téma: ukázalo se, že návrat nesouvisel s původním neotevřeným krokem.
+
+Zavřít bez změny neznamená "nic jsme neudělali". Znamená to, že tým ověřil signál a odmítl přidat práci bez dostatečného důvodu. Do záznamu napište, proč důkaz nestačil, a ukončete dočasné poznámky, štítky nebo ruční sledování. Pokud jste kvůli návratu sbírali pomocná data, smažte nebo anonymizujte je podle původní dohody. Malý test nemá po sobě nechávat velkou stopu.
+
+Ponechat lokální opravu je nejčastější dobrý výsledek. Například volitelná věta v potvrzovacím e-mailu může ušetřit obchodní doptávání, ale pořád z toho neplyne povinné pole ve formuláři. Lokální oprava má zůstat tam, kde pomohla. Přepište ji do pracovního místa, kde se používá, a k původní kartě dopište, že široký návrh zůstává zavřený.
+
+Otevřít nový menší krok dává smysl, když malý krok pomohl, ale nevyřešil celou potíž. I tady ale nezačínejte původním návrhem. Pokud volitelná otázka v e-mailu pomohla jen napůl, další krok může být lepší formulace otázky, ukázka rozpočtového rozpětí na stránce služby nebo změna obchodního skriptu. Povinné pole je pořád až jedna z možností, ne automatický osud.
+
+Založit nové téma je nejpoctivější stav ve chvíli, kdy návratový signál vypadal podobně, ale mířil jinam. Třeba se ukáže, že potíž nebyla v rozpočtu, ale v tom, že lidé nerozumí rozdílu mezi auditem, MVP a dlouhodobým vývojem. Pak starou kartu nezneužívejte. Uzavřete ji s poznámkou "nejde o návrat" a nové téma otevřete s novou otázkou.
+
+### Praktický příklad uzavření
+
+Kontrolní okno po návratu:
+
+```text
+Ověření:
+U dalších pěti relevantních poptávek sledujeme pouze to, zda volitelná otázka v potvrzovacím e-mailu ušetřila jedno ruční doptání.
+```
+
+Výsledek:
+
+```text
+U čtyř z pěti poptávek zákazník doplnil rámcový rozpočet nebo rozhodovací limit odpovědí na e-mail. U jedné poptávky problém nebyl rozpočet, ale nejasný interní vlastník projektu.
+```
+
+Uzavření:
+
+```text
+Stav:
+Ponechat lokální opravu.
+
+Co ponecháváme:
+Volitelnou větu v potvrzovacím e-mailu pro relevantní poptávky.
+
+Co zůstává zavřené:
+Povinné pole pro rozpočet ve formuláři, automatický lead scoring a nový export do marketingového nástroje.
+
+Privacy-first úklid:
+Ruční poznámky z kontrolního okna mažeme po vyhodnocení. Do běžného provozu nepřidáváme nový atribut leadu; stačí text odpovědi v obchodním vlákně.
+
+Návratový signál:
+K povinnému poli se vrátíme pouze pokud volitelná otázka tři relevantní poptávky za sebou nepomůže kvalifikovat a ruční doptání znovu zdrží rozhodnutí.
+```
+
+Takový záznam je nudně přesný. To je dobře. Produktová práce nemusí pokaždé znít jako trailer k akčnímu filmu. Často stačí napsat, co zůstává malé, co zůstává zavřené a kdy se téma může vrátit.
+
+### Privacy-first uzavření
+
+Nejdůležitější část uzavření je kontrola datové stopy. Návrat k neotevřenému kroku obvykle vznikl proto, že tým odolal nové evidenci, poli, trackeru, exportu nebo automatizaci. Když se téma vrátí, je snadné dočasně povolit malý sběr dat a potom na něj zapomenout.
+
+Proto při uzavření napište tři řádky:
+
+```text
+Dočasně vzniklo:
+
+Po uzavření ponecháváme:
+
+Po uzavření mažeme, slučujeme nebo přestáváme sbírat:
+```
+
+Pokud po uzavření ponecháváte nový údaj, musí mít jasný účel, vlastníka a místo v datové mapě. Pokud ho nepotřebujete k dalšímu rozhodnutí, nenechávejte ho "pro jistotu". "Pro jistotu" je oblíbená zkratka k provozu, kde nikdo neví, proč se co sbírá. A pak přijde audit, migrace nebo žádost zákazníka a všichni najednou objevují archeologii vlastního CRM. Zábava pro celou rodinu, pokud rodina miluje zbytečný stres.
+
+Codyho komentář: nejlepší výsledek návratu často není větší změna, ale lepší hranice. Tým se naučí, kdy signál uznat, jak malý krok stačí a jak nezaplatit za poznatek trvalým sběrem dat. To je přesně druh provozní dospělosti, který není vidět v hero sekci, ale je cítit při každém předání práce.
+
+### Karta uzavření návratu
+
+```text
+Původní neotevřený krok:
+
+Malý krok, který jsme otevřeli:
+
+Kontrolní okno:
+
+Výsledek kontroly:
+
+Uzavírací stav:
+- zavřít bez změny
+- ponechat lokální opravu
+- otevřít nový menší krok
+- založit nové téma
+
+Co zůstává zavřené z původního návrhu:
+
+Co se propsalo do běžného pracovního místa:
+
+Jaká dočasná data vznikla:
+
+Co po uzavření mažeme, slučujeme nebo přestáváme sbírat:
+
+Nový nebo potvrzený návratový signál:
+
+Kde je závěr uložený:
+
+Vlastník:
+```
+
+Karta neslouží k tomu, aby vznikla další administrativa. Slouží k tomu, aby se po měsíci nikdo nemusel ptát, jestli návrat znamenal změnu strategie, lokální opravu, nebo jen krátké ověření. Když je závěr uložený u pracovního místa, další člověk nemusí otevírat celou historii. Vidí stav a pokračuje.
+
+### Mini workshop na 8 minut
+
+1. Minuta 1: přečtěte původní neotevřený krok a malý otevřený krok.
+2. Minuty 2 až 3: přečtěte výsledek kontrolního okna.
+3. Minuta 4: vyberte jeden uzavírací stav.
+4. Minuta 5: napište, co zůstává zavřené.
+5. Minuta 6: rozhodněte, co se propíše do běžného pracovního místa.
+6. Minuta 7: ukončete nebo očistěte dočasnou datovou stopu.
+7. Minuta 8: zapište návratový signál pro další otevření, nebo výslovně napište, že žádný návrat teď neplánujete.
+
+Pokud se během workshopu objeví pátý stav, pravděpodobně se snažíte uzavřít dvě věci najednou. Oddělte původní návrat a nové téma. Jedna karta má nést jeden závěr. Zbytek patří do nové pracovní otázky.
+
+### Checklist uzavření návratu
+
+- Máme výsledek kontrolního okna, ne jen pocit z diskuse?
+- Vybrali jsme přesně jeden uzavírací stav?
+- Je jasně napsané, co z původního návrhu zůstává zavřené?
+- Pokud ponecháváme lokální opravu, víme přesně kde žije?
+- Pokud otevíráme nový menší krok, je menší než původní návrh?
+- Pokud zakládáme nové téma, oddělili jsme ho od staré karty?
+- Ukončili jsme dočasné poznámky, štítky, exporty nebo ruční sledování?
+- Zapsali jsme, jaká data po uzavření dál nesbíráme?
+- Má závěr vlastníka a stabilní pracovní místo?
+- Je nový návratový signál konkrétní, nebo je téma vědomě zavřené bez návratu?
+
+Uzavření návratu k neotevřenému kroku je malý akt provozní hygieny. Nedovolí, aby se z opatrného ověření stal trvalý polorozhodnutý režim. Tým tím získá dvě věci: lepší reakci na skutečný signál a menší datovou stopu. To je kombinace, která v evropském privacy-first provozu zestárne výrazně lépe než další pole ve formuláři.
+
 ## Kontrola přeneseného kontextu při návratu k tématu
 
 Když se tým vrací k tématu po týdnech nebo měsících, největší riziko často není zapomenutí. Horší je poloviční paměť: všichni si pamatují název problému, ale každý si pod ním nese jiný starý kontext. Jeden člověk pořád řeší původní segment, druhý už myslí na novou nabídku, třetí si pamatuje starou výjimku a čtvrtý má v hlavě poslední incident. Výsledek vypadá jako shoda, ale práce se rozjede do čtyř směrů.
@@ -254165,6 +254312,7 @@ První běžná kontrola je dobrá, když po ní tým nemá víc práce, než m�
 
 ## Pracovní log
 
+- 2026-06-25: Doplněna úvodní podkapitola o uzavření návratu k neotevřenému kroku: čtyři uzavírací stavy, praktický příklad, privacy-first úklid dočasné datové stopy, karta, mini workshop a checklist.
 - 2026-06-25: Doplněna úvodní podkapitola o první běžné kontrole v dlouhodobém rytmu: ověření pravidla v reálné práci, čtyři výsledky kontroly, praktický příklad, privacy-first kontrola bez nového sledování, karta, mini workshop a checklist.
 - 2026-06-25: Doplněna úvodní podkapitola o přechodu do dlouhodobého rytmu po uzavřené druhé standardní kontrole: typy rytmu, aktivní pracovní věta, návratový signál, archivace, privacy-first omezení dat, karta, mini workshop a checklist.
 - 2026-06-25: Doplněna úvodní podkapitola o uzavření druhé standardní kontroly po uzavřené první kontrole: uzavírací stavy, propsání do kanonického místa, ukončení mimořádné péče, privacy-first úklid, karta, mini workshop a checklist.
