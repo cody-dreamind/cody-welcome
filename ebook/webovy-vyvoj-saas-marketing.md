@@ -256010,8 +256010,166 @@ Pokud workshop začne řešit historii celého návratu, zastavte ho. Druhé pou
 
 Druhé běžné použití má pravidlu vzít poslední opěrná kolečka. Pokud obstojí, nechte ho být. Pokud zaváhá, opravte nejbližší větu, příklad nebo místo. A pokud se opravdu objeví návratový signál, otevřete malý průchod s dnešním důvodem. Ve všech třech případech platí stejná zásada: nepřidávat data jen proto, že tým chce mít dobrý pocit z kontroly.
 
+## Uzavření druhého běžného použití po návratu z klidu
+
+Druhé běžné použití po návratu z klidového období nesmí zůstat jako volná poznámka. Buď pravidlo opravdu přešlo do běžné práce, nebo potřebuje poslední lokální dočištění, nebo se objevil návratový signál a má vzniknout nový malý průchod. Uzavření má tento stav pojmenovat tak, aby se k tématu tým nevracel jen proto, že "se to nedávno řešilo".
+
+Začněte jednou větou:
+
+```text
+Po druhém běžném použití je stav:
+```
+
+Potom vyberte jeden ze čtyř stavů:
+
+- Vrátit do klidu: pravidlo bylo použité samostatně, širší návrh zůstal zavřený a nevznikla nová datová stopa.
+- Propsat lokální dočištění: pravidlo drží, ale jedno pracovní místo potřebuje jasnější větu, příklad nebo odkaz.
+- Otevřít malý průchod: návratový signál nastal a nejbližší pracovní místo má dostat vlastní ověření.
+- Zavřít jako falešný návrat: situace vypadala podobně, ale původní návratový signál nenastal.
+
+Stav `vrátit do klidu` je nejčistší. Neplánujte třetí speciální použití jen proto, že druhé dopadlo dobře. Pokud pravidlo funguje bez čerstvého vysvětlování, další kontrola patří do běžného rytmu, ne do mimořádné péče.
+
+Stav `propsat lokální dočištění` použijte jen tehdy, když je oprava opravdu lokální. Jedna věta v potvrzovací šabloně, jasnější hranice návratového signálu, lepší odkaz na kanonické místo. Pokud úprava sahá do více míst, už nejde o dočištění druhého použití, ale o novou otázku.
+
+Stav `otevřít malý průchod` použijte ve chvíli, kdy druhé použití přineslo domluvený návratový signál. Ani tehdy se ale automaticky nevrací původní široký návrh. Začněte dnešním pracovním místem a nejmenším krokem.
+
+Stav `falešný návrat` je užitečný hlavně pro klid týmu. Říká: všimli jsme si podobné situace, porovnali ji s návratovým signálem a nerozšiřujeme práci. To není ignorování. To je dobré filtrování.
+
+### Praktický příklad uzavření
+
+```text
+Pravidlo:
+Volitelnou otázku na rámcový rozpočet používáme v potvrzovacím e-mailu jen u relevantních poptávek, kde bez ní nejde navrhnout další krok.
+
+Druhé běžné použití:
+Nový člověk v obchodu použil šablonu bez vysvětlování původní debaty.
+
+Výsledek:
+Poptávku kvalifikoval bez povinného pole ve formuláři a bez nového lead scoringu.
+
+Stav:
+Vrátit do klidu.
+
+Co zůstává zavřené:
+Povinné pole pro rozpočet, automatický scoring a export poptávek do další tabulky.
+
+Návratový signál:
+Tři relevantní poptávky za sebou nepůjdou kvalifikovat ani po použití volitelné otázky.
+
+Privacy-first výsledek:
+Nevznikl nový CRM atribut ani pomocná evidence. Zůstává jen běžné obchodní vlákno a anonymizovaný závěr v pracovním místě.
+```
+
+Slabší příklad:
+
+```text
+Výsledek:
+Člověk pravidlo našel, ale nebylo jasné, jestli se volitelná otázka posílá všem poptávkám, nebo jen relevantním.
+
+Stav:
+Propsat lokální dočištění.
+
+Jedna oprava:
+Do šablony doplnit větu: "Otázku posílej jen u relevantní poptávky, kde rozpočet nebo rozhodovací limit chybí pro další krok."
+
+Co neotevíráme:
+Formulář, scoring ani novou evidenci rozpočtů.
+```
+
+### Kam uzavření uložit
+
+Uzavření patří k pracovnímu místu, kde se pravidlo opravdu používá. Pokud jde o potvrzovací e-mail, zapište stav ke šabloně e-mailu. Pokud jde o obchodní checklist, zapište ho tam. Pokud jde o rozcestník nebo interní pravidlo, upravte kanonické místo, ne jen poznámku v chatu.
+
+Minimální zápis:
+
+```text
+Druhé běžné použití:
+Stav:
+Co zůstává zavřené:
+Návratový signál:
+Privacy-first závěr:
+```
+
+Tento zápis má být krátký. Nemá znovu popisovat historii původního návrhu. Další člověk potřebuje vědět, co platí teď, kdy se téma vrátí a jaká data se díky tomu dál nesbírají.
+
+### Privacy-first uzavření
+
+Po druhém použití ukliďte pomocné stopy. Pokud během kontroly vznikla poznámka, screenshot, kopie poptávky nebo dočasná tabulka, nechte si jen rozhodovací závěr. U běžného pravidla nemá zůstávat mimořádná evidence jen proto, že se ověřovalo podruhé.
+
+Použijte tři řádky:
+
+```text
+Ponecháváme:
+
+Mažeme nebo nepřenášíme:
+
+Dál nesbíráme:
+```
+
+Příklad:
+
+```text
+Ponecháváme:
+Závěr, že pravidlo fungovalo bez čerstvého vysvětlení.
+
+Mažeme nebo nepřenášíme:
+Dočasnou poznámku z kontroly a kopii konkrétní zákaznické zprávy.
+
+Dál nesbíráme:
+Rozpočet v prvním formuláři, automatické skóre leadu ani novou tabulku poptávek.
+```
+
+Codyho komentář: druhé běžné použití je dobré místo, kde přestat být nervózní. Pokud pravidlo chodí samo, nedávejte mu vodítko. Pokud zakopne o jednu větu, opravte větu. A pokud začne bourat do stěn, teprve pak řešte, jestli je špatně pravidlo, nebo dům.
+
+### Karta uzavření druhého použití
+
+```text
+Pravidlo nebo trasa:
+
+Druhé běžné použití:
+
+Výsledek druhého použití:
+
+Uzavírací stav:
+- vrátit do klidu
+- propsat lokální dočištění
+- otevřít malý průchod
+- zavřít jako falešný návrat
+
+Co se propisuje do pracovního místa:
+
+Co zůstává výslovně zavřené:
+
+Návratový signál:
+
+Privacy-first uzavření:
+Ponecháváme:
+Mažeme nebo nepřenášíme:
+Dál nesbíráme:
+
+Vlastník:
+
+Datum dalšího běžného rytmu:
+```
+
+### Checklist uzavření druhého použití
+
+- Vybrali jsme jeden ze čtyř uzavíracích stavů?
+- Je jasné, jestli pravidlo jde do klidu, do lokálního dočištění, do malého průchodu, nebo se zavírá falešný návrat?
+- Je výsledek uložený u pracovního místa, kde se pravidlo používá?
+- Zůstává původní širší návrh zavřený, pokud nenastal návratový signál?
+- Pokud vzniká oprava, je opravdu lokální?
+- Pokud se otevírá malý průchod, má dnešní pracovní místo a nejmenší ověření?
+- Je návratový signál konkrétní a rozpoznatelný?
+- Nevznikla po druhém použití nová evidence, tracker, CRM atribut ani export?
+- Jsou dočasné poznámky, kopie zpráv a pracovní tabulky smazané nebo ponechané jen ve zdrojovém systému?
+- Umí další člověk poznat, co platí, bez čtení celé historie návratu?
+
+Uzavření druhého běžného použití je malá tečka za návratem z klidu. Když ji uděláte dobře, pravidlo se přestane tvářit jako nedávná oprava a začne být normální součást práce. A normální práce je přesně místo, kde mají dobrá pravidla končit.
+
 ## Pracovní log
 
+- 2026-06-25: Doplněna úvodní podkapitola o uzavření druhého běžného použití po návratu z klidu: čtyři uzavírací stavy, praktické příklady, propsání do pracovního místa, privacy-first úklid, karta a checklist.
 - 2026-06-25: Doplněna úvodní podkapitola o prvním běžném použití po uzavření návratu k neotevřenému kroku: najitelnost závěru, rozhodovací věta, ochrana zavřené hranice, privacy-first kontrola datové stopy, karta, mini workshop a checklist.
 - 2026-06-25: Doplněna úvodní podkapitola o druhém běžném použití po uzavření prvního návratu z klidového režimu: přenositelnost bez čerstvé paměti, stabilita hranice, falešný návrat, privacy-first kontrola bez nové evidence, karta, mini workshop a checklist.
 - 2026-06-25: Doplněna úvodní podkapitola o uzavření prvního běžného použití po uzavření prvního návratu z klidového režimu: uzavírací stavy, praktický příklad, propsání do pracovního místa, privacy-first úklid stop, karta, mini workshop a checklist.
