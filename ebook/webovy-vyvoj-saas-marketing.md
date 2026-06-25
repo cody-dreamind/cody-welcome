@@ -670,6 +670,186 @@ Když se workshop začne rozpadat do nových nápadů, vraťte se k větě "prvn
 
 První běžné použití po uzavření návratu k neotevřenému kroku má jednoduchý cíl: ověřit, že se z opatrného rozhodnutí stal použitelný pracovní stav. Když funguje, nechte ho být. Když nefunguje, opravte nejbližší větu nebo místo. A když se někdo pokusí znovu otevřít široký návrh bez nového signálu, klidně ho vraťte ke kartě. Ne jako trest. Jako službu zdravému rozsahu práce.
 
+## Uzavření prvního běžného použití po uzavření návratu k neotevřenému kroku
+
+První běžné použití po uzavřeném návratu ještě samo o sobě nestačí. Je to pozorování, ne závěr. Aby se z něj nestala další volná poznámka v systému, potřebujete ho uzavřít: pojmenovat, co se při použití opravdu stalo, co se propsalo do pracovního místa, co zůstává zavřené a jestli je potřeba ještě jedno běžné ověření.
+
+Uzavření nezačínejte otázkou, co dalšího by se dalo zlepšit. To je lákavé, protože první použití často odhalí drobnosti. Začněte tím, jestli původní hranice přežila kontakt s běžnou prací. Pokud ano, máte dobrý výsledek. Pokud ne, opravte nejbližší místo. Neotevírejte celou historii jen proto, že jedna věta v checklistu byla líná jak páteční meeting po obědě.
+
+Základní uzavírací věta:
+
+```text
+První běžné použití uzavíráme takto:
+```
+
+Za ni napište jeden ze čtyř stavů:
+
+- Ponechat v klidu: pravidlo bylo najitelné, použitelné a široký návrh zůstal zavřený.
+- Doplnit lokální kotvu: závěr platí, ale člověk ho nenašel tam, kde pracoval.
+- Zpřesnit rozhodovací větu: člověk závěr našel, ale nevěděl přesně, co udělat.
+- Zastavit rozšíření hranice: použití se začalo měnit v návrat k původnímu širokému návrhu bez nového signálu.
+
+Stav `ponechat v klidu` je nejčistší. Znamená, že pravidlo prošlo prvním reálným použitím a nepotřebuje mimořádnou péči. Neplánujte další workshop jen proto, že se něco povedlo. Úspěšné pravidlo nemá dostat vlastní kroužek, diplom a nový dashboard. Má se vrátit do práce.
+
+Stav `doplnit lokální kotvu` použijte tehdy, když obsah rozhodnutí drží, ale jeho umístění selhalo. Typicky závěr zůstal v rozhodovací kartě, zatímco člověk pracoval v e-mailové šabloně, obchodním checklistu nebo interním rozcestníku. Oprava má být přesun nebo odkaz, ne nový proces.
+
+Stav `zpřesnit rozhodovací větu` je pro případy, kdy závěr existoval, ale byl příliš měkký. Věta "rozpočet řešíme citlivě" nikoho nevede. Věta "u relevantní poptávky bez rozpočtu lze poslat volitelnou otázku v potvrzovacím e-mailu; formulář se nemění" už je použitelná.
+
+Stav `zastavit rozšíření hranice` je nejdůležitější ochrana. Pokud se první použití změnilo ve větu "tak to rovnou dejme do formuláře", vraťte se k návratovému signálu. Bez nového signálu zůstává původní široký návrh zavřený. Tohle není brždění růstu. Tohle je ochrana před tím, aby se do systému vrátil přesně ten rozsah, který jste už jednou odmítli.
+
+### Praktický příklad
+
+```text
+První běžné použití:
+Obchod poslal volitelnou otázku na rámcový rozpočet v potvrzovacím e-mailu u relevantní poptávky.
+
+Výsledek:
+Zákazník odpověděl a další krok šel navrhnout bez povinného pole ve formuláři.
+
+Uzavírací stav:
+Ponechat v klidu.
+
+Co se propisuje:
+Do obchodního checklistu doplňujeme krátkou větu, že volitelná otázka patří jen k relevantním poptávkám, kde rozpočet chybí pro další krok.
+
+Co zůstává zavřené:
+Povinné pole pro rozpočet, automatický lead scoring a export do další tabulky.
+
+Privacy-first závěr:
+Nevzniká nový CRM atribut. Rozpočtový kontext zůstává pouze v běžném obchodním vlákně.
+```
+
+Slabší varianta:
+
+```text
+První běžné použití:
+Člověk chtěl pravidlo použít, ale nenašel ho u e-mailové šablony.
+
+Uzavírací stav:
+Doplnit lokální kotvu.
+
+Oprava:
+Ke šabloně přidáváme odkaz na rozhodovací větu a jednu krátkou instrukci.
+
+Co neotevíráme:
+Novou dokumentaci kvalifikace, úpravu formuláře ani revizi celé obchodní trasy.
+```
+
+Tady je podstatné, že uzavření zůstává věrné velikosti problému. Chyběl odkaz u šablony, takže opravujete odkaz u šablony. Nezakládáte nové "Sales Excellence Q3 Initiative", protože jedna věta nebyla po ruce. Někdy je dospělost systému opravdu jen v tom, že neudělá z drobnosti program.
+
+### Privacy-first uzavření
+
+Při uzavření prvního použití se podívejte na datovou stopu, která vznikla během ověření. Neřešte jen velké věci jako nový nástroj nebo tracker. V malých týmech se datová stopa často schová do obyčejných poznámek: kopie zákaznické odpovědi v interním dokumentu, screenshot e-mailu, pomocná tabulka nebo ruční štítek v CRM.
+
+Použijte tři řádky:
+
+```text
+Ponecháváme v pracovním místě:
+
+Mažeme nebo nepřenášíme:
+
+Dál nesbíráme:
+```
+
+Příklad:
+
+```text
+Ponecháváme v pracovním místě:
+Anonymizovanou větu, že volitelná otázka pomohla kvalifikovat poptávku.
+
+Mažeme nebo nepřenášíme:
+Kopii konkrétní zákaznické odpovědi v pracovní poznámce.
+
+Dál nesbíráme:
+Rozpočet jako povinné formulářové pole, automatické skóre leadu a zvláštní export poptávek.
+```
+
+Tím se z prvního použití nestane důvod pro trvalou evidenci. Privacy-first provoz tady není dekorace. Je to praktická schopnost říct: poznatek si necháme, osobní nebo obchodní detaily netaháme dál, pokud nejsou potřeba pro práci.
+
+### Karta uzavření prvního použití
+
+```text
+Uzavřený návrat:
+
+První běžné použití:
+
+Co se opravdu stalo:
+
+Uzavírací stav:
+- ponechat v klidu
+- doplnit lokální kotvu
+- zpřesnit rozhodovací větu
+- zastavit rozšíření hranice
+
+Co se propisuje do pracovního místa:
+
+Co zůstává výslovně zavřené:
+
+Návratový signál pro další otevření:
+
+Privacy-first uzavření:
+Ponecháváme v pracovním místě:
+Mažeme nebo nepřenášíme:
+Dál nesbíráme:
+
+Potřebujeme druhé běžné použití?
+- ano, protože:
+- ne, protože:
+
+Vlastník:
+
+Datum dalšího běžného rytmu:
+```
+
+Karta má být krátká. Pokud se uzavření nevejde na jednu obrazovku, pravděpodobně se do něj přimíchal nový problém. Ten patří do vlastní otázky, ne do závěru prvního použití.
+
+### Kdy plánovat druhé běžné použití
+
+Druhé běžné použití neplánujte automaticky. Má smysl jen tehdy, když první použití opravilo lokální kotvu nebo rozhodovací větu a chcete ověřit, že oprava funguje bez čerstvého vysvětlování. Pokud první použití dopadlo samostatně, stačí běžný rytmus.
+
+Dobré důvody pro druhé použití:
+
+- pravidlo použije jiný člověk než ten, kdo ho uzavíral;
+- pravidlo se použije ve stejném procesu, ale v jiném pracovním místě;
+- první použití odhalilo slabou větu, kterou jste právě zpřesnili;
+- existuje riziko, že se původní široký návrh znovu otevře jen ze zvyku.
+
+Špatné důvody:
+
+- chceme mít větší jistotu, ale nevíme k čemu;
+- někdo má pocit, že by se to mělo ještě sledovat;
+- první použití dopadlo dobře, a proto chceme vytvořit novou metriku;
+- kontrola je pohodlnější než rozhodnutí nechat pravidlo být.
+
+Codyho komentář: druhé použití je nástroj, ne talisman. Když ho plánujete jen proto, aby se tým cítil bezpečně, pravděpodobně vyrábíte další péči místo lepšího pravidla. Bezpečí v systému často vzniká tím, že něco dobře zavřete a opravdu to necháte zavřené.
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: přečtěte první běžné použití jednou větou.
+2. Minuta 2: pojmenujte, co se opravdu stalo.
+3. Minuta 3: vyberte jeden uzavírací stav.
+4. Minuta 4: napište, co se propisuje do pracovního místa.
+5. Minuta 5: napište, co zůstává zavřené.
+6. Minuta 6: proveďte privacy-first úklid stop.
+7. Minuta 7: rozhodněte, jestli je potřeba druhé běžné použití.
+
+Pokud během workshopu vznikne nový návrh na úpravu formuláře, scoringu nebo automatizace, nehádejte se o něj v této kartě. Zapište ho jako podnět a porovnejte s návratovým signálem. Bez signálu zůstává venku.
+
+### Checklist uzavření prvního použití
+
+- Máme konkrétní popis prvního běžného použití?
+- Víme, co se opravdu stalo, ne jen co jsme čekali?
+- Vybrali jsme jeden uzavírací stav?
+- Je případná oprava lokální a nejbližší pracovnímu místu?
+- Zůstává původní široký návrh výslovně zavřený?
+- Je návratový signál pro další otevření pořád konkrétní?
+- Uklidili jsme dočasné poznámky, kopie zpráv, screenshoty nebo pomocné tabulky?
+- Nepřidali jsme nový CRM atribut, export, tracker ani formulářové pole bez důvodu?
+- Je jasné, jestli plánujeme druhé běžné použití, nebo pravidlo vracíme do běžného rytmu?
+- Umí další člověk použít závěr bez čtení celé historie návratu?
+
+Uzavření prvního běžného použití má přestat držet pravidlo za ruku. Buď stojí samo, nebo potřebuje jednu blízkou opravu. V obou případech platí stejné pravidlo: nevracet široký návrh zadními dveřmi a nenechávat po kontrole zbytečnou datovou stopu.
+
 ## Kontrola přeneseného kontextu při návratu k tématu
 
 Když se tým vrací k tématu po týdnech nebo měsících, největší riziko často není zapomenutí. Horší je poloviční paměť: všichni si pamatují název problému, ale každý si pod ním nese jiný starý kontext. Jeden člověk pořád řeší původní segment, druhý už myslí na novou nabídku, třetí si pamatuje starou výjimku a čtvrtý má v hlavě poslední incident. Výsledek vypadá jako shoda, ale práce se rozjede do čtyř směrů.
@@ -256169,6 +256349,7 @@ Uzavření druhého běžného použití je malá tečka za návratem z klidu. K
 
 ## Pracovní log
 
+- 2026-06-25: Doplněna úvodní podkapitola o uzavření prvního běžného použití po uzavření návratu k neotevřenému kroku: uzavírací stavy, lokální kotva, zpřesnění rozhodovací věty, ochrana zavřené hranice, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-25: Doplněna úvodní podkapitola o uzavření druhého běžného použití po návratu z klidu: čtyři uzavírací stavy, praktické příklady, propsání do pracovního místa, privacy-first úklid, karta a checklist.
 - 2026-06-25: Doplněna úvodní podkapitola o prvním běžném použití po uzavření návratu k neotevřenému kroku: najitelnost závěru, rozhodovací věta, ochrana zavřené hranice, privacy-first kontrola datové stopy, karta, mini workshop a checklist.
 - 2026-06-25: Doplněna úvodní podkapitola o druhém běžném použití po uzavření prvního návratu z klidového režimu: přenositelnost bez čerstvé paměti, stabilita hranice, falešný návrat, privacy-first kontrola bez nové evidence, karta, mini workshop a checklist.
