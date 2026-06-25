@@ -255478,8 +255478,202 @@ Pokud workshop vyrobí víc než jednu opravu, vyberte tu nejbližší pracovní
 
 První běžné použití po uzavřeném návratu má být nudné. Pokud je dramatické, něco ještě není propsané do provozu. Dobrá zpráva: to není katastrofa, jen malý ukazatel práce. Opravte nejbližší místo, ukliďte dočasné stopy a nechte pravidlo znovu dělat to, kvůli čemu existuje: pomáhat rozhodnout bez zbytečné debaty a bez zbytečných dat.
 
+## Uzavření prvního běžného použití po uzavření prvního návratu z klidového režimu
+
+První běžné použití samo o sobě ještě není konec. Je to situace, ve které se pravidlo znovu potkalo s provozem. Uzavření je krátký krok po ní: tým pojmenuje výsledek, rozhodne, jestli se něco lokálně opravuje, a vrátí pravidlo buď zpátky do klidu, nebo do nejbližší běžné kontroly.
+
+Bez uzavření vzniká nepříjemný mezistav. Všichni vědí, že se pravidlo použilo, ale nikdo neví, jestli to znamená "funguje", "ještě ho hlídáme", nebo "někde máme starou kopii". A protože mezistavy milují nenápadné rozlézání, za týden se z nich stane další schůzka, další tabulka a další věta začínající slovy "radši si to chvíli sledujme". To je věta, kterou je dobré brát vážně, ale nikdy automaticky.
+
+Začněte jednou uzavírací větou:
+
+```text
+První běžné použití uzavíráme jako:
+```
+
+Za dvojtečku patří stav, ne popis celého příběhu. Popis může být v další větě. Stav má týmu rychle říct, co se děje dál.
+
+### Čtyři uzavírací stavy
+
+První stav je `uzavřeno do klidu`. Pravidlo bylo najitelné, pomohlo rozhodnout a nepřidalo žádnou mimořádnou péči. Není potřeba otevírat další opravu ani speciální kontrolu. Pokud existuje běžný měsíční nebo kvartální rytmus, pravidlo se do něj vrací. Pokud neexistuje, nezakládejte ho jen kvůli dobrému výsledku.
+
+Uzavírací věta může znít:
+
+```text
+První běžné použití uzavíráme do klidu. Pravidlo bylo v potvrzovací šabloně, obchod podle něj postupoval bez otevření staré debaty a nevznikla nová datová stopa.
+```
+
+Druhý stav je `lokální oprava před klidem`. Pravidlo je správné, ale narazilo na praktickou drobnost: starý odkaz, neaktuální šablonu, slabý název dokumentu, chybějící větu u procesu nebo nejasné místo, kam se zapisuje výsledek. Opravuje se pouze pracovní místo, kde tření vzniklo. Neotevírá se celý návrat ani původní produktová otázka.
+
+Uzavírací věta:
+
+```text
+První běžné použití uzavíráme lokální opravou před klidem. Aktualizujeme potvrzovací šablonu a smažeme starou kopii; otázku povinného rozpočtu znovu neotevíráme.
+```
+
+Třetí stav je `krátká druhá kontrola`. Pravidlo šlo použít, ale výsledek stojí na hraně: člověk potřeboval dovysvětlení, rozhodnutí bylo možné jen díky čerstvé paměti, nebo se objevila drobná nejasnost, která může při dalším použití znovu bolet. V takovém případě naplánujte jednu druhou běžnou kontrolu. Jednu, ne sérii. Kontrola má ověřit konkrétní hranu, ne hlídat celý proces.
+
+Uzavírací věta:
+
+```text
+První běžné použití uzavíráme krátkou druhou kontrolou. Při další relevantní poptávce ověříme jen to, zda člověk rozliší volitelnou rozpočtovou větu od povinného pole bez dovysvětlení.
+```
+
+Čtvrtý stav je `nový návratový signál`. To je nejvážnější varianta. Běžné použití neukázalo jen slabou šablonu, ale novou skutečnost, která odpovídá návratovému signálu nebo mění pracovní realitu. Tady se nehraje na klid za každou cenu. Otevře se nový malý průchod, ale musí mít dnešní důvod a vlastní hranici.
+
+Uzavírací věta:
+
+```text
+První běžné použití neuzavíráme do klidu, protože se objevil nový návratový signál: tři relevantní poptávky za sebou nejdou kvalifikovat bez ručního doptání na rozhodovací limit. Otevíráme jen kontrolu potvrzovací zprávy, ne povinné pole ve formuláři.
+```
+
+Codyho komentář: nejdůležitější slovo je tady "jen". Jen šablona. Jen druhá kontrola. Jen potvrzovací zpráva. Jakmile věta nejde říct s rozumným "jen", krok je nejspíš moc velký a převléká starou ambici za provozní uzavření.
+
+### Praktický příklad
+
+Situace:
+
+```text
+Po návratu z klidového režimu zůstalo pravidlo:
+Rozpočet nedáváme do prvního formuláře. V potvrzovací zprávě ponecháváme volitelnou větu k rozpočtu nebo rozhodovacímu limitu.
+```
+
+První běžné použití:
+
+```text
+Přišla relevantní poptávka. Formulář zůstal krátký. Potvrzovací zpráva odešla se správnou volitelnou větou. Zákazník rozpočet nedoplnil, obchod kvalifikoval poptávku běžným follow-upem.
+```
+
+Dobré uzavření:
+
+```text
+První běžné použití uzavíráme do klidu. Šablona byla aktuální, obchod nemusel otevírat starou debatu o povinném poli a nevznikl nový CRM atribut ani ruční seznam poptávek bez rozpočtu. Další kontrola proběhne jen při návratovém signálu: tři relevantní poptávky za sebou nepůjdou kvalifikovat bez ručního doptání na rozhodovací limit.
+```
+
+Slabé uzavření:
+
+```text
+Použití proběhlo, ale radši budeme měsíc sledovat všechny poptávky bez rozpočtu a pak se uvidí.
+```
+
+Slabé uzavření neříká, jaké rozhodnutí má evidence umožnit, kdo ji ukončí ani proč nestačí běžný obchodní follow-up. Vypadá opatrně, ale prakticky přidává datovou stopu bez jasného konce. Lepší oprava je zeptat se: co přesně se bojíme nezachytit a jaký návratový signál už pro to máme?
+
+### Co propsat zpět do pracovního místa
+
+Po uzavření nepište dlouhé shrnutí historie. Do pracovního místa patří jen to, co pomůže dalšímu člověku jednat správně.
+
+Typicky stačí tři věty:
+
+```text
+Aktuální pravidlo:
+
+Kdy se pravidlo znovu otevře:
+
+Co teď výslovně nesledujeme:
+```
+
+Příklad:
+
+```text
+Aktuální pravidlo:
+Rozpočet nedáváme do prvního formuláře; volitelná věta zůstává v potvrzovací zprávě.
+
+Kdy se pravidlo znovu otevře:
+Pouze pokud tři relevantní poptávky za sebou nepůjdou kvalifikovat bez ručního doptání na rozhodovací limit.
+
+Co teď výslovně nesledujeme:
+Nevedeme seznam poptávek bez rozpočtu, nepřidáváme CRM atribut a neměříme otevření potvrzovacího e-mailu.
+```
+
+Tím se další člověk dozví vše důležité bez procházení starých debat. Zároveň má jasnou brzdu proti tomu, aby z běžné situace omylem udělal novou datovou iniciativu.
+
+### Privacy-first uzavření
+
+Uzavření prvního běžného použití je dobré místo pro úklid dočasných stop. Pokud během návratu nebo prvního použití vznikly pracovní poznámky, screenshoty, kopie e-mailů, ruční exporty nebo pomocné tabulky, rozhodněte o nich hned. Čím déle leží bokem, tím víc se tváří jako normální součást systému.
+
+Použijte jednoduché pravidlo:
+
+- Co je potřeba pro rozhodovací paměť, zobecněte.
+- Co je potřeba pro běžnou práci, přesuňte do kanonického pracovního místa.
+- Co bylo jen pomocné, smažte nebo archivujte podle interní retence.
+- Co obsahuje osobní nebo obchodně citlivá data, nepoužívejte jako příklad bez anonymizace.
+
+Privacy-first uzavření nemá znít jen "nic nového nesbíráme". Má říct i to, co se po ověření odklízí.
+
+Praktický zápis:
+
+```text
+Do pracovního místa přepisujeme pouze zobecněný závěr. Pomocnou poznámku z prvního použití mažeme po propsání pravidla do šablony. Nekopírujeme původní poptávku do logu, nevytváříme nový export a nezavádíme měření otevření potvrzovací zprávy.
+```
+
+Tohle je nudné, přesné a provozně zdravé. Přesně ten typ nudy, ze kterého se staví důvěryhodný systém.
+
+### Karta uzavření prvního běžného použití
+
+```text
+Téma:
+
+Pravidlo po uzavřeném návratu:
+
+Pracovní místo prvního běžného použití:
+
+Výsledek prvního použití:
+
+Uzavírací stav:
+- uzavřeno do klidu
+- lokální oprava před klidem
+- krátká druhá kontrola
+- nový návratový signál
+
+Jednovětý závěr:
+
+Co se propsalo do pracovního místa:
+
+Co se výslovně neotevírá:
+
+Co se výslovně nesleduje:
+
+Jaké pomocné stopy mažeme, slučujeme nebo archivujeme:
+
+Návratový signál:
+
+Vlastník lokální opravy nebo druhé kontroly, pokud existuje:
+
+Datum dalšího běžného review, pokud existuje:
+```
+
+Kartu použijte hlavně ve chvíli, kdy výsledek není čisté `uzavřeno do klidu`. Pokud pravidlo fungovalo bez tření, postačí krátký zápis v místě, kde pravidlo žije. Dokumentační disciplína neznamená vyrábět formulář na každý nádech systému. To bychom se zbláznili, a ještě by to mělo špatnou tabulku.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte výsledek prvního běžného použití.
+2. Minuta 2: vyberte jeden ze čtyř uzavíracích stavů.
+3. Minuta 3: napište jednovětý závěr.
+4. Minuta 4: určete, co se propsalo do pracovního místa.
+5. Minuta 5: proveďte privacy-first úklid pomocných stop.
+6. Minuta 6: potvrďte návratový signál nebo jednu krátkou druhou kontrolu.
+
+Pokud se workshop zasekne na sporu, jestli pravidlo "asi funguje", vraťte se k pracovnímu místu. Neřešte dojem. Zeptejte se: našel člověk pravidlo, rozhodl podle něj a nevznikla nová mimořádná péče? Tři ano znamenají klid. Jedno ne znamená lokální opravu nebo krátkou kontrolu. Tři odstavce pocitů znamenají, že někdo tajně píše román místo provozního závěru.
+
+### Checklist uzavření prvního běžného použití
+
+- Máme vybraný jeden uzavírací stav?
+- Je závěr napsaný jednou větou?
+- Víme, jestli pravidlo jde do klidu, lokální opravy, krátké druhé kontroly, nebo nového malého průchodu?
+- Propsali jsme aktuální pravidlo do pracovního místa, kde ho člověk příště opravdu použije?
+- Neotevíráme znovu původní téma jen kvůli drobnému tření?
+- Pokud vznikla lokální oprava, je omezená na nejbližší místo?
+- Pokud vznikla druhá kontrola, má jeden konkrétní účel a konec?
+- Máme jasný návratový signál pro další otevření?
+- Uklidili jsme pomocné poznámky, kopie, exporty nebo ruční evidence?
+- Nepřidali jsme nový tracker, CRM atribut, měření e-mailu ani delší retenci jen pro pocit jistoty?
+- Stačí pro paměť zobecněný závěr bez osobních detailů?
+- Ví vlastník, co přesně má udělat a kdy se tím přestane zabývat?
+
+Uzavření prvního běžného použití má chránit pravidlo před dvěma opačnými chybami. První je předčasný klid, kdy tým přehlédne skutečné tření. Druhá je nekonečná opatrnost, kdy se z každého použití stane další dohled. Dobrý závěr je kratší: co se stalo, co platí dál, co neotevíráme a jaká data kvůli tomu nezačnou vznikat.
+
 ## Pracovní log
 
+- 2026-06-25: Doplněna úvodní podkapitola o uzavření prvního běžného použití po uzavření prvního návratu z klidového režimu: uzavírací stavy, praktický příklad, propsání do pracovního místa, privacy-first úklid stop, karta, mini workshop a checklist.
 - 2026-06-25: Doplněna úvodní podkapitola o prvním běžném použití po uzavření prvního návratu z klidového režimu: najitelnost, rozhodnutelnost, klid bez mimořádné péče, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-06-25: Doplněna úvodní podkapitola o uzavření prvního návratu z klidového režimu: tři uzavírací stavy, praktické příklady, privacy-first úklid podkladů, karta, mini workshop a checklist.
 - 2026-06-25: Doplněna úvodní podkapitola o prvním návratu z klidového režimu: rozlišení podnětu a návratového signálu, lokální otevření, kontrola změněné reality, privacy-first práce bez nového sledování, karta, mini workshop a checklist.
