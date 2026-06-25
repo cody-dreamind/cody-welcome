@@ -252534,8 +252534,181 @@ Pět minut stačí, protože nejde o novou revizi. Jde o kontrolu, jestli se pra
 
 První běžné použití po uzavřeném návratu je dobrá zkouška pokory. Ukáže, jestli tým opravdu uzavřel práci, nebo jen napsal pěkný závěr na konec poslední schůzky. Když pravidlo obstojí, nechte ho pracovat. Když neobstojí, opravte nejmenší místo, které bránilo použití. A když se ukáže, že návrat byl větší, než vypadal, pojmenujte to otevřeně. Malé pravdivé znovuotevření je lepší než velká hromada drobných výjimek.
 
+## Uzavření prvního běžného použití po uzavření prvního návratu z klidu
+
+První běžné použití po návratu z klidu nestačí jen pozorovat. Musí se také uzavřít. Jinak z něj zůstane zvláštní mezistav: pravidlo se už jednou použilo, ale nikdo neřekl, jestli se opravdu vrací do normálního provozu, potřebuje lokální opravu, nebo znovu otevírá návratovou smyčku. Takový mezistav je nenápadný, ale drahý. Tým se k němu vrací při každém dalším použití a pokaždé znovu řeší, jestli "už je to v pořádku".
+
+Uzavření má udělat jednu věc: převést výsledek prvního použití do stabilního stavu. Ne do velkého review. Ne do nového seznamu nápadů. Do stavu, podle kterého bude další člověk vědět, jestli pravidlo používá normálně, hledá drobnou opravu, nebo má otevřít malou smyčku se stop podmínkou.
+
+Začněte krátkým zápisem:
+
+```text
+Při prvním běžném použití se ukázalo:
+
+Výsledek byl:
+
+Teď proto:
+
+Do běžného pracovního místa propisujeme:
+
+Mimo rozsah zůstává:
+```
+
+Praktický příklad:
+
+```text
+Při prvním běžném použití se ukázalo:
+Šablona lead magnetu pomohla rozhodnout, že telefonní číslo nepatří do prvního kroku. Člověk našel správné místo bez pomoci a nepotřeboval otevřít staré poptávky.
+
+Výsledek byl:
+Samostatné použití.
+
+Teď proto:
+Pravidlo necháváme v klidu a nepřidáváme novou kontrolu.
+
+Do běžného pracovního místa propisujeme:
+Krátký příklad u hraniční věty: "Telefon do prvního kroku nepatří, pokud pro doručení hodnoty stačí e-mail."
+
+Mimo rozsah zůstává:
+Neměníme formulář, nespouštíme nové měření a neotevíráme staré obchodní poznámky.
+```
+
+Všimněte si, že i úspěšné použití může vést k malému propsání. Ne proto, že pravidlo potřebuje další péči, ale proto, aby se dobrý příklad dostal na správné místo. Rozdíl je v rozsahu. Propsání jednoho příkladu do šablony je uzavření. Otevření debaty o celé lead magnet strategii je útěk z uzavření, jen oblečený do pracovního trička.
+
+### Čtyři uzavírací stavy
+
+Po prvním běžném použití vyberte jeden ze čtyř stavů:
+
+- Vrátit do klidu: pravidlo bylo nalezené, použité a nepotřebovalo starou historii.
+- Lokálně opravit cestu: pravidlo funguje, ale člověk ho hledal moc dlouho nebo přes špatné místo.
+- Lokálně opravit hranici: pravidlo je najitelné, ale jedna věta nedává dost jasné rozhodnutí.
+- Znovu otevřít malou smyčku: použití ukázalo, že návrat nebyl skutečně uzavřený.
+
+Stav `vrátit do klidu` je nejčistší. Zapište výsledek a nepřidávejte další revizní rytmus. Pokud se pravidlo použilo samostatně, nepotřebuje za odměnu novou schůzku. Potřebuje klid, aby mohlo dál dělat svou nudnou, užitečnou práci.
+
+Stav `lokálně opravit cestu` znamená, že problém není v obsahu, ale v navigaci. Opravte název v indexu, odkaz z pracovní šablony, popisek v kanonickém místě nebo jeden příklad, podle kterého člověk pozná, že je ve správné části. Neprodlužujte samotné pravidlo jen proto, že ho někdo nenašel.
+
+Stav `lokálně opravit hranici` znamená, že člověk správné místo našel, ale rozhodnutí pořád potřebovalo dohadu. Tady pomáhá jedna hraniční věta, negativní příklad nebo malá dvojice "patří sem / nepatří sem". Pokud oprava vyžaduje přepsat celý standard, už nejde o lokální hranici.
+
+Stav `znovu otevřít malou smyčku` použijte, když běžné použití potřebovalo staré podklady, mimořádné vysvětlení nebo nový důkaz. Nevracejte se rovnou k celé historii. Otevřete jen to, co se ukázalo v prvním použití: konkrétní pracovní místo, stop podmínku a privacy-first hranici.
+
+### Co propsat zpět
+
+Uzavření prvního běžného použití má mít malé, ale viditelné propsání. Jinak se dobrý výsledek ztratí v poznámce a další člověk z něj nic nemá. Propsání může mít několik podob:
+
+- jeden příklad u šablony;
+- přesnější název odkazu v kanonickém indexu;
+- doplněná hraniční věta v pracovním místě;
+- krátký záznam, že pravidlo se použilo samostatně;
+- uzavření dočasné kontrolní poznámky.
+
+Nepropagujte ale výsledek do míst, kde se nebude používat. Když se pravidlo týká lead magnet formuláře, nepište ho do obecné marketingové strategie, obchodního playbooku i privacy checklistu najednou. Jedno kanonické místo stačí. Ostatní místa mohou odkazovat, ale nemají nést vlastní kopii pravidla. Kopie stárnou, odkazy se dají udržet.
+
+Praktická věta pro propsání:
+
+```text
+Toto pravidlo bylo po návratu z klidu použité samostatně při [pracovní situace]. Další mimořádnou kontrolu nepřidáváme; vrací se do běžného rytmu.
+```
+
+Pokud byla potřeba lokální oprava, věta se změní:
+
+```text
+První běžné použití ukázalo slabou navigaci. Opravili jsme odkaz z [pracovní místo] na [kanonické místo]. Obsah pravidla neměníme.
+```
+
+Takový zápis je krátký, ale brání dvěma chybám: aby se úspěšné pravidlo dál hlídalo ze zvyku, nebo aby se malá navigační oprava tvářila jako nový obsahový problém.
+
+### Privacy-first uzavření
+
+Po prvním běžném použití často vznikne pokušení "raději si nechat" všechny poznámky z ověření. To je přesně okamžik, kdy se z dobré pracovní stopy stává malý archiv bez účelu. Uzavření musí říct, co zůstává a co mizí.
+
+Položte si tři otázky:
+
+- Stačí nám zobecněný závěr místo konkrétního příkladu?
+- Má pomocná poznámka další účel, nebo jen dokládá, že jsme byli pečliví?
+- Kde je jediný zdroj pravdy po uzavření?
+
+U privacy-first provozu je dobré preferovat větu před kopií. Místo vložení celé zákaznické poptávky napište: "Při přípravě lead magnetu nebyl potřeba telefon, protože hodnota šla doručit e-mailem." Místo screenshotu interního formuláře napište: "Rozhodnutí proběhlo podle hraniční věty v šabloně." Pokud detail není potřeba pro další rozhodnutí, nemá se stěhovat do další vrstvy dokumentace.
+
+Zavírací privacy-first věta může znít:
+
+```text
+Po uzavření necháváme jen zobecněný pracovní závěr v šabloně. Dočasné poznámky z prvního použití nemažeme z původního systému silou, ale nekopírujeme je do nového dokumentu a neotevíráme staré zákaznické detaily.
+```
+
+Tohle není byrokracie. Je to hygiena. Data, která se nepřelévají do dalších dokumentů, se později nemusí složitě hledat, vysvětlovat, mazat ani omlouvat. Nejlepší datový úklid je často ten, který vůbec nevznikne.
+
+### Karta uzavření prvního běžného použití
+
+```text
+Téma:
+
+Uzavřený návrat, ze kterého vycházíme:
+
+První běžná pracovní situace:
+
+Výsledek prvního použití:
+- samostatné použití
+- slabá navigace
+- slabé rozhodnutí
+- návrat není uzavřený
+
+Uzavírací stav:
+- vrátit do klidu
+- lokálně opravit cestu
+- lokálně opravit hranici
+- znovu otevřít malou smyčku
+
+Rozhodnutí jednou větou:
+
+Co propisujeme do kanonického pracovního místa:
+
+Co výslovně neotevíráme:
+
+Privacy-first úklid:
+Které podklady zobecníme, necháme v původním systému nebo už dál nekopírujeme:
+
+Návratový signál:
+
+Vlastník:
+
+Datum:
+```
+
+Karta má zachytit uzavření, ne znovu vyprávět celý návrat z klidu. Pokud do ní potřebujete přidat dlouhou historii, vraťte se k uzavřenému návratu a zjistěte, proč není dohledatelný. Karta prvního použití nemá suplovat archiv.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte výsledek prvního běžného použití.
+2. Minuta 2: vyberte jeden uzavírací stav.
+3. Minuta 3: napište rozhodnutí jednou větou.
+4. Minuta 4: určete, co se propíše do kanonického pracovního místa.
+5. Minuta 5: napište, co výslovně neotevíráte.
+6. Minuta 6: udělejte privacy-first úklid pomocných stop.
+
+Když workshop potřebuje víc než šest minut, pravděpodobně neuzavíráte první použití, ale znovu otevíráte téma. To může být správně, ale pojmenujte to. Skrytě otevřená smyčka je horší než přiznaná malá smyčka se stop podmínkou.
+
+### Checklist uzavření prvního běžného použití
+
+- Víme, v jaké běžné pracovní situaci se pravidlo použilo?
+- Vybrali jsme původní výsledek prvního použití?
+- Vybrali jsme jeden uzavírací stav?
+- Umíme rozhodnutí napsat jednou větou?
+- U úspěšného použití nepřidáváme další kontrolu jen ze zvyku?
+- U slabé navigace opravujeme cestu, ne obsah pravidla?
+- U slabé hranice opravujeme jednu rozhodovací větu, ne celý standard?
+- U neuzavřeného návratu otevíráme malou smyčku se stop podmínkou?
+- Propsali jsme výsledek do jednoho kanonického pracovního místa?
+- Je jasné, co výslovně neotevíráme?
+- Zobecnili jsme pracovní důkaz všude, kde není potřeba detail?
+- Nekopírujeme staré podklady do nové vrstvy dokumentace?
+- Má pravidlo po uzavření jasný návratový signál?
+
+Uzavření prvního běžného použití je drobný konec, který šetří velké množství budoucího šumu. Když pravidlo funguje, nechte ho v klidu. Když drhne, opravte nejmenší místo. Když se ukáže, že návrat nebyl uzavřený, otevřete malou smyčku a přiznejte to. Všechny tři reakce jsou lepší než nekonečný stav "ještě to sledujeme", který většinou znamená jen "nevíme, kdo to má zavřít".
+
 ## Pracovní log
 
+- 2026-06-25: Doplněna úvodní podkapitola o uzavření prvního běžného použití po uzavření prvního návratu z klidu: uzavírací stavy, propsání do kanonického pracovního místa, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-24: Doplněna úvodní podkapitola o prvním běžném použití po uzavření prvního návratu z klidu: samostatnost pravidla, slabá navigace, slabé rozhodnutí, privacy-first ověření, karta, mini workshop a checklist.
 - 2026-06-24: Doplněna úvodní podkapitola o uzavření prvního návratu z klidu po druhé standardní kontrole: uzavírací stavy, propsání změn do provozu, privacy-first úklid podkladů, karta, mini workshop a checklist.
 - 2026-06-24: Doplněna úvodní podkapitola o prvním návratu z klidu po druhé standardní kontrole: návratový signál, tři brány návratu, čtyři výsledky, privacy-first práce s důkazy, karta, mini workshop a checklist.
