@@ -256347,8 +256347,175 @@ Datum dalšího běžného rytmu:
 
 Uzavření druhého běžného použití je malá tečka za návratem z klidu. Když ji uděláte dobře, pravidlo se přestane tvářit jako nedávná oprava a začne být normální součást práce. A normální práce je přesně místo, kde mají dobrá pravidla končit.
 
+## Převod uzavřeného druhého použití zpět do stabilního klidu
+
+Po uzavření druhého běžného použití přichází poslední nenápadný krok: převést pravidlo zpět do stabilního klidu. Ne jako slavnostní archivaci, ale jako praktické potvrzení, že mimořádná pozornost skončila. Tým už nemá hlídat návrat jako čerstvou událost. Má používat pravidlo v místě práce a vracet se k němu jen podle domluveného návratového signálu.
+
+Tenhle převod je důležitý hlavně proto, že mnoho týmů nechá po dobrém ověření viset malé zbytky péče. Někde zůstane dočasná poznámka, někde ruční kontrola, někde "ještě měsíc pro jistotu" tabulka, někde interní připomínka v kalendáři. Každá z těch věcí vypadá nevinně. Dohromady ale udržují téma v polopohotovosti a tým si po čase není jistý, jestli pravidlo opravdu odpočívá, nebo se pořád sleduje bokem.
+
+Začněte proto větou:
+
+```text
+Po uzavřeném druhém použití převádíme pravidlo zpět do stabilního klidu takto:
+```
+
+Za ní napište tři věci: kde pravidlo teď žije, kdy se znovu otevře a co se po převodu výslovně přestává sledovat. Bez těchto tří bodů se stabilní klid snadno změní v neurčitý stav "asi hotovo".
+
+### Co znamená stabilní klid
+
+Stabilní klid není zapomenutí. Je to stav, kdy pravidlo:
+
+- má kanonické místo v běžné práci,
+- má konkrétní návratový signál,
+- nemá mimořádný dohled,
+- nemá pomocnou evidenci mimo původní systém,
+- a starší širší návrh zůstává zavřený, dokud nepřijde nový důvod.
+
+Kanonické místo je místo, kde člověk pravidlo použije bez hledání historie. Může to být potvrzovací e-mail, obchodní checklist, onboardingová šablona, interní rozcestník, provozní runbook nebo poznámka u formuláře. Pokud pravidlo žije jen v rozhodovacím logu, není ještě v klidu. Je uložené, ale nepracuje.
+
+Návratový signál musí být konkrétní. "Když to zase začne zlobit" není signál. "Tři relevantní poptávky za sebou nepůjdou kvalifikovat ani po použití volitelné otázky" už signál je. Stabilní klid potřebuje hranici, kterou pozná i člověk, který u poslední debaty nebyl.
+
+Mimořádný dohled musí skončit. Pokud druhé použití potvrdilo přenositelnost, není potřeba třetí zvláštní kontrola jen proto, že téma bylo nedávno citlivé. Další kontrola může proběhnout v běžném rytmu, třeba při měsíčním review šablon nebo kvartální kontrole datové stopy. Ne jako samostatná výjimka.
+
+### Praktický příklad převodu
+
+```text
+Pravidlo:
+Rozpočet nedáváme do prvního formuláře. U relevantních poptávek používáme volitelnou větu v potvrzovacím e-mailu.
+
+Druhé běžné použití:
+Nový člověk pravidlo použil bez čerstvého vysvětlení a poptávku šlo kvalifikovat běžným follow-upem.
+
+Stav po uzavření:
+Vrátit do klidu.
+
+Kanonické místo:
+Aktuální potvrzovací šablona a obchodní checklist.
+
+Návratový signál:
+Tři relevantní poptávky za sebou nepůjdou kvalifikovat ani po použití volitelné otázky.
+
+Co končí:
+Dočasná poznámka k ověření druhého použití a ruční připomínka na další mimořádnou kontrolu.
+
+Co zůstává zavřené:
+Povinné pole pro rozpočet, automatický lead scoring a export poptávek do samostatné tabulky.
+```
+
+Tento zápis neříká "už se tím nikdy nezabýváme". Říká něco užitečnějšího: téma má svoje místo, svoje pravidlo a svoji hranici návratu. Není potřeba kolem něj dál chodit po špičkách.
+
+### Tři typy převodu do klidu
+
+První typ je `čistý převod`. Použijte ho, když druhé použití potvrdilo přenositelnost a nevznikla žádná lokální oprava. V takovém případě stačí potvrdit kanonické místo, návratový signál a ukončení mimořádné péče.
+
+Druhý typ je `převod po lokálním dočištění`. Použijte ho, když druhé použití odhalilo drobnou nejasnost a ta už byla propsaná do pracovního místa. Klid začíná až po propsání, ne po slibu, že se propsání někdy udělá. Jinak se stabilní klid opírá o nedokončenou větu, což je provozní verze stavění židle se třemi nohami.
+
+Třetí typ je `převod s odloženým návratovým signálem`. Použijte ho, když se při uzavření ukázalo, že návratový signál je srozumitelný, ale zatím nemá kdo ho běžně poznat. Například obchodní checklist ho obsahuje, ale nový vlastník ještě neprošel první běžnou situací. V takovém případě neotevírejte mimořádnou kontrolu obsahu. Jen určete, kde se signál v běžném procesu objeví a kdo ho má rozpoznat.
+
+Rozdíl mezi třetím typem a skrytou mimořádnou péčí je v rozsahu. U odloženého signálu nesledujete všechno. Jen víte, kde se hranice pozná. U skryté péče někdo bokem hlídá, připomíná, zapisuje a zachraňuje pravidlo. To už není klid.
+
+### Privacy-first převod
+
+Převod do stabilního klidu je ideální chvíle pro poslední úklid datové stopy. Všechno, co vzniklo kvůli návratu, druhému použití nebo lokálnímu dočištění, musí dostat jasný stav.
+
+Použijte krátkou tabulku:
+
+```text
+Zůstává v kanonickém místě:
+
+Zůstává ve zdrojovém systému:
+
+Mažeme nebo nepřenášíme:
+
+Dál výslovně nesbíráme:
+```
+
+Praktický zápis:
+
+```text
+Zůstává v kanonickém místě:
+Jedna věta v potvrzovací šabloně a hranice návratového signálu v obchodním checklistu.
+
+Zůstává ve zdrojovém systému:
+Běžná obchodní vlákna podle standardní retence.
+
+Mažeme nebo nepřenášíme:
+Dočasnou poznámku z ověření druhého použití a kopii konkrétní poptávky použitou při interním rozboru.
+
+Dál výslovně nesbíráme:
+Rozpočet v prvním formuláři, CRM skóre rozpočtové připravenosti, event otevření potvrzovacího e-mailu ani samostatný export poptávek.
+```
+
+Tím se klid netýká jen práce, ale i dat. Tým ví, že se nevrací k rozsáhlejšímu sběru jen proto, že téma bylo nedávno na stole. Privacy-first provoz se často drží právě na těchto malých uzávěrách: nenechat pomocnou stopu přerůst v novou evidenci.
+
+### Karta převodu do stabilního klidu
+
+```text
+Téma:
+
+Pravidlo po uzavřeném druhém použití:
+
+Výsledek druhého použití:
+
+Typ převodu:
+- čistý převod
+- převod po lokálním dočištění
+- převod s odloženým návratovým signálem
+
+Kanonické místo pravidla:
+
+Kde se pozná návratový signál:
+
+Co po převodu končí:
+
+Co zůstává výslovně zavřené:
+
+Zůstává v kanonickém místě:
+
+Zůstává ve zdrojovém systému:
+
+Mažeme nebo nepřenášíme:
+
+Dál výslovně nesbíráme:
+
+Vlastník běžného rytmu:
+
+Nejbližší běžné review, pokud existuje:
+```
+
+Karta nemá být další vrstva administrativy. Má být poslední krátké potvrzení, že mimořádná péče skončila. Pokud se karta vyplňuje déle než samotné pravidlo, je něco špatně. Buď převod není zralý, nebo tým používá formulář jako náhražku rozhodnutí. Formulář je dobrý sluha, špatný šéf a úplně příšerný terapeut.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte výsledek druhého běžného použití.
+2. Minuta 2: vyberte typ převodu do klidu.
+3. Minuta 3: potvrďte kanonické místo pravidla.
+4. Minuta 4: napište návratový signál a co zůstává zavřené.
+5. Minuta 5: ukončete mimořádnou péči, připomínky a pomocné evidence.
+6. Minuta 6: proveďte privacy-first úklid datové stopy.
+
+Když se workshop zasekne na touze přidat ještě jednu kontrolu, zeptejte se: jaké nové rozhodnutí má ta kontrola umožnit? Pokud žádné, není to kontrola. Je to úzkost v kalendáři. Zapište návratový signál a nechte pravidlo pracovat.
+
+### Checklist převodu do stabilního klidu
+
+- Je druhé běžné použití opravdu uzavřené?
+- Víme, jestli jde o čistý převod, převod po lokálním dočištění, nebo převod s odloženým návratovým signálem?
+- Je aktuální pravidlo propsané do kanonického pracovního místa?
+- Je návratový signál konkrétní a najitelný pro dalšího člověka?
+- Končí mimořádná kontrola, ruční připomínka nebo pomocná evidence?
+- Zůstává původní širší návrh výslovně zavřený?
+- Pokud proběhlo lokální dočištění, je už hotové, ne jen slíbené?
+- Neplánujeme třetí speciální použití bez rozhodovacího důvodu?
+- Uklidili jsme dočasné poznámky, kopie, screenshoty nebo exporty?
+- Je jasné, co zůstává pouze ve zdrojovém systému podle běžné retence?
+- Nepřidali jsme nový atribut, tracker, report ani delší retenci jen kvůli pocitu jistoty?
+- Má pravidlo vlastníka běžného rytmu, ne vlastníka nekonečné mimořádné péče?
+
+Stabilní klid je dobrý výsledek. Není to méně práce, protože se nic dalšího neotevřelo. Je to lepší práce, protože tým ví, kdy nereagovat, kde reagovat a jak nepřidat data jen pro uklidnění. Když se téma vrátí, vrátí se přes signál. Do té doby má pravidlo dělat to, kvůli čemu vzniklo: pomáhat v běžné práci a nepřekážet.
+
 ## Pracovní log
 
+- 2026-06-25: Doplněna úvodní podkapitola o převodu uzavřeného druhého použití zpět do stabilního klidu: kanonické místo, návratový signál, ukončení mimořádné péče, privacy-first úklid datové stopy, karta, mini workshop a checklist.
 - 2026-06-25: Doplněna úvodní podkapitola o uzavření prvního běžného použití po uzavření návratu k neotevřenému kroku: uzavírací stavy, lokální kotva, zpřesnění rozhodovací věty, ochrana zavřené hranice, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-25: Doplněna úvodní podkapitola o uzavření druhého běžného použití po návratu z klidu: čtyři uzavírací stavy, praktické příklady, propsání do pracovního místa, privacy-first úklid, karta a checklist.
 - 2026-06-25: Doplněna úvodní podkapitola o prvním běžném použití po uzavření návratu k neotevřenému kroku: najitelnost závěru, rozhodovací věta, ochrana zavřené hranice, privacy-first kontrola datové stopy, karta, mini workshop a checklist.
