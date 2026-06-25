@@ -253685,8 +253685,162 @@ Když se workshop začne měnit v diskusi o tom, jak by pravidlo vypadalo pro ú
 
 Druhá standardní kontrola je test dospělosti pravidla. První kontrola často ještě nese energii původní opravy. Druhá už ukazuje, jestli pravidlo umí žít bez doprovodu. Pokud ano, pusťte ho do klidného rytmu. Pokud ne, opravte nejbližší místo nebo otevřete novou malou smyčku. Hlavně z druhé kontroly nedělejte další sklad historických poznámek. Těch už digitální svět vyrobil dost, fakt nemusíme přikládat.
 
+## Uzavření druhé standardní kontroly po uzavřené první kontrole
+
+Uzavření druhé standardní kontroly má jeden hlavní úkol: ukončit zvláštní pozornost kolem pravidla, pokud už ji nepotřebuje. Druhá kontrola ověřila, jestli pravidlo funguje v běžném provozu bez autora, bez starého vysvětlování a bez dočasných pracovních podpěr. Teď je potřeba rozhodnout, co z toho zůstane jako stabilní provozní stopa a co se má zavřít.
+
+Nezačínejte dalším seznamem nápadů. Začněte stavovou větou:
+
+```text
+Druhá standardní kontrola končí stavem:
+```
+
+Do věty patří jeden z konkrétních stavů, ne pocit. "Vypadá to dobře" je nálada. "Pravidlo přechází do dlouhodobého rytmu bez další mimořádné kontroly" je rozhodnutí. Rozdíl je důležitý, protože podle rozhodnutí se dá uklidit práce, odpovědnosti i data. Podle nálady se dá maximálně domluvit další schůzka, což je občas trest maskovaný za proces.
+
+Uzavření má být kratší než samotná kontrola. Pokud potřebujete dlouhý zápis, pravděpodobně se druhá kontrola proměnila v nové téma. To nevadí, ale nové téma má dostat vlastní kartu. Starou kontrolu nenechávejte otevřenou jen proto, že se během ní našlo něco zajímavého.
+
+### Čtyři uzavírací stavy
+
+Po druhé kontrole vybírejte jeden ze čtyř uzavíracích stavů:
+
+- Přechod do dlouhodobého rytmu: pravidlo je samostatné, přenositelné a nepotřebuje další zvláštní ověření.
+- Lokální doplnění uzavřeno: drobná úprava v jednom pracovním místě byla provedena a další ověření stačí v běžném použití.
+- Slabá přenositelnost oddělena: druhá kontrola ukázala rozdíl mezi situacemi, ale nejde o opravu původního pravidla; vzniká samostatná otázka.
+- Nový návratový signál předán do malé smyčky: opakovaný problém je potvrzený, ale druhá kontrola se tím nezvětšuje.
+
+U `přechodu do dlouhodobého rytmu` zapište, jak často se má pravidlo vracet do běžné správy. Nemusí to být kalendářní ceremonie. U malého týmu často stačí měsíční nebo kvartální dotaz v existujícím review: "platí pravidlo pořád, nebo ho poslední práce obešla?" Pokud pravidlo žije v sales kartě, kontrolujte ho při review obchodních rozhovorů. Pokud žije v produktové šabloně, kontrolujte ho při plánování iterace. Rytmus má vyrůstat z práce, ne z pocitu, že každý dokument potřebuje vlastní svátek.
+
+U `lokálního doplnění` neotvírejte další mimořádný režim. Jestli druhá kontrola ukázala jen chybějící větu v sales kartě, doplňte ji a napište, že další ověření proběhne při nejbližším běžném použití. Nevyrábějte samostatný checklist jen proto, že jste doplnili jednu větu. To by bylo jako stavět recepci kvůli dveřní rohožce.
+
+U `slabé přenositelnosti` zachovejte původní pravidlo v jeho platném rozsahu a oddělte novou otázku. Prakticky: pokud pravidlo pro inbound poptávky nefunguje stejně u doporučení od existujících zákazníků, nepřepisujte ho na univerzální obchodní moudro. Napište novou otázku: "Potřebují doporučení od existujících zákazníků vlastní kvalifikační větu?" To je užší, poctivější a méně nebezpečné.
+
+U `nového návratového signálu` uzavřete kontrolu větou, že signál byl předán do samostatné malé smyčky. V kartě kontroly ponechte jen odkaz a důvod. Detaily nového problému patří do nové smyčky, kde budou mít vlastní stop podmínku, pracovní místo a privacy-first hranici.
+
+### Praktický příklad
+
+```text
+Pravidlo:
+Doplňující otázky na rozpočet patří až do follow-upu, ne do prvního formuláře.
+
+Druhá standardní kontrola:
+Nový člověk pravidlo použil u další poptávky bez autora původní úpravy. Nepřidal nové pole do formuláře, nepoužil pomocnou tabulku a odpověď z follow-upu zapsal do existující poznámky u poptávky.
+
+Uzavírací stav:
+Přechod do dlouhodobého rytmu.
+
+Co se propisuje:
+V sales kartě zůstává věta o zápisu odpovědi do existující poznámky. Pravidlo se bude kontrolovat jen při běžném měsíčním review obchodních rozhovorů.
+
+Co se ukončuje:
+Dočasné poznámky z první a druhé kontroly, mimořádná kontrolní připomínka a starý odkaz na pracovní kopii.
+
+Co neotevíráme:
+Povinné pole rozpočtu ve formuláři, automatický lead scoring ani nový export poptávek.
+```
+
+Všimněte si, že příklad nekončí větou "ještě se na to podíváme". Pokud pravidlo funguje, nechte ho fungovat. Dlouhodobý provoz není absence péče, ale jiný typ péče: méně častý, navázaný na skutečnou práci a bez speciálního světla namířeného na problém, který už se neprojevuje.
+
+### Co propsat a co ukončit
+
+Po uzavření druhé standardní kontroly rozdělte výsledek do tří míst:
+
+- Kanonické pracovní místo: jedna finální věta, drobné doplnění nebo odkaz na pravidlo.
+- Provozní rytmus: kdy a kde se pravidlo běžně kontroluje, pokud vůbec.
+- Archiv nebo úklid: co se ruší, maže nebo přesouvá mimo aktivní práci.
+
+Kanonické místo nemá nést celou historii. Čtenář, který pravidlo použije za dva měsíce, nepotřebuje vědět, jak složitě vzniklo. Potřebuje vědět, co má udělat dnes. Historie patří do rozhodovacího logu v tak krátké podobě, aby chránila před opakováním stejné debaty, ne aby nahradila dokumentární seriál.
+
+Provozní rytmus pište jen tam, kde má smysl. Některá pravidla po druhé kontrole nepotřebují žádné zvláštní datum návratu. Stačí, že se znovu otevřou při návratovém signálu. Jiná pravidla se hodí zkontrolovat v existujícím měsíčním nebo kvartálním review, protože souvisí s nabídkou, právními texty, datovou mapou nebo obchodním procesem.
+
+Archiv a úklid udělejte hned. Nečekejte na "někdy až bude čas", protože staré pracovní kopie mají zvláštní talent tvářit se po měsíci jako platné dokumenty. Pokud mají zůstat, dejte jim jasný stav. Pokud nemají účel, odstraňte je nebo je uložte mimo aktivní pracovní cestu.
+
+### Privacy-first uzavření
+
+Privacy-first uzavření druhé kontroly je hlavně o redukci stop. V průběhu první a druhé kontroly mohly vzniknout poznámky, příklady, exporty, screenshoty, seznamy případů nebo kopie šablon. Po uzavření se zeptejte:
+
+- Jaké podklady byly potřeba jen pro ověření a už nemají účel?
+- Obsahují podklady osobní údaje, obchodní detaily nebo citlivé kontexty zákazníků?
+- Stačí pro budoucí práci zobecněná rozhodovací věta?
+- Nevznikl kvůli kontrole nový návyk sbírat data "pro jistotu"?
+
+Dobrá závěrečná privacy-first věta může znít:
+
+```text
+Po druhé kontrole ponecháváme jen finální větu v sales kartě a stručný záznam v rozhodovacím logu. Dočasné poznámky s detaily poptávek mažeme, protože pravidlo dál nepotřebuje jednotlivé obchodní případy jako podpěru.
+```
+
+Codyho komentář: nejlepší kontrolní proces je ten, který po sobě umí uklidit. Ne proto, že bychom měli fetiš na prázdné složky. Protože každý starý podklad je budoucí otázka: platí to, kdo to vlastní, proč tam jsou tahle data a jestli to někdo omylem nepoužije jako nový zdroj pravdy. Čím méně zbytečných stop, tím méně budoucí archeologie.
+
+### Karta uzavření druhé standardní kontroly
+
+```text
+Téma:
+
+Pravidlo nebo standard:
+
+Kanonické pracovní místo:
+
+Výsledek druhé standardní kontroly:
+- přechod do dlouhodobého rytmu
+- lokální doplnění uzavřeno
+- slabá přenositelnost oddělena
+- nový návratový signál předán do malé smyčky
+
+Uzavírací věta:
+
+Co se propsalo do kanonického místa:
+
+Co se ukončuje jako mimořádná péče:
+
+Co se maže, archivuje nebo přesouvá mimo aktivní práci:
+
+Co výslovně neotevíráme:
+
+Jaká data dál nesbíráme:
+
+Běžný rytmus kontroly, pokud existuje:
+
+Návratový signál:
+
+Vlastník:
+
+Datum zápisu:
+```
+
+Kartu nepoužívejte jako další pracovní dokument. Je to uzavírací záznam. Jakmile je vyplněný, aktivní práce má bydlet buď v kanonickém místě, nebo v nové malé smyčce. Pokud se karta začne průběžně doplňovat dalšími poznámkami, přestala být uzavírací.
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: přečtěte výsledek druhé standardní kontroly.
+2. Minuta 2: vyberte jeden uzavírací stav.
+3. Minuta 3: napište uzavírací větu.
+4. Minuta 4: určete, co se propisuje do kanonického místa.
+5. Minuta 5: napište, co se výslovně neotevírá.
+6. Minuta 6: ukliďte dočasné pracovní stopy a datové podklady.
+7. Minuta 7: určete běžný rytmus nebo návratový signál.
+
+Pokud workshop nedokáže do sedmi minut vybrat uzavírací stav, pravděpodobně druhá kontrola není hotová. Vraťte se o krok zpět a pojmenujte, co chybí: běžná situace, samostatné použití, přenositelnost, nebo privacy-first úklid. Neprodlužujte uzavření tak dlouho, až začne suplovat další analýzu.
+
+### Checklist uzavření druhé standardní kontroly
+
+- Máme jeden uzavírací stav?
+- Umíme výsledek napsat jednou stavovou větou?
+- Je jasné, zda pravidlo přechází do dlouhodobého rytmu?
+- U lokálního doplnění nevyrábíme další mimořádnou kontrolu?
+- U slabé přenositelnosti oddělujeme novou otázku od původního pravidla?
+- U nového návratového signálu zakládáme samostatnou malou smyčku?
+- Propsali jsme do kanonického místa jen to, co má čtenář použít?
+- Ukončili jsme mimořádnou péči, pokud už nemá důvod?
+- Je výslovně napsané, co se neotevírá?
+- Uklidili jsme dočasné kopie, exporty, seznamy, screenshoty a soukromé poznámky?
+- Ponecháváme jen data, která mají jasný účel pro další provoz?
+- Ví vlastník, kdy se pravidlo znovu kontroluje, nebo že se vrací až při návratovém signálu?
+
+Uzavření druhé standardní kontroly je bod, kde se pravidlo buď vrací do normálního života, nebo se poctivě oddělí nový problém. Obojí je v pořádku. Špatný výsledek je jen jeden: nechat zvláštní kontrolu pootevřenou bez důvodu. To vytváří procesní mlhu, datové zbytky a pocit, že práce pořád není hotová. Když je hotová, zavřete ji. Když není, dejte nové práci vlastní hranici.
+
 ## Pracovní log
 
+- 2026-06-25: Doplněna úvodní podkapitola o uzavření druhé standardní kontroly po uzavřené první kontrole: uzavírací stavy, propsání do kanonického místa, ukončení mimořádné péče, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-25: Doplněna úvodní podkapitola o druhé standardní kontrole po uzavřené první kontrole: samostatnost pravidla, přenositelnost, klid pracovních stop, výsledné stavy, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-25: Doplněna úvodní podkapitola o uzavření první standardní kontroly po uzavření druhého běžného použití: uzavírací stavy, praktický příklad, propsání do kanonického místa, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-25: Doplněna úvodní podkapitola o první standardní kontrole po uzavření druhého běžného použití: kontrolní otázky, čtyři výsledky, privacy-first kontrola, karta, mini workshop a checklist.
