@@ -254625,8 +254625,175 @@ Sedm minut stačí, pokud držíte otázku. Pokud nestačí, nejspíš se snaž�
 
 Druhá běžná kontrola má potvrdit, že pravidlo umí žít bez zvláštní pozornosti. Když to potvrdí, nechte ho v klidu běžet. Když ne, udělejte nejmenší opravu v místě, kde tření vzniklo. To je méně efektní než velká revize, ale podstatně užitečnější pro web, SaaS i tým, který chce pracovat bez zbytečných datových stínů.
 
+## Uzavření druhé běžné kontroly po uzavřené první kontrole
+
+Uzavření druhé běžné kontroly je chvíle, kdy se má dlouhodobý rytmus buď potvrdit, nebo upravit bez zbytečného dramatu. Druhá kontrola už nemá energii čerstvé změny. Právě proto je dobrým testem: ukazuje, jestli pravidlo funguje v normálním provozu, kde lidé řeší zákazníky, produkt, marketing, support a vlastní kalendáře místo toho, aby si slavnostně připomínali, že před měsícem vzniklo nové pravidlo.
+
+Začněte jednou větou:
+
+```text
+Druhá běžná kontrola končí stavem:
+```
+
+Do věty napište výsledek, ne příběh. "Zatím dobré, ale uvidíme" je mlha. "Pravidlo zůstává v průběžném rytmu beze změny" je rozhodnutí. "Doplňujeme jednu větu do sales karty a další kontrola proběhne až při návratovém signálu" je také rozhodnutí. Dobré uzavření je krátké, protože většinu práce už udělala kontrola.
+
+Pokud máte chuť po druhé kontrole otevřít velkou revizi, nejdřív se zeptejte, jestli opravdu uzavíráte kontrolu, nebo používáte kontrolu jako záminku k novému projektu. Nový projekt může být legitimní. Jen nemá bydlet uvnitř uzavírací poznámky. Tam by se z něj stal nečitelný přívěsek, který časem nikdo neodpojí, protože nebude jasné, kde začíná původní pravidlo a kde nový problém.
+
+### Čtyři uzavírací stavy
+
+Po druhé běžné kontrole vyberte jeden stav:
+
+- Ponechat rytmus: pravidlo funguje samostatně a není potřeba nic měnit.
+- Drobně dočistit pracovní místo: pravidlo funguje, ale jedno slovo, příklad nebo umístění zbytečně brzdí použití.
+- Zjednodušit pravidlo: pravidlo se používá, ale vytváří víc tření, než odpovídá jeho hodnotě.
+- Oddělit nové téma: kontrola ukázala problém, který už není opravou původního pravidla.
+
+`Ponechat rytmus` je nejlepší výsledek a zároveň nejtěžší na disciplínu. Tým má často pocit, že kontrola bez úkolu nebyla produktivní. Jenže produktivní byla právě tím, že zabránila zbytečné práci. Pokud pravidlo funguje, napište stav, ukliďte dočasné podklady a vraťte ho do provozu.
+
+`Drobně dočistit pracovní místo` použijte, když je oprava jasná a lokální. Například přesunout větu výš v šabloně odpovědi, doplnit jeden příklad do interní karty nebo smazat starou kopii, která mate lidi při hledání správného postupu. Jakmile oprava potřebuje víc než jedno pracovní místo, nejspíš už nejde o dočištění.
+
+`Zjednodušit pravidlo` je stav pro situaci, kdy pravidlo sice míří správně, ale je příliš těžké na běžné použití. Tady nezesilujte kontrolu. Zkraťte text, odeberte krok, spojte dvě věty do jedné nebo pravidlo přesuňte blíž k místu, kde člověk rozhoduje. Když proces nefunguje bez dozoru, další dozorce problém většinou nevyřeší. Jen přidá další židli ke stolu.
+
+`Oddělit nové téma` použijte, když kontrola narazí na jiný problém. Pokud pravidlo o follow-upu k rozpočtu ukáže, že lidé nerozumí rozdílu mezi konzultační službou a produktizovanou nabídkou, není to oprava rozpočtové věty. Je to nové téma pro nabídku, web nebo sales materiály. Uzavřete kontrolu a nové téma založte samostatně.
+
+### Praktický příklad uzavření
+
+```text
+Pravidlo:
+U relevantních poptávek obchod používá volitelnou větu v potvrzovacím e-mailu pro doplnění rámcového rozpočtu.
+
+Výsledek druhé běžné kontroly:
+Pravidlo se použilo u dvou poptávek samostatně. U třetí poptávky nebylo potřeba, protože rámec rozpočtu byl jasný už ze zadání. Nevzniklo nové pole ve formuláři, nový export ani ruční tabulka.
+
+Uzavírací stav:
+Ponechat rytmus.
+
+Co se mění:
+Nic v pravidle. V rozhodovacím logu zůstává jen poznámka, že druhá kontrola potvrdila samostatné použití.
+
+Co výslovně neotevíráme:
+Povinný rozpočet ve formuláři, lead scoring, samostatný report rozpočtů ani nové tracking eventy.
+
+Další rytmus:
+Pravidlo zůstává v průběžném rytmu a mimo něj se otevře jen při návratovém signálu: dvě relevantní poptávky za sebou nepůjdou kvalifikovat bez stejného ručního doptání na rozpočet.
+
+Privacy-first úklid:
+Mažeme pracovní poznámku z kontroly s detaily poptávek. Ponecháváme pouze zobecněný závěr bez zákaznických detailů.
+```
+
+Tento příklad není efektní, ale je zdravý. Kontrola potvrdila, že pravidlo funguje, a nepřidala žádnou novou datovou stopu. Přesně tak má vypadat dobrý dlouhodobý rytmus: umí se podívat na realitu, rozhodnout a nechat věci běžet.
+
+### Co se má po uzavření propsat
+
+Po uzavření druhé běžné kontroly rozdělte výsledek do tří míst:
+
+- Kanonické pracovní místo: pouze finální věta nebo drobná lokální oprava.
+- Rozhodovací log: stručný stav kontroly, datum a důvod, proč se rytmus mění nebo nemění.
+- Archiv nebo úklid: pracovní poznámky, exporty, screenshoty, pomocné kopie a staré odkazy.
+
+Kanonické místo nesmí nést celou kontrolní historii. Člověk, který pravidlo použije za tři měsíce, nechce číst, proč se tým kdysi rozhodl nepřidat pole do formuláře. Chce vědět, co má udělat v dnešní poptávce. Historie má být dohledatelná, ale nemá překážet.
+
+Rozhodovací log má být stejně střídmý. Dobrá věta může znít:
+
+```text
+Druhá běžná kontrola potvrdila samostatné použití pravidla bez nové datové stopy; rytmus zůstává průběžný a návratový signál beze změny.
+```
+
+To stačí. Pokud někdo později navrhne stejné rozšíření, log ukáže, že téma nebylo ignorované. Bylo ověřené a uzavřené. To je praktická obrana proti návratu starých debat v novém obleku.
+
+Archiv a úklid udělejte před tím, než kontrolu označíte za hotovou. Staré pracovní poznámky mají nepříjemnou vlastnost: když zůstanou v aktivní složce, začnou vypadat jako platné podklady. Pak se podle nich někdo rozhodne a tým znovu řeší problém, který už jednou zavřel.
+
+### Privacy-first uzavření bez nových důkazů
+
+Druhá běžná kontrola často svádí k větě "když už to funguje, začněme to měřit pořádně". V privacy-first provozu je potřeba otočit otázku:
+
+```text
+Co musíme dál vědět, aby se změnilo rozhodnutí?
+```
+
+Pokud odpověď neexistuje, nepřidávejte měření. Stabilní pravidlo nepotřebuje novou analytiku jen proto, že kontrola dopadla dobře. U webu to znamená nepřidávat heatmapy ani nové eventy bez jasného rozhodnutí. U SaaS to znamená nesbírat detailní behaviorální stopu, pokud stačí agregovaný signál. U marketingu to znamená nehonit člověka přes trackery jen proto, že chceme vědět, jestli si přečetl větu v e-mailu.
+
+Dobrá uzavírací privacy-first věta:
+
+```text
+Po druhé běžné kontrole nepřidáváme žádné nové měření. Pro budoucí rozhodnutí stačí návratový signál z běžné práce a anonymizovaná poznámka v měsíčním review.
+```
+
+Codyho komentář: stabilní proces nepotřebuje památník z dat. Potřebuje jasné místo, kam sáhnout, a jasný signál, kdy se znovu ozvat. Všechno ostatní je často jen uklidňující hromádka souborů, která bude jednou někomu připadat důležitá přesně proto, že nikdo neví, proč vznikla.
+
+### Karta uzavření druhé běžné kontroly
+
+```text
+Téma:
+
+Pravidlo nebo pracovní místo:
+
+Výsledek první běžné kontroly:
+
+Výsledek druhé běžné kontroly:
+
+Uzavírací stav:
+- ponechat rytmus
+- drobně dočistit pracovní místo
+- zjednodušit pravidlo
+- oddělit nové téma
+
+Uzavírací věta:
+
+Co se mění v kanonickém pracovním místě:
+
+Co zůstává beze změny:
+
+Co výslovně neotevíráme:
+
+Další rytmus nebo návratový signál:
+
+Jaké podklady jsme použili:
+
+Co ponecháváme:
+
+Co mažeme, slučujeme nebo zobecňujeme:
+
+Jaká data dál nesbíráme:
+
+Vlastník:
+
+Datum zápisu:
+```
+
+Kartu vyplňte tak, aby šla přečíst za minutu. Pokud potřebuje dlouhé vysvětlení, rozdělte ji: uzavření kontroly nechte krátké a nové téma založte zvlášť. Krátká karta chrání tým před tím, aby se z každé kontroly stal malý román s nejasným koncem.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte výsledek druhé běžné kontroly.
+2. Minuta 2: vyberte jeden uzavírací stav.
+3. Minuta 3: napište uzavírací větu.
+4. Minuta 4: určete, co se propisuje do kanonického místa a co zůstává beze změny.
+5. Minuta 5: napište, co výslovně neotevíráte.
+6. Minuta 6: ukliďte podklady a určete další rytmus nebo návratový signál.
+
+Když se během workshopu objeví nápad na větší změnu, napište ho na samostatnou kartu a vraťte se k uzavření. Šestiminutové uzavření nemá být kreativní sprint. Má ukončit kontrolu bez nových ocásků.
+
+### Checklist uzavření druhé běžné kontroly
+
+- Máme jeden uzavírací stav?
+- Umíme výsledek napsat jednou stavovou větou?
+- Je jasné, jestli dlouhodobý rytmus zůstává, mění se, nebo končí?
+- Pokud pravidlo funguje, necháváme ho běžet bez nového úkolu?
+- Pokud dočišťujeme pracovní místo, zůstává oprava lokální?
+- Pokud zjednodušujeme pravidlo, ubíráme tření místo přidávání dohledu?
+- Pokud se objevilo nové téma, oddělili jsme ho od původní kontroly?
+- Je zapsané, co výslovně neotevíráme?
+- Nepřidáváme nové měření jen proto, že kontrola proběhla?
+- Uklidili jsme pracovní poznámky, kopie, exporty, screenshoty a pomocné tabulky?
+- Ponecháváme jen údaje, které mají jasný účel pro další rozhodnutí?
+- Najde člověk finální pravidlo v kanonickém pracovním místě bez čtení historie?
+
+Uzavření druhé běžné kontroly je drobná provozní dovednost, ale má velký dopad. Učí tým, že dobrý výsledek může být i "nic dalšího neděláme". Když pravidlo funguje, nechte ho pracovat. Když drhne, opravte nejbližší místo. Když se objeví nové téma, dejte mu vlastní hranici. A když po kontrole zůstaly zbytečné datové stopy, ukliďte je dřív, než začnou předstírat, že jsou zdrojem pravdy.
+
 ## Pracovní log
 
+- 2026-06-25: Doplněna úvodní podkapitola o uzavření druhé běžné kontroly po uzavřené první kontrole: uzavírací stavy, praktický příklad, propsání do kanonického místa, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-25: Doplněna úvodní podkapitola o druhé běžné kontrole po uzavřené první kontrole: samostatnost pravidla, přiměřenost, privacy-first kontrola bez nového sledování, karta, mini workshop a checklist.
 - 2026-06-25: Doplněna úvodní podkapitola o uzavření první běžné kontroly v dlouhodobém rytmu: uzavírací stavy, praktický příklad, práce s rytmem, privacy-first úklid datové stopy, karta, mini workshop a checklist.
 - 2026-06-25: Doplněna úvodní podkapitola o uzavření návratu k neotevřenému kroku: čtyři uzavírací stavy, praktický příklad, privacy-first úklid dočasné datové stopy, karta, mini workshop a checklist.
