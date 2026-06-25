@@ -254791,8 +254791,183 @@ Když se během workshopu objeví nápad na větší změnu, napište ho na samo
 
 Uzavření druhé běžné kontroly je drobná provozní dovednost, ale má velký dopad. Učí tým, že dobrý výsledek může být i "nic dalšího neděláme". Když pravidlo funguje, nechte ho pracovat. Když drhne, opravte nejbližší místo. Když se objeví nové téma, dejte mu vlastní hranici. A když po kontrole zůstaly zbytečné datové stopy, ukliďte je dřív, než začnou předstírat, že jsou zdrojem pravdy.
 
+## Převod po druhé běžné kontrole do klidového režimu
+
+Po uzavřené druhé běžné kontrole přichází místo, kde se často pokazí dobře odvedená práce. Tým má za sebou první i druhou kontrolu, pravidlo funguje samostatně, pracovní místo je čisté a datová stopa se nerozrostla. A právě v tu chvíli někdo navrhne, že by bylo "rozumné" přidat ještě jednu kontrolu, malý report nebo pravidelný přehled, aby se jistota neztratila.
+
+Jenže pokud druhá kontrola potvrdila, že pravidlo funguje bez mimořádné péče, další práce má většinou vést do klidu, ne do další kontroly. Klidový režim není zapomenutí. Je to stav, kdy pravidlo zůstává v kanonickém pracovním místě, návratový signál je jasný a tým ho znovu otevře až tehdy, když se realita ozve. Ne proto, že kalendář chce být důležitý.
+
+Začněte větou:
+
+```text
+Po druhé běžné kontrole převádíme pravidlo do klidového režimu, protože:
+```
+
+Do věty napište důkaz, ne náladu:
+
+```text
+Po druhé běžné kontrole převádíme pravidlo do klidového režimu, protože se použilo samostatně ve dvou relevantních situacích, nevytvořilo novou ruční práci a nepotřebuje další datovou evidenci.
+```
+
+Tahle věta má uzavřít mimořádnou pozornost. Neříká "už nikdy se k tomu nevrátíme". Říká "nebudeme se k tomu vracet bez důvodu". To je v provozu zásadní rozdíl. První věta je alibismus, druhá je disciplína.
+
+### Co klidový režim obsahuje
+
+Klidový režim má tři živé části:
+
+- Kanonické pravidlo: jedna aktuální věta nebo krátká instrukce v místě, kde se opravdu používá.
+- Návratový signál: konkrétní situace, která pravidlo znovu otevře.
+- Rozhodovací paměť: stručný záznam, proč pravidlo existuje a proč se po druhé kontrole nezesiluje dohled.
+
+Všechno ostatní má odejít z aktivní práce. Dočasné kontrolní poznámky, staré exporty, screenshoty, osobní kopie, pomocné tabulky a "jen pro jistotu" seznamy nemají v klidovém režimu bydlet. Pokud je potřebujete pro auditní nebo rozhodovací historii, nechte je v archivu s jasným popisem. Pokud je nepotřebujete, smažte, slučte nebo zobecněte.
+
+Praktický příklad:
+
+```text
+Kanonické pravidlo:
+Rozpočet doptáváme ve follow-upu, ne v prvním formuláři.
+
+Návratový signál:
+Dvě relevantní poptávky za sebou nepůjdou kvalifikovat bez stejného ručního doptání na rozpočet.
+
+Rozhodovací paměť:
+Druhá běžná kontrola potvrdila samostatné použití pravidla bez nové datové stopy; další pravidelnou kontrolu nepřidáváme.
+```
+
+Tento zápis je dost krátký, aby ho člověk použil při práci, a dost konkrétní, aby později zabránil návratu staré debaty. Pokud někdo navrhne povinné pole pro rozpočet, tým nemusí znovu otevírat celou historii. Stačí porovnat podnět s návratovým signálem.
+
+### Tři způsoby převodu
+
+Po druhé běžné kontrole vyberte jeden ze tří převodů:
+
+- Přímý klid: pravidlo funguje, nic se nemění a další kontrola se spustí jen návratovým signálem.
+- Klid s lokálním dočištěním: před klidem se ještě upraví jedno pracovní místo, například stará kopie nebo nepřesná věta.
+- Klid se zúženým pravidlem: kontrola ukázala, že pravidlo platí jen v menším rozsahu, a do klidu jde už zúžená verze.
+
+Přímý klid je nejlepší výsledek. Zapište stav, ukliďte podklady a nechte pravidlo žít. Není potřeba přidávat třetí kontrolu jen proto, že dvě kontroly dopadly dobře. To by bylo jako koupit deštník pro deštník.
+
+Klid s lokálním dočištěním použijte, když druhá kontrola našla drobný zbytek: starou šablonu, nejasný odkaz, duplicitní poznámku nebo formulaci, která člověka nutí znovu přemýšlet. Dočištění udělejte před převodem do klidu, aby se do klidového režimu nepřenášel malý nepořádek.
+
+Klid se zúženým pravidlem je poctivý stav, když pravidlo pomáhá jen v části původního rozsahu. Například se ukáže, že rozpočtová věta funguje u poptávek na dlouhodobý vývoj, ale ne u krátkých auditů. Pak do klidu neposílejte široké pravidlo. Pošlete tam užší větu a zbytek nechte bez aktivního závazku.
+
+### Co výslovně nevzniká
+
+Převod do klidového režimu má obsahovat i negativní větu:
+
+```text
+Kvůli klidovému režimu nevzniká:
+```
+
+Doplňte konkrétně, co tým nepřidává:
+
+```text
+Kvůli klidovému režimu nevzniká:
+nový report, nové tracking eventy, povinné pole ve formuláři, ruční tabulka poptávek ani pravidelná schůzka.
+```
+
+Tahle věta chrání klid před tichým příslušenstvím. Mnoho provozních systémů se nezvětší jedním velkým rozhodnutím, ale sérií drobných "jen ať máme přehled". Klidový režim má říct, že přehled už má podobu návratového signálu, ne nového datového aparátu.
+
+Codyho komentář: jestli pravidlo po dvou kontrolách funguje, nejodvážnější produktové rozhodnutí může být přestat ho hladit po hlavě. Ne proto, že na něm nezáleží. Právě proto, že už umí chodit samo.
+
+### Privacy-first převod
+
+Privacy-first hodnota klidového režimu je jednoduchá: po ověření nezůstane trvalý datový ocásek. Pravidlo funguje, ale kolem něj se nehromadí nové důkazy, kopie a měření. To je zvlášť důležité u webu, marketingu a SaaS provozu, kde je snadné přidat jeden event, jeden export, jeden tag a jeden dashboard. Každý samostatně vypadá nevinně. Dohromady vytvoří systém, který nikdo nepotřeboval schválit jako celek.
+
+Před převodem napište:
+
+```text
+Pro klidový režim ponecháváme:
+
+Pro klidový režim mažeme, slučujeme nebo zobecňujeme:
+
+Pro klidový režim nezačínáme sbírat:
+```
+
+Příklad:
+
+```text
+Pro klidový režim ponecháváme:
+Jednu aktivní větu v sales kartě a návratový signál v rozhodovacím logu.
+
+Pro klidový režim mažeme, slučujeme nebo zobecňujeme:
+Pomocné poznámky z obou kontrol slučujeme do jedné anonymizované věty.
+
+Pro klidový režim nezačínáme sbírat:
+Samostatné rozpočtové atributy, tracking čtení potvrzovacího e-mailu ani export poptávek do dalšího nástroje.
+```
+
+Takový zápis je užitečnější než obecné "minimalizujeme data". Ukazuje konkrétní provozní rozhodnutí. Privacy-first přístup má být vidět právě v těchto malých hranicích, ne až ve chvíli, kdy někdo kreslí velkou datovou architekturu.
+
+### Karta převodu do klidového režimu
+
+```text
+Téma:
+
+Pravidlo nebo pracovní místo:
+
+Výsledek první běžné kontroly:
+
+Výsledek druhé běžné kontroly:
+
+Typ převodu:
+- přímý klid
+- klid s lokálním dočištěním
+- klid se zúženým pravidlem
+
+Kanonické pravidlo v klidu:
+
+Návratový signál:
+
+Rozhodovací paměť:
+
+Co se před klidem ještě dočišťuje:
+
+Co výslovně nevzniká:
+
+Pro klidový režim ponecháváme:
+
+Mažeme, slučujeme nebo zobecňujeme:
+
+Nezačínáme sbírat:
+
+Vlastník:
+
+Datum návratu, pokud existuje:
+```
+
+Karta má být poslední karta před klidem, ne začátek nové série. Pokud po jejím vyplnění vzniknou další úkoly, zkontrolujte, jestli opravdu patří k převodu. Často jde o nové téma, které se jen svezlo na dobrém pocitu z uzavřené kontroly.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte uzavírací větu druhé běžné kontroly.
+2. Minuta 2: vyberte typ převodu do klidu.
+3. Minuta 3: napište kanonické pravidlo a návratový signál.
+4. Minuta 4: napište, co kvůli klidu výslovně nevzniká.
+5. Minuta 5: rozdělte podklady na ponechat, smazat, sloučit nebo zobecnit.
+6. Minuta 6: určete vlastníka klidového pravidla a místo, kde ho člověk najde při práci.
+
+Když během workshopu někdo navrhne nový pravidelný report, vraťte se k otázce, jaké rozhodnutí by report změnil. Pokud žádné, report nevzniká. Klidový režim má chránit rozhodování, ne vyrábět důkaz, že tým pořád myslí na věc, kterou už uzavřel.
+
+### Checklist převodu do klidového režimu
+
+- Navazujeme na uzavřenou druhou běžnou kontrolu?
+- Je jasné, proč pravidlo může odejít do klidu?
+- Vybrali jsme typ převodu: přímý klid, lokální dočištění, nebo zúžené pravidlo?
+- Má kanonické pravidlo krátké znění v pracovním místě?
+- Je návratový signál konkrétní a rozpoznatelný bez staré historie?
+- Zůstává rozhodovací paměť stručná a oddělená od pracovní instrukce?
+- Je zapsané, co kvůli klidovému režimu výslovně nevzniká?
+- Nepřidáváme report, schůzku, tracking, export ani tabulku jen kvůli pocitu jistoty?
+- Uklidili jsme podklady z první i druhé kontroly?
+- Ponecháváme jen data, která mají jasný účel pro budoucí rozhodnutí?
+- Ví vlastník, kde pravidlo žije a kdy se má znovu otevřít?
+- Umí tým říct "necháváme v klidu" stejně jasně jako "otevíráme novou smyčku"?
+
+Převod do klidového režimu je dobrý konec malé provozní smyčky. Pravidlo má místo, signál a paměť. Nemá kolem sebe nový dohled, nové měření ani novou administrativu. Tým tím získá něco nenápadného, ale cenného: funkční pravidlo, které nevyžaduje pozornost, dokud se realita opravdu nezmění.
+
 ## Pracovní log
 
+- 2026-06-25: Doplněna úvodní podkapitola o převodu po druhé běžné kontrole do klidového režimu: typy převodu, kanonické pravidlo, návratový signál, negativní věta proti novému dohledu, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-25: Doplněna úvodní podkapitola o uzavření druhé běžné kontroly po uzavřené první kontrole: uzavírací stavy, praktický příklad, propsání do kanonického místa, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-25: Doplněna úvodní podkapitola o druhé běžné kontrole po uzavřené první kontrole: samostatnost pravidla, přiměřenost, privacy-first kontrola bez nového sledování, karta, mini workshop a checklist.
 - 2026-06-25: Doplněna úvodní podkapitola o uzavření první běžné kontroly v dlouhodobém rytmu: uzavírací stavy, praktický příklad, práce s rytmem, privacy-first úklid datové stopy, karta, mini workshop a checklist.
