@@ -253216,8 +253216,166 @@ Pokud workshop skončí tím, že potřebujete další workshop, pravděpodobně
 
 Uzavření druhého běžného použití je dobrý moment přestat tlačit na pilu. Pravidlo už ukázalo, co umí mimo čerstvou paměť prvního návratu. Teď potřebuje buď klid, malou hranu, správné přesměrování, nebo úzkou smyčku. Nic víc. V dobře vedeném provozu je "nic víc" často přesně ta práce, která chyběla.
 
+## První standardní kontrola po uzavření druhého běžného použití
+
+Po uzavření druhého běžného použití už pravidlo nemá být ve zvláštním režimu. Nečeká se další dramatické ověření, nová série schůzek ani kontrolní tabulka. Přesto je užitečné udělat jednu první standardní kontrolu v běžném rytmu, aby tým poznal, jestli se pravidlo opravdu usadilo tam, kde má. Rozdíl proti předchozím ověřením je jednoduchý: kontrola nezačíná nejistotou, ale údržbou.
+
+Standardní kontrola má odpovědět na otázku:
+
+```text
+Funguje pravidlo v běžném pracovním místě bez mimořádné péče a bez návratu ke starým podkladům?
+```
+
+Pokud ano, kontrola má být krátká a uzavřená. Pokud ne, nemá se z ní automaticky stát nový projekt. Nejdřív určete, jestli jde o lokální tření, chybějící hraniční větu, slabou navigaci nebo skutečný návratový signál. Teprve potom vybírejte další krok.
+
+První standardní kontrola má být plánovaná až po tom, co pravidlo prošlo druhým běžným použitím a bylo uzavřené. Pokud ji spustíte dřív, budete kontrolovat nedokončené ověření. Pokud ji spustíte moc pozdě, tým už možná začne pracovat podle vzpomínek, kopií nebo starých odkazů. Prakticky stačí navázat na nejbližší běžné review: týdenní marketingovou kontrolu, měsíční produktové review, údržbu šablon nebo revizi formulářů.
+
+### Co kontrolovat
+
+Kontrola nemá znovu řešit celý návrat z klidu. Stačí čtyři otázky:
+
+- Je pravidlo dostupné v kanonickém pracovním místě?
+- Použil ho někdo bez autora pravidla, čerstvé paměti a zvláštního vysvětlování?
+- Nevznikla kolem něj nová kopie, pomocná tabulka nebo neformální zkratka?
+- Nezačala kvůli pravidlu vznikat nová datová stopa, kterou jsme neplánovali?
+
+Tyto otázky vypadají obyčejně, ale právě ony oddělují funkční standard od textu, který jen dobře zněl při uzavření. Když je pravidlo v kanonickém místě, ale lidé ho stejně hledají ve starém vlákně, problém není v pravidle. Problém je v cestě k němu. Když pravidlo funguje, ale někdo si k němu vede vlastní kopii "pro jistotu", problém je v důvěře v pracovní místo. Když pravidlo začalo vyžadovat nový export, problém je v datové disciplíně.
+
+Codyho komentář: standardní kontrola není detektivka. Pokud musíte otevřít pět starých dokumentů, abyste zjistili, jestli pravidlo funguje, tak už máte nález. Pravidlo možná funguje obsahově, ale provozně je schované v krabici s nápisem "někdo ví".
+
+### Praktický příklad
+
+```text
+Uzavřené pravidlo:
+První kontakt u hodnotového obsahu nesbírá údaje, které nejsou nutné pro doručení hodnoty nebo první rozhodnutí.
+
+Druhé běžné použití:
+Pravidlo obstálo u pozvánky na technický audit; velikost týmu se do prvního formuláře nepřidala.
+
+První standardní kontrola:
+V měsíčním marketingovém review ověříme, jestli nová šablona formuláře stále používá stejné pravidlo a jestli kolem ní nevznikla pomocná kopie pro "lepší kvalifikaci".
+
+Výsledek:
+Pravidlo je v kanonické šabloně, ale obchod si do poznámek začal kopírovat návrh doplňkové otázky pro follow-up.
+
+Rozhodnutí:
+Neotevíráme nový formulář ani lead scoring. Do sales karty doplníme jednu větu, že rozšiřující otázky patří až do navazujícího rozhovoru, pokud první kontakt doručil hodnotu.
+```
+
+Tady kontrola neznamená návrat k velké debatě o formulářích. Jen ukázala, že sousední pracovní místo potřebuje jednu hranu. To je dobrý výsledek: malá oprava tam, kde se tření opravdu objevilo.
+
+### Čtyři výsledky standardní kontroly
+
+První standardní kontrola může skončit čtyřmi stavy:
+
+- Klid potvrzen: pravidlo je dostupné, použitelné a nevytváří novou datovou ani procesní stopu.
+- Lokální navigace drhne: pravidlo je správné, ale lidé ho hledají na špatném místě nebo používají starý odkaz.
+- Sousední místo potřebuje hranu: pravidlo funguje, ale navazující šablona, sales karta nebo onboardingový krok si žádá jednu doplňující větu.
+- Skutečný návratový signál: kontrola odhalila opakované tření, které nejde vyřešit lokální navigací ani jednou hranou.
+
+U stavu `klid potvrzen` nedělejte další práci. Zapište potvrzení a vraťte pravidlo do běžného rytmu. Pokud k němu přidáte další kontrolu jen proto, že kontrola vyšla dobře, vyrábíte proces za odměnu. To je zvláštní druh trestu.
+
+U stavu `lokální navigace drhne` opravte cestu, ne pravidlo. Aktualizujte odkaz, přesuňte šablonu na správné místo, označte starou kopii jako archiv nebo doplňte krátkou navigační větu. Nepřepisujte obsah jen proto, že byl špatně najitelný.
+
+U stavu `sousední místo potřebuje hranu` doplňte nejmenší větu do místa, kde tření vzniklo. Pokud obchod potřebuje vědět, kdy se ptát na rozpočet, neznamená to, že formulář má začít rozpočet sbírat. Znamená to, že sales karta potřebuje rozhodovací hranici.
+
+U stavu `skutečný návratový signál` otevřete novou malou smyčku. Nevracejte se automaticky k celému původnímu tématu. Napište, co přesně se opakuje, kde se to ukázalo a jaká stop podmínka uzavře další krok.
+
+### Privacy-first kontrola
+
+První standardní kontrola je nenápadné místo, kde se často začne hromadit zbytečná evidence. Někdo chce pro jistotu sledovat, kdo pravidlo použil. Někdo navrhne tabulku případů. Někdo chce porovnávat staré a nové formuláře detailněji, než je potřeba. Většinou stačí mnohem méně.
+
+Použijte větu:
+
+```text
+Ke kontrole stačí zjistit, zda pravidlo existuje ve správném pracovním místě, zda bylo použité bez mimořádné pomoci a zda nevznikla nová zbytečná datová stopa.
+```
+
+To nevyžaduje osobní historii uživatelů, detailní export obchodních případů ani nové trackování chování týmu. Pokud potřebujete příklad, zobecněte ho. Pokud potřebujete důkaz, použijte existující pracovní artefakt. Pokud by kontrola vyžadovala nové sledování lidí nebo zákazníků, nejdřív se zeptejte, jaké rozhodnutí má takové sledování umožnit. Když odpověď není jasná, nesbírejte.
+
+Privacy-first výsledek standardní kontroly může znít takto:
+
+```text
+Kontrola nepotřebovala nové měření ani export. Použili jsme kanonickou šablonu, jednu anonymizovanou poznámku z review a záznam, že stará kopie byla archivována.
+```
+
+Takový zápis stačí. Je praktický, dohledatelný a nedělá z provozu sklad stop, které nikdo nechce uklízet.
+
+### Karta první standardní kontroly
+
+```text
+Téma:
+
+Pravidlo nebo standard:
+
+Kdy bylo uzavřené druhé běžné použití:
+
+Běžný rytmus, ve kterém kontrolujeme:
+
+Kanonické pracovní místo:
+
+Kontrolní otázka jednou větou:
+
+Co jsme ověřili:
+- dostupnost pravidla
+- samostatné použití
+- absence starých kopií
+- absence nové zbytečné datové stopy
+
+Výsledek:
+- klid potvrzen
+- lokální navigace drhne
+- sousední místo potřebuje hranu
+- skutečný návratový signál
+
+Rozhodnutí:
+
+Nejmenší úprava, pokud existuje:
+
+Co výslovně neotevíráme:
+
+Privacy-first poznámka:
+Jaké podklady stačily a jaká data jsme nesbírali:
+
+Vlastník:
+
+Datum:
+```
+
+Karta má být kratší než samotné pravidlo. Pokud se rozrůstá, pravděpodobně se z kontroly stává nová smyčka. To není zakázané, ale musí se to přiznat a zmenšit. Standardní kontrola má chránit klid, ne si ho nenápadně pronajmout na neurčito.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: pojmenujte pravidlo a kanonické pracovní místo.
+2. Minuta 2: ověřte, jestli je pravidlo dostupné bez starých odkazů.
+3. Minuta 3: zjistěte, jestli ho někdo použil bez mimořádné pomoci.
+4. Minuta 4: hledejte staré kopie, pomocné seznamy nebo neformální zkratky.
+5. Minuta 5: vyberte jeden ze čtyř výsledků.
+6. Minuta 6: zapište privacy-first poznámku a rozhodnutí, co se neotevírá.
+
+Šest minut je záměrně málo. Standardní kontrola nemá být retrospektiva celého rozhodnutí. Pokud šest minut nestačí, zapište, proč nestačí. Možná jste našli skutečný návratový signál. Možná jen nemáte kanonické místo. Obojí je užitečný nález, ale každý vede jinam.
+
+### Checklist první standardní kontroly
+
+- Kontrola probíhá v běžném rytmu, ne jako další mimořádné ověření?
+- Víme, které pravidlo a které kanonické pracovní místo kontrolujeme?
+- Neotevíráme znovu celý návrat z klidu?
+- Ověřili jsme dostupnost pravidla bez starých odkazů a autora pravidla?
+- Ověřili jsme, jestli nevznikla stará kopie v novém kabátě?
+- Rozlišili jsme lokální navigaci, sousední hranu a skutečný návratový signál?
+- U potvrzeného klidu nepřidáváme další kontrolu?
+- U lokální navigace opravujeme cestu, ne obsah?
+- U sousední hrany doplňujeme jednu větu do správného místa?
+- U návratového signálu otevíráme novou malou smyčku se stop podmínkou?
+- Stačily nám existující a zobecněné podklady?
+- Nevzniklo nové měření, export ani sledování lidí jen kvůli pocitu jistoty?
+- Je jasně zapsané, co výslovně neotevíráme?
+
+První standardní kontrola je malá pojistka, že uzavřené pravidlo opravdu přešlo do provozu. Když potvrdí klid, nechte ho klidným. Když najde tření, opravte nejbližší místo. Když najde návratový signál, otevřete úzkou smyčku. Hlavní výhra je, že kontrola nezvětšuje systém jen proto, že se systém naučil fungovat.
+
 ## Pracovní log
 
+- 2026-06-25: Doplněna úvodní podkapitola o první standardní kontrole po uzavření druhého běžného použití: kontrolní otázky, čtyři výsledky, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-06-25: Doplněna úvodní podkapitola o uzavření druhého běžného použití po uzavření prvního návratu z klidu: uzavírací stavy, propsání do kanonického místa, privacy-first úklid podkladů, karta, mini workshop a checklist.
 - 2026-06-25: Doplněna úvodní podkapitola o druhém běžném použití po uzavření prvního návratu z klidu: přenositelnost bez čerstvé paměti, slabý okraj pravidla, falešná příbuznost, privacy-first porovnání, karta, mini workshop a checklist.
 - 2026-06-25: Doplněna úvodní podkapitola o uzavření prvního běžného použití po uzavření prvního návratu z klidu: uzavírací stavy, propsání do kanonického pracovního místa, privacy-first úklid, karta, mini workshop a checklist.
