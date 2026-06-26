@@ -193,6 +193,8 @@ Když se během sedmi minut ukáže, že důkaz je silnější, než tým čekal
 
 Neotevřený krok má být malý, přesný a dohledatelný. Když ho zapíšete dobře, neztrácíte nápad. Ztrácíte jen povinnost dělat práci, která si zatím nezasloužila existovat. To je fér obchod.
 
+Uložte záznam tam, kde se podnět pravděpodobně vrátí: k formuláři, obchodnímu skriptu, stránce nebo onboardingovému kroku. Samostatný dokument je užitečný až ve chvíli, kdy tým podobných záznamů řeší víc a potřebuje je pravidelně porovnávat.
+
 ## Návrat k neotevřenému kroku
 
 Neotevřený krok se někdy vrátí. To není chyba původního rozhodnutí. Dobrý záznam nemá téma navždy zamknout do sklepa; má zajistit, že se otevře až ve chvíli, kdy přijde lepší důvod než minule. Rozdíl je v tom, že návrat neznamená automatické spuštění původního návrhu. Znamená novou kontrolu: jestli se opravdu objevil návratový signál, jestli pořád platí stejná pracovní otázka a jestli lze otevřít menší krok než ten, který byl minule zamítnutý.
