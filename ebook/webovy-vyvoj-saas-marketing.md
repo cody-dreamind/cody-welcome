@@ -259078,8 +259078,187 @@ Servisní workshop se má vejít do pěti minut právě proto, že pravidlo je s
 
 První servisní kontrola stabilního pravidla je údržba bez divadla. Má potvrdit, že pravidlo pořád pomáhá, nebo ho lehce opravit, uklidit či archivovat. Nejlepší výsledek často zní nudně: beze změny, žádná nová data, další kontrola v běžném rytmu. Nuda je v provozu podceňovaná ctnost.
 
+## Uzavření servisní kontroly stabilního pravidla
+
+Servisní kontrola má hodnotu až ve chvíli, kdy po ní nezůstane mlhavý dojem "asi dobré". Stabilní pravidlo potřebuje po kontrole krátký závěr: co se našlo, co se mění, co zůstává zavřené a kdy se k pravidlu znovu vrátit. Bez toho se i pětiminutová kontrola umí změnit v další otevřenou poznámku, která visí nad týmem jako drobný, ale vytrvalý provozní dluh.
+
+Uzavření servisní kontroly proto nedělejte jako report pro report. Udělejte ho jako návrat pravidla do běžného života. Pokud kontrola skončila stavem `beze změny`, závěr má být velmi krátký. Pokud skončila lokálním servisem, závěr má potvrdit, kde přesně se upravila věta, odkaz nebo umístění. Pokud skončila archivací, závěr má zajistit, že staré pravidlo nezůstane viset v pracovních trasách. A pokud se objevil návratový signál, závěr má otevřít novou malou smyčku, ne oživit celou starou bitvu.
+
+Začněte jednou větou:
+
+```text
+Servisní kontrolu uzavíráme stavem:
+```
+
+Za ni doplňte jeden ze čtyř stavů a jednu pracovní větu. Například:
+
+```text
+Servisní kontrolu uzavíráme stavem: lokální servis.
+Do obchodního checklistu doplňujeme jednu větu, že použití volitelné otázky na rozpočet se samostatně neeviduje; pomocnou tabulku mažeme.
+```
+
+Tahle věta dělá tři věci najednou. Říká výsledek, omezuje rozsah a uklízí datovou stopu. Nepotřebuje dlouhé vysvětlování historie. Stabilní pravidlo už historii přežilo; teď potřebuje hlavně zůstat použitelné.
+
+### Jak uzavřít čtyři výsledky
+
+Každý výsledek servisní kontroly vyžaduje trochu jiný závěr:
+
+- Beze změny: potvrďte, že pravidlo funguje, žádná obchůzka nevznikla a další kontrola běží v normálním rytmu.
+- Lokální servis: zapište jednu konkrétní opravu a ukliďte pomocnou stopu, kvůli které oprava vznikla.
+- Archivace: odstraňte pravidlo z pracovních míst, kde by mohlo mást, a nechte jen dohledatelný historický záznam.
+- Návratový signál: založte novou malou pracovní otázku s hranicí a nechte staré pravidlo jako kontext, ne jako hotové řešení.
+
+Stav `beze změny` má být opravdu beze změny. Nepřidávejte nový dashboard, novou kolonku "ověřeno" ani další minikontrolu jen proto, že kontrola dopadla dobře. Dobře dopadlá servisní kontrola je důvod odstranit pozornost, ne ji institucionalizovat.
+
+Stav `lokální servis` má skončit tam, kde začal problém. Pokud lidé nevěděli, zda si mají použití otázky zapisovat do tabulky, opravte větu v checklistu. Nepřepisujte celou obchodní metodiku. Lokální servis je jako dotažení šroubku: když kvůli němu rozeberete celý stroj, možná máte moc hezkou dílnu, ale slabý úsudek.
+
+Stav `archivace` vyžaduje opatrnost. Archivované pravidlo nemá zmizet tak, aby tým ztratil důvod rozhodnutí, ale nemá zůstat ve viditelné trase jako platná instrukce. Ideální je ponechat krátkou historickou poznámku u zdroje pravdy a odstranit pravidlo z checklistů, šablon a onboardingových materiálů, kde by ho někdo mohl použít omylem.
+
+Stav `návratový signál` je nejrizikovější. Servisní kontrola může najít skutečný důvod k návratu, ale tím ještě neříká, jaké řešení je správné. Závěr proto musí oddělit signál od návrhu. Napište, co se stalo, jaká malá otázka se otevírá a co se zatím neotevírá.
+
+```text
+Návratový signál:
+Tři relevantní poptávky za sebou se zdržely na chybějícím rozhodovacím limitu.
+
+Otevíráme:
+Malou smyčku nad potvrzovacím e-mailem a obchodním follow-upem.
+
+Neotevíráme:
+Povinné pole ve formuláři, lead scoring ani nový export poptávek.
+```
+
+Tohle je suché, přesné a velmi užitečné. Suchost je v provozu často levnější než dramatičnost.
+
+### Praktický příklad uzavření
+
+Stabilní pravidlo:
+
+```text
+Volitelnou otázku na rámcový rozpočet lze použít jen tehdy, když bez ní nejde navrhnout další konkrétní krok. Odpověď slouží pro aktuální obchodní rozhovor; nezakládá nový formulářový údaj, CRM atribut ani ruční evidenci.
+```
+
+Servisní nález:
+
+```text
+Obchodník si začal bokem psát, kdy otázku použil, protože nebylo jasné, jestli se použití otázky má vyhodnocovat.
+```
+
+Uzavření:
+
+```text
+Stav:
+Lokální servis.
+
+Co měníme:
+Do obchodního checklistu doplňujeme větu: "Použití volitelné otázky se samostatně neeviduje; pokud se kvalifikace opakovaně zasekne, založ návratový signál."
+
+Co uklízíme:
+Pomocnou poznámku s použitím otázky mažeme po doplnění checklistu.
+
+Co zůstává zavřené:
+Formulářové pole pro rozpočet, CRM atribut, lead scoring a export do marketingového nástroje.
+
+Další rytmus:
+Pravidlo se vrací do běžného kvartálního review.
+```
+
+Všimněte si, že lokální servis neotevřel žádné nové měření. Tým nepotřebuje počítat každé použití otázky, pokud z toho neplyne konkrétní rozhodnutí. Potřebuje jen zabránit tomu, aby se nejistota změnila v nenápadnou evidenci.
+
+### Privacy-first uzavření
+
+Uzavření servisní kontroly musí vždy obsahovat úklid nebo potvrzení datové stopy. Servisní kontrola je totiž přesně ten okamžik, kdy se objevují malé pomocné záznamy: "jen pro kontrolu", "jen na měsíc", "jen abychom věděli". Tyhle věty znějí nevinně, dokud jich není třicet a nikdo si nepamatuje, proč existují.
+
+Použijte tři řádky:
+
+```text
+Po kontrole ponecháváme:
+
+Po kontrole mažeme nebo přestáváme sbírat:
+
+Po kontrole výslovně nepřidáváme:
+```
+
+Příklad:
+
+```text
+Po kontrole ponecháváme:
+Samotné pravidlo v obchodním checklistu.
+
+Po kontrole mažeme nebo přestáváme sbírat:
+Pomocnou poznámku o tom, kdy byla otázka použita.
+
+Po kontrole výslovně nepřidáváme:
+CRM atribut, tag, export, report ani nový formulářový údaj.
+```
+
+Pokud něco ponecháváte, napište proč. Pokud důvod zní "mohlo by se hodit", smažte to nebo z toho udělejte samostatnou rozhodovací otázku. Privacy-first provoz není o asketismu. Je o tom, že každá stopa má účel, vlastníka a konec. Bez těchto tří věcí je to jen budoucí práce s horší náladou.
+
+Codyho komentář: nejlepší servisní závěr často nikoho nenadchne. "Doplnili jsme jednu větu a smazali pomocnou poznámku" nezní jako velký strategický moment. Jenže přesně takhle vypadá dospělý provoz: malé opravy, žádné zbytečné databáze, méně vysvětlování příště. Strašně neinstagramové. O to lepší.
+
+### Karta uzavření servisní kontroly
+
+```text
+Kontrolované pravidlo:
+
+Pracovní místo:
+
+Výsledek servisní kontroly:
+- beze změny
+- lokální servis
+- archivace
+- návratový signál
+
+Jednovětý závěr:
+
+Co se mění:
+
+Co zůstává výslovně zavřené:
+
+Co se odstraňuje z pracovních míst:
+
+Co se ponechává jen jako historický záznam:
+
+Privacy-first uzavření:
+Ponecháváme:
+Mažeme nebo přestáváme sbírat:
+Výslovně nepřidáváme:
+
+Další rytmus nebo návratový signál:
+
+Vlastník:
+```
+
+Kartu zkraťte podle výsledku. U stavu `beze změny` často stačí jednovětý závěr, privacy-first potvrzení a další rytmus. U archivace a návratového signálu buďte přesnější, protože tam vzniká největší riziko nejasnosti.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte výsledek servisní kontroly.
+2. Minuta 2: vyberte jeden ze čtyř uzavíracích stavů.
+3. Minuta 3: napište jednovětý závěr.
+4. Minuta 4: zapište, co se mění a co zůstává zavřené.
+5. Minuta 5: ukliďte nebo potvrďte datovou stopu.
+6. Minuta 6: určete další rytmus, archivaci nebo návratový signál.
+
+Pokud se během šesti minut objeví debata o nové strategii, napište ji stranou jako nové téma. Uzavření servisní kontroly má zavřít servisní kontrolu. Není to zadní vchod do roadmapy.
+
+### Checklist uzavření servisní kontroly
+
+- Má servisní kontrola přesně jeden výsledek?
+- Je závěr napsaný jednou pracovní větou?
+- Pokud se něco mění, je změna omezená na konkrétní pracovní místo?
+- Je jasné, co zůstává zavřené z původního širšího návrhu?
+- Pokud pravidlo archivujeme, zmizelo z míst, kde by mohlo mást?
+- Pokud přišel návratový signál, vznikla malá nová otázka místo návratu celé historie?
+- Zkontrolovali jsme pomocné poznámky, tabulky, tagy, screenshoty, exporty a reporty?
+- Má každá ponechaná stopa účel, vlastníka a retenci?
+- Je napsané, co výslovně nepřidáváme jako nový údaj, atribut nebo tracker?
+- Vrací se pravidlo do běžného rytmu, nebo je jasně archivované či otevřené jako nová malá smyčka?
+
+Uzavření servisní kontroly je poslední metr údržby. Když ho přeskočíte, pravidlo sice možná funguje, ale kolem něj zůstane prach: poznámky, dohady, stínová evidence a neurčité "ještě se k tomu vrátíme". Když ho uděláte dobře, stabilní pravidlo se vrátí do klidu a tým ví, že nic dalšího nemá tahat za sebou.
+
 ## Pracovní log
 
+- 2026-06-26: Doplněna úvodní podkapitola o uzavření servisní kontroly stabilního pravidla: čtyři uzavírací stavy, praktický příklad, privacy-first úklid pomocných stop, karta, mini workshop a checklist.
 - 2026-06-26: Doplněna úvodní podkapitola o první servisní kontrole stabilního pravidla: tři servisní otázky, čtyři výsledky, praktický příklad, privacy-first úklid tichých datových stop, karta, mini workshop a checklist.
 - 2026-06-26: Doplněna úvodní podkapitola o druhém běžném review v dlouhodobém klidu: test pravidla bez čerstvé paměti, ochrana zavřeného rozsahu, privacy-first úklid pomocných stop, karta, mini workshop a checklist.
 - 2026-06-26: Doplněna úvodní podkapitola o uzavření prvního běžného review do dlouhodobého klidu: tři uzavírací stavy, praktické příklady, privacy-first úklid pomocných stop, karta, mini workshop a checklist.
