@@ -259613,8 +259613,169 @@ Pokud se v šesté minutě objeví nové téma, nezvětšujte workshop. Zapište
 
 Uzavření druhé servisní kontroly je dobrý test provozní dospělosti. Není těžké pravidlo vytvořit. Těžší je nechat ho po ověření zase ztichnout, uklidit po sobě data a nepřilepit na něj další proces jen proto, že tým zrovna věnoval pozornost jeho existenci. Stabilní pravidlo nemá být slavné. Má být použité, najitelné, střídmé na data a dostatečně nudné na to, aby kolem něj nevznikala práce navíc.
 
+## Převod stabilního pravidla do ročního rytmu
+
+Když pravidlo projde dvěma servisními kontrolami a po uzavření nezůstane žádná slabá hrana, není potřeba ho dál hlídat jako čerstvou změnu. V tu chvíli má dostat jiné zacházení: přejít z režimu "ověřujeme, jestli funguje" do režimu "jednou za čas ověříme, jestli pořád patří do systému". Rozdíl je malý ve formulaci a velký v provozu. První režim hledá tření po změně. Druhý chrání dlouhodobou srozumitelnost, datovou střídmost a shodu s aktuální prací.
+
+Začněte větou:
+
+```text
+Pravidlo převádíme do ročního rytmu, protože dvě běžná použití a dvě servisní kontroly neukázaly důvod k mimořádné péči.
+```
+
+Tahle věta není oslava úspěchu. Je to brzda proti dalšímu přidávání kontrol. Stabilní pravidlo už nemá mít vlastní týdenní poznámku, vlastní mini dashboard ani samostatnou tabulku "použití pravidla". Má žít v kanonickém pracovním místě a vracet se pouze při ročním review, při změně kontextu nebo při jasném návratovém signálu.
+
+Roční rytmus není vhodný pro všechno. Nepatří sem právní povinnosti, bezpečnostní procesy, kritické incidentní postupy ani nástroje, které se často mění. Tam zvolte kratší revizní rytmus a jasně napište proč. Roční rytmus patří hlavně pravidlům, která jsou provozně stabilní, málo riziková, dobře najitelná a nemají vlastní citlivou datovou stopu.
+
+### Co se při převodu mění
+
+Převod do ročního rytmu má čtyři praktické změny:
+
+- Pravidlo zůstává v kanonickém pracovním místě, ale mizí z mimořádných kontrolních seznamů.
+- Návratový signál se zkrátí na jednu větu, kterou tým najde tam, kde pravidlo používá.
+- Dočasné poznámky, kopie a měření se smažou, zkrátí nebo převedou na odkaz.
+- Roční review kontroluje platnost pravidla, ne historii všech debat, které k němu vedly.
+
+Jinými slovy: pravidlo nezmizí, jen přestane zabírat pozornost mimo běžný pracovní rytmus. To je důležité. Některé týmy mají sklon považovat každé dobré pravidlo za kandidáta na další proces. Výsledkem je knihovna drobných kontrol, které jednotlivě dávají smysl a dohromady požírají soustředění. Roční rytmus říká: toto pravidlo už je dost stabilní na to, aby samo nespotřebovávalo víc energie, než šetří.
+
+### Praktický příklad
+
+Představte si pravidlo z předchozí části: v obchodní komunikaci se u nejasné poptávky může použít volitelná otázka na rámcový rozpočet nebo rozhodovací limit. Pravidlo prošlo prvním běžným použitím, druhým běžným použitím, první servisní kontrolou a druhou servisní kontrolou. Nový člověk ho našel, použil bez dovysvětlení a nevznikly nové CRM tagy, exporty ani povinná pole.
+
+Převod do ročního rytmu může vypadat takto:
+
+```text
+Pravidlo:
+Volitelná rozpočtová otázka v obchodním follow-upu.
+
+Kanonické místo:
+Obchodní checklist pro kvalifikaci nejasné poptávky.
+
+Proč přechází do ročního rytmu:
+Dvě běžná použití a dvě servisní kontroly potvrdily, že pravidlo jde najít, použít a nezvětšuje datovou stopu.
+
+Co rušíme:
+Dočasnou poznámku z poslední kontroly a pracovní kopii ukázkového e-mailu.
+
+Co ponecháváme:
+Jednu zobecněnou větu v obchodním checklistu a návratový signál.
+
+Návratový signál:
+Tři relevantní poptávky za sebou nepůjde kvalifikovat bez ručního doptání na rozpočet nebo rozhodovací limit.
+
+Další kontrola:
+Roční review obchodního checklistu, pokud návratový signál nepřijde dřív.
+```
+
+Všimněte si, co se nestalo. Nevznikl nový report pro obchod. Nevznikl nový formulář. Nevznikla evidence každého použití otázky. Pravidlo zůstává dostupné, ale jeho údržba se zmenšila na rozumnou mez. To je přesně bod, ve kterém se provoz přestává tvářit jako neustálý projekt a začíná být opravdu provozem.
+
+### Roční review bez archeologie
+
+Roční review stabilního pravidla nemá znovu otevírat celou historii. Má položit pět krátkých otázek:
+
+- Používá se pravidlo ještě ve stejné pracovní situaci?
+- Je kanonické místo pořád správné?
+- Nezměnil se segment, nabídka, nástroj, právní rámec nebo datový tok tak, že pravidlo zestárlo?
+- Nevznikly kopie, které říkají něco jiného než zdroj pravdy?
+- Je datová stopa pořád přiměřená účelu pravidla?
+
+Pokud odpovědi drží, stačí zapsat krátké potvrzení:
+
+```text
+Roční review potvrzuje, že pravidlo zůstává v platnosti bez změny. Kopie nevznikly, datová stopa se nezvětšila a návratový signál nepřišel.
+```
+
+Pokud se něco změnilo, neotevírejte automaticky celou minulou debatu. Vyberte nejmenší stav:
+
+```text
+Beze změny:
+Pravidlo platí a další kontrola proběhne v příštím ročním review.
+
+Malá aktualizace:
+Mění se jedna věta v kanonickém místě, protože se změnil název pracovního kroku nebo drobný detail procesu.
+
+Nová kontrola kontextu:
+Nejdřív ověříme, jestli se pravidlo pořád týká stejné situace. Implementaci zatím neotevíráme.
+
+Archivace:
+Pravidlo už nepatří do aktivního provozu a mizí z pracovních tras. Historický záznam zůstává jen jako stručná stopa.
+```
+
+Roční review má chránit čitelnost systému. Když z něj vznikne dlouhá retrospektiva, pravděpodobně jste se vrátili k ověřovacímu režimu. To může být oprávněné, ale pak to pojmenujte jako nový návratový signál nebo změnu kontextu. Nepředstírejte, že jde jen o rutinní roční kontrolu.
+
+### Privacy-first roční rytmus
+
+Privacy-first hodnota ročního rytmu je jednoduchá: co nepotřebujete průběžně měřit, to průběžně neměřte. Stabilní pravidlo často nepotřebuje detailní historii použití. Potřebuje jen vědět, kde platí, kdy se vrátit a jaká data se kvůli němu nesbírají.
+
+Při převodu proto napište jednu větu o datové stopě:
+
+```text
+Po převodu do ročního rytmu neponecháváme dočasné ukázky zákaznických zpráv, neevidujeme jednotlivá použití pravidla a nekopírujeme obchodní detaily mimo kanonické pracovní místo.
+```
+
+Tahle věta je užitečnější než obecné "dodržujeme privacy-first". Ukazuje, jaké konkrétní datové návyky nevzniknou. Pokud se později objeví potřeba měřit dopad pravidla, začněte znovu rozhodovací otázkou a hledejte nejmenší agregovaný signál. Nevracejte se automaticky k detailním záznamům jen proto, že jsou pohodlné.
+
+Codyho komentář: roční rytmus je takový dospělý ekvivalent odložení šroubováku. Oprava je hotová, šroub drží, nářadí patří zpátky do krabice. Ne na stůl "kdyby náhodou". Kdyby náhodou je přesně ta věta, ze které se rodí hromady starých tabulek.
+
+### Karta převodu do ročního rytmu
+
+```text
+Pravidlo:
+
+Kanonické pracovní místo:
+
+Proč je pravidlo dost stabilní pro roční rytmus:
+
+Poslední ověřené použití nebo kontrola:
+
+Co mizí z mimořádné péče:
+
+Co zůstává ve zdroji pravdy:
+
+Co se maže, zkracuje nebo nahrazuje odkazem:
+
+Jaká data, citace, screenshoty, exporty, tagy nebo pracovní kopie po převodu nezůstávají:
+
+Návratový signál:
+
+Kdy proběhne další roční review:
+
+Kdo vlastní kanonické místo:
+
+Datum převodu:
+```
+
+Karta má bydlet u pravidla, ne v samostatném hřbitově údržby. Pokud ji člověk nenajde ve chvíli, kdy pravidlo používá, je skoro k ničemu. Stabilní provoz nepotřebuje víc dokumentace. Potřebuje dokumentaci na správném místě.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: potvrďte, že pravidlo prošlo běžným použitím a servisními kontrolami bez otevřené slabé hrany.
+2. Minuta 2: pojmenujte kanonické místo a vlastníka.
+3. Minuta 3: smažte nebo zkraťte jednu dočasnou stopu, která už nepomáhá rozhodnutí.
+4. Minuta 4: napište návratový signál jednou větou.
+5. Minuta 5: zapište, jaká data po převodu nezůstávají.
+6. Minuta 6: určete roční review nebo kratší rytmus s jasným důvodem.
+
+Pokud ve druhé minutě zjistíte, že kanonické místo není jasné, nepřevádějte pravidlo do ročního rytmu. Nejdřív opravte najitelnost. Roční rytmus u pravidla, které nikdo neumí najít, není údržba. Je to elegantně pojmenované zapomenutí.
+
+### Checklist převodu do ročního rytmu
+
+- Prošlo pravidlo alespoň jedním běžným použitím bez mimořádné pomoci?
+- Proběhly servisní kontroly bez otevřené slabé hrany?
+- Je jasné, kde je kanonické pracovní místo?
+- Ví tým, které mimořádné poznámky, kopie nebo evidence končí?
+- Je návratový signál napsaný jednou větou?
+- Je jasné, že roční review nekontroluje celou historii, ale dnešní platnost pravidla?
+- Nezůstává žádná dočasná tabulka, export, screenshot, zákaznická citace nebo kopie "pro jistotu"?
+- Je výslovně napsané, co se kvůli pravidlu dál neměří?
+- Má roční rytmus vlastníka?
+- Pokud je potřeba kratší rytmus, je napsané proč?
+
+Převod do ročního rytmu je malý, ale důležitý konec jedné dlouhé smyčky. Pravidlo vzniklo, prošlo návratem, běžným použitím, kontrolami, úklidem a teď se může stát obyčejnou součástí práce. To je dobrý výsledek. Ne proto, že už nikdy nebude potřeba změna. Ale proto, že další změna přijde až s důvodem, ne s neklidem.
+
 ## Pracovní log
 
+- 2026-06-26: Doplněna úvodní podkapitola o převodu stabilního pravidla do ročního rytmu: ukončení mimořádné péče, roční review bez archeologie, privacy-first omezení průběžného měření, karta, mini workshop a checklist.
 - 2026-06-26: Doplněna úvodní podkapitola o druhé servisní kontrole stabilního pravidla: přenositelnost bez čerstvé paměti, kontrola kanonického místa a kopií, privacy-first úklid zbytečných stop, karta, mini workshop a checklist.
 - 2026-06-26: Doplněna úvodní podkapitola o uzavření servisní kontroly stabilního pravidla: čtyři uzavírací stavy, praktický příklad, privacy-first úklid pomocných stop, karta, mini workshop a checklist.
 - 2026-06-26: Doplněna úvodní podkapitola o první servisní kontrole stabilního pravidla: tři servisní otázky, čtyři výsledky, praktický příklad, privacy-first úklid tichých datových stop, karta, mini workshop a checklist.
