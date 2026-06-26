@@ -256679,8 +256679,181 @@ Když v sedmé minutě nemáte rozhodnutí, výchozí stav je klid. Ne proto, ž
 
 První lehký návrat ze stabilního klidu má chránit dvě věci současně: citlivost na skutečné signály a odolnost proti šumu. Když signál nepřišel, klid pokračuje. Když přišel, otevře se nejmenší smysluplná práce. V obou případech tým neztrácí kontrolu nad rozsahem ani nad daty.
 
+## Uzavření lehkého návratu ze stabilního klidu
+
+Lehký návrat nemá zůstat viset jako poznámka "někdo se na to podívá". Buď potvrdil, že klidové pravidlo dál stačí, nebo otevřel malý průchod, lokální kontrolu či nové téma. Uzavření lehkého návratu proto není velká retrospektiva. Je to krátký zápis, který říká, co se stalo s podnětem, co se změnilo v pracovním místě a kdy se téma znovu smí vrátit.
+
+Začněte původním výsledkem lehkého návratu:
+
+```text
+Výsledek lehkého návratu byl:
+
+Co jsme udělali:
+
+Co se tím změnilo v běžné práci:
+
+Co zůstává zavřené:
+
+Další návrat povolí pouze:
+```
+
+Tahle šablona drží návrat v jeho velikosti. Pokud byl výsledek `ponechat v klidu`, nemá se najednou objevit "malé preventivní měření". Pokud šlo o `lokální kontrolu`, nemá se z ní stát trvalý report. Pokud šlo o `malý průchod`, nemá přerůst do starého širokého návrhu jen proto, že už je téma znovu na stole.
+
+### Čtyři způsoby uzavření
+
+První uzavření je `klid potvrzen`. Použijte ho, když se podnět nepotvrdil nebo lokální kontrola neukázala opakovaný problém. Do pracovního místa se nepřidává nová vrstva. Stačí krátký záznam u původní karty: klidové pravidlo dál platí, návratový signál se nemění a další kontrola se neplánuje.
+
+Druhé uzavření je `lokálně dočištěno`. Hodí se, když se našla drobná překážka v najitelnosti, formulaci nebo předání pravidla. Oprava se zapíše do jednoho kanonického místa a pomocná poznámka se zavře. Tým si nemá odnést pocit, že teď musí pravidlo hlídat zvlášť. Má si odnést jasnější běžnou cestu.
+
+Třetí uzavření je `malý průchod dokončen`. Použijte ho, když návratový signál skutečně otevřel úpravu a ta už proběhla v dohodnutém rozsahu. Zapište výsledek ověření, nové znění pravidla a hranici, která zůstává zavřená. Pokud se například upravila jedna věta v potvrzovacím e-mailu, formulář a scoring zůstávají mimo rozsah i po dokončení.
+
+Čtvrté uzavření je `převedeno na nové téma`. To je správný výsledek, když se ukázalo, že dnešní podnět není návrat ke starému pravidlu, ale jiná pracovní otázka. Starou kartu zavřete bez změny a založte novou otázku jen s tím kontextem, který je opravdu relevantní. Historii nepřenášejte celou; přeneste jen odkaz a jednu větu, proč souvisí.
+
+### Praktický příklad
+
+Lehký návrat:
+
+```text
+Klidové pravidlo:
+Rozpočet nesbíráme v prvním formuláři. U relevantních poptávek lze použít volitelnou otázku v potvrzovacím e-mailu.
+
+Dnešní podnět:
+U tří poptávek zákazníci nerozuměli výrazu "rozhodovací limit".
+
+Výsledek:
+Malý průchod. Upravíme jednu větu ve volitelné otázce.
+```
+
+Uzavření:
+
+```text
+Výsledek lehkého návratu byl:
+Malý průchod.
+
+Co jsme udělali:
+V potvrzovacím e-mailu jsme změnili větu na: "Pokud už víte, jaký rámec investice nebo interní limit máte schválený, napište nám ho v odpovědi."
+
+Co se tím změnilo v běžné práci:
+Obchod používá stejnou volitelnou otázku, jen s konkrétnější formulací.
+
+Co zůstává zavřené:
+Povinné pole pro rozpočet ve formuláři, lead scoring a nový export poptávek.
+
+Další návrat povolí pouze:
+Tři relevantní poptávky za sebou nepůjdou kvalifikovat ani po nové formulaci otázky.
+```
+
+Všimněte si, že uzavření neoslavuje samotnou úpravu textu. Důležité je, že se malý průchod vrací do běžného rytmu a nepřilepil k sobě další práci. Jedna věta se změnila, tři širší věci zůstaly zavřené a návratový signál je znovu konkrétní.
+
+### Co propsat zpět do pracovního místa
+
+Po uzavření lehkého návratu aktualizujte jen místa, která člověk opravdu použije při běžné práci. Typicky to bude jedna šablona, jeden checklist, jeden interní odkaz nebo jedna karta rozhodnutí. Nepřepisujte staré komentáře, dlouhé debaty ani pomocné poznámky, pokud z nich nevzniká nový zdroj pravdy.
+
+Do pracovního místa patří:
+
+- aktuální znění pravidla,
+- datum posledního uzavření,
+- nový nebo potvrzený návratový signál,
+- jasná hranice toho, co zůstává zavřené,
+- odkaz na původní kartu, pokud je užitečný pro audit.
+
+Do pracovního místa naopak nepatří celý průběh diskuse, seznam lidí, kteří měli odlišný názor, ani dočasná evidence použitá při lokální kontrole. Tyto věci mohou být důležité pro audit nebo týmovou paměť, ale nemají zatěžovat člověka, který chce pravidlo jen použít.
+
+Codyho komentář: dobré uzavření je trochu nevděčné. Když funguje, nikdo ho neobdivuje. Jen se další člověk nezasekne, nevezme starou cestu a nezačne sbírat data navíc. To je dost dobrý výsledek, i když se na něj špatně kreslí slavnostní graf.
+
+### Privacy-first uzavření
+
+Největší privacy-first riziko při uzavření je ponechat po návratu dočasnou stopu. Během lehkého návratu mohla vzniknout kontrolní poznámka, krátký seznam případů, screenshot, export, ruční tabulka nebo komentář s konkrétními zákaznickými údaji. Pokud už splnily účel, mají skončit.
+
+Uzavření proto doplňte o tři věty:
+
+```text
+Do běžného pracovního místa ukládáme pouze:
+
+Pomocné podklady mažeme nebo archivujeme podle:
+
+Nově nezavádíme:
+```
+
+Příklad:
+
+```text
+Do běžného pracovního místa ukládáme pouze nové znění volitelné otázky a návratový signál.
+
+Pomocné podklady mažeme podle běžné retence obchodních poznámek; nepřesouváme je do samostatné tabulky.
+
+Nově nezavádíme CRM atribut, tracker odpovědí ani export neodpovězených e-mailů.
+```
+
+Privacy-first provoz se tady nepozná podle velkého prohlášení. Pozná se podle toho, že po malé kontrole nezůstane malý datový nepořádek. Každá dočasná stopa musí mít účel, vlastníka a konec. Pokud jedno z toho chybí, nejspíš nemá zůstat.
+
+### Karta uzavření lehkého návratu
+
+```text
+Téma:
+
+Původní klidové pravidlo:
+
+Výsledek lehkého návratu:
+- klid potvrzen
+- lokálně dočištěno
+- malý průchod dokončen
+- převedeno na nové téma
+
+Co bylo provedeno:
+
+Aktuální znění pravidla nebo odkazu:
+
+Co zůstává zavřené:
+
+Návratový signál po uzavření:
+
+Co se propsalo do kanonického pracovního místa:
+
+Co se nepropsalo a proč:
+
+Privacy-first uzavření:
+Do běžného pracovního místa ukládáme pouze:
+Pomocné podklady mažeme nebo archivujeme podle:
+Nově nezavádíme:
+
+Vlastník běžného rytmu:
+
+Datum uzavření:
+```
+
+Karta má chránit budoucí tým před dvěma omyly. První omyl je myslet si, že se nic nestalo, i když se pravidlo lokálně zpřesnilo. Druhý omyl je myslet si, že se otevřela celá stará otázka, i když se dokončil jen malý průchod. Dobré uzavření dělá rozdíl viditelný.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte výsledek lehkého návratu.
+2. Minuta 2: napište, co se skutečně provedlo.
+3. Minuta 3: určete, co se propsalo do kanonického pracovního místa.
+4. Minuta 4: napište, co zůstává zavřené.
+5. Minuta 5: potvrďte nebo zpřesněte návratový signál.
+6. Minuta 6: zavřete pomocné podklady a privacy-first stopu.
+
+Pokud během workshopu vyjde najevo, že lehký návrat ještě není uzavřený, nezvětšujte ho na místě. Napište chybějící nejmenší krok a určete, kdy bude hotový. Uzavření není prostor pro dohánění celé práce; je to prostor pro poctivé pojmenování stavu.
+
+### Checklist uzavření lehkého návratu
+
+- Víme, jaký byl výsledek lehkého návratu?
+- Je jasné, co se skutečně provedlo?
+- Pokud se nic neměnilo, je klid potvrzen bez nové kontroly?
+- Pokud proběhlo lokální dočištění, je propsané do jednoho kanonického místa?
+- Pokud proběhl malý průchod, je uzavřený v původním rozsahu?
+- Pokud šlo o nové téma, zůstala stará karta zavřená?
+- Je zapsané, co zůstává mimo rozsah?
+- Má pravidlo aktuální návratový signál?
+- Skončila mimořádná poznámka, ruční evidence nebo dočasný export?
+- Nezavedli jsme nový tracker, CRM atribut, report ani delší retenci jen kvůli uzavření?
+- Umí další člověk pravidlo použít bez čtení celé historie návratu?
+
+Uzavřený lehký návrat má skončit klidem, ne novou vrstvou opatrnosti. Buď pravidlo dál funguje, nebo se lokálně zpřesnilo, nebo se otevřela samostatná otázka. Ve všech případech musí být vidět hranice práce a konec dočasné datové stopy.
+
 ## Pracovní log
 
+- 2026-06-26: Doplněna úvodní podkapitola o uzavření lehkého návratu ze stabilního klidu: čtyři způsoby uzavření, propsání do pracovního místa, privacy-first úklid dočasných stop, karta, mini workshop a checklist.
 - 2026-06-26: Doplněna úvodní podkapitola o prvním lehkém návratu ze stabilního klidu: potvrzení návratového signálu, čtyři výsledky návratu, praktické příklady, privacy-first hranice, karta, mini workshop a checklist.
 - 2026-06-25: Doplněna úvodní podkapitola o převodu uzavřeného druhého použití zpět do stabilního klidu: kanonické místo, návratový signál, ukončení mimořádné péče, privacy-first úklid datové stopy, karta, mini workshop a checklist.
 - 2026-06-25: Doplněna úvodní podkapitola o uzavření prvního běžného použití po uzavření návratu k neotevřenému kroku: uzavírací stavy, lokální kotva, zpřesnění rozhodovací věty, ochrana zavřené hranice, privacy-first úklid, karta, mini workshop a checklist.
