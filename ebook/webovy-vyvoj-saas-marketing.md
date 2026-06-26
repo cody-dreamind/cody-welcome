@@ -258091,8 +258091,165 @@ Pokud workshop potřebuje víc než pět minut, pravděpodobně se snažíte roz
 
 První tichý týden je test dospělosti pracovního pravidla. Neptá se, jestli umíte ještě něco zlepšit. Ptá se, jestli umíte nechat stabilní věc fungovat bez dalšího dozoru, bez nových dat a bez nenápadné návratové fronty. Když to tým zvládne, má pravidlo šanci stát se skutečnou součástí provozu místo další položky v muzeu dobře míněných procesů.
 
+## Uzavření prvního tichého týdne
+
+Tichý týden se musí uzavřít jinak než experiment. Experiment obvykle končí vyhodnocením: co jsme zkusili, co se změnilo, co spustíme dál. Tichý týden má často opačný závěr: nic mimořádného se nespouští, pravidlo zůstává v běžném místě a tým přestává věnovat tématu zvláštní pozornost. To je hotový výsledek, ne nedostatek ambice.
+
+Uzavření začněte jednou větou:
+
+```text
+Tichý týden uzavíráme tak, že pravidlo zůstává v běžném rytmu a nevzniká žádná další kontrolní stopa.
+```
+
+Pokud se během týdne pravidlo nepoužilo, věta se nemá nafukovat. Napište prostě, že nenastal návratový signál a není potřeba pokračovat v mimořádné péči. Pokud se pravidlo použilo normálně, zapište pouze, že bylo nalezené a rozhodnutelné v pracovním místě. Pokud se objevilo drobné tření, uzavření může obsahovat jednu lokální opravu. Ne víc.
+
+Codyho komentář: tady se často láme disciplína. Tým má chuť říct "když už jsme týden čekali, pojďme z toho něco vytěžit". Jenže někdy je výtěžek právě to, že nevznikla další práce. V provozu je to krásně nudný výsledek. A nudné výsledky jsou podezřele často ty nejlevnější.
+
+### Čtyři uzavírací stavy
+
+Po tichém týdnu vyberte jeden ze čtyř stavů:
+
+- Ticho potvrzeno: nenastal návratový signál, nevznikla pomocná evidence a pravidlo zůstává v běžném rytmu.
+- Běžné použití potvrzeno: pravidlo se použilo bez mimořádného vysvětlení a není potřeba nová kontrola.
+- Lokální tření opraveno: objevila se malá překážka v najitelnosti nebo znění, opravená přímo v pracovním místě.
+- Návratový signál potvrzen: stalo se něco, co patří do nové malé smyčky s vlastní hranicí.
+
+Nejčistší jsou první dva stavy. U nich uzavření nesmí vyrábět další plán. Stačí jedna věta v běžném review nebo u pracovního místa. Třetí stav smí vytvořit drobnou úpravu, ale jen tam, kde tření opravdu vzniklo. Čtvrtý stav už není uzavření tichého týdne jako takové; je to předání do nové otázky.
+
+Rozdíl mezi třetím a čtvrtým stavem je praktický. Pokud člověk nenašel odkaz na pravidlo, jde o lokální tření. Pokud ani po nalezení pravidla nejde udělat rozhodnutí, může jít o návratový signál. První opravte v textu, druhé otevřete jako samostatnou smyčku. Nemíchejte to, jinak každá drobná nejasnost začne vypadat jako strategický problém s vlastní židlí na poradě.
+
+### Praktický příklad
+
+Původní pravidlo:
+
+```text
+U relevantní poptávky lze poslat volitelnou otázku na rámcový rozpočet v potvrzovacím e-mailu. Formulář, scoring a nový CRM atribut zůstávají zavřené.
+```
+
+Tichý týden:
+
+```text
+Obchod používá běžnou potvrzovací šablonu. Nevzniká seznam použití otázky ani nový CRM atribut. Návratový signál je pouze situace, kdy tři relevantní poptávky za sebou nejde kvalifikovat ani po použití volitelné otázky.
+```
+
+Uzavření:
+
+```text
+Výsledek:
+Běžné použití potvrzeno.
+
+Co se stalo:
+Jedna relevantní poptávka dostala volitelnou otázku v potvrzovacím e-mailu. Šablona byla dostupná v obchodním checklistu a nebylo potřeba ruční vysvětlení.
+
+Co neměníme:
+Formulář, scoring, CRM atribut ani zvláštní report.
+
+Co rušíme:
+Dočasnou poznámku "sledovat tichý týden" u obchodního checklistu.
+
+Další kontrola:
+Pouze v běžném měsíčním review, pokud se objeví návratový signál.
+```
+
+Všimněte si, že příklad nepřidává žádné nové měření. Nepočítá konverze volitelné otázky, nezakládá tabulku a nesnaží se z jedné poptávky vyrobit závěr o celém obchodním procesu. Potvrzuje jen to, že pravidlo umí žít v běžném pracovním místě.
+
+### Co odstranit při uzavření
+
+Uzavření tichého týdne je dobrý moment uklidit věci, které byly oprávněné během návratu, ale nemají přežít do běžného provozu:
+
+- dočasnou poznámku v checklistu,
+- ruční seznam sledovaných situací,
+- štítek "ověřit po týdnu",
+- pracovní komentář u šablony,
+- pomocný export,
+- screenshoty nebo ukázky s reálnými údaji,
+- připomínku v kalendáři, pokud nemá další rozhodovací hodnotu.
+
+Každou stopu posuďte otázkou:
+
+```text
+Potřebujeme ji ještě k nějakému konkrétnímu rozhodnutí?
+```
+
+Pokud ne, smažte ji, anonymizujte nebo přepište do obecné věty. Obecná věta může znít: "Pravidlo bylo po tichém týdnu ponecháno v běžném rytmu bez mimořádné evidence." To obvykle stačí. Historie má pomoct pochopit rozhodnutí, ne uchovávat celý provozní šum kolem něj.
+
+### Privacy-first uzavření
+
+Privacy-first uzavření má tři jednoduché cíle:
+
+- žádná nová data nevznikají jen kvůli pocitu kontroly,
+- dočasné stopy z ověření nepřežijí déle, než musí,
+- běžný rytmus používá co nejméně identifikovatelných příkladů.
+
+Když potřebujete ponechat ukázku, zobecněte ji. Místo konkrétní poptávky napište "jedna relevantní poptávka". Místo jména zákazníka napište segment nebo typ situace. Místo citace e-mailu napište rozhodovací podstatu. Pokud detail není nutný k budoucímu rozhodnutí, nepatří do trvalého záznamu.
+
+Tím se privacy-first přístup neodkládá do právní složky. Stává se běžnou úklidovou reflexí: co nepotřebujeme pro rozhodnutí, to v systému nenecháváme jen proto, že se to jednou hodilo při ověřování.
+
+### Karta uzavření tichého týdne
+
+```text
+Pravidlo:
+
+Pracovní místo:
+
+Tichý týden od-do:
+
+Výsledek:
+- ticho potvrzeno
+- běžné použití potvrzeno
+- lokální tření opraveno
+- návratový signál potvrzen
+
+Co se opravdu stalo:
+
+Co zůstává beze změny:
+
+Co zůstává výslovně zavřené:
+
+Dočasné stopy, které rušíme nebo zobecňujeme:
+
+Návratový signál pro další otevření:
+
+Další kontrola v běžném rytmu:
+
+Vlastník:
+
+Datum:
+```
+
+Karta má být krátká. Pokud je delší než půl stránky, pravděpodobně popisujete nový problém, ne uzavření tichého týdne. V takovém případě napište závěr tichého týdne jednou větou a nové téma otevřete zvlášť.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte původní pravidlo a návratový signál.
+2. Minuta 2: napište, co se během tichého týdne opravdu stalo.
+3. Minuta 3: vyberte jeden uzavírací stav.
+4. Minuta 4: potvrďte, co zůstává zavřené.
+5. Minuta 5: zrušte nebo zobecněte dočasné stopy.
+6. Minuta 6: napište jednu větu pro běžné pracovní místo.
+
+Pokud se tým zasekne na tom, jestli "ještě něco neměřit", vraťte se k rozhodovací otázce. Jaké rozhodnutí by nové měření umožnilo? Pokud odpověď není jasná, uzavřete tichý týden bez něj.
+
+### Checklist uzavření tichého týdne
+
+- Vybrali jsme přesně jeden uzavírací stav?
+- Je jasné, co se během týdne opravdu stalo?
+- Pokud se nestalo nic, nepřidáváme další kontrolu jen pro pocit jistoty?
+- Pokud se pravidlo použilo, stačí potvrdit běžné použití?
+- Pokud se objevilo tření, opravujeme jen nejbližší pracovní místo?
+- Pokud se objevil návratový signál, otevíráme novou malou smyčku odděleně?
+- Zůstaly původně zavřené věci zavřené?
+- Zrušili jsme dočasné poznámky, seznamy, tagy, exporty nebo připomínky?
+- Zobecnili jsme příklady, které nemusí zůstat konkrétní?
+- Nevznikl nový údaj bez rozhodnutí, vlastníka a konce?
+- Je závěr uložený tam, kde se pravidlo běžně používá?
+- Ví tým, že další kontrola patří jen do běžného rytmu nebo při návratovém signálu?
+
+Uzavření tichého týdne má tým zbavit mimořádné péče. Když se to povede, výsledek vypadá skoro neviditelně: pravidlo zůstane tam, kde má být, dočasné stopy zmizí a nikdo nemusí nosit další kontrolní batoh. Přesně tak má stabilní provoz vypadat.
+
 ## Pracovní log
 
+- 2026-06-26: Doplněna úvodní podkapitola o uzavření prvního tichého týdne po návratu pravidla do běžného rytmu: čtyři uzavírací stavy, praktický příklad, úklid dočasných stop, privacy-first zobecnění záznamů, karta, mini workshop a checklist.
 - 2026-06-26: Doplněna úvodní podkapitola o druhém běžném použití po uzavřeném návratu k neotevřenému kroku: ověření lokální kotvy nebo rozhodovací věty, ochrana původně zavřeného rozsahu, privacy-first kontrola datové stopy, karta, mini workshop a checklist.
 - 2026-06-26: Doplněna úvodní podkapitola o prvním tichém týdnu po návratu pravidla do běžného rytmu: omezení mimořádné péče, tři sledované signály, privacy-first práce bez nové datové stopy, karta, mini workshop a checklist.
 - 2026-06-26: Doplněna úvodní podkapitola o uzavření druhého běžného použití po uzavřeném prvním ověření: čtyři uzavírací stavy, praktické příklady, privacy-first ukončení pomocných stop, karta, mini workshop a checklist.
