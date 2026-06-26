@@ -259977,8 +259977,184 @@ Sedm minut stačí, pokud je pravidlo opravdu stabilní. Pokud nestačí, neprod
 
 První roční review má být nenápadné. Pokud pravidlo drží, nejlepší výsledek je krátké potvrzení, malý úklid a návrat do běžné práce. Stabilní systém se nepozná podle toho, že pořád vyrábí nové kontroly. Pozná se podle toho, že dobrá pravidla zůstávají použitelná i bez neustálého dohledu.
 
+## Uzavření prvního ročního review do dalšího roku
+
+První roční review nekončí tím, že tým vybere stav. Končí až ve chvíli, kdy je jasné, co se po review opravdu změnilo, co zůstává v klidu a jak se pravidlo vrací do dalšího roku bez nového dohledu. Bez takového uzavření se z roční kontroly snadno stane poloviční rozhodnutí: něco jsme si řekli, možná něco opravíme, ale další člověk za tři měsíce nepozná, jestli pravidlo pořád platí, čeká na úpravu, nebo se už mělo archivovat.
+
+Uzavření začněte jednou stavovou větou:
+
+```text
+První roční review uzavíráme takto:
+```
+
+Za ni doplňte výsledek, pracovní místo a další rytmus:
+
+```text
+První roční review uzavíráme takto:
+Pravidlo zůstává v platnosti, opravili jsme jednu starou e-mailovou šablonu a další kontrola proběhne až v příštím ročním review, pokud dřív nepřijde návratový signál.
+```
+
+Tahle věta má tři úkoly. Potvrdí stav pravidla, zavře drobnou práci z review a zabrání tomu, aby se kolem stabilního pravidla znovu vytvořil mimořádný režim. Pokud věta neumí říct všechny tři věci, review ještě není uzavřené. Buď nevíte, co se mění, nebo nevíte, kam se změna propíše, nebo jste zapomněli určit, kdy se pravidlo znovu uvidí.
+
+### Čtyři uzavírací věty
+
+Pro čtyři běžné výsledky ročního review používejte čtyři jednoduché typy vět:
+
+```text
+Potvrzeno beze změny:
+Pravidlo zůstává v platnosti beze změny, kopie sedí se zdrojem pravdy a další kontrola proběhne v příštím ročním review.
+
+Lokální aktualizace:
+Pravidlo zůstává v platnosti, měníme pouze jednu lokální kopii nebo formulaci a po propsání se vrací do ročního rytmu.
+
+Kontrola kontextu:
+Roční review neuzavírá pravidlo jako platné ani neplatné; otevíráme krátkou kontrolu kontextu s vlastním pracovním místem a původní pravidlo zatím nerozšiřujeme.
+
+Archivace:
+Pravidlo mizí z aktivních pracovních tras, historická stopa zůstává zkrácená a další roční review se neplánuje.
+```
+
+Pátá věta pro nový návratový signál má být ještě opatrnější:
+
+```text
+Nový návratový signál:
+Objevil se konkrétní důkaz, že pravidlo už nestačí; otevíráme novou malou smyčku a původní roční review tím končí, ne pokračuje.
+```
+
+To poslední je důležité. Nová smyčka není roční review s prodlouženým ocáskem. Má vlastní otázku, vlastní stop podmínku a vlastní datovou hranici. Když ji necháte přilepenou k ročnímu review, budete mít za chvíli jeden dlouhý dokument, ve kterém se míchá údržba, produktové rozhodnutí, historická paměť a seznam nápadů. To je přesně kombinace, která vypadá důkladně a používá se mizerně.
+
+### Praktický příklad
+
+Roční review obchodního pravidla ukázalo, že pravidlo pořád platí, ale jedna starší šablona follow-up e-mailu obsahovala tvrdší formulaci, která z volitelné otázky dělala skoro povinný krok. Tým vybral stav "lokální aktualizace".
+
+Slabé uzavření by znělo:
+
+```text
+Upravíme šablonu a budeme to sledovat.
+```
+
+To je málo. Není jasné, která šablona, co znamená sledovat, jestli se pravidlo vrací do ročního rytmu, a jestli vznikne nová evidence. Lepší uzavření:
+
+```text
+První roční review uzavíráme stavem lokální aktualizace. V obchodní follow-up šabloně měníme větu tak, aby odpovídala kanonickému checklistu: otázka na rozpočet je volitelná a patří jen k relevantní poptávce, kde bez ní nejde navrhnout další krok. Pravidlo jako celek zůstává v ročním rytmu, jednotlivá použití neevidujeme a další kontrola proběhne až při návratovém signálu nebo při příštím ročním review.
+```
+
+Tady je uzavřeno všechno potřebné. Změna je lokální. Kanonické místo zůstává zdrojem pravdy. Datová stopa se nezvětšuje. A hlavně nevzniká nový stav "někdo by to měl hlídat". Pokud má stabilní pravidlo přežít další rok, musí po review zůstat lehké.
+
+### Co propsat po uzavření
+
+Po ročním review se obvykle propisuje jen jedna ze tří věcí:
+
+- potvrzení beze změny do karty pravidla,
+- drobná oprava do kanonického pracovního místa nebo aktivní kopie,
+- archivace do historické stopy.
+
+Všechno ostatní si zaslouží podezření. Pokud po review vzniká nový dashboard, nová tabulka, nový checklist, nový vlastník měření a nová série schůzek, pravděpodobně už neuzavíráte review. Otevíráte novou práci. To může být správně, ale musí to projít stejnou disciplínou jako jiné nové téma: pracovní otázka, nejmenší krok, stop podmínka a privacy-first hranice.
+
+U lokální opravy si pohlídejte pořadí. Nejdřív upravte zdroj pravdy nebo aktivní pracovní místo. Teprve potom ukliďte starou stopu. Pokud začnete úklidem, můžete ztratit důvod změny. Pokud začnete přidáváním nové dokumentace, vytvoříte další kopii. Nejmenší dobrý postup je:
+
+```text
+1. Opravit kanonické místo nebo aktivní kopii.
+2. Zapsat jednu uzavírací větu.
+3. Smazat nebo zkrátit dočasnou stopu z review.
+4. Potvrdit další rytmus nebo návratový signál.
+```
+
+### Privacy-first uzavření
+
+Roční review má tendenci vyrábět pomocné důkazy: ukázky e-mailů, screenshoty starých šablon, exporty z CRM, poznámky z obchodních rozhovorů, seznamy výjimek. Pro samotné rozhodnutí mohou být užitečné. Po uzavření se ale nesmí automaticky stát součástí běžné paměti.
+
+Použijte tři řádky:
+
+```text
+Při review dočasně vzniklo:
+
+Po uzavření ponecháváme:
+
+Po uzavření mažeme, zobecňujeme nebo nahrazujeme odkazem:
+```
+
+Praktický zápis:
+
+```text
+Při review dočasně vzniklo:
+Porovnání dvou aktivních e-mailových šablon a jedna anonymizovaná poznámka k poslední nejasné poptávce.
+
+Po uzavření ponecháváme:
+Upravenou větu v aktivní follow-up šabloně a krátký záznam výsledku review.
+
+Po uzavření mažeme, zobecňujeme nebo nahrazujeme odkazem:
+Dočasnou kopii staré šablony a konkrétní zákaznický detail z poznámky; v kartě necháváme jen obecný důvod změny.
+```
+
+Privacy-first uzavření neznamená, že tým nesmí použít důkaz. Znamená, že důkaz nepřežívá déle, než slouží rozhodnutí. Stabilní pravidla mají být opřená o dobré pracovní věty, ne o hromadu starých příkladů se zákaznickými detaily. Když potřebujete příklad pro onboarding, zobecněte ho a odstraňte konkrétní identifikátory. Když příklad nepotřebujete, nenechávejte ho v systému jen proto, že "by se někdy mohl hodit". Tahle věta je archivní kletba v obleku.
+
+Codyho komentář: dobré roční review má skoro až trapně malý závěr. Jedna věta, jedna oprava, jeden úklid. Pokud po něm máte pocit, že by se mělo stát ještě něco velkého, možná se opravdu objevil nový signál. Nebo jste jen potkali starý zvyk měnit věci, které konečně chvíli fungují. Ten druhý případ doporučuji poslat na kávu a nechat ho tam.
+
+### Karta uzavření ročního review
+
+```text
+Pravidlo:
+
+Datum ročního review:
+
+Výsledek review:
+- potvrzeno beze změny
+- lokální aktualizace
+- kontrola kontextu
+- archivace
+- nový návratový signál
+
+Uzavírací věta:
+
+Co se propsalo do kanonického pracovního místa:
+
+Co se propsalo pouze do aktivní kopie:
+
+Co se výslovně neotevírá:
+
+Jaká dočasná data nebo podklady při review vznikly:
+
+Co po uzavření mažeme, zobecňujeme nebo nahrazujeme odkazem:
+
+Další rytmus:
+
+Návratový signál:
+
+Vlastník:
+```
+
+Karta má být poslední stopa review, ne začátek další dokumentace. Pokud výsledek je "potvrzeno beze změny", většina polí bude krátká. To je v pořádku. Prázdnější karta u stabilního pravidla není slabost. Je to známka, že pravidlo nepotřebovalo další administrativu, aby přežilo.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte výsledek ročního review.
+2. Minuta 2: napište jednu uzavírací větu.
+3. Minuta 3: určete, co se propíše do kanonického místa nebo aktivní kopie.
+4. Minuta 4: napište, co se výslovně neotevírá.
+5. Minuta 5: ukliďte dočasné důkazy a datovou stopu.
+6. Minuta 6: potvrďte další rytmus nebo návratový signál.
+
+Když se v minutě 2 nedaří napsat uzavírací větu, neprodlužujte workshop. Vraťte se k výsledku review a vyberte jeden stav. Nejasná uzavírací věta obvykle znamená, že tým potichu drží dvě rozhodnutí najednou.
+
+### Checklist uzavření ročního review
+
+- Má review jednu uzavírací větu?
+- Je jasné, jestli pravidlo zůstává, lokálně se upravuje, čeká na kontrolu kontextu, archivuje se, nebo otevírá nový návratový signál?
+- Propsala se změna do kanonického pracovního místa nebo správné aktivní kopie?
+- Je zapsané, co se výslovně neotevírá?
+- Nevznikl nový dohled jen ze zvyku?
+- Jsou dočasné důkazy z review smazané, zobecněné nebo nahrazené odkazem?
+- Nezůstaly zákaznické detaily v pomocných poznámkách?
+- Je další rytmus jasný a přiměřený riziku pravidla?
+- Má pravidlo pořád vlastníka?
+- Pozná nový člověk za půl roku, jestli se má řídit pravidlem, nebo hledat novější rozhodnutí?
+
+Uzavření prvního ročního review je hlavně ochrana klidu. Pravidlo dostalo šanci ukázat, že po roce pořád slouží. Pokud slouží, vraťte ho zpátky do práce a nechte ho být. Pokud neslouží, otevřete malou smyčku s jasnou hranicí. V obou případech platí totéž: roční review nemá zvyšovat datovou stopu ani vyrábět novou správu jen proto, že se systém na chvíli podíval sám na sebe.
+
 ## Pracovní log
 
+- 2026-06-26: Doplněna úvodní podkapitola o uzavření prvního ročního review do dalšího roku: uzavírací věta, lokální propsání změn, návrat do ročního rytmu, privacy-first úklid dočasných důkazů, karta, mini workshop a checklist.
 - 2026-06-26: Doplněna úvodní podkapitola o převodu stabilního pravidla do ročního rytmu: ukončení mimořádné péče, roční review bez archeologie, privacy-first omezení průběžného měření, karta, mini workshop a checklist.
 - 2026-06-26: Doplněna úvodní podkapitola o druhé servisní kontrole stabilního pravidla: přenositelnost bez čerstvé paměti, kontrola kanonického místa a kopií, privacy-first úklid zbytečných stop, karta, mini workshop a checklist.
 - 2026-06-26: Doplněna úvodní podkapitola o uzavření servisní kontroly stabilního pravidla: čtyři uzavírací stavy, praktický příklad, privacy-first úklid pomocných stop, karta, mini workshop a checklist.
