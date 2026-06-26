@@ -259256,8 +259256,187 @@ Pokud se během šesti minut objeví debata o nové strategii, napište ji stran
 
 Uzavření servisní kontroly je poslední metr údržby. Když ho přeskočíte, pravidlo sice možná funguje, ale kolem něj zůstane prach: poznámky, dohady, stínová evidence a neurčité "ještě se k tomu vrátíme". Když ho uděláte dobře, stabilní pravidlo se vrátí do klidu a tým ví, že nic dalšího nemá tahat za sebou.
 
+## Druhá servisní kontrola stabilního pravidla
+
+Druhá servisní kontrola je méně slavnostní než první. A právě proto je užitečná. První kontrola často ještě nese čerstvou paměť: lidé vědí, proč pravidlo vzniklo, kdo ho upravoval a jaké širší návrhy zůstaly zavřené. Druhá kontrola už testuje něco jiného. Ukazuje, jestli pravidlo opravdu přežilo běžný provoz, nebo jestli fungovalo jen díky tomu, že si ho tým nedávno připomínal.
+
+Nedělejte z druhé servisní kontroly nový audit. Její účel je skromnější: ověřit přenositelnost pravidla bez čerstvého vysvětlování, najít drobné provozní obchůzky a rozhodnout, jestli pravidlo zůstává ve stejném rytmu, potřebuje lokální úpravu, nebo už dosloužilo. Pokud se při druhé kontrole otevírá celé téma znovu, není to druhá servisní kontrola. Je to návratový signál, slabé kanonické místo nebo stará debata v novém svetru.
+
+Začněte větou:
+
+```text
+Druhá servisní kontrola ověřuje, zda stabilní pravidlo funguje i bez čerstvé paměti týmu, bez obcházek a bez nové datové evidence.
+```
+
+Tahle věta drží rozsah. Neptáte se, jestli by pravidlo mohlo být dokonalejší. Ptáte se, jestli pořád dostatečně pomáhá v situaci, pro kterou je určené. Dokonalost je drahý koníček. Stabilní provoz potřebuje hlavně pravidla, která se dají použít bez velkého vysvětlování a bez vedlejších tabulek.
+
+### Co druhá kontrola zjišťuje navíc
+
+Oproti první servisní kontrole přidejte tři doplňující otázky:
+
+- Umí pravidlo použít člověk, který nebyl u poslední opravy?
+- Zůstalo pravidlo na stejném kanonickém místě, nebo vznikly pracovní kopie?
+- Nezačala se kolem pravidla sbírat data jen proto, aby se příště lépe kontrolovalo?
+
+První otázka testuje přenositelnost. Pokud pravidlo funguje jen pro lidi, kteří si pamatují poslední diskusi, není stabilní. Je to poznámka s dobrým PR.
+
+Druhá otázka testuje zdroj pravdy. Pravidlo může být správné, ale pokud existuje ve třech verzích v checklistu, šabloně a interním dokumentu, tým nebude vědět, která věta platí. Druhá servisní kontrola má tyto kopie najít a zredukovat je na odkaz, krátký výřez nebo jeden kanonický zápis.
+
+Třetí otázka testuje privacy-first disciplínu. Častá past zní: "budeme si jen chvíli značit, kdy se pravidlo použilo". Pokud z toho neplyne konkrétní rozhodnutí, je to nová evidence převlečená za péči. Péče o pravidlo nemá automaticky znamenat péči o další dataset.
+
+### Praktický příklad
+
+Stabilní pravidlo:
+
+```text
+Volitelnou otázku na rámcový rozpočet lze použít jen tehdy, když bez ní nejde navrhnout další konkrétní krok. Odpověď slouží pro aktuální obchodní rozhovor; nezakládá nový formulářový údaj, CRM atribut ani ruční evidenci.
+```
+
+Druhá servisní kontrola:
+
+```text
+Přenositelnost:
+Nový člověk v obchodu našel pravidlo v obchodním checklistu a použil ho bez dovysvětlení.
+
+Kanonické místo:
+Platná věta je jen v checklistu. V šabloně potvrzovacího e-mailu je pouze krátký odkaz na checklist.
+
+Datová stopa:
+Nevznikla evidence použití otázky, nový CRM tag ani export poptávek.
+
+Výsledek:
+Pravidlo ponecháváme ve stejném rytmu. Další kontrola bude součástí běžného kvartálního review.
+```
+
+Slabší výsledek:
+
+```text
+Přenositelnost:
+Nový člověk pravidlo našel, ale nebylo mu jasné, zda se otázka smí použít i u malých projektů.
+
+Kanonické místo:
+Checklist zůstává zdrojem pravdy.
+
+Lokální servis:
+Do checklistu doplňujeme jednu hranici: "U malých projektů se otázka používá jen tehdy, když bez rozpočtového rámce nelze vybrat další krok; nepoužívá se pro kvalifikaci podle velikosti rozpočtu."
+
+Co zůstává zavřené:
+Povinné pole, lead scoring, segmentace podle rozpočtu a samostatná evidence použití otázky.
+```
+
+Všimněte si, že slabší výsledek pořád neotevírá velkou změnu. Jen zpřesní hranu, která se ukázala při běžném použití. To je správná velikost druhé servisní kontroly: jedna hrana, jedno místo, žádná nová databáze.
+
+### Čtyři stavy po druhé kontrole
+
+Druhá servisní kontrola může skončit čtyřmi stavy:
+
+- Stabilní: pravidlo používá i nový člověk, kopie nevznikly a datová stopa se nezvětšila.
+- Slabá hrana: pravidlo funguje, ale jedna situace potřebuje přesnější větu.
+- Slabé kanonické místo: pravidlo je použitelné, ale lidé ho hledají ve špatné kopii nebo starém výřezu.
+- Ukončení nebo návrat: pravidlo se už nepoužívá, nebo přišel skutečný návratový signál.
+
+Stav `stabilní` má vést k menší pozornosti. Zapište výsledek a vraťte pravidlo do běžného rytmu. Nepřidávejte další kontrolu jen proto, že kontrola dopadla dobře. To je procesní verze přidávání zámků na dveře, které nikdo neotevírá.
+
+Stav `slabá hrana` opravujte co nejblíž místu použití. Jedna věta v checklistu je lepší než nová metodika. Pokud větu neumíte napsat krátce, možná neřešíte slabou hranu, ale návratový signál.
+
+Stav `slabé kanonické místo` řešte úklidem kopie. Nejdřív určete zdroj pravdy, pak z ostatních míst udělejte odkazy nebo krátké výřezy. Pokud necháte tři plné verze, další kontrola bude řešit rozdíl mezi nimi, ne skutečnou práci.
+
+Stav `ukončení nebo návrat` vyžaduje jasné rozdělení. Ukončení znamená, že pravidlo dosloužilo a má zmizet z pracovních tras. Návrat znamená, že se objevil signál pro novou malou smyčku. Nemíchejte je dohromady větou "zatím to necháme a uvidíme". To je jen odložená nejasnost.
+
+### Privacy-first kontrola kopií
+
+Druhá servisní kontrola by měla cíleně hledat kopie, protože právě v nich často vzniká datový nepořádek. Někdo si zkopíruje příklad do prezentace, vloží screenshot do interní poznámky, přepíše zákaznickou formulaci do checklistu nebo založí malou tabulku pro "lepší přehled". Každý jednotlivý krok vypadá nevinně. Dohromady z nich vzniká rozptýlená paměť, kterou nikdo neumí uklidit.
+
+Použijte krátkou kontrolu:
+
+```text
+Kde pravidlo bydlí:
+
+Kde existují kopie nebo výřezy:
+
+Obsahují kopie zákaznické údaje, citace, screenshoty nebo obchodní detaily?
+
+Co nahradíme odkazem:
+
+Co zobecníme:
+
+Co smažeme:
+
+Co zůstává jako zdroj pravdy:
+```
+
+Pokud kopie potřebuje zůstat, měla by nést minimum kontextu. Uveďte raději pracovní situaci a odkaz na zdroj pravdy než celý příběh s konkrétními zákaznickými detaily. Privacy-first dokumentace má být použitelná, ale ne hladová po datech. Ano, dokumentace bez zbytečných detailů je méně dramatická. Taky se lépe maže, předává a aktualizuje.
+
+### Karta druhé servisní kontroly
+
+```text
+Pravidlo:
+
+Kanonické pracovní místo:
+
+Kdo pravidlo použil od poslední kontroly:
+
+Test přenositelnosti:
+Použil pravidlo někdo bez čerstvého vysvětlení?
+Kde se zasekl, pokud se zasekl?
+
+Kontrola kopií:
+Kde existují kopie, výřezy nebo odkazy?
+Které kopie rušíme, zkracujeme nebo nahrazujeme odkazem?
+
+Privacy-first kontrola:
+Vznikla nová evidence, atribut, tag, screenshot, export nebo interní kopie zprávy?
+Co mažeme nebo zobecňujeme?
+Co výslovně nepřidáváme?
+
+Výsledek:
+- stabilní
+- slabá hrana
+- slabé kanonické místo
+- ukončení nebo návrat
+
+Co se mění:
+
+Co zůstává zavřené:
+
+Další rytmus nebo návratový signál:
+
+Vlastník:
+```
+
+Karta druhé kontroly má být kratší než původní karta změny. Pokud je delší, pravděpodobně zapisujete příliš mnoho historie. Druhá servisní kontrola má rozhodnout, jestli pravidlo stojí samo. Ne má znovu postavit kulisy, ve kterých vzniklo.
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: otevřete kanonické pravidlo a pracovní místo.
+2. Minuta 2: nechte člověka mimo poslední opravu říct, jak by pravidlo použil.
+3. Minuta 3: najděte kopie, výřezy a odkazy.
+4. Minuta 4: zkontrolujte, zda kopie neobsahují zbytečná data.
+5. Minuta 5: vyberte jeden ze čtyř stavů.
+6. Minuta 6: proveďte jednu lokální opravu nebo úklid kopie.
+7. Minuta 7: zapište další rytmus, archivaci nebo návratový signál.
+
+Pokud během workshopu zjistíte, že pravidlo nikdo neumí použít bez vysvětlení, nezachraňujte ho dlouhou debatou. Označte slabou hranu nebo slabé kanonické místo a otevřete jen nejbližší opravu. Workshop není zkouška schopnosti týmu improvizovat nad nejasným textem. Od toho máme porady, kalendáře a další tradiční zdroje drobného zoufalství.
+
+### Checklist druhé servisní kontroly
+
+- Kontrolujeme stejné pravidlo a stejné pracovní místo jako minule?
+- Umí pravidlo použít někdo bez čerstvé paměti poslední opravy?
+- Je jasné, kde je kanonická verze pravidla?
+- Neexistují staré kopie, které mohou lidem ukázat neplatnou větu?
+- Jsou výřezy kratší než zdroj pravdy a odkazují zpět na něj?
+- Nevznikla kvůli kontrole nová evidence použití pravidla?
+- Neobsahují kopie zbytečné zákaznické údaje, citace, screenshoty nebo obchodní detaily?
+- Pokud opravujeme slabou hranu, zůstává oprava u jednoho pracovního místa?
+- Pokud pravidlo dosloužilo, mizí z aktivních tras a zůstává jen historický záznam?
+- Pokud přišel návratový signál, otevírá se nová malá otázka a původní širší rozsah zůstává zavřený?
+- Je další rytmus méně náročný než mimořádná kontrola po změně?
+
+Druhá servisní kontrola je zkouška samostatnosti pravidla. Když projde, neodměňujte ho další pozorností. Nechte ho pracovat. Když neprojde, opravte nejmenší hranu, ukliďte kopie nebo pravidlo poctivě ukončete. Stabilní provoz se nepozná podle toho, že se nikdy nic nemění. Pozná se podle toho, že i změny mají rozumnou velikost a po sobě nezanechávají zbytečná data.
+
 ## Pracovní log
 
+- 2026-06-26: Doplněna úvodní podkapitola o druhé servisní kontrole stabilního pravidla: přenositelnost bez čerstvé paměti, kontrola kanonického místa a kopií, privacy-first úklid zbytečných stop, karta, mini workshop a checklist.
 - 2026-06-26: Doplněna úvodní podkapitola o uzavření servisní kontroly stabilního pravidla: čtyři uzavírací stavy, praktický příklad, privacy-first úklid pomocných stop, karta, mini workshop a checklist.
 - 2026-06-26: Doplněna úvodní podkapitola o první servisní kontrole stabilního pravidla: tři servisní otázky, čtyři výsledky, praktický příklad, privacy-first úklid tichých datových stop, karta, mini workshop a checklist.
 - 2026-06-26: Doplněna úvodní podkapitola o druhém běžném review v dlouhodobém klidu: test pravidla bez čerstvé paměti, ochrana zavřeného rozsahu, privacy-first úklid pomocných stop, karta, mini workshop a checklist.
