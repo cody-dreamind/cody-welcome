@@ -257206,8 +257206,215 @@ Když se tým během workshopu snaží rovnou navrhnout větší změnu, vraťte
 
 Uzavření prvního běžného ověření je malá tečka za lehkým návratem. Když ji uděláte dobře, pravidlo se buď vrátí do klidu, nebo dostane jednu přesnou opravu. Hlavní je nenechat po sobě polostav: něco jsme zkontrolovali, něco jsme zahlédli a teď to bude někde viset. Polostavy jsou provozní dluh s lepším PR. Zavřené ověření je čistší, levnější a výrazně méně otravné.
 
+## Druhé běžné použití po uzavřeném prvním ověření
+
+Druhé běžné použití je test přenositelnosti. První ověření mohlo projít i proto, že si tým ještě pamatoval, proč pravidlo vzniklo, kdo ho formuloval a jaké dveře mělo nechat zavřené. Druhé použití už bývá klidnější a méně slavnostní. Přijde běžný den, běžná poptávka, běžný e-mail nebo běžné rozhodnutí v produktu. A právě tam se ukáže, jestli pravidlo opravdu žije v pracovním místě, nebo jen v čerstvé paměti lidí.
+
+Nezačínejte druhé použití velkou revizí. Začněte jednou větou:
+
+```text
+Pravidlo po prvním ověření používáme podruhé v této běžné situaci:
+```
+
+Za ni napište konkrétní okamžik, ne název tématu:
+
+```text
+Pravidlo po prvním ověření používáme podruhé v této běžné situaci:
+Nový člověk v obchodním týmu posílá potvrzovací e-mail relevantní poptávce bez rozpočtu a rozhoduje, jestli použít volitelnou otázku.
+```
+
+Tím se druhé použití drží při zemi. Neřeší znovu strategii formuláře, kvalifikaci leadů ani budoucí automatizaci. Řeší, jestli někdo v normální práci najde pravidlo, pochopí ho a nezvětší rozsah bez nového návratového signálu.
+
+### Co se při druhém použití ověřuje
+
+Druhé použití ověřuje tři věci:
+
+- Přenositelnost: pravidlo použije i člověk, který nebyl u původního rozhodnutí.
+- Stabilitu hranice: původně zavřený široký návrh zůstane zavřený bez dalšího vysvětlování.
+- Datovou střídmost: ověření nepřidá nový seznam, tag, export ani měření jen proto, že jde o druhý průchod.
+
+Přenositelnost není totéž co školení. Pokud pravidlo funguje jen tehdy, když ho někdo deset minut vysvětluje, není ještě přenositelné. Možná je věcně správné, ale provozně slabé. V takovém případě neopravujte člověka. Opravte větu, název, umístění nebo příklad u pracovního místa.
+
+Stabilita hranice je test proti návratu starého pokušení. U příkladu s rozpočtem může druhý člověk říct: "Když se na rozpočet stejně ptáme e-mailem, nebylo by jednodušší přidat pole do formuláře?" To je legitimní otázka, ale není to nový návratový signál. Odpověď zní: formulář zůstává zavřený, dokud se nenaplní domluvená podmínka návratu.
+
+Datová střídmost znamená, že druhé použití nepotřebuje novou evidenci. Pokud už existuje běžná pracovní stopa, použijte ji. Pokud potřebujete pomocnou poznámku, napište její konec hned. Druhé použití nemá být začátek dlouhého sledování "pro jistotu". Tahle věta už v provozu napáchala víc škody než většina špatně pojmenovaných složek.
+
+### Čtyři výsledky druhého použití
+
+Druhé běžné použití může skončit čtyřmi stavy:
+
+- Přenos drží: pravidlo bylo najitelné, použitelné a zavřená hranice držela i bez původních účastníků.
+- Slabá kotva: pravidlo je správné, ale nové použití ukázalo, že není dost blízko pracovnímu místu.
+- Slabá hrana: pravidlo je k nalezení, ale pořád neříká dost jasně, kdy ho použít a kdy ne.
+- Skutečný návratový signál: druhé použití ukázalo opakovaný problém, který splňuje domluvenou podmínku návratu.
+
+U stavu `přenos drží` nic nepřidávejte. Zapište jednu větu a nechte pravidlo běžet. Úspěšné druhé použití je silnější důkaz než první, protože už méně závisí na čerstvé paměti. Právě proto nemá dostat další mimořádnou kontrolu.
+
+U stavu `slabá kotva` opravte nejbližší místo. Pokud nový člověk hledal pravidlo v obchodním checklistu a ono bylo jen u šablony e-mailu, doplňte odkaz nebo krátkou větu do checklistu. Nezakládejte novou dokumentaci. Chyběl ukazatel, ne encyklopedie.
+
+U stavu `slabá hrana` zpřesněte rozhodovací větu. Například nahraďte "u relevantních poptávek se ptejte na rozpočet citlivě" větou "volitelnou otázku použij jen tehdy, když bez rámcového rozpočtu nejde navrhnout konkrétní další krok". Rozdíl je zásadní: první věta je nálada, druhá je návod.
+
+U stavu `skutečný návratový signál` nezvětšujte starou kartu potichu. Zavřete druhé použití a otevřete samostatnou malou iteraci. Pokud se opravdu naplnila podmínka návratu, zaslouží si vlastní otázku, vlastní hranici a vlastní privacy-first kontrolu. Tím se historie nerozmaže do jedné nekonečné debaty.
+
+### Praktický příklad
+
+```text
+Pravidlo po prvním ověření:
+U relevantní poptávky bez rozpočtu lze poslat volitelnou otázku v potvrzovacím e-mailu. Formulář, scoring a export zůstávají zavřené.
+
+Druhé běžné použití:
+Nový obchodník použil šablonu u další relevantní poptávky.
+
+Výsledek:
+Pravidlo našel v checklistu, použil volitelnou otázku a nevytvářel nový CRM atribut.
+
+Stav:
+Přenos drží.
+
+Závěr:
+Pravidlo zůstává v běžném rytmu bez další mimořádné kontroly.
+```
+
+Slabší průchod:
+
+```text
+Druhé běžné použití:
+Nový obchodník věděl, že existuje volitelná otázka, ale nenašel ji u šablony e-mailu.
+
+Stav:
+Slabá kotva.
+
+Nejmenší oprava:
+K šabloně potvrzovacího e-mailu doplňujeme jednu větu a odkaz na obchodní checklist.
+
+Co zůstává zavřené:
+Neměníme formulář, nepřidáváme scoring, nevytváříme export a neotevíráme revizi celé kvalifikace.
+```
+
+Ještě jiný průchod:
+
+```text
+Druhé běžné použití:
+Pravidlo bylo k nalezení, ale člověk nevěděl, jestli volitelnou otázku použít i u malé poptávky, kde další krok šel navrhnout bez rozpočtu.
+
+Stav:
+Slabá hrana.
+
+Oprava:
+Do pravidla doplňujeme rozlišovací větu: "Otázku neposílej, pokud lze další konkrétní krok navrhnout bez rozpočtu."
+
+Co neotevíráme:
+Nové pole, nové měření ani změnu ceníkové stránky.
+```
+
+Tady se drží správná velikost zásahu. Problém nebyl v tom, že by tým potřeboval víc dat. Problém byl v tom, že věta neuměla rozlišit dvě podobné situace.
+
+### Privacy-first kontrola druhého použití
+
+Druhé použití je dobrý moment zastavit zbytkové sledování po prvním ověření. Pokud někde zůstala pomocná poznámka, ruční značka nebo dočasný seznam, teď se rozhoduje: buď má jasný účel a retenci, nebo končí. Nic mezi tím.
+
+Použijte krátký zápis:
+
+```text
+Po druhém použití potvrzujeme:
+
+Do běžného provozu nepřenášíme:
+
+Pomocné stopy po ověření ukončujeme takto:
+```
+
+Příklad:
+
+```text
+Po druhém použití potvrzujeme:
+Volitelná otázka funguje jako lokální obchodní pomůcka.
+
+Do běžného provozu nepřenášíme:
+CRM atribut "rozpočet doplněn", export poptávek bez rozpočtu ani ruční seznam odpovědí.
+
+Pomocné stopy po ověření ukončujeme takto:
+Zůstává jen zobecněná věta v checklistu. Konkrétní testovací poznámky mažeme podle běžné retence obchodních poznámek.
+```
+
+Codyho komentář: druhé použití je často nudné. To je kompliment. Když pravidlo projde nudným použitím, začíná být opravdu provozní. Nuda je v tomhle případě známka zdraví, ne nedostatku ambicí. Ambice se má projevit v dobrém produktu, ne v nekonečném dohledu nad jednou větou.
+
+### Karta druhého běžného použití
+
+```text
+Pravidlo po prvním ověření:
+
+Kanonické pracovní místo:
+
+Druhá běžná situace použití:
+
+Použil pravidlo někdo mimo původní rozhodnutí?
+- ano
+- ne
+- neplatí
+
+Najitelnost:
+- našel bez pomoci
+- našel s drobnou nápovědou
+- nenašel
+
+Rozhodnutelnost:
+- rozhodnutí šlo udělat
+- chyběla kotva
+- chyběla hrana
+- pravidlo nestačilo
+
+Co zůstalo zavřené:
+
+Vznikla nová datová stopa?
+
+Co s ní děláme:
+
+Výsledek druhého použití:
+- přenos drží
+- slabá kotva
+- slabá hrana
+- skutečný návratový signál
+
+Nejmenší další krok, pokud existuje:
+
+Návratový signál po druhém použití:
+
+Vlastník:
+
+Datum:
+```
+
+Karta není povinná pro každé další použití. Druhé použití má ověřit přenositelnost po prvním ověření. Pokud přenos drží, další práce patří do běžného rytmu, ne do zvláštního režimu.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: pojmenujte druhou běžnou situaci.
+2. Minuta 2: ověřte, jestli pravidlo použil někdo bez čerstvé paměti původního rozhodnutí.
+3. Minuta 3: zkontrolujte najitelnost a rozhodnutelnost.
+4. Minuta 4: napište, co zůstalo zavřené.
+5. Minuta 5: ukončete nebo ospravedlňte pomocnou datovou stopu.
+6. Minuta 6: vyberte výsledek a nejmenší další krok.
+
+Pokud se během šesti minut ukáže skutečný návratový signál, nesnažte se ho vyřešit uvnitř workshopu. Zapište ho a otevřete novou malou iteraci. Workshop má ověřit přenos, ne sežrat celý problém i s příborem.
+
+### Checklist druhého běžného použití
+
+- Proběhlo použití v normální práci, ne ve speciálně připraveném testu?
+- Použil pravidlo člověk, který nepotřeboval původní vysvětlení?
+- Bylo kanonické pracovní místo najitelné?
+- Šlo podle pravidla rozhodnout bez další interpretace?
+- Zůstaly původně zavřené věci opravdu zavřené?
+- Nepřidali jsme nové pole, CRM atribut, tracker, export, ruční seznam ani pomocnou tabulku?
+- Pokud zůstala pomocná stopa, má jasný účel, vlastníka a konec?
+- Pokud se objevilo tření, víme, zda jde o kotvu, hranu, nebo skutečný návratový signál?
+- Je další krok, pokud existuje, lokální a menší než původní návrh?
+- Pokud přenos drží, vracíme pravidlo do běžného rytmu bez další mimořádné péče?
+
+Druhé běžné použití má potvrdit, že pravidlo už není opřené o čerstvý příběh. Když projde, nechte ho být. Když narazí, opravte nejbližší slabé místo. A když opravdu přinese nový návratový signál, otevřete novou malou smyčku s vlastní hranicí. Tak zůstane práce čitelná, datová stopa střídmá a tým nebude žít ve věčném dozoru nad každým drobným rozhodnutím.
+
 ## Pracovní log
 
+- 2026-06-26: Doplněna úvodní podkapitola o druhém běžném použití po uzavřeném prvním ověření: přenositelnost pravidla, stabilita zavřené hranice, čtyři výsledné stavy, privacy-first ukončení pomocných stop, karta, mini workshop a checklist.
 - 2026-06-26: Doplněna úvodní podkapitola o uzavření prvního běžného ověření po uzavřeném lehkém návratu: čtyři uzavírací stavy, praktické příklady, privacy-first úklid sledovacího ocasu, karta, mini workshop a checklist.
 - 2026-06-26: Doplněna úvodní podkapitola o prvním běžném ověření po uzavřeném lehkém návratu: najitelnost pravidla, rozhodnutelnost, čtyři výsledky ověření, privacy-first kontrola bez sledovacího ocasu, karta, mini workshop a checklist.
 - 2026-06-26: Doplněna úvodní podkapitola o uzavření lehkého návratu ze stabilního klidu: čtyři způsoby uzavření, propsání do pracovního místa, privacy-first úklid dočasných stop, karta, mini workshop a checklist.
