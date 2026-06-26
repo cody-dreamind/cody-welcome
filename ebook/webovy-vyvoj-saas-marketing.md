@@ -257414,8 +257414,199 @@ Pokud se během šesti minut ukáže skutečný návratový signál, nesnažte s
 
 Druhé běžné použití má potvrdit, že pravidlo už není opřené o čerstvý příběh. Když projde, nechte ho být. Když narazí, opravte nejbližší slabé místo. A když opravdu přinese nový návratový signál, otevřete novou malou smyčku s vlastní hranicí. Tak zůstane práce čitelná, datová stopa střídmá a tým nebude žít ve věčném dozoru nad každým drobným rozhodnutím.
 
+## Uzavření druhého běžného použití po uzavřeném prvním ověření
+
+Druhé běžné použití si zaslouží vlastní uzavření hlavně proto, že už testuje přenos bez čerstvé paměti. Po prvním ověření se ještě dá spoléhat na to, že lidé vědí, proč pravidlo vzniklo. Po druhém použití už by mělo být jasné, jestli pravidlo stojí samo, nebo jestli potřebuje poslední lokální oporu.
+
+Uzavření nezačínejte otázkou, co všechno by se dalo zlepšit. Začněte otázkou, co druhé použití prokázalo:
+
+```text
+Druhé běžné použití uzavíráme, protože ukázalo:
+```
+
+Za větu napište jeden konkrétní výsledek:
+
+```text
+Druhé běžné použití uzavíráme, protože ukázalo:
+Nový člověk v obchodním týmu našel pravidlo bez vysvětlování, použil volitelnou otázku v potvrzovacím e-mailu a nepřidal nový údaj do formuláře ani CRM.
+```
+
+To je dost. Není potřeba z toho dělat slavnostní metodiku. Cílem je zavřít mimořádnou pozornost, potvrdit stabilní pracovní místo a nechat pravidlo fungovat v běžném rytmu.
+
+### Čtyři uzavírací stavy
+
+Po druhém použití vyberte jeden ze čtyř stavů:
+
+- Vrátit do běžného rytmu: pravidlo je najitelné, použitelné a zavřená hranice drží.
+- Udělat poslední lokální kotvu: pravidlo platí, ale chybí drobný odkaz, název nebo věta u místa práce.
+- Zpřesnit rozhodovací hranu: pravidlo je k nalezení, ale pořád neříká dost jasně, kdy ho použít.
+- Otevřít novou malou smyčku: druhé použití přineslo skutečný návratový signál, který už nejde řešit jen lokálním dočištěním.
+
+Stav `vrátit do běžného rytmu` je výsledek, po kterém se nemá přidávat další kontrola. Pokud pravidlo prošlo druhým použitím, mimořádný režim končí. Další kontroly patří do normálního review pracovního místa, ne do zvláštního dohledu nad jednou větou.
+
+Stav `udělat poslední lokální kotvu` použijte, když se pravidlo použilo správně, ale člověk ho hledal déle, než bylo nutné. Oprava má být co nejbližší práci: odkaz v checklistu, jedna věta u šablony, lepší název položky, krátká poznámka v handoffu. Pokud kvůli chybějící kotvě zakládáte nový proces, kotva se vám trochu utrhla z ruky.
+
+Stav `zpřesnit rozhodovací hranu` patří situacím, kde člověk pravidlo našel, ale nebylo jasné, jestli se použije právě teď. Tady nepomůže lepší odkaz. Pomůže věta, která rozliší podobné situace. Například: "Otázku na rozpočet neposílej, pokud lze další konkrétní krok navrhnout bez ní." To je hrana. Není dlouhá, ale chrání proti přehnanému sběru dat.
+
+Stav `otevřít novou malou smyčku` je pro opakovaný problém, který splnil domluvený návratový signál. V takovém případě druhé použití nezavírejte jako selhání pravidla. Zavřete ho jako důkaz, že vznikla nová otázka. Nová otázka má dostat vlastní hranici, vlastní stop podmínku a vlastní privacy-first kontrolu.
+
+### Praktický příklad uzavření
+
+```text
+Pravidlo:
+U relevantní poptávky bez rozpočtu lze poslat volitelnou otázku v potvrzovacím e-mailu. Formulář, scoring a export zůstávají zavřené.
+
+Druhé použití:
+Nový obchodník našel pravidlo v checklistu a použil ho bez vysvětlení.
+
+Výsledek:
+Zákazník odpověděl v běžném e-mailovém vlákně. Nevznikl nový formulářový údaj, CRM atribut ani pomocná tabulka.
+
+Uzavírací stav:
+Vrátit do běžného rytmu.
+
+Co zůstává zavřené:
+Povinné pole pro rozpočet, automatický lead scoring, export poptávek bez rozpočtu a zvláštní report odpovědí.
+
+Další kontrola:
+Jen v běžném měsíčním review obchodního checklistu, nebo při naplnění návratového signálu.
+```
+
+Slabší, ale pořád dobrý výsledek:
+
+```text
+Druhé použití:
+Člověk pravidlo použil správně, ale našel ho až přes starý zápis z ověření.
+
+Uzavírací stav:
+Udělat poslední lokální kotvu.
+
+Nejmenší oprava:
+Do obchodního checklistu přidáváme odkaz na větu v potvrzovací šabloně.
+
+Co neotevíráme:
+Nový obchodní proces, školení, formulářové pole ani další sledování poptávek.
+
+Kontrola:
+Při příštím běžném použití jen ověříme, jestli člověk našel pravidlo v checklistu.
+```
+
+A třetí varianta:
+
+```text
+Druhé použití:
+Pravidlo bylo k nalezení, ale člověk nevěděl, jestli se otázka posílá i u malé poptávky, kde jde další krok navrhnout bez rozpočtu.
+
+Uzavírací stav:
+Zpřesnit rozhodovací hranu.
+
+Nová věta:
+Volitelnou otázku použij jen tehdy, když bez rámcového rozpočtu nebo rozhodovacího limitu nejde navrhnout konkrétní další krok.
+
+Co zůstává zavřené:
+Formulář, scoring, nový CRM atribut a report kvalifikace podle rozpočtu.
+```
+
+Všimněte si, že ani slabší výsledky automaticky nevedou k širší změně. Druhé použití často ukáže drobný provozní nedostatek: věta není na správném místě, název neodpovídá běžné řeči, hranice je moc měkká. To se opravuje lokálně. Velká změna potřebuje vlastní důkaz.
+
+### Privacy-first uzavření po druhém použití
+
+Po druhém použití má být zvláštní datová stopa buď ukončená, nebo výslovně převedená do běžného pravidla s jasným účelem. Nic mezi tím. Pokud jste během prvního ověření a druhého použití měli pomocnou poznámku, seznam nebo značku, uzavření musí říct, co se s ní stane.
+
+Použijte krátký zápis:
+
+```text
+Pomocná stopa z ověření:
+
+Po druhém použití ji:
+- mažeme
+- anonymizujeme
+- slučujeme do zobecněného závěru
+- ponecháváme v běžném pracovním místě s tímto účelem a retencí
+
+Do běžného provozu dál nepřenášíme:
+```
+
+Příklad:
+
+```text
+Pomocná stopa z ověření:
+Ruční poznámky u pěti poptávek, jestli volitelná otázka pomohla kvalifikaci.
+
+Po druhém použití ji:
+Slučujeme do zobecněné věty v checklistu a konkrétní poznámky dál nepřenášíme mimo běžnou obchodní komunikaci.
+
+Do běžného provozu dál nepřenášíme:
+Samostatný atribut rozpočtu, export odpovědí, report použití otázky ani zvláštní segmentaci podle částky.
+```
+
+Codyho komentář: jestli se vám po druhém použití nechce mazat pomocné stopy, ptejte se proč. Pokud odpověď zní "mohlo by se to hodit", je to slabé. Pokud odpověď zní "potřebujeme to pro konkrétní rozhodnutí v konkrétním termínu", napište účel a datum. Data bez účelu nejsou rezerva. Jsou budoucí práce v přestrojení.
+
+### Karta uzavření druhého použití
+
+```text
+Pravidlo nebo lokální oprava:
+
+Druhá běžná situace použití:
+
+Kdo pravidlo použil:
+
+Co se stalo:
+
+Uzavírací stav:
+- vrátit do běžného rytmu
+- udělat poslední lokální kotvu
+- zpřesnit rozhodovací hranu
+- otevřít novou malou smyčku
+
+Co se mění v pracovním místě:
+
+Co zůstává výslovně zavřené:
+
+Pomocné datové stopy a jejich ukončení:
+
+Návratový signál pro další otevření:
+
+Kde je závěr uložený:
+
+Vlastník:
+
+Datum:
+```
+
+Karta má být poslední záznam mimořádné pozornosti. Pokud výsledek zní `vrátit do běžného rytmu`, další zápisy patří jen do normálního provozu. Pokud výsledek zní `otevřít novou malou smyčku`, tahle karta uzavírá druhé použití a nová karta začíná novou otázkou. Nemíchejte je dohromady, jinak se z historie stane polévka dobrých úmyslů.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte pravidlo a druhou běžnou situaci.
+2. Minuta 2: napište, co se opravdu stalo.
+3. Minuta 3: vyberte jeden uzavírací stav.
+4. Minuta 4: napište, co se mění v pracovním místě a co zůstává zavřené.
+5. Minuta 5: ukončete pomocné datové stopy.
+6. Minuta 6: zapište návratový signál nebo návrat do běžného rytmu.
+
+Pokud se workshop nevejde do šesti minut, nejspíš neuzavíráte druhé použití, ale otevíráte nové téma. To není chyba. Jen tomu dejte správný název a samostatnou malou smyčku.
+
+### Checklist uzavření druhého použití
+
+- Máme konkrétní popis druhé běžné situace?
+- Víme, jestli pravidlo použil někdo bez čerstvé paměti původního rozhodnutí?
+- Vybrali jsme přesně jeden uzavírací stav?
+- Pokud pravidlo drží, rušíme mimořádnou péči?
+- Pokud chybí kotva, opravujeme jen nejbližší pracovní místo?
+- Pokud chybí hrana, přepisujeme rozhodovací větu místo rozšiřování systému?
+- Pokud vznikl návratový signál, otevíráme novou malou smyčku s vlastní hranicí?
+- Je jasně napsané, co zůstává zavřené?
+- Ukončili jsme pomocné poznámky, tabulky, tagy, exporty nebo ruční seznamy?
+- Nepřidali jsme do běžného provozu nový údaj bez jasného účelu, vlastníka a retence?
+- Ví další člověk, kde závěr najde?
+- Je jasné, kdy se téma smí znovu otevřít?
+
+Uzavření druhého běžného použití je dobré místo, kde přestat. Pokud pravidlo drží, nechte ho žít. Pokud potřebuje poslední lokální opravu, udělejte ji a zavřete. Pokud se objevil skutečný návratový signál, otevřete novou malou otázku. Všechno ostatní je jen chuť dál hladit systém po hlavě, i když už dávno ví, co má dělat.
+
 ## Pracovní log
 
+- 2026-06-26: Doplněna úvodní podkapitola o uzavření druhého běžného použití po uzavřeném prvním ověření: čtyři uzavírací stavy, praktické příklady, privacy-first ukončení pomocných stop, karta, mini workshop a checklist.
 - 2026-06-26: Doplněna úvodní podkapitola o druhém běžném použití po uzavřeném prvním ověření: přenositelnost pravidla, stabilita zavřené hranice, čtyři výsledné stavy, privacy-first ukončení pomocných stop, karta, mini workshop a checklist.
 - 2026-06-26: Doplněna úvodní podkapitola o uzavření prvního běžného ověření po uzavřeném lehkém návratu: čtyři uzavírací stavy, praktické příklady, privacy-first úklid sledovacího ocasu, karta, mini workshop a checklist.
 - 2026-06-26: Doplněna úvodní podkapitola o prvním běžném ověření po uzavřeném lehkém návratu: najitelnost pravidla, rozhodnutelnost, čtyři výsledky ověření, privacy-first kontrola bez sledovacího ocasu, karta, mini workshop a checklist.
