@@ -258748,6 +258748,155 @@ Když se nevejdete do šesti minut, pravděpodobně neřešíte druhé review. �
 
 Druhé běžné review v dlouhodobém klidu má chránit jednoduchou věc: pravidlo má fungovat samo, ne díky čerstvé paměti a ne díky tajné evidenci. Když to zvládne, nechte ho být. Dobrý provoz není ten, kde se všechno pořád sleduje. Dobrý provoz je ten, kde víte, kdy sledování skončilo.
 
+## Uzavření druhého běžného review do stabilního režimu
+
+Druhé běžné review samo o sobě ještě není konec práce. Konec nastane až ve chvíli, kdy tým jasně zapíše, co se po review mění v běžném rytmu, co se už dál nekontroluje a jaký signál by pravidlo znovu vytáhl z klidu. Bez tohoto uzavření zůstává review viset jako drobná provozní položka, která se může vracet jen proto, že ji nikdo formálně neodložil.
+
+Stabilní režim neznamená, že se pravidlo už nikdy nezmění. Znamená, že pravidlo přestává být zvláštní projekt. Žije v běžném pracovním místě, má normální vlastníka, normální rytmus a žádnou tajnou vrstvu pozornosti navíc. To je rozdíl mezi "máme to opravené" a "pořád kolem toho chodíme s baterkou".
+
+Začněte větou:
+
+```text
+Druhé běžné review uzavíráme do stabilního režimu, protože pravidlo funguje bez čerstvé paměti, bez mimořádné kontroly a bez nové datové stopy.
+```
+
+Pokud věta není pravdivá, stabilní režim ještě neotevírejte. Vyberte přesnější stav: lokální dočištění, slabá přenositelnost nebo návratový signál. Stabilní režim se nemá udělovat za snahu. Má popisovat skutečnost.
+
+### Co se při uzavření mění
+
+Uzavření druhého review má udělat tři malé změny:
+
+- Přepsat pravidlo do běžného jazyka bez zmínek o pilotu, návratu, opravě nebo mimořádném režimu.
+- Odstranit pomocné kontrolní body, které vznikly jen kvůli ověření pravidla.
+- Nechat u pravidla pouze návratový signál a běžný rytmus kontroly.
+
+Příklad běžného přepisu:
+
+```text
+Před uzavřením:
+Po návratu k neotevřenému kroku dočasně kontrolujeme, zda volitelná otázka na rozpočet v potvrzovacím e-mailu nepovede k novému CRM atributu.
+
+Po uzavření:
+Volitelnou otázku na rámcový rozpočet lze použít jen tehdy, když bez ní nejde navrhnout další konkrétní krok. Odpověď slouží pro aktuální obchodní rozhovor; nezakládá nový formulářový údaj, CRM atribut ani ruční evidenci.
+```
+
+Druhá verze je lepší, protože nepotřebuje znát historii. Neříká, že něco bylo kdysi problém. Říká, co má člověk udělat dnes. Historie může zůstat v changelogu nebo rozhodovací kartě, ale nemá překážet na pracovním místě, kde někdo potřebuje jednat.
+
+### Praktický příklad
+
+Situace:
+
+```text
+Pravidlo:
+U relevantní poptávky lze poslat volitelnou otázku na rámcový rozpočet v potvrzovacím e-mailu. Formulář, scoring a CRM atribut zůstávají zavřené.
+
+Druhé review:
+Nový člověk v obchodu pravidlo správně použil bez vysvětlení. Nevznikl nový seznam použití otázky ani export odpovědí.
+```
+
+Uzavření:
+
+```text
+Stabilní režim:
+Pravidlo zůstává v obchodním checklistu a šabloně potvrzovacího e-mailu.
+
+Co mažeme:
+Dočasnou poznámku "ověřit po dalším použití" a pomocný seznam testovacích situací.
+
+Co ponecháváme:
+Jednu větu v checklistu, že odpověď na rozpočet se používá jen pro další krok v rozhovoru.
+
+Návratový signál:
+Tři relevantní poptávky za sebou nepůjdou kvalifikovat bez ručního doptání, nebo tým začne odpovědi zapisovat do nové evidence.
+```
+
+Tady je důležité, že stabilní režim neobsahuje nový rituál. Žádné měsíční hlášení "otázka na rozpočet funguje". Žádné počítání každého použití. Žádná tabulka pro jistotu. Pokud pravidlo funguje, běžná práce ho ověří sama. Pokud nefunguje, návratový signál ho znovu otevře.
+
+### Privacy-first uzavření stabilního režimu
+
+Privacy-first uzavření má být konkrétní. Nestačí napsat, že žádná data nepřibyla. Zapište, které potenciální stopy se po review výslovně nevedou:
+
+```text
+Po uzavření nevedeme:
+- seznam použití otázky,
+- samostatný CRM atribut pro rozpočet,
+- export odpovědí z e-mailů,
+- screenshoty zákaznických zpráv,
+- nový report pro kontrolu pravidla.
+```
+
+Pak doplňte, co se děje s pomocnými stopami z ověření:
+
+```text
+Dočasné poznámky z review:
+Mažeme po propsání závěru do obchodního checklistu.
+
+Zobecněný příklad:
+Ponecháváme bez jmen, firem, částek a citací zákaznické komunikace.
+
+Vlastník:
+Obchodní vlastník checklistu.
+```
+
+Codyho komentář: stabilní režim je místo, kde se často vyrábí zbytečné měření jen proto, že tým nechce pustit volant. Jenže když u každého malého pravidla necháte kontrolní přívěs, za půl roku netáhnete provoz, ale karavan administrativy. Elegantní dovolená to nebude.
+
+### Karta uzavření do stabilního režimu
+
+```text
+Pravidlo:
+
+Pracovní místo:
+
+Výsledek druhého review:
+
+Proč může pravidlo do stabilního režimu:
+
+Co se přepisuje do běžného jazyka:
+
+Co se odstraňuje jako dočasná kontrola:
+
+Co zůstává výslovně zavřené:
+
+Návratový signál:
+
+Privacy-first uzavření:
+Nepřidáváme:
+Mažeme:
+Anonymizujeme nebo zobecňujeme:
+Ponecháváme, protože:
+Retence:
+Vlastník:
+
+Další běžný rytmus:
+```
+
+Karta má být poslední administrativní stopa mimo běžné pracovní místo. Jakmile je závěr propsaný, karta patří do changelogu, rozhodovací historie nebo archivu. Nemá z ní vzniknout další checklist ke kontrolování checklistu. Ano, i to se v týmech děje. Ano, bolí mě to číst.
+
+### Mini workshop na 5 minut
+
+1. Minuta 1: přečtěte výsledek druhého review.
+2. Minuta 2: napište jednu běžnou verzi pravidla bez historie.
+3. Minuta 3: vyškrtněte dočasné kontroly a pomocné evidence.
+4. Minuta 4: zapište návratový signál a privacy-first úklid.
+5. Minuta 5: určete, kde stabilní pravidlo odteď bydlí.
+
+Pokud workshop otevře novou debatu o původním návrhu, zastavte ho. To není uzavření stabilního režimu. To je návratový signál, slabá přenositelnost nebo chuť znovu bojovat starou bitvu. Všechny tři věci se dají řešit, jen ne pod falešným názvem "rychle to zavřeme".
+
+### Checklist stabilního uzavření
+
+- Je pravidlo přepsané do běžného jazyka bez historického vysvětlování?
+- Je jasné, kde pravidlo odteď bydlí?
+- Zmizely dočasné kontrolní poznámky, seznamy a ověřovací úkoly?
+- Zůstává původně zavřený rozsah opravdu zavřený?
+- Je návratový signál konkrétní a poznatelný v běžné práci?
+- Je zapsané, jaká data, atributy, exporty nebo reporty se nepřidávají?
+- Jsou pomocné stopy z review smazané, anonymizované nebo mají jasný důvod ponechání?
+- Má pravidlo běžného vlastníka místo mimořádného dohledu?
+- Umí nový člověk pravidlo použít bez příběhu o tom, jak vzniklo?
+- Ví tým, že další změna pravidla začíná až návratovým signálem?
+
+Uzavření do stabilního režimu je malá, ale důležitá tečka. Bez ní se i správně opravené pravidlo může dál tvářit jako otevřená práce. S ní se vrací tam, kam patří: do běžného provozu, kde pomáhá rozhodovat a nepotřebuje kolem sebe vlastní miniprojekt.
+
 ## Pracovní log
 
 - 2026-06-26: Doplněna úvodní podkapitola o druhém běžném review v dlouhodobém klidu: test pravidla bez čerstvé paměti, ochrana zavřeného rozsahu, privacy-first úklid pomocných stop, karta, mini workshop a checklist.
@@ -259998,3 +260147,4 @@ Druhé běžné review v dlouhodobém klidu má chránit jednoduchou věc: pravi
 - 2026-06-24: Doplněna úvodní podkapitola o záznamu neotevřeného kroku: důvody neotevření, privacy-first hodnota, karta, mini workshop a checklist.
 - 2026-06-25: Doplněna úvodní podkapitola o návratu k neotevřenému kroku: návratový signál, tři brány návratu, menší otevřený krok, privacy-first hranice, karta, workshop a checklist.
 - 2026-06-26: Doplněna úvodní podkapitola o uzavření druhého běžného použití po uzavřeném návratu k neotevřenému kroku: tři uzavírací stavy, praktický příklad, privacy-first ukončení mimořádné datové stopy, karta, mini workshop a checklist.
+- 2026-06-26: Doplněna úvodní podkapitola o uzavření druhého běžného review do stabilního režimu: přepis pravidla do běžného jazyka, odstranění dočasných kontrol, privacy-first úklid, karta, mini workshop a checklist.
