@@ -260334,8 +260334,179 @@ Pět minut stačí, protože nejde o nové review. Pokud nestačí, je to signá
 
 První lehká kontrola po ročním review má potvrdit, že stabilita není jen stav v dokumentu. Stabilní pravidlo se pozná podle toho, že se po čase dá použít bez vysvětlování, bez archeologie a bez nové datové stopy. Pokud tohle platí, nechte ho v klidu dál sloužit. Pokud ne, opravte nejbližší hranu a vraťte se k práci.
 
+## Uzavření první lehké kontroly po uzavřeném ročním review
+
+Lehká kontrola po ročním review má skončit stejně lehce, jako začala. Její výstup nemá být nový proces, druhé review ani "pro jistotu" zavedený dohled. Má jen potvrdit, že uzavřené roční rozhodnutí se při běžné práci opravdu dá použít. Jakmile to víte, kontrolu zavřete a pravidlo vraťte do rytmu, který už byl domluvený.
+
+Začněte jednou uzavírací větou:
+
+```text
+První lehká kontrola po ročním review se uzavírá takto:
+```
+
+Za dvojtečku nepatří zápis celé historie pravidla. Patří tam výsledek dnešní krátké kontroly:
+
+```text
+První lehká kontrola po ročním review se uzavírá takto: pravidlo je najitelné v obchodním checklistu, rozhoduje follow-up bez nového pole a nevytváří novou datovou stopu.
+```
+
+Tahle věta je dost malá na to, aby se dala uložit přímo k pracovnímu místu. Zároveň je dost konkrétní, aby za půl roku někdo poznal, že lehká kontrola opravdu proběhla a neskončila jen neurčitým "vypadá to dobře".
+
+Pokud se během kontroly našla lokální oprava, uzavírací věta má pojmenovat opravu i hranici:
+
+```text
+První lehká kontrola po ročním review se uzavírá lokální opravou najitelnosti: do obchodního checklistu přidáváme odkaz na aktuální pravidlo, ale neotevíráme obsah pravidla ani nové měření jeho použití.
+```
+
+To je důležité. Lokální oprava není pozvánka k přepsání ročního rozhodnutí. Když chybí odkaz, opravte odkaz. Když je věta nejasná, zpřesněte větu. Když zůstala stará pomocná stopa, ukliďte stopu. Nezačínejte debatou o tom, jestli by pravidlo nemělo být celé chytřejší, protože to už je jiná práce v převleku.
+
+### Čtyři uzavírací stavy
+
+Lehkou kontrolu uzavírejte jedním ze čtyř stavů:
+
+- Potvrzeno bez změny: pravidlo je najitelné, rozhodnutelné a bez nové datové stopy.
+- Lokálně opraveno: opravilo se nejbližší pracovní místo, například odkaz, název, jedna věta nebo stará kopie.
+- Uklizena pomocná stopa: kontrola našla pozůstatek po ročním review, který už neměl žít.
+- Předáno do samostatné smyčky: kontrola narazila na změnu kontextu, kterou nejde spravedlivě uzavřít jako lehkou opravu.
+
+První tři stavy vracejí pravidlo do domluveného rytmu. Čtvrtý stav otevírá novou malou smyčku, ale jen tehdy, když se opravdu změnila pracovní situace. Ne když někoho během kontroly napadl zajímavý nápad. Nápady jsou fajn, dokud se netváří jako incidenty v levném kostýmu.
+
+Příklad rozdílu:
+
+```text
+Lokálně opraveno:
+V aktivním checklistu chyběl odkaz na aktuální pravidlo. Odkaz byl doplněn, stará review poznámka zůstává jen v historii.
+
+Samostatná smyčka:
+Pravidlo vzniklo pro obchodní follow-up, ale nový produktový onboarding používá stejnou otázku v jiné situaci. Neopravujeme obchodní pravidlo; otevíráme novou otázku pro onboarding.
+```
+
+V prvním případě je problém v cestě. V druhém případě je problém v kontextu. Míchat tyto dva stavy dohromady je spolehlivý způsob, jak z pětiminutové kontroly vyrobit pracovní bažinu.
+
+### Praktický příklad uzavření
+
+Roční review potvrdilo pravidlo: rámcový rozpočet se u nejasné relevantní poptávky doptává volitelně ve follow-upu, ne povinným polem v prvním formuláři. První lehká kontrola proběhla při reálné poptávce.
+
+Záznam uzavření může vypadat takto:
+
+```text
+Pravidlo:
+Rozpočet se u nejasné relevantní poptávky doptává volitelně ve follow-upu.
+
+Výsledek lehké kontroly:
+Potvrzeno bez změny.
+
+Uzavírací věta:
+Pravidlo je po ročním review najitelné v obchodním checklistu, pomohlo rozhodnout follow-up a nevyžadovalo nové CRM pole, tag ani kopii zákaznické zprávy.
+
+Co se výslovně neotevírá:
+Neotevíráme změnu formuláře, lead scoring ani měsíční evidenci použití otázky.
+
+Další rytmus:
+Pravidlo zůstává v ročním review, návrat pouze při třech relevantních poptávkách za sebou, které nepůjdou kvalifikovat bez ručního doptání na rozpočet.
+```
+
+Slabší varianta se stále dá uzavřít bez dramatu:
+
+```text
+Výsledek lehké kontroly:
+Lokální oprava najitelnosti.
+
+Uzavírací věta:
+Pravidlo bylo použitelné, ale aktivní checklist odkazoval na starou servisní poznámku. Opravili jsme odkaz na kanonické pravidlo a starou poznámku zkrátili na historickou stopu.
+
+Co se výslovně neotevírá:
+Neotevíráme obsah pravidla, roční review ani novou kontrolní tabulku.
+```
+
+Tým tím dává najevo, že rozumí velikosti problému. Chybějící odkaz není produktová strategie. Je to chybějící odkaz. Někdy je největší profesionální výkon opravit malou věc a nepřidat k ní filozofii.
+
+### Privacy-first uzavření
+
+Uzavření lehké kontroly má odstranit dočasnou pozornost, ne vytvořit nový záznamový režim. Proto si položte tři otázky:
+
+- Co jsme potřebovali vědět, abychom kontrolu uzavřeli?
+- Co už po uzavření nepotřebujeme uchovávat?
+- Jak zabráníme tomu, aby se z lehké kontroly stalo průběžné sledování lidí, zákazníků nebo obchodních situací?
+
+Ve většině případů stačí anonymizovaná věta bez detailů:
+
+```text
+Lehká kontrola proběhla při relevantní pracovní situaci; pravidlo šlo použít bez ukládání zákaznické zprávy, screenshotu, nového CRM pole nebo osobní evidence použití.
+```
+
+Pokud byla oprava potřeba, popište ji bez citlivých dat:
+
+```text
+Opraveno:
+Aktivní checklist neodkazoval na kanonické pravidlo.
+
+Neukládáme:
+Konkrétní poptávku, jméno obchodníka, e-mailovou komunikaci ani screenshot CRM.
+```
+
+Tím zůstane zachovaný důkaz o provozní kvalitě, ale nepřibude další vrstva osobních nebo zákaznických stop. Privacy-first přístup se pozná hlavně v těchto malých uzavřeních. Velká pravidla jsou snadná na plakát. Těžší je nezaložit tabulku pokaždé, když se chce člověk cítit důkladně.
+
+### Karta uzavření lehké kontroly
+
+```text
+Pravidlo:
+
+Roční review, na které kontrola navazuje:
+
+Pracovní situace lehké kontroly:
+
+Výsledek:
+- potvrzeno bez změny
+- lokálně opraveno
+- uklizena pomocná stopa
+- předáno do samostatné smyčky
+
+Uzavírací věta:
+
+Co se změnilo, pokud vůbec něco:
+
+Co se výslovně neotevírá:
+
+Jaké dočasné poznámky, kopie, screenshoty, exporty nebo zákaznické detaily se mažou nebo zobecňují:
+
+Kanonické pracovní místo po uzavření:
+
+Další rytmus nebo návratový signál:
+
+Vlastník:
+```
+
+Karta má být krátká. Pokud se nevejde na jednu obrazovku, pravděpodobně už neuzavíráte lehkou kontrolu, ale píšete nový příběh o pravidle. Ten může být někdy potřeba, ale nepašujte ho sem. Dejte mu vlastní otázku a vlastní stop podmínku.
+
+### Mini workshop na 5 minut
+
+1. Minuta 1: přečtěte výsledek lehké kontroly.
+2. Minuta 2: vyberte jeden ze čtyř uzavíracích stavů.
+3. Minuta 3: napište jednu uzavírací větu.
+4. Minuta 4: určete, co se výslovně neotevírá a co se uklízí.
+5. Minuta 5: potvrďte kanonické místo a další rytmus.
+
+Když se během workshopu objeví nové téma, zapište ho stranou jednou větou. Neřešte ho v kartě uzavření. Uzavření lehké kontroly má zavřít dnešní malou smyčku; nové téma potřebuje vlastní důvod, ne volné místo v cizím formuláři.
+
+### Checklist uzavření lehké kontroly
+
+- Má lehká kontrola jeden jasný výsledek?
+- Je vybraný jeden ze čtyř uzavíracích stavů?
+- Existuje uzavírací věta v běžném jazyce?
+- Pokud vznikla oprava, míří na nejbližší pracovní místo?
+- Je zapsané, co se výslovně neotevírá?
+- Neotevřelo se znovu roční review jen kvůli lokálnímu tření?
+- Jsou dočasné poznámky, kopie, screenshoty nebo exporty smazané, zkrácené nebo zobecněné?
+- Nevzniká nová evidence použití pravidla?
+- Je jasné kanonické místo, kde pravidlo po uzavření žije?
+- Zůstává další rytmus přiměřený skutečnému riziku pravidla?
+
+Uzavření první lehké kontroly je malý, ale důležitý test zralosti. Stabilní systém nepotřebuje po každém použití potlesk ani nový dohled. Potřebuje jasnou větu, uklizené stopy a klidný návrat do práce. Pokud se ukáže větší problém, otevřete ho poctivě jako novou smyčku. Pokud ne, zavřete kontrolu a nechte pravidlo dělat přesně to, kvůli čemu existuje.
+
 ## Pracovní log
 
+- 2026-06-26: Doplněna úvodní podkapitola o uzavření první lehké kontroly po uzavřeném ročním review: čtyři uzavírací stavy, praktické příklady, privacy-first úklid dočasných stop, karta, mini workshop a checklist.
 - 2026-06-26: Doplněna úvodní podkapitola o první lehké kontrole po uzavřeném ročním review: ověření použitelnosti v reálné práci, tři kontrolní otázky, lokální opravy, privacy-first práce bez nové datové stopy, karta, mini workshop a checklist.
 - 2026-06-26: Doplněna úvodní podkapitola o uzavření prvního ročního review do dalšího roku: uzavírací věta, lokální propsání změn, návrat do ročního rytmu, privacy-first úklid dočasných důkazů, karta, mini workshop a checklist.
 - 2026-06-26: Doplněna úvodní podkapitola o převodu stabilního pravidla do ročního rytmu: ukončení mimořádné péče, roční review bez archeologie, privacy-first omezení průběžného měření, karta, mini workshop a checklist.
