@@ -258570,8 +258570,187 @@ Když se během pěti minut začne řešit původní návrh, zastavte se. Uzaví
 
 Uzavření prvního běžného review je poslední dveřní rám mezi mimořádnou péčí a normálním provozem. Když jím pravidlo projde, přestaňte kolem něj stavět zábradlí. Nechte ho žít tam, kde pomáhá, a vraťte se až ve chvíli, kdy přijde skutečný důvod.
 
+## Druhé běžné review v dlouhodobém klidu
+
+Druhé běžné review v dlouhodobém klidu je záměrně nudná disciplína. První review ověřilo, že pravidlo přežilo přechod z mimořádné péče do běžného rytmu. Druhé review má ověřit ještě jednu věc: jestli pravidlo funguje i bez čerstvé paměti lidí, kteří ho původně opravovali.
+
+To je jiný test než první kontrola. Při prvním review si tým ještě pamatuje, proč pravidlo vzniklo, co se zavřelo a jaký kompromis byl přijatý. Při druhém review už by mělo stačit samotné pracovní místo: šablona, checklist, rozhodovací věta nebo karta pravidla. Pokud bez historického výkladu nejde poznat, co dělat, pravidlo není v klidu. Jen kolem něj zůstala neviditelná ústní dokumentace, což je elegantní název pro "všichni doufáme, že si to někdo pamatuje". Fascinující provozní strategie. Nedoporučuji.
+
+Začněte větou:
+
+```text
+Druhé běžné review v dlouhodobém klidu ověřuje, zda pravidlo obstojí bez čerstvé paměti původní změny.
+```
+
+Pak zkontrolujte tři věci:
+
+- Nový nebo méně zapojený člověk umí z pracovního místa poznat, kdy pravidlo použít.
+- Pravidlo pořád chrání původně zavřený rozsah a nevrací ho zadními dveřmi.
+- Běžný rytmus nevytvořil pomocnou evidenci, kterou nikdo samostatně neschválil.
+
+Když všechny tři věci projdou, review může skončit jedinou větou a krátkým privacy-first úklidem. Není potřeba vyrábět nové skóre, nový dashboard ani slavnostní status. Dlouhodobý klid se pozná mimo jiné podle toho, že se o něm dá napsat málo.
+
+### Co druhé review nesmí dělat
+
+Druhé review není příležitost znovu otevřít původní strategickou debatu. Pokud jste kdysi zavřeli povinné pole ve formuláři, lead scoring nebo nový tracker, druhé review nemá zkoušet, jestli by se přece jen "něco z toho nehodilo". Má jen ověřit, jestli dnešní pravidlo funguje a jestli se neobjevil domluvený návratový signál.
+
+Použijte krátkou brzdu:
+
+```text
+Dnes neposuzujeme původně zavřený návrh znovu. Posuzujeme pouze to, zda současné pravidlo v běžném rytmu funguje bez mimořádné paměti a bez nové datové stopy.
+```
+
+Tahle věta šetří čas. Taky šetří soukromí, protože nejčastější únik rozsahu po klidovém období nevypadá jako velký projekt. Vypadá jako drobná poznámka: "pro jistotu si to začneme značit". A za měsíc máte ruční seznam, nový atribut nebo export, který nikdo nepotřeboval schválit, protože přece vznikal jen "pro kontrolu".
+
+### Praktický příklad
+
+Původní pravidlo:
+
+```text
+U relevantní poptávky lze poslat volitelnou otázku na rámcový rozpočet v potvrzovacím e-mailu. Formulář, scoring a CRM atribut zůstávají zavřené.
+```
+
+Druhé běžné review:
+
+```text
+Pracovní místo:
+Šablona potvrzovacího e-mailu a obchodní checklist.
+
+Test bez čerstvé paměti:
+Nový člověk v obchodu z checklistu poznal, že otázku nemá posílat automaticky, ale jen když bez ní nejde navrhnout další konkrétní krok.
+
+Původně zavřený rozsah:
+Formulář, scoring a CRM atribut zůstávají zavřené.
+
+Datová stopa:
+Nevznikl ruční seznam použití otázky ani export odpovědí.
+
+Výsledek:
+Pravidlo zůstává v dlouhodobém klidu.
+```
+
+Slabší výsledek může vypadat takto:
+
+```text
+Test bez čerstvé paměti:
+Nový člověk pochopil, kdy otázku použít, ale v checklistu chybí věta, že odpověď se nemá kopírovat do nového CRM pole.
+
+Výsledek:
+Lokální dočištění pracovního místa.
+
+Oprava:
+Do checklistu doplňujeme větu: "Odpověď použij pro další krok v obchodním rozhovoru; nezakládej kvůli ní nový atribut ani ruční evidenci."
+```
+
+Tohle je pořád dobrý výsledek. Review našlo malou hranu a opravilo ji tam, kde vzniká práce. Špatný výsledek by byl začít kvůli jedné chybě kontrolovat všechny poptávky. To už není oprava pravidla, ale návrat mimořádné péče s falešným knírkem.
+
+### Čtyři výsledky druhého review
+
+Druhé review může skončit čtyřmi stavy:
+
+- Klid potvrzen: pravidlo funguje bez čerstvé paměti, hranice drží a nevznikla nová datová stopa.
+- Lokální dočištění: pravidlo funguje, ale jedno pracovní místo potřebuje zpřesnit větu, odkaz nebo umístění.
+- Slabá přenositelnost: bez původního kontextu není jasné, kdy pravidlo použít; opravuje se rozhodovací věta, ne celý proces.
+- Návratový signál: objevil se domluvený důvod k nové malé smyčce.
+
+Stav `klid potvrzen` nezvětšujte. Zapište ho a skončete. Stav `lokální dočištění` uzavřete hned po opravě jednoho místa. Stav `slabá přenositelnost` je vážnější: pravidlo sice možná dává smysl původnímu týmu, ale není samostatné. Tam má být výstupem lepší rozhodovací věta nebo lepší umístění pravidla.
+
+Stav `návratový signál` nepřekládejte jako "původní návrh měl pravdu". Překlad zní: "přišel nový důvod otevřít nejmenší další krok". Méně dramatu, méně tabulek, více přesnosti.
+
+### Privacy-first kontrola druhého review
+
+Druhé review je dobré místo pro kontrolu nenápadné provozní sedimentace. Nehledejte jen oficiální integrace. Hledejte malé pomocné věci, které se tváří nevinně:
+
+- kopie odpovědí v interním chatu,
+- ruční seznam použití otázky,
+- screenshoty zákaznických zpráv,
+- dočasné sloupce v tabulce,
+- poznámky s osobními nebo obchodními detaily,
+- staré exporty použité při prvním review.
+
+Privacy-first otázka zní:
+
+```text
+Co jsme začali uchovávat jen proto, že jsme si nebyli jistí pravidlem?
+```
+
+Pokud něco najdete, nerozšiřujte review. Rozhodněte jen o této stopě:
+
+```text
+Stopu mažeme:
+
+Stopu anonymizujeme:
+
+Stopu ponecháváme, protože:
+
+Retence a vlastník:
+```
+
+Ponechání musí mít důvod. "Mohlo by se hodit" není důvod, to je šuplík s právním cosplayem. Důvod má být spojený s konkrétním rozhodnutím, zákaznickou povinností nebo provozní kontrolou. Pokud takový důvod není, stopu ukliďte.
+
+### Karta druhého běžného review v klidu
+
+```text
+Pravidlo:
+
+Pracovní místo:
+
+Kdy probíhá druhé review:
+
+Test bez čerstvé paměti:
+
+Kdo pravidlo zkusil přečíst nebo použít:
+
+Výsledek review:
+- klid potvrzen
+- lokální dočištění
+- slabá přenositelnost
+- návratový signál
+
+Co se opravuje, pokud něco:
+
+Co zůstává výslovně zavřené:
+
+Návratový signál:
+
+Privacy-first kontrola:
+Nové nebo zbylé pomocné stopy:
+Rozhodnutí o stopách:
+Retence:
+Vlastník:
+
+Další běžný rytmus:
+```
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte pravidlo bez historického vysvětlování.
+2. Minuta 2: nechte člověka mimo původní změnu říct, kdy by pravidlo použil.
+3. Minuta 3: porovnejte odpověď s původně zavřeným rozsahem.
+4. Minuta 4: najděte případné pomocné datové stopy.
+5. Minuta 5: vyberte jeden ze čtyř výsledků review.
+6. Minuta 6: zapište opravu, úklid nebo potvrzení klidu.
+
+Když se nevejdete do šesti minut, pravděpodobně neřešíte druhé review. Řešíte buď slabou přenositelnost pravidla, nebo návratový signál. Obojí je v pořádku, jen tomu dejte vlastní malou smyčku a netvařte se, že pořád kontrolujete klid.
+
+### Checklist druhého review
+
+- Dá se pravidlo pochopit bez člověka, který ho původně psal?
+- Je jasné, kdy pravidlo použít a kdy ho nepoužít?
+- Zůstává původně zavřený rozsah opravdu zavřený?
+- Nevznikl nový formulářový údaj, CRM atribut, ruční seznam, export nebo tracker?
+- Pokud vznikla pomocná stopa, má jasný účel, retenci a vlastníka?
+- Je výsledek review jedním ze čtyř stavů?
+- Pokud stačí lokální dočištění, zůstalo opravdu lokální?
+- Pokud se objevil návratový signál, má vlastní malou smyčku?
+- Je zapsané, kdy se pravidlo vrací do běžného rytmu?
+- Umí tým po review říct, co teď výslovně nedělá?
+
+Druhé běžné review v dlouhodobém klidu má chránit jednoduchou věc: pravidlo má fungovat samo, ne díky čerstvé paměti a ne díky tajné evidenci. Když to zvládne, nechte ho být. Dobrý provoz není ten, kde se všechno pořád sleduje. Dobrý provoz je ten, kde víte, kdy sledování skončilo.
+
 ## Pracovní log
 
+- 2026-06-26: Doplněna úvodní podkapitola o druhém běžném review v dlouhodobém klidu: test pravidla bez čerstvé paměti, ochrana zavřeného rozsahu, privacy-first úklid pomocných stop, karta, mini workshop a checklist.
 - 2026-06-26: Doplněna úvodní podkapitola o uzavření prvního běžného review do dlouhodobého klidu: tři uzavírací stavy, praktické příklady, privacy-first úklid pomocných stop, karta, mini workshop a checklist.
 - 2026-06-26: Doplněna úvodní podkapitola o prvním běžném review po uzavřeném tichém týdnu: kontrola pracovního místa, návratového signálu a nenápadných datových stop, tři výsledky review, praktický příklad, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-26: Doplněna úvodní podkapitola o uzavření prvního tichého týdne po návratu pravidla do běžného rytmu: čtyři uzavírací stavy, praktický příklad, úklid dočasných stop, privacy-first zobecnění záznamů, karta, mini workshop a checklist.
