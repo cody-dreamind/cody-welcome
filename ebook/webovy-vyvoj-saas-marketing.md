@@ -259434,6 +259434,185 @@ Pokud během workshopu zjistíte, že pravidlo nikdo neumí použít bez vysvět
 
 Druhá servisní kontrola je zkouška samostatnosti pravidla. Když projde, neodměňujte ho další pozorností. Nechte ho pracovat. Když neprojde, opravte nejmenší hranu, ukliďte kopie nebo pravidlo poctivě ukončete. Stabilní provoz se nepozná podle toho, že se nikdy nic nemění. Pozná se podle toho, že i změny mají rozumnou velikost a po sobě nezanechávají zbytečná data.
 
+## Uzavření druhé servisní kontroly stabilního pravidla
+
+Druhá servisní kontrola má smysl teprve ve chvíli, kdy ji umíte zavřít bez nového malého projektu. Pokud po kontrole zůstane otevřená poznámka "ještě se na to podíváme", pravidlo se nevrátilo do stabilního provozu. Jen jste mu přidali další stínovou údržbu, kterou si za měsíc nikdo nebude pamatovat. Uzavření má proto udělat tři věci: říct, co se stalo s pravidlem, uklidit pracovní stopy a nastavit další rytmus nebo jasný návratový signál.
+
+Začněte jednoduchou větou:
+
+```text
+Druhou servisní kontrolu uzavíráme takto:
+```
+
+Za dvojtečku nepatří zápis celé debaty. Patří tam jeden ze čtyř výsledků: pravidlo zůstává stabilní, opravili jsme jednu slabou hranu, uklidili jsme kanonické místo, nebo pravidlo ukončujeme či otevíráme nový malý návrat. Cílem není vyrobit hezkou kroniku. Cílem je, aby další člověk rychle poznal, jestli má pravidlo používat, kde ho najde a co už nemá znovu rozebírat.
+
+Dobré uzavření se pozná podle toho, že po něm ubude zvláštní pozornosti. Pokud se počet kontrol, tabulek, stavů nebo poznámek zvýší, kontrola pravděpodobně neuzavřela pravidlo, ale vytvořila kolem něj nový proces. To může být někdy nutné, ale pak to pojmenujte jako novou otázku, ne jako uzavření servisní kontroly. Stabilní pravidlo má být tiché. Má pomáhat v práci, ne pořád mávat rukou, že existuje.
+
+### Čtyři uzavírací věty
+
+Použijte jednu z těchto vět a upravte ji podle konkrétního pracovního místa:
+
+```text
+Stabilní:
+Pravidlo zůstává v běžném rytmu, protože ho šlo použít bez čerstvého vysvětlení, kopie nevznikly a datová stopa se nezvětšila.
+
+Slabá hrana:
+Pravidlo zůstává aktivní, ale do kanonického místa doplňujeme jednu větu k situaci, kde vzniklo tření.
+
+Slabé kanonické místo:
+Pravidlo zůstává aktivní, ale rušíme nebo zkracujeme kopie a necháváme jeden zdroj pravdy.
+
+Ukončení nebo návrat:
+Pravidlo už nepatří do běžného provozu, proto ho archivujeme, nebo otevíráme novou malou otázku na základě jasného návratového signálu.
+```
+
+Tyto věty nejsou povinná šablona pro krásu dokumentace. Jsou pojistka proti nejasnému závěru. Když větu neumíte vybrat, nejspíš ještě nevíte, co druhá kontrola ukázala. V takovém případě se vraťte o krok zpět a nechte tým rozhodnout mezi stavem `slabá hrana`, `slabé kanonické místo` a `návratový signál`. Všechno ostatní je často jen elegantnější způsob, jak říct "nějak to dopadne".
+
+### Praktický příklad uzavření
+
+Představte si stabilní pravidlo pro volitelnou otázku na rámcový rozpočet v obchodní komunikaci.
+
+Druhá servisní kontrola ukázala:
+
+```text
+Nový člověk našel pravidlo v obchodním checklistu.
+Použil ho u jednoho poptávkového e-mailu bez dovysvětlení.
+Nevznikl nový CRM atribut, tag ani ruční tabulka.
+V jedné interní poznámce ale zůstala stará delší formulace s konkrétním příkladem zákazníka.
+```
+
+Uzavření:
+
+```text
+Druhou servisní kontrolu uzavíráme jako slabé kanonické místo.
+
+Pravidlo zůstává aktivní v obchodním checklistu.
+
+Měníme:
+Starou interní poznámku zkracujeme na odkaz na checklist a mažeme konkrétní zákaznický příklad.
+
+Neměníme:
+Nepřidáváme povinné pole, CRM atribut, lead scoring ani evidenci použití otázky.
+
+Další rytmus:
+Pravidlo kontrolujeme až v běžném kvartálním review obchodního checklistu.
+```
+
+Všimněte si velikosti zásahu. Neopravuje se celý obchodní proces. Nespouští se nový reporting. Nezakládá se nový dokument "jak používat otázku na rozpočet". Kontrola našla jednu starou kopii, takže uzavření uklidí jednu starou kopii. Ano, je to neheroické. Právě proto to funguje.
+
+### Co uklidit před návratem do klidu
+
+Před zavřením druhé servisní kontroly projděte krátký úklid:
+
+- Do kanonického místa propsat jedinou schválenou větu, pokud se měnila.
+- Ze starých kopií udělat odkazy nebo je smazat.
+- Z dočasných poznámek odstranit zákaznické citace, screenshoty a obchodní detaily.
+- Zrušit dočasnou evidenci, pokud vznikla jen kvůli kontrole.
+- Uložit jeden krátký závěr tam, kde se pravidlo používá.
+- Zapsat návratový signál jen tehdy, pokud opravdu existuje důvod k dalšímu návratu.
+
+Nejčastější chyba je nechat dočasné podklady "pro jistotu". Jenže jistota bez vlastníka, účelu a retence je jen budoucí nepořádek. Pokud podklad nepomáhá dalšímu rozhodnutí, nepatří do aktivní pracovní trasy. Historický záznam může zůstat krátký, ale pracovní kopie má zmizet.
+
+Codyho komentář: týmy často sbírají dokumentační suvenýry. Screenshot z příkladu, stará tabulka, poznámka z workshopu, výřez v prezentaci, ještě jedna kopie v onboardingovém materiálu. Každý suvenýr vypadá nevinně, dokud se někdo nezeptá, co z toho je pravda. Pak začne archeologie. A archeologie je skvělá věda, ale mizerný provozní model.
+
+### Privacy-first uzavření
+
+Privacy-first uzavření druhé servisní kontroly stojí na jedné otázce:
+
+```text
+Co po kontrole nemusí dál existovat?
+```
+
+Odpověď pište konkrétně. Ne "uklidíme data", ale:
+
+```text
+Mažeme pracovní kopii e-mailu s konkrétním rozpočtem.
+Z interní poznámky necháváme jen zobecněný příklad.
+Neponecháváme tabulku použití pravidla, protože nevede k žádnému dalšímu rozhodnutí.
+```
+
+Pokud se při kontrole ukáže, že pravidlo potřebuje měření, nejdřív napište rozhodovací otázku. Třeba:
+
+```text
+Potřebujeme zjistit, zda volitelná otázka pomáhá navrhnout další krok u nejasných poptávek.
+```
+
+Teprve potom určete nejmenší možný signál. Často stačí krátká agregovaná poznámka v rámci běžného review: kolikrát se problém opakoval a jestli pravidlo pomohlo rozhodnout další krok. Nepotřebujete automaticky ukládat jednotlivé odpovědi, rozpočty, jména, screenshoty ani kompletní historii zpráv.
+
+Privacy-first uzavření také výslovně říká, co se nepřidává:
+
+```text
+Nepřidáváme nový formulářový údaj.
+Nepřidáváme CRM tag pro rozpočtový rámec.
+Nepřidáváme samostatnou evidenci použití otázky.
+Nepřenášíme konkrétní zákaznické formulace do školících materiálů.
+```
+
+Takový zápis je užitečný i obchodně. Tým ví, že pravidlo zůstává praktické, ale nezačíná z něj nový datový zvyk. Kontrola tím chrání zákazníka, tým i budoucí údržbu.
+
+### Karta uzavření druhé servisní kontroly
+
+```text
+Pravidlo:
+
+Kanonické pracovní místo:
+
+Výsledek druhé servisní kontroly:
+- stabilní
+- slabá hrana
+- slabé kanonické místo
+- ukončení nebo návrat
+
+Jednovětý závěr:
+
+Co se mění:
+
+Co se nemaže, protože je stále zdrojem pravdy:
+
+Co se maže, zkracuje nebo nahrazuje odkazem:
+
+Jaká data, citace, screenshoty, tagy, exporty nebo kopie po kontrole nezůstávají:
+
+Co výslovně nepřidáváme:
+
+Další rytmus:
+
+Návratový signál, pokud existuje:
+
+Vlastník:
+
+Datum uzavření:
+```
+
+Karta má být krátká. Pokud potřebujete dlouhou přílohu, pravděpodobně uzavíráte víc než druhou servisní kontrolu. V takovém případě rozdělte práci: nejdřív zavřete servisní kontrolu, potom případně otevřete samostatnou malou otázku s vlastním návratovým signálem.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte výsledek druhé servisní kontroly.
+2. Minuta 2: vyberte jednu ze čtyř uzavíracích vět.
+3. Minuta 3: určete kanonické místo a staré kopie.
+4. Minuta 4: smažte, zkraťte nebo odkažte jednu pracovní kopii.
+5. Minuta 5: zapište, jaká data po kontrole nezůstávají.
+6. Minuta 6: nastavte běžný rytmus, archivaci nebo návratový signál.
+
+Pokud se v šesté minutě objeví nové téma, nezvětšujte workshop. Zapište ho jako podnět mimo servisní kontrolu a vraťte se k uzavření. Druhá servisní kontrola nemá být nenápadná brána do dalšího velkého kolečka.
+
+### Checklist uzavření druhé servisní kontroly
+
+- Je jasně vybraný jeden ze čtyř výsledků kontroly?
+- Je závěr napsaný jednou větou u pracovního místa, kde se pravidlo používá?
+- Pokud se měnila slabá hrana, změnila se jen jedna věta nebo jedno malé místo?
+- Pokud bylo slabé kanonické místo, zůstává jeden zdroj pravdy?
+- Jsou staré kopie smazané, zkrácené nebo nahrazené odkazem?
+- Nezůstaly v pracovních podkladech zbytečné zákaznické údaje, citace, screenshoty nebo obchodní detaily?
+- Nevznikla nová evidence jen proto, že proběhla kontrola?
+- Je výslovně napsané, co nepřidáváme?
+- Je další rytmus lehčí než mimořádné kontroly po změně?
+- Pokud pravidlo dosloužilo, zmizelo z aktivních tras?
+- Pokud přišel návratový signál, otevírá se nová malá otázka místo opakování celé historie?
+
+Uzavření druhé servisní kontroly je dobrý test provozní dospělosti. Není těžké pravidlo vytvořit. Těžší je nechat ho po ověření zase ztichnout, uklidit po sobě data a nepřilepit na něj další proces jen proto, že tým zrovna věnoval pozornost jeho existenci. Stabilní pravidlo nemá být slavné. Má být použité, najitelné, střídmé na data a dostatečně nudné na to, aby kolem něj nevznikala práce navíc.
+
 ## Pracovní log
 
 - 2026-06-26: Doplněna úvodní podkapitola o druhé servisní kontrole stabilního pravidla: přenositelnost bez čerstvé paměti, kontrola kanonického místa a kopií, privacy-first úklid zbytečných stop, karta, mini workshop a checklist.
@@ -260688,3 +260867,4 @@ Druhá servisní kontrola je zkouška samostatnosti pravidla. Když projde, neod
 - 2026-06-25: Doplněna úvodní podkapitola o návratu k neotevřenému kroku: návratový signál, tři brány návratu, menší otevřený krok, privacy-first hranice, karta, workshop a checklist.
 - 2026-06-26: Doplněna úvodní podkapitola o uzavření druhého běžného použití po uzavřeném návratu k neotevřenému kroku: tři uzavírací stavy, praktický příklad, privacy-first ukončení mimořádné datové stopy, karta, mini workshop a checklist.
 - 2026-06-26: Doplněna úvodní podkapitola o uzavření druhého běžného review do stabilního režimu: přepis pravidla do běžného jazyka, odstranění dočasných kontrol, privacy-first úklid, karta, mini workshop a checklist.
+- 2026-06-26: Doplněna úvodní podkapitola o uzavření druhé servisní kontroly stabilního pravidla: uzavírací věty, úklid kopií, privacy-first mazání dočasných stop, karta, mini workshop a checklist.
