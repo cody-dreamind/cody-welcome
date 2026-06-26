@@ -259773,6 +259773,210 @@ Pokud ve druhé minutě zjistíte, že kanonické místo není jasné, nepřevá
 
 Převod do ročního rytmu je malý, ale důležitý konec jedné dlouhé smyčky. Pravidlo vzniklo, prošlo návratem, běžným použitím, kontrolami, úklidem a teď se může stát obyčejnou součástí práce. To je dobrý výsledek. Ne proto, že už nikdy nebude potřeba změna. Ale proto, že další změna přijde až s důvodem, ne s neklidem.
 
+## První roční review stabilního pravidla
+
+První roční review je zkouška, jestli se stabilní pravidlo opravdu stalo součástí provozu, nebo jestli jen rok tiše leželo v dokumentaci. Nemá být velké. Nemá dokazovat, že tým kdysi rozhodl správně. Má odpovědět na jednu praktickou otázku:
+
+```text
+Pomáhá pravidlo pořád stejné práci, na správném místě a bez zbytečné datové stopy?
+```
+
+Pokud ano, review končí krátkým potvrzením. Pokud ne, neotevírá se hned celý historický příběh. Vybere se nejmenší další stav: ponechat, lehce aktualizovat, zkontrolovat kontext, archivovat, nebo otevřít nový návratový signál. Roční review není nostalgie nad starým rozhodnutím. Je to úklidový průchod: podívat se, jestli pravidlo pořád slouží, a odejít dřív, než z údržby vznikne nový projekt.
+
+Začněte třemi vstupy:
+
+```text
+Pravidlo:
+
+Kanonické pracovní místo:
+
+Otázka ročního review:
+```
+
+Teprve potom čtěte starou kartu převodu do ročního rytmu. Nejdřív potřebujete dnešní pracovní otázku, jinak se review snadno změní na archeologii. Starý kontext má pomoct, ale nesmí řídit celou kontrolu.
+
+### Pět kontrolních průchodů
+
+První roční review projděte v pěti krátkých průchodech:
+
+- Pracovní situace: používá se pravidlo pořád ve stejné situaci?
+- Najitelnost: najde ho člověk tam, kde práci opravdu dělá?
+- Rozhodnutelnost: pomáhá pravidlo udělat rozhodnutí, nebo jen připomíná hezký princip?
+- Shoda kopií: nevznikly vedlejší verze, které říkají něco jiného?
+- Datová stopa: nezůstaly kvůli pravidlu zbytečné příklady, exporty, screenshoty, poznámky nebo měření?
+
+Každý průchod má skončit jednou větou. Ne odstavcem, ne debatou, ne novou tabulkou. Pokud věta nejde napsat, je to samo o sobě signál: buď pravidlo není dost jasné, nebo review otevírá víc témat najednou.
+
+Příklad vět:
+
+```text
+Pracovní situace:
+Pravidlo se pořád používá při kvalifikaci nejasné poptávky po prvním kontaktu.
+
+Najitelnost:
+Pravidlo je v obchodním checklistu a nový člověk ho najde bez odkazu ze staré servisní poznámky.
+
+Rozhodnutelnost:
+Pravidlo pořád říká, kdy použít volitelnou otázku a kdy ji nepoužít.
+
+Shoda kopií:
+V aktivních materiálech není jiná verze pravidla.
+
+Datová stopa:
+Po převodu nezůstaly ukázky zákaznických zpráv ani evidence jednotlivých použití.
+```
+
+Když některá věta neplatí, neopravujte všechno. Opravte nejbližší pracovní místo. Pokud je problém v najitelnosti, neotevírejte nový sales proces. Pokud je problém v datové stopě, nezačínejte přepisovat text pravidla. První roční review má být přesné, ne statečné.
+
+### Praktický příklad
+
+Pravidlo z předchozích částí říká, že obchod může u nejasné poptávky použít volitelnou otázku na rámcový rozpočet nebo rozhodovací limit. Po roce review ukáže toto:
+
+```text
+Pracovní situace:
+Platí. Otázka se používá jen u nejasných poptávek.
+
+Najitelnost:
+Částečně platí. Pravidlo je v obchodním checklistu, ale starší šablona follow-up e-mailu obsahuje jinou formulaci.
+
+Rozhodnutelnost:
+Platí. Pravidlo pořád pomáhá rozhodnout, kdy otázku nepokládat.
+
+Shoda kopií:
+Neplatí. Jedna kopie v e-mailové šabloně zní jako povinný krok.
+
+Datová stopa:
+Platí. Nevznikla nová evidence jednotlivých použití.
+```
+
+Nejmenší rozumný výsledek není "přepsat obchodní kvalifikaci". Výsledek je opravit jednu šablonu a zapsat, že pravidlo zůstává v ročním rytmu:
+
+```text
+Rozhodnutí:
+Aktualizujeme starší follow-up šablonu, aby odpovídala kanonickému obchodnímu checklistu. Pravidlo zůstává v ročním rytmu, protože problém byl v kopii, ne v samotném rozhodnutí.
+```
+
+To je dobrá roční údržba. Jedna kopie se srovná se zdrojem pravdy, datová stopa se nezvětší a tým neotevře proces, který funguje. Ano, je to méně dramatické než velký redesign obchodního flow. To je přesně výhoda.
+
+### Čtyři výsledky ročního review
+
+Roční review by mělo skončit jedním ze čtyř stavů:
+
+```text
+Potvrzeno beze změny:
+Pravidlo pořád platí, kanonické místo je správné, kopie sedí a datová stopa se nezvětšila.
+
+Lokální aktualizace:
+Mění se jedna věta, odkaz, název kroku nebo kopie. Pravidlo jako takové zůstává stabilní.
+
+Kontrola kontextu:
+Není jisté, jestli pravidlo pořád řeší stejnou pracovní situaci. Neotevírá se implementace, jen krátké ověření dnešního kontextu.
+
+Archivace:
+Pravidlo už nepatří do aktivní práce. Mizí z pracovních tras a zůstává jen krátká historická stopa.
+```
+
+Pátý stav existuje, ale nemá být výchozí:
+
+```text
+Nový návratový signál:
+Objevil se konkrétní důkaz, že pravidlo už nestačí nebo škodí. Otevírá se nová malá smyčka s vlastním pracovním místem a stop podmínkou.
+```
+
+Nový návratový signál používejte opatrně. To, že někdo při review dostal nápad na zlepšení, ještě není signál. Signál je pozorování z práce: opakovaný problém, změna segmentu, nová překážka, rozpad datové hranice nebo ztráta rozhodnutelnosti. Nápady patří do poznámek. Signály otevírají práci.
+
+### Privacy-first roční review
+
+Privacy-first review má jednoduché pravidlo: pokud se datová stopa za rok nezvětšila, nevymýšlejte nové měření jen proto, že review působí prázdně. Prázdné review je někdy skvělá zpráva. Znamená, že pravidlo nepotřebovalo extra dohled.
+
+Položte si tři otázky:
+
+```text
+Zůstaly někde staré příklady se zákaznickými detaily?
+
+Vznikla kvůli pravidlu nová evidence, která už neslouží rozhodnutí?
+
+Umíme potvrdit platnost pravidla bez sledování jednotlivých lidí nebo zákazníků?
+```
+
+Pokud odpověď ukáže zbytečnou stopu, ukliďte ji v rámci review. Pokud ukáže potřebu nového měření, napište nejdřív rozhodovací otázku. Ne "měřit používání pravidla", ale třeba:
+
+```text
+Potřebujeme zjistit, jestli se kvůli nové šabloně znovu neobjevují povinné rozpočtové otázky tam, kde být nemají.
+```
+
+Teprve potom hledejte nejmenší agregovaný signál. Často stačí krátká kontrola několika anonymizovaných výstupů nebo týmová poznámka bez osobních údajů. Detailní sledování jednotlivých použití je až poslední možnost, ne reflex.
+
+Codyho komentář: roční review bez nových dat může vypadat podezřele klidně. Některé týmy pak začnou vyrábět měření, aby měly pocit, že něco udělaly. To je produktivní asi jako zapnout kameru v prázdné zasedačce, aby bylo vidět, že je pořád prázdná. Stačí zapsat stav a jít dělat práci.
+
+### Karta prvního ročního review
+
+```text
+Pravidlo:
+
+Kanonické pracovní místo:
+
+Vlastník:
+
+Datum review:
+
+Otázka review:
+
+Pracovní situace dnes:
+
+Najitelnost:
+
+Rozhodnutelnost:
+
+Shoda kopií:
+
+Datová stopa:
+
+Výsledek:
+- potvrzeno beze změny
+- lokální aktualizace
+- kontrola kontextu
+- archivace
+- nový návratový signál
+
+Co se mění:
+
+Co se výslovně neotevírá:
+
+Co se maže, zkracuje nebo nechává bez nového měření:
+
+Další review nebo návratový signál:
+```
+
+Karta má být krátká. Pokud má víc než jednu obrazovku, pravděpodobně už neprovádíte roční review, ale novou analýzu. To může být správně, jen to pojmenujte a dejte tomu vlastní hranici.
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: přečtěte pravidlo a otázku review.
+2. Minuta 2: potvrďte dnešní pracovní situaci.
+3. Minuta 3: ověřte, kde pravidlo člověk najde.
+4. Minuta 4: zkontrolujte jednu aktivní kopii nebo šablonu.
+5. Minuta 5: zapište privacy-first stav datové stopy.
+6. Minuta 6: vyberte jeden výsledek review.
+7. Minuta 7: napište, co se výslovně neotevírá.
+
+Sedm minut stačí, pokud je pravidlo opravdu stabilní. Pokud nestačí, neprodlužujte workshop donekonečna. Zapište, která brána neprošla, a otevřete menší kontrolu kontextu. Roční review má chránit běžný rytmus, ne nenápadně nahrazovat produktovou poradu.
+
+### Checklist prvního ročního review
+
+- Má review jednu konkrétní otázku?
+- Kontrolujeme dnešní platnost pravidla, ne celou historii vzniku?
+- Je jasné, jestli pravidlo pořád patří ke stejné pracovní situaci?
+- Najde pravidlo člověk bez starých servisních poznámek?
+- Pomáhá pravidlo udělat rozhodnutí?
+- Nevznikly aktivní kopie s jiným zněním?
+- Nezůstaly staré screenshoty, citace, exporty nebo příklady se zbytečnými detaily?
+- Nezavádíme nové měření jen proto, aby review působilo důkladně?
+- Výsledek review je jeden z jasných stavů?
+- Je zapsané, co se výslovně neotevírá?
+
+První roční review má být nenápadné. Pokud pravidlo drží, nejlepší výsledek je krátké potvrzení, malý úklid a návrat do běžné práce. Stabilní systém se nepozná podle toho, že pořád vyrábí nové kontroly. Pozná se podle toho, že dobrá pravidla zůstávají použitelná i bez neustálého dohledu.
+
 ## Pracovní log
 
 - 2026-06-26: Doplněna úvodní podkapitola o převodu stabilního pravidla do ročního rytmu: ukončení mimořádné péče, roční review bez archeologie, privacy-first omezení průběžného měření, karta, mini workshop a checklist.
@@ -261029,3 +261233,4 @@ Převod do ročního rytmu je malý, ale důležitý konec jedné dlouhé smyčk
 - 2026-06-26: Doplněna úvodní podkapitola o uzavření druhého běžného použití po uzavřeném návratu k neotevřenému kroku: tři uzavírací stavy, praktický příklad, privacy-first ukončení mimořádné datové stopy, karta, mini workshop a checklist.
 - 2026-06-26: Doplněna úvodní podkapitola o uzavření druhého běžného review do stabilního režimu: přepis pravidla do běžného jazyka, odstranění dočasných kontrol, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-26: Doplněna úvodní podkapitola o uzavření druhé servisní kontroly stabilního pravidla: uzavírací věty, úklid kopií, privacy-first mazání dočasných stop, karta, mini workshop a checklist.
+- 2026-06-26: Doplněna úvodní podkapitola o prvním ročním review stabilního pravidla: pět kontrolních průchodů, výsledkové stavy, privacy-first kontrola datové stopy, karta, mini workshop a checklist.
