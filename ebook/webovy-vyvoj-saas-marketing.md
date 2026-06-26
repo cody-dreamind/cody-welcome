@@ -256513,8 +256513,175 @@ Když se workshop zasekne na touze přidat ještě jednu kontrolu, zeptejte se: 
 
 Stabilní klid je dobrý výsledek. Není to méně práce, protože se nic dalšího neotevřelo. Je to lepší práce, protože tým ví, kdy nereagovat, kde reagovat a jak nepřidat data jen pro uklidnění. Když se téma vrátí, vrátí se přes signál. Do té doby má pravidlo dělat to, kvůli čemu vzniklo: pomáhat v běžné práci a nepřekážet.
 
+## První lehký návrat ze stabilního klidu
+
+Stabilní klid neznamená, že se tématu už nikdy nikdo nedotkne. Znamená, že se k němu tým nevrací ze zvyku, ale jen tehdy, když se objeví rozpoznatelný signál. První lehký návrat ze stabilního klidu je proto krátká kontrola, ne nová plná iterace. Má odpovědět na otázku: přišlo něco, co opravdu porušuje klidové pravidlo, nebo jde jen o běžný šum kolem normální práce?
+
+Začněte tím, že otevřete poslední kartu stabilního klidu a doslova přečtete návratový signál. Nepřepisujte ho podle dnešní nálady. Pokud bylo napsáno "tři relevantní poptávky za sebou nepůjdou kvalifikovat ani po použití volitelné otázky", dnešní podnět "jeden obchodník by raději viděl rozpočet rovnou ve formuláři" sám o sobě nestačí. Může to být užitečný názor, ale ještě to není návrat.
+
+První zápis má být krátký:
+
+```text
+Klidové pravidlo je:
+
+Návratový signál byl:
+
+Dnešní podnět je:
+
+Signál se potvrdil:
+- ano
+- částečně
+- ne
+
+Nejmenší další stav:
+- ponechat v klidu
+- udělat lokální kontrolu
+- otevřít malý průchod
+- přerámovat jako nové téma
+```
+
+Tahle šablona schválně nezačíná návrhem řešení. Neptá se "co upravíme". Ptá se "jestli se vůbec máme vracet". To je rozdíl mezi stabilním provozem a týmem, který každou připomínku promění v malou bouři v dokumentaci.
+
+### Čtyři výsledky lehkého návratu
+
+První výsledek je `ponechat v klidu`. Použijte ho, když se podnět nepotkal s návratovým signálem a neukazuje opakovaný dopad. Zapište jednu větu a nechte pravidlo dál fungovat. Nezakládejte k tomu úkol, tabulku ani další kontrolu. Klid se má chránit i tím, že se z každého "možná" nestane pracovní položka.
+
+Druhý výsledek je `lokální kontrola`. Hodí se, když podnět není dost silný na otevření průchodu, ale stojí za rychlé ověření v existujícím pracovním místě. Například se podíváte na poslední dvě běžné situace, jestli člověk pravidlo našel tam, kde mělo být. Lokální kontrola nesmí přidat nový sběr dat. Používá jen stopu, která už vznikla při práci.
+
+Třetí výsledek je `malý průchod`. Ten zvolte, když se návratový signál potvrdil nebo se opakovaně potvrdila jeho důležitá část. Malý průchod má mít jedno pracovní místo, jednu ověřovací větu a jednu hranici mimo rozsah. Nevracejte se automaticky k původnímu širokému návrhu. Stabilní klid se neporušuje proto, aby se starý nápad konečně pomstil.
+
+Čtvrtý výsledek je `nové téma`. Použijte ho, když podnět zní podobně, ale míří jinam. Třeba starý klid řešil rozpočet v poptávce, zatímco dnešní problém je nejasná odpovědnost zákazníka za rozhodnutí. V takovém případě staré pravidlo neotevírejte. Založte novou otázku a starou kartu jen odkažte jako související historii.
+
+### Praktický příklad
+
+```text
+Klidové pravidlo:
+Rozpočet nesbíráme v prvním formuláři. U relevantních poptávek lze použít volitelnou otázku v potvrzovacím e-mailu.
+
+Návratový signál:
+Tři relevantní poptávky za sebou nepůjdou kvalifikovat ani po použití volitelné otázky.
+
+Dnešní podnět:
+U jedné poptávky obchodník musel rozpočet doptat telefonicky, protože zákazník na e-mail neodpověděl.
+
+Výsledek:
+Ponechat v klidu. Signál se nepotvrdil, protože nejde o tři relevantní poptávky za sebou a problém nebyl ve formuláři, ale v neodpovězeném e-mailu.
+
+Co neděláme:
+Nepřidáváme povinné pole, scoring ani nový report neodpovězených e-mailů.
+```
+
+Jiný příklad:
+
+```text
+Dnešní podnět:
+U tří relevantních poptávek za sebou volitelná otázka nepomohla, protože zákazníci nerozuměli, co se myslí rozhodovacím limitem.
+
+Výsledek:
+Otevřít malý průchod.
+
+Nejmenší krok:
+Upravit jednu větu ve volitelné otázce v potvrzovacím e-mailu.
+
+Mimo rozsah:
+Formulář, CRM scoring a export poptávek zůstávají zavřené.
+
+Ověření:
+U dalších tří relevantních poptávek sledujeme jen to, zda nová formulace ušetří jedno ruční dovysvětlení.
+```
+
+Rozdíl mezi příklady je v důkazu. V prvním případě přišel běžný šum. Ve druhém přišel návratový signál, ale pořád nevolá po široké změně. Volá po malé opravě v místě, kde pravidlo opravdu pracuje.
+
+### Privacy-first návrat
+
+První lehký návrat ze stabilního klidu je nebezpečný tím, že se tým může cítit oprávněný znovu otevřít pomocné sledování. "Jen abychom měli jistotu" začne vznikat nový sloupec v tabulce, nový štítek v CRM, nový export nebo ruční seznam případů. To je přesně chvíle, kdy se privacy-first disciplína láme na drobnostech.
+
+Při návratu si napište:
+
+```text
+Pro potvrzení signálu použijeme jen:
+
+Nově nesbíráme:
+
+Dočasnou stopu ukončíme:
+```
+
+Pokud nejde signál potvrdit bez nového sledování, ještě to neznamená, že musíte sledování zavést. Nejdřív se zeptejte, jestli rozhodnutí opravdu potřebuje další data, nebo jestli stačí ponechat pravidlo v klidu a čekat na přirozeně vzniklý důkaz. Evropský privacy-first provoz často vyhrává tím, že má trpělivost na legitimní signál, místo aby si pro každou nejistotu postavil nový sběr.
+
+Codyho komentář: stabilní klid není křehká váza na polici. Nemusíte kolem něj chodit se zatajeným dechem. Jen ho nerozbíjejte pokaždé, když někdo řekne "co kdyby". "Co kdyby" je skvělý začátek hypotézy, ne automatická licence k novému poli ve formuláři.
+
+### Karta lehkého návratu ze stabilního klidu
+
+```text
+Téma:
+
+Klidové pravidlo:
+
+Kanonické pracovní místo:
+
+Původní návratový signál:
+
+Dnešní podnět:
+
+Existující důkaz:
+
+Shoda se signálem:
+- ano
+- částečně
+- ne
+
+Rozhodnutí:
+- ponechat v klidu
+- lokální kontrola
+- malý průchod
+- nové téma
+
+Nejbližší pracovní místo, pokud se něco otevírá:
+
+Co zůstává zavřené:
+
+Privacy-first hranice:
+Pro potvrzení použijeme jen:
+Nově nesbíráme:
+Dočasnou stopu ukončíme:
+
+Vlastník:
+
+Datum návratu, pokud existuje:
+```
+
+Karta má být krátká. Pokud se lehký návrat nevejde na jednu obrazovku, pravděpodobně už neřešíte lehký návrat, ale novou iteraci. To není zakázané, jen to pojmenujte správně a dejte tomu vlastní hranici.
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: přečtěte klidové pravidlo a původní návratový signál.
+2. Minuta 2: pojmenujte dnešní podnět jednou větou.
+3. Minuta 3: najděte existující důkaz z běžné práce.
+4. Minuta 4: rozhodněte, jestli se signál potvrdil, potvrdil částečně, nebo nepotvrdil.
+5. Minuta 5: vyberte jeden ze čtyř výsledků.
+6. Minuta 6: napište, co zůstává zavřené.
+7. Minuta 7: zapište privacy-first hranici a případný návrat.
+
+Když v sedmé minutě nemáte rozhodnutí, výchozí stav je klid. Ne proto, že podnět není důležitý, ale proto, že zatím nemá dost přesný tvar. Můžete ho uložit jako poznámku, ale nedávejte mu právo řídit práci.
+
+### Checklist lehkého návratu
+
+- Našli jsme poslední klidové pravidlo a jeho kanonické místo?
+- Četli jsme původní návratový signál doslova?
+- Popsali jsme dnešní podnět bez navrhování řešení?
+- Máme existující důkaz z běžné práce?
+- Rozlišili jsme plnou shodu, částečnou shodu a falešný návrat?
+- Vybrali jsme jeden výsledek: klid, lokální kontrolu, malý průchod, nebo nové téma?
+- Pokud něco otevíráme, má to jedno nejbližší pracovní místo?
+- Zůstává původní široký návrh zavřený, pokud signál neprošel?
+- Nepřidáváme nový tracker, CRM atribut, export, pomocnou tabulku ani delší retenci jen kvůli nejistotě?
+- Je jasné, kdy se téma znovu vrátí, nebo proč zůstává v klidu?
+
+První lehký návrat ze stabilního klidu má chránit dvě věci současně: citlivost na skutečné signály a odolnost proti šumu. Když signál nepřišel, klid pokračuje. Když přišel, otevře se nejmenší smysluplná práce. V obou případech tým neztrácí kontrolu nad rozsahem ani nad daty.
+
 ## Pracovní log
 
+- 2026-06-26: Doplněna úvodní podkapitola o prvním lehkém návratu ze stabilního klidu: potvrzení návratového signálu, čtyři výsledky návratu, praktické příklady, privacy-first hranice, karta, mini workshop a checklist.
 - 2026-06-25: Doplněna úvodní podkapitola o převodu uzavřeného druhého použití zpět do stabilního klidu: kanonické místo, návratový signál, ukončení mimořádné péče, privacy-first úklid datové stopy, karta, mini workshop a checklist.
 - 2026-06-25: Doplněna úvodní podkapitola o uzavření prvního běžného použití po uzavření návratu k neotevřenému kroku: uzavírací stavy, lokální kotva, zpřesnění rozhodovací věty, ochrana zavřené hranice, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-25: Doplněna úvodní podkapitola o uzavření druhého běžného použití po návratu z klidu: čtyři uzavírací stavy, praktické příklady, propsání do pracovního místa, privacy-first úklid, karta a checklist.
