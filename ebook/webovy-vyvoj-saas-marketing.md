@@ -852,6 +852,171 @@ Pokud během workshopu vznikne nový návrh na úpravu formuláře, scoringu neb
 
 Uzavření prvního běžného použití má přestat držet pravidlo za ruku. Buď stojí samo, nebo potřebuje jednu blízkou opravu. V obou případech platí stejné pravidlo: nevracet široký návrh zadními dveřmi a nenechávat po kontrole zbytečnou datovou stopu.
 
+## Druhé běžné použití po uzavřeném návratu k neotevřenému kroku
+
+Druhé běžné použití má smysl jen tehdy, když první použití něco drobně opravilo nebo když chcete ověřit přenositelnost pravidla mimo čerstvou paměť původního týmu. Nemá to být další kontrolní rituál. Pokud první použití proběhlo samostatně, závěr byl najitelný a široký návrh zůstal zavřený, nechte věc v klidu. Druhé použití plánujte až ve chvíli, kdy je potřeba ověřit, že lokální kotva, zpřesněná věta nebo opravené pracovní místo fungují i bez vysvětlování.
+
+Dobrá vstupní věta zní:
+
+```text
+Druhé běžné použití spouštíme, protože první použití ukázalo tuto lokální slabinu:
+```
+
+Za ni napište přesnou slabinu, ne obecný pocit:
+
+```text
+Druhé běžné použití spouštíme, protože první použití ukázalo, že volitelná otázka na rozpočet nebyla u e-mailové šablony najitelná bez staré rozhodovací karty.
+```
+
+Tím se chrání rozsah. Druhé použití neověřuje znovu celý návrat k neotevřenému kroku. Ověřuje jen to, jestli opravená kotva nebo věta funguje v běžné práci. Pokud během druhého použití začnete řešit, zda má formulář konečně dostat povinné pole, nejste ve druhém použití. Jste zpátky u návratového signálu a potřebujete nový důkaz.
+
+### Co druhé použití ověřuje
+
+Druhé použití má tři úzké otázky:
+
+- Najde člověk opravenou kotvu tam, kde pracuje?
+- Umí podle ní rozhodnout bez znalosti původní debaty?
+- Zůstává původní široký návrh zavřený i při opakovaném použití?
+
+První otázka je o umístění. Pokud jste po prvním použití doplnili větu k e-mailové šabloně, druhé použití ověřuje právě šablonu. Ne obchodní strategii, ne celou kvalifikaci leadů, ne formulář. Jen místo, které bylo slabé.
+
+Druhá otázka je o samostatnosti. Člověk nemá potřebovat vysvětlení, že "tohle vzniklo po návratu k neotevřenému kroku a kdysi jsme se rozhodli...". To je historie. Pracovní věta musí stát sama: kdy ji použít, co udělat a co neotevírat.
+
+Třetí otázka je o hranici. Opakované použití často vytváří falešný pocit, že lokální oprava už prokázala širší potřebu. Neprokázala. Ukázala jen to, že lokální oprava funguje nebo nefunguje. Chcete-li otevřít původní široký návrh, potřebujete nový návratový signál, ne jen druhé použití stejné pomůcky.
+
+Codyho komentář: druhé použití je jako kontrola, jestli nově nalepený štítek opravdu drží na správné krabici. Není to pozvánka k přestavbě skladu. Ano, i v produktové práci se dá ušetřit dost energie tím, že člověk nepředstírá architekturu tam, kde stačí lepší štítek.
+
+### Praktický příklad
+
+Po prvním použití jste doplnili lokální kotvu:
+
+```text
+Ke šabloně potvrzovacího e-mailu přidáváme větu:
+"Volitelnou otázku na rámcový rozpočet posílej jen u relevantních poptávek, kde rozpočet chybí a bez něj nejde navrhnout další krok."
+```
+
+Druhé běžné použití:
+
+```text
+Situace:
+Jiný člověk z obchodu zpracovává relevantní poptávku bez rozpočtu.
+
+Použití:
+Otevře potvrzovací šablonu, najde lokální větu a pošle volitelnou otázku v e-mailu.
+
+Výsledek:
+Nemusí otevírat původní rozhodovací kartu. Nezakládá nový CRM atribut. Formulář zůstává beze změny.
+
+Závěr:
+Lokální kotva funguje. Pravidlo se vrací do běžného rytmu bez další kontroly.
+```
+
+Slabší výsledek:
+
+```text
+Situace:
+Jiný člověk šablonu našel, ale větu pochopil tak, že otázku má posílat každé poptávce.
+
+Výsledek:
+Kotva je najitelná, ale rozhodovací věta je moc široká.
+
+Lokální oprava:
+Větu zpřesníme na "jen u relevantních poptávek, kde bez rozpočtu nejde navrhnout další krok".
+
+Co neotevíráme:
+Povinné pole ve formuláři, scoring ani novou kvalifikační dokumentaci.
+```
+
+V obou variantách zůstává práce malá. Dobré druhé použití buď potvrdí, že lokální oprava stačí, nebo opraví jednu větu. Nevyrobí novou řídicí vrstvu jen proto, že se pravidlo použilo podruhé.
+
+### Privacy-first kontrola druhého použití
+
+Druhé použití je poslední dobré místo, kde zkontrolovat, jestli se z původně dočasné opatrnosti nestal návyk sbírat víc dat. Při opakovaném použití se totiž snadno řekne: když se rozpočet ptáme podruhé, možná bychom ho měli ukládat strukturovaně. Možná ano, ale ne automaticky.
+
+Zeptejte se:
+
+```text
+Pomohlo by strukturované ukládání k rozhodnutí, které teď opravdu děláme?
+
+Nebo stačí, že informace zůstane v běžném obchodním vlákně?
+
+Který údaj by začal žít déle, než potřebujeme?
+```
+
+Pokud odpověď ukazuje jen pohodlí, nepřidávejte nové pole. Pohodlí není nulová cena. Nový atribut znamená definici, oprávnění, retenci, exporty, odpovědnost a budoucí úklid. U evropského privacy-first provozu je často lepší ponechat konkrétní obchodní kontext v původní komunikaci a do pracovního místa propsat jen zobecněné pravidlo.
+
+Příklad privacy-first závěru:
+
+```text
+Druhé použití potvrdilo, že volitelná otázka stačí. Rozpočtový kontext dál necháváme v obchodním vlákně a do CRM nepřidáváme nový povinný atribut. Do checklistu ukládáme jen pravidlo, ne konkrétní zákaznické odpovědi.
+```
+
+### Karta druhého běžného použití
+
+```text
+Uzavřený návrat:
+
+Slabina z prvního použití, kvůli které druhé použití dává smysl:
+
+Opravené pracovní místo:
+
+Druhá běžná situace:
+
+Kdo pravidlo použil:
+
+Našel opravenou kotvu?
+- ano
+- ne
+- jen s pomocí
+
+Šlo podle věty rozhodnout?
+- ano
+- ne, věta je moc široká
+- ne, věta je moc úzká
+
+Co zůstalo zavřené:
+
+Vznikla nová datová stopa?
+
+Privacy-first závěr:
+
+Výsledek druhého použití:
+- vrátit pravidlo do běžného rytmu
+- opravit jednu lokální větu
+- vrátit se k návratovému signálu
+- založit nové téma
+
+Vlastník:
+
+Kde je závěr uložený:
+```
+
+Karta nemá být nová evidence pro každé další použití. Po druhém použití buď pravidlo funguje a vrací se do běžného rytmu, nebo se objevil konkrétní důvod pro další malý krok. Pokud žádný konkrétní důvod nemáte, nezakládejte třetí kontrolu jen proto, že dvě už proběhly. Opakování samo o sobě není strategie.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte slabinu z prvního použití.
+2. Minuta 2: ověřte, jestli opravené pracovní místo člověk našel.
+3. Minuta 3: ověřte, jestli podle věty šlo rozhodnout.
+4. Minuta 4: napište, co z původního širokého návrhu zůstalo zavřené.
+5. Minuta 5: zkontrolujte, zda nevznikl nový údaj, atribut, export nebo pomocná tabulka.
+6. Minuta 6: rozhodněte, jestli se pravidlo vrací do běžného rytmu, nebo potřebuje jednu lokální opravu.
+
+Když se během workshopu objeví chuť "ještě to chvíli sledovat", požádejte o přesnou otázku. Pokud otázka neexistuje, další sledování je jen odložené rozhodnutí. A odložené rozhodnutí má tendenci tvářit se jako proces, protože proces má hezčí kravatu.
+
+### Checklist druhého běžného použití
+
+- Existuje konkrétní slabina z prvního použití, kvůli které druhé použití dává smysl?
+- Ověřujeme jen opravenou kotvu nebo větu, ne celý původní problém?
+- Použil pravidlo někdo bez čerstvého výkladu původního týmu?
+- Bylo jasné, kdy lokální opravu použít?
+- Zůstal původní široký návrh výslovně zavřený?
+- Nevznikl nový CRM atribut, formulářové pole, export, tracker nebo pomocná tabulka bez jasného účelu?
+- Pokud se objevila slabina, je oprava opravdu lokální?
+- Je jasné, zda pravidlo vracíme do běžného rytmu, nebo otevíráme nový návratový signál?
+
+Druhé běžné použití má být poslední lehké ověření, ne začátek nového dozoru. Když pravidlo prošlo, nechte ho pracovat. Když neprošlo, opravte nejbližší větu. A když někdo chce otevřít původní široký návrh, vraťte se k důkazu. Privacy-first provoz se neudrží velkými prohlášeními, ale tím, že i při opakovaném použití umíte říct: tahle data pořád nesbíráme a tenhle rozsah pořád neotevíráme.
+
 ## Kontrola přeneseného kontextu při návratu k tématu
 
 Když se tým vrací k tématu po týdnech nebo měsících, největší riziko často není zapomenutí. Horší je poloviční paměť: všichni si pamatují název problému, ale každý si pod ním nese jiný starý kontext. Jeden člověk pořád řeší původní segment, druhý už myslí na novou nabídku, třetí si pamatuje starou výjimku a čtvrtý má v hlavě poslední incident. Výsledek vypadá jako shoda, ale práce se rozjede do čtyř směrů.
@@ -257755,6 +257920,7 @@ První tichý týden je test dospělosti pracovního pravidla. Neptá se, jestli
 
 ## Pracovní log
 
+- 2026-06-26: Doplněna úvodní podkapitola o druhém běžném použití po uzavřeném návratu k neotevřenému kroku: ověření lokální kotvy nebo rozhodovací věty, ochrana původně zavřeného rozsahu, privacy-first kontrola datové stopy, karta, mini workshop a checklist.
 - 2026-06-26: Doplněna úvodní podkapitola o prvním tichém týdnu po návratu pravidla do běžného rytmu: omezení mimořádné péče, tři sledované signály, privacy-first práce bez nové datové stopy, karta, mini workshop a checklist.
 - 2026-06-26: Doplněna úvodní podkapitola o uzavření druhého běžného použití po uzavřeném prvním ověření: čtyři uzavírací stavy, praktické příklady, privacy-first ukončení pomocných stop, karta, mini workshop a checklist.
 - 2026-06-26: Doplněna úvodní podkapitola o druhém běžném použití po uzavřeném prvním ověření: přenositelnost pravidla, stabilita zavřené hranice, čtyři výsledné stavy, privacy-first ukončení pomocných stop, karta, mini workshop a checklist.
