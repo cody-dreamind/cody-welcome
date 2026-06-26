@@ -260504,8 +260504,206 @@ Když se během workshopu objeví nové téma, zapište ho stranou jednou větou
 
 Uzavření první lehké kontroly je malý, ale důležitý test zralosti. Stabilní systém nepotřebuje po každém použití potlesk ani nový dohled. Potřebuje jasnou větu, uklizené stopy a klidný návrat do práce. Pokud se ukáže větší problém, otevřete ho poctivě jako novou smyčku. Pokud ne, zavřete kontrolu a nechte pravidlo dělat přesně to, kvůli čemu existuje.
 
+## Druhá lehká kontrola po uzavřeném ročním review
+
+Druhá lehká kontrola po ročním review má smysl jen tehdy, když první lehká kontrola něco lokálně opravila, uklidila starou stopu, nebo potvrdila pravidlo v jedné situaci, ale tým chce ověřit, že stejný závěr obstojí i při dalším běžném použití. Nemá to být nový mezistupeň mezi každým použitím pravidla a ročním rytmem. Pokud první lehká kontrola proběhla bez změny a pravidlo se dál používá normálně, druhou kontrolu neplánujte. Klid je výsledek, ne mezera v procesu.
+
+Dobrá vstupní věta zní:
+
+```text
+Druhou lehkou kontrolu děláme pouze proto, že první lehká kontrola ukázala tuto lokální slabinu:
+```
+
+Za ni napište konkrétní slabinu:
+
+```text
+Druhou lehkou kontrolu děláme pouze proto, že první lehká kontrola ukázala tuto lokální slabinu:
+aktivní obchodní checklist neodkazoval na kanonické pravidlo po ročním review.
+```
+
+Tím se chrání rozsah. Druhá kontrola neověřuje celý rok používání, neotevírá obsah pravidla a nezkoumá, jestli by pravidlo nemohlo být chytřejší. Ověřuje jen to, zda opravený odkaz, zpřesněná věta nebo uklizená pomocná stopa opravdu přestala překážet při běžné práci.
+
+### Kdy druhou kontrolu nedělat
+
+Druhou lehkou kontrolu vynechte, pokud:
+
+- první kontrola skončila potvrzením bez změny;
+- pravidlo se od té doby nepoužilo v přirozené pracovní situaci;
+- neexistuje konkrétní lokální slabina k ověření;
+- tým chce kontrolu jen proto, že roční review bylo důležité;
+- kontrola by vyžadovala nové měření, export nebo ukládání zákaznických detailů.
+
+Vynechání druhé kontroly si nemusíte složitě obhajovat. Stačí krátká věta:
+
+```text
+Druhou lehkou kontrolu neplánujeme, protože první použití po ročním review bylo najitelné, rozhodnutelné a bez nové datové stopy.
+```
+
+Tahle věta je často lepší než další karta. V privacy-first provozu je neexistující kontrola někdy nejlepší kontrola: nevytváří pomocné poznámky, nekopíruje data, nezakládá nový rytmus a nepřesvědčuje tým, že stabilní pravidlo potřebuje doprovod.
+
+### Co druhá kontrola ověřuje
+
+Druhá lehká kontrola má tři úzké otázky:
+
+- Funguje lokální oprava z první kontroly i pro další běžné použití?
+- Dá se pravidlo použít bez návratu ke staré review poznámce?
+- Nevzniká z opakovaného použití tlak na nové sledování nebo evidenci?
+
+První otázka je o opravě. Pokud jste doplnili odkaz do checklistu, ověřujte odkaz. Pokud jste zpřesnili jednu větu, ověřujte větu. Pokud jste uklidili starou kopii, ověřujte, že člověk nepracuje ze staré kopie.
+
+Druhá otázka je o samostatnosti. Pravidlo má po ročním review žít v kanonickém pracovním místě, ne ve vzpomínce na to, kdo ho minule vysvětloval. Když člověk potřebuje otevřít starý zápis, aby pochopil dnešní krok, pravidlo ještě není dost provozní.
+
+Třetí otázka je o datové střídmosti. Opakované použití svádí k větě "měli bychom to začít sledovat". Možná jednou ano, ale druhá lehká kontrola k tomu sama o sobě nestačí. Pokud metrika nevede k rozhodnutí, nepřidávejte ji. Měření bez rozhodovací otázky je jen elegantnější forma nepořádku.
+
+### Praktický příklad
+
+První lehká kontrola po ročním review našla slabinu: obchodní checklist odkazoval na starou servisní poznámku místo na kanonické pravidlo. Oprava byla lokální: do checklistu se přidal správný odkaz a stará poznámka se zkrátila na historickou stopu.
+
+Druhá lehká kontrola proběhne až při další relevantní poptávce:
+
+```text
+Slabina z první kontroly:
+Aktivní obchodní checklist odkazoval na starou servisní poznámku.
+
+Druhá pracovní situace:
+Jiný člověk zpracovává nejasnou relevantní poptávku a potřebuje rozhodnout, zda poslat volitelnou otázku na rámcový rozpočet.
+
+Ověření:
+Člověk najde pravidlo přímo v checklistu, použije follow-up větu a nemusí otevírat starou review poznámku.
+
+Datová stopa:
+Nevzniká nové CRM pole, tag, export ani tabulka použití otázky.
+
+Výsledek:
+Lokální oprava najitelnosti funguje. Pravidlo se vrací do ročního rytmu bez další lehké kontroly.
+```
+
+Slabší výsledek:
+
+```text
+Ověření:
+Člověk našel správný odkaz, ale věta v checklistu pořád sváděla k tomu, aby otázku poslal každé poptávce.
+
+Výsledek:
+Odkaz funguje, ale rozhodovací věta je moc široká.
+
+Lokální oprava:
+Větu měníme na: "Volitelnou otázku na rámcový rozpočet posílej jen u relevantní poptávky, kde bez této informace nejde navrhnout další konkrétní krok."
+
+Co neotevíráme:
+Neotevíráme formulář, scoring, nový report ani další lehkou kontrolu automaticky. Další návrat jen při skutečném návratovém signálu.
+```
+
+V obou případech zůstává kontrola malá. Druhá lehká kontrola není záminka k tomu, aby se lokální oprava proměnila v nový standardizační projekt. Pokud stačí jedna věta, použijte jednu větu. Pokud nestačí, otevřete samostatnou smyčku s vlastní otázkou.
+
+### Privacy-first hranice druhé kontroly
+
+Druhá kontrola je riziková tím, že se stejná situace objevuje podruhé. Lidský mozek miluje vzory a někdy je vidí dřív, než existují. Dvě použití pravidla ještě nejsou důvod pro nové pole, měření ani evidenci. Jsou jen dva pracovní okamžiky, ve kterých se ověřilo, jestli pravidlo stojí samo.
+
+Použijte krátký privacy-first zápis:
+
+```text
+Pro druhou kontrolu potřebujeme vědět pouze:
+
+Nepotřebujeme ukládat:
+
+Po uzavření ponecháváme:
+
+Po uzavření mažeme nebo nezakládáme:
+```
+
+Příklad:
+
+```text
+Pro druhou kontrolu potřebujeme vědět pouze:
+zda člověk našel kanonické pravidlo v obchodním checklistu a použil ho bez staré poznámky.
+
+Nepotřebujeme ukládat:
+konkrétní poptávku, zákaznickou odpověď, jméno obchodníka ani screenshot CRM.
+
+Po uzavření ponecháváme:
+zobecněnou větu, že lokální oprava najitelnosti funguje.
+
+Po uzavření mažeme nebo nezakládáme:
+pomocnou tabulku použití, nový tag a kopii zákaznické komunikace.
+```
+
+Tím se z druhé kontroly nestane tichý začátek nového měření. Privacy-first systém se nepozná jen podle toho, že nepoužívá agresivní trackery. Pozná se i podle toho, že dvakrát ověřená pracovní věta automaticky nevyrábí nový datový zvyk.
+
+Codyho komentář: druhá lehká kontrola je poslední klepnutí na opravenou poličku. Pokud drží, přestaňte do ní klepat. Pokud nedrží, opravte šroubek, neobjednávejte nový nábytkový audit. Produktová práce snese překvapivě málo dramatu, když člověk dobře trefí velikost problému.
+
+### Karta druhé lehké kontroly
+
+```text
+Pravidlo:
+
+Roční review, na které kontrola navazuje:
+
+Slabina nebo oprava z první lehké kontroly:
+
+Druhá běžná pracovní situace:
+
+Co přesně ověřujeme:
+
+Našel člověk kanonické místo bez staré poznámky?
+- ano
+- ne
+- jen s pomocí
+
+Šlo podle pravidla rozhodnout?
+- ano
+- ne, věta je moc široká
+- ne, věta je moc úzká
+
+Vznikla nová datová stopa?
+
+Výsledek:
+- oprava funguje, návrat do rytmu
+- doladit jednu lokální větu
+- uklidit zbylou pomocnou stopu
+- otevřít samostatnou smyčku změny kontextu
+
+Co se mění:
+
+Co se výslovně neotevírá:
+
+Co nebudeme měřit, exportovat, kopírovat ani ukládat:
+
+Další rytmus nebo návratový signál:
+
+Vlastník:
+```
+
+Kartu nepoužívejte preventivně. Vyplňte ji jen tehdy, když existovala lokální slabina z první kontroly a pravidlo se znovu přirozeně použilo. Jinak by se z karty stal prázdný formulář čekající na data. A prázdné formuláře jsou magnet na zbytečnou práci. Mají takový ten kancelářský gravitační tah.
+
+### Mini workshop na 5 minut
+
+1. Minuta 1: přečtěte slabinu nebo opravu z první lehké kontroly.
+2. Minuta 2: ověřte, jestli člověk našel kanonické místo bez staré poznámky.
+3. Minuta 3: ověřte, jestli podle pravidla šlo rozhodnout.
+4. Minuta 4: zkontrolujte, že nevznikla nová datová stopa ani tlak na nové měření.
+5. Minuta 5: vyberte výsledek a potvrďte návrat do rytmu, nebo jednu lokální opravu.
+
+Pokud pět minut nestačí, druhá lehká kontrola pravděpodobně narazila na změnu kontextu. V takové chvíli ji ukončete krátkým zápisem a otevřete samostatnou smyčku. Nemíchejte opravu odkazu, změnu publika a nový návrh formuláře do jednoho malého záznamu. Malý záznam takové věci neunese, i kdyby se tvářil statečně.
+
+### Checklist druhé lehké kontroly
+
+- Existuje konkrétní slabina nebo lokální oprava z první lehké kontroly?
+- Proběhla druhá kontrola při přirozeném použití pravidla?
+- Ověřujeme jen opravené místo, ne celé roční review?
+- Našel člověk kanonické pravidlo bez starých servisních poznámek?
+- Šlo podle pravidla udělat konkrétní rozhodnutí?
+- Nevznikla nová evidence použití, export, screenshot, pomocná tabulka ani CRM atribut?
+- Pokud se objevilo další tření, je opravdu lokální?
+- Pokud jde o změnu kontextu, oddělili jsme ji do samostatné smyčky?
+- Je zapsané, co se výslovně neotevírá?
+- Vrací se pravidlo po kontrole do původního rytmu, pokud nepřišel skutečný návratový signál?
+
+Druhá lehká kontrola má ukončit zbytek mimořádné pozornosti po ročním review. Když lokální oprava drží, pravidlo se vrací do běžné práce a další kontrola čeká až na domluvený rytmus nebo návratový signál. Když nedrží, opravte nejbližší větu. A když se ukáže jiný kontext, otevřete ho poctivě jako nové téma. To je celé. Stabilní systém se pozná i podle toho, že umí přestat kontrolovat.
+
 ## Pracovní log
 
+- 2026-06-26: Doplněna úvodní podkapitola o druhé lehké kontrole po uzavřeném ročním review: kdy ji nedělat, ověření lokální opravy, privacy-first hranice, karta, mini workshop a checklist.
 - 2026-06-26: Doplněna úvodní podkapitola o uzavření první lehké kontroly po uzavřeném ročním review: čtyři uzavírací stavy, praktické příklady, privacy-first úklid dočasných stop, karta, mini workshop a checklist.
 - 2026-06-26: Doplněna úvodní podkapitola o první lehké kontrole po uzavřeném ročním review: ověření použitelnosti v reálné práci, tři kontrolní otázky, lokální opravy, privacy-first práce bez nové datové stopy, karta, mini workshop a checklist.
 - 2026-06-26: Doplněna úvodní podkapitola o uzavření prvního ročního review do dalšího roku: uzavírací věta, lokální propsání změn, návrat do ročního rytmu, privacy-first úklid dočasných důkazů, karta, mini workshop a checklist.
