@@ -258897,8 +258897,190 @@ Pokud workshop otevře novou debatu o původním návrhu, zastavte ho. To není 
 
 Uzavření do stabilního režimu je malá, ale důležitá tečka. Bez ní se i správně opravené pravidlo může dál tvářit jako otevřená práce. S ní se vrací tam, kam patří: do běžného provozu, kde pomáhá rozhodovat a nepotřebuje kolem sebe vlastní miniprojekt.
 
+## První servisní kontrola stabilního pravidla
+
+Stabilní režim neznamená, že pravidlo zmizí z radaru navždy. Znamená, že ho už nekontrolujete jako čerstvě opravenou věc. První servisní kontrola stabilního pravidla má proto jiný tón než návrat, pilot nebo druhé review: neptá se "funguje to ještě pod dohledem?", ale "nezačalo pravidlo nenápadně překážet běžné práci?".
+
+Tahle kontrola má být krátká a klidná. Pokud se z ní stane další projekt, pravidlo se ve skutečnosti do stabilního režimu nikdy nedostalo. Servisní kontrola nemá oživovat starou historii, otevírat původně zavřený návrh ani vyrábět nové měření pro jistotu. Má jen jednou za domluvený interval ověřit, že pravidlo pořád plní svůj účel, je najitelné, nevytváří ruční obchůzky a nepřidalo datovou stopu, kterou tým přestal vnímat.
+
+Začněte větou:
+
+```text
+Servisní kontrola ověřuje, zda stabilní pravidlo pořád pomáhá v běžné práci bez mimořádného dohledu, obcházení a nové datové stopy.
+```
+
+Pokud věta svádí k dlouhému vysvětlování, zkraťte rozsah. Kontrolujete jedno pravidlo na jednom pracovním místě. Ne celý proces, ne celý web, ne celou obchodní strategii. Ano, i když by se "při té příležitosti" dalo opravit dalších šest věcí. Při té příležitosti se dá hlavně vyrobit chaos v elegantním kabátě.
+
+### Tři servisní otázky
+
+Servisní kontrola stojí na třech otázkách:
+
+- Používá se pravidlo v situaci, pro kterou vzniklo?
+- Jde pravidlo použít bez obcházek, dovysvětlování a pomocných poznámek?
+- Zůstává datová stopa stejná nebo menší než při uzavření do stabilního režimu?
+
+První otázka chrání smysl. Pravidlo může být dokonale napsané, ale pokud ho nikdo v reálné práci nepotřebuje, má se zjednodušit, přesunout nebo archivovat.
+
+Druhá otázka chrání použitelnost. Pokud lidé pravidlo obcházejí, dopisují si k němu vlastní poznámky nebo se pořád ptají stejného člověka, stabilní režim je jen papírový.
+
+Třetí otázka chrání privacy-first provoz. Největší riziko není vždy nový nástroj. Často je to malá pomocná stopa: tabulka, screenshot, kopie e-mailu, ruční tag, poznámka v CRM nebo export, který vznikl proto, že někdo chtěl "jen rychle vidět, jak často se to děje".
+
+### Praktický příklad
+
+Stabilní pravidlo:
+
+```text
+Volitelnou otázku na rámcový rozpočet lze použít jen tehdy, když bez ní nejde navrhnout další konkrétní krok. Odpověď slouží pro aktuální obchodní rozhovor; nezakládá nový formulářový údaj, CRM atribut ani ruční evidenci.
+```
+
+Servisní kontrola:
+
+```text
+Pracovní místo:
+Obchodní checklist a šablona potvrzovacího e-mailu.
+
+Použití:
+Pravidlo bylo za poslední běžný cyklus použité jen u poptávek, kde bez rozpočtového rámce nešlo navrhnout další krok.
+
+Obchůzky:
+Nevznikla vedlejší tabulka ani ruční poznámka "rozpočty k dohledání".
+
+Datová stopa:
+Odpovědi zůstaly pouze v běžné obchodní komunikaci. Nevznikl nový CRM atribut, export ani screenshoty.
+
+Výsledek:
+Pravidlo ponecháváme beze změny. Další servisní kontrola proběhne v běžném kvartálním review.
+```
+
+Slabší výsledek:
+
+```text
+Obchůzka:
+Obchod si začal do interní poznámky psát, u kterých poptávek se otázka použila, protože nebylo jasné, jestli se to má nějak evidovat.
+
+Rozhodnutí:
+Pomocnou poznámku mažeme po propsání jedné věty do checklistu: "Použití otázky se samostatně neeviduje; pokud se kvalifikace opakovaně zasekne, založ návratový signál."
+```
+
+Tohle není velký incident. Je to přesně ten typ malého nálezu, kvůli kterému servisní kontrola existuje. Nenadávat, neškálovat, neotevírat celé téma. Opravit větu, uklidit stopu a pokračovat.
+
+### Čtyři výsledky servisní kontroly
+
+Servisní kontrola může skončit čtyřmi stavy:
+
+- Beze změny: pravidlo funguje, nikdo ho neobchází a datová stopa se nezvětšila.
+- Lokální servis: jedno pracovní místo potřebuje zpřesnit větu, odkaz nebo umístění.
+- Archivace: pravidlo už se nepoužívá a jeho ponechání spíš mate než pomáhá.
+- Návratový signál: objevila se domluvená situace, která má otevřít novou malou smyčku.
+
+Stav `beze změny` zapisujte krátce. Není potřeba dokazovat klid dlouhým protokolem.
+
+Stav `lokální servis` má zůstat lokální. Pokud stačí jedna věta v checklistu, nepřepisujte šablonu, sales proces a landing page. Váš budoucí já vám za to možná nepošle květiny, ale aspoň nebude muset uklízet.
+
+Stav `archivace` je legitimní. Dobré pravidlo může dosloužit. Pokud pracovní situace zmizela, nabídka se změnila nebo se pravidlo přestalo používat, je férovější ho archivovat než ho držet v dokumentaci jako historickou dekoraci.
+
+Stav `návratový signál` neznamená automatickou obnovu staré debaty. Znamená jen to, že servisní kontrola našla důvod otevřít nový malý průchod s vlastní hranicí.
+
+### Privacy-first servis
+
+Privacy-first servis se ptá hlavně na tiché přírůstky. Projděte pracovní místo a položte si otázku:
+
+```text
+Vzniklo kolem pravidla něco, co uchovává víc informací než stabilní verze pravidla dovolovala?
+```
+
+Hledejte hlavně:
+
+- nové poznámky v CRM,
+- ruční tagy a statusy,
+- dočasné tabulky,
+- sdílené screenshoty,
+- exporty z e-mailu nebo formuláře,
+- kopie zákaznické komunikace v interním chatu,
+- nový report, který nemá rozhodovací otázku.
+
+U každé stopy rozhodněte:
+
+```text
+Stopu mažeme:
+
+Stopu anonymizujeme nebo zobecňujeme:
+
+Stopu ponecháváme, protože:
+
+Retence:
+
+Vlastník:
+```
+
+Pokud neumíte vyplnit důvod ponechání, stopa nemá zůstat. "Pro jistotu" je v privacy-first provozu skoro vždycky jen zdvořilý název pro budoucí úklid.
+
+### Karta servisní kontroly
+
+```text
+Pravidlo:
+
+Pracovní místo:
+
+Interval servisní kontroly:
+
+Servisní otázky:
+Používá se pravidlo ve správné situaci?
+Jde použít bez obcházek?
+Zůstává datová stopa stejná nebo menší?
+
+Výsledek:
+- beze změny
+- lokální servis
+- archivace
+- návratový signál
+
+Co se mění, pokud něco:
+
+Co zůstává výslovně zavřené:
+
+Návratový signál:
+
+Privacy-first servis:
+Nové nebo zbylé pomocné stopy:
+Rozhodnutí o stopách:
+Retence:
+Vlastník:
+
+Další běžný rytmus:
+```
+
+Karta má být lehká. Pokud ji vyplňujete déle než samotnou kontrolu, zřejmě dokumentujete vlastní dokumentaci. To je působivé jen v muzeu procesů, které snad nikdo nikdy nezaloží.
+
+### Mini workshop na 5 minut
+
+1. Minuta 1: otevřete pravidlo a jeho pracovní místo.
+2. Minuta 2: odpovězte na tři servisní otázky.
+3. Minuta 3: zkontrolujte obchůzky a pomocné datové stopy.
+4. Minuta 4: vyberte jeden ze čtyř výsledků.
+5. Minuta 5: zapište lokální opravu, archivaci, návratový signál nebo "beze změny".
+
+Servisní workshop se má vejít do pěti minut právě proto, že pravidlo je stabilní. Pokud to nejde, neprodlužujte workshop. Změňte stav výsledku. Buď pravidlo potřebuje lokální servis, nebo přišel návratový signál.
+
+### Checklist servisní kontroly
+
+- Kontrolujeme jedno stabilní pravidlo na jednom pracovním místě?
+- Je jasné, pro jakou situaci pravidlo pořád platí?
+- Používá se pravidlo bez ústního dovysvětlování?
+- Nevznikly kolem něj obchůzky, ruční poznámky nebo stínová evidence?
+- Zůstává původně zavřený rozsah zavřený?
+- Nepřibyl formulářový údaj, CRM atribut, export, screenshot, interní kopie zprávy ani nový report?
+- Má každá ponechaná stopa účel, retenci a vlastníka?
+- Je výsledek kontroly jedním ze čtyř stavů?
+- Pokud jde o lokální servis, je opravdu omezený na jedno pracovní místo?
+- Pokud pravidlo dosloužilo, je bezpečně archivované a neplete se lidem do běžné práce?
+- Pokud přišel návratový signál, vzniká nová malá smyčka místo návratu celé staré debaty?
+
+První servisní kontrola stabilního pravidla je údržba bez divadla. Má potvrdit, že pravidlo pořád pomáhá, nebo ho lehce opravit, uklidit či archivovat. Nejlepší výsledek často zní nudně: beze změny, žádná nová data, další kontrola v běžném rytmu. Nuda je v provozu podceňovaná ctnost.
+
 ## Pracovní log
 
+- 2026-06-26: Doplněna úvodní podkapitola o první servisní kontrole stabilního pravidla: tři servisní otázky, čtyři výsledky, praktický příklad, privacy-first úklid tichých datových stop, karta, mini workshop a checklist.
 - 2026-06-26: Doplněna úvodní podkapitola o druhém běžném review v dlouhodobém klidu: test pravidla bez čerstvé paměti, ochrana zavřeného rozsahu, privacy-first úklid pomocných stop, karta, mini workshop a checklist.
 - 2026-06-26: Doplněna úvodní podkapitola o uzavření prvního běžného review do dlouhodobého klidu: tři uzavírací stavy, praktické příklady, privacy-first úklid pomocných stop, karta, mini workshop a checklist.
 - 2026-06-26: Doplněna úvodní podkapitola o prvním běžném review po uzavřeném tichém týdnu: kontrola pracovního místa, návratového signálu a nenápadných datových stop, tři výsledky review, praktický příklad, privacy-first úklid, karta, mini workshop a checklist.
