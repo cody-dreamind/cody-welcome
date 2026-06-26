@@ -257045,8 +257045,170 @@ Když workshop narazí na větší problém, neřešte ho celý. Zapište, že p
 
 První běžné ověření má jednoduchý ideál: pravidlo se použije, rozhodnutí proběhne a nic nového se nenabalí. Když se ukáže malé tření, opraví se v nejbližším pracovním místě. Když se ukáže skutečný návratový signál, otevře se malá iterace. Všechno ostatní je jen šum, který si nezaslouží vlastní systém.
 
+## Uzavření prvního běžného ověření po uzavřeném lehkém návratu
+
+První běžné ověření po lehkém návratu má smysl jen tehdy, když ho umíte zavřít. Jinak z něj vznikne další měkká kontrola: pravidlo se jednou použilo, někdo k tomu něco poznamenal, ale nikdo neřekl, jestli se má vrátit do klidu, lokálně dočistit, nebo znovu otevřít. A přesně tak se z malého ověření stane trvalá pozornost, která se tváří jako odpovědnost, ale ve skutečnosti jen nechává věci pootevřené.
+
+Uzavření začněte jednou větou:
+
+```text
+První běžné ověření po uzavřeném lehkém návratu uzavíráme stavem:
+```
+
+Za ni napište jeden ze čtyř stavů:
+
+- Vrátit do klidu: pravidlo bylo najitelné, rozhodnutelné a nepřidalo novou datovou stopu.
+- Dočistit jedno pracovní místo: pravidlo platí, ale chyběl odkaz, věta, pojmenování nebo drobná kotva tam, kde se opravdu pracovalo.
+- Otevřít malou opravu hrany: pravidlo šlo použít, ale rozhodovací hranice byla slabá a může znovu vyrobit stejný dotaz.
+- Založit nový návratový signál: ověření ukázalo problém, který už není jen dozvuk lehkého návratu.
+
+Stav `vrátit do klidu` je nejlepší výsledek a zároveň ten, který týmy často neumí přijmout. Když věc funguje, není potřeba přidávat další sledování, další review ani další tabulku. Zapište, že ověření prošlo, potvrďte návratový signál pro budoucí otevření a zavřete mimořádnou pozornost. Klid není zanedbání. Klid je výsledek dobré hranice.
+
+Stav `dočistit jedno pracovní místo` použijte, když problém nevznikl v pravidle, ale v jeho dostupnosti. Typicky někdo nevěděl, kde najít šablonu, jak se jmenuje kanonická poznámka, nebo která věta se má použít v e-mailu. Oprava má být nudně konkrétní: doplnit větu do šablony, přidat odkaz do checklistu, přejmenovat položku tak, aby odpovídala běžné řeči týmu. Nezakládejte nové školení kvůli chybějícímu odkazu. To by bylo elegantní asi jako hasit svíčku požární cisternou.
+
+Stav `otevřít malou opravu hrany` patří situacím, kdy pravidlo bylo k nalezení, ale člověk pořád nevěděl, jestli ho použít. Například věta říká "u relevantní poptávky použijte volitelnou otázku", ale tým nemá jasné, co v tomto pracovním místě znamená relevantní. To už není jen kotva. To je slabá rozhodovací hrana. Opravte hranu, ne celý proces.
+
+Stav `založit nový návratový signál` je pro případy, kdy běžné ověření ukáže něco většího: jiný segment, změněnou nabídku, opakované selhání pravidla nebo dopad, který původní lehký návrat neřešil. V takové chvíli starou věc nezvětšujte. Zavřete ověření a založte novou malou otázku. Tím udržíte historii čitelnou: lehký návrat byl uzavřený, běžné ověření něco odhalilo, nová práce má vlastní důvod.
+
+### Praktický příklad
+
+```text
+Uzavřený lehký návrat:
+Po jednom dotazu v obchodním týmu jsme doplnili do potvrzovacího e-mailu volitelnou větu na upřesnění rozhodovacího limitu. Formulář, scoring a export zůstaly zavřené.
+
+První běžné ověření:
+Obchodník větu použil u relevantní poptávky bez rozpočtu. Rozhodnutí šlo udělat, zákazník odpověděl v běžném e-mailovém vlákně a nevznikl nový CRM atribut.
+
+Uzavírací stav:
+Vrátit do klidu.
+
+Co potvrzujeme:
+Volitelná věta stačí jako lokální obchodní pomůcka.
+
+Co zůstává zavřené:
+Povinné pole pro rozpočet, lead scoring, pomocná tabulka a nový export.
+
+Návratový signál:
+K tématu se vrátíme jen pokud tři relevantní poptávky za sebou nepůjdou kvalifikovat ani po použití volitelné věty.
+
+Privacy-first úklid:
+Nepřepisujeme rozpočet do nového atributu. Kontext zůstává pouze v běžné obchodní komunikaci.
+```
+
+Slabší varianta se zavírá jinak:
+
+```text
+První běžné ověření:
+Člověk pravidlo našel, ale nevěděl, jestli se volitelná věta používá u každé poptávky, nebo jen u poptávek, kde bez rozpočtu nejde navrhnout další krok.
+
+Uzavírací stav:
+Otevřít malou opravu hrany.
+
+Malá oprava:
+Rozhodovací větu měníme na: "Volitelnou otázku na rámcový rozpočet použij jen u relevantní poptávky, kde bez této informace nejde navrhnout další konkrétní krok."
+
+Co neotevíráme:
+Formulář, povinné pole, scoring, automatické tagování ani samostatný report.
+```
+
+Tady ověření neříká, že původní široký návrh měl pravdu. Říká jen, že lokální věta byla moc měkká. To je rozdíl, který stojí za hlídání. Slabá věta se opravuje lepší větou, ne větším systémem.
+
+### Privacy-first uzavření
+
+Při uzavření zkontrolujte, jestli ověření nevytvořilo sledovací ocas. Sledovací ocas je malá datová stopa, kterou tým založí pro kontrolu a potom ji zapomene ukončit. Může to být tabulka "jen na pár poptávek", ruční štítek, kopie zákaznické odpovědi v poznámce, screenshot e-mailu nebo nový sloupec v CRM.
+
+Použijte tři řádky:
+
+```text
+Ověření potřebovalo tyto dočasné stopy:
+
+Po uzavření ponecháváme jen:
+
+Po uzavření mažeme, nepřenášíme nebo přestáváme sbírat:
+```
+
+Příklad:
+
+```text
+Ověření potřebovalo tyto dočasné stopy:
+Poznámku, zda volitelná věta pomohla kvalifikovat jednu poptávku.
+
+Po uzavření ponecháváme jen:
+Zobecněný závěr u obchodního checklistu.
+
+Po uzavření mažeme, nepřenášíme nebo přestáváme sbírat:
+Konkrétní pracovní poznámku s částkou, pomocný seznam poptávek a ruční značku "ověření rozpočtu".
+```
+
+Privacy-first uzavření není jen právní opatrnost. Je to provozní úleva. Čím méně pomocných stop tým nechá za sebou, tím méně musí později vysvětlovat, migrovat, čistit nebo bránit před vlastním zvykem všechno skladovat.
+
+### Karta uzavření prvního běžného ověření
+
+```text
+Uzavřený lehký návrat:
+
+První běžné ověření:
+
+Co se opravdu stalo:
+
+Uzavírací stav:
+- vrátit do klidu
+- dočistit jedno pracovní místo
+- otevřít malou opravu hrany
+- založit nový návratový signál
+
+Co potvrzujeme:
+
+Co lokálně dočišťujeme, pokud něco:
+
+Co zůstává výslovně zavřené:
+
+Návratový signál pro další otevření:
+
+Privacy-first uzavření:
+Ověření potřebovalo tyto dočasné stopy:
+Po uzavření ponecháváme jen:
+Po uzavření mažeme, nepřenášíme nebo přestáváme sbírat:
+
+Kde je závěr uložený:
+
+Vlastník:
+
+Datum:
+```
+
+Karta má pomoci zavřít ověření, ne založit novou administrativní disciplínu. Pokud se po jejím vyplnění objeví další nápad, zapište ho jako podnět zvlášť a pusťte ho přes návratový signál. Do uzavření nepatří všechno, co tým napadne u stolu.
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: přečtěte uzavřený lehký návrat a první běžné ověření.
+2. Minuta 2: napište, co se opravdu stalo.
+3. Minuta 3: vyberte jeden uzavírací stav.
+4. Minuta 4: potvrďte, co zůstává zavřené.
+5. Minuta 5: rozhodněte, jestli se dočišťuje pracovní místo, rozhodovací hrana, nebo nic.
+6. Minuta 6: ukončete dočasné datové stopy.
+7. Minuta 7: zapište návratový signál a místo, kde závěr žije.
+
+Když se tým během workshopu snaží rovnou navrhnout větší změnu, vraťte ho k uzavíracímu stavu. Pokud je stav "založit nový návratový signál", větší změna může dostat vlastní malou iteraci. Pokud stav není potvrzený, větší změna je jen předbíhání.
+
+### Checklist uzavření prvního běžného ověření
+
+- Máme konkrétní výsledek prvního běžného ověření?
+- Vybrali jsme přesně jeden uzavírací stav?
+- Pokud pravidlo fungovalo, vracíme ho opravdu do klidu?
+- Pokud chyběla kotva, opravujeme jen nejbližší pracovní místo?
+- Pokud byla slabá rozhodovací hrana, opravujeme větu nebo pravidlo, ne celý proces?
+- Pokud vznikl nový návratový signál, zakládáme ho jako samostatnou malou otázku?
+- Je výslovně napsané, co zůstává zavřené?
+- Nepřidali jsme po ověření nový formulářový údaj, CRM atribut, tracker, export ani pomocnou tabulku?
+- Ukončili jsme dočasné poznámky a pomocné stopy?
+- Ví další člověk, kde závěr najde a kdy se téma smí znovu otevřít?
+
+Uzavření prvního běžného ověření je malá tečka za lehkým návratem. Když ji uděláte dobře, pravidlo se buď vrátí do klidu, nebo dostane jednu přesnou opravu. Hlavní je nenechat po sobě polostav: něco jsme zkontrolovali, něco jsme zahlédli a teď to bude někde viset. Polostavy jsou provozní dluh s lepším PR. Zavřené ověření je čistší, levnější a výrazně méně otravné.
+
 ## Pracovní log
 
+- 2026-06-26: Doplněna úvodní podkapitola o uzavření prvního běžného ověření po uzavřeném lehkém návratu: čtyři uzavírací stavy, praktické příklady, privacy-first úklid sledovacího ocasu, karta, mini workshop a checklist.
 - 2026-06-26: Doplněna úvodní podkapitola o prvním běžném ověření po uzavřeném lehkém návratu: najitelnost pravidla, rozhodnutelnost, čtyři výsledky ověření, privacy-first kontrola bez sledovacího ocasu, karta, mini workshop a checklist.
 - 2026-06-26: Doplněna úvodní podkapitola o uzavření lehkého návratu ze stabilního klidu: čtyři způsoby uzavření, propsání do pracovního místa, privacy-first úklid dočasných stop, karta, mini workshop a checklist.
 - 2026-06-26: Doplněna úvodní podkapitola o prvním lehkém návratu ze stabilního klidu: potvrzení návratového signálu, čtyři výsledky návratu, praktické příklady, privacy-first hranice, karta, mini workshop a checklist.
