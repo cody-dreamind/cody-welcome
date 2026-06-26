@@ -258423,8 +258423,156 @@ Pokud workshop začne řešit původní návrh v plné šířce, zastavte ho. Pr
 
 První běžné review je poslední zkouška návratu do normálního provozu. Když dopadne dobře, není co oslavovat novou procedurou. Stačí nechat pravidlo v místě, kde pomáhá, uklidit případné stopy a vrátit pozornost k práci, která má dnešní důvod.
 
+## Uzavření prvního běžného review do dlouhodobého klidu
+
+První běžné review po tichém týdnu má po sobě nechat jasný stav. Pokud review jen proběhne a někdo si v hlavě řekne "vypadá to v pořádku", pravidlo sice formálně žije v běžném rytmu, ale pořád kolem něj může zůstat neviditelná mimořádná péče. Někdo ho bude dál sledovat bokem, někdo bude držet pomocnou tabulku "ještě pro jistotu" a někdo při dalším review znovu otevře stejnou historii.
+
+Uzavření review má proto jednoduchý cíl: převést výsledek do dlouhodobého klidu, nebo jasně říct, proč klid zatím nenastal. Dlouhodobý klid neznamená, že pravidlo je navždy pravda. Znamená, že se znovu otevře jen při běžném review, návratovém signálu nebo konkrétní změně kontextu.
+
+Začněte větou:
+
+```text
+První běžné review uzavíráme takto:
+```
+
+Za ni napište jeden ze tří stavů:
+
+- Dlouhodobý klid: pravidlo je na správném místě, návratový signál nenastal a nevznikla nová datová stopa.
+- Klid po lokální údržbě: pravidlo funguje, ale před klidem bylo potřeba opravit jedno pracovní místo.
+- Bez klidu: review ukázalo návratový signál nebo novou stopu, která potřebuje samostatné rozhodnutí.
+
+Stav `dlouhodobý klid` má být krátký. Nepřidávejte k němu další kontrolu jen proto, že je příjemné vidět věc pod dohledem. Stačí zapsat, kde pravidlo žije, jaký návratový signál ho znovu otevře a co se už dál zvlášť nesleduje.
+
+Stav `klid po lokální údržbě` použijte tehdy, když review našlo drobnou chybu v umístění nebo formulaci. Po opravě ale nesmí zůstat otevřená další péče. Když upravíte jednu větu v checklistu, zapište, že pravidlo se po této opravě vrací do běžného rytmu. Jinak se z lokální údržby stane nový polostav.
+
+Stav `bez klidu` je pro situace, kdy review opravdu otevřelo novou práci. Třeba se návratový signál naplnil, nebo vznikla datová stopa, kterou nelze jen smazat, protože tým ji začal používat k rozhodování. V takovém případě review neprodlužujte. Založte samostatnou malou smyčku a napište, co z původního rozsahu zůstává zavřené.
+
+### Praktický příklad
+
+```text
+Pravidlo:
+U relevantní poptávky lze poslat volitelnou otázku na rámcový rozpočet v potvrzovacím e-mailu. Formulář, scoring a CRM atribut zůstávají zavřené.
+
+Výsledek prvního běžného review:
+Pravidlo je u šablony, návratový signál nenastal a nevznikla žádná pomocná evidence.
+
+První běžné review uzavíráme stavem:
+Dlouhodobý klid.
+
+Co zůstává v běžném rytmu:
+Kontrola potvrzovací šablony při měsíčním obchodním review.
+
+Co dál zvlášť nesledujeme:
+Jednotlivá použití volitelné otázky, pokud se neobjeví návratový signál.
+
+Návratový signál:
+Tři relevantní poptávky za sebou nepůjdou kvalifikovat ani po použití volitelné otázky.
+```
+
+Lokální údržba může vypadat takto:
+
+```text
+Výsledek review:
+Pravidlo funguje, ale v checklistu byla stará formulace "zeptejte se na rozpočet".
+
+Oprava:
+Větu měníme na "volitelnou otázku na rámcový rozpočet použij jen tehdy, když bez ní nejde navrhnout další konkrétní krok".
+
+Uzavření:
+Klid po lokální údržbě. Neotevíráme formulář, scoring ani CRM atribut.
+```
+
+V obou příkladech se review zavře. Buď bez opravy, nebo po jedné opravě. To je podstatné: běžné review nemá samo vytvořit novou vrstvu provozu.
+
+### Privacy-first uzavření
+
+Před dlouhodobým klidem zkontrolujte, jestli po prvním běžném review nezůstala pomocná data. Typicky jde o pracovní poznámky, screenshoty, ruční seznamy použití, exporty z CRM, staré kopie šablon nebo chatové komentáře s konkrétními zákaznickými detaily.
+
+Použijte tři řádky:
+
+```text
+Ponecháváme:
+
+Mažeme nebo anonymizujeme:
+
+Dál nesbíráme:
+```
+
+Příklad:
+
+```text
+Ponecháváme:
+Jednu větu, že pravidlo prošlo prvním běžným review bez návratového signálu.
+
+Mažeme nebo anonymizujeme:
+Dočasné poznámky z kontroly šablony.
+
+Dál nesbíráme:
+Ruční seznam použití otázky, rozpočtový atribut v CRM ani export odpovědí.
+```
+
+Tento zápis je malý, ale brání tomu, aby review po sobě nechalo neplánovanou datovou stopu. Privacy-first klid znamená, že pravidlo už nepotřebuje vlastní stínovou evidenci.
+
+### Karta uzavření prvního běžného review
+
+```text
+Pravidlo:
+
+Pracovní místo:
+
+Výsledek prvního běžného review:
+
+Uzavírací stav:
+- dlouhodobý klid
+- klid po lokální údržbě
+- bez klidu, otevíráme samostatnou smyčku
+
+Lokální oprava, pokud proběhla:
+
+Co zůstává v běžném rytmu:
+
+Co dál zvlášť nesledujeme:
+
+Co výslovně neotevíráme:
+
+Privacy-first uzavření:
+Ponecháváme:
+Mažeme nebo anonymizujeme:
+Dál nesbíráme:
+
+Návratový signál:
+
+Vlastník:
+```
+
+### Mini workshop na 5 minut
+
+1. Minuta 1: přečtěte výsledek prvního běžného review.
+2. Minuta 2: vyberte jeden ze tří uzavíracích stavů.
+3. Minuta 3: napište, co zůstává v běžném rytmu a co se zvlášť nesleduje.
+4. Minuta 4: ukliďte pomocná data nebo napište, proč vzniká samostatné rozhodnutí.
+5. Minuta 5: potvrďte návratový signál a vlastníka.
+
+Když se během pěti minut začne řešit původní návrh, zastavte se. Uzavíráte review, ne starou debatu. Pokud je stará debata opravdu zpátky, musí přijít přes návratový signál a vlastní malou smyčku.
+
+### Checklist uzavření review
+
+- Má review jeden uzavírací stav?
+- Je jasné, zda pravidlo přechází do dlouhodobého klidu?
+- Pokud proběhla lokální údržba, je opravdu u jednoho pracovního místa?
+- Je napsané, co dál zvlášť nesledujeme?
+- Zůstává původní širší rozsah zavřený?
+- Pokud klid nenastal, vznikla samostatná malá smyčka s vlastní hranicí?
+- Jsou pomocné poznámky, exporty, screenshoty nebo staré kopie šablon smazané či anonymizované?
+- Nevznikl nový CRM atribut, tracker, ruční seznam nebo delší retence bez samostatného rozhodnutí?
+- Má pravidlo konkrétní návratový signál?
+- Ví vlastník, kdy pravidlo znovu otevřít a kdy ho nechat být?
+
+Uzavření prvního běžného review je poslední dveřní rám mezi mimořádnou péčí a normálním provozem. Když jím pravidlo projde, přestaňte kolem něj stavět zábradlí. Nechte ho žít tam, kde pomáhá, a vraťte se až ve chvíli, kdy přijde skutečný důvod.
+
 ## Pracovní log
 
+- 2026-06-26: Doplněna úvodní podkapitola o uzavření prvního běžného review do dlouhodobého klidu: tři uzavírací stavy, praktické příklady, privacy-first úklid pomocných stop, karta, mini workshop a checklist.
 - 2026-06-26: Doplněna úvodní podkapitola o prvním běžném review po uzavřeném tichém týdnu: kontrola pracovního místa, návratového signálu a nenápadných datových stop, tři výsledky review, praktický příklad, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-26: Doplněna úvodní podkapitola o uzavření prvního tichého týdne po návratu pravidla do běžného rytmu: čtyři uzavírací stavy, praktický příklad, úklid dočasných stop, privacy-first zobecnění záznamů, karta, mini workshop a checklist.
 - 2026-06-26: Doplněna úvodní podkapitola o druhém běžném použití po uzavřeném návratu k neotevřenému kroku: ověření lokální kotvy nebo rozhodovací věty, ochrana původně zavřeného rozsahu, privacy-first kontrola datové stopy, karta, mini workshop a checklist.
