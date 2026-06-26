@@ -256851,8 +256851,203 @@ Pokud během workshopu vyjde najevo, že lehký návrat ještě není uzavřený
 
 Uzavřený lehký návrat má skončit klidem, ne novou vrstvou opatrnosti. Buď pravidlo dál funguje, nebo se lokálně zpřesnilo, nebo se otevřela samostatná otázka. Ve všech případech musí být vidět hranice práce a konec dočasné datové stopy.
 
+## První běžné ověření po uzavřeném lehkém návratu
+
+Uzavřený lehký návrat se má poprvé ověřit v normální práci, ne na zvláštní schůzce. Cílem není znovu dokazovat, že tým udělal správné rozhodnutí. Cílem je zjistit, jestli uzavření opravdu drží bez čerstvé paměti lidí, kteří ho právě zapisovali. Pokud pravidlo funguje jen tehdy, když ho někdo vysvětluje bokem, není ještě stabilní. Je jen dobře zamaskované.
+
+První běžné ověření proto začíná v okamžiku, kdy se objeví další přirozená situace, pro kterou pravidlo existuje: nová poptávka, úprava šablony, rozhodnutí o formuláři, interní review nebo dotaz od kolegy. Nepřipravujte speciální testovací scénář. Speciální scénáře často ověřují ochotu týmu pomoct pravidlu, ne jeho skutečnou použitelnost.
+
+Zapište si krátce:
+
+```text
+Uzavřené pravidlo je:
+
+Běžná situace, ve které se použilo:
+
+Člověk našel pravidlo bez pomoci:
+- ano
+- s drobnou nápovědou
+- ne
+
+Rozhodnutí podle pravidla šlo udělat:
+- ano
+- částečně
+- ne
+
+Co zůstalo zavřené:
+
+Vznikla nová datová stopa:
+- ne
+- ano, a má tento konec:
+```
+
+Tento zápis má být obyčejný. Nehledejte v něm dokonalou metodiku. Stačí, aby za měsíc bylo poznat, jestli se pravidlo použilo samo, nebo jestli ho tým při prvním skutečném kontaktu znovu nesl na rukou jako porcelánovou sošku.
+
+### Co první ověření sleduje
+
+První věc je najitelnost. Člověk má vědět, kde pravidlo žije: v šabloně e-mailu, v obchodním checklistu, v rozhodovací kartě, v interní znalostní bázi nebo v kanonickém indexu. Pokud se musí ptát "kde jsme to nakonec uzavřeli", problém není nutně v pravidle. Problém může být v tom, že závěr nebyl propsaný do pracovního místa, kde ho lidé opravdu potřebují.
+
+Druhá věc je rozhodnutelnost. Pravidlo nemá být hezká poznámka, ale pomůcka k rozhodnutí. Když člověk podle něj pořád neví, jestli má ponechat věc v klidu, udělat lokální kontrolu, otevřít malý průchod nebo založit nové téma, je potřeba zpřesnit rozhodovací hranu. Ne celou historii. Jen hranu, na které se člověk zasekl.
+
+Třetí věc je odolnost zavřené hranice. Po lehkém návratu často zůstává ve vzduchu pokušení říct: "když už jsme to otevřeli, mohli bychom rovnou..." První běžné ověření má ukázat, jestli tým opravdu respektuje, co zůstalo zavřené. Pokud se při prvním použití znovu objeví povinné pole, nový report nebo další export, pravidlo sice existuje, ale hranice není dost viditelná.
+
+Čtvrtá věc je datová střídmost. Ověření nemá vytvářet novou pomocnou evidenci jen proto, že se kontroluje předchozí rozhodnutí. Použijte přirozené stopy z práce: existující tiket, běžnou obchodní poznámku, již uloženou kartu rozhodnutí nebo fakt, že člověk pravidlo našel a použil. Pokud kvůli ověření vznikne nová tabulka, nová značka v CRM nebo nový export, napište hned, kdy skončí. Jinak se z kontroly stane nenápadný nový systém.
+
+### Praktický příklad
+
+Uzavření lehkého návratu:
+
+```text
+Pravidlo:
+Rozpočet nesbíráme v prvním formuláři. U relevantních poptávek používáme volitelnou otázku v potvrzovacím e-mailu.
+
+Co zůstává zavřené:
+Povinné pole pro rozpočet, lead scoring a export neodpovězených e-mailů.
+
+Návratový signál:
+Tři relevantní poptávky za sebou nepůjdou kvalifikovat ani po nové formulaci volitelné otázky.
+```
+
+První běžná situace:
+
+```text
+Přišla nová relevantní poptávka bez rozpočtu.
+
+Obchodník našel pravidlo:
+Ano, v šabloně potvrzovacího e-mailu.
+
+Rozhodnutí podle pravidla:
+Použil volitelnou otázku a nepřidával pole do formuláře.
+
+Co zůstalo zavřené:
+Formulář, scoring i export.
+
+Vznikla nová datová stopa:
+Ne. Zůstala jen běžná obchodní poznámka u poptávky.
+```
+
+Výsledek je `ověření prošlo`. Není potřeba další schůzka ani nová kontrola. Pravidlo se chovalo jako součást práce.
+
+Jiný průchod může dopadnout hůř:
+
+```text
+Obchodník pravidlo nenašel a zeptal se v chatu, jestli už máme rozpočet sbírat ve formuláři.
+
+Rozhodnutí podle pravidla:
+Po nápovědě použil správnou volitelnou otázku.
+
+Problém:
+Pravidlo bylo jen v kartě uzavření, ne v aktuální šabloně poptávkového procesu.
+
+Nejmenší oprava:
+Doplnit odkaz na pravidlo přímo k potvrzovacímu e-mailu.
+
+Co zůstává zavřené:
+Neměníme formulář, CRM ani měření.
+```
+
+Tady nejde o návrat celého tématu. Jde o lokální opravu najitelnosti. Dobré první ověření umí takový rozdíl uhlídat: neskrývá tření, ale ani z něj nedělá nový projekt.
+
+### Čtyři výsledky prvního běžného ověření
+
+První výsledek je `prošlo bez zásahu`. Pravidlo se našlo, rozhodnutí šlo udělat a zavřená hranice držela. Zapište jednu větu a vraťte pravidlo do běžného rytmu. Nepřidávejte další kontrolu jen proto, že první použití dopadlo dobře.
+
+Druhý výsledek je `lokálně dočistit`. Použijte ho, když se člověk zasekl na najitelnosti, formulaci nebo odkazu, ale samotné pravidlo bylo správné. Opravte jedno pracovní místo. Typicky doplníte odkaz, zpřesníte název checklistu nebo přesunete závěr z karty do šablony, kterou lidé skutečně používají.
+
+Třetí výsledek je `slabá rozhodovací hrana`. Hodí se, když člověk pravidlo našel, ale neuměl podle něj vybrat další krok. V takovém případě nepřepisujte celou podkapitolu. Doplňte jednu rozlišovací větu: kdy je podnět běžný šum, kdy lokální kontrola a kdy skutečný návratový signál.
+
+Čtvrtý výsledek je `nový návratový signál`. Ten nastává, když běžná situace opravdu naplnila podmínku návratu nebo ukázala změnu kontextu, která staré pravidlo oslabuje. Teprve tehdy otevřete novou malou iteraci. I pak platí: nejdřív jedno pracovní místo, jedna otázka a jedna zavřená hranice.
+
+### Privacy-first ověření bez sledovacího ocasu
+
+První běžné ověření svádí k tomu, aby si tým "pro jistotu" založil evidenci dalších případů. Jenže tím se snadno z dočasné opatrnosti stane nový provozní zvyk. Privacy-first přístup tady znamená: ověřit pravidlo na stopě, která už přirozeně vzniká, a nepřidávat měření, pokud nemá jasné rozhodnutí, vlastníka a konec.
+
+Před zápisem si položte tři otázky:
+
+```text
+Potřebujeme pro toto ověření nová data, nebo stačí běžná pracovní stopa?
+
+Pokud nová data vznikla, kdo je smaže nebo archivuje podle běžné retence?
+
+Nevznikl z ověření nový report, štítek, export nebo ruční seznam bez jasného konce?
+```
+
+Codyho komentář: "jen si to pár týdnů pohlídáme" je jedna z nejdražších vět v provozu. Zní rozumně, ale často znamená "vyrobíme další tabulku, na kterou si nikdo nevzpomene, dokud nebude překážet". Pokud má kontrola konec, napište ho hned. Pokud konec nemá, nejspíš to není kontrola.
+
+### Karta prvního běžného ověření
+
+```text
+Téma:
+
+Uzavřené pravidlo:
+
+Kanonické pracovní místo:
+
+Běžná situace použití:
+
+Kdo pravidlo použil:
+
+Najitelnost:
+- našel bez pomoci
+- našel s drobnou nápovědou
+- nenašel
+
+Rozhodnutelnost:
+- rozhodnutí šlo udělat
+- bylo potřeba zpřesnit hranu
+- pravidlo nestačilo
+
+Co zůstalo zavřené:
+
+Výsledek ověření:
+- prošlo bez zásahu
+- lokálně dočistit
+- slabá rozhodovací hrana
+- nový návratový signál
+
+Nejmenší další krok, pokud existuje:
+
+Privacy-first záznam:
+Použili jsme jen běžnou pracovní stopu:
+Nově vzniklá pomocná data:
+Konec pomocné stopy:
+
+Vlastník:
+
+Datum:
+```
+
+Karta je užitečná jen tehdy, když vede k malému rozhodnutí. Pokud vyplněná karta končí pěti úkoly, vraťte se k výsledku ověření a vyberte jeden nejmenší další krok. První běžné ověření nemá být generátor backlogu. Má říct, jestli uzavření opravdu přešlo do práce.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: pojmenujte běžnou situaci, ve které se pravidlo použilo.
+2. Minuta 2: ověřte, jestli člověk našel kanonické pracovní místo.
+3. Minuta 3: napište, jestli podle pravidla šlo udělat rozhodnutí.
+4. Minuta 4: zkontrolujte, co zůstalo zavřené.
+5. Minuta 5: vyberte jeden ze čtyř výsledků ověření.
+6. Minuta 6: zavřete nebo pojmenujte datovou stopu ověření.
+
+Když workshop narazí na větší problém, neřešte ho celý. Zapište, že první běžné ověření odhalilo nový návratový signál, a otevřete samostatnou malou iteraci. To je poctivější než tvářit se, že šestiminutová kontrola zvládne opravit celý proces.
+
+### Checklist prvního běžného ověření
+
+- Ověřovali jsme pravidlo v přirozené pracovní situaci, ne ve speciálním testu?
+- Našli jsme kanonické pracovní místo?
+- Šlo pravidlo použít bez člověka, který ho původně uzavíral?
+- Bylo rozhodnutí podle pravidla dost jasné?
+- Pokud vzniklo tření, víme, jestli šlo o najitelnost, formulaci, rozhodovací hranu nebo skutečný návratový signál?
+- Zůstaly původně zavřené věci opravdu zavřené?
+- Nepřidali jsme nové pole, tracker, CRM atribut, export ani ruční seznam jen kvůli ověření?
+- Pokud vznikla pomocná stopa, má vlastníka a konec?
+- Vybrali jsme jeden výsledek ověření?
+- Je další krok, pokud existuje, menší než původní lehký návrat?
+
+První běžné ověření má jednoduchý ideál: pravidlo se použije, rozhodnutí proběhne a nic nového se nenabalí. Když se ukáže malé tření, opraví se v nejbližším pracovním místě. Když se ukáže skutečný návratový signál, otevře se malá iterace. Všechno ostatní je jen šum, který si nezaslouží vlastní systém.
+
 ## Pracovní log
 
+- 2026-06-26: Doplněna úvodní podkapitola o prvním běžném ověření po uzavřeném lehkém návratu: najitelnost pravidla, rozhodnutelnost, čtyři výsledky ověření, privacy-first kontrola bez sledovacího ocasu, karta, mini workshop a checklist.
 - 2026-06-26: Doplněna úvodní podkapitola o uzavření lehkého návratu ze stabilního klidu: čtyři způsoby uzavření, propsání do pracovního místa, privacy-first úklid dočasných stop, karta, mini workshop a checklist.
 - 2026-06-26: Doplněna úvodní podkapitola o prvním lehkém návratu ze stabilního klidu: potvrzení návratového signálu, čtyři výsledky návratu, praktické příklady, privacy-first hranice, karta, mini workshop a checklist.
 - 2026-06-25: Doplněna úvodní podkapitola o převodu uzavřeného druhého použití zpět do stabilního klidu: kanonické místo, návratový signál, ukončení mimořádné péče, privacy-first úklid datové stopy, karta, mini workshop a checklist.
