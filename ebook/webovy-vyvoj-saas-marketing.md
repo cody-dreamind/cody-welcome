@@ -258247,8 +258247,185 @@ Pokud se tým zasekne na tom, jestli "ještě něco neměřit", vraťte se k roz
 
 Uzavření tichého týdne má tým zbavit mimořádné péče. Když se to povede, výsledek vypadá skoro neviditelně: pravidlo zůstane tam, kde má být, dočasné stopy zmizí a nikdo nemusí nosit další kontrolní batoh. Přesně tak má stabilní provoz vypadat.
 
+## První běžné review po uzavřeném tichém týdnu
+
+Po uzavřeném tichém týdnu se pravidlo nemá vracet na scénu jako hlavní bod porady. Má se objevit jen tam, kde se běžně kontroluje dané pracovní místo: v měsíčním review obchodního procesu, v kontrole onboardingové trasy, v údržbě formuláře nebo v krátkém průchodu šablon. První běžné review proto není další test pravidla. Je to kontrola, jestli pravidlo opravdu přešlo z mimořádného režimu do normálního provozu.
+
+Začněte větou:
+
+```text
+Pravidlo kontrolujeme už jen v běžném review pracovního místa, protože tichý týden byl uzavřený bez potřeby nové mimořádné evidence.
+```
+
+Tahle věta je důležitá hlavně kvůli hranici. Když se do review vrátí starý příběh, staré argumenty a staré pomocné poznámky, tichý týden se ve skutečnosti neuzavřel. Jen jste ho přejmenovali na běžný rytmus a nechali mu stejnou váhu. Běžné review má pracovat s aktuálním stavem pracovního místa, ne znovu otevírat celý původní návrat.
+
+### Co se v běžném review kontroluje
+
+Kontrolujte jen tři otázky:
+
+- Je pravidlo stále na správném pracovním místě?
+- Nastal od uzavření tichého týdne návratový signál?
+- Nevznikla nenápadně nová datová nebo procesní stopa?
+
+Pokud odpovědi zní `ano`, `ne`, `ne`, review končí jednou větou. Pravidlo je na místě, návratový signál nenastal a nevznikla nová stopa. Není potřeba nový plán, nový report ani další týden sledování. To je přesně okamžik, kdy má tým umět přestat.
+
+Pokud pravidlo není na správném místě, opravte umístění. Neotevírejte původní problém. Když se například věta z potvrzovací šablony ztratila při úpravě obchodního checklistu, vraťte ji do checklistu nebo přidejte odkaz. To není strategická debata o kvalifikaci leadů. To je údržba pracovního místa.
+
+Pokud nastal návratový signál, otevřete novou malou smyčku. Nepoužívejte běžné review jako nádobu na celé řešení. Review má zachytit důvod, pojmenovat hranici a předat téma do samostatné práce. Pokud se všechno začne řešit rovnou na místě, review se nafoukne a příště se mu lidé budou vyhýbat, protože "zase z toho něco vznikne". A budou mít pravdu, což je nepříjemně dobrý důvod.
+
+Pokud vznikla nová datová stopa, zastavte ji nebo jí dejte řádný účel. Typicky jde o nenápadné věci: někdo si začne vést vlastní tabulku, někdo přidá štítek do CRM, někdo odkládá screenshoty do složky "pro jistotu". První běžné review je vhodné místo říct: buď tato stopa slouží konkrétnímu rozhodnutí, má vlastníka a konec, nebo končí.
+
+### Tři výsledky review
+
+Po prvním běžném review vyberte jeden ze tří výsledků:
+
+- Stabilní provoz: pravidlo je na místě, návratový signál nenastal a nevznikla nová stopa.
+- Lokální údržba: pravidlo funguje, ale potřebuje opravit odkaz, název, umístění nebo krátkou formulaci.
+- Nová smyčka: návratový signál nastal nebo vznikla datová stopa, kterou už nejde vyřešit jen úklidem.
+
+Stabilní provoz zapisujte co nejkratší větou:
+
+```text
+První běžné review: pravidlo zůstává v obchodním checklistu, návratový signál nenastal a nevzniká žádná mimořádná evidence.
+```
+
+Lokální údržba má mít přesně jedno pracovní místo. Pokud opravujete název v obchodním checklistu, neopravujte zároveň formulář, CRM a interní prezentaci. Ty mohou být samostatné kroky, ale nepatří do jednoho review jen proto, že je někdo zahlédl cestou.
+
+Nová smyčka začíná novou otázkou. Například:
+
+```text
+Novou smyčku otevíráme proto, že tři relevantní poptávky za sebou nešlo kvalifikovat ani po použití volitelné otázky v potvrzovacím e-mailu.
+```
+
+Všimněte si, že věta nezačíná "znovu řešíme rozpočet ve formuláři". Začíná dnešním signálem. Původně zavřený návrh může zůstat zavřený i tehdy, když se otevře nové ověření. Návratový signál není teleport zpátky k největšímu nápadu.
+
+### Praktický příklad
+
+Pravidlo po tichém týdnu:
+
+```text
+U relevantní poptávky lze poslat volitelnou otázku na rámcový rozpočet v potvrzovacím e-mailu. Formulář, scoring a nový CRM atribut zůstávají zavřené.
+```
+
+První běžné review:
+
+```text
+Kontrola pracovního místa:
+Věta je pořád u potvrzovací šablony a stejná hranice je v obchodním checklistu.
+
+Návratový signál:
+Nenastal. Nebyly tři relevantní poptávky za sebou, které by nešlo kvalifikovat ani po použití volitelné otázky.
+
+Datová stopa:
+Nevznikl nový CRM atribut, ruční seznam ani export rozpočtových odpovědí.
+
+Výsledek:
+Stabilní provoz.
+```
+
+Lokální údržba by mohla vypadat takto:
+
+```text
+Kontrola pracovního místa:
+V obchodním checklistu zůstala stará formulace "zeptejte se na rozpočet", která svádí k plošnému použití.
+
+Oprava:
+Měníme větu na: "Volitelnou otázku na rámcový rozpočet posílej jen tehdy, když bez ní nejde navrhnout další konkrétní krok."
+
+Co neotevíráme:
+Formulář, scoring, CRM atribut ani zvláštní měření.
+```
+
+Oba výsledky jsou dobré, pokud se nezvětší rozsah. Běžné review nemá dokazovat, že pravidlo je dokonalé. Má potvrdit, že je použitelné, dohledatelné a neprodukuje zbytečnou datovou stopu.
+
+### Privacy-first review
+
+Privacy-first otázka pro první běžné review zní:
+
+```text
+Začali jsme kvůli tomuto pravidlu sbírat, kopírovat nebo držet něco, co jsme při uzavření tichého týdne nechtěli držet?
+```
+
+Ptejte se konkrétně. Nevznikl nový atribut? Nevznikla tabulka? Nezačaly se kopírovat odpovědi zákazníků do interního dokumentu? Nezačal někdo posílat ukázky do chatu, kde nemají co dělat? Neprodlužuje se retence dočasných poznámek jen proto, že je nikdo nesmazal?
+
+Pokud něco takového vzniklo, napište krátké rozhodnutí:
+
+```text
+Stopa nemá samostatnou rozhodovací hodnotu, proto ji rušíme a ponecháváme jen zobecněnou větu v pracovním místě.
+```
+
+Pokud stopa rozhodovací hodnotu má, už nejde o vedlejší poznámku. Potřebuje vlastní účel, vlastníka, retenci a místo v datové mapě. Jinak se z ní stane další provozní zvyk, který nikdo neplánoval, ale všichni ho začnou považovat za samozřejmost.
+
+Codyho komentář: nejnebezpečnější data nejsou vždy ta, která někdo dramaticky zapne v novém nástroji. Často jsou to malá "zatím si to vedu bokem". Bokem je v provozu kouzelné slovo, které znamená "bez vlastníka, bez konce a za tři měsíce nikdo neví proč". Romantika tabulkového podsvětí, prostě.
+
+### Karta prvního běžného review
+
+```text
+Pravidlo:
+
+Pracovní místo:
+
+Datum uzavření tichého týdne:
+
+Datum prvního běžného review:
+
+Kontrola umístění:
+
+Návratový signál:
+- nenastal
+- nastal
+
+Datová stopa:
+- nevznikla nová
+- vznikla a rušíme ji
+- vznikla a otevíráme pro ni samostatné rozhodnutí
+
+Výsledek:
+- stabilní provoz
+- lokální údržba
+- nová smyčka
+
+Jedna provedená oprava, pokud existuje:
+
+Co zůstává výslovně zavřené:
+
+Další kontrola:
+
+Vlastník:
+```
+
+Kartu nepoužívejte jako nový formulář pro každé pravidlo v systému. Hodí se jen tam, kde předcházelo mimořádné ověření, návratový signál nebo tichý týden. U zralých pravidel stačí běžný review záznam.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte pravidlo a pracovní místo.
+2. Minuta 2: ověřte, jestli pravidlo pořád leží tam, kde ho člověk potřebuje.
+3. Minuta 3: zkontrolujte návratový signál.
+4. Minuta 4: najděte případné nové datové nebo procesní stopy.
+5. Minuta 5: vyberte jeden výsledek review.
+6. Minuta 6: napište jednu větu do běžného záznamu nebo otevřete samostatnou malou smyčku.
+
+Pokud workshop začne řešit původní návrh v plné šířce, zastavte ho. První běžné review není soud s minulým rozhodnutím. Je to kontrola dnešního pracovního místa.
+
+### Checklist prvního běžného review
+
+- Probíhá kontrola v běžném rytmu pracovního místa, ne jako mimořádná schůzka?
+- Je pravidlo pořád tam, kde ho člověk při práci najde?
+- Nenastal návratový signál?
+- Pokud nastal, otevíráme samostatnou malou smyčku s vlastní hranicí?
+- Nevznikla nová tabulka, export, CRM atribut, tag, screenshotová složka nebo ruční evidence?
+- Pokud stopa vznikla, rušíme ji, anonymizujeme, nebo jí dáváme řádný účel a retenci?
+- Zůstává původně zavřený rozsah opravdu zavřený?
+- Pokud je potřeba oprava, je lokální a u nejbližšího pracovního místa?
+- Neprodlužujeme tichý týden jen proto, že je příjemné mít věc pod dohledem?
+- Stačí závěr zapsat jednou větou?
+- Ví další člověk, kdy se pravidlo znovu otevře?
+
+První běžné review je poslední zkouška návratu do normálního provozu. Když dopadne dobře, není co oslavovat novou procedurou. Stačí nechat pravidlo v místě, kde pomáhá, uklidit případné stopy a vrátit pozornost k práci, která má dnešní důvod.
+
 ## Pracovní log
 
+- 2026-06-26: Doplněna úvodní podkapitola o prvním běžném review po uzavřeném tichém týdnu: kontrola pracovního místa, návratového signálu a nenápadných datových stop, tři výsledky review, praktický příklad, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-26: Doplněna úvodní podkapitola o uzavření prvního tichého týdne po návratu pravidla do běžného rytmu: čtyři uzavírací stavy, praktický příklad, úklid dočasných stop, privacy-first zobecnění záznamů, karta, mini workshop a checklist.
 - 2026-06-26: Doplněna úvodní podkapitola o druhém běžném použití po uzavřeném návratu k neotevřenému kroku: ověření lokální kotvy nebo rozhodovací věty, ochrana původně zavřeného rozsahu, privacy-first kontrola datové stopy, karta, mini workshop a checklist.
 - 2026-06-26: Doplněna úvodní podkapitola o prvním tichém týdnu po návratu pravidla do běžného rytmu: omezení mimořádné péče, tři sledované signály, privacy-first práce bez nové datové stopy, karta, mini workshop a checklist.
