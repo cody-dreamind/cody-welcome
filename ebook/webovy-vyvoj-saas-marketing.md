@@ -263942,8 +263942,198 @@ Pokud během pěti minut zjistíte, že pravidlo nejde použít bez dlouhého vy
 
 První běžná správa po druhém ročním cyklu je test dospělosti pravidla. Neptá se, jestli pravidlo vypadá důležitě. Ptá se, jestli jde použít bez doprovodu, bez starých poznámek a bez nového sběru dat. Pokud ano, nejlepší další krok je překvapivě prostý: nedělat z toho nový projekt.
 
+## Uzavření první běžné správy po druhém ročním cyklu
+
+První běžná správa má krátký život. Buď potvrdí, že pravidlo opravdu funguje jako součást normální práce, nebo najde drobné tření, které se má opravit lokálně. Nemá se proměnit v další stálý rituál. Když ji necháte otevřenou, vznikne přesně to, čemu se dlouhodobá správa měla vyhnout: pravidlo bude formálně stabilní, ale kolem něj poběží drobný kontrolní proces, který nikdo nechtěl vlastnit.
+
+Uzavření proto začněte jednou větou:
+
+```text
+První běžnou správu uzavíráme takto:
+```
+
+Příklad:
+
+```text
+První běžnou správu uzavíráme takto:
+Pravidlo je dohledatelné v potvrzovací šabloně, starý odkaz ze servisní poznámky je smazaný a další kontrola zůstává jen v běžném ročním review.
+```
+
+Ta věta má být nudná. To je kompliment. Pokud zní dramaticky, pravděpodobně neuzavíráte běžnou správu, ale otevíráte nové téma. Stabilní pravidlo nepotřebuje slavnostní fanfáry. Potřebuje jasné místo, jasnou hranici a žádnou novou administrativu, která se tváří jako péče.
+
+### Tři možné výsledky uzavření
+
+Po první běžné správě vyberte jeden ze tří výsledků:
+
+- Potvrdit běžnou správu: pravidlo je najitelné, použitelné a bez zbytečné datové stopy.
+- Udělat lokální opravu: pravidlo je správné, ale jedno pracovní místo, odkaz, věta nebo štítek ještě mate.
+- Oddělit nový podnět: během správy se objevil problém, který nesouvisí s uzavíraným pravidlem.
+
+Potvrzení běžné správy je nejčistší výsledek. Znamená, že kartu první správy můžete zavřít a nechat pravidlo v normálním rytmu. Do logu patří jen závěr a další kontrolní bod. Nepřidávejte další "pro jistotu" krok. Právě takové kroky jsou nenápadný zdroj procesního tuku. Vypadá to jako odpovědnost, ale po třech měsících nikdo neví, proč to pořád běží.
+
+Lokální oprava je povolená jen tehdy, když má jasné pracovní místo. Typicky jde o přepsání jedné věty, smazání starého odkazu, přesun pravidla blíž k šabloně nebo odstranění dočasného štítku. Oprava nesmí měnit původní rozhodnutí. Pokud mění rozhodnutí, nejde o lokální opravu, ale o nové otevření.
+
+Oddělený nový podnět je důležitý hlavně pro disciplínu. Při správě často zahlédnete související potíž: jiný formulář má podobný problém, jiná šablona má starou větu, obchod by chtěl jinou kvalifikační otázku. To může být užitečné, ale nepatří to do uzavření první běžné správy. Zapište podnět samostatně a uzavřete původní kontrolu.
+
+### Praktický příklad potvrzení
+
+```text
+Výsledek správy:
+Potvrdit běžnou správu.
+
+Co se ověřilo:
+Nový člověk našel pravidlo v potvrzovací šabloně, použil ho bez vysvětlování a nevytvořil nový export ani pomocnou tabulku.
+
+Co zavíráme:
+Kartu první běžné správy a dočasnou poznámku k návratu z druhého ročního cyklu.
+
+Co dál neotevíráme:
+Další měsíční kontrolu, povinné pole ve formuláři, lead scoring ani sledování rozpočtů mimo běžný rytmus.
+
+Další kontrola:
+Běžné roční review, pokud dřív nepřijde návratový signál.
+```
+
+Tady není potřeba nic přidávat. Výsledek je dobrý právě proto, že nepůsobí pracovně bohatě. Pravidlo se našlo, použilo a nezvětšilo datovou stopu. Hotovo. Codyho komentář: některé týmy mají u slova "hotovo" alergii a hned hledají další "zlepšení". Dejte tomu čaj a nechte pravidlo žít.
+
+### Praktický příklad lokální opravy
+
+```text
+Výsledek správy:
+Lokální oprava.
+
+Co se ověřilo:
+Pravidlo je správně v potvrzovací šabloně, ale rozcestník stále odkazuje i na starý záznam z mimořádného režimu.
+
+Lokální oprava:
+Smazat starý odkaz z rozcestníku a ponechat jen odkaz na potvrzovací šablonu.
+
+Co se nemění:
+Text pravidla, návratový signál, formulář, CRM pole ani obchodní kvalifikace.
+
+Ověření opravy:
+Při příštím běžném použití musí člověk dojít k pravidlu přes rozcestník bez staré servisní poznámky.
+```
+
+Všimněte si velikosti zásahu. Oprava se nedotýká pravidla, protože pravidlo není problém. Dotýká se jen cesty k pravidlu. To je rozdíl mezi údržbou a přepisováním historie. Údržba zmenšuje tření v místě, kde vzniklo. Přepisování historie se tváří důkladně, ale často znovu otevře rozhodnutí, které už bylo dost dobré.
+
+### Praktický příklad odděleného podnětu
+
+```text
+Výsledek správy:
+Oddělit nový podnět.
+
+Co se objevilo:
+Při kontrole potvrzovací šablony se ukázalo, že onboardingový e-mail pro pilotní zákazníky používá jinou otázku na rozpočet.
+
+Proč to nepatří do této správy:
+Uzavírané pravidlo řeší relevantní poptávky z webu, ne pilotní onboarding.
+
+Co děláme:
+Zapisujeme samostatný podnět k onboardingu a první běžnou správu webového pravidla zavíráme jako potvrzenou.
+
+Co nesbíráme:
+Nespouštíme porovnávací report rozpočtových odpovědí napříč webem a onboardingem.
+```
+
+Oddělení podnětu chrání původní práci před rozléváním. Pokud onboarding opravdu potřebuje vlastní pravidlo, zaslouží si vlastní otázku, vlastní pracovní místo a vlastní datovou hranici. Nemá se přilepit k webové šabloně jen proto, že obě témata obsahují slovo rozpočet.
+
+### Privacy-first uzavření
+
+Uzavření první běžné správy je vhodný okamžik k malému datovému úklidu. Nehledejte velký audit. Hledejte zbytky po kontrole: dočasné poznámky, kopie příkladů, pomocné tabulky, komentáře se zákaznickým kontextem, exporty, screenshoty a štítky, které už neslouží rozhodnutí.
+
+Použijte čtyři věty:
+
+```text
+V běžné správě necháváme:
+
+Po uzavření mažeme nebo zkracujeme:
+
+Mimo rytmus dál nesbíráme:
+
+Pokud se téma vrátí, začneme od:
+```
+
+Příklad:
+
+```text
+V běžné správě necháváme:
+Pracovní větu v potvrzovací šabloně a stručný závěr v rozhodovacím logu.
+
+Po uzavření mažeme nebo zkracujeme:
+Dočasnou tabulku prvního použití a konkrétní zákaznické příklady ze servisní poznámky.
+
+Mimo rytmus dál nesbíráme:
+Nové CRM atributy, odpovědi na rozpočet v samostatném exportu ani report použití šablony.
+
+Pokud se téma vrátí, začneme od:
+Návratového signálu, ne od starých pomocných podkladů.
+```
+
+Privacy-first přístup tady není heroická póza. Je to uklizený provoz. Data, která už nepomáhají rozhodnutí, nemají zůstávat v systému jen proto, že vznikla cestou. Každá ponechaná stopa má mít účel, vlastníka a přiměřený rytmus kontroly. Když účel skončil, stopa má skončit taky.
+
+### Karta uzavření první běžné správy
+
+```text
+Pravidlo nebo pracovní místo:
+
+Kanonické místo:
+
+Výsledek první běžné správy:
+- potvrdit běžnou správu
+- lokální oprava
+- oddělený nový podnět
+
+Jednovětý závěr:
+
+Co se propsalo do pracovního místa:
+
+Co se lokálně opravuje, pokud něco:
+
+Co se výslovně neotevírá:
+
+Jaké dočasné stopy mažeme, zkracujeme nebo anonymizujeme:
+
+Co mimo běžný rytmus dál nesbíráme:
+
+Návratový signál:
+
+Další běžná kontrola:
+
+Vlastník:
+```
+
+Kartu po uzavření nenechávejte jako další aktivní artefakt. Buď se její závěr propsal do kanonického místa, nebo ještě není uzavřená. Aktivní karta, která jen opakuje hotový závěr, je dokumentační šum. Hezky uložený šum je pořád šum, jen má lepší složku.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte pracovní větu v kanonickém místě.
+2. Minuta 2: vyberte jeden ze tří výsledků uzavření.
+3. Minuta 3: napište jednovětý závěr.
+4. Minuta 4: rozhodněte, co se propsalo nebo opravuje lokálně.
+5. Minuta 5: smažte, zkraťte nebo označte k úklidu jednu dočasnou stopu.
+6. Minuta 6: potvrďte návratový signál a další běžný rytmus.
+
+Pokud se během workshopu objeví spor o původní rozhodnutí, workshop ukončete jinak: uzavřete první běžnou správu jako "nelze potvrdit" a otevřete samostatnou otázku. Nemíchejte uzavírání provozní kontroly s debatou o strategii. Jedna místnost, jedna věc. Ano, je to nudné. Nudné procesy jsou často ty, které se dají opravdu používat.
+
+### Checklist uzavření první běžné správy
+
+- Je vybraný jeden ze tří výsledků uzavření?
+- Je jednovětý závěr srozumitelný bez historie druhého ročního cyklu?
+- Je jasné, co se propsalo do kanonického pracovního místa?
+- Pokud vznikla lokální oprava, zůstává opravdu lokální?
+- Pokud vznikl nový podnět, je oddělený od uzavíraného pravidla?
+- Je výslovně napsané, co se teď neotevírá?
+- Jsou dočasné stopy po první běžné správě smazané, zkrácené nebo označené k úklidu?
+- Nevznikl nový report, export, CRM atribut, tracker ani pravidelný kontrolní rituál?
+- Je návratový signál pořád konkrétní a použitelný i pro člověka mimo původní debatu?
+- Je další kontrola navázaná na běžný rytmus?
+
+Uzavření první běžné správy má zanechat pravidlo lehčí, ne slavnější. Pokud po něm tým ví, kde pravidlo žije, kdy se k němu vrátit a jaká data už nedržet, iterace splnila účel. Další práce začíná až tehdy, když přijde nový důvod. Ne když se někdo lekne ticha.
+
 ## Pracovní log
 
+- 2026-06-27: Doplněna úvodní podkapitola o uzavření první běžné správy po druhém ročním cyklu: tři výsledky uzavření, praktické příklady, privacy-first úklid dočasných stop, karta, mini workshop a checklist.
 - 2026-06-27: Doplněna úvodní podkapitola o první běžné správě po uzavřeném druhém ročním cyklu: kanonické místo, použitelná pracovní věta, úklid starých stop, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-06-27: Doplněna úvodní podkapitola o uzavření druhého ročního cyklu do běžné správy: uzavírací věta, propsání do kanonického místa, privacy-first úklid stop, karta, mini workshop a checklist.
 - 2026-06-27: Doplněna úvodní podkapitola o druhém ročním cyklu po uzavřeném mimořádném režimu: běžná správa pravidla, kontrola kontextu a návratového signálu, privacy-first datová stopa, karta, mini workshop a checklist.
