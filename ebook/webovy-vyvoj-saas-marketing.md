@@ -260879,8 +260879,188 @@ Když se během workshopu objeví změna segmentu, nabídky nebo procesu, nepři
 
 Uzavření druhé lehké kontroly je tečka za mimořádnou péčí po ročním review. Když pravidlo funguje, vraťte ho do rytmu. Když potřebuje poslední větu, napište ji tam, kde se používá. A když se objeví nový kontext, založte ho čistě. Stabilita není to, že se nic nemění. Stabilita je schopnost poznat, kdy je změna opravdu nová práce a kdy už stačí přestat držet systém za ruku.
 
+## Návrat pravidla do ročního klidu po lehkých kontrolách
+
+Po uzavření druhé lehké kontroly přichází nenápadná, ale důležitá práce: přestat pravidlo obsluhovat jako čerstvou změnu. Pokud lehké kontroly ukázaly, že pravidlo je najitelné, rozhodnutelné a nepotřebuje mimořádnou datovou stopu, má se vrátit do ročního klidu. To znamená, že se používá v běžné práci a znovu se otevře až při návratovém signálu nebo při dalším plánovaném ročním review.
+
+Roční klid není ignorování. Je to dohoda, že pravidlo už nemá vlastní servisní režim. Tým ho nepřipomíná každý týden, nevede k němu pomocnou tabulku, neptá se při každé poradě, jestli "pořád drží", a nevyrábí novou kontrolu jen proto, že poslední kontrola dopadla dobře. Ano, je zvláštní, že úspěšná kontrola často vyvolá chuť kontrolovat dál. Produktová úzkost má výbornou výdrž.
+
+Začněte větou:
+
+```text
+Pravidlo vracíme do ročního klidu, protože:
+```
+
+Dobrá věta obsahuje důvod, hranici a další otevření:
+
+```text
+Pravidlo vracíme do ročního klidu, protože poslední dvě lehké kontroly potvrdily, že kanonická věta je najitelná a použitelná bez pomocné evidence. Další mimořádnou kontrolu neplánujeme; téma se znovu otevře jen při návratovém signálu nebo při dalším ročním review.
+```
+
+Tahle věta je malá brzda proti rozlézání péče. Když ji nemáte, někdo za měsíc navrhne "jen rychlé ověření". Pak další. A najednou se stabilní pravidlo tváří jako trvale otevřený projekt, jen bez poctivého názvu.
+
+### Co se při návratu do klidu mění
+
+Při návratu do ročního klidu se mění hlavně režim pozornosti:
+
+- Pravidlo zůstává v kanonickém místě, ale už kolem něj neběží zvláštní kontrolní agenda.
+- Ověřovací poznámky se uzavřou nebo smažou podle retenčního pravidla.
+- V běžných poradách se pravidlo neprobírá, pokud nepřišel návratový signál.
+- Nové drobné nápady se nezapisují k servisní větvi, ale posuzují se jako samostatné podněty.
+- Další kontrola má pevný důvod: plánované roční review, změna kontextu nebo konkrétní opakovaný problém.
+
+Největší riziko je poloviční návrat. Pravidlo se sice formálně vrátí do rytmu, ale někde zůstane vedlejší checklist, ruční štítek, poznámka v kalendáři nebo neoficiální očekávání, že ho někdo "ještě chvíli pohlídá". To je provozně horší než otevřený úkol, protože to nemá jasného vlastníka ani konec.
+
+Před uzavřením se proto zeptejte:
+
+```text
+Kde by se pravidlo mohlo dál sledovat, i když jsme řekli, že je hotovo?
+```
+
+Odpověď hledejte v místech, která tým běžně přehlíží: osobní poznámky, interní kanály, staré issue, komentáře u šablon, nástěnky, exporty, duplicitní checklisty nebo automatické připomínky. Nemusíte dělat archeologii celého systému. Stačí projít místa, která byla použitá během lehkých kontrol.
+
+### Praktický příklad
+
+Stav po druhé lehké kontrole:
+
+```text
+Pravidlo:
+Volitelnou otázku na rozpočet používáme jen tehdy, když bez ní nejde navrhnout další konkrétní krok.
+
+Ověření:
+Dvě lehké kontroly potvrdily, že pravidlo jde najít u potvrzovací šablony a obchodní checklist na něj odkazuje bez nutnosti dalšího vysvětlování.
+
+Co zůstává zavřené:
+Povinné pole ve formuláři, lead scoring, export rozpočtových údajů a pomocná tabulka použití.
+```
+
+Návrat do ročního klidu:
+
+```text
+Pravidlo vracíme do ročního klidu, protože funguje v běžném použití bez mimořádné péče.
+
+Přenášíme:
+Kanonickou větu u potvrzovací šablony a odkaz v obchodním checklistu.
+
+Ukončujeme:
+Servisní poznámku po ročním review, ruční sledování použití a připomínku druhé lehké kontroly.
+
+Další otevření:
+Při dalším ročním review nebo pokud volitelná otázka třikrát za sebou nepomůže kvalifikovat relevantní poptávku.
+```
+
+Slabý návrat do klidu by vypadal takto:
+
+```text
+Pravidlo je asi v pohodě, ale ještě si ho necháme v pondělní kontrole.
+```
+
+To není klid. To je odložený konec. Pokud existuje konkrétní otázka pro pondělní kontrolu, napište ji a otevřete malou smyčku. Pokud neexistuje, kontrolu zrušte.
+
+### Co už nedělat
+
+Po návratu do ročního klidu už nedělejte tyto věci:
+
+- Nepřidávejte třetí lehkou kontrolu jen proto, že první dvě byly užitečné.
+- Nepřepisujte pravidlo znovu, pokud se při běžném použití neobjevil nový problém.
+- Nepřenášejte do ročního rytmu pomocné důkazy, které vznikly jen pro servisní ověření.
+- Nezakládejte nový dashboard pro pravidlo, které nepotřebuje průběžné měření.
+- Nepoužívejte starou servisní větev jako sběrné místo pro nové nápady.
+
+Zvlášť poslední bod bývá zrádný. Jakmile má téma historii, lidé k ní rádi přilepí další související nápad. Jenže stabilní pravidlo není magnet na všechny podobné problémy. Pokud nový nápad nemá stejný návratový signál, založte ho jako nový podnět a projděte běžným filtrem: pracovní místo, důkaz, dopad, datová stopa.
+
+Codyho komentář: třetí kontrola po dvou úspěšných kontrolách je často jen elegantně oblečená nejistota. Nejistota je normální. Ale pokud ji neumíte převést na konkrétní otázku, nemá dostat vlastní proces. Procesy mají sloužit práci, ne hladit tým po hlavě.
+
+### Privacy-first klid
+
+Roční klid má silnou privacy-first hodnotu. Když pravidlo nepotřebuje průběžné měření, nemá kolem něj vznikat průběžná datová stopa. Udržet poznatek a nepřenášet pomocná data je jeden z nejjednodušších způsobů, jak zůstat provozně štíhlý.
+
+Při návratu do klidu zapište tři věci:
+
+```text
+Poznatek, který zůstává:
+
+Data, která se nepřenášejí:
+
+Místo, kde zůstává původní zdroj:
+```
+
+Příklad:
+
+```text
+Poznatek, který zůstává:
+Volitelná otázka na rozpočet patří až do potvrzovací komunikace a jen pro relevantní poptávky, kde bez ní nejde navrhnout další krok.
+
+Data, která se nepřenášejí:
+Kopie zákaznických odpovědí, ruční štítky, servisní tabulka použití ani konkrétní obchodní detaily.
+
+Místo, kde zůstává původní zdroj:
+Původní obchodní komunikace podle běžné retence; do pravidla se propisuje jen zobecněný závěr.
+```
+
+Tím se zamezí dvěma špatným extrémům. První extrém je zahodit všechno a za rok znovu objevovat stejnou věc. Druhý extrém je uložit všechno a za rok vysvětlovat, proč pravidlo obsahuje staré osobní nebo obchodní detaily. Privacy-first provoz stojí uprostřed: zachovat rozhodovací hodnotu, uklidit přebytečnou stopu.
+
+### Karta návratu do ročního klidu
+
+```text
+Pravidlo nebo pracovní místo:
+
+Proč se vrací do ročního klidu:
+
+Co potvrdily lehké kontroly:
+
+Kanonické místo pravidla:
+
+Co přenášíme do běžného provozu:
+
+Co ukončujeme:
+
+Co zůstává výslovně zavřené:
+
+Další plánované review:
+
+Návratový signál mimo plánované review:
+
+Privacy-first uzavření:
+Poznatek, který zůstává:
+Data, která se nepřenášejí:
+Původní zdroj a jeho retence:
+
+Vlastník:
+
+Datum návratu do klidu:
+```
+
+Karta má být krátká. Pokud se rozroste na dlouhý popis historie, zkraťte ji na dnešní stav. Roční klid nepotřebuje kroniku. Potřebuje vědět, kde pravidlo žije, co už neběží a kdy se má znovu otevřít.
+
+### Mini workshop na 5 minut
+
+1. Minuta 1: přečtěte uzavření druhé lehké kontroly.
+2. Minuta 2: napište jednu větu, proč se pravidlo vrací do ročního klidu.
+3. Minuta 3: určete, co se přenáší a co se ukončuje.
+4. Minuta 4: zapište návratový signál a další plánované review.
+5. Minuta 5: ukliďte privacy-first stopu: co zůstává jako poznatek a která pomocná data se nepřenášejí.
+
+Pokud se během workshopu objeví potřeba další kontroly, musí mít jednu konkrétní otázku. Bez ní není další kontrola kontrolou. Je to jen neochota skončit.
+
+### Checklist návratu do ročního klidu
+
+- Je jasné, proč se pravidlo vrací do ročního klidu?
+- Víme, co přesně potvrdily lehké kontroly?
+- Je pravidlo v jednom kanonickém místě?
+- Ukončili jsme servisní poznámky, připomínky, pomocné tabulky nebo ruční štítky?
+- Je napsané, co zůstává výslovně zavřené?
+- Má pravidlo další plánované review?
+- Má pravidlo návratový signál mimo plánované review?
+- Nepřenášíme do běžného provozu osobní údaje, obchodní detaily ani pomocné důkazy bez účelu?
+- Umí nový člověk pravidlo použít bez znalosti celé servisní historie?
+- Nevznikla třetí kontrola jen proto, že tým nechce napsat tečku?
+
+Návrat do ročního klidu je úklid po dobře odvedené práci. Pravidlo zůstává dostupné, ale přestává si říkat o mimořádnou pozornost. Tým tím získá dvě věci najednou: méně provozního šumu a čistší datovou stopu. To je příjemně nudný výsledek, což bývá u stabilních pravidel přesně ono.
+
 ## Pracovní log
 
+- 2026-06-27: Doplněna úvodní podkapitola o návratu pravidla do ročního klidu po lehkých kontrolách: ukončení mimořádné péče, co už nedělat, privacy-first úklid datové stopy, karta, mini workshop a checklist.
 - 2026-06-27: Doplněna úvodní podkapitola o uzavření druhé lehké kontroly po uzavřeném ročním review: tři uzavírací stavy, praktické příklady, privacy-first úklid zbylých stop, karta, mini workshop a checklist.
 - 2026-06-26: Doplněna úvodní podkapitola o druhé lehké kontrole po uzavřeném ročním review: kdy ji nedělat, ověření lokální opravy, privacy-first hranice, karta, mini workshop a checklist.
 - 2026-06-26: Doplněna úvodní podkapitola o uzavření první lehké kontroly po uzavřeném ročním review: čtyři uzavírací stavy, praktické příklady, privacy-first úklid dočasných stop, karta, mini workshop a checklist.
