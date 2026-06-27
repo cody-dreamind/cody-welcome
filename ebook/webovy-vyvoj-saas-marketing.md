@@ -261696,8 +261696,227 @@ Pokud na konci workshopu není jasné pracovní místo, neotevírejte implementa
 
 Třetí podnět je dobrý okamžik na klidnou přesnost. Může potvrdit slabou hranu, ale nesmí se stát záminkou k plošnému zásahu. Nejlepší výsledek je malá smyčka, která opraví konkrétní pracovní místo, ochrání zbytek ročního klidu a nenechá za sebou datový nepořádek.
 
+## Otevření mimořádného review po třetím podnětu
+
+Když triage třetího podnětu ukáže, že nejde jen o šum, přichází další nebezpečný okamžik. Tým má konečně "důkaz", a proto má chuť otevřít všechno, co s tématem souvisí: pravidlo, šablony, onboarding, obchodní proces, interní reporting i staré rozhodnutí, které někomu leží v žaludku od minulého kvartálu. To je přesně chvíle, kdy má mimořádné review zůstat malé.
+
+Mimořádné review není nový standardní audit. Je to krátké přerušení klidu pro jedno pracovní místo, jednu rozhodovací hranu a jednu stop podmínku. Pokud ho neumíte popsat jednou větou, ještě ho neotevírejte.
+
+Začněte větou:
+
+```text
+Mimořádné review otevíráme pouze pro:
+```
+
+Dobrá věta zní třeba takto:
+
+```text
+Mimořádné review otevíráme pouze pro potvrzovací šablonu po relevantní poptávce, protože tři nezávislé podněty ukázaly stejnou nejasnost: kdy už nepoužívat otázku na rozpočet.
+```
+
+Všimněte si slova "pouze". Není tam pro parádu. Je to malá brzda proti tomu, aby se z opravy jedné hrany stalo opakování celého ročního review. Mimořádné review má opravit slabé místo, kvůli kterému se klid přerušil. Nemá znovu dokazovat, že celý systém existuje.
+
+Codyho komentář: mimořádné review je jako otevřít servisní kryt, ne rozebrat celý stroj na součástky. Ano, uvnitř pravděpodobně najdete další věci, které by "šly zlepšit". Gratuluji, právě jste objevili software, produkt a lidskou organizaci. Teď prosím opravte tu jednu věc, kvůli které jste kryt otevřeli.
+
+### Pět hranic mimořádného review
+
+Před prvním zásahem napište pět hranic:
+
+- Pracovní místo: kde se chyba opravdu ukázala.
+- Rozhodovací hrana: jaké rozhodnutí člověk neumí udělat bez pomoci.
+- Nejmenší zásah: co upravíte jako první.
+- Stop podmínka: podle čeho poznáte, že review končí.
+- Zavřený rozsah: čeho se teď výslovně nedotknete.
+
+Tyto hranice pište před otevřením dokumentů, exportů a starých poznámek. Jakmile se tým ponoří do historie, začne být těžší držet rozsah. Každý starý záznam vypadá jako souvislost. Každá souvislost vypadá jako důvod přidat další úkol. A za chvíli už neřešíte třetí podnět, ale archeologii se sprintovým backlogem.
+
+Praktická hranice může vypadat takto:
+
+```text
+Pracovní místo:
+Potvrzovací šablona po relevantní poptávce.
+
+Rozhodovací hrana:
+Kdy už lze navrhnout další krok bez otázky na rozpočet.
+
+Nejmenší zásah:
+Doplnit jeden pozitivní a jeden negativní příklad přímo k dané větě v šabloně.
+
+Stop podmínka:
+Nový nebo méně zkušený obchodník při dalším běžném použití šablony rozhodne bez dodatečného vysvětlení.
+
+Zavřený rozsah:
+Poptávkový formulář, lead scoring, CRM pole, obecná kvalifikační metodika a staré zákaznické příklady.
+```
+
+Když jedna z hranic chybí, review ještě není připravené. Chybějící pracovní místo znamená, že problém pořád plave. Chybějící rozhodovací hrana znamená, že nevíte, co člověku vlastně brání v práci. Chybějící stop podmínka znamená, že review nemá konec. Chybějící zavřený rozsah znamená, že si rozsah brzy najde vlastní nohy a odejde na dlouhou procházku. To bývá drahé, i když má hezké názvy úkolů.
+
+### Co v review nedělat
+
+Mimořádné review má několik typických pastí:
+
+- Nevracejte se k celé historii pravidla, pokud stačí poslední karta třetího podnětu.
+- Neotevírejte plošné měření, když problém ukazuje na jednu větu nebo jeden krok.
+- Nepřidávejte nové povinné pole jen proto, že interní rozhodnutí bylo nejasné.
+- Nezavádějte nový nástroj pro sběr důkazů, pokud stačí zápis rozhodovací hrany.
+- Nepřenášejte zákaznické detaily do review dokumentu, pokud nejsou nutné pro rozhodnutí.
+
+Zvlášť opatrní buďte u věty "když už jsme tady". Je to produktově nebezpečná věta. Někdy ukazuje efektivitu, ale často jen otevírá staré přání ve chvíli, kdy tým nemá mentální sílu ho odmítnout. Pokud během review najdete další téma, zapište ho jako samostatný podnět a nechte ho projít běžným filtrem. Mimořádné review se nemá proměnit v boční vchod pro nápady, které by jinak neprošly.
+
+### Praktický příklad review
+
+Výchozí stav:
+
+```text
+Tři nezávislé podněty ukázaly, že lidé neumí použít hranici otázky na rozpočet. Nejde o problém rozpočtu jako datového pole. Jde o nejasnou větu v potvrzovací šabloně.
+```
+
+Mimořádné review:
+
+```text
+Otevíráme:
+Jednu větu v potvrzovací šabloně a dva příklady použití.
+
+Neotevíráme:
+Formulář, CRM, scoring, cenovou strategii ani novou kvalifikační tabulku.
+
+Zásah:
+K větě "na rozpočet se ptejte až ve chvíli, kdy bez něj nejde navrhnout další krok" doplníme:
+- použít: zákazník chce porovnat dvě varianty rozsahu a bez rámcového rozpočtu nelze doporučit realistickou cestu
+- nepoužít: cíl a další krok jsou jasné, stačí potvrdit navazující konzultaci
+
+Ověření:
+Při dalším běžném použití šablony nový obchodník rozhodne sám a do karty review zapíše jen stav: rozhodl bez pomoci, potřeboval vysvětlení, nebo narazil na jinou hranu.
+```
+
+Výsledek může mít tři podoby:
+
+```text
+Hotovo:
+Nový příklad stačil, review končí a pravidlo se vrací do ročního klidu.
+
+Lokální dočištění:
+Příklad pomohl, ale navigace v šabloně je slabá; opravíme odkaz nebo nadpis a ověříme jedním dalším běžným použitím.
+
+Nová otázka:
+Ukázalo se, že problém není ve větě, ale v tom, jak obchod rozlišuje varianty rozsahu. Mimořádné review původní hrany zavíráme a novou otázku otevíráme zvlášť, s vlastní hranicí.
+```
+
+Třetí výsledek je důležitý. Když review objeví novou otázku, nepřipojujte ji automaticky k původnímu review. Zavřete původní smyčku a novou otázku založte samostatně. Jinak ztratíte čistý důvod, proč se práce otevřela.
+
+### Privacy-first minimum mimořádného review
+
+Mimořádné review má tendenci vytvářet "důkazní složku". U privacy-first provozu je lepší vytvořit jen rozhodovací stopu. Rozdíl je jednoduchý: důkazní složka hromadí suroviny, rozhodovací stopa zachytí závěr, hranici a další krok.
+
+Do review ukládejte:
+
+```text
+Pracovní místo:
+
+Rozhodovací hrana:
+
+Typ zásahu:
+
+Stop podmínka:
+
+Výsledek ověření:
+
+Co zůstalo zavřené:
+
+Kdy mažeme pomocné poznámky:
+```
+
+Do review neukládejte:
+
+- celé zákaznické zprávy,
+- screenshoty CRM,
+- jména lidí, pokud nejsou nutná pro vlastnictví úkolu,
+- rozpočty, osobní údaje nebo obchodní detaily,
+- interní chaty s dohady,
+- kopie starých rozhodnutí, když stačí odkaz na kanonické místo.
+
+Pokud potřebujete citovat konkrétní situaci, zobecněte ji. Místo "zákazník X napsal přesnou větu Y" napište "zákazník měl jasný cíl, ale nebylo možné vybrat rozsah bez rámcového rozpočtu". Rozhodovací hodnota zůstane. Citlivý detail neputuje do dalšího dokumentu.
+
+Privacy-first závěr mimořádného review by měl znít například:
+
+```text
+Review ponechává jen rozhodovací hranu, upravenou větu a stav ověření. Pomocné poznámky ze tří podnětů mažeme po prvním ověření. Zákaznické zprávy, rozpočty a CRM screenshoty nepřenášíme.
+```
+
+Tohle není byrokracie. Je to provozní hygiena. Čím menší stopu review zanechá, tím méně věcí musíte později vysvětlovat, čistit, migrovat nebo chránit.
+
+### Karta mimořádného review
+
+```text
+Název review:
+
+Důvod otevření jednou větou:
+
+Navazuje na kartu třetího podnětu:
+
+Pracovní místo:
+
+Rozhodovací hrana:
+
+Nejmenší zásah:
+
+Stop podmínka:
+
+Co zůstává zavřené:
+
+Jak ověříme výsledek:
+
+Možné výsledky:
+- hotovo, návrat do ročního klidu
+- lokální dočištění a jedno další ověření
+- zavření review a otevření nové samostatné otázky
+
+Privacy-first minimum:
+Co ukládáme:
+Co nepřenášíme:
+Kdy mažeme pomocné poznámky:
+
+Vlastník:
+
+Datum otevření:
+
+Datum uzavření:
+```
+
+Karta má být nástroj na zavření práce. Pokud po vyplnění karty vznikne deset dalších odrážek, rozdělte je: jedna patří do tohoto review, zbytek jsou samostatné podněty. V opačném případě si review začne půjčovat autoritu třetího podnětu pro věci, které si ji ještě nezasloužily.
+
+### Mini workshop na 8 minut
+
+1. Minuta 1: přečtěte závěr triage třetího podnětu.
+2. Minuta 2: napište větu "mimořádné review otevíráme pouze pro...".
+3. Minuta 3: pojmenujte pracovní místo a rozhodovací hranu.
+4. Minuta 4: vyberte nejmenší zásah.
+5. Minuta 5: napište stop podmínku.
+6. Minuta 6: napište zavřený rozsah.
+7. Minuta 7: určete privacy-first minimum a datum smazání pomocných poznámek.
+8. Minuta 8: rozhodněte, kdo review zavře a kde bude výsledek propsaný.
+
+Když se během workshopu objeví spor o rozsah, nehlasujte o přidání další práce. Vraťte se k větě "mimořádné review otevíráme pouze pro...". Pokud nová práce do věty nevejde bez toho, aby ji rozbila, patří mimo toto review.
+
+### Checklist mimořádného review
+
+- Navazuje review na konkrétní triage třetího podnětu?
+- Je jasné jedno pracovní místo?
+- Je pojmenovaná jedna rozhodovací hrana?
+- Je první zásah menší než původně lákavé řešení?
+- Má review stop podmínku?
+- Je výslovně napsané, co zůstává zavřené?
+- Neotevíráme formuláře, scoring, exporty nebo nové nástroje jen kvůli nejasné větě?
+- Ukládáme rozhodovací stopu místo surových důkazů?
+- Víme, kdy smažeme pomocné poznámky?
+- Má review vlastníka, který ho opravdu zavře?
+- Je jasné, jestli výsledek vrací pravidlo do ročního klidu, vyžaduje lokální dočištění, nebo zakládá novou samostatnou otázku?
+
+Mimořádné review má být krátká oprava důvěry v pravidlo. Pokud se podaří, tým získá jasnější pracovní místo a roční klid může pokračovat. Pokud se nepodaří, i to je výsledek: původní hrana nebyla skutečný problém a nová otázka si zaslouží vlastní smyčku. V obou případech má být po review méně nejasností, méně pomocných stop a žádný nový datový apetit.
+
 ## Pracovní log
 
+- 2026-06-27: Doplněna úvodní podkapitola o otevření mimořádného review po třetím podnětu: pět hranic review, zavřený rozsah, praktický příklad, privacy-first rozhodovací stopa, karta, mini workshop a checklist.
 - 2026-06-27: Doplněna úvodní podkapitola o třetím podnětu během ročního klidu: nezávislost podnětů, společná rozhodovací hrana, přerušení klidu jen pro konkrétní pracovní místo, privacy-first triage, karta, mini workshop a checklist.
 - 2026-06-27: Doplněna úvodní podkapitola o druhém podobném podnětu během ročního klidu: porovnání s prvním podnětem, hranice návratového signálu, malá smyčka, privacy-first záznam, karta, mini workshop a checklist.
 - 2026-06-27: Doplněna úvodní podkapitola o prvním podnětu během ročního klidu: rozlišení šumu, lokálního vysvětlení, slabé hrany a návratového signálu, privacy-first zachycení podnětu, karta, mini workshop a checklist.
