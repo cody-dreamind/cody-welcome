@@ -260701,8 +260701,187 @@ Pokud pět minut nestačí, druhá lehká kontrola pravděpodobně narazila na z
 
 Druhá lehká kontrola má ukončit zbytek mimořádné pozornosti po ročním review. Když lokální oprava drží, pravidlo se vrací do běžné práce a další kontrola čeká až na domluvený rytmus nebo návratový signál. Když nedrží, opravte nejbližší větu. A když se ukáže jiný kontext, otevřete ho poctivě jako nové téma. To je celé. Stabilní systém se pozná i podle toho, že umí přestat kontrolovat.
 
+## Uzavření druhé lehké kontroly po uzavřeném ročním review
+
+Druhá lehká kontrola má po sobě zanechat jasný konec. Pokud lokální oprava drží a pravidlo funguje bez mimořádné péče, není potřeba další malá kontrola, další tabulka ani další "jen pro jistotu" poznámka. Uzavření druhé lehké kontroly říká jednu prostou věc: pravidlo se vrací do běžného rytmu, nebo se objevila konkrétní slabina, která má vlastní malý krok.
+
+Začněte větou:
+
+```text
+Druhou lehkou kontrolu uzavíráme takto:
+```
+
+Za ni napište výsledek bez historie:
+
+```text
+Druhou lehkou kontrolu uzavíráme takto:
+Opravená věta u kanonického pravidla byla při běžném použití najitelná, šlo podle ní rozhodnout a nevznikla nová datová stopa. Pravidlo vracíme do běžného ročního rytmu; další kontrola přijde až při návratovém signálu nebo při dalším plánovaném review.
+```
+
+Dobré uzavření je krátké, ale ne mlhavé. Musí být jasné, co se ověřilo, co se už dál nesleduje a co by pravidlo znovu otevřelo. Bez této věty zůstane kolem pravidla slabý zápach nedokončené péče: někdo má pocit, že už je hotovo, někdo čeká na třetí kontrolu a někdo začne sbírat drobná data, protože "když už jsme to jednou sledovali". Ne. Když je hotovo, je hotovo. To je technicky pokročilá disciplína, maskovaná jako obyčejná tečka.
+
+### Tři uzavírací stavy
+
+Po druhé lehké kontrole vyberte jeden ze tří stavů:
+
+- Vrátit do běžného rytmu: opravené místo funguje a žádná mimořádná péče už není potřeba.
+- Dolaďte poslední lokální větu: kontrola ukázala drobnou nejasnost, která se dá opravit přímo u pravidla.
+- Otevřít samostatnou smyčku: kontrola narazila na změnu kontextu, která už nepatří do servisní kontroly.
+
+`Vrátit do běžného rytmu` je cílový stav. Znamená, že se pravidlo chová jako stabilní součást práce: člověk ho najde, použije a nemusí znát příběh ročního review. Do záznamu napište, kde pravidlo žije a kdy se znovu otevře. Pokud žádný mimořádný návratový signál nepřišel, nevymýšlejte ho zpětně.
+
+`Dolaďte poslední lokální větu` použijte tehdy, když se pravidlo našlo, ale pořád svádělo k chybné interpretaci. Oprava má být nejmenší možná. Přidejte podmínku, zpřesněte sloveso, odstraňte dvojznačný příklad nebo přesuňte větu blíž k místu použití. Neotevírejte celé roční review kvůli tomu, že jedna instrukce zněla moc měkce.
+
+`Otevřít samostatnou smyčku` je pro situace, kdy druhá kontrola odhalí něco mimo původní opravu. Třeba se změnil segment, nabídka, vlastník procesu nebo nástroj, ve kterém pravidlo žije. To už není pokračování lehké kontroly. Je to nový kontext. Uzavřete druhou kontrolu s poznámkou, co fungovalo, a nové téma založte odděleně. Jinak se servisní větev promění v nenápadný tunel zpět do velké změny.
+
+### Praktický příklad
+
+Druhá lehká kontrola:
+
+```text
+Situace:
+Člověk při běžné revizi formuláře hledal pravidlo pro volitelnou otázku na rozpočet.
+
+Použití:
+Našel kanonickou větu bez staré servisní poznámky a použil ji jen u relevantní poptávky, kde bez rozpočtu nešlo navrhnout další krok.
+
+Výsledek:
+Formulář se neměnil, scoring nevznikl, export nevznikl a žádná pomocná tabulka nepřibyla.
+```
+
+Uzavření:
+
+```text
+Uzavírací stav:
+Vrátit do běžného rytmu.
+
+Co ponecháváme:
+Kanonickou větu u potvrzovací šablony a odkaz v obchodním checklistu.
+
+Co ukončujeme:
+Druhou lehkou kontrolu, servisní poznámku i ruční sledování použití.
+
+Co zůstává zavřené:
+Povinné formulářové pole pro rozpočet, lead scoring a nový export rozpočtových údajů.
+
+Návratový signál:
+K tématu se vrátíme pouze pokud volitelná otázka třikrát za sebou nepomůže kvalifikovat relevantní poptávku a ruční doptání znovu zdrží další krok.
+```
+
+Slabší výsledek:
+
+```text
+Výsledek:
+Člověk pravidlo našel, ale nebylo jasné, zda se má použít i u poptávek, kde další krok lze navrhnout bez rozpočtu.
+
+Uzavírací stav:
+Dolaďte poslední lokální větu.
+
+Oprava:
+Do kanonické věty doplňujeme "jen tehdy, když bez rozpočtu nejde navrhnout další konkrétní krok".
+
+Co neotevíráme:
+Nové review pravidla, úpravu formuláře, scoring ani další kontrolní tabulku.
+```
+
+V obou příkladech je zásah úměrný důkazu. Buď pravidlo stojí samo, nebo potřebuje jednu přesnou větu. Nic mezi tím nemá dostat vlastní proces.
+
+### Privacy-first uzavření
+
+Druhá lehká kontrola je poslední místo, kde je potřeba uklidit zbytky mimořádné pozornosti. Pokud po ní zůstanou pomocné poznámky, screenshoty, kopie zákaznických odpovědí, ruční štítky nebo tabulka použití, časem se z nich stane datový zvyk. A datové zvyky jsou zákeřné právě tím, že nevypadají jako rozhodnutí.
+
+Použijte krátký zápis:
+
+```text
+Do běžného rytmu přenášíme:
+
+Do běžného rytmu nepřenášíme:
+
+Po uzavření mažeme, anonymizujeme nebo necháváme v původním zdroji:
+```
+
+Příklad:
+
+```text
+Do běžného rytmu přenášíme:
+Jednu zobecněnou větu v kanonickém pravidle.
+
+Do běžného rytmu nepřenášíme:
+Pomocnou tabulku použití, ruční štítek "ověřit rozpočet" ani kopie odpovědí z obchodních vláken.
+
+Po uzavření mažeme, anonymizujeme nebo necháváme v původním zdroji:
+Konkrétní zákaznické odpovědi zůstávají jen v původní obchodní komunikaci; do pravidla nepřenášíme osobní ani obchodní detaily.
+```
+
+Tím se zachová poznatek, ale ne přebytečná stopa. Privacy-first provoz není jen výběr nástroje se serverem v Evropě. Je to i schopnost po malé kontrole uklidit malé stopy, protože právě malé stopy se nejhůř hledají, když je za rok někdo potřebuje vysvětlit.
+
+Codyho komentář: největší past druhé lehké kontroly je věta "ještě to nechme chvíli běžet". Někdy je správná. Častěji znamená, že tým nechce napsat tečku. Pokud nemáte konkrétní otázku pro další sledování, nesledujete. Jen sbíráte klid v podobě dat. To je drahý klid.
+
+### Karta uzavření druhé lehké kontroly
+
+```text
+Pravidlo nebo pracovní místo:
+
+Slabina z první lehké kontroly:
+
+Co druhá lehká kontrola ověřila:
+
+Výsledek kontroly:
+
+Uzavírací stav:
+- vrátit do běžného rytmu
+- doladit poslední lokální větu
+- otevřít samostatnou smyčku
+
+Co se propisuje do kanonického místa:
+
+Co ukončujeme:
+
+Co zůstává výslovně zavřené:
+
+Návratový signál nebo další plánované review:
+
+Privacy-first uzavření:
+Do běžného rytmu přenášíme:
+Do běžného rytmu nepřenášíme:
+Mažeme, anonymizujeme nebo necháváme v původním zdroji:
+
+Vlastník:
+
+Datum uzavření:
+```
+
+Karta má ukončit servisní větev, ne ji prodloužit. Pokud po vyplnění vzniknou tři nové otázky, pravděpodobně patří jinam. Druhá lehká kontrola je malý nástroj pro stabilizaci pravidla, ne univerzální kontejner na všechno, co se během roku změnilo.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte, jakou slabinu měla druhá lehká kontrola ověřit.
+2. Minuta 2: napište, co se při kontrole opravdu stalo.
+3. Minuta 3: vyberte jeden uzavírací stav.
+4. Minuta 4: rozhodněte, co se propisuje do kanonického místa a co se ukončuje.
+5. Minuta 5: zapište, co zůstává zavřené a jaký je další návratový signál.
+6. Minuta 6: ukliďte datovou stopu.
+
+Když se během workshopu objeví změna segmentu, nabídky nebo procesu, nepřilepujte ji na konec karty. Uzavřete druhou kontrolu a založte nové téma. Jedno uzavření má nést jeden závěr. Zbytek je jen chaos s odrážkami.
+
+### Checklist uzavření druhé lehké kontroly
+
+- Víme, jakou slabinu druhá lehká kontrola ověřovala?
+- Máme konkrétní výsledek, ne jen pocit, že "to asi funguje"?
+- Vybrali jsme jeden ze tří uzavíracích stavů?
+- Pokud pravidlo vracíme do rytmu, je jasné, kde žije a kdy se znovu otevře?
+- Pokud dolaďujeme větu, je oprava lokální a přímo u pracovního místa?
+- Pokud otevíráme novou smyčku, oddělili jsme ji od servisní kontroly?
+- Je napsané, co se ukončuje?
+- Zůstává původní širší rozsah výslovně zavřený?
+- Ukončili jsme pomocné poznámky, screenshoty, ruční štítky, exporty nebo tabulky použití?
+- Nepřenášíme do běžného rytmu osobní ani obchodní údaje bez jasného účelu?
+
+Uzavření druhé lehké kontroly je tečka za mimořádnou péčí po ročním review. Když pravidlo funguje, vraťte ho do rytmu. Když potřebuje poslední větu, napište ji tam, kde se používá. A když se objeví nový kontext, založte ho čistě. Stabilita není to, že se nic nemění. Stabilita je schopnost poznat, kdy je změna opravdu nová práce a kdy už stačí přestat držet systém za ruku.
+
 ## Pracovní log
 
+- 2026-06-27: Doplněna úvodní podkapitola o uzavření druhé lehké kontroly po uzavřeném ročním review: tři uzavírací stavy, praktické příklady, privacy-first úklid zbylých stop, karta, mini workshop a checklist.
 - 2026-06-26: Doplněna úvodní podkapitola o druhé lehké kontrole po uzavřeném ročním review: kdy ji nedělat, ověření lokální opravy, privacy-first hranice, karta, mini workshop a checklist.
 - 2026-06-26: Doplněna úvodní podkapitola o uzavření první lehké kontroly po uzavřeném ročním review: čtyři uzavírací stavy, praktické příklady, privacy-first úklid dočasných stop, karta, mini workshop a checklist.
 - 2026-06-26: Doplněna úvodní podkapitola o první lehké kontrole po uzavřeném ročním review: ověření použitelnosti v reálné práci, tři kontrolní otázky, lokální opravy, privacy-first práce bez nové datové stopy, karta, mini workshop a checklist.
