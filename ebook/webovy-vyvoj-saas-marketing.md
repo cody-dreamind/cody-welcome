@@ -264275,8 +264275,198 @@ Pokud se během pěti minut ukáže, že tým vlastně nezná aktuální návrat
 
 První návratový signál po uzavřené běžné správě má otestovat jednu věc: jestli tým umí rozlišit skutečný důvod od pouhé podobnosti. Když signál nenastal, zapište podnět a nechte pravidlo v klidu. Když nastal, otevřete nejmenší průchod. V obou případech držte datovou stopu menší než problém, který řešíte.
 
+## Uzavření prvního návratového signálu po uzavřené běžné správě
+
+První návratový signál po běžné správě nesmí zůstat viset jako otevřená závorka. Jakmile tým rozhodne, jestli šlo jen o záznam, lokální vysvětlení, nebo skutečný návrat, musí stejnou energií uzavřít i reakci. Jinak se z jednoho podnětu stane šedá zóna: všichni vědí, že se něco řešilo, ale nikdo neví, jestli pravidlo dál platí, jestli se něco změnilo, nebo jestli se kolem něj potichu začalo znovu hlídat.
+
+Uzavření je krátké, ale důležité. Má odpovědět na čtyři otázky:
+
+```text
+Co jsme viděli:
+
+Jaký stav jsme vybrali:
+
+Co se změnilo nebo nezměnilo:
+
+Co už dál nesledujeme:
+```
+
+Tahle čtveřice chrání tým před dvěma špatnými konci. První je přehnaná reakce: jeden podobný případ otevře starý návrh, nový report a další schůzku. Druhý je mlhavé odložení: podnět se sice nezvětší, ale zůstane v hlavách jako neuzavřená starost. Dobré uzavření nedělá ani jedno. Prostě řekne, co se stalo, co z toho plyne a kde práce končí.
+
+### Tři způsoby uzavření
+
+Podle výsledku prvního podnětu použijte jeden ze tří uzavíracích stavů:
+
+- Podnět uzavřen bez změny: návratový signál nenastal a pravidlo zůstává v běžné správě.
+- Lokální vysvětlení uzavřeno: opravila se nejbližší věta, odkaz nebo navigace, ale původní rozhodnutí se neotevřelo.
+- Skutečný návrat předán do malého průchodu: podnět splnil návratový signál a vznikl samostatný malý krok se stop podmínkou.
+
+`Podnět uzavřen bez změny` potřebuje hlavně disciplínu. Zapište ho jednou větou a nepřidávejte další péči. Pokud se neotevřela práce, nemá kolem ní vznikat ani pomocná evidence. To je častá chyba: tým sice řekne "nic neměníme", ale pro jistotu si založí tabulku budoucích podobných případů. Tím změnu fakticky otevřel, jen se tváří, že ne.
+
+`Lokální vysvětlení uzavřeno` má mít jasnou hranici. Oprava patří na místo, kde člověk pravidlo nenašel nebo špatně pochopil. Pokud se kvůli jedné nejasné větě začne přepisovat celý playbook, uzavření se nepovedlo. Dobrý výsledek zní nudně: "zpřesnili jsme jednu větu u šablony a tím končíme". Nuda má v provozu často zdravější puls než kreativní nadšení.
+
+`Skutečný návrat předán do malého průchodu` neznamená návrat k původnímu velkému návrhu. Znamená jen to, že signál byl dost silný na novou kontrolu. Uzavření prvního signálu proto musí zároveň otevřít novou malou smyčku: pracovní místo, stop podmínku, vlastníka a věci, které zůstávají mimo rozsah.
+
+Codyho komentář: nejhorší stav je "budeme to sledovat". Někdy je legitimní, jasně. Ale často je to jen pohodlný způsob, jak neříct ani ano, ani ne, a přitom si pořídit malý provozní batoh plný dat. Batohy jsou fajn na výlety, méně na každé rozhodnutí v SaaS.
+
+### Praktický příklad bez změny
+
+```text
+Co jsme viděli:
+Jedna relevantní poptávka potřebovala ruční doptání na rozpočet.
+
+Jaký stav jsme vybrali:
+Podnět uzavřen bez změny.
+
+Proč:
+Domluvený návratový signál byly tři relevantní poptávky za sebou, které nejdou kvalifikovat bez rozpočtu. Tento signál nenastal.
+
+Co se nemění:
+Formulář, potvrzovací e-mail, obchodní šablona ani lead scoring.
+
+Co už dál nesledujeme:
+Nezakládáme tabulku poptávek bez rozpočtu a nepřidáváme nový CRM štítek.
+```
+
+Takový zápis je krátký a pro budoucnost bohatý. Když se za měsíc objeví další podobný podnět, tým vidí, že minule nešlo o návrat. Zároveň ale nevznikla nová datová hromádka, kterou by někdo musel udržovat, vysvětlovat a jednou uklízet.
+
+### Praktický příklad lokálního vysvětlení
+
+```text
+Co jsme viděli:
+Obchodník použil volitelnou otázku na rozpočet u poptávky, kde nebyla potřeba.
+
+Jaký stav jsme vybrali:
+Lokální vysvětlení uzavřeno.
+
+Co jsme upravili:
+U obchodní šablony jsme doplnili větu: "Otázku na rozpočet použij jen tehdy, když bez ní nejde navrhnout další konkrétní krok."
+
+Co zůstává zavřené:
+Povinné pole v prvním formuláři, lead scoring a mimořádné review rozpočtů.
+
+Jak ověříme:
+Při nejbližším běžném použití šablony zkontrolujeme, jestli člověk najde správnou větu bez dalšího vysvětlení.
+```
+
+Tady vznikla změna, ale jen lokální. Všimněte si poslední věty: ověření je přirozené a navázané na další použití. Nezakládá samostatný projekt. Pokud se šablona použije správně, není potřeba nic dalšího. Pokud se nepoužije správně, otevře se nejmenší další oprava šablony, ne celý starý problém.
+
+### Praktický příklad skutečného návratu
+
+```text
+Co jsme viděli:
+Tři relevantní poptávky za sebou nešlo kvalifikovat bez ručního doptání na rozpočet.
+
+Jaký stav jsme vybrali:
+Skutečný návrat předán do malého průchodu.
+
+Co otevíráme:
+Jednu úpravu potvrzovacího e-mailu, která lépe vysvětlí, kdy a proč se můžeme doptat na rámec rozpočtu.
+
+Stop podmínka:
+Po úpravě u dvou relevantních poptávek ověříme, jestli obchod dokáže navrhnout další krok bez zavedení povinného pole.
+
+Co zůstává zavřené:
+Povinné rozpočtové pole v prvním formuláři, automatický scoring a nový report rozpočtových kategorií.
+```
+
+Skutečný návrat je nejsilnější ze tří stavů, ale pořád nemusí vést k největší změně. Právě naopak. Silný signál si zaslouží přesnější práci. Pokud tým hned sáhne po nejširším původním návrhu, přeskočí možnost vyřešit problém menším zásahem a menší datovou stopou.
+
+### Privacy-first uzavření signálu
+
+Uzavření prvního signálu musí uklidit i data, která vznikla při jeho posouzení. To platí hlavně u obchodních, supportních a onboardingových příkladů. Pro rozhodnutí často stačí anonymizovaný záznam typu "jedna relevantní poptávka potřebovala doptání". Není potřeba držet celé znění zprávy, jméno zákazníka, interní odhad rozpočtu ani screenshot CRM.
+
+Před uzavřením napište:
+
+```text
+Pro další práci ponecháváme:
+
+Mažeme nebo neukládáme:
+
+Důvod:
+```
+
+Příklad:
+
+```text
+Pro další práci ponecháváme:
+Anonymizovanou větu, že šlo o jeden izolovaný případ bez splněného návratového signálu.
+
+Mažeme nebo neukládáme:
+Kopii poptávky, jméno kontaktu, rozpočtovou domněnku a screenshot CRM.
+
+Důvod:
+Rozhodnutí nevyžaduje osobní ani obchodní detaily; stačí provozní signál.
+```
+
+Privacy-first hodnota tady není v tom, že nikdy nepracujete s reálnými příklady. To by byla pohádka pro compliance plakát. Hodnota je v tom, že po rozhodnutí necháte jen takovou stopu, která je potřeba pro budoucí orientaci, a zbytek nenecháte zbytečně ležet v dokumentech, chatech ani exportech.
+
+### Karta uzavření prvního signálu
+
+```text
+Pravidlo nebo pracovní místo:
+
+Domluvený návratový signál:
+
+Posuzovaný podnět:
+
+Výsledek:
+- podnět uzavřen bez změny
+- lokální vysvětlení uzavřeno
+- skutečný návrat předán do malého průchodu
+
+Jednovětý závěr:
+
+Co se změnilo:
+
+Co zůstává beze změny:
+
+Co zůstává výslovně zavřené:
+
+Jaký další krok existuje, pokud existuje:
+
+Stop podmínka dalšího kroku, pokud existuje:
+
+Jakou datovou stopu ponecháváme:
+
+Co mažeme, neukládáme nebo nesbíráme:
+
+Vlastník:
+
+Datum další běžné kontroly nebo návratový signál:
+```
+
+Kartu zkraťte podle skutečné velikosti podnětu. Pokud šlo jen o jednoduchý záznam bez změny, stačí vyplnit výsledek, jednovětý závěr a datovou stopu. Karta nemá vyrábět práci navíc. Má zabránit tomu, aby se drobný podnět tvářil jako neuzavřený strategický problém.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: zopakujte, jaký podnět se posuzoval.
+2. Minuta 2: vyberte jeden ze tří výsledků uzavření.
+3. Minuta 3: napište jednovětý závěr bez staré historie.
+4. Minuta 4: určete, co se mění a co zůstává zavřené.
+5. Minuta 5: rozhodněte, jaká datová stopa stačí.
+6. Minuta 6: zapište další krok nebo výslovně napište, že žádný nevzniká.
+
+Když se workshop začne měnit v debatu o původním rozhodnutí, vraťte se k otázce: "Uzavíráme tento podnět, nebo opravdu nastal návratový signál?" Pokud nastal, založte malý průchod. Pokud nenastal, uzavřete podnět. Smíchat tyhle dvě věci je spolehlivý způsob, jak z běžné správy udělat nekonečnou poradní místnost.
+
+### Checklist uzavření prvního signálu
+
+- Je jasné, jaký podnět se uzavírá?
+- Vybrali jsme jeden ze tří výsledků uzavření?
+- Je jednovětý závěr srozumitelný bez znalosti celé historie?
+- Pokud se nic nemění, nevzniklo ani nové sledování?
+- Pokud šlo o lokální vysvětlení, zůstala oprava opravdu u nejbližší věty, odkazu nebo pracovního místa?
+- Pokud šlo o skutečný návrat, má další krok stop podmínku?
+- Je napsané, co zůstává výslovně zavřené?
+- Je datová stopa menší než původní podnět?
+- Smazali jsme nebo neuložili osobní, obchodní a screenshotové detaily, které nejsou nutné?
+- Ví nový člověk podle záznamu poznat, jestli pravidlo dál běží v běžné správě?
+
+Uzavření prvního návratového signálu má být klidné a přesné. Když signál nenastal, nejlepší výsledek je často žádná změna a žádný nový datový zvyk. Když signál nastal, nejlepší výsledek je malý průchod s hranicí. V obou případech má tým odejít s jasnou větou, ne s pocitem, že se kolem pravidla zase něco vznáší.
+
 ## Pracovní log
 
+- 2026-06-27: Doplněna úvodní podkapitola o uzavření prvního návratového signálu po uzavřené běžné správě: tři způsoby uzavření, praktické příklady, privacy-first úklid datové stopy, karta, mini workshop a checklist.
 - 2026-06-27: Doplněna úvodní podkapitola o prvním návratovém signálu po uzavřené běžné správě: rozlišení podnětu od skutečného návratu, lokální vysvětlení, privacy-first záznam, karta, mini workshop a checklist.
 - 2026-06-27: Doplněna úvodní podkapitola o uzavření první běžné správy po druhém ročním cyklu: tři výsledky uzavření, praktické příklady, privacy-first úklid dočasných stop, karta, mini workshop a checklist.
 - 2026-06-27: Doplněna úvodní podkapitola o první běžné správě po uzavřeném druhém ročním cyklu: kanonické místo, použitelná pracovní věta, úklid starých stop, privacy-first kontrola, karta, mini workshop a checklist.
