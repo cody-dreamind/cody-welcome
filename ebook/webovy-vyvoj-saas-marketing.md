@@ -263246,8 +263246,174 @@ Pokud se workshop zasekne na starém sporu, vraťte se k dnešnímu důkazu. Ro�
 
 Dobré první roční review po mimořádném režimu je skoro nudné. A to je kompliment. Znamená to, že mimořádná práce se nerozlezla do trvalého dramatu, pravidlo se vrátilo do normálního provozu a privacy-first úklid nezůstal jen jako hezká poznámka v kartě. Nuda je někdy nejlepší provozní architektura. Bohužel se hůř prodává na konferencích, ale zato funguje.
 
+## Uzavření prvního ročního review po návratu z mimořádného režimu
+
+Roční review po mimořádném režimu potřebuje vlastní uzavření. Ne proto, že by tým potřeboval další formulář do sbírky. Proto, že bez závěru zůstane stará mimořádná historie viset nad pravidlem jako nenápadná výjimka. Jednou za rok se pak někdo zeptá, jestli by se to nemělo znovu celé projít, protože "to tehdy bylo důležité". Ano, bylo. A právě proto se má review uzavřít tak, aby další rok začal normálně.
+
+Uzavření napište jednou větou:
+
+```text
+První roční review po mimořádném režimu uzavíráme takto:
+```
+
+Za ni doplňte výsledek, který říká tři věci: jestli pravidlo zůstává stabilní, co se případně lokálně upravilo a co se z mimořádné historie dál nepřenáší. Dobrá věta vypadá třeba takto:
+
+```text
+První roční review po mimořádném režimu uzavíráme takto: pravidlo zůstává ve stabilním ročním rytmu, do potvrzovací šablony doplňujeme jednu kratší variantu otázky a mimořádnou historii dál nepoužíváme jako důvod k debatě o povinném rozpočtovém poli.
+```
+
+Tohle není stylistické cvičení. Jedna přesná věta chrání další rok práce. Tým ví, že review proběhlo, že pravidlo obstálo, že drobná lokální úprava není návrat k širokému návrhu a že staré podklady nemají znovu řídit rozhodování.
+
+### Tři uzavírací stavy
+
+Po prvním ročním review po mimořádném režimu obvykle stačí vybrat jeden ze tří stavů:
+
+- Stabilní bez změny: pravidlo fungovalo, návratový signál nenastal a není potřeba upravovat pracovní místo.
+- Stabilní s lokální úpravou: pravidlo fungovalo, ale jedna věta, šablona nebo kotva potřebuje drobné zpřesnění.
+- Otevřít nový malý průchod: objevil se dnešní důkaz, který nestačí na návrat k celé mimořádné historii, ale stačí na malé ověření v konkrétním pracovním místě.
+
+Stav `stabilní bez změny` je plnohodnotný výsledek. Neznamená, že tým nic neudělal. Znamená, že ověřil pravidlo, nenašel nový důvod ke změně a odmítl vyrábět práci z nostalgie po starém problému.
+
+Stav `stabilní s lokální úpravou` je pro drobnosti. Třeba kratší formulace otázky v e-mailové šabloně, doplnění odkazu v checklistu nebo zkrácení interní poznámky. Úprava nesmí změnit datovou stopu ani otevřít původní široký návrh. Pokud měníte formulář, CRM atribut, export nebo retenci, už nejste v lokální úpravě.
+
+Stav `otevřít nový malý průchod` použijte jen tehdy, když review našlo dnešní opakovaný problém. I potom ale nezačínejte starým řešením. Začněte dnešním pracovním místem a nejmenším ověřením. Mimořádná historie může dodat hranici, ne hotovou odpověď.
+
+### Praktický příklad
+
+Review zkontrolovalo pravidlo kolem poptávek bez rozpočtu:
+
+```text
+Co se za rok stalo:
+Dvě relevantní poptávky přišly bez rozpočtu, obě šly kvalifikovat pomocí potvrzovací šablony a následné obchodní otázky.
+
+Návratový signál:
+Nenastal.
+
+Datová stopa:
+Nevzniklo nové formulářové pole, CRM skóre ani export.
+```
+
+Uzavření může znít takto:
+
+```text
+Uzavírací stav:
+Stabilní s lokální úpravou.
+
+Co upravujeme:
+V potvrzovací šabloně zkracujeme volitelnou otázku na rozpočet, aby byla použitelná bez vysvětlování.
+
+Co zůstává zavřené:
+Povinné pole pro rozpočet, automatický lead scoring, export poptávek do další tabulky a opakované mimořádné review.
+
+Co nepřenášíme dál:
+Staré konkrétní příklady z mimořádného review. Stačí zkrácený rozhodovací záznam a aktuální pracovní věta.
+
+Další rytmus:
+Běžné roční review, případně dřívější návrat pouze při původně definovaném návratovém signálu.
+```
+
+Všimněte si, že i když vznikla úprava, review končí stabilně. Tým neotevřel formulář, nezačal strukturovat rozpočty a nevytvořil další tabulku jen proto, že se téma jednou za rok připomnělo. To je přesně rozdíl mezi údržbou pravidla a opětovným nafouknutím starého problému.
+
+### Privacy-first uzavření
+
+Privacy-first část uzavření má být velmi konkrétní. Nestačí napsat "datová stopa v pořádku". To je hezké, ale trochu jako napsat na server "snad běží". Lepší je říct, co se ponechává, co se odstraňuje a co se dál nezačíná sbírat.
+
+Použijte tři řádky:
+
+```text
+Ponecháváme:
+
+Mažeme, zkracujeme nebo anonymizujeme:
+
+Dál nezavádíme:
+```
+
+Příklad:
+
+```text
+Ponecháváme:
+Aktuální pracovní větu u potvrzovací šablony a zkrácený rozhodovací záznam o tom, proč rozpočet není povinné pole.
+
+Mažeme, zkracujeme nebo anonymizujeme:
+Staré konkrétní zákaznické příklady z mimořádného review a pomocné poznámky, které sloužily jen pro tehdejší vyhodnocení.
+
+Dál nezavádíme:
+Povinný rozpočtový údaj, automatické skóre leadu, behaviorální sledování formuláře ani nový export poptávek.
+```
+
+Pokud tým chce některý starý příklad ponechat pro onboarding, přepište ho do anonymizovaného scénáře. Nechte v něm rozhodovací situaci, ne konkrétní obchodní detail. Onboarding nepotřebuje vědět, kdo přesně kdy napsal jaký rozpočet. Potřebuje poznat, kdy použít pravidlo a kdy ho neotevírat.
+
+Codyho komentář: anonymizovaný scénář je často lepší učební materiál než skutečný případ. Skutečný případ svádí k debatě o detailech. Scénář drží pozornost na pravidle. Méně šťavnaté, více užitečné. Produktová práce je občas dietní literatura.
+
+### Karta uzavření ročního review
+
+```text
+Pravidlo nebo pracovní místo:
+
+Výsledek ročního review:
+
+Uzavírací stav:
+- stabilní bez změny
+- stabilní s lokální úpravou
+- otevřít nový malý průchod
+
+Jednovětý závěr:
+
+Co se případně lokálně upravuje:
+
+Co zůstává zavřené z mimořádné historie:
+
+Co z mimořádné historie dál nepřenášíme:
+
+Privacy-first uzavření:
+Ponecháváme:
+Mažeme, zkracujeme nebo anonymizujeme:
+Dál nezavádíme:
+
+Další plánovaný rytmus:
+
+Návratový signál mimo plánovaný rytmus:
+
+Kde je závěr uložený:
+
+Vlastník:
+
+Datum:
+```
+
+Karta má být konec kapitoly, ne začátek nové. Pokud po jejím vyplnění vznikne pět dalších úkolů, pravděpodobně jste do review přimíchali jiné téma. Oddělte ho. Roční uzavření má nechat stabilní pravidlo v klidu a otevřít novou práci jen tam, kde existuje dnešní důkaz.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte výsledek ročního review jednou větou.
+2. Minuta 2: vyberte jeden uzavírací stav.
+3. Minuta 3: napište jednovětý závěr pro další rok.
+4. Minuta 4: určete, co z mimořádné historie zůstává zavřené.
+5. Minuta 5: proveďte privacy-first úklid starých stop.
+6. Minuta 6: potvrďte další rytmus a návratový signál.
+
+Když se během workshopu objeví nový návrh, položte jednoduchou otázku: patří k dnešnímu ročnímu review, nebo je to samostatný podnět? Pokud je samostatný, založte ho mimo tuto kartu. Jinak se z uzavření stane skládka dobrých nápadů a review ztratí pointu.
+
+### Checklist uzavření ročního review
+
+- Má review jeden jasný uzavírací stav?
+- Je jednovětý závěr srozumitelný bez čtení celé mimořádné historie?
+- Je jasné, jestli pravidlo zůstává stabilní, nebo se otevírá nový malý průchod?
+- Pokud vznikla lokální úprava, je opravdu lokální?
+- Zůstává původní široký návrh výslovně zavřený?
+- Nepřenášíme do dalšího roku staré konkrétní příklady bez účelu?
+- Uklidili jsme pomocné poznámky, tabulky, screenshoty nebo kopie zpráv z mimořádného review?
+- Nezavedli jsme nové pole, tracker, export, skóre ani delší retenci bez samostatného rozhodnutí?
+- Je další plánované review v běžném rytmu?
+- Má návratový signál konkrétní podobu, aby neotevíral práci při každém podobném podnětu?
+- Ví nový člověk, kde najít aktuální pracovní větu?
+- Umí tým říct, co už se kolem pravidla nemá znovu řešit?
+
+Uzavření prvního ročního review po mimořádném režimu je moment, kdy se stará výjimka definitivně přestane tvářit jako zvláštní kapitola provozu. Zůstane z ní jen to, co pomáhá dnešní práci: pracovní věta, hranice rozhodnutí, návratový signál a čistá datová stopa. Všechno ostatní může odejít do archivu, zkrácené poznámky nebo rovnou pryč.
+
 ## Pracovní log
 
+- 2026-06-27: Doplněna úvodní podkapitola o uzavření prvního ročního review po návratu z mimořádného režimu: tři uzavírací stavy, praktický příklad, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-27: Doplněna úvodní podkapitola o prvním ročním review po návratu z mimořádného režimu: omezení staré historie na hranici rozhodnutí, kontrola návratového signálu, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-27: Doplněna úvodní podkapitola o návratu do stabilního ročního režimu po mimořádném review: ukončení dočasné péče, kanonické místo, privacy-first úklid podkladů, karta, mini workshop a checklist.
 - 2026-06-27: Doplněna úvodní podkapitola o uzavření druhého běžného použití po uzavřeném mimořádném review: tři uzavírací výsledky, praktické příklady, privacy-first uzavření datové stopy, karta, mini workshop a checklist.
