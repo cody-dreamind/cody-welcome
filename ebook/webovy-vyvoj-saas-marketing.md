@@ -191,6 +191,8 @@ Když se během sedmi minut ukáže, že důkaz je silnější, než tým čekal
 - Je rozhodnutí uložené u pracovního místa, kde se podnět pravděpodobně znovu objeví?
 - Umí tým za měsíc poznat, jestli přišel nový důvod, nebo jen starý pocit v novém kabátě?
 
+Checklist nepoužívejte jako povinný formulář pro každou drobnost. Má smysl ve chvíli, kdy hrozí, že se z nejasného podnětu stane práce bez hranic. Pokud tým umí odpovědět jednou přesnou větou, stačí ji zapsat a pokračovat.
+
 Neotevřený krok má být malý, přesný a dohledatelný. Když ho zapíšete dobře, neztrácíte nápad. Ztrácíte jen povinnost dělat práci, která si zatím nezasloužila existovat. To je fér obchod.
 
 Uložte záznam tam, kde se podnět pravděpodobně vrátí: k formuláři, obchodnímu skriptu, stránce nebo onboardingovému kroku. Samostatný dokument je užitečný až ve chvíli, kdy tým podobných záznamů řeší víc a potřebuje je pravidelně porovnávat.
