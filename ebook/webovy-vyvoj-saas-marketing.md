@@ -262308,8 +262308,197 @@ Pokud se tým během workshopu vrací k původním třem podnětům, zastavte ho
 
 První běžné použití po mimořádném review je malý test dospělosti změny. Když projde, neoslavujte ho dalším procesem. Vraťte pravidlo do klidu. Když neprojde, opravte nejbližší překážku a držte zavřený rozsah zavřený. Dobrá výjimka nekončí tím, že o ní tým pořád mluví. Končí tím, že už ji nepotřebuje.
 
+## Uzavření prvního běžného použití po uzavřeném mimořádném review
+
+První běžné použití po mimořádném review má krátký život. Má ověřit, jestli výsledek review funguje v normální práci, a potom se má zavřít. Pokud ho necháte otevřené, začne se tvářit jako další kontrolní režim. To je přesně opačný výsledek, než kvůli kterému se mimořádné review zavíralo.
+
+Uzavření začněte třemi větami:
+
+```text
+Při prvním běžném použití jsme ověřili:
+
+Výsledek byl:
+
+Proto teď:
+```
+
+Tyto věty musí být konkrétní. Neuzavírejte použití větou "vypadá to dobře". To je dojem, ne pracovní stav. Dobré uzavření říká, co se použilo, jestli člověk rozhodl bez mimořádné opory a co se teď děje se zbylým rozsahem, daty a případnou lokální opravou.
+
+Codyho komentář: po mimořádném review bývá tým trochu napjatý. Chce si být jistý, že se problém už nevrátí. Jenže jistota se nedá vyrobit dalším hlídáním všeho. Dá se vyrobit jen dobrým pravidlem, malým ověřením a odvahou zavřít pomocné lešení. Ano, zní to méně hrdinsky než další dashboard. Právě proto to často funguje.
+
+### Čtyři uzavírací stavy
+
+První běžné použití uzavřete jedním ze čtyř stavů:
+
+- Potvrzeno a zpět do klidu: pravidlo šlo najít, použít a nebyly potřeba staré pomocné stopy.
+- Lokální navigační oprava: obsah pravidla funguje, ale cesta k němu je slabá.
+- Lokální rozhodovací oprava: pravidlo je najitelné, ale chybí jeden hraniční příklad nebo věta.
+- Nečisté uzavření review: použití záviselo na staré poznámce, ručním vysvětlení nebo dočasném materiálu.
+
+Stav `Potvrzeno a zpět do klidu` neznamená, že pravidlo je navždy dokonalé. Znamená, že dnešní ověření nenašlo důvod držet mimořádný režim při životě. Další práce smí přijít až přes návratový signál, roční rytmus nebo nový samostatný problém.
+
+Stav `Lokální navigační oprava` řeší trasu, ne obsah. Přidejte odkaz, přesuňte větu blíž k místu použití nebo upravte název v rozcestníku. Nepřepisujte pravidlo jen proto, že ho člověk napoprvé hledal na špatném místě.
+
+Stav `Lokální rozhodovací oprava` řeší jednu hranu. Doplňte příklad, negativní větu nebo krátké "kdy nepoužít". Neotevírejte celou metodiku, pokud selhala jedna rozhodovací situace.
+
+Stav `Nečisté uzavření review` je nejdůležitější nepřikrášlovat. Pokud člověk použil starou pracovní poznámku, review ve skutečnosti ještě nezmizelo z provozu. Neznamená to návrat k velkému rozboru, ale znamená to povinný úklid: rozhodovací věta musí být v kanonickém místě a pomocná stopa musí skončit.
+
+### Praktický příklad uzavření
+
+První běžné použití:
+
+```text
+Situace:
+Obchodník použil potvrzovací šablonu u nové poptávky.
+
+Ověření:
+Našel dva příklady u šablony, rozhodl nepoužít otázku na rozpočet a nemusel otevřít pracovní poznámky z mimořádného review.
+```
+
+Uzavření:
+
+```text
+Při prvním běžném použití jsme ověřili, že upravené příklady u potvrzovací šablony stačí pro samostatné rozhodnutí.
+
+Výsledek byl potvrzeno a zpět do klidu.
+
+Proto teď neotevíráme další review, nepřidáváme pole do formuláře, neměníme scoring a mažeme pomocné poznámky z mimořádného review podle domluveného termínu.
+```
+
+Slabá navigace může vypadat takto:
+
+```text
+Při prvním běžném použití jsme ověřili, že pravidlo je obsahově použitelné, ale člověk ho našel až přes starou poznámku.
+
+Výsledek byl lokální navigační oprava.
+
+Proto přidáme jeden odkaz z obchodního rozcestníku na potvrzovací šablonu, starou poznámku uzavřeme a při dalším běžném použití ověříme jen najitelnost. Obsah pravidla, formulář, scoring i nové review zůstávají zavřené.
+```
+
+Nečisté uzavření pojmenujte bez diplomacie:
+
+```text
+Při prvním běžném použití jsme zjistili, že rozhodnutí pořád závisí na pracovní poznámce z review.
+
+Výsledek byl nečisté uzavření review.
+
+Proto převedeme jedinou rozhodovací větu do kanonické šablony, pomocnou poznámku smažeme nebo archivujeme ve zkrácené podobě a ověříme jedno další běžné použití. Neotevíráme znovu tři původní podněty.
+```
+
+Rozdíl je podstatný. Nečisté uzavření není důvod znovu debatovat o všem. Je to důvod odstranit skrytou oporu, která měla skončit už při uzavření review.
+
+### Co propsat a co ukončit
+
+Po uzavření prvního běžného použití se do pracovního systému propsuje jen minimum:
+
+- stav prvního běžného použití;
+- jedna lokální oprava, pokud existuje;
+- potvrzení, že původně zavřený rozsah zůstává zavřený;
+- datum úklidu pomocných stop;
+- další kontrola pouze tehdy, pokud je nutná pro lokální opravu.
+
+Ukončete všechno, co bylo dočasné: zvláštní sledování pravidla, ruční připomínání změny, pracovní výpisky, kopie podnětů, neformální taháky a staré odkazy na review. Pokud něco z toho pořád potřebujete, pravděpodobně nemáte pravidlo na správném místě.
+
+Nepřidávejte nový metrický režim jen proto, že chcete mít klid. Klid se v tomto případě nepozná podle grafu. Pozná se podle toho, že člověk v běžné práci rozhodne bez mimořádné opory a bez nového sběru dat.
+
+### Privacy-first uzavření
+
+Privacy-first uzavření prvního běžného použití je jednoduché: po ověření nesmí zůstat dočasná datová stopa, která už nemá účel. Zapište tři řádky:
+
+```text
+Pro budoucí práci necháváme:
+
+Po ověření mažeme:
+
+Do dalších míst nepřenášíme:
+```
+
+Příklad:
+
+```text
+Pro budoucí práci necháváme:
+Upravenou šablonu, stav potvrzeno a zpřesněný návratový signál.
+
+Po ověření mažeme:
+Pracovní poznámku z mimořádného review a kopii tří podnětů.
+
+Do dalších míst nepřenášíme:
+Zákaznické zprávy, rozpočtové detaily, CRM screenshoty ani ruční komentáře z chatu.
+```
+
+Tento zápis chrání tým před dvěma chybami. První je zapomenout smazat pomocné podklady. Druhá je přenést je "pro jistotu" do další dokumentace. Obojí vypadá drobně, ale přesně tak vzniká provozní datový nepořádek.
+
+### Karta uzavření prvního běžného použití
+
+```text
+Pravidlo nebo pracovní místo:
+
+Co ověřovalo první běžné použití:
+
+Skutečná situace:
+
+Výsledek:
+- potvrzeno a zpět do klidu
+- lokální navigační oprava
+- lokální rozhodovací oprava
+- nečisté uzavření review
+
+Uzavírací věta:
+
+Co se propsuje:
+
+Co se ukončuje:
+
+Co zůstává zavřené:
+
+Privacy-first úklid:
+Pro budoucí práci necháváme:
+Po ověření mažeme:
+Do dalších míst nepřenášíme:
+
+Je potřeba další běžné ověření?
+
+Pokud ano, jen kvůli čemu:
+
+Vlastník:
+
+Datum:
+```
+
+Karta má být poslední stopa ověření, ne začátek další evidence. Pokud po jejím vyplnění vznikne pět úkolů, vraťte se k výslednému stavu. Buď jste našli novou samostatnou otázku, nebo se snažíte do lokální opravy nacpat širší úklid.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte, co mělo první běžné použití ověřit.
+2. Minuta 2: popište skutečnou situaci jednou větou.
+3. Minuta 3: vyberte jeden ze čtyř uzavíracích stavů.
+4. Minuta 4: napište, co se propsuje a co zůstává zavřené.
+5. Minuta 5: rozhodněte, které pomocné stopy se mažou nebo zkracují.
+6. Minuta 6: potvrďte návrat do klidu, nebo určete jedno další běžné ověření pouze pro lokální opravu.
+
+Pokud se během workshopu někdo vrací k otázce, zda se mimořádné review mělo vůbec otevřít, zastavte to. Tahle debata patří do ročního rytmu nebo samostatné retrospektivy. Uzavření prvního běžného použití řeší dnešní výsledek, ne obhajobu minulého rozhodnutí.
+
+### Checklist uzavření prvního běžného použití
+
+- Víme, co mělo první běžné použití ověřit?
+- Popsali jsme skutečnou situaci bez dlouhé historie review?
+- Vybrali jsme jeden ze čtyř uzavíracích stavů?
+- Pokud je výsledek potvrzený, vracíme pravidlo do klidu?
+- Pokud opravujeme navigaci, neměníme obsah pravidla?
+- Pokud opravujeme rozhodovací hranu, držíme se jednoho příkladu nebo věty?
+- Pokud šlo o nečisté uzavření, odstraňujeme skrytou oporu místo nového review?
+- Je jasné, co se propsuje do pracovního systému?
+- Je jasné, co se ukončuje jako dočasná péče?
+- Zůstává původně zavřený rozsah opravdu zavřený?
+- Mažeme nebo zkracujeme pomocné poznámky, kopie podnětů, screenshoty a exporty?
+- Nepřenášíme citlivé detaily do dalších dokumentů jen kvůli pohodlí?
+- Pokud je potřeba další ověření, je omezené na jednu lokální opravu?
+
+Uzavření prvního běžného použití je návrat ke standardní práci. Tým má vědět, jestli pravidlo funguje samo, jestli potřebuje malou lokální opravu, nebo jestli po review zůstala skrytá opora. Jakmile je to jasné, další hodnota nevzniká z dalšího hlídání. Vzniká z klidu, ve kterém pravidlo prostě slouží.
+
 ## Pracovní log
 
+- 2026-06-27: Doplněna úvodní podkapitola o uzavření prvního běžného použití po uzavřeném mimořádném review: čtyři uzavírací stavy, praktické příklady, propsání a ukončení dočasné péče, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-27: Doplněna úvodní podkapitola o prvním běžném použití po uzavřeném mimořádném review: ověření najitelnosti, rozhodnutelnosti a datového klidu, čtyři výsledné stavy, praktické příklady, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-27: Doplněna úvodní podkapitola o uzavření mimořádného review po třetím podnětu: čtyři uzavírací stavy, praktický příklad, propsání změny, privacy-first úklid pomocných stop, karta, mini workshop a checklist.
 - 2026-06-27: Doplněna úvodní podkapitola o otevření mimořádného review po třetím podnětu: pět hranic review, zavřený rozsah, praktický příklad, privacy-first rozhodovací stopa, karta, mini workshop a checklist.
