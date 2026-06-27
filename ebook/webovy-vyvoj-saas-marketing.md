@@ -264131,8 +264131,153 @@ Pokud se během workshopu objeví spor o původní rozhodnutí, workshop ukonče
 
 Uzavření první běžné správy má zanechat pravidlo lehčí, ne slavnější. Pokud po něm tým ví, kde pravidlo žije, kdy se k němu vrátit a jaká data už nedržet, iterace splnila účel. Další práce začíná až tehdy, když přijde nový důvod. Ne když se někdo lekne ticha.
 
+## První návratový signál po uzavřené běžné správě
+
+Po uzavřené běžné správě se pravidlo vrátí do normální práce. To je správně. Jenže dřív nebo později přijde první podnět, který bude znít jako návratový signál. Někdo narazí na staré tření, zákazník položí podobnou otázku, obchod si vzpomene na původní debatu nebo se v pracovním místě objeví situace, která vypadá povědomě.
+
+V tu chvíli je potřeba zpomalit přesně o jednu větu. Ne proto, abyste odkládali práci, ale abyste nerozjeli staré téma jen kvůli podobnosti. První podnět po běžné správě má nejdřív projít kontrolou:
+
+```text
+Toto je návratový signál, protože:
+```
+
+Pokud za dvojtečku neumíte napsat konkrétní pozorování odpovídající domluvenému signálu, nejde zatím o návrat. Je to podnět. Podnět se zapíše, ale neotevírá změnu.
+
+Příklad:
+
+```text
+Podnět:
+Jedna nová poptávka neuvedla rozpočet a obchod se musel doptat.
+
+Domluvený návratový signál:
+Tři relevantní poptávky za sebou nepůjdou kvalifikovat bez ručního doptání na rozpočet.
+
+Závěr:
+Návratový signál nenastal. Zapisujeme podnět, ale neotevíráme formulář, scoring ani nové sledování.
+```
+
+Tahle drobná kontrola chrání běžnou správu před panikou. Jeden podobný případ může být normální provoz. Tři opakované případy podle domluvené hranice už mohou být důvod k návratu. Rozdíl mezi těmito dvěma věcmi je rozdíl mezi údržbou a neklidným přepisováním systému.
+
+### Tři stavy prvního podnětu
+
+První podnět po uzavřené běžné správě může skončit třemi stavy:
+
+- Jen záznam: podnět připomíná staré téma, ale návratový signál nenastal.
+- Lokální vysvětlení: podnět vznikl tím, že člověk nenašel nebo špatně pochopil existující pravidlo.
+- Skutečný návrat: podnět odpovídá domluvenému návratovému signálu nebo ukazuje stejně silný dnešní důkaz.
+
+`Jen záznam` je nejčastější a nejzdravější výsledek. Do rozhodovacího logu napište jednu větu, že podnět byl viděn, ale hranice návratu nebyla splněná. Nespouštějte další sledování. Nezakládejte tabulku. Nevolejte mimořádné review. Systém, který umí zapsat jeden podnět a nezvětšit se, je dospělejší než systém, který z každé podobnosti udělá proces.
+
+`Lokální vysvětlení` použijte, když problém nevznikl v pravidle, ale v přístupu k pravidlu. Člověk třeba nevěděl, kde je potvrzovací šablona, nebo si nebyl jistý, jestli otázku použít u všech poptávek. Pak opravte jednu větu, odkaz nebo navigaci. Neotevírejte původní rozhodnutí.
+
+`Skutečný návrat` vyžaduje nový malý průchod. I tehdy ale nezačínejte starým velkým návrhem. Začněte nejbližším pracovním místem a stop podmínkou. Návratový signál říká, že téma stojí za kontrolu. Neříká, že původní široká změna má automaticky vyhrát.
+
+Codyho komentář: staré téma se umí vrátit v převleku "já jsem přece jen malý podnět". Roztomilé. Ale dokud nesplní domluvený signál, nedostane klíče od formuláře, CRM ani dalšího meetingu.
+
+### Praktický příklad lokálního vysvětlení
+
+```text
+Podnět:
+Obchodník poslal volitelnou otázku na rozpočet i u poptávky, kde rozpočet nebyl potřeba pro další krok.
+
+Kontrola signálu:
+Nejde o návrat k povinnému poli. Jde o špatné použití existující věty.
+
+Lokální oprava:
+U šablony zpřesníme větu na: "Volitelnou otázku na rozpočet posílej jen tehdy, když bez ní nejde navrhnout další konkrétní krok."
+
+Co neotevíráme:
+Formulář, nový lead scoring, export rozpočtů ani mimořádné review.
+```
+
+Všimněte si, že oprava je menší než podnět. Podnět mohl svádět k debatě o rozpočtu obecně. Oprava se drží místa, kde vzniklo tření: jedna věta u šablony.
+
+### Privacy-first kontrola podnětu
+
+První podnět po běžné správě je nebezpečný hlavně tím, že tým chce rychle získat "trochu víc dat". Trochu víc dat často znamená pomocnou tabulku, ruční štítek, kopii zákaznické odpovědi, screenshot nebo nový export. Než něco takového vznikne, napište:
+
+```text
+Pro rozhodnutí teď potřebujeme:
+
+Stačí nám anonymizovaný nebo agregovaný záznam:
+
+Nevytváříme:
+```
+
+Příklad:
+
+```text
+Pro rozhodnutí teď potřebujeme:
+Pouze vědět, že šlo o jeden izolovaný případ.
+
+Stačí nám anonymizovaný nebo agregovaný záznam:
+"Jedna relevantní poptávka potřebovala ruční doptání, návratový signál nenastal."
+
+Nevytváříme:
+Seznam rozpočtových odpovědí, nový CRM štítek ani export poptávek bez rozpočtu.
+```
+
+Tím si necháte smysl podnětu, ale neodnesete si z něj zbytečné osobní nebo obchodní detaily. Privacy-first provoz často stojí na takových malých větách. Nejsou efektní, ale brání tomu, aby se jeden provozní moment proměnil v další datový zvyk.
+
+### Karta prvního návratového signálu
+
+```text
+Pravidlo nebo pracovní místo:
+
+Kanonická pracovní věta:
+
+Domluvený návratový signál:
+
+Nový podnět:
+
+Odpovídá podnět návratovému signálu?
+- ne, jen záznam
+- ne, jde o lokální vysvětlení
+- ano, otevřít malý průchod
+
+Co případně opravujeme lokálně:
+
+Co zůstává výslovně zavřené:
+
+Jaký záznam stačí bez nových osobních nebo obchodních detailů:
+
+Co nevytváříme za nové pole, štítek, export, tracker nebo tabulku:
+
+Další krok:
+
+Vlastník:
+```
+
+Kartu použijte jen tehdy, když podnět může svádět k otevření práce. Pro drobnou poznámku stačí jedna věta v logu. Karta nemá být povinná pokuta za to, že se něco stalo.
+
+### Mini workshop na 5 minut
+
+1. Minuta 1: přečtěte domluvený návratový signál.
+2. Minuta 2: popište nový podnět jednou větou.
+3. Minuta 3: rozhodněte, jestli jde o záznam, lokální vysvětlení, nebo skutečný návrat.
+4. Minuta 4: napište, co se teď výslovně neotevírá.
+5. Minuta 5: zkontrolujte, že nevzniká nová datová stopa bez rozhodovací hodnoty.
+
+Pokud se během pěti minut ukáže, že tým vlastně nezná aktuální návratový signál, neotevírejte změnu. Nejdřív najděte kanonické pravidlo a doplňte signál tam. Bez jasné hranice by se podnět hodnotil podle nálady, a nálada je skvělá pro výběr hudby, horší pro provozní rozhodování.
+
+### Checklist prvního návratového signálu
+
+- Máme před sebou domluvený návratový signál?
+- Je nový podnět popsaný konkrétně, ne jako obecný pocit?
+- Odpovídá podnět signálu, nebo ho jen připomíná?
+- Pokud jde jen o záznam, neotevíráme další sledování?
+- Pokud jde o lokální vysvětlení, opravujeme jen nejbližší větu, odkaz nebo pracovní místo?
+- Pokud jde o skutečný návrat, otevíráme malý průchod se stop podmínkou?
+- Je výslovně napsané, co zůstává zavřené?
+- Stačí nám anonymizovaný nebo agregovaný záznam?
+- Nevzniká nový CRM atribut, štítek, export, tracker, tabulka ani pravidelný report bez samostatného rozhodnutí?
+- Ví nový člověk podle záznamu poznat, proč se téma otevřelo nebo neotevřelo?
+
+První návratový signál po uzavřené běžné správě má otestovat jednu věc: jestli tým umí rozlišit skutečný důvod od pouhé podobnosti. Když signál nenastal, zapište podnět a nechte pravidlo v klidu. Když nastal, otevřete nejmenší průchod. V obou případech držte datovou stopu menší než problém, který řešíte.
+
 ## Pracovní log
 
+- 2026-06-27: Doplněna úvodní podkapitola o prvním návratovém signálu po uzavřené běžné správě: rozlišení podnětu od skutečného návratu, lokální vysvětlení, privacy-first záznam, karta, mini workshop a checklist.
 - 2026-06-27: Doplněna úvodní podkapitola o uzavření první běžné správy po druhém ročním cyklu: tři výsledky uzavření, praktické příklady, privacy-first úklid dočasných stop, karta, mini workshop a checklist.
 - 2026-06-27: Doplněna úvodní podkapitola o první běžné správě po uzavřeném druhém ročním cyklu: kanonické místo, použitelná pracovní věta, úklid starých stop, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-06-27: Doplněna úvodní podkapitola o uzavření druhého ročního cyklu do běžné správy: uzavírací věta, propsání do kanonického místa, privacy-first úklid stop, karta, mini workshop a checklist.
