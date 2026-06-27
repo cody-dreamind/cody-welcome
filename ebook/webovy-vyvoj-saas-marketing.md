@@ -263611,8 +263611,170 @@ Když během workshopu někdo vytáhne starou mimořádnou historii, zeptejte se
 
 Druhý roční cyklus je dobré místo pro zklidnění systému. Pokud pravidlo funguje, nechte ho fungovat. Pokud se změnil kontext, přepište hranici. Pokud se objevil dnešní problém, otevřete malý průchod. Všechno ostatní je jen stará pozornost, která se snaží tvářit jako péče.
 
+## Uzavření druhého ročního cyklu do běžné správy
+
+Druhý roční cyklus nekončí tím, že tým odpoví na kontrolní otázky. Končí až ve chvíli, kdy je jasné, co se propsalo do běžného pracovního místa, co zůstává zavřené a kdy se pravidlo znovu otevře. Bez tohoto uzavření se i povedené review může změnit v měkký mezistav: všichni vědí, že se něco posoudilo, ale nikdo přesně neví, jestli se má příště postupovat podle staré věty, nové poznámky nebo dojmu z poslední debaty.
+
+Začněte jednou uzavírací větou:
+
+```text
+Druhý roční cyklus uzavíráme stavem:
+```
+
+A doplňte konkrétní výsledek:
+
+```text
+Druhý roční cyklus uzavíráme stavem ponechat beze změny: potvrzovací šablona zůstává kanonickým místem pro relevantní poptávky bez rozpočtu, povinné pole dál neotevíráme a další kontrola proběhne až v běžném ročním rytmu nebo při návratovém signálu.
+```
+
+Uzavírací věta má udělat tři věci najednou. Má potvrdit stav pravidla, ukončit starou mimořádnou pozornost a pojmenovat další rytmus. Pokud některá z těchto částí chybí, tým si ji později doplní po svém. A pracovní paměť týmu má zvláštní talent doplňovat chybějící části přesně ve chvíli, kdy je nejméně času.
+
+### Čtyři uzavírací věty
+
+Podle výsledku druhého cyklu použijte jednu ze čtyř vět:
+
+- Ponechat beze změny: pravidlo zůstává v kanonickém místě, další kontrola čeká na běžný rytmus nebo návratový signál.
+- Zpřesnit běžnou větu: lokální úprava je propsaná do pracovního místa, starší formulace je zkrácená nebo archivovaná.
+- Přerámovat hranici: stará hranice zůstává v historii a nové pravidlo popisuje dnešní kontext.
+- Otevřít nový malý průchod: review se uzavírá jako rozhodnutí otevřít úzkou navazující práci se stop podmínkou.
+
+`Ponechat beze změny` potřebuje disciplínu v nečinnosti. Napište, že se nic neupravuje, ale zároveň uveďte proč. Třeba proto, že pravidlo bylo použitelné, návratový signál nenastal a datová stopa zůstala čistá.
+
+`Zpřesnit běžnou větu` nesmí vytvořit druhou verzi pravidla. Pokud upravujete formulaci, starou větu buď nahraďte, nebo ji označte jako historickou. Dvě souběžné věty jsou skoro vždycky začátek budoucího zmatku.
+
+`Přerámovat hranici` vyžaduje jasné oddělení starého a nového kontextu. Nepište "upravili jsme pravidlo podle nové situace" a hotovo. Napište, co přesně se změnilo: segment, nabídka, formulář, obchodní postup, onboarding nebo odpovědnost.
+
+`Otevřít nový malý průchod` je pořád uzavření cyklu, ne otevřená brána do všeho. Výstupem má být jedna navazující práce, jeden vlastník, jedna stop podmínka a vědomě zavřený původní široký návrh.
+
+Codyho komentář: nejnebezpečnější věta po review je "něco s tím uděláme". Je tak pružná, že se do ní vejde oprava věty, redesign formuláře, nový report i tři schůzky, které nikdo nechtěl. Praktická práce má mít menší kufr.
+
+### Co propsat a co zavřít
+
+Po uzavírací větě projděte tři místa:
+
+- kanonické pracovní místo,
+- rozcestník nebo checklist, kde tým pravidlo hledá,
+- pomocné poznámky vzniklé během druhého cyklu.
+
+Do kanonického místa patří jen výsledná pracovní věta. Ne celý zápis review. Ne příběh, jak jste k ní došli. Ne všechny alternativy. Člověk, který pravidlo použije za tři měsíce, potřebuje rozhodnutí, hranici a návratový signál.
+
+Do rozcestníku patří odkaz nebo krátká navigační věta. Pokud rozcestník vysvětluje víc než samotné pravidlo, stal se druhým kanonickým místem. Zkraťte ho.
+
+Pomocné poznámky buď smažte, zkraťte, nebo označte jako uzavřenou historii. Pokud obsahují citlivé zákaznické detaily, nahraďte je agregovaným popisem. Review má po sobě nechat rozhodovací stopu, ne archiv polotovarů.
+
+Praktický příklad:
+
+```text
+Kanonické místo:
+Potvrzovací šablona pro relevantní poptávky bez rozpočtu.
+
+Propsaná věta:
+U relevantní poptávky bez rozpočtu posíláme volitelnou otázku v potvrzovacím e-mailu. Povinné pole v prvním formuláři neotevíráme.
+
+Rozcestník:
+U poptávek bez rozpočtu použij potvrzovací šablonu, ne starou servisní poznámku.
+
+Pomocné poznámky:
+Mažeme pracovní tabulku druhého ročního cyklu. V rozhodovacím logu necháváme jen agregovaný závěr.
+```
+
+### Privacy-first uzavření druhého cyklu
+
+Privacy-first uzavření není jen otázka, jestli review nepřidalo tracker. Zeptejte se, jestli po něm nezůstaly nenápadné stopy: export použitých příkladů, ruční tabulka podnětů, kopie zákaznických vět, nový štítek v CRM, komentáře v dokumentu nebo dočasná evidence "pro jistotu".
+
+Použijte krátký zápis:
+
+```text
+Po druhém ročním cyklu ponecháváme:
+
+Mažeme nebo zkracujeme:
+
+Nezavádíme:
+
+Retenci dalšího záznamu nastavujeme na:
+```
+
+Příklad:
+
+```text
+Po druhém ročním cyklu ponecháváme:
+Jednu agregovanou větu v rozhodovacím logu a aktuální potvrzovací šablonu.
+
+Mažeme nebo zkracujeme:
+Dočasný seznam konkrétních poptávek z review, protože už splnil účel.
+
+Nezavádíme:
+Nové CRM pole, scoring rozpočtu, pravidelný export ani další kontrolní tabulku.
+
+Retenci dalšího záznamu nastavujeme na:
+Do příštího ročního review, pokud dřív nenastane návratový signál.
+```
+
+Tahle část je malá, ale důležitá. Nejvíc zbytečných dat nevzniká zlým úmyslem. Vzniká z věty "nechme si to ještě chvíli". Chvíle se pak protáhne na rok a nikdo už neví, proč tabulka existuje.
+
+### Karta uzavření druhého ročního cyklu
+
+```text
+Pravidlo nebo pracovní místo:
+
+Výsledek druhého ročního cyklu:
+- ponechat beze změny
+- zpřesnit běžnou větu
+- přerámovat hranici
+- otevřít nový malý průchod
+
+Uzavírací věta:
+
+Co se propsalo do kanonického místa:
+
+Co se změnilo v rozcestníku nebo checklistu:
+
+Co zůstává zavřené:
+
+Co se maže, zkracuje nebo anonymizuje:
+
+Co výslovně nezavádíme:
+
+Další běžný rytmus:
+
+Návratový signál mimo rytmus:
+
+Vlastník:
+
+Datum:
+```
+
+Karta má být krátká. Pokud se do ní nevejdete bez dlouhého vysvětlování, pravděpodobně ještě nemáte uzavření, ale zápis debaty. Vraťte se k jedné pracovní větě a jednomu dalšímu rytmu.
+
+### Mini workshop na 5 minut
+
+1. Minuta 1: vyberte výsledek druhého ročního cyklu.
+2. Minuta 2: napište uzavírací větu.
+3. Minuta 3: určete, co se propsalo do kanonického místa a rozcestníku.
+4. Minuta 4: smažte, zkraťte nebo anonymizujte pomocné stopy.
+5. Minuta 5: zapište další rytmus a návratový signál mimo rytmus.
+
+Workshop neskončil, dokud není jasné, kde bude pravidlo příště použité. Zápis review uložený bokem je jen doklad práce. Kanonické místo je provoz.
+
+### Checklist uzavření druhého ročního cyklu
+
+- Má druhý cyklus jednu uzavírací větu?
+- Je vybraný jeden ze čtyř výsledků, ne směs více stavů?
+- Je jasné, co se propsalo do kanonického pracovního místa?
+- Je rozcestník nebo checklist aktualizovaný tak, aby nevedl na staré poznámky?
+- Zůstává původní široký návrh zavřený, pokud nenastal návratový signál?
+- Pokud se změnila hranice, je napsaná z dnešního kontextu?
+- Pokud se otevřel nový malý průchod, má vlastníka a stop podmínku?
+- Jsou pomocné poznámky z review smazané, zkrácené nebo anonymizované?
+- Nevzniklo nové pole, štítek, export, report nebo tabulka bez samostatného rozhodnutí?
+- Je další kontrola navázaná na běžný rytmus nebo návratový signál?
+- Umí nový člověk použít pravidlo bez čtení celé historie?
+
+Uzavření druhého ročního cyklu má být klidné a trochu nezajímavé. To je dobré znamení. Pokud pravidlo po dvou letech pořád potřebuje dramatické vysvětlování, není stabilní. Pokud stačí jedna věta, jedno místo a jeden návratový signál, systém dospěl. Gratuluji, právě jste nevyrobili další proces. V dnešní době téměř rebelské.
+
 ## Pracovní log
 
+- 2026-06-27: Doplněna úvodní podkapitola o uzavření druhého ročního cyklu do běžné správy: uzavírací věta, propsání do kanonického místa, privacy-first úklid stop, karta, mini workshop a checklist.
 - 2026-06-27: Doplněna úvodní podkapitola o druhém ročním cyklu po uzavřeném mimořádném režimu: běžná správa pravidla, kontrola kontextu a návratového signálu, privacy-first datová stopa, karta, mini workshop a checklist.
 - 2026-06-27: Doplněna úvodní podkapitola o uzavření prvního ročního review po návratu z mimořádného režimu: tři uzavírací stavy, praktický příklad, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-27: Doplněna úvodní podkapitola o prvním ročním review po návratu z mimořádného režimu: omezení staré historie na hranici rozhodnutí, kontrola návratového signálu, privacy-first úklid, karta, mini workshop a checklist.
