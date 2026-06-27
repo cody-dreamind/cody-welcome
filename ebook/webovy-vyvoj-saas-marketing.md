@@ -261482,8 +261482,221 @@ Pokud se tým zasekne, vraťte se k otázce: "Co by se pokazilo, kdybychom teď 
 
 Druhý podobný podnět je dobrý sluha a špatný šéf. Umí upozornit na slabou hranu, ale nesmí automaticky převzít řízení celého pravidla. Porovnejte ho, zmenšete reakci na nejbližší pracovní místo a otevřete práci jen tehdy, když máte konkrétní důvod. Stabilní pravidlo tím neztratí citlivost. Ztratí jen zbytečnou nervozitu.
 
+## Třetí podnět během ročního klidu
+
+Třetí podobný podnět už si zaslouží vážnější zacházení. Ne proto, že existuje magická hranice tří kusů, po které má tým slavnostně otevřít nový projekt. Ale protože třetí opakování často ukáže rozdíl mezi jednotlivým šumem a pravidlem, které má skutečně slabou hranu. Pořád ale platí: třetí podnět není automatický konec ročního klidu. Je to povinnost udělat krátkou triage a rozhodnout, jestli se naplnil návratový signál, nebo jen přibyl další příbuzný doklad.
+
+Začněte větou:
+
+```text
+Třetí podnět posuzujeme jako možný vzor, protože:
+```
+
+Dobrá věta musí být konkrétnější než "stalo se to potřetí":
+
+```text
+Třetí podnět posuzujeme jako možný vzor, protože se stejná hraniční věta objevila u tří různých obchodníků, kteří pravidlo používali bez čerstvého vysvětlení.
+```
+
+Tím se debata přesune z počítání případů k rozhodovací kvalitě důkazu. Tři stejné dotazy od jednoho člověka ve stejném týdnu mohou být jen nedotažené vysvětlení. Tři podobné chyby od tří rolí na třech pracovních místech mohou ukazovat, že pravidlo není přenositelné. Rozdíl je zásadní, protože první situace chce lokální pomoc a druhá malou opravu pravidla.
+
+Codyho komentář: třetí podnět je přesně ten moment, kdy se tým rád zatváří vědecky a řekne "máme pattern". Fajn. Ale pattern bez pracovního místa je jen dražší dojem. Nejdřív určete, kde se problém opakuje, a až pak mu dejte jméno.
+
+### Tři otázky před otevřením práce
+
+Před jakoukoliv změnou projděte tři otázky:
+
+- Jsou podněty nezávislé, nebo mají stejný zdroj vysvětlení?
+- Týkají se stejné rozhodovací hrany, nebo jen podobného tématu?
+- Naplňují původní návratový signál, nebo ukazují nový, užší signál?
+
+Nezávislost je důležitá. Pokud všechny tři podněty vznikly z jedné špatně pochopené interní poznámky, neopravujte celý systém. Opravte poznámku, smažte dočasný výklad a ověřte další běžné použití.
+
+Stejná rozhodovací hrana je ještě důležitější. Pokud první podnět řeší formulaci v potvrzovacím e-mailu, druhý obchodní kvalifikaci a třetí onboarding nového člověka, nejde automaticky o jeden problém. Může jít o tři místa, kde se jen používá podobné slovo. Otevřít společnou opravu by bylo lákavé, ale pravděpodobně moc široké.
+
+Návratový signál má být poslední brzda. Pokud jste si dřív nastavili konkrétní podmínku návratu, respektujte ji. Když se nenaplnila, ale podněty ukazují novou slabší hranu, neotevírejte původní velkou práci. Otevřete nejmenší ověření nové hrany.
+
+### Praktický příklad
+
+Tři podněty:
+
+```text
+První:
+Obchodník se zeptal, jestli může otázku na rozpočet použít i tam, kde už lze navrhnout další krok.
+
+Druhý:
+Jiný obchodník otázku použil příliš brzy, protože si hranici vyložil jako "každá kvalifikovaná firma".
+
+Třetí:
+Nový člověk při zaučení označil stejnou větu za nejasnou a požádal o příklad, kdy otázku nepoužít.
+```
+
+Triage:
+
+```text
+Nezávislost:
+Ano, podněty přišly od tří lidí a nevznikly z jedné společné schůzky.
+
+Stejná rozhodovací hrana:
+Ano, všichni naráží na hranici, kdy už lze navrhnout další krok bez rozpočtu.
+
+Původní návratový signál:
+Ne, stále nemáme tři relevantní poptávky za sebou, které nelze kvalifikovat bez rozpočtu.
+
+Nový užší signál:
+Ano, pravidlo není dost přenositelné pro člověka bez původního kontextu.
+```
+
+Výsledek:
+
+```text
+Neotevíráme formulář, scoring ani celý obchodní proces. Otevíráme lokální opravu u potvrzovací šablony: doplnit jeden pozitivní a jeden negativní příklad použití otázky na rozpočet. Ověření proběhne při dalším běžném použití šablony novým nebo méně zkušeným člověkem.
+```
+
+To je dostatečně silná reakce. Třetí podnět nezůstal ignorovaný, ale také nerozbil roční klid všude kolem.
+
+### Kdy roční klid opravdu přerušit
+
+Roční klid přerušte jen pro konkrétní pracovní místo, pokud platí jedna z těchto vět:
+
+- Podněty jsou nezávislé a opakují stejnou rozhodovací chybu.
+- Chyba už vedla k reálnému špatnému kroku vůči zákazníkovi, ne jen k interní otázce.
+- Původní návratový signál je naplněný přesně, ne pouze pocitově.
+- Nový užší signál je jasnější než původní a dá se ověřit malou změnou.
+
+Přerušení klidu neznamená otevření celé historie pravidla. Znamená otevření malé pracovní smyčky s vlastním koncem. Napište otázku, pracovní místo, stop podmínku a výslovně zavřený rozsah.
+
+Příklad:
+
+```text
+Otázka:
+Stačí doplnit dva příklady k potvrzovací šabloně, aby nový obchodník poznal, kdy otázku na rozpočet nepoužít?
+
+Pracovní místo:
+Potvrzovací šablona po relevantní poptávce.
+
+Stop podmínka:
+Při dalším běžném použití šablony nový obchodník rozhodne bez dodatečného vysvětlení.
+
+Co zůstává zavřené:
+Poptávkový formulář, lead scoring, obecná kvalifikační metodika a staré zákaznické příklady.
+```
+
+Když takovou kartu neumíte napsat, klid nepřerušujte. Nejspíš ještě nevíte, co vlastně otevíráte.
+
+### Privacy-first triage třetího podnětu
+
+Třetí podnět svádí k tomu, že tým začne sbírat "lepší důkazy". Často to znamená víc screenshotů, víc exportů, víc kopií zákaznické komunikace a víc interních poznámek s osobními detaily. Většinou to není potřeba.
+
+Pro triage třetího podnětu ukládejte jen toto:
+
+```text
+Společná rozhodovací hrana:
+
+Počet nezávislých pracovních situací:
+
+Nejmenší ověřovací krok:
+
+Detaily, které nepřenášíme:
+
+Kdy se pomocné poznámky smažou:
+```
+
+Příklad:
+
+```text
+Společná rozhodovací hrana:
+Kdy nepoužívat otázku na rozpočet, protože další krok už lze navrhnout.
+
+Počet nezávislých pracovních situací:
+Tři lidé, dvě běžná použití šablony a jedno zaučení.
+
+Nejmenší ověřovací krok:
+Doplnit jeden pozitivní a jeden negativní příklad k potvrzovací šabloně.
+
+Detaily, které nepřenášíme:
+Jména lidí, konkrétní zákaznické zprávy, rozpočty, CRM screenshoty ani kopie interního chatu.
+
+Kdy se pomocné poznámky smažou:
+Po prvním běžném ověření doplněné šablony.
+```
+
+Privacy-first pointa je jednoduchá: čím víc podnětů máte, tím víc musíte hlídat, aby se z důkazů nestala skládka detailů. Rozhodovací poznatek má zůstat. Citlivé suroviny mají zůstat na původním místě a podle běžné retence zmizet.
+
+### Karta třetího podnětu během ročního klidu
+
+```text
+Pravidlo nebo pracovní místo:
+
+První podnět jednou větou:
+
+Druhý podnět jednou větou:
+
+Třetí podnět jednou větou:
+
+Jsou podněty nezávislé?
+
+Stejná rozhodovací hrana:
+
+Původní návratový signál:
+- naplněný
+- nenaplněný
+- nahrazený užším signálem
+
+Výsledek:
+- ponecháváme roční klid
+- dáváme lokální vysvětlení
+- otevíráme malou ověřovací smyčku
+- přerušujeme klid pro konkrétní pracovní místo
+
+Nejmenší další krok:
+
+Stop podmínka:
+
+Co zůstává výslovně zavřené:
+
+Privacy-first záznam:
+Co ukládáme:
+Co nepřenášíme:
+Kdy mažeme pomocné poznámky:
+
+Vlastník:
+
+Datum:
+```
+
+Karta má být krátká. Pokud se rozroste na vyšetřovací spis, pravděpodobně jste otevřeli moc velký problém nebo opisujete surové důkazy místo rozhodovacího poznatku.
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: přečtěte všechny tři podněty jednou větou.
+2. Minuta 2: rozhodněte, jestli jsou nezávislé.
+3. Minuta 3: pojmenujte společnou rozhodovací hranu.
+4. Minuta 4: porovnejte ji s původním návratovým signálem.
+5. Minuta 5: vyberte nejmenší reakci.
+6. Minuta 6: napište, co zůstává zavřené.
+7. Minuta 7: zapište privacy-first minimum a datum smazání pomocných poznámek.
+
+Pokud na konci workshopu není jasné pracovní místo, neotevírejte implementaci. Otevřete jen krátké zpřesnění otázky. Třetí podnět má zvednout kvalitu rozhodnutí, ne hladinu aktivity.
+
+### Checklist třetího podnětu během ročního klidu
+
+- Neotevíráme práci jen proto, že máme tři položky?
+- Víme, jestli jsou podněty nezávislé?
+- Pojmenovali jsme stejnou rozhodovací hranu, ne jen podobné téma?
+- Porovnali jsme situaci s původním návratovým signálem?
+- Pokud vznikl nový užší signál, má vlastní malou ověřovací smyčku?
+- Přerušujeme roční klid jen pro konkrétní pracovní místo?
+- Je jasné, co zůstává zavřené?
+- Má další krok stop podmínku?
+- Ukládáme pouze rozhodovací poznatek, ne surové zákaznické nebo interní detaily?
+- Víme, kdy se smažou pomocné poznámky?
+
+Třetí podnět je dobrý okamžik na klidnou přesnost. Může potvrdit slabou hranu, ale nesmí se stát záminkou k plošnému zásahu. Nejlepší výsledek je malá smyčka, která opraví konkrétní pracovní místo, ochrání zbytek ročního klidu a nenechá za sebou datový nepořádek.
+
 ## Pracovní log
 
+- 2026-06-27: Doplněna úvodní podkapitola o třetím podnětu během ročního klidu: nezávislost podnětů, společná rozhodovací hrana, přerušení klidu jen pro konkrétní pracovní místo, privacy-first triage, karta, mini workshop a checklist.
 - 2026-06-27: Doplněna úvodní podkapitola o druhém podobném podnětu během ročního klidu: porovnání s prvním podnětem, hranice návratového signálu, malá smyčka, privacy-first záznam, karta, mini workshop a checklist.
 - 2026-06-27: Doplněna úvodní podkapitola o prvním podnětu během ročního klidu: rozlišení šumu, lokálního vysvětlení, slabé hrany a návratového signálu, privacy-first zachycení podnětu, karta, mini workshop a checklist.
 - 2026-06-27: Doplněna úvodní podkapitola o návratu pravidla do ročního klidu po lehkých kontrolách: ukončení mimořádné péče, co už nedělat, privacy-first úklid datové stopy, karta, mini workshop a checklist.
