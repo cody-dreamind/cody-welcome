@@ -262088,8 +262088,229 @@ Pokud se během workshopu objeví nové téma, nezastavujte uzavření. Jen ho p
 
 Uzavření mimořádného review je návrat k obyčejnosti. Tým na chvíli přerušil klid, opravil nebo vyjasnil jednu hranu a teď musí odolat pokušení nechat kolem ní běžet zvláštní pozornost. Dobře zavřené review po sobě nechá jasnější pracovní místo, menší datovou stopu a žádný nový provozní hlad. Přesně tak má výjimka skončit.
 
+## První běžné použití po uzavřeném mimořádném review
+
+Po uzavření mimořádného review přijde první skutečný test: někdo pravidlo použije v normální práci bez slavnostního vysvětlování. To je důležitější než samotné review. Review totiž probíhá ve zvýšené pozornosti, zatímco běžné použití ukáže, jestli se změna opravdu usadila tam, kde má žít.
+
+První běžné použití neotevírejte jako nový projekt. Berte ho jako krátké ověření, že uzavření review nezanechalo nejasné místo, skrytou oporu nebo datový ocásek. Tým nemá znovu rozebírat celou historii tří podnětů. Má zjistit, jestli člověk při nejbližší reálné situaci najde správnou větu, rozhodne podle ní a nepotřebuje vytahovat staré pomocné poznámky.
+
+Začněte větou:
+
+```text
+Po uzavřeném mimořádném review ověřujeme při prvním běžném použití:
+```
+
+Dobrá věta je úzká:
+
+```text
+Po uzavřeném mimořádném review ověřujeme při prvním běžném použití, jestli obchodník najde dva příklady u potvrzovací šablony a správně rozhodne, kdy otázku na rozpočet nepoužít.
+```
+
+Špatná věta zní takto:
+
+```text
+Ověříme, jestli obchodní proces po review funguje lépe.
+```
+
+To je moc široké. Taková věta nemá pracovní místo ani konec, takže brzy začne polykat formulář, CRM, kvalifikaci, onboarding a ideálně i pondělní poradu. Pondělní porady už toho unesly dost.
+
+### Tři věci, které ověřit
+
+Při prvním běžném použití kontrolujte jen tři vrstvy:
+
+- Najitelnost: člověk ví, kde upravené pravidlo nebo příklad hledat.
+- Rozhodnutelnost: podle pravidla umí udělat konkrétní krok bez dodatečného vysvětlení.
+- Klid datové stopy: k použití nepotřebuje staré poznámky, screenshoty, exporty ani kopie zákaznických zpráv.
+
+Pokud selže najitelnost, neopravujte hned pravidlo. Možná stačí odkaz z rozcestníku nebo přesun věty blíž k místu použití. Pokud selže rozhodnutelnost, neopravujte celý proces. Možná chybí negativní příklad, hraniční věta nebo jasnější "kdy nepoužít". Pokud selže datový klid, nejdřív smažte nebo uzavřete pomocnou stopu, která člověka svádí zpět do mimořádného režimu.
+
+První běžné použití má tím pádem čtyři možné výsledky:
+
+- V pořádku: pravidlo se použilo bez pomoci a bez návratu ke starým stopám.
+- Slabá navigace: pravidlo je správné, ale špatně dohledatelné.
+- Slabá hrana: pravidlo je dohledatelné, ale pořád chybí rozhodovací detail.
+- Skrytý mimořádný režim: člověk rozhodl až díky staré pomocné poznámce, ručnímu vysvětlení nebo dočasnému materiálu.
+
+Každý výsledek potřebuje jinou reakci. Nejhorší je univerzální "ještě to doladíme". To je věta, která vypadá pracovně, ale ve skutečnosti jen otevírá dveře všemu, co se komu zrovna zdá příbuzné.
+
+### Praktický příklad
+
+Uzavřené mimořádné review:
+
+```text
+Změna:
+K potvrzovací šabloně jsme doplnili pozitivní a negativní příklad otázky na rozpočet.
+
+Co zůstalo zavřené:
+Poptávkový formulář, lead scoring, CRM pole a export rozpočtových údajů.
+
+Návratový signál:
+Téma se znovu otevře pouze pokud tři relevantní poptávky za sebou nepůjde kvalifikovat bez ručního doptání na rozpočet.
+```
+
+První běžné použití:
+
+```text
+Situace:
+Obchodník použil potvrzovací šablonu u nové relevantní poptávky.
+
+Výsledek:
+Příklady našel, otázku na rozpočet nepoužil, protože další krok šel navrhnout i bez ní.
+
+Uzavření:
+První běžné použití je v pořádku. Neotevíráme další kontrolu, nepřidáváme nová pole a nemažeme ani neměníme návratový signál.
+```
+
+Slabá navigace:
+
+```text
+Situace:
+Obchodník věděl, že příklady existují, ale našel je až přes starou poznámku z review.
+
+Výsledek:
+Pravidlo je obsahově použitelné, ale špatně navedené z obchodního rozcestníku.
+
+Oprava:
+Přidat jeden odkaz z rozcestníku k potvrzovací šabloně.
+
+Co zůstává zavřené:
+Obsah pravidla, formulář, scoring, CRM pole i další review.
+```
+
+Slabá hrana:
+
+```text
+Situace:
+Obchodník našel příklady, ale nevěděl, co dělat u poptávky s rámcovým rozpočtem bez jasného cíle.
+
+Výsledek:
+Chybí jeden hraniční příklad.
+
+Oprava:
+Doplnit k šabloně větu: "Pokud rozpočet existuje, ale cíl není jasný, nepoužívejte rozpočtovou otázku jako zkratku; nejdřív zpřesněte očekávaný výsledek."
+
+Co zůstává zavřené:
+Širší obchodní metodika, formulář a sběr nových rozpočtových údajů.
+```
+
+Skrytý mimořádný režim:
+
+```text
+Situace:
+Obchodník rozhodl správně, ale jen proto, že si otevřel starou pracovní poznámku ze tří podnětů.
+
+Výsledek:
+Uzavření review není čisté. Pravidlo nežije samo v kanonickém místě.
+
+Oprava:
+Přenést rozhodovací větu do šablony, starou pracovní poznámku uzavřít a ověřit ještě jedno běžné použití.
+
+Co zůstává zavřené:
+Nový sběr dat, dashboard, třetí review a přepis celého playbooku.
+```
+
+Všimněte si, že ani slabý výsledek automaticky neznamená návrat k mimořádnému review. První běžné použití má opravovat nejbližší překážku, ne znovu rozjíždět vyšetřování.
+
+### Privacy-first kontrola prvního použití
+
+První běžné použití je citlivé na datovou hygienu. Lidé si rádi nechávají staré podklady "ještě pro jistotu", protože pomohly během review. Jenže podklady, které byly přijatelné při dočasném ověření, nemusí být přijatelné v běžném provozu.
+
+Zapište proto tři krátké odpovědi:
+
+```text
+K rozhodnutí stačilo:
+
+K rozhodnutí už nebylo potřeba:
+
+Po prvním běžném použití mažeme nebo necháváme jen v původním zdroji:
+```
+
+Příklad:
+
+```text
+K rozhodnutí stačilo:
+Kanonická věta a dva příklady u potvrzovací šablony.
+
+K rozhodnutí už nebylo potřeba:
+Souhrn tří podnětů, pracovní poznámka z review ani kopie obchodních vláken.
+
+Po prvním běžném použití mažeme nebo necháváme jen v původním zdroji:
+Pomocné poznámky z review mažeme; zákaznická komunikace zůstává pouze v původním obchodním systému podle jeho běžné retence.
+```
+
+Tahle kontrola je malá, ale brání nenápadnému rozšíření datové stopy. Privacy-first provoz se často neláme na velkých rozhodnutích, ale na drobných výjimkách, které po sobě nikdo neuklidí.
+
+Codyho komentář: jestli pravidlo po review funguje jen s pomocnou poznámkou, nefunguje. To není ostuda, to je nález. Ostuda by byla nechat tu poznámku žít jako tajnou berličku a za půl roku předstírat, že jde o standard.
+
+### Karta prvního běžného použití
+
+```text
+Pravidlo nebo pracovní místo:
+
+Co mimořádné review změnilo:
+
+První běžná situace:
+
+Kdo pravidlo použil:
+
+Výsledek:
+- v pořádku
+- slabá navigace
+- slabá hrana
+- skrytý mimořádný režim
+
+Nejmenší oprava, pokud existuje:
+
+Co zůstává výslovně zavřené:
+
+Další krok:
+- žádný, návrat do ročního klidu
+- lokální navigační oprava
+- jeden hraniční příklad
+- jedno další běžné ověření po odstranění skryté opory
+
+Privacy-first kontrola:
+K rozhodnutí stačilo:
+K rozhodnutí už nebylo potřeba:
+Co mažeme nebo necháváme v původním zdroji:
+
+Vlastník:
+
+Datum:
+```
+
+Karta nemá sloužit jako nový sledovací list. Vyplňte ji jednou, uzavřete výsledek a vraťte pravidlo do klidu, pokud není konkrétní důvod pro další lokální ověření.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte, co mimořádné review změnilo.
+2. Minuta 2: popište první běžnou situaci jednou větou.
+3. Minuta 3: vyberte výsledek ze čtyř stavů.
+4. Minuta 4: napište nejmenší opravu nebo potvrďte návrat do ročního klidu.
+5. Minuta 5: zapište, co zůstává zavřené.
+6. Minuta 6: ukliďte pomocné stopy a rozhodněte, jestli je potřeba ještě jedno běžné ověření.
+
+Pokud se tým během workshopu vrací k původním třem podnětům, zastavte ho. První běžné použití se neptá, proč review vzniklo. Ptá se, jestli jeho výsledek žije v normální práci. Historie má zůstat dostupná jen jako stručný rozhodovací záznam, ne jako stále otevřený debatní materiál.
+
+### Checklist prvního běžného použití
+
+- Ověřujeme konkrétní pracovní místo, ne celý proces?
+- Víme, co přesně mimořádné review změnilo?
+- Proběhlo použití v normální práci bez zvláštního vysvětlování?
+- Rozlišili jsme najitelnost, rozhodnutelnost a datový klid?
+- Vybrali jsme jeden ze čtyř výsledků?
+- Pokud opravujeme navigaci, neměníme obsah pravidla?
+- Pokud doplňujeme hraniční příklad, nepřepisujeme celý playbook?
+- Pokud se objevil skrytý mimořádný režim, odstraníme oporu a ověříme jen jedno další běžné použití?
+- Je jasné, co zůstává zavřené?
+- Nepřenášíme do běžného provozu pomocné poznámky, screenshoty, kopie komunikace ani dočasné exporty?
+- Má pravidlo po ověření jasný návrat do ročního klidu nebo přesný lokální další krok?
+
+První běžné použití po mimořádném review je malý test dospělosti změny. Když projde, neoslavujte ho dalším procesem. Vraťte pravidlo do klidu. Když neprojde, opravte nejbližší překážku a držte zavřený rozsah zavřený. Dobrá výjimka nekončí tím, že o ní tým pořád mluví. Končí tím, že už ji nepotřebuje.
+
 ## Pracovní log
 
+- 2026-06-27: Doplněna úvodní podkapitola o prvním běžném použití po uzavřeném mimořádném review: ověření najitelnosti, rozhodnutelnosti a datového klidu, čtyři výsledné stavy, praktické příklady, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-27: Doplněna úvodní podkapitola o uzavření mimořádného review po třetím podnětu: čtyři uzavírací stavy, praktický příklad, propsání změny, privacy-first úklid pomocných stop, karta, mini workshop a checklist.
 - 2026-06-27: Doplněna úvodní podkapitola o otevření mimořádného review po třetím podnětu: pět hranic review, zavřený rozsah, praktický příklad, privacy-first rozhodovací stopa, karta, mini workshop a checklist.
 - 2026-06-27: Doplněna úvodní podkapitola o třetím podnětu během ročního klidu: nezávislost podnětů, společná rozhodovací hrana, přerušení klidu jen pro konkrétní pracovní místo, privacy-first triage, karta, mini workshop a checklist.
