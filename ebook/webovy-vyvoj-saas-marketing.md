@@ -264464,8 +264464,195 @@ Když se workshop začne měnit v debatu o původním rozhodnutí, vraťte se k 
 
 Uzavření prvního návratového signálu má být klidné a přesné. Když signál nenastal, nejlepší výsledek je často žádná změna a žádný nový datový zvyk. Když signál nastal, nejlepší výsledek je malý průchod s hranicí. V obou případech má tým odejít s jasnou větou, ne s pocitem, že se kolem pravidla zase něco vznáší.
 
+## První běžné použití po uzavřeném prvním návratovém signálu
+
+Po uzavření prvního návratového signálu přichází obyčejná práce. To je přesně místo, kde se ukáže, jestli uzavření opravdu něco vyjasnilo, nebo jen vznikl hezký zápis do logu. Pravidlo se znovu potká s formulářem, e-mailem, obchodní šablonou, onboardingovým krokem nebo interním checklistem. Tentokrát už kolem něj nemá stát mimořádná pozornost. Má fungovat jako běžná součást provozu.
+
+První běžné použití po uzavřeném signálu se neptá, jestli bylo uzavření chytré. Ptá se na praktičtější věc:
+
+```text
+Umí člověk po uzavřeném signálu použít pravidlo bez otevření starého tématu?
+```
+
+To je malá, ale důležitá otázka. Pokud byl podnět uzavřen bez změny, člověk má pravidlo použít stejně jako předtím a nepřidat nové sledování. Pokud šlo o lokální vysvětlení, člověk má najít opravenou větu nebo odkaz. Pokud šlo o skutečný návrat předaný do malého průchodu, člověk má poznat, že běží malý krok se stop podmínkou, ne návrat k původnímu širokému návrhu.
+
+Začněte jednou větou:
+
+```text
+První běžné použití po uzavřeném signálu sledujeme proto, že:
+```
+
+Příklad:
+
+```text
+První běžné použití po uzavřeném signálu sledujeme proto, že jsme minule zpřesnili větu u obchodní šablony a chceme ověřit, zda se použije bez staré rozhodovací karty.
+```
+
+Tahle věta chrání rozsah. Nesledujete znovu celý problém rozpočtu. Nesledujete všechny poptávky. Nesledujete výkon obchodníka. Sledujete jednu větu v jednom pracovním místě. Ano, je to skromné. Skromnost je v provozu často jiný název pro přesnost.
+
+### Tři výchozí situace
+
+První běžné použití po uzavřeném signálu se liší podle toho, jak signál dopadl.
+
+- Po uzavření bez změny: ověřte, že podnět nezanechal nový skrytý proces.
+- Po lokálním vysvětlení: ověřte, že opravená věta, odkaz nebo kotva funguje bez doprovodného výkladu.
+- Po předání skutečného návratu do malého průchodu: ověřte, že se běžné použití drží stop podmínky a nezvětšuje rozsah.
+
+U uzavření bez změny je největším rizikem tiché sledování. Tým oficiálně řekne "nic neměníme", ale někdo si začne bokem značit podobné případy. Po dvou týdnech vznikne tabulka, po měsíci report a po kvartálu nikdo neví, proč to existuje. První běžné použití má zkontrolovat, že se nic takového nerozjelo.
+
+U lokálního vysvětlení je rizikem slabý přenos. Věta byla opravená, ale člověk ji nenajde, pochopí ji moc široce nebo se stejně vrátí ke staré kartě. Pak není potřeba znovu otevřít původní téma. Stačí opravit nejbližší pracovní místo.
+
+U skutečného návratu je rizikem růst rozsahu. Malý průchod má stop podmínku. Pokud se během prvního použití začne mluvit o novém poli, scoringu, exportu nebo celém redesignu, vraťte se k hranici průchodu. Silný signál dovolil malý krok. Nedal bianko šek na všechno, co kdysi leželo v nápadech.
+
+Codyho komentář: po uzavřeném signálu má tým často chuť "být opatrný". To zní krásně, dokud opatrnost nezačne vyrábět nové tabulky, štítky a schůzky. Dobrá opatrnost drží hranici. Špatná opatrnost sbírá data, protože se bojí rozhodnutí.
+
+### Praktický příklad po uzavření bez změny
+
+```text
+Uzavřený signál:
+Jedna relevantní poptávka potřebovala ruční doptání na rozpočet, ale domluvený návratový signál nenastal.
+
+První běžné použití:
+Při další relevantní poptávce obchod použil běžnou potvrzovací šablonu a neposlal žádný nový interní report.
+
+Výsledek:
+Pravidlo běží dál beze změny. Nevzniká tabulka poptávek bez rozpočtu, nový CRM štítek ani mimořádné review.
+
+Závěr:
+Podnět opravdu zůstal uzavřený. Další návrat řešíme pouze podle domluveného návratového signálu.
+```
+
+Tady je úspěch právě v tom, že se nic nerozrostlo. Jedno běžné použití potvrdilo, že uzavření bez změny nebylo jen slovní, ale provozní. Pravidlo se vrátilo do práce a nepřibralo batoh pomocné evidence.
+
+### Praktický příklad po lokálním vysvětlení
+
+```text
+Uzavřený signál:
+Obchodník použil otázku na rozpočet moc široce, proto jsme zpřesnili větu u šablony.
+
+Opravená věta:
+"Otázku na rozpočet použij jen tehdy, když bez ní nejde navrhnout další konkrétní krok."
+
+První běžné použití:
+Jiný člověk z obchodu zpracoval poptávku, našel opravenou větu u šablony a otázku neposlal, protože rozpočet nebyl potřeba pro další krok.
+
+Výsledek:
+Lokální vysvětlení funguje. Není potřeba otevírat formulář, scoring ani nové školení.
+```
+
+Pokud by člověk větu nenašel, oprava by byla ještě menší: přesunout ji blíž k tlačítku, šabloně nebo checklistu. Pokud by ji pochopil špatně, přepsat ji o pár slov. První běžné použití má opravovat tření, ne hledat příležitost ke generální rekonstrukci.
+
+### Praktický příklad po skutečném návratu
+
+```text
+Uzavřený signál:
+Tři relevantní poptávky za sebou nešlo kvalifikovat bez ručního doptání na rozpočet.
+
+Malý průchod:
+Upravíme potvrzovací e-mail tak, aby lépe vysvětlil, kdy se můžeme doptat na rámec rozpočtu.
+
+Stop podmínka:
+U dvou relevantních poptávek ověříme, zda obchod dokáže navrhnout další krok bez povinného pole ve formuláři.
+
+První běžné použití:
+Obchod použil upravený e-mail u první relevantní poptávky.
+
+Výsledek:
+Zákazník doplnil rámec v odpovědi. Formulář se neměnil, CRM atribut nevznikl a stop podmínka zůstává na dvou použitích.
+```
+
+Důležité je, že první běžné použití neuzavírá celý malý průchod, pokud stop podmínka říká dvě použití. Jen zapíše první výsledek a drží rozsah. Žádné předčasné vítězství, žádné rozšíření cíle, žádné "když už to funguje, pojďme to rovnou automatizovat". Automatizace bez uzavřeného důvodu je jen rychlejší způsob, jak šířit polorozhodnutí.
+
+### Privacy-first kontrola
+
+Po prvním běžném použití se podívejte, jestli nevznikla nová datová stopa jen proto, že se téma nedávno řešilo. Typické nenápadné stopy jsou:
+
+- ruční štítek v CRM,
+- pomocná tabulka,
+- kopie zákaznické odpovědi v interní poznámce,
+- screenshot formuláře nebo e-mailu,
+- nový sloupec v reportu,
+- zvláštní komentář s osobním nebo obchodním detailem.
+
+Neptejme se jen, jestli jsou data citlivá. Ptejme se, jestli jsou potřeba pro další rozhodnutí. Pokud ne, neukládejte je mimo původní zdroj. Do pracovního záznamu často stačí anonymizovaná věta:
+
+```text
+První běžné použití potvrdilo, že opravená věta u šablony stačí. Nevznikl nový atribut ani export.
+```
+
+Pokud konkrétní zákaznická odpověď zůstává v běžném obchodním vlákně, je to jiný režim než kopírování do nové pracovní tabulky. Vlákno má svůj účel a kontext. Pomocná tabulka často nemá ani jedno, jen dobrou výmluvu v době vzniku.
+
+### Karta prvního běžného použití po uzavřeném signálu
+
+```text
+Uzavřený návratový signál:
+
+Výsledek uzavření:
+- bez změny
+- lokální vysvětlení
+- malý průchod
+
+Proč první běžné použití sledujeme:
+
+Běžná situace:
+
+Kde člověk našel pravidlo nebo opravenou větu:
+
+Šlo rozhodnout bez staré historie?
+- ano
+- ne, chyběla kotva
+- ne, věta byla nejasná
+
+Co se opravdu použilo:
+
+Co zůstalo výslovně zavřené:
+
+Vznikla nová datová stopa?
+
+Co s ní děláme:
+
+Výsledek:
+- vrátit do běžného rytmu
+- opravit nejbližší větu nebo kotvu
+- pokračovat v malém průchodu podle stop podmínky
+- zastavit rozšiřování rozsahu
+
+Vlastník:
+
+Další krok nebo návratový signál:
+```
+
+Karta se nepoužívá vždy. Pokud byl podnět uzavřen bez změny a první běžné použití nic neotevřelo, stačí krátký zápis v logu. Kartu vytáhněte ve chvíli, kdy hrozí, že se staré téma vrátí zadními dveřmi nebo že po lokální opravě není jasné, jestli opravdu funguje.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte výsledek uzavřeného signálu.
+2. Minuta 2: pojmenujte první běžnou situaci, ve které se pravidlo použilo.
+3. Minuta 3: ověřte, jestli člověk našel správné pracovní místo bez staré historie.
+4. Minuta 4: napište, co se opravdu použilo a co zůstalo zavřené.
+5. Minuta 5: zkontrolujte novou datovou stopu.
+6. Minuta 6: vyberte jeden výsledek a další krok.
+
+Když se během workshopu objeví chuť doplnit obecné sledování, vraťte se k otázce: jaké rozhodnutí by sledování umožnilo? Pokud odpověď není konkrétní, sledování nevzniká. Záznam ano, datový zvyk ne.
+
+### Checklist prvního běžného použití po signálu
+
+- Víme, jak byl první signál uzavřen?
+- Sledujeme jen běžné použití, ne znovu celé původní téma?
+- Člověk našel pravidlo, opravenou větu nebo malý průchod v pracovním místě?
+- Šlo rozhodnout bez čtení celé historie?
+- Pokud byl signál uzavřen bez změny, nevzniklo nové sledování?
+- Pokud šlo o lokální vysvětlení, funguje oprava u nejbližší věty, odkazu nebo šablony?
+- Pokud běží malý průchod, drží se stop podmínky?
+- Je jasně napsané, co zůstává zavřené?
+- Nevznikl nový CRM atribut, tracker, export, pomocná tabulka ani screenshotová evidence bez rozhodovací hodnoty?
+- Umí další člověk poznat, zda se pravidlo vrací do běžného rytmu, nebo pokračuje jen úzký malý průchod?
+
+První běžné použití po uzavřeném signálu má potvrdit, že uzavření přežilo návrat do práce. Když funguje, nechte pravidlo dýchat v běžném rytmu. Když nefunguje, opravte nejbližší větu. A když se začne nafukovat rozsah, zastavte ho u hranice, kterou jste už jednou napsali. V evropském privacy-first provozu není disciplína brzda růstu. Je to způsob, jak růst bez zbytečných datových dluhů.
+
 ## Pracovní log
 
+- 2026-06-27: Doplněna úvodní podkapitola o prvním běžném použití po uzavřeném prvním návratovém signálu: tři výchozí situace, praktické příklady, privacy-first kontrola datové stopy, karta, mini workshop a checklist.
 - 2026-06-27: Doplněna úvodní podkapitola o uzavření prvního návratového signálu po uzavřené běžné správě: tři způsoby uzavření, praktické příklady, privacy-first úklid datové stopy, karta, mini workshop a checklist.
 - 2026-06-27: Doplněna úvodní podkapitola o prvním návratovém signálu po uzavřené běžné správě: rozlišení podnětu od skutečného návratu, lokální vysvětlení, privacy-first záznam, karta, mini workshop a checklist.
 - 2026-06-27: Doplněna úvodní podkapitola o uzavření první běžné správy po druhém ročním cyklu: tři výsledky uzavření, praktické příklady, privacy-first úklid dočasných stop, karta, mini workshop a checklist.
