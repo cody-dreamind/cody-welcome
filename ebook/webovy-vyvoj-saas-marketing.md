@@ -261277,8 +261277,214 @@ Pokud se v minutě 2 tým neshodne, neprodlužujte debatu. Zeptejte se, jestli p
 
 První podnět během ročního klidu je hlavně zkouška rozlišování. Stabilní pravidlo nemá být křehké. Má umět přežít otázku, poznámku i jeden okrajový případ bez toho, aby kolem něj znovu vznikl servisní režim. Když podnět opravdu odhalí problém, otevřete malou smyčku. Když ne, odpovězte, ukliďte stopu a nechte pravidlo dál klidně pracovat.
 
+## Druhý podobný podnět během ročního klidu
+
+Druhý podobný podnět je zrádnější než první. Už to nevypadá jako jednorázový šum, ale ještě to nemusí být návratový signál. Právě tady týmy často přeskočí rozlišování a začnou opravovat pravidlo jen proto, že se téma ozvalo dvakrát. Dvakrát ale není automaticky vzorec. Může to být stejný člověk ve stejné situaci, stejný onboardingový nedostatek, stejný okrajový případ, nebo naopak první skutečný náznak, že pravidlo má slabou hranu.
+
+Začněte porovnáním, ne reakcí:
+
+```text
+Druhý podnět porovnáváme s prvním, protože:
+```
+
+Dobrá věta neříká jen "přišlo to znovu". Říká, co je stejné a co je jiné:
+
+```text
+Druhý podnět porovnáváme s prvním, protože se znovu týká výkladu slova "relevantní poptávka", ale přišel od jiného člověka a v jiné obchodní situaci.
+```
+
+Teprve potom rozhodněte, jestli se má pravidlo dál nechat v klidu, jestli stačí lokální vysvětlení, jestli vzniká slabá hrana k ověření, nebo jestli už byl naplněn návratový signál. Druhý podnět má dostat o trochu víc pozornosti než první, ale pořád ne tolik, aby z něj vznikl nový servisní režim. To je přesně ten nepříjemný střed, kde produktová práce občas připomíná účetnictví nervozity.
+
+### Porovnejte čtyři věci
+
+U druhého podobného podnětu projděte čtyři krátké otázky:
+
+- Stejné pracovní místo: objevil se podnět u stejné stránky, formuláře, e-mailu, obchodního skriptu nebo šablony?
+- Stejný typ člověka: týká se stejné role, nového člověka, zákazníka, obchodníka, marketéra nebo správce provozu?
+- Stejná nejasnost: jde o stejnou formulaci, stejný krok, stejnou hranici rozhodnutí nebo stejný datový dopad?
+- Stejný návratový signál: odpovídá podnět přesně podmínce, kterou jste si dřív nastavili pro znovuotevření práce?
+
+Pokud se shoduje jen téma, ale ne pracovní místo ani nejasnost, nejde o opakovaný problém. Je to příbuzný podnět. Zapište ho odděleně nebo ho nechte být podle dopadu.
+
+Pokud se shoduje pracovní místo a nejasnost, ale návratový signál ještě naplněný není, pravděpodobně jde o slabou hranu. Otevřete jen nejmenší ověření při příštím přirozeném použití.
+
+Pokud se shoduje i návratový signál, roční klid končí pro tuto konkrétní otázku. Neotevírá se celé pravidlo, ale malá smyčka kolem místa, kde se signál potvrdil.
+
+### Praktický příklad
+
+První podnět:
+
+```text
+Nový obchodník se zeptal, jestli volitelnou otázku na rozpočet smí použít i u poptávky, kde už jde navrhnout další krok bez rozpočtu.
+
+Typ:
+Lokální vysvětlení.
+```
+
+Druhý podobný podnět:
+
+```text
+Jiný obchodník při přípravě follow-upu použil otázku na rozpočet u poptávky, kde už byl jasný další krok, protože si "relevantní poptávku" vyložil jako každou poptávku od kvalifikované firmy.
+```
+
+Porovnání:
+
+```text
+Stejné pracovní místo:
+Ano, potvrzovací komunikace po poptávce.
+
+Stejný typ člověka:
+Ano, obchodník používající šablonu bez původního kontextu.
+
+Stejná nejasnost:
+Ano, výklad hranice "kde bez této informace nejde navrhnout další konkrétní krok".
+
+Stejný návratový signál:
+Ne, stále nejde o tři relevantní poptávky za sebou, které nelze kvalifikovat bez rozpočtu.
+```
+
+Výsledek:
+
+```text
+Neotevíráme obchodní proces, formulář ani scoring. Zapíšeme slabou hranu pravidla a při příštím přirozeném použití ověříme, zda stačí doplnit jednu větu: "Otázku nepoužívej, pokud už umíš navrhnout další krok bez rozpočtu."
+```
+
+To je přiměřená reakce. Neignoruje opakování, ale ani z něj nedělá důkaz, který ještě nemáte.
+
+### Kdy už druhý podnět stačí
+
+Někdy druhý podnět opravdu stačí k otevření malé smyčky. Ne proto, že je druhý, ale protože má vyšší kvalitu důkazu.
+
+Otevření dává smysl, když platí alespoň jedna z těchto vět:
+
+- Druhý podnět přišel od jiné role a ukazuje stejnou nejasnost bez společného zdroje vysvětlení.
+- Druhý podnět vznikl v jiné zákaznické situaci, ale narazil na stejnou hranici pravidla.
+- Druhý podnět způsobil konkrétní chybný krok, ne jen otázku nebo názor.
+- Druhý podnět naplnil přesně definovaný návratový signál.
+
+I tehdy držte rozsah úzký. Otevřít malou smyčku neznamená přepsat pravidlo, proces, formulář i školení. Znamená vybrat nejbližší pracovní místo, zapsat jednu ověřovací otázku a určit stop podmínku.
+
+Příklad ověřovací otázky:
+
+```text
+Stačí u potvrzovací šablony doplnit jednu větu, aby obchodník nepoužil otázku na rozpočet tam, kde už lze navrhnout další krok?
+```
+
+Stop podmínka:
+
+```text
+Při příštím reálném použití šablony obchodník správně rozhodne bez dodatečného vysvětlení.
+```
+
+To je malý krok. Má pracovní místo, ověření i konec. Nemusí kolem něj vzniknout projekt s majestátním názvem "Optimalizace kvalifikační komunikace". Někdy je nejvyšší úroveň dospělosti napsat jednu větu a pak přestat.
+
+### Privacy-first porovnání podnětů
+
+Druhý podobný podnět svádí k tomu, že si tým začne schovávat více detailů "pro jistotu". To je pochopitelné, ale nebezpečné. Pokud porovnáváte dva podněty, většinou nepotřebujete ukládat celé e-maily, zákaznické zprávy, screenshoty CRM ani jména lidí. Potřebujete rozhodovací tvar.
+
+Použijte tento záznam:
+
+```text
+Společný vzor:
+
+Rozdíl mezi podněty:
+
+Rozhodovací poznatek:
+
+Detaily, které nepřenášíme:
+
+Původní zdroje zůstávají:
+```
+
+Příklad:
+
+```text
+Společný vzor:
+Dva obchodníci si stejnou větu vyložili tak, že otázku na rozpočet lze použít příliš brzy.
+
+Rozdíl mezi podněty:
+První byl dotaz před odesláním, druhý vedl k chybnému použití šablony.
+
+Rozhodovací poznatek:
+Pravidlo potřebuje ověřit jednu hraniční větu u potvrzovací šablony.
+
+Detaily, které nepřenášíme:
+Jména obchodníků, konkrétní zákaznické zprávy, rozpočtové částky, screenshoty ani kopie vláken.
+
+Původní zdroje zůstávají:
+V běžné obchodní komunikaci podle její retence.
+```
+
+Privacy-first přístup tady není brzda porozumění. Je to přesnější práce s důkazem. Když zachováte jen rozhodovací poznatek, tým se za měsíc rychleji dostane k podstatě a zároveň nenosí citlivé detaily tam, kde nemají co dělat.
+
+### Karta druhého podobného podnětu
+
+```text
+Pravidlo nebo pracovní místo:
+
+První podnět jednou větou:
+
+Druhý podnět jednou větou:
+
+Co je stejné:
+
+Co je jiné:
+
+Je naplněný návratový signál?
+
+Výsledek:
+- necháváme v klidu
+- dáváme lokální vysvětlení
+- ověřujeme slabou hranu
+- otevíráme malou smyčku
+
+Nejmenší další krok, pokud existuje:
+
+Stop podmínka:
+
+Co se výslovně neotevírá:
+
+Privacy-first záznam:
+Co ukládáme jako poznatek:
+Co nekopírujeme:
+Kde zůstávají původní zdroje:
+
+Vlastník:
+
+Datum:
+```
+
+Kartu nepoužívejte jako registr všech poznámek. Použijte ji jen tehdy, když druhý podnět opravdu mění míru nejistoty. Pokud jde o druhý kus šumu, nejlepší záznam může být pořád žádný záznam. Tichý provoz se neudržuje tím, že dokumentujete každý šustot.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte první a druhý podnět jednou větou.
+2. Minuta 2: napište, co je stejné.
+3. Minuta 3: napište, co je jiné.
+4. Minuta 4: ověřte, jestli je naplněný návratový signál.
+5. Minuta 5: vyberte nejmenší reakci.
+6. Minuta 6: zapište privacy-first poznatek a detaily, které se nepřenášejí.
+
+Pokud se tým zasekne, vraťte se k otázce: "Co by se pokazilo, kdybychom teď neotevřeli žádnou novou práci?" Pokud odpověď není konkrétní, pravděpodobně stačí vysvětlení, slabá hrana nebo žádný zápis. Pokud odpověď konkrétní je, otevřete nejmenší smyčku kolem ní.
+
+### Checklist druhého podobného podnětu
+
+- Porovnali jsme druhý podnět s prvním, místo abychom rovnou reagovali?
+- Víme, co je stejné a co je jiné?
+- Rozlišili jsme příbuzné téma od skutečného opakování?
+- Ověřili jsme přesné znění návratového signálu?
+- Pokud jde jen o lokální vysvětlení, neměníme pravidlo?
+- Pokud jde o slabou hranu, ověřujeme ji při nejbližším přirozeném použití?
+- Pokud otevíráme malou smyčku, má vlastní otázku, stop podmínku a konec?
+- Je jasné, co se výslovně neotevírá?
+- Ukládáme jen rozhodovací poznatek, ne zákaznické detaily a interní komunikaci?
+- Zůstává roční klid zachovaný pro všechno, co druhý podnět opravdu nezasáhl?
+
+Druhý podobný podnět je dobrý sluha a špatný šéf. Umí upozornit na slabou hranu, ale nesmí automaticky převzít řízení celého pravidla. Porovnejte ho, zmenšete reakci na nejbližší pracovní místo a otevřete práci jen tehdy, když máte konkrétní důvod. Stabilní pravidlo tím neztratí citlivost. Ztratí jen zbytečnou nervozitu.
+
 ## Pracovní log
 
+- 2026-06-27: Doplněna úvodní podkapitola o druhém podobném podnětu během ročního klidu: porovnání s prvním podnětem, hranice návratového signálu, malá smyčka, privacy-first záznam, karta, mini workshop a checklist.
 - 2026-06-27: Doplněna úvodní podkapitola o prvním podnětu během ročního klidu: rozlišení šumu, lokálního vysvětlení, slabé hrany a návratového signálu, privacy-first zachycení podnětu, karta, mini workshop a checklist.
 - 2026-06-27: Doplněna úvodní podkapitola o návratu pravidla do ročního klidu po lehkých kontrolách: ukončení mimořádné péče, co už nedělat, privacy-first úklid datové stopy, karta, mini workshop a checklist.
 - 2026-06-27: Doplněna úvodní podkapitola o uzavření druhé lehké kontroly po uzavřeném ročním review: tři uzavírací stavy, praktické příklady, privacy-first úklid zbylých stop, karta, mini workshop a checklist.
