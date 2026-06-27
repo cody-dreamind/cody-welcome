@@ -263083,8 +263083,172 @@ Pokud se workshop zasekne na debatě, jestli si dočasné podklady raději nenec
 
 Návrat do stabilního ročního režimu je dobrý konec mimořádné práce. Ne proto, že by se už nikdy nemohlo nic změnit. Ale proto, že změna už má normální vstupní bránu: plánované review nebo jasný návratový signál. Všechno ostatní je jen dozvuk staré pozornosti, který si zaslouží uklidit.
 
+## První roční review po návratu z mimořádného režimu
+
+Když pravidlo prošlo mimořádným review, vrátilo se do stabilního ročního režimu a pak konečně dorazí první plánované roční review, hrozí nenápadná past. Tým má chuť znovu otevřít celou historii, protože "tohle bylo přece citlivé". Jenže roční review po návratu z mimořádného režimu nemá být soudní rekonstrukce starého incidentu. Má ověřit, jestli pravidlo za rok fungovalo jako normální součást práce.
+
+Začněte větou:
+
+```text
+První roční review po mimořádném režimu děláme jako běžné review, se zvláštní kontrolou pouze této jedné hrany:
+```
+
+Za ni doplňte hranu, kvůli které mimořádné review kdysi vzniklo:
+
+```text
+První roční review po mimořádném režimu děláme jako běžné review, se zvláštní kontrolou pouze toho, jestli potvrzovací šablona stále pomáhá kvalifikovat poptávky bez zavedení povinného rozpočtového pole.
+```
+
+Tahle věta drží rozsah. Roční review se může snadno nafouknout do debaty o formulářích, cenách, obchodním procesu, CRM, lead scoringu a marketingovém slibu. Některé z těch témat mohou být legitimní. Ale pokud je otevřete všechna pod jednou starou historií, review přestane být kontrola pravidla a začne být volná porada s archivním materiálem.
+
+První roční review po mimořádném režimu má tři otázky:
+
+- Fungovalo pravidlo v běžné práci bez mimořádné péče?
+- Objevil se návratový signál, nebo jen jednotlivé podněty?
+- Zůstala datová stopa po mimořádném review opravdu uklizená?
+
+Pokud odpovědi zní ano, neotevírejte velkou změnu. Zapište, že pravidlo zůstává ve stabilním režimu, případně udělejte jednu lokální úpravu formulace. Pokud odpovědi ukazují opakovaný problém, otevřete nový malý průchod. Ne starou mimořádnou smyčku, ale dnešní nejmenší krok.
+
+Codyho komentář: roční review není výroční večírek starých obav. Pokud se problém rok nevrátil, nepotřebuje dort, svíčky ani zvláštní komisi. Potřebuje krátký zápis, že pravidlo funguje, a trochu disciplíny nehrabat ve věcech jen proto, že kdysi byly dramatické.
+
+### Co z minulosti kontrolovat
+
+Z mimořádné historie přenášejte jen čtyři věci:
+
+- původní pracovní místo,
+- jednovětý důvod mimořádného review,
+- aktuální podobu pravidla,
+- návratový signál.
+
+Nepřenášejte pracovní kopie, konkrétní zákaznické detaily, staré komentáře, interní dohady ani původní seznam všech variant řešení. Tyto věci už svou práci odvedly. Pokud se znovu objeví dnešní problém, otevřete dnešní důkazy. Starý materiál má pomoci pochopit hranici, ne znovu řídit rozhodnutí.
+
+Dobrá kontrolní věta vypadá takto:
+
+```text
+Z mimořádného review přebíráme jen hranici rozhodnutí: nepřidávat povinné rozpočtové pole, dokud kvalifikaci stačí vyřešit potvrzovací šablonou a obchodní otázkou.
+```
+
+Špatná kontrolní věta vypadá takto:
+
+```text
+Znovu projdeme všechny původní poptávky a rozhodneme, jestli jsme tehdy neměli přidat rozpočet do formuláře.
+```
+
+Druhá věta otevírá minulost bez nového důvodu. Tým tím nevylepšuje produkt, jen si půjčuje starou nejistotu.
+
+### Praktický příklad
+
+Před rokem vzniklo mimořádné review po třech podobných podnětech k poptávkám bez jasného rozpočtu. Tým se rozhodl nepřidat povinné pole do formuláře, ale upravit potvrzovací šablonu a obchodní kvalifikační otázku. Po dvou běžných použitích se pravidlo vrátilo do stabilního ročního režimu.
+
+První roční review může skončit takto:
+
+```text
+Pracovní místo:
+Poptávkový formulář a potvrzovací šablona.
+
+Co kontrolujeme z mimořádné historie:
+Pouze hranici: rozpočet nezavádíme jako povinné pole, pokud kvalifikaci zvládne šablona a obchodní otázka.
+
+Co se za rok stalo:
+Objevily se dvě poptávky bez rozpočtu, obě šly kvalifikovat bez nového formulářového pole.
+
+Návratový signál:
+Nenastal. Nebyly tři relevantní poptávky za sebou, které by nešly kvalifikovat bez ručního doptání na rozpočet.
+
+Rozhodnutí:
+Pravidlo zůstává ve stabilním ročním režimu. Do šablony doplňujeme jen kratší příklad formulace otázky.
+
+Co neotevíráme:
+Povinné pole, lead scoring, nový CRM export ani opakované mimořádné review.
+```
+
+Všimněte si, že výsledek obsahuje malou úpravu, ale neotevírá velkou změnu. To je normální. Stabilní pravidlo nemusí být nedotknutelné. Jen se k němu nemá přistupovat jako k trvale podezřelé věci.
+
+### Privacy-first roční review po mimořádném režimu
+
+Privacy-first kontrola má v tomto review zvláštní význam. Mimořádné review často vzniká kolem situací, kde je lákavé přidat víc sběru dat: nové povinné pole, detailnější formulář, delší retenci podkladů, více exportů, nahrávání chování uživatelů nebo automatické skórování. Roční review má ověřit nejen to, jestli pravidlo funguje, ale i to, jestli se tým mezitím nenápadně nevrátil k datově těžšímu řešení.
+
+Položte si čtyři otázky:
+
+```text
+Nepřibylo kolem pravidla nové pole, export nebo tracker bez samostatného rozhodnutí?
+
+Nezůstaly v pracovních místech staré konkrétní příklady déle, než bylo potřeba?
+
+Stačí dnešní rozhodnutí udělat z agregovaných nebo anonymizovaných signálů?
+
+Pokud pravidlo upravujeme, zůstává datová stopa stejná nebo menší?
+```
+
+Pokud odpověď na poslední otázku zní "větší", nejde o drobnou roční úpravu. Je to nové privacy-first rozhodnutí a zaslouží si vlastní záznam: účel, rozsah, retenci, přístupy, dodavatele a stop podmínku. Jinak se ze zdánlivě praktického vylepšení stane další datový zvyk, který se za rok bude tvářit jako samozřejmost.
+
+### Karta prvního ročního review po mimořádném režimu
+
+```text
+Pravidlo nebo pracovní místo:
+
+Kdy a proč vzniklo mimořádné review:
+
+Jaká hranice se z minulosti přenáší:
+
+Co z minulosti výslovně neotevíráme:
+
+Jak pravidlo fungovalo v běžné práci:
+
+Objevil se návratový signál:
+
+Jaké podněty se objevily, ale nestačí na otevření práce:
+
+Rozhodnutí po ročním review:
+
+Případná lokální úprava:
+
+Co zůstává zavřené:
+
+Privacy-first kontrola datové stopy:
+
+Co mažeme, zkracujeme nebo anonymizujeme:
+
+Další rytmus:
+
+Vlastník:
+
+Datum:
+```
+
+Karta nemá dokazovat, že staré rozhodnutí bylo geniální. Má jen poctivě ukázat, jestli pořád stačí. Když nestačí, otevřete nový malý krok. Když stačí, zavřete review bez okrasných prací okolo.
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: pojmenujte pravidlo a kanonické pracovní místo.
+2. Minuta 2: přečtěte jen jednovětý důvod mimořádného review a návratový signál.
+3. Minuta 3: napište, co se z minulosti výslovně neotevírá.
+4. Minuta 4: zkontrolujte, jestli pravidlo fungovalo v běžné práci.
+5. Minuta 5: rozhodněte, zda nastal návratový signál, lokální tření, nebo žádný problém.
+6. Minuta 6: projděte privacy-first otázky a ukliďte zbytečné stopy.
+7. Minuta 7: zapište rozhodnutí a další rytmus.
+
+Pokud se workshop zasekne na starém sporu, vraťte se k dnešnímu důkazu. Roční review má pracovat s tím, co se stalo od návratu do stabilního režimu. Starý spor můžete citovat jen jako hranici, ne jako hlavní materiál.
+
+### Checklist prvního ročního review po mimořádném režimu
+
+- Je jasné, které pravidlo a pracovní místo kontrolujeme?
+- Přenesli jsme z minulosti jen hranici rozhodnutí a návratový signál?
+- Je výslovně napsané, co z mimořádné historie znovu neotevíráme?
+- Víme, jestli pravidlo fungovalo bez mimořádné péče?
+- Rozlišili jsme návratový signál od jednotlivých podnětů?
+- Pokud děláme úpravu, je lokální a nepřepisuje celý starý rozsah?
+- Pokud otevíráme větší změnu, má vlastní dnešní důkaz a stop podmínku?
+- Zkontrolovali jsme, že nepřibylo nové pole, tracker, export ani delší retence bez rozhodnutí?
+- Uklidili jsme staré konkrétní příklady, které už nejsou potřeba?
+- Stačí další review držet v běžném ročním rytmu?
+- Umí tým popsat výsledek jednou větou?
+
+Dobré první roční review po mimořádném režimu je skoro nudné. A to je kompliment. Znamená to, že mimořádná práce se nerozlezla do trvalého dramatu, pravidlo se vrátilo do normálního provozu a privacy-first úklid nezůstal jen jako hezká poznámka v kartě. Nuda je někdy nejlepší provozní architektura. Bohužel se hůř prodává na konferencích, ale zato funguje.
+
 ## Pracovní log
 
+- 2026-06-27: Doplněna úvodní podkapitola o prvním ročním review po návratu z mimořádného režimu: omezení staré historie na hranici rozhodnutí, kontrola návratového signálu, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-27: Doplněna úvodní podkapitola o návratu do stabilního ročního režimu po mimořádném review: ukončení dočasné péče, kanonické místo, privacy-first úklid podkladů, karta, mini workshop a checklist.
 - 2026-06-27: Doplněna úvodní podkapitola o uzavření druhého běžného použití po uzavřeném mimořádném review: tři uzavírací výsledky, praktické příklady, privacy-first uzavření datové stopy, karta, mini workshop a checklist.
 - 2026-06-27: Doplněna úvodní podkapitola o druhém běžném použití po uzavřeném mimořádném review: přenositelnost bez čerstvé paměti, porovnání s prvním použitím, čtyři výsledné stavy, praktické příklady, privacy-first kontrola, karta, mini workshop a checklist.
