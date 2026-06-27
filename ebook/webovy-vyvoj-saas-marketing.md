@@ -263772,8 +263772,179 @@ Workshop neskončil, dokud není jasné, kde bude pravidlo příště použité.
 
 Uzavření druhého ročního cyklu má být klidné a trochu nezajímavé. To je dobré znamení. Pokud pravidlo po dvou letech pořád potřebuje dramatické vysvětlování, není stabilní. Pokud stačí jedna věta, jedno místo a jeden návratový signál, systém dospěl. Gratuluji, právě jste nevyrobili další proces. V dnešní době téměř rebelské.
 
+## První běžná správa po uzavřeném druhém ročním cyklu
+
+Když se druhý roční cyklus uzavře do běžné správy, vzniká nenápadné riziko: tým si řekne, že je hotovo, a pravidlo zmizí z pozornosti úplně. To není cílem. Stabilní pravidlo nemá dostávat mimořádnou péči, ale má zůstat použitelné v normálním rytmu. První běžná správa proto není další velké review. Je to krátká kontrola, jestli se uzavřené pravidlo opravdu vrátilo do místa, kde se pracuje, a jestli po něm nezůstaly staré kontrolní stopy.
+
+Začněte jednou větou:
+
+```text
+Pravidlo po druhém ročním cyklu spravujeme běžně takto:
+```
+
+Příklad:
+
+```text
+Pravidlo po druhém ročním cyklu spravujeme běžně takto:
+Potvrzovací šablona zůstává jediným kanonickým místem pro volitelnou otázku na rozpočet; kontrolujeme ji v běžném ročním review a mimo něj jen při návratovém signálu.
+```
+
+V té větě musí být tři věci: kde pravidlo bydlí, kdy se kontroluje a co se mimo rytmus neotevírá. Bez toho se běžná správa snadno změní na tichý chaos: jeden člověk hledá pravidlo v šabloně, druhý ve starém rozhodovacím logu a třetí si pamatuje workshop, který už dávno nemá být pracovní instrukcí. Takový stav je sice lidský, ale produktově je to malý bordel v obleku.
+
+### Co první běžná správa ověřuje
+
+První běžná správa má jen čtyři kontrolní otázky:
+
+- Je kanonické místo pořád jasné?
+- Je pracovní věta použitelná bez historie druhého ročního cyklu?
+- Zmizely mimořádné kontroly, tabulky a pomocné poznámky?
+- Je návratový signál mimo běžný rytmus pořád konkrétní?
+
+První otázka je o místě. Pokud pravidlo patří do šablony, má být ve šabloně. Pokud patří do checklistu, má být v checklistu. Rozhodovací log je dobrý pro historii, ale nemá suplovat pracovní plochu. Člověk v běžné práci nebude číst celý příběh pravidla. Potřebuje větu, podle které rozhodne teď.
+
+Druhá otázka je o jazyce. Věta nesmí znít jako závěr interní debaty. Nemá obsahovat "po review jsme se shodli" ani "v návaznosti na předchozí cyklus". To patří do logu. Pracovní věta má být v přítomném čase:
+
+```text
+U relevantní poptávky bez rozpočtu posíláme volitelnou otázku v potvrzovacím e-mailu. Povinné pole v prvním formuláři neotevíráme.
+```
+
+Třetí otázka je o úklidu. Pokud někde zůstala pomocná tabulka z review, starý komentář se zákaznickým příkladem nebo dočasný štítek, běžná správa ještě nezačala čistě. Nejdřív ukliďte stopu. Teprve potom nechte pravidlo žít.
+
+Čtvrtá otázka je pojistka proti samovolnému návratu práce. Návratový signál musí být tak jasný, aby ho poznal i člověk, který nebyl u původní debaty. "Když se objeví problém" nestačí. "Tři relevantní poptávky za sebou nepůjdou kvalifikovat bez ručního doptání na rozpočet" už stačí.
+
+### Praktický příklad
+
+Stav po druhém ročním cyklu:
+
+```text
+Kanonické místo:
+Potvrzovací šablona pro relevantní poptávky bez rozpočtu.
+
+Pracovní věta:
+U relevantní poptávky bez rozpočtu posíláme volitelnou otázku v potvrzovacím e-mailu. Povinné pole v prvním formuláři neotevíráme.
+
+Návratový signál:
+K povinnému poli se vracíme pouze tehdy, když volitelná otázka tři relevantní poptávky za sebou nepomůže kvalifikovat další krok.
+```
+
+První běžná správa:
+
+```text
+Kontrola:
+Nový člověk našel pravidlo přímo u potvrzovací šablony a použil ho bez čtení ročního review.
+
+Zjištění:
+Rozcestník pořád odkazoval i na starou servisní poznámku z mimořádného režimu.
+
+Oprava:
+Ze rozcestníku mažeme odkaz na starou servisní poznámku a necháváme jen odkaz na potvrzovací šablonu.
+
+Co neotevíráme:
+Nové review, nový formulář, nový scoring ani další sledování rozpočtů.
+```
+
+Tady je důležité, že problém nebyl v pravidle. Problém byl v navigaci k pravidlu. Oprava proto zůstala v navigaci. To je přesně velikost zásahu, kterou běžná správa potřebuje: najít nejbližší tření a neopravovat při tom celé dějiny.
+
+### Privacy-first kontrola běžné správy
+
+Při první běžné správě se neptejte jen na to, jestli pravidlo funguje. Ptejte se i na to, jestli po jeho roční historii nezůstalo víc dat, než je potřeba. Stabilní pravidlo má mít stabilní stopu. Nemá kolem sebe držet archiv dočasných důkazů, které už neslouží rozhodnutí.
+
+Použijte krátký zápis:
+
+```text
+V běžné správě ponecháváme:
+
+Z historie nepřenášíme:
+
+Mimo rytmus nesbíráme:
+
+K úklidu se vrátíme:
+```
+
+Příklad:
+
+```text
+V běžné správě ponecháváme:
+Aktuální pracovní větu v potvrzovací šabloně a agregovaný závěr v rozhodovacím logu.
+
+Z historie nepřenášíme:
+Konkrétní zákaznické příklady z mimořádného review ani dočasnou tabulku použití.
+
+Mimo rytmus nesbíráme:
+Nové CRM atributy, rozpočtové skóre, exporty ani pravidelný report.
+
+K úklidu se vrátíme:
+V běžném ročním review, pokud dřív nenastane návratový signál.
+```
+
+Privacy-first hodnota je v tom, že běžná správa nezvětšuje provozní paměť jen proto, že pravidlo kdysi prošlo složitější cestou. Historie může být užitečná, ale nemusí být pořád po ruce se všemi detaily. Často stačí závěr, hranice a signál návratu.
+
+### Karta první běžné správy
+
+```text
+Pravidlo nebo pracovní místo:
+
+Kanonické místo po druhém ročním cyklu:
+
+Pracovní věta v přítomném čase:
+
+Kde ji člověk hledal:
+
+Našel ji bez historie?
+- ano
+- ne
+- jen s pomocí
+
+Byla použitelná bez vysvětlování?
+- ano
+- ne, chyběla jasná hranice
+- ne, vedla na starou poznámku
+
+Co se opravuje lokálně:
+
+Co zůstává zavřené:
+
+Jaké dočasné stopy z historie mažeme, zkracujeme nebo anonymizujeme:
+
+Co mimo běžný rytmus nesbíráme:
+
+Návratový signál mimo rytmus:
+
+Další běžná kontrola:
+
+Vlastník:
+```
+
+Karta má sloužit jen pro první kontrolu po návratu do běžné správy. Nedělejte z ní nový pravidelný formulář. Pokud pravidlo funguje, vraťte ho do normálního rytmu a nechte ho pracovat. Pokud nefunguje, opravte nejbližší větu nebo odkaz. Teprve opakované selhání může být návratový signál.
+
+### Mini workshop na 5 minut
+
+1. Minuta 1: otevřete kanonické místo pravidla.
+2. Minuta 2: přečtěte pracovní větu bez historie review.
+3. Minuta 3: ověřte, jestli rozcestník nebo checklist nevede na starou stopu.
+4. Minuta 4: ukliďte jednu zbylou pomocnou stopu nebo napište, že žádná nezůstala.
+5. Minuta 5: potvrďte další běžný rytmus a návratový signál.
+
+Pokud během pěti minut zjistíte, že pravidlo nejde použít bez dlouhého vysvětlování, neprodlužujte workshop. Zapište lokální opravu: přepsat pracovní větu, přesunout ji blíž k práci nebo smazat starý odkaz. Běžná správa nemá nahrazovat roční review. Má jen zjistit, jestli se pravidlo po review opravdu vrátilo do provozu.
+
+### Checklist první běžné správy
+
+- Je pravidlo v jednom kanonickém pracovním místě?
+- Je pracovní věta napsaná v přítomném čase?
+- Umí ji použít člověk bez čtení historie druhého ročního cyklu?
+- Nevede rozcestník nebo checklist na starou servisní poznámku?
+- Zůstává původní široký návrh zavřený?
+- Je návratový signál mimo rytmus konkrétní?
+- Jsou dočasné tabulky, komentáře, kopie příkladů nebo štítky uklizené?
+- Nevznikl nový export, report, CRM atribut ani tracker kvůli běžné správě?
+- Je další kontrola navázaná na běžný rytmus, ne na pocit, že by se "mělo ještě něco hlídat"?
+- Je jasné, kdo pravidlo vlastní, pokud se v běžné práci objeví tření?
+
+První běžná správa po druhém ročním cyklu je test dospělosti pravidla. Neptá se, jestli pravidlo vypadá důležitě. Ptá se, jestli jde použít bez doprovodu, bez starých poznámek a bez nového sběru dat. Pokud ano, nejlepší další krok je překvapivě prostý: nedělat z toho nový projekt.
+
 ## Pracovní log
 
+- 2026-06-27: Doplněna úvodní podkapitola o první běžné správě po uzavřeném druhém ročním cyklu: kanonické místo, použitelná pracovní věta, úklid starých stop, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-06-27: Doplněna úvodní podkapitola o uzavření druhého ročního cyklu do běžné správy: uzavírací věta, propsání do kanonického místa, privacy-first úklid stop, karta, mini workshop a checklist.
 - 2026-06-27: Doplněna úvodní podkapitola o druhém ročním cyklu po uzavřeném mimořádném režimu: běžná správa pravidla, kontrola kontextu a návratového signálu, privacy-first datová stopa, karta, mini workshop a checklist.
 - 2026-06-27: Doplněna úvodní podkapitola o uzavření prvního ročního review po návratu z mimořádného režimu: tři uzavírací stavy, praktický příklad, privacy-first úklid, karta, mini workshop a checklist.
