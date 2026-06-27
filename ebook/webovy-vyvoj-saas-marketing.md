@@ -262918,8 +262918,174 @@ Pokud se workshop začne měnit v retrospektivu celého mimořádného review, v
 
 Uzavření druhého běžného použití je konec mimořádné smyčky. Buď se pravidlo vrací do klidu, nebo se opraví jedna blízká překážka, nebo se oddělí nové téma. Všechny tři výsledky jsou v pořádku, pokud jsou přesné. Špatný výsledek je jen rozmazané "budeme to sledovat", které nepřizná, co se vlastně rozhodlo.
 
+## Návrat do stabilního ročního režimu po mimořádném review
+
+Když mimořádné review skončilo, první běžné použití prošlo a druhé běžné použití bylo uzavřené, zbývá poslední důležitý krok: vrátit pravidlo do stabilního ročního režimu. Není to další kontrola obsahu. Je to úklid provozního režimu. Tým má přestat pracovat, jako by pravidlo bylo pořád v rekonvalescenci, a začít ho brát jako běžnou součást systému.
+
+Začněte větou:
+
+```text
+Po mimořádném review vracíme pravidlo do stabilního ročního režimu takto:
+```
+
+Za ni napište konkrétní provozní závěr:
+
+```text
+Po mimořádném review vracíme potvrzovací šablonu do stabilního ročního režimu: běžně ji používáme přes rozcestník, další kontrolu otevíráme až v ročním review nebo při jasném návratovém signálu a dočasné podklady z review mažeme.
+```
+
+Tahle věta je nenápadná, ale zavírá mnoho skrytého nepořádku. Bez ní se často stane, že mimořádné review formálně skončí, ale v systému zůstanou malé pozůstatky: extra kontrolní sloupec, komentář "ještě sledovat", kopie tří původních podnětů, ruční připomínka ve vlákně nebo tichá povinnost ptát se autora změny. Každá jednotlivost vypadá nevinně. Dohromady ale z normálního pravidla dělají trvale citlivé místo.
+
+Stabilní roční režim znamená tři věci:
+
+- pravidlo má jedno kanonické místo,
+- běžné použití nevyžaduje autora mimořádného review,
+- další zásah má stejnou vstupní bránu jako u ostatních stabilních pravidel.
+
+Pokud některá z těchto věcí neplatí, nejste ve stabilním režimu. Možná je pravidlo správné, ale ještě potřebuje lokální úklid. Možná je kanonické místo slabé. Možná tým pořád používá starou poznámku jako berličku. To není tragédie. Jen tomu neříkejte klid, protože klid, který stojí na tajné ruční práci, je jen proces s lepším PR.
+
+### Co stabilní režim ukončuje
+
+Návrat do stabilního ročního režimu ukončuje všechno, co vzniklo jen kvůli mimořádnému review:
+
+- dočasné kontrolní tabulky,
+- pracovní kopie původních podnětů,
+- staré komentáře u šablon,
+- ruční připomínky v chatu,
+- zvláštní odpovědnost člověka, který review vedl,
+- mimořádné reportování mimo běžný rytmus,
+- přenášení citlivých detailů do dalších karet.
+
+Neukončuje samotné poučení. To má být propsané v kanonickém pracovním místě: v pravidle, šabloně, rozcestníku, rozhodovacím logu nebo návratovém signálu. Rozdíl je jednoduchý. Poučení pomáhá budoucí práci. Dočasné stopy pomáhaly jen při rozhodování, které už skončilo.
+
+Před úklidem si proto položte otázku:
+
+```text
+Kdyby nový člověk použil pravidlo za půl roku, potřebuje tuto stopu k dobrému rozhodnutí?
+```
+
+Pokud odpověď zní ne, stopu smažte, zkraťte nebo archivujte mimo běžnou pracovní cestu. Pokud odpověď zní ano, pravděpodobně nemá zůstat jako poznámka z review, ale jako součást kanonického pravidla.
+
+### Praktický příklad
+
+Mimořádné review vzniklo po třech podobných podnětech k rozpočtu ve formuláři. Tým se rozhodl nepřidat povinné pole, ale upravit potvrzovací šablonu a obchodní kvalifikační věty. První i druhé běžné použití potvrdily, že nové pravidlo funguje bez starých podkladů.
+
+Návrat do stabilního režimu může vypadat takto:
+
+```text
+Pravidlo:
+Potvrzovací šablona pro relevantní poptávky bez jasného rozpočtu.
+
+Kanonické místo:
+Obchodní rozcestník -> Poptávky -> Potvrzovací šablony.
+
+Co zůstává:
+Aktuální šablona, dvě kvalifikační věty a návratový signál: tři relevantní poptávky za sebou nejde kvalifikovat bez ručního doptání na rozpočet.
+
+Co končí:
+Dočasná tabulka tří podnětů, komentář "hlídat rozpočet" u formuláře a ruční připomínka v obchodním vlákně.
+
+Další rytmus:
+Roční review obchodních šablon nebo dřívější návrat pouze při návratovém signálu.
+```
+
+Výsledek je praktický: obchodník najde šablonu běžnou cestou, nemusí znát historii review a produktový tým nemusí držet v hlavě, že se kdysi řešilo rozpočtové pole. Zůstává jen pravidlo, hranice a signál návratu.
+
+### Privacy-first návrat do režimu
+
+Mimořádné review často pracuje s citlivějšími stopami než běžná údržba: konkrétními poptávkami, obchodními poznámkami, citacemi zákazníků, screenshoty CRM nebo interními komentáři. To může být v průběhu rozhodování legitimní, pokud je účel jasný a rozsah malý. Po uzavření ale tyto stopy nesmí zůstat v provozu jen proto, že "už tam jsou".
+
+Privacy-first návrat do ročního režimu má vlastní krátkou bránu:
+
+```text
+Co bylo potřeba jen pro mimořádné rozhodnutí?
+
+Co musí zůstat pro běžné použití?
+
+Co musí zůstat pro audit rozhodnutí, ale nemá být v pracovní cestě?
+
+Co mažeme, anonymizujeme nebo zkracujeme hned?
+```
+
+Příklad odpovědi:
+
+```text
+Jen pro mimořádné rozhodnutí byly potřeba tři konkrétní poptávky a interní komentáře k jejich kvalifikaci.
+
+Pro běžné použití zůstává pouze obecná kvalifikační věta a návratový signál.
+
+Pro audit rozhodnutí zůstává krátký anonymizovaný záznam bez jmen, e-mailů a detailů zákaznických situací.
+
+Hned mažeme pracovní kopie poptávek a screenshoty z CRM.
+```
+
+Tím se z privacy-first přístupu nestane brzda práce. Je to úklid po práci. Data posloužila rozhodnutí, rozhodnutí se propsalo do pravidla a data se vrací na minimum. Kdyby takhle uklízely všechny týmy, polovina interních složek by náhle zeštíhlela a druhá polovina by přestala vypadat jako archeologická expozice.
+
+### Karta návratu do stabilního ročního režimu
+
+```text
+Pravidlo nebo pracovní místo:
+
+Jaké mimořádné review předcházelo:
+
+Co potvrdilo první běžné použití:
+
+Co potvrdilo druhé běžné použití:
+
+Jednovětý návrat do stabilního režimu:
+
+Kanonické místo:
+
+Co zůstává v běžné pracovní cestě:
+
+Co zůstává jen jako zkrácený rozhodovací záznam:
+
+Co mažeme, anonymizujeme nebo archivujeme mimo pracovní cestu:
+
+Co už tým nemá dělat:
+
+Další plánovaný rytmus:
+
+Návratový signál mimo plánovaný rytmus:
+
+Vlastník:
+
+Datum:
+```
+
+Karta má být poslední stopa mimořádné smyčky. Pokud po jejím vyplnění vzniká chuť založit další kontrolní rituál, vraťte se k jednovětému návratu. Stabilní režim má znamenat méně mimořádné pozornosti, ne nový kalendářový ornament.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: pojmenujte pravidlo a kanonické pracovní místo.
+2. Minuta 2: přečtěte závěr prvního a druhého běžného použití.
+3. Minuta 3: napište jednovětý návrat do stabilního ročního režimu.
+4. Minuta 4: určete, co zůstává v běžné pracovní cestě.
+5. Minuta 5: smažte, anonymizujte nebo zkraťte dočasné stopy z mimořádného review.
+6. Minuta 6: potvrďte další rytmus a návratový signál.
+
+Pokud se workshop zasekne na debatě, jestli si dočasné podklady raději nenechat, ptejte se na účel. Ne "mohlo by se to někdy hodit", ale "jaké konkrétní rozhodnutí bez toho nepůjde udělat". První otázka vyrábí sklady. Druhá chrání práci.
+
+### Checklist návratu do stabilního ročního režimu
+
+- Má pravidlo jedno kanonické místo?
+- Fungovalo první i druhé běžné použití bez starých pomocných stop?
+- Je napsaná jednovětá věta návratu do stabilního režimu?
+- Víme, co zůstává v běžné pracovní cestě?
+- Víme, co zůstává jen jako zkrácený rozhodovací záznam?
+- Ukončili jsme mimořádné kontrolní tabulky, připomínky a ruční hlídání?
+- Smazali, anonymizovali nebo zkrátili jsme podklady, které sloužily jen pro mimořádné review?
+- Nepřenášíme konkrétní zákaznické detaily do dalších karet bez účelu?
+- Je další plánovaný rytmus stejný jako u ostatních stabilních pravidel?
+- Je návratový signál dost konkrétní, aby neotevíral práci při každém pocitu nejistoty?
+- Umí nový člověk použít pravidlo bez znalosti mimořádné historie?
+- Umí tým za rok poznat, proč pravidlo vypadá právě takhle?
+
+Návrat do stabilního ročního režimu je dobrý konec mimořádné práce. Ne proto, že by se už nikdy nemohlo nic změnit. Ale proto, že změna už má normální vstupní bránu: plánované review nebo jasný návratový signál. Všechno ostatní je jen dozvuk staré pozornosti, který si zaslouží uklidit.
+
 ## Pracovní log
 
+- 2026-06-27: Doplněna úvodní podkapitola o návratu do stabilního ročního režimu po mimořádném review: ukončení dočasné péče, kanonické místo, privacy-first úklid podkladů, karta, mini workshop a checklist.
 - 2026-06-27: Doplněna úvodní podkapitola o uzavření druhého běžného použití po uzavřeném mimořádném review: tři uzavírací výsledky, praktické příklady, privacy-first uzavření datové stopy, karta, mini workshop a checklist.
 - 2026-06-27: Doplněna úvodní podkapitola o druhém běžném použití po uzavřeném mimořádném review: přenositelnost bez čerstvé paměti, porovnání s prvním použitím, čtyři výsledné stavy, praktické příklady, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-06-27: Doplněna úvodní podkapitola o uzavření prvního běžného použití po uzavřeném mimořádném review: čtyři uzavírací stavy, praktické příklady, propsání a ukončení dočasné péče, privacy-first úklid, karta, mini workshop a checklist.
