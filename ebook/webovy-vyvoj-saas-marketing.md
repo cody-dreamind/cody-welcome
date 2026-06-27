@@ -261058,8 +261058,228 @@ Pokud se během workshopu objeví potřeba další kontroly, musí mít jednu ko
 
 Návrat do ročního klidu je úklid po dobře odvedené práci. Pravidlo zůstává dostupné, ale přestává si říkat o mimořádnou pozornost. Tým tím získá dvě věci najednou: méně provozního šumu a čistší datovou stopu. To je příjemně nudný výsledek, což bývá u stabilních pravidel přesně ono.
 
+## První podnět během ročního klidu
+
+Roční klid neznamená, že kolem pravidla nikdy nic neprojde. Znamená, že první drobný podnět automaticky neotevírá novou práci. To je rozdíl, který v praxi šetří překvapivě hodně energie. Stabilní pravidlo může během roku potkat připomínku, otázku, malou nejistotu, nový nápad nebo jednotlivý okrajový případ. Většina těchto věcí není návratový signál. Jsou to podněty. Mají se zachytit úměrně, ne obsloužit jako incident.
+
+Začněte větou:
+
+```text
+Během ročního klidu přišel tento podnět:
+```
+
+Pak napište jednu konkrétní větu, ne příběh celé situace:
+
+```text
+Během ročního klidu přišel tento podnět:
+Nový obchodník se zeptal, jestli volitelnou otázku na rozpočet smí použít i u poptávky, kde už jde navrhnout další krok bez rozpočtu.
+```
+
+Teprve potom rozhodněte, jestli jde o šum, lokální vysvětlení, slabou hranu pravidla, nebo skutečný návratový signál. Nejdřív tedy třídění, potom reakce. Když pořadí otočíte, tým začne upravovat pravidlo dřív, než ví, jestli se vůbec něco stalo. To je rychlá cesta k tomu, aby stabilní pravidlo po roce vypadalo jako starý svetr se sedmi záplatami.
+
+### Čtyři typy podnětu
+
+První podnět během ročního klidu obvykle spadá do jedné ze čtyř kategorií:
+
+- Šum: jednorázová otázka nebo nápad, který neukazuje problém v pravidle.
+- Lokální vysvětlení: člověk potřebuje krátké objasnění, ale pravidlo je správně napsané a dostupné.
+- Slabá hrana: pravidlo funguje, ale jedna věta, odkaz nebo příklad může při dalším použití mást.
+- Návratový signál: přišel konkrétní důkaz, který odpovídá domluvené podmínce znovuotevření.
+
+Každá kategorie má jinou reakci.
+
+```text
+Šum:
+Podnět zapíšeme jen tehdy, pokud se váže k plánovanému ročnímu review. Jinak ho necháme být.
+
+Lokální vysvětlení:
+Odpovíme člověku u pracovního místa, ale pravidlo neměníme.
+
+Slabá hrana:
+Zapíšeme krátkou servisní poznámku pro příští přirozené použití, bez mimořádné kontroly.
+
+Návratový signál:
+Otevíráme novou malou smyčku s vlastní otázkou, stop podmínkou a privacy-first hranicí.
+```
+
+Tohle rozlišení chrání hlavně před dvěma extrémy. První extrém je ignorovat všechno, protože "pravidlo je v klidu". Druhý extrém je z každé otázky vyrobit úpravu. Zdravý provoz umí obojí oddělit: nevšímat si šumu, vysvětlit lokální nejasnost, hlídat slabou hranu a otevřít práci jen při skutečném signálu.
+
+### Praktický příklad
+
+Pravidlo říká:
+
+```text
+Volitelnou otázku na rámcový rozpočet posílej jen u relevantní poptávky, kde bez této informace nejde navrhnout další konkrétní krok.
+```
+
+Během ročního klidu přijdou čtyři možné podněty:
+
+```text
+Šum:
+Někdo navrhne, že by otázka na rozpočet mohla znít "profesionálněji".
+
+Reakce:
+Neotevíráme práci. Pokud se podobný jazykový podnět vrátí při ročním review, posoudíme ho tam.
+```
+
+```text
+Lokální vysvětlení:
+Nový obchodník se ptá, jestli otázku použít u poptávky, kde už jde navrhnout audit bez rozpočtu.
+
+Reakce:
+Odpověď zní: nepoužívat, protože další konkrétní krok navrhnout jde. Pravidlo neměníme.
+```
+
+```text
+Slabá hrana:
+Dva lidé nezávisle přečetli "relevantní poptávka" jako každou poptávku od firmy, i když cíl projektu nebyl jasný.
+
+Reakce:
+Zapíšeme slabou hranu formulace a při dalším přirozeném použití ověříme, jestli stačí zpřesnit jednu větu.
+```
+
+```text
+Návratový signál:
+Tři relevantní poptávky za sebou nešlo kvalifikovat bez ručního doptání na rozpočet nebo rozhodovací limit.
+
+Reakce:
+Otevíráme novou malou smyčku. Ne jako pokračování ročního klidu, ale jako samostatnou otázku obchodní kvalifikace.
+```
+
+Rozdíl je praktický. V prvních dvou případech by úprava pravidla byla zbytečná. Ve třetím může dávat smysl malá oprava formulace, ale ještě není potřeba otevírat celý proces. Ve čtvrtém už pravidlo narazilo na domluvený návratový signál a zaslouží si novou práci.
+
+### Záznam bez nové agendy
+
+Pokud podnět zapisujete, používejte krátký formát:
+
+```text
+Podnět:
+
+Typ:
+- šum
+- lokální vysvětlení
+- slabá hrana
+- návratový signál
+
+Reakce:
+
+Co se výslovně neotevírá:
+
+Kdy se k tomu vrátíme, pokud vůbec:
+```
+
+U šumu často stačí nezapisovat nic. Pokud se ale podnět dotýká ročního review, zapište ho jednou větou bez detailů. U lokálního vysvětlení napište odpověď tam, kde člověk pracuje, ne do nové dokumentace. U slabé hrany zapište jen nejbližší místo ověření. U návratového signálu založte novou smyčku a roční klid tím nepřetěžujte.
+
+Příklad slabé hrany:
+
+```text
+Podnět:
+Dva lidé si vyložili "relevantní poptávku" příliš široce.
+
+Typ:
+Slabá hrana formulace.
+
+Reakce:
+Při dalším přirozeném použití ověříme, jestli stačí doplnit "kde už známe cíl projektu".
+
+Co se výslovně neotevírá:
+Neměníme formulář, scoring, obchodní proces ani roční rytmus pravidla.
+
+Kdy se k tomu vrátíme:
+Jen při dalším reálném použití pravidla nebo při plánovaném ročním review.
+```
+
+Tento zápis je dostatečný. Není potřeba zakládat tabulku podnětů, pokud jich nemáte víc a opravdu je nevyhodnocujete v rytmu. Jedna slabá hrana nemá dostat vlastní administrativní oddělení. Papírování je velmi talentované v tom, jak se tvářit jako práce.
+
+### Privacy-first zachycení podnětu
+
+Podnět během ročního klidu často přijde z reálné zákaznické situace, interní komunikace nebo obchodního rozhovoru. To svádí k uložení celé zprávy "pro kontext". Většinou to není potřeba. Pro rozhodnutí stačí zobecněná věta o tření.
+
+Použijte tři otázky:
+
+```text
+Jaký rozhodovací poznatek potřebujeme zachovat?
+
+Jaké osobní, zákaznické nebo obchodní detaily k tomu nepotřebujeme?
+
+Kde zůstává původní zdroj podle běžné retence?
+```
+
+Praktický zápis:
+
+```text
+Poznatek:
+Dva lidé vyložili stejnou formulaci příliš široce.
+
+Nepotřebujeme ukládat:
+Konkrétní zákaznické zprávy, jména lidí, screenshot CRM ani kopie e-mailů.
+
+Původní zdroj:
+Interní komunikace a obchodní vlákna zůstávají ve svých běžných systémech podle jejich retence; do pravidla přenášíme jen zobecněný poznatek.
+```
+
+Privacy-first reakce na podnět není jen o mazání. Je o tom, aby se z jednotlivé situace vytěžil rozhodovací smysl a nepřenesl se datový balast. Čím klidnější pravidlo, tím méně historických detailů má kolem sebe nosit.
+
+Codyho komentář: první podnět po návratu do klidu je test nervů. Tým má často chuť říct "aha, vidíte, ještě to není hotové". Možná. Ale možná se jen někdo zeptal normální otázku. Ne každé zakašlání procesu je zápal plic. Občas je to jen prach na poličce.
+
+### Karta prvního podnětu během ročního klidu
+
+```text
+Pravidlo nebo pracovní místo:
+
+Datum podnětu:
+
+Podnět jednou větou:
+
+Typ podnětu:
+- šum
+- lokální vysvětlení
+- slabá hrana
+- návratový signál
+
+Proč je to tento typ:
+
+Reakce:
+
+Co se výslovně neotevírá:
+
+Co se nezapisuje, nekopíruje nebo neměří:
+
+Kdy se k podnětu vrátíme:
+
+Vlastník:
+```
+
+Kartu používejte jen tam, kde podnět opravdu potřebuje stopu. Pokud někdo položil běžnou otázku a odpověď je přímo v pravidle, lepší výsledek je často žádná karta. Tichý provoz má právo zůstat tichý.
+
+### Mini workshop na 5 minut
+
+1. Minuta 1: napište podnět jednou větou.
+2. Minuta 2: vyberte typ podnětu.
+3. Minuta 3: určete nejmenší reakci.
+4. Minuta 4: napište, co se výslovně neotevírá.
+5. Minuta 5: zkontrolujte privacy-first stopu a rozhodněte, zda zápis vůbec zůstává.
+
+Pokud se v minutě 2 tým neshodne, neprodlužujte debatu. Zeptejte se, jestli podnět splňuje domluvený návratový signál. Pokud ne, nejspíš nejde o otevření práce. Může jít o slabou hranu nebo lokální vysvětlení. To je menší reakce a menší reakce je u stabilního pravidla většinou správný výchozí stav.
+
+### Checklist prvního podnětu během ročního klidu
+
+- Je podnět popsaný jednou konkrétní větou?
+- Rozlišili jsme šum, lokální vysvětlení, slabou hranu a návratový signál?
+- Neotevíráme novou práci jen proto, že někdo položil otázku?
+- Pokud stačí vysvětlení, dostane ho člověk u pracovního místa?
+- Pokud jde o slabou hranu, má ověření nejbližší přirozenou příležitost?
+- Pokud jde o návratový signál, vzniká samostatná smyčka s vlastní hranicí?
+- Je zapsané, co se výslovně neotevírá?
+- Nekopírujeme zákaznické zprávy, osobní detaily, screenshoty ani exporty bez jasného účelu?
+- Nepřidáváme průběžné měření jen kvůli prvnímu podnětu?
+- Zůstává pravidlo v ročním klidu, pokud nepřišel skutečný návratový signál?
+
+První podnět během ročního klidu je hlavně zkouška rozlišování. Stabilní pravidlo nemá být křehké. Má umět přežít otázku, poznámku i jeden okrajový případ bez toho, aby kolem něj znovu vznikl servisní režim. Když podnět opravdu odhalí problém, otevřete malou smyčku. Když ne, odpovězte, ukliďte stopu a nechte pravidlo dál klidně pracovat.
+
 ## Pracovní log
 
+- 2026-06-27: Doplněna úvodní podkapitola o prvním podnětu během ročního klidu: rozlišení šumu, lokálního vysvětlení, slabé hrany a návratového signálu, privacy-first zachycení podnětu, karta, mini workshop a checklist.
 - 2026-06-27: Doplněna úvodní podkapitola o návratu pravidla do ročního klidu po lehkých kontrolách: ukončení mimořádné péče, co už nedělat, privacy-first úklid datové stopy, karta, mini workshop a checklist.
 - 2026-06-27: Doplněna úvodní podkapitola o uzavření druhé lehké kontroly po uzavřeném ročním review: tři uzavírací stavy, praktické příklady, privacy-first úklid zbylých stop, karta, mini workshop a checklist.
 - 2026-06-26: Doplněna úvodní podkapitola o druhé lehké kontrole po uzavřeném ročním review: kdy ji nedělat, ověření lokální opravy, privacy-first hranice, karta, mini workshop a checklist.
