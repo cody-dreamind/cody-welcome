@@ -262496,8 +262496,213 @@ Pokud se během workshopu někdo vrací k otázce, zda se mimořádné review m�
 
 Uzavření prvního běžného použití je návrat ke standardní práci. Tým má vědět, jestli pravidlo funguje samo, jestli potřebuje malou lokální opravu, nebo jestli po review zůstala skrytá opora. Jakmile je to jasné, další hodnota nevzniká z dalšího hlídání. Vzniká z klidu, ve kterém pravidlo prostě slouží.
 
+## Druhé běžné použití po uzavřeném mimořádném review
+
+Druhé běžné použití je kontrola přenositelnosti. První použití často proběhne ještě s čerstvou pamětí: lidé si pamatují, proč se mimořádné review otevřelo, kde se upravila věta a jaké pomocné podklady se měly uklidit. Druhé použití už má být obyčejnější. Pravidlo má fungovat bez atmosféry nedávné opravy.
+
+Smyslem není znovu testovat celou historii tří podnětů. Smyslem je ověřit, jestli se výsledek mimořádného review udržel v normální práci i ve chvíli, kdy už kolem něj není zvýšená pozornost. Pokud se druhé použití povede, pravidlo může opravdu zůstat v klidu. Pokud se nepovede, reakce má být pořád lokální: opravit nejbližší překážku, ne znovu otevřít mimořádné review jako dramatický seriál druhé řady.
+
+Začněte větou:
+
+```text
+Druhé běžné použití ověřuje, jestli pravidlo funguje i bez čerstvé paměti na mimořádné review.
+```
+
+Potom doplňte konkrétní pracovní místo:
+
+```text
+Druhé běžné použití ověřuje, jestli obchodník najde upravené příklady u potvrzovací šablony a rozhodne bez staré pracovní poznámky, ručního vysvětlení nebo nového sběru rozpočtových údajů.
+```
+
+Tahle věta je schválně úzká. Neptejte se, jestli "obchod lépe kvalifikuje poptávky". To je zajímavá otázka, ale nepatří sem. Druhé běžné použití má říct, jestli opravené pravidlo přežilo jeden další normální průchod.
+
+### Co druhé použití porovnává
+
+Porovnejte druhé použití s prvním ve třech bodech:
+
+- Stejné pracovní místo: používá se pořád stejná šablona, pravidlo, formulář, onboardingový krok nebo rozhodovací karta?
+- Stejný typ rozhodnutí: řeší člověk opravdu stejnou rozhodovací hranu, nebo jen podobně pojmenované téma?
+- Stejná datová střídmost: stačí pořád kanonické pravidlo, nebo se do práce nenápadně vrátily pomocné poznámky, exporty, screenshoty a ruční vysvětlení?
+
+Pokud se pracovní místo změnilo, druhé použití není čisté ověření. Může to být nová situace nebo nový podnět. Pokud se změnil typ rozhodnutí, nezachraňujte to tím, že ho přilepíte ke staré kartě. Pokud se rozšířila datová stopa, nejdřív ukliďte tu. Privacy-first provoz se neměří tím, že si tým pamatuje hezké zásady; měří se tím, co opravdu zůstává v nástrojích po druhém a třetím použití.
+
+Codyho komentář: první ověření umí být trochu slavnostní. Druhé je nudnější, a právě proto důležitější. Když pravidlo funguje jen ve chvíli, kdy všichni vědí, že se na něj kouká, není to pravidlo. Je to divadelní rekvizita s dobrým PR.
+
+### Čtyři výsledky druhého použití
+
+Druhé běžné použití uzavřete jedním ze čtyř stavů:
+
+- Stabilní: pravidlo se našlo, použilo a nevyžádalo si žádnou mimořádnou oporu.
+- Lokální slabina: pravidlo funguje, ale jedno blízké místo ještě zdržuje nebo mate.
+- Nový podnět: druhé použití ukázalo jiný problém, který nepatří do mimořádného review.
+- Návrat mimořádné opory: člověk se znovu opřel o starou poznámku, vysvětlení nebo dočasný materiál.
+
+Stav `Stabilní` znamená, že druhé použití nemusí pokračovat další kontrolou. Zapište krátký závěr a vraťte pravidlo do ročního nebo běžného rytmu.
+
+Stav `Lokální slabina` řešte jednou opravou. Typicky odkaz, název, jedna hraniční věta, přesun příkladu nebo smazání matoucí kopie. Lokální slabina není povolenka k přepisu celé metodiky.
+
+Stav `Nový podnět` je třeba oddělit. Může být cenný, ale nemá využívat energii mimořádného review. Založte novou kartu s vlastní otázkou, vlastní stop podmínkou a vlastním privacy-first minimem.
+
+Stav `Návrat mimořádné opory` je signál, že předchozí uzavření nebylo čisté. Neznamená to, že původní review bylo špatně. Znamená to, že jeho výsledek se ještě nepřestěhoval do správného pracovního místa. Opravte kanonické místo a ukončete starou oporu.
+
+### Praktický příklad
+
+První běžné použití bylo potvrzené:
+
+```text
+Obchodník našel příklady u potvrzovací šablony, správně nepoužil otázku na rozpočet a nepotřeboval pracovní poznámku z review.
+```
+
+Druhé běžné použití:
+
+```text
+Situace:
+Jiný obchodník použil stejnou šablonu u další relevantní poptávky.
+
+Výsledek:
+Příklady našel přes běžný rozcestník, rozhodl bez ručního vysvětlení a nepřidal žádné nové pole, tag ani poznámku k rozpočtu.
+
+Uzavření:
+Druhé běžné použití je stabilní. Pravidlo necháváme v běžném rytmu, pomocné stopy zůstávají smazané a další kontrolu neplánujeme mimo návratový signál nebo roční review.
+```
+
+Lokální slabina:
+
+```text
+Situace:
+Člověk našel pravidlo, ale název odkazu v rozcestníku neodpovídal názvu šablony.
+
+Výsledek:
+Rozhodnutí proběhlo správně, ale hledání zbytečně trvalo.
+
+Oprava:
+Sjednotit název odkazu s názvem šablony.
+
+Co zůstává zavřené:
+Obsah pravidla, formulář, scoring, CRM pole, nové review i sběr rozpočtových údajů.
+```
+
+Nový podnět:
+
+```text
+Situace:
+Při použití šablony se ukázalo, že zákazník nerozumí rozdílu mezi auditem a dlouhodobým vývojem.
+
+Výsledek:
+Nejde o návrat otázky na rozpočet. Jde o nový positioningový problém.
+
+Uzavření:
+Druhé běžné použití původního pravidla je stabilní. Nový podnět zakládáme samostatně pro blok nad formulářem, ne jako pokračování mimořádného review.
+```
+
+Tohle oddělení je důležité. Dobrý proces se nepozná podle toho, že ignoruje nové signály. Pozná se podle toho, že jim nedovolí převzít cizí rámec.
+
+### Privacy-first kontrola druhého použití
+
+Druhé použití má potvrdit, že úklid po mimořádném review opravdu vydržel. Zapište proto krátkou kontrolu:
+
+```text
+Při druhém použití jsme nepotřebovali:
+
+V běžném pracovním místě zůstává:
+
+Po druhém použití nepřidáváme:
+```
+
+Příklad:
+
+```text
+Při druhém použití jsme nepotřebovali:
+Pracovní poznámku z review, kopie tří podnětů, CRM screenshoty ani ruční vysvětlení.
+
+V běžném pracovním místě zůstává:
+Potvrzovací šablona, dva příklady a návratový signál.
+
+Po druhém použití nepřidáváme:
+Rozpočtové pole, lead scoring, nový export, nový dashboard ani další kontrolní tabulku.
+```
+
+Pokud se při druhém použití objeví potřeba staré citlivé stopy, neberte ji jako pohodlnou pomůcku. Berte ji jako nález. Buď je rozhodovací věta slabá, nebo je na špatném místě. V obou případech opravujte pravidlo, ne množství uložených dat.
+
+### Karta druhého běžného použití
+
+```text
+Pravidlo nebo pracovní místo:
+
+Co potvrdilo první běžné použití:
+
+Druhá běžná situace:
+
+Kdo pravidlo použil:
+
+Porovnání s prvním použitím:
+Stejné pracovní místo:
+Stejný typ rozhodnutí:
+Stejná datová střídmost:
+
+Výsledek:
+- stabilní
+- lokální slabina
+- nový podnět
+- návrat mimořádné opory
+
+Nejmenší oprava, pokud existuje:
+
+Nový podnět, pokud existuje, a kam patří:
+
+Co zůstává zavřené:
+
+Privacy-first kontrola:
+Při druhém použití jsme nepotřebovali:
+V běžném pracovním místě zůstává:
+Po druhém použití nepřidáváme:
+
+Další rytmus:
+- běžný klid
+- jedna lokální oprava
+- samostatná nová karta
+- odstranění mimořádné opory a jedno další ověření
+
+Vlastník:
+
+Datum:
+```
+
+Karta má z druhého použití udělat uzavřený důkaz, ne trvalý report. Pokud je výsledek stabilní, nechte kartu krátkou. Pokud je výsledek slabý, držte opravu u nejbližšího pracovního místa.
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: přečtěte závěr prvního běžného použití.
+2. Minuta 2: popište druhou běžnou situaci jednou větou.
+3. Minuta 3: porovnejte pracovní místo a typ rozhodnutí.
+4. Minuta 4: zkontrolujte, jestli nebyla potřeba mimořádná opora.
+5. Minuta 5: vyberte jeden ze čtyř výsledků.
+6. Minuta 6: napište nejmenší opravu, nebo potvrďte klid.
+7. Minuta 7: zapište privacy-first kontrolu a ukončete dočasnou pozornost.
+
+Pokud se během workshopu objeví nové téma, napište ho jednou větou a vraťte se k druhému použití. Nový podnět může být důležitý, ale nemá vám ukrást uzavření ověření, které jste přišli udělat.
+
+### Checklist druhého běžného použití
+
+- Navazuje druhé použití na konkrétní uzavřené první použití?
+- Proběhlo v normální práci bez zvláštního vysvětlování?
+- Porovnali jsme pracovní místo s prvním použitím?
+- Porovnali jsme typ rozhodnutí s prvním použitím?
+- Zkontrolovali jsme, že nebyly potřeba staré pomocné stopy?
+- Vybrali jsme jeden ze čtyř výsledků?
+- Pokud je výsledek stabilní, vracíme pravidlo do běžného klidu?
+- Pokud jde o lokální slabinu, držíme opravu u jednoho místa?
+- Pokud jde o nový podnět, oddělujeme ho od mimořádného review?
+- Pokud se vrátila mimořádná opora, přesouváme rozhodovací větu do kanonického místa?
+- Nepřidáváme nové pole, scoring, dashboard, export ani tracker jen kvůli lepšímu pocitu kontroly?
+- Je jasné, co zůstává zavřené?
+- Je jasné, jaký rytmus platí po druhém použití?
+
+Druhé běžné použití je malý, ale velmi poctivý test. Když pravidlo funguje i podruhé, bez čerstvé paměti a bez starých podkladů, zaslouží si klid. Když nefunguje, opravte přesně tu hranu, která selhala. V obou případech se držte jedné věci: mimořádné review už skončilo. Nenechte jeho stín dělat novou práci.
+
 ## Pracovní log
 
+- 2026-06-27: Doplněna úvodní podkapitola o druhém běžném použití po uzavřeném mimořádném review: přenositelnost bez čerstvé paměti, porovnání s prvním použitím, čtyři výsledné stavy, praktické příklady, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-06-27: Doplněna úvodní podkapitola o uzavření prvního běžného použití po uzavřeném mimořádném review: čtyři uzavírací stavy, praktické příklady, propsání a ukončení dočasné péče, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-27: Doplněna úvodní podkapitola o prvním běžném použití po uzavřeném mimořádném review: ověření najitelnosti, rozhodnutelnosti a datového klidu, čtyři výsledné stavy, praktické příklady, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-27: Doplněna úvodní podkapitola o uzavření mimořádného review po třetím podnětu: čtyři uzavírací stavy, praktický příklad, propsání změny, privacy-first úklid pomocných stop, karta, mini workshop a checklist.
