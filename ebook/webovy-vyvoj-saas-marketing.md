@@ -262700,8 +262700,227 @@ Pokud se během workshopu objeví nové téma, napište ho jednou větou a vrať
 
 Druhé běžné použití je malý, ale velmi poctivý test. Když pravidlo funguje i podruhé, bez čerstvé paměti a bez starých podkladů, zaslouží si klid. Když nefunguje, opravte přesně tu hranu, která selhala. V obou případech se držte jedné věci: mimořádné review už skončilo. Nenechte jeho stín dělat novou práci.
 
+## Uzavření druhého běžného použití po uzavřeném mimořádném review
+
+Druhé běžné použití má po dokončení skončit jasným rozhodnutím. Nestačí říct, že "to asi funguje" nebo že "ještě uvidíme". Pokud druhý normální průchod proběhl bez čerstvé paměti na mimořádné review, bez starých pomocných stop a bez nové datové opory, systém si zaslouží návrat do klidu. Pokud neproběhl čistě, má vzniknout jedna přesná oprava, ne další kolo mimořádné péče.
+
+Uzavření druhého použití proto začněte větou:
+
+```text
+Druhé běžné použití uzavíráme takto:
+```
+
+Za dvojtečku patří jeden konkrétní stav, ne odstavec opatrných dojmů:
+
+```text
+Druhé běžné použití uzavíráme jako stabilní; pravidlo fungovalo bez staré pracovní poznámky, ručního vysvětlení i nového sběru rozpočtových údajů.
+```
+
+Nebo:
+
+```text
+Druhé běžné použití uzavíráme lokální opravou odkazu v rozcestníku; obsah pravidla, formulář, scoring i mimořádné review zůstávají zavřené.
+```
+
+Tahle věta je důležitá, protože ukončuje psychologický dluh mimořádného review. Tým už nemusí v hlavě držet, že se "něco nedávno opravovalo". Buď je oprava součástí běžného pracovního místa, nebo ještě potřebuje poslední lokální dotažení. Nic mezi tím není potřeba glorifikovat. Proces není vitrína na staré zásluhy.
+
+### Tři uzavírací výsledky
+
+Po druhém běžném použití vyberte jeden ze tří výsledků:
+
+- Vracíme do klidu: pravidlo funguje samo a další mimořádná kontrola není potřeba.
+- Zavřeme po lokální opravě: pravidlo je správné, ale jedno blízké místo ještě mate nebo zdržuje.
+- Oddělujeme nový podnět: druhé použití ukázalo jiné téma, které má vlastní kartu a nesmí se přilepit ke starému review.
+
+Výsledek `Vracíme do klidu` znamená, že končí zvýšená pozornost. V běžném systému zůstává kanonické pravidlo, návratový signál a nejbližší revizní rytmus. Dočasné poznámky, porovnávací tabulky, výřezy z review a vysvětlující komentáře se nemají dál držet "pro jistotu".
+
+Výsledek `Zavřeme po lokální opravě` je povolení na jednu úpravu nejbližšího pracovního místa. Může to být název odkazu, viditelnost příkladu, krátká hraniční věta nebo smazání staré kopie. Jakmile oprava proběhne, udělejte nejvýš jedno ověření při dalším normálním použití. Pokud oprava začne růst, už to není uzavření druhého použití, ale nové téma.
+
+Výsledek `Oddělujeme nový podnět` chrání původní uzavření před nafukováním. Nový problém může být reálný a důležitý, ale nemá používat starou kartu jen proto, že se objevil ve stejném rozhovoru, formuláři nebo šabloně. Založte mu vlastní otázku, vlastní stop podmínku a vlastní privacy-first minimum.
+
+Codyho komentář: uzavření druhého použití je takové tiché účetnictví pozornosti. Když ho neuděláte, tým si dál nese pocit, že kolem pravidla "ještě něco běží". A pocit běžící práce je výborný způsob, jak mít hodně procesu a málo výsledků. Krásně administrativní, lehce tragické.
+
+### Praktický příklad stabilního uzavření
+
+Mimořádné review vzniklo po třetím podobném podnětu k rozpočtu ve formuláři. Výsledek review nebylo nové povinné pole, ale lepší potvrzovací šablona a dvě kvalifikační věty pro obchod.
+
+Druhé běžné použití:
+
+```text
+Situace:
+Jiný obchodník použil potvrzovací šablonu u nové relevantní poptávky.
+
+Co se stalo:
+Šablonu našel přes běžný rozcestník, použil dvě kvalifikační věty a nepotřeboval starou poznámku z mimořádného review.
+
+Privacy-first stav:
+Nepřibylo pole pro rozpočet, lead scoring, export, dashboard ani ruční kopie poptávky.
+
+Uzavření:
+Druhé běžné použití uzavíráme jako stabilní. Pravidlo vracíme do běžného klidu a další kontrolu otevíráme jen při návratovém signálu nebo v plánovaném ročním review.
+```
+
+Tohle je hotový výsledek. Není potřeba přidávat další měsíční sledování "pro jistotu". Jistotu tady nedává další tabulka, ale fakt, že pravidlo dvakrát fungovalo v běžné práci bez mimořádné opory.
+
+### Praktický příklad lokální opravy
+
+Druhé použití může být skoro stabilní, ale ukáže malou překážku:
+
+```text
+Situace:
+Obchodník našel pravidlo až přes starý odkaz ve vlákně, protože rozcestník používá jiný název než samotná šablona.
+
+Co fungovalo:
+Rozhodnutí bylo správné a nebyla potřeba stará poznámka z review.
+
+Co selhalo:
+Navigace k pravidlu není dost jednoznačná.
+
+Oprava:
+Sjednotit název odkazu v rozcestníku s názvem potvrzovací šablony.
+
+Co zůstává zavřené:
+Obsah pravidla, formulář, nové CRM pole, scoring, dashboard a mimořádné review.
+
+Uzavření:
+Po přejmenování odkazu stačí jedno běžné použití bez zvláštní kontroly. Pokud člověk pravidlo najde běžnou cestou, lokální oprava je zavřená.
+```
+
+Všimněte si hranice. Neřeší se celý obchodní proces. Neotevírá se redesign rozcestníku. Nevrací se debata o rozpočtovém poli. Opravuje se nejbližší překážka, která bránila tomu, aby pravidlo sloužilo samo.
+
+### Praktický příklad odděleného nového podnětu
+
+Někdy druhé použití přinese nové téma:
+
+```text
+Situace:
+Při použití šablony se ukázalo, že zákazník nerozumí rozdílu mezi jednorázovým auditem a dlouhodobým vývojem.
+
+Co to není:
+Není to návrat otázky na rozpočet a nepatří to do mimořádného review rozpočtového pole.
+
+Co to je:
+Nový positioningový podnět k nabídce na webu a v obchodním rozhovoru.
+
+Uzavření původního pravidla:
+Druhé běžné použití původního pravidla je stabilní. Nový podnět zakládáme samostatně s pracovním místem "blok nabídky nad formulářem".
+```
+
+Takhle se proces udrží čistý. Původní pravidlo se neotevírá jen proto, že se u něj objevil jiný problém. Nový podnět dostane prostor, ale neukradne cizí rámec.
+
+### Privacy-first uzavření
+
+Uzavření druhého použití musí výslovně říct, jaká datová stopa po mimořádném review zůstává. Bez toho se staré pomocné materiály rády schovají ve složkách, komentářích, CRM poznámkách a sdílených dokumentech. Nejsou vidět, ale pořád existují.
+
+Použijte krátký zápis:
+
+```text
+Po druhém použití ponecháváme:
+
+Po druhém použití mažeme nebo zkracujeme:
+
+Po druhém použití nepřidáváme:
+
+Nový podnět, pokud existuje, zakládáme bez těchto starých stop:
+```
+
+Příklad:
+
+```text
+Po druhém použití ponecháváme:
+Kanonickou potvrzovací šablonu, dvě kvalifikační věty a návratový signál.
+
+Po druhém použití mažeme nebo zkracujeme:
+Pracovní poznámku z mimořádného review a kopie tří původních podnětů.
+
+Po druhém použití nepřidáváme:
+Rozpočtové pole, lead scoring, nový export, dashboard ani další kontrolní tabulku.
+
+Nový podnět, pokud existuje, zakládáme bez těchto starých stop:
+Bez CRM screenshotů, bez kopií poptávek a bez detailů zákaznických rozhovorů, které pro nové rozhodnutí nejsou nutné.
+```
+
+Privacy-first hodnota tady není jen v tom, že nepřidáte tracker. Je i v tom, že nenecháte dočasné důkazy žít déle než jejich účel. Data mají pomáhat rozhodnout, ne zůstávat jako provozní suvenýr.
+
+### Karta uzavření druhého běžného použití
+
+```text
+Pravidlo nebo pracovní místo:
+
+Co ověřovalo druhé běžné použití:
+
+Skutečný průchod:
+
+Výsledek:
+- vracíme do klidu
+- zavřeme po lokální opravě
+- oddělujeme nový podnět
+
+Jednověté uzavření:
+
+Co se propsuje do kanonického místa:
+
+Co se po uzavření ukončuje:
+
+Lokální oprava, pokud existuje:
+
+Nový podnět, pokud existuje:
+
+Kam nový podnět patří:
+
+Co zůstává zavřené:
+
+Privacy-first uzavření:
+Ponecháváme:
+Mažeme nebo zkracujeme:
+Nepřidáváme:
+Nepřenášíme do nové karty:
+
+Další rytmus:
+
+Návratový signál:
+
+Vlastník:
+
+Datum:
+```
+
+Karta nemá být dlouhá. Je to závěrečný účet za mimořádné review, první použití a druhé použití. Pokud se do ní nevejde jednověté uzavření, pravděpodobně ještě nevíte, co vlastně zavíráte.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte, co mělo druhé běžné použití ověřit.
+2. Minuta 2: popište skutečný průchod jednou větou.
+3. Minuta 3: vyberte jeden ze tří uzavíracích výsledků.
+4. Minuta 4: napište jednověté uzavření a co zůstává zavřené.
+5. Minuta 5: rozhodněte, které pomocné stopy se mažou, zkracují nebo nepřenášejí.
+6. Minuta 6: potvrďte další rytmus: klid, jedna lokální oprava, nebo samostatná nová karta.
+
+Pokud se workshop začne měnit v retrospektivu celého mimořádného review, vraťte ho k jedné otázce: co dnes uzavírá druhé běžné použití? Retrospektiva může být užitečná, ale není to tahle práce.
+
+### Checklist uzavření druhého běžného použití
+
+- Víme, co druhé běžné použití ověřovalo?
+- Popsali jsme skutečný průchod bez dlouhé historie review?
+- Vybrali jsme jeden ze tří uzavíracích výsledků?
+- Máme jednověté uzavření?
+- Pokud výsledek vracíme do klidu, ukončujeme zvýšenou pozornost?
+- Pokud výsledek zavíráme po lokální opravě, je oprava opravdu u jednoho místa?
+- Pokud vznikl nový podnět, má vlastní pracovní místo a vlastní kartu?
+- Je jasné, co se propsuje do kanonického místa?
+- Je jasné, co se po uzavření ukončuje?
+- Zůstává původně zavřený rozsah zavřený?
+- Mažeme nebo zkracujeme pomocné poznámky, kopie podnětů a zbytečné výřezy?
+- Nepřenášíme citlivé detaily do nové karty jen proto, že jsou po ruce?
+- Nepřidáváme nové pole, export, dashboard, tracker ani kontrolní tabulku bez nové rozhodovací otázky?
+- Je další rytmus jasný a menší než mimořádné review?
+- Umí člověk za měsíc poznat, proč se pravidlo vrátilo do klidu?
+
+Uzavření druhého běžného použití je konec mimořádné smyčky. Buď se pravidlo vrací do klidu, nebo se opraví jedna blízká překážka, nebo se oddělí nové téma. Všechny tři výsledky jsou v pořádku, pokud jsou přesné. Špatný výsledek je jen rozmazané "budeme to sledovat", které nepřizná, co se vlastně rozhodlo.
+
 ## Pracovní log
 
+- 2026-06-27: Doplněna úvodní podkapitola o uzavření druhého běžného použití po uzavřeném mimořádném review: tři uzavírací výsledky, praktické příklady, privacy-first uzavření datové stopy, karta, mini workshop a checklist.
 - 2026-06-27: Doplněna úvodní podkapitola o druhém běžném použití po uzavřeném mimořádném review: přenositelnost bez čerstvé paměti, porovnání s prvním použitím, čtyři výsledné stavy, praktické příklady, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-06-27: Doplněna úvodní podkapitola o uzavření prvního běžného použití po uzavřeném mimořádném review: čtyři uzavírací stavy, praktické příklady, propsání a ukončení dočasné péče, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-27: Doplněna úvodní podkapitola o prvním běžném použití po uzavřeném mimořádném review: ověření najitelnosti, rozhodnutelnosti a datového klidu, čtyři výsledné stavy, praktické příklady, privacy-first úklid, karta, mini workshop a checklist.
