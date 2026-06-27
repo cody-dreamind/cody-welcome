@@ -264840,8 +264840,191 @@ Pokud se během workshopu objeví nová otázka, nezapisujte ji do stejného uza
 
 Uzavření prvního běžného použití po uzavřeném signálu je malý konec malé smyčky. Když ho uděláte dobře, pravidlo se vrátí do provozu bez mimořádné péče, starý návrh zůstane zavřený a datová stopa zůstane úměrná skutečnému rozhodnutí. To je přesně ten druh práce, který nevypadá efektně v prezentaci, ale udrží SaaS i marketingový provoz čistý, čitelný a dlouhodobě opravitelný.
 
+## Druhé běžné použití po uzavřeném prvním návratovém signálu
+
+První běžné použití ukáže, jestli uzavření přežilo návrat do práce. Druhé běžné použití ukáže něco trochu jiného: jestli pravidlo funguje i bez čerstvé paměti. Tým už nemá v hlavě poslední debatu, uzavírací věta není nová a nikdo by neměl potřebovat autora původní opravy, aby vysvětlil, co se má stát.
+
+Druhé použití proto začněte otázkou:
+
+```text
+Umí pravidlo projít druhou běžnou situací bez mimořádného vysvětlování, nové evidence a návratu ke starému návrhu?
+```
+
+Pokud odpověď zní ano, pravidlo se může vrátit hlouběji do běžného rytmu. Pokud odpověď zní ne, neznamená to automaticky, že byl původní závěr špatně. Možná jen chybí lepší kotva, kratší formulace nebo jasnější hranice toho, co se nemá otevírat.
+
+Druhé použití má být obyčejné. Nevybírejte speciální případ, který se hodí do příběhu. Vezměte další normální průchod: další poptávku, další onboardingový e-mail, další úpravu šablony, další kontrolu formuláře nebo další interní rozhodnutí, kde se pravidlo přirozeně použije. Pokud musíte situaci pracně hledat, možná pravidlo nepotřebuje další kontrolu, ale klid.
+
+### Co druhé použití ověřuje
+
+Druhé použití kontroluje čtyři věci:
+
+- Přenositelnost: pravidlo použije i člověk, který nebyl u původní debaty.
+- Najitelnost: rozhodovací věta je v pracovním místě, ne jen v historickém záznamu.
+- Stabilitu hranice: starý široký návrh se nevrací bez nového signálu.
+- Datovou střídmost: nevzniká nový pomocný sběr jen proto, že téma bylo nedávno živé.
+
+Přenositelnost je nejdůležitější. Pokud pravidlo funguje jen tehdy, když ho vysvětluje člověk, který ho psal, není to pravidlo. Je to ústní tradice s lepším marketingem. Do provozu patří věta, kterou lze najít, použít a případně opravit bez malého archeologického výkopu.
+
+Najitelnost řešte v místě práce. Pokud se pravidlo týká potvrzovacího e-mailu, patří k potvrzovací šabloně. Pokud se týká poptávkového formuláře, patří k formuláři nebo ke kvalifikační poznámce, kterou člověk opravdu otevře. Centrální záznam je dobrý jako historie. Běžné použití ale potřebuje pracovní kotvu.
+
+Stabilita hranice chrání tým před opakováním staré debaty. Když se během druhého použití znovu objeví návrh na nové pole, scoring, export nebo dashboard, zeptejte se nejdřív, jestli nastal domluvený návratový signál. Pokud ne, návrh patří do zavřeného prostoru. Ne proto, že je hloupý. Protože dnes nemá nový důvod.
+
+Datová střídmost je praktická kontrola, ne slavnostní přísaha u GDPR oltáře. Ptejte se jednoduše: co musíme uložit, aby šlo rozhodnutí příště použít lépe? Většinou stačí anonymizovaná věta o výsledku, ne kopie zákaznické odpovědi, screenshot CRM ani nová tabulka.
+
+Codyho komentář: druhé použití je výborný detektor procesového divadla. Pokud po něm vznikne další formulář na kontrolu toho, jestli kontrolní formulář funguje, někdo v místnosti si spletl péči s chovem kancelářských papírů. Ano, papír je statečný soupeř. Přesto ho nemusíme krmit.
+
+### Praktický příklad
+
+```text
+Původní uzavřený signál:
+Jedna poptávka potřebovala ruční doptání na rozpočet, ale návratový signál pro změnu formuláře nenastal.
+
+První běžné použití:
+Obchodník použil běžnou šablonu a nevytvořil novou evidenci.
+
+Druhé běžné použití:
+Jiný obchodník zpracoval další relevantní poptávku. U šablony našel větu: "Na rámec rozpočtu se ptej jen tehdy, když bez něj nejde navrhnout další konkrétní krok."
+
+Výsledek:
+Rozpočet nebyl potřeba, takže otázku neposlal. Formulář, CRM atribut, pomocná tabulka a mimořádné review zůstaly zavřené.
+
+Závěr:
+Pravidlo je přenositelné a vrací se do běžného rytmu. Další kontrola vznikne jen při domluveném návratovém signálu.
+```
+
+V tomhle příkladu se nestalo nic efektního. To je pointa. Dobrý provoz často vypadá jako absence dramatu: člověk najde větu, použije ji, nepřidá sběr dat a jde dál. Kdyby musel volat kolegovi, hledat starou kartu nebo zakládat novou tabulku, druhé použití by ukázalo slabé místo.
+
+### Když druhé použití neprojde
+
+Neúspěšné druhé použití rozdělte podle příčiny:
+
+- Člověk pravidlo nenašel: opravte pracovní kotvu.
+- Člověk pravidlo našel, ale pochopil moc široce: zkraťte nebo zpřesněte větu.
+- Člověk pravidlo použil správně, ale situace byla opravdu jiná: založte nový podnět, ne návrat starého tématu.
+- Během použití vznikla pomocná evidence: zrušte ji, pokud nemá jasné rozhodovací použití.
+
+Každá příčina má menší odpověď než "otevřeme to celé znovu". Chybějící kotva se řeší přesunem věty. Nejasná formulace se řeší přepisem jedné věty. Jiná situace se řeší novým podnětem. Zbytečná evidence se řeší úklidem. Teprve když se objeví domluvený návratový signál, má smysl otevřít další malý průchod.
+
+Příklad lokální opravy:
+
+```text
+Problém:
+Druhý člověk našel pravidlo až v uzavírací kartě, ne u šablony.
+
+Oprava:
+Přesouváme jednu rozhodovací větu přímo k potvrzovací šabloně.
+
+Co neotevíráme:
+Školení, redesign formuláře, nový CRM atribut ani měsíční report.
+
+Ověření:
+Při dalším běžném použití zkontrolujeme pouze to, zda je věta u šablony nalezitelná.
+```
+
+Taková oprava je úmyslně malá. Když se pravidlo jen špatně hledá, nepotřebuje strategii. Potřebuje lepší místo.
+
+### Privacy-first kontrola druhého použití
+
+Po druhém použití projděte krátký úklid:
+
+```text
+Co jsme při druhém použití museli vidět:
+
+Co jsme nemuseli kopírovat:
+
+Co po kontrole mažeme nebo dál nevytváříme:
+
+Jaká anonymizovaná věta stačí pro budoucí použití:
+```
+
+Příklad:
+
+```text
+Co jsme při druhém použití museli vidět:
+Že člověk našel rozhodovací větu u šablony a dokázal podle ní postupovat.
+
+Co jsme nemuseli kopírovat:
+Celý obsah zákaznické poptávky ani interní komentář obchodníka.
+
+Co po kontrole mažeme nebo dál nevytváříme:
+Dočasnou poznámku s konkrétním rozpočtem mimo původní obchodní vlákno.
+
+Jaká anonymizovaná věta stačí:
+Druhé běžné použití potvrdilo, že věta u šablony je nalezitelná a nevznikla nová evidence.
+```
+
+Privacy-first provoz nestojí na tom, že nikdo nikdy nic nevidí. Stojí na tom, že se informace nepřelévají do dalších míst bez účelu. Běžný obchodní kontext může zůstat v obchodním vlákně. Pracovní záznam má nést jen rozhodovací stopu, ne zákaznický detail.
+
+### Karta druhého běžného použití
+
+```text
+Uzavřený první návratový signál:
+
+Výsledek prvního běžného použití:
+
+Druhá běžná situace:
+
+Kdo pravidlo použil:
+
+Našel pravidlo v pracovním místě?
+- ano
+- ne
+
+Šlo rozhodnout bez vysvětlení od původního autora?
+- ano
+- ne
+
+Co se opravdu použilo:
+
+Co zůstalo zavřené:
+
+Vznikla nová evidence, štítek, export, screenshot nebo tabulka?
+
+Co s touto stopou děláme:
+
+Výsledek druhého použití:
+- vrátit do běžného rytmu
+- opravit pracovní kotvu
+- zpřesnit větu
+- založit nový podnět
+- zastavit zbytečnou evidenci
+
+Další návratový signál nebo konec mimořádné pozornosti:
+
+Vlastník:
+```
+
+Kartu vyplňujte jen tam, kde druhé použití něco ukázalo. Pokud všechno proběhlo čistě, stačí jedna věta v provozním logu. Cílem není vyrábět dokumentaci o tom, že dokumentace není potřeba. To by bylo sice dokonale absurdní, ale bohužel také velmi realistické.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: pojmenujte druhou běžnou situaci.
+2. Minuta 2: ověřte, jestli člověk našel pravidlo v pracovním místě.
+3. Minuta 3: zjistěte, jestli šlo rozhodnout bez původního autora.
+4. Minuta 4: napište, co zůstalo zavřené.
+5. Minuta 5: zkontrolujte datovou stopu a smažte nebo ukončete zbytečné pomocné stopy.
+6. Minuta 6: vyberte výsledek druhého použití.
+
+Pokud se workshop začne měnit v rekapitulaci celé historie, vraťte se k druhému použití. Dnešní otázka není "proč jsme kdysi rozhodli". Dnešní otázka je "funguje to bez čerstvé paměti a bez nové datové vrstvy".
+
+### Checklist druhého běžného použití
+
+- Vzali jsme opravdu běžnou situaci, ne speciálně vybraný případ?
+- Pravidlo použil člověk, který nepotřeboval čerstvé vysvětlení?
+- Byla rozhodovací věta v pracovním místě?
+- Šlo rozhodnout bez otevírání celé historické karty?
+- Zůstal starý široký návrh zavřený?
+- Pokud se objevil nový problém, oddělili jsme ho jako nový podnět?
+- Nevznikl nový CRM atribut, štítek, export, screenshot, pomocná tabulka ani interní kopie bez rozhodovací hodnoty?
+- Je jasné, co po kontrole mažeme nebo dál nevytváříme?
+- Stačí pro budoucí použití jedna anonymizovaná věta?
+- Ví tým, jestli pravidlo končí mimořádnou pozornost a vrací se do běžného rytmu?
+
+Druhé běžné použití je test, jestli uzavřené pravidlo opravdu patří do provozu. Když projde, nechte ho být. Když neprojde, opravte nejbližší místo. A když začne bobtnat datová stopa, vraťte se k nejjednodušší otázce: jaké konkrétní rozhodnutí nám ta data umožní? Pokud žádné, není to evidence. Je to budoucí úklid převlečený za opatrnost.
+
 ## Pracovní log
 
+- 2026-06-27: Doplněna úvodní podkapitola o druhém běžném použití po uzavřeném prvním návratovém signálu: přenositelnost pravidla, najitelnost pracovní kotvy, zastavení návratu starého rozsahu, privacy-first kontrola datové stopy, karta, mini workshop a checklist.
 - 2026-06-27: Doplněna úvodní podkapitola o uzavření prvního běžného použití po uzavřeném prvním návratovém signálu: čtyři uzavírací stavy, praktické příklady, privacy-first uzavření datové stopy, karta, mini workshop a checklist.
 - 2026-06-27: Doplněna úvodní podkapitola o prvním běžném použití po uzavřeném prvním návratovém signálu: tři výchozí situace, praktické příklady, privacy-first kontrola datové stopy, karta, mini workshop a checklist.
 - 2026-06-27: Doplněna úvodní podkapitola o uzavření prvního návratového signálu po uzavřené běžné správě: tři způsoby uzavření, praktické příklady, privacy-first úklid datové stopy, karta, mini workshop a checklist.
