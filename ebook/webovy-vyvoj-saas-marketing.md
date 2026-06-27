@@ -261914,8 +261914,183 @@ Když se během workshopu objeví spor o rozsah, nehlasujte o přidání další
 
 Mimořádné review má být krátká oprava důvěry v pravidlo. Pokud se podaří, tým získá jasnější pracovní místo a roční klid může pokračovat. Pokud se nepodaří, i to je výsledek: původní hrana nebyla skutečný problém a nová otázka si zaslouží vlastní smyčku. V obou případech má být po review méně nejasností, méně pomocných stop a žádný nový datový apetit.
 
+## Uzavření mimořádného review po třetím podnětu
+
+Mimořádné review se nesmí nechat otevřené jen proto, že bylo oprávněné. Tři podněty daly týmu dobrý důvod přerušit roční klid, ale nedávají mu povolení držet téma v mimořádném režimu donekonečna. Jakmile proběhne nejmenší zásah a první ověření, review potřebuje jasné uzavření.
+
+Uzavření začněte návratem k jedné větě, kterou jste review otevřeli:
+
+```text
+Mimořádné review jsme otevřeli pouze pro:
+```
+
+Potom k ní přidejte druhou větu:
+
+```text
+Review uzavíráme, protože:
+```
+
+Tyto dvě věty musí stát vedle sebe. První chrání původní hranici. Druhá říká, co se opravdu změnilo. Pokud mezi nimi vznikne mezera, například review bylo otevřené kvůli jedné větě v šabloně, ale závěr najednou mluví o změně celého kvalifikačního procesu, nezavíráte review. Pravděpodobně jste během něj našli nové téma a teď ho musíte oddělit.
+
+Codyho komentář: mimořádné review je už samo o sobě výjimka z klidu. Když výjimku nezavřete, začne se tvářit jako nový normál. A nový normál, který vznikl mimochodem, bývá produktově dražší než chyba, kvůli které jste ho otevřeli. Hezky voní po aktivitě, ale účet přijde později.
+
+### Čtyři uzavírací stavy
+
+Mimořádné review uzavřete jedním ze čtyř stavů:
+
+- Hotovo a zpět do ročního klidu: nejmenší zásah stačil, pracovní místo je jasné a další mimořádná kontrola není potřeba.
+- Lokální dočištění: zásah pomohl, ale jedno blízké místo ještě brání samostatnému použití.
+- Nová samostatná otázka: review ukázalo jiný problém, který nepatří do původní hrany.
+- Archivace pravidla nebo části pravidla: review potvrdilo, že pravidlo už v daném místě nepomáhá a jeho udržování by bylo horší než jeho zrušení.
+
+Stav `Hotovo a zpět do ročního klidu` je nejlepší výsledek, pokud odpovídá důkazům. Neznamená, že téma už nikdy neuvidíte. Znamená, že dnešní mimořádný důvod skončil a další práce musí přijít až přes běžný návratový signál nebo další roční review.
+
+Stav `Lokální dočištění` používejte opatrně. Má smysl jen tehdy, když víte přesně, kterou větu, odkaz, nadpis, příklad nebo umístění ještě upravit. Pokud dočištění vyžaduje novou debatu o cíli pravidla, není lokální. Je to nová otázka v pracovním převleku.
+
+Stav `Nová samostatná otázka` je zdravý výsledek, ne selhání. Review splnilo svoji práci: ukázalo, že původní rozhodovací hrana nebyla celý problém. Důležité je nepřilepit novou otázku k původnímu review. Dejte jí vlastní pracovní místo, vlastní stop podmínku a vlastní privacy-first hranici.
+
+Stav `Archivace pravidla nebo části pravidla` použijte tehdy, když se ukáže, že stabilní pravidlo už lidem nepomáhá rozhodovat. Třeba proto, že nabídka, typ zákazníka nebo provozní realita se změnily natolik, že staré pravidlo vytváří víc tření než jistoty. Archivace má být klidná, stručná a dohledatelná. Nemá kolem sebe vyrábět pamětní síň.
+
+### Praktický příklad uzavření
+
+Výchozí review:
+
+```text
+Mimořádné review jsme otevřeli pouze pro potvrzovací šablonu po relevantní poptávce, protože tři nezávislé podněty ukázaly stejnou nejasnost: kdy už nepoužívat otázku na rozpočet.
+```
+
+Ověření po zásahu:
+
+```text
+Do šablony jsme doplnili jeden pozitivní a jeden negativní příklad. Nový obchodník při dalším použití rozhodl bez dodatečného vysvětlení a nepřidal nové pole ani poznámku do CRM.
+```
+
+Uzavření:
+
+```text
+Review uzavíráme stavem hotovo a zpět do ročního klidu. Upravené příklady zůstávají v potvrzovací šabloně, pomocné poznámky ze tří podnětů mažeme a další kontrolu neplánujeme mimo běžný návratový signál nebo roční review.
+```
+
+Tento závěr je dost krátký na to, aby ho člověk našel a pochopil. Zároveň říká čtyři důležité věci: co bylo opraveno, kde to zůstává, co se maže a proč se nepokračuje v mimořádném režimu.
+
+Slabší výsledek může vypadat takto:
+
+```text
+Review uzavíráme stavem lokální dočištění. Příklady pomohly, ale šablona je špatně najitelná v obchodním playbooku. Opravíme pouze odkaz z rozcestníku na potvrzovací šablonu a ověříme při jednom dalším běžném použití. Obsah pravidla, formulář, CRM pole a scoring zůstávají zavřené.
+```
+
+Všimněte si slova "pouze". Bez něj by lokální dočištění mohlo během pěti minut nabrat podobu úklidu celého obchodního playbooku. Ten možná také jednou přijde, ale ne jako přívěsek mimořádného review.
+
+### Co propsat po uzavření
+
+Po uzavření mimořádného review aktualizujte jen místa, která se opravdu změnila:
+
+- kanonické pracovní místo, například potvrzovací šablonu;
+- stručný changelog nebo rozhodovací kartu;
+- odkaz v rozcestníku, pokud lidé pravidlo nenašli;
+- datum smazání pomocných poznámek;
+- návratový signál, pokud se po review zpřesnil.
+
+Neaktualizujte preventivně všechno, co se tématu dotýká. Když review změnilo jednu větu v šabloně, nepotřebujete přepisovat onboarding, sales materiály, CRM pravidla ani celý popis nabídky. Plošná synchronizace zní svědomitě, ale často jen rozšíří stopu malé změny na místa, kde ji nikdo nepotřebuje.
+
+Pokud je potřeba propsat změnu do více míst, nejdřív zkontrolujte, jestli nemáte slabé kanonické místo. Stabilní pravidlo by nemělo existovat ve čtyřech rovnocenných kopiích. Mimořádné review není jen příležitost opravit větu. Je to také dobrý okamžik zjistit, jestli tým náhodou nežije z dokumentačních duplikátů.
+
+### Privacy-first uzavření
+
+Privacy-first uzavření mimořádného review má jeden hlavní cíl: po návratu do klidu nesmí zůstat víc dat, než kolik je potřeba pro budoucí rozhodnutí. Review mohlo dočasně pracovat s pomocnými poznámkami, ukázkami situací nebo shrnutím tří podnětů. Po uzavření mají zůstat jen závěry.
+
+Projděte tři hromádky:
+
+```text
+Zůstává:
+Upravená věta, příklady, stav review, návratový signál a datum uzavření.
+
+Maže se:
+Pomocné poznámky, pracovní výpisky, dočasné tabulky a kopie podnětů.
+
+Nepřenáší se:
+Zákaznické zprávy, rozpočty, osobní údaje, interní chaty a screenshoty nástrojů.
+```
+
+Pokud některou pomocnou stopu potřebujete ponechat kvůli auditu, zkraťte ji. Místo konkrétního zákazníka popište typ situace. Místo plného rozpočtu napište "bez rámcového rozpočtu nešlo vybrat rozsah". Místo screenshotu z CRM napište rozhodovací závěr. Budoucí tým potřebuje vědět, proč jste pravidlo upravili. Nepotřebuje zdědit celou pracovní složku.
+
+Privacy-first závěr může znít takto:
+
+```text
+Po uzavření review ponecháváme pouze upravenou šablonu, stav uzavření a zpřesněný návratový signál. Pomocné poznámky ze tří podnětů mažeme do pěti pracovních dnů. Zákaznické zprávy, rozpočty a CRM screenshoty nepřenášíme do žádného dlouhodobého artefaktu.
+```
+
+Tohle je přesně ten typ nudné věty, která šetří budoucí práci. A také budoucí nervy, až se někdo za rok zeptá, proč máte v dokumentaci staré citlivé detaily kvůli jedné větě v šabloně.
+
+### Karta uzavření mimořádného review
+
+```text
+Název review:
+
+Původní věta otevření:
+
+Co jsme opravdu změnili:
+
+Výsledek ověření:
+
+Uzavírací stav:
+- hotovo a zpět do ročního klidu
+- lokální dočištění
+- nová samostatná otázka
+- archivace pravidla nebo části pravidla
+
+Co zůstává zavřené:
+
+Kam se změna propsala:
+
+Co se nepropsává a proč:
+
+Privacy-first úklid:
+Co zůstává:
+Co mažeme:
+Co nepřenášíme:
+Termín smazání pomocných poznámek:
+
+Další návratový signál:
+
+Vlastník uzavření:
+
+Datum uzavření:
+```
+
+Karta má po uzavření zkrátit budoucí vysvětlování. Pokud z ní vznikne další dlouhý dokument, něco je špatně. Buď review nebylo dost malé, nebo jste se pokusili do jedné karty nacpat nové téma. V takovém případě kartu rozdělte: původní review zavřete a novou otázku založte samostatně.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte původní větu otevření mimořádného review.
+2. Minuta 2: přečtěte nejmenší zásah a výsledek ověření.
+3. Minuta 3: vyberte jeden uzavírací stav.
+4. Minuta 4: napište, co zůstává zavřené a co se nepropsává.
+5. Minuta 5: rozdělte stopy na zůstává, maže se a nepřenáší se.
+6. Minuta 6: určete návratový signál, vlastníka a datum smazání pomocných poznámek.
+
+Pokud se během workshopu objeví nové téma, nezastavujte uzavření. Jen ho pojmenujte jako novou samostatnou otázku a vraťte se k původnímu review. Mimořádné review se zavírá podle důvodu, kvůli kterému vzniklo, ne podle všech věcí, které se při něm našly.
+
+### Checklist uzavření mimořádného review
+
+- Porovnali jsme původní větu otevření s výsledkem review?
+- Je vybraný jeden uzavírací stav?
+- Víme, co se opravdu změnilo?
+- Je jasné, kam se změna propsala?
+- Je napsané, co se nepropsává a proč?
+- Zůstává původně zavřený rozsah zavřený, pokud nevznikla nová samostatná otázka?
+- Má lokální dočištění jen jedno blízké pracovní místo?
+- Pokud vznikla nová otázka, má vlastní hranici a není přilepená k review?
+- Máme privacy-first úklid pomocných poznámek?
+- Nepřenášíme zákaznické detaily, rozpočty, CRM screenshoty ani interní chaty do dlouhodobé dokumentace?
+- Je určený další návratový signál nebo návrat do ročního klidu?
+- Ví někdo konkrétní, že má review opravdu zavřít?
+
+Uzavření mimořádného review je návrat k obyčejnosti. Tým na chvíli přerušil klid, opravil nebo vyjasnil jednu hranu a teď musí odolat pokušení nechat kolem ní běžet zvláštní pozornost. Dobře zavřené review po sobě nechá jasnější pracovní místo, menší datovou stopu a žádný nový provozní hlad. Přesně tak má výjimka skončit.
+
 ## Pracovní log
 
+- 2026-06-27: Doplněna úvodní podkapitola o uzavření mimořádného review po třetím podnětu: čtyři uzavírací stavy, praktický příklad, propsání změny, privacy-first úklid pomocných stop, karta, mini workshop a checklist.
 - 2026-06-27: Doplněna úvodní podkapitola o otevření mimořádného review po třetím podnětu: pět hranic review, zavřený rozsah, praktický příklad, privacy-first rozhodovací stopa, karta, mini workshop a checklist.
 - 2026-06-27: Doplněna úvodní podkapitola o třetím podnětu během ročního klidu: nezávislost podnětů, společná rozhodovací hrana, přerušení klidu jen pro konkrétní pracovní místo, privacy-first triage, karta, mini workshop a checklist.
 - 2026-06-27: Doplněna úvodní podkapitola o druhém podobném podnětu během ročního klidu: porovnání s prvním podnětem, hranice návratového signálu, malá smyčka, privacy-first záznam, karta, mini workshop a checklist.
