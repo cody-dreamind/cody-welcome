@@ -268473,8 +268473,201 @@ Když se workshop začne měnit v diskusi o širší správě procesu, zastavte 
 
 Uzavření druhé běžné správy je malý rituál s velkým dopadem: po něm má pravidlo buď žít samo, skončit, nebo předat nové téma čistě jinam. Nic mezi tím. Tím se z lokálního dočištění nestane stálá provozní agenda a tým si udrží to nejcennější: méně otevřených smyček, méně datových zbytků a víc klidu pro práci, která opravdu mění produkt.
 
+## Převod lokálního dočištění do dlouhodobého klidu
+
+Po uzavření druhé běžné správy přichází méně viditelný, ale důležitý krok: převést lokální dočištění do dlouhodobého klidu. Nejde o další kontrolu. Jde o úklid stavu, aby oprava přestala být tématem a zůstala jen jako běžná součást pracovního místa. Tým má po této chvíli vědět, kde pravidlo najde, kdy se k němu vrátit a co už nemá sledovat.
+
+Začněte větou:
+
+```text
+Lokální dočištění převádíme do dlouhodobého klidu, protože:
+```
+
+Příklad:
+
+```text
+Lokální dočištění převádíme do dlouhodobého klidu, protože dvě běžné správy potvrdily, že pravidlo je samostatné, najitelné a nepotřebuje zvláštní evidenci.
+```
+
+Tahle věta je brána ven z opravného režimu. Jakmile ji napíšete, nepřidávejte vedle ní "ještě jednou ověřit". Pokud pořád potřebujete další ověření, nejste v dlouhodobém klidu. Pokud ho nepotřebujete, nechte větu krátkou a zavřete zbytek.
+
+Codyho komentář: dlouhodobý klid není poetický název pro lenost. Je to provozní disciplína. Když má každá malá oprava svůj vlastní dozvuk, tým brzy nespravuje produkt, ale muzeum dočasných kontrol. Hezké vitríny, nulová radost.
+
+### Co v klidu zůstává
+
+Do dlouhodobého klidu patří jen tři věci:
+
+- kanonické pracovní místo, kde se pravidlo používá;
+- jedna věta návratového signálu;
+- krátký záznam, že lokální dočištění bylo uzavřené.
+
+Všechno ostatní musí mít dobrý důvod. Staré screenshoty, ověřovací poznámky, pomocné tabulky, kopie interních zpráv a ruční připomínky většinou důvod nemají. Vznikly proto, aby oprava šla bezpečně dokončit. Jakmile je dokončená, jejich práce skončila.
+
+Zápis dlouhodobého klidu může vypadat takto:
+
+```text
+Kanonické místo:
+Rozcestník review šablon.
+
+Pracovní věta:
+Slabý podnět nezakládej jako kartu změny, dokud neukazuje opakovaný dopad na rozhodnutí, zákaznickou zkušenost nebo datovou stopu.
+
+Návratový signál:
+Téma znovu otevřeme pouze tehdy, když tři slabé podněty za sebou povedou ke špatně založené kartě změny nebo k nejasnému rozhodnutí v review.
+
+Stav:
+Lokální dočištění je v dlouhodobém klidu.
+```
+
+Všimněte si, že zápis neobsahuje historii celé opravy. Nepotřebuje ji. Člověk, který přijde za půl roku, má vědět, co dělat dnes, ne proč někdo v minulosti pětkrát přepisoval okrajovou větu.
+
+### Tři zakázané ocasy
+
+Při převodu do dlouhodobého klidu si dejte pozor na tři ocasy, které rády zůstanou viset:
+
+- dohledový ocas: "budeme to ještě preventivně sledovat";
+- vysvětlovací ocas: "necháme starou poznámku, ať je jasné, proč to vzniklo";
+- datový ocas: "ponecháme pomocnou tabulku, kdyby se hodila".
+
+Dohledový ocas dělá z hotové opravy novou rutinu. Pokud není jasný návratový signál, dohled nemá co hlídat.
+
+Vysvětlovací ocas často vzniká z dobré vůle, ale oslabuje kanonické místo. Když člověk potřebuje starou poznámku, pracovní věta ještě není dost dobrá. Zpřesněte větu a starou poznámku zavřete.
+
+Datový ocas je nejrizikovější pro privacy-first provoz. Pomocná tabulka, export nebo sbírka příkladů obvykle obsahuje víc konkrétních detailů, než dlouhodobý provoz potřebuje. Pokud se z ní nestal oficiální zdroj pravdy, nemá zůstávat jako neformální archiv.
+
+Praktická brzda:
+
+```text
+Pokud stopa nepomáhá člověku udělat dnešní rozhodnutí v kanonickém pracovním místě, nepatří do dlouhodobého klidu.
+```
+
+### Praktický příklad
+
+```text
+Lokální dočištění:
+Do rozcestníku review šablon byla doplněna hranice, kdy slabý podnět nezakládat jako novou kartu změny.
+
+Dvě běžné správy:
+Potvrdily, že správce používá rozcestník bez staré ověřovací poznámky a bez pomocné evidence.
+
+Převod do dlouhodobého klidu:
+Pracovní věta zůstává v rozcestníku. Návratový signál je zapsaný u stejného místa. Staré ověřovací poznámky a screenshoty se archivují podle retenčního pravidla.
+
+Co nepokračuje:
+Samostatné sledování slabých podnětů, ruční připomínka pro další review a interní odkaz na původní opravu.
+```
+
+Příklad, kdy převod ještě není možný:
+
+```text
+Druhá běžná správa:
+Pravidlo bylo použité správně, ale správce pořád otevřel starou poznámku kvůli vysvětlení hranice.
+
+Výsledek:
+Dlouhodobý klid zatím neotevíráme. Nejprve zpřesníme pracovní větu v kanonickém místě a ověříme ji při nejbližším běžném použití.
+
+Co neotevíráme:
+Nové sledování, novou šablonu ani širší review procesu.
+```
+
+Tohle je důležitý rozdíl. Dlouhodobý klid neslouží k zametání nedotažené práce pod koberec. Slouží k ukončení práce, která už opravdu drží sama.
+
+### Privacy-first uzamčení
+
+Převod do dlouhodobého klidu má mít vlastní privacy-first uzamčení. Ne velký audit. Jen krátkou kontrolu, že po malé opravě nezůstala zbytečná data.
+
+Použijte čtyři řádky:
+
+```text
+V dlouhodobém klidu ponecháváme:
+
+Mažeme nebo archivujeme:
+
+Nepřenášíme do budoucích kontrol:
+
+Nové sledování:
+Nevzniká.
+```
+
+Příklad:
+
+```text
+V dlouhodobém klidu ponecháváme:
+Kanonickou pracovní větu a návratový signál v rozcestníku.
+
+Mažeme nebo archivujeme:
+Ověřovací poznámku, screenshot původní navigace a dočasnou připomínku.
+
+Nepřenášíme do budoucích kontrol:
+Jména autorů slabých podnětů, kopie interních zpráv ani surové příklady.
+
+Nové sledování:
+Nevzniká.
+```
+
+Privacy-first hodnota je tady prostá: dlouhodobý klid nesmí být dlouhodobé skladování. Když si necháte jen rozhodovací minimum, snižujete riziko, zrychlujete budoucí orientaci a nevyrábíte skrytou povinnost vysvětlovat staré pracovní stopy.
+
+### Karta dlouhodobého klidu
+
+```text
+Lokální dočištění:
+
+Kanonické pracovní místo:
+
+Co potvrdily dvě běžné správy:
+
+Stav převodu:
+- převést do dlouhodobého klidu
+- ještě ne, chybí samostatná pracovní věta
+- ještě ne, přežívá stará stopa
+- uzavřít jako neaktuální
+
+Pracovní věta, která zůstává:
+
+Návratový signál:
+
+Co výslovně nepokračuje:
+
+Co mažeme nebo archivujeme:
+
+Co nepřenášíme do budoucích kontrol:
+
+Vlastník kanonického místa:
+
+Nejbližší běžný rytmus, ve kterém se pravidlo může znovu objevit:
+```
+
+Karta nemá sloužit jako další dokument k pravidlu. Je to uzavírací štítek. Jakmile je převod hotový, běžný uživatel má chodit do kanonického místa, ne do karty.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte výsledek druhé běžné správy.
+2. Minuta 2: ověřte, že kanonické místo stačí bez staré historie.
+3. Minuta 3: napište nebo zpřesněte návratový signál.
+4. Minuta 4: pojmenujte, co výslovně nepokračuje.
+5. Minuta 5: smažte, archivujte nebo přestaňte používat dočasné stopy.
+6. Minuta 6: zapište stav dlouhodobého klidu jednou větou.
+
+Pokud se workshop zasekne na tom, že někdo potřebuje "ještě trochu kontextu", nepřidávejte kontext do nové poznámky. Zeptejte se, jestli chybí věta v kanonickém místě. Ve většině případů ano. A když ne, možná jen tým bojuje s přirozenou touhou nic definitivně nezavřít. Roztomilé, ale drahé.
+
+### Checklist dlouhodobého klidu
+
+- Potvrdily dvě běžné správy, že pravidlo funguje bez mimořádné péče?
+- Je kanonické pracovní místo jediné místo, které člověk potřebuje otevřít?
+- Je pracovní věta samostatná bez staré ověřovací poznámky?
+- Je návratový signál konkrétní a ověřitelný?
+- Je jasné, co výslovně nepokračuje?
+- Skončilo preventivní sledování, ruční připomínky a pomocná evidence?
+- Jsou dočasné poznámky, screenshoty, exporty a kopie interní komunikace smazané nebo archivované?
+- Zůstává jen rozhodovací minimum, ne surová historie opravy?
+- Nevzniká nové měření, nový tracker ani nový report "pro jistotu"?
+- Ví tým, že příští návrat má přijít přes návratový signál, ne přes zvyk kontrolovat starou větev?
+
+Dlouhodobý klid je hotový ve chvíli, kdy o lokálním dočištění nemusíte mluvit, aby fungovalo. Pravidlo má svoje místo, návrat má svůj signál a dočasné stopy jsou pryč. To je elegantní konec malé opravy: žádná fanfára, žádný nový proces, jen méně hluku v systému.
+
 ## Pracovní log
 
+- 2026-06-28: Doplněna úvodní podkapitola o převodu lokálního dočištění do dlouhodobého klidu: kanonické místo, návratový signál, zakázané ocasy, privacy-first uzamčení, karta, mini workshop a checklist.
 - 2026-06-28: Doplněna úvodní podkapitola o uzavření druhé běžné správy po lokálním dočištění: koncové stavy, praktické příklady, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-28: Doplněna úvodní podkapitola o druhé běžné správě po uzavřeném lokálním dočištění: samostatnost pravidla, odstranění skryté evidence, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-28: Doplněna úvodní podkapitola o uzavření první běžné správy po návratu lokálního dočištění: uzavírací stavy, praktické příklady, privacy-first úklid dočasných stop, karta, mini workshop a checklist.
