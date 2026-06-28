@@ -267397,8 +267397,167 @@ Pokud se během workshopu objeví chuť kontrolovat další části procesu, zas
 
 První běžné použití po uzavřeném lokálním dočištění má být krátké a obyčejné. Když dopadne dobře, skoro nic se nestane: člověk použije správné místo, práce projde a tým nezaloží další kontrolní vrstvu. To je přesně cílem. Dobrá provozní změna se nakonec pozná podle toho, že přestane být vidět.
 
+## Uzavření prvního běžného použití po lokálním dočištění
+
+První běžné použití po lokálním dočištění ukáže, jestli oprava drží v normální práci. Uzavření má rozhodnout, co s tím výsledkem dál. Bez uzavření se i úspěšná drobná oprava může změnit v poloviční stav: někdo ví, že už funguje, někdo čeká na další potvrzení a někdo začne preventivně držet pomocnou poznámku "kdyby se to vrátilo".
+
+Uzavření proto začněte jednou větou:
+
+```text
+Po prvním běžném použití lokální dočištění:
+```
+
+Za ni doplňte jeden ze čtyř stavů:
+
+- drží a vrací se do běžného rytmu;
+- drží, ale potřebuje jedno poslední zpřesnění;
+- nedrží, protože problém je ve stejném místě hlubší;
+- ukázalo nový vzor, který nepatří do lokální opravy.
+
+Stav `drží` je nejčistší. Znamená, že člověk našel opravené místo, použil ho bez staré historie a nevznikla nová evidence. V takovém případě nepřidávejte další kontrolu. Zapište závěr, ponechte pravidlo v kanonickém místě a vraťte téma do běžné údržby.
+
+Stav `poslední zpřesnění` použijte jen tehdy, když oprava pomohla, ale jedna hrana zůstala slabá. Například odkaz je už na správném místě, ale jeho název pořád zní jako historická poznámka. Oprava má být menší než původní lokální dočištění.
+
+Stav `stejné místo hlubší` znamená, že nejde jen o jednu větu nebo odkaz. Člověk se i po úpravě vrací ke staré historii, protože pracovní místo pořád neříká, jak se rozhodnout. Tady nepřidávejte další kosmetickou záplatu. Otevřete malou otázku k tomuto jednomu místu.
+
+Stav `nový vzor` použijte, když se podobné tření objeví mimo opravené místo. To už není lokální dočištění. Je to signál, že se stejný typ nejasnosti šíří přes více šablon, rozcestníků nebo rozhodovacích karet.
+
+### Praktický příklad
+
+```text
+Lokální dočištění:
+Do rozcestníku review šablon byla doplněna věta, kdy použít pravidlo pro slabý podnět.
+
+První běžné použití:
+Editor při měsíčním review našel pravidlo v rozcestníku a zavřel slabý podnět bez nové karty změny.
+
+Výsledek:
+Drží a vrací se do běžného rytmu.
+
+Co zůstává:
+Věta v rozcestníku a návratový signál pro opakované špatné zařazení podnětu.
+
+Co končí:
+Dočasná poznámka z ověření a ruční připomínka vlastníka.
+
+Co dál nesbíráme:
+Nesledujeme, kdo pravidlo použil, neukládáme screenshot průchodu a nezakládáme report používání rozcestníku.
+```
+
+Všimněte si, že závěr není "ještě měsíc hlídat". Pokud oprava prošla běžným použitím, hlídání by bylo novou prací bez nového důvodu. Návratový signál už existuje. To stačí.
+
+### Co propsat do kanonického místa
+
+Do pracovního místa po uzavření patří jen to, co pomůže příštímu použití:
+
+- platná pracovní věta;
+- případný návratový signál;
+- vlastník běžného rytmu, pokud je potřeba;
+- stručný stav, že lokální dočištění prošlo prvním použitím.
+
+Nepatří tam:
+
+- detailní historie, proč oprava vznikla;
+- jména lidí, kteří na tření narazili;
+- screenshoty, exporty nebo kopie starých poznámek;
+- seznam všech odmítnutých variant;
+- nové měření jen proto, že oprava byla nedávno.
+
+Když příští člověk otevře pracovní místo, nemá číst příběh opravy. Má vidět aktuální pravidlo a vědět, kdy se má téma vrátit.
+
+### Privacy-first uzavření
+
+Lokální dočištění často vznikne kolem dokumentace, šablon nebo provozních poznámek. I tam může zůstat datová stopa: kopie zákaznické odpovědi, screenshot interního rozcestníku, pracovní výřez z CRM nebo osobní poznámka, kdo se kde ztratil.
+
+Po uzavření si napište:
+
+```text
+Ponecháváme:
+
+Mažeme nebo anonymizujeme:
+
+Dál nesbíráme:
+```
+
+Příklad:
+
+```text
+Ponecháváme:
+Anonymizovaný závěr, že nová věta v rozcestníku stačila pro zavření slabého podnětu.
+
+Mažeme nebo anonymizujeme:
+Dočasnou poznámku z review a screenshot staré verze rozcestníku.
+
+Dál nesbíráme:
+Osobní průchody lidí, klikání v dokumentaci ani ruční seznam použití pravidla.
+```
+
+Privacy-first hodnota je tady velmi praktická. Nejde o velké právní gesto. Jde o to, že po malé opravě nezůstane malý dohledový systém. Malá oprava má po sobě zanechat malé pravidlo, ne další vrstvu dat.
+
+Codyho komentář: když drobné dočištění po prvním použití potřebuje vlastní report, pravděpodobně už to není dočištění. Je to proces v přestrojení. A procesy v přestrojení jsou horší než procesy otevřené, protože se tváří, že nic nestojí.
+
+### Karta uzavření po prvním použití
+
+```text
+Lokální dočištění:
+
+Kanonické místo:
+
+První běžné použití:
+
+Co se stalo:
+
+Uzavírací stav:
+- drží a vrací se do běžného rytmu
+- poslední zpřesnění
+- stejné místo je hlubší
+- nový vzor
+
+Co se propisuje do pracovního místa:
+
+Co končí jako mimořádná péče:
+
+Co zůstává zavřené:
+
+Návratový signál:
+
+Privacy-first uzavření:
+Ponecháváme:
+Mažeme nebo anonymizujeme:
+Dál nesbíráme:
+
+Vlastník:
+```
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte lokální dočištění a kanonické místo.
+2. Minuta 2: pojmenujte první běžné použití jednou větou.
+3. Minuta 3: vyberte jeden ze čtyř uzavíracích stavů.
+4. Minuta 4: napište, co se propisuje a co končí.
+5. Minuta 5: udělejte privacy-first úklid dočasných stop.
+6. Minuta 6: potvrďte návratový signál nebo napište, že žádná další kontrola mimo běžný rytmus nevzniká.
+
+Pokud během šesti minut vznikne debata o více místech, zastavte uzavření a založte nový podnět. Uzavření lokálního dočištění nemá být nádoba na všechno, co si tým při použití všiml.
+
+### Checklist uzavření
+
+- Má první běžné použití jasný výsledek?
+- Vybrali jsme jeden ze čtyř uzavíracích stavů?
+- Pokud oprava drží, opravdu končí mimořádná péče?
+- Pokud je potřeba poslední zpřesnění, je menší než původní oprava?
+- Pokud je problém hlubší, zůstává otázka omezená na stejné pracovní místo?
+- Pokud se ukázal nový vzor, oddělili jsme ho od lokální opravy?
+- Je kanonické místo aktualizované bez kopírování celé historie?
+- Jsou dočasné poznámky, screenshoty, exporty nebo osobní stopy smazané či anonymizované?
+- Nevznikl nový tracker, report ani evidence lidí?
+- Má další návrat konkrétní signál, ne jen pocit, že by se mělo ještě hlídat?
+
+Uzavření prvního běžného použití po lokálním dočištění je malá tečka za malou opravou. Právě proto je důležitá. Díky ní se oprava neprotáhne do dalšího kontrolního režimu, pravidlo zůstane tam, kde se používá, a tým si odnese jen tolik paměti, kolik opravdu pomůže příštímu rozhodnutí.
+
 ## Pracovní log
 
+- 2026-06-28: Doplněna úvodní podkapitola o uzavření prvního běžného použití po lokálním dočištění: čtyři uzavírací stavy, praktický příklad, propsání do kanonického místa, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-28: Doplněna úvodní podkapitola o uzavření ročního připomenutí do dalšího roku: uzavírací věty, praktický příklad, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-28: Doplněna úvodní podkapitola o ročním připomenutí po klidné správě: tři kontrolní otázky, praktický příklad, výsledné stavy, privacy-first brána, karta, mini workshop a checklist.
 - 2026-06-28: Doplněna úvodní podkapitola o uzavření druhého klidového měsíce bez nové kontrolní smyčky: tři povolené konce, praktické příklady, privacy-first úklid pomocných stop, karta, mini workshop a checklist.
