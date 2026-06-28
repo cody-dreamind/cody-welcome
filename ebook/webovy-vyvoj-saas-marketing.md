@@ -265674,6 +265674,157 @@ Karta má být kratší než samotné review. Pokud karta bobtná, pravděpodobn
 
 Uzavření prvního běžného review má po sobě nechat klid. Buď pravidlo funguje a vrací se do běžné správy, nebo dostalo malou opravu, nebo se nový podnět oddělil. V každém případě se tým nemá dál držet review jako otevřeného příběhu. Hotové review má být zavřené. Jinak to není review, ale záložka v prohlížeči, kterou nikdo nemá odvahu zavřít.
 
+## Druhé běžné review po uzavřeném prvním review
+
+Druhé běžné review po uzavřeném prvním review má jednoduchý účel: zjistit, jestli pravidlo pořád funguje, i když už kolem něj není čerstvá pozornost. První review často ještě těží z paměti lidí, kteří změnu zavírali. Druhé review je poctivější test. Ukáže, zda pravidlo opravdu bydlí na správném místě, jestli ho tým používá bez vysvětlování a jestli se kvůli němu nezačala potichu vracet evidence, kterou jste minule výslovně nechtěli.
+
+Začněte větou:
+
+```text
+Druhé běžné review otevíráme pouze jako kontrolu samostatnosti pravidla v běžném rytmu.
+```
+
+Tahle věta chrání rozsah. Druhé review není další pokus vylepšit staré rozhodnutí. Není to ani pozvánka k tomu, aby se znovu otevřely všechny návrhy, které se kdysi nevešly do prvního kroku. Je to kontrola, jestli se uzavřený stav drží bez mimořádné péče.
+
+Codyho komentář: druhé review je trochu nudný test dospělosti pravidla. Když pravidlo potřebuje pokaždé doprovodný výklad, není stabilní. Je jen obklopené lidmi, kteří si ještě pamatují, proč existuje. To je fajn první týden. Horší po třech měsících.
+
+### Co druhé review ověřuje
+
+Ověřte čtyři věci:
+
+- Pravidlo je najitelné z pracovního místa, kde vzniká rozhodnutí.
+- Člověk bez čerstvé historie pochopí, co má udělat a co nemá otevírat.
+- Původní široký návrh zůstává zavřený.
+- Nevznikla nová skrytá kontrola, tabulka, export, štítek nebo ruční dohled.
+
+Najitelnost znamená, že člověk pravidlo najde přirozeně. Pokud musí vědět, že existuje stará karta v rozhodovacím logu, není to dobrá najitelnost. Pravidlo má být u formuláře, šablony, checklistu, obchodního skriptu, onboardingového kroku nebo interního indexu, kde se skutečně používá.
+
+Srozumitelnost bez historie znamená, že text nevyžaduje znalost původní debaty. Věta "postupujeme podle rozhodnutí z května" je slabá. Věta "rozpočet nezjišťujeme v prvním formuláři; ptáme se na něj až ve chvíli, kdy bez něj nejde navrhnout další krok" je použitelná.
+
+Zavřený široký návrh kontrolujte výslovně. Pokud se do praxe vrací původně zamítnuté pole, další CRM štítek nebo nový export jen "pro jistotu", pravidlo se tiše rozpadá. Tým možná neotevřel staré rozhodnutí formálně, ale prakticky ho obešel.
+
+Skrytá kontrola je nejzrádnější. Vypadá jako zodpovědnost: někdo si vede bokem tabulku, někdo ručně porovnává poptávky, někdo si nechává screenshoty pro jistotu. Jenže tím vzniká nová datová stopa a nový provozní návyk. Pokud taková kontrola není nutná pro konkrétní rozhodnutí, patří pryč.
+
+### Praktický příklad
+
+```text
+Pravidlo:
+Rozpočet nezjišťujeme v prvním poptávkovém formuláři. Ptáme se na něj až po pochopení cíle projektu, pokud bez rámce nejde navrhnout další krok.
+
+První review:
+Pravidlo bylo najitelné u potvrzovací šablony. Doplnili jsme návratový signál přímo k pracovnímu místu a smazali pomocný výpis poptávek.
+
+Druhé review:
+Nový obchodník použil potvrzovací šablonu bez vysvětlování. Nepřidal rozpočtové pole, nezaložil CRM štítek a nesbíral bokem tabulku kvalifikace. U jedné poptávky se doptal na rámec až ve chvíli, kdy bez něj nešlo navrhnout další krok.
+
+Výsledek:
+Pravidlo je samostatné v běžné správě.
+```
+
+Tady druhé review nepotřebuje velký závěr. Stačí potvrdit, že pravidlo obstálo bez čerstvé paměti. Další práce by byla horší než žádná práce, protože by z jednoduchého pravidla znovu udělala projekt.
+
+Jiný výsledek:
+
+```text
+Druhé review:
+Pravidlo bylo v potvrzovací šabloně, ale nový člověk ho nenašel v obchodním rozcestníku. Rozhodnutí pochopil až po otevření historické karty.
+
+Výsledek:
+Samostatnost pravidla je slabá.
+
+Lokální oprava:
+Do obchodního rozcestníku přidáváme jednu položku: "Kdy se ptát na rozpočet". Historickou kartu necháváme jako archiv, ne jako primární vstup.
+
+Co neotevíráme:
+Původní formulář, lead scoring ani novou evidenci použití pravidla.
+```
+
+Tohle je dobrý případ malé opravy. Problém není v rozhodnutí. Problém je v trase k rozhodnutí. Opravte trasu a nechte původní pravidlo zavřené.
+
+### Privacy-first kontrola druhého review
+
+U druhého review si dejte zvláštní pozor na větu "pojďme to chvíli sledovat". Někdy je oprávněná. Často je to jen měkký způsob, jak neuzavřít nejistotu.
+
+Před zavedením jakéhokoli sledování si napište:
+
+```text
+Jaké rozhodnutí bez tohoto sledování nedokážeme udělat?
+```
+
+Pokud odpověď neexistuje, sledování nezavádějte. Pokud odpověď existuje, hledejte nejmenší agregovaný signál. U obchodního pravidla často stačí měsíční poznámka typu "u dvou poptávek nebylo potřeba pravidlo řešit, u jedné bylo použité podle šablony". Není nutné ukládat osobní údaje, kompletní konverzace ani detailní historii každého rozhodnutí.
+
+Privacy-first uzavření může znít takto:
+
+```text
+Druhé review potvrzuje samostatnost pravidla. Nenecháváme žádný nový seznam poptávek, nezavádíme štítek v CRM a nemažeme kanonickou kartu. Pomocné poznámky z kontroly byly zobecněny do jedné věty u obchodního rozcestníku.
+```
+
+To je praktická hodnota evropského, střídmého provozu. Data nevznikají jen proto, že by se jednou mohla hodit. Vznikají jen tam, kde mají jasný účel, omezený rozsah a rozumnou dobu života.
+
+### Karta druhého běžného review
+
+```text
+Pravidlo:
+
+Kanonické pracovní místo:
+
+Datum prvního review:
+
+Datum druhého review:
+
+Kdo pravidlo použil bez čerstvého vysvětlení:
+
+Bylo pravidlo najitelné?
+
+Bylo rozhodnutí srozumitelné bez historie?
+
+Zůstal původní široký návrh zavřený?
+
+Vznikla nějaká skrytá evidence nebo kontrola?
+
+Výsledek:
+- pravidlo je samostatné
+- pravidlo potřebuje lokální opravu trasy
+- pravidlo potřebuje jedno další běžné ověření
+- objevil se nový podnět mimo původní pravidlo
+
+Co upravujeme:
+
+Co výslovně neotevíráme:
+
+Co mažeme, anonymizujeme nebo vůbec nezakládáme:
+
+Další kontrola:
+```
+
+Kartu držte krátkou. Druhé review má být důkaz samostatnosti, ne nové shrnutí celé cesty. Pokud do karty opisujete historii, pravděpodobně se bojíte pustit pravidlo z ruky. To je lidské. Ale provoz se tím nezlepší.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: otevřete kanonické pracovní místo pravidla.
+2. Minuta 2: nechte člověka bez čerstvé historie říct, co by podle něj udělal.
+3. Minuta 3: ověřte, jestli původní široký návrh zůstává zavřený.
+4. Minuta 4: hledejte skrytou evidenci, exporty, štítky nebo ruční kontroly.
+5. Minuta 5: vyberte jeden výsledek review.
+6. Minuta 6: zapište jednu větu do pracovního místa a ukliďte pomocné poznámky.
+
+Šest minut stačí, pokud pravidlo opravdu funguje. Když nestačí, je to signál. Buď pravidlo není najitelné, nebo je moc závislé na historii, nebo se do něj vplížil nový problém. V takovém případě nezvětšujte review. Vyberte nejbližší pracovní místo a otevřete jen lokální opravu.
+
+### Checklist druhého běžného review
+
+- Proběhlo review v běžném rytmu, ne jako mimořádný projekt?
+- Testoval pravidlo někdo, kdo nepotřeboval čerstvý výklad?
+- Je pravidlo dostupné z pracovního místa, kde se má použít?
+- Dá se podle pravidla rozhodnout bez otevření historické karty?
+- Zůstal původní široký návrh výslovně zavřený?
+- Nevznikla nová tabulka, CRM vlastnost, export, screenshotová složka nebo ruční dohled?
+- Pokud vznikla lokální oprava, týká se jen trasy nebo formulace?
+- Pokud se objevil nový problém, má vlastní kartu a vlastní pracovní místo?
+- Je zapsané, jaká data dál nesbíráme?
+- Skončilo review jednou větou, kterou najde další člověk?
+
+Druhé běžné review má tým zbavit potřeby držet pravidlo v hlavě. Když pravidlo obstojí, vraťte ho do obyčejného provozu. Když neobstojí, neopravujte celý příběh. Opravte nejbližší místo, kde se samostatnost rozpadla, a znovu hlídejte datové minimum. Stabilní pravidlo není to, které má nejvíc dokumentace. Stabilní pravidlo je to, které pomůže udělat správné rozhodnutí bez zbytečné paměti, zbytečné kontroly a zbytečných dat.
+
 ## Pracovní log
 
 - 2026-06-28: Doplněna úvodní podkapitola o uzavření prvního běžného review po převodu do stabilní správy: čtyři uzavírací stavy, praktické příklady, privacy-first uzavření datové stopy, karta, mini workshop a checklist.
@@ -266962,3 +267113,4 @@ Uzavření prvního běžného review má po sobě nechat klid. Buď pravidlo fu
 - 2026-06-26: Doplněna úvodní podkapitola o uzavření druhého běžného review do stabilního režimu: přepis pravidla do běžného jazyka, odstranění dočasných kontrol, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-26: Doplněna úvodní podkapitola o uzavření druhé servisní kontroly stabilního pravidla: uzavírací věty, úklid kopií, privacy-first mazání dočasných stop, karta, mini workshop a checklist.
 - 2026-06-26: Doplněna úvodní podkapitola o prvním ročním review stabilního pravidla: pět kontrolních průchodů, výsledkové stavy, privacy-first kontrola datové stopy, karta, mini workshop a checklist.
+- 2026-06-28: Doplněna úvodní podkapitola o druhém běžném review po uzavřeném prvním review: samostatnost pravidla, skrytá evidence, privacy-first kontrola, karta, mini workshop a checklist.
