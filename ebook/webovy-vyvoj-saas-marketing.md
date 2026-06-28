@@ -266345,8 +266345,218 @@ Pokud se v minutě 2 tým hádá mezi lokálním dotažením a řízeným návra
 
 Uzavření klidového měsíce je malá, ale důležitá disciplína. Naučí tým dokončovat i to, co se nepokazilo. To je u webu, SaaS i marketingu vzácné: většina týmů umí reagovat na problém, méně týmů umí elegantně zavřít věc, která prostě funguje. Privacy-first provoz z toho těží přímo, protože každé dobré zavření znamená o jednu zbytečnou evidenci, kontrolu a datovou stopu méně.
 
+## Druhý klidový měsíc v tiché správě
+
+Druhý klidový měsíc je ještě nudnější než první. To je dobře. První měsíc ověřil, že pravidlo přežije bez mimořádné péče hned po uzavření review. Druhý měsíc ověřuje něco trochu jiného: jestli pravidlo funguje i ve chvíli, kdy už lidé nemají čerstvou paměť poslední debaty, poslední opravy ani posledního vysvětlení.
+
+Nejde o návrat k pravidelnému sledování. Pokud tichou správu každý měsíc slavnostně kontrolujete, není tichá. Druhý klidový měsíc má být lehký průchod přes běžné signály, které by tým stejně viděl: někdo pravidlo použije, někdo narazí na starý odkaz, někdo otevře související obchodní otázku, nebo se kolem pravidla nestane nic. Všechny čtyři možnosti jsou použitelné výsledky, pokud z nich nevznikne zbytečný rituál.
+
+Začněte větou:
+
+```text
+Pravidlo je druhý měsíc v tiché správě; kontrolujeme jen to, zda se samo udrželo v běžné práci.
+```
+
+Slovo `samo` je důležité. Neznamená bez vlastníka. Znamená bez speciálního režimu. Vlastník pořád existuje, návratový signál pořád existuje, kanonické pracovní místo pořád existuje. Jen kolem nich nemá běžet žádná pomocná evidence, ruční připomínání ani drobný dozor, který nikdo nepojmenoval.
+
+Codyho komentář: druhý klidový měsíc je test, jestli jste opravdu zavřeli smyčku, nebo jen přestali psát do logu, zatímco někdo v pozadí dál drží pravidlo při životě lepicí páskou a dobrými úmysly. Dobré úmysly jsou fajn. Lepicí páska v provozním systému méně.
+
+### Co druhý měsíc ověřuje
+
+Druhý klidový měsíc ověřuje čtyři věci:
+
+- Pravidlo je najitelné i bez lidí, kteří byli u jeho vzniku.
+- Návratový signál je pořád srozumitelný bez čtení celé historie.
+- Nevznikla tichá náhrada za původně zavřený rozsah.
+- Pomocné stopy z prvního měsíce nezůstaly v systému jen proto, že nikomu nepřekážely.
+
+První bod je test přenositelnosti. Pokud pravidlo umí použít jen člověk, který si pamatuje původní review, nejde o stabilní provoz. Neznamená to, že máte přepsat celou dokumentaci. Často stačí opravit název, přesunout odkaz nebo doplnit jednu větu do místa, kde se pravidlo opravdu používá.
+
+Druhý bod je test návratového signálu. Signál typu "když se to zase stane" je po měsíci skoro nepoužitelný. Dobrý signál říká, co přesně se má stát, kolikrát, v jakém pracovním místě a proč to mění rozhodnutí. Pokud tomu druhý měsíc nerozumí někdo mimo původní skupinu, signál není dost stabilní.
+
+Třetí bod hlídá plíživý návrat starého rozsahu. Původně zavřený formulář, scoring, export nebo nový nástroj se někdy vrátí jako nenápadná náhrada: ruční štítek, interní sloupec, "dočasný" seznam, další kopie e-mailu. To je často horší než otevřená změna, protože se netváří jako rozhodnutí.
+
+Čtvrtý bod je prostý úklid. Pokud po prvním měsíci zůstaly screenshoty, poznámky nebo výřezy poptávek, druhý měsíc je poslední rozumný okamžik je smazat, anonymizovat nebo převést na obecnou větu. Co přežije dva měsíce bez účelu, začne se tvářit jako součást systému.
+
+### Čtyři výsledky druhého klidového měsíce
+
+Na konci vyberte jeden výsledek:
+
+- Tichá správa drží: pravidlo nepotřebovalo mimořádnou péči a nevznikla nová stopa.
+- Chybí přenositelnost: pravidlo funguje, ale nový člověk ho neumí použít bez vysvětlení.
+- Vrátil se zavřený rozsah bokem: původně odmítnutá práce vzniká jako ruční náhrada.
+- Přišel návratový signál: objevila se situace, která opravdu splňuje domluvenou podmínku.
+
+`Tichá správa drží` uzavřete jednou větou. Nepřidávejte další měsíc sledování jen proto, že dva měsíce dopadly dobře. Dobré pravidlo nepotřebuje odměnu ve formě nové schůzky.
+
+`Chybí přenositelnost` řešte jako lokální dokumentační opravu. Přepište pracovní větu, opravte odkaz nebo doplňte příklad. Nespouštějte nové review pravidla, pokud problém není v rozhodnutí samotném.
+
+`Vrátil se zavřený rozsah bokem` berte vážně. Není to jen drobná kreativita týmu. Je to signál, že buď pravidlo není dost rozhodnutelné, nebo se někdo bojí ztráty kontroly. Nejprve zastavte ruční náhradu a ukliďte datovou stopu. Teprve potom rozhodujte, zda existuje skutečný návratový signál.
+
+`Přišel návratový signál` znamená řízený návrat v domluveném rozsahu. Neotevírá se automaticky původní velké řešení. Otevírá se nejbližší pracovní místo, kde se problém opravdu ukázal.
+
+### Praktický příklad
+
+Pravidlo v tiché správě:
+
+```text
+U relevantní poptávky lze v potvrzovacím e-mailu položit volitelnou otázku na rámcový rozpočet, pokud bez něj nejde navrhnout další krok. Formulář, scoring a nový export zůstávají zavřené.
+```
+
+Druhý klidový měsíc bez zásahu:
+
+```text
+Přirozené použití:
+Jedna poptávka potřebovala doptání na rozpočet. Obchod použil potvrzovací šablonu bez dotazu v chatu.
+
+Kontrola přenositelnosti:
+Nový člověk našel šablonu přes obchodní rozcestník.
+
+Datová stopa:
+Nevznikl nový štítek, seznam ani export.
+
+Výsledek:
+Tichá správa drží.
+
+Další krok:
+Žádný. Pravidlo se znovu otevře jen při návratovém signálu.
+```
+
+Slabší varianta:
+
+```text
+Přirozené použití:
+Nový člověk našel šablonu, ale nerozuměl větě "pokud bez rozpočtu nejde navrhnout další krok".
+
+Výsledek:
+Chybí přenositelnost.
+
+Lokální oprava:
+Do šablony doplňujeme příklad: "Ptáme se jen tehdy, když bez rámce neumíme doporučit další krok, ne u každé poptávky."
+
+Co neotevíráme:
+Review pravidla, povinné pole ve formuláři, scoring ani další evidenci poptávek.
+```
+
+Riziková varianta:
+
+```text
+Přirozené použití:
+Obchod si začal vést interní seznam poptávek, kde rozpočet chyběl, aby měl přehled "pro jistotu".
+
+Výsledek:
+Vrátil se zavřený rozsah bokem.
+
+První reakce:
+Seznam rušíme a mažeme, protože nemá účel, vlastníka ani retenci.
+
+Další ověření:
+Zjišťujeme pouze to, zda tým rozumí existujícímu návratovému signálu. Neotevíráme nové měření.
+```
+
+Třetí varianta je nejdůležitější. Tichá správa často neselže nahlas. Selže tím, že si někdo vytvoří vedlejší pomůcku a ta v systému zůstane. Privacy-first provoz stojí na tom, že takové pomůcky neberete jako nevinné, dokud nevíte, jaká data sbírají a kdy zmizí.
+
+### Privacy-first kontrola druhého měsíce
+
+Privacy-first otázka pro druhý klidový měsíc zní:
+
+```text
+Nevznikla náhražka za práci, kterou jsme se rozhodli neotevřít?
+```
+
+Hledejte hlavně náhražky s nízkou viditelností:
+
+- ruční štítky v CRM,
+- pomocné tabulky v cloudu,
+- interní seznamy zákazníků nebo poptávek,
+- kopie e-mailů v projektovém nástroji,
+- screenshoty konverzací,
+- poznámky s osobními nebo obchodními údaji,
+- opakované dotazy v chatu, které fakticky nahrazují chybějící pracovní větu.
+
+Pokud taková náhražka vznikla, neptejte se nejdřív, jestli "pomáhá". Ptejte se:
+
+```text
+Jaké rozhodnutí bez ní neumíme udělat?
+
+Kdo ji vlastní?
+
+Jak dlouho má existovat?
+
+Lze ji nahradit obecnou větou, anonymizovaným příkladem nebo lepší pracovní kotvou?
+```
+
+Pokud odpovědi nejsou jasné, náhražku zrušte. Pomocná evidence bez rozhodnutí je jen tracker v pracovním oblečení. A ten se do privacy-first provozu nevejde, i kdyby měl hezký název a tvářil se jako "jen interní poznámka".
+
+### Karta druhého klidového měsíce
+
+```text
+Pravidlo:
+
+Kanonické pracovní místo:
+
+Návratový signál:
+
+Období druhého klidového měsíce:
+
+Kdo pravidlo použil nebo hledal:
+
+Bylo pravidlo použitelné bez čerstvé paměti původního review?
+- ano
+- ne, kde se zadrhlo:
+
+Vznikla náhražka zavřeného rozsahu?
+- ne
+- ano, jaká:
+
+Vznikla nebo zůstala pomocná datová stopa?
+- ne
+- ano, co s ní děláme:
+
+Výsledek:
+- tichá správa drží
+- chybí přenositelnost
+- vrátil se zavřený rozsah bokem
+- přišel návratový signál
+
+Lokální oprava nebo řízený návrat, pokud existuje:
+
+Co výslovně neotevíráme:
+
+Další stav pravidla:
+```
+
+Karta má být krátká. Pokud ji vyplňujete jako audit, ztratili jste účel. Druhý klidový měsíc nemá pravidlo znovu hodnotit od nuly. Má jen ověřit, že tichá správa opravdu není závislá na skryté práci.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte kanonickou pracovní větu pravidla.
+2. Minuta 2: pojmenujte jedno přirozené použití, nebo napište, že žádné nebylo.
+3. Minuta 3: ověřte, zda pravidlo pochopí i člověk bez čerstvé historie.
+4. Minuta 4: hledejte náhražku zavřeného rozsahu.
+5. Minuta 5: vyberte jeden výsledek druhého měsíce.
+6. Minuta 6: zapište, co neotevíráte a jaký je další stav.
+
+Pokud během workshopu najdete náhražku zavřeného rozsahu, nezachraňujte ji tím, že ji zpětně pojmenujete jako experiment. Experiment má hypotézu, hranici, vlastníka a konec. Skrytá tabulka po dvou měsících tiché správy nic z toho nemá. Nejdřív ji zastavte, potom teprve rozhodujte, jestli existuje důvod otevřít skutečný experiment.
+
+### Checklist druhého klidového měsíce
+
+- Je jasné, že nejde o další pravidelné review?
+- Umí pravidlo použít někdo bez čerstvé paměti původní debaty?
+- Je návratový signál srozumitelný bez čtení celé historie?
+- Nevznikla ruční náhražka za původně zavřený formulář, scoring, export nebo nástroj?
+- Nezůstaly v systému pomocné poznámky, screenshoty, štítky nebo seznamy z prvního měsíce?
+- Pokud chyběla přenositelnost, opravujeme jen nejbližší pracovní kotvu?
+- Pokud se vrátil zavřený rozsah bokem, zastavili jsme ho před otevřením další práce?
+- Pokud přišel návratový signál, odpovídá přesně domluvené podmínce?
+- Je výslovně napsané, co dál neotevíráme?
+- Umí pravidlo pokračovat bez nové kontrolní smyčky?
+
+Druhý klidový měsíc je dobrý konec pro většinu malých pravidel. Pokud drží, nechte ho být. Pokud nedrží, opravte nejmenší místo, kde se tichá správa rozpadla. Nejhorší výsledek je poloviční režim: pravidlo se tváří jako zavřené, ale někdo kolem něj dál sbírá data, vysvětluje výjimky a drží starý rozsah při životě bokem. To není klid. To je jen práce, která se přestala přiznávat.
+
 ## Pracovní log
 
+- 2026-06-28: Doplněna úvodní podkapitola o druhém klidovém měsíci v tiché správě: přenositelnost bez čerstvé paměti, návrat zavřeného rozsahu bokem, privacy-first kontrola náhražek, karta, mini workshop a checklist.
 - 2026-06-28: Doplněna úvodní podkapitola o uzavření prvního klidového měsíce do tiché správy: tři uzavírací stavy, praktické příklady, privacy-first úklid pomocných stop, karta, mini workshop a checklist.
 - 2026-06-28: Doplněna úvodní podkapitola o prvním klidovém měsíci po uzavření druhého review: přirozené signály, výsledkové stavy, praktické příklady, privacy-first kontrola skryté evidence, karta, mini workshop a checklist.
 - 2026-06-28: Doplněna úvodní podkapitola o uzavření druhého běžného review do klidné správy: čtyři uzavírací stavy, praktické příklady, privacy-first úklid podkladů, karta, mini workshop a checklist.
