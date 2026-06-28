@@ -55,6 +55,8 @@ Pokud první poznámka pořád zní jako opis starého rozhodnutí, zastavte se 
 
 Z první návratové věty rovnou odvoďte hranici dalšího kroku. Pokud věta míří na potvrzovací e-mail, nezačínejte zároveň přepisovat homepage, formulář i obchodní skript. Návrat má nejdřív opravit místo, kde se dnešní důvod opravdu ukázal; širší vzor si zaslouží vlastní návratový signál.
 
+Pokud hranici dalšího kroku neumíte vysvětlit jedním pracovním místem a jedním očekávaným výsledkem, je pořád příliš široká. Zmenšete ji dřív, než začnete sbírat další podklady; jinak se z návratu stane nová analýza bez jasného konce.
+
 Když se z hranice dalšího kroku ukáže, že dnes není co opravovat, zapište to stejně pečlivě jako změnu. Věta "teď neotevíráme nový krok, protože návratový signál nepotvrdil problém" je užitečný výsledek: chrání tým před prací z návyku a zároveň nechává jasnou stopu, kdy se k tématu vrátit.
 
 ## Záznam neotevřeného kroku
@@ -267114,3 +267116,4 @@ Druhé běžné review má tým zbavit potřeby držet pravidlo v hlavě. Když 
 - 2026-06-26: Doplněna úvodní podkapitola o uzavření druhé servisní kontroly stabilního pravidla: uzavírací věty, úklid kopií, privacy-first mazání dočasných stop, karta, mini workshop a checklist.
 - 2026-06-26: Doplněna úvodní podkapitola o prvním ročním review stabilního pravidla: pět kontrolních průchodů, výsledkové stavy, privacy-first kontrola datové stopy, karta, mini workshop a checklist.
 - 2026-06-28: Doplněna úvodní podkapitola o druhém běžném review po uzavřeném prvním review: samostatnost pravidla, skrytá evidence, privacy-first kontrola, karta, mini workshop a checklist.
+- 2026-06-28: Doplněna krátká úvodní poznámka, aby hranice dalšího kroku musela jít popsat jedním pracovním místem a jedním očekávaným výsledkem.
