@@ -267200,6 +267200,203 @@ Když se během pěti minut objeví nová širší otázka, neřešte ji uvnitř
 
 Uzavřené lokální dočištění je dobrý konec malé smyčky. Pravidlo se vrátilo do běžné práce, starý rozsah zůstal zavřený a tým po sobě nenechal zbytečné datové stopy. Přesně takhle má vypadat praktická drobná změna: užitečná, dohledatelná a bez dramatu.
 
+## První běžné použití po uzavřeném lokálním dočištění
+
+Po uzavření lokálního dočištění už nemá následovat další slavnostní kontrola. Má následovat normální práce. Tým použije upravené pracovní místo v reálné situaci a sleduje jedinou věc: jestli se poslední drobná oprava opravdu stala součástí běžného chování, nebo jestli pořád žije jen v hlavě lidí, kteří ji opravovali.
+
+Začněte jednoduchou větou:
+
+```text
+Uzavřené lokální dočištění poprvé běžně používáme při:
+```
+
+Příklad:
+
+```text
+Uzavřené lokální dočištění poprvé běžně používáme při další relevantní poptávce, která přišla přes stejný formulář a dostala stejnou potvrzovací zprávu bez ručního vysvětlení navíc.
+```
+
+Tahle věta chrání rozsah. Neověřujete celý obchodní proces, nový web ani kvalitu každé odpovědi. Ověřujete, jestli konkrétní dočištěné místo umí obstát bez doprovodného komentáře. Pokud k tomu potřebujete dlouhou přípravu, nejspíš ještě nejde o běžné použití.
+
+Codyho komentář: nejzrádnější chvíle po malé opravě je ticho. Všichni mají pocit, že je hotovo, a pak se o měsíc později zjistí, že oprava fungovala jen proto, že ji někdo pokaždé ručně dovysvětlil. To není standard. To je lidský plugin v beta verzi.
+
+### Co při prvním běžném použití sledovat
+
+Sledujte tři malé signály:
+
+- Najitelnost: člověk našel aktuální pracovní místo bez hledání staré karty nebo chatu.
+- Samostatnost: použil nové znění, šablonu nebo pravidlo bez dodatečného vysvětlení od autora opravy.
+- Datová střídmost: nevznikla nová kopie zákaznických dat, screenshotů, exportů ani pomocných tabulek jen kvůli kontrole.
+
+Tyto signály stačí. Nepotřebujete metriky, dashboard ani nový rituál. První běžné použití má být lehká kontrola reality, ne návrat do mimořádné péče.
+
+Pokud se jeden signál rozpadne, opravujte nejbližší pracovní místo. Když člověk nenašel aktuální šablonu, problém není v obsahu dočištění, ale v navigaci. Když šablonu našel, ale nepochopil, kdy ji použít, problém je v hranici použití. Když kvůli kontrole vznikla nová tabulka s osobními údaji, problém je v provozní hygieně, ne v textu šablony.
+
+### Čtyři výsledné stavy
+
+Po prvním běžném použití vyberte jeden stav:
+
+- Drží tiše: oprava se použila bez pomoci, bez návratu staré nejasnosti a bez nové datové stopy.
+- Drží s navigační stopou: obsah funguje, ale lidé ho ještě nehledají na správném místě.
+- Drží s hranicí použití: pravidlo je srozumitelné, ale není jasné, kdy se má použít.
+- Nedrží: stejná nejasnost se vrátila i po lokálním dočištění.
+
+Stav `drží tiše` je konec. Nechte pravidlo v běžném rytmu a nedělejte další sledování jen proto, že máte čerstvý důkaz.
+
+Stav `drží s navigační stopou` řešte úpravou odkazu, názvu nebo umístění. Neotevírejte obsah. Pokud se člověk dostane ke správnému místu až přes starý chat, opravte cestu, ne pravidlo.
+
+Stav `drží s hranicí použití` řešte jednou větou u pravidla: kdy se používá a kdy ne. Nezakládejte rozhodovací strom, pokud stačí hraniční příklad.
+
+Stav `nedrží` znamená, že lokální dočištění nebylo poslední malou opravou. Vraťte se k pracovní otázce a rozhodněte, jestli ještě dává smysl jedna úzká oprava, nebo už jde o širší vzor.
+
+### Praktický příklad
+
+```text
+Uzavřené lokální dočištění:
+Potvrzovací zpráva po formuláři nově říká, že se tým ozve do dvou pracovních dnů s návrhem dalšího kroku.
+
+První běžné použití:
+Další relevantní poptávka přišla v pátek odpoledne. Obchod použil potvrzovací zprávu bez ručního dovysvětlení a v pondělí navázal standardním follow-upem.
+
+Najitelnost:
+Zpráva byla v aktuální šabloně u formuláře, ne ve starém chatu.
+
+Samostatnost:
+Obchod nemusel kontaktovat autora úpravy.
+
+Datová střídmost:
+Nevznikl nový export poptávek ani pomocná tabulka pro sledování odpovědí.
+
+Výsledek:
+Drží tiše.
+
+Co zůstává zavřené:
+Ceník, lead scoring, povinné pole pro rozpočet a nový reporting rychlosti odpovědí.
+```
+
+Slabší, ale pořád dobrý výsledek:
+
+```text
+Výsledek:
+Drží s navigační stopou.
+
+Co se stalo:
+Obchod použil správné znění, ale našel ho přes starou poznámku z dočištění, ne přes kanonickou šablonu u formuláře.
+
+Nejmenší oprava:
+Přidáme odkaz z karty formuláře na aktuální potvrzovací zprávu a starou poznámku zavřeme.
+
+Co neotevíráme:
+Neměníme text zprávy ani obchodní pravidla.
+```
+
+Tady není potřeba nová obsahová iterace. Stačí opravit cestu. To je přesně typ práce, který má zůstat malý, protože problém je malý. Ano, občas je řešení nudné. Nudné řešení je často nejlepší kompliment pro dobře omezený rozsah.
+
+### Privacy-first kontrola prvního běžného použití
+
+První běžné použití po lokálním dočištění nesmí vytvořit novou vrstvu sledování. Nepotřebujete sledovat lidi, ukládat celé konverzace ani kopírovat zákaznické zprávy do kontrolního dokumentu. Stačí krátký záznam o výsledku.
+
+Použijte tento tvar:
+
+```text
+Použití ověřeno na:
+
+Výsledek:
+
+Ponecháváme:
+
+Mažeme nebo nepřenášíme:
+
+Další sledování:
+```
+
+Příklad:
+
+```text
+Použití ověřeno na:
+Další relevantní poptávce přes stejný formulář.
+
+Výsledek:
+Drží tiše.
+
+Ponecháváme:
+Závěr, že aktuální potvrzovací zpráva stačí bez ručního vysvětlení termínu odpovědi.
+
+Mažeme nebo nepřenášíme:
+Osobní údaje zájemce, celé znění poptávky a pracovní komentáře z obchodního chatu.
+
+Další sledování:
+Neplánujeme. Návratový signál vznikne až při opakované nejasnosti u stejného pracovního místa.
+```
+
+Privacy-first hodnota je jednoduchá: tým si nechá rozhodnutí, ne surovinu. Rozhodnutí pomáhá další práci. Surovina většinou jen zvyšuje riziko, že se interní provoz promění ve skladiště polozapomenutých osobních údajů. A skladiště osobních údajů není strategie, jen dražší forma nepořádku.
+
+### Karta prvního běžného použití
+
+```text
+Uzavřené lokální dočištění:
+
+Kanonické pracovní místo:
+
+První běžné použití:
+
+Najitelnost:
+- našlo se bez pomoci
+- našlo se přes starou stopu
+- nenašlo se
+
+Samostatnost:
+- použito bez vysvětlení
+- použito s drobným dovysvětlením
+- nepoužitelné bez autora opravy
+
+Datová střídmost:
+- nevznikla nová stopa
+- vznikla zbytečná pomocná stopa
+- vznikla riziková kopie dat
+
+Výsledek:
+- drží tiše
+- drží s navigační stopou
+- drží s hranicí použití
+- nedrží
+
+Nejmenší další akce, pokud je potřeba:
+
+Co zůstává výslovně zavřené:
+
+Privacy-first uzavření:
+Ponecháváme:
+Mažeme nebo nepřenášíme:
+Další sledování:
+```
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: pojmenujte uzavřené lokální dočištění a kanonické pracovní místo.
+2. Minuta 2: popište první běžné použití bez detailů, které nejsou potřeba.
+3. Minuta 3: vyhodnoťte najitelnost a samostatnost.
+4. Minuta 4: zkontrolujte, jestli nevznikla nová datová stopa.
+5. Minuta 5: vyberte jeden ze čtyř výsledných stavů.
+6. Minuta 6: zapište buď konec sledování, nebo jednu nejmenší další akci.
+
+Pokud se během workshopu objeví chuť kontrolovat další části procesu, zastavte ji otázkou: "Souvisí to přímo s uzavřeným lokálním dočištěním?" Pokud ne, patří to do nové pracovní otázky, ne do této karty.
+
+### Checklist prvního běžného použití
+
+- Proběhlo použití v normální práci, ne v umělém auditu?
+- Je jasné, které uzavřené lokální dočištění se ověřuje?
+- Našel člověk kanonické pracovní místo bez staré pomocné stopy?
+- Šlo pravidlo použít bez autora opravy?
+- Nevrátila se stejná nejasnost, kvůli které dočištění vzniklo?
+- Nevznikl nový export, screenshot, kopie zprávy nebo pomocná tabulka?
+- Vybrali jsme jeden ze čtyř výsledných stavů?
+- Pokud oprava drží, končí mimořádná péče?
+- Pokud je potřeba další akce, je opravdu nejmenší možná?
+- Je výslovně napsané, co zůstává zavřené?
+
+První běžné použití po uzavřeném lokálním dočištění má být krátké a obyčejné. Když dopadne dobře, skoro nic se nestane: člověk použije správné místo, práce projde a tým nezaloží další kontrolní vrstvu. To je přesně cílem. Dobrá provozní změna se nakonec pozná podle toho, že přestane být vidět.
+
 ## Pracovní log
 
 - 2026-06-28: Doplněna úvodní podkapitola o uzavření ročního připomenutí do dalšího roku: uzavírací věty, praktický příklad, privacy-first úklid, karta, mini workshop a checklist.
@@ -268499,3 +268696,4 @@ Uzavřené lokální dočištění je dobrý konec malé smyčky. Pravidlo se vr
 - 2026-06-28: Doplněna úvodní podkapitola o druhém běžném review po uzavřeném prvním review: samostatnost pravidla, skrytá evidence, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-06-28: Doplněna krátká úvodní poznámka, aby hranice dalšího kroku musela jít popsat jedním pracovním místem a jedním očekávaným výsledkem.
 - 2026-06-28: Doplněna úvodní podkapitola o uzavření lokálního dočištění po prvním běžném ověření: tři výsledné stavy, praktické příklady, privacy-first uzavření, karta, mini workshop a checklist.
+- 2026-06-28: Doplněna úvodní podkapitola o prvním běžném použití po uzavřeném lokálním dočištění: najitelnost, samostatnost, datová střídmost, čtyři výsledné stavy, privacy-first kontrola, karta, mini workshop a checklist.
