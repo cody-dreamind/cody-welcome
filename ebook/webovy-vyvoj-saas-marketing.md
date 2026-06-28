@@ -266890,8 +266890,157 @@ Workshop nedělejte jako schůzku jen proto, že přišel rok. Pokud pravidlo vl
 
 Roční připomenutí je poslední pojistka proti dvěma extrémům: zapomenout na pravidlo úplně, nebo ho znovu proměnit v provozní práci. Dobrý výsledek je klidný: pravidlo pořád žije na správném místě, tým ví, kdy se k němu vrátit, a nikde bokem neroste malá databáze "pro jistotu". To je přesně ten typ provozní hygieny, která není vidět na homepage, ale drží web, SaaS i marketing dlouhodobě čitelné.
 
+
+## Uzavření ročního připomenutí do dalšího roku
+
+Roční připomenutí má skutečnou hodnotu až ve chvíli, kdy se umí zavřít. Nestačí říct, že pravidlo pořád platí nebo že se udělala drobná oprava. Tým musí vědět, co se po připomenutí stane dál: kde zůstává kanonická věta, jaký signál pravidlo znovu otevře a proč nevzniká další kontrolní smyčka. Jinak se z ročního připomenutí nenápadně stane nový provozní rituál. A provozních rituálů bývá v týmech tolik, že by se daly prodávat jako smutná desková hra.
+
+Uzavření proto začněte větou:
+
+```text
+Roční připomenutí uzavíráme takto:
+```
+
+Za ní musí následovat jeden konkrétní stav, ne volný odstavec dojmů. Dobré uzavření má být čitelné i za rok, kdy si nikdo nebude pamatovat dnešní debatu. Pokud se ke starému záznamu vrátí nový člověk, má během minuty poznat, jestli pravidlo zůstalo beze změny, jestli proběhl lokální úklid, nebo jestli byl otevřen návratový signál.
+
+Codyho komentář: největší riziko ročních připomenutí není, že tým něco přehlédne. Největší riziko je, že tým z opatrnosti vytvoří další opatrnost. Jedna kontrola porodí druhou, ta třetí tabulku a za chvíli máte systém, který chrání pravidlo tak důkladně, až se podle něj nikdo nerozhoduje.
+
+### Čtyři uzavírací věty
+
+Pro uzavření ročního připomenutí používejte jednu ze čtyř vět:
+
+- Beze změny: pravidlo platí, je najitelné a další připomenutí stačí za rok.
+- Lokálně opraveno: pravidlo platí, upravili jsme jen jedno pracovní místo a další kontrola proběhne až při běžném použití.
+- Datově uklizeno: pravidlo platí, odstranili jsme pomocnou datovou stopu a nevytváříme její náhradu.
+- Otevřen návrat: pravidlo narazilo na domluvený návratový signál a otevíráme nejmenší další krok.
+
+Tyto věty nejsou stylistické cvičení. Jsou to brzdy proti rozšiřování práce. Každá z nich říká, co se stalo, co se nestalo a jaký je další režim.
+
+U stavu `Beze změny` nepište dlouhé zdůvodnění. Pokud je potřeba obhajovat, proč pravidlo platí, možná stav není beze změny. Stačí krátký záznam:
+
+```text
+Roční připomenutí uzavíráme beze změny: pravidlo platí, nový člověk ho našel v obchodním rozcestníku a nevznikla žádná pomocná evidence. Další připomenutí za rok.
+```
+
+U stavu `Lokálně opraveno` pojmenujte jedno pracovní místo. Ne tři. Ne "dokumentaci obecně". Jedno místo:
+
+```text
+Roční připomenutí uzavíráme lokální opravou: v obchodním rozcestníku měníme odkaz na aktuální potvrzovací šablonu. Pravidlo ani formulář neotevíráme.
+```
+
+U stavu `Datově uklizeno` napište, co mizí a co nevzniká místo toho:
+
+```text
+Roční připomenutí uzavíráme datovým úklidem: rušíme CRM štítek "chybí rozpočet" bez náhrady. Pokud se objeví tři relevantní poptávky za sebou bez kvalifikace, použijeme původní návratový signál.
+```
+
+U stavu `Otevřen návrat` držte rozsah na nejmenším pracovním místě:
+
+```text
+Roční připomenutí uzavíráme otevřením návratu: návratový signál nastal u obchodního follow-upu, proto upravujeme jen první odpověď po poptávce. Formulář, scoring ani nové pole teď neotevíráme.
+```
+
+### Praktický příklad
+
+Tým má pravidlo, že na homepage neukazuje počet klientů, dokud ho neumí udržovat pravdivě bez ručního lovení čísel. Místo toho používá konkrétní zákaznický příklad a přímý odkaz na případovou studii. Návratový signál zní: obchod opakovaně ztrácí důvěru u relevantních poptávek, protože chybí důkaz rozsahu zkušeností.
+
+Po roce se ukáže toto:
+
+```text
+Platnost:
+Pravidlo pořád dává smysl. Počet klientů by byl ručně udržovaný a snadno zastaralý.
+
+Najitelnost:
+Nový marketér našel pravidlo až v poznámkách ke staré homepage, ne v aktuálním obsahovém playbooku.
+
+Datová stopa:
+Vznikla neoficiální tabulka s počty projektů podle typu služby. Není používaná veřejně, nemá vlastníka a obsahuje interní poznámky.
+
+Uzavření:
+Roční připomenutí uzavíráme lokální opravou a datovým úklidem: přesouváme kanonickou větu do obsahového playbooku a rušíme neoficiální tabulku bez náhrady. Homepage, claim ani nové číslo teď neotevíráme.
+
+Návratový signál zůstává:
+Tři relevantní obchodní rozhovory za sebou narazí na nedostatek důkazu rozsahu zkušeností.
+```
+
+Tady je důležité, že tým neotevřel celou homepage. Problém nebyl v claimu, ale v najitelnosti pravidla a ve vedlejší tabulce. Lokální oprava zlepší přenositelnost. Datový úklid sníží riziko. Produkt ani marketing se tím nezahltí novou debatou.
+
+### Privacy-first uzavření
+
+Privacy-first uzavření ročního připomenutí má tři části:
+
+- Zrušit dočasné stopy, které nemají další účel.
+- Ponechat jen kanonický záznam a případně jeden odkaz na pracovní místo.
+- Nepřidávat novou metriku jen proto, že se připomenutí jednou konalo.
+
+Typická chyba je nechat si "pro jistotu" export, screenshot nebo pomocnou tabulku. Pokud roční připomenutí skončilo beze změny, žádná taková stopa většinou není potřeba. Pokud skončilo lokální opravou, ponechte jen záznam o opravě. Pokud skončilo datovým úklidem, zapište, co bylo odstraněno a proč se nevytváří náhrada.
+
+Privacy-first provoz není jen o tom, jaká data sbíráte od návštěvníků. Je i o tom, kolik interních stop vyrábíte kolem vlastních rozhodnutí. Každá pomocná evidence může časem zestárnout, ztratit vlastníka nebo se začít používat k jinému účelu, než kvůli kterému vznikla. Roční připomenutí je dobré místo, kde takové stopy zastavit dřív, než začnou vypadat oficiálně.
+
+### Karta uzavření ročního připomenutí
+
+```text
+Pravidlo:
+
+Kanonické pracovní místo:
+
+Datum ročního připomenutí:
+
+Výsledek:
+- beze změny
+- lokálně opraveno
+- datově uklizeno
+- otevřen návrat
+
+Uzavírací věta:
+
+Co se upravilo, pokud něco:
+
+Co se smazalo, archivovalo nebo anonymizovalo:
+
+Co výslovně neotevíráme:
+
+Návratový signál pro další otevření:
+
+Další připomenutí:
+- za rok
+- jen při návratovém signálu
+- jiné:
+
+Vlastník kanonického místa:
+```
+
+Karta má být poslední stopa po připomenutí, ne začátek nové složky. Pokud k ní přikládáte víc než jeden odkaz, zastavte se a zeptejte se, jestli už z připomenutí neděláte audit. Audit může být správná věc, ale má mít vlastní důvod, rozsah a vlastníka. Nemá se schovávat pod roční připomenutí.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte výsledek ročního připomenutí.
+2. Minuta 2: vyberte jednu ze čtyř uzavíracích vět.
+3. Minuta 3: pojmenujte kanonické pracovní místo.
+4. Minuta 4: napište, co se výslovně neotevírá.
+5. Minuta 5: smažte nebo označte dočasné stopy bez dalšího účelu.
+6. Minuta 6: potvrďte návratový signál nebo další roční připomenutí.
+
+Když workshop nestačí na šest minut, pravděpodobně neuzavíráte připomenutí, ale řešíte nové téma. To není špatně. Jen mu dejte vlastní kartu a nenechte ho rozlézt se do ročního záznamu. Roční záznam má zavřít smyčku, ne otevřít konferenci.
+
+### Checklist uzavření ročního připomenutí
+
+- Má uzavření jednu jasnou větu?
+- Vybrali jsme jeden ze čtyř stavů?
+- Je kanonické pracovní místo jasné a najitelné?
+- Je napsané, co výslovně neotevíráme?
+- Pokud proběhla lokální oprava, týká se jednoho pracovního místa?
+- Pokud proběhl datový úklid, je jasné, co bylo odstraněno?
+- Nevznikla náhradní tabulka, štítek, export nebo měření bez účelu?
+- Je návratový signál pořád konkrétní a ověřitelný?
+- Je další roční připomenutí zapsané jen tehdy, když má smysl?
+- Umí nový člověk za rok pochopit rozhodnutí bez původní debaty?
+
+Uzavření ročního připomenutí je malý akt provozní dospělosti. Říká: pravidlo jsme zkontrolovali, víme, kde žije, víme, kdy se k němu vrátit, a zároveň jsme si nevyrobili další práci jen proto, že jsme byli pečliví. To je pro web, SaaS i marketing velmi praktická forma disciplíny. Není blyštivá. Ale funguje. Což je v provozu podezřele užitečná vlastnost.
+
 ## Pracovní log
 
+- 2026-06-28: Doplněna úvodní podkapitola o uzavření ročního připomenutí do dalšího roku: uzavírací věty, praktický příklad, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-28: Doplněna úvodní podkapitola o ročním připomenutí po klidné správě: tři kontrolní otázky, praktický příklad, výsledné stavy, privacy-first brána, karta, mini workshop a checklist.
 - 2026-06-28: Doplněna úvodní podkapitola o uzavření druhého klidového měsíce bez nové kontrolní smyčky: tři povolené konce, praktické příklady, privacy-first úklid pomocných stop, karta, mini workshop a checklist.
 - 2026-06-28: Doplněna krátká redakční brzda k drobnému tření po první běžné údržbě: nová věta se má přidat jen tehdy, když zabrání konkrétnímu špatnému rozhodnutí.
