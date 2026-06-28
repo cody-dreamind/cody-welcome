@@ -268094,8 +268094,178 @@ Když se workshop začne měnit v debatu o vylepšení celého procesu, vraťte 
 
 Uzavření první běžné správy má být nudné v tom nejlepším smyslu. Když všechno drží, nevymýšlejte pokračování. Zapište výsledek, ukliďte dočasné stopy a nechte pravidlo pracovat v běžném rytmu. Stabilní systém nepotřebuje nekonečný potlesk. Potřebuje klid a dobrý odkaz.
 
+## Druhá běžná správa po uzavřeném lokálním dočištění
+
+Druhá běžná správa má ověřit jednu jednoduchou věc: jestli se lokální dočištění opravdu stalo součástí normálního provozu, nebo jestli kolem sebe pořád tahá skrytou péči. Po první běžné správě už by pravidlo nemělo potřebovat autora opravy, zvláštní připomínku, samostatnou tabulku ani starou ověřovací poznámku. Má žít tam, kde se podle něj pracuje.
+
+Začněte otázkou:
+
+```text
+Použil by člověk pravidlo stejně, i kdyby nevěděl, že kolem něj někdy proběhlo lokální dočištění?
+```
+
+Pokud odpověď zní ano, druhá běžná správa má být krátká. Zapište, že pravidlo funguje bez mimořádné podpory, a nechte ho v rytmu. Pokud odpověď zní ne, nehledáte nový projekt. Hledáte poslední zbytečný háček: starý odkaz, nejasnou větu, duplicitní místo, ruční připomínku nebo datovou stopu, která nutí lidi vracet se do historie.
+
+Praktická vstupní věta:
+
+```text
+Druhou běžnou správu děláme jen proto, abychom potvrdili samostatnost pravidla v běžném rytmu.
+```
+
+Tahle věta je záměrně úzká. Neříká "zkontrolujeme celý proces". Neříká "najdeme další zlepšení". Říká, že cílem je samostatnost pravidla. Když se při správě objeví jiné téma, patří do nové karty nebo do návratového signálu, ne do této kontroly.
+
+### Tři kontrolní otázky
+
+Při druhé běžné správě stačí tři otázky:
+
+- Je kanonické místo jediné místo, které člověk potřebuje otevřít?
+- Je pracovní věta dost jasná bez znalosti původní opravy?
+- Nevznikla skrytá evidence, která pravidlo drží při životě mimo běžný rytmus?
+
+První otázka hledá duplicitní trasy. Pokud se člověk dostane k pravidlu přes starý zápis, komentář v úkolu nebo poznámku z ověření, kanonické místo sice existuje, ale systém ho ještě neumí používat čistě. Oprava je navigační: odstranit starou trasu nebo ji přesměrovat.
+
+Druhá otázka hledá slabou větu. Pokud člověk pravidlo najde, ale potřebuje vysvětlení, není problém v paměti týmu. Problém je ve formulaci. Zpřesněte větu na místě, kde se používá. Nepřidávejte další dokument, pokud stačí jasnější řádek.
+
+Třetí otázka hledá skrytou péči. Typicky jde o pomocný seznam použití, dočasný štítek, screenshot, kalendářovou připomínku nebo ruční kontrolu, kterou nikdo oficiálně neponechal, ale všichni ji ještě trochu používají. Skrytá evidence je nenápadná forma dluhu. Vypadá jako pečlivost, ale postupně dělá z malého pravidla nový provozní závazek.
+
+### Praktický příklad
+
+```text
+Lokální dočištění:
+Do rozcestníku review šablon byla doplněna věta, kdy slabý podnět nezakládat jako novou kartu změny.
+
+První běžná správa:
+Potvrdila, že věta je najitelná a použitelná.
+
+Druhá běžná správa:
+Správce otevřel jen rozcestník, použil větu bez staré ověřovací poznámky a nezaložil žádnou pomocnou evidenci.
+
+Výsledek:
+Pravidlo je samostatné. Zůstává v běžném měsíčním rytmu.
+```
+
+Slabší varianta:
+
+```text
+Druhá běžná správa:
+Správce pravidlo použil, ale pořád si ověřil kontext ve staré poznámce z lokálního dočištění.
+
+Problém:
+Kanonické místo neobsahuje dost jasnou hranici.
+
+Lokální oprava:
+Do rozcestníku doplňujeme jednu větu: "Slabý podnět nezakládej jako kartu změny, dokud neukazuje opakovaný dopad na rozhodnutí, zákaznickou zkušenost nebo datovou stopu."
+
+Co neotevíráme:
+Nový proces triáže podnětů, tabulku slabých signálů ani další mimořádnou kontrolu.
+```
+
+V obou případech zůstává druhá správa malá. Buď potvrdí samostatnost, nebo opraví poslední větu. Jakmile začne navrhovat novou strukturu, už neřeší uzavřené lokální dočištění, ale nové téma.
+
+### Privacy-first kontrola
+
+Druhá běžná správa je poslední vhodné místo pro úklid zbytkové evidence. Po první správě už měly zmizet dočasné stopy. Teď ověřte, jestli opravdu zmizely i z chování týmu. Nestačí, že tabulka není oficiální. Pokud do ní někdo pořád zapisuje, žije.
+
+Použijte tři řádky:
+
+```text
+Pravidlo používáme z:
+
+Už nepoužíváme:
+
+Žádná nová evidence nevzniká, protože:
+```
+
+Příklad:
+
+```text
+Pravidlo používáme z:
+Kanonického rozcestníku review šablon.
+
+Už nepoužíváme:
+Ověřovací poznámku, screenshot starého stavu ani pomocný seznam slabých podnětů.
+
+Žádná nová evidence nevzniká, protože:
+Rozhodnutí jde udělat podle pracovní věty a běžného měsíčního rytmu.
+```
+
+Privacy-first hodnota je tady velmi praktická. Když pravidlo funguje bez skryté evidence, nevznikají další osobní údaje, interní komentáře, exporty ani tabulky, které by někdo musel později vysvětlovat. Systém je menší a čitelnější. Což je přesně ten druh úspěchu, který nevypadá efektně na prezentaci, ale šetří nervy při každé další správě.
+
+Codyho komentář: druhá běžná správa je test, jestli tým umí nechat dobrou věc být. Pokud pravidlo funguje, nepřidávejte mu fitness náramek, deník pocitů a měsíční status report. Prostě ho nechte pracovat. Ano, radikální myšlenka.
+
+### Karta druhé běžné správy
+
+```text
+Lokální dočištění:
+
+Kanonické pracovní místo:
+
+Běžný správní rytmus:
+
+Co potvrdila první běžná správa:
+
+Druhá běžná správa:
+
+Použil člověk jen kanonické místo?
+- ano
+- ne, použil starou stopu
+- ne, potřeboval vysvětlení
+
+Byla pracovní věta samostatná?
+- ano
+- ne, chyběla hranice
+- ne, byla moc obecná
+
+Vznikla nebo přežila skrytá evidence?
+
+Výsledek:
+- pravidlo je samostatné
+- odstranit starou navigační stopu
+- zpřesnit jednu pracovní větu
+- založit nové téma mimo tuto správu
+
+Co zůstává v běžném rytmu:
+
+Co výslovně nepokračuje:
+
+Privacy-first úklid:
+Co mažeme, archivujeme nebo přestáváme používat:
+
+Vlastník kanonického místa:
+
+Datum další běžné správy:
+```
+
+Karta nemá sledovat každé další použití. Má potvrdit, že po dvou běžných správách už pravidlo nepotřebuje zvláštní pozornost. Pokud se později vrátí problém, vraťte ho přes návratový signál, ne přes nostalgii po staré opravě.
+
+### Mini workshop na 5 minut
+
+1. Minuta 1: otevřete kanonické pracovní místo a ověřte, jestli stačí samo.
+2. Minuta 2: přečtěte pracovní větu bez starého kontextu.
+3. Minuta 3: zkontrolujte, jestli nepřežívá skrytá evidence.
+4. Minuta 4: vyberte jeden výsledek druhé správy.
+5. Minuta 5: zapište, co zůstává v běžném rytmu a co už nepokračuje.
+
+Když během pěti minut nenajdete problém, nevyrábějte ho. Závěr je "pravidlo je samostatné". To je hotový výsledek, ne výzva k dalšímu hledání.
+
+### Checklist druhé běžné správy
+
+- Použil člověk pravidlo z kanonického pracovního místa?
+- Nepotřeboval starou ověřovací poznámku, autora opravy ani interní vysvětlení?
+- Je pracovní věta samostatná a dost konkrétní?
+- Zůstává oprava lokální, bez nového procesu okolo?
+- Nevznikla pomocná tabulka, štítek, připomínka ani další evidence?
+- Jsou staré odkazy, screenshoty a kopie interní komunikace odstraněné nebo archivované?
+- Je jasné, co zůstává v běžném rytmu?
+- Je jasné, co výslovně nepokračuje?
+- Pokud se objevil nový problém, má vlastní kartu a nenese starou historii?
+- Umí tým říct, kdy by se téma mělo vrátit přes návratový signál?
+
+Druhá běžná správa má ukončit mimořádnou pozornost kolem lokálního dočištění. Když pravidlo obstojí, nechte ho v klidu. Když neobstojí, opravte nejbližší větu nebo navigaci. A když se ukáže nový problém, založte ho čistě. Tak se z malých oprav nestává nekonečný systém péče a privacy-first provoz zůstává štíhlý.
+
 ## Pracovní log
 
+- 2026-06-28: Doplněna úvodní podkapitola o druhé běžné správě po uzavřeném lokálním dočištění: samostatnost pravidla, odstranění skryté evidence, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-28: Doplněna úvodní podkapitola o uzavření první běžné správy po návratu lokálního dočištění: uzavírací stavy, praktické příklady, privacy-first úklid dočasných stop, karta, mini workshop a checklist.
 - 2026-06-28: Doplněna úvodní podkapitola o první běžné správě po návratu lokálního dočištění: tři kontrolní otázky, výsledné stavy, praktické příklady, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-28: Doplněna úvodní podkapitola o návratu lokálního dočištění do běžné správy: běžný rytmus, pracovní věta, návratový signál, privacy-first úklid, karta, mini workshop a checklist.
