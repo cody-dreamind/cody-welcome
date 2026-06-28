@@ -265996,8 +265996,189 @@ Pokud workshop přeroste šest minut, zastavte ho a pojmenujte, co se stalo. Bu�
 
 Uzavření druhého review má zanechat pravidlo v klidné správě. Buď je stabilní, nebo má jednu malou opravu, nebo se nové téma oddělilo. V žádném z těchto stavů není potřeba držet starou smyčku otevřenou. Dobrá správa není nekonečné hlídání. Dobrá správa je schopnost poznat, kdy už stačí.
 
+## První klidový měsíc po uzavření druhého review
+
+Klidná správa se pozná až potom, co skončí viditelná péče. Dokud je pravidlo čerstvě po review, lidé si na něj dávají pozor, pamatují si poslední debatu a občas ho chrání víc, než by chránili běžnou práci. První klidový měsíc je proto jednoduchý test: vydrží pravidlo bez toho, aby kolem něj někdo držel mimořádný dohled?
+
+Nejde o další review. To je důležité. Pokud z prvního klidového měsíce uděláte novou kontrolní akci, právě jste klid zrušili. Smyslem je sledovat jen přirozené signály, které by se objevily tak jako tak: někdo pravidlo použije, někdo ho nenajde, někdo se zeptá na starý široký návrh, nebo se nestane vůbec nic. I nic je výsledek. V provozu je to často ten nejlepší.
+
+Začněte větou:
+
+```text
+Pravidlo je první měsíc v klidné správě; otevíráme ho jen při přirozeném návratovém signálu.
+```
+
+Tahle věta brání dvěma opačným chybám. První chyba je pokračovat v kontrole jen proto, že jsme zvyklí kontrolovat. Druhá chyba je zapomenout, že pravidlo má pořád hranici a návratový signál. Klidná správa není amnézie. Je to dohoda, že pravidlo žije v běžné práci a nevyrábí vlastní provozní stín.
+
+Codyho komentář: první klidový měsíc je produktový ekvivalent toho, když přestanete držet dveře, které už mají samozavírač. Pokud se zavřou samy, výborně. Pokud bouchnou lidem do nosu, opravte pant. Ale nestůjte tam měsíc s rukou na klice a netvrďte, že testujete architekturu.
+
+### Co klidový měsíc ověřuje
+
+První klidový měsíc ověřuje jen tři věci:
+
+- Pravidlo se používá z kanonického pracovního místa, ne ze staré paměti účastníků review.
+- Nevzniká skrytá pomocná evidence, protože se lidé pravidla pořád trochu bojí.
+- Původní široký návrh zůstává zavřený, dokud nepřijde domluvený návratový signál.
+
+První bod je test samostatnosti. Pokud pravidlo žije jen díky tomu, že ho někdo připomíná v chatu, není v klidné správě. Je v osobním dozoru. Oprava nemusí být velká: často stačí přesnější název v rozcestníku, jedna věta v šabloně nebo odstranění starého odkazu, který lidi vede do historické karty.
+
+Druhý bod je privacy-first test. Po review lidé někdy začnou "pro jistotu" ukládat příklady, dělat screenshoty, držet pomocné tabulky nebo označovat poptávky ručním štítkem. To vypadá odpovědně, ale pokud to nebylo součástí rozhodnutí, vzniká nová datová stopa bez účelu. Klidný měsíc má ukázat, že pravidlo nepotřebuje další data, aby mohlo fungovat.
+
+Třetí bod chrání rozsah. Pokud se během měsíce objeví věta "když už to funguje v e-mailu, dáme to rovnou do formuláře", nejde o přirozený provoz. Jde o návrat starého širokého návrhu bez nového důkazu. Takový podnět zapište jako neotevřený, pokud nesplňuje návratový signál.
+
+### Čtyři výsledky klidového měsíce
+
+Na konci měsíce vyberte jeden stav:
+
+- Klid drží: pravidlo se použilo nebo nepoužilo bez mimořádné péče a nevznikla nová stopa.
+- Chybí drobná kotva: pravidlo je správné, ale jednou se hledalo na špatném místě.
+- Vznikla skrytá evidence: lidé začali sbírat pomocné poznámky, štítky nebo kopie.
+- Přišel skutečný návratový signál: objevila se situace, která odpovídá domluvené hranici návratu.
+
+`Klid drží` znamená, že neděláte nic. Neotevíráte další optimalizaci, nevyrábíte oslavný zápis a nepřidáváte další kontrolu. Stačí jedna věta v pracovním logu nebo v provozním záznamu pravidla: první klidový měsíc bez mimořádného zásahu.
+
+`Chybí drobná kotva` opravte tam, kde se problém objevil. Pokud člověk hledal pravidlo přes obchodní rozcestník, přidejte odkaz do rozcestníku. Pokud narazil na starý název, přejmenujte odkaz. Nedělejte z toho nové review. Oprava má být menší než samotná chyba.
+
+`Vznikla skrytá evidence` je varovný stav. Nejdřív ji zastavte a ukliďte, potom zjistěte, proč vznikla. Lidé si často vedou pomocné poznámky, když pravidlo není dost rozhodnutelné nebo když se bojí, že později neobhájí svůj postup. To se řeší lepší pracovní větou, ne novou databází.
+
+`Přišel skutečný návratový signál` znamená, že klid se přerušuje jen v domluveném rozsahu. Neotevírá se celá historie. Otevře se karta návratu s konkrétním pracovním místem, důkazem a nejmenším dalším krokem.
+
+### Praktický příklad
+
+Uzavřené pravidlo:
+
+```text
+U relevantní poptávky lze v potvrzovacím e-mailu položit volitelnou otázku na rámcový rozpočet, pokud bez něj nejde navrhnout další krok. Formulář, scoring a nový export zůstávají zavřené.
+```
+
+První klidový měsíc:
+
+```text
+Použití:
+Dvě relevantní poptávky přišly bez rozpočtu. Obchod použil volitelnou otázku v e-mailu u jedné z nich, u druhé nebyla potřeba.
+
+Co se nestalo:
+Nevznikl CRM štítek, pomocná tabulka ani seznam poptávek bez rozpočtu. Nikdo neotevřel změnu formuláře.
+
+Stav:
+Klid drží.
+
+Další krok:
+Žádný. Pravidlo zůstává v běžné správě.
+```
+
+Slabší varianta:
+
+```text
+Použití:
+Nový člověk pravidlo nenašel v obchodním rozcestníku a ptal se v chatu.
+
+Stav:
+Chybí drobná kotva.
+
+Lokální oprava:
+Do obchodního rozcestníku přidáváme odkaz na existující potvrzovací šablonu.
+
+Co neotevíráme:
+Review pravidla, změnu formuláře, scoring ani novou evidenci poptávek.
+```
+
+Obě varianty jsou dobré, pokud zůstanou malé. První potvrzuje klid. Druhá opravuje cestu ke klidu. Ani jedna nepotřebuje nový projekt.
+
+### Privacy-first kontrola
+
+Privacy-first otázka pro první klidový měsíc zní:
+
+```text
+Začalo kvůli pravidlu vznikat něco, co při uzavření druhého review nemělo vznikat?
+```
+
+Hledejte drobnosti. Nejen nový nástroj nebo integraci, ale i pomocný sloupec, export, interní komentář s osobním údajem, screenshot poptávky, kopii e-mailu v poznámce nebo ruční štítek. Právě tyhle malé stopy často přežijí nejdéle, protože nejsou dost velké na formální rozhodnutí a dost viditelné na pravidelný úklid.
+
+Pokud stopa vznikla, napište:
+
+```text
+Stopa vznikla kvůli:
+
+Je nutná pro další rozhodnutí:
+- ano
+- ne
+
+Co s ní děláme:
+- mazat
+- anonymizovat
+- sloučit do obecné věty
+- ponechat s vlastníkem a retencí
+```
+
+Výchozí odpověď má být mazat nebo vůbec nezakládat. Ponechání je výjimka, která potřebuje účel. Pokud si tým neumí říct, kdo údaj používá a kdy skončí, údaj nemá v klidné správě co dělat.
+
+### Karta prvního klidového měsíce
+
+```text
+Pravidlo:
+
+Kanonické pracovní místo:
+
+Datum uzavření druhého review:
+
+Období prvního klidového měsíce:
+
+Přirozená použití nebo podněty:
+
+Vznikla mimořádná péče?
+- ne
+- ano, jaká:
+
+Vznikla skrytá evidence nebo pomocná datová stopa?
+- ne
+- ano, jaká:
+
+Výsledek:
+- klid drží
+- chybí drobná kotva
+- vznikla skrytá evidence
+- přišel skutečný návratový signál
+
+Lokální oprava, pokud existuje:
+
+Co výslovně neotevíráme:
+
+Co mažeme, anonymizujeme nebo přestáváme sbírat:
+
+Další stav pravidla:
+```
+
+Kartu nevyplňujte preventivně každý týden. Stačí ji použít na konci prvního klidového měsíce nebo ve chvíli, kdy se objeví přirozený podnět. Pokud se nestane nic, karta může být velmi krátká. Ticho v provozu není prázdné místo, které musíte zaplnit textem.
+
+### Mini workshop na 5 minut
+
+1. Minuta 1: přečtěte jednovětý závěr z uzavření druhého review.
+2. Minuta 2: pojmenujte přirozená použití nebo napište, že žádná nebyla.
+3. Minuta 3: zkontrolujte, zda nevznikla skrytá evidence.
+4. Minuta 4: vyberte jeden výsledek klidového měsíce.
+5. Minuta 5: zapište, co neotevíráte a jaký je další stav pravidla.
+
+Pokud workshop potřebuje víc než pět minut, nejspíš už neřešíte klidový měsíc. Buď se objevil skutečný návratový signál, nebo pravidlo nemá dost jasné pracovní místo. V obou případech neprodlužujte workshop. Založte menší kartu pro konkrétní problém.
+
+### Checklist prvního klidového měsíce
+
+- Víme, že nejde o další review, ale o kontrolu přirozených signálů?
+- Použilo se pravidlo z kanonického pracovního místa, ne z paměti lidí?
+- Nevznikla mimořádná péče, kterou nikdo neschválil?
+- Nevznikla pomocná evidence, štítek, export, tabulka nebo kopie dat?
+- Pokud něco vzniklo, víme proč a uklidili jsme to?
+- Zůstal původní široký návrh zavřený?
+- Pokud přišel návratový signál, odpovídá domluvené hranici?
+- Pokud chyběla kotva, opravili jsme jen nejbližší pracovní místo?
+- Je další stav pravidla jasný jednou větou?
+- Umíme nechat pravidlo dál v klidu bez další kontroly?
+
+První klidový měsíc má potvrdit, že tým umí nechat funkční pravidlo na pokoji. To je podceňovaná dovednost. Web, SaaS i marketing se dají donekonečna zlepšovat, ale dobrý privacy-first provoz potřebuje i schopnost neotevřít další sběr dat, další kontrolu a další malou výjimku jen proto, že máme chuť být důkladní. Důkladnost bez hranice je jen pomalý způsob, jak si zaplnit systém.
+
 ## Pracovní log
 
+- 2026-06-28: Doplněna úvodní podkapitola o prvním klidovém měsíci po uzavření druhého review: přirozené signály, výsledkové stavy, praktické příklady, privacy-first kontrola skryté evidence, karta, mini workshop a checklist.
 - 2026-06-28: Doplněna úvodní podkapitola o uzavření druhého běžného review do klidné správy: čtyři uzavírací stavy, praktické příklady, privacy-first úklid podkladů, karta, mini workshop a checklist.
 - 2026-06-28: Doplněna úvodní podkapitola o uzavření prvního běžného review po převodu do stabilní správy: čtyři uzavírací stavy, praktické příklady, privacy-first uzavření datové stopy, karta, mini workshop a checklist.
 - 2026-06-28: Doplněna úvodní podkapitola o prvním běžném review po převodu do stabilní správy: kontrolní otázky, tři výsledky review, praktické příklady, privacy-first kontrola datové stopy, karta, mini workshop a checklist.
