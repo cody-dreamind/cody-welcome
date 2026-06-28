@@ -265201,8 +265201,154 @@ Když se workshop zasekne, vraťte se k otázce použitelnosti. Neřešte, jestl
 
 Uzavření druhého běžného použití je dobré místo, kde přestat být statečně pečliví. Pokud pravidlo funguje, nechte ho pracovat. Pokud nefunguje, opravte jednu nejbližší věc. A pokud kolem něj začala vznikat data bez účelu, ukliďte je dřív, než se z nich stane tradice. Tradice bez účelu je jen starý workaround s lepším PR.
 
+## Převod uzavřeného druhého použití do stabilní běžné správy
+
+Po uzavření druhého běžného použití má tým poslední lákavou možnost všechno ještě jednou zkontrolovat. Právě tady je dobré být podezřele klidný. Dvě běžná použití už ukázala, jestli pravidlo stojí na vlastních nohách, jestli je najitelné v pracovním místě a jestli kolem něj nevzniká nový sběr dat. Další mimořádná péče má smysl jen tehdy, když přinesla konkrétní návratový signál. Jinak se z péče stává provozní zvyk, který už nic neověřuje.
+
+Stabilní běžná správa znamená tři věci. Pravidlo žije tam, kde se opravdu používá. Historická karta zůstává dohledatelná, ale neřídí každodenní práci. A další kontrola nevzniká podle kalendářního neklidu, ale podle návratového signálu. To je rozdíl mezi živým pravidlem a dokumentem, který si tým pravidelně připomíná jen proto, aby měl pocit, že se o něj stará.
+
+Převod začněte větou:
+
+```text
+Pravidlo po druhém běžném použití převádíme do stabilní běžné správy, protože fungovalo bez čerstvé paměti, bez nového sběru dat a bez návratu původního širokého návrhu.
+```
+
+Pokud takovou větu nedokážete napsat, převod ještě není hotový. Možná chybí pracovní kotva, možná pravidlo stále potřebuje člověka, který ho vysvětlí, nebo kolem něj zůstala pomocná evidence. V takovém případě neotevírejte novou velkou kapitolu. Dokončete jednu lokální opravu a teprve potom převádějte do správy.
+
+### Co se při převodu mění
+
+Převod do běžné správy mění režim práce, ne nutně obsah pravidla. Tým už nemá držet zvláštní pozornost nad tím, jestli pravidlo přežije návrat. Má ho používat jako součást běžného pracovního místa.
+
+Změní se hlavně pět věcí:
+
+- Mimořádná karta přestává být aktivním řídicím místem.
+- Pracovní věta se nachází u formuláře, šablony, checklistu, obchodního skriptu nebo runbooku.
+- Návratový signál je krátký, měřitelný a dohledatelný bez čtení celé historie.
+- Dočasné poznámky, kopie a pomocné tabulky se mažou nebo slučují do kanonického místa.
+- Běžná správa má vlastníka, ale nemá novou pravidelnou schůzku jen kvůli sobě.
+
+To poslední je důležité. Vlastník není člověk, který má pravidlo donekonečna hlídat. Je to člověk, který ví, kde pravidlo žije, jaký signál ho znovu otevře a co se nesmí nenápadně přidat do datové stopy. Když se nic neděje, vlastník nic nevyrábí. Překvapivě pokročilá forma práce.
+
+Codyho komentář: stabilní správa je test důvěry ve vlastní závěr. Pokud po dvou běžných použitích pořád potřebujete další kontrolu pro jistotu, možná neověřujete pravidlo, ale uklidňujete tým. To je lidské. Jen z toho nedělejte proces, protože procesy neumí poznat, kdy už jen hladí nervozitu po hlavě.
+
+### Praktický příklad
+
+```text
+Uzavřené druhé běžné použití:
+Jiný obchodník našel rozhodovací větu u potvrzovací šablony a rozhodl bez původního autora.
+
+Pravidlo:
+Na rámec rozpočtu se ptej jen u relevantní poptávky, kde bez této informace nejde navrhnout další konkrétní krok.
+
+Co převádíme do běžné správy:
+Jednu větu u potvrzovací šablony a krátkou poznámku v obchodním checklistu.
+
+Co zavíráme:
+Mimořádnou kartu návratového signálu, dočasnou kontrolní poznámku a nápad na plošný rozpočtový atribut v CRM.
+
+Návratový signál:
+K tématu se vrátíme pouze pokud tři relevantní poptávky za sebou nepůjdou kvalifikovat bez ručního doptání na rozpočet.
+
+Vlastník:
+Člověk odpovědný za obchodní šablony.
+```
+
+Tady převod neznamená, že se pravidlo přestane používat. Znamená, že přestane mít speciální režim. Když obchodník příště řeší poptávku, nepotřebuje otevřít historickou kartu. Stačí mu věta u šablony. Když se objeví tři problematické poptávky za sebou, tým má jasný signál k návratu. Mezi tím není potřeba nic sledovat navíc.
+
+Slabší varianta převodu vypadá takto:
+
+```text
+Problém:
+Pravidlo fungovalo, ale zůstaly dvě kopie rozhodovací věty: jedna u šablony a druhá ve staré kartě s trochu jiným zněním.
+
+Malá oprava před převodem:
+Kanonická věta zůstává u šablony. Starou kartu necháváme jako historii a dopisujeme do ní odkaz na aktuální pracovní místo.
+
+Co neotevíráme:
+Nové školení, úpravu formuláře ani další kontrolní průchod.
+```
+
+Taková oprava je správně malá. Problém není v pravidle, ale v duplicitě. Duplicita se neřeší workshopem. Řeší se tím, že určíte, která věta je živá a která je historická.
+
+### Stabilní správa bez tichého dohledu
+
+Nejčastější chyba po převodu je tichý dohled. Tým sice řekne, že pravidlo je v běžné správě, ale někdo si bokem nechá pomocnou tabulku, štítek, seznam výjimek nebo export "pro jistotu". Takový dohled je nebezpečný právě proto, že nevypadá jako nová funkcionalita. Nikdo neprosadil nový nástroj, nikdo neudělal velký datový projekt. Jen se začaly ukládat drobnosti.
+
+Stabilní správa má proto obsahovat negativní větu:
+
+```text
+V běžné správě nevedeme samostatnou evidenci použití pravidla; záznam vzniká pouze při návratovém signálu nebo při lokální opravě pracovního místa.
+```
+
+Negativní věta není byrokracie. Je to plot kolem datové stopy. Když někdo za měsíc navrhne "jen malý přehled", tým vidí, že tím mění režim správy. Možná k tomu bude dobrý důvod, ale musí ho pojmenovat.
+
+U privacy-first provozu je tahle hranice praktická. Jestli pravidlo pomáhá bez nové evidence, není důvod vyrábět nový datový proud. Jestli bez evidence nepomáhá, pravděpodobně nejde o stabilní pravidlo, ale o stále otevřené rozhodování.
+
+### Karta převodu do stabilní běžné správy
+
+```text
+Uzavřené druhé běžné použití:
+
+Výsledek uzavření:
+- vrátit pravidlo do běžného rytmu
+- poslední lokální oprava dokončena
+- nový podnět oddělen
+- zbytečná evidence zavřena
+
+Kanonické pracovní místo:
+
+Přesná pracovní věta:
+
+Historická karta zůstává kde:
+
+Co z historie nepřenášíme do běžné práce:
+
+Co výslovně dál nesledujeme:
+
+Co mažeme, slučujeme nebo archivujeme:
+
+Návratový signál:
+
+Vlastník běžné správy:
+
+Kdy se pravidlo kontroluje:
+- pouze při návratovém signálu
+- při nejbližším běžném review pracovního místa
+- jinak:
+```
+
+Karta nemá být další dokument vedle pravidla. Má sloužit jako přechodový záznam. Jakmile je pracovní věta v kanonickém místě a dočasné stopy jsou uklizené, běžná práce má používat pracovní místo, ne kartu převodu.
+
+Pokud potřebujete kartu převodu otevírat při každém použití, převod selhal. Pravděpodobně je pracovní věta moc dlouhá, kanonické místo je špatně zvolené, nebo návratový signál není dost konkrétní.
+
+### Mini workshop na 5 minut
+
+1. Minuta 1: přečtěte uzavírací větu druhého běžného použití.
+2. Minuta 2: určete jedno kanonické pracovní místo.
+3. Minuta 3: přepište pravidlo do jedné pracovní věty.
+4. Minuta 4: zrušte nebo archivujte dočasné stopy.
+5. Minuta 5: napište návratový signál a negativní větu proti tichému dohledu.
+
+Pokud během pěti minut neumíte určit kanonické místo, nepřevádějte pravidlo do stabilní správy. Nejbližší práce není další ověření pravidla, ale výběr místa, kde má pravidlo opravdu žít. Bez místa bude pravidlo pořád cestovat mezi lidmi, kartami a vzpomínkami.
+
+### Checklist převodu do stabilní správy
+
+- Je druhé běžné použití uzavřené jedním jasným stavem?
+- Má pravidlo jedno kanonické pracovní místo?
+- Je pracovní věta kratší než vysvětlení historie?
+- Víme, která karta je už jen historická?
+- Propsali jsme do pracovního místa jen to, co člověk potřebuje při rozhodování?
+- Nepřenášíme do běžné práce staré příklady, které už nejsou nutné?
+- Zrušili jsme pomocné tabulky, štítky, screenshoty, kopie odpovědí a kontrolní poznámky bez další rozhodovací hodnoty?
+- Je napsané, co výslovně dál nesledujeme?
+- Má pravidlo návratový signál, který lze poznat bez čtení celé historie?
+- Má běžná správa vlastníka bez toho, aby vznikla nová schůzka nebo report?
+
+Převod do stabilní běžné správy je hotový ve chvíli, kdy pravidlo umí zmizet z mimořádné pozornosti a přitom zůstat použitelné. To je nenápadná, ale důležitá dovednost. Dobré pravidlo nemá být pořád na očích. Má být přesně tam, kde ho člověk potřebuje, a zbytek času neotravovat.
+
 ## Pracovní log
 
+- 2026-06-28: Doplněna úvodní podkapitola o převodu uzavřeného druhého použití do stabilní běžné správy: kanonické pracovní místo, negativní věta proti tichému dohledu, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-28: Doplněna úvodní podkapitola o uzavření druhého běžného použití po uzavřeném prvním návratovém signálu: čtyři uzavírací stavy, praktické příklady, privacy-first úklid datové stopy, karta, mini workshop a checklist.
 - 2026-06-27: Doplněna úvodní podkapitola o druhém běžném použití po uzavřeném prvním návratovém signálu: přenositelnost pravidla, najitelnost pracovní kotvy, zastavení návratu starého rozsahu, privacy-first kontrola datové stopy, karta, mini workshop a checklist.
 - 2026-06-27: Doplněna úvodní podkapitola o uzavření prvního běžného použití po uzavřeném prvním návratovém signálu: čtyři uzavírací stavy, praktické příklady, privacy-first uzavření datové stopy, karta, mini workshop a checklist.
