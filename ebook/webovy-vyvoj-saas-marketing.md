@@ -11941,6 +11941,8 @@ Vlastník:
 
 Drobné tření je užitečné, když zůstane drobné. Opravte nejbližší místo, ověřte při dalším běžném použití a nenechte starou epizodu znovu zabrat prostor, který si nezaslouží.
 
+Pokud při úpravě vznikne chuť přidat ještě "malé vysvětlení navíc", napište ho nejdřív jako otázku: jaké rozhodnutí by bez této věty čtenář udělal špatně? Pokud žádné neumíte pojmenovat, věta do rukopisu nepatří. Patří nanejvýš do poznámek pro příští review. To je malá, ale užitečná redakční brzda: text se nezkracuje jen škrtáním, ale i tím, že se nové věty musí zasloužit o místo.
+
 ## Jak uzavřít drobnou úpravu po první běžné údržbě
 
 Drobné tření po první běžné údržbě má mít krátký život. Pokud jste opravili odkaz, doplnili jednu pracovní větu, přejmenovali položku v rozcestníku nebo přidali vlastníka k existujícímu rytmu, další krok nemá být nové review celé oblasti. Další krok má ověřit, jestli se konkrétní tření při běžném použití ztratilo.
@@ -266556,6 +266558,7 @@ Druhý klidový měsíc je dobrý konec pro většinu malých pravidel. Pokud dr
 
 ## Pracovní log
 
+- 2026-06-28: Doplněna krátká redakční brzda k drobnému tření po první běžné údržbě: nová věta se má přidat jen tehdy, když zabrání konkrétnímu špatnému rozhodnutí.
 - 2026-06-28: Doplněna úvodní podkapitola o druhém klidovém měsíci v tiché správě: přenositelnost bez čerstvé paměti, návrat zavřeného rozsahu bokem, privacy-first kontrola náhražek, karta, mini workshop a checklist.
 - 2026-06-28: Doplněna úvodní podkapitola o uzavření prvního klidového měsíce do tiché správy: tři uzavírací stavy, praktické příklady, privacy-first úklid pomocných stop, karta, mini workshop a checklist.
 - 2026-06-28: Doplněna úvodní podkapitola o prvním klidovém měsíci po uzavření druhého review: přirozené signály, výsledkové stavy, praktické příklady, privacy-first kontrola skryté evidence, karta, mini workshop a checklist.
