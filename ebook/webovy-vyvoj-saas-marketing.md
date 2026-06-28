@@ -267038,6 +267038,168 @@ Když workshop nestačí na šest minut, pravděpodobně neuzavíráte připomen
 
 Uzavření ročního připomenutí je malý akt provozní dospělosti. Říká: pravidlo jsme zkontrolovali, víme, kde žije, víme, kdy se k němu vrátit, a zároveň jsme si nevyrobili další práci jen proto, že jsme byli pečliví. To je pro web, SaaS i marketing velmi praktická forma disciplíny. Není blyštivá. Ale funguje. Což je v provozu podezřele užitečná vlastnost.
 
+## Jak uzavřít lokální dočištění po prvním běžném ověření
+
+Lokální dočištění je poslední malá úprava, která vznikne po prvním běžném ověření malého kroku. Změna v zásadě funguje, ale jedno místo ještě trochu drhne: chybí věta, odkaz je moc daleko, šablona používá starší název, nebo člověk při předání pořád musí dodat drobné vysvětlení. Tohle není návrat k velkému tématu. Je to servisní dotažení stejného pracovního místa.
+
+Riziko lokálního dočištění je v tom, že se tváří nevinně. "Jen ještě upravíme jednu větu" se snadno promění v "když už jsme u toho, projdeme celý proces". Proto má dočištění potřebovat vlastní malé uzavření. Ne proto, aby vznikla další administrativa, ale aby se tým ujistil, že oprava zůstala lokální, neotevřela starý rozsah a nepřidala novou datovou stopu.
+
+Začněte větou:
+
+```text
+Lokální dočištění uzavíráme, protože:
+```
+
+Potom napište konkrétní výsledek:
+
+```text
+Lokální dočištění uzavíráme, protože upravená věta v potvrzovací zprávě už jasně říká, kdy zákazník dostane další odpověď, a obchod ji při další relevantní poptávce nemusel vysvětlovat ručně.
+```
+
+Taková věta říká tři věci najednou: co se dočistilo, kde se to ověřilo a proč není potřeba pokračovat. Pokud některá část chybí, lokální dočištění ještě není uzavřené. Možná je oprava hotová v souboru, ale ne v provozu.
+
+### Tři možné konce
+
+Po lokálním dočištění vyberte jeden ze tří stavů:
+
+- Dočištění stačilo: stejné pracovní místo už člověka vede správně a pravidlo se vrací do běžného rytmu.
+- Dočištění nestačilo: stejné místo pořád mate a další pokus už potřebuje novou stop podmínku.
+- Dočištění ukázalo širší vzor: podobné tření se objevilo i jinde a nejde ho poctivě řešit jako jednu větu.
+
+Stav `dočištění stačilo` je konec. Neplánujte další kontrolu jen proto, že se něco zlepšilo. Pokud změna prošla prvním běžným použitím, má se vrátit do normální práce.
+
+Stav `dočištění nestačilo` používejte opatrně. Jedna další lokální oprava může dávat smysl, ale jen se stop podmínkou. Například: "Pokud se stejná nejasnost objeví i po dalším použití, už nebudeme upravovat větu, ale otevřeme otázku, jestli potvrzovací zpráva vůbec nese správný slib."
+
+Stav `širší vzor` znamená, že dočištění objevilo systémovější problém. V takové chvíli nepokračujte tichým přepisováním dalších míst. Založte novou pracovní otázku, pojmenujte společný vzor a napište, co z původního malého kroku zůstává zavřené.
+
+### Praktický příklad
+
+```text
+Uzavřený malý krok:
+Potvrzovací zpráva po formuláři nově odděluje audit od navazující implementace.
+
+První běžné ověření:
+Zájemce rozdíl pochopil, ale ptal se, kdy přijde další odpověď.
+
+Lokální dočištění:
+Do potvrzovací zprávy doplníme větu: "Do dvou pracovních dnů se ozveme s návrhem dalšího kroku."
+
+Další běžné použití:
+Nová relevantní poptávka odpověděla bez doptání na termín.
+
+Výsledek:
+Dočištění stačilo.
+
+Co zůstává zavřené:
+Ceník, obchodní skript, další formulářová pole a nové měření.
+```
+
+Tento zápis je malý, ale užitečný. Neřeší celou obchodní cestu. Jen potvrzuje, že poslední drobná oprava splnila účel a že širší rozsah nemá nové oprávnění.
+
+Slabší výsledek:
+
+```text
+Další běžné použití:
+Zájemce pochopil rozdíl auditu a implementace, ale odpověď týmu se zpozdila a obchod musel ručně vysvětlovat interní kapacitu.
+
+Výsledek:
+Dočištění ukázalo širší vzor.
+
+Nová otázka:
+Kde má zákazník vidět očekávání navazující kapacity a kdo drží slib termínu odpovědi?
+
+Co neotevíráme:
+Neotevíráme znovu rozdíl auditu a implementace. Ten je v potvrzovací zprávě dostatečně jasný.
+```
+
+Tady už problém není v jedné větě potvrzovací zprávy. Je v provozním slibu. To je jiná otázka a zaslouží si vlastní hranici.
+
+### Privacy-first uzavření
+
+Lokální dočištění má mít minimální datovou stopu. Většinou nepotřebujete ukládat celé e-maily, jména zákazníků, screenshoty CRM ani kopie interních poznámek. Stačí závěr, že opravené místo pomohlo nebo nepomohlo.
+
+Použijte tři řádky:
+
+```text
+Ponecháváme:
+
+Nepřenášíme:
+
+Další sledování:
+```
+
+Příklad:
+
+```text
+Ponecháváme:
+Závěr, že doplněná věta o termínu odpovědi snížila doptávání u další relevantní poptávky.
+
+Nepřenášíme:
+Celý e-mail zákazníka, kontaktní údaje ani interní obchodní poznámky.
+
+Další sledování:
+Neplánujeme. Téma se vrátí jen při opakování stejné nejasnosti.
+```
+
+Privacy-first hodnota je v tom, že tým získá paměť bez zbytečných kopií dat. Závěr zůstane použitelný, ale surové podklady nezískají druhý život v další pracovní vrstvě.
+
+### Karta uzavření lokálního dočištění
+
+```text
+Původní malý krok:
+
+První běžné ověření ukázalo:
+
+Lokální dočištění:
+
+Další běžné použití:
+
+Výsledek:
+- dočištění stačilo
+- dočištění nestačilo
+- ukázalo širší vzor
+
+Co se propsalo do pracovního místa:
+
+Co výslovně neotevíráme:
+
+Pokud nestačilo, nová stop podmínka:
+
+Pokud jde o širší vzor, nová pracovní otázka:
+
+Privacy-first uzavření:
+Ponecháváme:
+Nepřenášíme:
+Další sledování:
+
+Vlastník:
+```
+
+### Mini workshop na 5 minut
+
+1. Minuta 1: přečtěte původní malý krok a lokální dočištění.
+2. Minuta 2: pojmenujte další běžné použití, na kterém se dočištění ověřilo.
+3. Minuta 3: vyberte jeden ze tří výsledků.
+4. Minuta 4: napište, co zůstává zavřené.
+5. Minuta 5: udělejte privacy-first uzavření a rozhodněte, jestli další sledování končí.
+
+Když se během pěti minut objeví nová širší otázka, neřešte ji uvnitř dočištění. Zapište ji zvlášť. Lokální dočištění má zavřít poslední malou opravu, ne stát se zadním vchodem do nového projektu.
+
+### Checklist lokálního dočištění
+
+- Navazuje dočištění na jedno konkrétní první běžné ověření?
+- Opravovalo stejné pracovní místo, ne širší proces?
+- Proběhlo další běžné použití bez umělého auditu?
+- Vybrali jsme stav: stačilo, nestačilo, nebo širší vzor?
+- Pokud stačilo, končí mimořádná péče?
+- Pokud nestačilo, má další pokus stop podmínku?
+- Pokud jde o širší vzor, vznikla nová pracovní otázka s hranicí?
+- Je jasné, co zůstává výslovně zavřené?
+- Nepřenášíme osobní údaje, celé zprávy, screenshoty ani exporty mimo původní systém?
+- Má závěr místo, kde ho další člověk při práci najde?
+
+Uzavřené lokální dočištění je dobrý konec malé smyčky. Pravidlo se vrátilo do běžné práce, starý rozsah zůstal zavřený a tým po sobě nenechal zbytečné datové stopy. Přesně takhle má vypadat praktická drobná změna: užitečná, dohledatelná a bez dramatu.
+
 ## Pracovní log
 
 - 2026-06-28: Doplněna úvodní podkapitola o uzavření ročního připomenutí do dalšího roku: uzavírací věty, praktický příklad, privacy-first úklid, karta, mini workshop a checklist.
@@ -268336,3 +268498,4 @@ Uzavření ročního připomenutí je malý akt provozní dospělosti. Říká: 
 - 2026-06-26: Doplněna úvodní podkapitola o prvním ročním review stabilního pravidla: pět kontrolních průchodů, výsledkové stavy, privacy-first kontrola datové stopy, karta, mini workshop a checklist.
 - 2026-06-28: Doplněna úvodní podkapitola o druhém běžném review po uzavřeném prvním review: samostatnost pravidla, skrytá evidence, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-06-28: Doplněna krátká úvodní poznámka, aby hranice dalšího kroku musela jít popsat jedním pracovním místem a jedním očekávaným výsledkem.
+- 2026-06-28: Doplněna úvodní podkapitola o uzavření lokálního dočištění po prvním běžném ověření: tři výsledné stavy, praktické příklady, privacy-first uzavření, karta, mini workshop a checklist.
