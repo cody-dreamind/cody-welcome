@@ -268899,8 +268899,226 @@ Pokud se během workshopu začne probírat, kdo měl co vědět, vraťte diskusi
 
 První návrat po dlouhodobém klidu je hotový, když tým ví, jestli se starý problém opravdu vrátil, a udělal jen odpovídající malou reakci. Někdy to bude lokální úprava pracovní věty. Někdy jen navigační údržba. Někdy žádná akce. Všechny tři výsledky jsou v pořádku, pokud za nimi zůstane jasné rozhodnutí, čisté pracovní místo a žádný nový dohled "pro jistotu".
 
+## Uzavření prvního návratu po dlouhodobém klidu lokálního dočištění
+
+První návrat po dlouhodobém klidu se nesmí nechat viset jako nová mimořádná péče. Jakmile tým rozlišil, jestli šlo o návratový signál, běžný podnět nebo údržbové tření, musí z toho vzniknout uzavření. Ne velké shrnutí. Ne nový provozní režim. Jen jasná věta, co se stalo s klidem, co se případně opravilo a kdy se téma smí znovu otevřít.
+
+Uzavírací věta může znít:
+
+```text
+První návrat po dlouhodobém klidu uzavíráme takto:
+```
+
+Za ní patří jeden ze čtyř stavů:
+
+- Klid pokračuje: signál se nepotvrdil a nebyla potřeba žádná změna.
+- Klid pokračuje po lokální údržbě: pravidlo drželo, jen se opravila navigace, příklad nebo formulace.
+- Otevřený malý krok je uzavřený: návratový signál se potvrdil, proběhla úzká oprava a mimořádná péče končí.
+- Vzniká nové téma: ukázalo se, že nejde o návrat staré větve, ale o jiný problém s vlastním pracovním místem.
+
+Největší riziko je pátý, nepojmenovaný stav: "ještě to budeme chvíli sledovat". Ten zní rozumně, ale často jen obnoví dočasný dohled, který měl být dávno pryč. Pokud potřebujete sledovat, napište přesně co, jak dlouho a proč nestačí běžný návratový signál. Pokud to napsat neumíte, nesledujte. Ano, je to skoro nechutně jednoduché.
+
+### Praktický příklad klidu bez změny
+
+```text
+První návrat po dlouhodobém klidu uzavíráme takto:
+Klid pokračuje.
+
+Co se stalo:
+Jeden editor se zeptal, jestli má slabý podnět zavřít nebo založit kartu změny.
+
+Vyhodnocení:
+Situace neodpovídá návratovému signálu. Nešlo o tři špatně založené karty ani o opakované nejasné rozhodnutí.
+
+Co děláme:
+Nic neměníme.
+
+Co neotevíráme:
+Lokální dočištění, nové školení, review šablon ani sledování rozhodnutí editorů.
+
+Návrat:
+Téma zůstává v dlouhodobém klidu a otevře se jen při původním návratovém signálu.
+```
+
+Tohle je legitimní výsledek. Jedna otázka člověka není selhání systému. Pokud pravidlo žije dost blízko práci a člověk se rychle rozhodl, není co opravovat.
+
+### Praktický příklad lokální údržby
+
+```text
+První návrat po dlouhodobém klidu uzavíráme takto:
+Klid pokračuje po lokální údržbě.
+
+Co se stalo:
+Nový editor našel pravidlo až přes starou poznámku, ne přes aktuální rozcestník.
+
+Vyhodnocení:
+Nejde o návrat původního problému, ale o navigační tření.
+
+Co se opravilo:
+Do onboardingového seznamu pro editory byl doplněn odkaz na kanonický rozcestník.
+
+Co neotevíráme:
+Změnu rozhodovací věty, revizi všech šablon ani zvláštní kontrolu používání pravidla.
+
+Návrat:
+Téma zůstává v dlouhodobém klidu. Pokud se znovu objeví tři špatně založené karty bez dopadu, otevře se podle původního signálu.
+```
+
+Lokální údržba má skončit tam, kde vznikla. Přidat odkaz do onboardingu je v pořádku. Dělat z toho "program adopce pravidla" už je jen firemní způsob, jak z jednoho chybějícího odkazu vyrobit poradu, tabulku a pocit falešné důležitosti.
+
+### Praktický příklad uzavřeného malého kroku
+
+```text
+První návrat po dlouhodobém klidu uzavíráme takto:
+Otevřený malý krok je uzavřený.
+
+Návratový signál:
+Tři slabé podněty za sebou skončily jako nové karty změny bez dopadu a bez jasného pracovního místa.
+
+Nejmenší krok:
+Do úvodní věty karty změny byla doplněna podmínka: karta vzniká až ve chvíli, kdy má podnět dopad, pracovní místo nebo potvrzený návratový signál.
+
+Ověření:
+Při dalším běžném review byl jeden slabý podnět správně zavřený bez nové karty.
+
+Co končí:
+Mimořádná pozornost k tomuto návratu.
+
+Co neotevíráme:
+Širší audit změnových karet, skórování podnětů, evidenci lidí ani nové pravidelné reporty.
+
+Návrat:
+Téma se vrací do dlouhodobého klidu s upravenou pracovní větou.
+```
+
+Tady se starý problém opravdu vrátil, ale odpověď zůstala malá. Důležitý je konec mimořádné pozornosti. Pokud po opravě dál držíte zvláštní kontrolu, ve skutečnosti jste návrat neuzavřeli. Jen jste mu dali pohodlnější židli.
+
+### Praktický příklad nového tématu
+
+```text
+První návrat po dlouhodobém klidu uzavíráme takto:
+Vzniká nové téma.
+
+Co se stalo:
+Podněty se nezasekly na slabé kartě změny, ale na tom, že obchodní follow-up nemá vlastní pravidlo pro rozhodnutí "teď nezjišťovat rozpočet".
+
+Vyhodnocení:
+Nejde o návrat lokálního dočištění v review šablonách. Problém vzniká v obchodní komunikaci.
+
+Co děláme:
+Staré lokální dočištění necháváme zavřené. Zakládáme nové malé téma pro obchodní follow-up.
+
+Co nepřenášíme:
+Staré screenshoty, interní debaty, seznam autorů karet ani původní příklady z review procesu.
+
+První otázka nového tématu:
+Jak má obchod poznat, že rozpočet teď není potřeba zjišťovat, protože nejdřív chybí cíl projektu nebo rozhodovací proces?
+```
+
+Nové téma má právo vzniknout, ale nesmí si s sebou odnést starou historii jako výbavu na dovolenou. Přeneste jen poučení o hranici, ne archiv všeho, co kdysi bolelo.
+
+### Privacy-first uzavření
+
+Uzavření návratu je vhodný okamžik pro úklid datové stopy. Během návratu mohly vzniknout poznámky, výřezy z komunikace, dočasné příklady, kopie karet nebo seznam situací. Po uzavření má zůstat jen rozhodovací minimum.
+
+Zapište si tři řádky:
+
+```text
+Ponecháváme:
+
+Mažeme nebo zobecňujeme:
+
+Nové sledování:
+žádné / přesně omezené na:
+```
+
+Příklad:
+
+```text
+Ponecháváme:
+Typ situace, pracovní místo, uzavírací stav a upravenou pracovní větu.
+
+Mažeme nebo zobecňujeme:
+Konkrétní interní komentáře, jména autorů karet a surové kopie slabých podnětů.
+
+Nové sledování:
+Žádné. Návrat se znovu otevře jen při původním návratovém signálu.
+```
+
+Pokud vzniklo nové téma, privacy-first úklid je ještě důležitější. Nové téma nemá začít s batohem starých osobních detailů a interních debat. Stačí mu zobecněný typ problému, pracovní místo a první otázka. Všechno ostatní je často jen pocit jistoty v podobě dat, která nikdo nepotřebuje držet.
+
+### Karta uzavření prvního návratu po klidu
+
+```text
+Původní lokální dočištění:
+
+Kanonické pracovní místo:
+
+Původní návratový signál:
+
+Co se při návratu stalo:
+
+Typ situace:
+- návratový signál / běžný podnět / údržbové tření / nové téma
+
+Uzavírací stav:
+- klid pokračuje
+- klid pokračuje po lokální údržbě
+- otevřený malý krok je uzavřený
+- vzniká nové téma
+
+Co se změnilo:
+
+Co výslovně neotevíráme:
+
+Co zůstává v dlouhodobém klidu:
+
+Nový nebo potvrzený návratový signál:
+
+Privacy-first úklid:
+Ponecháváme:
+Mažeme nebo zobecňujeme:
+Nové sledování:
+
+Vlastník:
+
+Datum dalšího návratu:
+jen při signálu / konkrétní datum:
+```
+
+Karta není pozvánka k další administrativě. Pokud se vejde do pěti až deseti řádků, pravděpodobně dělá svou práci. Pokud se roztahuje na stránku, tým nejspíš znovu otevírá starou analýzu místo uzavření návratu.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: připomeňte původní návratový signál.
+2. Minuta 2: popište, co se při návratu opravdu stalo.
+3. Minuta 3: vyberte typ situace.
+4. Minuta 4: vyberte uzavírací stav.
+5. Minuta 5: napište, co se neotevírá a co zůstává v klidu.
+6. Minuta 6: udělejte privacy-first úklid poznámek.
+
+Pokud se tým během workshopu zasekne na tom, jestli "by nebylo dobré ještě něco doplnit", vraťte se k uzavíracímu stavu. Doplňujte jen tehdy, když bez doplnění pravidlo nepůjde použít v nejbližším pracovním místě. Všechno ostatní patří do poznámek nebo do nového tématu.
+
+### Checklist uzavření návratu po klidu
+
+- Je jasné, zda šlo o návratový signál, běžný podnět, údržbové tření nebo nové téma?
+- Má návrat jeden uzavírací stav?
+- Je napsané, co se případně změnilo?
+- Je výslovně zavřené, co se teď neotevírá?
+- Pokud klid pokračuje, nezůstala po něm skrytá mimořádná kontrola?
+- Pokud proběhla lokální údržba, skončila v místě, kde tření vzniklo?
+- Pokud se potvrdil návratový signál, je malý krok opravdu uzavřený?
+- Pokud vzniká nové téma, nepřenáší si staré surové podklady?
+- Zůstává jen rozhodovací minimum a ne archiv dočasných důkazů?
+- Nevznikl nový tracker, report, skóre nebo evidence lidí?
+- Je návratový signál potvrzený nebo zpřesněný tak, aby ho poznal i někdo mimo původní debatu?
+- Ví tým, kdy se téma smí znovu otevřít?
+
+Uzavření prvního návratu po dlouhodobém klidu je hotové ve chvíli, kdy klid znovu znamená klid. Buď se nic nezměnilo, nebo proběhla malá oprava, nebo vzniklo nové téma mimo starou větev. Ve všech případech musí zmizet mimořádná péče, dočasné důkazy a chuť sledovat systém jen proto, že se jednou pohnul. Dobrý provoz se pozná i podle toho, že umí znovu ztichnout.
+
 ## Pracovní log
 
+- 2026-06-28: Doplněna úvodní podkapitola o uzavření prvního návratu po dlouhodobém klidu lokálního dočištění: uzavírací stavy, praktické příklady, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-28: Doplněna úvodní podkapitola o prvním návratu po dlouhodobém klidu lokálního dočištění: rozlišení signálu, podnětu a údržby, tři brány návratu, praktické příklady, privacy-first záznam, karta, mini workshop a checklist.
 - 2026-06-28: Doplněna úvodní podkapitola o převodu lokálního dočištění do dlouhodobého klidu: kanonické místo, návratový signál, zakázané ocasy, privacy-first uzamčení, karta, mini workshop a checklist.
 - 2026-06-28: Doplněna úvodní podkapitola o uzavření druhé běžné správy po lokálním dočištění: koncové stavy, praktické příklady, privacy-first úklid, karta, mini workshop a checklist.
