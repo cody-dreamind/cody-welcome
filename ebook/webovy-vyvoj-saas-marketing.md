@@ -268665,8 +268665,243 @@ Pokud se workshop zasekne na tom, že někdo potřebuje "ještě trochu kontextu
 
 Dlouhodobý klid je hotový ve chvíli, kdy o lokálním dočištění nemusíte mluvit, aby fungovalo. Pravidlo má svoje místo, návrat má svůj signál a dočasné stopy jsou pryč. To je elegantní konec malé opravy: žádná fanfára, žádný nový proces, jen méně hluku v systému.
 
+## První návrat po dlouhodobém klidu lokálního dočištění
+
+Dlouhodobý klid neznamená, že se lokální dočištění už nikdy neotevře. Znamená jen to, že se otevře až ve chvíli, kdy přijde skutečný návratový signál. První návrat po klidu je proto citlivý okamžik: tým může snadno sklouznout buď k panice, že staré pravidlo selhalo, nebo k pohodlnému mávnutí rukou, že jde jen o starou věc. Ani jedno není práce. Práce je krátce ověřit, jestli se opravdu vrací stejný problém, a pokud ano, otevřít nejmenší možné místo.
+
+Začněte větou:
+
+```text
+Lokální dočištění po dlouhodobém klidu otevíráme znovu pouze kvůli tomuto signálu:
+```
+
+Příklad:
+
+```text
+Lokální dočištění po dlouhodobém klidu otevíráme znovu pouze kvůli tomuto signálu:
+tři slabé podněty za sebou skončily jako nové karty změny, přestože pro ně nebyl dopad ani jasné pracovní místo.
+```
+
+Pokud podobnou větu neumíte napsat, nejde ještě o návrat. Jde o podnět, pocit nebo běžné tření. To může být užitečné, ale nezaslouží si otevřít starou větev.
+
+Codyho komentář: dlouhodobý klid je dobrý sluha a mizerná výmluva. Nesmí blokovat opravu, když se problém opravdu vrátil. Ale taky nesmí sloužit jako magnet na všechno, co jen vzdáleně připomíná starou nejasnost. Staré téma má dostat klíč jen tehdy, když zná správné heslo: konkrétní návratový signál.
+
+### Rozlište signál, podnět a údržbu
+
+První návrat má nejdřív roztřídit situaci do tří možností:
+
+- Návratový signál: stalo se přesně to, co mělo téma znovu otevřít.
+- Běžný podnět: někdo narazil na podobnou situaci, ale ještě nejde o opakovaný nebo potvrzený problém.
+- Údržbové tření: pravidlo pořád platí, jen je slabší název, odkaz, příklad nebo umístění.
+
+Rozdíl je praktický. Návratový signál může otevřít malou pracovní otázku. Běžný podnět patří do poznámky nebo do existujícího review. Údržbové tření se má opravit na místě, bez obnovování celé historie.
+
+Krátká třídicí karta:
+
+```text
+Co se stalo:
+
+Jaký byl původní návratový signál:
+
+Shoda se signálem:
+- přesná / částečná / žádná
+
+Typ situace:
+- návratový signál / běžný podnět / údržbové tření
+
+Nejmenší odpověď:
+```
+
+Příklad:
+
+```text
+Co se stalo:
+Správce při review nevěděl, jestli slabý podnět zavřít, nebo založit kartu změny.
+
+Původní návratový signál:
+Tři slabé podněty za sebou skončí jako nové karty změny bez dopadu nebo pracovního místa.
+
+Shoda se signálem:
+Částečná.
+
+Typ situace:
+Údržbové tření.
+
+Nejmenší odpověď:
+Doplnit do rozcestníku jeden příklad slabého podnětu, který se zavírá bez karty změny.
+```
+
+Tady se staré lokální dočištění neotevírá. Pravidlo drží, jen potřebuje malý příklad v místě použití. To je rozdíl mezi zdravou údržbou a zbytečnou obnovou staré větve.
+
+### Tři brány prvního návratu
+
+Než otevřete práci, projděte tři brány:
+
+- Stejný problém: signál se týká stejné rozhodovací chyby, ne jen podobného názvu.
+- Stejné pracovní místo: problém vznikl tam, kde pravidlo žije, nebo v místě, které je na něj přímo navázané.
+- Menší zásah než původní oprava: první reakce nesmí být širší než staré lokální dočištění.
+
+Pokud neprojde první brána, založte nové téma. Starou větev můžete odkázat jako inspiraci, ale nenoste z ní podklady, jména, screenshoty ani staré argumenty.
+
+Pokud neprojde druhá brána, nejdřív najděte pracovní místo. Třeba se problém nevrátil v rozcestníku, ale v obchodním follow-upu, který si pravidlo nikdy nepřevzal. To není selhání původního dočištění. Je to nové místo, které potřebuje vlastní formulaci.
+
+Pokud neprojde třetí brána, zmenšete reakci. Návrat po dlouhodobém klidu není povolenka k velkému review. Je to povolenka podívat se na nejbližší místo, kde se pravidlo přestalo používat správně.
+
+Praktická věta:
+
+```text
+Otevíráme jen pracovní místo, kde se návratový signál projevil; starou historii bereme pouze jako kontrolu hranice, ne jako nový vstup pro analýzu.
+```
+
+### Praktický příklad
+
+Původní dlouhodobý klid:
+
+```text
+Kanonické místo:
+Rozcestník review šablon.
+
+Pracovní věta:
+Slabý podnět nezakládej jako kartu změny, dokud neukazuje opakovaný dopad na rozhodnutí, zákaznickou zkušenost nebo datovou stopu.
+
+Návratový signál:
+Téma znovu otevřeme pouze tehdy, když tři slabé podněty za sebou povedou ke špatně založené kartě změny nebo k nejasnému rozhodnutí v review.
+```
+
+Návrat po klidu:
+
+```text
+Co se stalo:
+Během dvou týdnů vznikly tři nové karty změny pro slabé podněty bez dopadu. Dvě z nich byly později zavřené jako zbytečné.
+
+Shoda se signálem:
+Přesná.
+
+Pracovní místo:
+Rozcestník review šablon a úvodní věta v kartě změny.
+
+Nejmenší otevřený krok:
+Upravit úvodní větu v kartě změny tak, aby před založením vyžadovala dopad nebo návratový signál.
+
+Co neotevíráme:
+Nové review všech šablon, změnu celého procesu, scoring podnětů ani evidenci lidí, kteří karty založili.
+```
+
+Všimněte si, že návrat neznamená opakovat původní opravu. Problém se tentokrát neukázal jen v rozcestníku, ale i v úvodní větě karty změny. Nejmenší krok proto míří na hranu mezi dvěma pracovními místy. To je pořád malé, konkrétní a ověřitelné.
+
+Příklad, kdy se stará větev neotevírá:
+
+```text
+Co se stalo:
+Nový člověk se zeptal, kde najde pravidlo pro slabý podnět.
+
+Shoda se signálem:
+Žádná.
+
+Typ situace:
+Navigační údržba.
+
+Nejmenší odpověď:
+Přidat odkaz na rozcestník do onboardingového seznamu pro editory.
+
+Co neotevíráme:
+Lokální dočištění, návratový signál ani změnu rozhodovacího pravidla.
+```
+
+Otázka nového člověka není návrat problému. Je to slabá navigace v onboardingu. Kdyby tým otevřel starou větev, řešil by špatnou věc na špatném místě.
+
+### Privacy-first návrat po klidu
+
+První návrat po dlouhodobém klidu svádí ke sběru důkazů. Tým chce rychle zjistit, kdo co udělal, kde klikl, jak dlouho hledal, kdo založil špatnou kartu a jaké konkrétní podněty se objevily. Většina toho není potřeba.
+
+Privacy-first minimum:
+
+```text
+Ponecháváme:
+Typ situace, pracovní místo, shodu se signálem a rozhodnutí o nejmenším kroku.
+
+Nepřenášíme:
+Jména lidí, kompletní interní konverzace, zákaznické detaily, screenshoty a surové kopie podnětů.
+
+Nesbíráme nově:
+Klikání v dokumentaci, osobní skóre dodržování pravidla, tabulku chyb podle lidí ani dlouhodobý report používání.
+```
+
+Pokud potřebujete příklady, zobecněte je. Místo "poptávka od konkrétní firmy s tímto rozpočtem" napište "větší B2B poptávka bez potvrzeného rozhodovacího procesu". Místo kopie chatové debaty napište "podnět neměl dopad ani pracovní místo". Rozhodnutí tím neztratí přesnost a systém nezíská zbytečnou datovou zátěž.
+
+Zvlášť opatrní buďte u návratu, který se týká zákaznické komunikace. Opravujete pravidlo, ne budujete archiv citlivých příkladů. Pokud konkrétní detail nepomáhá vybrat nejmenší krok, nepatří do záznamu.
+
+### Karta prvního návratu po klidu
+
+```text
+Původní lokální dočištění:
+
+Kanonické pracovní místo:
+
+Stav před návratem:
+dlouhodobý klid
+
+Původní návratový signál:
+
+Aktuální situace:
+
+Shoda se signálem:
+- přesná / částečná / žádná
+
+Typ situace:
+- návratový signál / běžný podnět / údržbové tření
+
+Pracovní místo, kde se situace projevila:
+
+Nejmenší odpověď:
+
+Co výslovně neotevíráme:
+
+Co ze staré historie nepřenášíme:
+
+Privacy-first záznam:
+Ponecháváme:
+Mažeme nebo zobecňujeme:
+Nové sledování:
+
+Vlastník:
+
+Datum kontroly nejmenší odpovědi:
+```
+
+Karta má být krátká. Pokud potřebuje dlouhé vysvětlování, pravděpodobně se snažíte do prvního návratu vměstnat celé staré rozhodování. To je signál ke zmenšení, ne k dalšímu psaní.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte původní návratový signál.
+2. Minuta 2: popište aktuální situaci jednou větou.
+3. Minuta 3: určete shodu se signálem.
+4. Minuta 4: vyberte typ situace.
+5. Minuta 5: napište nejmenší odpověď a co neotevíráte.
+6. Minuta 6: udělejte privacy-first záznam bez surových detailů.
+
+Pokud se během workshopu začne probírat, kdo měl co vědět, vraťte diskusi k pracovnímu místu. První návrat po klidu má opravit systémovou hranu, ne vyrábět osobní audit. Pokud systém potřebuje, aby si konkrétní lidé pamatovali starou historii, problém není v lidech. Problém je v tom, že pravidlo nežije dost blízko práci.
+
+### Checklist prvního návratu po klidu
+
+- Umíme aktuální situaci popsat jednou větou?
+- Máme původní návratový signál před očima?
+- Určili jsme přesnou, částečnou nebo nulovou shodu?
+- Rozlišili jsme návratový signál od běžného podnětu a údržbového tření?
+- Víme, kde se situace projevila v reálné práci?
+- Je nejmenší odpověď menší než původní lokální dočištění?
+- Je jasně napsané, co se neotevírá?
+- Nepřenášíme staré podklady jen proto, že existují?
+- Nezakládáme nové sledování lidí, klikání nebo používání pravidla?
+- Jsou příklady zobecněné na typ situace, pokud konkrétní detail není nezbytný?
+- Má odpověď vlastníka a datum kontroly?
+- Pokud se signál nepotvrdil, zůstává dlouhodobý klid opravdu klidem?
+
+První návrat po dlouhodobém klidu je hotový, když tým ví, jestli se starý problém opravdu vrátil, a udělal jen odpovídající malou reakci. Někdy to bude lokální úprava pracovní věty. Někdy jen navigační údržba. Někdy žádná akce. Všechny tři výsledky jsou v pořádku, pokud za nimi zůstane jasné rozhodnutí, čisté pracovní místo a žádný nový dohled "pro jistotu".
+
 ## Pracovní log
 
+- 2026-06-28: Doplněna úvodní podkapitola o prvním návratu po dlouhodobém klidu lokálního dočištění: rozlišení signálu, podnětu a údržby, tři brány návratu, praktické příklady, privacy-first záznam, karta, mini workshop a checklist.
 - 2026-06-28: Doplněna úvodní podkapitola o převodu lokálního dočištění do dlouhodobého klidu: kanonické místo, návratový signál, zakázané ocasy, privacy-first uzamčení, karta, mini workshop a checklist.
 - 2026-06-28: Doplněna úvodní podkapitola o uzavření druhé běžné správy po lokálním dočištění: koncové stavy, praktické příklady, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-28: Doplněna úvodní podkapitola o druhé běžné správě po uzavřeném lokálním dočištění: samostatnost pravidla, odstranění skryté evidence, privacy-first úklid, karta, mini workshop a checklist.
