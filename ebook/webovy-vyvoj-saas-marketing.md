@@ -266176,8 +266176,178 @@ Pokud workshop potřebuje víc než pět minut, nejspíš už neřešíte klidov
 
 První klidový měsíc má potvrdit, že tým umí nechat funkční pravidlo na pokoji. To je podceňovaná dovednost. Web, SaaS i marketing se dají donekonečna zlepšovat, ale dobrý privacy-first provoz potřebuje i schopnost neotevřít další sběr dat, další kontrolu a další malou výjimku jen proto, že máme chuť být důkladní. Důkladnost bez hranice je jen pomalý způsob, jak si zaplnit systém.
 
+## Uzavření prvního klidového měsíce do tiché správy
+
+První klidový měsíc má smysl uzavřít jen tehdy, když z něj nevznikne další malý rituál. Pokud po něm automaticky založíte měsíční kontrolu, týdenní připomínku nebo novou tabulku "pro jistotu", klidná správa se změnila v běžnou správu s horším názvem. Uzavření proto není další review. Je to krátké rozhodnutí, jestli pravidlo může zůstat opravdu tiché, nebo jestli se má opravit jedno konkrétní místo, které mu v tichém provozu brání.
+
+Začněte větou:
+
+```text
+První klidový měsíc uzavíráme takto:
+```
+
+Za dvojtečku patří jeden ze tří stavů, ne odstavec dojmů. Buď `pravidlo přechází do tiché správy`, `nejdřív opravujeme jednu kotvu`, nebo `otevíráme návratový signál v domluveném rozsahu`. Tři stavy stačí. Všechno mezi nimi je většinou jen nerozhodnost převlečená za pečlivost. A ta má skvělý kostým, jen stojí moc času.
+
+Tichá správa znamená, že pravidlo už nemá vlastní kontrolní smyčku. Existuje v kanonickém pracovním místě, má jasný návratový signál a dál se otevírá jen tehdy, když se tento signál opravdu objeví. Neznamená to, že o pravidle nikdo neví. Znamená to, že k jeho existenci nepotřebujete pravidelné připomínání, ruční hlídání ani sběr podpůrných důkazů.
+
+### Tři uzavírací stavy
+
+Vyberte jeden stav:
+
+- Tichá správa: klidový měsíc neukázal problém, nevznikla skrytá evidence a pravidlo má jasné pracovní místo.
+- Lokální dotažení: pravidlo je správné, ale chybí mu jedna kotva, název, odkaz nebo krátké vysvětlení.
+- Řízený návrat: objevil se skutečný návratový signál a otevírá se nejmenší další krok.
+
+`Tichá správa` je nejčistší konec. Zapište jednu větu a dál nic neplánujte. Pokud někdo navrhne "aspoň to ještě měsíc sledujme", zeptejte se, jaké rozhodnutí by sledování změnilo. Když odpověď neexistuje, sledování je jen pocit bezpečí. Pocit bezpečí je lidsky pochopitelný, ale do provozního systému patří až ve chvíli, kdy má účel, vlastníka a konec.
+
+`Lokální dotažení` je povolené, pokud se vejde do stejného pracovního místa. Typicky jde o doplnění odkazu do rozcestníku, přejmenování šablony, odstranění starého názvu nebo zkrácení věty, která při prvním použití zbytečně mátla. Neotvírejte kvůli tomu celé pravidlo. Opravte cestu k pravidlu.
+
+`Řízený návrat` není selhání klidového měsíce. Je to důkaz, že návratový signál funguje. Důležité je nevrátit se k původnímu širokému návrhu automaticky. Pokud byl zavřený formulář, scoring a export, zůstávají zavřené, dokud nový důkaz neříká přesně opak. První krok má být pořád nejmenší: upravit jednu otázku, zpřesnit jeden e-mail, prověřit tři poslední případy, ne přestavět celý tok.
+
+### Praktický příklad tiché správy
+
+```text
+První klidový měsíc uzavíráme takto:
+Pravidlo přechází do tiché správy.
+
+Důvod:
+V měsíci se objevily dvě běžné situace, pravidlo bylo použitelné z potvrzovací šablony a nevznikla pomocná evidence.
+
+Co dál neplánujeme:
+Měsíční kontrolu pravidla, nový CRM štítek, změnu formuláře ani další sběr příkladů.
+
+Návratový signál:
+Tři relevantní poptávky za sebou nepůjdou kvalifikovat bez ručního doptání na rozpočet.
+```
+
+Všimněte si, že zápis neobsahuje nový úkol. To je záměr. Dobré pravidlo v tiché správě nemá vyrábět práci jen tím, že existuje. Má být dostupné, rozhodnutelné a klidné.
+
+### Praktický příklad lokálního dotažení
+
+```text
+První klidový měsíc uzavíráme takto:
+Nejdřív opravujeme jednu kotvu.
+
+Důvod:
+Nový člověk hledal pravidlo v obchodním rozcestníku, ale odkaz vedl jen do staré karty review.
+
+Lokální oprava:
+Do obchodního rozcestníku přidáváme odkaz na aktuální potvrzovací šablonu a starý odkaz přejmenováváme na archivní záznam.
+
+Co neotevíráme:
+Obsah pravidla, formulář, scoring, export ani další review.
+
+Ověření:
+Při nejbližším běžném použití stačí ověřit, že člověk najde aktuální šablonu bez dotazu v chatu.
+```
+
+Lokální dotažení má mít vlastní konec. Pokud po něm vznikne další série kontrol, nebylo lokální. Bylo to nové review, jen se tvářilo jako úklid odkazu. Takové věci se dějí. Systémy milují masky. Proto pomáhá věta "co neotevíráme".
+
+### Praktický příklad řízeného návratu
+
+```text
+První klidový měsíc uzavíráme takto:
+Otevíráme návratový signál v domluveném rozsahu.
+
+Návratový signál:
+Tři relevantní poptávky za sebou nešlo kvalifikovat bez ručního doptání na rozpočet.
+
+Nejmenší další krok:
+Projít pouze tyto tři poptávky a rozhodnout, zda problém vzniká v potvrzovacím e-mailu, ve formuláři, nebo v obchodním follow-upu.
+
+Co zůstává zavřené:
+Povinné rozpočtové pole, automatický lead scoring, nový export a plošná změna obchodního procesu.
+
+Privacy-first hranice:
+Nepřidáváme nové údaje do formuláře, dokud nejmenší průchod neukáže, že nestačí upravit existující otázku nebo follow-up.
+```
+
+Řízený návrat chrání dvě věci najednou. Tým nezametá problém pod koberec, ale ani nepoužívá jeden signál jako výmluvu pro starý velký nápad. To je produktová hygiena v praxi: otevřít přesně tolik, kolik dnešní důkaz unese.
+
+### Privacy-first uzavření
+
+Při uzavření prvního klidového měsíce zkontrolujte hlavně to, co může zůstat ležet v systému po cestě:
+
+- pomocné poznámky z měsíce,
+- screenshoty, výřezy e-mailů nebo kopie poptávek,
+- ruční štítky v CRM nebo projektovém nástroji,
+- dočasné odkazy na staré karty,
+- interní zprávy s osobními nebo obchodními údaji, které se použily jako důkaz.
+
+U každé stopy rozhodněte:
+
+```text
+Potřebujeme ji pro budoucí rozhodnutí?
+
+Pokud ano:
+Kdo je vlastník, kde leží a kdy se smaže nebo zobecní?
+
+Pokud ne:
+Mažeme ji, anonymizujeme, nebo převádíme na obecnou větu bez osobních údajů.
+```
+
+Výchozí stav je úklid. Tichá správa nemá být sklad důkazů z doby, kdy se pravidlo učilo chodit. Pokud pravidlo už stojí, podpůrné berličky pryč. Ano, metafora trochu skřípe, ale datová minimálnost díky ní drží.
+
+### Karta uzavření klidového měsíce
+
+```text
+Pravidlo:
+
+Kanonické pracovní místo:
+
+Období prvního klidového měsíce:
+
+Výsledek:
+- tichá správa
+- lokální dotažení
+- řízený návrat
+
+Jednovětý důvod:
+
+Lokální oprava nebo nejmenší další krok, pokud existuje:
+
+Co výslovně neotevíráme:
+
+Jaké pomocné stopy mažeme, anonymizujeme nebo zobecňujeme:
+
+Kde zůstává návratový signál:
+
+Kdo vlastní pravidlo v tiché správě:
+
+Kdy se pravidlo znovu otevře:
+```
+
+Poslední řádek nevyplňujte datem jen proto, že formulář chce odpověď. Správná odpověď může být: "pouze při návratovém signálu". To je legitimní plán. Ne všechno potřebuje kalendář. Některé věci potřebují jen jasnou podmínku.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte výsledek prvního klidového měsíce.
+2. Minuta 2: vyberte jeden ze tří uzavíracích stavů.
+3. Minuta 3: napište jednovětý důvod.
+4. Minuta 4: určete, co výslovně neotevíráte.
+5. Minuta 5: ukliďte nebo pojmenujte pomocné datové stopy.
+6. Minuta 6: zapište, kde zůstává návratový signál.
+
+Pokud se v minutě 2 tým hádá mezi lokálním dotažením a řízeným návratem, vraťte se k důkazu. Lokální dotažení řeší cestu k pravidlu. Řízený návrat řeší problém, kvůli kterému pravidlo možná nestačí. To jsou dvě různé práce. Nemíchejte je, jinak z drobné opravy odkazu vznikne poloviční redesign procesu a nikdo nebude vědět, proč se to stalo.
+
+### Checklist uzavření klidového měsíce
+
+- Vybrali jsme jeden uzavírací stav?
+- Je důvod uzavření napsaný jednou konkrétní větou?
+- Pokud klid drží, nevznikl z toho nový kontrolní rituál?
+- Pokud chyběla kotva, opravujeme jen nejbližší pracovní místo?
+- Pokud přišel návratový signál, otevíráme jen domluvený rozsah?
+- Je výslovně napsané, co neotevíráme?
+- Uklidili jsme pomocné poznámky, screenshoty, štítky, exporty nebo kopie?
+- Zůstává návratový signál dostupný bez otevírání celé historie?
+- Ví vlastník, že pravidlo teď nemá aktivní kontrolní smyčku?
+- Umí tým říct, kdy se pravidlo znovu otevře?
+
+Uzavření klidového měsíce je malá, ale důležitá disciplína. Naučí tým dokončovat i to, co se nepokazilo. To je u webu, SaaS i marketingu vzácné: většina týmů umí reagovat na problém, méně týmů umí elegantně zavřít věc, která prostě funguje. Privacy-first provoz z toho těží přímo, protože každé dobré zavření znamená o jednu zbytečnou evidenci, kontrolu a datovou stopu méně.
+
 ## Pracovní log
 
+- 2026-06-28: Doplněna úvodní podkapitola o uzavření prvního klidového měsíce do tiché správy: tři uzavírací stavy, praktické příklady, privacy-first úklid pomocných stop, karta, mini workshop a checklist.
 - 2026-06-28: Doplněna úvodní podkapitola o prvním klidovém měsíci po uzavření druhého review: přirozené signály, výsledkové stavy, praktické příklady, privacy-first kontrola skryté evidence, karta, mini workshop a checklist.
 - 2026-06-28: Doplněna úvodní podkapitola o uzavření druhého běžného review do klidné správy: čtyři uzavírací stavy, praktické příklady, privacy-first úklid podkladů, karta, mini workshop a checklist.
 - 2026-06-28: Doplněna úvodní podkapitola o uzavření prvního běžného review po převodu do stabilní správy: čtyři uzavírací stavy, praktické příklady, privacy-first uzavření datové stopy, karta, mini workshop a checklist.
