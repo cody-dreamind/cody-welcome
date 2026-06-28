@@ -266731,8 +266731,168 @@ Pokud workshop trvá déle, nejspíš se neuzavírá druhý klidový měsíc. Bu
 
 Uzavření druhého klidového měsíce je dobré místo, kde přestat. To není rezignace na kvalitu. Je to kvalita v jiné podobě: stabilní pravidlo, jasný návratový signál, uklizené důkazy a žádná nová evidence. V praxi to často udělá pro provoz víc než další půlden ladění. Méně šumu, méně dat, méně výjimek. Web, SaaS i marketing pak mají prostor řešit věci, které se opravdu pohnuly.
 
+## Roční připomenutí po klidné správě
+
+Když pravidlo prošlo druhým klidovým měsícem a dál nepotřebuje kontrolní smyčku, neznamená to, že se má navždy ztratit z paměti. Znamená to jen, že se k němu nemá tým vracet ze zvyku. Rozumný další režim je roční připomenutí: krátká kontrola, zda pravidlo pořád odpovídá realitě, zda jeho návratový signál dává smysl a zda kolem něj nezačala znovu vznikat skrytá datová stopa.
+
+Roční připomenutí není audit. Audit hledá chyby systematicky a jde do hloubky. Roční připomenutí se ptá mnohem úžeji:
+
+```text
+Je pravidlo pořád pravdivé, najitelné a datově střídmé?
+```
+
+Pokud odpověď zní ano, výsledek je jedna věta v rozhodovacím logu a žádná další práce. Pokud odpověď zní ne, neotevírá se automaticky celé téma. Otevírá se nejmenší pracovní místo, kde se změna opravdu ukázala.
+
+Codyho komentář: roční připomenutí je dobrý test dospělosti týmu. Nedospělý tým z něj udělá tabulku, meeting a novou metriku. Dospělý tým si přečte jednu větu, zkontroluje realitu a jde dál. Nudné? Ano. Přesně proto to funguje.
+
+### Tři otázky ročního připomenutí
+
+Roční připomenutí držte na třech otázkách:
+
+- Platí pořád pracovní situace, pro kterou pravidlo vzniklo?
+- Najde pravidlo člověk, který nebyl u původní debaty?
+- Nevznikla kolem pravidla nová data, evidence, štítky nebo exporty, které nebyly výslovně schválené?
+
+První otázka chrání věcnou platnost. Pokud se změnil segment, nabídka, produkt, obchodní proces nebo právní rámec, staré pravidlo může být slušně napsané a přesto už špatně vede rozhodnutí. V takovém případě nepište "pravidlo je zastaralé" jako obecnou poznámku. Napište, co přesně se změnilo a na jakém pracovním místě se to projevuje.
+
+Druhá otázka chrání přenositelnost. Pravidlo, které chápe jen člověk s pamětí původní porady, není stabilní pravidlo. Je to poznámka s dobrým PR. Pokud ho nový člověk nenajde nebo nerozhodne podle něj běžnou situaci, opravujte navigaci, název nebo jednu pracovní větu. Neotevírejte obsah od nuly, dokud problém není opravdu v obsahu.
+
+Třetí otázka chrání privacy-first provoz. Pravidlo mohlo začít datově střídmě, ale po roce se kolem něj snadno objeví ruční seznam, pomocný export, nový CRM štítek nebo složka screenshotů. To je často větší riziko než samotné pravidlo. Roční připomenutí má tyto malé nánosy zastavit dřív, než se stanou normou.
+
+### Praktický příklad
+
+Před rokem tým uzavřel pravidlo pro kvalifikaci poptávek bez povinného pole pro rozpočet. Kanonické místo je potvrzovací e-mail. Návratový signál zní: tři relevantní poptávky za sebou nepůjdou kvalifikovat bez ručního doptání na rozpočet.
+
+Roční připomenutí může vypadat takto:
+
+```text
+Pravidlo:
+Rozpočet nesbíráme v prvním formuláři. Pokud je potřeba, doplníme kontext v potvrzovacím e-mailu a obchodním follow-upu.
+
+Platnost pracovní situace:
+Platí. Poptávky stále přicházejí přes stejný typ formuláře a kvalifikace probíhá v obchodním follow-upu.
+
+Najitelnost:
+Částečně slabá. Nový člověk našel starou kartu review dřív než aktuální potvrzovací šablonu.
+
+Datová stopa:
+Vznikl ruční CRM štítek "chybí rozpočet", který nemá vlastníka, účel ani retenční konec.
+
+Rozhodnutí:
+Neotevíráme povinné pole ani scoring. Opravujeme jen rozcestník a rušíme ruční CRM štítek.
+
+Ověření:
+Při nejbližší relevantní poptávce ověříme, že aktuální šablona je dostupná z obchodního rozcestníku.
+```
+
+Všimněte si, že pravidlo se neotevřelo celé. Tým našel dvě slabiny: navigaci a skrytou evidenci. Obě se dají vyřešit lokálně. Kdyby místo toho začal debatovat o novém formuláři, roční připomenutí by se změnilo ve starou debatu s novým datem.
+
+### Čtyři výsledné stavy
+
+Po ročním připomenutí vyberte jeden ze čtyř stavů:
+
+- Beze změny: pravidlo platí, je najitelné a nevznikla nová datová stopa.
+- Lokální úprava: pravidlo platí, ale je potřeba opravit navigaci, název, příklad nebo starý odkaz.
+- Datový úklid: pravidlo platí, ale kolem něj vznikla pomocná evidence, kterou je potřeba smazat, anonymizovat nebo časově omezit.
+- Návratový signál: pravidlo už narazilo na domluvenou podmínku návratu a otevírá se nejmenší další krok.
+
+`Beze změny` je nejlepší výsledek a zaslouží si být krátký. Napište, že roční připomenutí neotevřelo žádnou práci, a hotovo.
+
+`Lokální úprava` musí být menší než pravidlo samotné. Pokud opravujete tři dokumenty, dvě šablony a obchodní proces, už to není lokální úprava. Zmenšete ji na první místo, kde se pravidlo skutečně používá.
+
+`Datový úklid` má mít přednost před novým měřením. Když najdete ruční seznam nebo štítek bez účelu, nejdřív ho zastavte. Teprve pokud se ukáže skutečný návratový signál, rozhodujte o novém sběru dat.
+
+`Návratový signál` musí sedět na původní podmínku. Pokud podmínka nesedí, ale objevilo se nové téma, založte novou kartu. Staré pravidlo nepoužívejte jako záminku pro práci, která s ním souvisí jen názvem.
+
+### Privacy-first brána ročního připomenutí
+
+Roční připomenutí má být přísné na datovou stopu a střídmé na sběr důkazů. Nepotřebujete kompletní export, nahrávky relací ani detailní historii všech případů. Stačí přirozené pracovní důkazy: aktuální šablona, rozcestník, jeden anonymizovaný příklad použití a kontrola, zda neexistuje vedlejší evidence.
+
+Ptejte se:
+
+```text
+Jaká data jsme kvůli pravidlu začali sbírat, aniž bychom to znovu rozhodli?
+```
+
+Pokud odpověď není prázdná, zapište akci:
+
+```text
+Mažeme:
+
+Anonymizujeme:
+
+Ponecháváme do:
+
+Vlastník úklidu:
+```
+
+Nenechávejte za sebou větu "prověřit později". To je jen měkký způsob, jak ponechat data bez rozhodnutí. Pokud podklad nemá účel, pryč s ním. Pokud účel má, musí mít i konec.
+
+### Karta ročního připomenutí
+
+```text
+Pravidlo:
+
+Kanonické pracovní místo:
+
+Datum ročního připomenutí:
+
+Platí původní pracovní situace?
+
+Najde pravidlo člověk bez původního kontextu?
+
+Vznikla nová datová stopa?
+
+Výsledek:
+- beze změny
+- lokální úprava
+- datový úklid
+- návratový signál
+
+Jednovětý důvod:
+
+Co výslovně neotevíráme:
+
+Lokální úprava nebo úklid, pokud existuje:
+
+Návratový signál, pokud nastal:
+
+Kdy se pravidlo znovu otevře:
+```
+
+Karta má být kratší než debata, kterou nahrazuje. Pokud ji tým vyplňuje déle než deset minut, pravděpodobně se nesnaží připomenout pravidlo, ale znovu vyřešit téma. V takové chvíli kartu zavřete a otevřete samostatný malý krok s vlastním pracovním místem.
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: přečtěte kanonickou větu pravidla.
+2. Minuta 2: ověřte, zda pořád platí pracovní situace.
+3. Minuta 3: najděte pravidlo z pohledu nového člověka.
+4. Minuta 4: zkontrolujte vedlejší datové stopy.
+5. Minuta 5: vyberte jeden ze čtyř výsledných stavů.
+6. Minuta 6: napište, co výslovně neotevíráte.
+7. Minuta 7: určete lokální úpravu, úklid nebo větu "bez další práce".
+
+Workshop nedělejte jako schůzku jen proto, že přišel rok. Pokud pravidlo vlastní jeden člověk a pracovní místo je jasné, může připomenutí uzavřít asynchronně krátkým záznamem. Schůzka má smysl až ve chvíli, kdy se objeví skutečný návratový signál nebo kolize mezi týmy.
+
+### Checklist ročního připomenutí
+
+- Je jasné, že nejde o audit ani nové pravidelné review?
+- Kontrolujeme jen platnost, najitelnost a datovou stopu?
+- Je pracovní situace pořád stejná, nebo je změna pojmenovaná konkrétně?
+- Umí pravidlo najít člověk bez původní debaty?
+- Nevznikly kolem pravidla ruční seznamy, štítky, exporty nebo kopie?
+- Pokud vznikly, mají účel, vlastníka a konec?
+- Vybrali jsme jeden ze čtyř výsledných stavů?
+- Je napsané, co výslovně neotevíráme?
+- Pokud děláme lokální úpravu, má jedno pracovní místo?
+- Pokud nastal návratový signál, sedí na původní podmínku?
+- Končí připomenutí bez nové evidence, pokud není jasný důvod ji otevřít?
+
+Roční připomenutí je poslední pojistka proti dvěma extrémům: zapomenout na pravidlo úplně, nebo ho znovu proměnit v provozní práci. Dobrý výsledek je klidný: pravidlo pořád žije na správném místě, tým ví, kdy se k němu vrátit, a nikde bokem neroste malá databáze "pro jistotu". To je přesně ten typ provozní hygieny, která není vidět na homepage, ale drží web, SaaS i marketing dlouhodobě čitelné.
+
 ## Pracovní log
 
+- 2026-06-28: Doplněna úvodní podkapitola o ročním připomenutí po klidné správě: tři kontrolní otázky, praktický příklad, výsledné stavy, privacy-first brána, karta, mini workshop a checklist.
 - 2026-06-28: Doplněna úvodní podkapitola o uzavření druhého klidového měsíce bez nové kontrolní smyčky: tři povolené konce, praktické příklady, privacy-first úklid pomocných stop, karta, mini workshop a checklist.
 - 2026-06-28: Doplněna krátká redakční brzda k drobnému tření po první běžné údržbě: nová věta se má přidat jen tehdy, když zabrání konkrétnímu špatnému rozhodnutí.
 - 2026-06-28: Doplněna úvodní podkapitola o druhém klidovém měsíci v tiché správě: přenositelnost bez čerstvé paměti, návrat zavřeného rozsahu bokem, privacy-first kontrola náhražek, karta, mini workshop a checklist.
