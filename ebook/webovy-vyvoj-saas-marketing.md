@@ -267881,8 +267881,222 @@ Když během workshopu někdo navrhne větší přepsání pravidla, vraťte se 
 
 První běžná správa po návratu lokálního dočištění má potvrdit klid. Když pravidlo drží, nejlepší další krok je žádný nový krok. Jen krátký záznam, čisté pracovní místo a pokračování v normálním rytmu. Produktivita někdy vypadá podezřele jako nedělání další práce. Šokující, ale účinné.
 
+## Uzavření první běžné správy po návratu lokálního dočištění
+
+První běžná správa po návratu lokálního dočištění se nemá táhnout jako další drobný režim. Jakmile proběhne, potřebuje uzavření: jednu větu o výsledku, jednu větu o případné údržbě a jednu větu o tom, že žádná mimořádná péče nepokračuje. Bez uzavření se i úspěšná běžná správa umí nenápadně změnit na malý dohled. Někdo si nechá poznámku "ještě mrknout příště", někdo založí pomocný seznam, někdo si začne držet příklady pro jistotu. A najednou lokální dočištění sice funguje, ale kolem něj roste provozní mech.
+
+Začněte větou:
+
+```text
+První běžnou správu po návratu lokálního dočištění uzavíráme stavem:
+```
+
+Příklad:
+
+```text
+První běžnou správu po návratu lokálního dočištění uzavíráme stavem: beze změny v běžném rytmu.
+```
+
+Tahle věta je důležitější, než vypadá. Říká týmu, že kontrola proběhla, že výsledek je známý a že oprava se nevrací do zvláštního režimu. Pokud byl potřeba malý zásah, napište ho hned vedle, ale pořád ho držte v rámci běžné správy:
+
+```text
+První běžnou správu uzavíráme stavem: navigační údržba dokončena, pravidlo zůstává v měsíční správě rozcestníku.
+```
+
+Codyho komentář: nejrizikovější chvíle není chyba. Chybu většinou někdo vidí. Riziková je drobná nejistota po úspěchu, kdy tým řekne "radši si to ještě někam poznamenáme". V překladu: "založíme si malý interní šanon úzkosti". Roztomilé asi tři minuty, provozně otravné dlouhodobě.
+
+### Čtyři uzavírací stavy
+
+Po první běžné správě vyberte jeden z těchto stavů:
+
+- Uzavřeno beze změny: pravidlo je najitelné, rozhodnutelné a bez nové datové stopy.
+- Uzavřeno po drobné údržbě: navigace nebo jeden hraniční příklad byly opravené a není potřeba další kontrola mimo běžný rytmus.
+- Předáno do nové karty: běžná správa potvrdila návratový signál, který už nepatří do lokálního dočištění.
+- Zavřeno jako neaktuální: lokální dočištění už nemá pracovní místo, protože se změnila šablona, proces nebo produktový kontext.
+
+Stav `uzavřeno beze změny` je nejčistší. Nepřidávejte k němu preventivní úkol:
+
+```text
+Uzavřeno beze změny. Pracovní věta zůstává v kanonickém rozcestníku a další kontrola proběhne až v běžném měsíčním rytmu.
+```
+
+Stav `uzavřeno po drobné údržbě` použijte, když jste opravdu dokončili malou opravu. Ne když jste si ji jen všimli:
+
+```text
+Uzavřeno po drobné údržbě. Odkaz ze staré poznámky byl odstraněn, kanonické místo zůstává jediné vstupní místo a pravidlo se dál nekontroluje zvlášť.
+```
+
+Stav `předáno do nové karty` znamená, že starou větev nezvětšujete. Nová karta má vlastní otázku, vlastní důkaz a vlastní hranici:
+
+```text
+První běžná správa potvrdila opakované tření v obchodním follow-upu. Lokální dočištění uzavíráme a nové téma zakládáme jako samostatnou kartu s návratovým signálem.
+```
+
+Stav `zavřeno jako neaktuální` je užitečný ve chvíli, kdy původní pracovní místo přestalo existovat. Třeba se formulář sloučil, šablona byla nahrazena nebo se změnil onboardingový krok. Neznamená to, že stará práce byla zbytečná. Znamená to, že ji nemáte přenášet jen proto, že kdysi dávala smysl.
+
+### Praktický příklad
+
+```text
+Lokální dočištění:
+Do rozcestníku review šablon byla doplněna věta, kdy slabý podnět nezakládat jako novou kartu změny.
+
+První běžná správa:
+Měsíční review rozcestníku.
+
+Zjištění:
+Správce našel větu na kanonickém místě a použil ji bez autora opravy.
+
+Datová stopa:
+Nevznikla tabulka podnětů, screenshoty ani kopie interní komunikace.
+
+Uzavírací stav:
+Uzavřeno beze změny.
+
+Závěr:
+Pravidlo zůstává v běžném měsíčním rytmu. Starou ověřovací poznámku už nepoužíváme jako vstupní místo.
+```
+
+Příklad s drobnou údržbou:
+
+```text
+Zjištění:
+Pravidlo fungovalo, ale správce se k němu dostal přes starý odkaz v poznámce z ověření.
+
+Akce:
+Starý odkaz byl odstraněn a rozcestník vede přímo na kanonickou větu.
+
+Uzavírací stav:
+Uzavřeno po drobné navigační údržbě.
+
+Co zůstává zavřené:
+Neměníme znění pravidla, nezakládáme sledování použití a neotevíráme původní lokální dočištění.
+```
+
+Příklad nové karty:
+
+```text
+Zjištění:
+Běžná správa ukázala, že slabé podněty se opakovaně vracejí z obchodního follow-upu, ne z review šablon.
+
+Uzavírací stav:
+Předáno do nové karty.
+
+Nová otázka:
+Jak má obchodní follow-up rozlišit slabý podnět od skutečného návratového signálu?
+
+Co nepřenášíme:
+Historii původního dočištění, konkrétní jména ani kopie starých zpráv.
+```
+
+Třetí příklad je důležitý: nové téma nesmí nést starý batoh. Vezměte jen závěr, který je pořád použitelný. Zbytek nechte v uzavřené historii.
+
+### Privacy-first uzavření
+
+Uzavření první běžné správy je ideální chvíle uklidit dočasnou datovou stopu. Ptejte se:
+
+```text
+Co ještě existuje jen proto, že jsme opravě věnovali mimořádnou pozornost?
+```
+
+Typické zbytky:
+
+- poznámka z ověření, která se pořád používá jako návod;
+- screenshoty starého stavu;
+- kopie interních zpráv s konkrétními lidmi nebo zákaznickými údaji;
+- pomocná tabulka "použití pravidla";
+- duplicitní odkaz v rozcestníku;
+- připomínka v kalendáři, která už nemá důvod.
+
+Uzavření má nechat jen to, co slouží běžné práci: kanonickou větu, správný odkaz, případně stručný závěr v logu. Surové podklady smažte nebo archivujte podle interních pravidel. Pokud si nejste jistí, držte zásadu nejmenší užitečné stopy: ponechte rozhodnutí, ne materiál, ze kterého rozhodnutí vzniklo.
+
+Příklad privacy-first závěru:
+
+```text
+Ponecháváme:
+Kanonickou pracovní větu v rozcestníku a krátký záznam o uzavření první běžné správy.
+
+Mažeme nebo archivujeme:
+Ověřovací poznámku, starý odkaz a screenshot původního stavu.
+
+Nepřenášíme:
+Konkrétní slabý podnět, jméno autora podnětu ani kopie interní diskuse.
+
+Další sledování:
+Nevzniká. Téma zůstává pouze v běžném měsíčním rytmu.
+```
+
+Privacy-first provoz tady není dramatická právní kapitola. Je to obyčejné uklizení po práci. Čím méně dočasných stop přežije po úspěšném uzavření, tím menší je budoucí údržba, riziko i zmatek.
+
+### Karta uzavření první běžné správy
+
+```text
+Lokální dočištění:
+
+Kanonické pracovní místo:
+
+Běžný správní rytmus:
+
+Výsledek první běžné správy:
+- najitelné a použitelné
+- dokončena navigační údržba
+- dokončena hraniční údržba
+- potvrzen nový návratový signál
+- pracovní místo je neaktuální
+
+Uzavírací stav:
+- uzavřeno beze změny
+- uzavřeno po drobné údržbě
+- předáno do nové karty
+- zavřeno jako neaktuální
+
+Jedna uzavírací věta:
+
+Co zůstává v běžném rytmu:
+
+Co výslovně nepokračuje:
+
+Co se maže nebo archivuje:
+
+Co se nepřenáší do dalších rozhodnutí:
+
+Nová karta, pokud vzniká:
+
+Vlastník kanonického místa:
+
+Datum další běžné správy:
+```
+
+Karta má být krátká. Pokud je delší než původní oprava, něco se pokazilo. Uzavíráte běžnou správu, nepíšete paměti interního procesu.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: pojmenujte lokální dočištění a běžný rytmus, ve kterém se kontrolovalo.
+2. Minuta 2: vyberte uzavírací stav.
+3. Minuta 3: napište jednu uzavírací větu.
+4. Minuta 4: určete, co zůstává v běžném rytmu a co už nepokračuje.
+5. Minuta 5: smažte nebo archivujte dočasné stopy.
+6. Minuta 6: pokud vzniká nová karta, napište její otázku bez staré historie.
+
+Když se workshop začne měnit v debatu o vylepšení celého procesu, vraťte se k uzavíracímu stavu. Cílem není najít další optimalizaci. Cílem je rozhodnout, jestli lokální dočištění po první běžné správě tiše pokračuje, končí jako neaktuální, nebo předává nové téma jinam.
+
+### Checklist uzavření první běžné správy
+
+- Je jasné, v jakém běžném rytmu správa proběhla?
+- Je vybraný jeden uzavírací stav?
+- Má záznam jednu uzavírací větu, kterou pochopí i člověk mimo původní opravu?
+- Pokud proběhla drobná údržba, je opravdu dokončená?
+- Pokud vzniká nová karta, má vlastní otázku a nepřenáší starou historii?
+- Je napsané, co zůstává v běžném rytmu?
+- Je napsané, co výslovně nepokračuje?
+- Jsou odstraněné dočasné odkazy, screenshoty, pomocné tabulky nebo kopie interní komunikace?
+- Zůstává jen kanonická věta, správný odkaz a krátký log?
+- Nevzniká žádné nové sledování "pro jistotu"?
+
+Uzavření první běžné správy má být nudné v tom nejlepším smyslu. Když všechno drží, nevymýšlejte pokračování. Zapište výsledek, ukliďte dočasné stopy a nechte pravidlo pracovat v běžném rytmu. Stabilní systém nepotřebuje nekonečný potlesk. Potřebuje klid a dobrý odkaz.
+
 ## Pracovní log
 
+- 2026-06-28: Doplněna úvodní podkapitola o uzavření první běžné správy po návratu lokálního dočištění: uzavírací stavy, praktické příklady, privacy-first úklid dočasných stop, karta, mini workshop a checklist.
 - 2026-06-28: Doplněna úvodní podkapitola o první běžné správě po návratu lokálního dočištění: tři kontrolní otázky, výsledné stavy, praktické příklady, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-28: Doplněna úvodní podkapitola o návratu lokálního dočištění do běžné správy: běžný rytmus, pracovní věta, návratový signál, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-28: Doplněna úvodní podkapitola o uzavření prvního běžného použití po lokálním dočištění: čtyři uzavírací stavy, praktický příklad, propsání do kanonického místa, privacy-first úklid, karta, mini workshop a checklist.
