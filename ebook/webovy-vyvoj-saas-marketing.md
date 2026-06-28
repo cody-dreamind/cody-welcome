@@ -267555,8 +267555,130 @@ Pokud během šesti minut vznikne debata o více místech, zastavte uzavření a
 
 Uzavření prvního běžného použití po lokálním dočištění je malá tečka za malou opravou. Právě proto je důležitá. Díky ní se oprava neprotáhne do dalšího kontrolního režimu, pravidlo zůstane tam, kde se používá, a tým si odnese jen tolik paměti, kolik opravdu pomůže příštímu rozhodnutí.
 
+## Návrat lokálního dočištění do běžné správy
+
+Když lokální dočištění prošlo prvním běžným použitím a uzavřením, nemá dál žít jako zvláštní téma. Jeho další život patří do běžné správy: do pravidelného review šablon, rozcestníků, obchodních vět, onboardingových kroků nebo jiného pracovního místa, kde oprava opravdu pomáhá. Pokud si tým po úspěšném uzavření nechá samostatnou připomínku "ještě hlídat", často tím jen vytváří druhou stopu ke stejné věci.
+
+Návrat do běžné správy začněte větou:
+
+```text
+Lokální dočištění dál spravujeme pouze v tomto běžném rytmu:
+```
+
+Za větu patří konkrétní rytmus, ne obecné uklidnění:
+
+```text
+Lokální dočištění dál spravujeme pouze v tomto běžném rytmu:
+měsíční review rozcestníku review šablon.
+```
+
+Tím říkáte dvě věci najednou. Oprava nezmizela bez dozoru, ale zároveň kvůli ní nevzniká nová kontrolní smyčka. To je důležitý rozdíl. Běžná správa udržuje pracovní místo použitelné. Mimořádná smyčka dokazuje, že tým pořád nevěří vlastnímu uzavření.
+
+### Co se má přenést
+
+Do běžné správy přeneste jen tři věci:
+
+- aktuální pracovní větu;
+- návratový signál;
+- místo, kde se při pravidelném review kontroluje použitelnost.
+
+Nepřenášejte celou historii opravy. Běžný správce nepotřebuje vědět, kolik verzí věty vzniklo, kdo si čeho všiml a jaké varianty tým odmítl. Potřebuje poznat, jestli současné pravidlo pořád pomáhá rozhodovat.
+
+Praktický zápis může vypadat takto:
+
+```text
+Pracovní věta:
+Slabý podnět zavírej bez nové karty změny, pokud nemá návratový signál ani jasné pracovní místo.
+
+Návratový signál:
+Tři slabé podněty za sebou skončí špatně zařazené nebo se kvůli nim otevře zbytečná karta změny.
+
+Běžná správa:
+Kontrola při měsíčním review rozcestníku šablon.
+```
+
+To stačí. Pokud se později objeví návratový signál, stará historie může být dohledatelná v archivu, ale běžný rytmus ji nemusí nosit na zádech.
+
+### Tři stavy po návratu do správy
+
+Při nejbližší běžné správě může lokální dočištění skončit jedním ze tří stavů:
+
+- Beze změny: pracovní věta je najitelná, použitelná a nevznikla nová datová stopa.
+- Drobné přepsání: smysl platí, ale jazyk nebo umístění potřebuje malou úpravu.
+- Nový návratový signál: běžná správa narazila na opakované tření, které už nepatří do starého dočištění.
+
+Stav `beze změny` je plnohodnotný výsledek. Napište jednu větu do review a nepřidávejte úkol. Dobrý provoz někdy znamená, že kontrola nic nerozšíří. Ano, není to dramatické. Právě proto je to zdravé.
+
+Stav `drobné přepsání` dovoluje upravit formulaci nebo přesunout větu blíž k práci. Nesmí ale měnit rozhodovací pravidlo. Pokud se mění pravidlo, už nejde o údržbu, ale o novou pracovní otázku.
+
+Stav `nový návratový signál` znamená, že se téma má otevřít znovu, ale ne jako pokračování staré mimořádné péče. Otevřete novou kartu s dnešním důvodem a staré lokální dočištění uveďte jen jako související historii.
+
+### Privacy-first správa
+
+Návrat do běžné správy je dobré místo pro úklid zbytkových stop. Zeptejte se:
+
+```text
+Zůstala někde pomocná evidence jen proto, že oprava byla čerstvá?
+
+Potřebuje běžná správa konkrétní osobní nebo zákaznické příklady?
+
+Stačí anonymizovaný závěr místo kopie původního průchodu?
+```
+
+Ve většině případů stačí anonymizovaná pracovní věta a návratový signál. Screenshoty, kopie komentářů, seznam lidí, kteří pravidlo použili, nebo pomocné tabulky nepatří do dlouhodobé správy, pokud podle nich tým opravdu nerozhoduje. A pokud podle nich rozhoduje, mají mít účel, vlastníka a retenci. Jinak je to jen nenápadný dohled v pracovním oblečení.
+
+Codyho komentář: privacy-first provoz se často vyhrává v malých úklidech, ne ve velkých manifestech. Když po každé drobné opravě nezůstane extra poznámka, extra tabulka a extra "radši si to necháme", systém stárne mnohem klidněji.
+
+### Karta návratu do běžné správy
+
+```text
+Lokální dočištění:
+
+Kanonické pracovní místo:
+
+Pracovní věta, která zůstává:
+
+Návratový signál:
+
+Běžný správní rytmus:
+
+Co už dál nesledujeme mimo rytmus:
+
+Co mažeme nebo anonymizujeme:
+
+Kdy by vznikla nová karta:
+
+Vlastník běžné správy:
+```
+
+Karta má být krátká. Pokud se do ní nevejde na jednu obrazovku, pravděpodobně do běžné správy táhnete příliš mnoho starého kontextu.
+
+### Mini workshop na 5 minut
+
+1. Minuta 1: přečtěte uzavřené lokální dočištění.
+2. Minuta 2: vyberte běžný správní rytmus.
+3. Minuta 3: přepište pracovní větu a návratový signál do kanonického místa.
+4. Minuta 4: napište, co se dál nebude sledovat mimo rytmus.
+5. Minuta 5: smažte nebo anonymizujte pomocné stopy.
+
+Pokud během pěti minut neumíte určit běžný rytmus, oprava ještě není připravená opustit mimořádnou péči. Neznamená to, že máte přidat další kontrolu. Znamená to, že musíte najít pracovní místo, kde pravidlo opravdu žije.
+
+### Checklist návratu do správy
+
+- Je jasné, ve kterém běžném rytmu se lokální dočištění dál udržuje?
+- Je pracovní věta v kanonickém místě, ne jen v historii opravy?
+- Je návratový signál konkrétní?
+- Skončila mimořádná připomínka, ruční hlídání nebo samostatná kontrolní karta?
+- Nepřenášíme do běžné správy detaily, které pomohly jen při ověření?
+- Jsou pomocné screenshoty, exporty, poznámky nebo osobní příklady smazané či anonymizované?
+- Je jasné, kdy by vznikla nová karta místo dalšího dočišťování staré?
+- Ví vlastník běžné správy, co kontrolovat a co už neřešit?
+
+Návrat lokálního dočištění do běžné správy je okamžik, kdy se malá oprava přestane tvářit jako projekt. Zůstane po ní použitelná věta, návratový signál a čistší pracovní místo. Všechno ostatní má skončit, jinak tým jen vymění jednu nejasnost za dlouhou paměť na to, jak ji kdysi opravoval.
+
 ## Pracovní log
 
+- 2026-06-28: Doplněna úvodní podkapitola o návratu lokálního dočištění do běžné správy: běžný rytmus, pracovní věta, návratový signál, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-28: Doplněna úvodní podkapitola o uzavření prvního běžného použití po lokálním dočištění: čtyři uzavírací stavy, praktický příklad, propsání do kanonického místa, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-28: Doplněna úvodní podkapitola o uzavření ročního připomenutí do dalšího roku: uzavírací věty, praktický příklad, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-28: Doplněna úvodní podkapitola o ročním připomenutí po klidné správě: tři kontrolní otázky, praktický příklad, výsledné stavy, privacy-first brána, karta, mini workshop a checklist.
