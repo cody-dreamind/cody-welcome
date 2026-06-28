@@ -265346,8 +265346,174 @@ Pokud během pěti minut neumíte určit kanonické místo, nepřevádějte prav
 
 Převod do stabilní běžné správy je hotový ve chvíli, kdy pravidlo umí zmizet z mimořádné pozornosti a přitom zůstat použitelné. To je nenápadná, ale důležitá dovednost. Dobré pravidlo nemá být pořád na očích. Má být přesně tam, kde ho člověk potřebuje, a zbytek času neotravovat.
 
+## První běžné review po převodu do stabilní správy
+
+Stabilní správa neznamená, že pravidlo už nikdo nikdy neuvidí. Znamená, že se na něj tým dívá v normálním rytmu pracovního místa, ne ve zvláštním režimu po návratovém signálu. První běžné review po převodu je proto krátká kontrola, jestli pravidlo opravdu zapadlo do práce: člověk ho najde, použije, nerozšíří původní návrh a nevyrábí kolem něj novou evidenci.
+
+Tahle kontrola má být nudná. Pokud se z ní stane velká retrospektiva, pravděpodobně jste stabilní správu znovu proměnili v mimořádný režim. Cílem není znovu dokázat, že pravidlo bylo správné. Cílem je ověřit, že se běžně používá bez toho, aby na sebe lepilo další proces.
+
+Začněte větou:
+
+```text
+První běžné review po převodu kontroluje pouze to, zda pravidlo funguje v kanonickém pracovním místě bez mimořádné péče a bez nové datové stopy.
+```
+
+Když věta začne znít jako "pojďme ještě jednou projít celý kontext", zastavte se. Kontext už má být historický. Běžné review pracuje s aktuálním místem, aktuální větou a aktuálním použitím. Historii otevíráte jen tehdy, když aktuální stav nejde bez ní pochopit.
+
+### Co review ověřuje
+
+První běžné review má čtyři jednoduché otázky:
+
+- Našel člověk pravidlo tam, kde pracoval?
+- Stačila pracovní věta k rozhodnutí?
+- Zůstal původní široký návrh zavřený?
+- Nevznikla nová pomocná evidence, tabulka, štítek, export nebo bokem vedený seznam?
+
+Tyto otázky stačí. Nepřidávejte k nim obecnou spokojenost týmu, pocit kvality dokumentace ani chuť pravidlo literárně vylepšit. Pokud text funguje pro rozhodnutí, nepotřebuje během prvního review nový lak. Pokud nefunguje, opravte nejbližší pracovní větu, ne celý příběh.
+
+Codyho komentář: první běžné review je jako kontrola, jestli klika otevírá dveře. Když ano, nepíšete strategii klik. Prostě projdete. Ano, méně slavnostní, ale provozně zdravější.
+
+### Tři výsledky review
+
+Po kontrole vyberte jeden ze tří výsledků:
+
+- Pravidlo zůstává ve stabilní správě beze změny.
+- Pravidlo potřebuje lokální opravu v kanonickém pracovním místě.
+- Review odkrylo nový podnět, který nepatří do tohoto pravidla.
+
+První výsledek je ideální a má být krátký. Zapište, že pravidlo bylo použitelné, žádná nová evidence nevznikla a další kontrola zůstává jen v běžném rytmu pracovního místa.
+
+Druhý výsledek použijte, když pravidlo funguje, ale dře konkrétní detail: věta je moc dlouhá, odkaz vede na starou kartu, vlastník není uvedený, nebo je návratový signál schovaný mimo pracovní místo. Opravte detail tam, kde se používá. Neotevírejte návratový režim jen proto, že věta potřebuje zkrátit.
+
+Třetí výsledek patří situaci, kdy se během review objeví jiné téma. Například se ukáže, že obchodní šablona je v pořádku, ale onboarding používá starý příklad. To není chyba pravidla. Je to nový podnět v jiném pracovním místě. Zapište ho odděleně a původní pravidlo nechte žít.
+
+### Praktický příklad
+
+```text
+Kanonické pracovní místo:
+Potvrzovací šablona pro kvalifikovanou poptávku.
+
+Pravidlo:
+Na rámec rozpočtu se ptej jen tehdy, když bez něj nejde navrhnout další konkrétní krok.
+
+První běžné review:
+Obchodník pravidlo našel přímo u šablony a použil ho u jedné relevantní poptávky. Nepřidal nové pole do formuláře, nezaložil rozpočtový štítek v CRM a nepoužil historickou kartu.
+
+Výsledek:
+Pravidlo zůstává ve stabilní správě beze změny.
+
+Další kontrola:
+Pouze při návratovém signálu nebo při běžném review obchodních šablon.
+```
+
+Lokální oprava může vypadat takto:
+
+```text
+Zjištění:
+Pravidlo bylo použitelné, ale návratový signál byl uložený jen v historické kartě.
+
+Oprava:
+K potvrzovací šabloně doplňujeme jednu větu: k tématu se vracíme pouze pokud tři relevantní poptávky za sebou nepůjdou kvalifikovat bez ručního doptání na rozpočet.
+
+Co neotevíráme:
+Novou analýzu poptávek, změnu formuláře ani další měření obchodní kvalifikace.
+```
+
+Tahle oprava je malá, protože problém je v dostupnosti signálu, ne v podstatě pravidla. První review má chránit přesně takovou střízlivost.
+
+### Privacy-first kontrola
+
+Nejdůležitější privacy-first otázka při prvním review zní:
+
+```text
+Začali jsme kvůli stabilní správě sbírat něco, co jsme předtím výslovně nesledovali?
+```
+
+Pokud ano, nejdřív zpochybněte samotný sběr. Stabilní správa nemá potřebovat novou datovou vrstvu. Může vzniknout záznam o review, ale nemá vzniknout nový proud osobních údajů, obchodních poznámek, behaviorálních signálů nebo interních hodnocení lidí.
+
+Příklady zbytečné datové stopy:
+
+- tabulka všech použití pravidla,
+- štítek v CRM jen pro kontrolu pravidla,
+- export poptávek pro "budoucí jistotu",
+- screenshoty jednotlivých rozhodnutí,
+- bokem vedený seznam lidí, kteří pravidlo použili nebo nepoužili.
+
+Pokud je opravdu potřeba něco doložit, stačí agregovaná nebo anonymizovaná poznámka u review. Například: "ve dvou běžných průchodech pravidlo stačilo, nevznikla lokální oprava". Nepotřebujete ukládat celé poptávky, jména lidí ani konkrétní obchodní detaily.
+
+### Karta prvního běžného review
+
+```text
+Pravidlo ve stabilní správě:
+
+Kanonické pracovní místo:
+
+Datum review:
+
+Kdo pravidlo použil nebo kontroloval:
+
+Kontrolovaná pracovní situace:
+
+Našel člověk pravidlo v pracovním místě?
+- ano
+- ne
+
+Stačila pracovní věta k rozhodnutí?
+- ano
+- ne
+
+Zůstal původní široký návrh zavřený?
+- ano
+- ne
+
+Vznikla nová evidence nebo datová stopa?
+- ne
+- ano:
+
+Výsledek review:
+- stabilní správa beze změny
+- lokální oprava pracovního místa
+- nový podnět mimo toto pravidlo
+
+Co upravujeme:
+
+Co výslovně neotevíráme:
+
+Co mažeme nebo dál nesledujeme:
+
+Další kontrola:
+```
+
+Karta má být krátká. Pokud při vyplňování potřebujete dlouhé odstavce, pravděpodobně řešíte nové téma nebo špatně zapsané pravidlo. V obou případech je lepší udělat menší rozhodnutí než nafouknout review.
+
+### Mini workshop na 5 minut
+
+1. Minuta 1: otevřete kanonické pracovní místo a přečtěte pracovní větu.
+2. Minuta 2: ověřte jedno reálné nebo modelové použití.
+3. Minuta 3: rozhodněte, jestli pravidlo zůstalo použitelné bez historie.
+4. Minuta 4: zkontrolujte, zda nevznikla nová evidence.
+5. Minuta 5: zapište jeden výsledek review a zavřete práci.
+
+Když se během pěti minut objeví chuť otevřít větší debatu, napište ji jako podnět vedle. Review stabilní správy není skládka pro všechno, co se kolem pravidla vybavilo. Je to malá kontrola, jestli pravidlo pořád slouží tam, kde má.
+
+### Checklist prvního běžného review
+
+- Kontrolujeme pravidlo v běžném rytmu pracovního místa, ne v mimořádném režimu?
+- Díváme se na aktuální pracovní větu, ne na celou historii rozhodnutí?
+- Ověřili jsme najitelnost pravidla?
+- Ověřili jsme, že věta stačí k rozhodnutí?
+- Zůstal původní široký návrh zavřený?
+- Nevznikla pomocná evidence "pro jistotu"?
+- Pokud je potřeba oprava, je lokální a u kanonického místa?
+- Pokud se objevil nový podnět, je oddělený od původního pravidla?
+- Je jasné, co dál nesledujeme?
+- Končí review jedním výsledkem, ne novým seznamem práce?
+
+První běžné review je úspěšné, když po něm není moc co vyprávět. Pravidlo bylo najitelné, použitelné a nevytvořilo nová data. To možná nezní dramaticky, ale přesně tak má stabilní správa vypadat. Klidný provoz je funkce, ne mezera v aktivitě.
+
 ## Pracovní log
 
+- 2026-06-28: Doplněna úvodní podkapitola o prvním běžném review po převodu do stabilní správy: kontrolní otázky, tři výsledky review, praktické příklady, privacy-first kontrola datové stopy, karta, mini workshop a checklist.
 - 2026-06-28: Doplněna úvodní podkapitola o převodu uzavřeného druhého použití do stabilní běžné správy: kanonické pracovní místo, negativní věta proti tichému dohledu, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-28: Doplněna úvodní podkapitola o uzavření druhého běžného použití po uzavřeném prvním návratovém signálu: čtyři uzavírací stavy, praktické příklady, privacy-first úklid datové stopy, karta, mini workshop a checklist.
 - 2026-06-27: Doplněna úvodní podkapitola o druhém běžném použití po uzavřeném prvním návratovém signálu: přenositelnost pravidla, najitelnost pracovní kotvy, zastavení návratu starého rozsahu, privacy-first kontrola datové stopy, karta, mini workshop a checklist.
