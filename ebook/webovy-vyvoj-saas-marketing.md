@@ -268263,8 +268263,219 @@ Když během pěti minut nenajdete problém, nevyrábějte ho. Závěr je "pravi
 
 Druhá běžná správa má ukončit mimořádnou pozornost kolem lokálního dočištění. Když pravidlo obstojí, nechte ho v klidu. Když neobstojí, opravte nejbližší větu nebo navigaci. A když se ukáže nový problém, založte ho čistě. Tak se z malých oprav nestává nekonečný systém péče a privacy-first provoz zůstává štíhlý.
 
+## Uzavření druhé běžné správy po lokálním dočištění
+
+Druhá běžná správa je poslední rozumné místo, kde se má uzavřené lokální dočištění ještě záměrně připomenout. Ne proto, že by pravidlo bylo křehké. Právě naopak: chcete ověřit, že už křehké není. Po této kontrole má zůstat jen běžný rytmus, kanonické pracovní místo a návratový signál pro případ, že se problém opravdu vrátí. Všechno ostatní je podezřelé. Zvláštní poznámka, ruční připomínka, pomocná tabulka nebo "radši ještě jednou příště" znamenají, že lokální dočištění pořád není dočištěné.
+
+Začněte větou:
+
+```text
+Druhou běžnou správu po lokálním dočištění uzavíráme tímto stavem:
+```
+
+Příklad:
+
+```text
+Druhou běžnou správu po lokálním dočištění uzavíráme tímto stavem: pravidlo je samostatné a pokračuje pouze v běžném měsíčním rytmu.
+```
+
+Tahle věta má zavřít mimořádnou péči. Ne má otevřít další kontrolní kolo. Pokud se při druhé správě objevila poslední drobná chyba, nejdřív ji dokončete a teprve potom uzavřete:
+
+```text
+Druhou běžnou správu uzavíráme stavem: poslední navigační stopa odstraněna, pravidlo zůstává v kanonickém rozcestníku a další zvláštní kontrola nevzniká.
+```
+
+Codyho komentář: druhé uzavření je chvíle, kdy se tým musí rozloučit se svým oblíbeným "ještě to budeme trochu hlídat". Chápu. Hlídat věci působí zodpovědně. Jenže když hlídáte všechno, nehlídáte systém; vyrábíte si malou zoo připomínek, která chce krmit každý týden.
+
+### Čtyři koncové stavy
+
+Po druhé běžné správě vyberte jeden stav:
+
+- Stabilní provoz: pravidlo je samostatné, najitelné a nepotřebuje zvláštní pozornost.
+- Poslední lokální oprava dokončena: jedna věta, odkaz nebo navigační stopa byly opravené a hned uzavřené.
+- Nový podnět založen mimo větev: objevilo se téma, které už nepatří do lokálního dočištění.
+- Pravidlo staženo z provozu: pracovní místo nebo proces se změnily a pravidlo už není potřeba.
+
+Stabilní provoz je výchozí výhra. Pište ho bez dodatků:
+
+```text
+Stabilní provoz. Pravidlo používáme z kanonického rozcestníku, zvláštní kontrola končí a návrat patří až do běžného rytmu nebo při jasném návratovém signálu.
+```
+
+Poslední lokální oprava je povolená jen tehdy, když je opravdu poslední a dokončená. Ne když vznikl nápad:
+
+```text
+Poslední lokální oprava dokončena. Starý odkaz z ověřovací poznámky byl odstraněn, kanonické místo zůstává jediné vstupní místo a další kontrolní seznam nezakládáme.
+```
+
+Nový podnět založte mimo starou větev, pokud se ukázal jiný problém. Staré lokální dočištění nesmí sloužit jako levný kontejner na všechno, co vypadá podobně:
+
+```text
+Druhá správa ukázala opakované tření v obchodním follow-upu. Lokální dočištění uzavíráme jako stabilní a nový podnět zakládáme samostatně, bez přenášení starých podkladů.
+```
+
+Pravidlo stáhněte z provozu, pokud přestalo mít pracovní místo. To není ostuda. Dobrý systém umí nejen přidávat pravidla, ale i ukončovat ta, která už nemají kde pomáhat.
+
+### Praktický příklad
+
+```text
+Lokální dočištění:
+Do rozcestníku review šablon byla doplněna hranice, kdy slabý podnět nezakládat jako novou kartu změny.
+
+První běžná správa:
+Potvrdila, že věta je najitelná a použitelná.
+
+Druhá běžná správa:
+Správce použil pravidlo přímo z rozcestníku, nepotřeboval starou poznámku a nezaložil pomocnou evidenci.
+
+Koncový stav:
+Stabilní provoz.
+
+Uzavírací věta:
+Pravidlo zůstává v kanonickém rozcestníku a dál se kontroluje jen v běžném měsíčním rytmu.
+
+Co končí:
+Zvláštní pozornost k lokálnímu dočištění, stará ověřovací poznámka a neformální připomínka "mrknout ještě příště".
+```
+
+Příklad s poslední lokální opravou:
+
+```text
+Druhá běžná správa:
+Pravidlo bylo použité správně, ale v interní poznámce ještě zůstal odkaz na starou ověřovací kartu.
+
+Akce:
+Starý odkaz byl odstraněn a poznámka už nevede mimo kanonické místo.
+
+Koncový stav:
+Poslední lokální oprava dokončena.
+
+Co neotevíráme:
+Nové review rozcestníku, evidenci použití pravidla ani úpravu obchodního procesu.
+```
+
+Příklad nového podnětu:
+
+```text
+Druhá běžná správa:
+Pravidlo fungovalo, ale dvakrát se ukázalo, že obchodní follow-up používá jinou definici slabého podnětu.
+
+Koncový stav:
+Nový podnět založen mimo větev.
+
+Nová otázka:
+Jak má obchodní follow-up rozlišit slabý podnět od návratového signálu?
+
+Co nepřenášíme:
+Starou ověřovací poznámku, konkrétní jména, kopie zpráv ani historii původního lokálního dočištění.
+```
+
+### Privacy-first uzavření
+
+Uzavření druhé běžné správy má být poslední úklid po celé malé větvi. Projděte tři hromádky:
+
+- Ponechat: kanonickou pracovní větu, správný odkaz a krátký záznam o uzavření.
+- Smazat nebo archivovat: ověřovací poznámky, screenshoty, pomocné exporty, kopie interní komunikace a staré připomínky.
+- Nepřenášet: konkrétní osoby, zákaznické detaily, surové příklady a historii původní opravy.
+
+Použijte jednoduchý zápis:
+
+```text
+Ponecháváme:
+
+Mažeme nebo archivujeme:
+
+Nepřenášíme:
+
+Další zvláštní sledování:
+Nevzniká.
+```
+
+Příklad:
+
+```text
+Ponecháváme:
+Kanonickou větu v rozcestníku a jeden záznam v logu, že druhá běžná správa skončila stabilním provozem.
+
+Mažeme nebo archivujeme:
+Ověřovací poznámku, screenshot staré navigace a dočasnou připomínku.
+
+Nepřenášíme:
+Jména lidí, kteří přinesli původní slabé podněty, ani kopie interních zpráv.
+
+Další zvláštní sledování:
+Nevzniká.
+```
+
+Privacy-first hodnota je v tom, že po uzavření nezůstane malá datová stopa jen proto, že byla kdysi pohodlná. Zůstane rozhodnutí, ne surový materiál. Zůstane pravidlo, ne jeho porodní dokumentace. To je rozdíl mezi týmovou pamětí a provozním skladováním všeho "pro jistotu".
+
+### Karta uzavření druhé běžné správy
+
+```text
+Lokální dočištění:
+
+Kanonické pracovní místo:
+
+Běžný správní rytmus:
+
+Co potvrdila druhá běžná správa:
+
+Koncový stav:
+- stabilní provoz
+- poslední lokální oprava dokončena
+- nový podnět založen mimo větev
+- pravidlo staženo z provozu
+
+Jedna uzavírací věta:
+
+Co zůstává v běžném rytmu:
+
+Co výslovně končí:
+
+Co se maže nebo archivuje:
+
+Co se nepřenáší dál:
+
+Návratový signál, pokud téma někdy znovu otevřít:
+
+Nová karta, pokud vznikla:
+
+Vlastník kanonického místa:
+
+Datum další běžné správy:
+```
+
+Karta má zavírat, ne rozšiřovat. Pokud při jejím vyplňování vznikne dlouhý seznam budoucích zlepšení, odložte ho mimo tuto větev. Tady se rozhoduje, jestli je lokální dočištění hotové v provozu.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte výsledek druhé běžné správy.
+2. Minuta 2: vyberte jeden koncový stav.
+3. Minuta 3: napište jednu uzavírací větu.
+4. Minuta 4: určete, co zůstává v běžném rytmu a co končí.
+5. Minuta 5: smažte, archivujte nebo přestaňte používat dočasné stopy.
+6. Minuta 6: pokud vzniká nový podnět, napište jen jeho otázku a starou větev zavřete.
+
+Když se workshop začne měnit v diskusi o širší správě procesu, zastavte ho. To může být dobré téma, ale není to uzavření druhé běžné správy. Tady má vzniknout tečka, ne nová kapitola interního románu.
+
+### Checklist uzavření druhé běžné správy
+
+- Je vybraný jeden koncový stav?
+- Má záznam jednu srozumitelnou uzavírací větu?
+- Je jasné, co zůstává v běžném rytmu?
+- Je jasné, co výslovně končí?
+- Pokud proběhla poslední lokální oprava, je opravdu dokončená?
+- Pokud vznikl nový podnět, má vlastní otázku a vlastní kartu?
+- Nepřenáší nová karta staré podklady, jména ani kopie interní komunikace?
+- Jsou odstraněné nebo archivované dočasné poznámky, screenshoty, exporty a připomínky?
+- Nevzniká žádné další zvláštní sledování "pro jistotu"?
+- Je návratový signál formulovaný tak, aby se téma neotevřelo jen z pocitu?
+
+Uzavření druhé běžné správy je malý rituál s velkým dopadem: po něm má pravidlo buď žít samo, skončit, nebo předat nové téma čistě jinam. Nic mezi tím. Tím se z lokálního dočištění nestane stálá provozní agenda a tým si udrží to nejcennější: méně otevřených smyček, méně datových zbytků a víc klidu pro práci, která opravdu mění produkt.
+
 ## Pracovní log
 
+- 2026-06-28: Doplněna úvodní podkapitola o uzavření druhé běžné správy po lokálním dočištění: koncové stavy, praktické příklady, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-28: Doplněna úvodní podkapitola o druhé běžné správě po uzavřeném lokálním dočištění: samostatnost pravidla, odstranění skryté evidence, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-28: Doplněna úvodní podkapitola o uzavření první běžné správy po návratu lokálního dočištění: uzavírací stavy, praktické příklady, privacy-first úklid dočasných stop, karta, mini workshop a checklist.
 - 2026-06-28: Doplněna úvodní podkapitola o první běžné správě po návratu lokálního dočištění: tři kontrolní otázky, výsledné stavy, praktické příklady, privacy-first úklid, karta, mini workshop a checklist.
