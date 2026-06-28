@@ -267676,8 +267676,214 @@ Pokud během pěti minut neumíte určit běžný rytmus, oprava ještě není p
 
 Návrat lokálního dočištění do běžné správy je okamžik, kdy se malá oprava přestane tvářit jako projekt. Zůstane po ní použitelná věta, návratový signál a čistší pracovní místo. Všechno ostatní má skončit, jinak tým jen vymění jednu nejasnost za dlouhou paměť na to, jak ji kdysi opravoval.
 
+## První běžná správa po návratu lokálního dočištění
+
+První běžná správa po návratu lokálního dočištění je test, jestli se oprava opravdu usadila v normálním rytmu. Nejde o další mimořádné ověření. Jde o chvíli, kdy správce šablony, rozcestníku, formuláře nebo obchodní věty narazí na upravené místo při běžné údržbě a má poznat, jestli stačí ponechat stav beze změny.
+
+Začněte větou:
+
+```text
+Lokální dočištění poprvé kontrolujeme v běžné správě při:
+```
+
+Příklad:
+
+```text
+Lokální dočištění poprvé kontrolujeme v běžné správě při měsíčním review rozcestníku review šablon.
+```
+
+Tahle věta je malá pojistka proti návratu mimořádné péče. Pokud napíšete "pro jistotu zkontrolujeme, jestli to pořád funguje", snadno z toho vznikne samostatná kontrola. Pokud napíšete konkrétní běžný rytmus, oprava zůstane tam, kde má být: v provozu.
+
+Codyho komentář: první běžná správa je nenápadná disciplína. Tým má chuť ještě jednou pohladit čerstvě opravené místo a říct mu, jak je šikovné. Roztomilé, ale drahé. Pokud pravidlo funguje v běžném rytmu, nepotřebuje další mazlení, potřebuje klid.
+
+### Tři otázky běžné správy
+
+Při první běžné správě stačí tři otázky:
+
+- Je pracovní věta pořád najitelná na kanonickém místě?
+- Pomáhá rozhodnout bez staré historie a bez autora opravy?
+- Nevznikla kolem ní nová pomocná evidence?
+
+Pokud jsou všechny odpovědi ano, napište krátký závěr a nepřidávejte úkol. Tohle je plnohodnotný výsledek. Běžná správa má chránit použitelnost, ne vyrábět práci tam, kde pravidlo konečně funguje tiše.
+
+Pokud pracovní věta není najitelná, opravte cestu. Může jít o název odkazu, umístění v rozcestníku nebo starou kopii, která pořád vyhrává nad kanonickým místem. To je navigační údržba, ne nové produktové rozhodnutí.
+
+Pokud věta nepomáhá rozhodnout bez staré historie, zkontrolujte hranici použití. Možná stačí doplnit jeden příklad "použijte / nepoužívejte". Pokud by ale bylo potřeba vysvětlovat původní incident, staré varianty a půlku rozhodovacího procesu, pravidlo ještě není dost samostatné.
+
+Pokud vznikla nová pomocná evidence, zastavte ji hned. První běžná správa není důvod zakládat tabulku použití, sbírat screenshoty ani ukládat konkrétní zákaznické příklady. Dlouhodobě si nechte rozhodovací větu, ne provozní surovinu.
+
+### Výsledné stavy
+
+Po první běžné správě vyberte jeden stav:
+
+- Beze změny: pracovní věta je najitelná, rozhodnutelná a bez nové datové stopy.
+- Navigační údržba: smysl pravidla drží, ale cesta k němu je slabá.
+- Hraniční údržba: pravidlo drží, ale potřebuje jeden příklad hranice použití.
+- Nová karta: běžná správa potvrdila opakované tření, které už nejde řešit jako údržbu.
+
+Stav `beze změny` je nejlepší a nejkratší. Do review stačí:
+
+```text
+Lokální dočištění zůstává beze změny. Pracovní věta je najitelná, použitelná bez autora opravy a bez nové pomocné evidence.
+```
+
+Stav `navigační údržba` nesmí otevřít obsah pravidla. Opravte cestu a zapište, co jste přestali používat:
+
+```text
+Opravujeme odkaz z rozcestníku na kanonickou šablonu. Starou poznámku z dočištění zavíráme a dál ji nepoužíváme jako vstupní místo.
+```
+
+Stav `hraniční údržba` dovoluje přidat jeden malý příklad. Ne celý rozhodovací strom:
+
+```text
+Doplňujeme příklad, že pravidlo platí pro slabý podnět bez návratového signálu, ne pro opakované selhání stejného kroku.
+```
+
+Stav `nová karta` použijte až ve chvíli, kdy běžná správa ukáže skutečný návratový signál. Ne proto, že text může být hezčí. Hezčí text je fajn. Skutečný návratový signál je důvod k práci.
+
+### Praktický příklad
+
+```text
+Lokální dočištění:
+Do rozcestníku review šablon byla přidána věta, kdy slabý podnět nezakládat jako novou kartu změny.
+
+Běžná správa:
+Měsíční review rozcestníku.
+
+Kontrola:
+Správce našel větu v kanonickém rozcestníku, použil ji pro jeden slabý podnět a nemusel dohledávat původní opravu.
+
+Datová stopa:
+Nevznikla nová tabulka podnětů, screenshoty ani kopie pracovních zpráv.
+
+Výsledek:
+Beze změny.
+
+Závěr:
+Pravidlo zůstává v běžné správě. Další zvláštní sledování nevzniká.
+```
+
+Příklad drobné údržby:
+
+```text
+Výsledek:
+Navigační údržba.
+
+Co se stalo:
+Správce použil správnou větu, ale dostal se k ní přes starý odkaz v poznámce z ověření.
+
+Nejmenší oprava:
+Přesměrujeme odkaz v rozcestníku na kanonické místo a starou poznámku archivujeme.
+
+Co neotevíráme:
+Neměníme pravidlo, návratový signál ani rytmus správy.
+```
+
+Tady je důležité nezvětšit opravu jen proto, že už máte otevřený dokument. Otevřený dokument není výzva k rekonstrukci. Je to jen otevřený dokument. Ano, někdy je potřeba říct počítači i sobě.
+
+### Privacy-first kontrola běžné správy
+
+První běžná správa má po sobě nechat minimum stop. Zapište:
+
+```text
+Ponecháváme:
+
+Nepřenášíme:
+
+Mažeme nebo archivujeme:
+
+Další sledování:
+```
+
+Příklad:
+
+```text
+Ponecháváme:
+Závěr, že pracovní věta zůstává beze změny v měsíční správě rozcestníku.
+
+Nepřenášíme:
+Konkrétní znění slabého podnětu, jméno člověka, který ho přinesl, ani historii původního dočištění.
+
+Mažeme nebo archivujeme:
+Starý odkaz na ověřovací poznámku, protože už nemá být vstupním místem.
+
+Další sledování:
+Nevzniká. Návratový signál zůstává stejný.
+```
+
+Privacy-first smysl je přímočarý: běžná správa nemá z lokální opravy vyrábět kroniku. Čím méně surových stop po úspěšné opravě zůstane, tím snáz se systém udržuje a tím menší riziko vzniká při každé další interní kontrole.
+
+### Karta první běžné správy
+
+```text
+Lokální dočištění:
+
+Kanonické pracovní místo:
+
+Běžný správní rytmus:
+
+Co se při správě kontrolovalo:
+
+Najitelnost:
+- drží
+- potřebuje navigační údržbu
+- nedrží
+
+Rozhodnutelnost:
+- drží bez autora opravy
+- potřebuje hraniční příklad
+- nedrží
+
+Datová stopa:
+- bez nové evidence
+- pomocná stopa odstraněna
+- vzniklo riziko k úklidu
+
+Výsledek:
+- beze změny
+- navigační údržba
+- hraniční údržba
+- nová karta
+
+Nejmenší akce, pokud je potřeba:
+
+Co zůstává zavřené:
+
+Privacy-first uzavření:
+Ponecháváme:
+Nepřenášíme:
+Mažeme nebo archivujeme:
+Další sledování:
+```
+
+### Mini workshop na 5 minut
+
+1. Minuta 1: pojmenujte lokální dočištění a běžný správní rytmus.
+2. Minuta 2: ověřte najitelnost kanonického místa.
+3. Minuta 3: ověřte, jestli pravidlo pomáhá rozhodnout bez autora opravy.
+4. Minuta 4: zkontrolujte datovou stopu a odstraňte pomocné zbytky.
+5. Minuta 5: vyberte výsledek a napište, co zůstává zavřené.
+
+Když během workshopu někdo navrhne větší přepsání pravidla, vraťte se k otázce: "Potvrdila běžná správa návratový signál, nebo jen vidíme lepší formulaci?" Pokud jen lepší formulaci, držte údržbu malou. Pokud návratový signál, založte novou kartu.
+
+### Checklist první běžné správy
+
+- Proběhla kontrola v běžném rytmu, ne jako mimořádné ověření?
+- Je kanonické pracovní místo stále správné?
+- Je pracovní věta najitelná bez staré poznámky?
+- Dá se pravidlo použít bez autora lokální opravy?
+- Stačí případná údržba jako navigační nebo hraniční drobnost?
+- Pokud se objevil širší problém, vzniká nová karta místo natahování starého dočištění?
+- Nevznikl nový report, tracker, screenshotová složka ani kopie zákaznických dat?
+- Jsou staré pomocné odkazy, poznámky nebo exporty smazané či archivované?
+- Je jasně napsané, co zůstává zavřené?
+- Zůstává další kontrola jen v běžném správním rytmu?
+
+První běžná správa po návratu lokálního dočištění má potvrdit klid. Když pravidlo drží, nejlepší další krok je žádný nový krok. Jen krátký záznam, čisté pracovní místo a pokračování v normálním rytmu. Produktivita někdy vypadá podezřele jako nedělání další práce. Šokující, ale účinné.
+
 ## Pracovní log
 
+- 2026-06-28: Doplněna úvodní podkapitola o první běžné správě po návratu lokálního dočištění: tři kontrolní otázky, výsledné stavy, praktické příklady, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-28: Doplněna úvodní podkapitola o návratu lokálního dočištění do běžné správy: běžný rytmus, pracovní věta, návratový signál, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-28: Doplněna úvodní podkapitola o uzavření prvního běžného použití po lokálním dočištění: čtyři uzavírací stavy, praktický příklad, propsání do kanonického místa, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-28: Doplněna úvodní podkapitola o uzavření ročního připomenutí do dalšího roku: uzavírací věty, praktický příklad, privacy-first úklid, karta, mini workshop a checklist.
