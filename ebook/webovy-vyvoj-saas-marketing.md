@@ -265827,8 +265827,178 @@ Kartu držte krátkou. Druhé review má být důkaz samostatnosti, ne nové shr
 
 Druhé běžné review má tým zbavit potřeby držet pravidlo v hlavě. Když pravidlo obstojí, vraťte ho do obyčejného provozu. Když neobstojí, neopravujte celý příběh. Opravte nejbližší místo, kde se samostatnost rozpadla, a znovu hlídejte datové minimum. Stabilní pravidlo není to, které má nejvíc dokumentace. Stabilní pravidlo je to, které pomůže udělat správné rozhodnutí bez zbytečné paměti, zbytečné kontroly a zbytečných dat.
 
+## Uzavření druhého běžného review do klidné správy
+
+Druhé běžné review má hodnotu až ve chvíli, kdy ho umíte zavřít. Samotná kontrola jen říká, co se stalo. Uzavření říká, co se odteď mění, co zůstává stejné a co už nebudete dál držet v mimořádné pozornosti. Bez uzavření se i dobré review může proměnit v další otevřenou záložku: pravidlo funguje, ale někdo ho pořád sleduje, někdo si nechává poznámky bokem a někdo má pocit, že by se k tomu "ještě mělo něco napsat".
+
+Začněte větou:
+
+```text
+Druhé běžné review uzavíráme tímto stavem:
+```
+
+Za dvojtečku patří jeden stav, ne odstavec dojmů. Uzavírací stav má být tak krátký, aby ho bylo možné přenést přímo do pracovního místa. Pokud potřebujete dlouhé vysvětlení, nejspíš nezavíráte review, ale znovu otevíráte problém.
+
+Codyho komentář: uzavření review není slavnostní předání medaile pravidlu za dobré chování. Je to úklid. A úklid má jednu skvělou vlastnost: když je hotový, nemá být vidět jako další práce.
+
+### Čtyři uzavírací stavy
+
+Použijte jeden z těchto stavů:
+
+- Pravidlo je stabilní: zůstává v běžné správě bez další mimořádné kontroly.
+- Pravidlo potřebuje lokální dotažení: upravuje se jen nejbližší formulace, odkaz nebo pracovní kotva.
+- Pravidlo potřebuje poslední běžné ověření: kontrola se neprodlužuje obecně, ale čeká na jednu konkrétní situaci.
+- Review odhalilo nové téma: původní pravidlo se zavírá a nový podnět dostává vlastní kartu.
+
+Stav `pravidlo je stabilní` je nejjednodušší a často nejlepší. Znamená, že další práce nevzniká. Nezakládá se nová evidence, nepíše se další metodika a staré podklady se uklidí. Kanonické pracovní místo zůstává zdrojem pravdy.
+
+Stav `lokální dotažení` použijte, když problém není v rozhodnutí, ale v jeho dosažitelnosti. Typicky chybí odkaz v rozcestníku, věta v šabloně je moc historická, nebo název pravidla neodpovídá jazyku týmu. Oprava má být tak malá, že nemění význam pravidla.
+
+Stav `poslední běžné ověření` použijte opatrně. Je užitečný, když druhé review narazilo na situaci, která se nedá rozhodnout od stolu. Musí ale mít jasnou stop podmínku: jedno další použití, jeden konkrétní typ poptávky, jeden onboardingový průchod. Ne "budeme sledovat dál".
+
+Stav `nové téma` chrání staré pravidlo před tím, aby do sebe nasálo cizí problém. Pokud druhé review ukázalo jinou potíž, založte novou pracovní otázku a staré pravidlo nechte zavřené. Jinak se z dobrého standardu stane skladiště souvisejících bolestí.
+
+### Praktický příklad stabilního uzavření
+
+```text
+Druhé běžné review:
+Nový obchodník našel pravidlo u potvrzovací šablony, použil ho bez vysvětlování a nevytvořil žádnou pomocnou evidenci poptávek.
+
+Uzavírací stav:
+Pravidlo je stabilní.
+
+Co zůstává:
+V potvrzovací šabloně zůstává věta, že rozpočet řešíme až po pochopení cíle projektu, pokud je potřeba pro další krok.
+
+Co končí:
+Končí mimořádné review pravidla a maže se pomocná poznámka z druhé kontroly.
+
+Co neotevíráme:
+Povinné pole pro rozpočet, CRM štítek ani seznam poptávek pro další sledování.
+```
+
+Tady není potřeba vymýšlet další zlepšení. Pravidlo funguje v běžné práci, takže nejlepší další krok je žádný další krok. To zní podezřele jednoduše, ale produktivita občas opravdu znamená přestat sahat na věc, která už drží.
+
+### Praktický příklad lokálního dotažení
+
+```text
+Druhé běžné review:
+Pravidlo bylo v šabloně, ale nový člověk ho hledal přes obchodní rozcestník a tam chyběl odkaz.
+
+Uzavírací stav:
+Pravidlo potřebuje lokální dotažení.
+
+Lokální oprava:
+Do obchodního rozcestníku přidáváme odkaz "Kdy se ptát na rozpočet" vedoucí na existující šablonu.
+
+Co se nemění:
+Neměníme pravidlo, formulář ani obchodní kvalifikaci.
+
+Ověření:
+Při nejbližším běžném použití má člověk najít pravidlo přes rozcestník bez otevírání historické karty.
+```
+
+Lokální dotažení má zůstat lokální i po zapsání. Jakmile se z něj stane úprava formuláře, CRM procesu, sales skriptu a onboardingové dokumentace najednou, už to není dotažení. Je to nová změna, která se jen převlékla za drobnou opravu. Hezký kostým, pořád špatný rozsah.
+
+### Praktický příklad nového tématu
+
+```text
+Druhé běžné review:
+Pravidlo pro rozpočet funguje, ale při kontrole se ukázalo, že zájemci nerozumí rozdílu mezi auditem a dlouhodobým vývojem.
+
+Uzavírací stav:
+Review odhalilo nové téma.
+
+Co zavíráme:
+Pravidlo pro rozpočet zůstává stabilní a neotevíráme jeho změnu.
+
+Nová pracovní otázka:
+Kde má zájemce nejdřív poznat rozdíl mezi auditem a dlouhodobou spoluprací?
+
+Nejbližší pracovní místo:
+Blok nad poptávkovým formulářem.
+```
+
+Tady je důležité nepodlehnout pokušení přilepit nové téma ke starému pravidlu. Obě věci se možná potkaly ve stejném review, ale nepatří do stejného rozhodnutí. Staré pravidlo uzavřete a novému tématu dejte vlastní hranici.
+
+### Privacy-first uzavření
+
+Uzavření druhého review je vhodný okamžik pro úklid datové stopy. Ptejte se:
+
+```text
+Jaká pomocná data vznikla jen kvůli review a nemají důvod zůstat?
+```
+
+Typicky půjde o dočasné poznámky, exporty, screenshoty, seznamy příkladů, kopie poptávek nebo pracovní tabulky. Pokud už z nich vznikla jedna obecná věta v kanonickém pracovním místě, surové podklady nepotřebujete držet. Pokud je potřebujete kvůli konkrétnímu rozhodnutí, zkraťte je na minimum, anonymizujte a napište dobu návratu.
+
+Privacy-first uzavření může vypadat takto:
+
+```text
+Po druhém běžném review nenecháváme žádný seznam konkrétních poptávek ani pomocný export. Do obchodního rozcestníku se propisuje jen obecná věta o použití pravidla. Dočasné poznámky z kontroly jsou smazané.
+```
+
+Tohle je malá věc, ale právě z malých věcí se skládá evropský provoz s kontrolou nad daty. Nečekejte na velký audit, aby se uklidily podklady, které už splnily účel. Uklízejte je ve chvíli, kdy zavíráte rozhodnutí.
+
+### Karta uzavření druhého review
+
+```text
+Pravidlo:
+
+Kanonické pracovní místo:
+
+Datum druhého review:
+
+Uzavírací stav:
+- pravidlo je stabilní
+- pravidlo potřebuje lokální dotažení
+- pravidlo potřebuje poslední běžné ověření
+- review odhalilo nové téma
+
+Jednovětý závěr do pracovního místa:
+
+Co upravujeme:
+
+Co výslovně neotevíráme:
+
+Jaká pomocná data mažeme, anonymizujeme nebo vůbec nezakládáme:
+
+Další kontrola:
+
+Pokud vzniklo nové téma, kde má vlastní kartu:
+```
+
+Karta má být uzavírací, ne vyšetřovací. Neopisujte do ní celé druhé review. Zapište stav, větu do pracovního místa, datový úklid a případnou další kontrolu. Všechno ostatní je kandidát na archiv nebo samostatný podnět.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte výsledek druhého běžného review.
+2. Minuta 2: vyberte jeden uzavírací stav.
+3. Minuta 3: napište jednovětý závěr do kanonického pracovního místa.
+4. Minuta 4: určete, co výslovně neotevíráte.
+5. Minuta 5: smažte, anonymizujte nebo nezakládejte pomocné podklady.
+6. Minuta 6: rozhodněte, jestli další kontrola patří do běžného rytmu, nebo žádná další kontrola není.
+
+Pokud workshop přeroste šest minut, zastavte ho a pojmenujte, co se stalo. Buď nemáte uzavřené review, nebo se objevilo nové téma. V obou případech nepomůže delší debata v uzavírací kartě. Pomůže menší hranice.
+
+### Checklist uzavření druhého review
+
+- Má druhé review jeden jasný uzavírací stav?
+- Je závěr přenesený do pracovního místa, kde se pravidlo používá?
+- Pokud je pravidlo stabilní, skončila mimořádná pozornost?
+- Pokud vznikla lokální oprava, nemění význam pravidla?
+- Pokud čeká poslední ověření, má jasnou stop podmínku?
+- Pokud vzniklo nové téma, má vlastní kartu a vlastní pracovní místo?
+- Zůstává původní široký návrh zavřený?
+- Je výslovně zapsané, co neotevíráme?
+- Jsou pomocné podklady smazané, anonymizované nebo časově omezené?
+- Nevzniká nová evidence jen proto, že review vyvolalo dojem opatrnosti?
+- Ví další člověk, kde pravidlo najde bez čtení celé historie?
+
+Uzavření druhého review má zanechat pravidlo v klidné správě. Buď je stabilní, nebo má jednu malou opravu, nebo se nové téma oddělilo. V žádném z těchto stavů není potřeba držet starou smyčku otevřenou. Dobrá správa není nekonečné hlídání. Dobrá správa je schopnost poznat, kdy už stačí.
+
 ## Pracovní log
 
+- 2026-06-28: Doplněna úvodní podkapitola o uzavření druhého běžného review do klidné správy: čtyři uzavírací stavy, praktické příklady, privacy-first úklid podkladů, karta, mini workshop a checklist.
 - 2026-06-28: Doplněna úvodní podkapitola o uzavření prvního běžného review po převodu do stabilní správy: čtyři uzavírací stavy, praktické příklady, privacy-first uzavření datové stopy, karta, mini workshop a checklist.
 - 2026-06-28: Doplněna úvodní podkapitola o prvním běžném review po převodu do stabilní správy: kontrolní otázky, tři výsledky review, praktické příklady, privacy-first kontrola datové stopy, karta, mini workshop a checklist.
 - 2026-06-28: Doplněna úvodní podkapitola o převodu uzavřeného druhého použití do stabilní běžné správy: kanonické pracovní místo, negativní věta proti tichému dohledu, privacy-first úklid, karta, mini workshop a checklist.
