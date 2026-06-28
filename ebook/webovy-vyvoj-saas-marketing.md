@@ -265511,8 +265511,172 @@ Když se během pěti minut objeví chuť otevřít větší debatu, napište ji
 
 První běžné review je úspěšné, když po něm není moc co vyprávět. Pravidlo bylo najitelné, použitelné a nevytvořilo nová data. To možná nezní dramaticky, ale přesně tak má stabilní správa vypadat. Klidný provoz je funkce, ne mezera v aktivitě.
 
+## Uzavření prvního běžného review po převodu do stabilní správy
+
+První běžné review po převodu do stabilní správy nemá zůstat otevřené jako nenápadná poznámka "ještě se na to podíváme". Pokud review proběhlo, musí skončit jedním uzavíracím stavem, který tým pochopí i bez návratu do celé historie. Jinak se stabilní správa začne chovat jako dočasný režim: každý ví, že se něco kontrolovalo, ale nikdo neví, jestli se pravidlo opravdu vrátilo do normálního rytmu.
+
+Uzavření proto začíná krátkou větou:
+
+```text
+První běžné review uzavíráme tímto stavem:
+```
+
+Za dvojtečku nepatří dlouhé vysvětlení. Patří tam jeden výsledek: pravidlo zůstává beze změny, pravidlo dostalo lokální opravu, nebo vznikl oddělený podnět mimo původní pravidlo. Všechno ostatní je doprovodný zápis. Pokud výsledek nejde říct jednou větou, review pravděpodobně nebylo dost úzké.
+
+Codyho komentář: uzavření review je malá administrativní brzda proti tomu, aby se z "hotovo" stalo "všichni tak nějak tušíme". Týmová paměť není telepatie. Bohužel, i když by to ušetřilo dost poznámek.
+
+### Čtyři uzavírací stavy
+
+Použijte jeden ze čtyř stavů:
+
+- Stabilní správa potvrzena.
+- Lokální oprava provedena a uzavřena.
+- Lokální oprava provedena, ale čeká na jedno běžné použití.
+- Nový podnět oddělen od původního pravidla.
+
+Stabilní správa potvrzena znamená, že pravidlo bylo najitelné, použitelné, původní široký návrh zůstal zavřený a nevznikla nová evidence. Zápis má být krátký. Nezakládejte novou kartu jen proto, že všechno fungovalo. Stačí poznámka u pracovního místa nebo v logu review.
+
+Lokální oprava provedena a uzavřena patří k drobnostem, které se daly opravit hned: zkrácení věty, doplnění odkazu, přesun návratového signálu ke kanonické šabloně, odstranění staré poznámky. Pokud oprava nemění smysl pravidla, není důvod otevírat další kontrolní režim.
+
+Lokální oprava provedena, ale čeká na jedno běžné použití je stav pro situaci, kdy detail sice vypadá malý, ale jeho účinek se ukáže až při práci. Typicky jde o přepsanou větu v obchodní šabloně, upravenou navigaci v interním indexu nebo přesunutý checklist. Ověření má být jedno, běžné a jasně ohraničené.
+
+Nový podnět oddělen od původního pravidla použijte, když review odkrylo jiné téma. Původní pravidlo kvůli tomu nenechte otevřené. Nový podnět dostane vlastní kartu, vlastní pracovní místo a vlastní důkaz. Jinak se ze stabilní správy stane univerzální sběrné místo pro všechno, co se zrovna připomnělo.
+
+### Praktický příklad potvrzení
+
+```text
+Pravidlo:
+Na rámec rozpočtu se ptáme až ve chvíli, kdy bez něj nejde navrhnout další konkrétní krok.
+
+Review:
+Pravidlo bylo nalezené u potvrzovací šablony a použité u jedné relevantní poptávky. Obchodník nepřidal pole do formuláře, nezaložil nový štítek v CRM a nevracel se k historické kartě.
+
+Uzavírací stav:
+Stabilní správa potvrzena.
+
+Další kontrola:
+Pouze v běžném review obchodních šablon nebo při přesně zapsaném návratovém signálu.
+```
+
+Tady není co dramatizovat. Výsledek review potvrzuje, že pravidlo žije tam, kde má. Nejlepší další krok je žádný další krok.
+
+### Praktický příklad lokální opravy
+
+```text
+Zjištění:
+Pravidlo bylo použitelné, ale návratový signál byl uložený jen v historické kartě.
+
+Oprava:
+K potvrzovací šabloně doplňujeme jednu větu: k rozpočtovému poli se vracíme pouze pokud tři relevantní poptávky za sebou nepůjdou kvalifikovat bez ručního doptání na rozpočet.
+
+Uzavírací stav:
+Lokální oprava provedena a uzavřena.
+
+Co neotevíráme:
+Nové pole ve formuláři, změnu lead scoringu ani export poptávek pro kontrolu.
+```
+
+Tahle oprava nemění rozhodnutí. Jen dává návratový signál na místo, kde ho člověk najde. Proto ji není potřeba tahat do dalšího zvláštního režimu.
+
+### Praktický příklad odděleného podnětu
+
+```text
+Zjištění během review:
+Potvrzovací šablona je v pořádku, ale onboardingový e-mail pořád používá starý příklad s povinným rozpočtovým polem.
+
+Uzavírací stav původního pravidla:
+Stabilní správa potvrzena.
+
+Nový podnět:
+Ověřit onboardingový e-mail jako samostatné pracovní místo.
+
+Co neotevíráme:
+Původní rozhodnutí o poptávkovém formuláři.
+```
+
+Oddělení podnětu je důležité. Kdybyste onboardingový e-mail přilepili k původnímu review, začnete míchat dvě pracovní místa. Za týden už nebude jasné, jestli problém byl v pravidle, v šabloně, nebo v e-mailu. A to je přesně ten typ nejasnosti, který si pak říká o tři schůzky a jednu tabulku navíc. Nikdo to nechce, jen se to tak nějak stane.
+
+### Privacy-first uzavření
+
+Privacy-first uzavření se neptá jen na to, jestli pravidlo fungovalo. Ptá se, co po review zůstává v datech.
+
+Uzavřete tři věci:
+
+- Jaký záznam z review opravdu potřebujete ponechat.
+- Jaké pomocné poznámky, exporty nebo screenshoty můžete smazat.
+- Jaké sledování výslovně nezavádíte pro další období.
+
+Příklad privacy-first uzavírací věty:
+
+```text
+Po review necháváme jen stručný agregovaný záznam u obchodní šablony. Nemažeme kanonické rozhodnutí, ale mažeme pracovní výpis poptávek použitý při kontrole. Nezavádíme tabulku použití pravidla ani nový CRM štítek.
+```
+
+Tohle je praktické hlavně u týmů, které mají dobrý úmysl "měřit, jestli se pravidlo používá". Užitečnost pravidla se ale často pozná bez detailního sledování lidí a jednotlivých obchodních situací. Pokud stačí běžné review a anonymizovaná poznámka, neukládejte víc. Data, která nevzniknou, se nemusí chránit, mazat ani vysvětlovat.
+
+### Karta uzavření prvního běžného review
+
+```text
+Pravidlo:
+
+Kanonické pracovní místo:
+
+Datum prvního běžného review:
+
+Uzavírací stav:
+- stabilní správa potvrzena
+- lokální oprava provedena a uzavřena
+- lokální oprava čeká na jedno běžné použití
+- nový podnět oddělen od původního pravidla
+
+Jednovětý závěr:
+
+Co bylo upraveno:
+
+Co zůstává zavřené:
+
+Co nebudeme dál sledovat:
+
+Jaké pomocné podklady mažeme nebo anonymizujeme:
+
+Nový podnět, pokud vznikl:
+
+Kde je uložený:
+
+Další kontrola:
+```
+
+Karta má být kratší než samotné review. Pokud karta bobtná, pravděpodobně do ní cpete historii nebo nový problém. Vraťte se k uzavíracímu stavu a nechte kartu dělat jedinou věc: říct, jak review skončilo.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte výsledek prvního běžného review.
+2. Minuta 2: vyberte jeden uzavírací stav.
+3. Minuta 3: napište jednovětý závěr k pracovnímu místu.
+4. Minuta 4: určete, co zůstává zavřené.
+5. Minuta 5: smažte nebo anonymizujte pomocné podklady.
+6. Minuta 6: zapište další kontrolu nebo výslovně řekněte, že žádná mimořádná kontrola není.
+
+Šest minut stačí, protože uzavření nemá znovu hodnotit celé pravidlo. Má jen zavřít stav po review. Když potřebujete víc času, možná už nejste v uzavření, ale v novém podnětu. Ten si zaslouží vlastní hranici.
+
+### Checklist uzavření prvního běžného review
+
+- Má review jeden jasný uzavírací stav?
+- Je závěr srozumitelný bez čtení celé historie?
+- Pokud proběhla oprava, je opravdu lokální?
+- Pokud oprava čeká na ověření, je ověření omezené na jedno běžné použití?
+- Pokud vznikl nový podnět, má vlastní pracovní místo?
+- Zůstává původní široký návrh zavřený?
+- Je zapsané, co dál nesledujeme?
+- Jsou pomocné podklady smazané, anonymizované nebo jasně omezené?
+- Nevznikla nová tabulka, štítek, export nebo evidence jen kvůli pocitu kontroly?
+- Je další kontrola v běžném rytmu, ne v mimořádném režimu?
+
+Uzavření prvního běžného review má po sobě nechat klid. Buď pravidlo funguje a vrací se do běžné správy, nebo dostalo malou opravu, nebo se nový podnět oddělil. V každém případě se tým nemá dál držet review jako otevřeného příběhu. Hotové review má být zavřené. Jinak to není review, ale záložka v prohlížeči, kterou nikdo nemá odvahu zavřít.
+
 ## Pracovní log
 
+- 2026-06-28: Doplněna úvodní podkapitola o uzavření prvního běžného review po převodu do stabilní správy: čtyři uzavírací stavy, praktické příklady, privacy-first uzavření datové stopy, karta, mini workshop a checklist.
 - 2026-06-28: Doplněna úvodní podkapitola o prvním běžném review po převodu do stabilní správy: kontrolní otázky, tři výsledky review, praktické příklady, privacy-first kontrola datové stopy, karta, mini workshop a checklist.
 - 2026-06-28: Doplněna úvodní podkapitola o převodu uzavřeného druhého použití do stabilní běžné správy: kanonické pracovní místo, negativní věta proti tichému dohledu, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-28: Doplněna úvodní podkapitola o uzavření druhého běžného použití po uzavřeném prvním návratovém signálu: čtyři uzavírací stavy, praktické příklady, privacy-first úklid datové stopy, karta, mini workshop a checklist.
