@@ -273140,8 +273140,208 @@ Když workshop začne řešit, jestli se má pravidlo celé přepsat, zastavte h
 
 První běžné použití po uzavřeném skutečném návratu má skončit snížením péče. Buď se potvrdí, že pravidlo funguje samo, nebo se opraví nejbližší slabé místo. Co nemá vzniknout, je nový dlouhodobý dohled. Ten by z opraveného pravidla udělal další malý systém. A přesně tomu se celá tahle disciplína snaží zabránit.
 
+## Uzavření prvního běžného použití po uzavřeném skutečném návratu
+
+První běžné použití po uzavřeném skutečném návratu nesmí zůstat jako poznámka "zatím dobré". Tahle věta je pohodlná, ale neuzavírá skoro nic. Neříká, jestli pravidlo fungovalo samo, jestli se opravila kotva, jestli vznikla nová datová stopa, ani jestli původní široký návrh zůstal zavřený. Uzavření má z prvního použití udělat konkrétní stav, ne další měkké sledování.
+
+Začněte větou:
+
+```text
+První běžné použití po uzavřeném skutečném návratu uzavíráme tímto výsledkem:
+```
+
+Za ni napište jednu pracovní větu. Ne komentář, ne pocit, ne "budeme monitorovat". Například:
+
+```text
+První běžné použití po uzavřeném skutečném návratu uzavíráme tímto výsledkem:
+Pravidlo bylo dohledatelné u formuláře, vedlo k ponechání rozpočtu mimo povinná pole a nevznikla žádná nová evidence poptávek bez rozpočtu.
+```
+
+Taková věta zavírá tři věci najednou: místo, rozhodnutí a datovou stopu. Pokud se ukáže slabina, věta má být stejně konkrétní:
+
+```text
+První běžné použití po uzavřeném skutečném návratu uzavíráme tímto výsledkem:
+Pravidlo platí, ale člověk ho hledal ve staré návratové kartě; doplňujeme proto jednu kotvu do checklistu landing page a neotevíráme změnu formuláře.
+```
+
+Tohle je pořád uzavření. Jen neuzavírá celé téma jako bezchybné. Uzavírá první použití a otevírá nejmenší opravu, která má vlastní hranici.
+
+### Čtyři uzavírací stavy
+
+Po prvním běžném použití vyberte jeden ze čtyř stavů:
+
+- Stabilní bez zásahu: pravidlo bylo nalezené, použité a nevznikla nová datová stopa.
+- Stabilní po lokální kotvě: pravidlo platí, ale musíte opravit místo, odkud se k němu člověk dostává.
+- Stabilní po jedné hraně: pravidlo platí, ale potřebuje doplnit jednu praktickou rozhodovací větu.
+- Nestabilní, vrací se do malé opravy: pravidlo pořád vyžaduje mimořádnou péči, starou historii nebo pomocný sběr dat.
+
+Stav `stabilní bez zásahu` má skončit rychle. Zapíšete výsledek, necháte pravidlo v kanonickém místě a ukončíte speciální pozornost. Nepřidáváte další kontrolu jen proto, že první použití dopadlo dobře. Dobře dopadlo právě proto, aby kontrola nemusela pokračovat.
+
+Stav `stabilní po lokální kotvě` je drobná navigační oprava. Typicky doplníte odkaz do checklistu, přejmenujete sekci, přesunete větu blíž k rozhodnutí nebo přidáte pravidlo k formuláři, e-mailu či sales skriptu. Obsah rozhodnutí se nemění.
+
+Stav `stabilní po jedné hraně` použijte, když člověk pravidlo našel, ale narazil na jednu úzkou situaci. Hrana má být věta, ne nová podkapitola. Pokud potřebujete tři odstavce vysvětlení, nejspíš nejde o hranu, ale o nové téma.
+
+Stav `nestabilní, vrací se do malé opravy` je poctivější než optimistický zápis. Pokud člověk musel volat původnímu autorovi, číst celou návratovou kartu, založit novou evidenci nebo otevřít starý široký návrh, pravidlo ještě není běžné. Neznamená to katastrofu. Znamená to, že další krok má být nejbližší oprava samostatnosti pravidla.
+
+### Praktický příklad
+
+První běžné použití:
+
+```text
+Marketing připravoval landing page pro službu, u které se dřív řešilo povinné pole rozpočtu.
+```
+
+Výsledek použití:
+
+```text
+Člověk našel pravidlo u checklistu formuláře, ponechal formulář bez povinného rozpočtu a použil volitelnou otázku v potvrzovacím e-mailu.
+```
+
+Uzavření:
+
+```text
+Uzavírací stav:
+Stabilní bez zásahu.
+
+Co zůstává platné:
+Rozpočet se v prvním kontaktu nezjišťuje povinným polem. Pokud je potřeba, používá se volitelná otázka v potvrzovacím e-mailu.
+
+Co zůstává zavřené:
+Povinné pole ve formuláři, automatický lead scoring a export rozpočtu do marketingové tabulky.
+
+Datová stopa:
+Nevznikl nový štítek, export ani pomocný seznam.
+
+Další návrat pouze pokud:
+Tři relevantní poptávky za sebou nepůjde kvalifikovat ani po odpovědi na volitelnou otázku.
+```
+
+Jiný výsledek:
+
+```text
+Člověk pravidlo nenašel u checklistu landing page a použil starou návratovou kartu.
+```
+
+Uzavření pak nemá znít "pravidlo je špatně". Přesnější zápis je:
+
+```text
+Uzavírací stav:
+Stabilní po lokální kotvě.
+
+Lokální oprava:
+Do checklistu landing page doplníme odkaz na kanonické pravidlo u formuláře.
+
+Co se nemění:
+Samotné pravidlo, formulář, potvrzovací e-mail ani návratový signál.
+
+Co zůstává zavřené:
+Nová evidence poptávek, scoring a povinné pole pro rozpočet.
+```
+
+Rozdíl je důležitý. První zápis by mohl spustit přepis pravidla. Druhý opravuje jen cestu k pravidlu. To je levnější, přesnější a datově střídmější.
+
+### Co po uzavření odstranit
+
+Po prvním běžném použití často zůstanou malé pomocné stopy. Někdo si poznamenal odkaz na starou kartu, někdo si vytvořil dočasný seznam příkladů, někdo nechal v checklistu komentář "ověřit po první kampani". Pokud výsledek použití už znáte, tyto stopy buď převeďte do kanonického místa, nebo je smažte.
+
+Zkontrolujte hlavně:
+
+- dočasné komentáře v dokumentaci,
+- odkazy na staré návratové karty,
+- pomocné tabulky k prvnímu použití,
+- interní zprávy označené jako zdroj pravdy,
+- kopie pravidla v sales nebo marketingových poznámkách,
+- ruční štítky, které měly platit jen pro první ověření.
+
+Nejčastější chyba je nechat pomocnou stopu žít vedle kanonického pravidla. Tím vznikne druhý zdroj pravdy. Zpočátku nevadí. Za tři měsíce se někdo zeptá, proč jsou pravidla dvě, které je nové a jestli stará výjimka pořád platí. Gratuluji, právě jste si vyrobili mini audit z vlastního úklidu.
+
+### Privacy-first uzavření
+
+Privacy-first uzavření prvního běžného použití má jednoduchý cíl: nedovolit, aby se kontrola samostatnosti pravidla změnila v nový sběr dat.
+
+Použijte čtyři otázky:
+
+```text
+Vznikla při prvním použití nějaká nová pracovní stopa?
+
+Je potřeba pro trvalé rozhodování, nebo jen pomohla při první orientaci?
+
+Může být nahrazena jednou obecnou větou v kanonickém místě?
+
+Kdo ji smaže, sloučí nebo označí jako nekanonickou?
+```
+
+Pokud vznikl nový údaj o zákazníkovi, poptávce, chování uživatele nebo obchodním rozhodování, buďte přísnější. Nestačí říct, že je interní. Interní data jsou pořád data. Pokud nemají jasný účel, vlastníka a konec, nemají v systému zůstávat.
+
+Codyho komentář: první běžné použití je přesně ten moment, kdy se z dobré disciplíny může stát šuplík "pro jistotu". A šuplíky "pro jistotu" mají zvláštní schopnost přežít všechny lidi, kteří věděli, proč vznikly. Takže ano, smažte ten dočasný sloupec. Nebude mu smutno.
+
+### Karta uzavření prvního běžného použití
+
+```text
+Uzavřený skutečný návrat:
+
+Kanonické pravidlo:
+
+První běžná situace:
+
+Výsledek použití jednou větou:
+
+Uzavírací stav:
+- stabilní bez zásahu
+- stabilní po lokální kotvě
+- stabilní po jedné hraně
+- nestabilní, vrací se do malé opravy
+
+Co se propisuje do kanonického místa:
+
+Co se pouze uklízí:
+
+Co zůstává zavřené:
+
+Vznikla nová datová stopa?
+
+Co se smaže, sloučí nebo označí jako nekanonické:
+
+Další návrat pouze pokud:
+
+Vlastník uzavření:
+
+Datum:
+```
+
+Karta nemá být povinný rituál pro každé malé pravidlo. Použijte ji tam, kde se pravidlo vracelo po dlouhém klidu a hrozí, že se kolem něj znovu vytvoří zvláštní péče. U obyčejné drobné úpravy stačí jedna věta v pracovním logu.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte kanonické pravidlo a první běžnou situaci.
+2. Minuta 2: napište výsledek použití jednou větou.
+3. Minuta 3: vyberte jeden ze čtyř uzavíracích stavů.
+4. Minuta 4: určete, co se propíše do kanonického místa a co se jen uklidí.
+5. Minuta 5: najděte dočasné stopy, kopie a pomocná data.
+6. Minuta 6: potvrďte, co zůstává zavřené a jaký signál by téma znovu otevřel.
+
+Pokud se během workshopu objeví chuť založit nový report, napište nejdřív rozhodnutí, které má report umožnit. Když žádné konkrétní rozhodnutí neexistuje, report nevzniká. To není lenost. To je provozní hygiena.
+
+### Checklist uzavření prvního běžného použití
+
+- Máme výsledek prvního použití popsaný jednou pracovní větou?
+- Vybrali jsme jeden uzavírací stav?
+- Pokud pravidlo fungovalo, ukončili jsme zvláštní pozornost?
+- Pokud chyběla kotva, opravujeme jen cestu k pravidlu?
+- Pokud chyběla hrana, dopisujeme jednu praktickou větu?
+- Pokud pravidlo potřebovalo mimořádnou péči, vracíme ho do malé opravy místo předstírání stability?
+- Je jasné, co se propisuje do kanonického místa?
+- Je jasné, co se pouze uklízí?
+- Zůstal původní široký návrh zavřený?
+- Nevznikl nový trvalý seznam, štítek, export ani report bez rozhodovacího účelu?
+- Jsou staré návratové karty označené jako historie, ne jako zdroj pravdy?
+- Má další návrat konkrétní signál?
+
+Dobré uzavření prvního běžného použití je nenápadné. Pravidlo se použilo, případná malá oprava dostala hranici, pomocné stopy zmizely a tým se nemá k čemu vracet, dokud nepřijde skutečný signál. Přesně tak má vypadat zdravý provoz: méně dramatu, méně datových suvenýrů, více rozhodnutí, která prostě drží.
+
 ## Pracovní log
 
+- 2026-06-29: Doplněna úvodní podkapitola o uzavření prvního běžného použití po uzavřeném skutečném návratu: čtyři uzavírací stavy, praktické příklady, úklid pomocných stop, privacy-first uzavření, karta, mini workshop a checklist.
 - 2026-06-29: Doplněna úvodní podkapitola o prvním běžném použití po uzavřeném skutečném návratu: tři kontrolní otázky, praktický příklad, čtyři výsledné stavy, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-06-29: Doplněna úvodní podkapitola o uzavření prvního skutečného návratu po ročním klidu: čtyři uzavírací stavy, praktický příklad, privacy-first úklid dočasných dat, karta, mini workshop a checklist.
 - 2026-06-29: Doplněna úvodní podkapitola o prvním skutečném návratu po ročním klidu: ověření návratového signálu, kontrola kontextu, nejmenší otevřený krok, privacy-first datové minimum, karta, mini workshop a checklist.
