@@ -273339,8 +273339,193 @@ Pokud se během workshopu objeví chuť založit nový report, napište nejdří
 
 Dobré uzavření prvního běžného použití je nenápadné. Pravidlo se použilo, případná malá oprava dostala hranici, pomocné stopy zmizely a tým se nemá k čemu vracet, dokud nepřijde skutečný signál. Přesně tak má vypadat zdravý provoz: méně dramatu, méně datových suvenýrů, více rozhodnutí, která prostě drží.
 
+## Druhé běžné použití po uzavřeném skutečném návratu
+
+Druhé běžné použití po uzavřeném skutečném návratu je poslední rozumná kontrola před tím, než pravidlo necháte opravdu žít bez zvláštní pozornosti. První použití ověřilo, že pravidlo jde najít a použít. Druhé použití ověřuje něco jemnějšího: jestli pravidlo funguje i bez čerstvé paměti na poslední uzavření.
+
+Začněte větou:
+
+```text
+Druhé běžné použití ověřuje, jestli pravidlo po uzavřeném skutečném návratu funguje samostatně i v další běžné situaci, bez historického vysvětlování, bez dočasné evidence a bez návratu k původní široké variantě.
+```
+
+Tahle věta hlídá rozsah. Druhé použití nemá být nový audit. Nemá zjišťovat, jestli by pravidlo nešlo celé udělat lépe. Nemá hledat ideální verzi formuláře, e-mailu nebo sales procesu. Má ověřit, že po prvním uzavření nevznikla jen krátká vlna pozornosti, která pravidlo držela nad vodou.
+
+Pokud druhé použití proběhne stejně klidně jako první, zvláštní péči ukončete. Pokud neproběhne, opravte nejbližší slabé místo. Nezakládejte třetí kontrolu jen proto, že druhá kontrola byla neurčitá. Neurčitý výsledek je většinou signál ke zmenšení opravy, ne k prodloužení sledování.
+
+### Kdy druhé použití stačí vynechat
+
+Druhé použití není povinný obřad. Vynechte ho, pokud:
+
+- první běžné použití bylo stabilní bez zásahu,
+- pravidlo se týká málo používaného pracovního místa,
+- další reálná situace může přijít až za dlouho,
+- pokračující kontrola by vytvořila novou datovou stopu,
+- návratový signál je dost přesný a tým ví, kdy se má téma znovu otevřít.
+
+V takovém případě je poctivější zapsat klid:
+
+```text
+Druhé běžné použití neplánujeme. Pravidlo bylo při prvním použití potvrzené, další reálná situace není na dohled a nový dohled by vytvořil zbytečnou provozní stopu. Téma se vrátí jen při dohodnutém návratovém signálu.
+```
+
+Tohle není lenost. Je to respekt k provozu. Pokud každé pravidlo po uzavření dostane ještě kontrolu kontroly kontroly, tým se nenápadně vrátí do stavu, kdy má víc údržby než práce. A to je drahá forma opatrnosti.
+
+### Tři otázky druhého použití
+
+Když druhé použití smysl má, položte si jen tři otázky:
+
+- Našel člověk pravidlo bez připomenutí z prvního použití?
+- Vedlo pravidlo ke stejnému typu rozhodnutí i v trochu jiné situaci?
+- Zůstaly pomocné stopy po prvním použití pryč?
+
+První otázka testuje samostatnost. Pokud někdo pravidlo najde jen proto, že si pamatuje poslední workshop, pravidlo možná ještě není dobře ukotvené. Oprava má být pořád lokální: lepší název sekce, odkaz v checklistu, přesunutí věty blíž k formuláři nebo jasnější popisek u rozhodovacího místa.
+
+Druhá otázka testuje přenositelnost. Pravidlo nemusí pokrýt všechny možné varianty světa. Má ale pomoct ve stejné třídě práce. Pokud funguje jen pro jednu kampaň, jednu landing page nebo jednoho obchodníka, zapište hranici platnosti. Lepší úzké pravidlo než široká věta, která vypadá moudře a v praxi se rozpadne.
+
+Třetí otázka chrání privacy-first uzavření. Pomocná tabulka, ruční štítek nebo komentář "ověřit po dalším použití" se po prvním použití často smaže jen napůl. Druhé použití je dobrá chvíle ověřit, že se z pomocné stopy nestal tichý druhý zdroj pravdy.
+
+### Praktický příklad
+
+První běžné použití potvrdilo pravidlo u formuláře:
+
+```text
+Rozpočet se v prvním kontaktu nezjišťuje povinným polem. Pokud je potřeba pro kvalifikaci, používá se volitelná otázka v potvrzovacím e-mailu.
+```
+
+Druhá běžná situace:
+
+```text
+Obchod připravuje follow-up po nové poptávce ze stejného typu služby. Poptávka nemá uvedený rozpočet, ale má jasně popsaný cíl a rozhodovací termín.
+```
+
+Dobré použití:
+
+```text
+Obchodník nepřidává ruční rozpočtový štítek, nepíše interní poznámku "chybí budget" a použije volitelnou otázku v potvrzovacím e-mailu. Poptávku kvalifikuje podle cíle, naléhavosti a dalšího kroku.
+```
+
+Slabé použití:
+
+```text
+Obchodník pravidlo zná, ale pro jistotu si vede vlastní seznam poptávek bez rozpočtu, aby měl později argument pro návrat povinného pole.
+```
+
+Tady není problém v pravidle, ale v návratu do staré důkazní hry. Pokud seznam nemá jasné rozhodnutí, vlastníka a konec, smažte ho. Pokud obchod opravdu potřebuje lepší kvalifikaci, otevřete novou malou otázku: co přesně mu chybí pro další krok. Nevracejte se automaticky k rozpočtovému poli.
+
+Špatné použití:
+
+```text
+Tým přidá do CRM povinný interní štítek "rozpočet nezjištěn", protože formulář pole pořád nemá.
+```
+
+Tohle je obcházení zavřeného rozhodnutí. Formulář sice zůstal střídmý, ale stejná datová stopa se přesunula jinam. Privacy-first provoz se nepočítá podle toho, kde data nevznikla. Počítá se podle toho, kde vznikla.
+
+### Čtyři výsledky druhého použití
+
+Po druhém použití vyberte jeden stav:
+
+- Potvrzeno a vráceno do klidu: pravidlo fungovalo samostatně a další kontrola neběží.
+- Potvrzeno po drobné kotvě: pravidlo platí, ale opravilo se jedno místo nálezu.
+- Zúžit platnost pravidla: pravidlo funguje jen pro část situací a je potřeba to říct nahlas.
+- Vrátit do malé opravy: pravidlo znovu vyvolalo mimořádnou péči nebo náhradní sběr dat.
+
+Stav `potvrzeno a vráceno do klidu` je konec zvláštní pozornosti:
+
+```text
+Druhé běžné použití pravidlo potvrdilo. Pravidlo zůstává v kanonickém místě, další kontrola se neplánuje a téma se vrátí jen při dohodnutém návratovém signálu.
+```
+
+Stav `potvrzeno po drobné kotvě` použijte, když šlo o navigaci, ne o obsah. Opravíte odkaz, název, pořadí v checklistu nebo umístění věty. Potom už nepřidáváte další ověřovací cyklus, pokud kotva jen zpřístupnila stejné rozhodnutí.
+
+Stav `zúžit platnost pravidla` je užitečný, když pravidlo funguje pro landing page, ale ne pro obchodní follow-up, nebo naopak. Zúžení není prohra. Je to přesnější hranice. Široké pravidlo, které se musí pokaždé vysvětlovat, je horší než úzké pravidlo, které lidé používají samostatně.
+
+Stav `vrátit do malé opravy` patří situacím, kde se znovu objevila stará karta, původní autor, pomocný report, ruční evidence nebo skrytý sběr dat. Pak neprodlužujte kontrolu. Opravte konkrétní příčinu.
+
+### Privacy-first uzavření druhého použití
+
+Po druhém použití hledejte hlavně tiché náhrady za zavřený rozsah:
+
+```text
+Nevzniklo stejné rozhodování v jiném nástroji?
+
+Nepřesunuli jsme zavřené pole do interního štítku, poznámky nebo exportu?
+
+Nezůstala po prvním použití pomocná evidence, kterou už nikdo nepotřebuje?
+
+Umíme rozhodnutí udělat bez dalšího osobního, obchodního nebo behaviorálního údaje?
+```
+
+Pokud odpověď na poslední otázku zní ano, další údaj nevzniká. Pokud zní ne, napište přesně, jaké rozhodnutí údaj umožní, kdo ho vlastní a kdy skončí. Bez toho je nový údaj jen neklid převlečený za opatrnost.
+
+Codyho komentář: druhé použití je dobré místo, kde si tým může přestat hrát na archeology vlastních poznámek. Když pravidlo funguje, nechte ho být. Když nefunguje, opravte jedno místo. Hlavně z toho nedělejte seriál s nekonečným finále. Netflix už máme, v provozu ho nepotřebujeme.
+
+### Karta druhého běžného použití
+
+```text
+Kanonické pravidlo:
+
+Výsledek prvního běžného použití:
+
+Druhá běžná situace:
+
+Kdo pravidlo použil:
+
+Našel pravidlo bez připomenutí z prvního použití?
+
+Jaké rozhodnutí podle pravidla vzniklo:
+
+Platí pravidlo pro tuto situaci celé, nebo jen částečně?
+
+Co zůstalo zavřené:
+
+Vznikla náhradní datová stopa?
+
+Co se smaže, přesune nebo označí jako nekanonické:
+
+Výsledný stav:
+- potvrzeno a vráceno do klidu
+- potvrzeno po drobné kotvě
+- zúžit platnost pravidla
+- vrátit do malé opravy
+
+Další kontrola:
+- neplánuje se
+- pouze při návratovém signálu
+- malá oprava konkrétního místa
+```
+
+Karta má být krátká. Pokud se nevejde na jednu obrazovku, pravděpodobně do ní píšete historii místo výsledku. Historie už má své místo. Druhé použití má rozhodnout, jestli pravidlo může zpět do klidu.
+
+### Mini workshop na 5 minut
+
+1. Minuta 1: pojmenujte druhou běžnou situaci.
+2. Minuta 2: ověřte, jestli člověk našel pravidlo bez připomenutí.
+3. Minuta 3: napište rozhodnutí, které podle pravidla vzniklo.
+4. Minuta 4: zkontrolujte náhradní datové stopy a pomocné poznámky.
+5. Minuta 5: vyberte výsledný stav a ukončete zvláštní pozornost, nebo otevřete jednu malou opravu.
+
+Workshop zastavte ve chvíli, kdy se začne řešit, jestli by pravidlo nemělo dostat nový dashboard, nový report nebo nový měsíční review. Pokud druhé použití potřebuje dashboard, pravidlo není v klidu. Pokud ho nepotřebuje, dashboard nepotřebuje ani tým. Překvapivě úsporná matematika.
+
+### Checklist druhého běžného použití
+
+- Jde o reálnou druhou situaci, ne uměle vyrobený test?
+- Našel člověk pravidlo bez čerstvého připomenutí z prvního použití?
+- Vedlo pravidlo k rozhodnutí v běžném pracovním místě?
+- Zůstala stará návratová karta jen historií?
+- Nevznikla náhradní datová stopa v jiném nástroji?
+- Nevrátil se původní široký návrh pod jiným názvem?
+- Pokud pravidlo platí jen částečně, zúžili jsme jeho platnost jednou praktickou větou?
+- Pokud chyběla kotva, opravili jsme jen cestu k pravidlu?
+- Pokud vznikla malá oprava, má vlastní hranici a konec?
+- Pokud pravidlo fungovalo, ukončili jsme zvláštní pozornost?
+- Je další návrat navázaný pouze na konkrétní signál?
+
+Druhé běžné použití má mít odvahu skončit. Když pravidlo funguje samo, nechte ho v kanonickém místě a vraťte tým k práci. Když nefunguje, opravte nejbližší slabinu. Mezi tím neleží zlatá střední cesta, ale dlouhá chodba plná pomocných seznamů, které jednou někdo bude muset uklidit.
+
 ## Pracovní log
 
+- 2026-06-29: Doplněna úvodní podkapitola o druhém běžném použití po uzavřeném skutečném návratu: kdy ho vynechat, tři otázky samostatnosti, praktický příklad, privacy-first kontrola náhradních datových stop, karta, mini workshop a checklist.
 - 2026-06-29: Doplněna úvodní podkapitola o uzavření prvního běžného použití po uzavřeném skutečném návratu: čtyři uzavírací stavy, praktické příklady, úklid pomocných stop, privacy-first uzavření, karta, mini workshop a checklist.
 - 2026-06-29: Doplněna úvodní podkapitola o prvním běžném použití po uzavřeném skutečném návratu: tři kontrolní otázky, praktický příklad, čtyři výsledné stavy, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-06-29: Doplněna úvodní podkapitola o uzavření prvního skutečného návratu po ročním klidu: čtyři uzavírací stavy, praktický příklad, privacy-first úklid dočasných dat, karta, mini workshop a checklist.
