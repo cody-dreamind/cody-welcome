@@ -269938,8 +269938,208 @@ Pokud v minutě 2 nevíte, kde kanonické místo je, nepište nové pravidlo do 
 
 Převod je hotový ve chvíli, kdy se budoucí práce nemusí vracet do staré debaty. Kanonické místo má nést současné rozhodnutí, návratový signál a nezbytnou hranici. Zbytek patří do historie nebo do koše. V obou případech mimo cestu člověku, který má zítra udělat normální práci.
 
+## První běžná kontrola kanonického místa po převodu
+
+Převod závěru do kanonického místa je hotový až na papíře. Teprve první běžná kontrola ukáže, jestli pravidlo opravdu žije tam, kde má, a jestli se podle něj dá pracovat bez staré debaty. Nejde o velké review. Jde o krátkou provozní otázku: když člověk otevře běžné pracovní místo, najde současné pravidlo, pochopí hranici a nepotřebuje staré podklady?
+
+Začněte větou:
+
+```text
+Kanonické místo po převodu kontrolujeme při této běžné práci:
+```
+
+Potom doplňte konkrétní situaci:
+
+```text
+Kanonické místo po převodu kontrolujeme při této běžné práci:
+Obchodník připravuje odpověď na relevantní poptávku a otevírá obchodní checklist, aby rozhodl, jestli se má ptát na rozpočet.
+```
+
+Tím držíte kontrolu u reálného použití. Nekontrolujete celý systém, celou dokumentaci ani historickou správnost rozhodnutí. Kontrolujete, jestli aktuální pracovní místo vede k dobrému dnešnímu kroku.
+
+### Tři kontrolní otázky
+
+První běžná kontrola má jen tři otázky:
+
+- Je aktuální pravidlo v kanonickém místě najitelné bez hledání v historii?
+- Je pravidlo napsané jako použitelná instrukce, ne jako zápis z minulého rozhodnutí?
+- Je jasné, co se po převodu už nesleduje, nesbírá a neotevírá?
+
+První otázka chrání dohledatelnost. Pokud člověk musí otevřít starou kartu, chat, pull request nebo pracovní kopii, kanonické místo ještě není kanonické. Je to jen odkaz na archeologii.
+
+Druhá otázka chrání použitelnost. Věta "po druhém použití se ukázalo, že lokální oprava stačí" je dobrá do logu. Do pracovního místa patří věta "u relevantní poptávky bez rozpočtu použij volitelnou otázku v potvrzovacím e-mailu; formulář se nemění".
+
+Třetí otázka chrání privacy-first hranici. Po převodu má být jasné, že se nevede pomocná tabulka, nepřidává se CRM atribut, neukládají se screenshoty a nesleduje se nové číslo jen proto, že se pravidlo nedávno ověřovalo. Když kontrola zjistí, že někde zůstala skrytá evidence, ukončete ji hned. Skrytá evidence je takový malý provozní dluh. Na začátku vypadá nevinně, potom se tváří jako zdroj pravdy a nakonec se všichni diví, proč má tabulka osm vlastníků a nula účelu.
+
+### Čtyři výsledky kontroly
+
+Vyberte jeden ze čtyř výsledků:
+
+- Kanonické místo funguje: pravidlo je najitelné, použitelné a bez zbytečné datové stopy.
+- Chybí pracovní viditelnost: pravidlo existuje, ale člověk ho v běžné práci nenajde.
+- Chybí rozhodovací ostrost: pravidlo je vidět, ale nedá se podle něj jednoznačně jednat.
+- Zůstala mimořádná stopa: po převodu pořád existuje pomocná evidence, stará kopie nebo dočasné sledování.
+
+U výsledku `kanonické místo funguje` nic nepřidávejte. Zapište potvrzení a nechte pravidlo v běžném rytmu. Úspěšná kontrola není pozvánka ke kontrolnímu seriálu.
+
+U výsledku `chybí pracovní viditelnost` opravte umístění. Přidejte odkaz do šablony, přesuňte větu blíž k checklistu nebo přejmenujte položku v rozcestníku. Nezakládejte nové pravidlo vedle starého.
+
+U výsledku `chybí rozhodovací ostrost` přepište jednu větu. Nesnažte se doplnit všechny možné příklady. Pokud pravidlo potřebuje pět odstavců, aby šlo použít, pravděpodobně nemá dost ostrou hranici.
+
+U výsledku `zůstala mimořádná stopa` udělejte úklid. Smažte pracovní kopii, zavřete dočasnou kartu, anonymizujte příklad nebo ukončete pomocnou tabulku. Pokud stopa musí zůstat, napište její účel, vlastníka a konec.
+
+### Praktický příklad
+
+Převod do kanonického místa:
+
+```text
+Aktuální pravidlo:
+V prvním formuláři nesbíráme povinný rozpočet. U relevantní poptávky bez rozpočtu lze poslat volitelnou otázku v potvrzovacím e-mailu.
+
+Návratový signál:
+Téma otevřeme pouze pokud tři relevantní poptávky za sebou nepůjdou kvalifikovat bez ručního doptání na rozpočet.
+```
+
+První běžná kontrola:
+
+```text
+Situace:
+Obchodník otevřel obchodní checklist při odpovědi na novou relevantní poptávku.
+
+Výsledek:
+Pravidlo našel bez staré karty, použil volitelnou otázku a nepřidal rozpočet do CRM jako nový atribut.
+
+Stav:
+Kanonické místo funguje.
+
+Co dál nesledujeme:
+Nevedeme zvláštní seznam poptávek bez rozpočtu. Návratový signál zůstává v checklistu a aktivuje se jen při přirozeném opakování problému.
+```
+
+Slabší varianta:
+
+```text
+Situace:
+Obchodník pravidlo našel, ale nebylo jasné, jestli otázku posílat všem poptávkám bez rozpočtu.
+
+Stav:
+Chybí rozhodovací ostrost.
+
+Lokální oprava:
+Větu měníme na: "Volitelnou otázku na rozpočet posílej jen u relevantní poptávky, kde bez rozpočtu nejde navrhnout další konkrétní krok."
+
+Co neotevíráme:
+Formulář, CRM atribut, nový reporting ani školení celé obchodní kvalifikace.
+```
+
+V obou variantách zůstává zásah přiměřený nálezu. Kontrola kanonického místa nemá znovu spouštět původní téma. Má jen ověřit, že převod neztratil použitelnost.
+
+### Privacy-first kontrola
+
+Při první běžné kontrole se dívejte hlavně na věci, které zůstaly po převodu mimo pozornost. Typicky to nejsou velké nástroje, ale drobné zbytky:
+
+- pomocný sloupec v tabulce;
+- stará kopie rozhodovací karty;
+- komentář se zákaznickým detailem;
+- screenshot jako "příklad pro jistotu";
+- ruční štítek v CRM;
+- plán další kontroly bez návratového signálu.
+
+Krátká kontrola:
+
+```text
+Při běžném použití potřebujeme:
+
+Po převodu pořád zbytečně držíme:
+
+Dnes mažeme, anonymizujeme nebo zavíráme:
+```
+
+Příklad:
+
+```text
+Při běžném použití potřebujeme:
+Jednu kvalifikační větu a návratový signál.
+
+Po převodu pořád zbytečně držíme:
+Pracovní kopii staré tabulky s anonymizovanými příklady poptávek.
+
+Dnes mažeme, anonymizujeme nebo zavíráme:
+Tabulku mažeme. Do historie necháváme jen zobecněný závěr, že volitelná otázka stačila pro běžnou kvalifikaci.
+```
+
+Privacy-first hodnota tady není v tom, že tým ví méně. Je v tom, že ví přesně to, co potřebuje pro další rozhodnutí, a nenese si vedle toho batoh starých stop.
+
+Codyho komentář: kanonické místo je jako dobrá cedule na dveřích. Má říct, kam vejít, ne vyprávět dramatickou historii budovy. Pokud se člověk musí proklikat sklepem starých rozhodnutí, cedule selhala.
+
+### Karta první kontroly kanonického místa
+
+```text
+Téma:
+
+Kanonické místo:
+
+Běžná situace kontroly:
+
+Našel člověk pravidlo bez historie?
+ano / částečně / ne
+
+Šlo podle pravidla rozhodnout?
+ano / částečně / ne
+
+Bylo jasné, co se nesbírá a neotevírá?
+ano / částečně / ne
+
+Výsledek:
+- kanonické místo funguje
+- chybí pracovní viditelnost
+- chybí rozhodovací ostrost
+- zůstala mimořádná stopa
+
+Lokální oprava, pokud existuje:
+
+Co zůstává zavřené:
+
+Co mažeme, anonymizujeme nebo ukončujeme:
+
+Návratový signál:
+
+Vlastník:
+
+Datum:
+```
+
+Karta má být krátká závěrečná kontrola převodu. Pokud se z ní stane další dokument vedle kanonického místa, selhala hned při narození. Výsledek musí být propsaný tam, kde se pracuje.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: otevřete kanonické místo v běžné pracovní situaci.
+2. Minuta 2: ověřte, jestli člověk najde pravidlo bez historie.
+3. Minuta 3: přečtěte pravidlo a rozhodněte, jestli podle něj lze jednat.
+4. Minuta 4: zkontrolujte, co se po převodu už nesleduje a nesbírá.
+5. Minuta 5: vyberte jeden výsledný stav.
+6. Minuta 6: proveďte případnou lokální opravu nebo úklid stopy.
+
+Když během šesti minut vznikne potřeba řešit širší proces, zapište ji jako nový podnět. Tato kontrola má uzavřít převod, ne otevírat nový program.
+
+### Checklist první kontroly kanonického místa
+
+- Kontrola proběhla v reálné pracovní situaci?
+- Člověk našel pravidlo přes kanonické místo, ne přes starou historii?
+- Pravidlo je napsané v přítomném čase?
+- Dá se podle něj rozhodnout bez původního kontextu?
+- Je jasné, co zůstává zavřené?
+- Je jasné, jaký návratový signál by téma znovu otevřel?
+- Nevzniká nové sledování jen kvůli kontrole?
+- Jsou pomocné kopie, tabulky, screenshoty a staré karty zavřené nebo smazané?
+- Případná oprava je lokální a propsaná do pracovního místa?
+- Ví vlastník, že další návrat má jít přes běžný rytmus nebo konkrétní signál?
+
+První běžná kontrola kanonického místa má dát týmu klid. Buď pravidlo funguje a dál se nesleduje, nebo se opraví nejbližší věta, odkaz či zbytečná stopa. V obou případech je cílem totéž: aby příští člověk pracoval s aktuálním pravidlem, ne s historií toho, jak pravidlo vzniklo.
+
 ## Pracovní log
 
+- 2026-06-29: Doplněna úvodní podkapitola o první běžné kontrole kanonického místa po převodu: dohledatelnost pravidla, rozhodovací ostrost, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-29: Doplněna úvodní podkapitola o převodu závěru druhého běžného použití do kanonického místa: pravidlo v přítomném čase, oddělení historie, privacy-first převod, karta, mini workshop a checklist.
 - 2026-06-29: Doplněna úvodní podkapitola o druhém běžném použití po uzavřeném návratu z dlouhodobého klidu: přenositelnost bez čerstvého kontextu, dohledatelnost, skrytá kontrola, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-29: Doplněna úvodní podkapitola o prvním běžném použití po uzavřeném návratu z dlouhodobého klidu lokálního dočištění: kontrola samostatnosti pravidla, výsledné stavy, praktické příklady, privacy-first úklid, karta, mini workshop a checklist.
