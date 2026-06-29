@@ -270495,8 +270495,190 @@ Pokud během workshopu vznikne chuť naplánovat třetí kontrolu "pro jistotu",
 
 Druhá běžná kontrola kanonického místa je test tichosti. Když pravidlo obstojí, nemusí dostat medaili, schůzku ani dashboard. Stačí, že další člověk udělal správné rozhodnutí bez zbytečných dat a bez otevírání starého rozsahu. To je v provozu webu, SaaS i marketingu velmi dobrá forma klidu.
 
+## Uzavření druhé běžné kontroly kanonického místa
+
+Druhá běžná kontrola kanonického místa má skončit jinak než první. První kontrola ještě často dočišťuje převod: odkaz, formulaci, příklad nebo jedno pracovní místo. Druhá kontrola už má hlavně zavřít mimořádnou pozornost. Pokud pravidlo obstálo v běžné práci, není potřeba kolem něj stavět další lešení. Když se kontrola uzavře špatně, tým si nevšimne, že z dočasné péče vznikl nový proces.
+
+Začněte uzavírací větou:
+
+```text
+Druhou běžnou kontrolu uzavíráme tímto výsledkem:
+```
+
+Za dvojtečku patří jeden stav, ne odstavec obhajoby. Pokud potřebujete dlouze vysvětlovat, proč je kontrola hotová, pravděpodobně hotová ještě není. Dobré uzavření je krátké, protože rozhodovací materiál už vznikl při kontrole samotné.
+
+### Čtyři uzavírací stavy
+
+Použijte jeden ze čtyř stavů:
+
+- Kanonické místo zůstává v klidu.
+- Zavřeno po jedné lokální opravě.
+- Zavřeno po úklidu skryté evidence.
+- Nezavíráme jako běžnou kontrolu, zakládáme nové malé téma.
+
+Stav `kanonické místo zůstává v klidu` znamená, že pravidlo je najitelné, použitelné a nevyrobilo novou datovou stopu. Další práce není potřeba. Neplánujte třetí kontrolu jen proto, že druhá dopadla dobře. To není péče, to je záliba v kontrole převlečená za odpovědnost.
+
+Stav `zavřeno po jedné lokální opravě` použijte, když byl problém malý a oprava se vešla přímo do kanonického místa. Typicky přidání jednoho odkazu, zpřesnění jedné věty, přejmenování položky nebo výměna příkladu. Uzavření musí říct, že tím oprava končí. Pokud po lokální opravě otevíráte další sadu úkolů, nejde o lokální opravu.
+
+Stav `zavřeno po úklidu skryté evidence` je pro situace, kdy pravidlo fungovalo, ale někde zůstala pomocná tabulka, screenshot, dočasný export, komentář s osobním detailem nebo jiný záznam vytvořený z nejistoty. Uzavření má popsat, co se smazalo, co se zobecnilo a co nesmí zůstat jako neoficiální zdroj pravdy.
+
+Stav `nezakládáme jako běžnou kontrolu, zakládáme nové malé téma` použijte, když druhá kontrola našla skutečný návratový signál mimo svůj rozsah. V takovém případě druhou kontrolu nezvětšujte. Uzavřete ji a nové téma otevřete samostatně, s vlastní otázkou, pracovním místem a stop podmínkou.
+
+### Praktické uzavírací věty
+
+Krátké uzavření může vypadat takto:
+
+```text
+Výsledek:
+Kanonické místo zůstává v klidu.
+
+Potvrzeno:
+Pravidlo bylo použité bez pomoci autora, bez rozšíření rozsahu a bez nové evidence.
+
+Další krok:
+Žádný. Vracíme pravidlo do běžného rytmu a otevíráme ho pouze při návratovém signálu.
+```
+
+Po lokální opravě:
+
+```text
+Výsledek:
+Zavřeno po jedné lokální opravě.
+
+Oprava:
+Do checklistu doplněn odkaz z místa, kde obchodník reálně kvalifikuje poptávku.
+
+Co neotevíráme:
+Nový proces kvalifikace, další pole ve formuláři ani kontrolní report.
+
+Další krok:
+Žádný mimo běžné použití.
+```
+
+Po úklidu skryté evidence:
+
+```text
+Výsledek:
+Zavřeno po úklidu skryté evidence.
+
+Nález:
+Vznikla pomocná tabulka s posledními poptávkami bez jasné retence.
+
+Úklid:
+Tabulka byla smazána, do checklistu zůstal jen anonymizovaný závěr: rozpočet se ptáme volitelně pouze u relevantních poptávek.
+
+Co zůstává zavřené:
+Povinný rozpočet ve formuláři, scoring a další exporty.
+```
+
+A při novém tématu:
+
+```text
+Výsledek:
+Druhou kontrolu nezvětšujeme. Zakládáme nové malé téma.
+
+Návratový signál:
+Dvě relevantní poptávky za sebou správně prošly formulářem, ale ztratily se v interním předání po potvrzovacím e-mailu.
+
+Nové pracovní místo:
+Interní handoff po potvrzovací zprávě.
+
+Stop podmínka:
+Vybrat jednu úpravu handoff věty a ověřit ji na další relevantní poptávce.
+```
+
+Tahle věta je důležitá, protože chrání kanonické místo před přisátím cizího problému. Když se při kontrole obchodního checklistu ukáže slabé interní předání, neopravujte obchodní checklist tak dlouho, až z něj bude příručka pro celé CRM. Založte malé téma tam, kde problém opravdu vznikl.
+
+### Privacy-first uzavření
+
+Uzavření druhé kontroly má vždy obsahovat jednu větu o datové stopě. Ne obecné "vše v pořádku", ale konkrétní stav:
+
+```text
+Po uzavření nezůstává žádná nová pracovní ani datová stopa mimo kanonické místo.
+```
+
+Nebo:
+
+```text
+Dočasná pracovní stopa byla zobecněna do pravidla a původní podklad byl smazán.
+```
+
+Pokud stopa musí zůstat, napište proč:
+
+```text
+Záznam zůstává, protože slouží jako rozhodovací log k této změně; vlastníkem je obchod, retence je do příští měsíční kontroly.
+```
+
+Bez takové věty se z dočasných podkladů stává šedá paměť týmu. Není v systému, není v datové mapě, nemá vlastníka, ale všichni ji najednou používají jako důkaz. Přesně takhle vzniká provozní nepořádek, který se tváří jako zkušenost.
+
+Codyho komentář: nejnebezpečnější věta při uzavírání je "necháme si to pro jistotu". Jistota bez účelu je jen pomalé skládání digitální půdy. A pak se někdo diví, že za rok nikdo neví, co smí smazat.
+
+### Karta uzavření druhé kontroly
+
+```text
+Kanonické místo:
+
+Datum druhé kontroly:
+
+Uzavírací stav:
+- kanonické místo zůstává v klidu
+- zavřeno po jedné lokální opravě
+- zavřeno po úklidu skryté evidence
+- nezavíráme jako běžnou kontrolu, zakládáme nové malé téma
+
+Co se potvrdilo:
+
+Co se případně opravilo přímo v kanonickém místě:
+
+Jaká pracovní nebo datová stopa vznikla:
+
+Co se s touto stopou stalo:
+- nevznikla
+- smazána
+- zobecněna
+- ponechána s účelem, vlastníkem a retencí
+
+Co zůstává výslovně zavřené:
+
+Návratový signál:
+
+Další plánovaná kontrola:
+- žádná
+- pouze při návratovém signálu
+- konkrétní datum a důvod:
+```
+
+Kartu nepište do samostatného dokumentu, pokud už kanonické místo má vlastní rozhodovací log. Uzavření patří co nejblíž k místu, kde se pravidlo používá. Samostatný archiv dává smysl až ve chvíli, kdy tým skutečně porovnává více pravidel napříč webem, SaaS produktem nebo marketingem.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte výsledek druhé kontroly.
+2. Minuta 2: vyberte jeden uzavírací stav.
+3. Minuta 3: napište, co zůstává výslovně zavřené.
+4. Minuta 4: zkontrolujte pracovní a datovou stopu.
+5. Minuta 5: proveďte mazání, zobecnění nebo zápis retence.
+6. Minuta 6: napište návratový signál a ukončete mimořádnou pozornost.
+
+Workshop má skončit ukončením péče, ne plánem další péče. Pokud někdo navrhne novou kontrolu, musí říct konkrétní návratový signál nebo změnu kontextu. Bez toho je další kontrola jen práce navíc.
+
+### Checklist uzavření druhé kontroly
+
+- Má uzavření jeden jasný stav?
+- Je zapsané, co se potvrdilo v běžném použití?
+- Pokud proběhla oprava, zůstala lokální?
+- Pokud vznikla skrytá evidence, je smazaná, zobecněná nebo má účel, vlastníka a retenci?
+- Je výslovně zavřené, co se teď dál nerozšiřuje?
+- Není naplánovaná třetí kontrola bez konkrétního důvodu?
+- Je návratový signál dost konkrétní?
+- Je uzavření uložené u kanonického místa, ne v zapomenuté poznámce?
+- Umí další člověk poznat, že mimořádná pozornost skončila?
+- Zůstává privacy-first hodnota prakticky viditelná v tom, jaká data nevznikají?
+
+Uzavření druhé běžné kontroly je malá provozní tečka. Její hodnota není v množství textu, ale v tom, že tým přestane držet pravidlo za ruku. Když kanonické místo funguje, nechte ho fungovat. A když nefunguje, opravte nejbližší konkrétní místo místo toho, abyste kolem něj postavili další proces.
+
 ## Pracovní log
 
+- 2026-06-29: Doplněna úvodní podkapitola o uzavření druhé běžné kontroly kanonického místa: uzavírací stavy, praktické věty, privacy-first úklid datové stopy, karta, mini workshop a checklist.
 - 2026-06-29: Doplněna úvodní podkapitola o druhé běžné kontrole kanonického místa: samostatnost pravidla bez čerstvé péče, skrytá evidence, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-06-29: Doplněna úvodní podkapitola o uzavření první běžné kontroly kanonického místa: čtyři způsoby uzavření, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-29: Doplněn krátký praktický odstavec k první běžné kontrole kanonického místa, aby ověření začínalo u člověka v reálné pracovní cestě, ne u historického výkladu.
