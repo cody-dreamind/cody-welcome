@@ -271381,8 +271381,176 @@ Když workshop začne řešit celou historii návratu, zastavte ho. Cílem není
 
 První běžné použití má být krátká zkouška samostatnosti. Pokud pravidlo obstojí, nechte ho být. Pokud neobstojí, opravte nejmenší místo, kde selhalo. V obou případech hlídejte, aby se po uzavřeném návratu nevrátila mimořádná péče jen proto, že se tváří zodpovědně.
 
+## Uzavření prvního běžného použití po návratovém signálu v tichém provozu
+
+Po prvním běžném použití pravidla po uzavřeném návratovém signálu je potřeba udělat poslední drobný krok: uzavřít výsledek tak, aby pravidlo zůstalo v tichém provozu. Neznamená to přidat další kontrolní smyčku. Znamená to rozhodnout, jestli první použití potvrdilo samostatnost pravidla, odhalilo lokální tření, nebo ukázalo, že návrat ve skutečnosti ještě zavřený nebyl.
+
+Začněte jednou větou:
+
+```text
+První běžné použití po návratovém signálu uzavíráme takto:
+```
+
+Do věty nepište historii. Nepatří tam celý důvod původního návratu, argumenty z review ani seznam lidí, kteří u toho byli. Patří tam dnešní provozní závěr: co se ukázalo při použití pravidla a co se tím mění nebo nemění.
+
+Dobrá uzavírací věta zní například:
+
+```text
+První běžné použití potvrdilo, že pravidlo pro nesbírání rozpočtu ve formuláři je najitelné a rozhodnutelné; doplnili jsme jen lokální příklad cíle projektu a neotevíráme žádný nový sběr dat.
+```
+
+Slabá věta zní:
+
+```text
+Pravidlo zatím necháme, ale budeme to dál sledovat.
+```
+
+Ta druhá věta nevysvětluje, co se stalo, co je zavřené ani kdy sledování skončí. Je to měkký polštář pod neuzavřenou práci. Pohodlné, ale brzy začne překážet.
+
+### Tři uzavírací stavy
+
+Po prvním běžném použití vybírejte jeden ze tří stavů:
+
+- Uzavřeno bez změny: pravidlo funguje, člověk ho našel, rozhodl podle něj a nevznikla nová datová stopa.
+- Uzavřeno s lokálním dočištěním: pravidlo je správné, ale jedno pracovní místo potřebovalo přesnější větu, příklad nebo hranici.
+- Neuzavřeno: pravidlo pořád vyžaduje starou kartu, mimořádnou kontrolu nebo dodatečný sběr důkazů.
+
+U prvního stavu nepište nový úkol. Maximálně přidejte krátkou poznámku do logu, že první použití proběhlo bez zásahu. Čím méně pohybu kolem funkčního pravidla vznikne, tím lépe.
+
+U druhého stavu zůstaňte lokální. Pokud chyběl příklad u formuláře, doplňte příklad u formuláře. Pokud chyběla věta v obchodním skriptu, doplňte větu do skriptu. Nevyužívejte malou úpravu jako záminku k přepsání celé metodiky.
+
+U třetího stavu se nepřetvařujte, že pravidlo je v tichém provozu. Vraťte se k uzavření návratového signálu a opravte ho. Tichý provoz není diplom za snahu; je to stav, kdy pravidlo funguje bez zvýšené péče.
+
+### Co přesně zůstává zavřené
+
+Uzavření musí výslovně říct, co se neotevírá. Po návratovém signálu je tým citlivý na opakování problému a snadno začne preventivně rozšiřovat rozsah. Proto do uzavření přidejte jednu větu:
+
+```text
+Zůstává zavřené:
+```
+
+Příklad:
+
+```text
+Zůstává zavřené: povinné pole pro rozpočet, měsíční export poptávek bez rozpočtu a nové analytické eventy kolem formuláře.
+```
+
+Taková věta je praktická brzda. Neříká "nikdy". Říká "ne teď, ne bez nového návratového signálu". Rozdíl je důležitý. Privacy-first provoz nestojí na zákazu změn, ale na tom, že každá nová datová stopa musí mít lepší důvod než nervozitu.
+
+Codyho komentář: nejdražší věta v týmu často začíná slovy "jen si to budeme chvíli měřit". Někdy je to správně. Ale pokud nikdo neví, jaké rozhodnutí se podle měření udělá, není to měření. Je to sbírání budoucích výmluv v tabulce, která se samozřejmě bude jmenovat nějak nevinně. Třeba `temporary_leads_review_final_v3`.
+
+### Praktický příklad
+
+Původní pravidlo po návratovém signálu znělo:
+
+```text
+Rozpočet v prvním formuláři nesbíráme. Pokud je potřeba kvalifikovat rozsah, ptáme se nejdřív na cíl projektu a rozhodovací situaci.
+```
+
+První běžné použití proběhlo při úpravě landing page pro nový segment. Tým našel pravidlo u formuláře, nepřidal nové pole a doplnil jen příklad odpovědi:
+
+```text
+Například: "Chceme zkrátit ruční kvalifikaci poptávek a do 30 dnů ověřit, jestli nový formulář přivádí konkrétnější zadání."
+```
+
+Uzavření může vypadat takto:
+
+```text
+První běžné použití pravidla proběhlo bez návratu ke staré kartě.
+
+Lokální dočištění:
+Do formuláře jsme doplnili jeden příklad cíle projektu.
+
+Zůstává zavřené:
+Povinné pole pro rozpočet, lead scoring podle rozpočtu a měsíční ruční export poptávek.
+
+Nová data:
+Žádná.
+
+Další kontrola:
+Jen při návratovém signálu: tři relevantní poptávky za sebou nepůjde posunout bez ručního doptání na rozpočet.
+```
+
+To je uzavření s lokálním dočištěním. Pravidlo se nestalo projektem. Formulář se zlepšil. Datová stopa se nerozrostla. Starý návratový signál zůstává jako hranice, ne jako trvalý alarm.
+
+### Privacy-first uzavření
+
+Při uzavření prvního běžného použití si projděte krátký datový úklid:
+
+```text
+Vznikla při prvním použití pomocná poznámka, screenshot, export nebo kopie?
+
+Je potřeba ji ponechat, aby někdo mohl udělat konkrétní rozhodnutí?
+
+Pokud ano, kdo ji vlastní a kdy skončí?
+
+Pokud ne, kde ji smažeme nebo přesuneme do nepracovní historie?
+```
+
+Pomocné stopy po prvním použití jsou zrádné. Vypadají malé, ale když se nesmažou, začnou tvořit druhou neoficiální paměť vedle kanonického místa. A druhá paměť je skoro vždycky horší než první: hůř se hledá, hůř se čistí a častěji obsahuje údaje, které už nikdo nepotřebuje.
+
+Privacy-first uzavření proto není jen otázka formulářových polí. Je to i otázka pracovních zbytků. Pokud jste si při prvním použití udělali kopii poptávky, anonymizovaný příklad, dočasný seznam nebo poznámku v chatu, rozhodněte, jestli má dál žít. Výchozí odpověď má být ne.
+
+### Karta uzavření prvního běžného použití
+
+```text
+Pravidlo nebo pracovní místo:
+
+Běžná situace:
+
+Výsledek:
+- uzavřeno bez změny
+- uzavřeno s lokálním dočištěním
+- neuzavřeno
+
+Uzavírací věta:
+
+Lokální dočištění, pokud existuje:
+
+Co zůstává zavřené:
+
+Nová data, pole, eventy nebo exporty:
+
+Pomocné stopy, které mažeme:
+
+Pomocné stopy, které ponecháváme v historii:
+
+Vlastník případné další kontroly:
+
+Návratový signál:
+```
+
+Karta je krátká schválně. Pokud potřebujete tři odstavce vysvětlení, nejspíš ještě neuzavíráte. Teprve hledáte, co se vlastně stalo.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte rozhodnutí z prvního běžného použití.
+2. Minuta 2: vyberte jeden ze tří uzavíracích stavů.
+3. Minuta 3: napište uzavírací větu.
+4. Minuta 4: napište, co zůstává zavřené.
+5. Minuta 5: projděte pomocné stopy a rozhodněte, co se maže.
+6. Minuta 6: potvrďte návratový signál nebo napište, že žádná další kontrola není otevřená.
+
+Když se během workshopu objeví nový nápad, nezapisujte ho do uzavření. Dejte ho stranou jako samostatný podnět. Uzavření má chránit konec práce, ne otevírat další patro.
+
+### Checklist uzavření
+
+- Je vybraný jeden ze tří uzavíracích stavů?
+- Je uzavírací věta srozumitelná bez znalosti staré návratové karty?
+- Pokud proběhlo lokální dočištění, zůstalo u nejbližšího pracovního místa?
+- Je výslovně napsané, co se neotevírá?
+- Nevzniklo nové pole, event, export, štítek nebo tabulka bez jasného rozhodovacího důvodu?
+- Jsou pomocné stopy smazané, nebo mají účel, vlastníka a konec?
+- Zůstává kanonické místo zdrojem pravdy?
+- Je návratový signál pořád konkrétní a rozpoznatelný?
+- Neotevřeli jsme novou kontrolní smyčku jen proto, že první použití připomnělo starou epizodu?
+- Umí další člověk použít pravidlo bez toho, aby četl toto uzavření?
+
+Uzavření prvního běžného použití má vrátit pozornost z procesu zpět k práci. Pokud pravidlo funguje, nechte ho sloužit. Pokud potřebuje jednu větu, doplňte ji. Pokud nefunguje, přiznejte to a vraťte se o krok zpět. Všechno ostatní je jen elegantně formulované odkládání konce.
+
 ## Pracovní log
 
+- 2026-06-29: Doplněna úvodní podkapitola o uzavření prvního běžného použití po návratovém signálu v tichém provozu: tři uzavírací stavy, zachování zavřeného rozsahu, praktický příklad, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-29: Doplněna úvodní podkapitola o prvním běžném použití po uzavřeném návratovém signálu v tichém provozu: kontrolní otázky, výsledné stavy, praktický příklad, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-06-29: Doplněna úvodní podkapitola o uzavření prvního návratového signálu po tichém provozu: čtyři uzavírací stavy, praktický příklad, propsání do kanonického místa, privacy-first úklid pomocných stop, karta, mini workshop a checklist.
 - 2026-06-29: Doplněna úvodní podkapitola o prvním návratovém signálu po tichém provozu: rozlišení skutečného návratu od šumu, čtyři stavy návratu, praktické příklady, privacy-first důkazní minimum, karta, mini workshop a checklist.
