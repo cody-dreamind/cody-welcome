@@ -269957,6 +269957,8 @@ Obchodník připravuje odpověď na relevantní poptávku a otevírá obchodní 
 
 Tím držíte kontrolu u reálného použití. Nekontrolujete celý systém, celou dokumentaci ani historickou správnost rozhodnutí. Kontrolujete, jestli aktuální pracovní místo vede k dobrému dnešnímu kroku.
 
+Před kontrolou si určete člověka, který má podle kanonického místa udělat běžné rozhodnutí. Nechte ho projít cestu tak, jak by ji použil bez přípravy: odkud začne, co otevře, jak přečte pravidlo a jaký zápis po sobě nechá. Pokud mu musíte vysvětlovat starou historii, kontrola právě našla problém v pracovním místě, ne v člověku.
+
 ### Tři kontrolní otázky
 
 První běžná kontrola má jen tři otázky:
@@ -270139,6 +270141,7 @@ První běžná kontrola kanonického místa má dát týmu klid. Buď pravidlo 
 
 ## Pracovní log
 
+- 2026-06-29: Doplněn krátký praktický odstavec k první běžné kontrole kanonického místa, aby ověření začínalo u člověka v reálné pracovní cestě, ne u historického výkladu.
 - 2026-06-29: Doplněna úvodní podkapitola o první běžné kontrole kanonického místa po převodu: dohledatelnost pravidla, rozhodovací ostrost, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-29: Doplněna úvodní podkapitola o převodu závěru druhého běžného použití do kanonického místa: pravidlo v přítomném čase, oddělení historie, privacy-first převod, karta, mini workshop a checklist.
 - 2026-06-29: Doplněna úvodní podkapitola o druhém běžném použití po uzavřeném návratu z dlouhodobého klidu: přenositelnost bez čerstvého kontextu, dohledatelnost, skrytá kontrola, privacy-first úklid, karta, mini workshop a checklist.
