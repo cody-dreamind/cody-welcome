@@ -272802,8 +272802,169 @@ Pokud se během workshopu ukáže, že signál nenastal, nezachraňujte schůzku
 
 První skutečný návrat po ročním klidu je test důvěry v předchozí rozhodnutí. Když signál nenastal, klid pokračuje. Když nastal, otevře se nejmenší rozumný krok. V obou případech systém zůstává čitelný: žádné tiché rozšiřování, žádné sbírání dat pro jistotu, žádný návrat starého rozsahu zadními dveřmi.
 
+## Uzavření prvního skutečného návratu po ročním klidu
+
+Když po ročním klidu opravdu otevřete malý krok, další disciplína je stejně důležitá jako samotné otevření: umět ho zavřít. Jinak se z oprávněného návratu stane nový polotrvalý režim. Tým sice tvrdí, že jen "chvíli sleduje situaci", ale v praxi vzniká další tabulka, další štítek, další výjimka v procesu a další malý důvod, proč už systém není tak klidný jako předtím.
+
+Uzavření prvního skutečného návratu začněte větou:
+
+```text
+Návrat po ročním klidu uzavíráme tímto výsledkem:
+```
+
+Za ni nepište seznam aktivit. Napište stav, do kterého se pravidlo vrací. Dobrá věta vypadá třeba takto:
+
+```text
+Návrat po ročním klidu uzavíráme tímto výsledkem:
+Upravená volitelná otázka v potvrzovacím e-mailu stačila u pěti dalších relevantních poptávek a nevzniká důvod přidávat povinné pole do formuláře.
+```
+
+Slabá věta:
+
+```text
+Udělali jsme úpravu e-mailu a budeme to dál sledovat.
+```
+
+Druhá věta nechává otevřené skoro všechno. Neříká, jestli malý krok stačil, co zůstává zavřené, kde je aktuální pravidlo a kdy sledování skončí. Taková věta je pozvánka k nenápadnému rozšiřování. Ano, backlog ji miluje. Provoz už méně.
+
+### Čtyři uzavírací stavy
+
+Po prvním návratu po ročním klidu obvykle nastane jeden ze čtyř stavů:
+
+- Malý krok stačil: pravidlo se vrací do klidu s drobnou úpravou kanonického místa.
+- Malý krok nestačil, ale problém je pořád úzký: otevřete další malý krok ve stejném pracovním místě.
+- Ukázal se jiný problém: původní návrat zavřete a založíte novou pracovní otázku.
+- Signál se rozpadl: návrat byl oprávněný k ověření, ale další důkaz ho nepotvrdil.
+
+U prvního stavu je nejdůležitější nechat systém znovu ztichnout. Pokud upravená otázka v e-mailu stačila, není důvod nechávat vedle ní kontrolní tabulku "pro jistotu". Propíšete větu do kanonického místa, zavřete dočasnou evidenci a nastavíte návratový signál.
+
+U druhého stavu se nevracejte k původní velké variantě automaticky. Pokud první malý krok nestačil, otevřete další nejbližší krok. Třeba upravit kvalifikační větu v obchodním follow-upu. Pořád nemusí vzniknout povinné pole, scoring ani nový export.
+
+U třetího stavu buďte přísní na hranici tématu. Jestli se ukázalo, že problém není rozpočet, ale nejasný typ služby, nezachraňujte starou kartu přejmenováním. Zavřete návrat rozpočtu a založte novou otázku k nabídce. Starý záznam může být odkaz, ne nádoba na všechno.
+
+U čtvrtého stavu se nebojte napsat, že návrat se nepotvrdil. To není ostuda. Systém udělal přesně to, co měl: dovolil krátké ověření a zabránil velké změně bez dostatečného důvodu.
+
+### Praktický příklad uzavření
+
+Otevřený návrat:
+
+```text
+Návratový signál:
+Tři relevantní poptávky za sebou nešlo kvalifikovat bez ručního doptání na rámcový rozpočet.
+
+Malý krok:
+Upravíme volitelnou otázku v potvrzovacím e-mailu a nabídneme tři orientační rozpětí.
+
+Co zůstává zavřené:
+Povinné pole ve formuláři, automatický lead scoring a export rozpočtu do marketingové tabulky.
+```
+
+Uzavření po ověření:
+
+```text
+Výsledek:
+U pěti dalších relevantních poptávek stačila upravená otázka v potvrzovacím e-mailu. Obchod se doptával jen jednou, a to kvůli rozsahu, ne kvůli samotnému rozpočtu.
+
+Rozhodnutí:
+Malý krok stačil. Do formuláře nepřidáváme povinné pole pro rozpočet a nespouštíme scoring.
+
+Kanonické pravidlo:
+Rozpočet se v prvním kontaktu nezjišťuje povinným polem. Pokud je potřeba, používá se volitelná otázka v potvrzovacím e-mailu s orientačními rozpětími a možností "nevím, potřebuji doporučení".
+
+Další návrat pouze pokud:
+Tři relevantní poptávky za sebou nepůjde kvalifikovat ani po odpovědi na upravenou volitelnou otázku.
+```
+
+Takový zápis má několik dobrých vlastností. Uznává, že problém byl reálný. Ukazuje, že malý krok měl účinek. Výslovně nechává zavřené dražší a datově náročnější varianty. A hlavně vrací pravidlo do jednoho kanonického místa místo toho, aby tým žil s otevřenou poznámkou "ještě sledovat".
+
+### Privacy-first uzavření návratu
+
+Při uzavření návratu po ročním klidu si udělejte malý úklid datové stopy. Návrat často vytvoří pomocné poznámky: seznam dotčených poptávek, krátký export, interní komentáře, testovací štítek, dočasný sloupec v tabulce nebo ruční počítání případů. Všechno to možná bylo užitečné pro rozhodnutí. To ale neznamená, že to má zůstat navždy.
+
+Položte si čtyři otázky:
+
+```text
+Která dočasná data vznikla jen kvůli ověření návratu?
+
+Co musí zůstat jako důkaz rozhodnutí?
+
+Co lze smazat, anonymizovat nebo sloučit do obecné poznámky?
+
+Kdo je vlastníkem úklidu a do kdy se provede?
+```
+
+Privacy-first uzavření není jen věta "žádná nová data nesbíráme". Je to i schopnost uklidit data, která vznikla oprávněně, ale už splnila účel. Pokud potřebujete zachovat důkaz, často stačí agregovaná věta: "u pěti dalších relevantních poptávek stačila upravená otázka". Nemusíte držet jména firem, celé konverzace ani exporty jen proto, že pomohly k rozhodnutí.
+
+Codyho komentář: nejhorší druh datové stopy je ta, která vznikla při rozumném ověření a pak se na ni zapomnělo. Nikdo ji nechtěl zneužít, nikdo ji aktivně nepotřebuje, ale leží někde v tabulce jako památka na "rychlý test". Rychlé testy jsou fajn. Datové suvenýry už méně.
+
+### Karta uzavření návratu po ročním klidu
+
+```text
+Původní pravidlo v klidu:
+
+Návratový signál:
+
+Otevřený malý krok:
+
+Kontrolní okno:
+
+Výsledek ověření:
+
+Uzavírací stav:
+- malý krok stačil
+- malý krok nestačil, ale problém je úzký
+- ukázal se jiný problém
+- signál se rozpadl
+
+Co se propisuje do kanonického místa:
+
+Co zůstává zavřené:
+
+Jaká dočasná data vznikla:
+
+Co se smaže, anonymizuje nebo shrne:
+
+Nový nebo potvrzený návratový signál:
+
+Vlastník uzavření:
+
+Datum uzavření:
+```
+
+Kartu držte krátkou. Pokud má více než jednu stránku, nejspíš se do ní snažíte uložit historii místo rozhodnutí. Historie může zůstat v pracovních poznámkách, pokud ji opravdu potřebujete. Kanonické místo má dostat jen pravidlo, hranici, návratový signál a případně krátký důvod.
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: přečtěte původní návratový signál a otevřený malý krok.
+2. Minuta 2: napište výsledek ověření jednou větou.
+3. Minuta 3: vyberte jeden ze čtyř uzavíracích stavů.
+4. Minuta 4: napište, co se propíše do kanonického místa.
+5. Minuta 5: napište, co zůstává zavřené.
+6. Minuta 6: najděte dočasná data a rozhodněte o jejich úklidu.
+7. Minuta 7: potvrďte další návratový signál.
+
+Pokud se během workshopu objeví nový nápad, napište ho stranou jako podnět. Nepřidávejte ho do uzavření. Uzavření má zavřít návrat, ne otevírat malý festival všeho, co se zrovna připomnělo.
+
+### Checklist uzavření návratu po ročním klidu
+
+- Je výsledek ověření popsaný jako stav, ne jako seznam aktivit?
+- Vybrali jsme jeden ze čtyř uzavíracích stavů?
+- Pokud malý krok stačil, ukončili jsme mimořádné sledování?
+- Pokud nestačil, otevíráme další úzký krok, ne původní širokou variantu?
+- Pokud se ukázal jiný problém, zavřeli jsme původní návrat jako samostatnou věc?
+- Je pravidlo propsané do jednoho kanonického místa?
+- Je jasné, co zůstává zavřené?
+- Má pravidlo nový nebo potvrzený návratový signál?
+- Víme, jaká dočasná data vznikla při ověření?
+- Rozhodli jsme, co se smaže, anonymizuje nebo shrne?
+- Nevznikla trvalá evidence jen kvůli jednomu návratu?
+- Umí další člověk pravidlo použít bez čtení celé historie návratu?
+
+Uzavření prvního skutečného návratu po ročním klidu je poslední pojistka proti tomu, aby se z rozumné reakce stal nový šum. Dobrý výsledek není jen opravené pravidlo. Dobrý výsledek je opravené pravidlo, uklizená datová stopa, zavřený rozsah a jasná věta, kdy se k tématu znovu vrátit. Pak může systém zase ztichnout.
+
 ## Pracovní log
 
+- 2026-06-29: Doplněna úvodní podkapitola o uzavření prvního skutečného návratu po ročním klidu: čtyři uzavírací stavy, praktický příklad, privacy-first úklid dočasných dat, karta, mini workshop a checklist.
 - 2026-06-29: Doplněna úvodní podkapitola o prvním skutečném návratu po ročním klidu: ověření návratového signálu, kontrola kontextu, nejmenší otevřený krok, privacy-first datové minimum, karta, mini workshop a checklist.
 - 2026-06-29: Doplněna úvodní podkapitola o vrácení ročního připomenutí zpět do dlouhodobého klidu: uzavírací věta, úklid dočasných stop, tři uzavírací stavy, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-06-29: Doplněna úvodní podkapitola o ročním připomenutí po dlouhodobém klidu: kontrola kanonického místa, návratového signálu, skryté datové stopy, čtyři výsledky připomenutí, privacy-first karta, mini workshop a checklist.
