@@ -271041,8 +271041,195 @@ Workshop nesmí skončit větou "budeme to sledovat". Musí skončit stavem a kr
 
 První návrat po tichém provozu je test provozní dospělosti. Nejde o to nikdy se nevracet. Jde o to vracet se přesně, s malým krokem a bez zbytečného sběru dat. Když návratový signál funguje, tým si udrží paměť bez toho, aby z každé vzpomínky udělal nový proces.
 
+## Uzavření prvního návratového signálu po tichém provozu
+
+Návratový signál po tichém provozu má skončit rychleji než původní téma. Pokud tým po jednom návratu založí novou dlouhou smyčku, tichý provoz se tiše rozpadl. Místo pravidla, které funguje samo, vznikne pravidlo s doprovodným dozorem. To je drahé, únavné a privacy-first provozu to obvykle přidá nové poznámky, exporty a výjimky, které nikdo nechtěl vlastnit.
+
+Uzavření proto začíná otázkou:
+
+```text
+Co jsme se z prvního návratu opravdu dozvěděli a co se má odteď změnit v běžné práci?
+```
+
+Odpověď musí být kratší než původní návratová karta. Nemá opakovat celou historii. Má převést výsledek do jednoho z těchto stavů:
+
+- signál byl šum a pravidlo zůstává beze změny;
+- signál ukázal lokální tření a opravilo se nejbližší pracovní místo;
+- signál ukázal slabou hranici a pravidlo se zpřesnilo;
+- signál ukázal nové téma a původní pravidlo zůstává zavřené.
+
+Každý stav má jiné uzavření. Když byl signál šum, uzavření má být skoro neviditelné: krátká věta u pracovního místa, žádná nová evidence, žádné další sledování. Když šlo o lokální tření, uzavření patří přímo do místa, kde člověk pravidlo používá: šablona e-mailu, checklist, CRM poznámka, onboardingový krok nebo interní návod. Když se zpřesnilo pravidlo, uzavření musí jasně říct, která věta se změnila a jaký návratový signál zůstává. A když jde o nové téma, staré pravidlo se nesmí nechat otevřené jen proto, že vypadá příbuzně.
+
+Codyho komentář: nejhorší výsledek je věta "budeme to chvíli sledovat" bez toho, aby někdo řekl proč, kde a dokdy. To není opatrnost. To je odložené rozhodnutí v reflexní vestě.
+
+### Čtyři uzavírací věty
+
+Použijte jednu ze čtyř vět a doplňte ji konkrétně:
+
+```text
+Signál byl šum:
+První návrat neotevírá změnu pravidla, protože dnešní situace neodpovídala návratovému signálu; pravidlo zůstává v tichém provozu bez nové evidence.
+
+Lokální tření:
+První návrat uzavíráme lokální opravou v [pracovní místo]; pravidlo se nemění, jen je jeho použití viditelnější nebo méně matoucí.
+
+Slabá hranice:
+První návrat uzavíráme zpřesněním pravidla v [kanonické místo]; mění se pouze [jedna věta / jeden příklad / jedna hranice].
+
+Nové téma:
+Dnešní situace není návrat původního pravidla; staré pravidlo zůstává zavřené a nové téma otevíráme samostatně jen tehdy, pokud má vlastní pracovní otázku.
+```
+
+Tyto věty jsou záměrně suché. Uzavření návratu nemá být kreativní esej. Má být pracovní západka, která brání tomu, aby se otevřený okraj rozšířil do dalšího procesu.
+
+### Praktický příklad
+
+Původní tiché pravidlo:
+
+```text
+U relevantní poptávky bez rozpočtu lze poslat volitelnou otázku v potvrzovacím e-mailu. Formulář se nemění.
+
+Návratový signál:
+Téma se vrací pouze pokud tři relevantní poptávky za sebou nepůjdou kvalifikovat bez ručního doptání na rozpočet.
+```
+
+První návrat ukázal, že tři poptávky opravdu vyžadovaly doptání. Při kontrole ale vyšlo najevo, že problém nebyl ve formuláři. Obchodní člověk používal starou verzi potvrzovacího e-mailu bez volitelné otázky.
+
+Uzavření:
+
+```text
+První návrat uzavíráme lokální opravou v šabloně potvrzovacího e-mailu. Pravidlo se nemění: formulář zůstává bez povinného pole pro rozpočet. Kanonická šablona nově obsahuje viditelnou volitelnou otázku a stará kopie šablony se maže.
+```
+
+Co zůstává zavřené:
+
+```text
+Neotevíráme povinné pole pro rozpočet, lead scoring, novou CRM evidenci ani dlouhodobé sledování všech poptávek bez rozpočtu.
+```
+
+Privacy-first dopad:
+
+```text
+Do trvalého záznamu ukládáme jen anonymizovaný závěr: stará kopie šablony způsobila ruční doptání. Neukládáme plné texty poptávek, kontakty ani screenshoty CRM.
+```
+
+Takové uzavření je malé, ale přesné. Tým opravil pracovní místo, neotevřel celý obchodní proces a nepřidal datovou stopu, která by za měsíc vypadala jako nejasný auditní artefakt.
+
+### Co propsat do kanonického místa
+
+Do kanonického místa patří jen to, co pomůže dalšímu člověku udělat správné rozhodnutí bez znalosti návratové epizody. Typicky:
+
+- aktuální znění pravidla;
+- jedna praktická ukázka použití;
+- návratový signál, pokud se změnil;
+- věta, co se výslovně neotevírá;
+- datum poslední věcné změny, pokud je pro tým užitečné.
+
+Nepatří tam celý příběh návratu, seznam všech zvažovaných variant ani osobní detaily případů, na kterých se problém ukázal. Pokud je potřeba zachovat stopu pro interní učení, napište ji anonymizovaně a časově omezeně.
+
+Příklad kanonického zápisu:
+
+```text
+Pravidlo:
+U relevantní poptávky bez rozpočtu neposíláme povinné pole do formuláře. V potvrzovacím e-mailu lze použít volitelnou otázku: "Pokud máte orientační rozpočet nebo rozsah, pošlete ho prosím také; pomůže nám navrhnout rozumný další krok."
+
+Neotevíráme:
+Povinné pole pro rozpočet, automatický lead scoring ani dlouhodobé štítkování poptávek bez rozpočtu.
+
+Návratový signál:
+Pravidlo znovu otevřeme pouze pokud tři relevantní poptávky za sebou nepůjde kvalifikovat ani po použití aktuální potvrzovací šablony.
+```
+
+Všimněte si posunu: návratový signál už počítá s opravenou šablonou. To je důležité. Pokud signál necháte v původním znění, tým se může vrátit ke stejnému problému, i když právě opravil příčinu.
+
+### Privacy-first uzavření
+
+Po uzavření prvního návratu projděte pomocné stopy. Ptejte se u každé:
+
+```text
+Potřebujeme ji pro další rozhodnutí, nebo jen dokazuje, že jsme pracovali?
+```
+
+Pokud jen dokazuje práci, smažte ji nebo převeďte do anonymizovaného závěru. Dočasná evidence má skončit dřív, než si na ni tým zvykne. Zvlášť u obchodních a marketingových situací je lákavé nechat si všechno "pro jistotu": exporty poptávek, komentáře, screenshoty, kopie e-mailů, nové štítky. Jenže jistota se tím často nezvedne. Jen přibude míst, kde leží osobní a obchodní data.
+
+Dobré uzavření proto obsahuje krátkou datovou větu:
+
+```text
+Pomocné podklady k návratu se po propsání anonymizovaného závěru mažou; v kanonickém místě zůstává jen upravené pravidlo, návratový signál a věta o zavřeném rozsahu.
+```
+
+Pokud nějaký podklad zůstává, musí mít účel, vlastníka a konec:
+
+```text
+Zůstává anonymizovaný souhrn tří případů pro další měsíční review obchodní šablony. Vlastník: obchod. Retence: do dalšího review, potom smazat nebo převést do trvalého pravidla.
+```
+
+### Karta uzavření prvního návratu
+
+```text
+Kanonické pravidlo:
+
+Původní návratový signál:
+
+Co se skutečně stalo:
+
+Vybraný uzavírací stav:
+- šum
+- lokální tření
+- slabá hranice pravidla
+- nové téma
+
+Co se mění v běžné práci:
+
+Co se výslovně nemění:
+
+Kde je změna propsaná:
+
+Jaký návratový signál platí odteď:
+
+Jaké pomocné stopy se mažou, zobecňují nebo časově omezují:
+
+Vlastník kanonického místa:
+
+Další kontrola:
+- žádná
+- pouze při návratovém signálu
+- existující běžný rytmus:
+```
+
+Karta má po uzavření ztratit důležitost. Důležité je kanonické místo. Pokud lidé za měsíc potřebují kartu, aby pravidlo pochopili, nebylo uzavření propsané dost dobře.
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: přečtěte původní návratový signál a dnešní zjištění.
+2. Minuta 2: vyberte jeden uzavírací stav.
+3. Minuta 3: napište jednu uzavírací větu.
+4. Minuta 4: upravte kanonické místo nebo potvrďte, že se nemění.
+5. Minuta 5: napište, co zůstává zavřené.
+6. Minuta 6: rozhodněte o pomocných datech a jejich konci.
+7. Minuta 7: určete, jestli další kontrola vůbec existuje.
+
+Pokud se workshop zasekne u otázky, jestli "pro jistotu" nezaložit novou evidenci, vraťte se k rozhodovací otázce. Evidence bez rozhodnutí je jen přestupní stanice pro budoucí nepořádek.
+
+### Checklist uzavření prvního návratu
+
+- Je jasné, který ze čtyř stavů návrat uzavírá?
+- Je uzavírací věta kratší než původní návratová karta?
+- Je změna propsaná do kanonického místa, ne jen do poznámky z review?
+- Pokud šlo o lokální tření, zůstala oprava u nejbližšího pracovního místa?
+- Pokud se pravidlo zpřesnilo, změnila se jen jedna praktická hranice?
+- Pokud šlo o nové téma, zůstalo původní pravidlo zavřené?
+- Je výslovně napsané, co se nemění a co se neotevírá?
+- Je návratový signál po uzavření pořád aktuální?
+- Skončily pomocné exporty, screenshoty, kopie a štítky, které už nejsou potřeba?
+- Pokud nějaká pomocná stopa zůstává, má účel, vlastníka a retenci?
+- Umí nový člověk použít pravidlo bez znalosti návratové epizody?
+
+Uzavřený první návrat má být skoro nudný. Jedna věta se změnila, jedna stará kopie zmizela, jeden signál se zpřesnil, případně se potvrdilo, že není co dělat. To je dobrý výsledek. Produkt, marketing ani SaaS provoz nepotřebují víc dramat než zákazník už tak nosí v batohu.
+
 ## Pracovní log
 
+- 2026-06-29: Doplněna úvodní podkapitola o uzavření prvního návratového signálu po tichém provozu: čtyři uzavírací stavy, praktický příklad, propsání do kanonického místa, privacy-first úklid pomocných stop, karta, mini workshop a checklist.
 - 2026-06-29: Doplněna úvodní podkapitola o prvním návratovém signálu po tichém provozu: rozlišení skutečného návratu od šumu, čtyři stavy návratu, praktické příklady, privacy-first důkazní minimum, karta, mini workshop a checklist.
 - 2026-06-29: Doplněna úvodní podkapitola o převodu uzavřené druhé kontroly do tichého provozu: aktivní minimum pravidla, ukončení mimořádné péče, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-29: Doplněna úvodní podkapitola o uzavření druhé běžné kontroly kanonického místa: uzavírací stavy, praktické věty, privacy-first úklid datové stopy, karta, mini workshop a checklist.
