@@ -270861,8 +270861,189 @@ Workshop má skončit tím, že pravidlo nepotřebuje další doprovod. Pokud se
 
 Převod do tichého provozu je úspěšný, když se po něm nic zvláštního neděje. Pravidlo je na svém místě, návratový signál je čitelný a staré podklady nepřekážejí. V produktu, marketingu i SaaS provozu je tohle často nejlepší možný konec: žádné nové vrstvy, žádná zbytečná data, jen pracovní klid.
 
+## První návratový signál po tichém provozu
+
+Tichý provoz má jednu zkoušku, která přijde až později: někdo narazí na situaci, která připomíná staré téma. V tu chvíli se ukáže, jestli byl návratový signál napsaný dost přesně. Dobrý signál neříká "máme se k tomu někdy vrátit". Říká, co se muselo stát, kde se to stalo a jak malé rozhodnutí má tým teď udělat.
+
+První návrat po tichém provozu nesmí automaticky otevřít celou historii. To je nejčastější chyba. Tým uvidí známý problém, vytáhne staré karty, začne znovu číst původní debatu a z tichého pravidla je během deseti minut nový projekt. Správný postup je skromnější: porovnat dnešní situaci s návratovým signálem, rozhodnout jeden stav a udělat nejmenší odpovídající krok.
+
+Začněte větou:
+
+```text
+Téma se po tichém provozu vrací, protože:
+```
+
+Za ni napište konkrétní důvod:
+
+```text
+Téma se po tichém provozu vrací, protože:
+Třetí relevantní poptávka za sebou nešla kvalifikovat bez ručního doptání na rozpočet, což přesně odpovídá návratovému signálu u obchodního checklistu.
+```
+
+Pokud větu neumíte napsat podle existujícího signálu, téma se možná nevrací. Možná jde jen o šum, novou situaci nebo jeden lokální zádrhel.
+
+### Čtyři stavy návratu
+
+První návrat po tichém provozu může skončit čtyřmi stavy:
+
+- signál nenastal;
+- signál nastal, ale stačí lokální oprava pracovního místa;
+- signál nastal a pravidlo potřebuje zúžit nebo zpřesnit;
+- dnešní situace je nové téma, ne návrat starého pravidla.
+
+Stav "signál nenastal" je legitimní výsledek. Například jeden obchodník měl zvláštní poptávku, ale pravidlo jako takové dál funguje. Zapište krátkou poznámku k pracovnímu místu, pokud je potřeba, a neotevírejte starou historii.
+
+Stav "lokální oprava" znamená, že pravidlo je dobré, ale jeho použití někde drhne. Typicky chybí příklad, věta je schovaná pod špatným nadpisem nebo návratový signál není vidět přímo u kroku. Opravte nejbližší místo, ne celý systém.
+
+Stav "zúžit nebo zpřesnit" je skutečný návrat. Pravidlo se používá, ale nedává dost jasné rozhodnutí. Tady otevřete malou změnu: jednu větu, jeden příklad, jednu hranici.
+
+Stav "nové téma" chrání staré pravidlo před tím, aby na sebe nabalilo všechno, co mu je jen podobné. Pokud se změnil typ zákazníka, nabídka, formulář, pricing nebo provozní odpovědnost, možná už neřešíte návrat starého rozhodnutí. Řešíte nový výchozí bod.
+
+### Praktický příklad
+
+Tiché pravidlo:
+
+```text
+U relevantní poptávky bez rozpočtu lze poslat volitelnou otázku v potvrzovacím e-mailu. Formulář se nemění.
+
+Návratový signál:
+Téma se vrací pouze pokud tři relevantní poptávky za sebou nepůjdou kvalifikovat bez ručního doptání na rozpočet.
+```
+
+Situace A:
+
+```text
+Stalo se:
+Jedna poptávka bez rozpočtu vyžadovala ruční doptání, ale další dvě šly kvalifikovat běžně.
+
+Stav:
+Signál nenastal.
+
+Krok:
+Nic neměníme. Poznámku neukládáme do nové evidence.
+```
+
+Situace B:
+
+```text
+Stalo se:
+Tři relevantní poptávky za sebou vyžadovaly ruční doptání.
+
+Stav:
+Signál nastal, ale pravidlo je najitelné a používá se. Slabé je jen znění volitelné otázky.
+
+Krok:
+Upravíme jednu větu v šabloně potvrzovacího e-mailu a při dalším použití ověříme, jestli pomohla.
+```
+
+Situace C:
+
+```text
+Stalo se:
+Poptávky se týkají nového typu služby, kde rozpočet není vhodný kvalifikační signál.
+
+Stav:
+Nové téma, ne návrat starého pravidla.
+
+Krok:
+Staré pravidlo necháváme zavřené. Otevřeme novou malou otázku pro kvalifikaci tohoto typu služby.
+```
+
+Největší hodnota příkladu je v tom, že všechny tři situace vypadají na první pohled podobně. Rozdíl je v tom, jestli opravdu nastal návratový signál. Bez tohoto rozlišení tým opravuje věci, které fungují, a zároveň sbírá data, která nepotřebuje.
+
+### Privacy-first návrat
+
+První návrat po tichém provozu svádí k nové evidenci. Někdo navrhne tabulku případů, screenshoty, export z CRM nebo ruční štítek "ověřit". Někdy to dává smysl, ale jen pokud existuje konkrétní rozhodovací otázka a krátká retence.
+
+Použijte jednoduchou brzdu:
+
+```text
+Pro návrat potřebujeme doložit pouze:
+
+Nepotřebujeme sbírat:
+
+Pomocná stopa skončí kdy:
+```
+
+Příklad:
+
+```text
+Pro návrat potřebujeme doložit pouze:
+Že nastaly tři relevantní poptávky za sebou, které nešly kvalifikovat bez ručního doptání.
+
+Nepotřebujeme sbírat:
+Plné kopie poptávek, osobní údaje kontaktů, screenshoty CRM ani nový dlouhodobý štítek.
+
+Pomocná stopa skončí kdy:
+Po úpravě jedné věty a jednom ověřovacím použití. Do kanonického místa půjde jen anonymizovaný závěr.
+```
+
+Codyho komentář: návratový signál není povolenka k tomu, aby tým znovu postavil sledovací aparát. Je to pojistka, že se věc vrátí jen tehdy, když má proč. Privacy-first provoz tady znamená disciplínu: nejdřív rozhodovací otázka, potom minimum důkazů, a potom úklid. Obrácené pořadí je klasická továrna na "ještě se to může hodit".
+
+### Karta prvního návratu po tichém provozu
+
+```text
+Kanonické pravidlo:
+
+Kde pravidlo žije:
+
+Původní návratový signál:
+
+Dnešní situace:
+
+Nastal návratový signál?
+- ne
+- ano
+- není jasné
+
+Vybraný stav:
+- signál nenastal
+- lokální oprava pracovního místa
+- zúžení nebo zpřesnění pravidla
+- nové téma
+
+Nejmenší další krok:
+
+Co zůstává zavřené:
+
+Jaké pomocné důkazy stačí:
+
+Co nesbíráme:
+
+Kdy pomocná stopa skončí:
+```
+
+Karta má být krátká a jednorázová. Pokud se z ní stává nová průběžná evidence, vraťte se k otázce, jaké rozhodnutí vlastně potřebujete udělat. Bez rozhodnutí je evidence jen drahý způsob, jak uklidnit nejistotu.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte kanonické pravidlo a návratový signál.
+2. Minuta 2: napište dnešní situaci jednou větou.
+3. Minuta 3: rozhodněte, jestli signál nastal.
+4. Minuta 4: vyberte jeden ze čtyř stavů návratu.
+5. Minuta 5: napište nejmenší další krok a co zůstává zavřené.
+6. Minuta 6: určete minimální důkaz a jeho úklid.
+
+Workshop nesmí skončit větou "budeme to sledovat". Musí skončit stavem a krokem. Pokud žádný krok není potřeba, napište to výslovně. Ticho je někdy nejlepší výstup, jen musí být vědomé.
+
+### Checklist prvního návratu po tichém provozu
+
+- Je dnešní důvod návratu popsaný konkrétně?
+- Porovnali jste ho s původním návratovým signálem?
+- Neotevřeli jste starou historii jen proto, že situace vypadá povědomě?
+- Je vybraný jeden ze čtyř stavů návratu?
+- Pokud signál nenastal, je téma opravdu zavřené bez nové evidence?
+- Pokud jde o lokální opravu, zůstává oprava u nejbližšího pracovního místa?
+- Pokud se pravidlo zpřesňuje, mění se jen jedna praktická hranice?
+- Pokud jde o nové téma, zůstává staré pravidlo zavřené?
+- Sbíráte jen důkazy potřebné k dnešnímu rozhodnutí?
+- Má pomocná datová stopa jasný konec?
+
+První návrat po tichém provozu je test provozní dospělosti. Nejde o to nikdy se nevracet. Jde o to vracet se přesně, s malým krokem a bez zbytečného sběru dat. Když návratový signál funguje, tým si udrží paměť bez toho, aby z každé vzpomínky udělal nový proces.
+
 ## Pracovní log
 
+- 2026-06-29: Doplněna úvodní podkapitola o prvním návratovém signálu po tichém provozu: rozlišení skutečného návratu od šumu, čtyři stavy návratu, praktické příklady, privacy-first důkazní minimum, karta, mini workshop a checklist.
 - 2026-06-29: Doplněna úvodní podkapitola o převodu uzavřené druhé kontroly do tichého provozu: aktivní minimum pravidla, ukončení mimořádné péče, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-29: Doplněna úvodní podkapitola o uzavření druhé běžné kontroly kanonického místa: uzavírací stavy, praktické věty, privacy-first úklid datové stopy, karta, mini workshop a checklist.
 - 2026-06-29: Doplněna úvodní podkapitola o druhé běžné kontrole kanonického místa: samostatnost pravidla bez čerstvé péče, skrytá evidence, privacy-first kontrola, karta, mini workshop a checklist.
