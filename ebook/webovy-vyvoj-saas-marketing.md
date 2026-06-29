@@ -248200,6 +248200,230 @@ Když se tým v minutě 2 hádá mezi lokální opravou a novým tématem, zvolt
 
 Dobré uzavření prvního běžného použití je skoro neviditelné. Neoslavuje standard, nevyrábí nový projekt a nesbírá další data do zásoby. Jen potvrdí, že pravidlo po návratu obstálo v běžné práci, případně opraví jedno místo, které mu bránilo v klidném použití. To stačí. Ne každý dobrý výsledek potřebuje fanfáry; některé potřebují jen čistý zápis a zavřené složky.
 
+## Druhé běžné použití po uzavřeném návratu z dlouhodobého klidu lokálního dočištění
+
+Druhé běžné použití po uzavřeném návratu z dlouhodobého klidu lokálního dočištění nemá dokazovat, že tým minule postupoval správně. To už se stalo při prvním použití a jeho uzavření. Druhé použití má ověřit něco užšího: jestli pravidlo nebo malá oprava fungují i ve chvíli, kdy u toho není čerstvá paměť návratu, původní vlastník ani chuť znovu vysvětlovat historii.
+
+Začněte větou:
+
+```text
+Druhé běžné použití ověřuje, zda pravidlo obstojí bez čerstvé paměti návratu a bez nové mimořádné evidence.
+```
+
+Tahleta věta je brzda proti dvěma častým chybám. První chyba je znovuotevřít celé staré téma, protože se pravidlo použilo podruhé. Druhá chyba je založit novou kontrolu jen proto, že tým nechce pustit z ruky něco, co se kdysi vracelo z klidu. Obojí je pochopitelné. Obojí je drahé. A obojí obvykle vyrábí víc provozního šumu než užitku.
+
+Druhé použití má smysl hlavně tehdy, když první použití skončilo stavem `lokální dočištění` nebo `slabé kanonické místo`. Pokud první použití skončilo stabilním návratem do klidu a nevznikla žádná oprava, druhé použití neplánujte jako zvláštní aktivitu. Pravidlo už má běžet v normálním rytmu.
+
+Krátký zápis pro situaci, kdy druhé použití neděláte:
+
+```text
+Druhé běžné použití neplánujeme jako samostatnou kontrolu, protože první běžné použití skončilo stabilním návratem do klidu a nevznikla lokální oprava ani slabé kanonické místo.
+```
+
+Tohle je plnohodnotný výsledek. Ne každá možnost si zaslouží vlastní proces. Někdy je nejlepší provozní rozhodnutí přesně to, které zůstane jednou větou v logu.
+
+### Co má druhé použití potvrdit
+
+Druhé běžné použití potvrzuje čtyři věci:
+
+- Pravidlo se najde v aktuálním pracovním místě, ne ve staré kartě návratu.
+- Člověk podle něj rozhodne bez vysvětlování původní historie.
+- Lokální oprava z prvního použití neotevřela širší rozsah.
+- Nevznikla nová datová stopa jen kvůli jistotě.
+
+První bod je test dohledatelnosti. Pokud člověk pořád hledá starou kartu, staré komentáře nebo starý screenshot, pravidlo není dost dobře přenesené do aktuálního místa.
+
+Druhý bod je test samostatnosti. Když pravidlo potřebuje živého tlumočníka, není to pravidlo. Je to poznámka pro zasvěcené.
+
+Třetí bod hlídá rozsah. Lokální oprava nesmí být vstupenkou k revizi celé šablony, obchodního procesu nebo marketingového měření. Pokud první použití vedlo k jedné větě v rozcestníku, druhé použití ověřuje tu jednu větu. Ne celý vesmír kolem ní, byť by se ten vesmír tvářil produktivně.
+
+Čtvrtý bod je privacy-first kontrola. Po návratu z dlouhodobého klidu má tým často tendenci zapisovat víc než dřív: kdo pravidlo použil, kdo si nebyl jistý, kolik situací prošlo, kolik se jich zavřelo. Pokud tahle evidence nevede ke konkrétnímu rozhodnutí, nevytvářejte ji.
+
+### Praktický příklad
+
+Situace po prvním použití:
+
+```text
+Uzavřený návrat:
+Téma rozpočtu v poptávce se po dlouhém klidu vrátilo, ale místo povinného pole se upravila obchodní kvalifikační věta.
+
+První běžné použití:
+Kvalifikační věta fungovala, jen v obchodním rozcestníku chyběl odkaz na aktuální příklad.
+
+Lokální dočištění:
+Do rozcestníku byl doplněn jeden odkaz na příklad kvalifikační věty.
+```
+
+Druhé běžné použití:
+
+```text
+Druhá běžná situace:
+Jiný člověk připravuje follow-up pro novou poptávku.
+
+Co se stalo:
+Našel rozcestník, použil aktuální příklad a nepřidal otázku na rozpočet do prvního formuláře.
+
+Datová stopa:
+Nevznikl nový export poptávek, nový štítek v CRM ani tabulka "poptávky bez rozpočtu".
+
+Výsledek:
+Potvrzený klid.
+```
+
+Uzavírací zápis:
+
+```text
+Druhé běžné použití potvrzuje, že lokální odkaz v obchodním rozcestníku stačí. Pravidlo zůstává v běžném rytmu. Mimořádnou kontrolu neplánujeme a žádnou novou evidenci nezakládáme.
+```
+
+Tohle je dobrý konec. Není potřeba další workshop, další kontrola ani nová sekce v dashboardu. Pravidlo se našlo, rozhodnutí vzniklo a datová stopa se nezvětšila.
+
+Slabší varianta:
+
+```text
+Druhá běžná situace:
+Člověk našel správný rozcestník, ale pořád si nebyl jistý, jestli jednotlivá nejistá poptávka stačí k návratu rozpočtového pole.
+
+Výsledek:
+Chybí jedna hrana.
+
+Nejmenší oprava:
+Do rozcestníku doplnit větu: Jedna nejistá poptávka není návratový signál pro nové pole; téma se vrací až při třech relevantních poptávkách za sebou bez kvalifikace.
+
+Co neotevíráme:
+Revizi formuláře, scoring, export poptávek ani školení obchodu.
+```
+
+I tady je reakce malá. Neznamená to, že návrat selhal. Znamená to, že pravidlo potřebuje ostřejší hranu proti starému pokušení.
+
+### Čtyři výsledky druhého použití
+
+Po druhém běžném použití vyberte jeden stav:
+
+- Potvrzený klid: pravidlo se našlo, použilo a nevyžádalo další péči.
+- Poslední hrana: pravidlo funguje, ale potřebuje jednu větu proti rozšiřování rozsahu.
+- Slabé pracovní místo: problém není v pravidle, ale v tom, kde člověk pracuje nebo kam vede odkaz.
+- Návrat se znovu otevřel: druhé použití potvrdilo stejný návratový signál a pravidlo už nestačí.
+
+Potvrzený klid má skončit ukončením mimořádné pozornosti. Napište jednu větu do logu nebo kanonického místa a nic víc.
+
+Poslední hrana má skončit jednou úpravou. Ne dvěma. Ne "když už jsme u toho". Jedna věta, jeden odkaz nebo jeden příklad.
+
+Slabé pracovní místo znamená, že pravidlo možná funguje, ale lidé ho nepotkají ve správný okamžik. Opravte cestu k pravidlu, ne celé pravidlo.
+
+Návrat se znovu otevřel pouze tehdy, když druhé použití opravdu potvrdí stejný problém, kvůli kterému se téma vracelo z dlouhodobého klidu. Pokud se objeví jiné téma, založte ho odděleně. Starou větev tím neprodlužujte.
+
+Codyho komentář: druhé použití je jako kontrola, jestli jste po sobě uklidili pracovní stůl, ne výzva postavit nový sklad kancelářských potřeb. Pokud po něm vznikne další evidence, další schůzka a další "pro jistotu", pravděpodobně jste právě vynalezli proces pro uklízení procesu. Gratuluji, ale raději to smažte včas.
+
+### Privacy-first uzavření druhého použití
+
+Privacy-first závěr pište konkrétně:
+
+```text
+Po druhém běžném použití ponecháváme:
+
+Mažeme nebo nezakládáme:
+
+Další návrat nastane pouze pokud:
+```
+
+Příklad:
+
+```text
+Po druhém běžném použití ponecháváme:
+Aktuální kvalifikační větu a odkaz v obchodním rozcestníku.
+
+Mažeme nebo nezakládáme:
+Dočasnou poznámku k druhému použití, tabulku poptávek bez rozpočtu, nový CRM štítek a analytický event.
+
+Další návrat nastane pouze pokud:
+Tři relevantní poptávky za sebou nepůjdou kvalifikovat bez ručního doptání na rozpočet.
+```
+
+Důležité je slovo `nezakládáme`. Privacy-first úklid není jen mazání toho, co vzniklo. Je to i vědomé odmítnutí evidence, která by mohla vzniknout jen proto, že se někdo cítí nejistě. Nejistota je dobrý důvod k lepší větě. Není automaticky dobrý důvod k nové tabulce.
+
+Pokud si musíte ponechat dočasnou stopu, napište její retenci:
+
+```text
+Dočasnou poznámku k druhému použití ponecháváme do konce měsíčního review, protože obsahuje jedinou formulaci, která se má propsat do rozcestníku. Po propsání se poznámka smaže. Vlastník: produktový editor.
+```
+
+Bez retence se dočasné stopy mění na trvalé pomalu a tiše. Přesně proto je potřeba rozhodnout hned.
+
+### Karta druhého běžného použití
+
+```text
+Téma:
+
+Uzavřený návrat z dlouhodobého klidu:
+
+Výsledek prvního běžného použití:
+
+Co se po prvním použití lokálně dočistilo:
+
+Druhá běžná situace:
+
+Našlo se pravidlo bez staré historie?
+ano / částečně / ne
+
+Šlo podle něj rozhodnout?
+ano / částečně / ne
+
+Zůstal původní širší rozsah zavřený?
+ano / částečně / ne
+
+Datová stopa:
+stejná / menší / větší
+
+Výsledek:
+- potvrzený klid
+- poslední hrana
+- slabé pracovní místo
+- návrat se znovu otevřel
+
+Co se případně mění:
+
+Co výslovně neotevíráme:
+
+Co mažeme nebo nezakládáme:
+
+Další návratový signál:
+
+Vlastník:
+
+Datum:
+```
+
+Karta má být krátká. Pokud se nevejde na jednu obrazovku, pravděpodobně už nepopisujete druhé běžné použití, ale novou pracovní větev.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte výsledek prvního běžného použití.
+2. Minuta 2: pojmenujte druhou běžnou situaci.
+3. Minuta 3: ověřte, jestli se pravidlo našlo bez staré historie.
+4. Minuta 4: napište rozhodnutí, které podle pravidla vzniklo.
+5. Minuta 5: vyberte jeden ze čtyř výsledků.
+6. Minuta 6: napište, co se maže, nezakládá nebo vrací do klidu.
+
+Když během šesti minut narazíte na nové téma, neřešte ho v téže kartě. Zapište samostatný podnět s vlastním pracovním místem. Druhé běžné použití má potvrdit samostatnost staré opravy, ne sloužit jako vstupní brána pro všechno, co si tým právě všiml.
+
+### Checklist druhého běžného použití po dlouhodobém klidu
+
+- Dává druhé použití smysl, nebo ho děláme jen pro pocit jistoty?
+- Navazuje na konkrétní výsledek prvního běžného použití?
+- Proběhlo v přirozené pracovní situaci?
+- Našel člověk pravidlo bez staré karty návratu?
+- Vzniklo podle pravidla jasné rozhodnutí?
+- Zůstal původní širší návrh zavřený?
+- Pokud chyběla poslední hrana, je opravdu jen jedna?
+- Pokud je slabé pracovní místo, opravujeme cestu k pravidlu místo pravidla samotného?
+- Pokud se návrat znovu otevřel, máme konkrétní návratový signál?
+- Nevznikl nový export, tracker, štítek, tabulka, povinné pole ani kontrolní kalendář?
+- Je napsané, co se maže nebo vůbec nezakládá?
+- Umí pravidlo po druhém použití pokračovat bez mimořádné péče?
+
+Druhé běžné použití je hotové, když po něm ubude zvláštní pozornost. Buď se pravidlo vrátí do klidu, nebo dostane jednu poslední hranu, nebo se férově přizná, že návrat ještě není zavřený. Všechny tři výsledky jsou lepší než mlhavé "budeme to sledovat". To je jen práce převlečená za opatrnost.
+
 ## Druhé běžné použití po uzavřeném návratu z dlouhodobého klidu
 
 První běžné použití po uzavřeném návratu říká, jestli standard po dlouhém klidu vůbec obstál mimo mimořádnou péči. Druhé běžné použití říká něco trochu jiného: jestli standard funguje i bez čerstvé paměti prvního ověření. To je důležitý rozdíl. První použití má často v týmu ještě dozvuk. Lidé si pamatují, že se něco nedávno řešilo, vědí, kde hledat kartu, a dávají si větší pozor. Druhé použití už víc připomíná normální provoz.
@@ -273048,3 +273272,4 @@ Druhé běžné použití je dobré jen tehdy, když po něm ubude péče. Pokud
 - 2026-06-28: Doplněna úvodní podkapitola o uzavření lokálního dočištění po prvním běžném ověření: tři výsledné stavy, praktické příklady, privacy-first uzavření, karta, mini workshop a checklist.
 - 2026-06-28: Doplněna úvodní podkapitola o prvním běžném použití po uzavřeném lokálním dočištění: najitelnost, samostatnost, datová střídmost, čtyři výsledné stavy, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-06-29: Doplněna úvodní podkapitola o uzavření prvního běžného použití po uzavřeném návratu z dlouhodobého klidu lokálního dočištění: uzavírací stavy, praktické příklady, privacy-first úklid, karta, mini workshop a checklist.
+- 2026-06-29: Doplněna úvodní podkapitola o druhém běžném použití po uzavřeném návratu z dlouhodobého klidu lokálního dočištění: kdy druhé použití neplánovat, čtyři výsledky, praktické příklady, privacy-first uzavření, karta, mini workshop a checklist.
