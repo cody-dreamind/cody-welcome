@@ -271548,8 +271548,185 @@ Když se během workshopu objeví nový nápad, nezapisujte ho do uzavření. De
 
 Uzavření prvního běžného použití má vrátit pozornost z procesu zpět k práci. Pokud pravidlo funguje, nechte ho sloužit. Pokud potřebuje jednu větu, doplňte ji. Pokud nefunguje, přiznejte to a vraťte se o krok zpět. Všechno ostatní je jen elegantně formulované odkládání konce.
 
+## Druhé běžné použití po uzavření prvního použití v tichém provozu
+
+Druhé běžné použití má jiný smysl než první. První ověřuje, jestli pravidlo po návratovém signálu vůbec umí fungovat bez staré karty. Druhé ověřuje, jestli se pravidlo opravdu osamostatnilo: jestli ho použije další člověk, jiná situace nebo stejné pracovní místo bez čerstvé paměti z uzavření. Pokud druhé použití proběhne dobře, pravidlo už nemá dostávat mimořádnou péči.
+
+Neplánujte druhé použití automaticky. Má smysl hlavně tehdy, když první použití skončilo lokálním dočištěním, měkkou hranicí nebo drobným třením. Pokud první použití proběhlo čistě a pravidlo fungovalo bez úprav, nechte ho v běžném rytmu. Další kontrola jen pro pocit jistoty by z tichého provozu znovu udělala hlídaný režim.
+
+Začněte větou:
+
+```text
+Druhé běžné použití ověřuje pouze to, jestli lokální dočištění z prvního použití funguje bez čerstvého vysvětlování.
+```
+
+Tato věta chrání rozsah. Neověřujete znovu celý návratový signál, neotevíráte staré rozhodnutí a nehledáte nové optimalizace. Díváte se jen na to, jestli jedno pravidlo nebo jedna doplněná věta přežily další běžnou práci.
+
+### Kdy druhé použití nedělat
+
+Druhé použití nedělejte, pokud:
+
+- první použití bylo uzavřené bez změny;
+- žádné lokální dočištění nevzniklo;
+- pravidlo už má běžný revizní rytmus a neukázalo nové tření;
+- ověření by vyžadovalo nový sběr dat, který nemá jasné rozhodnutí;
+- tým chce druhé použití jen proto, že se bojí pravidlo pustit z ruky.
+
+V takovém případě napište krátce:
+
+```text
+Druhé běžné použití neplánujeme, protože první použití pravidlo potvrdilo bez lokální opravy a další kontrola by nevytvořila nové rozhodnutí.
+```
+
+To není lenost. To je dobré zavření. Tiché pravidlo má být tiché i tím, že kolem něj nevzniká další kontrolní kalendář.
+
+### Co druhé použití sleduje
+
+Pokud druhé použití dává smysl, sledujte jen čtyři věci:
+
+- Najitelnost po úpravě: člověk najde opravené pracovní místo bez staré karty.
+- Rozhodnutelnost: doplněná věta nebo hranice vede k jasnému kroku.
+- Zachování zavřeného rozsahu: původní širší návrh se nevrací zadními dveřmi.
+- Datová střídmost: nevzniká nový event, export, tabulka, štítek ani pole.
+
+Příklad:
+
+```text
+První použití:
+Pravidlo pro nesbírání rozpočtu ve formuláři fungovalo, ale u formuláře chyběl příklad cíle projektu.
+
+Lokální dočištění:
+Do formuláře jsme doplnili jeden příklad dobrého cíle projektu.
+
+Druhé použití:
+Marketing upravuje stejný formulář pro další kampaň.
+
+Výsledek:
+Člověk našel příklad, nepřidal pole pro rozpočet a upravil jen text nápovědy u cíle projektu.
+
+Závěr:
+Lokální dočištění drží. Pravidlo zůstává v tichém provozu bez další mimořádné kontroly.
+```
+
+Slabý výsledek:
+
+```text
+Druhé použití:
+Člověk příklad našel, ale navrhl k němu přidat tabulku všech poptávek bez rozpočtu, aby bylo "víc jistoty".
+
+Závěr:
+Pravidlo drží, ale objevila se snaha vrátit mimořádné sledování. Tabulku neotevíráme. Do pravidla doplníme větu, že návrat k rozpočtu vyžaduje konkrétní návratový signál.
+```
+
+Tady není problém v samotném formuláři. Problém je v měkké hranici proti dalšímu sledování. Oprava má být jedna věta, ne nová evidence.
+
+### Tři výsledky druhého použití
+
+Po druhém běžném použití vyberte jeden ze tří stavů:
+
+- Potvrzeno a ticho: pravidlo i lokální dočištění fungují, další mimořádná kontrola končí.
+- Ještě jedna hrana: pravidlo funguje, ale je potřeba doplnit jednu hranici proti rozšiřování rozsahu.
+- Návrat není zavřený: druhé použití znovu potřebuje starou kartu, dodatečné důkazy nebo nové sledování.
+
+Stav `potvrzeno a ticho` je cílový. Zapište jednu větu a nechte pravidlo v běžném rytmu.
+
+Stav `ještě jedna hrana` použijte, když pravidlo funguje, ale lidé kolem něj pořád zkoušejí otevřít zavřený rozsah. Typicky stačí doplnit větu typu:
+
+```text
+Rozpočet se do formuláře nepřidává bez nového návratového signálu; jednotlivá nejistota v kampani není důvod pro nové pole ani export.
+```
+
+Stav `návrat není zavřený` použijte bez kosmetiky. Pokud pravidlo pořád nejde použít bez staré historie, nepatří do tichého provozu. Vraťte se k uzavření návratu a opravte kanonické místo, návratový signál nebo datovou hranici.
+
+Codyho komentář: druhé použití je poslední šance neudělat z obyčejného pravidla malý památník. Když drží, pusťte ho. Když nedrží, opravte důvod. Ale hlavně kolem něj nezačněte stavět pavilon kontrolních rituálů. Weby, SaaS i marketing už mají dost míst, kde se dá ztratit čas důstojněji.
+
+### Privacy-first závěr
+
+Po druhém použití napište krátký privacy-first závěr:
+
+```text
+Po druhém použití dál nesbíráme:
+
+Do běžného rytmu přenášíme:
+
+Mimořádnou kontrolu ukončujeme:
+```
+
+Příklad:
+
+```text
+Po druhém použití dál nesbíráme:
+Rozpočet v prvním formuláři, export poptávek bez rozpočtu ani nový analytický event.
+
+Do běžného rytmu přenášíme:
+Pravidlo u formuláře a příklad dobrého cíle projektu.
+
+Mimořádnou kontrolu ukončujeme:
+Nevedeme zvláštní seznam kampaní, kde se rozpočet neptal.
+```
+
+Takový závěr převádí poznatek do práce a zároveň uklízí pokušení sledovat věc jen proto, že se kdysi vracela. Privacy-first provoz se často vyhrává přesně tady: ne v tom, že nikdy nic neověříte, ale v tom, že po ověření opravdu přestanete sbírat.
+
+### Karta druhého běžného použití
+
+```text
+Pravidlo:
+
+Proč druhé použití dává smysl:
+
+Lokální dočištění z prvního použití:
+
+Druhá běžná situace:
+
+Co člověk našel bez staré karty:
+
+Jaké rozhodnutí podle pravidla udělal:
+
+Výsledek:
+- potvrzeno a ticho
+- ještě jedna hrana
+- návrat není zavřený
+
+Co zůstává zavřené:
+
+Jaká data dál nesbíráme:
+
+Co ukončujeme jako mimořádnou kontrolu:
+
+Další stav pravidla:
+```
+
+Kartu vyplňte jen tam, kde druhé použití opravdu proběhlo. Pokud jste druhé použití vědomě neplánovali, stačí jedna věta v logu. Dokumentace má pomáhat rozhodovat, ne odměňovat každou možnost za to, že existuje.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte lokální dočištění z prvního použití.
+2. Minuta 2: pojmenujte druhou běžnou situaci.
+3. Minuta 3: ověřte, jestli člověk našel pravidlo bez staré karty.
+4. Minuta 4: napište rozhodnutí, které podle pravidla vzniklo.
+5. Minuta 5: zkontrolujte, jestli nevznikla nová datová stopa.
+6. Minuta 6: vyberte stav a ukončete mimořádnou kontrolu, pokud není důvod pokračovat.
+
+Když se během workshopu objeví návrh na nové měření, položte jedinou otázku: jaké rozhodnutí bez něj nejde udělat? Pokud odpověď neexistuje, měření neotevírejte.
+
+### Checklist druhého běžného použití
+
+- Mělo druhé použití jasný důvod, nebo šlo jen o kontrolu pro pocit jistoty?
+- Navazovalo na konkrétní lokální dočištění z prvního použití?
+- Člověk našel pravidlo v kanonickém místě bez staré karty?
+- Vedlo pravidlo k jasnému rozhodnutí?
+- Zůstal původní širší návrh zavřený?
+- Nevznikl nový export, event, tabulka, štítek, dashboard ani formulářové pole?
+- Pokud byla potřeba další hrana, zůstala jednou větou v nejbližším pracovním místě?
+- Pokud návrat pořád nebyl zavřený, přiznali jsme to místo předstírání tichého provozu?
+- Ukončili jsme mimořádnou kontrolu, když druhé použití pravidlo potvrdilo?
+- Umí další člověk použít pravidlo bez znalosti obou ověřovacích epizod?
+
+Druhé běžné použití je dobré jen tehdy, když po něm ubude péče. Pokud po něm vznikne další plán, další tabulka a další připomínka, pravidlo se neosamostatnilo. Jen dostalo lepší doprovod. Cílem je opak: jedno pravidlo, jedno místo, jasná hranice a žádná nová data bez důvodu.
+
 ## Pracovní log
 
+- 2026-06-29: Doplněna úvodní podkapitola o druhém běžném použití po uzavření prvního použití v tichém provozu: kdy druhé použití nedělat, co sledovat, privacy-first závěr, karta, mini workshop a checklist.
 - 2026-06-29: Doplněna úvodní podkapitola o uzavření prvního běžného použití po návratovém signálu v tichém provozu: tři uzavírací stavy, zachování zavřeného rozsahu, praktický příklad, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-29: Doplněna úvodní podkapitola o prvním běžném použití po uzavřeném návratovém signálu v tichém provozu: kontrolní otázky, výsledné stavy, praktický příklad, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-06-29: Doplněna úvodní podkapitola o uzavření prvního návratového signálu po tichém provozu: čtyři uzavírací stavy, praktický příklad, propsání do kanonického místa, privacy-first úklid pomocných stop, karta, mini workshop a checklist.
