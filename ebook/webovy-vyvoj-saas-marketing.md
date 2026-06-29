@@ -271948,8 +271948,181 @@ Když se během workshopu objeví návrh na nové měření, položte jedinou ot
 
 Druhé běžné použití je dobré jen tehdy, když po něm ubude péče. Pokud po něm vznikne další plán, další tabulka a další připomínka, pravidlo se neosamostatnilo. Jen dostalo lepší doprovod. Cílem je opak: jedno pravidlo, jedno místo, jasná hranice a žádná nová data bez důvodu.
 
+## Uzavření druhého běžného použití v tichém provozu
+
+Druhé běžné použití zavírá malou, ale důležitou otázku: může pravidlo zůstat v běžné práci bez dalšího zvláštního režimu? Pokud ano, není potřeba přidávat další kontrolu, další kartu ani další připomínku. Pokud ne, nejde o selhání týmu. Je to signál, že tichý provoz byl vyhlášený dřív, než pravidlo získalo dost pevné pracovní místo.
+
+Uzavření nezačínejte debatou o tom, jestli pravidlo obecně dává smysl. To už mělo být rozhodnuté dřív. Začněte tím, co se stalo při druhém běžném použití:
+
+```text
+Druhé běžné použití uzavíráme podle toho, jestli pravidlo fungovalo bez staré karty, bez mimořádné péče a bez nové datové stopy.
+```
+
+Tahle věta drží tři hranice najednou. Nevracíte se do historie, neprodlužujete kontrolu ze zvyku a neotevíráte nový sběr dat jen proto, že se téma jednou vrátilo. Tichý provoz není stav, kdy o pravidle nikdo neví. Je to stav, kdy pravidlo ví přesně ten člověk, který ho potřebuje, přesně tam, kde ho používá.
+
+### Tři uzavírací stavy
+
+Po druhém běžném použití vyberte jeden ze tří stavů:
+
+- Vrátit do ticha: pravidlo fungovalo samostatně a žádná mimořádná péče nepokračuje.
+- Dopsat poslední hranu: pravidlo fungovalo, ale jedna věta musí lépe chránit zavřený rozsah.
+- Vrátit z ticha zpět: pravidlo pořád potřebuje starou kartu, vysvětlování nebo zvláštní sledování.
+
+Stav `vrátit do ticha` je cílový. Zapište ho krátce:
+
+```text
+Druhé běžné použití pravidlo potvrdilo. Pravidlo zůstává v kanonickém místě, mimořádná kontrola končí a další návrat otevírá jen nový návratový signál.
+```
+
+Tím se práce opravdu zavře. Pokud k tomu přidáte "ještě se na to za měsíc podíváme", pravděpodobně ticho nevěříte. Buď máte konkrétní návratový signál, nebo jen nepříjemný pocit z toho, že pouštíte věc z ruky. Pocit patří do poznámek, ne do provozního rytmu.
+
+Stav `dopsat poslední hranu` použijte opatrně. Je vhodný, když pravidlo v zásadě funguje, ale při druhém použití se ukázala jedna nebezpečná zkratka. Například člověk pravidlo našel, správně nepřidal rozpočet do formuláře, ale navrhl pomocnou tabulku poptávek bez rozpočtu. V takové situaci není potřeba znovu otevírat celý návrat. Stačí do kanonického místa doplnit jednu větu:
+
+```text
+Jednotlivá nejistota v kampani není návratový signál pro nové pole, export ani pomocnou tabulku.
+```
+
+Stav `vrátit z ticha zpět` použijte tehdy, když druhé použití ukázalo, že pravidlo není samostatné. Člověk musel hledat starou kartu, ptát se původních účastníků, znovu číst důvody rozhodnutí nebo si vytvořit vlastní pomocnou evidenci. To už není tichý provoz. Vraťte se k nejbližšímu slabému místu: kanonické větě, pracovní kotvě nebo privacy-first hranici.
+
+### Praktický příklad
+
+Předchozí stav:
+
+```text
+Pravidlo:
+Rozpočet nezjišťujeme povinným polem v prvním formuláři. Pokud je potřeba pro kvalifikaci relevantní poptávky, obchod použije volitelnou otázku v potvrzovacím e-mailu.
+
+Lokální dočištění z prvního použití:
+Do obchodního checklistu byla doplněna věta, kdy se volitelná otázka používá.
+```
+
+Druhé běžné použití:
+
+```text
+Situace:
+Jiný člověk v týmu připravuje navazující kampaň a kontroluje poptávkový formulář.
+
+Co udělal:
+Našel pravidlo v checklistu, ponechal formulář bez rozpočtu a upravil jen text nápovědy k cíli projektu.
+
+Co nevzniklo:
+Nové pole, nový analytický event, export poptávek bez rozpočtu ani pomocná tabulka.
+```
+
+Uzavření:
+
+```text
+Stav:
+Vrátit do ticha.
+
+Závěr:
+Druhé běžné použití potvrdilo, že pravidlo funguje bez staré karty. Mimořádnou kontrolu ukončujeme. Další návrat vyžaduje nový návratový signál, například tři relevantní poptávky za sebou, které nepůjde kvalifikovat bez ručního doptání na rozpočet.
+```
+
+Slabší uzavření:
+
+```text
+Stav:
+Dopsat poslední hranu.
+
+Co se stalo:
+Pravidlo bylo použité správně, ale vznikl návrh vést pomocnou tabulku poptávek bez rozpočtu.
+
+Jedna doplněná věta:
+Pomocnou evidenci poptávek bez rozpočtu nevedeme; návrat k rozpočtu otevírá jen konkrétní opakovaný problém v kvalifikaci.
+```
+
+Špatné uzavření by znělo: "Raději si to budeme nějakou dobu měřit." To je přesně věta, která z privacy-first provozu dělá sklad drobných výjimek. Pokud nevíte, jaké rozhodnutí bez měření nejde udělat, měření neotevírejte.
+
+### Privacy-first uzavření
+
+Při uzavření druhého použití se ptejte hlavně na zbytky mimořádné péče. Ty často nevypadají jako tracking. Vypadají jako bezpečné drobnosti: sdílený list, ruční štítek, screenshot, poznámka v CRM, pomocný komentář u kampaně nebo připomínka v kalendáři. Každá z těch věcí může být v malé dávce rozumná. Problém je, když přežije důvod, kvůli kterému vznikla.
+
+Použijte tři řádky:
+
+```text
+Mimořádná stopa, která vznikla při ověření:
+
+Co po uzavření zůstává v běžném pracovním místě:
+
+Co po uzavření mažeme, vypínáme nebo přestáváme vytvářet:
+```
+
+Příklad:
+
+```text
+Mimořádná stopa, která vznikla při ověření:
+Krátký seznam dvou kampaní, kde se kontrolovalo použití volitelné otázky.
+
+Co po uzavření zůstává v běžném pracovním místě:
+Jedna věta v obchodním checklistu a příklad dobrého cíle projektu u formuláře.
+
+Co po uzavření mažeme, vypínáme nebo přestáváme vytvářet:
+Seznam kampaní mažeme. Nevedeme štítek "bez rozpočtu" ani pomocnou tabulku.
+```
+
+Codyho komentář: privacy-first práce není jen statečné odmítnutí velkých trackerů. Často je to nudné mazání malých podpůrných stop ve chvíli, kdy už splnily účel. Velká část dobrého provozu je schopnost říct: "Tohle už víme, takže to dál nepotřebujeme skladovat." Ano, je to méně dramatické než nový dashboard. Právě proto to obvykle pomůže.
+
+### Karta uzavření druhého použití
+
+```text
+Pravidlo:
+
+Druhé běžné použití:
+
+Lokální dočištění z prvního použití:
+
+Co při druhém použití fungovalo samostatně:
+
+Co pořád potřebovalo vysvětlení:
+
+Uzavírací stav:
+- vrátit do ticha
+- dopsat poslední hranu
+- vrátit z ticha zpět
+
+Co zůstává v kanonickém místě:
+
+Co výslovně zůstává zavřené:
+
+Jakou mimořádnou datovou stopu ukončujeme:
+
+Jaký návratový signál by téma znovu otevřel:
+
+Vlastník:
+```
+
+Karta má být poslední záznam mimořádné péče, ne začátek nové evidence. Pokud vyberete stav `vrátit do ticha`, další práce se má odehrávat v běžném rytmu. Pokud vyberete `dopsat poslední hranu`, opravte jednu větu a uzavřete. Pokud vyberete `vrátit z ticha zpět`, pojmenujte konkrétní slabé místo a nechte tichý provoz až na později.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte výsledek druhého běžného použití.
+2. Minuta 2: ověřte, jestli pravidlo fungovalo bez staré karty.
+3. Minuta 3: zkontrolujte, jestli nevznikla nová datová stopa.
+4. Minuta 4: vyberte jeden ze tří uzavíracích stavů.
+5. Minuta 5: napište, co zůstává v kanonickém místě a co zůstává zavřené.
+6. Minuta 6: smažte nebo ukončete mimořádné podklady, které už nemají rozhodovací účel.
+
+Pokud během šesti minut neumíte vybrat stav, neprodlužujte workshop. Zapište, co chybí k rozhodnutí. Buď chybí výsledek druhého použití, nebo pravidlo není v kanonickém místě dost jasné. Obojí je lepší přiznat než přikrýt slovem "ještě uvidíme".
+
+### Checklist uzavření druhého použití
+
+- Víme, co se opravdu stalo při druhém běžném použití?
+- Použil člověk pravidlo bez staré karty a bez původních účastníků?
+- Bylo lokální dočištění z prvního použití najitelné v pracovním místě?
+- Zůstal původní širší návrh zavřený?
+- Nevznikl nový event, export, štítek, tabulka, dashboard ani formulářové pole?
+- Vybrali jsme jeden ze tří uzavíracích stavů?
+- Pokud dopisujeme poslední hranu, je to opravdu jedna věta v nejbližším pracovním místě?
+- Pokud vracíme pravidlo z ticha zpět, víme přesně proč?
+- Ukončili jsme mimořádnou datovou stopu po ověření?
+- Má další návrat konkrétní signál, ne jen obecnou nervozitu?
+
+Uzavření druhého běžného použití je místo, kde se pozná, jestli tým umí nechat dobré pravidlo pracovat. Když funguje, nechte ho v tichu. Když potřebuje jednu hranu, dopište ji. Když ticho neuneslo, vraťte se o krok zpět. Hlavně z toho nedělejte trvalý kontrolní režim. Ten by možná uklidnil tým, ale webu, SaaS ani zákazníkům by obvykle nepřinesl nic kromě další datové stopy.
+
 ## Pracovní log
 
+- 2026-06-29: Doplněna úvodní podkapitola o uzavření druhého běžného použití v tichém provozu: tři uzavírací stavy, praktický příklad, privacy-first ukončení mimořádné datové stopy, karta, mini workshop a checklist.
 - 2026-06-29: Doplněna úvodní podkapitola o druhém běžném použití po uzavření prvního použití v tichém provozu: kdy druhé použití nedělat, co sledovat, privacy-first závěr, karta, mini workshop a checklist.
 - 2026-06-29: Doplněna úvodní podkapitola o uzavření prvního běžného použití po návratovém signálu v tichém provozu: tři uzavírací stavy, zachování zavřeného rozsahu, praktický příklad, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-29: Doplněna úvodní podkapitola o prvním běžném použití po uzavřeném návratovém signálu v tichém provozu: kontrolní otázky, výsledné stavy, praktický příklad, privacy-first kontrola, karta, mini workshop a checklist.
