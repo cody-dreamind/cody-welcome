@@ -269354,6 +269354,220 @@ Pokud workshop potřebuje víc než pět minut, nejspíš řešíte víc než pr
 
 První běžné použití po uzavřeném návratu je hotové, když pravidlo obstálo v normální práci bez mimořádného režimu. Někdy se nezmění nic. Někdy doplníte jeden příklad. Někdy oddělíte nové téma. Všechny výsledky jsou přijatelné, pokud po nich nezůstane skrytý dohled, staré důkazy ani nová datová stopa bez účelu.
 
+## Uzavření prvního běžného použití po uzavřeném návratu z dlouhodobého klidu
+
+První běžné použití po uzavřeném návratu z dlouhodobého klidu nekončí tím, že "to tentokrát prošlo". Končí až ve chvíli, kdy tým zapíše, co se opravdu ověřilo, co zůstává zavřené a jestli se smí pravidlo vrátit do klidného provozu bez další mimořádné péče.
+
+Tohle uzavření má být krátké. Ne proto, že by bylo nedůležité, ale proto, že jeho hlavní úkol je zabránit tomu, aby se kolem starého tématu znovu vytvořila malá kontrolní infrastruktura. Pokud se po každém návratu zakládá další poznámka, další stav, další tabulka a další "pro jistotu se podíváme za týden", dlouhodobý klid nebyl klid. Byl to jen odložený dohled.
+
+Začněte jednou větou:
+
+```text
+První běžné použití po uzavřeném návratu končí stavem:
+```
+
+Za větu doplňte jeden ze čtyř stavů. Nepište dojmy. Nepište dlouhé shrnutí historie. Stav má být tak konkrétní, aby podle něj šlo rozhodnout, jestli se něco mění.
+
+### Čtyři uzavírací stavy
+
+Použijte jeden z těchto stavů:
+
+- Stabilní návrat do klidu: aktuální pravidlo se našlo, použilo a nepotřebovalo mimořádný dohled.
+- Lokální dočištění: pravidlo fungovalo, ale jedno pracovní místo potřebuje drobnou opravu.
+- Slabé kanonické místo: člověk pravidlo použil správně až po nápovědě, takže problém není v pravidle, ale v jeho dohledatelnosti nebo názvu.
+- Nový návratový signál: při běžném použití se ukázal stejný problém, kvůli kterému se téma vracelo z klidu.
+
+Stabilní návrat do klidu je nejčistší konec. Zapište, že pravidlo funguje v běžném průchodu, zavřete dočasnou pozornost a nechte téma zase odpočívat. Nezakládejte novou kontrolu jen proto, že je příjemné mít pocit, že nad věcí ještě bdíte. Pocit bdění není provozní výstup.
+
+Lokální dočištění je povolené pouze tehdy, když jde opravit jedno konkrétní místo bez změny pravidla. Typicky název odkazu, chybějící věta v šabloně, starý příklad nebo poznámka v checklistu. Jakmile oprava sahá do více míst, mění význam pravidla nebo otevírá starou debatu, už to není dočištění.
+
+Slabé kanonické místo znamená, že pravidlo samo o sobě obstálo, ale člověk ho nenašel nebo nepoznal bez pomoci. V takovém případě neopravujte celý proces. Opravte orientaci: název, rozcestník, odkaz z pracovního místa nebo jednu vysvětlující větu. Cílem je, aby další člověk našel správné místo bez historického výkladu.
+
+Nový návratový signál je nejpřísnější stav. Pokud se opravdu vrátil stejný problém, neprodlužujte první běžné použití. Zavřete ho jako zjištění a otevřete nový, omezený průchod podle návratového signálu. První běžné použití nemá nést investigaci, opravu, změnu pravidla i kontrolu dopadu najednou. To je příliš mnoho klobouků na jednu hlavu, i kdyby ta hlava měla ráda procesy.
+
+### Praktický příklad stabilního návratu
+
+Situace:
+
+```text
+Staré téma:
+Povinné pole pro rozpočet v poptávkovém formuláři.
+
+Uzavřený návrat:
+Místo povinného pole jsme upravili potvrzovací e-mail a obchodní kvalifikační větu.
+
+První běžné použití:
+Nová poptávka se kvalifikovala podle upravené věty, bez nové datové položky a bez ručního vysvětlování staré historie.
+```
+
+Uzavírací zápis:
+
+```text
+První běžné použití po uzavřeném návratu končí stavem:
+Stabilní návrat do klidu.
+
+Co se ověřilo:
+Upravená kvalifikační věta stačí pro běžnou práci s novou poptávkou.
+
+Co zůstává zavřené:
+Povinné pole pro rozpočet, automatický lead scoring a samostatné sledování rozpočtových odpovědí.
+
+Co teď mažeme nebo ukončujeme:
+Dočasnou poznámku k prvnímu použití a pracovní kopii staré karty návratu.
+
+Kdy se téma vrátí:
+Pouze pokud tři relevantní poptávky za sebou znovu nepůjdou kvalifikovat bez ručního doptání na rozpočet.
+```
+
+Tady není potřeba další akce. Právě naopak: další akce by oslabovala závěr. Tým už má funkční pravidlo, jasnou hranici a návratový signál. Přidat k tomu další kontrolu by bylo jako dát zámku druhý zámek, třetí zápisník a schůzku o tom, jestli dveře pořád existují.
+
+### Praktický příklad lokálního dočištění
+
+Situace:
+
+```text
+První běžné použití:
+Člověk našel správnou kvalifikační větu, ale v obchodní kartě zůstal starý příklad, který naváděl k otázce na rozpočet příliš brzy.
+```
+
+Uzavírací zápis:
+
+```text
+První běžné použití po uzavřeném návratu končí stavem:
+Lokální dočištění.
+
+Co se nemění:
+Pravidlo, formulář ani návratový signál.
+
+Co opravujeme:
+Jeden starý příklad v obchodní kartě.
+
+Stop podmínka:
+Oprava končí přepsáním příkladu a smazáním staré pracovní poznámky.
+
+Co výslovně neotevíráme:
+Nové pole ve formuláři, nový scoring, nové měření a revizi celé obchodní kvalifikace.
+```
+
+Lokální dočištění má mít vlastní konec hned při zápisu. Pokud ho neumíte popsat jedním pracovním místem a jedním hotovým výsledkem, vraťte se o krok zpět. Pravděpodobně jste našli širší problém, ne lokální úklid.
+
+### Praktický příklad slabého kanonického místa
+
+Situace:
+
+```text
+První běžné použití:
+Pravidlo fungovalo, ale člověk ho našel až přes starou kartu návratu, ne přes aktuální obchodní rozcestník.
+```
+
+Uzavírací zápis:
+
+```text
+První běžné použití po uzavřeném návratu končí stavem:
+Slabé kanonické místo.
+
+Co se ověřilo:
+Obsah pravidla stačí.
+
+Co selhalo:
+Aktuální rozcestník neukazuje člověka na správné místo.
+
+Nejmenší oprava:
+Doplnit jeden odkaz do obchodního rozcestníku a odstranit odkaz na starou kartu návratu z pracovních poznámek.
+
+Co zůstává zavřené:
+Původní návrh povinného pole, staré měření a mimořádné review.
+```
+
+Slabé kanonické místo je častá příčina falešných návratů. Tým si myslí, že pravidlo nefunguje, ale ve skutečnosti jen není tam, kde ho lidé hledají. Neopravujte motor, když je problém v ceduli na dveřích.
+
+### Privacy-first uzavření
+
+Uzavření prvního běžného použití je dobré místo pro malý datový úklid. Ptejte se:
+
+```text
+Jaké dočasné stopy vznikly jen proto, že jsme ověřovali návrat z klidu?
+```
+
+Typicky půjde o pracovní kopii karty, poznámku z prvního použití, anonymizovaný příklad, dočasný screenshot, export několika poptávek nebo ručně vedený seznam otázek. Pokud už splnily účel, nemažte je "někdy". Uzavření je přesně ten okamžik.
+
+Privacy-first závěr napište konkrétně:
+
+```text
+Po uzavření prvního běžného použití necháváme pouze aktuální pravidlo a návratový signál. Mažeme pracovní kopii návratové karty, dočasný seznam kontrolních otázek a starý příklad s rozpočtem. Nevzniká nový tracker, nový export ani nové povinné pole.
+```
+
+Pokud některou dočasnou stopu necháváte, napište proč, kde, na jak dlouho a kdo ji vlastní. Bez toho se z dočasné evidence stane malý archiv "pro jistotu". A "pro jistotu" je věta, která v privacy-first provozu potřebuje vlastní detektor kouře.
+
+Codyho komentář: největší riziko po úspěšném prvním použití je příjemný pocit opatrnosti. Vypadá dospěle, mluví tiše a tváří se jako odpovědnost. Pak vám ale nechá tři pomocné tabulky, dvě staré poznámky a jeden interní rituál, který už nikdo neumí zrušit. Opatrnost je dobrý sluha. Jako bytový doplněk do každého procesu je dost otravná.
+
+### Karta uzavření prvního běžného použití
+
+```text
+Téma:
+
+Původní návratový signál:
+
+Co bylo po návratu uzavřeno:
+
+Kde proběhlo první běžné použití:
+
+Kdo pravidlo použil:
+
+Výsledek:
+- stabilní návrat do klidu
+- lokální dočištění
+- slabé kanonické místo
+- nový návratový signál
+
+Co se ověřilo:
+
+Co zůstává zavřené:
+
+Co se teď opravuje, pokud něco:
+
+Co se teď maže nebo archivuje:
+
+Jaká data, exporty, screenshoty, poznámky nebo kontrolní seznamy po uzavření nezůstávají:
+
+Kanonické místo aktuálního pravidla:
+
+Návratový signál do budoucna:
+
+Vlastník:
+
+Datum:
+```
+
+Karta nemá vytvářet nový dlouhodobý dokument. Má být závěrečnou stopou. Pokud výsledek zní stabilně, přepište podstatné dvě věty do kanonického místa a kartu zavřete. Pokud výsledek vyžaduje lokální opravu, nechte kartu žít jen do splnění stop podmínky.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte původní návratový signál.
+2. Minuta 2: popište první běžné použití jednou větou.
+3. Minuta 3: vyberte jeden ze čtyř uzavíracích stavů.
+4. Minuta 4: napište, co zůstává zavřené.
+5. Minuta 5: určete, co se maže, archivuje nebo nechává bez další evidence.
+6. Minuta 6: zapište návratový signál do budoucna nebo potvrďte, že zůstává stejný.
+
+Pokud se během šesti minut začnete bavit o redesignu, novém měření nebo revizi celého procesu, zastavte se. Možná máte dobré téma. Jen nepatří do uzavření prvního běžného použití. Zapište ho jako samostatný podnět a vraťte se k uzavírací větě.
+
+### Checklist uzavření prvního běžného použití po návratu
+
+- Je jasné, kde proběhlo první běžné použití?
+- Vybrali jsme jeden uzavírací stav, ne směs dojmů?
+- Je napsané, co se opravdu ověřilo?
+- Je výslovně uvedené, co zůstává zavřené?
+- Pokud vzniká lokální dočištění, má jedno pracovní místo a stop podmínku?
+- Pokud je slabé kanonické místo, opravujeme dohledatelnost místo pravidla?
+- Pokud se objevil nový návratový signál, otevíráme novou omezenou smyčku místo prodlužování této?
+- Smazali jsme nebo uzavřeli dočasné poznámky, screenshoty, exporty a kontrolní seznamy?
+- Nevzniká nový tracker, formulářové pole, report ani pravidelná schůzka bez jasného účelu?
+- Je aktuální pravidlo dohledatelné v kanonickém místě?
+- Umí další člověk za měsíc poznat, kdy se téma smí znovu otevřít?
+
+Uzavření má po sobě nechat klid, ne další vrstvu péče. Když první běžné použití obstálo, nejpraktičtější další krok je často žádný další krok. To není lenost. To je dobře navržený provoz, který ví, kdy má přestat sám sobě asistovat.
+
 ## Pracovní log
 
 - 2026-06-29: Doplněna úvodní podkapitola o prvním běžném použití po uzavřeném návratu z dlouhodobého klidu lokálního dočištění: kontrola samostatnosti pravidla, výsledné stavy, praktické příklady, privacy-first úklid, karta, mini workshop a checklist.
@@ -270664,3 +270878,4 @@ První běžné použití po uzavřeném návratu je hotové, když pravidlo obs
 - 2026-06-28: Doplněna krátká úvodní poznámka, aby hranice dalšího kroku musela jít popsat jedním pracovním místem a jedním očekávaným výsledkem.
 - 2026-06-28: Doplněna úvodní podkapitola o uzavření lokálního dočištění po prvním běžném ověření: tři výsledné stavy, praktické příklady, privacy-first uzavření, karta, mini workshop a checklist.
 - 2026-06-28: Doplněna úvodní podkapitola o prvním běžném použití po uzavřeném lokálním dočištění: najitelnost, samostatnost, datová střídmost, čtyři výsledné stavy, privacy-first kontrola, karta, mini workshop a checklist.
+- 2026-06-29: Doplněna úvodní podkapitola o uzavření prvního běžného použití po uzavřeném návratu z dlouhodobého klidu lokálního dočištění: uzavírací stavy, praktické příklady, privacy-first úklid, karta, mini workshop a checklist.
