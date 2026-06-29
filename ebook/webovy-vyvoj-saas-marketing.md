@@ -272469,8 +272469,170 @@ Pokud se workshop protáhne, nejspíš jste otevřeli širší review pracovníh
 
 Roční připomenutí je dobré, když po něm pravidlo buď zůstane v klidu, nebo se otevře přesně ten nejmenší důvod, který se opravdu ukázal. Špatné je, když připomenutí obnoví starou debatu jen proto, že kalendář řekl "rok". Kalendář umí měřit čas. Neumí poznat, jestli máte problém. To pořád musíte udělat vy.
 
+## Vrácení ročního připomenutí zpět do dlouhodobého klidu
+
+Nejčastější dobrý výsledek ročního připomenutí je nudný: pravidlo pořád funguje, návratový signál nenastal, skrytá evidence se nenašla a není co otevírat. Právě tady ale často vzniká drobná provozní chyba. Tým připomenutí sice formálně uzavře, ale nechá po něm novou poznámku, nový štítek, novou připomínku v kalendáři nebo závěr typu "za rok se na to podíváme podrobněji". Tím se dlouhodobý klid nenápadně změní v pravidelnou úzkost.
+
+Vrácení ročního připomenutí zpět do klidu je samostatný malý krok. Jeho účelem není znovu dokazovat, že pravidlo funguje. To už udělalo připomenutí. Účelem je uklidit samotnou kontrolu tak, aby po ní nezůstala nová mimořádná agenda.
+
+Použijte uzavírací větu:
+
+```text
+Roční připomenutí je uzavřené bez nové práce. Pravidlo se vrací do dlouhodobého klidu a potkáme ho pouze v běžném rytmu pracovního místa nebo při jasném návratovém signálu.
+```
+
+Ta věta je záměrně obyčejná. Říká tři důležité věci: kontrola skončila, nevzniká nová smyčka a další návrat potřebuje důvod. Bez takové věty se i povedené připomenutí může proměnit v další položku na seznamu "hlídat". A seznamy věcí k hlídání mají zvláštní talent tvářit se jako odpovědnost, i když ve skutečnosti často jen drží otevřené dveře.
+
+### Co po připomenutí neukládat
+
+Po připomenutí ukládejte jen závěr, který bude člověk potřebovat při příštím normálním použití pravidla. Neukládejte pracovní šum, který vznikl jen kvůli kontrole.
+
+Neukládejte hlavně:
+
+- poznámky z debaty, pokud z nich nevzniklo rozhodnutí;
+- seznam starých obav, které se znovu nepotvrdily;
+- exporty, screenshoty nebo ruční přehledy použité jen pro kontrolu;
+- nové kalendářové připomínky mimo běžný revizní rytmus;
+- kopie pravidla v dalších dokumentech jen "pro jistotu";
+- backlog položku bez návratového signálu;
+- nový úkol typu "sledovat situaci", pokud není jasné, co přesně by změnilo rozhodnutí.
+
+Praktické pravidlo je jednoduché: pokud artefakt nepomůže člověku pravidlo najít, použít nebo změnit při skutečném návratovém signálu, nemá po ročním připomenutí zůstávat.
+
+To neznamená mazat odpovědnost. Znamená mazat zbytky kontroly. Odpovědnost má bydlet u kanonického pracovního místa, ne v postranní paměti autora ročního review.
+
+### Praktický příklad
+
+Roční připomenutí potvrdilo klid u pravidla:
+
+```text
+Rozpočet nezjišťujeme povinným polem v prvním formuláři. Relevantní poptávky lze kvalifikovat volitelnou otázkou v potvrzovacím e-mailu.
+```
+
+Během kontroly vznikly tři dočasné věci:
+
+```text
+1. Ruční seznam posledních poptávek bez rozpočtu.
+2. Poznámka v meeting dokumentu s nápadem na budoucí lead scoring.
+3. Komentář v checklistu: "za rok znovu ověřit".
+```
+
+Dobré uzavření nevypadá tak, že všechny tři věci zůstanou "kdyby náhodou". Dobré uzavření vypadá takto:
+
+```text
+Výsledek:
+Roční připomenutí potvrzuje klid. Návratový signál nenastal, pravidlo je u formuláře i obchodního checklistu a žádné povinné pole nepřidáváme.
+
+Úklid:
+Ruční seznam poptávek mažeme, protože byl vytvořen jen pro kontrolu. Nápad na lead scoring neotevíráme a nepřenášíme do backlogu, protože nemá návratový signál. Komentář "za rok znovu ověřit" nahrazujeme běžným revizním rytmem obchodního checklistu.
+
+Další návrat:
+Pouze pokud tři relevantní poptávky za sebou nepůjde kvalifikovat bez ručního doptání na rozpočet.
+```
+
+Tím se pravidlo opravdu vrátí do klidu. Zůstane kanonická věta, zůstane návratový signál a zmizí dočasné pomůcky. Kdyby se za půl roku problém skutečně objevil, tým má jasnou bránu. Když se neobjeví, nikdo nemusí krmit pomocnou evidenci jen proto, že kdysi proběhla kontrola.
+
+Horší uzavření by znělo:
+
+```text
+Pravidlo zatím neměníme, ale budeme dál sledovat poptávky bez rozpočtu v tabulce a za rok vyhodnotíme, jestli přidat scoring.
+```
+
+Tohle není klid. To je nová datová stopa a nová produktová hypotéza převlečená za opatrnost. Pokud tým opravdu potřebuje sledovat poptávky, má nejdřív napsat rozhodovací otázku, účel dat, vlastníka, retenci a stop podmínku. Jinak je férovější tabulku nevyrábět.
+
+### Tři uzavírací stavy
+
+Po ročním připomenutí, které neotevírá novou práci, vyberte jeden ze tří uzavíracích stavů:
+
+- Čistý návrat do klidu: nic se nemění, dočasné podklady se mažou a pravidlo zůstává jen v kanonickém místě.
+- Návrat s drobnou kotvou: pravidlo se nemění, ale přidává se jeden odkaz nebo jedna věta tam, kde ho lidé nově potřebují najít.
+- Návrat s ukončením stopy: pravidlo se nemění, ale ruší se pomocná evidence, štítek, export nebo připomínka, která po cestě vznikla.
+
+Čistý návrat do klidu je nejlepší výsledek, pokud pravidlo pořád sedí na správném místě. Nepřidávejte k němu slavnostní dokumentaci. Jedna věta v logu pracovního místa stačí.
+
+Návrat s drobnou kotvou použijte tehdy, když se změnila cesta člověka k pravidlu. Například vznikla nová landing page, nový obchodní checklist nebo nový onboardingový krok, který pracuje se stejným rozhodnutím. Kotva má být odkaz na kanonické místo, ne nová kopie pravidla. Kopie stárnou rychleji než ambiciózní roadmapa v lednu.
+
+Návrat s ukončením stopy použijte tehdy, když připomenutí odhalilo zbytečnou evidenci. Tady je výstupem hlavně mazání nebo zavření. Zapište, co končí a proč. Ne proto, aby se z mazání stal obřad, ale aby za měsíc někdo tabulku znovu nevytvořil se slovy "nevím, proč zmizela".
+
+### Privacy-first uzavření připomenutí
+
+Privacy-first hodnota této části je jednoduchá: kontrola nemá být záminka ke sběru dat. Roční připomenutí může dočasně potřebovat vzorek, ruční přehled nebo poznámku. Jakmile je kontrola hotová, dočasná stopa má zmizet, pokud nemá samostatný rozhodovací důvod.
+
+Položte si čtyři otázky:
+
+```text
+Vznikl při připomenutí dočasný seznam, export nebo ruční přehled?
+
+Obsahuje osobní, obchodní nebo behaviorální údaje?
+
+Podporuje po uzavření připomenutí nějaké konkrétní rozhodnutí?
+
+Kdy a kdo ho smaže, pokud už rozhodnutí nepodporuje?
+```
+
+Pokud dočasná stopa neobsahuje citlivá data, pořád může být provozně škodlivá. Zvyšuje počet míst, kde lidé hledají pravdu. Pokud citlivá data obsahuje, je důvod k úklidu ještě silnější. Privacy-first provoz není jen o velkých nástrojích a právních dokumentech. Je i o tom, že po malé kontrole nezůstane malý nepořádek, který se za rok tváří jako systém.
+
+Codyho komentář: nejnebezpečnější věta po úspěšné kontrole je "necháme si to pro jistotu". Jistota je často jen hezké jméno pro budoucí nepořádek. Když opravdu víte, co chcete rozhodnout, napište to. Když nevíte, nemažte klid kvůli pocitu, že tabulka je dospělejší než důvěra v pravidlo.
+
+### Karta návratu po ročním připomenutí
+
+```text
+Pravidlo:
+
+Výsledek ročního připomenutí:
+
+Uzavírací stav:
+- čistý návrat do klidu
+- návrat s drobnou kotvou
+- návrat s ukončením stopy
+
+Co se mění v kanonickém místě:
+
+Co se nemaže, protože je stále potřeba:
+
+Co se maže nebo zavírá:
+
+Co výslovně neotevíráme:
+
+Další návrat pouze pokud:
+
+Kdo provedl úklid:
+
+Kde je závěr zapsaný:
+```
+
+Kartu používejte jen u pravidel, která mají reálný provozní dopad. U drobného checklistového pravidla stačí krátká uzavírací věta přímo u něj. Cílem není rozšířit administrativu, ale zabránit tomu, aby po připomenutí zůstala administrativní mlha.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte výsledek ročního připomenutí.
+2. Minuta 2: vyberte jeden ze tří uzavíracích stavů.
+3. Minuta 3: ukažte, co zůstává v kanonickém místě.
+4. Minuta 4: najděte dočasné podklady, které vznikly jen kvůli kontrole.
+5. Minuta 5: rozhodněte, co se smaže, zavře nebo nepřenáší do backlogu.
+6. Minuta 6: napište jednu větu dalšího návratu.
+
+Když se workshop zasekne na otázce, jestli "by se to někdy mohlo hodit", vraťte se k rozhodovací otázce. Hodit se může skoro všechno. Privacy-first provoz ale nestojí na možnosti budoucí zvědavosti. Stojí na jasném účelu, minimální stopě a schopnosti říct: tady teď práce končí.
+
+### Checklist návratu po ročním připomenutí
+
+- Je jasné, že roční připomenutí skončilo bez nové širší práce?
+- Vybrali jsme jeden uzavírací stav?
+- Zůstává pravidlo v jednom kanonickém místě?
+- Nepřidali jsme kopii pravidla jen kvůli pocitu jistoty?
+- Pokud přidáváme kotvu, je to odkaz nebo krátká navigační věta, ne nová verze pravidla?
+- Našli jsme dočasné seznamy, exporty, poznámky a štítky z kontroly?
+- Rozhodli jsme, které dočasné stopy se mažou nebo zavírají?
+- Nevznikla nová backlog položka bez návratového signálu?
+- Je zapsané, co výslovně neotevíráme?
+- Je další návrat navázaný na konkrétní signál, ne na kalendářovou nervozitu?
+- Ví člověk při příštím běžném použití pravidla, kde najde aktuální pravdu?
+
+Vrácení ročního připomenutí do klidu je malá, ale důležitá disciplína. Bez ní se i dobrá údržba mění v další vrstvu dohledu. S ní pravidlo zůstává živé jen tam, kde má být živé: v práci, kterou opravdu řídí. Všechno ostatní se uklidí, zavře nebo nechá být. Přesně tak má vypadat provoz, který bere vážně produktivitu i soukromí.
+
 ## Pracovní log
 
+- 2026-06-29: Doplněna úvodní podkapitola o vrácení ročního připomenutí zpět do dlouhodobého klidu: uzavírací věta, úklid dočasných stop, tři uzavírací stavy, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-06-29: Doplněna úvodní podkapitola o ročním připomenutí po dlouhodobém klidu: kontrola kanonického místa, návratového signálu, skryté datové stopy, čtyři výsledky připomenutí, privacy-first karta, mini workshop a checklist.
 - 2026-06-29: Doplněna úvodní podkapitola o dlouhodobém klidu po uzavření druhého běžného použití: kanonické místo, návratový signál, ukončení mimořádných kontrol, privacy-first datová střídmost, karta, mini workshop a checklist.
 - 2026-06-29: Doplněna úvodní podkapitola o uzavření druhého běžného použití v tichém provozu: tři uzavírací stavy, praktický příklad, privacy-first ukončení mimořádné datové stopy, karta, mini workshop a checklist.
