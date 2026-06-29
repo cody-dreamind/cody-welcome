@@ -269568,8 +269568,226 @@ Pokud se během šesti minut začnete bavit o redesignu, novém měření nebo r
 
 Uzavření má po sobě nechat klid, ne další vrstvu péče. Když první běžné použití obstálo, nejpraktičtější další krok je často žádný další krok. To není lenost. To je dobře navržený provoz, který ví, kdy má přestat sám sobě asistovat.
 
+## Druhé běžné použití po uzavřeném návratu z dlouhodobého klidu
+
+Druhé běžné použití má jiný účel než první. První ověřilo, že se pravidlo po návratu dá použít v normální práci. Druhé ověřuje, že se dá použít i bez čerstvé paměti na uzavírací debatu, bez člověka, který byl u opravy, a bez zvláštní pozornosti k tomu, že kdysi šlo o návrat z dlouhodobého klidu.
+
+Začněte větou:
+
+```text
+Druhé běžné použití ověřuje přenositelnost pravidla bez čerstvého kontextu.
+```
+
+To je důležitý rozdíl. Pokud druhé použití projde jen proto, že si všichni ještě pamatují první uzavření, nevíte, jestli pravidlo opravdu funguje. Víme jen, že tým má dobrou krátkodobou paměť. Gratuluji, mozek zatím bootuje. Pro provozní pravidlo je ale podstatné, aby obstálo i ve chvíli, kdy ho použije někdo později, v jiné náladě a bez historického výkladu.
+
+Druhé použití proto neplánujte jako extra test. Počkejte na nejbližší přirozenou situaci, ve které by se pravidlo stejně použilo: další poptávku, další měsíční review, další úpravu šablony, další supportní dotaz nebo další rozhodnutí o podnětu. Umělý test často vyrobí víc důkazů, než potřebujete. Přirozené použití ukáže, jestli pravidlo nese práci samo.
+
+### Co má druhé použití potvrdit
+
+Druhé běžné použití potvrzuje tři věci:
+
+- Přenositelnost: pravidlo pochopí člověk, který nebyl u posledního uzavření.
+- Dohledatelnost: pravidlo je v pracovním místě, kde ho člověk hledá.
+- Datovou střídmost: nevzniká nová evidence jen proto, že se tým bojí starého návratu.
+
+Přenositelnost netestujte otázkou "rozumíš tomu?". Lidé často rozumí textu, dokud podle něj nemusí rozhodnout. Lepší test je pracovní výstup:
+
+```text
+Člověk podle pravidla samostatně vybral stav, zapsal rozhodnutí a neotevřel starou větev.
+```
+
+Dohledatelnost se pozná podle cesty. Pokud člověk pravidlo našel přes aktuální rozcestník, checklist nebo šablonu, je to dobrý signál. Pokud ho našel přes starou kartu návratu, interní zprávu nebo paměť někoho z týmu, kanonické místo je pořád slabé.
+
+Datová střídmost znamená, že druhé použití po sobě nechá jen výsledek potřebný pro práci. Nepotřebujete seznam všech lidí, kteří pravidlo použili. Nepotřebujete screenshot každého průchodu. Nepotřebujete tabulku "správně/špatně". Pokud pravidlo funguje, jeho cílem je snižovat provozní tření, ne stavět pomník vlastní opatrnosti.
+
+### Tři varovné signály skryté kontroly
+
+Po prvním úspěšném použití se skrytá kontrola tváří nenápadně. Typicky přichází v jedné z těchto podob:
+
+- "Ještě si to jednou ověříme bokem."
+- "Založíme si jednoduchý seznam případů, kdy to pravidlo někdo použil."
+- "Necháme starou kartu chvíli otevřenou, kdyby něco."
+
+Každá věta může být rozumná, pokud má jasný návratový signál. Bez něj je to jen mimořádná péče převlečená za zodpovědnost. Druhé běžné použití má tyto ocasy ukončit. Pokud pravidlo obstojí, zavřete pomocné sledování. Pokud neobstojí, otevřete konkrétní opravu. Neudržujte mezistav, ve kterém pravidlo "vlastně funguje", ale pořád kolem něj visí dočasný dohled.
+
+Krátká provozní věta:
+
+```text
+Po druhém běžném použití necháváme jen kanonické pravidlo, návratový signál a případnou jednu lokální opravu.
+```
+
+Všechno ostatní musí mít důvod, vlastníka a datum smazání. Bez těchto tří věcí to není evidence. Je to digitální prach.
+
+### Praktický příklad
+
+Situace:
+
+```text
+Staré téma:
+Povinné pole pro rozpočet v poptávkovém formuláři.
+
+Uzavřený návrat:
+Povinné pole se neotevřelo. Tým upravil potvrzovací e-mail a obchodní kvalifikační větu.
+
+První běžné použití:
+Nová poptávka šla kvalifikovat bez nového pole a bez staré historie.
+
+Druhé běžné použití:
+Jiný obchodník pracuje s další poptávkou o dva týdny později.
+```
+
+Správný průchod:
+
+```text
+Přenositelnost:
+Obchodník našel kvalifikační větu v obchodní kartě a použil ji bez vysvětlení.
+
+Dohledatelnost:
+Nepotřeboval starou kartu návratu ani poznámky z prvního použití.
+
+Datová stopa:
+Nevzniklo nové pole, nový scoring ani seznam rozpočtových odpovědí.
+
+Výsledek:
+Pravidlo se vrací do klidného provozu bez další kontroly.
+```
+
+Co se má stát potom:
+
+```text
+Mažeme:
+Dočasnou poznámku "ověřit při druhé poptávce".
+
+Ponecháváme:
+Aktuální kvalifikační větu a návratový signál.
+
+Neotevíráme:
+Formulář, reporting rozpočtů, nové školení ani audit celé obchodní kvalifikace.
+```
+
+Příklad s malou opravou:
+
+```text
+Druhé běžné použití:
+Obchodník našel správné pravidlo, ale v rozcestníku bylo pojmenované jako "rozpočet", takže si nebyl jistý, jestli patří i pro situace bez rozpočtového údaje.
+
+Výsledek:
+Lokální oprava názvu v rozcestníku.
+
+Stop podmínka:
+Přejmenovat odkaz na "kvalifikace poptávky bez zbytečných polí" a smazat starou dočasnou poznámku.
+
+Co se nemění:
+Pravidlo, formulář, návratový signál ani obchodní proces.
+```
+
+Tady druhé použití neukázalo selhání pravidla. Ukázalo slabý štítek. To je malá oprava. Ne důvod svolat procesní koncil, zapálit backlog a přidat další metriku.
+
+### Privacy-first uzavření druhého použití
+
+Druhé běžné použití je vhodný okamžik pro poslední úklid po návratu z klidu. Ptejte se:
+
+```text
+Co pořád existuje jen proto, že jsme se báli, že se staré téma znovu vrátí?
+```
+
+Typické kandidáty:
+
+- dočasná karta "ověřit při dalším použití",
+- ruční seznam případů,
+- pracovní kopie starého návratu,
+- anonymizované, ale pořád zbytečné příklady,
+- interní poznámka se jménem člověka, který pravidlo použil,
+- plán další kontroly bez návratového signálu.
+
+Pokud druhé použití potvrdilo přenositelnost, tyto věci ukončete. Ponechte jen to, co člověk potřebuje v běžné práci: kanonické pravidlo, jasné pracovní místo a návratový signál. Privacy-first provoz tady neznamená "nemáme žádné poznámky". Znamená "nemáme poznámky, které už ztratily účel".
+
+Krátký zápis:
+
+```text
+Privacy-first výsledek druhého běžného použití:
+Pravidlo je přenositelné bez staré historie.
+Ponecháváme kanonickou větu a návratový signál.
+Mažeme dočasnou ověřovací poznámku a pracovní kopii staré karty.
+Nevzniká další evidence použití.
+```
+
+Pokud druhé použití neprošlo, neznamená to automaticky víc měření. Nejdřív určete, kde přesně selhalo: ve slovníku, odkazu, příkladu, rozhodovací větě nebo skutečném návratovém signálu. Teprve potom rozhodněte o nejmenší opravě. Většina selhání druhého použití není důkaz, že potřebujete nový systém. Často je to jen důkaz, že jeden odkaz má mizerný název. Ano, název odkazu umí být záporák. Tichý, nenápadný, ale pracovitý.
+
+### Karta druhého běžného použití
+
+```text
+Téma:
+
+Uzavřený návrat z klidu:
+
+Kanonické pracovní místo:
+
+Kde proběhlo druhé běžné použití:
+
+Použil pravidlo někdo bez čerstvého kontextu?
+ano / částečně / ne
+
+Našel pravidlo přes aktuální pracovní místo?
+ano / částečně / ne
+
+Bylo potřeba otevřít starou historii?
+ano / ne
+
+Datová stopa po druhém použití:
+stejná / menší / větší
+
+Výsledek:
+- návrat do klidného provozu
+- lokální oprava názvu, odkazu nebo příkladu
+- slabé kanonické místo
+- nový návratový signál
+
+Co se mění:
+
+Co se maže nebo ukončuje:
+
+Co výslovně neotevíráme:
+
+Návratový signál do budoucna:
+
+Vlastník:
+
+Datum:
+```
+
+Karta má být poslední provozní stopa druhého použití. Pokud výsledek zní "návrat do klidného provozu", přepište důležité minimum do kanonického místa a kartu zavřete. Pokud zůstane viset jen proto, že "se může hodit", právě jste si vyrobili další věc, kterou bude za půl roku někdo uklízet. Budoucí člověk vám neposílá děkovný dopis.
+
+### Mini workshop na 5 minut
+
+1. Minuta 1: pojmenujte druhé přirozené použití.
+2. Minuta 2: ověřte, jestli pravidlo použil člověk bez čerstvého kontextu.
+3. Minuta 3: ověřte, jak pravidlo našel.
+4. Minuta 4: rozhodněte, jestli jde o klid, lokální opravu, slabé kanonické místo nebo nový signál.
+5. Minuta 5: zapište, co se maže a co se už dál nesleduje.
+
+Workshop nesmí začít sbírat další příklady. Jeho cílem je rozhodnutí po druhém použití, ne nový důkazní archiv. Pokud důkaz nestačí, zapište přesně, jaký přirozený signál chybí. Pokud stačí, zavřete mimořádnou pozornost.
+
+### Checklist druhého běžného použití po uzavřeném návratu
+
+- Proběhlo druhé použití v přirozené pracovní situaci?
+- Použil pravidlo člověk bez čerstvé paměti na poslední uzavření?
+- Našel pravidlo přes aktuální kanonické místo?
+- Nebylo potřeba otevírat starou kartu návratu, staré důkazy nebo interní debatu?
+- Dalo se podle pravidla rozhodnout bez nového vysvětlování?
+- Vybrali jsme jeden výsledný stav?
+- Pokud pravidlo obstálo, ukončili jsme dočasnou pozornost?
+- Pokud selhal jen název, odkaz nebo příklad, zůstává oprava lokální?
+- Pokud vznikl nový návratový signál, je oddělený od druhého použití jako vlastní smyčka?
+- Smazali jsme nebo uzavřeli pomocné poznámky, seznamy a pracovní kopie?
+- Nevzniká nová evidence použití pravidla bez jasného účelu?
+- Je návratový signál do budoucna zapsaný v kanonickém místě?
+
+Druhé běžné použití je hotové, když pravidlo buď obstojí bez čerstvého kontextu, nebo přesně ukáže jedno místo k malé opravě. V obou případech má tým po skončení vědět, co už nesleduje. To je často nejcennější výsledek: ne další jistota navíc, ale konec zbytečné opatrnosti.
+
 ## Pracovní log
 
+- 2026-06-29: Doplněna úvodní podkapitola o druhém běžném použití po uzavřeném návratu z dlouhodobého klidu: přenositelnost bez čerstvého kontextu, dohledatelnost, skrytá kontrola, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-29: Doplněna úvodní podkapitola o prvním běžném použití po uzavřeném návratu z dlouhodobého klidu lokálního dočištění: kontrola samostatnosti pravidla, výsledné stavy, praktické příklady, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-28: Doplněna úvodní podkapitola o uzavření prvního návratu po dlouhodobém klidu lokálního dočištění: uzavírací stavy, praktické příklady, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-28: Doplněna úvodní podkapitola o prvním návratu po dlouhodobém klidu lokálního dočištění: rozlišení signálu, podnětu a údržby, tři brány návratu, praktické příklady, privacy-first záznam, karta, mini workshop a checklist.
