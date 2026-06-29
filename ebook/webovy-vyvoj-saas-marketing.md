@@ -272630,8 +272630,181 @@ Když se workshop zasekne na otázce, jestli "by se to někdy mohlo hodit", vra�
 
 Vrácení ročního připomenutí do klidu je malá, ale důležitá disciplína. Bez ní se i dobrá údržba mění v další vrstvu dohledu. S ní pravidlo zůstává živé jen tam, kde má být živé: v práci, kterou opravdu řídí. Všechno ostatní se uklidí, zavře nebo nechá být. Přesně tak má vypadat provoz, který bere vážně produktivitu i soukromí.
 
+## První skutečný návrat po ročním klidu
+
+Po ročním připomenutí, které skončilo bez nové práce, může přijít dlouhé ticho. To je dobrý stav. Pravidlo běží v běžném pracovním místě, nikdo ho mimořádně nehlídá, dočasné poznámky jsou uklizené a návrat čeká jen na skutečný signál. Jednou ale signál přijít může. Právě tehdy se ukáže, jestli byl dlouhodobý klid zdravý, nebo jen dobře uložené odkládání.
+
+První skutečný návrat po ročním klidu nezačínejte větou "konečně je čas to celé přepsat". To je dramatické, ale málokdy přesné. Začněte větou:
+
+```text
+Pravidlo po ročním klidu znovu otevíráme, protože nastal tento návratový signál:
+```
+
+Za ni napište pozorování, které odpovídá poslední dohodnuté bráně. Pokud byla brána "tři relevantní poptávky za sebou nepůjde kvalifikovat bez ručního doptání", nestačí napsat "obchod má pocit, že by rozpočet pomohl". Pocit může být užitečný podnět, ale není to návratový signál. Návratový signál má být rozpoznatelný i pro člověka, který u ročního připomenutí nebyl.
+
+Dobrá návratová věta:
+
+```text
+Pravidlo po ročním klidu znovu otevíráme, protože tři relevantní poptávky za sebou nešlo kvalifikovat bez ručního doptání na rámcový rozpočet.
+```
+
+Slabá návratová věta:
+
+```text
+Pravidlo otevíráme, protože rozpočet se teď zase řeší častěji.
+```
+
+Druhá věta možná popisuje náladu, ale ještě neříká, co se stalo, kde se to stalo a proč se má klid přerušit. Když po roce klidu otevřete práci jen podle nálady, ztrácíte výhodu celé předchozí disciplíny.
+
+### Čtyři kontroly před otevřením práce
+
+Než vznikne nový úkol, projděte čtyři krátké kontroly:
+
+- Shoda se signálem: stalo se opravdu to, co mělo pravidlo znovu otevřít?
+- Stejné pracovní místo: problém vznikl tam, kde pravidlo běžně žije, nebo se přesunul jinam?
+- Platný kontext: pořád platí segment, nabídka, proces a odpovědnost, pro které pravidlo vzniklo?
+- Nejmenší další krok: umíte reagovat menším krokem než původním širokým návrhem?
+
+První kontrola chrání před falešným návratem. Když se signál jen podobá starému tématu, ale neodpovídá dohodnuté bráně, nejde o návrat. Jde o nový podnět. Ten může být důležitý, ale má dostat vlastní pracovní otázku.
+
+Druhá kontrola chrání pracovní místo. Pokud problém nevznikl ve formuláři, ale v obchodním follow-upu, nezačínejte formulářem. Pokud nevznikl v obchodě, ale v textu nabídky, nezačínejte CRM polem. Návrat po klidu má být přesný, ne nostalgický.
+
+Třetí kontrola je nenápadná a důležitá. Po roce se mohl změnit zákaznický segment, typ nabídky, vlastník procesu, právní rámec, nástroj nebo způsob komunikace. Pokud se změnil kontext, nepřenášejte staré rozhodnutí mechanicky. Nejdřív napište, co pořád platí a co už ne.
+
+Čtvrtá kontrola brání tomu, aby se do systému vrátil starý široký návrh jen proto, že konečně přišel signál. Signál dává právo otevřít práci. Nedává právo otevřít největší možnou verzi práce.
+
+### Praktický příklad
+
+Poslední klidové pravidlo:
+
+```text
+Rozpočet nezjišťujeme povinným polem v prvním formuláři. Relevantní poptávky lze kvalifikovat volitelnou otázkou v potvrzovacím e-mailu.
+
+Další návrat pouze pokud:
+Tři relevantní poptávky za sebou nepůjde kvalifikovat bez ručního doptání na rozpočet.
+```
+
+Po několika měsících přijde signál:
+
+```text
+Tři relevantní poptávky za sebou nešlo kvalifikovat bez ručního doptání na rozpočet. U všech tří se obchod zasekl až po potvrzovacím e-mailu.
+```
+
+Špatná reakce:
+
+```text
+Přidáme povinné pole rozpočet do formuláře a začneme podle něj skórovat leady.
+```
+
+Lepší reakce:
+
+```text
+Otevíráme malý krok:
+Upravíme volitelnou otázku v potvrzovacím e-mailu tak, aby nabízela tři orientační rozpočtová rozpětí a možnost "nevím, potřebuji doporučení".
+
+Co zůstává zavřené:
+Povinné pole ve formuláři, automatický lead scoring a nový export rozpočtu do marketingové tabulky.
+
+Ověření:
+U dalších pěti relevantních poptávek sledujeme jen to, jestli upravená otázka ušetří jedno ruční doptání.
+```
+
+Všimněte si, že návratový signál byl uznaný. Tým se netváří, že problém neexistuje. Zároveň ale nespouští starý velký návrh. Otevírá nejbližší místo, kde se problém opravdu ukázal, a chrání datovou stopu.
+
+### Privacy-first návrat po klidu
+
+Po dlouhém klidu bývá silné pokušení říct: "Teď už asi data potřebujeme." Možná ano. Ale i tady platí, že nejdřív potřebujete rozhodovací otázku, potom datové minimum. Ne naopak.
+
+Při prvním skutečném návratu si napište:
+
+```text
+Jaká data jsme dosud záměrně nesbírali:
+
+Jaký nový důkaz máme:
+
+Jaký nejmenší údaj nebo pozorování stačí pro další rozhodnutí:
+
+Kde údaj vznikne a kdy skončí:
+```
+
+Pokud stačí ručně vyhodnotit dalších pět obchodních vláken, nedělejte z toho nový atribut v CRM. Pokud stačí doplnit příklad do e-mailu, nepřidávejte pole do formuláře. Pokud stačí kvalifikační věta v obchodním skriptu, nezapínejte nový automatický scoring.
+
+Privacy-first návrat neznamená ignorovat realitu. Znamená reagovat na realitu nejmenší datovou stopou, která umí rozhodnout další krok.
+
+Codyho komentář: když se po roce klidu něco konečně ozve, tým má často chuť vynahradit si všechny minulé neotevřené nápady najednou. Chápu. Backlog má rád dramatické návraty. Ale dobrý provoz se pozná podle toho, že i oprávněný návrat drží na uzdě. Signál není výherní los na kompletní redesign. Je to pozvánka k jednomu přesnému kroku.
+
+### Karta prvního skutečného návratu po klidu
+
+```text
+Pravidlo v dlouhodobém klidu:
+
+Kanonické místo pravidla:
+
+Dohodnutý návratový signál:
+
+Co se opravdu stalo:
+
+Odpovídá to signálu?
+- ano
+- ne, je to nový podnět
+- nevíme, nejdřív zpřesnit
+
+Kde problém vznikl:
+
+Co ze starého kontextu pořád platí:
+
+Co ze starého kontextu už nepřenášíme:
+
+Nejmenší otevřený krok:
+
+Co zůstává výslovně zavřené:
+
+Jaká data pořád nesbíráme:
+
+Jaká dočasná data vzniknou a kdy skončí:
+
+Jak poznáme, že malý krok stačil:
+
+Vlastník:
+
+Datum kontroly:
+```
+
+Karta není náhrada za práci. Je to brzda proti přestřelení. Když ji neumíte vyplnit, nejspíš ještě nevíte, jestli jde o skutečný návrat, nové téma, nebo jen starý pocit v novém kabátě.
+
+### Mini workshop na 8 minut
+
+1. Minuta 1: přečtěte poslední zapsané pravidlo a jeho návratový signál.
+2. Minuta 2: napište, co se opravdu stalo.
+3. Minuta 3: rozhodněte, jestli signál opravdu nastal.
+4. Minuta 4: určete pracovní místo, kde problém vznikl.
+5. Minuta 5: napište, co ze starého kontextu už nepřenášíte.
+6. Minuta 6: vyberte nejmenší otevřený krok.
+7. Minuta 7: napište, co zůstává zavřené a jaká data pořád nesbíráte.
+8. Minuta 8: určete kontrolní okno.
+
+Pokud se během workshopu ukáže, že signál nenastal, nezachraňujte schůzku novou prací. Zapište nový podnět, vraťte pravidlo do klidu a hotovo. I to je výsledek. Méně efektní než velká tabule s úkoly, ale často mnohem levnější.
+
+### Checklist prvního skutečného návratu po klidu
+
+- Máme před sebou poslední kanonické pravidlo, ne vzpomínku na něj?
+- Je návratový signál konkrétní a porovnaný s tím, co se opravdu stalo?
+- Rozlišili jsme skutečný návrat od nového podnětu?
+- Víme, ve kterém pracovním místě problém vznikl?
+- Zkontrolovali jsme, jestli pořád platí původní segment, nabídka, proces a vlastník?
+- Napsali jsme, co ze starého kontextu nepřenášíme?
+- Otevíráme menší krok než původní široký návrh?
+- Je jasné, co zůstává zavřené?
+- Víme, jaká data pořád nesbíráme?
+- Pokud vzniknou dočasná data, mají účel, vlastníka a konec?
+- Má malý krok kontrolní okno a stop podmínku?
+- Umí další člověk poznat, proč se klid přerušil právě teď?
+
+První skutečný návrat po ročním klidu je test důvěry v předchozí rozhodnutí. Když signál nenastal, klid pokračuje. Když nastal, otevře se nejmenší rozumný krok. V obou případech systém zůstává čitelný: žádné tiché rozšiřování, žádné sbírání dat pro jistotu, žádný návrat starého rozsahu zadními dveřmi.
+
 ## Pracovní log
 
+- 2026-06-29: Doplněna úvodní podkapitola o prvním skutečném návratu po ročním klidu: ověření návratového signálu, kontrola kontextu, nejmenší otevřený krok, privacy-first datové minimum, karta, mini workshop a checklist.
 - 2026-06-29: Doplněna úvodní podkapitola o vrácení ročního připomenutí zpět do dlouhodobého klidu: uzavírací věta, úklid dočasných stop, tři uzavírací stavy, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-06-29: Doplněna úvodní podkapitola o ročním připomenutí po dlouhodobém klidu: kontrola kanonického místa, návratového signálu, skryté datové stopy, čtyři výsledky připomenutí, privacy-first karta, mini workshop a checklist.
 - 2026-06-29: Doplněna úvodní podkapitola o dlouhodobém klidu po uzavření druhého běžného použití: kanonické místo, návratový signál, ukončení mimořádných kontrol, privacy-first datová střídmost, karta, mini workshop a checklist.
