@@ -269116,8 +269116,247 @@ Pokud se tým během workshopu zasekne na tom, jestli "by nebylo dobré ještě 
 
 Uzavření prvního návratu po dlouhodobém klidu je hotové ve chvíli, kdy klid znovu znamená klid. Buď se nic nezměnilo, nebo proběhla malá oprava, nebo vzniklo nové téma mimo starou větev. Ve všech případech musí zmizet mimořádná péče, dočasné důkazy a chuť sledovat systém jen proto, že se jednou pohnul. Dobrý provoz se pozná i podle toho, že umí znovu ztichnout.
 
+## První běžné použití po uzavřeném návratu z dlouhodobého klidu lokálního dočištění
+
+Po uzavřeném návratu přichází nejdůležitější a nejméně dramatická část: první běžné použití. Tým už nemá být v režimu "pozor, staré téma se vrátilo". Nemá si připomínat celou historii lokálního dočištění. Nemá preventivně hlídat každý krok. Má jen použít upravené nebo potvrzené pravidlo v normální práci a zjistit, jestli funguje bez vysvětlování navíc.
+
+První běžné použití začněte větou:
+
+```text
+Po uzavřeném návratu používáme pravidlo běžně v tomto pracovním místě:
+```
+
+Příklad:
+
+```text
+Po uzavřeném návratu používáme pravidlo běžně v tomto pracovním místě:
+měsíční review šablon, kde se rozhoduje, jestli slabý podnět zavřít, založit jako kartu změny, nebo ponechat jen jako poznámku.
+```
+
+Věta je záměrně nudná. Má vrátit pozornost k práci, ne k příběhu opravy. Pokud musíte při prvním běžném použití znovu vysvětlovat, proč kdysi vznikla lokální úprava, klid ještě není dost stabilní. Pravidlo má nést aktuální rozhodnutí samo, ne potřebovat pamětníka.
+
+Codyho komentář: první běžné použití je test, jestli jste opravdu uzavřeli návrat, nebo jste jen dočasný dohled přejmenovali na "ještě se na to mrkneme". Systém, který funguje jen pod dohledem, není stabilní systém. Je to hlídaný stan. Vypadá postaveně, dokud někdo drží tyč.
+
+### Co se při běžném použití nesmí vrátit
+
+Po uzavřeném návratu se často nenápadně vrací tři věci:
+
+- Staré vysvětlování: tým si znovu přehrává původní problém místo použití aktuální věty.
+- Staré důkazy: někdo vytahuje staré screenshoty, interní komentáře nebo seznam příkladů.
+- Starý dohled: vzniká dočasná tabulka, kdo pravidlo použil správně.
+
+Všechny tři návraty jsou varovné. Ne proto, že by historie byla zakázaná. Ale protože historie nemá být běžný provozní nástroj. Pokud pravidlo bez ní nejde použít, opravte kanonické místo. Pokud jde použít, historii nechte spát. Někdy je největší provozní disciplína v tom neotevřít archiv jen proto, že je po ruce.
+
+Krátká kontrolní věta:
+
+```text
+Při běžném použití nepotřebujeme starou historii; pokud něco chybí, doplníme to do aktuálního pracovního místa.
+```
+
+Příklad:
+
+```text
+Při běžném použití nepotřebujeme starou historii; pokud editor nerozliší slabý podnět od návratového signálu, doplníme jeden obecný příklad do rozcestníku, ne starou debatu do review.
+```
+
+Tím se chrání dvě věci najednou. Pravidlo zůstává použitelné a datová stopa zůstává malá. To je dobrý obchod.
+
+### Tři otázky prvního běžného použití
+
+Při prvním běžném použití stačí tři otázky:
+
+- Našlo se pravidlo tam, kde člověk skutečně pracuje?
+- Dalo se podle něj rozhodnout bez návratu ke staré historii?
+- Zůstala datová stopa stejná nebo menší než před návratem?
+
+První otázka testuje umístění. Pokud člověk pravidlo hledá přes staré poznámky, problém není v jeho pečlivosti. Problém je v navigaci.
+
+Druhá otázka testuje samostatnost. Pokud je potřeba vysvětlit, co věta "opravdu znamená", věta pravděpodobně není pracovní. Je to zkratka pro lidi, kteří byli u původní debaty.
+
+Třetí otázka testuje privacy-first disciplínu. Návrat po klidu často vytvoří dojem, že teď se musí víc měřit, víc ukládat a víc kontrolovat. Většinou nemusí. Stačí vědět, jestli běžné použití prošlo, narazilo na lokální tření, nebo otevřelo nový signál.
+
+### Čtyři výsledné stavy
+
+Po prvním běžném použití vyberte jeden ze čtyř stavů:
+
+- Pravidlo funguje tiše: člověk ho našel, použil a nebylo potřeba nic doplňovat.
+- Chybí lokální nápověda: pravidlo platí, ale potřebuje jeden příklad, odkaz nebo přesnější větu.
+- Běžné použití odhalilo nový signál: objevila se opakovaná situace, která odpovídá návratovému signálu nebo ho zpřesňuje.
+- Běžné použití ukázalo jiné téma: potíž neleží v lokálním dočištění, ale v jiném pracovním místě.
+
+Stav "pravidlo funguje tiše" je nejlepší výsledek a zároveň nejlákavější k přehlédnutí. Tým často slaví opravy, ale neklidně obchází fungující věci a hledá další práci. Tady stačí zapsat, že pravidlo prošlo bez mimořádné péče, a nepřidávat nic.
+
+Stav "chybí lokální nápověda" má skončit malou úpravou na místě. Jeden příklad. Jeden odkaz. Jedna přesnější věta. Pokud z toho vznikne revize celé kapitoly, reakce je větší než problém.
+
+Stav "běžné použití odhalilo nový signál" neznamená okamžitou implementaci. Znamená zapsat signál a ověřit, jestli opravdu odpovídá dohodnuté hranici. První použití po návratu má být citlivé, ale ne hysterické. Ano, technický termín.
+
+Stav "běžné použití ukázalo jiné téma" má oddělit novou věc od staré větve. Staré lokální dočištění zůstává uzavřené. Nové téma dostane vlastní pracovní místo, otázku a privacy-first hranici.
+
+### Praktický příklad
+
+Situace:
+
+```text
+Kanonické místo:
+Rozcestník review šablon.
+
+Uzavřený návrat:
+Do úvodní věty karty změny byla doplněna podmínka, že karta vzniká až při dopadu, pracovním místě nebo potvrzeném návratovém signálu.
+
+První běžné použití:
+Editor při měsíčním review narazil na slabý podnět: "možná by se měla upravit formulace v jedné šabloně". Podnět neměl dopad, pracovní místo ani opakování.
+```
+
+Běžný průchod:
+
+```text
+Našlo se pravidlo:
+Ano, editor použil úvodní větu karty změny.
+
+Rozhodnutí bez staré historie:
+Ano, podnět byl zavřený bez nové karty.
+
+Datová stopa:
+Zůstala menší. Nevznikla karta změny, export podnětů ani nové sledování.
+
+Výsledný stav:
+Pravidlo funguje tiše.
+
+Co děláme:
+Nic nedoplňujeme.
+```
+
+Tohle je přesně okamžik, kdy se má tým zastavit. Úspěch nevyžaduje další práci. Pokud pravidlo zabránilo zbytečné kartě a nevyrobilo nová data, splnilo svůj účel.
+
+Příklad s lokální nápovědou:
+
+```text
+Našlo se pravidlo:
+Ano, ale editor si nebyl jistý rozdílem mezi slabým podnětem a údržbovým třením.
+
+Rozhodnutí bez staré historie:
+Částečně. Bylo potřeba krátké vysvětlení od vlastníka.
+
+Datová stopa:
+Nevznikla nová evidence, jen poznámka k opravě rozcestníku.
+
+Výsledný stav:
+Chybí lokální nápověda.
+
+Nejmenší úprava:
+Do rozcestníku přidat jeden obecný příklad údržbového tření.
+
+Co neotevíráme:
+Starý návrat, školení editorů ani review všech rozhodovacích karet.
+```
+
+Lokální nápověda se má ověřit při dalším přirozeném použití. Ne v extra schůzce, ne přes dotazník, ne přes měření klikání v dokumentaci. Pokud se příklad najde a rozhodnutí projde, hotovo.
+
+### Privacy-first kontrola prvního běžného použití
+
+První běžné použití po uzavřeném návratu je vhodné místo pro kontrolu, jestli po návratu nezůstala zbytečná datová stopa.
+
+Zkontrolujte čtyři věci:
+
+- Nevznikla nová karta jen proto, že se testovalo pravidlo?
+- Nezůstaly v poznámkách konkrétní interní komentáře nebo zákaznické detaily?
+- Nevznikla tabulka lidí, použití, chyb nebo rozhodnutí?
+- Není v plánu další kontrola "pro jistotu", která nemá návratový signál?
+
+Krátký zápis:
+
+```text
+Privacy-first výsledek prvního běžného použití:
+Ponecháváme jen výsledný stav a případnou lokální úpravu.
+Mažeme nebo nezakládáme surové příklady, osobní hodnocení a dočasné exporty.
+Nové sledování nevzniká.
+```
+
+Pokud se během použití ukázalo nové téma, zapište ho bez přenesených detailů:
+
+```text
+Nové téma:
+Obchodní follow-up potřebuje vlastní větu pro situaci, kdy se zatím nezjišťuje rozpočet.
+
+Nepřenášíme:
+Jména lidí, konkrétní zákaznické zprávy ani staré příklady z review šablon.
+```
+
+Privacy-first přístup tady není brzda poznání. Je to způsob, jak poznatek oddělit od zbytečných stop. Potřebujete typ problému, pracovní místo a nejmenší další otázku. Nepotřebujete archiv všeho, co se kolem toho stalo.
+
+### Karta prvního běžného použití
+
+```text
+Původní lokální dočištění:
+
+Uzavřený návrat:
+
+Kanonické pracovní místo:
+
+Kde proběhlo první běžné použití:
+
+Našlo se pravidlo bez staré historie?
+ano / částečně / ne
+
+Dalo se podle něj rozhodnout?
+ano / částečně / ne
+
+Datová stopa:
+stejná / menší / větší
+
+Výsledný stav:
+- pravidlo funguje tiše
+- chybí lokální nápověda
+- běžné použití odhalilo nový signál
+- běžné použití ukázalo jiné téma
+
+Co se mění:
+
+Co výslovně neotevíráme:
+
+Privacy-first úklid:
+Ponecháváme:
+Mažeme nebo nezakládáme:
+Nové sledování:
+
+Vlastník:
+
+Další kontrola:
+jen při signálu / při dalším běžném použití / žádná
+```
+
+Karta má potvrdit návrat do normálu. Pokud z ní vznikne složitý report, pravidlo se zase dostává do mimořádné péče. To je přesně stav, kterému se snažíte vyhnout.
+
+### Mini workshop na 5 minut
+
+1. Minuta 1: pojmenujte pracovní místo prvního běžného použití.
+2. Minuta 2: odpovězte, jestli se pravidlo našlo bez staré historie.
+3. Minuta 3: odpovězte, jestli podle něj šlo rozhodnout.
+4. Minuta 4: vyberte výsledný stav.
+5. Minuta 5: zapište privacy-first výsledek a co se neotevírá.
+
+Pokud workshop potřebuje víc než pět minut, nejspíš řešíte víc než první běžné použití. Zastavte se a oddělte lokální tření od nového tématu. Jedno patří do malé úpravy, druhé do nové karty. Ani jedno nepotřebuje oživit celou starou historii.
+
+### Checklist prvního běžného použití po uzavřeném návratu
+
+- Proběhlo použití v přirozeném pracovním místě?
+- Našel člověk pravidlo bez staré historie?
+- Dalo se podle pravidla rozhodnout bez vysvětlování navíc?
+- Vybrali jsme jeden ze čtyř výsledných stavů?
+- Pokud pravidlo fungovalo tiše, nepřidali jsme zbytečnou práci?
+- Pokud chyběla lokální nápověda, je úprava opravdu malá a na místě?
+- Pokud se objevil nový signál, je oddělený od okamžité implementace?
+- Pokud vzniklo jiné téma, zůstala stará větev zavřená?
+- Je jasné, co se výslovně neotevírá?
+- Nevznikla nová evidence lidí, chyb, klikání nebo používání pravidla?
+- Jsou případné příklady zobecněné na typ situace?
+- Je další kontrola navázaná na signál nebo přirozené použití, ne na úzkost?
+
+První běžné použití po uzavřeném návratu je hotové, když pravidlo obstálo v normální práci bez mimořádného režimu. Někdy se nezmění nic. Někdy doplníte jeden příklad. Někdy oddělíte nové téma. Všechny výsledky jsou přijatelné, pokud po nich nezůstane skrytý dohled, staré důkazy ani nová datová stopa bez účelu.
+
 ## Pracovní log
 
+- 2026-06-29: Doplněna úvodní podkapitola o prvním běžném použití po uzavřeném návratu z dlouhodobého klidu lokálního dočištění: kontrola samostatnosti pravidla, výsledné stavy, praktické příklady, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-28: Doplněna úvodní podkapitola o uzavření prvního návratu po dlouhodobém klidu lokálního dočištění: uzavírací stavy, praktické příklady, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-28: Doplněna úvodní podkapitola o prvním návratu po dlouhodobém klidu lokálního dočištění: rozlišení signálu, podnětu a údržby, tři brány návratu, praktické příklady, privacy-first záznam, karta, mini workshop a checklist.
 - 2026-06-28: Doplněna úvodní podkapitola o převodu lokálního dočištění do dlouhodobého klidu: kanonické místo, návratový signál, zakázané ocasy, privacy-first uzamčení, karta, mini workshop a checklist.
