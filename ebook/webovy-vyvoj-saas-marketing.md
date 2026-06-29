@@ -270304,8 +270304,200 @@ Pokud se během workshopu objeví nové téma, nechte ho mimo tento zápis. Uzav
 
 Uzavření první běžné kontroly má být poslední krok převodu, ne začátek další vrstvy správy. Když kanonické místo funguje, nechte ho pracovat. Když potřebuje drobnou opravu, opravte ji tam, kde se používá. A když po kontrole zůstala stará stopa, ukliďte ji dřív, než se začne tvářit jako tradice.
 
+## Druhá běžná kontrola kanonického místa
+
+První běžná kontrola kanonického místa ověřila, že pravidlo po převodu nezůstalo jen v zápisu. Druhá kontrola má jiný úkol: zjistit, jestli pravidlo funguje i bez čerstvé pozornosti. Už není novinkou, nikdo kolem něj nedělá opatrný doprovod a pracovní místo by mělo obstát v normálním provozu.
+
+Začněte větou:
+
+```text
+Druhou běžnou kontrolu děláme proto, abychom ověřili samostatnost kanonického místa bez mimořádné péče.
+```
+
+Do kontroly nevracejte celou historii. Neotevírejte starý návrh, první návrat, převod ani předchozí úklid. Pokud člověk potřebuje celou kroniku, aby dnes použil pravidlo, problém není v jeho paměti. Problém je v tom, že kanonické místo pořád není dost samostatné.
+
+Druhá kontrola má pracovat s jednou běžnou situací. Například s novou poptávkou, kterou obchod kvalifikuje podle aktuálního checklistu. Nebo s úpravou šablony, u které produktový člověk rozhoduje, jestli smí přidat nové pole. Čím konkrétnější situace, tím menší riziko, že se kontrola rozteče do všeobecné debaty o procesech.
+
+### Tři otázky druhé kontroly
+
+Položte jen tři otázky:
+
+- Použil člověk kanonické místo bez pomoci původního autora?
+- Zůstalo pravidlo v rozsahu, který byl uzavřený po první kontrole?
+- Nevznikla nová skrytá evidence, protože si někdo nebyl jistý?
+
+První otázka ověřuje samostatnost. Pokud člověk musel volat autora, hledat starou kartu nebo se ptát ve vlákně, pravidlo sice možná existuje, ale pořád nežije v práci. Oprava má být blízko: lepší název, kratší rozhodovací věta, odkaz z checklistu nebo přesnější příklad.
+
+Druhá otázka hlídá rozsah. Běžná práce má tendenci přidávat malé "pro jistotu" výjimky. Jedna poznámka, jedno pole, jeden štítek, jeden sloupec v tabulce. Každá věc sama o sobě vypadá nevinně. Dohromady ale umí vrátit původní široký návrh v menších kusech, takže si toho nikdo nevšimne, dokud už systém zase nesbírá víc, než potřebuje.
+
+Třetí otázka je privacy-first brzda. Nejčastější skrytá evidence nevzniká z touhy špehovat. Vzniká z nejistoty. Člověk si uloží screenshot, udělá pomocnou tabulku, zkopíruje zákaznickou odpověď do poznámky nebo přidá interní tag, aby měl pocit kontroly. Pokud ten záznam nemá jasný účel a konec, není to kontrola. Je to nová datová stopa převlečená za opatrnost.
+
+### Čtyři výsledky druhé kontroly
+
+Druhá běžná kontrola může skončit čtyřmi výsledky:
+
+- Samostatný provoz: pravidlo se použilo bez pomoci, bez rozšíření a bez nové evidence.
+- Poslední lokální oprava: pravidlo funguje, ale jedno místo ještě brání samostatnému použití.
+- Skrytá evidence nalezena: pravidlo se použilo, ale vznikl pomocný záznam, který nemá zůstat.
+- Nový návratový signál: kontrola ukázala skutečný opakovaný problém mimo rozsah běžné kontroly.
+
+U výsledku `samostatný provoz` nepřidávejte další kontrolní vrstvu. Zapište potvrzení a vraťte pravidlo do běžného rytmu. Dobrý výsledek druhé kontroly je trochu nudný: nic se dramaticky nemění, protože systém konečně pracuje sám.
+
+U výsledku `poslední lokální oprava` opravte přesně jedno místo. Pokud člověk nenašel pravidlo, dejte odkaz tam, kde pracuje. Pokud pravidlo našel, ale nerozhodl se podle něj, přepište jednu větu. Pokud příklad sváděl k širší interpretaci, zkraťte ho nebo vyměňte. Neotevírejte nový ediční projekt.
+
+U výsledku `skrytá evidence nalezena` nejdřív rozhodněte, jestli záznam vůbec potřebujete. Pokud ne, smažte ho. Pokud ano, přepište ho do obecného pravidla, návratového signálu nebo krátkého anonymizovaného závěru. Běžná kontrola nemá po sobě nechávat seznam případů jen proto, že se někomu líbí mít podklady po ruce.
+
+U výsledku `nový návratový signál` kontrolu nezvětšujte. Zapište signál jako nové malé téma a druhou kontrolu uzavřete. To je důležité: druhá kontrola má ověřit kanonické místo, ne rovnou řešit všechno, co během práce vyplave.
+
+### Praktický příklad
+
+Kanonické místo:
+
+```text
+Obchodní checklist pro kvalifikaci poptávky.
+```
+
+Aktuální pravidlo:
+
+```text
+V prvním formuláři nesbíráme povinný rozpočet. U relevantní poptávky lze v potvrzovacím e-mailu položit volitelnou otázku na rámcový rozpočet, pokud bez ní nejde navrhnout další krok.
+```
+
+Druhá běžná situace:
+
+```text
+Nová poptávka přišla bez rozpočtu. Obchodník otevřel checklist, posoudil relevanci a poslal volitelnou otázku pouze v potvrzovacím e-mailu.
+```
+
+Dobré uzavření:
+
+```text
+Výsledek:
+Samostatný provoz.
+
+Co se potvrdilo:
+Pravidlo je najitelné a použitelné bez staré karty.
+
+Co nevzniklo:
+Povinné pole ve formuláři, CRM atribut, ruční tabulka ani nový report.
+
+Další krok:
+Žádný. Pravidlo zůstává v běžném obchodním checklistu a vrací se pouze při domluveném návratovém signálu.
+```
+
+Slabší, ale pořád užitečný výsledek:
+
+```text
+Výsledek:
+Poslední lokální oprava.
+
+Nález:
+Obchodník pravidlo našel, ale nevěděl, jestli se volitelná otázka používá u všech poptávek bez rozpočtu, nebo jen u relevantních.
+
+Oprava:
+Do checklistu doplňujeme slovo "relevantní" přímo do rozhodovací věty.
+
+Co neotevíráme:
+Formulář, scoring, export ani další kontrolní tabulku.
+```
+
+Tahle oprava je malá schválně. Když se při druhé kontrole ukáže, že chybí jedno slovo, přidejte jedno slovo. Nepište metodiku o rozpočtové kvalifikaci, pokud problémem byla jen neostrá věta. Codyho komentář: procesy často tloustnou přesně ve chvíli, kdy by jim stačila dietní čárka.
+
+### Privacy-first kontrola
+
+Druhá kontrola je výborné místo pro hledání náhražek trackerů a databázových polí. Tým možná opravdu nepřidal nový nástroj. To ale neznamená, že nevznikla datová stopa. Skrytá evidence může být mnohem obyčejnější:
+
+- pomocný seznam poptávek v tabulce,
+- ruční tag u kontaktu,
+- zkopírovaná odpověď zákazníka do interní poznámky,
+- screenshot formuláře nebo e-mailu,
+- komentář s osobním detailem ve sdíleném dokumentu.
+
+Při kontrole napište:
+
+```text
+Při druhém použití vznikla tato pracovní stopa:
+
+Potřebujeme ji pro další rozhodnutí?
+
+Pokud ne, kdy a jak ji mažeme nebo zobecňujeme?
+```
+
+Pokud stopa nevznikla, napište to také. Nulová stopa je výsledek, ne prázdné místo v šabloně. Ukazuje, že pravidlo umí fungovat bez pomocné evidence.
+
+Privacy-first pointa druhé kontroly není "nesbírat nikdy nic". Pointa je nenechat nejistotu, aby potichu vyrobila novou paměť systému. Když informace patří do běžné obchodní komunikace, ať tam zůstane. Když má řídit proces, musí mít účel, vlastníka a retenci. Když nemá ani jedno, pryč s ní. Slušně, bez fanfár.
+
+### Karta druhé běžné kontroly
+
+```text
+Kanonické místo:
+
+Běžná situace:
+
+Kdo pravidlo použil:
+
+Použil ho bez pomoci původního autora?
+- ano
+- ne
+
+Zůstal uzavřený rozsah zachovaný?
+- ano
+- ne
+
+Vznikla nová pracovní nebo datová stopa?
+- ne
+- ano, jaká:
+
+Výsledek kontroly:
+- samostatný provoz
+- poslední lokální oprava
+- skrytá evidence nalezena
+- nový návratový signál
+
+Co se případně opravuje přímo v kanonickém místě:
+
+Co se maže, zavírá nebo zobecňuje:
+
+Co zůstává výslovně zavřené:
+
+Návratový signál:
+
+Další kontrola:
+- žádná
+- jen při návratovém signálu
+- konkrétní datum, pokud existuje důvod:
+```
+
+Karta má být krátká. Pokud ji vyplňujete déle než samotné použití pravidla, pravděpodobně kontrolujete víc věcí najednou. Rozdělte je. Kanonické místo má obstát v jedné situaci, ne v celém životním příběhu produktu.
+
+### Mini workshop na 5 minut
+
+1. Minuta 1: pojmenujte běžnou situaci a kanonické místo.
+2. Minuta 2: ověřte, jestli člověk pravidlo použil bez pomoci.
+3. Minuta 3: zkontrolujte, zda se nerozšířil uzavřený rozsah.
+4. Minuta 4: najděte případnou skrytou evidenci.
+5. Minuta 5: vyberte výsledek a proveďte jednu opravu nebo úklid.
+
+Pokud během workshopu vznikne chuť naplánovat třetí kontrolu "pro jistotu", zastavte se. Třetí kontrola má smysl jen při konkrétním návratovém signálu nebo při reálné změně kontextu. Jinak jen vytváříte péči o věc, která už měla umět pracovat sama.
+
+### Checklist druhé běžné kontroly
+
+- Kontrolujeme jednu běžnou situaci, ne celou historii pravidla?
+- Použil pravidlo člověk, který nebyl u původního rozhodnutí?
+- Nemusel hledat staré karty, vlákna nebo autora?
+- Zůstal původní široký návrh zavřený?
+- Nevzniklo nové pole, štítek, export, report ani pomocná tabulka?
+- Pokud vznikla pracovní stopa, má jasný účel a konec?
+- Je lokální oprava opravdu lokální?
+- Je nový návratový signál oddělený od této kontroly?
+- Umíme říct, co se dál nesleduje?
+- Končí kontrola návratem do běžného rytmu, ne novým dohledem?
+
+Druhá běžná kontrola kanonického místa je test tichosti. Když pravidlo obstojí, nemusí dostat medaili, schůzku ani dashboard. Stačí, že další člověk udělal správné rozhodnutí bez zbytečných dat a bez otevírání starého rozsahu. To je v provozu webu, SaaS i marketingu velmi dobrá forma klidu.
+
 ## Pracovní log
 
+- 2026-06-29: Doplněna úvodní podkapitola o druhé běžné kontrole kanonického místa: samostatnost pravidla bez čerstvé péče, skrytá evidence, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-06-29: Doplněna úvodní podkapitola o uzavření první běžné kontroly kanonického místa: čtyři způsoby uzavření, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-29: Doplněn krátký praktický odstavec k první běžné kontrole kanonického místa, aby ověření začínalo u člověka v reálné pracovní cestě, ne u historického výkladu.
 - 2026-06-29: Doplněna úvodní podkapitola o první běžné kontrole kanonického místa po převodu: dohledatelnost pravidla, rozhodovací ostrost, privacy-first úklid, karta, mini workshop a checklist.
