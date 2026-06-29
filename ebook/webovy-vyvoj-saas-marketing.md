@@ -271227,8 +271227,163 @@ Pokud se workshop zasekne u otázky, jestli "pro jistotu" nezaložit novou evide
 
 Uzavřený první návrat má být skoro nudný. Jedna věta se změnila, jedna stará kopie zmizela, jeden signál se zpřesnil, případně se potvrdilo, že není co dělat. To je dobrý výsledek. Produkt, marketing ani SaaS provoz nepotřebují víc dramat než zákazník už tak nosí v batohu.
 
+## První běžné použití po uzavřeném návratovém signálu v tichém provozu
+
+Po uzavření prvního návratového signálu v tichém provozu přijde nejdůležitější test: běžný člověk použije pravidlo, šablonu, rozhodovací větu nebo pracovní místo bez toho, aby věděl, jaké malé drama se kolem něj před chvílí odehrálo. Právě tady se ukáže, jestli byl návrat opravdu uzavřený, nebo jestli po něm zůstala skrytá berlička.
+
+Nezačínejte tím, že si znovu přečtete celou návratovou kartu. Začněte reálnou pracovní situací. Někdo chce upravit landing page, rozhodnout o formuláři, poslat nabídku, vyhodnotit SaaS onboarding nebo zkrátit obsahový brief. Vezme kanonické místo a má z něj poznat, co dělat teď. Pokud k tomu potřebuje historický výklad, uzavření ještě nebylo dotažené.
+
+Jednoduchá pracovní věta zní:
+
+```text
+Po uzavřeném návratovém signálu používáme pravidlo běžně: bez mimořádné kontroly, bez staré karty po ruce a bez nového sběru důkazů.
+```
+
+To neznamená, že se nesmí objevit chyba. Znamená to, že chyba musí být vidět v dnešním pracovním místě, ne v archeologii minulé epizody. Tiché provozní pravidlo má obstát samo. Když neobstojí, opravujte nejbližší větu, příklad nebo hranici, ne celý příběh.
+
+### Tři kontrolní otázky
+
+Při prvním běžném použití po uzavřeném návratu stačí tři otázky:
+
+```text
+Najde člověk správné pravidlo bez odkazu na starou kartu?
+
+Umí podle něj rozhodnout bez dalšího vysvětlování?
+
+Nevzniká kvůli použití nová datová stopa, kterou jsme nechtěli sbírat?
+```
+
+První otázka testuje dohledatelnost. Pokud je pravidlo schované v poznámce z review, v komentáři v úkolu nebo v interním chatu, není v tichém provozu. Je jen dočasně zapamatované. Přesuňte rozhodovací větu do místa, kde člověk práci opravdu dělá.
+
+Druhá otázka testuje rozhodovací ostrost. Dobré pravidlo neříká jen "zvažte dopad". Říká například: "Rozpočet v prvním formuláři nesbíráme, dokud tři relevantní poptávky za sebou nejdou kvalifikovat bez ručního doptání." To je věta, podle které se dá jednat.
+
+Třetí otázka testuje privacy-first disciplínu. Po návratovém signálu má tým často chuť "pro jistotu" sledovat víc. To je pochopitelné a obvykle zrádné. Pokud pravidlo funguje, nepotřebuje tichý stín v podobě exportu, screenshotů, duplicitní tabulky nebo nového eventu v analytice.
+
+### Čtyři výsledky prvního běžného použití
+
+První běžné použití může skončit čtyřmi stavy:
+
+- Pravidlo funguje bez úprav: člověk ho najde, rozhodne a nevznikne nová datová stopa.
+- Chybí lokální vysvětlení: pravidlo je správné, ale u konkrétního formuláře, e-mailu nebo šablony chybí jedna podpůrná věta.
+- Hranice je pořád moc měkká: pravidlo se najde, ale nevede k rozhodnutí, protože neříká, co je ještě uvnitř a co už je mimo.
+- Návrat nebyl uzavřený: tým pořád potřebuje starou kartu, mimořádnou kontrolu nebo dodatečné důkazy.
+
+Každý stav má jinou reakci. U funkčního pravidla nedělejte nic navíc. U chybějícího lokálního vysvětlení doplňte jednu větu přímo do pracovního místa. U měkké hranice zpřesněte rozhodovací pravidlo, ne celé téma. U neuzavřeného návratu se vraťte o krok zpět a uzavření opravte, protože tichý provoz zatím nezačal.
+
+Codyho komentář: nejčastější chyba není slabé pravidlo, ale přehnaná péče po jeho uzavření. Tým chce dokázat, že se poučil, a tak začne hlídat i věci, které už se mají prostě používat. Výsledek je paradoxní: pravidlo je papírově hotové, ale provozně se nikdy neosamostatní. Ano, je to takový interní rodičovský dohled nad větou v dokumentaci. Roztomilé možná pět minut, pak už jen drahé.
+
+### Praktický příklad
+
+Tým dřív řešil, jestli do poptávkového formuláře přidat povinné pole pro rozpočet. Původně krok neotevřel, později se objevil návratový signál a po malé úpravě se pravidlo uzavřelo takto:
+
+```text
+Rozpočet v prvním formuláři nesbíráme. Pokud je potřeba kvalifikovat rozsah, ptáme se nejdřív na cíl projektu a rozhodovací situaci. Rozpočet otevírá obchod až v navazujícím rozhovoru, pokud bez něj nejde navrhnout další krok.
+```
+
+O týden později marketing upravuje landing page pro nový segment. Někdo navrhne přidat pole "orientační rozpočet", protože by se "hodilo mít lepší leady". První běžné použití pravidla proběhne takto:
+
+```text
+Pravidlo jsme našli u poptávkového formuláře.
+
+Rozhodnutí: nové pole nepřidáváme.
+
+Lokální úprava: k textu formuláře doplníme příklad cíle projektu, aby se lépe kvalifikoval kontext bez sběru rozpočtu.
+
+Nová data: žádná.
+
+Návratový signál: otevřeme znovu pouze tehdy, pokud tři relevantní poptávky za sebou nepůjde posunout bez ručního doptání na rozpočet.
+```
+
+To je dobrý výsledek. Pravidlo nezablokovalo práci, jen zabránilo zbytečnému sběru dat. Tým přitom nezůstal pasivní: upravil nejbližší pracovní místo, ale neotevřel původně zavřený rozsah.
+
+Slabý výsledek by vypadal jinak:
+
+```text
+Pro jistotu založíme tabulku všech poptávek bez rozpočtu a měsíc budeme sledovat, jestli nechybí.
+```
+
+To zní opatrně, ale ve skutečnosti to vrací mimořádnou péči zadními dveřmi. Pokud není jasná rozhodovací otázka, vlastník, retence a konec sledování, nejde o opatrnost. Je to nová datová stopa převlečená za zdravý rozum.
+
+### Privacy-first kontrola po prvním použití
+
+Privacy-first kontrola má být krátká, ale konkrétní:
+
+```text
+Přidali jsme nové pole?
+
+Přidali jsme nový event, export, štítek nebo tabulku?
+
+Prodloužili jsme retenci pomocných důkazů?
+
+Zůstala stará návratová karta někde jako neoficiální zdroj pravdy?
+
+Umí pravidlo fungovat bez osobních nebo obchodních údajů navíc?
+```
+
+Pokud odpověď na některou z prvních tří otázek zní ano, musí být jasné proč. "Pro jistotu" nestačí. Důvod musí být spojený s rozhodnutím, které bez dat opravdu nejde udělat. A i pak má být zapsané, kdy sběr skončí.
+
+Starou návratovou kartu po prvním běžném použití znovu nepropagujte. Může zůstat v historii, pokud má smysl pro audit, ale nesmí být pracovním návodem. Kanonické místo má být kratší, přesnější a méně datově hladové než cesta, která k němu vedla.
+
+### Karta prvního běžného použití
+
+```text
+Pravidlo nebo pracovní místo:
+
+Běžná situace, ve které bylo použité:
+
+Kdo ho použil:
+
+Našel člověk pravidlo bez staré karty:
+
+Rozhodnutí, které podle něj udělal:
+
+Výsledek:
+- funguje bez úprav
+- chybí lokální vysvětlení
+- hranice je moc měkká
+- návrat nebyl uzavřený
+
+Jedna případná lokální úprava:
+
+Co zůstává zavřené:
+
+Nová data, eventy, exporty nebo pole:
+
+Co se maže nebo nechává v historii:
+
+Další kontrola:
+```
+
+Kartu vyplňujte jen tehdy, když první použití něco odhalilo. Pokud pravidlo funguje čistě, stačí krátká poznámka v pracovním logu nebo žádná poznámka vůbec. Tichý provoz se nemá proměnit v divadlo důkazů.
+
+### Mini workshop na 5 minut
+
+1. Minuta 1: vezměte jednu reálnou situaci, kde se pravidlo právě použilo.
+2. Minuta 2: ověřte, jestli člověk našel kanonické místo bez staré karty.
+3. Minuta 3: napište rozhodnutí, které podle pravidla vzniklo.
+4. Minuta 4: vyberte jeden ze čtyř výsledků.
+5. Minuta 5: zapište lokální úpravu nebo vědomě nechte pravidlo bez změny.
+
+Když workshop začne řešit celou historii návratu, zastavte ho. Cílem není obhájit minulou práci. Cílem je zjistit, jestli dnešní člověk umí podle pravidla jednat.
+
+### Checklist prvního běžného použití po uzavřeném návratu
+
+- Byla použita reálná pracovní situace, ne umělý test?
+- Člověk našel pravidlo v kanonickém místě?
+- Rozhodnutí šlo udělat bez staré návratové karty?
+- Pokud chyběla věta, doplnila se do nejbližšího pracovního místa?
+- Pokud byla hranice měkká, zpřesnilo se pravidlo jen v jednom bodě?
+- Pokud se návrat ukázal jako neuzavřený, nehráli jsme si na tichý provoz?
+- Nevznikl nový event, export, tabulka, štítek ani formulářové pole bez jasného rozhodovacího důvodu?
+- Zůstalo napsané, co se pořád neotevírá?
+- Má případná pomocná stopa konec, vlastníka a důvod?
+- Je kanonické místo použitelné i pro člověka, který nezná minulou epizodu?
+
+První běžné použití má být krátká zkouška samostatnosti. Pokud pravidlo obstojí, nechte ho být. Pokud neobstojí, opravte nejmenší místo, kde selhalo. V obou případech hlídejte, aby se po uzavřeném návratu nevrátila mimořádná péče jen proto, že se tváří zodpovědně.
+
 ## Pracovní log
 
+- 2026-06-29: Doplněna úvodní podkapitola o prvním běžném použití po uzavřeném návratovém signálu v tichém provozu: kontrolní otázky, výsledné stavy, praktický příklad, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-06-29: Doplněna úvodní podkapitola o uzavření prvního návratového signálu po tichém provozu: čtyři uzavírací stavy, praktický příklad, propsání do kanonického místa, privacy-first úklid pomocných stop, karta, mini workshop a checklist.
 - 2026-06-29: Doplněna úvodní podkapitola o prvním návratovém signálu po tichém provozu: rozlišení skutečného návratu od šumu, čtyři stavy návratu, praktické příklady, privacy-first důkazní minimum, karta, mini workshop a checklist.
 - 2026-06-29: Doplněna úvodní podkapitola o převodu uzavřené druhé kontroly do tichého provozu: aktivní minimum pravidla, ukončení mimořádné péče, privacy-first úklid, karta, mini workshop a checklist.
