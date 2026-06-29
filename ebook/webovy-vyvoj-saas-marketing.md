@@ -272120,8 +272120,188 @@ Pokud během šesti minut neumíte vybrat stav, neprodlužujte workshop. Zapišt
 
 Uzavření druhého běžného použití je místo, kde se pozná, jestli tým umí nechat dobré pravidlo pracovat. Když funguje, nechte ho v tichu. Když potřebuje jednu hranu, dopište ji. Když ticho neuneslo, vraťte se o krok zpět. Hlavně z toho nedělejte trvalý kontrolní režim. Ten by možná uklidnil tým, ale webu, SaaS ani zákazníkům by obvykle nepřinesl nic kromě další datové stopy.
 
+## Dlouhodobý klid po uzavření druhého běžného použití
+
+Když druhé běžné použití dopadne dobře a pravidlo se vrátí do ticha, další práce už nemá vypadat jako další ověřovací epizoda. To je nepříjemně snadná chyba: tým udělá dvě rozumné kontroly, obě uzavře, a potom si pro jistotu založí třetí připomínku. Výsledek se tváří opatrně, ale ve skutečnosti pravidlo nikdy nepustí z ruky.
+
+Dlouhodobý klid znamená něco jiného. Pravidlo zůstává v kanonickém pracovním místě, používá se v běžné práci a znovu se otevře jen tehdy, když přijde konkrétní návratový signál. Neotevírá se proto, že se někdo po čase zeptá "neměli bychom to raději znovu projít?". Pokud otázka nemá nový důkaz, patří do poznámek, ne do provozu.
+
+Začněte jednoduchou větou:
+
+```text
+Pravidlo po druhém běžném použití zůstává v dlouhodobém klidu; další práce vznikne pouze při návratovém signálu nebo při plánovaném obecném review pracovního místa.
+```
+
+Věta má dvě hranice. První brání mimořádné kontrole bez důvodu. Druhá dovoluje, aby se pravidlo normálně objevilo při širším review formuláře, obchodního checklistu, onboardingového kroku nebo šablony e-mailu. Rozdíl je důležitý. Dlouhodobý klid není zákaz údržby. Je to zákaz speciální péče, která nemá nové rozhodnutí.
+
+### Co v dlouhodobém klidu zůstává aktivní
+
+V dlouhodobém klidu zůstávají aktivní jen tři věci:
+
+- kanonická věta v místě, kde člověk pracuje;
+- konkrétní návratový signál;
+- běžný revizní rytmus daného pracovního místa.
+
+Nic víc není potřeba. Pokud pravidlo chrání formulář před zbytečným polem, má být vidět u formuláře nebo u checklistu pro jeho úpravy. Pokud chrání e-mailovou šablonu, má být u šablony. Pokud chrání marketingové měření, má být u měřicího plánu. Samostatný seznam "pravidel v tichu" zní pořádkumilovně, ale často jen vytváří další místo, které musí někdo hlídat.
+
+Praktický příklad:
+
+```text
+Kanonická věta:
+Rozpočet nezjišťujeme povinným polem v prvním formuláři; relevantní poptávky lze kvalifikovat volitelnou otázkou v potvrzovacím e-mailu.
+
+Návratový signál:
+Tři relevantní poptávky za sebou nepůjde kvalifikovat bez ručního doptání na rozpočet.
+
+Běžný revizní rytmus:
+Pravidlo se čte pouze při úpravě poptávkového formuláře nebo při kvartální kontrole obchodního checklistu.
+```
+
+Tím je pravidlo živé, ale neotravné. Člověk ho potká tam, kde ho potřebuje. Nepotká ho každý měsíc v novém reportu, kde se všichni tváří, že opakované čtení staré věty je strategie.
+
+### Tři věci, které po uzavření nedělejte
+
+Po uzavření druhého použití nedělejte hlavně tyto tři věci:
+
+- nezakládejte připomínku jen pro kontrolu klidu;
+- nevytvářejte pomocnou evidenci "pro případ, že se to vrátí";
+- nepřepisujte pravidlo do více míst, pokud jedno kanonické místo stačí.
+
+Připomínka bez návratového signálu vypadá neškodně, ale učí tým, že žádné rozhodnutí není nikdy opravdu zavřené. Pomocná evidence zase vytváří datovou stopu dřív, než vznikne rozhodovací potřeba. A kopie pravidla ve více místech časem začnou žít vlastním životem: jedna se upraví, druhá zůstane stará a třetí někdo použije jako argument v úplně jiné situaci.
+
+Pokud někdo navrhne další kontrolu, zeptejte se:
+
+```text
+Jaké rozhodnutí bez této kontroly neumíme udělat?
+```
+
+Když odpověď zní "budeme mít jistotu", kontrolu neotevírejte. Jistota není rozhodnutí. Je to pocit, který se v digitálním provozu podezřele často převléká za tabulku.
+
+### Praktický příklad dlouhodobého klidu
+
+Situace:
+
+```text
+Pravidlo po druhém použití:
+Povinné pole pro rozpočet do prvního formuláře nepřidáváme.
+
+Kde pravidlo žije:
+U poptávkového formuláře a v obchodním checklistu.
+
+Co zůstává zavřené:
+Povinné pole, automatický lead scoring, export poptávek bez rozpočtu a pomocná tabulka pro sledování kampaní.
+```
+
+O měsíc později někdo připravuje novou landing page a zeptá se, jestli by se u kampaně neměl rozpočet přece jen měřit. Dlouhodobý klid neznamená, že otázku ignorujete. Znamená, že ji porovnáte s návratovým signálem:
+
+```text
+Dnešní podnět:
+Nová kampaň má dražší návštěvnost, takže vznikla nervozita kolem kvality poptávek.
+
+Návratový signál:
+Tři relevantní poptávky za sebou nepůjde kvalifikovat bez ručního doptání na rozpočet.
+
+Rozhodnutí:
+Návratový signál nenastal. Rozpočet do formuláře nepřidáváme a nezakládáme pomocnou evidenci. Kvalitu kampaně vyhodnotíme běžnými signály poptávek a obchodního fitu.
+```
+
+Toto je dlouhodobý klid v praxi. Téma se objevilo, ale neotevřelo se celé. Staré pravidlo se použilo jako hrana, ne jako důvod k novému projektu.
+
+Slabší situace:
+
+```text
+Dnešní podnět:
+U tří relevantních poptávek za sebou obchod musel ručně doptávat rozpočet a rozhodnutí se tím zdrželo.
+
+Rozhodnutí:
+Návratový signál nastal. Neotevíráme rovnou povinné pole; otevíráme nejmenší nový krok u potvrzovacího e-mailu nebo obchodního skriptu.
+```
+
+I při návratu se drží původní disciplína. Návratový signál není automatické povolení široké změny. Je to důvod znovu otevřít nejmenší rozumné pracovní místo.
+
+### Privacy-first klid
+
+Dlouhodobý klid má silnou privacy-first hodnotu, protože brání nenápadnému růstu podpůrných dat. Po dvou ověřeních už tým často ví dost na to, aby pravidlo používal. Další sběr obvykle nevzniká kvůli zákazníkovi, ale kvůli interní nervozitě. To je špatný důvod pro novou datovou stopu.
+
+Zapište si proto tři řádky:
+
+```text
+V dlouhodobém klidu dál nesbíráme:
+
+Návrat poznáme podle:
+
+Běžné review se smí ptát pouze na:
+```
+
+Příklad:
+
+```text
+V dlouhodobém klidu dál nesbíráme:
+Rozpočet v prvním formuláři, pomocný štítek "bez rozpočtu", export poptávek bez rozpočtu ani nový analytický event.
+
+Návrat poznáme podle:
+Tří relevantních poptávek za sebou, které nejdou kvalifikovat bez ručního doptání na rozpočet.
+
+Běžné review se smí ptát pouze na:
+Jestli je pravidlo pořád najitelné u formuláře a obchodního checklistu.
+```
+
+Codyho komentář: dlouhodobý klid je docela dospělá forma produktivity. Nevypadá efektně, protože v něm nepřibývá nový nástroj, proces ani dashboard. Jenom se nepřidá další zbytečné pole, nesbírá se další údaj a tým se nevrací ke stejné debatě bez nového důvodu. Nuda? Možná. Ale dobře provozovaná nuda umí vydělat víc než kreativní chaos s barevným reportem.
+
+### Karta dlouhodobého klidu
+
+```text
+Pravidlo:
+
+Kde je kanonicky uložené:
+
+Co druhé běžné použití potvrdilo:
+
+Co zůstává výslovně zavřené:
+
+Návratový signál:
+
+Běžný revizní rytmus pracovního místa:
+
+Jaká mimořádná kontrola už neběží:
+
+Jaká data dál nesbíráme:
+
+Kdo smí pravidlo změnit:
+
+Jak se změna zapíše:
+```
+
+Karta nemá být nová evidence. Má vzniknout jen tehdy, když pravidlo chrání důležité pracovní místo nebo se kolem něj dřív opakovaně vracel tlak na širší rozsah. U malých pravidel stačí jedna věta přímo u šablony, formuláře nebo checklistu.
+
+### Mini workshop na 5 minut
+
+1. Minuta 1: přečtěte závěr druhého běžného použití.
+2. Minuta 2: ukažte kanonické pracovní místo, kde pravidlo žije.
+3. Minuta 3: pojmenujte návratový signál jednou větou.
+4. Minuta 4: napište, jaká mimořádná kontrola už neběží.
+5. Minuta 5: potvrďte, jaká data dál nesbíráte.
+
+Pokud v páté minutě zjistíte, že někde pořád běží pomocná tabulka, štítek, připomínka nebo export, workshop neskončil. Nejdřív tu stopu ukončete nebo pro ni napište samostatný rozhodovací důvod. Bez toho dlouhodobý klid jen hezky pojmenovává nedokončený úklid.
+
+### Checklist dlouhodobého klidu
+
+- Je pravidlo v jednom kanonickém pracovním místě?
+- Umí ho použít člověk bez staré karty a bez čerstvého vysvětlování?
+- Je návratový signál konkrétní a rozpoznatelný?
+- Skončila mimořádná kontrola po druhém běžném použití?
+- Nevznikla nová připomínka jen pro pocit jistoty?
+- Nevedeme pomocnou evidenci pro případ, že se téma někdy vrátí?
+- Je jasné, co zůstává zavřené z původního širšího návrhu?
+- Víme, jaká data díky dlouhodobému klidu dál nesbíráme?
+- Objeví se pravidlo při běžném review pracovního místa, ne jako samostatný rituál?
+- Je jasné, kdo smí pravidlo změnit a jak se změna zapíše?
+
+Dlouhodobý klid je dobrý konec malé smyčky. Neznamená, že se pravidlo už nikdy nezmění. Znamená, že se nezmění bez důvodu, bez pracovního místa a bez vědomé datové ceny. To je přesně typ klidu, který webům, SaaS produktům i marketingu prospívá: méně výjimek, méně skrytého sběru a méně debat, které se vracejí jen proto, že nikdo nenapsal dost jasnou poslední větu.
+
 ## Pracovní log
 
+- 2026-06-29: Doplněna úvodní podkapitola o dlouhodobém klidu po uzavření druhého běžného použití: kanonické místo, návratový signál, ukončení mimořádných kontrol, privacy-first datová střídmost, karta, mini workshop a checklist.
 - 2026-06-29: Doplněna úvodní podkapitola o uzavření druhého běžného použití v tichém provozu: tři uzavírací stavy, praktický příklad, privacy-first ukončení mimořádné datové stopy, karta, mini workshop a checklist.
 - 2026-06-29: Doplněna úvodní podkapitola o druhém běžném použití po uzavření prvního použití v tichém provozu: kdy druhé použití nedělat, co sledovat, privacy-first závěr, karta, mini workshop a checklist.
 - 2026-06-29: Doplněna úvodní podkapitola o uzavření prvního běžného použití po návratovém signálu v tichém provozu: tři uzavírací stavy, zachování zavřeného rozsahu, praktický příklad, privacy-first úklid, karta, mini workshop a checklist.
