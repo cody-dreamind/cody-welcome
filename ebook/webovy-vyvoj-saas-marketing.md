@@ -270139,8 +270139,174 @@ Když během šesti minut vznikne potřeba řešit širší proces, zapište ji 
 
 První běžná kontrola kanonického místa má dát týmu klid. Buď pravidlo funguje a dál se nesleduje, nebo se opraví nejbližší věta, odkaz či zbytečná stopa. V obou případech je cílem totéž: aby příští člověk pracoval s aktuálním pravidlem, ne s historií toho, jak pravidlo vzniklo.
 
+## Uzavření první běžné kontroly kanonického místa
+
+První běžná kontrola kanonického místa není hotová ve chvíli, kdy někdo řekne "vypadá to dobře". Hotová je až tehdy, když po ní v běžném pracovním místě zůstane jen to, co má člověk příště opravdu použít: aktuální pravidlo, hranice výjimky, návratový signál a případná lokální oprava. Všechno ostatní má skončit v historii, v archivu, nebo se má smazat.
+
+Začněte uzavření větou:
+
+```text
+Po první běžné kontrole kanonického místa zůstává v provozu:
+```
+
+Do věty nepište celý průběh kontroly. Neopisujte, kdo co hledal, jak dlouho to trvalo a proč byla stará karta matoucí. To patří do pracovních poznámek, pokud je ještě potřebujete. Uzavírací věta má říct, s čím se pracuje dál.
+
+Příklad:
+
+```text
+Po první běžné kontrole kanonického místa zůstává v provozu:
+V prvním formuláři nesbíráme povinný rozpočet; obchod používá volitelnou kvalifikační otázku jen u relevantní poptávky, kde bez ní nejde navrhnout další konkrétní krok.
+```
+
+To je použitelný závěr. Člověk z něj pozná pravidlo, hranici i pracovní situaci. Nepotřebuje znát celou historii návratu z dlouhodobého klidu, aby mohl odpovědět na další poptávku.
+
+### Čtyři způsoby uzavření
+
+První kontrola se uzavírá jedním ze čtyř způsobů:
+
+- Bez změny: kanonické místo funguje a kontrola jen potvrzuje běžný provoz.
+- Lokální dočištění: opraví se jedna věta, odkaz, název nebo příklad.
+- Úklid stopy: smaže se nebo zavře pomocná evidence, která po převodu zůstala z opatrnosti.
+- Nový omezený podnět: kontrola odhalila jiné téma, které nepatří do tohoto uzavření.
+
+U výsledku `bez změny` nepřidávejte další kontrolu. To je nejčastější pokušení: pravidlo obstálo, tak mu tým chce věnovat víc pozornosti. Jenže pozornost bez důvodu je provozní náklad. Zapište potvrzení a vraťte pravidlo do běžného rytmu.
+
+U výsledku `lokální dočištění` opravte přímo kanonické místo a zavřete kontrolu až po opravě. Nezakládejte úkol "někdy upravit formulaci", pokud jde o jednu větu. Takové úkoly se rády tváří jako pořádek, ale ve skutečnosti jen odkládají dvě minuty práce do budoucí porady.
+
+U výsledku `úklid stopy` rozhodněte, co se maže, co se anonymizuje a co se nechává jen jako zobecněný závěr. Pokud musí stopa zůstat, napište účel, vlastníka a datum další kontroly. Bez toho nejde o řízenou evidenci, ale o starý pracovní materiál s falešným pocitem bezpečí.
+
+U výsledku `nový omezený podnět` neprodlužujte starou kontrolu. Zapište nový podnět samostatně a uveďte, co zůstává mimo rozsah. Tím zabráníte tomu, aby se kontrola kanonického místa změnila v nenápadný restart původního problému.
+
+### Praktický příklad uzavření
+
+Výchozí situace:
+
+```text
+Kanonické místo:
+Obchodní checklist pro kvalifikaci poptávky.
+
+Kontrola:
+Obchodník našel pravidlo bez staré karty a použil volitelnou otázku jen u relevantní poptávky.
+
+Nález:
+V checklistu ale zůstala poznámka "ověřit ještě při dalším rozpočtovém dotazu".
+```
+
+Špatné uzavření:
+
+```text
+Necháme poznámku ještě měsíc, kdyby se něco objevilo.
+```
+
+To zní opatrně, ale chybí tomu návratový signál. Poznámka přežije měsíc, potom kvartál, potom ji někdo najde a začne se ptát, jestli rozpočtové téma pořád běží. Tak vzniká starý šum v novém provozu.
+
+Lepší uzavření:
+
+```text
+Výsledek:
+Kanonické místo funguje.
+
+Lokální úklid:
+Mažeme poznámku "ověřit ještě při dalším rozpočtovém dotazu".
+
+V provozu zůstává:
+Aktuální kvalifikační věta a návratový signál tří relevantních poptávek za sebou.
+
+Co neotevíráme:
+Formulář, CRM atribut, report rozpočtů ani další kontrolní měsíc.
+```
+
+Tady je uzavření krátké, ale ostré. Tým ví, co funguje, co zmizelo a co se nesmí tiše vrátit zadními dveřmi.
+
+### Privacy-first uzavření
+
+Při uzavření první běžné kontroly se zaměřte na zbytky, které nevypadají jako osobní údaje, ale přesto rozšiřují datovou stopu. Typicky jde o pracovní kopie, komentáře, exporty, seznamy případů, interní screenshoty nebo ruční štítky v CRM. Každá taková věc může být sama o sobě malá. Dohromady ale vytváří prostředí, kde už nikdo přesně neví, odkud se rozhoduje a proč nějaká data pořád existují.
+
+Krátká privacy-first otázka:
+
+```text
+Kdybychom tuto stopu dnes smazali, ztratíme schopnost příště správně rozhodnout?
+```
+
+Pokud je odpověď ne, stopa nemá v běžném provozu zůstávat. Pokud je odpověď ano, přepište ji do obecného pravidla nebo návratového signálu. Běžná práce nepotřebuje seznam konkrétních případů, když stačí věta "tři relevantní poptávky za sebou".
+
+Příklad úklidu:
+
+```text
+Mažeme:
+Pracovní tabulku s příklady poptávek po návratu z klidu.
+
+Ponecháváme:
+Zobecněný závěr v historii a návratový signál v obchodním checklistu.
+
+Nepřidáváme:
+Nový CRM štítek, nové pole, pravidelný report ani další ruční sledování.
+```
+
+Codyho komentář: privacy-first provoz často nevypadá jako velké gesto. Vypadá jako nudné smazání tabulky, která už nemá práci. Není to sexy. Ale ani vysvětlování, proč se po roce pořád drží zbytečný export, není zrovna lázeňský wellness.
+
+### Karta uzavření první kontroly
+
+```text
+Téma:
+
+Kanonické místo:
+
+Běžná situace kontroly:
+
+Výsledek kontroly:
+- bez změny
+- lokální dočištění
+- úklid stopy
+- nový omezený podnět
+
+Uzavírací věta v přítomném čase:
+
+Co se mění v kanonickém místě:
+
+Co se maže, anonymizuje nebo zavírá:
+
+Co zůstává výslovně zavřené:
+
+Návratový signál:
+
+Co se dál nesleduje:
+
+Vlastník:
+
+Datum:
+```
+
+Karta má po uzavření zmizet z cesty běžné práci. Pokud obsahuje změnu, propsat ji do kanonického místa. Pokud obsahuje úklid, provést ho. Pokud obsahuje nový podnět, založit ho odděleně. Karta sama nemá být nové kanonické místo.
+
+### Mini workshop na 5 minut
+
+1. Minuta 1: přečtěte výsledek první běžné kontroly.
+2. Minuta 2: vyberte jeden ze čtyř způsobů uzavření.
+3. Minuta 3: napište uzavírací větu v přítomném čase.
+4. Minuta 4: proveďte lokální opravu nebo úklid zbytečné stopy.
+5. Minuta 5: zapište, co se dál nesleduje a jaký návratový signál zůstává.
+
+Pokud se během workshopu objeví nové téma, nechte ho mimo tento zápis. Uzavření první kontroly má stabilizovat kanonické místo, ne sbírat další ambice.
+
+### Checklist uzavření první kontroly
+
+- Má kontrola jeden vybraný výsledek?
+- Je uzavírací věta napsaná v přítomném čase?
+- Je změna propsaná přímo do kanonického místa?
+- Pokud šlo jen o lokální dočištění, nezvětšili jsme rozsah?
+- Pokud zůstala zbytečná stopa, je smazaná, anonymizovaná nebo zavřená?
+- Je jasné, co se dál nesleduje?
+- Nevznikl nový tracker, CRM atribut, report, tabulka ani pravidelná schůzka bez návratového signálu?
+- Je nový podnět oddělený od uzavření této kontroly?
+- Umí příští člověk použít pravidlo bez čtení karty uzavření?
+- Ví vlastník, kdy se téma smí znovu otevřít?
+
+Uzavření první běžné kontroly má být poslední krok převodu, ne začátek další vrstvy správy. Když kanonické místo funguje, nechte ho pracovat. Když potřebuje drobnou opravu, opravte ji tam, kde se používá. A když po kontrole zůstala stará stopa, ukliďte ji dřív, než se začne tvářit jako tradice.
+
 ## Pracovní log
 
+- 2026-06-29: Doplněna úvodní podkapitola o uzavření první běžné kontroly kanonického místa: čtyři způsoby uzavření, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-29: Doplněn krátký praktický odstavec k první běžné kontrole kanonického místa, aby ověření začínalo u člověka v reálné pracovní cestě, ne u historického výkladu.
 - 2026-06-29: Doplněna úvodní podkapitola o první běžné kontrole kanonického místa po převodu: dohledatelnost pravidla, rozhodovací ostrost, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-29: Doplněna úvodní podkapitola o převodu závěru druhého běžného použití do kanonického místa: pravidlo v přítomném čase, oddělení historie, privacy-first převod, karta, mini workshop a checklist.
