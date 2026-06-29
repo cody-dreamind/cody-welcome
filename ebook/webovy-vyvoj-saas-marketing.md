@@ -269785,8 +269785,162 @@ Workshop nesmí začít sbírat další příklady. Jeho cílem je rozhodnutí p
 
 Druhé běžné použití je hotové, když pravidlo buď obstojí bez čerstvého kontextu, nebo přesně ukáže jedno místo k malé opravě. V obou případech má tým po skončení vědět, co už nesleduje. To je často nejcennější výsledek: ne další jistota navíc, ale konec zbytečné opatrnosti.
 
+## Převod závěru druhého běžného použití do kanonického místa
+
+Po druhém běžném použití už nestačí říct, že pravidlo obstálo. Je potřeba převést závěr zpět do místa, kde podle něj bude někdo příště pracovat. Jinak se ověření stane jen dalším zápisem v historii: pravdivým, možná i hezky napsaným, ale v běžném provozu neviditelným.
+
+Kanonické místo je aktuální pracovní místo pravidla. Může to být šablona poptávky, checklist před publikací, obchodní karta, onboardingový krok, interní playbook nebo rozhodovací tabulka. Není to nutně nejdelší dokument. Je to místo, kam člověk opravdu sáhne ve chvíli, kdy má rozhodnout.
+
+Začněte převod jednou větou:
+
+```text
+Po druhém běžném použití zůstává v kanonickém místě toto pravidlo:
+```
+
+Věta má být v přítomném čase. Ne "minule jsme se dohodli", ne "po návratu z klidu jsme ověřili", ale prostě aktuální pravidlo. Historie patří do logu. Pracovní místo potřebuje instrukci, podle které se dá jednat bez archeologického výletu do starých poznámek.
+
+### Co se přepisuje a co zůstává v historii
+
+Do kanonického místa přeneste jen to, co pomůže příštímu použití:
+
+- platné pravidlo;
+- hranici výjimky, pokud existuje;
+- návratový signál;
+- odkaz na zdroj pravdy, pokud pravidlo žije jinde;
+- jednu poznámku o tom, co se po druhém použití už mimořádně nesleduje.
+
+V historii nechte zbytek: původní podnět, staré návrhy, důkazy z návratu, pracovní kopie, diskusi o prvním použití a detaily druhého ověření. Tyto věci mohou být užitečné při auditu nebo při dalším skutečném návratovém signálu. Nemají ale překážet člověku, který dnes jen potřebuje vybrat správný formulář, správnou otázku nebo správný další krok.
+
+Praktický rozdíl:
+
+```text
+Historie:
+Původně se řešilo, jestli do poptávkového formuláře přidat povinný telefon. Po návratu z klidu se ukázalo, že výjimka má smysl jen u auditní landing page s kvalifikačním hovorem. Druhé běžné použití potvrdilo, že workshopová stránka výjimku nepřebírá.
+
+Kanonické místo:
+Ve výchozím poptávkovém formuláři telefon nesbíráme. Volitelný telefon patří jen na auditní landing page, pokud je kvalifikační hovor součástí nabídky. Ostatní stránky výjimku nepřebírají bez nové rozhodovací karty.
+```
+
+Druhá verze je kratší, ale pracovně silnější. Člověk z ní pozná, co má udělat. První verze je dobrá jako stopa. Špatná jako instrukce.
+
+### Praktický příklad převodu
+
+Situace:
+
+```text
+Téma:
+Rozpočtová otázka v prvním kontaktu.
+
+Druhé běžné použití:
+Jiný obchodník kvalifikoval další poptávku bez povinného pole pro rozpočet. Stačila upravená kvalifikační věta v obchodní kartě.
+
+Závěr:
+Pravidlo je přenositelné bez čerstvé paměti na návrat z klidu.
+```
+
+Převod do kanonického místa:
+
+```text
+Aktuální pravidlo:
+V prvním formuláři nesbíráme povinný rozpočet. Kvalifikaci řeší obchodní věta: "Jaký výsledek má projekt přinést a jak poznáme, že se investice vyplatila?"
+
+Hranice:
+Rozpočet se doptává až v obchodním rozhovoru, pokud je potřeba pro rozhodnutí o rozsahu.
+
+Návratový signál:
+Téma znovu otevřeme pouze pokud tři relevantní poptávky za sebou nepůjdou kvalifikovat bez ručního doptání na rozpočet.
+
+Co už nesledujeme:
+Nevedeme zvláštní seznam poptávek kvůli rozpočtu a neudržujeme pracovní kopii staré karty návratu.
+```
+
+Tohle je dost. Nepotřebujete přidávat dlouhou poznámku o tom, kdo byl u původní debaty a proč se tehdy rozhodlo jinak. Pokud se to někdy bude hodit, historie existuje. Běžná práce ale nemá nést batoh starých rozhodnutí jen proto, že batoh má popruhy.
+
+### Privacy-first převod
+
+Převod do kanonického místa je zároveň poslední kontrola datové střídmosti. Ptejte se:
+
+```text
+Nezůstává v pracovním místě víc dat nebo detailů, než člověk potřebuje pro další rozhodnutí?
+```
+
+Typické chyby:
+
+- do šablony se zkopíruje konkrétní zákaznický příklad, i když stačí zobecněný typ situace;
+- v pravidle zůstane jméno člověka, který ověření provedl;
+- pracovní místo odkazuje na starý export, screenshot nebo interní diskusi;
+- návratový signál vyžaduje nové sledování, místo aby využil přirozené pracovní situace;
+- dočasná poznámka se přejmenuje na "archiv" a zůstane dostupná všem.
+
+Privacy-first verze pravidla má být obecná tam, kde obecnost stačí. "Tři relevantní poptávky za sebou" je lepší než seznam konkrétních lidí. "Workshopová landing page" je lepší než kopie konkrétní zákaznické stránky. "Kvalifikační věta stačila" je lepší než uložený přepis hovoru.
+
+Krátký zápis:
+
+```text
+Do kanonického místa přenášíme pravidlo, hranici a návratový signál. Nepřenášíme konkrétní poptávky, jména, screenshoty ani pracovní exporty. Dočasné podklady po druhém použití mažeme nebo necháváme jen jako zobecněný závěr v historii.
+```
+
+Codyho komentář: kanonické místo není muzeum rozhodování. Pokud se z něj stane vitrína všech důvodů, proč pravidlo existuje, lidé ho přestanou používat a začnou se ptát v chatu. A jakmile se pravidla začnou znovu vysvětlovat v chatu, staré výjimky se vracejí rychleji než špatně pojmenované soubory na sdíleném disku. Velmi důstojný chaos.
+
+### Karta převodu do kanonického místa
+
+```text
+Téma:
+
+Kde proběhlo druhé běžné použití:
+
+Výsledek druhého použití:
+
+Kanonické místo:
+
+Aktuální pravidlo v přítomném čase:
+
+Hranice výjimky, pokud existuje:
+
+Návratový signál:
+
+Co se z historie nepřenáší:
+
+Co se maže nebo archivuje:
+
+Jaké osobní údaje, exporty, screenshoty nebo konkrétní příklady nezůstávají v pracovním místě:
+
+Kdo vlastní kanonické místo:
+
+Datum další běžné kontroly, pokud existuje:
+```
+
+Kartu nepoužívejte jako nový dokument vedle pravidla. Použijte ji jako převodní list: zkontrolovat, propsat, uklidit, zavřít. Pokud po převodu zůstane další karta, další kopie a další "zatím si to necháme", převod nebyl dokončený. Jen jste přestěhovali nepořádek do hezčí složky.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: otevřete závěr druhého běžného použití.
+2. Minuta 2: najděte skutečné kanonické pracovní místo.
+3. Minuta 3: napište pravidlo v přítomném čase.
+4. Minuta 4: doplňte hranici výjimky a návratový signál.
+5. Minuta 5: určete, co z historie se nepřenáší.
+6. Minuta 6: smažte nebo zavřete dočasné podklady, které už nemají účel.
+
+Pokud v minutě 2 nevíte, kde kanonické místo je, nepište nové pravidlo do dalšího dokumentu. Nejdřív opravte dohledatelnost. Pravidlo bez domova je budoucí duplicita, jen se zatím tváří jako pečlivá poznámka.
+
+### Checklist převodu
+
+- Je jasné, kde pravidlo bude příště použité?
+- Je pravidlo přepsané v přítomném čase?
+- Neobsahuje pracovní místo zbytečnou historii návratu?
+- Je hranice výjimky praktická a rozpoznatelná v běžné práci?
+- Je návratový signál konkrétní, ale nevyžaduje nové sledování bez důvodu?
+- Jsou staré karty, exporty, screenshoty a pracovní kopie zavřené nebo smazané?
+- Nezůstávají v kanonickém místě konkrétní osobní nebo zákaznické detaily, pokud stačí zobecnění?
+- Ví vlastník, že další kontrola proběhne jen v běžném rytmu nebo podle návratového signálu?
+- Umí nový člověk použít pravidlo bez vysvětlení původní historie?
+- Je jasné, co se po převodu výslovně nesleduje?
+
+Převod je hotový ve chvíli, kdy se budoucí práce nemusí vracet do staré debaty. Kanonické místo má nést současné rozhodnutí, návratový signál a nezbytnou hranici. Zbytek patří do historie nebo do koše. V obou případech mimo cestu člověku, který má zítra udělat normální práci.
+
 ## Pracovní log
 
+- 2026-06-29: Doplněna úvodní podkapitola o převodu závěru druhého běžného použití do kanonického místa: pravidlo v přítomném čase, oddělení historie, privacy-first převod, karta, mini workshop a checklist.
 - 2026-06-29: Doplněna úvodní podkapitola o druhém běžném použití po uzavřeném návratu z dlouhodobého klidu: přenositelnost bez čerstvého kontextu, dohledatelnost, skrytá kontrola, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-29: Doplněna úvodní podkapitola o prvním běžném použití po uzavřeném návratu z dlouhodobého klidu lokálního dočištění: kontrola samostatnosti pravidla, výsledné stavy, praktické příklady, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-28: Doplněna úvodní podkapitola o uzavření prvního návratu po dlouhodobém klidu lokálního dočištění: uzavírací stavy, praktické příklady, privacy-first úklid, karta, mini workshop a checklist.
