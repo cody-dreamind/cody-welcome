@@ -270676,8 +270676,194 @@ Workshop má skončit ukončením péče, ne plánem další péče. Pokud někd
 
 Uzavření druhé běžné kontroly je malá provozní tečka. Její hodnota není v množství textu, ale v tom, že tým přestane držet pravidlo za ruku. Když kanonické místo funguje, nechte ho fungovat. A když nefunguje, opravte nejbližší konkrétní místo místo toho, abyste kolem něj postavili další proces.
 
+## Převod uzavřené druhé kontroly do tichého provozu
+
+Po uzavření druhé běžné kontroly přichází nenápadný, ale důležitý krok: přestat se kolem pravidla chovat, jako by bylo pořád nové. Pokud kanonické místo obstálo, pravidlo už nepotřebuje zvláštní ochranu, kontrolní tabulku ani pravidelnou připomínku v kalendáři. Potřebuje tichý provoz: být dostupné tam, kde se pracuje, mít jasný návratový signál a nezanechávat za sebou zbytečnou datovou stopu.
+
+Tichý provoz není zapomenutí. Je to stav, kdy pravidlo funguje bez mimořádné péče. Člověk ho najde v běžném pracovním místě, použije ho bez historického výkladu a ví, kdy se má téma znovu otevřít. Všechno ostatní je buď historie, nebo provozní odpad s lepším PR.
+
+Začněte jednou větou:
+
+```text
+Po druhé běžné kontrole převádíme pravidlo do tichého provozu takto:
+```
+
+Za ni napište, co zůstává aktivní a co končí:
+
+```text
+Po druhé běžné kontrole převádíme pravidlo do tichého provozu takto:
+V obchodním checklistu zůstává aktuální věta o volitelné rozpočtové otázce, návratový signál zůstává u stejného místa a rušíme dočasnou poznámku k ověření druhého použití.
+```
+
+Dobrá převodní věta má tři části: kde pravidlo žije, kdy se může vrátit a co už se dál nesleduje. Pokud třetí část chybí, mimořádná péče se často jen přejmenuje. Z "ověřit při druhém použití" se stane "sledovat průběžně". Z "dočasná tabulka" se stane "pomocný přehled". Z "rychlá poznámka" se stane neoficiální zdroj pravdy. Hezký vývoj slovní zásoby, horší vývoj provozu.
+
+### Co v tichém provozu zůstává
+
+Do tichého provozu patří jen minimum:
+
+- aktuální pravidlo v kanonickém místě;
+- hranice, co se neotevírá bez nového signálu;
+- návratový signál;
+- vlastník pracovního místa;
+- běžný rytmus, pokud už existuje.
+
+Nepatří sem stará rozhodovací karta, dočasné exporty, seznamy použití, screenshoty, kopie zákaznických odpovědí ani kontrolní poznámky, které vznikly jen kvůli ověření. Tyto věci mohly být užitečné během návratu. Po uzavření ale mají buď skončit, nebo zůstat jen jako krátký zobecněný závěr v historii.
+
+Praktický rozdíl:
+
+```text
+Tichý provoz:
+U relevantní poptávky bez rozpočtu lze poslat volitelnou otázku v potvrzovacím e-mailu. Formulář se nemění. Téma se vrací pouze pokud volitelná otázka třikrát za sebou nepomůže kvalifikovat další krok.
+
+Už nepatří do běžné práce:
+Seznam posledních poptávek bez rozpočtu, kopie odpovědí zákazníků, poznámka "ověřit ještě jednou" a stará karta návratu jako povinné čtení.
+```
+
+Tichý provoz má být krátký právě proto, že se používá často. Čím víc historie do něj přenesete, tím rychleji se z pravidla stane text, který lidé přeskočí a raději se zeptají v chatu.
+
+### Tři kontrolní brzdy
+
+Před převodem do tichého provozu si položte tři otázky:
+
+- Kdyby pravidlo zítra použil nový člověk, našel by ho bez staré debaty?
+- Kdyby se téma za měsíc vrátilo, poznal by tým přesný návratový signál?
+- Kdyby přišel privacy nebo provozní audit, uměli bychom vysvětlit, proč po ověření nezůstaly pomocné podklady?
+
+První otázka je o použitelnosti. Pokud nový člověk potřebuje číst historii, převod není hotový. Druhá otázka je o hranici. Pokud návratový signál zní "když to bude zase problém", je moc vágní. Třetí otázka je o datové stopě. Pokud po ověření zůstala tabulka nebo poznámka "pro jistotu", musí mít účel, vlastníka a retenci, jinak nemá zůstat.
+
+Codyho komentář: tichý provoz je pro tým trochu nepříjemný, protože nedává pocit aktivity. Žádný nový dashboard, žádný nový proces, žádná slavnostní kontrola. Jen pravidlo na správném místě a méně věcí okolo. To je přesně důvod, proč funguje. Systém, který potřebuje neustálé připomínání, ještě není systém. Je to text s úzkostí.
+
+### Praktický příklad
+
+Uzavření druhé kontroly:
+
+```text
+Výsledek:
+Kanonické místo zůstává v klidu.
+
+Potvrzeno:
+Obchodník použil pravidlo bez pomoci původního autora a bez otevření staré karty.
+
+Datová stopa:
+Nevznikla nová evidence použití.
+```
+
+Převod do tichého provozu:
+
+```text
+Aktivní zůstává:
+Jedna rozhodovací věta v obchodním checklistu.
+
+Návratový signál:
+Téma se vrací pouze pokud tři relevantní poptávky za sebou nepůjdou kvalifikovat bez ručního doptání na rozpočet.
+
+Končí:
+Dočasná poznámka k druhé kontrole a ruční sledování použití pravidla.
+
+Co neotevíráme:
+Povinné pole ve formuláři, nový CRM atribut, scoring ani report rozpočtových odpovědí.
+```
+
+Slabší převod:
+
+```text
+Aktivní zůstává:
+Pravidlo je v checklistu, ale návratový signál je jen ve staré kartě.
+
+Oprava před tichým provozem:
+Přesunout návratový signál přímo k pravidlu a zavřít starou kartu jako historii.
+
+Co neotevíráme:
+Další kontrolu pravidla. Problém byl v umístění návratového signálu, ne v pravidle samotném.
+```
+
+Tady je důležité nezaměnit slabý převod za slabé pravidlo. Pokud pravidlo funguje, ale návratový signál leží ve špatném místě, opravte místo. Nevracejte se k celé debatě.
+
+### Privacy-first převod
+
+Privacy-first část tichého provozu je jednoduchá: po uzavření musí být jasné, jaká data nevznikají dál. Nestačí napsat, že "nepřidáváme tracking". Konkrétně pojmenujte, co se nevede, nemaří a neexportuje.
+
+Použijte krátký zápis:
+
+```text
+Do tichého provozu nepřenášíme:
+
+V kanonickém místě ponecháváme pouze:
+
+Mažeme, zobecňujeme nebo necháváme v původním zdroji:
+```
+
+Příklad:
+
+```text
+Do tichého provozu nepřenášíme:
+Pomocný seznam poptávek, kopie odpovědí, ruční štítek "bez rozpočtu" ani report použití pravidla.
+
+V kanonickém místě ponecháváme pouze:
+Rozhodovací větu, hranici formuláře a návratový signál.
+
+Mažeme, zobecňujeme nebo necháváme v původním zdroji:
+Konkrétní obchodní odpovědi zůstávají jen v e-mailových vláknech podle běžné retence; do checklistu přenášíme pouze anonymizovaný závěr.
+```
+
+Tím se z ověření nestane nový datový režim. Evropský privacy-first provoz se často láme právě na takových maličkostech. Ne na velkém rozhodnutí "budeme nebo nebudeme sledovat lidi", ale na stovce drobných pomocných poznámek, které nikdo nezavřel.
+
+### Karta převodu do tichého provozu
+
+```text
+Pravidlo:
+
+Kanonické místo:
+
+Výsledek druhé běžné kontroly:
+
+Co zůstává aktivní v běžné práci:
+
+Návratový signál:
+
+Co se výslovně neotevírá:
+
+Co z mimořádné péče končí:
+
+Jaká pomocná data, poznámky, exporty nebo kopie se mažou, zobecňují nebo nechávají v původním zdroji:
+
+Vlastník kanonického místa:
+
+Další kontrola:
+- žádná
+- pouze při návratovém signálu
+- běžný rytmus, který už existuje:
+```
+
+Karta má být poslední převodní stopa. Pokud po ní vznikne ještě další "sledovací" karta, převod do tichého provozu se nepovedl. Ne proto, že by sledování bylo vždy špatně. Protože bez konkrétní otázky je to jen další forma nejistoty.
+
+### Mini workshop na 5 minut
+
+1. Minuta 1: přečtěte výsledek druhé běžné kontroly.
+2. Minuta 2: napište aktuální pravidlo v kanonickém místě.
+3. Minuta 3: doplňte návratový signál přímo k pravidlu.
+4. Minuta 4: vyjmenujte, co z mimořádné péče končí.
+5. Minuta 5: smažte, zobecněte nebo uzavřete pomocné datové stopy.
+
+Workshop má skončit tím, že pravidlo nepotřebuje další doprovod. Pokud se objeví nový problém, založte ho jako nové malé téma. Nepřilepujte ho k převodu jen proto, že už máte otevřený dokument.
+
+### Checklist tichého provozu
+
+- Je pravidlo v kanonickém místě napsané v přítomném čase?
+- Je návratový signál u pravidla, ne jen ve staré historii?
+- Ví tým, co se bez nového signálu výslovně neotevírá?
+- Skončila mimořádná kontrola po druhém použití?
+- Nezůstává pomocná tabulka, štítek, export, screenshot nebo kopie odpovědi bez účelu?
+- Pokud nějaká stopa zůstává, má účel, vlastníka a retenci?
+- Je jasné, že další kontrola přijde jen v běžném rytmu nebo při návratovém signálu?
+- Umí nový člověk použít pravidlo bez výkladu původní debaty?
+- Je privacy-first hodnota vidět v tom, co dál nesbíráme?
+
+Převod do tichého provozu je úspěšný, když se po něm nic zvláštního neděje. Pravidlo je na svém místě, návratový signál je čitelný a staré podklady nepřekážejí. V produktu, marketingu i SaaS provozu je tohle často nejlepší možný konec: žádné nové vrstvy, žádná zbytečná data, jen pracovní klid.
+
 ## Pracovní log
 
+- 2026-06-29: Doplněna úvodní podkapitola o převodu uzavřené druhé kontroly do tichého provozu: aktivní minimum pravidla, ukončení mimořádné péče, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-29: Doplněna úvodní podkapitola o uzavření druhé běžné kontroly kanonického místa: uzavírací stavy, praktické věty, privacy-first úklid datové stopy, karta, mini workshop a checklist.
 - 2026-06-29: Doplněna úvodní podkapitola o druhé běžné kontrole kanonického místa: samostatnost pravidla bez čerstvé péče, skrytá evidence, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-06-29: Doplněna úvodní podkapitola o uzavření první běžné kontroly kanonického místa: čtyři způsoby uzavření, privacy-first úklid, karta, mini workshop a checklist.
