@@ -275688,8 +275688,170 @@ Pokud se v páté minutě nedaří říct, co bude dál, neprodlužujte workshop
 
 Uzavření první běžné údržby vrací pravidlo zpátky do normálního života. Neoslavuje se, neobaluje metrikami a nečeká na zvláštní dohled. Prostě zůstane tam, kde pomáhá. A když nepomáhá, vrátí se až přes konkrétní signál. To je tichý provoz v dospělé podobě: má paměť, ale netahá za sebou kufr starých papírů.
 
+## První běžné použití po uzavřené údržbě tichého provozu
+
+Po uzavřené první údržbě přichází nenápadný test: někdo pravidlo použije v běžné práci, bez workshopu, bez připomenutí a bez člověka, který ho právě opravil. Právě tady se pozná, jestli tichý provoz opravdu drží. Ne v okamžiku, kdy je karta čerstvě uklizená a všichni si pamatují, co se domluvilo. Ale za pár dní nebo týdnů, když pravidlo potká normální poptávku, normální onboardingový krok, normální supportní odpověď nebo normální úpravu webu.
+
+Cílem prvního běžného použití není pravidlo znovu auditovat. Cílem je ověřit, že ho člověk najde, pochopí a použije bez mimořádné péče. Pokud se při tom ukáže drobná nejasnost, opravte nejbližší pracovní místo. Pokud se ukáže opakovaný problém, otevřete návratový signál. Pokud se neukáže nic, nepište oslavný report. Stačí krátký záznam, že pravidlo prošlo běžným použitím a zůstává v tichém provozu.
+
+Začněte větou:
+
+```text
+Pravidlo po uzavřené údržbě prošlo prvním běžným použitím v tomto pracovním místě:
+```
+
+Do věty doplňte konkrétní místo. Ne "v sales procesu", ale "v potvrzovací zprávě po poptávkovém formuláři". Ne "v onboardingu", ale "v prvním importu dat". Ne "v marketingu", ale "v úpravě CTA bloku na stránce služby". Čím přesnější místo, tím menší riziko, že z běžného použití vznikne plošná revize.
+
+### Tři otázky prvního použití
+
+Při prvním běžném použití stačí tři otázky:
+
+- Našel člověk pravidlo tam, kde ho přirozeně potřeboval?
+- Vedlo pravidlo k jednomu konkrétnímu rozhodnutí nebo kroku?
+- Nevznikla kvůli použití nová datová stopa, kterou pravidlo nepotřebuje?
+
+První otázka testuje umístění. Pokud člověk musel hledat ve starém chatu, v exportu, v poznámkách z workshopu nebo u kolegy, pravidlo není v tichém provozu. Je v něčí hlavě a pár digitálních kapsách. To není katastrofa, ale je to lokální oprava: přesuňte odkaz, doplňte navigaci nebo přepište název tak, aby pravidlo bydlelo tam, kde vzniká práce.
+
+Druhá otázka testuje rozhodnutelnost. Pravidlo může být správně uložené, ale pořád příliš měkké. Pokud po jeho přečtení člověk neví, jestli má pole nepřidat, text upravit, poptávku doptat nebo věc zavřít, nejde o běžně použitelné pravidlo. Opravte větu na rozhodovací tvar.
+
+Třetí otázka chrání privacy-first provoz. První běžné použití nesmí automaticky vytvořit novou evidenci jen proto, že "chceme vědět, jak to dopadne". Pokud pravidlo pracuje správně, často stačí jednorázový záznam bez osobních detailů. Měřte jen to, co mění rozhodnutí. Zbytek je zvědavost převlečená za provozní hygienu. Elegantní kostým, pořád zvědavost.
+
+### Praktický příklad
+
+Situace:
+
+```text
+Tiché pravidlo:
+Rozpočtový kontext se u B2B poptávky doptává jen tehdy, když bez něj nejde navrhnout další konkrétní krok. Formulář, CRM scoring ani měsíční sledování nerozšiřujeme.
+
+První běžné použití:
+Přišla poptávka na audit SaaS onboardingu. Obchodník otevřel potvrzovací šablonu a řešil, zda se má rovnou zeptat na rozpočet.
+```
+
+Dobré použití:
+
+```text
+Obchodník podle pravidla neposlal samostatnou otázku na rozpočet, protože další konkrétní krok šel navrhnout bez ní: krátký diagnostický call s cílem vyjasnit rozsah auditu. Do CRM nepřidal nový štítek ani poznámku o rozpočtu.
+```
+
+Lokální tření:
+
+```text
+Pravidlo bylo správné, ale šablona měla starý nadpis "Rozpočet". Obchodník ho našel až přes vyhledávání.
+```
+
+Nejmenší oprava:
+
+```text
+Přejmenovat blok v potvrzovací šabloně na "Kdy doptat rozpočtový kontext" a ponechat návratový signál beze změny.
+```
+
+Špatná reakce:
+
+```text
+Začneme si u každé poptávky na měsíc zapisovat, jestli se rozpočet doptával.
+```
+
+Tahle reakce přeskočí z lokálního tření rovnou do nové evidence. Přitom problém nebyl v datech, ale v názvu bloku. Když dveře vržou, nemusíte hned stavět nový dům. Stačí namazat pant. A ne, tohle není strategická transformace, jen zdravý respekt k rozsahu.
+
+### Čtyři výsledky prvního běžného použití
+
+Po prvním běžném použití vyberte jeden ze čtyř výsledků:
+
+- Klid potvrzen: pravidlo bylo najitelné, rozhodnutelné a nevytvořilo novou datovou stopu.
+- Lokální oprava: pravidlo fungovalo, ale jedno pracovní místo potřebuje drobné zpřesnění.
+- Slabý signál: objevilo se tření, ale zatím není jasné, jestli jde o opakovaný problém.
+- Skutečný návrat: objevila se situace, která odpovídá domluvenému návratovému signálu.
+
+`Klid potvrzen` je nejkratší zápis. Napište, kde pravidlo prošlo, a nechte ho být. Nevyrábějte z klidu nový rituál.
+
+`Lokální oprava` má zůstat opravdu lokální. Typicky přejmenování bloku, přesun odkazu, doplnění jedné věty nebo odstranění staré formulace, která po údržbě přežila v kopii. Jakmile oprava sahá na více míst, zastavte se a napište, proč nestačí jedno pracovní místo.
+
+`Slabý signál` znamená: vidíme něco, ale ještě nevíme, jestli to má otevřít práci. Zapište ho bez sběru dalších osobních detailů a určete čekací hranici. Například "pokud se stejná nejasnost objeví u dalších dvou relevantních poptávek, vrátíme se k pravidlu".
+
+`Skutečný návrat` znamená, že se naplnil návratový signál. V takovém případě první běžné použití neuzavírejte lokální opravou. Otevřete samostatný malý krok a popište dnešní důvod. Původní velký návrh pořád nemá automatické právo vstát z hrobu a tvářit se svěže.
+
+### Privacy-first kontrola
+
+První běžné použití po údržbě má být datově lehké. Pokud kvůli němu vznikne víc evidence než kvůli samotnému pravidlu, něco se pokazilo.
+
+Použijte krátkou kontrolu:
+
+- Stačí zapsat výsledek bez jména zákazníka, e-mailu, rozpočtu nebo interní obchodní poznámky?
+- Nevznikl nový štítek, export, filtr nebo ruční seznam jen kvůli jedné kontrole?
+- Pokud vznikla dočasná poznámka, má datum smazání nebo anonymizace?
+- Nevyžaduje pravidlo zbytečně data, která původně mělo pomáhat nesbírat?
+- Zůstává kanonické místo jedno, nebo se rozhodnutí rozkopírovalo do více nástrojů?
+
+Privacy-first přístup v této fázi znamená hlavně sebeovládání. Pravidlo neověřujete tím, že kolem něj postavíte nový sledovací systém. Ověřujete ho tím, že běžná práce proběhne bez zbytečných dat, bez nových trackerů a bez dalšího dodavatele.
+
+### Karta prvního běžného použití po údržbě
+
+```text
+Tiché pravidlo:
+
+Kanonické pracovní místo:
+
+Datum prvního běžného použití:
+
+Kde bylo použito:
+
+Kdo pravidlo použil nebo jaká role:
+
+Výsledek:
+- klid potvrzen
+- lokální oprava
+- slabý signál
+- skutečný návrat
+
+Co pravidlo pomohlo rozhodnout:
+
+Co se případně lokálně opravuje:
+
+Co zůstává zavřené:
+
+Návratový signál:
+
+Vznikla nová datová stopa?
+- ne
+- ano, jaká a kdy skončí:
+
+Co se maže, zkracuje nebo nepřenáší dál:
+
+Další krok:
+```
+
+Kartu nevyplňujte jako formulář pro radost z políček. Pokud je výsledek `klid potvrzen`, stačí pár řádků. Delší zápis má smysl až ve chvíli, kdy vznikla lokální oprava, slabý signál nebo skutečný návrat.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: pojmenujte konkrétní pracovní místo prvního použití.
+2. Minuta 2: odpovězte, jestli bylo pravidlo najitelné.
+3. Minuta 3: odpovězte, jestli vedlo k rozhodnutí.
+4. Minuta 4: zkontrolujte datovou stopu.
+5. Minuta 5: vyberte jeden ze čtyř výsledků.
+6. Minuta 6: napište další krok nebo potvrďte klid.
+
+Když workshop začne řešit, jestli by se pravidlo nemělo vylepšit obecně, vraťte se k pracovnímu místu. První běžné použití není brainstorming. Je to krátká kontrola, jestli uklizené pravidlo přežije reálný kontakt s prací.
+
+### Checklist prvního běžného použití
+
+- Je popsané konkrétní pracovní místo, kde pravidlo vzniklo nebo bylo použito?
+- Našel člověk pravidlo bez mimořádné pomoci?
+- Vedlo pravidlo k jednomu rozhodnutí nebo kroku?
+- Zůstala původní široká změna zavřená?
+- Je případná oprava opravdu lokální?
+- Pokud jde o slabý signál, má čekací hranici?
+- Pokud jde o skutečný návrat, je otevřený jako samostatný malý krok?
+- Nevzniklo nové sledování, export, štítek nebo ruční evidence bez účelu?
+- Jsou případné zákaznické příklady anonymizované nebo zkrácené?
+- Je jasné, jestli pravidlo zůstává v tichém provozu?
+
+První běžné použití po uzavřené údržbě má být obyčejné. To je pointa. Pokud pravidlo potřebuje fanfáry, průvodce a zvláštní tabulku, není v tichém provozu. Pokud ho člověk najde, použije a nic zbytečného po něm nezůstane, vyhráli jste tu méně nápadnou, ale velmi užitečnou hru: dobré pravidlo se stalo součástí práce.
+
 ## Pracovní log
 
+- 2026-06-30: Doplněna úvodní podkapitola o prvním běžném použití po uzavřené údržbě tichého provozu: tři otázky použití, praktický příklad, čtyři výsledky, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-06-30: Doplněna úvodní podkapitola o uzavření první běžné údržby tichého provozu: čtyři uzavírací stavy, praktický příklad, úklid dočasných stop, privacy-first uzavření, karta, mini workshop a checklist.
 - 2026-06-30: Doplněna úvodní podkapitola o první běžné údržbě tichého provozu: kontrola kanonického místa, přítomného času pravidla, návratového signálu, privacy-first datové stopy, karta, mini workshop a checklist.
 - 2026-06-30: Doplněna úvodní podkapitola o převodu uzavřeného slabého signálu do tichého provozu: pravidlo v přítomném čase, ukončení mimořádné kontroly, privacy-first úklid, karta, mini workshop a checklist.
