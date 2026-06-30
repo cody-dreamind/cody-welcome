@@ -275361,8 +275361,174 @@ Pokud tým během workshopu navrhne novou metriku, nové pole nebo třetí ově�
 
 Tichý provoz je dobrý konec malé smyčky. Pravidlo funguje, lidé ho najdou, data se nehromadí a tým se může vrátit k práci, která má dnešní důvod. Codyho komentář: když se po dobře uzavřeném slabém signálu nic dalšího neděje, není to nuda. Je to systém, který se konečně naučil mlčet ve správnou chvíli.
 
+## První běžná údržba tichého provozu
+
+Tichý provoz neznamená, že se pravidla už nikdy nikdo nedotkne. Znamená, že se pravidlo nekontroluje mimořádně jen proto, že kdysi vzniklo po slabém signálu. První běžná údržba je normální servisní okamžik: tým stejně prochází šablonu, checklist, formulář, onboardingový krok nebo interní instrukci, a při tom si ověří, jestli pravidlo pořád sedí na svém místě.
+
+Rozdíl proti návratu je zásadní. Návrat otevírá téma kvůli signálu. Běžná údržba jen kontroluje, jestli stabilní pracovní místo nezestárlo, nezdvojilo se nebo nezačalo potichu sbírat víc dat, než bylo domluvené. Pokud při údržbě žádný problém nenajdete, výsledek není "nic". Výsledek je potvrzení klidu.
+
+Začněte větou:
+
+```text
+Tiché pravidlo kontrolujeme jen v rámci běžné údržby pracovního místa, ne jako samostatné téma.
+```
+
+Tahle věta chrání rozsah. Když ji vynecháte, údržba se snadno převlékne za nový projekt: někdo vytáhne starou kartu, někdo chce "pro jistotu" doplnit metriku a za deset minut se řeší návrh, který měl zůstat zavřený. Ano, přesně takhle se z jedné věty v šabloně stane půldenní porada. Produktivita miluje kostým nenápadné revize.
+
+### Co při první údržbě kontrolovat
+
+První běžná údržba má čtyři krátké kontroly:
+
+- Pravidlo je pořád na správném místě: člověk ho najde tam, kde opravdu pracuje.
+- Pravidlo je pořád v přítomném čase: nevypráví historii ověření, ale říká, co platí teď.
+- Návratový signál je pořád konkrétní: tým ví, kdy se téma znovu otevře.
+- Datová stopa zůstává malá: nevzniklo nové pole, export, štítek, tabulka ani tracker bez rozhodovací otázky.
+
+První kontrola je o ergonomii. Pokud pravidlo patří k potvrzovací šabloně, má být u potvrzovací šablony. Pokud patří k formuláři, má být u formuláře. Pokud člověk musí lovit v rozhodovacím archivu, tichý provoz se změnil na archeologii. To není provozní disciplína, to je placené hledání pokladů bez pokladu.
+
+Druhá kontrola je o jazyku. Staré věty typu "po testu jsme zjistili" nebo "zatím necháváme" časem ztrácejí sílu. V tichém provozu má být pravidlo napsané jako současný pracovní stav:
+
+```text
+U relevantní B2B poptávky bez rozpočtového kontextu nejdřív posíláme volitelnou otázku v potvrzovacím e-mailu. Povinné pole ve formuláři nepřidáváme.
+```
+
+Třetí kontrola je o návratu. Návratový signál nesmí být nálada. "Když to začne zase drhnout" je slabé. "Tři relevantní poptávky za sebou nejde kvalifikovat bez stejného ručního doptání" už je rozpoznatelné.
+
+Čtvrtá kontrola je privacy-first brzda. Stabilní pravidlo se nemá postupně obalovat pomocnou evidencí. Pokud někdo při běžné údržbě navrhne novou metriku, nejdřív musí říct, jaké rozhodnutí by změnila. Bez odpovědi se metrika nepřidává.
+
+### Praktický příklad
+
+Tiché pravidlo:
+
+```text
+U relevantní B2B poptávky bez rozpočtového kontextu lze poslat volitelnou otázku v potvrzovacím e-mailu. Formulář se nemění a rozpočet se neukládá jako nový povinný CRM atribut.
+```
+
+První běžná údržba:
+
+```text
+Pracovní místo:
+Měsíční kontrola obchodních e-mailových šablon.
+
+Co sedí:
+Věta je přímo u potvrzovací šablony a obchod ji najde bez staré rozhodovací karty.
+
+Co dolaďujeme:
+Přepisujeme "lze poslat" na "posílej jen tehdy, když bez odpovědi nejde navrhnout další konkrétní krok", protože původní formulace byla moc široká.
+
+Co neotevíráme:
+Povinné pole ve formuláři, scoring, nový report ani další sledování odpovědí.
+
+Privacy-first závěr:
+Do běžného provozu nepřidáváme nový údaj. Pravidlo zůstává v šabloně, konkrétní odpovědi zůstávají jen v obchodním vlákně.
+```
+
+Všimněte si velikosti opravy. Údržba našla slabší formulaci, takže opravila formulaci. Neotevřela znovu původní návrh, nevymyslela novou evidenci a nezačala měřit všechno, co se kolem věty mihne. To je přesně rozdíl mezi údržbou a neřízeným návratem.
+
+### Tři výsledky první údržby
+
+Po kontrole vyberte jeden ze tří stavů:
+
+- Ponechat beze změny: pravidlo je najitelné, použitelné, datově střídmé a návratový signál pořád sedí.
+- Dolaďte jedno pracovní místo: pravidlo platí, ale potřebuje lepší formulaci, odkaz nebo umístění.
+- Otevřít návratový signál: údržba odhalila konkrétní opakovaný problém, který už nejde vyřešit lokální formulací.
+
+Stav `ponechat beze změny` je plnohodnotný výsledek. Není potřeba si vymýšlet práci jen proto, že jste si na pravidlo vzpomněli. Zapište kontrolu a nechte téma v klidu.
+
+Stav `dolaďte jedno pracovní místo` je servisní zásah. Opravte přesně to místo, kde pravidlo selhává: větu u šablony, odkaz v checklistu, název rozhodovacího bloku nebo umístění poznámky. Pokud oprava potřebuje víc než jedno pracovní místo, pravděpodobně už nejste v údržbě.
+
+Stav `otevřít návratový signál` používejte opatrně. Nestačí, že někomu pravidlo připadá staré. Musí existovat konkrétní důkaz, že tichý provoz už nestačí. Pak se vraťte k návratové kartě a otevřete nový malý krok, ne rovnou původní široký návrh.
+
+### Privacy-first údržba
+
+Běžná údržba je ideální chvíle zeptat se, jestli pravidlo nezačalo po cestě vytvářet stínovou evidenci. Ta často nevypadá jako velký problém. Je to jeden sloupec v tabulce, jeden tag v CRM, jedna kopie zákaznické odpovědi v poznámce, jeden screenshot v chatu. Jenže přesně z těchto drobností vzniká datový nepořádek.
+
+Použijte tři otázky:
+
+```text
+Vznikla od převodu do tichého provozu nová datová stopa?
+
+Mění tato stopa nějaké rozhodnutí?
+
+Pokud ne, kde ji smažeme, anonymizujeme nebo přestaneme vytvářet?
+```
+
+Pokud stopa opravdu pomáhá rozhodnutí, dejte jí vlastníka, účel a dobu životnosti. Pokud jen uklidňuje pocit, že "máme víc informací", ukončete ji. Codyho komentář: víc informací je super, dokud se z nich nestane víc odpovědnosti bez víc rozhodnutí. To je obchod, který bych nebral ani s cashbackem.
+
+### Karta první běžné údržby
+
+```text
+Tiché pravidlo:
+
+Kanonické pracovní místo:
+
+Běžná údržba, ve které pravidlo kontrolujeme:
+
+Je pravidlo najitelné?
+- ano
+- ne
+- jen s pomocí
+
+Je napsané v přítomném čase?
+- ano
+- ne
+
+Je návratový signál pořád konkrétní?
+- ano
+- ne
+
+Vznikla nová datová stopa?
+- ne
+- ano, a mění toto rozhodnutí:
+- ano, ale nemá jasný účel:
+
+Výsledek údržby:
+- ponechat beze změny
+- doladit jedno pracovní místo
+- otevřít návratový signál
+
+Co přesně měníme:
+
+Co zůstává zavřené:
+
+Co mažeme, anonymizujeme nebo přestáváme sbírat:
+
+Vlastník pracovního místa:
+
+Datum další běžné údržby:
+```
+
+Karta nemá vytvořit nový proces. Má zabránit tomu, aby se běžná údržba tvářila jako návrat a aby tichý provoz potichu přibral další data.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: otevřete kanonické pracovní místo a najděte pravidlo.
+2. Minuta 2: přečtěte pravidlo nahlas jako pracovní instrukci.
+3. Minuta 3: ověřte návratový signál.
+4. Minuta 4: najděte případnou novou datovou stopu.
+5. Minuta 5: vyberte jeden výsledný stav.
+6. Minuta 6: zapište lokální opravu nebo potvrzení klidu.
+
+Když se během workshopu objeví téma, které vyžaduje širší změnu, neřešte ho uvnitř údržby. Zapište návratový signál a otevřete samostatný malý krok. Údržba má být servis, ne tajný tunel do nového projektu.
+
+### Checklist první běžné údržby
+
+- Kontrolujeme pravidlo v rámci existující údržby, ne jako mimořádné téma?
+- Je pravidlo stále v jednom kanonickém pracovním místě?
+- Najde ho člověk bez staré rozhodovací karty?
+- Je formulované jako současné pravidlo, ne jako historie testu?
+- Je návratový signál konkrétní a poznatelný?
+- Nevznikla nová pomocná evidence bez jasného rozhodnutí?
+- Pokud vznikla datová stopa, má účel, vlastníka a konec?
+- Případná oprava se týká jen nejbližšího pracovního místa?
+- Původní široký návrh zůstává zavřený?
+- Výsledek údržby je zapsaný jako klid, lokální oprava, nebo návratový signál?
+
+První běžná údržba tichého provozu má potvrdit, že pravidlo opravdu žije normálně. Když funguje, nechte ho být. Když potřebuje drobnou úpravu, opravte nejbližší místo. A když se objeví skutečný návratový signál, otevřete ho čistě. Tak se systém učí pečovat o pravidla bez toho, aby z každé péče vznikla další evidence.
+
 ## Pracovní log
 
+- 2026-06-30: Doplněna úvodní podkapitola o první běžné údržbě tichého provozu: kontrola kanonického místa, přítomného času pravidla, návratového signálu, privacy-first datové stopy, karta, mini workshop a checklist.
 - 2026-06-30: Doplněna úvodní podkapitola o převodu uzavřeného slabého signálu do tichého provozu: pravidlo v přítomném čase, ukončení mimořádné kontroly, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-30: Doplněna úvodní podkapitola o uzavření druhého běžného použití po návratu slabého signálu do klidu: uzavírací stavy, praktický příklad, úklid dočasných stop, privacy-first uzavření, karta, mini workshop a checklist.
 - 2026-06-30: Doplněna úvodní podkapitola o druhém běžném použití po návratu slabého signálu do klidu: kdy ho vůbec dělat, tři ověřovací otázky, čtyři výsledné stavy, privacy-first kontrola, karta, mini workshop a checklist.
