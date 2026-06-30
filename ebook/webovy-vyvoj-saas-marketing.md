@@ -274466,8 +274466,195 @@ Když během workshopu někdo navrhne "pro jistotu měsíční kontrolu", požá
 
 Návrat uzavřeného slabého signálu do dlouhodobého klidu je malý, ale důležitý konec smyčky. Díky němu se tým poučí z podnětu, uklidí po sobě a nepřidá další provozní vrstvu jen proto, že se na chvíli něco mihlo v radaru. Klid pak není zapomnění. Je to vědomě udržovaná hranice.
 
+## První běžné použití po návratu slabého signálu do klidu
+
+Když se uzavřený slabý signál vrátí do dlouhodobého klidu, další zkouška nemá být speciální audit. Speciální audit by nenápadně popřel předchozí rozhodnutí: místo klidu by vznikla nová mimořádná péče, jen s lepším názvem. První běžné použití má proto proběhnout v normálním pracovním rytmu. Někdo použije šablonu, otevře formulář, připraví obchodní odpověď, aktualizuje stránku nebo projde onboarding. A teprve v tom běžném použití se ukáže, jestli návrat do klidu opravdu funguje.
+
+Cíl není dokazovat, že slabý signál byl navždy bezvýznamný. Cíl je ověřit, že po něm nezůstala skrytá pracovní vrstva: pomocná tabulka, zvláštní štítek, tichá kontrola, nejasná lokální věta nebo nový zvyk ptát se na data, která tým výslovně nechtěl sbírat.
+
+Začněte větou:
+
+```text
+První běžné použití po návratu do klidu kontrolujeme jen v rozsahu běžné práce:
+```
+
+Za ni doplňte konkrétní pracovní místo:
+
+```text
+První běžné použití po návratu do klidu kontrolujeme jen v rozsahu běžné práce:
+Obchod použije upravenou šablonu při další relevantní poptávce. Sledujeme pouze to, jestli věta pomůže vést rozhovor bez nového pole pro rozpočet, ručního štítku nebo pomocného exportu.
+```
+
+Taková věta drží hranici. Neříká "teď měsíc sledujeme všechny poptávky". Říká: až běžná práce sama nastane, podíváme se, jestli pravidlo funguje bez nových berliček. To je rozdíl mezi ověřením a nenápadným zavedením monitoringu.
+
+### Tři kontrolní otázky
+
+Při prvním běžném použití si položte jen tři otázky:
+
+- Najde člověk správné pravidlo nebo lokální větu bez vysvětlování?
+- Dokáže podle ní udělat rozhodnutí bez otevření staré historie slabého signálu?
+- Nevznikla při použití nová datová stopa, kterou návrat do klidu výslovně nechtěl přenášet?
+
+První otázka testuje najitelnost. Pokud člověk potřebuje, aby mu někdo připomněl, kde závěr bydlí, klid je formální. Pravidlo je sice zapsané, ale v reálné práci nefunguje. Oprava má být malá: doplnit odkaz, přejmenovat kotvu, posunout větu k místu použití. Neotevírejte kvůli tomu celou historii slabého signálu.
+
+Druhá otázka testuje rozhodnutelnost. Běžný uživatel pravidla nemá luštit, proč se minule něco neotevřelo. Má umět udělat dnešní krok: odpovědět zákazníkovi, nepřidat pole, použít šablonu, neotevřít nový report. Pokud musí číst starý záznam, pravidlo je pořád moc závislé na paměti lidí.
+
+Třetí otázka testuje privacy-first výsledek. Slabé signály často zanechávají zvyk "jen si to poznačit". Při prvním běžném použití proto zkontrolujte, jestli někdo nezačal vytvářet náhradní evidenci: bokem v tabulce, v poznámce u kontaktu, ve štítku v CRM nebo v komentáři, který obsahuje víc osobních či obchodních detailů, než je potřeba pro dnešní rozhodnutí.
+
+Codyho komentář: nejzrádnější věta v provozu je "to si jen poznamenám". Někdy je to poctivá pracovní stopa. Jindy je to malé datové akvárium, ve kterém začnou plavat věci, které už měly zůstat v řece původního kontextu. Ano, metafora je divná. Pointa je pořád správná.
+
+### Praktický příklad
+
+Předchozí závěr:
+
+```text
+Slabý signál:
+Jeden obchodní rozhovor se zdržel kvůli nejistému rozpočtu.
+
+Návrat do klidu:
+Kanonické pravidlo se nemění. Rozpočet nezavádíme jako povinné formulářové pole ani jako CRM atribut. U obchodní šablony zůstává jedna lokální věta, která pomáhá nejdřív pojmenovat cíl a rozsah.
+```
+
+První běžné použití:
+
+```text
+Situace:
+Přišla nová relevantní poptávka na menší SaaS úpravu.
+
+Použití pravidla:
+Obchodník použil lokální větu ze šablony: "Nejdřív si pojďme potvrdit cíl, rozsah a rozhodovací omezení; podle toho teprve poznáme rozumný rozpočtový rámec."
+
+Výsledek:
+Rozhovor se pohnul bez povinného pole, bez nového CRM atributu a bez pomocné tabulky rozpočtů.
+```
+
+Závěr po použití:
+
+```text
+První běžné použití potvrdilo klid:
+Lokální věta je použitelná, kanonické pravidlo zůstává beze změny a nevzniká žádná nová evidence rozpočtů. Do šablony nepřidáváme další příklady, dokud nepřijde nový návratový signál.
+```
+
+Tohle je dobrý výsledek právě proto, že je krátký. Nepotřebuje dashboard. Nepotřebuje nový status. Nepotřebuje měsíční report "kolikrát jsme se nezeptali na rozpočet", protože to by byla skutečně smutná tabulka. Stačí potvrdit, že běžná práce proběhla bez návratu staré datové chuti.
+
+### Čtyři výsledné stavy
+
+Po prvním běžném použití vyberte jeden ze čtyř stavů:
+
+- Klid drží: pravidlo nebo lokální věta funguje, nevznikla nová datová stopa a není co měnit.
+- Chybí najitelnost: závěr je správný, ale člověk ho v běžné práci nenašel.
+- Chybí rozhodnutelnost: člověk závěr našel, ale podle textu nevěděl, co má udělat.
+- Vznikla náhradní stopa: práce sice proběhla, ale někdo si začal bokem značit data nebo výjimky.
+
+U stavu "klid drží" nic nevylepšujte. To je těžší, než to zní. Úspěšné první použití není pozvánka k dalšímu ladění. Zapište jednu větu a nechte pravidlo běžet.
+
+U chybějící najitelnosti opravte pouze cestu. Přesuňte větu, doplňte odkaz, upravte název kotvy nebo přidejte krátkou poznámku do místa, kde člověk skutečně pracuje. Neměňte rozhodnutí, pokud problém byl jen v navigaci.
+
+U chybějící rozhodnutelnosti opravte formulaci pravidla. Dobrá oprava obvykle přidá sloveso: nepřidávat pole, použít větu, ponechat rozhovor v původním vlákně, nezakládat export, vrátit se až při konkrétním signálu. Pokud pravidlo jen vysvětluje historii, ale neříká dnešní krok, je to pamětní deska, ne pracovní nástroj.
+
+U náhradní datové stopy zastavte nejdřív stopu, ne lidi. Napište, proč vznikla: nejasné pravidlo, obava ze ztráty informace, tlak na kontrolu, nebo starý zvyk. Potom rozhodněte, zda stačí smazat či anonymizovat pomocný záznam a zpřesnit pravidlo, nebo jestli náhradní stopa ukazuje skutečný návratový signál. Bez téhle kontroly se privacy-first hodnota rozpadá v detailech.
+
+### Privacy-first kontrola prvního použití
+
+Privacy-first kontrola má být stručná a konkrétní. Nepište obecné prohlášení, že data chráníte. Napište, co přesně nevzniklo.
+
+Použijte šablonu:
+
+```text
+Při prvním běžném použití nevzniklo:
+
+Pokud vzniklo něco navíc, rušíme nebo zobecňujeme:
+
+Do běžného pravidla nepřidáváme:
+```
+
+Příklad:
+
+```text
+Při prvním běžném použití nevzniklo:
+Nové formulářové pole pro rozpočet, CRM atribut, pomocná tabulka ani štítek pro hlídání podobných poptávek.
+
+Pokud vzniklo něco navíc, rušíme nebo zobecňujeme:
+Jednu osobní poznámku k rozhovoru necháváme pouze v původním obchodním vlákně; do šablony přenášíme jen obecnou formulaci otázky.
+
+Do běžného pravidla nepřidáváme:
+Měsíční kontrolu, reporting rozpočtových dotazů ani nový seznam výjimek.
+```
+
+Tím se z privacy-first hodnoty stane provozní rozhodnutí. Nejde o to nikdy nic nezapsat. Jde o to, aby se detail držel tam, kde má legitimní účel, a aby z jedné slabé situace nevznikla nová vrstva sledování.
+
+### Karta prvního běžného použití po návratu do klidu
+
+```text
+Téma v dlouhodobém klidu:
+
+Uzavřený slabý signál:
+
+Režim návratu do klidu:
+
+První běžná situace, ve které se pravidlo použilo:
+
+Kdo pravidlo použil:
+
+Našel člověk správné místo bez vysvětlování?
+- ano
+- ne, oprava najitelnosti:
+
+Šlo podle pravidla udělat rozhodnutí?
+- ano
+- ne, oprava formulace:
+
+Vznikla nová datová stopa?
+- ne
+- ano, jaká:
+
+Co rušíme, mažeme, anonymizujeme nebo zobecňujeme:
+
+Výsledný stav:
+- klid drží
+- chybí najitelnost
+- chybí rozhodnutelnost
+- vznikla náhradní stopa
+
+Co zůstává výslovně beze změny:
+
+Budoucí návratový signál:
+
+Vlastník:
+
+Datum:
+```
+
+Karta má smysl jen jednou: při prvním běžném použití po návratu do klidu. Pokud ji začnete vyplňovat pokaždé, udělali jste z ní nový proces. A nový proces po návratu do klidu je přesně věc, které se tahle část snaží zabránit. Krásná ironie, ale raději bez ní.
+
+### Mini workshop na 5 minut
+
+1. Minuta 1: pojmenujte běžnou situaci, ve které se pravidlo použilo.
+2. Minuta 2: ověřte, jestli člověk našel správné místo bez vysvětlování.
+3. Minuta 3: ověřte, jestli podle pravidla udělal rozhodnutí.
+4. Minuta 4: zkontrolujte, jestli nevznikla náhradní datová stopa.
+5. Minuta 5: zapište jeden výsledný stav a jednu věc, která zůstává beze změny.
+
+Pokud se během pěti minut objeví debata o nové metrice, novém reportu nebo pravidelné kontrole, vraťte se k návratovému signálu. Buď se opravdu objevil důvod otevřít nové téma, nebo tým jen hledá jistotu navíc. Jistota navíc je drahá měna: často se platí daty, časem a pozorností.
+
+### Checklist prvního běžného použití
+
+- Proběhlo ověření v normální pracovní situaci, ne ve speciálním auditu?
+- Je jasné, které pravidlo nebo lokální věta se použila?
+- Našel ji člověk bez ústního vysvětlení od autora změny?
+- Dokázal podle ní udělat dnešní rozhodnutí?
+- Zůstalo kanonické pravidlo beze změny, pokud nebyl jasný důvod ho upravit?
+- Nevzniklo nové pole, štítek, pomocná tabulka, export, screenshotová evidence ani report?
+- Pokud něco navíc vzniklo, je rozhodnuté, zda se to ruší, anonymizuje, nebo vrací do původního pracovního zdroje?
+- Je zapsané, co zůstává výslovně zavřené?
+- Je budoucí návratový signál pořád konkrétní?
+- Nevznikla nová pravidelná kontrola bez rozhodovací otázky?
+
+První běžné použití po návratu slabého signálu do klidu má potvrdit, že systém umí pokračovat normálně. Nejlepší výsledek je obyčejný: člověk najde správnou větu, udělá dobré rozhodnutí, nepřidá zbytečná data a pokračuje v práci. Žádné fanfáry. Jen klid, který přežil kontakt s realitou.
+
 ## Pracovní log
 
+- 2026-06-30: Doplněna úvodní podkapitola o prvním běžném použití po návratu slabého signálu do klidu: kontrolní otázky, praktický příklad, výsledné stavy, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-06-30: Doplněna krátká úvodní poznámka, aby neotevřený krok výslovně potvrdil, co zůstává v běžném rytmu beze změny.
 - 2026-06-30: Doplněna úvodní podkapitola o návratu uzavřeného slabého signálu do dlouhodobého klidu: režimy návratu, kanonické pravidlo, lokální věta, privacy-first úklid dočasných stop, karta, mini workshop a checklist.
 - 2026-06-30: Doplněna úvodní podkapitola o uzavření slabého signálu v dlouhodobém klidu: uzavírací stavy, čekací hranice místo sledování, privacy-first úklid datové stopy, karta, mini workshop a checklist.
