@@ -273882,8 +273882,205 @@ Když se během sedmi minut objeví nová otázka, neřešte ji v tomto workshop
 
 Dlouhodobý klid je dobrý výsledek. Znamená, že systém se poučil, pravidlo drží, historie nezmizela a provoz si nevyrábí zbytečnou stopu. Když se téma někdy vrátí, vrátí se přes jasný signál. Do té doby má tým pracovat na současných problémech, ne hlídat starý neklid v tabulkách.
 
+## Slabý signál v dlouhodobém klidu
+
+Dlouhodobý klid neznamená, že se kolem tématu už nikdy nic neobjeví. Znamená, že každý nový podnět neotevírá práci automaticky. Mezi úplným tichem a skutečným návratovým signálem existuje mezistav: slabý signál. Je to poznámka v obchodním hovoru, jeden support dotaz, drobné zaváhání při použití šablony nebo pocit člověka, který si není jistý, jestli pravidlo pořád sedí.
+
+Slabý signál si zaslouží pozornost, ale ne zasloužený projekt. První reakce má být krátká:
+
+```text
+Zachytili jsme slabý signál k tématu v dlouhodobém klidu. Teď neotevíráme práci, jen ověřujeme, jestli signál odpovídá domluvenému návratovému signálu.
+```
+
+Tahle věta chrání dvě strany najednou. Neignorujete realitu, protože podnět zapisujete a porovnáváte s pravidlem. Zároveň z jednoho pozorování nevyrábíte nový backlog, novou metriku ani nové sledování. Slabý signál je kontrola dveří, ne vstupenka do celé místnosti.
+
+Nejdřív otevřete jen kanonické pravidlo a poslední kartu dlouhodobého klidu. Neotevírejte starou historii návratu, pokud k tomu není důvod. Historie je užitečná až ve chvíli, kdy slabý signál skutečně sedí na návratový signál nebo když dnešní pravidlo nejde najít.
+
+### Jak slabý signál poznat
+
+Slabý signál má obvykle jeden z těchto tvarů:
+
+- Jednorázová výjimka: jeden zákazník, jedna poptávka nebo jeden interní průchod narazil na okrajovou situaci.
+- Nejasná formulace: člověk pravidlo najde, ale musí si domyslet drobný detail.
+- Povědomý pocit: někdo říká, že se "možná vrací starý problém", ale zatím nemá provozní důkaz.
+- Náhradní obchůzka: tým si jednou pomohl bokem, například poznámkou v e-mailu nebo ručním doplněním informace.
+
+Žádný z těchto tvarů sám o sobě nestačí k otevření práce. Stačí k malé kontrole:
+
+```text
+Je to návratový signál, lokální tření, nebo jen poznámka bez další akce?
+```
+
+Pokud odpověď neznáte během několika minut, nezačínejte sbírat další data. Zapište slabý signál a určete, co by z něj udělalo skutečný návrat. V dlouhodobém klidu je lepší přesná čekací věta než předčasná analýza.
+
+### Tři krátké kontroly
+
+U slabého signálu projděte tři kontroly:
+
+- Shoda se signálem: odpovídá podnět přesně návratovému signálu z karty dlouhodobého klidu?
+- Běžné pracovní místo: vznikl podnět tam, kde pravidlo opravdu žije, nebo mimo něj?
+- Datová stopa: vyžaduje reakce nové pole, štítek, export, kopii e-mailu, tracker nebo dočasný seznam?
+
+Když první kontrola neprojde, práci neotevírejte. Můžete zapsat poznámku:
+
+```text
+Slabý signál neodpovídá návratovému signálu. Téma zůstává v dlouhodobém klidu.
+```
+
+Když druhá kontrola neprojde, nejde o návrat pravidla, ale o problém najitelnosti nebo předání. Opravte nejbližší pracovní místo, pokud je oprava jasná a malá. Nepřepisujte celé pravidlo.
+
+Když třetí kontrola ukáže novou datovou stopu, zpomalte. Slabý signál nesmí být záminka k zavedení sledování "jen na chvíli", pokud nemá konec a rozhodovací otázku. Dočasné sledování je pořád sledování. Krátké, nenápadné a o to víc náchylné zůstat v provozu, když se nikdo nedívá.
+
+### Praktický příklad
+
+Téma v dlouhodobém klidu:
+
+```text
+U poptávkového formuláře nezavádíme povinné pole pro rozpočet. Téma se vrátí pouze pokud dvě relevantní poptávky za sebou nepůjdou kvalifikovat bez nového interního sběru rozpočtu.
+```
+
+Slabý signál:
+
+```text
+Jeden obchodní rozhovor se zdržel, protože klient neměl představu o rozpočtu.
+```
+
+První kontrola:
+
+```text
+Nejde o dvě relevantní poptávky za sebou a nešlo o nemožnost kvalifikace. Šlo o jeden rozhovor s nejasným očekáváním.
+```
+
+Rozhodnutí:
+
+```text
+Téma zůstává v dlouhodobém klidu. Neotevíráme nové pole, lead scoring ani interní štítek. Do follow-up poznámky si obchod zapíše obecnou formulaci otázky na rozsah, bez ukládání samostatného rozpočtového údaje do formuláře.
+```
+
+Tady je důležitý detail: reakce nezmizela, ale zůstala lokální. Tým neříká "nic se nestalo". Říká "tohle zatím není návratový signál, uděláme jen nejmenší úpravu v místě, kde vzniklo tření". Tak se z dlouhodobého klidu nestane slepota, ale ani permanentní servisní režim.
+
+### Čtyři výsledné stavy
+
+Po kontrole slabého signálu vyberte jeden ze čtyř stavů:
+
+- Bez akce: signál neodpovídá návratovému signálu a neodhalil ani lokální tření.
+- Lokální dočištění: pravidlo platí, ale v jednom pracovním místě chybí drobná formulace, odkaz nebo příklad.
+- Čekací věta: signál ještě nestačí, ale je jasné, co by z něj udělalo skutečný návrat.
+- Skutečný návrat: signál odpovídá domluvené hranici a otevírá se nejmenší další krok.
+
+Každý stav má jiný zápis.
+
+```text
+Bez akce:
+Slabý signál neodpovídá návratovému signálu. Téma zůstává v dlouhodobém klidu bez další kontroly.
+
+Lokální dočištění:
+Pravidlo platí. Do pracovního místa doplňujeme jednu větu, aby se stejná nejasnost neopakovala.
+
+Čekací věta:
+Téma se neotevírá. Pokud se stejná situace objeví ještě jednou v relevantní poptávce, porovnáme ji s návratovým signálem.
+
+Skutečný návrat:
+Návratový signál se naplnil. Otevíráme nejmenší krok a původní širší rozsah zůstává zavřený.
+```
+
+Nejčastěji stačí první nebo druhý stav. To je v pořádku. Dlouhodobý klid má právě odfiltrovat drobné zachvění, které by jinak spustilo zbytečnou práci.
+
+### Privacy-first práce se slabým signálem
+
+Slabý signál je nebezpečný hlavně tím, že svádí k tichému sběru "pro jistotu". Typická věta zní:
+
+```text
+Pojďme si to pár týdnů značit, ať víme.
+```
+
+Někdy je to rozumné. Většinou ale nejdřív chybí rozhodovací otázka. Co přesně po pár týdnech rozhodnete? Kdo záznam vlastní? Kdy skončí? Jaká data se ukládají? Dá se stejná odpověď získat z běžné práce bez nového štítku?
+
+Privacy-first reakce na slabý signál začíná minimem:
+
+- nepřidávat nové povinné pole,
+- nespouštět nový tracker,
+- neexportovat data do dalšího nástroje,
+- nekopírovat osobní údaje do pomocné tabulky,
+- nezavádět nový štítek bez konce,
+- nezakládat report, který nemá rozhodovací otázku.
+
+Pokud opravdu potřebujete krátké ověření, napište ho jako uzavřený test:
+
+```text
+Po dobu nejbližších pěti relevantních poptávek si obchod pouze v existující poznámce označí, zda šlo kvalifikovat bez doptání na rozpočet. Nevzniká nové pole ani export. Po pěti poptávkách se poznámky smažou nebo zobecní do jedné věty v rozhodovacím záznamu.
+```
+
+Codyho komentář: slabé signály jsou skvělé v tom, že ukazují realitu dřív než problém vybuchne. Jsou hrozné v tom, že každý v nich vidí potvrzení svého oblíbeného nápadu. Proto se jich neptejte "co bychom mohli udělat". Ptejte se "splnilo to domluvenou hranici?". Méně divadla, víc provozní hygieny.
+
+### Karta slabého signálu
+
+```text
+Téma v dlouhodobém klidu:
+
+Kanonické pravidlo:
+
+Domluvený návratový signál:
+
+Nový slabý signál:
+
+Kde vznikl:
+
+Odpovídá návratovému signálu?
+- ano
+- ne
+- zatím nevíme
+
+Výsledný stav:
+- bez akce
+- lokální dočištění
+- čekací věta
+- skutečný návrat
+
+Co teď výslovně neotevíráme:
+
+Jaká data, pole, štítky, exporty nebo trackery nepřidáváme:
+
+Pokud vzniká krátké ověření, kdy skončí:
+
+Kde je zapsaný závěr:
+
+Vlastník:
+
+Datum:
+```
+
+Kartu nepoužívejte pro každou drobnou poznámku. Má smysl ve chvíli, kdy by slabý signál mohl otevřít staré téma nebo přidat novou datovou stopu. Pokud jde jen o běžnou otázku v týmu, stačí jedna věta u pracovního místa.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte nový slabý signál jednou větou.
+2. Minuta 2: otevřete kanonické pravidlo a návratový signál.
+3. Minuta 3: porovnejte nový signál s domluvenou hranicí.
+4. Minuta 4: vyberte jeden ze čtyř výsledných stavů.
+5. Minuta 5: napište, co se teď výslovně neotevírá.
+6. Minuta 6: zkontrolujte, že nevzniká nová datová stopa bez konce.
+
+Pokud se tým během workshopu začne vracet k celé historii, zastavte ho. Historie patří do hry až ve chvíli, kdy se naplnil návratový signál nebo když kanonické pravidlo selhalo. Slabý signál má nejdřív projít přes dnešní hranici, ne přes archiv emocí.
+
+### Checklist slabého signálu
+
+- Je nový podnět popsaný jako konkrétní situace, ne jako obecný pocit?
+- Porovnali jsme ho s přesným návratovým signálem?
+- Víme, kde podnět vznikl?
+- Neotevíráme starou historii dřív, než je potřeba?
+- Vybrali jsme jeden výsledný stav?
+- Je jasné, co se teď výslovně neotevírá?
+- Nepřidáváme nové pole, štítek, export, tracker ani report bez rozhodovací otázky?
+- Pokud vzniká krátké ověření, má konec a používá existující pracovní stopu?
+- Zůstává kanonické pravidlo v dlouhodobém klidu, pokud se návratový signál nenaplnil?
+- Umí člověk za měsíc poznat, jestli šlo o slabý signál, lokální dočištění, nebo skutečný návrat?
+
+Slabý signál je dobrý sluha a špatný šéf. Má vás upozornit, že se něco možná mění. Nemá vám diktovat nové sledování, novou šablonu ani nové rozhodovací kolečko. Dokud nesplní domluvenou hranici, dlouhodobý klid zůstává výchozí stav.
+
 ## Pracovní log
 
+- 2026-06-30: Doplněna úvodní podkapitola o slabém signálu v dlouhodobém klidu: rozlišení od skutečného návratu, tři kontroly, výsledné stavy, privacy-first práce bez zbytečné datové stopy, karta, mini workshop a checklist.
 - 2026-06-30: Doplněna úvodní podkapitola o převodu uzavřeného skutečného návratu do dlouhodobého klidu: kanonické místo, historie, návratový signál, privacy-first úklid datových stop, karta, mini workshop a checklist.
 - 2026-06-30: Doplněna úvodní podkapitola o uzavření druhého běžného použití po skutečném návratu: čtyři uzavírací stavy, praktický příklad, úklid pomocných stop, privacy-first uzavření, karta, mini workshop a checklist.
 - 2026-06-29: Doplněna úvodní podkapitola o druhém běžném použití po uzavřeném skutečném návratu: kdy ho vynechat, tři otázky samostatnosti, praktický příklad, privacy-first kontrola náhradních datových stop, karta, mini workshop a checklist.
