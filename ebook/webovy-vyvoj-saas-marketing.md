@@ -276923,6 +276923,182 @@ Pokud se během workshopu objeví nový problém, nedokončujte ho v téže kart
 
 Uzavření první kvartální kontroly má působit jako tečka, ne jako tři tečky. Pravidlo buď pokračuje, dostane malou lokální úpravu, změní návratový signál, nebo pustí do světa samostatnou otázku. V každém případě se kontrola sama nestává novým procesem. To je pointa dlouhodobého rytmu: dobrá pravidla mají být dostupná, ne slavnostně opečovávaná.
 
+## Druhá kvartální kontrola dlouhodobého rytmu
+
+Druhá kvartální kontrola je jiný test než první. První kontrola hlavně ověřuje, jestli pravidlo přežilo přechod z mimořádné péče do běžného rytmu. Druhá kontrola už testuje něco tvrdšího: jestli pravidlo funguje i ve chvíli, kdy kolem něj není čerstvá paměť, původní autor ani pocit, že "tohle jsme zrovna dodělali".
+
+Pokud pravidlo po druhém kvartálu pořád potřebuje vysvětlovat historii, není stabilní. Možná je užitečné, ale ještě není dobře uložené. Druhá kontrola proto nemá znovu dokazovat, že nápad byl správný. Má zjistit, jestli současný člověk v současné práci pozná, co má udělat, a nepotřebuje kvůli tomu otevřít staré poznámky.
+
+Začněte větou:
+
+```text
+Druhá kvartální kontrola ověřuje, zda pravidlo funguje bez čerstvé paměti první kontroly.
+```
+
+Tahle věta drží kontrolu při zemi. Nepotřebujete velkou retrospektivu, prezentaci ani přehled všech případů. Potřebujete jeden běžný průchod, jedno kanonické místo, jednu datovou kontrolu a jeden závěr.
+
+### Co se proti první kontrole mění
+
+Druhá kontrola se liší ve třech věcech:
+
+- Méně se ptá na přežití pravidla a víc na jeho samostatnost.
+- Méně řeší původní důvod změny a víc dnešní pracovní použití.
+- Přísněji odstraňuje zbytky dočasné evidence, protože po dvou kvartálech už "dočasné" často znamená "zapomenuté".
+
+Samostatnost pravidla poznáte podle jednoduchého testu. Dejte ho člověku, který nebyl u původní úpravy, a požádejte ho, aby podle něj rozhodl v běžné situaci. Pokud se zeptá na kontext zákazníka, cíl práce nebo hranici rozhodnutí, je to normální. Pokud se musí ptát, proč pravidlo vzniklo, kde je stará debata nebo co se tehdy myslelo konkrétním slovem, pravidlo není dostatečně samostatné.
+
+Druhá kontrola má také právo říct, že pravidlo je v pořádku a není co měnit. To není pasivita. Je to dobrá provozní hygiena. Ne každá kontrola má skončit úpravou; některé mají jen potvrdit, že věc může dál tiše sloužit.
+
+### Praktický příklad
+
+Původní dlouhodobé pravidlo:
+
+```text
+Rozpočtový kontext se u B2B poptávky doptává jen tehdy, když bez něj nejde navrhnout další konkrétní krok.
+```
+
+První kvartální kontrola ukázala, že pravidlo je v checklistu potvrzovacího e-mailu, bylo použité bez problému a nevznikla nová datová stopa.
+
+Druhá kvartální kontrola:
+
+```text
+Samostatnost:
+Nový člověk v obchodní podpoře našel pravidlo v checklistu a dokázal rozhodnout, že u jednoduché poptávky není nutné rozpočet doptávat v prvním e-mailu.
+
+Současná platnost:
+Pravidlo pořád odpovídá nabídce i způsobu kvalifikace poptávek.
+
+Datová stopa:
+Nevznikl seznam použití pravidla, nové pole v CRM ani export poptávek kvůli kontrole.
+
+Závěr:
+Pravidlo pokračuje v dlouhodobém rytmu beze změny. Další kontrola proběhne v běžném review obchodních šablon.
+```
+
+Všimněte si, co se v příkladu neděje. Tým nepřepisuje formulář, nezakládá report, nevrací se k původní debatě a nedělá z jedné dobré kontroly nový projekt. Jen ověřil, že pravidlo funguje bez čerstvé paměti. To je přesně výsledek, kvůli kterému dlouhodobý rytmus existuje.
+
+### Čtyři výsledky druhé kontroly
+
+Po druhé kontrole vyberte jeden ze čtyř výsledků:
+
+- Stabilní bez změny: pravidlo je najitelné, samostatné a nevytváří novou datovou stopu.
+- Stabilní s drobným přepisem: pravidlo funguje, ale jedna věta potřebuje zpřesnit pro člověka bez historie.
+- Slabé kanonické místo: pravidlo je správné, ale lidé ho nehledají tam, kde pracují.
+- Návrat do úpravy rytmu: pravidlo vyžaduje změnu běžného rytmu nebo návratového signálu.
+
+`Stabilní bez změny` je nejlepší konec. Zapište ho krátce a nepřidávejte další péči. Pokud pravidlo dvakrát prošlo kvartální kontrolou bez tření, zaslouží si méně pozornosti, ne víc.
+
+`Stabilní s drobným přepisem` se týká pouze formulace. Třeba nahradit interní zkratku běžným slovem, přidat jednu rozhodovací otázku nebo odstranit příklad, který už neodpovídá dnešní nabídce. Přepis nesmí měnit rozsah pravidla.
+
+`Slabé kanonické místo` znamená, že pravidlo není špatné, ale je špatně uložené. Lidé ho hledají v potvrzovací šabloně, ale ono bydlí v poznámce z review. Nebo ho hledají v obchodním playbooku, ale je schované v datové mapě. Oprava má přesunout pravidlo k práci, ne založit další kopii.
+
+`Návrat do úpravy rytmu` je nejsilnější výsledek. Použijte ho jen tehdy, když běžný rytmus opravdu neodpovídá realitě. Například kontrola probíhá kvartálně, ale pravidlo se používá každý týden v situaci s vyšším rizikem, nebo naopak kontrola probíhá často, i když se pracovní situace objeví jednou za rok. Úprava rytmu není trest. Je to přizpůsobení péče skutečné práci.
+
+### Privacy-first kontrola druhého kvartálu
+
+Druhá kontrola má položit jednu nepříjemně konkrétní otázku:
+
+```text
+Zůstalo po první kontrole něco, co mělo být dočasné?
+```
+
+Hledejte hlavně:
+
+- odkazy na konkrétní zákaznické zprávy,
+- kopie příkladů v pracovních dokumentech,
+- pomocné tabulky s případy použití,
+- screenshoty formulářů nebo CRM,
+- poznámky s obchodními detaily,
+- dočasné štítky, které se mezitím staly "normálními".
+
+Pokud něco takového najdete, nejdřív se zeptejte, jestli je to pořád potřeba pro rozhodnutí. Pokud ne, smažte to nebo anonymizujte. Pokud ano, převeďte to do řádné evidence s účelem, vlastníkem a retenčním pravidlem. Dlouhodobý rytmus nesmí být místo, kde se dočasné důkazy mění na trvalý nepořádek.
+
+Dobrá závěrečná privacy-first věta:
+
+```text
+Po druhé kvartální kontrole zůstává v pracovní trase pouze aktuální pravidlo; dočasné příklady z první kontroly byly odstraněné a nevzniká nová evidence použití.
+```
+
+Pokud kontrola odhalí zbytečnou datovou stopu, závěr má být konkrétní:
+
+```text
+Pomocná tabulka případů se ruší, protože pro další rozhodnutí stačí návratový signál v kanonickém pravidle; žádná zákaznická jména ani obchodní detaily nepřenášíme do dalšího kvartálu.
+```
+
+Codyho komentář: druhý kvartál je skvělý detektor věcí, které se tvářily dočasně a mezitím si v kanceláři postavily gauč. Nehádejte se s nimi. Prostě se zeptejte, jestli pořád slouží rozhodnutí. Když ne, ven.
+
+### Karta druhé kvartální kontroly
+
+```text
+Pravidlo nebo pracovní místo:
+
+Kanonické místo:
+
+Běžný rytmus:
+
+Kontrolované období:
+
+Kdo pravidlo použil bez znalosti původní historie:
+
+Odpověď na otázku samostatnosti:
+
+Odpověď na otázku současné platnosti:
+
+Odpověď na otázku datové stopy:
+
+Výsledek druhé kontroly:
+- stabilní bez změny
+- stabilní s drobným přepisem
+- slabé kanonické místo
+- návrat do úpravy rytmu
+
+Co se výslovně nemění:
+
+Co zůstává zavřené:
+
+Co se maže, anonymizuje nebo přesouvá mimo pracovní trasu:
+
+Jaká data se dál nesbírají:
+
+Další běžný rytmus:
+
+Návratový signál mimo rytmus:
+
+Záznam uložil:
+
+Datum:
+```
+
+Karta má ukázat, že pravidlo funguje bez původního příběhu. Pokud se při jejím vyplňování musíte pořád vracet k tomu, kdo co kdy myslel, je to výsledek kontroly: pravidlo potřebuje samostatnější formulaci nebo lepší kanonické místo.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: otevřete kanonické místo pravidla.
+2. Minuta 2: nechte pravidlo přečíst člověka bez původní historie.
+3. Minuta 3: ověřte jedno běžné rozhodnutí podle pravidla.
+4. Minuta 4: zkontrolujte, zda po první kontrole nezůstaly dočasné podklady.
+5. Minuta 5: vyberte jeden ze čtyř výsledků.
+6. Minuta 6: zapište závěr a odstraňte zbytečnou datovou stopu.
+
+Když se v druhé minutě ukáže, že pravidlo bez historie nejde pochopit, nepokračujte do velké debaty. Napište jednu lepší rozhodovací větu, ověřte ji na stejném příkladu a zbytek nechte zavřený. Druhá kvartální kontrola není místo pro přepis celé metodiky.
+
+### Checklist druhé kvartální kontroly
+
+- Ověřujeme samostatnost pravidla, ne znovu původní opravu?
+- Dokáže pravidlo použít člověk bez čerstvé paměti první kontroly?
+- Je kanonické místo pořád tam, kde se rozhodnutí opravdu dělá?
+- Odpovídá pravidlo současné nabídce, procesu nebo pracovní situaci?
+- Nevznikla po první kontrole dočasná evidence, která v provozu zůstala ze zvyku?
+- Jsou zákaznické, obchodní nebo behaviorální údaje smazané, anonymizované nebo vedené v řádné evidenci?
+- Vybrali jsme jeden ze čtyř výsledků?
+- Pokud pravidlo přepisujeme, je to jen drobný přepis bez změny rozsahu?
+- Pokud přesouváme kanonické místo, rušíme starou kopii místo vytváření další?
+- Pokud měníme rytmus, víme proč a nerozšiřujeme tím sběr dat?
+- Je napsané, co se výslovně nemění?
+- Může pravidlo po kontrole pokračovat bez nové mimořádné péče?
+
+Druhá kvartální kontrola je úspěšná, když pravidlo ztratí závislost na paměti týmu. Stane se obyčejnou součástí práce: najitelné, použitelné, střídmé na data a kontrolované jen v rytmu, který odpovídá realitě. Pokud po kontrole zůstane méně poznámek než před ní, nejspíš jste to udělali správně. Krásně neokázalé. Skoro podezřelé.
+
 ## Pracovní log
 
 - 2026-06-30: Doplněna úvodní podkapitola o uzavření první kvartální kontroly dlouhodobého rytmu: uzavírací věty, praktický příklad, hranice neotevírané práce, privacy-first úklid, karta, mini workshop a checklist.
@@ -278277,3 +278453,4 @@ Uzavření první kvartální kontroly má působit jako tečka, ne jako tři te
 - 2026-06-29: Doplněna úvodní podkapitola o uzavření prvního běžného použití po uzavřeném návratu z dlouhodobého klidu lokálního dočištění: uzavírací stavy, praktické příklady, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-29: Doplněna úvodní podkapitola o druhém běžném použití po uzavřeném návratu z dlouhodobého klidu lokálního dočištění: kdy druhé použití neplánovat, čtyři výsledky, praktické příklady, privacy-first uzavření, karta, mini workshop a checklist.
 - 2026-06-30: Doplněna úvodní podkapitola o uzavření druhého běžného použití po uzavřené údržbě tichého provozu: čtyři uzavírací stavy, praktické příklady, privacy-first práce s dočasnými stopami, karta, mini workshop a checklist.
+- 2026-06-30: Doplněna úvodní podkapitola o druhé kvartální kontrole dlouhodobého rytmu: samostatnost pravidla bez čerstvé paměti, čtyři výsledky kontroly, privacy-first úklid dočasných stop, karta, mini workshop a checklist.
