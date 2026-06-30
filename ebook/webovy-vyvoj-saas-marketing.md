@@ -275526,8 +275526,171 @@ Když se během workshopu objeví téma, které vyžaduje širší změnu, neře
 
 První běžná údržba tichého provozu má potvrdit, že pravidlo opravdu žije normálně. Když funguje, nechte ho být. Když potřebuje drobnou úpravu, opravte nejbližší místo. A když se objeví skutečný návratový signál, otevřete ho čistě. Tak se systém učí pečovat o pravidla bez toho, aby z každé péče vznikla další evidence.
 
+## Uzavření první běžné údržby tichého provozu
+
+První běžná údržba končí až ve chvíli, kdy je jasné, co se dál neděje. Nestačí projít kartu, opravit větu a odejít s pocitem, že "to máme". Tichý provoz potřebuje uzavírací větu, jinak se kolem něj začne držet měkká pozornost: někdo čeká na další kontrolu, někdo si vede bokem poznámku, někdo navrhne malý report "jen na měsíc". A přesně tady se z dobře uklizeného pravidla znovu stane malý administrativní magnet.
+
+Uzavření první údržby proto odpovídá na tři otázky:
+
+- Co je výsledný stav pravidla po údržbě?
+- Co přesně se změnilo, pokud se něco měnilo?
+- Co zůstává zavřené a nebude se dál sledovat?
+
+Začněte větou:
+
+```text
+První běžná údržba tichého pravidla je uzavřená; pravidlo zůstává v běžném provozu bez mimořádného sledování.
+```
+
+Pokud věta není pravdivá, údržba ještě není uzavřená. Buď máte lokální opravu, která čeká na propsání, nebo návratový signál, který je potřeba otevřít jako samostatný malý krok. Obojí je v pořádku. Jen to nesmí zůstat v mlze, protože mlha je místo, kde procesy potichu nabírají další tabulky. Codyho komentář: když někdo řekne "to si zatím jen necháme bokem", zpozorněte. Bokem často znamená mimo odpovědnost, ale pořád uvnitř datové stopy.
+
+### Čtyři uzavírací stavy
+
+Po první běžné údržbě vyberte jeden ze čtyř stavů:
+
+- Potvrzený klid: pravidlo funguje, nic se nemění a další kontrola proběhne až v běžném rytmu pracovního místa.
+- Uzavřená lokální oprava: opravili jste jednu větu, odkaz, umístění nebo název a výsledek je propsaný do kanonického místa.
+- Otevřený návratový signál: údržba našla opakovaný problém, který už nejde vyřešit lokální úpravou.
+- Zastavená údržba: zjistili jste, že chybí vlastník, kanonické místo nebo základní dohoda, takže nejdřív obnovíte minimum provozního pořádku.
+
+`Potvrzený klid` je nejlepší výsledek, pokud pravidlo opravdu slouží. Neznamená, že tým nic neudělal. Znamená, že odolal pokušení vyrábět práci z toho, že se na něco podíval.
+
+`Uzavřená lokální oprava` musí být malá. Typicky jde o formulaci, která byla moc široká, odkaz na staré místo, nejasný název bloku nebo větu, která pořád zněla jako experiment. Pokud oprava sahá do dvou a více pracovních míst, už nejde o lokální údržbu. Otevřete návratový signál.
+
+`Otevřený návratový signál` není selhání tichého provozu. Je to důkaz, že návratová hranice funguje. Důležité je nepřeskočit rovnou k původnímu velkému návrhu. Nový signál popište dnešním jazykem a začněte nejmenším krokem, který může rozhodnout, jestli pravidlo zestárlo.
+
+`Zastavená údržba` používejte výjimečně, ale bez studu. Pokud nikdo neví, kde pravidlo skutečně bydlí, nebo kdo ho vlastní, nemá smysl debatovat o jemném doladění. Nejdřív obnovte jedno pracovní místo a jednoho vlastníka.
+
+### Praktický příklad uzavření
+
+Situace:
+
+```text
+Tiché pravidlo:
+Rozpočtový kontext se u B2B poptávky doptává jen volitelně v potvrzovacím e-mailu. Formulář ani CRM nerozšiřujeme.
+
+Výsledek údržby:
+Obchod pravidlo našel, ale věta "lze poslat otázku" vedla k tomu, že ji někteří lidé posílali i u poptávek, kde nebyla potřeba.
+```
+
+Špatné uzavření:
+
+```text
+Ještě měsíc budeme sledovat, kdy se otázka posílá, a pak uvidíme.
+```
+
+Tohle otevírá novou evidenci bez jasného rozhodnutí. Vypadá to rozumně, protože "měsíc" zní krátce. Ve skutečnosti vzniká další datová stopa, další interpretace a další budoucí porada.
+
+Lepší uzavření:
+
+```text
+Uzavíráme jako lokální opravu. V potvrzovací šabloně měníme větu na:
+"Rozpočtový kontext se doptává jen tehdy, když bez něj nejde navrhnout další konkrétní krok."
+
+Povinné pole, scoring ani měsíční sledování neotevíráme. Návratový signál zůstává:
+"Tři relevantní poptávky za sebou nejde kvalifikovat bez stejného ručního doptání."
+```
+
+V lepší variantě je jasné, co se změnilo, co se nemění a kdy se téma smí vrátit. Pravidlo se zlepšilo, ale nedostalo kolem sebe nový kontrolní aparát. Ano, kontrolní aparát je skvělé sousloví pro věc, která se tváří důležitě a pak jen zabírá místo v kalendáři.
+
+### Co po uzavření odstranit
+
+Uzavření první údržby má malý úklidový ocas. Projděte místa, kde se během kontroly mohly objevit pomocné stopy:
+
+- dočasné poznámky z workshopu,
+- kopie šablony s komentáři,
+- screenshoty pracovního místa,
+- pomocné exporty nebo filtry,
+- chatové vlákno s konkrétními zákaznickými příklady,
+- osobní seznam "ještě sledovat".
+
+Ne všechno musí zmizet. Ale každá ponechaná stopa musí mít účel. Pokud slouží jako záznam rozhodnutí, přepište ji do rozhodovací karty a smažte pracovní kopie. Pokud slouží jako důkaz konkrétního zákaznického příkladu, zvažte anonymizaci nebo zkrácení. Pokud neslouží ničemu, pryč s ní. Digitální pořádek nevzniká tím, že máme lepší složky. Vzniká tím, že méně věcí vůbec ukládáme.
+
+### Privacy-first uzavření
+
+Privacy-first uzavření stojí na jedné větě:
+
+```text
+Po uzavření údržby nezůstává žádná nová datová stopa, která nemá účel, vlastníka a konec.
+```
+
+Použijte krátkou kontrolu:
+
+- Přidali jsme během údržby nové pole, štítek, filtr, export nebo ruční seznam?
+- Pokud ano, jaké rozhodnutí má měnit?
+- Kdo ho vlastní?
+- Kdy se smaže, anonymizuje nebo znovu vyhodnotí?
+- Dá se stejný výsledek získat bez ukládání osobních nebo zákaznických detailů?
+
+U evropského, privacy-first provozu je nejlevnější datová stopa ta, která vůbec nevznikne. Druhá nejlepší je ta, která má krátký život, jasný účel a není rozkopírovaná po nástrojích. Pokud potřebujete příklad pro tým, používejte raději zkrácený situační popis než celé zákaznické vlákno.
+
+### Karta uzavření první běžné údržby
+
+```text
+Tiché pravidlo:
+
+Kanonické pracovní místo:
+
+Datum první běžné údržby:
+
+Výsledek údržby:
+- potvrzený klid
+- uzavřená lokální oprava
+- otevřený návratový signál
+- zastavená údržba
+
+Co se změnilo:
+
+Co zůstává zavřené:
+
+Návratový signál:
+
+Mimořádné sledování po údržbě:
+- ne
+- ano, proč:
+
+Nová nebo dočasná datová stopa:
+- nevznikla
+- vznikla a byla odstraněna
+- vznikla a má účel/vlastníka/konec:
+
+Co mažeme, anonymizujeme nebo přestáváme sbírat:
+
+Další běžný rytmus kontroly:
+
+Vlastník pracovního místa:
+```
+
+Karta je záměrně strohá. Jejím cílem není dokumentovat, jak moc jste byli pečliví. Cílem je zabránit tomu, aby pečlivost vytvořila novou práci bez rozhodnutí.
+
+### Mini workshop na 5 minut
+
+1. Minuta 1: přečtěte výsledek první běžné údržby.
+2. Minuta 2: vyberte jeden ze čtyř uzavíracích stavů.
+3. Minuta 3: napište, co zůstává zavřené.
+4. Minuta 4: projděte dočasné datové stopy.
+5. Minuta 5: potvrďte další běžný rytmus nebo otevřete samostatný návratový signál.
+
+Pokud se v páté minutě nedaří říct, co bude dál, neprodlužujte workshop. Zapište stav `zastavená údržba` a obnovte základ: jedno pravidlo, jedno místo, jeden vlastník. Někdy je nejproduktivnější závěr ten, který přizná, že chybí obyčejný pořádek.
+
+### Checklist uzavření první údržby
+
+- Má údržba jasný uzavírací stav?
+- Je případná lokální oprava propsaná do kanonického pracovního místa?
+- Je původní široký návrh dál zavřený?
+- Je návratový signál pořád konkrétní?
+- Nevzniklo mimořádné sledování jen proto, že proběhla údržba?
+- Jsou dočasné poznámky, kopie, screenshoty a exporty smazané nebo zkrácené?
+- Má každá ponechaná datová stopa účel, vlastníka a konec?
+- Je jasné, kdy proběhne další běžná kontrola?
+- Ví vlastník pracovního místa, že téma nemá hlídat mimo běžný rytmus?
+- Umí tým říct jednou větou, proč je údržba uzavřená?
+
+Uzavření první běžné údržby vrací pravidlo zpátky do normálního života. Neoslavuje se, neobaluje metrikami a nečeká na zvláštní dohled. Prostě zůstane tam, kde pomáhá. A když nepomáhá, vrátí se až přes konkrétní signál. To je tichý provoz v dospělé podobě: má paměť, ale netahá za sebou kufr starých papírů.
+
 ## Pracovní log
 
+- 2026-06-30: Doplněna úvodní podkapitola o uzavření první běžné údržby tichého provozu: čtyři uzavírací stavy, praktický příklad, úklid dočasných stop, privacy-first uzavření, karta, mini workshop a checklist.
 - 2026-06-30: Doplněna úvodní podkapitola o první běžné údržbě tichého provozu: kontrola kanonického místa, přítomného času pravidla, návratového signálu, privacy-first datové stopy, karta, mini workshop a checklist.
 - 2026-06-30: Doplněna úvodní podkapitola o převodu uzavřeného slabého signálu do tichého provozu: pravidlo v přítomném čase, ukončení mimořádné kontroly, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-30: Doplněna úvodní podkapitola o uzavření druhého běžného použití po návratu slabého signálu do klidu: uzavírací stavy, praktický příklad, úklid dočasných stop, privacy-first uzavření, karta, mini workshop a checklist.
