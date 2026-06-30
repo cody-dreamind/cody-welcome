@@ -276398,8 +276398,177 @@ Pokud se během šesti minut začnete hádat o širší strategii, workshop zast
 
 Uzavření druhého běžného použití je malý moment důvěry v systém. Když pravidlo obstálo, nechte ho pracovat. Když selhala jedna hrana, opravte jednu hranu. A když vznikla nová datová stopa, nezametat, nezdobit, nepokřtít na "operativní přehled". Buď pryč, nebo do řádného rozhodnutí. Takhle se z tichého provozu nestane šuplík plný výjimek.
 
+## Převod potvrzeného tichého provozu do dlouhodobého rytmu
+
+Když druhé běžné použití potvrdí, že pravidlo stojí samo, přichází nenápadně těžká část: přestat se o něj mimořádně starat. Tým často zvládne opravu, zvládne první ověření, zvládne druhé použití, a pak si kolem pravidla nechá malý kontrolní rituál "pro jistotu". Ten rituál bývá dražší než samotný problém. Zabírá pozornost, vytváří dočasné poznámky, udržuje starý příběh při životě a občas nenápadně přidá novou evidenci, kterou nikdo původně nechtěl.
+
+Dlouhodobý rytmus není další kapitola péče. Je to způsob, jak pravidlo vrátit mezi ostatní běžné věci: najitelné, stručné, vlastněné a kontrolované jen tehdy, když na něj přijde řada nebo když se objeví návratový signál.
+
+Začněte větou:
+
+```text
+Potvrzený tichý provoz převádíme do dlouhodobého rytmu takto:
+```
+
+Za ni napište jedno kanonické místo, jeden běžný rytmus a jednu hranici, kdy se téma znovu otevře. Například:
+
+```text
+Potvrzený tichý provoz převádíme do dlouhodobého rytmu takto: pravidlo zůstává v checklistu potvrzovacího e-mailu, kontroluje se v měsíčním review obchodních šablon a znovu se otevře jen tehdy, když dva lidé po sobě nedokážou podle pravidla rozhodnout bez ručního vysvětlení.
+```
+
+To je dost. Pokud k tomu potřebujete tři odstavce vysvětlování, pravidlo ještě není připravené na dlouhodobý rytmus. Buď není jasné, kde bydlí, nebo není jasné, co má spustit návrat.
+
+### Tři prvky dlouhodobého rytmu
+
+Dlouhodobý rytmus má mít tři prvky:
+
+- Kanonické místo: jedno místo, kde pravidlo opravdu žije.
+- Běžný rytmus: existující kontrola, do které pravidlo patří.
+- Návratový signál: konkrétní situace, kvůli které se téma znovu otevře mimo běžný rytmus.
+
+`Kanonické místo` není archiv starých debat. Je to pracovní místo, kam člověk sáhne ve chvíli rozhodnutí: checklist, šablona e-mailu, interní playbook, provozní karta, onboardingový krok nebo definice hotovo. Pokud pravidlo zůstane jen v zápisu z review, nebude dlouhodobé. Bude uložené. To není totéž.
+
+`Běžný rytmus` má být rytmus, který už existuje. Nepřidávejte nový kalendář jen kvůli jednomu pravidlu. Pokud pravidlo patří do obchodní šablony, kontroluje se při review obchodních šablon. Pokud patří do datové mapy, kontroluje se při privacy-first revizi. Pokud patří do produktového onboardingu, kontroluje se při běžném produktovém review. Nový samostatný rituál je oprávněný jen tehdy, když pravidlo chrání vysoké provozní, právní nebo bezpečnostní riziko.
+
+`Návratový signál` nemá být pocit. Má být situace, kterou někdo pozná i bez autora pravidla. Ne "když bude zase zmatek", ale "když dva po sobě jdoucí obchodní follow-upy použijí odlišnou kvalifikační otázku pro stejný typ poptávky". Ne "když analytika nebude stačit", ale "když měsíční review nedokáže odpovědět na domluvenou rozhodovací otázku bez nového exportu".
+
+### Praktický příklad převodu
+
+Situace po druhém běžném použití:
+
+```text
+Pravidlo:
+Rozpočtový kontext se u B2B poptávky doptává jen tehdy, když bez něj nejde navrhnout další konkrétní krok.
+
+Výsledek:
+Dva lidé po sobě pravidlo našli v potvrzovací šabloně, rozhodli podle něj správně a nevytvořili novou evidenci poptávek.
+```
+
+Převod do dlouhodobého rytmu:
+
+```text
+Kanonické místo:
+Checklist před odesláním potvrzovacího e-mailu.
+
+Běžný rytmus:
+Měsíční review obchodních šablon.
+
+Návratový signál:
+Dva obchodníci po sobě nedokážou bez vysvětlení rozhodnout, zda rozpočet doptat, nebo nedoptat.
+
+Co se odstraňuje:
+Dočasná poznámka z ověření druhého použití a odkaz na původní debatu.
+
+Co se nemění:
+Formulář, CRM pole, scoring leadů ani povinná otázka na rozpočet.
+```
+
+Tento převod je záměrně obyčejný. Žádná nová metodika, žádný dashboard, žádný maják v kalendáři. Jen jasné místo, existující rytmus a návratová podmínka. Přesně tak vypadá pravidlo, které dospělo.
+
+### Co z dlouhodobého rytmu odstranit
+
+Při převodu odstraňte všechno, co patřilo k mimořádné péči:
+
+- pracovní poznámky z ověření,
+- dočasné odkazy na chaty a komentáře,
+- screenshoty s konkrétními zákaznickými údaji,
+- pomocné tabulky,
+- zvláštní kontrolní úkoly,
+- vysvětlující texty, které už suplují špatně napsané pravidlo.
+
+Pokud se některý podklad musí zachovat kvůli auditu nebo právní povinnosti, nepatří do běžné pracovní trasy. Uložte ho do odpovídající evidence s účelem, vlastníkem, přístupem a retencí. Běžný uživatel pravidla nemá při každém použití procházet historii incidentu, pilotu nebo údržby. Má dostat současné pravidlo.
+
+Codyho komentář: dlouhodobý rytmus není muzeum rozhodnutí. Historie má být dohledatelná, když ji opravdu potřebujete, ale nemá stát u dveří a každému vyprávět, jak statečně přežila minulou poradu.
+
+### Privacy-first převod
+
+Privacy-first otázka zní:
+
+```text
+Jaká data by dál zůstala v provozu jen proto, že jsme si zvykli pravidlo kontrolovat?
+```
+
+Tohle je překvapivě užitečná otázka. Týmy často nechávají pomocné tabulky, exporty, štítky nebo komentáře žít dlouho po tom, co už neslouží rozhodnutí. Ne proto, že by byly potřeba. Jen proto, že nikomu nepřekážely dost nahlas.
+
+Při převodu proto napište jednu větu:
+
+```text
+Do dlouhodobého rytmu nepřenášíme žádné dočasné ukázky s údaji zákazníků, žádný pomocný export a žádný nový tracker; zůstává jen obecné pravidlo v kanonické šabloně.
+```
+
+Pokud dlouhodobý rytmus vyžaduje data, napište proč:
+
+```text
+V dlouhodobém rytmu zůstává pouze počet případů, kdy pravidlo nešlo použít bez vysvětlení; neevidujeme jména zákazníků, hodnotu poptávky ani obsah obchodních zpráv.
+```
+
+Takový zápis chrání dvě věci najednou. Tým ví, co má sledovat, a zároveň ví, co nesmí začít sbírat ze zvyku. V Evropě je tohle praktická výhoda, ne dekorace do patičky webu.
+
+### Karta převodu do dlouhodobého rytmu
+
+```text
+Pravidlo nebo pracovní místo:
+
+Potvrzený stav:
+
+Kanonické místo:
+
+Běžný rytmus:
+- týdenní
+- měsíční
+- kvartální
+- roční
+- bez plánované kontroly, pouze při návratovém signálu
+
+Vlastník v běžném rytmu:
+
+Návratový signál mimo běžný rytmus:
+
+Co se výslovně nemění:
+
+Co zůstává zavřené:
+
+Co z mimořádné péče odstraňujeme:
+
+Co se maže, anonymizuje nebo archivuje mimo pracovní trasu:
+
+Jaká data se v dlouhodobém rytmu nesbírají:
+
+Kde bude převod dohledatelný:
+
+Datum další běžné kontroly, pokud existuje:
+```
+
+Karta má být poslední stopa mimořádné linky. Po jejím vyplnění už nepokračujte další servisní kartou, pokud se neobjeví nový signál. Jinak jste jen přejmenovali mimořádnou péči na dlouhodobý rytmus a tváříte se u toho administrativně vyrovnaně. Hezké, ale pořád špatně.
+
+### Mini workshop na 5 minut
+
+1. Minuta 1: pojmenujte potvrzený stav jednou větou.
+2. Minuta 2: určete kanonické místo pravidla.
+3. Minuta 3: vyberte existující běžný rytmus.
+4. Minuta 4: napište návratový signál mimo běžný rytmus.
+5. Minuta 5: odstraňte nebo převeďte dočasné datové stopy.
+
+Pokud se v páté minutě ukáže, že dočasné podklady nejdou jednoduše odstranit, nezvětšujte workshop. Otevřete samostatné datové rozhodnutí. Dlouhodobý rytmus pravidla a rozhodnutí o datové stopě jsou dvě různé práce.
+
+### Checklist dlouhodobého rytmu
+
+- Má pravidlo jedno kanonické místo?
+- Patří do existujícího rytmu místo nového zvláštního rituálu?
+- Je vlastník rytmu jasný?
+- Je návratový signál konkrétní a rozpoznatelný bez autora pravidla?
+- Je výslovně napsané, co se nemění?
+- Zůstává původní široký návrh zavřený?
+- Jsou dočasné poznámky, exporty, screenshoty a pomocné tabulky odstraněné, anonymizované nebo přesunuté do řádné evidence?
+- Je jasné, jaká data se v dlouhodobém rytmu nesbírají?
+- Dá se za měsíc pravidlo použít bez čtení historie?
+- Nevznikla nová pravidelná schůzka jen kvůli tomu, že tým neuměl ukončit mimořádnou péči?
+
+Převod do dlouhodobého rytmu je dobrý konec malé systémové změny. Ne proto, že už se nikdy nic nestane, ale protože tým ví, co dělat bez zvláštní pozornosti. Pravidlo má svoje místo. Rytmus má svého vlastníka. Návrat má podmínku. A všechna data, která vznikla jen kvůli ověřování, buď zmizí, nebo dostanou vlastní řádné rozhodnutí. Tak se pozná tichý provoz: není neviditelný proto, že ho nikdo neřeší, ale proto, že už nepotřebuje hluk.
+
 ## Pracovní log
 
+- 2026-06-30: Doplněna úvodní podkapitola o převodu potvrzeného tichého provozu do dlouhodobého rytmu: kanonické místo, běžný rytmus, návratový signál, úklid mimořádné péče, privacy-first převod, karta, mini workshop a checklist.
 - 2026-06-30: Doplněna úvodní podkapitola o druhém běžném použití po uzavřené údržbě tichého provozu: kdy ho dělat, kontrolní otázky, praktický příklad, výsledné stavy, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-06-30: Doplněna úvodní podkapitola o uzavření prvního běžného použití po uzavřené údržbě tichého provozu: uzavírací stavy, praktický příklad, propsání do kanonického místa, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-30: Doplněna úvodní podkapitola o prvním běžném použití po uzavřené údržbě tichého provozu: tři otázky použití, praktický příklad, čtyři výsledky, privacy-first kontrola, karta, mini workshop a checklist.
