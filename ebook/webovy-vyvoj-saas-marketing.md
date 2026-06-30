@@ -274281,8 +274281,192 @@ Když workshop potřebuje víc času, zastavte se u důvodu. Pokud chybí důkaz
 
 Uzavření slabého signálu je malá disciplína, která chrání dlouhodobý klid. Neignoruje podnět, ale nedovolí mu nafouknout se do práce bez důkazu. V privacy-first provozu je to obzvlášť cenné: tým se učí vnímat změny, aniž by z každého zaváhání vyráběl nový sběr dat.
 
+## Návrat uzavřeného slabého signálu do dlouhodobého klidu
+
+Uzavřený slabý signál ještě není automaticky pryč ze systému. Tým ho sice vyhodnotil, rozhodl, že neotevírá skutečný návrat, a zapsal, co zůstává zavřené. Jenže pokud se závěr nevrátí zpět do kanonického pravidla nebo pracovního místa, může podnět dál žít jako neformální vzpomínka. A neformální vzpomínky mají v provozu pozoruhodnou schopnost znovu se tvářit jako fakta.
+
+Cílem návratu do dlouhodobého klidu je udělat tři věci: uložit závěr tam, kde ho příště člověk najde, odstranit dočasné stopy, které vznikly během kontroly, a potvrdit, že domluvený návratový signál se nemění, pokud pro to není jasný důvod. Jinak slabý signál sice formálně uzavřete, ale necháte po něm otevřený boční vchod.
+
+Začněte větou:
+
+```text
+Uzavřený slabý signál vracíme do dlouhodobého klidu takto:
+```
+
+Za ni napište, co se propisuje do běžného místa a co končí:
+
+```text
+Uzavřený slabý signál vracíme do dlouhodobého klidu takto:
+Kanonické pravidlo zůstává beze změny, u obchodní šablony ponecháváme jednu zpřesňující větu a dočasnou poznámku k podnětu zobecňujeme do závěru. Nevzniká nový report, štítek ani sledování podobných případů.
+```
+
+Tahle věta chrání klid před dvěma opačnými chybami. První chyba je slabý signál úplně zahodit, takže se příště bude řešit od začátku. Druhá chyba je ponechat po něm zvláštní pozornost, která se časem změní v neplánovaný proces. Správný návrat do klidu říká: poznatek jsme si vzali, mimořádnou péči končíme.
+
+### Co se má vrátit do klidu
+
+Po uzavření slabého signálu rozlište čtyři věci:
+
+- Kanonické pravidlo: hlavní pracovní věta, podle které se tým dál rozhoduje.
+- Lokální věta: drobné zpřesnění u šablony, checklistu, odkazu nebo jiného pracovního místa.
+- Rozhodovací stopa: krátký záznam, proč se slabý signál neotevřel jako skutečný návrat.
+- Dočasné podklady: poznámky, kopie, screenshoty, pomocné tabulky nebo štítky, které vznikly jen kvůli kontrole.
+
+Kanonické pravidlo neměňte automaticky. Slabý signál obvykle nestačí k tomu, aby přepsal hlavní pravidlo. Pokud se mění, napište proč. Pokud se nemění, napište to také. Věta "kanonické pravidlo zůstává beze změny" je užitečná, protože brání tichému přepisování pravidel podle poslední nápadné situace.
+
+Lokální věta může zůstat, pokud odstraňuje konkrétní tření. Musí ale být opravdu lokální. Pokud se při slabém signálu ukázalo, že obchodní šablona potřebuje jasnější formulaci, doplňte ji u šablony. Nepřepisujte celý obchodní proces, pokud problém vznikl v jedné větě.
+
+Rozhodovací stopa má být krátká. Stačí podnět, porovnání s návratovým signálem a závěr. Nemá se z ní stát druhý archiv vedle kanonického pravidla. Pokud je záznam delší než samotné pravidlo, pravděpodobně jste do něj naložili historii, kterou příští člověk nepotřebuje.
+
+Dočasné podklady mají skončit. To znamená smazat, anonymizovat, sloučit do jedné zobecněné věty, nebo ponechat jen v původním pracovním zdroji, kde už mají svůj legitimní účel. Nenechávejte pomocnou stopu jen proto, že "by se mohla hodit". V systému užitečných pravidel se má hodit hlavně pravidlo, ne hromada důkazních drobků kolem něj.
+
+### Praktický příklad
+
+Uzavřený slabý signál:
+
+```text
+Slabý signál:
+Jeden obchodní rozhovor se zdržel kvůli nejistému rozpočtu.
+
+Uzavírací stav:
+Zavřít s lokální větou.
+
+Lokální oprava:
+Ke šabloně doplnit větu, že nejdřív se ptáme na cíl, rozsah a rozhodovací omezení; rozpočet neukládáme jako samostatné pole.
+```
+
+Návrat do dlouhodobého klidu:
+
+```text
+Kanonické pravidlo:
+Beze změny. Rozpočet nezavádíme jako povinné formulářové pole ani jako CRM atribut.
+
+Lokální věta:
+Zůstává u obchodní šablony, protože pomáhá formulovat dotaz bez nového sběru dat.
+
+Rozhodovací stopa:
+Podnět neodpovídal návratovému signálu. Šlo o jeden rozhovor, ne opakované selhání kvalifikace.
+
+Dočasné podklady:
+Pracovní poznámku zobecňujeme do této věty a konkrétní detail necháváme pouze v původním obchodním vlákně.
+```
+
+Výsledek je klidný. Pravidlo se nepřepsalo, šablona je o jednu větu použitelnější a nevznikla nová evidence rozpočtů. Tým neztratil poznatek, ale také si z něj nevyrobil další sledování. To je přesně rozdíl mezi učením a hromaděním.
+
+### Tři návratové režimy
+
+Po uzavřeném slabém signálu vyberte jeden ze tří režimů návratu do klidu:
+
+- Čistý návrat: kanonické pravidlo se nemění, žádná lokální věta nezůstává a dočasné stopy končí.
+- Lokálně zpřesněný klid: kanonické pravidlo se nemění, ale jedno pracovní místo dostane lepší větu nebo odkaz.
+- Upravená čekací hranice: pravidlo zůstává v klidu, ale návratový signál se zpřesní, protože stará hranice byla nejasná.
+
+Čistý návrat je vhodný, když byl podnět opravdu jen šum. Zapište závěr a ukončete stopu. Nepřidávejte žádnou připomínku, kontrolu ani poznámku do šablony. Klid má někdy zůstat úplně klidný. Překvapivé, já vím, ale systém nemusí dostat suvenýr z každé události.
+
+Lokálně zpřesněný klid použijte, když slabý signál ukázal drobnou nejasnost v jednom pracovním místě. Důležité je, že tím nevzniká nový cyklus. Věta se přidá, stará dočasná stopa se uklidí a tým pokračuje podle stejného návratového signálu.
+
+Upravená čekací hranice dává smysl, když se během uzavírání ukázalo, že návratový signál je moc vágní. Například "až se to začne opakovat" přepište na "pokud dvě relevantní poptávky za sebou nepůjdou kvalifikovat bez ručního doptání". Nejde o otevření práce. Jde o to, aby budoucí návrat nebyl hádanka.
+
+### Privacy-first návrat do klidu
+
+Privacy-first část návratu do klidu je hlavně úklid pokušení. Slabý signál často vytvoří chuť něco si "jen dočasně" značit. Když už se téma uzavírá, dočasnost musí buď skončit, nebo dostat jasný důvod v běžném pracovním místě.
+
+Použijte tři řádky:
+
+```text
+Do klidu přenášíme:
+
+Do klidu nepřenášíme:
+
+Ukončujeme:
+```
+
+Příklad:
+
+```text
+Do klidu přenášíme:
+Jednu zobecněnou větu u obchodní šablony.
+
+Do klidu nepřenášíme:
+Konkrétní zákaznický detail, pomocnou tabulku ani ruční štítek.
+
+Ukončujeme:
+Dočasnou pracovní poznámku ke slabému signálu; závěr je uložený u kanonického pravidla.
+```
+
+Tím se chrání jednoduchý princip: poznatek může zůstat, osobní a obchodní detaily nemají putovat dál, pokud nejsou nutné pro další rozhodnutí. Evropský privacy-first provoz se nepozná podle toho, že nikdy nic neřeší. Pozná se podle toho, že umí po vyřešení zmenšit datovou stopu zpět na rozumné minimum.
+
+Codyho komentář: největší riziko slabých signálů není panika. Panika je vidět. Horší je malý nepořádek, který se tváří jako odpovědnost. Jeden štítek, jedna tabulka, jedna kopie zprávy, jeden "dočasný" sloupec. Za půl roku z toho máte provozní muzeum bez vstupenek a s překvapivě citlivými exponáty.
+
+### Karta návratu do dlouhodobého klidu
+
+```text
+Téma v dlouhodobém klidu:
+
+Uzavřený slabý signál:
+
+Uzavírací stav slabého signálu:
+
+Režim návratu do klidu:
+- čistý návrat
+- lokálně zpřesněný klid
+- upravená čekací hranice
+
+Kanonické pravidlo:
+- beze změny
+- upraveno takto:
+
+Lokální věta nebo kotva, pokud zůstává:
+
+Rozhodovací stopa:
+
+Co zůstává výslovně zavřené:
+
+Do klidu přenášíme:
+
+Do klidu nepřenášíme:
+
+Ukončujeme, mažeme nebo anonymizujeme:
+
+Návratový signál pro budoucí otevření:
+
+Kde je závěr uložený:
+
+Vlastník:
+
+Datum:
+```
+
+Karta má být poslední stopa mimořádné pozornosti. Pokud po jejím vyplnění vznikne potřeba další pravidelné kontroly, zeptejte se, jestli slabý signál nebyl ve skutečnosti návratový signál. Pokud nebyl, další kontrola je jen sledování bez otázky.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte uzavírací závěr slabého signálu.
+2. Minuta 2: rozhodněte, jestli jde o čistý návrat, lokálně zpřesněný klid, nebo upravenou čekací hranici.
+3. Minuta 3: napište stav kanonického pravidla.
+4. Minuta 4: určete, jestli nějaká lokální věta zůstává u pracovního místa.
+5. Minuta 5: ukončete dočasné podklady a datovou stopu.
+6. Minuta 6: potvrďte budoucí návratový signál a místo uložení závěru.
+
+Když během workshopu někdo navrhne "pro jistotu měsíční kontrolu", požádejte o rozhodovací otázku. Pokud otázka neexistuje, kontrola nemá vzniknout. Dlouhodobý klid není nečinnost. Je to dohoda, že systém bude reagovat až na signál, který si reakci zaslouží.
+
+### Checklist návratu do klidu
+
+- Je jasné, jaký slabý signál se vrací do dlouhodobého klidu?
+- Víme, zda se kanonické pravidlo mění, nebo zůstává beze změny?
+- Pokud zůstává lokální věta, je opravdu u nejbližšího pracovního místa?
+- Je rozhodovací stopa krátká a dohledatelná?
+- Je napsané, co zůstává výslovně zavřené?
+- Nepřenášíme konkrétní osobní nebo obchodní údaje do nové vrstvy dokumentace?
+- Ukončili jsme pomocné tabulky, štítky, kopie, screenshoty nebo dočasné poznámky?
+- Je návratový signál pro budoucí otevření konkrétní?
+- Nevznikla nová pravidelná kontrola bez jasné rozhodovací otázky?
+- Umí další člověk poznat, že téma je zpět v dlouhodobém klidu, ne v tichém sledování?
+
+Návrat uzavřeného slabého signálu do dlouhodobého klidu je malý, ale důležitý konec smyčky. Díky němu se tým poučí z podnětu, uklidí po sobě a nepřidá další provozní vrstvu jen proto, že se na chvíli něco mihlo v radaru. Klid pak není zapomnění. Je to vědomě udržovaná hranice.
+
 ## Pracovní log
 
+- 2026-06-30: Doplněna úvodní podkapitola o návratu uzavřeného slabého signálu do dlouhodobého klidu: režimy návratu, kanonické pravidlo, lokální věta, privacy-first úklid dočasných stop, karta, mini workshop a checklist.
 - 2026-06-30: Doplněna úvodní podkapitola o uzavření slabého signálu v dlouhodobém klidu: uzavírací stavy, čekací hranice místo sledování, privacy-first úklid datové stopy, karta, mini workshop a checklist.
 - 2026-06-30: Doplněna úvodní podkapitola o slabém signálu v dlouhodobém klidu: rozlišení od skutečného návratu, tři kontroly, výsledné stavy, privacy-first práce bez zbytečné datové stopy, karta, mini workshop a checklist.
 - 2026-06-30: Doplněna úvodní podkapitola o převodu uzavřeného skutečného návratu do dlouhodobého klidu: kanonické místo, historie, návratový signál, privacy-first úklid datových stop, karta, mini workshop a checklist.
