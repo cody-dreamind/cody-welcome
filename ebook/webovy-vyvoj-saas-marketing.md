@@ -275849,8 +275849,184 @@ Když workshop začne řešit, jestli by se pravidlo nemělo vylepšit obecně, 
 
 První běžné použití po uzavřené údržbě má být obyčejné. To je pointa. Pokud pravidlo potřebuje fanfáry, průvodce a zvláštní tabulku, není v tichém provozu. Pokud ho člověk najde, použije a nic zbytečného po něm nezůstane, vyhráli jste tu méně nápadnou, ale velmi užitečnou hru: dobré pravidlo se stalo součástí práce.
 
+## Uzavření prvního běžného použití po uzavřené údržbě tichého provozu
+
+První běžné použití po uzavřené údržbě nesmí zůstat viset jako další drobná kontrola, ke které se "někdy vrátíme". Buď potvrdilo klid, ukázalo lokální opravu, vytvořilo slabý signál, nebo otevřelo skutečný návrat. Každý z těchto stavů potřebuje jiný konec. Společné mají jen jedno: po uzavření musí být jasné, co se změnilo, co se nemění a jaká stopa po ověření zůstává.
+
+Začněte uzavírací větou:
+
+```text
+První běžné použití po uzavřené údržbě uzavíráme jako:
+```
+
+Do věty doplňte stav, ne popis nálady. "Vypadá to dobře" je dojem. "Klid potvrzen v potvrzovací šabloně po poptávce" je uzavření. "Ještě to budeme sledovat" je začátek dalšího problému, pokud nemá čekací hranici. Tichý provoz potřebuje krátké věty, které zavírají práci, ne další otevřené zásuvky.
+
+### Čtyři uzavírací stavy
+
+Použijte jeden ze čtyř stavů:
+
+- Klid potvrzen: pravidlo prošlo běžným použitím a není co měnit.
+- Lokální oprava uzavřena: drobná nejasnost byla opravena v jednom pracovním místě.
+- Slabý signál uložen do čekací hranice: tření je zapsané, ale neotevírá práci.
+- Skutečný návrat předán do samostatného kroku: naplnil se návratový signál a běžné použití končí.
+
+`Klid potvrzen` je nejkratší varianta. Napište pracovní místo, výsledek a potvrzení, že nevznikla nová datová stopa. Tím to končí. Neplánujte další kontrolu jen proto, že se kontrola povedla. To je oblíbený způsob, jak si tým vyrobí pravidelné rituály z ničeho.
+
+`Lokální oprava uzavřena` znamená, že oprava už je propsaná tam, kde člověk pravidlo opravdu používá. Nestačí poznámka v kartě. Pokud byl problém v názvu bloku v šabloně, musí být přejmenovaný blok. Pokud byl problém v odkazu, musí být opravený odkaz. Pokud byl problém v jedné větě, musí být věta přepsaná do rozhodovacího tvaru.
+
+`Slabý signál uložen do čekací hranice` je dobrý konec pouze tehdy, když hranice umí sama zastavit zvědavost. Například: "k pravidlu se vrátíme, pokud se stejná nejasnost objeví u dvou dalších relevantních poptávek". Bez hranice se slabý signál mění v mlhavé sledování. A mlhavé sledování je jen dražší způsob, jak říct, že se bojíme rozhodnout.
+
+`Skutečný návrat předán do samostatného kroku` znamená, že běžné použití už není hlavní téma. Neprodlužujte ho, aby uneslo novou práci. Založte malý krok s dnešním důvodem, konkrétním pracovním místem a nejmenším ověřením. Původní první použití uzavřete odkazem na tento krok a ukliďte jeho pomocné stopy.
+
+### Praktický příklad
+
+Situace:
+
+```text
+Tiché pravidlo:
+Rozpočtový kontext se u B2B poptávky doptává jen tehdy, když bez něj nejde navrhnout další konkrétní krok.
+
+První běžné použití:
+Obchodník použil pravidlo u poptávky na audit SaaS onboardingu.
+
+Zjištění:
+Pravidlo pomohlo neposlat samostatnou otázku na rozpočet. Dalším krokem byl diagnostický call. V potvrzovací šabloně ale zůstal starý nadpis "Rozpočet", který člověka zbytečně mátl.
+```
+
+Špatné uzavření:
+
+```text
+Budeme měsíc sledovat, jestli se obchodníci ptají na rozpočet správně.
+```
+
+Tahle věta otevírá novou evidenci, aniž by doložila potřebu. Problém byl v nadpisu, ne v chování obchodníků. Reakce má být menší.
+
+Dobré uzavření:
+
+```text
+První běžné použití po uzavřené údržbě uzavíráme jako lokální opravu. V potvrzovací šabloně jsme přejmenovali blok "Rozpočet" na "Kdy doptat rozpočtový kontext". Původní široký návrh na povinné pole v poptávkovém formuláři zůstává zavřený. Nevzniká nový štítek, export ani měsíční sledování.
+```
+
+Tady je konec jasný. Jedno pracovní místo se opravilo, původní rozsah zůstal zavřený a privacy-first hranice se nezvětšila. Tým nemusí nic domýšlet.
+
+Codyho komentář: dobré uzavření je často nudné. To je v pořádku. Když je provozní pravidlo dramatické i po údržbě, většinou v něm pořád bydlí neuzavřený problém. Dobrá práce někdy vypadá jako věta, po které nikdo nemá potřebu otevřít tabulku. Civilizace přežila horší šoky.
+
+### Co propsat do kanonického místa
+
+Po uzavření prvního běžného použití se do kanonického místa nepřenáší celá historie. Přenáší se jen to, co bude potřebovat další člověk při běžné práci.
+
+Do kanonického místa patří:
+
+- platné pravidlo v přítomném čase,
+- případná lokální oprava formulace, názvu nebo odkazu,
+- návratový signál, pokud se změnil nebo zpřesnil,
+- věta, co zůstává zavřené,
+- privacy-first hranice, pokud brání sběru nových dat.
+
+Do kanonického místa nepatří:
+
+- jména zákazníků z ověření,
+- celý průběh diskuse,
+- screenshoty dočasného stavu,
+- seznam všech hypotéz, které se nepotvrdily,
+- pomocné exporty nebo tabulky vytvořené jen pro ověření.
+
+Kanonické místo má pomáhat v další práci, ne připomínat celou detektivku. Pokud člověk při běžném použití potřebuje znát historii sporu, pravidlo je možná pořád příliš křehké. Přepište ho tak, aby rozhodovalo samo.
+
+### Privacy-first uzavření
+
+Uzavření prvního běžného použití je vhodný okamžik pro malý úklid. Ne proto, že by každý záznam byl nebezpečný. Proto, že zbytečné záznamy časem vytvoří systém, kterému už nikdo nerozumí.
+
+Projděte čtyři otázky:
+
+- Zůstává po ověření jen tolik informací, kolik další běžná práce opravdu potřebuje?
+- Dají se zákaznické příklady zkrátit nebo anonymizovat?
+- Nevznikl nový štítek, export, filtr, ruční seznam nebo analytický event bez jasného rozhodovacího účelu?
+- Má každá ponechaná dočasná poznámka datum smazání, anonymizace nebo převodu do kanonického místa?
+
+Pokud odpověď na třetí otázku zní ano, zastavte se. Nový datový prvek má projít stejnou bránou jako každá jiná změna: účel, vlastník, retence, přístup a důvod, proč nestačí existující data. Pokud tím neprojde, smažte ho nebo ho vůbec nezavádějte.
+
+Privacy-first uzavření má mít konkrétní větu:
+
+```text
+Po uzavření prvního běžného použití neponecháváme žádnou novou evidenci poptávek, žádný rozpočtový štítek ani žádný nový analytický event. V kanonické šabloně zůstává jen přejmenovaný blok a platné pravidlo.
+```
+
+Taková věta je užitečnější než obecné "dbáme na soukromí". Ukazuje přesně, co nevzniklo. A v provozu často chrání data právě věci, které se nestaly.
+
+### Karta uzavření prvního běžného použití po údržbě
+
+```text
+Tiché pravidlo:
+
+Kanonické pracovní místo:
+
+Datum prvního běžného použití:
+
+Uzavírací stav:
+- klid potvrzen
+- lokální oprava uzavřena
+- slabý signál uložen do čekací hranice
+- skutečný návrat předán do samostatného kroku
+
+Jednovětý závěr:
+
+Co se změnilo v kanonickém místě:
+
+Co zůstává zavřené:
+
+Návratový signál:
+- beze změny
+- zpřesněn takto:
+- naplněn a předán do kroku:
+
+Dočasné stopy po ověření:
+- nevznikly
+- vznikly a byly odstraněny
+- vznikly a mají tento konec:
+
+Nová datová stopa:
+- nevzniká
+- vzniká, protože:
+
+Co se maže, anonymizuje nebo nepřenáší dál:
+
+Další běžný rytmus:
+
+Vlastník pracovního místa:
+```
+
+Karta má zavřít první použití, ne založit novou administrativní vrstvu. Pokud vyplňujete víc než pár řádků u stavu `klid potvrzen`, pravděpodobně si jen vyrábíte pocit kontroly. Ten je příjemný, ale špatně se deployuje.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte pracovní místo a výsledek prvního použití.
+2. Minuta 2: vyberte jeden uzavírací stav.
+3. Minuta 3: napište jednovětý závěr.
+4. Minuta 4: potvrďte, co zůstává zavřené.
+5. Minuta 5: projděte dočasné a nové datové stopy.
+6. Minuta 6: propsání do kanonického místa nebo předání skutečného návratu do samostatného kroku.
+
+Když se workshop začne větvit do ceníku, formuláře, CRM, analytiky a obchodního procesu najednou, vraťte ho k jedné otázce: co přesně uzavíráme po tomto prvním běžném použití? Všechno ostatní patří do samostatného návratového signálu nebo do poznámek mimo rozsah.
+
+### Checklist uzavření prvního běžného použití
+
+- Má první běžné použití jasný uzavírací stav?
+- Je jednovětý závěr srozumitelný i člověku, který nebyl u údržby?
+- Je případná lokální oprava propsaná v místě, kde se pravidlo opravdu používá?
+- Zůstává původní široký návrh výslovně zavřený?
+- Pokud vznikl slabý signál, má konkrétní čekací hranici?
+- Pokud vznikl skutečný návrat, je předaný do samostatného malého kroku?
+- Nevznikla nová evidence jen kvůli pocitu kontroly?
+- Jsou zákaznické nebo interní příklady zkrácené na nezbytné minimum?
+- Jsou dočasné poznámky, screenshoty, exporty a pomocné seznamy smazané nebo mají konec?
+- Je jasné, kdy a v jakém rytmu se pravidlo znovu potká s běžnou prací?
+
+Uzavření prvního běžného použití po údržbě je malý, ale důležitý práh. Před ním ještě pravidlo nese čerstvou paměť údržby. Po něm má stát samo. Když se to povede, nepřidávejte mu berličky. Nechte ho pracovat v tichu, s jedním kanonickým místem, jasným návratovým signálem a bez zbytečných dat kolem.
+
 ## Pracovní log
 
+- 2026-06-30: Doplněna úvodní podkapitola o uzavření prvního běžného použití po uzavřené údržbě tichého provozu: uzavírací stavy, praktický příklad, propsání do kanonického místa, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-30: Doplněna úvodní podkapitola o prvním běžném použití po uzavřené údržbě tichého provozu: tři otázky použití, praktický příklad, čtyři výsledky, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-06-30: Doplněna úvodní podkapitola o uzavření první běžné údržby tichého provozu: čtyři uzavírací stavy, praktický příklad, úklid dočasných stop, privacy-first uzavření, karta, mini workshop a checklist.
 - 2026-06-30: Doplněna úvodní podkapitola o první běžné údržbě tichého provozu: kontrola kanonického místa, přítomného času pravidla, návratového signálu, privacy-first datové stopy, karta, mini workshop a checklist.
