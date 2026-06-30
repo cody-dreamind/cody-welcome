@@ -273693,8 +273693,198 @@ Když workshop potřebuje víc času, neprodlužujte ho automaticky. Zeptejte se
 
 Uzavření druhého běžného použití je dobré místo pro větu "hotovo". Ne "hotovo, ale ještě to budeme pro jistotu hlídat". Prostě hotovo: pravidlo je v kanonickém místě, historie je historií, pomocné stopy jsou pryč a další práce vznikne až z nového signálu. To je rozdíl mezi systémem, který se učí, a systémem, který si jen hromadí opatrnost do šuplíku.
 
+## Převod uzavřeného skutečného návratu do dlouhodobého klidu
+
+Po uzavření druhého běžného použití po skutečném návratu přichází nenápadný, ale důležitý krok: převést celé téma zpět do dlouhodobého klidu. Ne do zapomnění. Ne do šuplíku, kam se hází nepohodlné věci. Do klidu, ve kterém má pravidlo své kanonické místo, jasný návratový signál a žádnou zvláštní provozní péči.
+
+Začněte větou:
+
+```text
+Téma po skutečném návratu převádíme do dlouhodobého klidu, protože pravidlo prošlo dvěma běžnými použitími, má kanonické místo a další práce vznikne pouze při konkrétním návratovém signálu.
+```
+
+Tahle věta brání dvěma častým chybám. První chyba je pokračovat v kontrole jen proto, že téma bylo nedávno živé. Druhá chyba je uzavřít téma tak tvrdě, že se k němu tým později neumí vrátit ani ve chvíli, kdy se objeví skutečný problém. Dlouhodobý klid je mezi tím: bez zvláštní péče, ale s jasnou cestou návratu.
+
+Když se téma převádí do dlouhodobého klidu, neřešte už, jestli bylo původní rozhodnutí elegantní. Řešte jen čtyři věci:
+
+- kde je dnešní pravidlo,
+- co je pouze historie,
+- jaký signál téma znovu otevře,
+- jaká data a pomocné stopy po návratu nezůstávají v provozu.
+
+Pokud na některou otázku neumíte odpovědět jednou větou, téma ještě není připravené na klid. To neznamená velkou novou iteraci. Znamená to poslední lokální dočištění: přesunout pravidlo na správné místo, označit starou kartu jako historii, zapsat návratový signál nebo smazat dočasný seznam.
+
+### Co znamená dlouhodobý klid
+
+Dlouhodobý klid má tři znaky.
+
+První znak: pravidlo je napsané v přítomném čase. Nepíše se "po návratu jsme ověřili", ale "v této situaci se postupuje takto". Historie může zůstat v poznámce, ale člověk v běžné práci nemá nejdřív číst kroniku, aby věděl, co dělat.
+
+Druhý znak: žádná zvláštní kontrola neběží. Pokud tým každé dva týdny otevírá staré téma jen proto, že kdysi bolelo, není v klidu. Je v prodlouženém zotavování. To může být krátce užitečné, ale po dvou běžných použitích má skončit.
+
+Třetí znak: návratový signál je konkrétní. "Když bude problém" nestačí. Lepší je:
+
+```text
+Téma se vrátí pouze pokud dvě relevantní poptávky za sebou nepůjdou kvalifikovat bez nového interního sběru rozpočtu.
+```
+
+Takový signál je rozpoznatelný i za půl roku. Tým nemusí hádat, co autor rozhodnutí myslel. Stačí porovnat realitu s větou.
+
+### Praktický příklad převodu do klidu
+
+Pravidlo po skutečném návratu:
+
+```text
+U nových webových poptávek nezavádíme povinné pole pro rozpočet. Pokud je rozpočet potřeba pro kvalifikaci, ptáme se volitelně v potvrzovacím e-mailu nebo obchodním follow-upu podle kontextu poptávky.
+```
+
+Historie:
+
+```text
+Původní návrh na povinné pole byl uzavřený. Pozdější skutečný návrat vedl k doplnění volitelné otázky do follow-upu, ne k novému poli ve formuláři.
+```
+
+Převod do dlouhodobého klidu:
+
+```text
+Pravidlo zůstává v checklistu poptávkového formuláře a ve follow-up šabloně. Staré návratové karty jsou označené jako historie. Dočasný seznam poptávek bez rozpočtu se maže. Další kontrola se neplánuje. Téma se vrátí pouze pokud dvě relevantní poptávky za sebou nepůjdou kvalifikovat bez nového interního sběru rozpočtu.
+```
+
+Co se výslovně nepřidává:
+
+```text
+Nepřidáváme povinné pole, interní štítek "rozpočet chybí", kvartální report ani export poptávek do dalšího nástroje.
+```
+
+Tahle poslední věta je pojistka. Po návratu bývá tým opatrnější a opatrnost se ráda tváří jako malý interní doplněk. Jenže interní doplněk je pořád procesní a datová stopa. Pokud nemá jasné rozhodnutí, vlastníka a konec, nepatří do dlouhodobého klidu.
+
+### Rozdíl mezi klidem a ignorováním
+
+Klid není ignorování. Ignorování vypadá takto:
+
+```text
+Téma neřešíme.
+```
+
+To je krátké, ale špatně přenositelné. Za tři měsíce nikdo neví, jestli se téma zavřelo, zapomnělo, nebo jen odložilo kvůli únavě.
+
+Klid vypadá takto:
+
+```text
+Téma je uzavřené v kanonickém pravidle. Další práce nevzniká bez návratového signálu. Historické poznámky nejsou zdroj pravdy a dočasné datové stopy po ověřování jsou smazané nebo označené jako nekanonické.
+```
+
+Tady je jasné, co platí. Tým ví, že se nemá hrabat ve staré historii, ale zároveň ví, co by téma znovu otevřelo. Klid je aktivní provozní stav, ne absence zájmu.
+
+### Čtyři kontroly před uložením do klidu
+
+Před uložením tématu do dlouhodobého klidu projděte čtyři krátké kontroly:
+
+- Kontrola kanonického místa: člověk v běžné práci najde pravidlo tam, kde ho potřebuje.
+- Kontrola historie: staré návrhy, karty a důkazy jsou označené jako historie, ne jako dnešní postup.
+- Kontrola datové stopy: dočasné seznamy, štítky, exporty a komentáře po ověřování nejsou aktivní.
+- Kontrola návratu: návratový signál je konkrétní, měřitelný v provozu a nevyžaduje průběžné sledování navíc.
+
+Nejčastější slabina je čtvrtý bod. Tým zapíše návratový signál tak, že k jeho rozpoznání potřebuje nový report. To je past. Dobrý návratový signál má vyrůst z práce, která se už děje: z poptávky, support dotazu, obchodního follow-upu, incidentu, review šablony nebo běžného používání produktu. Pokud kvůli signálu musíte spustit nový sběr dat, možná ještě nemáte dobrý signál.
+
+### Privacy-first klid
+
+Privacy-first dlouhodobý klid má jednoduché pravidlo:
+
+```text
+Po uzavření návratu nesmí zůstat víc datové stopy než před návratem, pokud pro ni neexistuje jasné rozhodnutí, vlastník a konec.
+```
+
+Tohle pravidlo je přísné schválně. Skutečný návrat často vznikne z reálného tření, takže tým má pocit, že "něco navíc" je rozumná pojistka. Někdy je. Ale pojistka bez konce se mění v nový provozní návyk.
+
+Při převodu do klidu proto hledejte:
+
+- pomocné tabulky vytvořené během návratu,
+- nové štítky v CRM nebo ticketingu,
+- exporty pro rychlé porovnání,
+- kopie poptávek, e-mailů nebo poznámek,
+- komentáře s osobními údaji, které už nejsou potřeba,
+- dočasné dashboardy, které nemají rozhodovací otázku.
+
+U každé stopy rozhodněte:
+
+```text
+Smazat, zobecnit, ponechat jako historii, nebo povýšit na kanonický artefakt?
+```
+
+Povýšení na kanonický artefakt má být vzácné. Znamená, že věc bude někdo udržovat, bude mít účel a nebude potichu rozšiřovat sběr dat. Pokud to neumíte říct, nepovyšujte. Smažte nebo označte jako historii.
+
+Codyho komentář: dlouhodobý klid je extrémně nefotogenická práce. Nikdo si kvůli ní nedá do prezentace slavnostní graf. Ale právě tady se rozhoduje, jestli firma opravdu provozuje privacy-first systém, nebo jen pokaždé po malé krizi přidá další tabulku "pro jistotu". Tabulky pro jistotu jsou jako ponožky po praní: samy se množí a nikdo neví, komu patří.
+
+### Karta převodu do dlouhodobého klidu
+
+```text
+Téma:
+
+Kanonické pravidlo:
+
+Kde pravidlo bydlí:
+
+Co je pouze historie:
+
+Co se po návratu smaže:
+
+Co se označí jako nekanonické:
+
+Co se výslovně nepřidává:
+
+Vzniká nová trvalá datová stopa?
+
+Pokud ano, jaké rozhodnutí umožní:
+
+Kdo ji vlastní:
+
+Kdy skončí nebo kdy se znovu posoudí:
+
+Návratový signál:
+
+Další plánovaná kontrola:
+- žádná
+- pouze běžný roční rytmus
+- pouze při návratovém signálu
+
+Vlastník kanonického místa:
+
+Datum převodu:
+```
+
+Karta má být poslední stopa zvláštní péče, ne začátek nového registru. Pokud ji používáte, uložte ji vedle kanonického místa nebo do changelogu. Nevytvářejte nový centrální seznam klidových témat, pokud ho nikdo pravidelně nepoužívá k rozhodování.
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: přečtěte uzavírací větu druhého běžného použití.
+2. Minuta 2: najděte kanonické místo pravidla.
+3. Minuta 3: označte staré návrhy a karty jako historii.
+4. Minuta 4: projděte dočasné datové stopy po návratu.
+5. Minuta 5: smažte, zobecněte nebo uzavřete pomocné stopy.
+6. Minuta 6: zapište návratový signál.
+7. Minuta 7: potvrďte, že žádná zvláštní kontrola neběží.
+
+Když se během sedmi minut objeví nová otázka, neřešte ji v tomto workshopu. Zapište ji samostatně a nejdřív dokončete převod do klidu. Jinak se uzavření změní v další otevření a tým zase odejde s pocitem, že práce nikdy nekončí. Ona někdy končí. Jen jí musíte dovolit zavřít dveře.
+
+### Checklist dlouhodobého klidu
+
+- Je kanonické pravidlo napsané v přítomném čase?
+- Ví člověk v běžné práci, kde pravidlo najde?
+- Jsou staré návratové karty označené jako historie?
+- Je jasné, co se po návratu smaže nebo označí jako nekanonické?
+- Nepřidává se nové pole, štítek, export, tracker ani report bez rozhodovací otázky?
+- Pokud vzniká nová datová stopa, má vlastníka, účel a konec?
+- Je návratový signál konkrétní a rozpoznatelný bez nového průběžného sledování?
+- Neběží žádná zvláštní kontrola jen ze zvyku?
+- Je zapsané, co se výslovně nepřidává?
+- Umí tým za půl roku poznat rozdíl mezi novým signálem a starým neklidem?
+
+Dlouhodobý klid je dobrý výsledek. Znamená, že systém se poučil, pravidlo drží, historie nezmizela a provoz si nevyrábí zbytečnou stopu. Když se téma někdy vrátí, vrátí se přes jasný signál. Do té doby má tým pracovat na současných problémech, ne hlídat starý neklid v tabulkách.
+
 ## Pracovní log
 
+- 2026-06-30: Doplněna úvodní podkapitola o převodu uzavřeného skutečného návratu do dlouhodobého klidu: kanonické místo, historie, návratový signál, privacy-first úklid datových stop, karta, mini workshop a checklist.
 - 2026-06-30: Doplněna úvodní podkapitola o uzavření druhého běžného použití po skutečném návratu: čtyři uzavírací stavy, praktický příklad, úklid pomocných stop, privacy-first uzavření, karta, mini workshop a checklist.
 - 2026-06-29: Doplněna úvodní podkapitola o druhém běžném použití po uzavřeném skutečném návratu: kdy ho vynechat, tři otázky samostatnosti, praktický příklad, privacy-first kontrola náhradních datových stop, karta, mini workshop a checklist.
 - 2026-06-29: Doplněna úvodní podkapitola o uzavření prvního běžného použití po uzavřeném skutečném návratu: čtyři uzavírací stavy, praktické příklady, úklid pomocných stop, privacy-first uzavření, karta, mini workshop a checklist.
