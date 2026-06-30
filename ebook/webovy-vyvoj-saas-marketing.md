@@ -277297,8 +277297,206 @@ Když se během workshopu objeví spor, neprodlužujte ho donekonečna. Položte
 
 Uzavření druhé kvartální kontroly má být tiché. Žádné velké gesto, žádná nová aparatura, žádný pocit, že když už jsme kontrolovali, musíme něco změnit. Pokud pravidlo funguje, vraťte ho do práce. Pokud nefunguje, otevřete nejmenší samostatnou otázku. V obou případech po sobě ukliďte data. To je provozní dospělost: méně stop, jasnější pravidlo, klidnější tým.
 
+## Převod uzavřené druhé kvartální kontroly do pololetního rytmu
+
+Když druhá kvartální kontrola dopadne stabilně, tým má tendenci nechat všechno tak, jak bylo. To zní rozumně, ale často to znamená, že zůstane zachovaný i kontrolní rytmus, který už není potřeba. Pravidlo se dál kontroluje čtvrtletně jen proto, že se tak kontrolovalo během stabilizace. Jenže stabilizace není trvalý domov. Je to dočasné lešení.
+
+Po dvou dobrých kvartálních kontrolách proto otevřete otázku:
+
+```text
+Může pravidlo přejít z kvartální kontroly do pololetního rytmu bez ztráty použitelnosti, odpovědnosti a privacy-first střídmosti?
+```
+
+Odpověď nemá být automatické ano. Některá pravidla se mění rychleji: týkají se živé nabídky, důležitého formuláře, nového obchodního procesu nebo části produktu, která je pořád ve vývoji. Jiná pravidla po dvou kvartálech prostě sedí v provozu, lidé je používají a návratový signál je dost jasný. U těch druhých dává smysl kontrolu zředit.
+
+Codyho komentář: pololetní rytmus není odměna za hodné chování dokumentu. Je to důkaz, že pravidlo už nepotřebuje chodítko. Když mu ho necháte navždy, nevypadá bezpečněji. Jen zabírá místo v kalendáři a tváří se důležitě. Kalendář už tak trpí dost.
+
+### Tři podmínky pro zředění rytmu
+
+Převod do pololetního rytmu dělejte jen tehdy, když platí všechny tři podmínky:
+
+- Pravidlo bylo při druhé kvartální kontrole použitelné bez původní historie.
+- Kanonické místo je jasné a není vedle něj živá pracovní kopie.
+- Návratový signál mimo běžný rytmus je konkrétnější než obecné "když bude problém".
+
+Pokud jedna podmínka chybí, nepřevádějte rytmus hned. Neznamená to selhání pravidla. Znamená to, že potřebuje ještě jednu běžnou kontrolu, drobný přepis nebo uklizení kanonického místa.
+
+Rozlišujte hlavně tyto situace:
+
+```text
+Pravidlo je použitelné, ale návratový signál je slabý:
+Nechte kvartální rytmus ještě jedno období a zpřesněte návratový signál.
+
+Návratový signál je jasný, ale kanonické místo je slabé:
+Nejdřív přesuňte pravidlo tam, kde se rozhodnutí opravdu dělá.
+
+Kanonické místo i signál jsou dobré, ale pravidlo závisí na rychle se měnící nabídce:
+Rytmus nezřeďujte; místo toho ho napojte na změny nabídky.
+```
+
+Tím se z převodu nestane mechanické stárnutí dokumentace. Pololetní rytmus má patřit pravidlům, která jsou opravdu běžnou součástí práce, ne pravidlům, která jen přežila dvě kontroly.
+
+### Praktický příklad
+
+Pravidlo:
+
+```text
+Rozpočtový kontext se u B2B poptávky doptává jen tehdy, když bez něj nejde navrhnout další konkrétní krok pro zákazníka.
+```
+
+Druhá kvartální kontrola ukázala, že pravidlo funguje:
+
+- nový člověk ho našel v obchodním checklistu,
+- použil ho bez vysvětlování původní debaty,
+- nevznikl nový formulář, scoring ani tabulka použití,
+- dočasné poznámky z kontroly byly smazané,
+- návratový signál je jasný.
+
+Převod do pololetního rytmu:
+
+```text
+Rozhodnutí:
+Pravidlo přechází z kvartální kontroly do pololetního review obchodních šablon.
+
+Proč:
+Dvě kvartální kontroly potvrdily najitelnost, samostatné použití a datovou střídmost.
+
+Co zůstává:
+Pravidlo v obchodním checklistu a návratový signál mimo běžný rytmus.
+
+Co končí:
+Samostatná kvartální kontrolní karta pro toto pravidlo.
+
+Mimo rytmus otevře:
+Tři relevantní poptávky za sebou nepůjde kvalifikovat bez ručního vysvětlování stejné části pravidla.
+```
+
+Všimněte si, že se nepřidává nový dohled. Rytmus se zřeďuje právě proto, že pravidlo nepotřebuje zvláštní péči. Pokud by převod do pololetního rytmu vyžadoval novou tabulku, nový report nebo nové měření, pravděpodobně jste jen přejmenovali kvartální kontrolu na něco elegantnějšího. Elegantní zbytečnost je pořád zbytečnost, jen má lepší kabát.
+
+### Co se při převodu musí odstranit
+
+Převod do pololetního rytmu není jen změna data další kontroly. Je to úklid stabilizační vrstvy.
+
+Odstraňte nebo uzavřete:
+
+- samostatnou kartu druhé kvartální kontroly, pokud už její závěr žije u kanonického místa,
+- dočasné seznamy použití,
+- pracovní kopie pravidla,
+- poznámky s konkrétními zákaznickými příklady,
+- připomínky v kalendáři, které vznikly jen kvůli stabilizaci,
+- interní odkazy na starou debatu, pokud už nejsou potřeba pro rozhodnutí.
+
+Nechte:
+
+- aktuální znění pravidla,
+- kanonické místo,
+- vlastníka,
+- pololetní kontrolní rytmus,
+- návratový signál mimo rytmus,
+- krátký changelog, že pravidlo přešlo ze stabilizační kontroly do běžného dlouhodobého režimu.
+
+Pokud potřebujete zachovat příklad pro školení, anonymizujte ho tak, aby neobsahoval jméno zákazníka, firmu, e-mail, částku, přesný projekt ani kombinaci detailů, která člověka nebo obchodní situaci zpětně pozná. U praktického pravidla většinou stačí scénář:
+
+```text
+B2B poptávka má jasný cíl, ale nejasný rozsah. Rozpočet se nedoptává ve formuláři; obchod nejdřív navrhne další krok a rozpočtový kontext otevře až ve chvíli, kdy bez něj nejde rozhodnout o rozsahu.
+```
+
+To je použitelné a přitom střídmé. Dobrý příklad nemusí být malý únik reality.
+
+### Privacy-first převod
+
+Pololetní rytmus je privacy-first rozhodnutí, pokud opravdu snižuje objem provozních stop. Nejde jen o méně schůzek. Jde o méně pomocných záznamů, méně seznamů použití, méně kopií pravidel a menší šanci, že někde zůstane konkrétní zákaznický detail bez účelu.
+
+Před převodem si položte pět otázek:
+
+- Sbíráme kvůli pravidlu ještě nějaké údaje jen proto, abychom ho kontrolovali?
+- Existuje pomocná evidence, která po dvou kvartálech nemá jasný účel?
+- Je návratový signál napsaný tak, že nevyžaduje průběžné sledování jednotlivců?
+- Stačí pro pololetní kontrolu agregované pozorování místo konkrétních zákaznických stop?
+- Ví vlastník, co má smazat, anonymizovat nebo nechat u zdroje pravdy?
+
+Privacy-first převod by měl skončit větou:
+
+```text
+Po převodu do pololetního rytmu nevzniká žádná nová evidence použití pravidla; v kanonickém místě zůstává jen aktuální pravidlo, vlastník, běžný rytmus a návratový signál.
+```
+
+Pokud tu větu neumíte napsat, převod ještě není čistý. Někde zůstala skrytá kontrola, stará kopie nebo datový zvyk, který se tváří jako opatrnost.
+
+### Karta převodu do pololetního rytmu
+
+```text
+Pravidlo nebo pracovní místo:
+
+Kanonické místo:
+
+Výsledek druhé kvartální kontroly:
+
+Podmínky pro převod:
+- použitelné bez původní historie
+- jasné kanonické místo
+- konkrétní návratový signál mimo rytmus
+
+Rozhodnutí:
+- převést do pololetního rytmu
+- ponechat kvartální rytmus ještě jedno období
+- otevřít drobný přepis
+- přesunout kanonické místo
+
+Nový běžný rytmus:
+
+Co se ruší ze stabilizační péče:
+
+Co zůstává u zdroje pravdy:
+
+Co se maže:
+
+Co se anonymizuje:
+
+Co se výslovně dál nesleduje:
+
+Jaká data díky převodu dál nevznikají:
+
+Návratový signál mimo běžný rytmus:
+
+Vlastník:
+
+Datum další běžné kontroly:
+```
+
+Karta má být krátká. Pokud se vám do ní nevejde rozhodnutí bez dlouhého vysvětlování, pravděpodobně nejde o převod rytmu, ale o nové rozhodnutí o pravidle. V tom případě uzavřete převod jako `ponechat kvartální rytmus` a otevřete samostatnou otázku.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte uzavírací větu druhé kvartální kontroly.
+2. Minuta 2: ověřte tři podmínky pro zředění rytmu.
+3. Minuta 3: vyberte jeden ze čtyř výsledků převodu.
+4. Minuta 4: napište, co se ruší ze stabilizační péče.
+5. Minuta 5: potvrďte privacy-first úklid dočasných stop.
+6. Minuta 6: uložte nový rytmus ke kanonickému místu.
+
+Workshop nesmí skončit větou "ještě to pro jistotu budeme sledovat". Pokud potřebujete sledovat, nepřevádějte. Pokud převádíte, ukončete stabilizační péči. Napůl zředěný rytmus je jen starý rytmus s lepším popiskem.
+
+### Checklist převodu do pololetního rytmu
+
+- Má pravidlo za sebou dvě stabilní kvartální kontroly?
+- Bylo použitelné bez původní historie a bez osobního vysvětlování?
+- Je kanonické místo jasné a bez živých kopií?
+- Je návratový signál mimo rytmus konkrétní?
+- Nevyžaduje návratový signál průběžné sledování jednotlivých lidí nebo zákaznických případů?
+- Je rozhodnuto, zda pravidlo přechází do pololetního rytmu, nebo zůstává kvartálně ještě jedno období?
+- Víme, co se ruší ze stabilizační péče?
+- Jsou dočasné karty, tabulky, příklady a poznámky smazané, anonymizované nebo přesunuté do řádné evidence?
+- Zůstává u zdroje pravdy jen aktuální pravidlo, vlastník, rytmus a návratový signál?
+- Je výslovně napsané, co se dál nesleduje?
+- Nevznikl nový report ani pomocný seznam jen kvůli pololetní kontrole?
+- Je další kontrola napojená na běžný provozní rytmus, ne na mimořádnou pozornost?
+
+Převod do pololetního rytmu je malá, ale důležitá zkouška provozní zralosti. Umíte pravidlo nejen vytvořit, opravit a zkontrolovat, ale také mu ubrat péči, když už ji nepotřebuje. V dobrém systému se některé věci stávají tiššími. Ne proto, že by přestaly být důležité, ale proto, že konečně fungují jako součást normální práce.
+
 ## Pracovní log
 
+- 2026-06-30: Doplněna úvodní podkapitola o převodu uzavřené druhé kvartální kontroly do pololetního rytmu: podmínky zředění kontroly, praktický příklad, úklid stabilizační péče, privacy-first převod, karta, mini workshop a checklist.
 - 2026-06-30: Doplněna úvodní podkapitola o uzavření druhé kvartální kontroly dlouhodobého rytmu: uzavírací věta, hranice nesledované práce, praktické příklady, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-30: Doplněna úvodní podkapitola o uzavření první kvartální kontroly dlouhodobého rytmu: uzavírací věty, praktický příklad, hranice neotevírané práce, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-30: Doplněna úvodní podkapitola o první kvartální kontrole dlouhodobého rytmu: najitelnost pravidla, běžné použití, datová stopa, čtyři výsledky kontroly, privacy-first úklid, karta, mini workshop a checklist.
