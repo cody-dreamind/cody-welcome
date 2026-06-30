@@ -275192,8 +275192,178 @@ Pokud se workshop protáhne, pravděpodobně neuzavíráte druhé použití, ale
 
 Dobré uzavření druhého použití je krátké, nudné a užitečné. Téma se buď vrátí do klidu, nebo dostane poctivě nový začátek. Nejhorší varianta je mezistav, kde se nic neotevřelo, nic nezavřelo a někde v rohu tiše běží další sledování.
 
+## Převod uzavřeného slabého signálu do tichého provozu
+
+Po uzavření druhého běžného použití přichází poslední malý krok: převést téma do tichého provozu. Tichý provoz není další kontrolní režim. Je to stav, kdy pravidlo normálně platí, lidé ho najdou na správném místě a nikdo kolem něj nedrží zvláštní evidenci jen proto, že se kdysi objevil slabý signál.
+
+Rozdíl mezi dlouhodobým klidem a tichým provozem je praktický. Dlouhodobý klid říká, že se téma neotevírá bez návratového signálu. Tichý provoz říká, že se o tom v běžné práci už nemusí mluvit zvlášť. Pravidlo je součástí standardu, ne malé provozní drama s vlastním stínem.
+
+Převod začněte jednou větou:
+
+```text
+Uzavřený slabý signál převádíme do tichého provozu tak, že v běžném pracovním místě zůstává pouze pravidlo a všechna mimořádná pozornost končí.
+```
+
+Tahle věta je důležitá hlavně pro tým. Bez ní často zůstane někde viset úkol "ještě sledovat", připomínka v kalendáři nebo ruční seznam výjimek. Nikdo ho aktivně nepotřebuje, ale nikdo ho ani nezruší. A pak se po třech měsících zjistí, že se pořád sbírají data k problému, který byl dávno uzavřený. Gratuluji, máme procesní fosilii.
+
+### Co v tichém provozu zůstává
+
+V tichém provozu mají zůstat jen tři věci:
+
+- kanonické pravidlo v místě, kde ho člověk při práci přirozeně hledá,
+- návratový signál, který říká, kdy se téma znovu otevře,
+- běžná odpovědnost vlastníka daného pracovního místa.
+
+Všechno ostatní musí mít jasný důvod. Pokud důvod nemá, patří pryč. Zvlášť pozor na pomocné tabulky, štítky v CRM, dočasné exporty, samostatné poznámky v chatu a staré komentáře ve šablonách. Tyhle věci se tváří jako levná paměť, ale v praxi často vytvářejí druhý zdroj pravdy.
+
+Příklad tichého provozu:
+
+```text
+Kanonické pravidlo:
+V obchodní šabloně je věta, kdy se ptát na rozhodovací omezení místo povinného rozpočtu.
+
+Návratový signál:
+Relevantní poptávku znovu nejde kvalifikovat bez stejného ručního doptávání nebo nové pomocné evidence.
+
+Běžná odpovědnost:
+Vlastník obchodní šablony hlídá pravidlo při běžné měsíční údržbě šablon, ne v samostatném režimu.
+
+Mimořádná pozornost:
+Končí. Žádný zvláštní report, žádná tabulka výjimek, žádné sledování konkrétního obchodníka.
+```
+
+Tichý provoz tedy neznamená, že se na pravidlo zapomene. Znamená, že se chová jako ostatní stabilní pravidla. Když funguje, nepřitahuje pozornost. Když přestane fungovat, otevře ho návratový signál.
+
+### Praktický převod ve třech krocích
+
+První krok je přepsat výsledek do přítomného času. Místo "ověřili jsme, že přesun věty pomohl" napište větu, kterou člověk použije při práci:
+
+```text
+U B2B poptávky s nejasným rozpočtem nejdřív zjišťujeme cíl, rozhodovací omezení a očekávaný dopad. Povinné rozpočtové pole nepřidáváme, dokud se problém nepotvrdí návratovým signálem.
+```
+
+Druhý krok je odstranit vyprávění o ověření z míst, kde by překáželo běžnému použití. Historie patří do pracovního logu nebo rozhodovacího záznamu, ne do každé šablony. Člověk, který řeší novou poptávku, nepotřebuje číst kroniku slabého signálu. Potřebuje vědět, co má udělat teď.
+
+Třetí krok je zrušit zvláštní péči. Pokud existovala připomínka, štítek, dočasné pole, ruční checklist nebo samostatné review, ukončete ho výslovně:
+
+```text
+Zvláštní kontrolu slabého signálu ukončujeme. Další práce se neplánuje. Téma se vrátí pouze při návratovém signálu.
+```
+
+Tento zápis je malý, ale brání tomu, aby se tichý provoz proměnil v tiché sledování.
+
+### Privacy-first převod
+
+Privacy-first převod do tichého provozu má jednoduché pravidlo: stabilní pravidlo si nezaslouží mimořádnou datovou stopu.
+
+Po uzavření proto projděte čtyři otázky:
+
+- Zůstává někde osobní nebo zákaznický příklad, který už není potřeba pro rozhodnutí?
+- Nevznikl pomocný atribut, který se tváří jako dočasný, ale dál se plní?
+- Nesledujeme chování člověka místo výsledku pracovního místa?
+- Má ponechaná stopa jasný účel, vlastníka a dobu životnosti?
+
+Pokud odpověď bolí, je to dobré znamení. Privacy-first úklid nemá být jen slavnostní prohlášení o evropském provozu. Má se projevit přesně tady: méně zbytečných polí, méně exportů, méně osobních stop a méně důvodů posílat data do dalšího nástroje.
+
+Minimální zápis:
+
+```text
+Do tichého provozu převádíme:
+
+V kanonickém místě zůstává:
+
+Mimořádnou kontrolu ukončujeme:
+
+Mažeme nebo anonymizujeme:
+
+Dál nesbíráme:
+
+Téma se znovu otevře jen pokud:
+```
+
+Příklad:
+
+```text
+Do tichého provozu převádíme:
+Pravidlo pro kvalifikaci B2B poptávky bez povinného rozpočtového pole.
+
+V kanonickém místě zůstává:
+Jedna pracovní věta v obchodní šabloně.
+
+Mimořádnou kontrolu ukončujeme:
+Ruční sledování dalších poptávek po lokální opravě.
+
+Mažeme nebo anonymizujeme:
+Dočasnou poznámku s konkrétním zákaznickým příkladem.
+
+Dál nesbíráme:
+Povinný rozpočet, osobní skóre obchodníka, seznam výjimek ani kliky v šabloně.
+
+Téma se znovu otevře jen pokud:
+Relevantní poptávku znovu nejde kvalifikovat bez stejného ručního doptávání nebo nové pomocné evidence.
+```
+
+### Karta převodu do tichého provozu
+
+```text
+Téma:
+
+Uzavřený slabý signál:
+
+Poslední uzavírací stav:
+- zavřeno do klidu
+- zavřeno s lokálním dočištěním
+- přepsaná pracovní věta
+
+Kanonické pracovní místo:
+
+Pravidlo v přítomném čase:
+
+Co zůstává v běžném provozu:
+
+Co výslovně ukončujeme:
+
+Co mažeme, anonymizujeme nebo archivujeme s důvodem:
+
+Co dál nesbíráme:
+
+Běžný vlastník pracovního místa:
+
+Budoucí návratový signál:
+
+Datum převodu:
+```
+
+Karta má být krátká. Pokud se z ní stane detailní post-mortem, nejspíš do ní taháte historii, která patří jinam. Tichý provoz potřebuje jasné pravidlo, ne román o tom, jak statečně přežilo dvě ověření.
+
+### Mini workshop na 5 minut
+
+1. Minuta 1: přečtěte uzavírací větu druhého běžného použití.
+2. Minuta 2: přepište pravidlo do přítomného času.
+3. Minuta 3: určete jediné kanonické pracovní místo.
+4. Minuta 4: zrušte mimořádné kontroly a dočasné stopy.
+5. Minuta 5: potvrďte návratový signál a vlastníka běžného místa.
+
+Pokud tým během workshopu navrhne novou metriku, nové pole nebo třetí ověření, vraťte se k otázce: jaké rozhodnutí by tahle nová stopa změnila? Pokud odpověď není konkrétní, stopa nevzniká.
+
+### Checklist tichého provozu
+
+- Je pravidlo přepsané do přítomného času?
+- Je v jednom kanonickém pracovním místě?
+- Neobsahuje běžná šablona zbytečnou historii ověřování?
+- Je mimořádná kontrola výslovně ukončená?
+- Zmizely dočasné poznámky, kopie, exporty a připomínky bez účelu?
+- Nezůstalo žádné nové pole, štítek nebo ruční sledování "pro jistotu"?
+- Je jasné, co dál nesbíráme?
+- Má pravidlo běžného vlastníka místo zvláštního hlídače?
+- Je návratový signál konkrétní?
+- Umí tým téma nechat být, dokud návratový signál opravdu nepřijde?
+
+Tichý provoz je dobrý konec malé smyčky. Pravidlo funguje, lidé ho najdou, data se nehromadí a tým se může vrátit k práci, která má dnešní důvod. Codyho komentář: když se po dobře uzavřeném slabém signálu nic dalšího neděje, není to nuda. Je to systém, který se konečně naučil mlčet ve správnou chvíli.
+
 ## Pracovní log
 
+- 2026-06-30: Doplněna úvodní podkapitola o převodu uzavřeného slabého signálu do tichého provozu: pravidlo v přítomném čase, ukončení mimořádné kontroly, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-30: Doplněna úvodní podkapitola o uzavření druhého běžného použití po návratu slabého signálu do klidu: uzavírací stavy, praktický příklad, úklid dočasných stop, privacy-first uzavření, karta, mini workshop a checklist.
 - 2026-06-30: Doplněna úvodní podkapitola o druhém běžném použití po návratu slabého signálu do klidu: kdy ho vůbec dělat, tři ověřovací otázky, čtyři výsledné stavy, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-06-30: Doplněna úvodní podkapitola o uzavření prvního běžného použití po návratu slabého signálu do klidu: uzavírací stavy, praktický příklad, úklid dočasných stop, privacy-first uzavření, karta, mini workshop a checklist.
