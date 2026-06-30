@@ -276566,8 +276566,187 @@ Pokud se v páté minutě ukáže, že dočasné podklady nejdou jednoduše odst
 
 Převod do dlouhodobého rytmu je dobrý konec malé systémové změny. Ne proto, že už se nikdy nic nestane, ale protože tým ví, co dělat bez zvláštní pozornosti. Pravidlo má svoje místo. Rytmus má svého vlastníka. Návrat má podmínku. A všechna data, která vznikla jen kvůli ověřování, buď zmizí, nebo dostanou vlastní řádné rozhodnutí. Tak se pozná tichý provoz: není neviditelný proto, že ho nikdo neřeší, ale proto, že už nepotřebuje hluk.
 
+## První kvartální kontrola dlouhodobého rytmu
+
+Dlouhodobý rytmus se nesmí hned při první kontrole změnit zpátky na mimořádnou péči. Kvartální kontrola není restart staré opravy, ale krátké ověření, že pravidlo pořád bydlí na správném místě, používá se v běžné práci a nevyrábí kolem sebe skrytou administrativu. Pokud se z první kvartální kontroly stane velká retrospektiva, tým pravděpodobně nepřevedl pravidlo do dlouhodobého rytmu, ale jen ho odložil do kalendáře s hezčím názvem.
+
+Začněte jednoduchou větou:
+
+```text
+První kvartální kontrola dlouhodobého rytmu ověřuje, zda pravidlo pořád funguje bez mimořádné pozornosti.
+```
+
+Tahle věta je brzda proti dvěma častým chybám. První chyba je přehnané dokazování: tým začne znovu sbírat příklady, tabulky a screenshoty, i když pravidlo poslední měsíce normálně fungovalo. Druhá chyba je kosmetické otevírání: někdo si všimne, že formulace by mohla být elegantnější, a z kontroly se stane ediční sprint. Obojí může vypadat jako pečlivost. Ve skutečnosti to často jen vrací hluk do místa, které už mělo být tiché.
+
+### Tři kontrolní otázky
+
+Kvartální kontrola má projít jen tři otázky:
+
+- Je pravidlo stále najitelné v kanonickém místě?
+- Použilo se aspoň jednou v běžné práci bez zvláštního vysvětlování?
+- Nevznikla kolem něj nová datová stopa, kopie nebo stínový proces?
+
+`Najitelné` znamená, že člověk nemusí vědět, jak se pravidlo historicky jmenovalo. Najde ho tam, kde pracuje: v checklistu, šabloně, provozní kartě, definici hotovo nebo interním playbooku. Pokud ho najde jen člověk, který byl u původní debaty, pravidlo není dlouhodobé. Je to památka s dobrým úmyslem.
+
+`Použité bez vysvětlování` znamená, že pravidlo dokázalo vést rozhodnutí bez autora opravy, bez ručního komentáře a bez návratu do staré diskuse. Nemusí jít o dokonalé použití. Stačí, že člověk podle pravidla udělal přiměřené rozhodnutí a práce se nezasekla na tom, co pravidlo vlastně znamená.
+
+`Bez nové datové stopy` znamená, že kvůli pravidlu nevznikla pomocná tabulka, další štítek v CRM, nový report, screenshotová knihovna ani ruční evidence "jen pro přehled". Pokud něco takového vzniklo, nejdřív se ptejte, jaké rozhodnutí tím mělo být lepší. Když odpověď není jasná, stopa patří pryč.
+
+### Praktický příklad kontroly
+
+Původní převod do dlouhodobého rytmu:
+
+```text
+Pravidlo:
+Rozpočtový kontext se u B2B poptávky doptává jen tehdy, když bez něj nejde navrhnout další konkrétní krok.
+
+Kanonické místo:
+Checklist před odesláním potvrzovacího e-mailu.
+
+Běžný rytmus:
+Měsíční review obchodních šablon.
+
+Návratový signál:
+Dva obchodníci po sobě nedokážou bez vysvětlení rozhodnout, zda rozpočet doptat, nebo nedoptat.
+```
+
+První kvartální kontrola:
+
+```text
+Najitelnost:
+Pravidlo je pořád v checklistu potvrzovacího e-mailu a není schované v poznámce z původní debaty.
+
+Běžné použití:
+Ve dvou poptávkách stačilo k rozhodnutí, že rozpočet není nutné doptat v prvním kontaktu.
+
+Datová stopa:
+Nevzniklo nové CRM pole, pomocný export ani ruční seznam poptávek s rozpočtovým kontextem.
+
+Závěr:
+Rytmus pokračuje beze změny. Další kontrola proběhne v běžném review šablon, ne jako samostatná agenda.
+```
+
+To je dobrý výsledek, i když nevypadá dramaticky. Pravidlo funguje, nic se nerozšiřuje, data se nehromadí a tým nezakládá novou aktivitu jen proto, aby měl pocit, že se o věc stará. Produktivita někdy vypadá nudně. Bohužel pro milovníky tabulek, často právě tehdy funguje nejlíp.
+
+### Čtyři výsledky kvartální kontroly
+
+Po kontrole vyberte jeden ze čtyř výsledků:
+
+- Pokračuje beze změny: pravidlo je najitelné, použitelné a bez nové datové stopy.
+- Potřebuje lokální zpřesnění: pravidlo funguje, ale jedna formulace nebo odkaz mate při běžném použití.
+- Potřebuje nový návratový signál: pravidlo funguje, ale původní signál už neodpovídá dnešní práci.
+- Otevírá samostatnou otázku: kontrola odhalila problém mimo hranici původního pravidla.
+
+`Pokračuje beze změny` je nejčistší výsledek. Zapište jednu větu a tím končete. Nepřidávejte "pro jistotu" další kontrolní úkol.
+
+`Lokální zpřesnění` má být malé. Třeba přejmenovat odkaz, přesunout pravidlo o pár řádků výš, odstranit starý příklad nebo doplnit jednu rozhodovací větu. Jakmile úprava sahá do formuláře, datové mapy, obchodního procesu nebo měření, už to není lokální zpřesnění.
+
+`Nový návratový signál` dává smysl, když se změnil kontext běžné práce. Například původně pravidlo používal jeden obchodník, ale teď ho používá i delivery tým. Signál "dva obchodníci po sobě" už nemusí stačit; lepší může být "dva lidé ve dvou rolích po sobě". Změna signálu ale nesmí nenápadně rozšířit sběr dat.
+
+`Samostatná otázka` vzniká ve chvíli, kdy kontrola objeví širší problém. Třeba se ukáže, že potvrzovací e-mail funguje, ale obchodní kvalifikace před ním je nejasná. To není důvod rozebrat hotové pravidlo. Založte novou otázku s vlastním pracovním místem a původní rytmus nechte běžet.
+
+### Privacy-first kontrola kvartálního rytmu
+
+Privacy-first kontrola má být tvrdší než běžná redakční kontrola, protože dlouhodobé rytmy umí tiše vyrábět data. Ne naráz, ne dramaticky, ale po malých kouscích: jeden sloupec, jeden export, jeden sdílený dokument, jedna složka se screenshoty.
+
+Položte si tři otázky:
+
+```text
+Vznikla kvůli pravidlu nová evidence?
+
+Obsahuje osobní, obchodní nebo behaviorální údaje?
+
+Umíme bez ní udělat stejné rozhodnutí?
+```
+
+Pokud je odpověď na první dvě otázky ano a na třetí taky ano, evidence nemá v dlouhodobém rytmu co dělat. Smažte ji, anonymizujte nebo převeďte do řádné datové evidence s jasným účelem. Nenechávejte ji v pracovních poznámkách jen proto, že "se může hodit". Tahle věta je v provozu skoro vždycky začátek skladiště.
+
+Dobrá privacy-first závěrečná věta vypadá takto:
+
+```text
+Kvartální kontrola nepřenáší do dalšího období žádné dočasné příklady, exporty ani zákaznické údaje; v rytmu zůstává pouze obecné pravidlo a návratový signál.
+```
+
+Pokud nějaká data zůstat musí, napište minimum:
+
+```text
+V rytmu zůstává jen počet případů, kdy pravidlo nešlo použít bez vysvětlení. Neevidujeme jména zákazníků, obsah zpráv ani hodnotu poptávky.
+```
+
+Codyho komentář: dlouhodobý rytmus má být jako dobrá polička, ne jako půda. Věci, které se používají, mají svoje místo. Věci, které se jen "možná někdy hodí", obvykle čekají na den, kdy je někdo bude muset s otráveným výrazem třídit.
+
+### Karta první kvartální kontroly
+
+```text
+Pravidlo nebo pracovní místo:
+
+Kanonické místo:
+
+Běžný rytmus:
+
+Vlastník rytmu:
+
+Kontrolované období:
+
+Odpověď na otázku najitelnosti:
+
+Odpověď na otázku běžného použití:
+
+Odpověď na otázku datové stopy:
+
+Výsledek kontroly:
+- pokračuje beze změny
+- lokální zpřesnění
+- nový návratový signál
+- samostatná otázka
+
+Co se výslovně nemění:
+
+Co zůstává zavřené:
+
+Co se maže, anonymizuje nebo převádí mimo pracovní trasu:
+
+Jaká data se dál nesbírají:
+
+Další běžný rytmus nebo návratový signál:
+
+Záznam uložil:
+
+Datum:
+```
+
+Karta nemá vytvářet nový report. Má být krátkým záznamem, že pravidlo přežilo první normální období. Pokud ji vyplňujete déle než deset minut, pravděpodobně kontrolujete moc věcí najednou.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: otevřete kanonické místo pravidla.
+2. Minuta 2: ověřte, zda je pravidlo najitelné bez historie.
+3. Minuty 3 až 4: najděte jeden běžný průchod, kde pravidlo pomohlo nebo mělo pomoct.
+4. Minuta 5: zkontrolujte, zda nevznikla nová datová stopa.
+5. Minuta 6: vyberte jeden ze čtyř výsledků a zapište závěrečnou větu.
+
+Pokud nenajdete žádný běžný průchod, neznamená to automaticky problém. Možná se situace za kvartál prostě neobjevila. V takovém případě nevybírejte lokální úpravu jen proto, aby se něco dělo. Zapište, že pravidlo zůstává v rytmu a návratový signál se nemění.
+
+### Checklist první kvartální kontroly
+
+- Kontrolujeme pravidlo v běžném rytmu, ne starou mimořádnou opravu?
+- Je pravidlo pořád v jednom kanonickém místě?
+- Najde ho člověk bez znalosti původní historie?
+- Existuje aspoň jeden běžný průchod, který ukazuje použitelnost nebo nepoužití bez problému?
+- Pokud průchod neexistuje, nezakládáme umělý test jen kvůli kontrole?
+- Nevznikla kolem pravidla nová tabulka, export, štítek, screenshotová složka nebo ruční evidence?
+- Vybrali jsme jeden ze čtyř výsledků?
+- Je lokální zpřesnění opravdu lokální?
+- Pokud měníme návratový signál, nerozšiřujeme tím sběr dat?
+- Pokud vznikla samostatná otázka, oddělili jsme ji od původního pravidla?
+- Je výslovně napsané, co se nemění a co zůstává zavřené?
+- Dá se po kontrole pokračovat bez nové schůzky, zvláštního reportu nebo hlídacího úkolu?
+
+První kvartální kontrola je úspěšná tehdy, když po ní pravidlo působí obyčejněji než před ní. Je snadno najitelné, nemá kolem sebe zvláštní režim, nevyrábí datový nepořádek a umí počkat na svůj běžný rytmus. Pokud kontrola skončí jen jednou klidnou větou, je to často nejlepší možný výsledek. Ano, v kalendáři to vypadá méně hrdinsky. Ale v provozu je to přesně ten druh nudy, který šetří čas, data i nervy.
+
 ## Pracovní log
 
+- 2026-06-30: Doplněna úvodní podkapitola o první kvartální kontrole dlouhodobého rytmu: najitelnost pravidla, běžné použití, datová stopa, čtyři výsledky kontroly, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-30: Doplněna úvodní podkapitola o převodu potvrzeného tichého provozu do dlouhodobého rytmu: kanonické místo, běžný rytmus, návratový signál, úklid mimořádné péče, privacy-first převod, karta, mini workshop a checklist.
 - 2026-06-30: Doplněna úvodní podkapitola o druhém běžném použití po uzavřené údržbě tichého provozu: kdy ho dělat, kontrolní otázky, praktický příklad, výsledné stavy, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-06-30: Doplněna úvodní podkapitola o uzavření prvního běžného použití po uzavřené údržbě tichého provozu: uzavírací stavy, praktický příklad, propsání do kanonického místa, privacy-first úklid, karta, mini workshop a checklist.
