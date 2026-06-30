@@ -277099,8 +277099,207 @@ Když se v druhé minutě ukáže, že pravidlo bez historie nejde pochopit, nep
 
 Druhá kvartální kontrola je úspěšná, když pravidlo ztratí závislost na paměti týmu. Stane se obyčejnou součástí práce: najitelné, použitelné, střídmé na data a kontrolované jen v rytmu, který odpovídá realitě. Pokud po kontrole zůstane méně poznámek než před ní, nejspíš jste to udělali správně. Krásně neokázalé. Skoro podezřelé.
 
+## Uzavření druhé kvartální kontroly dlouhodobého rytmu
+
+Po druhé kvartální kontrole už není cílem dokázat, že pravidlo stojí za další péči. Cílem je rozhodnout, jestli může zůstat v běžném dlouhodobém rytmu, jestli potřebuje jednu drobnou opravu, nebo jestli se má otevřít samostatná změna mimo kontrolní kartu.
+
+Začněte uzavírací větou:
+
+```text
+Druhá kvartální kontrola se uzavírá tímto výsledkem:
+```
+
+Do věty napište výsledek tak, aby šel použít bez čtení celé kontroly:
+
+```text
+Druhá kvartální kontrola se uzavírá výsledkem stabilní bez změny: pravidlo je najitelné v obchodním checklistu, nový člověk ho použil bez původní historie a po kontrole nezůstává žádná pomocná evidence případů.
+```
+
+Tahle věta je důležitější než dlouhý zápis. Pokud ji neumíte napsat, kontrola ještě není uzavřená. Buď nemáte jasný výsledek, nebo se do uzavření přimíchalo nové téma. V obou případech nejdřív zmenšete závěr na jednu pracovní situaci.
+
+### Co se po druhé kontrole nesmí stát
+
+Po druhé kontrole se často objeví pokušení přidat "jen malý" dohled: jednou za měsíc se podívat, jestli pravidlo pořád funguje, vést seznam použití, nebo nechat dočasnou tabulku ještě chvíli ležet pro jistotu. To vypadá bezpečně, ale většinou to jen prodlužuje mimořádnou péči, která měla dávno skončit.
+
+Uzavření proto musí výslovně říct tři věci:
+
+- Co pokračuje v běžném rytmu.
+- Co se po kontrole už dál nesleduje.
+- Jaký signál by téma otevřel mimo plánovaný rytmus.
+
+Příklad:
+
+```text
+Pokračuje:
+Pravidlo zůstává v obchodním checklistu a kontroluje se pouze v běžném kvartálním review šablon.
+
+Dál nesledujeme:
+Nevzniká seznam jednotlivých použití pravidla ani měsíční kontrola pro jistotu.
+
+Mimo rytmus otevře:
+Tři relevantní poptávky za sebou nepůjde kvalifikovat bez ručního vysvětlování stejné části pravidla.
+```
+
+Takový zápis chrání tým před dvěma extrémy. Na jedné straně pravidlo nezmizí bez návratového signálu. Na druhé straně se z něj nestane věčný malý projekt, který si bere pozornost jen proto, že kdysi vznikl jako důležitá oprava.
+
+### Praktický příklad
+
+Kontrola řešila pravidlo:
+
+```text
+Rozpočtový kontext se u B2B poptávky doptává jen tehdy, když bez něj nejde navrhnout další konkrétní krok.
+```
+
+Druhá kvartální kontrola dopadla dobře. Nový člověk našel pravidlo v checklistu, použil ho při běžné poptávce a nevznikla nová datová stopa.
+
+Uzavření:
+
+```text
+Výsledek:
+Stabilní bez změny.
+
+Uzavírací věta:
+Pravidlo zůstává v obchodním checklistu beze změny, protože je najitelné, použitelné bez původní historie a nevytváří novou evidenci použití.
+
+Co se neotevírá:
+Nepřidáváme nové pole do formuláře, nezakládáme scoring rozpočtů a nezavádíme měsíční dohled nad jednotlivými poptávkami.
+
+Privacy-first závěr:
+Dočasné poznámky z kontroly byly smazané; v pracovní trase zůstává jen aktuální pravidlo a návratový signál.
+
+Další rytmus:
+Běžné kvartální review obchodních šablon.
+```
+
+Všimněte si, že zápis nezvyšuje administrativu. Pravidlo neoslavuje, jen ho vrací do provozu. To je zdravý konec: menší datová stopa, méně dočasných poznámek, jasnější pracovní místo.
+
+### Když druhá kontrola odhalila drobný přepis
+
+Pokud výsledek není `stabilní bez změny`, uzavření musí pořád zůstat úzké. Drobný přepis znamená jednu větu, ne přestavbu pravidla.
+
+Příklad:
+
+```text
+Výsledek:
+Stabilní s drobným přepisem.
+
+Původní věta:
+Doptat rozpočet jen při nutnosti kvalifikace.
+
+Nová věta:
+Rozpočtový kontext se doptává až ve chvíli, kdy bez něj nejde navrhnout další konkrétní krok pro zákazníka.
+
+Co se nemění:
+Formulář, CRM pole, obchodní kvalifikace ani návratový signál.
+```
+
+Pokud při přepisu zjistíte, že chcete měnit formulář, sales proces, CRM nebo metriky, nejde o drobný přepis. Uzavřete kontrolu výsledkem `návrat do úpravy rytmu` nebo založte samostatnou otázku. Kontrolní karta nemá tajně nést větší změnu jen proto, že se vešla na konec dokumentu.
+
+### Privacy-first uzavření
+
+Privacy-first uzavření druhé kontroly má být tvrdší než u první. Po druhém kvartálu už není moc důvodů držet pomocné důkazy v pracovní trase. Buď jsou pořád potřeba pro jasný účel, nebo patří pryč.
+
+Projděte tyto položky:
+
+- dočasné poznámky z kontrolního workshopu,
+- konkrétní zákaznické příklady,
+- screenshoty formulářů, CRM nebo e-mailů,
+- pomocné tabulky použití pravidla,
+- odkazy na interní konverzace,
+- pracovní kopie checklistů a staré varianty formulací.
+
+U každé položky rozhodněte:
+
+```text
+Smazat:
+Už neslouží rozhodnutí a obsahuje konkrétní provozní nebo zákaznický detail.
+
+Anonymizovat:
+Příklad je užitečný jako vzor, ale nepotřebuje jméno, firmu, e-mail, částku ani identifikovatelný kontext.
+
+Přesunout do řádné evidence:
+Položka je pořád potřebná pro provoz, má účel, vlastníka a retenční pravidlo.
+
+Nechat v pracovní trase:
+Pouze aktuální pravidlo, návratový signál a nejbližší běžný rytmus.
+```
+
+Codyho komentář: "necháme to tam, kdyby se to hodilo" je často jen datový binec v obleku. Když nevíte, komu položka slouží a kdy se smaže, neslouží provozu. Slouží budoucímu zmatku.
+
+### Karta uzavření druhé kvartální kontroly
+
+```text
+Pravidlo nebo pracovní místo:
+
+Kanonické místo po kontrole:
+
+Výsledek druhé kvartální kontroly:
+- stabilní bez změny
+- stabilní s drobným přepisem
+- slabé kanonické místo
+- návrat do úpravy rytmu
+
+Uzavírací věta:
+
+Co pokračuje v běžném rytmu:
+
+Co se po kontrole už dál nesleduje:
+
+Co se výslovně neotevírá:
+
+Co se nemění v nástroji, formuláři, CRM, analytice nebo šabloně:
+
+Co se maže:
+
+Co se anonymizuje:
+
+Co se přesouvá do řádné evidence:
+
+Jaká data se dál nesbírají:
+
+Návratový signál mimo běžný rytmus:
+
+Další plánovaná kontrola:
+
+Záznam uložil:
+
+Datum:
+```
+
+Karta má být závěrečná, ne iniciační. Pokud v ní vznikne pět nových položek, rozdělte je: jedna uzavírací karta, maximálně jedna samostatná otázka a zbytek do poznámek mimo aktivní práci.
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: přečtěte výsledek druhé kvartální kontroly.
+2. Minuta 2: napište jednu uzavírací větu.
+3. Minuta 3: určete, co pokračuje v běžném rytmu.
+4. Minuta 4: napište, co se po kontrole dál nesleduje.
+5. Minuta 5: smažte nebo anonymizujte dočasné podklady.
+6. Minuta 6: potvrďte návratový signál mimo běžný rytmus.
+7. Minuta 7: uložte závěr ke kanonickému místu a zavřete kontrolní kartu.
+
+Když se během workshopu objeví spor, neprodlužujte ho donekonečna. Položte jednoduchou otázku: brání spor uzavření druhé kontroly, nebo je to nové téma? Pokud brání uzavření, vyřešte nejmenší rozhodovací větu. Pokud je to nové téma, napište ho stranou a kartu dokončete.
+
+### Checklist uzavření druhé kvartální kontroly
+
+- Má kontrola jednu uzavírací větu?
+- Je jasné, který ze čtyř výsledků platí?
+- Pokračuje pravidlo v běžném rytmu bez mimořádné péče?
+- Je napsané, co se po kontrole už dál nesleduje?
+- Nevznikl nový report, seznam použití nebo kontrolní rituál jen pro jistotu?
+- Je výslovně uvedeno, co se nemění ve formuláři, CRM, analytice, šabloně nebo nástroji?
+- Jsou dočasné podklady smazané, anonymizované nebo přesunuté do řádné evidence?
+- Zůstává v pracovní trase jen aktuální pravidlo, návratový signál a běžný rytmus?
+- Je jasné, jaká data se dál nesbírají?
+- Má téma návratový signál mimo běžný rytmus?
+- Je závěr uložený u kanonického místa, ne v izolované kontrolní poznámce?
+- Dokáže další člověk použít pravidlo bez čtení obou kvartálních kontrol?
+
+Uzavření druhé kvartální kontroly má být tiché. Žádné velké gesto, žádná nová aparatura, žádný pocit, že když už jsme kontrolovali, musíme něco změnit. Pokud pravidlo funguje, vraťte ho do práce. Pokud nefunguje, otevřete nejmenší samostatnou otázku. V obou případech po sobě ukliďte data. To je provozní dospělost: méně stop, jasnější pravidlo, klidnější tým.
+
 ## Pracovní log
 
+- 2026-06-30: Doplněna úvodní podkapitola o uzavření druhé kvartální kontroly dlouhodobého rytmu: uzavírací věta, hranice nesledované práce, praktické příklady, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-30: Doplněna úvodní podkapitola o uzavření první kvartální kontroly dlouhodobého rytmu: uzavírací věty, praktický příklad, hranice neotevírané práce, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-30: Doplněna úvodní podkapitola o první kvartální kontrole dlouhodobého rytmu: najitelnost pravidla, běžné použití, datová stopa, čtyři výsledky kontroly, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-30: Doplněna úvodní podkapitola o převodu potvrzeného tichého provozu do dlouhodobého rytmu: kanonické místo, běžný rytmus, návratový signál, úklid mimořádné péče, privacy-first převod, karta, mini workshop a checklist.
