@@ -273523,8 +273523,179 @@ Workshop zastavte ve chvíli, kdy se začne řešit, jestli by pravidlo nemělo 
 
 Druhé běžné použití má mít odvahu skončit. Když pravidlo funguje samo, nechte ho v kanonickém místě a vraťte tým k práci. Když nefunguje, opravte nejbližší slabinu. Mezi tím neleží zlatá střední cesta, ale dlouhá chodba plná pomocných seznamů, které jednou někdo bude muset uklidit.
 
+## Uzavření druhého běžného použití po skutečném návratu
+
+Uzavření druhého běžného použití je chvíle, kdy přestanete pravidlu držet ruku. Pokud prošlo dvěma běžnými situacemi po skutečném návratu, už nepotřebuje mimořádnou pozornost, zvláštní poznámky ani tajný seznam "ještě raději hlídat". Potřebuje jen dobré kanonické místo, jasný návratový signál a klid.
+
+Začněte uzavírací větou:
+
+```text
+Druhé běžné použití po skutečném návratu uzavíráme takto:
+```
+
+Do věty nedávejte celý příběh. Napište výsledek. Například:
+
+```text
+Druhé běžné použití pravidlo potvrdilo. Pravidlo zůstává v kanonickém checklistu, další kontrola se neplánuje a téma se vrátí pouze pokud dvě relevantní poptávky za sebou nepůjdou kvalifikovat bez nového interního sběru rozpočtu.
+```
+
+Tahle věta je užitečně nudná. Neoslavuje proces, nevyrábí další projekt a nedává nikomu záminku otevřít starou debatu. Říká, co platí, kde to platí a kdy se k tomu vrátit. Přesně tolik má uzavření umět.
+
+### Čtyři uzavírací stavy
+
+Po druhém běžném použití vyberte jeden ze čtyř stavů:
+
+- Stabilní pravidlo: pravidlo fungovalo samostatně, zvláštní pozornost končí.
+- Stabilní pravidlo s lokální kotvou: pravidlo platí, ale doplnila se jedna navigační pomoc.
+- Zúžené pravidlo: pravidlo funguje jen pro přesněji vymezenou situaci.
+- Návrat do malé opravy: druhé použití ukázalo konkrétní slabinu, kterou nejde schovat do uzavření.
+
+Stav `stabilní pravidlo` je nejčistší konec:
+
+```text
+Stav: stabilní pravidlo.
+Uzavření: pravidlo fungovalo ve druhé běžné situaci bez připomenutí, bez náhradní evidence a bez návratu k původní široké variantě. Další kontrola neběží.
+```
+
+Stav `stabilní pravidlo s lokální kotvou` použijte, když člověk pravidlo nakonec použil správně, ale cesta k němu byla zbytečně kostrbatá. Opravte jednu věc: odkaz, název, pořadí, popisek nebo místo v checklistu. Pak uzavřete. Kotva není nová iterace. Je to cedulka na dveřích, které už existují.
+
+Stav `zúžené pravidlo` je fér, když druhé použití ukázalo hranici platnosti. Třeba pravidlo funguje pro poptávky z webu, ale ne pro existující zákazníky v rozšíření spolupráce. Nepište potom "někdy neplatí". Napište přesnou hranici:
+
+```text
+Pravidlo platí pro nové webové poptávky. U rozšíření existující spolupráce se rozpočet řeší až v obchodním follow-upu podle kontextu účtu.
+```
+
+Stav `návrat do malé opravy` použijte, když se znovu objevila stejná slabina: lidé pravidlo nenašli, obešli ho vlastním seznamem, přesunuli zavřený údaj do jiného nástroje nebo museli volat autora původní změny. To není důvod k dalšímu sledování. To je důvod opravit nejbližší pracovní místo.
+
+### Praktický příklad uzavření
+
+Druhé použití proběhlo u kvalifikace poptávky bez povinného rozpočtového pole.
+
+Výsledek:
+
+```text
+Obchodník použil volitelnou otázku v potvrzovacím e-mailu, poptávku kvalifikoval podle cíle a dalšího kroku, nevytvořil interní štítek "rozpočet chybí" a nevrátil se k návrhu povinného pole ve formuláři.
+```
+
+Uzavření:
+
+```text
+Stav: stabilní pravidlo.
+Pravidlo zůstává v checklistu pro poptávkový formulář a v sales follow-up šabloně. Staré návratové karty zůstávají jen jako historie. Další kontrola se neplánuje. Téma se vrátí pouze pokud dvě relevantní poptávky za sebou nepůjdou posunout bez nového sběru rozpočtu.
+```
+
+Co se neudělá:
+
+```text
+Nepřidáváme povinné pole, interní štítek, samostatný report poptávek bez rozpočtu ani nový export do marketingového nástroje.
+```
+
+Tahle poslední věta je malá, ale důležitá. Uzavírá dveře, kterými by se původní široký návrh mohl vrátit převlečený za "jen interní evidenci". Interní evidence je pořád evidence. Pokud nemá jasné rozhodnutí, konec a vlastníka, není to bezpečná opatrnost. Je to budoucí úklid.
+
+### Co po uzavření odstranit
+
+Po druhém běžném použití projděte pomocné stopy:
+
+- dočasné komentáře u pravidla,
+- poznámky "ověřit ještě jednou",
+- ruční tabulky vytvořené pro první návrat,
+- lokální kopie staré karty,
+- vlastní seznamy lidí, kteří pravidlu ještě nevěří,
+- dočasné štítky, které jen nahrazují zavřené pole.
+
+Ne všechno se musí smazat. Některé věci stačí označit jako historii. Rozdíl je v tom, jestli podle nich někdo může dnes rozhodovat. Historický záznam vysvětluje, proč pravidlo vzniklo. Kanonické místo říká, co má člověk dělat teď. Jakmile si tyto dvě role vymění místa, tým začne znovu rozhodovat podle starého neklidu.
+
+### Privacy-first uzavření
+
+Privacy-first uzavření druhého použití má jednu hlavní otázku:
+
+```text
+Zůstalo po ověřování méně datové stopy, nebo jsme jen změnili její název?
+```
+
+Dobré uzavření snižuje provozní stopu. Ruší dočasné seznamy, nechává staré karty v historii, nepřidává nové trackery, neprodlužuje retenci a nepřesouvá zavřený údaj do CRM, poznámky nebo reportu.
+
+Špatné uzavření vypadá zdánlivě opatrně:
+
+```text
+Pravidlo funguje, ale pro jistotu budeme další kvartál sledovat všechny případy, kdy rozpočet nebyl uveden.
+```
+
+Pokud to nemá konkrétní rozhodovací otázku, je to jen nový sběr dat. Lepší věta je:
+
+```text
+Další sledování nespouštíme. Pokud se objeví dvě relevantní poptávky za sebou, které nepůjde kvalifikovat bez rozpočtu, otevřeme novou malou otázku v sales follow-upu.
+```
+
+Codyho komentář: "pro jistotu" je v provozu často nejdražší fráze. Zní rozumně, ale umí vyrobit tabulku, kterou nikdo nechce vlastnit, report, který nikdo nečte, a datovou stopu, kterou jednou někdo bude vysvětlovat. Když pravidlo drží, nejlepší další krok je občas žádný další krok. Skandální, ale funkční.
+
+### Karta uzavření druhého běžného použití
+
+```text
+Kanonické pravidlo:
+
+Druhá běžná situace:
+
+Rozhodnutí, které podle pravidla vzniklo:
+
+Výsledek druhého použití:
+- stabilní pravidlo
+- stabilní pravidlo s lokální kotvou
+- zúžené pravidlo
+- návrat do malé opravy
+
+Co se propsalo do kanonického místa:
+
+Co zůstává pouze v historii:
+
+Co se smaže nebo označí jako nekanonické:
+
+Co se výslovně nepřidává:
+
+Vzniká nějaká nová datová stopa?
+
+Pokud ano, jaké rozhodnutí umožní, kdo ji vlastní a kdy skončí:
+
+Návratový signál:
+
+Další plánovaná kontrola:
+- žádná
+- pouze při návratovém signálu
+- malá oprava konkrétního místa
+```
+
+Kartu nevyplňujte jako kroniku. Pokud se do ní nevejde výsledek, pravděpodobně ještě nemáte výsledek. Vraťte se k jedné otázce: může pravidlo zpět do klidu, nebo potřebuje jednu malou opravu?
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte kanonické pravidlo a druhou běžnou situaci.
+2. Minuta 2: napište rozhodnutí, které podle pravidla vzniklo.
+3. Minuta 3: vyberte jeden ze čtyř uzavíracích stavů.
+4. Minuta 4: označte, co se propisuje do kanonického místa a co zůstává historií.
+5. Minuta 5: smažte nebo uzavřete dočasné datové stopy.
+6. Minuta 6: zapište návratový signál a ukončete zvláštní pozornost.
+
+Když workshop potřebuje víc času, neprodlužujte ho automaticky. Zeptejte se, jestli se opravdu uzavírá druhé použití, nebo se nenápadně otevírá nová otázka. Nová otázka smí vzniknout, ale má mít vlastní kartu, vlastní hranici a vlastní důvod. Nemá se schovávat v uzavření staré smyčky.
+
+### Checklist uzavření druhého běžného použití
+
+- Je jasné, jaké pravidlo se uzavírá?
+- Je druhá běžná situace popsaná konkrétně?
+- Vzniklo podle pravidla skutečné rozhodnutí?
+- Vybrali jsme jeden ze čtyř uzavíracích stavů?
+- Je jasné, co se propsalo do kanonického místa?
+- Je jasné, co zůstává jen historií?
+- Jsou dočasné komentáře, seznamy, štítky nebo reporty smazané, uzavřené nebo označené jako nekanonické?
+- Nevrátil se původní široký návrh pod názvem interní evidence?
+- Nevzniká nová datová stopa bez jasné rozhodovací otázky?
+- Má další návrat konkrétní signál?
+- Pokud pravidlo funguje, opravdu končí zvláštní pozornost?
+
+Uzavření druhého běžného použití je dobré místo pro větu "hotovo". Ne "hotovo, ale ještě to budeme pro jistotu hlídat". Prostě hotovo: pravidlo je v kanonickém místě, historie je historií, pomocné stopy jsou pryč a další práce vznikne až z nového signálu. To je rozdíl mezi systémem, který se učí, a systémem, který si jen hromadí opatrnost do šuplíku.
+
 ## Pracovní log
 
+- 2026-06-30: Doplněna úvodní podkapitola o uzavření druhého běžného použití po skutečném návratu: čtyři uzavírací stavy, praktický příklad, úklid pomocných stop, privacy-first uzavření, karta, mini workshop a checklist.
 - 2026-06-29: Doplněna úvodní podkapitola o druhém běžném použití po uzavřeném skutečném návratu: kdy ho vynechat, tři otázky samostatnosti, praktický příklad, privacy-first kontrola náhradních datových stop, karta, mini workshop a checklist.
 - 2026-06-29: Doplněna úvodní podkapitola o uzavření prvního běžného použití po uzavřeném skutečném návratu: čtyři uzavírací stavy, praktické příklady, úklid pomocných stop, privacy-first uzavření, karta, mini workshop a checklist.
 - 2026-06-29: Doplněna úvodní podkapitola o prvním běžném použití po uzavřeném skutečném návratu: tři kontrolní otázky, praktický příklad, čtyři výsledné stavy, privacy-first kontrola, karta, mini workshop a checklist.
