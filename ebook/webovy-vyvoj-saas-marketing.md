@@ -274078,8 +274078,212 @@ Pokud se tým během workshopu začne vracet k celé historii, zastavte ho. Hist
 
 Slabý signál je dobrý sluha a špatný šéf. Má vás upozornit, že se něco možná mění. Nemá vám diktovat nové sledování, novou šablonu ani nové rozhodovací kolečko. Dokud nesplní domluvenou hranici, dlouhodobý klid zůstává výchozí stav.
 
+## Uzavření slabého signálu v dlouhodobém klidu
+
+Slabý signál potřebuje uzavření stejně jako větší návrat. Bez něj zůstane v systému zvláštní polostav: téma se prý neotevřelo, ale někdo si ho pamatuje, někdo ho začne bokem sledovat a někdo ho při další debatě použije jako důkaz, že se "to přece už řešilo". To je nejhorší varianta. Není to práce, není to klid a není to ani poctivý návratový signál. Je to jen poznámka, která si potichu staví židli u stolu.
+
+Uzavření slabého signálu má proto jednoduchý účel: říct, co se s podnětem stalo, proč se neotevírá nebo otevírá další krok, co zůstává zavřené a jaká datová stopa nevzniká. Nemá to být velká analýza. Pokud uzavření slabého signálu vyžaduje dlouhé dohledávání staré historie, pravděpodobně jste už mimo slabý signál a měli byste nejdřív zkontrolovat, jestli se nenaplnil skutečný návratový signál.
+
+Začněte větou:
+
+```text
+Slabý signál uzavíráme takto:
+```
+
+Za ni napište jeden pracovní závěr:
+
+```text
+Slabý signál uzavíráme takto:
+Podnět neodpovídá domluvenému návratovému signálu, neodhalil opakované tření v pracovním místě a téma zůstává v dlouhodobém klidu. Neotevíráme nové pole, štítek ani dočasnou evidenci.
+```
+
+Taková věta není sexy. To je dobře. Slabé signály se nemají uzavírat tak, aby vypadaly jako nová iniciativa. Mají se uzavírat tak, aby další člověk rychle poznal, jestli má něco dělat. V tomto případě nemá.
+
+### Čtyři uzavírací stavy
+
+Po kontrole slabého signálu vyberte jeden ze čtyř stavů:
+
+- Zavřít bez akce: podnět není návratový signál a neukázal ani konkrétní lokální tření.
+- Zavřít s lokální větou: pravidlo platí, ale v jednom pracovním místě chyběla drobná formulace.
+- Zavřít s čekací hranicí: signál zatím nestačí, ale je přesně napsané, co by z něj udělalo návrat.
+- Převést na skutečný návrat: signál splnil domluvenou hranici a otevírá se nejmenší další krok.
+
+Stav `zavřít bez akce` použijte, když byl podnět jen jednorázová odchylka nebo pocit bez opory v pracovním místě. Do závěru nepište omluvu. Napište fakt: návratový signál se nenaplnil a téma zůstává v klidu.
+
+Stav `zavřít s lokální větou` je pro situace, kdy slabý signál neotevírá téma, ale ukázal špatně umístěnou nebo moc měkkou formulaci. Oprava má být opravdu lokální. Jedna věta u šablony, odkazu, checklistu nebo kanonického pravidla. Ne nový proces, ne nová pravidelná kontrola, ne nový dokument s ambicí přežít všechny budoucí reorganizace.
+
+Stav `zavřít s čekací hranicí` použijte, když podnět není dost silný, ale nechcete ho nechat úplně zmizet. Čekací hranice má být konkrétní: kolikrát, kde a jak se musí situace zopakovat, aby se z ní stal návratový signál. Pokud tu hranici neumíte napsat, neplánujte sledování.
+
+Stav `převést na skutečný návrat` je výjimka. Znamená, že slabý signál už vlastně slabý není. Splnil domluvenou hranici, vznikl v relevantním pracovním místě a vy víte, jaký nejmenší krok otevřít. I tady ale původní široký rozsah zůstává zavřený, dokud ho nový důkaz opravdu nevyžaduje.
+
+### Praktický příklad uzavření
+
+Slabý signál:
+
+```text
+Jeden obchodní rozhovor se zdržel, protože klient neměl představu o rozpočtu.
+```
+
+Domluvený návratový signál:
+
+```text
+Téma se vrátí pouze pokud dvě relevantní poptávky za sebou nepůjdou kvalifikovat bez nového interního sběru rozpočtu.
+```
+
+Uzavření:
+
+```text
+Uzavírací stav:
+Zavřít bez akce.
+
+Proč:
+Šlo o jeden rozhovor a problém nebyl nemožnost kvalifikace, ale nejasné očekávání klienta.
+
+Co zůstává zavřené:
+Povinné pole pro rozpočet, lead scoring a pomocný seznam poptávek bez rozpočtu.
+
+Privacy-first závěr:
+Nevzniká nový CRM atribut ani dočasná tabulka. Obchod si v běžném vlákně ponechá jen kontext konkrétního rozhovoru.
+```
+
+Jiná varianta:
+
+```text
+Uzavírací stav:
+Zavřít s lokální větou.
+
+Proč:
+Podnět neodpovídá návratovému signálu, ale ukázal, že u obchodní šablony chybí věta, jak se ptát na rozsah bez sběru rozpočtu jako samostatného údaje.
+
+Lokální oprava:
+Ke šabloně doplňujeme větu: "Pokud rozpočet chybí, nejdřív se ptej na cíl, rozsah a rozhodovací omezení; rozpočet ukládej jen jako součást běžné komunikace, ne jako nové pole."
+
+Co neotevíráme:
+Formulář, scoring, report ani novou evidenci rozpočtů.
+```
+
+Rozdíl je malý, ale důležitý. V první variantě systém nepotřebuje nic. Ve druhé potřebuje jednu lepší větu tam, kde vzniklo tření. Ani jedna varianta nepotřebuje návrat k celé historii tématu.
+
+### Čekací hranice místo sledování
+
+Když si tým není jistý, často navrhne sledování. To zní rozumně, ale může to být jen nejdražší způsob, jak neříct "zatím nevíme". U slabého signálu je lepší čekací hranice než nová evidence.
+
+Špatná věta:
+
+```text
+Budeme si teď značit všechny podobné případy.
+```
+
+Lepší věta:
+
+```text
+Téma se znovu porovná s návratovým signálem pouze pokud se stejná situace objeví u dvou relevantních poptávek za sebou a bez doptání nepůjde navrhnout další krok.
+```
+
+První věta otevírá datový zvyk bez konce. Druhá věta nechává téma v klidu a říká, co by klid změnilo. To je výrazně lepší provozní obchod. Méně dat, méně údržby, méně falešných poplachů.
+
+Pokud čekací hranice potřebuje krátký záznam, držte ho co nejblíž existující práci. Například jedna anonymizovaná věta v rozhodovacím záznamu je obvykle lepší než pomocná tabulka. Tabulka má zvláštní talent tvářit se nevinně a pak po půl roce obsahovat osobní údaje, obchodní detaily a nulovou odpovědnost. Krásná kariéra, pokud je cílem budoucí úklid.
+
+### Privacy-first uzavření slabého signálu
+
+Privacy-first uzavření slabého signálu stojí na jedné otázce:
+
+```text
+Co by začalo vznikat, kdybychom slabý signál neuzavřeli?
+```
+
+Odpověď může být nové pole, štítek, export, report, kopie e-mailů, screenshoty, poznámka v pomocné tabulce nebo neformální prosba týmu, aby si "to zatím někam psal". Neformální prosba je také systém. Jen horší, protože nemá vlastníka, retenci ani jasný konec.
+
+Do uzavření proto napište:
+
+```text
+Nepřidáváme:
+
+Nepřenášíme:
+
+Mažeme nebo necháváme v původním zdroji:
+```
+
+Příklad:
+
+```text
+Nepřidáváme:
+Nový rozpočtový atribut, štítek "chybí rozpočet" ani pomocný report.
+
+Nepřenášíme:
+Konkrétní zákaznickou odpověď do interní dokumentace.
+
+Mažeme nebo necháváme v původním zdroji:
+Pracovní poznámku zobecníme do jedné věty; detail konkrétního rozhovoru zůstává jen v obchodním vlákně.
+```
+
+Tím se neztrácí poznatek. Ztrácí se jen zbytečná datová stopa. A to je přesně druh ztráty, kterou si privacy-first provoz může dovolit s radostí.
+
+### Karta uzavření slabého signálu
+
+```text
+Téma v dlouhodobém klidu:
+
+Slabý signál:
+
+Domluvený návratový signál:
+
+Porovnání se signálem:
+
+Uzavírací stav:
+- zavřít bez akce
+- zavřít s lokální větou
+- zavřít s čekací hranicí
+- převést na skutečný návrat
+
+Co se teď stane:
+
+Co zůstává výslovně zavřené:
+
+Čekací hranice, pokud existuje:
+
+Privacy-first uzavření:
+Nepřidáváme:
+Nepřenášíme:
+Mažeme nebo necháváme v původním zdroji:
+
+Kde je závěr uložený:
+
+Vlastník:
+
+Datum:
+```
+
+Karta má být konec, ne začátek nové složky. Pokud po jejím vyplnění vzniknou tři další úkoly, vraťte se k uzavíracímu stavu. Slabý signál buď zůstává slabý, nebo se stal skutečným návratem. Mezi tím není prostor pro pohodlné "ještě si to budeme trochu hlídat" bez jasné otázky.
+
+### Mini workshop na 5 minut
+
+1. Minuta 1: přečtěte slabý signál a domluvený návratový signál.
+2. Minuta 2: rozhodněte, jestli se hranice naplnila.
+3. Minuta 3: vyberte jeden uzavírací stav.
+4. Minuta 4: napište, co zůstává zavřené a co se případně lokálně upraví.
+5. Minuta 5: uzavřete datovou stopu a určete, kde bude závěr dohledatelný.
+
+Když workshop potřebuje víc času, zastavte se u důvodu. Pokud chybí důkaz, uzavřete čekací hranicí. Pokud se naplnil návratový signál, otevřete nejmenší další krok. Pokud se tým jen snaží z jednoho podnětu vyrobit jistotu, zavřete bez akce. Slabý signál nemá právo na nekonečnou poradu.
+
+### Checklist uzavření slabého signálu
+
+- Je jasně zapsané, jaký slabý signál se uzavírá?
+- Porovnali jsme ho s domluveným návratovým signálem?
+- Vybrali jsme přesně jeden uzavírací stav?
+- Je jasné, co se teď stane, a co se naopak výslovně neotevírá?
+- Pokud vzniká lokální věta, je opravdu u nejbližšího pracovního místa?
+- Pokud vzniká čekací hranice, je konkrétní a nevyžaduje nové sledování bez konce?
+- Pokud se signál převádí na skutečný návrat, zůstává původní široký rozsah zavřený?
+- Nepřidali jsme nové pole, štítek, export, tracker, report ani pomocnou tabulku bez rozhodovací otázky?
+- Je dočasná poznámka smazaná, zobecněná nebo ponechaná jen v původním pracovním zdroji?
+- Umí další člověk poznat, jestli byl slabý signál zavřený, lokálně dočištěný, čeká na hranici, nebo převedený na návrat?
+
+Uzavření slabého signálu je malá disciplína, která chrání dlouhodobý klid. Neignoruje podnět, ale nedovolí mu nafouknout se do práce bez důkazu. V privacy-first provozu je to obzvlášť cenné: tým se učí vnímat změny, aniž by z každého zaváhání vyráběl nový sběr dat.
+
 ## Pracovní log
 
+- 2026-06-30: Doplněna úvodní podkapitola o uzavření slabého signálu v dlouhodobém klidu: uzavírací stavy, čekací hranice místo sledování, privacy-first úklid datové stopy, karta, mini workshop a checklist.
 - 2026-06-30: Doplněna úvodní podkapitola o slabém signálu v dlouhodobém klidu: rozlišení od skutečného návratu, tři kontroly, výsledné stavy, privacy-first práce bez zbytečné datové stopy, karta, mini workshop a checklist.
 - 2026-06-30: Doplněna úvodní podkapitola o převodu uzavřeného skutečného návratu do dlouhodobého klidu: kanonické místo, historie, návratový signál, privacy-first úklid datových stop, karta, mini workshop a checklist.
 - 2026-06-30: Doplněna úvodní podkapitola o uzavření druhého běžného použití po skutečném návratu: čtyři uzavírací stavy, praktický příklad, úklid pomocných stop, privacy-first uzavření, karta, mini workshop a checklist.
