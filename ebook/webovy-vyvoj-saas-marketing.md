@@ -274843,8 +274843,177 @@ Pokud se workshop začne rozšiřovat na debatu o celé obchodní kvalifikaci, z
 
 Uzavření prvního běžného použití má být krátké a trochu nudné. To je dobře. Po slabém signálu nechcete dramatický závěr; chcete vrátit práci do normálu, odstranit dočasné stopy a nechat další návrat čekat na skutečný důvod.
 
+## Druhé běžné použití po návratu slabého signálu do klidu
+
+Druhé běžné použití po návratu slabého signálu do klidu neplánujte automaticky. Má smysl jen tehdy, když první běžné použití skončilo lokální opravou cesty, lokální opravou věty nebo zastavením náhradní stopy. Pokud první použití dopadlo čistě a pravidlo se vrátilo do klidu bez další péče, druhé použití by často bylo jen kontrolou pro kontrolu. A kontrola pro kontrolu je v provozu takový ten malý šroubek, který se tváří nevinně, dokud kvůli němu nevznikne celá polička.
+
+Druhé použití má ověřit jen jednu věc:
+
+```text
+Funguje lokální oprava bez čerstvého vysvětlování a bez nové datové stopy?
+```
+
+Neověřuje znovu celý slabý signál. Neřeší, jestli by se jednou nemělo přidat rozpočtové pole, nová metrika, nový stav v CRM nebo nový report. Ověřuje jen to, jestli opravené pracovní místo zvládne další běžnou situaci samo.
+
+Zapište začátek takto:
+
+```text
+Druhé běžné použití otevíráme pouze proto, že první použití ukázalo:
+
+Teď ověřujeme jen:
+
+Co zůstává zavřené:
+```
+
+Příklad:
+
+```text
+Druhé běžné použití otevíráme pouze proto, že první použití ukázalo:
+Obchodník našel správnou větu až přes starou poznámku ve vlákně.
+
+Teď ověřujeme jen:
+Jestli věta přesunutá do aktuální obchodní šablony stačí při další relevantní poptávce.
+
+Co zůstává zavřené:
+Povinné rozpočtové pole, lead scoring, pomocná tabulka výjimek a další kontrola všech poptávek.
+```
+
+Tím se druhé použití drží v rozumné velikosti. Nevrací se k původní debatě. Jen ověřuje, že malá oprava opravdu odstranila malé tření.
+
+### Tři otázky druhého použití
+
+Při druhém použití položte jen tři otázky:
+
+- Našel člověk opravené místo bez staré poznámky, chatu nebo osobního vysvětlení?
+- Vedlo opravené místo ke stejnému rozhodnutí jako původní pravidlo?
+- Nevznikla kvůli tomu nová pomocná evidence, export, štítek nebo pravidelná kontrola?
+
+Pokud jsou všechny odpovědi ano, druhé použití uzavřete a nechte pravidlo v dlouhodobém klidu. Nepřidávejte třetí použití. Nepište novou kapitolu do interní dokumentace. Nezakládejte tabulku "ověřeno dvakrát". Tohle je přesně chvíle, kdy dobrá práce končí tím, že nepokračuje.
+
+Pokud první odpověď zní ne, problém je pořád v cestě. Opravte nejbližší místo, kde člověk začal. Pokud druhá odpověď zní ne, problém je ve formulaci pravidla a potřebuje přesnější pracovní větu. Pokud třetí odpověď zní ne, problém je v datové disciplíně: pravidlo možná funguje, ale tým si kolem něj vyrábí novou stopu.
+
+### Čtyři výsledky druhého použití
+
+Po druhém běžném použití vyberte jeden ze čtyř stavů:
+
+- Potvrdit klid: oprava funguje, pravidlo se neotevírá a žádná nová stopa nevznikla.
+- Dočistit stejné místo: tření zůstalo, ale pořád přesně víte, kde je.
+- Přerámovat opravu: první oprava mířila na špatné místo a je potřeba nová pracovní otázka.
+- Otevřít skutečný návrat: slabý signál už není slabý, protože se opakuje s dopadem na práci.
+
+Stav `potvrdit klid` má být nejkratší. Stačí jedna věta:
+
+```text
+Druhé běžné použití potvrdilo, že lokální oprava stačí. Pravidlo zůstává v dlouhodobém klidu a další návrat vznikne jen při původním návratovém signálu.
+```
+
+Stav `dočistit stejné místo` použijte jen tehdy, když je oprava opravdu pořád lokální. Například věta už je ve správné šabloně, ale její nadpis je nejasný. Nebo je odkaz ve správném rozcestníku, ale vede pod názvem, který zní jako archiv. Dočištění nesmí otevřít celé téma.
+
+Stav `přerámovat opravu` je poctivý ve chvíli, kdy se ukáže, že první oprava řešila špatnou překážku. Mysleli jste, že člověk nenašel pravidlo, ale ve skutečnosti nerozumí rozdílu mezi slabým podnětem a skutečným návratem. To už není problém cesty. To je problém rozhodovací věty.
+
+Stav `otevřít skutečný návrat` použijte až tehdy, když druhé použití ukáže opakovaný dopad. Třeba další relevantní poptávka znovu nejde kvalifikovat bez stejného ručního doptání, lokální věta nepomohla a tým začíná vytvářet pomocnou evidenci. V takové chvíli už nejde o slabý signál v klidu. Jde o návrat, který si zaslouží vlastní smyčku.
+
+### Privacy-first kontrola
+
+Druhé použití nesmí být záminka k měření lidí ani k novému sběru "pro jistotu". Sledujte výsledek práce, ne chování člověka.
+
+Stačí tento zápis:
+
+```text
+Použili jsme:
+
+Výsledek:
+
+Dočasné stopy:
+
+Dál nesbíráme:
+```
+
+Příklad:
+
+```text
+Použili jsme:
+Aktuální obchodní šablonu s volitelnou otázkou na rozhodovací omezení.
+
+Výsledek:
+Poptávku šlo kvalifikovat bez povinného rozpočtového pole.
+
+Dočasné stopy:
+Dočasnou poznámku z prvního ověření mažeme po zapsání tohoto závěru.
+
+Dál nesbíráme:
+Rozpočet jako CRM atribut, osobní skóre obchodníka, kliky v šabloně ani pomocný seznam výjimek.
+```
+
+Privacy-first hodnota je tady jednoduchá: pokud lokální oprava stačí, nemusíte kvůli ní vytvářet další datový návyk. Poznatek zůstane v pravidle. Detaily konkrétní situace zůstanou v původním legitimním pracovním zdroji, nebo zmizí, pokud už nemají účel.
+
+### Karta druhého běžného použití
+
+```text
+Téma v dlouhodobém klidu:
+
+První běžné použití skončilo stavem:
+
+Druhé běžné použití otevíráme proto, že:
+
+Druhá běžná situace:
+
+Opravené pracovní místo:
+
+Našel člověk pravidlo bez staré pomoci?
+- ano / ne
+
+Vedlo pravidlo ke správnému rozhodnutí?
+- ano / ne
+
+Vznikla nová pomocná datová stopa?
+- ano / ne
+
+Výsledek:
+- potvrdit klid
+- dočistit stejné místo
+- přerámovat opravu
+- otevřít skutečný návrat
+
+Jedna další úprava, pokud existuje:
+
+Co zůstává zavřené:
+
+Co mažeme, anonymizujeme nebo dál nesbíráme:
+
+Budoucí návratový signál:
+
+Vlastník:
+```
+
+### Mini workshop na 5 minut
+
+1. Minuta 1: přečtěte stav po prvním běžném použití.
+2. Minuta 2: pojmenujte druhou běžnou situaci.
+3. Minuta 3: odpovězte na tři otázky druhého použití.
+4. Minuta 4: vyberte jeden ze čtyř výsledků.
+5. Minuta 5: zapište privacy-first úklid a potvrďte, co zůstává zavřené.
+
+Když se během pěti minut začne řešit širší produkt, formulář, CRM nebo analytika, workshop zastavte. Druhé běžné použití není strategické review. Je to malý test, jestli lokální oprava už umí stát sama.
+
+### Checklist druhého běžného použití
+
+- Má druhé použití důvod z prvního použití, nebo ho děláme jen pro jistotu?
+- Ověřujeme jedno opravené pracovní místo?
+- Našel člověk pravidlo bez staré poznámky, chatu nebo osobního vysvětlení?
+- Vedlo pravidlo ke stejnému rozhodnutí jako původní uzavření?
+- Nevznikl nový CRM atribut, tabulka, export, štítek ani pravidelná kontrola?
+- Pokud tření zůstalo, je pořád lokální?
+- Pokud se signál opakuje s dopadem, otevřeli jsme skutečný návrat jako novou smyčku?
+- Je jasné, co zůstává zavřené?
+- Uklidili jsme dočasné podklady z prvního a druhého použití?
+- Umíme pravidlo po potvrzení nechat v dlouhodobém klidu?
+
+Druhé běžné použití po slabém signálu má být poslední kontrola lokální opravy, ne začátek dalšího sledování. Pokud oprava drží, nechte ji držet. Pokud nedrží, pojmenujte přesně proč. V obou případech platí: žádná nová data bez rozhodovací otázky, žádná nová péče bez návratového signálu.
+
 ## Pracovní log
 
+- 2026-06-30: Doplněna úvodní podkapitola o druhém běžném použití po návratu slabého signálu do klidu: kdy ho vůbec dělat, tři ověřovací otázky, čtyři výsledné stavy, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-06-30: Doplněna úvodní podkapitola o uzavření prvního běžného použití po návratu slabého signálu do klidu: uzavírací stavy, praktický příklad, úklid dočasných stop, privacy-first uzavření, karta, mini workshop a checklist.
 - 2026-06-30: Doplněna úvodní podkapitola o prvním běžném použití po návratu slabého signálu do klidu: kontrolní otázky, praktický příklad, výsledné stavy, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-06-30: Doplněna krátká úvodní poznámka, aby neotevřený krok výslovně potvrdil, co zůstává v běžném rytmu beze změny.
