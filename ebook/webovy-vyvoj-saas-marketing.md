@@ -275011,8 +275011,190 @@ Když se během pěti minut začne řešit širší produkt, formulář, CRM neb
 
 Druhé běžné použití po slabém signálu má být poslední kontrola lokální opravy, ne začátek dalšího sledování. Pokud oprava drží, nechte ji držet. Pokud nedrží, pojmenujte přesně proč. V obou případech platí: žádná nová data bez rozhodovací otázky, žádná nová péče bez návratového signálu.
 
+## Uzavření druhého běžného použití po návratu slabého signálu do klidu
+
+Uzavření druhého běžného použití je místo, kde se slabý signál buď definitivně vrátí do dlouhodobého klidu, nebo poctivě přestane být slabým signálem. Nenechte ho viset jako "ještě to někdy zkontrolujeme". To je nejrychlejší cesta k tomu, že se z jedné rozumné poznámky stane pololegální provozní mlha: nikdo neví, jestli pravidlo platí, kdo ho hlídá a proč kolem něj vznikla další tabulka.
+
+Uzavření má odpovědět na jednu větu:
+
+```text
+Co po druhém běžném použití zůstává v běžném provozu, co mažeme a co se otevírá jen při skutečném návratovém signálu?
+```
+
+Pokud tuto větu neumíte napsat, druhé použití ještě není uzavřené. Možná máte výsledek práce, ale nemáte rozhodnutí. A bez rozhodnutí bude tým za měsíc znovu řešit stejný stín, jen s větším množstvím poznámek.
+
+### Čtyři uzavírací stavy
+
+Po druhém běžném použití vyberte jeden stav:
+
+- Zavřeno do klidu: oprava funguje, žádná další péče se neplánuje.
+- Zavřeno s lokálním dočištěním: je potřeba poslední úprava stejného místa, ale téma se neotevírá.
+- Přepsat pracovní větu: cesta je dostupná, ale pravidlo pořád vede k nejasnému rozhodnutí.
+- Otevřít skutečný návrat: signál se opakuje s dopadem a už nejde držet jako slabý.
+
+Stav `zavřeno do klidu` používejte častěji, než je pohodlné. Produktové a marketingové týmy často přidávají kontrolu jen proto, že mají pocit, že po práci má přijít další práce. Nemusí. Někdy je nejlepší výstup přesně ten, že se nic dalšího neděje.
+
+Stav `zavřeno s lokálním dočištěním` znamená, že můžete upravit nadpis, přesunout větu do správné šablony, odstranit starý odkaz nebo smazat dočasnou poznámku. Nesmí z toho vzniknout nový typ review, nový formulář ani nová metrika.
+
+Stav `přepsat pracovní větu` je dobrý, když lidé místo našli, ale pořád se rozhodují jinak, než pravidlo zamýšlelo. Tady problém není ve vyhledání, ale ve významu. Přepište pravidlo do konkrétnější věty a ověřte ho při nejbližší přirozené situaci. Neotevírejte celou historii slabého signálu.
+
+Stav `otevřít skutečný návrat` použijte jen tehdy, když druhé použití ukázalo reálný opakovaný dopad. Například tým znovu potřeboval ruční výjimku, znovu vznikla pomocná evidence nebo znovu nebylo možné udělat zákaznické rozhodnutí bez stejného doptávání. V tu chvíli se nesnažte slabý signál uklidit kosmeticky. Otevřete novou smyčku a napište novou rozhodovací otázku.
+
+### Praktický příklad uzavření
+
+Představte si SaaS tým, který měl v dlouhodobém klidu pravidlo pro kvalifikaci poptávek bez povinného rozpočtového pole. Slabý signál vznikl, když jeden obchodník u enterprise poptávky nevěděl, jestli má rozpočet zjišťovat hned, nebo až po pochopení rozhodovacího omezení zákazníka.
+
+První běžné použití ukázalo, že věta existuje, ale je schovaná ve staré poznámce. Tým ji přesunul do aktuální obchodní šablony.
+
+Druhé běžné použití dopadlo takto:
+
+```text
+Druhá běžná situace:
+Nová B2B poptávka s neurčitým rozpočtem a jasným problémem v provozu.
+
+Výsledek:
+Obchodník použil aktuální šablonu, položil otázku na rozhodovací omezení a nepřidal povinné rozpočtové pole.
+
+Nová datová stopa:
+Nevznikla.
+
+Závěr:
+Zavřeno do klidu.
+```
+
+Uzavírací věta může znít:
+
+```text
+Druhé běžné použití potvrdilo, že lokální přesun věty do obchodní šablony stačí. Pravidlo zůstává v dlouhodobém klidu. Další práce se otevře jen tehdy, když se u relevantní poptávky znovu nepodaří rozhodnout bez nové pomocné evidence.
+```
+
+Všimněte si, co se nestalo: tým nepřidal nový CRM atribut, nesledoval obchodníka, nevytvořil dashboard výjimek a nezačal sbírat rozpočty "pro jistotu". Codyho komentář: tohle je přesně ten typ neudělané práce, který vypadá nudně, ale za půl roku ušetří překvapivě hodně bordelu.
+
+### Co po uzavření odstranit
+
+Uzavření není jen věta v logu. Je to také úklid dočasných stop. Po druhém použití projděte:
+
+- dočasné poznámky z prvního a druhého ověření,
+- pomocné kopie šablon,
+- odkazy na staré vysvětlení,
+- interní chatové shrnutí, které už supluje kanonické místo,
+- testovací exporty nebo ručně vedené seznamy výjimek,
+- připomínky v kalendáři nebo task manageru, které měly smysl jen během ověření.
+
+U každé stopy rozhodněte:
+
+```text
+Ponechat v kanonickém místě / smazat / anonymizovat / archivovat s důvodem
+```
+
+Archivace má smysl jen tehdy, když stopa stále podporuje legitimní pracovní účel. "Možná se bude hodit" není účel. To je jen převlečená lenost se složkou v cloudu.
+
+### Privacy-first uzavření
+
+Privacy-first uzavření znamená, že po potvrzeném klidu nezůstane běžet měření, které vzniklo jen kvůli dočasné nejistotě. Pokud jste při ověření potřebovali konkrétní příklad, použijte ho jen k úpravě pravidla. Jakmile je pravidlo jasné, konkrétní případ dál netahejte jako exponát po dokumentaci.
+
+Minimální zápis:
+
+```text
+Kanonické místo po uzavření:
+
+Dočasné stopy odstraněné po uzavření:
+
+Stopy ponechané s účelem:
+
+Dál nesbíráme:
+
+Budoucí návratový signál:
+```
+
+Příklad:
+
+```text
+Kanonické místo po uzavření:
+Obchodní šablona "První kvalifikace B2B poptávky".
+
+Dočasné stopy odstraněné po uzavření:
+Poznámka z prvního ověření a interní chatové shrnutí.
+
+Stopy ponechané s účelem:
+Jen obecná věta v šabloně bez konkrétních zákaznických detailů.
+
+Dál nesbíráme:
+Rozpočtové pole jako povinný CRM atribut, osobní výkon obchodníka ani seznam výjimek.
+
+Budoucí návratový signál:
+Relevantní poptávku znovu nejde kvalifikovat bez stejného ručního doptávání nebo nové pomocné evidence.
+```
+
+Privacy-first hodnota není v tom, že nikdy nic nezapíšete. Je v tom, že po rozhodnutí nezůstáváte zbytečně připoutaní ke konkrétním lidem, zákazníkům a epizodám. Systém si ponechá pravidlo. Detaily se uklidí.
+
+### Karta uzavření druhého použití
+
+```text
+Téma v dlouhodobém klidu:
+
+Důvod druhého běžného použití:
+
+Druhá běžná situace:
+
+Opravené pracovní místo:
+
+Výsledek druhého použití:
+
+Uzavírací stav:
+- zavřeno do klidu
+- zavřeno s lokálním dočištěním
+- přepsat pracovní větu
+- otevřít skutečný návrat
+
+Uzavírací věta:
+
+Co zůstává v kanonickém místě:
+
+Co zůstává výslovně zavřené:
+
+Co mažeme, anonymizujeme nebo archivujeme:
+
+Co dál nesbíráme:
+
+Budoucí návratový signál:
+
+Vlastník uzavření:
+
+Datum kontroly, pokud je opravdu potřeba:
+```
+
+Pole `Datum kontroly` vyplňujte jen ve výjimečných případech. Pokud všechno funguje a návratový signál je jasný, další kontrola není potřeba. Stačí běžný provoz.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte kartu druhého běžného použití.
+2. Minuta 2: vyberte jeden ze čtyř uzavíracích stavů.
+3. Minuta 3: napište jednu uzavírací větu.
+4. Minuta 4: určete, co zůstává v kanonickém místě a co zůstává zavřené.
+5. Minuta 5: smažte nebo označte dočasné stopy k úklidu.
+6. Minuta 6: napište budoucí návratový signál.
+
+Pokud se workshop protáhne, pravděpodobně neuzavíráte druhé použití, ale otevíráte nové téma. V tom případě zastavte a pojmenujte novou rozhodovací otázku. Nelepte ji na slabý signál jen proto, že už máte otevřený dokument.
+
+### Checklist uzavření druhého použití
+
+- Vybrali jsme jeden uzavírací stav?
+- Umíme výsledek popsat jednou uzavírací větou?
+- Je jasné, co zůstává v kanonickém místě?
+- Je jasné, co zůstává zavřené?
+- Odstranili jsme dočasné poznámky, kopie, exporty a připomínky bez dalšího účelu?
+- Neponechali jsme novou pomocnou evidenci jen proto, že už vznikla?
+- Pokud pravidlo funguje, neplánujeme třetí běžné použití?
+- Pokud pravidlo nefunguje, víme, zda jde o cestu, pracovní větu, nebo skutečný návrat?
+- Dál nesbíráme osobní, zákaznická ani behaviorální data bez nové rozhodovací otázky?
+- Budoucí návratový signál je konkrétní a poznatelný i pro člověka mimo původní diskusi?
+
+Dobré uzavření druhého použití je krátké, nudné a užitečné. Téma se buď vrátí do klidu, nebo dostane poctivě nový začátek. Nejhorší varianta je mezistav, kde se nic neotevřelo, nic nezavřelo a někde v rohu tiše běží další sledování.
+
 ## Pracovní log
 
+- 2026-06-30: Doplněna úvodní podkapitola o uzavření druhého běžného použití po návratu slabého signálu do klidu: uzavírací stavy, praktický příklad, úklid dočasných stop, privacy-first uzavření, karta, mini workshop a checklist.
 - 2026-06-30: Doplněna úvodní podkapitola o druhém běžném použití po návratu slabého signálu do klidu: kdy ho vůbec dělat, tři ověřovací otázky, čtyři výsledné stavy, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-06-30: Doplněna úvodní podkapitola o uzavření prvního běžného použití po návratu slabého signálu do klidu: uzavírací stavy, praktický příklad, úklid dočasných stop, privacy-first uzavření, karta, mini workshop a checklist.
 - 2026-06-30: Doplněna úvodní podkapitola o prvním běžném použití po návratu slabého signálu do klidu: kontrolní otázky, praktický příklad, výsledné stavy, privacy-first kontrola, karta, mini workshop a checklist.
