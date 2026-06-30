@@ -276744,8 +276744,188 @@ Pokud nenajdete žádný běžný průchod, neznamená to automaticky problém. 
 
 První kvartální kontrola je úspěšná tehdy, když po ní pravidlo působí obyčejněji než před ní. Je snadno najitelné, nemá kolem sebe zvláštní režim, nevyrábí datový nepořádek a umí počkat na svůj běžný rytmus. Pokud kontrola skončí jen jednou klidnou větou, je to často nejlepší možný výsledek. Ano, v kalendáři to vypadá méně hrdinsky. Ale v provozu je to přesně ten druh nudy, který šetří čas, data i nervy.
 
+## Uzavření první kvartální kontroly dlouhodobého rytmu
+
+Po první kvartální kontrole je potřeba udělat jednu nepohodlně jednoduchou věc: opravdu ji zavřít. Kontrola, která skončí zápisem, ale nechá za sebou otevřené "ještě se k tomu vrátíme", se nenápadně mění v další provozní smyčku. Tým pak sice tvrdí, že pravidlo funguje v dlouhodobém rytmu, ale současně kolem něj drží zvláštní pozornost, pomocné poznámky a malý pocit nedokončenosti. To není dlouhodobý rytmus. To je oprava převlečená za kalendář.
+
+Uzavření první kvartální kontroly má proto odpovědět na tři otázky:
+
+- Jaký je konečný stav pravidla po kontrole?
+- Co se teď výslovně nebude dál sledovat?
+- Jaká stopa z kontroly zůstane a jaká zmizí?
+
+Začněte větou:
+
+```text
+První kvartální kontrolu uzavíráme tímto stavem:
+```
+
+Za ni napište jeden ze čtyř stavů z předchozí části: pokračuje beze změny, lokálně zpřesněno, návratový signál upraven, nebo otevřena samostatná otázka. Nepište kolem toho esej. Pokud výsledek nejde říct jednou větou, kontrola nejspíš ještě není rozhodnutá.
+
+### Čtyři uzavírací věty
+
+Pro každý výsledek použijte jinou uzavírací větu:
+
+```text
+Pokračuje beze změny:
+Pravidlo zůstává v kanonickém místě, běžný rytmus se nemění a další mimořádná kontrola nevzniká.
+
+Lokálně zpřesněno:
+Pravidlo jsme zpřesnili v kanonickém místě, nepřidali jsme novou evidenci a další kontrola proběhne až v běžném rytmu.
+
+Návratový signál upraven:
+Návratový signál jsme upravili podle současné práce, aniž bychom rozšířili sběr dat nebo otevřeli původní široký návrh.
+
+Otevřena samostatná otázka:
+Nový problém oddělujeme od původního pravidla; původní dlouhodobý rytmus pokračuje a samostatná otázka dostává vlastní hranici.
+```
+
+Tyto věty nejsou stylistické cvičení. Jsou pojistka proti rozpliznutí. Každá říká, co se stalo, co se nestalo a kdy se téma znovu otevře. Bez toho bude tým za měsíc znovu řešit, jestli kvartální kontrola něco "naznačila". Naznačení je skvělé v literatuře. V provozu většinou jen vyrábí zmatek.
+
+### Praktický příklad uzavření
+
+Původní kontrola:
+
+```text
+Pravidlo:
+Rozpočtový kontext se u B2B poptávky doptává jen tehdy, když bez něj nejde navrhnout další konkrétní krok.
+
+Výsledek kvartální kontroly:
+Pravidlo je najitelné v checklistu potvrzovacího e-mailu, bylo použité ve dvou běžných poptávkách a nevznikla nová datová stopa.
+```
+
+Uzavření:
+
+```text
+První kvartální kontrolu uzavíráme tímto stavem:
+Pravidlo pokračuje beze změny. Zůstává v checklistu potvrzovacího e-mailu, kontroluje se v měsíčním review obchodních šablon a další mimořádná kontrola nevzniká.
+
+Co se dál nesleduje:
+Nesbíráme seznam poptávek, kde se pravidlo použilo, a nezakládáme zvláštní report rozpočtových dotazů.
+
+Co se maže:
+Dočasná poznámka z kvartální kontroly s konkrétními příklady poptávek.
+
+Co zůstává:
+Jedna obecná uzavírací věta v changelogu šablony.
+```
+
+Tohle je malé, ale důležité. Pravidlo se nevrací do fáze dokazování. Příklady z kontroly posloužily k rozhodnutí a potom zmizely nebo se zobecnily. V běžné trase zůstává jen současné pravidlo, ne složka s důkazy, proč mu kdysi někdo věřil.
+
+### Co po kontrole neotevírat
+
+Po první kvartální kontrole často vzniknou lákavé vedlejší nápady:
+
+- udělat lepší report,
+- přidat další pole do formuláře,
+- založit přehled všech podobných pravidel,
+- poslat týmu dlouhé shrnutí,
+- přepsat související šablony "když už jsme u toho",
+- zavést další kontrolní bod do review.
+
+Každý z těchto nápadů může být užitečný. Jen nepatří automaticky do uzavření kvartální kontroly. Pokud nápad nemění výsledek kontrolovaného pravidla, napište ho stranou jako samostatný podnět a zavřete aktuální práci. Jinak se z kontroly stane nenápadný generátor backlogu.
+
+Dobrá hranice zní:
+
+```text
+Z této kontroly neotevíráme žádnou další práci, pokud nová otázka nemá vlastní pracovní místo, očekávaný výsledek a privacy-first dopad.
+```
+
+Když ta věta působí přísně, je to v pořádku. Přísnost tady nebrání zlepšování. Brání tomu, aby každé zlepšení mělo potomky, kteří se tváří jako povinná péče.
+
+### Privacy-first uzavření
+
+Uzavření první kvartální kontroly je dobré místo pro datový úklid. V průběhu kontroly mohly vzniknout dočasné poznámky: odkazy na zákaznické zprávy, výpisy z CRM, interní komentáře, screenshoty nebo seznamy příkladů. Tyto podklady mají krátký život. Pomohly rozhodnout, ale nemají se stát součástí dlouhodobého provozu.
+
+Použijte jednoduché pravidlo:
+
+```text
+Do dlouhodobého rytmu smí přejít jen to, co bude potřeba při dalším běžném rozhodnutí.
+```
+
+Všechno ostatní smažte, anonymizujte, nebo přesuňte do řádné evidence s účelem a retencí. Pokud další člověk k použití pravidla nepotřebuje jméno zákazníka, konkrétní e-mail ani hodnotu poptávky, nemají tyto údaje zůstat u pravidla. Stačí obecný příklad nebo závěrečná věta.
+
+Privacy-first uzavírací věta může vypadat takto:
+
+```text
+Po kontrole zůstává pouze obecná uzavírací věta a aktuální pravidlo; dočasné příklady s údaji zákazníků byly smazané a nevzniká žádný nový report ani tracker.
+```
+
+Pokud potřebujete zachovat důkaz kvůli auditu, oddělte ho od pracovní trasy:
+
+```text
+Auditní podklad je uložený mimo běžnou pracovní trasu s vlastníkem, účelem a retenční lhůtou; běžné použití pravidla pracuje jen s anonymizovaným příkladem.
+```
+
+Codyho komentář: nejhorší datové hromady nevznikají velkým rozhodnutím "teď budeme sbírat moc věcí". Vznikají tím, že po každé rozumné kontrole zůstane pár drobků. Po roce z toho máte sklad. A sklad má tu otravnou vlastnost, že ho jednou musí někdo uklidit.
+
+### Karta uzavření první kvartální kontroly
+
+```text
+Pravidlo nebo pracovní místo:
+
+Kontrolované období:
+
+Výsledek kvartální kontroly:
+- pokračuje beze změny
+- lokálně zpřesněno
+- návratový signál upraven
+- otevřena samostatná otázka
+
+Uzavírací věta:
+
+Co se výslovně nemění:
+
+Co zůstává zavřené:
+
+Co se neotevírá jako další práce:
+
+Co se maže, anonymizuje nebo přesouvá mimo pracovní trasu:
+
+Jaká data se dál nesbírají:
+
+Kde zůstává kanonické pravidlo:
+
+Kdy proběhne další běžná kontrola:
+
+Jaký návratový signál může téma otevřít dřív:
+
+Záznam uzavřel:
+
+Datum:
+```
+
+Karta má být krátká závěrečná stopa, ne nová šablona údržby. Po jejím vyplnění už nevytvářejte další kartu "kontrola uzavření kontroly". Pokud máte nutkání něco takového založit, pravděpodobně se bojíte nechat pravidlo pracovat bez dozoru. To je pochopitelné, ale není to provozní strategie.
+
+### Mini workshop na 5 minut
+
+1. Minuta 1: přečtěte výsledek kvartální kontroly.
+2. Minuta 2: vyberte jednu uzavírací větu.
+3. Minuta 3: napište, co se po kontrole neotevírá.
+4. Minuta 4: smažte, anonymizujte nebo oddělte dočasné podklady.
+5. Minuta 5: ověřte, že kanonické pravidlo zůstalo použitelné bez historie.
+
+Pokud se během workshopu objeví nový problém, nedokončujte ho v téže kartě. Zapište ho jako samostatnou otázku s vlastním pracovním místem. Uzavření kontroly má zavřít kontrolu. Ne být univerzální vstupní branou pro všechno, co zrovna někoho napadlo.
+
+### Checklist uzavření první kvartální kontroly
+
+- Má kontrola jednu konečnou uzavírací větu?
+- Je jasné, zda pravidlo pokračuje beze změny, bylo lokálně zpřesněno, má nový návratový signál, nebo otevřelo samostatnou otázku?
+- Je napsané, co se výslovně nemění?
+- Zůstává původní širší návrh zavřený?
+- Nevzniká další mimořádná kontrola jen pro jistotu?
+- Jsou nové podněty oddělené od uzavření původního pravidla?
+- Jsou dočasné příklady, exporty, screenshoty a poznámky s údaji smazané, anonymizované nebo přesunuté do řádné evidence?
+- Je jasné, jaká data se po kontrole dál nesbírají?
+- Zůstává v pracovní trase jen aktuální pravidlo, ne historie jeho dokazování?
+- Dokáže další člověk pravidlo použít bez čtení kvartální kontroly?
+- Je další kontrola jen v běžném rytmu, pokud nepřijde návratový signál?
+
+Uzavření první kvartální kontroly má působit jako tečka, ne jako tři tečky. Pravidlo buď pokračuje, dostane malou lokální úpravu, změní návratový signál, nebo pustí do světa samostatnou otázku. V každém případě se kontrola sama nestává novým procesem. To je pointa dlouhodobého rytmu: dobrá pravidla mají být dostupná, ne slavnostně opečovávaná.
+
 ## Pracovní log
 
+- 2026-06-30: Doplněna úvodní podkapitola o uzavření první kvartální kontroly dlouhodobého rytmu: uzavírací věty, praktický příklad, hranice neotevírané práce, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-30: Doplněna úvodní podkapitola o první kvartální kontrole dlouhodobého rytmu: najitelnost pravidla, běžné použití, datová stopa, čtyři výsledky kontroly, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-30: Doplněna úvodní podkapitola o převodu potvrzeného tichého provozu do dlouhodobého rytmu: kanonické místo, běžný rytmus, návratový signál, úklid mimořádné péče, privacy-first převod, karta, mini workshop a checklist.
 - 2026-06-30: Doplněna úvodní podkapitola o druhém běžném použití po uzavřené údržbě tichého provozu: kdy ho dělat, kontrolní otázky, praktický příklad, výsledné stavy, privacy-first kontrola, karta, mini workshop a checklist.
