@@ -276024,8 +276024,207 @@ Když se workshop začne větvit do ceníku, formuláře, CRM, analytiky a obcho
 
 Uzavření prvního běžného použití po údržbě je malý, ale důležitý práh. Před ním ještě pravidlo nese čerstvou paměť údržby. Po něm má stát samo. Když se to povede, nepřidávejte mu berličky. Nechte ho pracovat v tichu, s jedním kanonickým místem, jasným návratovým signálem a bez zbytečných dat kolem.
 
+## Druhé běžné použití po uzavřené údržbě tichého provozu
+
+Druhé běžné použití po uzavřené údržbě má jednoduchý úkol: ověřit, že pravidlo opravdu funguje bez čerstvého vysvětlení, bez autora opravy za zády a bez zvláštní pozornosti týmu. První použití často ještě těží z toho, že všichni vědí, co se nedávno řešilo. Druhé použití už má být obyčejnější. Právě proto je cenné.
+
+Neplánujte ho automaticky pro každé pravidlo. Pokud první běžné použití potvrdilo klid a pravidlo má nízké riziko, druhé použití může proběhnout jen jako běžná práce bez zvláštní karty. Druhé ověření má smysl tehdy, když pravidlo ovlivňuje zákaznické rozhodnutí, obchodní kvalifikaci, onboarding, retenci dat, automatizaci nebo místo, kde se dřív opakovalo tření. Jinak si tým jen vyrábí jemnější administrativu, což je sport krásný asi jako leštění faktury zevnitř.
+
+Začněte větou:
+
+```text
+Druhé běžné použití po uzavřené údržbě kontroluje, jestli:
+```
+
+Za dvojtečku napište jednu vlastnost, ne celý seznam ambicí. Například: "pravidlo rozhoduje i bez vysvětlení autora", "nový název bloku nevede k další otázce" nebo "čekací hranice slabého signálu zůstává srozumitelná". Když věta potřebuje tři odstavce, druhé použití není ověření. Je to další analýza převlečená za provoz.
+
+### Kdy druhé použití vůbec dělat
+
+Druhé použití otevřete jen při jednom z těchto důvodů:
+
+- Pravidlo se dotýká dat, která by mohla zbytečně rozšířit profil zákazníka.
+- Pravidlo používá jiný člověk než ten, kdo dělal první ověření.
+- První použití skončilo lokální opravou, která se má potvrdit v běžném průchodu.
+- Pravidlo chrání před návratem starého širokého návrhu.
+- Pracovní místo je často používané a drobná nejasnost by se rychle násobila.
+
+Pokud žádný důvod neplatí, napište krátké neotevření:
+
+```text
+Druhé běžné použití po uzavřené údržbě teď zvlášť neotevíráme, protože první použití potvrdilo klid, pravidlo má nízký dopad a nevznikla nová datová stopa. Pravidlo pokračuje v běžném rytmu.
+```
+
+Tohle je plnohodnotný výsledek. Ne každé pravidlo si zaslouží další kontrolu. Tichý provoz má být tichý i organizačně.
+
+### Tři otázky druhého použití
+
+Při druhém použití si položte tři otázky:
+
+```text
+Našel člověk správné pravidlo bez nápovědy?
+
+Rozhodl podle něj stejně, jak pravidlo slibuje?
+
+Nevznikla kvůli jistotě nová datová stopa?
+```
+
+První otázka testuje najitelnost. Pokud člověk pravidlo použil jen proto, že mu někdo poslal přímý odkaz do chatu, pravidlo ještě nestojí samo. Oprava ale nemusí být velká. Často stačí lepší název v indexu, přesnější odkaz v šabloně nebo jedna věta v místě, kde se práce opravdu děje.
+
+Druhá otázka testuje rozhodnutelnost. Pravidlo může být snadno najitelné, ale pořád neurčité. Když dva lidé přečtou stejný text a jeden z něj odvodí "zeptat se zákazníka" a druhý "nechat otázku až na call", pravidlo není tiché. Jen čeká, až se spor vrátí v méně vhodný okamžik.
+
+Třetí otázka testuje privacy-first disciplínu. Někdy tým pravidlo pochopí, ale pro jistotu si začne vést pomocný seznam, interní štítek, kopii poptávek nebo komentář s osobními detaily. To je varovný signál. Pravidlo možná sice funguje, ale jeho použití si vyrábí nový datový stín.
+
+### Praktický příklad
+
+Situace:
+
+```text
+Tiché pravidlo:
+Rozpočtový kontext se u B2B poptávky doptává jen tehdy, když bez něj nejde navrhnout další konkrétní krok.
+
+První běžné použití po údržbě:
+Blok v potvrzovací šabloně byl přejmenován z "Rozpočet" na "Kdy doptat rozpočtový kontext".
+
+Druhé běžné použití:
+Jiný obchodník řeší poptávku na implementaci interní AI asistence.
+```
+
+Dobré druhé použití:
+
+```text
+Obchodník našel pravidlo v potvrzovací šabloně, nedoptal rozpočet v prvním e-mailu a navrhl diagnostický call podle cíle projektu. Nevznikl nový CRM štítek ani ruční seznam poptávek. Pravidlo zůstává beze změny.
+```
+
+Slabé druhé použití:
+
+```text
+Obchodník pravidlo použil až po dotazu v chatu. Rozhodnutí bylo správné, ale kanonické místo není dost viditelné.
+```
+
+Tady neotevírejte nový obchodní proces. Opravte navigaci k pravidlu. Například přidejte odkaz do checklistu před odesláním potvrzovacího e-mailu. Původní široký návrh na povinné rozpočtové pole zůstává zavřený.
+
+Špatné druhé použití:
+
+```text
+Obchodník si pro jistotu založil soukromou tabulku "poptávky bez rozpočtu", aby měl přehled, kdy se pravidlo hodí.
+```
+
+Tady pravidlo nevytvořilo klid. Vytvořilo náhradní evidenci. Reakce nemá být "tabulku standardizujeme", ale nejdřív otázka, proč pravidlo nedává dost jistoty v kanonickém místě. Pokud není jasný rozhodovací účel tabulky, smažte ji a opravte pravidlo nebo jeho umístění.
+
+Codyho komentář: soukromé tabulky jsou často jen nejistota ve formátu CSV. Někdy zachrání den. Častěji ale vytvoří datovou stopu, kterou nikdo nechtěl vlastnit, dokud se na ni někdo nezeptá.
+
+### Čtyři výsledky druhého použití
+
+Druhé běžné použití uzavřete jedním ze čtyř výsledků:
+
+- Samostatnost potvrzena: pravidlo našel a použil jiný člověk bez pomoci.
+- Slabá najitelnost: rozhodnutí bylo správné, ale cesta k pravidlu potřebuje lokální opravu.
+- Slabá rozhodnutelnost: pravidlo je najitelné, ale jeho text nevede k jednoznačnému rozhodnutí.
+- Náhradní datová stopa: použití pravidla vyvolalo nový seznam, štítek, export nebo ruční evidenci.
+
+`Samostatnost potvrzena` znamená konec zvláštní péče. Nepřidávejte třetí použití jen proto, že druhé vyšlo. Pravidlo se vrací do běžného rytmu a další návrat potřebuje návratový signál.
+
+`Slabá najitelnost` řešte v navigaci, ne v obsahu pravidla. Pokud člověk nevěděl, kde pravidlo hledat, nepřepisujte jeho logiku. Upravte název, odkaz, pořadí v checklistu nebo jedno místo, kde práce začíná.
+
+`Slabá rozhodnutelnost` řešte v textu pravidla. Přidejte hraniční příklad, zkraťte obecnou větu nebo nahraďte přání rozhodovacím testem. Nepřidávejte další schvalovací krok, pokud problém vznikl jen z nejasné formulace.
+
+`Náhradní datová stopa` je nejvážnější výsledek. Ne proto, že by každý seznam byl tragédie. Proto, že tým začal kompenzovat nejistotu sběrem dalších dat. Tady musí vzniknout privacy-first uzavření: co se maže, co se nepřenáší, co se případně musí schválit jako nový datový prvek a proč nestačí existující podklad.
+
+### Privacy-first kontrola druhého použití
+
+U druhého použití hledejte hlavně nepřímé datové stopy. Ty jsou zrádnější než oficiální změny, protože nevypadají jako implementace. Jenže z pohledu provozu je jedno, jestli osobní údaj vznikl ve velkém nástroji, v exportu, v poznámce u kontaktu nebo v soukromé tabulce. Pořád existuje.
+
+Zkontrolujte:
+
+- Nevznikl pomocný seznam lidí, firem, poptávek nebo chování?
+- Nepřibyl interní štítek, který profiluje zákazníka bez jasného účelu?
+- Nezkopíroval někdo zákaznické detaily do chatu, dokumentu nebo tabulky?
+- Neprodloužila se retence jen proto, že "by se to mohlo hodit"?
+- Není nové měření jen obcházení toho, že pravidlo není dost jasné?
+
+Dobrá privacy-first věta po druhém použití může znít:
+
+```text
+Druhé použití nepotřebovalo žádnou novou evidenci. Do kanonického místa doplňujeme jen odkaz z checklistu před odesláním potvrzovacího e-mailu. Dočasný chatový příklad mažeme po propsání obecné formulace.
+```
+
+Pokud nová datová stopa opravdu vzniknout musí, neuzavírejte ji nenápadně v téhle kartě. Otevřete samostatné rozhodnutí s účelem, vlastníkem, retencí, přístupem a alternativou bez nového sběru. Privacy-first provoz nestojí na tom, že nikdy nevzniknou nová data. Stojí na tom, že nevznikají potichu a bez důvodu.
+
+### Karta druhého běžného použití po údržbě
+
+```text
+Tiché pravidlo:
+
+Kanonické pracovní místo:
+
+Důvod, proč druhé použití zvlášť kontrolujeme:
+
+Kdo pravidlo použil:
+- stejný člověk jako minule
+- jiný člověk
+- role, ne jméno:
+
+Pracovní situace:
+
+Výsledek:
+- samostatnost potvrzena
+- slabá najitelnost
+- slabá rozhodnutelnost
+- náhradní datová stopa
+
+Jednovětý závěr:
+
+Co se mění v kanonickém místě:
+
+Co zůstává zavřené:
+
+Vznikla nová datová stopa?
+- ne
+- ano, jaká:
+
+Co se maže, anonymizuje nebo nepřenáší:
+
+Návratový signál po druhém použití:
+
+Další rytmus:
+- návrat do běžného provozu
+- lokální oprava navigace
+- lokální oprava textu pravidla
+- samostatné rozhodnutí o datové stopě
+
+Vlastník:
+```
+
+Karta má být krátká. Pokud se rozroste, pravděpodobně jste do druhého použití schovali víc témat: navigaci, obchodní rozhodnutí, CRM hygienu a privacy audit najednou. Rozdělte je. Druhé použití má potvrdit samostatnost pravidla nebo ukázat jednu přesnou slabinu.
+
+### Mini workshop na 5 minut
+
+1. Minuta 1: napište, proč druhé použití vůbec kontrolujete.
+2. Minuta 2: ověřte, jestli člověk pravidlo našel bez nápovědy.
+3. Minuta 3: porovnejte rozhodnutí s tím, co pravidlo slibuje.
+4. Minuta 4: najděte případnou náhradní datovou stopu.
+5. Minuta 5: vyberte jeden výsledek a napište jednovětý závěr.
+
+Když se během workshopu objeví návrh na nový formulář, nové CRM pole nebo nové měření, neřešte ho bokem. Zapište ho jako samostatný návratový signál nebo samostatné datové rozhodnutí. Tiché pravidlo nemá být zadní vchod pro změny, které by jinak musely projít normální kontrolou.
+
+### Checklist druhého běžného použití
+
+- Má druhé použití jasný důvod, nebo ho děláme jen ze zvyku?
+- Použil pravidlo člověk bez čerstvého vysvětlení autora údržby?
+- Bylo pravidlo najitelné v běžném pracovním místě?
+- Vedl text pravidla k jednoznačnému rozhodnutí?
+- Zůstává původní široký návrh zavřený?
+- Nevznikl pomocný seznam, štítek, export, screenshot nebo chatová evidence?
+- Pokud vznikla náhradní datová stopa, je zastavená nebo předaná do samostatného rozhodnutí?
+- Je případná oprava omezená na navigaci nebo text, podle skutečné slabiny?
+- Je do kanonického místa přenesené jen to, co další člověk opravdu potřebuje?
+- Vrací se pravidlo po potvrzení samostatnosti do běžného rytmu bez další mimořádné kontroly?
+
+Druhé běžné použití je poslední dobrý okamžik zachytit, jestli se pravidlo opírá o systém, nebo pořád o paměť lidí kolem něj. Když obstojí, nechte ho být. Když neobstojí, opravte nejmenší místo, které selhalo. A když si tým začne pomáhat novými daty, zastavte to dřív, než se z dočasné jistoty stane trvalý provozní zvyk.
+
 ## Pracovní log
 
+- 2026-06-30: Doplněna úvodní podkapitola o druhém běžném použití po uzavřené údržbě tichého provozu: kdy ho dělat, kontrolní otázky, praktický příklad, výsledné stavy, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-06-30: Doplněna úvodní podkapitola o uzavření prvního běžného použití po uzavřené údržbě tichého provozu: uzavírací stavy, praktický příklad, propsání do kanonického místa, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-30: Doplněna úvodní podkapitola o prvním běžném použití po uzavřené údržbě tichého provozu: tři otázky použití, praktický příklad, čtyři výsledky, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-06-30: Doplněna úvodní podkapitola o uzavření první běžné údržby tichého provozu: čtyři uzavírací stavy, praktický příklad, úklid dočasných stop, privacy-first uzavření, karta, mini workshop a checklist.
