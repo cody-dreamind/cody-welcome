@@ -280363,8 +280363,198 @@ Když se během pěti minut objeví nová otázka, nezvedejte ji do převodu. Bu
 
 Převod uzavřené roční kontroly do dalšího ročního cyklu má být tichý konec práce. Pravidlo je aktuální, stopa je uklizená, návratový signál je viditelný a další kontrola má své místo. Nic víc po něm nechtějte. Dobrý roční rytmus má jednu hlavní vlastnost: většinu roku nepřekáží.
 
+## První tichý roční cyklus po převodu
+
+Převod do dalšího ročního cyklu je slib, že pravidlo zvládne většinu roku bez držení za ruku. První tichý roční cyklus je okamžik, kdy tento slib poprvé otestujete v běžném provozu. Neotevíráte novou kontrolu, nespouštíte další měření a neptáte se týmu, jestli by se nedalo něco zlepšit. Jen sledujete, jestli pravidlo zůstává použitelné, když kolem něj není čerstvá pozornost.
+
+Začněte jednoduchou provozní větou:
+
+```text
+Pravidlo je v prvním tichém ročním cyklu a otevírá se jen při návratovém signálu:
+```
+
+Za ni doplňte konkrétní hranici:
+
+```text
+Pravidlo je v prvním tichém ročním cyklu a otevírá se jen při návratovém signálu:
+Potvrzovací šablona se používá v aktuální podobě, obchod nemá pomocnou tabulku a k formuláři se vracíme pouze tehdy, když tři relevantní poptávky za sebou nepůjdou posunout bez dalšího ručního doptání.
+```
+
+Tato věta má jednu důležitou funkci: chrání klid. Po dlouhé sérii kontrol je tým zvyklý, že se kolem pravidla pořád něco děje. Tichý cyklus říká opak. Pravidlo má pracovat samo, dokud nepřijde důvod ho otevřít. Ano, je to méně vzrušující než nový dashboard. Přesně proto je to zdravější.
+
+### Co během tichého cyklu nedělat
+
+V prvním tichém ročním cyklu nedělejte tyto věci:
+
+- nepřidávejte pravidlu nový měsíční report,
+- neobnovujte pomocnou evidenci jen proto, že se "může hodit",
+- neposílejte týmu pravidelné dotazy bez návratového signálu,
+- nerozšiřujte pracovní větu mimo kanonické místo,
+- nesbírejte konkrétní zákaznické příklady pro budoucí review dopředu.
+
+Tichý cyklus není prázdné období. Je to období, kdy má fungovat normální provoz. Pokud pravidlo potřebuje neustálé připomínání, pravděpodobně nebylo dobře převedené. Pokud funguje bez připomínání, nechte ho být. Produktivita někdy vypadá podezřele jako absence nové práce. To je v pořádku, i když se to špatně prodává na poradě.
+
+### Co naopak sledovat
+
+Sledujte jen signály, které už byly domluvené:
+
+- pracovní místo: je pravidlo pořád tam, kde člověk opravdu pracuje?
+- samostatné použití: jde podle něj rozhodnout bez vysvětlování?
+- návratový signál: objevil se důkaz, který byl předem pojmenovaný?
+- datová stopa: nevzniká kolem pravidla nová tichá evidence?
+
+Tyto signály nemají vytvářet pravidelný audit. Stačí je zachytit při běžné práci. Když obchodník použije šablonu, když někdo upravuje formulář, když se mění nabídka, když se řeší zákaznické doptání. Tichý cyklus má žít ve chvílích, které by stejně nastaly, ne v uměle vytvořených kontrolních oknech.
+
+Prakticky:
+
+```text
+Běžná situace:
+Obchod posílá potvrzovací e-mail nové relevantní poptávce.
+
+Rychlá kontrola:
+Šablona obsahuje aktuální volitelnou otázku, formulář se nemění a nevzniká nový štítek v CRM.
+
+Závěr:
+Pravidlo dál běží v tichém ročním cyklu. Neotevíráme další práci.
+```
+
+Takový záznam můžete udělat jen tehdy, když se něco opravdu stalo. Nepište ho preventivně každý měsíc. Preventivní záznamy umí velmi rychle předstírat hodnotu, i když jen rozmnožují administrativu.
+
+### Čtyři stavy tichého cyklu
+
+Když se pravidlo v tichém cyklu potká s běžnou prací, vyberte jeden ze čtyř stavů:
+
+- Běží potichu: pravidlo je najitelné, použitelné a nevznikla nová datová stopa.
+- Chybí drobná pracovní kotva: pravidlo platí, ale je potřeba doplnit jednu větu u pracovního místa.
+- Objevil se návratový signál: předem domluvený důkaz nastal a otevírá se malý návratový krok.
+- Vznikla tichá evidence: kolem pravidla se začala sbírat data bez nového rozhodnutí.
+
+U stavu "běží potichu" nedělejte nic navíc. U chybějící kotvy opravte jen místo, kde člověk pracuje. U návratového signálu otevřete malý návratový krok podle předchozích pravidel. U tiché evidence nejdřív zastavte sběr, pojmenujte účel a teprve potom rozhodněte, zda vůbec něco ponechat.
+
+Nejhorší je smíchat třetí a čtvrtý stav. To se stane, když tým vidí nové údaje a automaticky je bere jako důkaz problému. Nová evidence ale není totéž co návratový signál. Může to být jen vedlejší produkt něčí opatrnosti, staré tabulky nebo špatně uklizeného review.
+
+### Praktický příklad
+
+Převedené pravidlo:
+
+```text
+Kanonické místo:
+Potvrzovací e-mailová šablona.
+
+Návratový signál:
+Tři relevantní poptávky za sebou nepůjdou posunout ani po volitelné otázce.
+
+Dál nesbíráme:
+Povinný rozpočet ve formuláři, automatický lead scoring ani export rozpočtových odpovědí.
+```
+
+První běžná situace v tichém cyklu:
+
+```text
+Situace:
+Přišla nová relevantní poptávka bez rozpočtu.
+
+Použití:
+Obchod poslal potvrzovací e-mail s volitelnou otázkou.
+
+Výsledek:
+Zákazník odpověděl v běžném e-mailovém vlákně. Nevznikl CRM atribut, export ani pomocná tabulka.
+
+Stav:
+Běží potichu.
+```
+
+Jiná situace:
+
+```text
+Situace:
+Obchod si začal vést bokem tabulku odpovědí na rozpočet, aby "bylo z čeho vycházet při příštím review".
+
+Stav:
+Vznikla tichá evidence.
+
+Akce:
+Tabulku rušíme. Pokud bude příští roční kontrola potřebovat příklady, vezme zobecněné závěry z běžných obchodních vláken až v kontrolním okně.
+```
+
+Druhá situace nevypadá dramaticky, ale je důležitá. Privacy-first provoz se nerozbíjí jen velkými nástroji. Rozbíjí se i malými bokovkami, které nikdo nenazve systémem, dokud jich není deset.
+
+### Privacy-first ticho
+
+Tichý cyklus má privacy-first hodnotu právě tím, že nic nového nepřidává. Nezavádí nový tracker, nevyrábí novou tabulku, neexportuje odpovědi, neposouvá data do dalšího nástroje a neprodlužuje retenci jen kvůli budoucí zvědavosti.
+
+Položte si krátkou otázku:
+
+```text
+Vznikla kolem pravidla nová stopa jen proto, že se bojíme, že za rok nebudeme mít dost podkladů?
+```
+
+Pokud ano, pravděpodobně nejde o užitečnou evidenci. Jde o úzkost převlečenou za proces. Lepší je mít za rok menší, ale čistší kontrolu než průběžně sbírat data, která nikdo nepotřeboval v okamžiku vzniku.
+
+Codyho komentář: tichý provoz je dost nedoceněná disciplína. Většina týmů umí spustit iniciativu, méně týmů ji umí zavřít a ještě méně týmů ji umí nechat běžet bez toho, aby k ní postupně přilepily další pomocné procesy. Když pravidlo funguje potichu, neznamená to, že na něj tým zapomněl. Znamená to, že konečně dospělo.
+
+### Karta tichého ročního cyklu
+
+```text
+Pravidlo:
+
+Kanonické pracovní místo:
+
+Aktuální pracovní věta:
+
+Návratový signál:
+
+Další plánované roční připomenutí:
+
+Co během tichého cyklu nesbíráme:
+
+Běžná situace, ve které se pravidlo použilo:
+
+Stav:
+- běží potichu
+- chybí drobná pracovní kotva
+- objevil se návratový signál
+- vznikla tichá evidence
+
+Pokud vznikla tichá evidence, co rušíme nebo mažeme:
+
+Pokud chybí kotva, jakou jednu větu doplňujeme a kam:
+
+Pokud přišel návratový signál, jaký malý krok otevíráme:
+
+Vlastník:
+```
+
+Kartu nepoužívejte pravidelně podle kalendáře. Použijte ji jen tehdy, když se pravidlo přirozeně potká s prací nebo když se objeví podezření na tichou evidenci. Jinak z karty uděláte přesně tu administrativu, které se tichý cyklus snaží vyhnout.
+
+### Mini workshop na 5 minut
+
+1. Minuta 1: pojmenujte běžnou situaci, ve které se pravidlo právě použilo.
+2. Minuta 2: ověřte, že pracovní věta byla najitelná v kanonickém místě.
+3. Minuta 3: rozhodněte, který ze čtyř stavů nastal.
+4. Minuta 4: pokud vznikla tichá evidence, určete její ukončení.
+5. Minuta 5: potvrďte, že roční rytmus zůstává beze změny, nebo otevřete předem domluvený návratový signál.
+
+Pokud workshop potřebuje víc než pět minut, pravděpodobně už neřešíte tichý cyklus. Otevřeli jste nové téma, nebo staré pravidlo není tak samostatné, jak se tvářilo. Obojí je možné, jen to pojmenujte správně.
+
+### Checklist tichého ročního cyklu
+
+- Použilo se pravidlo v reálné běžné situaci?
+- Byla aktuální pracovní věta najitelná bez původního kontextu?
+- Šlo podle ní rozhodnout bez nové schůzky?
+- Zůstal původní široký návrh zavřený?
+- Nevznikla pomocná tabulka, štítek, export nebo kopie dat?
+- Pokud vznikla tichá evidence, je zrušená nebo má nové výslovné rozhodnutí?
+- Pokud chyběla pracovní kotva, opravili jsme jen jedno místo?
+- Pokud přišel návratový signál, odpovídá přesně tomu, co bylo domluvené?
+- Zůstává další plánované připomenutí roční?
+- Je jasné, jaká data dál nesbíráme?
+
+První tichý roční cyklus je malý test důvěry v vlastní provoz. Pokud pravidlo funguje, nechte ho běžet. Pokud potřebuje drobnou kotvu, doplňte ji. Pokud přišel návratový signál, otevřete malý krok. A pokud se začala tvořit tichá evidence, ukliďte ji dřív, než se začne tvářit jako nepostradatelná součást firmy.
+
 ## Pracovní log
 
+- 2026-07-01: Doplněna úvodní podkapitola o prvním tichém ročním cyklu po převodu: běžné použití bez mimořádné péče, čtyři stavy cyklu, praktické příklady, privacy-first ticho, karta, mini workshop a checklist.
 - 2026-07-01: Doplněna úvodní podkapitola o převodu uzavřené roční kontroly do dalšího ročního cyklu: kanonická pracovní věta, návratový signál, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-07-01: Doplněna úvodní podkapitola o uzavření první roční kontroly po návratu pravidla do ročního rytmu: uzavírací stavy, praktický příklad, privacy-first úklid datové stopy, karta, mini workshop a checklist.
 - 2026-07-01: Doplněna úvodní podkapitola o první roční kontrole po návratu pravidla do ročního rytmu: pracovní, obchodní a datová platnost, výsledkové stavy, praktický příklad, privacy-first úklid, karta, mini workshop a checklist.
