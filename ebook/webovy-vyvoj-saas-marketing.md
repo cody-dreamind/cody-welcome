@@ -279051,8 +279051,221 @@ Pokud se během pěti minut objeví větší problém, nezvětšujte workshop. Z
 
 První běžné použití po ročním připomenutí je malá provozní pojistka. Potvrzuje, že roční kontrola nebyla jen dobře vyplněná karta, ale že pravidlo dál žije tam, kde má. Když funguje, nechte ho být. Když drhne, opravte nejbližší větu. A když se změnil kontext, otevřete novou malou otázku místo toho, abyste staré pravidlo natahovali přes novou realitu.
 
+## Uzavření prvního běžného použití po ročním připomenutí
+
+První běžné použití po ročním připomenutí nesmí zůstat viset jako poznámka typu "někdy se k tomu vrátíme". Když se pravidlo opravdu použilo, má vzniknout krátké uzavření: co se stalo, jestli pravidlo obstálo, zda bylo potřeba lokální dočištění a co se díky tomu dál nesleduje. Bez uzavření se i úspěšné použití může změnit v nové tiché hlídání. Tým si začne schovávat příklady, dělat pomocné poznámky a čekat, jestli se "ještě něco neukáže". Gratuluji, právě jste z ročního klidu vyrobili novou malou administrativu. To obvykle není upgrade.
+
+Uzavření začněte jednou větou:
+
+```text
+První běžné použití po ročním připomenutí uzavíráme takto:
+```
+
+Věta má popsat výsledek, ne historii:
+
+```text
+První běžné použití po ročním připomenutí uzavíráme takto:
+Pravidlo bylo najitelné u potvrzovací šablony, šlo podle něj rozhodnout bez pomoci a nevznikla nová evidence rozpočtů.
+```
+
+Taková věta stačí, pokud všechno fungovalo. Není potřeba přepisovat starou kartu, znovu otevírat roční připomenutí ani plánovat další kontrolu jen proto, že první použití proběhlo dobře. Úspěšný provoz má často nejkratší dokumentaci. Důležité je, aby šla za půl roku pochopit bez člověka, který u použití byl.
+
+### Čtyři uzavírací stavy
+
+Po prvním běžném použití vyberte jeden ze čtyř stavů:
+
+- Uzavřít beze změny: pravidlo bylo najitelné, rozhodnutelné a datová stopa zůstala podle plánu.
+- Uzavřít po lokální kotvě: pravidlo platí, ale bylo potřeba doplnit větu, odkaz nebo umístění u pracovního místa.
+- Uzavřít po zpřesnění věty: pravidlo bylo dostupné, ale pracovní formulace musela být ostřejší.
+- Oddělit nové rozhodnutí: použití ukázalo jiný kontext, který už nepatří do ročního pravidla.
+
+Stav `uzavřít beze změny` je jednoduchý. Zapište závěr, nechte další roční připomenutí v původním rytmu a nic dalšího neměřte. Pokud pravidlo funguje, další práce by měla mít nový důvod, ne jen pocit, že se sluší udělat ještě jeden check.
+
+Stav `uzavřít po lokální kotvě` použijte, když problém nebyl v pravidle, ale v jeho dostupnosti. Typická oprava je jedna věta u šablony, odkaz v checklistu, pojmenování v interním indexu nebo krátké vysvětlení u formuláře. Nezakládejte novou metodiku. Když chyběla cedule ke dveřím, nestavte recepci.
+
+Stav `uzavřít po zpřesnění věty` znamená, že pravidlo potřebovalo rozhodovací jazyk. Přepište jen větu, kterou člověk používá při práci. Historie, důvody a staré příklady mohou zůstat v kanonické kartě, ale běžné pracovní místo má dostat jednoduchou instrukci: kdy použít, co udělat a co neotevírat.
+
+Stav `oddělit nové rozhodnutí` je pojistka proti natahování starého pravidla. Pokud se změnil segment, nabídka, kanál, vlastník nebo pracovní situace, první použití neuzavírejte tím, že staré pravidlo nafouknete. Staré pravidlo uzavřete podle toho, co se stalo, a nové téma založte jako samostatnou úzkou kartu.
+
+### Praktický příklad uzavření
+
+Původní pravidlo:
+
+```text
+U relevantní poptávky bez rozpočtu se nepřidává povinné pole do formuláře. Obchod může poslat volitelnou otázku v potvrzovacím e-mailu, pokud bez ní nejde navrhnout další krok.
+```
+
+První použití:
+
+```text
+Nový obchodník našel větu u potvrzovací šablony, použil volitelnou otázku a nechal formulář beze změny.
+```
+
+Uzavření beze změny:
+
+```text
+První běžné použití po ročním připomenutí uzavíráme beze změny. Pravidlo bylo najitelné u potvrzovací šablony, šlo podle něj rozhodnout bez původního vlastníka a nevznikl nový CRM atribut, scoring ani export.
+
+Další rytmus:
+Ponecháváme roční připomenutí.
+
+Co neotevíráme:
+Další sledování použití otázky, úpravu formuláře ani novou kvalifikační tabulku.
+```
+
+Uzavření po lokální kotvě:
+
+```text
+První běžné použití po ročním připomenutí uzavíráme po lokální kotvě. Pravidlo platí, ale nebylo u e-mailové šablony; člověk ho našel až v kanonické kartě.
+
+Lokální oprava:
+Ke šabloně přidáváme jednu větu: "Pokud relevantní poptávce chybí rozpočet a bez něj nejde navrhnout další krok, pošli volitelnou otázku v potvrzovacím e-mailu; formulář se nemění."
+
+Co neotevíráme:
+Nový formulář, povinné pole, měření četnosti otázky ani další obchodní evidenci.
+```
+
+Uzavření po zpřesnění věty:
+
+```text
+První běžné použití po ročním připomenutí uzavíráme po zpřesnění pracovní věty. Pravidlo bylo dostupné, ale formulace "rozpočet řešíme citlivě" nevedla k rozhodnutí.
+
+Zpřesněná věta:
+U relevantní poptávky bez rozpočtu se nejdřív posílá volitelná otázka v potvrzovacím e-mailu; povinné pole ve formuláři se neotevírá bez tří po sobě jdoucích nekvalifikovatelných poptávek.
+
+Co neotevíráme:
+Novou datovou mapu, protože se nezměnil tok dat; pouze jsme zpřesnili pracovní instrukci.
+```
+
+Oddělené nové rozhodnutí:
+
+```text
+První běžné použití po ročním připomenutí neuzavíráme úpravou starého pravidla. Použití ukázalo nový kontext: poptávka nepřišla z webu, ale z partnerského doporučení, kde se kvalifikace děje v jiném rozhovoru.
+
+Uzavření starého pravidla:
+Pravidlo pro webový formulář zůstává beze změny.
+
+Nová karta:
+Jak se ptát na rozpočet u partnersky doporučených poptávek, aniž by vznikla zbytečná obchodní evidence.
+```
+
+Tím se staré pravidlo nezamotá do nové situace. Když se dva kontexty tváří podobně, ale používají jiný kanál a jiné očekávání zákazníka, zaslouží si oddělené rozhodnutí. Jinak se za pár měsíců nikdo nevyzná, jestli pravidlo vzniklo pro formulář, e-mail, partnera nebo obchodní hovor.
+
+### Co po uzavření smazat nebo nechat být
+
+Uzavření prvního běžného použití má často jednu malou úklidovou část. Zkontrolujte hlavně dočasné stopy, které vznikly během ověření:
+
+- poznámku s konkrétním zákaznickým příkladem,
+- kopii e-mailu v interní dokumentaci,
+- pomocný screenshot šablony,
+- testovací odkaz,
+- ruční značku v CRM,
+- pracovní tabulku s jedním řádkem.
+
+Ne každá stopa je problém. Problém je stopa bez účelu, vlastníka a konce. Pokud pomohla zpřesnit pracovní větu, výsledek přepište do obecné podoby a citlivý detail smažte nebo vraťte tam, kde má běžně být. Pokud stopa podporuje další úzké rozhodnutí, patří do nové karty s jasným účelem. Pokud jen dokazuje, že se něco stalo, většinou ji nepotřebujete.
+
+Použijte jednoduché pravidlo:
+
+```text
+Necháváme jen stopu, podle které někdo později udělá lepší rozhodnutí.
+```
+
+Všechno ostatní je provozní suvenýr. Hezké, ale časem překáží.
+
+### Privacy-first uzavření
+
+Privacy-first hodnota uzavření není jen v tom, že nepřidáte nový tracker nebo formulářové pole. Je i v tom, že neproměníte jednorázové ověření v trvalou evidenci. Po prvním běžném použití se proto ptejte:
+
+```text
+Co jsme potřebovali vědět pro rozhodnutí?
+
+Co už pro další práci nepotřebujeme?
+
+Jak zabráníme tomu, aby z lokální opravy vzniklo nové sledování?
+```
+
+Příklad odpovědi:
+
+```text
+Pro rozhodnutí jsme potřebovali vědět, zda člověk najde pravidlo u potvrzovací šablony a použije ho bez pomoci.
+
+Pro další práci nepotřebujeme uchovávat konkrétní zákaznickou odpověď ani výši rozpočtu mimo běžné obchodní vlákno.
+
+Lokální oprava je jen věta u šablony; nezakládáme nové pole, štítek, dashboard ani export.
+```
+
+Tohle je malý, ale důležitý rozdíl. Tým se něco naučil, pravidlo se případně zpřesnilo, ale provoz se nerozšířil o další datovou vrstvu. Privacy-first provoz v Evropě má často právě tuto podobu: méně pomocných kopií, méně skrytých tabulek, méně nástrojů, které "pro jistotu" vědí víc než potřebují.
+
+### Karta uzavření prvního běžného použití
+
+```text
+Pravidlo nebo pracovní místo:
+
+Datum ročního připomenutí:
+
+Běžná situace použití:
+
+Co se stalo:
+
+Uzavírací stav:
+- uzavřít beze změny
+- uzavřít po lokální kotvě
+- uzavřít po zpřesnění věty
+- oddělit nové rozhodnutí
+
+Uzavírací věta:
+
+Lokální oprava, pokud existuje:
+
+Kde je oprava propsaná:
+
+Co se výslovně neotevírá:
+
+Dočasné stopy k úklidu:
+
+Privacy-first uzavření:
+Necháváme:
+Mažeme nebo zobecňujeme:
+Nově nesbíráme:
+
+Další rytmus:
+
+Vlastník:
+```
+
+Karta nemá být povinný rituál. Pokud první použití fungovalo, často stačí vyplnit pět řádků: co se stalo, stav, uzavírací větu, co se neotevírá a další rytmus. Delší verzi použijte jen tehdy, když vznikla lokální oprava, nový kontext nebo dočasné stopy k úklidu.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte běžnou situaci a výsledek použití.
+2. Minuta 2: vyberte jeden ze čtyř uzavíracích stavů.
+3. Minuta 3: napište uzavírací větu.
+4. Minuta 4: určete případnou lokální opravu a místo propsání.
+5. Minuta 5: pojmenujte, co se výslovně neotevírá.
+6. Minuta 6: smažte, zobecněte nebo ponechte jen nezbytné dočasné stopy.
+
+Pokud se během workshopu objeví nový problém, nezvětšujte uzavření. Zapište ho jako novou úzkou kartu a první běžné použití zavřete. Uzavření nemá spolknout nové téma jen proto, že se ukázalo ve stejném rozhovoru.
+
+### Checklist uzavření prvního běžného použití
+
+- Je jasné, jaké pravidlo nebo pracovní místo se použilo?
+- Je popsané, co se při prvním běžném použití opravdu stalo?
+- Má použití jeden ze čtyř uzavíracích stavů?
+- Je uzavírací věta srozumitelná bez staré historie?
+- Pokud vznikla lokální oprava, je propsaná přesně tam, kde člověk pracuje?
+- Pokud se zpřesnila pracovní věta, zůstala krátká a rozhodovací?
+- Pokud se ukázal nový kontext, má vlastní úzkou kartu?
+- Je jasně zapsané, co se výslovně neotevírá?
+- Nevzniklo nové sledování jen kvůli uklidnění týmu?
+- Jsou dočasné poznámky, kopie, screenshoty nebo ruční značky smazané, zobecněné nebo ponechané s účelem?
+- Zůstává další rytmus přiměřený výsledku použití?
+- Umí další člověk použít pravidlo bez původního vlastníka a bez čtení celé historie?
+
+Uzavření prvního běžného použití je poslední malá brzda po ročním připomenutí. Když pravidlo funguje, vrací se do klidu. Když mu chybí věta nebo kotva, dostane lokální opravu. Když se změnil kontext, vznikne nová úzká karta. V žádném z těchto stavů není potřeba rozšiřovat sledování jen proto, že se tým chce cítit jistěji. Jistota má přijít z dobré pracovní věty, ne z další tabulky.
+
 ## Pracovní log
 
+- 2026-07-01: Doplněna úvodní podkapitola o uzavření prvního běžného použití po ročním připomenutí: čtyři uzavírací stavy, praktické příklady, úklid dočasných stop, privacy-first uzavření, karta, mini workshop a checklist.
 - 2026-07-01: Doplněna úvodní podkapitola o prvním běžném použití po uzavřeném ročním připomenutí: kontrola najitelnosti pravidla, rozhodovací věty, privacy-first datové stopy, karta, mini workshop a checklist.
 - 2026-07-01: Doplněna úvodní podkapitola o uzavření prvního ročního připomenutí po zředění rytmu: uzavírací stavy, praktické příklady, hranice neotevírané práce, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-07-01: Doplněna úvodní podkapitola o prvním ročním připomenutí po zředění rytmu: tři kontroly, praktické příklady, čtyři výsledky, privacy-first pravidla, karta, mini workshop a checklist.
