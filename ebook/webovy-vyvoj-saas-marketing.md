@@ -281924,8 +281924,202 @@ Když se v šesté minutě ukáže, že kolem prvního použití vzniklo víc po
 
 Uzavření prvního běžného použití po lokální úpravě z archivního minima má být krátké a rozhodné. Buď úprava funguje a vrací se do práce, nebo potřebuje jednu blízkou opravu. V obou případech platí: nevracet starý rozsah bez signálu a nenechávat po sobě data, která už neslouží žádnému rozhodnutí.
 
+## Druhé běžné použití po dočištění lokální úpravy z archivního minima
+
+Druhé běžné použití má smysl jen tehdy, když první použití neprošlo úplně čistě. Typicky jste doplnili kotvu, aby člověk úpravu našel v běžném pracovním místě, nebo jste zpřesnili rozhodovací větu, aby bylo jasné, kdy ji použít a kdy ne. Druhé použití pak není nové kolo nadšení. Je to krátká kontrola, jestli lokální oprava odstranila konkrétní tření.
+
+Začněte větou:
+
+```text
+Druhé běžné použití ověřuje pouze tuto lokální opravu:
+```
+
+Do věty nepatří celý starý archivní příběh. Patří tam jedna opravená kotva nebo jedna opravená rozhodovací věta. Pokud musíte vysvětlovat půl historie, oprava ještě není dost lokální nebo není dost srozumitelná.
+
+Příklad dobré věty:
+
+```text
+Druhé běžné použití ověřuje pouze to, zda obchodník najde volitelnou větu k orientační investici přímo v šabloně první odpovědi po doporučení.
+```
+
+Příklad slabé věty:
+
+```text
+Druhé běžné použití ověřuje, jestli máme správně vyřešené kvalifikování rozpočtu u poptávek.
+```
+
+Druhá věta je moc široká. Vrací vás k tématu, které už bylo jednou zúžené. Takto se lokální oprava převléká zpět za projekt. Hezký trik, ale ne v mém checklistu.
+
+### Co při druhém použití nesledovat
+
+Druhé použití často láká k přimíchání dalších otázek. Když už někdo znovu použije upravenou šablonu, nabízí se sledovat rychlost odpovědi, obchodní kvalitu, reakci zákazníka, míru konverze, práci v CRM a náladu týmu. Nedělejte z toho malé výzkumné centrum.
+
+Sledujte jen tři věci:
+
+- Najitelnost: našel člověk opravenou kotvu tam, kde začal práci?
+- Rozhodnutelnost: poznal podle věty, jestli úpravu použít?
+- Zavřený rozsah: zůstalo původní široké řešení pořád zavřené?
+
+Všechno ostatní je buď běžná obchodní práce, nebo nové téma. Pokud se objeví nový signál, zapište ho zvlášť. Nepřilepujte ho k druhému použití jen proto, že vznikl ve stejném týdnu.
+
+### Čtyři výsledky druhého použití
+
+Po druhém běžném použití vyberte jeden stav:
+
+- Uzavřít do tichého provozu: kotva nebo rozhodovací věta funguje bez další pomoci.
+- Udělat poslední lokální dočištění: tření je pořád na stejném místě a oprava je jasně menší než původní úprava.
+- Vrátit se o krok zpět: druhé použití ukázalo, že problém nebyl v kotvě ani větě, ale v samotném pracovním místě.
+- Zastavit rozšiřování: druhé použití se znovu pokusilo otevřít původní široké řešení bez návratového signálu.
+
+Stav `uzavřít do tichého provozu` znamená konec mimořádné pozornosti. Nepište třetí kontrolu. Nepřidávejte report. Nepřenášejte pravidlo do dalšího indexu jen proto, že fungovalo. Funkční lokální úprava má být dostupná tam, kde se používá, a jinak má mlčet.
+
+Stav `udělat poslední lokální dočištění` použijte opatrně. Oprava musí být opravdu poslední a opravdu lokální: přejmenovat kotvu, přesunout větu blíž k rozhodnutí, zkrátit příklad, odstranit dvojznačné slovo. Pokud oprava potřebuje nové schéma, nový proces nebo další roli, už nejde o dočištění.
+
+Stav `vrátit se o krok zpět` je poctivý, když druhé použití ukáže špatnou diagnózu. Třeba jste doplnili kotvu do e-mailové šablony, ale obchodník začíná práci v CRM úkolu a k šabloně se dostane až pozdě. Pak neopravujte další větu v šabloně. Vraťte se k otázce, kde je skutečné pracovní místo.
+
+Stav `zastavit rozšiřování` použijte ve chvíli, kdy se úspěšné druhé použití začne vydávat za důkaz pro širší změnu. Dvě dobrá použití volitelné věty nejsou automaticky argument pro povinné pole ve formuláři. Jsou argument pro to, že volitelná věta funguje v omezené situaci.
+
+### Praktický příklad
+
+Po prvním použití jste zpřesnili rozhodovací větu:
+
+```text
+Použij jen u doporučené poptávky, kde bez orientační investice nejde navrhnout další konkrétní krok.
+```
+
+Druhé použití:
+
+```text
+Obchodník řešil další doporučenou poptávku. Větu našel v šabloně první odpovědi a použil ji až poté, co bez orientační investice nedokázal navrhnout další krok.
+```
+
+Uzavření:
+
+```text
+Stav:
+Uzavřít do tichého provozu.
+
+Co fungovalo:
+Rozhodovací věta byla najitelná a omezila použití na správnou situaci.
+
+Co dál neděláme:
+Neplánujeme třetí mimořádnou kontrolu, nepřidáváme CRM pole, neměníme formulář a nezakládáme report rozpočtových odpovědí.
+
+Návratový signál:
+Téma znovu otevřeme jen pokud tři relevantní doporučené poptávky za sebou nepůjdou kvalifikovat bez nové strukturované otázky.
+```
+
+Slabší výsledek:
+
+```text
+Obchodník větu použil správně, ale musel ji hledat ve staré kartě návratu, ne v šabloně, se kterou pracoval.
+```
+
+Uzavření:
+
+```text
+Stav:
+Udělat poslední lokální dočištění.
+
+Dočištění:
+Přesunout rozhodovací větu přímo do šablony první odpovědi a ve staré kartě nechat jen odkaz na aktuální pracovní místo.
+
+Co neotevíráme:
+Nový rozcestník, novou obchodní metodiku, změnu formuláře ani další kontrolní tabulku.
+```
+
+Tento rozdíl je důležitý. Když člověk větu použije správně, ale musí ji lovit ve starém záznamu, problém není v principu. Je v umístění. Oprava má přesunout větu blíž k práci, ne znovu analyzovat celý obchodní proces.
+
+### Privacy-first kontrola druhého použití
+
+Druhé použití nesmí vytvořit novou trvalou evidenci jen proto, že "ještě ověřujeme". Pokud potřebujete krátkou poznámku, zapište pouze zobecněný výsledek. Nepřenášejte konkrétní zákaznické odpovědi, částky, jména, screenshoty ani celé e-mailové vlákno do dokumentace pravidla.
+
+Použijte krátkou kontrolu:
+
+```text
+Pro druhé použití potřebujeme uchovat:
+
+Po uzavření nepřenášíme:
+
+Nové pole, tracker, export nebo report:
+ano/ne; pokud ano, proč je nezbytný pro rozhodnutí:
+```
+
+Ve většině případů má být poslední řádek `ne`. Lokální úprava z archivního minima má dokazovat, že umíte pracovat s malým pravidlem bez budování nové datové infrastruktury kolem každého povzdechu.
+
+Codyho komentář: druhé použití je nejnebezpečnější ve chvíli, kdy se povede. Neúspěch tým brzdí přirozeně. Úspěch naopak svádí k větě "tak to rovnou rozšiřme". Jenže dobrá lokální věta není pozvánka k plošnému sběru dat. Je to důkaz, že někdy stačí vědět, co se ptát, kdy se ptát a kdy konečně přestat přidávat políčka.
+
+### Karta druhého běžného použití
+
+```text
+Archivní pravidlo:
+
+Lokální úprava po prvním použití:
+- doplněná kotva
+- zpřesněná rozhodovací věta
+- jiné lokální dočištění:
+
+Druhé použití ověřuje pouze:
+
+Běžná pracovní situace:
+
+Co se opravdu stalo:
+
+Výsledek:
+- uzavřít do tichého provozu
+- udělat poslední lokální dočištění
+- vrátit se o krok zpět
+- zastavit rozšiřování
+
+Co ponecháváme v běžném pracovním místě:
+
+Co případně naposledy lokálně dočišťujeme:
+
+Co zůstává zavřené:
+
+Návratový signál pro širší otevření:
+
+Privacy-first kontrola:
+Pro druhé použití potřebujeme uchovat:
+Po uzavření nepřenášíme:
+Nové pole, tracker, export nebo report:
+
+Vlastník:
+
+Datum:
+```
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte lokální opravu po prvním použití.
+2. Minuta 2: napište, co druhé použití ověřuje a co už neřeší.
+3. Minuta 3: ověřte najitelnost a rozhodnutelnost.
+4. Minuta 4: zkontrolujte, jestli původní široký rozsah zůstal zavřený.
+5. Minuta 5: vyberte jeden výsledek.
+6. Minuta 6: ukliďte dočasnou poznámku nebo ji zobecněte.
+
+Pokud se během workshopu objeví nový větší problém, nezatahujte ho do stejné karty. Zapište ho jako samostatný podnět s vlastním důkazem. Druhé použití má uzavřít dočištěnou lokální úpravu, ne stát se sběrným dvorem pro všechno, co se při práci zrovna ukázalo.
+
+### Checklist druhého použití
+
+- Opravdu bylo druhé použití potřeba po prvním použití?
+- Víme, kterou kotvu nebo rozhodovací větu ověřujeme?
+- Nevracíme se zbytečně k celé historii archivního minima?
+- Proběhlo ověření v běžné pracovní situaci?
+- Byla úprava najitelná bez mimořádného vysvětlení?
+- Vedla rozhodovací věta k jasnému ano/ne?
+- Zůstal původní široký návrh zavřený?
+- Vybrali jsme jeden ze čtyř výsledků?
+- Pokud dočišťujeme, je oprava poslední a lokální?
+- Pokud uzavíráme do tichého provozu, neplánujeme další kontrolu ze zvyku?
+- Nepřenesli jsme konkrétní zákaznická nebo obchodní data do dokumentace pravidla?
+- Nevzniklo nové pole, tracker, export nebo report bez jasného rozhodovacího důvodu?
+
+Druhé běžné použití po dočištění lokální úpravy má být poslední kontrola, ne začátek nové série. Pokud oprava funguje, zavřete ji do tichého provozu. Pokud nefunguje, udělejte jednu poslední blízkou opravu nebo se vraťte k pracovnímu místu. V obou případech držte starý široký návrh zavřený, dokud nepřijde návratový signál silnější než dobrý pocit z toho, že něco konečně prošlo.
+
 ## Pracovní log
 
+- 2026-07-01: Doplněna úvodní podkapitola o druhém běžném použití po dočištění lokální úpravy z archivního minima: ověření kotvy nebo rozhodovací věty, čtyři výsledky, praktické příklady, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-07-01: Doplněna úvodní podkapitola o uzavření prvního běžného použití po lokální úpravě z archivního minima: uzavírací stavy, praktické příklady, privacy-first úklid stop, karta, mini workshop a checklist.
 - 2026-07-01: Doplněna úvodní podkapitola o uzavření první reakce po návratu z archivního minima: čtyři uzavírací stavy, praktický příklad, privacy-first úklid dočasných podkladů, karta, mini workshop a checklist.
 - 2026-07-01: Doplněna úvodní podkapitola o návratu z archivního minima při prvním signálu: ověření návratového signálu, dnešní pracovní místo, nejmenší krok, privacy-first datové minimum, karta, mini workshop a checklist.
