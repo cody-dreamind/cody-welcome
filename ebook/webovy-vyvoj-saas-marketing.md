@@ -278686,8 +278686,180 @@ Když workshop narazí na větší změnu trhu, produktu nebo nabídky, necpěte
 
 První roční připomenutí má být nudné v nejlepším smyslu. Když pravidlo funguje, nechá ho fungovat. Když najde drobný zbytek, uklidí ho. Když se změnil svět kolem pravidla, otevře nové úzké rozhodnutí. A když pravidlo přestalo sloužit, slušně ho ukončí. To je celý trik: roční rytmus nemá vyrábět práci. Má bránit tomu, aby stará práce zůstala v systému déle, než má smysl.
 
+## Uzavření prvního ročního připomenutí po zředění rytmu
+
+Roční připomenutí je hotové až ve chvíli, kdy po něm nezůstane rozmazaná pozornost. Nestačí říct "vypadá to dobře" a odejít. Po roce je největší riziko v tom, že tým nechá v systému malou hromádku pomocných poznámek, starých důkazů, dočasných otázek a neurčitých slibů, že se k tomu "někdy ještě vrátí". To není uzavření. To je jen odklad převlečený za klid.
+
+Uzavření má proto převést výsledek ročního připomenutí do jednoho ze čtyř provozních stavů:
+
+- Pravidlo zůstává v ročním připomenutí beze změny.
+- Pravidlo zůstává v ročním připomenutí po lokálním dočištění.
+- Pravidlo opouští roční rytmus, protože se změnil pracovní kontext.
+- Pravidlo končí a jeho stopy se uklízejí.
+
+Každý stav musí mít vlastní uzavírací větu. Bez ní se stejný výsledek může vyložit čtyřmi způsoby: produkt si myslí, že se nic nemění, obchod čeká novou větu v kartě nabídky, marketing si založí poznámku na příští kampaň a někdo další pro jistotu vytvoří tabulku. Gratuluji, právě jste z ročního připomenutí vyrobili malý festival nejasností.
+
+Uzavírací věta má být krátká:
+
+```text
+Roční připomenutí uzavíráme stavem:
+
+V běžném provozu se mění pouze:
+
+Výslovně neotevíráme:
+
+Datovou stopu uzavíráme takto:
+```
+
+Pokud se mění více než jedna věc, pravděpodobně nejde o uzavření připomenutí, ale o novou pracovní větev. Tu založte zvlášť. Roční karta má zůstat koncem jedné kontroly, ne začátkem skryté roadmapy.
+
+### Čtyři uzavírací stavy
+
+Potvrzený roční rytmus je nejkratší stav. Pravidlo platí, kanonické místo je najitelné, datová stopa je čistá a další připomenutí zůstává za rok. Do systému se nepřidává nová evidence, jen se aktualizuje datum poslední kontroly.
+
+Lokální dočištění znamená, že pravidlo funguje, ale jedna malá věc překáží samostatnému použití. Může jít o nepřesnou větu v kartě nabídky, starý odkaz, chybějící vlastník nebo jednu poznámku s citlivým detailem, která už nemá účel. Dočištění má být hotové hned nebo při nejbližším běžném použití. Nesmí z něj vzniknout nový měsíční režim.
+
+Změna pracovního kontextu znamená, že se posunula nabídka, segment, proces, kanál nebo dodavatel natolik, že staré pravidlo nemá nést nové rozhodnutí. Uzavření v takovém případě neříká "pravidlo je špatně". Říká: "pro tento nový kontext potřebujeme vlastní úzkou kartu". Staré pravidlo může dál platit pro původní místo.
+
+Ukončení pravidla je nejvíc praktický a nejméně romantický stav. Pravidlo už nepomáhá, nahradilo ho jiné kanonické místo nebo pracovní situace zanikla. Uzavření musí odstranit odkazy, kopie a šablony, jinak se mrtvé pravidlo bude dál objevovat v onboardingu, checklistu nebo staré složce. Nic nevydrží tak dlouho jako dokument, který už nikdo neměl používat.
+
+### Praktický příklad uzavření
+
+Roční připomenutí pravidla bez povinného rozpočtu ve formuláři dopadlo dobře. Nabídka se mírně rozšířila, ale hlavní formulář pořád slouží stejnému typu poptávky. Nový obchodník našel větu v kartě nabídky a použil ji bez vysvětlování. Nevznikl nový export ani scoring.
+
+Uzavření:
+
+```text
+Roční připomenutí uzavíráme stavem:
+Potvrzený roční rytmus.
+
+V běžném provozu se mění pouze:
+Datum posledního ročního připomenutí v kartě pravidla.
+
+Výslovně neotevíráme:
+Povinné pole pro rozpočet, lead scoring, nový report poptávek ani samostatné měření použití obchodní věty.
+
+Datovou stopu uzavíráme takto:
+Mažeme dvě pracovní poznámky s konkrétními částkami z minulého ověření. V kartě zůstává jen zobecněná věta, že rozpočtový kontext řeší obchodní rozhovor.
+```
+
+Slabší výsledek může vypadat takto:
+
+```text
+Roční připomenutí uzavíráme stavem:
+Lokální dočištění.
+
+V běžném provozu se mění pouze:
+Karta nabídky dostane jednu větu, že menší konzultace se nekvalifikují přes hlavní formulář.
+
+Výslovně neotevíráme:
+Změnu hlavního formuláře, novou analytiku konzultací ani sběr rozpočtu před prvním rozhovorem.
+
+Datovou stopu uzavíráme takto:
+Ruční poznámky k rozpočtům konzultací se mažou; pro další rozhodnutí stačí pracovní věta o rozdílném vstupu menší konzultace.
+```
+
+V obou příkladech je důležité, že uzavření neeskaluje jen proto, že se po roce objevilo pár detailů. Roční připomenutí má rozlišit, jestli detail patří do stejného pravidla, do lokální opravy, nebo do nové otázky. Nemá z každého detailu dělat projekt.
+
+### Co po uzavření neotevírat
+
+Po prvním ročním připomenutí bývá nejtěžší nechat dobré pravidlo být. Tým má často pocit, že když už téma jednou otevřel, byla by škoda "nevyužít příležitost" k širšímu vylepšení. Jenže příležitost bez rozhodovací otázky je většinou jen nový rozsah.
+
+Po uzavření proto výslovně neotevírejte:
+
+- plošnou revizi všech podobných pravidel,
+- novou evidenci použití pravidla,
+- historický audit starých zákaznických případů,
+- redesign formuláře, pokud návratový signál mířil jen na text v kartě,
+- nový nástroj jen proto, že by připomenutí šlo automatizovat,
+- delší retenci pomocných poznámek "pro příští rok".
+
+Pokud se během uzavření objeví skutečně silný vzor napříč více pravidly, zapište ho jako samostatný podnět. Nechte ale roční připomenutí zavřené. Jedna karta nemá nést celou provozní strategii, i když se tváří velmi ochotně.
+
+### Privacy-first uzavření
+
+Privacy-first uzavření má odstranit datovou pachuť po kontrole. Roční připomenutí má často dobrý důvod krátce otevřít pracovní poznámky, starou kartu nebo zobecněný příklad. Jakmile rozhodnutí padne, všechno bez dalšího účelu musí zmizet, být archivované podle retenčního pravidla, nebo přepsané do anonymní pracovní věty.
+
+Položte si čtyři otázky:
+
+- Zůstaly někde konkrétní osobní, obchodní nebo behaviorální údaje, které už nerozhodují žádnou práci?
+- Vznikla během připomenutí nová pomocná evidence?
+- Přidali jsme ruční poznámku, která se za rok bude tvářit jako povinný podklad?
+- Umí člověk použít pravidlo bez čtení starých detailů?
+
+Dobré uzavření může znít:
+
+```text
+Po ročním připomenutí zůstává aktivní pouze pravidlo, vlastník, roční datum, návratový signál a zobecněný příklad. Dočasné poznámky z kontroly byly smazané, protože neobsahují samostatné rozhodnutí ani zákonný retenční důvod.
+```
+
+Codyho komentář: uklidit po ročním připomenutí je méně vzrušující než přidat dashboard. Přesně proto je to často lepší práce. Dashboard se hezky ukazuje. Uklizená datová stopa jen tiše snižuje budoucí riziko. Hrozně nefotogenické, velmi užitečné.
+
+### Karta uzavření prvního ročního připomenutí
+
+```text
+Pravidlo nebo pracovní místo:
+
+Datum ročního připomenutí:
+
+Výsledek připomenutí:
+- potvrzený roční rytmus
+- lokální oprava
+- změna pracovního kontextu
+- ukončení pravidla
+
+Uzavírací věta:
+
+Co se mění v kanonickém místě:
+
+Co se výslovně neotevírá:
+
+Co se maže:
+
+Co se archivuje podle retenčního pravidla:
+
+Co se zobecňuje do pracovní věty:
+
+Další rytmus nebo nové úzké rozhodnutí:
+
+Vlastník:
+
+Datum dalšího připomenutí nebo ověření:
+```
+
+Karta má být kratší než samotné připomenutí. Pokud je delší, pravděpodobně do ní opisujete důkazy místo závěru. Důkazy měly pomoci rozhodnout. Po rozhodnutí mají zůstat jen ty, které opravdu podporují běžné použití pravidla.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte výsledek ročního připomenutí.
+2. Minuta 2: vyberte jeden uzavírací stav.
+3. Minuta 3: napište uzavírací větu.
+4. Minuta 4: určete, co se výslovně neotevírá.
+5. Minuta 5: smažte, archivujte nebo zobecněte dočasné podklady.
+6. Minuta 6: nastavte další rytmus, lokální ověření nebo novou úzkou kartu.
+
+Pokud se v minutě 4 neumíte shodnout, co se neotevírá, ještě nemáte uzavření. Vraťte se k výsledku připomenutí a zmenšete rozhodnutí. Nejasné hranice jsou přesně místo, kde se po roce začne znovu hromadit práce bez majitele.
+
+### Checklist uzavření prvního ročního připomenutí
+
+- Má roční připomenutí jeden ze čtyř uzavíracích stavů?
+- Je uzavírací věta srozumitelná bez staré debaty?
+- Je jasné, co se mění v kanonickém místě?
+- Je jasné, co se výslovně neotevírá?
+- Pokud jde o lokální opravu, má nejbližší ověření a nerozšiřuje rytmus celého pravidla?
+- Pokud se změnil pracovní kontext, má nové rozhodnutí vlastní úzkou kartu?
+- Pokud pravidlo končí, jsou určené odkazy, kopie a šablony k úklidu?
+- Nevznikla nová evidence použití pravidla jen kvůli budoucímu klidu?
+- Jsou citlivé detaily smazané, archivované nebo zobecněné podle účelu?
+- Zůstává aktivní jen datová stopa, kterou pravidlo opravdu potřebuje?
+- Je další připomenutí, ověření nebo konec pravidla zapsané na jednom kanonickém místě?
+- Umí tým za rok poznat, proč pravidlo zůstalo, změnilo se nebo skončilo?
+
+Uzavření prvního ročního připomenutí má tým vrátit do běžné práce. Když pravidlo obstálo, nepotřebuje potlesk, jen správné datum a uklizené stopy. Když potřebuje drobnou opravu, zaslouží si přesné pracovní místo. Když se změnil kontext, dostane novou kartu. A když skončilo, má zmizet ze systému tak čistě, aby ho nikdo omylem nepoužil v dalším kole.
+
 ## Pracovní log
 
+- 2026-07-01: Doplněna úvodní podkapitola o uzavření prvního ročního připomenutí po zředění rytmu: uzavírací stavy, praktické příklady, hranice neotevírané práce, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-07-01: Doplněna úvodní podkapitola o prvním ročním připomenutí po zředění rytmu: tři kontroly, praktické příklady, čtyři výsledky, privacy-first pravidla, karta, mini workshop a checklist.
 - 2026-07-01: Doplněna úvodní podkapitola o převodu potvrzeného pololetního rytmu do ročního připomenutí: podmínky zředění, praktické příklady, hranice ročního připomenutí, privacy-first datové minimum, karta, mini workshop a checklist.
 - 2026-07-01: Doplněna úvodní podkapitola o uzavření druhé pololetní kontroly po potvrzeném rytmu: čtyři uzavírací stavy, praktické příklady, hranice neotevírané práce, privacy-first úklid, karta, mini workshop a checklist.
