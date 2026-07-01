@@ -281748,8 +281748,185 @@ Když se během workshopu objeví návrh na širší změnu, nezamítejte ho má
 
 První běžné použití po lokální úpravě z archivního minima má jednoduchý cíl: nechat malou změnu projít normální prací a přitom nepustit zpátky starý rozsah ani zbytečná data. Když funguje, nechte ji být. Když drhne, opravte nejbližší větu. A když se chce rozrůst, vraťte ji k důkazu.
 
+## Uzavření prvního běžného použití po lokální úpravě z archivního minima
+
+První běžné použití lokální úpravy je pozorování. Uzavření z něj dělá pracovní stav. Bez uzavření tým ví, že se něco použilo, ale neví, jestli se úprava vrací do klidu, potřebuje ještě jednu lokální opravu, nebo se začala nenápadně rozšiřovat. A to je přesně místo, kde se starý archivní problém umí vrátit v novém kabátě. Ne přes velké rozhodnutí. Přes drobnou větu, kterou nikdo pořádně nezavřel.
+
+Uzavření začněte krátkou větou:
+
+```text
+První běžné použití lokální úpravy uzavíráme takto:
+```
+
+Za ni napište jeden ze čtyř stavů:
+
+- Ponechat v běžném pracovním místě: úprava byla najitelná, použitelná a původní široké řešení zůstalo zavřené.
+- Doplnit kotvu: úprava věcně funguje, ale člověk ji nenašel tam, kde začal práci.
+- Zpřesnit rozhodovací větu: úprava byla vidět, ale její hranice nebyla dost jasná.
+- Zastavit rozšíření: první použití se začalo měnit ve starý široký návrh bez nového návratového signálu.
+
+Stav `ponechat v běžném pracovním místě` je ideální konec. Znamená to, že lokální úprava prošla běžnou situací a nepotřebuje mimořádnou pozornost. Neplánujte druhou kontrolu jen proto, že se první povedla. Úspěšná malá oprava má po uzavření ztichnout a sloužit. Tým ji nemá nosit na rukou jako trofej. Je to pracovní věta, ne rodinné stříbro.
+
+Stav `doplnit kotvu` použijte tehdy, když problém nebyl v obsahu úpravy, ale v jejím umístění. Typicky je pravidlo zapsané v kartě návratu, ale člověk pracuje v e-mailové šabloně, obchodním checklistu, support makru nebo interním rozcestníku. Oprava má být jedna blízká kotva: odkaz, krátká věta, poznámka u šablony nebo drobné přejmenování. Ne nová dokumentační kampaň.
+
+Stav `zpřesnit rozhodovací větu` je pro chvíli, kdy člověk úpravu našel, ale nepoznal hranici použití. Slabá věta říká, že "lze se doptat na orientační investici". Silnější věta říká, kdy přesně se ptát, komu otázku neposílat a co z odpovědi nedělat. Věta má člověka dovést k rozhodnutí, ne k dalšímu čtení.
+
+Stav `zastavit rozšíření` použijte bez omlouvání. Pokud první běžné použití skončí návrhem "když už to fungovalo, dejme to rovnou do formuláře", nejde o uzavření lokální úpravy. Je to pokus otevřít původní široký návrh. Ten může být jednou správný, ale ne bez vlastního návratového signálu. Do záznamu napište, že rozšíření se dnes neotevírá, a vraťte se k lokálnímu výsledku.
+
+### Praktický příklad
+
+První běžné použití:
+
+```text
+Obchodník u doporučené poptávky použil volitelnou větu k orientační investici, protože bez ní nešlo navrhnout další konkrétní krok.
+```
+
+Výsledek:
+
+```text
+Zákazník odpověděl v běžném e-mailovém vlákně. Obchod navrhl další krok. Formulář se nezměnil, nevznikl nový CRM atribut ani export.
+```
+
+Uzavření:
+
+```text
+Stav:
+Ponechat v běžném pracovním místě.
+
+Co ponecháváme:
+Volitelnou větu v šabloně první odpovědi po doporučení.
+
+Co zůstává zavřené:
+Povinné pole pro rozpočet, lead scoring, rozpočtový export a nový report.
+
+Privacy-first závěr:
+Konkrétní odpověď zůstává jen v obchodním vlákně. Do pracovního pravidla zapisujeme pouze zobecněné poučení, kdy větu použít.
+```
+
+Slabší výsledek:
+
+```text
+Obchodník pravidlo našel, ale poslal větu i poptávce, kde orientační investice nebyla potřeba pro další krok.
+```
+
+Uzavření:
+
+```text
+Stav:
+Zpřesnit rozhodovací větu.
+
+Lokální oprava:
+V šabloně nahrazujeme měkkou větu přesnějším pravidlem: "Použij jen u doporučené poptávky, kde bez orientační investice nejde navrhnout další konkrétní krok."
+
+Co neotevíráme:
+Změnu formuláře, scoring, automatizaci ani novou kvalifikační metodiku.
+```
+
+Všimněte si, že slabší výsledek nevede k širšímu projektu. Vede k opravě jedné věty. To je správná velikost zásahu, protože zjištěná chyba byla v hranici lokální instrukce, ne v celém obchodním procesu.
+
+### Privacy-first uzavření
+
+Uzavření prvního použití musí ukončit i dočasnou datovou stopu. Pokud jste kvůli prvnímu použití udělali pracovní poznámku, kopii odpovědi, screenshot, pomocný sloupec nebo ruční štítek, rozhodněte, co s ním bude. Nenechávejte ho v systému jen proto, že je malý. Malé stopy se sčítají a časem z nich vznikne provozní mlha.
+
+Použijte tři řádky:
+
+```text
+V pracovním místě ponecháváme:
+
+Po uzavření mažeme nebo nepřenášíme:
+
+Dál nesbíráme:
+```
+
+Příklad:
+
+```text
+V pracovním místě ponecháváme:
+Zobecněnou rozhodovací větu u šablony první odpovědi.
+
+Po uzavření mažeme nebo nepřenášíme:
+Kopii konkrétní zákaznické odpovědi z pracovní poznámky.
+
+Dál nesbíráme:
+Rozpočet jako povinné pole, zvláštní CRM atribut, export rozpočtů a pomocnou tabulku prvních odpovědí.
+```
+
+Tím se z prvního použití nestane nová evidence. Poznatek zůstane tam, kde pomáhá, ale konkrétní zákaznická nebo obchodní data necestují dál bez důvodu.
+
+Codyho komentář: největší riziko malých lokálních úprav není jejich velikost. Jejich riziko je nenápadnost. Nikdo se nebojí jedné věty u šablony, jednoho štítku v CRM ani jedné kopie odpovědi v poznámce. Jenže přesně z těchhle drobností se dělá provozní nepořádek. Ne dramaticky. Prostě postupně, jako když někdo každý týden přidá jeden kabel pod stůl a pak se diví, že tam žije infrastruktura.
+
+### Karta uzavření prvního použití
+
+```text
+Archivní pravidlo:
+
+Lokální úprava:
+
+První běžné použití:
+
+Co se opravdu stalo:
+
+Uzavírací stav:
+- ponechat v běžném pracovním místě
+- doplnit kotvu
+- zpřesnit rozhodovací větu
+- zastavit rozšíření
+
+Co ponecháváme:
+
+Co lokálně opravujeme, pokud něco:
+
+Co zůstává výslovně zavřené:
+
+Návratový signál pro širší otevření:
+
+Privacy-first uzavření:
+V pracovním místě ponecháváme:
+Po uzavření mažeme nebo nepřenášíme:
+Dál nesbíráme:
+
+Je potřeba druhé běžné použití?
+- ano, protože:
+- ne, protože:
+
+Vlastník:
+
+Datum:
+```
+
+Druhé běžné použití plánujte jen tehdy, když jste po prvním použití doplnili kotvu nebo zpřesnili rozhodovací větu. Pokud úprava fungovala samostatně, není co mimořádně ověřovat. Vraťte ji do běžného rytmu a další návrat podmiňte signálem, ne zvykem kontrolovat.
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: přečtěte první běžné použití jednou větou.
+2. Minuta 2: napište, co se opravdu stalo.
+3. Minuta 3: vyberte jeden uzavírací stav.
+4. Minuta 4: napište, co ponecháváte v pracovním místě.
+5. Minuta 5: napište, co zůstává zavřené.
+6. Minuta 6: uklidte dočasnou datovou stopu.
+7. Minuta 7: rozhodněte, jestli má smysl druhé běžné použití.
+
+Když se v šesté minutě ukáže, že kolem prvního použití vzniklo víc pomocných stop, než jste čekali, neprodlužujte workshop. Vyberte jednu věc, kterou hned smažete nebo zobecníte, a zbytek dejte vlastníkovi jako krátký úklidový úkol. Privacy-first uzavření má být praktické, ne slavnostní audit.
+
+### Checklist uzavření prvního použití
+
+- Máme konkrétní popis prvního běžného použití?
+- Víme, co se opravdu stalo, ne jen co mělo nastat?
+- Vybrali jsme jeden uzavírací stav?
+- Je jasné, co ponecháváme v běžném pracovním místě?
+- Pokud něco opravujeme, je to jen kotva nebo rozhodovací věta?
+- Zůstává původní široké řešení výslovně zavřené?
+- Má širší otevření pořád konkrétní návratový signál?
+- Uklidili jsme dočasné poznámky, kopie odpovědí, screenshoty, štítky nebo pomocné tabulky?
+- Nepřidali jsme nový formulářový údaj, CRM atribut, export, tracker ani report bez důvodu?
+- Víme, jestli druhé běžné použití opravdu potřebujeme?
+- Pozná další člověk ze záznamu, co má udělat při dalším podobném použití?
+
+Uzavření prvního běžného použití po lokální úpravě z archivního minima má být krátké a rozhodné. Buď úprava funguje a vrací se do práce, nebo potřebuje jednu blízkou opravu. V obou případech platí: nevracet starý rozsah bez signálu a nenechávat po sobě data, která už neslouží žádnému rozhodnutí.
+
 ## Pracovní log
 
+- 2026-07-01: Doplněna úvodní podkapitola o uzavření prvního běžného použití po lokální úpravě z archivního minima: uzavírací stavy, praktické příklady, privacy-first úklid stop, karta, mini workshop a checklist.
 - 2026-07-01: Doplněna úvodní podkapitola o uzavření první reakce po návratu z archivního minima: čtyři uzavírací stavy, praktický příklad, privacy-first úklid dočasných podkladů, karta, mini workshop a checklist.
 - 2026-07-01: Doplněna úvodní podkapitola o návratu z archivního minima při prvním signálu: ověření návratového signálu, dnešní pracovní místo, nejmenší krok, privacy-first datové minimum, karta, mini workshop a checklist.
 - 2026-07-01: Doplněna úvodní podkapitola o převodu potvrzeného ticha do archivního minima: kanonická pracovní věta, návratový signál, úklid aktivního rytmu, privacy-first archiv, karta, mini workshop a checklist.
