@@ -280709,8 +280709,188 @@ Pokud workshop odhalí nové téma, zapište ho stranou. Tichý cyklus se neuzav
 
 Uzavření prvního tichého ročního cyklu je dobrý okamžik říct: stačí. Pravidlo nemusí být pod dohledem, aby bylo živé. Pokud zůstalo použitelné, datově střídmé a najitelné, zaslouží si další klidný rok. To není pasivita. To je provoz, který se konečně nechová jako věčný projekt.
 
+## Druhý tichý roční cyklus po potvrzeném klidu
+
+Druhý tichý roční cyklus je zkouška, jestli tým opravdu uvěřil vlastnímu uzavření. První tichý rok ještě často nese čerstvou paměť: lidé si pamatují, proč pravidlo vzniklo, kde je zapsané a proč kolem něj nemají zakládat další evidenci. Ve druhém roce už tahle paměť slábne. To je dobře. Pravidlo nemá stát na tom, že si někdo pamatuje starý workshop. Má stát na tom, že žije na správném pracovním místě a dává smysl i člověku, který u původní debaty nebyl.
+
+Začněte větou:
+
+```text
+Druhý tichý roční cyklus otevíráme pouze jako pokračování potvrzeného klidu:
+```
+
+Příklad:
+
+```text
+Druhý tichý roční cyklus otevíráme pouze jako pokračování potvrzeného klidu:
+Potvrzovací šablona zůstává kanonickým místem, rozpočet se nevrací do formuláře a k tématu se vracíme jen při původním návratovém signálu.
+```
+
+V té větě není žádné nové zadání. Neříká "letos to změříme lépe" ani "uděláme menší audit pro jistotu". Říká: první rok potvrdil, že klid funguje, a druhý rok nemá začínat tím, že si tým znovu vymyslí důvod k práci. Ano, je to trochu nudné. Provoz, který umí být nudný na správných místech, bývá překvapivě výkonný.
+
+### Co se ve druhém tichém roce testuje
+
+Druhý tichý cyklus netestuje kvalitu původního rozhodnutí. Tu už testovala předchozí práce. Teď se testují tři jiné věci:
+
+- odolnost bez paměti: pravidlo používá člověk, který nezná původní příběh,
+- odolnost proti bokovkám: kolem pravidla nevznikají pomocné tabulky, značky ani exporty,
+- odolnost proti přehnané péči: tým neotevírá kontrolu jen proto, že už uběhl další kus času.
+
+Odolnost bez paměti ověřte v běžné situaci. Pokud nový člověk otevře potvrzovací šablonu a pochopí, kdy poslat volitelnou otázku, pravidlo je zdravé. Pokud potřebuje dlouhé vysvětlení historie, není problém v člověku. Problém je v tom, že pracovní věta pořád nese příliš mnoho minulosti a málo dnešního rozhodnutí.
+
+Odolnost proti bokovkám je privacy-first kontrola bez velkého ceremoniálu. Stačí se podívat, jestli někde nevznikl "dočasný" seznam odpovědí, ruční štítek, export z e-mailů nebo poznámka s konkrétními zákaznickými údaji. Pokud ano, nejdřív ji zastavte. Teprve potom se ptejte, jestli ukazuje skutečný návratový signál. Většinou neukazuje. Většinou jen ukazuje, že někdo chtěl mít pocit, že bude na příští kontrolu připravený.
+
+Odolnost proti přehnané péči je možná nejtěžší. Po roce klidu má tým chuť aspoň něco "pro jistotu" zkontrolovat. Jenže druhý tichý cyklus má fungovat přesně opačně: pokud není návratový signál, další aktivita je podezřelá. Ne proto, že by kontrola byla špatná. Protože kontrola bez otázky je jen elegantní způsob, jak znovu otevřít zavřenou práci.
+
+### Praktický příklad
+
+Původní stav po prvním tichém roce:
+
+```text
+Pravidlo:
+U kvalifikované poptávky bez rozpočtu nebo měsíčního rozhodovacího rámce lze poslat volitelnou otázku v potvrzovacím e-mailu; formulář se nemění.
+
+Návratový signál:
+Tři kvalifikované poptávky za sebou nepůjdou posunout ani po použití volitelné otázky.
+
+Dál nesbíráme:
+Povinný rozpočet ve formuláři, lead scoring, export odpovědí ani pomocnou tabulku použití otázky.
+```
+
+Běžná situace ve druhém tichém roce:
+
+```text
+Situace:
+Nový obchodník řeší poptávku bez rozpočtu.
+
+Použití:
+Najde větu přímo v potvrzovací šabloně a pošle volitelnou otázku.
+
+Výsledek:
+Poptávka se posune v běžném vlákně. Nevznikne nový atribut, tabulka ani report.
+
+Stav:
+Druhý tichý cyklus pokračuje beze změny.
+```
+
+Slabší situace:
+
+```text
+Situace:
+Nový obchodník větu nenašel a zeptal se kolegy.
+
+Špatná reakce:
+Založíme měsíční kontrolu použití šablony.
+
+Lepší reakce:
+Doplníme jednu navigační větu přímo do šablony nebo interního checklistu. Roční rytmus se nemění.
+```
+
+Tady je hranice důležitá. Jedna otázka na najitelnost není návratový signál k přestavbě formuláře ani důvod pro nový reporting. Je to drobná pracovní kotva. Opravte ji tam, kde člověk pracuje, a nechte pravidlo dál běžet.
+
+### Čtyři stavy druhého tichého cyklu
+
+Při běžném použití ve druhém tichém roce vyberte jeden ze čtyř stavů:
+
+- Drží bez paměti: pravidlo použil i člověk bez původního kontextu.
+- Potřebuje lepší kotvu: pravidlo platí, ale jeho umístění nebo formulace zdržela práci.
+- Vznikla nová bokovka: někdo začal sbírat pomocná data nebo udržovat paralelní postup.
+- Nastal návratový signál: předem domluvený důkaz se opravdu objevil.
+
+Stav "drží bez paměti" je nejlepší možný výsledek. Nedělejte z něj nový projekt. Jen pokud už zrovna zapisujete krátkou provozní poznámku, potvrďte, že pravidlo zůstává v tichém ročním cyklu.
+
+Stav "potřebuje lepší kotvu" řešte jednou úpravou u pracovního místa. Přepište nadpis, doplňte větu, zkraťte formulaci nebo přesuňte pravidlo blíž k okamžiku použití. Neotvírejte historii.
+
+Stav "vznikla nová bokovka" řešte jako úklid, ne jako důkaz. Zastavte sběr, smažte nebo zobecněte stopu a napište, že bokovka nebyla návratový signál. Pokud by se z ní přece jen vyklubal skutečný problém, musí mít vlastní důkaz, účel, vlastníka a retenci. Jinak je to jen administrativní plevel. Ano, plevel v dokumentech taky existuje.
+
+Stav "nastal návratový signál" otevře malý krok, ale jen podle předem domluvené hranice. Nevracejte se k původnímu širokému návrhu jen proto, že se konečně něco stalo. Návratový signál je start malé odpovědi, ne povolenka k přestavbě celého procesu.
+
+### Privacy-first kontrola druhého ticha
+
+Druhý tichý rok je dobrý na hledání nenápadných datových návratů. První rok bývá tým ještě opatrný. Ve druhém roce se často objeví věty jako "jen si to píšu bokem", "zatím to nikam neposíláme" nebo "to není systém, jen sdílený soubor". Překlad: vzniká systém, jen bez rozhodnutí.
+
+Použijte tři otázky:
+
+```text
+Začala vznikat nová stopa, která nebyla v původním pravidle?
+
+Má tato stopa jasný účel, vlastníka a dobu uchování?
+
+Je tato stopa nutná pro dnešní rozhodnutí, nebo jen pro budoucí pocit jistoty?
+```
+
+Pokud odpověď na třetí otázku zní "pro budoucí pocit jistoty", stopu nepřenášejte dál. Zobecněný závěr většinou stačí:
+
+```text
+Ve druhém tichém roce se pravidlo použilo bez potřeby povinného pole. Konkrétní zákaznické odpovědi neukládáme a pomocnou evidenci nevedeme.
+```
+
+Codyho komentář: privacy-first provoz není jen otázka velkých nástrojů a smluv. Je to schopnost všimnout si malého sdíleného souboru dřív, než se z něj stane "náš nepostradatelný historický přehled". Historické přehledy mají zvláštní talent přežít svůj účel. Malá datová stopa takový talent mít nemá.
+
+### Karta druhého tichého ročního cyklu
+
+```text
+Pravidlo:
+
+Kanonické pracovní místo:
+
+Původní návratový signál:
+
+Co potvrdil první tichý roční cyklus:
+
+Běžná situace ve druhém tichém roce:
+
+Použil pravidlo někdo bez původního kontextu?
+
+Stav:
+- drží bez paměti
+- potřebuje lepší kotvu
+- vznikla nová bokovka
+- nastal návratový signál
+
+Pokud potřebuje kotvu, jakou jednu větu nebo přesun děláme:
+
+Pokud vznikla bokovka, co rušíme, mažeme nebo zobecňujeme:
+
+Pokud nastal návratový signál, jaký malý krok otevíráme:
+
+Co dál výslovně nesbíráme:
+
+Další rytmus:
+
+Vlastník:
+```
+
+Karta nesmí být povinným ročním formulářem. Použijte ji jen při reálném použití, při podezření na bokovku nebo při návratovém signálu. Pokud se celý rok nic nestane, další roční připomenutí může klidně začít větou, že v druhém tichém cyklu nebyl žádný důvod k mimořádné práci.
+
+### Mini workshop na 5 minut
+
+1. Minuta 1: pojmenujte běžnou situaci nebo podezření, kvůli kterému se na pravidlo díváte.
+2. Minuta 2: ověřte, jestli pravidlo použil člověk bez původního kontextu.
+3. Minuta 3: vyberte jeden ze čtyř stavů.
+4. Minuta 4: pokud je potřeba zásah, omezte ho na jednu kotvu, jeden úklid nebo jeden malý návratový krok.
+5. Minuta 5: potvrďte, že se nepřenáší žádná nová průběžná evidence.
+
+Pokud se workshop začne ptát na širší obchodní proces, zastavte ho. To může být legitimní téma, ale není to druhý tichý cyklus. Druhý tichý cyklus má chránit pravidlo před zbytečnou péčí, ne poskytovat záminku pro další strategické povídání. Strategické povídání má vlastní židli, vlastní čas a ideálně i vlastní stop podmínku.
+
+### Checklist druhého tichého cyklu
+
+- Navazujeme na potvrzený klid z prvního tichého ročního cyklu?
+- Zůstalo pravidlo v kanonickém pracovním místě?
+- Použil ho někdo bez původní historie?
+- Pokud se zasekl, jde o jednu kotvu, ne o návrat celého tématu?
+- Nevznikla pomocná tabulka, ruční štítek, export, kopie e-mailů nebo jiná bokovka?
+- Pokud bokovka vznikla, je zrušená, smazaná nebo zobecněná?
+- Nezaměnili jsme novou evidenci za návratový signál?
+- Pokud návratový signál nastal, odpovídá přesně původní hranici?
+- Nepřidali jsme mezikontrolu jen proto, že druhý rok působí dlouho?
+- Je jasné, co dál výslovně nesbíráme?
+
+Druhý tichý roční cyklus je důkaz, že pravidlo nepotřebuje původní autory ani pravidelné připomínání, aby fungovalo. Pokud drží bez paměti, nechte ho být. Pokud potřebuje kotvu, opravte kotvu. Pokud vznikla bokovka, ukliďte ji. A pokud přišel návratový signál, otevřete malý krok. Všechno ostatní je většinou jen nervozita převlečená za zodpovědnost.
+
 ## Pracovní log
 
+- 2026-07-01: Doplněna úvodní podkapitola o druhém tichém ročním cyklu po potvrzeném klidu: odolnost pravidla bez původní paměti, bokovky, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-07-01: Doplněna úvodní podkapitola o uzavření prvního tichého ročního cyklu: čtyři uzavírací stavy, praktické příklady, privacy-first úklid tiché evidence, karta, mini workshop a checklist.
 - 2026-07-01: Doplněna úvodní podkapitola o prvním tichém ročním cyklu po převodu: běžné použití bez mimořádné péče, čtyři stavy cyklu, praktické příklady, privacy-first ticho, karta, mini workshop a checklist.
 - 2026-07-01: Doplněna úvodní podkapitola o převodu uzavřené roční kontroly do dalšího ročního cyklu: kanonická pracovní věta, návratový signál, privacy-first úklid, karta, mini workshop a checklist.
