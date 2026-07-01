@@ -280195,8 +280195,177 @@ Pokud se během sedmi minut objeví nový problém, necpěte ho do uzavření. Z
 
 Uzavření první roční kontroly má pravidlu vrátit klid. Roční připomenutí splnilo práci, když po něm tým ví, co platí, co se drobně změnilo, co se uklidilo a kdy se k pravidlu vrátit. Všechno navíc je jen další vrstva údržby. A vrstvy údržby mají jednu špatnou vlastnost: tváří se jako péče, dokud nezačnou brát kyslík práci, kterou měly chránit.
 
+## Převod uzavřené roční kontroly do dalšího ročního cyklu
+
+Uzavřená roční kontrola ještě neznamená, že je další rok dobře nastavený. Znamená jen, že víte, co se při kontrole potvrdilo, co se přepsalo a co se uklidilo. Další krok je převést tento závěr zpět do ročního cyklu tak, aby pravidlo zůstalo najitelné a použitelné, ale aby kolem něj nevznikl nový dohled jen proto, že se kontrola povedla.
+
+Začněte krátkou převodní větou:
+
+```text
+Po roční kontrole pravidlo vracíme do dalšího ročního cyklu takto:
+```
+
+Za ni napište jen to, co má platit v běžné práci:
+
+```text
+Po roční kontrole pravidlo vracíme do dalšího ročního cyklu takto:
+Aktuální věta žije u potvrzovací šablony, formulář a scoring zůstávají zavřené, pomocné příklady jsou zobecněné a další kontrola přijde za rok nebo při návratovém signálu.
+```
+
+Tato věta má zavřít mimořádnou pozornost. Pokud po roční kontrole necháte v provozu pomocnou tabulku, ruční připomínku, zvláštní kontrolní checklist nebo "dočasný" export, pravidlo se do ročního cyklu ve skutečnosti nevrátilo. Jen dostalo delší vodítko.
+
+### Co se má převést
+
+Do dalšího ročního cyklu přenášejte pouze čtyři věci:
+
+- aktuální pracovní větu v kanonickém pracovním místě,
+- návratový signál pro dřívější otevření,
+- vlastníka ročního připomenutí,
+- krátkou privacy-first hranici, která říká, jaká data se dál nesbírají.
+
+Všechno ostatní musí obhájit účel. Staré příklady, exporty, kontrolní poznámky a pracovní kopie často vznikly jen proto, aby roční kontrola šla provést. Jakmile je závěr uzavřený, nemají automatické právo žít v dalším roce.
+
+Prakticky:
+
+```text
+Přenášíme:
+Jednu aktuální větu u potvrzovací šablony a návratový signál.
+
+Nepřenášíme:
+Pomocný seznam konkrétních zákaznických odpovědí, kontrolní tabulku ročního review ani starou formulaci pravidla.
+
+Dál nesbíráme:
+Rozpočet jako povinné pole, automatické skóre leadu ani export odpovědí do dalšího nástroje.
+```
+
+Takový převod je malý, ale důležitý. Roční cyklus má být lehký připomínač, ne skrytý proces. Pokud potřebuje vlastní evidenci, report a měsíční kontrolu, není to roční cyklus. Je to proces v převleku a převlek mu moc nesedí.
+
+### Praktický příklad
+
+Uzavření roční kontroly:
+
+```text
+Uzavírací stav:
+Přepsat a zavřít.
+
+Co měníme:
+Jednu větu v potvrzovací šabloně, aby odpovídala dnešní nabídce dlouhodobé spolupráce.
+
+Co zůstává zavřené:
+Povinné pole ve formuláři, automatický lead scoring a nový export rozpočtových údajů.
+```
+
+Převod do dalšího ročního cyklu:
+
+```text
+Kanonické místo:
+Potvrzovací e-mailová šablona.
+
+Roční připomenutí:
+Zkontrolovat za rok, jestli věta pořád odpovídá nabídce, obchodnímu postupu a datové stopě.
+
+Návratový signál:
+Otevřít dříve pouze tehdy, když tři kvalifikované poptávky za sebou nepůjdou posunout ani po volitelné otázce.
+
+Privacy-first hranice:
+Do dalšího roku nepřenášíme konkrétní odpovědi zákazníků z review. Stačí zobecněný závěr u šablony.
+```
+
+Všimněte si, že další roční cyklus nezačíná novým měřením. Začíná pracovním místem, návratovým signálem a datovou střídmostí. To je celé kouzlo, pokud se slovu kouzlo dá věřit v dokumentu, který většinu času říká "prosím, nepřidávejte další tabulku".
+
+### Kdy cyklus nezahušťovat
+
+Po roční kontrole často přijde pokušení zkrátit interval. Tým si řekne, že když kontrola našla drobný přepis, možná by bylo lepší kontrolovat pravidlo každé čtvrtletí. Někdy ano, ale drobný přepis sám o sobě není důkaz, že roční rytmus selhal.
+
+Roční rytmus nezahušťujte, pokud:
+
+- pravidlo bylo najitelné a použitelné,
+- změna byla jen jazyková nebo lokální,
+- nevznikl nový opakovaný problém,
+- skrytá evidence šla uklidit jednorázově,
+- návratový signál zůstává dostatečně konkrétní.
+
+Rytmus zvažte zkrátit jen tehdy, když roční kontrola ukázala systémový problém: pravidlo nebylo najitelné ve více pracovních místech, opakovaně se používala stará verze, nebo kolem něj vznikla trvalá evidence, kterou tým nedokáže uhlídat v běžném provozu. I tehdy ale nejdřív opravte pracovní místo. Kratší interval má být poslední možnost, ne náplast na nejasnou větu.
+
+### Privacy-first převod
+
+Nejdůležitější otázka převodu zní:
+
+```text
+Co jsme kvůli roční kontrole otevřeli, ale do dalšího roku už to nepotřebuje žít?
+```
+
+Odpověď často najdete v drobnostech: kopie staré šablony, export několika poptávek, ruční poznámka s konkrétní odpovědí, screenshot CRM, pomocný dokument pro vyhodnocení. Tyto stopy mohou být legitimní během kontroly. Po kontrole ale potřebují nový účel, nebo mají zmizet, anonymizovat se, případně zůstat jen v původním zdroji pravdy.
+
+Privacy-first převod proto napište třemi řádky:
+
+```text
+Do dalšího cyklu přenášíme:
+
+Po kontrole uklízíme:
+
+Dál výslovně nesbíráme:
+```
+
+Tento zápis chrání tým před nenápadným hromaděním. Roční rytmus má být řídký i datově. Pokud každý rok přidá jednu pomocnou evidenci, za pár let už nemáte lehké připomenutí, ale malou dokumentační půdu plnou věcí, které se nikdo neodváží vyhodit.
+
+### Karta převodu do dalšího ročního cyklu
+
+```text
+Pravidlo:
+
+Výsledek uzavřené roční kontroly:
+
+Kanonické pracovní místo:
+
+Aktuální pracovní věta:
+
+Návratový signál pro dřívější otevření:
+
+Další roční připomenutí:
+
+Vlastník:
+
+Do dalšího cyklu přenášíme:
+
+Po kontrole uklízíme, mažeme nebo anonymizujeme:
+
+Dál nesbíráme:
+
+Rytmus:
+- ponechat roční
+- dočasně zkrátit, protože:
+- otevřít nový návratový krok, protože:
+```
+
+Karta má být kratší než samotná roční kontrola. Pokud je delší, pravděpodobně do ní cpete nový projekt. Převod má jen nastavit další rok, ne znovu vyhodnocovat všechno, co už kontrola uzavřela.
+
+### Mini workshop na 5 minut
+
+1. Minuta 1: přečtěte uzavírací větu roční kontroly.
+2. Minuta 2: ověřte kanonické pracovní místo a aktuální pracovní větu.
+3. Minuta 3: potvrďte návratový signál a další roční připomenutí.
+4. Minuta 4: rozhodněte, co se po kontrole uklízí nebo anonymizuje.
+5. Minuta 5: potvrďte, že rytmus zůstává roční, nebo napište konkrétní důvod zkrácení.
+
+Když se během pěti minut objeví nová otázka, nezvedejte ji do převodu. Buď má vlastní návratový signál, nebo patří do poznámek. Převod do cyklu má být konec jedné smyčky, ne začátek nenápadně větší.
+
+### Checklist převodu
+
+- Máme aktuální pracovní větu v kanonickém místě?
+- Je zapsaný návratový signál pro dřívější otevření?
+- Je další roční připomenutí konkrétní, ale ne zbytečně husté?
+- Víme, kdo je vlastník pravidla?
+- Nepřenášíme do dalšího roku pomocné exporty, kopie nebo konkrétní zákaznické příklady bez účelu?
+- Je jasné, jaká data dál nesbíráme?
+- Pokud zkracujeme rytmus, máme k tomu opakovaný provozní důkaz?
+- Umí další člověk za rok poznat, co má otevřít, aniž by četl celou historii kontroly?
+
+Převod uzavřené roční kontroly do dalšího ročního cyklu má být tichý konec práce. Pravidlo je aktuální, stopa je uklizená, návratový signál je viditelný a další kontrola má své místo. Nic víc po něm nechtějte. Dobrý roční rytmus má jednu hlavní vlastnost: většinu roku nepřekáží.
+
 ## Pracovní log
 
+- 2026-07-01: Doplněna úvodní podkapitola o převodu uzavřené roční kontroly do dalšího ročního cyklu: kanonická pracovní věta, návratový signál, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-07-01: Doplněna úvodní podkapitola o uzavření první roční kontroly po návratu pravidla do ročního rytmu: uzavírací stavy, praktický příklad, privacy-first úklid datové stopy, karta, mini workshop a checklist.
 - 2026-07-01: Doplněna úvodní podkapitola o první roční kontrole po návratu pravidla do ročního rytmu: pracovní, obchodní a datová platnost, výsledkové stavy, praktický příklad, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-07-01: Doplněna úvodní podkapitola o převodu potvrzeného pravidla zpět do ročního rytmu: kanonická pracovní věta, návratový signál, úklid mimořádné péče, privacy-first datová dieta, karta, mini workshop a checklist.
