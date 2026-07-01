@@ -280552,8 +280552,166 @@ Pokud workshop potřebuje víc než pět minut, pravděpodobně už neřešíte 
 
 První tichý roční cyklus je malý test důvěry v vlastní provoz. Pokud pravidlo funguje, nechte ho běžet. Pokud potřebuje drobnou kotvu, doplňte ji. Pokud přišel návratový signál, otevřete malý krok. A pokud se začala tvořit tichá evidence, ukliďte ji dřív, než se začne tvářit jako nepostradatelná součást firmy.
 
+## Uzavření prvního tichého ročního cyklu
+
+Tichý roční cyklus potřebuje vlastní uzavření právě proto, že se v něm většinu času nemá nic dít. Bez uzavírací věty tým snadno nepozná, jestli pravidlo opravdu dozrálo do klidného provozu, nebo jen nikdo neměl čas se k němu vrátit. Rozdíl je zásadní. Klid je rozhodnutí, zapomenutí je náhoda v pracovním obleku.
+
+Začněte větou:
+
+```text
+První tichý roční cyklus uzavíráme se stavem:
+```
+
+A doplňte jeden ze čtyř výsledků:
+
+- potvrzený klid,
+- drobná kotva doplněná,
+- návratový signál otevřený,
+- tichá evidence odstraněná.
+
+Uzavření nemá znovu hodnotit celý rok. Má jen pojmenovat, co se během tichého cyklu skutečně stalo, jaký stav z toho plyne a co se přenáší do dalšího období. Pokud během roku nevznikl návratový signál ani nová evidence, je v pořádku napsat krátké uzavření. Dobrý tichý cyklus se neposuzuje podle množství záznamů, ale podle toho, že pravidlo zůstalo použitelné bez přidané administrativy.
+
+### Čtyři uzavírací stavy
+
+Potvrzený klid znamená, že pravidlo zůstalo v kanonickém místě, šlo podle něj rozhodnout v běžné práci a nevznikla žádná nová datová stopa. V takovém případě nepřidávejte další mezikontrolu. Jen potvrďte další roční připomenutí a nechte pravidlo běžet.
+
+Drobná kotva doplněná znamená, že pravidlo platilo, ale někdo potřeboval jednu větu navíc v pracovním místě. Uzavření má říct, kam byla věta doplněná a proč se tím neotevírá širší úprava. Opravená kotva není důvod vracet celé pravidlo do častějšího režimu.
+
+Návratový signál otevřený znamená, že nastal předem domluvený důkaz. Uzavření tichého cyklu pak zároveň označí začátek nového malého kroku. Důležité je neotevřít všechno, co tým v minulosti řešil. Otevírá se jen rozsah, který odpovídá signálu.
+
+Tichá evidence odstraněná znamená, že se kolem pravidla začala tvořit tabulka, štítek, export, kopie nebo jiná stopa bez nového rozhodnutí. Uzavření má potvrdit, že evidence byla zrušená nebo výslovně omezená, a že samotné pravidlo se kvůli ní automaticky nemění.
+
+Prakticky:
+
+```text
+První tichý roční cyklus uzavíráme se stavem:
+Potvrzený klid.
+
+Co se stalo:
+Pravidlo bylo použité ve třech běžných obchodních situacích. Nebyla potřeba nová schůzka, pomocná tabulka ani změna formuláře.
+
+Co přenášíme dál:
+Stejnou pracovní větu, stejný návratový signál a další roční připomenutí.
+
+Co nepřenášíme:
+Žádné konkrétní zákaznické příklady ani průběžnou evidenci odpovědí.
+```
+
+Jiný příklad:
+
+```text
+První tichý roční cyklus uzavíráme se stavem:
+Tichá evidence odstraněná.
+
+Co se stalo:
+Obchod si vedl pomocný seznam odpovědí na rozpočet pro budoucí review.
+
+Akce:
+Seznam rušíme. Do dalšího ročního připomenutí se přenáší jen zobecněný závěr, že pravidlo bylo použitelné bez povinného pole ve formuláři.
+
+Rytmus:
+Zůstává roční, protože tichá evidence nebyla návratový signál.
+```
+
+Druhý příklad je častější, než se týmy rády přiznávají. Lidé nesbírají bokem data proto, že chtějí rozbít privacy-first provoz. Často jen nechtějí přijít na další kontrole s prázdnýma rukama. Jenže prázdné ruce jsou někdy správný výsledek: pokud pravidlo fungovalo bez problémů, není potřeba vyrábět důkaz z každé běžné interakce.
+
+### Co uzavření nesmí otevřít
+
+Při uzavření tichého cyklu se vyhněte třem pastem:
+
+- nepřidávejte nový průběžný report jen proto, že roční kontrola působí daleko,
+- nepřepisujte pravidlo kvůli jedné situaci, která nebyla návratovým signálem,
+- neponechávejte pomocnou evidenci "pro jistotu", pokud nemá konkrétní účel, vlastníka a retenci.
+
+Pokud tým cítí nejistotu, napište ji jako otázku, ne jako novou povinnost. Otázka může počkat na další roční připomenutí nebo na návratový signál. Nová povinnost začne vyrábět práci hned.
+
+Krátká uzavírací věta může znít:
+
+```text
+Tichý cyklus zůstává tichý. Pravidlo bylo použitelné v běžné práci, nevznikl návratový signál a nepřenášíme žádnou průběžnou evidenci.
+```
+
+To je plnohodnotný výsledek. Není potřeba ho nafukovat do prezentace. Tichý provoz má být čitelný, ne slavnostní.
+
+### Privacy-first uzavření
+
+Privacy-first uzavření tichého cyklu má dvě části: potvrdit, co dál nesbíráte, a uklidit, co vzniklo bez rozhodnutí. Nestačí napsat, že data zůstávají pod kontrolou. Napište konkrétně, co se nebude dít.
+
+Příklad:
+
+```text
+Dál nesbíráme povinný rozpočet ve formuláři, nevytváříme lead scoring, neexportujeme odpovědi z e-mailů a nevedeme pomocnou tabulku obchodních příkladů.
+```
+
+Pokud během cyklu vznikly pracovní poznámky, rozhodněte o nich hned:
+
+- smazat, pokud nemají další účel,
+- anonymizovat, pokud stačí vzor bez identifikace,
+- ponechat jen kanonickou pracovní větu,
+- otevřít nový datový účel pouze tehdy, když existuje skutečný návratový signál.
+
+Codyho komentář: největší riziko dlouhodobých pravidel není dramatické selhání. Je to pomalé přilepování malých evidencí, které každá jednotlivě působí rozumně. Po roce z nich máte provozní pavučinu. Privacy-first uzavření je koště, které ji smete dřív, než se začne tvářit jako architektura.
+
+### Karta uzavření tichého ročního cyklu
+
+```text
+Pravidlo:
+
+Kanonické pracovní místo:
+
+Původní návratový signál:
+
+Běžné situace, ve kterých se pravidlo použilo:
+
+Uzavírací stav:
+- potvrzený klid
+- drobná kotva doplněná
+- návratový signál otevřený
+- tichá evidence odstraněná
+
+Uzavírací věta:
+
+Co se přenáší do dalšího období:
+
+Co se výslovně nepřenáší:
+
+Jaká data, tabulky, exporty nebo kopie mažeme či nepřidáváme:
+
+Další roční připomenutí:
+
+Vlastník:
+```
+
+Karta má být krátká. Pokud se do ní nevejdete, pravděpodobně už píšete roční review nebo nový návratový krok. Uzavření tichého cyklu má chránit klid, ne vyrábět další dokumentaci.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte původní pracovní větu a návratový signál.
+2. Minuta 2: pojmenujte, kde se pravidlo během roku potkalo s běžnou prací.
+3. Minuta 3: vyberte jeden ze čtyř uzavíracích stavů.
+4. Minuta 4: napište uzavírací větu jedním odstavcem.
+5. Minuta 5: určete, co se nepřenáší a co se maže nebo anonymizuje.
+6. Minuta 6: potvrďte další roční připomenutí, nebo otevřete jen předem domluvený návratový signál.
+
+Pokud workshop odhalí nové téma, zapište ho stranou. Tichý cyklus se neuzavírá tím, že do něj přibalíte další práci. Uzavírá se tím, že jasně řeknete, co zůstává klidné a co má vlastní důvod k otevření.
+
+### Checklist uzavření
+
+- Víme, zda cyklus skončil potvrzeným klidem, drobnou kotvou, návratovým signálem nebo odstraněnou tichou evidencí?
+- Je uzavírací věta krátká a srozumitelná bez čtení celé historie?
+- Zůstalo kanonické pracovní místo stejné, nebo je jasně popsaná jedna drobná kotva?
+- Nepřidali jsme nový report, kontrolu ani schůzku bez návratového signálu?
+- Je výslovně zapsané, co se nepřenáší do dalšího období?
+- Jsou pomocné poznámky, tabulky, exporty nebo kopie smazané, anonymizované nebo omezené?
+- Je další roční připomenutí pořád přiměřené?
+- Pokud se otevřel návratový signál, je rozsah menší než původní široký návrh?
+- Umí další člověk za rok poznat, proč pravidlo zůstalo v klidu?
+
+Uzavření prvního tichého ročního cyklu je dobrý okamžik říct: stačí. Pravidlo nemusí být pod dohledem, aby bylo živé. Pokud zůstalo použitelné, datově střídmé a najitelné, zaslouží si další klidný rok. To není pasivita. To je provoz, který se konečně nechová jako věčný projekt.
+
 ## Pracovní log
 
+- 2026-07-01: Doplněna úvodní podkapitola o uzavření prvního tichého ročního cyklu: čtyři uzavírací stavy, praktické příklady, privacy-first úklid tiché evidence, karta, mini workshop a checklist.
 - 2026-07-01: Doplněna úvodní podkapitola o prvním tichém ročním cyklu po převodu: běžné použití bez mimořádné péče, čtyři stavy cyklu, praktické příklady, privacy-first ticho, karta, mini workshop a checklist.
 - 2026-07-01: Doplněna úvodní podkapitola o převodu uzavřené roční kontroly do dalšího ročního cyklu: kanonická pracovní věta, návratový signál, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-07-01: Doplněna úvodní podkapitola o uzavření první roční kontroly po návratu pravidla do ročního rytmu: uzavírací stavy, praktický příklad, privacy-first úklid datové stopy, karta, mini workshop a checklist.
