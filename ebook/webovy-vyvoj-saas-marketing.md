@@ -280888,8 +280888,189 @@ Pokud se workshop začne ptát na širší obchodní proces, zastavte ho. To mů
 
 Druhý tichý roční cyklus je důkaz, že pravidlo nepotřebuje původní autory ani pravidelné připomínání, aby fungovalo. Pokud drží bez paměti, nechte ho být. Pokud potřebuje kotvu, opravte kotvu. Pokud vznikla bokovka, ukliďte ji. A pokud přišel návratový signál, otevřete malý krok. Všechno ostatní je většinou jen nervozita převlečená za zodpovědnost.
 
+## Uzavření druhého tichého ročního cyklu
+
+Druhý tichý roční cyklus uzavírejte jen tehdy, když se opravdu něco stalo: pravidlo bylo použité, někdo narazil na kotvu, objevila se bokovka, nebo dorazil návratový signál. Pokud se nestalo nic, stačí krátký zápis do běžného ročního připomenutí. Tiché pravidlo nemá dostat samostatnou oslavu jen proto, že přežilo další rok. Jeho úspěch se pozná právě podle toho, že nikoho moc nerušilo.
+
+Začněte jednou stavovou větou:
+
+```text
+Druhý tichý roční cyklus uzavíráme tímto stavem:
+```
+
+Za ni napište výsledek bez historického románu:
+
+```text
+Druhý tichý roční cyklus uzavíráme tímto stavem:
+Pravidlo drží bez původní paměti, kanonické místo zůstává stejné a další mimořádnou kontrolu neplánujeme.
+```
+
+Dobrá uzavírací věta má čtyři části: co se při běžném použití ukázalo, zda se mění pracovní místo, co dál nesbíráte a kdy se téma znovu otevře. Pokud některá část chybí, tým si ji později doplní podle nálady. A nálada je výborná na kávu, ale mizerná na provozní paměť.
+
+### Čtyři uzavírací stavy
+
+Po druhém tichém cyklu vyberte jeden ze čtyř stavů:
+
+- Potvrzený dlouhodobý klid: pravidlo funguje bez původního kontextu a nepotřebuje další mimořádnou péči.
+- Jedna stabilizační kotva: pravidlo platí, ale potřebovalo malý přesun, zkrácení nebo doplnění u pracovního místa.
+- Uklizená bokovka: někde vznikla paralelní evidence nebo pomocná stopa a byla ukončená bez změny pravidla.
+- Otevřený návratový signál: předem popsaný důkaz opravdu nastal a otevírá se nejmenší další krok.
+
+Potvrzený dlouhodobý klid je nejlepší výsledek a zároveň ten, který se nejhůř prodává v reportu. Neobsahuje dramatickou změnu. Přesto má hodnotu: pravidlo přežilo bez dozoru, nevytvořilo nová data a nezdržovalo práci. Zapište ho krátce a nechte další kontrolu až v běžném rytmu.
+
+Jedna stabilizační kotva je pořád klidný výsledek. Pokud jste doplnili větu přímo do šablony, přejmenovali interní odkaz nebo přesunuli pravidlo blíž k okamžiku použití, není to nový projekt. Je to údržba pracovního místa. Uzavření má říct, že pravidlo zůstává stejné, jen se lépe hledá.
+
+Uklizená bokovka si zaslouží přísnější zápis. Ne proto, že by někdo udělal chybu, ale protože bokovky mají tendenci vracet se pod jiným názvem. Napište, co vzniklo, proč to nebyl návratový signál, co se smazalo nebo zobecnilo a jaká data dál nesbíráte. Věta "zrušili jsme pomocnou tabulku" je dobrý začátek; věta "zrušili jsme pomocnou tabulku, protože pravidlo nevyžaduje průběžnou evidenci odpovědí" je použitelný závěr.
+
+Otevřený návratový signál znamená, že druhý tichý cyklus končí a začíná nová malá práce. Neznamená to návrat k původnímu širokému návrhu. Pokud se například tři kvalifikované poptávky za sebou neposunuly ani po volitelné otázce, další krok může být úprava potvrzovací věty, krátký rozhovor s obchodem nebo změna jednoho příkladu na stránce služby. Povinné pole ve formuláři je pořád jen možnost, ne automatická odměna za trpělivost.
+
+### Praktické příklady uzavření
+
+Potvrzený dlouhodobý klid:
+
+```text
+Stav:
+Potvrzený dlouhodobý klid.
+
+Co se ukázalo:
+Nový člověk použil pravidlo přímo z potvrzovací šablony bez znalosti původní debaty.
+
+Co se nemění:
+Kanonické pracovní místo, návratový signál ani roční rytmus.
+
+Co dál nesbíráme:
+Povinný rozpočet ve formuláři, lead scoring, export odpovědí a pomocnou tabulku použití otázky.
+```
+
+Jedna stabilizační kotva:
+
+```text
+Stav:
+Jedna stabilizační kotva.
+
+Co se ukázalo:
+Pravidlo platí, ale nový člověk ho hledal v obchodním checklistu, ne v šabloně.
+
+Oprava:
+Do checklistu přidáváme odkaz na kanonickou větu v potvrzovací šabloně.
+
+Co neotevíráme:
+Novou kvalifikační dokumentaci, úpravu formuláře ani další kontrolní schůzku.
+```
+
+Uklizená bokovka:
+
+```text
+Stav:
+Uklizená bokovka.
+
+Co vzniklo:
+Pomocný seznam odpovědí na rozpočtovou otázku.
+
+Proč to není návratový signál:
+Seznam nevznikl kvůli třem neřešitelným poptávkám, ale kvůli pocitu, že se data mohou jednou hodit.
+
+Úklid:
+Konkrétní odpovědi mažeme, ponecháváme jen zobecněnou poznámku, že průběžná evidence není potřeba.
+```
+
+Otevřený návratový signál:
+
+```text
+Stav:
+Otevřený návratový signál.
+
+Co se stalo:
+Tři kvalifikované poptávky za sebou nešlo posunout ani po volitelné otázce.
+
+Nejmenší další krok:
+Projít tyto tři případy a rozhodnout, zda problém vznikl ve formulaci otázky, v nabídce služby, nebo až v obchodním follow-upu.
+
+Co zůstává zavřené:
+Povinné pole ve formuláři a automatický scoring.
+```
+
+### Privacy-first uzavření
+
+Uzavření druhého tichého cyklu je hlavně kontrola, že se ticho nezměnilo v neviditelnou evidenci. Zeptejte se:
+
+```text
+Vznikla během druhého tichého roku nějaká nová kopie, tabulka, štítek, export nebo poznámkový rituál?
+
+Pokud ano, slouží dnešnímu rozhodnutí, nebo jen pocitu, že budeme mít později víc podkladů?
+
+Co po uzavření smažeme, zobecníme nebo výslovně nepřenášíme do dalšího roku?
+```
+
+Privacy-first závěr má být konkrétní:
+
+```text
+Do dalšího roku nepřenášíme pomocný seznam odpovědí ani kopie zákaznických e-mailů. V pracovním místě zůstává jen pravidlo a návratový signál. Konkrétní obchodní komunikace zůstává v původním vlákně podle běžného režimu.
+```
+
+Codyho komentář: největší riziko dlouhého klidu není zapomenuté pravidlo. Je to pravidlo obklopené malými "pro jistotu" poznámkami, které se tváří nevinně, dokud jich není plná skříň. Pokud poznatek nepotřebujete pro rozhodnutí, nechte si pravidlo a ukliďte stopu. Méně archeologie, více provozu.
+
+### Karta uzavření druhého tichého cyklu
+
+```text
+Pravidlo:
+
+Kanonické pracovní místo:
+
+Co se ve druhém tichém roce opravdu stalo:
+
+Uzavírací stav:
+- potvrzený dlouhodobý klid
+- jedna stabilizační kotva
+- uklizená bokovka
+- otevřený návratový signál
+
+Co se mění v pracovním místě:
+
+Co zůstává výslovně zavřené:
+
+Jaká data, kopie, exporty nebo pomocné poznámky rušíme:
+
+Co dál výslovně nesbíráme:
+
+Návratový signál pro další otevření:
+
+Další rytmus:
+
+Vlastník:
+```
+
+Kartu vyplňujte jen při skutečném uzavření. Pokud druhý tichý rok proběhl bez použití a bez podnětu, nedělejte z toho kontrolní dokument. Stačí v ročním připomenutí napsat, že nepřišel návratový signál a pravidlo zůstává v klidu.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte pravidlo a kanonické pracovní místo.
+2. Minuta 2: pojmenujte, co se ve druhém tichém roce opravdu stalo.
+3. Minuta 3: vyberte jeden uzavírací stav.
+4. Minuta 4: napište, co se mění nebo nemění v pracovním místě.
+5. Minuta 5: ukliďte bokovky, kopie, exporty nebo pomocné poznámky.
+6. Minuta 6: potvrďte další rytmus nebo otevřete nejmenší návratový krok.
+
+Když se během workshopu objeví chuť "udělat pro jistotu větší review", vraťte se k otázce, co se opravdu stalo. Bez konkrétního děje není co uzavírat zvláštní prací. Roční klid není výzva k ročnímu neklidu.
+
+### Checklist uzavření druhého tichého cyklu
+
+- Uzavíráme skutečné použití, bokovku nebo návratový signál, ne jen plynutí času?
+- Vybrali jsme přesně jeden uzavírací stav?
+- Je jasné, jestli se mění kanonické pracovní místo?
+- Pokud přidáváme kotvu, je to jedna blízká úprava, ne nový proces?
+- Pokud vznikla bokovka, je ukončená, smazaná nebo zobecněná?
+- Je výslovně napsané, co dál nesbíráme?
+- Nevrátili jsme původní široký návrh bez domluveného návratového signálu?
+- Pokud návratový signál nastal, otevíráme nejmenší další krok?
+- Nepřidali jsme další mimořádnou kontrolu jen kvůli pocitu opatrnosti?
+- Umí další člověk za rok poznat, proč pravidlo zůstalo v klidu, nebo proč se otevřel malý krok?
+
+Uzavření druhého tichého ročního cyklu má být konečně dospělé: buď potvrdit dlouhodobý klid, opravit jednu kotvu, uklidit bokovku, nebo otevřít malý návratový krok. Nic mezi tím nepotřebuje slavnostní název. Čím lépe tým umí zavřít tichý rok, tím méně energie utrácí za střežení pravidel, která už dávno fungují.
+
 ## Pracovní log
 
+- 2026-07-01: Doplněna úvodní podkapitola o uzavření druhého tichého ročního cyklu: čtyři uzavírací stavy, příklady, privacy-first úklid bokovek, karta, mini workshop a checklist.
 - 2026-07-01: Doplněna úvodní podkapitola o druhém tichém ročním cyklu po potvrzeném klidu: odolnost pravidla bez původní paměti, bokovky, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-07-01: Doplněna úvodní podkapitola o uzavření prvního tichého ročního cyklu: čtyři uzavírací stavy, praktické příklady, privacy-first úklid tiché evidence, karta, mini workshop a checklist.
 - 2026-07-01: Doplněna úvodní podkapitola o prvním tichém ročním cyklu po převodu: běžné použití bez mimořádné péče, čtyři stavy cyklu, praktické příklady, privacy-first ticho, karta, mini workshop a checklist.
