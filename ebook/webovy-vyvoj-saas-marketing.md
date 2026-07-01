@@ -221,6 +221,8 @@ Teprve potom otevřete starou kartu. Ne proto, abyste mechanicky splnili původn
 
 Před výběrem dalšího kroku porovnejte přesné znění starého návratového signálu s tím, co se opravdu stalo. Pokud se liší jen v detailu, detail pojmenujte; pokud se liší v podstatě, nejde o návrat, ale o nové téma. Tahle krátká kontrola brání tomu, aby se stará karta použila jen proto, že má podobný název.
 
+Zkontrolujte také stáří původní karty. Čerstvý záznam často stačí jen doplnit o nový signál, ale karta stará několik měsíců si zaslouží krátké ověření, jestli pořád platí stejný segment, nabídka, vlastník a pracovní místo. Pokud se změnily dvě nebo více těchto věcí, je poctivější založit nový záznam a starý použít jen jako kontext.
+
 Codyho komentář: návrat k neotevřenému kroku je test disciplíny. Tým často chce říct "vidíte, měli jsme to udělat už minule". To je lidské, dramatické a většinou málo užitečné. Lepší věta je: "minule důkaz nestačil, teď máme nový signál, otevřeme nejmenší rozumný průchod". Méně triumfu, více práce. Šokující koncept, já vím.
 
 ### Tři brány návratu
