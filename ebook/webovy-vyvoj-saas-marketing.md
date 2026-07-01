@@ -281068,8 +281068,190 @@ Když se během workshopu objeví chuť "udělat pro jistotu větší review", v
 
 Uzavření druhého tichého ročního cyklu má být konečně dospělé: buď potvrdit dlouhodobý klid, opravit jednu kotvu, uklidit bokovku, nebo otevřít malý návratový krok. Nic mezi tím nepotřebuje slavnostní název. Čím lépe tým umí zavřít tichý rok, tím méně energie utrácí za střežení pravidel, která už dávno fungují.
 
+## Převod potvrzeného ticha do archivního minima
+
+Po dvou tichých ročních cyklech už pravidlo nemá potřebovat vlastní provozní rytmus. Pokud se za dva roky ukázalo, že funguje bez původní paměti, bez skryté evidence a bez mimořádné péče, další práce není třetí kontrola. Další práce je zmenšení stopy: ponechat jen kanonické místo, návratový signál a stručný důvod, proč pravidlo zůstává v archivu místo v aktivním review.
+
+Archivní minimum není smazání odpovědnosti. Je to dohoda, že téma se nevrací podle kalendáře, ale podle skutečného signálu. Tým pořád ví, kde pravidlo najít. Zároveň mu ale nepřiděluje pravidelné meetingy, pomocné tabulky ani roční rituály jen proto, že kdysi bylo důležité. Některé věci mají poctivě zestárnout do tichého standardu. Ano, zní to méně hrdinsky než "strategická iniciativa". O to víc to šetří kapacitu.
+
+Začněte jednou větou:
+
+```text
+Pravidlo převádíme do archivního minima, protože:
+```
+
+Dobrá věta obsahuje důkaz, ne pocit:
+
+```text
+Pravidlo převádíme do archivního minima, protože ve dvou tichých ročních cyklech fungovalo z kanonického místa, nevznikla pomocná evidence a nepřišel návratový signál.
+```
+
+Tím vznikne jasná hranice. Pravidlo se neudržuje aktivně. Jen zůstává dohledatelné tam, kde se má použít. Pokud se znovu otevře, musí to být kvůli návratovému signálu, ne kvůli tomu, že někdo našel starou poznámku a dostal chuť "to celé ještě jednou promyslet".
+
+### Co v archivním minimu zůstává
+
+Archivní minimum má mít tři části:
+
+- Kanonickou pracovní větu: stručné pravidlo na místě, kde se opravdu používá.
+- Návratový signál: konkrétní situaci, která téma znovu otevře.
+- Archivní poznámku: krátký důvod, proč už neběží pravidelná kontrola.
+
+Kanonická pracovní věta patří do šablony, checklistu, interní stránky, obchodního skriptu nebo jiného pracovního místa. Ne do samostatného dokumentu, který si člověk musí pamatovat otevřít. Pokud pravidlo žije mimo práci, není archivované. Je schované.
+
+Návratový signál musí být stále měřitelný běžným provozem. Nepište "když se zhorší kvalita leadů". Napište třeba: "když tři relevantní poptávky za sebou nepůjde kvalifikovat bez ručního doptání na rozpočet". Signál má spustit rozhodnutí, ne hádku o pocitech.
+
+Archivní poznámka má být krátká:
+
+```text
+Aktivní review ukončeno po dvou tichých ročních cyklech bez návratového signálu. Další kontrola jen při naplnění návratového signálu.
+```
+
+To stačí. Nepřepisujte do archivu celou historii. Historie může zůstat v changelogu nebo rozhodovacím logu, ale pracovní místo potřebuje hlavně aktuální pravidlo a důvod, proč se už pravidelně nehlídá.
+
+### Co z archivu odstranit
+
+Převod do archivního minima má smysl jen tehdy, když zároveň něco ubere. Jinak se jen přidá další štítek na existující složitost.
+
+Odstraňte nebo ukončete:
+
+- roční připomenutí, pokud jeho jediným účelem bylo kontrolovat toto pravidlo,
+- pomocné seznamy použití pravidla,
+- kopie zákaznických zpráv ukládané mimo původní systém,
+- dočasné poznámky z ověřovacích cyklů,
+- staré verze šablon, které se tváří jako platné,
+- interní komentáře typu "ještě sledovat", pokud nemají návratový signál.
+
+Pokud něco nejde smazat kvůli účetnictví, smlouvě, compliance nebo interní retenční politice, nechte to v původním systému a nepřenášejte to do pracovního archivu. Archivní minimum není sběrna starých důkazů. Je to ukazatel na platné pravidlo.
+
+Praktická otázka zní:
+
+```text
+Kdyby se k pravidlu za rok dostal nový člověk, co opravdu potřebuje vědět, aby ho použil bez dalšího výkladu?
+```
+
+Většinou odpověď není "všechno, co jsme řešili". Je to jedna pracovní věta, návratový signál a možná jeden příklad. Zbytek je minulost.
+
+### Praktický příklad převodu
+
+Původní pravidlo po dvou tichých cyklech:
+
+```text
+U poptávek na nový web se nejdřív ptáme na cíl projektu a rozhodovací situaci. Rozpočet zjišťujeme volitelně až ve chvíli, kdy je jasné, co má projekt změnit.
+```
+
+Archivní minimum:
+
+```text
+Kanonická pracovní věta:
+Při první kvalifikaci poptávky nepřidáváme povinné pole pro rozpočet; nejdřív ověřujeme cíl projektu a rozhodovací situaci.
+
+Návratový signál:
+Tři relevantní poptávky za sebou nepůjde kvalifikovat bez ručního doptání na rozpočet.
+
+Archivní poznámka:
+Aktivní review ukončeno po dvou tichých ročních cyklech bez návratového signálu. Další kontrola jen při naplnění návratového signálu.
+
+Co dál nesbíráme:
+Povinný rozpočet ve formuláři, průběžný lead scoring a pomocný export odpovědí.
+```
+
+Takový zápis je nudně užitečný. Nový člověk ví, co dělat. Obchod ví, kdy téma znovu otevřít. Marketing ví, že nemá upravovat formulář jen proto, že "by se data hodila". Provoz ví, že se nepřidává další evidence. A privacy-first hodnota zůstává praktická, ne plakátová.
+
+### Kdy archivní minimum nepoužít
+
+Nepřevádějte pravidlo do archivu, pokud platí aspoň jedna z těchto věcí:
+
+- Pravidlo se během druhého tichého roku vůbec nepoužilo a neumíte ověřit, že je dohledatelné.
+- Nový člověk pravidlo našel jen díky ústnímu vysvětlení.
+- Vznikla pomocná evidence, kterou ještě nikdo neuklidil.
+- Návratový signál je nejasný nebo závisí na pocitu jednoho člověka.
+- Pravidlo se opírá o právní, cenové, bezpečnostní nebo technické tvrzení, které vyžaduje pravidelnou aktualizaci.
+
+V takovém případě nejdřív opravte nejbližší slabinu. Archiv je odměna za stabilitu, ne způsob, jak odložit nepořádek. Pokud pravidlo nejde najít, nepatří do archivu. Pokud generuje bokovky, nepatří do archivu. Pokud se opírá o věci, které stárnou rychleji než provozní zvyk, potřebuje revizní rytmus, ne tichou polici.
+
+### Privacy-first archiv
+
+Archivní minimum je silný privacy-first nástroj, protože záměrně brání hromadění důkazů po skončení potřeby. Před převodem se zeptejte:
+
+```text
+Jaká data jsme sbírali jen proto, že pravidlo bylo v ověřovacím režimu?
+
+Která z nich už nepotřebujeme pro dnešní rozhodnutí?
+
+Co musí zůstat v původním systému a co nemá být kopírované do archivu?
+```
+
+Výsledek napište konkrétně:
+
+```text
+Do archivního minima nepřenášíme konkrétní zákaznické odpovědi, kopie e-mailů ani pomocné tabulky. V pracovním místě zůstává pouze pravidlo, návratový signál a obecný důvod ukončení aktivního review.
+```
+
+Privacy-first archiv není o tom, že všechno smažete bez rozmyslu. Je o tom, že po skončení ověřování nepřevlečete staré podklady za trvalou dokumentaci. Data mají sloužit rozhodnutí. Když rozhodnutí skončilo, má skončit i jejich pomocná role.
+
+Codyho komentář: nejčistší dokumentace často není ta nejdelší, ale ta, která odmítla tahat do budoucnosti každou stopu z minulosti. Archivní minimum je malá schopnost říct: víme dost, necháváme jen to, co pomáhá příštímu rozhodnutí. Krásně neokázalé. Skoro až podezřelé.
+
+### Karta archivního minima
+
+```text
+Pravidlo:
+
+Kanonické pracovní místo:
+
+Důvod převodu do archivního minima:
+
+Důkaz stabilního ticha:
+
+Kanonická pracovní věta:
+
+Návratový signál:
+
+Archivní poznámka:
+
+Co rušíme z aktivního rytmu:
+
+Co mažeme, zobecňujeme nebo necháváme jen v původním systému:
+
+Co dál výslovně nesbíráme:
+
+Kdo smí téma znovu otevřít a na základě čeho:
+
+Datum převodu:
+```
+
+Karta má být poslední aktivní práce s pravidlem. Po jejím vyplnění nevzniká nový měsíční ani roční úkol. Vzniká jen dohledatelné minimum, které se otevře při signálu. Pokud máte chuť přidat ještě kontrolní datum "pro jistotu", vraťte se k důvodu převodu. Buď pravidlo ještě není připravené na archiv, nebo si tým plete zodpovědnost s pravidelným koukáním na stejnou věc.
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: přečtěte poslední uzavření druhého tichého cyklu.
+2. Minuta 2: ověřte, že existuje kanonické pracovní místo.
+3. Minuta 3: napište jednu kanonickou pracovní větu.
+4. Minuta 4: potvrďte návratový signál.
+5. Minuta 5: vyberte, co se ruší z aktivního rytmu.
+6. Minuta 6: určete, jaké podklady se mažou, zobecňují nebo zůstávají jen v původním systému.
+7. Minuta 7: napište archivní poznámku a uzavřete téma bez dalšího kontrolního úkolu.
+
+Pokud se workshop protáhne, je to signál. Archivní minimum nemá vyžadovat dlouhou debatu. Buď je pravidlo stabilní a stačí ho zmenšit, nebo stabilní není a potřebuje poslední lokální opravu.
+
+### Checklist archivního minima
+
+- Máme za sebou dva tiché roční cykly bez nevyřešeného návratového signálu?
+- Je pravidlo dohledatelné v pracovním místě, ne jen v historii rozhodnutí?
+- Umíme ho zapsat jednou kanonickou pracovní větou?
+- Je návratový signál konkrétní a použitelný bez původních autorů?
+- Rušíme aktivní připomenutí, které už nemá vlastní rozhodovací hodnotu?
+- Mažeme nebo zobecňujeme pomocné podklady z ověřovacího režimu?
+- Nepřenášíme do archivu konkrétní zákaznická data, kopie e-mailů ani exporty?
+- Je jasné, co dál výslovně nesbíráme?
+- Neopírá se pravidlo o tvrzení, které potřebuje pravidelnou právní, cenovou nebo technickou aktualizaci?
+- Nevznikl nový kontrolní úkol jen z opatrnosti?
+- Pozná další člověk, kdy téma znovu otevřít?
+
+Převod do archivního minima je tichý konec dlouhé smyčky. Pravidlo už není projekt, experiment, oprava ani zvláštní kontrola. Je to malý standard s jasnou hranicí návratu. Když ho tým umí takhle zmenšit, získá dvě věci najednou: méně provozního šumu a menší datovou stopu. To je dobrá výměna.
+
 ## Pracovní log
 
+- 2026-07-01: Doplněna úvodní podkapitola o převodu potvrzeného ticha do archivního minima: kanonická pracovní věta, návratový signál, úklid aktivního rytmu, privacy-first archiv, karta, mini workshop a checklist.
 - 2026-07-01: Doplněna úvodní podkapitola o uzavření druhého tichého ročního cyklu: čtyři uzavírací stavy, příklady, privacy-first úklid bokovek, karta, mini workshop a checklist.
 - 2026-07-01: Doplněna úvodní podkapitola o druhém tichém ročním cyklu po potvrzeném klidu: odolnost pravidla bez původní paměti, bokovky, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-07-01: Doplněna úvodní podkapitola o uzavření prvního tichého ročního cyklu: čtyři uzavírací stavy, praktické příklady, privacy-first úklid tiché evidence, karta, mini workshop a checklist.
