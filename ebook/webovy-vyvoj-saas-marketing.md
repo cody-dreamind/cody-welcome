@@ -281249,8 +281249,172 @@ Pokud se workshop protáhne, je to signál. Archivní minimum nemá vyžadovat d
 
 Převod do archivního minima je tichý konec dlouhé smyčky. Pravidlo už není projekt, experiment, oprava ani zvláštní kontrola. Je to malý standard s jasnou hranicí návratu. Když ho tým umí takhle zmenšit, získá dvě věci najednou: méně provozního šumu a menší datovou stopu. To je dobrá výměna.
 
+## Návrat z archivního minima při prvním signálu
+
+Archivní minimum funguje dobře jen tehdy, když se umí znovu otevřít bez paniky. Pokud se po delším klidu objeví návratový signál, tým nemá oprášit celou historii, svolat velké review a znovu rozběhnout starý projekt. Má udělat menší věc: ověřit, jestli signál opravdu odpovídá archivní poznámce, otevřít nejbližší pracovní místo a rozhodnout, zda stačí lokální úprava, nebo se pravidlo vrací do aktivnějšího rytmu.
+
+Začněte větou:
+
+```text
+Archivní minimum znovu otevíráme, protože nastal tento návratový signál:
+```
+
+Do věty napište konkrétní událost, ne interpretaci:
+
+```text
+Archivní minimum znovu otevíráme, protože tři relevantní poptávky za sebou nešlo kvalifikovat bez ručního doptání na rozpočet.
+```
+
+Teprve potom otevřete archivní kartu. Nečtěte ji jako starý rozsudek. Čtěte ji jako hranici: co bylo ponecháno v pracovním místě, co bylo výslovně zrušeno z aktivního rytmu a jaká data se dál nesbírala. První návrat má tuhle hranici respektovat. Pokud se minule zrušil lead scoring, první reakce nemá být automatické obnovení scoringu. Pokud se minule neukládaly kopie poptávek, první reakce nemá být pomocná tabulka s celou historií. Ano, tabulky se umí tvářit jako řešení. Často jsou jen rozhodnutí v převleku za buňky.
+
+### Tři otázky prvního návratu
+
+První návrat z archivu projděte přes tři otázky:
+
+- Nastal přesně domluvený návratový signál?
+- Je kanonické pracovní místo pořád správné?
+- Jaký je nejmenší krok, který stačí k rozhodnutí?
+
+Pokud signál nenastal přesně, neotevírejte archivní minimum jako návrat. Zapište nový podnět vedle a rozhodněte, jestli jde o samostatné téma. Podobnost názvu nestačí. Když archiv říká "tři nekvalifikovatelné poptávky bez rozpočtu" a objeví se jedna slabší poptávka z jiného segmentu, není to návrat. Je to šum, nebo nové téma.
+
+Pokud pracovní místo už není správné, nejdřív opravte mapu místa. Třeba zjistíte, že kvalifikace dnes nezačíná formulářem, ale krátkým e-mailem po doporučení. Pak nemá smysl upravovat starý formulář. Návratový signál je reálný, ale jeho dnešní adresa se změnila.
+
+Pokud nejmenší krok neumíte pojmenovat, nevracejte pravidlo do aktivního rytmu. Otevřete jen krátké zpřesnění. Prakticky: projít poslední tři případy, napsat jednu větu příčiny a vybrat pracovní místo. To je pořád práce. Jen se netváří jako velká obnova procesu.
+
+### Praktický příklad
+
+Archivní minimum:
+
+```text
+Kanonická pracovní věta:
+Při první kvalifikaci poptávky nepřidáváme povinné pole pro rozpočet; nejdřív ověřujeme cíl projektu a rozhodovací situaci.
+
+Návratový signál:
+Tři relevantní poptávky za sebou nepůjde kvalifikovat bez ručního doptání na rozpočet.
+
+Co dál nesbíráme:
+Povinný rozpočet ve formuláři, průběžný lead scoring a pomocný export odpovědí.
+```
+
+Návratový signál opravdu nastal. Tým ale před první úpravou zjistí, že všechny tři poptávky přišly přes doporučení, ne přes webový formulář. Nejmenší krok proto není přidání pole do formuláře. Je to úprava první odpovědi po doporučení:
+
+```text
+První malý krok:
+Do první odpovědi po doporučení přidáme volitelnou větu: "Abychom navrhli rozumný další krok, pomůže nám znát orientační rozmezí investice nebo limit, který nesmíme překročit."
+
+Co stále neotevíráme:
+Povinné pole ve formuláři, lead scoring, export odpovědí a pravidelnou kontrolu všech poptávek.
+
+Ověření:
+U dalších tří doporučených poptávek zkontrolujeme, jestli volitelná věta stačila k základní kvalifikaci bez dalšího doptání.
+```
+
+Tím se archiv nepopře. Použije se. Původní pravidlo chránilo formulář před zbytečným sběrem dat. Nový signál ukázal jiný kanál. Správná reakce proto drží stejnou hodnotu, ale překládá ji do dnešního pracovního místa.
+
+### Čtyři výsledky návratu z archivu
+
+Po prvním návratu vyberte jeden z těchto stavů:
+
+- Falešný návrat: signál se podobal archivnímu signálu, ale ve skutečnosti ho nenaplnil.
+- Lokální úprava: signál nastal, ale stačí malá změna v jednom pracovním místě.
+- Návrat do dočasného rytmu: signál nastal a pravidlo potřebuje krátké ověřovací okno.
+- Nové téma: starý archiv pomohl s orientací, ale dnešní problém má jinou příčinu, segment nebo pracovní místo.
+
+Falešný návrat uzavřete jednou větou a archiv nechte být:
+
+```text
+Archivní minimum neotevíráme, protože dnešní podnět nenaplnil domluvený návratový signál; týkal se jedné nerelevantní poptávky mimo segment.
+```
+
+Lokální úprava má mít jasné ověření a konec. Neotevírejte k ní nový měsíční rituál. Stačí určit, při jakém nejbližším použití poznáte, že pomohla.
+
+Návrat do dočasného rytmu je silnější zásah. Použijte ho jen tehdy, když se ukáže, že pravidlo už nejde bezpečně držet jako archivní minimum. I tehdy nastavte krátké okno: třeba tři případy, jeden měsíc nebo jeden uzavřený obchodní cyklus. Dočasný rytmus bez stop podmínky je archiv v opačném směru: místo aby zapomínal, začne znovu hromadit.
+
+Nové téma založte odděleně. Starý archiv může být odkaz, ale nemá nést odpovědnost za nový problém. Pokud se změnil segment, nabídka nebo kanál, napište to výslovně.
+
+### Privacy-first návrat z archivu
+
+Návrat z archivu je rizikový moment pro datovou střídmost. Tým má pocit, že se "něco pokazilo", a snadno začne sbírat víc důkazů, než potřebuje. Proto si před první reakcí napište:
+
+```text
+Jaké nové údaje bychom začali sbírat, kdybychom reagovali nejpohodlnějším způsobem?
+
+Který nejmenší údaj nebo pozorování stačí pro první rozhodnutí?
+
+Co z původního archivního minima stále výslovně nesbíráme?
+```
+
+Praktická odpověď může vypadat takto:
+
+```text
+Pro první rozhodnutí nepotřebujeme export všech poptávek ani scoring. Stačí ruční záznam tří posledních případů bez osobních detailů: kanál, důvod nedostatečné kvalifikace a pracovní místo, kde chyběla informace.
+```
+
+Pokud musíte pracovat s konkrétními zákaznickými zprávami, nechte je v původním systému. Do rozhodovací poznámky přeneste jen zobecněný vzor. Privacy-first návrat není slepý návrat k datům. Je to návrat k rozhodnutí s co nejmenší novou stopou.
+
+### Karta návratu z archivního minima
+
+```text
+Archivní pravidlo:
+
+Kanonické pracovní místo podle archivu:
+
+Návratový signál podle archivu:
+
+Co se opravdu stalo:
+
+Je to přesný návrat, falešný návrat, nebo nové téma:
+
+Dnešní pracovní místo:
+
+Nejmenší další krok:
+
+Co stále výslovně neotevíráme:
+
+Jaká data nebudeme nově sbírat:
+
+Jak ověříme první reakci:
+
+Kdy se pravidlo vrátí do archivu, nebo do dočasného rytmu:
+
+Vlastník:
+
+Datum:
+```
+
+Karta má být krátká. Pokud potřebuje dvě stránky, pravděpodobně už neřešíte návrat z archivního minima, ale nový provozní problém. To není zakázané. Jen tomu dejte správné jméno, jinak se starý archiv stane univerzálním šuplíkem pro všechno, co trochu připomíná minulost.
+
+### Mini workshop na 8 minut
+
+1. Minuta 1: přečtěte archivní pracovní větu a návratový signál.
+2. Minuta 2: popište, co se opravdu stalo.
+3. Minuta 3: rozhodněte, jestli jde o přesný návrat, falešný návrat, nebo nové téma.
+4. Minuta 4: ověřte dnešní pracovní místo.
+5. Minuta 5: napište nejmenší další krok.
+6. Minuta 6: napište, co se stále neotevírá a nesbírá.
+7. Minuta 7: určete ověření první reakce.
+8. Minuta 8: rozhodněte, jestli pravidlo zatím zůstává v archivu, jde do lokální úpravy, nebo dostane krátký dočasný rytmus.
+
+Když se tým během workshopu začne vracet do celé historie, zastavte ho otázkou: "Která část historie mění dnešní nejmenší krok?" Pokud žádná, nechte ji v archivu. Historie je užitečná, ale nemá se vydávat za čerstvý důkaz.
+
+### Checklist návratu z archivního minima
+
+- Nastal přesně domluvený návratový signál?
+- Nezaměnili jsme podobný podnět za skutečný návrat?
+- Ověřili jsme, že kanonické pracovní místo pořád odpovídá dnešní práci?
+- Vybrali jsme nejmenší další krok, ne původní široký návrh?
+- Je výslovně napsané, co stále neotevíráme?
+- Nepřidáváme zpět data, exporty, scoring nebo trackery jen proto, že se téma vrátilo?
+- Pokud pracujeme s konkrétními případy, zůstávají v původním systému?
+- Má první reakce jasné ověření a konec?
+- Víme, kdy se pravidlo vrátí do archivu, nebo kdy přejde do krátkého dočasného rytmu?
+- Pozná další člověk rozdíl mezi falešným návratem, lokální úpravou, dočasným rytmem a novým tématem?
+
+Návrat z archivního minima je dobrý test, jestli archiv nebyl jen uklizený hřbitov rozhodnutí. Správný archiv umí mlčet dlouho, ale když přijde signál, poskytne hranici pro rozumnou reakci. Neříká "nedělej nic". Říká "nezačínej znovu od nuly a nesbírej víc, než potřebuješ". Což je přesně ten druh nudné disciplíny, ze které vzniká použitelný provoz.
+
 ## Pracovní log
 
+- 2026-07-01: Doplněna úvodní podkapitola o návratu z archivního minima při prvním signálu: ověření návratového signálu, dnešní pracovní místo, nejmenší krok, privacy-first datové minimum, karta, mini workshop a checklist.
 - 2026-07-01: Doplněna úvodní podkapitola o převodu potvrzeného ticha do archivního minima: kanonická pracovní věta, návratový signál, úklid aktivního rytmu, privacy-first archiv, karta, mini workshop a checklist.
 - 2026-07-01: Doplněna úvodní podkapitola o uzavření druhého tichého ročního cyklu: čtyři uzavírací stavy, příklady, privacy-first úklid bokovek, karta, mini workshop a checklist.
 - 2026-07-01: Doplněna úvodní podkapitola o druhém tichém ročním cyklu po potvrzeném klidu: odolnost pravidla bez původní paměti, bokovky, privacy-first kontrola, karta, mini workshop a checklist.
