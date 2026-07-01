@@ -282117,8 +282117,199 @@ Pokud se během workshopu objeví nový větší problém, nezatahujte ho do ste
 
 Druhé běžné použití po dočištění lokální úpravy má být poslední kontrola, ne začátek nové série. Pokud oprava funguje, zavřete ji do tichého provozu. Pokud nefunguje, udělejte jednu poslední blízkou opravu nebo se vraťte k pracovnímu místu. V obou případech držte starý široký návrh zavřený, dokud nepřijde návratový signál silnější než dobrý pocit z toho, že něco konečně prošlo.
 
+## Uzavření druhého běžného použití po dočištění lokální úpravy
+
+Druhé běžné použití se má uzavřít rychle. Jeho účel není vyrobit novou kapitolu v životě pravidla, ale rozhodnout, jestli lokální oprava umí dál žít bez doprovodu. Pokud ano, patří do tichého provozu. Pokud ne, musí být jasné, jestli stačí poslední drobné dočištění, návrat k pracovnímu místu, nebo zastavení pokusu o rozšíření.
+
+Začněte jednou větou:
+
+```text
+Druhé běžné použití uzavíráme tímto stavem:
+```
+
+Hned za ni napište důvod. Ne historii, ne omluvu, ne další plán. Jen důvod, který vychází z druhého použití:
+
+```text
+Druhé běžné použití uzavíráme stavem tichý provoz, protože obchodník našel rozhodovací větu v běžné šabloně, použil ji ve správné situaci a nepokusil se otevřít původní široké řešení.
+```
+
+Taková věta stačí. Pokud k ní potřebujete přiložit tabulku, nahrávku, CRM export a tři komentáře ze schůzky, pravděpodobně už neuzavíráte druhé použití. Otevíráte novou práci a jen jí dáváte staré jméno. To je administrativní cosplay, ne provozní disciplína.
+
+### Čtyři uzavírací stavy
+
+Po druhém použití vyberte jeden z těchto stavů:
+
+- Tichý provoz: lokální úprava funguje v běžné práci a nepotřebuje další mimořádnou kontrolu.
+- Poslední lokální dočištění: tření je malé, přesně umístěné a oprava se vejde do stejného pracovního místa.
+- Návrat k pracovnímu místu: úprava nebyla špatná, ale seděla na špatném místě v procesu.
+- Zavření bez rozšíření: druhé použití dopadlo dobře, ale nevznikl důvod pro širší změnu.
+
+Stav `tichý provoz` znamená, že pravidlo má zůstat viditelné jen tam, kde se používá. Nepřidávejte mu zvláštní status, pokud k tomu nemáte provozní důvod. Tichý provoz není méně hodnotný než další optimalizace. Je to stav, kdy se malá oprava konečně přestala tvářit jako projekt.
+
+Stav `poslední lokální dočištění` použijte jen jednou. Třetí "poslední" oprava už není poslední oprava, ale vzor. Pokud se k ní dostanete, vraťte se k diagnóze: možná nebylo slabé znění věty, ale celé pracovní místo.
+
+Stav `návrat k pracovnímu místu` neznamená návrat do původního širokého návrhu. Znamená přesun pozornosti k místu, kde člověk opravdu začíná práci. Pokud obchodník nezačíná v šabloně, ale v CRM úkolu, oprava má být v CRM úkolu nebo v jeho napojení na šablonu. Ne v další krásné poznámce, kterou nikdo při práci neuvidí.
+
+Stav `zavření bez rozšíření` je důležitý hlavně po úspěchu. Dobré druhé použití může svádět k plošné změně: povinné pole, nový report, nové skórování, nová automatizace. Pokud návratový signál pořád neříká, že je širší problém reálný, uzavřete úspěch jako lokální úspěch.
+
+### Praktický příklad
+
+Lokální úprava po prvním použití:
+
+```text
+Rozhodovací věta k orientační investici byla přesunuta ze staré karty návratu přímo do šablony první odpovědi.
+```
+
+Druhé použití:
+
+```text
+Obchodník řešil další doporučenou poptávku. Začal v šabloně první odpovědi, rozhodovací větu našel bez hledání ve starých poznámkách a použil ji pouze proto, že bez orientační investice nešlo navrhnout další konkrétní krok.
+```
+
+Uzavření:
+
+```text
+Stav:
+Tichý provoz.
+
+Důvod:
+Věta je v běžném pracovním místě, použití bylo omezené na správnou situaci a původní návrh na povinné rozpočtové pole zůstává zavřený.
+
+Co necháváme:
+Jednu volitelnou rozhodovací větu v šabloně první odpovědi.
+
+Co rušíme:
+Dočasnou poznámku k druhému použití a připomínku mimořádné kontroly.
+
+Co dál neotevíráme:
+Povinné pole ve formuláři, rozpočtový report, scoring leadů ani nový export do marketingového nástroje.
+
+Návratový signál:
+Téma znovu otevřeme jen pokud tři relevantní doporučené poptávky za sebou nepůjdou posunout bez strukturovanější otázky na rámec spolupráce.
+```
+
+Slabší výsledek může vypadat takto:
+
+```text
+Věta byla správná, ale obchodník pořád začal v CRM úkolu, kde na ni nebyl žádný odkaz.
+```
+
+Uzavření pak nemá znít "přepišme větu". Má znít:
+
+```text
+Stav:
+Návrat k pracovnímu místu.
+
+Důvod:
+Tření není ve znění věty, ale v tom, že běžná práce začíná jinde než věta.
+
+Nejmenší další krok:
+Doplnit do CRM úkolu odkaz na aktuální šablonu první odpovědi.
+
+Co neotevíráme:
+Novou metodiku kvalifikace, změnu formuláře ani plošnou evidenci rozpočtů.
+```
+
+Tím se chyba dostane na správné místo. Neopravujete dokument, který už je dost dobrý. Opravujete trasu k němu.
+
+### Privacy-first uzavření
+
+Při uzavření druhého použití ukliďte dočasné stopy. Lokální oprava často během ověřování vytvoří malé pomocné poznámky: kdo pravidlo použil, u jaké poptávky, co zákazník napsal, jaká částka padla, proč se obchodník rozhodl tak či onak. Pro rozhodnutí o pravidle většinou stačí zobecněný výsledek.
+
+Použijte jednoduché pravidlo:
+
+```text
+Do stabilního pravidla přenášíme pouze:
+
+Po uzavření mažeme nebo nepřenášíme:
+
+Nová trvalá data nevznikají, protože:
+```
+
+Příklad:
+
+```text
+Do stabilního pravidla přenášíme pouze:
+Věta má zůstat v šabloně první odpovědi a používat se jen u doporučených poptávek, kde bez orientační investice nejde navrhnout další krok.
+
+Po uzavření mažeme nebo nepřenášíme:
+Konkrétní částku z poptávky, jméno zákazníka, e-mailové vlákno a interní poznámku k testu.
+
+Nová trvalá data nevznikají, protože:
+Rozhodnutí nepotřebuje nové pole, report ani export. Stačí upravená pracovní věta v existující šabloně.
+```
+
+Codyho komentář: nejlepší uzavření je často nudné. Není tam nový dashboard, není tam graf, není tam slavnostní "framework". Jen věta na správném místě a uklizené dočasné stopy. Přesně tak má vypadat privacy-first provoz, když se nechce stát sběratelským albem všech mikroudálostí.
+
+### Karta uzavření druhého použití
+
+```text
+Archivní pravidlo:
+
+Lokální úprava, kterou druhé použití ověřovalo:
+
+Druhé použití proběhlo v tomto pracovním místě:
+
+Uzavírací stav:
+- tichý provoz
+- poslední lokální dočištění
+- návrat k pracovnímu místu
+- zavření bez rozšíření
+
+Důvod stavu:
+
+Co zůstává ve stabilním pracovním místě:
+
+Co mažeme, archivujeme nebo nepřenášíme:
+
+Co zůstává výslovně zavřené:
+
+Návratový signál pro nové otevření:
+
+Privacy-first uzavření:
+Do stabilního pravidla přenášíme pouze:
+Po uzavření mažeme nebo nepřenášíme:
+Nová trvalá data nevznikají, protože:
+
+Vlastník:
+
+Datum uzavření:
+```
+
+Karta má být poslední stopa mimořádné péče. Jakmile je vyplněná, nepěstujte kolem ní další servisní rituál. Stabilní pravidlo má žít v pracovním místě, ne v pamětní vitríně.
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: přečtěte, co přesně druhé použití ověřovalo.
+2. Minuta 2: napište jednu větu, co se při druhém použití opravdu stalo.
+3. Minuta 3: vyberte jeden uzavírací stav.
+4. Minuta 4: určete, co zůstává ve stabilním pracovním místě.
+5. Minuta 5: napište, co zůstává zavřené.
+6. Minuta 6: ukliďte nebo zobecněte dočasné stopy.
+7. Minuta 7: zapište návratový signál a zrušte mimořádnou kontrolu.
+
+Pokud se tým zasekne mezi dvěma stavy, vyberte ten menší. Lepší je uzavřít lokální opravu a otevřít nový podnět později než nenápadně prodlužovat ověřování jen proto, že se nikomu nechce říct "stačí".
+
+### Checklist uzavření druhého použití
+
+- Máme jednu větu, která shrnuje výsledek druhého použití?
+- Vybrali jsme jeden uzavírací stav?
+- Je jasné, co zůstává ve stabilním pracovním místě?
+- Zrušili jsme mimořádnou kontrolu, pokud už není potřeba?
+- Pokud ještě dočišťujeme, je oprava poslední, lokální a bez nového procesu?
+- Pokud se vracíme k pracovnímu místu, neotevíráme tím původní široký návrh?
+- Pokud druhé použití dopadlo dobře, nezaměňujeme lokální úspěch za důkaz pro plošnou změnu?
+- Je zapsaný návratový signál pro nové otevření?
+- Je výslovně uvedené, co zůstává zavřené?
+- Přenesli jsme do stabilního pravidla jen zobecněný výsledek?
+- Uklidili jsme konkrétní zákaznické, obchodní nebo dočasné testovací stopy?
+- Nevzniklo nové pole, tracker, export nebo report jen kvůli uzavření?
+
+Uzavření druhého běžného použití je dobré místo pro tečku. Pokud oprava funguje, nechte ji fungovat. Pokud nefunguje, opravte nejbližší skutečné pracovní místo. A pokud se někdo pokusí z lokálního úspěchu vyrobit plošný systém, vraťte se k návratovému signálu. Bez něj má dobrá malá oprava právo zůstat malá.
+
 ## Pracovní log
 
+- 2026-07-01: Doplněna úvodní podkapitola o uzavření druhého běžného použití po dočištění lokální úpravy z archivního minima: čtyři uzavírací stavy, praktické příklady, privacy-first úklid dočasných stop, karta, mini workshop a checklist.
 - 2026-07-01: Doplněna úvodní podkapitola o druhém běžném použití po dočištění lokální úpravy z archivního minima: ověření kotvy nebo rozhodovací věty, čtyři výsledky, praktické příklady, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-07-01: Doplněna úvodní podkapitola o uzavření prvního běžného použití po lokální úpravě z archivního minima: uzavírací stavy, praktické příklady, privacy-first úklid stop, karta, mini workshop a checklist.
 - 2026-07-01: Doplněna úvodní podkapitola o uzavření první reakce po návratu z archivního minima: čtyři uzavírací stavy, praktický příklad, privacy-first úklid dočasných podkladů, karta, mini workshop a checklist.
