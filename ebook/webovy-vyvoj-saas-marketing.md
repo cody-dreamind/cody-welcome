@@ -280048,8 +280048,156 @@ Pokud v minutě 5 vyberete dva výsledky, určete primární. Například "přep
 
 První roční kontrola po návratu pravidla do ročního rytmu má potvrdit, že klid systému není zanedbání. Dobré pravidlo nepotřebuje neustálou pozornost. Potřebuje být najitelné, srozumitelné, datově střídmé a občas ověřené proti realitě. Když to splní, zavřete kontrolu a nechte tým pracovat.
 
+## Jak uzavřít první roční kontrolu po návratu pravidla do ročního rytmu
+
+První roční kontrola má skončit jasněji, než začala. Pokud jen projdete pravidlo, pokývete hlavou a necháte výsledek v poznámkách, za rok nebude jasné, jestli pravidlo opravdu drželo, jestli se mělo přepsat, nebo jestli se jen nikomu nechtělo otevírat další práce. Uzavření proto není formalita. Je to krátké provozní rozhodnutí, které říká: co zůstává, co se mění, co uklízíme a kdy se k tématu vrátíme.
+
+Začněte uzavírací větou:
+
+```text
+První roční kontrolu uzavíráme takto:
+```
+
+Za ni napište jeden konkrétní stav, ne shrnutí celé debaty:
+
+```text
+První roční kontrolu uzavíráme takto:
+Pracovní věta u potvrzovací šablony pořád vede obchod správně, jen ji přepisujeme do dnešního slovníku nabídky. Formulář, scoring ani nový export neotevíráme a další kontrola proběhne v běžném ročním rytmu.
+```
+
+Dobrá uzavírací věta má čtyři části: výsledek kontroly, konkrétní změnu, hranici neotevírané práce a další rytmus. Když některá část chybí, tým si ji začne domýšlet. Jeden člověk uslyší "pravidlo funguje", druhý "máme upravit formulář", třetí "za rok se uvidí". Uzavření má takové domýšlení omezit.
+
+### Čtyři uzavírací stavy
+
+Po první roční kontrole vyberte jeden ze čtyř stavů:
+
+- Zavřít beze změny: pravidlo je najitelné, použitelné a datová stopa zůstává malá.
+- Přepsat a zavřít: princip platí, ale pracovní věta potřebuje dnešní jazyk.
+- Uklidit a zavřít: pravidlo platí, ale kolem něj vznikla zbytečná evidence nebo pomocné stopy.
+- Otevřít nový návratový krok: kontrola ukázala skutečný návratový signál, který už nejde vyřešit roční údržbou.
+
+Stav `zavřít beze změny` má být krátký. Neplánujte další kontrolu jen proto, že roční připomenutí proběhlo. Pokud pravidlo drží, zapište výsledek a nechte ho dál žít v běžném rytmu.
+
+Stav `přepsat a zavřít` použijte, když se změnil slovník práce. Například tým už nemluví o relevantní poptávce, ale o kvalifikované poptávce. Přepište pracovní větu tam, kde se používá, a starý jazyk nechte jen v rozhodovací paměti, pokud má ještě hodnotu.
+
+Stav `uklidit a zavřít` je privacy-first výhra. Pravidlo může fungovat, ale kolem něj se časem nalepí pomocná tabulka, ruční štítek nebo kopie příkladů. Pokud už nemají účel, smažte je, anonymizujte nebo nahraďte zobecněným závěrem.
+
+Stav `otevřít nový návratový krok` vyžaduje důkaz. Roční kontrola sama o sobě není důkaz. Důkaz je opakovaný problém, který odpovídá návratovému signálu a má dopad na pracovní rozhodnutí.
+
+### Praktický příklad uzavření
+
+```text
+Výsledek roční kontroly:
+Pravidlo je najitelné u potvrzovací šablony a obchod ho používá bez původní historie. Nabídka se posunula k dlouhodobější spolupráci, takže slovo "rozpočet" je potřeba doplnit o "měsíční rozhodovací rámec".
+
+Uzavírací stav:
+Přepsat a zavřít.
+
+Co měníme:
+Jednu větu v potvrzovací šabloně.
+
+Co zůstává zavřené:
+Povinné pole ve formuláři, automatický lead scoring a nový export rozpočtových údajů.
+
+Privacy-first úklid:
+Mažeme staré konkrétní příklady odpovědí a ponecháváme jen zobecněnou poznámku, že volitelná otázka patří do e-mailového vlákna.
+
+Další rytmus:
+Další kontrola proběhne za rok, pokud dřív nenastane návratový signál.
+```
+
+Tento závěr je malý, ale úplný. Přepisuje pracovní větu, čistí stopu a zároveň brání tomu, aby se roční kontrola změnila v návrat k širšímu návrhu.
+
+### Privacy-first uzavření
+
+Po roční kontrole vždy napište, co se s datovou stopou stalo:
+
+```text
+Ponecháváme:
+
+Mažeme nebo anonymizujeme:
+
+Dál nesbíráme:
+```
+
+Příklad:
+
+```text
+Ponecháváme:
+Aktuální pracovní větu a návratový signál u potvrzovací šablony.
+
+Mažeme nebo anonymizujeme:
+Staré konkrétní příklady odpovědí, které už neslouží dalšímu rozhodnutí.
+
+Dál nesbíráme:
+Rozpočet jako povinné formulářové pole, automatické skóre leadu ani zvláštní export poptávek.
+```
+
+Tato část je důležitá hlavně proto, že roční kontroly často otevírají staré podklady. Co jednou otevřete, může omylem zůstat v nové pracovní vrstvě. Uzavření má zajistit, že si tým odnese pravidlo, ne hromádku znovu oživených dat.
+
+### Karta uzavření roční kontroly
+
+```text
+Pravidlo:
+
+Kanonické pracovní místo:
+
+Výsledek první roční kontroly:
+
+Uzavírací stav:
+- zavřít beze změny
+- přepsat a zavřít
+- uklidit a zavřít
+- otevřít nový návratový krok
+
+Rozhodnutí jednou větou:
+
+Co se propisuje do pracovního místa:
+
+Co zůstává výslovně zavřené:
+
+Privacy-first uzavření:
+Ponecháváme:
+Mažeme nebo anonymizujeme:
+Dál nesbíráme:
+
+Návratový signál:
+
+Další běžný rytmus:
+
+Vlastník:
+```
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: přečtěte výsledek roční kontroly.
+2. Minuta 2: vyberte jeden uzavírací stav.
+3. Minuta 3: napište rozhodnutí jednou větou.
+4. Minuta 4: určete, co se propíše do pracovního místa.
+5. Minuta 5: napište, co zůstává zavřené.
+6. Minuta 6: ukliďte datovou stopu.
+7. Minuta 7: potvrďte další rytmus a vlastníka.
+
+Pokud se během sedmi minut objeví nový problém, necpěte ho do uzavření. Zapište ho jako návratový krok jen tehdy, pokud má vlastní důkaz a pracovní místo. Jinak patří do poznámek, ne do ročního závěru.
+
+### Checklist uzavření roční kontroly
+
+- Má první roční kontrola jeden jasný výsledek?
+- Vybrali jsme přesně jeden uzavírací stav?
+- Umíme rozhodnutí napsat jednou větou?
+- Propsali jsme případný přepis do kanonického pracovního místa?
+- Je jasné, co zůstává výslovně zavřené?
+- Uklidili jsme staré příklady, exporty, screenshoty, pomocné tabulky nebo ruční značky?
+- Zůstává privacy-first hranice viditelná tam, kde by mohla vznikat nová data?
+- Pokud otevíráme návratový krok, má konkrétní důkaz, vlastníka a pracovní místo?
+- Pokud neotevíráme návratový krok, vrací se pravidlo do běžného ročního rytmu?
+- Najde další člověk aktuální pravidlo bez čtení celé historie roční kontroly?
+
+Uzavření první roční kontroly má pravidlu vrátit klid. Roční připomenutí splnilo práci, když po něm tým ví, co platí, co se drobně změnilo, co se uklidilo a kdy se k pravidlu vrátit. Všechno navíc je jen další vrstva údržby. A vrstvy údržby mají jednu špatnou vlastnost: tváří se jako péče, dokud nezačnou brát kyslík práci, kterou měly chránit.
+
 ## Pracovní log
 
+- 2026-07-01: Doplněna úvodní podkapitola o uzavření první roční kontroly po návratu pravidla do ročního rytmu: uzavírací stavy, praktický příklad, privacy-first úklid datové stopy, karta, mini workshop a checklist.
 - 2026-07-01: Doplněna úvodní podkapitola o první roční kontrole po návratu pravidla do ročního rytmu: pracovní, obchodní a datová platnost, výsledkové stavy, praktický příklad, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-07-01: Doplněna úvodní podkapitola o převodu potvrzeného pravidla zpět do ročního rytmu: kanonická pracovní věta, návratový signál, úklid mimořádné péče, privacy-first datová dieta, karta, mini workshop a checklist.
 - 2026-07-01: Doplněna úvodní podkapitola o uzavření druhého běžného použití po uzavřeném prvním použití: čtyři uzavírací stavy, praktické příklady, privacy-first úklid datové stopy, karta, mini workshop a checklist.
