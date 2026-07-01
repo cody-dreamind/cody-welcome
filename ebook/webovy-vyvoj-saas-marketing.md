@@ -281412,8 +281412,163 @@ Když se tým během workshopu začne vracet do celé historie, zastavte ho otá
 
 Návrat z archivního minima je dobrý test, jestli archiv nebyl jen uklizený hřbitov rozhodnutí. Správný archiv umí mlčet dlouho, ale když přijde signál, poskytne hranici pro rozumnou reakci. Neříká "nedělej nic". Říká "nezačínej znovu od nuly a nesbírej víc, než potřebuješ". Což je přesně ten druh nudné disciplíny, ze které vzniká použitelný provoz.
 
+## Uzavření první reakce po návratu z archivního minima
+
+První reakce po návratu z archivního minima má skončit rychleji než původní téma. Když se vrátí starý signál, tým má přirozenou chuť otevřít celou minulost: staré argumenty, staré návrhy, staré tabulky, staré obavy a staré "já jsem to říkal". To je lidské, ale provozně drahé. Smyslem první reakce není znovu rozhodnout všechno. Smyslem je ověřit, jestli archivní minimum pořád drží, nebo jestli se má přesunout do lokální úpravy, krátkého dočasného rytmu, případně do nového tématu.
+
+Uzavření proto začněte větou:
+
+```text
+První reakci po návratu z archivu uzavíráme tímto stavem:
+```
+
+Do věty nedávejte procesní popis. "Prošli jsme tři případy a domluvili další kontrolu" ještě neříká, co platí. Lepší zápis zní:
+
+```text
+První reakci po návratu z archivu uzavíráme jako lokální úpravu první odpovědi po doporučení; archivní pravidlo pro webový formulář zůstává beze změny.
+```
+
+Taková věta má dvě užitečné vlastnosti. Zaprvé říká, co se opravdu mění. Zadruhé říká, co se nemění. To je u návratu z archivu klíčové. Bez druhé poloviny věty se z malé opravy snadno stane tichý návrat starého projektu.
+
+### Čtyři uzavírací stavy
+
+Po první reakci vyberte jeden ze čtyř stavů:
+
+- Archiv zůstává zavřený: podnět nenaplnil návratový signál nebo se ukázal jako šum.
+- Proběhla lokální úprava: signál byl reálný, ale stačila změna v jednom pracovním místě.
+- Vzniká krátký dočasný rytmus: signál byl reálný a pravidlo potřebuje omezené ověřovací okno.
+- Zakládá se nové téma: starý archiv pomohl s orientací, ale dnešní problém má jinou příčinu.
+
+Archiv zůstává zavřený tehdy, když se první reakce nedostala přes bránu návratového signálu. Zapište to stručně a nepřidávejte nové hlídání:
+
+```text
+Archiv zůstává zavřený. Dnešní podnět se týkal jedné poptávky mimo cílový segment, takže nenaplnil domluvený návratový signál tří relevantních poptávek za sebou.
+```
+
+Lokální úprava má mít jasné pracovní místo, jedno ověření a návrat do klidu. Například upravit jednu větu v prvním e-mailu, doplnit nápovědu k formuláři nebo změnit interní předávací poznámku. Neotevírejte k tomu nový reporting, novou poradu ani nový export. Lokální úprava, která začne potřebovat vlastní pravidelnou správu, už není lokální úprava. Je to malý provozní systém, jen se stydí za jméno.
+
+Krátký dočasný rytmus použijte jen tehdy, když první reakce ukáže, že archivní pravidlo samo nestačí. Dočasný rytmus musí mít stop podmínku. Třeba tři další případy, jeden obchodní cyklus nebo jedno měsíční review. Bez stop podmínky se archivní minimum nevrátilo k práci, ale k trvalému šumu.
+
+Nové téma založte odděleně, když se změnil segment, kanál, nabídka, vlastník nebo pracovní místo. Starý archiv může být odkaz, ale nemá nést nové rozhodnutí. Tím chráníte srozumitelnost týmové paměti: kdo později otevře archivní kartu, neuvidí v ní přilepený problém, který patřil jinam.
+
+### Praktický příklad uzavření
+
+Archivní pravidlo říká:
+
+```text
+Při první kvalifikaci poptávky nepřidáváme povinné pole pro rozpočet; nejdřív ověřujeme cíl projektu a rozhodovací situaci.
+```
+
+Návratový signál nastal u tří doporučených poptávek. První reakce proto nebyla změna formuláře, ale doplnění volitelné věty do první odpovědi po doporučení.
+
+Uzavření po třech dalších doporučených poptávkách:
+
+```text
+Stav:
+Lokální úprava potvrzena.
+
+Co se změnilo:
+V první odpovědi po doporučení zůstává volitelná věta k orientační investici nebo limitu.
+
+Co se nemění:
+Webový formulář dál nemá povinné pole pro rozpočet. Nezavádíme lead scoring, export poptávek ani pravidelné sledování všech odpovědí.
+
+Ověření:
+U dvou ze tří dalších doporučených poptávek stačila volitelná věta k základní kvalifikaci. U třetí byl problém v nejasném cíli projektu, ne v rozpočtu.
+
+Návrat:
+K tématu se vrátíme jen tehdy, pokud tři doporučené poptávky za sebou znovu nepůjde kvalifikovat bez ručního doptání na rozpočet.
+```
+
+Všimněte si, že závěr není triumfální. Neříká "rozpočet už máme vyřešený navždy". Říká, co se změnilo, co zůstává zavřené a jaký signál by věc znovu otevřel. To je přesně dost. Codyho komentář: trvalá jistota je v produktové práci často jen dobrá věta napsaná moc sebevědomě.
+
+### Privacy-first uzavření
+
+Uzavření první reakce je místo, kde se musí vědomě zavřít i datová stopa. Během návratu z archivu často vzniknou pomocné poznámky: tři příklady, ruční srovnání, pracovní hypotéza, dočasná tabulka nebo screenshot. Tyto podklady nemají automaticky zůstat v provozu.
+
+Položte si tři otázky:
+
+```text
+Které dočasné podklady vznikly jen kvůli první reakci?
+
+Co z nich musí zůstat jako zobecněné poučení?
+
+Co smažeme, anonymizujeme nebo necháme jen v původním systému?
+```
+
+Dobré privacy-first uzavření může vypadat takto:
+
+```text
+Do kanonického pravidla přenášíme jen zobecněný závěr: u doporučených poptávek pomáhá volitelná otázka na orientační investici. Konkrétní zprávy zůstávají v původním komunikačním nástroji. Do pracovního záznamu nepřenášíme jména, rozpočty ani kopie e-mailů.
+```
+
+Pokud první reakce vedla k dočasnému rytmu, nastavte datové minimum hned při uzavření. Napište, co se smí zaznamenat, na jak dlouho a proč. Bez toho se dočasný rytmus velmi rychle promění v "pro jistotu si necháme všechno". A "pro jistotu" je jedna z nejdražších vět v privacy-first provozu.
+
+### Karta uzavření první reakce
+
+```text
+Archivní pravidlo:
+
+Návratový signál:
+
+Co jsme při první reakci ověřili:
+
+Uzavírací stav:
+- archiv zůstává zavřený
+- lokální úprava
+- krátký dočasný rytmus
+- nové téma
+
+Co se mění:
+
+Co zůstává beze změny:
+
+Co výslovně neotevíráme:
+
+Jaké dočasné podklady mažeme, zobecňujeme nebo necháváme v původním systému:
+
+Jaký je nový nebo potvrzený návratový signál:
+
+Kde je kanonický záznam:
+
+Vlastník:
+
+Datum:
+```
+
+Karta má být kratší než původní archivní historie. Pokud při uzavření potřebujete opisovat celý vývoj tématu, pravděpodobně uzavíráte špatnou věc. První reakce po návratu má být samostatně srozumitelná, ale nemá znovu vytvářet kroniku.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte návratový signál a výsledek první reakce.
+2. Minuta 2: vyberte jeden ze čtyř uzavíracích stavů.
+3. Minuta 3: napište, co se mění a co zůstává beze změny.
+4. Minuta 4: napište, co výslovně neotevíráte.
+5. Minuta 5: zavřete dočasné podklady a datovou stopu.
+6. Minuta 6: potvrďte návratový signál a kanonické místo záznamu.
+
+Pokud se tým neshodne na uzavíracím stavu, nezvětšujte debatu. Vraťte se k otázce: "Co musí být pravda, aby se archivní pravidlo změnilo?" Když na ni neumíte odpovědět, nemáte ještě důvod k trvalé změně. Máte maximálně důvod ke krátkému dočasnému rytmu.
+
+### Checklist uzavření první reakce
+
+- Vybrali jsme jeden konkrétní uzavírací stav?
+- Je jasné, zda archiv zůstává zavřený, vznikla lokální úprava, krátký rytmus, nebo nové téma?
+- Napsali jsme, co se mění?
+- Napsali jsme stejně jasně, co se nemění?
+- Je výslovně zavřené původní široké řešení, pokud pro něj pořád není důkaz?
+- Má lokální úprava nejbližší ověření a konec?
+- Má dočasný rytmus stop podmínku?
+- Je nové téma oddělené od starého archivu?
+- Uklidili jsme dočasné poznámky, exporty, kopie zpráv a pomocné tabulky?
+- Přenášíme do kanonického místa jen zobecněné poučení, ne zbytečná osobní nebo obchodní data?
+- Je potvrzený návratový signál pro další otevření?
+- Pozná další člověk, proč první reakce skončila právě tímto stavem?
+
+Uzavření první reakce po návratu z archivního minima chrání dvě věci najednou: provoz před starými projekty, které se chtějí vrátit zadními dveřmi, a data před sběrem "pro jistotu". Dobrý závěr není velký. Je přesný. Říká, co se stalo, co platí dál a kde se práce znovu zastaví.
+
 ## Pracovní log
 
+- 2026-07-01: Doplněna úvodní podkapitola o uzavření první reakce po návratu z archivního minima: čtyři uzavírací stavy, praktický příklad, privacy-first úklid dočasných podkladů, karta, mini workshop a checklist.
 - 2026-07-01: Doplněna úvodní podkapitola o návratu z archivního minima při prvním signálu: ověření návratového signálu, dnešní pracovní místo, nejmenší krok, privacy-first datové minimum, karta, mini workshop a checklist.
 - 2026-07-01: Doplněna úvodní podkapitola o převodu potvrzeného ticha do archivního minima: kanonická pracovní věta, návratový signál, úklid aktivního rytmu, privacy-first archiv, karta, mini workshop a checklist.
 - 2026-07-01: Doplněna úvodní podkapitola o uzavření druhého tichého ročního cyklu: čtyři uzavírací stavy, příklady, privacy-first úklid bokovek, karta, mini workshop a checklist.
