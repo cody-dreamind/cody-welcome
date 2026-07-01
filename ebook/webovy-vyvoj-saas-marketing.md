@@ -278522,8 +278522,173 @@ Pokud se během workshopu objeví nový problém, nenechte ho pohltit převod. P
 
 Převod do ročního připomenutí je odměna za dobrý provoz. Pravidlo se nestává méně důležitým. Jen přestává vyžadovat častou pozornost. To je zdravý stav: rozhodnutí zůstává dostupné, tým ví, kdy se k němu vrátit, a systém kolem něj nesbírá data jen proto, aby měl za rok co kontrolovat.
 
+## První roční připomenutí po zředění rytmu
+
+První roční připomenutí je test, jestli zředěný rytmus opravdu funguje bez skryté péče. Rok je dost dlouhá doba na to, aby se změnila nabídka, tým, formulář, onboarding, marketingový kanál nebo dodavatel. Zároveň je to dost krátká doba na to, aby tým ještě nepodlehl pokušení otevřít kompletní historii jen proto, že se v kalendáři objevilo slovo "review". Ano, kalendář umí dělat drama i z věcí, které měly být nudné. Nenechte ho.
+
+Roční připomenutí má začít otázkou, ne sběrem podkladů:
+
+```text
+Existuje dnes konkrétní důvod měnit pravidlo, jeho rytmus, nebo datovou stopu kolem něj?
+```
+
+Pokud odpověď není konkrétní, připomenutí má zůstat lehké. Neprocházejte všechny staré případy, nehledejte zapomenuté komentáře, neotevírejte archivní exporty a nevytvářejte nový report. Vezměte kanonické místo, návratový signál, dnešní pracovní realitu a tři otázky z převodu do ročního připomenutí. To stačí.
+
+Codyho komentář: první roční připomenutí je chvíle, kdy tým ukáže, jestli pravidlu opravdu věří. Pokud ho po roce musí znovu dokazovat jako čerstvý experiment, nebylo převedené do ročního rytmu. Bylo jen odložené do budoucí schůzky s lepším názvem.
+
+### Tři kontroly ročního připomenutí
+
+Držte se tří kontrol. Každá má vést k rozhodnutí, ne k dalšímu průzkumu.
+
+- Kontrola platnosti: pravidlo pořád odpovídá dnešní nabídce, zákazníkům, produktu a pracovnímu místu.
+- Kontrola použitelnosti: člověk bez původní historie pravidlo najde a použije bez zvláštního výkladu.
+- Kontrola datové stopy: kolem pravidla nevznikl nový tracker, export, formulářové pole, ruční evidence nebo delší retence.
+
+Kontrola platnosti se ptá na svět kolem pravidla. Pokud se změnila nabídka, segment nebo typ zákazníka, pravidlo může být zastaralé i tehdy, když je napsané dokonale. Třeba pravidlo pro kvalifikaci poptávek po malých webech nemusí sedět ve chvíli, kdy firma prodává hlavně dlouhodobé SaaS partnerství.
+
+Kontrola použitelnosti se ptá na pracovní cestu. Najde obchodník správnou větu v kartě nabídky? Najde support rozhodovací hranici v checklistu? Najde marketing důvod, proč nepřidávat další tracking? Pokud odpověď závisí na jednom člověku, pravidlo není ročně stabilní. Potřebuje lokální opravu kanonického místa, ne velké review.
+
+Kontrola datové stopy se ptá na tichý provoz. Často se nestane nic viditelného s pravidlem, ale kolem něj se nenápadně objeví pomocná tabulka, screenshoty, exporty z analytiky nebo komentáře s konkrétními zákaznickými detaily. Roční připomenutí má tyhle náhražky najít a uklidit.
+
+### Praktický příklad
+
+Pravidlo říká, že poptávkový formulář nemá povinné pole pro rozpočet. Rozpočtový kontext se řeší v obchodní kartě, aby první kontakt nesbíral zbytečně citlivý obchodní údaj. Návratový signál zní: téma se otevře, pokud tři relevantní poptávky za sebou nejdou kvalifikovat bez ručního doptání na rozpočet.
+
+První roční připomenutí:
+
+```text
+Platnost:
+Nabídka se rozšířila o menší konzultace, ale hlavní poptávkový formulář pořád slouží pro zakázkový web a SaaS spolupráci. Pravidlo zůstává platné pro hlavní formulář.
+
+Použitelnost:
+Obchodní karta obsahuje větu, jak se na rozpočtový kontext ptát bez povinného pole. Nový člověk ji našel bez původní debaty.
+
+Datová stopa:
+Nevzniklo nové pole ve formuláři, lead scoring ani export rozpočtů. V jedné pracovní poznámce zůstaly dvě konkrétní částky z minulého ověření; poznámku mažeme, protože pro dnešní rozhodnutí není potřeba.
+
+Rozhodnutí:
+Pravidlo zůstává v ročním připomenutí. Neotevíráme změnu formuláře, nový report ani plošné vyhodnocení poptávek.
+```
+
+Všimněte si, že příklad neignoruje změnu nabídky. Jen ji nepoužije jako záminku k otevření všeho. Menší konzultace mohou mít vlastní vstupní pravidlo, ale hlavní formulář se tím automaticky nemění. Když se nový segment opravdu ukáže jako samostatná pracovní situace, dostane vlastní rozhodnutí.
+
+Slabší výsledek:
+
+```text
+Platnost:
+Pravidlo pořád dává smysl, ale nabídka se změnila natolik, že není jasné, jestli platí pro nový typ konzultací.
+
+Použitelnost:
+Kanonické místo je najitelné, ale nerozlišuje hlavní projekty a menší konzultace.
+
+Datová stopa:
+Nevznikl nový tracker ani export, ale tým si bokem ukládá ruční poznámky k rozpočtům u konzultací.
+
+Rozhodnutí:
+Roční připomenutí nezvyšujeme na pololetní kontrolu celého pravidla. Otevíráme jen lokální úpravu karty nabídky pro menší konzultace a mažeme ruční poznámky bez dalšího účelu.
+```
+
+Tohle je zdravý zásah: nevrací se celý starý režim, opravuje se konkrétní hrana. Roční připomenutí tím splnilo úkol. Našlo změnu okolí, zúžilo reakci a zabránilo nové datové vrstvě.
+
+### Čtyři výsledky prvního ročního připomenutí
+
+Po připomenutí vyberte jeden ze čtyř stavů:
+
+- Potvrzený roční rytmus: pravidlo platí, je použitelné a datová stopa zůstává čistá.
+- Lokální oprava: pravidlo platí, ale potřebuje drobné zpřesnění kanonického místa nebo uklizení jedné pracovní stopy.
+- Změna pracovního kontextu: pravidlo možná neplatí pro novou nabídku, segment, proces nebo nástroj; otevírá se nové úzké rozhodnutí.
+- Ukončení pravidla: pravidlo už nepomáhá dnešní práci nebo ho nahradilo jiné kanonické místo.
+
+Potvrzený roční rytmus končí jednou větou a dalším ročním připomenutím. Lokální oprava má mít vlastní malé ověření při nejbližším běžném použití, ne nový dlouhý rytmus. Změna pracovního kontextu patří do nové karty, protože staré pravidlo nemá nést zodpovědnost za nový problém. Ukončení pravidla musí uklidit odkazy, kopie a zbytky šablon, aby se mrtvé pravidlo nevracelo jako provozní fosilie. Krásné slovo, ošklivý stav.
+
+### Privacy-first pravidla ročního připomenutí
+
+První roční připomenutí nesmí přidat sledování jen proto, že tým chce mít jistotu. Jistota je drahá věc, když se platí daty lidí.
+
+Použijte tato pravidla:
+
+- Nezakládejte novou evidenci použití pravidla.
+- Neexportujte historické zákaznické případy, pokud neexistuje konkrétní incident nebo návratový signál.
+- Nepřenášejte do aktivní karty jména, e-maily, částky, IP adresy, screenshoty, nahrávky ani detailní obchodní poznámky.
+- Pokud se objeví konkrétní citlivý příklad, zobecněte ho do pracovní věty a původní detail smažte nebo archivujte podle retenčního pravidla.
+- Pokud připomenutí odhalí nový nástroj nebo dodavatele, nejdřív ověřte účel a datový tok; teprve potom rozhodujte, jestli k pravidlu patří.
+
+Privacy-first výsledek ročního připomenutí má ideálně znít takto:
+
+```text
+Roční připomenutí potvrdilo pravidlo bez nové evidence. U zdroje pravdy zůstává aktivní věta, vlastník, roční rytmus a návratový signál; konkrétní ověřovací poznámky z minulého období byly odstraněny.
+```
+
+Pokud připomenutí skončí novou tabulkou, novým exportem a třemi novými poli, něco se utrhlo ze řetězu. Vraťte se k otázce účelu. Co přesně má nová datová stopa rozhodnout? Pokud neumíte odpovědět jednou větou, nemá vzniknout.
+
+### Karta prvního ročního připomenutí
+
+```text
+Pravidlo nebo pracovní místo:
+
+Kanonické místo:
+
+Datum ročního připomenutí:
+
+Vlastník:
+
+Původní důvod ročního rytmu:
+
+Kontrola platnosti:
+
+Kontrola použitelnosti:
+
+Kontrola datové stopy:
+
+Výsledek:
+- potvrzený roční rytmus
+- lokální oprava
+- změna pracovního kontextu
+- ukončení pravidla
+
+Co se výslovně neotevírá:
+
+Co se maže, archivuje nebo zobecňuje:
+
+Návratový signál mimo roční rytmus:
+
+Další připomenutí nebo ověření:
+```
+
+Karta má zachytit rozhodnutí, ne dokazovací spis. Pokud se do ní nevejde výsledek bez dlouhých příloh, roční připomenutí nejspíš otevřelo příliš širokou otázku. Zmenšete ji: pravidlo, kanonické místo, datová stopa, uzavírací stav.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: otevřete kanonické místo a přečtěte aktivní pravidlo.
+2. Minuta 2: ověřte, zda pravidlo pořád sedí na dnešní nabídku, zákazníky a pracovní místo.
+3. Minuta 3: ověřte, zda ho člověk bez původní historie najde a použije.
+4. Minuta 4: najděte případné nové datové stopy kolem pravidla.
+5. Minuta 5: vyberte jeden ze čtyř výsledků a napište uzavírací větu.
+6. Minuta 6: určete, co se neotevírá a co se maže, archivuje nebo zobecňuje.
+
+Když workshop narazí na větší změnu trhu, produktu nebo nabídky, necpěte ji do roční karty. Roční připomenutí zavřete stavem "změna pracovního kontextu" a otevřete nové úzké rozhodnutí. Tím staré pravidlo nezneužijete jako nosič pro úplně jinou debatu.
+
+### Checklist prvního ročního připomenutí
+
+- Začali jsme otázkou, ne sběrem podkladů?
+- Otevřeli jsme kanonické místo místo starých debat?
+- Ověřili jsme platnost pravidla pro dnešní nabídku, zákazníky a pracovní místo?
+- Ověřili jsme použitelnost bez původního vlastníka?
+- Zkontrolovali jsme, jestli nevznikla nová datová stopa?
+- Vybrali jsme jeden ze čtyř výsledků?
+- Pokud vzniká lokální oprava, je opravdu lokální?
+- Pokud se změnil pracovní kontext, má nové rozhodnutí vlastní kartu?
+- Pokud pravidlo končí, víme, kde uklidit odkazy a kopie?
+- Nevzniká nová evidence použití pravidla jen kvůli budoucí jistotě?
+- Jsou citlivé příklady smazané, archivované nebo zobecněné podle účelu?
+- Je jasné, co se výslovně neotevírá?
+- Zůstává další rytmus přiměřený výsledku připomenutí?
+
+První roční připomenutí má být nudné v nejlepším smyslu. Když pravidlo funguje, nechá ho fungovat. Když najde drobný zbytek, uklidí ho. Když se změnil svět kolem pravidla, otevře nové úzké rozhodnutí. A když pravidlo přestalo sloužit, slušně ho ukončí. To je celý trik: roční rytmus nemá vyrábět práci. Má bránit tomu, aby stará práce zůstala v systému déle, než má smysl.
+
 ## Pracovní log
 
+- 2026-07-01: Doplněna úvodní podkapitola o prvním ročním připomenutí po zředění rytmu: tři kontroly, praktické příklady, čtyři výsledky, privacy-first pravidla, karta, mini workshop a checklist.
 - 2026-07-01: Doplněna úvodní podkapitola o převodu potvrzeného pololetního rytmu do ročního připomenutí: podmínky zředění, praktické příklady, hranice ročního připomenutí, privacy-first datové minimum, karta, mini workshop a checklist.
 - 2026-07-01: Doplněna úvodní podkapitola o uzavření druhé pololetní kontroly po potvrzeném rytmu: čtyři uzavírací stavy, praktické příklady, hranice neotevírané práce, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-07-01: Doplněna úvodní podkapitola o druhé pololetní kontrole po potvrzeném rytmu: opakovatelnost bez původní paměti, čtyři výsledky kontroly, privacy-first úklid pomocné evidence, karta, mini workshop a checklist.
