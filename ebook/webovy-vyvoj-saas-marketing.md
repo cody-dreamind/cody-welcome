@@ -279695,8 +279695,197 @@ Když se v minutě 3 neshodnete na stavu, nepokračujte do úprav. Nejprve pojme
 
 Uzavření druhého běžného použití je poslední bod, kde se pravidlo může zase stát obyčejným nástrojem. Pokud přenos funguje, dejte mu klid. Pokud nefunguje, opravte nejbližší místo. A pokud se objevil nový kontext, oddělte ho dřív, než začne přepisovat staré rozhodnutí. Tím udržíte provoz použitelný, rozhodnutí dohledatelná a datovou stopu menší, než by z ní udělala dobře míněná přehnaná péče.
 
+## Převod potvrzeného pravidla zpět do ročního rytmu
+
+Když druhé běžné použití potvrdí přenos pravidla, není další práce v tom, že pravidlo ještě chvíli sledujete. Další práce je v tom, že ho opravdu vrátíte do domluveného ročního rytmu. To zní banálně, ale právě tady týmy často zakopnou: pravidlo je potvrzené, ale někdo nechá v provozu pomocnou tabulku, připomínku, zvláštní kontrolu nebo ruční značku "jen kdyby se to ještě hodilo". A najednou se z dobře uzavřené smyčky stane tiché dlouhodobé hlídání.
+
+Převod do ročního rytmu má proto jeden cíl: odstranit mimořádnou péči a ponechat jen kanonické pravidlo, návratový signál a běžné pracovní místo. Všechno ostatní musí mít důvod, jinak mizí. Ne jako dramatické mazání historie, ale jako obyčejný úklid po dokončené práci. Ano, méně efektní než nový dashboard. Taky mnohem užitečnější.
+
+Začněte větou:
+
+```text
+Potvrzené pravidlo vracíme do ročního rytmu, protože:
+```
+
+Příklad:
+
+```text
+Potvrzené pravidlo vracíme do ročního rytmu, protože:
+Druhé běžné použití ukázalo, že pracovní větu u potvrzovací šablony použije i jiný člověk bez pomoci a bez nové datové evidence.
+```
+
+Do té věty nepatří naděje, že "už to snad bude fungovat". Patří tam konkrétní důkaz z druhého použití: kdo pravidlo použil, kde ho našel, jak rozhodl a jaká datová stopa nevznikla. Bez toho nejde o převod do rytmu, ale o odložení tématu s dobrým pocitem.
+
+### Co v ročním rytmu zůstává
+
+Po převodu mají zůstat jen tři věci:
+
+- kanonická pracovní věta u místa, kde se pravidlo používá,
+- návratový signál pro skutečné znovuotevření,
+- roční připomenutí, které kontroluje existenci pravidla, ne každé jeho použití.
+
+Kanonická pracovní věta musí být v přítomném čase. Ne "po posledním ověření jsme se rozhodli", ale "u relevantní poptávky bez rozpočtu lze poslat volitelnou otázku v potvrzovacím e-mailu; formulář se nemění". Historie patří do záznamu, běžná práce potřebuje instrukci.
+
+Návratový signál musí být ostřejší než běžné tření. Pokud se někdo jednou zeptá, kde věta je, není to ještě návrat. Pokud tři relevantní poptávky za sebou nejdou kvalifikovat bez ručního doptání navzdory šabloně, to už návrat být může. Signál má chránit tým před dvěma chybami najednou: před ignorováním skutečného problému i před otevíráním práce z neklidu.
+
+Roční připomenutí se má ptát jen na stabilitu. Po roce stačí zjistit, jestli pravidlo pořád odpovídá nabídce, kanálu, datové stopě a pracovnímu místu. Nemá znovu měřit každé použití. Pokud roční připomenutí začne připomínat audit procesu, je moc široké.
+
+### Co po převodu mizí
+
+Po potvrzeném druhém použití zavřete všechno, co vzniklo jen kvůli mimořádnému ověření:
+
+- pomocné poznámky s konkrétními zákaznickými odpověďmi,
+- ruční značky, že pravidlo bylo použito,
+- dočasné tabulky použití,
+- připomínky na další mimořádné sledování,
+- kopie e-mailů nebo screenshoty uložené mimo běžné pracovní místo,
+- staré varianty věty, které by mohly mást dalšího člověka.
+
+Nejde o úklid pro krásu. Každá z těchto stop může za pár měsíců působit jako platný proces. Někdo najde tabulku a začne ji doplňovat. Někdo uvidí starou připomínku a otevře review bez nové otázky. Někdo zkopíruje starou formulaci a vrátí do hry původní široký návrh. Provoz se málokdy rozbije jedním velkým špatným rozhodnutím. Často se jen postupně zanese věcmi, které nikdo po dokončení nezavřel.
+
+Praktická úklidová věta:
+
+```text
+Po převodu do ročního rytmu rušíme mimořádné sledování a necháváme jen pracovní větu, návratový signál a roční kontrolu stability.
+```
+
+Tahle věta je užitečná hlavně pro privacy-first provoz. Říká, že poznatek zůstává, ale pomocná data se nestávají novým zvykem.
+
+### Praktický příklad
+
+Potvrzené druhé použití:
+
+```text
+Výsledek:
+Další člověk použil větu u potvrzovací šablony bez pomoci, poslal volitelnou otázku na rozpočet a neotevřel formulář.
+
+Datová stopa:
+Nevznikl CRM atribut, scoring ani tabulka použití otázky.
+```
+
+Převod do ročního rytmu:
+
+```text
+Kanonická pracovní věta:
+U relevantní poptávky bez rozpočtu lze poslat volitelnou otázku v potvrzovacím e-mailu, pokud bez rozpočtu nejde navrhnout další krok; formulář se nemění.
+
+Návratový signál:
+K tématu se vrátíme pouze pokud tři relevantní poptávky za sebou nepůjdou kvalifikovat ani po použití volitelné otázky.
+
+Roční připomenutí:
+Jednou ročně ověřit, zda věta pořád sedí k nabídce, šabloně a datové stopě.
+
+Úklid:
+Mažeme pomocnou poznámku z druhého použití a rušíme dočasnou připomínku na další kontrolu.
+```
+
+Slabší převod:
+
+```text
+Problém:
+Pravidlo je potvrzené, ale pomocná tabulka použití otázky zůstala v týmu.
+
+Riziko:
+Tabulka začne působit jako trvalá evidence rozpočtových dotazů.
+
+Oprava:
+Tabulku mažeme nebo převádíme na anonymizovanou uzavírací poznámku. Do běžného provozu se nepřidává žádný nový sledovaný údaj.
+```
+
+V obou příkladech je důležitá hranice: roční rytmus není pomalé průběžné sledování. Je to řídké připomenutí, že pravidlo má pořád smysl. Když nemáte nový návratový signál, mezi připomenutími se k tématu nevracíte.
+
+### Privacy-first převod
+
+Převod do ročního rytmu je dobrý okamžik pro datovou dietu. Neřešte jen formální osobní údaje. Hledejte i pracovní stopy, které by v součtu mohly vytvořit zbytečný profil zákazníka, obchodní situace nebo interního výkonu.
+
+Vyplňte tři řádky:
+
+```text
+Poznatek ponecháváme jako:
+
+Konkrétní provozní stopy mažeme nebo zobecňujeme:
+
+Do ročního rytmu nepřenášíme:
+```
+
+Příklad:
+
+```text
+Poznatek ponecháváme jako:
+Jednu pracovní větu u potvrzovací šablony.
+
+Konkrétní provozní stopy mažeme nebo zobecňujeme:
+Pomocné poznámky s obsahem zákaznických odpovědí a seznam použití otázky.
+
+Do ročního rytmu nepřenášíme:
+Počítání rozpočtových dotazů, ruční štítky leadů ani samostatný export odpovědí.
+```
+
+Codyho komentář: dobrý privacy-first systém se pozná podle toho, že po ověření umí zmenšit stopu. Ne jen "nepřidat tracker", ale taky uklidit malé provozní drobky, které by jinak za rok začaly vypadat jako záměrná analytika. Datová střídmost není póza. Je to schopnost nezanechat po každém dobrém rozhodnutí malý nepořádek.
+
+### Karta převodu do ročního rytmu
+
+```text
+Pravidlo nebo pracovní místo:
+
+Důkaz z druhého běžného použití:
+
+Kanonická pracovní věta:
+
+Kde věta žije:
+
+Návratový signál:
+
+Roční připomenutí kontroluje:
+- platnost pravidla vůči nabídce
+- platnost vůči pracovnímu místu
+- platnost vůči datové stopě
+- vlastníka pravidla
+
+Mimořádné kontroly, které rušíme:
+
+Pomocné stopy, které mažeme nebo zobecňujeme:
+
+Co výslovně nepřenášíme do ročního rytmu:
+
+Vlastník:
+
+Datum dalšího ročního připomenutí:
+```
+
+Karta má být krátká, protože převod do rytmu není nová analýza. Pokud do ní potřebujete psát dlouhý příběh, nejspíš pravidlo ještě není potvrzené nebo se do převodu dostal nový kontext.
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: přečtěte uzavírací větu druhého použití.
+2. Minuta 2: přepište pravidlo do jedné pracovní věty v přítomném čase.
+3. Minuta 3: zkontrolujte, kde věta žije.
+4. Minuta 4: napište návratový signál.
+5. Minuta 5: určete, co bude kontrolovat roční připomenutí.
+6. Minuta 6: smažte nebo zobecněte pomocné stopy.
+7. Minuta 7: zapište vlastníka a datum dalšího ročního připomenutí.
+
+Pokud v minutě 4 neumíte napsat návratový signál, nepouštějte pravidlo do ročního rytmu. Bez signálu totiž nevíte, kdy se k němu vrátit. A když nevíte, kdy se k němu vrátit, vrátíte se k němu buď nikdy, nebo pořád. Ani jedna varianta není řízení.
+
+### Checklist převodu
+
+- Je druhé běžné použití opravdu uzavřené?
+- Máme konkrétní důkaz přenosu, ne jen dobrý pocit?
+- Je pravidlo přepsané do jedné pracovní věty v přítomném čase?
+- Žije věta u skutečného pracovního místa?
+- Je návratový signál konkrétní a rozpoznatelný?
+- Je jasné, co přesně bude kontrolovat roční připomenutí?
+- Zrušili jsme mimořádné kontroly, které už nemají otázku?
+- Smazali nebo zobecnili jsme pomocné poznámky, kopie, screenshoty, tabulky a ruční značky?
+- Nepřenášíme do ročního rytmu nové měření jen proto, že bylo užitečné při ověření?
+- Je vlastník pravidla jasný i bez původní debaty?
+- Ví další člověk, co dělat mezi ročními připomenutími?
+
+Převod potvrzeného pravidla do ročního rytmu je práce na klidu systému. Uzavírá mimořádnou péči, ponechává použitelnou větu a chrání tým před tím, aby si z ověření udělal další proces. Když se to povede, pravidlo není slavně dokončené. Je normálně použitelné. To je lepší výsledek.
+
 ## Pracovní log
 
+- 2026-07-01: Doplněna úvodní podkapitola o převodu potvrzeného pravidla zpět do ročního rytmu: kanonická pracovní věta, návratový signál, úklid mimořádné péče, privacy-first datová dieta, karta, mini workshop a checklist.
 - 2026-07-01: Doplněna úvodní podkapitola o uzavření druhého běžného použití po uzavřeném prvním použití: čtyři uzavírací stavy, praktické příklady, privacy-first úklid datové stopy, karta, mini workshop a checklist.
 - 2026-07-01: Doplněna úvodní podkapitola o druhém běžném použití po uzavřeném prvním použití: kdy ho otevírat, tři otázky přenositelnosti, čtyři výsledky, praktické příklady, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-07-01: Doplněna úvodní podkapitola o uzavření prvního běžného použití po ročním připomenutí: čtyři uzavírací stavy, praktické příklady, úklid dočasných stop, privacy-first uzavření, karta, mini workshop a checklist.
