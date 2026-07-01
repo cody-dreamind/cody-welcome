@@ -279883,8 +279883,174 @@ Pokud v minutě 4 neumíte napsat návratový signál, nepouštějte pravidlo do
 
 Převod potvrzeného pravidla do ročního rytmu je práce na klidu systému. Uzavírá mimořádnou péči, ponechává použitelnou větu a chrání tým před tím, aby si z ověření udělal další proces. Když se to povede, pravidlo není slavně dokončené. Je normálně použitelné. To je lepší výsledek.
 
+## První roční kontrola po návratu pravidla do ročního rytmu
+
+První roční kontrola po návratu pravidla do ročního rytmu není výroční audit celého procesu. Je to krátká kontrola, jestli pravidlo pořád sedí k práci, kvůli které vzniklo. Pokud se z ní stane velká revize nabídky, formulářů, CRM, obchodního procesu a marketingových textů, rytmus se rozpadl. Roční připomenutí má být řídké a přesné, ne slavnostní záminka otevřít všechno, co se za rok nastřádalo.
+
+Začněte jednou větou:
+
+```text
+První roční kontrolu otevíráme pouze proto, abychom ověřili:
+```
+
+Příklad:
+
+```text
+První roční kontrolu otevíráme pouze proto, abychom ověřili:
+Jestli pracovní věta u potvrzovací šablony pořád odpovídá nabídce, rozhodování obchodníka a datové stopě poptávkového procesu.
+```
+
+Tahle věta je důležitější, než vypadá. Chrání kontrolu před rozšiřováním. Roční rytmus nemá znovu dokazovat, že kdysi zvolená cesta byla chytrá. Má ověřit, jestli je pořád použitelná v dnešním provozu.
+
+### Tři kontroly ročního připomenutí
+
+První roční kontrola potřebuje jen tři pohledy:
+
+- pracovní platnost: pravidlo pořád odpovídá tomu, jak tým skutečně pracuje,
+- obchodní platnost: pravidlo pořád odpovídá nabídce, segmentu a očekávání zákazníka,
+- datová platnost: pravidlo nevytvořilo skrytou evidenci, kterou původní rozhodnutí nechtělo.
+
+Pracovní platnost ověřte u místa, kde pravidlo žije. Ne ve starém záznamu, ne v dlouhém dokumentu, ne ve vzpomínce člověka, který ho psal. Pokud jde o větu u potvrzovací šablony, otevřete šablonu. Pokud jde o obchodní checklist, otevřete checklist. Roční kontrola má jít do práce, ne do archivu.
+
+Obchodní platnost znamená, že pravidlo pořád pomáhá dnešnímu typu poptávek. Pokud se za rok změnila nabídka, cílový segment nebo kvalifikační proces, pravidlo může být stále správné, ale potřebuje přepsat jazyk. To není selhání. Selhání by bylo používat starou větu jen proto, že má hezkou historii.
+
+Datová platnost je privacy-first jádro kontroly. Zeptejte se, jestli kolem pravidla nevznikla pomocná evidence: nový sloupec, CRM atribut, ruční štítek, kopie e-mailů, poznámky se zákaznickými údaji nebo přehled použití. Pokud ano, roční kontrola má nejdřív rozhodnout, jestli evidence má účel, vlastníka a retenci. Pokud ne, smažte ji nebo zobecněte.
+
+### Čtyři výsledky první roční kontroly
+
+Po kontrole vyberte jeden ze čtyř stavů:
+
+- Potvrdit beze změny: pravidlo je najitelné, použitelné a datová stopa zůstala malá.
+- Přepsat pracovní větu: pravidlo platí, ale jeho formulace už neodpovídá dnešní práci.
+- Uklidit skrytou evidenci: pravidlo platí, ale kolem něj vznikly zbytečné provozní stopy.
+- Otevřít nový návratový signál: kontrola ukázala skutečný problém, který se nevejde do roční údržby.
+
+Potvrdit beze změny je plnohodnotný výsledek. Neznamená to, že kontrola byla zbytečná. Znamená to, že pravidlo přežilo rok běžného provozu a není třeba ho odměňovat dalším procesem. Zapište jednu větu a zavřete kontrolu.
+
+Přepsat pracovní větu dává smysl, když se změnil jazyk nabídky nebo běžný postup, ale princip zůstává. Třeba místo "relevantní poptávka" dnes tým používá "kvalifikovaná poptávka". Opravte slova u pracovního místa a nechte historii v záznamu. Nemusíte kvůli tomu znovu otevírat původní debatu.
+
+Uklidit skrytou evidenci je nejčastější privacy-first zásah. Pravidlo může fungovat dobře, ale někdo si mezitím založil pomocnou tabulku, protože "se to hodilo". Pokud tabulka nepodporuje konkrétní rozhodnutí, nemá v provozu co dělat. Poznatek ponechte, stopu zmenšete.
+
+Otevřít nový návratový signál je nejvzácnější stav. Použijte ho jen tehdy, když kontrola ukáže opakovaný problém, ne jen drobnou nejasnost. Pokud například tři poslední kvalifikované poptávky nešly posunout ani po volitelné otázce v e-mailu, je to signál. Pokud se jeden člověk ptal, kde věta leží, je to lokální úprava najitelnosti.
+
+### Praktický příklad
+
+Původní pravidlo:
+
+```text
+U relevantní poptávky bez rozpočtu lze poslat volitelnou otázku v potvrzovacím e-mailu, pokud bez rozpočtu nejde navrhnout další krok; formulář se nemění.
+```
+
+Roční kontrola:
+
+```text
+Pracovní platnost:
+Věta je pořád u potvrzovací šablony a obchod ji umí použít bez vysvětlování.
+
+Obchodní platnost:
+Nabídka se změnila z jednorázových MVP na průběžný vývoj, takže slovo "rozpočet" doplňujeme o "měsíční rozhodovací rámec".
+
+Datová platnost:
+Nevznikl CRM atribut ani scoring. Našli jsme ale pomocnou poznámku se dvěma starými příklady odpovědí.
+```
+
+Výsledek:
+
+```text
+Stav:
+Přepsat pracovní větu a uklidit skrytou evidenci.
+
+Nová pracovní věta:
+U kvalifikované poptávky bez rozpočtu nebo měsíčního rozhodovacího rámce lze poslat volitelnou otázku v potvrzovacím e-mailu, pokud bez této informace nejde navrhnout další krok; formulář se nemění.
+
+Privacy-first úklid:
+Staré konkrétní příklady odpovědí mažeme a ponecháváme jen zobecněnou poznámku, že volitelná otázka stačí řešit v e-mailovém vlákně.
+```
+
+Všimněte si hranice. Kontrola upravila jazyk a uklidila stopu, ale neotevřela formulář, scoring ani nový export. Roční připomenutí splnilo přesně to, co mělo: udrželo pravidlo použitelné a provoz datově štíhlý.
+
+Slabší výsledek by vypadal takto:
+
+```text
+Kontrola ukázala, že rozpočty řešíme častěji, proto navrhujeme přidat pole do formuláře a měřit odpovědi.
+```
+
+Tady chybí návratový signál, hranice i privacy-first otázka. Možná existuje skutečný problém, ale roční kontrola ho nesmí proměnit ve velkou změnu bez důkazu. Správnější věta je:
+
+```text
+Roční kontrola sama o sobě neotevírá formulář. Pokud se potvrdí, že tři kvalifikované poptávky za sebou nejdou posunout ani po volitelné otázce, otevřeme nový malý návratový krok.
+```
+
+Codyho komentář: roční kontrola je jako servisní prohlídka kola. Když najdete povolený šroub, dotáhnete šroub. Nekoupíte automaticky nový vůz, garáž a měsíční předplatné na palubní telemetrii. Ano, analogie kulhá, ale účet za zbytečná data kulhá taky.
+
+### Karta první roční kontroly
+
+```text
+Pravidlo nebo pracovní místo:
+
+Kde pravidlo žije:
+
+Původní návratový signál:
+
+Co roční kontrola ověřuje:
+- pracovní platnost
+- obchodní platnost
+- datovou platnost
+
+Co se za rok změnilo v nabídce, segmentu nebo pracovním místě:
+
+Je pravidlo najitelné bez původní historie?
+
+Je pracovní věta pořád rozhodnutelná?
+
+Vznikla skrytá evidence, ruční značka, pomocná tabulka nebo nový atribut?
+
+Výsledek kontroly:
+- potvrdit beze změny
+- přepsat pracovní větu
+- uklidit skrytou evidenci
+- otevřít nový návratový signál
+
+Co zůstává výslovně zavřené:
+
+Jakou datovou stopu mažeme, zobecňujeme nebo nepřenášíme dál:
+
+Vlastník:
+
+Další roční připomenutí:
+```
+
+Karta má být krátká. Pokud se rozroste, nejspíš do ní píšete nový projekt. V takové chvíli ji rozdělte: roční kontrolu uzavřete a nový problém otevřete jen s vlastním návratovým signálem.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: otevřete pravidlo u skutečného pracovního místa.
+2. Minuta 2: ověřte, jestli je věta najitelná a použitelná bez původní historie.
+3. Minuta 3: napište, co se za rok změnilo v nabídce nebo segmentu.
+4. Minuta 4: hledejte skrytou evidenci a pomocné provozní stopy.
+5. Minuta 5: vyberte jeden hlavní výsledek kontroly.
+6. Minuta 6: zapište, co zůstává zavřené a kdy přijde další roční připomenutí.
+
+Pokud v minutě 5 vyberete dva výsledky, určete primární. Například "přepsat pracovní větu" může jít spolu s malým privacy-first úklidem, ale pořád musí být jasné, co je hlavní uzavření kontroly. Bez toho se z krátkého připomenutí stane směs drobných úkolů.
+
+### Checklist první roční kontroly
+
+- Otevřeli jsme pravidlo u pracovního místa, ne jen ve starém záznamu?
+- Je jasné, co roční kontrola ověřuje a co neotevírá?
+- Odpovídá pracovní věta dnešní nabídce, segmentu a slovníku týmu?
+- Umí ji použít člověk bez původní debaty?
+- Zkontrolovali jsme skryté evidence, tabulky, CRM atributy, štítky, kopie a poznámky?
+- Pokud vznikla zbytečná datová stopa, máme rozhodnutí o smazání nebo zobecnění?
+- Vybrali jsme jeden hlavní výsledek kontroly?
+- Je napsané, co zůstává výslovně zavřené?
+- Pokud otevíráme nový návratový signál, je konkrétní a opakovatelný?
+- Má pravidlo vlastníka a další roční připomenutí?
+
+První roční kontrola po návratu pravidla do ročního rytmu má potvrdit, že klid systému není zanedbání. Dobré pravidlo nepotřebuje neustálou pozornost. Potřebuje být najitelné, srozumitelné, datově střídmé a občas ověřené proti realitě. Když to splní, zavřete kontrolu a nechte tým pracovat.
+
 ## Pracovní log
 
+- 2026-07-01: Doplněna úvodní podkapitola o první roční kontrole po návratu pravidla do ročního rytmu: pracovní, obchodní a datová platnost, výsledkové stavy, praktický příklad, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-07-01: Doplněna úvodní podkapitola o převodu potvrzeného pravidla zpět do ročního rytmu: kanonická pracovní věta, návratový signál, úklid mimořádné péče, privacy-first datová dieta, karta, mini workshop a checklist.
 - 2026-07-01: Doplněna úvodní podkapitola o uzavření druhého běžného použití po uzavřeném prvním použití: čtyři uzavírací stavy, praktické příklady, privacy-first úklid datové stopy, karta, mini workshop a checklist.
 - 2026-07-01: Doplněna úvodní podkapitola o druhém běžném použití po uzavřeném prvním použití: kdy ho otevírat, tři otázky přenositelnosti, čtyři výsledky, praktické příklady, privacy-first kontrola, karta, mini workshop a checklist.
