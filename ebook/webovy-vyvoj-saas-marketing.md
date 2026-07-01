@@ -278859,8 +278859,201 @@ Pokud se v minutě 4 neumíte shodnout, co se neotevírá, ještě nemáte uzav�
 
 Uzavření prvního ročního připomenutí má tým vrátit do běžné práce. Když pravidlo obstálo, nepotřebuje potlesk, jen správné datum a uklizené stopy. Když potřebuje drobnou opravu, zaslouží si přesné pracovní místo. Když se změnil kontext, dostane novou kartu. A když skončilo, má zmizet ze systému tak čistě, aby ho nikdo omylem nepoužil v dalším kole.
 
+## První běžné použití po uzavřeném ročním připomenutí
+
+Roční připomenutí je kontrola. První běžné použití po něm je zkouška, jestli kontrola opravdu vrátila pravidlo do práce. Po roce se totiž může stát zvláštní věc: tým pravidlo formálně potvrdí, uklidí staré stopy, nastaví další datum a pak při prvním normálním použití zjistí, že člověk stejně neví, kde pravidlo najít nebo jak ho použít bez historického výkladu.
+
+To není důvod znovu otevřít celé roční připomenutí. Je to důvod udělat malou kontrolu prvního použití. Ne kvůli auditu, ale kvůli přenosu do reality. Pravidlo, které přežilo roční připomenutí, nemá žít jen v kartě. Má být použitelné v e-mailu, formuláři, obchodní šabloně, onboardingovém kroku, supportním postupu nebo jiném místě, kde se opravdu rozhoduje.
+
+Začněte větou:
+
+```text
+Po uzavřeném ročním připomenutí používáme pravidlo v této běžné situaci:
+```
+
+Nepopisujte téma obecně. Popište konkrétní okamžik:
+
+```text
+Po uzavřeném ročním připomenutí používáme pravidlo v této běžné situaci:
+Nový obchodník zpracovává relevantní poptávku bez rozpočtu a rozhoduje, jestli poslat volitelnou otázku v potvrzovacím e-mailu.
+```
+
+Tím se ověření drží při zemi. Neřešíte znovu strategii kvalifikace leadů. Neřešíte, jestli má formulář sbírat více údajů. Jen sledujete, zda pravidlo obstojí ve chvíli, kdy ho má použít člověk bez čerstvé paměti z roční kontroly.
+
+### Tři otázky prvního použití
+
+Při prvním běžném použití po ročním připomenutí stačí tři otázky:
+
+- Našel člověk pravidlo tam, kde pracoval?
+- Šlo podle pravidla rozhodnout bez dodatečného vysvětlování?
+- Nevznikla nová datová stopa, kterou roční připomenutí neplánovalo?
+
+První otázka je o umístění. Pokud je pravidlo potvrzené v kanonické kartě, ale člověk pracuje v e-mailové šabloně, potřebuje tam aspoň jasnou pracovní větu nebo odkaz. Jinak bude pravidlo formálně existovat a prakticky chybět.
+
+Druhá otázka je o ostrosti. Věta "rozpočet řešíme citlivě" je pěkná nálada, ale slabé pravidlo. Věta "u relevantní poptávky bez rozpočtu lze poslat volitelnou otázku v potvrzovacím e-mailu; formulář se nemění" už vede k rozhodnutí.
+
+Třetí otázka je privacy-first brzda. Po ročním připomenutí bývá lákavé vytvořit malou pomocnou evidenci, aby se "příště lépe vědělo". Pokud evidence nepodporuje konkrétní rozhodnutí, nevzniká. První běžné použití nemá být začátek nového sledování.
+
+### Čtyři výsledky prvního použití
+
+Po prvním použití vyberte jeden ze čtyř výsledků:
+
+- Funguje beze změny: pravidlo bylo najitelné, použitelné a datová stopa zůstala čistá.
+- Doplnit pracovní kotvu: pravidlo platí, ale nebylo u místa, kde člověk pracoval.
+- Zpřesnit pracovní větu: pravidlo bylo najitelné, ale nešlo podle něj rozhodnout dost jistě.
+- Otevřít nové úzké rozhodnutí: běžné použití ukázalo změnu kontextu, která už nepatří do starého pravidla.
+
+Stav `funguje beze změny` je nejlepší a nejkratší. Zapište jednu větu a nechte pravidlo být. Úspěšné první použití není pozvánka k další optimalizaci. Je to důvod nepřidávat práci.
+
+Stav `doplnit pracovní kotvu` znamená, že pravidlo je správné, ale leží moc daleko od práce. Oprava má být malá: odkaz u šablony, jedna věta v checklistu, krátká poznámka u formuláře. Nevyrábějte nový proces, když chybí jen směrovka.
+
+Stav `zpřesnit pracovní větu` použijte, když člověk pravidlo našel, ale musel hádat. Přepište větu do rozhodovací podoby: kdy pravidlo použít, co udělat a co neotevírat. Historii nechte v kartě. Pracovní místo potřebuje instrukci, ne román.
+
+Stav `otevřít nové úzké rozhodnutí` patří situaci, kdy první použití ukáže, že se po roce změnil segment, nabídka, formulář, kanál nebo vlastník. Nelepte to na staré pravidlo. Uzavřené roční připomenutí zůstává uzavřené a nová otázka dostane vlastní malou kartu.
+
+### Praktický příklad
+
+Roční připomenutí potvrdilo pravidlo:
+
+```text
+U relevantní poptávky bez rozpočtu se nepřidává povinné pole do formuláře. Obchod může poslat volitelnou otázku v potvrzovacím e-mailu, pokud bez ní nejde navrhnout další krok.
+```
+
+První běžné použití:
+
+```text
+Situace:
+Nový obchodník zpracoval relevantní poptávku bez rozpočtu.
+
+Použití:
+Našel větu u potvrzovací šablony, poslal volitelnou otázku a neotevřel změnu formuláře.
+
+Výsledek:
+Zákazník odpověděl rámcovým limitem v běžném e-mailovém vlákně. Nevznikl CRM atribut, export ani nový scoring.
+
+Závěr:
+Pravidlo funguje beze změny. Další roční připomenutí zůstává podle původního rytmu.
+```
+
+Slabší varianta:
+
+```text
+Situace:
+Nový obchodník pravidlo našel v kanonické kartě, ale ne u e-mailové šablony.
+
+Výsledek:
+Musel se doptat původního vlastníka, jestli otázku může použít.
+
+Závěr:
+Doplnit pracovní kotvu. Ke šabloně přidáváme jednu větu a odkaz na kanonické pravidlo.
+
+Co neotevíráme:
+Nový formulář, novou kvalifikační tabulku ani měření použití otázky.
+```
+
+V obou příkladech se pracuje s nejbližším místem. První použití po ročním připomenutí nemá znovu prověřovat celý systém. Má jen potvrdit, že roční závěr opravdu přešel zpět do normální práce.
+
+### Privacy-first kontrola
+
+Po prvním použití zkontrolujte, jestli nevznikla nová stopa jen proto, že si tým chtěl použití zapamatovat. Typicky jde o pomocnou tabulku, kopii zákaznické odpovědi, ruční štítek, screenshot nebo poznámku s obchodním detailem.
+
+Použijte tři řádky:
+
+```text
+Pro běžnou práci stačí:
+
+Nepřenášíme dál:
+
+Nově nesbíráme:
+```
+
+Příklad:
+
+```text
+Pro běžnou práci stačí:
+Zobecněná věta u šablony, kdy poslat volitelnou otázku.
+
+Nepřenášíme dál:
+Konkrétní částku ze zákaznické odpovědi do interní poznámky.
+
+Nově nesbíráme:
+Rozpočet jako povinné formulářové pole, CRM atribut, scoring ani export poptávek.
+```
+
+Tohle je praktický rozdíl mezi učením a hromaděním dat. Tým si nechá pravidlo, ale netahá s sebou detaily, které už nejsou potřeba pro rozhodnutí. Privacy-first provoz se často udrží právě takhle: ne velkým gestem, ale stovkou malých odmítnutí zbytečné evidence.
+
+### Karta prvního běžného použití po ročním připomenutí
+
+```text
+Pravidlo nebo pracovní místo:
+
+Datum posledního ročního připomenutí:
+
+Běžná situace použití:
+
+Kde měl člověk pravidlo najít:
+
+Našel ho bez pomoci?
+- ano
+- ne
+- jen s pomocí
+
+Šlo podle pravidla rozhodnout?
+- ano
+- ne, chyběla pracovní kotva
+- ne, věta byla nejasná
+- ne, změnil se kontext
+
+Co se opravdu stalo:
+
+Výsledek:
+- funguje beze změny
+- doplnit pracovní kotvu
+- zpřesnit pracovní větu
+- otevřít nové úzké rozhodnutí
+
+Co se výslovně neotevírá:
+
+Privacy-first kontrola:
+Pro běžnou práci stačí:
+Nepřenášíme dál:
+Nově nesbíráme:
+
+Další rytmus:
+
+Vlastník:
+```
+
+Karta má být krátká. Pokud ji člověk vyplňuje déle než samotné použití pravidla, je moc těžká. První běžné použití má být lehká kontrola přenosu, ne nový kontrolní režim.
+
+### Mini workshop na 5 minut
+
+1. Minuta 1: pojmenujte běžnou situaci použití.
+2. Minuta 2: ověřte, kde bylo pravidlo najitelné.
+3. Minuta 3: řekněte, jestli podle něj šlo rozhodnout bez původní historie.
+4. Minuta 4: zkontrolujte novou nebo skrytou datovou stopu.
+5. Minuta 5: vyberte výsledek a případnou lokální opravu.
+
+Pokud se během pěti minut objeví větší problém, nezvětšujte workshop. Zapište nové úzké rozhodnutí a první použití uzavřete. Staré pravidlo nemá být nádoba na všechno, co se po roce ukáže.
+
+### Checklist prvního použití po ročním připomenutí
+
+- Je popsaná konkrétní běžná situace?
+- Bylo pravidlo dostupné u místa, kde člověk pracoval?
+- Šlo podle něj rozhodnout bez vysvětlování původního vlastníka?
+- Zůstalo jasné, co se výslovně neotevírá?
+- Nevznikla nová pomocná evidence jen kvůli budoucímu klidu?
+- Pokud vznikla datová stopa, má jasný účel a konec?
+- Je případná oprava lokální: kotva, věta nebo odkaz?
+- Pokud se změnil kontext, má nové téma vlastní úzkou kartu?
+- Zůstává roční rytmus přiměřený výsledku prvního použití?
+- Umí další člověk pravidlo použít bez čtení celé historie?
+
+První běžné použití po ročním připomenutí je malá provozní pojistka. Potvrzuje, že roční kontrola nebyla jen dobře vyplněná karta, ale že pravidlo dál žije tam, kde má. Když funguje, nechte ho být. Když drhne, opravte nejbližší větu. A když se změnil kontext, otevřete novou malou otázku místo toho, abyste staré pravidlo natahovali přes novou realitu.
+
 ## Pracovní log
 
+- 2026-07-01: Doplněna úvodní podkapitola o prvním běžném použití po uzavřeném ročním připomenutí: kontrola najitelnosti pravidla, rozhodovací věty, privacy-first datové stopy, karta, mini workshop a checklist.
 - 2026-07-01: Doplněna úvodní podkapitola o uzavření prvního ročního připomenutí po zředění rytmu: uzavírací stavy, praktické příklady, hranice neotevírané práce, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-07-01: Doplněna úvodní podkapitola o prvním ročním připomenutí po zředění rytmu: tři kontroly, praktické příklady, čtyři výsledky, privacy-first pravidla, karta, mini workshop a checklist.
 - 2026-07-01: Doplněna úvodní podkapitola o převodu potvrzeného pololetního rytmu do ročního připomenutí: podmínky zředění, praktické příklady, hranice ročního připomenutí, privacy-first datové minimum, karta, mini workshop a checklist.
