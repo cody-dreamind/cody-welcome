@@ -279492,8 +279492,212 @@ Pokud se v minutě 4 ukáže nový kontext, nezvětšujte workshop. Staré pravi
 
 Druhé běžné použití je test přenositelnosti, ne další kolo dokazování. Když pravidlo zvládne další člověk, u skutečného pracovního místa a bez nové datové vrstvy, má se vrátit do klidu. Když nezvládne, opravte nejbližší větu nebo oddělte nový kontext. A hlavně z úspěchu nevyrábějte proces. To je jeden z těch nudných návyků, které šetří víc práce než deset efektních optimalizací.
 
+## Uzavření druhého běžného použití po uzavřeném prvním použití
+
+Druhé běžné použití má smysl jen tehdy, když po něm něco uzavřete. Jinak se z něj stane další průběžná kontrola, která sice vypadá pečlivě, ale nevrací pravidlo do normální práce. Uzavření druhého použití proto není slavnostní zápis do kroniky. Je to rozhodnutí, jestli pravidlo už unese běžný provoz, potřebuje poslední lokální opravu, nebo se ukázalo, že starý závěr nebyl přenosný.
+
+Začněte větou:
+
+```text
+Druhé běžné použití uzavíráme takto:
+```
+
+Do věty patří výsledek, další rytmus a datová hranice:
+
+```text
+Druhé běžné použití uzavíráme takto:
+Pravidlo použil další člověk bez pomoci, věta u šablony stačila k rozhodnutí, formulář se nemění a pomocnou poznámku z ověření mažeme; pravidlo se vrací do ročního připomenutí.
+```
+
+Tahle věta je krátká, ale dělá hodně práce. Říká, že přenos proběhl. Říká, že není potřeba třetí mimořádná kontrola. Říká, co se neotevírá. A hlavně říká, že po ověření nezůstává nová datová stopa jen proto, že se někomu hodila při uzavírání.
+
+Codyho komentář: u druhého použití je největší pokušení udělat "ještě jedno malé sledování". To je přesně ten moment, kdy produktivita obleče reflexní vestu a začne řídit provoz na prázdné silnici. Pokud druhé použití odpovědělo na otázku, zavřete ho. Další kontrola bez nové otázky není opatrnost, ale zvyk.
+
+### Čtyři uzavírací stavy
+
+Po druhém použití vyberte jeden ze čtyř stavů:
+
+- Vrátit do běžného rytmu: přenos je potvrzený, pravidlo je najitelné a datová stopa se nerozšířila.
+- Dovřít poslední lokální opravu: pravidlo fungovalo, ale je potřeba opravit jednu větu, název, odkaz nebo umístění.
+- Přepsat pracovní místo: přenos je slabý, protože pravidlo nebylo použitelné bez vysvětlení.
+- Oddělit nový kontext: druhé použití ukázalo situaci, která už nepatří pod původní pravidlo.
+
+Stav `vrátit do běžného rytmu` je nejčistší konec. Zapište jednu uzavírací větu, smažte pomocné stopy a nechte pravidlo žít v domluveném rytmu. Nepřidávejte další mezikrok, pokud nemáte nový návratový signál.
+
+Stav `dovřít poslední lokální opravu` použijte jen pro drobnost, která nevyžaduje nové ověření celého pravidla. Pokud přesunete větu z interních poznámek přímo k šabloně, stačí při příštím běžném použití vnímat, jestli tam nepřekáží. Nezakládejte kvůli tomu nový review režim.
+
+Stav `přepsat pracovní místo` je tvrdší závěr. Znamená, že problém není v člověku, který pravidlo nepoužil, ale v místě, kde mělo pravidlo pomoci. Přepište instrukci, příklad, pořadí kroků nebo rozhodovací hranici. Pokud pravidlo potřebuje školení pokaždé, když ho použije někdo nový, není to pravidlo. Je to ústní tradice s pěkným názvem.
+
+Stav `oddělit nový kontext` držte stranou. Jestli druhé použití otevřelo jiný segment, jiný typ poptávky, jiný kanál nebo jiný datový tok, nelepte ho na staré uzavření. Staré pravidlo uzavřete podle toho, co o něm víte, a nové téma založte jako samostatnou otázku.
+
+### Praktický příklad uzavření
+
+Druhé běžné použití:
+
+```text
+Situace:
+Nový obchodník použil potvrzovací šablonu u relevantní poptávky bez rozpočtu.
+
+Výsledek:
+Našel pracovní větu u šablony, poslal volitelnou otázku a neotevřel změnu formuláře.
+
+Datová stopa:
+Nevznikl nový CRM atribut, tabulka použití otázky ani export odpovědí.
+```
+
+Uzavření:
+
+```text
+Stav:
+Vrátit do běžného rytmu.
+
+Uzavírací věta:
+Druhé běžné použití potvrdilo přenos pravidla: volitelná otázka u potvrzovací šablony stačí i bez původního vlastníka, formulář se nemění a pravidlo se vrací do ročního připomenutí.
+
+Co mažeme nebo zobecňujeme:
+Pomocnou poznámku s konkrétním obsahem zákaznické odpovědi.
+
+Co dál nesledujeme:
+Počet použití rozpočtové otázky, konkrétní rozpočty mimo běžné obchodní vlákno ani ruční štítek v CRM.
+```
+
+Varianta s poslední lokální opravou:
+
+```text
+Stav:
+Dovřít poslední lokální opravu.
+
+Výsledek druhého použití:
+Člověk pravidlo našel, ale až po otevření staré poznámky, protože odkaz u šablony měl nejasný název.
+
+Lokální oprava:
+Odkaz přejmenováváme na "Kdy poslat volitelnou otázku na rozpočet" a necháváme ho přímo u potvrzovací šablony.
+
+Co neotevíráme:
+Nové školení, přepis celého obchodního postupu ani samostatnou evidenci rozpočtových dotazů.
+```
+
+Varianta slabého přenosu:
+
+```text
+Stav:
+Přepsat pracovní místo.
+
+Výsledek druhého použití:
+Člověk větu našel, ale neuměl rozhodnout, kdy je rozpočet opravdu nutný pro další krok.
+
+Závěr:
+Pravidlo potřebuje rozhodovací příklad přímo u šablony. Nejde o problém adopce ani o důvod měnit formulář.
+
+Další krok:
+Dopsat jeden příklad hranice a při příštím běžném použití ověřit jen tuto větu.
+```
+
+Tři příklady ukazují stejnou disciplínu: uzavření vždy říká, co se stalo, co se mění, co zůstává zavřené a jaká data po ověření nezůstávají viset v provozu.
+
+### Privacy-first uzavření druhého použití
+
+Po druhém použití má datová stopa spíš mizet než růst. Pokud pravidlo funguje, nepotřebujete další evidenci. Pokud nefunguje, potřebujete opravit pracovní místo, ne začít sbírat víc provozních detailů.
+
+Při uzavření proto vyplňte tři řádky:
+
+```text
+Pro uzavření druhého použití stačilo:
+
+Po uzavření ponecháváme:
+
+Po uzavření mažeme, zobecňujeme nebo přestáváme sbírat:
+```
+
+Příklad:
+
+```text
+Pro uzavření druhého použití stačilo:
+Zobecněné pozorování, že pravidlo použil jiný člověk bez pomoci.
+
+Po uzavření ponecháváme:
+Jednu pracovní větu u potvrzovací šablony.
+
+Po uzavření mažeme, zobecňujeme nebo přestáváme sbírat:
+Pomocnou poznámku s konkrétním obsahem poptávky a dočasné sledování, kdo otázku použil.
+```
+
+Pokud po uzavření ponecháváte novou informaci, musí mít jasné místo a účel. "Možná se to bude hodit" není účel. Je to pozvánka pro budoucí úklid, který přijde ve chvíli, kdy má tým dělat něco užitečnějšího.
+
+Privacy-first závěr druhého použití má být jednoduchý: pravidlo je buď dost dobré pro běžnou práci, nebo potřebuje lepší větu. Ani jedna varianta sama o sobě nevyžaduje nový tracker, nový export ani nový atribut zákazníka.
+
+### Karta uzavření druhého běžného použití
+
+```text
+Pravidlo nebo pracovní místo:
+
+Co druhé použití ověřovalo:
+
+Běžná situace:
+
+Kdo pravidlo použil bez čerstvého kontextu:
+
+Výsledek druhého použití:
+- přenos potvrzen
+- poslední lokální dočištění
+- slabý přenos
+- nový kontext
+
+Uzavírací stav:
+- vrátit do běžného rytmu
+- dovřít poslední lokální opravu
+- přepsat pracovní místo
+- oddělit nový kontext
+
+Uzavírací věta:
+
+Co se mění v pracovním místě:
+
+Co zůstává výslovně zavřené:
+
+Co po uzavření ponecháváme:
+
+Co mažeme, zobecňujeme nebo přestáváme sbírat:
+
+Další rytmus nebo návratový signál:
+
+Vlastník:
+```
+
+Kartu držte krátkou. Pokud ji nejde vyplnit bez dlouhého popisu historie, nejspíš jste do druhého použití přimíchali nové téma. Vraťte se k původní otázce: ověřovali jste přenos pravidla, ne celý obchodní nebo produktový proces.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte důvod druhého použití.
+2. Minuta 2: pojmenujte, co se při běžném použití opravdu stalo.
+3. Minuta 3: vyberte jeden uzavírací stav.
+4. Minuta 4: napište uzavírací větu včetně toho, co zůstává zavřené.
+5. Minuta 5: rozhodněte, co se mění v pracovním místě.
+6. Minuta 6: smažte, zobecněte nebo ukončete pomocné stopy a nastavte další rytmus.
+
+Když se v minutě 3 neshodnete na stavu, nepokračujte do úprav. Nejprve pojmenujte, jestli řešíte přenos starého pravidla, nebo nový kontext. Bez toho tým snadno opraví špatné místo a ještě si k tomu přidá tabulku, aby měl pocit kontroly. Tabulka pocit kontroly unese. Skutečnou práci už hůř.
+
+### Checklist uzavření druhého použití
+
+- Je jasné, co druhé použití ověřovalo?
+- Víme, kdo pravidlo použil bez čerstvého kontextu?
+- Máme výsledek druhého použití, ne jen dojem z diskuse?
+- Vybrali jsme jeden uzavírací stav?
+- Je napsaná uzavírací věta s dalším rytmem?
+- Je jasné, co se případně mění v pracovním místě?
+- Je zapsané, co zůstává výslovně zavřené?
+- Pokud jde o poslední lokální opravu, je opravdu malá?
+- Pokud jde o slabý přenos, opravuje se pracovní místo místo dalšího vysvětlování bokem?
+- Pokud jde o nový kontext, vzniká samostatná úzká karta?
+- Jsou pomocné poznámky, screenshoty, kopie, ruční značky nebo dočasné tabulky smazané nebo zobecněné?
+- Nevzniká nová datová evidence jen proto, že druhé použití bylo užitečné?
+- Vrací se pravidlo po potvrzeném přenosu do běžného rytmu bez třetí mimořádné kontroly?
+
+Uzavření druhého běžného použití je poslední bod, kde se pravidlo může zase stát obyčejným nástrojem. Pokud přenos funguje, dejte mu klid. Pokud nefunguje, opravte nejbližší místo. A pokud se objevil nový kontext, oddělte ho dřív, než začne přepisovat staré rozhodnutí. Tím udržíte provoz použitelný, rozhodnutí dohledatelná a datovou stopu menší, než by z ní udělala dobře míněná přehnaná péče.
+
 ## Pracovní log
 
+- 2026-07-01: Doplněna úvodní podkapitola o uzavření druhého běžného použití po uzavřeném prvním použití: čtyři uzavírací stavy, praktické příklady, privacy-first úklid datové stopy, karta, mini workshop a checklist.
 - 2026-07-01: Doplněna úvodní podkapitola o druhém běžném použití po uzavřeném prvním použití: kdy ho otevírat, tři otázky přenositelnosti, čtyři výsledky, praktické příklady, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-07-01: Doplněna úvodní podkapitola o uzavření prvního běžného použití po ročním připomenutí: čtyři uzavírací stavy, praktické příklady, úklid dočasných stop, privacy-first uzavření, karta, mini workshop a checklist.
 - 2026-07-01: Doplněna úvodní podkapitola o prvním běžném použití po uzavřeném ročním připomenutí: kontrola najitelnosti pravidla, rozhodovací věty, privacy-first datové stopy, karta, mini workshop a checklist.
