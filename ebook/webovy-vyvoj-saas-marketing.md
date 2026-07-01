@@ -278132,8 +278132,215 @@ Když workshop narazí na změnu nabídky, segmentu nebo produktu, nepokoušejte
 
 Druhá pololetní kontrola má potvrdit, že pravidlo už není čerstvě zavedená změna, ale normální součást provozu. Když projde, dejte mu klid. Když neprojde, zkraťte rytmus, zpřesněte zdroj pravdy nebo pravidlo důstojně zavřete. Hlavně kolem něj nestavte další sledovací aparát jen proto, že dlouhodobý klid působí podezřele. Někdy je klid prostě dobrá zpráva.
 
+## Uzavření druhé pololetní kontroly po potvrzeném rytmu
+
+Druhá pololetní kontrola není hotová ve chvíli, kdy tým řekne "vypadá to dobře". Hotová je až tehdy, když po ní nezůstane rozmazaná odpovědnost, dočasná evidence ani nejistota, jestli se pravidlo dál kontroluje pololetně, vrací do kratšího rytmu, nebo se má zavřít. U dlouhodobých pravidel je uzavření důležitější než samotné review: bez něj se z dobrého klidu stane poloviční ticho, ve kterém nikdo neví, jestli se ještě něco čeká.
+
+Začněte uzavírací větou:
+
+```text
+Druhou pololetní kontrolu uzavíráme tímto stavem:
+```
+
+Za dvojtečku patří jeden stav, ne odstavec dojmů. Pokud je výsledek opravdu klidný, věta má být skoro nudná:
+
+```text
+Druhou pololetní kontrolu uzavíráme potvrzením dlouhodobého pololetního rytmu.
+Pravidlo zůstává u stejného kanonického místa, bez nové evidence a bez mimořádné kontroly.
+```
+
+To je celé kouzlo. Žádná slavnostní tabulka, žádné nové štítky, žádná "pro jistotu" připomínka za měsíc. Když pravidlo prokázalo, že funguje v dlouhém rytmu, odměnou má být méně provozního hluku, ne další patro procesu.
+
+Codyho komentář: uzavřít druhou pololetní kontrolu je jako uklidit po návštěvě, která nic nerozbila. Když po ní začnete stavět nový botník, pravděpodobně jste si spletli údržbu s rekonstrukcí.
+
+### Čtyři uzavírací stavy
+
+Použijte jeden ze čtyř stavů a napište k němu jednu pracovní větu:
+
+```text
+Potvrzený dlouhodobý rytmus:
+Pravidlo zůstává v pololetním rytmu bez nových pomocných stop.
+
+Potvrzený rytmus po drobném zpřesnění:
+Pravidlo zůstává v pololetním rytmu, ale u zdroje pravdy se uzavírá jedna lokální úprava.
+
+Dočasný návrat do kvartálního rytmu:
+Pravidlo se vrací na jedno kvartální období, protože druhá pololetní kontrola ukázala slabou najitelnost, odpovědnost nebo datovou střídmost.
+
+Ukončení nebo náhrada pravidla:
+Pravidlo se zavírá, archivuje nebo nahrazuje, protože už neodpovídá dnešní práci.
+```
+
+Stav `potvrzený dlouhodobý rytmus` nesmí vyrábět další práci. Zapište výsledek, další termín a úklid dočasných stop. Pak pravidlo nechte být.
+
+Stav `potvrzený rytmus po drobném zpřesnění` má mít jasnou hranici. Jedna věta, jeden odkaz, jeden vlastník nebo jeden návratový signál. Jakmile úprava potřebuje vysvětlovací schůzku, nový checklist nebo školení, už nejde o drobné zpřesnění.
+
+Stav `dočasný návrat do kvartálního rytmu` musí obsahovat návratovou podmínku. Nestačí říct "budeme to kontrolovat častěji". Napište, co se má během kvartálu potvrdit a kdy se rytmus vrátí do pololetí.
+
+Stav `ukončení nebo náhrada pravidla` používejte ve chvíli, kdy dlouhodobá údržba chrání starý svět. Pravidlo mohlo být správné, když vzniklo, a přesto dnes nemá smysl. Důstojné zavření je lepší než pietní údržba procesu, který už nikdo nepotřebuje.
+
+### Praktický příklad uzavření
+
+Druhá pololetní kontrola pravidla pro rozpočtový kontext dopadla čistě. Obchodník použil aktuální obchodní kartu, nepotřeboval původní historii a nevznikla nová evidence poptávek.
+
+Uzavření:
+
+```text
+Druhou pololetní kontrolu uzavíráme potvrzením dlouhodobého pololetního rytmu.
+Pravidlo pro rozpočtový kontext je opakovaně najitelné a použitelné bez původní historie.
+Další kontrola zůstává pololetní.
+Neotevíráme novou evidenci použití, změnu formuláře ani zvláštní obchodní report.
+Pomocná poznámka z kontroly se po zapsání závěru maže.
+```
+
+Slabší, ale pořád zdravý výsledek:
+
+```text
+Druhou pololetní kontrolu uzavíráme potvrzením rytmu po drobném zpřesnění.
+Pravidlo funguje, ale návratový signál u zdroje pravdy byl moc obecný.
+Do obchodní karty doplňujeme jednu větu: téma se otevře mimo rytmus pouze tehdy, když dvě relevantní poptávky po sobě nejdou kvalifikovat bez ručního doptání na rozpočtový rámec.
+Neotevíráme nové pole ve formuláři ani sledování všech poptávek.
+Další kontrola zůstává pololetní.
+```
+
+Kvartální návrat:
+
+```text
+Druhou pololetní kontrolu uzavíráme dočasným návratem do kvartálního rytmu.
+Pravidlo je věcně správné, ale v posledním období ho tým našel jen přes starou interní poznámku.
+Během jednoho kvartálu ověříme, zda aktualizované kanonické místo stačí pro samostatné použití.
+Pokud další běžné použití proběhne bez staré poznámky a bez doptání původního vlastníka, pravidlo se vrátí do pololetního rytmu.
+```
+
+Ukončení:
+
+```text
+Druhou pololetní kontrolu uzavíráme ukončením pravidla.
+Pravidlo vzniklo pro službu, která už není v nabídce, a dnešní obchodní karta řeší situaci jiným způsobem.
+Staré pravidlo archivujeme s odkazem na nové kanonické místo.
+Nemažeme historii rozhodnutí, ale mažeme pomocné kopie a pracovní příklady s obchodními detaily.
+```
+
+Všimněte si, že žádný z příkladů nekončí větou "někdo se na to ještě podívá". Buď je jasný rytmus, jasné drobné zpřesnění, jasný dočasný návrat, nebo jasné ukončení. Mlžná odpovědnost je drahá. Jen se tváří jako opatrnost.
+
+### Co po uzavření neotevírat
+
+Po druhé pololetní kontrole se často objeví chuť přidat "malinkou" pojistku. Zní rozumně, protože pravidlo už žije dlouho a tým nechce nic ztratit. Jenže právě dlouhodobě fungující pravidlo nepotřebuje více pojistek. Potřebuje čistý zdroj pravdy a návratový signál.
+
+Po uzavření proto výslovně neotevírejte:
+
+- novou průběžnou evidenci všech použití pravidla,
+- další kontrolní schůzku mimo dohodnutý rytmus,
+- paralelní kopii pravidla v jiné šabloně,
+- nový formulářový údaj jen kvůli lepší kontrole,
+- export konkrétních zákaznických případů pro budoucí review,
+- přepis celé související oblasti, pokud kontrola našla jen lokální tření.
+
+Pokud se během uzavření objeví větší téma, napište ho jako nové rozhodnutí. Ne jako poznámku pod údržbou pravidla. Údržbová kontrola má zavřít stav pravidla, ne nenápadně přepsat produkt, web nebo obchod.
+
+Krátká ochranná věta:
+
+```text
+Tato kontrola neotevírá změnu nabídky, formuláře, ceníku ani obchodního procesu; pokud se některé z těchto témat objeví, dostane vlastní rozhodovací kartu.
+```
+
+Taková věta není byrokracie. Je to zábradlí proti rozsahu, který se rád tváří jako drobná poznámka.
+
+### Privacy-first uzavření
+
+Uzavření druhé pololetní kontroly má vždy obsahovat datovou větu. U dlouhého rytmu je riziko jednoduché: protože se kontroluje málo často, tým má tendenci shromažďovat víc podkladů "pro jistotu". Privacy-first provoz to obrací. Čím delší rytmus, tím důležitější je nesbírat pomocnou historii bez účelu.
+
+Použijte jednu z vět:
+
+```text
+Kontrola vycházela jen z kanonického místa a agregovaného pozorování; nevznikla nová evidence konkrétních zákaznických případů.
+```
+
+```text
+Pomocná poznámka vznikla pouze pro uzavření kontroly a po propsání obecného závěru se maže.
+```
+
+```text
+Do zdroje pravdy nepřenášíme jména, e-maily, částky, screenshoty ani detaily projektů; zůstává pouze obecné pravidlo, vlastník, rytmus a návratový signál.
+```
+
+Pokud pravidlo archivujete, přidejte ještě jednu větu:
+
+```text
+Archiv obsahuje důvod ukončení a odkaz na nové kanonické místo, ne konkrétní zákaznické příklady ani staré pracovní exporty.
+```
+
+Tohle je malý rozdíl s velkým dopadem. Tým si ponechá paměť rozhodnutí, ale nepěstuje kolem ní datovou stopu, která už neslouží zákazníkovi, produktu ani provozu.
+
+### Karta uzavření druhé pololetní kontroly
+
+```text
+Pravidlo nebo pracovní místo:
+
+Datum druhé pololetní kontroly:
+
+Kanonické místo:
+
+Výsledek kontroly:
+- potvrzený dlouhodobý rytmus
+- potvrzený rytmus po drobném zpřesnění
+- dočasný návrat do kvartálního rytmu
+- ukončení nebo náhrada pravidla
+
+Uzavírací věta:
+
+Co se mění:
+
+Co zůstává beze změny:
+
+Co se výslovně neotevírá:
+
+Další rytmus:
+
+Návratová podmínka, pokud se rytmus zkracuje:
+
+Nové kanonické místo, pokud se pravidlo nahrazuje:
+
+Co se maže, anonymizuje nebo archivuje:
+
+Co zůstává u zdroje pravdy:
+
+Vlastník:
+```
+
+Karta má být poslední stopa kontroly, ne začátek další dokumentace. Pokud po jejím vyplnění vznikne potřeba další tabulky, vraťte se k výsledku kontroly. Buď jste neuzavřeli stav, nebo se snažíte údržbou řídit nové téma.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte výsledek druhé pololetní kontroly.
+2. Minuta 2: vyberte jeden ze čtyř uzavíracích stavů.
+3. Minuta 3: napište uzavírací větu a další rytmus.
+4. Minuta 4: napište, co se výslovně neotevírá.
+5. Minuta 5: ukliďte pomocné poznámky, kopie a konkrétní příklady.
+6. Minuta 6: ověřte, že u zdroje pravdy zůstává jen pravidlo, vlastník, rytmus a návratový signál.
+
+Když se v minutě 4 ukáže, že tým chce otevřít širší změnu, nezavírejte oči a netlačte ji do karty. Uzavřete kontrolu a založte nové rozhodnutí. Druhá pololetní kontrola má chránit dlouhodobý rytmus. Nemá být tajný vchod do reorganizace všeho, co se zrovna připomnělo.
+
+### Checklist uzavření druhé pololetní kontroly
+
+- Vybrali jsme jeden jasný uzavírací stav?
+- Je uzavírací věta krátká a rozhodnutelná?
+- Víme, jestli pravidlo zůstává v pololetním rytmu, vrací se do kvartálu, nebo končí?
+- Pokud se dělá drobné zpřesnění, je opravdu jen u jednoho kanonického místa?
+- Pokud se rytmus zkracuje, má zkrácení návratovou podmínku?
+- Pokud se pravidlo ukončuje nebo nahrazuje, existuje nové kanonické místo?
+- Je zapsané, co se výslovně neotevírá?
+- Nevznikla nová průběžná evidence jen kvůli další kontrole?
+- Jsou pomocné poznámky, kopie, exporty a konkrétní příklady uklizené?
+- Nezůstávají ve zdroji pravdy osobní údaje nebo obchodní detaily bez účelu?
+- Je další kontrolní rytmus jasný pro člověka, který nebyl u původní debaty?
+- Umí tým za půl roku poznat, proč se k pravidlu vrací?
+
+Uzavření druhé pololetní kontroly má být tiché, ale pevné. Potvrzené pravidlo dostane klid. Slabší pravidlo dostane krátký opravný rytmus. Zastaralé pravidlo dostane důstojný konec. A privacy-first provoz dostane to, co potřebuje nejvíc: méně zbytečných stop, méně skrytého sledování a víc jasných rozhodnutí.
+
 ## Pracovní log
 
+- 2026-07-01: Doplněna úvodní podkapitola o uzavření druhé pololetní kontroly po potvrzeném rytmu: čtyři uzavírací stavy, praktické příklady, hranice neotevírané práce, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-07-01: Doplněna úvodní podkapitola o druhé pololetní kontrole po potvrzeném rytmu: opakovatelnost bez původní paměti, čtyři výsledky kontroly, privacy-first úklid pomocné evidence, karta, mini workshop a checklist.
 - 2026-06-30: Doplněna úvodní podkapitola o uzavření první pololetní kontroly po zředění rytmu: uzavírací věta, čtyři stavy, praktické příklady, hranice neotevírané práce, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-30: Doplněna úvodní podkapitola o převodu uzavřené druhé kvartální kontroly do pololetního rytmu: podmínky zředění kontroly, praktický příklad, úklid stabilizační péče, privacy-first převod, karta, mini workshop a checklist.
