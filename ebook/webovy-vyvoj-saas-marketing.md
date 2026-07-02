@@ -286595,8 +286595,199 @@ Pokud se ve třetí minutě tým neshodne mezi poslední lokální opravou a nov
 
 Dobré uzavření druhého klidového použití je krátké a trochu nudné. To je v pořádku. Cílem není dokázat, že tým udělal velkou práci. Cílem je nechat funkční pravidlo tiše sloužit a nepřidat mu na záda další procesní batoh.
 
+## Roční kontrola pravidla v pasivním provozu
+
+Pravidlo, které přežilo návrat do pasivního provozu, nemá zůstat navždy bez dotyku. Pasivní provoz znamená, že pravidlo nepotřebuje mimořádnou péči, ne že se už nikdy nesmí ověřit. Rozumný tým se k němu po delší době vrátí krátkou roční kontrolou: ne aby ho znovu otevřel, ale aby zjistil, jestli pořád žije na správném místě, jestli mu lidé rozumí a jestli po sobě nenechává zbytečnou datovou stopu.
+
+Roční kontrola má být lehká. Pokud se z ní stane revize celé strategie, minuli jste cíl. Stačí vzít jedno pravidlo, jedno kanonické pracovní místo a několik běžných použití. Otázka není "co všechno bychom mohli zlepšit". Otázka zní: funguje pravidlo bez zvláštní péče i po delším čase?
+
+Začněte zápisem:
+
+```text
+Kontrolované pravidlo:
+
+Kde má pravidlo žít:
+
+Poslední mimořádné uzavření:
+
+Co dnes ověřujeme:
+
+Co výslovně neotevíráme:
+```
+
+Příklad:
+
+```text
+Kontrolované pravidlo:
+Volitelnou otázku na rámcový rozpočet posíláme jen u relevantních poptávek, kde bez ní nejde navrhnout další krok.
+
+Kde má pravidlo žít:
+U potvrzovací e-mailové šablony a v krátkém obchodním checklistu.
+
+Poslední mimořádné uzavření:
+Pravidlo bylo vráceno do pasivního provozu po druhém klidovém použití.
+
+Co dnes ověřujeme:
+Jestli pravidlo lidé najdou, použijí správně a nepřidávají kvůli němu nový CRM atribut.
+
+Co výslovně neotevíráme:
+Neměníme formulář, scoring, segmentaci ani nástrojovou skladbu.
+```
+
+Takový zápis drží kontrolu u země. Roční kontrola není pozvánka k tomu, aby se znovu rozbalila celá historie. Je to provozní prohlídka: pravidlo stojí, nebo potřebuje malou lokální opravu.
+
+### Tři vrstvy roční kontroly
+
+Projít stačí tři vrstvy:
+
+- Najitelnost: je pravidlo pořád tam, kde člověk opravdu pracuje?
+- Použitelnost: dá se podle něj rozhodnout bez čtení staré historie?
+- Datová stopa: nevznikla kolem něj nová evidence, pole, export nebo pomocná tabulka?
+
+Najitelnost selže často nenápadně. Šablona se přesune, checklist přejmenuje, nový člověk dostane jiný odkaz a pravidlo zůstane ve staré dokumentaci. Oprava má být malá: přesunout větu, doplnit odkaz nebo odstranit duplicitní starou verzi.
+
+Použitelnost selže tehdy, když pravidlo sice existuje, ale zní moc obecně. Věta "ptejme se citlivě na rozpočet" může být kulturně hezká, ale provozně slabá. Lepší je věta, která říká kdy, kde a co se nemá otevírat.
+
+Datová stopa je nejdůležitější privacy-first vrstva. Pravidlo mohlo původně vzniknout proto, aby tým nepřidával povinné pole. Po roce se ale může ukázat, že někdo mezitím začal rozpočty kopírovat do pomocné tabulky nebo značit v CRM ručním štítkem. To je přesně ten typ tichého růstu, který roční kontrola zachytí dřív, než se z něj stane provozní samozřejmost.
+
+### Čtyři výsledky kontroly
+
+Po kontrole vyberte jeden ze čtyř výsledků:
+
+- Ponechat beze změny: pravidlo je najitelné, použitelné a datová stopa se nerozšířila.
+- Opravit kanonické místo: pravidlo funguje, ale leží na špatném místě nebo má starou kopii.
+- Zpřesnit pracovní větu: místo je správné, ale formulace svádí k moc širokému nebo moc úzkému použití.
+- Otevřít nový návratový signál: kontrola ukázala opakovaný problém, který už není jen lokální údržba.
+
+Výsledek `ponechat beze změny` je plnohodnotný výsledek. Neznamená, že kontrola byla zbytečná. Znamená, že pravidlo zestárlo dobře. Takové pravidlo nepotřebuje nový proces, jen krátký záznam, že prošlo kontrolou.
+
+Výsledek `opravit kanonické místo` má řešit umístění, ne obsah. Pokud je správná věta ve staré šabloně, přesuňte ji do nové. Pokud existují dvě verze, nechte jednu a druhou smažte nebo označte jako archivní. Dvě podobné verze pravidla jsou výborný způsob, jak z jednoduché věci vyrobit týmový kvíz. A týmové kvízy patří na večírek, ne do provozu.
+
+Výsledek `zpřesnit pracovní větu` je vhodný, když pravidlo lidé našli, ale použili ho různě. Oprava má být jedna věta u pracovního místa. Ne nový interní manuál, pokud problém vznikl jen tím, že původní věta byla líná.
+
+Výsledek `otevřít nový návratový signál` používejte střídmě. Roční kontrola může odhalit skutečný problém, ale nemá z každé drobnosti vyrábět návrat. Nový signál otevřete až ve chvíli, kdy vidíte opakování, dopad a nejbližší pracovní místo.
+
+### Praktický příklad
+
+```text
+Kontrola:
+Tři běžná použití pravidla za poslední období.
+
+Zjištění:
+Pravidlo je u potvrzovací šablony najitelné. Dva lidé ho použili správně. Jeden člověk si ale starou poznámku přenesl do vlastní pomocné tabulky a začal si značit, u kterých poptávek chyběl rozpočet.
+
+Výsledek:
+Ponechat pravidlo, opravit datovou stopu.
+
+Rozhodnutí:
+Pracovní věta zůstává u šablony. Pomocnou tabulku rušíme; zobecněný poznatek stačí v checklistu. Do CRM nepřidáváme nový atribut a formulář zůstává beze změny.
+
+Návratový signál:
+K tématu se vrátíme pouze pokud tři relevantní poptávky za sebou nepůjdou kvalifikovat bez nové strukturované evidence.
+```
+
+Tento příklad je záměrně malý. Roční kontrola neotevřela produktovou strategii. Zachytila tichou datovou odbočku a vrátila pravidlo do čistšího stavu.
+
+### Privacy-first úklid
+
+Roční kontrola má vždy obsahovat krátký datový úklid. Nehledejte jen velké nástroje. Hledejte i malé zvyky: soukromou tabulku, export pro "rychlou kontrolu", screenshoty zákaznických odpovědí, ruční štítky, kopie e-mailů nebo poznámky v nástroji, který nemá být zdrojem pravdy.
+
+Použijte tři řádky:
+
+```text
+Po roce ponecháváme:
+
+Po roce mažeme, slučujeme nebo vracíme do původního zdroje:
+
+Po roce dál nesbíráme:
+```
+
+Příklad:
+
+```text
+Po roce ponecháváme:
+Jednu pracovní větu u potvrzovací šablony.
+
+Po roce mažeme, slučujeme nebo vracíme do původního zdroje:
+Pomocnou tabulku nahrazujeme syntetickým příkladem v checklistu.
+
+Po roce dál nesbíráme:
+Rozpočet jako povinné formulářové pole, CRM atribut, marketingový export ani samostatnou metriku.
+```
+
+Codyho komentář: nejnebezpečnější data často nevzniknou velkým rozhodnutím, ale malou poznámkou, kterou nikdo nezavře. Roční kontrola je dobrý okamžik říct: poznatek si necháme, datový bordýlek ne. Ano, odborný termín je možná jiný, ale tento má lepší konverzi na úklid.
+
+### Karta roční kontroly
+
+```text
+Kontrolované pravidlo:
+
+Kanonické pracovní místo:
+
+Poslední mimořádné uzavření:
+
+Použití, která kontrolujeme:
+
+Najitelnost:
+- funguje / potřebuje opravu
+
+Použitelnost:
+- funguje / potřebuje zpřesnit
+
+Datová stopa:
+- čistá / vznikla skrytá evidence
+
+Výsledek:
+- ponechat beze změny
+- opravit kanonické místo
+- zpřesnit pracovní větu
+- otevřít nový návratový signál
+
+Co se mění:
+
+Co zůstává výslovně zavřené:
+
+Privacy-first úklid:
+
+Návratový signál:
+
+Vlastník:
+
+Datum další běžné kontroly:
+```
+
+### Mini workshop na 11 minut
+
+1. Minuty 1 až 2: přečtěte pravidlo a jeho kanonické pracovní místo.
+2. Minuty 3 až 4: projděte dvě nebo tři běžná použití bez osobních detailů.
+3. Minuty 5 až 6: ověřte najitelnost a použitelnost.
+4. Minuty 7 až 8: zkontrolujte datovou stopu a skryté evidence.
+5. Minuta 9: vyberte jeden výsledek kontroly.
+6. Minuta 10: napište, co zůstává zavřené.
+7. Minuta 11: zapište privacy-first úklid a návratový signál.
+
+Pokud workshop začne otevírat širší strategii, zastavte ho. Zapište nový podnět stranou a dokončete roční kontrolu původního pravidla. Jedna kontrola má uzavřít jednu věc.
+
+### Checklist roční kontroly
+
+- Kontrolujeme jedno pravidlo, ne celou oblast?
+- Víme, kde má pravidlo kanonicky žít?
+- Prošli jsme několik běžných použití bez kopírování osobních detailů?
+- Je pravidlo najitelné v místě práce?
+- Dá se podle něj rozhodnout bez staré historie?
+- Neexistuje duplicitní nebo zastaralá verze pravidla?
+- Nevznikla soukromá tabulka, export, štítek, screenshot nebo pomocná evidence?
+- Pokud vznikla skrytá evidence, víme, co s ní uděláme?
+- Vybrali jsme jeden ze čtyř výsledků kontroly?
+- Je jasné, co zůstává výslovně zavřené?
+- Má pravidlo nový nebo potvrzený návratový signál?
+- Končí kontrola menší mimořádnou péčí, ne větší?
+
+Roční kontrola pravidla v pasivním provozu má být klidná servisní návštěva. Když pravidlo funguje, nechte ho být. Když má slabé místo, opravte nejbližší větu nebo kanonické umístění. A když po roce najdete zbytečnou datovou stopu, ukliďte ji dřív, než se začne tvářit jako standard.
+
 ## Pracovní log
 
+- 2026-07-02: Doplněna úvodní podkapitola o roční kontrole pravidla v pasivním provozu: najitelnost, použitelnost, datová stopa, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-07-02: Doplněna úvodní podkapitola o uzavření druhého klidového použití po návratu do pasivního provozu: tři uzavírací stavy, exportní příklady, privacy-first úklid dočasných stop, karta, mini workshop a checklist.
 - 2026-07-02: Doplněna úvodní podkapitola o druhém klidovém použití po návratu do pasivního provozu: kdy ho plánovat, tři výsledky, exportní příklad, privacy-first kontrola nejmenší stopy, karta, mini workshop a checklist.
 - 2026-07-02: Doplněna úvodní podkapitola o uzavření prvního klidového použití po návratu do pasivního provozu: čtyři uzavírací stavy, exportní příklad, privacy-first úklid datové stopy, karta, mini workshop a checklist.
