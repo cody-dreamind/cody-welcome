@@ -283698,8 +283698,200 @@ Workshop končí výběrem stavu. Pokud se během něj objeví širší téma, n
 
 První pasivní použití má být tiché. Jeho cílem není dokázat, že stará práce byla skvělá. Cílem je ověřit, že dobré pravidlo umí sloužit bez další péče. Pokud ano, nechte ho pracovat. Pokud ne, opravte nejbližší hranu. A pokud se objeví návratový signál, otevřete malé téma přesně tam, kde signál vznikl.
 
+## Jak uzavřít první pasivní použití
+
+První pasivní použití pravidla je snadné nechat bez konce. Člověk pravidlo najde, použije ho, nic se nerozbije a tým jde dál. To je většinou dobře. Přesto se vyplatí udělat malý uzavírací zápis, pokud šlo o první použití po větší práci, po návratu z archivu nebo po převodu pravidla do pasivního provozu. Ne kvůli administrativě, ale kvůli tomu, aby se z tichého úspěchu nestala další nejasná vzpomínka.
+
+Uzavření prvního pasivního použití má odpovědět na jednu otázku:
+
+```text
+Zůstává pravidlo v pasivním provozu, nebo je potřeba opravit jeho nejbližší pracovní místo?
+```
+
+Neřešte znovu celý původní příběh. První pasivní použití není review strategie, kvality produktu ani kompletní dokumentace. Je to kontrola, zda pravidlo funguje v běžném provozu bez mimořádné péče. Pokud funguje, uzavření má být krátké. Pokud nefunguje, oprava má být lokální. Pokud se objeví návratový signál, otevřete novou malou smyčku s vlastní hranicí.
+
+Začněte třemi větami:
+
+```text
+Při prvním pasivním použití se stalo:
+
+Stav pravidla po použití je:
+
+Do běžného provozu dál nepřenášíme:
+```
+
+Třetí věta je privacy-first brzda. První použití často svádí k tomu, aby si tým schoval konkrétní příklad "pro jistotu". Jenže pasivní pravidlo má žít bez nové evidence. Pokud použití dopadlo hladce, obvykle nepotřebujete ukládat zákaznickou zprávu, screenshot, jméno člověka, hodnotu obchodu ani interní komentář. Stačí stav pravidla a případná lokální oprava.
+
+### Čtyři uzavírací stavy
+
+Po prvním pasivním použití vyberte jeden ze čtyř stavů:
+
+- Ponechat pasivně: pravidlo bylo najitelné, rozhodovací a nevznikla zbytečná datová stopa.
+- Opravit kotvu: pravidlo je správné, ale nebylo v přirozeném pracovním místě.
+- Opravit větu: pravidlo bylo najitelné, ale člověk podle něj neuměl rozhodnout.
+- Otevřít návratový signál: použití ukázalo skutečný problém, který odpovídá domluvené podmínce návratu.
+
+Stav `ponechat pasivně` je nejlepší konec. Znamená, že pravidlo přežilo kontakt s běžnou prací a nepotřebuje nový rytmus kontroly. Zapište jednu větu, případně aktualizujte pracovní místo, a nechte ho být.
+
+Stav `opravit kotvu` použijte, když člověk pravidlo nakonec našel, ale hledal ho ve špatném místě. Oprava má být přesun, odkaz nebo doplnění jedné věty tam, kde se opravdu pracuje. Nezakládejte novou dokumentaci, pokud stačí přesunout pravidlo z rozhodovací karty do šablony.
+
+Stav `opravit větu` použijte, když je problém v jazyce. Věta "použij podle situace" je skoro vždycky slabá. Lepší je napsat, kdy přesně pravidlo použít, co tím neotevírat a jaký je návratový signál. Rozhodovací věta má člověka vést v práci, ne ho poslat přemýšlet nad filozofií procesu.
+
+Stav `otevřít návratový signál` používejte opatrně. Špatně umístěná poznámka není návratový signál. Nejasné slovo v šabloně také ne. Návratový signál vzniká až tehdy, když použití ukáže problém, který byl předem pojmenovaný nebo má jasný dopad na práci, zákazníka, provoz nebo data.
+
+### Praktický příklad
+
+Pravidlo v pasivním provozu:
+
+```text
+U žádosti o export dat nejdřív zjisti účel exportu. Nežádej technickou specifikaci ani nezakládej integrační ticket, dokud není jasné, zda zákazník potřebuje jednorázový export nebo pravidelné napojení.
+```
+
+První pasivní použití:
+
+```text
+Situace:
+Support dostal žádost o "export dat do našeho systému".
+
+Co se stalo:
+Člověk našel pravidlo přímo v support makru, zeptal se na účel a zjistil, že zákazník potřebuje jednorázový CSV export za poslední měsíc.
+
+Stav:
+Ponechat pasivně.
+
+Co zůstává zavřené:
+Integrační ticket, technická specifikace, nový exportní dashboard a evidence exportních scénářů.
+
+Do běžného provozu dál nepřenášíme:
+Konkrétní text zákaznické zprávy ani interní poznámky k případu. Stačí vědět, že pravidlo bylo najitelné a použitelné.
+```
+
+Slabší varianta:
+
+```text
+Co se stalo:
+Člověk pravidlo našel až v rozhodovacím logu, ne v support makru.
+
+Stav:
+Opravit kotvu.
+
+Lokální oprava:
+Do support makra přidáváme jednu větu: "Nejdřív ověř účel exportu: jednorázový soubor, nebo pravidelné napojení."
+
+Co neotevíráme:
+Novou dokumentaci exportů, dashboard požadavků ani revizi celého support procesu.
+```
+
+Ještě slabší varianta:
+
+```text
+Co se stalo:
+Pravidlo bylo v makru, ale člověk nevěděl, jestli se má ptát vždy, nebo jen při nejasné žádosti.
+
+Stav:
+Opravit větu.
+
+Nová věta:
+"Pokud zákazník žádá export bez jasného účelu, polož jednu otázku: má jít o jednorázový export, nebo pravidelné napojení?"
+
+Co dál nesbíráme:
+Nezakládáme strukturovaný seznam všech exportních požadavků a nepřidáváme nový CRM štítek.
+```
+
+Všimněte si, že ani jedna oprava nepřidává nový systém. Pracuje se s nejbližším místem: makrem, větou, stavem pravidla. Pasivní provoz má zůstat pasivní i po drobné opravě.
+
+### Privacy-first uzavření
+
+Uzavření prvního pasivního použití má být datově skromné. Neuchovávejte detail jen proto, že šlo o první případ. První případ není automaticky vzorek pro budoucí analýzu. Je to provozní kontrola, zda pravidlo funguje.
+
+Použijte krátký filtr:
+
+```text
+Pro stav pravidla potřebujeme:
+
+Pro stav pravidla nepotřebujeme:
+
+Proto po uzavření necháváme pouze:
+```
+
+Příklad:
+
+```text
+Pro stav pravidla potřebujeme:
+Informaci, že pravidlo bylo v makru najitelné a vedlo ke správné otázce.
+
+Pro stav pravidla nepotřebujeme:
+Text zákaznické žádosti, název zákazníka, objem exportu ani interní poznámku supportu.
+
+Proto po uzavření necháváme pouze:
+Jednu anonymizovanou větu u pracovního místa: "První pasivní použití proběhlo hladce, pravidlo zůstává beze změny."
+```
+
+Pokud první použití odhalí slabinu, pořád ukládejte jen to, co je nutné pro opravu. U slabé kotvy nepotřebujete celý případ. Potřebujete vědět, kde člověk pravidlo nenašel. U slabé věty nepotřebujete osobní detail. Potřebujete vědět, která část věty nebyla rozhodovací.
+
+### Karta uzavření prvního pasivního použití
+
+```text
+Pravidlo v pasivním provozu:
+
+Pracovní místo:
+
+První pasivní použití:
+
+Co se stalo:
+
+Uzavírací stav:
+- ponechat pasivně
+- opravit kotvu
+- opravit větu
+- otevřít návratový signál
+
+Pokud opravujeme, jedno místo opravy:
+
+Co zůstává zavřené:
+
+Co nebudeme dál evidovat:
+
+Jaká data, exporty, trackery nebo pole dál nevznikají:
+
+Kde zůstává aktuální pravidlo:
+
+Návratový signál:
+
+Datum:
+```
+
+Kartu nepoužívejte pro každé další použití. Je určená pro první pasivní průchod nebo pro situaci, kdy se pravidlo po delší době poprvé dostane k novému člověku, novému týmu nebo novému pracovnímu místu.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte pravidlo a pracovní místo.
+2. Minuta 2: popište první použití bez osobních nebo zákaznických detailů.
+3. Minuta 3: vyberte jeden uzavírací stav.
+4. Minuta 4: pokud je potřeba oprava, určete jedno místo a jednu větu.
+5. Minuta 5: napište, co zůstává zavřené.
+6. Minuta 6: proveďte privacy-first úklid, tedy co dál neevidujete.
+
+Pokud workshop sklouzne k otázce, jestli by se pravidlo nemělo měřit dlouhodobě, zastavte se. Dlouhodobé měření potřebuje vlastní důvod. Hladké první použití samo o sobě není důvod zakládat evidenci. Je to spíš důvod žádnou evidenci nezakládat. Ano, občas je největší inovace odolat tabulce.
+
+### Checklist uzavření
+
+- Víme, kde první pasivní použití proběhlo?
+- Popsali jsme výsledek bez zbytečných osobních, obchodních nebo technických detailů?
+- Vybrali jsme jeden ze čtyř uzavíracích stavů?
+- Pokud pravidlo drží, vrací se bez další mimořádné kontroly do pasivního provozu?
+- Pokud opravujeme kotvu nebo větu, je oprava lokální?
+- Pokud otevíráme návratový signál, máme konkrétní důkaz a pracovní místo?
+- Je jasně napsané, co zůstává zavřené?
+- Nezakládáme novou evidenci prvních použití jen proto, že první použití proběhlo?
+- Uklidili jsme pomocné poznámky, kopie, screenshoty nebo exporty?
+- Zůstává aktuální pravidlo tam, kde ho další člověk opravdu použije?
+
+Uzavření prvního pasivního použití má pravidlo pustit z ruky. Buď funguje a může zůstat tiché, nebo potřebuje jednu blízkou opravu. V obou případech je cílem totéž: méně mimořádné péče, méně datových stop a jasnější práce pro dalšího člověka.
+
 ## Pracovní log
 
+- 2026-07-02: Doplněna úvodní podkapitola o uzavření prvního pasivního použití pravidla: čtyři uzavírací stavy, support příklady, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-07-02: Doplněna úvodní podkapitola o prvním běžném použití pravidla v pasivním provozu: tři kontrolní otázky, čtyři výsledky, praktický support příklad, privacy-first ne-evidence, karta, mini workshop a checklist.
 - 2026-07-02: Doplněna úvodní podkapitola o převodu potvrzeného archivního minima do pasivního provozu: pracovní místo, hranice použití, návratový signál, privacy-first ne-evidence, karta, mini workshop a checklist.
 - 2026-07-02: Doplněno krátké pravidlo pro délku zápisu při hladkém uzavření druhého běžného použití po archivaci.
