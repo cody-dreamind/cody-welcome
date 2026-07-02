@@ -285044,8 +285044,194 @@ První běžné použití potvrdilo nový návratový signál, proto otevíráme
 
 Každá z těch vět je lepší než neurčité "budeme to sledovat". Sledování bez rozhodnutí je jen pomalý způsob, jak si přidat práci a data. Běžné použití má pravidlo vrátit do normálního života, ne mu postavit památník.
 
+## Uzavření prvního běžného použití po uzavřeném návratu
+
+První běžné použití po uzavřeném návratu se nesmí nechat viset jako "skoro hotovo". Buď potvrdilo, že pravidlo zase funguje v normální práci, nebo ukázalo přesné místo, které ještě potřebuje drobnou opravu. Obojí je užitečné, ale jen pokud to uzavřete jednou větou a neotevřete kolem toho novou mlhu.
+
+Začněte větou:
+
+```text
+První běžné použití po uzavřeném návratu uzavíráme takto:
+```
+
+Dobrá uzavírací věta popíše výsledek, hranici další práce a datovou stopu:
+
+```text
+První běžné použití po uzavřeném návratu uzavíráme takto:
+Pravidlo pro rozlišení jednorázového exportu a technického napojení bylo v support šabloně použitelné bez staré karty návratu. Nepřidáváme další kontrolu, neukládáme kopii ticketu a pravidlo zůstává v pasivním provozu.
+```
+
+Tahle věta je záměrně nudná. Dobře uzavřená provozní práce často nudná být má. Pokud se po každém běžném použití píše dramatický report, systém se tváří důležitěji, než ve skutečnosti je. Praktický provoz má naopak umět říct: fungovalo to, nic nepřidáváme, jdeme dál.
+
+### Čtyři uzavírací stavy
+
+Po prvním použití vyberte jeden uzavírací stav:
+
+- Vracíme do pasivního provozu: pravidlo bylo najitelné, rozhodovací věta stačila a nevznikla nová datová stopa.
+- Zavřeno s lokální opravou kotvy: obsah pravidla platí, ale bylo potřeba zlepšit umístění, odkaz, nadpis nebo odstranění staré kopie.
+- Zavřeno s lokální opravou věty: pracovní místo je správné, ale jedna hrana rozhodnutí byla nejasná.
+- Nezavíráme, otevíráme novou malou smyčku: první běžné použití potvrdilo nový návratový signál.
+
+`Vracíme do pasivního provozu` je nejlepší výsledek, pokud pravidlo opravdu fungovalo. Nepřidávejte k němu "ještě jednu kontrolu za týden", pokud nemáte jasné rozhodnutí, které by kontrola mohla změnit. Pasivní provoz není odklad odpovědnosti. Je to stav, kdy pravidlo nepotřebuje zvláštní pozornost.
+
+`Zavřeno s lokální opravou kotvy` použijte, když člověk rozhodl správně, ale musel pravidlo lovit. Typická oprava je přesun věty na začátek šablony, smazání starého odkazu nebo přejmenování části tak, aby odpovídala reálné otázce. Nezakládejte nový playbook, pokud stačí dát existující větu na místo, kde se opravdu pracuje.
+
+`Zavřeno s lokální opravou věty` použijte, když člověk našel správné místo, ale nerozlišil dvě blízké situace. Oprava má být jedna hrana, ne nová kapitola. Například: "opakovaný ruční CSV export zůstává support požadavek, automatizované API napojení patří do technické kvalifikace". Hotovo. Žádná opera.
+
+`Nezavíráme, otevíráme novou malou smyčku` použijte jen tehdy, když se skutečně potvrdil návrat problému. Nestačí, že se někdo u pravidla na chvíli zastavil. Nová smyčka potřebuje vlastní otázku, stop podmínku a pracovní místo. Jinak jen přejmenujete nejistotu na proces.
+
+### Praktické příklady uzavření
+
+Samostatné použití:
+
+```text
+Výsledek:
+Vracíme do pasivního provozu.
+
+Závěr:
+Support člověk použil pravidlo v nové šabloně bez staré karty návratu. Rozhodnutí proběhlo v původním systému, nevznikla kopie ticketu ani nová tabulka použití.
+
+Neotevíráme:
+Další audit exportních požadavků, nový CRM atribut ani týdenní kontrolu support rozhodnutí.
+```
+
+Slabá kotva:
+
+```text
+Výsledek:
+Zavřeno s lokální opravou kotvy.
+
+Závěr:
+Pravidlo platí, ale člověk ho našel až přes starý interní odkaz. Kanonickou větu přesouváme do první části support šablony a starý odkaz mažeme.
+
+Neotevíráme:
+Přepis obsahu pravidla, nový onboardingový dokument ani další kontrolní režim.
+```
+
+Slabá věta:
+
+```text
+Výsledek:
+Zavřeno s lokální opravou věty.
+
+Závěr:
+Pravidlo bylo na správném místě, ale neříkalo jasně, kam patří opakovaný ruční export. Doplňujeme jednu hranici mezi ručním exportem a automatizovaným napojením.
+
+Neotevíráme:
+Nový formulář pro technické požadavky, detailní kategorizaci všech exportů ani sběr dalších údajů od zákazníka.
+```
+
+Nová malá smyčka:
+
+```text
+Výsledek:
+Nezavíráme, otevíráme novou malou smyčku.
+
+Závěr:
+První běžné použití ukázalo, že support opakovaně nepozná rozdíl mezi jednorázovým exportem a integračním požadavkem. Otevíráme jen tuto rozhodovací hranu, ne celý exportní proces.
+
+Stop podmínka:
+Po úpravě hrany musí další dva běžné požadavky jít rozhodnout bez otevření staré karty návratu.
+```
+
+Všimněte si, že i nová smyčka je úzká. Neříká "zkontrolujeme exporty". Říká, kterou hranu rozhodnutí opravujete a jak poznáte, že stačí. Přesně tak se brání tomu, aby se z jednoho support případu stal měsíční projekt s vlastním názvem a smutným kalendářem.
+
+### Privacy-first uzavření
+
+Uzavření prvního běžného použití má výslovně říct, co se stane s dočasnou stopou:
+
+```text
+Dočasnou stopu po prvním použití uzavíráme takto:
+```
+
+Příklad:
+
+```text
+Dočasnou stopu po prvním použití uzavíráme takto:
+V e-bookové nebo interní dokumentaci necháváme jen zobecněný závěr o použitelnosti pravidla. Konkrétní zákaznický ticket zůstává pouze v support systému podle jeho běžných přístupů a retence.
+```
+
+Tahle věta je důležitější, než vypadá. Bez ní se snadno stane, že si tým pro jistotu uloží screenshot, export, jméno zákazníka nebo interní komentář do dalšího nástroje. Pak už nemáte jen ověření pravidla. Máte druhou datovou stopu, druhý přístupový režim a druhé místo, které jednou bude potřeba uklidit. Gratuluju, právě jste vyrobili práci pro budoucí já. Budoucí já posílá méně vděčný pozdrav.
+
+Privacy-first uzavření proto kontroluje tři věci:
+
+- Závěr je dostatečný bez kopie reálného případu.
+- Případ zůstává v původním systému, kde už platí přístupová a retenční pravidla.
+- Onboardingový příklad je zobecněný a neobsahuje identifikovatelné detaily.
+
+Pokud některý bod neplatí, nejdřív uklidte datovou stopu. Neodkládejte to na "až bude čas". U dočasných stop je "až bude čas" obvykle jen elegantnější název pro archeologii.
+
+### Karta uzavření prvního běžného použití
+
+```text
+Pravidlo:
+
+Kanonické pracovní místo:
+
+Co bylo po návratu poprvé běžně použito:
+
+Výsledek použití:
+- vracíme do pasivního provozu
+- zavřeno s lokální opravou kotvy
+- zavřeno s lokální opravou věty
+- nezavíráme, otevíráme novou malou smyčku
+
+Uzavírací věta:
+
+Nejmenší provedená nebo plánovaná oprava:
+
+Co zůstává beze změny:
+
+Co výslovně neotevíráme:
+
+Co mažeme, anonymizujeme nebo necháváme jen v původním systému:
+
+Vzniká nová smyčka?
+
+Pokud ano, její stop podmínka:
+
+Zůstává pravidlo v pasivním provozu?
+
+Vlastník pracovního místa:
+
+Kde je závěr uložený:
+```
+
+Karta má uzavřít první použití, ne z něj udělat nový provozní artefakt na věčné časy. Pokud je výsledek `vracíme do pasivního provozu`, karta po zápisu závěru končí. Pokud je výsledek lokální oprava, karta končí po propsání opravy do pracovního místa. Pokud vzniká nová smyčka, karta končí předáním do nové smyčky. V žádném stavu nemá zůstat viset jako neurčité "sledujeme".
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: přečtěte záznam prvního běžného použití.
+2. Minuta 2: vyberte jeden uzavírací stav.
+3. Minuta 3: napište uzavírací větu.
+4. Minuta 4: určete nejmenší opravu, pokud je potřeba.
+5. Minuta 5: napište, co zůstává beze změny a co se neotevírá.
+6. Minuta 6: zavřete dočasnou datovou stopu.
+7. Minuta 7: uložte závěr do kanonického pracovního místa nebo založte úzkou novou smyčku.
+
+Sedm minut stačí, pokud se držíte jednoho pravidla: nemluvíte o celém procesu, ale o tom, co první běžné použití skutečně ukázalo. Když se debata rozjede do "když už jsme u toho", napište tu větu do parkoviště a vraťte se k uzavření. Parkoviště je tady od toho, aby nápady nezmizely, ne aby ukradly řízení.
+
+### Checklist uzavření prvního běžného použití
+
+- Máme popsané, co se při prvním běžném použití skutečně stalo?
+- Vybrali jsme jeden uzavírací stav?
+- Je uzavírací věta konkrétní a bez neurčitého "budeme sledovat"?
+- Pokud pravidlo fungovalo, vrací se opravdu do pasivního provozu?
+- Pokud byla slabá kotva, opravili jsme umístění místo vymýšlení nového obsahu?
+- Pokud byla slabá věta, doplnili jsme jen nutnou rozhodovací hranu?
+- Pokud vznikl nový návratový signál, má vlastní malou smyčku a stop podmínku?
+- Je jasné, co zůstává beze změny?
+- Je jasné, co výslovně neotevíráme?
+- Uklidili jsme dočasné poznámky, screenshoty, kopie ticketů, pomocné exporty nebo vedlejší tabulky?
+- Zůstávají konkrétní zákaznické údaje jen v původním systému s běžnou retencí a přístupy?
+- Pokud potřebujeme příklad pro onboarding, je zobecněný?
+- Je závěr uložený tam, kde se pravidlo příště použije?
+
+Uzavření prvního běžného použití má jeden hlavní smysl: zabránit tomu, aby se mimořádná pozornost nenápadně stala novým normálem. Pokud pravidlo funguje, nechte ho pracovat. Pokud potřebuje malou opravu, udělejte ji tam, kde se rozhoduje. Pokud se problém vrátil, otevřete úzkou smyčku. Všechno ostatní je často jen hezky organizovaná nejistota.
+
 ## Pracovní log
 
+- 2026-07-02: Doplněna úvodní podkapitola o uzavření prvního běžného použití po uzavřeném návratu: čtyři uzavírací stavy, exportní příklady, privacy-first uzavření dočasné datové stopy, karta, mini workshop a checklist.
 - 2026-07-02: Doplněna úvodní podkapitola o uzavření návratu po dlouhém tichu v pasivním provozu: čtyři uzavírací stavy, exportní příklad, nový návratový signál, privacy-first ukončení dočasné datové stopy, karta, mini workshop a checklist.
 - 2026-07-02: Doplněna úvodní podkapitola o návratu po dlouhém tichu v pasivním provozu: kontrola návratového signálu, pracovní místo, čtyři výsledky návratu, exportní příklad, privacy-first datová brzda, karta, mini workshop a checklist.
 - 2026-07-02: Doplněna úvodní podkapitola o dlouhém tichu po potvrzeném pasivním provozu: klidová kotva, zahlédnutí bez evidence, přesun pracovního místa, privacy-first ticho, karta, mini workshop a checklist.
