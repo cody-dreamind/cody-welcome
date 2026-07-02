@@ -285424,8 +285424,187 @@ Pokud workshop potřebuje víc času, většinou se do něj přimíchalo nové t
 
 Druhé běžné použití po uzavřeném návratu po dlouhém tichu je dobré místo pro návrat ke klidu. Ne proto, že by tým přestal být opatrný. Právě naopak: opatrnost se projeví tím, že nepřidá další proces, další tabulku ani další sběr dat bez rozhodovací hodnoty. Pravidlo prošlo běžnou prací podruhé. Teď má právo zase ztichnout.
 
+## Uzavření druhého běžného použití po uzavřeném návratu po dlouhém tichu
+
+Po druhém běžném použití už pravidlo nesmí zůstat v polovičním stavu. Buď se vrací do pasivního provozu, dostane poslední lokální dočištění, nebo se z něj oddělí nový návratový signál. Všechno ostatní je organizační mlha: tým má pocit, že je opatrný, ale ve skutečnosti jen nechává otevřenou malou výjimku, která se bude připomínat při každém dalším použití.
+
+Uzavření druhého použití proto začíná krátkou rozhodovací větou:
+
+```text
+Druhé běžné použití uzavíráme takto:
+```
+
+Dobrá věta obsahuje výsledek, pracovní místo a hranici další péče:
+
+```text
+Druhé běžné použití uzavíráme takto:
+opravená věta v support šabloně funguje bez čerstvé paměti návratu, pravidlo se vrací do pasivního provozu a další kontrolu plánujeme jen při novém návratovém signálu.
+```
+
+Tahle věta je důležitá hlavně proto, že ukončuje výjimečný režim. Po dlouhém tichu se do pravidla na chvíli vrátila pozornost. To bylo správně. Ale když druhé běžné použití potvrdí, že pravidlo opět stojí samo, pozornost má skončit. Jinak se z pasivního provozu stane pasivní provoz s malou stálou kontrolou, což je hezký název pro neuklizený proces.
+
+### Čtyři uzavírací stavy
+
+Po druhém běžném použití vyberte jeden ze čtyř stavů:
+
+- Stabilní návrat do pasivního provozu: pravidlo fungovalo bez čerstvé paměti, bez staré karty a bez nové datové stopy.
+- Poslední lokální dočištění: pravidlo je správné, ale potřebuje jednu drobnou úpravu na stejném pracovním místě.
+- Nová úzká smyčka: druhé použití potvrdilo skutečný návrat problému, který nejde vyřešit posledním dočištěním.
+- Zavření bez další kontroly: druhé použití ukázalo, že další sledování by už nepřineslo rozhodovací hodnotu.
+
+`Stabilní návrat do pasivního provozu` je nejčistší konec. Zapište závěr do kanonického pracovního místa, smažte nebo archivujte pomocnou kartu a další použití už neplánujte. Pravidlo se má znovu objevit až ve chvíli, kdy ho někdo normálně potřebuje.
+
+`Poslední lokální dočištění` použijte opatrně. Je přípustné opravit nadpis, doplnit jednu hraniční větu, přesunout odkaz blíž k místu rozhodnutí nebo odstranit starou poznámku, která mate čtenáře. Není přípustné otevřít novou dokumentaci, nový report, nový formulář ani plošný audit jen proto, že jste u druhého použití zahlédli další možné zlepšení.
+
+`Nová úzká smyčka` patří do hry jen tehdy, když se problém skutečně opakuje i po lokální opravě. V takovém případě starou návratovou kartu nezvětšujte. Zavřete ji a založte novou smyčku s vlastním pracovním místem, stop podmínkou a privacy-first hranicí.
+
+`Zavření bez další kontroly` je užitečné, když druhé použití ukázalo, že tým nepotřebuje ani další potvrzení, ani novou smyčku. Někdy je nejlepší závěr prostě: funguje to, nic dalšího nesledujeme. Krátké, trochu nudné a přesně proto zdravé.
+
+### Praktický příklad
+
+Druhé běžné použití ověřilo support pravidlo pro exporty:
+
+```text
+Druhá běžná situace:
+Support člověk bez čerstvé paměti návratu řeší požadavek na opakovaný ruční CSV export.
+
+Použití:
+V šabloně najde hranici mezi ručním exportem a automatizovaným API napojením.
+
+Výsledek:
+Požadavek zůstává v supportu, protože nejde o technickou integraci.
+```
+
+Uzavření:
+
+```text
+Druhé běžné použití uzavíráme takto:
+hranice mezi opakovaným ručním exportem a API napojením je v support šabloně najitelná a rozhodnutelná. Pravidlo se vrací do pasivního provozu, starou kartu návratu neotevíráme a další kontrolu neplánujeme.
+```
+
+Co se výslovně neotevírá:
+
+```text
+Neotevíráme:
+nový typ ticketu, zvláštní exportní checklist, CRM atribut pro typ exportu, audit historických exportů ani tabulku všech hraničních případů.
+```
+
+Slabší výsledek může vypadat takto:
+
+```text
+Druhé použití ukázalo, že věta funguje, ale nadpis části "Exporty" pořád svádí k technickému předání.
+
+Poslední lokální dočištění:
+Nadpis měníme na "Ruční exporty a technická napojení" a pod něj necháváme stejnou rozhodovací větu.
+
+Co dál neděláme:
+Neplánujeme třetí běžné použití. Změnu ověří až běžná práce, nebo nový návratový signál.
+```
+
+Tím se oprava uzavře tam, kde vzniklo tření. Žádný nový proces, žádný nový přehled, žádná "pro jistotu" kontrola za čtrnáct dní. Pokud je nadpis jediný problém, opravte nadpis. Nenechte z něj vyrůst malý interní projekt s vlastním kalendářem a smutným koncem.
+
+### Privacy-first uzavření
+
+Uzavření druhého použití musí uklidit dočasnou datovou stopu. Při návratu po dlouhém tichu mohly vzniknout pomocné poznámky, anonymizované příklady, dočasné výřezy ticketů, interní komentáře nebo krátké exporty pro ověření. Po druhém použití se rozhodněte, co z nich má zůstat.
+
+Použijte tři otázky:
+
+```text
+Co musí zůstat jako trvalé pravidlo?
+
+Co stačí ponechat v původním systému?
+
+Co mažeme nebo anonymizujeme, protože už splnilo účel?
+```
+
+Příklad:
+
+```text
+Trvalé pravidlo:
+Jedna rozhodovací věta v support šabloně.
+
+Původní systém:
+Konkrétní tickety zůstávají jen v support nástroji podle běžné retence a přístupů.
+
+Mazání nebo anonymizace:
+Mažeme pomocnou tabulku hraničních případů a onboardingový příklad přepisujeme synteticky bez zákaznických detailů.
+```
+
+Privacy-first pointa není v tom, že se nic nesmí uložit. Pointa je v tom, že trvalý má být poznatek, ne hromada identifikovatelných stop kolem něj. Pokud se tým naučil rozlišit ruční export od technického napojení, má v systému zůstat rozlišovací věta. Ne screenshot ticketu, jméno zákazníka, API endpoint, interní poznámka ani obchodní kontext.
+
+Codyho komentář: nejčastější chyba po dobrém ověření je nechat si všechny podklady "kdyby se hodily". To je datový ekvivalent šuplíku s kabely. Jeden den se tváří užitečně, za rok nikdo neví, co k čemu patří, ale všichni se bojí to vyhodit.
+
+### Karta uzavření druhého běžného použití
+
+```text
+Pravidlo:
+
+Proč jsme dělali druhé běžné použití:
+
+Druhá běžná situace:
+
+Použil pravidlo člověk bez čerstvé paměti návratu?
+
+Bylo pravidlo najitelné v kanonickém pracovním místě?
+
+Stačila rozhodovací věta?
+
+Zůstal původní široký návrh zavřený?
+
+Výsledek uzavření:
+- stabilní návrat do pasivního provozu
+- poslední lokální dočištění
+- nová úzká smyčka
+- zavření bez další kontroly
+
+Jedna uzavírací věta:
+
+Co se propsalo do pracovního místa:
+
+Co výslovně neotevíráme:
+
+Co zůstává jen v původním systému:
+
+Co mažeme, anonymizujeme nebo archivujeme:
+
+Kdy se k pravidlu vrátíme:
+
+Vlastník pracovního místa:
+```
+
+Karta je krátká pojistka proti dvěma extrémům. První extrém je zapomenout, co se ověřilo. Druhý extrém je nechat si kolem ověření trvalý servisní režim. Dobrá karta udělá jednu věc: zavře větev tak, aby pravidlo mohlo znovu potichu fungovat.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte výsledek druhého běžného použití.
+2. Minuta 2: vyberte jeden ze čtyř uzavíracích stavů.
+3. Minuta 3: napište jednu uzavírací větu.
+4. Minuta 4: určete, co se propsalo do kanonického pracovního místa.
+5. Minuta 5: napište, co se výslovně neotevírá.
+6. Minuta 6: ukliďte datovou stopu: původní systém, anonymizace, mazání.
+
+Pokud se v šesté minutě ukáže, že tým neví, kde jsou pomocné podklady, je to samo o sobě nález. Neotevírejte kvůli tomu velký datový audit. Zapište nejbližší úklidový krok: kde leží dočasná tabulka, kdo ji smaže nebo anonymizuje a do kdy. Úklid má být stejně úzký jako původní ověření.
+
+### Checklist uzavření druhého běžného použití
+
+- Máme jednu uzavírací větu?
+- Vybrali jsme jeden ze čtyř stavů?
+- Je jasné, jestli se pravidlo vrací do pasivního provozu?
+- Pokud dočišťujeme, je oprava opravdu poslední a lokální?
+- Pokud vznikla nová smyčka, má vlastní stop podmínku?
+- Původní široký návrh zůstal zavřený?
+- Pravidlo je uložené v kanonickém pracovním místě?
+- Neplánujeme třetí kontrolu bez nového signálu?
+- Uklidili jsme pomocné poznámky, výřezy, tabulky nebo screenshoty?
+- Konkrétní zákaznické údaje zůstávají jen v původních systémech?
+- Onboardingový příklad je syntetický nebo dostatečně anonymizovaný?
+- Vlastník pracovního místa ví, kdy se k pravidlu znovu vrátit?
+
+Uzavření druhého běžného použití je malý návrat k normálu. Pravidlo prošlo dlouhým tichem, návratem, prvním použitím i druhým použitím. Pokud pořád funguje, zaslouží si klid. Ne další štítek, ne další kontrolní schůzku, ne další sloupec v tabulce. Jen jasnou větu, uklizenou datovou stopu a právo být použité až ve chvíli, kdy ho práce opravdu potřebuje.
+
 ## Pracovní log
 
+- 2026-07-02: Doplněna úvodní podkapitola o uzavření druhého běžného použití po uzavřeném návratu po dlouhém tichu: čtyři uzavírací stavy, exportní příklad, privacy-first úklid dočasné datové stopy, karta, mini workshop a checklist.
 - 2026-07-02: Doplněna úvodní podkapitola o druhém běžném použití po uzavřeném návratu po dlouhém tichu: kdy ho vynechat, tři výsledky, exportní příklad, privacy-first kontrola druhé datové stopy, karta, mini workshop a checklist.
 - 2026-07-02: Doplněna úvodní podkapitola o uzavření prvního běžného použití po uzavřeném návratu: čtyři uzavírací stavy, exportní příklady, privacy-first uzavření dočasné datové stopy, karta, mini workshop a checklist.
 - 2026-07-02: Doplněna úvodní podkapitola o uzavření návratu po dlouhém tichu v pasivním provozu: čtyři uzavírací stavy, exportní příklad, nový návratový signál, privacy-first ukončení dočasné datové stopy, karta, mini workshop a checklist.
