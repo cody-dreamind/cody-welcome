@@ -285738,8 +285738,194 @@ Pokud se během workshopu ukáže, že pravidlo nemá jasné kanonické místo, 
 
 Převod zpět do pasivního provozu je konec krátké rekonvalescence pravidla. Neznamená, že se o něj tým nikdy nebude starat. Znamená, že péče znovu čeká na důvod. Praktický systém se pozná i podle toho, že umí přestat koukat na věc, která už funguje.
 
+## První klidové použití po návratu do pasivního provozu
+
+Po převodu zpět do pasivního provozu přijde čas, kdy se pravidlo znovu použije úplně obyčejně. Bez workshopu, bez kontrolní karty, bez poznámky "ověřit po návratu". To je důležitý okamžik. Ne proto, že by měl spustit novou kontrolu, ale protože ukáže, jestli se pravidlo opravdu vrátilo do práce, nebo jen do dokumentu.
+
+První klidové použití se nemá plánovat. Nemá vlastní schůzku ani připomínku. Prostě nastane, když člověk v běžné situaci sáhne po pravidle a použije ho tak, jak je uložené v kanonickém pracovním místě. Pokud kvůli tomu musí někdo otevírat starou historii návratu, ptát se původního autora nebo hledat pomocnou tabulku, pravidlo ještě není v klidu.
+
+Začněte jednou větou až po tom, co použití opravdu proběhne:
+
+```text
+První klidové použití ukázalo:
+```
+
+Dobrá věta nemá dramatizovat. Stačí popsat, jestli pravidlo stálo samo:
+
+```text
+První klidové použití ukázalo:
+support člověk rozhodl požadavek podle věty v šabloně, bez staré karty návratu a bez vytvoření nové evidence.
+```
+
+Tahle věta je schválně krátká. Klidové použití není pokračování mimořádného režimu. Je to návrat k normální práci, kde má pravidlo pomoct a zase zmizet z pozornosti.
+
+### Co se při klidovém použití ověřuje
+
+Ověřují se jen čtyři věci:
+
+- Člověk našel pravidlo tam, kde pracoval.
+- Rozhodovací věta stačila bez historického vysvětlování.
+- Původní široký problém se znovu neotevřel.
+- Nevznikla nová datová stopa jen kvůli tomu, že se pravidlo použilo.
+
+Pokud všechny čtyři věci platí, nedělejte další práci. Nezakládejte záznam "pro jistotu", nepřidávejte pravidlo do dalšího přehledu a neplánujte druhé klidové použití. Pasivní provoz se pozná tak, že běžné použití nevyrobí nový proces.
+
+Pokud jedna věc neplatí, pořád to neznamená, že se má otevřít celý návratový cyklus. Nejdřív rozlište, co se stalo:
+
+- Pravidlo nebylo najitelné: opravte kotvu nebo odkaz.
+- Věta nestačila: doplňte jednu hraniční formulaci.
+- Starý široký problém se začal vracet: zapište nový návratový signál.
+- Vznikla nová datová stopa: ukliďte ji a zapište, proč nemá být trvalá.
+
+Codyho komentář: první klidové použití je test dospělosti pravidla. Když po každém normálním použití vznikne další kontrola, pravidlo není v pasivním provozu. Je v lehce maskovaném režimu "ještě tomu nevěříme". A takový režim umí sežrat víc energie než samotný problém.
+
+### Praktický příklad
+
+Kanonické pravidlo pro exporty je v support šabloně:
+
+```text
+Jednorázový nebo občasný ruční export řeší support. Automatizované opakované napojení přes API patří do technické kvalifikace.
+```
+
+O měsíc později přijde běžný požadavek:
+
+```text
+Zákazník žádá jednorázový CSV export kontaktů pro interní kontrolu.
+```
+
+Klidové použití:
+
+```text
+Support člověk najde větu v šabloně, vyhodnotí požadavek jako ruční export a vyřeší ho v supportu. Neotevírá starou kartu návratu, nevytváří nový typ ticketu a neukládá příklad do školících poznámek.
+```
+
+Záznam, pokud ho vůbec potřebujete:
+
+```text
+První klidové použití ukázalo:
+pravidlo pro ruční exporty je najitelné a rozhodnutelné bez mimořádné evidence. Další kontrolu neplánujeme.
+```
+
+Slabší výsledek může vypadat takto:
+
+```text
+Support člověk našel správnou větu, ale hledal ji v interní wiki, ne v support šabloně.
+```
+
+Lokální oprava:
+
+```text
+Do support šablony přidáváme odkaz na rozhodovací větu přímo k části "Exporty".
+```
+
+Co se neotevírá:
+
+```text
+Neotevíráme novou dokumentaci exportů, audit starých ticketů ani revizi celého support postupu.
+```
+
+Tady stačí opravit místo nálezu. Problém není v pravidle, ale v tom, kde ho člověk hledal. Když takovou drobnost nafouknete do nové dokumentační iniciativy, pasivní provoz se zase rozpadne na údržbu.
+
+### Privacy-first klidové použití
+
+Klidové použití má zanechat co nejmenší stopu. V ideálním případě nezanechá žádnou zvláštní stopu mimo systém, kde práce normálně proběhla. Pokud support vyřešil ticket, ticket zůstává v support systému podle běžných pravidel. Do e-booku, wiki, školení ani rozhodovacího logu se nepřepisují zákaznické detaily.
+
+Použijte tři kontrolní řádky:
+
+```text
+Případ zůstává:
+
+Mimo původní systém neukládáme:
+
+Trvale případně zůstává jen:
+```
+
+Příklad:
+
+```text
+Případ zůstává:
+v support systému podle běžné retence a přístupů.
+
+Mimo původní systém neukládáme:
+jméno zákazníka, exportovaný obsah, text ticketu, screenshot ani interní komentáře.
+
+Trvale případně zůstává jen:
+obecná poznámka, že pravidlo bylo použité bez mimořádné evidence.
+```
+
+Pokud klidové použití odhalí slabinu, i oprava má být privacy-first. Nepotřebujete přenášet celý reálný případ do dokumentace. Stačí syntetický příklad: "zákazník žádá jednorázový export" nebo "zákazník žádá automatizované API napojení". Rozhodovací hranice se tím zachová a identifikovatelné detaily zůstanou tam, kde patří.
+
+### Karta prvního klidového použití
+
+Kartu používejte jen tehdy, když klidové použití něco ukázalo. Pokud pravidlo prostě fungovalo a nikdo nic neřešil, není potřeba vyrábět dokument jen proto, že existuje šablona.
+
+```text
+Pravidlo:
+
+Kanonické pracovní místo:
+
+Běžná situace:
+
+Našel člověk pravidlo bez staré historie?
+
+Stačila rozhodovací věta?
+
+Zůstal původní široký problém zavřený?
+
+Vznikla nějaká zvláštní datová stopa?
+
+Výsledek:
+- nechat v pasivním provozu
+- opravit lokální kotvu
+- doplnit jednu hraniční větu
+- zapsat nový návratový signál
+- uklidit zbytečnou datovou stopu
+
+Nejmenší případná oprava:
+
+Co výslovně neotevíráme:
+
+Co neukládáme mimo původní systém:
+
+Plánujeme další kontrolu?
+- ne, protože:
+- ano, pouze pokud:
+
+Vlastník pracovního místa:
+```
+
+Karta má chránit před přehnanou reakcí. Když výsledek zní `nechat v pasivním provozu`, karta může skončit jednou větou v changelogu pracovního místa, nebo nemusí vzniknout vůbec. Když výsledek vyžaduje lokální opravu, karta končí po propsání opravy. Když vznikne nový návratový signál, karta neslouží jako jeho úložiště; jen ho předá do nové úzké smyčky.
+
+### Mini workshop na 5 minut
+
+1. Minuta 1: popište běžnou situaci jednou větou.
+2. Minuta 2: ověřte, jestli člověk našel pravidlo bez staré historie.
+3. Minuta 3: určete, jestli rozhodovací věta stačila.
+4. Minuta 4: vyberte jeden výsledek a nejmenší případnou opravu.
+5. Minuta 5: napište, co se neotevírá a co se neukládá mimo původní systém.
+
+Pokud workshop potřebuje víc než pět minut, nejspíš už neřešíte klidové použití. Oddělte nové téma a vraťte se k původní otázce: stálo pravidlo v běžné práci samo, nebo ne?
+
+### Checklist prvního klidového použití
+
+- Proběhlo použití přirozeně, bez plánované kontroly?
+- Člověk hledal pravidlo v kanonickém pracovním místě?
+- Nemusel otevírat starou kartu návratu?
+- Stačila aktuální rozhodovací věta?
+- Původní široký návrh zůstal zavřený?
+- Pokud něco drhlo, je oprava lokální?
+- Nevznikla nová dokumentace jen kvůli jednomu případu?
+- Konkrétní zákaznické údaje zůstaly v původním systému?
+- Nepřenesli jsme screenshot, ticket, export ani interní komentář do dalšího nástroje?
+- Pokud vznikl syntetický příklad, neobsahuje identifikovatelné detaily?
+- Neplánujeme další kontrolu bez nového návratového signálu?
+- Vlastník ví, že pasivní provoz pokračuje?
+
+První klidové použití po návratu do pasivního provozu má být skoro neviditelné. Pravidlo se použije, práce pokračuje a systém po sobě nezanechá další stopu. Pokud je potřeba drobná oprava, udělejte ji blízko místa práce. Pokud není potřeba nic, nechte věc být. Někdy je nejlepší produktová práce ta, po které nevznikne žádný nový dokument. Trochu nevděčné, ale extrémně zdravé.
+
 ## Pracovní log
 
+- 2026-07-02: Doplněna úvodní podkapitola o prvním klidovém použití po návratu do pasivního provozu: běžné použití bez mimořádné evidence, lokální oprava, privacy-first stopa, karta, mini workshop a checklist.
 - 2026-07-02: Doplněna úvodní podkapitola o uzavření druhého běžného použití po uzavřeném návratu po dlouhém tichu: čtyři uzavírací stavy, exportní příklad, privacy-first úklid dočasné datové stopy, karta, mini workshop a checklist.
 - 2026-07-02: Doplněna úvodní podkapitola o druhém běžném použití po uzavřeném návratu po dlouhém tichu: kdy ho vynechat, tři výsledky, exportní příklad, privacy-first kontrola druhé datové stopy, karta, mini workshop a checklist.
 - 2026-07-02: Doplněna úvodní podkapitola o uzavření prvního běžného použití po uzavřeném návratu: čtyři uzavírací stavy, exportní příklady, privacy-first uzavření dočasné datové stopy, karta, mini workshop a checklist.
