@@ -284248,8 +284248,203 @@ Pokud pět minut nestačí, pravděpodobně řešíte víc než uzavření druh�
 
 Uzavření druhého pasivního použití má být tiché. Když pravidlo obstálo, nechte ho být. Když potřebuje poslední hranu, přidejte ji tam, kde se používá. Když se objevil skutečný návratový signál, otevřete novou malou smyčku. V každém případě platí: neodměňujte dobré pravidlo novou evidencí. Nejlepší důkaz pasivního provozu je často právě to, že po něm nezůstává žádný nový provoz.
 
+## Dlouhé ticho po potvrzeném pasivním provozu
+
+Po druhém potvrzeném pasivním použití přichází zvláštní typ práce: nedělat z pravidla další práci. Tým už ví, že pravidlo stojí samo. Ví, kde bydlí. Ví, kdy se má použít. Ví, jaký návratový signál by ho znovu otevřel. Teď je potřeba vydržet klid a nesplést si ticho s opomenutím.
+
+Dlouhé ticho neznamená, že pravidlo nikdo nepoužívá. Znamená, že jeho použití nevyžaduje mimořádnou pozornost. Když pracovní místo běží normálně, lidé se k pravidlu dostanou přirozeně a nevzniká nová evidence, je to úspěch. Ne každý úspěch potřebuje graf. Některé potřebují hlavně nebýt rušeny.
+
+Začněte jednou větou u kanonického pracovního místa:
+
+```text
+Pravidlo zůstává v pasivním provozu; další běžná použití neevidujeme a k tématu se vracíme pouze při návratovém signálu:
+```
+
+Za dvojtečku doplňte konkrétní signál, ne obecný pocit. Například:
+
+```text
+Pravidlo zůstává v pasivním provozu; další běžná použití neevidujeme a k tématu se vracíme pouze tehdy, když dvě exportní žádosti za sebou skončí sběrem technických detailů v supportu místo technické kvalifikace.
+```
+
+Tím vznikne klidová kotva. Není to úkol, není to kontrolní plán a není to metrika. Je to hranice, která říká: pravidlo existuje, ale samo o sobě nevyrábí žádný nový provoz.
+
+### Co v dlouhém tichu nedělat
+
+Největší riziko dlouhého ticha je produktivní nervozita. Tým má pocit, že když se nic neděje, měl by něco kontrolovat. Jenže pasivní provoz je přesně stav, kdy kontrola musí mít důvod.
+
+Po potvrzeném pasivním provozu proto nedělejte tyto věci:
+
+- nezakládejte seznam dalších použití;
+- nepřidávejte pravidlo do pravidelného meetingu jen pro jistotu;
+- neposílejte lidem připomínku, pokud nevznikl signál;
+- nerozšiřujte pravidlo na sousední procesy;
+- nekopírujte staré příklady do nové dokumentace;
+- nezavádějte nový dashboard, CRM atribut ani štítek;
+- neprodlužujte retenci dočasných poznámek jen proto, že by se "mohly hodit".
+
+Každý z těchto kroků vypadá nevinně. Dohromady ale dělají z pasivního pravidla aktivní systém. A aktivní systém už potřebuje vlastníka, rytmus, údržbu, vysvětlení, datovou mapu a důvod. Pokud ho nemáte, nevyrábějte ho omylem.
+
+Codyho komentář: ticho je pro týmy podezřelé. Máme tendenci věřit, že dobrá práce musí šustit v tabulce. Jenže některé nejlepší provozní změny poznáte podle toho, že přestanou chtít pozornost. Ano, je to nudné. Nuda je občas jen stabilita v pracovním oblečení.
+
+### Kdy pravidlo zahlédnout bez nové evidence
+
+Dlouhé ticho neznamená, že pravidlo nesmí nikdo nikdy otevřít. Znamená, že ho neotevíráte kvůli samotnému plynutí času. Přirozené zahlédnutí může nastat, když člověk stejně pracuje v daném místě:
+
+- při úpravě šablony, kde pravidlo bydlí;
+- při onboardingu nového člověka do stejné pracovní situace;
+- při změně nabídky, která se dotýká stejného rozhodnutí;
+- při úklidu kanonického indexu;
+- při incidentu, který odpovídá návratovému signálu;
+- při zjištění, že pracovní místo, kde pravidlo bydlí, už neexistuje.
+
+Rozdíl mezi zahlédnutím a evidencí je jednoduchý. Zahlédnutí vznikne jako vedlejší efekt reálné práce. Evidence vznikne jako nový samostatný režim. První je v pořádku. Druhé musí mít vlastní důvod.
+
+Praktická věta:
+
+```text
+Pravidlo jsme zahlédli při úpravě support makra. Kotva pořád platí, návratový signál nenastal a nevzniká žádný nový záznam použití.
+```
+
+Tahle věta je dostatečná. Nepřidávejte k ní tabulku "kontrola proběhla". Pokud se nic nemění, zůstane stopa jen tam, kde už stejně probíhala práce.
+
+### Když se změní pracovní místo
+
+Nejčastější legitimní důvod sáhnout na pasivní pravidlo bez návratového signálu je změna pracovního místa. Šablona se sloučí, support makro se přepíše, formulář se rozdělí, interní postup se přesune do jiného nástroje. Pravidlo možná pořád platí, ale jeho domov se změnil.
+
+V takové chvíli neotevírejte obsah pravidla od začátku. Přeneste jen tři věci:
+
+- pracovní větu pravidla;
+- hranici použití;
+- návratový signál.
+
+Všechno ostatní je historie. Staré příklady, dočasné poznámky, jména lidí, zákaznické formulace a ověřovací výstupy nepřenášejte, pokud nejsou nezbytné pro dnešní použití. Nové pracovní místo nemá zdědit celé archeologické naleziště jen proto, že se kdysi něco řešilo.
+
+Šablona přesunu:
+
+```text
+Původní pracovní místo:
+
+Nové pracovní místo:
+
+Přenášíme:
+- pracovní větu:
+- hranici použití:
+- návratový signál:
+
+Nepřenášíme:
+
+Privacy-first úklid:
+
+Kde je nová kotva:
+```
+
+Příklad:
+
+```text
+Původní pracovní místo:
+Support makro pro jednorázové exporty.
+
+Nové pracovní místo:
+Společná šablona pro exporty a technické napojení.
+
+Přenášíme:
+- pracovní větu: nejdřív rozliš jednorázový export a pravidelné napojení.
+- hranici použití: support nesbírá technické detaily pravidelného napojení.
+- návratový signál: dva případy za sebou skončí sběrem technických detailů v supportu.
+
+Nepřenášíme:
+Staré zákaznické dotazy, pracovní poznámky z ověření ani seznam prvních použití.
+
+Privacy-first úklid:
+Do nové šablony nejde žádný nový atribut, export ani kopie ticketů.
+
+Kde je nová kotva:
+Odstavec "Rozlišení exportu a napojení" ve společné support šabloně.
+```
+
+Tento přesun je provozní údržba, ne nové ověřování. Pokud se při přesunu ukáže, že pracovní věta už nedává smysl, neprotahujte přesun. Otevřete novou malou smyčku s dnešní otázkou.
+
+### Privacy-first ticho
+
+Privacy-first hodnota dlouhého ticha je v tom, že nevzniká další vrstva dat. Nepřibývají záznamy použití, osobní poznámky, exporty, screenshoty, kopie ticketů ani nový dodavatelský nástroj. Pravidlo pomáhá lidem rozhodovat a přitom kolem sebe nestaví sledovací aparát.
+
+U pasivního pravidla si proto jednou napište:
+
+```text
+V dlouhém tichu nevzniká:
+```
+
+A doplňte konkrétní položky:
+
+```text
+V dlouhém tichu nevzniká:
+- seznam použití pravidla;
+- kopie zákaznických dotazů mimo původní ticket;
+- nový CRM atribut pro typ exportu;
+- dashboard exportních žádostí;
+- pravidelný report pro tým;
+- nový nástroj pro sledování kvality support odpovědí.
+```
+
+Tento seznam není paranoia. Je to provozní hygiena. Když tým ví, co nevzniká, snáz odolá nápadu "jen si to někam pišme". "Někam" je v privacy-first provozu nejdražší místo na světě, protože nikdo neví, kdo ho vlastní, jak dlouho žije a kdy se uklidí.
+
+### Karta dlouhého ticha
+
+```text
+Pravidlo v pasivním provozu:
+
+Kanonické pracovní místo:
+
+Pracovní věta pravidla:
+
+Hranice použití:
+
+Návratový signál:
+
+Co dál neevidujeme:
+
+Co dál neukládáme ani nekopírujeme:
+
+Kdy lze pravidlo pouze zahlédnout:
+
+Kdy se musí otevřít nová smyčka:
+
+Kdo vlastní pracovní místo, ne zvláštní kontrolu:
+
+Datum posledního potvrzení pasivního provozu:
+```
+
+Kartu použijte jen pro pravidla, která mají vyšší riziko návratu nebo žijí v důležitém pracovním místě. U drobného pravidla často stačí jedna klidová věta. Pokud karta sama začne vyžadovat pravidelnou údržbu, pravděpodobně jste si právě vyrobili aktivní standard. Gratuluji, ale taky soustrast.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte pracovní větu pravidla.
+2. Minuta 2: potvrďte, kde pravidlo bydlí.
+3. Minuta 3: napište návratový signál.
+4. Minuta 4: napište, co dál neevidujete.
+5. Minuta 5: napište, co dál neukládáte ani nekopírujete.
+6. Minuta 6: určete, kdy pravidlo smí být pouze zahlédnuto bez nové evidence.
+
+Workshop má skončit klidem. Pokud během něj vznikne nápad na dashboard, nový report nebo rozšíření pravidla, dejte ho stranou a ptejte se, jaký signál ho opravdu odůvodňuje. Bez signálu je to jen pracovní neklid v hezké bundě.
+
+### Checklist dlouhého ticha
+
+- Je jasné, že po druhém potvrzeném použití nevzniká třetí ověřovací kolo?
+- Má pravidlo jednu pracovní větu v kanonickém místě?
+- Je návratový signál konkrétní a dohledatelný?
+- Je napsané, co dál neevidujeme?
+- Je napsané, co dál neukládáme, nekopírujeme ani neposíláme do nového nástroje?
+- Víme, kdy smí být pravidlo pouze zahlédnuto jako součást jiné práce?
+- Pokud se mění pracovní místo, přenášíme jen pracovní větu, hranici a návratový signál?
+- Nepřenášíme staré příklady, zákaznické texty ani dočasné poznámky bez dnešního důvodu?
+- Nevznikl nový meeting, report, dashboard, CRM atribut ani kontrolní seznam?
+- Zůstává vlastnictví u pracovního místa, ne u samostatné kontroly pravidla?
+
+Dlouhé ticho je jeden z nejlepších výsledků provozní práce. Ne proto, že by pravidlo zmizelo, ale protože přestalo vyžadovat obsluhu. Pokud se později objeví návratový signál, otevřete novou malou smyčku. Do té doby nechte pravidlo dělat přesně to, kvůli čemu vzniklo: pomáhat v práci, aniž by kolem sebe sbíralo zbytečná data a pozornost.
+
 ## Pracovní log
 
+- 2026-07-02: Doplněna úvodní podkapitola o dlouhém tichu po potvrzeném pasivním provozu: klidová kotva, zahlédnutí bez evidence, přesun pracovního místa, privacy-first ticho, karta, mini workshop a checklist.
 - 2026-07-02: Doplněna úvodní podkapitola o uzavření druhého pasivního použití: čtyři uzavírací stavy, exportní příklad, privacy-first ne-evidence, karta, mini workshop a checklist.
 - 2026-07-02: Doplněna úvodní podkapitola o druhém běžném použití pravidla v pasivním provozu: ověření bez čerstvé paměti, čtyři výsledky, exportní příklad, privacy-first ne-evidence, karta, mini workshop a checklist.
 - 2026-07-02: Doplněna úvodní podkapitola o uzavření prvního pasivního použití pravidla: čtyři uzavírací stavy, support příklady, privacy-first úklid, karta, mini workshop a checklist.
