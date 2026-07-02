@@ -283299,6 +283299,8 @@ Datum uzavření:
 
 Karta má smysl hlavně u výsledků, které nejsou čisté potvrzené ticho. Pokud druhé použití dopadlo hladce, stačí jedna věta u pracovního místa. Karta je nástroj pro hranici, ne sběratelský předmět.
 
+U hladkého uzavření si proto hlídejte délku zápisu. Jedna věta má říct, že pravidlo bylo nalezené, použité bez staré historie a dál nevyžaduje zvláštní péči. Pokud k ní začnete přidávat tabulku, skóre nebo nové připomínky, už neuzavíráte archivní minimum; otevíráte novou rutinu.
+
 ### Mini workshop na 6 minut
 
 1. Minuta 1: přečtěte archivní pravidlo a druhé běžné použití.
@@ -283331,6 +283333,7 @@ Uzavření druhého běžného použití po archivaci je konec malé smyčky. Po
 
 ## Pracovní log
 
+- 2026-07-02: Doplněno krátké pravidlo pro délku zápisu při hladkém uzavření druhého běžného použití po archivaci.
 - 2026-07-02: Doplněna úvodní podkapitola o uzavření druhého běžného použití po návratu lokální úpravy do archivního minima: čtyři uzavírací stavy, poslední lokální oprava, ukončení mimořádné péče, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-07-02: Doplněna úvodní podkapitola o druhém běžném použití po návratu lokální úpravy do archivního minima: samostatnost pravidla bez čerstvé paměti, slabá kotva, slabá hranice, skrytá rutina, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-07-02: Doplněna navazující podkapitola o uzavření prvního běžného použití po návratu lokální úpravy do archivního minima: uzavírací stavy, praktické příklady, privacy-first uzavření, karta, mini workshop a checklist.
