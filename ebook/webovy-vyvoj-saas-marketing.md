@@ -283119,8 +283119,219 @@ Pokud se v páté minutě objeví návrh na nový report, vraťte se ke třetí 
 
 Druhé běžné použití po návratu do archivního minima má skončit lehce. Pokud pravidlo funguje, dál ho nenoste po schůzkách jako čestnou vlajku. Nechte ho v pracovním místě, kde pomáhá. Dobře navržené pravidlo nemusí být vidět pořád. Stačí, že je vidět ve chvíli, kdy má.
 
+## Uzavření druhého běžného použití po návratu lokální úpravy do archivního minima
+
+Druhé běžné použití po návratu do archivního minima je poslední rozumné místo, kde má lokální úprava dostat mimořádnou pozornost. Pokud obstála i bez čerstvé paměti původní opravy, nemá dál cestovat po plánování jako téma "pro jistotu". Uzavření druhého použití proto říká: pravidlo buď zůstává jako archivní minimum, potřebuje poslední lokální opravu, nebo ukázalo, že už nejde o archivní minimum.
+
+Začněte větou:
+
+```text
+Druhé běžné použití po archivaci uzavíráme stavem:
+```
+
+Do věty napište stav, důvod a další režim pravidla:
+
+```text
+Druhé běžné použití po archivaci uzavíráme stavem samostatné ticho, protože nový kolega našel pravidlo v šabloně první odpovědi, rozhodl podle něj bez staré historie a nevznikla žádná nová evidence použití. Pravidlo dál zůstává jako archivní minimum.
+```
+
+Tahle věta ukončuje mimořádnou péči. Neříká, že pravidlo je navždy dokonalé. Říká jen, že po dvou běžných použitích nemá vlastní kontrolní režim. Kdyby se problém vrátil, musí přijít přes konkrétní návratový signál, ne přes volný pocit, že by se "na to mohlo ještě podívat".
+
+### Čtyři uzavírací stavy
+
+Po druhém použití vyberte jeden ze čtyř stavů:
+
+- Potvrdit archivní minimum: pravidlo bylo najitelné, použitelné a nevznikla nová rutina.
+- Udělat poslední lokální opravu kotvy: pravidlo je správné, ale ještě jednou se musí přiblížit pracovnímu místu.
+- Udělat poslední lokální opravu hranice: pravidlo je na správném místě, ale rozhodovací věta potřebuje poslední zpřesnění.
+- Ukončit archivní minimum a otevřít novou otázku: druhé použití ukázalo širší vzor nebo skrytou rutinu, kterou nejde uklidit jednou větou.
+
+Stav `potvrdit archivní minimum` je cílový. Znamená, že pravidlo může dál mlčet. Neplánujte třetí běžné použití, pokud k němu nemáte nový důvod. Třetí kontrola bez důvodu už není opatrnost, ale malé předplatné nejistoty.
+
+Stav `poslední lokální oprava kotvy` použijte, když člověk pořád hledal pravidlo mimo přirozené pracovní místo. Oprava smí změnit název bloku, odkaz, umístění nebo krátkou navigační větu. Nesmí z archivního minima udělat novou dokumentaci.
+
+Stav `poslední lokální oprava hranice` použijte, když člověk pravidlo našel, ale nerozlišil přesně situaci použití. Oprava smí přidat jednu větu typu "použij jen když" nebo "nepoužívej pokud". Pokud potřebujete tři odstavce, pravidlo už není minimum.
+
+Stav `nová otázka` použijte, když se ukáže širší vzor. Například pravidlo funguje v obchodní šabloně, ale podobná stará stopa se objevila v onboardingu nového obchodníka, v CRM popisku a v interním checklistu. To už není lokální oprava. To je otázka zdrojů pravdy, a ta si zaslouží vlastní hranici.
+
+### Praktický příklad
+
+```text
+Archivní pravidlo:
+U doporučených poptávek se ptej na rámec spolupráce jen tehdy, když bez něj nejde navrhnout další konkrétní krok.
+
+Druhé běžné použití:
+Nový kolega řešil nejasnou doporučenou poptávku, našel pravidlo v šabloně první odpovědi a otázku použil jen proto, že bez rámce spolupráce nešlo navrhnout další krok.
+
+Uzavírací stav:
+Potvrdit archivní minimum.
+
+Důvod:
+Pravidlo bylo najitelné, srozumitelné a nepřitáhlo starý rozhodovací log ani novou evidenci.
+
+Co dál neděláme:
+Neplánujeme třetí kontrolu, nezakládáme report použití otázky a neotevíráme lead scoring.
+
+Privacy-first závěr:
+Ponecháváme jen zobecněný závěr o samostatném použití. Nepřenášíme text poptávky, jméno zákazníka, částku ani interní obchodní komentář.
+```
+
+Varianta s poslední opravou kotvy:
+
+```text
+Výsledek druhého použití:
+Člověk pravidlo použil správně, ale našel ho až přes starý rozhodovací log.
+
+Uzavírací stav:
+Poslední lokální oprava kotvy.
+
+Oprava:
+Přesunout jednu rozhodovací větu přímo do šablony první odpovědi a starý log ponechat jen jako historický zdroj.
+
+Stop podmínka:
+Pokud ani další běžné použití pravidlo nenajde v šabloně, nejde už o kotvu jedné věty, ale o otázku zdroje pravdy.
+```
+
+Varianta se skrytou rutinou:
+
+```text
+Výsledek druhého použití:
+Pravidlo fungovalo, ale někdo založil pomocnou tabulku s příklady použití otázky.
+
+Uzavírací stav:
+Ukončit archivní minimum a otevřít novou otázku pouze k pracovní rutině.
+
+Nová otázka:
+Proč má tým potřebu evidovat použití otázky, když pravidlo mělo zůstat archivní?
+
+Co zůstává zavřené:
+Obsah pravidla, formulář, CRM pole a scoring.
+
+Nejmenší první krok:
+Zrušit tabulku a zapsat, jaký návratový signál by musel existovat, aby evidence dávala smysl.
+```
+
+Tady je důležité nezaměnit obsah pravidla a chování kolem něj. Pravidlo může být správné, ale tým kolem něj začne vytvářet novou rutinu. Pak neopravujete pravidlo. Uklízíte provozní návyk.
+
+### Kdy už neplánovat další použití
+
+Další zvláštní použití po druhém průchodu neplánujte, pokud platí tři věci:
+
+- pravidlo bylo nalezené v pracovním místě;
+- člověk podle něj rozhodl bez staré historie;
+- nevznikla nová datová stopa, rutina ani kontrolní připomínka.
+
+Po těchto třech odpovědích má pravidlo nárok na klid. Zůstává v pracovním místě, čeká na návratový signál a nebere si další pozornost. Pokud se za měsíc nic nestane, není potřeba slavit stabilitu dalším review. Stabilita se někdy projevuje tím, že se nic neozve. Ano, trochu nepohodlné pro lidi, kteří milují dashboardy s čárkou nahoru. Ale účinné.
+
+Další použití plánujte jen tehdy, když druhý průchod skončil poslední lokální opravou kotvy nebo hranice. I tehdy ale napište stop podmínku. Například:
+
+```text
+Po poslední opravě kotvy ověříme jedno nejbližší běžné použití. Pokud pravidlo znovu nebude najitelné, otevíráme novou otázku zdroje pravdy; pokud najitelné bude, mimořádná péče končí.
+```
+
+Bez stop podmínky se z "ještě jednou" stane oblíbený provozní polštář. Pohodlný, měkký a podezřele často pod ním končí rozhodnutí.
+
+### Privacy-first uzavření
+
+Uzavření druhého použití musí uklidit i stopu po ověřování. U archivního minima je cílem, aby po dvou použitích nezůstala vlastní evidence. Stačí závěr, stav a případná lokální oprava. Všechno ostatní buď patří do původního systému, nebo má zmizet.
+
+Použijte tři řádky:
+
+```text
+Ponecháváme:
+
+Rušíme nebo nepřenášíme:
+
+Nová evidence nevzniká, protože:
+```
+
+Příklad:
+
+```text
+Ponecháváme:
+Závěr, že pravidlo obstálo při druhém běžném použití bez staré historie.
+
+Rušíme nebo nepřenášíme:
+Dočasnou poznámku z ověření, zákaznický příklad, interní komentář a návrh tabulky četnosti.
+
+Nová evidence nevzniká, protože:
+Pravidlo má dál fungovat jen jako rozhodovací věta v šabloně a otevře se až při návratovém signálu.
+```
+
+Tohle je drobná věc, ale přesně tak se drží privacy-first provoz v realitě. Ne velkými slogany, ale tím, že po malé kontrole nevznikne malá databáze. Malé databáze mají totiž nepříjemný zvyk tvářit se nevinně, dokud se někdo nezeptá, proč existují.
+
+### Karta uzavření druhého použití po archivaci
+
+```text
+Archivní pravidlo:
+
+Druhé běžné použití:
+
+Co se opravdu stalo:
+
+Uzavírací stav:
+- potvrdit archivní minimum
+- poslední lokální oprava kotvy
+- poslední lokální oprava hranice
+- ukončit archivní minimum a otevřít novou otázku
+
+Důvod stavu:
+
+Poslední lokální oprava, pokud existuje:
+
+Stop podmínka pro případnou poslední opravu:
+
+Co zůstává zavřené:
+
+Co dál nesledujeme:
+
+Privacy-first uzavření:
+Ponecháváme:
+Rušíme nebo nepřenášíme:
+Nová evidence nevzniká, protože:
+
+Další návratový signál:
+
+Vlastník:
+
+Datum uzavření:
+```
+
+Karta má smysl hlavně u výsledků, které nejsou čisté potvrzené ticho. Pokud druhé použití dopadlo hladce, stačí jedna věta u pracovního místa. Karta je nástroj pro hranici, ne sběratelský předmět.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte archivní pravidlo a druhé běžné použití.
+2. Minuta 2: pojmenujte, co se opravdu stalo bez interpretace historie.
+3. Minuta 3: vyberte jeden uzavírací stav.
+4. Minuta 4: napište případnou poslední lokální opravu a její stop podmínku.
+5. Minuta 5: zapište, co zůstává zavřené a co dál nesledujete.
+6. Minuta 6: udělejte privacy-first úklid a ukončete mimořádnou péči.
+
+Když se workshop začne měnit v návrh nového reportu, zastavte ho. Report může být správný, ale ne jako přívěsek archivního minima. Musí přijít s vlastním důvodem, vlastníkem a datovou hranicí. Jinak jen převlékáte starou nejistotu za metriku.
+
+### Checklist uzavření druhého použití po archivaci
+
+- Víme, jaké archivní pravidlo uzavíráme?
+- Popisujeme druhé běžné použití, ne jen dojem z pravidla?
+- Bylo použití dost samostatné bez čerstvé paměti?
+- Vybrali jsme jeden ze čtyř uzavíracích stavů?
+- Pokud potvrzujeme archivní minimum, končí mimořádná péče?
+- Pokud opravujeme kotvu, měníme jen najitelnost nebo umístění?
+- Pokud opravujeme hranici, měníme jen jednu rozhodovací větu?
+- Pokud vznikla skrytá rutina, oddělili jsme ji od obsahu pravidla?
+- Je jasné, co zůstává zavřené?
+- Je jasné, co dál nesledujeme?
+- Rušíme nebo nepřenášíme dočasné poznámky, zákaznické příklady, interní komentáře a pomocné tabulky?
+- Nevzniká nové CRM pole, tracker, report, segment ani export?
+- Má další otevření konkrétní návratový signál?
+- Může pravidlo po uzavření znovu fungovat jako tiché archivní minimum?
+
+Uzavření druhého běžného použití po archivaci je konec malé smyčky. Pokud pravidlo prošlo, nechte ho zmizet do práce. Pokud potřebuje poslední větu nebo lepší kotvu, opravte ji a nastavte jasnou stop podmínku. A pokud se kolem něj rodí nová rutina, přestaňte ji nazývat opatrností. Je to nová práce a musí si zasloužit existenci.
+
 ## Pracovní log
 
+- 2026-07-02: Doplněna úvodní podkapitola o uzavření druhého běžného použití po návratu lokální úpravy do archivního minima: čtyři uzavírací stavy, poslední lokální oprava, ukončení mimořádné péče, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-07-02: Doplněna úvodní podkapitola o druhém běžném použití po návratu lokální úpravy do archivního minima: samostatnost pravidla bez čerstvé paměti, slabá kotva, slabá hranice, skrytá rutina, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-07-02: Doplněna navazující podkapitola o uzavření prvního běžného použití po návratu lokální úpravy do archivního minima: uzavírací stavy, praktické příklady, privacy-first uzavření, karta, mini workshop a checklist.
 - 2026-07-02: Doplněna úvodní podkapitola o prvním běžném použití po návratu lokální úpravy do archivního minima: tři otázky použití, čtyři výsledky, praktické příklady, privacy-first zápis, karta, mini workshop a checklist.
