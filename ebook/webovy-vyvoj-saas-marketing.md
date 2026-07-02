@@ -282706,8 +282706,207 @@ Pokud se během workshopu ukáže nový problém mimo archivní pravidlo, založ
 
 První běžné použití po návratu lokální úpravy do archivního minima má být skoro neviditelné. Když funguje, jen potvrdí, že archivní pravidlo stačí. Když nefunguje, opraví nejbližší kotvu nebo hranici. A když se někdo pokusí o širší změnu bez signálu, pomůže říct klidné ne. Což je mimochodem podceňovaná produktová dovednost.
 
+## Uzavření prvního běžného použití po návratu lokální úpravy do archivního minima
+
+První běžné použití po archivaci se musí také umět zavřít. Jinak se z malé kontroly najitelnosti pravidla stane nový dohled nad pravidlem, které už mělo mlčet. Uzavření říká jednoduchou věc: co jsme se z použití dozvěděli, jestli je potřeba jedna lokální oprava a co dál výslovně neotvíráme.
+
+Začněte větou:
+
+```text
+První běžné použití po archivaci uzavíráme jako:
+```
+
+Do věty nepište celý příběh. Stačí jeden stav a jedna příčina:
+
+```text
+První běžné použití po archivaci uzavíráme jako potvrzené ticho, protože obchodník našel pravidlo v šabloně první odpovědi a správně ho nepoužil u poptávky, kde další krok šel navrhnout bez otázky na rámec spolupráce.
+```
+
+Tím je práce hotová. Není potřeba zakládat další pravidelnou kontrolu, měnit formulář, přidávat CRM pole ani sbírat nové příklady "pro jistotu". Pokud archivní minimum obstálo v obyčejné práci, nejlepší další krok je nechat ho být.
+
+### Čtyři uzavírací stavy
+
+Použijte jeden ze čtyř stavů:
+
+- Potvrzené ticho: pravidlo bylo najitelné, srozumitelné a nevyvolalo novou práci.
+- Uzavřeno s lokální opravou kotvy: pravidlo je správné, ale musí být lépe vidět v pracovním místě.
+- Uzavřeno s lokální opravou hranice: pravidlo je na správném místě, ale věta "kdy ano a kdy ne" potřebuje zpřesnit.
+- Neuzavřeno, protože vznikl skutečný návratový signál: první použití odhalilo problém, který odpovídá předem domluvenému signálu pro širší otevření.
+
+Stav `potvrzené ticho` nevyžaduje další akci. Zapište jednu větu, ověřte, že nevznikla nová datová stopa, a skončete.
+
+Stav `uzavřeno s lokální opravou kotvy` smí změnit jen místo nebo název. Například přesunout krátkou rozhodovací větu ze staré archivní karty přímo do šablony první odpovědi. Neznamená to psát novou metodiku.
+
+Stav `uzavřeno s lokální opravou hranice` smí upravit jen rozhodovací větu. Například doplnit "nepoužívej u jednoduchých poptávek, kde jde navrhnout další krok bez rámce spolupráce". Neznamená to přidat povinné pole nebo nový kvalifikační proces.
+
+Stav `neuzavřeno` používejte opatrně. Ne každé nepohodlí je návratový signál. Pokud se jen ukázalo, že člověk pravidlo špatně hledal, je to kotva. Pokud ho našel, ale váhal nad použitím, je to hranice. Skutečný návratový signál musí odpovídat tomu, co bylo v archivní kartě napsané předem.
+
+### Praktický příklad uzavření
+
+Situace:
+
+```text
+Archivní pravidlo:
+U doporučených poptávek se ptej na rámec spolupráce jen tehdy, když bez něj nejde navrhnout další konkrétní krok.
+
+První běžné použití:
+Obchodník pravidlo našel v šabloně první odpovědi a nepoužil ho u jednoduché poptávky, kde bylo možné rovnou navrhnout krátký úvodní call.
+```
+
+Uzavření:
+
+```text
+Stav:
+Potvrzené ticho.
+
+Důvod:
+Pravidlo bylo najitelné a zabránilo zbytečné otázce na obchodní rámec.
+
+Co dál neděláme:
+Neotevíráme formulář, CRM pole, lead scoring, report ani další kontrolní rytmus.
+
+Privacy-first stopa:
+Uchováváme pouze zobecněnou větu o výsledku použití. Nepřenášíme konkrétní zákaznický e-mail, částku ani interní obchodní komentář.
+```
+
+Slabší varianta:
+
+```text
+Pravidlo bylo správné, ale obchodník ho našel až přes starou archivní kartu, protože v šabloně první odpovědi byl nadpis příliš obecný.
+```
+
+Uzavření s lokální opravou:
+
+```text
+Stav:
+Uzavřeno s lokální opravou kotvy.
+
+Nejmenší oprava:
+V šabloně první odpovědi přejmenovat blok na "Volitelná otázka na rámec spolupráce" a odstranit odkaz na starou archivní kartu z běžného postupu.
+
+Co dál neděláme:
+Nepíšeme novou obchodní metodiku a nesbíráme další příklady použití.
+```
+
+Třetí varianta:
+
+```text
+Obchodník pravidlo našel, ale použil otázku automaticky u každé poptávky, protože věta neříkala, kdy ji vynechat.
+```
+
+Uzavření:
+
+```text
+Stav:
+Uzavřeno s lokální opravou hranice.
+
+Nejmenší oprava:
+Doplnit k pravidlu větu: "Nepoužívej, pokud jde další konkrétní krok navrhnout bez znalosti rámce spolupráce."
+
+Co dál neděláme:
+Nezavádíme povinnou obchodní kvalifikaci ani nové sledování odpovědí.
+```
+
+### Privacy-first uzavření
+
+Uzavření prvního použití má být datově chudé. Pro pravidlo obvykle nepotřebujete vědět, kdo byl zákazník, jaký měl rozpočet, co přesně napsal, kdo interně váhal nebo kolik minut se nad tím tým bavil. Potřebujete jen vědět, jestli pravidlo v běžné situaci fungovalo.
+
+Použijte tento krátký filtr:
+
+```text
+K rozhodnutí stačí uchovat:
+
+Záměrně neuchováváme:
+
+Po uzavření mažeme nebo nepřenášíme:
+
+Nový sběr dat nevzniká, protože:
+```
+
+Příklad:
+
+```text
+K rozhodnutí stačí uchovat:
+Pravidlo bylo nalezené v šabloně první odpovědi a správně nebylo použité.
+
+Záměrně neuchováváme:
+Konkrétní e-mail, jméno zákazníka, odhad rozpočtu ani interní komentář obchodníka.
+
+Po uzavření mažeme nebo nepřenášíme:
+Dočasnou poznámku z ověření najitelnosti.
+
+Nový sběr dat nevzniká, protože:
+Nezakládáme report použití ani CRM pole pro sledování této otázky.
+```
+
+Codyho komentář: uzavření je místo, kde se pozná, jestli tým opravdu věří svému vlastnímu pravidlu. Když pravidlo funguje a tým přesto přidá tabulku, připomínku a report, neuzavřel práci. Jen jí oblékl kancelářský kabát a poslal ji zpátky do chodby.
+
+### Karta uzavření prvního použití po archivaci
+
+```text
+Archivní pravidlo:
+
+První běžná situace:
+
+Co se stalo:
+
+Uzavírací stav:
+- potvrzené ticho
+- uzavřeno s lokální opravou kotvy
+- uzavřeno s lokální opravou hranice
+- neuzavřeno, protože vznikl skutečný návratový signál
+
+Důvod stavu:
+
+Lokální oprava, pokud existuje:
+
+Co zůstává výslovně zavřené:
+
+Co dál nesledujeme:
+
+Privacy-first zápis:
+K rozhodnutí uchováváme:
+Záměrně neuchováváme:
+Po uzavření mažeme nebo nepřenášíme:
+Nový sběr dat nevzniká, protože:
+
+Vlastník:
+
+Datum uzavření:
+```
+
+Kartu nepoužívejte automaticky. Pokud první použití skončí potvrzeným tichem a žádná lokální oprava není potřeba, stačí krátká věta u pracovního místa. Karta má pomoct ve chvíli, kdy je potřeba doložit drobnou opravu nebo ubránit širší otevření bez signálu.
+
+### Mini workshop na 5 minut
+
+1. Minuta 1: přečtěte archivní pravidlo a běžnou situaci.
+2. Minuta 2: pojmenujte, co se při prvním použití opravdu stalo.
+3. Minuta 3: vyberte jeden uzavírací stav.
+4. Minuta 4: napište, co zůstává zavřené a co dál nesledujete.
+5. Minuta 5: zapište minimální privacy-first stopu a ukončete mimořádnou pozornost.
+
+Pokud workshop začne vyrábět nový seznam úkolů, vraťte se ke třetí minutě. Buď existuje skutečný návratový signál, nebo ne. Mezi tím není elegantní prostor pro "raději si to budeme ještě chvíli hlídat". To je jen sledování bez odvahy říct, že stačí.
+
+### Checklist uzavření prvního použití po archivaci
+
+- Je jasné, jaké archivní pravidlo uzavíráme?
+- Popisujeme skutečné první použití, ne obecný pocit z pravidla?
+- Vybrali jsme jeden uzavírací stav?
+- Pokud opravujeme kotvu, měníme jen najitelnost pravidla?
+- Pokud opravujeme hranici, měníme jen rozhodovací větu?
+- Pokud tvrdíme, že vznikl návratový signál, odpovídá přesně tomu, co bylo domluvené předem?
+- Je výslovně napsané, co zůstává zavřené?
+- Je jasné, co dál nesledujeme?
+- Uchováváme jen zobecněnou stopu potřebnou k rozhodnutí?
+- Nepřenášíme zákaznické e-maily, částky, osobní údaje ani interní komentáře?
+- Nevzniká nové pole, tracker, report, segment, export ani pravidelná připomínka?
+- Může pravidlo po uzavření znovu fungovat jako archivní minimum?
+
+Dobré uzavření prvního použití po archivaci je krátké a trochu nudné. To je v pořádku. Nuda je často známka toho, že systém dělá přesně tolik práce, kolik má, a nepředstírá drama tam, kde stačí jedna věta.
+
 ## Pracovní log
 
+- 2026-07-02: Doplněna navazující podkapitola o uzavření prvního běžného použití po návratu lokální úpravy do archivního minima: uzavírací stavy, praktické příklady, privacy-first uzavření, karta, mini workshop a checklist.
 - 2026-07-02: Doplněna úvodní podkapitola o prvním běžném použití po návratu lokální úpravy do archivního minima: tři otázky použití, čtyři výsledky, praktické příklady, privacy-first zápis, karta, mini workshop a checklist.
 - 2026-07-02: Doplněna úvodní podkapitola o návratu lokální úpravy do archivního minima: stabilní pracovní věta, kanonické místo, hranice použití, privacy-first úklid ověřovacích stop, karta, mini workshop a checklist.
 - 2026-07-01: Doplněna úvodní podkapitola o uzavření druhého běžného použití po dočištění lokální úpravy z archivního minima: čtyři uzavírací stavy, praktické příklady, privacy-first úklid dočasných stop, karta, mini workshop a checklist.
