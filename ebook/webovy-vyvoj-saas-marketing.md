@@ -283889,8 +283889,203 @@ Pokud workshop sklouzne k otázce, jestli by se pravidlo nemělo měřit dlouhod
 
 Uzavření prvního pasivního použití má pravidlo pustit z ruky. Buď funguje a může zůstat tiché, nebo potřebuje jednu blízkou opravu. V obou případech je cílem totéž: méně mimořádné péče, méně datových stop a jasnější práce pro dalšího člověka.
 
+## Druhé běžné použití v pasivním provozu
+
+Druhé běžné použití je zkouška, jestli pasivní provoz opravdu není jen hezky pojmenovaná vzpomínka na první úspěch. Poprvé mohlo pravidlo fungovat i proto, že bylo čerstvé, někdo o něm zrovna mluvil nebo u něj ještě ležela nedávná poznámka. Podruhé už má být obyčejnější: člověk přijde k pracovnímu místu, použije pravidlo bez zvláštní péče a nevytvoří z toho nový proces.
+
+Začněte větou:
+
+```text
+Druhé pasivní použití potvrzuje, že pravidlo:
+```
+
+Věta má pokračovat jedním z konkrétních výsledků:
+
+```text
+Druhé pasivní použití potvrzuje, že pravidlo je najitelné, rozhodovací a nepotřebuje další evidenci.
+```
+
+nebo:
+
+```text
+Druhé pasivní použití ukázalo slabou kotvu v support makru; opravujeme pouze umístění věty a dál neotevíráme review exportních žádostí.
+```
+
+Druhé použití není pozvánka k tomu, abyste začali počítat všechna další použití. Pokud se pravidlo chová dobře dvakrát po sobě, většinou nepotřebuje metriku. Potřebuje klid.
+
+### Co se při druhém použití ověřuje
+
+U druhého použití ověřujte jen tři věci:
+
+- Pravidlo přežilo bez čerstvého vysvětlování.
+- Pracovní místo zůstalo správné i pro jinou situaci nebo jiného člověka.
+- Nevznikla nová datová stopa jen proto, že tým chtěl mít jistotu.
+
+První bod chrání před pravidlem, které funguje jen s původním autorem v místnosti. Pokud někdo musí znovu vyprávět historii opravy, pasivní provoz ještě není hotový. Opravte aktuální větu nebo kotvu, ne celou historii.
+
+Druhý bod chrání před příliš úzkým umístěním. Pravidlo může být správné, ale schované jen v jednom makru, zatímco druhé použití vzniká v navazujícím e-mailu, checklistu nebo interním handoffu. Pokud je to opakované pracovní místo, přidejte odkaz nebo krátkou větu tam. Pokud je to náhodná odbočka, nic nepřidávejte.
+
+Třetí bod je privacy-first brzda. Druhé použití často vyvolá pocit, že "už máme vzorek". Dva případy ale nejsou důvod ukládat zákaznické zprávy, obchodní kontext, technické detaily ani interní komentáře. Jsou důvod rozhodnout, zda pravidlo zůstává tiché, potřebuje jednu lokální opravu, nebo se objevil skutečný návratový signál.
+
+### Čtyři výsledky druhého pasivního použití
+
+Druhé běžné použití v pasivním provozu může skončit čtyřmi stavy:
+
+- Potvrzený pasivní provoz: pravidlo fungovalo podruhé bez pomoci a bez nové evidence.
+- Lokální dočištění: pravidlo funguje, ale jedno pracovní místo potřebuje lepší kotvu nebo kratší větu.
+- Slabá přenositelnost: pravidlo fungovalo v prvním scénáři, ale v druhém už není jasné, kdy ho použít.
+- Návratový signál: druhé použití ukázalo problém, který odpovídá předem domluvené podmínce návratu.
+
+U potvrzeného pasivního provozu udělejte co nejméně:
+
+```text
+Druhé pasivní použití proběhlo bez pomoci. Pravidlo zůstává v pasivním provozu a další použití už neevidujeme.
+```
+
+U lokálního dočištění opravte nejbližší hranu:
+
+```text
+Pravidlo bylo správné, ale druhý člověk ho hledal v předávacím e-mailu místo v support makru. Do e-mailové šablony přidáváme odkaz na makro. Nezakládáme novou kopii pravidla.
+```
+
+U slabé přenositelnosti zmenšete rozsah pravidla:
+
+```text
+Pravidlo dobře funguje pro jednorázový export, ale ne pro pravidelné napojení. Doplňujeme hranici: "pro pravidelné napojení otevři samostatnou technickou kvalifikaci". Neměníme support proces jako celek.
+```
+
+U návratového signálu otevřete novou malou smyčku:
+
+```text
+Druhé použití znovu skončilo opačným výkladem hranice, což je návratový signál. Otevíráme pouze kontrolu rozhodovací věty pro exportní žádosti.
+```
+
+### Praktický příklad
+
+Pravidlo v pasivním provozu:
+
+```text
+Pokud zákazník žádá export dat bez jasného účelu, polož jednu otázku: má jít o jednorázový export, nebo pravidelné napojení?
+```
+
+První použití bylo hladké. Druhé použití přijde o tři týdny později, kdy jiný člověk řeší podobnou žádost:
+
+```text
+Situace:
+Zákazník napsal, že chce "napojit data do reportingu".
+
+Použití:
+Support našel pravidlo v makru, položil otázku na účel a zjistil, že nejde o jednorázový export, ale o opakované napojení.
+
+Výsledek:
+Pravidlo pomohlo rozlišit typ požadavku, ale potřebuje jasnou větu, že pravidelné napojení se předává do samostatné technické kvalifikace.
+
+Lokální oprava:
+Do makra přidáváme větu: "Pokud zákazník potvrdí pravidelné napojení, neptej se na všechny technické detaily; otevři technickou kvalifikaci s účelem a očekávanou frekvencí."
+
+Co neotevíráme:
+Nový dashboard exportních požadavků, povinné CRM pole, seznam všech reportingových nástrojů zákazníků ani revizi celého support handoffu.
+```
+
+Tady druhé použití neznamená, že pravidlo selhalo. Naopak ukázalo přesnější hranici. Dobrá reakce není velký proces, ale jedna věta, která zabrání zbytečnému sběru technických detailů.
+
+Codyho komentář: druhé použití je poslední dobrý okamžik, kdy můžete odolat tomu, aby se z rozumného pravidla stal malý kult s vlastní tabulkou. Dvakrát použito neznamená "měřit navždy". Často to znamená "funguje, nechme to být". Radikální, já vím.
+
+### Privacy-first kontrola druhého použití
+
+Při druhém použití si hlídejte hlavně falešnou jistotu. Tým si může říct, že když se situace zopakovala, měl by začít sbírat víc dat. To může být pravda, pokud vznikl návratový signál. Ale pokud pravidlo jen fungovalo, další data nejsou důkaz. Jsou jen provozní zátěž.
+
+Použijte filtr:
+
+```text
+Druhé použití potřebujeme zachytit kvůli:
+
+K rozhodnutí nepotřebujeme:
+
+Po uzavření proto necháváme pouze:
+```
+
+Příklad:
+
+```text
+Druhé použití potřebujeme zachytit kvůli:
+Ověření, že pravidlo umí rozlišit jednorázový export a pravidelné napojení.
+
+K rozhodnutí nepotřebujeme:
+Název zákazníka, text jeho žádosti, seznam používaných nástrojů, hodnotu obchodu ani interní komentář supportu.
+
+Po uzavření proto necháváme pouze:
+Anonymizovanou větu o doplnění hranice pro pravidelné napojení.
+```
+
+Pokud se rozhodnete něco uložit, musí být jasné, k jakému rozhodnutí to slouží a kdy to smažete nebo přesunete do kanonického místa. Dočasná poznámka bez termínu úklidu je jen budoucí nepořádek ve slušivém kabátě.
+
+### Karta druhého pasivního použití
+
+```text
+Pravidlo v pasivním provozu:
+
+Pracovní místo:
+
+Druhé použití vzniklo kde:
+
+Použil pravidlo člověk bez čerstvého vysvětlení?
+
+Bylo pracovní místo pořád správné?
+
+Výsledek:
+- potvrzený pasivní provoz
+- lokální dočištění
+- slabá přenositelnost
+- návratový signál
+
+Jedna lokální oprava, pokud existuje:
+
+Co výslovně neotevíráme:
+
+Co dál neevidujeme:
+
+Jaká data, exporty, trackery nebo pole díky tomu nevznikají:
+
+Zůstává pravidlo v pasivním provozu?
+
+Kdy by se znovu otevřelo:
+
+Datum:
+```
+
+Kartu použijte pouze tehdy, pokud druhé použití mění kotvu, větu nebo hranici pravidla. Pokud podruhé proběhlo hladce, stačí jedna věta u pracovního místa a konec mimořádné pozornosti.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: pojmenujte druhé použití bez zákaznických detailů.
+2. Minuta 2: ověřte, jestli pravidlo fungovalo bez čerstvého vysvětlení.
+3. Minuta 3: zkontrolujte, zda pracovní místo pořád sedí.
+4. Minuta 4: vyberte jeden ze čtyř výsledků.
+5. Minuta 5: napište případnou jednu lokální opravu.
+6. Minuta 6: uzavřete, co dál neevidujete a neotevíráte.
+
+Workshop má skončit buď potvrzeným pasivním provozem, nebo jednou malou opravou. Pokud vznikne chuť řešit širší proces, musí mít vlastní návratový signál a vlastní hranici. Jinak jen maskujete rozšiřování práce jako péči o pravidlo.
+
+### Checklist druhého pasivního použití
+
+- Šlo o skutečné druhé běžné použití, ne o uměle vyvolaný test?
+- Použil pravidlo člověk bez původního autora nebo čerstvého vysvětlení?
+- Bylo pravidlo pořád v přirozeném pracovním místě?
+- Stačilo pravidlo pro rozhodnutí, nebo chyběla hranice použití?
+- Vybrali jsme jeden ze čtyř výsledků?
+- Pokud opravujeme, jde jen o kotvu, větu nebo hranici?
+- Pokud se objevila slabá přenositelnost, zúžili jsme pravidlo místo rozšiřování evidence?
+- Pokud vznikl návratový signál, otevíráme jen nejmenší konkrétní smyčku?
+- Nezapisujeme zákaznické texty, obchodní hodnoty, nástroje zákazníka ani interní komentáře bez účelu?
+- Je jasně řečeno, co dál neevidujeme a co zůstává zavřené?
+- Pokud druhé použití proběhlo hladce, končí mimořádná pozornost?
+
+Druhé pasivní použití je dobrý konec pro pravidlo, které už dvakrát posloužilo bez dramatu. Po takovém výsledku není potřeba další ceremoniál. Nechte pravidlo tam, kde se používá, a vraťte pozornost k práci, která má skutečný signál.
+
 ## Pracovní log
 
+- 2026-07-02: Doplněna úvodní podkapitola o druhém běžném použití pravidla v pasivním provozu: ověření bez čerstvé paměti, čtyři výsledky, exportní příklad, privacy-first ne-evidence, karta, mini workshop a checklist.
 - 2026-07-02: Doplněna úvodní podkapitola o uzavření prvního pasivního použití pravidla: čtyři uzavírací stavy, support příklady, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-07-02: Doplněna úvodní podkapitola o prvním běžném použití pravidla v pasivním provozu: tři kontrolní otázky, čtyři výsledky, praktický support příklad, privacy-first ne-evidence, karta, mini workshop a checklist.
 - 2026-07-02: Doplněna úvodní podkapitola o převodu potvrzeného archivního minima do pasivního provozu: pracovní místo, hranice použití, návratový signál, privacy-first ne-evidence, karta, mini workshop a checklist.
