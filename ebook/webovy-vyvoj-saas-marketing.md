@@ -286785,8 +286785,190 @@ Pokud workshop začne otevírat širší strategii, zastavte ho. Zapište nový 
 
 Roční kontrola pravidla v pasivním provozu má být klidná servisní návštěva. Když pravidlo funguje, nechte ho být. Když má slabé místo, opravte nejbližší větu nebo kanonické umístění. A když po roce najdete zbytečnou datovou stopu, ukliďte ji dřív, než se začne tvářit jako standard.
 
+## Uzavření roční kontroly pravidla v pasivním provozu
+
+Roční kontrola je hotová až ve chvíli, kdy po ní nezůstane otevřený pocit, že by se "s tím mělo ještě něco dělat". Kontrola může najít drobnou opravu, potvrdit klid nebo otevřít nový návratový signál. Každý výsledek ale potřebuje uzavírací větu, která řekne, co se opravdu mění, co zůstává zavřené a kde bude pravidlo dál žít.
+
+Bez uzavření se roční kontrola snadno promění v poloviční práci. Tým si sice připomene pravidlo, možná si i všimne malé datové odbočky, ale nikdo neudělá poslední krok: nepřesune větu, nesmaže starou kopii, nezavře pomocnou tabulku nebo nezapíše, že pravidlo obstálo beze změny. A pak se o rok později řeší stejná mlha, jen s novějšími poznámkami. To je sice forma tradice, ale ne ta, kterou bychom chtěli budovat.
+
+Začněte uzavření krátkým zápisem:
+
+```text
+Roční kontrolu uzavíráme takto:
+
+Pravidlo dál žije zde:
+
+Mění se:
+
+Zůstává zavřené:
+
+Datový úklid:
+
+Další návrat nastane pouze pokud:
+```
+
+Příklad:
+
+```text
+Roční kontrolu uzavíráme takto:
+Pravidlo pro volitelný dotaz na rozpočet obstálo, ale rušíme soukromou pomocnou tabulku.
+
+Pravidlo dál žije zde:
+U potvrzovací e-mailové šablony a v obchodním checklistu.
+
+Mění se:
+Do checklistu doplňujeme jednu větu, že rozpočet se neznačí do samostatné evidence.
+
+Zůstává zavřené:
+Formulářové pole, CRM atribut, scoring, automatizovaný export a marketingová segmentace podle rozpočtu.
+
+Datový úklid:
+Pomocnou tabulku mažeme po přepsání jednoho syntetického příkladu do checklistu.
+
+Další návrat nastane pouze pokud:
+Tři relevantní poptávky za sebou nepůjdou kvalifikovat bez nové strukturované evidence.
+```
+
+Takový zápis je nudně konkrétní. A to je správně. Uzavření nemá být inspirativní manifest. Má být provozní tečka, podle které za půl roku poznáte, co se stalo a co se naopak vědomě nestalo.
+
+### Čtyři uzavírací stavy
+
+Po roční kontrole vyberte jeden ze čtyř stavů:
+
+- Potvrzený klid: pravidlo je najitelné, použitelné a datová stopa zůstala čistá.
+- Lokální údržba: stačí přesunout větu, odstranit duplicitu nebo zpřesnit kanonické místo.
+- Datový úklid: pravidlo funguje, ale kolem něj vznikla zbytečná evidence, kterou je potřeba smazat, sloučit nebo vrátit do původního zdroje.
+- Nový návratový signál: kontrola ukázala opakovaný problém, který si zaslouží samostatný návrat mimo běžnou roční údržbu.
+
+Potvrzený klid je nejkratší uzavření. Zapište, že pravidlo obstálo, a neplánujte další mimořádnou práci. Pokud tým po potvrzeném klidu přidá nový měsíční report "pro jistotu", kontrola selhala v cílové rovince. Klid se nemá oslavit novým procesem.
+
+Lokální údržba smí být opravdu lokální. Pokud je problém v tom, že pravidlo leží ve staré šabloně, nepřepisujte celý onboarding. Přesuňte větu, starou kopii zrušte a napište, kde je nová kanonická verze. Jedna opravená věta je často lepší než nová stránka dokumentace, kterou nikdo neotevře.
+
+Datový úklid je uzavření s největší privacy-first hodnotou. Cílem není potrestat člověka, který si pomohl tabulkou nebo exportem. Cílem je zachovat poznatek a odstranit zbytečnou datovou stopu. Pokud se poznatek dá převést na syntetický příklad, pracovní větu nebo agregovanou poznámku, reálná zákaznická data nemají důvod dál cestovat po interních bokovkách.
+
+Nový návratový signál otevírejte jen tehdy, když roční kontrola našla opakování, dopad a pracovní místo. Pokud našla jen osamělou výjimku, zapište ji do uzavření a nechte pravidlo v klidu. Výjimka bez vzoru není strategie. Je to jeden den v provozu, který se nemá tvářit jako revoluce.
+
+### Praktický příklad uzavření
+
+```text
+Kontrolované pravidlo:
+Při nejasném cíli projektu se v potvrzovacím e-mailu ptáme nejdřív na výsledek, ne na detailní rozpočet.
+
+Zjištění:
+Pravidlo je v aktuální šabloně. Obchod ho používá správně. Ve staré poznámce v interní wiki ale zůstala věta, která doporučuje zapisovat chybějící rozpočet do samostatné tabulky.
+
+Uzavírací stav:
+Lokální údržba a datový úklid.
+
+Rozhodnutí:
+Kanonická pracovní věta zůstává u potvrzovací šablony. Starou wiki poznámku rušíme a ponecháme jen odkaz na aktuální šablonu. Samostatnou tabulku nezakládáme ani neobnovujeme.
+
+Zůstává zavřené:
+Povinné pole v poptávkovém formuláři, CRM atribut pro rozpočet a pravidelný export poptávek kvůli kontrole rozpočtů.
+
+Návratový signál:
+K tématu se vrátíme pouze pokud se u tří relevantních poptávek za sebou ukáže, že bez strukturovaného rozpočtového údaje nejde navrhnout další krok.
+```
+
+Všimněte si, že uzavření neřeší všechno, co by se dalo kolem poptávek zlepšit. Opravuje jen místo, kde roční kontrola našla skutečný problém. To je důležitá disciplína: když roční kontrola začne sahat na širší obchodní proces, přestává být roční kontrolou pravidla a stává se novou pracovní iterací. Tu můžete otevřít, ale až s vlastní otázkou a vlastní hranicí.
+
+### Privacy-first uzavření
+
+Privacy-first uzavření má chránit dvě věci najednou: užitečné pravidlo a zbytečně nenasbíraná data. Proto si při uzavření položte tři otázky:
+
+```text
+Co je znalost, kterou si chceme nechat?
+
+Co je datová stopa, kterou už nepotřebujeme?
+
+Kde bude pravidlo dostupné bez kopírování reálných zákaznických detailů?
+```
+
+Příklad odpovědi:
+
+```text
+Znalost:
+Rozpočet se řeší až ve chvíli, kdy bez něj nejde navrhnout další krok.
+
+Datová stopa k odstranění:
+Soukromá tabulka s poznámkami k jednotlivým poptávkám.
+
+Kanonické místo bez zákaznických detailů:
+Jedna pracovní věta v potvrzovací šabloně a jeden syntetický příklad v obchodním checklistu.
+```
+
+Tento rozdíl je praktický. Znalost má zůstat. Reálné zákaznické odpovědi, screenshoty, exporty a kopie nemají přežívat jen proto, že kdysi pomohly někomu pochopit vzor. Jakmile je vzor převedený do pracovní věty nebo syntetického příkladu, dočasné podklady mají jít pryč podle domluvené retence.
+
+Codyho komentář: nejčistší CRM atribut je ten, který nikdy nevznikl. Hned druhý nejlepší je ten, který po kontrole umíte bez dramatu smazat. V obou případech vyhrává provoz, protože má méně polí, méně výjimek a méně důvodů vysvětlovat, proč se kdysi sbíralo něco, co už nikdo nepoužívá.
+
+### Karta uzavření roční kontroly
+
+```text
+Kontrolované pravidlo:
+
+Kanonické pracovní místo:
+
+Datum roční kontroly:
+
+Zjištění:
+
+Uzavírací stav:
+- potvrzený klid
+- lokální údržba
+- datový úklid
+- nový návratový signál
+
+Co se mění:
+
+Co zůstává beze změny:
+
+Co zůstává výslovně zavřené:
+
+Co mažeme, slučujeme nebo vracíme do původního zdroje:
+
+Kde je nová nebo potvrzená kanonická věta:
+
+Návratový signál:
+
+Vlastník:
+
+Datum další běžné kontroly:
+```
+
+Kartu držte krátkou. Pokud se nevejde na jednu obrazovku, pravděpodobně jste do ní přimíchali nové téma. Uzavírací karta nemá suplovat zápis z workshopu ani historii všech diskusí. Má říct, jak roční kontrola dopadla a co se podle ní stane.
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: přečtěte výsledek roční kontroly.
+2. Minuta 2: vyberte jeden hlavní uzavírací stav.
+3. Minuta 3: napište jednu uzavírací větu.
+4. Minuta 4: určete kanonické pracovní místo pravidla.
+5. Minuta 5: napište, co zůstává výslovně zavřené.
+6. Minuta 6: rozhodněte, co se smaže, sloučí nebo vrátí do původního zdroje.
+7. Minuta 7: potvrďte návratový signál a vlastníka.
+
+Pokud se během workshopu objeví dobrý nápad na větší změnu, zapište ho mimo kartu. Neztrácíte ho. Jen mu nedovolíte, aby se schoval do uzavření roční kontroly a tvářil se jako drobná údržba.
+
+### Checklist uzavření roční kontroly
+
+- Má roční kontrola jednu uzavírací větu?
+- Vybrali jsme přesně jeden hlavní uzavírací stav?
+- Víme, kde pravidlo dál kanonicky žije?
+- Je jasné, co se mění a co zůstává beze změny?
+- Je výslovně zapsané, co se neotevírá?
+- Pokud vznikla lokální údržba, je opravdu lokální?
+- Pokud vznikl datový úklid, víme, co mažeme, slučujeme nebo vracíme do původního zdroje?
+- Neponecháváme reálná zákaznická data jen kvůli budoucímu pohodlí?
+- Pokud vznikl nový návratový signál, má vlastní hranici a pracovní místo?
+- Neudělali jsme z klidného pravidla nový pravidelný report?
+- Má uzavření vlastníka a další běžný kontrolní okamžik?
+- Dá se za půl roku pochopit, proč kontrola skončila právě takto?
+
+Dobré uzavření roční kontroly zanechá méně otevřených věcí, než kolik jich našlo. Potvrdí pravidlo, opraví drobnost, uklidí data nebo oddělí nový signál. V žádném případě nemá z pravidla, které fungovalo v pasivním provozu, vyrobit novou administrativní atrakci s vlastním životem. To by byla škoda práce i dat.
+
 ## Pracovní log
 
+- 2026-07-02: Doplněna úvodní podkapitola o uzavření roční kontroly pravidla v pasivním provozu: uzavírací stavy, praktický příklad, privacy-first uzavření, karta, mini workshop a checklist.
 - 2026-07-02: Doplněna úvodní podkapitola o roční kontrole pravidla v pasivním provozu: najitelnost, použitelnost, datová stopa, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-07-02: Doplněna úvodní podkapitola o uzavření druhého klidového použití po návratu do pasivního provozu: tři uzavírací stavy, exportní příklady, privacy-first úklid dočasných stop, karta, mini workshop a checklist.
 - 2026-07-02: Doplněna úvodní podkapitola o druhém klidovém použití po návratu do pasivního provozu: kdy ho plánovat, tři výsledky, exportní příklad, privacy-first kontrola nejmenší stopy, karta, mini workshop a checklist.
