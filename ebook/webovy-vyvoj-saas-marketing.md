@@ -284442,8 +284442,230 @@ Workshop má skončit klidem. Pokud během něj vznikne nápad na dashboard, nov
 
 Dlouhé ticho je jeden z nejlepších výsledků provozní práce. Ne proto, že by pravidlo zmizelo, ale protože přestalo vyžadovat obsluhu. Pokud se později objeví návratový signál, otevřete novou malou smyčku. Do té doby nechte pravidlo dělat přesně to, kvůli čemu vzniklo: pomáhat v práci, aniž by kolem sebe sbíralo zbytečná data a pozornost.
 
+## Návrat po dlouhém tichu v pasivním provozu
+
+Jednou se může stát, že dlouhé ticho skončí. Přijde případ, který odpovídá návratovému signálu, změní se pracovní místo, nový člověk pravidlo nenajde, nebo se v provozu objeví situace, kterou stará věta neumí rozhodnout. To není důkaz, že pasivní provoz selhal. Je to jen okamžik, kdy se tiché pravidlo musí na chvíli vrátit do malé pracovní smyčky.
+
+Nejdůležitější je nezačít návrat velkým gestem. Dlouhé ticho svádí k tomu říct: "Když se to po takové době vrátilo, musíme to vzít pořádně." Často je pravda opačná. Právě proto, že pravidlo dlouho fungovalo bez obsluhy, má první reakce být úzká, klidná a navázaná na konkrétní signál.
+
+Začněte jednou větou:
+
+```text
+Pasivní pravidlo znovu otevíráme, protože nastal tento návratový signál:
+```
+
+Do věty napište pozorování, ne náladu. Dobře:
+
+```text
+Pasivní pravidlo znovu otevíráme, protože dvě exportní žádosti za sebou skončily sběrem technických detailů v supportu místo předáním na technickou kvalifikaci.
+```
+
+Slabě:
+
+```text
+Pasivní pravidlo znovu otevíráme, protože exporty jsou zase nějaké zmatené.
+```
+
+Druhá věta má omezit rozsah:
+
+```text
+Dnes ověřujeme jen to, jestli stará pracovní věta pořád pomáhá v tomto pracovním místě.
+```
+
+Tím návrat nepřeroste v audit celého procesu. Neřešíte všechny exporty, celý support, kompletní dokumentaci ani obchodní kvalifikaci. Řešíte konkrétní návratový signál na konkrétním místě.
+
+### První tři kontroly návratu
+
+Před úpravou pravidla projděte tři krátké kontroly:
+
+- Signál opravdu odpovídá návratové podmínce.
+- Pracovní místo je pořád stejné, nebo jasně víte, jak se změnilo.
+- Stará pracovní věta je dohledatelná bez lovení v historii.
+
+Když neprojde první kontrola, nejde o návrat po dlouhém tichu. Je to nové téma, které jen připomíná starý problém. Založte novou malou kartu a staré pravidlo nechte být.
+
+Když neprojde druhá kontrola, neotevírejte obsah pravidla. Nejdřív přeneste nebo znovu ukotvěte pracovní místo. Pravidlo, které nemá domov, se špatně opravuje, protože nikdo neví, kde se má změna projevit.
+
+Když neprojde třetí kontrola, problém nemusí být v pravidle, ale v najitelnosti. V takovém případě první krok není přepis věty, ale lepší kotva: odkaz z šablony, jasnější nadpis, přesun do kanonického indexu nebo odstranění staré kopie.
+
+Codyho komentář: návrat po dlouhém tichu je místo, kde týmy rády dramatizují. Jeden incident a najednou se otevírá "revize celého systému". Klid. Pokud pravidlo měsíce fungovalo, zaslouží si nejdřív malý šroubovák, ne bagr s vlastním dashboardem.
+
+### Čtyři výsledky návratu
+
+Po první kontrole vyberte jeden ze čtyř výsledků:
+
+- Falešný návrat: signál se podobá starému problému, ale návratová podmínka nenastala.
+- Lokální obnova kotvy: pravidlo platí, jen nebylo na správném místě nebo nebylo dost vidět.
+- Úzké doplnění pravidla: pracovní věta platí, ale potřebuje jednu hranu, příklad nebo výjimku.
+- Nová malá smyčka: staré pravidlo už nestačí a je potřeba otevřít omezené ověření.
+
+Falešný návrat uzavřete krátce:
+
+```text
+Návratový signál nenastal. Případ patří do nové otázky o technickém napojení, ne do pravidla pro jednorázové exporty. Pasivní pravidlo neměníme a nezakládáme novou evidenci použití.
+```
+
+Lokální obnova kotvy vypadá takto:
+
+```text
+Pravidlo platí, ale po sloučení support šablon ztratilo kotvu. Přidáváme odkaz do části "Export nebo napojení" a starou kopii smažeme až po ověření, že nová šablona je kanonické místo.
+```
+
+Úzké doplnění pravidla má zůstat opravdu úzké:
+
+```text
+Do pracovní věty doplňujeme jednu hranu: pokud zákazník žádá pravidelný automatický export, support nesbírá technické detaily a předává případ do technické kvalifikace.
+```
+
+Nová malá smyčka potřebuje vlastní stop podmínku:
+
+```text
+Otevíráme dvoutýdenní ověření pouze pro žádosti o pravidelný export. Stop podmínka: po třech případech rozhodneme, zda stačí upravit support větu, nebo vzniká samostatné pravidlo pro technické napojení.
+```
+
+Všimněte si slova "pouze". Bez něj se návrat po dlouhém tichu snadno roztáhne do sousedních témat. A sousední témata jsou jako záložky v prohlížeči: tváří se nevinně, dokud jich není třicet a notebook zvažuje odchod do kláštera.
+
+### Praktický příklad
+
+Pasivní pravidlo:
+
+```text
+U žádostí o export nejdřív rozliš jednorázový export a pravidelné technické napojení. Support nesbírá technické detaily pravidelného napojení; předává ho do technické kvalifikace.
+```
+
+Návratový signál:
+
+```text
+Dvě exportní žádosti za sebou skončí sběrem technických detailů v supportu místo předáním do technické kvalifikace.
+```
+
+Co se stalo:
+
+```text
+Nový support člověk vyřešil dvě podobné žádosti podle staré kopie makra, která neobsahovala hranici pro pravidelné napojení.
+```
+
+První kontrola:
+
+```text
+Signál nastal. Pracovní místo se změnilo: používá se nová společná šablona, ale stará kopie makra zůstala v interních poznámkách. Pracovní věta je správná, problém je v kotvě a kopii.
+```
+
+Rozhodnutí:
+
+```text
+Neotevíráme nové pravidlo pro všechny exporty. Obnovujeme kotvu v nové společné šabloně, mažeme starou kopii makra a do onboardingového rozcestníku přidáváme odkaz na část "Export nebo napojení".
+```
+
+Privacy-first výsledek:
+
+```text
+Nepřidáváme CRM atribut pro typ exportu, nezakládáme report support chyb a nekopírujeme zákaznické tickety do tréninkového dokumentu. Pro ověření stačí potvrzení, že stará kopie zmizela a nové místo je dohledatelné.
+```
+
+Tohle je dobrý návrat. Problém se řeší tam, kde vznikl. Nevzniká nový měřicí aparát. Staré pravidlo se neposuzuje znovu od nuly. A tým si nenechá jedním incidentem unést celý proces.
+
+### Privacy-first návrat
+
+Návrat po dlouhém tichu je rizikový právě tím, že tým chce rychle získat jistotu. Jistota se ale často zamění za sběr dalších dat: více polí, více štítků, více logů, více screenshotů, více exportů. To může být lákavé, ale privacy-first provoz se ptá jinak:
+
+```text
+Jaký nejmenší důkaz stačí k rozhodnutí o tomto návratu?
+```
+
+Někdy stačí přečíst dva případy v původním systému. Někdy stačí projít jednu šablonu. Někdy stačí ověřit, že stará kopie opravdu zmizela. Není nutné z každého návratu vyrábět měření chování lidí.
+
+Při návratu si napište:
+
+```text
+Pro tento návrat nepřidáváme:
+```
+
+A doplňte konkrétní zákazy:
+
+```text
+Pro tento návrat nepřidáváme:
+- nové povinné pole ve formuláři;
+- nový CRM štítek;
+- export zákaznických ticketů mimo support systém;
+- screenshoty interních odpovědí;
+- dashboard chyb supportu;
+- pravidelný report používání pravidla;
+- delší retenci dočasných poznámek.
+```
+
+Pokud se ukáže, že nějaký nový údaj opravdu potřebujete, zapište jeho účel, vlastníka, dobu života a místo v datové mapě. Bez toho nejde o evidence-driven práci. Jde o "radši si to někam uložíme", což je věta, po které by měl v privacy-first provozu spadnout malý interní jistič.
+
+### Karta návratu po dlouhém tichu
+
+```text
+Pasivní pravidlo:
+
+Kanonické pracovní místo:
+
+Původní návratový signál:
+
+Co se opravdu stalo:
+
+Odpovídá to návratovému signálu?
+
+Změnilo se pracovní místo?
+
+Je pracovní věta dohledatelná?
+
+Vybraný výsledek:
+- falešný návrat
+- lokální obnova kotvy
+- úzké doplnění pravidla
+- nová malá smyčka
+
+Nejmenší dnešní krok:
+
+Stop podmínka:
+
+Co nepřidáváme do datové stopy:
+
+Co uklidíme po uzavření návratu:
+
+Kde zůstane konečný závěr:
+
+Vlastník pracovního místa:
+```
+
+Karta má být krátká. Pokud potřebujete víc než jednu obrazovku, pravděpodobně jste místo návratu otevřeli audit. Audit může být někdy správně, ale nemá se tvářit jako malá reakce na návratový signál.
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: přečtěte původní návratový signál.
+2. Minuta 2: napište, co se opravdu stalo.
+3. Minuta 3: rozhodněte, jestli signál opravdu nastal.
+4. Minuta 4: ověřte pracovní místo a dohledatelnost věty.
+5. Minuta 5: vyberte jeden ze čtyř výsledků návratu.
+6. Minuta 6: napište nejmenší dnešní krok a stop podmínku.
+7. Minuta 7: napište, co kvůli návratu nepřidáváte do datové stopy.
+
+Pokud se skupina zasekne na tom, jestli signál opravdu nastal, nehlasujte podle dojmu. Vezměte původní formulaci signálu a porovnejte ji s realitou slovo po slově. Když nesedí, je lepší založit novou otázku než násilím otevřít staré pravidlo.
+
+### Checklist návratu po dlouhém tichu
+
+- Máme přesně opsaný původní návratový signál?
+- Popsali jsme, co se opravdu stalo, bez zobecnění?
+- Víme, jestli jde o skutečný návrat, nebo nové podobné téma?
+- Zkontrolovali jsme, zda se změnilo pracovní místo?
+- Je stará pracovní věta dohledatelná v kanonickém místě?
+- Vybrali jsme jeden ze čtyř výsledků návratu?
+- Je dnešní krok menší než celková revize procesu?
+- Má krok stop podmínku?
+- Je jasné, co kvůli návratu nepřidáváme do datové stopy?
+- Neukládáme zákaznické příklady, screenshoty, exporty ani osobní poznámky bez nutného účelu?
+- Pokud vznikla nová malá smyčka, má vlastní rozsah a vlastní uzavření?
+- Zůstává vlastnictví u pracovního místa, ne u nouzového kontrolního režimu?
+
+Návrat po dlouhém tichu má být důkazem, že pasivní provoz není zapomenutí. Pravidlo může dlouho mlčet a přesto být připravené na okamžik, kdy ho bude potřeba znovu vzít do ruky. Když se to stane, nezačínejte od paniky ani od velkého auditu. Začněte od signálu, pracovního místa, nejmenšího kroku a datové střídmosti. To je méně efektní než nový dashboard, ale obvykle mnohem užitečnější. Takže samozřejmě méně populární.
+
 ## Pracovní log
 
+- 2026-07-02: Doplněna úvodní podkapitola o návratu po dlouhém tichu v pasivním provozu: kontrola návratového signálu, pracovní místo, čtyři výsledky návratu, exportní příklad, privacy-first datová brzda, karta, mini workshop a checklist.
 - 2026-07-02: Doplněna úvodní podkapitola o dlouhém tichu po potvrzeném pasivním provozu: klidová kotva, zahlédnutí bez evidence, přesun pracovního místa, privacy-first ticho, karta, mini workshop a checklist.
 - 2026-07-02: Doplněna úvodní podkapitola o uzavření druhého pasivního použití: čtyři uzavírací stavy, exportní příklad, privacy-first ne-evidence, karta, mini workshop a checklist.
 - 2026-07-02: Doplněna úvodní podkapitola o druhém běžném použití pravidla v pasivním provozu: ověření bez čerstvé paměti, čtyři výsledky, exportní příklad, privacy-first ne-evidence, karta, mini workshop a checklist.
