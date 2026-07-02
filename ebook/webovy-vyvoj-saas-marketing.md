@@ -284083,8 +284083,174 @@ Workshop má skončit buď potvrzeným pasivním provozem, nebo jednou malou opr
 
 Druhé pasivní použití je dobrý konec pro pravidlo, které už dvakrát posloužilo bez dramatu. Po takovém výsledku není potřeba další ceremoniál. Nechte pravidlo tam, kde se používá, a vraťte pozornost k práci, která má skutečný signál.
 
+## Uzavření druhého pasivního použití
+
+Druhé pasivní použití je potřeba zavřít dřív, než se z něj stane nová rutina. To zní paradoxně: pravidlo právě prokázalo, že funguje bez mimořádné péče, a tým má chuť si to pojistit ještě jednou kontrolou. Jenže právě další kontrola by pasivní provoz rozbila. Pokud pravidlo dvakrát posloužilo bez čerstvé paměti, další práce není další evidence, ale klid.
+
+Uzavření druhého pasivního použití má odpovědět na čtyři otázky:
+
+- Potvrdilo druhé použití, že pravidlo stojí samo?
+- Je potřeba jedna lokální oprava kotvy, věty nebo hranice?
+- Objevil se skutečný návratový signál?
+- Jaká data, poznámky a dočasné stopy po tomto ověření dál nevznikají?
+
+Začněte větou:
+
+```text
+Druhé pasivní použití uzavíráme stavem:
+```
+
+Potom vyberte jeden ze čtyř stavů:
+
+- potvrdit pasivní provoz;
+- udělat poslední lokální dočištění;
+- zúžit pravidlo kvůli slabé přenositelnosti;
+- otevřít návratový signál.
+
+Stav `potvrdit pasivní provoz` je cílový. Znamená, že pravidlo bylo nalezené, použité a nevyžádalo si nový sběr dat. V takové chvíli napište krátkou větu a ukončete mimořádnou pozornost. Nezakládejte třetí použití jen proto, že dvě použití vypadají jako začátek metriky. Dvě hladká použití mohou být dostatečný důkaz pro návrat do ticha.
+
+Stav `poslední lokální dočištění` použijte, když pravidlo funguje, ale jedno místo ještě potřebuje drobnou opravu. Typicky jde o odkaz na makro, kratší rozhodovací větu, jasnější hranici pro výjimku nebo odstranění staré poznámky. Slovo `poslední` je důležité. Pokud by po dočištění mělo přijít další dočištění, nejde už o pasivní provoz, ale o slabý domov pravidla.
+
+Stav `zúžit pravidlo` patří situaci, kdy druhé použití ukázalo, že pravidlo je užitečné jen pro část případů. Nezvětšujte ho, aby pokrylo všechno. Zúžení je často lepší výsledek než univerzální ambice. Pravidlo pro jednorázový export nemusí řešit pravidelné napojení, právní výjimku ani technickou integraci. Stačí, když jasně řekne, kde končí.
+
+Stav `otevřít návratový signál` použijte pouze tehdy, když se naplnila předem zapsaná podmínka. Ne když se objevilo zajímavé tření. Ne když někdo navrhl lepší verzi procesu. Ne když se pravidlo použilo podruhé a tým dostal chuť dělat z něj standard. Návratový signál musí být konkrétní důkaz, ne energie v místnosti.
+
+### Praktický příklad uzavření
+
+```text
+Pravidlo:
+Pokud zákazník žádá export dat bez jasného účelu, nejdřív rozliš jednorázový export a pravidelné napojení.
+
+Druhé použití:
+Support použil pravidlo u žádosti formulované jako "napojit data do reportingu".
+
+Výsledek:
+Pravidlo pomohlo poznat, že nejde o jednorázový export. Chyběla ale věta, že pravidelné napojení se nepředkvalifikuje v support makru, ale předává do technické kvalifikace.
+
+Druhé pasivní použití uzavíráme stavem:
+Poslední lokální dočištění.
+
+Dočištění:
+Do support makra doplňujeme větu: "U pravidelného napojení otevři technickou kvalifikaci s účelem a očekávanou frekvencí; nesbírej technické detaily v support vlákně."
+
+Co zůstává zavřené:
+Nový dashboard exportních požadavků, povinné CRM pole pro reportingový nástroj a plošná revize všech exportních procesů.
+
+Další návratový signál:
+Téma se otevře znovu jen tehdy, když dva další případy pravidelného napojení skončí sběrem technických detailů v supportu místo technické kvalifikace.
+```
+
+Tento zápis drží rozumnou velikost. Pravidlo se nezvětšuje na celý integrační proces. Jen dostane poslední hranu, aby člověk v supportu nesbíral data, která patří až do technické kvalifikace. To je přesně typ malé opravy, která zlepší práci a zároveň zmenší datovou stopu.
+
+### Co už po uzavření nesledovat
+
+Po druhém pasivním použití si výslovně napište, co dál neevidujete. Je to možná nejdůležitější část celé podkapitoly. Bez ní si tým snadno řekne, že když se pravidlo použilo dvakrát, měl by vzniknout seznam dalších použití. Jenže seznam dalších použití je nový systém. A nový systém potřebuje účel, vlastníka, retenci a důvod.
+
+Použijte krátký zápis:
+
+```text
+Dál neevidujeme:
+
+Dál neukládáme:
+
+Dál neotevíráme:
+```
+
+Příklad:
+
+```text
+Dál neevidujeme:
+Každé použití support makra pro exportní žádosti.
+
+Dál neukládáme:
+Texty zákaznických žádostí, názvy reportingových nástrojů ani interní komentáře supportu mimo původní ticket.
+
+Dál neotevíráme:
+Nový CRM atribut, exportní dashboard ani plošný audit všech integrací.
+```
+
+Tím se pasivní provoz opravdu stane pasivním. Pravidlo zůstává dostupné, ale nevyrábí kolem sebe vlastní stínovou administrativu. Codyho komentář: pravidlo, které potřebuje vlastní deníček pokaždé, když si odkašle, ještě není pravidlo. Je to úkol v převleku.
+
+### Privacy-first uzavření
+
+Privacy-first uzavření druhého pasivního použití má být krátké a konkrétní. Nepište obecné "dodržujeme soukromí". Napište, která data nevznikla nebo nezměnila místo.
+
+Dobrá věta:
+
+```text
+Po druhém použití ponecháváme pouze anonymizovaný závěr o hranici pravidelného napojení; zákaznický text, nástroje a interní komentáře zůstávají jen v původním ticketu.
+```
+
+Ještě lepší věta:
+
+```text
+Do běžného provozu nepřidáváme žádné nové pole, export, měření ani dodavatelský tok. Pravidlo zůstává v support makru a návratový signál je uložený u stejného pracovního místa.
+```
+
+Pokud po druhém použití vznikla dočasná poznámka, pracovní kopie nebo přepis zákaznického dotazu, rozhodněte hned, co s ní. Buď ji převeďte do anonymizovaného závěru, nebo ji nechte ve zdrojovém systému a dál ji nekopírujte. Dočasné podklady mají zvláštní talent přežít déle než důvod, kvůli kterému vznikly. A pak se tváří jako paměť týmu, i když jsou jen starý kontext bez oprávnění.
+
+### Karta uzavření druhého pasivního použití
+
+```text
+Pravidlo v pasivním provozu:
+
+Druhé použití:
+
+Výsledek druhého použití:
+
+Uzavírací stav:
+- potvrdit pasivní provoz
+- poslední lokální dočištění
+- zúžit pravidlo
+- otevřít návratový signál
+
+Co se případně mění v pracovním místě:
+
+Co zůstává výslovně zavřené:
+
+Co dál neevidujeme:
+
+Co dál neukládáme nebo nekopírujeme:
+
+Privacy-first závěr:
+
+Návratový signál:
+
+Kde je závěr uložený:
+
+Vlastník:
+```
+
+Karta má smysl hlavně tehdy, když druhé použití vedlo k lokálnímu dočištění, zúžení nebo návratovému signálu. Pokud druhé použití pouze potvrdilo klid, stačí jedna věta u pracovního místa. Nepište kartu jen proto, že šablona existuje. Šablona je nástroj, ne hladový domácí úkol.
+
+### Mini workshop na 5 minut
+
+1. Minuta 1: přečtěte pravidlo a anonymizovaný popis druhého použití.
+2. Minuta 2: vyberte jeden uzavírací stav.
+3. Minuta 3: napište, co se případně mění v pracovním místě.
+4. Minuta 4: napište, co dál neevidujete a neukládáte.
+5. Minuta 5: potvrďte návratový signál nebo ukončete mimořádnou pozornost.
+
+Pokud pět minut nestačí, pravděpodobně řešíte víc než uzavření druhého použití. Oddělte novou otázku a tuto kartu zavřete. Pasivní provoz se nemá stát místem, kam se pohodlně odkládají všechny příbuzné nápady.
+
+### Checklist uzavření druhého pasivního použití
+
+- Vybrali jsme jeden jasný uzavírací stav?
+- Pokud pravidlo fungovalo, ukončili jsme mimořádnou pozornost?
+- Pokud dočišťujeme, jde opravdu o jednu větu, kotvu nebo hranici?
+- Pokud zúžujeme pravidlo, je jasné, kde končí jeho použití?
+- Pokud otevíráme návratový signál, odpovídá předem zapsané podmínce?
+- Je napsané, co dál neevidujeme?
+- Je napsané, co dál neukládáme, nekopírujeme ani neposíláme do nového nástroje?
+- Zůstává závěr u kanonického pracovního místa?
+- Nevznikl nový dashboard, CRM atribut, export, tracker ani kontrolní seznam lidí?
+- Umí další člověk poznat, kdy pravidlo použít a kdy už otevřít nový krok?
+
+Uzavření druhého pasivního použití má být tiché. Když pravidlo obstálo, nechte ho být. Když potřebuje poslední hranu, přidejte ji tam, kde se používá. Když se objevil skutečný návratový signál, otevřete novou malou smyčku. V každém případě platí: neodměňujte dobré pravidlo novou evidencí. Nejlepší důkaz pasivního provozu je často právě to, že po něm nezůstává žádný nový provoz.
+
 ## Pracovní log
 
+- 2026-07-02: Doplněna úvodní podkapitola o uzavření druhého pasivního použití: čtyři uzavírací stavy, exportní příklad, privacy-first ne-evidence, karta, mini workshop a checklist.
 - 2026-07-02: Doplněna úvodní podkapitola o druhém běžném použití pravidla v pasivním provozu: ověření bez čerstvé paměti, čtyři výsledky, exportní příklad, privacy-first ne-evidence, karta, mini workshop a checklist.
 - 2026-07-02: Doplněna úvodní podkapitola o uzavření prvního pasivního použití pravidla: čtyři uzavírací stavy, support příklady, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-07-02: Doplněna úvodní podkapitola o prvním běžném použití pravidla v pasivním provozu: tři kontrolní otázky, čtyři výsledky, praktický support příklad, privacy-first ne-evidence, karta, mini workshop a checklist.
