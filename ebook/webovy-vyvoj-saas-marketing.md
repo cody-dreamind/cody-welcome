@@ -282904,8 +282904,224 @@ Pokud workshop začne vyrábět nový seznam úkolů, vraťte se ke třetí minu
 
 Dobré uzavření prvního použití po archivaci je krátké a trochu nudné. To je v pořádku. Nuda je často známka toho, že systém dělá přesně tolik práce, kolik má, a nepředstírá drama tam, kde stačí jedna věta.
 
+## Druhé běžné použití po návratu lokální úpravy do archivního minima
+
+Druhé běžné použití po archivaci je poslední dobrý test, jestli lokální úprava opravdu přežila návrat do tichého režimu. První použití často ještě nese čerstvou paměť: někdo si pamatuje, proč se pravidlo upravovalo, kde byla diskuse, kdo rozhodl a jaký příklad se řešil. Druhé použití už má být obyčejnější. Ideálně ho udělá někdo, kdo u původní opravy nebyl, nebo se odehraje v situaci, která není kopií prvního příkladu.
+
+Smyslem není znovu auditovat celé pravidlo. Smyslem je ověřit, že archivní minimum stačí i bez doprovodného vysvětlování. Pokud tým při druhém použití potřebuje otevřít staré poznámky, ptát se autora nebo dohledávat původní zákaznický případ, archivní minimum je moc slabé. Pokud naopak pravidlo pomůže k rozhodnutí a nezaloží novou evidenci, může dál mlčet.
+
+Začněte větou:
+
+```text
+Druhé běžné použití po archivaci kontrolujeme jen proto, abychom ověřili samostatnost pravidla bez čerstvé paměti.
+```
+
+Tahle věta drží rozsah. Neříká "hledáme, co ještě zlepšit". Říká "ověřujeme, že už není potřeba mimořádná péče". To je rozdíl mezi údržbou a věčným vrtáním do stejného místa.
+
+### Tři otázky druhého použití
+
+Položte si jen tři otázky:
+
+- Našel člověk archivní pravidlo tam, kde pracoval?
+- Dokázal podle něj rozhodnout bez otevření staré historie?
+- Nevznikla kvůli použití nová datová stopa nebo další kontrolní rutina?
+
+Pokud všechny tři odpovědi zní ano, druhé použití je potvrzené. Není potřeba psát delší metodiku, přidávat nový checklist ani plánovat třetí běžné použití jen pro klid duše. Klid duše je hezký, ale v provozu často stojí překvapivě hodně tabulek.
+
+Pokud první odpověď selže, problém je v kotvě. Pravidlo může být správné, ale leží mimo pracovní místo. Opravte název, umístění nebo krátký odkaz. Neotevírejte obsah pravidla, dokud není jasné, že obsah opravdu selhal.
+
+Pokud druhá odpověď selže, problém je v rozhodovací větě. Člověk pravidlo našel, ale neuměl podle něj rozlišit "teď použít" a "teď nechat být". Opravte hranici jednou větou a nevracejte do textu celý příběh původní opravy.
+
+Pokud třetí odpověď selže, problém je v chování okolo pravidla. Tým možná zavedl bokem tabulku, připomínku, report nebo sběr příkladů. To nevypadá jako změna pravidla, ale provozně to změna je. Privacy-first provoz si musí hlídat i tyhle nenápadné stopy.
+
+### Čtyři výsledky druhého použití
+
+Použijte jeden ze čtyř výsledků:
+
+- Samostatné ticho: pravidlo bylo nalezené, použité nebo vědomě nepoužité a nevznikla další práce.
+- Slabá kotva: pravidlo je správné, ale není dost blízko pracovnímu místu.
+- Slabá hranice: pravidlo je na správném místě, ale nerozlišuje dost jasně situace použití.
+- Skrytá nová rutina: pravidlo sice funguje, ale okolo něj vzniklo nové sledování, připomínání nebo shromažďování příkladů.
+
+`Samostatné ticho` znamená konec mimořádné péče. Zapište jednu větu a nechte archivní minimum dál mlčet.
+
+`Slabá kotva` opravuje pouze cestu k pravidlu. Může jít o přesnější nadpis v šabloně, odkaz z checklistu nebo přesun jedné věty blíž k formuláři, e-mailu či obchodnímu skriptu.
+
+`Slabá hranice` opravuje pouze rozhodovací jazyk. Přidejte nebo upravte větu typu "použij jen když" nebo "nepoužívej pokud". Pokud je potřeba víc než jedna krátká věta, pravděpodobně už nejde o archivní minimum.
+
+`Skrytá nová rutina` vyžaduje úklid. Pokud někdo začal ukládat příklady, označovat případy, dělat ruční report nebo připomínat pravidlo v kalendáři, nejdřív rozhodněte, jestli tato rutina opravdu zaslouží existovat. Většinou ne. A když ano, už to není archivní minimum, ale nový provozní rytmus, který musí mít vlastní důvod, vlastníka a datovou hranici.
+
+### Praktický příklad
+
+Archivní pravidlo:
+
+```text
+U doporučených poptávek se ptej na rámec spolupráce jen tehdy, když bez něj nejde navrhnout další konkrétní krok.
+```
+
+První použití po archivaci dopadlo dobře. Obchodník pravidlo našel a nepoložil zbytečnou otázku u jednoduché poptávky.
+
+Druhé použití:
+
+```text
+Nový kolega řeší poptávku přes doporučení. V šabloně první odpovědi najde blok "Volitelná otázka na rámec spolupráce". Poptávka je nejasná: klient chce "něco s automatizací", ale není jasné, jestli jde o audit, MVP, nebo interní workflow. Kolega otázku použije, protože bez ní nejde navrhnout další konkrétní krok.
+```
+
+Vyhodnocení:
+
+```text
+Výsledek:
+Samostatné ticho.
+
+Důvod:
+Pravidlo bylo najitelné v běžném pracovním místě, kolega podle něj rozhodl bez otevírání staré historie a nevznikla nová evidence použití.
+
+Co dál neděláme:
+Neplánujeme třetí kontrolní použití, nepřidáváme CRM pole a nesbíráme konkrétní příklady poptávek.
+```
+
+Slabší varianta:
+
+```text
+Nový kolega pravidlo našel až ve starém rozhodovacím logu, protože v šabloně první odpovědi zůstal jen obecný text "doplňující otázky".
+```
+
+Lokální oprava:
+
+```text
+Výsledek:
+Slabá kotva.
+
+Nejmenší oprava:
+V šabloně první odpovědi přejmenovat blok na "Volitelná otázka na rámec spolupráce" a nechat v něm jednu rozhodovací větu.
+
+Co dál neděláme:
+Nepřepisujeme obchodní proces a nevracíme starý rozhodovací log do běžné práce.
+```
+
+Jiná slabší varianta:
+
+```text
+Kolega pravidlo našel, ale po použití si založil malou tabulku "případy otázky na rámec", aby bylo vidět, jak často se používá.
+```
+
+Úklid:
+
+```text
+Výsledek:
+Skrytá nová rutina.
+
+Nejmenší oprava:
+Tabulku zrušit, ponechat jen zobecněnou větu o druhém použití a připomenout, že pravidlo nemá vlastní report.
+
+Co dál neděláme:
+Nesledujeme četnost použití otázky, pokud nepřijde předem domluvený návratový signál.
+```
+
+### Privacy-first kontrola druhého použití
+
+Druhé použití svádí k malé evidenci. "Jen si poznačíme, kdy se to použilo." "Jen pár příkladů pro jistotu." "Jen screenshot, ať víme." Právě tady se z dobrého archivního minima stává nenápadná sbírka dat.
+
+Použijte krátký filtr:
+
+```text
+K ověření samostatnosti stačí:
+
+Nepotřebujeme ukládat:
+
+Skrytá rutina, která nesmí vzniknout:
+
+Po kontrole rušíme nebo nepřenášíme:
+```
+
+Příklad:
+
+```text
+K ověření samostatnosti stačí:
+Nový kolega našel pravidlo v šabloně a rozhodl podle něj bez staré historie.
+
+Nepotřebujeme ukládat:
+Jméno zákazníka, text poptávky, interní komentář, rozpočet ani screenshot e-mailu.
+
+Skrytá rutina, která nesmí vzniknout:
+Tabulka četnosti použití otázky na rámec spolupráce.
+
+Po kontrole rušíme nebo nepřenášíme:
+Dočasnou poznámku z ověřovacího průchodu.
+```
+
+Privacy-first hodnota je v tom, že tým neudělá z každého správného rozhodnutí další datový bod. Někdy stačí vědět, že pravidlo funguje. Není nutné držet celou vitrínu důkazů, jako by produktové rozhodnutí bylo výstava minerálů.
+
+### Karta druhého běžného použití po archivaci
+
+```text
+Archivní pravidlo:
+
+Druhá běžná situace:
+
+Kdo pravidlo použil nebo měl použít:
+
+Našel pravidlo v pracovním místě?
+
+Rozhodl bez otevření staré historie?
+
+Vznikla nová datová stopa nebo rutina?
+
+Výsledek:
+- samostatné ticho
+- slabá kotva
+- slabá hranice
+- skrytá nová rutina
+
+Nejmenší oprava, pokud existuje:
+
+Co zůstává zavřené:
+
+Co dál nesledujeme:
+
+Privacy-first zápis:
+K ověření stačí:
+Nepotřebujeme ukládat:
+Rušíme nebo nepřenášíme:
+
+Vlastník:
+
+Datum:
+```
+
+Karta je užitečná jen tehdy, když vznikla slabá kotva, slabá hranice nebo skrytá rutina. U samostatného ticha stačí jeden stručný záznam u pracovního místa. Když karta vzniká i pro čistý výsledek, je to první náznak, že tým rád vyrábí administrativu a tváří se u toho jako opatrnost.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: pojmenujte archivní pravidlo a druhou běžnou situaci.
+2. Minuta 2: ověřte, jestli člověk pravidlo našel v pracovním místě.
+3. Minuta 3: ověřte, jestli rozhodl bez staré historie.
+4. Minuta 4: zkontrolujte, jestli nevznikla skrytá nová rutina.
+5. Minuta 5: vyberte jeden výsledek a případnou nejmenší opravu.
+6. Minuta 6: zapište, co dál nesledujete, a ukončete mimořádnou pozornost.
+
+Pokud se v páté minutě objeví návrh na nový report, vraťte se ke třetí otázce. Report není důkaz samostatnosti pravidla. Je to nový provozní objekt. Může být užitečný, ale musí si zasloužit vlastní rozhodnutí, ne se potichu přilepit na archivní minimum.
+
+### Checklist druhého použití po archivaci
+
+- Je druhé použití opravdu běžná situace, ne umělé demo?
+- Proběhlo s menší čerstvou pamětí než první použití?
+- Bylo pravidlo najitelné tam, kde člověk pracoval?
+- Šlo podle pravidla rozhodnout bez otevření starého rozhodovacího logu?
+- Nevznikla tabulka, report, připomínka, nové CRM pole ani sběr příkladů?
+- Vybrali jsme jeden ze čtyř výsledků?
+- Pokud opravujeme kotvu, zůstává oprava u umístění nebo názvu?
+- Pokud opravujeme hranici, zůstává oprava u jedné rozhodovací věty?
+- Pokud uklízíme skrytou rutinu, víme přesně, co rušíme nebo nepřenášíme?
+- Zůstává původní širší rozsah zavřený?
+- Uchováváme jen zobecněný záznam potřebný k rozhodnutí?
+- Může pravidlo po druhém použití znovu fungovat jako archivní minimum?
+
+Druhé běžné použití po návratu do archivního minima má skončit lehce. Pokud pravidlo funguje, dál ho nenoste po schůzkách jako čestnou vlajku. Nechte ho v pracovním místě, kde pomáhá. Dobře navržené pravidlo nemusí být vidět pořád. Stačí, že je vidět ve chvíli, kdy má.
+
 ## Pracovní log
 
+- 2026-07-02: Doplněna úvodní podkapitola o druhém běžném použití po návratu lokální úpravy do archivního minima: samostatnost pravidla bez čerstvé paměti, slabá kotva, slabá hranice, skrytá rutina, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-07-02: Doplněna navazující podkapitola o uzavření prvního běžného použití po návratu lokální úpravy do archivního minima: uzavírací stavy, praktické příklady, privacy-first uzavření, karta, mini workshop a checklist.
 - 2026-07-02: Doplněna úvodní podkapitola o prvním běžném použití po návratu lokální úpravy do archivního minima: tři otázky použití, čtyři výsledky, praktické příklady, privacy-first zápis, karta, mini workshop a checklist.
 - 2026-07-02: Doplněna úvodní podkapitola o návratu lokální úpravy do archivního minima: stabilní pracovní věta, kanonické místo, hranice použití, privacy-first úklid ověřovacích stop, karta, mini workshop a checklist.
