@@ -285602,6 +285602,142 @@ Pokud se v šesté minutě ukáže, že tým neví, kde jsou pomocné podklady, 
 
 Uzavření druhého běžného použití je malý návrat k normálu. Pravidlo prošlo dlouhým tichem, návratem, prvním použitím i druhým použitím. Pokud pořád funguje, zaslouží si klid. Ne další štítek, ne další kontrolní schůzku, ne další sloupec v tabulce. Jen jasnou větu, uklizenou datovou stopu a právo být použité až ve chvíli, kdy ho práce opravdu potřebuje.
 
+## Převod potvrzeného návratu zpět do pasivního provozu
+
+Po uzavření druhého běžného použití přichází poslední drobný, ale důležitý krok: převést potvrzený návrat zpět do pasivního provozu. Nejde o další kontrolu pravidla. Jde o úklid režimu, ve kterém tým na chvíli pracoval pozorněji než obvykle.
+
+Když se pravidlo vrátí po dlouhém tichu, je správné k němu na chvíli přistupovat jako k citlivému místu. Ověříte návratový signál, provedete malé dočištění, sledujete první běžné použití a potom druhé. Jenže jakmile obě použití ukážou, že pravidlo znovu funguje samostatně, mimořádná pozornost se má vypnout. Jinak pasivní provoz nikdy opravdu nenastane; jen se tváří jako klid, zatímco někde v rohu pořád běží malý nepojmenovaný monitoring.
+
+Začněte převodovou větou:
+
+```text
+Potvrzený návrat převádíme zpět do pasivního provozu takto:
+```
+
+Dobrá věta říká tři věci: co je nyní kanonické, co se už nesleduje a kdy se téma smí znovu otevřít.
+
+```text
+Potvrzený návrat převádíme zpět do pasivního provozu takto:
+kanonická rozhodovací věta zůstává v support šabloně, pomocnou kartu návratu zavíráme a k pravidlu se vrátíme pouze při novém požadavku, který stejnou hranici znovu znejasní.
+```
+
+Tahle věta chrání tým před dvěma špatnými konci. První je zapomenout, co se vlastně ověřilo. Druhý je držet pravidlo v trvalé opatrnosti jen proto, že návrat byl kdysi nepříjemný. Pasivní provoz má být klidný, ne nervózní.
+
+### Co se při převodu mění
+
+Převod do pasivního provozu se dotkne hlavně pracovního režimu, ne obsahu pravidla. Obsah už měl být upravený dřív. Teď rozhodujete, kde pravidlo žije, co kolem něj mizí a kdo má oprávnění ho příště znovu otevřít.
+
+Zkontrolujte čtyři věci:
+
+- Kanonické místo: pravidlo je v jednom pracovním místě, kde ho člověk opravdu hledá.
+- Pomocné stopy: dočasné poznámky, tabulky, výřezy a karty jsou smazané, anonymizované nebo archivované podle účelu.
+- Návratový signál: je napsaný jednoduše a nevyžaduje pravidelnou kontrolu.
+- Vlastník: je jasné, kdo pravidlo udržuje, ale nevzniká nová schůzka ani nový report.
+
+Kanonické místo je nejdůležitější. Pokud pravidlo zůstane ve třech kopiích, pasivní provoz se rozbije při první změně. Jedna kopie bude stará, druhá bude poloviční a třetí bude "jen interní poznámka", kterou někdo použije ve špatné chvíli. Tohle není chaos, to je jen běžný kancelářský jazz s PDF přílohou. Pořád mu ale nemusíme tleskat.
+
+### Praktický příklad převodu
+
+Představte si pravidlo pro rozlišení ručního exportu a technického napojení v supportu. Návrat po dlouhém tichu ukázal, že stará hranice byla slabě napsaná. Tým ji upravil, ověřil při prvním a druhém běžném použití a teď ji chce vrátit do pasivního provozu.
+
+Převod může vypadat takto:
+
+```text
+Kanonické místo:
+Support šablona "Ruční exporty a technická napojení".
+
+Trvalé pravidlo:
+Pokud zákazník žádá jednorázový nebo občasný export, řeší ho support. Pokud požaduje opakované napojení na vlastní systém, jde o technickou integraci a předává se podle integračního postupu.
+
+Co zavíráme:
+Pomocnou kartu návratu, dočasnou tabulku hraničních případů a interní připomínku v onboarding poznámkách.
+
+Kdy se vrátíme:
+Pouze pokud dva nové požadavky za sebou nepůjdou rozhodnout podle této věty bez doptání seniorního člověka.
+```
+
+Tady je důležité, že návratový signál není pravidelný audit. Nikdo každý měsíc nepočítá exporty. Nikdo preventivně nečte všechny support tickety. Pravidlo prostě leží v místě práce a čeká na skutečný signál. To je pasivní provoz: systém ví, co dělat, ale nevyžaduje pozornost jen proto, aby se cítil důležitě.
+
+### Privacy-first převod
+
+Privacy-first převod se ptá hlavně na to, co z ověřování nesmí zůstat navíc. Během návratu mohly vzniknout pracovní kopie zákaznických příkladů, výřezy komunikace, exporty, screenshoty nebo seznamy hraničních případů. V pasivním provozu má zůstat pravidlo, ne dočasná evidence.
+
+Použijte jednoduché třídění:
+
+```text
+Zůstává trvale:
+obecné pravidlo, syntetický příklad, vlastník a návratový signál.
+
+Zůstává v původním systému:
+původní tickety, e-maily nebo obchodní poznámky podle běžné retence a přístupů.
+
+Mizí:
+kopie, pomocné exporty, pracovní tabulky, screenshoty a poznámky, které už splnily účel.
+```
+
+Pokud potřebujete příklad pro školení, přepište ho synteticky. Nepřenášejte jméno zákazníka, konkrétní endpoint, obchodní kontext ani text ticketu. Uživatel budoucí šablony potřebuje pochopit rozhodovací hranici, ne detaily případu, který ji kdysi připomněl.
+
+Codyho komentář: nejlepší důkaz dobrého privacy-first provozu je často dost neatraktivní. Méně tabulek. Méně kopií. Méně "pro jistotu". Vypadá to nenápadně, ale přesně takhle se dlouhodobě snižuje riziko bez toho, aby se z týmu stala komise pro mazání screenshotů.
+
+### Karta převodu do pasivního provozu
+
+```text
+Pravidlo nebo pracovní místo:
+
+Proč bylo pravidlo po dlouhém tichu znovu otevřené:
+
+Co potvrdilo první běžné použití:
+
+Co potvrdilo druhé běžné použití:
+
+Kanonické místo pravidla:
+
+Jedna trvalá rozhodovací věta:
+
+Co se z mimořádného režimu vypíná:
+
+Co výslovně nebudeme dál sledovat:
+
+Co zůstává v původních systémech:
+
+Co mažeme, anonymizujeme nebo slučujeme:
+
+Návratový signál pro budoucnost:
+
+Vlastník kanonického místa:
+
+Datum převodu:
+```
+
+Karta nemá být další trvalý artefakt vedle pravidla. V ideálním případě stačí jako poslední záznam v historii změny nebo v rozhodovacím logu. Pokud ji tým kopíruje do samostatné evidence, měl by k tomu mít jasný důvod. Jinak se z převodu do pasivního provozu stane další místo, které bude jednou potřebovat vlastní údržbu. A takhle se rodí dokumentační labyrinty: nevinně, s dobrým úmyslem a špatným koncem.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte uzavírací větu druhého běžného použití.
+2. Minuta 2: určete jediné kanonické místo pravidla.
+3. Minuta 3: napište trvalou rozhodovací větu v přítomném čase.
+4. Minuta 4: vypněte mimořádný režim: co už nesledujete, neplánujete a nekontrolujete.
+5. Minuta 5: ukliďte datovou stopu do tří skupin: trvale, původní systém, mizí.
+6. Minuta 6: napište návratový signál pro budoucnost.
+
+Pokud se během workshopu ukáže, že pravidlo nemá jasné kanonické místo, nepřevádějte ho do pasivního provozu jen formálně. Nejdřív vyberte místo. Pasivní pravidlo bez domova je jen znalost v hlavě člověka, který zrovna není na dovolené. To je sice tradiční infrastruktura mnoha firem, ale tradice není argument.
+
+### Checklist převodu zpět do pasivního provozu
+
+- Je potvrzené, že druhé běžné použití dopadlo dostatečně dobře?
+- Má pravidlo jedno kanonické pracovní místo?
+- Je trvalá rozhodovací věta napsaná v přítomném čase?
+- Je jasné, které dočasné karty, poznámky nebo tabulky se zavírají?
+- Vypnuli jsme mimořádné kontroly, které už nemají rozhodovací hodnotu?
+- Neplánujeme další review bez nového návratového signálu?
+- Víme, co zůstává jen v původních systémech podle běžné retence?
+- Smazali nebo anonymizovali jsme pomocné kopie a výřezy?
+- Pokud zůstává školící příklad, je syntetický nebo dostatečně obecný?
+- Původní široký problém se znovu neotevřel jen kvůli převodu?
+- Vlastník ví, kdy pravidlo znovu otevřít a kdy ho nechat být?
+
+Převod zpět do pasivního provozu je konec krátké rekonvalescence pravidla. Neznamená, že se o něj tým nikdy nebude starat. Znamená, že péče znovu čeká na důvod. Praktický systém se pozná i podle toho, že umí přestat koukat na věc, která už funguje.
+
 ## Pracovní log
 
 - 2026-07-02: Doplněna úvodní podkapitola o uzavření druhého běžného použití po uzavřeném návratu po dlouhém tichu: čtyři uzavírací stavy, exportní příklad, privacy-first úklid dočasné datové stopy, karta, mini workshop a checklist.
@@ -287003,3 +287139,4 @@ Uzavření druhého běžného použití je malý návrat k normálu. Pravidlo p
 - 2026-06-30: Doplněna úvodní podkapitola o první pololetní kontrole po zředění rytmu: ověření najitelnosti a samostatného použití pravidla, čtyři výsledky kontroly, privacy-first úklid skryté evidence, karta, mini workshop a checklist.
 - 2026-07-01: Doplněna úvodní podkapitola o prvním běžném použití po lokální úpravě z archivního minima: najitelnost úpravy, rozhodovací věta, ochrana zavřeného rozsahu, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-07-02: Doplněna úvodní podkapitola o prvním běžném použití po uzavřeném návratu po dlouhém tichu: samostatné použití, slabá kotva, slabá věta, nový návratový signál, privacy-first kontrola, karta, mini workshop a checklist.
+- 2026-07-02: Doplněna úvodní podkapitola o převodu potvrzeného návratu zpět do pasivního provozu: kanonické místo, vypnutí mimořádného režimu, privacy-first úklid datové stopy, karta, mini workshop a checklist.
