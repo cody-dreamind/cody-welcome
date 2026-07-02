@@ -282307,8 +282307,203 @@ Pokud se tým zasekne mezi dvěma stavy, vyberte ten menší. Lepší je uzavř�
 
 Uzavření druhého běžného použití je dobré místo pro tečku. Pokud oprava funguje, nechte ji fungovat. Pokud nefunguje, opravte nejbližší skutečné pracovní místo. A pokud se někdo pokusí z lokálního úspěchu vyrobit plošný systém, vraťte se k návratovému signálu. Bez něj má dobrá malá oprava právo zůstat malá.
 
+## Návrat lokální úpravy do archivního minima
+
+Když lokální úprava prošla druhým běžným použitím a byla uzavřena jako funkční, přichází méně nápadná, ale důležitá práce: vrátit ji zpět do archivního minima. Neznamená to schovat ji tak hluboko, že ji nikdo nenajde. Znamená to ukončit mimořádnou péči a ponechat jen tolik paměti, kolik tým potřebuje pro další normální použití.
+
+Začněte větou:
+
+```text
+Lokální úpravu vracíme do archivního minima v této podobě:
+```
+
+Věta musí popsat dnešní stabilní tvar, ne celou historii opravy:
+
+```text
+Lokální úpravu vracíme do archivního minima v podobě jedné volitelné rozhodovací věty v šabloně první odpovědi, používané pouze u doporučených poptávek, kde bez rámce spolupráce nejde navrhnout další krok.
+```
+
+Tím se z živé opravy stane normální součást pracovního místa. Nezůstává kolem ní speciální sledování, boková karta ani připomínka typu "zkontrolovat, jestli pořád funguje". Pokud se má téma někdy vrátit, vrátí se přes návratový signál, ne přes sentimentální údržbu. Ano, i dobré opravy si občas zaslouží klid. Nejsou bonsaj, nemusí se každý týden zastřihávat.
+
+### Co se vrací do archivu
+
+Do archivního minima se vrací jen čtyři věci:
+
+- Stabilní pracovní věta: jak pravidlo zní v běžném jazyce.
+- Pracovní místo: kde ji člověk při práci najde.
+- Hranice použití: kdy ji použít a kdy ji naopak nechat být.
+- Návratový signál: co by téma znovu otevřelo.
+
+Všechno ostatní je kandidát na úklid. Patří sem poznámky z ověřování, dočasné připomínky, jména konkrétních poptávek, interní komentáře, kopie starých karet a seznamy hypotéz, které už splnily svůj účel. Archivní minimum má být tenké. Pokud po návratu úpravy do archivu zůstane deset položek, není to archivní minimum. Je to menší sklep s lepším názvem.
+
+Praktický zápis může vypadat takto:
+
+```text
+Stabilní pracovní věta:
+U doporučených poptávek se ptej na rámec spolupráce jen tehdy, když bez něj nejde navrhnout další konkrétní krok.
+
+Pracovní místo:
+Šablona první odpovědi.
+
+Hranice použití:
+Nepřidávat otázku do formuláře a nepoužívat ji u každé poptávky automaticky.
+
+Návratový signál:
+Téma znovu otevřeme pouze pokud tři relevantní doporučené poptávky za sebou nepůjdou posunout bez strukturovanější otázky na rámec spolupráce.
+```
+
+Tento zápis stačí pro běžnou práci. Když ho nový člověk najde, ví, co má dělat. Když přijde nový podnět, tým ví, podle čeho pozná, jestli se opravdu vrací staré téma. A když se nic neděje, pravidlo může klidně mlčet.
+
+### Co zůstává mimo archiv
+
+Do archivního minima nevracejte věci, které sloužily jen pro ověření:
+
+- kdo přesně úpravu testoval,
+- u kterého zákazníka se věta použila,
+- jaké částky nebo interní domněnky během testu zazněly,
+- pracovní komentáře typu "zatím vypadá dobře",
+- starší návrhy, které zůstaly zavřené,
+- dočasné checklisty prvního a druhého použití.
+
+Pokud něco z toho potřebujete kvůli účetní, právní nebo provozní povinnosti, nechte to v systému, kam patří. Nedávejte to ale do pracovního archivu pravidla jen proto, že to existuje. E-bookový princip je jednoduchý: archiv pravidla má nést rozhodovací paměť, ne kompletní sediment testování.
+
+Codyho komentář: týmy často pletou dohledatelnost s hromaděním. "Ať to máme pro jistotu" zní rozumně, dokud jistota nezabere půl dne hledání a nevysvětlí nikomu nic. Dobrá paměť není ta největší. Je to ta, která v pravou chvíli odpoví na správnou otázku.
+
+### Praktický příklad návratu
+
+Před návratem do archivu:
+
+```text
+Lokální úprava:
+Rozhodovací věta byla přesunuta do šablony první odpovědi.
+
+Ověření:
+První použití našlo slabou kotvu, druhé použití potvrdilo, že nová kotva funguje.
+
+Uzavírací stav:
+Tichý provoz.
+```
+
+Archivní minimum:
+
+```text
+Archivní položka:
+Rámec spolupráce v první odpovědi.
+
+Stabilní pravidlo:
+Otázku na rámec spolupráce používej pouze u doporučených poptávek, kde bez ní nejde navrhnout další konkrétní krok.
+
+Kanonické místo:
+Šablona první odpovědi.
+
+Co se nepřenáší:
+Poznámky z prvního a druhého ověření, konkrétní zákaznické údaje, částky, interní komentáře a původní návrh povinného pole.
+
+Co zůstává zavřené:
+Povinné pole ve formuláři, lead scoring podle rozpočtu, rozpočtový report a export do dalšího marketingového nástroje.
+
+Návratový signál:
+Tři relevantní doporučené poptávky za sebou nepůjdou posunout bez strukturovanější otázky na rámec spolupráce.
+```
+
+Všimněte si, že archivní položka neříká "měli jsme problém s rozpočtem a řešili jsme ho dlouhou sérií ověření". To je historie. Stabilní pravidlo říká, co má člověk udělat příště. Archivní minimum je orientační cedule, ne kronika obce.
+
+### Privacy-first archivace
+
+Návrat do archivního minima je ideální chvíle pro datový úklid. Ptejte se:
+
+```text
+Co z ověřování už nepotřebujeme k běžnému použití pravidla?
+```
+
+Odpověď napište konkrétně:
+
+```text
+Po návratu do archivu nepřenášíme jména zákazníků, částky, interní odhady, e-mailové citace ani dočasné poznámky obchodníka.
+```
+
+Pak doplňte, co díky tomu nevzniká:
+
+```text
+Díky archivaci nevzniká nové CRM pole, report rozpočtů, marketingový segment ani export dat do dalšího nástroje.
+```
+
+Tím se privacy-first hodnota propíše do běžné údržby. Nejde jen o to, že nepřidáváte trackery. Jde i o to, že po ověření malé opravy nemažete jen z estetických důvodů, ale proto, že stabilní pravidlo nepotřebuje nést víc osobních a obchodních stop, než je nutné.
+
+Pokud si nejste jistí, zda stopu odstranit, použijte tři otázky:
+
+- Pomůže tato stopa člověku správně použít pravidlo?
+- Pomůže poznat návratový signál?
+- Existuje povinnost nebo jasný provozní důvod ji držet jinde?
+
+Když jsou první dvě odpovědi ne a třetí také ne, stopa nepatří do archivu pravidla. Pokud třetí odpověď zní ano, uložte ji do správného systému s jasnou retencí, ne do pracovního textu.
+
+### Karta návratu do archivního minima
+
+```text
+Lokální úprava:
+
+Uzavírací stav před archivací:
+- tichý provoz
+- poslední lokální dočištění uzavřeno
+- zavření bez rozšíření
+
+Stabilní pracovní věta:
+
+Kanonické pracovní místo:
+
+Hranice použití:
+
+Co zůstává výslovně zavřené:
+
+Co se z ověřování nepřenáší:
+
+Co mažeme, archivujeme mimo pracovní pravidlo nebo zobecňujeme:
+
+Návratový signál:
+
+Privacy-first výsledek:
+Nová trvalá data nevznikají, protože:
+Do archivu pravidla nepřenášíme:
+Retenci nebo uložení mimo pravidlo řeší:
+
+Vlastník:
+
+Datum návratu do archivního minima:
+```
+
+Karta má být krátká. Pokud se do ní nevejdete, nejspíš do ní cpete historii, která už nepatří do pravidla. V takovém případě si napište zvlášť servisní poznámku k úklidu, ale archivní minimum nechte úzké.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: pojmenujte lokální úpravu jednou větou.
+2. Minuta 2: napište stabilní pracovní větu.
+3. Minuta 3: určete kanonické pracovní místo.
+4. Minuta 4: napište hranici použití a co zůstává zavřené.
+5. Minuta 5: vyškrtněte stopy z ověřování, které nejsou potřeba pro použití ani návratový signál.
+6. Minuta 6: zapište návratový signál a zrušte mimořádnou péči.
+
+Pokud se během workshopu objeví nová otázka, nedávejte ji do archivní karty. Zapište ji jako samostatný podnět a vraťte se k archivaci. Cílem je zavřít hotovou úpravu, ne otevřít další kolo nápadů v převleku za pořádek.
+
+### Checklist návratu do archivního minima
+
+- Je stabilní pracovní věta napsaná v běžném jazyce?
+- Je jasné kanonické pracovní místo, kde člověk pravidlo najde?
+- Je uvedené, kdy pravidlo použít a kdy ne?
+- Je výslovně zapsané, co zůstává zavřené?
+- Zůstává návratový signál konkrétní a ověřitelný?
+- Zrušili jsme mimořádné připomínky, kontroly a bokové poznámky?
+- Nepřenášíme konkrétní zákaznické údaje, částky nebo interní komentáře, které nejsou nutné?
+- Nevzniklo nové pole, tracker, report, segment ani export jen kvůli archivaci?
+- Pokud nějaká stopa musí zůstat jinde, má jasný důvod, vlastníka a retenci?
+- Umí nový člověk pravidlo použít bez čtení celé historie?
+- Umí tým poznat, kdy se téma smí znovu otevřít?
+
+Návrat do archivního minima je tichý konec dobré opravy. Pravidlo je dostupné, hranice jsou jasné, staré stopy jsou uklizené a další práce čeká až na skutečný signál. To je dobrý stav. Ne všechno, co funguje, potřebuje další schůzku.
+
 ## Pracovní log
 
+- 2026-07-02: Doplněna úvodní podkapitola o návratu lokální úpravy do archivního minima: stabilní pracovní věta, kanonické místo, hranice použití, privacy-first úklid ověřovacích stop, karta, mini workshop a checklist.
 - 2026-07-01: Doplněna úvodní podkapitola o uzavření druhého běžného použití po dočištění lokální úpravy z archivního minima: čtyři uzavírací stavy, praktické příklady, privacy-first úklid dočasných stop, karta, mini workshop a checklist.
 - 2026-07-01: Doplněna úvodní podkapitola o druhém běžném použití po dočištění lokální úpravy z archivního minima: ověření kotvy nebo rozhodovací věty, čtyři výsledky, praktické příklady, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-07-01: Doplněna úvodní podkapitola o uzavření prvního běžného použití po lokální úpravě z archivního minima: uzavírací stavy, praktické příklady, privacy-first úklid stop, karta, mini workshop a checklist.
