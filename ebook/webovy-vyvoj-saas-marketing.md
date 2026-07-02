@@ -284663,8 +284663,183 @@ Pokud se skupina zasekne na tom, jestli signál opravdu nastal, nehlasujte podle
 
 Návrat po dlouhém tichu má být důkazem, že pasivní provoz není zapomenutí. Pravidlo může dlouho mlčet a přesto být připravené na okamžik, kdy ho bude potřeba znovu vzít do ruky. Když se to stane, nezačínejte od paniky ani od velkého auditu. Začněte od signálu, pracovního místa, nejmenšího kroku a datové střídmosti. To je méně efektní než nový dashboard, ale obvykle mnohem užitečnější. Takže samozřejmě méně populární.
 
+## Uzavření návratu po dlouhém tichu v pasivním provozu
+
+Návrat po dlouhém tichu nesmí zůstat otevřený jen proto, že byl trochu nepříjemný. Pokud se pasivní pravidlo po měsících znovu ozvalo, tým má přirozenou chuť nechat kolem něj chvíli běžet zvýšenou pozornost. To dává smysl u první reakce, ale ne jako nový normál. Uzavření návratu říká, co se opravdu potvrdilo, co se opravilo, co se neotevírá a jestli se pravidlo vrací zpět do pasivního provozu, nebo potřebuje vlastní novou malou smyčku.
+
+Začněte jednou větou:
+
+```text
+Návrat po dlouhém tichu uzavíráme takto:
+```
+
+Dobrá věta vypadá například takto:
+
+```text
+Návrat po dlouhém tichu uzavíráme takto:
+Problém nebyl v obsahu pravidla pro exporty, ale ve staré kopii support makra. Kanonickou větu jsme vrátili do nové šablony, starou kopii odstranili a pasivní pravidlo vracíme zpět do běžného klidu bez nového reportu nebo CRM atributu.
+```
+
+V jedné větě je stav pravidla, příčina návratu, provedená oprava a datová hranice. To je přesně množství detailu, které další člověk potřebuje. Nepotřebuje číst celou historii, ale musí poznat, jestli má pravidlo znovu sledovat, měnit, nebo nechat být.
+
+### Čtyři uzavírací stavy
+
+Po návratu po dlouhém tichu vyberte jeden ze čtyř stavů:
+
+- Vrátit do pasivního provozu: návrat byl vyřešen lokálně a pravidlo znovu funguje bez zvláštní péče.
+- Ponechat lokální opravu v běžném místě: pravidlo platí, ale pracovní místo potřebovalo malou trvalou kotvu.
+- Otevřít novou malou smyčku: návrat ukázal úzký problém, který nejde uzavřít jednou větou.
+- Založit nové téma: signál vypadal podobně, ale ve skutečnosti patří jinam.
+
+Stav `vrátit do pasivního provozu` je cílový u falešného návratu nebo u návratu způsobeného slabou kotvou. Jakmile je kotva opravená a stará kopie odstraněná, není důvod zavádět další kontrolu. Pokud pravidlo předtím dlouho fungovalo, nesmí za trest dostat nový měsíční meeting. To by byl dost drahý způsob, jak říct "našli jsme staré makro".
+
+Stav `ponechat lokální opravu v běžném místě` použijte, když se pravidlo nemusí obsahově měnit, ale potřebuje jednu trvalou oporu. Typicky jde o odkaz ze šablony, krátkou rozhodovací větu u formuláře nebo jasnější nadpis v interním rozcestníku. Oprava má žít tam, kde se pracuje, ne v novém samostatném dokumentu.
+
+Stav `otevřít novou malou smyčku` dává smysl, když návrat opravdu odhalil novou hranu pravidla. Například jednorázové exporty jsou pořád jasné, ale pravidelné automatické napojení se opakovaně plete se support požadavkem. V takovém případě neotevírejte "celý exportní proces". Otevřete úzkou smyčku pro pravidelné napojení a dejte jí vlastní stop podmínku.
+
+Stav `založit nové téma` je nejpoctivější, když se ukáže, že staré pravidlo bylo jen podobný název. Pokud problém není v exportech, ale v tom, že zákazník nerozumí rozdílu mezi jednorázovým výstupem a integrací, vzniká nové komunikační téma. Staré pasivní pravidlo nechte zavřené a nové téma otevřete čistě.
+
+### Praktický příklad
+
+Návrat:
+
+```text
+Návratový signál:
+Dvě exportní žádosti za sebou skončily sběrem technických detailů v supportu místo předáním do technické kvalifikace.
+
+Zjištění:
+Oba případy šly přes starou kopii makra v interních poznámkách. Nová support šablona správné pravidlo obsahovala, ale stará kopie byla rychlejší k nalezení.
+```
+
+Uzavření:
+
+```text
+Uzavírací stav:
+Ponechat lokální opravu v běžném místě.
+
+Co opravujeme:
+Starou kopii makra mažeme a do nové support šablony přidáváme jasný odkaz na část "Export nebo napojení".
+
+Co zůstává beze změny:
+Pravidlo pro rozlišení jednorázového exportu a pravidelného napojení.
+
+Co neotevíráme:
+Nový exportní dashboard, CRM atribut "typ exportu", pravidelný report support chyb ani plošné školení všech obchodních scénářů.
+
+Návratový signál po uzavření:
+K pravidlu se vrátíme pouze pokud dvě žádosti za sebou projdou novou šablonou a přesto skončí sběrem technických detailů v supportu.
+```
+
+Všimněte si změny návratového signálu. Původní signál ukázal problém, ale po opravě kotvy už nestačí stejná formulace. Kdyby se další chyba stala přes starou kopii, není to možné, protože kopie má být pryč. Nový signál proto musí testovat novou realitu: funguje kanonická šablona, nebo ne?
+
+Slabší uzavření by vypadalo takto:
+
+```text
+Uzavření:
+Budeme exporty chvíli víc sledovat.
+```
+
+To není uzavření. To je mlha v pěkném kabátě. Neříká, kdo sleduje, co přesně sleduje, jak dlouho, proč a co se nesmí začít evidovat. Pokud potřebujete sledování, napište stop podmínku. Pokud ji napsat neumíte, pravděpodobně sledování nepotřebujete.
+
+### Privacy-first uzavření
+
+Nejdůležitější část uzavření je ukončení nouzové datové pozornosti. Návrat po dlouhém tichu často vznikne kolem konkrétních případů. Tým si je chce uložit, přeposlat, dát do tabulky, použít jako příklad v onboardingu nebo z nich udělat report. Někdy je krátký anonymizovaný příklad užitečný. Ale konkrétní zákaznické tickety, screenshoty, interní poznámky a technické detaily nemají cestovat dál jen proto, že pomohly opravit pravidlo.
+
+Použijte tři řádky:
+
+```text
+Po uzavření ponecháváme:
+
+Po uzavření mažeme, anonymizujeme nebo necháváme v původním systému:
+
+Do běžného provozu nepřidáváme:
+```
+
+Příklad:
+
+```text
+Po uzavření ponecháváme:
+Zobecněnou větu, že problém vznikl kvůli staré kopii makra, ne kvůli obsahu pravidla.
+
+Po uzavření mažeme, anonymizujeme nebo necháváme v původním systému:
+Konkrétní zákaznické tickety necháváme jen v support systému podle běžné retence. Do dokumentace nepřenášíme jména zákazníků, technické endpointy ani screenshoty konverzací.
+
+Do běžného provozu nepřidáváme:
+Nový CRM štítek, export support případů, dashboard chyb, měření jednotlivých lidí ani delší retenci dočasných poznámek.
+```
+
+Tím se oddělí poznatek od osobních a obchodních detailů. Poznatek má zůstat v pravidle. Detaily mají zůstat tam, kde mají právní, pracovní a retenční důvod. Privacy-first provoz není alergie na fakta. Je to schopnost neudělat z každého faktu nový datový majetek, který pak někdo musí hlídat, vysvětlovat a uklízet.
+
+Codyho komentář: pokud po uzavření návratu vznikne nový report, nový štítek a nový meeting, pravděpodobně jste neuzavřeli návrat. Jen jste mu koupili kancelářskou židli. A jakmile má problém židli, začne si říkat o kalendář.
+
+### Karta uzavření návratu po dlouhém tichu
+
+```text
+Pasivní pravidlo:
+
+Návratový signál:
+
+Co se opravdu stalo:
+
+Nejmenší krok, který jsme udělali:
+
+Uzavírací stav:
+- vrátit do pasivního provozu
+- ponechat lokální opravu v běžném místě
+- otevřít novou malou smyčku
+- založit nové téma
+
+Co se mění v pracovním místě:
+
+Co zůstává výslovně beze změny:
+
+Co neotevíráme:
+
+Privacy-first uzavření:
+Po uzavření ponecháváme:
+Po uzavření mažeme, anonymizujeme nebo necháváme v původním systému:
+Do běžného provozu nepřidáváme:
+
+Nový nebo potvrzený návratový signál:
+
+Vlastník pracovního místa:
+
+Kde je závěr uložený:
+```
+
+Karta má být poslední stopa mimořádné pozornosti. Pokud po ní potřebujete další pomocnou kartu, zeptejte se, jestli jste náhodou neotevřeli novou smyčku. To je v pořádku, ale má se to jmenovat pravým jménem.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte návratový signál a skutečný průběh.
+2. Minuta 2: pojmenujte nejmenší krok, který se opravdu udělal.
+3. Minuta 3: vyberte jeden uzavírací stav.
+4. Minuta 4: napište, co se mění v pracovním místě a co zůstává beze změny.
+5. Minuta 5: napište, co se neotevírá a jaký je další návratový signál.
+6. Minuta 6: ukončete nebo omezte dočasnou datovou stopu.
+
+Když se workshop zasekne na tom, jestli "by se to nemělo preventivně měřit", vraťte se k rozhodovací otázce: jaké rozhodnutí by měření změnilo? Pokud žádné, měření není opatrnost. Je to odložený úklid s lepším marketingem.
+
+### Checklist uzavření návratu
+
+- Máme konkrétní popis toho, co se opravdu stalo?
+- Víme, jaký nejmenší krok byl udělaný?
+- Vybrali jsme jeden uzavírací stav?
+- Pokud pravidlo vracíme do pasivního provozu, je jasné, proč není potřeba další kontrola?
+- Pokud ponecháváme lokální opravu, žije v běžném pracovním místě?
+- Pokud otevíráme novou malou smyčku, má vlastní stop podmínku?
+- Pokud zakládáme nové téma, oddělili jsme ho od starého pravidla?
+- Je napsané, co zůstává beze změny?
+- Je napsané, co výslovně neotevíráme?
+- Ukončili jsme dočasné poznámky, kopie, screenshoty, exporty nebo pomocné tabulky?
+- Nepřidali jsme CRM atribut, report, tracker nebo delší retenci bez jasného rozhodovacího účelu?
+- Má pravidlo po uzavření nový nebo potvrzený návratový signál?
+
+Uzavření návratu po dlouhém tichu je zkouška, jestli tým umí reagovat bez zbytečného dramatu. Dobrý výsledek není ten, že se pravidlo začne víc kontrolovat. Dobrý výsledek je, že se opraví nejbližší příčina, uklidí dočasná stopa a pravidlo se buď vrátí do pasivního provozu, nebo se z něj čistě oddělí nová malá smyčka. Tak se systém učí, aniž by po každém návratu přibíral další vrstvu evidence.
+
 ## Pracovní log
 
+- 2026-07-02: Doplněna úvodní podkapitola o uzavření návratu po dlouhém tichu v pasivním provozu: čtyři uzavírací stavy, exportní příklad, nový návratový signál, privacy-first ukončení dočasné datové stopy, karta, mini workshop a checklist.
 - 2026-07-02: Doplněna úvodní podkapitola o návratu po dlouhém tichu v pasivním provozu: kontrola návratového signálu, pracovní místo, čtyři výsledky návratu, exportní příklad, privacy-first datová brzda, karta, mini workshop a checklist.
 - 2026-07-02: Doplněna úvodní podkapitola o dlouhém tichu po potvrzeném pasivním provozu: klidová kotva, zahlédnutí bez evidence, přesun pracovního místa, privacy-first ticho, karta, mini workshop a checklist.
 - 2026-07-02: Doplněna úvodní podkapitola o uzavření druhého pasivního použití: čtyři uzavírací stavy, exportní příklad, privacy-first ne-evidence, karta, mini workshop a checklist.
