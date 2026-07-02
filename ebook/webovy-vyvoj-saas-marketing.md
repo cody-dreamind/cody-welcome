@@ -284837,6 +284837,213 @@ Když se workshop zasekne na tom, jestli "by se to nemělo preventivně měřit"
 
 Uzavření návratu po dlouhém tichu je zkouška, jestli tým umí reagovat bez zbytečného dramatu. Dobrý výsledek není ten, že se pravidlo začne víc kontrolovat. Dobrý výsledek je, že se opraví nejbližší příčina, uklidí dočasná stopa a pravidlo se buď vrátí do pasivního provozu, nebo se z něj čistě oddělí nová malá smyčka. Tak se systém učí, aniž by po každém návratu přibíral další vrstvu evidence.
 
+## První běžné použití po uzavřeném návratu po dlouhém tichu
+
+Když se návrat po dlouhém tichu uzavře, další běžné použití je malý test dospělosti pravidla. Nejde o další mimořádnou kontrolu. Jde o obyčejnou pracovní situaci, ve které se má ukázat, jestli pravidlo znovu funguje bez vysvětlování, bez historického pátrání a bez dočasné evidence.
+
+Začněte větou:
+
+```text
+Pravidlo používáme poprvé po uzavřeném návratu takto:
+```
+
+Dobrá věta popíše pracovní místo a očekávaný výsledek:
+
+```text
+Pravidlo používáme poprvé po uzavřeném návratu takto:
+Support řeší novou žádost o export v běžné šabloně. Člověk má bez čtení staré karty poznat, jestli jde o jednorázový export, nebo pravidelné technické napojení, a podle toho případ buď dokončit, nebo předat do technické kvalifikace.
+```
+
+Tahle věta chrání tým před nenápadným návratem mimořádné péče. Pokud při prvním použití někdo otevře starý incident, tabulku dočasných poznámek a tři předchozí tickety, pravidlo ještě není zpátky v běžném provozu. Pořád stojí na paměti lidí, ne na pracovním místě.
+
+### Co se při prvním použití ověřuje
+
+Ověřujte jen tři věci:
+
+- Pravidlo je tam, kde člověk skutečně pracuje.
+- Rozhodovací věta stačí bez vysvětlování historického návratu.
+- Použití nevytváří novou zbytečnou datovou stopu.
+
+První bod je o umístění. Pokud člověk pracuje v support šabloně, pravidlo nemá bydlet jen v retrospektivní kartě. Pokud se rozhodnutí dělá u poptávkového formuláře, nemá být schované v interním playbooku, který se otevře jednou za měsíc a pak se tváří jako autorita.
+
+Druhý bod je o samostatnosti. Člověk nemusí znát drama dlouhého ticha, starou kopii makra ani důvod poslední opravy. Má vidět běžnou větu, která mu pomůže rozhodnout. Historie je užitečná pro správce pravidla, ne pro každého, kdo dělá běžnou práci.
+
+Třetí bod je privacy-first brzda. První použití po uzavřeném návratu svádí k tomu, že si tým "pro jistotu" uloží ukázku, screenshot, jméno zákazníka, stav ticketu nebo interní komentář. Pokud k rozhodnutí stačí vědět, že pravidlo bylo použitelné, neukládejte víc.
+
+Codyho komentář: první běžné použití po návratu je jako kontrola, jestli opravené dveře jdou otevřít normální rukou. Když k tomu potřebujete návod, dva svědky a tabulku v cloudu, dveře možná nejsou opravené. Jen se kolem nich vytvořil malý provozní folklor.
+
+### Čtyři výsledky prvního použití
+
+Po prvním běžném použití vyberte jeden ze čtyř výsledků:
+
+- Samostatné použití: pravidlo bylo najitelné, rozhodnutí proběhlo a nevznikla nová datová stopa.
+- Slabá kotva: pravidlo platí, ale člověk ho našel pozdě nebo přes vedlejší cestu.
+- Slabá věta: pravidlo bylo na správném místě, ale rozhodovací formulace nestačila.
+- Nový návratový signál: běžné použití ukázalo stejný problém, který měl být uzavřený.
+
+`Samostatné použití` znamená, že nic dalšího neotevíráte. Zapište krátký závěr a nechte pravidlo v pasivním provozu. Neodměňujte fungující pravidlo další kontrolou. To je manažerská obdoba zalévání plastové kytky.
+
+`Slabá kotva` řešte úpravou místa, ne novým pravidlem. Přesuňte odkaz blíž k rozhodnutí, změňte nadpis, smažte starou kopii nebo doplňte jednu navigační větu. Cílem není přidat dokumentaci. Cílem je odstranit zbytečný lov.
+
+`Slabá věta` řešte přepsáním jedné rozhodovací formulace. Nepřidávejte celou novou sekci, pokud chybí jen hrana mezi dvěma možnostmi. Dobrá oprava je tak malá, že při dalším použití skoro není vidět; prostě pomůže.
+
+`Nový návratový signál` berte vážně, ale úzce. Pokud se stejný problém opakuje i po uzavření návratu, neznamená to automaticky audit celého procesu. Znamená to, že poslední uzavření nestačilo a je potřeba otevřít novou malou smyčku s vlastní stop podmínkou.
+
+### Praktický příklad
+
+Uzavřený návrat:
+
+```text
+Problém nebyl v obsahu pravidla pro exporty, ale ve staré kopii support makra. Starou kopii jsme odstranili a kanonickou větu vrátili do nové support šablony.
+```
+
+První běžné použití:
+
+```text
+Nový support člověk řeší žádost o pravidelný export. V nové šabloně najde větu, že pravidelné technické napojení se nepokouší kvalifikovat v supportu, ale předává se do technické kvalifikace.
+```
+
+Výsledek:
+
+```text
+Samostatné použití.
+Pravidlo bylo použité bez staré karty návratu, bez dočasné tabulky a bez kopírování zákaznického ticketu do dokumentace. Pasivní provoz pokračuje beze změny.
+```
+
+Jiný výsledek by mohl být slabá kotva:
+
+```text
+Člověk rozhodl správně, ale pravidlo našel až přes starou interní poznámku. Obsah neměníme. Přesouváme rozhodovací větu přímo do začátku části "Export nebo napojení" a starou poznámku mažeme.
+```
+
+A slabá věta:
+
+```text
+Člověk našel správné místo, ale nevěděl, zda opakovaný měsíční CSV export už počítat jako pravidelné technické napojení. Do věty doplňujeme hranici: opakovaný ruční export zůstává support požadavek, automatizovaný export přes API je technická kvalifikace.
+```
+
+Všimněte si, že ani v jednom případě nevzniká nový report. Stačí opravit místo nebo větu. Report má smysl až ve chvíli, kdy bude měnit rozhodnutí. Jinak je to jen úhledná krabice na budoucí úklid.
+
+### Privacy-first kontrola prvního použití
+
+Při prvním běžném použití po návratu napište krátkou datovou větu:
+
+```text
+Pro ověření prvního použití ukládáme pouze:
+```
+
+Příklad:
+
+```text
+Pro ověření prvního použití ukládáme pouze:
+závěr, že pravidlo bylo najitelné v nové support šabloně a rozhodnutí proběhlo bez otevření staré karty návratu.
+```
+
+Potom doplňte, co neukládáte:
+
+```text
+Neukládáme:
+zákaznický ticket, screenshot konverzace, jméno zákazníka, technické endpointy, interní komentáře ani novou tabulku použití pravidla.
+```
+
+Tohle je drobná věta, ale drží důležitou hranici. Ověření použitelnosti pravidla nevyžaduje kopii reálného případu mimo systém, kde případ přirozeně žije. Pokud má support systém vlastní retenci a přístupová pravidla, neobejděte je tím, že si "jen pro učení" začnete dělat druhou paměť v dokumentaci.
+
+Pokud potřebujete příklad pro onboarding, vytvořte zobecněný scénář bez identifikovatelných detailů:
+
+```text
+Zákazník žádá jednorázový CSV export za minulé období.
+Rozhodnutí: support může export dokončit podle běžného postupu.
+
+Zákazník žádá automatické měsíční napojení přes API.
+Rozhodnutí: support nesbírá technické detaily a předává požadavek do technické kvalifikace.
+```
+
+Takový příklad učí rozhodnutí, ale netahá za sebou zákaznickou historii. To je přesně ten typ nudné disciplíny, ze které se skládá důvěryhodný evropský provoz.
+
+### Karta prvního běžného použití po uzavřeném návratu
+
+```text
+Pravidlo:
+
+Kanonické pracovní místo:
+
+Co bylo při návratu uzavřeno:
+
+Dnešní běžná situace:
+
+Použil člověk pravidlo bez staré karty návratu?
+
+Bylo pravidlo na správném místě?
+
+Stačila rozhodovací věta?
+
+Vznikla nová datová stopa?
+
+Výsledek:
+- samostatné použití
+- slabá kotva
+- slabá věta
+- nový návratový signál
+
+Nejmenší případná oprava:
+
+Co výslovně neotevíráme:
+
+Co neukládáme mimo původní systém:
+
+Zůstává pravidlo v pasivním provozu?
+
+Vlastník pracovního místa:
+```
+
+Karta má být krátká a po prvním použití buď zavřená, nebo převedená do jedné malé opravy. Pokud se karta začne plnit debatou o celém procesu, zastavte se. Buď máte nový návratový signál, nebo jen starý strach z toho, že ticho jednou skončilo.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: popište dnešní běžnou situaci.
+2. Minuta 2: ověřte, jestli člověk našel pravidlo v kanonickém místě.
+3. Minuta 3: ověřte, jestli rozhodovací věta stačila bez historického vysvětlení.
+4. Minuta 4: vyberte jeden ze čtyř výsledků.
+5. Minuta 5: napište nejmenší opravu, pokud je potřeba.
+6. Minuta 6: zapište, co se neukládá a co se neotevírá.
+
+Neprodlužujte workshop jen proto, že se případ týká starého návratu. Právě tady je potřeba držet normální tempo. Pokud pravidlo funguje, zavřete. Pokud nefunguje, otevřete nejmenší opravu. Pokud vznikl nový návratový signál, založte malou smyčku. Drama si nechte na release poznámky, tam aspoň občas pobaví.
+
+### Checklist prvního běžného použití
+
+- Proběhlo použití v normální pracovní situaci, ne ve speciálním testovacím režimu?
+- Člověk našel pravidlo bez otevření staré karty návratu?
+- Bylo pravidlo přímo v pracovním místě, kde se rozhoduje?
+- Stačila rozhodovací věta bez dodatečného vysvětlování?
+- Vybrali jsme jeden ze čtyř výsledků?
+- Pokud šlo o slabou kotvu, opravujeme místo místo obsahu?
+- Pokud šlo o slabou větu, přepisujeme jen nutnou hranu?
+- Pokud vznikl nový návratový signál, má vlastní malou smyčku a stop podmínku?
+- Je napsané, co výslovně neotevíráme?
+- Neukládáme zákaznické případy, screenshoty, exporty ani osobní údaje mimo původní systém?
+- Pokud vznikl onboardingový příklad, je zobecněný a bez identifikovatelných detailů?
+- Zůstává pasivní provoz opravdu pasivní, pokud první použití dopadlo dobře?
+
+První běžné použití po uzavřeném návratu je dobré zakončit jednou větou:
+
+```text
+Pravidlo po uzavřeném návratu funguje v běžné práci, a proto kolem něj nezavádíme další kontrolní režim.
+```
+
+Nebo:
+
+```text
+Pravidlo po uzavřeném návratu potřebuje jen lokální opravu kotvy; obsah pravidla a pasivní provoz zůstávají beze změny.
+```
+
+Nebo:
+
+```text
+První běžné použití potvrdilo nový návratový signál, proto otevíráme úzkou smyčku pouze pro tuto hranu.
+```
+
+Každá z těch vět je lepší než neurčité "budeme to sledovat". Sledování bez rozhodnutí je jen pomalý způsob, jak si přidat práci a data. Běžné použití má pravidlo vrátit do normálního života, ne mu postavit památník.
+
 ## Pracovní log
 
 - 2026-07-02: Doplněna úvodní podkapitola o uzavření návratu po dlouhém tichu v pasivním provozu: čtyři uzavírací stavy, exportní příklad, nový návratový signál, privacy-first ukončení dočasné datové stopy, karta, mini workshop a checklist.
@@ -286234,3 +286441,4 @@ Uzavření návratu po dlouhém tichu je zkouška, jestli tým umí reagovat bez
 - 2026-06-30: Doplněna úvodní podkapitola o druhé kvartální kontrole dlouhodobého rytmu: samostatnost pravidla bez čerstvé paměti, čtyři výsledky kontroly, privacy-first úklid dočasných stop, karta, mini workshop a checklist.
 - 2026-06-30: Doplněna úvodní podkapitola o první pololetní kontrole po zředění rytmu: ověření najitelnosti a samostatného použití pravidla, čtyři výsledky kontroly, privacy-first úklid skryté evidence, karta, mini workshop a checklist.
 - 2026-07-01: Doplněna úvodní podkapitola o prvním běžném použití po lokální úpravě z archivního minima: najitelnost úpravy, rozhodovací věta, ochrana zavřeného rozsahu, privacy-first kontrola, karta, mini workshop a checklist.
+- 2026-07-02: Doplněna úvodní podkapitola o prvním běžném použití po uzavřeném návratu po dlouhém tichu: samostatné použití, slabá kotva, slabá věta, nový návratový signál, privacy-first kontrola, karta, mini workshop a checklist.
