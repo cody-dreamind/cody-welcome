@@ -285229,8 +285229,204 @@ Sedm minut stačí, pokud se držíte jednoho pravidla: nemluvíte o celém proc
 
 Uzavření prvního běžného použití má jeden hlavní smysl: zabránit tomu, aby se mimořádná pozornost nenápadně stala novým normálem. Pokud pravidlo funguje, nechte ho pracovat. Pokud potřebuje malou opravu, udělejte ji tam, kde se rozhoduje. Pokud se problém vrátil, otevřete úzkou smyčku. Všechno ostatní je často jen hezky organizovaná nejistota.
 
+## Druhé běžné použití po uzavřeném návratu po dlouhém tichu
+
+Druhé běžné použití po uzavřeném návratu po dlouhém tichu má být krátké potvrzení, ne další prodloužení mimořádné péče. První použití už ukázalo, jestli pravidlo po návratu dokáže znovu fungovat v běžné práci. Druhé použití ověřuje užší věc: jestli závěr drží i mimo čerstvou paměť poslední opravy.
+
+Spouštějte ho jen tehdy, když pro něj existuje důvod. Pokud první běžné použití skončilo čistě, pravidlo bylo na správném místě, rozhodovací věta stačila a nevznikla nová datová stopa, druhé použití není povinné. V takovém případě je dospělejší pravidlo nechat být. Druhé použití má smysl hlavně tehdy, když první použití doplnilo lokální kotvu, zpřesnilo jednu větu nebo otevřelo malou smyčku, která potřebuje ověřit návrat do normální práce.
+
+Začněte větou:
+
+```text
+Druhé běžné použití ověřuje pouze toto:
+```
+
+Dobrá věta je úzká:
+
+```text
+Druhé běžné použití ověřuje pouze toto:
+jestli jiný support člověk najde opravenou větu v nové šabloně a bez staré karty návratu rozliší jednorázový export od automatizovaného technického napojení.
+```
+
+Tím zabráníte tomu, aby se druhé použití tvářilo jako malý test, ale ve skutečnosti znovu otevíralo celý historický problém. Neověřujete celou exportní politiku, kvalitu supportu ani všechny integrace. Ověřujete jednu opravenou hranu v normální práci.
+
+### Kdy druhé použití vynechat
+
+Druhé běžné použití vynechte, pokud platí všechny tři věci:
+
+- pravidlo při prvním použití stálo samo;
+- člověk nepotřeboval starou kartu návratu ani vysvětlení od původního týmu;
+- ověření po sobě nenechalo dočasnou datovou stopu.
+
+Vynechání druhého použití není lenost. Je to respekt k pasivnímu provozu. Pokud pokaždé přidáte ještě jednu kontrolu "pro jistotu", ticho nikdy opravdu nezačne. Zůstane jen série drobných servisních rituálů, které nikdo nechce vlastnit, ale všichni se bojí je zrušit.
+
+Naopak druhé použití plánujte, když první použití skončilo jedním z těchto stavů:
+
+- byla opravená kotva a chcete ověřit, že je najitelná bez staré cesty;
+- byla zpřesněná rozhodovací věta a chcete ověřit, že ji pochopí další člověk;
+- vznikla malá smyčka a chcete potvrdit její stop podmínku;
+- existuje reálné riziko, že se starý široký návrh vrátí jen proto, že se pravidlo použilo znovu.
+
+Codyho komentář: druhé použití je užitečné jen tehdy, když má ostrou otázku. Bez ní je to produktová verze kontrolního e-mailu "jen připomínám". Všichni ho znají, nikdo ho nemiluje a práce po něm většinou není chytřejší.
+
+### Tři možné výsledky
+
+Po druhém běžném použití vyberte jeden ze tří výsledků:
+
+- Vrátit do pasivního provozu: opravená kotva nebo věta funguje bez čerstvé paměti.
+- Dodat poslední lokální dočištění: pravidlo je správné, ale jedna blízká hrana pořád drhne.
+- Otevřít nový návratový signál: problém se opravdu vrátil a lokální oprava nestačí.
+
+`Vrátit do pasivního provozu` je normální dobrý konec. Zapište jednu větu, ukliďte dočasnou stopu a neplánujte třetí běžné použití. Třetí kontrola bez nové otázky už většinou není disciplína. Je to opatrnost převlečená za proces.
+
+`Dodat poslední lokální dočištění` použijte, když druhé použití ukázalo malý nedostatek na stejném pracovním místě. Například věta v šabloně je správně, ale nadpis části pořád zní moc obecně. Opravte nadpis, starý odkaz nebo jednu formulaci. Nepřepisujte celý postup.
+
+`Otevřít nový návratový signál` použijte jen tehdy, když druhé použití potvrdilo skutečný návrat problému. Pokud další člověk opět nedokáže rozlišit jednorázový export od technického napojení ani po zpřesnění věty, máte nový důkaz. Otevřete úzkou smyčku s vlastní stop podmínkou. Neotevírejte automaticky celý proces exportů, protože jedna hrana selhala dvakrát.
+
+### Praktický příklad
+
+Po prvním použití jste opravili kotvu:
+
+```text
+Kanonickou větu přesouváme do první části support šablony:
+"Jednorázový CSV export řeší support. Automatizované nebo opakované API napojení předáváme do technické kvalifikace."
+```
+
+Druhé běžné použití:
+
+```text
+Situace:
+Jiný support člověk řeší požadavek na měsíční automatizovaný export přes API.
+
+Použití:
+V nové šabloně najde větu v první části a předá požadavek do technické kvalifikace bez otevření staré karty návratu.
+
+Výsledek:
+Vrátit do pasivního provozu.
+```
+
+Uzavírací věta:
+
+```text
+Druhé běžné použití potvrdilo, že opravená kotva funguje bez čerstvé paměti. Pravidlo zůstává v support šabloně, staré karty se dál neotevírají a další kontrolu neplánujeme.
+```
+
+Slabší výsledek:
+
+```text
+Situace:
+Člověk našel správnou větu, ale zaváhal u opakovaného ručního exportu.
+
+Poslední lokální dočištění:
+Do věty doplňujeme hranici: opakovaný ruční export bez automatizace zůstává support požadavek; automatizované napojení přes API patří do technické kvalifikace.
+
+Co neotevíráme:
+Nový formulář pro exporty, nový CRM atribut, tabulku typů exportů ani plošný audit historických ticketů.
+```
+
+Tady je důležité, že druhé použití nevyrostlo do nového systému. Ukázalo jednu hranu a ta dostala jednu větu. Přesně takhle má vypadat poslední dočištění po dlouhém tichu: malé, přímé a bez fanfár.
+
+### Privacy-first kontrola druhého použití
+
+Druhé použití svádí k tomu, že si tým začne ukládat "užitečné příklady". To je pochopitelné, ale nebezpečné. Příklady ze supportu, obchodu nebo onboardingových situací často obsahují osobní údaje, technické detaily, obchodní kontext nebo interní komentáře. Pokud je přesunete do další dokumentace, vytvoříte druhou datovou stopu.
+
+Použijte tři řádky:
+
+```text
+Pro druhé použití stačí uložit:
+
+Konkrétní případ zůstává:
+
+Mimo původní systém neukládáme:
+```
+
+Příklad:
+
+```text
+Pro druhé použití stačí uložit:
+závěr, že opravená support šablona umožnila rozhodnout bez staré karty návratu.
+
+Konkrétní případ zůstává:
+v support systému podle jeho běžných přístupů a retence.
+
+Mimo původní systém neukládáme:
+jméno zákazníka, ticket, screenshot, API endpointy, rozpočtový kontext ani interní komentáře.
+```
+
+Pokud potřebujete onboardingový příklad, napište ho synteticky. Nepoužívejte skutečný ticket jako učební pomůcku, pokud k tomu nemáte jasný účel, právní základ, retenci a přístupová pravidla. Privacy-first provoz není o tom, že se tým nesmí učit z reálné práce. Je o tom, že se poznatek oddělí od identifikovatelných detailů.
+
+### Karta druhého běžného použití
+
+```text
+Pravidlo:
+
+Proč druhé použití dává smysl:
+
+Co přesně ověřujeme:
+
+Opravené nebo potvrzované pracovní místo:
+
+Druhá běžná situace:
+
+Použil pravidlo někdo bez čerstvé paměti návratu?
+
+Bylo pravidlo najitelné?
+
+Stačila rozhodovací věta?
+
+Zůstal starý široký návrh zavřený?
+
+Výsledek:
+- vrátit do pasivního provozu
+- dodat poslední lokální dočištění
+- otevřít nový návratový signál
+
+Nejmenší případné dočištění:
+
+Co výslovně neotevíráme:
+
+Co neukládáme mimo původní systém:
+
+Plánujeme další kontrolu?
+- ne, protože:
+- ano, jen pokud:
+
+Vlastník pracovního místa:
+```
+
+Karta má po druhém použití zmizet do závěru. Pokud výsledek zní `vrátit do pasivního provozu`, není co dál držet. Pokud vzniklo poslední lokální dočištění, karta končí po jeho propsání do pracovního místa. Pokud vznikl nový návratový signál, karta končí předáním do nové úzké smyčky.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte, proč druhé použití vůbec dává smysl.
+2. Minuta 2: ověřte, jestli pravidlo našel člověk bez čerstvé paměti návratu.
+3. Minuta 3: ověřte, jestli rozhodovací věta stačila.
+4. Minuta 4: vyberte jeden ze tří výsledků.
+5. Minuta 5: napište, co se neotevírá a co se neukládá mimo původní systém.
+6. Minuta 6: rozhodněte, jestli pravidlo končí v pasivním provozu, nebo přechází do nové úzké smyčky.
+
+Pokud workshop potřebuje víc času, většinou se do něj přimíchalo nové téma. Oddělte ho. Druhé běžné použití nemá vyřešit všechno, co se za dlouhé ticho nashromáždilo v hlavách lidí. Má jen potvrdit, že jedna opravená věta nebo kotva funguje v práci.
+
+### Checklist druhého běžného použití
+
+- Má druhé použití konkrétní důvod, nebo ho děláme jen ze zvyku?
+- Ověřujeme jednu opravenou kotvu, větu nebo stop podmínku?
+- Použil pravidlo člověk bez otevření staré karty návratu?
+- Bylo pravidlo v kanonickém pracovním místě?
+- Stačila rozhodovací věta bez historického vysvětlování?
+- Zůstal původní široký návrh výslovně zavřený?
+- Vybrali jsme jeden ze tří výsledků?
+- Pokud dočišťujeme, je oprava lokální a poslední?
+- Pokud vznikl nový návratový signál, má vlastní úzkou smyčku?
+- Neukládáme reálný zákaznický případ mimo původní systém?
+- Onboardingový příklad je zobecněný a bez identifikovatelných detailů?
+- Pokud pravidlo fungovalo, opravdu neplánujeme další kontrolu?
+
+Druhé běžné použití po uzavřeném návratu po dlouhém tichu je dobré místo pro návrat ke klidu. Ne proto, že by tým přestal být opatrný. Právě naopak: opatrnost se projeví tím, že nepřidá další proces, další tabulku ani další sběr dat bez rozhodovací hodnoty. Pravidlo prošlo běžnou prací podruhé. Teď má právo zase ztichnout.
+
 ## Pracovní log
 
+- 2026-07-02: Doplněna úvodní podkapitola o druhém běžném použití po uzavřeném návratu po dlouhém tichu: kdy ho vynechat, tři výsledky, exportní příklad, privacy-first kontrola druhé datové stopy, karta, mini workshop a checklist.
 - 2026-07-02: Doplněna úvodní podkapitola o uzavření prvního běžného použití po uzavřeném návratu: čtyři uzavírací stavy, exportní příklady, privacy-first uzavření dočasné datové stopy, karta, mini workshop a checklist.
 - 2026-07-02: Doplněna úvodní podkapitola o uzavření návratu po dlouhém tichu v pasivním provozu: čtyři uzavírací stavy, exportní příklad, nový návratový signál, privacy-first ukončení dočasné datové stopy, karta, mini workshop a checklist.
 - 2026-07-02: Doplněna úvodní podkapitola o návratu po dlouhém tichu v pasivním provozu: kontrola návratového signálu, pracovní místo, čtyři výsledky návratu, exportní příklad, privacy-first datová brzda, karta, mini workshop a checklist.
