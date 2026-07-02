@@ -283331,8 +283331,190 @@ Když se workshop začne měnit v návrh nového reportu, zastavte ho. Report m�
 
 Uzavření druhého běžného použití po archivaci je konec malé smyčky. Pokud pravidlo prošlo, nechte ho zmizet do práce. Pokud potřebuje poslední větu nebo lepší kotvu, opravte ji a nastavte jasnou stop podmínku. A pokud se kolem něj rodí nová rutina, přestaňte ji nazývat opatrností. Je to nová práce a musí si zasloužit existenci.
 
+## Převod potvrzeného archivního minima do pasivního provozu
+
+Po uzavření druhého běžného použití přichází poslední malý převod: potvrzené archivní minimum se má přesunout do pasivního provozu. Pasivní provoz neznamená, že pravidlo zmizí. Znamená, že už nemá vlastní rytmus, vlastní review, vlastní evidenci ani vlastní připomínku. Je dostupné v pracovním místě a čeká jen na běžné použití nebo na skutečný návratový signál.
+
+Začněte větou:
+
+```text
+Potvrzené archivní minimum převádíme do pasivního provozu takto:
+```
+
+Do věty patří tři věci: kde pravidlo zůstává, jaký signál ho znovu otevře a co se kolem něj dál nebude sledovat.
+
+```text
+Potvrzené archivní minimum převádíme do pasivního provozu jako jednu rozhodovací větu v šabloně první odpovědi. Znovu ho otevřeme pouze tehdy, když dva lidé po sobě pravidlo v běžné práci nenajdou nebo podle něj rozhodnou opačně. Dál nesledujeme četnost použití otázky, nevedeme příklady a nezakládáme samostatné review.
+```
+
+Tahle věta je krátká, ale důležitá. Zavírá dveře mezi funkčním pravidlem a novou administrativou. Bez ní se totiž snadno stane, že po úspěšné opravě vznikne "jen drobná kontrola". Drobná kontrola se pak za tři měsíce tváří jako povinnost, kterou už nikdo neumí vysvětlit.
+
+### Co pasivní provoz obsahuje
+
+Pasivní provoz obsahuje pouze:
+
+- stabilní pracovní místo, kde pravidlo bydlí;
+- jednu aktuální rozhodovací větu;
+- jednu hranici použití;
+- jeden návratový signál;
+- vlastníka pracovního místa, ne vlastníka historické opravy.
+
+Nic dalšího nepotřebujete. Pokud pravidlo vyžaduje vysvětlovací stránku, měsíční kontrolu, seznam příkladů a tabulku výjimek, není v pasivním provozu. Je to aktivní standard nebo neuzavřený problém. Obojí může být legitimní, ale nemá se schovávat pod archivní minimum.
+
+Praktický příklad:
+
+```text
+Pravidlo:
+U doporučených poptávek se ptej na rámec spolupráce jen tehdy, když bez něj nejde navrhnout další konkrétní krok.
+
+Pracovní místo:
+Šablona první odpovědi na doporučenou poptávku.
+
+Hranice:
+Nepoužívat u poptávek, kde je další krok jasný z kontextu doporučení.
+
+Návratový signál:
+Dva lidé po sobě pravidlo nenajdou nebo ho použijí opačně.
+
+Co dál nesledujeme:
+Četnost použití otázky, texty konkrétních poptávek, obchodní komentáře, ruční skóre ani pomocnou tabulku příkladů.
+```
+
+Všimněte si, že vlastník tady není člověk, který opravu původně řešil. Vlastník je role nebo místo, kde pravidlo žije: třeba obchodní šablona, onboardingový checklist, support makro nebo provozní karta. To chrání tým před tím, aby se archivní minimum vázalo na paměť jednoho člověka.
+
+### Rozlišujte pasivní provoz a zapomenutí
+
+Pasivní provoz není zapomenutí. Rozdíl poznáte podle tří otázek:
+
+- Když pravidlo někdo potřebuje, najde ho v přirozeném pracovním místě?
+- Když ho najde, umí podle něj rozhodnout bez historického příběhu?
+- Když selže, víme, jaký návratový signál má otevřít další práci?
+
+Pokud odpověď na první otázku zní ne, nemáte pasivní provoz, ale ztracené pravidlo. Opravte kotvu.
+
+Pokud odpověď na druhou otázku zní ne, nemáte pasivní provoz, ale příliš historickou větu. Zkraťte ji do dnešního rozhodnutí.
+
+Pokud odpověď na třetí otázku zní ne, nemáte pasivní provoz, ale tichou nejistotu. Doplňte návratový signál, jinak se k tématu tým vrátí podle nálady, a nálada je známý odborník na zvětšování práce.
+
+Codyho komentář: pasivní provoz je trochu nevděčná disciplína. Nikdo vám za něj netleská, protože vypadá jako nic. Jenže právě to "nic" často znamená, že tým nepřidal další tabulku, další schůzku a další sběr dat. Produktivita občas vypadá podezřele jako slušně zavřený šuplík.
+
+### Praktické převody podle pracovního místa
+
+U šablony první odpovědi může pasivní provoz vypadat takto:
+
+```text
+Do šablony zůstává vložená jedna volitelná věta. Starý rozhodovací log neodkazujeme v běžném použití. Pokud dva lidé po sobě větu nenajdou, opravíme kotvu nebo otevřeme otázku zdroje pravdy.
+```
+
+U onboardingového checklistu:
+
+```text
+Pravidlo zůstává jako jedna kontrolní otázka v části "první samostatné použití". Nepřidáváme zvláštní lekci, test ani seznam příkladů. Návratový signál nastane, když nový člověk dvakrát po sobě eskaluje stejnou situaci, kterou měla otázka pokrýt.
+```
+
+U support makra:
+
+```text
+Makro obsahuje jednu hranici použití a jednu větu pro ruční rozhodnutí. Nepíšeme pomocný katalog zákaznických případů. Návratový signál nastane, když se dvě odpovědi po sobě odchýlí od hranice a způsobí ruční opravu.
+```
+
+U provozní karty:
+
+```text
+Karta obsahuje jen rozhodovací stav a návratový signál. Neudržujeme samostatnou historii drobných potvrzení. Pokud se stejná nejistota objeví znovu ve dvou různých pracovních místech, archivní minimum končí a otevírá se otázka širšího standardu.
+```
+
+Tyto převody mají společný princip: pravidlo zůstává tam, kde se používá, a pomocná historie se nevozí dál. Historie může zůstat v archivu pro audit rozhodnutí, ale nemá být součástí běžného průchodu.
+
+### Privacy-first pasivní provoz
+
+Privacy-first hodnota pasivního provozu je jednoduchá: funkční pravidlo dál nepřitahuje data. Nepotřebujete sledovat, kdo pravidlo použil, kolikrát, u jakého zákazníka a s jakým výsledkem, pokud z toho nevzniká konkrétní rozhodnutí.
+
+Použijte krátkou kontrolu:
+
+```text
+Kdybychom kolem pravidla nechali evidenci, jaká data by vznikala?
+
+Která z nich opravdu potřebujeme pro další rozhodnutí?
+
+Co smažeme, nebudeme kopírovat nebo vůbec nezaložíme?
+```
+
+Příklad:
+
+```text
+Kdybychom evidenci nechali, vznikaly by poznámky k doporučeným poptávkám, odhady obchodní hodnoty a texty ručních odpovědí.
+
+Pro další rozhodnutí potřebujeme jen vědět, zda pravidlo bylo dvakrát po sobě nenajitelné nebo použité opačně.
+
+Proto nezakládáme tabulku použití, nepřenášíme zákaznické texty a ponecháváme pouze návratový signál v šabloně.
+```
+
+Tohle není přehnaná opatrnost. Je to provozní hygiena. Každá malá evidence potřebuje účel, vlastníka, retenci a důvod existence. Pokud je neumíte napsat jednou větou, evidence pravděpodobně nemá vzniknout.
+
+### Karta pasivního provozu archivního minima
+
+```text
+Archivní pravidlo:
+
+Pracovní místo:
+
+Aktuální rozhodovací věta:
+
+Hranice použití:
+
+Co zůstává dostupné:
+
+Co se neodkazuje v běžném použití:
+
+Co dál nesledujeme:
+
+Návratový signál:
+
+Kdo vlastní pracovní místo:
+
+Kde je stará historie, pokud ji vůbec držíme:
+
+Privacy-first závěr:
+Data, která nevznikají:
+Data, která mažeme nebo nepřenášíme:
+Retence zbylé stopy:
+
+Datum převodu do pasivního provozu:
+```
+
+Kartu nepoužívejte jako nový formulář pro každý mikrostandard. Má smysl tehdy, když pravidlo prošlo delší smyčkou, mělo dočasné ověřování nebo kolem něj hrozilo nové sledování. U malých hladkých věcí stačí jedna převodová věta.
+
+### Mini workshop na 5 minut
+
+1. Minuta 1: přečtěte uzavírací větu druhého běžného použití.
+2. Minuta 2: určete pracovní místo, kde pravidlo dál bydlí.
+3. Minuta 3: zapište hranici použití a návratový signál.
+4. Minuta 4: pojmenujte, co dál nesledujete a jaké dočasné stopy mizí.
+5. Minuta 5: potvrďte vlastníka pracovního místa a ukončete zvláštní péči.
+
+Workshop končí ve chvíli, kdy existuje jedna převodová věta. Pokud se začne rozpadat do širší debaty o zdrojích pravdy, není to chyba. Jen jste našli nové téma. Zapište ho zvlášť a nenechte ho sežrat převod archivního minima.
+
+### Checklist převodu do pasivního provozu
+
+- Je jasné, které archivní pravidlo převádíme?
+- Má pravidlo jedno přirozené pracovní místo?
+- Je rozhodovací věta aktuální a bez historického vysvětlování?
+- Je hranice použití krátká a praktická?
+- Má pravidlo konkrétní návratový signál?
+- Končí vlastní review, připomínka nebo evidence pravidla?
+- Víme, co dál nesledujeme?
+- Nezakládáme pomocnou tabulku, report, tracker, CRM pole ani export?
+- Do běžného použití nepřenášíme zákaznické příklady, interní komentáře ani starý rozhodovací log?
+- Zůstává vlastník pracovního místa, ne vlastník dávné opravy?
+- Je jasné, kde případně leží stará historie a proč ji držíme?
+- Umí pravidlo po převodu fungovat bez toho, aby ho někdo znovu vysvětloval?
+
+Převod do pasivního provozu je poslední dobrý úklid po malé smyčce. Pravidlo zůstává dostupné, ale nebere si pozornost navíc. Data nevznikají jen proto, že by to šlo. A další práce čeká až na signál, který si ji opravdu zaslouží. Přesně tak má archivní minimum vypadat: malé, užitečné a nenápadně tvrdohlavé.
+
 ## Pracovní log
 
+- 2026-07-02: Doplněna úvodní podkapitola o převodu potvrzeného archivního minima do pasivního provozu: pracovní místo, hranice použití, návratový signál, privacy-first ne-evidence, karta, mini workshop a checklist.
 - 2026-07-02: Doplněno krátké pravidlo pro délku zápisu při hladkém uzavření druhého běžného použití po archivaci.
 - 2026-07-02: Doplněna úvodní podkapitola o uzavření druhého běžného použití po návratu lokální úpravy do archivního minima: čtyři uzavírací stavy, poslední lokální oprava, ukončení mimořádné péče, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-07-02: Doplněna úvodní podkapitola o druhém běžném použití po návratu lokální úpravy do archivního minima: samostatnost pravidla bez čerstvé paměti, slabá kotva, slabá hranice, skrytá rutina, privacy-first úklid, karta, mini workshop a checklist.
