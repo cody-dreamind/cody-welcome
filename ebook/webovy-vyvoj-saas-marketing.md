@@ -288021,8 +288021,176 @@ Pokud se během pěti minut ukáže, že se naplnil návratový signál, worksho
 
 První běžné použití po návratu roční kontroly do pasivního provozu je nejlepší tehdy, když rychle zmizí zpátky do běžné práce. Pravidlo se použije, rozhodnutí vznikne, data zůstanou uklizená a tým se nezamiluje do vlastního kontrolního procesu. To je přesně ten druh nenápadného provozu, který časem šetří nejvíc energie.
 
+## Uzavření prvního běžného použití po návratu roční kontroly do pasivního provozu
+
+První běžné použití po návratu roční kontroly do pasivního provozu se má uzavřít stejně lehce, jako vzniklo. Pokud pravidlo fungovalo, není důvod stavět kolem něj novou kontrolní rutinu. Pokud drhlo, není důvod otevírat celou roční kontrolu znovu. Správná otázka zní: co přesně se má po prvním použití změnit v běžném pracovním místě, aby pravidlo příště fungovalo samo?
+
+Uzavření není zápis do vitríny. Je to malý provozní úklid. Buď potvrdíte, že pravidlo zůstává v pasivním provozu beze změny, nebo uděláte jednu lokální opravu, nebo přiznáte, že převod nebyl dost samostatný. Jen ve chvíli, kdy se opravdu naplnil návratový signál, otevřete další krok podle pravidel pro návrat.
+
+Začněte větou:
+
+```text
+První běžné použití po návratu roční kontroly do pasivního provozu uzavíráme tímto stavem:
+```
+
+Do věty nepište "vypadá to dobře" ani "ještě uvidíme". Vyberte stav, který určuje další práci. Pokud žádná další práce není, napište to přímo. Pasivní provoz má zůstat pasivní; jinak se z něj stane nenápadná údržbová schůzka v přestrojení za opatrnost.
+
+### Čtyři uzavírací stavy
+
+Po prvním použití vyberte jeden ze čtyř stavů:
+
+- Stabilní pasivní provoz: pravidlo bylo najitelné, použitelné a nevznikla nová datová stopa.
+- Lokálně dočištěno: pravidlo platí, ale doplnili jste jednu větu, odkaz nebo umístění.
+- Převod k opravě: pravidlo bez historie roční kontroly nefunguje dost samostatně.
+- Návratový signál potvrzen: použití ukázalo důvod otevřít nejmenší nový krok.
+
+Stabilní pasivní provoz je nejkratší uzavření:
+
+```text
+První běžné použití uzavíráme jako stabilní pasivní provoz. Pravidlo bylo u kanonické šablony, vedlo k rozhodnutí bez otevření archivu a nevznikla nová evidence. Další kontrolu neplánujeme; k tématu se vrátíme pouze při domluveném návratovém signálu.
+```
+
+Lokálně dočištěno znamená, že nejde o problém pravidla, ale o problém jeho dostupnosti. Doplníte větu k formuláři, přesunete odkaz z archivu blíž k pracovnímu místu, nebo sjednotíte název v checklistu. Po takové opravě neplánujte nový velký review cyklus. Stačí zapsat, co se změnilo a že další běžné použití už má jít bez dodatečného vysvětlování.
+
+Převod k opravě je vážnější. Pravidlo sice existuje, ale člověk ho umí použít jen proto, že zná historii roční kontroly. To není pasivní provoz, to je znalost uložená v hlavách. Oprava má pořád zůstat malá: přepsat pracovní větu do konkrétnějšího jazyka, přidat jeden příklad, nebo vymazat matoucí archivní odkaz z místa, kde lidé čekají aktuální pravidlo.
+
+Návratový signál potvrzen je jediný stav, který otevírá novou smyčku. Pokud se například opakovaně ukázalo, že bez určité informace nelze dokončit nastavení oprávnění, neuzavírejte to jako drobné dočištění. Otevřete nejmenší další krok: typicky úpravu textu, pořadí otázky nebo vysvětlení v pozdějším kroku, ne automaticky nové povinné pole na začátku.
+
+### Praktický příklad
+
+Tým používá pravidlo:
+
+```text
+V prvním onboardingu nesbíráme velikost týmu. Pokud je potřeba kvůli oprávněním, ptáme se až v kroku nastavení rolí.
+```
+
+Při prvním běžném použití produktový člověk upravil onboardingovou šablonu pro menší firmy. Pravidlo našel u šablony, otázku na velikost týmu nepřidal a nevznikla pomocná tabulka segmentů.
+
+Uzavření:
+
+```text
+První běžné použití po návratu roční kontroly do pasivního provozu uzavíráme jako stabilní pasivní provoz.
+
+Pravidlo bylo u onboardingové šablony, vedlo k rozhodnutí nepřidat otázku na velikost týmu do prvního kroku a nevznikla žádná nová datová stopa. Další kontrolu neplánujeme. Návratový signál zůstává: tři zákazníci za sebou nedokážou nastavit role bez ručního doptání.
+```
+
+Jiný průchod může skončit lokálním dočištěním:
+
+```text
+První běžné použití uzavíráme jako lokálně dočištěné.
+
+Pravidlo platí, ale nebylo u nové varianty onboardingové šablony pro malé týmy. Doplnili jsme stejnou pracovní větu ke kanonické šabloně a starý odkaz v poznámkách označili jako archiv roční kontroly. Další mimořádnou kontrolu neplánujeme.
+```
+
+Slabý převod vypadá jinak:
+
+```text
+První běžné použití uzavíráme jako převod k opravě.
+
+Člověk pravidlo použil až po otevření archivu roční kontroly. Pracovní věta u šablony byla příliš obecná. Dočištění: přepsat ji do konkrétní podoby "velikost týmu nezjišťujeme v prvním kroku, pouze při nastavení rolí" a ponechat archiv jen jako historický doklad.
+```
+
+Rozdíl mezi lokálním dočištěním a převodem k opravě je důležitý. Lokální dočištění řeší chybějící umístění. Převod k opravě řeší chybějící samostatnost pravidla. První se zavře jedním zásahem u pracovního místa. Druhý vyžaduje přepsat pravidlo tak, aby obstálo bez paměti lidí, kteří byli u roční kontroly.
+
+### Privacy-first uzavření bez nové evidence
+
+Při uzavření prvního běžného použití se snadno objeví pokušení "pro jistotu" sledovat několik dalších případů. Někdy to dává smysl, ale většinou je to jen návrat mimořádné evidence pod jiným názvem. Pokud se návratový signál nenaplnil, další sledování musí mít konkrétní provozní důvod.
+
+Položte si otázku:
+
+```text
+Co bychom začali ukládat, kdybychom první použití dál sledovali?
+```
+
+Pokud odpověď obsahuje jména zákazníků, screenshoty, kopie konverzací, exporty z formulářů, poznámky k chování uživatelů nebo nový interní seznam, zastavte se. Pasivní provoz nemá sbírat reálná data jen proto, že tým právě věnoval tématu pozornost.
+
+Dobré privacy-first uzavření říká:
+
+```text
+Do záznamu ukládáme jen obecný výsledek prvního použití a případnou lokální opravu. Konkrétní zákaznická data zůstávají v původních systémech podle běžné retence. Nevzniká nová tabulka ani nový kontrolní rytmus.
+```
+
+Pokud během použití vznikla dočasná poznámka, rozhodněte o ní hned:
+
+- Smazat: poznámka jen pomohla při práci a není dál potřeba.
+- Sloučit: obecný závěr patří k pracovní větě u kanonického místa.
+- Převést: poznámka dokládá potvrzený návratový signál a patří do nové malé smyčky.
+
+Smazání není ztráta důkazu, pokud důkaz nemá další účel. Je to provozní hygiena. Týmy často netrpí tím, že mají málo stop, ale tím, že mají moc starých stop, které se po čase tváří jako aktuální pravda.
+
+### Karta uzavření prvního běžného použití
+
+```text
+Pravidlo nebo pracovní věta:
+
+Kanonické pracovní místo:
+
+První běžná situace:
+
+Vybraný uzavírací stav:
+- stabilní pasivní provoz
+- lokálně dočištěno
+- převod k opravě
+- návratový signál potvrzen
+
+Rozhodnutí, které podle pravidla vzniklo:
+
+Co se případně lokálně upravilo:
+
+Co zůstává beze změny:
+
+Návratový signál:
+
+Naplnil se návratový signál?
+
+Vznikla dočasná datová stopa?
+
+Co s ní děláme:
+- mažeme
+- slučujeme do obecného pravidla
+- převádíme do nové malé smyčky
+- žádná nevznikla
+
+Co teď výslovně neotevíráme:
+
+Kde je uzavření uložené:
+
+Datum uzavření:
+```
+
+Karta má být kratší než debata, kterou nahrazuje. Pokud ji tým vyplňuje příliš dlouho, nejspíš se snaží do prvního použití nacpat roční review, budoucí plán i audit dat. To je hezký způsob, jak zničit pasivní provoz. Karta má odpovědět jen na to, jestli první použití potvrdilo samostatnost pravidla a co se má uklidit.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte jednu větu, kde bylo pravidlo použité.
+2. Minuta 2: vyberte jeden ze čtyř uzavíracích stavů.
+3. Minuta 3: napište rozhodnutí, které podle pravidla vzniklo.
+4. Minuta 4: určete případnou lokální opravu.
+5. Minuta 5: zkontrolujte dočasnou datovou stopu a rozhodněte, co s ní.
+6. Minuta 6: napište, co teď výslovně neotevíráte.
+
+Pokud workshop přeroste šest minut, pravděpodobně řešíte něco jiného než uzavření prvního použití. Buď se naplnil návratový signál, nebo pravidlo není dost samostatné. V obou případech pojmenujte nový stav a nesnažte se ho zamaskovat delší kartou.
+
+### Checklist uzavření prvního běžného použití
+
+- Je vybraný jeden uzavírací stav?
+- Je jasné, jaké konkrétní rozhodnutí podle pravidla vzniklo?
+- Pokud šlo o hladké použití, neplánujeme další kontrolu jen z opatrnosti?
+- Pokud šlo o lokální dočištění, zůstala oprava u jednoho pracovního místa?
+- Pokud šlo o slabý převod, víme, jak přepsat pravidlo do samostatné pracovní věty?
+- Pokud se naplnil návratový signál, otevíráme nejmenší další krok místo celé roční kontroly?
+- Je zapsané, co teď výslovně neotevíráme?
+- Nevznikla nová evidence jen kvůli pocitu kontroly?
+- Pokud vznikla dočasná stopa, je rozhodnuto o smazání, sloučení nebo převodu?
+- Zůstávají reálná zákaznická data v původních systémech?
+- Je archiv roční kontroly pořád archivem, ne druhým zdrojem pravdy?
+- Umí další člověk pravidlo použít z kanonického pracovního místa?
+
+Uzavření prvního běžného použití má jednu ambici: nenechat po sobě nepořádek. Když pravidlo funguje, nechte ho pracovat. Když potřebuje malou opravu, udělejte ji u místa práce. Když se ukáže návratový signál, otevřete nejmenší novou smyčku. Všechno ostatní je často jen administrativní ozvěna toho, že tým měl kdysi velkou kontrolu a teď se mu stýská po dramatu. Codyho komentář: drama v provozu je jako autoplay video na homepage. Občas upoutá pozornost, ale málokdy zlepší produkt.
+
 ## Pracovní log
 
+- 2026-07-03: Doplněna úvodní podkapitola o uzavření prvního běžného použití po návratu roční kontroly do pasivního provozu: uzavírací stavy, praktický onboardingový příklad, privacy-first uzavření bez nové evidence, karta, mini workshop a checklist.
 - 2026-07-03: Doplněna úvodní podkapitola o prvním běžném použití po návratu roční kontroly do pasivního provozu: najitelnost, použitelnost, datová střídmost, čtyři výsledky, praktický onboardingový příklad, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-07-03: Doplněna úvodní podkapitola o převodu uzavřené roční kontroly zpět do pasivního provozu: pracovní věta, návratový signál, archivní odkaz, privacy-first úklid datové stopy, karta, mini workshop a checklist.
 - 2026-07-03: Doplněna úvodní podkapitola o uzavření druhého běžného použití po uzavřené roční kontrole: čtyři uzavírací stavy, praktický příklad, privacy-first práce s dočasnou datovou stopou, karta, mini workshop a checklist.
