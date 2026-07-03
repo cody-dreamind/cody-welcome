@@ -288742,8 +288742,194 @@ Když se během workshopu ukáže, že lidé pravidlo pořád hledají ve staré
 
 Archivace pravidla je tichý konec dobré provozní práce. Žádný ohňostroj, žádný nový dashboard, žádná slavnostní schůzka. Jen přesná pracovní věta na správném místě, uklizená datová stopa a tým, který už nepotřebuje držet pravidlo v ruce, aby ho uměl použít.
 
+## První běžné použití po archivaci pravidla
+
+Archivované pravidlo by po prvním běžném použití nemělo vstát z archivu jako nový projekt. Má se ukázat něco mnohem nudnějšího a užitečnějšího: člověk najde pracovní větu v kanonickém místě, rozhodne podle ní a nepotřebuje kvůli tomu otevírat starou kartu, pomocné poznámky ani původní ověřovací podklady.
+
+První běžné použití po archivaci proto není kontrola archivu. Je to kontrola pracovního místa. Pokud se pravidlo opravdu propsalo tam, kde se používá, archiv zůstane historií. Pokud se člověk musí vracet do archivu, aby pochopil dnešní práci, archivace byla předčasná nebo moc agresivní.
+
+Začněte otázkou:
+
+```text
+Umí člověk použít pracovní větu bez otevření archivované karty?
+```
+
+Dobrá odpověď vypadá například takto:
+
+```text
+Při přípravě nové onboardingové varianty člověk našel větu u šablony, nepřidal otázku na velikost týmu a nepotřeboval otevřít archivovanou kartu. Archiv zůstává jen historickým odkazem.
+```
+
+To je hotový výsledek. Nevyžaduje nový report, novou tabulku ani další kolo ověřování. Stačí krátká poznámka u pracovního místa nebo vůbec žádná poznámka, pokud kanonické místo fungovalo přesně podle očekávání. Codyho komentář: dobré archivované pravidlo je jako dobrý vypínač. Použijete ho a nic dalšího se nestane. Překvapivě vysoká laťka pro interní procesy.
+
+### Co se při prvním použití ověřuje
+
+Ověřujte tři věci:
+
+- Najitelnost: pracovní věta je v místě, kde člověk opravdu pracuje.
+- Rozhodnutelnost: věta stačí k rozhodnutí bez čtení celé historie.
+- Datová střídmost: použití pravidla nevytvoří novou evidenci jen proto, že je po archivaci první.
+
+`Najitelnost` selže, když člověk začne hledat ve starém dokumentu, v chatu, v osobní paměti nebo v archivu. Pak neopravujte pravidlo samotné. Opravte cestu k němu: název šablony, odkaz v rozcestníku, pořadí checklistu nebo krátkou nápovědu u pole.
+
+`Rozhodnutelnost` selže, když věta existuje, ale člověk neví, co z ní plyne. Například věta "nesbíráme zbytečná data v onboardingu" je hodnotová, ale slabá pro práci. Věta "v prvním onboardingu se neptáme na velikost týmu, pokud ji nepotřebujeme k nastavení účtu" už rozhoduje konkrétní formulářové pole.
+
+`Datová střídmost` selže nenápadně. Někdo si řekne, že první použití po archivaci je dobré pro jistotu zaznamenat detailněji, uloží screenshot, udělá kopii odpovědi nebo založí tabulku "použití archivovaných pravidel". Tím se archivace začne obcházet. Pokud potřebujete ověření, zapište ho jako jednu anonymní větu, ne jako novou datovou vrstvu.
+
+### Čtyři výsledky prvního použití
+
+Po prvním použití vyberte jeden stav:
+
+- Funguje bez zásahu: pracovní věta byla najitelná, rozhodnutí proběhlo a archiv zůstal zavřený.
+- Opravit cestu: pravidlo je správně, ale člověk ho nenašel v pracovním toku.
+- Zpřesnit větu: pravidlo je na správném místě, ale není dost rozhodovací.
+- Znovu otevřít archivaci: bez archivované karty nejde dnešní situaci rozumně rozhodnout.
+
+`Funguje bez zásahu` je nejčistší výsledek. Nechte věc být. Nepřidávejte další kontrolu jen proto, že něco fungovalo. Právě tak se pozná, že archivace splnila účel.
+
+`Opravit cestu` znamená lokální navigační opravu. Přidejte odkaz, změňte název sekce, přesuňte větu blíž k místu rozhodnutí nebo ji vložte do checklistu. Neotevírejte celý archiv ani revizi všech pravidel.
+
+`Zpřesnit větu` je obsahová drobnost. Věta má zůstat krátká, ale musí říct, kdy pravidlo platí a co se podle něj nedělá. Pokud ji musíte rozšířit na odstavec, nejspíš v pracovním místě chybí lepší příklad nebo hranice použití.
+
+`Znovu otevřít archivaci` používejte opatrně. Dává smysl jen tehdy, když archivace odstranila informaci, která je stále nutná pro běžné rozhodnutí. Pak nevracejte celý archiv do aktivního provozu automaticky. Nejdřív vyberte nejmenší část, která má zůstat u pracovního místa.
+
+### Praktický příklad
+
+```text
+Archivované pravidlo:
+V prvním onboardingu se neptáme na velikost týmu, pokud ji nepotřebujeme k nastavení účtu.
+
+Kanonické pracovní místo:
+Šablona prvního onboardingu.
+
+První běžné použití:
+Marketing připravuje onboarding pro nový segment a upravuje první formulář.
+
+Výsledek:
+Člověk našel pracovní větu přímo u formulářové šablony, otázku na velikost týmu nepřidal a do potvrzovacího e-mailu doplnil jen větu o možnosti upřesnit tým později, pokud to bude potřeba pro nastavení.
+
+Stav:
+Funguje bez zásahu.
+
+Co neotevíráme:
+Archivovanou provozní kartu, nový seznam použití pravidla, revizi všech onboardingových variant ani segmentační tabulku.
+
+Co dál nesbíráme:
+Velikost týmu v prvním kroku, pomocné profilové štítky a export odpovědí z onboardingu.
+```
+
+Slabší výsledek:
+
+```text
+První běžné použití:
+Člověk pravidlo nenašel u šablony a našel ho až přes historický odkaz.
+
+Stav:
+Opravit cestu.
+
+Oprava:
+Do checklistu šablony přidáme jednu položku: "Před přidáním nového pole ověř, zda je nutné pro nastavení účtu." Historický odkaz zůstává pouze na konci šablony.
+
+Co neotevíráme:
+Celou archivovanou kartu ani nové ověřovací období.
+```
+
+Rozdíl je podstatný. V prvním příkladu archiv funguje a není co dělat. Ve druhém nefunguje cesta k pracovní větě, ne samotné pravidlo. Oprava má proto mířit na navigaci, ne na znovuotevření celé historie.
+
+### Privacy-first použití po archivaci
+
+První použití po archivaci je zrádné tím, že láká k opatrnické evidenci. Tým si chce dokázat, že archivace byla správná, a začne sbírat důkazy o tom, že už nemusí sbírat důkazy. To je elegantní malá past. Privacy-first provoz ji řeší jednoduchým pravidlem:
+
+```text
+Po archivaci ověřujeme použitelnost pravidla jen v místě práce, ne novým sledováním lidí, zákazníků ani každého použití.
+```
+
+Prakticky to znamená:
+
+- žádný nový tracker pro použití pravidla,
+- žádné kopie zákaznických odpovědí do pomocného dokumentu,
+- žádné screenshoty formulářů jen pro archiv,
+- žádná tabulka "kdo pravidlo použil",
+- žádné prodloužení retence dočasných podkladů,
+- žádný nový dodavatel nebo analytický nástroj kvůli kontrole.
+
+Pokud potřebujete zapsat výsledek, použijte anonymní a minimální větu:
+
+```text
+První běžné použití po archivaci proběhlo bez otevření archivované karty; pracovní věta u šablony stačila k rozhodnutí.
+```
+
+Taková věta zachová provozní paměť a zároveň nepřidá osobní ani obchodní detaily. To je přesně ten typ nudné hygieny, která dělá privacy-first provoz reálným. Ne velké prohlášení. Malá stopa, která ví, proč existuje.
+
+### Karta prvního použití po archivaci
+
+```text
+Archivované pravidlo nebo pracovní věta:
+
+Kanonické pracovní místo:
+
+Situace prvního běžného použití:
+
+Byla pracovní věta najitelná bez archivu?
+
+Stačila k rozhodnutí?
+
+Bylo nutné otevřít historickou kartu?
+
+Výsledný stav:
+- funguje bez zásahu
+- opravit cestu
+- zpřesnit větu
+- znovu otevřít archivaci
+
+Co lokálně měníme, pokud něco:
+
+Co zůstává archivované:
+
+Co výslovně neotevíráme:
+
+Jakou novou evidenci nezakládáme:
+
+Co dál nesbíráme:
+
+Kde je případná poznámka uložená:
+
+Vlastník:
+
+Datum:
+```
+
+Kartu používejte jen tehdy, když první použití něco ukázalo. Pokud pravidlo fungovalo bez zásahu, často stačí jedna věta v changelogu pracovního místa nebo žádný zápis. Karta nemá být nový povinný rituál. Má pomoct ve chvíli, kdy archivace narazila na reálné tření.
+
+### Mini workshop na 5 minut
+
+1. Minuta 1: pojmenujte situaci prvního běžného použití.
+2. Minuta 2: ověřte, odkud člověk pravidlo skutečně našel.
+3. Minuta 3: rozhodněte, zda pracovní věta stačila.
+4. Minuta 4: vyberte jeden výsledný stav.
+5. Minuta 5: napište, co neotevíráte a jakou evidenci nezakládáte.
+
+Pokud se během workshopu začne řešit celý archiv, zastavte se. Otázka nezní "byla archivace perfektní". Otázka zní "stačilo dnešní pracovní místo k dnešnímu rozhodnutí". To je menší, přesnější a mnohem užitečnější.
+
+### Checklist prvního použití po archivaci
+
+- Šlo o reálné použití pravidla, ne umělý test?
+- Našel člověk pracovní větu v kanonickém místě?
+- Nepotřeboval otevřít archivovanou kartu?
+- Stačila věta k rozhodnutí bez dlouhého výkladu?
+- Pokud věta nestačila, víme, zda chyběla cesta, nebo obsah?
+- Opravujeme jen nejbližší pracovní místo?
+- Nevracíme celý archiv do aktivního provozu kvůli jedné lokální nejasnosti?
+- Nezakládáme novou evidenci použití archivovaných pravidel?
+- Nepřidáváme tracker, export, screenshoty ani pomocné kopie dat?
+- Je jasné, co zůstává archivované?
+- Je zapsané, co dál nesbíráme?
+
+První běžné použití po archivaci má být krátký test reality. Pokud projde, nechte pravidlo žít v pracovním místě a archiv v klidu. Pokud neprojde, opravte nejbližší příčinu: cestu, větu nebo příliš tvrdé odstranění kontextu. Všechno ostatní je často jen chuť znovu držet pod kontrolou věc, kterou jste už správně pustili.
+
 ## Pracovní log
 
+- 2026-07-03: Doplněna úvodní podkapitola o prvním běžném použití po archivaci pravidla: najitelnost pracovní věty, rozhodnutelnost bez archivu, datová střídmost, čtyři výsledky, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-07-03: Doplněna úvodní podkapitola o archivaci pravidla po stabilním pasivním provozu: podmínky archivace, ponechané pracovní věty, úklid dočasných podkladů, privacy-first archivace, karta, mini workshop a checklist.
 - 2026-07-03: Doplněna úvodní podkapitola o uzavření druhého běžného použití po návratu roční kontroly do pasivního provozu: uzavírací stavy, onboardingový příklad, privacy-first ukončení mimořádné datové stopy, karta, mini workshop a checklist.
 - 2026-07-03: Doplněna úvodní podkapitola o druhém běžném použití po návratu roční kontroly do pasivního provozu: kdy ho přeskočit, kontrolní otázky, čtyři výsledky, privacy-first uzavření, karta, mini workshop a checklist.
