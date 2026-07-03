@@ -288360,8 +288360,188 @@ Pokud během pěti minut začnete plánovat další metriku, nový dashboard neb
 
 Druhé běžné použití po návratu roční kontroly do pasivního provozu má být poslední malá pojistka, ne začátek nového cyklu hlídání. Když pravidlo drží, nechte ho držet. Když nedrží, opravte nejbližší místo nebo otevřete skutečný návratový signál. V obou případech držte rozsah malý a datovou stopu ještě menší.
 
+## Uzavření druhého běžného použití po návratu roční kontroly do pasivního provozu
+
+Druhé běžné použití má po sobě nechat jasný konec. Pokud ho tým jen provede a výsledek nechá v poznámkách, pasivní provoz se začne znovu tvářit jako mimořádný režim. Někdo čeká na třetí kontrolu, někdo si vede seznam použití, někdo se bojí pravidlo pustit z ruky. Přesně tomu má uzavření zabránit.
+
+Uzavření druhého použití není další revize roční kontroly. Nevracíte se k celé historii pravidla. Jen rozhodujete, jestli lokální oprava z prvního použití obstála, jestli pravidlo zůstává u kanonického pracovního místa a jestli se mimořádná datová pozornost opravdu vypíná.
+
+Začněte krátkou větou:
+
+```text
+Druhé běžné použití uzavíráme takto:
+```
+
+Dobrá odpověď vypadá například takto:
+
+```text
+Druhé běžné použití uzavíráme takto:
+Opravená pracovní věta u onboardingové šablony byla najitelná bez archivu roční kontroly, vedla ke stejnému rozhodnutí jako minule a nevznikla nová evidence použití. Pravidlo vracíme do pasivního provozu.
+```
+
+Tahle věta je dostatečně krátká a dostatečně uzavřená. Říká, co bylo ověřeno, co se nestalo a co platí dál. Hlavně ale neotevírá žádnou novou povinnost jen proto, že kontrola dopadla dobře.
+
+### Čtyři uzavírací stavy
+
+Po druhém použití vyberte jeden stav:
+
+- Potvrdit pasivní provoz: pravidlo obstálo, mimořádná kontrola končí a další práce čeká až na návratový signál.
+- Zapsat poslední lokální opravu: stejné místo potřebuje drobné dočištění, ale nejde o systémový problém.
+- Převést na opravu kanonického místa: pravidlo je správné, ale lidé ho nehledají správnou cestou.
+- Otevřít návratový signál: opakuje se problém, který už přesahuje lokální dočištění.
+
+`Potvrdit pasivní provoz` je nejlepší výsledek. Neznamená, že pravidlo je navždy dokonalé. Znamená, že dnes nepotřebuje žádnou zvláštní péči. Ponechte pracovní větu tam, kde se používá, a zrušte dočasné poznámky z ověřování.
+
+`Poslední lokální oprava` dává smysl, když druhé použití našlo ještě jednu malou nejasnost. Například věta u šablony byla najitelná, ale chyběla v ní podmínka "jen u prvního onboardingu". Opravte větu a zapište, že další selhání stejného místa už nebude servisní drobnost, ale signál slabého kanonického místa.
+
+`Oprava kanonického místa` je pro situace, kdy lidé pravidlo pořád obcházejí nebo hledají ve starém archivu. Pak není problém v obsahu pravidla, ale v cestě k němu. Oprava patří do rozcestníku, názvu šablony, checklistu nebo interní navigace.
+
+`Návratový signál` použijte jen tehdy, když se opravdu naplnila předem zapsaná podmínka. Druhé použití samo o sobě není důkaz pro novou iteraci. Důkazem je opakovaný problém na stejném pracovním místě, dopad na rozhodnutí nebo nová datová stopa, kterou už nejde uklidit lokálně.
+
+### Praktický příklad
+
+```text
+Pravidlo:
+V prvním onboardingu se neptáme na velikost týmu, pokud ji nepotřebujeme k nastavení účtu.
+
+První použití:
+Nová onboardingová šablona pravidlo neobsahovala. Doplnili jsme jednu pracovní větu.
+
+Druhé použití:
+Jiný člověk připravil další variantu onboardingu, našel větu u šablony a otázku na velikost týmu nepřidal.
+
+Uzavírací stav:
+Potvrdit pasivní provoz.
+
+Co ponecháváme:
+Jednu pracovní větu u onboardingové šablony.
+
+Co rušíme:
+Dočasnou poznámku z kontroly druhého použití.
+
+Co dál nesbíráme:
+Velikost týmu v prvním kroku, pomocnou segmentační tabulku ani seznam použití pravidla.
+
+Návratový signál:
+K tématu se vrátíme pouze pokud se otázka na velikost týmu znovu objeví ve dvou nových onboardingových variantách nebo pokud bez tohoto údaje nepůjde dokončit konkrétní nastavení účtu.
+```
+
+Slabší výsledek:
+
+```text
+Druhé použití:
+Člověk pravidlo našel až přes archiv roční kontroly, ne přes onboardingovou šablonu.
+
+Uzavírací stav:
+Převést na opravu kanonického místa.
+
+Oprava:
+Do rozcestníku onboardingových šablon přidáme odkaz na aktuální pracovní větu a archiv roční kontroly označíme jako historii.
+
+Co neotevíráme:
+Nové měření onboardingu, nový segmentační formulář ani revizi všech šablon.
+```
+
+V obou příkladech uzavření drží jednu hranici: opravuje se jen to, co druhé použití opravdu ukázalo. Žádný slavnostní re-launch procesu. Žádné "když už jsme tady". Tohle je provoz, ne výprodej rozsahu.
+
+### Privacy-first uzavření
+
+Po druhém použití vypněte mimořádnou datovou stopu. Pokud vznikla kontrolní poznámka, pomocný seznam, screenshot, export nebo kopie zákaznické odpovědi, rozhodněte o ní hned. Nečekejte na "až se to bude hodit". To je věta, po které se v systémech objevují datové vrstvy, které nikdo nepoužívá a všichni se jich bojí smazat.
+
+Použijte tři řádky:
+
+```text
+Do pasivního provozu ponecháváme:
+
+Po uzavření rušíme nebo zobecňujeme:
+
+Dál výslovně nesbíráme:
+```
+
+Příklad:
+
+```text
+Do pasivního provozu ponecháváme:
+Pracovní větu u šablony a návratový signál v kanonickém místě.
+
+Po uzavření rušíme nebo zobecňujeme:
+Dočasnou kontrolní poznámku nahrazujeme větou "druhé použití potvrdilo samostatnost pravidla".
+
+Dál výslovně nesbíráme:
+Seznam použití pravidla, velikost týmu v prvním kroku, pomocné segmentační štítky a export onboardingových odpovědí.
+```
+
+Privacy-first hodnota tady není v tom, že tým nic neví. Hodnota je v tom, že ví přesně tolik, kolik potřebuje k rozhodnutí, a zbytek nenechává hnít v pomocných dokumentech. Codyho komentář: "pomocný dokument" je krásné jméno pro věc, která se za tři měsíce tváří jako systém pravdy, i když ji nikdo oficiálně neadoptoval. Roztomilé. Nebezpečné. Pryč s tím.
+
+### Karta uzavření druhého použití
+
+```text
+Pravidlo nebo pracovní věta:
+
+Důvod druhého použití:
+
+Kanonické pracovní místo:
+
+Co se při druhém použití opravdu stalo:
+
+Uzavírací stav:
+- potvrdit pasivní provoz
+- zapsat poslední lokální opravu
+- převést na opravu kanonického místa
+- otevřít návratový signál
+
+Co ponecháváme v běžném pracovním místě:
+
+Co lokálně opravujeme, pokud něco:
+
+Co zůstává výslovně zavřené:
+
+Co po uzavření rušíme, mažeme nebo zobecňujeme:
+
+Dál nesbíráme:
+
+Návratový signál pro další otevření:
+
+Kde je uzavření uložené:
+
+Vlastník:
+
+Datum:
+```
+
+Karta má uzavřít mimořádnou pozornost. Pokud z ní vznikne nový průběžný report, minuli jste cíl. Po druhém použití má pravidlo buď stát v pasivním provozu, nebo se má otevřít konkrétní menší smyčka. Mezistav "budeme to ještě sledovat" používejte jen tehdy, když umíte říct přesnou otázku a konec sledování.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte důvod druhého použití.
+2. Minuta 2: napište, co se opravdu stalo.
+3. Minuta 3: vyberte jeden uzavírací stav.
+4. Minuta 4: určete, co zůstává v kanonickém pracovním místě.
+5. Minuta 5: ukliďte dočasnou datovou stopu.
+6. Minuta 6: potvrďte návratový signál a napište, co teď neotevíráte.
+
+Když během workshopu vznikne potřeba řešit širší problém, necpěte ho do uzavření. Zapište ho jako návratový signál nebo nový podnět. Uzavření druhého použití má zavřít smyčku, ne otevřít další patro práce.
+
+### Checklist uzavření druhého použití
+
+- Víme, proč se druhé použití sledovalo?
+- Máme konkrétní výsledek, ne jen pocit, že pravidlo "asi funguje"?
+- Vybrali jsme jeden uzavírací stav?
+- Pokud potvrzujeme pasivní provoz, rušíme mimořádnou pozornost?
+- Pokud opravujeme lokálně, zůstává oprava u jednoho pracovního místa?
+- Pokud selhalo kanonické místo, opravujeme navigaci k pravidlu místo obsahu celé roční kontroly?
+- Pokud se naplnil návratový signál, otevíráme nejmenší další krok?
+- Zůstává archiv roční kontroly archivem, ne paralelním zdrojem pravdy?
+- Smazali jsme, zobecnili nebo v původním zdroji nechali dočasné poznámky a důkazy?
+- Nepřidali jsme seznam použití, nový tracker, export ani pomocnou tabulku jen kvůli pocitu kontroly?
+- Je jasně napsané, co dál nesbíráme?
+- Umí další člověk použít pravidlo bez znalosti celé kontrolní historie?
+
+Uzavření druhého běžného použití je moment, kdy tým přestane pravidlo držet za ruku. Pokud prošlo, patří do normální práce. Pokud neprošlo, zaslouží si jednu přesnou opravu nebo nový návratový signál. Všechno mezi tím je často jen provozní nerozhodnost v obleku pečlivosti.
+
 ## Pracovní log
 
+- 2026-07-03: Doplněna úvodní podkapitola o uzavření druhého běžného použití po návratu roční kontroly do pasivního provozu: uzavírací stavy, onboardingový příklad, privacy-first ukončení mimořádné datové stopy, karta, mini workshop a checklist.
 - 2026-07-03: Doplněna úvodní podkapitola o druhém běžném použití po návratu roční kontroly do pasivního provozu: kdy ho přeskočit, kontrolní otázky, čtyři výsledky, privacy-first uzavření, karta, mini workshop a checklist.
 - 2026-07-03: Doplněna úvodní podkapitola o uzavření prvního běžného použití po návratu roční kontroly do pasivního provozu: uzavírací stavy, praktický onboardingový příklad, privacy-first uzavření bez nové evidence, karta, mini workshop a checklist.
 - 2026-07-03: Doplněna úvodní podkapitola o prvním běžném použití po návratu roční kontroly do pasivního provozu: najitelnost, použitelnost, datová střídmost, čtyři výsledky, praktický onboardingový příklad, privacy-first kontrola, karta, mini workshop a checklist.
