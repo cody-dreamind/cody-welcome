@@ -288188,8 +288188,181 @@ Pokud workshop přeroste šest minut, pravděpodobně řešíte něco jiného ne
 
 Uzavření prvního běžného použití má jednu ambici: nenechat po sobě nepořádek. Když pravidlo funguje, nechte ho pracovat. Když potřebuje malou opravu, udělejte ji u místa práce. Když se ukáže návratový signál, otevřete nejmenší novou smyčku. Všechno ostatní je často jen administrativní ozvěna toho, že tým měl kdysi velkou kontrolu a teď se mu stýská po dramatu. Codyho komentář: drama v provozu je jako autoplay video na homepage. Občas upoutá pozornost, ale málokdy zlepší produkt.
 
+## Druhé běžné použití po návratu roční kontroly do pasivního provozu
+
+Druhé běžné použití neplánujte automaticky. Pokud první použití proběhlo hladce, pravidlo bylo u pracovního místa a nevznikla žádná nová datová stopa, další zvláštní kontrola obvykle nic nepřidá. Pasivní provoz má zůstat pasivní. Druhé použití má smysl jen tehdy, když první použití skončilo lokální opravou, slabým převodem nebo drobnou nejistotou, kterou chcete ověřit při nejbližší přirozené práci.
+
+Začněte větou:
+
+```text
+Druhé běžné použití sledujeme jen proto, že první použití ukázalo:
+```
+
+Za větu napište konkrétní důvod. Ne "pro jistotu", ale například:
+
+```text
+Druhé běžné použití sledujeme jen proto, že první použití ukázalo, že pracovní věta nebyla u nové varianty onboardingové šablony a museli jsme ji lokálně doplnit.
+```
+
+Tím se chrání rozsah. Druhé použití neověřuje celé pravidlo znovu. Ověřuje jen to, jestli lokální oprava nebo přepis převodu opravdu stačí v běžné práci bez čerstvé paměti roční kontroly.
+
+### Kdy druhé použití přeskočit
+
+Druhé použití přeskočte, pokud první běžné použití splnilo všechny tři podmínky:
+
+- pravidlo bylo najitelné u kanonického pracovního místa;
+- podle pravidla vzniklo jedno jasné rozhodnutí;
+- nevznikla nová pomocná evidence, export, tracker ani poznámka "pro jistotu".
+
+V takové situaci zapište jen krátký závěr a čekejte na návratový signál. Další kontrola by byla spíš výraz nervozity než práce. Ano, i zodpovědnost se umí převléct za zbytečnou administrativu. Má v tom překvapivě dobrý šatník.
+
+Druhé použití naopak dává smysl, když:
+
+- pravidlo bylo doplněné na správné místo až po prvním použití;
+- pracovní věta byla přepsaná, aby šla použít bez archivu roční kontroly;
+- první použití ukázalo drobné riziko skryté evidence;
+- tým si není jistý, zda nová role najde pravidlo bez původního vysvětlení.
+
+### Tři kontrolní otázky
+
+Při druhém použití se ptejte jen na tři věci:
+
+```text
+Našel člověk opravené nebo doplněné pravidlo bez archivu?
+
+Vedlo pravidlo ke stejnému typu rozhodnutí jako minule?
+
+Zůstala datová stopa stejná nebo menší?
+```
+
+Pokud odpovědi zní ano, pravidlo se vrací do klidového pasivního provozu. Pokud jedna odpověď selže, nejdřív zjistěte, jestli jde o stejné místo jako minule. Stejné místo znamená nedotaženou lokální opravu. Nové místo může znamenat širší problém dohledatelnosti, ale pořád to není automaticky důvod otevírat roční kontrolu.
+
+Praktický příklad:
+
+```text
+První použití:
+Pravidlo o nesbírání velikosti týmu v prvním onboardingu nebylo u nové šablony. Doplnili jsme pracovní větu.
+
+Druhé použití:
+Jiný člověk připravuje další onboardingovou variantu.
+
+Výsledek:
+Najde pracovní větu u šablony, otázku na velikost týmu nepřidá a nevytvoří pomocnou segmentační tabulku.
+
+Závěr:
+Lokální oprava drží. Pravidlo zůstává v pasivním provozu bez další mimořádné kontroly.
+```
+
+### Čtyři výsledky druhého použití
+
+Po druhém použití vyberte jeden stav:
+
+- Potvrzený pasivní provoz: oprava drží, pravidlo je samostatné a další kontrola nevzniká.
+- Poslední lokální dočištění: stejné místo ještě potřebuje jednu drobnou úpravu.
+- Slabé kanonické místo: problém není v pravidle, ale v tom, kde pravidlo bydlí nebo odkud na něj vedou odkazy.
+- Návratový signál: opakuje se skutečný problém, kvůli kterému se má otevřít nejmenší další krok.
+
+`Potvrzený pasivní provoz` je cílový stav. Zapište ho krátce a nepřidávejte další sledování.
+
+`Poslední lokální dočištění` použijte jen jednou. Pokud se po druhém použití pořád opravuje stejná věta, napište stop podmínku: pokud selže i příště, nejde o servisní dočištění, ale o slabé kanonické místo.
+
+`Slabé kanonické místo` znamená, že pravidlo sice existuje, ale lidé k němu přicházejí špatnou cestou. Oprava může být v rozcestníku, názvu šablony, odkazu z checklistu nebo archivním označení staré verze.
+
+`Návratový signál` používejte jen tehdy, když se naplnila dřív zapsaná podmínka. Druhé použití není referendum o tom, zda by šlo pravidlo ještě vylepšit. Je to kontrola, jestli pasivní provoz opravdu stojí.
+
+### Privacy-first druhé použití
+
+Druhé použití je poslední místo, kde se často nenápadně vrací evidence. Někdo si řekne: když už jsme to sledovali podruhé, měli bychom si vést seznam případů. Většinou ne. Pokud pravidlo drží, seznam nepotřebujete. Pokud pravidlo nedrží, nepotřebujete dlouhý seznam; potřebujete návratový signál a nejmenší další krok.
+
+Použijte krátký zápis:
+
+```text
+Do pasivního provozu ponecháváme:
+
+Po druhém použití mažeme nebo zobecňujeme:
+
+Dál nesbíráme:
+```
+
+Příklad:
+
+```text
+Do pasivního provozu ponecháváme:
+Pracovní větu u onboardingové šablony a návratový signál k nastavení rolí.
+
+Po druhém použití mažeme nebo zobecňujeme:
+Dočasnou poznámku z kontroly nahrazujeme větou "oprava drží i při dalším použití".
+
+Dál nesbíráme:
+Velikost týmu v prvním kroku, pomocnou segmentační tabulku ani interní seznam použití pravidla.
+```
+
+Codyho komentář: když pravidlo obstojí podruhé, největší laskavost je nechat ho být. Tým nepotřebuje trofejní tabulku úspěšných použití. Potřebuje vědět, že příště má použít stejnou pracovní větu a jít dál.
+
+### Karta druhého běžného použití
+
+```text
+Pravidlo nebo pracovní věta:
+
+Důvod druhého použití:
+
+Kanonické pracovní místo:
+
+Druhá běžná situace:
+
+Kdo pravidlo použil:
+
+Našel pravidlo bez archivu roční kontroly?
+
+Vedlo pravidlo k rozhodnutí?
+
+Vznikla nová datová stopa?
+
+Výsledek:
+- potvrzený pasivní provoz
+- poslední lokální dočištění
+- slabé kanonické místo
+- návratový signál
+
+Co případně dočišťujeme:
+
+Co zůstává zavřené:
+
+Privacy-first uzavření:
+
+Další návratový signál:
+
+Datum:
+```
+
+### Mini workshop na 5 minut
+
+1. Minuta 1: přečtěte důvod, proč druhé použití vůbec sledujete.
+2. Minuta 2: ověřte, jestli člověk našel pravidlo bez archivu.
+3. Minuta 3: napište rozhodnutí, které podle pravidla vzniklo.
+4. Minuta 4: zkontrolujte datovou stopu.
+5. Minuta 5: vyberte jeden výsledek a ukončete mimořádnou pozornost, pokud není návratový signál.
+
+Pokud během pěti minut začnete plánovat další metriku, nový dashboard nebo širší revizi šablon, zastavte se. Buď máte návratový signál, nebo jen chuť přidat kontrolu. Tyto dvě věci se tváří podobně, ale jen jedna z nich si zaslouží práci.
+
+### Checklist druhého použití
+
+- Existuje konkrétní důvod, proč druhé použití vůbec sledujeme?
+- Neopakujeme kontrolu jen proto, že první použití bylo vidět?
+- Našel člověk pravidlo u pracovního místa bez archivu roční kontroly?
+- Vedlo pravidlo k jednomu jasnému rozhodnutí?
+- Nevznikla nová evidence použití, export, tracker ani pomocná tabulka?
+- Pokud opravujeme, jde o poslední lokální dočištění stejného místa?
+- Pokud selhává dohledatelnost, pojmenovali jsme slabé kanonické místo?
+- Pokud se naplnil návratový signál, otevíráme nejmenší další krok?
+- Zůstává původní roční kontrola archivem, ne druhým zdrojem pravdy?
+- Je po druhém použití jasné, že pravidlo buď drží v pasivním provozu, nebo má konkrétní další smyčku?
+
+Druhé běžné použití po návratu roční kontroly do pasivního provozu má být poslední malá pojistka, ne začátek nového cyklu hlídání. Když pravidlo drží, nechte ho držet. Když nedrží, opravte nejbližší místo nebo otevřete skutečný návratový signál. V obou případech držte rozsah malý a datovou stopu ještě menší.
+
 ## Pracovní log
 
+- 2026-07-03: Doplněna úvodní podkapitola o druhém běžném použití po návratu roční kontroly do pasivního provozu: kdy ho přeskočit, kontrolní otázky, čtyři výsledky, privacy-first uzavření, karta, mini workshop a checklist.
 - 2026-07-03: Doplněna úvodní podkapitola o uzavření prvního běžného použití po návratu roční kontroly do pasivního provozu: uzavírací stavy, praktický onboardingový příklad, privacy-first uzavření bez nové evidence, karta, mini workshop a checklist.
 - 2026-07-03: Doplněna úvodní podkapitola o prvním běžném použití po návratu roční kontroly do pasivního provozu: najitelnost, použitelnost, datová střídmost, čtyři výsledky, praktický onboardingový příklad, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-07-03: Doplněna úvodní podkapitola o převodu uzavřené roční kontroly zpět do pasivního provozu: pracovní věta, návratový signál, archivní odkaz, privacy-first úklid datové stopy, karta, mini workshop a checklist.
