@@ -290903,8 +290903,140 @@ Pokud se během workshopu objeví potřeba další kontroly, neprodlužujte pře
 
 Převod do dlouhodobého klidu je dobrý konec malé produktové smyčky. Ne heroický, ne hlučný, bez konfety. Pravidlo prostě funguje, má své místo a nevyžaduje další pozornost. Přesně tak má vypadat provoz, který chrání čas týmu i data zákazníků.
 
+## První klidová kontrola po návratu pravidla
+
+Když se pravidlo vrátí do dlouhodobého klidu, nemá se hned znovu rozebírat. První klidová kontrola proto není další mimořádná revize. Je to krátké ověření, že pravidlo pořád tiše plní svůj účel: je najitelné, srozumitelné a nevyrábí práci navíc.
+
+Otevřete ji až v běžném rytmu, který už pro dané pracovní místo existuje. Pokud support jednou měsíčně kontroluje šablony odpovědí, stačí se podívat tam. Pokud produkt jednou za kvartál prochází onboarding, stačí přidat jednu otázku do tohoto review. Nevytvářejte nový kalendář jen proto, že pravidlo nedávno prošlo návratem. To by nebyl klid, jen mimořádná péče převlečená za proces. Velmi elegantní převlek, ale pořád proces.
+
+Začněte větou:
+
+```text
+První klidovou kontrolu děláme v běžném rytmu, abychom ověřili, že pravidlo po návratu zůstalo použitelné bez další mimořádné evidence.
+```
+
+Tato věta drží rozsah. Kontrola nemá znovu hodnotit celou historii návratu, správnost původního rozhodnutí ani všechny možné varianty budoucího použití. Má odpovědět na jednu praktickou otázku: funguje pravidlo v místě, kde má být, i když se na něj tým nedívá se zvýšenou pozorností?
+
+### Tři kontrolní otázky
+
+První klidová kontrola potřebuje jen tři otázky:
+
+- Našel člověk pravidlo tam, kde ho při běžné práci čekal?
+- Dokázal podle něj udělat rozhodnutí bez čtení návratové historie?
+- Nevznikla kolem pravidla nová pomocná evidence, kterou nikdo výslovně neschválil?
+
+Pokud všechny tři odpovědi zní ano, kontrolu zavřete. Nepřidávejte "ještě pro jistotu" další poznámku, varování nebo link na starý dokument. Pravidlo právě prokázalo, že umí žít v klidu. Nechte ho tam.
+
+Pokud jedna odpověď neprojde, opravte nejbližší pracovní místo. To obvykle znamená zkrátit větu, přesunout odkaz, sjednotit název, doplnit jeden příklad nebo odstranit starou kopii. Neznamená to znovu otevírat návratový režim.
+
+Pokud neprojdou dvě nebo tři odpovědi, nejde už o běžné dočištění. Zapište nový návratový signál a rozhodněte, zda se pravidlo skutečně vrací do aktivní práce. I tehdy ale začněte nejmenším krokem. Dlouhá historie pravidla není povolenka k dlouhé poradě.
+
+### Praktický příklad
+
+Představte si pravidlo pro ruční ověření exportu zákaznických dat. Po návratu z dlouhodobého klidu tým upravil support šablonu a po dvou běžných použitích pravidlo vrátil zpět do klidu. O měsíc později probíhá běžná kontrola support šablon.
+
+Dobrá klidová kontrola vypadá takto:
+
+```text
+Pravidlo bylo nalezené v support šabloně u žádostí o export dat.
+Support podle něj rozhodl bez čtení historické karty.
+Nevznikl nový kontrolní sheet ani seznam exportů.
+Výsledek: pravidlo zůstává v dlouhodobém klidu beze změny.
+```
+
+Slabší výsledek:
+
+```text
+Pravidlo bylo správné, ale support ho hledal ve starém provozním checklistu místo v aktuální šabloně.
+Oprava: do starého checklistu přidáme odkaz na kanonickou šablonu a starou větu odstraníme.
+Výsledek: lokální dočištění, bez návratu do aktivní práce.
+```
+
+Špatné uzavření by bylo přidat novou měsíční tabulku všech exportů "pro jistotu". Taková tabulka by možná uklidnila tým, ale zároveň by vytvořila novou datovou stopu, nový vlastnický problém a další místo, kde mohou ležet citlivé informace déle, než je potřeba.
+
+Codyho komentář: u klidové kontroly je nejtěžší nedělat chytrého. Jakmile pravidlo najdete, pochopíte a použijete, máte silné nutkání ho ještě trochu vylepšit. Někdy je nejlepší odborný zásah zavřít dokument a jít dělat práci, která opravdu čeká.
+
+### Privacy-first kontrola
+
+První klidová kontrola má být datově lehká. Nepotřebuje export případů, nahrávky obrazovky, heatmapu ani nový dashboard. Většinou stačí jeden reálný průchod nebo krátká poznámka od člověka, který pravidlo použil.
+
+Položte si čtyři otázky:
+
+- Stačí ověřit pravidlo na běžném pracovním artefaktu místo na novém exportu?
+- Můžeme výsledek zapsat bez osobních údajů a detailů zákaznického případu?
+- Nevznikla po návratu skrytá kopie dat, kterou je potřeba smazat?
+- Nezačal tým držet pomocnou evidenci jen proto, že se bojí pravidlo pustit z ruky?
+
+Privacy-first zápis může být velmi krátký:
+
+```text
+Kontrolu zapisujeme bez zákaznických detailů. Ověřili jsme jen aktuální support šablonu a jeden anonymizovaný průchod. Nevzniká nový seznam exportů, nová retence ani nový pravidelný report.
+```
+
+Tohle je přesně typ drobné provozní hygieny, která v Evropě dává smysl. Ne proto, že by každá tabulka byla katastrofa. Protože každá zbytečná tabulka má vlastní život, přístupy, kopie a zapomenuté výjimky. A ty se časem sčítají.
+
+### Karta první klidové kontroly
+
+```text
+Pravidlo:
+
+Kanonické pracovní místo:
+
+Běžný rytmus, ve kterém kontrola proběhla:
+
+Kontrolovaná situace:
+
+Našel člověk pravidlo na očekávaném místě?
+
+Šlo podle něj rozhodnout bez návratové historie?
+
+Vznikla nová pomocná evidence?
+
+Výsledek:
+- pravidlo zůstává v klidu
+- lokální dočištění
+- nový návratový signál
+
+Pokud je potřeba lokální dočištění, jaké:
+
+Jaká data, exporty, screenshoty nebo seznamy díky kontrole nevznikají:
+
+Vlastník:
+
+Datum kontroly:
+```
+
+Kartu ukládejte k běžnému review, ne k původní návratové historii. Smyslem je potvrdit, že pravidlo už znovu patří do normálního provozu. Pokud kvůli každé kontrole musíte otevírat archiv, pravidlo ještě není tak samostatné, jak jste si mysleli.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: otevřete běžné pracovní místo pravidla.
+2. Minuta 2: najděte aktuální pracovní větu bez použití historické karty.
+3. Minuta 3: ověřte jeden běžný průchod nebo jeden anonymizovaný příklad.
+4. Minuta 4: zkontrolujte, zda nevznikla nová pomocná evidence.
+5. Minuta 5: vyberte výsledek kontroly.
+6. Minuta 6: zapište, co zůstává beze změny a jaká data dál nevznikají.
+
+Když se workshop začne rozšiřovat, vraťte se ke třem kontrolním otázkám. Pokud na ně neumíte odpovědět bez další analýzy, zapište slabé místo. Nezkoušejte z klidové kontroly udělat skryté discovery.
+
+### Checklist první klidové kontroly
+
+- Proběhla kontrola v existujícím běžném rytmu?
+- Nezaložili jsme kvůli ní nový mimořádný proces?
+- Je jasné, kde pravidlo žije?
+- Dokázal ho člověk použít bez čtení historie návratu?
+- Je pracovní věta pořád krátká a rozhodnutelná?
+- Nevznikla nová pomocná evidence?
+- Pokud bylo potřeba dočištění, zůstalo lokální?
+- Je výsledek zapsaný bez osobních údajů a zákaznických detailů?
+- Je jasné, jaká data, exporty, screenshoty, seznamy nebo reporty dál nevznikají?
+- Pokud se objevil skutečný návratový signál, je pojmenovaný odděleně od běžné údržby?
+
+První klidová kontrola má potvrdit, že pravidlo nepotřebuje pozornost navíc. Když dopadne dobře, největší výsledek je ticho: žádná nová tabulka, žádný nový meeting, žádná nová datová stopa. Jen pravidlo, které je tam, kde má být, a pracuje, když je potřeba.
+
 ## Pracovní log
 
+- 2026-07-03: Doplněna úvodní podkapitola o první klidové kontrole po návratu pravidla: tři kontrolní otázky, praktický support příklad, privacy-first kontrola bez nové evidence, karta, mini workshop a checklist.
 - 2026-07-03: Doplněna úvodní podkapitola o převodu potvrzeného pravidla zpět do dlouhodobého klidu: kanonické pracovní místo, pracovní věta, návratový signál, privacy-first úklid dočasných stop, karta, mini workshop a checklist.
 - 2026-07-03: Doplněna úvodní podkapitola o uzavření druhého běžného použití po uzavření návratu z dlouhodobého klidu: čtyři uzavírací stavy, support příklady, privacy-first úklid dočasných stop, karta, mini workshop a checklist.
 - 2026-07-03: Doplněna úvodní podkapitola o druhém běžném použití po uzavření návratu z dlouhodobého klidu: přenositelnost pravidla bez čerstvé paměti, kdy druhé použití otevírat, support příklad, privacy-first kontrola, karta, mini workshop a checklist.
