@@ -289852,8 +289852,196 @@ Pokud workshop potřebuje víc než šest minut, je to signál. Buď se změnil 
 
 První návrat z dlouhodobého klidu má být krátký a střízlivý. Jeho úkolem není znovu prožít celou historii pravidla. Má jen rozhodnout, jestli dnešní signál vyžaduje práci. Když ano, otevře nejmenší možný průchod. Když ne, nechá archiv spát. Někdy je to nejpraktičtější věc, kterou může tým udělat: nechat dobré staré rozhodnutí být dobrým starým rozhodnutím.
 
+## Uzavření prvního návratu z dlouhodobého klidu
+
+První návrat z dlouhodobého klidu se musí uzavřít rychle. Jinak z něj vznikne nový mezistav: archiv už není úplně v klidu, ale pravidlo ještě nemá nový provozní tvar. To je nebezpečné hlavně proto, že mezistav působí nenápadně. Nikdo nevyhlásí nový projekt, nikdo dramaticky nerozšíří rozsah, jen se začne "pro jistotu" dívat do staré karty, ptát se dalších lidí a nechávat si poznámky na později. A najednou má jedno staré rozhodnutí vlastní oběžnou dráhu.
+
+Uzavření návratu má odpovědět na čtyři otázky:
+
+```text
+Co návrat opravdu ukázal?
+
+Co se mění v pracovním místě?
+
+Co zůstává v dlouhodobém klidu?
+
+Jaká data, pole, exporty nebo evidence dál nevznikají?
+```
+
+Pokud na některou otázku neumíte odpovědět jednou nebo dvěma větami, návrat ještě není uzavřený. Buď jste otevřeli příliš široký problém, nebo jste si nevšimli, že z původního pravidla už vzniklo nové téma.
+
+### Čtyři uzavírací stavy
+
+První návrat uzavřete jedním ze čtyř stavů:
+
+- Falešný návrat zavřen: dnešní situace patřila jinam a archiv se dál nepoužívá.
+- Běžné použití potvrzeno: pracovní věta stačila a dlouhodobý klid pokračuje beze změny.
+- Lokální hrana doplněna: do pracovního místa přibyla jedna věta a čeká ji nejbližší běžné ověření.
+- Nový výchozí bod založen: kontext se změnil natolik, že staré pravidlo zůstává historií a nová práce má vlastní hranici.
+
+U falešného návratu je cílem zabránit tomu, aby podobný slovník přitáhl starý archiv do nové oblasti. Uzavírací věta může znít:
+
+```text
+Návrat zavíráme jako falešný, protože dnešní dotaz vznikl v obchodní kvalifikaci před registrací, ne v prvním onboardingovém formuláři. Archivované onboardingové pravidlo dál zůstává v dlouhodobém klidu.
+```
+
+U potvrzeného běžného použití neoslavujte pravidlo dalším procesem. Stačí:
+
+```text
+Pracovní věta stačila k rozhodnutí bez otevření archivu. Dlouhodobý klid pokračuje beze změny a nezakládáme další kontrolu.
+```
+
+U lokální hrany musí být změna opravdu lokální. Jestli potřebuje tři odstavce, tabulku výjimek nebo novou roli, není to lokální hrana. Je to nové téma s historickým rodičem. Dobré uzavření zní:
+
+```text
+Do support pracovního místa doplňujeme jednu větu pro asistovanou migraci. Původní onboardingové pravidlo zůstává zavřené; formulář, CRM atribut ani plošná evidence velikosti týmu se nemění.
+```
+
+U nového výchozího bodu hlavně nepřepisujte starý archiv. Starý záznam byl správný pro tehdejší pracovní místo. Nový kontext si zaslouží vlastní otázku:
+
+```text
+Původní archiv zůstává rozhodnutím pro onboardingový formulář. Dnešní problém patří do enterprise kvalifikace před registrací, proto otevíráme nový výchozí bod s vlastním pracovním místem a vlastní datovou hranicí.
+```
+
+Codyho komentář: nejvíc škody obvykle nenadělá špatné rozhodnutí, ale správné rozhodnutí použité mimo svůj domov. Starý archiv pak vypadá jako moudrost, ale ve skutečnosti jen přenáší starou mapu na nové město. Výsledek bývá přesně tak užitečný, jak to zní.
+
+### Praktický příklad
+
+Archivované pravidlo:
+
+```text
+V prvním onboardingovém formuláři se neptáme na velikost týmu, pokud ji nepotřebujeme k nastavení účtu nebo ke splnění domluvené služby.
+```
+
+Návratový signál:
+
+```text
+Dva support případy za sebou váhaly, zda se na velikost týmu ptát při asistované migraci.
+```
+
+Kontrola ukázala, že formulář funguje dobře. Problém není v prvním kroku, ale v support pracovním místě. Uzavření proto může vypadat takto:
+
+```text
+Stav:
+lokální hrana doplněna.
+
+Co návrat ukázal:
+pracovní věta chrání první formulář dobře, ale support potřebuje viditelnou hranici pro asistovanou migraci.
+
+Co se mění:
+do support follow-upu přidáváme větu, že velikost týmu se smí zjistit jen v konkrétním migračním vlákně, pokud je nutná pro nastavení, a neukládá se jako plošný atribut účtu.
+
+Co zůstává v klidu:
+archivovaná karta k onboardingovému formuláři a zákaz plošného sběru velikosti týmu v prvním kroku.
+
+Co neotevíráme:
+nové pole ve formuláři, CRM segment, marketingový tag ani report podle velikosti týmu.
+
+Ověření:
+nejbližší asistovaná migrace půjde rozhodnout ze support věty bez otevření archivní karty.
+```
+
+Tím se návrat uzavře do jednoho místa. Support má jasnější větu. Onboarding zůstává klidný. Archiv nepovyrostl o další historickou vrstvu. A data, která tým nepotřeboval plošně sbírat před návratem, se nezačnou plošně sbírat ani po něm.
+
+### Privacy-first uzavření
+
+Uzavření prvního návratu je poslední šance zastavit nenápadné rozšíření datové stopy. I když samotný návrat dopadl rozumně, po cestě mohly vzniknout pomocné věci: kopie support případů, screenshoty formuláře, dočasné poznámky, seznam výjimek nebo návrh nového pole, který nakonec neprošel.
+
+Po uzavření proto napište tři řádky:
+
+```text
+Do pracovního místa přenášíme:
+
+Do archivu necháváme:
+
+Mažeme nebo dál nepřenášíme:
+```
+
+Příklad:
+
+```text
+Do pracovního místa přenášíme:
+jednu obecnou support větu pro asistovanou migraci.
+
+Do archivu necháváme:
+původní rozhodnutí o nepřidání velikosti týmu do prvního formuláře.
+
+Mažeme nebo dál nepřenášíme:
+kopie dvou support vláken, návrh CRM segmentu a pomocnou poznámku s reálnými zákaznickými formulacemi.
+```
+
+Pokud potřebujete zachovat příklad, přepište ho do syntetické podoby. Uzavření nemá uchovávat reálné zákaznické detaily jen proto, že pomohly k rozhodnutí. Rozhodovací hodnota je v pravidle, ne v celé původní stopě.
+
+### Karta uzavření prvního návratu
+
+```text
+Archivované pravidlo:
+
+Návratový signál:
+
+Výsledný stav:
+- falešný návrat zavřen
+- běžné použití potvrzeno
+- lokální hrana doplněna
+- nový výchozí bod založen
+
+Co návrat opravdu ukázal:
+
+Co se mění v pracovním místě:
+
+Co zůstává v dlouhodobém klidu:
+
+Co výslovně neotevíráme:
+
+Jaká data, pole, exporty nebo evidence nepřidáváme:
+
+Co přenášíme do pracovního místa:
+
+Co necháváme v archivu:
+
+Co mažeme nebo dál nepřenášíme:
+
+Nejbližší ověření, pokud existuje:
+
+Vlastník:
+
+Datum uzavření:
+```
+
+Karta se ukládá jen tehdy, když po návratu něco opravdu zůstává: doplněná hrana, nový výchozí bod nebo jasná stopa falešného návratu, který by se mohl vrátit. Pokud pracovní věta stačila a nic se nemění, často stačí jedna uzavírací věta u pracovního místa.
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: přečtěte návratový signál.
+2. Minuta 2: vyberte jeden ze čtyř uzavíracích stavů.
+3. Minuta 3: napište, co návrat opravdu ukázal.
+4. Minuta 4: určete, co se mění v pracovním místě.
+5. Minuta 5: napište, co zůstává v dlouhodobém klidu.
+6. Minuta 6: zapište, jaká data, pole, exporty nebo evidence nepřidáváte.
+7. Minuta 7: vyberte pomocné stopy k odstranění nebo zobecnění.
+
+Workshop nemá hledat další možné návraty. Má zavřít tento jeden. Pokud se během něj objeví nový problém, napište ho stranou jako samostatný podnět. Nelepte ho na archivované pravidlo jen proto, že je zrovna otevřené okno.
+
+### Checklist uzavření prvního návratu
+
+- Má návrat jeden jasný výsledný stav?
+- Je popsáno, co návrat opravdu ukázal?
+- Je změna omezená na konkrétní pracovní místo?
+- Pokud pracovní věta stačila, nezakládáme novou kontrolu?
+- Pokud chyběla hrana, je doplněná jednou větou?
+- Pokud se změnil kontext, vznikl nový výchozí bod místo přepsání archivu?
+- Je jasné, co zůstává v dlouhodobém klidu?
+- Je zapsané, co výslovně neotevíráme?
+- Víme, jaká data, pole, exporty nebo evidence dál nepřidáváme?
+- Uklidili jsme pomocné kopie, screenshoty, výřezy komunikace a dočasné poznámky?
+- Pokud zůstává příklad, je syntetický nebo dostatečně obecný?
+- Má případná lokální hrana nejbližší reálné ověření?
+
+Uzavření prvního návratu z dlouhodobého klidu má jednu hlavní ambici: nedovolit, aby se návrat stal novým provozním režimem. Buď pravidlo dál odpočívá, nebo dostane malou lokální hranu, nebo se od něj oddělí nový problém. Všechny tři dobré výsledky mají společnou vlastnost: čtenář, tým i systém vědí, co se změnilo, co se nezměnilo a proč kvůli tomu nevzniká další zbytečná datová stopa.
+
 ## Pracovní log
 
+- 2026-07-03: Doplněna úvodní podkapitola o uzavření prvního návratu z dlouhodobého klidu: čtyři uzavírací stavy, praktický support příklad, privacy-first úklid návratových stop, karta, mini workshop a checklist.
 - 2026-07-03: Doplněna úvodní podkapitola o prvním návratu z dlouhodobého klidu: návratový signál, tři otázky návratu, čtyři výsledky, privacy-first brzda, karta, mini workshop a checklist.
 - 2026-07-03: Doplněna úvodní podkapitola o převodu ověřeného archivovaného pravidla do dlouhodobého klidu: klidová věta, aktivní a archivní minimum, privacy-first úklid pomocných stop, karta, mini workshop a checklist.
 - 2026-07-03: Doplněna úvodní podkapitola o uzavření druhého běžného použití po archivaci pravidla: čtyři uzavírací stavy, praktický onboardingový příklad, privacy-first úklid dočasné stopy, karta, mini workshop a checklist.
