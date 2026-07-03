@@ -287153,8 +287153,215 @@ Pokud workshop potřebuje víc času, pravděpodobně už nejde o první běžn�
 
 První běžné použití po uzavřené roční kontrole je malý test reality. Pokud pravidlo funguje, nechte ho fungovat. Pokud zůstala stará stopa, ukliďte ji. Pokud se objevil nový signál, oddělte ho. Hlavně z roční kontroly nedělejte věčný dozvuk. Dobrý provoz má paměť, ale netahá ji za sebou jako kufr s rozbitým kolečkem.
 
+## Uzavření prvního běžného použití po uzavřené roční kontrole
+
+První běžné použití po roční kontrole je potřeba uzavřít rychle. Ne proto, že by každé použití pravidla muselo mít vlastní obřad, ale proto, aby se po kontrole nezrodil nový polostav. Buď pravidlo opravdu běží samo, nebo po sobě roční kontrola nechala drobný zbytek, který se má uklidit. Obojí se dá poznat a zapsat bez dlouhé schůzky.
+
+Uzavření má odpovědět na jednu otázku:
+
+```text
+Vrací se pravidlo po prvním běžném použití do klidu, nebo potřebuje jednu přesnou lokální opravu?
+```
+
+Pokud odpověď není jasná, nesnažte se ji vyřešit rozšířením kontroly. Vraťte se k pracovnímu místu a popište, co se přesně stalo. Pravidlo buď člověk našel a použil, nebo nenašel. Pracovní věta buď stačila, nebo nestačila. Rozsah buď zůstal zavřený, nebo se znovu otevřel. Data buď zůstala v původním systému, nebo začala vznikat nová pomocná stopa. Většinou není potřeba víc filozofie. Ano, je to nudné. Nudné provozní odpovědi jsou často ty nejlevnější.
+
+Začněte uzavírací větou:
+
+```text
+První běžné použití po roční kontrole uzavíráme takto:
+```
+
+Dobrá věta je konkrétní a krátká:
+
+```text
+První běžné použití po roční kontrole uzavíráme takto:
+pravidlo bylo nalezené v potvrzovací šabloně, použité bez staré wiki poznámky a nevznikla žádná nová evidence. Pravidlo vracíme do běžného provozu bez další kontroly.
+```
+
+Slabší, ale pořád užitečná věta:
+
+```text
+První běžné použití po roční kontrole uzavíráme takto:
+pravidlo fungovalo, ale ve staré wiki zůstal odkaz na zrušenou tabulku. Odkaz mažeme a další práci neotevíráme.
+```
+
+Obě věty mají společnou disciplínu: nevyrobí nový projekt. První potvrdí klid. Druhá uklidí zbytek. Ani jedna nespouští nový audit obchodního procesu jen proto, že se někdo na chvíli podíval do staré dokumentace.
+
+### Čtyři uzavírací stavy
+
+Použijte jeden ze čtyř stavů:
+
+- Vráceno do klidu: pravidlo bylo najitelné, použitelné a nevznikla nová datová stopa.
+- Lokální dočištění: pravidlo fungovalo, ale zůstala stará kopie, odkaz, poznámka nebo nejasná kotva.
+- Hraniční věta: pravidlo bylo nalezené, ale člověk váhal, kdy ho použít; stačí doplnit jednu větu.
+- Nový signál mimo toto uzavření: použití ukázalo opakovaný problém, který už není dozvuk roční kontroly.
+
+Stav `vráceno do klidu` znamená, že dál nic neděláte. Neplánujete druhé porevizní použití, nezakládáte kontrolní tabulku a nepřidáváte do dashboardu metriku "pravidlo po roční kontrole stále žije". Pokud pravidlo funguje samo, nejlepší další krok je nechat ho být.
+
+Stav `lokální dočištění` je pro malé zbytky po starém provozu. Typicky starý odkaz, duplicitní šablona, poznámka v interní wiki nebo zkratka v onboardingovém checklistu. Oprava má odstranit zmatek, ne přepsat pravidlo. Po dočištění má být méně míst, kde pravidlo žije.
+
+Stav `hraniční věta` použijte, když pravidlo člověk našel, ale nedokázal z něj sám odvodit hranici. Neznamená to, že potřebujete novou kapitolu dokumentace. Doplňte jednu větu typu: "Tento dotaz pokládáme až tehdy, když bez něj nejde navrhnout další krok." Pak uzavřete. Pokud jedna věta nestačí, možná nejde o hranu, ale o nový návratový signál.
+
+Stav `nový signál mimo toto uzavření` používejte opatrně. První běžné použití může odhalit, že se změnil typ poptávek, kanál, člověk v roli nebo pracovní místo. Pokud je to skutečně opakovaný problém s dopadem, založte nové téma. Do uzavření původního pravidla ale napište, že původní roční kontrola se tím nerozšiřuje. Jinak se z jednoho signálu stane nenápadné otevření všeho.
+
+### Praktický příklad
+
+Roční kontrola zrušila starou pomocnou tabulku a potvrdila pravidlo u potvrzovací šablony. O několik týdnů později obchodník řeší poptávku, kde není jasný cíl projektu.
+
+Dobré použití:
+
+```text
+Obchodník našel aktuální šablonu, zeptal se nejdřív na očekávaný výsledek a nerozšiřoval CRM o nový atribut.
+```
+
+Uzavření:
+
+```text
+První běžné použití po roční kontrole uzavíráme takto:
+pravidlo fungovalo v kanonickém místě a nevznikla žádná nová evidence. Vrací se do klidu.
+
+Co výslovně neotevíráme:
+formulářové pole pro rozpočet, CRM atribut, scoring ani nový report.
+
+Další návrat:
+pouze pokud tři relevantní poptávky za sebou nepůjdou kvalifikovat bez strukturované evidence.
+```
+
+Lokální dočištění:
+
+```text
+Zjištění:
+Pravidlo fungovalo, ale ve staré wiki pořád zůstal odkaz na zrušenou tabulku.
+
+Uzavření:
+Starý odkaz mažeme. Kanonická věta zůstává jen u potvrzovací šablony a v obchodním checklistu. Další kontrolu neplánujeme.
+```
+
+Hraniční věta:
+
+```text
+Zjištění:
+Obchodník si nebyl jistý, jestli se má ptát na rozpočet hned, nebo až po cíli projektu.
+
+Uzavření:
+Do šablony doplňujeme jednu větu: "Na rámcový rozpočet se ptáme až ve chvíli, kdy bez něj nejde navrhnout další krok." Formulář, CRM a scoring zůstávají zavřené.
+```
+
+Nový signál:
+
+```text
+Zjištění:
+Tři poslední poptávky z nového kanálu měly jiný nákupní proces a současná šablona nepomohla určit rozhodovací osobu.
+
+Uzavření původního použití:
+Původní pravidlo pro rozpočet zůstává v klidu. Nové téma se netýká rozpočtu, ale identifikace rozhodovacího procesu u nového kanálu.
+```
+
+V posledním příkladu je důležité oddělení témat. Kdyby se nový kanál schoval do pravidla o rozpočtu, tým by pravděpodobně začal přepisovat špatné místo. Správná otázka není "jak lépe sbírat rozpočet", ale "jak u tohoto kanálu zjistit rozhodovací proces bez zbytečných dat".
+
+### Privacy-first uzavření
+
+Privacy-first uzavření má v tomto kroku jeden hlavní úkol: zabránit tomu, aby se ověření pravidla stalo novou evidencí případů. Po roční kontrole může být lákavé ukládat si příklady "pro jistotu". Jenže právě tím vzniká druhotná datová stopa, která často nemá jasný účel, vlastníka ani retenci.
+
+Použijte krátký záznam:
+
+```text
+Poznatek ponecháváme jako:
+
+Reálný případ zůstává:
+
+Mimo původní systém neukládáme:
+
+Dočasné stopy uklízíme:
+```
+
+Příklad:
+
+```text
+Poznatek ponecháváme jako:
+jednu hraniční větu u potvrzovací šablony.
+
+Reálný případ zůstává:
+v obchodní komunikaci podle běžné retence a přístupů.
+
+Mimo původní systém neukládáme:
+jméno zákazníka, text e-mailu, rozpočet, interní poznámku ani screenshot.
+
+Dočasné stopy uklízíme:
+starý wiki odkaz a pracovní poznámku z roční kontroly.
+```
+
+Codyho komentář: "pro jistotu si to někam zkopíruju" je věta, ze které se rodí většina malých datových nepořádků. Pokud chcete jistotu, napište lepší pravidlo. Nekopírujte případ do dalšího místa jen proto, že jednou pomohl vysvětlit kontext.
+
+### Karta uzavření prvního běžného použití
+
+```text
+Pravidlo:
+
+Kanonické pracovní místo:
+
+Co ukázalo první běžné použití:
+
+Uzavírací stav:
+- vráceno do klidu
+- lokální dočištění
+- hraniční věta
+- nový signál mimo toto uzavření
+
+Uzavírací věta:
+
+Nejmenší případná oprava:
+
+Co zůstává výslovně zavřené:
+
+Poznatek ponecháváme jako:
+
+Reálná data zůstávají:
+
+Mimo původní systém neukládáme:
+
+Dočasné stopy uklízíme:
+
+Další návratový signál:
+
+Vlastník pracovního místa:
+
+Datum uzavření:
+```
+
+Kartu nemažte jen proto, že je krátká. Krátký zápis je v pořádku. Nebezpečný je dlouhý zápis bez rozhodnutí. Pokud karta říká "vráceno do klidu" a neobsahuje žádná reálná zákaznická data, splnila účel.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte větu, co ukázalo první běžné použití.
+2. Minuta 2: vyberte jeden ze čtyř uzavíracích stavů.
+3. Minuta 3: napište uzavírací větu.
+4. Minuta 4: určete nejmenší opravu, pokud nějaká existuje.
+5. Minuta 5: napište, co zůstává zavřené.
+6. Minuta 6: potvrďte, že mimo původní systém neukládáte reálná data.
+
+Pokud v šesté minutě pořád potřebujete řešit další varianty, zastavte workshop. Původní uzavření je buď hotové, nebo se objevilo nové téma. Smíchejte je dohromady a dostanete typickou interní polévku: trochu provozu, trochu strategie, trochu datového bordýlku a žádný jasný konec.
+
+### Checklist uzavření prvního běžného použití
+
+- Máme jednu větu, co první běžné použití ukázalo?
+- Vybrali jsme přesně jeden uzavírací stav?
+- Pokud pravidlo fungovalo, vrací se opravdu do klidu?
+- Pokud něco drhlo, je oprava lokální a u kanonického pracovního místa?
+- Pokud doplňujeme hraniční větu, je to jedna věta místo nové dokumentace?
+- Pokud vznikl nový signál, oddělili jsme ho od původního pravidla?
+- Je jasné, co zůstává výslovně zavřené?
+- Nevznikla nová tabulka, export, screenshot, štítek ani kopie komunikace?
+- Reálná zákaznická data zůstávají v původním systému?
+- Dočasné pracovní stopy jsou smazané, sloučené nebo zobecněné?
+- Další kontrola vzniká jen při návratovém signálu?
+- Zanechává uzavření méně práce, než kolik by vzniklo z opatrnosti?
+
+Uzavření prvního běžného použití po roční kontrole má být malá provozní tečka. Potvrdí, že pravidlo žije, nebo uklidí poslední drobnost po kontrole. Jakmile začne vyrábět nové sledování, minulo smysl. Dobrý pasivní provoz se pozná tak, že po něm zůstane jasné pravidlo, čisté pracovní místo a žádná tajná evidence "kdyby něco".
+
 ## Pracovní log
 
+- 2026-07-03: Doplněna úvodní podkapitola o uzavření prvního běžného použití po uzavřené roční kontrole: uzavírací stavy, praktické příklady, privacy-first ne-evidence, karta, mini workshop a checklist.
 - 2026-07-03: Doplněna úvodní podkapitola o prvním běžném použití po uzavřené roční kontrole: přenos uzavření do pracovního místa, zavřený rozsah, privacy-first ne-evidence, karta, mini workshop a checklist.
 - 2026-07-02: Doplněna úvodní podkapitola o uzavření roční kontroly pravidla v pasivním provozu: uzavírací stavy, praktický příklad, privacy-first uzavření, karta, mini workshop a checklist.
 - 2026-07-02: Doplněna úvodní podkapitola o roční kontrole pravidla v pasivním provozu: najitelnost, použitelnost, datová stopa, privacy-first úklid, karta, mini workshop a checklist.
