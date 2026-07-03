@@ -287680,8 +287680,180 @@ Pokud se v páté minutě ukáže, že chcete otevřít větší téma, zastavte
 
 Uzavření druhého běžného použití je dobré, když po něm zůstane méně aktivních věcí než před ním. Stabilní pravidlo je u pracovního místa, staré stopy jsou uklizené, původní rozsah zůstává zavřený a nový problém má vlastní dveře. V tu chvíli může roční kontrola konečně zmizet z popředí a pravidlo dál sloužit potichu.
 
+## Převod uzavřené roční kontroly zpět do pasivního provozu
+
+Po druhém běžném použití po roční kontrole by pravidlo nemělo zůstat ve zvláštním režimu jen proto, že se mu chvíli věnovala pozornost. Pokud fungovalo, patří zpátky do pasivního provozu. To znamená: pravidlo je u svého pracovního místa, další kontrola nevzniká automaticky, dočasné poznámky jsou uklizené a tým ví, jaký signál by téma znovu otevřel.
+
+Začněte větou:
+
+```text
+Roční kontrolu převádíme zpět do pasivního provozu, protože druhé běžné použití potvrdilo:
+```
+
+Za dvojtečku doplňte konkrétní důvod. Nestačí napsat "vypadá to dobře". Dobrá věta říká, že pravidlo bylo dohledatelné, vedlo k rozhodnutí a nevytvořilo novou datovou stopu. Například:
+
+```text
+Roční kontrolu převádíme zpět do pasivního provozu, protože druhé běžné použití potvrdilo, že obchodník najde pravidlo u poptávkového formuláře, kvalifikuje poptávku bez nového pole pro rozpočet a nevytváří pomocnou evidenci mimo CRM.
+```
+
+Tato věta je malá, ale důležitá. Uzavírá mimořádnou pozornost a zároveň nechává jasnou stopu, proč se nepokračuje další kontrolou. Bez ní se tým snadno vrátí k pocitu, že "ještě jednou by se to mohlo ověřit". Mohlo. A pak ještě jednou. A pak máte z pasivního pravidla seriál, který nikdo nesledoval dobrovolně.
+
+### Co znamená pasivní provoz
+
+Pasivní provoz neznamená, že pravidlo zmizí. Znamená, že pravidlo nepotřebuje zvláštní dohled, aby se používalo správně. Je dostupné v místě práce, jeho návratový signál je známý a běžní lidé nemusí znát historii roční kontroly.
+
+Pasivní provoz má tři znaky:
+
+- Pravidlo je u kanonického pracovního místa, ne v dočasné poznámce z kontroly.
+- Další aktivita vznikne jen z návratového signálu, ne z kalendářové nervozity.
+- Reálná data zůstávají v původních systémech a do shrnutí se přenáší jen obecný poznatek.
+
+První znak je o dohledatelnosti. Pokud pravidlo platí pro formulář, patří k formuláři. Pokud platí pro onboardingový e-mail, patří k šabloně e-mailu. Pokud platí pro obchodní kvalifikaci, patří do obchodního pracovního místa. Archiv roční kontroly může existovat, ale nesmí být jediným místem, kde člověk zjistí, co má udělat.
+
+Druhý znak je o rytmu. Po roční kontrole často vznikne chuť naplánovat další "pro jistotu" kontrolu za měsíc. Nedělejte to automaticky. Pokud druhé běžné použití fungovalo, stačí návratový signál. Pasivní pravidlo se má ozvat až tehdy, když se objeví problém, ne když se v kalendáři uvolní místo.
+
+Třetí znak je privacy-first brzda. Převod do pasivního provozu má snižovat datovou stopu, ne ji konzervovat. Zvláštní tabulky, screenshoty, exporty a kopie komunikace patří buď do kanonického systému, nebo pryč. Shrnutí pravidla má nést rozhodnutí, ne zákaznický materiál.
+
+### Převod bez ztráty kontextu
+
+Při převodu se často pletou dvě věci: ztratit kontext a přestat nosit kontext všude s sebou. Pasivní provoz nemá smazat důležité rozhodnutí. Má ho zkrátit tak, aby člověk u práce nemusel číst celou historii.
+
+Použijte tři vrstvy:
+
+- Pracovní věta: co člověk u místa skutečně potřebuje vědět.
+- Návratový signál: kdy se téma znovu otevře.
+- Archivní odkaz: kde leží delší historie, pokud ji někdo opravdu potřebuje.
+
+Pracovní věta má být krátká. U poptávkového formuláře může znít:
+
+```text
+V prvním kontaktu nesbíráme přesný rozpočet; nejdřív zjišťujeme cíl, rozhodovací proces a termín.
+```
+
+Návratový signál je konkrétnější:
+
+```text
+Téma znovu otevřeme, pokud tři relevantní poptávky za sebou nepůjde kvalifikovat bez ručního doptání na rozpočet.
+```
+
+Archivní odkaz může být jen odkaz na záznam roční kontroly nebo její jednověté uzavření. Nemá se z něj stát druhý zdroj pravdy. Pokud se pracovní věta a archiv liší, platí kanonické pracovní místo a archiv je potřeba opravit nebo označit jako historický.
+
+Codyho komentář: archiv je sklep, ne kuchyňská linka. Hodí se mít tam starší věci, ale pokud si pro hrnek musíte pokaždé dojít o patro níž, není to chytrá organizace. Je to jen drahý způsob, jak mít žízeň.
+
+### Praktický příklad převodu
+
+Roční kontrola potvrdila pravidlo pro SaaS onboarding. Původní problém byl, že tým chtěl po registraci sbírat příliš mnoho údajů "pro lepší segmentaci". Pravidlo po kontrole zní:
+
+```text
+V prvním onboardingu žádáme jen pracovní e-mail a název organizace. Velikost týmu, rozpočet a detailní obor doplňujeme až ve chvíli, kdy jsou potřeba pro konkrétní nastavení služby.
+```
+
+První i druhé běžné použití proběhlo bez nové evidence. Support našel pravidlo u onboardingové šablony, uživatel prošel prvním krokem bez rozšířeného dotazníku a obchodní kvalifikace proběhla později v hovoru.
+
+Převod do pasivního provozu:
+
+```text
+Pravidlo vracíme do pasivního provozu. U onboardingové šablony zůstává pracovní věta o minimálním sběru údajů, návratový signál je opakovaná nemožnost nastavit službu bez ručního doptání na velikost týmu. Rušíme dočasnou poznámku z roční kontroly a neponecháváme pomocnou tabulku případů.
+```
+
+Tady se nemění produktová strategie. Jen se uzavírá zvláštní pozornost. Výsledek je praktický: člověk u onboardingu ví, co má dělat, a tým nesbírá víc údajů jen proto, že by se jednou mohly hodit.
+
+Kdyby se při převodu ukázalo, že pracovní věta v šabloně chybí, neznamená to novou roční kontrolu. Znamená to lokální doplnění jedné věty. Kdyby se ukázalo, že pravidlo bez starého zápisu nikdo nenajde, stav není pasivní provoz, ale slabý přenos. Nejdřív opravte pracovní místo a až potom převádějte.
+
+### Privacy-first uzavření převodu
+
+Převod do pasivního provozu je ideální chvíle pro úklid datové stopy. Roční kontrola mohla vytvořit podpůrné poznámky, anonymizované příklady, screenshoty, výpisy případů nebo ruční seznamy. Při převodu se rozhoduje, co z toho má dál existovat.
+
+Použijte jednoduché pravidlo:
+
+```text
+V pasivním provozu zůstává jen to, co člověk potřebuje k dalšímu správnému rozhodnutí.
+```
+
+Typicky zůstane pracovní věta, návratový signál a případně zobecněný příklad. Nezůstává kopie zákaznické komunikace, export z CRM, screenshot administrace ani kontrolní tabulka "pro jistotu". Pokud je něco opravdu nutné uchovat kvůli účetnímu, právnímu nebo provoznímu důvodu, patří to do příslušného kanonického systému, ne do poznámek k e-bookové metodice.
+
+Dobrá privacy-first věta:
+
+```text
+Do pasivního provozu přenášíme jen zobecněný poznatek a návratový signál. Reálné případy zůstávají v původních systémech, dočasné exporty z kontroly mažeme.
+```
+
+Pokud si nejste jistí, zda pomocný podklad ponechat, zeptejte se obráceně:
+
+```text
+Jaké rozhodnutí by bez tohoto podkladu nešlo příště udělat?
+```
+
+Když odpověď není konkrétní, podklad nemá v pasivním provozu co dělat. Užitečná dokumentace snižuje budoucí práci. Zbytečná dokumentace zvyšuje budoucí podezření, že někde leží ještě něco dalšího.
+
+### Karta převodu do pasivního provozu
+
+```text
+Pravidlo nebo pracovní věta:
+
+Kanonické pracovní místo:
+
+Co potvrdilo druhé běžné použití:
+
+Stav převodu:
+- vráceno do pasivního provozu
+- nejdřív doplnit pracovní větu
+- nejdřív opravit dohledatelnost
+- oddělen nový signál
+
+Co zůstává u pracovního místa:
+
+Co přesouváme do archivu:
+
+Co mažeme, slučujeme nebo zobecňujeme:
+
+Reálná data zůstávají v:
+
+Další návratový signál:
+
+Další plánovaná kontrola:
+- žádná
+- jen konkrétní datum z provozního důvodu
+
+Vlastník pracovního místa:
+
+Datum převodu:
+```
+
+Pole "další plánovaná kontrola" je tam schválně. Nutí tým říct nahlas, zda opravdu plánuje další kontrolu. Ve většině případů má být odpověď "žádná". Pokud tam někdo napíše datum, měl by vedle něj stát provozní důvod, ne jen pocit, že zodpovědný tým kontroluje všechno častěji.
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: přečtěte jednověté uzavření druhého běžného použití.
+2. Minuta 2: určete kanonické pracovní místo, kde má pravidlo zůstat.
+3. Minuta 3: zkraťte výsledek na pracovní větu pro člověka u práce.
+4. Minuta 4: napište návratový signál.
+5. Minuta 5: rozhodněte, co se přesouvá do archivu.
+6. Minuta 6: smažte, slučte nebo zobecněte dočasné datové stopy.
+7. Minuta 7: napište, zda existuje další plánovaná kontrola; pokud ano, proč.
+
+Když workshop odhalí, že pravidlo nemá jasné pracovní místo, nepřevádějte ho do pasivního provozu. Nejdřív najděte místo, kde se rozhodnutí opravdu používá. Pasivní provoz bez pracovního místa je jen hezký název pro zapomenutou poznámku.
+
+### Checklist převodu do pasivního provozu
+
+- Je jasné, co druhé běžné použití potvrdilo?
+- Má pravidlo jedno kanonické pracovní místo?
+- Existuje krátká pracovní věta pro člověka u práce?
+- Je návratový signál konkrétní a rozpoznatelný?
+- Neplánujeme další kontrolu jen z opatrnosti?
+- Pokud plánujeme datum kontroly, je k němu konkrétní provozní důvod?
+- Je delší historie v archivu označená jako historie, ne jako druhý zdroj pravdy?
+- Nezůstaly bokem dočasné tabulky, screenshoty, exporty nebo kopie komunikace?
+- Reálná data zůstávají v původních systémech?
+- Do pasivního provozu přechází jen obecný poznatek, pracovní věta a návratový signál?
+- Ví vlastník pracovního místa, že mimořádný režim končí?
+- Umí nový člověk pravidlo použít bez čtení roční kontroly?
+
+Převod do pasivního provozu je dobrý, když z něj není cítit drama. Pravidlo je na místě, datová stopa je uklizená, návratový signál je známý a tým nemá další schůzku jen proto, aby oslavil, že nemá další schůzku. To je produktivita v její méně fotogenické, ale mnohem užitečnější podobě.
+
 ## Pracovní log
 
+- 2026-07-03: Doplněna úvodní podkapitola o převodu uzavřené roční kontroly zpět do pasivního provozu: pracovní věta, návratový signál, archivní odkaz, privacy-first úklid datové stopy, karta, mini workshop a checklist.
 - 2026-07-03: Doplněna úvodní podkapitola o uzavření druhého běžného použití po uzavřené roční kontrole: čtyři uzavírací stavy, praktický příklad, privacy-first práce s dočasnou datovou stopou, karta, mini workshop a checklist.
 - 2026-07-03: Doplněna úvodní podkapitola o druhém běžném použití po uzavřené roční kontrole: samostatnost pravidla bez čerstvé paměti, čtyři výsledky, praktický příklad, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-07-03: Doplněna úvodní podkapitola o uzavření prvního běžného použití po uzavřené roční kontrole: uzavírací stavy, praktické příklady, privacy-first ne-evidence, karta, mini workshop a checklist.
