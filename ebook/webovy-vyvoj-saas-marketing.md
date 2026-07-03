@@ -205,6 +205,8 @@ Uložte záznam tam, kde se podnět pravděpodobně vrátí: k formuláři, obch
 
 Neotevřený krok se někdy vrátí. To není chyba původního rozhodnutí. Dobrý záznam nemá téma navždy zamknout do sklepa; má zajistit, že se otevře až ve chvíli, kdy přijde lepší důvod než minule. Rozdíl je v tom, že návrat neznamená automatické spuštění původního návrhu. Znamená novou kontrolu: jestli se opravdu objevil návratový signál, jestli pořád platí stejná pracovní otázka a jestli lze otevřít menší krok než ten, který byl minule zamítnutý.
 
+Při návratu zároveň znovu ověřte datovou stopu. Téma se může vrátit se silnějším důkazem, ale pořád nemusí vyžadovat nové pole, delší retenci, další export nebo cizí analytický nástroj. Pokud existuje menší úprava bez sběru nových dat, má dostat přednost.
+
 Začněte proto větou:
 
 ```text
