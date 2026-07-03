@@ -288539,8 +288539,212 @@ Když během workshopu vznikne potřeba řešit širší problém, necpěte ho d
 
 Uzavření druhého běžného použití je moment, kdy tým přestane pravidlo držet za ruku. Pokud prošlo, patří do normální práce. Pokud neprošlo, zaslouží si jednu přesnou opravu nebo nový návratový signál. Všechno mezi tím je často jen provozní nerozhodnost v obleku pečlivosti.
 
+## Archivace pravidla po stabilním pasivním provozu
+
+Některá pravidla po roční kontrole, návratu do pasivního provozu a dvou běžných použitích přestanou potřebovat vlastní život. Ne proto, že by byla špatná. Naopak: splnila účel, propsala se do pracovního místa a už není důvod držet kolem ní samostatnou historii, návratové signály a kontrolní poznámky.
+
+Archivace pravidla není smazání paměti. Je to přesun z aktivního provozního rozhodnutí do stručné historické stopy. Tým tím říká: pravidlo už není samostatný objekt péče, ale jeho nejlepší část zůstává zabudovaná tam, kde se opravdu používá.
+
+Začněte otázkou:
+
+```text
+Potřebuje toto pravidlo ještě vlastní provozní kartu, nebo už stačí jeho pracovní věta v kanonickém místě?
+```
+
+Dobrá archivace vypadá třeba takto:
+
+```text
+Pravidlo o nesbírání velikosti týmu v prvním onboardingu archivujeme jako samostatné rozhodnutí. Pracovní věta zůstává u onboardingové šablony, návratový signál zůstává v poznámce šablony a historickou kartu nahrazujeme krátkým odkazem. Dočasné kontrolní poznámky mažeme nebo zobecňujeme.
+```
+
+Tahle věta má tři důležité části. Říká, co se archivuje, co zůstává v běžném pracovním místě a co se uklízí. Bez těchto tří částí se archivace snadno zvrhne do jednoho ze dvou extrémů: buď tým pravidlo smaže moc tvrdě a ztratí důvod, nebo ho nechá celé žít dál a jen mu nalepí cedulku "archiv".
+
+### Kdy archivaci otevřít
+
+Archivaci otevírejte jen tehdy, když pravidlo splní všechny čtyři podmínky:
+
+- Poslední běžná použití proběhla bez mimořádné pomoci.
+- Kanonické pracovní místo obsahuje aktuální pracovní větu.
+- Návratový signál je krátký, pochopitelný a uložený u pracovního místa.
+- Samostatná karta pravidla už nepřináší rozhodovací hodnotu.
+
+Pokud chybí první podmínka, nejste u archivace, ale u opravy pravidla. Pokud chybí druhá, nejdřív opravte pracovní místo. Pokud chybí třetí, zkraťte návratový signál. Pokud chybí čtvrtá, nechte kartu ještě žít, ale zapište proč. Archivace není odměna za pořádek. Je to praktické rozhodnutí, že další samostatná evidence už nepomáhá.
+
+Pozor na archivaci z únavy. Věta "už se nám to nechce držet" není důvod. Důvod zní spíš: "pravidlo se používá samostatně, jeho pracovní věta je na správném místě a samostatná historie už není potřeba pro žádné dnešní rozhodnutí." Rozdíl je malý v textu a velký v provozu.
+
+### Co musí zůstat
+
+Po archivaci nesmí zmizet všechno. Zůstat mají tři malé věci:
+
+- Pracovní věta v místě použití.
+- Návratový signál u stejného místa.
+- Krátký historický odkaz, pokud by někdo potřeboval pochopit původ rozhodnutí.
+
+Pracovní věta má být použitelná bez archivu:
+
+```text
+V prvním onboardingu se na velikost týmu neptáme, pokud ji nepotřebujeme k nastavení účtu.
+```
+
+Návratový signál má být stejně praktický:
+
+```text
+K otázce se vrátíme pouze pokud bez velikosti týmu nepůjde dokončit konkrétní nastavení účtu nebo pokud se otázka znovu objeví ve dvou nových šablonách.
+```
+
+Historický odkaz má být krátký:
+
+```text
+Původ rozhodnutí: archivovaná karta "velikost týmu v onboardingu", 2026-07.
+```
+
+To stačí. Nepřepisujte celý příběh pravidla do šablony. Kanonické místo má pomáhat člověku při práci, ne ho nutit číst archeologii rozhodování. Codyho komentář: když potřebujete tři odstavce historie, aby někdo nepřidal jedno pole do formuláře, problém možná není v historii, ale ve větě, kterou jste nechali u formuláře.
+
+### Co se uklízí
+
+Archivace má praktický úklidový dopad. Zkontrolujte:
+
+- dočasné kontrolní poznámky,
+- kopie zákaznických odpovědí,
+- screenshoty formulářů,
+- exporty z onboardingů nebo supportu,
+- pomocné tabulky,
+- duplicitní odkazy ve starých rozcestnících,
+- připomínky v kalendáři nebo projektovém nástroji.
+
+U každé položky rozhodněte jednu ze tří možností:
+
+- Smazat: položka už není potřeba a neexistuje zákonný, smluvní ani provozní důvod ji držet.
+- Zobecnit: konkrétní osobní nebo obchodní detail nahradit anonymním shrnutím.
+- Přesunout do kanonického místa: pouze pokud položka opravdu pomáhá běžnému použití.
+
+Nejčastější chyba je čtvrtá nevyřčená možnost: "necháme to tam, kdyby něco". To není archivace. To je sklepení. Privacy-first provoz potřebuje opačný reflex: pokud data nepomáhají současnému rozhodnutí, nemají jen tak ležet v pomocném dokumentu.
+
+### Praktický příklad
+
+```text
+Pravidlo:
+V prvním onboardingu se neptáme na velikost týmu, pokud ji nepotřebujeme k nastavení účtu.
+
+Stav před archivací:
+Pravidlo prošlo roční kontrolou, návratem do pasivního provozu a dvěma běžnými použitími. V obou použitích ho lidé našli u onboardingové šablony bez pomoci archivu.
+
+Co archivujeme:
+Samostatnou provozní kartu pravidla a dočasné poznámky z kontrol.
+
+Co ponecháváme:
+Jednu pracovní větu u onboardingové šablony, návratový signál a krátký historický odkaz.
+
+Co mažeme nebo zobecňujeme:
+Konkrétní kopie odpovědí z prvního ověření nahrazujeme větou "ověřeno na dvou běžných použitích bez potřeby sběru velikosti týmu".
+
+Co dál nesbíráme:
+Velikost týmu v prvním kroku, seznam použití pravidla, pomocné segmentační štítky ani export onboardingových odpovědí.
+```
+
+Slabší archivace:
+
+```text
+Archivujeme pravidlo, ale necháváme všechny kontrolní poznámky, protože by se mohly hodit.
+```
+
+Tady se ve skutečnosti nic nearchivovalo. Jen se změnil název složky. Pokud poznámky opravdu mohou být potřeba, napište přesně k čemu, kdo je použije a kdy se znovu rozhodne o jejich smazání. Pokud to neumíte, pravděpodobně nemají zůstat.
+
+### Privacy-first archivace
+
+Archivace je silný privacy-first moment, protože tým může konečně uklidit data, která vznikla jen kvůli ověřování pravidla. Během aktivní práce někdy dočasně držíte detailnější podklady, abyste neudělali ukvapené rozhodnutí. Jakmile je rozhodnutí stabilní a pravidlo funguje v běžné práci, důvod pro detailní podklady mizí.
+
+Použijte krátkou větu:
+
+```text
+Po archivaci pravidla ponecháváme pouze data, která jsou nutná pro běžné použití nebo doložení samotného rozhodnutí.
+```
+
+Pak ji převeďte do konkrétního seznamu:
+
+```text
+Ponecháváme:
+Pracovní větu, návratový signál a historický odkaz.
+
+Zobecňujeme:
+Kontrolní poznámku z ověření na jednu anonymní větu.
+
+Mažeme:
+Kopie konkrétních onboardingových odpovědí a pomocný seznam použití.
+
+Dál nesbíráme:
+Velikost týmu, nový segmentační atribut ani behaviorální sledování onboardingu.
+```
+
+Tím archivace chrání dvě věci najednou: paměť rozhodnutí a malé množství dat. Nejde o asketické mazání všeho. Jde o dospělý provoz, kde každá stopa ví, proč existuje.
+
+### Karta archivace pravidla
+
+```text
+Pravidlo nebo pracovní věta:
+
+Kanonické pracovní místo:
+
+Důvod archivace:
+
+Poslední dvě běžná použití:
+
+Co archivujeme jako samostatnou kartu:
+
+Co ponecháváme v pracovním místě:
+
+Návratový signál po archivaci:
+
+Krátký historický odkaz:
+
+Co mažeme:
+
+Co zobecňujeme:
+
+Co výslovně nepřesouváme do nové evidence:
+
+Dál nesbíráme:
+
+Kde je archivní stopa uložená:
+
+Vlastník:
+
+Datum:
+```
+
+Karta archivace má být poslední karta, ne začátek nové evidence archivovaných pravidel s měsíční kontrolou, barevnými štítky a pocitem produktivity. Pokud potřebujete seznam archivovaných pravidel, držte ho jako rejstřík odkazů, ne jako další proces.
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: přečtěte pracovní větu a kanonické místo.
+2. Minuta 2: ověřte poslední dvě běžná použití.
+3. Minuta 3: rozhodněte, zda samostatná karta ještě přináší rozhodovací hodnotu.
+4. Minuta 4: napište, co zůstává v pracovním místě.
+5. Minuta 5: napište návratový signál po archivaci.
+6. Minuta 6: smažte nebo zobecněte dočasné podklady.
+7. Minuta 7: uložte krátký historický odkaz a zavřete archivaci.
+
+Když se během workshopu ukáže, že lidé pravidlo pořád hledají ve staré kartě, archivaci odložte. Nejdřív opravte kanonické místo. Archivovat pravidlo, které ještě neumí žít tam, kde se používá, je jen pěkně popsané zametení problému pod koberec.
+
+### Checklist archivace pravidla
+
+- Proběhla poslední běžná použití bez mimořádné pomoci?
+- Je pracovní věta v kanonickém pracovním místě?
+- Je návratový signál krátký a uložený u pracovního místa?
+- Přináší samostatná karta ještě rozhodovací hodnotu?
+- Je jasné, co se archivuje a co zůstává aktivní?
+- Nezůstává archiv jako paralelní zdroj pravdy?
+- Smazali jsme nebo zobecnili dočasné podklady?
+- Nepřesouváme konkrétní osobní nebo obchodní data do nové evidence?
+- Je historický odkaz dost krátký, aby nerušil běžnou práci?
+- Ví vlastník, že další otevření má přijít až přes návratový signál?
+- Je výslovně napsané, co dál nesbíráme?
+
+Archivace pravidla je tichý konec dobré provozní práce. Žádný ohňostroj, žádný nový dashboard, žádná slavnostní schůzka. Jen přesná pracovní věta na správném místě, uklizená datová stopa a tým, který už nepotřebuje držet pravidlo v ruce, aby ho uměl použít.
+
 ## Pracovní log
 
+- 2026-07-03: Doplněna úvodní podkapitola o archivaci pravidla po stabilním pasivním provozu: podmínky archivace, ponechané pracovní věty, úklid dočasných podkladů, privacy-first archivace, karta, mini workshop a checklist.
 - 2026-07-03: Doplněna úvodní podkapitola o uzavření druhého běžného použití po návratu roční kontroly do pasivního provozu: uzavírací stavy, onboardingový příklad, privacy-first ukončení mimořádné datové stopy, karta, mini workshop a checklist.
 - 2026-07-03: Doplněna úvodní podkapitola o druhém běžném použití po návratu roční kontroly do pasivního provozu: kdy ho přeskočit, kontrolní otázky, čtyři výsledky, privacy-first uzavření, karta, mini workshop a checklist.
 - 2026-07-03: Doplněna úvodní podkapitola o uzavření prvního běžného použití po návratu roční kontroly do pasivního provozu: uzavírací stavy, praktický onboardingový příklad, privacy-first uzavření bez nové evidence, karta, mini workshop a checklist.
