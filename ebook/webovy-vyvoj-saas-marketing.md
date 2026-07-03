@@ -290039,8 +290039,184 @@ Workshop nemá hledat další možné návraty. Má zavřít tento jeden. Pokud 
 
 Uzavření prvního návratu z dlouhodobého klidu má jednu hlavní ambici: nedovolit, aby se návrat stal novým provozním režimem. Buď pravidlo dál odpočívá, nebo dostane malou lokální hranu, nebo se od něj oddělí nový problém. Všechny tři dobré výsledky mají společnou vlastnost: čtenář, tým i systém vědí, co se změnilo, co se nezměnilo a proč kvůli tomu nevzniká další zbytečná datová stopa.
 
+## První běžné použití po uzavření návratu z dlouhodobého klidu
+
+Po uzavření prvního návratu přichází nenápadný, ale důležitý test: co se stane při prvním běžném použití. Už nejste v režimu návratu, workshopu ani mimořádné kontroly. Pravidlo se má vrátit do práce. Pokud byla doplněna lokální hrana, má být najitelná tam, kde ji člověk potřebuje. Pokud návrat skončil bez změny, má být jasné, že se nic dalšího nesleduje. Pokud vznikl nový výchozí bod, nemá se potichu míchat zpátky do starého archivu.
+
+První běžné použití po návratu proto neověřuje celou historii pravidla. Ověřuje jen to, zda uzavření opravdu přešlo do provozu. Dobrá otázka zní:
+
+```text
+Dokáže člověk při běžné práci použít aktuální závěr bez otevírání návratové karty?
+```
+
+Pokud odpověď zní ano, pravidlo se nechá pracovat. Pokud ne, neopravujte hned celé pravidlo. Nejdřív hledejte nejbližší slabé místo: chybí věta u šablony, odkaz u pracovního místa, jasné rozlišení mezi starým archivem a novou hranou, nebo privacy-first úklid po návratu?
+
+### Co první použití ověřuje
+
+První běžné použití má čtyři úzké kontroly:
+
+- Závěr je u pracovního místa, kde vzniká rozhodnutí.
+- Člověk pozná, zda používá staré pravidlo, doplněnou hranu, nebo nový výchozí bod.
+- Původní archiv se neotevírá ze zvyku.
+- Nevzniká nová evidence jen proto, že návrat byl nedávno čerstvý.
+
+První bod je o umístění. Pokud se návrat týkal support follow-upu, musí být závěr u support šablony, interního checklistu nebo krátkého pracovního pravidla. Záznam v dlouhé rozhodovací kartě je dobrý pro historii, ale slabý pro člověka, který právě odpovídá zákazníkovi.
+
+Druhý bod je o rozlišování vrstev. Starý archiv, lokální hrana a nový výchozí bod nejsou totéž. Když se smíchají, člověk může z lokální support věty udělat obecné formulářové pravidlo. To je přesně ten typ nenápadného posunu, který z jednoho rozumného návratu vyrobí širší sběr dat.
+
+Třetí bod chrání klid. Archiv se nemá otevírat pokaždé, když se objeví podobné slovo. Pokud pracovní věta stačí, archiv zůstává zavřený. Jinak dlouhodobý klid není klid, ale jen pomalé procházení starých poznámek s lepším názvem.
+
+Čtvrtý bod je privacy-first brzda. Po návratu může být lákavé začít sledovat, kolikrát se nová hrana použila, kdo ji použil a s jakým výsledkem. Pokud z toho neplyne konkrétní rozhodnutí, nesledujte to. Jedno běžné použití není důvod zakládat další tabulku. Tabulky umí vypadat produktivně i ve chvíli, kdy jen chovají data, která nikdo nepotřebuje.
+
+### Praktický příklad
+
+Uzavřený návrat:
+
+```text
+Do support pracovního místa doplňujeme větu:
+u asistované migrace se na velikost týmu ptáme jen v daném vlákně, pokud je nutná pro nastavení, a odpověď nepřevádíme do plošného profilu zákazníka.
+
+Původní onboardingové pravidlo zůstává v dlouhodobém klidu.
+```
+
+První běžné použití:
+
+```text
+Situace:
+Support řeší novou asistovanou migraci a potřebuje vědět, jestli velikost týmu ovlivní nastavení.
+
+Použití:
+Operátor najde větu u support šablony, zeptá se v konkrétním vlákně a odpověď použije jen pro nastavení migrace.
+
+Výsledek:
+Archiv k onboardingovému formuláři se neotevřel. Nevznikl nový atribut účtu ani CRM segment.
+
+Závěr:
+Lokální hrana funguje samostatně. Pravidlo zůstává v běžném support pracovním místě.
+```
+
+Slabší varianta:
+
+```text
+Situace:
+Operátor ví, že existovalo staré rozhodnutí, ale nenajde support větu a otevře archiv onboardingového pravidla.
+
+Problém:
+Závěr je věcně správný, ale není dost blízko pracovnímu místu.
+
+Lokální oprava:
+Support šablona dostává jednu viditelnou větu a odkaz na stručný závěr. Archiv zůstává zavřený pro běžné použití.
+
+Co neotevíráme:
+Nové pole ve formuláři, CRM atribut, měření všech migrací ani revizi onboardingového pravidla.
+```
+
+V obou případech zůstává práce malá. První běžné použití buď potvrdí, že uzavření návratu přešlo do provozu, nebo ukáže nejbližší chybějící kotvu. Nemá ambici znovu rozhodovat o celém tématu.
+
+### Čtyři výsledky prvního použití
+
+Po prvním běžném použití vyberte jeden ze čtyř výsledků:
+
+- Funguje samostatně: pracovní místo obsahuje potřebnou větu a archiv zůstává zavřený.
+- Chybí kotva: závěr je správný, ale člověk ho nenašel tam, kde pracoval.
+- Chybí hranice: člověk našel závěr, ale nepoznal, co už by bylo rozšíření rozsahu.
+- Vzniká skrytá evidence: použití pravidla začalo vyrábět nová data bez jasného účelu.
+
+U samostatného použití nic nepřidávejte. Zapište krátké potvrzení jen tehdy, když je to první použití doplněné hrany. Pak pravidlo vraťte do běžné práce.
+
+U chybějící kotvy přesuňte závěr blíž k místu použití. Oprava má být odkaz, jedna věta nebo drobná úprava šablony. Pokud kvůli chybějící kotvě otevíráte nový proces, oprava už je větší než problém.
+
+U chybějící hranice doplňte, co se výslovně neotevírá. Například: "Tato věta platí jen pro asistovanou migraci; první onboardingový formulář ani profil zákazníka se nemění." Suché? Ano. Použitelné? Také ano, což je v práci příjemně zásadní detail.
+
+U skryté evidence se zastavte hned. Pokud si někdo začal vést pomocný seznam všech migrací s velikostí týmu, zeptejte se, jaké rozhodnutí z něj vznikne. Pokud žádné, seznam končí. Poznatek patří do pravidla, ne do nové databáze.
+
+### Privacy-first kontrola
+
+První běžné použití po návratu je poslední místo, kde se dá snadno zachytit datové rozšíření dřív, než se stane zvykem. Položte si tři otázky:
+
+```text
+Vznikl při použití nový údaj mimo původní pracovní zdroj?
+
+Potřebujeme ho pro další rozhodnutí, nebo stačí v původní komunikaci?
+
+Máme jasně napsané, že z použití nevzniká plošné pole, segment, export ani tracker?
+```
+
+V support příkladu může velikost týmu zůstat v konkrétním migračním vlákně, pokud je nutná pro nastavení služby. Není nutné ji převádět do profilu zákazníka, pokud podle ní neřídíte další provoz. Privacy-first přístup tady nebrání obsloužit zákazníka. Brání tomu, aby se jednorázová servisní informace proměnila v trvalý atribut jen proto, že někdo měl po ruce kolonku.
+
+### Karta prvního běžného použití po návratu
+
+```text
+Uzavřený návrat:
+
+Pracovní místo:
+
+První běžná situace:
+
+Co měl člověk najít:
+
+Našel to bez archivu?
+- ano
+- ne
+- jen s pomocí
+
+Šlo podle závěru rozhodnout?
+- ano
+- ne, chyběla kotva
+- ne, chyběla hranice
+
+Co se opravdu použilo:
+
+Co zůstalo v dlouhodobém klidu:
+
+Co výslovně neotevíráme:
+
+Vznikla nová datová stopa?
+
+Co s ní děláme:
+
+Výsledek:
+- funguje samostatně
+- doplnit kotvu
+- doplnit hranici
+- zastavit skrytou evidenci
+
+Vlastník:
+
+Datum:
+```
+
+Kartu používejte jen pro první běžné použití po uzavřeném návratu nebo po doplněné hraně. Nemá z ní vzniknout registr všech budoucích použití. Když pravidlo funguje, vraťte ho do práce. Když nefunguje, opravte nejbližší větu.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: pojmenujte běžnou situaci, ve které se pravidlo použilo.
+2. Minuta 2: ověřte, jestli člověk našel závěr bez otevření archivu.
+3. Minuta 3: řekněte, zda podle závěru šlo rozhodnout.
+4. Minuta 4: napište, co zůstalo v dlouhodobém klidu.
+5. Minuta 5: zkontrolujte novou nebo skrytou datovou stopu.
+6. Minuta 6: vyberte jeden výsledek a případnou lokální opravu.
+
+Pokud se během šesti minut objeví širší debata o původním pravidle, zastavte ji. První běžné použití není revize archivu. Je to kontrola, jestli uzavření návratu funguje v normální práci.
+
+### Checklist prvního použití po návratu
+
+- Je popsaná konkrétní běžná situace?
+- Byl závěr dostupný u pracovního místa?
+- Šlo rozhodnout bez otevření archivu?
+- Je jasné, co je doplněná lokální hrana a co je původní archivované pravidlo?
+- Zůstává dlouhodobý klid opravdu klidem?
+- Je výslovně napsané, co se neotevírá?
+- Nevznikl nový formulářový údaj, CRM atribut, export, tracker ani pomocná tabulka bez rozhodovacího účelu?
+- Pokud vznikla datová stopa, zůstává v původním zdroji nebo má jasný konec?
+- Případná oprava je lokální a nejbližší pracovnímu místu?
+- Není z prvního použití zakládaný nový pravidelný dohled?
+
+První běžné použití po uzavření návratu z dlouhodobého klidu má jednoduchý cíl: ověřit, že návrat nezaložil nový režim. Buď pravidlo dál klidně funguje, nebo dostane jednu blízkou oporu. V obou případech zůstává důležité totéž: archiv se neotevírá bez důvodu a data nevznikají jen proto, že by se jednou možná mohla hodit.
+
 ## Pracovní log
 
+- 2026-07-03: Doplněna úvodní podkapitola o prvním běžném použití po uzavření návratu z dlouhodobého klidu: ověření pracovního místa bez otevírání archivu, čtyři výsledky, support příklad, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-07-03: Doplněna úvodní podkapitola o uzavření prvního návratu z dlouhodobého klidu: čtyři uzavírací stavy, praktický support příklad, privacy-first úklid návratových stop, karta, mini workshop a checklist.
 - 2026-07-03: Doplněna úvodní podkapitola o prvním návratu z dlouhodobého klidu: návratový signál, tři otázky návratu, čtyři výsledky, privacy-first brzda, karta, mini workshop a checklist.
 - 2026-07-03: Doplněna úvodní podkapitola o převodu ověřeného archivovaného pravidla do dlouhodobého klidu: klidová věta, aktivní a archivní minimum, privacy-first úklid pomocných stop, karta, mini workshop a checklist.
