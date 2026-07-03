@@ -290780,8 +290780,132 @@ Pokud se tým zasekne na minutě 3, nejspíš nemá společný obraz výsledku. 
 
 Uzavření druhého běžného použití má vrátit pravidlo do klidu. Pokud pravidlo funguje, nechte ho být. Pokud potřebuje drobnou opravu, opravte nejbližší místo. Pokud ukázalo nový opakovaný problém, otevřete novou malou smyčku. Všechno ostatní je většinou jen elegantní způsob, jak si přidat práci a datovou stopu, kterou pak někdo bude slavnostně uklízet za půl roku.
 
+## Převod potvrzeného pravidla zpět do dlouhodobého klidu
+
+Po uzavřeném druhém běžném použití už pravidlo nepotřebuje mimořádnou péči. Tým má dost důkazů, že se dá použít bez čerstvého vysvětlování, bez přídavné evidence a bez nového dohledového rytmu. Teď je potřeba udělat poslední krok, který se často podceňuje: převést pravidlo zpět do dlouhodobého klidu.
+
+Dlouhodobý klid neznamená zapomenutí. Znamená, že pravidlo má své kanonické místo, jasnou pracovní větu, návratový signál a žádné skryté pomocné procesy kolem. Když se k němu někdo vrátí za měsíc nebo za půl roku, má najít použitelný stav, ne archeologické naleziště z poslední kontroly. Ano, archeologie je krásná věda. Jen ji nechcete provozovat pokaždé, když někdo hledá, jak odpovědět zákazníkovi.
+
+Převod začněte jednou větou:
+
+```text
+Pravidlo vracíme do dlouhodobého klidu, protože po návratu prošlo dvěma běžnými použitími bez potřeby nové mimořádné péče.
+```
+
+Tato věta má dvě funkce. Jednak uzavírá poslední ověřovací smyčku. Jednak brání tomu, aby se z pravidla stal permanentní projekt. Pokud pravidlo obstálo, nemá dál vyrábět schůzky, kontrolní tabulky ani interní připomínky. Má prostě tiše fungovat.
+
+### Co musí zůstat v aktivním místě
+
+V aktivním pracovním místě nechte jen to, co člověk potřebuje při běžném použití. Typicky:
+
+- jednu pracovní větu pravidla,
+- nejbližší příklad použití,
+- návratový signál,
+- vlastníka pravidla nebo týmovou roli,
+- odkaz na historickou kartu, pokud je opravdu potřeba.
+
+Všechno ostatní patří pryč z hlavní cesty. Dočasné poznámky, srovnávací tabulky, screenshoty, exporty, pomocné seznamy, staré varianty textů a průběžné komentáře nemají být vedle pravidla jen proto, že kdysi pomohly. Pokud jsou pořád užitečné, zobecněte je. Pokud nejsou, smažte je nebo archivujte mimo běžnou trasu s jasným důvodem.
+
+Praktické pravidlo: člověk, který pravidlo používá poprvé, nemá poznat, že předtím proběhla mimořádná smyčka. Má poznat jen aktuální rozhodnutí.
+
+### Praktický příklad
+
+Představte si SaaS, kde se po dlouhém klidu vrátilo pravidlo pro ruční kontrolu exportu zákaznických dat. Návrat ukázal, že stará věta byla pořád správná, ale nebyla dobře vidět v support šabloně. Tým upravil šablonu, ověřil první běžné použití a pak druhé běžné použití. Obě proběhla bez eskalace.
+
+Špatné uzavření by vypadalo takto:
+
+```text
+Necháme ještě měsíc kontrolní sheet, kdyby se to znovu objevilo.
+```
+
+To zní opatrně, ale ve skutečnosti to prodlužuje mimořádný režim. Vzniká nová evidence, někdo ji musí hlídat a časem nebude jasné, jestli je pořád aktivní.
+
+Lepší uzavření:
+
+```text
+Pravidlo vracíme do dlouhodobého klidu. V support šabloně zůstává věta: "Export zákaznických dat ručně ověřujeme jen při změně rozsahu, příjemce nebo formátu." Návratový signál: dvě nejasné žádosti o export za sebou, u kterých support nepozná, zda jde o stejný rozsah jako minule. Dočasný kontrolní sheet mažeme, protože druhé běžné použití nepotvrdilo potřebu další evidence.
+```
+
+Tím je hotovo víc než jen text. Tým ví, kde pravidlo žije, kdy se má vrátit, co se nemaže z paměti a co se naopak nemaže jen ze sentimentu. To poslední je důležité. Sentimentální tabulky jsou takové ty dokumenty, které nikdo nechce vlastnit, ale každý se bojí smazat. Velmi lidské. Provozově dost drahé.
+
+### Privacy-first převod
+
+Převod do dlouhodobého klidu je privacy-first příležitost, protože zavírá dočasnou datovou stopu. Při návratech a ověřování často vznikají pomocné podklady: seznam problematických případů, kopie ticketů, výřezy z CRM, screenshoty formulářů, ruční poznámky z callů nebo exporty pro porovnání. Část z nich byla během kontroly legitimní. Po uzavření už ale často nemá důvod existovat.
+
+Položte si čtyři otázky:
+
+- Jaké dočasné podklady vznikly jen kvůli návratu pravidla?
+- Obsahují osobní údaje, obchodní detaily nebo chování uživatelů?
+- Potřebujeme je pro běžné použití pravidla?
+- Pokud ano, stačí je zobecnit do příkladu bez identifikovatelných dat?
+
+Privacy-first výsledek má být konkrétní:
+
+```text
+Po převodu ponecháváme jen zobecněný příklad v support šabloně. Mažeme dočasný seznam tří ticketů a lokální kopii exportu. Nevytváříme nový dashboard, novou retenci ani další ruční kontrolní evidenci.
+```
+
+Takový zápis je lepší než obecné "data uklizena". Říká, co se opravdu stalo a co se záměrně nestalo. To je pro evropský provoz důležité: datová střídmost není nálada, ale opakovatelný pracovní postup.
+
+### Karta převodu do dlouhodobého klidu
+
+```text
+Pravidlo:
+
+Proč ho vracíme do dlouhodobého klidu:
+
+Kanonické pracovní místo:
+
+Aktuální pracovní věta pravidla:
+
+Nejbližší příklad použití:
+
+Návratový signál:
+
+Co zůstává v aktivním místě:
+
+Co přesouváme do archivu:
+
+Co mažeme nebo zobecňujeme:
+
+Jaká data, exporty, seznamy, screenshoty nebo pomocné evidence dál nevznikají:
+
+Vlastník:
+
+Datum převodu:
+```
+
+Kartu nepište jako závěrečnou zprávu o celé historii. Má být servisní štítek na dveřích: tady pravidlo najdete, takhle se používá, takhle se pozná, že se má znovu otevřít. Historie může být odkazem, ne hlavním textem.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: napište jednovětý důvod převodu.
+2. Minuta 2: potvrďte kanonické pracovní místo.
+3. Minuta 3: zkraťte pravidlo do aktuální pracovní věty.
+4. Minuta 4: napište návratový signál.
+5. Minuta 5: rozhodněte, které dočasné podklady se mažou, zobecňují nebo archivují.
+6. Minuta 6: zapište, jaká nová evidence dál nevzniká.
+
+Pokud se během workshopu objeví potřeba další kontroly, neprodlužujte převod automaticky. Nejdřív se zeptejte, zda jde o skutečný návratový signál, nebo jen o nechuť zavřít práci. Druhá varianta je běžná. Mozek má rád otevřené pojistky. Produktový provoz už méně.
+
+### Checklist převodu zpět do klidu
+
+- Je jasné, proč pravidlo může zpět do dlouhodobého klidu?
+- Proběhla dvě běžná použití bez potřeby mimořádné péče?
+- Má pravidlo jedno kanonické pracovní místo?
+- Je pracovní věta krátká a použitelná bez historického vysvětlování?
+- Je zapsaný návratový signál?
+- Zůstává v aktivním místě jen to, co člověk potřebuje při běžném použití?
+- Jsou dočasné podklady smazané, zobecněné nebo přesunuté mimo hlavní trasu?
+- Je jasné, jaká data, exporty, seznamy, screenshoty nebo kontrolní evidence dál nevznikají?
+- Nevzniká nový dohled jen kvůli pocitu jistoty?
+- Umí nový člen týmu pravidlo použít bez čtení celé návratové historie?
+
+Převod do dlouhodobého klidu je dobrý konec malé produktové smyčky. Ne heroický, ne hlučný, bez konfety. Pravidlo prostě funguje, má své místo a nevyžaduje další pozornost. Přesně tak má vypadat provoz, který chrání čas týmu i data zákazníků.
+
 ## Pracovní log
 
+- 2026-07-03: Doplněna úvodní podkapitola o převodu potvrzeného pravidla zpět do dlouhodobého klidu: kanonické pracovní místo, pracovní věta, návratový signál, privacy-first úklid dočasných stop, karta, mini workshop a checklist.
 - 2026-07-03: Doplněna úvodní podkapitola o uzavření druhého běžného použití po uzavření návratu z dlouhodobého klidu: čtyři uzavírací stavy, support příklady, privacy-first úklid dočasných stop, karta, mini workshop a checklist.
 - 2026-07-03: Doplněna úvodní podkapitola o druhém běžném použití po uzavření návratu z dlouhodobého klidu: přenositelnost pravidla bez čerstvé paměti, kdy druhé použití otevírat, support příklad, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-07-03: Doplněna úvodní podkapitola o uzavření prvního běžného použití po uzavření návratu z dlouhodobého klidu: čtyři uzavírací stavy, praktický support příklad, privacy-first ukončení skryté evidence, karta, mini workshop a checklist.
