@@ -288927,8 +288927,175 @@ Pokud se během workshopu začne řešit celý archiv, zastavte se. Otázka nezn
 
 První běžné použití po archivaci má být krátký test reality. Pokud projde, nechte pravidlo žít v pracovním místě a archiv v klidu. Pokud neprojde, opravte nejbližší příčinu: cestu, větu nebo příliš tvrdé odstranění kontextu. Všechno ostatní je často jen chuť znovu držet pod kontrolou věc, kterou jste už správně pustili.
 
+## Uzavření prvního běžného použití po archivaci pravidla
+
+První běžné použití po archivaci pravidla je hotové až ve chvíli, kdy tým ví, co se s výsledkem stane dál. Nestačí říct "použili jsme to". Potřebujete uzavřít, jestli archivace obstála, jestli stačí malá lokální oprava, nebo jestli jste z pracovního místa odstranili moc kontextu. Bez uzavření zůstane po prvním použití měkký neklid: někdo si bude pamatovat, že to "nějak šlo", jiný začne pro jistotu držet vlastní poznámku a archiv se nenápadně vrátí do provozu zadními dveřmi. To je přesně ten typ interního cirkusu, který nevypadá dramaticky, ale časem sežere spoustu pozornosti.
+
+Uzavření má být krátké. Jeho cílem není znovu hodnotit celé pravidlo, původní rozhodnutí ani historii archivace. Cílem je převést jeden reálný průchod do jednoho pracovního stavu. Ten stav pak rozhodne, jestli se nic nedělá, opraví se nejbližší cesta, zpřesní se pracovní věta, nebo se velmi úzce vrátí část archivovaného kontextu.
+
+Začněte větou:
+
+```text
+První běžné použití po archivaci uzavíráme tímto stavem:
+```
+
+Dobrá uzavírací věta vypadá například takto:
+
+```text
+První běžné použití po archivaci uzavíráme stavem "funguje bez zásahu": pracovní věta u onboardingové šablony stačila k rozhodnutí a archivovaná karta zůstala zavřená.
+```
+
+To je celé. Není potřeba z toho dělat samostatný report. Pokud výsledek nevyžaduje opravu, uzavření může zůstat jen u pracovního místa nebo v krátkém changelogu. Pokud opravu vyžaduje, uzavření musí říct, co přesně se opravuje a co se výslovně neotevírá.
+
+### Čtyři uzavírací stavy
+
+Vyberte jeden z těchto stavů:
+
+- Stabilní: pracovní věta byla najitelná, rozhodovací a archiv zůstal zavřený.
+- Lokální navigační oprava: pravidlo bylo správné, ale cesta k němu byla slabá.
+- Lokální obsahová oprava: pravidlo bylo na správném místě, ale věta nebyla dost konkrétní.
+- Částečný návrat kontextu: archivace odstranila informaci, která je pro běžné rozhodnutí pořád nutná.
+
+`Stabilní` znamená, že další práce nevzniká. Nepřidávejte kontrolní úkol jen proto, že první použití dopadlo dobře. Ticho je tady výsledek, ne zanedbání.
+
+`Lokální navigační oprava` má mířit na nejbližší dveře k pravidlu. Typicky přidáte odkaz do checklistu, přejmenujete sekci, přesunete větu blíž k formuláři nebo zkrátíte cestu v rozcestníku. Neměňte obsah pravidla, pokud problém byl jen v nalezení.
+
+`Lokální obsahová oprava` má zpřesnit rozhodnutí, ne rozepsat minulost. Pracovní věta má pořád zůstat věta. Pokud potřebujete odstavec, raději přidejte krátký příklad vedle věty a starý archiv nechte zavřený.
+
+`Částečný návrat kontextu` je nejcitlivější stav. Použijte ho jen tehdy, když bez malé části historie nejde bezpečně rozhodnout. Nevracejte celou kartu, staré podklady ani detailní evidenci. Vraťte jen informaci, která má běžnou rozhodovací hodnotu.
+
+### Praktický příklad uzavření
+
+```text
+Situace:
+Produkt upravuje první onboardingový formulář pro nový segment.
+
+Archivované pravidlo:
+V prvním onboardingu se neptáme na velikost týmu, pokud ji nepotřebujeme k nastavení účtu.
+
+Průběh:
+Člověk našel pracovní větu přímo u šablony formuláře, otázku na velikost týmu nepřidal a archivovanou kartu neotevřel.
+
+Uzavírací stav:
+Stabilní.
+
+Uzavírací věta:
+První běžné použití po archivaci proběhlo bez zásahu; pracovní věta u formulářové šablony stačila k rozhodnutí.
+
+Co dál neděláme:
+Nezakládáme evidenci použití pravidla, neotevíráme archivovanou kartu a neplánujeme druhé mimořádné ověření.
+
+Co dál nesbíráme:
+Velikost týmu v prvním kroku, pomocné segmentační štítky ani kopie onboardingových odpovědí.
+```
+
+Jiný výsledek:
+
+```text
+Situace:
+Obchod připravuje variantu onboardingového dotazníku a pravidlo našel až přes starý archivní odkaz.
+
+Uzavírací stav:
+Lokální navigační oprava.
+
+Oprava:
+Do checklistu onboardingové šablony přidáme položku: "Nové pole přidej jen tehdy, když je nutné pro nastavení účtu nebo pro splnění domluvené služby."
+
+Co neotevíráme:
+Celou archivovanou kartu, revizi všech formulářů ani nový tracking použití checklistu.
+```
+
+V obou příkladech je důležité, že uzavření nemění větší systém, než musí. Jednou stačí nechat věc být. Podruhé stačí opravit cestu. Ani jeden případ nepotřebuje dlouhou schůzku o archivaci jako životním stylu. To by bylo možná dojemné, ale hlavně zbytečné.
+
+### Privacy-first uzavření
+
+Uzavření prvního použití po archivaci má chránit dvě věci: pracovní klid a datovou střídmost. Když uzavření dopadne dobře, nemá vzniknout nová kontrolní vrstva. Když dopadne slabě, oprava má být lokální a má přidat co nejméně nové evidence.
+
+Zapište si proto jednu větu:
+
+```text
+Kvůli uzavření tohoto použití nezakládáme žádnou novou evidenci lidí, zákazníků, odpovědí ani použití pravidla.
+```
+
+Pokud potřebujete udělat opravu, položte si tři otázky:
+
+- Dá se oprava udělat přímo v pracovním místě?
+- Dá se použít anonymní příklad místo reálných zákaznických detailů?
+- Dá se ověření uzavřít při dalším přirozeném použití bez nového trackeru?
+
+Pokud je odpověď třikrát ano, jste na dobré cestě. Pokud ne, pravděpodobně se z malé uzavírací práce stává nová evidence. V takové chvíli se vraťte k nejmenší opravě: jedna věta, jeden odkaz, jedno umístění, jeden návratový signál.
+
+### Karta uzavření prvního použití po archivaci
+
+```text
+Archivované pravidlo:
+
+Kanonické pracovní místo:
+
+Situace prvního běžného použití:
+
+Byl archiv otevřený?
+
+Stačila pracovní věta?
+
+Uzavírací stav:
+- stabilní
+- lokální navigační oprava
+- lokální obsahová oprava
+- částečný návrat kontextu
+
+Uzavírací věta:
+
+Co lokálně měníme:
+
+Co zůstává archivované:
+
+Co výslovně neotevíráme:
+
+Jakou novou evidenci nezakládáme:
+
+Co dál nesbíráme:
+
+Kde je uzavření uložené:
+
+Vlastník:
+
+Datum:
+```
+
+Kartu nepoužívejte automaticky. Pokud je stav stabilní a nevzniká žádná oprava, často stačí samotná uzavírací věta. Karta má smysl tam, kde první použití ukázalo tření a chcete zabránit tomu, aby se z lokální opravy stalo nové téma.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte situaci prvního použití.
+2. Minuta 2: ověřte, jestli se otevíral archiv.
+3. Minuta 3: rozhodněte, jestli stačila pracovní věta.
+4. Minuta 4: vyberte jeden uzavírací stav.
+5. Minuta 5: napište, co se lokálně mění nebo že se nic nemění.
+6. Minuta 6: zapište, jakou evidenci nezakládáte a co dál nesbíráte.
+
+Workshop ukončete i tehdy, když se objeví další nápady. Pokud nesouvisí s prvním použitím archivovaného pravidla, patří do samostatného podnětu. Uzavření má chránit malý rozsah. Když z něj uděláte sběrnu nápadů, archivace sice přežije, ale tým si k ní přilepí nový batoh.
+
+### Checklist uzavření prvního použití po archivaci
+
+- Je jasné, jaké pravidlo bylo použito?
+- Šlo o reálné použití, ne dodatečný test?
+- Víme, jestli se otevíral archiv?
+- Je vybraný přesně jeden uzavírací stav?
+- Pokud je stav stabilní, nevzniká zbytečný další úkol?
+- Pokud je potřeba oprava, míří na nejbližší pracovní místo?
+- Nevracíme celý archiv kvůli jedné chybě v navigaci?
+- Je pracovní věta pořád krátká a rozhodovací?
+- Je zapsané, co zůstává archivované?
+- Je zapsané, co výslovně neotevíráme?
+- Nezakládáme evidenci použití pravidla, screenshoty ani kopie zákaznických odpovědí?
+- Je jasné, co dál nesbíráme?
+
+Uzavření prvního použití po archivaci je dobré tehdy, když po něm zůstane méně věcí otevřených než před ním. Stabilní pravidlo se nechá být. Slabá cesta se opraví v cestě. Slabá věta se zpřesní ve větě. Chybějící kontext se vrátí jen v nejmenší nutné podobě. To je praktická disciplína: žádné velké gesto, jen přesné zavření dveří.
+
 ## Pracovní log
 
+- 2026-07-03: Doplněna úvodní podkapitola o uzavření prvního běžného použití po archivaci pravidla: čtyři uzavírací stavy, praktické příklady, privacy-first uzavření bez nové evidence, karta, mini workshop a checklist.
 - 2026-07-03: Doplněna úvodní podkapitola o prvním běžném použití po archivaci pravidla: najitelnost pracovní věty, rozhodnutelnost bez archivu, datová střídmost, čtyři výsledky, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-07-03: Doplněna úvodní podkapitola o archivaci pravidla po stabilním pasivním provozu: podmínky archivace, ponechané pracovní věty, úklid dočasných podkladů, privacy-first archivace, karta, mini workshop a checklist.
 - 2026-07-03: Doplněna úvodní podkapitola o uzavření druhého běžného použití po návratu roční kontroly do pasivního provozu: uzavírací stavy, onboardingový příklad, privacy-first ukončení mimořádné datové stopy, karta, mini workshop a checklist.
