@@ -289093,8 +289093,199 @@ Workshop ukončete i tehdy, když se objeví další nápady. Pokud nesouvisí s
 
 Uzavření prvního použití po archivaci je dobré tehdy, když po něm zůstane méně věcí otevřených než před ním. Stabilní pravidlo se nechá být. Slabá cesta se opraví v cestě. Slabá věta se zpřesní ve větě. Chybějící kontext se vrátí jen v nejmenší nutné podobě. To je praktická disciplína: žádné velké gesto, jen přesné zavření dveří.
 
+## Druhé běžné použití po archivaci pravidla
+
+Druhé běžné použití po archivaci pravidla má jiný účel než první. První použití hlavně ověřilo, jestli archivace něco nerozbila hned při nejbližší příležitosti. Druhé použití ověřuje, jestli pravidlo obstojí i bez čerstvé paměti na předchozí opravu, bez zvláštní pozornosti a bez člověka, který u archivace seděl. Pokud pravidlo funguje i podruhé, už nejspíš nepotřebuje mimořádnou péči. Pokud nefunguje, problém často není v archivaci jako takové, ale v tom, že pracovní věta není dost přenosná.
+
+Druhé použití neplánujte jako umělý test. Počkejte na další přirozenou situaci, ve které má pravidlo rozhodovat: úprava formuláře, příprava onboardingové šablony, nový support postup, aktualizace obchodního follow-upu nebo kontrola exportu dat. Když žádná taková situace dlouho nepřijde, je to samo o sobě dobrý signál. Pravidlo možná opravdu patří do archivu a není potřeba ho chodit budit jen proto, že máme rádi zaškrtnuté kolonky. Což je sice lidské, ale tabulky tím občas dostávají nezaslouženě dramatickou kariéru.
+
+Začněte jednoduchou větou:
+
+```text
+Druhé běžné použití po archivaci sledujeme jen proto, abychom ověřili přenositelnost pracovní věty bez návratu k archivu.
+```
+
+Tahle věta nastavuje hranici. Nesledujete kvalitu celého archivu, nehledáte všechny staré výjimky a nevyrábíte nový audit pravidel. Sledujete jen to, jestli se dnešní člověk dostane od běžné práce k rozhodnutí bez otevření archivované karty.
+
+### Kdy druhé použití vůbec dělat
+
+Druhé použití má smysl jen tehdy, když první použití skončilo jedním z těchto stavů:
+
+- Stabilní, ale pravidlo je důležité pro data, zákaznický slib nebo obchodní kvalifikaci.
+- Lokální navigační oprava, kterou chcete ověřit v dalším přirozeném průchodu.
+- Lokální obsahová oprava, kde potřebujete vědět, jestli nová pracovní věta rozhoduje samostatně.
+- Částečný návrat kontextu, u kterého hrozí, že se nenápadně zvětší zpět na celý archiv.
+
+Pokud první použití bylo stabilní a pravidlo je málo rizikové, druhé mimořádné použití klidně vynechte. Stačí nechat pravidlo v pracovním místě a vrátit se k němu až podle návratového signálu. Praktický systém nemá dokazovat, že umí kontrolovat všechno. Má umět poznat, kdy kontrola přidává hodnotu a kdy jen hladí interní úzkost po hlavě.
+
+Pokud první použití vyžadovalo opravu, druhé použití má ověřit právě opravu, ne původní historii. U navigační opravy se ptejte, jestli člověk pravidlo našel kratší cestou. U obsahové opravy se ptejte, jestli věta stačila k rozhodnutí. U částečného návratu kontextu se ptejte, jestli vrácený kontext zůstal malý.
+
+### Tři otázky přenositelnosti
+
+Při druhém použití položte jen tři otázky:
+
+```text
+Našel člověk pravidlo tam, kde pracoval?
+
+Stačila pracovní věta bez otevření archivované karty?
+
+Nevznikla při použití nová datová stopa, kterou jsme původně nechtěli?
+```
+
+Když jsou odpovědi třikrát ano, pravidlo je přenosné. Neznamená to, že je věčné. Znamená to, že v běžném provozu nepotřebuje zvláštní režim. Přepište případnou poznámku do klidové věty a zavřete mimořádnou pozornost.
+
+Když pravidlo člověk nenašel, opravte cestu. Když ho našel, ale nerozhodlo, opravte větu. Když rozhodlo jen po otevření archivu, vraťte se k otázce, zda jste z archivovaného kontextu neodstranili jednu nutnou informaci. Když při použití vznikla nová evidence, zastavte ji hned, dokud je malá.
+
+### Praktický příklad
+
+Představte si pravidlo:
+
+```text
+V prvním onboardingovém formuláři se neptáme na velikost týmu, pokud ji nepotřebujeme k nastavení účtu nebo ke splnění domluvené služby.
+```
+
+První použití po archivaci bylo stabilní. Produktový člověk pravidlo našel přímo u šablony formuláře a nepřidal nové pole. O měsíc později obchod připravuje variantu onboardingu pro nový typ zákazníka. To je vhodné druhé běžné použití, protože se pravidlo znovu dotýká sběru dat.
+
+Dobré druhé použití vypadá takto:
+
+```text
+Situace:
+Obchod připravuje variantu onboardingu pro menší B2B zákazníky.
+
+Průběh:
+Pracovní věta byla v checklistu u šablony. Obchod nepřidal otázku na velikost týmu, protože pro nastavení účtu není nutná.
+
+Výsledek:
+Pravidlo je přenosné bez archivu.
+
+Co dál neděláme:
+Neotevíráme archivovanou kartu, nezakládáme evidenci použití pravidla a neplánujeme další mimořádné ověření.
+
+Co dál nesbíráme:
+Velikost týmu v prvním kroku, interní segmentační poznámky ani kopie odpovědí pro pozdější analýzu.
+```
+
+Slabší výsledek může vypadat takto:
+
+```text
+Situace:
+Support upravuje onboardingový follow-up a zvažuje doplnit otázku na velikost týmu.
+
+Průběh:
+Pravidlo bylo v checklistu, ale věta neříkala, co dělat, když velikost týmu pomáhá až později v supportu.
+
+Výsledek:
+Lokální obsahová oprava.
+
+Oprava:
+Větu zpřesníme: "Velikost týmu se neptáme v prvním kroku; pokud ji support opravdu potřebuje, ptá se až v konkrétním kontextu a bez povinného pole."
+
+Co neotevíráme:
+Celou archivovanou kartu, nový formulářový experiment ani tracking všech support dotazů.
+```
+
+Všimněte si rozdílu. Slabší výsledek neznamená návrat do velkého projektu. Znamená jednu přesnější větu v místě, kde se rozhoduje. To je přesně velikost opravy, kterou druhé použití má povolit.
+
+### Privacy-first kontrola druhého použití
+
+Druhé použití po archivaci je rizikové v jedné nenápadné věci: tým si může říct, že když už pravidlo ověřuje podruhé, měl by si začít vést lepší evidenci. Tím ale často poruší původní smysl archivace. Pravidlo mělo přestat vyžadovat mimořádnou péči. Pokud kvůli druhému použití vznikne nová tabulka, export, screenshoty, kopie zákaznických odpovědí nebo interní štítkování, možná jste sice ověřili pravidlo, ale zároveň jste vyrobili novou datovou stopu.
+
+Privacy-first otázka proto zní:
+
+```text
+Umíme druhé použití uzavřít jednou pracovní větou bez nové evidence?
+```
+
+Pokud ano, udělejte to. Pokud ne, napište přesně, proč jedna věta nestačí, a zkontrolujte, zda nejde o známku širšího problému. Ale ani tehdy nezačínejte sbírat data plošně. Nejprve opravte pracovní místo a počkejte na další přirozený signál.
+
+U druhého použití výslovně nezakládejte:
+
+- evidenci všech budoucích použití pravidla,
+- screenshoty formulářů jen pro kontrolní pocit,
+- kopie zákaznických odpovědí mimo původní systém,
+- nový interní štítek "ověřeno pravidlem",
+- automatický report o tom, kolikrát bylo pravidlo použito.
+
+Někdy bude potřeba krátký záznam. Ten ale má popsat rozhodnutí, ne lidi. Pište o pracovním místě, pravidlu a výsledku. Nepište o konkrétních zákaznících, pokud to není nezbytné pro řešení incidentu nebo smluvní závazek.
+
+### Karta druhého použití po archivaci
+
+```text
+Archivované pravidlo:
+
+Kanonické pracovní místo:
+
+Co se opravilo po prvním použití, pokud něco:
+
+Situace druhého běžného použití:
+
+Kdo pravidlo použil bez čerstvé paměti:
+
+Našel pravidlo v pracovním místě?
+
+Stačila pracovní věta bez archivu?
+
+Vznikla nová datová stopa?
+
+Výsledek:
+- přenosné bez zásahu
+- opravit cestu
+- opravit větu
+- zmenšit vrácený kontext
+- zastavit novou evidenci
+
+Jedna uzavírací věta:
+
+Co lokálně měníme:
+
+Co zůstává archivované:
+
+Co výslovně neotevíráme:
+
+Jakou evidenci nezakládáme:
+
+Co dál nesbíráme:
+
+Kde je záznam uložený:
+
+Vlastník:
+
+Datum:
+```
+
+Kartu použijte jen tehdy, když druhé použití něco odhalí nebo když pravidlo chrání citlivější datovou hranici. Pokud druhé použití dopadlo hladce a pravidlo není kritické, stačí uzavírací věta u pracovního místa. Cílem není rozšířit administrativu kolem dobrého pravidla. Cílem je potvrdit, že pravidlo umí žít bez administrativních koleček.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: pojmenujte druhou reálnou situaci použití.
+2. Minuta 2: ověřte, jestli člověk našel pravidlo bez čerstvé paměti.
+3. Minuta 3: přečtěte pracovní větu a rozhodněte, jestli stačila.
+4. Minuta 4: zkontrolujte, jestli nevznikla nová datová stopa.
+5. Minuta 5: vyberte jeden výsledek.
+6. Minuta 6: napište uzavírací větu a co výslovně neotevíráte.
+
+Pokud se během workshopu ukáže, že lidé pravidlo používají různě, neřešte to přidáním sledování. Nejdřív napište lepší pracovní větu nebo ji přesuňte blíž k rozhodnutí. Teprve pokud se rozdíl opakuje v reálných situacích a má dopad na zákazníka, data nebo obchodní slib, otevřete samostatnou malou iteraci.
+
+### Checklist druhého použití po archivaci
+
+- Šlo o přirozenou pracovní situaci?
+- Nešlo jen o umělou kontrolu pro pocit jistoty?
+- Použil pravidlo člověk, který neměl čerstvou paměť na archivaci?
+- Bylo pravidlo najitelné v kanonickém pracovním místě?
+- Stačila pracovní věta bez otevření archivu?
+- Pokud nestačila, víme, zda chyběla cesta, obsah, nebo malý kontext?
+- Opravujeme jen nejbližší pracovní místo?
+- Zůstává archivovaná karta zavřená?
+- Neplánujeme další mimořádné ověření bez návratového signálu?
+- Nevznikla nová evidence použití pravidla?
+- Nevznikly screenshoty, exporty ani kopie zákaznických odpovědí?
+- Je jasně napsané, co dál nesbíráme?
+
+Druhé běžné použití po archivaci má skončit klidem. Buď pravidlo funguje a může zůstat v pasivním provozu, nebo se opraví jedna nejbližší věc. Jakmile z druhého použití začne vznikat nový kontrolní mechanismus, zastavte se. Archivované pravidlo nemá dostat osobního asistenta, vlastní dashboard a pravidelnou schůzku. Má jen pomáhat rozhodnout ve správném místě, s minimem dat a bez zbytečného návratu do minulosti.
+
 ## Pracovní log
 
+- 2026-07-03: Doplněna úvodní podkapitola o druhém běžném použití po archivaci pravidla: přenositelnost pracovní věty bez čerstvé paměti, kdy druhé použití dělat, privacy-first kontrola bez nové evidence, karta, mini workshop a checklist.
 - 2026-07-03: Doplněna úvodní podkapitola o uzavření prvního běžného použití po archivaci pravidla: čtyři uzavírací stavy, praktické příklady, privacy-first uzavření bez nové evidence, karta, mini workshop a checklist.
 - 2026-07-03: Doplněna úvodní podkapitola o prvním běžném použití po archivaci pravidla: najitelnost pracovní věty, rozhodnutelnost bez archivu, datová střídmost, čtyři výsledky, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-07-03: Doplněna úvodní podkapitola o archivaci pravidla po stabilním pasivním provozu: podmínky archivace, ponechané pracovní věty, úklid dočasných podkladů, privacy-first archivace, karta, mini workshop a checklist.
