@@ -286966,8 +286966,196 @@ Pokud se během workshopu objeví dobrý nápad na větší změnu, zapište ho 
 
 Dobré uzavření roční kontroly zanechá méně otevřených věcí, než kolik jich našlo. Potvrdí pravidlo, opraví drobnost, uklidí data nebo oddělí nový signál. V žádném případě nemá z pravidla, které fungovalo v pasivním provozu, vyrobit novou administrativní atrakci s vlastním životem. To by byla škoda práce i dat.
 
+## První běžné použití po uzavřené roční kontrole
+
+Po uzavřené roční kontrole přijde obyčejná situace: pravidlo se znovu použije v práci. Bez auditní nálady, bez zvláštního režimu a bez toho, aby někdo vytahoval kartu roční kontroly jako manuál. Právě tady se pozná, jestli uzavření opravdu vrátilo pravidlo do provozu, nebo jen vytvořilo hezký zápis, který se v běžném dni mine s realitou.
+
+První běžné použití po roční kontrole nemá být plánovaná zkouška. Má přijít samo. Člověk narazí na situaci, najde pravidlo v kanonickém místě, použije ho a pokračuje. Pokud potřebuje hledat staré zjištění, ptát se autora kontroly nebo otevírat pomocnou tabulku, roční kontrola možná nebyla uzavřená dost prakticky.
+
+Začněte až po reálném použití krátkou větou:
+
+```text
+První běžné použití po roční kontrole ukázalo:
+```
+
+Dobrá věta popisuje, jestli se pravidlo chovalo jako běžná součást práce:
+
+```text
+První běžné použití po roční kontrole ukázalo:
+obchodník našel pravidlo u potvrzovací šablony, použil ho bez staré wiki poznámky a nevytvořil novou evidenci rozpočtů.
+```
+
+To stačí. Cílem není zopakovat roční kontrolu v miniatuře. Cílem je ověřit, že její závěr dorazil do místa práce.
+
+### Co se ověřuje
+
+Ověřujte jen čtyři věci:
+
+- Přenos uzavření: změna z roční kontroly je opravdu v kanonickém pracovním místě.
+- Samostatnost použití: člověk nepotřeboval staré podklady ani vysvětlení.
+- Zavřený rozsah: neotevřel se znovu formulář, CRM atribut, export, scoring nebo jiný širší návrh.
+- Datová střídmost: nevznikla nová pomocná stopa jen kvůli opatrnosti.
+
+Pokud všechny čtyři věci platí, nedělejte další práci. Nezakládejte "porevizní sledování", neplánujte druhé ověření a nepřidávejte pravidlo do dalšího dashboardu. Roční kontrola už proběhla. Běžné použití má hlavně ukázat, že po ní systém nezatuhl.
+
+Pokud něco drhne, zmenšete reakci:
+
+- Změna není v pracovním místě: přesuňte větu nebo odkaz tam, kde člověk pracuje.
+- Člověk potřeboval staré vysvětlení: doplňte jednu hraniční větu, ne celou historii.
+- Rozsah se znovu otevřel: zapište, co zůstává zavřené, a otevřete nové téma jen při skutečném návratovém signálu.
+- Vznikla datová stopa: smažte ji, anonymizujte nebo vraťte do původního systému podle účelu.
+
+Codyho komentář: roční kontrola má být jako servisní prohlídka, ne jako očkování proti všem budoucím pochybnostem. Když po ní každé použití potřebuje další razítko, systém není bezpečnější. Jen se učí být nervózní v hezčích formulářích.
+
+### Praktický příklad
+
+Roční kontrola pravidla pro dotaz na rozpočet skončila takto:
+
+```text
+Pravidlo dál žije u potvrzovací e-mailové šablony.
+Starou wiki poznámku rušíme.
+Rozpočet neznačíme do samostatné tabulky ani CRM atributu.
+```
+
+O několik týdnů později přijde relevantní poptávka s nejasným cílem. Obchodník otevře potvrzovací šablonu a použije větu:
+
+```text
+Nejdřív se ptáme na očekávaný výsledek projektu. Rámcový rozpočet řešíme jen tehdy, když bez něj nejde navrhnout další krok.
+```
+
+Dobré běžné použití:
+
+```text
+Obchodník poslal doplňující otázku na výsledek projektu, rozpočet zatím nevyžadoval a nezaložil novou evidenci.
+```
+
+Krátký zápis, pokud je potřeba:
+
+```text
+První běžné použití po roční kontrole ukázalo:
+uzavřená věta je v potvrzovací šabloně použitelná bez staré wiki poznámky. Další kontrolu neplánujeme.
+```
+
+Slabší výsledek:
+
+```text
+Obchodník našel správnou větu, ale ve staré wiki pořád zůstal odkaz na zrušenou tabulku rozpočtů.
+```
+
+Lokální oprava:
+
+```text
+Starý odkaz z wiki mažeme a necháváme pouze odkaz na aktuální potvrzovací šablonu.
+```
+
+Co se neotevírá:
+
+```text
+Neotevíráme redesign formuláře, CRM pole pro rozpočet, nový scoring ani revizi celé obchodní dokumentace.
+```
+
+Tady není problém v pravidle. Problém je ve zbylé stopě po starém provozu. Oprava má být malá a přesná, jinak roční kontrola začne rodit další dokumentaci místo klidu.
+
+### Privacy-first použití po roční kontrole
+
+Privacy-first kontrola je v tomto kroku jednoduchá: uzavření roční kontroly nesmí vytvořit novou vrstvu evidence. Pokud se pravidlo použilo správně, případ zůstává v původním pracovním systému. Do rozhodovacího logu patří nanejvýš obecná věta, že pravidlo obstálo.
+
+Použijte tři řádky:
+
+```text
+Případ zůstává:
+
+Mimo původní systém neukládáme:
+
+Po použití uklízíme:
+```
+
+Příklad:
+
+```text
+Případ zůstává:
+v obchodní komunikaci podle běžné retence a přístupů.
+
+Mimo původní systém neukládáme:
+jméno zákazníka, rozpočet, text e-mailu, interní komentář ani screenshot šablony.
+
+Po použití uklízíme:
+starý wiki odkaz na zrušenou tabulku, protože už nemá žádný pracovní účel.
+```
+
+Pokud potřebujete zachovat poznatek, přepište ho do syntetické věty. Nechte pravidlo žít, ne případ. Rozdíl je zásadní: pravidlo pomáhá dalším lidem rozhodovat, případ přenáší reálná data do míst, kde často nemají dlouhodobý důvod být.
+
+### Karta prvního běžného použití po roční kontrole
+
+Kartu použijte jen tehdy, když použití něco ukázalo. Pokud pravidlo běžně fungovalo a nevznikla žádná oprava, stačí věta nebo žádný zápis.
+
+```text
+Pravidlo:
+
+Kanonické pracovní místo po roční kontrole:
+
+Běžná situace:
+
+Našel člověk pravidlo bez staré historie?
+
+Stačila aktuální pracovní věta?
+
+Zůstal rozsah roční kontroly zavřený?
+
+Vznikla nová pomocná datová stopa?
+
+Výsledek:
+- ponechat v běžném provozu
+- opravit zbylou starou stopu
+- doplnit jednu hraniční větu
+- oddělit nový návratový signál
+- uklidit zbytečnou evidenci
+
+Nejmenší případná oprava:
+
+Co výslovně neotevíráme:
+
+Co neukládáme mimo původní systém:
+
+Další kontrolu plánujeme?
+- ne, protože:
+- ano, pouze pokud:
+
+Vlastník pracovního místa:
+```
+
+Nejčastější správný výsledek je `ponechat v běžném provozu`. Nezní efektně, ale je to výhra. Pravidlo prošlo roční kontrolou, vrátilo se do práce a nevyrobilo další proces.
+
+### Mini workshop na 5 minut
+
+1. Minuta 1: popište běžnou situaci jednou větou.
+2. Minuta 2: ověřte, jestli člověk našel pravidlo v kanonickém místě.
+3. Minuta 3: určete, jestli stačila aktuální pracovní věta.
+4. Minuta 4: vyberte jeden výsledek a nejmenší případnou opravu.
+5. Minuta 5: napište, co se neotevírá a co se neukládá mimo původní systém.
+
+Pokud workshop potřebuje víc času, pravděpodobně už nejde o první běžné použití. Oddělte nové téma, uzavřete původní kontrolu a pokračujte až s novou pracovní otázkou.
+
+### Checklist prvního běžného použití po roční kontrole
+
+- Proběhlo použití přirozeně, ne jako plánovaný audit?
+- Je pravidlo v kanonickém místě, které roční kontrola potvrdila nebo upravila?
+- Člověk nepotřeboval starou kartu, wiki poznámku ani autora původní kontroly?
+- Stačila aktuální pracovní věta?
+- Zůstal starý širší návrh zavřený?
+- Pokud drhlo umístění, opravujeme jen kotvu nebo odkaz?
+- Pokud drhla formulace, doplňujeme jednu hraniční větu?
+- Nevznikla nová tabulka, export, štítek, screenshot ani kopie komunikace?
+- Reálná zákaznická data zůstala v původním systému?
+- Pokud zůstává příklad, je syntetický?
+- Neplánujeme další kontrolu bez nového návratového signálu?
+- Je zřejmé, že roční kontrola po použití zanechala méně práce, ne víc?
+
+První běžné použití po uzavřené roční kontrole je malý test reality. Pokud pravidlo funguje, nechte ho fungovat. Pokud zůstala stará stopa, ukliďte ji. Pokud se objevil nový signál, oddělte ho. Hlavně z roční kontroly nedělejte věčný dozvuk. Dobrý provoz má paměť, ale netahá ji za sebou jako kufr s rozbitým kolečkem.
+
 ## Pracovní log
 
+- 2026-07-03: Doplněna úvodní podkapitola o prvním běžném použití po uzavřené roční kontrole: přenos uzavření do pracovního místa, zavřený rozsah, privacy-first ne-evidence, karta, mini workshop a checklist.
 - 2026-07-02: Doplněna úvodní podkapitola o uzavření roční kontroly pravidla v pasivním provozu: uzavírací stavy, praktický příklad, privacy-first uzavření, karta, mini workshop a checklist.
 - 2026-07-02: Doplněna úvodní podkapitola o roční kontrole pravidla v pasivním provozu: najitelnost, použitelnost, datová stopa, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-07-02: Doplněna úvodní podkapitola o uzavření druhého klidového použití po návratu do pasivního provozu: tři uzavírací stavy, exportní příklady, privacy-first úklid dočasných stop, karta, mini workshop a checklist.
