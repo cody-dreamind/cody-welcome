@@ -287522,8 +287522,167 @@ Pokud workshop trvá déle, pravděpodobně neřešíte druhé běžné použit�
 
 Druhé běžné použití po roční kontrole má být poslední jemné ověření, ne začátek nové série kontrol. Když pravidlo funguje, vraťte ho do klidu. Když potřebuje jednu větu, doplňte ji tam, kde člověk pracuje. Když se objeví nový signál, otevřete ho zvlášť. A když nevznikla žádná nová datová stopa, nechte to tak. Privacy-first provoz se často pozná podle toho, že po dobrém použití nezůstane skoro nic navíc.
 
+## Uzavření druhého běžného použití po uzavřené roční kontrole
+
+Uzavření druhého běžného použití po roční kontrole má zabránit tomu, aby se z dobrého ověření stal nový pravidelný rituál. Druhé použití už ukázalo, jestli pravidlo funguje bez čerstvé paměti z kontroly. Teď je potřeba udělat jedno rozhodnutí: vrátit pravidlo do normálního provozu, doplnit malou lokální větu, opravit slabou samostatnost, nebo oddělit nový signál.
+
+Začněte jednou větou:
+
+```text
+Druhé běžné použití uzavíráme takto:
+```
+
+Za dvojtečku nepatří dlouhý zápis, ale rozhodnutí. Pokud věta nejde napsat jednoduše, pravděpodobně pořád mícháte ověření, opravu a novou otázku. Uzavření má tyto věci rozdělit, ne je držet pohromadě ve jménu opatrnosti.
+
+Dobré uzavření může znít:
+
+```text
+Druhé běžné použití uzavíráme bez změny: pravidlo bylo dohledatelné u formuláře, vedlo ke kvalifikaci poptávky a nevznikla nová evidence mimo CRM.
+```
+
+Nebo:
+
+```text
+Druhé běžné použití uzavíráme lokální větou u formuláře; původní rozsah zůstává zavřený a nerozšiřujeme sledování poptávek.
+```
+
+Obě věty jsou krátké, ale říkají dost: co se stalo, co se mění a co se výslovně nemění.
+
+### Čtyři uzavírací stavy
+
+Po druhém běžném použití vyberte jeden ze čtyř stavů:
+
+- Vráceno do klidu: pravidlo fungovalo a není potřeba další akce.
+- Drobně dočištěno: doplnila se jedna věta, příklad nebo odkaz v pracovním místě.
+- Potřebuje přenos: pravidlo je věcně správné, ale není dost samostatné pro člověka u práce.
+- Oddělen nový signál: použití ukázalo jiný problém, který už nepatří do uzavření roční kontroly.
+
+Vrácení do klidu je nejčistší výsledek. Neplánujte další kontrolu jen proto, že druhé použití proběhlo dobře. Další návrat má vzniknout až z konkrétního signálu, ne z potřeby mít "ještě jedno potvrzení". Stabilní pravidlo nepotřebuje doprovodný kult.
+
+Drobné dočištění je přijatelné, pokud je opravdu lokální. Typicky jde o větu u formuláře, krátký příklad v interní poznámce, přesnější název šablony nebo odkaz na kanonické místo. Jakmile úprava vyžaduje novou kapitolu, nový report nebo nové školení, už to není dočištění druhého použití.
+
+Stav "potřebuje přenos" použijte, když člověk pravidlo použil správně až po dodatečném vysvětlení. V takové chvíli neopravujte hned samotné pravidlo. Nejdřív opravte cestu k němu: název, umístění, kontext u pracovního místa, příklad vstupu a očekávanou výstupní větu.
+
+Nový signál oddělte tvrdě. Pokud druhé použití ukázalo, že se změnil typ zákaznické poptávky, vzniklo nové provozní riziko nebo staré pravidlo naráží na jiný segment, založte novou kartu. Původní roční kontrolu kvůli tomu znovu nerozebírejte.
+
+### Praktický příklad uzavření
+
+Pravidlo po roční kontrole říká, že poptávkový formulář nesbírá přesný rozpočet v prvním kontaktu. Druhé běžné použití ukázalo, že obchodník pravidlo našel u formuláře a kvalifikoval poptávku přes cíl, rozhodovací proces a termín.
+
+Uzavření:
+
+```text
+Druhé běžné použití uzavíráme stavem vráceno do klidu.
+
+Pravidlo šlo použít bez autora roční kontroly, bez nového pole ve formuláři a bez pomocné evidence poptávek. Další kontrolu neplánujeme; téma se znovu otevře jen pokud tři relevantní poptávky za sebou nepůjde kvalifikovat bez ručního doptání na rozpočet.
+```
+
+Kdyby obchodník pravidlo našel až po hledání ve starém zápisu, uzavření by bylo jiné:
+
+```text
+Druhé běžné použití uzavíráme stavem potřebuje přenos.
+
+Pravidlo je věcně správné, ale není dost viditelné u poptávkového formuláře. Do interní poznámky u formuláře doplňujeme jednu rozhodovací větu. Nepřidáváme nové pole, scoring, export ani kontrolní tabulku.
+```
+
+Rozdíl je zásadní. V prvním případě neděláte nic dalšího. Ve druhém případě opravujete dohledatelnost. Ani v jednom případě automaticky nepřepisujete strategii formuláře.
+
+Codyho komentář: uzavření druhého použití je test, jestli tým umí přestat. Spousta týmů zvládne problém analyzovat, opravit i ověřit, ale pak kolem hotové věci ještě tři měsíce chodí s baterkou. Pokud pravidlo funguje, zhasněte. Účty za mentální elektřinu nejsou vidět, ale platíte je pořád.
+
+### Privacy-first uzavření
+
+Při uzavření druhého použití napište, co se stane s případnou dočasnou stopou. Pokud nevznikla, řekněte to přímo. Pokud vznikla, rozhodněte, zda se smaže, sloučí do kanonického systému nebo zobecní.
+
+Použijte jednoduchou formulaci:
+
+```text
+Reálná data zůstávají v původním systému. Do uzavření přenášíme pouze obecný poznatek, ne kopii zákaznické komunikace.
+```
+
+Pokud někdo pro ověření pořídil screenshot, export nebo pomocnou tabulku, neponechávejte je "pro jistotu". Buď byly nutné pro konkrétní rozhodnutí a patří do kanonického systému, nebo nutné nebyly a mají zmizet. Privacy-first provoz není jen výběr evropského nástroje. Je to i schopnost nevytvářet druhou kopii dat, když stačí pracovní věta.
+
+U uzavření si proto zapište:
+
+```text
+Nová datová stopa po uzavření:
+- žádná
+- smazána
+- sloučena do kanonického systému
+- zobecněna bez osobních a obchodně citlivých údajů
+```
+
+Vyberte jednu možnost. Pokud vyberete "sloučena", napište kam. Pokud vyberete "zobecněna", napište, co bylo odstraněno. Věta "data jsou vyřešená" není řešení. Je to mlha ve firemním tričku.
+
+### Karta uzavření druhého běžného použití
+
+```text
+Pravidlo:
+
+Kanonické pracovní místo:
+
+Druhé běžné použití ukázalo:
+
+Uzavírací stav:
+- vráceno do klidu
+- drobně dočištěno
+- potřebuje přenos
+- oddělen nový signál
+
+Jednověté uzavření:
+
+Co případně upravujeme:
+
+Kde přesně:
+
+Co zůstává výslovně zavřené:
+
+Nová datová stopa po uzavření:
+- žádná
+- smazána
+- sloučena do kanonického systému
+- zobecněna
+
+Další návratový signál:
+
+Vlastník pracovního místa:
+
+Datum uzavření:
+```
+
+Karta je užitečná hlavně tehdy, když druhé použití neskončilo čistým klidem. Pokud skončilo čistým klidem, zapište jednověté uzavření k pracovnímu místu a dál ho nerozepisujte. Dokumentace má chránit rozhodnutí, ne vyrábět pomník tomu, že se nic nestalo.
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: přečtěte poslední záznam druhého běžného použití.
+2. Minuta 2: vyberte jeden uzavírací stav.
+3. Minuta 3: napište jednověté uzavření.
+4. Minuta 4: určete nejmenší případnou úpravu a její přesné místo.
+5. Minuta 5: napište, co zůstává zavřené.
+6. Minuta 6: rozhodněte o nové datové stopě.
+7. Minuta 7: určete návratový signál, nebo napište, že další kontrola není plánovaná.
+
+Pokud se v páté minutě ukáže, že chcete otevřít větší téma, zastavte uzavření a založte nový signál. Není to brzda práce. Je to oddělení dvou různých věcí: uzavřít pravidlo a otevřít nový problém.
+
+### Checklist uzavření druhého běžného použití
+
+- Je jasné, co druhé běžné použití ukázalo?
+- Vybrali jsme přesně jeden uzavírací stav?
+- Pokud pravidlo fungovalo, vrací se opravdu do klidu?
+- Pokud se něco dočišťuje, je to jedna lokální úprava u pracovního místa?
+- Pokud pravidlo potřebuje přenos, opravujeme dohledatelnost dřív než samotný obsah?
+- Pokud vznikl nový signál, má vlastní kartu mimo původní roční kontrolu?
+- Je výslovně zapsané, co zůstává zavřené?
+- Nevzniká další kontrola jen z opatrnosti?
+- Je rozhodnuto o všech dočasných stopách, exportech, screenshotech a pomocných tabulkách?
+- Zůstávají reálná zákaznická data v původním systému?
+- Je další návratový signál konkrétní a rozpoznatelný?
+- Umí člověk u pracovního místa za měsíc pochopit, co má dělat, bez čtení celé historie?
+
+Uzavření druhého běžného použití je dobré, když po něm zůstane méně aktivních věcí než před ním. Stabilní pravidlo je u pracovního místa, staré stopy jsou uklizené, původní rozsah zůstává zavřený a nový problém má vlastní dveře. V tu chvíli může roční kontrola konečně zmizet z popředí a pravidlo dál sloužit potichu.
+
 ## Pracovní log
 
+- 2026-07-03: Doplněna úvodní podkapitola o uzavření druhého běžného použití po uzavřené roční kontrole: čtyři uzavírací stavy, praktický příklad, privacy-first práce s dočasnou datovou stopou, karta, mini workshop a checklist.
 - 2026-07-03: Doplněna úvodní podkapitola o druhém běžném použití po uzavřené roční kontrole: samostatnost pravidla bez čerstvé paměti, čtyři výsledky, praktický příklad, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-07-03: Doplněna úvodní podkapitola o uzavření prvního běžného použití po uzavřené roční kontrole: uzavírací stavy, praktické příklady, privacy-first ne-evidence, karta, mini workshop a checklist.
 - 2026-07-03: Doplněna úvodní podkapitola o prvním běžném použití po uzavřené roční kontrole: přenos uzavření do pracovního místa, zavřený rozsah, privacy-first ne-evidence, karta, mini workshop a checklist.
