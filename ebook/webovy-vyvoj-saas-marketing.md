@@ -287359,8 +287359,172 @@ Pokud v šesté minutě pořád potřebujete řešit další varianty, zastavte 
 
 Uzavření prvního běžného použití po roční kontrole má být malá provozní tečka. Potvrdí, že pravidlo žije, nebo uklidí poslední drobnost po kontrole. Jakmile začne vyrábět nové sledování, minulo smysl. Dobrý pasivní provoz se pozná tak, že po něm zůstane jasné pravidlo, čisté pracovní místo a žádná tajná evidence "kdyby něco".
 
+## Druhé běžné použití po uzavřené roční kontrole
+
+Druhé běžné použití po uzavřené roční kontrole má jednoduchý úkol: ověřit, že pravidlo obstojí i bez čerstvé pozornosti, kterou mu tým věnoval při kontrole. První použití často ještě jede na paměti lidí, kteří u roční kontroly seděli. Druhé použití už ukáže, jestli pravidlo opravdu žije v pracovním místě, nebo jen v hlavách několika svědků.
+
+Neotevírejte ho jako další audit. Audit už proběhl. Tady jde o běžnou situaci, ve které někdo použije pravidlo, šablonu, rozhodovací větu nebo malý proces bez toho, aby kolem něj vznikla zvláštní schůzka. Pokud potřebujete svolat tým, vysvětlovat historii a hledat staré poznámky, druhé běžné použití právě odhalilo problém: pravidlo není dost samostatné.
+
+Dobrá startovní věta zní:
+
+```text
+Druhé běžné použití po roční kontrole ověřuje, zda pravidlo funguje bez čerstvé paměti z kontroly a bez nové pomocné evidence.
+```
+
+Tato věta chrání rozsah. Neptáte se, zda by šlo pravidlo vylepšit obecně. Neptáte se, zda by nestálo za to otevřít další report, dashboard nebo dokumentaci. Ptáte se, jestli konkrétní pracovní místo zvládne druhý normální průchod.
+
+### Co se při druhém použití ověřuje
+
+Sledujte tři věci:
+
+- Samostatnost: člověk u pracovního místa ví, co má udělat, aniž by musel volat autora pravidla.
+- Rozhodovací ostrost: pravidlo pořád vede k rozhodnutí, ne k další interpretaci.
+- Datová střídmost: použití pravidla nevyrábí nové kopie zákaznických dat, screenshoty, exporty ani ruční seznamy.
+
+Samostatnost neznamená, že pravidlo musí pochopit úplně každý člověk ve firmě. Znamená, že ho dokáže použít člověk, který dané pracovní místo běžně obsluhuje. Obchodník má rozumět obchodní větě. Support má rozumět supportnímu kroku. Produkt má rozumět rozhodnutí v backlogu. Pokud pravidlo potřebuje univerzální výklad pro všechny role, pravděpodobně je příliš široké.
+
+Rozhodovací ostrost poznáte podle toho, že po použití pravidla vznikne jedna z mála očekávaných vět. Například: "poptávku kvalifikujeme bez dalšího pole", "šablona stačí beze změny", "doplníme jednu lokální větu", "otevíráme nový signál mimo toto pravidlo". Pokud místo toho vznikne debata o smyslu celé kapitoly, pravidlo se rozpadlo zpět do metodiky.
+
+Datová střídmost je zde stejně důležitá jako samotný výsledek. Druhé použití svádí k nenápadnému sledování: někdo si začne dělat bokem tabulku, ukládat příklady, kopírovat komunikaci nebo označovat zákazníky pro pozdější analýzu. V privacy-first provozu má být výchozí odpověď jednoduchá: pokud tato evidence není nutná pro aktuální rozhodnutí, nevzniká.
+
+### Čtyři výsledky druhého použití
+
+Druhé běžné použití obvykle skončí jedním ze čtyř stavů:
+
+- Potvrzeno bez změny: pravidlo fungovalo samostatně a nevznikla nová datová stopa.
+- Lokální věta: pravidlo fungovalo, ale jedno místo potřebuje přesnější formulaci.
+- Slabá samostatnost: člověk pravidlo našel, ale potřeboval starý kontext nebo autora.
+- Nový signál: běžné použití ukázalo problém, který už nepatří do roční kontroly ani jejího uzavření.
+
+U potvrzení bez změny nepište dlouhý zápis. Stačí jedna věta a datum. Dlouhé potvrzování stabilního pravidla je zvláštní forma neklidu: tým tvrdí, že věc funguje, ale zároveň kolem ní pořád staví lešení.
+
+Lokální věta je malá úprava přímo v pracovním místě. Typicky doplní hranici, příklad nebo rozhodovací formulaci. Nemá otevírat novou kapitolu dokumentace. Pokud potřebujete více než jednu krátkou větu, nejdřív zkontrolujte, jestli neřešíte slabou samostatnost.
+
+Slabá samostatnost znamená, že pravidlo možná není špatně, ale ještě není dobře přenesené. Oprava má začít u dohledatelnosti a jazyka pracovního místa. Ne u nového školení, ne u dalšího auditu, ne u tabulky použití.
+
+Nový signál oddělte od původního pravidla. Druhé běžné použití může ukázat, že se změnil segment, nabídka, typ zákaznické otázky nebo provozní riziko. To je už nový průchod. Původní pravidlo kvůli tomu nemažte ani nepřepisujte ve stresu. Zapište, co se stalo, a otevřete novou kartu jen pro nový problém.
+
+### Praktický příklad
+
+Roční kontrola potvrdila pravidlo pro poptávkový formulář:
+
+```text
+V prvním kontaktu se neptáme na přesný rozpočet. Místo toho žádáme cíl projektu, rozhodovací proces a nejbližší termín. Rozpočet doplňujeme až v obchodním rozhovoru, pokud je potřeba pro kvalifikaci.
+```
+
+První běžné použití po kontrole proběhlo hladce. Obchodník kvalifikoval poptávku podle cíle a termínu, neotevíral nové pole ve formuláři a nic nekopíroval do pomocné tabulky.
+
+Druhé běžné použití přijde o tři týdny později. Jiný obchodník dostane poptávku, kde klient píše jen "potřebujeme nový web". Podle pravidla se neptá hned na rozpočet. Pošle doplňující otázku na cíl, rozhodovací proces a termín. Klient odpoví, že web má podpořit nábor, rozhoduje jednatel a termín je před veletrhem. Rozpočet se řeší až v navazujícím hovoru.
+
+Výsledek:
+
+```text
+Druhé běžné použití potvrzeno bez změny. Pravidlo šlo použít bez autora roční kontroly, bez nového pole ve formuláři a bez pomocné evidence poptávek.
+```
+
+Kdyby obchodník musel hledat starý zápis z roční kontroly, výsledek by nebyl "potvrzeno bez změny", ale "slabá samostatnost". Nejmenší oprava by pak mohla znít:
+
+```text
+Do interní poznámky u formuláře doplňujeme větu: Pokud poptávka neobsahuje rozpočet, nejdřív se ptej na cíl, rozhodovací proces a termín; rozpočet řeš až v hovoru, pokud bez něj nejde kvalifikovat další krok.
+```
+
+To je lokální oprava. Nepřidává pole. Nepřidává scoring. Neposílá data do dalšího nástroje. Jen zpřesňuje pracovní místo, kde pravidlo opravdu vzniká.
+
+Codyho komentář: druhé použití je krásně neokázalá zkouška. Žádné fanfáry, žádný dashboard se sedmi grafy, jen otázka, jestli člověk u práce ví, co dělat. Když ano, gratuluji, můžete nedělat nic dalšího. Extrémně podceňovaná disciplína.
+
+### Privacy-first kontrola druhého použití
+
+Při druhém běžném použití si hlídejte hlavně skrytou evidenci. Tým už ví, že pravidlo bylo kontrolované, a může mít pocit, že je rozumné "ještě si pár případů bokem uložit". Tím ale často vznikne přesně to, čemu se privacy-first provoz snaží bránit: zbytečná druhá stopa vedle původního systému.
+
+Ptejte se:
+
+```text
+Vznikla při druhém použití nějaká nová kopie reálných dat mimo původní pracovní systém?
+```
+
+Pokud ano, určete, zda byla nezbytná pro rozhodnutí. Většinou nebude. Pak ji smažte, sloučte do kanonického místa nebo zobecněte tak, aby neobsahovala osobní ani obchodně citlivé údaje.
+
+Dobré privacy-first uzavření zní:
+
+```text
+Poznatek zapisujeme jen jako obecnou větu k pravidlu. Reálná poptávka zůstává v CRM, nevzniká export, screenshot ani pomocná tabulka druhých použití.
+```
+
+Pokud je potřeba příklad pro tým, použijte anonymizovaný vzor situace, ne kopii skutečné komunikace. Příklad má učit rozhodnutí, ne archivovat zákazníka.
+
+### Karta druhého běžného použití po roční kontrole
+
+```text
+Pravidlo po roční kontrole:
+
+Kanonické pracovní místo:
+
+Datum druhého běžného použití:
+
+Kdo pravidlo použil:
+
+Pracovní situace:
+
+Bylo pravidlo dohledatelné bez autora kontroly:
+
+Vzniklo rozhodnutí bez další interpretace:
+
+Výsledek:
+- potvrzeno bez změny
+- lokální věta
+- slabá samostatnost
+- nový signál
+
+Jednovětý závěr:
+
+Nejmenší případná oprava:
+
+Co zůstává výslovně zavřené:
+
+Reálná data zůstávají v:
+
+Nové kopie, exporty nebo screenshoty:
+
+Co mažeme, slučujeme nebo zobecňujeme:
+
+Další návratový signál:
+
+Vlastník pracovního místa:
+```
+
+Kartu používejte jen tehdy, když druhé použití něco ukázalo. Pokud pravidlo fungovalo úplně běžně a nic nového nevzniklo, stačí krátký záznam u pracovního místa. Cílem není vyrábět dokumentaci o tom, že dokumentace funguje. To je organizační zrcadlový sál a nikdo tam nechce bydlet.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: pojmenujte pracovní situaci druhého použití.
+2. Minuta 2: ověřte, jestli člověk našel pravidlo bez autora roční kontroly.
+3. Minuta 3: napište, jaké rozhodnutí podle pravidla vzniklo.
+4. Minuta 4: vyberte jeden ze čtyř výsledků.
+5. Minuta 5: určete případnou lokální větu nebo napište "bez změny".
+6. Minuta 6: potvrďte, že nevznikla nová kopie reálných dat mimo původní systém.
+
+Pokud workshop trvá déle, pravděpodobně neřešíte druhé běžné použití, ale nový signál nebo slabou samostatnost pravidla. To není problém. Jen to pojmenujte správně a nezalévejte původní pravidlo další vrstvou opatrnosti.
+
+### Checklist druhého běžného použití
+
+- Proběhlo druhé použití v normální pracovní situaci, ne jako nový audit?
+- Použil pravidlo někdo, kdo nebyl závislý na čerstvé paměti z roční kontroly?
+- Bylo jasné kanonické pracovní místo?
+- Vedlo pravidlo ke konkrétnímu rozhodnutí?
+- Vybrali jsme přesně jeden výsledný stav?
+- Pokud šlo o lokální větu, je opravdu krátká a u pracovního místa?
+- Pokud se ukázala slabá samostatnost, nezačali jsme místo ní dělat velké školení?
+- Pokud vznikl nový signál, oddělili jsme ho od původního pravidla?
+- Zůstává původně zavřený rozsah zavřený?
+- Nevzniklo nové pole, tracker, export, screenshot ani pomocná evidence?
+- Reálná zákaznická data zůstala v původním systému?
+- Další návrat vzniká jen při jasném signálu, ne kvůli pocitu, že stabilní pravidlo zaslouží další kontrolu?
+
+Druhé běžné použití po roční kontrole má být poslední jemné ověření, ne začátek nové série kontrol. Když pravidlo funguje, vraťte ho do klidu. Když potřebuje jednu větu, doplňte ji tam, kde člověk pracuje. Když se objeví nový signál, otevřete ho zvlášť. A když nevznikla žádná nová datová stopa, nechte to tak. Privacy-first provoz se často pozná podle toho, že po dobrém použití nezůstane skoro nic navíc.
+
 ## Pracovní log
 
+- 2026-07-03: Doplněna úvodní podkapitola o druhém běžném použití po uzavřené roční kontrole: samostatnost pravidla bez čerstvé paměti, čtyři výsledky, praktický příklad, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-07-03: Doplněna úvodní podkapitola o uzavření prvního běžného použití po uzavřené roční kontrole: uzavírací stavy, praktické příklady, privacy-first ne-evidence, karta, mini workshop a checklist.
 - 2026-07-03: Doplněna úvodní podkapitola o prvním běžném použití po uzavřené roční kontrole: přenos uzavření do pracovního místa, zavřený rozsah, privacy-first ne-evidence, karta, mini workshop a checklist.
 - 2026-07-02: Doplněna úvodní podkapitola o uzavření roční kontroly pravidla v pasivním provozu: uzavírací stavy, praktický příklad, privacy-first uzavření, karta, mini workshop a checklist.
