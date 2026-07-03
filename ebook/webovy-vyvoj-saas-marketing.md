@@ -291034,8 +291034,154 @@ Když se workshop začne rozšiřovat, vraťte se ke třem kontrolním otázkám
 
 První klidová kontrola má potvrdit, že pravidlo nepotřebuje pozornost navíc. Když dopadne dobře, největší výsledek je ticho: žádná nová tabulka, žádný nový meeting, žádná nová datová stopa. Jen pravidlo, které je tam, kde má být, a pracuje, když je potřeba.
 
+## Uzavření první klidové kontroly do běžného rytmu
+
+První klidová kontrola má hodnotu až ve chvíli, kdy se správně zavře. Pokud ji tým nechá viset jako "ještě se k tomu vrátíme", pravidlo se ve skutečnosti nevrátilo do klidu. Jen dostalo měkčí název pro další dohled. Uzavření proto musí být krátké, konkrétní a provozně nudné: co kontrola ukázala, co se případně lokálně opravilo, co se dál neotevírá a kde pravidlo zůstává v běžném rytmu.
+
+Začněte větou:
+
+```text
+První klidovou kontrolu uzavíráme se stavem:
+```
+
+Za dvojtečku patří jeden ze tří stavů:
+
+- pravidlo zůstává v běžném rytmu beze změny,
+- pravidlo zůstává v běžném rytmu po lokálním dočištění,
+- pravidlo se vrací do aktivní práce kvůli novému návratovému signálu.
+
+Nepřidávejte čtvrtý stav typu "budeme sledovat". Ten bývá nejnebezpečnější, protože zní rozumně a skoro nic neříká. Kdo sleduje? Co přesně? Jak dlouho? Kde se to zapisuje? Jaká data vznikají? Pokud na tyto otázky není odpověď, nejde o stav, ale o mlhu s kalendářovou pozvánkou.
+
+### Stav beze změny
+
+Stav beze změny použijte, když pravidlo člověk našel na očekávaném místě, dokázal podle něj rozhodnout a nevznikla kolem něj nová pomocná evidence. V takové situaci není potřeba vylepšovat text jen proto, že už je dokument otevřený. To je častá past: tým vidí funkční pravidlo a začne ho ladit, dokud už zase funkční není.
+
+Zápis může být jednoduchý:
+
+```text
+První klidovou kontrolu uzavíráme beze změny. Pravidlo bylo nalezené v aktuální support šabloně, šlo podle něj rozhodnout bez návratové historie a nevznikla žádná nová evidence. Další kontrola zůstává součástí běžného měsíčního review šablon.
+```
+
+Důležité je poslední souvětí. Neříká "nikdy se k tomu nevrátíme". Říká, že návrat zůstává uvnitř běžného rytmu, který už existuje. Tím se pravidlo neodřízne od údržby, ale zároveň kolem něj nevznikne zvláštní proces.
+
+### Stav po lokálním dočištění
+
+Lokální dočištění použijte, když pravidlo funguje, ale jeho nejbližší pracovní místo má malou chybu. Typicky je špatně pojmenovaný odkaz, stará kopie věty v checklistu, nejasný příklad nebo chybějící odkaz z místa, kde ho lidé reálně hledají.
+
+Lokální dočištění musí splnit tři podmínky:
+
+- opravuje stejné pracovní místo,
+- nemění smysl pravidla,
+- nepotřebuje nové měření ani novou evidenci.
+
+Příklad:
+
+```text
+První klidovou kontrolu uzavíráme po lokálním dočištění. Pravidlo bylo správné, ale starý provozní checklist obsahoval neaktuální zkrácenou větu. Starou větu jsme odstranili a přidali odkaz na kanonickou support šablonu. Pravidlo zůstává v běžném měsíčním review šablon, bez nové kontrolní evidence.
+```
+
+Tady je zásadní, že oprava nepřerostla do revize celého support procesu. Chyba byla v jedné staré větě, takže se opravila jedna stará věta. Ano, zní to až podezřele rozumně. Přesně proto to v provozu často vyhrává.
+
+### Stav s návratovým signálem
+
+Třetí stav použijte jen tehdy, když kontrola odhalí skutečný návratový signál. Nestačí, že někomu pravidlo připadá nehezké, dlouhé nebo "možná zastaralé". Návratový signál musí ukazovat, že pravidlo v běžné práci selhává nebo že jeho pracovní místo už neodpovídá realitě.
+
+Příklad:
+
+```text
+První klidovou kontrolu uzavíráme novým návratovým signálem. Dva lidé hledali pravidlo na jiném místě, než kde je kanonicky uložené, a oba kvůli tomu otevřeli historickou kartu. Neotevíráme kompletní revizi exportů. Otevíráme jen malý krok: ověřit, zda má být kanonické místo v support šabloně, nebo v provozním checklistu.
+```
+
+Tento zápis chrání rozsah. Návratový signál neznamená, že se automaticky znovu otevírá celá historie pravidla. Znamená, že existuje důvod otevřít nejmenší další otázku. Pokud problém spočívá v najitelnosti, první krok má řešit najitelnost, ne celé znění pravidla, obchodní výjimky, reporting a ještě ceník, když už jsme u toho.
+
+### Privacy-first uzavření
+
+Uzavření klidové kontroly je poslední místo, kde se dá zastavit nenápadné hromadění dat. Během kontroly mohl vzniknout pracovní screenshot, poznámka z ticketu, anonymizovaný příklad, seznam míst, kde se pravidlo hledalo, nebo krátký výpis z interního systému. Než kontrolu zavřete, rozhodněte, co z toho má dál existovat.
+
+Použijte tuto větu:
+
+```text
+Po uzavření ponecháváme jen:
+```
+
+A hned za ni:
+
+```text
+Mažeme, nezakládáme nebo dál nevedeme:
+```
+
+Praktický zápis:
+
+```text
+Po uzavření ponecháváme jen anonymizovanou větu v měsíčním review šablon: "pravidlo bylo nalezené a použité bez návratové historie." Mažeme pracovní screenshot starého checklistu. Nezakládáme seznam exportů, nový report ani další kontrolní tabulku.
+```
+
+Tím se z privacy-first přístupu nestane obecná morální dekorace. Je vidět konkrétní dopad: méně kopií, méně skrytých stop, méně důvodů přemýšlet za rok, proč někde leží starý screenshot s daty, která už nikdo nepotřebuje.
+
+### Karta uzavření první klidové kontroly
+
+```text
+Pravidlo:
+
+Kanonické pracovní místo:
+
+Datum klidové kontroly:
+
+Výsledek kontroly:
+- beze změny
+- lokální dočištění
+- nový návratový signál
+
+Jednovětý důkaz výsledku:
+
+Pokud proběhlo lokální dočištění, co přesně se změnilo:
+
+Pokud vznikl návratový signál, jak zní:
+
+Co se dál výslovně neotevírá:
+
+V jakém běžném rytmu pravidlo zůstává:
+
+Jaké dočasné podklady mažeme nebo zobecňujeme:
+
+Jaká nová data, exporty, screenshoty, seznamy nebo reporty nevznikají:
+
+Vlastník:
+
+Datum další běžné kontroly, pokud už existuje v rytmu:
+```
+
+Karta nemá být nová složka kolem pravidla. Uložte ji tam, kde se dělá běžné review daného pracovního místa. Pokud pravidlo žije v support šabloně, uzavření patří k review support šablon. Pokud pravidlo žije v produktovém checklistu, patří k produktovému review. Archiv návratové historie je kontext, ne každodenní kancelář.
+
+### Mini workshop na 5 minut
+
+1. Minuta 1: vyberte jeden ze tří výsledků kontroly.
+2. Minuta 2: napište jednovětý důkaz výsledku.
+3. Minuta 3: zapište, co se případně lokálně dočistilo nebo jak zní návratový signál.
+4. Minuta 4: určete, co se dál výslovně neotevírá.
+5. Minuta 5: zavřete datovou stopu: co ponecháváte, co mažete a co nezakládáte.
+
+Pokud workshop nestačí dokončit za pět minut, nejspíš se nebavíte o uzavření klidové kontroly. Buď se objevilo širší téma, nebo tým nemá společnou definici výsledku. V obou případech je lepší zapsat nový malý krok než natahovat uzavření, které mělo být jen servisní tečkou.
+
+### Checklist uzavření první klidové kontroly
+
+- Vybrali jsme jeden ze tří výsledků kontroly?
+- Má výsledek jednovětý důkaz?
+- Pokud pravidlo zůstává beze změny, nepřidali jsme další dohled pro jistotu?
+- Pokud proběhlo lokální dočištění, zůstalo u stejného pracovního místa?
+- Pokud vznikl návratový signál, neotevřeli jsme automaticky celou historii pravidla?
+- Je jasné, co se dál výslovně neotevírá?
+- Zůstává pravidlo v existujícím běžném rytmu?
+- Je karta uzavření uložená u běžného review, ne v nové pomocné vrstvě?
+- Jsou dočasné podklady smazané, zobecněné nebo ponechané s jasným účelem?
+- Je zapsané, jaká nová data, exporty, screenshoty, seznamy nebo reporty nevznikají?
+- Umí tým za měsíc poznat, jestli pravidlo jen běží, nebo se skutečně objevil nový návratový signál?
+
+Uzavření první klidové kontroly má vrátit pravidlo tam, kde má být: do běžné práce. Ne do zapomnění, ne do zvláštního dohledu, ne do další tabulky. Jen do rytmu, který už tým používá. Když se později objeví skutečný signál, pravidlo se znovu otevře. Do té doby má klid a tým má méně provozního šumu.
+
 ## Pracovní log
 
+- 2026-07-03: Doplněna úvodní podkapitola o uzavření první klidové kontroly do běžného rytmu: tři výsledné stavy, praktické support příklady, privacy-first uzavření datové stopy, karta, mini workshop a checklist.
 - 2026-07-03: Doplněna úvodní podkapitola o první klidové kontrole po návratu pravidla: tři kontrolní otázky, praktický support příklad, privacy-first kontrola bez nové evidence, karta, mini workshop a checklist.
 - 2026-07-03: Doplněna úvodní podkapitola o převodu potvrzeného pravidla zpět do dlouhodobého klidu: kanonické pracovní místo, pracovní věta, návratový signál, privacy-first úklid dočasných stop, karta, mini workshop a checklist.
 - 2026-07-03: Doplněna úvodní podkapitola o uzavření druhého běžného použití po uzavření návratu z dlouhodobého klidu: čtyři uzavírací stavy, support příklady, privacy-first úklid dočasných stop, karta, mini workshop a checklist.
