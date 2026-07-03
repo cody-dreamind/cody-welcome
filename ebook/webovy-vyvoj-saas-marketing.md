@@ -289646,8 +289646,215 @@ Pokud se během workshopu ukáže, že pracovní věta nestačí bez archivu, ne
 
 Převod ověřeného archivovaného pravidla do dlouhodobého klidu je malý akt provozní hygieny. Neudělá efektní screenshot. Nevyrobí novou funkci. Ale zabrání tomu, aby staré rozhodnutí tahalo za rukáv každou další iteraci. A to je přesně druh nenápadné práce, díky které zůstává web, SaaS i marketing lehčí, čitelnější a datově střídmější.
 
+## První návrat z dlouhodobého klidu
+
+Dlouhodobý klid jednou skončí. Ne proto, že tým selhal, ale proto, že se objeví situace, která staré pravidlo znovu potká. Rozdíl proti běžné údržbě je v tom, že dlouhodobý klid nemá vlastní kontrolní rytmus. Návrat tedy nesmí začít větou "pojďme to pro jistotu zkontrolovat". Musí začít konkrétním signálem z práce.
+
+První návrat z dlouhodobého klidu má tři cíle: ověřit, zda se opravdu týká archivovaného pravidla, rozhodnout, jestli stačí pracovní věta bez otevření archivu, a případně otevřít nejmenší další krok. Nic víc. Jakmile se z návratu stane obecná inventura starých rozhodnutí, dlouhodobý klid se nenápadně zrušil a tým si založil další údržbový seriál. Gratuluji, zase máme proces. Přesně to jsme nechtěli.
+
+Začněte návratovou větou:
+
+```text
+Archivované pravidlo se vrací z dlouhodobého klidu, protože:
+```
+
+Dobrá věta popisuje reálnou situaci, ne náladu:
+
+```text
+Archivované pravidlo se vrací z dlouhodobého klidu, protože dva support případy za sebou nedokázaly rozhodnout, zda se na velikost týmu ptát v prvním formuláři, nebo až v asistovaném nastavení.
+```
+
+Slabá věta zní jinak:
+
+```text
+Archivované pravidlo se vrací z dlouhodobého klidu, protože bychom se měli podívat, jestli pořád dává smysl.
+```
+
+To není návratový signál. To je zvyk převlečený za péči. Pokud pravidlo opravdu odpočívá v dlouhodobém klidu, obecný pocit nestačí. Buď přišel konkrétní pracovní střet, nebo se pravidlo nechá být.
+
+### Tři otázky návratu
+
+Před otevřením archivu projděte tři otázky:
+
+- Je dnešní situace stejný typ rozhodnutí, pro který pravidlo vzniklo?
+- Stačí člověku pracovní věta v kanonickém místě?
+- Pokud nestačí, chybí jedna hrana pravidla, nebo se změnil celý kontext?
+
+První otázka chrání před falešnou podobností. Když staré pravidlo řešilo první onboardingový formulář a dnešní problém vzniká v obchodním dotazníku pro enterprise poptávky, nejspíš nejde o návrat. Je to nové pracovní místo s podobným slovníkem.
+
+Druhá otázka chrání archiv. Pokud pracovní věta stačí, archiv neotevírejte. Zapište, že návratový signál byl slabý nebo vyřešený běžným použitím, a nechte pravidlo dál v klidu. Archiv není vyhledávač pro každou nejistotu.
+
+Třetí otázka určuje rozsah. Jedna chybějící hrana může být doplněna lokálně. Změněný kontext potřebuje nové přerámování, ne drobnou opravu staré věty. Rozdíl je důležitý: lokální doplnění chrání stabilitu, přerámování přiznává, že staré pravidlo už nepokrývá dnešní práci.
+
+### Čtyři výsledky prvního návratu
+
+Po krátké kontrole zvolte jeden ze čtyř výsledků:
+
+- Falešný návrat: situace se podobá starému pravidlu, ale patří jinam.
+- Běžné použití stačí: pracovní věta rozhodla bez otevření archivu.
+- Lokální hrana chybí: pravidlo funguje, ale potřebuje jednu větu navíc.
+- Kontext se změnil: starý archiv zůstává historií a otevírá se nový výchozí bod.
+
+U falešného návratu nezakládejte opravu starého pravidla. Zapište jen větu:
+
+```text
+Nejde o návrat archivovaného pravidla, protože dnešní situace vznikla v obchodním dotazníku, ne v onboardingovém formuláři.
+```
+
+U běžného použití stačí krátké uzavření:
+
+```text
+Pracovní věta stačila k rozhodnutí bez otevření archivu; dlouhodobý klid pokračuje beze změny.
+```
+
+U lokální hrany napište přesně jednu doplňující větu a ověřte ji při nejbližším reálném použití. Například:
+
+```text
+Pokud se velikost týmu řeší jen kvůli jednorázové asistované migraci, ptáme se v support vlákně a odpověď neukládáme jako trvalý atribut účtu.
+```
+
+U změněného kontextu nepřepisujte historii. Staré pravidlo nechte v archivu a založte nový pracovní průchod:
+
+```text
+Původní pravidlo zůstává archivované pro první onboardingový formulář. Dnešní problém se týká enterprise kvalifikace před registrací, proto otevíráme nový výchozí bod s vlastním pracovním místem a vlastní datovou hranicí.
+```
+
+Codyho komentář: nejhorší varianta je tvářit se, že změněný kontext je "jen malé doplnění". Tak vznikají pravidla, která mají šest výjimek, tři historické poznámky a nikdo je nepoužívá bez pamětníka. Krásná památka na všechna dobrá rozhodnutí, která jsme postupně zabili vysvětlivkami.
+
+### Praktický příklad
+
+Archivované pravidlo říká:
+
+```text
+V prvním onboardingovém formuláři se neptáme na velikost týmu, pokud ji nepotřebujeme k nastavení účtu nebo ke splnění domluvené služby.
+```
+
+Po půl roce přijde support s otázkou: dva zákazníci požádali o asistovanou migraci a operátor nevěděl, jestli se smí zeptat na velikost týmu. Návratová věta:
+
+```text
+Archivované pravidlo se vrací z dlouhodobého klidu, protože dva support případy za sebou váhaly, zda se na velikost týmu ptát při asistované migraci.
+```
+
+Kontrola:
+
+```text
+Stejný typ rozhodnutí:
+ano, pořád jde o hranici mezi zbytečným plošným sběrem a oprávněným dotazem v konkrétní službě.
+
+Stačí pracovní věta:
+částečně, formulář chrání dobře, ale support hrana není dost viditelná.
+
+Rozsah:
+lokální doplnění support věty, ne otevření formuláře ani CRM atributu.
+```
+
+Výsledek:
+
+```text
+Do support pracovního místa doplňujeme větu:
+u asistované migrace se na velikost týmu ptáme jen v daném vlákně, pokud je nutná pro nastavení, a odpověď nepřevádíme do plošného profilu zákazníka.
+
+Dlouhodobý klid původního onboardingového pravidla pokračuje.
+
+Ověření:
+nejbližší asistovaná migrace půjde rozhodnout bez otevření archivní karty.
+```
+
+Všimněte si, co se nestalo. Nepřidalo se pole do formuláře. Nevznikl segment v CRM. Nezačal se měřit počet týmů. Starý archiv se nepřepsal do nové eseje. Jedna chybějící hrana dostala jedno pracovní místo.
+
+### Privacy-first návrat
+
+První návrat z dlouhodobého klidu je nebezpečný pro datovou střídmost, protože tým už má pocit, že téma bylo kdysi důkladně promyšlené. Snadno pak přidá "malé" pole, "dočasný" export nebo "jen interní" značku, aby se problém příště lépe vyhodnocoval. Jenže dlouhodobý klid má opačný směr: vracet se jen k tomu, co je nutné pro rozhodnutí.
+
+Před každou úpravou napište:
+
+```text
+Jaká nová data by vznikla, kdybychom návrat řešili nejpohodlnější cestou?
+```
+
+Příklad odpovědi:
+
+```text
+Nejpohodlnější cesta by přidala velikost týmu do prvního formuláře, uložila ji do CRM a umožnila segmentaci zákazníků podle týmu. To teď neděláme, protože problém vznikl jen v asistované migraci.
+```
+
+Pak napište menší variantu:
+
+```text
+Menší varianta je support věta pro konkrétní migrační vlákno bez nového plošného atributu a bez nové retence.
+```
+
+Tahle dvojice vět je praktická brzda. Nezakazuje změnu, ale nutí tým vidět cenu pohodlí. Privacy-first přístup se pozná právě tady: ne v tom, že nikdy nic nezjistíte, ale v tom, že nezjišťujete plošně to, co stačí řešit v konkrétní situaci.
+
+### Karta prvního návratu z dlouhodobého klidu
+
+```text
+Archivované pravidlo:
+
+Kanonické pracovní místo:
+
+Návratový signál:
+
+Kde se signál objevil:
+
+Je to stejný typ rozhodnutí?
+
+Stačí pracovní věta bez archivu?
+
+Výsledek:
+- falešný návrat
+- běžné použití stačí
+- lokální hrana chybí
+- kontext se změnil
+
+Co se upravuje:
+
+Co se výslovně neotevírá:
+
+Jaká data nepřidáváme:
+
+Jak ověříme nejmenší úpravu:
+
+Zůstává původní archiv zavřený?
+
+Vlastník pracovního místa:
+
+Datum:
+```
+
+Kartu nepoužívejte jako nový dlouhodobý registr všech návratů. Má zachytit první střet po klidu a rozhodnutí, jestli pravidlo dál spí, dostane lokální hranu, nebo se z něj oddělí nový problém. Jakmile je výsledek jasný, karta se uzavře.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: napište návratový signál jednou větou.
+2. Minuta 2: určete, zda jde o stejný typ rozhodnutí.
+3. Minuta 3: zkuste rozhodnout jen z pracovní věty.
+4. Minuta 4: vyberte jeden ze čtyř výsledků.
+5. Minuta 5: napište, co se výslovně neotevírá a jaká data nepřidáváte.
+6. Minuta 6: určete nejbližší ověření nebo zavřete návrat beze změny.
+
+Pokud workshop potřebuje víc než šest minut, je to signál. Buď se změnil kontext, nebo pracovní věta není dost samostatná. V obou případech neprodlužujte debatu nad starou kartou. Otevřete nejmenší poctivý krok: doplnění jedné hrany, nebo nový výchozí bod.
+
+### Checklist prvního návratu
+
+- Začíná návrat konkrétním pracovním signálem?
+- Nejde jen o obecnou chuť "zkontrolovat, jestli to pořád platí"?
+- Ověřili jsme, že jde o stejný typ rozhodnutí?
+- Zkusili jsme rozhodnout jen z pracovní věty?
+- Neotevřeli jsme archiv dřív, než bylo nutné?
+- Vybrali jsme jeden ze čtyř výsledků?
+- Pokud chybí hrana, je opravdu lokální a jednovětá?
+- Pokud se změnil kontext, necháváme starý archiv jako historii?
+- Je zapsané, co výslovně neotevíráme?
+- Je jasné, jaká data, pole, exporty nebo štítky nepřidáváme?
+- Má případná úprava nejbližší reálné ověření?
+- Zůstává dlouhodobý klid pravidlem, ne novým skrytým review procesem?
+
+První návrat z dlouhodobého klidu má být krátký a střízlivý. Jeho úkolem není znovu prožít celou historii pravidla. Má jen rozhodnout, jestli dnešní signál vyžaduje práci. Když ano, otevře nejmenší možný průchod. Když ne, nechá archiv spát. Někdy je to nejpraktičtější věc, kterou může tým udělat: nechat dobré staré rozhodnutí být dobrým starým rozhodnutím.
+
 ## Pracovní log
 
+- 2026-07-03: Doplněna úvodní podkapitola o prvním návratu z dlouhodobého klidu: návratový signál, tři otázky návratu, čtyři výsledky, privacy-first brzda, karta, mini workshop a checklist.
 - 2026-07-03: Doplněna úvodní podkapitola o převodu ověřeného archivovaného pravidla do dlouhodobého klidu: klidová věta, aktivní a archivní minimum, privacy-first úklid pomocných stop, karta, mini workshop a checklist.
 - 2026-07-03: Doplněna úvodní podkapitola o uzavření druhého běžného použití po archivaci pravidla: čtyři uzavírací stavy, praktický onboardingový příklad, privacy-first úklid dočasné stopy, karta, mini workshop a checklist.
 - 2026-07-03: Doplněna úvodní podkapitola o druhém běžném použití po archivaci pravidla: přenositelnost pracovní věty bez čerstvé paměti, kdy druhé použití dělat, privacy-first kontrola bez nové evidence, karta, mini workshop a checklist.
