@@ -290620,8 +290620,169 @@ Workshop nemá sloužit k debatě o tom, jestli by se podobný princip hodil i j
 
 Druhé běžné použití je zkouška klidu. Pokud dopadne dobře, nejlepší další krok je často žádný další krok. Pravidlo se našlo, použilo, nerozšířilo a nepřidalo data. To není nudný výsledek. To je přesně ten typ provozní kvality, který šetří čas, chrání soukromí a nechává tým dělat práci místo péče o vlastní pomocné systémy.
 
+## Uzavření druhého běžného použití po uzavření návratu z dlouhodobého klidu
+
+Uzavření druhého běžného použití rozhoduje, jestli se pravidlo po návratu z dlouhodobého klidu opravdu vrací do normálního provozu. Nejde o velké review. Jde o krátké zavření smyčky: víme, co se stalo při druhém použití, víme, zda pravidlo obstálo bez čerstvé paměti, a víme, že z ověření nevzniká nový stálý dohled.
+
+Začněte jednou stavovou větou:
+
+```text
+Druhé běžné použití uzavíráme jako:
+```
+
+Za dvojtečku patří jeden stav, ne komentář o všem, co se u toho řešilo. Pokud věta zní "v zásadě potvrzené, ale ještě bychom se měli podívat na...", smyčka není uzavřená. Buď vyberte lokální opravu, nebo pojmenujte nový podnět odděleně.
+
+Druhé použití se má uzavřít dřív, než začne lákat k širším závěrům. Když support šablona obstála ve druhé migraci, neznamená to automaticky, že je čas přepsat celý onboarding. Když se vrátila skrytá evidence, neznamená to automaticky, že je špatně celá privacy-first strategie. Znamená to, že jeden běžný případ ukázal jeden stav. To stačí.
+
+Codyho komentář: uzavírání druhého použití je práce proti dramatizaci. Lidé milují moment "teď už víme". Jenže často víme jen to, že jedna věta fungovala v jednom dalším případě. To je dobrá zpráva, ale pořád to není zakládací listina nové civilizace.
+
+### Čtyři uzavírací stavy
+
+Po druhém běžném použití vyberte jeden ze čtyř stavů:
+
+- Pravidlo se vrací do tichého provozu: druhé použití potvrdilo přenositelnost, hranice zůstala zavřená a nevznikla nová datová stopa.
+- Zavíráme po lokálním dočištění: pravidlo fungovalo, ale bylo nutné opravit kotvu, větu hranice nebo odstranit jednu pomocnou stopu.
+- Otevíráme novou malou smyčku: druhé použití odhalilo opakované tření, které nejde opravit jen v místě použití.
+- Vracíme téma do klidu bez další práce: druhé použití nepřineslo dost důkazu pro další zásah a případ se přirozeně nebude opakovat.
+
+První stav je nejjednodušší. Zapište, že zvláštní pozornost končí, a nechte pravidlo pracovat. Nepřidávejte další kontrolní datum jen proto, že se hodí mít pocit jistoty.
+
+U lokálního dočištění napište přesně, co se mění. Třeba:
+
+```text
+Do support šablony doplňujeme jednu větu, že velikost týmu se nepřenáší do CRM profilu, pokud z ní nevzniká schválené rozhodnutí.
+```
+
+To je hotová lokální oprava. Není to důvod otevřít obchodní kvalifikaci, segmentaci zákazníků ani novou analytiku migrací.
+
+Novou malou smyčku otevřete jen tehdy, když se tření opakuje a má jasné pracovní místo. Pokud druhý operátor znovu vytvořil pomocný seznam, možná nestačí jen smazat tabulku. Možná pravidlo neříká dost jasně, proč se informace drží pouze ve vlákně. I tak ale první nová smyčka nemá být "revize support procesu". Má být například "přepsat privacy-first větu v migrační šabloně a ověřit při dalším přirozeném případu".
+
+Klid bez další práce je platný výsledek. Pokud druhé použití nebylo čisté, ale situace byla jednorázová a nevznikla nová datová stopa, nezakládejte úkol jen proto, aby tabulka nevypadala prázdně. Prázdná tabulka je někdy krásná. Skoro až podezřele civilizovaná.
+
+### Praktický příklad uzavření
+
+Druhý běžný případ asistované migrace dopadl takto: operátor našel pravidlo v support šabloně, zeptal se zákazníka na rozsah migrace ve vlákně, použil odpověď pro nastavení a nezapsal velikost týmu do CRM. Nevznikl export ani pomocný seznam.
+
+Uzavření:
+
+```text
+Druhé běžné použití uzavíráme jako návrat pravidla do tichého provozu.
+
+Pravidlo bylo nalezené v support šabloně, archivní karta se neotevřela a odpověď zákazníka zůstala jen v migračním vlákně.
+
+Zvláštní pozornost končí. Nezakládáme další kontrolní evidenci migrací, nepřidáváme CRM atribut velikosti týmu a další návratový signál teď neurčujeme.
+```
+
+Slabší výsledek:
+
+```text
+Druhé běžné použití uzavíráme po lokálním dočištění.
+
+Pravidlo bylo použité správně, ale operátor si založil pomocný seznam migrací podle velikosti týmu. Seznam mažeme, protože nemá rozhodovací účel.
+
+Do support šablony doplňujeme větu: "Rozsah migrace použij pouze pro nastavení tohoto případu; nepřenášej ho do CRM ani do pomocné evidence."
+
+Další smyčku neotevíráme, pokud se stejný pomocný seznam nevrátí v dalším přirozeném případu.
+```
+
+Rozdíl je malý, ale důležitý. První zápis končí mimořádnou péči. Druhý zápis zavírá drobnou opravu a zároveň brání tomu, aby se z jednoho pomocného seznamu stal projekt o datové architektuře.
+
+### Privacy-first uzavření
+
+Privacy-first uzavření druhého použití má pojmenovat, co po ověření nezůstává. Často nejde o velké osobní údaje. Jde o nenápadné provozní stopy: pomocné seznamy, kopie odpovědí, poznámky k zákazníkům, exporty pro "pozdější analýzu" nebo screenshoty, které už nemají účel.
+
+Krátký zápis může vypadat takto:
+
+```text
+Po druhém použití nezůstává žádná pomocná evidence mimo pracovní vlákno.
+Do CRM nepřidáváme nový atribut.
+Dočasnou poznámku mažeme po dokončení migrace.
+Pravidlo se vrací do běžného provozu bez dalšího sledování.
+```
+
+Pokud vznikla dočasná stopa, rozhodněte o ní hned:
+
+- Smazat: stopa splnila účel a nemá být potřeba později.
+- Zobecnit: konkrétní zákaznický detail nahradíte anonymním příkladem pravidla.
+- Ponechat u pracovního místa: stopa je součástí konkrétního případu a má jasný účel.
+- Převést do nové smyčky: stopa ukazuje opakovaný problém, ale musí dostat vlastní hranici, vlastní stop podmínku a vlastní retenční pravidlo.
+
+Nejhorší stav je "necháme to zatím být". To obvykle znamená, že data zůstanou navždy, protože nikdo nebude mít odvahu smazat něco, co kdysi možná pomohlo. Privacy-first provoz nepotřebuje dokonalost. Potřebuje rozhodnutí v okamžiku, kdy je účel ještě vidět.
+
+### Karta uzavření druhého běžného použití po návratu
+
+```text
+Uzavřený návrat:
+
+Druhé běžné použití:
+
+Původní důvod druhého použití:
+- ověřit lokální kotvu
+- ověřit hranici
+- ověřit zastavení skryté evidence
+- ověřit zákaznickou komunikaci v dalším přirozeném případě
+
+Co se při druhém použití stalo:
+
+Uzavírací stav:
+- pravidlo se vrací do tichého provozu
+- zavíráme po lokálním dočištění
+- otevíráme novou malou smyčku
+- vracíme téma do klidu bez další práce
+
+Co se mění v pracovním místě:
+
+Co se výslovně nemění:
+
+Co dál neotevíráme:
+
+Jaká data, pole, exporty, segmenty, seznamy nebo trackery nepřidáváme:
+
+Co mažeme, zobecňujeme nebo ponecháváme jen u pracovního místa:
+
+Končí zvláštní pozornost?
+
+Nový návratový signál, pokud opravdu existuje:
+
+Vlastník:
+
+Datum:
+```
+
+Karta má být poslední věc, kterou k druhému použití potřebujete. Pokud po jejím vyplnění vzniknou další tři otázky, necpěte je do stejného záznamu. Vyberte jednu, založte novou malou smyčku a staré uzavření nechte uzavřené.
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: přečtěte původní důvod druhého použití.
+2. Minuta 2: napište, co se opravdu stalo, bez komentáře k historii.
+3. Minuta 3: vyberte jeden ze čtyř uzavíracích stavů.
+4. Minuta 4: rozhodněte, co se mění přímo v pracovním místě.
+5. Minuta 5: zapište, co se dál neotevírá.
+6. Minuta 6: zavřete privacy-first stopu: co mažeme, nepřidáváme nebo ponecháváme jen u případu.
+7. Minuta 7: rozhodněte, zda končí zvláštní pozornost.
+
+Pokud se tým zasekne na minutě 3, nejspíš nemá společný obraz výsledku. Vraťte se k jedné větě: "Co nám druhé použití ukázalo?" Bez té věty nemá smysl debatovat o dalším kroku. Jen byste malovali šipky kolem mlhy, a to je krásná disciplína, ale do provozu patří spíš výjimečně.
+
+### Checklist uzavření druhého běžného použití
+
+- Je jasné, proč jsme druhé použití původně otevřeli?
+- Je popsané, co se při druhém použití opravdu stalo?
+- Vybrali jsme jeden uzavírací stav?
+- Pokud pravidlo obstálo, končí zvláštní pozornost?
+- Pokud bylo potřeba dočištění, je lokální a má jasné pracovní místo?
+- Pokud vzniká nová smyčka, má užší hranici než původní návrat?
+- Je zapsané, co se dál neotevírá?
+- Nevzniká nový dohled jen kvůli pocitu jistoty?
+- Je jasné, jaká data, pole, exporty, segmenty, seznamy nebo trackery nepřidáváme?
+- Jsou dočasné poznámky, kopie, screenshoty nebo seznamy smazané, zobecněné nebo ponechané s jasným účelem?
+- Umí člověk příště pravidlo použít bez otevření této uzavírací karty?
+- Zůstává výsledek u pracovního místa, ne v nové pomocné vrstvě?
+
+Uzavření druhého běžného použití má vrátit pravidlo do klidu. Pokud pravidlo funguje, nechte ho být. Pokud potřebuje drobnou opravu, opravte nejbližší místo. Pokud ukázalo nový opakovaný problém, otevřete novou malou smyčku. Všechno ostatní je většinou jen elegantní způsob, jak si přidat práci a datovou stopu, kterou pak někdo bude slavnostně uklízet za půl roku.
+
 ## Pracovní log
 
+- 2026-07-03: Doplněna úvodní podkapitola o uzavření druhého běžného použití po uzavření návratu z dlouhodobého klidu: čtyři uzavírací stavy, support příklady, privacy-first úklid dočasných stop, karta, mini workshop a checklist.
 - 2026-07-03: Doplněna úvodní podkapitola o druhém běžném použití po uzavření návratu z dlouhodobého klidu: přenositelnost pravidla bez čerstvé paměti, kdy druhé použití otevírat, support příklad, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-07-03: Doplněna úvodní podkapitola o uzavření prvního běžného použití po uzavření návratu z dlouhodobého klidu: čtyři uzavírací stavy, praktický support příklad, privacy-first ukončení skryté evidence, karta, mini workshop a checklist.
 - 2026-07-03: Doplněna úvodní podkapitola o prvním běžném použití po uzavření návratu z dlouhodobého klidu: ověření pracovního místa bez otevírání archivu, čtyři výsledky, support příklad, privacy-first kontrola, karta, mini workshop a checklist.
