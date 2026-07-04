@@ -61,6 +61,8 @@ Když se z hranice dalšího kroku ukáže, že dnes není co opravovat, zapišt
 
 K takovému zápisu přidejte i jednu věc, která zůstává v běžném rytmu beze změny. Čtenář pak pozná, že nejde o tiché odsunutí odpovědnosti, ale o vědomé ponechání současného pravidla v platnosti až do jasnějšího signálu.
 
+Krátký zápis má také říct, kde ho člověk při běžné práci najde. Není nutné zakládat nový dokument; často stačí poznámka u stejného formuláře, šablony nebo karty pravidla. Důležité je, aby se uzavření dalo dohledat právě ve chvíli, kdy se stejný podnět vrátí.
+
 ## Záznam neotevřeného kroku
 
 Neotevřený krok je zvláštní typ výsledku. Na první pohled vypadá jako nic: žádný commit, žádná nová obrazovka, žádný upravený formulář, žádný nový report. Ve skutečnosti ale může být velmi cenný, pokud zabrání práci, která by jen rozšířila rozsah, přidala data bez účelu nebo znovu otevřela starý problém bez dnešního důvodu.
@@ -292190,6 +292192,7 @@ Druhé běžné použití po návratu pravidla do stabilního rytmu je poslední
 
 ## Pracovní log
 
+- 2026-07-04: Doplněna krátká úvodní poznámka k dohledatelnosti záznamu neotevřeného kroku v běžném pracovním místě.
 - 2026-07-04: Doplněna úvodní podkapitola o druhém běžném použití po návratu pravidla do stabilního rytmu: přenos bez čerstvé paměti, slabá kotva, slabá rozhodovací věta, návrat skryté evidence, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-07-04: Doplněna úvodní podkapitola o uzavření prvního běžného použití po návratu pravidla do stabilního rytmu: čtyři uzavírací stavy, lokální oprava, skrytá evidence, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-07-04: Doplněna úvodní podkapitola o prvním běžném použití po návratu pravidla do stabilního rytmu: ověření kanonického místa, práce bez historie, skrytá evidence, support příklady, privacy-first karta, mini workshop a checklist.
