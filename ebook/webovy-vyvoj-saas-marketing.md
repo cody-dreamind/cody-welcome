@@ -292367,8 +292367,198 @@ Když workshop sklouzne k debatě o celé oblasti, zastavte ho větou: "Druhé p
 
 Uzavření druhého běžného použití je dobrý konec stabilizační smyčky. Pravidlo buď obstálo a vrací se do normální práce, nebo ukázalo poslední lokální opravu, širší vzor či skutečný návratový signál. V každém případě má skončit zvláštní režim. Stabilní provoz nevzniká tím, že všechno hlídáte déle. Vzniká tím, že víte, kdy přestat.
 
+## Převod stabilizovaného pravidla do dlouhodobého revizního rytmu
+
+Když pravidlo prošlo druhým běžným použitím a zvláštní péče skončila, zbývá poslední malý krok: zařadit ho do dlouhodobého revizního rytmu. Ne do nové kontrolní kampaně. Ne do další tabulky. Do obyčejného rytmu, ve kterém tým stejně kontroluje své pracovní šablony, support postupy, onboarding, obchodní materiály nebo privacy-first mapu dat.
+
+Tahle část je důležitá hlavně proto, že stabilizované pravidlo snadno skončí ve zvláštním mezistavu. Už není nové, ale ještě kolem něj zůstává paměť poslední opravy. Lidé ho znají, protože se o něm nedávno mluvilo. Jenže za tři měsíce přijde nový člověk, jiný typ zakázky nebo úprava procesu a čerstvá paměť zmizí. Dlouhodobý rytmus proto nehlídá minulou změnu. Hlídá, aby pravidlo zůstalo dohledatelné, úměrné a datově střídmé i bez lidí, kteří ho zaváděli.
+
+Začněte větou:
+
+```text
+Pravidlo po stabilizaci zařazujeme do tohoto běžného revizního rytmu:
+```
+
+Za ni napište konkrétní rytmus a pracovní místo:
+
+```text
+Pravidlo po stabilizaci zařazujeme do měsíční kontroly support šablon, protože žije v potvrzovací odpovědi k fakturačním opravám.
+```
+
+Pokud takovou větu neumíte napsat, pravidlo ještě nemá domov. To není důvod založit nový proces. Je to důvod najít nejbližší existující místo, kde se s pravidlem opravdu pracuje.
+
+### Vyberte nejlehčí existující rytmus
+
+Dlouhodobý revizní rytmus má být co nejlehčí. Ideálně použijte něco, co už tým dělá:
+
+- měsíční kontrolu support šablon,
+- kvartální úklid obchodních materiálů,
+- revizi onboardingové příručky,
+- kontrolu datové mapy,
+- technické review automatizací,
+- pravidelný úklid kanonického indexu.
+
+Nový rytmus zakládejte jen tehdy, když pravidlo nemá žádné přirozené místo. I pak začněte malým intervalem a jasným koncem: po prvním cyklu se rozhodne, jestli nový rytmus opravdu dává smysl, nebo se pravidlo připojí k jinému existujícímu review.
+
+Praktická otázka:
+
+```text
+Kde by člověk pravidlo hledal, kdyby o poslední stabilizaci nic nevěděl?
+```
+
+Odpověď má větší váhu než organizační přání. Pokud by ho člověk hledal v support šabloně, neukládejte ho jen do produktového backlogu. Pokud by ho hledal v onboardingové příručce, nenechávejte ho jen v komentáři u starého ticketu. Kanonické místo má sledovat práci, ne interní nostalgii.
+
+### Praktický příklad
+
+```text
+Pravidlo:
+Fakturační opravy se řeší v původním support ticketu. Nevzniká samostatná tabulka oprav.
+
+Stabilizační výsledek:
+Druhé běžné použití potvrdilo přenos. Jiný člověk pravidlo našel a použil bez dotazu na původního vlastníka.
+
+Dlouhodobý rytmus:
+Měsíční kontrola support šablon.
+
+Co se při kontrole ověřuje:
+1. Pracovní věta je pořád v potvrzovací šabloně.
+2. Šablona pořád odkazuje na původní ticket jako zdroj pravdy.
+3. Nevznikla nová pomocná tabulka, CRM vlastnost ani ruční evidence oprav.
+4. Návratový signál je pořád srozumitelný.
+
+Co se neověřuje:
+Nekontrolujeme výkon jednotlivých lidí, počet všech oprav ani historii každého ticketu.
+
+Návratový signál:
+Téma otevřeme znovu pouze tehdy, když se mimo ticket objeví samostatná evidence fakturačních oprav nebo když support nedokáže dohledat poslední stav opravy v původním ticketu.
+```
+
+Tento příklad drží rytmus malý. Kontrola se nedívá na všechno, co by se teoreticky dalo měřit. Dívá se jen na to, jestli pravidlo pořád žije na správném místě a nevyrábí zbytečnou datovou stopu.
+
+Slabší převod by vypadal takto:
+
+```text
+Dlouhodobě budeme sledovat, jestli se pravidlo používá.
+```
+
+To zní rozumně, ale je to moc volné. Může z toho vzniknout report lidí, audit každého použití nebo další evidence, která porušuje smysl původního pravidla. Lepší věta je konkrétnější:
+
+```text
+Při měsíční kontrole support šablon ověříme, že pracovní věta pořád existuje, nevede k nové evidenci a má srozumitelný návratový signál.
+```
+
+### Co se v rytmu sleduje
+
+Dlouhodobé review stabilizovaného pravidla má mít tři vrstvy:
+
+- Najitelnost: člověk pravidlo najde tam, kde přirozeně pracuje.
+- Použitelnost: pravidlo vede k rozhodnutí bez dalšího vysvětlování.
+- Datová střídmost: pravidlo nevytváří novou evidenci, tracker, export nebo osobní kontrolu lidí.
+
+Nic dalšího nepřidávejte, pokud pro to nemáte návratový signál. Stabilní pravidlo nepotřebuje vlastní dashboard jen proto, že existuje. Potřebuje zůstat použitelné bez skryté podpory.
+
+Pokud při review narazíte na drobnou slabinu, zapište ji jako lokální servisní poznámku:
+
+```text
+Při kvartální kontrole jsme našli starý odkaz na předchozí verzi šablony. Opravujeme odkaz v onboardingové stránce. Neotevíráme změnu pravidla ani novou evidenci použití.
+```
+
+Pokud najdete opakovaný vzor, otevřete novou otázku:
+
+```text
+Stejná zastaralá kopie pravidla se objevila ve třech pracovních místech. Nejde o lokální opravu odkazu. Otevíráme otázku zdroje pravdy pro support postupy.
+```
+
+Rozdíl je důležitý. Lokální servis opravuje jedno místo. Nová otázka řeší systémový vzor. Dlouhodobý rytmus nemá tyto dva stavy míchat dohromady.
+
+### Privacy-first dlouhodobý rytmus
+
+Privacy-first kontrola se při dlouhodobém rytmu ptá hlavně na jednu věc:
+
+```text
+Nevznikla kolem pravidla nová evidence jen proto, že jsme ho chtěli mít pod kontrolou?
+```
+
+Tohle je častá past. Tým zruší jednu zbytečnou tabulku a za měsíc založí jinou, tentokrát pojmenovanou "kontrola používání pravidla". Formálně je to nový dokument. Prakticky je to starý problém v čisté košili.
+
+Při každém dlouhodobém review proto projděte tři privacy-first otázky:
+
+- Sbíráme kvůli pravidlu nové osobní, obchodní nebo behaviorální údaje?
+- Vznikl nový export, screenshot, ruční seznam nebo analytický pohled bez jasného rozhodovacího účelu?
+- Dá se kontrola udělat z existujícího pracovního místa místo z nové evidence?
+
+Pokud odpověď ukáže zbytečnou datovou stopu, nepište hned nové pravidlo. Nejdřív ukliďte stopu a doplňte hranici do kanonického místa:
+
+```text
+Pravidlo se kontroluje při běžné revizi šablony. Nevzniká samostatný seznam použití, protože rozhodovací hodnota je v najitelnosti šablony a absenci vedlejší evidence.
+```
+
+Codyho komentář: nejzábavnější způsob, jak zabít privacy-first pravidlo, je měřit jeho dodržování tak horlivě, až vytvoříte přesně tu datovou stopu, které se mělo zabránit. Je to elegantní, drahé a úplně zbytečné. Takže ne.
+
+### Karta dlouhodobého revizního rytmu
+
+```text
+Pravidlo:
+
+Kanonické pracovní místo:
+
+Stabilizační výsledek:
+
+Dlouhodobý revizní rytmus:
+
+Proč právě tento rytmus:
+
+Co se při review ověřuje:
+- najitelnost
+- použitelnost
+- datová střídmost
+
+Co se výslovně neověřuje:
+
+Jaká nová evidence nevzniká:
+
+Lokální servisní poznámka, pokud existuje:
+
+Nová otázka, pokud existuje:
+
+Návratový signál:
+
+Vlastník rytmu:
+
+Nejbližší kontrola:
+```
+
+Karta nemá zakládat nový svět. Má jen říct, kam pravidlo patří, co se minimálně ověřuje a co se kvůli tomu nezačne sbírat. Pokud je delší než samotné pravidlo, zkraťte ji. Dlouhodobý rytmus má být lehký, jinak ho tým začne obcházet nebo z něj udělá rituál bez rozhodovací hodnoty.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte pravidlo a výsledek druhého běžného použití.
+2. Minuta 2: najděte nejbližší existující revizní rytmus.
+3. Minuta 3: napište, co se v rytmu opravdu ověřuje.
+4. Minuta 4: napište, co se výslovně neověřuje.
+5. Minuta 5: potvrďte, že nevzniká nová evidence ani tracker.
+6. Minuta 6: určete vlastníka a návratový signál.
+
+Když tým nedokáže vybrat existující rytmus, nezačínejte debatou o nové poradě. Vraťte se k otázce, kde pravidlo reálně žije. Pracovní místo většinou napoví rytmus samo.
+
+### Checklist dlouhodobého rytmu
+
+- Má pravidlo po stabilizaci jasné kanonické pracovní místo?
+- Je vybraný existující revizní rytmus, ne nová kontrola ze zvyku?
+- Víme, proč pravidlo patří právě do tohoto rytmu?
+- Ověřuje review najitelnost, použitelnost a datovou střídmost?
+- Je zapsané, co se výslovně neověřuje?
+- Nevzniká samostatný seznam použití, nový tracker, CRM atribut ani report lidí?
+- Umíme lokální servisní poznámku oddělit od nové systémové otázky?
+- Je návratový signál pořád konkrétní a dohledatelný?
+- Má rytmus vlastníka?
+- Ví tým, kdy pravidlo nechat být?
+
+Převod do dlouhodobého revizního rytmu je nenápadný, ale důležitý konec stabilizace. Pravidlo už nepotřebuje mimořádnou péči. Potřebuje jen správné místo, lehké ověření a jasnou hranici dat. Pokud se nic neděje, nechte ho pracovat. I procesy občas ocení, když jim nikdo každé ráno neměří tep.
+
 ## Pracovní log
 
+- 2026-07-04: Doplněna úvodní podkapitola o převodu stabilizovaného pravidla do dlouhodobého revizního rytmu: výběr existujícího rytmu, praktický support příklad, lokální servisní poznámka, privacy-first kontrola evidence, karta, mini workshop a checklist.
 - 2026-07-04: Doplněna úvodní podkapitola o uzavření druhého běžného použití po stabilizaci pravidla: uzavírací stavy, poslední lokální oprava, nová otázka, privacy-first úklid dočasných stop, karta, mini workshop a checklist.
 - 2026-07-04: Doplněna krátká úvodní poznámka k dohledatelnosti záznamu neotevřeného kroku v běžném pracovním místě.
 - 2026-07-04: Doplněna úvodní podkapitola o druhém běžném použití po návratu pravidla do stabilního rytmu: přenos bez čerstvé paměti, slabá kotva, slabá rozhodovací věta, návrat skryté evidence, privacy-first kontrola, karta, mini workshop a checklist.
