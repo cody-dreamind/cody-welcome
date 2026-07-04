@@ -294474,8 +294474,187 @@ Pokud workshop začne sklouzávat k tomu, jestli bylo rozhodnutí o pasivním pr
 
 První běžné použití po převodu do pasivního provozu nemá dokazovat, že systém je dokonalý. Má ukázat, jestli pravidlo dokáže žít tam, kde se práce skutečně děje. Když ano, nechte ho být. Když ne, opravte nejbližší překážku a chraňte pasivní režim před návratem zbytečné kontroly.
 
+## Uzavření prvního pasivního použití
+
+První pasivní použití je potřeba uzavřít lehčeji než běžné review. Pokud z něj uděláte velkou schůzku, vracíte se k režimu, který jste právě zředili. Pokud ho ale neuzavřete vůbec, zůstane po něm nejasnost: pravidlo možná fungovalo, možná jen někdo pomohl z paměti, možná vznikla malá pomocná evidence, která za měsíc začne vypadat jako nový standard.
+
+Uzavření má proto jednoduchý cíl:
+
+```text
+Potvrdit, zda pasivní provoz pokračuje, a uklidit všechno, co by z prvního použití dělalo nový kontrolní režim.
+```
+
+Neuzavíráte celou historii pravidla. Uzavíráte jednu obyčejnou situaci. To je důležitý rozdíl. Čím déle bylo pravidlo dřív v aktivním rytmu, tím větší pokušení bude připsat k prvnímu použití komentáře, poučení, tabulku výjimek a preventivní kontrolu za měsíc. Většina z toho je dobře míněná administrativa, která pasivní provoz tiše ruší.
+
+### Tři uzavírací věty
+
+Po prvním pasivním použití stačí doplnit tři věty:
+
+```text
+Pravidlo při běžném použití:
+
+Pasivní provoz:
+
+Dočasné stopy:
+```
+
+Vyplněný příklad:
+
+```text
+Pravidlo při běžném použití:
+Support šablona pro export dat byla nalezená v helpdesku a stačila k odpovědi zákazníkovi.
+
+Pasivní provoz:
+Pokračuje beze změny, protože nebyl potřeba starý kontext ani ruční eskalace.
+
+Dočasné stopy:
+Nevznikl export, kontrolní seznam ani nová metrika; interní poznámka s odkazem na staré review byla odstraněná.
+```
+
+Tyto věty jsou schválně krátké. Mají zavřít práci, ne vytvořit novou dokumentaci. Pokud se do nich nevejde výsledek, pravděpodobně nejde o čisté uzavření. Buď vznikla lokální oprava, slabá samostatnost, nebo návratový signál. V takovém případě použijte odpovídající stav a nelepte na něj nálepku "všechno dobré".
+
+### Čtyři uzavírací stavy
+
+Vyberte jeden ze čtyř stavů:
+
+- Zavřeno bez změny: pravidlo bylo použité samostatně a nevznikla nová stopa.
+- Zavřeno s lokální opravou: pravidlo fungovalo, ale upravilo se jedno pracovní místo.
+- Vráceno k doplnění: pravidlo nebylo dost samostatné a potřebuje jednu konkrétní rozhodovací větu.
+- Otevřen návratový signál: stala se přesně ta situace, která měla téma znovu otevřít.
+
+U stavu "zavřeno bez změny" nedělejte nic navíc. Nezakládejte další kontrolu, neposílejte dlouhý update a nesbírejte důkazy o tom, že nic nesbíráte. Běžný pracovní záznam stačí.
+
+U stavu "zavřeno s lokální opravou" popište opravu jednou větou. Například: "Šablona byla přesunutá z archivní sekce do aktivního helpdesku." To je celé. Není potřeba otevírat starou kartu převodu, pokud se nemění pravidlo ani návratový signál.
+
+U stavu "vráceno k doplnění" neobnovujte celý revizní rytmus. Doplňte chybějící větu a domluvte první další běžné použití, ve kterém se ověří právě ona. Pokud pravidlo potřebuje stránku vysvětlení, není to pasivní pravidlo; je to skrytý proces a zaslouží si zjednodušení.
+
+U stavu "otevřen návratový signál" začněte znovu od signálu, ne od dojmu. Napište, co se přesně stalo, porovnejte to s domluvenou hranicí a otevřete nejmenší další krok. Ani návratový signál neznamená, že máte obnovit všechno, co kdysi existovalo kolem původní kontroly.
+
+### Praktický příklad
+
+Support tým po převodu pravidla do pasivního provozu vyřídí první dotaz na export dat. Člověk najde správnou šablonu, odpoví zákazníkovi a nepotřebuje se ptát právníka ani technického týmu. V ticketu zůstane běžná odpověď. To je čisté použití.
+
+Uzavření může znít:
+
+```text
+Pravidlo při běžném použití:
+Šablona Export dat stačila k vyřízení standardního dotazu.
+
+Pasivní provoz:
+Pokračuje beze změny.
+
+Dočasné stopy:
+Žádné nevznikly.
+```
+
+O týden později přijde podobný dotaz. Tentokrát člověk šablonu najde až přes starý odkaz z uzavírací karty. Odpověď je správná, ale pracovní místo je slabé. Uzavření nemá znít "pasivní provoz selhal". Přesnější je:
+
+```text
+Pravidlo při běžném použití:
+Šablona fungovala, ale nebyla dohledatelná z běžného helpdesku.
+
+Pasivní provoz:
+Pokračuje po lokální opravě.
+
+Dočasné stopy:
+Starý odkaz z uzavírací karty se nepřenáší; šablona byla připojená k běžné kategorii Exporty.
+```
+
+Třetí varianta je slabší. Člověk šablonu najde, ale neví, jestli konkrétní žádost spadá do standardního rozsahu. Musí se ptát původního vlastníka pravidla. Tady není problém v umístění, ale v rozhodovací větě. Uzavření:
+
+```text
+Pravidlo při běžném použití:
+Šablona byla dostupná, ale hranice standardního exportu nebyla samostatně rozhodnutelná.
+
+Pasivní provoz:
+Vrací se k jednomu doplnění rozhodovací věty, ne k pravidelnému review.
+
+Dočasné stopy:
+Dotaz původnímu vlastníkovi se nepřenáší do nové evidence; po doplnění věty se ověří další běžné použití.
+```
+
+### Privacy-first uzavření
+
+Uzavření prvního pasivního použití je místo, kde se často nenápadně vrací sběr dat. Tým chce být pečlivý, a tak si uloží příklad, screenshot, export ticketu, seznam podobných případů nebo poznámku "sledovat". Každá z těchto stop může být rozumná, pokud má účel a konec. Bez účelu je to jen starý kontrolní režim převlečený za opatrnost.
+
+Privacy-first uzavření proto obsahuje jednu větu o stopách:
+
+```text
+Po uzavření nezůstává žádná nová evidence mimo běžné pracovní místo.
+```
+
+Pokud nějaká nová stopa zůstat musí, napište proč, kde bude uložená a kdy skončí. Například:
+
+```text
+Dočasná poznámka zůstává v ticketu do uzavření reklamace, protože vysvětluje konkrétní zákaznickou odpověď. Nevzniká samostatný export ani seznam podobných případů.
+```
+
+To je přijatelný kompromis: stopa má účel, místo a hranici. Horší varianta je "dáme si to bokem pro jistotu". Bokem je místo, kde se rodí zbytečné databáze. A zbytečné databáze pak chtějí vlastní údržbu, oprávnění, retenci a vysvětlování. Skvělý způsob, jak z jedné šablony vyrobit malý administrativní román.
+
+Codyho komentář: nejhezčí uzavření pasivního pravidla je nudné. Pravidlo fungovalo, nic se nerozšířilo, data nepřibyla, lidé šli dělat něco užitečnějšího. V produktové práci je to skoro podezřelé, protože to nevypadá jako výkon. Přesto je to přesně ten druh výkonu, který dlouhodobě šetří tým.
+
+### Karta uzavření prvního pasivního použití
+
+```text
+Pravidlo:
+
+Běžné pracovní místo:
+
+Situace prvního použití:
+
+Výsledek prvního použití:
+- zavřeno bez změny
+- zavřeno s lokální opravou
+- vráceno k doplnění
+- otevřen návratový signál
+
+Uzavírací věta:
+
+Pokračuje pasivní provoz?
+
+Lokální oprava, pokud existuje:
+
+Doplňovaná rozhodovací věta, pokud existuje:
+
+Návratový signál, pokud se potvrdil:
+
+Co se nepřenáší do nové evidence:
+
+Co mažeme, anonymizujeme nebo necháváme pouze v běžném pracovním místě:
+
+Kde je uložený běžný záznam:
+```
+
+Kartu nepoužívejte automaticky u čistého použití. Je užitečná hlavně tehdy, když se něco opravovalo, doplňovalo nebo otevíralo. Pokud se nic nestalo, nevyrábějte důkaz, že se nic nestalo. To není dokumentace, to je rituál.
+
+### Mini workshop na 5 minut
+
+1. Minuta 1: přečtěte běžnou situaci prvního použití.
+2. Minuta 2: vyberte jeden ze čtyř uzavíracích stavů.
+3. Minuta 3: napište tři uzavírací věty.
+4. Minuta 4: zkontrolujte, zda nezůstala nová evidence mimo běžné pracovní místo.
+5. Minuta 5: proveďte lokální opravu nebo potvrďte, že pasivní provoz pokračuje.
+
+Když se během pěti minut objeví větší téma, neřešte ho v tomto workshopu. Zapište návratový signál nebo novou pracovní otázku a uzavřete první použití. Pasivní provoz má zůstat lehký i ve chvíli, kdy tým narazí na zajímavý nápad.
+
+### Checklist uzavření prvního pasivního použití
+
+- Je jasné, jaké pravidlo se použilo?
+- Šlo o běžné pracovní místo, ne o plánované review?
+- Vybrali jsme jeden uzavírací stav?
+- Je uzavírací věta krátká a rozhodnutelná?
+- Pokud vznikla lokální oprava, zůstala u jednoho místa?
+- Pokud chyběla rozhodovací věta, doplňujeme jen ji?
+- Pokud se potvrdil návratový signál, otevíráme nejmenší další krok?
+- Nevznikla nová evidence jen kvůli kontrole?
+- Jsou dočasné stopy smazané, anonymizované nebo ponechané jen tam, kde mají účel?
+- Je jasné, zda pasivní provoz pokračuje?
+
+Uzavření prvního pasivního použití má být rychlé, konkrétní a skoro neviditelné. Pokud pravidlo funguje, nechte ho pracovat. Pokud narazilo na malou překážku, opravte ji tam, kde vznikla. Pokud se opravdu objevil návratový signál, otevřete další krok vědomě. Všechno ostatní je jen pokušení udělat z klidu nový projekt.
+
 ## Pracovní log
 
+- 2026-07-04: Doplněna úvodní podkapitola o uzavření prvního pasivního použití: tři uzavírací věty, čtyři stavy, support příklad, privacy-first úklid stop, karta, mini workshop a checklist.
 - 2026-07-04: Doplněna úvodní podkapitola o prvním běžném použití po převodu do pasivního provozu: tři otázky použití, support příklad, čtyři výsledky, privacy-first kontrola nové evidence, karta, mini workshop a checklist.
 - 2026-07-04: Doplněna úvodní podkapitola o převodu zředěného revizního rytmu do dlouhodobého pasivního provozu: pasivní pracovní věta, vypnutí kontrolních stop, návratový signál bez nové evidence, privacy-first převod, karta, mini workshop a checklist.
 - 2026-07-04: Doplněna úvodní podkapitola o druhé kontrole po zředění revizního rytmu: tři kontrolní otázky, čtyři výsledky kontroly, praktický support příklad, privacy-first kontrola skryté evidence, karta, mini workshop a checklist.
