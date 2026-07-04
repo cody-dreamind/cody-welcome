@@ -291179,8 +291179,186 @@ Pokud workshop nestačí dokončit za pět minut, nejspíš se nebavíte o uzav�
 
 Uzavření první klidové kontroly má vrátit pravidlo tam, kde má být: do běžné práce. Ne do zapomnění, ne do zvláštního dohledu, ne do další tabulky. Jen do rytmu, který už tým používá. Když se později objeví skutečný signál, pravidlo se znovu otevře. Do té doby má klid a tým má méně provozního šumu.
 
+## Druhá klidová kontrola po návratu pravidla
+
+Druhá klidová kontrola má jinou roli než první. První ověřuje, jestli pravidlo po návratu vůbec zvládne běžnou práci bez mimořádné pozornosti. Druhá ověřuje, jestli se z toho nestal tichý zvyk: pravidlo je pořád najitelné, pořád rozhodnutelné a tým kolem něj nezačal nenápadně budovat novou evidenci.
+
+Neotevírejte ji hned další den. Druhá klidová kontrola má přijít až v dalším přirozeném rytmu pracovního místa. Pokud se šablony kontrolují měsíčně, počkejte na další měsíc. Pokud provozní checklist žije v kvartálním review, patří tam. Smyslem není hlídat pravidlo jako pacienta po operaci. Smyslem je zjistit, jestli pravidlo umí normálně žít, když už se na něj nikdo nedívá s čerstvou opatrností.
+
+Začněte větou:
+
+```text
+Druhou klidovou kontrolu děláme proto, abychom ověřili, že pravidlo po první kontrole zůstalo součástí běžného rytmu a nevytvořilo kolem sebe nový dohled.
+```
+
+Tato věta je malá brzda proti přehnané péči. Druhá kontrola nemá znovu rozebírat původní návrat, první běžné použití ani všechna stará rozhodnutí. Má se podívat na současný provoz: pravidlo tam je, lidé ho používají, neotvírá se bez důvodu a nevznikají nové datové stopy.
+
+### Co se při druhé kontrole mění
+
+U druhé klidové kontroly už se neptejte jen na najitelnost. Přidejte otázku stability:
+
+- Zůstalo pravidlo na stejném kanonickém místě?
+- Nepřibyly vedle něj další kopie, zkratky nebo neoficiální poznámky?
+- Umí člověk použít pravidlo bez připomenutí první klidové kontroly?
+- Nevznikla pomocná evidence, která měla být původně odmítnutá?
+
+První kontrola často opraví malý nepořádek. Druhá kontrola ukáže, jestli oprava opravdu drží, nebo jestli se systém vrací ke starému návyku. Pokud se například po první kontrole odstranila stará věta z checklistu, druhá kontrola ověří, že se znovu neobjevila v jiné šabloně, komentáři nebo ruční poznámce.
+
+Nejde o hon na chyby. Jde o ochranu jednoduchosti. Pravidlo v dlouhodobém klidu má mít jedno místo, jednu pracovní větu a jeden návratový signál. Jakmile kolem něj začnou růst pomocné kopie, tým už zase neví, co platí. A když nikdo neví, co platí, brzy někdo založí tabulku. Tak začínají malé provozní ságy, které nikdo nechtěl číst.
+
+### Praktický příklad
+
+Představte si pravidlo pro ruční ověření exportu zákaznických dat. Po návratu z dlouhodobého klidu se pravidlo upravilo v support šabloně. První klidová kontrola potvrdila, že support pravidlo našel a použil bez historické karty. Jedna stará věta v provozním checklistu se odstranila.
+
+Druhá klidová kontrola o měsíc později:
+
+```text
+Kanonické místo:
+Aktuální support šablona pro žádosti o export dat.
+
+Co kontrolujeme:
+Zda support používá šablonu bez starého checklistu a zda nevznikl nový seznam exportů.
+
+Výsledek:
+Pravidlo bylo použité u jedné žádosti. Člověk našel aktuální šablonu, starý checklist nepoužil a nevznikl nový kontrolní sheet.
+
+Závěr:
+Pravidlo zůstává v běžném měsíčním review šablon. Neotevíráme další kontrolu mimo tento rytmus.
+```
+
+Slabší výsledek:
+
+```text
+Výsledek:
+Pravidlo je v support šabloně správně, ale obchod si pro jistotu vede ruční poznámku "exporty k ověření" v soukromém dokumentu.
+
+Lokální oprava:
+Soukromý dokument rušíme. Pokud support potřebuje eskalaci, použije běžný ticket a anonymizovanou poznámku v review.
+
+Co neotevíráme:
+Nový report exportů, nový CRM atribut ani další měsíční kontrolu mimo běžné review šablon.
+```
+
+Tady druhá kontrola neříká, že pravidlo selhalo. Říká, že kolem něj vyrostla malá neoficiální berlička. Berličku odstraňte dřív, než se z ní stane "náš proces". Ne všechno, co pomohlo jednou, si zaslouží vlastní život.
+
+### Tři výsledky druhé klidové kontroly
+
+Druhou klidovou kontrolu uzavřete jedním ze tří stavů:
+
+- Stabilní klid: pravidlo je na kanonickém místě, funguje bez připomínání a nevznikla nová evidence.
+- Lokální očištění: pravidlo platí, ale je potřeba odstranit kopii, soukromou poznámku, starý odkaz nebo pomocnou evidenci.
+- Návratový signál: pravidlo v běžné práci opakovaně selhalo nebo kanonické místo už zjevně neodpovídá tomu, kde lidé rozhodují.
+
+Stabilní klid znamená, že další zvláštní pozornost končí. Pravidlo zůstává jen v běžném rytmu daného pracovního místa. Neplánujte třetí klidovou kontrolu jen proto, že druhá dopadla dobře. To by bylo jako gratulovat hasicímu přístroji každý měsíc, že nezačal hořet. Hezké gesto, slabý provozní přínos.
+
+Lokální očištění znamená, že neotevíráte novou produktovou práci. Jen uklidíte stopu, která by časem matoucím způsobem konkurovala kanonickému pravidlu. Typicky smažete starou kopii, přidáte odkaz na správné místo, zobecníte příklad nebo zrušíte ruční seznam.
+
+Návratový signál znamená, že problém není kosmetický. Pokud dva různí lidé pravidlo znovu hledají mimo kanonické místo, nebo pokud pravidlo nevede k rozhodnutí v reálném případu, otevřete malý návrat. Ale i tehdy nezačínejte kompletní revizí. První otázka má být užší: kde má pravidlo žít, aby odpovídalo skutečné práci?
+
+### Privacy-first kontrola
+
+Druhá klidová kontrola je dobré místo na hledání neoficiálních datových stop. Právě po první kontrole může někdo začít držet "malou pomocnou evidenci", aby měl jistotu. Vypadá nevinně: seznam exportů, kopie zákaznické odpovědi, screenshot staré šablony, ruční štítek v CRM, soukromá poznámka ve sdíleném dokumentu. Jenže každá taková stopa potřebuje účel, vlastníka, přístup a konec.
+
+Použijte krátký zápis:
+
+```text
+Při druhé klidové kontrole jsme hledali:
+
+Našli jsme:
+
+Mažeme nebo rušíme:
+
+Dál nezakládáme:
+```
+
+Příklad:
+
+```text
+Při druhé klidové kontrole jsme hledali:
+Pomocné seznamy exportů, kopie ticketů a ruční poznámky mimo support šablonu.
+
+Našli jsme:
+Jeden soukromý dokument se dvěma anonymizovanými poznámkami.
+
+Mažeme nebo rušíme:
+Dokument rušíme, protože rozhodnutí patří do běžného review šablon.
+
+Dál nezakládáme:
+Nový report exportů, samostatný seznam kontrol ani další retenci zákaznických žádostí.
+```
+
+Privacy-first výsledek není jen "nic nového nesbíráme". Je to i aktivní odstranění toho, co se začalo sbírat bokem. Evropský provoz se nepozná podle toho, že nikdy neudělá provizorium. Pozná se podle toho, že provizorium nenechá zestárnout do infrastruktury.
+
+### Karta druhé klidové kontroly
+
+```text
+Pravidlo:
+
+Kanonické pracovní místo:
+
+Běžný rytmus kontroly:
+
+Co první klidová kontrola uzavřela:
+
+Co ověřuje druhá klidová kontrola:
+
+Zůstalo pravidlo na kanonickém místě?
+
+Použil ho člověk bez připomenutí historie?
+
+Vznikly kopie, zkratky, soukromé poznámky nebo pomocné evidence?
+
+Výsledek:
+- stabilní klid
+- lokální očištění
+- návratový signál
+
+Pokud proběhlo lokální očištění, co přesně mizí nebo se slučuje:
+
+Pokud vznikl návratový signál, jak zní nejmenší další otázka:
+
+Co se dál výslovně neotevírá:
+
+Jaká data, exporty, screenshoty, seznamy, reporty nebo CRM atributy dál nevznikají:
+
+Vlastník:
+
+Datum kontroly:
+```
+
+Kartu ukládejte k běžnému review, stejně jako kartu první kontroly. Nepřesouvejte ji do zvláštní složky "návraty pravidel", pokud ji tým běžně neotevírá. Samostatná složka často vypadá uklizeně, ale pro běžnou práci je to jen další místo, kde pravda chodí odpočívat.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: otevřete kanonické pracovní místo pravidla.
+2. Minuta 2: porovnejte ho se závěrem první klidové kontroly.
+3. Minuta 3: ověřte jeden běžný průchod bez historické karty.
+4. Minuta 4: hledejte kopie, ruční poznámky nebo pomocné evidence.
+5. Minuta 5: vyberte jeden ze tří výsledků.
+6. Minuta 6: zapište, co dál nevzniká a zda končí zvláštní pozornost.
+
+Pokud se workshop začne měnit v návrh nového reportu, zastavte ho a napište, jaký konkrétní návratový signál report údajně řeší. Pokud signál neumíte pojmenovat, report nepotřebujete. Potřebujete zavřít kontrolu a nechat pravidlo v klidu.
+
+### Checklist druhé klidové kontroly
+
+- Proběhla kontrola v existujícím běžném rytmu?
+- Nevrátili jsme se zbytečně k celé historii návratu?
+- Je pravidlo pořád na jednom kanonickém místě?
+- Uměl ho člověk použít bez připomenutí první klidové kontroly?
+- Nevznikly vedle pravidla nové kopie, zkratky nebo soukromé poznámky?
+- Nevznikl nový seznam, report, export, screenshotová složka nebo CRM atribut?
+- Pokud vznikla pomocná stopa, rozhodli jsme, zda ji smazat, sloučit nebo zobecnit?
+- Vybrali jsme jeden ze tří výsledků: stabilní klid, lokální očištění, nebo návratový signál?
+- Pokud jde o lokální očištění, nemění smysl pravidla?
+- Pokud jde o návratový signál, je nejmenší další otázka užší než kompletní revize?
+- Je jasné, co se dál výslovně neotevírá?
+- Končí zvláštní pozornost, pokud pravidlo obstálo?
+
+Druhá klidová kontrola je poslední rozumná kontrola před tím, než pravidlo necháte opravdu žít vlastním životem. Když obstojí, nechte ho být. Když najdete malý nános provozního prachu, setřete ho na místě. A když najdete skutečný návratový signál, otevřete malý návrat, ne celou kroniku. To je rozdíl mezi údržbou systému a péčí, která si jen vyrábí další systém.
+
 ## Pracovní log
 
+- 2026-07-04: Doplněna úvodní podkapitola o druhé klidové kontrole po návratu pravidla: stabilní klid, lokální očištění, návratový signál, privacy-first hledání pomocných evidencí, karta, mini workshop a checklist.
 - 2026-07-03: Doplněna úvodní podkapitola o uzavření první klidové kontroly do běžného rytmu: tři výsledné stavy, praktické support příklady, privacy-first uzavření datové stopy, karta, mini workshop a checklist.
 - 2026-07-03: Doplněna úvodní podkapitola o první klidové kontrole po návratu pravidla: tři kontrolní otázky, praktický support příklad, privacy-first kontrola bez nové evidence, karta, mini workshop a checklist.
 - 2026-07-03: Doplněna úvodní podkapitola o převodu potvrzeného pravidla zpět do dlouhodobého klidu: kanonické pracovní místo, pracovní věta, návratový signál, privacy-first úklid dočasných stop, karta, mini workshop a checklist.
