@@ -291533,8 +291533,231 @@ Pokud se během workshopu objeví návrh na další pravidelnou kontrolu, zeptej
 
 Uzavření druhé klidové kontroly je dobrý okamžik k tichému "dost". Ne dramatickému, ne uraženému, prostě provoznímu. Pravidlo obstálo, přechodná péče končí, dočasné stopy mizí a tým se vrací k normální práci. Pokud se problém vrátí, má přijít přes návratový signál. Ne přes neklid lidí, kteří mají pocit, že každá dobrá věc potřebuje ještě jednu kontrolu.
 
+## První běžné použití po návratu pravidla do stabilního rytmu
+
+Po uzavření druhé klidové kontroly už pravidlo nemá zvláštní doprovod. Nečeká na další mimořádnou schůzku, nemá vlastní tabulku a nikdo mu nedrží ručičku v provozu. Právě proto je první běžné použití po návratu do stabilního rytmu důležité: ukáže, jestli se pravidlo opravdu stalo součástí práce, nebo jestli se jen hezky uzavřelo na papíře.
+
+Tento krok není nová kontrolní smyčka. Je to obyčejné použití pravidla v běžném rytmu, u kterého si tým na chvíli všimne tří věcí: kde pravidlo žije, jestli podle něj člověk jednal bez historie a jestli se po cestě nezačala znovu rodit pomocná evidence.
+
+Začněte větou:
+
+```text
+Pravidlo po návratu do stabilního rytmu poprvé používáme v této běžné situaci:
+```
+
+Za ni napište konkrétní pracovní okamžik:
+
+```text
+Pravidlo po návratu do stabilního rytmu poprvé používáme v této běžné situaci:
+Support zpracovává žádost zákazníka o export dat a používá aktuální šablonu bez otevírání starého provozního checklistu.
+```
+
+Tím se držíte reality. Neověřujete znovu celou historii exportů. Neřešíte, proč pravidlo kdysi vzniklo. Jen sledujete, jestli člověk u práce najde správnou větu, použije ji a nevytvoří bokem novou stopu "pro jistotu".
+
+### Co první použití ověřuje
+
+První běžné použití po stabilizaci ověřuje čtyři krátké věci:
+
+- Pravidlo je na kanonickém pracovním místě.
+- Člověk ho použil bez staré rozhodovací historie.
+- Nevznikla nová skrytá evidence.
+- Návratový signál zůstává jasný, ale nespustil se bez důvodu.
+
+Kanonické pracovní místo je základ. Pokud pravidlo mělo po uzavření druhé klidové kontroly žít v support šabloně, první běžné použití začíná tam. Ne v archivu, ne ve starém zápisu, ne v soukromé poznámce člověka, který si "radši pamatuje víc". Paměť člověka je užitečná, ale není pracovní systém.
+
+Použití bez historie znamená, že člověk nepotřeboval znát celý příběh. Stačila mu aktuální pracovní věta. Pokud musel číst tři staré karty, aby pochopil, co má udělat, pravidlo se ještě nevrátilo do stabilního rytmu. Jen má stabilní název.
+
+Skrytá evidence je nejčastější drobný únik. Člověk pravidlo použije správně, ale vytvoří si vedle něj pomocný seznam, screenshot, štítek, kopii odpovědi nebo vlastní tabulku. Ne ze zlého úmyslu. Z praktického neklidu. Jenže právě takhle vzniká datový nepořádek: malá jistota dnes, nejasný závazek zítra.
+
+Návratový signál musí zůstat viditelný, ale klidný. Je to pojistka pro budoucí problém, ne tlačítko, které mačkáte při každém běžném použití. Pokud se signál nespustil, napište to stručně a pokračujte.
+
+Codyho komentář: stabilní rytmus se pozná podle toho, že práce proběhne bez slavnostního komentáře. Když každé normální použití potřebuje vlastní zápis, pravidlo není stabilní. Jen má kolem sebe lepší dokumentaci a tým má novou záminku kontrolovat věci, které měly konečně pracovat samy.
+
+### Čtyři výsledky prvního použití
+
+Po prvním běžném použití vyberte jeden ze čtyř výsledků:
+
+- Stabilní použití: pravidlo bylo najitelné, použitelné a nevznikla nová datová stopa.
+- Slabé umístění: pravidlo je správné, ale člověk ho nehledal na kanonickém místě.
+- Slabá pracovní věta: pravidlo je dostupné, ale člověk podle něj neuměl jednat bez výkladu.
+- Skrytá evidence: pravidlo fungovalo, ale po použití vznikla nová pomocná stopa.
+
+Stabilní použití je nejlepší výsledek a zároveň nejkratší zápis. Nepřidávejte další péči. Napište, že pravidlo obstálo v běžném rytmu, a nechte další kontrolu až na běžném review nebo návratovém signálu.
+
+Slabé umístění opravte přesunem nebo odkazem. Pokud člověk šel do starého checklistu místo support šablony, nepište nové vysvětlení do obou míst. Starý checklist ukliďte nebo přesměrujte na aktuální místo. Dvě pravdy jsou v provozu často horší než jedna neúplná, protože každá si najde svého fanouška.
+
+Slabá pracovní věta potřebuje přepis do akce. Věta "ověř export citlivě" je přání. Věta "před odesláním exportu zkontroluj identitu podle support šablony a neukládej kopii exportu mimo běžný ticket" už je pracovní pravidlo.
+
+Skrytou evidenci řešte hned. Pokud někdo vytvořil pomocný seznam exportů, zeptejte se, jaké rozhodnutí má seznam umožnit. Pokud žádné konkrétní rozhodnutí neexistuje, seznam smažte nebo ho převeďte na anonymizovanou poznámku do pravidla. Nečekejte, až se z pomocné tabulky stane "zdroj pravdy", protože to je jen zdvořilý výraz pro problém s přístupovými právy.
+
+### Praktický příklad
+
+Stabilní použití:
+
+```text
+Běžná situace:
+Support zpracoval žádost zákazníka o export dat.
+
+Použití:
+Člověk otevřel aktuální support šablonu, ověřil identitu podle pracovní věty a odpověď nechal v běžném ticketu.
+
+Výsledek:
+Starý checklist se nepoužil. Nevznikl nový seznam exportů, screenshot ani kopie zákaznických údajů.
+
+Závěr:
+Pravidlo obstálo v prvním běžném použití po stabilizaci. Další zvláštní kontrolu neplánujeme.
+```
+
+Slabé umístění:
+
+```text
+Běžná situace:
+Support řešil export dat, ale člověk nejdřív otevřel starý onboarding checklist.
+
+Problém:
+Pravidlo je správné v support šabloně, ale starý checklist pořád působí jako alternativní vstup.
+
+Lokální oprava:
+Ze starého checklistu mažeme starou instrukci a necháváme jen odkaz na aktuální support šablonu.
+
+Co neotevíráme:
+Novou dokumentaci exportů, nový report ani revizi celého support procesu.
+```
+
+Skrytá evidence:
+
+```text
+Běžná situace:
+Pravidlo bylo použité správně, ale člověk si založil pomocný seznam žádostí o export.
+
+Privacy-first oprava:
+Seznam rušíme. Do pravidla doplňujeme jen zobecněnou větu, že kontrola probíhá v běžném ticketu a mimo něj se nekopírují zákaznické údaje.
+
+Co dál nevzniká:
+Samostatný seznam exportů, nový CRM atribut, kopie příloh ani report žádostí.
+```
+
+V každé variantě je zásah úzký. Nevrací se celá historie, neotevírá se strategická debata a nepřidává se nový měřicí aparát. První běžné použití má ukázat, jestli pravidlo stojí samo. Pokud nestojí, opravte nejbližší oporu.
+
+### Privacy-first kontrola
+
+Po prvním použití se neptejte jen "fungovalo to?". Ptejte se také:
+
+```text
+Vzniklo při běžném použití něco, co pravidlo nepotřebuje k dalšímu rozhodnutí?
+```
+
+Hledejte hlavně malé věci:
+
+- kopie zákaznické odpovědi mimo původní ticket;
+- screenshot formuláře nebo administrace;
+- ruční seznam případů;
+- nový štítek v CRM;
+- export do tabulky;
+- poznámka se jménem zákazníka tam, kde stačí anonymizovaný vzor.
+
+Pokud stopa nevznikla, napište to jednou větou a nepřidávejte další kontrolu. Pokud vznikla, rozhodněte hned:
+
+```text
+Ponecháváme:
+
+Mažeme nebo slučujeme:
+
+Dál nevytváříme:
+```
+
+Příklad:
+
+```text
+Ponecháváme:
+Pracovní větu v support šabloně.
+
+Mažeme nebo slučujeme:
+Pomocný seznam exportů rušíme; informaci o jednom průchodu necháváme jen v běžném ticketu.
+
+Dál nevytváříme:
+Samostatný report exportů, nový CRM atribut ani kopie exportovaných souborů.
+```
+
+Privacy-first hodnota tohoto kroku je jednoduchá: stabilní pravidlo nemá po každém použití vyrábět novou datovou stopu. Má pomoct člověku udělat správnou věc v původním pracovním místě a potom zmizet z pozornosti.
+
+### Karta prvního běžného použití po stabilizaci
+
+```text
+Pravidlo:
+
+Kanonické pracovní místo:
+
+Běžná situace použití:
+
+Kdo pravidlo použil:
+
+Našel pravidlo na kanonickém místě?
+- ano
+- ne
+- jen přes starou stopu
+
+Šlo podle pracovní věty jednat bez historie?
+- ano
+- ne, věta byla moc obecná
+- ne, chyběla hranice neotevírané práce
+
+Vznikla skrytá evidence?
+- ne
+- ano, jaká:
+
+Výsledek:
+- stabilní použití
+- slabé umístění
+- slabá pracovní věta
+- skrytá evidence
+
+Lokální oprava, pokud je potřeba:
+
+Co dál výslovně neotevíráme:
+
+Jaká data, kopie, seznamy, reporty, atributy nebo exporty dál nevznikají:
+
+Kdy se k pravidlu vrátíme:
+- v běžném review
+- při návratovém signálu
+- po jedné lokální opravě
+
+Vlastník:
+
+Datum:
+```
+
+Kartu nevyplňujte při každém dalším použití. Slouží jen k prvnímu běžnému použití po stabilizaci, případně k prvnímu použití po přesunu pravidla do nového pracovního místa. Jinak by se z karty stal přesně ten dohled, kterého jste se snažili zbavit.
+
+### Mini workshop na 5 minut
+
+1. Minuta 1: pojmenujte běžnou situaci, ve které pravidlo proběhlo.
+2. Minuta 2: ověřte, jestli člověk našel kanonické pracovní místo.
+3. Minuta 3: řekněte, jestli podle věty šlo jednat bez historie.
+4. Minuta 4: zkontrolujte skrytou evidenci a případné kopie dat.
+5. Minuta 5: vyberte výsledek a napište jednu lokální opravu, nebo pravidlo nechte v klidu.
+
+Pokud se workshop rozjede do širších nápadů, vraťte ho k první větě: jde o první běžné použití po stabilizaci. Ne o redesign procesu, ne o novou metriku, ne o revizi všech historických rozhodnutí. Pět minut stačí, pokud se držíte jednoho pracovního místa.
+
+### Checklist prvního běžného použití po stabilizaci
+
+- Proběhlo použití v běžném rytmu, ne ve zvláštní kontrole?
+- Bylo jasné kanonické pracovní místo pravidla?
+- Použil člověk pravidlo bez čtení starých rozhodovacích karet?
+- Byla pracovní věta dost konkrétní pro akci?
+- Zůstala hranice neotevírané práce viditelná?
+- Nevznikla nová pomocná tabulka, seznam, screenshot, export, CRM atribut nebo report?
+- Pokud vznikla skrytá evidence, rozhodli jsme hned, zda ji smazat, sloučit nebo zobecnit?
+- Případná oprava je lokální a nemění smysl pravidla?
+- Je jasné, kdy se pravidlo znovu uvidí v běžném review?
+- Je jasné, jaký návratový signál by spustil další práci?
+
+První běžné použití po návratu pravidla do stabilního rytmu má potvrdit obyčejnou věc: pravidlo je tam, kde lidé pracují, a nevyrábí kolem sebe další provoz. Když to platí, nechte ho být. Když ne, opravte nejbližší větu, odkaz nebo skrytou evidenci. Stabilní provoz nevzniká tím, že všechno pořád sledujete. Vzniká tím, že dobré pravidlo umíte pustit z ruky a vrátit se k němu až ve chvíli, kdy má důvod promluvit.
+
 ## Pracovní log
 
+- 2026-07-04: Doplněna úvodní podkapitola o prvním běžném použití po návratu pravidla do stabilního rytmu: ověření kanonického místa, práce bez historie, skrytá evidence, support příklady, privacy-first karta, mini workshop a checklist.
 - 2026-07-04: Doplněna úvodní podkapitola o uzavření druhé klidové kontroly do stabilního rytmu: čtyři uzavírací stavy, support příklady, privacy-first úklid dočasných stop, karta, mini workshop a checklist.
 - 2026-07-04: Doplněna úvodní podkapitola o druhé klidové kontrole po návratu pravidla: stabilní klid, lokální očištění, návratový signál, privacy-first hledání pomocných evidencí, karta, mini workshop a checklist.
 - 2026-07-03: Doplněna úvodní podkapitola o uzavření první klidové kontroly do běžného rytmu: tři výsledné stavy, praktické support příklady, privacy-first uzavření datové stopy, karta, mini workshop a checklist.
