@@ -291951,8 +291951,246 @@ Když se během šesti minut začne řešit širší proces, zastavte se. Buď m
 
 Uzavření prvního běžného použití po stabilizaci je poslední kontrola, že pravidlo opravdu patří do práce, ne do zvláštní péče. Když obstojí, nechte ho klidně zmizet do běžného rytmu. Když neobstojí, opravte nejbližší místo a ukliďte data. V obou případech držte jednu zásadu: stabilní pravidlo nemá po sobě nechávat další malé systémy, které nikdo nechtěl vlastnit.
 
+## Druhé běžné použití po návratu pravidla do stabilního rytmu
+
+První běžné použití ukáže, jestli pravidlo po stabilizaci stojí na správném místě. Druhé běžné použití ukazuje něco jiného: jestli se pravidlo přenese bez čerstvé paměti z posledního uzavření. Už by nemělo těžit z toho, že se o něm právě mluvilo, někdo ho nedávno uklízel a všichni mají v hlavě jeho příběh. Má fungovat jako součást práce.
+
+Druhé použití proto neotevírejte automaticky po každém prvním použití. Má smysl ve chvíli, kdy se pravidlo objeví v další běžné situaci, u jiného člověka, v jiné směně, u jiného typu zákaznického dotazu nebo po krátkém odstupu. Pokud se nic takového nestalo, neplánujte kontrolu uměle. Stabilní pravidlo nepotřebuje dokazovat svou existenci každou hodinu. Ano, dokumentace by z toho měla radost. Provoz už méně.
+
+Začněte větou:
+
+```text
+Pravidlo po stabilizaci podruhé používáme v této běžné situaci:
+```
+
+Příklad:
+
+```text
+Pravidlo po stabilizaci podruhé používáme v této běžné situaci:
+Jiný člen supportu řeší žádost o opravu fakturačních údajů a používá aktuální šablonu bez dotazu na člověka, který pravidlo naposledy uzavíral.
+```
+
+Tato věta má dvě funkce. Drží druhé použití u konkrétní práce a zároveň ukazuje, jestli pravidlo přežilo bez osobního výkladu. Pokud ho umí použít jen člověk, který byl u poslední úpravy, pravidlo ještě není stabilní. Je jen dobře zapamatované.
+
+### Kdy druhé použití otevřít
+
+Druhé použití otevřete, pokud platí aspoň jedna z těchto podmínek:
+
+- pravidlo použil jiný člověk než při prvním použití;
+- pravidlo se použilo v jiné běžné variantě stejné práce;
+- mezi prvním a druhým použitím uplynul dostatečný odstup, aby zmizela čerstvá paměť;
+- první použití mělo lokální opravu a teď se ověřuje, jestli oprava opravdu stačí;
+- při prvním použití vznikla skrytá evidence a teď se ověřuje, že se nevrátila.
+
+Neotevírejte druhé použití jen proto, že se blíží review, někdo chce mít "jistotu", nebo se pravidlo tváří důležitě. Jistota bez konkrétní situace rychle vyrábí kontrolní rituál. A kontrolní rituály mají zvláštní talent přežít déle než problém, kvůli kterému vznikly.
+
+Pokud druhé použití vzniká po lokální opravě, napište ji přímo do úvodu:
+
+```text
+Druhé použití ověřuje lokální opravu:
+Starý checklist už neobsahuje neplatnou instrukci a odkazuje jen na aktuální support šablonu.
+```
+
+Pokud vzniká po skryté evidenci, napište očekávanou hranici:
+
+```text
+Druhé použití ověřuje, že mimo běžný ticket nevzniká samostatný seznam, screenshot ani kopie zákaznických údajů.
+```
+
+Tím zabráníte tomu, aby se druhé použití rozteklo do obecné debaty o kvalitě procesu. Víte, co ověřujete, a víte, co do ověření nepatří.
+
+### Tři otázky přenositelnosti
+
+Při druhém běžném použití stačí tři otázky:
+
+- Našel člověk pravidlo bez osobního vysvětlení?
+- Uměl podle něj rozhodnout bez staré historie?
+- Zůstala datová stopa stejná nebo menší než při prvním použití?
+
+První otázka testuje umístění. Pokud člověk musel někomu napsat "kde to najdu?", pravidlo není dost dobře zasazené. Oprava obvykle není nová dokumentace, ale lepší vstup v místě práce: odkaz v šabloně, odstranění staré kopie, jasnější název nebo krátká pracovní věta.
+
+Druhá otázka testuje srozumitelnost. Pokud člověk pravidlo našel, ale pořád potřeboval vysvětlení, problém není v dostupnosti. Problém je ve větě. Přepište ji z obecného doporučení na rozhodovací akci.
+
+Třetí otázka testuje privacy-first provoz. Druhé použití nesmí po cestě vytvořit další důkazní vrstvu jen proto, že tým je opatrný. Pokud pravidlo potřebuje k fungování nový seznam, další atribut nebo ruční report, možná není stabilní. Možná jen přesunulo práci z oficiálního místa do bokovky.
+
+Codyho komentář: druhé použití je výborný detektor dokumentačního optimismu. V první iteraci všichni vědí, co se změnilo, protože u toho byli. Ve druhé se ukáže, jestli pravidlo opravdu žije v systému, nebo jen v hlavách lidí, kteří zrovna seděli u stolu. Hlavy jsou fajn. Jako zdroj pravdy jsou trochu náladové.
+
+### Čtyři výsledky druhého použití
+
+Po druhém použití vyberte jeden ze čtyř výsledků:
+
+- Přenos potvrzen: pravidlo použil další člověk nebo další běžná situace bez zvláštní pomoci.
+- Slabá kotva: pravidlo funguje, ale lidé ho pořád hledají přes staré nebo osobní místo.
+- Slabá rozhodovací věta: pravidlo je najitelné, ale nedovede člověka k akci.
+- Skrytá stopa se vrací: pravidlo funguje jen za cenu nové evidence, kopie nebo reportu.
+
+`Přenos potvrzen` znamená, že druhé použití nemá pokračování. Napište krátký závěr a nechte pravidlo v běžném rytmu. Nepřidávejte třetí kontrolu jen proto, že druhá dopadla dobře.
+
+`Slabá kotva` opravuje navigaci. Pokud člověk pořád chodí do staré stránky, staré stránky se zbavte, přesměrujte ji nebo v ní nechte jediný odkaz na kanonické místo. Neudržujte dvě paralelní cesty "pro jistotu".
+
+`Slabá rozhodovací věta` vyžaduje přepis. Ne dlouhý odstavec. Jednu větu, která říká, co udělat, kdy to neudělat a kde zůstává stopa.
+
+`Skrytá stopa se vrací` je privacy-first varování. Pokud se po druhém použití znovu objeví pomocná evidence, nejde o náhodu. Buď pravidlo nevysvětluje hranici dat, nebo práce opravdu potřebuje jiný zdroj pravdy. V obou případech nezačínejte tím, že nový seznam přijmete. Nejdřív napište, jaké rozhodnutí má seznam umožnit a proč nestačí existující pracovní místo.
+
+### Praktický příklad
+
+Přenos potvrzen:
+
+```text
+Běžná situace:
+Jiný člen supportu řešil opravu fakturačních údajů zákazníka.
+
+Použití:
+Našel aktuální support šablonu, ověřil identitu podle pracovní věty a změnu zaznamenal v původním ticketu.
+
+Výsledek:
+Nepotřeboval starý checklist ani vysvětlení od člověka, který pravidlo uzavíral.
+
+Privacy-first výsledek:
+Nevznikla kopie dokladu mimo ticket, ruční seznam oprav ani nový CRM štítek.
+
+Závěr:
+Přenos pravidla je potvrzen. Další zvláštní kontrolu neplánujeme.
+```
+
+Slabá kotva:
+
+```text
+Běžná situace:
+Člověk řešil stejný typ žádosti, ale pravidlo hledal přes starý onboardingový dokument.
+
+Výsledek:
+Pravidlo použil správně až po přechodu do support šablony.
+
+Lokální oprava:
+Ve starém dokumentu mažeme původní text a necháváme jen odkaz na kanonickou support šablonu.
+
+Co neotevíráme:
+Novou školící stránku, nový checklist ani revizi celého onboardingu.
+```
+
+Skrytá stopa se vrací:
+
+```text
+Běžná situace:
+Pravidlo bylo použité správně, ale člověk si znovu vytvořil pomocný seznam fakturačních oprav.
+
+Otázka:
+Jaké rozhodnutí má seznam umožnit?
+
+Rozhodnutí:
+Seznam rušíme. Pokud je potřeba dohledat stav konkrétní žádosti, zdrojem pravdy zůstává původní ticket.
+
+Úprava pravidla:
+Do pracovní věty doplňujeme, že mimo ticket se nevytváří samostatná evidence fakturačních oprav.
+```
+
+Všimněte si, že ani jeden příklad neotevírá celý support proces. Druhé použití má potvrdit přenos nebo odhalit nejbližší slabinu. Větší práce vzniká až tehdy, když se slabina opakuje přes více míst a máte jasný návratový signál.
+
+### Privacy-first kontrola druhého použití
+
+Druhé použití je vhodný okamžik k otázce:
+
+```text
+Vrací se stejná datová stopa, kterou jsme už jednou uklízeli?
+```
+
+Pokud ne, zápis má být krátký:
+
+```text
+Druhé použití nevytvořilo novou evidenci ani kopii dat. Pravidlo pokračuje v běžném rytmu.
+```
+
+Pokud ano, nepište hned nové pravidlo. Nejdřív rozlište tři možnosti:
+
+- člověk neviděl hranici v pracovní větě;
+- starý nástroj nebo dokument pořád vybízí ke kopii;
+- existující pracovní místo opravdu neumožňuje potřebné rozhodnutí.
+
+První možnost se řeší přepisem věty. Druhá úklidem starého vstupu. Třetí je jediná, která může otevřít hlubší práci. I tam ale začněte nejmenším možným řešením: upravit ticket, změnit povinné pole na nepovinnou poznámku, zkrátit retenci, nebo použít anonymizovaný vzor místo osobních údajů.
+
+Privacy-first cíl není zakázat evidenci za každou cenu. Cíl je mít jen takovou evidenci, která má jasný účel, vlastníka, místo a konec. Vše ostatní je provozní mlha. A mlha se v auditu tváří překvapivě hmotně.
+
+### Karta druhého běžného použití po stabilizaci
+
+```text
+Pravidlo:
+
+Kanonické pracovní místo:
+
+Co se ověřuje druhým použitím:
+- přenos na jiného člověka
+- přenos na jinou běžnou variantu
+- ověření lokální opravy
+- ověření, že se nevrací skrytá evidence
+
+Běžná situace:
+
+Kdo pravidlo použil:
+
+Našel pravidlo bez osobního vysvětlení?
+- ano
+- ne
+
+Šlo podle pravidla rozhodnout bez staré historie?
+- ano
+- ne
+
+Vznikla nová nebo opakovaná datová stopa?
+- ne
+- ano, jaká:
+
+Výsledek:
+- přenos potvrzen
+- slabá kotva
+- slabá rozhodovací věta
+- skrytá stopa se vrací
+
+Lokální oprava, pokud je potřeba:
+
+Co dál výslovně neotevíráme:
+
+Jaká data, kopie, seznamy, reporty, atributy nebo exporty dál nevznikají:
+
+Kdy se k pravidlu vrátíme:
+
+Vlastník:
+
+Datum:
+```
+
+Karta má být krátká. Pokud by její vyplnění trvalo déle než samotné použití pravidla, něco se pokazilo: buď ověřujete moc široké téma, nebo z běžného pravidla znovu děláte projekt.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: napište, proč druhé použití vůbec otevíráte.
+2. Minuta 2: pojmenujte běžnou situaci a člověka, který pravidlo použil.
+3. Minuta 3: ověřte najitelnost bez osobního vysvětlení.
+4. Minuta 4: ověřte rozhodnutí bez staré historie.
+5. Minuta 5: zkontrolujte, zda se nevrací skrytá datová stopa.
+6. Minuta 6: vyberte výsledek a napište lokální opravu, nebo pravidlo vraťte do klidu.
+
+Když se během workshopu objeví nápad na velkou změnu, zapište ho mimo kartu. Do této karty patří jen to, co přímo plyne z druhého použití. Všechno ostatní čeká na vlastní návratový signál.
+
+### Checklist druhého běžného použití
+
+- Má druhé použití konkrétní důvod, nebo jen opakuje první kontrolu?
+- Proběhlo v běžné pracovní situaci?
+- Ověřuje přenos bez čerstvé paměti?
+- Našel člověk pravidlo bez osobního vysvětlení?
+- Šlo podle pravidla rozhodnout bez starých karet?
+- Je jasné, zda byla slabina v umístění, větě, nebo datové stopě?
+- Pokud vznikla lokální oprava, zůstává u jednoho pracovního místa?
+- Pokud se vrací skrytá evidence, víme, jaké rozhodnutí měla umožnit?
+- Nevzniká nový report, tabulka, CRM atribut, screenshotová složka ani export bez jasného vlastníka a konce?
+- Je zapsané, co dál výslovně neotevíráme?
+- Pokud je přenos potvrzen, končí zvláštní pozornost?
+
+Druhé běžné použití po návratu pravidla do stabilního rytmu je poslední zdravý test přenositelnosti. Když pravidlo obstojí podruhé, nechte ho pracovat. Když neobstojí, opravte nejmenší kotvu, větu nebo datovou hranici. Stabilita není stav, kdy už nikdy nic neupravíte. Stabilita je stav, kdy úpravu umíte držet tak malou, aby z pravidla znovu nevznikl projekt.
+
 ## Pracovní log
 
+- 2026-07-04: Doplněna úvodní podkapitola o druhém běžném použití po návratu pravidla do stabilního rytmu: přenos bez čerstvé paměti, slabá kotva, slabá rozhodovací věta, návrat skryté evidence, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-07-04: Doplněna úvodní podkapitola o uzavření prvního běžného použití po návratu pravidla do stabilního rytmu: čtyři uzavírací stavy, lokální oprava, skrytá evidence, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-07-04: Doplněna úvodní podkapitola o prvním běžném použití po návratu pravidla do stabilního rytmu: ověření kanonického místa, práce bez historie, skrytá evidence, support příklady, privacy-first karta, mini workshop a checklist.
 - 2026-07-04: Doplněna úvodní podkapitola o uzavření druhé klidové kontroly do stabilního rytmu: čtyři uzavírací stavy, support příklady, privacy-first úklid dočasných stop, karta, mini workshop a checklist.
