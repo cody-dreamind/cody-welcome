@@ -293943,6 +293943,218 @@ Pokud se během workshopu otevře otázka, která nesouvisí se zředěným rytm
 
 Druhá kontrola po zředění má rozhodnout, jestli lehčí rytmus opravdu unesl provoz. Když ano, nechte ho být. Když ne, opravte nejbližší příčinu: pracovní místo, dočasnou evidenci, nebo jasně potvrzený návratový signál. Cílem není vrátit se k časté kontrole ze zvyku, ale držet pravidlo v takové pozornosti, jakou si opravdu zaslouží.
 
+## Uzavření druhé kontroly po zředění revizního rytmu
+
+Druhá kontrola po zředění revizního rytmu potřebuje jasné uzavření. Jinak se z ní stane zvláštní mezistav: rytmus je formálně pořád zředěný, ale tým si není jistý, jestli mu má věřit. V praxi se pak děje přesně to, čemu mělo zředění zabránit. Lidé si nechávají pomocné seznamy, připomínají si staré výjimky, přidávají kontrolní poznámky "jen pro jistotu" a lehký provoz je najednou lehký asi jako batoh s cihlami.
+
+Uzavření druhé kontroly má proto odpovědět na jednu pracovní otázku:
+
+```text
+Může pravidlo zůstat v lehčím rytmu bez skryté kontroly navíc?
+```
+
+Pokud ano, zapište to bez dramat. Pokud ne, neopravujte hned celý systém. Pojmenujte nejbližší příčinu: slabé pracovní místo, příliš řídký rytmus, nebo skutečný návrat problému. Každá z těchto příčin vede k jiné akci.
+
+Dobrá uzavírací věta vypadá takto:
+
+```text
+Druhou kontrolu po zředění uzavíráme tak, že pololetní rytmus dál stačí, protože pravidlo bylo použité samostatně, nevznikla pomocná evidence a další kontrola proběhne v běžném pololetním review.
+```
+
+Slabší, ale pořád užitečná věta:
+
+```text
+Druhou kontrolu po zředění uzavíráme lokální opravou pracovního místa: pravidlo platí, rytmus nezkracujeme, ale v rozcestníku přejmenujeme odkaz tak, aby nový člověk nemusel hledat starou kartu.
+```
+
+V obou větách je jasné, co se stalo s rytmem, co se stalo s pravidlem a co nevzniká navíc. To je pointa uzavření. Nevyrobit kolem kontroly další kontrolu. Ano, i procesy se umí rozmnožovat, když jim necháte otevřená dvířka.
+
+### Tři věci, které musí být po uzavření jasné
+
+Po druhé kontrole napište tři krátké závěry:
+
+- Stav rytmu: zůstává zředěný, dočasně se zhušťuje, nebo se vrací k častějšímu režimu.
+- Stav pravidla: zůstává beze změny, dostává lokální úpravu, nebo se otevírá návratový signál.
+- Stav datové stopy: nevzniklo nic nového, něco se maže, nebo se výslovně zapisuje nový údaj s účelem a vlastníkem.
+
+Stav rytmu nesmí být schovaný v pocitu. Věta "zatím to necháme" je málo. Napište konkrétní další kontrolu:
+
+```text
+Další kontrola proběhne v dalším pololetním review support šablon, pokud dřív nepřijde návratový signál.
+```
+
+Nebo:
+
+```text
+Rytmus dočasně zhušťujeme na jednu kontrolu za 30 dní; po ní se vrátíme k pololetnímu rytmu, pokud se nepotvrdí návrat problému.
+```
+
+Stav pravidla má říct, kde se pravidlo používá. Pokud pravidlo fungovalo, ale bylo hůř najitelné, nepište jen "zlepšit dokumentaci". Napište pracovní místo:
+
+```text
+V interním rozcestníku měníme název odkazu z "Archiv fakturace" na "Aktuální pravidlo fakturačních oprav".
+```
+
+Stav datové stopy je privacy-first pojistka. Pokud se kvůli kontrole sepsal ruční seznam případů, screenshoty, export ticketů nebo poznámky podle lidí, musí mít konec. Jinak jste rytmus nezředili, jen jste z něj udělali tajnou evidenci.
+
+### Praktický příklad
+
+Situace:
+
+```text
+Pravidlo:
+Fakturační opravy zůstávají v původním support ticketu.
+
+Zředěný rytmus:
+Pololetní review support šablon.
+
+Druhá kontrola:
+Tři opravy proběhly správně. Nový člověk pravidlo našel, ale až přes starý archivní odkaz. Nevznikla pomocná tabulka ani export.
+```
+
+Špatné uzavření:
+
+```text
+Zatím dobré, jen to někdy zkontrolujeme.
+```
+
+Tohle není závěr. To je mlha v pěkném svetru.
+
+Lepší uzavření:
+
+```text
+Výsledek:
+Upravit pracovní místo.
+
+Rytmus:
+Pololetní review zůstává.
+
+Lokální oprava:
+Přejmenujeme odkaz v interním rozcestníku na "Aktuální pravidlo fakturačních oprav" a archivní odkaz přesuneme pod něj.
+
+Co zůstává zavřené:
+Samostatná tabulka oprav, CRM atribut pro typ opravy, export support ticketů a měsíční kontrola použití pravidla.
+
+Privacy-first úklid:
+Do záznamu nepřenášíme detaily zákaznických ticketů. Stačí agregovaná věta, že tři relevantní opravy proběhly v původním ticketu.
+
+Další kontrola:
+Další pololetní review, pokud dřív nevzniknou tři opravy za sebou mimo původní ticket.
+```
+
+Tento závěr je malý, ale uzavírá všechno důležité: rytmus, pracovní místo, zavřený rozsah, datovou stopu i návratový signál.
+
+### Kdy rytmus opravdu vrátit zpět
+
+Vrátit se k častější kontrole má smysl jen tehdy, když druhá kontrola ukáže, že lehčí rytmus nechrání důležité rozhodnutí. Typicky:
+
+- Problém se opakoval a tým ho zachytil pozdě.
+- Lidé mezi kontrolami vytvořili náhradní evidenci, protože běžný rytmus jim nestačil.
+- Kanonické místo bylo tak slabé, že pravidlo fakticky přestalo žít.
+- Návratový signál se potvrdil a nejde ho vyřešit lokální úpravou.
+
+Ani v těchto případech nemusí být návrat k častému rytmu trvalý. Nejprve použijte dočasné zhuštění:
+
+```text
+Na další dva reálné průchody nastavujeme krátkou kontrolu po použití. Pokud pravidlo obstojí bez pomocné evidence, vracíme se k pololetnímu rytmu.
+```
+
+Dočasnost je důležitá. Bez ní se výjimka stane novým normálem a nikdo si nevšimne, že zředění tiše skončilo.
+
+### Privacy-first uzavření
+
+Uzavření druhé kontroly po zředění je dobré místo pro malý datový úklid. Nečekejte na velký audit. Stačí tři řádky:
+
+```text
+Kvůli kontrole jsme použili:
+
+Do běžného provozu nepřenášíme:
+
+Po uzavření mažeme nebo necháváme expirovat:
+```
+
+Příklad:
+
+```text
+Kvůli kontrole jsme použili:
+Agregovaný počet tří relevantních oprav a ověření, že zůstaly v původních ticketech.
+
+Do běžného provozu nepřenášíme:
+Seznam zákazníků, kopie ticketů, osobní hodnocení práce supportu ani export oprav.
+
+Po uzavření mažeme nebo necháváme expirovat:
+Dočasnou pracovní poznámku s odkazy na konkrétní tickety.
+```
+
+Tím se kontrola nestane dalším zdrojem dat. Privacy-first provoz není jen o tom, které nástroje nepoužíváte. Je i o tom, že si nenecháváte pomocné stopy, které už neslouží rozhodnutí.
+
+Codyho komentář: zředěný rytmus je malá zkouška důvěry v systém. Když po druhé kontrole pořád potřebujete tajnou kontrolní tabulku, systém vám právě řekl, že mu ještě nevěříte. To není tragédie. Jen to nebalte do věty "máme to pod kontrolou". Nemáte. Máte tabulku.
+
+### Karta uzavření druhé kontroly po zředění
+
+```text
+Pravidlo:
+
+Zředěný rytmus:
+
+Druhá kontrola ověřila:
+
+Výsledek kontroly:
+- potvrdit zředěný rytmus
+- upravit pracovní místo
+- dočasně zhustit rytmus
+- otevřít návratový signál
+
+Uzavírací věta:
+
+Stav rytmu po uzavření:
+
+Stav pravidla po uzavření:
+
+Lokální oprava, pokud existuje:
+
+Co zůstává výslovně zavřené:
+
+Jaká data nebo pomocné stopy vznikly při kontrole:
+
+Co po uzavření mažeme, anonymizujeme nebo nepřenášíme:
+
+Další kontrola:
+
+Návratový signál:
+
+Vlastník:
+```
+
+Karta má být krátká. Pokud se do ní nevejdete bez dlouhé historie, pravděpodobně uzavíráte víc než druhou kontrolu po zředění. Oddělte novou otázku do samostatného podnětu a tuhle kartu nechte dělat jen jednu práci.
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: přečtěte pravidlo, zředěný rytmus a výsledek druhé kontroly.
+2. Minuta 2: vyberte jeden výsledný stav.
+3. Minuta 3: napište uzavírací větu.
+4. Minuta 4: rozhodněte, jestli se mění rytmus, nebo jen pracovní místo.
+5. Minuta 5: napište, co zůstává zavřené.
+6. Minuta 6: ukliďte nebo ukončete pomocné stopy kontroly.
+7. Minuta 7: zapište další kontrolu a návratový signál.
+
+Když se workshop zasekne na tom, jestli zředění bylo "dobrý nápad", vraťte se k důkazu z druhé kontroly. Nehodnotíte estetiku procesu. Hodnotíte, jestli pravidlo fungovalo bez skryté náhrady.
+
+### Checklist uzavření druhé kontroly
+
+- Máme výsledek druhé kontroly zapsaný jednou větou?
+- Vybrali jsme přesně jeden výsledný stav?
+- Je jasné, jestli rytmus zůstává zředěný, dočasně se zhušťuje, nebo se vrací k častější kontrole?
+- Pokud se mění jen pracovní místo, je napsané kde přesně?
+- Pokud rytmus dočasně zhušťujeme, má zhuštění konkrétní konec?
+- Je jasné, co zůstává výslovně zavřené?
+- Nevznikla po kontrole nová pomocná evidence bez účelu?
+- Uklidili jsme dočasné poznámky, exporty, screenshoty nebo seznamy případů?
+- Umíme výsledek popsat agregovaně bez zákaznických detailů?
+- Je další kontrola navázaná na běžný rytmus nebo konkrétní návratový signál?
+
+Uzavření druhé kontroly po zředění je drobná, ale důležitá tečka. Pokud zředěný rytmus funguje, nechte ho dýchat. Pokud nefunguje, opravte nejbližší příčinu a nenechte po kontrole datový nepořádek. Cílem je provoz, který ví, kdy se dívat, kdy zasáhnout a kdy konečně nechat dobře fungující pravidlo na pokoji.
+
 ## Pracovní log
 
 - 2026-07-04: Doplněna úvodní podkapitola o druhé kontrole po zředění revizního rytmu: tři kontrolní otázky, čtyři výsledky kontroly, praktický support příklad, privacy-first kontrola skryté evidence, karta, mini workshop a checklist.
@@ -295391,3 +295603,4 @@ Druhá kontrola po zředění má rozhodnout, jestli lehčí rytmus opravdu unes
 - 2026-07-02: Doplněna úvodní podkapitola o prvním běžném použití po uzavřeném návratu po dlouhém tichu: samostatné použití, slabá kotva, slabá věta, nový návratový signál, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-07-02: Doplněna úvodní podkapitola o převodu potvrzeného návratu zpět do pasivního provozu: kanonické místo, vypnutí mimořádného režimu, privacy-first úklid datové stopy, karta, mini workshop a checklist.
 - 2026-07-04: Doplněna úvodní podkapitola o prvním dlouhodobém review po stabilizaci pravidla: tři kontrolní otázky, čtyři výsledky review, privacy-first úklid datové stopy, karta, mini workshop a checklist.
+- 2026-07-04: Doplněna úvodní podkapitola o uzavření druhé kontroly po zředění revizního rytmu: uzavírací věta, stavy rytmu a pravidla, privacy-first úklid, karta, mini workshop a checklist.
