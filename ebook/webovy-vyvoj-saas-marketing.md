@@ -294652,8 +294652,152 @@ Když se během pěti minut objeví větší téma, neřešte ho v tomto worksho
 
 Uzavření prvního pasivního použití má být rychlé, konkrétní a skoro neviditelné. Pokud pravidlo funguje, nechte ho pracovat. Pokud narazilo na malou překážku, opravte ji tam, kde vznikla. Pokud se opravdu objevil návratový signál, otevřete další krok vědomě. Všechno ostatní je jen pokušení udělat z klidu nový projekt.
 
+## Servisní poznámka k pořadí navazujících částí
+
+U dlouhého živého rukopisu se může stát, že navazující části nejsou v ideálním pořadí. Někdy se kapitola dopíše dřív, než se doplní její uzavření. Jindy vznikne další krok v jiné části dokumentu, protože zrovna navazoval na předchozí pracovní smyčku. To není katastrofa, pokud se s tím zachází vědomě. Problém vzniká až ve chvíli, kdy tým začne kvůli pořadí přepisovat všechno najednou, nebo naopak ignoruje, že čtenář může ztratit nit.
+
+Servisní poznámka k pořadí má jeden cíl: opravit čtenářskou navigaci nejmenším možným zásahem. Nejde o velkou redakční rekonstrukci, přesun desítek kapitol ani rozhodnutí, že rukopis musí být hned dokonale lineární. Jde o malou pojistku, aby další člověk poznal, jak části použít, i když historické pořadí vzniku není ideální.
+
+Začněte větou:
+
+```text
+Tato část navazuje pracovně na [předchozí stav], i když některé související kapitoly už jsou v rukopisu zapsané dříve.
+```
+
+Věta nesmí omlouvat chaos. Má jen oddělit dvě věci: pořadí vzniku a pořadí použití. Pořadí vzniku je interní historie. Pořadí použití je to, co potřebuje čtenář. Pokud tyto dvě roviny smícháte, e-book začne působit jako deník práce místo praktického nástroje.
+
+### Kdy stačí servisní poznámka
+
+Servisní poznámka stačí, když platí všechny tři podmínky:
+
+- text je obsahově použitelný;
+- problém je hlavně v návaznosti nebo orientaci;
+- oprava se dá udělat jednou větou, krátkým odkazem nebo drobným doplněním nadpisu.
+
+Příklad:
+
+```text
+Po uzavření prvního pasivního použití použijte navazující část "Druhé běžné použití v pasivním provozu". Pokud ji čtete mimo pořadí, berte ji jako další běžnou situaci, ne jako nové review.
+```
+
+Taková poznámka je dostatečná. Čtenář ví, kam pokračovat, a tým nemusí rozebírat celý rukopis. Pokud by ale kapitoly obsahovaly protichůdná pravidla, nestačí poznámka. Pak je potřeba vybrat kanonické místo a starší formulaci přepsat nebo označit jako překonanou.
+
+### Kdy pořadí opravdu opravit
+
+Pořadí opravujte přímo, pokud orientační poznámka neřeší skutečné riziko. Typicky:
+
+- dvě části dávají opačné instrukce;
+- checklist odkazuje na krok, který čtenář ještě nemohl potkat;
+- stejná šablona existuje dvakrát s odlišnými poli;
+- pracovní log tvrdí, že kapitola je hotová, ale v textu chybí uzavření;
+- čtenář by kvůli pořadí mohl začít sbírat data, která další část výslovně zakazuje.
+
+V takové situaci nedělejte kosmetickou navigaci. Udělejte malou redakční opravu s jasným rozsahem:
+
+```text
+Opravujeme pouze pořadí a odkazy mezi částmi o pasivním provozu. Neměníme pravidla, checklisty ani návratové signály.
+```
+
+Tato hranice chrání práci před neplánovaným zásahem. Jakmile se při opravě pořadí začne debatovat o obsahu pravidel, vzniká nová iterace. Ta může být užitečná, ale má mít vlastní otázku, vlastní stop podmínku a vlastní zápis.
+
+### Praktický příklad
+
+Představte si, že rukopis obsahuje hotovou kapitolu o druhém pasivním použití, ale poslední čerstvě dopsaná část uzavírá teprve první pasivní použití. Čtenář by mohl čekat, že druhé použití přijde hned za uzavřením prvního. Místo rychlého přesunu velkého bloku stačí v další servisní iteraci zapsat:
+
+```text
+Po uzavření prvního pasivního použití pokračujte částí "Druhé běžné použití v pasivním provozu". Tato část je v rukopisu už dříve, ale pracovně patří jako další krok po uzavření prvního použití.
+```
+
+Pokud je cílem připravit veřejnou verzi, později může přijít samostatná redakční iterace, která pořadí fyzicky srovná. To je jiná práce. Servisní poznámka mezitím brání tomu, aby čtenář ztratil návaznost, a zároveň neotevírá rizikový přesun dlouhého textu.
+
+Slabší reakce by byla hned přeskládat několik desítek kapitol, přepsat log a cestou změnit formulace v checklistech. To vypadá jako poctivá redakce, ale bez jasné stop podmínky snadno vznikne větší problém než ten původní. U živého e-booku je malé, vratné zpřesnění často lepší než velká čistka z nervozity.
+
+### Privacy-first redakční úklid
+
+I redakční úklid má datovou stopu. Když při opravě pořadí vznikají pomocné exporty, kopie celého rukopisu, poznámky s interním komentářem nebo seznamy "věcí k pozdějšímu přepsání", musí mít účel a konec.
+
+Použijte krátký filtr:
+
+```text
+Pomocný podklad potřebujeme k:
+
+Po dokončení ho:
+
+Do rukopisu nepřenášíme:
+```
+
+Příklad:
+
+```text
+Pomocný podklad potřebujeme k:
+Porovnání pořadí čtyř částí o pasivním provozu.
+
+Po dokončení ho:
+Mažeme, protože závěr bude přímo v rukopisu a pracovním logu.
+
+Do rukopisu nepřenášíme:
+Interní poznámky o historii vzniku, technické výpisy ani celé duplicitní pasáže.
+```
+
+Privacy-first hodnota tady není jen o osobních údajích. Je i o tom, že e-book nemá nést zbytečnou interní historii. Čtenář potřebuje použitelné pravidlo, ne archeologii každé iterace.
+
+### Karta servisní opravy pořadí
+
+```text
+Místo v rukopisu:
+
+Co je matoucí:
+
+Je problém v obsahu, nebo jen v návaznosti?
+
+Nejmenší oprava:
+- servisní poznámka
+- krátký odkaz
+- přejmenování nadpisu
+- fyzický přesun části
+- přepis kolizního pravidla
+
+Co výslovně neměníme:
+
+Kanonické místo, pokud existuje:
+
+Pomocné podklady k úklidu:
+
+Privacy-first závěr:
+
+Zápis do pracovního logu:
+```
+
+Kartu použijte hlavně tehdy, když hrozí, že se z drobné navigační opravy stane velká redakční akce. U jedné jasné věty stačí rovnou upravit text a zapsat log.
+
+### Mini workshop na 5 minut
+
+1. Minuta 1: najděte konkrétní místo, kde čtenář ztratí návaznost.
+2. Minuta 2: rozhodněte, jestli jde o obsahovou kolizi, nebo jen orientaci.
+3. Minuta 3: vyberte nejmenší opravu.
+4. Minuta 4: napište, co se výslovně nemění.
+5. Minuta 5: ukliďte pomocné podklady a zapište log.
+
+Pokud pět minut nestačí, nejspíš už nejde o servisní poznámku. Otevřete samostatnou redakční iteraci s jasnou stop podmínkou: které části srovnáte, co necháte být a podle čeho poznáte, že je hotovo.
+
+### Checklist servisní poznámky
+
+- Je jasné, kde čtenář ztrácí návaznost?
+- Víme, zda jde o pořadí, odkaz, nadpis, nebo skutečnou obsahovou kolizi?
+- Zvolili jsme nejmenší opravu, která čtenáři pomůže pokračovat?
+- Napsali jsme, co se tímto zásahem výslovně nemění?
+- Nepřepisujeme pravidla jen proto, že jsme si všimli redakčního dluhu?
+- Pokud existuje kanonické místo, odkazujeme na něj místo duplikace?
+- Nevznikl nový seznam redakčních úkolů bez vlastníka a konce?
+- Uklidili jsme pomocné kopie, exporty nebo poznámky po úpravě?
+- Je pracovní log konkrétní a neříká víc, než se opravdu stalo?
+- Umí další iterace navázat bez čtení celé historie změn?
+
+Servisní poznámka k pořadí je malý nástroj pro velké rukopisy. Umožní pokračovat bez předstírání, že dokument je dokonale srovnaný, a zároveň brání tomu, aby se každá drobná nejasnost změnila v redakční maraton. Codyho komentář: někdy je nejprofesionálnější oprava prostě cedulka "tudy dál" a uklizená podlaha kolem ní.
+
 ## Pracovní log
 
+- 2026-07-04: Doplněna servisní podkapitola k pořadí navazujících částí: kdy stačí krátká poznámka, kdy opravdu opravit pořadí, praktický příklad, privacy-first úklid redakčních podkladů, karta, mini workshop a checklist.
 - 2026-07-04: Doplněna úvodní podkapitola o uzavření prvního pasivního použití: tři uzavírací věty, čtyři stavy, support příklad, privacy-first úklid stop, karta, mini workshop a checklist.
 - 2026-07-04: Doplněna úvodní podkapitola o prvním běžném použití po převodu do pasivního provozu: tři otázky použití, support příklad, čtyři výsledky, privacy-first kontrola nové evidence, karta, mini workshop a checklist.
 - 2026-07-04: Doplněna úvodní podkapitola o převodu zředěného revizního rytmu do dlouhodobého pasivního provozu: pasivní pracovní věta, vypnutí kontrolních stop, návratový signál bez nové evidence, privacy-first převod, karta, mini workshop a checklist.
