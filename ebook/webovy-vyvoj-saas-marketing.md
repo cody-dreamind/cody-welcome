@@ -295310,8 +295310,175 @@ Pokud se během workshopu otevře debata o pořadí celého rukopisu, zastavte j
 
 Uzavření ověření čtenářské mapy chrání rukopis před dvěma špatnými extrémy. První extrém je nechat po ověření mlhu. Druhý extrém je vyrobit z navigace další provozní proces. Správná cesta je kratší: vybrat stav, udělat nejmenší opravu, uklidit dočasné stopy a vrátit mapu zpátky do tiché služby čtenáři.
 
+## Druhé běžné použití čtenářské mapy po uzavření ověření
+
+Po uzavřeném prvním ověření má čtenářská mapa projít druhou, mnohem méně slavnostní zkouškou: někdo ji použije znovu v běžné práci a nemá u toho v ruce čerstvé vysvětlení z předchozí opravy. Právě tady se pozná, jestli mapa opravdu slouží, nebo jestli fungovala jen proto, že si tým pamatoval poslední debatu.
+
+Druhé použití nemá být další audit. Má odpovědět na jednoduchou otázku:
+
+```text
+Dokáže mapa poslat čtenáře na správné místo i bez čerstvé redakční paměti?
+```
+
+Pokud ano, nechte ji být. Pokud ne, opravte nejbližší slabé místo. Nezakládejte novou navigační vrstvu, nezapisujte každé použití a nesnažte se mapu proměnit v rozhodovací strom pro všechny myslitelné situace. To by byla klasická dokumentační dieta naruby: místo zhubnutí přibude další tabulka a všichni se tváří, že to je procesní dospělost.
+
+Druhé použití je užitečné hlavně proto, že testuje přenositelnost. První člověk často ví, proč mapa vznikla, co se opravilo a kterou větu tým minule řešil. Druhý člověk má jen pracovní situaci a text před sebou. To je zdravější test použitelnosti.
+
+### Tři kontrolní otázky
+
+Při druhém použití sledujte jen tři věci:
+
+- Našel čtenář správnou vstupní situaci bez vysvětlování?
+- Vedla mapa ke kapitole, která řeší dnešní pracovní otázku?
+- Nevznikla potřeba ukládat nový osobní, zákaznický nebo provozní detail jen proto, aby se použití dalo později obhájit?
+
+První otázka testuje jazyk mapy. Pokud člověk nepozná rozdíl mezi "prvním pasivním použitím" a "návratovým signálem", problém není v jeho pozornosti. Problém je v tom, že mapa mluví jazykem autorů místo jazykem práce.
+
+Druhá otázka testuje směr. Mapa může mít hezké názvy a pořád posílat špatně. Pokud běžný dotaz skončí v kapitole o redakční opravě, čtenář si zbytečně bere do ruky kladivo na práci, která chtěla jen šroubovák.
+
+Třetí otázka drží privacy-first hranici. Použití mapy nemá vyrábět důkazní spis o tom, kdo se kdy ztratil. Trvalý záznam má popisovat opravu mapy, ne výkon konkrétního člověka.
+
+### Praktický příklad
+
+Marketing po uzavřeném prvním ověření používá mapu znovu. Tentokrát nejde o support a exportní dotaz, ale o situaci, kdy nový člověk připravuje interní výřez e-booku pro obchodní follow-up. Potřebuje zjistit, jestli má otevřít část o pasivním provozu, nebo část o redakční opravě mapy.
+
+Dobrý průchod může vypadat takto:
+
+```text
+Pracovní situace:
+Marketing připravuje krátký interní výřez pro obchod po běžném dotazu zákazníka.
+
+Vstup v mapě:
+"Čtenář potřebuje najít správnou část bez nového rozhodnutí."
+
+Kam mapa vedla:
+Do části o prvním běžném použití po převodu do pasivního provozu.
+
+Výsledek:
+Správně. Nevznikla redakční oprava, jen se použil existující výřez.
+
+Trvalý zápis:
+Žádný. Mapa fungovala beze změny.
+```
+
+To je ideální nudný výsledek. Nuda je tady kompliment. Znamená, že mapa nevyžaduje doprovodný výklad, čtenář se neztratil a tým nemusel přidat žádnou evidenci.
+
+Slabší průchod může vypadat takto:
+
+```text
+Pracovní situace:
+Marketing připravuje krátký interní výřez pro obchod po běžném dotazu zákazníka.
+
+Vstup v mapě:
+Čtenář váhal mezi "pasivním použitím" a "redakční opravou".
+
+Výsledek:
+Mapa byla správná, ale vstupní věta neříkala, že běžný výřez bez obsahové kolize není redakční oprava.
+
+Nejmenší oprava:
+Doplnit k redakční opravě větu: "Redakční oprava začíná až ve chvíli, kdy dvě části rukopisu říkají něco rozdílného."
+```
+
+Tady není potřeba přepisovat mapu ani otevírat kapitolu o obchodním follow-upu. Stačí doplnit jednu hraniční větu. Hranice je důležitější než další příklad.
+
+### Čtyři výsledky druhého použití
+
+Po druhém použití vyberte jeden výsledek:
+
+- Stabilní mapa: druhý člověk našel správnou část bez pomoci.
+- Slabá vstupní věta: mapa vede správně, ale jeden název nebo popis je moc interní.
+- Slabý cíl: vstupní situace je srozumitelná, ale odkaz vede do špatné části.
+- Skrytá podpůrná evidence: tým si začal bokem zapisovat použití, screenshoty nebo konkrétní případy.
+
+Stabilní mapa se nezapisuje do speciální evidence. Stačí, že se používá. Pokud máte nutkání založit tabulku úspěšných použití, dejte si kávu a chvíli počkejte. Většina podobných tabulek umře dřív, než stihne být užitečná.
+
+Slabá vstupní věta se opravuje přímo v mapě. Nepište dlouhé vysvětlení pod mapu. Čtenář, který mapu používá, potřebuje lepší rozcestník, ne poznámku pod čarou k tomu, proč je rozcestník složitý.
+
+Slabý cíl opravte změnou odkazu nebo pořadí doporučení. Pokud přidáte jen další větu, která vysvětluje, proč mapa posílá trochu špatně, vyrábíte dluh. Navigace má navigovat, ne obhajovat vlastní nepřesnost.
+
+Skrytá podpůrná evidence je varovný signál. Znamená, že lidé mapě nevěří dost na to, aby ji nechali pracovat samotnou. Nejdřív zjistěte, co se bojí ztratit: kontext, důkaz, odpovědnost, nebo možnost později ukázat, že "to přece bylo v ticketu". Potom opravte mapu nebo pravidlo, ale neudržujte paralelní paměť jen pro klid duše.
+
+### Privacy-first kontrola druhého použití
+
+Druhé použití často svádí k tomu, že si tým začne ukládat "příklady pro jistotu". Jenže příklady z reálné práce bývají plné jmen, ticketů, zákaznických situací, interních rozhodnutí a obchodních detailů. Pro navigační mapu je to většinou zbytečné.
+
+Před uložením čehokoliv si položte otázku:
+
+```text
+Potřebujeme tento konkrétní detail k opravě mapy, nebo nám stačí anonymní popis situace?
+```
+
+Ve většině případů stačí anonymní záznam:
+
+```text
+Marketing role zaměnila běžný výřez pro obchod za redakční opravu. Do mapy doplněna hranice: redakční oprava začíná až při obsahové kolizi.
+```
+
+To je dost. Není potřeba ukládat jméno člověka, název zákazníka, odkaz na interní ticket ani screenshot konverzace. Pokud už dočasný podklad vznikl, po opravě ho smažte nebo anonymizujte.
+
+Codyho komentář: dokumentace má umět zestárnout bez ostudy. Když za rok otevřete starý záznam a najdete v něm konkrétního člověka přilepeného k dávnému zaváhání, není to znalostní báze. Je to paměť bez dobrého filtru.
+
+### Karta druhého použití mapy
+
+```text
+Pracovní situace:
+
+Role čtenáře:
+
+Vstupní věta v mapě:
+
+Kam mapa vedla:
+
+Byl cíl správný?
+
+Výsledek druhého použití:
+- stabilní mapa
+- slabá vstupní věta
+- slabý cíl
+- skrytá podpůrná evidence
+
+Nejmenší oprava, pokud existuje:
+
+Co se výslovně nemění:
+
+Dočasné podklady k odstranění nebo anonymizaci:
+
+Kanonické místo po opravě:
+
+Návratový signál:
+```
+
+Kartu použijte jen tehdy, když druhé použití odhalilo tření. U čistého použití ji nezakládejte. Pasivní provoz nemá vyhrávat tím, že bude mít nejvíc formulářů.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: pojmenujte pracovní situaci druhého použití.
+2. Minuta 2: ukažte, kterou vstupní větu člověk použil.
+3. Minuta 3: zkontrolujte, jestli mapa vedla do správné části.
+4. Minuta 4: vyberte jeden ze čtyř výsledků.
+5. Minuta 5: udělejte nejmenší opravu, pokud je potřeba.
+6. Minuta 6: smažte nebo anonymizujte dočasné podklady.
+
+Pokud se během workshopu objeví touha přidat nové měření používání mapy, vraťte se ke třetí kontrolní otázce. Potřebujete rozhodnutí, nebo jen uklidňující číslo? U dokumentace je uklidňující číslo často jen dražší forma nejistoty.
+
+### Checklist druhého použití mapy
+
+- Druhé použití proběhlo v jiné běžné situaci než první ověření?
+- Čtenář nepotřeboval čerstvé vysvětlení z předchozí opravy?
+- Byla vstupní věta srozumitelná bez interní historie?
+- Vedla mapa do kapitoly, která řeší dnešní pracovní otázku?
+- Pokud stačila lokální oprava, zůstala opravdu lokální?
+- Pokud byl špatný cíl, opravili jsme směr místo dlouhého vysvětlování?
+- Nevzniká tabulka úspěšných použití mapy?
+- Nevznikají screenshoty, exporty nebo osobní poznámky pro jistotu?
+- Stačí trvalému záznamu role a anonymní pracovní situace?
+- Je po druhém použití jasné, jestli mapa zůstává v pasivním provozu?
+
+Druhé běžné použití má mapě dodat klid. Pokud funguje, nechte ji pracovat bez fanfár. Pokud drhne, opravte nejbližší větu nebo cíl. A pokud kolem ní začíná růst podpůrná evidence, berte to jako signál, že problém není v počtu záznamů, ale v důvěře v samotnou navigaci.
+
 ## Pracovní log
 
+- 2026-07-04: Doplněna úvodní podkapitola o druhém běžném použití čtenářské mapy po uzavření ověření: přenositelnost bez čerstvé redakční paměti, čtyři výsledky použití, praktický marketingový příklad, privacy-first úklid dočasných podkladů, karta, mini workshop a checklist.
 - 2026-07-04: Doplněna úvodní podkapitola o uzavření ověření čtenářské mapy: čtyři uzavírací stavy, praktický support příklad, propsání změn, privacy-first úklid dočasných podkladů, karta, mini workshop a checklist.
 - 2026-07-04: Doplněna úvodní podkapitola o ověření čtenářské mapy při prvním použití: kontrola správné navigace, čtyři výsledky ověření, praktický support příklad, privacy-first práce bez nové evidence, karta, mini workshop a checklist.
 - 2026-07-04: Doplněna čtenářská mapa pasivního provozu: vstupní situace, rozcestník kapitol, praktický exportní příklad, privacy-first datová brzda, karta, mini workshop a checklist.
