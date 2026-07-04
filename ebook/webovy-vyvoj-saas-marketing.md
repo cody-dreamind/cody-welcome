@@ -294155,8 +294155,180 @@ Když se workshop zasekne na tom, jestli zředění bylo "dobrý nápad", vraťt
 
 Uzavření druhé kontroly po zředění je drobná, ale důležitá tečka. Pokud zředěný rytmus funguje, nechte ho dýchat. Pokud nefunguje, opravte nejbližší příčinu a nenechte po kontrole datový nepořádek. Cílem je provoz, který ví, kdy se dívat, kdy zasáhnout a kdy konečně nechat dobře fungující pravidlo na pokoji.
 
+## Převod zředěného rytmu do dlouhodobého pasivního provozu
+
+Když druhá kontrola po zředění potvrdí, že pravidlo funguje bez skryté evidence, přichází další krok: převést ho do dlouhodobého pasivního provozu. To neznamená pravidlo zahodit, přestat ho vlastnit nebo ho pohřbít v archivu. Znamená to, že pravidlo už nepotřebuje vlastní revizní rytmus. Stačí, aby zůstalo na pracovním místě, kde se používá, a aby mělo jasný návratový signál.
+
+Pasivní provoz je jiný režim než zředěná kontrola. U zředěné kontroly pořád existuje plánované review: kvartální, pololetní nebo roční. U pasivního provozu se pravidlo vrací jen tehdy, když se objeví konkrétní signál. Tým tím říká: "Tohle je stabilní součást práce. Necháme ji běžet a nebudeme kolem ní vyrábět další péči."
+
+Začněte větou:
+
+```text
+Pravidlo převádíme do pasivního provozu, protože zředěný rytmus dvakrát potvrdil samostatné použití bez návratového signálu a bez skryté evidence.
+```
+
+Pokud takovou větu neumíte napsat, pasivní provoz je předčasný. Možná rytmus fungoval jen díky jednomu člověku. Možná pravidlo pořád žije v poznámce, kterou nový člen týmu nenajde. Možná sice nevznikla tabulka, ale lidé si před kontrolou ručně dohledávají příklady, aby měli jistotu. To všechno znamená, že pravidlo ještě není pasivní. Je jen méně často kontrolované.
+
+### Co musí zůstat aktivní
+
+Při převodu do pasivního provozu nechte aktivní jen tři věci:
+
+- pracovní větu přímo u místa použití;
+- vlastníka pracovního místa, ne zvláštního review;
+- návratový signál, který pravidlo znovu otevře.
+
+Pracovní věta musí být krátká a použitelná bez historie. Například:
+
+```text
+Fakturační opravu řeš v původním support ticketu. Samostatnou evidenci zakládej jen tehdy, když dvě opravy za sebou nejdou uzavřít v původním vlákně.
+```
+
+To je pasivní pravidlo. Člověk nemusí číst staré review, aby poznal, co má dělat. Zároveň ví, kdy už pravidlo nestačí.
+
+Vlastník nemá být "ten, kdo kdysi řešil kontrolu". V pasivním provozu vlastní pravidlo role, která vlastní pracovní místo. Pokud pravidlo žije v support šabloně, vlastní ho support. Pokud v onboardingovém e-mailu, vlastní ho člověk nebo tým odpovědný za onboarding. Pokud v ceníkové poznámce, vlastní ho obchod nebo produkt podle toho, kdo text v praxi drží.
+
+Návratový signál musí zůstat viditelný. Ne jako samostatný alarm, ale jako součást pracovního místa. Pasivní provoz bez návratového signálu není lehký režim. Je to zapomenutí s lepším názvem.
+
+### Co se má vypnout
+
+Převod do pasivního provozu má zároveň něco vypnout. Jinak jste jen přidali další štítek.
+
+Vypněte:
+
+- samostatnou položku v revizním kalendáři;
+- dočasné kontrolní poznámky;
+- pomocné seznamy použití;
+- exporty vytvořené kvůli minulým kontrolám;
+- připomínky, které už neslouží konkrétnímu rozhodnutí.
+
+Tohle je důležitá část. Tým často umí pravidlo stabilizovat, ale neumí odstranit lešení. Pak zůstane starý reminder, stará tabulka, starý odkaz na "dočasné review" a za půl roku nikdo neví, jestli je to živé, archivní, nebo jen digitální prach. Pasivní provoz má nechat v systému jen to, co člověk opravdu potřebuje při práci.
+
+### Praktický příklad
+
+```text
+Pravidlo:
+Fakturační opravy zůstávají v původním support ticketu.
+
+Zředěný rytmus:
+Pololetní review support šablon.
+
+Důkaz pro pasivní provoz:
+Dvě kontroly po zředění potvrdily, že pravidlo bylo použité samostatně, nový člověk ho našel v šabloně a nevznikla pomocná tabulka ani export.
+
+Pasivní pracovní věta:
+Fakturační opravu řeš v původním support ticketu. Samostatnou evidenci neotvírej, pokud dvě opravy za sebou nejdou uzavřít v původním vlákně.
+
+Co vypínáme:
+Samostatnou pololetní kontrolní otázku k fakturačním opravám.
+
+Co ponecháváme:
+Větu v support šabloně a návratový signál přímo u ní.
+
+Co zůstává zavřené:
+Tabulka oprav, CRM atribut pro typ opravy, report použití pravidla po lidech a export support ticketů.
+
+Návratový signál:
+Dvě relevantní opravy za sebou skončí mimo původní ticket, nebo si support založí pomocnou evidenci, aby pravidlo udržel.
+```
+
+Tento příklad neříká, že fakturační opravy už nikdy nebudou problém. Říká, že pravidlo je dost stabilní na to, aby se řešilo až při signálu. To je zdravý rozdíl.
+
+Slabší převod:
+
+```text
+Pravidlo funguje, takže ho už nebudeme kontrolovat.
+```
+
+To je moc málo. Chybí pracovní věta, chybí návratový signál, chybí úklid starých kontrolních stop. Za pár měsíců tým nebude vědět, jestli pravidlo opravdu žije, nebo jestli jen zmizelo z kalendáře.
+
+### Privacy-first převod
+
+Pasivní provoz je silný privacy-first nástroj. Když pravidlo nepotřebuje plánované review, nepotřebuje ani pravidelné sbírání důkazů. To je dobrá zpráva pro tým i pro data.
+
+Při převodu napište tři řádky:
+
+```text
+V pasivním provozu dál nesbíráme:
+
+Staré kontrolní podklady ukončujeme takto:
+
+Návrat poznáme bez nové evidence takto:
+```
+
+Příklad:
+
+```text
+V pasivním provozu dál nesbíráme:
+Seznam fakturačních oprav, osobní poznámky k práci supportu, export ticketů ani zvláštní CRM atribut.
+
+Staré kontrolní podklady ukončujeme takto:
+Dočasnou poznámku z poslední kontroly mažeme po přepsání agregovaného závěru do support šablony.
+
+Návrat poznáme bez nové evidence takto:
+Support narazí přímo v ticketu na situaci, kdy opravu nejde uzavřít v původním vlákně, a zapíše návratový signál k pracovní větě.
+```
+
+Codyho komentář: nejlepší pasivní provoz není ten, kde nikdo nic nevidí. Je to ten, kde problém vidíte přesně ve chvíli, kdy se opravdu objeví, a nemusíte kvůli tomu držet malou farmu tabulek "pro jistotu". Tabulky mají dost svých starostí.
+
+### Karta převodu do pasivního provozu
+
+```text
+Pravidlo:
+
+Kanonické pracovní místo:
+
+Poslední zředěný rytmus:
+
+Důkaz stabilního provozu:
+
+Pasivní pracovní věta:
+
+Co vypínáme z revizního rytmu:
+
+Co ponecháváme v pracovním místě:
+
+Co zůstává výslovně zavřené:
+
+Jak poznáme návrat bez nové evidence:
+
+Co mažeme, anonymizujeme nebo nepřenášíme:
+
+Kdo vlastní pracovní místo:
+
+Kde je závěr uložený:
+```
+
+Karta má být poslední stopa po převodu. Nezakládejte nový pasivní registr všech pasivních pravidel, pokud k tomu nemáte silný důvod. Pasivní pravidlo má žít hlavně v pracovním místě. Centrální seznam dává smysl až tehdy, když bez něj lidé opravdu ztrácejí orientaci. A i tehdy má obsahovat jen název pravidla, pracovní místo a vlastníka, ne historii všech kontrol.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte uzavření druhé kontroly po zředění.
+2. Minuta 2: napište jednu pasivní pracovní větu.
+3. Minuta 3: určete, co se vypíná z revizního rytmu.
+4. Minuta 4: zapište návratový signál bez nové evidence.
+5. Minuta 5: ukliďte staré kontrolní podklady.
+6. Minuta 6: potvrďte vlastníka pracovního místa.
+
+Pokud během workshopu někdo navrhne "aspoň malý seznam pro přehled", zastavte se a napište, jaké rozhodnutí by ten seznam změnil. Pokud žádné, seznam nepotřebujete. Pokud ano, možná pravidlo ještě není připravené na pasivní provoz.
+
+### Checklist převodu do pasivního provozu
+
+- Máme dvě zředěné kontroly, které potvrdily samostatné použití?
+- Nevznikla mezi kontrolami skrytá evidence?
+- Je pravidlo zapsané přímo u pracovního místa?
+- Dá se pracovní věta použít bez staré historie?
+- Víme, co přesně vypínáme z revizního rytmu?
+- Zůstává vlastník pracovního místa, ne vlastník bývalého review?
+- Je návratový signál konkrétní a rozpoznatelný bez nové tabulky?
+- Uklidili jsme dočasné poznámky, exporty, screenshoty nebo pomocné seznamy?
+- Je jasné, jaká data dál nesbíráme?
+- Nezakládáme nový pasivní registr jen proto, že se bojíme pravidlo pustit z ruky?
+
+Převod do dlouhodobého pasivního provozu je chvíle, kdy pravidlo přestane být projekt a stane se normální prací. Když to uděláte dobře, tým má méně kontrol, méně datových stop a pořád stejnou schopnost poznat, že se problém vrátil. To je přesně ten druh provozního klidu, který vypadá nenápadně, ale šetří pozornost každý týden.
+
 ## Pracovní log
 
+- 2026-07-04: Doplněna úvodní podkapitola o převodu zředěného revizního rytmu do dlouhodobého pasivního provozu: pasivní pracovní věta, vypnutí kontrolních stop, návratový signál bez nové evidence, privacy-first převod, karta, mini workshop a checklist.
 - 2026-07-04: Doplněna úvodní podkapitola o druhé kontrole po zředění revizního rytmu: tři kontrolní otázky, čtyři výsledky kontroly, praktický support příklad, privacy-first kontrola skryté evidence, karta, mini workshop a checklist.
 - 2026-07-04: Doplněna úvodní podkapitola o uzavření první kontroly po zředění revizního rytmu: čtyři uzavírací stavy, praktický support příklad, privacy-first úklid po kontrole, karta, mini workshop a checklist.
 - 2026-07-04: Doplněna úvodní podkapitola o první kontrole po zředění revizního rytmu: ověření samostatnosti pravidla, návratový signál, skrytá evidence, čtyři výsledky kontroly, privacy-first karta, mini workshop a checklist.
