@@ -292735,8 +292735,189 @@ Když během workshopu přijde nový nápad, nejdřív se zeptejte, jestli patř
 
 První dlouhodobé review má potvrdit, že pravidlo umí stárnout normálně. Ne slavnostně, ne pod dohledem, ne s novou evidencí za zády. Normálně: na správném místě, s použitelnou větou a bez datového přívěsku, který nikdo nechtěl, ale všichni ho pak musí uklízet.
 
+## Uzavření prvního dlouhodobého review do běžného rytmu
+
+První dlouhodobé review se musí také uzavřít. Nestačí říct "kontrola proběhla" a nechat výsledek viset ve vzduchu. Pokud review potvrdilo, že pravidlo drží, musí se vrátit do běžného rytmu bez nové péče. Pokud našlo lokální slabinu, musí se opravit nejbližší pracovní místo. Pokud našlo širší problém, musí se z review stát nový návratový signál, ne nenápadně rozšířená údržba.
+
+Uzavření začněte jednou větou:
+
+```text
+První dlouhodobé review uzavíráme tímto stavem:
+```
+
+Za ni napište konkrétní výsledek, ne pocit:
+
+```text
+První dlouhodobé review uzavíráme stavem ponechat beze změny: pravidlo je pořád v potvrzovací šabloně, nový člověk podle něj dokáže jednat a nevznikla vedlejší evidence fakturačních oprav.
+```
+
+Tahle věta má být dost krátká, aby šla přepsat do changelogu šablony nebo interní poznámky. Pokud se do ní nevejde výsledek review, pravděpodobně se snažíte uzavřít víc témat najednou.
+
+### Tři uzavírací otázky
+
+Před zavřením review položte tři otázky:
+
+- Co přesně po review zůstává stejné?
+- Co se lokálně mění, pokud vůbec něco?
+- Jaká mimořádná stopa po review končí?
+
+První otázka chrání stabilitu. Pokud pravidlo prošlo kontrolou, není potřeba ho přeformulovat jen proto, že se ho někdo dotkl. Stabilní pravidla si zaslouží i stabilní jazyk. Každý zbytečný přepis je nová šance, že se ztratí původní hranice.
+
+Druhá otázka chrání praktičnost. Pokud review našlo slabou větu nebo ztracené kanonické místo, opravte přesně tohle místo. Nepřidávejte novou kapitolu, nový dashboard ani nový onboardingový blok, pokud problém vznikl v jedné šabloně.
+
+Třetí otázka je privacy-first pojistka. Review často vytvoří pomocné poznámky, screenshoty, krátké exporty nebo ruční srovnání. Po uzavření buď zmizí, anonymizují se, nebo se vědomě nepřenesou do běžného provozu. Jinak se z kontroly stane nový datový zdroj.
+
+### Čtyři uzavírací stavy
+
+Uzavření prvního dlouhodobého review má čtyři rozumné stavy:
+
+- Vrátit beze změny do rytmu: pravidlo drží a další kontrola proběhne až v plánovaném rytmu.
+- Zavřít lokální opravu: drobná úprava pracovní věty nebo umístění je hotová a nepotřebuje zvláštní sledování.
+- Otevřít servisní poznámku: review našlo drobnost, která nejde opravit hned, ale pořád patří ke stejnému pracovnímu místu.
+- Otevřít nový návratový signál: review ukázalo opakovaný nebo širší problém, který už není běžná údržba pravidla.
+
+Stav `vrátit beze změny do rytmu` je nejčistší. Do záznamu napište jen výsledek, další běžnou kontrolu a potvrzení, že nevzniká nová evidence. Tím review končí. Nepřidávejte "pro jistotu" další kontrolu za týden. To by nebyla opatrnost, ale nenápadné zpochybnění vlastního závěru.
+
+Stav `zavřít lokální opravu` použijte, když je oprava hotová během review. Například doplníte jednu větu do support šablony a tím je problém vyřešený. Do logu patří, co se změnilo a co zůstalo zavřené. Není nutné otevírat samostatnou kartu jen proto, že existuje klávesnice a umí vyrábět formuláře.
+
+Stav `otevřít servisní poznámku` použijte, když lokální oprava potřebuje krátké dokončení mimo review. Třeba je potřeba upravit šablonu v nástroji, ke kterému má přístup jen vlastník supportu. Servisní poznámka má mít vlastníka, jedno pracovní místo a jasný konec. Pokud se začne větvit, už to není servisní poznámka.
+
+Stav `otevřít nový návratový signál` je pro situace, kdy review ukáže, že pravidlo samotné možná nestačí. Například se ve dvou různých týmech znovu objevila vedlejší evidence, protože kanonické místo není dostupné. To už není oprava věty. To je návrat k otázce zdroje pravdy.
+
+### Praktický příklad
+
+Review:
+
+```text
+Pravidlo:
+Fakturační opravy se řeší v původním support ticketu. Nevzniká samostatná tabulka oprav.
+
+Výsledek review:
+Pravidlo je v potvrzovací šabloně a nový člověk ho našel. U složitější technické opravy ale nebylo jasné, kde má vzniknout interní úkol.
+```
+
+Uzavření:
+
+```text
+Stav:
+Zavřít lokální opravu.
+
+Co upravujeme:
+Do potvrzovací šablony doplňujeme větu: "Interní úkol zakládej jen pro technickou práci; stav opravy vůči zákazníkovi zůstává v původním ticketu."
+
+Co zůstává stejné:
+Zdroj pravdy pro zákaznický stav je původní support ticket.
+
+Co zůstává zavřené:
+Samostatná tabulka fakturačních oprav, nový CRM atribut a report jednotlivých použití pravidla.
+
+Privacy-first úklid:
+Pomocnou poznámku z review mažeme po úpravě šablony. Do běžného provozu nepřidáváme novou evidenci.
+
+Další kontrola:
+Další měsíční kontrola support šablon, bez mimořádného follow-upu.
+```
+
+Slabší uzavření by znělo:
+
+```text
+Pravidlo upravíme a budeme sledovat, jestli se používá správně.
+```
+
+To je přesně věta, ze které se rodí zbytečný dohled. Neříká, co se upravuje, kde se to upravuje, co zůstává zavřené ani jaké sledování se nesmí rozjet. Lepší uzavření má méně ambicí a více hranic.
+
+### Privacy-first uzavření review
+
+Při uzavření review se neptejte jen na pravidlo. Ptejte se i na stopu samotné kontroly:
+
+```text
+Co jsme kvůli review dočasně viděli?
+
+Co z toho patří do trvalého záznamu?
+
+Co po uzavření smažeme, anonymizujeme nebo vůbec nepřenášíme?
+```
+
+Trvalý záznam obvykle nepotřebuje konkrétní zákaznické zprávy, jména lidí, screenshoty interních nástrojů ani exporty historie. Potřebuje závěr, případnou úpravu a návratový signál. Zbytek je pracovní lešení. Po stavbě má zmizet, ne se prohlásit za architekturu.
+
+Příklad privacy-first záznamu:
+
+```text
+Do trvalého záznamu ukládáme:
+Výsledek review, upravenou pracovní větu a další běžný termín kontroly.
+
+Do trvalého záznamu neukládáme:
+Kopie ticketů, jména zákazníků, jména lidí v týmu ani seznam všech použití pravidla.
+
+Po uzavření mažeme:
+Pomocné poznámky z review obsahující konkrétní zákaznický kontext.
+```
+
+Codyho komentář: dlouhodobé review má být jako dobrý servis kola. Zkontrolovat brzdy, dotáhnout jeden šroub, nenechat po sobě krabici náhradních dílů uprostřed chodby. Pokud po každé kontrole vznikne nový sklad materiálu, neudržujete systém. Zakládáte si malý provozní bazar.
+
+### Karta uzavření prvního dlouhodobého review
+
+```text
+Pravidlo:
+
+Kanonické pracovní místo:
+
+Dlouhodobý revizní rytmus:
+
+Výsledek prvního review:
+
+Uzavírací stav:
+- vrátit beze změny do rytmu
+- zavřít lokální opravu
+- otevřít servisní poznámku
+- otevřít nový návratový signál
+
+Co zůstává stejné:
+
+Co se lokálně mění:
+
+Co zůstává výslovně zavřené:
+
+Jaká mimořádná kontrola po review končí:
+
+Jaké pomocné stopy mažeme, anonymizujeme nebo nepřenášíme:
+
+Další běžná kontrola:
+
+Vlastník:
+```
+
+Karta je konec review, ne začátek další administrativy. Pokud vyplněná karta sama vytváří nový pravidelný úkol, zkontrolujte, jestli jste omylem nepřevedli běžné review do mimořádného režimu.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte výsledek prvního dlouhodobého review.
+2. Minuta 2: vyberte jeden uzavírací stav.
+3. Minuta 3: napište, co zůstává stejné a co zůstává zavřené.
+4. Minuta 4: proveďte lokální úpravu nebo zapište servisní poznámku.
+5. Minuta 5: ukončete mimořádnou kontrolu a uklidte pomocné stopy.
+6. Minuta 6: potvrďte další běžnou kontrolu a vlastníka.
+
+Když se během uzavření objeví chuť přidat novou metriku, vraťte se k výsledku review. Pokud metrika neodpovídá na konkrétní problém z kontroly, nepatří sem. Možná je to dobrý nápad. Jen není dnešní práce.
+
+### Checklist uzavření prvního dlouhodobého review
+
+- Má review jeden jasný výsledek?
+- Vybrali jsme právě jeden uzavírací stav?
+- Je napsané, co zůstává stejné?
+- Pokud se něco mění, je to lokální a u nejbližšího pracovního místa?
+- Je jasné, co zůstává výslovně zavřené?
+- Nevzniká po review nový dohled, report lidí, export ani CRM atribut?
+- Uklidili jsme pomocné poznámky, screenshoty, kopie zpráv nebo dočasné tabulky?
+- Pokud vznikla servisní poznámka, má vlastníka, jedno místo a jasný konec?
+- Pokud vznikl návratový signál, je oddělený od běžné údržby?
+- Ví tým, kdy přijde další běžná kontrola?
+
+Uzavření prvního dlouhodobého review má vrátit pravidlo do klidného provozu. Buď beze změny, nebo s malou lokální opravou, ale bez nové kontrolní vrstvy. Stabilní pravidlo nepotřebuje publikum. Potřebuje dobré místo, jasnou větu a občasné tiché ověření, že po něm nezůstává datový nepořádek.
+
 ## Pracovní log
 
+- 2026-07-04: Doplněna úvodní podkapitola o uzavření prvního dlouhodobého review do běžného rytmu: uzavírací stavy, lokální oprava, servisní poznámka, nový návratový signál, privacy-first úklid stop, karta, mini workshop a checklist.
 - 2026-07-04: Doplněna úvodní podkapitola o převodu stabilizovaného pravidla do dlouhodobého revizního rytmu: výběr existujícího rytmu, praktický support příklad, lokální servisní poznámka, privacy-first kontrola evidence, karta, mini workshop a checklist.
 - 2026-07-04: Doplněna úvodní podkapitola o uzavření druhého běžného použití po stabilizaci pravidla: uzavírací stavy, poslední lokální oprava, nová otázka, privacy-first úklid dočasných stop, karta, mini workshop a checklist.
 - 2026-07-04: Doplněna krátká úvodní poznámka k dohledatelnosti záznamu neotevřeného kroku v běžném pracovním místě.
