@@ -294961,8 +294961,184 @@ Pokud se během workshopu ukáže, že dvě části říkají opačné věci, ne
 
 Čtenářská mapa pasivního provozu je obyčejná navigace pro neobyčejně dlouhý rukopis. Pomáhá držet rozdíl mezi převodem, použitím, uzavřením a návratem. Díky tomu e-book zůstává praktický nástroj, ne historický záznam toho, jak jsme se k nástroji postupně prokopali.
 
+## Ověření čtenářské mapy při prvním použití
+
+Čtenářská mapa je užitečná až ve chvíli, kdy podle ní někdo opravdu najde správnou část rukopisu. Dokud existuje jen jako pěkný rozcestník, je to slib. První použití ověřuje, jestli mapa pomáhá v běžné situaci: člověk má konkrétní problém, nechce číst celý blok o pasivním provozu a potřebuje se rychle rozhodnout, kterou část otevřít.
+
+Ověření mapy nemá být další redakční projekt. Nemá zkoumat celý e-book, nevyrábí nový index a nesbírá dlouhé poznámky o čtenářském chování. Stačí jeden konkrétní průchod:
+
+```text
+Člověk přišel s touto pracovní situací:
+
+Mapa ho poslala do této části:
+
+Výsledek:
+```
+
+Pokud se podle mapy dostal do správné části a dokázal pokračovat bez pracovního logu, mapa funguje. Pokud musel hádat, ptát se původního autora, nebo otevřel špatnou fázi procesu, opravte nejbližší větu mapy. Nezačínejte hned přestavovat celou navigaci. První použití má odhalit nejmenší tření, ne vyvolat pocit, že dokument potřebuje generální rekonstrukci.
+
+### Co první použití ověřuje
+
+První použití čtenářské mapy ověřuje tři věci:
+
+- vstupní situace je popsaná jazykem čtenáře;
+- mapa vede k jedné konkrétní části;
+- mapa říká i to, co se teď nemá otevírat.
+
+První bod je nejčastější slabina. Autor mapy často pojmenuje situaci podle interního procesu: "pasivní režim po zředění". Čtenář ale přijde s větou: "Máme šablonu, která už dlouho funguje, a nechceme ji dál kontrolovat." Mapa má používat druhý typ jazyka. Procesní štítky jsou užitečné až potom.
+
+Druhý bod chrání před rozcestníkem, který nerozcestníkuje. Pokud jedna situace odkazuje na tři kapitoly, čtenář je zase tam, kde byl: musí odhadovat. Lepší je poslat ho do jedné části a v ní případně krátce odkázat dál.
+
+Třetí bod je privacy-first pojistka. Když mapa neřekne, co teď neotevírat, člověk může z opatrnosti otevřít review, evidenci nebo starý export, i když řeší jen běžné použití. Dobrá mapa brzdí i dobře míněné přidávání práce.
+
+### Praktický příklad
+
+Tým používá pravidlo pro exportní dotazy. Pravidlo už prošlo převodem do pasivního provozu a první běžné použití bylo uzavřené bez změny. O měsíc později přijde nový support člověk s otázkou:
+
+```text
+Přišel standardní dotaz na export dat. Šablonu jsem našel, ale nejsem si jistý, jestli mám něco zapisovat, když je to první podobný dotaz, který řeším já.
+```
+
+Mapa má člověka poslat do části o dalším běžném použití v pasivním provozu, ne zpět do převodu a ne do návratového signálu. Správná navigační věta může znít:
+
+```text
+Jestli pravidlo používá další člověk nebo stejný člověk po delší době, otevři část o dalším běžném použití. Nevracej se k převodu, pokud se nemění pracovní věta ani návratový signál.
+```
+
+Výsledek prvního ověření:
+
+```text
+Člověk přišel s běžným použitím pravidla novou rolí.
+Mapa ho poslala do dalšího běžného použití v pasivním provozu.
+Nepotřeboval pracovní log ani starou kartu převodu.
+Nevznikla nová evidence exportních dotazů.
+Mapa pokračuje beze změny.
+```
+
+Slabší výsledek by vypadal takto:
+
+```text
+Člověk otevřel část o návratovém signálu, protože mapa nerozlišovala "nový člověk používá pravidlo" od "pravidlo se znovu rozbilo".
+```
+
+Tady není potřeba přepsat celý blok. Stačí doplnit jednu větu u vstupní situace "další běžné použití":
+
+```text
+Nový člověk s běžným dotazem není návratový signál, pokud se nestala domluvená hraniční situace.
+```
+
+To je dobrá oprava. Je malá, konkrétní a brání zbytečnému otevření aktivnějšího režimu.
+
+### Čtyři výsledky ověření mapy
+
+Po prvním použití vyberte jeden ze čtyř výsledků:
+
+- Mapa funguje: čtenář našel správnou část a pokračoval bez další pomoci.
+- Mapa potřebuje lokální větu: situace byla správná, ale formulace vstupu byla nejasná.
+- Mapa míří do špatné fáze: čtenář otevřel jiný krok procesu, než ve kterém skutečně byl.
+- Mapa odhalila obsahovou kolizi: dvě části dávají odlišné instrukce a rozcestník to neumí vyřešit.
+
+U prvního výsledku nic nedělejte. Nezakládejte seznam úspěšných použití mapy. Pokud mapa funguje, její nejlepší stav je ticho.
+
+U lokální věty opravte jen formulaci vstupu. Nepřidávejte další kategorii, pokud stačí příklad nebo krátká věta "tohle není návratový signál".
+
+U špatné fáze zkontrolujte, jestli mapa používá jazyk čtenáře. Často stačí přepsat "uzavření" na "první použití právě skončilo a potřebujeme rozhodnout, co s tím". Stejná fáze, méně interního slovníku.
+
+U obsahové kolize se nesnažte mapou přelepit problém. Rozcestník nemá rozhodovat, která z protichůdných instrukcí platí. Vyberte kanonické místo a otevřete samostatnou redakční opravu s jasným rozsahem.
+
+### Privacy-first ověření
+
+Ověření čtenářské mapy má být datově lehké. Není potřeba měřit každý klik, sledovat čtenářskou cestu přes analytiku ani ukládat osobní poznámky o tom, kdo se kde ztratil. Stačí krátký pracovní záznam, pokud se něco opravovalo.
+
+Použijte tento filtr:
+
+```text
+Stačí nám k ověření běžný pracovní příklad?
+
+Potřebujeme ukládat jméno člověka, nebo stačí role?
+
+Vzniká nová evidence použití mapy, která mění rozhodnutí?
+```
+
+Ve většině případů stačí role a anonymizovaná situace:
+
+```text
+Support člověk při běžném exportním dotazu otevřel správnou část o dalším použití. Mapa pokračuje beze změny.
+```
+
+Pokud mapa selhala, zapište jen tolik, kolik je nutné pro opravu:
+
+```text
+Nový člen supportu zaměnil další běžné použití za návratový signál. Do mapy doplněna věta, že nový člověk s běžným dotazem není návrat, dokud nenastane domluvená hranice.
+```
+
+Není potřeba ukládat celé ticketové vlákno, screenshoty, jméno člověka ani export konverzace. Opravujete navigaci, ne vyšetřujete výkon jednotlivce. Privacy-first provoz tady znamená i sociální hygienu: méně zbytečných stop o tom, kdo se v čem ztratil.
+
+Codyho komentář: když se člověk ztratí v mapě, problém obvykle není člověk. Je to mapa. Ano, občas někdo ignoruje ceduli velikosti billboardu, ale v dokumentaci je praktičtější začít tím, že cedule možná ukazuje moc učeně a málo lidsky.
+
+### Karta ověření čtenářské mapy
+
+```text
+Blok rukopisu:
+
+Pracovní situace čtenáře:
+
+Role čtenáře, pokud je důležitá:
+
+Kam mapa poslala čtenáře:
+
+Byla to správná část?
+
+Musel čtenář otevřít pracovní log nebo starou historii?
+
+Vznikla nová evidence, export nebo pomocná poznámka?
+
+Výsledek:
+- mapa funguje
+- mapa potřebuje lokální větu
+- mapa míří do špatné fáze
+- mapa odhalila obsahovou kolizi
+
+Nejmenší oprava:
+
+Co výslovně neměníme:
+
+Co mažeme, anonymizujeme nebo nepřenášíme:
+
+Kde je oprava uložená:
+```
+
+Kartu použijte jen při nejasnosti nebo opravě. U čistého použití stačí, že člověk pokračoval. Pokud byste kartu vyplňovali pokaždé, mapa by se změnila v další proces. A to je přesně opak toho, proč vznikla.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte pracovní situaci čtenáře jednou větou.
+2. Minuta 2: zkontrolujte, kam ho mapa poslala.
+3. Minuta 3: ověřte, jestli pokračoval bez pracovního logu.
+4. Minuta 4: vyberte jeden ze čtyř výsledků.
+5. Minuta 5: napište nejmenší opravu, pokud je potřeba.
+6. Minuta 6: zkontrolujte, že nevznikla nová evidence použití mapy.
+
+Pokud se workshop začne měnit v debatu o celém pořadí rukopisu, zastavte ho. První ověření mapy má řešit jednu navigační situaci. Velká redakční práce může přijít později, ale nemá se schovat do malé kontroly.
+
+### Checklist ověření čtenářské mapy
+
+- Měli jsme jednu konkrétní pracovní situaci?
+- Popsali jsme ji jazykem čtenáře, ne jen interním názvem procesu?
+- Poslala mapa čtenáře do jedné konkrétní části?
+- Byla tato část správná pro danou fázi práce?
+- Řekla mapa také, co se teď nemá otevírat?
+- Nemusel čtenář dohledávat pracovní log nebo starou historii?
+- Pokud mapa selhala, opravujeme nejbližší větu místo celého bloku?
+- Pokud se ukázala obsahová kolize, neřešíme ji mapou, ale samostatnou redakční opravou?
+- Nevznikla nová evidence použití mapy bez jasného rozhodovacího účelu?
+- Je privacy-first závěr zapsaný bez zbytečných osobních nebo interních detailů?
+
+Ověření čtenářské mapy má být malé, protože mapa sama má být malá. Jejím úkolem není vyhrát soutěž o nejchytřejší navigaci. Má člověka poslat na správné místo, ušetřit mu čtení historie a zabránit tomu, aby kvůli nejasnosti vznikla nová data nebo nový proces. Když to zvládne, nechte ji dělat svoji nudnou, užitečnou práci.
+
 ## Pracovní log
 
+- 2026-07-04: Doplněna úvodní podkapitola o ověření čtenářské mapy při prvním použití: kontrola správné navigace, čtyři výsledky ověření, praktický support příklad, privacy-first práce bez nové evidence, karta, mini workshop a checklist.
 - 2026-07-04: Doplněna čtenářská mapa pasivního provozu: vstupní situace, rozcestník kapitol, praktický exportní příklad, privacy-first datová brzda, karta, mini workshop a checklist.
 - 2026-07-04: Doplněna servisní podkapitola k pořadí navazujících částí: kdy stačí krátká poznámka, kdy opravdu opravit pořadí, praktický příklad, privacy-first úklid redakčních podkladů, karta, mini workshop a checklist.
 - 2026-07-04: Doplněna úvodní podkapitola o uzavření prvního pasivního použití: tři uzavírací věty, čtyři stavy, support příklad, privacy-first úklid stop, karta, mini workshop a checklist.
