@@ -294326,8 +294326,157 @@ Pokud během workshopu někdo navrhne "aspoň malý seznam pro přehled", zastav
 
 Převod do dlouhodobého pasivního provozu je chvíle, kdy pravidlo přestane být projekt a stane se normální prací. Když to uděláte dobře, tým má méně kontrol, méně datových stop a pořád stejnou schopnost poznat, že se problém vrátil. To je přesně ten druh provozního klidu, který vypadá nenápadně, ale šetří pozornost každý týden.
 
+## První běžné použití po převodu do pasivního provozu
+
+Po převodu pravidla do pasivního provozu přijde první běžné použití. To je nenápadný, ale důležitý test. Nejde o plánované review, slavnostní kontrolu ani návrat staré projektové péče. Jde o obyčejnou pracovní situaci, ve které má pravidlo fungovat bez toho, aby někdo vytahoval historii, staré kontrolní karty nebo pomocné tabulky.
+
+První běžné použití má odpovědět na jednoduchou otázku:
+
+```text
+Umí člověk použít pasivní pravidlo přímo v pracovním místě, bez čerstvé paměti z převodu?
+```
+
+Pokud ano, pasivní provoz začíná dobře. Pokud ne, není potřeba panikařit. Opravte nejbližší překážku a neotevírejte znovu celý revizní rytmus. Pasivní provoz se nemá při prvním zaškobrtnutí změnit zpět na projekt. Má jen ukázat, jestli pracovní místo opravdu nese pravidlo samo.
+
+Typická chyba je, že tým první použití tajně doprovodí mimořádnou péčí. Někdo připomene starý kontext, pošle odkaz na uzavírací kartu, nebo si pro jistotu otevře bývalý kontrolní dokument. Výsledek pak vypadá dobře, ale není čistý. Neověřili jste pasivní pravidlo; ověřili jste pravidlo s doprovodem. To je trochu jako testovat samoobslužnou pokladnu s člověkem, který za zákazníka mačká tlačítka. Hezké, ale zavádějící.
+
+### Tři otázky prvního použití
+
+Při prvním běžném použití si položte jen tři otázky:
+
+- Našel člověk pravidlo tam, kde práci opravdu dělal?
+- Rozhodl podle něj bez návratu do staré historie?
+- Nevznikla kvůli použití nová evidence, export, tracker nebo ruční seznam?
+
+První otázka ověřuje umístění. Pasivní pravidlo, které člověk musí hledat v archivu revizí, není pasivní. Je jen uklizené moc daleko.
+
+Druhá otázka ověřuje samostatnost. Člověk může znát kontext z minulosti, ale pravidlo musí být použitelné i pro někoho, kdo u převodu nebyl. Pokud je nutné volat původního vlastníka, pasivní věta je slabá.
+
+Třetí otázka ověřuje datovou střídmost. První použití nesmí vytvořit novou nenápadnou kontrolní stopu: screenshot "pro jistotu", export případů, seznam výjimek nebo komentářovou větev, která supluje zrušené review.
+
+### Praktický příklad
+
+Představte si support šablonu, která po dvou zředěných kontrolách přešla do pasivního provozu. Pravidlo říká:
+
+```text
+U dotazu na export dat odpovídáme podle šablony Export: vysvětlíme dostupný formát, odkážeme na samoobslužný postup a eskalujeme pouze žádosti o nestandardní rozsah nebo právní výklad.
+
+Návratový signál:
+Dvě žádosti během jednoho měsíce nepůjde vyřídit podle šablony bez ručního právního nebo technického doptání.
+```
+
+O týden později přijde běžný dotaz na export. Support člověk najde šablonu v helpdesku, použije ji, zákazník dostane jasnou odpověď a nevznikne žádná nová tabulka sledování exportních dotazů. To je dobré první použití. Není potřeba nic zapisovat mimo běžný ticket.
+
+Slabší varianta vypadá jinak. Člověk šablonu najde až přes starý odkaz v uzavírací kartě, odpověď sice odešle správně, ale do interní poznámky přidá: "radši sledujme další exportní dotazy". Tady není problém v zákaznické odpovědi. Problém je v pracovním místě a v návratu skryté evidence. Oprava má být malá: přesunout nebo přejmenovat šablonu a smazat interní poznámku, pokud nemění žádné rozhodnutí.
+
+Nejslabší varianta: člověk bez starého kontextu neví, zda žádost eskalovat, a raději exportuje příklady do separátního souboru pro pozdější kontrolu. Tady pasivní provoz neprošel. Neotevírejte ale hned pravidelné review. Nejdřív doplňte do šablony jednu rozhodovací větu a určete, jestli exportní soubor obsahuje data, která mají být smazaná nebo anonymizovaná.
+
+### Čtyři výsledky prvního použití
+
+Po prvním běžném použití vyberte jeden ze čtyř výsledků:
+
+- Čisté použití: pravidlo bylo nalezené, použité a nezanechalo novou stopu.
+- Lokální oprava: pravidlo fungovalo, ale pracovní místo potřebuje drobné zpřesnění.
+- Slabá samostatnost: pravidlo potřebovalo starý kontext, který v pracovním místě chybí.
+- Návratový signál: situace opravdu splnila domluvený důvod k novému otevření tématu.
+
+U čistého použití nic nerozšiřujte. Nezakládejte "evidenci čistých použití", protože to je jen revizní rytmus v převleku. Stačí, že běžný pracovní záznam existuje tam, kde by existoval tak jako tak: ticket, karta zákazníka, poznámka u úkolu nebo odpověď v support systému.
+
+U lokální opravy změňte jen nejbližší místo. Přepište název šablony, doplňte jednu rozhodovací větu, opravte odkaz nebo odstraňte starou poznámku. Neotevírejte kapitolu o celé historii pravidla.
+
+U slabé samostatnosti se zastavte u otázky: co přesně člověk potřeboval vědět navíc? Pokud je odpověď jedna věta, doplňte ji. Pokud je odpověď dlouhé vysvětlování, pravidlo možná nebylo připravené na pasivní provoz a zaslouží si krátké zpřesnění hranice.
+
+U návratového signálu postupujte podle domluveného návratu. To znamená: nejdřív potvrdit signál, potom vybrat nejmenší další krok a teprve potom rozhodovat, zda se pravidlo vrací do aktivnějšího rytmu. Návratový signál není povolenka ke generálnímu úklidu všeho, co s tématem souvisí.
+
+### Privacy-first kontrola
+
+První běžné použití po převodu do pasivního provozu je citlivé na nenápadné hromadění dat. Tým chce mít jistotu, že pravidlo funguje, a tak si často začne ukládat důkazy "jen dočasně". Jenže právě tomu se pasivní provoz snažil vyhnout.
+
+Položte si po použití tři krátké otázky:
+
+```text
+Vznikla data, která by bez pasivního pravidla nevznikla?
+
+Ukládáme něco mimo běžné pracovní místo?
+
+Má nová stopa jasný účel, vlastníka a konec?
+```
+
+Pokud odpověď na první otázku zní ano, ověřte, jestli jsou data opravdu nutná. Pokud odpověď na druhou otázku zní ano, zkuste stopu přesunout do běžného místa nebo ji zrušit. Pokud odpověď na třetí otázku zní ne, stopa nemá v systému co dělat.
+
+Privacy-first výsledek prvního použití může vypadat takto:
+
+```text
+Pravidlo bylo použité v běžném ticketu. Nevznikl export, zvláštní seznam ani nová metrika. Interní poznámka s odkazem na staré review byla odstraněná, protože nemění další rozhodnutí.
+```
+
+To je lepší než pět odstavců o tom, jak moc tým chrání soukromí. Konkrétně říká, co se nestalo: nepřibyl export, nepřibyl seznam, nepřibyla metrika. V evropském privacy-first provozu je někdy nejcennější stopa právě ta, kterou jste se rozhodli nevytvořit.
+
+Codyho komentář: pasivní provoz neznamená, že si tým zakáže všímat reality. Znamená, že si realitu nebude preventivně šanonovat, dokud nepřijde dobrý důvod. To je rozdíl mezi pozorností a sběratelstvím. Jedno pomáhá produktu, druhé jen krmí pocit kontroly.
+
+### Karta prvního pasivního použití
+
+```text
+Pravidlo:
+
+Pracovní místo:
+
+Běžná situace, ve které bylo použité:
+
+Kdo pravidlo použil:
+
+Našel pravidlo bez staré historie?
+
+Rozhodl podle něj samostatně?
+
+Vznikla nová evidence, export, tracker nebo pomocný seznam?
+
+Výsledek:
+- čisté použití
+- lokální oprava
+- slabá samostatnost
+- návratový signál
+
+Nejmenší oprava, pokud existuje:
+
+Co mažeme, anonymizujeme nebo nepřenášíme:
+
+Zůstává pasivní provoz v platnosti?
+
+Kde je běžný pracovní záznam:
+```
+
+Kartu vyplňujte jen tehdy, když první použití přineslo nejistotu, lokální opravu nebo návratový signál. U čistého použití často stačí běžný pracovní záznam a žádná zvláštní karta. Pasivní provoz se nemá stát novou administrativou, která se tváří jako lehkost.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: pojmenujte běžnou situaci, ve které se pravidlo použilo.
+2. Minuta 2: ověřte, kde člověk pravidlo našel.
+3. Minuta 3: zjistěte, jestli potřeboval starý kontext.
+4. Minuta 4: zkontrolujte, zda nevznikla nová evidence.
+5. Minuta 5: vyberte jeden ze čtyř výsledků.
+6. Minuta 6: proveďte nejmenší opravu nebo potvrďte, že pasivní provoz pokračuje beze změny.
+
+Pokud workshop začne sklouzávat k tomu, jestli bylo rozhodnutí o pasivním provozu správné, vraťte se k prvnímu použití. Hodnotíte konkrétní průchod, ne celou filozofii údržby. Velké otázky si zaslouží vlastní návratový signál, ne nenápadné přibalení k šestiminutové kontrole.
+
+### Checklist prvního pasivního použití
+
+- Šlo o běžnou pracovní situaci, ne o plánované review?
+- Bylo pravidlo přímo u pracovního místa?
+- Nemusel člověk otevírat starou historii převodu?
+- Byla rozhodovací věta dost konkrétní?
+- Nevznikla nová pomocná evidence?
+- Nevznikl export, screenshot, tracker nebo metrika jen pro jistotu?
+- Pokud vznikla lokální oprava, zůstala u jednoho pracovního místa?
+- Pokud se objevil návratový signál, byl opravdu stejný jako domluvený signál?
+- Je jasné, zda pasivní provoz pokračuje beze změny?
+- Uklidili jsme dočasné stopy, které první použití nepotřebuje?
+
+První běžné použití po převodu do pasivního provozu nemá dokazovat, že systém je dokonalý. Má ukázat, jestli pravidlo dokáže žít tam, kde se práce skutečně děje. Když ano, nechte ho být. Když ne, opravte nejbližší překážku a chraňte pasivní režim před návratem zbytečné kontroly.
+
 ## Pracovní log
 
+- 2026-07-04: Doplněna úvodní podkapitola o prvním běžném použití po převodu do pasivního provozu: tři otázky použití, support příklad, čtyři výsledky, privacy-first kontrola nové evidence, karta, mini workshop a checklist.
 - 2026-07-04: Doplněna úvodní podkapitola o převodu zředěného revizního rytmu do dlouhodobého pasivního provozu: pasivní pracovní věta, vypnutí kontrolních stop, návratový signál bez nové evidence, privacy-first převod, karta, mini workshop a checklist.
 - 2026-07-04: Doplněna úvodní podkapitola o druhé kontrole po zředění revizního rytmu: tři kontrolní otázky, čtyři výsledky kontroly, praktický support příklad, privacy-first kontrola skryté evidence, karta, mini workshop a checklist.
 - 2026-07-04: Doplněna úvodní podkapitola o uzavření první kontroly po zředění revizního rytmu: čtyři uzavírací stavy, praktický support příklad, privacy-first úklid po kontrole, karta, mini workshop a checklist.
