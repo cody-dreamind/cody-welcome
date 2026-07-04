@@ -293773,8 +293773,179 @@ Když se během šesti minut objeví debata o novém měření, nepřidávejte j
 
 Uzavření první kontroly po zředění má potvrdit, že lehčí rytmus není jen přání, ale provozní realita. Když pravidlo drží, nechte ho v klidu. Když potřebuje jednu větu, opravte jednu větu. A když se objeví skutečný signál, otevřete ho čistě, bez toho, aby se z každé kontroly stal nový důvod sbírat další data.
 
+## Druhá kontrola po zředění revizního rytmu
+
+Druhá kontrola po zředění rytmu je test, jestli lehčí režim opravdu funguje jako provozní úspora, nebo jestli se jen posunul problém do delšího intervalu. První kontrola po zředění obvykle ještě nese čerstvou paměť rozhodnutí. Druhá už má ukázat, jestli pravidlo stojí samo: člověk ho najde, použije, nezaloží pomocnou evidenci a neotevře starý rozsah jen proto, že mezi kontrolami uběhlo víc času.
+
+Začněte větou:
+
+```text
+Druhou kontrolu po zředění otevíráme, abychom ověřili:
+```
+
+Za ni napište jednu věc, ne celý seznam obav:
+
+```text
+Druhou kontrolu po zředění otevíráme, abychom ověřili, že pololetní rytmus support šablon pořád stačí a že se fakturační opravy nevrátily do pomocné tabulky.
+```
+
+Tahle věta drží kontrolu úzkou. Neřeší celý support, všechny šablony ani kvalitu fakturace obecně. Řeší zředěný rytmus, konkrétní pravidlo a datovou stopu, kvůli které rytmus vůbec stojí za kontrolu.
+
+### Tři kontrolní otázky
+
+Druhá kontrola po zředění má tři otázky:
+
+- Je zředěný rytmus pořád dost častý na zachycení skutečného návratového signálu?
+- Zůstalo pravidlo najitelné v běžné práci bez připomínání historie?
+- Nevznikla mezi kontrolami skrytá evidence, která nahrazuje starý častější dohled?
+
+První otázka chrání před slepotou. Pokud se během delšího intervalu objevil opakovaný problém a tým ho zjistil až pozdě, rytmus je možná příliš řídký. Neznamená to návrat k původní frekvenci navždy, ale může dávat smysl dočasně ho zkrátit.
+
+Druhá otázka chrání pracovní místo. Když lidé pravidlo během delšího intervalu najdou jen přes staré poznámky, zředění odkrylo slabou navigaci. Opravte navigaci, ne frekvenci review.
+
+Třetí otázka je privacy-first brzda. Pokud si tým mezi kontrolami založil pomocnou tabulku, export nebo ruční seznam, rytmus sice formálně zřídnul, ale prakticky vznikla nová kontrolní vrstva. To není úspora. To je kontrola v převleku.
+
+### Čtyři výsledky druhé kontroly
+
+Po druhé kontrole vyberte jeden stav:
+
+- Potvrdit zředěný rytmus: pravidlo drží, návratový signál nepřišel a nevznikla skrytá evidence.
+- Upravit pracovní místo: rytmus stačí, ale pravidlo je hůř najitelné nebo má slabou pracovní větu.
+- Dočasně zhustit rytmus: objevilo se tření, které potřebuje jednu kratší kontrolu, než se rytmus znovu zředí.
+- Otevřít návratový signál: problém se vrátil v podobě, kterou běžná údržba už neumí vyřešit.
+
+Stav `potvrdit zředěný rytmus` má být krátký. Zapište, že zředění funguje, a další kontrolu nechte v novém běžném rytmu. Nepřidávejte mezikontrolu jen proto, že delší interval působí nezvykle.
+
+Stav `upravit pracovní místo` je pro drobné navigační chyby. Například pravidlo pořád platí, ale odkaz v rozcestníku je slabý nebo pracovní věta neříká, kde přesně zapsat výjimku. To je oprava místa, ne důkaz, že rytmus selhal.
+
+Stav `dočasně zhustit rytmus` použijte jen s koncem. Například jedna další kontrola za 30 dní, nebo kontrola po třech reálných použitích. Bez konce byste jen potichu zrušili zředění.
+
+Stav `otevřít návratový signál` patří situaci, kdy se problém skutečně vrátil: opakované použití starého procesu, nová pomocná evidence, ztracené kanonické místo nebo datová stopa, která odporuje původnímu pravidlu.
+
+### Praktický příklad
+
+```text
+Pravidlo:
+Fakturační opravy zůstávají v původním support ticketu. Nevzniká samostatná tabulka oprav.
+
+Zředěný rytmus:
+Pololetní review support šablon.
+
+Druhá kontrola:
+Za poslední období proběhly tři relevantní opravy. Všechny zůstaly v původním ticketu, nový člen supportu našel pravidlo v šabloně a nevznikl žádný export ani pomocná tabulka.
+
+Výsledek:
+Potvrdit zředěný rytmus.
+
+Co zůstává stejné:
+Support ticket je zdroj pravdy pro stav opravy.
+
+Co zůstává zavřené:
+Samostatná tabulka oprav, nový CRM atribut, report použití pravidla po lidech a export support vláken.
+
+Další kontrola:
+Další pololetní review support šablon, pokud dřív nepřijde návratový signál.
+```
+
+Slabší výsledek:
+
+```text
+Druhá kontrola:
+Pravidlo platí, ale nový člověk ho našel až přes starý odkaz v interním rozcestníku.
+
+Výsledek:
+Upravit pracovní místo.
+
+Oprava:
+Přejmenujeme odkaz v rozcestníku na "Aktuální pravidlo fakturačních oprav" a archivní odkaz přesuneme níž.
+
+Co neměníme:
+Nezkracujeme rytmus a nezakládáme kontrolní seznam použití pravidla.
+```
+
+Tady rytmus neselhal. Selhal vstup do pravidla. To je menší a přesnější oprava.
+
+### Privacy-first kontrola
+
+Druhá kontrola po zředění má chránit lehký provoz před nenápadným návratem evidence. Položte si tři otázky:
+
+```text
+Vzniklo mezi kontrolami něco, co nahrazuje starý dohled?
+
+Držíme nějaký export, screenshot, seznam případů nebo osobní poznámku jen pro jistotu?
+
+Umíme výsledek kontroly zapsat agregovaně bez kopírování zákaznických nebo interních detailů?
+```
+
+Pokud odpověď ukazuje na skrytou evidenci, nejdřív ji ukliďte. Teprve potom rozhodujte, jestli rytmus zkrátit. Častější review není řešení pro tabulku, která nikdy neměla vzniknout.
+
+Codyho komentář: zředěný rytmus je užitečný jen tehdy, když se zároveň zředí i nervozita. Pokud kontrolujete méně často, ale mezi tím si vedete tajný seznam "abychom něco nepřehlédli", systém se jen naučil lhát v kalendáři.
+
+### Karta druhé kontroly po zředění
+
+```text
+Pravidlo:
+
+Zředěný revizní rytmus:
+
+Druhá kontrola proběhla v rámci:
+
+Co se mělo potvrdit:
+
+Použilo se pravidlo v běžné práci?
+
+Bylo najitelné bez historie?
+
+Vznikla mezi kontrolami skrytá evidence?
+
+Výsledek:
+- potvrdit zředěný rytmus
+- upravit pracovní místo
+- dočasně zhustit rytmus
+- otevřít návratový signál
+
+Lokální oprava, pokud existuje:
+
+Co zůstává výslovně zavřené:
+
+Co mažeme, anonymizujeme nebo nepřenášíme:
+
+Další kontrola:
+
+Návratový signál:
+
+Vlastník:
+```
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte pravidlo, zředěný rytmus a původní návratový signál.
+2. Minuta 2: ověřte, jestli se pravidlo použilo v běžné práci.
+3. Minuta 3: ověřte, jestli ho člověk našel bez čerstvé historie.
+4. Minuta 4: hledejte skrytou evidenci vzniklou mezi kontrolami.
+5. Minuta 5: vyberte jeden ze čtyř výsledků.
+6. Minuta 6: zapište privacy-first úklid a další kontrolu.
+
+Pokud se během workshopu otevře otázka, která nesouvisí se zředěným rytmem, napište ji jako samostatný podnět. Druhá kontrola po zředění nemá suplovat strategické review celé oblasti.
+
+### Checklist druhé kontroly po zředění
+
+- Kontrolujeme stejné pravidlo, kvůli kterému se rytmus zředil?
+- Je jasné, co měla druhá kontrola potvrdit?
+- Použilo se pravidlo v běžné práci bez mimořádného režimu?
+- Bylo kanonické místo najitelné bez původního týmu?
+- Nevznikla mezi kontrolami pomocná tabulka, export, tracker, CRM atribut nebo seznam lidí?
+- Pokud vzniklo tření, víme, jestli jde o pracovní místo, rytmus, nebo skutečný návratový signál?
+- Pokud rytmus dočasně zhušťujeme, má zhuštění jasný konec?
+- Nepřenášíme do záznamu zákaznické detaily, kopie ticketů ani interní osobní poznámky?
+- Uklidili jsme dočasné podklady použité jen pro kontrolu?
+- Umíme po kontrole říct, jestli zředěný rytmus dál drží?
+
+Druhá kontrola po zředění má rozhodnout, jestli lehčí rytmus opravdu unesl provoz. Když ano, nechte ho být. Když ne, opravte nejbližší příčinu: pracovní místo, dočasnou evidenci, nebo jasně potvrzený návratový signál. Cílem není vrátit se k časté kontrole ze zvyku, ale držet pravidlo v takové pozornosti, jakou si opravdu zaslouží.
+
 ## Pracovní log
 
+- 2026-07-04: Doplněna úvodní podkapitola o druhé kontrole po zředění revizního rytmu: tři kontrolní otázky, čtyři výsledky kontroly, praktický support příklad, privacy-first kontrola skryté evidence, karta, mini workshop a checklist.
 - 2026-07-04: Doplněna úvodní podkapitola o uzavření první kontroly po zředění revizního rytmu: čtyři uzavírací stavy, praktický support příklad, privacy-first úklid po kontrole, karta, mini workshop a checklist.
 - 2026-07-04: Doplněna úvodní podkapitola o první kontrole po zředění revizního rytmu: ověření samostatnosti pravidla, návratový signál, skrytá evidence, čtyři výsledky kontroly, privacy-first karta, mini workshop a checklist.
 - 2026-07-04: Doplněna úvodní podkapitola o zředění revizního rytmu po stabilním provozu: podmínky zředění, praktický support příklad, návratový signál, privacy-first kontrola skryté evidence, karta, mini workshop a checklist.
