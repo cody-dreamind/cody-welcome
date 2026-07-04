@@ -292190,8 +292190,186 @@ Když se během workshopu objeví nápad na velkou změnu, zapište ho mimo kart
 
 Druhé běžné použití po návratu pravidla do stabilního rytmu je poslední zdravý test přenositelnosti. Když pravidlo obstojí podruhé, nechte ho pracovat. Když neobstojí, opravte nejmenší kotvu, větu nebo datovou hranici. Stabilita není stav, kdy už nikdy nic neupravíte. Stabilita je stav, kdy úpravu umíte držet tak malou, aby z pravidla znovu nevznikl projekt.
 
+## Uzavření druhého běžného použití po stabilizaci pravidla
+
+Druhé běžné použití po stabilizaci pravidla má být poslední chvíle, kdy se kolem pravidla drží zvláštní pozornost. Pokud pravidlo použil další člověk, jiná běžná situace nebo stejné pracovní místo bez čerstvé paměti původní opravy, je čas přestat ho doprovázet. Ne proto, že by už nikdy nemohlo selhat. Protože dál má žít stejným způsobem jako ostatní pravidla: v kanonickém místě, s běžným revizním rytmem a s jasným návratovým signálem.
+
+Uzavření druhého použití začněte otázkou:
+
+```text
+Co druhé použití opravdu potvrdilo nebo vyvrátilo?
+```
+
+Nepopisujte celou historii pravidla. Druhé použití neověřuje, proč pravidlo vzniklo. Ověřuje, jestli se přenáší bez původních lidí, bez starých karet a bez nové skryté evidence.
+
+Praktická uzavírací věta:
+
+```text
+Druhé běžné použití uzavíráme takto:
+```
+
+Za ni napište jeden ze čtyř stavů:
+
+- Přenos potvrzen: pravidlo je najitelné, použitelné a nevytvořilo novou datovou stopu.
+- Poslední lokální oprava: pravidlo drží, ale jedno pracovní místo ještě potřebuje drobnou úpravu.
+- Otevřít novou otázku: druhé použití ukázalo širší vzor, který už není jen lokální slabina.
+- Vrátit pravidlo k návratovému signálu: objevil se předem pojmenovaný problém, který pravidlo opravdu znovu otevírá.
+
+Stav `přenos potvrzen` je cílový. Znamená konec zvláštní péče. Zapište závěr, ukliďte pomocné stopy a nechte pravidlo v běžném rytmu. Nepřidávejte třetí použití jen proto, že druhé dopadlo dobře. To by nebyla opatrnost, ale malý procesní suvenýr.
+
+Stav `poslední lokální oprava` použijte jen tehdy, když je slabina opravdu v jednom místě. Například starý odkaz, příliš obecná věta nebo chybějící poznámka u šablony. Oprava má mít stop podmínku: po jejím provedení se pravidlo buď vrací do rytmu, nebo se už otevírá nová otázka.
+
+Stav `nová otázka` patří situaci, kdy druhé použití ukáže opakovaný vzor přes více míst. Třeba pravidlo funguje v support šabloně, ale stejná stará evidence se vrací v onboardingové příručce, CRM poznámce i v checklistu pro předání. To už není jedna oprava. To je otázka zdroje pravdy.
+
+Stav `návratový signál` použijte jen tehdy, když se naplnila předem zapsaná podmínka. Ne když někdo našel zajímavý nápad. Ne když by se pravidlo dalo napsat elegantněji. Návratový signál má být konkrétní důvod, ne chuť se v tématu znovu povrtat.
+
+### Praktický příklad
+
+```text
+Pravidlo:
+Fakturační opravy se řeší v původním support ticketu. Nevzniká samostatná tabulka oprav.
+
+Druhé běžné použití:
+Jiný člověk ze supportu vyřešil opravu fakturačních údajů bez dotazu na původního vlastníka pravidla.
+
+Co se stalo:
+Našel support šablonu, ověřil identitu, zapsal změnu do původního ticketu a nevytvořil pomocný seznam.
+
+Druhé běžné použití uzavíráme stavem:
+Přenos potvrzen.
+
+Co se mění:
+Zvláštní kontrola končí. Pravidlo zůstává v běžném měsíčním review support šablon.
+
+Co zůstává zavřené:
+Samostatná evidence fakturačních oprav, nový CRM štítek a export oprav do tabulky.
+
+Návratový signál:
+Téma otevřeme znovu pouze tehdy, když se mimo ticket znovu objeví samostatná evidence fakturačních oprav.
+```
+
+Slabší výsledek:
+
+```text
+Druhé běžné použití:
+Člověk pravidlo našel, ale přes starý onboardingový dokument, kde zůstala kopie původní instrukce.
+
+Stav:
+Poslední lokální oprava.
+
+Oprava:
+Starý dokument už neobsahuje pravidlo. Nechává jen odkaz na kanonickou support šablonu.
+
+Stop podmínka:
+Pokud se po této úpravě znovu objeví další aktivní kopie pravidla, nejde o lokální opravu; otevřeme otázku zdrojů pravdy pro support postupy.
+
+Co neotevíráme:
+Nový support playbook, plošný audit všech dokumentů ani novou evidenci dodržování pravidla.
+```
+
+Tady je důležité, že poslední lokální oprava není pozvánka k nekonečnému čištění. Je to poslední malý zásah před návratem do rytmu, nebo důkaz, že problém je širší a má dostat vlastní otázku.
+
+### Privacy-first uzavření
+
+Uzavření druhého použití má definitivně ukončit dočasné datové stopy, které vznikly kvůli stabilizaci. Pokud pravidlo prošlo druhým použitím, už nepotřebujete pomocné kopie, screenshoty, ruční seznamy ani komentáře v chatu, které měly jen ověřit přenos.
+
+Použijte tři řádky:
+
+```text
+Do běžného rytmu přenášíme:
+
+Po uzavření mažeme, zkracujeme nebo necháváme ve zdrojovém systému:
+
+Dál nevzniká:
+```
+
+Příklad:
+
+```text
+Do běžného rytmu přenášíme:
+Pracovní větu v support šabloně a návratový signál.
+
+Po uzavření mažeme, zkracujeme nebo necháváme ve zdrojovém systému:
+Dočasný komentář z ověření a kopii staré instrukce v onboardingovém dokumentu.
+
+Dál nevzniká:
+Samostatná tabulka fakturačních oprav, CRM štítek ani report používání šablony podle lidí.
+```
+
+Privacy-first pointa je prostá: stabilní pravidlo nemá za sebou nechávat stabilní hromádku podkladů. Má zanechat jen zdroj pravdy, návratový signál a datovou hranici. Všechno ostatní je buď historie s jasným účelem, nebo nepořádek s lepším názvem.
+
+Codyho komentář: když pravidlo po druhém použití pořád potřebuje vlastní tabulku, možná nemáte pravidlo. Možná máte křehkou dohodu, která se bojí normální práce. To se dá opravit, ale ne další tabulkou. Šokující, já vím.
+
+### Karta uzavření druhého použití
+
+```text
+Pravidlo:
+
+Kanonické pracovní místo:
+
+Co ověřovalo druhé použití:
+
+Co se reálně stalo:
+
+Uzavírací stav:
+- přenos potvrzen
+- poslední lokální oprava
+- otevřít novou otázku
+- vrátit pravidlo k návratovému signálu
+
+Co se propisuje do běžného rytmu:
+
+Poslední lokální oprava, pokud existuje:
+
+Nová otázka, pokud existuje:
+
+Co zůstává výslovně zavřené:
+
+Privacy-first uzavření:
+Do běžného rytmu přenášíme:
+Mažeme, zkracujeme nebo necháváme ve zdrojovém systému:
+Dál nevzniká:
+
+Návratový signál:
+
+Vlastník:
+
+Datum:
+```
+
+Karta má uzavřít zvláštní režim. Pokud po jejím vyplnění vzniknou tři nové úkoly, pravděpodobně jste místo uzavření otevřeli nové téma. To není zakázané, ale má mít vlastní kartu a vlastní důvod.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte pravidlo, kanonické místo a důvod druhého použití.
+2. Minuta 2: napište, co se při druhém použití opravdu stalo.
+3. Minuta 3: vyberte jeden uzavírací stav.
+4. Minuta 4: určete, co se propisuje do běžného rytmu a co zůstává zavřené.
+5. Minuta 5: ukončete dočasné datové stopy.
+6. Minuta 6: potvrďte návratový signál a vlastníka.
+
+Když workshop sklouzne k debatě o celé oblasti, zastavte ho větou: "Druhé použití uzavírá pravidlo, ne celou doménu." Pokud se opravdu ukázal širší vzor, pojmenujte novou otázku a tuto kartu zavřete.
+
+### Checklist uzavření druhého použití
+
+- Víme, co druhé použití ověřovalo?
+- Máme konkrétní výsledek z běžné práce?
+- Vybrali jsme jeden ze čtyř uzavíracích stavů?
+- Pokud je přenos potvrzen, končí zvláštní pozornost?
+- Pokud děláme poslední lokální opravu, má jasnou stop podmínku?
+- Pokud vzniká nová otázka, oddělili jsme ji od této karty?
+- Pokud se objevil návratový signál, odpovídá předem zapsané podmínce?
+- Je pravidlo propsané do kanonického pracovního místa?
+- Uklidili jsme pomocné kopie, exporty, screenshoty, komentáře nebo ruční seznamy?
+- Nevzniká nový tracker, report, CRM atribut ani evidence lidí bez jasného účelu?
+- Zůstává privacy-first hranice vidět tam, kde se s daty reálně pracuje?
+- Umí tým říct, kdy se pravidlo znovu otevře?
+
+Uzavření druhého běžného použití je dobrý konec stabilizační smyčky. Pravidlo buď obstálo a vrací se do normální práce, nebo ukázalo poslední lokální opravu, širší vzor či skutečný návratový signál. V každém případě má skončit zvláštní režim. Stabilní provoz nevzniká tím, že všechno hlídáte déle. Vzniká tím, že víte, kdy přestat.
+
 ## Pracovní log
 
+- 2026-07-04: Doplněna úvodní podkapitola o uzavření druhého běžného použití po stabilizaci pravidla: uzavírací stavy, poslední lokální oprava, nová otázka, privacy-first úklid dočasných stop, karta, mini workshop a checklist.
 - 2026-07-04: Doplněna krátká úvodní poznámka k dohledatelnosti záznamu neotevřeného kroku v běžném pracovním místě.
 - 2026-07-04: Doplněna úvodní podkapitola o druhém běžném použití po návratu pravidla do stabilního rytmu: přenos bez čerstvé paměti, slabá kotva, slabá rozhodovací věta, návrat skryté evidence, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-07-04: Doplněna úvodní podkapitola o uzavření prvního běžného použití po návratu pravidla do stabilního rytmu: čtyři uzavírací stavy, lokální oprava, skrytá evidence, privacy-first úklid, karta, mini workshop a checklist.
