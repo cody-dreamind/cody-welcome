@@ -292556,6 +292556,185 @@ Když tým nedokáže vybrat existující rytmus, nezačínejte debatou o nové 
 
 Převod do dlouhodobého revizního rytmu je nenápadný, ale důležitý konec stabilizace. Pravidlo už nepotřebuje mimořádnou péči. Potřebuje jen správné místo, lehké ověření a jasnou hranici dat. Pokud se nic neděje, nechte ho pracovat. I procesy občas ocení, když jim nikdo každé ráno neměří tep.
 
+## První dlouhodobé review po stabilizaci pravidla
+
+Když se stabilizované pravidlo vrátí do dlouhodobého revizního rytmu, první review má být schválně malé. Nemá znovu dokazovat, že původní změna byla dobrý nápad. Nemá hledat nové metriky, nové automatizace ani nový dohled. Má ověřit jen to, jestli pravidlo v běžném rytmu pořád drží: člověk ho najde, dokáže podle něj jednat a nevzniká kolem něj zbytečná datová stopa.
+
+První dlouhodobé review je tedy kontrola života pravidla bez mimořádné péče. Pokud se při něm začne znovu otevírat celá historie, je to signál, že tým neprovádí review, ale návrat k tématu. To může být někdy správně, ale musí to mít vlastní návratový signál. Jinak se z obyčejné údržby stane retrospektiva maskovaná za rutinu. A retrospektivy v převleku jsou přesně ten druh kancelářského dramatu, který nepotřebuje ani vstupenku.
+
+Začněte větou:
+
+```text
+První dlouhodobé review pravidla děláme v tomto běžném rytmu:
+```
+
+Za ni napište pracovní místo a důvod:
+
+```text
+První dlouhodobé review pravidla děláme v měsíční kontrole support šablon, protože pravidlo žije v potvrzovací odpovědi k fakturačním opravám.
+```
+
+Tím review zůstane ukotvené. Neřešíte všechny fakturační opravy, celý support proces ani výkon lidí. Kontrolujete jedno pravidlo v místě, kde má normálně fungovat.
+
+### Tři otázky prvního dlouhodobého review
+
+Položte jen tři otázky:
+
+- Je pravidlo pořád na kanonickém pracovním místě?
+- Dá se podle něj rozhodnout bez znalosti poslední stabilizace?
+- Nevznikla kolem pravidla nová evidence, která nebyla součástí rozhodnutí?
+
+První otázka je o najitelnosti. Pokud pravidlo žije v potvrzovací šabloně, má být v potvrzovací šabloně. Pokud se mezitím přesunulo do interní poznámky, starého ticketu nebo paměti jednoho člověka, review našlo problém. Oprava ale nemusí být velká: často stačí vrátit pracovní větu na správné místo a doplnit datum poslední kontroly.
+
+Druhá otázka je o použitelnosti. Člověk nemá potřebovat výklad, proč pravidlo vzniklo, jaké byly alternativy a kdo se o co přel. To patří do historie. Pracovní pravidlo má říct, kdy ho použít, co udělat a co zůstává zavřené. Pokud to neumí, nepřepisujte celou dokumentaci. Přepište jednu větu.
+
+Třetí otázka je privacy-first brzda. Dlouhodobé review nesmí samo vyrábět nový sběr dat. Pokud tým začne evidovat každé použití pravidla jen proto, aby měl jistotu, že pravidlo funguje, pravděpodobně vytváří nový problém. U stabilního pravidla většinou stačí ověřit stav pracovního místa, ne sledovat každého člověka a každé použití.
+
+### Praktický příklad
+
+```text
+Pravidlo:
+Fakturační opravy se řeší v původním support ticketu. Nevzniká samostatná tabulka oprav.
+
+Dlouhodobý rytmus:
+Měsíční kontrola support šablon.
+
+První review:
+Šablona pořád obsahuje pracovní větu. Odkazuje na původní ticket jako zdroj pravdy. Nevznikla nová tabulka ani ruční seznam oprav.
+
+Výsledek:
+Pravidlo ponecháváme v běžném rytmu bez změny.
+```
+
+Slabší výsledek:
+
+```text
+První review:
+Pracovní věta v šabloně zůstala, ale nový člověk si nebyl jistý, zda má u složitější opravy založit samostatný interní úkol.
+
+Lokální oprava:
+Do věty doplňujeme: "Interní úkol zakládej jen pro technickou práci; stav opravy vůči zákazníkovi zůstává v původním ticketu."
+
+Co neotevíráme:
+Novou evidenci fakturačních oprav, samostatný report ani audit všech historických ticketů.
+```
+
+V obou případech review pracuje s nejmenším nutným zásahem. Buď pravidlo nechá v klidu, nebo opraví jednu větu. Nevyrábí nový systém jen proto, že se při kontrole našla drobná nejasnost.
+
+### Čtyři výsledky review
+
+První dlouhodobé review může skončit čtyřmi stavy:
+
+- Ponechat beze změny: pravidlo je najitelné, použitelné a datově střídmé.
+- Opravit jednu pracovní větu: pravidlo drží, ale jeho formulace svádí k nejasnému použití.
+- Vrátit na kanonické místo: pravidlo je správné, ale ztratilo se z místa, kde se opravdu pracuje.
+- Otevřít nový návratový signál: review ukázalo opakovaný problém, který už není jen údržba pravidla.
+
+Stav `ponechat beze změny` je dobrý výsledek. Neznamená, že review bylo zbytečné. Znamená, že systém prošel kontrolou a nepotřebuje další péči. Zapište jednu větu a nepřidávejte nové úkoly.
+
+Stav `opravit jednu pracovní větu` použijte, když je problém v interpretaci. Věta je moc široká, moc měkká nebo neříká, co zůstává zavřené. Oprava má být přesná a lokální. Pokud se přepis rozroste na více pracovních míst, pravděpodobně už nejde o jednu větu.
+
+Stav `vrátit na kanonické místo` je pro případy, kdy pravidlo existuje, ale člověk ho při práci nenajde. Typicky zůstalo v rozhodovací kartě, zatímco skutečná práce probíhá v šabloně, checklistu nebo support nástroji. Opravte umístění, ne celý proces.
+
+Stav `otevřít nový návratový signál` použijte opatrně. Nestačí, že někoho napadlo možné zlepšení. Musí jít o konkrétní opakovaný signál: pravidlo se dvakrát po sobě nepoužilo, protože pracovní místo neodpovídá realitě; lidé zakládají vedlejší evidenci, protože zdroj pravdy není dostupný; nebo zákaznický dopad ukazuje, že původní hranice už nestačí.
+
+### Privacy-first kontrola review
+
+Při prvním dlouhodobém review se zaměřte na datovou stopu samotné kontroly. To je místo, kde se privacy-first pravidla často kazí nenápadně. Tým nechce nic špatného. Jen si chce být jistý. A tak vznikne dočasná tabulka, screenshoty ticketů, export support historie nebo ruční seznam lidí, kteří pravidlo použili. Pak se na to zapomene a dočasná kontrola má najednou trvalý život.
+
+Použijte tři řádky:
+
+```text
+Pro review používáme existující zdroj:
+
+Do nové evidence nepřenášíme:
+
+Po review mažeme, anonymizujeme nebo vůbec nevytváříme:
+```
+
+Příklad:
+
+```text
+Pro review používáme existující zdroj:
+Aktuální potvrzovací šablonu a jeden anonymizovaný příklad z posledního support týdne.
+
+Do nové evidence nepřenášíme:
+Kopie zákaznických zpráv, jména lidí ani seznam všech použití pravidla.
+
+Po review mažeme, anonymizujeme nebo vůbec nevytváříme:
+Pomocné poznámky s konkrétními údaji. Do záznamu review ukládáme jen závěr a případnou lokální úpravu věty.
+```
+
+Tím si tým ponechá hodnotu kontroly a neodnese si z ní zbytečnou databázi. Privacy-first provoz není jen výběr správného nástroje. Je to schopnost nenechat po každé kontrole hromádku osobních nebo obchodních detailů, které už nikdo nepotřebuje.
+
+Codyho komentář: pokud review potřebuje víc dat než samotné pravidlo, něco je podezřelé. Někdy je to oprávněné. Často je to ale jen pohodlný způsob, jak nejistotu převést do tabulky a tvářit se, že tím zmizela. Nezmizela. Jen dostala sloupce.
+
+### Karta prvního dlouhodobého review
+
+```text
+Pravidlo:
+
+Kanonické pracovní místo:
+
+Dlouhodobý revizní rytmus:
+
+Co mělo review ověřit:
+- najitelnost
+- použitelnost
+- datovou střídmost
+
+Co se opravdu stalo:
+
+Výsledek review:
+- ponechat beze změny
+- opravit jednu pracovní větu
+- vrátit na kanonické místo
+- otevřít nový návratový signál
+
+Co se upravuje:
+
+Co zůstává zavřené:
+
+Jaká nová evidence nevzniká:
+
+Jaké dočasné stopy po review mažeme, anonymizujeme nebo nevytváříme:
+
+Návratový signál:
+
+Vlastník:
+
+Další běžná kontrola:
+```
+
+Karta má být krátká. Pokud se z ní stává vyšetřovací spis, review pravděpodobně narazilo na nové téma. To je v pořádku, ale nové téma patří do vlastní karty s vlastní otázkou.
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: přečtěte pravidlo a jeho kanonické pracovní místo.
+2. Minuta 2: ověřte, jestli pravidlo člověk najde bez znalosti poslední stabilizace.
+3. Minuta 3: přečtěte pracovní větu a rozhodněte, jestli podle ní jde jednat.
+4. Minuta 4: zkontrolujte, zda kolem pravidla nevznikla vedlejší evidence.
+5. Minuta 5: vyberte jeden ze čtyř výsledků review.
+6. Minuta 6: zapište lokální úpravu nebo potvrďte stav beze změny.
+7. Minuta 7: proveďte privacy-first úklid stop po review.
+
+Když během workshopu přijde nový nápad, nejdřív se zeptejte, jestli patří k dnešnímu review. Pokud ne, napište ho jako podnět a pokračujte v uzavření kontroly. Dlouhodobý rytmus funguje jen tehdy, když umí odlišit údržbu od nového projektu.
+
+### Checklist prvního dlouhodobého review
+
+- Probíhá review v rytmu, do kterého bylo pravidlo opravdu zařazené?
+- Kontrolujeme kanonické pracovní místo, ne celou historii rozhodnutí?
+- Je pravidlo najitelné bez lidí, kteří ho stabilizovali?
+- Dá se podle pracovní věty jednat bez dalšího vysvětlování?
+- Zůstává jasné, co pravidlo výslovně neotevírá?
+- Nevznikl nový seznam použití, export, tracker, CRM atribut nebo report lidí?
+- Pokud je potřeba oprava, je lokální a nejbližší pracovnímu místu?
+- Pokud se objevil širší problém, má konkrétní návratový signál?
+- Uklidili jsme pomocné poznámky, screenshoty, kopie zpráv nebo dočasné tabulky?
+- Je jasné, kdy přijde další běžná kontrola a kdo ji vlastní?
+
+První dlouhodobé review má potvrdit, že pravidlo umí stárnout normálně. Ne slavnostně, ne pod dohledem, ne s novou evidencí za zády. Normálně: na správném místě, s použitelnou větou a bez datového přívěsku, který nikdo nechtěl, ale všichni ho pak musí uklízet.
+
 ## Pracovní log
 
 - 2026-07-04: Doplněna úvodní podkapitola o převodu stabilizovaného pravidla do dlouhodobého revizního rytmu: výběr existujícího rytmu, praktický support příklad, lokální servisní poznámka, privacy-first kontrola evidence, karta, mini workshop a checklist.
@@ -293996,3 +294175,4 @@ Převod do dlouhodobého revizního rytmu je nenápadný, ale důležitý konec 
 - 2026-07-01: Doplněna úvodní podkapitola o prvním běžném použití po lokální úpravě z archivního minima: najitelnost úpravy, rozhodovací věta, ochrana zavřeného rozsahu, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-07-02: Doplněna úvodní podkapitola o prvním běžném použití po uzavřeném návratu po dlouhém tichu: samostatné použití, slabá kotva, slabá věta, nový návratový signál, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-07-02: Doplněna úvodní podkapitola o převodu potvrzeného návratu zpět do pasivního provozu: kanonické místo, vypnutí mimořádného režimu, privacy-first úklid datové stopy, karta, mini workshop a checklist.
+- 2026-07-04: Doplněna úvodní podkapitola o prvním dlouhodobém review po stabilizaci pravidla: tři kontrolní otázky, čtyři výsledky review, privacy-first úklid datové stopy, karta, mini workshop a checklist.
