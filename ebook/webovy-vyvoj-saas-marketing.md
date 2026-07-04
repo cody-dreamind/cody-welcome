@@ -293430,8 +293430,183 @@ Když se během workshopu objeví návrh "raději to ještě jednou zkontrolujme
 
 Zředění revizního rytmu je dobrá zkouška důvěry v vlastní provoz. Pokud pravidlo drží, nechte ho dýchat. Pokud nedrží, neopravujte to delší kontrolou. Opravte pracovní místo, větu nebo datovou stopu. Stabilita se nepozná podle počtu kontrol, ale podle toho, že pravidlo pomáhá i ve chvíli, kdy na něj zrovna nikdo nesvítí baterkou.
 
+## První kontrola po zředění revizního rytmu
+
+Zředěný revizní rytmus potřebuje první lehkou kontrolu. Ne proto, abyste znovu zavedli starou intenzitu, ale abyste ověřili, že pravidlo opravdu přežilo s menší péčí. První kontrola po zředění má být krátká, navázaná na existující review a zaměřená na jednu otázku: funguje pravidlo v běžné práci i bez častého dohledu?
+
+Tohle je důležitý rozdíl. Pokud při první kontrole otevřete celou historii, projdete všechny minulé záznamy a začnete znovu hodnotit původní rozhodnutí, rytmus jste ve skutečnosti nezředili. Jen jste starý režim přesunuli do většího balíčku. První kontrola po zředění má potvrdit samostatnost, ne vyrábět nostalgii po dashboardu, který měl už dávno spát.
+
+Začněte větou:
+
+```text
+Pravidlo po zředění kontrolujeme v tomto běžném rytmu:
+```
+
+Potom doplňte konkrétní pracovní situaci:
+
+```text
+Pravidlo po zředění kontrolujeme v tomto běžném rytmu:
+Součástí měsíčního support review je jedna otázka, zda šablona odpovědi na opakovaný dotaz pořád stačí bez nové evidence a bez speciálního reportu.
+```
+
+Tahle věta má dvě funkce. Ukazuje, kde kontrola žije, a zároveň brání tomu, aby se z ní stal nový zvláštní proces. Pokud ji neumíte napsat bez slov "nový meeting", "samostatná tabulka" nebo "dočasný export", rytmus jste možná nezředili dost poctivě.
+
+### Co první kontrola po zředění ověřuje
+
+První kontrola po zředění má jen tři otázky:
+
+- Používá se pravidlo samostatně v běžném pracovním místě?
+- Objevil se návratový signál pro zkrácení rytmu?
+- Nevznikla skrytá evidence, která nahrazuje dřívější časté kontroly?
+
+První otázka je o použitelnosti. Člověk nemá hledat starou kartu, ptát se původního vlastníka ani otevírat archiv. Má být schopen rozhodnout přímo tam, kde pracuje: v šabloně, checklistu, support vlákně, ceníkové poznámce, onboardingovém kroku nebo interním standardu.
+
+Druhá otázka je o klidu. Zředěný rytmus není slib, že se téma už nikdy nevrátí. Je to dohoda, že se vrátí jen při konkrétním signálu. Pokud signál nepřišel, neotevírejte nové zkoumání jen proto, že kontrola má zrovna okénko v kalendáři.
+
+Třetí otázka je privacy-first pojistka. Týmy si často zruší časté review, ale nechají si "pro jistotu" bokem pomocnou tabulku, ruční štítky nebo export. To není lehčí rytmus. To je stará kontrola v přestrojení, jen méně viditelná a hůř ukliditelná.
+
+### Praktický příklad
+
+Původní stav:
+
+```text
+Pravidlo:
+U opakovaných support dotazů nejdřív použít krátkou šablonu odpovědi a teprve při třech selháních za sebou otevřít úpravu onboardingového textu.
+
+Zředění:
+Po dvou stabilních dlouhodobých review přechází pravidlo z měsíční kontroly do kvartálního support review.
+
+Návratový signál:
+Tři relevantní support vlákna za sebou potřebují ruční vysvětlení mimo šablonu.
+```
+
+První kontrola po zředění:
+
+```text
+Běžný rytmus:
+Kvartální support review.
+
+Co se stalo:
+Za poslední období přišla čtyři relevantní vlákna. Ve třech stačila šablona, v jednom bylo potřeba ruční doplnění kvůli specifickému zákaznickému kontextu.
+
+Návratový signál:
+Nepřišel. Nešlo o tři selhání za sebou.
+
+Skrytá evidence:
+Support si nezačal vést zvláštní tabulku dotazů; poznámka zůstává jen u konkrétního vlákna.
+
+Rozhodnutí:
+Rytmus ponecháváme zředěný. Do šablony doplníme jednu lokální větu, která neotevírá nový sběr dat ani nové review.
+```
+
+Všimněte si, že jedno ruční doplnění neznamená návrat k časté kontrole. Stabilní pravidlo může mít výjimky. Důležité je, jestli výjimka ukazuje opakovaný vzor, nebo jen normální realitu práce se zákazníkem. Svět, ve kterém žádná šablona nikdy nepotřebuje lidskou větu navíc, existuje hlavně v prezentacích. Tam je mimochodem možné všechno, včetně dokonale čistého CRM.
+
+### Čtyři výsledky první kontroly
+
+Po první kontrole vyberte jeden ze čtyř stavů:
+
+- Ponechat zředěný rytmus: pravidlo funguje, návratový signál nepřišel a nevznikla skrytá evidence.
+- Drobně opravit pracovní místo: pravidlo funguje, ale jedna věta nebo kotva je slabá.
+- Dočasně zkrátit rytmus: návratový signál se objevil nebo se opakuje stejné tření.
+- Otevřít nové téma: kontrola ukázala jiný problém než ten, kvůli kterému pravidlo existuje.
+
+Ponechat zředěný rytmus je nejlepší výsledek a zároveň nejméně dramatický. Napište jednu větu do pracovního místa a nechte pravidlo dál běžet. Nepřidávejte nové metriky, protože "když už jsme se na to dívali". To je přesně věta, která z lehkého rytmu dělá další provozní batoh.
+
+Drobně opravit pracovní místo dává smysl, když pravidlo funguje, ale člověk musí trochu hádat. Opravte nejbližší text, ne celý standard. Například doplňte do šablony odpovědi větu "Pokud zákazník popisuje specifický proces, odpověď uprav ručně a nezakládej nový typ dotazu." To je lokální pomoc, ne nový systém.
+
+Dočasně zkrátit rytmus je rozumné, pokud přišel návratový signál. Zkrácení ale musí mít konec. Napište, zda jde o jedno mezireview, dvě kratší kontroly nebo kontrolu po dalších pěti použitích. Bez konce se dočasné zkrácení tváří odpovědně a potom zůstane navždy, protože nikdo nechce být ten, kdo "sníží kontrolu".
+
+Otevřít nové téma je poctivý stav, když kontrola narazí na jiný problém. Třeba šablona support odpovědi drží, ale zákazníci se začali ptát na novou část služby. To není selhání původního pravidla. Je to nový produktový nebo marketingový signál, který si zaslouží vlastní otázku, vlastní hranici a vlastní privacy-first kontrolu.
+
+### Privacy-first kontrola po zředění
+
+Nejdůležitější část první kontroly je ověřit, že zředění nevyrobilo neviditelnou datovou stopu. Položte si tyto otázky:
+
+```text
+Začal někdo kvůli menší frekvenci review evidovat věci bokem?
+
+Vznikl nový ruční štítek, atribut, export, tabulka nebo poznámkový zvyk?
+
+Má tato evidence jasný účel, vlastníka a konec?
+
+Lze stejný klid udržet bez ní?
+```
+
+Pokud odpověď na poslední otázku zní ano, evidenci zavřete. Pokud zní ne, vraťte se k pracovnímu místu. Možná pravidlo není dost jasné, možná návratový signál není dost konkrétní, možná člověk neví, kdy má eskalovat. To se neopravuje sběrem dalších dat. To se opravuje lepší větou, lepším místem nebo menší hranicí.
+
+Codyho komentář: první kontrola po zředění je jako kontrola, jestli jste opravdu uklidili stůl, nebo jen přesunuli hromádku papírů do šuplíku. Šuplík je sice vizuálně elegantní řešení, ale až do chvíle, kdy ho otevřete a objevíte tam tři roky "dočasných" poznámek.
+
+### Karta první kontroly po zředění
+
+```text
+Pravidlo:
+
+Kanonické pracovní místo:
+
+Zředěný revizní rytmus:
+
+První kontrola proběhla v rámci:
+
+Co se v běžné práci stalo:
+
+Přišel návratový signál?
+- ano
+- ne
+- částečně, potřebujeme zpřesnit
+
+Vznikla skrytá evidence?
+- ne
+- ano, zavíráme ji
+- ano, dočasně ji ponecháváme do:
+
+Výsledek kontroly:
+- ponechat zředěný rytmus
+- drobně opravit pracovní místo
+- dočasně zkrátit rytmus
+- otevřít nové téma
+
+Co se mění v pracovním místě:
+
+Co zůstává výslovně zavřené:
+
+Jaká data dál nesbíráme:
+
+Kdy bude další kontrola:
+
+Vlastník:
+```
+
+Karta má potvrdit, že zředění funguje v praxi. Pokud z ní vznikne dlouhý audit, je to signál, že pravidlo ještě není připravené na lehčí rytmus. V takovém případě je lepší přiznat slabinu a opravit pracovní místo než předstírat stabilitu s další sadou pomocných poznámek.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte pravidlo a zředěný rytmus.
+2. Minuta 2: najděte jedno nebo dvě reálná použití od posledního review.
+3. Minuta 3: ověřte, jestli přišel návratový signál.
+4. Minuta 4: zkontrolujte, zda nevznikla skrytá evidence.
+5. Minuta 5: vyberte jeden ze čtyř výsledků kontroly.
+6. Minuta 6: zapište změnu do pracovního místa nebo potvrďte, že se nic nemění.
+
+Workshop nesmí skončit větou "ještě to raději sledujme". Pokud chcete sledovat, napište přesně co, proč, kde, jak dlouho a jakou evidenci tím vytváříte. Pokud to napsat neumíte, nesledujte. Jen si nejste jistí a snažíte se nejistotu převést na tabulku. Tabulky za to nemůžou, ale stejně jich už mají dost.
+
+### Checklist první kontroly po zředění
+
+- Proběhla kontrola v existujícím rytmu, ne v novém speciálním procesu?
+- Ověřili jsme reálné použití pravidla, ne jen starý záznam?
+- Je jasné, zda přišel návratový signál?
+- Pokud signál nepřišel, nechali jsme rytmus zředěný?
+- Pokud signál přišel, má případné zkrácení rytmu jasný konec?
+- Nevznikla skrytá tabulka, export, štítek, CRM atribut nebo report?
+- Pokud vznikla pomocná evidence, víme, kdy skončí a kdo ji uklidí?
+- Je případná oprava lokální a přímo u pracovního místa?
+- Zůstává původní širší rozsah zavřený?
+- Je zapsané, jaká data dál nesbíráme?
+
+První kontrola po zředění revizního rytmu má být tichá, krátká a užitečná. Když potvrdí stabilitu, největší práce je odolat chuti přidat další pojistku. Když najde slabinu, opravte nejbližší pracovní místo. A když objeví skrytou evidenci, ukliďte ji dřív, než se zabydlí a začne se tvářit jako tradice.
+
 ## Pracovní log
 
+- 2026-07-04: Doplněna úvodní podkapitola o první kontrole po zředění revizního rytmu: ověření samostatnosti pravidla, návratový signál, skrytá evidence, čtyři výsledky kontroly, privacy-first karta, mini workshop a checklist.
 - 2026-07-04: Doplněna úvodní podkapitola o zředění revizního rytmu po stabilním provozu: podmínky zředění, praktický support příklad, návratový signál, privacy-first kontrola skryté evidence, karta, mini workshop a checklist.
 - 2026-07-04: Doplněna úvodní podkapitola o uzavření druhého dlouhodobého review do stabilního provozu: čtyři uzavírací stavy, praktické support příklady, privacy-first úklid dočasných podkladů, karta, mini workshop a checklist.
 - 2026-07-04: Doplněna úvodní podkapitola o druhém dlouhodobém review v běžném rytmu: tři kontrolní otázky, čtyři výsledky review, praktický support příklad, privacy-first kontrola pomocné evidence, karta, mini workshop a checklist.
