@@ -293274,8 +293274,165 @@ Pokud se během šesti minut nedokážete shodnout na uzavíracím stavu, není 
 
 Uzavření druhého dlouhodobého review má pravidlo vrátit do správné míry pozornosti. Stabilní věc nepotřebuje reflektor. Potřebuje dobré místo, jednoduchou větu, občasnou kontrolu a žádné zbytečné stopy kolem. Když tohle platí, nechte pravidlo pracovat a nepřidávejte mu administrativní doprovod jen proto, že ticho vypadá podezřele.
 
+## Zředění revizního rytmu po stabilním provozu
+
+Když pravidlo prošlo druhým dlouhodobým review a zůstalo ve stabilním provozu, další otázka nezní "co ještě zkontrolujeme". Zní: "můžeme kontrolu zředit, aniž ztratíme schopnost poznat návrat problému?" To je důležitý rozdíl. Cílem není přestat se o pravidlo starat. Cílem je přestat se o něj starat častěji, než si zaslouží.
+
+Zředění rytmu je praktická provozní úspora. Méně schůzek, méně pomocných poznámek, méně dočasných exportů, méně příležitostí přidat sledování jen proto, že někdo chce mít "lepší přehled". Stabilní pravidlo má žít tam, kde se používá, ne v kalendáři, který mu každé tři týdny připomíná, že by mohlo selhat.
+
+Začněte jednou větou:
+
+```text
+Revizní rytmus ředíme, protože poslední dvě kontroly potvrdily stabilní použití pravidla bez nové pomocné evidence.
+```
+
+Pokud takovou větu neumíte napsat, rytmus ještě neřeďte. Možná pravidlo funguje, ale důkaz je slabý. Možná poslední review dopadlo dobře jen díky člověku, který pravidlo znal z historie. Možná kontrola nenašla skrytou evidenci jen proto, že se nikdo nepodíval na místo, kde by pravděpodobně vznikla. Zředění není odměna za dobrý pocit. Je to výsledek opakovaného běžného použití.
+
+### Kdy rytmus opravdu zředit
+
+Rytmus má smysl zředit až ve chvíli, kdy platí čtyři podmínky:
+
+- Pravidlo je na kanonickém pracovním místě, které lidé opravdu používají.
+- Podle pracovní věty šlo rozhodnout bez čerstvého výkladu.
+- Poslední dvě kontroly nenašly skrytou tabulku, export, tracker, CRM atribut ani seznam lidí.
+- Existuje jasný návratový signál, který by zředěný rytmus znovu zkrátil.
+
+První podmínka chrání najitelnost. Když pravidlo není na pracovním místě, delší rytmus z něj udělá archivní artefakt. Lidé ho nebudou používat, ale při review se slavnostně zjistí, že pořád existuje. To je dokumentační divadlo, ne provoz.
+
+Druhá podmínka chrání samostatnost. Stabilní pravidlo nemá být závislé na člověku, který ho kdysi vymyslel. Pokud se pořád musí vysvětlovat, proč zůstává zavřený starý rozsah, rytmus neřeďte. Nejdřív zpřesněte pracovní větu.
+
+Třetí podmínka je privacy-first brzda. Skrytá evidence je častý důvod, proč se stabilní pravidlo tváří v pořádku, ale ve skutečnosti obchází vlastní hodnotu. Pokud vedle pravidla vzniká pomocný seznam, zředění kontroly by jen prodloužilo dobu, po kterou zbytečná data leží v provozu.
+
+Čtvrtá podmínka brání slepotě. Když rytmus zředíte, musíte vědět, co ho znovu zhustí. Jinak se z úspory stane zapomenutí.
+
+### Praktický příklad
+
+```text
+Pravidlo:
+Fakturační opravy se vůči zákazníkovi řeší v původním support ticketu. Nevzniká samostatná tabulka oprav.
+
+Dosavadní rytmus:
+Kvartální review support šablon.
+
+Důvod zředění:
+Dvě po sobě jdoucí dlouhodobá review potvrdila, že pravidlo je v support šabloně, nový člen týmu ho použil bez výkladu a nevznikla pomocná evidence oprav.
+
+Nový rytmus:
+Pololetní review support šablon.
+
+Co zůstává aktivní:
+Pracovní věta v support šabloně a odkaz na kanonické pravidlo.
+
+Co zůstává zavřené:
+Samostatná tabulka fakturačních oprav, report použití pravidla po lidech, nový CRM atribut a ruční export ticketů.
+
+Návratový signál:
+Rytmus zkrátíme zpět, pokud vznikne pomocná evidence oprav, nový člověk nenajde pravidlo v šabloně, nebo dvě opravy za sebou skončí mimo původní support ticket.
+```
+
+Tohle je dobré zředění, protože nemizí pravidlo ani odpovědnost. Mění se jen frekvence kontroly. Pracovní místo zůstává stejné, hranice zůstává jasná a návratový signál je dost konkrétní.
+
+Slabší zápis by zněl:
+
+```text
+Pravidlo už funguje, tak ho budeme kontrolovat méně často.
+```
+
+To je nálada, ne provozní rozhodnutí. Neříká, co fungovalo, co zůstává aktivní, co zůstává zavřené ani co by rytmus znovu zkrátilo. Za půl roku z toho tým vyčte jen to, že někdo měl tehdy dobrý den.
+
+### Jak moc rytmus zředit
+
+Neřeďte rytmus skokem do neurčita. Pokud bylo review měsíční, přejděte na kvartální. Pokud bylo kvartální a dvakrát po sobě dopadlo stabilně, přejděte na pololetní. Pokud bylo pololetní a pravidlo pořád drží, můžete ho napojit jen na běžný roční audit pracovních šablon.
+
+Důležité je, aby nový rytmus už někde existoval. Nepřidávejte novou zvláštní kontrolu jen pro jedno pravidlo. Stabilní provoz má být lehčí, ne jen méně častý se stejnou administrativou. Ideální je připojit pravidlo k revizi, která už přirozeně probíhá: review support šablon, kontrola onboardingových e-mailů, úklid ceníkových podkladů, audit formulářů nebo interní revize dokumentace.
+
+Příklad rozhodnutí:
+
+```text
+Nepřidáváme nový pololetní meeting pro fakturační opravy. Pravidlo připojujeme k existujícímu pololetnímu review support šablon.
+```
+
+Tohle je malá věta, ale šetří hodně budoucí práce. Nový rytmus se nesmí stát novým provozním objektem, který bude někdo udržovat jen proto, že existuje.
+
+### Privacy-first zředění
+
+Při zředění rytmu udělejte zvláštní datovou kontrolu. Delší interval znamená, že případná zbytečná evidence může ležet déle bez povšimnutí. To neznamená, že máte zavést další sledování. Znamená to, že návratový signál musí být viditelný v běžné práci.
+
+Položte si tři otázky:
+
+```text
+Kde by se zbytečná evidence objevila jako první?
+
+Kdo by si jí všiml bez nového reportu?
+
+Jak ji zavřeme, pokud se objeví?
+```
+
+Pokud odpověď na druhou otázku zní "nikdo, pokud nezavedeme nový přehled", rytmus neřeďte. Nejdřív vraťte pravidlo blíž k pracovnímu místu. Privacy-first provoz se nemá opírat o další kontrolní vrstvu. Má být navržený tak, aby zbytečný sběr dat byl nápadný už při běžné práci.
+
+Codyho komentář: zředění kontroly není lenost. Lenost je nechat starou tabulku žít dál, protože se nikomu nechce rozhodnout, jestli ji ještě potřebuje. Zředění je dospělý provozní krok: "tohle drží, necháme to v lehčím rytmu a víme, co by nás mělo probudit." Méně dramatu, víc čistého stolu. Hrůza, skoro efektivita.
+
+### Karta zředění revizního rytmu
+
+```text
+Pravidlo:
+
+Kanonické pracovní místo:
+
+Původní revizní rytmus:
+
+Důkazy stabilního provozu:
+
+Nový revizní rytmus:
+
+K jakému existujícímu review pravidlo připojujeme:
+
+Co zůstává aktivní v pracovním místě:
+
+Co zůstává výslovně zavřené:
+
+Kde by se mohla objevit skrytá evidence:
+
+Návratový signál pro zkrácení rytmu:
+
+Jaké dočasné podklady mažeme, anonymizujeme nebo nepřenášíme:
+
+Kde je rozhodnutí uložené:
+
+Vlastník:
+```
+
+Karta má být poslední administrativní krok před lehčím režimem. Pokud kvůli zředění rytmu zakládáte novou tabulku, nový dashboard nebo nový seznam kontrol, vraťte se o krok zpět. Pravděpodobně neředíte rytmus, jen přesouváte práci do jiného šuplíku.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte poslední dvě review a jejich uzavírací stavy.
+2. Minuta 2: ověřte, že pravidlo je pořád na kanonickém pracovním místě.
+3. Minuta 3: potvrďte, že nevznikla skrytá evidence.
+4. Minuta 4: vyberte existující lehčí rytmus.
+5. Minuta 5: napište návratový signál pro zkrácení rytmu.
+6. Minuta 6: uklidte dočasné podklady a zapište rozhodnutí k pravidlu.
+
+Když se během workshopu objeví návrh "raději to ještě jednou zkontrolujme příští měsíc", ptejte se proč. Pokud existuje konkrétní slabina, neřeďte rytmus a opravte ji. Pokud slabina neexistuje, jde jen o nervozitu. Nervozita není návratový signál.
+
+### Checklist zředění revizního rytmu
+
+- Máme dvě po sobě jdoucí kontroly, které potvrdily stabilní provoz?
+- Je pravidlo na pracovním místě, kde se opravdu používá?
+- Umí podle něj rozhodnout člověk bez čerstvého výkladu?
+- Nevznikla skrytá tabulka, export, tracker, CRM atribut ani report lidí?
+- Připojujeme pravidlo k existujícímu lehčímu rytmu, ne k novému speciálnímu meetingu?
+- Je napsané, co zůstává aktivní?
+- Je napsané, co zůstává výslovně zavřené?
+- Víme, kde by se nejpravděpodobněji objevila zbytečná evidence?
+- Máme konkrétní návratový signál pro zkrácení rytmu?
+- Uklidili jsme dočasné podklady po rozhodnutí o zředění?
+
+Zředění revizního rytmu je dobrá zkouška důvěry v vlastní provoz. Pokud pravidlo drží, nechte ho dýchat. Pokud nedrží, neopravujte to delší kontrolou. Opravte pracovní místo, větu nebo datovou stopu. Stabilita se nepozná podle počtu kontrol, ale podle toho, že pravidlo pomáhá i ve chvíli, kdy na něj zrovna nikdo nesvítí baterkou.
+
 ## Pracovní log
 
+- 2026-07-04: Doplněna úvodní podkapitola o zředění revizního rytmu po stabilním provozu: podmínky zředění, praktický support příklad, návratový signál, privacy-first kontrola skryté evidence, karta, mini workshop a checklist.
 - 2026-07-04: Doplněna úvodní podkapitola o uzavření druhého dlouhodobého review do stabilního provozu: čtyři uzavírací stavy, praktické support příklady, privacy-first úklid dočasných podkladů, karta, mini workshop a checklist.
 - 2026-07-04: Doplněna úvodní podkapitola o druhém dlouhodobém review v běžném rytmu: tři kontrolní otázky, čtyři výsledky review, praktický support příklad, privacy-first kontrola pomocné evidence, karta, mini workshop a checklist.
 - 2026-07-04: Doplněna úvodní podkapitola o uzavření prvního dlouhodobého review do běžného rytmu: uzavírací stavy, lokální oprava, servisní poznámka, nový návratový signál, privacy-first úklid stop, karta, mini workshop a checklist.
