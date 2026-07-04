@@ -293096,8 +293096,187 @@ Když se během workshopu objeví debata o tom, jestli pravidlo vůbec dává st
 
 Druhé dlouhodobé review má být důkaz, že pravidlo se umí udržovat bez dramatu. Pokud drží, vraťte ho do rytmu. Pokud drhne, opravte nejbližší místo. Pokud se vrací větší problém, pojmenujte ho jako nový signál. A po cestě nenechte vzniknout novou evidenci jen proto, že kontrola vypadá seriózněji, když má tabulku.
 
+## Uzavření druhého dlouhodobého review do stabilního provozu
+
+Uzavření druhého dlouhodobého review má rozhodnout, jestli pravidlo opravdu patří do stabilního provozu, nebo jestli si jen dobře vedlo v jedné další kontrole. Rozdíl je nenápadný. Stabilní provoz neznamená "už se na to nikdy nepodíváme". Znamená, že pravidlo nepotřebuje zvláštní péči mimo běžný rytmus, má jasné pracovní místo a tým ho umí použít bez vytahování celé historie.
+
+Dobrá uzavírací věta zní:
+
+```text
+Druhé dlouhodobé review uzavíráme takto:
+```
+
+Za ni napište jeden ze čtyř stavů. Ne popis celé debaty, ne seznam všeho, co by se jednou mohlo hodit. Jen rozhodnutí:
+
+```text
+Druhé dlouhodobé review uzavíráme takto:
+Pravidlo zůstává ve stabilním provozu beze změny. Další kontrola proběhne v běžném kvartálním review support šablon.
+```
+
+Taková věta je užitečná, protože ukončí mimořádnou pozornost. Pravidlo se nehlídá víc jen proto, že už jsme si na jeho hlídání zvykli. Pokud druhé review neukázalo problém, další práce má být menší, ne větší. Ano, i péče o pravidla potřebuje brzdu. Jinak se z údržby stane hobby s kalendářem.
+
+### Čtyři uzavírací stavy
+
+Druhé dlouhodobé review uzavřete jedním ze čtyř stavů:
+
+- Stabilní provoz beze změny: pravidlo je najitelné, samostatně použitelné a bez skryté evidence.
+- Stabilní provoz po lokální opravě: pravidlo platí, ale bylo potřeba opravit odkaz, pracovní větu nebo jedno blízké místo.
+- Návrat do zkráceného review: pravidlo funguje, ale druhá kontrola ukázala slabinu, kterou má smysl znovu ověřit dřív než v běžném rytmu.
+- Nový návratový signál: review ukázalo širší problém, který už není údržba pravidla.
+
+Stav `stabilní provoz beze změny` je nejkratší. Zapište výsledek, další běžný rytmus a potvrzení, že nevznikla nová datová stopa. Nepřidávejte "pro jistotu" mezikontrolu. Jestli pravidlo prošlo dvěma dlouhodobými review, jeho odměna není další dohled, ale klid.
+
+Stav `stabilní provoz po lokální opravě` použijte, když oprava nemění smysl pravidla. Typicky jde o starý odkaz, nejasnou větu, chybějící místo v šabloně nebo slabý název karty. Oprava má být tak blízko pracovního místa, aby ji další člověk potkal přirozeně.
+
+Stav `návrat do zkráceného review` patří k situaci, kdy pravidlo funguje, ale lokální oprava je natolik čerstvá, že ji nechcete rovnou pustit do dlouhého rytmu. Zkrácené review ale nesmí být trest. Má mít jasnou otázku a konec:
+
+```text
+Za 30 dní ověříme pouze to, zda nový odkaz v support šabloně našel člověk bez čerstvého výkladu.
+```
+
+Stav `nový návratový signál` použijte, když review odhalilo něco většího než slabé místo pravidla. Například se pomocné evidence objevují ve více týmech, lidé obcházejí kanonické místo kvůli oprávněním, nebo pravidlo řeší špatnou část procesu. To už není uzavření review. To je nový malý průchod s vlastní hranicí.
+
+### Praktický příklad
+
+```text
+Pravidlo:
+Fakturační opravy se vůči zákazníkovi řeší v původním support ticketu. Nevzniká samostatná tabulka oprav.
+
+Druhé dlouhodobé review ukázalo:
+Pravidlo našel nový člen supportu v šabloně, rozhodl podle něj bez výkladu a nevznikla pomocná evidence.
+
+Uzavírací stav:
+Stabilní provoz beze změny.
+
+Co zůstává v platnosti:
+Support ticket je zdroj pravdy pro stav zákaznické opravy.
+
+Co zůstává zavřené:
+Samostatná tabulka oprav, report jednotlivých použití pravidla a nový atribut v CRM.
+
+Další rytmus:
+Běžné kvartální review support šablon.
+
+Privacy-first závěr:
+Do záznamu ukládáme jen anonymizované potvrzení průchodu. Neukládáme kopii ticketu, jméno zákazníka ani jméno pracovníka.
+```
+
+Lokální oprava může vypadat takto:
+
+```text
+Druhé dlouhodobé review ukázalo:
+Pravidlo platí, ale v rozcestníku byl starý odkaz na archivní dokument.
+
+Uzavírací stav:
+Stabilní provoz po lokální opravě.
+
+Lokální oprava:
+Odkaz v support rozcestníku vede na aktuální kanonickou kartu. Text pravidla se nemění.
+
+Co neotevíráme:
+Revizi support procesu, nový report oprav ani sledování použití pravidla po lidech.
+
+Další rytmus:
+Běžné kvartální review. Bez mezikontroly, protože šlo jen o opravu odkazu.
+```
+
+Zkrácené review má být ještě užší:
+
+```text
+Druhé dlouhodobé review ukázalo:
+Pravidlo funguje, ale pracovní věta byla doplněna tak, aby člověk poznal, kdy už nejde o fakturační opravu, ale o obchodní změnu.
+
+Uzavírací stav:
+Návrat do zkráceného review.
+
+Otázka zkráceného review:
+Najde další člověk hranici mezi fakturační opravou a obchodní změnou bez výkladu?
+
+Co zůstává zavřené:
+Nové pole v CRM, ruční seznam případů a revize celé fakturační komunikace.
+```
+
+### Privacy-first uzavření
+
+Uzavření druhého dlouhodobého review je dobré místo pro poslední úklid. Ne proto, že by každý záznam byl nebezpečný, ale proto, že dlouhodobá údržba ráda sbírá drobné pozůstatky: poznámku v tabulce, export pro kontrolu, screenshot, kopii ticketu, pomocný seznam lidí, kteří pravidlo použili. Každý kousek vypadá malý. Dohromady z nich vznikne provozní nepořádek, který nikdo nechtěl vlastnit.
+
+Při uzavření projděte tři otázky:
+
+```text
+Co zůstává jako trvalý záznam?
+
+Co bylo potřeba jen pro review?
+
+Co by při dalším review svádělo k novému sběru dat?
+```
+
+Trvalý záznam má obsahovat rozhodnutí, stav pravidla, další rytmus, vlastníka a případnou lokální opravu. Dočasné podklady mají zmizet, anonymizovat se, nebo se převést do obecného příkladu. Pokud z review vznikl nový návratový signál, pořád není důvod ponechat surové podklady navždy. Signál má být formulovaný tak, aby šel použít bez osobních a zákaznických detailů.
+
+Codyho komentář: dobrý privacy-first úklid není heroický rituál s plamenným projevem o datech. Je to nudné zavření dočasné tabulky ve chvíli, kdy už splnila účel. Překvapivě účinné, tragicky málo dramatické.
+
+### Karta uzavření druhého dlouhodobého review
+
+```text
+Pravidlo:
+
+Kanonické pracovní místo:
+
+Druhé dlouhodobé review proběhlo dne:
+
+Co review ověřilo:
+
+Uzavírací stav:
+- stabilní provoz beze změny
+- stabilní provoz po lokální opravě
+- návrat do zkráceného review
+- nový návratový signál
+
+Co zůstává v platnosti:
+
+Co se lokálně změnilo:
+
+Co zůstává výslovně zavřené:
+
+Jaký dočasný podklad mažeme, anonymizujeme nebo nepřenášíme:
+
+Další rytmus nebo otázka zkráceného review:
+
+Kde je záznam uložený:
+
+Vlastník:
+```
+
+Karta má zabránit dvěma opačným chybám. První je přepéče: pravidlo prošlo, ale tým mu stejně přidá další dohled. Druhá je předčasné zapomenutí: review ukázalo lokální opravu nebo slabinu, ale nikdo ji nepřenese do pracovního místa. Karta drží prostředek: zapsat, co je potřeba, a zbytek pustit.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte výsledek druhého dlouhodobého review.
+2. Minuta 2: vyberte jeden ze čtyř uzavíracích stavů.
+3. Minuta 3: napište, co zůstává v platnosti a co zůstává zavřené.
+4. Minuta 4: proveďte nebo pojmenujte lokální opravu.
+5. Minuta 5: uzavřete dočasné podklady a datovou stopu.
+6. Minuta 6: potvrďte další běžný rytmus, zkrácené review nebo nový návratový signál.
+
+Pokud se během šesti minut nedokážete shodnout na uzavíracím stavu, není to signál pro delší workshop. Je to signál, že review ještě nemělo jasnou rozhodovací otázku. Vraťte se k jedné větě: co přesně mělo druhé dlouhodobé review ověřit?
+
+### Checklist uzavření druhého dlouhodobého review
+
+- Má review jeden jasný uzavírací stav?
+- Je zapsané, co zůstává v platnosti?
+- Je zapsané, co zůstává výslovně zavřené?
+- Pokud vznikla lokální oprava, je propsaná do kanonického pracovního místa?
+- Pokud je potřeba zkrácené review, má jedinou otázku a konec?
+- Pokud vznikl nový návratový signál, je oddělený od běžné údržby?
+- Nevzniká nový report, tracker, export ani seznam lidí jen kvůli dalšímu klidu?
+- Jsou dočasné podklady smazané, anonymizované nebo nepřenesené?
+- Je jasný další rytmus a vlastník?
+- Umí další člověk za půl roku pochopit závěr bez znalosti celé historie?
+
+Uzavření druhého dlouhodobého review má pravidlo vrátit do správné míry pozornosti. Stabilní věc nepotřebuje reflektor. Potřebuje dobré místo, jednoduchou větu, občasnou kontrolu a žádné zbytečné stopy kolem. Když tohle platí, nechte pravidlo pracovat a nepřidávejte mu administrativní doprovod jen proto, že ticho vypadá podezřele.
+
 ## Pracovní log
 
+- 2026-07-04: Doplněna úvodní podkapitola o uzavření druhého dlouhodobého review do stabilního provozu: čtyři uzavírací stavy, praktické support příklady, privacy-first úklid dočasných podkladů, karta, mini workshop a checklist.
 - 2026-07-04: Doplněna úvodní podkapitola o druhém dlouhodobém review v běžném rytmu: tři kontrolní otázky, čtyři výsledky review, praktický support příklad, privacy-first kontrola pomocné evidence, karta, mini workshop a checklist.
 - 2026-07-04: Doplněna úvodní podkapitola o uzavření prvního dlouhodobého review do běžného rytmu: uzavírací stavy, lokální oprava, servisní poznámka, nový návratový signál, privacy-first úklid stop, karta, mini workshop a checklist.
 - 2026-07-04: Doplněna úvodní podkapitola o převodu stabilizovaného pravidla do dlouhodobého revizního rytmu: výběr existujícího rytmu, praktický support příklad, lokální servisní poznámka, privacy-first kontrola evidence, karta, mini workshop a checklist.
