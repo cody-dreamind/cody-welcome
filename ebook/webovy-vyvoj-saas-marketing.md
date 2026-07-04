@@ -294795,8 +294795,175 @@ Pokud pět minut nestačí, nejspíš už nejde o servisní poznámku. Otevřete
 
 Servisní poznámka k pořadí je malý nástroj pro velké rukopisy. Umožní pokračovat bez předstírání, že dokument je dokonale srovnaný, a zároveň brání tomu, aby se každá drobná nejasnost změnila v redakční maraton. Codyho komentář: někdy je nejprofesionálnější oprava prostě cedulka "tudy dál" a uklizená podlaha kolem ní.
 
+## Čtenářská mapa pasivního provozu
+
+Když se rukopis rozroste o více navazujících částí, nestačí doufat, že čtenář vždy trefí správné pořadí. Pasivní provoz je na to citlivý zvlášť. Má být lehký, bez pravidelného review a bez nové evidence, ale v textu kolem něj často existuje několik příbuzných kapitol: převod do pasivního provozu, první použití, uzavření prvního použití, druhé použití, návratový signál, dlouhé ticho, roční kontrola nebo archivace. Každá část může být správná, a přesto se člověk může ztratit.
+
+Čtenářská mapa nemá nahradit kapitoly. Má říct, kterou část otevřít podle situace. Je to rozcestník, ne nový proces. Pokud z něj začne vznikat další vrstva povinného vyplňování, zahněte zpátky. Rozcestník má šetřit pozornost, ne si ji účtovat s úroky.
+
+Začněte jednoduchou větou:
+
+```text
+Teď řešíme pravidlo v pasivním provozu ve stavu:
+```
+
+Za ni doplňte jeden konkrétní stav. Ne obecné téma, ne název procesu, ale pracovní situaci:
+
+```text
+Teď řešíme pravidlo v pasivním provozu ve stavu:
+pravidlo bylo právě převedené do pasivního provozu a poprvé se použilo v běžném support ticketu.
+```
+
+Tahle věta určí, kam v rukopisu sáhnout. Bez ní tým často otevře nejbližší kapitolu podle podobného nadpisu a začne řešit jinou fázi, než ve které opravdu je.
+
+### Pět běžných vstupních situací
+
+Pro pasivní provoz stačí většinou rozlišit pět vstupů:
+
+- Převod: pravidlo právě opouští zředěný revizní rytmus a má žít jen v pracovním místě.
+- První použití: pravidlo se poprvé používá bez mimořádné péče.
+- Uzavření prvního použití: je potřeba rozhodnout, jestli pasivní provoz pokračuje, nebo stačí lokální oprava.
+- Další běžné použití: pravidlo už jednou obstálo a teď se ověřuje přenositelnost bez čerstvé paměti.
+- Návratový signál: objevil se důvod pravidlo znovu otevřít.
+
+Každý vstup vede jinam. U převodu hledejte pracovní větu, vlastníka pracovního místa a vypnutí starých kontrolních stop. U prvního použití hledejte najitelnost, rozhodnutelnost a absenci nové evidence. U uzavření hledejte stav: pokračovat, opravit jedno místo, doplnit větu nebo otevřít návrat. U dalšího použití hledejte přenositelnost. U návratového signálu už nejste v pasivním provozu; otevíráte nový malý průchod.
+
+Praktický rozcestník:
+
+```text
+Jestli pravidlo právě převádíme:
+otevři část o převodu do dlouhodobého pasivního provozu.
+
+Jestli pravidlo poprvé používáme:
+otevři část o prvním běžném použití po převodu do pasivního provozu.
+
+Jestli první použití skončilo:
+otevři část o uzavření prvního pasivního použití.
+
+Jestli pravidlo používá další člověk nebo stejný člověk po delší době:
+otevři část o druhém nebo dalším běžném použití v pasivním provozu.
+
+Jestli se objevil návratový signál:
+nepokračuj v pasivním režimu; otevři návrat k pravidlu jako samostatnou pracovní otázku.
+```
+
+Rozcestník má být přímo u místa, kde čtenář do pasivního provozu vstupuje. Nemusí být na začátku celého e-booku. Často stačí krátká mapa před blokem kapitol nebo u interního odkazu v týmu.
+
+### Praktický příklad
+
+Tým má pravidlo pro exportní dotazy:
+
+```text
+U běžných žádostí o export dat použij šablonu Export. Eskaluj pouze nestandardní rozsah nebo právní výklad. Návratový signál nastane, když dvě žádosti během jednoho měsíce nepůjde vyřídit podle šablony bez ručního právního nebo technického doptání.
+```
+
+Situace A:
+
+```text
+Pravidlo po dvou zředěných kontrolách fungovalo samostatně. Tým chce zrušit samostatnou kontrolní otázku v pololetním review.
+```
+
+Mapa řekne: otevřít převod do pasivního provozu. Neřešit první použití, protože ještě nepřišlo. Hlavní práce je pracovní věta, vlastník šablony, návratový signál a vypnutí starých kontrolních stop.
+
+Situace B:
+
+```text
+O týden později přijde běžný exportní dotaz. Support člověk našel šablonu a odpověděl podle ní, ale do interní poznámky přidal "radši sledujme exporty".
+```
+
+Mapa řekne: otevřít první běžné použití. Neotevírat hned návratový signál, protože problém není v pravidle, ale ve skryté evidenci. Nejmenší oprava je smazat nebo uzavřít poznámku, pokud nemění rozhodnutí, a případně zpřesnit větu u šablony.
+
+Situace C:
+
+```text
+Dvě exportní žádosti během jednoho měsíce opravdu nešlo vyřídit podle šablony bez právního doptání.
+```
+
+Mapa řekne: pasivní provoz skončil pro tuto otázku. Nečtěte dál kapitoly o klidu. Otevřete návratový signál a nejmenší další krok. To může být doplnění jedné rozhodovací věty, ne rovnou nový exportní proces.
+
+### Privacy-first mapa
+
+Čtenářská mapa musí chránit i datovou stopu. Špatně zvolená kapitola může vést k tomu, že tým začne sbírat důkazy pro review, i když je ve skutečnosti jen u prvního běžného použití. Nebo naopak přehlédne návratový signál, protože ho schová pod větu "pasivní provoz pokračuje".
+
+Ke každému vstupu proto dopište datovou brzdu:
+
+```text
+Převod:
+nesbíráme nové důkazy, jen uklízíme staré kontrolní stopy.
+
+První použití:
+nezavádíme seznam použití, sledujeme jen to, zda pravidlo šlo použít v běžném pracovním místě.
+
+Uzavření:
+ponecháváme jen závěr, který mění práci; pomocné poznámky mažeme nebo necháváme expirovat.
+
+Další použití:
+nezakládáme novou pravidelnou kontrolu, pokud se nepotvrdil návratový signál.
+
+Návratový signál:
+otevíráme nejmenší další krok a předem určujeme, jaká dočasná data vzniknou a kdy skončí.
+```
+
+Codyho komentář: dobrá mapa je nudná. To je pochvala. Když je rozcestník příliš chytrý, lidé ho začnou interpretovat. Když je nudně přesný, prostě je pošle do správné části a drží ruce pryč od dat, která nepotřebují.
+
+### Karta čtenářské mapy
+
+```text
+Blok rukopisu:
+
+Kdy ho čtenář pravděpodobně otevře:
+
+Vstupní situace:
+- převod
+- první použití
+- uzavření prvního použití
+- další běžné použití
+- návratový signál
+
+Kterou část má otevřít:
+
+Kterou část teď nemá otevírat:
+
+Co se tím výslovně nemění:
+
+Datová brzda:
+
+Kde mapa žije:
+
+Kdy mapu upravit:
+```
+
+Kartu není nutné vyplňovat pro každou kapitolu. Hodí se tam, kde dlouhý rukopis obsahuje více podobných navazujících částí a hrozí, že čtenář otevře špatnou fázi. Jedna dobrá mapa může ušetřit několik servisních poznámek.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: vyberte blok rukopisu, kde se čtenář může ztratit.
+2. Minuta 2: napište pět možných vstupních situací.
+3. Minuta 3: přiřaďte ke každé situaci jednu správnou část.
+4. Minuta 4: napište, kterou část čtenář v dané situaci nemá otevírat.
+5. Minuta 5: doplňte datovou brzdu.
+6. Minuta 6: uložte mapu tam, kde čtenář do bloku vstupuje.
+
+Pokud se během workshopu ukáže, že dvě části říkají opačné věci, nezachraňujte to mapou. To už není navigace, ale obsahová kolize. Vyberte kanonické místo a otevřete samostatnou redakční opravu.
+
+### Checklist čtenářské mapy
+
+- Je jasné, pro který blok rukopisu mapa platí?
+- Rozlišuje mapa pracovní situace, ne jen podobné nadpisy?
+- Vede každá situace k jedné konkrétní části?
+- Říká mapa také, co teď neotevírat?
+- Nezavádí mapa nový povinný proces?
+- Obsahuje datovou brzdu pro převod, použití, uzavření i návratový signál?
+- Je mapa uložená u místa, kde ji čtenář opravdu potřebuje?
+- Nepoužíváme mapu k zakrytí obsahové kolize?
+- Dá se podle mapy pokračovat bez čtení pracovního logu?
+- Umí další iterace mapu upravit jednou malou změnou, ne velkým přepisem?
+
+Čtenářská mapa pasivního provozu je obyčejná navigace pro neobyčejně dlouhý rukopis. Pomáhá držet rozdíl mezi převodem, použitím, uzavřením a návratem. Díky tomu e-book zůstává praktický nástroj, ne historický záznam toho, jak jsme se k nástroji postupně prokopali.
+
 ## Pracovní log
 
+- 2026-07-04: Doplněna čtenářská mapa pasivního provozu: vstupní situace, rozcestník kapitol, praktický exportní příklad, privacy-first datová brzda, karta, mini workshop a checklist.
 - 2026-07-04: Doplněna servisní podkapitola k pořadí navazujících částí: kdy stačí krátká poznámka, kdy opravdu opravit pořadí, praktický příklad, privacy-first úklid redakčních podkladů, karta, mini workshop a checklist.
 - 2026-07-04: Doplněna úvodní podkapitola o uzavření prvního pasivního použití: tři uzavírací věty, čtyři stavy, support příklad, privacy-first úklid stop, karta, mini workshop a checklist.
 - 2026-07-04: Doplněna úvodní podkapitola o prvním běžném použití po převodu do pasivního provozu: tři otázky použití, support příklad, čtyři výsledky, privacy-first kontrola nové evidence, karta, mini workshop a checklist.
