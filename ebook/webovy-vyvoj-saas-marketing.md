@@ -295136,8 +295136,183 @@ Pokud se workshop začne měnit v debatu o celém pořadí rukopisu, zastavte ho
 
 Ověření čtenářské mapy má být malé, protože mapa sama má být malá. Jejím úkolem není vyhrát soutěž o nejchytřejší navigaci. Má člověka poslat na správné místo, ušetřit mu čtení historie a zabránit tomu, aby kvůli nejasnosti vznikla nová data nebo nový proces. Když to zvládne, nechte ji dělat svoji nudnou, užitečnou práci.
 
+## Uzavření ověření čtenářské mapy
+
+Po prvním ověření čtenářské mapy je potřeba udělat jednu věc, která zní banálně a v praxi se často přeskočí: ověření uzavřít. Bez uzavření zůstane v týmu pachuť nedokončené kontroly. Někdo ví, že mapa byla jednou použitá, někdo tuší, že se něco mělo opravit, někdo si pro jistotu nechá vlastní poznámku. A přesně tak vzniká druhá, soukromá navigace vedle té oficiální.
+
+Uzavření ověření nemá vyrábět nový proces. Má jen rozhodnout, co se stane s mapou po jednom reálném použití:
+
+```text
+Mapa po prvním ověření:
+- zůstává beze změny
+- dostala jednu lokální větu
+- potřebuje opravu cíle
+- odkázala na samostatnou redakční opravu
+```
+
+Tím se první ověření zavře. Člověk, který mapu použil, nemusí čekat na další redakční rozhodnutí. Vlastník rukopisu ví, jestli má něco změnit. A tým nemusí zakládat evidenci úspěšných i neúspěšných průchodů. Pasivní provoz má zůstat pasivní i ve chvíli, kdy se kolem něj opravuje navigace.
+
+### Čtyři uzavírací stavy
+
+Po ověření mapy vyberte jeden ze čtyř stavů:
+
+- Beze změny: mapa poslala čtenáře správně a nevzniklo žádné tření.
+- Lokální věta: mapa byla správná, ale jeden vstup potřeboval lidštější formulaci.
+- Oprava cíle: mapa posílala do špatné části a je potřeba změnit odkaz nebo pořadí doporučení.
+- Redakční oprava: mapa ukázala, že dvě části rukopisu říkají něco odlišného.
+
+Stav "beze změny" je plnohodnotný výsledek. Neznamená, že jste nic neudělali. Znamená, že jste ověřili použitelnost mapy a nezaložili zbytečnou údržbu.
+
+Stav "lokální věta" je nejčastější. Typicky stačí doplnit jednu větu ke vstupní situaci:
+
+```text
+Nový člověk s běžným dotazem není návratový signál, pokud se nezměnila pracovní věta pravidla.
+```
+
+Stav "oprava cíle" je vážnější, ale pořád lokální. Mění se navigace, ne obsah celé kapitoly. Například situace "pravidlo se poprvé používá po převodu" nemá vést do části o návratovém signálu, ale do části o prvním pasivním použití.
+
+Stav "redakční oprava" znamená stop. Neřešte ji v mapě. Rozcestník nemá být arbitrem pravdy. Pokud jedna část říká "nezakládat evidenci" a druhá naznačuje "udělat kontrolní seznam použití", vyberte kanonické místo a otevřete samostatnou opravu s vlastním rozsahem.
+
+### Praktický příklad
+
+Support tým ověřil mapu pasivního provozu na běžném exportním dotazu. Nový člověk podle mapy našel část o dalším běžném použití a neotevřel starý pracovní log. V praxi se ale na chvíli zarazil u věty "další použití po klidu", protože nevěděl, jestli "klid" znamená měsíc, kvartál nebo jen to, že pravidlo dlouho nikdo neřešil.
+
+Uzavření může vypadat takto:
+
+```text
+Pracovní situace:
+Nový support člověk řešil běžný exportní dotaz po měsíci bez podobného dotazu.
+
+Výsledek ověření:
+Mapa vedla do správné části, ale výraz "po klidu" byl nejasný.
+
+Uzavírací stav:
+Lokální věta.
+
+Oprava:
+Doplněno: "Klid znamená období bez návratového signálu, ne přesný počet dní."
+
+Co neměníme:
+Neměníme pořadí kapitol, nezakládáme evidenci použití mapy, neotevíráme návratový signál.
+```
+
+To je dobré uzavření. Je konkrétní, malé a nenechává za sebou otevřenou otázku. Zároveň chrání tým před typickou pastí: "Když už jsme narazili na nejasnost, pojďme zrovna přepsat celý blok." Ne. Přepsání celého bloku je jiný úkol.
+
+### Co se po uzavření propíše
+
+Po uzavření ověření se propisují jen tři věci:
+
+- změna v samotné mapě, pokud byla potřeba;
+- krátká uzavírací věta u pracovní poznámky, pokud poznámka vznikla;
+- smazání nebo anonymizace dočasných podkladů, pokud obsahovaly konkrétní osobu, ticket nebo zákaznický detail.
+
+Nepřepisujte pracovní log do podrobného deníku testování. Nezakládejte tabulku "použití mapy". Neudržujte screenshoty jako důkaz, že se čtenář ztratil. Pokud oprava nepotřebuje konkrétní citaci, nepřenášejte ji.
+
+Dobrá uzavírací věta může znít:
+
+```text
+Mapa po prvním ověření pokračuje s jednou lokální větou u situace "další běžné použití"; dočasná poznámka byla smazána.
+```
+
+Nebo:
+
+```text
+Mapa fungovala beze změny; nevzniká další evidence ověření.
+```
+
+Tyto věty nejsou poetické, ale jsou užitečné. Říkají týmu, že kontrola skončila a co z ní zůstalo.
+
+### Privacy-first uzavření
+
+Uzavření ověření mapy je přesně místo, kde privacy-first přístup šetří práci. Když ověřujete navigaci, nepotřebujete ukládat osobní výkon čtenáře. Potřebujete vědět, jestli mapa poslala člověka správně.
+
+Před uložením jakékoliv poznámky si položte tři otázky:
+
+```text
+Pomůže tato informace opravit mapu?
+
+Stačí role místo jména?
+
+Můžeme po opravě smazat dočasný příklad?
+```
+
+Ve většině případů je dobrý trvalý záznam anonymní:
+
+```text
+Support role zaměnila "po klidu" za časový interval. Do mapy doplněna definice klidu jako období bez návratového signálu.
+```
+
+Špatný trvalý záznam je přehnaně konkrétní:
+
+```text
+Konkrétní člověk v konkrétním ticketu nerozuměl větě X; uložen screenshot ticketu a interní poznámka pro budoucí školení.
+```
+
+Tohle je zbytečná stopa. Pokud nejde o incident, bezpečnostní problém nebo právní povinnost, neuchovávejte osobní detail jen proto, že se z něj dá vyrobit hezký příklad. Příklad anonymizujte a dočasný podklad smažte.
+
+Codyho komentář: dobrá dokumentace nemá pamatovat každé zaváhání člověka. Má po něm zůstat lepší věta. To je méně dramatické, ale mnohem zdravější.
+
+### Karta uzavření ověření mapy
+
+```text
+Blok rukopisu:
+
+Ověřená vstupní situace:
+
+Kam mapa vedla:
+
+Byla část správná?
+
+Uzavírací stav:
+- beze změny
+- lokální věta
+- oprava cíle
+- redakční oprava
+
+Jedna uzavírací věta:
+
+Co se mění v mapě:
+
+Co se výslovně nemění:
+
+Dočasné podklady k odstranění nebo anonymizaci:
+
+Kanonické místo po uzavření:
+
+Návratový signál, pokud se problém zopakuje:
+```
+
+Kartu nevyplňujte u každého čistého použití. Použijte ji ve chvíli, kdy vznikla oprava, nejasnost nebo riziko soukromé navigace bokem. U čistého použití stačí věta "mapa fungovala beze změny".
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte výsledek prvního ověření mapy.
+2. Minuta 2: vyberte jeden ze čtyř uzavíracích stavů.
+3. Minuta 3: napište jednu uzavírací větu.
+4. Minuta 4: proveďte nejmenší změnu v mapě, pokud je potřeba.
+5. Minuta 5: pojmenujte, co se výslovně nemění.
+6. Minuta 6: smažte nebo anonymizujte dočasné podklady.
+
+Pokud se během workshopu otevře debata o pořadí celého rukopisu, zastavte ji a založte samostatnou redakční opravu. Uzavření ověření mapy má zavřít jednu navigační situaci, ne znovu otevřít celý e-book.
+
+### Checklist uzavření ověření mapy
+
+- Vybrali jsme jeden uzavírací stav?
+- Je uzavírací věta srozumitelná člověku, který u ověření nebyl?
+- Pokud mapa fungovala, nezakládáme zbytečnou evidenci úspěšných použití?
+- Pokud stačila lokální věta, nepřepisujeme celý blok?
+- Pokud mapa mířila špatně, opravili jsme cíl, ne jen přidali další vysvětlení?
+- Pokud se objevila obsahová kolize, otevřeli jsme samostatnou redakční opravu?
+- Je jasné, co se výslovně nemění?
+- Nezůstaly bokem soukromé poznámky, screenshoty nebo exporty?
+- Stačí v trvalém záznamu role a anonymizovaná situace?
+- Ví tým, kde je po uzavření kanonická mapa?
+
+Uzavření ověření čtenářské mapy chrání rukopis před dvěma špatnými extrémy. První extrém je nechat po ověření mlhu. Druhý extrém je vyrobit z navigace další provozní proces. Správná cesta je kratší: vybrat stav, udělat nejmenší opravu, uklidit dočasné stopy a vrátit mapu zpátky do tiché služby čtenáři.
+
 ## Pracovní log
 
+- 2026-07-04: Doplněna úvodní podkapitola o uzavření ověření čtenářské mapy: čtyři uzavírací stavy, praktický support příklad, propsání změn, privacy-first úklid dočasných podkladů, karta, mini workshop a checklist.
 - 2026-07-04: Doplněna úvodní podkapitola o ověření čtenářské mapy při prvním použití: kontrola správné navigace, čtyři výsledky ověření, praktický support příklad, privacy-first práce bez nové evidence, karta, mini workshop a checklist.
 - 2026-07-04: Doplněna čtenářská mapa pasivního provozu: vstupní situace, rozcestník kapitol, praktický exportní příklad, privacy-first datová brzda, karta, mini workshop a checklist.
 - 2026-07-04: Doplněna servisní podkapitola k pořadí navazujících částí: kdy stačí krátká poznámka, kdy opravdu opravit pořadí, praktický příklad, privacy-first úklid redakčních podkladů, karta, mini workshop a checklist.
