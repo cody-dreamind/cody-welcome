@@ -299215,8 +299215,191 @@ Pokud během workshopu někdo začne obhajovat původní široký návrh, vraťt
 
 První dohledání archivního minima je malý test, jestli archivace opravdu slouží práci. Když minimum stačí, nechte téma zavřené. Když nestačí, opravte najitelnost nebo větu. A když návratový signál opravdu nastal, otevřete nejmenší další krok, ne celou minulost. Tím zůstane archiv užitečný, provoz lehký a privacy-first hodnota víc než jen hezká etiketa na šanonu.
 
+## Uzavření prvního dohledání archivního minima
+
+První dohledání archivního minima nekončí ve chvíli, kdy člověk záznam našel. Končí až tehdy, když je jasné, co se dnešním podnětem stalo: zůstal zavřený, opravila se najitelnost, zpřesnila se pracovní věta, nebo se opravdu otevřel návratový signál. Bez uzavření se i dobré dohledání změní v další drobnou stopu, která bude při příštím návratu spíš překážet než pomáhat.
+
+Uzavření začněte jednou větou:
+
+```text
+První dohledání archivního minima uzavíráme takto:
+```
+
+Za ni napište výsledek, ne zápis celé detektivky. Dobrá věta může znít:
+
+```text
+První dohledání archivního minima uzavíráme takto:
+Archivní minimum stačilo k dnešnímu rozhodnutí, návratový signál nenastal a registrační formulář zůstává bez pole velikosti týmu. Do nápovědy po prvním importu doplňujeme jen jednu lokální větu o pozvání kolegů.
+```
+
+V té větě jsou čtyři důležité věci: minimum stačilo, návratový signál nenastal, původní široký návrh zůstává zavřený a dnešní drobný podnět se řeší v nejbližším pracovním místě. Přesně to má uzavření udělat. Neoslavuje archiv. Nezakládá nový proces. Jen uklidí dnešní rozhodnutí tam, kde ho další člověk najde.
+
+### Čtyři uzavírací stavy
+
+Po prvním dohledání vyberte jeden ze čtyř stavů:
+
+- Zavřít dnešní podnět: archivní minimum stačilo a návratový signál nenastal.
+- Opravit najitelnost minima: rozhodnutí platí, ale záznam se špatně hledal.
+- Zpřesnit pracovní větu: rozhodnutí platí, ale věta nebyla dost použitelná.
+- Otevřít nový malý krok: návratový signál opravdu nastal, ale původní široký návrh pořád není automatická odpověď.
+
+Stav `zavřít dnešní podnět` je nejčistší. Zapište krátký závěr k místu, kde podnět vznikl, a nechte archiv zavřený. Pokud support navrhl nové registrační pole a archiv jasně říká, že se téma vrací jen při selhání před prvním importem, není potřeba znovu číst celou historii. Stačí napsat, že dnešní dotaz se řeší lokální nápovědou a registrace se nemění.
+
+Stav `opravit najitelnost minima` použijte, když záznam existoval, ale člověk ho našel až přes kolegu, starý odkaz nebo náhodné hledání. Oprava má být malá: lepší název, alias, odkaz z pracovního místa nebo jedna věta v rozcestníku. Nezakládejte novou archivní strukturu jen proto, že jeden záznam měl špatné jméno.
+
+Stav `zpřesnit pracovní větu` patří situaci, kdy záznam šel najít, ale člověk nevěděl, co má dnes udělat. Věta "registraci držíme jednoduchou" je hezký princip, ale slabá instrukce. Věta "registrace zůstává bez otázky na velikost týmu; kontext spolupráce řešíme až po prvním importu" už vede práci.
+
+Stav `otevřít nový malý krok` používejte jen tehdy, když dnešní situace opravdu splnila návratový signál. Ani potom neskákejte rovnou k původnímu širokému návrhu. Pokud tři účty za sebou selhaly kvůli chybějícímu kontextu spolupráce před prvním importem, první krok může být úprava onboardingové otázky, krátký experiment v potvrzovacím e-mailu nebo změna první obrazovky po registraci. Povinné registrační pole je pořád jen jedna možnost, ne nárok minulosti na návrat.
+
+### Praktický SaaS příklad
+
+Dnešní podnět:
+
+```text
+Support navrhl přidat do registrace pole "velikost týmu", protože dva noví uživatelé se ptali, kde pozvat kolegy.
+```
+
+Archivní minimum:
+
+```text
+Registrace zůstává bez otázky na velikost týmu; kontext spolupráce řešíme až po prvním importu, pokud je potřeba.
+
+Návratový signál:
+Téma se vrátí pouze pokud tři nové účty za sebou selžou v onboardingu kvůli chybějícímu kontextu spolupráce ještě před prvním importem.
+```
+
+Uzavření:
+
+```text
+Uzavírací stav:
+Zavřít dnešní podnět.
+
+Proč:
+Dnešní situace nenaplnila návratový signál. Dotazy vznikly až po registraci a týkaly se pozvání kolegů, ne selhání před prvním importem.
+
+Co děláme:
+Do nápovědy po prvním importu doplňujeme jednu větu: "Kolegy můžete pozvat v nastavení projektu."
+
+Co zůstává zavřené:
+Pole velikosti týmu v registraci, automatická segmentace podle registrace a export těchto odpovědí do marketingové tabulky.
+```
+
+Slabší výsledek může vypadat jinak:
+
+```text
+Problém:
+Archivní minimum existovalo, ale support ho hledal pod "pozvání kolegů" a nenašel záznam pojmenovaný "registrační kvalifikační atribut".
+
+Uzavírací stav:
+Opravit najitelnost minima.
+
+Oprava:
+K archivnímu záznamu přidáváme alias "velikost týmu / pozvání kolegů" a odkaz z onboardingové nápovědy.
+
+Co neotevíráme:
+Novou dokumentaci registrace, redesign onboardingu ani sběr velikosti týmu.
+```
+
+Tady není problém v rozhodnutí, ale v cestě k němu. Oprava proto zůstává u názvu a odkazu. To je často nejlepší druh systémové práce: tak malý, že se skoro nedá prezentovat, a tak praktický, že příště ušetří celý rozhovor.
+
+### Privacy-first uzavření
+
+Při uzavření prvního dohledání hlídejte, aby se z dnešního podnětu nestala nová datová vrstva. Stačí málo: někdo zkopíruje zákaznickou zprávu do poznámky, udělá screenshot support tiketu, založí pomocný sloupec "chybí tým" nebo začne značkovat účty ručním štítkem. Pokud to nemá jasný účel pro další rozhodnutí, nevzniká to.
+
+Použijte tři řádky:
+
+```text
+Do dnešního závěru přenášíme:
+
+Do archivu nepřidáváme:
+
+Dál nesbíráme:
+```
+
+Příklad:
+
+```text
+Do dnešního závěru přenášíme:
+Anonymizovaný fakt, že podnět přišel ze dvou dotazů na pozvání kolegů po registraci.
+
+Do archivu nepřidáváme:
+Kopie support zpráv, názvy účtů, screenshoty ani pomocnou tabulku.
+
+Dál nesbíráme:
+Velikost týmu v registraci, automatický segment podle týmu a marketingový export registračních odpovědí.
+```
+
+Tím se zachová rozhodovací hodnota a nepřenese se zbytečná citlivost. Privacy-first provoz není odmítání poznatků. Je to schopnost nechat si poznatek a netahat s ním celý pytel detailů, které už k práci nepotřebujete.
+
+Codyho komentář: archivní minimum má být jako dobrá cedule na dveřích. Řekne vám, jestli máte vejít, nebo ne. Nemá vás nutit otevřít sklep, vytáhnout staré krabice a číst poznámky lidí, kteří už dávno řešili něco jiného. Sklep někdy potřebujete, jasně. Ale ne kvůli každému zaklepání.
+
+### Karta uzavření prvního dohledání
+
+```text
+Dnešní podnět:
+
+Dohledané archivní minimum:
+
+Návratový signál z archivu:
+
+Dnešní porovnání se signálem:
+
+Uzavírací stav:
+- zavřít dnešní podnět
+- opravit najitelnost minima
+- zpřesnit pracovní větu
+- otevřít nový malý krok
+
+Jednovětý závěr:
+
+Co lokálně opravujeme:
+
+Co zůstává výslovně zavřené:
+
+Do dnešního závěru přenášíme:
+
+Do archivu nepřidáváme:
+
+Dál nesbíráme:
+
+Kde je závěr uložený:
+
+Vlastník:
+```
+
+Kartu používejte hlavně při prvním dohledání nebo tam, kde se záznam ukázal jako špatně najitelný. U jednoduchého případu stačí jednovětý závěr u dnešního podnětu a případný odkaz na archivní minimum.
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: přečtěte dnešní podnět.
+2. Minuta 2: přečtěte archivní minimum a návratový signál.
+3. Minuta 3: rozhodněte, jestli návratový signál nastal.
+4. Minuta 4: vyberte jeden uzavírací stav.
+5. Minuta 5: napište jednovětý závěr.
+6. Minuta 6: určete případnou lokální opravu najitelnosti nebo pracovní věty.
+7. Minuta 7: udělejte privacy-first úklid a napište, co dál nesbíráte.
+
+Když se workshop začne měnit v debatu o tom, jestli bylo původní rozhodnutí správné, vraťte se k dnešnímu signálu. První dohledání není soud s minulostí. Je to rozhodnutí, zda dnešní podnět splňuje bránu, kterou si tým sám nastavil.
+
+### Checklist uzavření prvního dohledání
+
+- Máme jasně popsaný dnešní podnět?
+- Našli jsme správné archivní minimum?
+- Porovnali jsme dnešní situaci s konkrétním návratovým signálem?
+- Vybrali jsme jeden uzavírací stav?
+- Pokud signál nenastal, zůstává původní široký návrh výslovně zavřený?
+- Pokud opravujeme najitelnost, jde jen o název, alias, odkaz nebo nejbližší pracovní místo?
+- Pokud zpřesňujeme pracovní větu, je napsaná v přítomném čase a použitelná bez historie?
+- Pokud otevíráme nový malý krok, je menší než původní široký návrh?
+- Nepřidali jsme do archivu kopie zákaznických zpráv, screenshoty, pomocné tabulky nebo ruční štítky bez jasného účelu?
+- Je zapsané, jaká data dál nesbíráme?
+- Ví další člověk, kde závěr najde, aniž by četl celou historii?
+
+Uzavření prvního dohledání archivního minima má udělat z archivu normální pracovní nástroj. Když stačí, téma se zavře. Když nestačí, opraví se nejbližší slabina. A když signál opravdu nastal, otevře se malý krok s novou hranicí. Díky tomu archiv nezůstává muzeem starých rozhodnutí, ale funguje jako klidná paměť systému, která chrání rozsah práce i data.
+
 ## Pracovní log
 
+- 2026-07-05: Doplněna úvodní podkapitola o uzavření prvního dohledání archivního minima: čtyři uzavírací stavy, praktický SaaS příklad, privacy-first uzavření bez nové datové vrstvy, karta, mini workshop a checklist.
 - 2026-07-05: Doplněna úvodní podkapitola o prvním dohledání archivního minima v běžné práci: ověření najitelnosti, pracovní věty a návratového signálu, praktický SaaS příklad, privacy-first kontrola hlubší historie, karta, mini workshop a checklist.
 - 2026-07-05: Doplněna úvodní podkapitola o archivním minimu neotevřeného kroku: aktivní minimum, hlubší historie, praktický SaaS příklad, privacy-first archivace, karta, mini workshop a checklist.
 - 2026-07-05: Doplněna úvodní podkapitola o uzavření druhého dlouhodobého review neotevřeného kroku: uzavírací stavy, praktické příklady, archivace aktivního záznamu, privacy-first úklid stop, karta, mini workshop a checklist.
