@@ -205,6 +205,132 @@ Neotevřený krok má být malý, přesný a dohledatelný. Když ho zapíšete 
 
 Uložte záznam tam, kde se podnět pravděpodobně vrátí: k formuláři, obchodnímu skriptu, stránce nebo onboardingovému kroku. Samostatný dokument je užitečný až ve chvíli, kdy tým podobných záznamů řeší víc a potřebuje je pravidelně porovnávat.
 
+## Běžná kontrola neotevřeného kroku
+
+Neotevřený krok nemusí čekat jen na velký návratový signál. Někdy se potká s realitou úplně obyčejně: při další poptávce, při použití šablony, při měsíčním review, při obchodním hovoru nebo při úpravě stránky, ke které byl záznam původně připojený. V tu chvíli nejde o nové otevření práce. Jde o krátkou kontrolu, jestli se původní důvod neotevření pořád drží.
+
+Rozdíl je důležitý. Návratový signál říká: "máme nový důvod téma znovu posoudit." Běžná kontrola říká: "téma se přirozeně mihlo kolem práce, ověřme, že ho nemusíme zvedat ze stolu." Pokud tým tyto dvě věci plete, začne z každé připomínky vyrábět novou iteraci. A to je velmi elegantní způsob, jak se tvářit jako produktový tým a přitom jen přehazovat staré nápady z hromádky na hromádku.
+
+Běžnou kontrolu proto dělejte malou. Stačí jedna pracovní otázka:
+
+```text
+Ukázalo se při dnešní běžné práci něco, co mění důvod, proč jsme tento krok neotevřeli?
+```
+
+Pokud odpověď zní ne, nevzniká úkol. Vzniká pouze krátká poznámka, že rozhodnutí zůstává platné. Ta poznámka je užitečná hlavně proto, že chrání tým před tichým znovuotevřením. Když se stejný podnět za týden objeví znovu, uvidíte, že jste ho nedávno neignorovali; prostě se nepotvrdil.
+
+### Co kontrolovat
+
+V běžné kontrole nečtěte celou historii. Podívejte se jen na čtyři věci:
+
+- Původní podnět: co někdo chtěl otevřít?
+- Důvod neotevření: proč to tehdy nedávalo smysl?
+- Dnešní kontakt s realitou: kde se téma znovu potkalo s prací?
+- Změna důkazu: přibylo něco, co původní závěr mění?
+
+Praktický příklad:
+
+```text
+Původní podnět:
+Přidat do poptávkového formuláře pole pro rozpočet.
+
+Důvod neotevření:
+Problém nebyl v rozpočtu, ale v nejasném cíli projektu.
+
+Dnešní kontakt s realitou:
+Přišla další relevantní poptávka a obchod ji dokázal kvalifikovat bez doptání na rozpočet.
+
+Závěr:
+Neotevřený krok zůstává zavřený. Původní důvod se nemění a nové pole pořád nepřidáváme.
+```
+
+Tohle není administrativní román. Jsou to čtyři krátké věty, které drží hranici. Pokud je neumíte napsat rychle, pravděpodobně už nejste v běžné kontrole, ale v návratu nebo novém tématu.
+
+### Tři výsledky běžné kontroly
+
+Běžná kontrola má mít jen tři možné výsledky:
+
+- Zůstává zavřeno: dnešní práce původní důvod neotevření potvrzuje nebo se ho netýká.
+- Zpřesnit záznam: téma se neotevírá, ale karta potřebuje přesnější návratový signál, pracovní místo nebo příklad.
+- Otevřít návrat: objevil se konkrétní návratový signál, který splňuje původní podmínku nebo ji jasně nahrazuje lepším důkazem.
+
+Čtvrtý stav "nějak to ještě sledujme" nepřidávejte. To je většinou jen nenápadný způsob, jak začít sbírat data bez rozhodnutí. Když potřebujete sledovat, napište co přesně, proč, kde to skončí a kdo to smaže. Pokud to napsat nechcete, pravděpodobně to sledovat nepotřebujete.
+
+### Privacy-first kontrola
+
+Běžná kontrola je dobré místo pro úklid datové opatrnosti. U neotevřeného kroku se ptejte:
+
+```text
+Nevznikla kolem tohoto zavřeného tématu dočasná data, která už nemají důvod existovat?
+```
+
+Může jít o ruční poznámky v CRM, export poptávek, dočasný štítek, komentář ve sdíleném dokumentu, screenshot formuláře nebo seznam příkladů. Pokud téma zůstává zavřené, tyto pomocné stopy často nemají dál žít. Buď je smažte, anonymizujte, nebo přepište do obecného poznatku bez osobních a obchodních detailů.
+
+Příklad:
+
+```text
+Běžná kontrola potvrdila, že rozpočet ve formuláři nepřidáváme. Dočasný seznam tří poptávek mažeme a v kartě necháváme jen obecnou větu: poslední kontrola nepotvrdila problém s kvalifikací bez rozpočtu.
+```
+
+Tím se privacy-first přístup neodehrává až při velkých rozhodnutích o nástrojích. Odehrává se i v malém provozním uklízení. Méně dat, méně vysvětlování, méně budoucího "proč to tady vlastně máme".
+
+### Karta běžné kontroly
+
+```text
+Neotevřený krok:
+
+Kde je původní záznam:
+
+Dnešní běžný kontakt s realitou:
+
+Mění se původní důvod neotevření?
+- ne, zůstává zavřeno
+- ne, ale zpřesníme záznam
+- ano, otevíráme návrat
+
+Jednovětý závěr:
+
+Co dál výslovně neotevíráme:
+
+Jaká data díky tomu pořád nesbíráme:
+
+Jaké dočasné stopy mažeme, anonymizujeme nebo zavíráme:
+
+Kde bude poznámka uložená:
+
+Vlastník:
+
+Datum další kontroly, pokud opravdu existuje důvod:
+```
+
+Datum další kontroly nepište ze zvyku. Pokud neexistuje návratový signál ani přirozený rytmus, žádné datum nepotřebujete. Neotevřený krok může zůstat klidně zavřený bez budíku. Produktová práce není adventní kalendář; není nutné každý den otevírat další okénko.
+
+### Mini workshop na 8 minut
+
+1. Minuta 1: najděte původní záznam neotevřeného kroku.
+2. Minuta 2: pojmenujte dnešní běžný kontakt s realitou.
+3. Minuty 3 až 4: rozhodněte, jestli se mění důvod neotevření.
+4. Minuta 5: napište jeden ze tří výsledků kontroly.
+5. Minuta 6: napište, co dál výslovně neotevíráte.
+6. Minuta 7: zkontrolujte dočasné datové stopy.
+7. Minuta 8: uložte poznámku k původnímu pracovnímu místu.
+
+Pokud se během osmi minut ukáže, že potřebujete víc lidí, víc dat nebo širší debatu, přestaňte tomu říkat běžná kontrola. Zapište, že se objevil možný návratový signál, a otevřete samostatný návrat podle předchozí šablony. To není prohra. To je přesné pojmenování velikosti práce.
+
+### Checklist běžné kontroly
+
+- Kontrolujeme konkrétní neotevřený krok, ne obecný starý nápad?
+- Víme, kde se dnes téma přirozeně potkalo s prací?
+- Odpověděli jsme, zda se mění původní důvod neotevření?
+- Vybrali jsme jeden ze tří výsledků: zavřeno, zpřesnit záznam, otevřít návrat?
+- Je zapsané, co dál výslovně neotevíráme?
+- Je jasné, jaká data, pole, trackery nebo exporty pořád nepřidáváme?
+- Zkontrolovali jsme dočasné poznámky, exporty a příklady?
+- Uložili jsme závěr tam, kde se téma příště objeví?
+- Nevznikl nový kontrolní rytmus jen ze zvyku?
+
+Běžná kontrola neotevřeného kroku má být nudná. To je její síla. Když potvrdí, že není co otevírat, nechte práci pokračovat. Dobře zavřená věc nepotřebuje ceremonii; potřebuje jen krátkou stopu, aby ji tým příště neotevíral od nuly.
+
 ## Návrat k neotevřenému kroku
 
 Neotevřený krok se někdy vrátí. To není chyba původního rozhodnutí. Dobrý záznam nemá téma navždy zamknout do sklepa; má zajistit, že se otevře až ve chvíli, kdy přijde lepší důvod než minule. Rozdíl je v tom, že návrat neznamená automatické spuštění původního návrhu. Znamená novou kontrolu: jestli se opravdu objevil návratový signál, jestli pořád platí stejná pracovní otázka a jestli lze otevřít menší krok než ten, který byl minule zamítnutý.
@@ -301269,3 +301395,4 @@ Uzavřené druhé dohledání má být nudné v tom nejlepším smyslu. Záznam 
 - 2026-07-04: Doplněna úvodní podkapitola o prvním dlouhodobém review po stabilizaci pravidla: tři kontrolní otázky, čtyři výsledky review, privacy-first úklid datové stopy, karta, mini workshop a checklist.
 - 2026-07-04: Doplněna úvodní podkapitola o uzavření druhé kontroly po zředění revizního rytmu: uzavírací věta, stavy rytmu a pravidla, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-07-05: Doplněna krátká úvodní poznámka, aby neotevřený krok měl přirozené místo další kontroly v běžném rytmu práce.
+- 2026-07-05: Doplněna úvodní podkapitola o běžné kontrole neotevřeného kroku: rozlišení kontroly od návratu, tři výsledné stavy, privacy-first úklid dočasných stop, karta, mini workshop a checklist.
