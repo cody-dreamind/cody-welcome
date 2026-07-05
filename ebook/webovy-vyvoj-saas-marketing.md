@@ -298220,8 +298220,202 @@ Když během workshopu vznikne chuť "rovnou to celé přehodnotit", zastavte se
 
 První dlouhodobé review je hotové, když pasivní rozhodnutí buď zůstane lehké, nebo se přesně ukáže, proč už lehké být nemůže. Cílem není udržet staré rozhodnutí za každou cenu. Cílem je nepustit do systému novou práci a nová data bez jasného důvodu. To je malá, nenápadná věc, ze které se skládá důvěryhodný evropský provoz.
 
+## Uzavření prvního dlouhodobého review neotevřeného kroku
+
+První dlouhodobé review nesmí zůstat jako poznámka typu "zkontrolováno". Taková věta vypadá uklidňujícím dojmem, ale za půl roku nikomu neřekne, co vlastně zůstalo zavřené, co se přesunulo a jaká data se dál nesbírají. Uzavření review má proto udělat tři věci: pojmenovat výsledek, vrátit rozhodnutí do běžného pracovního místa a odstranit dočasné stopy, které vznikly jen kvůli kontrole.
+
+Začněte uzavírací větou:
+
+```text
+Dlouhodobé review uzavíráme se stavem:
+```
+
+Dobrá věta:
+
+```text
+Dlouhodobé review uzavíráme se stavem "aktualizovat kotvu": rozhodnutí nesbírat rozpočet v prvním formuláři dál platí, ale přesouváme jeho pracovní větu ze starého obchodního checklistu do nové šablony auditu.
+```
+
+Slabá věta:
+
+```text
+Review hotovo, zatím nic.
+```
+
+Slabá věta má dva problémy. Neříká, jestli "nic" znamená potvrzený pasivní klid, nebo jen nedostatek energie. A neříká, kde se má člověk příště podívat. U pasivních rozhodnutí je místo uložení skoro stejně důležité jako samotný závěr. Co nejde najít při běžné práci, začne se časem řešit znovu.
+
+### Čtyři uzavírací stavy
+
+Uzavření navazuje na výsledek review:
+
+- Pasivní klid potvrzen: zapište jednu větu k původnímu pracovnímu místu a neplánujte další kontrolu.
+- Kotva přesunuta: přeneste krátké pravidlo do nového pracovního místa a starou stopu označte jako nahrazenou.
+- Tichá stopa uklizena: zastavte nebo smažte náhradní evidenci a napište, proč se z ní nestává nový standard.
+- Nové malé posouzení otevřeno: založte samostatnou kartu s novou otázkou a starý neotevřený krok nechte zavřený v původním rozsahu.
+
+`Pasivní klid potvrzen` je nejčistší závěr. Neznamená, že se už nikdy nic nezmění. Znamená, že dnešní kontakt s pracovním místem nepřinesl důvod k nové práci. Závěr má být krátký:
+
+```text
+Pasivní klid potvrzen. Původní návratový signál nepřišel, pracovní místo se relevantně nezměnilo a nevznikla žádná nová evidence rozpočtu. Další kontrolu neplánujeme; téma se smí vrátit pouze přes původní návratový signál nebo při další relevantní změně formuláře.
+```
+
+`Kotva přesunuta` vyžaduje jeden praktický úkon. Nestačí napsat, že pravidlo "platí dál". Musí bydlet tam, kde ho člověk uvidí při práci. Pokud se změnila šablona, přesuňte větu do šablony. Pokud se změnil formulář, dejte větu k formuláři. Pokud se změnil obchodní proces, dejte ji do obchodního checklistu.
+
+`Tichá stopa uklizena` je citlivější. Tým často vytvoří náhradní evidenci s dobrým úmyslem: "jen abychom měli přehled". Jenže pokud původní rozhodnutí říkalo nesbírat údaj bez jasného účelu, tichá evidence není nevinná zkratka. Je to nové zpracování dat bez pořádné brány. Uzavření musí říct, co se zastavilo, co se maže nebo anonymizuje a co by muselo existovat, aby se téma otevřelo znovu.
+
+`Nové malé posouzení otevřeno` odděluje starou historii od nové reality. Starý krok se neodemkne automaticky. Jen vznikne nová otázka, třeba:
+
+```text
+Nová otázka:
+Potřebujeme u nabídky dlouhodobého SaaS partnerství lépe kvalifikovat ekonomický rozsah projektu, aniž bychom do prvního formuláře přidávali povinný rozpočet?
+```
+
+To je jiné téma než původní návrh "přidat pole rozpočet". Rozdíl vypadá drobně, ale v praxi chrání rozsah práce i soukromí zákazníka.
+
+### Praktický příklad uzavření
+
+Situace:
+
+```text
+Při aktualizaci landing page pro privacy-first SaaS audit tým zkontroloval starý neotevřený krok: nepřidávat povinné pole "rozpočet" do prvního poptávkového formuláře.
+```
+
+Review našlo:
+
+```text
+Návratový signál nepřišel.
+Nová šablona auditu ale neobsahuje původní větu o tom, proč rozpočet v prvním kontaktu nesbíráme.
+Skrytá datová stopa nevznikla.
+```
+
+Uzavření:
+
+```text
+Stav:
+Kotva přesunuta.
+
+Co měníme:
+Do nové šablony auditu přidáváme pracovní větu: "Rozpočet v prvním formuláři nesbíráme; pokud je pro kvalifikaci potřeba, ptáme se volitelně až v obchodním follow-upu."
+
+Co zůstává zavřené:
+Povinné pole rozpočtu, CRM atribut rozpočtu a scoring podle odhadované kupní síly.
+
+Co uklízíme:
+Starý odkaz v původním obchodním checklistu označujeme jako nahrazený novou šablonou auditu.
+
+Jaká data dál nesbíráme:
+Rozpočtový údaj v prvním kontaktu, automatický odhad rozpočtu a behaviorální signály pro scoring hodnoty leadu.
+```
+
+Varianta s tichou stopou:
+
+```text
+Stav:
+Tichá stopa uklizena.
+
+Co měníme:
+Rušíme interní sloupec "odhad rozpočtu", který vznikl v pomocné tabulce při přípravě nové nabídky.
+
+Co děláme s existující stopou:
+Konkrétní odhady mažeme. Ponecháváme jen anonymní poznámku, že tým potřebuje jasněji rozlišit malý audit od dlouhodobého vývojového partnerství.
+
+Co zůstává zavřené:
+Povinné pole rozpočtu i scoring podle rozpočtu.
+
+Kdy se téma smí vrátit:
+Až když vznikne nová rozhodovací otázka, jasný účel zpracování, vlastník a místo v datové mapě.
+```
+
+Codyho komentář: tichá stopa je přesně ten typ věci, která se v týmu tváří jako "to není systém, jen tabulka". Gratuluju, tabulka je systém v tričku s nápisem "já nic". Když v ní držíte osobní nebo obchodně citlivé údaje, chovejte se k ní jako k systému.
+
+### Privacy-first uzavření
+
+Uzavření review musí výslovně říct, jaká data dál nevznikají. Nestačí napsat, že "privacy dopad je nulový". Nulový dopad je potřeba rozložit na konkrétní provozní věci:
+
+```text
+Po uzavření review dál nevzniká:
+- nové pole ve formuláři
+- nový CRM atribut
+- nový export do marketingového nástroje
+- nový ruční scoring
+- nová retence pomocných poznámek
+- nový přístup pro dalšího dodavatele
+```
+
+Pokud se něco uklízelo, doplňte i výsledek:
+
+```text
+Pomocná tabulka byla zastavena, konkrétní odhady smazány a anonymní závěr přesunut do rozhodovacího logu. Staré sdílení tabulky bylo zrušeno.
+```
+
+Tím se privacy-first hodnota nepíše jako slogan, ale jako inventura stop. Evropský provoz není jen otázka regionu serveru. Je to schopnost říct, proč určitý údaj vůbec nemáte. Občas je nejlepší bezpečnostní opatření prostě nevyrábět další citlivou kolonku. Nudné? Ano. Účinné? Taky ano.
+
+### Karta uzavření dlouhodobého review
+
+```text
+Neotevřený krok:
+
+Původní pracovní místo:
+
+Dnešní pracovní místo:
+
+Proč review vzniklo:
+
+Výsledek review:
+- pasivní klid potvrzen
+- kotva přesunuta
+- tichá stopa uklizena
+- nové malé posouzení otevřeno
+
+Uzavírací věta:
+
+Co zůstává zavřené:
+
+Co se přesunulo:
+
+Co se uklidilo:
+
+Jaká data dál nesbíráme:
+
+Kde je aktuální závěr uložený:
+
+Co by téma znovu otevřelo:
+
+Kdo závěr viděl nebo komu byl předán:
+```
+
+Poslední řádek není formalita. Pokud uzavření ovlivňuje obchod, support nebo produkt, člověk v dané roli musí vědět, kde rozhodnutí najde. Jinak se za měsíc objeví stejný podnět a bude se tvářit jako nový. To je oblíbený firemní trik: recyklace nejistoty bez recyklačního symbolu.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte výsledek dlouhodobého review.
+2. Minuta 2: napište uzavírací větu jedním stavem.
+3. Minuta 3: určete aktuální pracovní místo, kde závěr musí bydlet.
+4. Minuta 4: zapište, co zůstává zavřené.
+5. Minuta 5: zkontrolujte a ukliďte dočasné stopy po review.
+6. Minuta 6: napište, jaká data dál nesbíráte a co by téma znovu otevřelo.
+
+Workshop má skončit jedním uzavřeným záznamem, ne plánem dalšího zkoumání. Pokud se ukáže, že potřebujete nové posouzení, založte ho jako samostatnou kartu. Staré review zavřete, jinak bude nové téma viset na staré historii a nikdo nebude vědět, co ještě platí.
+
+### Checklist uzavření dlouhodobého review
+
+- Má review jeden jasný uzavírací stav?
+- Je napsaná uzavírací věta, kterou pochopí člověk mimo původní diskusi?
+- Víme, kde aktuální závěr bydlí?
+- Je staré pracovní místo označené jako nahrazené, pokud se kotva přesunula?
+- Je výslovně napsané, co zůstává zavřené?
+- Pokud vznikla tichá stopa, je jasné, co se maže, anonymizuje nebo zastavuje?
+- Pokud vzniká nové malé posouzení, má vlastní otázku a nevydává se za pokračování starého návrhu?
+- Je zapsané, jaká data dál nesbíráme?
+- Nevznikl kvůli uzavření nový tracker, export, pole ani ruční scoring?
+- Ví příslušná role, kde rozhodnutí najde při běžné práci?
+- Je další návrat vázaný na signál, ne na obecný pocit, že "by bylo dobré se k tomu někdy vrátit"?
+
+Uzavřené dlouhodobé review má být tiché. Ne proto, že by bylo nedůležité, ale proto, že už nevyžaduje zvláštní pozornost. Rozhodnutí je na správném místě, dočasné stopy jsou pryč, další návrat má podmínku a datová hranice zůstává čitelná. To je přesně ten typ provozní čistoty, která nevypadá efektně na prezentaci, ale šetří čas, nervy a zbytečně nasbíraná data.
+
 ## Pracovní log
 
+- 2026-07-05: Doplněna úvodní podkapitola o uzavření prvního dlouhodobého review neotevřeného kroku: uzavírací stavy, praktický příklad, privacy-first úklid stop, karta, mini workshop a checklist.
 - 2026-07-05: Doplněna úvodní podkapitola o prvním dlouhodobém review neotevřeného kroku v pasivním provozu: přirozený důvod kontroly, tři otázky, čtyři výsledky, praktický SaaS příklad, privacy-first kontrola skrytých stop, karta, mini workshop a checklist.
 - 2026-07-05: Doplněna úvodní podkapitola o převodu neotevřeného kroku do dlouhodobého pasivního provozu: převodová věta, praktický SaaS příklad, privacy-first úklid dočasných stop, karta, mini workshop a checklist.
 - 2026-07-05: Doplněna úvodní podkapitola o uzavření druhé běžné kontroly neotevřeného kroku: uzavírací stavy, praktický SaaS příklad, úklid náhradní evidence, privacy-first závěr, karta, mini workshop a checklist.
