@@ -295833,8 +295833,151 @@ Když workshop nemá co opravovat, skončete dřív. Šest minut je horní hrani
 
 Třetí běžné použití čtenářské mapy má potvrdit, že navigace v e-booku umí žít bez zvláštní péče. Pokud pomůže, nechte ji pomáhat. Pokud potřebuje drobnou opravu, udělejte ji na nejbližším místě. Pokud začne vyrábět evidenci, zastavte ji dřív, než se z užitečné mapy stane další systém, který někdo musí udržovat jen proto, že jednou vznikl.
 
+## Uzavření třetího běžného použití čtenářské mapy
+
+Třetí běžné použití čtenářské mapy uzavíráte jinak než první dvě. První použití mělo ověřit, že mapa vůbec dovede člověka na správné místo. Druhé použití mělo ukázat, že případná oprava přežije bez čerstvé redakční paměti. Třetí použití má rozhodnout, jestli mapa patří do dlouhodobého pasivního provozu, nebo jestli kolem ní pořád vzniká práce, kterou ještě neumíte pustit z ruky.
+
+Uzavření proto nezačínejte otázkou "co všechno bychom mohli zlepšit". Začněte otázkou:
+
+```text
+Může čtenářská mapa po třetím běžném použití zůstat bez další zvláštní kontroly?
+```
+
+Pokud odpověď zní ano, uzavření má být krátké. Čím delší závěr píšete k nástroji, který má fungovat pasivně, tím větší je riziko, že si jen vyrábíte další provozní rituál. Mapa nemá dostat medaili za každé použití. Má být najitelná, použitelná a neotravná. Skromný život, ale někdo ho žít musí.
+
+Začněte jednou uzavírací větou:
+
+```text
+Po třetím běžném použití necháváme čtenářskou mapu v pasivním provozu, protože dovedla čtenáře ke správnému výřezu bez lokální opravy a bez nové evidence.
+```
+
+Když věta není pravdivá, neohýbejte realitu. Vyberte přesnější stav. Třetí použití může dopadnout dobře, částečně dobře, nebo může ukázat, že mapa ještě není pasivní. Všechny tři výsledky jsou užitečné, pokud z nich nevznikne pět nových paralelních oprav.
+
+### Čtyři uzavírací stavy
+
+Po třetím použití vyberte jeden stav:
+
+- Stabilní pasivní provoz: mapa pomohla, nevznikla oprava, nevznikla evidence a další kontrola není naplánovaná.
+- Poslední lokální dočištění: mapa pomohla, ale jedna věta, odkaz nebo pořadí ještě potřebuje drobnou úpravu.
+- Samostatná redakční otázka: mapa vedla správně, ale cílový výřez není dost samostatný.
+- Ukončení zbytečné evidence: mapa začala vytvářet tabulky, seznamy, reporty nebo jinou stopu, která nepomáhá rozhodování.
+
+Stabilní pasivní provoz je nejčistší výsledek. Zapište jen kanonické místo mapy a případný návratový signál. Neplánujte čtvrté běžné použití jen proto, že číslo čtyři vypadá uklizeně. Pokud mapa funguje, další práce má přijít až z reálného podnětu.
+
+Poslední lokální dočištění je pořád dobrý výsledek. Důležité je slovo "lokální". Opravte nejbližší formulaci, ne celou navigační logiku. Pokud čtenář zaváhal u vstupu "marketing", protože nepoznal, jestli jde o akvizici, follow-up nebo měření, zpřesněte tuto větu. Nepřepisujte kvůli tomu všechny marketingové kapitoly. To by byla velmi sofistikovaná forma vyhýbání se malé práci.
+
+Samostatná redakční otázka vzniká jen tehdy, když mapa svůj úkol splnila, ale cílová část čtenáři nepomohla. Pak není fér opravovat mapu. Mapa ukázala na správné dveře; problém je, že za nimi chybí použitelný stůl. Založte otázku k výřezu, například: "umí část o privacy-first měření fungovat jako samostatný odkaz po obchodním hovoru?"
+
+Ukončení zbytečné evidence je ochranný stav. Pokud se kolem mapy začaly hromadit screenshoty, poznámky o tom, kdo co četl, seznamy předaných odkazů nebo interní komentáře se zákaznickými detaily, uzavření má nejdřív zastavit tuto stopu. Mapa má pomáhat vybrat část e-booku, ne tiše budovat analytiku čtenářského chování.
+
+### Praktický příklad
+
+Tým potřetí použil mapu při přípravě follow-upu po úvodním hovoru o SaaS analytice. Cíl byl poslat jeden krátký výřez, který vysvětlí, proč začít rozhodovací otázkou a datovým minimem místo instalace dalšího nástroje.
+
+Dobré uzavření:
+
+```text
+Po třetím běžném použití necháváme mapu v pasivním provozu. Vstup "privacy-first provoz" dovedl obchod k výřezu o datové střídmosti, follow-up použil jen kanonický odkaz a nevznikla žádná nová evidence příjemců.
+```
+
+Částečné uzavření s lokální opravou:
+
+```text
+Mapa dovedla obchod ke správnému tématu, ale vstup "privacy-first provoz" je pro obchodní follow-up příliš široký. Zpřesňujeme ho na "privacy-first měření a datové minimum". Strukturu mapy ani cílový výřez teď neměníme.
+```
+
+Uzavření se samostatnou redakční otázkou:
+
+```text
+Mapa vedla správně, ale cílový výřez nejde poslat samostatně, protože mu chybí krátký příklad rozhodovací otázky. Mapu necháváme beze změny a otevíráme redakční otázku pouze k tomuto výřezu.
+```
+
+Uzavření zbytečné evidence:
+
+```text
+Při použití mapy vznikl návrh sledovat, komu byl který výřez poslán. Tuto evidenci nezavádíme. Ve follow-up šabloně zůstane jen kanonický odkaz a obecná věta, kdy se používá.
+```
+
+Všimněte si rozdílu: každá varianta končí jedním rozhodnutím. Žádná nepřidává nový dashboard, nový revizní kalendář ani další nástroj. Pokud se vám po třetím použití chce zakládat nový systém, dejte si vodu a zeptejte se, jestli opravdu řešíte čtenářskou mapu, nebo vlastní nervozitu z toho, že něco konečně funguje bez dozoru.
+
+### Privacy-first uzavření
+
+Uzavření třetího použití má být datově střídmé. Do trvalého záznamu patří jen:
+
+- anonymní typ pracovní situace,
+- použitý vstup v mapě,
+- cílová část nebo kanonický odkaz,
+- uzavírací stav,
+- případná lokální oprava nebo návratový signál.
+
+Nepatří tam jména lidí, konkrétní zákaznické situace, přepisy obchodních hovorů, CRM screenshoty, seznamy příjemců, otevření e-mailu ani poznámky typu "tomuto člověku se hodila kapitola X". Takové údaje možná patří do zákaznického procesu, pokud k tomu máte jasný důvod a pravidla. Nepatří do redakčního provozu e-booku.
+
+Privacy-first hodnota uzavření je v tom, že dobrý nástroj nepotřebuje kolem sebe sbírat důkaz vlastní existence. Pokud mapa pomohla, stačí kanonický odkaz a čistější práce. Pokud nepomohla, stačí anonymní důvod opravy. V obou případech držíte e-book jako pracovní pomůcku, ne jako další sklad stop.
+
+### Karta uzavření třetího použití mapy
+
+```text
+Třetí použití uzavíráme dne:
+
+Pracovní situace bez osobních detailů:
+
+Použitý vstup v mapě:
+
+Cílová část:
+
+Uzavírací stav:
+- stabilní pasivní provoz
+- poslední lokální dočištění
+- samostatná redakční otázka
+- ukončení zbytečné evidence
+
+Jednovětý závěr:
+
+Co se mění:
+
+Co se výslovně nemění:
+
+Jaká evidence nevzniká nebo se ruší:
+
+Kanonické místo mapy:
+
+Návratový signál, pokud existuje:
+```
+
+Kartu nevyplňujte pro čistý stabilní provoz, pokud stačí jedna věta u kanonického místa. Použijte ji hlavně ve chvíli, kdy něco opravujete, rušíte nebo oddělujete jako samostatnou redakční otázku. Formulář má sloužit rozhodnutí, ne rozhodnutí formuláři. Ano, formuláře bývají hladové. Nekrmte je bez důvodu.
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: přečtěte větu, proč se mapa potřetí použila.
+2. Minuta 2: ověřte, jestli mapa vedla ke správnému typu části.
+3. Minuta 3: ověřte, jestli cílová část šla použít samostatně.
+4. Minuta 4: vyberte jeden uzavírací stav.
+5. Minuta 5: napište jednovětý závěr.
+6. Minuta 6: zapište, co se výslovně nemění.
+7. Minuta 7: smažte nebo odmítněte zbytečnou evidenci a nechte jen kanonický odkaz nebo anonymní záznam opravy.
+
+Pokud první tři minuty ukážou stabilní pasivní provoz, workshop ukončete dřív. Není potřeba vyplnit zbytek času moudrými poznámkami. Někdy je nejlepší provozní rozhodnutí zavřít dokument a jít dělat skutečnou práci. Radikální, uznávám.
+
+### Checklist uzavření třetího použití mapy
+
+- Víme, proč se mapa použila potřetí?
+- Je pracovní situace anonymní a bez zákaznických detailů?
+- Vedla mapa ke správnému typu části?
+- Byla cílová část použitelná sama o sobě?
+- Vybrali jsme přesně jeden uzavírací stav?
+- Pokud mapa fungovala, zůstává v pasivním provozu bez plánované další kontroly?
+- Pokud něco drhlo, opravujeme nejbližší větu, odkaz nebo výřez místo celé struktury?
+- Pokud vznikla redakční otázka, týká se cílové části, ne celé mapy?
+- Zastavili jsme případnou zbytečnou evidenci použití mapy?
+- Je jasné, co se výslovně nemění?
+- Stačí trvalému záznamu kanonický odkaz, anonymní situace a rozhodnutí?
+- Existuje návratový signál, nebo mapu necháváme tiše fungovat?
+
+Uzavření třetího běžného použití je poslední kontrola před opravdu pasivním životem čtenářské mapy. Když mapa funguje, nechte ji být. Když potřebuje drobnost, opravte drobnost. Když odhalí slabý výřez, řešte výřez. A když začne vyrábět evidenci, zavřete kohoutek dřív, než si tým začne plést užitečný rozcestník s dalším provozním systémem.
+
 ## Pracovní log
 
+- 2026-07-05: Doplněna úvodní podkapitola o uzavření třetího běžného použití čtenářské mapy: čtyři uzavírací stavy, praktický SaaS follow-up příklad, privacy-first uzavření bez zbytečné evidence, karta, mini workshop a checklist.
 - 2026-07-05: Doplněna úvodní podkapitola o třetím běžném použití čtenářské mapy v pasivním provozu: přirozené použití, čtyři výsledky, praktické příklady, privacy-first pravidlo minimální stopy, karta, mini workshop a checklist.
 - 2026-07-05: Doplněna úvodní podkapitola o uzavření druhého běžného použití čtenářské mapy: čtyři uzavírací stavy, praktické příklady, privacy-first úklid dočasných podkladů, karta, mini workshop a checklist.
 - 2026-07-04: Doplněna úvodní podkapitola o druhém běžném použití čtenářské mapy po uzavření ověření: přenositelnost bez čerstvé redakční paměti, čtyři výsledky použití, praktický marketingový příklad, privacy-first úklid dočasných podkladů, karta, mini workshop a checklist.
