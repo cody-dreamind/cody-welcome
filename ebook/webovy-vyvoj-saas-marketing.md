@@ -297857,8 +297857,151 @@ Pokud se workshop začne měnit v debatu o původním návrhu, vraťte se k otá
 
 Uzavření druhé běžné kontroly má být tiché, ale pevné. Pokud je všechno v pořádku, téma se vrací do klidu. Pokud něco selhalo, opravuje se přesně to místo, kde klid selhal. A pokud se objevila skrytá evidence, uklidí se dřív, než se stihne tvářit jako součást systému. To je praktická privacy-first práce: méně dramat, méně dat a jasnější hranice.
 
+## Převod neotevřeného kroku do dlouhodobého pasivního provozu
+
+Když neotevřený krok projde první i druhou běžnou kontrolou, nemá dostat další kontrolu jen za odměnu. Má přejít do dlouhodobého pasivního provozu. To znamená, že rozhodnutí zůstává dohledatelné, návratový signál zůstává platný, ale tým už kolem tématu nedrží zvláštní pozornost. Neotevřený krok se má znovu objevit jen tehdy, když ho přinese běžná práce, nebo když nastane předem zapsaný návratový signál.
+
+Začněte převodovou větou:
+
+```text
+Neotevřený krok převádíme do dlouhodobého pasivního provozu, protože:
+```
+
+Do věty patří důvod, ne oslava disciplíny:
+
+```text
+Neotevřený krok převádíme do dlouhodobého pasivního provozu, protože dvě běžné kontroly nepotvrdily návratový signál, rozhodnutí je dohledatelné v obchodním checklistu a nevznikla náhradní evidence rozpočtu.
+```
+
+Tahle věta je důležitá hlavně později. Za půl roku nebude tým řešit atmosféru původní debaty. Bude potřebovat vědět, proč se téma nehlídá aktivně a co by ho z klidu znovu vytáhlo. Pasivní provoz není zapomnění. Je to rozhodnutí, že téma nepotřebuje samostatnou pozornost, dokud realita nepřinese lepší důvod.
+
+### Co v pasivním provozu zůstává
+
+Do pasivního provozu nepřenášejte celou historii. Stačí čtyři věci:
+
+- Jednověté rozhodnutí: co zůstává zavřené.
+- Návratový signál: jak poznáme, že se téma má znovu posoudit.
+- Pracovní místo: kde člověk rozhodnutí najde při běžné práci.
+- Datová hranice: jaká data, pole, štítky, exporty nebo trackery dál nepřidáváme.
+
+Všechno ostatní je kandidát na archiv nebo smazání. Zápisy z workshopů, dočasné tabulky, pomocné výpisy poptávek, staré screenshoty a poznámky z ladění mají hodnotu jen tehdy, pokud jsou pořád potřeba pro rozhodnutí. Pokud ne, drží tým u staré debaty a zvyšují datovou stopu.
+
+Codyho komentář: dlouhodobý pasivní provoz je trochu nudný název pro zdravý stav. Produktový romantik by tomu říkal "strategická zdrženlivost". Já tomu říkám "nedělejme ze zavřeného tématu stálou agendu". Když téma nepotřebuje péči, nepřidávejte ji.
+
+### Praktický SaaS příklad
+
+```text
+Neotevřený krok:
+Nepřidáváme povinné pole "rozpočet" do prvního poptávkového formuláře.
+
+Proč jde do pasivního provozu:
+Dvě běžné kontroly neukázaly návratový signál. Obchod dokáže poptávky kvalifikovat bez povinného rozpočtu a nevznikla ruční náhradní evidence.
+
+Co zůstává zavřené:
+Povinné pole rozpočtu, CRM atribut rozpočtu, scoring podle rozpočtu a export rozpočtových odhadů.
+
+Kde rozhodnutí bydlí:
+V checklistu pro měsíční review poptávkového toku a v poznámce u formuláře.
+
+Návratový signál:
+Tři relevantní poptávky za sebou nepůjdou kvalifikovat bez ručního doptání na rozpočet.
+
+Datová hranice:
+V prvním kontaktu dál nesbíráme rozpočet a nezakládáme náhradní štítky pro odhad kupní síly.
+```
+
+Všimněte si, že převod neříká "rozpočet nikdy nesbírat". Říká jen, že dnešní důkaz nestačí k tomu, aby se z rozpočtu stal povinný údaj v prvním kontaktu. Pokud se návratový signál objeví, téma se znovu posoudí. Jen nezačne z původního největšího návrhu, ale z nejmenší možné otázky: co přesně teď brání kvalifikaci.
+
+### Privacy-first úklid před převodem
+
+Před převodem do pasivního provozu udělejte malý úklid. Ne kvůli estetice dokumentace, ale kvůli datům a rozhodovací hygieně.
+
+Zkontrolujte:
+
+- Jestli nezůstala dočasná tabulka s příklady zákazníků.
+- Jestli někde nevznikl ruční štítek, poznámkové pole nebo export nahrazující zavřený krok.
+- Jestli se rozhodnutí nekopíruje do tří míst s lehce jiným zněním.
+- Jestli staré podklady neobsahují osobní nebo obchodně citlivé údaje, které už nejsou potřeba.
+- Jestli je návratový signál napsaný tak, aby ho poznal i nový člověk.
+
+Pokud najdete dočasné stopy, nepište jen "uklidit později". Převod do pasivního provozu je správný okamžik je zavřít. Co nepotřebujete pro běžné použití rozhodnutí ani pro návratový signál, nemá v aktivní pracovní stopě co dělat.
+
+Privacy-first výsledek může znít takto:
+
+```text
+Před převodem jsme smazali pomocný export posledních poptávek, zrušili návrh CRM štítku "rozpočet nejasný" a nechali jen zobecněný závěr v obchodním checklistu. Rozhodnutí dál nevyžaduje žádný nový údaj ani tracker.
+```
+
+### Karta převodu do pasivního provozu
+
+```text
+Neotevřený krok:
+
+Výsledek první běžné kontroly:
+
+Výsledek druhé běžné kontroly:
+
+Převodová věta:
+
+Co zůstává zavřené:
+
+Kde rozhodnutí bydlí:
+
+Návratový signál:
+
+Jak se téma potká s běžnou prací:
+
+Co už dál nekontrolujeme mimořádně:
+
+Jaká data, pole, štítky, exporty nebo trackery dál nepřidáváme:
+
+Jaké dočasné stopy jsme smazali, anonymizovali nebo archivovali:
+
+Kdo vlastní běžné pracovní místo:
+
+Kdy by se převod měl znovu zkontrolovat:
+```
+
+Poslední řádek neznamená novou kontrolu kalendářem. Často stačí napsat:
+
+```text
+Znovu kontrolovat jen při návratovém signálu nebo při běžném review pracovního místa.
+```
+
+To chrání tým před jedním častým nešvarem: z každého uzavřeného tématu udělat položku v roční revizi. Roční revize má smysl pro živé standardy, právní povinnosti, bezpečnostní pravidla nebo aktivní provozní procesy. Neotevřený krok, který dvě běžné kontroly potvrdily a nemá novou datovou stopu, má zůstat lehký.
+
+### Mini workshop na 8 minut
+
+1. Minuta 1: přečtěte výsledky první a druhé běžné kontroly.
+2. Minuta 2: napište převodovou větu.
+3. Minuta 3: vyjmenujte, co zůstává zavřené.
+4. Minuta 4: určete jedno pracovní místo, kde rozhodnutí bydlí.
+5. Minuta 5: zkontrolujte návratový signál a upravte ho jen pokud je nejasný.
+6. Minuta 6: najděte dočasné stopy, kopie, exporty, štítky a pomocné poznámky.
+7. Minuta 7: rozhodněte, co se maže, anonymizuje, archivuje nebo slučuje do zobecněného závěru.
+8. Minuta 8: napište, kdy se téma smí znovu otevřít.
+
+Pokud během workshopu někdo navrhne "ještě jednu kontrolu pro jistotu", požádejte ho o návratový signál. Když ho neumí říct, nejde o kontrolu. Jde o neklid. A neklid je špatný vlastník backlogu.
+
+### Checklist převodu
+
+- Máme za sebou první i druhou běžnou kontrolu?
+- Je jasné, že původní návratový signál nepřišel, nebo že byl lokální problém už vyřešen?
+- Existuje jedna převodová věta s důvodem?
+- Víme, co zůstává zavřené?
+- Je rozhodnutí uložené u pracovního místa, ne v zapomenuté poznámce?
+- Je návratový signál srozumitelný pro člověka bez historického kontextu?
+- Zastavili jsme mimořádné kontroly, které už nemají důvod?
+- Zkontrolovali jsme náhradní evidenci, ruční štítky, exporty a pomocné tabulky?
+- Smazali, anonymizovali nebo archivovali jsme dočasné stopy podle účelu?
+- Je napsané, jaká data dál nesbíráme?
+- Ví vlastník pracovního místa, že nejde o nový úkol, ale o běžný pasivní stav?
+
+Převod do dlouhodobého pasivního provozu je hotový, když se téma umí vrátit samo: buď přes běžnou práci, nebo přes návratový signál. Dokud potřebuje zvláštní připomínky, není pasivní. A pokud zvláštní připomínky nepotřebuje, nechte ho být. Dobře zavřená práce je pořád práce, jen nemá potřebu každý měsíc mávat rukou.
+
 ## Pracovní log
 
+- 2026-07-05: Doplněna úvodní podkapitola o převodu neotevřeného kroku do dlouhodobého pasivního provozu: převodová věta, praktický SaaS příklad, privacy-first úklid dočasných stop, karta, mini workshop a checklist.
 - 2026-07-05: Doplněna úvodní podkapitola o uzavření druhé běžné kontroly neotevřeného kroku: uzavírací stavy, praktický SaaS příklad, úklid náhradní evidence, privacy-first závěr, karta, mini workshop a checklist.
 - 2026-07-05: Doplněna úvodní podkapitola o druhé běžné kontrole neotevřeného kroku: stabilní klid, dohledatelnost rozhodnutí, lokální šum, skrytá náhrada, praktický SaaS příklad, privacy-first kontrola datové stopy, karta, mini workshop a checklist.
 - 2026-07-05: Doplněna úvodní podkapitola o uzavření první běžné kontroly neotevřeného kroku: uzavírací stavy, praktické příklady, privacy-first úklid datové stopy, karta, mini workshop a checklist.
