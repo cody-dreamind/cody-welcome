@@ -295975,8 +295975,177 @@ Pokud první tři minuty ukážou stabilní pasivní provoz, workshop ukončete 
 
 Uzavření třetího běžného použití je poslední kontrola před opravdu pasivním životem čtenářské mapy. Když mapa funguje, nechte ji být. Když potřebuje drobnost, opravte drobnost. Když odhalí slabý výřez, řešte výřez. A když začne vyrábět evidenci, zavřete kohoutek dřív, než si tým začne plést užitečný rozcestník s dalším provozním systémem.
 
+## Návratový signál čtenářské mapy v dlouhodobém pasivním provozu
+
+Jakmile čtenářská mapa projde třetím běžným použitím a zůstane v pasivním provozu, nemá se otevírat jen proto, že někoho napadne lepší struktura. Lepší struktura je krásná věc, zejména v hlavě člověka, který právě pije kávu a má deset minut pocit, že všechno chápe. Ale pasivní provoz stojí na jiné disciplíně: mapu otevřete až ve chvíli, kdy přijde návratový signál z reálné práce.
+
+Návratový signál není nápad. Není to ani estetická nespokojenost, že by rozcestník mohl mít hezčí názvy. Je to konkrétní situace, ve které mapa nedokázala splnit svůj pracovní slib: pomoct člověku najít použitelnou část e-booku bez zvláštní redakční péče a bez sběru nové evidence.
+
+Začněte větou:
+
+```text
+Čtenářskou mapu znovu otevíráme pouze proto, že se v běžné práci objevil tento návratový signál:
+```
+
+Dobrá věta vypadá takto:
+
+```text
+Čtenářskou mapu znovu otevíráme pouze proto, že dva lidé nezávisle použili vstup "privacy-first provoz" a oba skončili u části o interních standardech místo u výřezu o datovém minimu pro SaaS analytiku.
+```
+
+Slabá věta vypadá takto:
+
+```text
+Čtenářská mapa by možná měla být přehlednější.
+```
+
+Druhá věta může být pravdivá, ale není akční. Neříká, kde mapa selhala, koho poslala špatně, jaký výřez chyběl ani jakou práci tím zdržela. Pokud neumíte návratový signál popsat bez mlhy, mapu neotevírejte. Zapište podnět stranou a počkejte na reálné použití.
+
+### Co se počítá jako návratový signál
+
+Za návratový signál považujte jednu z těchto situací:
+
+- Člověk použil mapu, ale skončil u špatného typu části.
+- Mapa vedla ke správnému tématu, ale ne k samostatně použitelnému výřezu.
+- Dva různé vstupy v mapě vedou k prakticky stejnému rozhodnutí a čtenář neví, který zvolit.
+- Použití mapy opakovaně vytváří pomocnou komunikaci, kterou by mapa měla odstranit.
+- Kolem mapy začíná vznikat evidence použití, která nemá rozhodovací hodnotu.
+
+První čtyři signály míří na použitelnost. Pátý míří na privacy-first hygienu. Oba typy jsou důležité, ale nemají stejnou reakci. Když mapa vede špatně, opravujte navigaci. Když mapa začíná sbírat stopy, zastavujte provozní návyk. Nepleťte tyto věci dohromady, jinak budete opravovat text tam, kde ve skutečnosti stačí smazat tabulku.
+
+Praktický příklad:
+
+```text
+Situace:
+Support hledá výřez, který může poslat zákazníkovi po dotazu na bezpečné měření aktivace.
+
+Co se stalo:
+Mapa vede přes "marketingové měření" na část o kampaních, ale zákaznický dotaz potřebuje část o produktové aktivaci a datovém minimu.
+
+Návratový signál:
+Vstup "měření" nerozlišuje marketingové kampaně a produktovou aktivaci.
+
+První reakce:
+Zpřesníme jeden vstup v mapě. Neotevíráme kapitoly o marketingu, analytice ani celou strukturu e-booku.
+```
+
+Tohle je dobrý signál, protože má pracovní místo, důsledek a malou reakci. Neříká "mapa je špatně". Říká, kde přesně se mapa spletla.
+
+### Tři brány před znovuotevřením
+
+Před editací mapy projděte tři brány:
+
+- Stejná pracovní situace: signál vznikl při skutečném hledání části e-booku, ne při abstraktním čtení struktury.
+- Opakovatelný problém: nejde jen o jednorázové přehlédnutí odkazu nebo nepozorné čtení.
+- Malá oprava je možná: umíte zlepšit vstup, popisek, pořadí nebo odkaz bez přestavby celé mapy.
+
+Pokud neprojde první brána, mapu neotevírejte. Možná máte redakční nápad, ale ne návratový signál.
+
+Pokud neprojde druhá brána, zapište jen anonymní poznámku u pracovního místa a počkejte. Jedno zakopnutí není důvod rozebrat stabilní nástroj na součástky. Ano, někdy člověk klikne vedle. Internet to zatím přežil.
+
+Pokud neprojde třetí brána, neznamená to automaticky velkou rekonstrukci. Znamená to, že nejdřív potřebujete zúžit otázku. Třeba ne "přepsat mapu pro marketing", ale "rozlišit v mapě marketingové měření od produktové aktivace".
+
+### Privacy-first hranice návratu
+
+Návratový signál u čtenářské mapy svádí k ukládání důkazů. Kdo hledal, co hledal, komu posílal odkaz, co se stalo potom, jestli zákazník odpověděl, jestli výřez otevřel. Přesně tady je potřeba zabrzdit.
+
+Do trvalého záznamu patří jen:
+
+- anonymní typ pracovní situace,
+- vstup v mapě, který selhal,
+- cílová část, která byla potřeba,
+- nejmenší oprava nebo rozhodnutí neotevírat,
+- návratový signál pro další kontrolu.
+
+Nepatří tam konkrétní jména, zákaznické firmy, e-mailové citace, otevření odkazu, CRM screenshoty ani seznamy předaných výřezů. Pokud podobná data už vznikla během běžné práce, neproměňujte je v redakční důkaz. Pro mapu stačí zobecněná věta.
+
+Příklad privacy-first zápisu:
+
+```text
+Anonymní situace:
+Po dotazu na produktovou aktivaci byl použit vstup "měření".
+
+Selhání:
+Vstup vedl k marketingovým kampaním, ne k produktové aktivaci.
+
+Oprava:
+Rozdělujeme vstup na "marketingové měření" a "produktová aktivace". Nevedeme seznam případů, kde byl výřez poslán.
+```
+
+Takový zápis chrání dvě věci najednou: mapa se zlepší a e-book nezačne fungovat jako boční evidence zákaznických interakcí.
+
+### Karta návratového signálu mapy
+
+```text
+Datum návratového signálu:
+
+Anonymní pracovní situace:
+
+Použitý vstup v mapě:
+
+Kam mapa vedla:
+
+Kam měla vést:
+
+Typ signálu:
+- špatný typ části
+- slabý samostatný výřez
+- kolize dvou vstupů
+- opakovaná pomocná komunikace
+- zbytečná evidence
+
+Prošla první brána skutečné pracovní situace?
+- ano
+- ne
+
+Prošla druhá brána opakovatelnosti?
+- ano
+- ne
+
+Prošla třetí brána malé opravy?
+- ano
+- ne
+
+Nejmenší reakce:
+
+Co se výslovně nemění:
+
+Jaká data nezapisujeme nebo mažeme:
+
+Návratový signál pro další otevření:
+```
+
+Kartu použijte jen tehdy, když mapu opravdu znovu otevíráte nebo vědomě odmítáte zbytečnou evidenci. Pokud jde jen o poznámku "možná by se někdy hodilo", karta je moc těžká. Pasivní provoz má zůstat lehký, jinak pasivní není.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: napište anonymní pracovní situaci.
+2. Minuta 2: popište, kam mapa vedla a kam měla vést.
+3. Minuta 3: vyberte typ signálu.
+4. Minuta 4: projděte tři brány znovuotevření.
+5. Minuta 5: napište nejmenší reakci a co se výslovně nemění.
+6. Minuta 6: smažte nebo nezapisujte zbytečné osobní, zákaznické a sledovací údaje.
+
+Když workshop neskončí konkrétní malou reakcí, mapu neotevírejte. Výsledek může být i: "signál zatím nestačí". To není prohra. To je údržba hranic. E-book nepotřebuje být nervózní pokaždé, když někdo řekne slovo přehlednost.
+
+### Checklist návratového signálu mapy
+
+- Vznikl signál při reálném použití mapy?
+- Umíme jednou větou popsat, kam mapa vedla špatně?
+- Víme, kam měla vést?
+- Jde o opakovatelný problém, nebo jen jednorázové přehlédnutí?
+- Umíme udělat malou opravu bez přestavby celé mapy?
+- Je jasné, co se výslovně nemění?
+- Pokud problém patří cílovému výřezu, neobviňujeme zbytečně mapu?
+- Pokud vzniká evidence použití, umíme ji zastavit nebo zrušit?
+- Trvalý záznam neobsahuje jména, zákazníky, citace, screenshoty ani seznamy příjemců?
+- Má další otevření konkrétní návratový signál, nebo mapa zůstává v pasivním provozu?
+
+Návratový signál čtenářské mapy je pojistka proti dvěma extrémům. První extrém je nechat rozbitý rozcestník ležet jen proto, že byl jednou prohlášený za stabilní. Druhý extrém je otevírat stabilní mapu při každém redakčním neklidu. Dobrá praxe je nudnější a účinnější: čekat na konkrétní signál, udělat nejmenší opravu, nezapisovat zbytečná data a vrátit mapu zpět do tichého provozu.
+
 ## Pracovní log
 
+- 2026-07-05: Doplněna úvodní podkapitola o návratovém signálu čtenářské mapy v dlouhodobém pasivním provozu: co se počítá jako signál, tři brány znovuotevření, praktický příklad, privacy-first hranice, karta, mini workshop a checklist.
 - 2026-07-05: Doplněna úvodní podkapitola o uzavření třetího běžného použití čtenářské mapy: čtyři uzavírací stavy, praktický SaaS follow-up příklad, privacy-first uzavření bez zbytečné evidence, karta, mini workshop a checklist.
 - 2026-07-05: Doplněna úvodní podkapitola o třetím běžném použití čtenářské mapy v pasivním provozu: přirozené použití, čtyři výsledky, praktické příklady, privacy-first pravidlo minimální stopy, karta, mini workshop a checklist.
 - 2026-07-05: Doplněna úvodní podkapitola o uzavření druhého běžného použití čtenářské mapy: čtyři uzavírací stavy, praktické příklady, privacy-first úklid dočasných podkladů, karta, mini workshop a checklist.
