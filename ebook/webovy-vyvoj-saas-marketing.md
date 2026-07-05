@@ -296955,8 +296955,179 @@ Pokud se v první minutě neobjeví jasný důvod, workshop ukončete. Druhé po
 
 Druhé běžné použití má potvrdit přenos, ne rozpoutat další péči. Když opravená cesta obstojí u další role, napište závěr a nechte mapu ztichnout. Když neobstojí, opravte nejbližší místo nebo otevřete přesný návratový signál. V obou případech držte datovou stopu malou. Mapa má čtenáře vést, ne vyrábět nový provozní systém kolem toho, že někoho dovedla správně.
 
+## Uzavření druhého běžného použití po uzavřeném signálu mapy
+
+Druhé běžné použití po uzavřeném signálu mapy končí až tehdy, když je jasné, jestli mapa zůstává v pasivním provozu, potřebuje poslední lokální dočištění, nebo se práce přesouvá jinam. Nestačí říct "zkusili jsme to ještě jednou". Druhé použití má uzavřít přenos. Pokud po něm zůstane otevřený pocit, že se "ještě uvidí", mapa se nenápadně vrátí do mimořádné péče a tým začne sledovat nástroj místo toho, aby používal text.
+
+Uzavření začněte jednou pracovní větou:
+
+```text
+Druhé běžné použití uzavíráme takto:
+```
+
+Dobrá věta obsahuje výsledek, rozsah případné změny a stav další kontroly:
+
+```text
+Druhé běžné použití uzavíráme takto:
+Produktová role našla opravený vstup samostatně, mapa zůstává beze změny, nepokračujeme další kontrolou a nevedeme evidenci použití vstupu.
+```
+
+Slabá věta vypadá takto:
+
+```text
+Druhé použití dopadlo dobře, budeme sledovat dál.
+```
+
+Slabá věta je pohodlná, protože nic nezavírá. A právě proto je nebezpečná. "Budeme sledovat dál" často znamená, že nikdo neví, jaký signál by sledování ukončil, co přesně se má sledovat a kdo za to odpovídá. Pokud nemáte novou otázku, nesledujte. Zavřete.
+
+### Tři uzavírací stavy
+
+Po druhém běžném použití vyberte jeden ze tří stavů:
+
+- Vrátit mapu do pasivního provozu: přenos fungoval a nevzniká žádná další práce.
+- Provést poslední lokální dočištění: jedno malé místo pořád brání samostatnému použití, ale mapa jako celek funguje.
+- Předat problém cílovému výřezu nebo novému signálu: mapa vedla správně, ale cílová část nestačila, nebo se opakuje stejný navigační problém.
+
+Stav `vrátit mapu do pasivního provozu` je nejčistší. Zapište závěr u mapy, ukončete mimořádnou pozornost a nepřidávejte další kontrolu. Nástroj, který funguje, nepotřebuje nový rituál. Potřebuje jen stabilní místo a jasný návratový signál.
+
+Stav `provést poslední lokální dočištění` použijte jen pro úpravu, která se dá udělat v jednom místě. Například změnit popisek vstupu, doplnit jeden neutrální příklad nebo odstranit staré slovo, které vede k záměně. Po dočištění napište rovnou uzavírací větu. Nezakládejte třetí kontrolu, pokud nemáte konkrétní návratový signál.
+
+Stav `předat problém cílovému výřezu nebo novému signálu` chrání mapu před cizí prací. Pokud mapa správně dovede čtenáře do části o aktivaci, ale ta část nemá checklist, neopravujte mapu. Otevřete práci v cílovém výřezu. Pokud se naopak i po dočištění opakuje stejná navigační chyba, nejde o běžné dočištění; založte nový návratový signál mapy.
+
+### Praktický příklad uzavření
+
+Druhé použití:
+
+```text
+Produktový člověk bez čerstvého vysvětlení použil vstup "produktová aktivace v SaaS" a dostal se do správného výřezu o datovém minimu v aktivaci.
+```
+
+Uzavření:
+
+```text
+Stav:
+Vrátit mapu do pasivního provozu.
+
+Závěr:
+Opravený vstup funguje i mimo původní supportní průchod.
+
+Co se mění:
+Nic. Mapa zůstává ve stávající podobě.
+
+Co se výslovně nemění:
+Nepřidáváme role ke každému vstupu, nezakládáme log použití mapy a nepřepisujeme cílový výřez.
+
+Další návratový signál:
+K mapě se vrátíme pouze pokud se stejný typ role znovu nedostane k výřezu kvůli nejasnému vstupu.
+```
+
+Varianta s posledním lokálním dočištěním:
+
+```text
+Stav:
+Provést poslední lokální dočištění.
+
+Zjištění:
+Produktová role našla správný vstup, ale příklad pod ním pořád zní jako supportní situace.
+
+Změna:
+Příklad přepisujeme na neutrální formulaci použitelnou pro support i produkt.
+
+Co se neotevírá:
+Struktura mapy, nové role, sledování použití a revize cílového výřezu.
+
+Uzavření po změně:
+Dočištění je lokální a po úpravě se mapa vrací do pasivního provozu.
+```
+
+Tady je důležitá poslední věta. Lokální dočištění se nemá stát novou větví práce. Má opravit jednu hranu a skončit. Pokud po něm pořád cítíte potřebu dalšího sledování, pravděpodobně nejde o lokální dočištění, ale o návratový signál. Pojmenujte ho poctivě.
+
+### Privacy-first uzavření
+
+Uzavření druhého použití musí uklidit i pomocnou stopu. Při práci s mapou snadno vzniknou drobné poznámky: kdo mapu použil, pro jaký případ, jaký zákazník za tím byl, kam se dostal a co si myslel. Většina z toho není potřeba. Pro mapu stačí anonymní provozní závěr.
+
+Použijte tři řádky:
+
+```text
+Ponecháváme:
+
+Mažeme nebo nezakládáme:
+
+K dalšímu návratu stačí:
+```
+
+Příklad:
+
+```text
+Ponecháváme:
+Anonymní závěr, že opravený vstup fungoval pro produktovou roli.
+
+Mažeme nebo nezakládáme:
+Jména lidí, zákaznický kontext, kopie checklistu, tabulku použití a odkazy do interních nástrojů.
+
+K dalšímu návratu stačí:
+Opakovaná navigační chyba u stejného typu vstupu, popsaná bez osobních a zákaznických detailů.
+```
+
+Takový zápis je skromný, ale praktický. Tým ví, co se stalo, aniž by kolem mapy vznikla nová evidence. Codyho komentář: pokud kvůli rozcestníku potřebujete rozcestník důkazů, něco se utrhlo ze řetězu. Většinou stačí jedna anonymní věta a klid.
+
+### Karta uzavření druhého použití
+
+```text
+Datum:
+
+Důvod druhého použití:
+
+Běžná pracovní situace:
+
+Výsledek druhého použití:
+
+Uzavírací stav:
+- vrátit mapu do pasivního provozu
+- provést poslední lokální dočištění
+- předat problém cílovému výřezu nebo novému signálu
+
+Co se mění:
+
+Co se výslovně nemění:
+
+Jaká pomocná evidence končí nebo nevzniká:
+
+Kde je závěr uložený:
+
+Další návratový signál:
+```
+
+Karta má být krátká. Pokud ji vyplňujete déle než samotné uzavření, zkraťte ji na pracovní větu, stav a privacy-first úklid. Smyslem není dokumentovat každý nádech mapy. Smyslem je zabránit tomu, aby se z ověřeného přenosu stal nový sledovací proces.
+
+### Mini workshop na 5 minut
+
+1. Minuta 1: přečtěte důvod druhého použití a skutečný výsledek.
+2. Minuta 2: vyberte jeden ze tří uzavíracích stavů.
+3. Minuta 3: napište, co se mění a co se výslovně nemění.
+4. Minuta 4: ukončete nebo odmítněte pomocnou evidenci.
+5. Minuta 5: zapište návratový signál, nebo výslovně vraťte mapu do pasivního provozu.
+
+Pokud se tým ve druhé minutě nemůže shodnout na stavu, nepokračujte v obecné debatě o kvalitě mapy. Vraťte se k jediné otázce: dovedla mapa člověka v běžné práci na správné místo bez čerstvého vysvětlení? Odpověď obvykle stačí k výběru stavu.
+
+### Checklist uzavření
+
+- Máme skutečný výsledek druhého použití, ne jen dojem?
+- Vybrali jsme přesně jeden uzavírací stav?
+- Pokud vracíme mapu do pasivního provozu, neplánujeme další kontrolu bez signálu?
+- Pokud dočišťujeme, jde opravdu o jedno lokální místo?
+- Pokud problém patří cílovému výřezu, nepředěláváme kvůli němu mapu?
+- Pokud vznikl nový návratový signál, je konkrétní a anonymní?
+- Napsali jsme, co se výslovně nemění?
+- Ukončili jsme pomocné poznámky, tabulky, kopie nebo ruční sledování?
+- Je závěr uložený u mapy nebo u cílového výřezu, kde ho další člověk najde?
+- Ví tým, jaký signál by mapu znovu otevřel?
+
+Uzavření druhého běžného použití má mapu vrátit do ticha. Buď funguje a není co řešit, nebo má jedno lokální místo k dočištění, nebo problém patří jinam. Ve všech třech případech je dobrý výsledek stejný: méně mimořádné péče, méně zbytečných dat a jasnější hranice další práce.
+
 ## Pracovní log
 
+- 2026-07-05: Doplněna úvodní podkapitola o uzavření druhého běžného použití po uzavřeném signálu čtenářské mapy: tři uzavírací stavy, praktické příklady, privacy-first úklid pomocné evidence, karta, mini workshop a checklist.
 - 2026-07-05: Doplněna úvodní podkapitola o druhém běžném použití po uzavřeném signálu čtenářské mapy: kdy druhé použití přeskočit, ověření přenositelnosti, čtyři výsledky, praktický SaaS příklad, privacy-first hranice, karta, mini workshop a checklist.
 - 2026-07-05: Doplněna úvodní podkapitola o uzavření prvního běžného použití po uzavřeném signálu čtenářské mapy: čtyři uzavírací stavy, praktické příklady, privacy-first uzavření bez nové evidence, karta, mini workshop a checklist.
 - 2026-07-05: Doplněna úvodní podkapitola o prvním běžném použití po uzavření návratového signálu čtenářské mapy: najitelnost, rozhodnutelnost, klid, čtyři výsledky použití, praktický SaaS příklad, privacy-first kontrola, karta, mini workshop a checklist.
