@@ -296345,8 +296345,213 @@ Pokud se v minutě 2 nedokážete rozhodnout mezi dvěma výsledky, nerozšiřuj
 
 Uzavření návratového signálu je poslední brzda před tím, než se z užitečného rozcestníku stane samostatný provozní systém s vlastní agendou. Udělejte malou opravu, zapište hranici, ukliďte dočasné stopy a vraťte mapu do tichého provozu. Když bude znovu potřeba, ozve se skutečný signál. Když se neozve, gratuluji: máte jednu věc, která funguje bez schůzky.
 
+## První běžné použití po uzavření návratového signálu čtenářské mapy
+
+Po uzavření návratového signálu čtenářské mapy přichází nenápadná, ale důležitá chvíle: první běžné použití. Ne test. Ne slavnostní kontrola. Ne další workshop, který se tváří jako péče a ve skutečnosti jen prodlužuje mimořádný režim. Prostě situace, kdy někdo mapu normálně otevře, aby našel správnou část e-booku pro práci.
+
+První běžné použití má ověřit, jestli se oprava opravdu rozpustila do provozu. Člověk by neměl potřebovat vzpomínku na poslední debatu, vysvětlení autora ani poznámku "tohle jsme nedávno měnili". Mapa má vést dost jasně sama. Pokud k tomu potřebuje čerstvou paměť týmu, není ještě zpátky v pasivním provozu.
+
+Začněte jednoduchou větou:
+
+```text
+Mapu po uzavřeném návratovém signálu používáme běžně v této situaci:
+```
+
+Dobrý zápis:
+
+```text
+Mapu po uzavřeném návratovém signálu používáme běžně v této situaci: support hledá výřez pro zákazníka, který se ptá, jak měřit aktivaci v SaaS produktu bez zbytečných událostí a externích trackerů.
+```
+
+Slabý zápis:
+
+```text
+Kontrolujeme, jestli mapa funguje.
+```
+
+Slabý zápis zní bezpečně, ale je moc obecný. Neříká, kdo mapu používá, k jakému pracovnímu výsledku a bez jaké mimořádné pomoci. První běžné použití není audit všeho. Je to obyčejný průchod jednou reálnou situací.
+
+### Co první běžné použití ověřuje
+
+Ověření držte u tří otázek:
+
+- Najitelnost: člověk najde správný vstup bez znalosti poslední opravy.
+- Rozhodnutelnost: po přečtení vstupu ví, kam pokračovat a co už neotevírat.
+- Klid: použití nevyrobí novou evidenci, schůzku ani paralelní seznam "pro jistotu".
+
+Najitelnost neznamená, že je mapa dokonalá pro každého čtenáře. Znamená, že pro běžnou pracovní situaci vede k dost dobrému dalšímu kroku. Rozhodnutelnost neznamená, že člověk dostane kompletní strategii. Znamená, že ví, který výřez nebo kapitolu použít. Klid neznamená pasivitu. Znamená, že po použití nevznikne zbytečný provozní ocas.
+
+Příklad jedné věty pro každou otázku:
+
+```text
+Najitelnost:
+Support našel vstup "produktová aktivace" bez připomenutí poslední změny.
+
+Rozhodnutelnost:
+Vstup vedl ke kapitole o datovém minimu v aktivaci, ne k marketingovému měření kampaní.
+
+Klid:
+Nevznikl seznam odeslaných výřezů ani nový report použití mapy.
+```
+
+Pokud jedna otázka selže, neznamená to automaticky nový návratový signál. Nejprve zjistěte, jestli jde o lokální tření prvního použití, slabé znění jednoho vstupu, nebo skutečné opakování původního problému.
+
+### Čtyři výsledky prvního použití
+
+První běžné použití po uzavřeném návratovém signálu může skončit čtyřmi stavy:
+
+- Mapa funguje v klidu: člověk našel správnou část, udělal pracovní krok a nic dalšího není potřeba.
+- Stačí lokální dočištění: jeden popisek, odkaz nebo příklad je ještě neostrý, ale směr mapy je správný.
+- Problém patří cílovému výřezu: mapa vede dobře, jen cílová část není dost samostatná.
+- Návratový signál se znovu objevil: stejný typ chyby se opakuje i po uzavření a má konkrétní pracovní dopad.
+
+Každý stav má jinou reakci. Když mapa funguje v klidu, nezakládejte další kontrolu. Když stačí lokální dočištění, opravte jedno místo a zapište, že rozsah zůstává zavřený. Když problém patří výřezu, neotevírejte mapu. Když se signál opravdu opakuje, založte nový návratový signál podle pravidel z předchozí části.
+
+Praktické věty:
+
+```text
+Mapa funguje v klidu:
+První běžné použití vedlo správně a neotevíráme žádnou další práci.
+
+Stačí lokální dočištění:
+Vstup "produktová aktivace" doplňujeme o slovo "SaaS", aby se nepletl s marketingovou aktivací; cílové kapitoly se nemění.
+
+Problém patří cílovému výřezu:
+Mapa vedla správně, ale výřez nemá samostatný úvod pro support. Otevíráme lokální úpravu výřezu, ne mapy.
+
+Návratový signál se znovu objevil:
+Dva nezávislé supportní průchody po uzavření znovu skončily v marketingovém měření místo produktové aktivace. Otevíráme nový návratový signál mapy.
+```
+
+Codyho komentář: nejzrádnější je druhý stav. "Stačí lokální dočištění" se umí během pěti minut převléct za "když už jsme tady, přepišme celý rozcestník". Ne. Jedno místo, jeden důvod, jeden konec. Jinak jste neověřili běžné použití, jen jste si našli záminku pro další redakční posilovnu.
+
+### Praktický SaaS příklad
+
+Situace:
+
+```text
+Support potřebuje poslat zákazníkovi krátký výřez k tomu, jak v SaaS produktu rozhodnout o nové aktivační události.
+```
+
+Po předchozí opravě mapa obsahuje samostatný vstup "produktová aktivace". Člověk ze supportu mapu otevře, najde vstup a pokračuje do části o datovém minimu. Nemusí vědět, že dřív byl vstup schovaný pod obecným "měření".
+
+Výsledek použití:
+
+```text
+Mapa funguje v klidu: vstup "produktová aktivace" vedl na správný výřez, support nepoužil marketingovou kapitolu a nevznikla žádná nová evidence použití.
+```
+
+Co se výslovně nedělá:
+
+```text
+Nezakládáme tabulku použití mapy, nepřidáváme další dvě podkategorie aktivace, nepřepisujeme kapitolu o marketingu a neukládáme zákaznický dotaz do redakční historie.
+```
+
+Návratový signál:
+
+```text
+K mapě se vrátíme jen tehdy, pokud dva další běžné průchody povedou ze vstupu "produktová aktivace" ke špatné části nebo pokud support začne obcházet mapu vlastním seznamem výřezů.
+```
+
+Tento příklad je záměrně malý. Právě malost ukazuje, že mapa je zpátky v pasivním provozu. Kdyby bylo potřeba svolat tým, porovnávat varianty a číst historii rozhodnutí, mapa by ještě nebyla běžný nástroj. Byla by čerstvě opravený mechanismus, který se bojíte pustit z ruky.
+
+### Privacy-first kontrola prvního použití
+
+První běžné použití po opravě svádí k tomu, že si tým začne dokazovat, že změna funguje. Vznikají malé tabulky, poznámky u konkrétních zákazníků, screenshoty průchodů, seznamy lidí, kterým byl poslaný výřez, nebo ruční počítání případů. Vypadá to nevinně. Jenže přesně takhle se z minimální mapy stane měření bez jasného účelu.
+
+Položte si proto tři otázky:
+
+```text
+Potřebujeme tento údaj pro rozhodnutí o mapě?
+Stačí anonymní typ situace místo konkrétního zákazníka nebo člověka?
+Kdy tuto dočasnou stopu smažeme nebo přestaneme vést?
+```
+
+Ve většině případů stačí věta:
+
+```text
+První běžné použití proběhlo správně v anonymní supportní situaci; nevzniká evidence zákazníků, příjemců výřezu ani opakované sledování použití mapy.
+```
+
+Pokud použití selže, pořád nepotřebujete ukládat všechno. Uložte typ selhání, pracovní místo a dopad. Ne jméno zákazníka, obsah e-mailu, screenshot CRM ani kompletní supportní vlákno.
+
+Dobrá privacy-first stopa:
+
+```text
+Anonymní typ selhání: vstup "produktová aktivace" byl při supportním použití přehlédnut a člověk zvolil obecné marketingové měření.
+```
+
+Špatná stopa:
+
+```text
+Přiložen screenshot zákaznického dotazu, jméno account managera, odkaz do CRM a kopie odpovědi.
+```
+
+Mapa nepotřebuje osobní příběh. Potřebuje vědět, kde selhala orientace. To je rozdíl mezi rozhodovací stopou a sběrem dat ze zvyku.
+
+### Karta prvního běžného použití po uzavřeném signálu
+
+```text
+Datum použití:
+
+Běžná pracovní situace:
+
+Kdo mapu použil podle role, ne podle jména:
+
+Kam mapa vedla:
+
+Kam měla vést:
+
+Výsledek použití:
+- mapa funguje v klidu
+- stačí lokální dočištění
+- problém patří cílovému výřezu
+- návratový signál se znovu objevil
+
+Co se případně lokálně dočistí:
+
+Co se výslovně nemění:
+
+Jaká evidence nevzniká nebo končí:
+
+Kde je případná drobná oprava propsaná:
+
+Návratový signál pro další otevření:
+
+Jednovětý závěr:
+```
+
+Kartu nepoužívejte automaticky pro každé klidné použití. Když mapa funguje a nic se nemění, často stačí jedna věta u poslední uzavírací poznámky. Plná karta má smysl tehdy, když vzniká lokální dočištění, oddělujete problém cílového výřezu nebo zvažujete nový návratový signál.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: popište běžnou pracovní situaci bez jmen a zákaznických detailů.
+2. Minuta 2: řekněte, kam mapa vedla a jestli to bylo správně.
+3. Minuta 3: vyberte jeden ze čtyř výsledků použití.
+4. Minuta 4: napište, co se případně dočistí a co se výslovně nemění.
+5. Minuta 5: zkontrolujte, zda nevzniká zbytečná evidence použití.
+6. Minuta 6: napište jednovětý závěr nebo nový návratový signál.
+
+Pokud workshop začne řešit více než jednu pracovní situaci, zastavte ho. První běžné použití není retrospektiva mapy. Je to kontrola, jestli jedna oprava obstála v jednom přirozeném průchodu. Víc situací patří až do dalšího návratového signálu nebo do plánovaného revizního rytmu.
+
+### Checklist prvního běžného použití po uzavřeném signálu
+
+- Použití vzniklo v normální práci, ne jako umělý test?
+- Je pracovní situace popsaná anonymně?
+- Našel člověk správný vstup bez čerstvého vysvětlení autora opravy?
+- Vedla mapa ke správnému typu části?
+- Je jasné, jestli výsledek patří mapě, cílovému výřezu, nebo žádné další práci?
+- Pokud něco dočišťujeme, je to jedno konkrétní místo?
+- Je výslovně napsané, co se nemění?
+- Nevzniká tabulka, report, seznam příjemců ani evidence použití bez rozhodovací hodnoty?
+- Pokud se signál opakuje, je popsaný jako nový návratový signál, ne jako obecná nespokojenost?
+- Vrací se mapa po použití zpět do pasivního provozu?
+
+První běžné použití je malý test důvěry. Ne v tom smyslu, že máte mapu znovu prověřit odshora dolů. Spíš v tom, že ji necháte chvíli dělat práci bez asistence. Pokud obstojí, nechte ji být. Pokud ne, opravte nejbližší místo. A pokud začne kolem ní vznikat nová evidence, zastavte ji dřív, než se z jednoduchého rozcestníku stane další systém, který bude jednou potřebovat vlastní rozcestník. Ano, svět je plný těchto malých ironických pastí.
+
 ## Pracovní log
 
+- 2026-07-05: Doplněna úvodní podkapitola o prvním běžném použití po uzavření návratového signálu čtenářské mapy: najitelnost, rozhodnutelnost, klid, čtyři výsledky použití, praktický SaaS příklad, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-07-05: Doplněna úvodní podkapitola o uzavření návratového signálu čtenářské mapy: čtyři výsledky uzavření, praktický SaaS příklad, umístění záznamu, privacy-first ukončení návratu, karta, mini workshop a checklist.
 - 2026-07-05: Doplněna úvodní podkapitola o návratovém signálu čtenářské mapy v dlouhodobém pasivním provozu: co se počítá jako signál, tři brány znovuotevření, praktický příklad, privacy-first hranice, karta, mini workshop a checklist.
 - 2026-07-05: Doplněna úvodní podkapitola o uzavření třetího běžného použití čtenářské mapy: čtyři uzavírací stavy, praktický SaaS follow-up příklad, privacy-first uzavření bez zbytečné evidence, karta, mini workshop a checklist.
