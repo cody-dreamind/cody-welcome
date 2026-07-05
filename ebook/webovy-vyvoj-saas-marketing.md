@@ -299397,8 +299397,200 @@ Když se workshop začne měnit v debatu o tom, jestli bylo původní rozhodnut�
 
 Uzavření prvního dohledání archivního minima má udělat z archivu normální pracovní nástroj. Když stačí, téma se zavře. Když nestačí, opraví se nejbližší slabina. A když signál opravdu nastal, otevře se malý krok s novou hranicí. Díky tomu archiv nezůstává muzeem starých rozhodnutí, ale funguje jako klidná paměť systému, která chrání rozsah práce i data.
 
+## Druhé dohledání archivního minima v běžné práci
+
+Druhé dohledání archivního minima je důležitější než první. Poprvé ještě často pomáhá čerstvá paměť: někdo si pamatuje, proč téma vzniklo, kdo ho zavíral a kde přibližně leží záznam. Podruhé už by archiv měl fungovat bez této lidské berličky. Člověk má přijít s běžným podnětem, najít minimum podle pracovního jazyka, přečíst jednu rozhodovací větu a poznat, zda se téma znovu otevírá.
+
+Pokud druhé dohledání selže, neznamená to automaticky, že původní rozhodnutí bylo špatné. Často to znamená jen to, že archivní minimum pořád nese příliš mnoho historického jazyka, slabý alias, nejasný návratový signál nebo chybějící odkaz z místa, kde se téma reálně vrací. To je dobrá zpráva. Opravuje se konkrétní pracovní cesta, ne celá minulost.
+
+Začněte větou:
+
+```text
+Archivní minimum dohledáváme podruhé, protože přišel tento běžný podnět:
+```
+
+Za ni napište podnět tak, jak přišel v normální práci:
+
+```text
+Archivní minimum dohledáváme podruhé, protože přišel tento běžný podnět:
+Nový obchodník se ptá, zda má u menších SaaS poptávek ručně zjišťovat velikost týmu ještě před prvním produktovým hovorem.
+```
+
+Tahle věta brání dvěma zkratkám. První zkratka je otevřít staré téma jen proto, že zní podobně. Druhá zkratka je odmítnout podnět jen proto, že "už jsme to přece řešili". Podruhé už nejde o sentiment k rozhodnutí. Jde o použitelnost paměti v běžném provozu.
+
+### Co má druhé dohledání ověřit
+
+Druhé dohledání ověřuje čtyři věci:
+
+- Najitelnost podle běžného názvu: člověk nemusí znát interní historický název tématu.
+- Použitelnost pracovní věty: rozhodnutí jde použít bez čtení celé historie.
+- Přesnost návratového signálu: dnešní podnět lze porovnat s jasnou bránou.
+- Datovou střídmost: dohledání nevytvoří novou evidenci, tabulku ani ruční štítek.
+
+Pokud fungují všechny čtyři věci, archivní minimum je zdravé. Stačí zapsat krátký výsledek u dnešního podnětu a nepokračovat dál. To je možná neuspokojivě obyčejný konec, ale přesně tak má dobrá provozní paměť vypadat: člověk najde odpověď a jde pracovat.
+
+Když selže najitelnost, opravte cestu k záznamu. Přidejte alias, odkaz z checklistu, běžnější název nebo krátkou navigační větu. Nepřepisujte celé rozhodnutí, pokud samo funguje.
+
+Když selže pracovní věta, přepište jen ji. Starý kontext může zůstat v historii, ale aktivní minimum musí mluvit jazykem dnešní práce. Věta má říct, co platí teď, co zůstává zavřené a kdy se téma smí vrátit.
+
+Když selže návratový signál, zpřesněte bránu. Špatný signál je buď moc měkký, takže otevře skoro všechno, nebo moc úzký, takže nepustí ani skutečný problém. Dobrý signál popisuje pozorovatelnou situaci, ne náladu týmu.
+
+Když selže datová střídmost, zastavte doprovodnou evidenci. Druhé dohledání nemá být důvodem založit "jen dočasnou" tabulku opakovaných podnětů, pokud není jasné, jaké rozhodnutí má tabulka obsloužit a kdy skončí.
+
+### Praktický SaaS příklad
+
+Archivní minimum po prvním dohledání:
+
+```text
+Registrace zůstává bez otázky na velikost týmu.
+Kontext spolupráce řešíme až po prvním importu, pokud je potřeba.
+
+Návratový signál:
+Téma se vrátí pouze pokud tři nové účty za sebou selžou v onboardingu kvůli chybějícímu kontextu spolupráce ještě před prvním importem.
+
+Alias:
+velikost týmu / pozvání kolegů
+```
+
+Druhý běžný podnět:
+
+```text
+Nový obchodník se ptá, zda má u menších SaaS poptávek ručně zjišťovat velikost týmu ještě před prvním produktovým hovorem.
+```
+
+Porovnání:
+
+```text
+Dnešní podnět se netýká registrace ani selhání před prvním importem. Týká se obchodního hovoru a přípravy nabídky.
+```
+
+Dobrý závěr:
+
+```text
+Archivní minimum pro registraci stačilo jen k potvrzení, že registrační formulář zůstává zavřený. Obchodní otázku neřešíme rozšířením registrace. Pokud obchod potřebuje kvalifikační pomůcku, otevře samostatnou malou otázku u sales skriptu.
+```
+
+Tady je důležité, že archivní minimum nepolyká nové téma. Pomohlo ubránit registraci před zbytečným polem, ale zároveň nepředstírá, že řeší obchodní kvalifikaci. To je zdravé rozdělení odpovědnosti: staré rozhodnutí zůstane platné ve svém pracovním místě a nový podnět se případně otevře tam, kde opravdu vznikl.
+
+Slabší varianta by vypadala takto:
+
+```text
+Protože se znovu řeší velikost týmu, otevřeme původní rozhodnutí o registraci a projdeme historii.
+```
+
+To je příliš široké. Podobné slovo ještě není stejný problém. Pokud se problém odehrává v obchodním hovoru, nemá se kvůli němu automaticky otevírat registrační formulář. Formuláře jsou jako lednička v kanceláři: jakmile do nich každý přidá "jen jednu drobnost", za chvíli nikdo nechce otevřít dveře.
+
+### Privacy-first kontrola druhého dohledání
+
+Druhé dohledání často svádí k tomu, že tým začne sbírat opakované podněty "pro jistotu". U privacy-first provozu je lepší nejdřív napsat, jaké rozhodnutí by taková evidence měla obsloužit.
+
+Použijte čtyři řádky:
+
+```text
+Dnešní podnět stačí zapsat jako:
+
+Nezakládáme novou evidenci:
+
+Nepřenášíme do archivu:
+
+Dál nesbíráme:
+```
+
+Příklad:
+
+```text
+Dnešní podnět stačí zapsat jako:
+Anonymizovanou poznámku, že obchodní otázka se týká sales skriptu, ne registrace.
+
+Nezakládáme novou evidenci:
+Tabulku velikosti týmů u poptávek.
+
+Nepřenášíme do archivu:
+Jména zákazníků, konkrétní e-mailové odpovědi ani poznámky obchodníka z hovoru.
+
+Dál nesbíráme:
+Velikost týmu v registraci ani automatický segment podle registračních odpovědí.
+```
+
+Pokud se opakované podněty opravdu začnou množit, otevřete novou pracovní otázku s vlastním účelem a návratovým signálem. Nedělejte z archivu sběrný dvůr každé související věty. Archiv má chránit rozhodnutí, ne nahrazovat CRM, analytiku ani týmovou paměť ve stylu "hodíme to tam a jednou se uvidí". Jednou se většinou neuvidí. Jednou se jen někdo zeptá, proč to tam je.
+
+Codyho komentář: druhé dohledání je test, jestli jsme si minule nevyrobili jen hezký zápis pro lidi, kteří už všechno vědí. Skutečně užitečný záznam pomůže i člověku, který přišel později, má méně kontextu a chce jen rozhodnout dnešní drobnost bez archeologické výpravy.
+
+### Karta druhého dohledání archivního minima
+
+```text
+Dnešní běžný podnět:
+
+Pod jakými slovy jsme minimum hledali:
+
+Našli jsme ho bez pomoci?
+- ano
+- ne, chyběl alias nebo odkaz
+- částečně, našli jsme historii, ale ne aktivní minimum
+
+Aktivní pracovní věta:
+
+Návratový signál:
+
+Porovnání dnešního podnětu se signálem:
+
+Výsledek druhého dohledání:
+- minimum funguje samostatně
+- opravit najitelnost
+- zpřesnit pracovní větu
+- zpřesnit návratový signál
+- otevřít samostatné nové téma v jiném pracovním místě
+
+Co zůstává výslovně zavřené:
+
+Co případně otevíráme jinde:
+
+Privacy-first poznámka:
+
+Co nepřenášíme do archivu:
+
+Co dál nesbíráme:
+
+Kde je krátký závěr uložený:
+
+Vlastník:
+```
+
+Kartu nepoužívejte jako důkaz, že jste "udělali proces". Použijte ji tehdy, když druhé dohledání odhalí slabinu, kterou by další člověk pravděpodobně zopakoval. Pokud minimum fungovalo samostatně, často stačí krátká věta u dnešního podnětu.
+
+### Mini workshop na 8 minut
+
+1. Minuta 1: přečtěte dnešní běžný podnět.
+2. Minuta 2: zkuste najít archivní minimum bez pomoci původního autora.
+3. Minuta 3: přečtěte aktivní pracovní větu a návratový signál.
+4. Minuta 4: rozhodněte, zda jde o stejný problém, nebo jen podobný jazyk.
+5. Minuta 5: vyberte výsledek druhého dohledání.
+6. Minuta 6: napište, co zůstává zavřené.
+7. Minuta 7: pokud vzniká nové téma, určete jiné pracovní místo.
+8. Minuta 8: udělejte privacy-first kontrolu a ukončete zbytečné pomocné stopy.
+
+Pokud se během workshopu ukáže, že podnět patří do jiného pracovního místa, neberte to jako selhání archivu. Naopak. Archiv právě splnil užitečnou roli: zabránil tomu, aby se nové téma přilepilo na staré rozhodnutí jen kvůli podobnému slovu.
+
+### Checklist druhého dohledání
+
+- Hledali jsme archivní minimum podle slov, která používá dnešní člověk?
+- Šlo minimum najít bez pomoci původního autora?
+- Stačila aktivní pracovní věta, nebo bylo nutné číst hlubší historii?
+- Porovnali jsme dnešní podnět s návratovým signálem?
+- Rozlišili jsme stejný problém od podobného názvu?
+- Pokud jde o jiné pracovní místo, nechali jsme původní rozhodnutí zavřené?
+- Pokud opravujeme minimum, je oprava menší než nové archivní schéma?
+- Pokud vzniká nové téma, má vlastní pracovní otázku a vlastní hranici?
+- Nezakládáme novou evidenci opakovaných podnětů bez jasného rozhodnutí a konce?
+- Nepřenášíme do archivu zákaznické zprávy, jména, screenshoty ani obchodní poznámky bez potřeby?
+- Je jasně napsané, jaká data dál nesbíráme?
+- Ví další člověk po přečtení závěru, zda má pokračovat v práci, opravit záznam, nebo otevřít nové téma jinde?
+
+Druhé dohledání archivního minima má ukázat, jestli rozhodnutí přežilo bez čerstvé paměti. Když ano, nechte ho v klidu pracovat. Když ne, opravte nejmenší slabinu v najitelnosti, větě nebo signálu. A když dnešní podnět míří jinam, nelepte ho na starý archiv. Privacy-first systém není jen o menším sběru dat; je i o menším sběru falešných souvislostí.
+
 ## Pracovní log
 
+- 2026-07-05: Doplněna úvodní podkapitola o druhém dohledání archivního minima v běžné práci: najitelnost bez čerstvé paměti, rozlišení stejného problému od podobného jazyka, praktický SaaS příklad, privacy-first kontrola bez nové evidence, karta, mini workshop a checklist.
 - 2026-07-05: Doplněna úvodní podkapitola o uzavření prvního dohledání archivního minima: čtyři uzavírací stavy, praktický SaaS příklad, privacy-first uzavření bez nové datové vrstvy, karta, mini workshop a checklist.
 - 2026-07-05: Doplněna úvodní podkapitola o prvním dohledání archivního minima v běžné práci: ověření najitelnosti, pracovní věty a návratového signálu, praktický SaaS příklad, privacy-first kontrola hlubší historie, karta, mini workshop a checklist.
 - 2026-07-05: Doplněna úvodní podkapitola o archivním minimu neotevřeného kroku: aktivní minimum, hlubší historie, praktický SaaS příklad, privacy-first archivace, karta, mini workshop a checklist.
