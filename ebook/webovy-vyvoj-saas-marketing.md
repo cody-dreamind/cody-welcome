@@ -298844,8 +298844,195 @@ Pokud se tým nedokáže shodnout mezi pasivním klidem a archivací, použijte 
 
 Uzavření druhého dlouhodobého review je dobré ve chvíli, kdy téma umí být menší než jeho historie. V běžné práci zůstane jen to, co člověk potřebuje k rozhodnutí. Zbytek se archivuje, smaže nebo anonymizuje. Původní široký návrh zůstává zavřený, dokud nepřijde nový důvod. To je praktická dospělost: nechat systém pamatovat si dost, ale nenechat ho tahat za sebou všechno.
 
+## Archivní minimum neotevřeného kroku
+
+Když se neotevřený krok po druhém dlouhodobém review přesune do historie, ještě není hotovo. Archivace má být praktická, ne slavnostní. Cílem není schovat starý záznam tak hluboko, že ho nikdo nenajde, ani ho nechat v aktivním provozu jen proto, že byl kdysi důležitý. Cílem je vytvořit archivní minimum: krátkou stopu, která vysvětlí rozhodnutí, udrží návratový signál a zároveň nepřenáší zbytečné osobní, obchodní ani pracovní detaily.
+
+Archivní minimum odpovídá na čtyři otázky:
+
+- Co jsme se rozhodli neotevřít?
+- Proč to tehdy dávalo smysl?
+- Co by rozhodnutí znovu otevřelo?
+- Kde v běžné práci leží aktuální krátká věta?
+
+Všechno ostatní musí projít filtrem užitečnosti. Detailní historie workshopů, kontrolní poznámky, anonymizované příklady, odkazy na staré podklady, screenshoty a pomocné tabulky mají zůstat jen tehdy, když opravdu pomáhají budoucímu rozhodnutí. Pokud jen dokazují, že tým byl pečlivý, pryč s nimi. Archiv není vitrína procesní svědomitosti.
+
+Dobré archivní minimum může vypadat takto:
+
+```text
+Neotevřený krok:
+Nepřidávat povinné pole pro rozpočet do prvního poptávkového formuláře.
+
+Důvod:
+Poptávky šlo kvalifikovat lépe přes volitelný follow-up v obchodním vlákně; povinné pole by zvýšilo datovou stopu a neřešilo hlavní rozhodovací problém.
+
+Aktuální pracovní věta:
+Rozpočet v prvním formuláři nesbíráme; pokud je potřeba pro další krok, ptáme se volitelně ve follow-upu.
+
+Návratový signál:
+Vrátíme se pouze pokud tři relevantní poptávky za sebou nepůjdou kvalifikovat bez rozpočtu nebo pokud se změní nabídka tak, že rozpočet začne být vstupní podmínkou.
+
+Archivní odkaz:
+Detailní historie je v rozhodovacím archivu u poptávkového formuláře.
+```
+
+Všimněte si, že archivní minimum neobsahuje seznam všech debat, jména zákazníků, konkrétní částky ani staré poznámky z kontrol. Obsahuje jen to, co člověk potřebuje, až se téma jednou vrátí. To je rozdíl mezi pamětí a skladováním.
+
+### Co do archivního minima nepatří
+
+Do archivního minima obvykle nepatří:
+
+- konkrétní zákaznické odpovědi, pokud nejsou nezbytné a anonymizované;
+- screenshoty e-mailů nebo CRM záznamů;
+- dočasné tabulky z ověřovacího období;
+- jména lidí, kteří byli u původní debaty, pokud nejsou vlastníky pravidla;
+- staré návrhy řešení, které už byly výslovně zavřené;
+- metriky bez kontextu, třeba "pět případů", pokud není jasné, co přesně dokazovaly;
+- interní komentáře typu "obchod to chtěl", "produkt nesouhlasil" nebo jiné malé pamětní drama.
+
+Některé informace mohou zůstat v hlubším archivu, ale nemusí být součástí aktivního minima. Rozlišujte proto dvě vrstvy:
+
+```text
+Aktivní minimum:
+Jedna pracovní věta, důvod, návratový signál a odkaz.
+
+Hlubší historie:
+Jen ty podklady, které mají jasný účel pro budoucí audit rozhodnutí.
+```
+
+Pokud hlubší historie obsahuje osobní nebo obchodně citlivé údaje, napište k ní účel a retenční pravidlo. Nestačí říct "pro jistotu". To je kouzelná formulka, kterou systémy používají, když chtějí přibrat pět kilo dat a tvářit se, že je to svalová hmota.
+
+### Praktický SaaS příklad
+
+Představte si malý SaaS, který zvažoval povinné pole "velikost týmu" při registraci. Podnět dával smysl: support chtěl lépe odhadnout, jaký onboarding nabídnout. Jenže první ověření ukázalo, že velikost týmu není spolehlivý signál. Lepší bylo zeptat se po prvním importu dat, zda uživatel pracuje sám, nebo předává projekt týmu.
+
+Po několika kontrolách tým rozhodnutí archivuje:
+
+```text
+Neotevřený krok:
+Nepřidávat velikost týmu do registračního formuláře.
+
+Důvod:
+Velikost týmu při registraci nepomohla lépe rozhodnout onboarding. Skutečná potřeba se ukázala až po prvním importu dat.
+
+Aktuální pracovní věta:
+Registrace zůstává bez otázky na velikost týmu; kontext spolupráce zjišťujeme až po prvním importu, pokud je potřeba.
+
+Co zůstává zavřené:
+Povinné pole velikosti týmu, automatická segmentace podle odhadu a export registračních odpovědí do marketingové tabulky.
+
+Návratový signál:
+Téma se vrátí pouze pokud tři nové účty za sebou selžou v onboardingu kvůli chybějícímu kontextu spolupráce ještě před prvním importem.
+```
+
+Tohle je praktická privacy-first archivace. SaaS si pamatuje rozhodnutí, ale nezačne kvůli němu držet staré registrační odpovědi, pomocné segmenty ani poznámky ze supportu. Pokud se problém vrátí, tým má jasnou bránu. Pokud se nevrátí, registrace zůstane kratší a čistší.
+
+### Privacy-first archivace
+
+Archivace je nenápadné místo, kde se privacy-first hodnota buď potvrdí, nebo potichu prohraje. Při běžné práci se tým často hlídá: nepřidat pole, nezapnout tracker, neposílat data dalšímu nástroji. Jenže při archivaci se snadno řekne: nechme si všechno, kdyby se to hodilo. A najednou vznikne druhá datová stopa, méně viditelná než původní systém.
+
+Před uložením archivního minima si položte pět otázek:
+
+```text
+Obsahuje archiv konkrétní osobní nebo obchodní údaje?
+
+Je každý takový údaj nutný pro budoucí rozhodnutí?
+
+Stačí místo detailu anonymizovaný vzor?
+
+Má archiv vlastníka a retenční pravidlo?
+
+Ví člověk v běžné práci, že nemá otevírat celý archiv bez nového signálu?
+```
+
+Pokud odpověď na druhou otázku není jasné ano, detail do archivního minima nepatří. Pokud je potřeba zachovat hlubší historii, oddělte ji od aktivní pracovní věty a omezte přístup podle citlivosti. Archiv nemá být pohodlná náhrada za rozhodnutí, že něco už dál nepotřebujete.
+
+Příklad privacy-first zápisu:
+
+```text
+Do aktivního minima ukládáme:
+Rozhodnutí, důvod, pracovní větu a návratový signál.
+
+Do hlubší historie ukládáme:
+Anonymizované shrnutí ověřovacích případů bez zákaznických jmen, částek a kopií komunikace.
+
+Mažeme nebo nepřenášíme:
+Pomocnou tabulku z review, screenshoty odpovědí a jednorázové CRM štítky.
+
+Retence:
+Hlubší historii zkontrolujeme při příštím ročním úklidu rozhodovacích záznamů, nebo dříve při změně nabídky.
+```
+
+Tím archiv splní svůj účel a nepřeroste v tichý datový sklad. Poznatek zůstane, přebytečné detaily odejdou. Přesně tak má vypadat dospělá evropská provozní paměť: užitečná, střídmá a dohledatelná.
+
+### Karta archivního minima
+
+```text
+Název neotevřeného kroku:
+
+Aktuální stav:
+- archivní minimum
+- hlubší historie s omezeným účelem
+- smazáno bez další archivace
+
+Krátké rozhodnutí:
+
+Proč rozhodnutí platilo:
+
+Aktuální pracovní věta v běžném místě:
+
+Kde pracovní věta bydlí:
+
+Co zůstává výslovně zavřené:
+
+Návratový signál:
+
+Co je v aktivním minimu:
+
+Co je v hlubší historii:
+
+Co mažeme, anonymizujeme nebo nepřenášíme:
+
+Retenční pravidlo hlubší historie:
+
+Vlastník archivního minima:
+
+Kdy se archiv otevře znovu:
+```
+
+Kartu nevyplňujte mechanicky pro každé malé rozhodnutí. Použijte ji tam, kde téma mělo delší historii, dotýkalo se sběru dat nebo se pravděpodobně bude vracet. U drobnosti stačí jedna pracovní věta a návratový signál.
+
+### Mini workshop na 8 minut
+
+1. Minuta 1: přečtěte uzavření druhého dlouhodobého review.
+2. Minuta 2: napište jednořádkové rozhodnutí.
+3. Minuta 3: vyberte aktuální pracovní větu, která má zůstat v běžném místě.
+4. Minuta 4: napište návratový signál.
+5. Minuta 5: rozhodněte, co patří do aktivního minima.
+6. Minuta 6: oddělte hlubší historii od pracovního minima.
+7. Minuta 7: smažte, anonymizujte nebo nepřenášejte zbytečné detaily.
+8. Minuta 8: určete vlastníka a retenční pravidlo.
+
+Když se během workshopu ukáže, že archivní minimum potřebuje dlouhé vysvětlení, pravděpodobně ještě nemáte jasnou pracovní větu. Neřešte to delším archivem. Vraťte se k rozhodnutí a přepište ho tak, aby obstálo bez celého příběhu.
+
+### Checklist archivního minima
+
+- Je jasné, jaký krok zůstává neotevřený?
+- Má archivní minimum krátký důvod, ne celou historii debat?
+- Existuje aktuální pracovní věta v běžném pracovním místě?
+- Je návratový signál konkrétní a rozpoznatelný?
+- Oddělili jsme aktivní minimum od hlubší historie?
+- Neobsahuje aktivní minimum zbytečné osobní, zákaznické nebo obchodní detaily?
+- Smazali jsme nebo anonymizovali pomocné tabulky, screenshoty, ruční štítky a kopie komunikace bez dalšího účelu?
+- Má hlubší historie vlastníka, účel a retenční pravidlo?
+- Ví tým, že archiv se neotevírá ze zvědavosti, ale až při návratovém signálu?
+- Dá se podle archivního minima za půl roku pochopit rozhodnutí bez původních účastníků?
+
+Archivní minimum je poslední služba dobrému neotevřenému kroku. Nechává v systému právě tolik paměti, aby se tým nemusel učit stejnou věc znovu, ale ne tolik, aby minulost překážela práci. V praxi to znamená méně polí, méně skrytých evidencí, méně návratů bez důvodu a klidnější provoz. Což je skoro nudné. A právě proto užitečné.
+
 ## Pracovní log
 
+- 2026-07-05: Doplněna úvodní podkapitola o archivním minimu neotevřeného kroku: aktivní minimum, hlubší historie, praktický SaaS příklad, privacy-first archivace, karta, mini workshop a checklist.
 - 2026-07-05: Doplněna úvodní podkapitola o uzavření druhého dlouhodobého review neotevřeného kroku: uzavírací stavy, praktické příklady, archivace aktivního záznamu, privacy-first úklid stop, karta, mini workshop a checklist.
 - 2026-07-05: Doplněna úvodní podkapitola o druhém dlouhodobém review neotevřeného kroku po pasivním klidu: přenositelnost rozhodnutí, opakované tiché stopy, archivace aktivního záznamu, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-07-05: Doplněna úvodní podkapitola o uzavření prvního dlouhodobého review neotevřeného kroku: uzavírací stavy, praktický příklad, privacy-first úklid stop, karta, mini workshop a checklist.
