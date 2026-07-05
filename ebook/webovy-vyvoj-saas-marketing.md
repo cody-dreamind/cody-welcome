@@ -297125,8 +297125,162 @@ Pokud se tým ve druhé minutě nemůže shodnout na stavu, nepokračujte v obec
 
 Uzavření druhého běžného použití má mapu vrátit do ticha. Buď funguje a není co řešit, nebo má jedno lokální místo k dočištění, nebo problém patří jinam. Ve všech třech případech je dobrý výsledek stejný: méně mimořádné péče, méně zbytečných dat a jasnější hranice další práce.
 
+## První běžná kontrola neotevřeného kroku
+
+Neotevřený krok se nemá kontrolovat jen proto, že existuje. Pokud jste ho minule správně zavřeli, má čekat na návratový signál nebo na přirozené místo v běžném rytmu práce. První běžná kontrola proto není mimořádná revize starého rozhodnutí. Je to krátké zastavení u stejného formuláře, šablony, obchodního skriptu, onboardingového kroku nebo supportního review, kde by se původní podnět stejně znovu ukázal.
+
+Začněte větou:
+
+```text
+Neotevřený krok kontrolujeme v běžném rytmu tohoto pracovního místa, protože:
+```
+
+Dobrá věta má ukázat, že nejde o návrat staré debaty, ale o normální provozní kontrolu:
+
+```text
+Neotevřený krok kontrolujeme v běžném rytmu poptávkového formuláře, protože dnes stejně procházíme kvalitu posledních poptávek a můžeme ověřit, jestli se znovu objevil problém s kvalifikací rozpočtu.
+```
+
+Slabá věta vypadá takto:
+
+```text
+Vracíme se k poli pro rozpočet, protože už je to nějakou dobu.
+```
+
+Čas sám o sobě není důkaz. Může být připomínkou, ale nemá být důvodem k otevření práce. Pokud se při běžné kontrole nic nového neukázalo, nejčistší výsledek je znovu nic neměnit. Ano, v reportu to nevypadá oslnivě. Ale provoz, který umí neotevřít zbytečnou práci dvakrát po sobě, už má slušnou imunitu proti produktovému šumu.
+
+### Tři otázky kontroly
+
+První běžná kontrola má odpovědět jen na tři otázky:
+
+- Objevil se návratový signál, který byl minule zapsaný?
+- Změnilo se pracovní místo tak, že staré neotevření už nemusí platit?
+- Začala někde vznikat náhradní evidence, která obchází původní rozhodnutí?
+
+První otázka chrání před přehnanou reakcí. Pokud jste si minule řekli, že rozpočet otevřete až po třech nekvalifikovatelných poptávkách za sebou, jedna neurčitá poznámka z obchodu nestačí. Zapište ji jako pozorování, ale neotevírejte změnu formuláře.
+
+Druhá otázka chrání před slepým kopírováním starého závěru. Pokud se změnila nabídka, segment nebo způsob kvalifikace, může být staré neotevření pořád užitečné, ale už ho nelze brát jako hotové pravidlo bez kontroly.
+
+Třetí otázka je privacy-first brzda. Tým někdy formálně nepřidá pole do formuláře, ale začne si rozpočty psát do vedlejší tabulky, poznámek v CRM nebo ručního scoringu. To není neotevřený krok. To je otevřený krok bez názvu a bez kontroly. Krásná malá díra v plotě, jen s lepším marketingem.
+
+### Čtyři výsledky první kontroly
+
+První běžná kontrola může skončit čtyřmi stavy:
+
+- Klid potvrzen: návratový signál nepřišel, pracovní místo se nezměnilo a nevznikla náhradní evidence.
+- Lokální vysvětlení: signál nepřišel, ale je potřeba jednou větou připomenout, proč se krok dál neotevírá.
+- Změna kontextu: pracovní místo se změnilo a staré neotevření je nutné znovu posoudit jako nové rozhodnutí.
+- Skrytý otevřený krok: tým začal sbírat data nebo vést pomocnou evidenci, i když původní práce zůstala formálně zavřená.
+
+`Klid potvrzen` je cílový stav. Zapište jednu větu a nechte téma dál v běžném rytmu. Nepřidávejte další kontrolu jen proto, že kontrola dopadla dobře.
+
+`Lokální vysvětlení` použijte, když se stejná otázka vrací jako slovní šum, ale důkaz pořád chybí. Stačí doplnit poznámku k pracovnímu místu: proč pole, tracker, export nebo nový proces teď nepřidáváte.
+
+`Změna kontextu` znamená, že starý závěr už nemusí stačit. Neotevírejte rovnou původní návrh. Otevřete nové malé posouzení: co se změnilo, jaké rozhodnutí je dnes potřeba a jaká data by kvůli němu začala vznikat.
+
+`Skrytý otevřený krok` je nejdůležitější zachytit rychle. Pokud někdo obchází původní rozhodnutí vedlejší evidencí, nejdřív zastavte sběr, pojmenujte účel a rozhodněte, jestli je opravdu nutný. Neschovávejte ho pod větu "jen si to zatím píšeme". Dočasné tabulky mají zvláštní talent stát se trvalou infrastrukturou v přestrojení za poznámku.
+
+### Praktický příklad
+
+Původní neotevřený krok:
+
+```text
+Nepřidáváme povinné pole pro rozpočet do poptávkového formuláře. K tématu se vrátíme pouze pokud tři relevantní poptávky za sebou nepůjdou kvalifikovat bez ručního doptání na rozpočet.
+```
+
+První běžná kontrola:
+
+```text
+Při měsíčním review poptávek kontrolujeme posledních šest relevantních poptávek. U čtyř byl problém v nejasném cíli projektu, u dvou v chybějícím rozhodovacím procesu. Rozpočet nebyl hlavní překážkou kvalifikace.
+```
+
+Výsledek:
+
+```text
+Klid potvrzen. Pole pro rozpočet dál neotevíráme, protože návratový signál nepřišel. Nepřidáváme ani pomocnou tabulku rozpočtů; v běžném review stačí anonymní poznámka o důvodu nekvalifikovatelnosti.
+```
+
+Varianta se skrytým otevřeným krokem:
+
+```text
+Obchod si začal vedle formuláře vést ruční sloupec "odhad rozpočtu" u každé poptávky.
+```
+
+Uzavření:
+
+```text
+Skrytý otevřený krok. Ruční sloupec pozastavujeme, mažeme nepotřebné odhady a nejdřív rozhodneme, jestli existuje konkrétní rozhodnutí, které bez rozpočtového údaje nejde udělat. Do té doby formulář ani CRM nerozšiřujeme.
+```
+
+Tady nejde o trestání obchodu. Obchod se často snaží jen rychleji rozhodovat. Úkolem privacy-first provozu je ale převést takovou snahu do jasného pravidla: proč data potřebujeme, jak dlouho je držíme, kdo je vidí a jestli nestačí menší údaj nebo lepší otázka na cíl projektu.
+
+### Karta první běžné kontroly
+
+```text
+Datum:
+
+Původní neotevřený krok:
+
+Běžný rytmus, ve kterém kontrola proběhla:
+
+Původní návratový signál:
+
+Co se při kontrole ukázalo:
+
+Výsledek kontroly:
+- klid potvrzen
+- lokální vysvětlení
+- změna kontextu
+- skrytý otevřený krok
+
+Co se dál neotevírá:
+
+Co se případně zastavuje nebo maže:
+
+Jaká data díky tomu dál nesbíráme:
+
+Kde je závěr uložený:
+
+Další návratový signál:
+```
+
+Karta má být krátká. Pokud vyjde `klid potvrzen`, stačí vyplnit jen původní krok, běžný rytmus, výsledek a datovou stopu. Plnou kartu použijte hlavně u změny kontextu nebo skrytého otevřeného kroku, kde by bez zápisu snadno vznikla neviditelná práce.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte původní neotevřený krok a návratový signál.
+2. Minuta 2: řekněte, v jakém běžném rytmu kontrola právě probíhá.
+3. Minuty 3 až 4: porovnejte návratový signál s tím, co se opravdu stalo.
+4. Minuta 5: zkontrolujte, jestli nevznikla náhradní evidence nebo nový sběr dat.
+5. Minuta 6: vyberte jeden ze čtyř výsledků a napište závěr.
+
+Pokud se během workshopu objeví chuť "pro jistotu" začít něco měřit, zastavte se u rozhodovací věty:
+
+```text
+Bez tohoto údaje neumíme rozhodnout:
+```
+
+Když větu nedopíšete konkrétně, údaj nesbírejte. Když ji dopíšete, teprve potom řešte, jestli jde rozhodnutí udělat menší datovou stopou.
+
+### Checklist první běžné kontroly
+
+- Probíhá kontrola v existujícím běžném rytmu, ne jako nová mimořádná schůzka?
+- Máme před sebou původní návratový signál?
+- Víme, jestli se signál opravdu objevil, nebo jde jen o podobný pocit?
+- Ověřili jsme, jestli se nezměnilo pracovní místo, nabídka nebo segment?
+- Zkontrolovali jsme náhradní evidence, ruční tabulky, CRM poznámky a dočasné exporty?
+- Vybrali jsme přesně jeden výsledek kontroly?
+- Pokud potvrzujeme klid, nepřidáváme další kontrolu bez nového signálu?
+- Pokud vysvětlujeme lokálně, nepřepisujeme kvůli tomu celý proces?
+- Pokud se změnil kontext, otevíráme nové malé posouzení, ne původní velký návrh?
+- Pokud vznikl skrytý otevřený krok, víme, co se zastavuje, maže nebo převádí do jasného rozhodnutí?
+- Je zapsané, jaká data dál nesbíráme?
+
+První běžná kontrola neotevřeného kroku má být nudná a užitečná. Buď potvrdí, že se nic nemění, nebo najde přesné místo, kde se z neotevřené práce začala rodit práce skrytá. V obou případech drží tým u stejné zásady: neotevírat změnu bez signálu a nesbírat data bez rozhodnutí.
+
 ## Pracovní log
 
+- 2026-07-05: Doplněna úvodní podkapitola o první běžné kontrole neotevřeného kroku: přirozený rytmus kontroly, tři otázky, čtyři výsledky, praktický příklad s poptávkovým formulářem, privacy-first zachycení skryté evidence, karta, mini workshop a checklist.
 - 2026-07-05: Doplněna úvodní podkapitola o uzavření druhého běžného použití po uzavřeném signálu čtenářské mapy: tři uzavírací stavy, praktické příklady, privacy-first úklid pomocné evidence, karta, mini workshop a checklist.
 - 2026-07-05: Doplněna úvodní podkapitola o druhém běžném použití po uzavřeném signálu čtenářské mapy: kdy druhé použití přeskočit, ověření přenositelnosti, čtyři výsledky, praktický SaaS příklad, privacy-first hranice, karta, mini workshop a checklist.
 - 2026-07-05: Doplněna úvodní podkapitola o uzavření prvního běžného použití po uzavřeném signálu čtenářské mapy: čtyři uzavírací stavy, praktické příklady, privacy-first uzavření bez nové evidence, karta, mini workshop a checklist.
