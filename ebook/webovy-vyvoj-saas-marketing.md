@@ -298413,8 +298413,243 @@ Workshop má skončit jedním uzavřeným záznamem, ne plánem dalšího zkoum�
 
 Uzavřené dlouhodobé review má být tiché. Ne proto, že by bylo nedůležité, ale proto, že už nevyžaduje zvláštní pozornost. Rozhodnutí je na správném místě, dočasné stopy jsou pryč, další návrat má podmínku a datová hranice zůstává čitelná. To je přesně ten typ provozní čistoty, která nevypadá efektně na prezentaci, ale šetří čas, nervy a zbytečně nasbíraná data.
 
+## Druhé dlouhodobé review neotevřeného kroku po pasivním klidu
+
+Druhé dlouhodobé review má mnohem užší roli než první. První review ověřovalo, jestli pasivní rozhodnutí přežije delší klid a přirozený kontakt s pracovním místem. Druhé review už nemá znovu dokazovat totéž. Má zjistit, jestli se z pasivního klidu nestal zapomenutý relikt, který nikdo nepoužívá, nebo naopak skryté pravidlo, které se potichu obchází.
+
+Spouštěčem druhého review nemá být kalendář. Má jím být druhý přirozený kontakt s pracovním místem po uzavřeném prvním review: další větší úprava formuláře, změna šablony nabídky, úklid CRM polí, revize onboardingové cesty nebo audit datové mapy. Pokud se pracovní místo od prvního review nepoužilo relevantně, druhé review neplánujte. Téma má zůstat v pasivním klidu.
+
+Začněte větou:
+
+```text
+Druhé dlouhodobé review otevíráme, protože se po uzavřeném prvním review znovu přirozeně dotýkáme tohoto pracovního místa:
+```
+
+Dobrá věta:
+
+```text
+Druhé dlouhodobé review otevíráme, protože při kvartálním úklidu CRM polí kontrolujeme, zda rozhodnutí nesbírat rozpočet v prvním kontaktu pořád odpovídá novému způsobu kvalifikace SaaS auditů.
+```
+
+Slabá věta:
+
+```text
+Je čas se k tomu zase vrátit.
+```
+
+Čas není důkaz. Čas je jen prostředí, ve kterém se důkazy občas objeví. Pokud důkaz nepřišel a pracovní místo se nemění, review by jen vyrábělo pocit péče. Ten je příjemný, ale provozně drahý.
+
+### Co druhé review ověřuje
+
+Druhé dlouhodobé review položte na tři jednoduché kontroly:
+
+- Přežilo rozhodnutí přenos mezi lidmi, šablonami nebo nástroji?
+- Nevznikla opakovaná tichá náhrada za původně neotevřený krok?
+- Má pasivní záznam ještě hodnotu, nebo ho lze archivovat do stručné historie?
+
+První kontrola je o přenositelnosti. Rozhodnutí může být správné, ale pokud ho noví lidé nenajdou, začne se řešit znovu. Sledujte, jestli je pracovní věta pořád u místa, kde se rozhoduje: u formuláře, sales šablony, onboardingového kroku, support odpovědi nebo datové mapy.
+
+Druhá kontrola je o opakování. Jednorázová tichá stopa se dá uklidit v prvním review. Pokud se ale stejný obchvat objeví znovu, nejde jen o úklid. Je to signál, že týmu chybí lepší rozhodovací opora. Pořád to nemusí znamenat otevření původního návrhu, ale může to znamenat jasnější pravidlo, lepší příklad nebo nové malé posouzení.
+
+Třetí kontrola chrání před nekonečnou pamětí. Některé neotevřené kroky jsou po dvou klidných cyklech už jen historická poznámka. Pokud se pracovní místo stabilizovalo, návratový signál nepřišel, žádné tiché stopy nevznikají a lidé pravidlo chápou, není potřeba držet záznam v aktivní provozní vrstvě. Stačí ho archivovat jako rozhodnutí, které se vrátí jen při zásadní změně.
+
+Codyho komentář: dobrá týmová paměť není hromada všeho, co se kdy rozhodlo. To je spíš šanon s ambicemi. Dobrá paměť umí některé věci držet po ruce a jiné poslat do klidného archivu, kde neotravují, ale dají se dohledat.
+
+### Čtyři výsledky druhého dlouhodobého review
+
+Druhé review může skončit čtyřmi stavy:
+
+- Pasivní klid drží: rozhodnutí je použitelné, najitelné a bez tichých obchvatů.
+- Zesílit pracovní kotvu: rozhodnutí platí, ale lidé ho nacházejí pozdě nebo nepřesně.
+- Otevřít malé posouzení opakovaného obchvatu: původní návrh zůstává zavřený, ale opakovaná tichá stopa ukazuje na chybějící pravidlo.
+- Archivovat aktivní záznam: rozhodnutí je stabilní a stačí ho držet v historii nebo datové mapě jako uzavřený kontext.
+
+`Pasivní klid drží` je výsledek bez další práce. Zapište jednu větu a neplánujte třetí review. Další návrat musí mít konkrétní spouštěč.
+
+`Zesílit pracovní kotvu` použijte, když rozhodnutí funguje, ale je schované. Typicky ho najdete ve starém checklistu, zatímco lidé rozhodují v nové šabloně. Nezakládejte nový proces. Přesuňte nebo zkraťte jednu větu tam, kde ji člověk uvidí ve chvíli rozhodnutí.
+
+`Otevřít malé posouzení opakovaného obchvatu` použijte opatrně. Pokud se tichá evidence vrací, problém možná není v tom, že tým "nedodržuje pravidla". Možná pravidlo neodpovídá reálné otázce. Otevřete tedy nejmenší posouzení: co lidé potřebují rozhodnout, proč k tomu sahají po zakázané nebo nechtěné stopě a jak to vyřešit bez zbytečného sběru dat.
+
+`Archivovat aktivní záznam` je legitimní výsledek. Neznamená zapomenout. Znamená přesunout záznam z běžné provozní vrstvy do historie, protože už nepotřebuje aktivní pozornost. V aktivní šabloně může zůstat jen krátká věta; detailní historie patří do logu nebo datové mapy.
+
+### Praktický SaaS příklad
+
+Původní neotevřený krok:
+
+```text
+Nepřidáváme povinné pole "rozpočet" do prvního poptávkového formuláře.
+```
+
+První dlouhodobé review skončilo stavem `kotva přesunuta`:
+
+```text
+Rozhodnutí bylo přesunuto ze starého obchodního checklistu do nové šablony privacy-first SaaS auditu. Povinné pole, CRM atribut a scoring podle rozpočtu zůstaly zavřené.
+```
+
+Druhé review vzniklo přirozeně:
+
+```text
+Pracovní místo:
+Kvartální úklid CRM polí a sales šablon.
+
+Kontrola:
+Nová šablona auditu obsahuje větu o nesbírání rozpočtu v prvním kontaktu. Obchod ji používá. V CRM nevznikl nový atribut rozpočtu.
+
+Zjištění:
+V poznámkách u dvou leadů se objevila ruční poznámka "asi menší rozpočet", ale nejde o opakovaný proces ani sloupec.
+```
+
+Rozhodnutí:
+
+```text
+Stav:
+Pasivní klid drží.
+
+Co děláme:
+Do šablony doplňujeme jen přesnější formulaci, že odhad ekonomického rozsahu patří až do obchodního follow-upu, pokud je pro další krok opravdu potřeba.
+
+Co neotevíráme:
+Povinné pole, CRM atribut, scoring ani tabulku odhadů.
+
+Jaká data dál nesbíráme:
+Rozpočtový údaj v prvním formuláři, automatický odhad rozpočtu a behaviorální signály pro hodnotu leadu.
+```
+
+Varianta s opakovaným obchvatem:
+
+```text
+Zjištění:
+V každém druhém obchodním zápisu vzniká ruční odhad rozpočtu, protože tým neumí rozlišit malý audit od dlouhodobého partnerství bez ekonomického kontextu.
+```
+
+Rozhodnutí:
+
+```text
+Stav:
+Otevřít malé posouzení opakovaného obchvatu.
+
+Nová otázka:
+Jak rozlišit typ spolupráce bez povinného rozpočtu v prvním formuláři a bez interního scoringu podle dojmu?
+
+První krok:
+Ověřit, zda stačí na stránku služby doplnit rozsahy typických scénářů a do obchodního follow-upu přidat volitelnou otázku na očekávaný rozsah spolupráce.
+
+Co zůstává zavřené:
+Povinné pole rozpočtu, CRM atribut a automatický scoring.
+```
+
+Tohle je důležitý rozdíl. Opakovaný obchvat není důvod automaticky otevřít původní návrh. Je to důvod pochopit, jakou práci se lidé snaží udělat, a najít menší, datově střídmější cestu.
+
+### Privacy-first kontrola druhého review
+
+Druhé review má zkontrolovat hlavně opakování datových stop:
+
+```text
+Od prvního dlouhodobého review se opakovaly tyto stopy:
+
+Byly součástí schváleného pracovního místa:
+- ano
+- ne
+
+Měly jasný účel:
+- ano
+- ne
+
+Obsahovaly osobní nebo obchodně citlivé údaje:
+- ano
+- ne
+
+Co zastavujeme, mažeme nebo anonymizujeme:
+
+Jaká data dál nesbíráme:
+```
+
+Pokud se stopa objevila jen jednou, může stačit lokální úklid. Pokud se opakuje, nepište jen "připomenout pravidlo". Připomenutí je levné, ale často slabé. Lepší je zjistit, proč lidé pravidlo obcházejí: chybí jim informace, příklad, rozhodovací hranice, nebo mají starý návyk z jiného procesu.
+
+Privacy-first závěr má být konkrétní:
+
+```text
+Po druhém review nevzniká nový rozpočtový atribut, neprodlužujeme retenci obchodních poznámek a neexportujeme leady do dalšího nástroje. Dvě ruční poznámky bez rozhodovací hodnoty mažeme. Do šablony přidáváme jen větu, kdy se na rozsah spolupráce ptát volitelně ve follow-upu.
+```
+
+To je provozní ochrana v praxi: méně údajů, jasnější rozhodnutí, žádné dramatické tanečky kolem dalšího formulářového pole.
+
+### Karta druhého dlouhodobého review
+
+```text
+Neotevřený krok:
+
+Stav po prvním dlouhodobém review:
+
+Proč druhé review vzniklo právě teď:
+
+Dotčené pracovní místo:
+
+Je rozhodnutí najitelné při běžné práci:
+- ano
+- ne
+- částečně
+
+Přežilo přenos mezi lidmi, šablonami nebo nástroji:
+- ano
+- ne
+- částečně
+
+Vznikla opakovaná tichá stopa:
+- ne
+- ano, jaká:
+
+Výsledek druhého review:
+- pasivní klid drží
+- zesílit pracovní kotvu
+- otevřít malé posouzení opakovaného obchvatu
+- archivovat aktivní záznam
+
+Co zůstává zavřené:
+
+Co se doplňuje, uklízí nebo archivuje:
+
+Jaká data dál nesbíráme:
+
+Kde bude závěr uložený:
+
+Co by téma znovu otevřelo:
+```
+
+Karta má jednu praktickou ambici: zabránit tomu, aby se druhé review proměnilo v obnovené hlasování o starém nápadu. Starý návrh zůstává zavřený, dokud nemáte nový důvod, novou otázku a menší první krok.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte stav po prvním dlouhodobém review.
+2. Minuta 2: pojmenujte, proč druhé review vzniklo právě teď.
+3. Minuta 3: ověřte, jestli je rozhodnutí najitelné v dnešním pracovním místě.
+4. Minuta 4: hledejte opakované tiché stopy, ne jednorázové poznámky bez dopadu.
+5. Minuta 5: vyberte jeden ze čtyř výsledků druhého review.
+6. Minuta 6: zapište, co zůstává zavřené, jaká data dál nesbíráte a zda aktivní záznam zůstává po ruce, nebo se archivuje.
+
+Pokud se workshop začne větvit do více rozhodnutí, vraťte se k pracovnímu místu. Druhé review řeší jen to místo, kvůli kterému vzniklo. Vše ostatní patří do samostatné karty, jinak se z pasivního klidu stane nenápadný generátor nových projektů.
+
+### Checklist druhého dlouhodobého review
+
+- Vzniklo druhé review z přirozeného kontaktu s pracovním místem?
+- Neotevíráme téma jen proto, že uplynul čas?
+- Máme před sebou výsledek prvního dlouhodobého review?
+- Je rozhodnutí najitelné v dnešním pracovním místě?
+- Přežilo rozhodnutí přenos do nové šablony, role nebo nástroje?
+- Rozlišili jsme jednorázovou poznámku od opakované tiché stopy?
+- Pokud se obchvat opakuje, ptáme se na chybějící rozhodovací oporu, ne jen na disciplínu lidí?
+- Vybrali jsme jeden ze čtyř výsledků review?
+- Je jasné, co zůstává zavřené?
+- Pokud zesilujeme kotvu, nepřidáváme nový proces ani nové pole?
+- Pokud otevíráme malé posouzení, má novou otázku a privacy-first hranici?
+- Pokud archivujeme aktivní záznam, zůstává dohledatelná stručná historie?
+- Je výslovně napsané, jaká data dál nesbíráme?
+
+Druhé dlouhodobé review je hotové, když je jasné, jestli pasivní rozhodnutí pořád slouží běžné práci. Pokud ano, nechte ho ztichnout ještě víc. Pokud ne, neoprašujte automaticky starý návrh. Najděte dnešní otázku, nejmenší pracovní místo a datově nejstřídmější odpověď. Tak se z dlouhodobého provozu nestane muzeum starých rozhodnutí ani továrna na nové formuláře.
+
 ## Pracovní log
 
+- 2026-07-05: Doplněna úvodní podkapitola o druhém dlouhodobém review neotevřeného kroku po pasivním klidu: přenositelnost rozhodnutí, opakované tiché stopy, archivace aktivního záznamu, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-07-05: Doplněna úvodní podkapitola o uzavření prvního dlouhodobého review neotevřeného kroku: uzavírací stavy, praktický příklad, privacy-first úklid stop, karta, mini workshop a checklist.
 - 2026-07-05: Doplněna úvodní podkapitola o prvním dlouhodobém review neotevřeného kroku v pasivním provozu: přirozený důvod kontroly, tři otázky, čtyři výsledky, praktický SaaS příklad, privacy-first kontrola skrytých stop, karta, mini workshop a checklist.
 - 2026-07-05: Doplněna úvodní podkapitola o převodu neotevřeného kroku do dlouhodobého pasivního provozu: převodová věta, praktický SaaS příklad, privacy-first úklid dočasných stop, karta, mini workshop a checklist.
