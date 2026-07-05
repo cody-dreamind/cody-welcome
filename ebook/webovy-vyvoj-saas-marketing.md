@@ -297999,8 +297999,230 @@ Pokud během workshopu někdo navrhne "ještě jednu kontrolu pro jistotu", pož
 
 Převod do dlouhodobého pasivního provozu je hotový, když se téma umí vrátit samo: buď přes běžnou práci, nebo přes návratový signál. Dokud potřebuje zvláštní připomínky, není pasivní. A pokud zvláštní připomínky nepotřebuje, nechte ho být. Dobře zavřená práce je pořád práce, jen nemá potřebu každý měsíc mávat rukou.
 
+## První dlouhodobé review neotevřeného kroku v pasivním provozu
+
+Neotevřený krok v pasivním provozu nemá mít pravidelnou kontrolu jen proto, že kalendář umí pípat. Přesto se může stát, že se po delší době přirozeně potká s běžnou prací: mění se nabídka, někdo upravuje formulář, tým reviduje obchodní checklist, support aktualizuje šablonu odpovědi nebo se onboarding přesouvá do nového nástroje. V takové chvíli dává smysl udělat první dlouhodobé review.
+
+Důležité je slovo `přirozeně`. Review nemá z pasivního tématu udělat novou agendu. Má jen ověřit, jestli staré rozhodnutí pořád sedí k místu, kterého se právě dotýkáte. Pokud se pracovního místa nikdo nedotýká a návratový signál nepřišel, není co otevírat.
+
+Začněte větou:
+
+```text
+Neotevřený krok kontrolujeme po delším klidu, protože se přirozeně dotýkáme tohoto pracovního místa:
+```
+
+Dobrá věta:
+
+```text
+Neotevřený krok kontrolujeme po delším klidu, protože aktualizujeme poptávkový formulář kvůli nové nabídce auditu a potřebujeme ověřit, jestli staré rozhodnutí nesbírat rozpočet v prvním kontaktu pořád platí.
+```
+
+Slabá věta:
+
+```text
+Už jsme se na to dlouho nedívali.
+```
+
+Dlouhý klid sám o sobě není problém. Problém je až změna pracovního místa, nový návratový signál nebo nová datová stopa, která vznikla bez rozhodnutí. Pokud nic z toho neexistuje, nejlepší review je žádné review. Ano, tohle zní jako lenost, ale je to disciplína. Lenost nemá kartu, disciplína má hranici.
+
+### Tři otázky dlouhodobého review
+
+Při prvním dlouhodobém review položte jen tři otázky:
+
+- Změnilo se pracovní místo tak, že staré rozhodnutí může být neaktuální?
+- Přišel původní návratový signál, nebo jen nový podnět s podobným názvem?
+- Vznikla od převodu do pasivního provozu skrytá datová stopa?
+
+První otázka chrání před automatickým přepisem starých rozhodnutí. Když se mění nabídka, segment zákazníků nebo způsob kvalifikace poptávky, může být rozumné staré rozhodnutí zkontrolovat. Když se ale mění jen barva tlačítka nebo pořadí polí ve formuláři, rozhodnutí o nesbíraném údaji se tím samo neotevírá.
+
+Druhá otázka odděluje návratový signál od nového nápadu. Pokud byl návratový signál "tři relevantní poptávky za sebou nejdou kvalifikovat bez rozpočtu", nestačí říct, že by rozpočet "možná pomohl". Muselo se stát něco, co odpovídá původnímu signálu, nebo musíte založit nové malé posouzení s novou otázkou.
+
+Třetí otázka je privacy-first brzda. Dlouhodobý klid může skrýt drobné obchvaty: poznámkové pole, interní štítek, ruční export, sdílenou tabulku, screenshoty nebo opakované kopírování údajů do jiné šablony. Review má tyto stopy najít dřív, než se začnou tvářit jako samozřejmá součást provozu.
+
+Codyho komentář: dlouhodobé review není detektivka se šokujícím odhalením. Je to spíš kontrola, jestli se z malého "to si jen poznamenám" nestal neoficiální systém. Neoficiální systémy jsou jako neoznačené krabice ve skladu: někdy obsahují užitečnou věc, častěji jen budoucí práci.
+
+### Čtyři výsledky review
+
+Dlouhodobé review může skončit čtyřmi stavy:
+
+- Pasivní klid potvrzen: pracovní místo se nezměnilo relevantně, návratový signál nepřišel a nevznikla skrytá evidence.
+- Aktualizovat kotvu: rozhodnutí platí, ale je potřeba ho přesunout nebo zkrátit u nového pracovního místa.
+- Uklidit tichou stopu: rozhodnutí platí, ale někde vznikla náhradní evidence, kterou je potřeba zastavit nebo anonymizovat.
+- Otevřít nové malé posouzení: změna pracovního místa je reálná a starý návratový signál už nestačí popsat dnešní otázku.
+
+`Pasivní klid potvrzen` je nejlehčí výsledek. Zapište jednu větu a dál nic neplánujte. Není potřeba vyrábět druhé dlouhodobé review jen proto, že první dopadlo dobře.
+
+`Aktualizovat kotvu` použijte, když se pracovní místo přesunulo. Třeba obchodní checklist nahradila nová šablona kvalifikace, ale rozhodnutí zůstává stejné. V takovém případě přesuňte jednu pracovní větu do nového místa a starý odkaz zavřete.
+
+`Uklidit tichou stopu` je stav pro případy, kdy se formálně nic nezměnilo, ale tým začal údaj nahrazovat bokem. Neotevírejte rovnou původní návrh. Nejdřív zastavte tichou stopu a napište, zda měla vůbec jasný účel.
+
+`Otevřít nové malé posouzení` použijte jen tehdy, když se změnila realita. Například se nabídka posunula z malých auditů na dlouhodobé vývojové partnerství a kvalifikace rozpočtu má novou roli. Ani tehdy nemusí být výsledkem povinné pole. Prvním krokem může být lepší popis typického rozsahu spolupráce na stránce služby nebo volitelná otázka v obchodním e-mailu.
+
+### Praktický SaaS příklad
+
+Původní pasivní rozhodnutí:
+
+```text
+Nepřidáváme povinné pole "rozpočet" do prvního poptávkového formuláře.
+
+Návratový signál:
+Tři relevantní poptávky za sebou nepůjdou kvalifikovat bez ručního doptání na rozpočet.
+
+Datová hranice:
+V prvním kontaktu nesbíráme rozpočet, nevytváříme CRM atribut rozpočtu a nespouštíme scoring podle odhadované kupní síly.
+```
+
+Dlouhodobé review vzniklo přirozeně:
+
+```text
+Pracovní místo:
+Poptávkový formulář upravujeme kvůli nové produktizované nabídce "privacy-first SaaS audit".
+
+Kontrola:
+Návratový signál nepřišel. Poslední relevantní poptávky šly kvalifikovat podle cíle projektu, typu systému a rozhodovacího procesu.
+
+Zjištění:
+Ve starém obchodním checklistu je rozhodnutí jasné, ale nová šablona auditu ho zatím neobsahuje.
+```
+
+Rozhodnutí:
+
+```text
+Stav:
+Aktualizovat kotvu.
+
+Co děláme:
+Do nové šablony auditu přenášíme jednu větu: "Rozpočet v prvním formuláři nesbíráme; pokud je pro kvalifikaci potřeba, ptáme se volitelně v obchodním follow-upu."
+
+Co zůstává zavřené:
+Povinné rozpočtové pole, rozpočtový CRM atribut a scoring podle rozpočtu.
+
+Privacy-first závěr:
+Nevzniká nové pole, nový tracker, nový export ani nová retence obchodních odhadů.
+```
+
+Varianta s tichou stopou:
+
+```text
+Zjištění:
+V nové šabloně auditu vznikl interní sloupec "odhad rozpočtu", který lidé doplňují podle dojmu z první zprávy.
+```
+
+Rozhodnutí:
+
+```text
+Stav:
+Uklidit tichou stopu.
+
+Co děláme:
+Sloupec zastavujeme a existující hodnoty mažeme nebo převádíme do anonymního závěru, že tým potřebuje lépe rozlišit typ projektu. Než vznikne jakýkoli údaj o rozpočtu, musí existovat nová rozhodovací otázka, účel, vlastník a místo v datové mapě.
+
+Co zůstává zavřené:
+Povinné pole a scoring podle rozpočtu.
+```
+
+Tahle druhá varianta je přesně důvod, proč dlouhodobé review občas dává smysl. Ne proto, aby tým znovu hlasoval o starém nápadu, ale aby staré rozhodnutí nepřestalo platit jen tím, že se potichu přestěhovalo do jiné tabulky.
+
+### Privacy-first kontrola po delším klidu
+
+Do review přidejte krátkou datovou kontrolu:
+
+```text
+Od převodu do pasivního provozu vzniklo:
+
+Účel těchto stop:
+
+Co ponecháváme:
+
+Co mažeme, anonymizujeme, slučujeme nebo zastavujeme:
+
+Jaká data dál nesbíráme:
+```
+
+Pokud nic nevzniklo, napište to:
+
+```text
+Od převodu do pasivního provozu nevznikla žádná nová evidence rozpočtu, žádný CRM atribut, žádný export ani ruční scoring. Rozhodnutí dál stojí na stejném návratovém signálu.
+```
+
+Explicitní nula je užitečná. Ukazuje, že klid nebyl jen nezájem, ale opravdu nevznikla nová stopa. V privacy-first provozu je taková nula často lepší než nový dashboard. Dashboard umí odpovědět na otázku. Nula říká, že jste si tu otázku nemuseli koupit dalšími daty.
+
+### Karta dlouhodobého review
+
+```text
+Neotevřený krok v pasivním provozu:
+
+Kde rozhodnutí bydlí:
+
+Proč review vzniklo právě teď:
+
+Změnilo se pracovní místo:
+- ano
+- ne
+- částečně
+
+Původní návratový signál:
+
+Přišel původní návratový signál:
+- ano
+- ne
+- nejasné
+
+Vznikla skrytá datová stopa:
+- ne
+- ano, jaká:
+
+Výsledek review:
+- pasivní klid potvrzen
+- aktualizovat kotvu
+- uklidit tichou stopu
+- otevřít nové malé posouzení
+
+Co zůstává zavřené:
+
+Co se přesouvá, opravuje nebo uklízí:
+
+Jaká data dál nesbíráme:
+
+Kde je závěr uložený:
+
+Kdy se téma smí znovu otevřít:
+```
+
+Karta má být krátká. Pokud se začne rozrůstat, pravděpodobně už neděláte review pasivního kroku, ale otevíráte nové téma. To může být správně, jen to pojmenujte. Starý pasivní záznam nemá nést nový projekt na zádech.
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: pojmenujte pracovní místo, které se teď přirozeně mění nebo používá.
+2. Minuta 2: přečtěte původní neotevřený krok a návratový signál.
+3. Minuta 3: rozhodněte, jestli se pracovní místo relevantně změnilo.
+4. Minuta 4: ověřte, jestli přišel původní návratový signál.
+5. Minuta 5: hledejte skrytou datovou stopu v šablonách, tabulkách, CRM, exportech a poznámkách.
+6. Minuta 6: vyberte jeden ze čtyř výsledků review.
+7. Minuta 7: zapište, co zůstává zavřené a jaká data dál nesbíráte.
+
+Když během workshopu vznikne chuť "rovnou to celé přehodnotit", zastavte se u důvodu review. Pokud důvodem byla jen aktualizace šablony, opravte šablonu. Pokud důvodem je skutečná změna nabídky, otevřete nové malé posouzení. Tyto dvě věci nemíchejte, jinak se z úklidu jedné věty stane strategická porada v kostýmu drobné údržby.
+
+### Checklist dlouhodobého review
+
+- Vzniklo review přirozeně při práci s dotčeným místem?
+- Nepoužíváme samotný čas jako důvod k otevření tématu?
+- Máme před sebou původní neotevřený krok a návratový signál?
+- Víme, jestli se změnilo pracovní místo, nabídka, segment nebo kvalifikační proces?
+- Ověřili jsme, zda přišel původní návratový signál?
+- Rozlišili jsme návratový signál od nového podnětu?
+- Zkontrolovali jsme skryté datové stopy, ruční tabulky, štítky, exporty a poznámková pole?
+- Vybrali jsme jeden ze čtyř výsledků review?
+- Pokud jen aktualizujeme kotvu, nepřidáváme nové pole ani nový proces?
+- Pokud uklízíme tichou stopu, víme, co se maže, anonymizuje nebo zastavuje?
+- Pokud otevíráme nové malé posouzení, má vlastní otázku a menší rozsah než původní návrh?
+- Je výslovně napsané, jaká data dál nesbíráme?
+
+První dlouhodobé review je hotové, když pasivní rozhodnutí buď zůstane lehké, nebo se přesně ukáže, proč už lehké být nemůže. Cílem není udržet staré rozhodnutí za každou cenu. Cílem je nepustit do systému novou práci a nová data bez jasného důvodu. To je malá, nenápadná věc, ze které se skládá důvěryhodný evropský provoz.
+
 ## Pracovní log
 
+- 2026-07-05: Doplněna úvodní podkapitola o prvním dlouhodobém review neotevřeného kroku v pasivním provozu: přirozený důvod kontroly, tři otázky, čtyři výsledky, praktický SaaS příklad, privacy-first kontrola skrytých stop, karta, mini workshop a checklist.
 - 2026-07-05: Doplněna úvodní podkapitola o převodu neotevřeného kroku do dlouhodobého pasivního provozu: převodová věta, praktický SaaS příklad, privacy-first úklid dočasných stop, karta, mini workshop a checklist.
 - 2026-07-05: Doplněna úvodní podkapitola o uzavření druhé běžné kontroly neotevřeného kroku: uzavírací stavy, praktický SaaS příklad, úklid náhradní evidence, privacy-first závěr, karta, mini workshop a checklist.
 - 2026-07-05: Doplněna úvodní podkapitola o druhé běžné kontrole neotevřeného kroku: stabilní klid, dohledatelnost rozhodnutí, lokální šum, skrytá náhrada, praktický SaaS příklad, privacy-first kontrola datové stopy, karta, mini workshop a checklist.
