@@ -297693,8 +297693,173 @@ Pokud se tým během workshopu začne hádat o původní rozhodnutí, vraťte se
 
 Druhá běžná kontrola je hotová, když téma buď zůstane v klidu, nebo se přesně ukáže, kde klid selhal. V obou případech je cílem menší provozní stopa: méně zvláštních kontrol, méně skryté evidence a více rozhodnutí, která vydrží i bez člověka, který je původně napsal.
 
+## Jak uzavřít druhou běžnou kontrolu neotevřeného kroku
+
+Druhá běžná kontrola neotevřeného kroku má po sobě nechat jasnější konec než první kontrola. První kontrola často jen ověřuje, že rozhodnutí přežilo běžné použití. Druhá už má říct, jestli neotevřený krok patří dál do klidového režimu, jestli potřebuje lokální opravu dohledatelnosti, nebo jestli se ve skutečnosti začala tvořit náhradní evidence. Bez uzavření se z druhé kontroly snadno stane neurčitá poznámka: "zatím dobré, ale sledujme". A to je věta, která umí potichu vyrábět práci i data.
+
+Začněte jednou uzavírací větou:
+
+```text
+Druhou běžnou kontrolu uzavíráme takto:
+```
+
+Za ni napište stav, důvod a další režim:
+
+```text
+Druhou běžnou kontrolu uzavíráme takto:
+Návratový signál nepřišel, rozhodnutí je dohledatelné v obchodním checklistu a nevznikla žádná náhradní evidence. Neotevřený krok proto zůstává v pasivním režimu a další kontrolu neplánujeme mimo běžné měsíční review.
+```
+
+Taková věta zavírá tři dveře najednou. Neotevírá původní návrh. Nezakládá novou mimořádnou kontrolu. A nedovolí, aby se kolem tématu začala sbírat pomocná data jen proto, že "se to možná bude hodit".
+
+### Čtyři uzavírací stavy
+
+Po druhé kontrole vyberte jeden ze čtyř stavů:
+
+- Potvrdit pasivní klid: návratový signál nepřišel, rozhodnutí je dohledatelné a nevznikla náhradní evidence.
+- Opravit dohledatelnost: rozhodnutí platí, ale pracovní místo ho neukazuje dost jasně.
+- Uklidit náhradní evidenci: původní krok zůstává zavřený, ale někde vznikla ruční tabulka, štítek, export nebo poznámkové pole.
+- Otevřít nové malé posouzení: neotevřel se původní velký návrh, ale druhá kontrola ukázala konkrétní lokální problém.
+
+`Potvrdit pasivní klid` je nejlepší stav. Znamená, že neotevřený krok už nepotřebuje mimořádnou péči. Nechte ho tam, kde má být: v rozhodovacím záznamu, u pracovního místa a s jasným návratovým signálem. Nepřidávejte další kontrolu jen proto, že dvě kontroly proběhly úspěšně.
+
+`Opravit dohledatelnost` je lokální úklid, ne návrat k tématu. Pokud člověk neví, proč se rozpočet nesbírá v prvním formuláři, doplňte jednu větu k checklistu nebo šabloně. Neotevírejte formulář, scoring ani novou analytiku.
+
+`Uklidit náhradní evidenci` je nejcitlivější stav. Jakmile tým začne ručně nahrazovat zavřený krok, třeba štítkem "asi nízký rozpočet", rozhodnutí se sice formálně nezměnilo, ale datová stopa už roste. Nejprve zastavte sběr, potom rozhodněte, co s existujícími stopami, a teprve nakonec se ptejte, jestli existuje skutečný důvod k novému malému posouzení.
+
+`Otevřít nové malé posouzení` použijte jen tehdy, když druhá kontrola ukázala konkrétní problém, který není původním návrhem v převleku. Například se nepotvrdí potřeba povinného rozpočtu, ale opakovaně se ukáže, že chybí otázka na rozhodovací proces. Pak otevíráte otázku rozhodovacího procesu, ne rozpočtové pole.
+
+### Praktický příklad uzavření
+
+```text
+Neotevřený krok:
+Nepřidáváme povinné pole "rozpočet" do prvního poptávkového formuláře.
+
+Výsledek druhé kontroly:
+Návratový signál nepřišel. Obchod dokázal posledních osm relevantních poptávek kvalifikovat bez povinného rozpočtu.
+
+Stav:
+Potvrdit pasivní klid.
+
+Co zůstává zavřené:
+Povinné pole rozpočtu, CRM atribut rozpočtu, scoring podle rozpočtu a export rozpočtových odhadů.
+
+Další režim:
+Téma se kontroluje jen v běžném měsíčním review poptávkového toku, nebo při původním návratovém signálu.
+
+Privacy-first závěr:
+Nesbíráme nový obchodní údaj v prvním kontaktu a nevytváříme náhradní evidenci rozpočtu.
+```
+
+Varianta s náhradní evidencí:
+
+```text
+Výsledek druhé kontroly:
+Formulář se nezměnil, ale v CRM vznikl ruční štítek "rozpočet nejasný".
+
+Stav:
+Uklidit náhradní evidenci.
+
+Rozhodnutí:
+Nové štítky zastavujeme. Existující štítky mažeme nebo slučujeme do anonymního review závěru. Než vznikne jakýkoli nový údaj o rozpočtu, musí tým napsat rozhodovací větu, k čemu přesně údaj slouží.
+
+Co zůstává zavřené:
+Povinné rozpočtové pole a automatický scoring.
+```
+
+Codyho komentář: skrytá náhradní evidence je záludná tím, že se často tváří jako disciplína. "Jen si to ručně značím" zní nevinně, dokud z toho není druhý systém bez pravidel, retence a vlastníka. Malé ruční pole umí být větší problém než nepřidaná funkce.
+
+### Privacy-first uzavření
+
+Uzavření druhé kontroly musí výslovně říct, co se s datovou stopou děje dál:
+
+```text
+Dál nesbíráme:
+
+Náhradní evidence:
+- nevznikla / vznikla a zastavujeme ji / vznikla a potřebuje samostatné posouzení
+
+Existující pomocné stopy:
+- mažeme / anonymizujeme / necháváme v původním zdroji / převádíme do zobecněného závěru
+
+Další kontrola:
+- pouze v běžném rytmu / při návratovém signálu / po lokálním úklidu
+```
+
+Pokud náhradní evidence nevznikla, napište to. Právě explicitní věta "nevznikla" pomáhá za měsíc poznat, že se rozhodnutí drželo nejen v produktu, ale i v provozních zvycích týmu.
+
+Pokud náhradní evidence vznikla, neřešte ji jako administrativní detail. Je to samostatný datový stav. Musí mít účel, vlastníka, retenci a oprávnění, nebo má skončit. Privacy-first provoz není proti poznatkům. Je proti tomu, aby se poznatky měnily v databáze bez rozhodnutí.
+
+### Karta uzavření druhé kontroly
+
+```text
+Neotevřený krok:
+
+Původní návratový signál:
+
+Výsledek první kontroly:
+
+Výsledek druhé kontroly:
+
+Uzavírací stav:
+- potvrdit pasivní klid
+- opravit dohledatelnost
+- uklidit náhradní evidenci
+- otevřít nové malé posouzení
+
+Rozhodnutí jednou větou:
+
+Co zůstává zavřené:
+
+Co se lokálně upraví:
+
+Jaká náhradní evidence vznikla nebo nevznikla:
+
+Co mažeme, anonymizujeme nebo necháváme v původním zdroji:
+
+Jaká data dál nesbíráme:
+
+Další režim:
+- běžný rytmus
+- návratový signál
+- lokální úklid
+- nové malé posouzení
+
+Kde je závěr uložený:
+
+Vlastník:
+```
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: přečtěte neotevřený krok a původní návratový signál.
+2. Minuta 2: porovnejte výsledek první a druhé kontroly.
+3. Minuta 3: vyberte jeden uzavírací stav.
+4. Minuta 4: napište rozhodnutí jednou větou.
+5. Minuta 5: určete, co zůstává zavřené a co se případně lokálně upraví.
+6. Minuta 6: uzavřete datovou stopu a náhradní evidenci.
+7. Minuta 7: zapište další režim a místo, kde závěr bydlí.
+
+Pokud se workshop začne měnit v debatu o původním návrhu, vraťte se k otázce: "Přišel návratový signál, nebo řešíme jen dohledatelnost a provozní stopu?" Bez této otázky se druhá kontrola snadno změní v nové hlasování o starém nápadu.
+
+### Checklist uzavření druhé kontroly
+
+- Máme výsledek druhé kontroly popsaný konkrétně, ne pocitově?
+- Vybrali jsme jeden ze čtyř uzavíracích stavů?
+- Je jasné, jestli se téma vrací do pasivního klidu, nebo potřebuje lokální zásah?
+- Zůstává původní velký návrh výslovně zavřený?
+- Pokud opravujeme dohledatelnost, opravujeme jedno pracovní místo?
+- Pokud vznikla náhradní evidence, víme, co se zastavuje, maže, anonymizuje nebo posuzuje zvlášť?
+- Nepřidáváme novou mimořádnou kontrolu bez návratového signálu?
+- Je datová hranice napsaná pozitivně: jaká data dál nesbíráme?
+- Je závěr uložený tam, kde se stejný podnět pravděpodobně vrátí?
+- Umí nový člověk poznat, proč neotevřený krok zůstává zavřený?
+
+Uzavření druhé běžné kontroly má být tiché, ale pevné. Pokud je všechno v pořádku, téma se vrací do klidu. Pokud něco selhalo, opravuje se přesně to místo, kde klid selhal. A pokud se objevila skrytá evidence, uklidí se dřív, než se stihne tvářit jako součást systému. To je praktická privacy-first práce: méně dramat, méně dat a jasnější hranice.
+
 ## Pracovní log
 
+- 2026-07-05: Doplněna úvodní podkapitola o uzavření druhé běžné kontroly neotevřeného kroku: uzavírací stavy, praktický SaaS příklad, úklid náhradní evidence, privacy-first závěr, karta, mini workshop a checklist.
 - 2026-07-05: Doplněna úvodní podkapitola o druhé běžné kontrole neotevřeného kroku: stabilní klid, dohledatelnost rozhodnutí, lokální šum, skrytá náhrada, praktický SaaS příklad, privacy-first kontrola datové stopy, karta, mini workshop a checklist.
 - 2026-07-05: Doplněna úvodní podkapitola o uzavření první běžné kontroly neotevřeného kroku: uzavírací stavy, praktické příklady, privacy-first úklid datové stopy, karta, mini workshop a checklist.
 - 2026-07-05: Doplněna úvodní podkapitola o první běžné kontrole neotevřeného kroku: přirozený rytmus kontroly, tři otázky, čtyři výsledky, praktický příklad s poptávkovým formulářem, privacy-first zachycení skryté evidence, karta, mini workshop a checklist.
