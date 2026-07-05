@@ -59,6 +59,8 @@ Pokud hranici dalšího kroku neumíte vysvětlit jedním pracovním místem a j
 
 Když se z hranice dalšího kroku ukáže, že dnes není co opravovat, zapište to stejně pečlivě jako změnu. Věta "teď neotevíráme nový krok, protože návratový signál nepotvrdil problém" je užitečný výsledek: chrání tým před prací z návyku a zároveň nechává jasnou stopu, kdy se k tématu vrátit.
 
+Do stejného zápisu přidejte i nejbližší běžný okamžik, kdy se rozhodnutí může přirozeně potkat s realitou: další poptávku, další onboarding, další review nebo další použití šablony. Tím se z neotevřeného kroku nestane zapomenutá poznámka, ale klidná kontrola v místě, kde by se problém stejně ukázal.
+
 K takovému zápisu přidejte i jednu věc, která zůstává v běžném rytmu beze změny. Čtenář pak pozná, že nejde o tiché odsunutí odpovědnosti, ale o vědomé ponechání současného pravidla v platnosti až do jasnějšího signálu.
 
 Krátký zápis má také říct, kde ho člověk při běžné práci najde. Není nutné zakládat nový dokument; často stačí poznámka u stejného formuláře, šablony nebo karty pravidla. Důležité je, aby se uzavření dalo dohledat právě ve chvíli, kdy se stejný podnět vrátí.
@@ -297805,3 +297807,4 @@ Uzavření návratového signálu je poslední brzda před tím, než se z užit
 - 2026-07-02: Doplněna úvodní podkapitola o převodu potvrzeného návratu zpět do pasivního provozu: kanonické místo, vypnutí mimořádného režimu, privacy-first úklid datové stopy, karta, mini workshop a checklist.
 - 2026-07-04: Doplněna úvodní podkapitola o prvním dlouhodobém review po stabilizaci pravidla: tři kontrolní otázky, čtyři výsledky review, privacy-first úklid datové stopy, karta, mini workshop a checklist.
 - 2026-07-04: Doplněna úvodní podkapitola o uzavření druhé kontroly po zředění revizního rytmu: uzavírací věta, stavy rytmu a pravidla, privacy-first úklid, karta, mini workshop a checklist.
+- 2026-07-05: Doplněna krátká úvodní poznámka, aby neotevřený krok měl přirozené místo další kontroly v běžném rytmu práce.
