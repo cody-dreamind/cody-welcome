@@ -296722,8 +296722,242 @@ Pokud se během pěti minut nedá vybrat jeden stav, pravděpodobně nemáte jed
 
 Uzavření prvního běžného použití má být krátké, ale ne vágní. Dobře napsaná věta udrží mapu v klidném režimu, zabrání zbytečné evidenci a dá dalšímu člověku jistotu, že nemusí znovu otevírat celou redakční minulost. Přesně tak má fungovat pracovní nástroj: pomoci, zanechat jen nutnou stopu a pak nepřekážet.
 
+## Druhé běžné použití po uzavřeném signálu mapy
+
+Druhé běžné použití po uzavřeném signálu mapy není automatická povinnost. Otevírá se jen tehdy, když první běžné použití skončilo lokálním dočištěním, předáním problému cílovému výřezu, nebo když tým potřebuje potvrdit, že opravená cesta funguje i mimo první roli. Pokud první použití proběhlo čistě a mapa se vrátila do pasivního provozu, druhé použití neplánujte. Klid není mezistav, který musí dostat ještě jednu kontrolu pro dobrý pocit.
+
+Smysl druhého použití je přenos. Neptá se znovu, jestli byla původní oprava správná. Ptá se, jestli se mapa dá použít bez čerstvé paměti i v další přirozené situaci. Pokud první průchod dělal support, druhý může vzniknout v produktu, obchodu nebo u člověka, který připravuje veřejný výřez pro zákazníka. Pořád ale musí jít o běžnou práci, ne o uměle vyrobený test.
+
+Začněte větou:
+
+```text
+Druhé běžné použití otevíráme, protože první použití nechalo tento konkrétní důvod k ověření:
+```
+
+Dobrá verze:
+
+```text
+Druhé běžné použití otevíráme, protože první supportní průchod vyžadoval drobné zpřesnění vstupu "produktová aktivace v SaaS" a chceme ověřit, že opravený vstup použije samostatně i produktový člověk při přípravě onboardingového checklistu.
+```
+
+Slabá verze:
+
+```text
+Ještě jednou zkontrolujeme mapu.
+```
+
+Slabá verze znovu otevírá celý rozcestník. Dobrá verze drží jeden důvod, jednu pracovní situaci a jeden očekávaný výsledek. To je rozdíl mezi druhým běžným použitím a nenápadným návratem do mimořádné péče.
+
+### Kdy druhé použití přeskočit
+
+Druhé použití přeskočte, pokud platí některá z těchto vět:
+
+- První použití skončilo stavem "vrátit mapu do pasivního provozu" a nevzniklo žádné lokální dočištění.
+- Další situace je jen opakováním stejné role, stejného dotazu a stejné cesty.
+- Tým neumí říct, co přesně má druhé použití potvrdit nebo vyvrátit.
+- Ověření by vyžadovalo novou evidenci zákazníků, dotazů nebo použití mapy bez jasné rozhodovací hodnoty.
+
+Přeskočení není zanedbání. Je to provozní disciplína. Pokud nástroj funguje, nemá se dokazovat donekonečna. Zapište jednu větu a nechte mapu pracovat:
+
+```text
+Druhé běžné použití neplánujeme, protože první průchod proběhl správně, nic se nedočisťovalo a další kontrola by nevytvořila nové rozhodnutí.
+```
+
+Tato věta je zvlášť užitečná v týmech, které mají rády jistotu. Jistota je fajn. Jen má občas zvláštní koníček vyrábět tabulky, které pak někdo musí udržovat. Codyho komentář: pokud je jediný důvod "ještě pro jistotu", zavřete to. Jistota bez otázky je administrativní šum v košili s límečkem.
+
+### Co druhé použití ověřuje
+
+Držte se tří otázek:
+
+- Přenositelnost: použije mapu jiná role nebo stejná role bez čerstvého vysvětlení?
+- Opravené místo: pomohlo případné lokální dočištění přesně tam, kde mělo?
+- Datový klid: nevznikla kvůli druhému použití nová pomocná evidence?
+
+Přenositelnost neznamená, že mapa musí vyhovět všem rolím stejně. Znamená, že opravená cesta není závislá na člověku, který ji minule opravoval. Opravené místo neznamená přepis celé mapy. Znamená, že jeden vstup, odkaz nebo příklad po drobné úpravě vede lépe. Datový klid znamená, že druhé použití nepřidalo vlastní malý systém sledování.
+
+Praktický zápis:
+
+```text
+Přenositelnost:
+Produktový člověk našel vstup "produktová aktivace v SaaS" bez připomenutí supportního průchodu.
+
+Opravené místo:
+Doplnění "v SaaS" zabránilo záměně s marketingovou aktivací.
+
+Datový klid:
+Nevedeme seznam použití vstupu ani kopie zákaznických dotazů; zapisujeme jen anonymní výsledek průchodu.
+```
+
+Pokud druhé použití selže, nejdřív určete typ selhání. Může jít o slabou roli v mapě, nejasný cílový výřez, nebo skutečný návrat původního problému. Tyto tři věci nemíchejte. Každá vede k jiné reakci.
+
+### Čtyři výsledky druhého použití
+
+Druhé běžné použití může skončit čtyřmi stavy:
+
+- Přenos potvrzen: jiná role použila mapu správně, žádná další práce nevzniká.
+- Poslední lokální dočištění: opravená cesta funguje, ale jeden popisek nebo příklad potřebuje poslední zpřesnění.
+- Slabý cílový výřez: mapa vede správně, ale cílová část pořád nedává samostatný pracovní výstup.
+- Nový návratový signál: stejný typ navigační chyby se opakuje i po prvním uzavření a má konkrétní dopad.
+
+U stavu `přenos potvrzen` končete. Neplánujte třetí použití jen proto, že druhé dopadlo dobře. U stavu `poslední lokální dočištění` opravte jedno místo a napište, že další kontrola se neotevírá automaticky. U stavu `slabý cílový výřez` přesuňte práci do výřezu, ne do mapy. U stavu `nový návratový signál` založte signál s anonymním popisem situace a vraťte se k pravidlům pro návrat.
+
+Krátké příklady:
+
+```text
+Přenos potvrzen:
+Produktový člověk použil opravený vstup samostatně, vybral správný výřez a nevzniká další evidence.
+
+Poslední lokální dočištění:
+Vstup fungoval, ale příklad pod ním zmiňuje jen support. Doplníme neutrální formulaci pro support i produkt; struktura mapy se nemění.
+
+Slabý cílový výřez:
+Mapa vedla správně, ale cílová část nemá checklist pro rozhodnutí o aktivační události. Otevíráme úpravu výřezu, ne mapy.
+
+Nový návratový signál:
+Druhé nezávislé použití po úpravě znovu skončilo v marketingovém měření místo produktové aktivace. Otevíráme návratový signál mapy.
+```
+
+Nejdůležitější je nezaměnit slabý cílový výřez za slabou mapu. Mapa má člověka dovést na správné místo. Nemá za cílovou kapitolu odpracovat její úvod, checklist ani příklad.
+
+### Praktický SaaS příklad
+
+První použití:
+
+```text
+Support po uzavřeném signálu našel výřez k produktové aktivaci, ale vstup "aktivace" byl moc široký. Dočistili jsme ho na "produktová aktivace v SaaS".
+```
+
+Druhé použití:
+
+```text
+Produktový člověk připravuje onboardingový checklist pro nový SaaS modul a hledá část o tom, jak vybrat jednu aktivační událost bez plošného sledování uživatelů.
+```
+
+Průchod:
+
+```text
+Mapa vede přes vstup "produktová aktivace v SaaS" do části o datovém minimu v aktivaci. Člověk nepotřebuje znát předchozí supportní opravu a nepoužije marketingovou kapitolu o kampaních.
+```
+
+Uzavření:
+
+```text
+Přenos potvrzen: opravený vstup fungoval i pro produktovou roli, nevzniká další kontrola mapy a nevedeme seznam použití tohoto vstupu.
+```
+
+Co se nedělá:
+
+```text
+Nepřidáváme roli "produkt" jako samostatnou kategorii do všech vstupů, nezakládáme log použití mapy a neukládáme onboardingový případ jako redakční důkaz.
+```
+
+Tento příklad drží mapu u její práce. Měla vést z pracovní situace ke správné části. Vedla. Hotovo. Pokud cílový výřez později nebude stačit, je to nová lokální práce cílového textu, ne důvod přestavět rozcestník.
+
+### Privacy-first hranice druhého použití
+
+Druhé použití má větší riziko datové stopy než první. Jakmile tým začne porovnávat dvě situace, snadno vznikne tabulka: role, zákazník, dotaz, poslaný výřez, výsledek, poznámka. Pro rozhodnutí o mapě je to skoro vždycky zbytečně moc.
+
+Stačí tato minimální stopa:
+
+```text
+Typ role:
+Anonymní pracovní situace:
+Očekávaná cesta:
+Skutečná cesta:
+Výsledek:
+Co dál nesbíráme:
+```
+
+Příklad:
+
+```text
+Typ role:
+Produkt.
+
+Anonymní pracovní situace:
+Příprava onboardingového checklistu pro aktivační událost.
+
+Očekávaná cesta:
+Produktová aktivace v SaaS -> datové minimum v aktivaci.
+
+Skutečná cesta:
+Shodná s očekávanou.
+
+Výsledek:
+Přenos potvrzen.
+
+Co dál nesbíráme:
+Jména zákazníků, odkazy do interních nástrojů, kopie checklistu ani počty použití vstupu.
+```
+
+Pokud potřebujete detailnější důkaz, nejdřív napište, jaké rozhodnutí bez něj nepůjde udělat. Pokud takovou větu neumíte napsat, detail nepotřebujete. Privacy-first provoz není o tom, že se týmu zakáže přemýšlet nad důkazy. Je o tom, že důkaz má být přiměřený rozhodnutí. Mapa se obvykle dá vyhodnotit bez osobních údajů, bez zákaznického kontextu a bez nového trackeru.
+
+### Karta druhého běžného použití po uzavřeném signálu
+
+```text
+Datum:
+
+Proč druhé použití otevíráme:
+
+První použití zanechalo tento důvod k ověření:
+
+Běžná pracovní situace druhého použití:
+
+Role podle typu, ne podle jména:
+
+Očekávaná cesta mapou:
+
+Skutečná cesta mapou:
+
+Výsledek druhého použití:
+- přenos potvrzen
+- poslední lokální dočištění
+- slabý cílový výřez
+- nový návratový signál
+
+Co se případně mění:
+
+Co se výslovně nemění:
+
+Jaká evidence nevzniká nebo končí:
+
+Kde je závěr uložený:
+
+Další návratový signál, pokud existuje:
+```
+
+Kartu použijte hlavně tehdy, když první použití zanechalo konkrétní otevřenou hranu. Pokud druhé použití jen potvrzuje klid, stačí jednovětý závěr. Formulář není odměna za disciplínu. Je to nástroj pro situace, kde by bez něj rozhodnutí zůstalo mlhavé.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: řekněte, proč druhé použití vůbec otevíráte.
+2. Minuta 2: popište druhou pracovní situaci anonymně a bez zákaznických detailů.
+3. Minuta 3: porovnejte očekávanou a skutečnou cestu mapou.
+4. Minuta 4: vyberte jeden ze čtyř výsledků.
+5. Minuta 5: napište, co se mění a co se výslovně nemění.
+6. Minuta 6: zrušte zbytečnou evidenci nebo napište minimální návratový signál.
+
+Pokud se v první minutě neobjeví jasný důvod, workshop ukončete. Druhé použití bez důvodu je jen kontrolní reflex. Ten se tváří odpovědně, ale v praxi zvyšuje provozní hluk.
+
+### Checklist druhého běžného použití
+
+- Má druhé použití konkrétní důvod z prvního použití?
+- Neotevíráme ho jen pro pocit jistoty?
+- Vzniklo v běžné práci, ne jako umělý test?
+- Je role popsaná typem, ne jménem člověka?
+- Je pracovní situace anonymní?
+- Porovnali jsme očekávanou a skutečnou cestu mapou?
+- Vybrali jsme přesně jeden výsledek?
+- Pokud něco dočišťujeme, je to poslední lokální místo, ne přepis celé mapy?
+- Pokud problém patří cílovému výřezu, nepřipisujeme ho mapě?
+- Nevzniká nová evidence použití, zákazníků, dotazů ani poslaných výřezů?
+- Je jasné, jestli mapa po druhém použití končí v pasivním provozu?
+
+Druhé běžné použití má potvrdit přenos, ne rozpoutat další péči. Když opravená cesta obstojí u další role, napište závěr a nechte mapu ztichnout. Když neobstojí, opravte nejbližší místo nebo otevřete přesný návratový signál. V obou případech držte datovou stopu malou. Mapa má čtenáře vést, ne vyrábět nový provozní systém kolem toho, že někoho dovedla správně.
+
 ## Pracovní log
 
+- 2026-07-05: Doplněna úvodní podkapitola o druhém běžném použití po uzavřeném signálu čtenářské mapy: kdy druhé použití přeskočit, ověření přenositelnosti, čtyři výsledky, praktický SaaS příklad, privacy-first hranice, karta, mini workshop a checklist.
 - 2026-07-05: Doplněna úvodní podkapitola o uzavření prvního běžného použití po uzavřeném signálu čtenářské mapy: čtyři uzavírací stavy, praktické příklady, privacy-first uzavření bez nové evidence, karta, mini workshop a checklist.
 - 2026-07-05: Doplněna úvodní podkapitola o prvním běžném použití po uzavření návratového signálu čtenářské mapy: najitelnost, rozhodnutelnost, klid, čtyři výsledky použití, praktický SaaS příklad, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-07-05: Doplněna úvodní podkapitola o uzavření návratového signálu čtenářské mapy: čtyři výsledky uzavření, praktický SaaS příklad, umístění záznamu, privacy-first ukončení návratu, karta, mini workshop a checklist.
