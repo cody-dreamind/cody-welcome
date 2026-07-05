@@ -299030,8 +299030,194 @@ Když se během workshopu ukáže, že archivní minimum potřebuje dlouhé vysv
 
 Archivní minimum je poslední služba dobrému neotevřenému kroku. Nechává v systému právě tolik paměti, aby se tým nemusel učit stejnou věc znovu, ale ne tolik, aby minulost překážela práci. V praxi to znamená méně polí, méně skrytých evidencí, méně návratů bez důvodu a klidnější provoz. Což je skoro nudné. A právě proto užitečné.
 
+## První dohledání archivního minima v běžné práci
+
+Archivní minimum začne být opravdu užitečné až ve chvíli, kdy ho někdo najde při běžné práci. Dokud leží jen v archivu, je to dobře napsaná pojistka. Při prvním dohledání se ukáže, jestli pojistka opravdu pomáhá: člověk narazí na starý podnět, najde krátký záznam, pochopí aktuální pracovní větu a ví, jestli má něco otevřít, nebo nechat zavřené.
+
+První dohledání nemá znovu otevírat celou historii. Má odpovědět na jednoduchou otázku: stačí archivní minimum k dnešnímu rozhodnutí? Pokud ano, použijte ho a pokračujte. Pokud ne, opravte minimum nebo pracovní větu. Nevyhrabávejte staré tabulky, screenshoty a poznámky jen proto, že se v archivu rozsvítilo světlo.
+
+Začněte větou:
+
+```text
+Archivní minimum dohledáváme, protože:
+```
+
+Za ni napište konkrétní pracovní situaci:
+
+```text
+Archivní minimum dohledáváme, protože obchod znovu navrhl přidat povinné pole pro rozpočet do prvního formuláře.
+```
+
+Tím se hned nastaví hranice. Neřešíte celou historii formuláře. Neřešíte všechny staré debaty o kvalifikaci poptávek. Řešíte dnešní podnět a to, jestli už pro něj existuje rozhodovací stopa.
+
+### Co má první dohledání ověřit
+
+První dohledání ověřuje pět věcí:
+
+- Záznam jde najít podle běžného názvu tématu.
+- Krátké rozhodnutí je srozumitelné bez původních účastníků.
+- Aktuální pracovní věta pořád bydlí tam, kde člověk pracuje.
+- Návratový signál je konkrétní a dá se porovnat s dnešní situací.
+- Archiv nevyžaduje otevření zbytečných osobních nebo obchodních detailů.
+
+Když některá věc neplatí, neopravujte hned celý archiv. Opravte nejbližší slabinu. Pokud záznam nejde najít, přidejte lepší název nebo odkaz. Pokud je pracovní věta moc historická, přepište ji do přítomného času. Pokud návratový signál nejde poznat v praxi, zpřesněte ho tak, aby tým věděl, co by se muselo stát.
+
+První dohledání je hlavně test použitelnosti. Archivní minimum nemá ohromit tím, kolik si pamatuje. Má rychle říct: tohle jsme zavřeli, proto to zůstává zavřené, takhle by se to mohlo vrátit a tady najdete aktuální větu.
+
+### Praktický SaaS příklad
+
+Archivní minimum:
+
+```text
+Neotevřený krok:
+Nepřidávat velikost týmu do registračního formuláře.
+
+Aktuální pracovní věta:
+Registrace zůstává bez otázky na velikost týmu; kontext spolupráce zjišťujeme až po prvním importu, pokud je potřeba.
+
+Návratový signál:
+Téma se vrátí pouze pokud tři nové účty za sebou selžou v onboardingu kvůli chybějícímu kontextu spolupráce ještě před prvním importem.
+```
+
+Dnešní podnět:
+
+```text
+Support navrhuje přidat velikost týmu do registrace, protože dva noví uživatelé se ptali, jak pozvat kolegy.
+```
+
+První dohledání:
+
+```text
+Výsledek:
+Archivní minimum stačí. Návratový signál nenastal, protože potíž vznikla až po registraci a nesouvisela se selháním před prvním importem.
+
+Co děláme:
+Registrační formulář zůstává beze změny. Do nápovědy po prvním importu doplníme jednu větu, kde najít pozvání kolegů.
+
+Co neotevíráme:
+Povinné pole velikosti týmu, segmentaci podle registrace ani export registračních odpovědí.
+```
+
+Všimněte si, že archivní minimum neblokuje práci. Pomáhá vybrat menší a přesnější zásah. Tým neignoruje signál ze supportu, jen ho neposílá do špatného pracovního místa.
+
+### Čtyři výsledky prvního dohledání
+
+První dohledání může skončit čtyřmi způsoby:
+
+- Minimum stačí: záznam je najitelný, srozumitelný a návratový signál nenastal.
+- Opravit najitelnost: rozhodnutí platí, ale člověk ho nenašel podle přirozeného názvu nebo v pracovním místě.
+- Zpřesnit pracovní větu: rozhodnutí platí, ale současná věta nevede k jasnému kroku.
+- Otevřít návratový signál: dnešní situace opravdu splňuje podmínku, kterou archivní minimum popsalo.
+
+Stav `minimum stačí` je nejlepší. Nepište nový dokument, nezakládejte kontrolní tabulku a neplánujte schůzku o tom, že archiv funguje. Zapište krátkou poznámku k dnešnímu podnětu a nechte téma zavřené.
+
+Stav `opravit najitelnost` použijte, když člověk záznam našel až přes někoho jiného nebo přes starou historii. Archivní minimum má být dohledatelné podle slov, která lidé běžně používají. Pokud se v archivu píše "kvalifikační atribut registrace" a tým hledá "velikost týmu", problém není v týmu. Problém je v názvu, který si vzal moc elegantní boty na obyčejnou cestu.
+
+Stav `zpřesnit pracovní větu` patří situaci, kdy rozhodnutí dává smysl, ale věta je moc měkká. "Registraci držíme krátkou" je princip. "Registrace zůstává bez otázky na velikost týmu; kontext spolupráce řešíme až po prvním importu" je pracovní pravidlo.
+
+Stav `otevřít návratový signál` používejte opatrně. Nestačí, že se téma podobá starému podnětu. Musí opravdu splnit podmínku z archivu. Pokud ji splní, neotevírejte rovnou původní široký návrh. Otevřete další nejmenší krok podle aktuálního důkazu.
+
+### Privacy-first kontrola při dohledání
+
+Při prvním dohledání vzniká pokušení otevřít hlubší historii. Tým si řekne: když už jsme tady, podívejme se na staré příklady. To může být oprávněné, ale jen pokud krátké minimum nestačí k rozhodnutí.
+
+Použijte tři otázky:
+
+```text
+Stačí aktivní minimum k dnešnímu rozhodnutí?
+
+Pokud nestačí, který konkrétní anonymizovaný vzor potřebujeme?
+
+Co nesmíme kopírovat do nové pracovní vrstvy?
+```
+
+Pokud aktivní minimum stačí, hlubší historii neotevírejte. Pokud nestačí, otevřete jen konkrétní část s jasným účelem. Nekopírujte zákaznické zprávy do nové tabulky, nedělejte screenshoty starých CRM záznamů a nepřenášejte konkrétní údaje do aktuálního podnětu jen proto, že se s nimi lépe argumentuje.
+
+Privacy-first závěr může znít takto:
+
+```text
+Aktivní minimum stačilo k rozhodnutí. Hlubší historii neotevíráme. Dnešní podnět zapisujeme anonymně jako "support navrhl úpravu po dvou dotazech na pozvání kolegů"; nepřenášíme konkrétní účty, jména ani kopie komunikace.
+```
+
+Takový zápis zachová pracovní hodnotu a nezvětší datovou stopu. Přesně o to jde: archiv má pomáhat rozhodovat, ne sloužit jako pohodlný důvod znovu rozhýbat staré detaily.
+
+Codyho komentář: dobrý archiv je trochu nevděčný. Když funguje, člověk ho najde, pochopí a zase zavře. Žádné drama, žádná velká obnova historie, žádné "pojďme z toho udělat proces". Jen krátká paměť ve správnou chvíli. Skandálně praktické.
+
+### Karta prvního dohledání archivního minima
+
+```text
+Téma dnešního podnětu:
+
+Proč archivní minimum dohledáváme:
+
+Našli jsme správný záznam?
+- ano
+- ne
+- jen přes pomoc nebo starou historii
+
+Krátké rozhodnutí z archivu:
+
+Aktuální pracovní věta:
+
+Kde pracovní věta opravdu bydlí:
+
+Návratový signál z archivu:
+
+Nastal dnes návratový signál?
+- ano
+- ne
+- nevíme, nejdřív zpřesnit
+
+Výsledek dohledání:
+- minimum stačí
+- opravit najitelnost
+- zpřesnit pracovní větu
+- otevřít návratový signál
+
+Co zůstává zavřené:
+
+Co případně lokálně opravujeme:
+
+Privacy-first poznámka:
+Hlubší historii otevíráme / neotevíráme:
+Co nekopírujeme do nové pracovní vrstvy:
+
+Vlastník:
+
+Kde je dnešní poznámka uložená:
+```
+
+Karta není povinný formulář pro každý návrat k archivu. Použijte ji při prvním dohledání, při změně týmu nebo když se ukáže, že záznam někdo našel obtížně. U jednoduchého případu stačí jedna věta: "Archivní minimum stačilo, návratový signál nenastal, formulář zůstává beze změny."
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: pojmenujte dnešní podnět.
+2. Minuta 2: najděte archivní minimum podle běžného názvu tématu.
+3. Minuta 3: přečtěte aktuální pracovní větu.
+4. Minuta 4: porovnejte dnešní situaci s návratovým signálem.
+5. Minuta 5: rozhodněte, zda minimum stačí, nebo je potřeba lokální oprava záznamu.
+6. Minuta 6: udělejte privacy-first kontrolu, jestli není potřeba otevírat hlubší historii.
+
+Pokud během workshopu někdo začne obhajovat původní široký návrh, vraťte se k návratovému signálu. Archivní minimum není referendum o minulosti. Je to brána pro dnešní práci.
+
+### Checklist prvního dohledání
+
+- Dohledali jsme archiv podle slov, která tým opravdu používá?
+- Stačilo krátké rozhodnutí bez čtení celé historie?
+- Je aktuální pracovní věta pořád v běžném pracovním místě?
+- Porovnali jsme dnešní podnět s návratovým signálem, ne jen s názvem tématu?
+- Pokud návratový signál nenastal, zůstává široký návrh výslovně zavřený?
+- Pokud záznam nešel najít, opravili jsme najitelnost místo zakládání nového archivu?
+- Pokud pracovní věta nebyla použitelná, zpřesnili jsme ji v přítomném čase?
+- Neotevřeli jsme hlubší historii bez konkrétního důvodu?
+- Nekopírujeme osobní, zákaznické nebo obchodní detaily do nové pracovní vrstvy?
+- Je dnešní výsledek zapsaný tak krátce, aby příští dohledání nezačínalo od nuly?
+
+První dohledání archivního minima je malý test, jestli archivace opravdu slouží práci. Když minimum stačí, nechte téma zavřené. Když nestačí, opravte najitelnost nebo větu. A když návratový signál opravdu nastal, otevřete nejmenší další krok, ne celou minulost. Tím zůstane archiv užitečný, provoz lehký a privacy-first hodnota víc než jen hezká etiketa na šanonu.
+
 ## Pracovní log
 
+- 2026-07-05: Doplněna úvodní podkapitola o prvním dohledání archivního minima v běžné práci: ověření najitelnosti, pracovní věty a návratového signálu, praktický SaaS příklad, privacy-first kontrola hlubší historie, karta, mini workshop a checklist.
 - 2026-07-05: Doplněna úvodní podkapitola o archivním minimu neotevřeného kroku: aktivní minimum, hlubší historie, praktický SaaS příklad, privacy-first archivace, karta, mini workshop a checklist.
 - 2026-07-05: Doplněna úvodní podkapitola o uzavření druhého dlouhodobého review neotevřeného kroku: uzavírací stavy, praktické příklady, archivace aktivního záznamu, privacy-first úklid stop, karta, mini workshop a checklist.
 - 2026-07-05: Doplněna úvodní podkapitola o druhém dlouhodobém review neotevřeného kroku po pasivním klidu: přenositelnost rozhodnutí, opakované tiché stopy, archivace aktivního záznamu, privacy-first kontrola, karta, mini workshop a checklist.
