@@ -295476,8 +295476,192 @@ Pokud se během workshopu objeví touha přidat nové měření používání ma
 
 Druhé běžné použití má mapě dodat klid. Pokud funguje, nechte ji pracovat bez fanfár. Pokud drhne, opravte nejbližší větu nebo cíl. A pokud kolem ní začíná růst podpůrná evidence, berte to jako signál, že problém není v počtu záznamů, ale v důvěře v samotnou navigaci.
 
+## Uzavření druhého běžného použití čtenářské mapy
+
+Druhé běžné použití čtenářské mapy má skončit jasným stavem. Bez uzavření se z něj snadno stane další tichá redakční poznámka: někdo něco zkusil, mapa možná fungovala, možná drhla, ale nikdo neřekl, jestli se vrací do pasivního provozu, nebo jestli potřebuje poslední opravu. To je přesně typ mlhy, kvůli které dokumentace bobtná a lidé si začnou dělat vlastní vedlejší mapy. A vlastní vedlejší mapy jsou většinou začátek malého interního folkloru, ne známka zdravého systému.
+
+Uzavření druhého použití proto začněte jednou větou:
+
+```text
+Druhé použití čtenářské mapy uzavíráme takto:
+```
+
+Za ni napište výsledek bez historie, kdo co minule navrhl. Člověk, který se k mapě vrátí za měsíc, nepotřebuje slyšet celý příběh. Potřebuje vědět, jestli mapa platí, jestli se změnila jedna věta, jestli se opravil cíl, nebo jestli se uklidila skrytá evidence.
+
+Dobrá uzavírací věta může vypadat takto:
+
+```text
+Druhé použití čtenářské mapy uzavíráme takto:
+Mapa zůstává v pasivním provozu, protože nový čtenář našel správnou část bez vysvětlování; nezakládáme evidenci použití a do mapy nepřidáváme další vrstvu navigace.
+```
+
+Slabší, ale pořád užitečná věta:
+
+```text
+Druhé použití čtenářské mapy uzavíráme takto:
+Mapa vedla správně, ale vstupní věta k redakční opravě byla moc široká; doplňujeme jednu hraniční větu a mapu po opravě vracíme do pasivního provozu.
+```
+
+V obou případech je důležitý konec věty. Nestačí říct, co se stalo. Je potřeba říct, co se dál neděje: nevzniká nový audit, nevzniká tabulka použití, nevzniká další rozcestník a neukládají se osobní nebo zákaznické detaily jako důkaz. Uzavření má mapě vrátit lehkost.
+
+### Čtyři uzavírací stavy
+
+Po druhém použití vyberte jeden stav:
+
+- Vrátit mapu do pasivního provozu: druhé použití proběhlo samostatně a bez nových stop.
+- Propsat jednu lokální opravu: mapa byla správná, ale jedna vstupní věta nebo odkaz potřeboval zpřesnění.
+- Otevřít samostatnou redakční opravu: druhé použití ukázalo obsahovou kolizi, kterou nejde vyřešit navigací.
+- Uklidit podpůrnou evidenci: mapa možná funguje, ale kolem ní začala vznikat zbytečná paměť použití.
+
+Stav `vrátit mapu do pasivního provozu` je nejlepší výsledek. Znamená, že navigace obstála bez čerstvé redakční paměti. Neplánujte třetí běžné použití jen proto, že druhé dopadlo dobře. To by byl krásný způsob, jak z pasivního nástroje udělat aktivní úkol. Mapa má pomáhat čtenáři, ne vyrábět práci autorům.
+
+Stav `propsat jednu lokální opravu` použijte, když je směr mapy správný, ale jazyk drhne. Opravte nejbližší větu. Nepřidávejte vysvětlovací odstavec, pokud stačí přesnější název nebo jedna hranice typu: "redakční oprava začíná až při obsahové kolizi". Dobrá mapa má být krátká i po opravě.
+
+Stav `otevřít samostatnou redakční opravu` je pro situace, kdy mapa jen odhalila skutečný problém v rukopisu. Pokud dvě části říkají rozdílné věci, navigace to nemá maskovat. Uzavřete druhé použití mapy a založte novou redakční otázku s vlastním rozsahem. Mapa není lék na obsahový rozpor.
+
+Stav `uklidit podpůrnou evidenci` je potřeba ve chvíli, kdy si tým začne pro jistotu ukládat příklady použití, screenshoty, jména lidí nebo odkazy na interní případy. Taková evidence často vzniká z dobrého úmyslu, ale po pár týdnech se z ní stane citlivý archiv zaváhání. Pokud detail nepotřebujete k opravě mapy, nemá v trvalém záznamu co dělat.
+
+### Praktický příklad uzavření
+
+Druhé použití:
+
+```text
+Pracovní situace:
+Marketing připravuje interní výřez e-booku pro obchodní follow-up.
+
+Výsledek:
+Čtenář našel správnou vstupní situaci a mapa ho poslala do části o prvním běžném použití po převodu do pasivního provozu.
+
+Datová stopa:
+Nevznikl screenshot, jméno čtenáře ani tabulka použití.
+```
+
+Uzavření:
+
+```text
+Uzavírací stav:
+Vrátit mapu do pasivního provozu.
+
+Co se mění:
+Nic.
+
+Co se výslovně neotevírá:
+Třetí ověření mapy, nová navigační vrstva a evidence úspěšných použití.
+
+Privacy-first závěr:
+V trvalém záznamu neponecháváme konkrétní osobu ani interní obchodní situaci. Stačí závěr, že mapa fungovala bez pomoci.
+```
+
+Jiný výsledek:
+
+```text
+Pracovní situace:
+Čtenář zaměnil běžný výřez pro obchod za redakční opravu.
+
+Výsledek:
+Mapa vedla správně, ale vstupní věta u redakční opravy byla moc široká.
+
+Uzavírací stav:
+Propsat jednu lokální opravu.
+
+Oprava:
+K redakční opravě doplňujeme větu: "Redakční oprava začíná až ve chvíli, kdy dvě části rukopisu dávají čtenáři rozdílné doporučení."
+
+Co neotevíráme:
+Nový rozcestník, přepis celé mapy ani sledování dalších použití.
+```
+
+Rozdíl je jednoduchý. První případ nechává mapu být. Druhý opravuje jednu větu. Ani jeden z nich nevyrábí nový proces. To je správný konec této smyčky.
+
+### Privacy-first uzavření
+
+Při uzavření druhého použití mapy projděte dočasné podklady. V redakční práci se snadno ukládají věci, které působí nevinně: screenshot kanálu, odkaz na interní ticket, jméno člověka, konkrétní zákaznický dotaz nebo část obchodního kontextu. Pro opravu mapy to většinou nepotřebujete.
+
+Použijte krátké pravidlo:
+
+```text
+Do trvalého záznamu patří role, anonymní pracovní situace a rozhodnutí.
+Do trvalého záznamu nepatří osoba, zákazník, screenshot ani interní detail, pokud bez něj mapa nejde opravit.
+```
+
+Příklad úklidu:
+
+```text
+Ponecháváme:
+Anonymní větu, že marketingová role zaměnila běžný výřez za redakční opravu.
+
+Mažeme nebo nepřenášíme:
+Screenshot interní konverzace a konkrétní název zákaznického follow-upu.
+
+Dál nesbíráme:
+Úspěšná použití mapy, jména čtenářů ani pomocné tabulky navigačních průchodů.
+```
+
+Tím se zachová poznatek bez zbytečné paměti o lidech a zákaznících. Privacy-first provoz tady není právnický deštník pro případ bouřky. Je to praktická redakční hygiena: neukládat víc kontextu, než kolik opravdu zlepšuje text.
+
+### Karta uzavření druhého použití mapy
+
+```text
+Druhé použití mapy:
+
+Výsledek použití:
+
+Uzavírací stav:
+- vrátit mapu do pasivního provozu
+- propsat jednu lokální opravu
+- otevřít samostatnou redakční opravu
+- uklidit podpůrnou evidenci
+
+Co se mění v mapě:
+
+Co se výslovně nemění:
+
+Vzniká samostatná redakční otázka?
+- ano, protože:
+- ne, protože:
+
+Dočasné podklady k odstranění nebo anonymizaci:
+
+Trvalý záznam bez osobních a zákaznických detailů:
+
+Kanonické místo mapy po uzavření:
+
+Návratový signál pro další otevření:
+```
+
+Kartu vyplňujte jen tehdy, když druhé použití něco změnilo nebo uklízelo. Pokud mapa fungovala bez zásahu, stačí krátká uzavírací věta v pracovním logu nebo u kanonického místa. Pasivní provoz se pozná i podle toho, že netrvá na formuláři pro každý malý úspěch.
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: přečtěte pracovní situaci druhého použití.
+2. Minuta 2: pojmenujte výsledek jednou větou.
+3. Minuta 3: vyberte jeden uzavírací stav.
+4. Minuta 4: napište nejmenší opravu, pokud existuje.
+5. Minuta 5: napište, co se výslovně nemění.
+6. Minuta 6: smažte nebo anonymizujte dočasné podklady.
+7. Minuta 7: rozhodněte, jestli mapa zůstává v pasivním provozu, nebo vzniká samostatná redakční otázka.
+
+Pokud se workshop začne měnit v debatu o celé struktuře e-booku, zastavte ho. Druhé použití mapy nemá řešit celý rukopis. Má jen uzavřít, jestli mapa po poslední opravě umí poslat čtenáře správným směrem.
+
+### Checklist uzavření druhého použití mapy
+
+- Máme konkrétní výsledek druhého použití?
+- Vybrali jsme přesně jeden uzavírací stav?
+- Pokud mapa fungovala, vrací se do pasivního provozu bez dalšího sledování?
+- Pokud drhla vstupní věta, opravili jsme nejbližší formulaci místo celé mapy?
+- Pokud byl špatný cíl, opravili jsme odkaz nebo pořadí doporučení?
+- Pokud se ukázala obsahová kolize, oddělili jsme ji do samostatné redakční otázky?
+- Je jasné, co se výslovně nemění?
+- Uklidili jsme screenshoty, osobní poznámky, interní odkazy a konkrétní zákaznické detaily?
+- Stačí trvalému záznamu role, anonymní situace a rozhodnutí?
+- Je kanonické místo mapy po uzavření jednoznačné?
+- Existuje návratový signál pro další otevření, nebo mapu vědomě necháváme být?
+
+Uzavření druhého běžného použití čtenářské mapy má být konec malé navigační smyčky. Mapa buď obstála a vrací se do tichého provozu, nebo dostane jednu přesnou opravu. V obou případech platí: žádné nové měření pro dobrý pocit, žádné ukládání konkrétních lidí jako důkaz a žádné rozšiřování mapy jen proto, že zrovna držíme editor otevřený.
+
 ## Pracovní log
 
+- 2026-07-05: Doplněna úvodní podkapitola o uzavření druhého běžného použití čtenářské mapy: čtyři uzavírací stavy, praktické příklady, privacy-first úklid dočasných podkladů, karta, mini workshop a checklist.
 - 2026-07-04: Doplněna úvodní podkapitola o druhém běžném použití čtenářské mapy po uzavření ověření: přenositelnost bez čerstvé redakční paměti, čtyři výsledky použití, praktický marketingový příklad, privacy-first úklid dočasných podkladů, karta, mini workshop a checklist.
 - 2026-07-04: Doplněna úvodní podkapitola o uzavření ověření čtenářské mapy: čtyři uzavírací stavy, praktický support příklad, propsání změn, privacy-first úklid dočasných podkladů, karta, mini workshop a checklist.
 - 2026-07-04: Doplněna úvodní podkapitola o ověření čtenářské mapy při prvním použití: kontrola správné navigace, čtyři výsledky ověření, praktický support příklad, privacy-first práce bez nové evidence, karta, mini workshop a checklist.
