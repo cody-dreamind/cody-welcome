@@ -295659,8 +295659,183 @@ Pokud se workshop začne měnit v debatu o celé struktuře e-booku, zastavte ho
 
 Uzavření druhého běžného použití čtenářské mapy má být konec malé navigační smyčky. Mapa buď obstála a vrací se do tichého provozu, nebo dostane jednu přesnou opravu. V obou případech platí: žádné nové měření pro dobrý pocit, žádné ukládání konkrétních lidí jako důkaz a žádné rozšiřování mapy jen proto, že zrovna držíme editor otevřený.
 
+## Třetí běžné použití čtenářské mapy v pasivním provozu
+
+Třetí běžné použití čtenářské mapy už nemá dokazovat, že mapa existuje. To bylo cílem prvního použití. Nemá ani ověřovat, že drobná oprava po prvním použití přežila bez čerstvé redakční paměti. To řešilo druhé použití. Třetí použití má ukázat něco tiššího: jestli mapa funguje jako běžná součást práce, aniž by kolem sebe pořád vytvářela malý projekt.
+
+To je překvapivě důležitý rozdíl. Užitečný rozcestník se pozná podle toho, že ho člověk použije, rozhodne se a jde dál. Nezakládá tabulku použití, neotevírá redakční poradu, nehlásí dramatickou transformaci znalostní báze. Prostě pomůže. Ano, je to méně slavnostní než nová strategie. Bohužel pro milovníky velkých slov je to často přesně ten typ kvality, který tým doopravdy potřebuje.
+
+Třetí použití otevřete jen tehdy, když mapa přirozeně vstoupí do práce. Typicky někdo řeší, kterou část e-booku poslat zákazníkovi, kam odkázat nového člena týmu, nebo jak z rukopisu vytáhnout jeden použitelný pracovní výřez. Pokud se musíte uměle domlouvat, že "teď bychom měli mapu zase otestovat", nejde o běžné použití. Jde o další kontrolu, a ta má mít vlastní důvod.
+
+Začněte krátkou větou:
+
+```text
+Mapu používáme potřetí v pasivním provozu, protože se sama objevila při této práci:
+```
+
+Do věty patří pracovní situace, ne jméno člověka ani detail zákazníka:
+
+```text
+Mapu používáme potřetí v pasivním provozu, protože obchod hledá krátký výřez k poslání po úvodním hovoru o privacy-first analytice.
+```
+
+Tahle věta stačí. Není potřeba přidávat historii, kdo mapu minule připomněl, jaké screenshoty vznikly při ověření, ani co si kdo myslel o předchozí verzi. Čím víc starého kontextu přinesete, tím méně pasivní provoz ve skutečnosti je.
+
+### Co třetí použití ověřuje
+
+Třetí použití má tři praktické otázky:
+
+- Najdeme správný vstup bez vysvětlování původního záměru mapy?
+- Dovede mapa člověka k použitelné části, ne jen k tematicky podobné kapitole?
+- Nevzniká při použití nová evidence, kterou nikdo nepotřebuje?
+
+První otázka chrání najitelnost. Pokud člověk ví, že existuje "nějaká mapa", ale neví, kde začít, mapa pořád není běžný nástroj. Je to uložená dobrá vůle. Druhá otázka chrání akčnost. Čtenář nepotřebuje jen sekci, která se tématu podobá; potřebuje část, ze které vytáhne další krok, checklist nebo rozhodovací větu. Třetí otázka drží privacy-first hodnotu. Pokud každé použití mapy vytváří novou poznámku se jmény, zákaznickými situacemi a interními detaily, mapa potichu mění e-book v evidenční systém. To nechceme. E-book má pomáhat rozhodovat, ne sbírat stopy jako nadšený kancelářský vysavač.
+
+Dobré třetí použití vypadá jednoduše:
+
+```text
+Pracovní situace:
+Po obchodním hovoru chceme poslat krátký výřez k tomu, jak vybrat privacy-first měření bez zbytečného sběru dat.
+
+Použití mapy:
+Vstup "privacy-first provoz" vede k části o datové střídmosti a k checklistu pro nové nástroje.
+
+Výsledek:
+Posíláme jen kanonický odkaz a jednu větu, proč je relevantní. Nevzniká nový export poznámek z hovoru.
+```
+
+Slabé třetí použití vypadá podobně, ale zadrhne se v jednom bodě:
+
+```text
+Pracovní situace:
+Nový člen týmu hledá, kde začít při úpravě onboardingového e-mailu.
+
+Použití mapy:
+Mapa nabízí cestu přes onboarding, ale vstupní věta neříká, jestli jde o e-mail, produktový krok, nebo předávací pravidlo.
+
+Výsledek:
+Vzniká jedna lokální oprava vstupní věty. Neotevíráme novou strukturu celé mapy.
+```
+
+Rozdíl je v rozsahu reakce. Třetí použití nemá trestat mapu za každý neostrý roh. Pokud pomohla zhruba správně a stačí zpřesnit jednu větu, udělejte to lokálně. Pokud opakovaně posílá lidi na špatné místo, teprve potom vzniká samostatná redakční otázka.
+
+### Čtyři výsledky třetího použití
+
+Po třetím použití vyberte jeden ze čtyř výsledků:
+
+- Mapa funguje tiše: člověk našel správnou část, použil ji a nevznikla další práce.
+- Mapa potřebuje lokální zpřesnění: stačí opravit jednu vstupní větu, odkaz nebo pořadí doporučení.
+- Mapa odhalila slabý výřez: cílová část existuje, ale není dost použitelná sama o sobě.
+- Mapa se chová jako evidence: její použití vytváří nové poznámky, tabulky nebo sledování, které nejsou potřeba.
+
+U prvního výsledku nepište dlouhý zápis. Stačí uzavírací věta u pracovního místa:
+
+```text
+Mapa při třetím běžném použití dovedla obchod k výřezu o privacy-first měření; bez nové evidence a bez úpravy mapy.
+```
+
+U druhého výsledku opravte nejbližší bod a napište, co zůstává beze změny:
+
+```text
+Zpřesňujeme vstup "onboarding" na "onboardingový e-mail a první produktový krok". Strukturu mapy neměníme, protože cíl byl správný a drhla jen vstupní formulace.
+```
+
+U třetího výsledku neobviňujte mapu. Pokud mapa pošle čtenáře správně, ale cílová část sama o sobě nepomůže, problém je v obsahu výřezu. Otevřete samostatnou redakční otázku pro tu část, ne pro celou navigaci.
+
+```text
+Mapa správně našla část o výběru metriky, ale výřez nejde poslat samostatně, protože mu chybí krátký příklad. Otevíráme samostatnou redakční otázku k výřezu, mapu necháváme beze změny.
+```
+
+U čtvrtého výsledku zastavte vznik evidence. Tady je potřeba být nepříjemně praktický: pokud tým začne ke každému použití mapy zakládat řádek v tabulce, mapa sice vypadá důležitě, ale přestává být pasivní pomůckou. Trvalý záznam má být výjimka pro opravu, ne automatický návyk.
+
+```text
+Použití mapy začalo vytvářet tabulku předaných výřezů. Tabulku nezavádíme; necháváme jen kanonický odkaz ve follow-up šabloně a žádnou historii příjemců nevedeme.
+```
+
+Codyho komentář: třetí použití je dobrý test dospělosti nástroje. Když po třech průchodech pořád potřebuje zvláštní pozornost, nejspíš není pasivní. A když kolem něj lidé začnou vyrábět reporting, možná nemáte problém s mapou, ale s chutí měřit i to, že někdo našel odstavec. Krásná metrika, nulová užitečnost.
+
+### Privacy-first pravidlo třetího použití
+
+Třetí použití čtenářské mapy smí zanechat pouze minimální stopu:
+
+- kanonický odkaz nebo název použité části,
+- anonymní pracovní situaci,
+- rozhodnutí, zda mapa zůstává beze změny, nebo se lokálně upravuje,
+- případný návratový signál.
+
+Nepatří sem jména čtenářů, konkrétní zákazníci, citace z interních hovorů, screenshoty CRM, exporty e-mailů ani seznamy lidí, kterým byl výřez poslán. Pokud potřebujete vědět, jestli výřez pomohl konkrétnímu zákazníkovi, řešte to v zákaznickém procesu. Čtenářská mapa nemá být náhradní CRM ani tichý marketingový pixel v textové podobě.
+
+Při každém třetím použití si položte jednu otázku:
+
+```text
+Pomůže nám trvalý záznam zlepšit mapu, nebo jen ukládá důkaz, že byla použita?
+```
+
+Pokud jde jen o důkaz použití, nezapisujte ho. Použitý nástroj nepotřebuje diplom. Pokud záznam vede k opravě mapy nebo cílového výřezu, zapište pouze to, co je nutné k úpravě.
+
+### Karta třetího použití mapy
+
+```text
+Třetí běžné použití:
+
+Pracovní situace bez osobních detailů:
+
+Vstup v mapě:
+
+Cílová část:
+
+Výsledek:
+- mapa funguje tiše
+- lokální zpřesnění mapy
+- slabý cílový výřez
+- mapa začíná vytvářet zbytečnou evidenci
+
+Co se mění:
+
+Co se výslovně nemění:
+
+Vzniká samostatná redakční otázka?
+- ano, protože:
+- ne, protože:
+
+Jaká data nezapisujeme:
+
+Trvalý záznam, pokud je opravdu potřeba:
+
+Návratový signál:
+```
+
+Kartu použijte jen pro druhý, třetí nebo čtvrtý výsledek. Pokud mapa funguje tiše, karta je zbytečná. To není lenost, to je správná úroveň administrativní sebeobrany.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: napište pracovní situaci bez osobních detailů.
+2. Minuta 2: určete vstup v mapě a cílovou část.
+3. Minuta 3: vyberte jeden ze čtyř výsledků.
+4. Minuta 4: pokud je potřeba oprava, zapište nejmenší lokální změnu.
+5. Minuta 5: napište, co se výslovně nemění.
+6. Minuta 6: smažte nebo přeskočte zbytečnou evidenci a nechte jen kanonický odkaz nebo anonymní rozhodnutí.
+
+Když workshop nemá co opravovat, skončete dřív. Šest minut je horní hranice, ne povinná délka obřadu. Pasivní provoz má právo být nudný. Nuda je v provozu často luxusní zboží.
+
+### Checklist třetího použití mapy
+
+- Vzniklo použití přirozeně z práce, ne z umělého testu?
+- Je pracovní situace popsaná bez osobních a zákaznických detailů?
+- Vedla mapa ke správnému typu části?
+- Byla cílová část použitelná sama o sobě?
+- Pokud něco drhlo, jde o mapu, nebo o slabý cílový výřez?
+- Vybrali jsme přesně jeden ze čtyř výsledků?
+- Při lokální opravě je jasné, co se výslovně nemění?
+- Nevzniká tabulka, seznam příjemců, export nebo jiná zbytečná evidence?
+- Stačí trvalému záznamu anonymní situace, kanonický odkaz a rozhodnutí?
+- Je návratový signál konkrétní, nebo mapu necháváme tiše fungovat bez další kontroly?
+
+Třetí běžné použití čtenářské mapy má potvrdit, že navigace v e-booku umí žít bez zvláštní péče. Pokud pomůže, nechte ji pomáhat. Pokud potřebuje drobnou opravu, udělejte ji na nejbližším místě. Pokud začne vyrábět evidenci, zastavte ji dřív, než se z užitečné mapy stane další systém, který někdo musí udržovat jen proto, že jednou vznikl.
+
 ## Pracovní log
 
+- 2026-07-05: Doplněna úvodní podkapitola o třetím běžném použití čtenářské mapy v pasivním provozu: přirozené použití, čtyři výsledky, praktické příklady, privacy-first pravidlo minimální stopy, karta, mini workshop a checklist.
 - 2026-07-05: Doplněna úvodní podkapitola o uzavření druhého běžného použití čtenářské mapy: čtyři uzavírací stavy, praktické příklady, privacy-first úklid dočasných podkladů, karta, mini workshop a checklist.
 - 2026-07-04: Doplněna úvodní podkapitola o druhém běžném použití čtenářské mapy po uzavření ověření: přenositelnost bez čerstvé redakční paměti, čtyři výsledky použití, praktický marketingový příklad, privacy-first úklid dočasných podkladů, karta, mini workshop a checklist.
 - 2026-07-04: Doplněna úvodní podkapitola o uzavření ověření čtenářské mapy: čtyři uzavírací stavy, praktický support příklad, propsání změn, privacy-first úklid dočasných podkladů, karta, mini workshop a checklist.
