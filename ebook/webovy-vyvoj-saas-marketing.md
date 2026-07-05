@@ -296143,8 +296143,209 @@ Když workshop neskončí konkrétní malou reakcí, mapu neotevírejte. Výsled
 
 Návratový signál čtenářské mapy je pojistka proti dvěma extrémům. První extrém je nechat rozbitý rozcestník ležet jen proto, že byl jednou prohlášený za stabilní. Druhý extrém je otevírat stabilní mapu při každém redakčním neklidu. Dobrá praxe je nudnější a účinnější: čekat na konkrétní signál, udělat nejmenší opravu, nezapisovat zbytečná data a vrátit mapu zpět do tichého provozu.
 
+## Uzavření návratového signálu čtenářské mapy
+
+Návratový signál čtenářské mapy nemá zůstat viset jako červená cedulka na zdi. Jakmile podle něj uděláte nejmenší opravu, odmítnete zbytečnou evidenci nebo zjistíte, že signál nestačí, je potřeba ho uzavřít. Ne kvůli hezkému pocitu z administrativy. Kvůli tomu, aby se mapa neproměnila v nekonečný servisní režim, kde každé další použití znovu otevírá stejnou otázku.
+
+Uzavření odpovídá na čtyři jednoduché otázky:
+
+- Co se opravdu stalo v běžné práci?
+- Co jsme změnili, nezměnili nebo vědomě neotevřeli?
+- Jakou datovou stopu jsme tím odstranili nebo nepřidali?
+- Kdy se k mapě smíme vrátit znovu?
+
+Pokud na tyto otázky neumíte odpovědět, návratový signál ještě není uzavřený. Možná máte opravený odkaz, ale ne rozhodnutí. Možná máte rozhodnutí, ale nevíte, kde má žít. Možná máte pocit, že už je hotovo, což je nejméně spolehlivá metrika hned po "mně to funguje".
+
+Začněte uzavírací větou:
+
+```text
+Návratový signál čtenářské mapy uzavíráme takto:
+```
+
+Dobrý zápis:
+
+```text
+Návratový signál čtenářské mapy uzavíráme takto: vstup "měření" jsme rozdělili na "marketingové měření" a "produktová aktivace", protože původní vstup vedl support ke kampaním místo k datovému minimu v SaaS aktivaci. Neměníme cílové kapitoly ani nezakládáme evidenci poslaných výřezů. K mapě se vrátíme až tehdy, když nový vstup znovu pošle dva nezávislé případy ke špatnému typu části.
+```
+
+Slabý zápis:
+
+```text
+Mapu jsme zpřehlednili.
+```
+
+Slabý zápis zní lákavě, protože je krátký. Jenže za měsíc nikdo nepozná, jaký problém řešil, co zůstalo mimo rozsah a jaký signál by měl mapu znovu otevřít. Krátkost je užitečná jen tehdy, když neztratí rozhodnutí.
+
+### Čtyři výsledky uzavření
+
+Návratový signál mapy může skončit jedním ze čtyř stavů:
+
+- Malá oprava mapy: upravíte jeden vstup, popisek, pořadí nebo odkaz.
+- Bez změny mapy: signál se po kontrole nepotvrdil nebo šlo o jednorázové přehlédnutí.
+- Samostatná oprava cílového výřezu: mapa vedla správně, ale cílová část nebyla použitelná.
+- Zastavení zbytečné evidence: problém nebyl v navigaci, ale v tom, že kolem mapy vznikal sledovací nebo provozní návyk bez rozhodovací hodnoty.
+
+Každý stav má jiné uzavření. U malé opravy napište přesně, co se změnilo v mapě. U stavu bez změny napište, proč signál nestačil. U opravy cílového výřezu napište, že mapa zůstává stabilní a nová práce patří do cílové části. U zastavení evidence napište, jaká tabulka, poznámka, export nebo ruční sledování končí.
+
+Praktické varianty:
+
+```text
+Malá oprava mapy:
+Rozdělujeme vstup "měření" na "marketingové měření" a "produktová aktivace". Cílové kapitoly se nemění.
+
+Bez změny mapy:
+Mapu neměníme, protože šlo o jednorázové přehlédnutí existujícího vstupu a další běžné použití vedlo správně.
+
+Samostatná oprava výřezu:
+Mapa vedla správně na část o produktové aktivaci, ale výřez neměl samostatnou první větu. Otevíráme lokální úpravu výřezu, ne mapy.
+
+Zastavení evidence:
+Rušíme ruční seznam případů, kdy byl výřez poslán zákazníkovi. Pro mapu stačí anonymní poznámka, že vstup fungoval nebo selhal.
+```
+
+Všimněte si, že žádný stav neříká "přestavíme celou mapu". To může být někdy nutné, ale není to běžné uzavření návratového signálu. Pokud jeden signál vyžaduje přestavbu všeho, nejdřív zkontrolujte, jestli ve skutečnosti neřešíte širší redakční problém, který si zaslouží vlastní pracovní kartu.
+
+### Praktický SaaS příklad
+
+Situace:
+
+```text
+Člověk ze supportu hledal část, kterou může poslat zákazníkovi po dotazu na bezpečné měření aktivace v SaaS produktu.
+```
+
+Mapa vedla přes obecný vstup "měření" na marketingové kampaně. Potřebná část ale měla být o produktové aktivaci, datovém minimu a rozhodnutí, zda vůbec přidávat novou analytickou událost.
+
+Nejmenší oprava:
+
+```text
+V mapě rozdělujeme obecný vstup "měření" na dva vstupy:
+
+- marketingové měření
+- produktová aktivace
+```
+
+Co se nemění:
+
+```text
+Nepřepisujeme kapitolu o marketingu, nepřidáváme nový dashboard, nezavádíme seznam odeslaných výřezů a neměníme sales ani support proces.
+```
+
+Privacy-first uzavření:
+
+```text
+Do trvalého záznamu neukládáme jméno zákazníka, text dotazu, e-mailovou komunikaci ani informaci, komu byl výřez poslán. Stačí anonymní situace: "support hledal výřez pro produktovou aktivaci a obecný vstup měření vedl ke kampaním".
+```
+
+Návratový signál pro další otevření:
+
+```text
+K mapě se vrátíme, pokud nový vstup "produktová aktivace" dvakrát za sebou povede ke špatnému typu části nebo pokud support začne znovu vytvářet pomocný seznam výřezů.
+```
+
+Takové uzavření je malé, ale úplné. Mapa je přesnější, rozsah se nerozjel, zákaznické detaily nezůstaly viset v redakčních poznámkách a další otevření má jasný důvod.
+
+### Kde uzavření bydlí
+
+Uzavření návratového signálu má bydlet u kanonické čtenářské mapy nebo u pracovního místa, kde mapa reálně slouží. Pokud mapu používá support, dejte krátkou uzavírací větu do supportního rozcestníku. Pokud mapu používá marketing při výběru výřezů pro články, dejte ji k redakčnímu rozcestníku. Pokud jde o veřejnou webovou navigaci e-booku, uzavření patří k poznámce o dané navigační změně.
+
+Nepomáhá zakládat další dokument jen pro uzavírání signálů. Samostatný registr má smysl až ve chvíli, kdy řešíte víc návratových signálů napříč různými mapami a opravdu podle něj rozhodujete. Pokud ho nikdo nečte před další změnou, je to jen další krásně strukturovaný odpadkový koš na rozhodnutí. Elegantní, ale pořád koš.
+
+Pravidlo:
+
+```text
+Uzavření dejte tam, kde ho člověk uvidí před dalším použitím mapy.
+```
+
+To je důležitější než název složky, formát dokumentu nebo počet sloupců. Dobrý záznam je ten, který zabrání opakování stejné chyby. Špatný záznam je ten, který vypadá profesionálně a nikdo ho v rozhodovací chvíli nenajde.
+
+### Privacy-first ukončení návratu
+
+Při uzavření návratového signálu zkontrolujte, jestli během řešení nevznikly dočasné stopy:
+
+- poznámky s konkrétními jmény lidí,
+- zákaznické citace,
+- odkazy na CRM záznamy,
+- screenshoty e-mailů nebo support tiketů,
+- seznamy lidí, kterým byl poslaný výřez,
+- tabulka použití mapy,
+- dočasný export z analytiky nebo helpdesku.
+
+Pokud tyto stopy nejsou potřeba pro zákonnou, smluvní nebo provozní evidenci, nepřenášejte je do redakčního záznamu. Shrňte je anonymně a zbytek smažte podle interních pravidel. Privacy-first provoz není jen výběr evropského hostingu a vypnutých trackerů. Je to i schopnost neudělat z každé pracovní opravy malý archiv cizích situací.
+
+Dobrá uzavírací věta:
+
+```text
+Do mapy se propsala jen anonymní navigační oprava; dočasné zákaznické podklady se nepřenášejí do redakční historie a nevzniká evidence odeslaných výřezů.
+```
+
+Pokud dočasné podklady musí zůstat jinde, napište pouze kde a proč, ne jejich obsah. Například:
+
+```text
+Supportní tiket zůstává v helpdesku podle běžné retenční politiky. Redakční záznam obsahuje jen anonymní typ situace a opravu vstupu v mapě.
+```
+
+Tím oddělíte provozní evidenci od redakční práce. Mapě stačí vědět, jak se má zlepšit. Nepotřebuje znát celý příběh.
+
+### Karta uzavření návratového signálu mapy
+
+```text
+Datum uzavření:
+
+Původní anonymní návratový signál:
+
+Výsledek uzavření:
+- malá oprava mapy
+- bez změny mapy
+- samostatná oprava cílového výřezu
+- zastavení zbytečné evidence
+
+Co se změnilo:
+
+Co se výslovně nemění:
+
+Kde je změna propsaná:
+
+Jaká dočasná evidence nevzniká, končí nebo se nepřenáší:
+
+Co zůstává v provozní evidenci mimo mapu, pokud něco:
+
+Jednovětý závěr:
+
+Návratový signál pro další otevření:
+```
+
+Kartu zkraťte, pokud stačí jedna uzavírací věta. Použijte ji v plné délce jen tehdy, když se zároveň mění mapa, ruší evidence nebo odděluje samostatná oprava výřezu. Jinak by karta spotřebovala víc pozornosti než samotný problém, což je přesně ten typ produktivity, při kterém se člověk tváří zaměstnaně a systém mezitím tiše tloustne.
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: přečtěte původní anonymní návratový signál.
+2. Minuta 2: vyberte jeden ze čtyř výsledků uzavření.
+3. Minuta 3: napište, co se změnilo.
+4. Minuta 4: napište, co se výslovně nemění.
+5. Minuta 5: určete, kde uzavření uvidí další člověk před použitím mapy.
+6. Minuta 6: smažte, nepřenášejte nebo anonymizujte dočasné osobní a zákaznické stopy.
+7. Minuta 7: napište návratový signál pro další otevření nebo větu, že mapa zůstává v pasivním provozu bez plánované kontroly.
+
+Pokud se v minutě 2 nedokážete rozhodnout mezi dvěma výsledky, nerozšiřujte workshop. Rozdělte práci: nejdřív uzavřete navigační otázku mapy, potom založte samostatnou kartu pro cílový výřez nebo provozní evidenci. Smíchání dvou problémů do jednoho záznamu skoro vždycky vyrobí text, který zní chytře a nepomůže nikomu.
+
+### Checklist uzavření návratového signálu mapy
+
+- Je původní signál popsaný anonymně a konkrétně?
+- Vybrali jsme přesně jeden hlavní výsledek uzavření?
+- Je jasné, jestli se mění mapa, cílový výřez, evidence, nebo nic?
+- Umíme jednou větou říct, co se výslovně nemění?
+- Je uzavření uložené tam, kde ho další člověk uvidí před použitím mapy?
+- Nepřenášíme do redakční historie jména, zákaznické detaily, citace, screenshoty ani seznamy příjemců?
+- Pokud provozní evidence musí zůstat jinde, je oddělená od mapy?
+- Má mapa další návratový signál, nebo se vrací do pasivního provozu?
+- Nevznikl kvůli jednomu signálu nový systém, tabulka nebo pravidelný report?
+- Dá se za měsíc poznat, proč se mapa změnila nebo proč zůstala beze změny?
+
+Uzavření návratového signálu je poslední brzda před tím, než se z užitečného rozcestníku stane samostatný provozní systém s vlastní agendou. Udělejte malou opravu, zapište hranici, ukliďte dočasné stopy a vraťte mapu do tichého provozu. Když bude znovu potřeba, ozve se skutečný signál. Když se neozve, gratuluji: máte jednu věc, která funguje bez schůzky.
+
 ## Pracovní log
 
+- 2026-07-05: Doplněna úvodní podkapitola o uzavření návratového signálu čtenářské mapy: čtyři výsledky uzavření, praktický SaaS příklad, umístění záznamu, privacy-first ukončení návratu, karta, mini workshop a checklist.
 - 2026-07-05: Doplněna úvodní podkapitola o návratovém signálu čtenářské mapy v dlouhodobém pasivním provozu: co se počítá jako signál, tři brány znovuotevření, praktický příklad, privacy-first hranice, karta, mini workshop a checklist.
 - 2026-07-05: Doplněna úvodní podkapitola o uzavření třetího běžného použití čtenářské mapy: čtyři uzavírací stavy, praktický SaaS follow-up příklad, privacy-first uzavření bez zbytečné evidence, karta, mini workshop a checklist.
 - 2026-07-05: Doplněna úvodní podkapitola o třetím běžném použití čtenářské mapy v pasivním provozu: přirozené použití, čtyři výsledky, praktické příklady, privacy-first pravidlo minimální stopy, karta, mini workshop a checklist.
