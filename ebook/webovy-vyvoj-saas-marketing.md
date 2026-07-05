@@ -297467,8 +297467,235 @@ Když se během sedmi minut objeví nový nápad, zapište ho stranou. Uzavřen�
 
 Uzavření první běžné kontroly neotevřeného kroku má vrátit věc do klidu bez ztráty paměti. Tým ví, proč nic nemění, co by změnu znovu otevřelo a jaká data díky tomu dál nevznikají. To je dobrý výsledek: méně práce bez důvodu, méně skryté evidence a víc rozhodnutí, která umí stát sama.
 
+## Druhá běžná kontrola neotevřeného kroku
+
+Druhá běžná kontrola neotevřeného kroku už nemá dokazovat, že první kontrola byla správná. Má ověřit něco praktičtějšího: jestli se rozhodnutí udrželo v běžném provozu bez mimořádné péče, bez nových vysvětlujících schůzek a bez skryté evidence, která tiše obchází původní hranici.
+
+Pokud první kontrola skončila stavem `klid potvrzen`, druhá kontrola má být ještě menší. Neotevírá se zvláštní review, nevyrábí se nový report a nikdo neprochází staré debaty pro radost z archivní archeologie. Stačí využít další přirozený průchod stejným pracovním místem: další měsíční review poptávek, další onboarding, další supportní triage, další kontrolu landing page nebo další redakční údržbu.
+
+Začněte větou:
+
+```text
+Druhou běžnou kontrolu děláme při tomto přirozeném průchodu:
+```
+
+Dobrá věta:
+
+```text
+Druhou běžnou kontrolu děláme při dalším měsíčním review poptávek, protože stejné pracovní místo znovu ukáže, zda chybějící rozpočet opravdu brání kvalifikaci, nebo jestli stačí původní rozhodnutí ponechat zavřené.
+```
+
+Slabá věta:
+
+```text
+Je čas se k tomu znovu vrátit.
+```
+
+Čas může být připomínka, ale pořád není důkaz. Druhá kontrola má stát na použití pracovního místa, ne na kalendářním neklidu. Když se nic nového neukázalo, nejhodnotnější výsledek je potvrdit klid a ještě víc zředit pozornost. Ano, je to produktová práce, která se špatně fotí na LinkedIn. O to víc se hodí do skutečného provozu.
+
+### Co druhá kontrola ověřuje
+
+Druhá kontrola má tři úkoly:
+
+- Potvrdit, že původní návratový signál pořád nepřišel.
+- Ověřit, že lokální vysvětlení z první kontroly stačí bez další asistence.
+- Zkontrolovat, že nevznikla nová náhradní datová stopa.
+
+První úkol je čistý test reality. Pokud byl návratový signál "tři relevantní poptávky za sebou nejdou kvalifikovat bez rozpočtu", druhá kontrola se neptá, jestli by rozpočet byl pohodlný. Ptá se, jestli se opravdu stalo to, co mělo rozhodnutí znovu otevřít.
+
+Druhý úkol testuje samostatnost pravidla. Když se někdo u pracovního místa zeptá, proč se krok dál neotevírá, odpověď má být dohledatelná bez člověka, který původní rozhodnutí pamatuje. Pokud je potřeba dlouhé vysvětlení, pravidlo možná není špatné, ale jeho zápis je slabý.
+
+Třetí úkol chrání privacy-first hodnotu. Neotevřený krok se často neporuší velkou změnou, ale drobnou náhradou: poznámkovým polem, interním štítkem, screenshotem, ručním exportem nebo "dočasnou" tabulkou. Druhá kontrola má tyto tiché náhrady zachytit dřív, než se stanou normálním provozem.
+
+Codyho komentář: druhá kontrola je dobré místo pro otázku "nezačali jsme dělat totéž, jen méně viditelně?" Pokud odpověď zní "tak trochu", gratuluji, právě jste našli procesní kamufláž. Není potřeba drama. Stačí ji pojmenovat, zastavit a rozhodnout normálně.
+
+### Čtyři výsledky druhé kontroly
+
+Druhá běžná kontrola může skončit čtyřmi stavy:
+
+- Stabilní klid: pravidlo funguje bez mimořádné péče a návratový signál nepřišel.
+- Slabá dohledatelnost: rozhodnutí platí, ale člověk ho u pracovního místa nenajde nebo mu nerozumí.
+- Nový lokální šum: opakuje se podobná otázka, ale pořád bez návratového signálu.
+- Skrytá náhrada: někde vznikla náhradní evidence, pole, štítek, export nebo ruční proces.
+
+`Stabilní klid` je nejlepší výsledek. Zapište jednu větu a nechte téma v pasivním režimu. Další kontrolu plánujte jen tehdy, pokud se objeví návratový signál nebo pokud je pracovní místo součástí pravidelného review, které by stejně proběhlo.
+
+`Slabá dohledatelnost` neznamená otevřít původní krok. Znamená opravit místo, kde rozhodnutí bydlí. Přesuňte nebo zkraťte poznámku tak, aby ji našel člověk při práci, ne až při archeologickém výletu do rozhodovacího logu.
+
+`Nový lokální šum` znamená, že se otázka vrací v řeči týmu, ale realita ji pořád nepotvrdila. Tady stačí krátké připomenutí hranice: co by krok otevřelo a co se dál nesbírá. Nepřidávejte nové měření jen proto, že se stejný nápad umí vracet v lepších botách.
+
+`Skrytá náhrada` je jediný stav, který vyžaduje aktivní úklid. Pokud se našla tabulka, export, štítek nebo ruční scoring, nejdřív zastavte sběr a teprve potom řešte, jestli existuje legitimní malé posouzení. Data bez rozhodnutí nejsou "předběžná opatrnost". Jsou to data bez rozhodnutí.
+
+### Praktický SaaS příklad
+
+Původní neotevřený krok:
+
+```text
+Nepřidáváme povinné pole "rozpočet" do poptávkového formuláře. K tématu se vrátíme pouze pokud tři relevantní poptávky za sebou nepůjdou kvalifikovat bez ručního doptání na rozpočet.
+```
+
+První kontrola:
+
+```text
+Klid potvrzen. Posledních šest poptávek neukázalo problém s rozpočtem. Hlavní překážkou byl nejasný cíl projektu a chybějící rozhodovací proces. Rozpočet dál nesbíráme jako povinný údaj.
+```
+
+Druhá kontrola při dalším měsíčním review:
+
+```text
+Návratový signál nepřišel. Nové poptávky šly kvalifikovat bez povinného rozpočtu. Obchodní checklist obsahuje krátké vysvětlení, proč rozpočet v prvním formuláři nesbíráme.
+```
+
+Uzavření:
+
+```text
+Stabilní klid. Povinné pole pro rozpočet, CRM atribut rozpočtu a export odhadů dál neotevíráme. Téma necháváme v pasivním režimu; vrátíme se pouze při původním návratovém signálu nebo při změně nabídky, která by kvalifikaci rozpočtu udělala nově nutnou.
+```
+
+Varianta se slabou dohledatelností:
+
+```text
+Rozhodnutí pořád platí, ale obchodní checklist odkazuje jen na starý rozhodovací log. Nový člověk nepozná, proč se rozpočet nesbírá.
+```
+
+Lokální oprava:
+
+```text
+K checklistu doplňujeme jednu větu: "Rozpočet v prvním formuláři nesbíráme, dokud tři relevantní poptávky za sebou nepůjde kvalifikovat bez doptání; místo toho se ptáme na cíl projektu a rozhodovací proces." Formulář, CRM ani analytiku neměníme.
+```
+
+Varianta se skrytou náhradou:
+
+```text
+V CRM vznikl ruční štítek "asi nízký rozpočet", který lidé doplňují podle dojmu z prvního e-mailu.
+```
+
+Uzavření:
+
+```text
+Skrytá náhrada. Štítek zastavujeme, existující štítky mažeme nebo slučujeme do anonymního review poznatku a nejdřív rozhodujeme, zda vůbec existuje konkrétní rozhodnutí, které takový odhad potřebuje. Do té doby nerozšiřujeme formulář ani CRM.
+```
+
+Tahle varianta je nepříjemná právě proto, že vypadá jako drobnost. Jenže "asi nízký rozpočet" může být osobní obchodní úsudek, nepřesný signál a datová stopa bez jasné retence najednou. Privacy-first provoz nemá brzdit obchodní rozhodování; má donutit tým říct, jestli údaj opravdu potřebuje, jak ho získá férově a kde skončí.
+
+### Privacy-first kontrola druhého průchodu
+
+Druhá kontrola má mít krátkou datovou část i tehdy, když se nic nemění:
+
+```text
+Nová data od minulé kontroly:
+
+Náhradní evidence:
+
+Co dál nevzniká:
+
+Co mažeme nebo slučujeme:
+```
+
+Příklad stabilního klidu:
+
+```text
+Nová data od minulé kontroly:
+Žádná mimo běžné anonymní poznámky z review poptávek.
+
+Náhradní evidence:
+Nevznikla žádná tabulka, CRM pole, štítek ani export.
+
+Co dál nevzniká:
+Povinný rozpočet ve formuláři, rozpočtový CRM atribut, lead scoring podle rozpočtu.
+
+Co mažeme nebo slučujeme:
+Nic; pomocné podklady nevznikly.
+```
+
+Příklad skryté náhrady:
+
+```text
+Nová data od minulé kontroly:
+CRM štítek "asi nízký rozpočet" u sedmi poptávek.
+
+Náhradní evidence:
+Ano, ruční štítek bez schváleného účelu.
+
+Co dál nevzniká:
+Nové štítky, export štítků, scoring podle odhadu rozpočtu.
+
+Co mažeme nebo slučujeme:
+Ruční štítky mažeme a do review ponecháváme jen anonymní poznámku, že se tým snažil kvalifikovat rozpočtovou nejistotu.
+```
+
+Smyslem není trestat lidi za improvizaci. Smyslem je nenechat improvizaci stát se tichou infrastrukturou. Každá tichá infrastruktura má časem své vlastní výjimky, vlastní zálohy a vlastní "to už radši nemažme". Tady je levnější uklidit hned.
+
+### Karta druhé běžné kontroly
+
+```text
+Původní neotevřený krok:
+
+Výsledek první běžné kontroly:
+
+Přirozený průchod, při kterém proběhla druhá kontrola:
+
+Původní návratový signál:
+
+Objevil se návratový signál:
+- ano
+- ne
+- nejasné, potřebuje nové malé posouzení
+
+Výsledek druhé kontroly:
+- stabilní klid
+- slabá dohledatelnost
+- nový lokální šum
+- skrytá náhrada
+
+Co zůstává zavřené:
+
+Co se lokálně opravuje:
+
+Jaká náhradní evidence vznikla nebo nevznikla:
+
+Co mažeme, slučujeme nebo zastavujeme:
+
+Jaká data dál nesbíráme:
+
+Kde je závěr uložený:
+
+Další návratový signál:
+```
+
+Kartu nezakládejte jako nový samostatný dokument, pokud k tomu není důvod. Nejlepší místo je stejné pracovní místo: checklist u formuláře, poznámka v obchodním playbooku, karta onboardingového kroku nebo revizní poznámka u obsahové šablony. Čím blíž je závěr práci, tím menší šance, že se z něj stane mrtvý zápis.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte původní neotevřený krok a výsledek první kontroly.
+2. Minuta 2: pojmenujte přirozený průchod, ve kterém druhá kontrola probíhá.
+3. Minuta 3: ověřte, jestli přišel původní návratový signál.
+4. Minuta 4: zkontrolujte dohledatelnost rozhodnutí u pracovního místa.
+5. Minuta 5: hledejte náhradní evidenci, štítky, exporty, kopie nebo ruční tabulky.
+6. Minuta 6: vyberte výsledek druhé kontroly a napište datovou větu.
+
+Pokud se tým během workshopu začne hádat o původní rozhodnutí, vraťte se k návratovému signálu. Druhá kontrola není referendum o staré debatě. Je to test, jestli přišel důvod, který jste si sami předem určili.
+
+### Checklist druhé běžné kontroly
+
+- Proběhla kontrola při přirozeném pracovním průchodu, ne jako nová mimořádná aktivita?
+- Máme před sebou výsledek první běžné kontroly?
+- Víme, jestli se objevil původní návratový signál?
+- Je rozhodnutí dohledatelné tam, kde se práce opravdu dělá?
+- Rozuměl by rozhodnutí nový člověk bez historického vysvětlení?
+- Zkontrolovali jsme ruční tabulky, CRM štítky, poznámková pole, exporty a kopie komunikace?
+- Vybrali jsme jeden ze čtyř výsledků druhé kontroly?
+- Pokud je stav stabilní klid, neplánujeme další mimořádnou kontrolu bez signálu?
+- Pokud je problém jen dohledatelnost, opravujeme jen umístění nebo formulaci rozhodnutí?
+- Pokud vznikl lokální šum, nepřidáváme nové měření bez rozhodovací věty?
+- Pokud vznikla skrytá náhrada, víme, co se zastavuje, maže nebo převádí do jasného posouzení?
+- Je zapsané, jaká data dál nesbíráme?
+
+Druhá běžná kontrola je hotová, když téma buď zůstane v klidu, nebo se přesně ukáže, kde klid selhal. V obou případech je cílem menší provozní stopa: méně zvláštních kontrol, méně skryté evidence a více rozhodnutí, která vydrží i bez člověka, který je původně napsal.
+
 ## Pracovní log
 
+- 2026-07-05: Doplněna úvodní podkapitola o druhé běžné kontrole neotevřeného kroku: stabilní klid, dohledatelnost rozhodnutí, lokální šum, skrytá náhrada, praktický SaaS příklad, privacy-first kontrola datové stopy, karta, mini workshop a checklist.
 - 2026-07-05: Doplněna úvodní podkapitola o uzavření první běžné kontroly neotevřeného kroku: uzavírací stavy, praktické příklady, privacy-first úklid datové stopy, karta, mini workshop a checklist.
 - 2026-07-05: Doplněna úvodní podkapitola o první běžné kontrole neotevřeného kroku: přirozený rytmus kontroly, tři otázky, čtyři výsledky, praktický příklad s poptávkovým formulářem, privacy-first zachycení skryté evidence, karta, mini workshop a checklist.
 - 2026-07-05: Doplněna úvodní podkapitola o uzavření druhého běžného použití po uzavřeném signálu čtenářské mapy: tři uzavírací stavy, praktické příklady, privacy-first úklid pomocné evidence, karta, mini workshop a checklist.
