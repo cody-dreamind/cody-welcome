@@ -297278,8 +297278,198 @@ Když větu nedopíšete konkrétně, údaj nesbírejte. Když ji dopíšete, te
 
 První běžná kontrola neotevřeného kroku má být nudná a užitečná. Buď potvrdí, že se nic nemění, nebo najde přesné místo, kde se z neotevřené práce začala rodit práce skrytá. V obou případech drží tým u stejné zásady: neotevírat změnu bez signálu a nesbírat data bez rozhodnutí.
 
+## Uzavření první běžné kontroly neotevřeného kroku
+
+První běžná kontrola neotevřeného kroku je hotová až ve chvíli, kdy má jasný závěr. Nestačí říct "nic jsme nenašli" nebo "asi to necháme být". Takové věty se po měsíci rozpadnou na dojem. Uzavření má z kontroly udělat pracovní stav: co dál zůstává zavřené, jestli se něco lokálně vysvětluje, jestli vzniká nové malé posouzení, nebo jestli je potřeba uklidit skrytou evidenci.
+
+Začněte větou:
+
+```text
+První běžnou kontrolu neotevřeného kroku uzavíráme takto:
+```
+
+Za ni napište jeden ze čtyř stavů:
+
+- Klid potvrzen a téma se vrací do běžného rytmu.
+- Doplňujeme lokální vysvětlení, ale krok dál neotevíráme.
+- Kontext se změnil, proto otevíráme nové malé posouzení.
+- Našli jsme skrytý otevřený krok a nejdřív uklízíme jeho datovou stopu.
+
+Rozdíl mezi těmito stavy je důležitý. `Klid potvrzen` znamená, že nepřišel návratový signál, pracovní místo pořád sedí a nikde nevznikla náhradní evidence. Tady je nejlepší udělat co nejméně: zapsat větu, neplánovat další mimořádnou kontrolu a nechat téma vrátit se do ticha.
+
+`Doplňujeme lokální vysvětlení` znamená, že se otázka vrací hlavně jako šum. Například někdo znovu navrhne povinné pole pro rozpočet, ale důkaz pořád chybí. Oprava není úprava formuláře. Oprava je jedna věta u pracovního místa, která připomene, proč se pole dál nepřidává a jaký signál by rozhodnutí změnil.
+
+`Kontext se změnil` znamená, že starý závěr už nejde brát jako samozřejmý. Možná se změnila nabídka, typ zákazníků, onboarding nebo obchodní kvalifikace. Ani tady ale nespouštějte původní velký návrh. Otevřete nové malé posouzení s dnešní otázkou a dnešní datovou stopou.
+
+`Skrytý otevřený krok` je stav, kdy tým formálně nic neotevřel, ale prakticky začal dělat přesně to, čemu se minule chtěl vyhnout: ruční tabulku, nový CRM štítek, kopie odpovědí, pomocný export nebo neoficiální scoring. Uzavření pak není "pokračujeme opatrně". Uzavření je nejdřív zastavit, pojmenovat účel a uklidit data, která nemají jasné rozhodnutí.
+
+### Uzavírací věta
+
+Dobrá uzavírací věta je krátká a obsahuje tři části: stav, hranici a datovou stopu.
+
+```text
+První běžnou kontrolu uzavíráme stavem klid potvrzen. Povinné pole pro rozpočet dál neotevíráme, protože návratový signál nepřišel. Nepřidáváme pomocnou evidenci rozpočtů; v měsíčním review zůstává jen anonymní poznámka o hlavní překážce kvalifikace.
+```
+
+Slabá věta:
+
+```text
+Zatím to necháme.
+```
+
+Slabá věta neříká, co přesně zůstává zavřené, proč to zůstává zavřené ani jaká data díky tomu nevznikají. Je to pohodlné v zápisu a nepohodlné při dalším návratu. Člověk pak musí znovu hádat, jestli tým něco věděl, nevěděl, zapomněl nebo jen neměl energii.
+
+Codyho komentář: "zatím" je v produktové práci nebezpečně pružné slovo. Umí znamenat dnes, měsíc, nikdy, nebo "nechci se hádat". V uzavření ho používejte jen tehdy, když za ním stojí konkrétní návratový signál. Jinak je to jen měkká mlha v hezkém svetru.
+
+### Praktický příklad
+
+Kontrola:
+
+```text
+Při měsíčním review poptávek jsme prošli posledních šest relevantních poptávek. Návratový signál pro povinné pole rozpočtu nepřišel. U dvou poptávek chyběl rozhodovací proces, u čtyř nebyl jasný cíl projektu.
+```
+
+Uzavření:
+
+```text
+Stav:
+Klid potvrzen.
+
+Co zůstává zavřené:
+Povinné pole pro rozpočet, automatický lead scoring a export rozpočtových odhadů.
+
+Co zapisujeme:
+Do review poptávek doplňujeme anonymní poznámku, že hlavní překážkou byl cíl projektu nebo rozhodovací proces.
+
+Co dál nesbíráme:
+Rozpočet jako povinný formulářový údaj ani samostatný CRM atribut.
+
+Návratový signál:
+Tři relevantní poptávky za sebou nepůjdou kvalifikovat bez ručního doptání na rozpočet.
+```
+
+Varianta s lokálním vysvětlením:
+
+```text
+Stav:
+Doplňujeme lokální vysvětlení.
+
+Oprava:
+K obchodnímu checklistu přidáváme větu: "Rozpočet se do prvního formuláře nepřidává, dokud tři relevantní poptávky za sebou nepůjde kvalifikovat bez doptání na rozpočet."
+
+Co neotevíráme:
+Formulář, CRM pole, scoring ani další měření.
+```
+
+Varianta se skrytým otevřeným krokem:
+
+```text
+Stav:
+Skrytý otevřený krok.
+
+Co se našlo:
+Vedlejší tabulka s ručním odhadem rozpočtu u každé poptávky.
+
+Uzavření:
+Tabulku zastavujeme, nepotřebné odhady mažeme a necháváme jen anonymní poznámku, že vznikla potřeba lepší kvalifikace. Nové malé posouzení otevřeme pouze tehdy, pokud umíme napsat konkrétní rozhodnutí, které bez rozpočtového údaje nejde udělat.
+```
+
+Tady je podstatné pořadí. Nejdřív uklidit skrytý sběr, potom teprve rozhodovat, jestli vůbec existuje legitimní nový krok. Kdyby se pořadí otočilo, tým by snadno začal obhajovat data, která už mezitím vznikla. To je špatná motivace: nejdřív sběr, potom důvod. Privacy-first provoz chce opačné pořadí.
+
+### Privacy-first uzavření
+
+Uzavření první běžné kontroly má vždy obsahovat větu o datech. I když žádná nová data nevznikla. Právě tahle věta pomáhá týmu vidět, že neotevřený krok má hodnotu.
+
+Použijte tři řádky:
+
+```text
+Dál nesbíráme:
+
+Dočasně vzniklo:
+
+Po uzavření mažeme, slučujeme nebo necháváme nevzniknout:
+```
+
+Příklad:
+
+```text
+Dál nesbíráme:
+Rozpočet jako povinné formulářové pole, automatické skóre leadu ani export rozpočtových odhadů.
+
+Dočasně vzniklo:
+Anonymní poznámky z měsíčního review poptávek.
+
+Po uzavření mažeme, slučujeme nebo necháváme nevzniknout:
+Nemažeme zákaznickou komunikaci, ale nepřenášíme rozpočtové odhady do nové tabulky ani CRM atributu.
+```
+
+Pokud při kontrole vznikly kopie konkrétních poptávek, screenshoty, výřezy z e-mailů nebo pomocné tabulky, uzavření musí říct, co se s nimi stane. "Zůstane to u nás pro jistotu" není plán. Je to budoucí úklid, který si právě objednáváte bez termínu.
+
+### Karta uzavření první běžné kontroly
+
+```text
+Původní neotevřený krok:
+
+Běžná kontrola proběhla kde:
+
+Původní návratový signál:
+
+Co kontrola ukázala:
+
+Uzavírací stav:
+- klid potvrzen
+- doplnit lokální vysvětlení
+- otevřít nové malé posouzení kvůli změně kontextu
+- zastavit skrytý otevřený krok
+
+Co zůstává zavřené:
+
+Co se případně doplňuje do pracovního místa:
+
+Co se zastavuje, maže nebo nepřenáší:
+
+Jaká data dál nesbíráme:
+
+Nový nebo potvrzený návratový signál:
+
+Kde je závěr uložený:
+
+Vlastník:
+```
+
+Karta je záměrně obyčejná. Nemá vytvářet další artefakt pro archiv. Má zajistit, že další člověk u stejného pracovního místa uvidí, zda se téma uklidnilo, dostalo lokální poznámku, změnilo kontext, nebo se musela zastavit skrytá evidence.
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: přečtěte původní neotevřený krok a návratový signál.
+2. Minuta 2: přečtěte výsledek první běžné kontroly.
+3. Minuta 3: vyberte jeden uzavírací stav.
+4. Minuta 4: napište, co zůstává výslovně zavřené.
+5. Minuta 5: rozhodněte, jestli stačí lokální vysvětlení, nebo vzniká nové malé posouzení.
+6. Minuta 6: uzavřete datovou stopu.
+7. Minuta 7: uložte závěr k pracovnímu místu a potvrďte návratový signál.
+
+Když se během sedmi minut objeví nový nápad, zapište ho stranou. Uzavření kontroly nemá být kreativní dílna. Má zavřít konkrétní provozní otázku. Nový nápad může být užitečný, ale musí si zasloužit vlastní otázku, vlastní důkaz a vlastní datovou hranici.
+
+### Checklist uzavření první běžné kontroly
+
+- Máme výsledek kontroly, ne jen obecný dojem?
+- Vybrali jsme přesně jeden uzavírací stav?
+- Je jasně napsané, co zůstává zavřené?
+- Pokud potvrzujeme klid, neplánujeme další mimořádnou kontrolu bez signálu?
+- Pokud doplňujeme lokální vysvětlení, zůstává opravdu lokální?
+- Pokud se změnil kontext, otevíráme nové malé posouzení, ne starý široký návrh?
+- Pokud vznikl skrytý otevřený krok, víme, co se zastavuje, maže nebo převádí do jasného rozhodnutí?
+- Je v závěru napsané, jaká data dál nesbíráme?
+- Jsou dočasné poznámky, tabulky, exporty nebo kopie po kontrole uklizené?
+- Je závěr uložený u pracovního místa, kde se stejná otázka vrátí?
+- Má téma potvrzený návratový signál, nebo je vědomě zavřené bez další kontroly?
+
+Uzavření první běžné kontroly neotevřeného kroku má vrátit věc do klidu bez ztráty paměti. Tým ví, proč nic nemění, co by změnu znovu otevřelo a jaká data díky tomu dál nevznikají. To je dobrý výsledek: méně práce bez důvodu, méně skryté evidence a víc rozhodnutí, která umí stát sama.
+
 ## Pracovní log
 
+- 2026-07-05: Doplněna úvodní podkapitola o uzavření první běžné kontroly neotevřeného kroku: uzavírací stavy, praktické příklady, privacy-first úklid datové stopy, karta, mini workshop a checklist.
 - 2026-07-05: Doplněna úvodní podkapitola o první běžné kontrole neotevřeného kroku: přirozený rytmus kontroly, tři otázky, čtyři výsledky, praktický příklad s poptávkovým formulářem, privacy-first zachycení skryté evidence, karta, mini workshop a checklist.
 - 2026-07-05: Doplněna úvodní podkapitola o uzavření druhého běžného použití po uzavřeném signálu čtenářské mapy: tři uzavírací stavy, praktické příklady, privacy-first úklid pomocné evidence, karta, mini workshop a checklist.
 - 2026-07-05: Doplněna úvodní podkapitola o druhém běžném použití po uzavřeném signálu čtenářské mapy: kdy druhé použití přeskočit, ověření přenositelnosti, čtyři výsledky, praktický SaaS příklad, privacy-first hranice, karta, mini workshop a checklist.
