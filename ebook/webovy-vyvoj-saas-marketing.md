@@ -302172,8 +302172,203 @@ Workshop má skončit tím, že záznam buď přechází do běžné údržby, n
 
 Převod do běžné údržby je tiché vítězství. Pravidlo už nemusí dokazovat, že existuje. Prostě pomáhá lidem neotevírat zbytečnou práci a nevyrábět zbytečná data. A to je přesně ten druh provozní elegance, která se špatně prodává na slidech, ale výborně funguje v pondělí ráno.
 
+## První běžné review po převodu indexového záznamu do údržby
+
+Když indexový záznam přejde do běžné údržby, tým má tendenci si oddechnout a chvíli se tvářit, že tím téma skončilo. To je z poloviny pravda. Skončil mimořádný režim, ale nezačala nesmrtelnost pravidla. První běžné review po převodu má ověřit, že záznam opravdu žije v normálním rytmu: je najitelný, používá se při správných rozhodnutích, nevyrábí obchvaty a neotevírá zpátky práci, která byla vědomě zavřená.
+
+Nejde o nové kolo dokazování. Pokud záznam před převodem prošel kontrolami, první běžné review nemá znovu přehrávat celý film. Má zkontrolovat, jestli se z filmu nestal nepopsaný plakát na zdi. Pravidlo může být věcně správné, ale provozně slabé, pokud se k němu nikdo nedostane ve chvíli, kdy ho potřebuje.
+
+Začněte otázkou:
+
+```text
+Použil se indexový záznam od převodu do údržby v běžné práci tak, jak jsme čekali?
+```
+
+Odpověď má být opřená o konkrétní pracovní průchod. Třeba úpravu registrační obrazovky, revizi onboardingového e-mailu, přípravu nové kampaně, obchodní kvalifikaci nebo kontrolu šablony. Pokud žádný průchod nenastal, review nemá vymýšlet umělý test. Stačí zapsat, že záznam zůstává v běžné údržbě a první reálné použití teprve přijde.
+
+### Čtyři kontrolní body
+
+První běžné review po převodu se drží čtyř bodů:
+
+- Místo použití: potkal se záznam s pracovním místem, kde měl pomoci?
+- Samostatnost: dokázal člověk podle záznamu rozhodnout bez vysvětlování původní historie?
+- Hranice: zůstalo jasné, co pravidlo neotevírá?
+- Datová stopa: nevznikla bokem nová evidence, která měla být podle pravidla zbytečná?
+
+Místo použití je základ. Pokud se například pravidlo o nesbírání velikosti firmy mělo používat při změnách registrace, onboardingu a sales karty, review se ptá právě na tato místa. Ne na obecný názor týmu. Pokud se záznam v běžné práci nepotkal s žádným z nich, neznamená to selhání. Znamená to jen, že pravidlo zatím nebylo v provozu vyzvané k práci.
+
+Samostatnost poznáte podle toho, jestli člověk uměl udělat rozhodnutí z indexové věty a odkazu na kanonické místo. Pokud musel hledat staré kontroly, ptát se původního autora nebo dohledávat dlouhou historii, záznam ještě není dost provozní. Oprava má být malá: zpřesnit větu, přidat odkaz nebo posunout kotvu blíž k místu práce.
+
+Hranice chrání před návratem starého rozsahu. První běžné review často zachytí větu typu: "když už to máme v indexu, mohli bychom z toho udělat systematičtější segmentaci." Možná jednou ano. Ale ne v tomto review. Tady se kontroluje existující pravidlo, ne otevírá nová strategie.
+
+Datová stopa je nejpraktičtější privacy-first kontrola. Pokud pravidlo říká, že se nesbírá velikost firmy, ale někdo si začal bokem vést ruční odhady v tabulce, pravidlo nefunguje. Ne proto, že by tabulka byla technologicky dramatická. Protože obchází přesně tu hranici, kterou záznam měl držet.
+
+### Čtyři výsledky review
+
+Review může skončit čtyřmi stavy:
+
+- Zůstává v běžné údržbě: záznam se použil samostatně, hranice drží a nevznikla nová datová stopa.
+- Doplnit provozní kotvu: pravidlo platí, ale nebylo dost blízko pracovnímu místu.
+- Zpřesnit indexovou větu: záznam byl najitelný, ale člověk nevěděl, co přesně z něj plyne.
+- Zastavit obchvat: kolem pravidla vznikla náhradní evidence, ruční štítek, export nebo jiný datový zvyk.
+
+Stav `zůstává v běžné údržbě` je nejkratší. Napište jednovětý závěr a nic víc nerozšiřujte. Zralý systém poznáte mimo jiné podle toho, že úspěšné review neumírá pod tíhou dalších nápadů.
+
+Stav `doplnit provozní kotvu` znamená, že pravidlo je správné, ale jeho odkaz je špatně umístěný. Například index záznam má, ale v šabloně onboardingového e-mailu není žádná poznámka. Opravte šablonu, ne celý proces.
+
+Stav `zpřesnit indexovou větu` použijte, když je věta moc měkká. "Velikost firmy aktivně nesbíráme" je dobrý začátek, ale někdy nestačí. Lepší pracovní věta může znít: "Při registraci a prvním onboardingu se neptáme na velikost firmy; pokud zákazník velikost sám zmíní v obchodní komunikaci, nepřevádíme ji do nového CRM atributu bez samostatného rozhodnutí."
+
+Stav `zastavit obchvat` je nejdůležitější. Obchvat může vypadat nevinně: poznámkový sloupec, ruční tag, dočasná tabulka, filtr v kampani, interní seznam "větších zákazníků". Pokud vznikl bez návratového signálu a bez jasného účelu, review ho má zavřít. Buď ho smažte, anonymizujte, nebo převeďte do nového vědomého rozhodnutí. Nenechte ho žít jako polotajnou druhou databázi.
+
+### Praktický SaaS příklad
+
+Indexový záznam:
+
+```text
+Registrace nesbírá velikost firmy. Pravidlo chrání krátký vstup do produktu a brání zbytečné firmografické evidenci. Znovu otevřít pouze pokud tři relevantní onboardingy po sobě selžou proto, že bez velikosti firmy nejde doporučit první krok.
+```
+
+První běžné review:
+
+```text
+Průchod:
+Tým upravil první onboardingový e-mail pro nové účty.
+
+Použití záznamu:
+Záznam byl nalezen v indexu a odkazoval na onboardingovou šablonu.
+
+Výsledek:
+E-mail nepřidává otázku na velikost firmy. Místo toho se ptá na první pracovní cíl.
+
+Datová stopa:
+Nevzniká nový CRM atribut, ruční štítek ani segmentační tabulka.
+
+Závěr:
+Záznam zůstává v běžné údržbě.
+```
+
+Slabší varianta:
+
+```text
+Průchod:
+Marketing připravoval segmentovanou kampaň pro nové registrace.
+
+Problém:
+Indexový záznam našel až po dotazu na produkt. Mezitím vznikla pracovní tabulka s ručním odhadem velikosti firmy u deseti účtů.
+
+Uzavření review:
+Zastavit obchvat. Tabulku mažeme, do kampaně nepřidáváme segment podle velikosti firmy a k marketingovému briefu doplňujeme odkaz na indexový záznam.
+
+Co neotevíráme:
+Nový firmografický atribut, scoring účtů ani obohacování dat z externího zdroje.
+```
+
+Tady review neříká, že marketing nesmí segmentovat nikdy. Říká, že tento konkrétní obchvat neměl důvod a šel proti zavřené hranici. Pokud později vznikne skutečný návratový signál, otevře se nový malý krok. Ale ne přes vedlejší tabulku, která vznikla jen proto, že byla rychlejší než rozhodnutí.
+
+### Privacy-first review
+
+Privacy-first část review má být konkrétní. Nepište "zkontrolovali jsme soukromí". Napište, co díky pravidlu dál nevzniká a co se po review uklízí.
+
+Použijte tři řádky:
+
+```text
+Dál nevzniká:
+
+Při review jsme našli:
+
+Po review děláme:
+```
+
+Příklad:
+
+```text
+Dál nevzniká:
+Povinné pole velikost firmy, CRM atribut, ruční segmentační tabulka a export pro marketing.
+
+Při review jsme našli:
+Jednu dočasnou pracovní poznámku se třemi odhady velikosti účtů.
+
+Po review děláme:
+Poznámku mažeme a do marketingového briefu přidáváme odkaz na indexový záznam.
+```
+
+Codyho komentář: nejnebezpečnější datové vrstvy často nevznikají v architektuře, ale v dobré víře. Někdo chce pomoct kampani, tak si udělá malou tabulku. Někdo chce pomoct obchodu, tak přidá ruční štítek. Někdo chce pomoct produktu, tak začne bokem opisovat signály. Všichni chtějí pomoct. A najednou máte systém, který nikdo nenavrhl, nikdo nevlastní a všichni se diví, proč se těžko uklízí.
+
+### Karta prvního běžného review
+
+```text
+Indexový záznam:
+
+Kanonické místo:
+
+Pracovní průchod od převodu do údržby:
+
+Použil se záznam?
+- ano, samostatně
+- ano, ale s pomocí
+- ne, nebyl potřeba
+- ne, člověk ho nenašel
+
+Držela původní hranice?
+- ano
+- ne, začala se rozšiřovat
+- nevíme, věta byla slabá
+
+Vznikla náhradní datová stopa?
+- ne
+- ano, jaká:
+
+Výsledek review:
+- zůstává v běžné údržbě
+- doplnit provozní kotvu
+- zpřesnit indexovou větu
+- zastavit obchvat
+
+Co upravujeme:
+
+Co zůstává zavřené:
+
+Co mažeme, anonymizujeme nebo přestáváme sbírat:
+
+Návratový signál zůstává:
+
+Vlastník:
+
+Další běžný review rytmus:
+```
+
+Karta má být krátká a použitelná. Pokud se z ní stane složité hodnocení celého pravidla, review je moc široké. Vraťte se k jednomu pracovnímu průchodu a jedné otázce: drží záznam v běžné údržbě?
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: pojmenujte pracovní průchod od převodu do údržby.
+2. Minuta 2: ověřte, jestli byl indexový záznam najitelný.
+3. Minuta 3: řekněte, jestli podle něj šlo rozhodnout bez staré historie.
+4. Minuta 4: zkontrolujte, co zůstalo zavřené.
+5. Minuta 5: hledejte náhradní datovou stopu nebo obchvat.
+6. Minuta 6: vyberte jeden výsledek review.
+7. Minuta 7: zapište lokální opravu nebo potvrďte běžnou údržbu.
+
+Pokud se během workshopu objeví nový obchodní nebo produktový nápad, zapište ho jako podnět mimo kartu. Review indexového záznamu není místo pro strategickou debatu. Je to kontrola, jestli pravidlo dál pomáhá v běžné práci bez zbytečných dat.
+
+### Checklist prvního běžného review
+
+- Kontrolujeme jeden konkrétní indexový záznam?
+- Máme pracovní průchod od převodu do údržby, nebo jasně víme, že ještě nenastal?
+- Byl záznam najitelný v místě, kde měl pomoci?
+- Šlo podle něj rozhodnout bez vysvětlování původní historie?
+- Zůstalo jasné, co pravidlo neotevírá?
+- Nevznikla náhradní evidence, ruční tag, export, tabulka nebo segment bez rozhodnutí?
+- Pokud vznikl obchvat, víme, kdo ho zavře a co se smaže nebo anonymizuje?
+- Je případná oprava lokální, ne nový proces?
+- Zůstává návratový signál konkrétní?
+- Je další kontrola součástí běžného rytmu, ne mimořádné péče?
+
+První běžné review po převodu indexového záznamu má být klidné. Buď potvrdí, že pravidlo už opravdu žije v provozu, nebo opraví nejbližší slabé místo. V obou případech platí stejná zásada: žádná nová data bez nové otázky, žádná nová otázka bez jasného pracovního místa.
+
 ## Pracovní log
 
+- 2026-07-06: Doplněna úvodní podkapitola o prvním běžném review po převodu indexového záznamu do údržby: kontrolní body, výsledky review, praktický SaaS příklad, zastavení obchvatů, privacy-first datový úklid, karta, mini workshop a checklist.
 - 2026-07-06: Doplněna úvodní podkapitola o převodu ověřeného indexového záznamu do běžné údržby: nový režim záznamu, ukončení mimořádné pozornosti, praktický SaaS příklad, privacy-first úklid dočasných stop, karta, mini workshop a checklist.
 - 2026-07-06: Doplněna úvodní podkapitola o uzavření druhé kontroly indexového záznamu: uzavírací stavy, praktický SaaS příklad, propsání provozního minima zpět do indexu, privacy-first uzavření obchvatů, karta, mini workshop a checklist.
 - 2026-07-06: Doplněna úvodní podkapitola o druhé kontrole indexového záznamu v běžné práci: samostatné použití bez původní paměti, oprava vstupu, zpřesnění návratového signálu, zastavení obchvatů, privacy-first kontrola náhradní evidence, karta, mini workshop a checklist.
