@@ -304383,8 +304383,218 @@ Když se v páté minutě ukáže, že někdo začal vést pomocný seznam "pro 
 
 Dobré uzavření prvního přirozeného použití po dlouhodobém klidu je malé a pevné. Potvrdí, že pravidlo funguje, nebo opraví nejbližší slabinu. Nepřidává slavnostní review, nevyrábí novou evidenci a nevrací starý široký návrh jen proto, že se pravidlo po pauze znovu použilo. Tím se dlouhodobý klid nestává zapomenutím. Stává se důkazem, že provoz umí nést dobré rozhodnutí bez neustálého dohledu.
 
+## Druhé přirozené použití záznamu po dlouhodobém klidu
+
+Druhé přirozené použití je důležitější než první. První použití často jen ukáže, jestli se záznam po pauze dá najít. Druhé už ukazuje, jestli záznam opravdu patří do běžného provozu, nebo jestli pořád žije jen díky lidem, kteří si pamatují jeho historii.
+
+Nejde o pravidelné review. Druhé použití nastává pouze tehdy, když se záznam znovu přirozeně potká s prací: přijde další podobná poptávka, jiný člověk použije stejnou šablonu, produkt řeší podobnou hranu, nebo marketing narazí na stejné rozhodovací minimum při úpravě stránky. Pokud se nic takového nestalo, druhé použití nevyrábějte. Dlouhodobý klid má zůstat klidný, ne se měnit v rituál jen proto, že kalendář našel volné místo.
+
+Začněte větou:
+
+```text
+Záznam po dlouhodobém klidu používáme podruhé, protože se znovu přirozeně objevil tento pracovní okamžik:
+```
+
+Prakticky:
+
+```text
+Záznam po dlouhodobém klidu používáme podruhé, protože jiný obchodník řeší relevantní B2B poptávku bez rozpočtu a potřebuje rozhodnout, jestli použít volitelnou otázku, nebo otevřít změnu formuláře.
+```
+
+Tahle věta má jednu podstatnou funkci: odděluje přenositelnost od návratu. Přenositelnost znamená, že pravidlo umí použít další člověk v podobné situaci. Návrat znamená, že se splnil signál pro nové posouzení. Když tyto dvě věci smícháte, z každého druhého použití se stane důkaz, že "téma se opakuje". Jenže opakování běžné situace není samo o sobě problém. Někdy je to přesně důvod, proč pravidlo existuje.
+
+### Co druhé použití ověřuje
+
+Druhé přirozené použití má ověřit čtyři věci:
+
+- pravidlo použije i člověk, který nebyl u jeho vzniku,
+- lokální kotva z prvního použití funguje bez dalšího vysvětlování,
+- rozhodovací minimum vede ke stejnému typu kroku,
+- nevzniká náhradní evidence jen proto, že se situace opakuje.
+
+První bod je test nezávislosti. Pokud pravidlo dokáže použít jen původní vlastník, ještě není provozní. Je to znalost v lidské hlavě s Markdown doprovodem. To může krátkodobě stačit, ale dlouhodobý klid si zaslouží lepší základ.
+
+Druhý bod testuje umístění. Pokud jste po prvním použití doplnili kotvu k šabloně, druhé použití má ukázat, jestli člověk opravdu začíná u šablony, ne v indexu, starých zprávách nebo otázkou na kolegu. Když kotva funguje, není potřeba ji dál zdobit. Když nefunguje, opravte nejbližší místo, ne celý systém.
+
+Třetí bod ověřuje konzistenci rozhodnutí. Podobná situace nemusí mít stejný výsledek do detailu, ale měla by vést ke stejnému typu prvního kroku. Pokud jeden člověk posílá volitelnou otázku a druhý rovnou navrhuje povinné pole, pravidlo není dost pevné. Neznamená to, že povinné pole je správně. Znamená to, že minimum nedrží hranici.
+
+Čtvrtý bod je privacy-first pojistka. Druhé opakování svádí k větě "pojďme si to pro jistotu zapisovat". Někdy to může být oprávněné, ale nesmí to být reflex. Pokud záznam funguje, žádná nová evidence opakování nemá vzniknout. Stačí běžná práce v běžném systému.
+
+### Čtyři výsledky druhého přirozeného použití
+
+Druhé použití může skončit čtyřmi stavy:
+
+- Potvrdit přenositelnost: pravidlo použil další člověk bez historie a bez nové evidence.
+- Opravit provozní kotvu: pravidlo platí, ale pořád není dost blízko místu práce.
+- Zpřesnit hranici: pravidlo vede k různým výkladům, i když návratový signál nenastal.
+- Otevřít návrat: opakované použití splnilo domluvený návratový signál.
+
+`Potvrdit přenositelnost` je nejsilnější výsledek. Znamená, že záznam už nepotřebuje zvláštní péči. Můžete zapsat jedinou větu: "Druhé přirozené použití potvrdilo přenositelnost, záznam zůstává v dlouhodobém klidu." Žádný nový meeting. Žádná tabulka. Žádný mini audit s názvem, který zní důležitěji než jeho přínos.
+
+`Opravit provozní kotvu` znamená, že problém je stále v dohledatelnosti. Třeba první použití doplnilo odkaz do interního indexu, ale druhý člověk hledal pravidlo přímo v CRM šabloně. Oprava má být stejně malá jako problém: přidat větu u šablony, upravit název pravidla, propojit checklist s kanonickým místem.
+
+`Zpřesnit hranici` je potřeba ve chvíli, kdy dva lidé použijí pravidlo různě. Typicky chybí věta, co přesně zůstává zavřené. Například "nejdřív se doptáme e-mailem" nestačí, pokud někdo zároveň založí ruční seznam poptávek bez rozpočtu. Lepší věta zní: "nejdřív se doptáme e-mailem; nezakládáme nový atribut, seznam výskytů ani změnu formuláře, dokud nenastane návratový signál."
+
+`Otevřít návrat` patří až na konec. Když pravidlo říká, že návrat nastane po třech relevantních poptávkách za sebou bez možnosti kvalifikace, druhé použití samo o sobě většinou nestačí. Pokud ale druhé použití navazuje na předchozí neúspěšný případ a podmínka je opravdu splněná, uzavřete použití jako návrat a otevřete samostatnou malou smyčku.
+
+### Praktický SaaS příklad
+
+Výchozí záznam:
+
+```text
+Kdy použít:
+Relevantní B2B poptávka přišla bez rozpočtu.
+
+První krok:
+Poslat volitelnou otázku v potvrzovacím e-mailu.
+
+Co dál neotevírat:
+Povinné pole pro rozpočet, lead scoring, export rozpočtových údajů a ruční seznam výskytů.
+
+Návratový signál:
+Tři relevantní poptávky za sebou nejdou kvalifikovat ani po volitelné otázce.
+```
+
+Druhé dobré použití:
+
+```text
+Situace:
+Jiný obchodník dostal podobnou poptávku bez rozpočtu.
+
+Použití:
+Našel větu u potvrzovací šablony a poslal volitelnou otázku.
+
+Výsledek:
+Zákazník odpověděl dostatečně pro další krok. Formulář, scoring i CRM zůstaly beze změny.
+
+Závěr:
+Přenositelnost potvrzena. Záznam necháváme v dlouhodobém klidu.
+```
+
+Druhé slabší použití:
+
+```text
+Situace:
+Obchodník poslal volitelnou otázku správně, ale zároveň si založil pomocný seznam "poptávky bez rozpočtu".
+
+Výsledek:
+První krok fungoval, ale vznikla náhradní evidence bez jasného konce.
+
+Oprava:
+Seznam mažeme a do pravidla doplňujeme větu, že opakování situace se nezapisuje mimo běžné obchodní místo, dokud nenastane návratový signál.
+
+Co neotevíráme:
+Nový CRM atribut, dashboard, export ani změnu formuláře.
+```
+
+Rozdíl je v datové disciplíně. V prvním případě pravidlo fungovalo celé. Ve druhém fungoval obchodní krok, ale selhala privacy-first hranice. To je pořád malá oprava, ne důvod otevřít velkou změnu.
+
+### Privacy-first kontrola druhého použití
+
+Druhé použití je moment, kdy se z výjimky může stát zvyk. Proto je potřeba explicitně zkontrolovat, jestli se z pravidla nestává vedlejší sběr dat.
+
+Položte čtyři otázky:
+
+```text
+Použil pravidlo někdo další bez kopírování zákaznických detailů do nového místa?
+
+Zůstaly obchodní informace v původním oprávněném systému?
+
+Nevznikl pomocný seznam, štítek, export, atribut nebo ruční počítadlo?
+
+Pokud něco vzniklo, má to jasný účel, vlastníka a konec?
+```
+
+Silný privacy-first závěr může znít:
+
+```text
+Druhé přirozené použití potvrdilo, že pravidlo je přenositelné bez nové evidence. Konkrétní rozpočtový kontext zůstává v obchodním vlákně, do CRM nepřidáváme atribut a neopisujeme zákaznické odpovědi do indexu.
+```
+
+Slabší, ale poctivý závěr:
+
+```text
+Při druhém použití vznikl pomocný seznam bez jasného konce. Seznam po uzavření mažeme, do pravidla doplňujeme zákaz nové náhradní evidence a záznam necháváme v dlouhodobém klidu.
+```
+
+Codyho komentář: druhé použití je přesně ten okamžik, kdy se z "jen si to někam napíšu" stává budoucí problém. Jeden zápis vypadá neškodně. Deset podobných zápisů už je stínový systém. A stínové systémy mají jednu vlastnost: nikdo je nevlastní, dokud nezačnou bolet.
+
+### Karta druhého přirozeného použití po klidu
+
+```text
+Záznam v dlouhodobém klidu:
+
+Kanonické pracovní místo:
+
+Druhá přirozená situace použití:
+
+Použil záznam někdo jiný než při prvním použití?
+- ano
+- ne
+- nevíme
+
+Byla lokální kotva dostatečná?
+- ano
+- ne
+- částečně
+
+Vedlo minimum ke správnému prvnímu kroku?
+- ano
+- ne
+- částečně
+
+Zůstal původní široký rozsah zavřený?
+
+Vznikla náhradní evidence nebo nová datová stopa?
+
+Privacy-first závěr:
+
+Výsledek:
+- potvrdit přenositelnost
+- opravit provozní kotvu
+- zpřesnit hranici
+- otevřít návrat
+
+Co případně upravujeme:
+
+Co dál výslovně neotevíráme:
+
+Kde je závěr uložený:
+
+Vlastník:
+```
+
+Kartu nepoužívejte jako povinný formulář pro každé další použití. Je vhodná pro druhý přirozený kontakt, protože ten ověřuje přenositelnost. Jakmile je přenositelnost potvrzená, další běžná použití už mají probíhat bez zvláštní administrativy.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: pojmenujte druhou přirozenou situaci použití.
+2. Minuta 2: ověřte, jestli záznam použil člověk bez původní historie.
+3. Minuta 3: zkontrolujte, jestli lokální kotva vedla ke správnému prvnímu kroku.
+4. Minuta 4: potvrďte zavřený rozsah a návratový signál.
+5. Minuta 5: najděte případnou náhradní evidenci nebo novou datovou stopu.
+6. Minuta 6: vyberte jeden výsledek a zapište nejmenší nutnou opravu.
+
+Pokud se debata zasekne u toho, jestli "už se to opakuje moc často", vraťte ji k návratovému signálu. Buď je splněný, nebo není. Pokud není, druhé použití má potvrdit pravidlo, ne měnit pravidla hry během hry.
+
+### Checklist druhého přirozeného použití po klidu
+
+- Vzniklo druhé použití přirozeně při práci, ne z naplánovaného review?
+- Použil pravidlo někdo bez původní historie?
+- Byla kotva blízko skutečnému pracovnímu místu?
+- Vedlo minimum ke stejnému typu prvního kroku?
+- Zůstal původní široký návrh výslovně zavřený?
+- Rozlišili jsme přenositelnost od návratového signálu?
+- Pokud pravidlo někdo vyložil jinak, zpřesňujeme hranici místo rozšiřování rozsahu?
+- Nevznikl pomocný seznam, štítek, export, atribut ani ruční počítadlo bez jasného konce?
+- Pokud náhradní evidence vznikla, víme, zda ji mažeme, zobecňujeme nebo přesouváme do oprávněného systému?
+- Po potvrzení přenositelnosti nezakládáme další pravidelný kontrolní rytmus?
+
+Druhé přirozené použití po dlouhodobém klidu má dát týmu klidnou odpověď: pravidlo už není jen starý zápis, ale použitelná součást provozu. Když projde, nechte ho dál pracovat bez pozornosti. Když neprojde, opravte nejmenší slabé místo. A když se opravdu splnil návratový signál, otevřete návrat poctivě, ne bočními dveřmi přes pomocnou evidenci.
+
 ## Pracovní log
 
+- 2026-07-06: Doplněna úvodní podkapitola o druhém přirozeném použití záznamu po dlouhodobém klidu: ověření přenositelnosti, výsledné stavy, praktický SaaS příklad, privacy-first kontrola náhradní evidence, karta, mini workshop a checklist.
 - 2026-07-06: Doplněna úvodní podkapitola o uzavření prvního přirozeného použití záznamu po dlouhodobém klidu: uzavírací stavy, praktické SaaS příklady, privacy-first úklid datové stopy, karta, mini workshop a checklist.
 - 2026-07-06: Doplněna úvodní podkapitola o prvním přirozeném použití záznamu po dlouhodobém klidu: tiché kontroly, výsledné stavy, praktický SaaS příklad, privacy-first práce bez nové evidence, karta, mini workshop a checklist.
 - 2026-07-06: Doplněna úvodní podkapitola o převodu indexového záznamu do dlouhodobého klidu: rozhodovací minimum, praktický SaaS příklad, privacy-first úklid historických stop, karta, mini workshop a checklist.
