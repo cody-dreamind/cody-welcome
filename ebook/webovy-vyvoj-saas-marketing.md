@@ -301767,8 +301767,243 @@ Pokud workshop skončí větou "radši se na to ještě podíváme", vraťte se 
 
 Druhá kontrola indexového záznamu je test dospělosti pravidla. Když pravidlo funguje i bez autora, bez schůzky a bez staré historie, může se začít chovat jako součást běžného provozu. Když nefunguje, opravte nejmenší překážku. A když kolem něj vznikl obchvat, ukliďte obchvat. Index nemá být muzeum starých rozhodnutí. Má být mapa, podle které se dá v úterý dopoledne neudělat zbytečná věc.
 
+## Uzavření druhé kontroly indexového záznamu
+
+Druhá kontrola indexového záznamu má skončit jasněji než první. Po první kontrole tým ještě mohl říct: záznam jsme převedli do indexu a ověřili jsme, že se dá použít. Po druhé kontrole už se ptáme přísněji: má záznam zůstat jako běžné pravidlo, potřebuje poslední lokální opravu, nebo kolem něj vznikl provozní obchvat, který se musí uklidit?
+
+Uzavření druhé kontroly proto nesmí být dlouhá retrospektiva. Má vybrat jeden stav, propsat nejmenší změnu a zavřít vedlejší datovou stopu. Pokud druhá kontrola proběhla dobře, výsledek je skoro nudný:
+
+```text
+Druhá kontrola potvrzuje, že indexový záznam funguje samostatně. Záznam zůstává v běžném provozu, pravidlo se nemění a nevzniká žádný náhradní sběr stejného údaje.
+```
+
+Tohle je dobrá věta. Není efektní, ale je použitelná. Člověk za tři měsíce pozná, že pravidlo prošlo druhým použitím a není potřeba kolem něj držet zvláštní pozornost.
+
+Pokud kontrola ukázala drobnou slabinu, uzavření má být stejně konkrétní:
+
+```text
+Druhá kontrola ukázala, že záznam funguje, ale člověk ho hledal pod názvem "firmografická data". Do indexu přidáváme alias, pravidlo ani zavřený rozsah se nemění.
+```
+
+Nebo:
+
+```text
+Druhá kontrola našla obchvat v ruční tabulce odhadů. Tabulku mažeme, do indexu doplňujeme větu, že údaj neodhadujeme ani bokem, a původní rozhodnutí zůstává zavřené.
+```
+
+Každá z těchto vět končí prací. Žádná neotevírá obecné "podívat se na segmentaci", "zvážit personalizaci" nebo "sledovat obchodní potenciál". Pokud se má otevřít nové téma, musí mít vlastní návratový signál a vlastní hranici. Druhá kontrola indexu není zadní vchod do širší strategie.
+
+### Čtyři uzavírací stavy
+
+Po druhé kontrole vyberte jeden ze čtyř stavů:
+
+- Převést do běžného provozu: záznam funguje samostatně a nepotřebuje další zvláštní kontrolu.
+- Uzavřít po lokální opravě vstupu: doplnil se odkaz, alias nebo lepší pracovní název.
+- Uzavřít po zpřesnění návratového signálu: pravidlo funguje, ale bylo potřeba přesněji říct, co by ho znovu otevřelo.
+- Uzavřít po úklidu obchvatu: pravidlo zůstává, ale vedle něj se zrušila nebo osamostatnila náhradní evidence.
+
+První stav je nejjednodušší:
+
+```text
+Stav:
+Převést do běžného provozu.
+
+Závěr:
+Indexový záznam byl podruhé použit bez autora původního rozhodnutí a stačil k rozhodnutí neupravovat registraci.
+
+Co dál:
+Záznam zůstává v indexu jako běžné pravidlo. Další kontrola proběhne jen při návratovém signálu nebo při běžném review indexu.
+```
+
+Druhý stav opravuje cestu k pravidlu:
+
+```text
+Stav:
+Uzavřít po lokální opravě vstupu.
+
+Závěr:
+Pravidlo bylo správné, ale člověk ho hledal u e-mailové šablony. Do šablony doplňujeme odkaz na kanonický indexový záznam.
+
+Co se nemění:
+Pravidlo, zavřený rozsah i návratový signál.
+```
+
+Třetí stav opravuje návratový signál:
+
+```text
+Stav:
+Uzavřít po zpřesnění návratového signálu.
+
+Závěr:
+Záznam správně zavírá sběr oboru podnikání, ale návratový signál byl moc obecný. Nově se téma otevře jen pokud tři relevantní onboardingy po sobě selžou proto, že bez oboru nejde doporučit první krok ani po výběru cíle.
+```
+
+Čtvrtý stav uklízí obchvat:
+
+```text
+Stav:
+Uzavřít po úklidu obchvatu.
+
+Závěr:
+Index zakazuje aktivní sběr velikosti firmy, ale v supportu vznikla ruční tabulka odhadů bez účelu a retence. Tabulku mažeme a do indexu doplňujeme, že velikost firmy aktivně nesbíráme ani neodhadujeme bokem.
+
+Co se neotevírá:
+Nové pole v registraci, scoring podle velikosti firmy ani export účtů podle odhadu.
+```
+
+Obchvat je potřeba brát vážně. Ne proto, že každý obchvat je špatný. Někdy ruční evidence vznikne z oprávněného důvodu. Ale pokud je oprávněná, musí dostat vlastní rozhodnutí: účel, rozsah, retenci, vlastníka a místo v datové mapě. Pokud tohle nedostane, nemá zůstat jen proto, že už ji někdo založil.
+
+### Praktický SaaS příklad
+
+SaaS tým má v indexu pravidlo:
+
+```text
+Onboarding nesbírá obor podnikání. První doporučení stavíme na cíli, který si uživatel vybere, ne na oborovém štítku. K tématu se vrátíme jen pokud opakovaně selže doporučení prvního kroku právě kvůli chybějícímu oboru.
+```
+
+První kontrola proběhla při úpravě registrační obrazovky a dopadla dobře. Oborový dropdown se nepřidal. O dva měsíce později se upravuje automatický e-mail pro nové účty a nový člověk navrhne otázku "v jakém oboru působíte?". Indexový záznam najde přes odkaz z onboardingové šablony, přečte pravidlo a rozhodne se místo oboru zeptat na pracovní cíl.
+
+Uzavření druhé kontroly může znít:
+
+```text
+Druhá kontrola potvrzuje, že záznam "onboarding nesbírá obor podnikání" funguje samostatně i při úpravě e-mailové šablony. Otázku na obor nepřidáváme, místo ní používáme otázku na první pracovní cíl. Nevzniká oborový štítek, segmentace podle oboru ani export účtů pro oborové kampaně.
+```
+
+Tohle je uzavření, které se dá použít. Říká, kde se pravidlo uplatnilo, jaká náhrada se použila a jaká data dál nevznikají.
+
+Pokud se při kontrole ukáže, že marketing mezitím vede bokem tabulku "pravděpodobný obor podle webu", uzavření se změní:
+
+```text
+Druhá kontrola našla obchvat: marketingová tabulka odhadů oboru vznikla bez samostatného účelu, retence a vlastníka. Tabulku mažeme, do indexu doplňujeme větu "obor podnikání aktivně nezjišťujeme ani neodhadujeme z veřejných zdrojů" a původní rozhodnutí o onboardingu zůstává zavřené.
+```
+
+Tady je důležité, že se neřeší jen text e-mailu. Řeší se provozní realita. Privacy-first provoz není formulář bez polí, zatímco někde vedle běží tabulka s ručními odhady. Privacy-first provoz znamená, že účel, data a rozhodnutí sedí napříč systémem. Ano, je to méně pohodlné než "hodíme si to do tabulky". Ale tabulky bez účelu jsou přesně ty malé věci, které později stojí nejvíc času při úklidu.
+
+### Co propsat zpět
+
+Po druhé kontrole se do indexu propisuje jen provozní minimum:
+
+- stav, že záznam funguje samostatně,
+- nový alias nebo vstupní odkaz, pokud byl problém v najitelnosti,
+- zpřesněný návratový signál, pokud byl moc měkký,
+- věta proti obchvatu, pokud vznikal náhradní sběr,
+- krátká privacy-first poznámka, jaká data dál nevznikají.
+
+Do indexu nepatří zápis z debaty, jména lidí, konkrétní zákaznické příklady, screenshoty, exporty ani důkazní materiál z obchvatu. Pokud jsou potřeba kvůli samostatnému rozhodnutí, patří do samostatné karty s účelem a retencí. Pokud nejsou potřeba, smažte je nebo zobecněte.
+
+Krátký zápis v indexu může vypadat takto:
+
+```text
+Druhé použití:
+Potvrzeno při úpravě onboardingového e-mailu bez účasti autora původního rozhodnutí. Pravidlo stačilo k rozhodnutí neptat se na obor podnikání.
+```
+
+Po úklidu obchvatu:
+
+```text
+Hrana:
+Obor podnikání aktivně nezjišťujeme ani neodhadujeme z veřejných zdrojů. Pokud ho zákazník sám uvede v kontextu svého cíle, používáme ho jen pro danou podporu, ne pro segmentaci.
+```
+
+To je dost. Pokud máte chuť přidat dalších pět odstavců, pravděpodobně se snažíte zachránit důvěru v rozhodnutí délkou textu. Dobrý index důvěru nezískává délkou. Získává tím, že pomůže rozhodnout v reálné práci.
+
+### Privacy-first uzavření
+
+Privacy-first uzavření po druhé kontrole má být tvrdé na náhradní evidence. Ptejte se:
+
+```text
+Zůstává po této kontrole nějaký nový údaj, seznam, štítek, export, tabulka nebo automatizace, která obchází původní pravidlo?
+```
+
+Pokud odpověď zní ne, napište to:
+
+```text
+Po druhé kontrole nezůstává žádný nový seznam, štítek, export ani ruční odhad; trvalý záznam je jen obecná indexová věta a odkaz z pracovního místa.
+```
+
+Pokud odpověď zní ano, nepřikrývejte to slovem "dočasně". Dočasnost bez data je jen trvalost, která se ještě stydí. Napište:
+
+```text
+Dočasný seznam se maže do 7 dnů po přepsání závěru do obecné indexové věty. Pokud má seznam zůstat déle, musí dostat samostatné rozhodnutí s účelem, retencí a vlastníkem.
+```
+
+Tahle věta je malá, ale chrání budoucí provoz. V evropském privacy-first přístupu není cílem mít nejvíc dat a pak doufat, že se neztratí. Cílem je nevytvořit data, která nepotřebujete. Když už vzniknou při kontrole, musí mít jasný konec.
+
+### Karta uzavření druhé kontroly indexu
+
+```text
+Indexový záznam:
+
+Kanonické místo:
+
+Dnešní pracovní situace:
+
+Výsledek druhé kontroly:
+- převést do běžného provozu
+- uzavřít po lokální opravě vstupu
+- uzavřít po zpřesnění návratového signálu
+- uzavřít po úklidu obchvatu
+
+Jednovětý závěr:
+
+Co se propsalo zpět do indexu:
+
+Co se nepropsalo:
+
+Co zůstává zavřené:
+
+Jaká data, štítky, exporty, segmenty, tabulky nebo automatizace dál nevznikají:
+
+Vznikl obchvat nebo náhradní evidence?
+
+Co se maže, zobecňuje, časově omezuje nebo převádí do samostatného rozhodnutí:
+
+Nový stav záznamu:
+- běžný provoz
+- běžný provoz po lokální opravě
+- čeká na malé ověření opravené hrany
+- čeká na potvrzení úklidu obchvatu
+
+Návratový signál:
+
+Vlastník:
+
+Datum uzavření:
+```
+
+Kartu nepoužívejte jako univerzální formulář. Když záznam funguje samostatně, stačí jednovětý závěr a privacy-first věta. Celou kartu vytáhněte tehdy, když se mění vstup, signál nebo obchvat. Jinak by kontrola indexu začala vytvářet víc administrativy než hodnoty. A to je přesně okamžik, kdy by se index zasloužil o vlastní index, což je elegantní cesta do pekla tabulek.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte výsledek druhé kontroly.
+2. Minuta 2: vyberte jeden ze čtyř uzavíracích stavů.
+3. Minuta 3: napište jednovětý závěr.
+4. Minuta 4: určete, co se propíše zpět do indexu.
+5. Minuta 5: napište, co zůstává zavřené a jaká data dál nevznikají.
+6. Minuta 6: zavřete náhradní evidenci, nebo jí dejte samostatné rozhodnutí s účelem, retencí a vlastníkem.
+
+Pokud workshop skončí tím, že "někdo ještě zjistí, jak to vlastně je", druhá kontrola není uzavřená. Buď chybí důkaz, nebo existuje obchvat, který nikdo nechce pojmenovat. V obou případech zmenšete další krok: zjistit jednu konkrétní věc, na jednom pracovním místě, bez zakládání nového průběžného sledování.
+
+### Checklist uzavření druhé kontroly indexu
+
+- Je vybraný jeden uzavírací stav?
+- Má kontrola jednovětý závěr?
+- Je jasné, zda záznam přechází do běžného provozu, nebo potřebuje lokální opravu?
+- Pokud se opravuje index, jde jen o vstup, alias, jazyk, návratový signál nebo větu proti obchvatu?
+- Je zapsané, co zůstává zavřené?
+- Je konkrétně pojmenované, jaká data, štítky, exporty, segmenty, tabulky nebo automatizace dál nevznikají?
+- Zkontrolovali jsme obchvaty a náhradní evidence?
+- Pokud obchvat existoval, má rozhodnutí o smazání, zobecnění, časovém omezení nebo samostatném vlastnictví?
+- Neotevřeli jsme původní rozhodnutí bez nového návratového signálu?
+- Propsali jsme zpět jen provozní minimum?
+- Nezůstaly v indexu osobní údaje, konkrétní zákaznické příklady ani dočasné exporty?
+- Je další kontrola navázaná na běžný rytmus nebo návratový signál, ne na neurčité "sledovat dál"?
+
+Uzavření druhé kontroly je chvíle, kdy se indexový záznam buď stane běžnou součástí provozu, nebo dostane poslední malou opravu. V obou případech má práce skončit čistě: pravidlo je najitelné, zavřený rozsah je jasný, obchvaty jsou pojmenované a zbytečná data nevznikají. To je dobrý výsledek. Nehlučný, bez fanfár, ale přesně ten typ práce, díky kterému se privacy-first provoz nerozpadne na tisíc malých výjimek.
+
 ## Pracovní log
 
+- 2026-07-06: Doplněna úvodní podkapitola o uzavření druhé kontroly indexového záznamu: uzavírací stavy, praktický SaaS příklad, propsání provozního minima zpět do indexu, privacy-first uzavření obchvatů, karta, mini workshop a checklist.
 - 2026-07-06: Doplněna úvodní podkapitola o druhé kontrole indexového záznamu v běžné práci: samostatné použití bez původní paměti, oprava vstupu, zpřesnění návratového signálu, zastavení obchvatů, privacy-first kontrola náhradní evidence, karta, mini workshop a checklist.
 - 2026-07-06: Doplněna úvodní podkapitola o uzavření první kontroly indexového záznamu: uzavírací stavy, praktický SaaS příklad, propsání zpět do indexu, privacy-first úklid náhradní evidence, karta, mini workshop a checklist.
 - 2026-07-06: Doplněna úvodní podkapitola o první kontrole indexového záznamu v běžné práci: najitelnost, srozumitelnost, rozhodnutelnost, privacy-first kontrola náhradní evidence, karta, mini workshop a checklist.
