@@ -300122,8 +300122,166 @@ Když workshop nestihnete za sedm minut, pravděpodobně nevytváříte kotvu, a
 
 Stabilní kotva po druhém dohledání je dobrý konec dlouhé malé smyčky. Tým už nemusí držet staré rozhodnutí v hlavě, ale také ho nemusí pravidelně oprašovat. Stačí mu krátká věta na správném místě, jasný návratový signál a datová hranice, která nepustí stejný sběr zpátky dveřmi s novou cedulkou.
 
+## První běžné použití stabilní kotvy
+
+Stabilní kotva začne dávat smysl až ve chvíli, kdy ji někdo použije bez slavnostního vysvětlování. Ne při workshopu, ne při revizi rukopisu, ne ve chvíli, kdy původní autor sedí vedle a nadšeně vykládá historii rozhodnutí. První běžné použití je obyčejná pracovní situace: někdo narazí na podobný podnět, najde kotvu a podle ní se rozhodne, jestli téma zůstává zavřené, patří jinam, nebo se opravdu objevil návratový signál.
+
+Cílem prvního použití není kotvu znovu auditovat. Cílem je ověřit, že drží v provozu. Pokud člověk musí číst staré zápisy, ptát se původního vlastníka nebo si domýšlet, co vlastně zůstává zavřené, kotva není dost stabilní. Pokud naopak stačí krátká pracovní věta, hranice datové stopy a návratový signál, rozhodnutí přešlo z historie do běžného rytmu.
+
+Začněte jednou otázkou:
+
+```text
+Dokáže člověk podle stabilní kotvy uzavřít dnešní podnět bez otevření hlubší historie?
+```
+
+Tahle otázka je záměrně praktická. Neptá se, jestli je kotva hezky napsaná. Ptá se, jestli umí ušetřit práci právě v místě, kde se starý podnět vrátil v novém kabátě. Pokud ano, kotva funguje. Pokud ne, opravuje se kotva, ne celý starý problém.
+
+### Tři kontrolní body prvního použití
+
+Při prvním běžném použití sledujte jen tři věci:
+
+- Najitelnost: člověk kotvu najde tam, kde podnět vznikl.
+- Rozhodnutelnost: kotva říká, co se má stát s dnešním podnětem.
+- Datovou hranici: kotva pozná, zda by nový návrh vytvářel stejnou datovou stopu.
+
+Praktický zápis:
+
+```text
+Dnešní podnět:
+Marketing navrhl v registračním formuláři přidat otázku "kolik lidí bude produkt používat".
+
+Kotva nalezena:
+U registračního formuláře.
+
+Rozhodnutí podle kotvy:
+Podnět patří ke stejné datové stopě jako velikost týmu. Neotevíráme nové pole v registraci.
+
+Další krok:
+Žádný. Pokud obchod potřebuje kontext pro konkrétní nabídku, použije volitelnou otázku v hovoru.
+```
+
+Takový zápis je dost krátký na běžnou práci a dost přesný na budoucí návrat. Důležité je, že nevznikl nový výzkum, nový formulář ani nová tabulka "možných segmentů". Kotva splnila svou práci: převedla podobný podnět na jasné rozhodnutí.
+
+### Čtyři výsledky prvního použití
+
+První běžné použití stabilní kotvy může skončit čtyřmi způsoby:
+
+- Kotva funguje: podnět se uzavřel podle pracovní věty a hranice datové stopy.
+- Kotva potřebuje lokální dočištění: chybí alias, příklad, odkaz nebo přesnější formulace návratového signálu.
+- Podnět patří do jiného pracovního místa: vypadá podobně, ale řeší jinou situaci a nemá otevírat starou kotvu.
+- Objevil se skutečný návratový signál: podnět splňuje domluvenou podmínku a má se otevřít nejmenší další krok.
+
+Nejrizikovější je třetí stav. Podobný jazyk totiž snadno vytváří falešný pocit, že už "tohle přece máme rozhodnuté". Jenže ne každé slovo "tým", "segment" nebo "kontext" patří do stejného rozhodnutí. Stabilní kotva má chránit hranici, ne zakazovat přemýšlení.
+
+Příklad rozdílu:
+
+```text
+Stejné pracovní místo:
+Přidat počet uživatelů do registrace. To patří ke kotvě registračního formuláře.
+
+Jiné pracovní místo:
+Zeptat se v enterprise obchodním hovoru, kolik lidí bude součástí pilotu. To patří do sales kvalifikace, ne do registračního formuláře.
+```
+
+Pokud jde o jiné pracovní místo, nezapisujte ho jako výjimku do staré kotvy. Vytvořte samostatnou pracovní větu tam, kde téma opravdu žije, nebo ho uzavřete jako běžnou obchodní otázku. Jinak kotva časem nabobtná do malého právního komentáře ke všemu, co se kdy tvářilo podobně. A to už není kotva. To je kotva s batohem.
+
+### Privacy-first kontrola prvního použití
+
+Při prvním použití kotvy je dobré ověřit, jestli nevznikla náhradní datová stopa. Tým sice nepřidá pole do registrace, ale někdo si může začít dělat ruční poznámky, exportovat odpovědi z hovoru nebo segmentovat účty podle domněnek. Privacy-first provoz se nerozbije jen trackerem. Někdy se rozbije hodným člověkem, který si "jen pro jistotu" vede pomocnou tabulku.
+
+Položte tři otázky:
+
+```text
+Nevznikl kvůli dnešnímu podnětu nový formulářový údaj?
+Nevznikl nový segment, štítek, export nebo ruční seznam?
+Nevznikla dočasná evidence bez vlastníka, účelu a konce?
+```
+
+Pokud ano, první použití kotvy není hotové. Buď záznam smažte, pokud nebyl potřeba, nebo ho převeďte do jasného pracovního místa s účelem, retencí a vlastníkem. Nejlepší výsledek je většinou jednodušší: žádná nová evidence nevzniká, protože kotva už rozhodnutí unesla.
+
+Příklad privacy-first uzavření:
+
+```text
+Podnět jsme uzavřeli podle stabilní kotvy. Nevzniklo nové registrační pole, marketingový segment, ruční seznam ani export. Obchod může otázku použít pouze v konkrétním hovoru, pokud má jasný účel pro nabídku.
+```
+
+Tahle věta je malá, ale chrání provoz. Ukazuje, že privacy-first hodnota není jen v původním rozhodnutí nesbírat data. Je i v tom, že se stejný sběr nevrací bokem jako pomocný proces.
+
+### Karta prvního běžného použití kotvy
+
+```text
+Stabilní kotva:
+
+Dnešní podnět:
+
+Kde podnět vznikl:
+
+Našli jsme kotvu v běžném pracovním místě?
+
+Rozhodnutí podle kotvy:
+
+Výsledek:
+- kotva funguje
+- lokálně dočistit kotvu
+- podnět patří jinam
+- otevřít návratový signál
+
+Pokud kotva potřebuje dočištění, co přesně:
+
+Pokud podnět patří jinam, kam:
+
+Pokud se objevil návratový signál, jaký:
+
+Co zůstává zavřené:
+
+Jaká data dál nesbíráme:
+
+Nevznikl nový:
+- formulářový údaj
+- segment
+- export
+- tracker
+- ruční seznam
+- dočasná tabulka
+
+Vlastník pracovního místa:
+
+Datum použití:
+```
+
+Karta nemá zavádět novou evidenci pro každou drobnost. Použijte ji jen při prvním běžném použití nebo ve chvíli, kdy si tým není jistý, zda kotva opravdu drží. Pokud je situace jasná, stačí kratší zápis přímo u pracovního místa.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: napište dnešní podnět jednou větou.
+2. Minuta 2: najděte stabilní kotvu v běžném pracovním místě.
+3. Minuta 3: rozhodněte, zda podnět patří ke stejné datové stopě.
+4. Minuta 4: vyberte jeden ze čtyř výsledků prvního použití.
+5. Minuta 5: zapište, co zůstává zavřené nebo kam podnět patří jinam.
+6. Minuta 6: proveďte privacy-first kontrolu náhradní evidence.
+
+Když se během šesti minut nedostanete k rozhodnutí, neprodlužujte workshop. Zapište, co přesně není jasné: najitelnost kotvy, hranice datové stopy, jiné pracovní místo, nebo návratový signál. Pak opravte jen tuto jednu věc. První použití kotvy nemá otevřít celou minulost, jen ukázat, jestli krátká pracovní věta stačí v běžném provozu.
+
+### Checklist prvního použití stabilní kotvy
+
+- Vznikl konkrétní podnět v běžné práci?
+- Našli jsme kotvu tam, kde člověk přirozeně pracuje?
+- Šlo rozhodnout bez čtení hlubší historie?
+- Poznali jsme, zda podnět patří ke stejné datové stopě?
+- Vybrali jsme jeden ze čtyř výsledků?
+- Pokud kotva funguje, nevznikl zbytečný nový úkol?
+- Pokud je potřeba dočištění, je lokální a malé?
+- Pokud podnět patří jinam, nelepíme ho jako výjimku do staré kotvy?
+- Pokud přišel návratový signál, otevíráme nejmenší další krok?
+- Je jasné, co zůstává zavřené?
+- Nevznikl nový formulářový údaj, segment, export, tracker, ruční seznam ani dočasná tabulka?
+- Ví další člověk, zda má kotvu příště použít stejně, opravit ji, nebo jít do jiného pracovního místa?
+
+První běžné použití stabilní kotvy je malý test provozní dospělosti. Když funguje, staré rozhodnutí už nežije v hlavě autora, ale v práci samotné. Člověk najde větu, pozná hranici, nezaloží zbytečnou evidenci a pokračuje. Přesně tak má vypadat dobrá produktivita: žádný ohňostroj, jen méně práce, méně dat a jasnější rozhodnutí.
+
 ## Pracovní log
 
+- 2026-07-06: Doplněna úvodní podkapitola o prvním běžném použití stabilní kotvy: najitelnost, rozhodnutelnost, datová hranice, čtyři výsledky použití, privacy-first kontrola náhradní evidence, karta, mini workshop a checklist.
 - 2026-07-06: Doplněna úvodní podkapitola o stabilní kotvě po druhém dohledání archivního minima: pracovní věta, návratový signál, hranice zavřeného rozsahu, privacy-first datová kotva, karta, mini workshop a checklist.
 - 2026-07-05: Doplněna úvodní podkapitola o uzavření druhého dohledání archivního minima: čtyři uzavírací stavy, praktický SaaS příklad, privacy-first uzavření bez nové evidence, karta, mini workshop a checklist.
 - 2026-07-05: Doplněna úvodní podkapitola o druhém dohledání archivního minima v běžné práci: najitelnost bez čerstvé paměti, rozlišení stejného problému od podobného jazyka, praktický SaaS příklad, privacy-first kontrola bez nové evidence, karta, mini workshop a checklist.
