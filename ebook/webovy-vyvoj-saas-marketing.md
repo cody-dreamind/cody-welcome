@@ -304214,8 +304214,178 @@ Když se během šesti minut objeví debata o větší změně, zastavte ji na n
 
 První přirozené použití po dlouhodobém klidu má potvrdit, že pravidlo opravdu patří do běžného provozu. Když funguje, nechte ho být. Když chybí kotva, přidejte kotvu. Když je věta slabá, zpřesněte větu. A když nastal skutečný návratový signál, otevřete malý návrat vědomě. Všechno ostatní je jen stará chuť dělat víc práce, než situace potřebuje.
 
+## Uzavření prvního přirozeného použití po dlouhodobém klidu
+
+První přirozené použití po dlouhodobém klidu nekončí samotným použitím pravidla. Končí až ve chvíli, kdy tým ví, jestli pravidlo zůstává v klidu, potřebuje lokální kotvu, potřebuje zpřesnit větu, nebo se z něj opravdu stal návrat. Bez uzavření vzniká zvláštní mlha: pravidlo se použilo, někdo něco doplnil, možná to pomohlo, ale nikdo neřekl, co z toho platí dál.
+
+Uzavření má být kratší než původní použití. Nevracejte se do celé historie a neotevírejte znovu otázku, proč pravidlo vzniklo. Stačí porovnat tři věci: přirozenou situaci, skutečné použití a výsledek. Pokud tyto tři věci sedí, dlouhodobý klid pokračuje. Pokud nesedí, opravte nejbližší pracovní místo, ne celý systém.
+
+Začněte uzavírací větou:
+
+```text
+První přirozené použití po dlouhodobém klidu uzavíráme takto:
+```
+
+A doplňte konkrétní závěr:
+
+```text
+První přirozené použití po dlouhodobém klidu uzavíráme takto:
+obchod pravidlo našel u potvrzovací šablony, volitelná otázka stačila a povinné pole pro rozpočet zůstává zavřené. Záznam necháváme v dlouhodobém klidu bez nového review.
+```
+
+Tahle věta je nudná správným způsobem. Říká, co se stalo, co zůstává zavřené a že nevzniká další proces. Když uzavírací věta místo toho zní "téma budeme dál sledovat", zeptejte se proč. Co přesně chcete sledovat? Kde to skončí? Jaká data kvůli tomu vzniknou? Pokud odpověď není jasná, žádné sledování nezakládejte.
+
+### Čtyři uzavírací stavy
+
+Po prvním přirozeném použití vyberte jeden ze čtyř stavů:
+
+- Nechat v klidu: pravidlo bylo najitelné, srozumitelné a stačilo bez nové evidence.
+- Opravit kotvu: pravidlo platí, ale nebylo dost blízko pracovnímu místu.
+- Zpřesnit pracovní minimum: pravidlo bylo dostupné, ale člověk si musel domýšlet první krok nebo zavřený rozsah.
+- Převést na návrat: splnil se návratový signál a běžné použití už nestačí.
+
+`Nechat v klidu` je výchozí dobrý výsledek. Zapište maximálně jednu servisní větu k pracovnímu místu a dál nic neplánujte. Pokud pravidlo funguje, další aktivita by byla jen údržba pro dobrý pocit.
+
+`Opravit kotvu` znamená doplnit pravidlo tam, kde ho člověk hledal. Typicky stačí odkaz u šablony, krátká věta v checklistu nebo jasnější název v indexu. Neotevírejte přitom obsah pravidla, pokud obsah fungoval. Problém nebyl v rozhodnutí, ale ve viditelnosti.
+
+`Zpřesnit pracovní minimum` je malá textová oprava. Věta musí člověku říct, kdy pravidlo použít, co udělat jako první, co dál neotevírat a kdy se vrátit. Pokud zpřesnění vyžaduje novou metriku, novou tabulku nebo nový sběr dat, pravděpodobně už nejde o zpřesnění, ale o návrat.
+
+`Převést na návrat` používejte opatrně. Nestačí, že se situace znovu objevila. Návrat vzniká až tehdy, když se splnila domluvená podmínka nebo když máte lepší konkrétní důkaz, který ji vědomě nahrazuje. Pak uzavřete první přirozené použití a otevřete samostatný malý návrat s vlastní hranicí.
+
+### Praktický SaaS příklad
+
+První přirozené použití:
+
+```text
+Situace:
+Po delším klidu přišla relevantní B2B poptávka bez rozpočtu.
+
+Použití:
+Obchod našel pravidlo u potvrzovací šablony a poslal volitelnou otázku.
+
+Výsledek:
+Zákazník odpověděl, obchod mohl připravit další krok a formulář zůstal beze změny.
+```
+
+Uzavření:
+
+```text
+Stav:
+Nechat v klidu.
+
+Uzavírací věta:
+První přirozené použití po dlouhodobém klidu potvrdilo, že pravidlo stačí: volitelná otázka pomohla, povinné pole pro rozpočet neotevíráme a nezakládáme nové review.
+
+Privacy-first závěr:
+Rozpočtový kontext zůstává pouze v obchodním vlákně. Do CRM nepřidáváme nový atribut, do indexu neukládáme zákaznickou odpověď a nevzniká pomocný seznam podobných poptávek.
+```
+
+Jiný výsledek:
+
+```text
+Situace:
+Nový člověk pravidlo nenašel u šablony a musel se ptát kolegy.
+
+Stav:
+Opravit kotvu.
+
+Lokální oprava:
+K potvrzovací šabloně doplňujeme větu: "U relevantní poptávky bez rozpočtu pošli volitelnou otázku; formulář ani scoring se nemění."
+
+Co neotevíráme:
+Novou kapitolu pravidla, změnu formuláře, nový export ani samostatné sledování výskytů.
+```
+
+Všimněte si rozdílu. V prvním případě se neděje nic dalšího. Ve druhém se opravuje jen místo, kde záznam nebyl po ruce. Ani jeden výsledek neospravedlňuje návrat starého širokého řešení.
+
+### Privacy-first uzavření
+
+Uzavření po dlouhodobém klidu je poslední šance zastavit nenápadnou datovou stopu. Pravidlo se potkalo s realitou a někdo mohl mít chuť nechat si doklad "pro příště". To je pochopitelné, ale často zbytečné. Pokud pravidlo fungovalo, nepotřebujete novou evidenci o tom, že fungovalo. Potřebujete jen jistotu, že pracovní minimum zůstává správně umístěné.
+
+Použijte krátkou úklidovou otázku:
+
+```text
+Co vzniklo jen proto, že jsme pravidlo po klidu znovu použili, a musí to dál existovat?
+```
+
+Možné odpovědi:
+
+- nic nevzniklo a pravidlo zůstává v klidu,
+- vznikla jen lokální kotva u šablony,
+- vznikla obecná věta bez zákaznických detailů,
+- vznikla dočasná poznámka, kterou po uzavření smažeme,
+- vznikl návratový důkaz, který přesouváme do nové malé návratové karty.
+
+Pokud odpověď obsahuje konkrétní zákaznické informace, rozpočty, interní poznámky z obchodního hovoru nebo ruční seznam případů, nepřenášejte je do indexu. Buď zůstanou v původním oprávněném systému, nebo se po vyhodnocení smažou či zobecní. Index má nést pravidlo, ne kopie provozních detailů.
+
+Codyho komentář: největší trik dlouhodobého klidu je odolat potřebě dělat pamětní desku každému úspěšnému použití. Když pravidlo funguje, není nutné mu stavět pomníček. Stačí, že další člověk ví, kde ho najde a co podle něj udělá. Provozní poezie, jen bez poezie.
+
+### Karta uzavření prvního přirozeného použití
+
+```text
+Záznam v dlouhodobém klidu:
+
+Přirozená situace použití:
+
+Co se opravdu stalo:
+
+Bylo pravidlo dohledatelné?
+
+Stačilo rozhodovací minimum?
+
+Zůstal původní rozsah zavřený?
+
+Uzavírací stav:
+- nechat v klidu
+- opravit kotvu
+- zpřesnit pracovní minimum
+- převést na návrat
+
+Uzavírací věta:
+
+Co případně lokálně upravujeme:
+
+Co dál výslovně neotevíráme:
+
+Jaká nová datová stopa nevzniká:
+
+Co mažeme, anonymizujeme nebo necháváme pouze v původním systému:
+
+Kde je závěr uložený:
+
+Vlastník:
+```
+
+Karta má být krátká. Pokud ji vyplňujete déle než samotné použití pravidla, pravděpodobně řešíte návrat, ne uzavření. V takovém případě uzavřete běžné použití větou "nastal návratový signál" a pokračujte samostatnou návratovou smyčkou.
+
+### Mini workshop na 5 minut
+
+1. Minuta 1: přečtěte přirozenou situaci a skutečné použití pravidla.
+2. Minuta 2: rozhodněte, zda pravidlo stačilo bez historie.
+3. Minuta 3: vyberte jeden ze čtyř uzavíracích stavů.
+4. Minuta 4: napište uzavírací větu a zavřený rozsah.
+5. Minuta 5: zkontrolujte, zda nevznikla zbytečná datová stopa.
+
+Když se v páté minutě ukáže, že někdo začal vést pomocný seznam "pro jistotu", rozhodněte hned, jestli má účel a konec. Pokud ne, smažte ho. Dočasná opatrnost bez konce je jen pomalý způsob, jak si v privacy-first provozu vyrobit bordel s lepším názvem.
+
+### Checklist uzavření
+
+- Uzavíráme konkrétní první použití, ne celou starou historii tématu?
+- Víme, co se opravdu stalo v pracovním místě?
+- Vybrali jsme jeden ze čtyř stavů?
+- Je uzavírací věta kratší než původní záznam?
+- Je jasné, co zůstává výslovně zavřené?
+- Pokud opravujeme kotvu, saháme jen na nejbližší pracovní místo?
+- Pokud zpřesňujeme minimum, nepřidáváme nový sběr dat?
+- Pokud převádíme na návrat, máme konkrétní návratový signál?
+- Nevznikl nový atribut, export, tracker, seznam ani kopie zákaznických detailů bez jasného konce?
+- Zůstává záznam po uzavření v dlouhodobém klidu, pokud k návratu není důvod?
+
+Dobré uzavření prvního přirozeného použití po dlouhodobém klidu je malé a pevné. Potvrdí, že pravidlo funguje, nebo opraví nejbližší slabinu. Nepřidává slavnostní review, nevyrábí novou evidenci a nevrací starý široký návrh jen proto, že se pravidlo po pauze znovu použilo. Tím se dlouhodobý klid nestává zapomenutím. Stává se důkazem, že provoz umí nést dobré rozhodnutí bez neustálého dohledu.
+
 ## Pracovní log
 
+- 2026-07-06: Doplněna úvodní podkapitola o uzavření prvního přirozeného použití záznamu po dlouhodobém klidu: uzavírací stavy, praktické SaaS příklady, privacy-first úklid datové stopy, karta, mini workshop a checklist.
 - 2026-07-06: Doplněna úvodní podkapitola o prvním přirozeném použití záznamu po dlouhodobém klidu: tiché kontroly, výsledné stavy, praktický SaaS příklad, privacy-first práce bez nové evidence, karta, mini workshop a checklist.
 - 2026-07-06: Doplněna úvodní podkapitola o převodu indexového záznamu do dlouhodobého klidu: rozhodovací minimum, praktický SaaS příklad, privacy-first úklid historických stop, karta, mini workshop a checklist.
 - 2026-07-06: Doplněna úvodní podkapitola o uzavření druhé pasivní kontroly indexového záznamu: čtyři uzavírací stavy, praktické SaaS varianty, privacy-first úklid pomocných stop, karta, mini workshop a checklist.
