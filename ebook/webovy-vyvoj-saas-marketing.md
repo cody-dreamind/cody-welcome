@@ -300923,8 +300923,190 @@ Pokud workshop neskončí za šest minut, není to automaticky problém. Je to a
 
 Uzavření druhého použití stabilní kotvy je moment, kdy se pravidlo buď uklidní, nebo poctivě skončí. Obě možnosti jsou dobré. Špatná možnost je nechat ho napůl živé: trochu platí, trochu se obchází, trochu se sleduje a trochu nikdo neví proč. Stabilní kotva si zaslouží jasný stav. Tým taky.
 
+## Převod stabilní kotvy do týmového indexu
+
+Stabilní kotva, která prošla dvěma běžnými použitími, už nemá žít jako zvláštní artefakt pro pár zasvěcených. Má se stát součástí týmového indexu: krátkého seznamu rozhodnutí, pravidel a hranic, ke kterým se lidé vrací při normální práci. Ne proto, aby tým budoval další encyklopedii. Proto, aby dobré rozhodnutí nezůstalo schované v jedné kartě, kterou najde jen člověk s archeologickým talentem a přebytkem kofeinu.
+
+Převod do indexu není publikace celé historie. Je to zkrácení na použitelný záznam. Člověk, který řeší registraci, onboarding, poptávkový formulář nebo marketingovou stránku, má během minuty poznat tři věci: jaké pravidlo platí, kde je jeho kanonické místo a kdy se má téma znovu otevřít.
+
+Začněte jednou indexovou větou:
+
+```text
+Při práci na:
+
+Platí:
+
+Kanonické místo je:
+
+Znovu otevřít pouze pokud:
+```
+
+Taková věta má být kratší než původní kotva. Pokud je stejně dlouhá, nepřevádíte ji do indexu, jen ji kopírujete na další místo. Index nemá suplovat detailní záznam. Má člověka dovést k rozhodnutí nebo ke správnému kanonickému místu.
+
+### Co do indexu patří
+
+Do týmového indexu patří jen provozní minimum:
+
+- název pracovního místa,
+- jednověté pravidlo,
+- odkaz nebo popis kanonického místa,
+- zavřený rozsah,
+- návratový signál,
+- vlastník pracovního místa,
+- datum posledního ověřeného použití.
+
+Nepatří tam celý příběh vzniku. Nepatří tam dlouhé interní debaty, seznam zákazníků, screenshoty, citace ze supportu ani poznámky typu "tohle kdysi navrhoval obchod". Ty mohou mít místo v archivu, pokud jsou pořád užitečné, ale index má zůstat lehký. Jeho kvalita se měří tím, jestli ho člověk použije v běžné práci, ne tím, kolik minulosti unese.
+
+Praktický záznam:
+
+```text
+Pracovní místo:
+Registrace a první onboarding SaaS účtu.
+
+Pravidlo:
+Nesbíráme velikost týmu ani odhad počtu budoucích uživatelů; doporučení v onboardingu stavíme na viditelných akcích v produktu a dobrovolném kontextu.
+
+Kanonické místo:
+Karta registračního formuláře a onboardingová šablona.
+
+Zavřený rozsah:
+Povinné pole velikosti týmu, ruční velikostní štítek, segment podle odhadu, export účtů podle odhadu.
+
+Návratový signál:
+Otevřít pouze pokud onboarding opakovaně selže u konkrétního kroku, který nejde vyřešit podle viditelných akcí ani dobrovolného kontextu.
+
+Vlastník:
+Produktový vlastník onboardingu.
+
+Poslední ověřené použití:
+2026-07-06.
+```
+
+Tohle už není pracovní román. Je to dopravní značka. Říká, kudy se jede, kudy se nejede a kdy má smysl zastavit.
+
+### Kde index bydlí
+
+Týmový index má bydlet tam, kde lidé opravdu hledají odpověď. Ne nutně v nejčistším informačním systému. Pokud se pravidlo používá při úpravě formuláře, patří odkaz k formuláři. Pokud se používá při úpravě onboardingových e-mailů, patří k šabloně. Pokud ho používá obchod při kvalifikaci leadů, patří do sales karty.
+
+Jeden index může mít více vstupů, ale jen jedno kanonické místo. To je rozdíl mezi navigací a kopií. Navigace říká "tady najdeš pravidlo". Kopie říká "tady je další verze pravidla" a tím vytváří budoucí hádku. Budoucí hádky jsou sice levný zdroj meetingů, ale drahý zdroj provozu.
+
+Dobrá praxe:
+
+```text
+Index u onboardingové šablony:
+Viz pravidlo "Registrace nesbírá velikost týmu" v kartě registračního formuláře.
+
+Kanonická karta:
+Obsahuje plné pravidlo, zavřený rozsah, návratový signál a vlastníka.
+```
+
+Špatná praxe:
+
+```text
+Onboardingová šablona:
+Nesbíráme velikost týmu, ledaže by se někdy ukázalo, že by to pomohlo.
+
+Sales karta:
+Velikost týmu zatím nechceme, ale možná se k tomu vrátíme.
+
+Produktová karta:
+Historicky jsme to nedělali kvůli privacy-first přístupu.
+```
+
+Tři podobné věty nejsou znalost. Jsou tři budoucí interpretace. Index má šetřit rozhodování, ne vyrábět malou jazykovou loterii.
+
+### Privacy-first index
+
+Privacy-first hodnota indexu je v tom, že brání opakovanému vymýšlení stejného sběru dat. Když člověk při práci narazí na nápad "přidejme pole", "udělejme segment", "označme si účty", nebo "pošleme to do dalšího nástroje", index rychle ukáže, jestli už tým podobnou datovou stopu zavřel.
+
+Každý privacy-first záznam v indexu má proto obsahovat větu:
+
+```text
+Díky tomuto pravidlu nevzniká:
+```
+
+Příklad:
+
+```text
+Díky tomuto pravidlu nevzniká:
+Povinný údaj o velikosti týmu, interní odhad velikosti zákazníka, segmentace podle domněnky, export účtů do marketingového nástroje ani nová retence pro tento účel.
+```
+
+Tahle věta je silnější než obecné "minimalizujeme data". Ukazuje konkrétní věci, které nevznikají. Když později někdo navrhne ruční štítek, nejde o novou nevinnou drobnost. Je to návrat ke stejné zavřené datové stopě a musí splnit návratový signál.
+
+Do indexu ale nepište osobní údaje ani detailní příklady zákazníků. Pokud potřebujete příklad, zobecněte ho:
+
+```text
+Správně:
+Podnět přišel z opakované nejistoty customer success při prvním nastavení týmového účtu.
+
+Špatně:
+Podnět přišel u účtů A, B a C, kde konkrétní lidé řešili konkrétní organizační strukturu.
+```
+
+Index má pomáhat rozhodovat. Nemá se stát novým skladem citlivého kontextu.
+
+### Karta indexového záznamu
+
+```text
+Název záznamu:
+
+Pracovní místo:
+
+Jednověté pravidlo:
+
+Kanonické místo:
+
+Kde na pravidlo vedou odkazy:
+
+Zavřený rozsah:
+
+Díky tomuto pravidlu nevzniká:
+
+Návratový signál:
+
+Vlastník pracovního místa:
+
+Poslední ověřené použití:
+
+Kdy záznam zkontrolovat:
+
+Co se do indexu záměrně nepřenáší:
+```
+
+Poslední řádek je důležitý. Nutí tým rozhodnout, co z historie nechává mimo běžné použití. Může to být starý seznam účtů, interní argumentace, dočasný export, poznámky z workshopu nebo příklad, který už není reprezentativní. Index má být čistý vstup do práce, ne zmenšený archiv.
+
+### Mini workshop na 8 minut
+
+1. Minuta 1: přečtěte stabilní kotvu a poslední uzavření.
+2. Minuta 2: napište jednověté pravidlo pro člověka, který u historie nebyl.
+3. Minuta 3: vyberte jedno kanonické místo.
+4. Minuta 4: napište zavřený rozsah a větu "díky tomuto pravidlu nevzniká".
+5. Minuta 5: zkontrolujte návratový signál.
+6. Minuta 6: určete odkazy z míst, kde lidé pravidlo přirozeně hledají.
+7. Minuta 7: vyškrtněte z indexu interní historii, osobní údaje a dočasné podklady.
+8. Minuta 8: určete vlastníka a datum další lehké kontroly.
+
+Pokud se workshop zasekne na tom, jak pravidlo pojmenovat, nepřidávejte další vysvětlení. Vraťte se k pracovnímu místu. Název má vycházet z práce, ne z interní geneze rozhodnutí. "Registrace nesbírá velikost týmu" je lepší než "Rozhodnutí po druhém dohledání archivního minima". Druhá varianta je přesná asi jako šanon v šanonu.
+
+### Checklist převodu do indexu
+
+- Je pravidlo srozumitelné člověku, který nezná historii?
+- Má záznam jedno kanonické místo?
+- Jsou další výskyty jen odkazy, ne kopie pravidla?
+- Je zavřený rozsah napsaný konkrétně?
+- Je jasné, jaká data, štítky, segmenty, exporty nebo nástroje díky pravidlu nevznikají?
+- Je návratový signál pořád konkrétní a ověřitelný?
+- Neobsahuje index osobní údaje, zákaznické citace, screenshoty ani dočasné seznamy?
+- Je určený vlastník pracovního místa?
+- Je jasné, kdy se záznam lehce zkontroluje?
+- Ví tým, kam má při běžné práci sáhnout?
+
+Převod stabilní kotvy do týmového indexu je malý, ale důležitý provozní krok. Dělá z dobrého rozhodnutí dostupné pravidlo. Když se povede, další člověk nemusí znovu objevovat, proč se něco nesbírá, neměří nebo neposílá do dalšího nástroje. Prostě najde pravidlo, použije ho a pokračuje. To je přesně ten typ nenápadné efektivity, který nevypadá efektně v prezentaci, ale zachraňuje spoustu času a ještě víc dat.
+
 ## Pracovní log
 
+- 2026-07-06: Doplněna úvodní podkapitola o převodu stabilní kotvy do týmového indexu: indexová věta, kanonické místo, privacy-first záznam, karta, mini workshop a checklist.
 - 2026-07-06: Doplněna úvodní podkapitola o uzavření druhého běžného použití stabilní kotvy: uzavírací stavy, praktický SaaS příklad, propsání minima zpět do kotvy, privacy-first úklid dočasných stop, karta, mini workshop a checklist.
 - 2026-07-06: Doplněna úvodní podkapitola o druhém běžném použití stabilní kotvy: samostatnost bez čerstvé paměti, čtyři výsledné stavy, praktický SaaS příklad, privacy-first kontrola obchvatů, karta, mini workshop a checklist.
 - 2026-07-06: Doplněna úvodní podkapitola o uzavření prvního běžného použití stabilní kotvy: čtyři uzavírací stavy, praktický SaaS příklad, propsání zpět do kotvy, privacy-first úklid náhradní evidence, karta, mini workshop a checklist.
