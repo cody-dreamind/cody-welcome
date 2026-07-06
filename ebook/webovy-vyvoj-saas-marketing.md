@@ -303849,8 +303849,176 @@ Pokud se během šesti minut objeví spor o původní rozhodnutí, vraťte se k 
 
 Uzavření druhé pasivní kontroly má nechat po práci co nejméně stop a co nejvíc jasnosti. Fungující záznam zůstává v klidu. Slabé místo se opraví tam, kde vzniklo. Opakované selhání se vrátí do aktivní údržby. Skutečný návratový signál otevře návrat. Všechno ostatní je jen chuť něco dělat, a tu je v dobrém provozu potřeba občas slušně poslat sednout.
 
+## Převod indexového záznamu do dlouhodobého klidu
+
+Po druhé pasivní kontrole má indexový záznam buď zůstat v pasivní údržbě, vrátit se do aktivní práce, nebo otevřít návratový signál. Pokud dvakrát obstál v běžné práci, přichází ještě jeden drobný krok: převést ho do dlouhodobého klidu. Ne jako novou fázi procesu, ale jako vědomé ukončení mimořádné pozornosti.
+
+Dlouhodobý klid znamená, že záznam dál existuje tam, kde ho lidé potřebují, ale už se k němu neplánuje samostatná kontrola. Potká se s realitou jen tehdy, když ho někdo přirozeně použije, když nastane návratový signál, nebo když se mění pracovní místo, ke kterému patří. Tím se z pravidla nestane zapomenutý dokument. Stane se obyčejnou součástí provozu. A to je přesně cíl.
+
+Začněte převodovou větou:
+
+```text
+Indexový záznam převádíme do dlouhodobého klidu, protože dvakrát obstál v běžné práci bez vysvětlování, bez nové datové stopy a bez návratového signálu.
+```
+
+Pokud tahle věta není pravdivá, převod nedělejte. Není ostuda nechat záznam ještě chvíli v aktivní údržbě. Horší je prohlásit klid tam, kde lidé pořád potřebují obchvaty, staré komentáře nebo pomocnou evidenci.
+
+### Co se při převodu mění
+
+Převod do dlouhodobého klidu mění hlavně tři věci:
+
+- končí samostatné připomínky a plánovaná review,
+- v běžném pracovním místě zůstává jen rozhodovací minimum,
+- hlubší historie se nechává dostupná, ale nepoužívá se při každém průchodu.
+
+Rozhodovací minimum má obsahovat jen to, co další člověk potřebuje v práci:
+
+```text
+Kdy pravidlo použít:
+
+Co udělat jako první:
+
+Co se dál neotevírá:
+
+Kdy se k tématu vrátit:
+
+Kde je hlubší historie, pokud bude opravdu potřeba:
+```
+
+Všechno ostatní je kandidát na archivaci, sloučení nebo smazání. Pokud u běžného použití pořád potřebujete číst původní důvody, dlouhodobý klid je předčasný. Záznam má umět odpovědět na dnešní otázku, ne předčítat celý vývoj názoru.
+
+### Praktický SaaS příklad
+
+Indexový záznam po druhé pasivní kontrole:
+
+```text
+U relevantní B2B poptávky bez rozpočtu nejdřív použijeme volitelnou otázku v potvrzovacím e-mailu. Formulář, scoring ani export rozpočtových údajů se nemění. K povinnému poli se vrátíme pouze pokud volitelná otázka třikrát za sebou nepomůže kvalifikovat relevantní poptávku.
+```
+
+Převod do dlouhodobého klidu:
+
+```text
+Kdy použít:
+Relevantní B2B poptávka přišla bez rozpočtu.
+
+První krok:
+Použít volitelnou otázku v potvrzovacím e-mailu.
+
+Co dál neotevírat:
+Povinné pole pro rozpočet, lead scoring, export rozpočtových údajů a samostatný dashboard výskytů.
+
+Návratový signál:
+Tři relevantní poptávky za sebou nejdou kvalifikovat ani po volitelné otázce.
+```
+
+Tohle stačí. Obchodník nemusí znát celou debatu o formuláři. Produkt nemusí znovu dokazovat, proč se pole nepřidalo. Marketing nemusí měnit landing page jen proto, že přišla další poptávka bez rozpočtu. Pravidlo je blízko práci a drží hranici.
+
+Slabší převod by vypadal takto:
+
+```text
+Pravidlo zůstává podle rozhodnutí z review v červnu, viz poznámky v logu.
+```
+
+To není dlouhodobý klid. To je odkaz na lov pokladů. Další člověk musí dohledat, které review, který log a co z toho platí dnes. Takový záznam vraťte o krok zpět a přepište ho do pracovního jazyka.
+
+### Privacy-first uzavření dlouhodobého klidu
+
+Dlouhodobý klid je silný privacy-first moment. Po dvou pasivních kontrolách už většinou víte, že pravidlo funguje bez nové evidence. Teď je potřeba zabránit tomu, aby kolem něj zůstala historická datová stopa jen proto, že "se může hodit".
+
+Použijte jednoduchou otázku:
+
+```text
+Co musí zůstat, aby další člověk pravidlo správně použil, a co je už jen důkaz staré práce?
+```
+
+Typické úklidové rozhodnutí:
+
+- ponechat jednu pracovní větu v checklistu,
+- ponechat návratový signál,
+- ponechat odkaz na archivní rozhodnutí bez zákaznických detailů,
+- smazat dočasné seznamy konkrétních případů,
+- odstranit pomocné štítky, které už neřídí práci,
+- nechat původní komunikaci jen v původním oprávněném systému.
+
+Příklad:
+
+```text
+Ponecháváme:
+Jednu pracovní větu v obchodním checklistu a obecný návratový signál.
+
+Archivujeme:
+Krátké rozhodnutí, proč se formulář nerozšiřoval.
+
+Mažeme:
+Dočasnou poznámku s konkrétními poptávkami, která vznikla při ověřování.
+
+Dál výslovně nezakládáme:
+Nový CRM atribut, export rozpočtů, tracker formuláře ani ruční počítadlo poptávek bez rozpočtu.
+```
+
+Codyho komentář: dlouhodobý klid je místo, kde se pozná rozdíl mezi pamětí a hromaděním. Paměť pomáhá dalšímu člověku udělat lepší rozhodnutí. Hromadění jen uklidňuje tým, že "něco máme", i když to nikdo neumí použít bez dalšího vysvětlování. V privacy-first provozu je lepší mít jednu dobrou větu než deset starých stop.
+
+### Karta převodu do dlouhodobého klidu
+
+```text
+Indexový záznam:
+
+Kanonické pracovní místo:
+
+Důkaz samostatnosti:
+
+Převodová věta:
+
+Rozhodovací minimum:
+
+Co zůstává výslovně zavřené:
+
+Návratový signál:
+
+Co ponecháváme v běžném pracovním místě:
+
+Co archivujeme:
+
+Co mažeme, anonymizujeme nebo vracíme do původního zdroje:
+
+Co dál výslovně nezakládáme:
+
+Kdy se záznam znovu přirozeně potká s realitou:
+
+Vlastník:
+```
+
+Karta je poslední servisní stopa. Po jejím vyplnění nemá vzniknout další karta "kontrola dlouhodobého klidu", pokud k tomu není konkrétní důvod. Záznam se dál používá v práci. Nechodí na pravidelné kontroly jen proto, že existuje.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte výsledek druhé pasivní kontroly.
+2. Minuta 2: napište převodovou větu do dlouhodobého klidu.
+3. Minuta 3: zkraťte záznam na rozhodovací minimum.
+4. Minuta 4: potvrďte, co zůstává výslovně zavřené a kdy se téma vrátí.
+5. Minuta 5: ukliďte pomocné datové stopy.
+6. Minuta 6: uložte pracovní větu do kanonického místa a zavřete mimořádnou péči.
+
+Pokud se během workshopu objeví spor o to, jestli pravidlo opravdu obstálo, převod zastavte. Nejdřív vyberte správný stav po druhé pasivní kontrole. Dlouhodobý klid nesmí být kompromis mezi lidmi, kteří chtějí pokračovat, a lidmi, kteří už nechtějí řešit proces. Má být výsledek dostatečně jasného provozního důkazu.
+
+### Checklist dlouhodobého klidu
+
+- Obstál záznam dvakrát v běžné práci bez mimořádného vysvětlování?
+- Nevznikl při použití nový tag, atribut, export, tabulka, metrika nebo tracker?
+- Je převodová věta konkrétní a pravdivá?
+- Je v pracovním místě jen rozhodovací minimum?
+- Je jasné, co se dál neotevírá?
+- Je návratový signál srozumitelný i člověku bez původní historie?
+- Je hlubší historie dostupná, ale nepoužívá se jako běžný návod?
+- Uklidili jsme dočasné zákaznické příklady a pomocné seznamy?
+- Nevzniká nový kontrolní rytmus ze zvyku?
+- Ví další člověk, kdy má záznam použít, kdy ho nechat být a kdy ho znovu otevřít?
+
+Převod do dlouhodobého klidu je dobrý konec dlouhé smyčky. Tým nejdřív neotevřel zbytečnou práci, potom rozhodnutí ověřil v běžném provozu, převedl ho do indexu, nechal ho dvakrát pasivně obstát a nakonec ho zmenšil na praktické minimum. Výsledek není heroická kapitola. Je to tiché pravidlo, které šetří práci, data i pozornost. Přesně takhle má dobrý provoz vypadat většinu času: nenápadně správně.
+
 ## Pracovní log
 
+- 2026-07-06: Doplněna úvodní podkapitola o převodu indexového záznamu do dlouhodobého klidu: rozhodovací minimum, praktický SaaS příklad, privacy-first úklid historických stop, karta, mini workshop a checklist.
 - 2026-07-06: Doplněna úvodní podkapitola o uzavření druhé pasivní kontroly indexového záznamu: čtyři uzavírací stavy, praktické SaaS varianty, privacy-first úklid pomocných stop, karta, mini workshop a checklist.
 - 2026-07-06: Doplněna úvodní podkapitola o druhé pasivní kontrole indexového záznamu: najitelnost bez čerstvé paměti, samostatné rozhodnutí, stabilní hranice, privacy-first úklid pomocných stop, karta, mini workshop a checklist.
 - 2026-07-06: Doplněna úvodní podkapitola o uzavření první pasivní kontroly indexového záznamu: čtyři uzavírací stavy, praktické příklady, privacy-first úklid pomocných stop, karta, mini workshop a checklist.
