@@ -299914,8 +299914,217 @@ Když se tým zasekne u páté minuty, zeptejte se, jestli oprava pomůže pří
 
 Uzavřené druhé dohledání má být nudné v tom nejlepším smyslu. Záznam se našel, použil, případně dostal malou opravu a vrátil se do klidu. Když takhle funguje archivní minimum, tým si nemusí pamatovat všechno. Stačí mu vědět, kde najde pracovní větu, jak pozná návratový signál a proč se kvůli každému podobnému slovu neotevírá celý starý problém.
 
+## Stabilní kotva po druhém dohledání archivního minima
+
+Když druhé dohledání archivního minima proběhne dobře, přichází zvláštní moment: tým by nejraději ještě něco nastavil, připomněl, označil nebo naplánoval. Jenže právě tady má dobré archivní minimum přestat vyrábět práci. Po druhém samostatném použití už nepotřebuje další mini proces. Potřebuje stabilní kotvu: krátké místo, kde člověk příště najde platnou pracovní větu, návratový signál a hranici, co se kvůli podobnému podnětu neotevírá.
+
+Stabilní kotva není nová kapitola historie. Je to aktivní štítek u pracovního místa. Může být v checklistu formuláře, v poznámce u sales skriptu, v interní kartě šablony nebo v krátkém indexu rozhodnutí. Důležité je, aby ji člověk našel tam, kde se podnět přirozeně vrací, ne v hlubokém archivu, který znají jen pamětníci.
+
+Začněte větou:
+
+```text
+Archivní minimum po druhém dohledání necháváme jako stabilní kotvu zde:
+```
+
+Vyplněný příklad:
+
+```text
+Archivní minimum po druhém dohledání necháváme jako stabilní kotvu zde:
+U popisu registračního formuláře a u sales skriptu jako krátkou hranici mezi registrací a obchodní kvalifikací.
+```
+
+Tahle věta dělá dvě věci. Zaprvé říká, kde kotva bydlí. Zadruhé brání tomu, aby se z jednoho ověřeného minima stal další revizní rytmus. Pokud záznam fungoval při druhém dohledání, další péče má být spouštěná jen návratovým signálem nebo skutečnou změnou pracovního místa.
+
+### Co stabilní kotva obsahuje
+
+Stabilní kotva má být kratší než archivní minimum. Pokud je stejně dlouhá, jen jste archiv přenesli blíž k práci a přejmenovali ho. Kotva má obsahovat pět částí:
+
+- Pracovní větu v přítomném čase.
+- Návratový signál.
+- Hranici zavřeného rozsahu.
+- Odkaz na hlubší historii, pokud je potřeba.
+- Privacy-first poznámku, co se díky rozhodnutí dál nesbírá.
+
+Příklad stabilní kotvy:
+
+```text
+Registrace zůstává bez otázky na velikost týmu. Kontext spolupráce řešíme až po prvním importu nebo v obchodním hovoru, pokud je to pro danou situaci potřeba.
+
+Návratový signál:
+Téma registrace se vrátí pouze pokud tři nové účty za sebou selžou v onboardingu kvůli chybějícímu kontextu spolupráce ještě před prvním importem.
+
+Zavřené:
+Nepřidáváme pole velikost týmu do registrace, segmentaci podle odpovědi ani novou tabulku ručních štítků.
+
+Historie:
+Viz archivní minimum registrace / velikost týmu.
+
+Privacy-first:
+Dál nesbíráme velikost týmu v registraci a neposíláme ji do marketingové automatizace.
+```
+
+Tohle je dost krátké pro běžné použití a dost konkrétní pro rozhodnutí. Člověk nemusí číst staré debaty, ale ví, kam se podívat, pokud potřebuje hlubší kontext.
+
+### Kdy kotvu nevytvářet
+
+Stabilní kotva není odměna za každé uzavřené dohledání. Nevytvářejte ji, pokud:
+
+- téma se vrací vzácně a stačí běžný archiv;
+- pracovní místo není jasné;
+- návratový signál je pořád slabý;
+- záznam by jen duplikoval existující pravidlo;
+- kotva by vyžadovala novou evidenci nebo pravidelnou kontrolu.
+
+Nejčastější chyba je udělat kotvu jen proto, že tým nechce "ztratit" dobře napsané rozhodnutí. Jenže rozhodnutí se neztrácí tím, že není všude. Ztrácí se tím, že je všude trochu jinak. Pokud už existuje jasné kanonické místo, přidejte k němu odkaz nebo alias, ne další kopii.
+
+Praktická věta pro odmítnutí kotvy:
+
+```text
+Stabilní kotvu teď nevytváříme, protože archivní minimum se nevrací v běžném pracovním místě a nový odkaz by jen duplikoval existující rozhodnutí.
+```
+
+Takový zápis je lepší než tiché přidání další poznámky. Tým ví, že možnost zvažoval, a zároveň nevyrábí další místo, které bude za půl roku zastaralé.
+
+### Praktický SaaS příklad
+
+Představte si SaaS s lehkou registrací a onboardingem přes první import dat. Historicky se řešilo, zda se má při registraci ptát na velikost týmu. Téma bylo dvakrát dohledané a pokaždé se ukázalo, že registrační formulář má zůstat lehký.
+
+Stabilní kotva u registračního formuláře:
+
+```text
+Pracovní věta:
+Registrace sbírá jen údaje nutné k založení účtu a prvnímu importu.
+
+Hranice:
+Velikost týmu, role kolegů a interní strukturu nezjišťujeme v registraci.
+
+Návratový signál:
+Téma otevřeme pouze pokud tři nové účty za sebou nedokážou dokončit první import kvůli chybějícímu kontextu týmu.
+
+Odkaz:
+Archivní minimum: velikost týmu v registraci.
+
+Privacy-first:
+Dál nevzniká profilování účtů podle velikosti týmu před prvním použitím produktu.
+```
+
+Stabilní kotva u sales skriptu může být jiná:
+
+```text
+Pracovní věta:
+Pokud obchod potřebuje kontext týmu pro nabídku, řeší ho v hovoru jako volitelnou kvalifikační otázku, ne přes registraci.
+
+Hranice:
+Sales skript nesmí vracet kvalifikační otázky zpět do registračního formuláře bez nového návratového signálu.
+```
+
+Tady je vidět rozdíl mezi kotvou a kopií. Registrační kotva chrání produktové místo. Sales kotva chrání obchodní místo. Obě odkazují na stejný historický závěr, ale každá používá jazyk své práce.
+
+Slabá varianta by byla:
+
+```text
+Velikost týmu neřešíme.
+```
+
+To je sice krátké, ale špatně. Obchod může velikost týmu legitimně řešit v hovoru. Produkt ji jen nechce sbírat v registraci. Stabilní kotva musí chránit správnou hranici, ne zakázat celé téma napříč firmou jako líné kladivo.
+
+### Privacy-first kotva
+
+Privacy-first hodnota stabilní kotvy je v tom, že brání návratu starých sběrů pod novým názvem. Dnes se nezeptáme na velikost týmu. Za měsíc někdo navrhne "počet uživatelů". Za další měsíc "kolik lidí bude nástroj používat". Bez kotvy to mohou vypadat jako tři různé nápady. S kotvou je jasné, že jde o stejnou datovou stopu v jiném kabátě.
+
+Do kotvy proto přidejte krátkou datovou hranici:
+
+```text
+Stejná datová stopa:
+velikost týmu / počet lidí / pozvaní kolegové / počet budoucích uživatelů
+
+Dál nesbíráme:
+tyto údaje v registraci ani v automatickém marketingovém segmentu.
+
+Přípustná alternativa:
+volitelná otázka v obchodním hovoru, pokud má jasný účel pro nabídku a nezapisuje se do nové trvalé evidence bez důvodu.
+```
+
+Tahle hranice je praktičtější než obecné "minimalizujeme data". Ukazuje, které formulace se počítají jako stejný problém. To je důležité hlavně u marketingu a onboardingu, kde se stejné datové přání umí převléct za lepší personalizaci, segmentaci, kvalifikaci nebo zákaznickou péči. Ano, nápad v novém kabátě je pořád stejný nápad. Šatník není strategie.
+
+Codyho komentář: stabilní kotva je malá brzda pro chytré lidi s dobrými důvody. Neříká "nikdy". Říká "jestli to chceš otevřít znovu, ukaž stejný návratový signál nebo pojmenuj jiné pracovní místo". To je férové. Brání to chaosu, ne rozhodování.
+
+### Karta stabilní kotvy
+
+```text
+Téma:
+
+Kde kotva bydlí:
+
+Pracovní věta v přítomném čase:
+
+Návratový signál:
+
+Co zůstává zavřené:
+
+Jaké podobné názvy patří ke stejné datové stopě:
+
+Kdy jde o jiné pracovní místo:
+
+Odkaz na hlubší historii:
+
+Privacy-first hranice:
+
+Dál nesbíráme:
+
+Nevytváříme nový:
+- formulářový údaj
+- segment
+- export
+- tracker
+- pomocnou tabulku
+- pravidelnou kontrolu
+
+Vlastník pracovního místa:
+
+Datum další kontroly:
+```
+
+U data další kontroly je v pořádku napsat:
+
+```text
+Žádné datum. Kotva se vrací jen při návratovém signálu nebo změně pracovního místa.
+```
+
+To není lenost. Je to ochrana před kalendářovou údržbou bez důvodu. Pokud něco funguje jako stabilní kotva, nemá se připomínat jen proto, aby dokázalo, že existuje.
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: přečtěte uzavírací větu druhého dohledání.
+2. Minuta 2: určete, zda kotva opravdu patří do běžného pracovního místa.
+3. Minuta 3: napište pracovní větu v přítomném čase.
+4. Minuta 4: zkraťte návratový signál tak, aby šel použít bez historie.
+5. Minuta 5: doplňte hranici zavřeného rozsahu a podobné názvy stejné datové stopy.
+6. Minuta 6: vložte odkaz na hlubší historii, ne její kopii.
+7. Minuta 7: proveďte privacy-first kontrolu a rozhodněte, že nevzniká nová pravidelná kontrola.
+
+Když workshop nestihnete za sedm minut, pravděpodobně nevytváříte kotvu, ale znovu otevíráte rozhodnutí. V takovém případě se vraťte o krok zpět: buď záznam ještě není dost stabilní, nebo se objevil nový návratový signál. Obojí je užitečné zjištění, ale není to práce pro stabilní kotvu.
+
+### Checklist stabilní kotvy
+
+- Proběhlo druhé dohledání bez závislosti na původním autorovi?
+- Je jasné pracovní místo, kde se podnět běžně vrací?
+- Je kotva kratší než archivní minimum?
+- Je pracovní věta napsaná v přítomném čase?
+- Dá se návratový signál použít bez čtení historie?
+- Je výslovně napsané, co zůstává zavřené?
+- Jsou uvedené podobné názvy stejné datové stopy?
+- Je jasné, kdy podobný podnět patří do jiného pracovního místa?
+- Odkazuje kotva na hlubší historii místo jejího kopírování?
+- Nezavedli jsme novou tabulku, segment, tracker, export ani pravidelnou kontrolu?
+- Je napsané, jaká data dál nesbíráme?
+- Ví další člověk, že kotva se má použít, ne automaticky revidovat?
+
+Stabilní kotva po druhém dohledání je dobrý konec dlouhé malé smyčky. Tým už nemusí držet staré rozhodnutí v hlavě, ale také ho nemusí pravidelně oprašovat. Stačí mu krátká věta na správném místě, jasný návratový signál a datová hranice, která nepustí stejný sběr zpátky dveřmi s novou cedulkou.
+
 ## Pracovní log
 
+- 2026-07-06: Doplněna úvodní podkapitola o stabilní kotvě po druhém dohledání archivního minima: pracovní věta, návratový signál, hranice zavřeného rozsahu, privacy-first datová kotva, karta, mini workshop a checklist.
 - 2026-07-05: Doplněna úvodní podkapitola o uzavření druhého dohledání archivního minima: čtyři uzavírací stavy, praktický SaaS příklad, privacy-first uzavření bez nové evidence, karta, mini workshop a checklist.
 - 2026-07-05: Doplněna úvodní podkapitola o druhém dohledání archivního minima v běžné práci: najitelnost bez čerstvé paměti, rozlišení stejného problému od podobného jazyka, praktický SaaS příklad, privacy-first kontrola bez nové evidence, karta, mini workshop a checklist.
 - 2026-07-05: Doplněna úvodní podkapitola o uzavření prvního dohledání archivního minima: čtyři uzavírací stavy, praktický SaaS příklad, privacy-first uzavření bez nové datové vrstvy, karta, mini workshop a checklist.
