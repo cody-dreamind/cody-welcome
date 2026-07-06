@@ -302366,8 +302366,196 @@ Pokud se během workshopu objeví nový obchodní nebo produktový nápad, zapi�
 
 První běžné review po převodu indexového záznamu má být klidné. Buď potvrdí, že pravidlo už opravdu žije v provozu, nebo opraví nejbližší slabé místo. V obou případech platí stejná zásada: žádná nová data bez nové otázky, žádná nová otázka bez jasného pracovního místa.
 
+## Uzavření prvního běžného review po převodu indexového záznamu do údržby
+
+První běžné review po převodu indexového záznamu do údržby nesmí zůstat jen jako dojem, že "to asi funguje". Pokud review neuzavřete, tým si z něj každý odnese něco jiného: někdo bude čekat další kontrolu, někdo začne pravidlo potichu obcházet a někdo z něj udělá důkaz pro širší změnu, kterou review vůbec neověřovalo. Uzavření má proto udělat jednu věc: převést výsledek review do jasného provozního stavu.
+
+Začněte větou:
+
+```text
+První běžné review indexového záznamu uzavíráme takto:
+```
+
+Za ni napište konkrétní výsledek, ne obecnou náladu. Dobrá věta vypadá například takto:
+
+```text
+První běžné review indexového záznamu uzavíráme takto:
+Záznam byl najitelný v týmovém indexu, podle jedné věty šlo rozhodnout bez původní historie a obchvat přes pomocnou tabulku nevznikl. Pravidlo zůstává v běžné údržbě bez mimořádné kontroly.
+```
+
+Tahle věta není ozdobná. Je provozní. Říká, kde pravidlo obstálo, že nepotřebuje zvláštní péči a že se kolem něj nezačala hromadit nová datová vrstva. Pokud se taková věta nedá napsat, review pravděpodobně něco odhalilo a uzavření musí pojmenovat nejbližší opravu.
+
+### Čtyři uzavírací stavy
+
+Po review vyberte jeden ze čtyř stavů:
+
+- Ponechat v běžné údržbě: indexový záznam je najitelný, srozumitelný a nepodporuje obchvaty.
+- Doplnit provozní kotvu: pravidlo platí, ale člověk ho nenašel v místě, kde rozhodoval.
+- Zpřesnit indexovou větu: záznam byl najitelný, ale věta byla moc obecná, široká nebo měkká.
+- Zastavit obchvat: review odhalilo náhradní evidenci, ruční štítek, tabulku nebo neformální postup mimo pravidlo.
+
+Stav `ponechat v běžné údržbě` je cílový. Znamená, že pravidlo přežilo první normální kontakt s provozem a nepotřebuje další mimořádný režim. Neplánujte další kontrolu jen proto, že právě proběhla tahle. Když pravidlo funguje, jeho nejlepší odměna je, že ho necháte pracovat.
+
+Stav `doplnit provozní kotvu` použijte, když je obsah správný, ale umístění slabé. Typicky záznam existuje v indexu, zatímco člověk pracuje v šabloně, CRM poznámce, checklistu nebo interním návodu. Oprava má být blízká: odkaz, jedna věta, krátká nápověda u pracovního místa. Ne nový proces s ambicí vyléčit celou firmu, protože jeden odkaz byl líný.
+
+Stav `zpřesnit indexovou větu` je pro situace, kdy pravidlo existuje, ale člověk podle něj nemůže rozhodnout. Věta "u kvalifikace postupujeme střídmě" je hezká do prezentace. Věta "u relevantní poptávky bez rozpočtu použij volitelnou otázku v potvrzovacím e-mailu; formulář, scoring ani export se nemění" je pracovní pravidlo.
+
+Stav `zastavit obchvat` je privacy-first poplach v malém. Obchvat nemusí být nový nástroj. Stačí pomocná tabulka, ruční tag, sdílený dokument s kopiemi odpovědí nebo domluva, že "si to zatím budeme psát bokem". Pokud obchvat nemá jasnou otázku, vlastníka, konec a místo v datové mapě, patří zavřít.
+
+### Praktický SaaS příklad
+
+Představte si SaaS, který má v týmovém indexu záznam:
+
+```text
+Téma:
+Kvalifikace rozpočtu u nových B2B poptávek.
+
+Pracovní věta:
+U relevantní poptávky bez rozpočtu lze poslat volitelnou otázku v potvrzovacím e-mailu. Formulář, automatický lead scoring ani export rozpočtových údajů se nemění.
+
+Návratový signál:
+K povinnému poli se vrátíme pouze pokud volitelná otázka třikrát za sebou nepomůže kvalifikovat relevantní poptávku a ruční doptání zdrží další krok.
+```
+
+První běžné review zjistí:
+
+```text
+Průchod:
+Obchod zpracoval novou relevantní poptávku bez rozpočtu.
+
+Co se stalo:
+Člověk našel indexový záznam, použil volitelnou otázku v e-mailu a nemusel otevírat starou rozhodovací kartu.
+
+Datová stopa:
+Nevznikl nový CRM atribut ani pomocná tabulka. Rozpočtový kontext zůstal v obchodním vlákně.
+```
+
+Uzavření:
+
+```text
+Uzavírací stav:
+Ponechat v běžné údržbě.
+
+Co ponecháváme:
+Indexovou větu a odkaz u potvrzovací e-mailové šablony.
+
+Co zůstává zavřené:
+Povinné pole pro rozpočet, automatický scoring a export do další tabulky.
+
+Další návrat:
+Pouze podle původního návratového signálu, ne podle obecného pocitu, že by se rozpočty měly víc měřit.
+```
+
+Slabší výsledek:
+
+```text
+Co se stalo:
+Člověk index našel, ale větu pochopil tak, že otázku na rozpočet má posílat všem poptávkám.
+
+Uzavírací stav:
+Zpřesnit indexovou větu.
+
+Oprava:
+Do věty přidáváme "jen u relevantní poptávky, kde bez rozpočtu nejde navrhnout další konkrétní krok".
+
+Co neotevíráme:
+Nové segmenty v CRM, úpravu formuláře ani povinné ukládání rozpočtu.
+```
+
+V obou výsledcích je práce malá. První potvrzuje, že záznam může žít v údržbě. Druhý opravuje jednu větu. Ani jeden nepotřebuje novou metodiku, protože dobrý provoz se pozná i podle toho, že z drobné slabiny nevyrobí poradový seriál.
+
+### Privacy-first uzavření
+
+Uzavření review je místo, kde se má vypnout mimořádná datová pozornost. Během převodu do údržby mohla vzniknout dočasná stopa: seznam příkladů, screenshot, export, ruční štítek, pracovní poznámka nebo kopie zákaznické odpovědi. Po review musí být jasné, co zůstává a co končí.
+
+Použijte tři řádky:
+
+```text
+Do údržby přenášíme:
+
+Do údržby nepřenášíme:
+
+Mažeme, anonymizujeme nebo necháváme jen v původním zdroji:
+```
+
+Příklad:
+
+```text
+Do údržby přenášíme:
+Jednu anonymizovanou pracovní větu v indexu a odkaz u e-mailové šablony.
+
+Do údržby nepřenášíme:
+Pomocný seznam poptávek, ruční štítek "rozpočet chybí" ani zvláštní export rozpočtových odpovědí.
+
+Mažeme, anonymizujeme nebo necháváme jen v původním zdroji:
+Konkrétní zákaznické odpovědi zůstávají pouze v obchodních vláknech; do indexu se nepřenášejí osobní ani obchodní detaily.
+```
+
+Codyho komentář: privacy-first provoz se často nerozbije velkým rozhodnutím. Rozbije se tím, že po malých ověřeních zůstanou malé tabulky, malé štítky, malé kopie a malé výjimky. Samé nevinné drobnosti, dokud jich není dost na vlastní archeologický výzkum. Uklízejte je hned, je to levnější než později vysvětlovat, proč existují.
+
+### Karta uzavření prvního běžného review
+
+```text
+Indexový záznam:
+
+První běžný pracovní průchod:
+
+Co review ukázalo:
+
+Uzavírací stav:
+- ponechat v běžné údržbě
+- doplnit provozní kotvu
+- zpřesnit indexovou větu
+- zastavit obchvat
+
+Co upravujeme:
+
+Co zůstává výslovně zavřené:
+
+Co do údržby přenášíme:
+
+Co do údržby nepřenášíme:
+
+Co mažeme, anonymizujeme nebo necháváme jen v původním zdroji:
+
+Návratový signál:
+
+Vlastník:
+
+Kde je závěr uložený:
+```
+
+Karta má být poslední stopa po review, ne nová agenda. Pokud po jejím vyplnění vznikne potřeba sledovat další věci, napište přesnou otázku. Pokud otázku napsat neumíte, pravděpodobně nepotřebujete sledovat nic.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte indexový záznam a pracovní průchod, který review ověřovalo.
+2. Minuta 2: pojmenujte, co review opravdu ukázalo.
+3. Minuta 3: vyberte jeden uzavírací stav.
+4. Minuta 4: napište, co zůstává zavřené a jaký návratový signál dál platí.
+5. Minuta 5: rozhodněte, co se přenáší do údržby a co se nepřenáší.
+6. Minuta 6: smažte, anonymizujte nebo vraťte do původního zdroje dočasné datové stopy.
+
+Když se během workshopu objeví nová produktová otázka, nezakopávejte ji do uzavření review. Dejte jí vlastní podnět, vlastní pracovní místo a vlastní návratový signál. Uzavření review má zavřít review, ne nenápadně otevřít další patro práce.
+
+### Checklist uzavření prvního běžného review
+
+- Máme konkrétní výsledek review, ne jen dojem?
+- Vybrali jsme přesně jeden uzavírací stav?
+- Je případná oprava nejbližší pracovnímu místu?
+- Zůstává jasné, co indexový záznam dál neotevírá?
+- Je návratový signál pořád konkrétní a rozpoznatelný?
+- Ukončili jsme mimořádné poznámky, seznamy, štítky, exporty nebo tabulky?
+- Nepřenášíme do údržby osobní ani obchodní detaily, které stačí ponechat v původním zdroji?
+- Pokud vznikl obchvat, je jasné, kdo ho zavře a kdy?
+- Ví další člověk, kde najde závěr bez čtení celé historie?
+- Neplánujeme další kontrolu jen ze zvyku?
+
+Uzavření prvního běžného review je drobná, ale důležitá brzda proti provoznímu roztékání. Když review potvrdilo, že pravidlo funguje, nechte ho v běžné údržbě. Když ukázalo slabinu, opravte nejbližší větu nebo kotvu. A když ukázalo obchvat, zavřete ho dřív, než se z něj stane "dočasné" řešení s vlastním životem.
+
 ## Pracovní log
 
+- 2026-07-06: Doplněna úvodní podkapitola o uzavření prvního běžného review po převodu indexového záznamu do údržby: čtyři uzavírací stavy, praktický SaaS příklad, privacy-first vypnutí mimořádné datové stopy, karta, mini workshop a checklist.
 - 2026-07-06: Doplněna úvodní podkapitola o prvním běžném review po převodu indexového záznamu do údržby: kontrolní body, výsledky review, praktický SaaS příklad, zastavení obchvatů, privacy-first datový úklid, karta, mini workshop a checklist.
 - 2026-07-06: Doplněna úvodní podkapitola o převodu ověřeného indexového záznamu do běžné údržby: nový režim záznamu, ukončení mimořádné pozornosti, praktický SaaS příklad, privacy-first úklid dočasných stop, karta, mini workshop a checklist.
 - 2026-07-06: Doplněna úvodní podkapitola o uzavření druhé kontroly indexového záznamu: uzavírací stavy, praktický SaaS příklad, propsání provozního minima zpět do indexu, privacy-first uzavření obchvatů, karta, mini workshop a checklist.
