@@ -302001,8 +302001,180 @@ Pokud workshop skončí tím, že "někdo ještě zjistí, jak to vlastně je", 
 
 Uzavření druhé kontroly je chvíle, kdy se indexový záznam buď stane běžnou součástí provozu, nebo dostane poslední malou opravu. V obou případech má práce skončit čistě: pravidlo je najitelné, zavřený rozsah je jasný, obchvaty jsou pojmenované a zbytečná data nevznikají. To je dobrý výsledek. Nehlučný, bez fanfár, ale přesně ten typ práce, díky kterému se privacy-first provoz nerozpadne na tisíc malých výjimek.
 
+## Převod ověřeného indexového záznamu do běžné údržby
+
+Indexový záznam, který prošel druhou kontrolou, nemá dál stát uprostřed místnosti s reflexní vestou. Pokud funguje samostatně, patří do běžné údržby týmového indexu. To znamená: žádná mimořádná péče, žádné další dokazování jen pro klid duše, žádná nová tabulka "stav pravidla". Záznam má být prostě dostupný, použitelný a kontrolovaný ve stejném rytmu jako ostatní stabilní pravidla.
+
+Převod do běžné údržby je malý, ale důležitý krok. Uzavírá období, kdy tým sledoval, jestli se pravidlo opravdu přeneslo z jedné karty do běžné práce. Teď už se záznam nemá ověřovat při každém setkání s tématem. Má se použít, pokud je potřeba, a zkontrolovat jen v běžném review indexu nebo při návratovém signálu.
+
+Začněte převodovou větou:
+
+```text
+Indexový záznam:
+
+Po druhé kontrole přechází do:
+
+Běžná údržba znamená:
+
+Mimořádná pozornost končí, protože:
+
+Znovu otevřít pouze pokud:
+```
+
+Tahle věta má být kratší než samotný záznam. Pokud z ní vznikne nový zápis na půl stránky, pravděpodobně ještě nemáte stabilní pravidlo, ale nedokončené vysvětlování. Běžná údržba nepotřebuje obhajobu. Potřebuje jasný stav.
+
+### Co se při převodu mění
+
+Při převodu do běžné údržby se mění hlavně režim pozornosti:
+
+- končí zvláštní sledování prvního a druhého použití,
+- zůstává kanonické místo a odkazy z pracovních míst,
+- další kontrola se váže na běžný review rytmus indexu,
+- návratový signál zůstává konkrétní,
+- dočasné poznámky z ověřování se mažou nebo zobecňují,
+- index neobsahuje historii kontrol, jen provozní minimum.
+
+Nemění se samotné pravidlo, pokud druhá kontrola neukázala nutnost lokální opravy. Převod není šance přepsat záznam do hezčí podoby jen proto, že se na něj zrovna díváte. Pokud funguje, nechte ho fungovat. Produktová disciplína někdy vypadá velmi podezřele jako nedělání dalších úprav. Ano, je to méně romantické než refaktor všech věcí. Taky je to často správně.
+
+Krátký převod může vypadat takto:
+
+```text
+Indexový záznam:
+Onboarding nesbírá obor podnikání.
+
+Po druhé kontrole přechází do:
+Běžné údržby týmového indexu.
+
+Běžná údržba znamená:
+Záznam se kontroluje při měsíčním review indexu nebo při návratovém signálu, ne při každé úpravě e-mailu.
+
+Mimořádná pozornost končí, protože:
+Záznam byl dvakrát použit bez autora původního rozhodnutí a stačil k rozhodnutí.
+
+Znovu otevřít pouze pokud:
+Tři relevantní onboardingy po sobě selžou proto, že bez oboru nejde doporučit první krok ani po výběru pracovního cíle.
+```
+
+To je celé. Záznam je stabilní, tým ví, kde ho najde, a další práce má jasnou bránu.
+
+### Praktický SaaS příklad
+
+Představte si SaaS, který v registraci nesbírá velikost firmy. Pravidlo vzniklo po několika návrzích na lepší segmentaci, prošlo stabilní kotvou, indexem a dvěma běžnými kontrolami. Při první kontrole pomohlo nepřidat otázku do registrační obrazovky. Při druhé kontrole pomohlo nepřidat stejnou otázku do onboardingového e-mailu.
+
+Teď je lákavé říct: "ještě to budeme chvíli sledovat". Jenže co přesně by se sledovalo? Jestli se někdo znovu zeptá na velikost firmy? Jestli obchod náhodou nebude chtít segment? Jestli marketing nepřijde s kampaní podle firmografie? To všechno jsou možné budoucí podněty, ale nejsou důvod držet mimořádný režim.
+
+Dobrý převod proto řekne:
+
+```text
+Záznam "registrace nesbírá velikost firmy" přechází do běžné údržby indexu. Další zvláštní kontrolu neplánujeme. Pravidlo se použije při úpravách registrace, onboardingu a sales karty; znovu se otevře jen při potvrzeném návratovém signálu. Dál nevzniká povinné pole, aktivní dobrovolná otázka, ruční odhad velikosti firmy, CRM štítek ani export podle velikostního segmentu.
+```
+
+Všimněte si, že převod neříká "nikdy se k tomu nevrátíme". Říká "nevracíme se bez důvodu". To je rozdíl mezi dogmatem a provozním pravidlem. Privacy-first přístup nemá bránit učení. Má bránit tomu, aby se učení maskovalo jako trvalé sbírání dat bez jasné otázky.
+
+### Co uklidit před běžnou údržbou
+
+Než záznam pustíte do běžné údržby, ukliďte ověřovací stopy. Hledejte hlavně:
+
+- pracovní poznámky z první a druhé kontroly,
+- dočasné exporty nebo seznamy příkladů,
+- duplicitní znění pravidla v šablonách,
+- staré komentáře typu "ověřit příště",
+- nejasné aliasy, které už nejsou potřeba,
+- odkazy na záznamy, které měly být jen přechodné.
+
+Úklid neznamená mazat historii bez rozmyslu. Znamená nechat v běžném provozu jen to, co člověk potřebuje k rozhodnutí. Pokud má starý podklad právní, bezpečnostní nebo provozní důvod zůstat, uložte ho jako archiv s účelem a retencí. Pokud ho držíte jen proto, že by se "možná někdy hodil", je to slabý důvod. Slabé důvody mají silný talent vyrábět datový nepořádek.
+
+Privacy-first převodová věta:
+
+```text
+Po převodu do běžné údržby nezůstává žádná dočasná evidence z kontrol; trvalý je jen indexový záznam, odkaz z pracovních míst a obecná poznámka o tom, jaká data díky pravidlu nevznikají.
+```
+
+Pokud něco zůstává, napište proč:
+
+```text
+Zůstává anonymizovaný příklad rozhodovací hrany, protože pomáhá rozlišit dobrovolný zákaznický kontext od aktivního sběru údaje. Příklad neobsahuje zákaznické jméno, citaci, screenshot ani identifikátor.
+```
+
+Tím se z úklidu nestane slepé mazání. Stane se z něj vědomá redukce datové stopy.
+
+### Karta převodu do běžné údržby
+
+```text
+Indexový záznam:
+
+Kanonické místo:
+
+Poslední ověřené použití:
+
+Výsledek druhé kontroly:
+
+Nový režim:
+- běžná údržba indexu
+- běžná údržba po lokální opravě
+- čeká na malé ověření opravené hrany
+- čeká na potvrzení úklidu obchvatu
+
+Co končí:
+
+Co zůstává:
+
+Kde jsou vstupní odkazy:
+
+Návratový signál:
+
+Jaká data, štítky, segmenty, exporty, tabulky nebo automatizace dál nevznikají:
+
+Jaké dočasné podklady se mažou nebo zobecňují:
+
+Co se záměrně neřeší:
+
+Vlastník:
+
+Datum převodu:
+
+Nejbližší běžné review:
+```
+
+Řádek "co se záměrně neřeší" je pojistka proti nenápadnému rozšíření práce. Může znít třeba:
+
+```text
+Neřešíme obecnou personalizační strategii onboardingu; převádíme pouze ověřené pravidlo o nesbírání velikosti firmy do běžné údržby.
+```
+
+Taková věta vypadá banálně, ale chrání rozsah. Bez ní se převod stabilního pravidla snadno promění v nový brainstorming. Brainstorming má svoje místo. Jen ne uvnitř úklidu pravidla, které už funguje.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte jednovětý závěr druhé kontroly.
+2. Minuta 2: rozhodněte nový režim záznamu.
+3. Minuta 3: napište, co končí a co zůstává.
+4. Minuta 4: potvrďte návratový signál a běžný review rytmus.
+5. Minuta 5: ukliďte dočasné podklady, kopie a náhradní evidence.
+6. Minuta 6: zapište, co se záměrně neřeší.
+
+Workshop má skončit tím, že záznam buď přechází do běžné údržby, nebo má jednu konkrétní překážku před převodem. Pokud překážek najdete pět, nezakládejte projekt na "stabilizaci indexu". Vyberte nejbližší blokující překážku a ostatní nechte zavřené, dokud se neukáže, že opravdu brání práci.
+
+### Checklist převodu do běžné údržby
+
+- Prošel záznam druhou kontrolou nebo jasným ekvivalentem v běžné práci?
+- Je vybraný nový režim záznamu?
+- Končí mimořádná pozornost, pokud záznam funguje samostatně?
+- Je jasné, kdy proběhne další běžné review?
+- Je návratový signál konkrétní a pořád platný?
+- Zůstává jedno kanonické místo a další výskyty jsou jen odkazy?
+- Nezůstaly v provozu duplicitní verze pravidla?
+- Jsou dočasné poznámky, seznamy, exporty a pracovní podklady smazané, anonymizované nebo uložené s účelem a retencí?
+- Je konkrétně pojmenované, jaká data, štítky, segmenty, exporty, tabulky nebo automatizace dál nevznikají?
+- Je zapsané, co se záměrně neřeší?
+- Ví vlastník, že záznam už není ve zvláštním ověřovacím režimu?
+- Dá se pravidlo použít při běžné práci bez otevření staré historie?
+
+Převod do běžné údržby je tiché vítězství. Pravidlo už nemusí dokazovat, že existuje. Prostě pomáhá lidem neotevírat zbytečnou práci a nevyrábět zbytečná data. A to je přesně ten druh provozní elegance, která se špatně prodává na slidech, ale výborně funguje v pondělí ráno.
+
 ## Pracovní log
 
+- 2026-07-06: Doplněna úvodní podkapitola o převodu ověřeného indexového záznamu do běžné údržby: nový režim záznamu, ukončení mimořádné pozornosti, praktický SaaS příklad, privacy-first úklid dočasných stop, karta, mini workshop a checklist.
 - 2026-07-06: Doplněna úvodní podkapitola o uzavření druhé kontroly indexového záznamu: uzavírací stavy, praktický SaaS příklad, propsání provozního minima zpět do indexu, privacy-first uzavření obchvatů, karta, mini workshop a checklist.
 - 2026-07-06: Doplněna úvodní podkapitola o druhé kontrole indexového záznamu v běžné práci: samostatné použití bez původní paměti, oprava vstupu, zpřesnění návratového signálu, zastavení obchvatů, privacy-first kontrola náhradní evidence, karta, mini workshop a checklist.
 - 2026-07-06: Doplněna úvodní podkapitola o uzavření první kontroly indexového záznamu: uzavírací stavy, praktický SaaS příklad, propsání zpět do indexu, privacy-first úklid náhradní evidence, karta, mini workshop a checklist.
