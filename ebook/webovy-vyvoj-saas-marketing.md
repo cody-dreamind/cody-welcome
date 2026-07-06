@@ -300695,8 +300695,235 @@ Pokud se během sedmi minut ukáže, že se řeší změněná nabídka, nový s
 
 Druhé běžné použití stabilní kotvy má být konečně trochu nudné. Pokud funguje, tým už nepotřebuje mimořádnou pozornost. Kotva se našla, použila, nepřidala data a práce pokračuje. V dobrém provozu je to malá výhra: méně debat, méně evidence, méně skrytých výjimek a víc klidu pro věci, které opravdu stojí za otevření.
 
+## Uzavření druhého běžného použití stabilní kotvy
+
+Druhé běžné použití stabilní kotvy nekončí tím, že někdo řekne "fungovalo". To je příjemný pocit, ale ještě ne provozní závěr. Uzavření má říct, jestli kotva zůstává v pasivním provozu, potřebuje poslední lokální opravu, má se přesunout ke správnému pracovnímu místu, nebo už neplatí a musí vzniknout nová návratová věta.
+
+Dobré uzavření je krátké. Nemá z druhého použití vyrábět další review, novou tabulku ani skrytou kontrolu. Právě naopak: pokud kotva prošla druhým použitím, má tým uklidit mimořádnou pozornost a nechat pravidlo pracovat v místě, kde se bude přirozeně používat příště.
+
+Začněte uzavírací větou:
+
+```text
+Druhé běžné použití stabilní kotvy skončilo stavem:
+
+Proto teď:
+
+Kotva zůstává:
+
+Nevzniká nová datová stopa:
+```
+
+Tahle věta odděluje výsledek od další práce. Pokud je výsledek "kotva je samostatná", další práce obvykle není žádná. Pokud je výsledek "poslední lokální zpřesnění", další práce je jedna malá úprava na stejném místě. Pokud je výsledek "špatné místo", další práce je přesun odkazu, ne přepis historie. Pokud kotva ztratila platnost, uzavření má staré pravidlo zastavit dřív, než začne překážet.
+
+### Čtyři uzavírací stavy
+
+Uzavření druhého použití vybírejte ze čtyř stavů:
+
+- Pasivní provoz: kotva se našla, použila a nepotřebuje další kontrolu.
+- Poslední lokální oprava: kotva funguje, ale doplní se alias, příklad, odkaz nebo jedna hraniční věta.
+- Přesun ke skutečnému pracovnímu místu: rozhodnutí je správné, ale lidé ho hledají jinde.
+- Nový výchozí bod: změnil se proces, segment nebo nabídka a starou kotvu už nelze poctivě natahovat.
+
+Pasivní provoz zapisujte bez triumfu i bez další agendy:
+
+```text
+Stav:
+Pasivní provoz.
+
+Závěr:
+Kotva byla použita podruhé bez čerstvé paměti a bez nové pomocné evidence. Zůstává u onboardingové šablony jako běžné pracovní pravidlo.
+
+Co se nemění:
+Nepřidáváme otázku na velikost týmu, ruční odhad, segment ani export.
+```
+
+Poslední lokální oprava má být opravdu poslední a lokální:
+
+```text
+Stav:
+Poslední lokální oprava.
+
+Závěr:
+Doplníme k pracovní větě alias "odhadovaný počet uživatelů". Rozsah kotvy, návratový signál i zavřená datová stopa se nemění.
+```
+
+Přesun ke skutečnému pracovnímu místu řešte jako navigační problém:
+
+```text
+Stav:
+Přesun ke skutečnému pracovnímu místu.
+
+Závěr:
+Kotva zůstává kanonicky stejná, ale odkaz bude u šablony prvního onboardingového e-mailu. Archivní záznam zůstává jen jako historie, nevzniká druhá kopie pravidla.
+```
+
+Nový výchozí bod je nejcitlivější stav. Neznamená to, že staré rozhodnutí bylo špatné. Znamená to, že dnešní realita je jiná:
+
+```text
+Stav:
+Nový výchozí bod.
+
+Závěr:
+Kotvu nebudeme dál upravovat, protože produkt nově pracuje s týmovým prostorem už při založení účtu. Staré pravidlo archivujeme a otevíráme novou návratovou větu k tomu, jaké údaje jsou pro týmový prostor opravdu nutné.
+```
+
+Codyho komentář: největší nebezpečí není slabá kotva. Největší nebezpečí je hrdinná kotva, kterou tým nechá bojovat ve válce, pro kterou nikdy nebyla napsaná. Staré pravidlo má mít důstojný konec, ne neomezený kariérní růst.
+
+### Praktický SaaS příklad
+
+Stabilní kotva říká:
+
+```text
+Registrace nesbírá velikost týmu ani počet budoucích uživatelů. Onboarding doporučuje další kroky podle aktuálních akcí v produktu, ne podle odhadu struktury zákazníka.
+```
+
+Druhé běžné použití přineslo podnět od customer success: ručně značit nové účty jako "pravděpodobně malý tým" nebo "pravděpodobně větší tým". Tým kotvu našel u onboardingové šablony a použil ji bez pomoci autora.
+
+Uzavření:
+
+```text
+Stav:
+Pasivní provoz.
+
+Co se stalo:
+Stejná datová stopa se vrátila jako ruční interní štítek. Kotva stačila k rozhodnutí bez nové debaty.
+
+Rozhodnutí:
+Štítek nezavádíme. Onboarding dál používá dokončený import, pozvaného kolegu a přímý požadavek na podporu jako viditelné signály, ne odhad velikosti týmu.
+
+Co uklízíme:
+Mažeme pracovní poznámku s návrhem štítků. Do backlogu nepřidáváme experiment, export ani další kontrolní úkol.
+
+Kde zůstává kotva:
+U onboardingové šablony a v kartě registračního formuláře.
+```
+
+Slabé uzavření by vypadalo takto:
+
+```text
+Zatím štítek nezavádíme, ale budeme sledovat, jestli by se hodil.
+```
+
+Tohle není uzavření. To je měkké otevření nové datové stopy bez vlastníka, účelu a konce. Pokud opravdu potřebujete něco sledovat, napište rozhodovací otázku, stop podmínku, retenci a způsob smazání. Pokud to napsat nechcete, nesledujte to. Ano, je to méně romantické než "budeme to vnímat". Ale provoz se nedá řídit pocity schovanými v šuplíku.
+
+### Co propsat zpět
+
+Po druhém použití se do kotvy propisuje jen minimum:
+
+- stav uzavření,
+- případný alias nebo odkaz na pracovní místo,
+- potvrzení zavřené datové stopy,
+- návratový signál, pokud se zpřesnil,
+- datum posledního běžného použití.
+
+Do kotvy nepište celý příběh druhého použití. Nepřenášejte jména zákazníků, citace z interních debat, exporty, screenshoty ani dlouhé vysvětlení. Kotva má být rychle použitelná. Hlubší historie může zůstat v archivu, pokud má důvod existovat, ale běžný člověk ji nemá potřebovat.
+
+Krátký zápis:
+
+```text
+Poslední použití:
+2026-07-06, customer success návrh ručního velikostního štítku.
+
+Stav:
+Kotva je v pasivním provozu.
+
+Zavřená datová stopa:
+Velikost týmu v registraci, ruční odhad velikosti týmu, segment podle odhadu a export účtů podle odhadu.
+
+Návratový signál:
+Téma otevřeme jen pokud onboarding opakovaně selže u konkrétního kroku, který nejde vyřešit podle viditelných akcí v produktu ani dobrovolného kontextu v hovoru.
+```
+
+Všimněte si, že návratový signál není "až budeme chtít personalizovat". To je skoro vždycky pravda a zároveň skoro nikdy nestačí. Dobrý signál říká, co konkrétně selhalo a proč současná datově střídmá cesta nestačí.
+
+### Privacy-first uzavření
+
+Uzavření druhého použití je poslední místo, kde se dá zachytit náhradní evidence. Během diskuse mohly vzniknout poznámky, návrhy štítků, dočasný seznam účtů nebo pracovní export. Pokud zůstanou ležet vedle kotvy, tým sice formálně nic nezavedl, ale datová stopa už existuje.
+
+Privacy-first uzavření proto odpoví na čtyři otázky:
+
+```text
+Vznikl během druhého použití dočasný seznam, export nebo pracovní poznámka s osobními či obchodními údaji?
+Má tento podklad ještě účel?
+Kdo ho smaže nebo anonymizuje?
+Kde zůstane pouze rozhodnutí bez zbytečných detailů?
+```
+
+Praktická věta:
+
+```text
+Dočasnou poznámku s příklady účtů mažeme. V kotvě zůstává jen obecný typ podnětu a rozhodnutí, že ruční velikostní štítek nevzniká.
+```
+
+Tohle je přesně ten malý provozní pohyb, který odlišuje privacy-first praxi od hezkého slibu. Nejde jen o to, co nepřidáte do formuláře. Jde i o to, co po rozhodování nenecháte ležet v interním bordelu. Pardon, v interní znalostní bázi s historickým významem.
+
+### Karta uzavření druhého použití kotvy
+
+```text
+Stabilní kotva:
+
+Druhý běžný podnět:
+
+Stav uzavření:
+- pasivní provoz
+- poslední lokální oprava
+- přesun ke skutečnému pracovnímu místu
+- nový výchozí bod
+
+Jednovětý závěr:
+
+Co se propisuje do kotvy:
+
+Co se nepropisuje do kotvy:
+
+Co zůstává zavřené:
+
+Vznikla během práce dočasná datová stopa?
+
+Co mažeme, anonymizujeme nebo necháváme jen obecně:
+
+Kde kotva zůstává:
+
+Návratový signál, pokud se mění:
+
+Vlastník pracovního místa:
+
+Datum uzavření:
+```
+
+Karta má chránit před dvěma chybami: před nekonečným servisováním pravidla a před tichým vznikem náhradní evidence. Pokud po vyplnění karty vzniknou tři nové úkoly, pravděpodobně jste už neuzavírali druhé použití, ale otevřeli nové téma. Vraťte se k jedné větě a zmenšete rozsah.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte druhý podnět a použitou kotvu.
+2. Minuta 2: vyberte jeden ze čtyř uzavíracích stavů.
+3. Minuta 3: napište jednovětý závěr.
+4. Minuta 4: určete, co se propíše do kotvy a co zůstane jen v historii.
+5. Minuta 5: smažte nebo anonymizujte dočasné podklady bez účelu.
+6. Minuta 6: uložte závěr u pracovního místa a ukončete mimořádnou pozornost.
+
+Pokud workshop neskončí za šest minut, není to automaticky problém. Je to ale signál. Buď kotva není dost jasná, nebo druhý podnět ve skutečnosti otevřel změnu kontextu. V obou případech nepokračujte tak, že budete přidávat další vrstvy kontroly. Rozhodněte, jestli děláte lokální opravu, nebo novou návratovou větu.
+
+### Checklist uzavření druhého použití kotvy
+
+- Je vybraný jeden ze čtyř uzavíracích stavů?
+- Je závěr napsaný jednou pracovní větou?
+- Pokud kotva funguje, nepřidáváme další pravidelnou kontrolu?
+- Pokud kotvu opravujeme, jde jen o alias, příklad, odkaz nebo hranici?
+- Pokud kotvu přesouváme, přesouváme odkaz a nevyrábíme kopii historie?
+- Pokud kotva ztratila platnost, otevíráme novou návratovou větu?
+- Je jasné, co zůstává zavřené?
+- Je potvrzené, že nevzniká odhad, štítek, segment, export, ruční seznam ani dočasná tabulka?
+- Jsou dočasné podklady s daty smazané, anonymizované nebo záměrně uložené s účelem a retencí?
+- Zůstává v kotvě jen použitelné minimum, ne celý příběh?
+- Ví vlastník pracovního místa, kde kotva po uzavření bydlí?
+- Je návratový signál pořád konkrétní a rozpoznatelný?
+
+Uzavření druhého použití stabilní kotvy je moment, kdy se pravidlo buď uklidní, nebo poctivě skončí. Obě možnosti jsou dobré. Špatná možnost je nechat ho napůl živé: trochu platí, trochu se obchází, trochu se sleduje a trochu nikdo neví proč. Stabilní kotva si zaslouží jasný stav. Tým taky.
+
 ## Pracovní log
 
+- 2026-07-06: Doplněna úvodní podkapitola o uzavření druhého běžného použití stabilní kotvy: uzavírací stavy, praktický SaaS příklad, propsání minima zpět do kotvy, privacy-first úklid dočasných stop, karta, mini workshop a checklist.
 - 2026-07-06: Doplněna úvodní podkapitola o druhém běžném použití stabilní kotvy: samostatnost bez čerstvé paměti, čtyři výsledné stavy, praktický SaaS příklad, privacy-first kontrola obchvatů, karta, mini workshop a checklist.
 - 2026-07-06: Doplněna úvodní podkapitola o uzavření prvního běžného použití stabilní kotvy: čtyři uzavírací stavy, praktický SaaS příklad, propsání zpět do kotvy, privacy-first úklid náhradní evidence, karta, mini workshop a checklist.
 - 2026-07-06: Doplněna úvodní podkapitola o prvním běžném použití stabilní kotvy: najitelnost, rozhodnutelnost, datová hranice, čtyři výsledky použití, privacy-first kontrola náhradní evidence, karta, mini workshop a checklist.
