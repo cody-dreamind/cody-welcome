@@ -302553,8 +302553,202 @@ Když se během workshopu objeví nová produktová otázka, nezakopávejte ji d
 
 Uzavření prvního běžného review je drobná, ale důležitá brzda proti provoznímu roztékání. Když review potvrdilo, že pravidlo funguje, nechte ho v běžné údržbě. Když ukázalo slabinu, opravte nejbližší větu nebo kotvu. A když ukázalo obchvat, zavřete ho dřív, než se z něj stane "dočasné" řešení s vlastním životem.
 
+## Druhé běžné review po převodu indexového záznamu do údržby
+
+Druhé běžné review po převodu indexového záznamu do údržby má jinou roli než první. První review ověřovalo, jestli záznam vůbec přežil první normální kontakt s prací. Druhé review už nemá dokazovat, že se pravidlo narodilo. Má ověřit, jestli se z něj nestává zvláštní výjimka, kterou tým pořád obchází, opečovává nebo vysvětluje.
+
+To je důležitý rozdíl. Pokud druhé review vypadá stejně jako první, pravděpodobně jste pravidlo nepřevedli do údržby, ale jen jste mu dali nové jméno. Běžná údržba znamená, že pravidlo pracuje v normálním rytmu: člověk ho najde, použije, zavře výsledek a nemusí kvůli tomu otevírat starou historii.
+
+Začněte větou:
+
+```text
+Druhé běžné review indexového záznamu děláme proto, abychom ověřili, jestli pravidlo funguje bez mimořádné péče:
+```
+
+Za ni napište jeden konkrétní pracovní průchod. Ne souhrn všeho, co se od minula stalo. Jedno review má držet jednu situaci, jinak se z něj rychle stane malá porada o celém procesu.
+
+Příklad:
+
+```text
+Druhé běžné review indexového záznamu děláme proto, abychom ověřili, jestli pravidlo funguje bez mimořádné péče:
+Nový člověk v obchodu zpracoval relevantní poptávku bez rozpočtu a měl podle indexu rozhodnout, zda použije volitelnou otázku v potvrzovacím e-mailu.
+```
+
+V té větě jsou tři dobré testy najednou: pravidlo použil někdo jiný, použil ho v běžné práci a nepotřeboval k tomu původní diskusi. Pokud kterýkoliv test chybí, druhé review pořád může být užitečné, ale jeho závěr musí být opatrnější.
+
+### Co má druhé review ověřit
+
+Druhé běžné review se ptejte na čtyři věci:
+
+- Přenositelnost: umí pravidlo použít i člověk, který nebyl u původního rozhodnutí?
+- Tichý provoz: nepotřebuje pravidlo mimořádné připomínání, dohled nebo vysvětlování?
+- Hranice rozsahu: zůstává jasné, co pravidlo dál neotevírá?
+- Datová střídmost: nevznikla kolem pravidla nová pomocná evidence?
+
+Přenositelnost je tvrdší test než pouhá najitelnost. Někdo může záznam najít, ale pořád nepoznat, co má udělat. Pokud se to stane, neopravujte celý index. Opravte konkrétní větu, která nepřežila přenos.
+
+Tichý provoz znamená, že pravidlo nepotřebuje člověka, který ho hlídá jako domácí projekt. Pokud někdo musí před každým použitím připomínat "nezapomeňte, že tohle jsme řešili", pravidlo ještě není v údržbě. Je v poloprovozu s lidskou páskou přes díru.
+
+Hranice rozsahu chrání původní neotevřený krok. U příkladu s rozpočtem to znamená, že volitelná otázka v e-mailu nezačne potichu tlačit na povinné pole ve formuláři, nový scoring nebo export. Druhé review má poznat, jestli se široký návrh nevrací zadními dveřmi.
+
+Datová střídmost je privacy-first kontrola v praxi. Nehledejte jen velké trackery a nové nástroje. Hledejte drobnosti: pomocný sloupec v tabulce, interní poznámku s kopiemi odpovědí, ruční tag v CRM, screenshot zákaznického e-mailu nebo neformální seznam "případů pro jistotu". Právě takové drobnosti umí přežít nejdéle, protože nikomu nestojí za to je uklidit. Gratulace, našli jsme nejtišší cestu k budoucímu chaosu.
+
+### Čtyři výsledky druhého review
+
+Druhé review zakončete jedním ze čtyř výsledků:
+
+- Převést do klidné údržby: pravidlo je přenositelné, funguje bez mimořádné péče a nevyrábí novou datovou stopu.
+- Poslední lokální dotažení: pravidlo drží, ale jedna kotva nebo věta ještě potřebuje drobnou úpravu.
+- Vrátit do prvního review režimu: druhé použití odhalilo, že pravidlo nebylo dostatečně stabilní.
+- Otevřít návratový signál: objevil se konkrétní důvod znovu posoudit původní hranici.
+
+`Převést do klidné údržby` je cílový stav. Neznamená to, že pravidlo už nikdy nikdo neuvidí. Znamená to, že další kontrola proběhne jen v běžném rytmu: při pravidelné údržbě indexu, při změně pracovního místa nebo při jasném návratovém signálu.
+
+`Poslední lokální dotažení` použijte, když je problém malý a přesně umístěný. Třeba nový člověk pravidlo našel, ale nevěděl, jestli volitelnou otázku použít před nebo po prvním ručním posouzení poptávky. Oprava je jedna věta u obchodního checklistu, ne nové školení a už vůbec ne nový dashboard.
+
+`Vrátit do prvního review režimu` je poctivý stav, když se ukáže, že pravidlo není přenositelné. Možná chybí kanonické místo, možná index používá interní zkratky, možná je návratový signál napsaný tak měkce, že si ho každý vyloží jinak. V tom případě se netvařte, že stačí klidná údržba. Nejprve znovu ověřte základní použitelnost.
+
+`Otevřít návratový signál` patří jen tam, kde se opravdu objevil důvod definovaný v záznamu nebo lepší nový důkaz. Obecná věta "možná bychom to měli přece jen měřit víc" nestačí. Pokud chcete sbírat víc dat, napište nejdřív přesnou otázku, kterou bez nich nejde rozhodnout.
+
+### Praktický SaaS příklad
+
+Indexový záznam:
+
+```text
+Pracovní věta:
+U relevantní B2B poptávky bez rozpočtu lze po prvním ručním posouzení poslat volitelnou otázku v potvrzovacím e-mailu. Formulář, scoring ani export rozpočtových údajů se nemění.
+
+Návratový signál:
+K povinnému poli se vrátíme pouze pokud volitelná otázka třikrát za sebou nepomůže kvalifikovat relevantní poptávku a ruční doptání zdrží další krok.
+```
+
+Druhé review:
+
+```text
+Pracovní průchod:
+Nový obchodník zpracoval relevantní poptávku bez rozpočtu.
+
+Použití:
+Našel indexový záznam přes obchodní checklist, provedl první ruční posouzení a poslal volitelnou otázku v potvrzovacím e-mailu.
+
+Výsledek:
+Zákazník odpověděl v e-mailovém vlákně. Nevznikl nový CRM atribut, tag ani pomocná tabulka.
+
+Závěr:
+Převést do klidné údržby.
+```
+
+Slabší výsledek:
+
+```text
+Pracovní průchod:
+Nový obchodník záznam našel, ale před použitím otázky si založil pomocný seznam poptávek bez rozpočtu.
+
+Výsledek:
+Pravidlo je použitelné, ale vznikl obchvat.
+
+Závěr:
+Poslední lokální dotažení. Do checklistu doplňujeme větu: "Poptávky bez rozpočtu neeviduj bokem; pokud otázku použiješ, stačí běžné obchodní vlákno a závěr v CRM poznámce bez nového atributu."
+
+Co zavíráme:
+Pomocný seznam mažeme a do údržby ho nepřenášíme.
+```
+
+Všimněte si velikosti opravy. Problém nebyl v produktu, marketingu ani formuláři. Problém byl v tom, že člověk chtěl mít jistotu a vytvořil si bokem malou evidenci. Oprava proto míří na jistotu: říká, kde má informace zůstat a co se nemá zakládat.
+
+### Privacy-first kontrola druhého review
+
+U druhého review už by mimořádné datové stopy neměly vznikat. Pokud vznikají, je to signál, že pravidlo není dost jasné nebo že lidé nevěří běžnému pracovnímu místu. Neřešte to moralizováním. Lidé si pomocné tabulky často nedělají proto, že chtějí porušovat pravidla. Dělají je proto, že systém neumí odpovědět na jejich praktickou nejistotu.
+
+Použijte tři otázky:
+
+```text
+Jakou nejistotu měla pomocná datová stopa vyřešit?
+
+Umí tuto nejistotu vyřešit lepší věta v indexu nebo u pracovního místa?
+
+Co se po review smaže, anonymizuje nebo vrátí do původního zdroje?
+```
+
+Třetí otázku nevynechávejte. Pokud pomocná stopa vznikla jen na pár hodin, je pořád dobré ji zavřít. Privacy-first provoz není jen o tom, kde běží servery a jaký nástroj používáte. Je i o tom, že po rozhodnutích nezůstává drobný datový prach v místech, kde ho nikdo nehledá a nikdo za něj nechce nést odpovědnost.
+
+Codyho komentář: největší kompliment pro dobré pravidlo je, že o něm tým nemluví. Ne proto, že by ho ignoroval, ale protože se dá použít bez dramatu. Druhé review má přesně tohle ověřit: jestli pravidlo přešlo z "pamatujete, jak jsme se domluvili" do "jasně, tady je věta, jedu podle ní".
+
+### Karta druhého běžného review
+
+```text
+Indexový záznam:
+
+Kanonické místo:
+
+Druhý běžný pracovní průchod:
+
+Použil pravidlo člověk bez původní historie?
+- ano
+- ne
+- jen s pomocí
+
+Fungovalo pravidlo bez mimořádné péče?
+- ano
+- ne, co bylo potřeba:
+
+Zůstala původní hranice zavřená?
+- ano
+- ne, co se začalo otevírat:
+
+Vznikla nová nebo náhradní datová stopa?
+- ne
+- ano, jaká a proč:
+
+Výsledek druhého review:
+- převést do klidné údržby
+- poslední lokální dotažení
+- vrátit do prvního review režimu
+- otevřít návratový signál
+
+Co upravujeme:
+
+Co zůstává zavřené:
+
+Co mažeme, anonymizujeme nebo vracíme do původního zdroje:
+
+Další běžný rytmus:
+
+Vlastník:
+```
+
+Karta má pomoct uzavřít druhé review, ne založit novou pravidelnou kontrolu. Pokud pravidlo obstálo, další rytmus může být prostě běžná údržba indexu. Pokud neobstálo, napište nejmenší opravu a vraťte se jen k místu, které selhalo.
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: vyberte jeden pracovní průchod, který proběhl po prvním review.
+2. Minuta 2: ověřte, jestli pravidlo použil člověk bez původní historie.
+3. Minuta 3: zkontrolujte, jestli nebyla potřeba mimořádná péče.
+4. Minuta 4: napište, co z původního rozsahu zůstalo zavřené.
+5. Minuta 5: najděte případné pomocné datové stopy nebo obchvaty.
+6. Minuta 6: vyberte jeden ze čtyř výsledků review.
+7. Minuta 7: zapište opravu, úklid a další běžný rytmus.
+
+Když se během workshopu objeví potřeba větší změny, nepřeskakujte rovnou do implementace. Porovnejte ji s návratovým signálem. Pokud signál neprošel, jde jen o podnět. Podnět může být dobrý, ale ještě nemá právo rozšiřovat pravidlo ani datovou stopu.
+
+### Checklist druhého běžného review
+
+- Ověřujeme druhý konkrétní pracovní průchod, ne celou historii pravidla?
+- Pravidlo použil někdo bez čerstvé paměti původního rozhodnutí?
+- Bylo pravidlo najitelné a rozhodnutelné bez mimořádného vysvětlování?
+- Zůstalo jasné, co pravidlo dál neotevírá?
+- Nevznikl pomocný seznam, tag, export, tabulka, segment nebo nový CRM atribut?
+- Pokud vznikl obchvat, víme, jakou nejistotu řešil?
+- Umíme nejistotu vyřešit jednou lokální větou nebo kotvou?
+- Je jasné, co se po review smaže, anonymizuje nebo vrátí do původního zdroje?
+- Vybrali jsme jeden výsledek review, ne neurčitý mezistav?
+- Další kontrola je opravdu součást běžného rytmu, nebo má konkrétní návratový signál?
+
+Druhé běžné review má pravidlu sundat pomocná kolečka. Pokud obstálo, převeďte ho do klidné údržby a přestaňte kolem něj chodit po špičkách. Pokud neobstálo, opravte nejbližší větu, kotvu nebo obchvat. Hlavně z něj nedělejte nový dlouhodobý program. Dobrý indexový záznam má zmenšovat počet věcí, které tým musí držet v hlavě.
+
 ## Pracovní log
 
+- 2026-07-06: Doplněna úvodní podkapitola o druhém běžném review po převodu indexového záznamu do údržby: přenositelnost bez původní historie, tichý provoz, privacy-first kontrola obchvatů, karta, mini workshop a checklist.
 - 2026-07-06: Doplněna úvodní podkapitola o uzavření prvního běžného review po převodu indexového záznamu do údržby: čtyři uzavírací stavy, praktický SaaS příklad, privacy-first vypnutí mimořádné datové stopy, karta, mini workshop a checklist.
 - 2026-07-06: Doplněna úvodní podkapitola o prvním běžném review po převodu indexového záznamu do údržby: kontrolní body, výsledky review, praktický SaaS příklad, zastavení obchvatů, privacy-first datový úklid, karta, mini workshop a checklist.
 - 2026-07-06: Doplněna úvodní podkapitola o převodu ověřeného indexového záznamu do běžné údržby: nový režim záznamu, ukončení mimořádné pozornosti, praktický SaaS příklad, privacy-first úklid dočasných stop, karta, mini workshop a checklist.
