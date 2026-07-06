@@ -303135,8 +303135,171 @@ Pokud se během workshopu objeví nový důvod pravidlo aktivně sledovat, nepř
 
 Převod do pasivní údržby je malý akt důvěry v vlastní provoz. Necháváte pravidlo žít tam, kde ho lidé potřebují, a zároveň mu berete zvláštní péči, kterou už si nezaslouží. Dobře udělaný převod sníží počet kontrol, zmenší datovou stopu a ponechá týmu jasnou cestu zpět, pokud se skutečně objeví návratový signál.
 
+## První pasivní kontrola indexového záznamu
+
+Pasivní údržba neznamená, že se záznam už nikdy nepotká s realitou. Znamená jen, že ho nevyvoláváte na schůzku bez důvodu. První pasivní kontrola přijde až ve chvíli, kdy se indexový záznam přirozeně objeví při běžné práci: někdo použije obchodní checklist, upravuje šablonu e-mailu, kontroluje onboarding nebo řeší situaci, ke které se pravidlo vztahuje.
+
+Cílem první pasivní kontroly není dokazovat, že staré rozhodnutí bylo geniální. To je příjemné ego cvičení, ale do provozu patří jen v opravdu malých dávkách. Cílem je ověřit, že záznam pořád funguje bez mimořádné péče, bez nové evidence a bez návratu k celé původní debatě.
+
+Začněte jednou otázkou:
+
+```text
+Pomohl pasivně udržovaný indexový záznam vyřešit dnešní pracovní situaci bez nového vysvětlování, nové kontroly a nové datové stopy?
+```
+
+Pokud odpověď zní ano, neotevírejte nový cyklus. Zapište krátký závěr a nechte záznam v pasivní údržbě. Pokud odpověď zní ne, nejdřív určete, co přesně selhalo. Mohla selhat najitelnost, srozumitelnost, návratový signál, pracovní místo nebo datová střídmost. Každé selhání chce jinou reakci.
+
+### Co při první pasivní kontrole sledovat
+
+Sledujte jen pět věcí:
+
+- Najitelnost: našel člověk záznam z běžného pracovního místa?
+- Použitelnost: uměl podle něj udělat další krok bez původní historie?
+- Hranice: zůstalo jasné, co se dál neotevírá?
+- Návratový signál: neobjevil se důvod pravidlo znovu aktivně posoudit?
+- Datová stopa: nevznikla pomocná evidence jen proto, že si někdo nebyl jistý?
+
+To je celé. První pasivní kontrola nesmí být tajně třetí review. Pokud začnete znovu procházet všechny staré příklady, porovnávat původní argumenty a vyrábět novou tabulku výskytů, pasivní režim se právě rozpadl. V takové chvíli to pojmenujte: buď se objevil návratový signál, nebo záznam nebyl dost dobrý pro samostatné použití.
+
+Praktická hranice:
+
+```text
+Pasivní kontrola končí ve chvíli, kdy víme, zda záznam pomohl dnešní situaci vyřešit bez nové mimořádné péče.
+```
+
+Všechno navíc patří do samostatného návratu, lokální opravy nebo dalšího běžného review. Nepřidávejte to do stejné kontroly jen proto, že už jste záznam otevřeli.
+
+### Čtyři výsledky první pasivní kontroly
+
+První pasivní kontrola má čtyři rozumné výsledky:
+
+- Zůstává pasivní: záznam byl nalezen, použit a nezpůsobil novou datovou stopu.
+- Lokální oprava: záznam funguje, ale potřebuje drobné zpřesnění věty, odkazu nebo názvu v indexu.
+- Návrat do aktivní údržby: záznam opakovaně nejde použít bez vysvětlování nebo začal vytvářet obchvaty.
+- Otevření návratového signálu: dnešní situace splnila podmínku, která byla v záznamu výslovně uvedená.
+
+Rozdíl mezi lokální opravou a návratem do aktivní údržby je v rozsahu. Lokální oprava mění nejbližší pracovní místo: například přidá lepší název odkazu v obchodním checklistu nebo přepíše jednu nejasnou větu v indexu. Aktivní údržba znamená, že pravidlo jako celek už není dost samostatné a potřebuje nový krátký cyklus ověření.
+
+Otevření návratového signálu je jiný stav. Tam nejde o kvalitu záznamu, ale o realitu, která se změnila. Pokud jste si dřív řekli, že se k povinnému poli pro rozpočet vrátíte až po třech po sobě jdoucích kvalifikačních potížích, a přesně to se stalo, neřešte kosmetiku indexu. Otevřete návrat podle domluvené hranice.
+
+### Praktický SaaS příklad
+
+Pasivně udržovaný záznam:
+
+```text
+U relevantní B2B poptávky bez rozpočtu nejdřív použijeme volitelnou otázku v potvrzovacím e-mailu. Formulář, scoring ani export rozpočtových údajů se nemění. K povinnému poli se vrátíme pouze pokud volitelná otázka třikrát za sebou nepomůže kvalifikovat relevantní poptávku.
+```
+
+Dnešní situace:
+
+```text
+Přišla relevantní poptávka bez rozpočtu. Obchodník našel pravidlo v checklistu, použil volitelnou otázku a poptávku kvalifikoval bez nového pole ve formuláři.
+```
+
+Závěr první pasivní kontroly:
+
+```text
+Záznam zůstává v pasivní údržbě: dnešní poptávka šla kvalifikovat podle obchodního checklistu, návratový signál nenastal a nevzniká žádná nová evidence rozpočtů.
+```
+
+To je ideální výsledek. Krátký, nudný, užitečný. Záznam obstál a tým se nemusí tvářit, že z toho vznikla nová strategie.
+
+Slabší situace:
+
+```text
+Obchodník pravidlo nenašel v checklistu, ale našel ho až přes starý komentář v rozhodovacím logu. Poptávku kvalifikoval správně, ale cestou si založil dočasný seznam "poptávky bez rozpočtu".
+```
+
+Tady není potřeba otevírat celou otázku rozpočtu. Je potřeba lokální oprava: přidat čitelný odkaz do obchodního checklistu, smazat dočasný seznam a do indexu napsat lepší název pracovní situace. Pokud se stejný problém zopakuje při dalším použití, záznam už možná nepatří do pasivní údržby.
+
+### Privacy-first kontrola
+
+První pasivní kontrola je dobrá chvíle ověřit, že pasivní režim opravdu snížil datovou stopu. Ptejte se:
+
+```text
+Vzniklo při použití záznamu něco, co jsme při převodu do pasivní údržby výslovně nechtěli držet?
+```
+
+Typické varovné signály:
+
+- někdo si založil pomocnou tabulku případů,
+- v CRM vznikl nový štítek bez jasného účelu,
+- do interní poznámky se začaly kopírovat části zákaznických odpovědí,
+- tým začal ručně počítat výskyty bez stop pravidla,
+- záznam se začal šířit do dalších míst, kde se reálně nepoužívá.
+
+Privacy-first reakce má být malá a konkrétní. Pokud pomocná stopa vznikla jen z nejistoty, smažte ji a opravte větu nebo odkaz, který nejistotu způsobil. Pokud stopa opravdu pomáhá, už nejde o pasivní údržbu bez další datové vrstvy. Pak potřebuje účel, vlastníka, retenci a místo v datové mapě. Ano, i malá tabulka umí být provozní závazek. Tabulky se tváří nevinně, dokud jich není třicet a nikdo neví, kdo je má mazat.
+
+Codyho komentář: dobrý pasivní záznam snižuje potřebu improvizace. Pokud lidé kolem něj začnou vyrábět obchvaty, není to důkaz, že potřebujete víc sledování. Často to znamená, že pracovní věta není dost blízko místu, kde se rozhoduje. Opravte místo použití dřív než začnete sbírat další data.
+
+### Karta první pasivní kontroly
+
+```text
+Indexový záznam:
+
+Kanonické pracovní místo:
+
+Dnešní běžná situace:
+
+Našel člověk záznam bez původní historie?
+
+Pomohl záznam rozhodnout další krok?
+
+Zůstalo jasné, co se dál neotevírá?
+
+Nastal návratový signál?
+
+Vznikla nová pomocná datová stopa?
+
+Výsledek kontroly:
+- zůstává pasivní
+- lokální oprava
+- návrat do aktivní údržby
+- otevřený návratový signál
+
+Jednovětý závěr:
+
+Co upravujeme, pokud něco:
+
+Co mažeme, anonymizujeme nebo výslovně nezakládáme:
+
+Kde je závěr uložený:
+
+Vlastník:
+```
+
+Karta je záměrně krátká. Pokud ji vyplňujete déle než několik minut, kontrola se zvětšila. Zastavte se a vyberte správný režim práce. Pasivní kontrola má potvrdit samostatnost pravidla nebo ukázat nejbližší slabé místo, ne znovu vyšetřovat celou historii.
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: pojmenujte dnešní běžnou situaci, ve které se záznam objevil.
+2. Minuta 2: ověřte, odkud člověk záznam našel.
+3. Minuta 3: řekněte, jestli záznam pomohl rozhodnout další krok.
+4. Minuta 4: zkontrolujte hranici zavřeného rozsahu a návratový signál.
+5. Minuta 5: najděte případné nové pomocné datové stopy.
+6. Minuta 6: vyberte jeden ze čtyř výsledků kontroly.
+7. Minuta 7: napište jednovětý závěr a uložte ho k pracovnímu místu.
+
+Pokud z workshopu vypadnou tři úkoly, zmenšete je na jeden. První pasivní kontrola má opravit nejbližší překážku samostatného použití. Ostatní poznámky patří do backlogu jen tehdy, když mají vlastní důvod a vlastní hranici.
+
+### Checklist první pasivní kontroly
+
+- Proběhla kontrola při přirozené práci, ne jako další plánované review ze zvyku?
+- Víme, jak člověk záznam našel?
+- Šel záznam použít bez původní debaty?
+- Zůstalo jasné, co se dál neotevírá?
+- Ověřili jsme, zda nastal návratový signál?
+- Vybrali jsme jeden ze čtyř výsledků kontroly?
+- Pokud jde o lokální opravu, je opravdu lokální?
+- Pokud vznikla pomocná datová stopa, víme, zda ji mažeme, anonymizujeme, nebo formálně přiznáváme?
+- Nevznikl nový kontrolní rytmus jen proto, že jsme měli záznam otevřený?
+- Je jednovětý závěr uložený u pracovního místa, kde se záznam příště použije?
+
+První pasivní kontrola má tým naučit, že klidový provoz není zapomnění. Je to schopnost potkat starší rozhodnutí v běžné práci, použít ho bez dramatu a zase ho odložit. Když záznam obstojí, nechte ho pasivní. Když neobstojí, opravte nejbližší slabé místo nebo otevřete skutečný návratový signál. Mezi tím není potřeba stavět malý chrám procesní nejistoty.
+
 ## Pracovní log
 
+- 2026-07-06: Doplněna úvodní podkapitola o první pasivní kontrole indexového záznamu: najitelnost, použitelnost, hranice zavřeného rozsahu, návratový signál, privacy-first kontrola pomocných datových stop, karta, mini workshop a checklist.
 - 2026-07-06: Doplněna úvodní podkapitola o převodu indexového záznamu do pasivní údržby: podmínky převodu, praktický SaaS příklad, vypnutí dočasných podpor, privacy-first úklid datových stop, karta, mini workshop a checklist.
 - 2026-07-06: Doplněna úvodní podkapitola o uzavření druhého běžného review po převodu indexového záznamu do údržby: uzavírací stavy, praktický SaaS příklad, propsání zpět do indexu, privacy-first úklid pomocných stop, karta, mini workshop a checklist.
 - 2026-07-06: Doplněna úvodní podkapitola o druhém běžném review po převodu indexového záznamu do údržby: přenositelnost bez původní historie, tichý provoz, privacy-first kontrola obchvatů, karta, mini workshop a checklist.
