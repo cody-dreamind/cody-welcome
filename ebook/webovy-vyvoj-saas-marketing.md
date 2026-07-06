@@ -302951,8 +302951,193 @@ Když šest minut nestačí, pravděpodobně neuzavíráte review, ale znovu ote
 
 Uzavření druhého review má indexový záznam ztišit. Po dobrém uzavření pravidlo nezmizí, jen přestane vyžadovat mimořádnou pozornost. Tým ví, kde ho najde, co podle něj udělá, co dál neotevře a jak pozná skutečný návratový signál. To je přesně ten druh provozní dospělosti, který nevypadá efektně na poradě, ale dělá produkt klidnějším každý týden.
 
+## Převod indexového záznamu do pasivní údržby
+
+Když indexový záznam přežil druhé běžné review, je čas přestat se k němu chovat jako k čerstvé změně. Pasivní údržba neznamená, že záznam zahodíte. Znamená to, že už kolem něj nedržíte zvláštní rytmus, zvláštní poznámky ani zvláštní pozornost. Zůstává v pracovním indexu, ale kontroluje se jen tehdy, když na něj přirozeně přijde řada nebo když se objeví návratový signál.
+
+Tohle je důležitý moment pro malé SaaS týmy. Mnoho firem umí změnu otevřít, několik ji umí ověřit, ale málo jich umí změnu pustit z ruky. Výsledkem je provoz plný polozavřených pravidel, která už fungují, ale pořád mají vlastní štítky, připomínky a pomocné tabulky. Pasivní údržba je způsob, jak říct: pravidlo stačí, zbytek podpěr může pryč.
+
+Začněte převodovou větou:
+
+```text
+Indexový záznam převádíme do pasivní údržby, protože:
+```
+
+Za dvojtečku napište jeden konkrétní důvod. Ne pocit, ne shrnutí celé historie, ne pochvalu procesu. Důvod má ukázat, že záznam obstál bez mimořádné péče.
+
+Příklad:
+
+```text
+Indexový záznam převádíme do pasivní údržby, protože:
+Dva běžné průchody potvrdily, že obchodník najde pravidlo bez původní historie, použije volitelnou otázku v e-mailu a nevytvoří novou evidenci rozpočtových údajů.
+```
+
+Tahle věta má dvě výhody. Ukazuje, proč už pravidlo nepotřebuje speciální dohled, a zároveň chrání původně zavřený rozsah. Formulář, scoring ani export se nevrací jen proto, že se k tématu občas někdo mentálně vrátí.
+
+### Co musí být pravda před převodem
+
+Do pasivní údržby převádějte jen záznam, který splňuje čtyři podmínky:
+
+- je dohledatelný z běžného pracovního místa,
+- je použitelný bez původní debaty,
+- má jasný návratový signál,
+- nevyrábí novou pomocnou datovou stopu.
+
+Pokud jedna z podmínek chybí, nejste připraveni na pasivní údržbu. Neznamená to velký problém. Znamená to jen, že převod by byl předčasný. Opravte nejbližší slabé místo a převod udělejte až potom.
+
+Dohledatelnost znamená, že člověk nemusí vědět, jak se změna jmenovala v době vzniku. Má ji najít přes pracovní situaci. U obchodního příkladu to není "rozhodnutí o rozpočtu", ale třeba "relevantní B2B poptávka bez rozpočtu".
+
+Použitelnost bez původní debaty znamená, že záznam nepoužívá interní zkratky, jména lidí ani historické odkazy jako hlavní vysvětlení. Věta "jak jsme řešili s Petrem v červnu" není pravidlo. Je to pozvánka hledat člověka místo rozhodnutí.
+
+Návratový signál musí být dost konkrétní, aby ho tým poznal i po delší době. "Až to bude dávat smysl" není signál. "Pokud volitelná otázka třikrát za sebou nepomůže kvalifikovat relevantní poptávku a ruční doptání zdrží další krok" signál je.
+
+Datová stopa je poslední brána. Jestli pravidlo funguje jen s pomocnou tabulkou, tajným tagem nebo ručním exportem, nejde do pasivní údržby. Nejdřív rozhodněte, zda je ta stopa opravdu potřebná. Pokud ano, musí mít účel, vlastníka a místo. Pokud ne, smažte ji.
+
+### Praktický SaaS příklad
+
+Před převodem:
+
+```text
+Indexový záznam:
+U relevantní B2B poptávky bez rozpočtu lze po prvním ručním posouzení poslat volitelnou otázku v potvrzovacím e-mailu. Formulář, scoring ani export rozpočtových údajů se nemění.
+
+Návratový signál:
+K povinnému poli se vrátíme pouze pokud volitelná otázka třikrát za sebou nepomůže kvalifikovat relevantní poptávku a ruční doptání zdrží další krok.
+
+Stav:
+Po druhém běžném review potvrzeno pro klidnou údržbu.
+```
+
+Převod do pasivní údržby:
+
+```text
+Nový stav:
+Pasivní údržba.
+
+Provozní věta:
+Pravidlo zůstává v obchodním checklistu a v indexu rozhodnutí. Nekontrolujeme ho samostatně; vracíme se k němu jen při běžné údržbě obchodního checklistu nebo při návratovém signálu.
+
+Co vypínáme:
+Samostatné review pravidla, dočasný štítek "ověřit rozpočet", pracovní poznámku k druhému review a případné pomocné kopie příkladů.
+
+Co zůstává:
+Jedna pracovní věta, jeden návratový signál a odkaz z obchodního checklistu.
+```
+
+Tady je podstatné slovo "jedna". Jedna pracovní věta stačí. Jeden návratový signál stačí. Jeden odkaz z pracovního místa stačí. Pokud potřebujete tři připomínky a dvě náhradní cesty, záznam ještě není pasivní.
+
+Slabší převod by vypadal takto:
+
+```text
+Nový stav:
+Pasivní údržba, ale ponecháváme měsíční kontrolu rozpočtových poptávek.
+```
+
+To není pasivní údržba. To je aktivní kontrola s tišším názvem. Buď je měsíční kontrola opravdu potřeba, a pak ji pojmenujte jako běžné review s účelem, nebo není potřeba a nemá zůstat. Polovičatá věta jen schová práci na později.
+
+### Co odstranit při převodu
+
+Převod do pasivní údržby má po sobě uklidit podpěry, které byly užitečné během ověření, ale škodí v klidovém provozu.
+
+Typicky odstraňte:
+
+- dočasné štítky typu "ověřit", "sledovat", "po druhém review",
+- pomocné seznamy případů,
+- kopie zákaznických odpovědí v pracovních poznámkách,
+- interní komentáře, které vysvětlují starou debatu,
+- připomínky v kalendáři, pokud nemají běžný rytmus,
+- duplicitní odkazy na stejný záznam z míst, kde se pravidlo nepoužívá.
+
+Neodstraňujte kanonické místo. Pasivní údržba není zapomenutí. Záznam má zůstat dohledatelný, jen bez mimořádného rámusu okolo.
+
+Dobrá otázka zní:
+
+```text
+Kdyby nový člověk za tři měsíce řešil stejnou pracovní situaci, co opravdu potřebuje najít?
+```
+
+Většinou odpověď není "celý příběh rozhodnutí". Je to jedna pracovní věta, hranice zavřeného rozsahu a návratový signál.
+
+### Privacy-first převod
+
+Privacy-first hodnota pasivní údržby je v tom, že po ověření nezůstává zbytečná datová vrstva. Během review je někdy rozumné mít pracovní poznámku, krátký příklad nebo kontrolní stopu. Po převodu už ale musí obstát otázka: proč by to mělo zůstat?
+
+Použijte čtyři kontrolní věty:
+
+```text
+Tento údaj ponecháváme, protože:
+
+Jeho účel je:
+
+Jeho vlastníkem je:
+
+Smažeme nebo znovu zkontrolujeme ho při:
+```
+
+Pokud některou větu neumíte dokončit, údaj do pasivní údržby nepatří. Zobecněte příklad, smažte kopii nebo vraťte informaci do původního zdroje. U B2B poptávky často stačí, že konkrétní odpověď zůstává v e-mailovém vlákně nebo v běžné CRM poznámce. Index nepotřebuje opis odpovědi, screenshot ani seznam firem.
+
+Codyho komentář: pasivní údržba je moment, kdy se ukáže, jestli tým opravdu věří vlastnímu pravidlu. Pokud po dvou úspěšných použitích pořád sbíráte pomocná data, pravděpodobně neřešíte analytiku, ale nejistotu. Nejistotu neopraví další sloupec. Opraví ji jasnější věta, lepší pracovní místo nebo poctivé přiznání, že návratový signál už nastal.
+
+### Karta převodu do pasivní údržby
+
+```text
+Indexový záznam:
+
+Kanonické místo:
+
+Proč převádíme do pasivní údržby:
+
+Potvrzené běžné průchody:
+
+Nová provozní věta:
+
+Návratový signál:
+
+Co zůstává v pracovním místě:
+
+Co zůstává výslovně zavřené:
+
+Co vypínáme:
+
+Jaké dočasné datové stopy mažeme, anonymizujeme nebo vracíme do původního zdroje:
+
+Kdy se záznam znovu kontroluje:
+
+Vlastník:
+```
+
+Karta má být krátká. Pokud se nevejde na jednu obrazovku, pravděpodobně do ní přenášíte historii místo provozního minima. Historie může zůstat v archivu rozhodnutí, pokud má důvod. Pasivní údržba ale potřebuje jen to, co pomůže při další práci.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte závěr druhého běžného review.
+2. Minuta 2: ověřte čtyři podmínky převodu: dohledatelnost, použitelnost, návratový signál a datovou střídmost.
+3. Minuta 3: napište jednu provozní větu pro pasivní údržbu.
+4. Minuta 4: označte, co zůstává zavřené.
+5. Minuta 5: vypněte dočasné štítky, připomínky a pomocné odkazy.
+6. Minuta 6: smažte, anonymizujte nebo vraťte do původního zdroje datové stopy z review.
+
+Pokud se během workshopu objeví nový důvod pravidlo aktivně sledovat, nepřevádějte ho do pasivní údržby. Buď otevřete návratový signál, nebo pojmenujte nové běžné review. Pasivní režim má být pravdivý, ne jen uklidňující.
+
+### Checklist převodu do pasivní údržby
+
+- Máme dokončené druhé běžné review?
+- Je důvod převodu napsaný jednou konkrétní větou?
+- Najde záznam člověk bez znalosti původní debaty?
+- Umí podle něj udělat další krok bez mimořádného vysvětlování?
+- Je návratový signál konkrétní a pořád platný?
+- Zůstává jasné, co pravidlo dál neotevírá?
+- Vypnuli jsme samostatné review, pokud už nemá účel?
+- Odstranili jsme dočasné štítky, připomínky, pomocné seznamy a duplicitní odkazy?
+- Nezůstaly v indexu konkrétní zákaznické detaily nebo kopie pracovních příkladů?
+- Má každá ponechaná datová stopa účel, vlastníka a místo další kontroly?
+- Ví tým, kdy se k záznamu vrátit a kdy ho nechat být?
+
+Převod do pasivní údržby je malý akt důvěry v vlastní provoz. Necháváte pravidlo žít tam, kde ho lidé potřebují, a zároveň mu berete zvláštní péči, kterou už si nezaslouží. Dobře udělaný převod sníží počet kontrol, zmenší datovou stopu a ponechá týmu jasnou cestu zpět, pokud se skutečně objeví návratový signál.
+
 ## Pracovní log
 
+- 2026-07-06: Doplněna úvodní podkapitola o převodu indexového záznamu do pasivní údržby: podmínky převodu, praktický SaaS příklad, vypnutí dočasných podpor, privacy-first úklid datových stop, karta, mini workshop a checklist.
 - 2026-07-06: Doplněna úvodní podkapitola o uzavření druhého běžného review po převodu indexového záznamu do údržby: uzavírací stavy, praktický SaaS příklad, propsání zpět do indexu, privacy-first úklid pomocných stop, karta, mini workshop a checklist.
 - 2026-07-06: Doplněna úvodní podkapitola o druhém běžném review po převodu indexového záznamu do údržby: přenositelnost bez původní historie, tichý provoz, privacy-first kontrola obchvatů, karta, mini workshop a checklist.
 - 2026-07-06: Doplněna úvodní podkapitola o uzavření prvního běžného review po převodu indexového záznamu do údržby: čtyři uzavírací stavy, praktický SaaS příklad, privacy-first vypnutí mimořádné datové stopy, karta, mini workshop a checklist.
