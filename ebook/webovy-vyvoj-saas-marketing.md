@@ -304016,8 +304016,207 @@ Pokud se během workshopu objeví spor o to, jestli pravidlo opravdu obstálo, p
 
 Převod do dlouhodobého klidu je dobrý konec dlouhé smyčky. Tým nejdřív neotevřel zbytečnou práci, potom rozhodnutí ověřil v běžném provozu, převedl ho do indexu, nechal ho dvakrát pasivně obstát a nakonec ho zmenšil na praktické minimum. Výsledek není heroická kapitola. Je to tiché pravidlo, které šetří práci, data i pozornost. Přesně takhle má dobrý provoz vypadat většinu času: nenápadně správně.
 
+## První přirozené použití záznamu po dlouhodobém klidu
+
+Dlouhodobý klid neznamená, že záznam zmizel. Znamená, že ho tým přestal držet pod zvláštním dohledem. První skutečný test přijde až ve chvíli, kdy se záznam po nějaké době přirozeně potká s prací: přijde podobná poptávka, někdo upravuje šablonu, nový člověk hledá pravidlo, nebo se rozhoduje o formuláři, který kdysi hrozil zbytečným rozšířením.
+
+V takové chvíli není cílem znovu otevřít celou historii. Cílem je ověřit, jestli dlouhodobě klidný záznam pořád funguje jako pracovní minimum. Má být najitelný, srozumitelný a dost silný na to, aby zabránil návratu původního širokého nápadu bez nového důkazu.
+
+Začněte větou:
+
+```text
+Záznam po dlouhodobém klidu používáme, protože se přirozeně objevil tento pracovní okamžik:
+```
+
+Potom doplňte konkrétní situaci:
+
+```text
+Záznam po dlouhodobém klidu používáme, protože přišla relevantní B2B poptávka bez rozpočtu a obchod potřebuje rozhodnout, jestli stačí volitelná otázka v potvrzovacím e-mailu.
+```
+
+Tahle věta chrání rozsah. Neřešíte znovu obecnou otázku "máme chtít rozpočet dřív?". Řešíte dnešní práci: jedna poptávka, jedno pravidlo, jeden nejbližší krok.
+
+### Tři tiché kontroly
+
+Při prvním přirozeném použití po dlouhodobém klidu stačí tři kontroly:
+
+- Záznam je dohledatelný v místě, kde člověk pracuje.
+- Rozhodovací minimum stačí bez čtení celé historie.
+- Původní zavřený rozsah se neotevírá bez návratového signálu.
+
+Dohledatelnost je praktická věc. Pokud záznam žije v indexu, ale člověk pracuje v e-mailové šabloně, musí tam být aspoň krátká kotva nebo odkaz. Pokud musí někdo prohledávat staré logy, dlouhodobý klid se změnil v archivní schovávanou. To není tragédie, ale je to lokální slabina.
+
+Rozhodovací minimum znamená, že člověk uvidí, kdy pravidlo použít, co udělat jako první, co dál neotevírat a kdy se k tématu vrátit. Nemá potřebovat původní debatu ani osobu, která pravidlo kdysi formulovala. Historie může zůstat dostupná, ale nesmí být běžným návodem.
+
+Zavřený rozsah je ochrana proti návratu starého pohodlného řešení. Když se pravidlo po dlouhé době použije, může někdo snadno říct: "Když se to zase stalo, dejme to konečně do formuláře." Možná jednou ano. Ale ne jen proto, že se záznam přirozeně použil. Potřebujete návratový signál, který byl v pravidle domluvený, nebo nový důkaz, který ho vědomě nahrazuje.
+
+Codyho komentář: dlouhý klid je zrádný v tom, že staré nápady začnou znít čerstvě. Mozek si řekne "tohle jsme přece řešili dávno, možná už nastal čas". Možná. Nebo se jen vrátila stejná situace, pro kterou už máte funkční pravidlo. Ne všechno, co se vrátí po pauze, je signál. Někdy je to jen práce v normálním rytmu.
+
+### Čtyři výsledky prvního přirozeného použití
+
+První přirozené použití po dlouhodobém klidu může skončit čtyřmi rozumnými stavy:
+
+- Použít beze změny: záznam byl najitelný, rozhodovací minimum stačilo a původní rozsah zůstal zavřený.
+- Doplnit kotvu: pravidlo platí, ale chybělo u místa, kde se rozhodovalo.
+- Zpřesnit minimum: pravidlo bylo dohledatelné, ale rozhodovací věta nebyla dost jasná.
+- Otevřít návrat: nastal konkrétní návratový signál a je potřeba nový malý krok.
+
+`Použít beze změny` je nejlepší výsledek. Zapište jednu krátkou stopu, pokud je to užitečné, a nechte záznam dál v klidu. Nepřidávejte nové review jen proto, že se pravidlo po delší době použilo. Dlouhodobý klid má unést běžný kontakt s realitou.
+
+`Doplnit kotvu` je lokální oprava umístění. Pokud člověk pravidlo nenašel u šablony, doplňte odkaz nebo jednu větu k šabloně. Nezakládejte nový dokument a neotevírejte celý proces. Problém nebyl ve strategii, ale v tom, že správná věta nebyla po ruce.
+
+`Zpřesnit minimum` použijte, když je pravidlo blízko práce, ale moc měkké. Věta "použijeme citlivý postup" je hezká, ale slabá. Věta "u relevantní poptávky bez rozpočtu pošli volitelnou otázku v potvrzovacím e-mailu; formulář ani scoring se nemění" je pracovní návod.
+
+`Otevřít návrat` je na místě jen tehdy, když se splnil návratový signál. Například volitelná otázka třikrát za sebou nepomohla kvalifikovat relevantní poptávku. Pak už nejde o běžné použití záznamu. Jde o návrat k tématu a potřebuje novou malou hranici.
+
+### Praktický SaaS příklad
+
+Záznam v dlouhodobém klidu:
+
+```text
+Kdy použít:
+Relevantní B2B poptávka přišla bez rozpočtu.
+
+První krok:
+Použít volitelnou otázku v potvrzovacím e-mailu.
+
+Co dál neotevírat:
+Povinné pole pro rozpočet, lead scoring, export rozpočtových údajů a samostatný dashboard výskytů.
+
+Návratový signál:
+Tři relevantní poptávky za sebou nejdou kvalifikovat ani po volitelné otázce.
+```
+
+První přirozené použití:
+
+```text
+Situace:
+Po dvou měsících přišla relevantní poptávka bez rozpočtu.
+
+Použití:
+Obchod našel pravidlo u potvrzovací šablony a poslal volitelnou otázku.
+
+Výsledek:
+Zákazník odpověděl, další krok šel navrhnout a formulář zůstal beze změny.
+
+Závěr:
+Záznam funguje beze změny. Neplánujeme nové review.
+```
+
+Slabší použití:
+
+```text
+Situace:
+Nový člověk z obchodu věděl, že pravidlo existuje, ale nenašel ho u šablony.
+
+Výsledek:
+Musel otevřít index a starší poznámku.
+
+Lokální oprava:
+K potvrzovací šabloně doplňujeme jednu větu a odkaz na indexový záznam.
+
+Co neotevíráme:
+Formulář, scoring, export ani nový kontrolní rytmus.
+```
+
+V obou případech se práce drží nejbližšího místa. Dobré použití nepotřebuje novou agendu. Slabé použití potřebuje lepší kotvu. Ani jedno samo o sobě neznamená, že se starý široký návrh vrátil do hry.
+
+### Privacy-first kontrola po klidu
+
+Po delším klidu bývá největší riziko v nenápadném obnovení datové stopy. Někdo si začne dělat pomocný seznam, protože "už se to zase objevilo". Někdo přidá ruční štítek. Někdo zkopíruje zákaznickou odpověď do poznámek. Všechno může vypadat nevinně, ale právě tak vznikají dlouhé ocasy dat, které nikdo aktivně nepotřebuje.
+
+Položte tři otázky:
+
+```text
+Stačilo pravidlo použít bez nové evidence?
+
+Vznikl při použití údaj mimo původní pracovní místo?
+
+Pokud vznikl, má jasný účel a konec?
+```
+
+Pokud pravidlo fungovalo, žádná nová evidence nemá vzniknout. Obchodní informace zůstává v běžném obchodním vlákně nebo v systému, který ji už oprávněně drží. Do indexu nebo checklistu patří jen zobecněná pracovní věta, ne kopie konkrétních zákaznických detailů.
+
+Příklad privacy-first závěru:
+
+```text
+Pravidlo po dlouhodobém klidu stačilo použít bez nové evidence. Rozpočtový kontext zůstává v obchodní komunikaci, do CRM nepřidáváme nový atribut a do indexu neukládáme konkrétní odpověď zákazníka.
+```
+
+Pokud se návratový signál opravdu splnil, i tehdy začínejte nejmenším možným sběrem. Nejprve ověřte, jestli stačí upravit pracovní větu, šablonu nebo obchodní follow-up. Nové pole, export nebo tracker mají být poslední možnost, ne přirozená reakce na to, že se staré téma znovu mihlo kolem stolu.
+
+### Karta prvního přirozeného použití po klidu
+
+```text
+Záznam v dlouhodobém klidu:
+
+Kanonické pracovní místo:
+
+Přirozená situace použití:
+
+Kdo záznam použil:
+
+Byl záznam dohledatelný v pracovním místě?
+- ano
+- ne
+- jen přes hlubší historii
+
+Stačilo rozhodovací minimum?
+- ano
+- ne, chyběla kotva
+- ne, věta byla nejasná
+- ne, nastal návratový signál
+
+Co se opravdu udělalo:
+
+Co zůstalo výslovně zavřené:
+
+Vznikla nová datová stopa?
+
+Privacy-first závěr:
+
+Výsledek:
+- použít beze změny
+- doplnit kotvu
+- zpřesnit minimum
+- otevřít návrat
+
+Kde je závěr uložený:
+
+Vlastník:
+```
+
+Kartu použijte jen při prvním přirozeném kontaktu po delším klidu nebo při prvním použití novým týmem. Není to záznam pro každou běžnou poptávku. Pokud byste ji vyplňovali pořád dokola, dlouhodobý klid jste právě proměnili v pravidelný proces převlečený za opatrnost.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: pojmenujte přirozenou situaci použití.
+2. Minuta 2: ověřte, jestli byl záznam dostupný u pracovního místa.
+3. Minuta 3: přečtěte rozhodovací minimum a řekněte, jestli stačilo.
+4. Minuta 4: potvrďte, co zůstává zavřené.
+5. Minuta 5: zkontrolujte, zda nevznikla nová datová stopa.
+6. Minuta 6: vyberte jeden ze čtyř výsledků a uložte případnou lokální opravu.
+
+Když se během šesti minut objeví debata o větší změně, zastavte ji na návratovém signálu. Pokud signál nastal, otevřete návrat. Pokud nenastal, větší změna nemá patřit do prvního přirozeného použití po klidu.
+
+### Checklist prvního přirozeného použití po klidu
+
+- Popisujeme konkrétní pracovní situaci, ne obecný pocit, že se téma vrátilo?
+- Byl záznam dohledatelný tam, kde se opravdu pracovalo?
+- Stačilo rozhodovací minimum bez čtení celé historie?
+- Zůstal původní široký návrh výslovně zavřený?
+- Pokud chyběla kotva, opravujeme jen nejbližší pracovní místo?
+- Pokud byla věta nejasná, zpřesňujeme ji bez rozšíření rozsahu?
+- Pokud otevíráme návrat, splnil se konkrétní návratový signál?
+- Nevznikl nový atribut, export, tracker, pomocný seznam ani kopie zákaznických detailů bez jasného účelu?
+- Je privacy-first závěr zapsaný jako konkrétní datové rozhodnutí?
+- Nezakládáme nový kontrolní rytmus jen proto, že se záznam po klidu použil?
+
+První přirozené použití po dlouhodobém klidu má potvrdit, že pravidlo opravdu patří do běžného provozu. Když funguje, nechte ho být. Když chybí kotva, přidejte kotvu. Když je věta slabá, zpřesněte větu. A když nastal skutečný návratový signál, otevřete malý návrat vědomě. Všechno ostatní je jen stará chuť dělat víc práce, než situace potřebuje.
+
 ## Pracovní log
 
+- 2026-07-06: Doplněna úvodní podkapitola o prvním přirozeném použití záznamu po dlouhodobém klidu: tiché kontroly, výsledné stavy, praktický SaaS příklad, privacy-first práce bez nové evidence, karta, mini workshop a checklist.
 - 2026-07-06: Doplněna úvodní podkapitola o převodu indexového záznamu do dlouhodobého klidu: rozhodovací minimum, praktický SaaS příklad, privacy-first úklid historických stop, karta, mini workshop a checklist.
 - 2026-07-06: Doplněna úvodní podkapitola o uzavření druhé pasivní kontroly indexového záznamu: čtyři uzavírací stavy, praktické SaaS varianty, privacy-first úklid pomocných stop, karta, mini workshop a checklist.
 - 2026-07-06: Doplněna úvodní podkapitola o druhé pasivní kontrole indexového záznamu: najitelnost bez čerstvé paměti, samostatné rozhodnutí, stabilní hranice, privacy-first úklid pomocných stop, karta, mini workshop a checklist.
