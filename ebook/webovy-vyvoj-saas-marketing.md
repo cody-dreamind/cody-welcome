@@ -303457,8 +303457,209 @@ Když se během pěti minut objeví potřeba širší debaty, pravděpodobně ne
 
 Uzavření první pasivní kontroly má zanechat jednoduchý stav: pravidlo zůstává v klidu, dostává drobnou lokální opravu, vrací se do aktivní údržby, nebo otevírá skutečný návrat. Všechno ostatní je šum. A šum je v privacy-first provozu drahý, protože často končí jako další data, další vysvětlování a další místo, které někdo jednou bude muset uklidit.
 
+## Druhá pasivní kontrola indexového záznamu
+
+Druhá pasivní kontrola indexového záznamu má ověřit něco jemnějšího než první. První kontrola říká: záznam přežil první přirozené použití po převodu do klidu. Druhá kontrola říká: záznam nezačal po čase znovu vyžadovat zvláštní péči, obchvaty ani nové datové stopy.
+
+To je malý rozdíl na papíře a velký rozdíl v provozu. První použití často ještě nese čerstvou paměť. Někdo ví, kde záznam hledat, protože se o něm nedávno mluvilo. Druhé pasivní použití už má být obyčejnější: člověk narazí na pracovní situaci, najde pravidlo přes běžné místo, rozhodne další krok a po použití nezaloží novou evidenci "pro jistotu".
+
+Začněte jednou větou:
+
+```text
+Druhou pasivní kontrolu děláme proto, že se indexový záznam znovu přirozeně objevil při běžné práci:
+```
+
+Za ni napište konkrétní situaci. Nehledejte všechny případy od minula. Druhá pasivní kontrola není audit historie. Je to krátké ověření, že pasivní záznam pořád funguje v reálném pracovním místě.
+
+Příklad:
+
+```text
+Druhou pasivní kontrolu děláme proto, že se indexový záznam znovu přirozeně objevil při běžné práci:
+Nový obchodník po měsíci použil obchodní checklist u relevantní poptávky bez rozpočtu a měl rozhodnout, zda stačí volitelná otázka v potvrzovacím e-mailu.
+```
+
+Věta obsahuje tři užitečné brzdy: časový odstup, běžné pracovní místo a konkrétní rozhodnutí. Pokud místo toho napíšete "zkontrolovat, jestli pravidlo pořád dává smysl", je to moc široké. Taková věta skoro prosí o novou debatu.
+
+### Co druhá pasivní kontrola ověřuje
+
+Při druhé pasivní kontrole se ptejte na pět věcí:
+
+- Najitelnost bez čerstvé paměti: našel člověk záznam z běžného pracovního místa?
+- Samostatné rozhodnutí: uměl podle záznamu udělat další krok bez vysvětlování?
+- Stabilní hranice: zůstalo jasné, co se dál neotevírá?
+- Žádný návratový signál: nenastala podmínka, kvůli které se má pravidlo znovu aktivně posoudit?
+- Žádná nová pomocná stopa: nevznikl seznam, tag, export, kopie odpovědí nebo nová metrika?
+
+Najitelnost bez čerstvé paměti je nejdůležitější test. Pokud člověk pravidlo najde jen proto, že mu ho někdo připomněl v chatu, záznam sice existuje, ale není pasivně použitelný. Oprava ale pořád nemusí být velká. Často stačí lepší název odkazu, věta v checklistu nebo přesun záznamu blíž k místu rozhodnutí.
+
+Samostatné rozhodnutí znamená, že záznam nevyžaduje překlad. Pokud v něm stojí "postup podle posledního review" a člověk musí hledat, co to znamenalo, záznam není pracovní. Je to odkaz na archeologii. Přepište ho do přítomného času: co udělat, co neotevírat a kdy se vrátit.
+
+Stabilní hranice chrání původní neotevřený rozsah. U rozpočtu to znamená, že druhá pasivní kontrola nesmí potichu otevřít povinné pole, scoring, export ani novou analytiku jen proto, že se téma znovu objevilo. Téma se objevilo, protože práce pokračuje. To samo o sobě není důkaz, že se má pravidlo rozšířit.
+
+### Čtyři výsledky druhé pasivní kontroly
+
+Druhá pasivní kontrola má čtyři praktické výsledky:
+
+- Zůstává pasivní: záznam byl nalezen, použit a nevyrobil novou datovou stopu.
+- Poslední lokální zpřesnění: záznam funguje, ale jedna věta, kotva nebo název ještě brzdí samostatné použití.
+- Návrat do aktivní údržby: záznam už podruhé potřeboval pomoc, obchvat nebo vysvětlení.
+- Otevření návratového signálu: dnešní situace splnila nebo jasně nahradila původní podmínku návratu.
+
+`Zůstává pasivní` je dobrý konec. Zapište jednovětý závěr k pracovnímu místu a nechte záznam být. Nepřidávejte třetí kontrolu jen proto, že druhá dopadla dobře. Dvě obyčejná použití bez dramatu jsou signál, že pravidlo má zůstat obyčejné.
+
+`Poslední lokální zpřesnění` použijte, když problém sedí na jednom místě. Třeba název odkazu "Rozpočet" byl moc obecný a člověk nevěděl, jestli jde o ceník, poptávkový formulář nebo obchodní e-mail. Oprava je přejmenovat odkaz na "Poptávka bez rozpočtu" a doplnit jednu větu. Ne nový workshop, ne nový dashboard, ne malý festival procesního nadšení.
+
+`Návrat do aktivní údržby` použijte, pokud se slabina opakuje. Když první pasivní kontrola potřebovala lokální opravu a druhá znovu ukáže, že lidé pravidlo nenajdou, nechte pasivní režim stranou. Krátce ověřte, kde má pravidlo opravdu bydlet, kdo ho používá a jestli pořád odpovídá dnešní práci.
+
+`Otevření návratového signálu` patří jen skutečnému důkazu. Pokud záznam říká, že se k povinnému poli vrátíte po třech neúspěšných kvalifikacích za sebou, a přesně to se stalo, otevřete návrat. Pokud se jen někdo cítí nejistě, ještě to návrat není. Nejistotu řešte větou, ne novým sběrem dat.
+
+### Praktický SaaS příklad
+
+Pasivní záznam:
+
+```text
+U relevantní B2B poptávky bez rozpočtu nejdřív použijeme volitelnou otázku v potvrzovacím e-mailu. Formulář, scoring ani export rozpočtových údajů se nemění. K povinnému poli se vrátíme pouze pokud volitelná otázka třikrát za sebou nepomůže kvalifikovat relevantní poptávku.
+```
+
+Druhá pasivní situace:
+
+```text
+Po měsíci přišla další relevantní poptávka bez rozpočtu. Obchodník našel pravidlo v checklistu, poslal volitelnou otázku po ručním posouzení a poptávku kvalifikoval v běžném e-mailovém vlákně.
+```
+
+Závěr:
+
+```text
+Záznam zůstává pasivní: druhé přirozené použití proběhlo z obchodního checklistu, původní rozsah formuláře a scoringu zůstává zavřený a nevzniká nová evidence rozpočtů.
+```
+
+Slabší varianta:
+
+```text
+Druhá pasivní situace:
+Obchodník pravidlo našel, ale až po dotazu kolegovi, protože odkaz v checklistu se jmenoval jen "Rozpočet".
+
+Výsledek:
+Poptávku šlo kvalifikovat správně a bez nových datových polí, ale najitelnost bez čerstvé paměti selhala.
+
+Závěr:
+Poslední lokální zpřesnění. Odkaz v obchodním checklistu přejmenováváme na "Poptávka bez rozpočtu" a doplňujeme větu, že formulář, scoring ani export se nemění.
+```
+
+Ještě slabší varianta:
+
+```text
+Druhá pasivní situace:
+Obchodník pravidlo nenašel ani po lokální opravě z první pasivní kontroly a založil si pomocnou tabulku poptávek bez rozpočtu.
+
+Závěr:
+Návrat do aktivní údržby. Pasivní režim zatím nefunguje, protože záznam opakovaně potřebuje obchvat. Pomocnou tabulku mažeme a ověřujeme nové kanonické místo pravidla.
+```
+
+Všimněte si, že ani třetí varianta automaticky neotevírá povinné pole ve formuláři. Selhala použitelnost záznamu, ne nutně původní produktové rozhodnutí. To jsou dvě různé věci. Pokud je smícháte, budete opravovat formulář ve chvíli, kdy máte opravit cestu k pravidlu.
+
+### Privacy-first kontrola
+
+Druhá pasivní kontrola je dobrý test, jestli se privacy-first úklid stal zvykem, nebo jen jednorázovou akcí při prvním review. Ptejte se:
+
+```text
+Vzniklo od první pasivní kontroly něco, co pravidlo nepotřebuje k rozhodnutí?
+```
+
+Hledejte hlavně malé stopy:
+
+- ruční seznam případů,
+- štítek v CRM bez jasného účelu,
+- kopie zákaznických odpovědí v interní poznámce,
+- screenshoty e-mailů v úkolu,
+- pomocnou metriku bez stop podmínky,
+- nový odkaz na starý detailní zápis, který obsahuje víc dat, než další člověk potřebuje.
+
+Privacy-first reakce má mít tři kroky:
+
+```text
+Nejdřív určete, jakou nejistotu stopa řešila.
+
+Potom opravte nejbližší pracovní větu nebo kotvu.
+
+Nakonec stopu smažte, anonymizujte nebo vraťte do původního zdroje.
+```
+
+Pokud pomocná stopa opravdu musí zůstat, už to není neškodná poznámka. Dejte jí účel, vlastníka, místo a retenci. Jinak se jen tváříte, že máte pasivní pravidlo, zatímco vedle něj roste druhý systém bez odpovědnosti.
+
+Codyho komentář: druhá pasivní kontrola je trochu nevděčná práce. Když dopadne dobře, skoro nic se nestane. Právě proto je cenná. Dobrý provoz často nevypadá jako velký zásah, ale jako schopnost říct: pravidlo funguje, data nepřibyla, nic dalšího neotevíráme. Ano, zní to nudně. Nuda je v provozu často drahá věc, jen v dobrém slova smyslu.
+
+### Karta druhé pasivní kontroly
+
+```text
+Indexový záznam:
+
+Kanonické pracovní místo:
+
+Druhá pasivní situace:
+
+Jak člověk záznam našel:
+
+Šel záznam použít bez čerstvé paměti?
+
+Pomohl rozhodnout další krok?
+
+Zůstalo jasné, co se dál neotevírá?
+
+Nastal návratový signál?
+
+Vznikla od první pasivní kontroly nová pomocná datová stopa?
+
+Výsledek kontroly:
+- zůstává pasivní
+- poslední lokální zpřesnění
+- návrat do aktivní údržby
+- otevření návratového signálu
+
+Jednovětý závěr:
+
+Co upravujeme, pokud něco:
+
+Co zůstává výslovně zavřené:
+
+Co mažeme, anonymizujeme nebo vracíme do původního zdroje:
+
+Kde je závěr uložený:
+
+Vlastník:
+```
+
+Karta má být lehčí než původní rozhodnutí. Pokud do ní přepisujete starou historii, zákaznické detaily nebo dlouhé zdůvodnění, vraťte se k otázce: co další člověk potřebuje při příštím použití? Většinou stačí pracovní věta, hranice, návratový signál a krátký závěr.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: pojmenujte druhou pasivní situaci jednou větou.
+2. Minuta 2: ověřte, jak člověk záznam našel.
+3. Minuta 3: řekněte, jestli záznam pomohl rozhodnout bez čerstvé paměti.
+4. Minuta 4: zkontrolujte hranici zavřeného rozsahu a návratový signál.
+5. Minuta 5: najděte nové pomocné datové stopy od první pasivní kontroly.
+6. Minuta 6: vyberte výsledek a napište jednovětý závěr k pracovnímu místu.
+
+Když workshop otevře víc než jednu opravu, vyberte tu nejbližší místu použití. Ostatní poznámky nechte stranou, dokud nemají vlastní návratový signál. Druhá pasivní kontrola má držet klid, ne vyrábět další frontu práce.
+
+### Checklist druhé pasivní kontroly
+
+- Vznikla kontrola z přirozené práce, ne ze zvyku kontrolovat?
+- Je jasné, proč jde o druhou pasivní kontrolu a ne o nové review?
+- Našel člověk záznam z kanonického pracovního místa?
+- Šlo pravidlo použít bez původní historie a bez vysvětlování?
+- Zůstalo jasné, co se dál neotevírá?
+- Ověřili jsme, zda nenastal návratový signál?
+- Nevznikla nová pomocná tabulka, tag, export, atribut, kopie odpovědí nebo metrika?
+- Pokud vznikla pomocná stopa, víme, jakou nejistotu řešila?
+- Opravujeme nejbližší pracovní větu nebo kotvu místo širšího procesu?
+- Je jednovětý závěr uložený tam, kde se pravidlo příště použije?
+
+Druhá pasivní kontrola má potvrdit, že záznam opravdu umí stárnout v klidu. Pokud obstál, nechte ho být. Pokud potřebuje poslední zpřesnění, udělejte ho přesně tam, kde vzniklo tření. Pokud znovu selhal, vraťte ho do aktivní údržby bez dramatu. A pokud nastal návratový signál, otevřete návrat poctivě. Klidový režim není slib, že se nic nezmění. Je to slib, že změnu otevřete až ve chvíli, kdy má důvod.
+
 ## Pracovní log
 
+- 2026-07-06: Doplněna úvodní podkapitola o druhé pasivní kontrole indexového záznamu: najitelnost bez čerstvé paměti, samostatné rozhodnutí, stabilní hranice, privacy-first úklid pomocných stop, karta, mini workshop a checklist.
 - 2026-07-06: Doplněna úvodní podkapitola o uzavření první pasivní kontroly indexového záznamu: čtyři uzavírací stavy, praktické příklady, privacy-first úklid pomocných stop, karta, mini workshop a checklist.
 - 2026-07-06: Doplněna úvodní podkapitola o první pasivní kontrole indexového záznamu: najitelnost, použitelnost, hranice zavřeného rozsahu, návratový signál, privacy-first kontrola pomocných datových stop, karta, mini workshop a checklist.
 - 2026-07-06: Doplněna úvodní podkapitola o převodu indexového záznamu do pasivní údržby: podmínky převodu, praktický SaaS příklad, vypnutí dočasných podpor, privacy-first úklid datových stop, karta, mini workshop a checklist.
