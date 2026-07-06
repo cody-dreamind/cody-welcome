@@ -301104,8 +301104,232 @@ Pokud se workshop zasekne na tom, jak pravidlo pojmenovat, nepřidávejte dalš�
 
 Převod stabilní kotvy do týmového indexu je malý, ale důležitý provozní krok. Dělá z dobrého rozhodnutí dostupné pravidlo. Když se povede, další člověk nemusí znovu objevovat, proč se něco nesbírá, neměří nebo neposílá do dalšího nástroje. Prostě najde pravidlo, použije ho a pokračuje. To je přesně ten typ nenápadné efektivity, který nevypadá efektně v prezentaci, ale zachraňuje spoustu času a ještě víc dat.
 
+## První kontrola indexového záznamu v běžné práci
+
+Indexový záznam není hotový ve chvíli, kdy se hezky zapíše. Hotový je až tehdy, když ho někdo najde při běžné práci a použije bez toho, aby musel volat autora, otevírat starou historii nebo si domýšlet, co vlastně znamená "znovu otevřít pouze pokud". První kontrola indexového záznamu proto nezkoumá, jestli byl převod formálně správný. Zkoumá, jestli záznam opravdu pomohl rozhodnout.
+
+Tahle kontrola má být nenápadná. Nezakládejte kvůli ní nový audit indexu, speciální meeting ani tabulku s dvaceti sloupci. Stačí využít první přirozenou situaci, kdy někdo pracuje na stejném formuláři, onboardingové šabloně, obchodní kartě nebo marketingové stránce. Pokud záznam najde, pochopí a použije, index funguje. Pokud ne, opravte nejmenší část navigace nebo formulace.
+
+Začněte jednou kontrolní větou:
+
+```text
+Při dnešní práci na:
+
+Člověk hledal:
+
+Indexový záznam pomohl takto:
+
+Proto teď:
+```
+
+Tahle věta drží kontrolu u reality. Neptá se, jestli se záznam líbí. Ptá se, jestli v konkrétní práci snížil nejistotu, zkrátil rozhodnutí nebo zabránil opakovanému sběru dat.
+
+### Co při první kontrole sledovat
+
+První kontrola má čtyři jednoduché otázky:
+
+- Najitelnost: narazil člověk na záznam tam, kde ho přirozeně hledal?
+- Srozumitelnost: pochopil pravidlo bez znalosti staré historie?
+- Rozhodnutelnost: stačilo pravidlo k rozhodnutí, co teď udělat nebo neudělat?
+- Datová hranice: bylo jasné, jaká data, štítky, exporty nebo nástroje díky pravidlu nevznikají?
+
+Pokud odpověď na všechny čtyři otázky zní ano, nedělejte další práci. Zapište první použití a nechte index žít. Pokud jedna odpověď zní ne, opravte jen tu část. Slabá najitelnost se řeší odkazem nebo aliasem. Slabá srozumitelnost se řeší jednou pracovní větou. Slabá rozhodnutelnost se řeší zpřesněním návratového signálu. Slabá datová hranice se řeší konkrétním výčtem toho, co nevzniká.
+
+Nesnažte se při první kontrole záznam "vylepšit pro všechny budoucí případy". To je nejrychlejší cesta k tomu, aby se z indexu stal malý e-book uvnitř e-booku. Index má být vstup do rozhodnutí, ne náhradní archiv.
+
+### Praktický SaaS příklad
+
+V indexu je záznam:
+
+```text
+Pracovní místo:
+Registrace a první onboarding SaaS účtu.
+
+Pravidlo:
+Nesbíráme velikost týmu ani odhad počtu budoucích uživatelů; doporučení v onboardingu stavíme na viditelných akcích v produktu a dobrovolném kontextu.
+
+Díky tomuto pravidlu nevzniká:
+Povinný údaj o velikosti týmu, interní odhad velikosti zákazníka, segment podle domněnky ani export účtů podle odhadu.
+```
+
+Při úpravě onboardingového e-mailu někdo navrhne přidat větu "napište nám, kolik lidí bude nástroj používat, a my vám doporučíme nastavení". Tohle není stejné jako povinné pole v registraci, ale je to stejná datová logika: ptáme se na odhad, který možná nepotřebujeme.
+
+Dobrá první kontrola vypadá takto:
+
+```text
+Při dnešní práci na:
+Prvním onboardingovém e-mailu.
+
+Člověk hledal:
+Zda se smí ptát na velikost týmu jako dobrovolný kontext.
+
+Indexový záznam pomohl takto:
+Ukázal, že velikost týmu je zavřený rozsah i jako ruční odhad. E-mail proto nemá žádat velikost týmu, ale nabídnout pomoc podle konkrétního cíle nastavení.
+
+Proto teď:
+Do e-mailu doplníme otázku "co chcete nastavit jako první" a velikost týmu dál nesbíráme.
+```
+
+Všimněte si, že kontrola neotevřela nový výzkum personalizace. Jen použila existující pravidlo v podobné situaci. To je přesně účel indexu: přenést rozhodnutí do práce dřív, než vznikne nová malá datová odbočka.
+
+Slabá kontrola by zněla:
+
+```text
+Záznam jsme našli, ale raději budeme sledovat, jestli se lidé na velikost týmu sami neptají.
+```
+
+Tohle je mlha. Pokud lidé píšou sami od sebe, stačí dobrovolný kontext v komunikaci. Pokud se chcete aktivně ptát, potřebujete nový důvod a novou hranici. "Raději budeme sledovat" často znamená "necháme vznikat poznámky, které nikdo nepojmenoval jako datovou stopu". A přesně takhle se do privacy-first provozu vplíží malé věci, které později nikdo neumí uklidit.
+
+### Čtyři výsledné stavy kontroly
+
+Po první kontrole vyberte jeden ze čtyř stavů:
+
+- Index funguje: záznam byl najitelný, srozumitelný a rozhodl práci.
+- Chybí vstupní odkaz: pravidlo je dobré, ale člověk ho hledal jinde.
+- Chybí pracovní jazyk: záznam je přesný, ale moc interní nebo historický.
+- Chybí rozhodovací hrana: pravidlo nestačí k rozlišení dnešní situace od zavřeného rozsahu.
+
+Stav "index funguje" zapisujte velmi krátce:
+
+```text
+Stav:
+Index funguje.
+
+Závěr:
+Pravidlo bylo nalezeno při úpravě onboardingového e-mailu a stačilo k rozhodnutí nepřidávat otázku na velikost týmu.
+
+Úprava:
+Žádná.
+```
+
+"Chybí vstupní odkaz" neznamená, že máte kopírovat záznam:
+
+```text
+Stav:
+Chybí vstupní odkaz.
+
+Závěr:
+Člověk hledal pravidlo u onboardingového e-mailu. Doplníme tam odkaz na kanonickou kartu registračního formuláře, ne druhou verzi pravidla.
+```
+
+"Chybí pracovní jazyk" je signál k překladu, ne k rozšíření:
+
+```text
+Stav:
+Chybí pracovní jazyk.
+
+Závěr:
+Název "velikostní segmentace" nahradíme názvem "registrace nesbírá velikost týmu", protože tak téma lidé opravdu hledají.
+```
+
+"Chybí rozhodovací hrana" je nejcitlivější stav:
+
+```text
+Stav:
+Chybí rozhodovací hrana.
+
+Závěr:
+Záznam jasně zavírá povinné pole, ale není jasné, jestli zavírá i dobrovolnou otázku v onboardingovém e-mailu. Doplníme hraniční větu: aktivně se na velikost týmu neptáme ani dobrovolně; použijeme ji jen pokud ji zákazník sám uvede jako součást cíle nebo omezení.
+```
+
+Taková úprava je pořád lokální. Neotevírá nový výzkum, nepřidává tracking a neposouvá pravidlo do širší personalizační strategie. Jen říká, jak se pravidlo používá v dnešní práci.
+
+Codyho komentář: dobrý index není chytrý proto, že umí všechno vysvětlit. Je chytrý proto, že člověka rychle zastaví před zbytečnou prací. Pokud záznam potřebuje tři odstavce obhajoby pokaždé, když ho někdo použije, není to index. Je to zakuklený memoár rozhodnutí.
+
+### Privacy-first kontrola
+
+První kontrola indexového záznamu má jednu speciální privacy-first otázku:
+
+```text
+Nevznikla při hledání nebo použití pravidla náhradní evidence?
+```
+
+Náhradní evidence může být dočasný seznam účtů, poznámka s příklady zákazníků, ruční štítky v CRM, screenshoty z administrace nebo nový sloupec v tabulce "jen pro orientaci". Pokud díky indexu rozhodnete, že novou datovou stopu nezavedete, ale během rozhodování si vytvoříte pomocný seznam se stejnými údaji, výsledek je poloviční. Formulář je čistý, ale provoz má nový stín.
+
+Správný závěr proto přidá jednu větu:
+
+```text
+Během kontroly nevznikl žádný seznam účtů, štítek, export ani pomocná evidence; zůstává jen obecný záznam o použití pravidla.
+```
+
+Nebo pokud něco vzniklo:
+
+```text
+Dočasnou poznámku se třemi příklady mažeme po zápisu obecného závěru. Do indexu se nepřenáší zákaznické údaje ani konkrétní citace.
+```
+
+Tohle není puntičkářství. Je to provozní hygiena. Privacy-first přístup se často nerozbije velkým rozhodnutím, ale sérií malých "jen si to poznačíme". Každé "jen" si zaslouží vlastní účel, retenci a konec. Pokud je nemá, smažte ho.
+
+### Karta první kontroly indexového záznamu
+
+```text
+Indexový záznam:
+
+Kanonické místo:
+
+Dnešní pracovní situace:
+
+Kdo záznam použil nebo kde byl použit:
+
+Co člověk hledal:
+
+Výsledek kontroly:
+- index funguje
+- chybí vstupní odkaz
+- chybí pracovní jazyk
+- chybí rozhodovací hrana
+
+Jednovětý závěr:
+
+Co se případně upraví v indexu:
+
+Co se neupravuje:
+
+Co zůstává zavřené:
+
+Vznikla náhradní evidence?
+
+Co se smaže, anonymizuje nebo nepřenáší:
+
+Vlastník pracovního místa:
+
+Datum kontroly:
+```
+
+Karta má být krátká. Pokud vyplňování začne bolet, pravděpodobně se nesnažíte ověřit index, ale znovu projednat původní rozhodnutí. Vraťte se k otázce: pomohl záznam dnešní práci, nebo ne?
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: pojmenujte dnešní pracovní situaci.
+2. Minuta 2: najděte indexový záznam tak, jak by ho hledal člověk bez historie.
+3. Minuta 3: přečtěte pravidlo a zavřený rozsah.
+4. Minuta 4: rozhodněte dnešní otázku.
+5. Minuta 5: vyberte jeden ze čtyř výsledných stavů.
+6. Minuta 6: opravte jen odkaz, jazyk nebo hranu, pokud je to nutné.
+7. Minuta 7: zkontrolujte náhradní evidenci a zapište jednovětý závěr.
+
+Workshop končí rozhodnutím, ne dojmem. Pokud neumíte rozhodnout, co se v dnešní práci mění nebo nemění, záznam ještě není použitelný. Neopravujte ho přidáním celé historie. Opravte nejbližší věc, která člověku brání udělat rozhodnutí.
+
+### Checklist první kontroly indexu
+
+- Proběhla kontrola při reálné pracovní situaci, ne v abstraktním auditu?
+- Hledal záznam člověk nebo role, která ho má běžně používat?
+- Byl záznam najitelný z přirozeného pracovního místa?
+- Bylo pravidlo srozumitelné bez staré historie?
+- Stačilo pravidlo k dnešnímu rozhodnutí?
+- Je zavřený rozsah konkrétní i pro podobnou situaci?
+- Je jasné, jaká data, štítky, segmenty, exporty nebo nástroje díky pravidlu nevznikají?
+- Pokud záznam nefungoval, opravujeme jen odkaz, jazyk nebo jednu rozhodovací hranu?
+- Nevzniká druhá kopie kanonického pravidla?
+- Nevznikla náhradní evidence bez účelu a retence?
+- Je jednovětý závěr uložený u indexového záznamu nebo pracovního místa?
+- Ví vlastník, jestli záznam zůstává beze změny, nebo má jednu malou opravu?
+
+První kontrola indexového záznamu je malý test přenositelnosti. Ukáže, jestli se z dobrého rozhodnutí opravdu stalo týmové pravidlo. Když funguje, nechte ho být. Když nefunguje, opravte nejmenší překážku. Index má být klidný pomocník v běžné práci, ne další systém, který vyžaduje vlastní onboarding, certifikaci a obětní kalendář.
+
 ## Pracovní log
 
+- 2026-07-06: Doplněna úvodní podkapitola o první kontrole indexového záznamu v běžné práci: najitelnost, srozumitelnost, rozhodnutelnost, privacy-first kontrola náhradní evidence, karta, mini workshop a checklist.
 - 2026-07-06: Doplněna úvodní podkapitola o převodu stabilní kotvy do týmového indexu: indexová věta, kanonické místo, privacy-first záznam, karta, mini workshop a checklist.
 - 2026-07-06: Doplněna úvodní podkapitola o uzavření druhého běžného použití stabilní kotvy: uzavírací stavy, praktický SaaS příklad, propsání minima zpět do kotvy, privacy-first úklid dočasných stop, karta, mini workshop a checklist.
 - 2026-07-06: Doplněna úvodní podkapitola o druhém běžném použití stabilní kotvy: samostatnost bez čerstvé paměti, čtyři výsledné stavy, praktický SaaS příklad, privacy-first kontrola obchvatů, karta, mini workshop a checklist.
