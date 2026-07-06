@@ -301327,8 +301327,250 @@ Workshop končí rozhodnutím, ne dojmem. Pokud neumíte rozhodnout, co se v dne
 
 První kontrola indexového záznamu je malý test přenositelnosti. Ukáže, jestli se z dobrého rozhodnutí opravdu stalo týmové pravidlo. Když funguje, nechte ho být. Když nefunguje, opravte nejmenší překážku. Index má být klidný pomocník v běžné práci, ne další systém, který vyžaduje vlastní onboarding, certifikaci a obětní kalendář.
 
+## Uzavření první kontroly indexového záznamu
+
+První kontrola indexového záznamu nesmí zůstat otevřená jako "někdy se k tomu vrátíme". Buď potvrdila, že záznam funguje, nebo ukázala jednu konkrétní překážku: chybějící odkaz, slabý pracovní jazyk, nebo nejasnou rozhodovací hranu. Uzavření má z kontroly udělat malý provozní výsledek, ne další položku v metadokumentaci.
+
+Dobré uzavření odpovídá na tři otázky:
+
+- Co se při prvním použití indexového záznamu potvrdilo?
+- Co se případně lokálně upravilo?
+- Co díky uzavření dál zůstává zavřené?
+
+Třetí otázka je nejdůležitější. Pokud se v indexu potvrdí pravidlo, které brání zbytečnému sběru dat, nestačí napsat "záznam funguje". Napište také, jaké pole, štítek, export, segment, ruční seznam nebo nový nástroj tím dál nevzniká. Jinak tým sice pochopí závěr, ale snadno zapomene jeho provozní cenu.
+
+Uzavírací věta může být krátká:
+
+```text
+První kontrola potvrzuje, že pravidlo bylo najitelné a stačilo k rozhodnutí nepřidávat otázku na velikost týmu; záznam zůstává beze změny a nevzniká žádná náhradní evidence.
+```
+
+Nebo pokud se něco upravilo:
+
+```text
+První kontrola ukázala slabý vstupní odkaz z onboardingového e-mailu; doplnili jsme odkaz na kanonickou kartu registrace, pravidlo samotné se nemění a velikost týmu dál aktivně nesbíráme.
+```
+
+Všimněte si hranice. Uzavření neříká "probereme personalizaci onboardingu". Neříká ani "začneme sledovat, jestli by se segmentace nehodila". Říká, co se stalo, kde se opravila nejmenší překážka a co zůstává zavřené. To je práce, která má konec. Vzácný druh, skoro jako čistý issue tracker po pátku.
+
+### Čtyři uzavírací stavy
+
+Po první kontrole vyberte jeden uzavírací stav. Nepřidávejte pátý stav "sledovat dál bez rozhodnutí"; ten většinou jen vytváří tichou evidenci.
+
+- Potvrzeno bez úpravy: záznam byl najitelný, srozumitelný a rozhodl dnešní práci.
+- Uzavřeno po lokální navigační úpravě: pravidlo funguje, ale bylo potřeba přidat odkaz, alias nebo vstup z pracovního místa.
+- Uzavřeno po jazykovém zpřesnění: pravidlo bylo správné, ale název nebo první věta byly moc interní.
+- Převést na malou opravu hrany: kontrola ukázala, že záznam nestačí rozlišit dnešní situaci od zavřeného rozsahu.
+
+První tři stavy kontrolu zavírají hned. Čtvrtý stav otevírá jen jednu malou opravu, ne návrat k původnímu rozhodnutí. Pokud je problém v hraně mezi povinným polem a dobrovolnou otázkou, opravuje se tahle hranice. Neotevírá se celá strategie segmentace, personalizace, scoringu a automatických doporučení. To by byla klasická produktová akrobacie: z jedné nejasné věty udělat půlroční plán.
+
+Příklad uzavření bez úpravy:
+
+```text
+Stav:
+Potvrzeno bez úpravy.
+
+Závěr:
+Indexový záznam byl nalezen u registračního formuláře a stačil k rozhodnutí nepřidávat do onboardingového e-mailu otázku na velikost týmu.
+
+Co zůstává zavřené:
+Povinné pole, dobrovolná aktivní otázka, segment podle velikosti týmu a export účtů podle odhadu velikosti.
+```
+
+Příklad po navigační úpravě:
+
+```text
+Stav:
+Uzavřeno po lokální navigační úpravě.
+
+Závěr:
+Pravidlo bylo správné, ale člověk ho hledal u e-mailové šablony. Do šablony přidáváme odkaz na kanonický indexový záznam.
+
+Co se nemění:
+Text pravidla, návratový signál a zavřený rozsah.
+```
+
+Příklad po jazykovém zpřesnění:
+
+```text
+Stav:
+Uzavřeno po jazykovém zpřesnění.
+
+Závěr:
+Název "segmentační minimum registrace" měníme na "registrace nesbírá velikost týmu". Pravidlo je stejné, jen se jmenuje jazykem pracovního místa.
+
+Co zůstává zavřené:
+Interní velikostní segmentace bez nového návratového signálu.
+```
+
+Příklad malé opravy hrany:
+
+```text
+Stav:
+Převést na malou opravu hrany.
+
+Závěr:
+Záznam neříká, jestli se aktivní otázka na velikost týmu smí objevit jako dobrovolná věta v e-mailu. Doplníme jednu hraniční větu a kontrolu uzavřeme po dalším použití stejné šablony.
+
+Co se neotevírá:
+Nový výzkum personalizace ani sběr velikosti týmu.
+```
+
+### Praktický SaaS příklad
+
+Tým má indexový záznam, že první nastavení SaaS účtu nesmí vyžadovat obor podnikání. Důvod je jednoduchý: produkt umí nabídnout dobrý první krok podle cíle, který uživatel sám vybere, a obor by zavedl hrubé segmenty, které by se později začaly používat v marketingu, supportu i reportech. Takové štítky se tváří nevinně, ale umí žít déle než jejich původní účel. To není kouzlo, to je jen špatně hlídaná databáze v obleku.
+
+Při úpravě první obrazovky někdo navrhne dropdown "v jakém oboru podnikáte". Kontrola indexu proběhne správně: záznam je nalezený, pravidlo je jasné a tým se rozhodne místo oboru použít otázku "co chcete dnes nastavit jako první".
+
+Uzavření by mělo vypadat takto:
+
+```text
+První kontrola potvrzuje, že indexový záznam "onboarding nesbírá obor podnikání" funguje i při úpravě první obrazovky. Dropdown oboru nepřidáváme, místo něj používáme volbu prvního cíle. Nevzniká oborový štítek, export podle oboru ani nová marketingová segmentace.
+```
+
+Tohle uzavření je použitelné i za půl roku. Člověk vidí, že rozhodnutí nebylo kosmetické. Vidí pracovní místo, náhradu a datovou hranici. Kdyby se později ukázalo, že obor je opravdu potřebný, návratový signál musí přijít jako nový důkaz, ne jako "už jsme o tom kdysi mluvili".
+
+Slabé uzavření by znělo:
+
+```text
+Obor zatím nepřidáváme, uvidíme později.
+```
+
+To je skoro pozvánka k tomu, aby se téma vrátilo bez nového důvodu. "Uvidíme později" nemá vlastníka, signál ani hranici. Lepší je napsat přesně, co by později muselo být pravda:
+
+```text
+K tématu se vrátíme jen pokud tři po sobě jdoucí relevantní onboardingy selžou proto, že bez znalosti oboru nejde doporučit první nastavení ani po výběru cíle.
+```
+
+Takový návratový signál je přísnější, ale fér. Nezakazuje změnu. Jen vyžaduje důvod.
+
+### Co propsat zpět do indexu
+
+Uzavření první kontroly obvykle nepatří do hlavního textu pravidla celé. Do indexu se propisuje jen to, co pomůže dalšímu použití:
+
+- potvrzení prvního použití, pokud záznam fungoval beze změny,
+- nový vstupní odkaz, pokud člověk hledal pravidlo jinde,
+- lepší název nebo první věta, pokud jazyk brzdil použití,
+- jedna hraniční věta, pokud podobná situace nebyla jasná,
+- obecný privacy-first závěr, pokud během kontroly vznikla a zmizela pomocná evidence.
+
+Do indexu nepatří detailní debata, kdo co navrhl, citace zákazníků, screenshoty, seznam konkrétních účtů ani pracovní poznámky z kontroly. Ty buď vůbec nevytvářejte, nebo je po uzavření smažte či zobecněte. Index má držet pravidlo, ne archeologii rozhodnutí.
+
+Kanonický záznam může po uzavření obsahovat krátký řádek:
+
+```text
+První použití:
+Potvrzeno při úpravě onboardingového e-mailu; pravidlo stačilo k rozhodnutí nepřidávat aktivní otázku na velikost týmu.
+```
+
+Pokud se upravil vstupní odkaz:
+
+```text
+Vstupy:
+Registrační formulář, první onboardingový e-mail, karta úprav prvního nastavení.
+```
+
+Pokud se upravila hrana:
+
+```text
+Hrana:
+Na velikost týmu se aktivně neptáme ani jako dobrovolnou otázkou; údaj používáme pouze tehdy, když ho zákazník sám uvede jako součást cíle nebo omezení.
+```
+
+Tohle je maximum. Jakmile máte chuť přidat "kontext pro budoucí čtenáře", zastavte se. Budoucí čtenář většinou nepotřebuje kontext. Potřebuje vědět, co má udělat v úterý dopoledne, když upravuje šablonu a nechce rozbít datovou hygienu.
+
+### Privacy-first uzavření
+
+Privacy-first uzavření má zkontrolovat, že kontrola indexu nepřidala vedlejší datovou stopu. Při první kontrole často vznikají malé pomocné věci: kopie textu do komentáře, screenshot s příkladem, tabulka "účty, kterých se to týká", ruční štítek v CRM, interní poznámka u zákazníka nebo export pro porovnání. Některé mohou být oprávněné, ale žádná nesmí zůstat bez účelu a konce.
+
+Uzavírací otázka zní:
+
+```text
+Co po kontrole zůstává jako trvalý záznam a co se maže, zobecňuje nebo nepřenáší?
+```
+
+Správná odpověď:
+
+```text
+Trvale zůstává jen obecný závěr v indexu. Dočasná poznámka se dvěma zákaznickými příklady se maže po přepsání na anonymní pracovní situaci.
+```
+
+Nebo:
+
+```text
+Během kontroly nevznikl export, nový štítek ani seznam účtů. Zůstává pouze odkaz z e-mailové šablony na kanonický indexový záznam.
+```
+
+Tahle věta je malá brzda proti "pro jistotu". V privacy-first provozu je "pro jistotu" často nejdražší fráze. Sbírá data bez jasného účelu, drží je bez konce a za rok se tváří jako nezbytná součást procesu, protože už tam přece je.
+
+### Karta uzavření první kontroly indexu
+
+```text
+Indexový záznam:
+
+Kanonické místo:
+
+Dnešní pracovní situace:
+
+Výsledek první kontroly:
+- potvrzeno bez úpravy
+- uzavřeno po lokální navigační úpravě
+- uzavřeno po jazykovém zpřesnění
+- převést na malou opravu hrany
+
+Jednovětý závěr:
+
+Co se propsalo zpět do indexu:
+
+Co se nepropsalo:
+
+Co zůstává zavřené:
+
+Jaká data, štítky, exporty, segmenty nebo nástroje dál nevznikají:
+
+Vznikla náhradní evidence?
+
+Co se maže, anonymizuje nebo nepřenáší:
+
+Návratový signál:
+
+Vlastník pracovního místa:
+
+Datum uzavření:
+```
+
+Karta má být krátká a suchá. Pokud z ní vznikne zápis z porady, použijte jen jednovětý závěr a privacy-first větu. U indexu platí jednoduché pravidlo: čím víc textu musí člověk číst, tím menší šance, že ho použije dřív, než udělá změnu.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte výsledek první kontroly.
+2. Minuta 2: vyberte jeden ze čtyř uzavíracích stavů.
+3. Minuta 3: napište jednovětý závěr.
+4. Minuta 4: určete, co se propsalo zpět do indexu a co ne.
+5. Minuta 5: napište, co zůstává zavřené a jaká data dál nevznikají.
+6. Minuta 6: smažte, anonymizujte nebo zavřete náhradní evidenci.
+
+Pokud v šesté minutě zjistíte, že potřebujete ještě "malý report", zeptejte se, jaké rozhodnutí report umožní. Pokud žádné, nevytvářejte ho. Pokud rozhodnutí existuje, napište účel, rozsah, retenci a vlastníka. Bez toho report není kontrola. Je to nová datová stopa s hezkým názvem.
+
+### Checklist uzavření první kontroly indexu
+
+- Je vybraný jeden uzavírací stav?
+- Má kontrola jednovětý závěr?
+- Je jasné, jestli se index nemění, nebo se mění jen odkaz, jazyk či jedna hrana?
+- Neotevřeli jsme znovu původní rozhodnutí bez nového návratového signálu?
+- Je zapsané, co zůstává zavřené?
+- Je konkrétně pojmenované, jaká data, štítky, exporty, segmenty nebo nástroje dál nevznikají?
+- Propsali jsme do indexu jen to, co pomůže dalšímu použití?
+- Nevznikla druhá kopie kanonického pravidla?
+- Jsou dočasné poznámky, příklady, screenshoty nebo exporty smazané, anonymizované nebo výslovně časově omezené?
+- Zůstává návratový signál konkrétní a ověřitelný?
+- Ví vlastník pracovního místa, že kontrola je zavřená?
+
+Uzavření první kontroly indexového záznamu je poslední malý test, jestli index opravdu pomáhá práci. Když ho zavřete dobře, tým získá důkaz, že pravidlo není jen historická poznámka, ale použitelná brzda proti zbytečným změnám a zbytečným datům. Když ho necháte rozmazané, index se začne tvářit jako úložiště moudrosti. A úložiště moudrosti je často jen archiv, který si koupil lepší kabát.
+
 ## Pracovní log
 
+- 2026-07-06: Doplněna úvodní podkapitola o uzavření první kontroly indexového záznamu: uzavírací stavy, praktický SaaS příklad, propsání zpět do indexu, privacy-first úklid náhradní evidence, karta, mini workshop a checklist.
 - 2026-07-06: Doplněna úvodní podkapitola o první kontrole indexového záznamu v běžné práci: najitelnost, srozumitelnost, rozhodnutelnost, privacy-first kontrola náhradní evidence, karta, mini workshop a checklist.
 - 2026-07-06: Doplněna úvodní podkapitola o převodu stabilní kotvy do týmového indexu: indexová věta, kanonické místo, privacy-first záznam, karta, mini workshop a checklist.
 - 2026-07-06: Doplněna úvodní podkapitola o uzavření druhého běžného použití stabilní kotvy: uzavírací stavy, praktický SaaS příklad, propsání minima zpět do kotvy, privacy-first úklid dočasných stop, karta, mini workshop a checklist.
