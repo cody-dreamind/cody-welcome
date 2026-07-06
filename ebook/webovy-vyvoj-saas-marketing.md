@@ -302746,8 +302746,214 @@ Když se během workshopu objeví potřeba větší změny, nepřeskakujte rovno
 
 Druhé běžné review má pravidlu sundat pomocná kolečka. Pokud obstálo, převeďte ho do klidné údržby a přestaňte kolem něj chodit po špičkách. Pokud neobstálo, opravte nejbližší větu, kotvu nebo obchvat. Hlavně z něj nedělejte nový dlouhodobý program. Dobrý indexový záznam má zmenšovat počet věcí, které tým musí držet v hlavě.
 
+## Uzavření druhého běžného review po převodu indexového záznamu do údržby
+
+Druhé běžné review samo o sobě nestačí. Hodnotu má až jeho uzavření: jedna věta, která řekne, jestli indexový záznam přechází do klidné údržby, potřebuje poslední lokální dotažení, vrací se do prvního review režimu, nebo otevírá skutečný návratový signál. Bez té věty se z review snadno stane další poznámka v historii. Někdo ji možná četl, někdo možná souhlasil, ale další člověk pořád neví, podle čeho má pracovat.
+
+Uzavření druhého review proto začněte výsledkem, ne opakováním příběhu. Starší kontext už v indexu má své místo. Teď potřebujete provozní závěr, který se dá použít při další běžné práci.
+
+Použijte tuto větu:
+
+```text
+Druhé běžné review uzavíráme stavem:
+```
+
+A za ni doplňte jeden ze čtyř stavů. Ne pět poznámek, ne tři možné interpretace, ne "ještě uvidíme". Pokud review opravdu neumí skončit jedním stavem, nebylo dost malé. Vraťte se k jednomu pracovnímu průchodu a uzavřete nejdřív ten.
+
+Příklad:
+
+```text
+Druhé běžné review uzavíráme stavem:
+Převést do klidné údržby. Nový obchodník použil indexový záznam bez původní historie, nevznikla pomocná evidence a původní rozsah formuláře, scoringu ani exportu zůstává zavřený.
+```
+
+Tahle věta má být dost konkrétní, aby ji šlo vložit do indexu nebo k obchodnímu checklistu bez dalšího komentáře. Pokud potřebuje vysvětlivky, pravděpodobně pořád obsahuje moc historie a málo rozhodnutí.
+
+### Čtyři uzavírací stavy
+
+Uzavření druhého review má čtyři praktické stavy:
+
+- Klidná údržba: pravidlo je přenositelné, tiché a nevyrábí novou datovou stopu.
+- Poslední lokální dotažení: pravidlo funguje, ale jedno pracovní místo potřebuje přesnější větu.
+- Návrat do prvního review režimu: pravidlo ještě není samostatné a potřebuje znovu ověřit základní použitelnost.
+- Otevřený návratový signál: objevil se konkrétní důvod znovu posoudit původně zavřený rozsah.
+
+`Klidná údržba` je stav, kdy se kolem pravidla přestává dělat zvláštní péče. Záznam zůstává v indexu, běžné pracovní místo na něj odkazuje a další kontrola proběhne jen v normálním rytmu. Nezakládejte pro něj nový úkol, novou metriku ani novou tabulku. Kdyby pravidlo potřebovalo vlastní miniprojekt, ještě není v klidné údržbě.
+
+`Poslední lokální dotažení` použijte, když druhé review odhalilo malou nejasnost. Třeba člověk pravidlo našel, ale nebylo jasné, zda volitelnou otázku poslat před kvalifikací poptávky, nebo až po ní. Oprava patří do jedné věty u pracovního místa. Neotevírejte kvůli tomu celý index, onboarding ani školení.
+
+`Návrat do prvního review režimu` je poctivý stav, když druhé review ukázalo, že pravidlo samo nefunguje. Může být špatně pojmenované, schované na špatném místě nebo napsané jazykem lidí, kteří byli u původní debaty. V takovém případě se netvařte, že stačí klidná údržba. Vraťte se k prvnímu ověření: najitelnost, srozumitelnost, rozhodnutelnost.
+
+`Otevřený návratový signál` má nejvyšší cenu změny. Použijte ho pouze tehdy, když se opravdu splnila podmínka návratu nebo se objevil lepší, konkrétnější důkaz. Obecné "možná by se hodilo víc dat" není návratový signál. Je to chuť otevřít skříňku s nástroji a doufat, že tam najdeme strategii. Hezký pokus, ale ne.
+
+### Praktický SaaS příklad
+
+Původní indexový záznam:
+
+```text
+Pracovní věta:
+U relevantní B2B poptávky bez rozpočtu lze po prvním ručním posouzení poslat volitelnou otázku v potvrzovacím e-mailu. Formulář, scoring ani export rozpočtových údajů se nemění.
+
+Návratový signál:
+K povinnému poli se vrátíme pouze pokud volitelná otázka třikrát za sebou nepomůže kvalifikovat relevantní poptávku a ruční doptání zdrží další krok.
+```
+
+Druhé review:
+
+```text
+Pracovní průchod:
+Nový obchodník použil záznam u relevantní poptávky bez rozpočtu.
+
+Co se stalo:
+Záznam našel přes obchodní checklist, nejdřív provedl ruční posouzení a potom poslal volitelnou otázku v potvrzovacím e-mailu.
+
+Datová stopa:
+Zákazník odpověděl ve stejném e-mailovém vlákně. Nevznikl nový CRM atribut, ruční tag, export ani pomocná tabulka.
+```
+
+Uzavření:
+
+```text
+Stav:
+Klidná údržba.
+
+Závěr do indexu:
+Pravidlo je samostatně použitelné i bez původní historie. Zůstává v obchodním checklistu a další kontrola proběhne jen při běžné údržbě indexu nebo při návratovém signálu.
+
+Co zůstává zavřené:
+Povinné pole pro rozpočet ve formuláři, automatický lead scoring a export rozpočtových údajů.
+
+Privacy-first úklid:
+Žádné pomocné stopy nevznikly. V běžném provozu dál stačí e-mailové vlákno a stručná obchodní poznámka bez nového atributu.
+```
+
+Slabší varianta:
+
+```text
+Co se stalo:
+Nový obchodník pravidlo použil, ale bokem si založil tabulku poptávek bez rozpočtu, aby měl jistotu, že na ně nezapomene.
+
+Stav:
+Poslední lokální dotažení.
+
+Lokální oprava:
+Do obchodního checklistu přidáváme větu: "Poptávky bez rozpočtu neeviduj bokem; pokud použiješ volitelnou otázku, odpověď zůstává v obchodním vlákně a závěr patří do běžné CRM poznámky bez nového atributu."
+
+Privacy-first úklid:
+Pomocnou tabulku mažeme. Do indexu nepřenášíme seznam konkrétních poptávek.
+```
+
+Rozdíl mezi těmito dvěma závěry je malý, ale důležitý. V prvním případě pravidlo opravdu přešlo do klidné údržby. Ve druhém fungovalo, ale vyrobilo obchvat. To není důvod k velké změně. Je to důvod doplnit jednu větu tam, kde vznikla nejistota, a uklidit pomocnou stopu.
+
+### Co propsat zpět
+
+Po uzavření druhého review nepište do indexu celý zápis. Index není kronika. Má nést jen to, co další člověk potřebuje k práci.
+
+Do indexu patří:
+
+- aktuální pracovní věta,
+- stav po druhém review,
+- další běžný rytmus,
+- potvrzený návratový signál,
+- hranice toho, co se dál neotevírá.
+
+Do indexu nepatří:
+
+- konkrétní zákaznické e-maily,
+- seznam poptávek z review,
+- jména lidí, pokud nejsou nutná pro vlastnictví pravidla,
+- pomocné tabulky,
+- detaily staré debaty.
+
+Pokud chcete uchovat příklad, zobecněte ho. Místo "u klienta Novák s.r.o. chyběl rozpočet" napište "u relevantní B2B poptávky bez rozpočtu stačila volitelná otázka v potvrzovacím e-mailu". Rozhodovací hodnota zůstane, datová stopa se zmenší.
+
+### Privacy-first uzavření
+
+Uzavření druhého review je dobré místo pro malý datový audit. Ne proto, že by šlo o právní drama. Protože právě tady se často láme rozdíl mezi rozumnou pracovní pomůckou a tichým vznikem nové evidence.
+
+Položte si čtyři otázky:
+
+```text
+Vznikla během review nová evidence?
+
+Zůstává po uzavření nějaký nový údaj v běžném provozu?
+
+Má tento údaj jasný účel a vlastníka?
+
+Co mažeme, anonymizujeme nebo vracíme do původního zdroje?
+```
+
+Pokud odpověď na druhou otázku zní ano, dopište k údaji účel a místo. Například: "rozpočtová odpověď zůstává pouze v obchodním e-mailovém vlákně, protože slouží k přípravě dalšího hovoru". Pokud účel neumíte napsat, údaj do běžného provozu nepatří.
+
+Pozor na nenápadné kompromisy. "Jen dočasně si povedeme seznam" je v SaaS provozu velmi nebezpečná věta, protože dočasné seznamy mají zvláštní talent přežít všechny, kdo si pamatovali, proč vznikly. Pokud seznam opravdu potřebujete, napište stop podmínku a datum smazání. Pokud stop podmínku nemáte, seznam nezakládejte.
+
+Codyho komentář: privacy-first provoz není soutěž v tom, kdo řekne nejčastěji "GDPR". Je to schopnost v běžné práci říct: tento údaj už nepotřebujeme, tuto tabulku smažeme, tento příklad zobecníme a tento nástroj nezapneme jen proto, že umí hezký graf. Méně dat, méně budoucího vysvětlování. Nuda, která šetří nervy.
+
+### Karta uzavření druhého review
+
+```text
+Indexový záznam:
+
+Kanonické místo:
+
+Druhé review ověřovalo:
+
+Výsledek review:
+
+Uzavírací stav:
+- klidná údržba
+- poslední lokální dotažení
+- návrat do prvního review režimu
+- otevřený návratový signál
+
+Jednovětý závěr do indexu:
+
+Co se upravuje v pracovním místě:
+
+Co zůstává zavřené:
+
+Potvrzený nebo nový návratový signál:
+
+Jaká data vznikla během review:
+
+Co po uzavření mažeme, anonymizujeme nebo vracíme do původního zdroje:
+
+Další běžný rytmus:
+
+Vlastník:
+```
+
+Kartu vyplňujte tak krátce, aby šla přečíst při práci. Pokud z ní vznikne dlouhý zápis, rozdělte ji: do indexu dejte závěr, detailní historii nechte u review a osobní nebo obchodní detaily z ní odstraňte hned po vyhodnocení.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte výsledek druhého review bez staré historie.
+2. Minuta 2: vyberte jeden ze čtyř uzavíracích stavů.
+3. Minuta 3: napište jednovětý závěr do indexu.
+4. Minuta 4: určete, co zůstává zavřené a jaký návratový signál dál platí.
+5. Minuta 5: rozhodněte, co se upraví v pracovním místě.
+6. Minuta 6: smažte, anonymizujte nebo vraťte do původního zdroje pomocné datové stopy.
+
+Když šest minut nestačí, pravděpodobně neuzavíráte review, ale znovu otevíráte téma. To může být v pořádku, ale pojmenujte to. Uzavření má mít jasný konec; nové téma má mít vlastní podnět, vlastní pracovní místo a vlastní hranici dat.
+
+### Checklist uzavření druhého review
+
+- Vybrali jsme přesně jeden uzavírací stav?
+- Je závěr napsaný jednou větou, kterou lze vložit do indexu?
+- Ví další člověk, jestli je pravidlo v klidné údržbě, nebo ještě potřebuje opravu?
+- Zůstává jasné, co původní pravidlo dál neotevírá?
+- Je návratový signál potvrzený, zpřesněný nebo výslovně beze změny?
+- Propsali jsme jen to, co další člověk opravdu potřebuje k práci?
+- Neuložili jsme do indexu zákaznické detaily, starou debatu ani pomocné příklady?
+- Zkontrolovali jsme nové tagy, tabulky, exporty, atributy a ruční seznamy?
+- Má každá ponechaná datová stopa účel, vlastníka a místo?
+- Smazali jsme nebo anonymizovali pomocné podklady, které po review nemají důvod existovat?
+
+Uzavření druhého review má indexový záznam ztišit. Po dobrém uzavření pravidlo nezmizí, jen přestane vyžadovat mimořádnou pozornost. Tým ví, kde ho najde, co podle něj udělá, co dál neotevře a jak pozná skutečný návratový signál. To je přesně ten druh provozní dospělosti, který nevypadá efektně na poradě, ale dělá produkt klidnějším každý týden.
+
 ## Pracovní log
 
+- 2026-07-06: Doplněna úvodní podkapitola o uzavření druhého běžného review po převodu indexového záznamu do údržby: uzavírací stavy, praktický SaaS příklad, propsání zpět do indexu, privacy-first úklid pomocných stop, karta, mini workshop a checklist.
 - 2026-07-06: Doplněna úvodní podkapitola o druhém běžném review po převodu indexového záznamu do údržby: přenositelnost bez původní historie, tichý provoz, privacy-first kontrola obchvatů, karta, mini workshop a checklist.
 - 2026-07-06: Doplněna úvodní podkapitola o uzavření prvního běžného review po převodu indexového záznamu do údržby: čtyři uzavírací stavy, praktický SaaS příklad, privacy-first vypnutí mimořádné datové stopy, karta, mini workshop a checklist.
 - 2026-07-06: Doplněna úvodní podkapitola o prvním běžném review po převodu indexového záznamu do údržby: kontrolní body, výsledky review, praktický SaaS příklad, zastavení obchvatů, privacy-first datový úklid, karta, mini workshop a checklist.
