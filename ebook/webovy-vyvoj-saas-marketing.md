@@ -300279,8 +300279,218 @@ Když se během šesti minut nedostanete k rozhodnutí, neprodlužujte workshop.
 
 První běžné použití stabilní kotvy je malý test provozní dospělosti. Když funguje, staré rozhodnutí už nežije v hlavě autora, ale v práci samotné. Člověk najde větu, pozná hranici, nezaloží zbytečnou evidenci a pokračuje. Přesně tak má vypadat dobrá produktivita: žádný ohňostroj, jen méně práce, méně dat a jasnější rozhodnutí.
 
+## Uzavření prvního běžného použití stabilní kotvy
+
+První použití stabilní kotvy nekončí tím, že se tým rychle shodne u stolu. Končí až ve chvíli, kdy je jasné, co se propsalo do běžného pracovního místa, co zůstalo zavřené a jestli nevznikla žádná náhradní evidence. Jinak se snadno stane, že kotva sice "fungovala", ale vedle ní potichu vznikne komentář v CRM, poznámka v tabulce nebo nový štítek, který začne dělat přesně to, čemu měla kotva zabránit.
+
+Uzavření má být krátké. Nevracejte se k celé historii rozhodnutí. Neopisujte archivní minimum. Nezakládejte novou revizní agendu. Stačí potvrdit, že kotva obstála v běžné práci, nebo přesně pojmenovat jedno lokální dočištění.
+
+Začněte větou:
+
+```text
+První běžné použití stabilní kotvy končí tímto stavem:
+```
+
+A doplňte jeden ze čtyř stavů:
+
+```text
+Kotva funguje beze změny.
+Kotva potřebuje lokální dočištění.
+Podnět patří do jiného pracovního místa.
+Objevil se návratový signál a otevíráme nejmenší další krok.
+```
+
+Tahle věta je důležitější než dlouhé vysvětlování. Nutí tým vybrat stav. Bez stavu se první použití snadno rozplizne do neurčitého "asi dobrý, ještě to budeme sledovat". A jak už víme, "budeme sledovat" je často jen zdvořilý název pro novou evidenci bez konce.
+
+### Čtyři uzavírací stavy
+
+Pokud kotva funguje beze změny, uzavření je nejkratší:
+
+```text
+Kotva funguje beze změny. Podnět patřil ke stejné datové stopě, nové registrační pole neotevíráme a žádná náhradní evidence nevznikla.
+```
+
+Tento stav nevyžaduje další kontrolu. Kotva zůstává v běžném pracovním místě a použije se znovu až při dalším přirozeném podnětu.
+
+Pokud kotva potřebuje lokální dočištění, neopravujte všechno. Opravte jen část, která selhala při použití: chybějící alias, nepřesný návratový signál, nejasný odkaz na hlubší historii nebo slabou hranici datové stopy.
+
+```text
+Kotva potřebuje lokální dočištění: doplníme alias "počet budoucích uživatelů" ke stejné datové stopě jako velikost týmu. Rozsah rozhodnutí se nemění.
+```
+
+Pokud podnět patří do jiného pracovního místa, uzavření musí starou kotvu ochránit před nafukováním:
+
+```text
+Podnět nepatří do registrační kotvy. Jde o sales kvalifikaci enterprise pilotu, proto ho nelepíme jako výjimku k registraci. Registrační formulář zůstává beze změny.
+```
+
+Pokud se objevil skutečný návratový signál, uzavření prvního použití nemá rovnou řešit celý návrat. Má jen předat práci do další malé smyčky:
+
+```text
+První použití potvrdilo návratový signál: tři účty za sebou nedokončily první import kvůli chybějícímu kontextu týmu. Registrační pole pořád nepřidáváme; otevíráme jen kontrolu onboardingové věty u prvního importu.
+```
+
+Všimněte si poslední věty. I když se signál potvrdil, původně zavřený sběr dat se neotevírá automaticky. Nejprve se hledá nejbližší menší místo, kde problém opravdu vznikl.
+
+### Praktický SaaS příklad
+
+Stabilní kotva u registračního formuláře říká:
+
+```text
+Registrace sbírá jen údaje nutné k založení účtu a prvnímu importu. Velikost týmu, počet budoucích uživatelů a interní strukturu nezjišťujeme v registraci.
+```
+
+Při prvním běžném použití přijde návrh:
+
+```text
+Marketing chce do registrace přidat otázku "kolik lidí bude produkt používat", aby šlo lépe segmentovat uvítací obsah.
+```
+
+Dobré uzavření:
+
+```text
+Stav:
+Kotva funguje beze změny.
+
+Závěr:
+Návrh patří ke stejné datové stopě jako velikost týmu. Registrační formulář neměníme.
+
+Co zůstává zavřené:
+Nové pole v registraci, marketingový segment podle velikosti týmu a automatické větvení uvítacích e-mailů podle této informace.
+
+Co případně uděláme místo toho:
+Uvítací obsah napíšeme tak, aby fungoval bez znalosti velikosti týmu; pokud obchod řeší konkrétní enterprise nabídku, otázku položí volitelně v hovoru.
+
+Privacy-first závěr:
+Nevzniká nový formulářový údaj, segment, export, ruční seznam ani dočasná tabulka.
+```
+
+Tohle je hotové uzavření. Nevyžaduje experiment, další schůzku ani dashboard. Tým získal rozhodnutí a zároveň nepřidal datovou stopu.
+
+Slabé uzavření by vypadalo takto:
+
+```text
+Zatím to do registrace nedáme, ale marketing si bude ručně značit, u koho odhaduje větší tým.
+```
+
+To není uzavření. To je stejný sběr přes boční dveře, navíc horší: místo přiznaného pole vzniká odhad bez jasného účelu, retence a kontroly. Privacy-first provoz nemá rád boční dveře. Jsou to dveře, jen s horší dokumentací.
+
+### Co propsat zpět do kotvy
+
+Po prvním použití se do stabilní kotvy propsuje jen to, co pomůže příště rozhodnout rychleji. Typicky:
+
+- nový alias stejné datové stopy;
+- kratší příklad správného použití;
+- přesnější hranice jiného pracovního místa;
+- opravený odkaz na hlubší historii;
+- jasnější návratový signál.
+
+Nepropsujte do ní:
+
+- celý dnešní rozhovor;
+- jména zákazníků nebo osob;
+- ruční seznam příkladů;
+- interní obchodní detaily;
+- hypotézy, které se při použití nepotvrdily;
+- novou pravidelnou kontrolu bez důvodu.
+
+Stabilní kotva má po prvním použití zůstat stabilní. Pokud do ní přidáte všechno, co se kolem použití stalo, přestane být kotvou a stane se mini archivem. Archiv už přitom existuje. Kotva má být pracovní zkratka, ne druhá kopie historie.
+
+### Privacy-first uzavření
+
+Uzavření prvního použití musí vždy odpovědět na otázku:
+
+```text
+Vznikla při použití kotvy nějaká nová datová stopa, kterou musíme uklidit?
+```
+
+Hledejte hlavně tyto nenápadné stopy:
+
+- komentáře s osobními nebo obchodními údaji;
+- dočasné exporty;
+- pomocné tabulky;
+- nové štítky v CRM;
+- segmenty v e-mailovém nástroji;
+- screenshoty formulářů nebo účtů;
+- poznámky v chatu, které obsahují konkrétní zákaznické detaily.
+
+Pokud stopa vznikla jen kvůli rozhodnutí, smažte ji nebo anonymizujte. Pokud má zůstat, musí mít účel, vlastníka, místo uložení a konec. Bez těchto čtyř věcí jde pryč. Ne proto, že data jsou zlá. Protože data bez účelu jsou dluh, který se tváří jako poznámka.
+
+Praktická uzavírací věta:
+
+```text
+Pomocný seznam tří příkladů mažeme. Do kotvy doplňujeme jen obecný alias "počet budoucích uživatelů" bez zákaznických detailů.
+```
+
+To je přesně ten typ malé hygieny, který drží evropský privacy-first provoz při zemi. Místo aby tým sbíral víc údajů "pro jistotu", nechává jen pravidlo, které pomůže při dalším rozhodnutí.
+
+### Karta uzavření prvního použití kotvy
+
+```text
+Stabilní kotva:
+
+Dnešní podnět:
+
+Výsledek použití:
+- kotva funguje beze změny
+- lokálně dočistit kotvu
+- podnět patří jinam
+- otevřít návratový signál
+
+Jednovětý závěr:
+
+Co zůstává zavřené:
+
+Co se propisuje zpět do kotvy:
+
+Co se nepropisuje a proč:
+
+Vznikla nová datová stopa?
+
+Co mažeme, anonymizujeme nebo zavíráme:
+
+Kde zůstává kanonická kotva:
+
+Vlastník pracovního místa:
+
+Datum uzavření:
+```
+
+Pole "co se nepropisuje" je užitečné hlavně pro týmy, které mají sklon všechno dokumentovat. Někdy je nejlepší redakční rozhodnutí napsat, že se dnešní detail záměrně nepřenáší dál. Člověk příště ví, že nejde o zapomenutí, ale o vědomé zúžení.
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: přečtěte dnešní podnět a stabilní kotvu.
+2. Minuta 2: vyberte jeden ze čtyř uzavíracích stavů.
+3. Minuta 3: napište jednovětý závěr.
+4. Minuta 4: určete, co zůstává zavřené.
+5. Minuta 5: rozhodněte, zda se do kotvy propíše alias, příklad nebo hranice.
+6. Minuta 6: zkontrolujte nové datové stopy.
+7. Minuta 7: smažte, anonymizujte nebo zavřete pomocné podklady a uložte závěr u pracovního místa.
+
+Pokud se během workshopu ukáže, že se tým hádá o původní rozhodnutí, nejste v uzavření prvního použití. Jste v návratu k rozhodnutí. Zapište návratový signál, zachovejte zavřený původní rozsah a otevřete nejmenší další krok. Uzavření nesmí suplovat novou strategickou debatu.
+
+### Checklist uzavření prvního použití kotvy
+
+- Vybrali jsme jeden jasný uzavírací stav?
+- Je jednovětý závěr srozumitelný bez čtení celé historie?
+- Víme, co zůstává zavřené?
+- Pokud kotva funguje, nevznikla nová kontrola ze zvyku?
+- Pokud kotvu dočišťujeme, je oprava lokální a malá?
+- Pokud podnět patří jinam, nelepíme ho jako výjimku do staré kotvy?
+- Pokud přišel návratový signál, otevíráme jen nejmenší další krok?
+- Propsali jsme zpět jen to, co pomůže příštímu rozhodnutí?
+- Nepropsali jsme zákaznické detaily, ruční seznamy ani nepotvrzené hypotézy?
+- Zkontrolovali jsme komentáře, exporty, štítky, segmenty a pomocné tabulky?
+- Smazali jsme nebo anonymizovali dočasné podklady bez dalšího účelu?
+- Zůstává kanonická kotva na jednom pracovním místě?
+- Umí další člověk poznat, zda má kotvu použít stejně, lokálně opravit, nebo otevřít návrat?
+
+Dobré uzavření prvního použití stabilní kotvy je nenápadné. Neoslavuje rozhodnutí, nevyrábí proces a netváří se jako velká produktová událost. Jen potvrdí, že krátká pracovní věta unesla běžný podnět, že zavřený rozsah zůstal zavřený a že po cestě nevznikla nová datová stopa. To stačí. A právě proto je to užitečné.
+
 ## Pracovní log
 
+- 2026-07-06: Doplněna úvodní podkapitola o uzavření prvního běžného použití stabilní kotvy: čtyři uzavírací stavy, praktický SaaS příklad, propsání zpět do kotvy, privacy-first úklid náhradní evidence, karta, mini workshop a checklist.
 - 2026-07-06: Doplněna úvodní podkapitola o prvním běžném použití stabilní kotvy: najitelnost, rozhodnutelnost, datová hranice, čtyři výsledky použití, privacy-first kontrola náhradní evidence, karta, mini workshop a checklist.
 - 2026-07-06: Doplněna úvodní podkapitola o stabilní kotvě po druhém dohledání archivního minima: pracovní věta, návratový signál, hranice zavřeného rozsahu, privacy-first datová kotva, karta, mini workshop a checklist.
 - 2026-07-05: Doplněna úvodní podkapitola o uzavření druhého dohledání archivního minima: čtyři uzavírací stavy, praktický SaaS příklad, privacy-first uzavření bez nové evidence, karta, mini workshop a checklist.
