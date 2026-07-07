@@ -305839,6 +305839,170 @@ Pokud se během workshopu objeví potřeba větší debaty, nejdřív dokončete
 
 Uzavření prvního přirozeného review je malá brzda proti nekonečné péči. Pokud standard funguje, nechte ho pracovat. Pokud potřebuje drobnou opravu, opravte nejbližší místo. Pokud kolem něj vznikl obchvat, ukliďte ho. Pokud se realita změnila, otevřete nový průchod. Hlavně z review nedělejte trvalý dohled jen proto, že se standard po čase znovu objevil na stole.
 
+## Druhé přirozené review tichého standardu
+
+Druhé přirozené review má jinou práci než první. První review ověřovalo, že tichý standard po uzavření opravdu zapadl do běžného pracovního místa. Druhé review ověřuje, že tam vydržel i bez čerstvé paměti, bez zvláštní pozornosti a bez toho, aby si někdo bokem vytvořil malý servisní proces jen proto, že se kdysi standard kontroloval.
+
+Správná otázka zní:
+
+```text
+Funguje tichý standard i teď jako běžná součást práce, nebo se kolem něj znovu vytvořila péče, která má vlastní stopy, vlastní výjimky a vlastní vysvětlování?
+```
+
+Tohle review se má stát pouze tehdy, když se standard přirozeně potká s prací podruhé: při další úpravě šablony, při novém člověku v roli, při kontrole obchodního postupu, při změně formuláře nebo při běžném review kanonického indexu. Neplánujte ho jako samostatný ceremoniál. Tichý standard, který potřebuje vlastní pravidelný rituál, pravděpodobně ještě není tichý.
+
+Druhé review má chránit dvě věci najednou. Za prvé stabilitu: pokud pravidlo funguje, není důvod ho znovu brousit jen proto, že ho někdo otevřel. Za druhé čistotu provozu: pokud se kolem pravidla nenápadně vrátila pomocná evidence, výjimkový seznam nebo ruční kontrola, je potřeba rozhodnout, jestli má skutečnou hodnotu, nebo jestli jde jen o starý strach v nové tabulce.
+
+### Co druhé review ověřuje
+
+Při druhém přirozeném review se neptejte, jestli by šel standard napsat lépe. To jde skoro vždycky. Ptejte se na čtyři provozní věci:
+
+- Člověk najde pravidlo bez znalosti historie.
+- Pravidlo vede ke stejnému rozhodnutí jako po prvním review.
+- Návratový signál se nezměnil v neurčité sledování.
+- Nevznikla nová dočasná stopa, která přežila svůj účel.
+
+Najitelnost bez historie je hlavní test. Pokud nový člověk musí nejdřív přečíst původní rozhodovací kartu, starý Slack, export nebo zápis z review, standard není u práce dost dobře ukotvený. Nemusí to znamenat nový projekt. Často stačí doplnit jednu větu přímo k šabloně nebo přesunout odkaz z archivní poznámky na místo, kde člověk opravdu kliká, píše nebo schvaluje.
+
+Stejné rozhodnutí neznamená stejné znění. Text se může zkrátit, přesunout nebo zpřesnit. Důležité je, že tým dál ví, co dělat a co neotevírat. Pokud se z věty "nepřidáváme povinné pole" stala věta "zatím pole nesledujeme", pozor. "Zatím" často nenápadně mění zavřené rozhodnutí na čekárnu bez kritérií.
+
+Návratový signál má zůstat ostrý. Jestli původně říkal "tři relevantní poptávky za sebou nepůjdou kvalifikovat ani po volitelné otázce", druhé review nesmí skončit větou "budeme sledovat kvalitu poptávek". To je širší, měkčí a hůř ukončitelné. Pokud potřebujete signál změnit, udělejte to výslovně a napište proč.
+
+Dočasná stopa je všechno, co vzniklo při zavádění, kontrole nebo uklidňování týmu: pomocný list, štítek, export, zvláštní poznámka v CRM, samostatná kontrolní karta nebo interní seznam "pro jistotu". Pokud se podle ní nerozhoduje, smažte ji. Pokud se podle ní rozhoduje, pojmenujte nové rozhodnutí a otevřete nový průchod. Mezi tím není žádná pohodlná šedá zóna. Tedy je, ale smrdí po budoucí práci.
+
+### Praktický SaaS příklad
+
+Tichý standard po prvním review:
+
+```text
+U relevantní B2B poptávky bez rozpočtu pošli volitelnou otázku v potvrzovacím e-mailu. Povinné pole pro rozpočet, lead scoring ani zvláštní report neotevíráme, dokud tři relevantní poptávky za sebou nepůjdou kvalifikovat ani po této otázce.
+```
+
+Druhé přirozené review nastane o několik týdnů později při onboardingu nového člověka do obchodu. Nový člověk otevře potvrzovací šablonu a má podle ní vyřídit první relevantní poptávku bez rozpočtu.
+
+Silný výsledek:
+
+```text
+Tichý standard funguje i při druhém přirozeném review. Nový člověk našel větu přímo u potvrzovací šablony, poslal volitelnou otázku bez čtení historie a nevznikl žádný zvláštní seznam poptávek bez rozpočtu. Dál neotevíráme formulář, scoring ani report.
+```
+
+Lokální oprava:
+
+```text
+Standard zůstává platný, ale při onboardingu nebylo jasné, že volitelná otázka patří jen k relevantním B2B poptávkám. Doplňujeme tuto hranici přímo do šablony a neotevíráme žádné nové měření.
+```
+
+Ukončení návratu do péče:
+
+```text
+Při druhém review se našel soukromý seznam poptávek bez rozpočtu vedený po prvním review "pro jistotu". Ze seznamu nevzniklo žádné rozhodnutí, proto ho rušíme a nepřenášíme jeho obsah do CRM. Standard zůstává u potvrzovací šablony.
+```
+
+Nový průchod:
+
+```text
+Druhé review potvrdilo návratový signál: tři relevantní poptávky za sebou nešly kvalifikovat ani po volitelné otázce. Tichý standard uzavíráme jako překonaný pro tuto situaci a otevíráme nový malý průchod ke kvalifikaci poptávek s datovým minimem.
+```
+
+Všimněte si rozdílu mezi lokální opravou a novým průchodem. Lokální oprava pomáhá stejnému pravidlu dělat stejnou práci. Nový průchod vzniká až ve chvíli, kdy se změnil důkaz nebo realita. Když tyto dvě věci smícháte, začnete staré standardy potichu přepisovat podle čerstvého dojmu. To je rychlé, dokud nemusíte vysvětlit, proč má tým tři verze stejného pravidla.
+
+### Privacy-first kontrola druhého review
+
+Druhé přirozené review je dobrý moment na kontrolu, jestli se privacy-first závěr opravdu udržel i po čase. Nezajímejte se jen o to, co systém sbírá oficiálně. Podívejte se i na neoficiální místa:
+
+- osobní tabulky,
+- exporty v e-mailu,
+- štítky v CRM,
+- poznámky v chatu,
+- kopie příkladů v onboardingových materiálech,
+- screenshoty nebo ručně vedené seznamy.
+
+Položte tři otázky:
+
+```text
+Vznikla od prvního review nějaká nová datová stopa?
+Vzniká z ní rozhodnutí, které standard neumí udělat?
+Má tato stopa vlastníka, konec a důvod retence?
+```
+
+Pokud odpověď na druhou nebo třetí otázku zní ne, stopu ukončete. Nečekejte na velký datový audit. Privacy-first provoz se drží hlavně tím, že malé zbytečné stopy nenecháte dorůst do tradice. Tradice je hezká u vánočky, méně hezká u exportu osobních údajů bez účelu.
+
+Codyho komentář: druhé review je test dospělosti standardu. První review ještě může těžit z toho, že si všichni pamatují, proč pravidlo vzniklo. Druhé už paměť nešetří. Buď pravidlo stojí samo u práce, nebo se opírá o šeptandu, staré poznámky a privátní tabulky. Hádejte, která varianta vyhrává za půl roku. Přesně. Ta nudnější.
+
+### Karta druhého přirozeného review
+
+```text
+Tichý standard:
+
+Pracovní místo druhého review:
+
+Proč se standard potkal s prací právě teď:
+
+Našel člověk pravidlo bez historie?
+
+Vedlo pravidlo ke stejnému rozhodnutí jako po prvním review?
+
+Zůstal návratový signál konkrétní?
+
+Vznikla nová dočasná nebo náhradní stopa?
+
+Výsledek:
+- potvrzený tichý standard
+- lokální oprava
+- ukončení návratu do péče
+- nový průchod
+
+Důkaz pro výsledek:
+
+Co zůstává zavřené:
+
+Co se mění, ruší nebo mažeme:
+
+Privacy-first datová věta:
+
+Kde závěr bydlí:
+
+Vlastník pracovního místa:
+
+Další přirozený návratový signál:
+```
+
+Kartu použijte, pokud review našlo opravu, rušení stopy nebo nový průchod. Pokud standard funguje bez výhrad, stačí jedna věta u pracovního místa:
+
+```text
+Při druhém přirozeném review tichý standard obstál bez historie, bez náhradní evidence a bez nové datové stopy; dál zůstává u potvrzovací šablony a neotevíráme formulář, scoring ani report.
+```
+
+Tahle věta je lepší než založit další záznam jen proto, aby bylo vidět, že se něco udělalo. U tichého standardu je někdy nejlepší výsledek právě to, že nevznikne nový dokument.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: pojmenujte pracovní místo a situaci, kde druhé review přirozeně nastalo.
+2. Minuta 2: nechte člověka najít pravidlo bez vysvětlování historie.
+3. Minuta 3: ověřte, jestli pravidlo vede ke stejnému rozhodnutí.
+4. Minuta 4: zkontrolujte návratový signál a případné obchvaty.
+5. Minuta 5: napište privacy-first datovou větu.
+6. Minuta 6: vyberte výsledek a uložte závěr na pracovní místo.
+
+Pokud se během workshopu objeví větší téma, nezvětšujte review. Zapište, jestli jde o návratový signál, nebo o nové téma mimo tento standard. Druhé review má standard buď potvrdit, lokálně opravit, uklidit kolem něj stopy, nebo otevřít nový průchod. Nemá se změnit v poradnu pro všechno, co tým právě napadlo.
+
+### Checklist druhého přirozeného review
+
+- Nastalo review přirozeně při běžné práci?
+- Našel člověk pravidlo bez znalosti historie?
+- Vedlo pravidlo ke konkrétnímu rozhodnutí?
+- Zůstalo stejné pracovní místo jako po prvním review?
+- Je návratový signál pořád konkrétní a ověřitelný?
+- Nevzniklo neurčité "budeme sledovat" místo jasného závěru?
+- Nevznikla nová tabulka, štítek, export, screenshot, poznámka nebo ruční seznam?
+- Pokud stopa vznikla, má rozhodovací účel, vlastníka a konec?
+- Pokud účel nemá, je jasné, kdo ji smaže nebo sloučí zpět?
+- Pokud se potvrdil návratový signál, otevíráme nový průchod místo tichého přepsání standardu?
+- Je privacy-first datová věta konkrétní?
+- Končí review u pracovního místa, ne v samostatné administrativní vrstvě?
+
+Druhé přirozené review má standard nechat zestárnout důstojně. Když funguje, nepotřebuje nový kabát. Když drhne, potřebuje nejbližší opravu. Když se kolem něj vrátila péče, potřebuje úklid. A když se změnila realita, potřebuje nový průchod. Všechno ostatní je většinou jen elegantnější způsob, jak si ponechat starý problém v oběhu.
+
 ## Pracovní log
 
 - 2026-07-07: Doplněna úvodní podkapitola o uzavření prvního přirozeného review tichého standardu: čtyři uzavírací stavy, praktický SaaS příklad, privacy-first datová věta, karta, mini workshop a checklist.
@@ -307355,3 +307519,4 @@ Uzavření prvního přirozeného review je malá brzda proti nekonečné péči
 - 2026-07-05: Doplněna úvodní podkapitola o běžné kontrole neotevřeného kroku: rozlišení kontroly od návratu, tři výsledné stavy, privacy-first úklid dočasných stop, karta, mini workshop a checklist.
 - 2026-07-06: Doplněna krátká poznámka k běžné kontrole neotevřeného kroku, aby její závěr končil jednou dohledatelnou větou místo novou mini analýzou.
 - 2026-07-07: Doplněna krátká poznámka k jednověté stopě po běžné kontrole, aby nevznikaly nové přílohy bez rozhodovací hodnoty.
+- 2026-07-07: Doplněna úvodní podkapitola o druhém přirozeném review tichého standardu: ověření bez čerstvé historie, lokální oprava, ukončení návratu do péče, privacy-first datová věta, karta, mini workshop a checklist.
