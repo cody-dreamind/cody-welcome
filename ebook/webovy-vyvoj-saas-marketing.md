@@ -305537,8 +305537,150 @@ Pokud se během sedmi minut objeví nová otázka, necpěte ji do uzavření. Za
 
 Uzavření druhého běžného použití je tečka za mimořádnou péčí. Dobrý standard nemusí být každý týden kontrolovaný, aby byl živý. Stačí, že je najitelný, použitelný a má jasnou hranici. Zbytek je klidný provoz. Přesně ten typ práce, který se na první pohled netváří dramaticky, ale za půl roku ušetří nejvíc vysvětlování.
 
+## První přirozené review tichého standardu
+
+Tichý standard se po uzavření druhého použití nemá hlídat samostatným režimem. To ale neznamená, že se ho už nikdy nikdo nesmí dotknout. Správný návrat přichází přirozeně: při úpravě šablony, při review obchodního procesu, při kontrole onboardingového kroku nebo ve chvíli, kdy někdo stejně otevře pracovní místo, kde standard bydlí.
+
+První přirozené review není nová mimořádná kontrola. Je to krátká otázka položená ve správný čas:
+
+```text
+Když už jsme u pracovního místa, drží tichý standard pořád svoji práci bez nové evidence a bez vysvětlování?
+```
+
+Pokud odpověď zní ano, review končí jednou větou. Pokud ne, vyberte nejmenší opravu. Nepřepisujte celý standard jen proto, že jste ho po čase znovu uviděli. Staré rozhodnutí často působí trochu neuhlazeně prostě proto, že už není čerstvé. To samo o sobě není problém. Problém je až ve chvíli, kdy člověk podle standardu neumí pracovat, nebo kolem něj začne vznikat náhradní evidence.
+
+### Co má review ověřit
+
+Při prvním přirozeném review kontrolujte jen čtyři věci:
+
+- Standard je pořád u správného pracovního místa.
+- Pracovní věta pořád vede ke konkrétnímu kroku.
+- Návratový signál je stále rozpoznatelný.
+- Nevznikl obchvat v podobě tabulky, štítku, exportu, trackeru nebo neformálního seznamu.
+
+Správné pracovní místo je důležitější než hezká dokumentace. Pokud se standard používá v potvrzovacím e-mailu, má být u potvrzovací šablony. Pokud se používá při kvalifikaci poptávky, má být v obchodním checklistu. Pokud se používá při publikaci článku, má být v publikačním checklistu. Archivní záznam může existovat, ale nesmí být jediným místem, kde pravidlo žije.
+
+Pracovní věta má být pořád akční. Věta "dbejme na kvalitu leadů" nezestárla důstojně. Věta "u relevantní B2B poptávky bez rozpočtu pošli volitelnou otázku v potvrzovacím e-mailu a nepřidávej povinné pole, dokud nenastane návratový signál" je méně elegantní, ale užitečnější. Provozní text má vyhrávat použitelnost, ne literární soutěž.
+
+Návratový signál se kontroluje proto, aby standard nezůstal zavřený navždy jen ze setrvačnosti. Dobrý signál říká, kdy se téma znovu otevře. Špatný signál říká "když to bude dávat smysl". To je v praxi jen pozvánka k pocitovému hlasování.
+
+Obchvaty jsou nejzrádnější. Tichý standard může formálně platit, ale tým si bokem začne vést seznam výjimek, ruční značky v CRM nebo měsíční poznámku "pro jistotu". Pokud tyto stopy nemění rozhodnutí, ukončete je. Pokud rozhodnutí mění, už nejde o obchvat, ale o návratový signál a má vzniknout nový průchod.
+
+### Praktický SaaS příklad
+
+Tichý standard:
+
+```text
+U relevantní B2B poptávky bez rozpočtu pošli volitelnou otázku v potvrzovacím e-mailu. Nepřidávej povinné pole, lead scoring ani ruční seznam poptávek bez rozpočtu, dokud tři relevantní poptávky za sebou nepůjdou kvalifikovat ani po této otázce.
+```
+
+Přirozené review nastane při úpravě potvrzovací šablony. Tým se neptá, jestli má znovu otevřít kvalifikaci poptávek. Ptá se jen:
+
+```text
+Je tahle věta pořád na správném místě, dá se podle ní pracovat a nevznikla kolem ní pomocná evidence?
+```
+
+Možný závěr:
+
+```text
+Tichý standard zůstává beze změny. Věta je u potvrzovací šablony, obchod podle ní pracuje bez historie a nevedeme žádnou zvláštní evidenci poptávek bez rozpočtu.
+```
+
+Slabší závěr:
+
+```text
+Standard zůstává platný, ale přesouváme jeho pracovní větu z archivní poznámky přímo do potvrzovací šablony. Neotevíráme formulář, scoring ani nový report.
+```
+
+Návratový závěr:
+
+```text
+Review ukázalo skutečný návratový signál: poslední tři relevantní poptávky nešly kvalifikovat ani po volitelné otázce. Tichý standard neohýbáme; otevíráme nový průchod ke kvalifikaci poptávek s datovým minimem.
+```
+
+Tyto tři závěry vypadají podobně, ale vedou k úplně jiné práci. První nechává standard v klidu. Druhý opravuje umístění. Třetí otevírá nové téma. Nejhorší varianta je neurčité "budeme to sledovat". To zní zodpovědně, ale často jen znamená, že někdo založí tabulku bez jasného konce.
+
+### Privacy-first review
+
+Při přirozeném review se neptejte jen na to, jestli standard funguje. Ptejte se i na to, jestli kolem něj nevznikla datová stopa, která přežila vlastní účel.
+
+Použijte tři otázky:
+
+```text
+Jaká data standard opravdu potřebuje k rozhodnutí?
+Jaká data vznikla jen při ověřování nebo ze zvyku?
+Co můžeme smazat, sloučit zpět do původního systému nebo přestat vytvářet?
+```
+
+U privacy-first provozu je dobrý výsledek často negativní: nic nového nesbíráme, nic neposíláme dalšímu dodavateli, nic neexportujeme a žádný člověk nevede soukromý seznam. To není lenost. To je provozní disciplína. Data, která nepotřebujete pro rozhodnutí, se časem změní z opory na závazek.
+
+Codyho komentář: první přirozené review má být nudné v tom nejlepším smyslu. Pokud standard pořád funguje, nepřidávejte kolem něj efektní péči. Užitečné pravidlo si neříká o pozornost. Prostě stojí u práce, kde ho člověk potřebuje, a brání tomu, aby se z jedné otázky stal malý datový cirkus.
+
+### Karta přirozeného review
+
+```text
+Tichý standard:
+
+Pracovní místo, kde review přirozeně nastalo:
+
+Proč jsme standard otevřeli právě teď:
+
+Je pracovní věta na správném místě?
+
+Stačí k rozhodnutí bez historie?
+
+Je návratový signál pořád rozpoznatelný?
+
+Vznikla náhradní evidence nebo obchvat?
+
+Výsledek:
+- zůstává beze změny
+- lokálně opravujeme umístění nebo větu
+- ukončujeme obchvat
+- otevíráme nový průchod
+
+Krátký závěr:
+
+Co dál výslovně neotevíráme:
+
+Co mažeme, nepřenášíme nebo přestáváme vytvářet:
+
+Kde závěr bydlí:
+
+Vlastník pracovního místa:
+```
+
+Kartu použijte jen tehdy, když review našlo něco, co je potřeba rozhodnout. Pokud standard zůstává beze změny, stačí krátká věta u pracovního místa. Karta nemá být povinné razítko. Má zabránit tomu, aby se lokální oprava nebo obchvat rozpustily v neurčitém "někdy se k tomu vrátíme".
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: pojmenujte pracovní místo, kde review přirozeně nastalo.
+2. Minuta 2: přečtěte pracovní větu standardu.
+3. Minuta 3: ověřte návratový signál.
+4. Minuta 4: hledejte obchvaty a náhradní evidenci.
+5. Minuta 5: vyberte jeden výsledek review.
+6. Minuta 6: napište krátký závěr a ukončete zbytečné stopy.
+
+Pokud se workshop začne rozšiřovat do strategie, zastavte ho. Přirozené review není schůzka o budoucnosti produktu. Je to provozní kontrola jednoho standardu na místě, kde se stejně pracuje.
+
+### Checklist přirozeného review
+
+- Nastalo review přirozeně u pracovního místa, ne jako nový mimořádný režim?
+- Je standard pořád uložený tam, kde se opravdu používá?
+- Dá se podle pracovní věty rozhodnout bez staré historie?
+- Je návratový signál konkrétní a stále platný?
+- Zůstává původní zavřený rozsah zavřený?
+- Nevznikla náhradní evidence, štítek, tabulka, export, tracker nebo ruční seznam?
+- Pokud obchvat vznikl, má jasné rozhodnutí, vlastníka a konec, nebo ho rušíme?
+- Pokud se objevil návratový signál, otevíráme nový průchod místo tiché úpravy starého standardu?
+- Je privacy-first závěr jasný: co nesbíráme, co mažeme a co necháváme jen v původním systému?
+- Končí review jednou dohledatelnou větou u pracovního místa?
+
+První přirozené review má potvrdit, že tichý standard opravdu zapadl do práce. Když funguje, nechte ho být. Když drhne, opravte nejbližší pracovní místo. Když se změnila realita, otevřete nový průchod čistě. A když někde potichu vyrostla nová evidence, ukliďte ji dřív, než začne vypadat jako zavedený proces.
+
 ## Pracovní log
 
+- 2026-07-07: Doplněna úvodní podkapitola o prvním přirozeném review tichého standardu: kontrola pracovního místa, návratového signálu, obchvatů, privacy-first úklidu, karta, mini workshop a checklist.
 - 2026-07-07: Doplněna úvodní podkapitola o uzavření druhého běžného použití tichého standardu do pasivního provozu: tři uzavírací stavy, praktický SaaS příklad, privacy-first datový úklid, karta, mini workshop a checklist.
 - 2026-07-07: Doplněna úvodní podkapitola o druhém běžném použití tichého standardu: opakovatelnost, samostatnost, zavřený rozsah, privacy-first ukončení pomocné evidence, karta, mini workshop a checklist.
 - 2026-07-07: Doplněna úvodní podkapitola o uzavření prvního běžného použití tichého standardu: čtyři uzavírací stavy, praktický SaaS příklad, privacy-first úklid datových drobků, karta, mini workshop a checklist.
