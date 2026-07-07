@@ -307334,8 +307334,163 @@ Když se workshop nevejde do šesti minut, pravděpodobně neuzavíráte kontrol
 
 Uzavření první kontroly lehkého rytmu má vrátit pravidlo do normální práce. Pokud kontrola obstála, nechte ji být. Pokud narazila, opravte nejbližší místo. Pokud byla moc těžká, zúžte ji. Tím se z revize nestane nová agenda a z dlouhodobé paměti zůstane praktická opora, ne další úkol v převleku.
 
+## Druhá kontrola lehkého revizního rytmu
+
+Druhá kontrola lehkého revizního rytmu je důležitější než první, protože odhalí, jestli pravidlo opravdu funguje opakovaně, nebo jestli první kontrola prošla jen díky čerstvé paměti lidí, kteří ho zaváděli. První kontrola často stojí na dobrém kontextu. Druhá už přichází později, v běžnějším provozu, často s jiným člověkem, jiným detailem práce nebo s menší energií na metodiku.
+
+Nezačínejte otázkou, jestli by se pravidlo dalo zlepšit. Dalo. Všechno se dá zlepšit, dokud nezemřeme pod hromadou "drobných optimalizací". Začněte otázkou:
+
+```text
+Proběhla druhá kontrola ze stejného lehkého rytmu, nebo jsme si k pravidlu vytvořili nový důvod jen proto, že existuje?
+```
+
+Pokud druhá kontrola vznikla při běžném dotyku s pracovním místem, při jasném návratovém signálu nebo při skutečné změně kontextu, pokračujte. Pokud vznikla jen proto, že někdo otevřel seznam starých pravidel a chtěl mít dobrý pocit z údržby, výsledek může být prostý: pravidlo se nekontroluje a zůstává v klidu.
+
+### Co druhá kontrola ověřuje
+
+Druhá kontrola má ověřit čtyři věci:
+
+- pravidlo je stále dohledatelné bez původního autora;
+- kontrolní situace odpovídá zapsanému rytmu;
+- výsledek kontroly se vejde do jedné rozhodovací věty;
+- nevznikla nová datová stopa, která by z lehké revize udělala provozní evidenci.
+
+První bod je test samostatnosti. Pokud člověk najde pravidlo jen proto, že se zeptá pamětníka, pravidlo není uložené dobře. Druhý bod chrání před falešnou prací. Pokud se pravidlo kontroluje mimo svůj rytmus, pravděpodobně se z něj stává úkol. Třetí bod drží rozhodnutí malé. Čtvrtý bod je privacy-first brzda: žádný nový tracker, export, štítek ani pomocná tabulka jen proto, že druhá kontrola "už by měla být důkladnější".
+
+### Praktický SaaS příklad
+
+Původní pravidlo:
+
+```text
+U relevantní poptávky bez rozpočtu posíláme volitelnou otázku v potvrzovacím e-mailu. Formulář neměníme, dokud tři relevantní poptávky za sebou nejdou kvalifikovat ani po této otázce.
+```
+
+Lehký rytmus říká, že pravidlo kontrolujeme při úpravě potvrzovací šablony, při změně formuláře nebo při splnění návratového signálu. První kontrola proběhla při úpravě e-mailu a rytmus držel.
+
+Druhá kontrola může nastat takto:
+
+```text
+Kontrolní situace:
+Nový člověk upravuje potvrzovací e-mail kvůli přesnější větě o dalším kroku po poptávce.
+
+Ověření rytmu:
+Jde o revizi při dotyku se stejnou šablonou, takže kontrola odpovídá rytmu.
+
+Výsledek:
+Pravidlo je u šablony dohledatelné. Otázka na rozpočet zůstává volitelná. Návratový signál zůstává stejný.
+
+Datová stopa:
+Nevzniká seznam poptávek bez rozpočtu, CRM štítek ani report. Kontrola pracovala jen se šablonou a jedním běžným obchodním příkladem.
+```
+
+To je zdravá druhá kontrola. Ukazuje, že pravidlo nepotřebuje mimořádnou péči. Kdyby ale nový člověk pravidlo nenašel a musel se ptát, není to důvod otevřít celý obchodní proces. Je to důvod doplnit jednu kotvu u šablony:
+
+```text
+Lokální oprava:
+K potvrzovací šabloně doplňujeme krátkou větu "Rozpočet se ptáme volitelně v e-mailu; formulář neměníme bez návratového signálu".
+```
+
+Oprava je malá, protože problém byl v najitelnosti pravidla, ne v pravidle samotném.
+
+### Čtyři výsledky druhé kontroly
+
+Druhá kontrola má čtyři rozumné výsledky:
+
+- Rytmus je opakovatelný: pravidlo našel i další průchod a kontrola nevytvořila novou agendu.
+- Potřebuje poslední kotvu: pravidlo drží, ale musí být lépe viditelné u pracovního místa.
+- Rytmus se musí zúžit: kontrola znovu vyžaduje víc práce, než bylo slíbeno.
+- Pravidlo se vrací do návratu: objevil se skutečný návratový signál, který už nejde vyřešit lokální úpravou.
+
+Stav `rytmus je opakovatelný` je signál k většímu klidu, ne k většímu procesu. Po druhé úspěšné kontrole není potřeba zakládat třetí jen pro jistotu. Zapište, že rytmus obstál opakovaně, a dál kontrolujte pouze podle původních spouštěčů.
+
+Stav `potřebuje poslední kotvu` použijte, když pravidlo funguje, ale člověk ho musel hledat. Kotva má být nejmenší možná: odkaz, jedna věta, přesun do správné sekce nebo vymazání starého duplicitního zápisu. Nezakládejte nový index, pokud stačí přesunout větu blíž k práci.
+
+Stav `rytmus se musí zúžit` znamená, že i po první opravě je kontrola pořád těžká. V takovém případě se ptejte, který spouštěč je zbytečný. Možná kontrola při každé úpravě šablony nedává smysl a stačí jen návratový signál. Možná změna kontextu musí být přesnější. Zúžení má odstranit nadbytečný kontakt s pravidlem.
+
+Stav `pravidlo se vrací do návratu` používejte opatrně. Návrat není každé drobné tření. Návrat je chvíle, kdy se potvrdí podmínka, kvůli které se má znovu rozhodovat. Pokud tři relevantní poptávky za sebou nejdou kvalifikovat ani po volitelné otázce, je to návrat. Pokud jedna poptávka přišla chaoticky, je to běžná realita internetu, gratuluji.
+
+### Privacy-first druhá kontrola
+
+U druhé kontroly je největší riziko, že tým začne chtít "lepší jistotu". Jistota často znamená víc evidence: vytáhnout historii, označit výjimky, sledovat chování, porovnat konverze. Někdy to dává smysl, ale pak už nejde o lehkou revizi. Jde o nové rozhodnutí s vlastním účelem a vlastní retenční hranicí.
+
+Do druhé kontroly proto patří věta:
+
+```text
+Pro druhou kontrolu nepřidáváme žádnou novou dlouhodobou evidenci; pokud potřebujeme víc dat, otevíráme samostatnou otázku s vlastním účelem, rozsahem a pravidlem smazání.
+```
+
+Tahle věta chrání tým před nenápadným rozšiřováním datové stopy. Privacy-first provoz v Evropě není jen o tom, kde běží server. Je to i schopnost říct: pro toto rozhodnutí nám stačí pracovní důkaz, který už existuje, a zbytek nesbíráme.
+
+### Karta druhé kontroly rytmu
+
+```text
+Pravidlo:
+
+Původní lehký rytmus:
+
+První kontrola dopadla:
+
+Druhá kontrolní situace:
+
+Proč odpovídá rytmu:
+
+Kdo pravidlo použil bez původní historie:
+
+Výsledek:
+- rytmus je opakovatelný
+- potřebuje poslední kotvu
+- rytmus se musí zúžit
+- pravidlo se vrací do návratu
+
+Co se lokálně mění, pokud vůbec něco:
+
+Co zůstává zavřené:
+
+Jakou novou evidenci výslovně nezavádíme:
+
+Co mažeme nebo nepřenášíme dál:
+
+Závěrečná věta:
+```
+
+Závěrečná věta může znít:
+
+```text
+Druhá kontrola potvrdila, že pravidlo je dohledatelné u potvrzovací šablony a kontrola nevytvořila novou evidenci; rytmus zůstává lehký a další kontrola vznikne jen podle původních spouštěčů.
+```
+
+Pokud je závěrečná věta delší než malý odstavec, pravděpodobně už neuzavíráte druhou kontrolu. Pravděpodobně píšete omluvu pro nový proces.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte původní rytmus a závěr první kontroly.
+2. Minuta 2: pojmenujte druhou kontrolní situaci.
+3. Minuta 3: ověřte, jestli situace opravdu odpovídá rytmu.
+4. Minuta 4: vyberte jeden ze čtyř výsledků.
+5. Minuta 5: zapište privacy-first větu o evidenci, kterou nezavádíte.
+6. Minuta 6: napište závěrečnou větu a uložte ji k pracovnímu místu.
+
+Když se workshop zasekne na tom, že "by se hodilo mít lepší data", napište to jako samostatný podnět. Nelepte ho na druhou kontrolu. Druhá kontrola má rozhodnout, jestli rytmus funguje. Nemá vyřešit celý analytický hlad týmu.
+
+### Checklist druhé kontroly lehkého rytmu
+
+- Vznikla druhá kontrola z platného spouštěče rytmu?
+- Použil pravidlo někdo bez původní historie nebo čerstvého vysvětlení?
+- Bylo pravidlo dohledatelné u pracovního místa?
+- Vešel se výsledek do jedné rozhodovací věty?
+- Vybrali jsme jeden ze čtyř výsledků?
+- Pokud doplňujeme kotvu, je to opravdu jen lokální oprava?
+- Pokud zužujeme rytmus, víme, který spouštěč byl příliš těžký?
+- Pokud se pravidlo vrací do návratu, máme skutečný návratový signál?
+- Nevznikl nový tracker, export, štítek, tabulka, report ani dlouhodobý seznam?
+- Smazali jsme nebo nepřenášeli dočasné poznámky bez další hodnoty?
+- Je jasné, kdy další kontrola vznikne a kdy ne?
+
+Druhá kontrola lehkého revizního rytmu je test opakovatelnosti. Když pravidlo obstojí podruhé, dejte mu klid. Když potřebuje malou kotvu, doplňte ji. Když je rytmus těžký, zúžte ho. A když se opravdu objevil návratový signál, otevřete nové rozhodnutí s vlastním rozsahem. Všechno ostatní je jen administrativní fitness: člověk se zapotí, ale produkt ani zákazník z toho nemusí mít vůbec nic.
+
 ## Pracovní log
 
+- 2026-07-07: Doplněna úvodní podkapitola o druhé kontrole lehkého revizního rytmu: test opakovatelnosti bez původní historie, čtyři výsledky kontroly, praktický SaaS příklad, privacy-first hranice evidence, karta, mini workshop a checklist.
 - 2026-07-07: Doplněna úvodní podkapitola o uzavření první kontroly lehkého revizního rytmu: tři uzavírací stavy, praktický SaaS příklad, zúžení příliš těžkého rytmu, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-07-07: Doplněna úvodní podkapitola o první kontrole lehkého revizního rytmu: tři výsledky kontroly, praktický SaaS příklad, signály nabobtnání, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-07-07: Doplněna úvodní podkapitola o převodu ověřené dlouhodobé paměti do lehkého revizního rytmu: kontrolní místa, revize při dotyku, signálu nebo změně kontextu, privacy-first důkaz z běžné práce, karta, mini workshop a checklist.
