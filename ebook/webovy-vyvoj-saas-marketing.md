@@ -333,6 +333,8 @@ Běžná kontrola neotevřeného kroku má být nudná. To je její síla. Když
 
 Nejlepší stopa po takové kontrole je jedna věta v místě, kde se původní podnět objevil: co bylo znovu zkontrolováno, proč závěr pořád platí a co se dál výslovně neotevírá. Pokud věta potřebuje odstavce vysvětlování, kontrola už nejspíš přerostla do návratu nebo nové otázky.
 
+Když tuto větu ukládáte, nepřidávejte k ní nové přílohy jen pro pocit jistoty. Stačí odkaz na původní záznam a aktuální závěr; další důkaz má vzniknout až tehdy, když opravdu mění rozhodnutí.
+
 ## Návrat k neotevřenému kroku
 
 Neotevřený krok se někdy vrátí. To není chyba původního rozhodnutí. Dobrý záznam nemá téma navždy zamknout do sklepa; má zajistit, že se otevře až ve chvíli, kdy přijde lepší důvod než minule. Rozdíl je v tom, že návrat neznamená automatické spuštění původního návrhu. Znamená novou kontrolu: jestli se opravdu objevil návratový signál, jestli pořád platí stejná pracovní otázka a jestli lze otevřít menší krok než ten, který byl minule zamítnutý.
@@ -306884,3 +306886,4 @@ Druhé běžné použití je dobrý konec mimořádné pozornosti. Pokud standar
 - 2026-07-05: Doplněna krátká úvodní poznámka, aby neotevřený krok měl přirozené místo další kontroly v běžném rytmu práce.
 - 2026-07-05: Doplněna úvodní podkapitola o běžné kontrole neotevřeného kroku: rozlišení kontroly od návratu, tři výsledné stavy, privacy-first úklid dočasných stop, karta, mini workshop a checklist.
 - 2026-07-06: Doplněna krátká poznámka k běžné kontrole neotevřeného kroku, aby její závěr končil jednou dohledatelnou větou místo novou mini analýzou.
+- 2026-07-07: Doplněna krátká poznámka k jednověté stopě po běžné kontrole, aby nevznikaly nové přílohy bez rozhodovací hodnoty.
