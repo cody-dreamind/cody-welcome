@@ -307488,8 +307488,179 @@ Když se workshop zasekne na tom, že "by se hodilo mít lepší data", napište
 
 Druhá kontrola lehkého revizního rytmu je test opakovatelnosti. Když pravidlo obstojí podruhé, dejte mu klid. Když potřebuje malou kotvu, doplňte ji. Když je rytmus těžký, zúžte ho. A když se opravdu objevil návratový signál, otevřete nové rozhodnutí s vlastním rozsahem. Všechno ostatní je jen administrativní fitness: člověk se zapotí, ale produkt ani zákazník z toho nemusí mít vůbec nic.
 
+## Uzavření druhé kontroly lehkého revizního rytmu
+
+Druhá kontrola lehkého rytmu potřebuje vlastní uzavření. Ne proto, že by si každá kontrola zasloužila slavnostní ceduli, ale proto, že právě po druhém průchodu se rozhoduje, jestli pravidlo opravdu může zůstat lehké. Pokud uzavření neuděláte, tým často nechá otevřené dvě věci najednou: pravidlo samotné a rytmus jeho kontroly. Výsledek je klasický provozní mlžný opar: všichni vědí, že se "něco kontrolovalo", ale nikdo neví, jestli se má kontrolovat znovu.
+
+Uzavření začněte jednou větou:
+
+```text
+Druhou kontrolu lehkého rytmu uzavíráme takto:
+```
+
+Za ni napište výsledek, který říká tři věci: jestli rytmus obstál, co se případně lokálně mění a kdy se pravidlo znovu otevře. Nehodnoťte celou historii pravidla. Hodnoťte jen druhou kontrolu a její dopad na běžný provoz.
+
+Dobrá uzavírací věta může znít:
+
+```text
+Druhou kontrolu lehkého rytmu uzavíráme takto:
+Pravidlo bylo dohledatelné u potvrzovací šablony, nový člověk ho použil bez původní historie a nevznikla žádná nová evidence; rytmus proto zůstává lehký a další kontrola proběhne jen při změně šablony, změně kontextu nebo návratovém signálu.
+```
+
+Tahle věta není sexy. Díky bohu. Má být provozně jasná, ne nominovaná na copywriterskou cenu. Po jejím přečtení má být zřejmé, že pravidlo nežádá další mimořádnou péči.
+
+### Čtyři uzavírací stavy
+
+Po druhé kontrole vyberte jeden ze čtyř stavů:
+
+- Stabilní lehký rytmus: kontrola proběhla podle spouštěče, pravidlo bylo použitelné a nevznikla nová agenda.
+- Poslední lokální kotva: pravidlo drží, ale potřebuje jednu viditelnější větu, odkaz nebo přesun u pracovního místa.
+- Zúžit rytmus: kontrola byla opakovaně těžší, než má lehký rytmus unést.
+- Otevřít návrat: objevil se skutečný návratový signál a další práce už není jen údržba pravidla.
+
+Stav `stabilní lehký rytmus` je cílový. Znamená, že po druhém použití už neplánujete třetí speciální kontrolu. Pravidlo zůstává u pracovního místa a vrací se jen podle běžných spouštěčů. Pokud se tým cítí nesvůj, zapište raději přesnější návratový signál než další kalendářovou kontrolu.
+
+Stav `poslední lokální kotva` použijte, když kontrola odhalila čistě navigační problém. Typicky člověk pravidlo našel až po hledání, nebo viděl správný závěr, ale ne u místa, kde rozhodoval. Oprava má být malá: jedna věta u šablony, odkaz v indexu, přesun poznámky z archivu do kanonického místa, odstranění staré duplicity.
+
+Stav `zúžit rytmus` je pro situace, kdy lehký rytmus pořád generuje moc práce. Pokud kontrola při každé úpravě šablony vyžaduje otevírat obchodní historii, je spouštěč moc široký. Zúžení může znít třeba takto: "Nekontrolujeme pravidlo při každé textové úpravě šablony, ale jen při změně kvalifikační otázky nebo návratovém signálu."
+
+Stav `otevřít návrat` patří jen potvrzenému signálu. Pokud se například třikrát za sebou ukáže, že volitelná otázka na rozpočet nepomohla kvalifikovat relevantní poptávku, nejde už o lehkou revizi. Je to návrat k rozhodnutí a má dostat vlastní malý průchod, vlastní stop podmínku a vlastní privacy-first hranici.
+
+### Praktický příklad uzavření
+
+```text
+Pravidlo:
+Rozpočet se ptáme volitelně v potvrzovacím e-mailu u relevantních poptávek. Formulář neměníme bez návratového signálu.
+
+Druhá kontrola:
+Nový člověk upravoval potvrzovací šablonu a pravidlo našel u pracovního místa.
+
+Výsledek:
+Pravidlo použil správně, neotevřel formulář a nezaložil žádný seznam poptávek bez rozpočtu.
+
+Uzavírací stav:
+Stabilní lehký rytmus.
+
+Rozhodnutí:
+Pravidlo necháváme u šablony. Další kontrola vznikne jen při změně kvalifikační otázky, změně formuláře nebo návratovém signálu.
+
+Privacy-first závěr:
+Nevzniká nový CRM atribut, štítek ani export. Pracujeme jen s běžnou obchodní komunikací a zobecněnou větou v šabloně.
+```
+
+Slabší varianta:
+
+```text
+Druhá kontrola:
+Člověk pravidlo nenašel u šablony a otevřel starou rozhodovací kartu.
+
+Uzavírací stav:
+Poslední lokální kotva.
+
+Oprava:
+Ke šabloně doplňujeme jednu větu: "Rozpočet se ptáme volitelně v e-mailu; formulář neměníme bez návratového signálu."
+
+Co neotevíráme:
+Nový obchodní checklist, nový lead scoring ani revizi celého poptávkového toku.
+```
+
+V obou variantách zůstává zásah malý. Druhá kontrola nemá být záminka k tomu, aby se staré pravidlo znovu stalo projektem.
+
+### Privacy-first uzavření
+
+Po druhé kontrole uzavřete i datovou stopu kontroly. Ptejte se:
+
+```text
+Co vzniklo jen kvůli kontrole?
+
+Co opravdu patří do běžného pracovního místa?
+
+Co nepřenášíme dál?
+```
+
+Pokud kvůli kontrole vznikla dočasná poznámka, screenshot, seznam příkladů, kopie zákaznické odpovědi nebo ruční štítek, rozhodněte hned, co s tím. V lehkém rytmu obvykle stačí zobecněná věta u pravidla. Konkrétní zákaznické detaily nechte v původním systému, pokud tam mají legitimní účel, nebo je odstraňte podle retenčních pravidel. Nepřenášejte je do nové pracovní vrstvy jen proto, že pomohly při kontrole.
+
+Krátký privacy-first zápis:
+
+```text
+Do pravidla přenášíme:
+Jednu zobecněnou větu o tom, kdy se volitelná otázka používá.
+
+Nepřenášíme:
+Konkrétní odpovědi zákazníků, pomocný seznam poptávek ani nový CRM štítek.
+
+Dál nesbíráme:
+Rozpočet jako povinné pole, automatické skóre leadu ani dlouhodobý report výjimek.
+```
+
+Tím se lehký rytmus opravdu uzavře jako lehký. Nezůstane po něm nová evidence, která bude za půl roku vypadat důležitě jen proto, že nikdo neví, proč vznikla.
+
+### Karta uzavření druhé kontroly
+
+```text
+Pravidlo:
+
+Lehký rytmus:
+
+Druhá kontrolní situace:
+
+Co se opravdu stalo:
+
+Uzavírací stav:
+- stabilní lehký rytmus
+- poslední lokální kotva
+- zúžit rytmus
+- otevřít návrat
+
+Rozhodnutí jednou větou:
+
+Co se mění u pracovního místa:
+
+Co zůstává zavřené:
+
+Kdy vznikne další kontrola:
+
+Privacy-first uzavření:
+Co přenášíme:
+Co nepřenášíme:
+Co dál nesbíráme:
+
+Vlastník:
+
+Kde je závěr uložený:
+```
+
+Karta má být poslední stopa mimořádné pozornosti. Pokud po jejím vyplnění pořád potřebujete další schůzku, pravděpodobně nejde o uzavření druhé kontroly, ale o návrat k tématu.
+
+### Mini workshop na 5 minut
+
+1. Minuta 1: přečtěte druhou kontrolní situaci a původní lehký rytmus.
+2. Minuta 2: napište, co se opravdu stalo.
+3. Minuta 3: vyberte jeden ze čtyř uzavíracích stavů.
+4. Minuta 4: napište rozhodnutí jednou větou a určete další spouštěč kontroly.
+5. Minuta 5: uzavřete privacy-first stopu: co přenášíte, co nepřenášíte a co dál nesbíráte.
+
+Pokud se během pěti minut otevře debata o nových datech, metrikách nebo automatizaci, zastavte ji jako samostatný podnět. Druhá kontrola nemá obsloužit analytickou chuť týmu. Má říct, jestli lehký rytmus zůstává lehký.
+
+### Checklist uzavření druhé kontroly
+
+- Máme konkrétní výsledek druhé kontroly?
+- Vybrali jsme jeden ze čtyř uzavíracích stavů?
+- Je rozhodnutí napsané jednou větou?
+- Pokud rytmus zůstává stabilní, neplánujeme další kontrolu jen pro jistotu?
+- Pokud doplňujeme kotvu, je oprava u nejbližšího pracovního místa?
+- Pokud zužujeme rytmus, je jasné, který spouštěč byl moc široký?
+- Pokud otevíráme návrat, máme skutečný návratový signál?
+- Zůstává původní širší rozsah výslovně zavřený?
+- Uzavřeli jsme dočasné poznámky, screenshoty, exporty, štítky nebo pomocné seznamy?
+- Nepřenášíme osobní ani obchodní detaily do nové vrstvy bez jasného účelu?
+- Ví další člověk, kdy pravidlo znovu kontrolovat a kdy ho nechat v klidu?
+
+Uzavření druhé kontroly lehkého revizního rytmu má jednoduchý výsledek: pravidlo buď může dál tiše fungovat, nebo dostane jednu poslední lokální opravu, nebo se poctivě vrátí do rozhodování. Všechny tři dobré výsledky mají společné jedno: nevyrábějí novou evidenci jen proto, že tým zrovna kontroloval, jestli něco pořád funguje.
+
 ## Pracovní log
 
+- 2026-07-07: Doplněna úvodní podkapitola o uzavření druhé kontroly lehkého revizního rytmu: čtyři uzavírací stavy, praktický SaaS příklad, privacy-first uzavření datové stopy, karta, mini workshop a checklist.
 - 2026-07-07: Doplněna úvodní podkapitola o druhé kontrole lehkého revizního rytmu: test opakovatelnosti bez původní historie, čtyři výsledky kontroly, praktický SaaS příklad, privacy-first hranice evidence, karta, mini workshop a checklist.
 - 2026-07-07: Doplněna úvodní podkapitola o uzavření první kontroly lehkého revizního rytmu: tři uzavírací stavy, praktický SaaS příklad, zúžení příliš těžkého rytmu, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-07-07: Doplněna úvodní podkapitola o první kontrole lehkého revizního rytmu: tři výsledky kontroly, praktický SaaS příklad, signály nabobtnání, privacy-first úklid, karta, mini workshop a checklist.
