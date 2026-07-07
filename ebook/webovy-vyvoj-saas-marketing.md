@@ -307658,8 +307658,165 @@ Pokud se během pěti minut otevře debata o nových datech, metrikách nebo aut
 
 Uzavření druhé kontroly lehkého revizního rytmu má jednoduchý výsledek: pravidlo buď může dál tiše fungovat, nebo dostane jednu poslední lokální opravu, nebo se poctivě vrátí do rozhodování. Všechny tři dobré výsledky mají společné jedno: nevyrábějí novou evidenci jen proto, že tým zrovna kontroloval, jestli něco pořád funguje.
 
+## Převod lehkého revizního rytmu do pasivního standardu
+
+Lehký revizní rytmus nemá být nová instituce. Má sloužit jen tak dlouho, dokud tým potřebuje ověřit, že se pravidlo po předchozích opravách opravdu používá samo, bez čerstvé paměti a bez nenápadných obchvatů. Po dvou dobrých kontrolách už další pravidelná kontrola často nepřidává hodnotu. Přidává jen kalendářovou položku, další poznámku a příjemný pocit, že se o věc pečuje. To je hezké, ale hezké věci umí být provozně pěkně drahé.
+
+Pasivní standard je stav, kdy pravidlo zůstává dostupné, srozumitelné a vlastněné, ale nekontroluje se samo pro sebe. Vrací se do práce jen tehdy, když se přirozeně použije, když přijde návratový signál, nebo když se změní kontext, ve kterém pravidlo dává smysl. Jinými slovy: standard pořád existuje, ale tým kolem něj nepálí pozornost jen proto, že kdysi vznikl.
+
+Převod začněte jednou větou:
+
+```text
+Lehký revizní rytmus končí, protože pravidlo obstálo ve dvou běžných kontrolách; dál se vrací jen při použití, změně kontextu nebo návratovém signálu.
+```
+
+Tahle věta má dvě práce. Zaprvé ukončuje zvláštní péči. Zadruhé říká, že standard nezmizel. To je důležité hlavně v týmech, kde "už to nekontrolujeme" občas znamená "nikdo neví, jestli to ještě platí". Pasivní standard není zapomenutí. Je to dospělý provoz.
+
+### Co musí být hotové před převodem
+
+Do pasivního standardu převádějte jen pravidlo, které splňuje čtyři podmínky:
+
+- Má kanonické pracovní místo, kde ho člověk opravdu najde.
+- Má rozhodovací větu, podle které lze jednat bez vysvětlování historie.
+- Má návratový signál, který říká, kdy se má téma znovu otevřít.
+- Nemá kolem sebe aktivní pomocnou evidenci, skrytý checklist ani dočasný export.
+
+Pokud některá podmínka chybí, nepřevádějte rytmus do pasivního režimu. Nejdřív udělejte jednu lokální opravu. Pasivní standard bez kanonického místa je jen tiché přání. Pasivní standard bez návratového signálu je past: tým ho buď nikdy neotevře, nebo ho bude otevírat pokaždé, když někdo dostane pocit, že "by se na to mělo mrknout".
+
+Praktická kontrola:
+
+```text
+Kdyby dnes nastoupil nový člověk, našel by pravidlo bez odkazu v chatu?
+Rozhodl by podle něj konkrétní situaci bez vysvětlování?
+Věděl by, kdy pravidlo nechat být?
+Nevzniká vedle pravidla žádná druhá, neoficiální stopa?
+```
+
+Pokud čtyřikrát odpovíte ano, rytmus může ztichnout. Pokud ne, opravte nejbližší slabé místo a převod odložte. Odložení není prohra. Je to lepší než slavnostně převést do pasivního provozu něco, co se při prvním běžném použití zase rozsype na pracovní archeologii.
+
+### Praktický SaaS příklad
+
+Tým má standard pro poptávky bez uvedeného rozpočtu. Pravidlo říká, že se do formuláře nepřidává povinné pole "rozpočet", dokud se problém nepotvrdí opakovaně. Obchod má místo toho v potvrzovací šabloně jednu otázku na cíl projektu a rozhodovací proces. Privacy-first důvod je jasný: nesbírat obchodní údaj dřív, než má pro zákazníka i tým skutečnou hodnotu.
+
+Po první kontrole se ukázalo, že obchodník pravidlo našel, ale věta byla moc dlouhá. Tým ji zkrátil. Po druhé kontrole nový člověk použil šablonu bez vysvětlování, poptávku kvalifikoval a nikde bokem nevznikla tabulka "chybějící rozpočty". To je dobrý kandidát na pasivní standard.
+
+Závěr může vypadat takto:
+
+```text
+Standard pro poptávky bez rozpočtu přechází do pasivního provozu. Platná věta je u potvrzovací šablony: "Rozpočet v prvním kontaktu nesbíráme, dokud tři relevantní poptávky za sebou nepůjdou kvalifikovat bez ručního doptání na rozpočet." Další kontrola nevzniká kalendářem, ale pouze při použití šablony, změně formuláře nebo splnění návratového signálu.
+```
+
+Všimněte si, co v závěru není. Není tam nový měsíční report. Není tam nová metrika. Není tam povinnost sledovat každou poptávku. Standard je připravený zasáhnout, když nastane správná situace, ale jinak nechává tým pracovat.
+
+### Tři spouštěče pasivního standardu
+
+Pasivní standard se vrací jen třemi způsoby:
+
+- Přirozené použití: někdo pravidlo použije při běžné práci.
+- Změna kontextu: změní se formulář, nabídka, segment, týmová role, nástroj nebo právní či provozní rámec.
+- Návratový signál: nastane předem popsaná situace, která má pravidlo znovu otevřít.
+
+Každý spouštěč vede k jiné reakci. Přirozené použití obvykle nepotřebuje zápis, pokud pravidlo funguje. Změna kontextu potřebuje krátkou kontrolu platnosti. Návratový signál potřebuje nový malý průchod, protože už nejde o údržbu, ale o důvod k rozhodnutí.
+
+Příklad rozdílu:
+
+```text
+Přirozené použití:
+Obchod použil potvrzovací šablonu a poptávku kvalifikoval bez doptání na rozpočet. Bez zápisu.
+
+Změna kontextu:
+Formulář se přesouvá na novou landing page pro enterprise segment. Zkontrolovat, jestli rozhodovací věta pořád sedí.
+
+Návratový signál:
+Tři relevantní poptávky za sebou nejdou kvalifikovat bez rozpočtu. Otevřít nový malý průchod, ne rovnou přidat pole.
+```
+
+Tím se pasivní standard chrání před dvěma extrémy. Na jedné straně nezmizí do zapomnění. Na druhé straně z něj nevznikne drobná byrokracie, která kontroluje sama sebe, protože už má v kalendáři vlastní židli.
+
+### Privacy-first převod
+
+Při převodu do pasivního standardu udělejte poslední datový úklid. Cílem je ukončit všechno, co vzniklo jen kvůli reviznímu období:
+
+- dočasné seznamy příkladů,
+- screenshoty konkrétních poptávek,
+- pomocné štítky v CRM,
+- exporty pro kontrolu,
+- kopie šablon s poznámkami,
+- chatová vlákna používaná jako náhradní dokumentace.
+
+Nechte jen to, co má provozní účel: kanonickou větu, umístění pravidla, návratový signál a vlastníka. Pokud potřebujete příklad, zobecněte ho. Nepřenášejte do pasivního standardu osobní údaje, obchodní detaily ani konkrétní zákaznický kontext. Pasivní režim má být lehčí i datově, ne jen procesně.
+
+Dobrá privacy-first věta:
+
+```text
+Do pasivního standardu nepřenášíme konkrétní poptávky, export kontrol ani pomocné CRM štítky; zůstává jen obecná rozhodovací věta u šablony a návratový signál pro případ opakovaného problému.
+```
+
+Codyho komentář: nejčistší provozní dokumentace často není ta nejdelší. Je to ta, po které se nemusí mazat hromada vedlejších stop, protože si na začátku odpustila sbírání materiálu "pro jistotu". Ano, někdy je těžké odolat. Dokumentační hlad je skutečná věc. Ale databáze za něj platí účty.
+
+### Karta převodu do pasivního standardu
+
+```text
+Standard:
+
+Kanonické pracovní místo:
+
+Platná rozhodovací věta:
+
+Proč končí lehký revizní rytmus:
+
+Co bylo ověřeno ve dvou kontrolách:
+
+Další spouštěče:
+- přirozené použití
+- změna kontextu
+- návratový signál
+
+Co se už pravidelně nekontroluje:
+
+Co zůstává výslovně zavřené:
+
+Privacy-first úklid:
+Mažeme nebo zavíráme:
+Nepřenášíme:
+Ponecháváme:
+
+Vlastník:
+
+Kde je převod zapsaný:
+```
+
+Karta má být krátká. Pokud se nevejde na jednu obrazovku, pravděpodobně do ní cpete historii, která patří do archivu, ne do pasivního standardu. Člověk, který pravidlo použije za tři měsíce, nepotřebuje vědět, kolikrát se tým hádal o formulář. Potřebuje vědět, co má udělat dnes.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte rozhodovací větu a kanonické místo.
+2. Minuta 2: napište, co dvě kontroly skutečně ověřily.
+3. Minuta 3: určete, co se odteď už pravidelně nekontroluje.
+4. Minuta 4: napište tři spouštěče návratu pasivního standardu.
+5. Minuta 5: proveďte privacy-first úklid pomocných stop.
+6. Minuta 6: zapište jednu převodovou větu u pracovního místa.
+
+Když se během workshopu objeví nový problém, nezahrnujte ho do převodu. Zapište ho jako samostatný podnět a dokončete převod jen tehdy, pokud původní standard opravdu obstál. Pasivní standard nemá být odkladiště nových nápadů. Má být klidné místo pro pravidlo, které už si zasloužilo nebýt pořád na stole.
+
+### Checklist převodu do pasivního standardu
+
+- Proběhly aspoň dvě běžné kontroly bez potřeby mimořádné péče?
+- Je jasné kanonické pracovní místo?
+- Je rozhodovací věta krátká a použitelná bez historie?
+- Má standard návratový signál?
+- Víme, které pravidelné kontroly končí?
+- Jsou popsané tři spouštěče dalšího návratu?
+- Zůstává původní širší rozsah zavřený?
+- Uklidili jsme dočasné seznamy, exporty, štítky, screenshoty a kopie?
+- Nepřenášíme do pasivního standardu osobní ani obchodní detaily bez účelu?
+- Ví vlastník, že jeho práce není standard hlídat každý měsíc, ale udržet jeho pracovní místo použitelné?
+
+Převod lehkého revizního rytmu do pasivního standardu je malý akt důvěry. Tým tím říká: pravidlo funguje, víme kde bydlí, víme kdy se vrátí a nebudeme mu zřizovat kancelář jen proto, že se osvědčilo. V dobrém SaaS provozu je tohle důležité. Ne všechno, co funguje, si zaslouží další proces. Některé věci si zaslouží klid.
+
 ## Pracovní log
 
+- 2026-07-07: Doplněna úvodní podkapitola o převodu lehkého revizního rytmu do pasivního standardu: podmínky převodu, praktický SaaS příklad, tři spouštěče návratu, privacy-first datový úklid, karta, mini workshop a checklist.
 - 2026-07-07: Doplněna úvodní podkapitola o uzavření druhé kontroly lehkého revizního rytmu: čtyři uzavírací stavy, praktický SaaS příklad, privacy-first uzavření datové stopy, karta, mini workshop a checklist.
 - 2026-07-07: Doplněna úvodní podkapitola o druhé kontrole lehkého revizního rytmu: test opakovatelnosti bez původní historie, čtyři výsledky kontroly, praktický SaaS příklad, privacy-first hranice evidence, karta, mini workshop a checklist.
 - 2026-07-07: Doplněna úvodní podkapitola o uzavření první kontroly lehkého revizního rytmu: tři uzavírací stavy, praktický SaaS příklad, zúžení příliš těžkého rytmu, privacy-first úklid, karta, mini workshop a checklist.
