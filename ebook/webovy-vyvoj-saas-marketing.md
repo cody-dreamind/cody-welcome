@@ -304755,8 +304755,147 @@ Když se během workshopu objeví návrh na nové měření, ptejte se, jaké ro
 
 Uzavření druhého přirozeného použití má být poslední tečka za dlouhodobým klidem. Pokud pravidlo prošlo, nechte ho žít bez dohledu. Pokud potřebuje poslední kotvu, opravte ji přesně tam, kde chyběla. A pokud se opravdu splnil návratový signál, otevřete nový průchod čistě, s vlastním rozsahem a bez pašování staré pomocné evidence do běžného provozu.
 
+## Převod potvrzeného klidu do tichého standardu
+
+Když záznam po dlouhodobém klidu obstál i při druhém přirozeném použití, je čas přestat se k němu chovat jako k živé otázce. Téma už nemusí mít zvláštní péči, pravidelné kontroly ani samostatnou pozornost. Potřebuje jen tichý standard: krátké pravidlo v místě práce, jasný návratový signál a žádnou novou datovou stopu.
+
+Tichý standard není další šablona navíc. Je to provozní stav, kdy se dobré rozhodnutí stane součástí běžného prostředí. Člověk otevře potvrzovací e-mail, CRM poznámku, onboardingový checklist nebo redakční kartu a najde tam krátkou větu, která mu pomůže rozhodnout. Nemusí číst historii, hledat staré zápisy ani se ptát původního vlastníka, co tím kdysi tým myslel.
+
+Začněte převodovou větou:
+
+```text
+Záznam převádíme do tichého standardu, protože:
+```
+
+Prakticky:
+
+```text
+Záznam převádíme do tichého standardu, protože pravidlo dvakrát obstálo v přirozené práci, použil ho i člověk bez původní historie a nevznikla nová evidence rozpočtových údajů.
+```
+
+Tahle věta je hranice. Říká, proč se téma už dál nekontroluje jako výjimka. Zároveň brání tomu, aby někdo za měsíc znovu otevřel staré review jen proto, že pravidlo existuje a vypadá důležitě. Důležitá pravidla nemusí být hlučná. Někdy jsou nejlepší právě tehdy, když je nikdo neřeší.
+
+### Co do tichého standardu patří
+
+Do tichého standardu přenášejte jen tři věci:
+
+- pracovní větu,
+- návratový signál,
+- odkaz na kanonický záznam nebo archivní minimum.
+
+Pracovní věta má být použitelná bez kontextu. Ne "viz rozhodnutí z června", ale "u relevantní B2B poptávky bez rozpočtu pošli volitelnou otázku; nepřidávej povinné pole ani pomocný seznam, dokud tři poptávky za sebou nepůjdou kvalifikovat." To je věta, se kterou člověk může pracovat hned.
+
+Návratový signál chrání pravidlo před věčným životem bez reality. Tichý standard neznamená, že se rozhodnutí už nikdy nezmění. Znamená, že se změní jen při konkrétním důvodu. Pokud signál nenastane, pravidlo dál pracuje v klidu.
+
+Odkaz na kanonický záznam stačí krátký. Není potřeba kopírovat celou historii do každého pracovního místa. Stačí, aby člověk věděl, kde najde důvod, pokud ho opravdu potřebuje. Běžné použití se má opřít o pracovní větu, ne o archiv.
+
+### Co do tichého standardu nepatří
+
+Do tichého standardu nepřenášejte:
+
+- pomocné tabulky z ověření,
+- konkrétní zákaznické odpovědi,
+- screenshoty interních vláken,
+- ruční počítadla opakování,
+- dočasné štítky,
+- seznam lidí, kteří byli u původního rozhodnutí.
+
+Tyto věci možná pomohly při rozhodování, ale nejsou potřeba pro běžný provoz. Pokud je necháte přilepené k pravidlu, tichý standard se změní v malý archiv s cizími daty a nejasným vlastníkem. To je přesně ten typ provozního sedimentu, který privacy-first tým nemá hromadit.
+
+Codyho komentář: když si tým řekne "necháme to u toho pro jistotu", většinou tím myslí "nechce se nám teď rozhodnout, co s tím". Jenže data nemají být suvenýr z rozhodování. Buď mají účel, vlastníka a konec, nebo patří pryč.
+
+### Praktický SaaS příklad
+
+Výchozí situace:
+
+```text
+Původní otázka:
+Máme přidat do poptávkového formuláře povinné pole pro rozpočet?
+
+Ověřené pravidlo:
+Nejdřív posíláme volitelnou otázku v potvrzovacím e-mailu.
+
+Návratový signál:
+Tři relevantní poptávky za sebou nejdou kvalifikovat ani po volitelné otázce.
+```
+
+Tichý standard v pracovním místě:
+
+```text
+U relevantní B2B poptávky bez rozpočtu pošli volitelnou otázku v potvrzovacím e-mailu. Nepřidávej povinné pole, lead scoring ani ruční seznam poptávek bez rozpočtu, dokud tři relevantní poptávky za sebou nepůjdou kvalifikovat ani po této otázce.
+```
+
+Kanonický odkaz:
+
+```text
+Detail rozhodnutí: obchodní formulář / neotevřené pole rozpočtu / archivní minimum.
+```
+
+Privacy-first úklid:
+
+```text
+Konkrétní odpovědi zákazníků zůstávají jen v obchodních vláknech. Do šablony přenášíme pouze zobecněné pravidlo a návratový signál. Pomocnou tabulku z ověření mažeme.
+```
+
+Takhle má vypadat převod do tichého standardu. Člověk v provozu má jasný první krok. Produkt ví, co zůstává zavřené. Marketing nemusí přepisovat stránku. Privacy-first provoz nevyrábí nový datový stín.
+
+### Karta převodu do tichého standardu
+
+```text
+Původní záznam:
+
+Proč převádíme do tichého standardu:
+
+Pracovní místo, kde má standard bydlet:
+
+Krátká pracovní věta:
+
+Návratový signál:
+
+Co zůstává výslovně zavřené:
+
+Kanonický záznam nebo archivní minimum:
+
+Co nepřenášíme do běžného provozu:
+
+Co mažeme, anonymizujeme nebo necháváme v původním systému:
+
+Kdo vlastní pracovní místo:
+
+Kdy se standard znovu otevře:
+```
+
+Karta má vzniknout jednou. Potom už se nemá sama stát dalším místem údržby. Pokud je pracovní věta u správné šablony a návratový signál je jasný, karta splnila účel.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: potvrďte, že druhé přirozené použití opravdu obstálo.
+2. Minuta 2: vyberte jediné pracovní místo, kde bude standard vidět.
+3. Minuta 3: napište pracovní větu bez historického kontextu.
+4. Minuta 4: doplňte návratový signál a zavřený rozsah.
+5. Minuta 5: rozhodněte, které pomocné stopy se smažou nebo zůstanou jen v původním systému.
+6. Minuta 6: uložte kanonický odkaz a zavřete mimořádnou péči.
+
+Pokud v šesté minutě vznikne nápad na další měření, dejte ho mimo převod. Tichý standard není místo pro nové experimenty. Pokud existuje nový problém, otevřete ho samostatně s vlastní otázkou a vlastním datovým minimem.
+
+### Checklist tichého standardu
+
+- Převádíme pravidlo až po ověřeném druhém přirozeném použití?
+- Je pracovní věta srozumitelná bez původní historie?
+- Bydlí standard přímo u pracovního místa, kde se používá?
+- Je návratový signál konkrétní a poznatelný?
+- Je jasné, co zůstává zavřené?
+- Nepřenášíme do standardu konkrétní zákaznická data?
+- Smazali jsme nebo uzavřeli pomocné tabulky, štítky, exporty a ruční počítadla?
+- Má standard vlastníka pracovního místa, ne vlastníka staré diskuse?
+- Nevzniká nový kontrolní rytmus jen proto, že pravidlo existuje?
+- Umí další člověk pravidlo použít bez dotazu na původního autora?
+
+Převod do tichého standardu je malá, ale důležitá tečka. Pravidlo už nemusí dokazovat, že je užitečné. Stačí, aby bylo blízko práci, drželo zavřený rozsah a neprodukovalo zbytečná data. Když se později objeví skutečný návratový signál, otevřete nové posouzení. Do té doby nechte standard dělat přesně to, kvůli čemu vznikl: pomáhat bez hluku.
+
 ## Pracovní log
 
+- 2026-07-07: Doplněna úvodní podkapitola o převodu potvrzeného klidu do tichého standardu: pracovní věta, návratový signál, praktický SaaS příklad, privacy-first úklid pomocných stop, karta, mini workshop a checklist.
 - 2026-07-07: Doplněna úvodní podkapitola o uzavření druhého přirozeného použití po dlouhodobém klidu: uzavírací stavy, praktické SaaS příklady, privacy-first ukončení náhradní evidence, karta, mini workshop a checklist.
 - 2026-07-06: Doplněna úvodní podkapitola o druhém přirozeném použití záznamu po dlouhodobém klidu: ověření přenositelnosti, výsledné stavy, praktický SaaS příklad, privacy-first kontrola náhradní evidence, karta, mini workshop a checklist.
 - 2026-07-06: Doplněna úvodní podkapitola o uzavření prvního přirozeného použití záznamu po dlouhodobém klidu: uzavírací stavy, praktické SaaS příklady, privacy-first úklid datové stopy, karta, mini workshop a checklist.
