@@ -305374,8 +305374,172 @@ Pokud workshop potřebuje víc než šest minut, pravděpodobně už neřešíte
 
 Druhé běžné použití je dobrý konec mimořádné pozornosti. Pokud standard obstál, zavřete kontrolní režim a nechte pravidlo žít v pracovním místě. Pokud potřebuje poslední lokální zpřesnění, udělejte ho bez rozšiřování. A pokud se ukáže, že se změnila realita, otevřete nový průchod čistě. V každé variantě platí totéž: nepřidávejte data, která nepotřebujete pro rozhodnutí.
 
+## Uzavření druhého běžného použití tichého standardu
+
+Druhé běžné použití tichého standardu je dobrý okamžik přestat kolem pravidla chodit po špičkách. Pokud standard obstál dvakrát v běžné práci, má se vrátit do pasivního provozu: zůstane u pracovního místa, má jasný návratový signál a dál se nehlídá zvláštním režimem. Cílem není dokázat, že pravidlo je dokonalé. Cílem je rozhodnout, že už nepotřebuje mimořádnou pozornost.
+
+Uzavření proto začněte jednou větou:
+
+```text
+Druhé běžné použití uzavíráme takto:
+```
+
+Za ni napište stav, který tým dokáže použít bez dalšího vysvětlování:
+
+```text
+Druhé běžné použití uzavíráme takto:
+Tichý standard zůstává v pasivním provozu. Pracovní věta u e-mailové šablony stačila i druhému člověku, povinné pole pro rozpočet zůstává zavřené a pomocnou evidenci nevedeme.
+```
+
+V té větě jsou čtyři důležité věci: standard zůstává, kde má být; druhé použití potvrdilo samostatnost; původní široký rozsah zůstává zavřený; nevzniká nová evidence. Když některá část chybí, tým si ji začne domýšlet. A domýšlení je přesně místo, kde se z tichého standardu zase stane téma na poradu. Radost nesmírná, efekt sporný.
+
+### Tři uzavírací stavy
+
+Po druhém použití vyberte jen jeden ze tří stavů:
+
+- Vrátit do pasivního provozu: standard funguje samostatně a nepotřebuje další kontrolu.
+- Udělat poslední lokální opravu: standard drží, ale jedna věta, odkaz nebo umístění ještě potřebuje dočistit.
+- Otevřít nový průchod: druhé použití ukázalo nový návratový signál, který už nepatří do údržby standardu.
+
+Stav `vrátit do pasivního provozu` je nejčistší. Znamená, že pravidlo zůstává u pracovního místa a další kontrola se spustí jen tehdy, když přijde návratový signál nebo přirozené review daného místa. Nepřidávejte periodický ping jen proto, že standard je důležitý. Důležité pravidlo má být srozumitelné v práci, ne obalené další správou.
+
+Stav `poslední lokální oprava` použijte střídmě. Smí opravit jen nejbližší slabinu: přepsat větu, přesunout ji k šabloně, doplnit jeden příklad nebo zrušit pomocný seznam. Jakmile oprava potřebuje víc pracovních míst, už nejde o poslední lokální opravu. Je to nový průchod a má dostat vlastní otázku.
+
+Stav `otevřít nový průchod` je správný, když se opravdu změnila realita. Například druhé použití ukáže, že problém není v rozpočtu, ale v tom, že lidé nerozumí rozdílu mezi jednorázovým auditem a dlouhodobým vývojem. Pak neohýbejte starý standard. Uzavřete ho a otevřete nové téma s novým pracovním místem.
+
+### Praktický příklad
+
+```text
+Tichý standard:
+U relevantní B2B poptávky bez rozpočtu lze v potvrzovacím e-mailu poslat volitelnou otázku na rámcový rozpočet. Formulář se nemění.
+
+Druhé použití:
+Jiný obchodník použil větu u nové poptávky bez vysvětlení od původního týmu.
+
+Výsledek:
+Otázku poslal správně, další krok šel navrhnout a nevznikl nový CRM atribut.
+
+Uzavírací stav:
+Vrátit do pasivního provozu.
+
+Co zůstává zavřené:
+Povinné pole pro rozpočet, automatický lead scoring, export poptávek a pravidelný report použití otázky.
+
+Návratový signál:
+K tématu se vrátíme jen pokud tři relevantní poptávky za sebou nepůjde kvalifikovat pomocí běžné e-mailové otázky.
+```
+
+Slabší varianta:
+
+```text
+Druhé použití:
+Obchodník větu našel, ale nebylo jasné, jestli ji má použít i u velmi malé poptávky bez placeného záměru.
+
+Uzavírací stav:
+Poslední lokální oprava.
+
+Oprava:
+Do věty doplňujeme spouštěč "u relevantní B2B poptávky s placeným záměrem".
+
+Co neotevíráme:
+Novou kvalifikační tabulku, scoring ani změnu formuláře.
+```
+
+Tahle slabší varianta pořád není problém pro celý systém. Je to nepřesný spouštěč ve větě. Opravte spouštěč a konec. Pokud kvůli tomu založíte nový proces, vyhráli jste administrativní soutěž, kterou nikdo nevyhlásil.
+
+### Privacy-first uzavření
+
+Při převodu do pasivního provozu udělejte datový úklid hned. Tichý standard nemá po sobě nechávat pomocnou evidenci jen proto, že vznikla během ověřování. Pokud už pravidlo funguje, zůstává pracovní věta, návratový signál a případně anonymizovaný příklad. Konkrétní zákaznické detaily patří pouze do původního obchodního nebo provozního systému, pokud tam mají legitimní důvod.
+
+Použijte krátký zápis:
+
+```text
+V pasivním provozu ponecháváme:
+
+Po uzavření rušíme:
+
+Nadále nesbíráme:
+```
+
+Příklad:
+
+```text
+V pasivním provozu ponecháváme:
+Pracovní větu u potvrzovací e-mailové šablony a návratový signál u obchodního checklistu.
+
+Po uzavření rušíme:
+Pomocnou poznámku se dvěma konkrétními poptávkami z ověřování.
+
+Nadále nesbíráme:
+Rozpočet jako povinné pole, automatické skóre leadu, zvláštní tabulku a měsíční report použití otázky.
+```
+
+Privacy-first hodnota je tady velmi praktická. Standard zůstane použitelný, ale provoz se nerozroste o další datovou vrstvu. To je přesně rozdíl mezi znalostí a hromaděním: znalost se vejde do pracovní věty, hromadění potřebuje další tabulku a pak se tváří jako řízení.
+
+### Karta uzavření do pasivního provozu
+
+```text
+Tichý standard:
+
+Pracovní místo:
+
+Druhé běžné použití:
+
+Výsledek:
+
+Uzavírací stav:
+- vrátit do pasivního provozu
+- poslední lokální oprava
+- otevřít nový průchod
+
+Finální pracovní věta:
+
+Co zůstává výslovně zavřené:
+
+Návratový signál:
+
+V pasivním provozu ponecháváme:
+
+Po uzavření rušíme:
+
+Nadále nesbíráme:
+
+Kde závěr bydlí:
+
+Vlastník pracovního místa:
+```
+
+Karta má být poslední stopa mimořádné péče, ne začátek nové evidence. Pokud se po jejím vyplnění objeví chuť založit další seznam kontrol, vraťte se k uzavíracímu stavu. Pasivní provoz znamená, že pravidlo žije v práci a ozve se až při signálu.
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: přečtěte finální pracovní větu standardu.
+2. Minuta 2: ověřte výsledek druhého běžného použití.
+3. Minuta 3: vyberte jeden ze tří uzavíracích stavů.
+4. Minuta 4: napište, co zůstává zavřené.
+5. Minuta 5: potvrďte návratový signál.
+6. Minuta 6: zrušte pomocné stopy, které nemají důvod pokračovat.
+7. Minuta 7: uložte závěr k pracovnímu místu a ukončete mimořádnou pozornost.
+
+Pokud se během sedmi minut objeví nová otázka, necpěte ji do uzavření. Zapište ji bokem. Uzavření má zavřít standard, ne posloužit jako nenápadný vstup do dalšího projektu.
+
+### Checklist uzavření do pasivního provozu
+
+- Máme výsledek druhého běžného použití?
+- Vybrali jsme jeden uzavírací stav?
+- Je finální pracovní věta u místa, kde se opravdu používá?
+- Je původní široký návrh stále výslovně zavřený?
+- Je návratový signál konkrétní a rozpoznatelný?
+- Zrušili jsme pomocné poznámky, tabulky, štítky nebo reporty z ověřování?
+- Nepřidali jsme nový formulářový údaj, CRM atribut, export ani tracker?
+- Ví vlastník pracovního místa, že standard je zpět v pasivním provozu?
+- Je jasné, kdy se téma znovu otevře a kdy se naopak nechá být?
+
+Uzavření druhého běžného použití je tečka za mimořádnou péčí. Dobrý standard nemusí být každý týden kontrolovaný, aby byl živý. Stačí, že je najitelný, použitelný a má jasnou hranici. Zbytek je klidný provoz. Přesně ten typ práce, který se na první pohled netváří dramaticky, ale za půl roku ušetří nejvíc vysvětlování.
+
 ## Pracovní log
 
+- 2026-07-07: Doplněna úvodní podkapitola o uzavření druhého běžného použití tichého standardu do pasivního provozu: tři uzavírací stavy, praktický SaaS příklad, privacy-first datový úklid, karta, mini workshop a checklist.
 - 2026-07-07: Doplněna úvodní podkapitola o druhém běžném použití tichého standardu: opakovatelnost, samostatnost, zavřený rozsah, privacy-first ukončení pomocné evidence, karta, mini workshop a checklist.
 - 2026-07-07: Doplněna úvodní podkapitola o uzavření prvního běžného použití tichého standardu: čtyři uzavírací stavy, praktický SaaS příklad, privacy-first úklid datových drobků, karta, mini workshop a checklist.
 - 2026-07-07: Doplněna úvodní podkapitola o prvním běžném použití tichého standardu: najitelnost, rozhodnutelnost, datová střídmost, praktický SaaS příklad, privacy-first kontrola, karta, mini workshop a checklist.
