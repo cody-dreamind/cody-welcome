@@ -304893,8 +304893,165 @@ Pokud v šesté minutě vznikne nápad na další měření, dejte ho mimo přev
 
 Převod do tichého standardu je malá, ale důležitá tečka. Pravidlo už nemusí dokazovat, že je užitečné. Stačí, aby bylo blízko práci, drželo zavřený rozsah a neprodukovalo zbytečná data. Když se později objeví skutečný návratový signál, otevřete nové posouzení. Do té doby nechte standard dělat přesně to, kvůli čemu vznikl: pomáhat bez hluku.
 
+## První běžné použití tichého standardu
+
+Tichý standard je hotový až ve chvíli, kdy ho někdo použije bez toho, aby si všiml, že používá výsledek starého rozhodování. Ne proto, že by historie nebyla důležitá. Ale protože běžná práce nemá vyžadovat archeologii. Člověk má najít krátkou pracovní větu, udělat správný krok a nepřidat k tomu zbytečnou evidenci.
+
+První běžné použití tichého standardu proto není nové review. Je to přirozený kontakt pravidla s prací. Přijde poptávka, support dotaz, onboardingový krok, úprava ceníku nebo redakční rozhodnutí a standard se buď použije bez tření, nebo ukáže, že pracovní věta ještě není dost blízko realitě.
+
+Začněte jednou otázkou:
+
+```text
+Použil člověk tichý standard při běžné práci bez návratu do staré historie?
+```
+
+Pokud ano, nic velkého se neděje. Zapište pouze, že standard obstál, a nechte ho dál v klidu. Pokud ne, neopravujte rovnou celý systém. Nejdřív zjistěte, jestli problém byl v najitelnosti, srozumitelnosti, nebo v samotném pravidle.
+
+### Tři místa kontroly
+
+Při prvním běžném použití kontrolujte jen tři věci:
+
+- Najitelnost: byl standard ve skutečném pracovním místě?
+- Rozhodnutelnost: dalo se podle jedné věty udělat konkrétní rozhodnutí?
+- Datová střídmost: nevznikla bokem nová tabulka, export, štítek nebo ruční seznam?
+
+Najitelnost je často obyčejnější problém, než tým čeká. Standard může být napsaný skvěle, ale pokud bydlí v archivu, který nikdo při práci neotevírá, nepracuje. Správné místo je šablona e-mailu, karta procesu, pole v CRM, checklist před publikací nebo krátká poznámka u formuláře. Ne dokument, který se čte jen při revizi.
+
+Rozhodnutelnost znamená, že věta člověku řekne, co má udělat teď. Pokud standard říká "zvažte dopad na kvalifikaci poptávky", je to spíš připomínka než pravidlo. Pokud říká "pošli volitelnou otázku v potvrzovacím e-mailu a nepřidávej povinné pole, dokud nenastane návratový signál", dá se podle něj pracovat.
+
+Datová střídmost je privacy-first brzda. Když člověk při prvním použití založí pomocnou tabulku "pro jistotu", standard se začíná rozpadat. Ne proto, že tabulka je technicky špatně. Protože tichý standard měl právě zabránit tomu, aby se z běžného rozhodnutí znovu stal sledovaný mini proces.
+
+### Praktický SaaS příklad
+
+Situace:
+
+```text
+Přišla B2B poptávka bez uvedeného rozpočtu.
+```
+
+Tichý standard v šabloně:
+
+```text
+U relevantní B2B poptávky bez rozpočtu pošli volitelnou otázku v potvrzovacím e-mailu. Nepřidávej povinné pole, lead scoring ani ruční seznam poptávek bez rozpočtu, dokud tři relevantní poptávky za sebou nepůjdou kvalifikovat ani po této otázce.
+```
+
+Správné první použití:
+
+```text
+Obchodník použil potvrzovací e-mail s volitelnou otázkou. Poptávku neoznačil novým štítkem, nezaložil pomocnou tabulku a neotevřel návrh na změnu formuláře.
+```
+
+Krátký záznam:
+
+```text
+Tichý standard obstál při běžné poptávce. Pravidlo bylo dostupné v potvrzovací šabloně, rozhodnutí šlo udělat bez historie a nevznikla nová datová stopa.
+```
+
+Tohle je dost. Není potřeba psát dlouhé vyhodnocení. Tichý standard má pracovat tiše. Když po prvním použití vznikne stránkový zápis, pravděpodobně už jste z něj znovu udělali proces.
+
+### Když první použití zadrhne
+
+Zadrhnutí neznamená automaticky, že standard je špatně. Rozlišujte čtyři stavy:
+
+- Standard obstál: člověk ho našel, použil a nevznikla nová evidence.
+- Slabé místo uložení: pravidlo je dobré, ale nebylo tam, kde se práce děje.
+- Slabá pracovní věta: pravidlo bylo dostupné, ale nevedlo ke konkrétnímu kroku.
+- Skutečný návrat: při použití nastal domluvený návratový signál nebo lepší důkaz, že staré rozhodnutí už nestačí.
+
+U slabého místa uložení přesuňte standard blíž k práci. Nepište novou metodiku. Pokud se pravidlo má použít v potvrzovacím e-mailu, dejte ho do šablony e-mailu. Pokud v onboardingovém checklistu, dejte ho k danému kroku. Jedna lokální oprava často stačí.
+
+U slabé pracovní věty ji přepište do akce. Pomůže věta:
+
+```text
+Když nastane X, udělej Y; neotevírej Z, dokud nenastane návratový signál.
+```
+
+Tento tvar drží tři věci najednou: spouštěč, akci a zavřený rozsah. Zní suše, ale funguje. A upřímně, provozní pravidla nemají vyhrávat literární cenu. Mají snížit počet schůzek, což je v byznysu velmi blízko poezii.
+
+U skutečného návratu nelepte opravu do tichého standardu. Otevřete nový průchod s vlastní otázkou. Starý standard splnil úkol: pomohl rozpoznat, že se změnila realita. Teď už není potřeba ho natahovat, aby pokryl všechno.
+
+### Privacy-first kontrola prvního použití
+
+Po prvním běžném použití si položte čtyři krátké otázky:
+
+```text
+Vznikl nový osobní nebo obchodní údaj?
+Vznikla nová kopie existujících dat?
+Vznikl nový dodavatel, export, tracker nebo automatizace?
+Vznikla ruční evidence, která nemá konec?
+```
+
+Pokud je odpověď všude ne, standard zůstává tichý. Pokud je někde ano, zapište proč a určete konec. Nejčastěji ale bude lepší novou stopu rovnou zrušit. První běžné použití nemá vyrábět další měření jen proto, že někdo chce mít jistotu.
+
+Codyho komentář: jistota je drahá, když ji platíte daty. U malých provozních pravidel často stačí dobrá pracovní věta a jasný návratový signál. Všechno navíc má mít důvod, vlastníka a datum úklidu. Jinak to není kontrola, ale sbírka drobků po rozhodování.
+
+### Karta prvního běžného použití
+
+```text
+Tichý standard:
+
+Pracovní místo:
+
+Dnešní běžné použití:
+
+Kdo standard použil:
+
+Našel standard bez pomoci?
+
+Stačila pracovní věta k rozhodnutí?
+
+Vznikla nová datová stopa?
+
+Výsledek:
+- standard obstál
+- slabé místo uložení
+- slabá pracovní věta
+- skutečný návrat
+
+Lokální oprava, pokud existuje:
+
+Co zůstává zavřené:
+
+Privacy-first uzavření:
+Nepřidáváme:
+Mažeme nebo nepřenášíme:
+Ponecháváme jen v původním systému:
+
+Kde je krátký závěr uložený:
+
+Vlastník pracovního místa:
+```
+
+Karta má být krátká. Pokud standard obstál, vyplňte ji v několika větách nebo ji nahraďte jedním záznamem u pracovního místa. Pokud neobstál, karta má pomoct opravit nejbližší příčinu, ne otevřít celou historii rozhodnutí.
+
+### Mini workshop na 5 minut
+
+1. Minuta 1: pojmenujte běžnou situaci, ve které se standard použil.
+2. Minuta 2: ověřte, jestli člověk standard našel bez pomoci.
+3. Minuta 3: rozhodněte, zda pracovní věta stačila k akci.
+4. Minuta 4: zkontrolujte, jestli nevznikla nová datová stopa.
+5. Minuta 5: napište jeden závěr nebo jednu lokální opravu.
+
+Pokud se v páté minutě objeví chuť "ještě to chvíli sledovat", vraťte se k návratovému signálu. Buď nastal, a pak otevřete nový průchod. Nebo nenastal, a pak standard nechte pracovat bez nového dohledu.
+
+### Checklist prvního použití tichého standardu
+
+- Nastalo použití v běžné práci, ne v umělém testu?
+- Byl standard u pracovního místa, kde ho člověk opravdu potřeboval?
+- Šlo podle jedné věty udělat konkrétní krok?
+- Zůstal zavřený původně zavřený rozsah?
+- Nevznikla pomocná tabulka, export, štítek, tracker ani ruční počítadlo?
+- Pokud vznikla lokální oprava, je opravdu jen u nejbližšího pracovního místa?
+- Pokud nastal návratový signál, otevírá se nový průchod místo nafukování starého standardu?
+- Je krátký závěr dohledatelný tam, kde se standard příště použije?
+- Má standard dál vlastníka pracovního místa, ne vlastníka staré diskuse?
+- Umí tým nechat standard v klidu, když obstál?
+
+První běžné použití tichého standardu má ověřit, že pravidlo umí zmizet do práce. Když obstojí, neoslavujte ho novou kontrolou. Když zadrhne, opravte nejbližší příčinu. A když se opravdu změní realita, otevřete nový návrat čistě. Tím si standard zachová nejdůležitější vlastnost: pomáhá rozhodovat, aniž by kolem sebe stavěl další proces.
+
 ## Pracovní log
 
+- 2026-07-07: Doplněna úvodní podkapitola o prvním běžném použití tichého standardu: najitelnost, rozhodnutelnost, datová střídmost, praktický SaaS příklad, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-07-07: Doplněna úvodní podkapitola o převodu potvrzeného klidu do tichého standardu: pracovní věta, návratový signál, praktický SaaS příklad, privacy-first úklid pomocných stop, karta, mini workshop a checklist.
 - 2026-07-07: Doplněna úvodní podkapitola o uzavření druhého přirozeného použití po dlouhodobém klidu: uzavírací stavy, praktické SaaS příklady, privacy-first ukončení náhradní evidence, karta, mini workshop a checklist.
 - 2026-07-06: Doplněna úvodní podkapitola o druhém přirozeném použití záznamu po dlouhodobém klidu: ověření přenositelnosti, výsledné stavy, praktický SaaS příklad, privacy-first kontrola náhradní evidence, karta, mini workshop a checklist.
