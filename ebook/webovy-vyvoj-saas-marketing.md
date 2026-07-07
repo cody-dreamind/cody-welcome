@@ -305200,8 +305200,181 @@ Pokud workshop začne řešit obecnou kvalitu celého procesu, zastavte ho. Uzav
 
 Uzavření prvního běžného použití má být rychlé a trochu nudné. To je dobře. Tichý standard není produktová atrakce, ale provozní opora. Když prošel, nechte ho být. Když potřebuje drobnou opravu, udělejte ji přesně tam, kde zadrhl. A když ukázal skutečnou změnu reality, otevřete nový návrat čistě, bez pašování pomocné evidence a bez předstírání, že staré pravidlo musí unést všechno.
 
+## Druhé běžné použití tichého standardu
+
+Druhé běžné použití tichého standardu je jiné než první. První použití ověřuje, jestli standard vůbec dosáhl do práce. Druhé použití ověřuje, jestli tam zůstává přirozeně. Tým už by neměl mít pocit, že právě testuje čerstvé pravidlo. Člověk prostě narazí na běžnou situaci, použije pracovní větu a pokračuje dál.
+
+Tohle je malý, ale důležitý rozdíl. Pokud se při druhém použití pořád mluví o "ověřování standardu", standard ještě není tichý. Je pořád trochu na pódiu, má reflektor a čeká na potlesk. V provozu ale nechcete potlesk. Chcete, aby správné rozhodnutí bylo blízko ruky a nevyrábělo kolem sebe další agendu.
+
+Začněte proto kontrolní větou:
+
+```text
+Standard byl podruhé použit v běžné práci a člověk kvůli tomu nemusel otevřít historii ani zakládat novou evidenci.
+```
+
+Pokud tahle věta neplatí, nepanikařte. Jen ještě nejste u čistého tichého standardu. Potřebujete vybrat, jestli problém vznikl v umístění, ve větě, v novém typu situace, nebo v tom, že se opravdu objevil návratový signál.
+
+### Co druhé použití ověřuje
+
+Druhé použití se nemá ptát na všechno. Kontrolujte jen čtyři věci:
+
+- Opakovatelnost: použil standard někdo i bez čerstvé paměti z prvního použití?
+- Samostatnost: stačila pracovní věta bez vysvětlení od původního autora?
+- Zavřený rozsah: zůstaly zavřené věci, které měly zůstat zavřené?
+- Datová střídmost: nepřibyla nová pomocná evidence jen proto, že se situace opakovala?
+
+Opakovatelnost chrání před pravidlem, které fungovalo jen jednou, protože u něj zrovna stál člověk, který ho napsal. Pokud druhé použití zvládne jiný obchodník, produktový člověk, marketér nebo support bez původní debaty, pravidlo se začíná chovat jako skutečná součást provozu.
+
+Samostatnost je tvrdší test než najitelnost. Nestačí, že věta někde je. Musí být napsaná tak, aby člověk pochopil spouštěč, akci a hranici. Pokud musí hledat starý záznam, ptát se na Slacku nebo otevírat dlouhou dokumentaci, tichý standard ještě není dost pracovní.
+
+Zavřený rozsah je pojistka proti nenápadnému rozšiřování. U standardu k poptávkám bez rozpočtu například pořád platí, že nepřidáváte povinné pole, lead scoring ani ruční seznam, dokud nenastane návratový signál. Druhé použití nemá být záminka k tomu, aby se starý zavřený návrh vrátil bokem.
+
+Datová střídmost je poslední brzda. Když se situace opakuje podruhé, lidé mají chuť začít ji evidovat. Někdy je to užitečné. Často je to jen reflex. U tichého standardu se ptejte: jaké rozhodnutí by nová evidence změnila? Pokud žádné, nevzniká.
+
+### Praktický SaaS příklad
+
+Standard:
+
+```text
+Když je poptávka B2B a chybí rozpočet, pošli volitelnou otázku v potvrzovacím e-mailu. Nepřidávej povinné pole, lead scoring ani ruční seznam poptávek bez rozpočtu, dokud tři relevantní poptávky za sebou nepůjdou kvalifikovat ani po této otázce.
+```
+
+První použití už proběhlo a obstálo. Teď přichází druhá běžná poptávka bez rozpočtu.
+
+Dobré druhé použití:
+
+```text
+Obchodník otevřel potvrzovací šablonu, použil volitelnou otázku a kvalifikaci řešil v běžném vlákně. Nezakládal nový štítek, nepřepisoval formulář a neotevřel pomocnou tabulku.
+```
+
+Krátký závěr:
+
+```text
+Tichý standard obstál i při druhém běžném použití. Pracovní věta byla použitelná bez historie, zavřený rozsah se nemění a nevznikla nová evidence poptávek bez rozpočtu.
+```
+
+To je ideální stav. Po takovém závěru už neplánujte "třetí kontrolní použití". Pravidlo se má vrátit do tichého provozu. Další pozornost dostane až při návratovém signálu nebo při přirozeném review pracovního místa, ne jen proto, že se nám líbí mít věci pod dohledem.
+
+Slabší varianta:
+
+```text
+Obchodník pravidlo našel, ale nebylo jasné, zda volitelnou otázku poslat u všech B2B poptávek bez rozpočtu, nebo jen u těch, které už vypadají kvalifikovaně.
+```
+
+Lokální oprava:
+
+```text
+Pracovní větu zpřesňujeme: "Když je poptávka B2B, týká se placené spolupráce a chybí rozpočet, pošli volitelnou otázku v potvrzovacím e-mailu." Neotevíráme změnu formuláře ani novou evidenci.
+```
+
+Tady standard ještě potřebuje drobné dočištění, ale pořád není důvod otevírat celý obchodní proces. Oprava patří k pracovní větě, ne do nového projektu.
+
+### Čtyři výsledky druhého použití
+
+Druhé běžné použití zakončete jedním ze čtyř stavů:
+
+- Standard je stabilní: druhé použití proběhlo samostatně, bez historie a bez nové evidence.
+- Je potřeba poslední lokální zpřesnění: pravidlo funguje, ale pracovní věta potřebuje malou úpravu spouštěče, akce nebo zavřeného rozsahu.
+- Tichost je porušená: tým kolem standardu vytvořil nový kontrolní zvyk, který je potřeba ukončit.
+- Nastal návratový signál: realita se změnila a otevírá se nový průchod.
+
+Stabilní standard nechte být. Nezakládejte další kartu, pokud stačí krátká věta u pracovního místa. Stabilita se pozná i podle toho, že se o ní nemusí moc mluvit.
+
+Poslední lokální zpřesnění má být opravdu poslední a lokální. Přepište jednu větu, přesuňte ji na lepší místo nebo doplňte jeden příklad. Pokud se oprava rozlévá do formuláře, ceníku, onboardingu a CRM zároveň, už nejde o druhé použití. Jde o nový problém s vlastním rozsahem.
+
+Porušená tichost je zajímavý stav. Standard může fungovat věcně správně, ale tým kolem něj vytvoří kontrolní rituál: ruční seznam, pravidelný ping, měsíční mini report nebo štítek v CRM. Pokud tyto stopy nemají rozhodovací účel, zavřete je. Tichý standard, který se musí pravidelně hlídat, není tichý standard. Je to proces v malém klobouku.
+
+Návratový signál berte vážně, ale čistě. Pokud opravdu nastal, nepřepisujte standard pod rukou. Otevřete nový průchod s dnešní otázkou, konkrétním pracovním místem a datovým minimem. Starý standard zůstane archivní oporou, ne natahovací gumou.
+
+### Privacy-first kontrola druhého použití
+
+Při druhém použití už bývá největší riziko nenápadná normalizace pomocných dat. Poprvé někdo udělal poznámku "jen pro kontrolu". Podruhé už se z ní snadno stane zvyk. A zvyk je v provozu mnohem houževnatější než oficiální rozhodnutí, protože nikdo přesně neví, kdo ho schválil.
+
+Zkontrolujte proto:
+
+```text
+Vznikla při prvním použití pomocná stopa?
+Použila se znovu při druhém použití?
+Má pořád jasné rozhodnutí, vlastníka a konec?
+```
+
+Pokud pomocná stopa nemá konec, ukončete ji teď. Pokud má být ponechaná z právního, smluvního nebo provozního důvodu, uložte ji v původním systému, ne u tichého standardu. Standard má nést pravidlo a návratový signál, ne kopie zákaznických detailů.
+
+Praktický privacy-first závěr:
+
+```text
+Druhé použití nepotvrdilo potřebu nové evidence. Ruční poznámky z prvního použití mažeme, v šabloně necháváme jen pracovní větu a návratový signál. Konkrétní komunikace se zákazníkem zůstává pouze v obchodním vlákně.
+```
+
+Codyho komentář: privacy-first provoz se často nerozhoduje u velkých strategických nástrojů, ale u malých návyků. Jeden neuklizený seznam sem, jeden zkopírovaný zákaznický detail tam a za rok máte interní muzeum dat, které nikdo nechtěl, ale všichni se ho bojí zrušit. Druhé použití je dobrá chvíle takové muzeum vůbec nezaložit.
+
+### Karta druhého běžného použití
+
+```text
+Tichý standard:
+
+Pracovní místo:
+
+Druhá běžná situace:
+
+Kdo standard použil:
+
+Použil standard bez původní historie?
+
+Stačila pracovní věta?
+
+Zůstal zavřený rozsah opravdu zavřený?
+
+Vznikla nebo pokračovala pomocná evidence?
+
+Výsledek:
+- standard je stabilní
+- poslední lokální zpřesnění
+- tichost je porušená
+- nastal návratový signál
+
+Krátký závěr:
+
+Lokální oprava nebo ukončení pomocné stopy:
+
+Co dál výslovně neotevíráme:
+
+Kde závěr bydlí:
+
+Vlastník pracovního místa:
+```
+
+Kartu nevyplňujte, pokud by z ní byla větší práce než ze samotného použití. U čistého stabilního výsledku stačí jednovětý závěr. Karta je užitečná hlavně tam, kde je potřeba ukončit pomocnou evidenci nebo opravit poslední slabé místo pracovní věty.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: pojmenujte druhou běžnou situaci.
+2. Minuta 2: ověřte, zda člověk použil standard bez historie.
+3. Minuta 3: zkontrolujte, zda pracovní věta stačila k rozhodnutí.
+4. Minuta 4: pojmenujte, co zůstalo zavřené.
+5. Minuta 5: ukončete nebo potvrďte nulovou pomocnou evidenci.
+6. Minuta 6: napište jeden ze čtyř výsledků a vraťte standard do klidu.
+
+Pokud workshop potřebuje víc než šest minut, pravděpodobně už neřešíte druhé použití. Zastavte se, napište nový návratový signál nebo novou pracovní otázku a nepředstírejte, že jde jen o drobné uzavření.
+
+### Checklist druhého běžného použití
+
+- Šlo o skutečné druhé použití v běžné práci?
+- Použil standard člověk bez čerstvé paměti z prvního použití?
+- Stačila pracovní věta bez otevření staré historie?
+- Zůstal původně zavřený rozsah zavřený?
+- Nevznikla nová pomocná evidence?
+- Nepokračuje pomocná stopa z prvního použití jen ze zvyku?
+- Pokud byla potřeba oprava, je poslední, lokální a u pracovního místa?
+- Pokud se objevil návratový signál, otevírá se nový průchod s vlastním rozsahem?
+- Je privacy-first závěr jasný: co nesbíráme, co mažeme a co zůstává jen v původním systému?
+- Umí tým po tomto použití nechat standard opravdu v klidu?
+
+Druhé běžné použití je dobrý konec mimořádné pozornosti. Pokud standard obstál, zavřete kontrolní režim a nechte pravidlo žít v pracovním místě. Pokud potřebuje poslední lokální zpřesnění, udělejte ho bez rozšiřování. A pokud se ukáže, že se změnila realita, otevřete nový průchod čistě. V každé variantě platí totéž: nepřidávejte data, která nepotřebujete pro rozhodnutí.
+
 ## Pracovní log
 
+- 2026-07-07: Doplněna úvodní podkapitola o druhém běžném použití tichého standardu: opakovatelnost, samostatnost, zavřený rozsah, privacy-first ukončení pomocné evidence, karta, mini workshop a checklist.
 - 2026-07-07: Doplněna úvodní podkapitola o uzavření prvního běžného použití tichého standardu: čtyři uzavírací stavy, praktický SaaS příklad, privacy-first úklid datových drobků, karta, mini workshop a checklist.
 - 2026-07-07: Doplněna úvodní podkapitola o prvním běžném použití tichého standardu: najitelnost, rozhodnutelnost, datová střídmost, praktický SaaS příklad, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-07-07: Doplněna úvodní podkapitola o převodu potvrzeného klidu do tichého standardu: pracovní věta, návratový signál, praktický SaaS příklad, privacy-first úklid pomocných stop, karta, mini workshop a checklist.
