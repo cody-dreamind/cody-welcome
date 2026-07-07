@@ -306690,8 +306690,173 @@ Pokud workshop začne řešit, jestli by se neměl zlepšit celý systém znalos
 
 Druhé použití dlouhodobé paměti je malý test dospělosti pravidla. Po prvním použití už víte, že pravidlo nějak funguje. Po druhém použití víte, jestli funguje bez doprovodné péče, bez paměti původních lidí a bez tajné hromádky dat vedle. Pokud ano, nechte ho být. Pokud ne, opravte nejbližší kotvu, zrušte skrytou evidenci nebo otevřete návratový signál. Všechno ostatní je jen dražší způsob, jak se tvářit zaneprázdněně.
 
+## Uzavření druhého použití dlouhodobé paměti
+
+Druhé použití dlouhodobé paměti nekončí tím, že někdo pravidlo podruhé najde a použije. Končí až ve chvíli, kdy tým rozhodne, jestli pravidlo nechává v klidu, dělá poslední lokální dočištění, ruší skrytou evidenci, nebo otevírá skutečný návratový signál. Bez tohoto uzavření se pravidlo tváří jako ověřené, ale v praxi kolem něj mohou zůstat malé pomocné zvyky: tabulka pro jistotu, štítek pro jistotu, kopie odpovědi pro jistotu. A "pro jistotu" je často jen slušnější název pro budoucí nepořádek.
+
+Uzavření začněte jednou větou:
+
+```text
+Druhé použití dlouhodobé paměti uzavíráme takto:
+```
+
+Za ni napište, co se opravdu stalo v běžné práci, ne co by si tým přál, aby se stalo. Dobrá věta má tři části: jak pravidlo fungovalo, co zůstává zavřené a co se děje s datovou stopou.
+
+Příklad:
+
+```text
+Druhé použití dlouhodobé paměti uzavíráme takto:
+Obchodník našel pravidlo u e-mailové šablony, použil volitelnou otázku bez vysvětlení původní historie a nepřidal žádnou pomocnou evidenci; povinné pole ve formuláři, scoring i export zůstávají zavřené.
+```
+
+To je dost. Není potřeba z toho vyrábět prezentaci, interní metodiku ani další revizní schůzku. Pokud věta jasně říká, že pravidlo obstálo, nejlepší další krok je často žádný další krok. Ano, produktová dospělost někdy vypadá jako schopnost přestat psát odrážky.
+
+### Čtyři uzavírací stavy
+
+Po druhém použití vyberte jeden stav:
+
+- Uzavřít do klidu: pravidlo fungovalo samostatně a nevznikla nová datová stopa.
+- Doladit jednu kotvu: pravidlo fungovalo, ale potřebuje poslední úpravu u pracovního místa.
+- Zrušit skrytý proces: pravidlo se používalo, ale kolem něj vznikla pomocná evidence nebo obchůzka.
+- Otevřít návratový signál: nastala podmínka, kvůli které se pravidlo má znovu posoudit.
+
+Uzavřít do klidu znamená, že další review neplánujete. Zapište závěr k pracovnímu místu a nechte pravidlo běžet. Tohle je důležité hlavně pro týmy, které mají tendenci ověřovat ověření, potom ověřovat ověření ověření a nakonec se divit, že nikdo nestaví produkt. Klid je legitimní stav.
+
+Doladit jednu kotvu znamená, že opravíte jen místo, kde druhé použití zadrhlo. Pokud člověk našel pravidlo až v indexu, doplňte odkaz k šabloně. Pokud věta byla příliš obecná, přepište ji do konkrétní akce. Pokud chyběl příklad, přidejte jeden krátký příklad. Neotevírejte celou znalostní bázi.
+
+Zrušit skrytý proces je samostatná práce, i když je malá. Pokud se po prvním použití objevil ruční seznam, dočasná tabulka, nový štítek nebo zvyk kopírovat zákaznické odpovědi jinam, uzavření musí říct, co s tím bude. Buď to smažete, anonymizujete, nebo přepíšete na obecnou pracovní větu. Nenechávejte to "zatím". Zatím je kalendářní jednotka, která v provozu podezřele často znamená navždy.
+
+Otevřít návratový signál znamená, že druhé použití opravdu splnilo předem zapsanou podmínku. V takové chvíli pravidlo neopravujte potichu. Otevřete nové malé review, pojmenujte pracovní místo a znovu hlídejte, aby první krok nebyl širší než důkaz.
+
+### Praktický SaaS příklad
+
+Pravidlo v dlouhodobé paměti:
+
+```text
+U relevantní poptávky bez rozpočtu lze poslat volitelnou otázku v potvrzovacím e-mailu. Formulář, scoring ani nový export se nemění. K povinnému poli se vracíme pouze tehdy, když tři relevantní poptávky za sebou nepůjdou kvalifikovat ani po volitelné otázce.
+```
+
+Druhé použití:
+
+```text
+Situace:
+Jiný obchodník použil pravidlo u další relevantní poptávky bez rozpočtu.
+
+Výsledek:
+Pravidlo našel u e-mailové šablony, poslal volitelnou otázku a poptávku kvalifikoval z běžné odpovědi. Nevznikl CRM štítek, pomocná tabulka ani kopie odpovědi.
+
+Uzavření:
+Uzavřít do klidu. Pravidlo zůstává u šablony a v dlouhodobé paměti. Povinné pole pro rozpočet, scoring a export zůstávají zavřené. Další review neplánujeme bez návratového signálu.
+```
+
+Jiný výsledek:
+
+```text
+Situace:
+Obchodník pravidlo použil, ale zároveň doplnil nový štítek "bez rozpočtu" do CRM, aby měl přehled pro příště.
+
+Uzavření:
+Zrušit skrytý proces. Štítek mažeme, protože pravidlo nepotřebuje novou evidenci. Dlouhodobá paměť si ponechává pouze obecný návratový signál: tři relevantní poptávky za sebou nepůjde kvalifikovat ani po volitelné otázce.
+```
+
+Všimněte si, že druhý výsledek neznamená selhání pravidla. Znamená selhání datové střídmosti kolem pravidla. To se opravuje jinak: ne přepisem celého procesu, ale zrušením konkrétního zbytečného artefaktu.
+
+### Privacy-first uzavření
+
+Privacy-first uzavření má být konkrétní. Nepište "data jsou v pořádku". Napište, co přesně po druhém použití zůstává, co mizí a co nikdy nezačalo vznikat.
+
+Použijte tři řádky:
+
+```text
+Po druhém použití ponecháváme:
+
+Po druhém použití rušíme nebo mažeme:
+
+Dál výslovně nezavádíme:
+```
+
+Příklad:
+
+```text
+Po druhém použití ponecháváme:
+Pracovní větu u e-mailové šablony a obecný návratový signál v dlouhodobé paměti.
+
+Po druhém použití rušíme nebo mažeme:
+Dočasný CRM štítek "bez rozpočtu" a ruční seznam poptávek, který vznikl po prvním použití.
+
+Dál výslovně nezavádíme:
+Povinné pole ve formuláři, automatický scoring, export poptávek a samostatný report rozpočtů.
+```
+
+Takový zápis chrání tým před dvěma opačnými chybami. První chyba je přidat zbytečná data, protože pravidlo bylo dvakrát použité. Druhá chyba je smazat i užitečnou pracovní větu a tím donutit dalšího člověka znovu řešit starou otázku. Privacy-first není amnézie. Je to schopnost nechat jen to, co má provozní účel.
+
+Codyho komentář: nejlepší dlouhodobá paměť je překvapivě krátká. Ne proto, že by tým zapomínal, ale protože umí ukládat rozhodnutí bez zákaznických detailů, bez tabulek pro duševní uklidnění a bez dashboardů, které dokazují hlavně to, že někdo uměl přidat dashboard.
+
+### Karta uzavření druhého použití
+
+```text
+Pravidlo z dlouhodobé paměti:
+
+První použití uzavřelo:
+
+Druhé použití ukázalo:
+
+Uzavírací stav:
+- uzavřít do klidu
+- doladit jednu kotvu
+- zrušit skrytý proces
+- otevřít návratový signál
+
+Co zůstává zavřené:
+
+Co zůstává u pracovního místa:
+
+Co mažeme, rušíme nebo anonymizujeme:
+
+Co dál výslovně nezavádíme:
+
+Návratový signál zůstává stejný, nebo se mění?
+
+Kde je závěr uložený:
+
+Vlastník případného dočištění:
+
+Datum další kontroly, pouze pokud má důvod:
+```
+
+Datum další kontroly vyplňujte jen tehdy, když existuje konkrétní důvod. Pokud pravidlo fungovalo podruhé samostatně a bez datové stopy, další datum je často jen pozvánka k tomu, aby se klid znovu zbytečně otevřel.
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: přečtěte pravidlo a závěr prvního použití.
+2. Minuta 2: popište druhé použití jednou větou.
+3. Minuta 3: vyberte jeden ze čtyř uzavíracích stavů.
+4. Minuta 4: napište, co zůstává zavřené.
+5. Minuta 5: projděte skryté procesy, štítky, exporty, kopie a pomocné tabulky.
+6. Minuta 6: napište privacy-first uzavření ve třech řádcích.
+7. Minuta 7: uložte závěr k pracovnímu místu a rozhodněte, jestli vůbec existuje důvod pro další kontrolu.
+
+Když se během workshopu objeví nové velké téma, nezapisujte ho do uzavření druhého použití. Dejte mu vlastní podnět a vlastní návratový signál. Uzavření má chránit konkrétní pravidlo, ne sloužit jako univerzální sběrný koš.
+
+### Checklist uzavření druhého použití
+
+- Máme konkrétní druhé použití v běžné práci?
+- Víme, jestli pravidlo fungovalo bez původní historie a bez čerstvého vysvětlení?
+- Vybrali jsme jeden uzavírací stav?
+- Je jasné, co zůstává zavřené?
+- Pokud dočišťujeme kotvu, je to opravdu jen jedno pracovní místo?
+- Pokud vznikl skrytý proces, je zrušený, smazaný nebo jasně ukončený?
+- Zapsali jsme, co po druhém použití ponecháváme?
+- Zapsali jsme, co mažeme, rušíme nebo anonymizujeme?
+- Zapsali jsme, co dál výslovně nezavádíme?
+- Neplánujeme další kontrolu bez konkrétního důvodu?
+- Je závěr uložený tam, kde se pravidlo příště použije?
+
+Uzavření druhého použití dlouhodobé paměti je poslední pojistka před klidem. Pokud pravidlo obstálo, nechte ho běžet. Pokud potřebuje malou kotvu, doplňte ji. Pokud kolem něj vyrostla pomocná evidence, utněte ji dřív, než se stane provozní tradicí. A pokud opravdu přišel návratový signál, otevřete nové review s menším prvním krokem. Tím dlouhodobá paměť zůstane užitečná: ne jako archiv všeho, ale jako stručná opora pro rozhodnutí, která se nemají znovu dokazovat od nuly.
+
 ## Pracovní log
 
+- 2026-07-07: Doplněna úvodní podkapitola o uzavření druhého použití dlouhodobé paměti: čtyři uzavírací stavy, praktický SaaS příklad, privacy-first uzavření, karta, mini workshop a checklist.
 - 2026-07-07: Doplněna úvodní podkapitola o druhém použití dlouhodobé paměti bez původní historie: ověření přenositelnosti, skrytý proces po první opravě, praktický SaaS příklad, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-07-07: Doplněna úvodní podkapitola o uzavření prvního použití dlouhodobé paměti: čtyři uzavírací stavy, praktický SaaS příklad, privacy-first datová věta, karta, mini workshop a checklist.
 - 2026-07-07: Doplněna úvodní podkapitola o prvním použití dlouhodobé paměti bez původní historie: samostatné použití pravidla, lokální kotva, ostrá pracovní věta, falešná výjimka, privacy-first kontrola datové stopy, karta, mini workshop a checklist.
