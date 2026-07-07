@@ -307985,8 +307985,135 @@ Pokud se workshop nespustí, protože použití proběhlo úplně hladce, nevad�
 
 První běžné použití pasivního standardu má potvrdit, že pravidlo umí pracovat bez doprovodu. Když funguje, nechte ho pracovat. Když chybí kotva, dejte mu ji. Když se změnil kontext, otevřete malý návrat. A když máte nutkání všechno evidovat, nejdřív si položte nepříjemnou, ale zdravou otázku: komu tím opravdu pomůžete a jak dlouho tu stopu budete muset držet?
 
+## Uzavření prvního běžného použití pasivního standardu
+
+První běžné použití pasivního standardu se má uzavřít stejně tiše, jako proběhlo. Pokud standard fungoval, není potřeba z něj dělat novou fázi projektu. Pokud se ukázalo malé tření, opravte nejbližší pracovní místo. Pokud se změnil kontext, otevřete návrat, ale jen v rozsahu, který změna opravdu vyžaduje.
+
+Uzavření má odpovědět na jednu otázku:
+
+```text
+Co se po prvním běžném použití pasivního standardu mění, a co zůstává vědomě beze změny?
+```
+
+Když neumíte odpovědět jednou větou, pravděpodobně jste do uzavření přinesli moc historie. Pasivní standard už má za sebou ověření, dlouhodobou paměť, lehký revizní rytmus i převod do pasivního provozu. Teď nepotřebuje další slavnostní razítko. Potřebuje jen jasný závěr, aby tým věděl, jestli standard zůstává tichý, dostává lokální opravu, nebo se vrací do malého návratu.
+
+### Tři uzavírací stavy
+
+První použití pasivního standardu uzavírejte jedním ze tří stavů:
+
+- Zůstává pasivní: standard byl použit bez tření, bez nové evidence a bez otevření zavřeného rozsahu.
+- Dostává lokální opravu: standard platí, ale potřebuje lepší kotvu, kratší větu nebo přesnější místo u šablony, formuláře či checklistu.
+- Otevírá malý návrat: použití ukázalo změnu kontextu nebo skutečný návratový signál.
+
+Stav `zůstává pasivní` je nejčistší výsledek. Neznamená "nic jsme neudělali". Znamená "standard už pracuje bez mimořádné péče". Zapište maximálně jednu větu u pracovního místa, pokud je to užitečné pro budoucí dohledání, a nepřidávejte žádný nový rytmus kontroly.
+
+Stav `dostává lokální opravu` má být opravdu lokální. Pokud obchodník našel pravidlo až přes starý zápis, přesuňte rozhodovací větu k potvrzovací šabloně. Pokud je věta moc dlouhá, zkraťte ji. Pokud chybí odkaz z checklistu, doplňte odkaz. To je celé. Lokální oprava nemá otevřít nové měření, redesign formuláře ani další sadu variant.
+
+Stav `otevírá malý návrat` použijte jen tehdy, když se změnil rámec práce. Například vznikla nová nabídka, nový segment, jiný typ poptávek nebo opakovaný problém přesně podle návratového signálu. I potom začínejte malým návratem: ověřte pracovní místo, rozhodovací větu a nejmenší další důkaz. Nepřeskakujte rovnou k implementaci větší změny jen proto, že se standard konečně ozval.
+
+### Praktický SaaS příklad
+
+Pasivní standard říká, že rozpočet v prvním kontaktu nesbíráte povinně. Obchodník použije potvrzovací šablonu, položí volitelnou otázku a poptávku kvalifikuje bez nového pole ve formuláři.
+
+Uzavření ve stavu `zůstává pasivní`:
+
+```text
+Standard pro poptávky bez rozpočtu byl použit u potvrzovací šablony bez tření; formulář, scoring ani evidence výjimek se nemění.
+```
+
+Uzavření ve stavu `dostává lokální opravu`:
+
+```text
+Standard platí, ale nebyl viditelný u potvrzovací šablony. Doplňujeme k šabloně jednu větu o volitelné otázce na rozpočet; formulář a CRM zůstávají beze změny.
+```
+
+Uzavření ve stavu `otevírá malý návrat`:
+
+```text
+Použití narazilo na novou enterprise nabídku, kde rozpočet souvisí s kvalifikací dalšího kroku. Otevíráme malý návrat k rozhodovací větě pro enterprise poptávky; původní formulář se zatím nemění.
+```
+
+Rozdíl mezi těmito větami je provozně zásadní. První chrání klid. Druhá opravuje navigaci. Třetí otevírá omezený návrat. Kdyby všechny skončily větou "pro jistotu to budeme sledovat", tým by si zadělal na další nenápadnou evidenci, kterou nikdo nechtěl, ale všichni ji budou muset později uklízet. Gratuluji, právě jste vynalezli administrativní kompost.
+
+### Privacy-first uzavření
+
+Uzavření prvního použití je místo, kde se často nenápadně přidávají data. Ne proto, že by je tým nutně potřeboval, ale protože první použití po převodu působí důležitě. "Dáme si to do tabulky" zní nevinně. Jenže tabulka má sloupce, sloupce mají hodnoty, hodnoty mají vlastníky a za chvíli držíte novou stopu, která nemá jasný účel ani konec.
+
+Proto uzavření vždy doplňte krátkou privacy-first větou:
+
+```text
+Po tomto použití nepřidáváme nové pole, atribut, export, tracker ani seznam výjimek; případná oprava se zapisuje pouze jako zobecněná věta u pracovního místa.
+```
+
+Pokud se opravdu otevírá malý návrat, napište i hranici dat:
+
+```text
+Pro návrat nepřenášíme konkrétní zákaznické detaily do standardu. Pracujeme se zobecněným popisem situace a ověřujeme jen nejbližší rozhodovací větu.
+```
+
+Tím se návrat nezmění v druhou databázi. Standard má nést pravidlo, ne archiv případů. Konkrétní zákaznické informace patří do systému, kde vznikly a kde mají jasný účel, přístupová práva a retenci.
+
+### Karta uzavření prvního použití
+
+```text
+Standard:
+
+Pracovní místo:
+
+První běžné použití:
+
+Uzavírací stav:
+- zůstává pasivní
+- dostává lokální opravu
+- otevírá malý návrat
+
+Jednovětý závěr:
+
+Co se mění:
+
+Co zůstává zavřené:
+
+Vzniká nová evidence?
+Ne / ano, pouze pokud má jasný účel a konec:
+
+Privacy-first věta:
+
+Kde je závěr uložený:
+
+Vlastník pracovního místa:
+```
+
+Kartu nevyplňujte automaticky. Použijte ji, když první použití přineslo opravu nebo návrat. Pokud standard zůstal pasivní a použití proběhlo bez tření, stačí jednovětý závěr u pracovního místa, nebo žádný zápis. Tichý standard se neprokazuje tím, že o něm píšete pořád víc. Prokazuje se tím, že ho lidé používají a práce se nezvětšuje.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte situaci prvního použití jednou větou.
+2. Minuta 2: vyberte jeden ze tří uzavíracích stavů.
+3. Minuta 3: napište, co se mění.
+4. Minuta 4: napište, co zůstává zavřené.
+5. Minuta 5: doplňte privacy-first větu o nepřidání nové evidence.
+6. Minuta 6: uložte závěr k pracovnímu místu, nebo vědomě rozhodněte, že zápis není potřeba.
+
+Pokud se během šesti minut začne řešit širší produktová otázka, zastavte workshop a převeďte ji do samostatného návratového signálu. Uzavření prvního použití nemá suplovat strategii. Má jen bezpečně zavřít jednu situaci.
+
+### Checklist uzavření prvního použití
+
+- Vybrali jsme jeden ze tří uzavíracích stavů?
+- Umíme výsledek popsat jednou větou?
+- Pokud standard fungoval, nepřidali jsme nový rytmus kontroly?
+- Pokud chyběla kotva, opravili jsme nejbližší pracovní místo?
+- Pokud byla věta slabá, zkrátili jsme ji bez otevření celé historie?
+- Pokud se otevírá návrat, je omezený na konkrétní změnu kontextu nebo návratový signál?
+- Zůstává původní širší rozsah zavřený?
+- Nevzniklo nové povinné pole, CRM pravidlo, tracker, export ani seznam výjimek bez jasného účelu?
+- Nepřenášíme konkrétní zákaznické detaily do standardu?
+- Je závěr uložený tam, kde ho člověk najde při dalším běžném použití?
+
+Uzavření prvního běžného použití pasivního standardu je dobrý test provozní dospělosti. Začátečnický tým má radost, že pravidlo fungovalo, a hned mu postaví další proces. Zkušenější tým si všimne, že pravidlo fungovalo, uklidí drobnou stopu, nechá zavřený rozsah zavřený a jde dělat práci, která má větší dopad. Pasivní standard tím nezmizí. Jen konečně dostane prostor být užitečný bez potlesku.
+
 ## Pracovní log
 
+- 2026-07-07: Doplněna úvodní podkapitola o uzavření prvního běžného použití pasivního standardu: tři uzavírací stavy, praktický SaaS příklad, privacy-first nepřidávání evidence, karta, mini workshop a checklist.
 - 2026-07-07: Doplněna úvodní podkapitola o prvním běžném použití pasivního standardu: tiché použití, lokální kotva, zpřesnění rozhodovací věty, návratový signál, privacy-first práce bez nové evidence, karta, mini workshop a checklist.
 - 2026-07-07: Doplněna úvodní podkapitola o převodu lehkého revizního rytmu do pasivního standardu: podmínky převodu, praktický SaaS příklad, tři spouštěče návratu, privacy-first datový úklid, karta, mini workshop a checklist.
 - 2026-07-07: Doplněna úvodní podkapitola o uzavření druhé kontroly lehkého revizního rytmu: čtyři uzavírací stavy, praktický SaaS příklad, privacy-first uzavření datové stopy, karta, mini workshop a checklist.
