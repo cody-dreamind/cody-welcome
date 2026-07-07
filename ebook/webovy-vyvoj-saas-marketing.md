@@ -305678,8 +305678,170 @@ Pokud se workshop začne rozšiřovat do strategie, zastavte ho. Přirozené rev
 
 První přirozené review má potvrdit, že tichý standard opravdu zapadl do práce. Když funguje, nechte ho být. Když drhne, opravte nejbližší pracovní místo. Když se změnila realita, otevřete nový průchod čistě. A když někde potichu vyrostla nová evidence, ukliďte ji dřív, než začne vypadat jako zavedený proces.
 
+## Uzavření prvního přirozeného review tichého standardu
+
+První přirozené review tichého standardu nekončí tím, že si tým řekne "vypadá to v pohodě". To je pocit, ne provozní závěr. Review má skončit jednou dohledatelnou větou u pracovního místa, která řekne, co zůstává beze změny, co se lokálně opravilo, co se ruší a co se výslovně neotevírá.
+
+Uzavření je důležité hlavně proto, že tichý standard nemá vlastní velký proces. Nechodí na pravidelnou poradu s barevným grafem a dramatickou hudbou. Žije u šablony, formuláře, checklistu nebo sales karty. Pokud review nezanechá malou, jasnou stopu, za měsíc nikdo nepozná, jestli se standard opravdu zkontroloval, nebo jestli jen někdo prošel kolem a zamumlal, že dobrý.
+
+Základní uzavírací věta má tento tvar:
+
+```text
+Při přirozeném review u [pracovní místo] zůstává tichý standard [stav], protože [důkaz]; dál neotevíráme [zavřený rozsah] a [datový závěr].
+```
+
+Příklad:
+
+```text
+Při přirozeném review u potvrzovací šablony zůstává tichý standard beze změny, protože obchod podle věty pracuje bez historie a bez ruční evidence; dál neotevíráme povinné pole pro rozpočet, scoring ani nový report a žádná nová data nesbíráme.
+```
+
+Taková věta není krásná. Je lepší: je použitelná. Člověk z ní pozná místo, stav, důvod, hranici a privacy-first výsledek. Když se téma vrátí, tým nezačíná od nálady, ale od posledního uzavření.
+
+### Čtyři uzavírací stavy
+
+Po prvním přirozeném review vyberte jeden ze čtyř stavů:
+
+- Zůstává beze změny: standard je na správném místě, dá se podle něj pracovat a nevznikla náhradní evidence.
+- Lokálně opravujeme: standard platí, ale potřebuje přesunout větu, zpřesnit návratový signál nebo odstranit nejasný příklad.
+- Rušíme obchvat: standard platí, ale kolem něj vznikla tabulka, štítek, export nebo ruční seznam, který nemá rozhodovací hodnotu.
+- Otevíráme nový průchod: objevil se skutečný návratový signál a starý tichý standard už nestačí.
+
+Nesmí vzniknout pátý stav "ještě se uvidí". Pokud se má něco sledovat, napište přesně co, kde, kdo to smaže a kdy sledování skončí. Pokud to napsat neumíte, pravděpodobně nejde o měření, ale o nervózní hromadění důkazů. To je drahé na údržbu a ještě dražší na soukromí.
+
+Stav "lokálně opravujeme" držte opravdu lokální. Jestli stačí přesunout větu z archivní poznámky do šablony, nepřepisujte celý obchodní proces. Jestli stačí doplnit, že návratový signál znamená tři relevantní poptávky za sebou, nezačínejte řešit nový CRM atribut. Lokální oprava má zlepšit použitelnost stejného standardu, ne otevřít vedlejší dveře do nové strategie.
+
+Stav "rušíme obchvat" je často nejcennější. Tým si někdy neuvědomí, že pomocná evidence vznikla jen jako berlička během ověřování. Po uzavření standardu ale berlička zůstane v provozu a začne se tvářit jako nutnost. Pokud z ní nevzniká rozhodnutí, zrušte ji. Pokud z ní rozhodnutí vzniká, přestaňte jí říkat obchvat a otevřete nový průchod s jasnou otázkou.
+
+### Praktický SaaS příklad
+
+Výchozí situace:
+
+```text
+Tichý standard říká: u relevantní B2B poptávky bez rozpočtu pošli volitelnou otázku v potvrzovacím e-mailu. Neotevírej povinné pole, scoring ani ruční seznam, dokud tři relevantní poptávky za sebou nepůjdou kvalifikovat ani po této otázce.
+```
+
+Při úpravě potvrzovací šablony proběhne první přirozené review. Tým najde tři možné výsledky.
+
+Varianta beze změny:
+
+```text
+Při přirozeném review potvrzovací šablony zůstává tichý standard beze změny. Věta je přímo v šabloně, obchod ji používá bez staré historie a nevedeme žádný zvláštní seznam poptávek bez rozpočtu. Dál neotevíráme formulář, scoring ani nový report.
+```
+
+Varianta lokální opravy:
+
+```text
+Při přirozeném review potvrzovací šablony zůstává tichý standard platný, ale přesouváme jeho pracovní větu z interní poznámky přímo do šablony. Dál neotevíráme formulář, scoring ani reporting; pouze měníme místo, kde člověk pravidlo najde.
+```
+
+Varianta rušení obchvatu:
+
+```text
+Při přirozeném review potvrzovací šablony rušíme ruční seznam poptávek bez rozpočtu, protože po zavedení volitelné otázky z něj nevzniká žádné rozhodnutí. Tichý standard zůstává beze změny a žádná data ze seznamu nepřenášíme do CRM.
+```
+
+Varianta nového průchodu:
+
+```text
+Při přirozeném review potvrzovací šablony se potvrdil návratový signál: tři relevantní poptávky za sebou nešly kvalifikovat ani po volitelné otázce. Tichý standard neohýbáme; otevíráme nový malý průchod ke kvalifikaci poptávek s datovým minimem a původní ruční seznam nepovýšíme na proces.
+```
+
+Rozdíl mezi variantami je zásadní. V první tým nepracuje dál. Ve druhé opraví místo. Ve třetí smaže zbytečnou stopu. Ve čtvrté otevře nové téma. Když tyto stavy smícháte, vznikne oblíbená produktová mlha: všichni mají pocit, že se něco řeší, ale nikdo neví, co přesně skončilo.
+
+### Privacy-first uzavření
+
+Každé uzavření prvního přirozeného review musí mít datovou větu. Nemusí být dlouhá. Musí být konkrétní.
+
+Dobré datové věty:
+
+```text
+Žádná nová data nesbíráme a dočasný seznam mažeme.
+
+Nepřidáváme nové pole do formuláře, žádný CRM atribut ani export pro marketing.
+
+Pomocné poznámky z ověření sloučíme do jedné anonymizované věty u šablony a zdrojové příklady smažeme.
+```
+
+Slabé datové věty:
+
+```text
+Budeme to dál sledovat.
+
+Data zatím necháme pro jistotu.
+
+Možná se to bude hodit.
+```
+
+"Pro jistotu" je v privacy-first provozu drahá fráze. Pokud data nemají rozhodovací účel, vlastníka a konec, nemají se jen tak válet v tabulce, CRM, poznámkách nebo chatu. Data bez účelu nejsou rezerva. Jsou budoucí vysvětlování.
+
+Codyho komentář: nejlepší review tichého standardu často končí smazáním něčeho malého. Jedna tabulka pryč, jeden štítek pryč, jedna dočasná poznámka sloučená do normální šablony. Není to efektní práce na LinkedIn. Je to přesně ten typ provozní hygieny, díky které se za půl roku nemusíte ptát, proč existuje `final_final_leads_budget_v3.xlsx`.
+
+### Karta uzavření review
+
+```text
+Tichý standard:
+
+Pracovní místo review:
+
+Vybraný stav:
+- zůstává beze změny
+- lokálně opravujeme
+- rušíme obchvat
+- otevíráme nový průchod
+
+Důkaz pro stav:
+
+Uzavírací věta:
+
+Co zůstává zavřené:
+
+Co se lokálně mění, pokud něco:
+
+Jakou náhradní evidenci, export, štítek nebo seznam rušíme:
+
+Jaká data mažeme, nepřenášíme nebo dál nevytváříme:
+
+Kde závěr bydlí:
+
+Vlastník pracovního místa:
+
+Návratový signál:
+```
+
+Karta je povinná jen tehdy, když se něco mění, ruší nebo otevírá. Pokud standard zůstává beze změny, stačí jedna uzavírací věta u pracovního místa. Ne každý dobrý závěr potřebuje formulář. Některé závěry potřebují hlavně nebýt nafouknuté do další administrativy.
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: přečtěte pracovní větu tichého standardu.
+2. Minuta 2: pojmenujte pracovní místo, kde review nastalo.
+3. Minuta 3: vyberte jeden ze čtyř uzavíracích stavů.
+4. Minuta 4: napište důkaz pro vybraný stav.
+5. Minuta 5: napište, co dál výslovně neotevíráte.
+6. Minuta 6: napište datovou větu: co nesbíráte, mažeme nebo nepřenášíte.
+7. Minuta 7: uložte uzavírací větu na pracovní místo a ukončete review.
+
+Pokud se během workshopu objeví potřeba větší debaty, nejdřív dokončete uzavření review. Teprve potom otevřete nový průchod. Smíchat uzavření a nový začátek je lákavé, ale špatně dohledatelné. Za týden nebude jasné, jestli starý standard skončil, změnil se, nebo se jen začal tvářit jako něco jiného.
+
+### Checklist uzavření prvního přirozeného review
+
+- Vybrali jsme přesně jeden uzavírací stav?
+- Má stav konkrétní důkaz z pracovního místa?
+- Končí review jednou dohledatelnou větou?
+- Je jasné, co zůstává zavřené?
+- Pokud měníme standard, jde jen o lokální opravu stejného pracovního místa?
+- Pokud rušíme obchvat, víme, kde byl a kdo ho odstraní?
+- Pokud otevíráme nový průchod, neohýbáme starý standard potichu?
+- Má závěr konkrétní privacy-first datovou větu?
+- Mažeme nebo ukončujeme dočasné stopy, které už nemají rozhodovací účel?
+- Zůstává návratový signál čitelný i pro člověka, který u review nebyl?
+- Je závěr uložený tam, kde se standard opravdu používá?
+
+Uzavření prvního přirozeného review je malá brzda proti nekonečné péči. Pokud standard funguje, nechte ho pracovat. Pokud potřebuje drobnou opravu, opravte nejbližší místo. Pokud kolem něj vznikl obchvat, ukliďte ho. Pokud se realita změnila, otevřete nový průchod. Hlavně z review nedělejte trvalý dohled jen proto, že se standard po čase znovu objevil na stole.
+
 ## Pracovní log
 
+- 2026-07-07: Doplněna úvodní podkapitola o uzavření prvního přirozeného review tichého standardu: čtyři uzavírací stavy, praktický SaaS příklad, privacy-first datová věta, karta, mini workshop a checklist.
 - 2026-07-07: Doplněna úvodní podkapitola o prvním přirozeném review tichého standardu: kontrola pracovního místa, návratového signálu, obchvatů, privacy-first úklidu, karta, mini workshop a checklist.
 - 2026-07-07: Doplněna úvodní podkapitola o uzavření druhého běžného použití tichého standardu do pasivního provozu: tři uzavírací stavy, praktický SaaS příklad, privacy-first datový úklid, karta, mini workshop a checklist.
 - 2026-07-07: Doplněna úvodní podkapitola o druhém běžném použití tichého standardu: opakovatelnost, samostatnost, zavřený rozsah, privacy-first ukončení pomocné evidence, karta, mini workshop a checklist.
