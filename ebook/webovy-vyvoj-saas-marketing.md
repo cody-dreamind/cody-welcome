@@ -304592,8 +304592,172 @@ Pokud se debata zasekne u toho, jestli "už se to opakuje moc často", vraťte j
 
 Druhé přirozené použití po dlouhodobém klidu má dát týmu klidnou odpověď: pravidlo už není jen starý zápis, ale použitelná součást provozu. Když projde, nechte ho dál pracovat bez pozornosti. Když neprojde, opravte nejmenší slabé místo. A když se opravdu splnil návratový signál, otevřete návrat poctivě, ne bočními dveřmi přes pomocnou evidenci.
 
+## Uzavření druhého přirozeného použití po dlouhodobém klidu
+
+Druhé přirozené použití po dlouhodobém klidu potřebuje vlastní konec. Ne proto, aby tým vyrobil další vrstvu dokumentace, ale proto, aby bylo jasné, jestli záznam opravdu zvládl přenositelnost, nebo jestli pořád potřebuje opravu. Bez uzavření se může stát zvláštní věc: pravidlo bylo použité dvakrát, ale nikdo neřekl, jestli má zůstat v klidu, změnit kotvu, zpřesnit hranici, nebo se vrátit do aktivní práce.
+
+Začněte větou:
+
+```text
+Druhé přirozené použití po dlouhodobém klidu uzavíráme takto:
+```
+
+Za ni napište jeden jasný výsledek. Ne historii, ne celý kontext, ne přání do budoucna. Jen stav pravidla po druhém použití:
+
+```text
+Druhé přirozené použití po dlouhodobém klidu uzavíráme takto:
+Pravidlo použil jiný člověk bez původní historie, našel ho u potvrzovací šablony a použil volitelnou otázku bez založení nové evidence. Záznam zůstává v dlouhodobém klidu a další kontrolu neplánujeme.
+```
+
+Tahle věta má být nudně jednoznačná. Když říkáte "zůstává v dlouhodobém klidu", znamená to, že se kolem pravidla nevyrábí další rytmus, tabulka ani sledování. Když říkáte "další kontrolu neplánujeme", znamená to, že další návrat smí přijít až přes návratový signál nebo přirozené pracovní použití, ne přes pocit, že by se na věc mělo zase podívat.
+
+### Tři uzavírací stavy
+
+Po druhém přirozeném použití vyberte jeden ze tří stavů:
+
+- Potvrdit dlouhodobý klid: pravidlo je přenositelné, funguje bez původní paměti a nevznikla nová datová stopa.
+- Dolaďte poslední kotvu: pravidlo je správné, ale druhé použití ukázalo ještě jednu slabinu v místě, kde se hledá nebo používá.
+- Otevřít návrat: druhé použití spolu s předchozími signály opravdu splnilo domluvený návratový signál.
+
+Stav `potvrdit dlouhodobý klid` je cílový. Znamená, že pravidlo už není projekt. Je to součást pracovního prostředí. Nechte ho být a nepřidávejte mu nový kontrolní režim. Dobré pravidlo po potvrzení klidu nemá volat o pozornost. Má tiše pomáhat.
+
+Stav `dolaďte poslední kotvu` použijte, když pravidlo funguje věcně, ale ještě má slabé umístění. Například člověk nakonec našel správnou větu, ale jen přes interní index, ne přímo u šablony, kde pracoval. Oprava má být malá: přesun odkazu, přejmenování záznamu, jedna věta u šablony nebo doplnění zavřeného rozsahu na místo použití.
+
+Stav `otevřít návrat` nepoužívejte jen proto, že situace nastala podruhé. Opakované použití pravidla není automaticky důkaz problému. Návrat otevírejte až tehdy, když je splněná domluvená podmínka: například několik relevantních poptávek za sebou nejde kvalifikovat ani po volitelné otázce. Pak už nejde o běžné použití. Jde o nový průchod se samostatnou hranicí.
+
+### Praktický SaaS příklad
+
+```text
+Druhé přirozené použití:
+Jiný obchodník řešil relevantní poptávku bez rozpočtu.
+
+Co se stalo:
+Našel pravidlo u potvrzovací šablony, poslal volitelnou otázku a zákazník doplnil dost kontextu pro další krok.
+
+Uzavírací stav:
+Potvrdit dlouhodobý klid.
+
+Co ponecháváme:
+Jednu pracovní větu u potvrzovací šablony.
+
+Co zůstává zavřené:
+Povinné pole pro rozpočet, lead scoring, ruční seznam poptávek bez rozpočtu a export rozpočtových odpovědí.
+
+Privacy-first závěr:
+Konkrétní odpověď zákazníka zůstává jen v obchodním vlákně. Do indexu ani CRM nepřenášíme nový atribut.
+```
+
+Slabší uzavření může vypadat takto:
+
+```text
+Druhé přirozené použití:
+Člověk pravidlo použil správně, ale našel ho až přes kolegu.
+
+Uzavírací stav:
+Dolaďte poslední kotvu.
+
+Oprava:
+K potvrzovací šabloně přidáváme krátkou větu a odkaz na kanonický záznam.
+
+Co neotevíráme:
+Novou obchodní dokumentaci, změnu formuláře, CRM atribut ani pravidelné review tématu.
+```
+
+Všimněte si hranice. Selhalo umístění, takže opravujete umístění. Neotevíráte obchodní proces, produktovou strategii ani novou metriku. To je rozdíl mezi provozní opravou a nenápadným bobtnáním práce.
+
+### Privacy-first uzavření
+
+Po druhém použití zkontrolujte hlavně náhradní evidenci. Pokud během prvního nebo druhého použití vznikl pomocný seznam, štítek, tabulka, screenshot, kopie e-mailu nebo ruční počítadlo, rozhodněte o něm hned.
+
+Použijte tři řádky:
+
+```text
+Do dlouhodobého klidu ponecháváme:
+
+Do dlouhodobého klidu nepřenášíme:
+
+Mažeme, anonymizujeme nebo necháváme v původním oprávněném zdroji:
+```
+
+Příklad:
+
+```text
+Do dlouhodobého klidu ponecháváme:
+Zobecněnou pracovní větu u potvrzovací šablony.
+
+Do dlouhodobého klidu nepřenášíme:
+Pomocnou tabulku s konkrétními odpověďmi zákazníků.
+
+Mažeme, anonymizujeme nebo necháváme v původním oprávněném zdroji:
+Konkrétní obchodní odpovědi necháváme pouze v e-mailovém vlákně; do týmového indexu patří jen zobecněné pravidlo.
+```
+
+Codyho komentář: dlouhodobý klid není skříň, kam odložíte všechno, co nechcete řešit. Je to režim pro pravidla, která obstála a nepotřebují mimořádnou pozornost. Pokud do něj přenesete i pomocné datové stopy, nevytváříte klid. Vytváříte archiv s náladou "někdy se to může hodit". A přesně tam začíná budoucí úklid, který nikdo nechtěl.
+
+### Karta uzavření druhého přirozeného použití
+
+```text
+Záznam v dlouhodobém klidu:
+
+Druhé přirozené použití:
+
+Kdo pravidlo použil a kde:
+
+Co se opravdu stalo:
+
+Uzavírací stav:
+- potvrdit dlouhodobý klid
+- doladit poslední kotvu
+- otevřít návrat
+
+Co ponecháváme v pracovním místě:
+
+Co případně dolaďujeme:
+
+Co zůstává výslovně zavřené:
+
+Návratový signál pro další otevření:
+
+Privacy-first uzavření:
+Do dlouhodobého klidu ponecháváme:
+Do dlouhodobého klidu nepřenášíme:
+Mažeme, anonymizujeme nebo necháváme v původním oprávněném zdroji:
+
+Kde je závěr uložený:
+
+Vlastník:
+```
+
+Karta má být konečná stopa, ne začátek další péče. Pokud po ní vznikne nový úkol, měl by být buď velmi lokální, nebo už patřit do samostatného návratu. Všechno mezi tím je šedá zóna, kde se práce tváří malá, ale chová se jako dlouhý závazek.
+
+### Mini workshop na 5 minut
+
+1. Minuta 1: přečtěte druhé přirozené použití jednou větou.
+2. Minuta 2: rozhodněte, jestli pravidlo použil člověk bez původní historie.
+3. Minuta 3: vyberte jeden ze tří uzavíracích stavů.
+4. Minuta 4: napište, co zůstává zavřené a jaký návratový signál platí dál.
+5. Minuta 5: ukončete nebo očistěte náhradní datovou stopu.
+
+Když se během workshopu objeví návrh na nové měření, ptejte se, jaké rozhodnutí má měření změnit. Pokud odpověď není jasná, měření nezakládejte. Dlouhodobý klid se nemá měřit jen proto, že umíme vytvořit sloupec.
+
+### Checklist uzavření druhého přirozeného použití
+
+- Uzavíráme druhé přirozené použití, ne pravidelné review?
+- Víme, kdo pravidlo použil a zda potřeboval původní historii?
+- Vybrali jsme jeden ze tří stavů?
+- Pokud potvrzujeme dlouhodobý klid, nevzniká žádný nový kontrolní rytmus?
+- Pokud dolaďujeme kotvu, je oprava jen u nejbližšího pracovního místa?
+- Pokud otevíráme návrat, je návratový signál opravdu splněný?
+- Je jasné, co zůstává výslovně zavřené?
+- Ukončili jsme pomocné seznamy, štítky, exporty nebo kopie zákaznických detailů?
+- Nepřenášíme do indexu osobní ani obchodní údaje, když stačí zobecněné pravidlo?
+- Umí další člověk poznat, že záznam zůstává v klidu až do nového signálu?
+
+Uzavření druhého přirozeného použití má být poslední tečka za dlouhodobým klidem. Pokud pravidlo prošlo, nechte ho žít bez dohledu. Pokud potřebuje poslední kotvu, opravte ji přesně tam, kde chyběla. A pokud se opravdu splnil návratový signál, otevřete nový průchod čistě, s vlastním rozsahem a bez pašování staré pomocné evidence do běžného provozu.
+
 ## Pracovní log
 
+- 2026-07-07: Doplněna úvodní podkapitola o uzavření druhého přirozeného použití po dlouhodobém klidu: uzavírací stavy, praktické SaaS příklady, privacy-first ukončení náhradní evidence, karta, mini workshop a checklist.
 - 2026-07-06: Doplněna úvodní podkapitola o druhém přirozeném použití záznamu po dlouhodobém klidu: ověření přenositelnosti, výsledné stavy, praktický SaaS příklad, privacy-first kontrola náhradní evidence, karta, mini workshop a checklist.
 - 2026-07-06: Doplněna úvodní podkapitola o uzavření prvního přirozeného použití záznamu po dlouhodobém klidu: uzavírací stavy, praktické SaaS příklady, privacy-first úklid datové stopy, karta, mini workshop a checklist.
 - 2026-07-06: Doplněna úvodní podkapitola o prvním přirozeném použití záznamu po dlouhodobém klidu: tiché kontroly, výsledné stavy, praktický SaaS příklad, privacy-first práce bez nové evidence, karta, mini workshop a checklist.
