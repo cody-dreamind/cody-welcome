@@ -306344,8 +306344,179 @@ Pokud se během workshopu ukáže, že člověk bez historie pravidlo vůbec nem
 
 První použití dlouhodobé paměti bez původní historie je tvrdý, ale férový test. Buď pravidlo opravdu přešlo do provozu, nebo pořád závisí na lidech, kteří si pamatují, proč vzniklo. V prvním případě ho nechte být. Ve druhém opravte nejbližší kotvu nebo větu. Neotvírejte celý příběh, když chybí jen klika na správných dveřích.
 
+## Uzavření prvního použití dlouhodobé paměti
+
+První použití dlouhodobé paměti bez původní historie nemá skončit dojmem, že to "asi fungovalo". Má skončit malým provozním závěrem: pravidlo buď obstálo, potřebuje lokální kotvu, potřebuje ostřejší větu, nebo se objevila falešná výjimka, kterou je potřeba zavřít dřív, než z ní někdo vyrobí nový proces.
+
+Uzavření napište hned po použití, dokud je ještě jasné, kde člověk hledal, co opravdu použil a jestli vznikla nová datová stopa. Nečekejte na měsíční review. Dlouhodobá paměť se zlepšuje nejlépe v místě, kde se právě ukázala realita; po měsíci už z ní často zůstane jen neurčitá vzpomínka typu "někdo s tím měl problém". To je dobrý začátek hospodské historky, ne provozního rozhodnutí.
+
+Začněte jednou z těchto vět:
+
+```text
+První použití dlouhodobé paměti uzavíráme jako samostatně funkční.
+
+První použití dlouhodobé paměti uzavíráme lokální kotvou u pracovního místa.
+
+První použití dlouhodobé paměti uzavíráme zpřesněním pracovní věty.
+
+První použití dlouhodobé paměti uzavíráme zastavením falešné výjimky.
+```
+
+Tím určíte, jak velká práce smí následovat. Samostatně funkční pravidlo nepotřebuje další úpravu. Lokální kotva znamená přesun nebo doplnění odkazu tam, kde člověk skutečně pracuje. Zpřesnění pracovní věty znamená přepsat rozhodovací text, ne rozšiřovat historii. Falešná výjimka znamená potvrdit, že návratový signál nenastal, a zavřít pokus obejít pravidlo.
+
+### Čtyři uzavírací stavy
+
+Samostatně funkční pravidlo uzavřete co nejkratší stopou:
+
+```text
+Pravidlo z dlouhodobé paměti bylo použito bez původní historie, vedlo ke správné akci a nevznikla nová datová stopa. Zůstává u potvrzovací šablony; formulář, scoring ani export dál neotevíráme.
+```
+
+Takový zápis není oslava. Je to brzda proti dalšímu zbytečnému review. Pokud pravidlo funguje, největší služba je nechat ho být. Každá nová kontrola by měla mít důvod, ne jen chuť ujistit se, že dobré rozhodnutí je pořád dobré.
+
+Lokální kotvu použijte, když člověk pravidlo pochopil, ale našel ho pozdě, jinde nebo až s pomocí:
+
+```text
+Pravidlo zůstává beze změny, ale doplňujeme jednu pracovní větu přímo k potvrzovací šabloně. Týmový index zůstává jen kanonickým odkazem; neotevíráme nový obchodní postup ani pomocnou evidenci poptávek.
+```
+
+Kotva má být blízko kliknutí, psaní nebo rozhodnutí. Pokud člověk pracuje v e-mailové šabloně, pravidlo má být u šablony. Pokud pracuje ve formulářovém backlogu, pravidlo má být u backlogové položky nebo jejího kanonického záznamu. Neposílejte lidi na výlet do dokumentace pokaždé, když mají udělat běžnou věc.
+
+Zpřesnění pracovní věty použijte, když pravidlo bylo najitelné, ale nedalo se podle něj jednat:
+
+```text
+Původní větu přepisujeme do akce: u relevantní poptávky bez rozpočtu pošli volitelnou otázku v potvrzovacím e-mailu. Formulář, scoring ani export se nemění. Návratový signál zůstává: tři relevantní poptávky za sebou nepůjdou kvalifikovat ani po této otázce.
+```
+
+Při zpřesnění nevracejte do textu starou debatu. Pokud věta potřebuje vysvětlit tři historické odbočky, není to pracovní věta. Je to malý archiv převlečený za instrukci.
+
+Zastavení falešné výjimky použijte, když někdo navrhl obejít pravidlo bez splnění návratového signálu:
+
+```text
+Dnešní situace nesplňuje návratový signál. Zákazník je větší, ale poptávku jde kvalifikovat volitelnou otázkou v e-mailu, proto pravidlo platí dál. Nezakládáme zvláštní pole, štítek ani ruční seznam pro tento typ poptávky.
+```
+
+Falešnou výjimku neřešte zostra proti člověku. Často vzniká z odpovědnosti, ne z chaosu. Zavřete ji proti důkazu: co přesně se stalo, proč to není návratový signál a co se kvůli tomu nemění.
+
+### Praktický SaaS příklad
+
+Dlouhodobé pravidlo říká:
+
+```text
+U relevantní poptávky bez rozpočtu lze poslat volitelnou otázku v potvrzovacím e-mailu. Formulář, scoring ani nový export se nemění. K povinnému poli se vracíme pouze tehdy, když tři relevantní poptávky za sebou nepůjdou kvalifikovat ani po volitelné otázce.
+```
+
+Nový obchodník pravidlo poprvé použije bez původní historie. Po odeslání odpovědi vzniknou čtyři možné závěry.
+
+Samostatně funkční závěr:
+
+```text
+Obchodník našel větu u šablony, poslal volitelnou otázku a poptávku kvalifikoval v běžném e-mailovém vlákně. Nevznikl nový CRM atribut, export ani pomocná tabulka. Pravidlo zůstává beze změny.
+```
+
+Lokální kotva:
+
+```text
+Obchodník pravidlo našel až v týmovém indexu. Doplňujeme stejnou pracovní větu k potvrzovací šabloně a index ponecháváme jako zdroj širšího kontextu. Staré rozhodnutí neměníme.
+```
+
+Zpřesnění věty:
+
+```text
+Obchodník našel pravidlo, ale nebylo jasné, zda se týká jen relevantních B2B poptávek. Doplňujeme tuto hranici přímo do věty. Neotevíráme nové segmentování, scoring ani povinné pole.
+```
+
+Falešná výjimka:
+
+```text
+Obchodník navrhl výjimku, protože poptávka přišla od větší firmy. Návratový signál ale nenastal: poptávku šlo kvalifikovat volitelnou otázkou. Výjimku neotevíráme a pravidlo platí dál.
+```
+
+Všimněte si, že ani jedna varianta nezačíná větou "pojďme se podívat na celý proces poptávek". To je přesně ten svah, po kterém se malé uzavření sveze do nového projektu. Pokud chcete otevřít celý proces, udělejte to jindy, s novou otázkou a vlastním důvodem.
+
+### Privacy-first uzavření
+
+Uzavření prvního použití musí říct, co se stalo s datovou stopou. Nestačí napsat, že "nevznikl problém". U privacy-first provozu je důležité, jestli vznikl nový údaj, kopie, štítek, export, screenshot nebo pomocná poznámka. Malé dočasné stopy jsou zrádné právě tím, že vypadají neškodně.
+
+Použijte krátkou datovou větu:
+
+```text
+Při použití pravidla nevzniká nový datový zdroj; pracujeme jen s běžným e-mailovým vláknem a po uzavření neukládáme kopie odpovědí mimo původní místo.
+```
+
+Nebo pokud stopa vznikla:
+
+```text
+Pomocná poznámka vznikla jen pro první použití pravidla. Po propsání obecného závěru k šabloně ji mažeme a nepřenášíme zákaznické detaily do indexu.
+```
+
+Tahle věta je často důležitější než samotná oprava textu. Dobré pravidlo může ztratit privacy-first hodnotu, pokud kolem něj lidé začnou pro jistotu zakládat nové evidence. A "pro jistotu" je v provozu nejdražší formulace, protože nikdy sama neřekne, kdy už jistota stačí.
+
+### Karta uzavření prvního použití
+
+```text
+Pravidlo:
+
+První použití bez původní historie:
+
+Výsledek:
+- samostatně funkční
+- lokální kotva
+- zpřesnění pracovní věty
+- zastavení falešné výjimky
+
+Důkaz:
+
+Co se mění:
+
+Co zůstává zavřené:
+
+Návratový signál zůstává nebo se mění takto:
+
+Privacy-first datová věta:
+
+Kde je uzavření uložené:
+
+Vlastník případné lokální opravy:
+
+Další review:
+- žádné
+- jen při návratovém signálu
+- konkrétní kontrola kvůli lokální opravě
+```
+
+Kartu vyplňujte jen tehdy, když něco měníte nebo rušíte. Pokud pravidlo fungovalo samostatně, stačí jedna uzavírací věta u pracovního místa. Dlouhodobá paměť se nemá dokazovat hromadou záznamů. Má fungovat tak nenápadně, že další záznam často vůbec nepotřebuje.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte situaci prvního použití.
+2. Minuta 2: vyberte jeden ze čtyř uzavíracích stavů.
+3. Minuta 3: napište důkaz pro vybraný stav.
+4. Minuta 4: určete, co se mění a co zůstává zavřené.
+5. Minuta 5: napište privacy-first datovou větu.
+6. Minuta 6: uložte závěr na pracovní místo a zavřete případnou dočasnou stopu.
+
+Pokud se během šesti minut nedokážete shodnout na stavu, pravděpodobně nejde o uzavření prvního použití. Možná přišel skutečný návratový signál, možná pravidlo není dost srozumitelné, možná řešíte nové téma. V takovém případě nejdřív napište, proč uzavření nejde dokončit, a otevřete samostatný menší průchod. Nepřilepujte ho k dlouhodobé paměti jako přívěsek.
+
+### Checklist uzavření prvního použití
+
+- Vybrali jsme přesně jeden uzavírací stav?
+- Máme důkaz z konkrétního pracovního místa?
+- Nezaměňujeme chybějící kotvu za špatné pravidlo?
+- Pokud zpřesňujeme větu, zůstává v přítomném čase a vede k akci?
+- Pokud zastavujeme falešnou výjimku, píšeme proč návratový signál nenastal?
+- Je jasné, co zůstává zavřené?
+- Nevzniká nový proces jen kvůli prvnímu použití?
+- Je datová stopa popsána konkrétně?
+- Mažeme nebo ukončujeme pomocné poznámky, exporty a kopie bez dalšího účelu?
+- Je závěr uložený u místa, kde se pravidlo příště použije?
+- Neplánujeme další review bez návratového signálu?
+
+Uzavření prvního použití dlouhodobé paměti má být malé a rozhodné. Pravidlo buď necháte být, přiblížíte ho k práci, zostříte jeho větu, nebo zastavíte falešnou výjimku. Tím se dlouhodobá paměť nestane dalším dokumentačním patrem, ale praktickou oporou: člověk přijde, použije pravidlo, neotevře starou debatu a nevytvoří zbytečná data. Krása? Ne. Provozní klid? Ano. Beru.
+
 ## Pracovní log
 
+- 2026-07-07: Doplněna úvodní podkapitola o uzavření prvního použití dlouhodobé paměti: čtyři uzavírací stavy, praktický SaaS příklad, privacy-first datová věta, karta, mini workshop a checklist.
 - 2026-07-07: Doplněna úvodní podkapitola o prvním použití dlouhodobé paměti bez původní historie: samostatné použití pravidla, lokální kotva, ostrá pracovní věta, falešná výjimka, privacy-first kontrola datové stopy, karta, mini workshop a checklist.
 - 2026-07-07: Doplněna úvodní podkapitola o uzavření druhého přirozeného review do dlouhodobé paměti: pracovní věta, kanonické místo, zavřený rozsah, návratový signál, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-07-07: Doplněna úvodní podkapitola o uzavření prvního přirozeného review tichého standardu: čtyři uzavírací stavy, praktický SaaS příklad, privacy-first datová věta, karta, mini workshop a checklist.
