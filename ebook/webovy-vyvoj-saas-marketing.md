@@ -306003,8 +306003,167 @@ Pokud se během workshopu objeví větší téma, nezvětšujte review. Zapište
 
 Druhé přirozené review má standard nechat zestárnout důstojně. Když funguje, nepotřebuje nový kabát. Když drhne, potřebuje nejbližší opravu. Když se kolem něj vrátila péče, potřebuje úklid. A když se změnila realita, potřebuje nový průchod. Všechno ostatní je většinou jen elegantnější způsob, jak si ponechat starý problém v oběhu.
 
+## Uzavření druhého přirozeného review do dlouhodobé paměti
+
+Druhé přirozené review je dobrý konec mimořádné pozornosti, ale ještě není samo o sobě dlouhodobá paměť. Aby se z něj stal stabilní provozní stav, musí po něm zůstat krátká stopa, kterou najde další člověk bez vysvětlování historie. Ne celý příběh. Ne přepis workshopu. Jen věta, která říká, co standard dnes znamená, kde bydlí, co zůstává zavřené a kdy má smysl ho znovu otevřít.
+
+Začněte zápisem:
+
+```text
+Po druhém přirozeném review ukládáme do dlouhodobé paměti:
+```
+
+Za něj napište jednu pracovní větu:
+
+```text
+Po druhém přirozeném review ukládáme do dlouhodobé paměti:
+U relevantní poptávky bez jasného rozpočtu nebo rozhodovacího limitu používáme volitelnou otázku v potvrzovacím e-mailu; formulář, lead scoring a zvláštní export dál neotevíráme, dokud tři relevantní poptávky za sebou nepůjdou kvalifikovat tímto postupem.
+```
+
+Tahle věta je delší než marketingový slogan, ale kratší než provozní dokument. To je správná velikost. Dlouhodobá paměť nemá inspirovat. Má zabránit tomu, aby se za dva měsíce řešila stejná otázka od nuly nebo aby se původně zavřený rozsah vrátil zadními dveřmi.
+
+### Co do dlouhodobé paměti patří
+
+Uložte jen čtyři věci:
+
+- současné pravidlo;
+- kanonické pracovní místo;
+- zavřený rozsah;
+- návratový signál.
+
+Současné pravidlo říká, co se má dělat v běžné práci. Kanonické pracovní místo říká, kde pravidlo člověk najde. Zavřený rozsah chrání před nenápadným rozšířením. Návratový signál určuje, kdy už nejde o další nápad, ale o legitimní důvod k novému průchodu.
+
+Nepatří sem celá historie rozhodnutí, seznam všech starých variant ani kopie zákaznických příkladů. Pokud někdo potřebuje historii, může otevřít původní záznam. Dlouhodobá paměť má sloužit člověku, který právě pracuje, ne badateli, který píše monografii o tom, proč formulář nemá další pole. I když uznávám, že by to byl napínavý žánr pro velmi specifické publikum.
+
+### Tři úrovně uložení
+
+Po druhém review vyberte jednu ze tří úrovní:
+
+- Pracovní věta u místa použití: stačí, když standard funguje a není potřeba širší koordinace.
+- Krátký záznam v týmovém indexu: použijte, když se pravidlo týká více lidí nebo pracovních míst.
+- Provozní standard: použijte jen tehdy, když pravidlo opakovaně ovlivňuje zákaznickou zkušenost, příjem, riziko nebo datovou stopu.
+
+Většina dobrých výsledků patří do první nebo druhé úrovně. Provozní standard zní lákavě, protože působí dospěle. Ale když z každé věty uděláte standard, tým brzy přestane číst i ty důležité. Dospělost systému není v počtu dokumentů. Je v tom, že správná věta bydlí na správném místě.
+
+Příklad pracovního uložení:
+
+```text
+Místo:
+Potvrzovací e-mail pro relevantní poptávky.
+
+Pracovní věta:
+Pokud bez rámcového rozpočtu nebo rozhodovacího limitu nejde navrhnout další krok, pošli volitelnou otázku v odpovědi. Formulář se kvůli tomu nemění.
+```
+
+Příklad záznamu v indexu:
+
+```text
+Index:
+Kvalifikace poptávek bez rozšiřování formuláře.
+
+Stav:
+Tichý standard po druhém přirozeném review.
+
+Kanonické místo:
+Potvrzovací e-mail a obchodní checklist.
+
+Zavřený rozsah:
+Povinné pole pro rozpočet, automatický lead scoring, export rozpočtových údajů.
+
+Návratový signál:
+Tři relevantní poptávky za sebou nepůjdou kvalifikovat bez dalšího ručního doptání.
+```
+
+### Privacy-first závěr
+
+Dlouhodobá paměť nesmí být záminka k dlouhodobému držení detailů. Do stabilního záznamu ukládejte pravidlo a zobecněný důkaz, ne osobní nebo obchodní detaily jednotlivých zákazníků. Pokud druhé review pracovalo s konkrétními poptávkami, e-maily, screenshoty nebo dočasnou tabulkou, uzavřete jejich stav ještě před uložením standardu.
+
+Použijte tři řádky:
+
+```text
+Do dlouhodobé paměti ukládáme:
+
+Do dlouhodobé paměti neukládáme:
+
+Původní detaily zůstávají nebo končí zde:
+```
+
+Příklad:
+
+```text
+Do dlouhodobé paměti ukládáme:
+Pravidlo pro volitelnou otázku v potvrzovacím e-mailu a návratový signál.
+
+Do dlouhodobé paměti neukládáme:
+Konkrétní rozpočty, kopie zákaznických odpovědí, pomocnou tabulku ani screenshoty e-mailů.
+
+Původní detaily zůstávají nebo končí zde:
+Zákaznické odpovědi zůstávají jen v obchodním vlákně podle běžné retence; pomocnou tabulku mažeme po propsání zobecněného závěru.
+```
+
+Tím se standard učí z reality, ale nenosí si realitu v batohu navždy. Privacy-first provoz nepotřebuje paměť bez zapomínání. Potřebuje paměť, která ví, co má zůstat jako pravidlo a co má skončit jako dočasný důkaz.
+
+### Karta uložení do dlouhodobé paměti
+
+```text
+Tichý standard:
+
+Výsledek druhého přirozeného review:
+
+Co ukládáme jako současné pravidlo:
+
+Kanonické pracovní místo:
+
+Zavřený rozsah:
+
+Návratový signál:
+
+Úroveň uložení:
+- pracovní věta u místa použití
+- záznam v týmovém indexu
+- provozní standard
+
+Do dlouhodobé paměti neukládáme:
+
+Co mažeme, anonymizujeme nebo necháváme jen v původním zdroji:
+
+Kdo vlastní další úpravu pravidla:
+
+Kdy se pravidlo vrací k review:
+```
+
+Kartu vyplňujte jen tehdy, když pravidlo míří do indexu nebo provozního standardu. Pokud stačí jedna věta u šablony, nezakládejte kartu jen proto, aby se dlouhodobá paměť tvářila důležitě. Důležitá paměť je ta, kterou někdo použije.
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: přečtěte výsledek druhého přirozeného review.
+2. Minuta 2: napište současné pravidlo jednou pracovní větou.
+3. Minuta 3: určete kanonické pracovní místo.
+4. Minuta 4: napište zavřený rozsah.
+5. Minuta 5: potvrďte návratový signál.
+6. Minuta 6: vyberte úroveň uložení.
+7. Minuta 7: udělejte privacy-first úklid detailů.
+
+Když se během workshopu ukáže, že pravidlo neumíte napsat jednou větou, neukládejte ho do dlouhodobé paměti. Vraťte se o krok zpět a zpřesněte výsledek review. Dlouhodobá paměť nemá opravovat nejasné rozhodnutí. Má uchovat jasné rozhodnutí v použitelné podobě.
+
+### Checklist dlouhodobé paměti
+
+- Je současné pravidlo napsané jako pracovní věta?
+- Víme, kde pravidlo člověk najde při běžné práci?
+- Je zavřený rozsah výslovně uvedený?
+- Má pravidlo konkrétní návratový signál?
+- Vybrali jsme nejmenší vhodnou úroveň uložení?
+- Nepřevádíme do dlouhodobé paměti konkrétní osobní nebo obchodní detaily?
+- Ukončili jsme pomocné tabulky, screenshoty, exporty a dočasné poznámky?
+- Je jasné, kdo smí pravidlo upravit?
+- Neplánujeme další review jen ze zvyku?
+- Umí další člověk použít pravidlo bez čtení celé historie?
+
+Uzavření do dlouhodobé paměti je poslední malý krok po druhém přirozeném review. Když ho uděláte dobře, standard se přestane tvářit jako projekt a začne fungovat jako součást práce. To je přesně cílový stav: méně péče, méně datových stop, méně opakovaného vysvětlování a víc klidného provozu.
+
 ## Pracovní log
 
+- 2026-07-07: Doplněna úvodní podkapitola o uzavření druhého přirozeného review do dlouhodobé paměti: pracovní věta, kanonické místo, zavřený rozsah, návratový signál, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-07-07: Doplněna úvodní podkapitola o uzavření prvního přirozeného review tichého standardu: čtyři uzavírací stavy, praktický SaaS příklad, privacy-first datová věta, karta, mini workshop a checklist.
 - 2026-07-07: Doplněna úvodní podkapitola o prvním přirozeném review tichého standardu: kontrola pracovního místa, návratového signálu, obchvatů, privacy-first úklidu, karta, mini workshop a checklist.
 - 2026-07-07: Doplněna úvodní podkapitola o uzavření druhého běžného použití tichého standardu do pasivního provozu: tři uzavírací stavy, praktický SaaS příklad, privacy-first datový úklid, karta, mini workshop a checklist.
