@@ -307006,8 +307006,156 @@ Když workshop začne navrhovat nový dashboard, vraťte se k otázce: "Jaké ro
 
 Lehký revizní rytmus je způsob, jak nechat ověřené pravidlo žít bez zbytečné péče. Dobré pravidlo nemá být pořád na stole. Má být po ruce, když se stejná pracovní situace vrátí. Pokud se nevrátí, klid není zanedbání. Klid je důkaz, že systém nepotřebuje další hluk.
 
+## První kontrola lehkého revizního rytmu
+
+Lehký revizní rytmus se pozná až při první kontrole. Do té chvíle je to dobrý záměr zapsaný vedle pravidla. První kontrola má ověřit jednu věc: jestli se pravidlo dá zkontrolovat bez toho, aby kolem něj vznikla nová provozní agenda.
+
+Začněte krátkou otázkou:
+
+```text
+Potkalo se pravidlo s běžnou prací, nebo ho otevíráme jen proto, že jsme si na něj vzpomněli?
+```
+
+Pokud se pravidlo potkalo s běžnou prací, kontrola má smysl. Pokud se nepotkalo, většinou je správný výsledek nechat ho zavřené. Tohle je těžší, než vypadá. Produktové týmy mají tendenci považovat každý uložený poznatek za dluh, ke kterému se musí vracet. Jenže dlouhodobá paměť není úkolovník. Je to místo pro rozhodnutí, která mají pomoci, až znovu nastane stejná situace.
+
+### Tři výsledky první kontroly
+
+První kontrola lehkého rytmu má jen tři rozumné výsledky:
+
+- pravidlo drží a rytmus se nemění;
+- pravidlo drží, ale potřebuje jednu lokální úpravu u pracovního místa;
+- rytmus je příliš těžký a musí se zúžit.
+
+První výsledek je nejlepší. Znamená, že pravidlo bylo najitelné, člověk ho použil bez původního vysvětlování a kontrola nevytvořila novou evidenci. Do logu stačí jedna věta:
+
+```text
+První kontrola: pravidlo drží, rytmus zůstává beze změny.
+```
+
+Druhý výsledek je pořád zdravý. Například věta u šablony je dobrá, ale je schovaná pod starým názvem sekce. Nebo je pravidlo přesné, ale chybí mu odkaz na konkrétní formulář. Opravte jen nejbližší pracovní místo. Neotevírejte znovu původní debatu, pokud se nezměnil důvod rozhodnutí.
+
+Třetí výsledek je varování. Pokud první kontrola vyžaduje tabulku, ruční export, nové štítky, opakované pingy nebo speciální schůzku, rytmus není lehký. Možná jste si pod slovem "kontrola" schovali další proces. V takovém případě se neptejte, jak proces lépe řídit. Nejdřív se ptejte, jak ho zmenšit.
+
+### Praktický SaaS příklad
+
+Tým má pravidlo:
+
+```text
+U relevantní poptávky bez rozpočtu posíláme volitelnou otázku v potvrzovacím e-mailu. Formulář neměníme, dokud tři relevantní poptávky za sebou nejdou kvalifikovat ani po této otázce.
+```
+
+Po měsíci někdo upravuje potvrzovací e-mail. Tím vzniká přirozený dotyk s pravidlem. První kontrola může vypadat takto:
+
+```text
+Kontrolní situace:
+Upravujeme potvrzovací e-mail kvůli nové formulaci termínu odpovědi.
+
+Co se kontroluje:
+Jestli volitelná otázka na rozpočet stále patří do e-mailu a jestli není potřeba měnit formulář.
+
+Výsledek:
+Otázka zůstává volitelná. Formulář se nemění. Návratový signál "tři nekvalifikovatelné relevantní poptávky za sebou" zůstává.
+
+Úprava:
+V šabloně se přesouvá věta o rozpočtu blíž k otázce na rozsah projektu.
+```
+
+To je dobrá kontrola. Děje se při práci, používá existující šablonu a končí konkrétní lokální úpravou. Nepřidává další CRM pole. Nevyrábí report. Nesbírá historická data jen proto, aby se kontrola cítila důkladně.
+
+Slabá kontrola by vypadala takto:
+
+```text
+Než upravíme e-mail, vytáhneme všechny poptávky za poslední čtvrtletí, označíme ty bez rozpočtu, spočítáme jejich konverzi a rozhodneme, jestli má otázka zůstat volitelná.
+```
+
+Takový postup může být oprávněný u větší změny obchodního procesu. Ale pro první kontrolu lehkého rytmu je zbytečně těžký. Vytváří novou práci, která nebyla podmínkou původního pravidla. Navíc snadno přesune pozornost od otázky "funguje věta v šabloně?" k otázce "co všechno by šlo optimalizovat v obchodním trychtýři?" To je jiná kapitola, ne první kontrola rytmu.
+
+### Jak poznat, že kontrola nabobtnala
+
+Kontrola je příliš velká, když se objeví některý z těchto signálů:
+
+- potřebujete data mimo původní pracovní místo;
+- vzniká nový seznam "pro jistotu";
+- někdo navrhuje sledovat výjimky dlouhodobě;
+- původní pravidlo už nestačí přečíst jedním pohledem;
+- kontrola otevírá víc než jedno rozhodnutí;
+- po kontrole není jasné, co přesně se změnilo.
+
+V takové chvíli napište stop větu:
+
+```text
+Tato kontrola už neověřuje lehký rytmus, ale otevírá širší téma. Lehký rytmus necháváme zavřený a širší téma musí mít vlastní důvod, vlastní rozsah a vlastní rozhodnutí.
+```
+
+Stop věta není alibi pro ignorování problému. Je to ochrana před tím, aby se jeden malý návrat stal nenápadným přepisem celého procesu.
+
+### Privacy-first kontrola
+
+Privacy-first první kontrola má jednoduché pravidlo:
+
+```text
+Kontrolu děláme z důkazu, který už vznikl při práci, a po kontrole mažeme dočasné poznámky bez rozhodovací hodnoty.
+```
+
+V praxi to znamená, že se podíváte na šablonu, konkrétní ticket, konkrétní kartu nebo konkrétní formulář. Pokud si během kontroly uděláte pracovní poznámku, po uzavření ji buď přepíšete do jedné rozhodovací věty, nebo smažete. Neuchovávejte bokem seznam lidí, poptávek, e-mailů nebo chování jen proto, že by se "někdy mohly hodit".
+
+Codyho komentář: privacy-first provoz není jen o tom nepoužívat zbytečné trackery. Je to i disciplína neproměnit každou drobnou kontrolu v archiv dočasných dojmů.
+
+### Karta první kontroly rytmu
+
+```text
+Pravidlo:
+
+Kontrolní situace:
+
+Proč se pravidlo potkalo s běžnou prací:
+
+Co kontrolujeme:
+
+Co výslovně neotevíráme:
+
+Výsledek:
+- drží beze změny
+- drží s lokální úpravou
+- rytmus je příliš těžký
+
+Lokální úprava, pokud existuje:
+
+Co se maže nebo neukládá:
+
+Závěrečná věta:
+```
+
+Závěrečná věta má být krátká. Pokud se nevejde na dva řádky, kontrola nejspíš otevřela víc práce, než měla.
+
+### Mini workshop na 5 minut
+
+1. Minuta 1: pojmenujte běžnou práci, která kontrolu vyvolala.
+2. Minuta 2: přečtěte původní pravidlo a jeho návratový signál.
+3. Minuta 3: rozhodněte jeden ze tří výsledků kontroly.
+4. Minuta 4: proveďte nejmenší lokální úpravu, pokud je opravdu potřeba.
+5. Minuta 5: zapište závěrečnou větu a smažte dočasné poznámky bez hodnoty.
+
+Pokud se během pěti minut objeví potřeba větší analýzy, workshop nekončí prodloužením. Končí zápisem, že se otevřelo jiné téma. To jiné téma pak musí dostat vlastní hranici.
+
+### Checklist první kontroly lehkého rytmu
+
+- Vznikla kontrola z běžné práce, ne z obecného pocitu povinnosti?
+- Je jasné, které pravidlo se kontroluje?
+- Používáme důkaz z pracovního místa, kde pravidlo žije?
+- Kontrolujeme jen jednu věc?
+- Zůstává zavřený původní širší rozsah?
+- Nevzniká nový tracker, export, štítek, tabulka nebo pravidelný report?
+- Pokud byla potřeba úprava, je lokální a dohledatelná?
+- Pokud kontrola nabobtnala, oddělili jsme širší téma do samostatného rozhodnutí?
+- Smazali jsme dočasné poznámky bez rozhodovací hodnoty?
+- Má výsledek jednu krátkou závěrečnou větu?
+
+První kontrola lehkého revizního rytmu nemá dokázat, že tým má všechno pod kontrolou. Má dokázat, že dobré pravidlo umí projít běžnou prací bez doprovodné administrativy. Když se to podaří, rytmus je opravdu lehký. Když ne, není ostuda ho zúžit. Ostuda je tvářit se, že těžká kontrola je pořád lehká jen proto, že má v názvu slovo revize.
+
 ## Pracovní log
 
+- 2026-07-07: Doplněna úvodní podkapitola o první kontrole lehkého revizního rytmu: tři výsledky kontroly, praktický SaaS příklad, signály nabobtnání, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-07-07: Doplněna úvodní podkapitola o převodu ověřené dlouhodobé paměti do lehkého revizního rytmu: kontrolní místa, revize při dotyku, signálu nebo změně kontextu, privacy-first důkaz z běžné práce, karta, mini workshop a checklist.
 - 2026-07-07: Doplněna úvodní podkapitola o uzavření druhého použití dlouhodobé paměti: čtyři uzavírací stavy, praktický SaaS příklad, privacy-first uzavření, karta, mini workshop a checklist.
 - 2026-07-07: Doplněna úvodní podkapitola o druhém použití dlouhodobé paměti bez původní historie: ověření přenositelnosti, skrytý proces po první opravě, praktický SaaS příklad, privacy-first kontrola, karta, mini workshop a checklist.
