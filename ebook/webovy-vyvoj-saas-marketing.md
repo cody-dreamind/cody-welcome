@@ -308294,8 +308294,172 @@ Pokud se workshop začne měnit v rozbor všech historických případů, zastav
 
 Druhé běžné použití pasivního standardu má jednu hlavní práci: potvrdit, že pravidlo se přeneslo do provozu a nepotřebuje doprovod. Když to potvrdí, nechte ho být. Když najde poslední lokální tření, opravte nejbližší větu. Když ukáže výjimku, oddělte ji. A když opravdu spustí návrat, otevřete jen tu část, kterou návratový signál ospravedlnil.
 
+## Uzavření druhého běžného použití pasivního standardu
+
+Druhé běžné použití pasivního standardu je poslední chvíle, kdy má smysl věnovat standardu lehce zvýšenou pozornost. Ne proto, že by šlo o slavnostní milník. Spíš proto, že se právě ukazuje, jestli pravidlo opravdu přežilo mimo původní kontext: použil ho další člověk, v další situaci, bez starého vysvětlování a bez nové evidence. Pokud ano, další péče se má vypnout. Pokud ne, je potřeba uzavřít přesně tu slabinu, která se ukázala.
+
+Uzavírací otázka zní:
+
+```text
+Co po druhém běžném použití pasivního standardu končí, co se případně lokálně opravuje a kdy se standard znovu otevře?
+```
+
+Tahle otázka chrání dvě věci najednou. Zaprvé brání tomu, aby se z druhého dobrého použití stal nový revizní rytmus. Zadruhé brání tomu, aby se skutečné tření zametlo pod koberec jen proto, že tým už chce mít téma z krku. Pasivní standard má být klidný, ne slepý.
+
+### Tři uzavírací stavy
+
+Po druhém běžném použití vyberte jeden ze tří stavů:
+
+- Standard zůstává pasivní: druhé použití potvrdilo přenositelnost bez nové práce, evidence a návratu.
+- Proběhne poslední lokální oprava: pravidlo platí, ale jedna věta, odkaz nebo umístění pořád brání samostatnému použití.
+- Otevírá se omezený návrat: druhé použití potvrdilo výjimku, změnu kontextu nebo návratový signál.
+
+Stav `standard zůstává pasivní` je cílový. Neplánujte třetí běžné použití jako další kontrolu. Standard dál žije u pracovního místa a ozve se až tehdy, když ho někdo přirozeně použije, změní se kontext nebo nastane návratový signál. Jestli po druhém dobrém použití přidáte pravidelný check-in, právě jste pasivní standard zase probudili a dali mu kalendář. To není provozní moudrost, to je administrativní kofein.
+
+Stav `proběhne poslední lokální oprava` používejte jen pro nejbližší pracovní místo. Pokud chybí věta u šablony, doplňte větu. Pokud odkaz vede do starého rozhodovacího logu, přesuňte ho na kanonické místo. Pokud je pravidlo moc obecné, zkraťte ho na akční větu. Nezakládejte novou kapitolu, novou tabulku ani nový proces.
+
+Stav `otevírá se omezený návrat` znamená, že druhé použití nepřineslo jen tření, ale skutečně změnilo rozhodovací situaci. Například se opakovaně ukázalo, že určitý segment potřebuje jinou kvalifikační otázku. Návrat se pak týká pouze tohoto segmentu, ne celého standardu. Původní zavřený rozsah zůstává zavřený, dokud nový důkaz neřekne něco konkrétnějšího.
+
+### Praktický SaaS příklad
+
+Pasivní standard říká:
+
+```text
+Rozpočet se v prvním kontaktu nesbírá povinně. Zeptej se volitelně jen tehdy, když bez něj nejde domluvit další konkrétní krok.
+```
+
+Druhé běžné použití proběhne u jiné poptávky a jiného obchodníka. Obchodník najde větu u potvrzovací šablony, použije ji a domluví další krok bez přidání pole do formuláře.
+
+Uzavření ve stavu `standard zůstává pasivní`:
+
+```text
+Druhé běžné použití potvrdilo pasivní standard pro poptávky bez rozpočtu. Věta je najitelná u potvrzovací šablony, formulář zůstává beze změny a nevzniká evidence výjimek.
+```
+
+Uzavření ve stavu `proběhne poslední lokální oprava`:
+
+```text
+Standard platí, ale druhý obchodník si nebyl jistý, kdy otázku na rozpočet vynechat. U šablony zkracujeme větu na: "Na rozpočet se ptej jen tehdy, když bez něj nejde domluvit další krok." Formulář ani CRM se nemění.
+```
+
+Uzavření ve stavu `otevírá se omezený návrat`:
+
+```text
+Druhé použití u enterprise poptávky znovu ukázalo, že bez rámcového rozpočtu nejde domluvit další krok. Otevíráme omezený návrat pro enterprise větev; obecný formulář, scoring a evidence výjimek zůstávají zavřené.
+```
+
+Všimněte si, že ani třetí varianta nezačíná implementací. Začíná omezeným návratem. To je důležité. Návratový signál je důvod k rozhodnutí, ne povolenka k tomu, aby se okamžitě přidalo nové pole, nový tracker a tři grafy, protože grafy umí vypadat pracovně i ve chvíli, kdy jen maskují nejistotu.
+
+### Co po uzavření končí
+
+Po uzavření druhého běžného použití by měly skončit všechny zbytky mimořádné péče:
+
+- poznámky typu "zkontrolujeme ještě při dalším použití",
+- dočasné komentáře u šablony,
+- pomocné seznamy příkladů,
+- chatové připomínky původního autora,
+- staré odkazy do rozhodovací historie,
+- skrytý reporting, který vznikl jen kvůli ověření standardu.
+
+Nechte jen kanonické pracovní místo, platnou rozhodovací větu, návratový signál a vlastníka pracovního místa. Pokud někdo potřebuje vědět víc, může se podívat do archivu. Běžný uživatel standardu ale nemá číst historii. Má udělat správný další krok.
+
+Krátká uzavírací věta:
+
+```text
+Po druhém běžném použití standard zůstává pasivní; další kontrola nevzniká a standard se znovu otevře jen při změně kontextu nebo návratovém signálu.
+```
+
+Pokud proběhla lokální oprava, přidejte ji do stejné věty:
+
+```text
+Po druhém běžném použití zůstává standard pasivní; u šablony je zpřesněná jedna věta a další kontrola nevzniká.
+```
+
+### Privacy-first uzavření
+
+Privacy-first uzavření je hlavně úklid pokušení. Druhé použití vypadá jako začátek trendu, a trend svádí k evidenci. Jenže evidence bez jasného rozhodnutí rychle vyrobí nový účel zpracování, nová přístupová práva, novou retenci a nový budoucí úklid. To je hodně práce za možnost říct "pro jistotu".
+
+Do uzavření proto napište jednu datovou větu:
+
+```text
+Po druhém použití nepřidáváme nové pole, atribut, tracker, export ani seznam výjimek; ponecháváme jen zobecněnou rozhodovací větu u pracovního místa.
+```
+
+Pokud se otevírá omezený návrat:
+
+```text
+Návrat pracuje se zobecněným popisem opakovaného problému. Konkrétní zákaznické údaje zůstávají v původním systému, nepřepisují se do standardu a nepoužívají se k nové dlouhodobé evidenci.
+```
+
+Codyho komentář: privacy-first provoz se často nepozná podle velkých právních dokumentů, ale podle těchto malých brzd. Nepřidat sloupec. Neposlat export. Neudělat seznam "jen na měsíc", který pak oslaví druhé narozeniny. Nuda? Trochu. Účinné? Velmi.
+
+### Karta uzavření druhého použití
+
+```text
+Standard:
+
+Pracovní místo:
+
+Druhé běžné použití:
+
+Uzavírací stav:
+- standard zůstává pasivní
+- proběhne poslední lokální oprava
+- otevírá se omezený návrat
+
+Jednovětý závěr:
+
+Co po tomto uzavření končí:
+
+Co se případně lokálně opravuje:
+
+Co zůstává zavřené:
+
+Kdy se standard znovu otevře:
+
+Vzniká nová evidence?
+Ne / ano, pouze s účelem, koncem a retencí:
+
+Privacy-first věta:
+
+Kde je závěr uložený:
+
+Vlastník pracovního místa:
+```
+
+Kartu vyplňte jen tehdy, když druhé použití přineslo opravu nebo omezený návrat. Pokud standard zůstává pasivní bez tření, často stačí jednovětý závěr přímo u pracovního místa. Pasivní standard není seriál. Nemusí mít novou epizodu pokaždé, když splní svou práci.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte druhé běžné použití jednou větou.
+2. Minuta 2: vyberte jeden ze tří uzavíracích stavů.
+3. Minuta 3: napište, co po uzavření končí.
+4. Minuta 4: doplňte případnou poslední lokální opravu nebo hranici omezeného návratu.
+5. Minuta 5: napište privacy-first větu o nepřidání nové evidence.
+6. Minuta 6: uložte závěr k pracovnímu místu a smažte nebo zavřete pomocné stopy.
+
+Pokud se workshop začne rozšiřovat na otázku "jak celkově pracujeme s rozpočtem", zastavte ho. To může být legitimní téma, ale není to uzavření druhého použití pasivního standardu. Uzavření má chránit konkrétní pravidlo před zbytečnou péčí a konkrétní data před zbytečnou stopou.
+
+### Checklist uzavření druhého použití
+
+- Vybrali jsme jeden ze tří uzavíracích stavů?
+- Umíme závěr popsat jednou větou?
+- Pokud standard zůstává pasivní, nevzniká další kontrola jen pro jistotu?
+- Pokud probíhá lokální oprava, týká se jednoho pracovního místa?
+- Pokud se otevírá omezený návrat, má jasný návratový signál nebo změnu kontextu?
+- Zůstává původní širší rozsah zavřený?
+- Je jasné, co po uzavření končí?
+- Zavřeli jsme dočasné poznámky, pomocné seznamy, staré odkazy a skrytý reporting?
+- Nevzniká nové pole, CRM atribut, tracker, export ani seznam výjimek bez jasného účelu?
+- Pracujeme se zobecněným závěrem místo konkrétních zákaznických detailů?
+- Je závěr uložený u pracovního místa, ne jen v historii rozhodnutí?
+- Ví vlastník, kdy má standard nechat být a kdy otevřít omezený návrat?
+
+Uzavření druhého běžného použití pasivního standardu má standard pustit z ruky. Ne zapomenout. Ne zamknout navždy. Jen ho přestat obcházet s baterkou pokaždé, když se ozve běžná práce. Když pravidlo dvakrát obstálo, nejpraktičtější další krok je často klid. A klid je v dobrém provozu překvapivě produktivní věc.
+
 ## Pracovní log
 
+- 2026-07-07: Doplněna úvodní podkapitola o uzavření druhého běžného použití pasivního standardu: tři uzavírací stavy, praktický SaaS příklad, ukončení mimořádné péče, privacy-first nepřidávání evidence, karta, mini workshop a checklist.
 - 2026-07-07: Doplněna úvodní podkapitola o druhém běžném použití pasivního standardu: přenositelnost bez původní historie, poslední lokální zpřesnění, oddělení výjimky, privacy-first nepřidávání evidence, karta, mini workshop a checklist.
 - 2026-07-07: Doplněna úvodní podkapitola o uzavření prvního běžného použití pasivního standardu: tři uzavírací stavy, praktický SaaS příklad, privacy-first nepřidávání evidence, karta, mini workshop a checklist.
 - 2026-07-07: Doplněna úvodní podkapitola o prvním běžném použití pasivního standardu: tiché použití, lokální kotva, zpřesnění rozhodovací věty, návratový signál, privacy-first práce bez nové evidence, karta, mini workshop a checklist.
