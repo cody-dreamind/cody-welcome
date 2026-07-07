@@ -306161,8 +306161,192 @@ Když se během workshopu ukáže, že pravidlo neumíte napsat jednou větou, n
 
 Uzavření do dlouhodobé paměti je poslední malý krok po druhém přirozeném review. Když ho uděláte dobře, standard se přestane tvářit jako projekt a začne fungovat jako součást práce. To je přesně cílový stav: méně péče, méně datových stop, méně opakovaného vysvětlování a víc klidného provozu.
 
+## První použití dlouhodobé paměti bez původní historie
+
+Dlouhodobá paměť se neověří tím, že ji autor po týdnu pořád chápe. To je příliš snadné. Opravdový test přijde ve chvíli, kdy pravidlo použije člověk, který nebyl u původní debaty, nečetl celou historii a nechce se stát archivářem produktu jen proto, že potřebuje poslat jeden e-mail, upravit jednu stránku nebo rozhodnout jednu výjimku.
+
+První použití dlouhodobé paměti bez původní historie má proto jednoduchý cíl: ověřit, jestli uložené pravidlo funguje jako pracovní nástroj, ne jako pamětní deska. Člověk má najít současnou větu, poznat zavřený rozsah, použít pravidlo v konkrétním pracovním místě a neotevřít starý kontext, pokud nepřišel návratový signál.
+
+Začněte větou:
+
+```text
+Pravidlo z dlouhodobé paměti teď používá člověk bez původní historie v této situaci:
+```
+
+Za ni napište běžný pracovní okamžik. Ne "řešíme rozpočty". Spíš:
+
+```text
+Obchodník, který nebyl u původního rozhodnutí, odpovídá na relevantní poptávku bez uvedeného rozpočtu a má rozhodnout, jestli použít volitelnou otázku v potvrzovacím e-mailu.
+```
+
+Tím se test drží u práce. Nehodnotíte kvalitu celého systému znalostí. Hodnotíte, jestli jedno pravidlo přežilo předání do normálního použití.
+
+### Co musí člověk poznat
+
+Při prvním použití bez historie musí být jasné čtyři věci:
+
+- současné pravidlo: co se má v této situaci udělat;
+- pracovní místo: kde se pravidlo používá;
+- zavřený rozsah: co se pořád nemá otevírat;
+- návratový signál: co by pravidlo poslalo zpět k review.
+
+Pokud některá část chybí, neopravujte hned celý záznam. Nejdřív zjistěte, kde přesně se člověk zasekl. Dlouhodobá paměť často neselže obsahem, ale umístěním. Pravidlo může být napsané dobře, jen leží v týmovém indexu, zatímco člověk pracuje v šabloně e-mailu. V takovém případě nechcete přepisovat princip. Chcete přidat kotvu k místu, kde se rozhoduje.
+
+Stejně tak může selhat jazyk. Věta "rozpočtový kontext zůstává lokální" dává smysl lidem, kteří seděli u původní debaty. Novému člověku může znít jako elegantní mlha. Pracovní věta má být sušší:
+
+```text
+U relevantní poptávky bez rozpočtu lze poslat volitelnou otázku v potvrzovacím e-mailu. Formulář, scoring ani nový export se nemění.
+```
+
+To není poezie. To je dobře. Pravidlo, které má fungovat bez původní historie, nemá vyhrávat literární cenu. Má zabránit špatnému kliknutí.
+
+### Čtyři výsledky prvního použití
+
+První použití dlouhodobé paměti bez původní historie může skončit čtyřmi způsoby:
+
+- Funguje samostatně: člověk pravidlo našel, pochopil a použil bez otevření staré historie.
+- Chybí kotva u práce: pravidlo je správné, ale nebylo u šablony, formuláře, checklistu nebo jiného pracovního místa.
+- Chybí ostrá věta: pravidlo bylo najitelné, ale nešlo podle něj rozhodnout.
+- Objevila se falešná výjimka: člověk si myslel, že dnešní situace pravidlo obchází, ale ve skutečnosti nepřišel návratový signál.
+
+U samostatného použití nedělejte nic navíc. Zapište krátké potvrzení a nechte pravidlo být. Dlouhodobá paměť tím splnila účel.
+
+U chybějící kotvy doplňte odkaz nebo krátkou pracovní větu přímo do místa použití. Když se pravidlo používá v potvrzovacím e-mailu, má být u e-mailové šablony. Když se používá při review ceníku, má být u ceníkového checklistu. Když se používá při úpravě formuláře, má být u formulářového backlogu nebo provozního standardu. Ne v dokumentu, který lidé otevřou jen při slavnostním hledání pravdy.
+
+U chybějící ostré věty přepište pravidlo do přítomného času a konkrétní akce. Nepřidávejte historii, proč vzniklo. Historie má zůstat dostupná, ale nemá být nutná pro běžné rozhodnutí.
+
+U falešné výjimky zastavte rozšiřování. Typická věta zní: "Tohle asi neplatí, protože zákazník je větší." Možná ano, možná ne. Pokud návratový signál říká něco jiného, samotná velikost zákazníka nestačí. Napište, jestli dnešní situace splňuje návratový signál. Pokud ne, pravidlo platí dál.
+
+### Praktický SaaS příklad
+
+Dlouhodobé pravidlo:
+
+```text
+U relevantní poptávky bez rozpočtu lze poslat volitelnou otázku v potvrzovacím e-mailu. Formulář, scoring ani nový export se nemění. K povinnému poli se vracíme pouze tehdy, když tři relevantní poptávky za sebou nepůjdou kvalifikovat ani po volitelné otázce.
+```
+
+První použití bez historie:
+
+```text
+Situace:
+Nový obchodník odpovídá na poptávku bez rozpočtu.
+
+Použití:
+U šablony e-mailu najde větu s volitelnou otázkou a použije ji.
+
+Výsledek:
+Poptávka jde kvalifikovat z odpovědi v e-mailovém vlákně. Formulář se nemění, CRM atribut nevzniká, export nevzniká.
+
+Závěr:
+Pravidlo funguje samostatně. Není potřeba další review.
+```
+
+Slabší varianta:
+
+```text
+Situace:
+Nový obchodník našel pravidlo až v týmovém indexu, ne u e-mailové šablony.
+
+Oprava:
+K e-mailové šabloně doplňujeme jednu pracovní větu a odkaz na kanonický záznam.
+
+Co neotevíráme:
+Nový obchodní proces, úpravu formuláře ani další tabulku pro sledování rozpočtů.
+```
+
+Tady je dobré nezpanikařit. Slabší varianta neříká, že rozhodnutí bylo špatné. Říká jen, že pravidlo nebylo dost blízko práci. To je levná oprava, pokud ji nezměníte v reorganizaci celé znalostní báze. Prosím, nedělejte z jednoho odkazu transformační program. To zvládne i levnější chaos.
+
+### Privacy-first kontrola
+
+První použití dlouhodobé paměti bez historie je dobrý test datové střídmosti. Nový člověk často sahá po evidenci, protože se chce ujistit: přidá pomocný sloupec, vytvoří interní kopii odpovědi, označí zákazníka štítkem nebo začne ukládat příklady "pro později". Úmysl bývá dobrý. Datová stopa už méně.
+
+Položte tři otázky:
+
+```text
+Potřeboval člověk nový údaj, aby pravidlo použil?
+
+Pokud ano, byl ten údaj součástí běžné práce, nebo vznikla nová evidence?
+
+Pokud vznikla nová evidence, kdy ji zavřeme, smažeme nebo nahradíme obecným poznatkem?
+```
+
+Ve zdravé variantě pravidlo funguje bez nového sběru dat. Člověk použije informaci, která už existuje v běžné komunikaci, a nevyrábí z ní nový atribut. Pokud si kvůli jistotě udělá pomocnou poznámku, po použití ji buď smaže, nebo přepíše do anonymizované pracovní věty.
+
+Codyho komentář: dlouhodobá paměť má snižovat potřebu dat, ne ji maskovat. Když dobrý záznam způsobí, že lidé zakládají další tabulky, není to paměť. Je to generátor drobných závazků s hezkou čepicí.
+
+### Karta prvního použití dlouhodobé paměti
+
+```text
+Pravidlo z dlouhodobé paměti:
+
+Běžná situace použití:
+
+Kdo pravidlo použil bez původní historie:
+
+Kde pravidlo hledal:
+
+Našel současnou pracovní větu?
+- ano
+- ne
+- až s pomocí
+
+Šlo podle věty rozhodnout?
+- ano
+- ne, chyběla akce
+- ne, chyběl zavřený rozsah
+- ne, chyběl návratový signál
+
+Co se opravdu použilo:
+
+Co zůstalo zavřené:
+
+Vznikla nová datová stopa?
+
+Co s ní po použití děláme:
+
+Výsledek:
+- funguje samostatně
+- doplnit kotvu u práce
+- zpřesnit pracovní větu
+- zastavit falešnou výjimku
+
+Vlastník lokální opravy:
+
+Datum dalšího review, jen pokud existuje návratový signál:
+```
+
+Kartu používejte jen pro první použití nebo pro situaci, kdy pravidlo přebírá nový tým. Pokud ji vyplňujete pokaždé, dlouhodobá paměť se změnila v rituál. Rituály jsou fajn u kávy, méně u provozních pravidel.
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: pojmenujte běžnou situaci použití.
+2. Minuta 2: ověřte, kde člověk pravidlo hledal.
+3. Minuta 3: přečtěte současnou pracovní větu.
+4. Minuta 4: napište, co zůstalo zavřené.
+5. Minuta 5: zkontrolujte, jestli nevznikla falešná výjimka.
+6. Minuta 6: proveďte privacy-first kontrolu nové datové stopy.
+7. Minuta 7: vyberte výsledek a případnou lokální opravu.
+
+Pokud se během workshopu ukáže, že člověk bez historie pravidlo vůbec nemohl najít, nehodnoťte ho jako nepozorného. Systém, který vyžaduje paměť původních účastníků, ještě není dlouhodobá paměť. Je to jen dobře napsaná vzpomínka.
+
+### Checklist prvního použití dlouhodobé paměti
+
+- Použil pravidlo člověk, který nebyl u původní debaty?
+- Byla popsaná konkrétní běžná situace?
+- Byla pracovní věta dostupná u místa použití?
+- Šlo podle ní jednat bez čtení celé historie?
+- Byl jasný zavřený rozsah?
+- Byl jasný návratový signál?
+- Nevznikla falešná výjimka bez nového důkazu?
+- Nevznikl nový formulářový údaj, CRM atribut, export, pomocná tabulka nebo kopie zákaznické odpovědi bez důvodu?
+- Pokud vznikla dočasná stopa, má jasný konec?
+- Je případná oprava lokální, ne nový proces?
+
+První použití dlouhodobé paměti bez původní historie je tvrdý, ale férový test. Buď pravidlo opravdu přešlo do provozu, nebo pořád závisí na lidech, kteří si pamatují, proč vzniklo. V prvním případě ho nechte být. Ve druhém opravte nejbližší kotvu nebo větu. Neotvírejte celý příběh, když chybí jen klika na správných dveřích.
+
 ## Pracovní log
 
+- 2026-07-07: Doplněna úvodní podkapitola o prvním použití dlouhodobé paměti bez původní historie: samostatné použití pravidla, lokální kotva, ostrá pracovní věta, falešná výjimka, privacy-first kontrola datové stopy, karta, mini workshop a checklist.
 - 2026-07-07: Doplněna úvodní podkapitola o uzavření druhého přirozeného review do dlouhodobé paměti: pracovní věta, kanonické místo, zavřený rozsah, návratový signál, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-07-07: Doplněna úvodní podkapitola o uzavření prvního přirozeného review tichého standardu: čtyři uzavírací stavy, praktický SaaS příklad, privacy-first datová věta, karta, mini workshop a checklist.
 - 2026-07-07: Doplněna úvodní podkapitola o prvním přirozeném review tichého standardu: kontrola pracovního místa, návratového signálu, obchvatů, privacy-first úklidu, karta, mini workshop a checklist.
