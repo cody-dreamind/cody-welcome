@@ -305049,8 +305049,160 @@ Pokud se v páté minutě objeví chuť "ještě to chvíli sledovat", vraťte s
 
 První běžné použití tichého standardu má ověřit, že pravidlo umí zmizet do práce. Když obstojí, neoslavujte ho novou kontrolou. Když zadrhne, opravte nejbližší příčinu. A když se opravdu změní realita, otevřete nový návrat čistě. Tím si standard zachová nejdůležitější vlastnost: pomáhá rozhodovat, aniž by kolem sebe stavěl další proces.
 
+## Uzavření prvního běžného použití tichého standardu
+
+První běžné použití tichého standardu má krátký dozvuk. Ne proto, aby se z něj stalo další review, ale aby tým vědomě zavřel otázku: standard opravdu funguje v běžné práci, nebo potřebuje lokální opravu? Bez tohoto uzavření se často stane zvláštní věc. Pravidlo je sice použité, ale někdo si bokem nechá pomocný seznam, někdo další čeká na "ještě jedno ověření" a tichý standard najednou není tichý. Je to malý proces v převleku.
+
+Uzavření má proto skončit jednou ze čtyř vět:
+
+```text
+Standard obstál a zůstává beze změny.
+
+Standard obstál po lokální opravě u pracovního místa.
+
+Standard zatím nezavřeme, protože pracovní věta není rozhodnutelná.
+
+Standard se převádí do nového návratu, protože nastal návratový signál.
+```
+
+Tyto věty jsou důležitější než dlouhé vysvětlení. Nutí tým pojmenovat stav, ne jen popsat aktivitu. "Použili jsme pravidlo a podíváme se na to příště" je měkký závěr. "Standard obstál a zůstává beze změny" je provozní rozhodnutí.
+
+### Čtyři uzavírací stavy
+
+První stav je nejjednodušší: standard obstál a zůstává beze změny. Člověk ho našel tam, kde pracoval, pracovní věta stačila k rozhodnutí a nevznikla nová datová stopa. V takovém případě neplánujte další kontrolu. Zapište krátký závěr u pracovního místa a nechte pravidlo běžet.
+
+Druhý stav říká, že standard obstál po lokální opravě. Typicky byl dobrý, ale nebyl dost blízko práci. Přesunuli jste větu do šablony, doplnili krátký odkaz nebo přepsali jednu formulaci tak, aby šla použít bez původní historie. Tady je důležité opravu nezvětšovat. Lokální oprava není pozvánka k auditu celého procesu.
+
+Třetí stav je slabá rozhodnutelnost. Standard sice existuje, ale člověk podle něj neví, co má udělat. Tady standard ještě nezavírejte jako tichý. Přepište pracovní větu do tvaru "když nastane X, udělej Y; neotevírej Z, dokud nenastane signál" a ověřte ji při nejbližším běžném použití. Nezakládejte kvůli tomu velký test. Stačí další přirozený kontakt s prací.
+
+Čtvrtý stav je skutečný návrat. Pokud při použití nastal domluvený návratový signál, tichý standard se nemá natahovat. Otevřete nový průchod s dnešní otázkou, novou hranicí a vlastním datovým minimem. Starý standard tím neselhává. Naopak splnil svoji práci: pomohl poznat, že se realita změnila.
+
+### Praktický SaaS příklad
+
+Výchozí standard:
+
+```text
+U relevantní B2B poptávky bez rozpočtu pošli volitelnou otázku v potvrzovacím e-mailu. Nepřidávej povinné pole, lead scoring ani ruční seznam poptávek bez rozpočtu, dokud tři relevantní poptávky za sebou nepůjdou kvalifikovat ani po této otázce.
+```
+
+První použití:
+
+```text
+Přišla relevantní poptávka bez rozpočtu. Obchodník našel pravidlo v potvrzovací šabloně, poslal volitelnou otázku a nezaložil žádnou pomocnou evidenci.
+```
+
+Uzavření:
+
+```text
+Standard obstál a zůstává beze změny. Pracovní věta byla dostupná v potvrzovací šabloně, rozhodnutí šlo udělat bez historie a nevznikla nová datová stopa. Návratový signál se nemění: tři relevantní poptávky za sebou nejdou kvalifikovat ani po volitelné otázce.
+```
+
+Tohle je celé. Žádná tabulka, žádné skóre jistoty, žádný měsíční follow-up. Kdyby obchodník pravidlo nenašel, závěr by vypadal jinak:
+
+```text
+Standard obstál po lokální opravě u pracovního místa. Pravidlo bylo správné, ale nebylo vidět při úpravě potvrzovacího e-mailu. Přesunuli jsme krátkou pracovní větu přímo do šablony. Neotevíráme změnu formuláře ani nové měření poptávek bez rozpočtu.
+```
+
+Kdyby věta nebyla rozhodnutelná:
+
+```text
+Standard zatím nezavřeme, protože pracovní věta neříká, kdy přesně poslat volitelnou otázku. Přepisujeme ji na: "Když je poptávka B2B a chybí rozpočet, pošli volitelnou otázku v potvrzovacím e-mailu; nepřidávej povinné pole, dokud nenastane návratový signál." Ověříme při nejbližší běžné poptávce.
+```
+
+A kdyby nastal návrat:
+
+```text
+Standard se převádí do nového návratu, protože tři relevantní poptávky za sebou nešly kvalifikovat ani po volitelné otázce. Neopravujeme starý standard bokem. Otevíráme nové posouzení kvalifikace poptávek s datovým minimem: počet dotčených poptávek, důvod nekvalifikovatelnosti a návrh nejmenší změny.
+```
+
+Rozdíl mezi těmito variantami je malý v textu, ale velký v provozu. První dvě drží standard v klidu. Třetí opravuje rozhodovací větu. Čtvrtá otevírá nový průchod. Když je smícháte dohromady, skončíte u neurčitého "budeme sledovat", což je oblíbený způsob, jak založit práci bez majitele.
+
+### Privacy-first uzavření
+
+Uzavření prvního běžného použití je ideální chvíle zkontrolovat, jestli po standardu nezůstaly drobné datové drobky. Tiché pravidlo často selže ne tím, že by vedlo ke špatnému rozhodnutí, ale tím, že kolem něj někdo začne pro jistotu sbírat další stopy.
+
+Zkontrolujte pět míst:
+
+- šablona, ve které standard bydlí,
+- CRM nebo obchodní záznam,
+- interní poznámky k poptávce,
+- pomocné tabulky a štítky,
+- automatizace, které se spustily při použití.
+
+Otázka není "máme všechno zdokumentované?" Otázka je:
+
+```text
+Vzniklo něco, co není potřeba pro rozhodnutí ani pro zákonnou nebo smluvní povinnost?
+```
+
+Pokud ano, smažte to nebo vraťte do původního systému s jasným účelem. Do standardu nepatří konkrétní odpovědi zákazníků, interní komentáře obchodníka ani ruční seznam "pro jistotu". Stačí zobecněná věta, návratový signál a krátký závěr.
+
+Codyho komentář: nejnebezpečnější evidence je ta, která se tváří jako nevinná pomoc. Jeden sloupec tady, jeden štítek tam, tři screenshoty v poznámce. Za půl roku nikdo neví, proč existují, ale všichni se bojí je smazat. Privacy-first provoz znamená uklízet právě tyhle malé věci dřív, než dostanou status tradice.
+
+### Karta uzavření prvního použití
+
+```text
+Tichý standard:
+
+Pracovní místo:
+
+Běžná situace, ve které byl použit:
+
+Výsledek:
+- obstál beze změny
+- obstál po lokální opravě
+- nezavíráme, pracovní věta není rozhodnutelná
+- převádíme do nového návratu
+
+Krátký závěr:
+
+Lokální oprava, pokud existuje:
+
+Co zůstává zavřené:
+
+Návratový signál:
+
+Nová datová stopa vznikla?
+
+Co mažeme, nepřenášíme nebo vracíme do původního systému:
+
+Kde závěr bydlí:
+
+Vlastník pracovního místa:
+```
+
+Kartu používejte jen tam, kde pomůže zavřít stav. Pokud standard obstál úplně čistě, stačí jedna věta u pracovního místa. Karta je užitečná hlavně ve chvíli, kdy vznikla lokální oprava nebo slabá rozhodnutelnost. Nemá se stát dalším formulářem, který se vyplňuje ze zvyku.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte situaci, ve které byl standard použit.
+2. Minuta 2: vyberte jeden ze čtyř uzavíracích stavů.
+3. Minuta 3: napište krátký závěr jednou větou.
+4. Minuta 4: rozhodněte, jestli existuje jen lokální oprava, nebo skutečný návrat.
+5. Minuta 5: zkontrolujte a ukliďte novou datovou stopu.
+6. Minuta 6: uložte závěr u pracovního místa a ukončete mimořádnou pozornost.
+
+Pokud workshop začne řešit obecnou kvalitu celého procesu, zastavte ho. Uzavíráte první použití tichého standardu, ne redesign obchodu, onboardingu nebo marketingu. Širší téma může být legitimní, ale potřebuje vlastní otázku a vlastní návratový signál.
+
+### Checklist uzavření prvního použití
+
+- Vybrali jsme jeden ze čtyř uzavíracích stavů?
+- Je závěr napsaný jako rozhodnutí, ne jako volná poznámka?
+- Pokud standard obstál, nevzniká další kontrolní rytmus?
+- Pokud byla potřeba oprava, je lokální a u pracovního místa?
+- Pokud pracovní věta nebyla rozhodnutelná, přepisujeme ji do konkrétní akce?
+- Pokud nastal návratový signál, otevíráme nový průchod místo natahování starého standardu?
+- Je jasné, co zůstává zavřené?
+- Nevznikla pomocná tabulka, štítek, tracker, export ani ruční seznam bez konce?
+- Smazali jsme nebo uzavřeli dočasné stopy z prvního použití?
+- Bydlí závěr tam, kde se standard příště opravdu použije?
+- Zůstává vlastníkem pracovní místo, ne člověk, který kdysi vedl diskusi?
+
+Uzavření prvního běžného použití má být rychlé a trochu nudné. To je dobře. Tichý standard není produktová atrakce, ale provozní opora. Když prošel, nechte ho být. Když potřebuje drobnou opravu, udělejte ji přesně tam, kde zadrhl. A když ukázal skutečnou změnu reality, otevřete nový návrat čistě, bez pašování pomocné evidence a bez předstírání, že staré pravidlo musí unést všechno.
+
 ## Pracovní log
 
+- 2026-07-07: Doplněna úvodní podkapitola o uzavření prvního běžného použití tichého standardu: čtyři uzavírací stavy, praktický SaaS příklad, privacy-first úklid datových drobků, karta, mini workshop a checklist.
 - 2026-07-07: Doplněna úvodní podkapitola o prvním běžném použití tichého standardu: najitelnost, rozhodnutelnost, datová střídmost, praktický SaaS příklad, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-07-07: Doplněna úvodní podkapitola o převodu potvrzeného klidu do tichého standardu: pracovní věta, návratový signál, praktický SaaS příklad, privacy-first úklid pomocných stop, karta, mini workshop a checklist.
 - 2026-07-07: Doplněna úvodní podkapitola o uzavření druhého přirozeného použití po dlouhodobém klidu: uzavírací stavy, praktické SaaS příklady, privacy-first ukončení náhradní evidence, karta, mini workshop a checklist.
