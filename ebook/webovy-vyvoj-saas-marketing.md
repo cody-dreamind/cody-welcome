@@ -308111,8 +308111,192 @@ Pokud se během šesti minut začne řešit širší produktová otázka, zastav
 
 Uzavření prvního běžného použití pasivního standardu je dobrý test provozní dospělosti. Začátečnický tým má radost, že pravidlo fungovalo, a hned mu postaví další proces. Zkušenější tým si všimne, že pravidlo fungovalo, uklidí drobnou stopu, nechá zavřený rozsah zavřený a jde dělat práci, která má větší dopad. Pasivní standard tím nezmizí. Jen konečně dostane prostor být užitečný bez potlesku.
 
+## Druhé běžné použití pasivního standardu
+
+Druhé běžné použití pasivního standardu je nenápadnější než první. Už nejde o důkaz, že se standard po převodu vůbec dá použít. Jde o důkaz, že se nepřilepil na jednu osobu, jeden čerstvý případ nebo jednu šťastně opravenou šablonu. Standard má projít další běžnou situací a pořád zůstat malý.
+
+Základní otázka zní:
+
+```text
+Použil někdo pasivní standard podruhé bez toho, aby potřeboval čerstvé vysvětlení, starý rozhodovací log nebo novou evidenci?
+```
+
+Pokud ano, standard se začíná chovat jako skutečné provozní pravidlo. Není závislý na paměti autora, nevytváří další rytmus kontroly a nepřidává práci pokaždé, když se objeví. Pokud ne, pořád to nemusí znamenat návrat do aktivního režimu. Často stačí doplnit chybějící kotvu, zkrátit větu nebo odstranit starou nápovědu, která lidi táhne zpátky do historie.
+
+Druhé použití proto neberte jako audit. Berte ho jako klidný test přenositelnosti:
+
+```text
+Stejné pravidlo pomohlo v další běžné situaci a nezvětšilo systém?
+```
+
+Když odpověď neumíte říct jednou větou, je možné, že z pasivního standardu znovu vyrábíte projekt. To se stává. Procesy mají zvláštní talent tvářit se jako bezpečí, i když jsou to jen dlouhé stíny po dávno vyřešeném problému.
+
+### Co druhé použití ověřuje
+
+Sledujte čtyři věci:
+
+- Člověk našel standard tam, kde pracoval, ne přes původního autora.
+- Rozhodovací věta fungovala i v druhém, trochu jiném případě.
+- První lokální oprava, pokud nějaká byla, problém opravdu zmenšila.
+- Po druhém použití nevznikla nová evidence jen proto, že teď už "máme dva případy".
+
+Poslední bod bývá zrádný. Dva případy vypadají jako vzor. Někdy jím jsou, ale často jsou to jen dvě normální použití stejného pravidla. Než založíte tabulku, CRM štítek nebo pravidelný reporting, napište nejdřív obyčejnou větu:
+
+```text
+Druhé použití potvrdilo, že pasivní standard funguje bez nové evidence.
+```
+
+Pokud věta sedí, není co přidávat. Pokud nesedí, napište proč. Ale i potom začněte nejmenší možnou opravou u pracovního místa, ne novým sledovacím systémem.
+
+### Praktický SaaS příklad
+
+Pasivní standard pořád říká, že rozpočet v prvním kontaktu nesbíráte povinně. První použití proběhlo u potvrzovací šablony a ukázalo, že stačí volitelná otázka v e-mailu. K šabloně jste doplnili krátkou větu:
+
+```text
+Rozpočet se v prvním kontaktu nesbírá povinně; pokud pomůže kvalifikovat další krok, zeptej se volitelně v potvrzovacím e-mailu.
+```
+
+Druhé běžné použití přijde o dva týdny později. Jiný obchodník řeší poptávku z menší firmy, kde rozpočet znovu chybí. Najde větu u šablony, použije ji, poptávku kvalifikuje a formulář nechá beze změny.
+
+Zdravý závěr:
+
+```text
+Druhé použití potvrdilo pasivní standard u potvrzovací šablony. Věta byla najitelná, rozpočet se dál nesbírá povinně a nevzniká evidence výjimek.
+```
+
+Slabší závěr:
+
+```text
+Obchodník standard použil, ale pořád si ověřoval starý rozhodovací log, protože věta u šablony neříká, kdy otázku vynechat.
+```
+
+To není důvod přidat pole do formuláře. Je to důvod zpřesnit větu:
+
+```text
+Rozpočet se v prvním kontaktu nesbírá povinně. Zeptej se volitelně jen tehdy, když bez něj nejde domluvit další konkrétní krok.
+```
+
+Silnější závěr:
+
+```text
+Druhé použití ukázalo, že u enterprise poptávek se bez rámcového rozpočtu opakovaně nedá domluvit další krok.
+```
+
+To už může být návratový signál, pokud odpovídá dříve zapsané podmínce. Ani tehdy ale nezačínejte plošnou změnou formuláře. Otevřete malý návrat pro enterprise větev a nechte původní standard pro běžné poptávky zavřený.
+
+### Čtyři výsledky druhého použití
+
+Druhé běžné použití pasivního standardu může skončit čtyřmi stavy:
+
+- Potvrzuje pasivní standard: pravidlo fungovalo podruhé bez vysvětlování, evidence a změny rozsahu.
+- Potřebuje poslední lokální zpřesnění: pravidlo platí, ale jedna věta nebo kotva pořád nechává zbytečné tření.
+- Odděluje výjimku od pravidla: druhý případ je jiný, ale nemění hlavní standard.
+- Spouští malý návrat: opakovaný problém splnil návratový signál nebo ukázal změnu kontextu.
+
+Stav `potvrzuje pasivní standard` je cílový. Nezakládejte třetí kontrolu jen proto, že druhá dopadla dobře. Pokud standard funguje podruhé, další běžné použití už nemá mít vlastní zvláštní pozornost. Standard zůstává u pracovního místa a tým se k němu vrací jen při skutečném signálu.
+
+Stav `potřebuje poslední lokální zpřesnění` používejte opatrně. Poslední znamená poslední v této smyčce, ne "ještě něco vymyslíme příště". Změňte jednu větu, jeden odkaz nebo jedno umístění. Pak standard vraťte do pasivního provozu.
+
+Stav `odděluje výjimku od pravidla` je užitečný, když druhý případ vypadá podobně, ale pracuje v jiném režimu. Například enterprise poptávka, veřejná zakázka nebo partnerství může potřebovat jinou kvalifikační otázku. To ale neznamená, že kvůli ní změníte formulář pro všechny.
+
+Stav `spouští malý návrat` má jasnou hranici. Otevírá se jen část standardu, které se návratový signál týká. Původní pravidlo, pracovní místo a data, která dál nesbíráte, zůstávají chráněné, dokud nový důkaz neřekne něco konkrétnějšího.
+
+### Privacy-first druhé použití
+
+Druhé použití nesmí být záminka k tomu, aby se z pasivního standardu stala sbírka případů. Dva příklady často svádí k větě "pojďme to sledovat". Privacy-first odpověď zní: sledujte jen tehdy, když víte proč, kde to skončí a jaká data tím začnou vznikat.
+
+Před novou evidencí si položte tři otázky:
+
+```text
+Co přesně bychom bez nové evidence nerozhodli?
+
+Stačí nám zobecněný závěr bez zákaznických detailů?
+
+Kdy a podle čeho tuto evidenci smažeme nebo zavřeme?
+```
+
+Pokud neumíte odpovědět, evidenci nezakládejte. Zapište raději zobecněný závěr u pracovního místa:
+
+```text
+Druhé použití standardu nepřidává nové pole, atribut, export ani seznam výjimek. Případné zpřesnění zůstává jako zobecněná věta u šablony.
+```
+
+Pokud se otevírá malý návrat, přidejte datovou hranici:
+
+```text
+Pro návrat pracujeme se zobecněným popisem opakovaného problému. Konkrétní zákaznické údaje zůstávají v původním systému s původním účelem a retencí.
+```
+
+Codyho komentář: druhý případ není automaticky statistika. Je to druhý případ. Někdy stačí k rozhodnutí, někdy jen svítí baterkou na další otázku. Ale skoro nikdy nepotřebuje vlastní malý datový sklad s cedulkou "pro jistotu".
+
+### Karta druhého běžného použití
+
+```text
+Standard:
+
+Pracovní místo:
+
+Druhá běžná situace použití:
+
+Kdo standard použil bez původní historie:
+
+Výsledek:
+- potvrzuje pasivní standard
+- potřebuje poslední lokální zpřesnění
+- odděluje výjimku od pravidla
+- spouští malý návrat
+
+Co potvrdilo přenositelnost:
+
+Co se případně lokálně zpřesňuje:
+
+Co zůstává zavřené:
+
+Vzniká nová evidence?
+Ne / ano, pouze s účelem, koncem a retencí:
+
+Privacy-first závěr:
+Co dál nesbíráme:
+Co nepřenášíme do standardu:
+Kde zůstávají konkrétní zákaznické údaje:
+
+Jednovětý závěr:
+```
+
+Kartu použijte jen tehdy, když druhé použití přineslo tření, výjimku nebo návrat. Pokud standard fungoval podruhé bez odchylky, stačí jedna věta u pracovního místa, případně vůbec nic. Tichý standard nemá dokazovat svou hodnotu rostoucím počtem zápisů. Má snižovat počet věcí, které musíte řešit.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: pojmenujte druhou běžnou situaci použití.
+2. Minuta 2: ověřte, jestli člověk našel standard bez původní historie.
+3. Minuta 3: vyberte jeden ze čtyř výsledků.
+4. Minuta 4: pokud je potřeba, napište poslední lokální zpřesnění nebo hranici výjimky.
+5. Minuta 5: zapište, co zůstává zavřené a jaká data dál nesbíráte.
+6. Minuta 6: rozhodněte, zda stačí jednovětý závěr, nebo vzniká malý návrat.
+
+Pokud se workshop začne měnit v rozbor všech historických případů, zastavte ho. Druhé použití má ověřit přenositelnost v běžné práci, ne vrátit tým do muzea starých rozhodnutí. Muzea jsou fajn, ale produktový provoz se v nich špatně sprintuje.
+
+### Checklist druhého běžného použití
+
+- Šlo o běžnou práci, ne plánovaný audit?
+- Použil standard někdo bez čerstvého vysvětlení původního autora?
+- Byl standard najitelný u pracovního místa?
+- Stačila rozhodovací věta i pro druhý případ?
+- Pokud první použití vedlo k lokální opravě, opravdu pomohla?
+- Vybrali jsme jeden ze čtyř výsledků?
+- Pokud standard fungoval, nevytvořili jsme další kontrolu jen pro pocit jistoty?
+- Pokud vznikla výjimka, oddělili jsme ji od hlavního pravidla?
+- Pokud se spouští návrat, má jasný návratový signál a omezený rozsah?
+- Zůstává původní zavřený rozsah zavřený?
+- Nevzniklo nové pole, CRM pravidlo, tracker, export ani seznam výjimek bez jasného účelu?
+- Pracujeme se zobecněným závěrem místo konkrétních zákaznických detailů?
+- Je jasné, kdy se standard nechává pasivní a kdy se opravdu otevírá malý návrat?
+
+Druhé běžné použití pasivního standardu má jednu hlavní práci: potvrdit, že pravidlo se přeneslo do provozu a nepotřebuje doprovod. Když to potvrdí, nechte ho být. Když najde poslední lokální tření, opravte nejbližší větu. Když ukáže výjimku, oddělte ji. A když opravdu spustí návrat, otevřete jen tu část, kterou návratový signál ospravedlnil.
+
 ## Pracovní log
 
+- 2026-07-07: Doplněna úvodní podkapitola o druhém běžném použití pasivního standardu: přenositelnost bez původní historie, poslední lokální zpřesnění, oddělení výjimky, privacy-first nepřidávání evidence, karta, mini workshop a checklist.
 - 2026-07-07: Doplněna úvodní podkapitola o uzavření prvního běžného použití pasivního standardu: tři uzavírací stavy, praktický SaaS příklad, privacy-first nepřidávání evidence, karta, mini workshop a checklist.
 - 2026-07-07: Doplněna úvodní podkapitola o prvním běžném použití pasivního standardu: tiché použití, lokální kotva, zpřesnění rozhodovací věty, návratový signál, privacy-first práce bez nové evidence, karta, mini workshop a checklist.
 - 2026-07-07: Doplněna úvodní podkapitola o převodu lehkého revizního rytmu do pasivního standardu: podmínky převodu, praktický SaaS příklad, tři spouštěče návratu, privacy-first datový úklid, karta, mini workshop a checklist.
