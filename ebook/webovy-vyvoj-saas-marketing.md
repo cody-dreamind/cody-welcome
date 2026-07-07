@@ -307814,8 +307814,180 @@ Když se během workshopu objeví nový problém, nezahrnujte ho do převodu. Za
 
 Převod lehkého revizního rytmu do pasivního standardu je malý akt důvěry. Tým tím říká: pravidlo funguje, víme kde bydlí, víme kdy se vrátí a nebudeme mu zřizovat kancelář jen proto, že se osvědčilo. V dobrém SaaS provozu je tohle důležité. Ne všechno, co funguje, si zaslouží další proces. Některé věci si zaslouží klid.
 
+## První běžné použití pasivního standardu
+
+Pasivní standard začne být skutečný až ve chvíli, kdy ho někdo použije bez zvláštní přípravy. Dokud jen hezky leží v dokumentaci, může působit stabilně, ale to je levný trik. Stabilitu ukáže až běžná práce: nový formulář, úprava e-mailové šablony, obchodní rozhovor, support odpověď, změna landing page nebo interní review, při kterém se standard prostě potká s realitou.
+
+První běžné použití po převodu do pasivního standardu není návrat k reviznímu režimu. Není to kontrolní schůzka, není to audit a rozhodně to není pozvánka k tomu, aby se znovu otevřela celá historie. Je to krátký test, jestli standard funguje v normálním prostředí:
+
+```text
+Použili jsme pasivní standard při běžné práci bez toho, aby vznikla nová zvláštní péče?
+```
+
+Pokud odpověď zní ano, nejlepší výsledek může být skoro nudný: standard se použil, práce pokračovala a nevznikl žádný nový proces. To je přesně ono. Pasivní standard nemá zanechat stopu pokaždé, když pomůže. Má být jako dobré zábradlí: všimnete si ho hlavně tehdy, když chybí.
+
+### Co při prvním použití sledovat
+
+Sledujte jen čtyři věci:
+
+- Člověk našel standard u pracovního místa, ne v hlavě původního autora.
+- Rozhodovací věta stačila k akci bez vysvětlování celé historie.
+- Použití neotevřelo širší rozsah, který byl při převodu výslovně zavřený.
+- Nevznikla nová datová stopa jen proto, že standard byl použit poprvé po převodu.
+
+To poslední je důležité. Týmy mají tendenci první použití zdokumentovat "pro jistotu". Jedna zobecněná poznámka může dávat smysl, pokud ukáže slabé místo standardu. Ale screenshot zákaznické odpovědi, nový CRM štítek, tabulka výjimek nebo dlouhodobý seznam případů už není běžné použití. To je návrat k evidenci převlečený za opatrnost.
+
+Praktická kontrolní věta:
+
+```text
+Standard byl použit při běžné práci; pokud nevznikla odchylka, nezakládáme novou evidenci a necháváme ho v pasivním provozu.
+```
+
+Tahle věta může znít skoro až příliš jednoduchě. To je její práce. Chrání tým před tím, aby z prvního normálního použití udělal další fázi projektu.
+
+### Praktický SaaS příklad
+
+Máte pasivní standard pro poptávky bez rozpočtu. U potvrzovací šablony je rozhodovací věta:
+
+```text
+Rozpočet v prvním kontaktu nesbíráme jako povinné pole; volitelně se ptáme až v potvrzovacím e-mailu, pokud to pomůže kvalifikovat další krok.
+```
+
+První běžné použití přijde ve chvíli, kdy obchodník dostane relevantní poptávku bez rozpočtu. Neotevírá formulář, nepřidává nové pole a nezačne vést seznam "lidé bez rozpočtu". Použije šablonu, doplní jednu volitelnou otázku a pokračuje v kvalifikaci.
+
+Zdravý zápis, pokud vůbec nějaký vznikne:
+
+```text
+Pasivní standard pro poptávky bez rozpočtu byl použit u potvrzovací šablony. Standard stačil, formulář se nemění a nevzniká nová evidence.
+```
+
+To je všechno. Žádné drama, žádná slavnostní retrospektiva, žádný nový sloupec v CRM, který bude za půl roku smutně koukat do prázdna. Standard udělal práci a může zůstat tichý.
+
+Slabší varianta:
+
+```text
+Obchodník standard našel až přes starý rozhodovací log, ne u šablony.
+```
+
+To není důvod otevřít celé téma rozpočtů. Je to důvod doplnit jednu lokální kotvu:
+
+```text
+K potvrzovací šabloně doplňujeme větu: "Rozpočet se v prvním kontaktu nesbírá povinně; volitelná otázka patří do potvrzovacího e-mailu."
+```
+
+Silnější varianta:
+
+```text
+Při prvním použití se ukázalo, že rozhodovací věta neodpovídá nové nabídce pro enterprise segment.
+```
+
+To už není běžné použití. To je změna kontextu. Otevřete krátkou kontrolu platnosti standardu, ale pořád nezačínejte přidáním nového pole. Nejdřív zjistěte, jestli se změnil segment, nabídka, kvalifikační otázka nebo jen jeden konkrétní případ.
+
+### Čtyři výsledky prvního použití
+
+První běžné použití pasivního standardu může skončit čtyřmi způsoby:
+
+- Funguje tiše: standard byl najitelný, použitelný a nevznikla nová práce.
+- Potřebuje kotvu: standard platí, ale nebyl dost viditelný u pracovního místa.
+- Potřebuje zpřesnit větu: standard platí, ale rozhodovací věta je moc obecná nebo moc dlouhá.
+- Spustil se návrat: použití narazilo na změnu kontextu nebo návratový signál.
+
+Stav `funguje tiše` je cílový a nemá se přetěžovat zápisem. Pokud standard opravdu fungoval, další krok je žádný. To je občas nejtěžší produktové rozhodnutí: nechat dobrou věc nechat být.
+
+Stav `potřebuje kotvu` řešte nejbližší úpravou u pracovního místa. Nepřidávejte nový index, pokud stačí přesunout větu z rozhodovacího logu k šabloně. Nepřidávejte meeting, pokud stačí odkaz v checklistu. Navigační problém se řeší navigačně.
+
+Stav `potřebuje zpřesnit větu` neznamená přepsat celé pravidlo. Znamená vzít první použití a upravit rozhodovací větu tak, aby příště šla použít rychleji. Dobrý test zní: bude nová věta kratší, konkrétnější a méně závislá na historii?
+
+Stav `spustil se návrat` používejte jen tehdy, když se opravdu změnil rámec nebo nastal návratový signál. Jedna divná poptávka není návrat. Nový segment, nové právní omezení, změna formuláře nebo opakovaný problém podle předem zapsané podmínky už návrat být může.
+
+### Privacy-first první použití
+
+Privacy-first hodnota pasivního standardu se ukáže hlavně v tom, co po prvním použití nevznikne. Pokud standard říká, že nesbíráte nové údaje bez důvodu, první použití nesmí být záminka k tomu, abyste začali sbírat údaje o používání standardu.
+
+Položte si tři otázky:
+
+```text
+Potřebujeme kvůli tomuto použití ukládat nový osobní nebo obchodní údaj?
+
+Potřebujeme zakládat novou dlouhodobou evidenci?
+
+Stačí nám zobecněná věta u pracovního místa?
+```
+
+Ve většině běžných případů bude stačit zobecněná věta, nebo vůbec nic. Pokud vznikla dočasná poznámka s konkrétním zákaznickým kontextem, nepřenášejte ji do standardu. Buď zůstane v původním systému s původním účelem, nebo se smaže podle retenčních pravidel. Pasivní standard nemá být druhá databáze reálných případů.
+
+Krátký privacy-first zápis:
+
+```text
+Při prvním použití standardu nepřidáváme nový atribut, export ani sledování výjimek. Pokud je potřeba upravit standard, přeneseme jen zobecněnou větu bez zákaznických detailů.
+```
+
+Codyho komentář: jestli k použití každého pravidla potřebujete novou tabulku, možná nemáte standard, ale malý úřední festival. A festivaly bývají hlučné, drahé a někdo po nich musí uklízet.
+
+### Karta prvního použití pasivního standardu
+
+```text
+Standard:
+
+Pracovní místo:
+
+První běžná situace použití:
+
+Kdo standard použil bez původní historie:
+
+Výsledek:
+- funguje tiše
+- potřebuje kotvu
+- potřebuje zpřesnit větu
+- spustil se návrat
+
+Co se případně lokálně mění:
+
+Co zůstává zavřené:
+
+Vzniká nová evidence?
+Ano/ne a proč:
+
+Privacy-first závěr:
+Co nepřenášíme do standardu:
+Co mažeme nebo necháváme v původním systému:
+Co dál nesbíráme:
+
+Závěrečná věta:
+```
+
+Kartu vyplňujte jen tehdy, když první použití přineslo odchylku, lokální opravu nebo návratový signál. Pokud standard fungoval tiše a bez tření, stačí nechat ho být. Povinný zápis pro každé správné použití by pasivní standard zase proměnil v aktivní režim, jen s lepším názvem. Hezký kabát, stejná zbytečná práce.
+
+### Mini workshop na 5 minut
+
+1. Minuta 1: pojmenujte běžnou situaci, ve které byl standard použit.
+2. Minuta 2: ověřte, jestli člověk našel standard u pracovního místa.
+3. Minuta 3: vyberte jeden ze čtyř výsledků.
+4. Minuta 4: pokud je potřeba, napište jednu lokální opravu nebo návratový signál.
+5. Minuta 5: uzavřete privacy-first stopu: co dál nesbíráte, co nepřenášíte a co mažete.
+
+Pokud se workshop nespustí, protože použití proběhlo úplně hladce, nevadí. Ne každé správné použití si zaslouží workshop. Někdy je nejlepší důkaz funkčního standardu právě to, že si ho nikdo nemusí všimnout.
+
+### Checklist prvního běžného použití
+
+- Vzniklo použití z běžné práce, ne z plánované kontroly?
+- Našel člověk standard u pracovního místa?
+- Stačila rozhodovací věta bez původní historie?
+- Zůstal zavřený širší rozsah, který standard chrání?
+- Vybrali jsme jeden ze čtyř výsledků?
+- Pokud standard fungoval tiše, nevytvořili jsme zápis jen pro pocit jistoty?
+- Pokud chyběla kotva, opravili jsme nejbližší pracovní místo?
+- Pokud byla věta slabá, zpřesnili jsme ji bez otevírání celého pravidla?
+- Pokud se spustil návrat, máme skutečnou změnu kontextu nebo návratový signál?
+- Nevznikl nový tracker, CRM atribut, export, štítek ani seznam výjimek?
+- Nepřenášíme do standardu osobní nebo obchodní detaily bez účelu?
+- Je jasné, kdy pasivní standard dál zůstává tichý a kdy se má opravdu otevřít?
+
+První běžné použití pasivního standardu má potvrdit, že pravidlo umí pracovat bez doprovodu. Když funguje, nechte ho pracovat. Když chybí kotva, dejte mu ji. Když se změnil kontext, otevřete malý návrat. A když máte nutkání všechno evidovat, nejdřív si položte nepříjemnou, ale zdravou otázku: komu tím opravdu pomůžete a jak dlouho tu stopu budete muset držet?
+
 ## Pracovní log
 
+- 2026-07-07: Doplněna úvodní podkapitola o prvním běžném použití pasivního standardu: tiché použití, lokální kotva, zpřesnění rozhodovací věty, návratový signál, privacy-first práce bez nové evidence, karta, mini workshop a checklist.
 - 2026-07-07: Doplněna úvodní podkapitola o převodu lehkého revizního rytmu do pasivního standardu: podmínky převodu, praktický SaaS příklad, tři spouštěče návratu, privacy-first datový úklid, karta, mini workshop a checklist.
 - 2026-07-07: Doplněna úvodní podkapitola o uzavření druhé kontroly lehkého revizního rytmu: čtyři uzavírací stavy, praktický SaaS příklad, privacy-first uzavření datové stopy, karta, mini workshop a checklist.
 - 2026-07-07: Doplněna úvodní podkapitola o druhé kontrole lehkého revizního rytmu: test opakovatelnosti bez původní historie, čtyři výsledky kontroly, praktický SaaS příklad, privacy-first hranice evidence, karta, mini workshop a checklist.
