@@ -306514,8 +306514,185 @@ Pokud se během šesti minut nedokážete shodnout na stavu, pravděpodobně nej
 
 Uzavření prvního použití dlouhodobé paměti má být malé a rozhodné. Pravidlo buď necháte být, přiblížíte ho k práci, zostříte jeho větu, nebo zastavíte falešnou výjimku. Tím se dlouhodobá paměť nestane dalším dokumentačním patrem, ale praktickou oporou: člověk přijde, použije pravidlo, neotevře starou debatu a nevytvoří zbytečná data. Krása? Ne. Provozní klid? Ano. Beru.
 
+## Druhé použití dlouhodobé paměti bez původní historie
+
+První použití dlouhodobé paměti ověří, že pravidlo není jen hezký zápis pro lidi, kteří si pamatují původní debatu. Druhé použití ověřuje něco trochu jiného: jestli se pravidlo nezačalo opírat o čerstvou opravu z prvního použití. Jinými slovy, jestli už opravdu funguje jako součást práce, nebo jen přežilo první test díky tomu, že někdo stál poblíž s lepicí páskou a dobrou vůlí.
+
+Druhé použití nedělejte hned druhý den jen proto, že chcete mít důkaz. Má vzniknout přirozeně: další poptávka, další úprava stránky, další použití šablony, další rozhodnutí v onboardingu. Pokud musíte situaci vyrábět uměle, pravidlo možná ještě není v běžném provozu. To není tragédie. Jen tomu neříkejte druhé přirozené použití.
+
+Začněte krátkou větou:
+
+```text
+Pravidlo z dlouhodobé paměti se podruhé používá bez původní historie v této běžné situaci:
+```
+
+Za ni napište konkrétní pracovní okamžik a člověka nebo roli, která pravidlo používá. Ne kvůli evidenci lidí, ale kvůli ověření přenositelnosti. Pokud pravidlo funguje jen pro autora, je to osobní poznámka. Pokud funguje pro další roli bez vysvětlování, začíná to vypadat jako provozní paměť.
+
+### Co druhé použití ověřuje
+
+Druhé použití má zkontrolovat pět věcí:
+
+- jestli je pravidlo pořád u pracovního místa, kde ho člověk potřebuje;
+- jestli pracovní věta obstojí bez čerstvého vysvětlení z prvního použití;
+- jestli člověk rozpozná zavřený rozsah;
+- jestli nevzniká nová evidence jen pro pocit jistoty;
+- jestli první lokální oprava nezaložila nový skrytý proces.
+
+Poslední bod je nenápadný a důležitý. Při prvním použití se často doplní kotva, věta, odkaz nebo krátká poznámka. To je v pořádku. Problém vzniká, když se z této opravy stane nové pravidlo vedle pravidla: "vždycky si ještě otevři tu pomocnou poznámku", "raději si udělej kopii odpovědi", "pro jistotu si to označ v tabulce". Tak dlouhodobá paměť potichu vyrábí další práci.
+
+Druhé použití proto nehodnotí jen obsah. Hodnotí i stopu, kterou po sobě zanechalo první použití.
+
+### Praktický SaaS příklad
+
+Dlouhodobé pravidlo:
+
+```text
+U relevantní poptávky bez rozpočtu lze poslat volitelnou otázku v potvrzovacím e-mailu. Formulář, scoring ani nový export se nemění. K povinnému poli se vracíme pouze tehdy, když tři relevantní poptávky za sebou nepůjdou kvalifikovat ani po volitelné otázce.
+```
+
+První použití ukázalo, že pravidlo bylo v týmovém indexu, ale chybělo u e-mailové šablony. Lokální oprava proto doplnila pracovní větu přímo k šabloně.
+
+Druhé použití:
+
+```text
+Situace:
+Jiný obchodník odpovídá na další relevantní poptávku bez rozpočtu.
+
+Použití:
+U šablony najde pracovní větu, pošle volitelnou otázku a nepřidává pole do formuláře.
+
+Výsledek:
+Poptávku jde kvalifikovat z odpovědi v běžném e-mailovém vlákně. Nevzniká pomocná tabulka, CRM štítek ani kopie zákaznické odpovědi.
+
+Závěr:
+Lokální kotva funguje. Pravidlo zůstává v dlouhodobé paměti a u šablony, další review neplánujeme.
+```
+
+Slabší varianta:
+
+```text
+Situace:
+Obchodník pravidlo našel u šablony, ale zároveň si začal vést ruční seznam poptávek bez rozpočtu.
+
+Závěr:
+Pravidlo je najitelné, ale první použití vytvořilo skrytou evidenci. Seznam rušíme, ponecháváme jen pracovní větu u šablony a návratový signál v kanonickém záznamu.
+```
+
+Tady není potřeba vymýšlet školení ani novou kontrolu. Stačí zastavit skrytou evidenci dřív, než se stane "naším běžným postupem". Uvozovky jsou důležité. Hodně špatných postupů začíná jako naprosto rozumné "jen zatím".
+
+### Čtyři výsledky druhého použití
+
+Druhé použití může skončit čtyřmi praktickými stavy:
+
+- Potvrzená samostatnost: pravidlo bylo nalezeno, použito a nezanechalo novou datovou stopu.
+- Potvrzená kotva s malým dočištěním: pravidlo funguje, ale je potřeba upravit jeden odkaz, popisek nebo umístění věty.
+- Skrytý proces po první opravě: pravidlo se používá, ale kolem něj vznikla nová evidence, kontrola nebo ruční obchůzka.
+- Skutečný návratový signál: druhé použití ukázalo problém, který splňuje domluvenou podmínku pro nové review.
+
+U potvrzené samostatnosti nedělejte další práci. Zapište jednu větu a nechte pravidlo běžet.
+
+U potvrzené kotvy s malým dočištěním opravte jen nejbližší místo. Pokud chybí odkaz u šablony, doplňte odkaz. Pokud věta říká "použij doplňující otázku" a lidé nevědí kterou, doplňte přesnou větu. Neotevírejte celý obchodní proces.
+
+U skrytého procesu zastavte vedlejší evidenci. To je často největší hodnota druhého použití: ne že objeví novou funkci, ale že včas ukončí malý provozní výhonek, který by jinak rostl do tabulky, reportu a jednou možná i do dashboardu. Ano, dashboard je někdy užitečný. Ne, ne kvůli jedné nejisté otázce u poptávky.
+
+U skutečného návratového signálu nezkoušejte pravidlo lepit. Pokud podmínka opravdu nastala, otevřete nové review podle zapsaného návratového signálu. Dlouhodobá paměť nemá bránit změnám. Má bránit změnám bez důvodu.
+
+### Privacy-first kontrola druhého použití
+
+Druhé použití je výborný moment pro kontrolu, jestli dlouhodobá paměť opravdu snižuje datovou stopu. Ptejte se:
+
+```text
+Použil člověk pravidlo s daty, která už existovala v běžném pracovním místě?
+
+Vznikla po prvním použití nějaká pomocná evidence, kterou druhé použití znovu použilo?
+
+Pokud ano, je ta evidence opravdu nutná, nebo jen uklidňuje tým?
+```
+
+Privacy-first závěr může být velmi krátký:
+
+```text
+Druhé použití proběhlo bez nové evidence. Pravidlo pracuje jen s běžným e-mailovým vláknem; pomocné kopie, štítky ani exporty nevznikají.
+```
+
+Nebo:
+
+```text
+Druhé použití odhalilo ruční seznam poptávek bez rozpočtu. Seznam rušíme, zákaznické detaily nepřenášíme do dlouhodobé paměti a ponecháváme jen obecný návratový signál.
+```
+
+Tahle věta má být konkrétní. "Data máme pod kontrolou" je hezké, ale skoro nic neříká. "Rušíme ruční seznam a nepřenášíme zákaznické detaily" už se dá udělat, zkontrolovat a za měsíc dohledat.
+
+### Karta druhého použití dlouhodobé paměti
+
+```text
+Pravidlo z dlouhodobé paměti:
+
+První použití uzavřelo:
+
+Druhá běžná situace použití:
+
+Kdo pravidlo použil bez původní historie:
+
+Kde pravidlo našel:
+
+Použil pravidlo bez čerstvého vysvětlení?
+- ano
+- ne
+- ano, ale jen díky lokální obchůzce
+
+Co zůstalo zavřené:
+
+Vznikla nebo pokračovala skrytá evidence?
+
+Privacy-first datová věta:
+
+Výsledek:
+- potvrzená samostatnost
+- potvrzená kotva s malým dočištěním
+- skrytý proces po první opravě
+- skutečný návratový signál
+
+Co se mění:
+
+Co dál výslovně neotevíráme:
+
+Kde je závěr uložený:
+
+Vlastník případného dočištění:
+```
+
+Kartu nezavádějte jako nový povinný formulář pro každé pravidlo. Použijte ji, když má druhé použití rozhodovací hodnotu: potvrzuje přenositelnost, ruší skrytou evidenci, nebo ukazuje návratový signál. Pokud bylo všechno hladké, stačí jednovětý závěr u pracovního místa.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: pojmenujte druhou běžnou situaci použití.
+2. Minuta 2: ověřte, jestli člověk našel pravidlo bez původní historie.
+3. Minuta 3: porovnejte použití s lokální opravou z prvního použití.
+4. Minuta 4: zkontrolujte skrytou evidenci, štítky, kopie a pomocné seznamy.
+5. Minuta 5: vyberte jeden ze čtyř výsledků.
+6. Minuta 6: napište závěr a případné jedno lokální dočištění.
+
+Pokud workshop začne řešit, jestli by se neměl zlepšit celý systém znalostí, zastavte ho. Možná by měl. Ale druhé použití jednoho pravidla není správné místo pro velkou reorganizaci. Tady se má rozhodnout, jestli konkrétní pravidlo funguje podruhé bez původní historie a bez nové datové stopy.
+
+### Checklist druhého použití dlouhodobé paměti
+
+- Nastalo druhé použití přirozeně v běžné práci?
+- Použil pravidlo člověk bez původní historie?
+- Našel pravidlo u pracovního místa, ne až v hluboké dokumentaci?
+- Obstála pracovní věta bez čerstvého vysvětlení?
+- Bylo jasné, co zůstává zavřené?
+- Nezměnila se lokální oprava z prvního použití ve skrytý proces?
+- Nevznikl nový CRM atribut, štítek, export, pomocná tabulka, screenshot nebo kopie zákaznické odpovědi?
+- Pokud skrytá evidence vznikla, je zrušená nebo má jasný konec?
+- Neotevíráme celé review, pokud nenastal návratový signál?
+- Je závěr uložený u pracovního místa, kde se pravidlo použije potřetí?
+
+Druhé použití dlouhodobé paměti je malý test dospělosti pravidla. Po prvním použití už víte, že pravidlo nějak funguje. Po druhém použití víte, jestli funguje bez doprovodné péče, bez paměti původních lidí a bez tajné hromádky dat vedle. Pokud ano, nechte ho být. Pokud ne, opravte nejbližší kotvu, zrušte skrytou evidenci nebo otevřete návratový signál. Všechno ostatní je jen dražší způsob, jak se tvářit zaneprázdněně.
+
 ## Pracovní log
 
+- 2026-07-07: Doplněna úvodní podkapitola o druhém použití dlouhodobé paměti bez původní historie: ověření přenositelnosti, skrytý proces po první opravě, praktický SaaS příklad, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-07-07: Doplněna úvodní podkapitola o uzavření prvního použití dlouhodobé paměti: čtyři uzavírací stavy, praktický SaaS příklad, privacy-first datová věta, karta, mini workshop a checklist.
 - 2026-07-07: Doplněna úvodní podkapitola o prvním použití dlouhodobé paměti bez původní historie: samostatné použití pravidla, lokální kotva, ostrá pracovní věta, falešná výjimka, privacy-first kontrola datové stopy, karta, mini workshop a checklist.
 - 2026-07-07: Doplněna úvodní podkapitola o uzavření druhého přirozeného review do dlouhodobé paměti: pracovní věta, kanonické místo, zavřený rozsah, návratový signál, privacy-first úklid, karta, mini workshop a checklist.
