@@ -306854,8 +306854,161 @@ Když se během workshopu objeví nové velké téma, nezapisujte ho do uzavřen
 
 Uzavření druhého použití dlouhodobé paměti je poslední pojistka před klidem. Pokud pravidlo obstálo, nechte ho běžet. Pokud potřebuje malou kotvu, doplňte ji. Pokud kolem něj vyrostla pomocná evidence, utněte ji dřív, než se stane provozní tradicí. A pokud opravdu přišel návratový signál, otevřete nové review s menším prvním krokem. Tím dlouhodobá paměť zůstane užitečná: ne jako archiv všeho, ale jako stručná opora pro rozhodnutí, která se nemají znovu dokazovat od nuly.
 
+## Převod ověřené dlouhodobé paměti do lehkého revizního rytmu
+
+Když dlouhodobá paměť obstála ve druhém použití bez původní historie, tým má chuť udělat jednu ze dvou věcí. Buď pravidlo slavnostně prohlásí za hotové a už se k němu nikdy nevrátí, nebo mu naopak přidělí pravidelnou kontrolu, protože "co kdyby". Ani jedna reakce není ideální. První může nechat zastarat rozhodnutí, které se potichu potká s novou realitou. Druhá z klidného pravidla vyrábí administrativní závazek.
+
+Lehký revizní rytmus je prostřední cesta. Neznamená pravidelné schůzky nad každou uloženou větou. Znamená, že pravidlo má své přirozené kontrolní místo, jednoduchý návratový signál a jasnou větu, kdy se nemá kontrolovat vůbec. Tím se dlouhodobá paměť nezmění v muzeum starých rozhodnutí ani v další provozní kalendář.
+
+Začněte jednou větou:
+
+```text
+Toto pravidlo po druhém ověřeném použití necháváme v dlouhodobé paměti a kontrolujeme ho jen tehdy, když:
+```
+
+Za dvojtečku doplňte konkrétní situaci, ne obecné "při revizi". Dobrá situace je například další úprava stejné šablony, změna formuláře, změna segmentu zákazníků, nový onboardingový kanál nebo návratový signál z původní karty. Špatná situace je "jednou za čas se na to podíváme". Jednou za čas je místo, kde umírají provozní záměry i staré rostliny na parapetu.
+
+### Co má lehký rytmus chránit
+
+Lehký revizní rytmus chrání tři věci:
+
+- pravidlo zůstane dohledatelné u pracovního místa;
+- tým nezačne znovu řešit zavřený rozsah bez nového důkazu;
+- kolem pravidla nevznikne pravidelná datová evidence jen kvůli kontrole.
+
+Nejde tedy o další proces nad procesem. Jde o pojistku, že ověřené pravidlo neztratí vazbu na práci. Pokud se pravidlo týká poptávkového e-mailu, jeho kontrolní místo je e-mailová šablona nebo obchodní playbook. Pokud se týká onboardingového kroku, kontrolní místo je onboardingová karta. Pokud se týká marketingové stránky, kontrolní místo je stránka, rozcestník nebo publikační checklist.
+
+Revize má vzniknout jen tam, kde se pravidlo přirozeně potká s prací. Když se nepotká, není co kontrolovat. To je důležité: dlouhodobá paměť nemá být seznamem věcí, které tým povinně otevírá, aby se cítil odpovědně. Má být krátkou oporou pro chvíle, kdy se stejná otázka opravdu vrátí.
+
+### Praktický SaaS příklad
+
+Pravidlo po druhém použití:
+
+```text
+U relevantní poptávky bez rozpočtu lze poslat volitelnou otázku v potvrzovacím e-mailu. Formulář, scoring ani nový export se nemění. K povinnému poli se vracíme pouze tehdy, když tři relevantní poptávky za sebou nepůjdou kvalifikovat ani po volitelné otázce.
+```
+
+Lehký revizní rytmus:
+
+```text
+Kontrolní místo:
+Poptávková e-mailová šablona a karta poptávkového formuláře.
+
+Kontrolujeme pouze když:
+- upravujeme poptávkovou šablonu;
+- měníme poptávkový formulář;
+- tři relevantní poptávky za sebou nejdou kvalifikovat ani po volitelné otázce.
+
+Nekontrolujeme když:
+- někdo jen znovu navrhne povinné pole bez nového důkazu;
+- jedna poptávka přijde bez rozpočtu, ale jde normálně kvalifikovat;
+- tým dělá obecné měsíční review znalostní báze.
+```
+
+Tady je rytmus lehký, protože se drží pracovního místa. Není potřeba zakládat měsíční report "poptávky bez rozpočtu". Není potřeba přidávat CRM štítek. Není potřeba dělat dashboard. Pokud se problém opravdu objeví, návratový signál ho zachytí. Pokud se neobjeví, pravidlo tiše slouží.
+
+Slabší varianta by vypadala takto:
+
+```text
+Každý měsíc zkontrolujeme, kolik poptávek přišlo bez rozpočtu, a podle toho vyhodnotíme, zda přidat pole.
+```
+
+To už není lehký rytmus. To je nová evidence, nový interpretační problém a nový tlak na změnu formuláře. Možná by dávala smysl, kdyby rozpočet byl skutečný opakovaný blokátor obchodního procesu. Ale po dvou ověřených použitích pravidla je to spíš hlad po číslech než potřeba práce.
+
+### Tři typy lehké revize
+
+Lehká revize může mít tři podoby:
+
+- Revize při dotyku: pravidlo zkontrolujete pouze ve chvíli, kdy stejně upravujete stejné pracovní místo.
+- Revize při signálu: pravidlo zkontrolujete pouze tehdy, když nastane předem zapsaná podmínka.
+- Revize při změně kontextu: pravidlo zkontrolujete, když se změní segment, nabídka, kanál, vlastník nebo právní či provozní okolnost, která se pravidla přímo dotýká.
+
+Revize při dotyku je nejlevnější. Když měníte šablonu, přečtete i větu vedle ní. Pokud pořád sedí, necháte ji být. Pokud nesedí, upravíte ji v rámci stejného pracovního místa.
+
+Revize při signálu je nejpřesnější. Někdo nechce spoléhat na pocit, takže pravidlo říká, jaká konkrétní situace ho znovu otevře. U poptávkového formuláře to mohou být tři za sebou jdoucí kvalifikační problémy. U onboardingového e-mailu to mohou být tři noví zákazníci, kteří po stejné větě udělají stejnou chybu.
+
+Revize při změně kontextu je pojistka proti tomu, že dobré staré pravidlo začne pracovat pro jiný svět. Pokud se nabídka přesune z menších projektů na enterprise prodej, staré pravidlo pro kvalifikaci poptávky nemusí stačit. Pokud se marketingový kanál přesune z přímých odkazů na partnerské kampaně, staré vysvětlení zdroje poptávky může být slabé. Kontext není dekorace. Kontext je půda, ve které pravidlo buď drží, nebo se začne viklat.
+
+### Privacy-first rytmus
+
+Privacy-first pravidlo pro lehkou revizi je jednoduché:
+
+```text
+Kontrolujeme pravidlo podle práce, ne podle nové evidence.
+```
+
+To znamená, že při revizi nejdřív použijete data, která už přirozeně existují v pracovním místě: konkrétní e-mailové vlákno, šablonu, formulář, checklist, support ticket nebo rozhodovací kartu. Nový export, nový štítek, nový dashboard nebo nová tabulka jsou až poslední možnost, ne výchozí reakce.
+
+Do karty rytmu proto přidejte větu:
+
+```text
+Pro kontrolu nepřidáváme nová pole, trackery, štítky, exporty ani pomocné seznamy; používáme jen důkaz z běžného pracovního místa.
+```
+
+Pokud tato věta není pravdivá, rytmus už není lehký. Možná je pořád oprávněný, ale musí mít vlastní rozhodnutí: proč novou evidenci potřebujete, jak dlouho poběží, kdo ji smaže a jak zabráníte tomu, aby se z dočasné kontroly stal trvalý sběr dat.
+
+Codyho komentář: dobrá revize je jako dobrá kontrolka v autě. Rozsvítí se, když má důvod. Nesvítí pořád jen proto, aby vám připomínala, že auto existuje.
+
+### Karta lehkého revizního rytmu
+
+```text
+Pravidlo v dlouhodobé paměti:
+
+Kde pravidlo žije u pracovního místa:
+
+Co druhé použití potvrdilo:
+
+Lehký rytmus:
+- revize při dotyku
+- revize při signálu
+- revize při změně kontextu
+
+Kontrolujeme pouze když:
+
+Nekontrolujeme když:
+
+Co zůstává zavřené:
+
+Jaký důkaz použijeme z běžného pracovního místa:
+
+Co pro kontrolu výslovně nezavádíme:
+
+Kdo smí rytmus změnit:
+
+Kde je rytmus zapsaný:
+```
+
+Řádek "kdo smí rytmus změnit" není korporátní ozdoba. Chrání pravidlo před tím, aby ho kdokoli během obyčejného review proměnil na povinný report. Stačí role, ne jméno: vlastník formuláře, vlastník onboardingu, vlastník obchodního playbooku.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte závěr druhého použití dlouhodobé paměti.
+2. Minuta 2: pojmenujte pracovní místo, kde pravidlo opravdu žije.
+3. Minuta 3: vyberte typ lehké revize: dotyk, signál nebo změna kontextu.
+4. Minuta 4: napište, kdy se pravidlo nekontroluje.
+5. Minuta 5: doplňte privacy-first větu o tom, co pro kontrolu nezavádíte.
+6. Minuta 6: uložte kartu rytmu vedle pravidla a zavřete téma.
+
+Když workshop začne navrhovat nový dashboard, vraťte se k otázce: "Jaké rozhodnutí bez něj nedokážeme udělat?" Pokud odpověď není konkrétní, dashboard není nástroj. Je to jen dražší poznámka s grafem.
+
+### Checklist lehkého revizního rytmu
+
+- Obstálo pravidlo ve druhém použití bez původní historie?
+- Je pravidlo uložené u pracovního místa, kde se bude příště používat?
+- Vybrali jsme jeden typ lehké revize?
+- Je jasné, kdy se pravidlo kontroluje?
+- Je stejně jasné, kdy se pravidlo nekontroluje?
+- Zůstává zavřený původní širší rozsah?
+- Používá revize důkaz z běžného pracovního místa?
+- Nevzniká kvůli revizi nový tracker, štítek, export, report, tabulka nebo povinné pole?
+- Je zapsané, kdo může rytmus změnit?
+- Je závěr dost krátký, aby ho další člověk použil bez vysvětlování?
+
+Lehký revizní rytmus je způsob, jak nechat ověřené pravidlo žít bez zbytečné péče. Dobré pravidlo nemá být pořád na stole. Má být po ruce, když se stejná pracovní situace vrátí. Pokud se nevrátí, klid není zanedbání. Klid je důkaz, že systém nepotřebuje další hluk.
+
 ## Pracovní log
 
+- 2026-07-07: Doplněna úvodní podkapitola o převodu ověřené dlouhodobé paměti do lehkého revizního rytmu: kontrolní místa, revize při dotyku, signálu nebo změně kontextu, privacy-first důkaz z běžné práce, karta, mini workshop a checklist.
 - 2026-07-07: Doplněna úvodní podkapitola o uzavření druhého použití dlouhodobé paměti: čtyři uzavírací stavy, praktický SaaS příklad, privacy-first uzavření, karta, mini workshop a checklist.
 - 2026-07-07: Doplněna úvodní podkapitola o druhém použití dlouhodobé paměti bez původní historie: ověření přenositelnosti, skrytý proces po první opravě, praktický SaaS příklad, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-07-07: Doplněna úvodní podkapitola o uzavření prvního použití dlouhodobé paměti: čtyři uzavírací stavy, praktický SaaS příklad, privacy-first datová věta, karta, mini workshop a checklist.
