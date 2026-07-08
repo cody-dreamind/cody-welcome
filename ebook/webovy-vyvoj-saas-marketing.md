@@ -312951,8 +312951,147 @@ Pokud se workshop začne točit kolem toho, jak by se dal zlepšit celý obchodn
 
 Uzavření druhého běžného návratu je malé, ale důležité gesto. Říká: pravidlo jsme ověřili v reálné práci, nezvětšili jsme ho bez důvodu a uklidili jsme po sobě. To je přesně typ provozní disciplíny, díky které web, SaaS i marketing časem nezarostou vlastními poznámkami.
 
+## Převod stabilního archivního minima do dlouhodobého klidu
+
+Když archivní minimum obstálo při druhém běžném návratu, nemá dostat další kontrolní plán jen proto, že už kolem něj vznikla série pečlivých záznamů. Právě naopak. Smyslem druhého návratu bylo ověřit, že pravidlo funguje bez čerstvé paměti, bez mimořádné péče a bez nové datové stopy. Pokud to zvládlo, další krok je jednoduchý: převést ho do dlouhodobého klidu.
+
+Dlouhodobý klid neznamená zapomenout. Znamená odstranit pravidlu zvláštní pozornost a nechat ho dostupné tam, kde se přirozeně používá. Tým si ponechá kanonickou větu, návratový signál a případně jednu pracovní kotvu. Všechno ostatní má skončit: dočasné komentáře, kontrolní poznámky, pomocné příklady, opakované revize a pocit, že se k tomu "ještě někdy radši vrátíme". Pokud nevíte proč, nevracejte se. Revoluční, já vím.
+
+Začněte větou:
+
+```text
+Archivní minimum převádíme do dlouhodobého klidu, protože:
+```
+
+Za ni napište důvod, který by pochopil i člověk mimo původní debatu:
+
+```text
+Archivní minimum převádíme do dlouhodobého klidu, protože pravidlo obstálo při dvou běžných návratech, druhý člověk ho použil bez staré historie a nevznikla nová datová stopa.
+```
+
+Tato věta je důležitá. Uzavírá mimořádnou pozornost a zároveň nechává jasnou stopu, proč se neplánuje další kontrola. Bez ní se může za měsíc objevit někdo pečlivý, otevřít starou kartu a říct: "Měli bychom to ještě jednou projít." Možná neměli. Možná by jen znovu zaplatili časem za rozhodnutí, které už je hotové.
+
+### Co v dlouhodobém klidu zůstává
+
+Do dlouhodobého klidu přenášejte jen minimum, které má reálnou pracovní hodnotu:
+
+- kanonickou větu, podle které jde rozhodnout;
+- místo, kde ji člověk najde při běžné práci;
+- návratový signál, který téma znovu otevře;
+- jednu privacy-first hranici, která říká, jaká data se kvůli pravidlu dál nesbírají.
+
+Všechno ostatní je podezřelé. Ne proto, že by to bylo špatné, ale proto, že dlouhodobý klid má být levný. Pokud k němu potřebujete tři odkazy, dvě tabulky, starý screenshot a vysvětlení původního workshopu, není to klid. Je to malý muzeální provoz, jen bez vstupného.
+
+Praktický příklad:
+
+```text
+Kanonická věta:
+U relevantní poptávky bez rozpočtu se ptáme volitelně v potvrzovacím e-mailu jen tehdy, když bez odpovědi nejde navrhnout další konkrétní krok.
+
+Pracovní místo:
+Obchodní checklist u zpracování nové poptávky.
+
+Návratový signál:
+K tématu se vrátíme pouze pokud volitelná otázka třikrát za sebou nepomůže kvalifikovat relevantní poptávku.
+
+Privacy-first hranice:
+Nepřidáváme povinné pole pro rozpočet, CRM atribut, lead scoring ani export rozpočtových odpovědí.
+```
+
+Tohle stačí. Staré debaty, proč se rozpočet nepřidal do formuláře, mohou zůstat v archivu. Běžný člověk při práci nepotřebuje celou historii. Potřebuje vědět, co má udělat teď a co nemá omylem otevřít.
+
+### Co po převodu odstranit
+
+Největší hodnota převodu do dlouhodobého klidu je v úklidu. Po dvou návratech často zůstane víc stop, než tým potřebuje: pomocné komentáře, staré návrhy formulací, kopie zákaznických odpovědí, dočasné tabulky, interní odkazy na revizní karty nebo poznámky typu "ověřit později". Pokud pravidlo obstálo, většina těchto stop už nemá účel.
+
+Použijte krátkou kontrolu:
+
+```text
+Pro běžnou práci dál potřebujeme:
+
+Pro historii stačí ponechat:
+
+Mažeme nebo nepřenášíme:
+
+Dál výslovně nesbíráme:
+```
+
+Příklad:
+
+```text
+Pro běžnou práci dál potřebujeme:
+Kanonickou větu v obchodním checklistu.
+
+Pro historii stačí ponechat:
+Jednovětý záznam, že druhý návrat pravidlo potvrdil.
+
+Mažeme nebo nepřenášíme:
+Dočasný komentář z první revize, pracovní screenshot a kopii konkrétní zákaznické odpovědi.
+
+Dál výslovně nesbíráme:
+Rozpočet jako povinný údaj, samostatný CRM atribut ani pomocný export.
+```
+
+Tím se z dlouhodobého klidu nestane další dokumentační vrstva. Zůstane po něm pracovní věta a čistší provoz. Privacy-first přístup tady není plakát o hodnotách. Je to obyčejné rozhodnutí nepřenášet dál data a poznámky, které už nevedou k žádnému rozhodnutí.
+
+### Karta dlouhodobého klidu
+
+```text
+Archivní minimum:
+
+Proč ho převádíme do dlouhodobého klidu:
+
+Kanonická věta pro běžnou práci:
+
+Kde žije:
+
+Co zůstává jen jako historická stopa:
+
+Co po převodu mažeme nebo nepřenášíme:
+
+Co zůstává výslovně zavřené:
+
+Jaká data, pole, exporty, trackery nebo kopie dál nevznikají:
+
+Návratový signál:
+
+Kdo drží vlastnictví pracovního místa:
+
+Kdy se téma smí znovu otevřít:
+```
+
+Kartu nepoužívejte jako další povinný formulář. Pokud pravidlo funguje a není co uklízet, stačí jednovětý záznam u pracovního místa. Plná karta má smysl tehdy, když po návratech zůstaly dočasné stopy nebo je potřeba jasně oddělit pracovní větu od historické dokumentace.
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: přečtěte výsledek druhého běžného návratu.
+2. Minuta 2: napište kanonickou větu pro běžnou práci.
+3. Minuta 3: určete jediné pracovní místo, kde má věta žít.
+4. Minuta 4: rozhodněte, co zůstává jen jako historická stopa.
+5. Minuta 5: smažte nebo pojmenujte stopy, které se po převodu nepřenášejí.
+6. Minuta 6: zapište privacy-first hranici.
+7. Minuta 7: napište návratový signál a výslovně řekněte, že další kontrola nevzniká bez něj.
+
+Pokud se workshop změní v debatu o tom, jestli by pravidlo nemělo být součástí širší metodiky, zastavte se. Možná ano, ale to je nové téma. Převod do dlouhodobého klidu má zavřít ověřené minimum, ne přepsat týmový operační systém.
+
+### Checklist dlouhodobého klidu
+
+- Obstálo archivní minimum při druhém běžném návratu?
+- Máme jednu kanonickou větu, která stojí bez staré historie?
+- Je věta uložená u skutečného pracovního místa?
+- Skončila mimořádná péče, dočasné kontroly a pomocné komentáře?
+- Je jasné, co zůstává jen jako historie?
+- Smazali jsme nebo nepřenesli zbytečné kopie, screenshoty, exporty a zákaznické detaily?
+- Zůstává původní široký rozsah výslovně zavřený?
+- Je napsané, jaká data, pole, trackery nebo exporty dál nevznikají?
+- Má téma konkrétní návratový signál místo pravidelné kontroly ze zvyku?
+- Ví vlastník pracovního místa, že pravidlo má být tiché, dokud nepřijde nový signál?
+
+Dlouhodobý klid je dobrý konec pro pravidlo, které už prokázalo použitelnost. Nechává týmu paměť bez aktivního břemene, rozhodnutí bez dalšího ceremoniálu a privacy-first hranici bez nových datových zbytků. To je nenápadná, ale velmi praktická forma kvality: systém si pamatuje dost, aby rozhodl, a zapomíná dost, aby se sám nezanesl.
+
 ## Pracovní log
 
+- 2026-07-08: Doplněna úvodní podkapitola o převodu stabilního archivního minima do dlouhodobého klidu: kanonická věta, pracovní místo, návratový signál, privacy-first úklid stop, karta, mini workshop a checklist.
 - 2026-07-08: Doplněna úvodní podkapitola o uzavření druhého běžného návratu po archivní revizi: čtyři uzavírací stavy, SaaS příklady, privacy-first úklid dočasných stop, karta, mini workshop a checklist.
 - 2026-07-08: Doplněna úvodní podkapitola o druhém běžném návratu po archivní revizi: kdy ho otevřít, čtyři výsledky, SaaS příklady, privacy-first úklid dočasných stop, karta, mini workshop a checklist.
 - 2026-07-08: Doplněna úvodní podkapitola o uzavření prvního běžného návratu po archivní revizi: čtyři uzavírací stavy, SaaS příklady, privacy-first uzavření nové datové stopy, karta, mini workshop a checklist.
