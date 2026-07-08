@@ -310536,8 +310536,253 @@ Když pět minut nestačí, pravděpodobně neuzavíráte první použití. Otev
 
 Uzavření prvního běžného použití archivního minima má být krátké a trochu nekompromisní. Buď pravidlo funguje samo, nebo potřebuje nejbližší lokální opravu, nebo ještě nepatří do archivu. Všechny tři výsledky jsou použitelné. Nepoužitelný je jen mlhavý mezistav, ve kterém se archiv tváří jako hotovo a provoz si mezitím zakládá nové poznámky bokem.
 
+## Druhé běžné použití archivního minima
+
+Druhé běžné použití archivního minima má jiný účel než první. První použití ověřuje, jestli krátká kanonická věta vůbec přežila kontakt s realitou. Druhé použití ověřuje, jestli pravidlo funguje i bez čerstvé paměti na poslední opravu, bez autora u stolu a bez mimořádné pozornosti týmu.
+
+Proto ho neplánujte automaticky u každého archivního minima. Otevírá se jen tehdy, když první použití dopadlo dobře, ale pravidlo je pořád dost důležité na to, aby se vyplatilo ověřit jeho přenositelnost. Typicky jde o pravidlo u poptávkového formuláře, obchodní odpovědi, onboardingového kroku, podpůrné šablony nebo provozního rozhodnutí, které může ovlivnit sběr dat.
+
+Začněte jednou větou:
+
+```text
+Druhé běžné použití archivního minima otevíráme proto, že:
+```
+
+Věta má říct důvod, ne náladu. "Chceme mít jistotu" je slabé. "Pravidlo chrání formulář před zbytečným sběrem rozpočtu a další relevantní poptávka ukáže, jestli ho obchod použije bez staré historie" je použitelné. Tým ví, kde se dívá, co se má stát a jaký rozsah zůstává zavřený.
+
+Codyho komentář: druhé použití není zkušební doba pro archiv. Je to krátká kontrola přenositelnosti. Jakmile z něj uděláte dlouhodobé sledování, archivní minimum jste právě nenápadně povýšili zpátky na živý proces. Gratuluju, vyrobili jste si práci z ničeho; účet přijde v podobě tabulek.
+
+### Kdy druhé použití otevřít
+
+Druhé použití má smysl otevřít jen při splnění tří podmínek:
+
+- První použití bylo uzavřené a mělo jasný stav.
+- Pravidlo se znovu potkalo se stejným typem pracovní situace.
+- Výsledek druhého použití může změnit pouze nejbližší pracovní kotvu, kanonickou větu nebo stav pravidla.
+
+Pokud třetí podmínka neplatí, nejste v druhém použití. Jste v nové produktové otázce, obchodním problému nebo privacy-first revizi. To je v pořádku, jen to tak pojmenujte. Archivní minimum nemá nést cizí rozsah jen proto, že je po ruce.
+
+Druhé použití naopak neotevírejte, když se pravidlo jen připomnělo v diskusi, ale nikdo ho nemusel použít. Neotevírejte ho ani proto, že někdo chce "ještě jednou mrknout do historie". Historie je v archivu právě proto, aby běžná práce nestála na jejím opakovaném čtení.
+
+Praktické rozhodnutí:
+
+```text
+Druhé použití otevíráme:
+Další relevantní poptávka znovu nemá uvedený rozpočet a obchod má použít stejnou kanonickou větu u potvrzovací šablony.
+
+Druhé použití neotevíráme:
+Na poradě se někdo zeptal, proč rozpočet není ve formuláři, ale nevznikla nová poptávka ani pracovní situace.
+```
+
+Rozdíl je malý, ale důležitý. V prvním případě pravidlo pracuje. Ve druhém se o něm jen mluví. A provoz se nemá řídit tím, o čem se zrovna mluvilo nejhlasitěji.
+
+### Co při druhém použití sledovat
+
+Sledujte jen tři věci:
+
+- Najitelnost: člověk našel kanonickou větu tam, kde pracuje.
+- Rozhodnutelnost: podle věty šlo rozhodnout bez staré historie.
+- Datovou střídmost: nevznikla nová evidence, nový atribut, export ani pomocný tracker.
+
+Nepřidávejte metriky navíc. Druhé použití není analytický sprint. Pokud potřebujete měřit rychlost odpovědi, obchodní konverzi, kvalitu leadu nebo vliv na revenue, otevřete samostatnou otázku. Tady kontrolujete pouze to, jestli archivní minimum unese další běžný průchod.
+
+Zápis může být velmi krátký:
+
+```text
+Najitelnost:
+Kanonická věta byla u potvrzovací šablony.
+
+Rozhodnutelnost:
+Obchodník podle ní odpověděl bez čtení staré karty.
+
+Datová střídmost:
+Nevznikl CRM atribut, pomocná tabulka ani kopie zákaznické odpovědi.
+```
+
+Když jeden z řádků neumíte vyplnit, neznamená to automaticky problém pravidla. Může to znamenat, že sledujete špatné pracovní místo. Nejdřív ověřte, kde se rozhodnutí opravdu děje, a teprve potom upravujte text.
+
+### Praktický SaaS příklad
+
+Archivní minimum chrání poptávkový formulář před povinným polem pro rozpočet. Kanonická věta zní:
+
+```text
+Rozpočet nedáváme do veřejného formuláře. Pokud bez něj nejde navrhnout další krok, ptáme se volitelně v obchodním vlákně a odpověď nepřepisujeme do nového CRM atributu.
+```
+
+Druhé použití:
+
+```text
+Situace:
+Přišla další relevantní SaaS poptávka bez rozpočtu.
+
+Použití:
+Obchodník našel větu u potvrzovací šablony a poslal odpověď s volitelnou otázkou na rámec rozpočtu pouze pro účel návrhu dalšího kroku.
+
+Výsledek:
+Poptávku šlo kvalifikovat bez úpravy formuláře a bez nové evidence rozpočtů.
+```
+
+Závěr:
+
+```text
+Stav po druhém použití:
+Archivní minimum je přenositelné.
+
+Co zůstává:
+Kanonická věta u potvrzovací šablony a krátká poznámka u formuláře.
+
+Co nevzniká:
+Povinné pole, CRM atribut, scoring rozpočtu, dočasná tabulka ani nový review rytmus.
+```
+
+Slabší varianta:
+
+```text
+Situace:
+Obchodník našel větu, ale nebylo jasné, zda se smí zeptat na rozpočet v odpovědi.
+
+Stav po druhém použití:
+Zpřesnit kanonickou větu.
+
+Lokální oprava:
+Do věty doplnit, že volitelná otázka patří pouze do obchodního vlákna a pouze pokud bez ní nejde navrhnout další krok.
+
+Co neotevíráme:
+Formulář, scoring, export ani revizi celé kvalifikace poptávek.
+```
+
+Nejslabší varianta:
+
+```text
+Situace:
+Tým znovu začal ručně značit poptávky bez rozpočtu bokem, aby "měli přehled".
+
+Stav po druhém použití:
+Vrátit pravidlo z archivního minima do lehkého revizního rytmu.
+
+Další krok:
+Na dvě další relevantní poptávky ověřit, kde opravdu vzniká potřeba rozpočtového kontextu.
+
+Privacy-first hranice:
+Žádné nové povinné pole, žádný trvalý CRM atribut a žádná tabulka bez vlastníka a data smazání.
+```
+
+Všimněte si, že i nejslabší varianta nezačíná velkou přestavbou formuláře. Začíná malou otázkou. Privacy-first provoz není o tom, že se nikdy nezeptáte na citlivější obchodní kontext. Je o tom, že se ptáte pozdě, účelově, v nejbližším lidském kontextu a bez automatického vyrábění dalších databází.
+
+### Čtyři výsledky druhého použití
+
+Po druhém použití vyberte jeden výsledek:
+
+- Potvrdit přenositelnost: pravidlo fungovalo bez čerstvé paměti a zůstává v archivním minimu.
+- Opravit kotvu: pravidlo je správné, ale člověk ho nehledal na správném místě.
+- Zpřesnit větu: pravidlo bylo najitelné, ale nedalo dost jasnou hranici rozhodnutí.
+- Vrátit do lehkého revizního rytmu: druhé použití znovu vytvořilo výjimky, ruční evidenci nebo potřebu staré historie.
+
+Výsledek `potvrdit přenositelnost` je konec práce. Nepřidávejte třetí použití "pro jistotu". Pokud se pravidlo znovu přirozeně potká s prací, použije se normálně. Zvláštní pozornost končí.
+
+Výsledek `opravit kotvu` má být fyzická změna umístění věty: blíž k šabloně, formuláři, administračnímu poli, support odpovědi nebo checklistu releasu. Nemá se z něj stát přepis pravidla.
+
+Výsledek `zpřesnit větu` má odstranit jednu nejasnost. Pokud po druhém použití chcete přepsat tři související pravidla, vraťte se o krok zpět a pojmenujte novou otázku. Jedna kanonická věta má unést jedno rozhodnutí, ne celou metodiku.
+
+Výsledek `vrátit do lehkého revizního rytmu` má mít konec. Zapište počet dalších průchodů nebo datum návratu. Bez konce z něj bude nový trvalý monitoring převlečený za opatrnost.
+
+### Privacy-first kontrola druhého použití
+
+Druhé použití archivního minima je ideální místo pro kontrolu, jestli se kolem starého pravidla nezačala tvořit nová datová stopa. Hledejte hlavně nenápadné věci:
+
+- kopie zákaznických odpovědí v interní poznámce,
+- pomocná tabulka výjimek,
+- nový štítek v CRM,
+- screenshoty formulářů nebo e-mailů,
+- dočasné exporty bez data smazání,
+- poznámky obsahující konkrétní rozpočty, jména nebo rozhodovací proces zákazníka.
+
+Pokud něco z toho vzniklo, neřešte to moralizováním. Zeptejte se provozně:
+
+```text
+K jakému rozhodnutí tato stopa slouží, kdo ji vlastní a kdy skončí?
+```
+
+Když odpověď chybí, stopu smažte nebo zobecněte. Do pravidla patří poznatek, ne zákaznický detail. Do pracovního místa patří hranice rozhodnutí, ne archiv osobních a obchodních situací.
+
+Příklad privacy-first závěru:
+
+```text
+Po druhém použití necháváme v pracovním místě pouze kanonickou větu. Konkrétní odpověď zákazníka zůstává v obchodním vlákně po dobu běžného obchodního účelu. Nevytváříme kopii, export, štítek ani nový retenční režim.
+```
+
+Tohle je věta, která šetří budoucí práci. Nemusíte vysvětlovat, proč existuje tabulka. Nemusíte řešit, kdo ji smí vidět. Nemusíte ji čistit. Prostě nevznikla. Někdy je nejhezčí architektura ta, kterou nikdo nemusí provozovat.
+
+### Karta druhého běžného použití archivního minima
+
+```text
+Archivní minimum:
+
+Kanonická věta:
+
+Proč otevíráme druhé použití:
+
+Druhá běžná situace:
+
+Kdo pravidlo použil:
+
+Najitelnost:
+
+Rozhodnutelnost:
+
+Datová střídmost:
+
+Výsledek:
+- potvrdit přenositelnost
+- opravit kotvu
+- zpřesnit větu
+- vrátit do lehkého revizního rytmu
+
+Lokální oprava, pokud existuje:
+
+Co zůstává výslovně zavřené:
+
+Privacy-first závěr:
+
+Návratový signál pro další otevření:
+
+Kde je závěr uložený:
+```
+
+Kartu vyplňujte jen u pravidel, která za to stojí. Pokud druhé použití proběhlo čistě a pravidlo není kritické, stačí jednovětý zápis u pracovního místa. Karta je nástroj pro rozhodnutí, ne vstupenka do klubu lidí, kteří mají rádi formuláře. Což je klub podezřele dobře organizovaný, ale pořád klub.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte kanonickou větu a důvod druhého použití.
+2. Minuta 2: popište druhou běžnou situaci.
+3. Minuta 3: ověřte najitelnost a rozhodnutelnost.
+4. Minuta 4: napište, jaká nová datová stopa nevznikla nebo vznikla.
+5. Minuta 5: vyberte jeden ze čtyř výsledků.
+6. Minuta 6: zapište lokální opravu, privacy-first závěr a návratový signál.
+
+Když workshop začne řešit obchodní strategii, kvalitu leadů nebo novou podobu formuláře, zastavte ho. To jsou legitimní témata, ale nepatří do druhého použití archivního minima. Zapište je jako samostatný podnět a tuto kontrolu uzavřete.
+
+### Checklist druhého běžného použití archivního minima
+
+- Otevíráme druhé použití kvůli reálné pracovní situaci, ne kvůli dojmu?
+- První použití bylo uzavřené jasným stavem?
+- Je druhá situace stejného typu jako původní rozhodnutí?
+- Našel člověk kanonickou větu bez staré historie?
+- Šlo podle ní rozhodnout bez mimořádné pomoci?
+- Nevznikla nová evidence, atribut, export, tracker ani pomocná tabulka?
+- Pokud vznikla datová stopa, má účel, vlastníka a konec?
+- Vybrali jsme jeden ze čtyř výsledků?
+- Pokud opravujeme kotvu, zůstává oprava u nejbližšího pracovního místa?
+- Pokud zpřesňujeme větu, měníme jen jednu hranici rozhodnutí?
+- Pokud vracíme pravidlo do lehkého revizního rytmu, má tento rytmus konec?
+- Je jasné, co zůstává zavřené i po druhém použití?
+- Končí zvláštní pozornost, pokud pravidlo potvrdilo přenositelnost?
+
+Druhé běžné použití archivního minima má potvrdit, že pravidlo už nepotřebuje doprovod. Pokud obstojí, nechte ho být. Pokud neobstojí, opravte nejbližší kotvu, zpřesněte větu nebo ho krátce vraťte do lehkého rytmu. Všechno ostatní je jen elegantně pojmenované rozšiřování práce.
+
 ## Pracovní log
 
+- 2026-07-08: Doplněna úvodní podkapitola o druhém běžném použití archivního minima: kdy ho otevřít, co sledovat, SaaS příklady, čtyři výsledky, privacy-first kontrola datové stopy, karta, mini workshop a checklist.
 - 2026-07-08: Doplněna úvodní podkapitola o uzavření prvního běžného použití archivního minima: čtyři uzavírací stavy, SaaS příklady, privacy-first rozdělení poznatku a dat, karta, mini workshop a checklist.
 - 2026-07-08: Doplněna úvodní podkapitola o prvním běžném použití archivního minima: ověření kanonické věty bez původní historie, čtyři výsledky použití, SaaS příklad, privacy-first kontrola nové evidence, karta, mini workshop a checklist.
 - 2026-07-08: Doplněna úvodní podkapitola o převodu pasivního standardu do archivního minima: podmínky archivace, SaaS příklad, rozdělení živého pracovního místa a historie, privacy-first archivace, karta, mini workshop a checklist.
