@@ -308633,8 +308633,197 @@ Když se během workshopu začne probírat širší strategie, vraťte se k prvn
 
 První návratový signál u pasivního standardu má být malý test reality. Ne oslava návratu starého projektu. Pokud signál nestačí, standard zůstává klidný. Pokud stačí, otevřete jen nejmenší potřebný kus. Tak se z pasivního standardu nestane ani dogma, ani věčně rozdělaná věc.
 
+## Uzavření prvního návratového signálu u pasivního standardu
+
+První návratový signál nestačí jen zachytit. Musí se také zavřít. Jinak se z pasivního standardu stane podivný mezistav: už není úplně klidný, ale ještě nikdo neřekl, jestli se opravdu změnil. Tým pak začne kolem pravidla chodit opatrněji, přidá malé výjimky, nechá někde pomocnou poznámku a po měsíci se diví, proč se jednoduchá věta zase chová jako mini proces.
+
+Uzavření má odpovědět na tři otázky:
+
+```text
+Co jsme se ze signálu opravdu naučili?
+
+Co se mění v pasivním standardu nebo jeho pracovním místě?
+
+Co po uzavření přestáváme sledovat, sbírat nebo vysvětlovat?
+```
+
+Pokud na ně neumíte odpovědět krátce, návrat ještě není uzavřený. Možná chybí důkaz, možná se otevřelo jiné téma, nebo se malý signál nenápadně rozlil do strategie. To se stává. Jen tomu neříkejte hotovo, protože hotovo má v provozu zvláštní vlastnost: lidé mu věří.
+
+Dobrá uzavírací věta může znít:
+
+```text
+První návratový signál uzavíráme jako lokální zpřesnění partnerské instrukce; obecný formulář, povinný rozpočet, scoring a nová evidence zůstávají zavřené.
+```
+
+V jedné větě je výsledek, rozsah i datová hranice. Člověk, který přijde později, nemusí číst celou historii. Ví, že signál nebyl ignorovaný, ale ani nepřepsal celý standard.
+
+### Čtyři uzavírací stavy
+
+Po prvním návratovém signálu vyberte jeden ze čtyř stavů:
+
+- Vrátit do klidu: signál byl slabý, jednorázový nebo vyřešený dohledáním existující věty.
+- Zapsat lokální zpřesnění: standard platí, ale jedno pracovní místo potřebuje lepší formulaci, odkaz nebo příklad.
+- Otevřít omezený návrat: signál potvrdil změnu v konkrétním segmentu, kanálu nebo pracovním kroku.
+- Oddělit nové téma: podnět vypadal jako návrat standardu, ale ve skutečnosti míří jinam.
+
+Stav `vrátit do klidu` používejte bez studu. Ne každý signál si zaslouží práci. Pokud člověk standard nakonec použil správně, jen ho chvíli hledal, může stačit doplnit odkaz nebo poznámku do běžného místa. Pokud ani to není potřeba, napište, že standard zůstává beze změny a další sledování nevzniká.
+
+Stav `zapsat lokální zpřesnění` je vhodný, když chyba nevznikla v rozhodnutí, ale v jeho použití. Třeba partnerská instrukce neříkala, kde najít volitelnou otázku k rozpočtu. Neotevírejte kvůli tomu celý formulář. Dopište jednu větu do partnerského postupu a k pasivnímu standardu přidejte jen odkaz, že lokální zpřesnění existuje.
+
+Stav `otevřít omezený návrat` vyžaduje jasnou hranici. Napište, kterého segmentu, kanálu, šablony nebo kroku se týká. Otevřený návrat nesmí znamenat "uvidíme všude". Pokud se signál objevil v partnerském kanálu, návrat začíná v partnerském kanálu. Tečka. Ano, i když někdo ve schůzce řekne kouzelné zaklínadlo "systémově". Kouzelné slovo z toho systémový problém ještě neudělá.
+
+Stav `oddělit nové téma` chrání starý standard před zneužitím. Například se ukáže, že problém není rozpočet v prvním kontaktu, ale nejasná nabídka partnerské samoobsluhy. Pak nepište návrat k rozpočtu. Uzavřete signál jako nesouvisející a založte nové téma s vlastní otázkou.
+
+### Praktický SaaS příklad
+
+Pasivní standard:
+
+```text
+Rozpočet se v prvním kontaktu nesbírá povinně. Volitelně se na něj ptáme až tehdy, když bez něj nejde domluvit další konkrétní krok.
+```
+
+Návratový signál:
+
+```text
+Dvě partnerské poptávky nešly správně nasměrovat, protože partner nevěděl, jestli se má zeptat na rámcový rozpočet v odpovědi, nebo kontakt předat rovnou.
+```
+
+Krátké ověření ukáže, že obecné poptávky problém nemají. Drhne jen partnerská instrukce, která neříká, kdy použít volitelnou otázku. Uzavření proto nemá měnit formulář.
+
+```text
+Uzavírací stav:
+Zapsat lokální zpřesnění.
+
+Co měníme:
+Do partnerské instrukce doplňujeme větu: "Pokud bez rámcového rozpočtu nejde doporučit další krok, zeptejte se na rozpětí v odpovědi; veřejný formulář kvůli tomu neměňte."
+
+Co zůstává zavřené:
+Povinné pole pro rozpočet, automatický lead scoring, nový CRM atribut a samostatný export partnerských výjimek.
+
+Privacy-first závěr:
+Nepřenášíme konkrétní částky ani zákaznické detaily do rozhodovací karty. Stačí zobecněný závěr, že partnerská instrukce potřebovala lokální větu.
+```
+
+Tady je důležité, že tým uznal signál a zároveň ho nepřefoukl. Výsledek se propíše tam, kde člověk příště pracuje. Pasivní standard zůstává pasivní, jen má přesnější lokální oporu.
+
+Kdyby se později stejný problém objevil i mimo partnerský kanál, vznikl by nový návratový signál. Ale to je budoucí práce s vlastním důkazem, ne důvod preventivně rozšířit dnešní změnu.
+
+### Co po uzavření uklidit
+
+První návratový signál často po sobě nechá malé stopy. Některé jsou užitečné jen během rozhodování:
+
+- dočasná poznámka v dokumentu,
+- ruční seznam příkladů,
+- interní komentář u zákaznického vlákna,
+- export poptávek pro rychlé porovnání,
+- štítek v CRM,
+- návrh textu v chatu nebo projektové kartě.
+
+Po uzavření se rozhodněte, co s nimi. Nenechávejte pomocnou stopu jen proto, že "by se mohla hodit". Pokud už výsledek existuje jako zobecněná věta v pracovním místě, většina podkladů splnila účel.
+
+Použijte jednoduché pravidlo:
+
+```text
+Do běžného provozu smí přejít jen to, co člověk potřebuje pro další správné rozhodnutí.
+```
+
+Všechno ostatní smažte, anonymizujte, slučte do zobecněného závěru nebo nechte v původním systému bez kopírování. Privacy-first provoz není jen o tom, že nepřidáte tracker. Je i o tom, že po malé debatě nezůstane pět míst, kde leží poloviční zákaznický kontext.
+
+### Privacy-first uzavření
+
+Při uzavření napište krátkou datovou větu:
+
+```text
+Po uzavření nezůstává žádná nová evidence; pracovní změna je pouze jedna věta v partnerské instrukci.
+```
+
+Nebo, pokud něco zůstává:
+
+```text
+Po uzavření zůstává pouze lokální příklad bez zákaznických detailů. Do CRM nepřidáváme nový atribut a pomocný přehled mažeme po propsání závěru.
+```
+
+Datová věta má být konkrétní. Slova jako "dbáme na soukromí" jsou hezká, ale provozně slabá. Lepší je napsat, že nevzniká nové pole, nový export, nový seznam výjimek, delší retence ani nový dodavatel. To už je věta, podle které se dá pracovat.
+
+Pokud uzavření otevírá omezený návrat, datová věta musí říct i konec dočasné evidence:
+
+```text
+Po dobu dalšího partnerského týdne počítáme jen počet situací, kdy bez rozpočtového rozpětí nejde doporučit další krok. Nesbíráme konkrétní částky do veřejného formuláře. Po kontrole přehled smažeme nebo převedeme do zobecněného rozhodnutí.
+```
+
+Codyho komentář: největší riziko prvního návratu není samotná změna. Je to provozní drobečková stopa po změně. Jedna poznámka tady, jeden export tam, jeden "dočasný" štítek, který přežije tři reorganizace. Pak se všichni diví, že privacy-first provoz vypadá jako půda po stěhování. Uklízet hned je nudné. Proto funguje.
+
+### Karta uzavření prvního návratového signálu
+
+```text
+Pasivní standard:
+
+Kanonické pracovní místo:
+
+Návratový signál:
+
+Co jsme ověřili:
+
+Uzavírací stav:
+- vrátit do klidu
+- zapsat lokální zpřesnění
+- otevřít omezený návrat
+- oddělit nové téma
+
+Jednovětý závěr:
+
+Co se mění v pracovním místě:
+
+Co zůstává zavřené:
+
+Jaká nová evidence nevzniká:
+
+Jaké dočasné stopy mažeme, anonymizujeme nebo slučujeme:
+
+Pokud pokračuje omezený návrat, kde končí:
+
+Kde je závěr uložený:
+
+Vlastník:
+
+Další návratový signál:
+Pouze pokud:
+```
+
+Karta má být krátká. Pokud uzavíráte slabý signál, vyplňte jen standard, signál, stav, jednovětý závěr a datovou větu. Plná karta má smysl až tehdy, když se opravdu mění pracovní místo nebo otevírá omezený návrat.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte pasivní standard a návratový signál.
+2. Minuta 2: napište, co se skutečně ověřilo.
+3. Minuta 3: vyberte jeden ze čtyř uzavíracích stavů.
+4. Minuta 4: napište jednovětý závěr a co zůstává zavřené.
+5. Minuta 5: rozhodněte, co se propíše do pracovního místa.
+6. Minuta 6: ukliďte datovou stopu a určete další návratový signál, pokud existuje.
+
+Když během šesti minut nejde vybrat uzavírací stav, signál ještě není připravený na uzavření. Zapište, co přesně chybí, a neotevírejte kvůli tomu širší práci. Chybějící důkaz není pozvánka k dalšímu sběru dat; je to důvod zmenšit otázku.
+
+### Checklist uzavření prvního návratového signálu
+
+- Víme, který pasivní standard se uzavírá?
+- Popsali jsme návratový signál bez přikrášlení?
+- Je jasné, co se opravdu ověřilo?
+- Vybrali jsme jeden uzavírací stav?
+- Máme jednovětý závěr, kterému porozumí člověk bez původní historie?
+- Je napsané, co se mění v pracovním místě?
+- Je výslovně uvedené, co zůstává zavřené?
+- Nepřidali jsme z návratu univerzální pravidlo bez univerzálního důkazu?
+- Uklidili jsme dočasné poznámky, exporty, štítky a příklady?
+- Je jasné, jaká nová evidence nevzniká?
+- Pokud pokračuje omezený návrat, má hranici, vlastníka a konec?
+- Je závěr uložený tam, kde se standard příště použije?
+- Má téma další návratový signál, nebo se vrací do klidu?
+
+Uzavření prvního návratového signálu má vrátit standardu klid nebo mu dát přesnou malou změnu. Nic víc. Když signál nestačil, nechte pravidlo být. Když stačil, upravte nejbližší pracovní místo. A když se ukázalo nové téma, oddělte ho čistě. Pasivní standard pak zůstává užitečný: připravený reagovat na realitu, ale odolný proti každému šumu, který se chce tvářit jako strategie.
+
 ## Pracovní log
 
+- 2026-07-08: Doplněna úvodní podkapitola o uzavření prvního návratového signálu u pasivního standardu: čtyři uzavírací stavy, praktický SaaS příklad, úklid dočasných stop, privacy-first datová věta, karta, mini workshop a checklist.
 - 2026-07-08: Doplněna úvodní podkapitola o prvním návratovém signálu u pasivního standardu: rozlišení skutečného signálu od podnětu, čtyři první reakce, praktický SaaS příklad, privacy-first kontrola nové evidence, karta, mini workshop a checklist.
 - 2026-07-07: Doplněna úvodní podkapitola o uzavření druhého běžného použití pasivního standardu: tři uzavírací stavy, praktický SaaS příklad, ukončení mimořádné péče, privacy-first nepřidávání evidence, karta, mini workshop a checklist.
 - 2026-07-07: Doplněna úvodní podkapitola o druhém běžném použití pasivního standardu: přenositelnost bez původní historie, poslední lokální zpřesnění, oddělení výjimky, privacy-first nepřidávání evidence, karta, mini workshop a checklist.
