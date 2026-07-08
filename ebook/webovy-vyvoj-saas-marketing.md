@@ -312769,8 +312769,191 @@ Pokud workshop potřebuje víc než šest minut, zkontrolujte, jestli neřešít
 
 Druhý běžný návrat po archivní revizi má archivní minimum buď pustit do klidu, nebo ukázat jednu přesnou slabinu. Oba výsledky jsou užitečné. Co užitečné není: vyrábět třetí kontrolu ze zvyku, rozšiřovat archiv o další vrstvu opatrnosti, nebo přidávat data jen proto, že se tým bojí zapomenout. Dobře napsané minimum má přežít bez hlídače. Když přežije podruhé, dejte mu pokoj.
 
+## Uzavření druhého běžného návratu po archivní revizi
+
+Uzavření druhého běžného návratu je okamžik, kdy tým přestane kolem archivního minima chodit po špičkách. Buď se ukázalo, že pravidlo opravdu funguje jako malá pasivní kotva, nebo se ukázalo, že potřebuje přesnou opravu. V obou případech má uzavření zabránit tomu, aby z druhého návratu vznikla další nekonečná péče.
+
+Největší riziko je nenápadné: druhý návrat dopadne dobře, ale tým si stejně naplánuje další kontrolu, nechá si pomocnou tabulku, přidá další poznámku nebo začne sbírat nový signál "pro jistotu". Tím se archivní minimum vrací zpět do aktivního provozu. Ne proto, že by ho práce potřebovala, ale proto, že se lidem těžko věří tichému pravidlu. Ano, tichá pravidla nejsou dramatická. Ale právě proto jsou levná na údržbu.
+
+Uzavírací otázka zní:
+
+```text
+Co přesně po druhém návratu končí, co zůstává jako běžná kotva a jaký nový signál by musel přijít, aby se téma znovu otevřelo?
+```
+
+Pokud na ni neumíte odpovědět jednou větou, druhý návrat pravděpodobně není uzavřený. Buď jste nechali viset dočasnou stopu, nebo se do archivního minima přimíchalo nové téma.
+
+### Čtyři uzavírací stavy
+
+Po druhém běžném návratu použijte jeden ze čtyř stavů:
+
+- Stabilní archivní minimum: pravidlo obstálo podruhé a další kontrola nevzniká.
+- Uzavřená lokální oprava: drobná oprava z prvního návratu se potvrdila a stává se běžnou kotvou.
+- Poslední přesné dočištění: opakovaná slabina má jasné lokální řešení a po něm se plánuje jen jedno ověření při přirozeném použití.
+- Nové téma mimo archiv: druhý návrat ukázal nový vzor, který se odděluje od původního archivního minima.
+
+`Stabilní archivní minimum` je nejčistší konec. Zapište, že pravidlo obstálo bez čerstvé paměti, bez další opravy a bez nové datové stopy. Nezakládejte třetí návrat. Pokud se téma někdy vrátí, musí přijít nový návratový signál, ne jen pocit, že by se hodilo zkontrolovat staré rozhodnutí.
+
+`Uzavřená lokální oprava` znamená, že poslední drobná úprava opravdu pomohla. Typicky šlo o odkaz v checklistu, zpřesněnou větu, lepší název položky nebo připojení pravidla k místu, kde se práce skutečně děje. Dočasný komentář smažte, finální kotvu ponechte a původní revizní kartu zavřete.
+
+`Poslední přesné dočištění` použijte opatrně. Je vhodné jen tehdy, když opakovaná slabina má malé a jasné místo opravy. Například věta je najitelná, ale neříká dost jasně, pro jaký typ poptávky platí. V takovém případě neoprašujte celou historii. Upravte jednu větu, určete jedno přirozené ověření a zapište, že širší rozsah zůstává zavřený.
+
+`Nové téma mimo archiv` je správný stav, když druhý návrat už nemluví o původní hranici. Původní archivní minimum nechte platit pro starou otázku a nové téma otevřete jen tehdy, když má vlastní pracovní místo, vlastní důkaz a vlastní stop podmínku. Archiv nemá být hromada přilepených výjimek.
+
+### Praktický SaaS příklad
+
+Stav před uzavřením:
+
+```text
+Archivní minimum:
+Rozpočet u relevantní poptávky nezjišťujeme povinným polem ve formuláři. Pokud bez něj nejde navrhnout další krok, zeptáme se volitelně v potvrzovacím e-mailu.
+
+První návrat:
+Obchodník pravidlo nenašel v obchodním checklistu.
+
+Lokální oprava:
+Do checklistu byl přidán krátký odkaz na kanonickou větu.
+
+Druhý návrat:
+Jiný člověk odkaz našel, použil větu a rozhodl bez otevírání staré revize.
+```
+
+Uzavření:
+
+```text
+Uzavírací stav:
+Uzavřená lokální oprava.
+
+Jednovětá stopa:
+Druhý běžný návrat potvrdil, že odkaz v obchodním checklistu stačí; pravidlo o rozpočtu necháváme jako archivní minimum v pasivním provozu a další kontrolu neplánujeme bez nového návratového signálu.
+
+Co zůstává:
+Krátký odkaz v obchodním checklistu a kanonická věta u archivního minima.
+
+Co končí:
+Dočasný komentář z revizní karty a mimořádná pozornost po prvním návratu.
+
+Co zůstává zavřené:
+Povinné pole pro rozpočet, CRM atribut, lead scoring, nový export a přepis celého poptávkového formuláře.
+```
+
+Alternativní uzavření při nové slabině:
+
+```text
+Uzavírací stav:
+Poslední přesné dočištění.
+
+Opakovaná slabina:
+Lidé pravidlo najdou, ale nejsou si jistí, co znamená "relevantní poptávka".
+
+Nejmenší oprava:
+Kanonická věta dostane negativní příklad: "Nepoužívejte u prvního neurčitého kontaktu, kde ještě neznáme cíl ani rozhodovací situaci."
+
+Ověření:
+Při dalším přirozeném použití stačí ověřit, zda negativní příklad zabránil zbytečné otázce na rozpočet.
+```
+
+Všimněte si, že ani druhá varianta neotevírá nový scoring, formulář ani obchodní metodiku. Opravuje jen hranu, která se opravdu ukázala. To je rozdíl mezi údržbou pravidla a projektem, který se tváří jako drobná poznámka.
+
+### Privacy-first uzavření
+
+Po druhém návratu udělejte malý úklid datové stopy. Nejde jen o osobní údaje zákazníků. Datovou stopou je i dočasná tabulka, screenshot, interní komentář s příkladem, kopie e-mailu, export z CRM nebo poznámka, která zbytečně uchovává detail konkrétní situace.
+
+Použijte čtyři věty:
+
+```text
+Pro rozhodnutí dál potřebujeme:
+
+Pro rozhodnutí už nepotřebujeme:
+
+Proto ponecháváme:
+
+Proto mažeme nebo nepřenášíme:
+```
+
+Příklad:
+
+```text
+Pro rozhodnutí dál potřebujeme:
+Krátkou kanonickou větu a odkaz v obchodním checklistu.
+
+Pro rozhodnutí už nepotřebujeme:
+Komentář s konkrétní zákaznickou poptávkou, který vznikl při prvním návratu.
+
+Proto ponecháváme:
+Obecnou formulaci pravidla bez zákaznických detailů.
+
+Proto mažeme nebo nepřenášíme:
+Dočasný komentář, pracovní screenshot a pomocnou poznámku z revizní karty.
+```
+
+Tím archivní minimum zůstane opravdu minimem. Nejen rozsahem textu, ale i množstvím stop, které po sobě nechává. Codyho komentář: privacy-first provoz často nestojí na velkých právních rozhodnutích, ale na nudném mazání malých zbytků. Nudné? Ano. Užitečné? Bohužel taky ano.
+
+### Karta uzavření druhého návratu po archivní revizi
+
+```text
+Archivní minimum:
+
+Druhý běžný návrat ukázal:
+
+Uzavírací stav:
+- stabilní archivní minimum
+- uzavřená lokální oprava
+- poslední přesné dočištění
+- nové téma mimo archiv
+
+Jednovětá stopa:
+
+Co zůstává v běžném pracovním místě:
+
+Co končí jako mimořádná péče:
+
+Co se maže nebo nepřenáší:
+
+Co zůstává výslovně zavřené:
+
+Jaká data, pole, exporty, trackery nebo kopie dál nevznikají:
+
+Nový návratový signál, pokud existuje:
+
+Pokud vzniklo nové téma, jeho samostatná pracovní otázka:
+
+Kde je uzavření uložené:
+
+Vlastník:
+```
+
+Kartu nevyplňujte mechanicky pokaždé. Pokud je stav jasný a bez opravy, stačí jednovětá stopa u pracovního místa. Plná karta má smysl tehdy, když se něco maže, dočišťuje, nebo odděluje jako nové téma.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte jednou větou výsledek druhého návratu.
+2. Minuta 2: vyberte jeden uzavírací stav.
+3. Minuta 3: určete, co zůstává jako běžná kotva.
+4. Minuta 4: určete, co končí jako mimořádná péče.
+5. Minuta 5: smažte nebo pojmenujte dočasné stopy, které už nemají hodnotu.
+6. Minuta 6: napište jednovětou stopu a návratový signál, pokud nějaký opravdu existuje.
+
+Pokud se workshop začne točit kolem toho, jak by se dal zlepšit celý obchodní proces, zastavte ho. To může být legitimní téma, ale není to uzavření druhého návratu. Uzavření má zavřít konkrétní smyčku, ne otevřít novou poradu v převleku.
+
+### Checklist uzavření druhého návratu
+
+- Vybrali jsme jeden uzavírací stav?
+- Je jasné, zda archivní minimum zůstává pasivní, dostává poslední lokální opravu, nebo se odděluje nové téma?
+- Máme jednovětou stopu uloženou u pracovního místa?
+- Skončila mimořádná péče po prvním nebo druhém návratu?
+- Zůstává jen běžná kotva, ne pomocná vrstva navíc?
+- Smazali jsme nebo nepřenesli dočasné komentáře, screenshoty, kopie a pracovní exporty bez další hodnoty?
+- Zůstává původní široký rozsah výslovně zavřený?
+- Pokud existuje další návratový signál, je konkrétní a rozpoznatelný i bez staré historie?
+- Pokud vzniklo nové téma, má vlastní úzkou otázku mimo archivní minimum?
+- Nepřibylo nové pole, tracker, CRM atribut, scoring, export ani evidence jen kvůli pocitu jistoty?
+
+Uzavření druhého běžného návratu je malé, ale důležité gesto. Říká: pravidlo jsme ověřili v reálné práci, nezvětšili jsme ho bez důvodu a uklidili jsme po sobě. To je přesně typ provozní disciplíny, díky které web, SaaS i marketing časem nezarostou vlastními poznámkami.
+
 ## Pracovní log
 
+- 2026-07-08: Doplněna úvodní podkapitola o uzavření druhého běžného návratu po archivní revizi: čtyři uzavírací stavy, SaaS příklady, privacy-first úklid dočasných stop, karta, mini workshop a checklist.
 - 2026-07-08: Doplněna úvodní podkapitola o druhém běžném návratu po archivní revizi: kdy ho otevřít, čtyři výsledky, SaaS příklady, privacy-first úklid dočasných stop, karta, mini workshop a checklist.
 - 2026-07-08: Doplněna úvodní podkapitola o uzavření prvního běžného návratu po archivní revizi: čtyři uzavírací stavy, SaaS příklady, privacy-first uzavření nové datové stopy, karta, mini workshop a checklist.
 - 2026-07-08: Doplněna úvodní podkapitola o prvním běžném návratu po archivní revizi: ověření kanonické věty bez staré historie, čtyři výsledky návratu, SaaS příklady, privacy-first kontrola nové datové stopy, karta, mini workshop a checklist.
