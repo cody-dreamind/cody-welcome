@@ -310143,8 +310143,207 @@ Pokud se ve čtvrté minutě objeví víc než tři okraje mimo rozsah, nepřev�
 
 Převod do archivního minima je hotový ve chvíli, kdy tým umí pravidlo použít bez čerstvé paměti a bez nové evidence. Nejde o konec pravidla. Jde o konec jeho zvláštní péče. A to je přesně bod, kdy se dobré produktové pravidlo stává součástí provozu místo další položky na seznamu věcí, které "musíme někdy zkontrolovat".
 
+## První běžné použití archivního minima
+
+Archivní minimum se neověří tím, že ho někdo hezky zformuloval. Ověří se až ve chvíli, kdy ho další člověk použije v normální práci bez toho, aby musel otevírat starou kartu, dohledávat kontext v logu nebo se ptát původního vlastníka, co tím básník myslel. První běžné použití archivního minima je proto malý provozní test: zůstala živá věta dostatečně jasná, nebo jsme archivovali tak důkladně, až jsme pohřbili i použitelnost?
+
+Začněte jednoduchou větou:
+
+```text
+Archivní minimum teď používáme v této běžné situaci:
+```
+
+Za ni napište konkrétní pracovní okamžik:
+
+```text
+Archivní minimum teď používáme v této běžné situaci:
+Obchodník upravuje odpověď na novou SaaS poptávku a rozhoduje, jestli má žádat rozpočet hned ve formuláři, nebo ho nechat až do konkrétního obchodního vlákna.
+```
+
+Tím se test udrží malý. Neotevíráte historii rozhodnutí o formuláři, scoringu ani celé kvalifikaci leadů. Ověřujete jen to, jestli jedna archivovaná pracovní věta pomáhá rozhodnout v místě, kde má žít.
+
+### Tři otázky použití
+
+Při prvním použití archivního minima položte jen tři otázky:
+
+- Našel člověk kanonickou větu tam, kde pracoval?
+- Šlo podle ní rozhodnout bez původní historie?
+- Nevznikla kvůli použití nová evidence, kontrola nebo pomocná tabulka?
+
+První otázka chrání umístění. Pokud věta patří k obchodní šabloně, má být u šablony. Pokud patří k formuláři, má být u popisu formuláře nebo u rozhodovací poznámky pro jeho úpravy. Archivní minimum není použitelné, pokud je schované jen v dlouhém changelogu. Changelog je dobrý pro paměť, špatný jako pracovní plocha.
+
+Druhá otázka chrání samostatnost. Věta má říct, co platí teď, ne vyžadovat znalost všech důvodů, proč to tak vzniklo. "Rozpočet ve veřejném formuláři nesbíráme; obchodní kontext řešíme až ve vlákně, kde je jasný další krok" je pravidlo. "Viz rozhodnutí z června o rozpočtech" je pozvánka do archeologie.
+
+Třetí otázka chrání privacy-first hodnotu. Archivní minimum má ukončit zvláštní péči, ne založit její drobnou náhradu. Pokud první použití vyrobí novou tabulku výjimek, ruční štítek nebo kopii zákaznické zprávy, archivace se začíná rozpadat. Vzniká nová evidence místo lepšího pracovního pravidla.
+
+### Čtyři výsledky prvního použití
+
+První běžné použití archivního minima může skončit čtyřmi způsoby:
+
+- Funguje samostatně: věta byla najitelná, rozhodnutí bylo jasné a žádná nová evidence nevznikla.
+- Chybí pracovní kotva: věta je dobrá, ale nebyla u místa, kde se pracovalo.
+- Věta je moc obecná: člověk ji našel, ale stejně nevěděl, co má udělat.
+- Archivace byla předčasná: použití znovu otevřelo historii, výjimky nebo novou datovou stopu.
+
+U samostatného fungování nic nerozšiřujte. Zapište krátké potvrzení a nechte pravidlo být. Úspěch archivního minima vypadá nenápadně: člověk větu použil, rozhodl a systém se nezvětšil. To je přesně pointa.
+
+U chybějící pracovní kotvy přesuňte větu blíž k práci. Nepište novou dokumentaci. Stačí odkaz u šablony, krátká poznámka u formuláře nebo jedna řádka v checklistu. Problém nebyl v pravidle, ale v tom, kde čekalo na použití.
+
+U moc obecné věty ji přepište do rozhodovacího tvaru. Místo "pracujeme střídmě s rozpočtem" napište "rozpočet nedáváme do veřejného formuláře; u relevantní poptávky se na něj ptáme volitelně až v obchodním e-mailu, pokud bez něj nejde navrhnout další krok". Ano, je to méně poetické. Produktová pravidla ale nemusí vyhrávat literární cenu, mají snižovat počet zbytečných debat.
+
+U předčasné archivace pravidlo nevylepšujte potichu. Vraťte ho z archivního minima do lehkého revizního rytmu nebo otevřete konkrétní návratový signál. Pokud se při prvním použití musí otevřít staré výjimky, pravidlo ještě nebylo zralé na archiv.
+
+### Praktický SaaS příklad
+
+Archivní minimum:
+
+```text
+Kanonická věta:
+Rozpočet ve veřejném formuláři nesbíráme; pokud je potřeba pro další krok, obchod se na něj ptá volitelně v konkrétním e-mailovém vlákně.
+
+Rozsah platnosti:
+Relevantní B2B SaaS poptávky, kde první formulář slouží hlavně k pochopení cíle projektu.
+
+Návratový signál:
+Tři relevantní poptávky za sebou nejde kvalifikovat bez strukturovaného rozpočtového údaje.
+```
+
+První použití:
+
+```text
+Situace:
+Přišla relevantní SaaS poptávka bez rozpočtu.
+
+Použití:
+Obchodník našel větu u potvrzovací šablony, neposílal zákazníka zpět do formuláře a položil volitelnou otázku v odpovědi.
+
+Výsledek:
+Další krok šel navrhnout bez nového formulářového pole, CRM atributu nebo exportu.
+
+Závěr:
+Archivní minimum funguje samostatně. Neotevíráme žádnou další kontrolu.
+```
+
+Slabší varianta:
+
+```text
+Situace:
+Přišla relevantní SaaS poptávka bez rozpočtu.
+
+Problém:
+Věta byla jen v archivní kartě, ne u potvrzovací šablony.
+
+Lokální oprava:
+Přenášíme stejnou větu k potvrzovací šabloně.
+
+Co neotevíráme:
+Revizi formuláře, nové CRM pole, scoring ani další review rytmus.
+```
+
+Obě varianty jsou v pořádku, pokud zůstanou malé. První potvrzuje, že pravidlo už je součástí práce. Druhá opravuje místo, kde pravidlo nebylo dost blízko. Ani jedna nepotřebuje nový projekt.
+
+### Privacy-first kontrola
+
+První použití archivního minima je poslední chvíle, kdy se může stará pracovní stopa nenápadně vrátit do provozu. Tým si řekne: "Jen si k tomu dáme pomocný sloupec, kdyby se to opakovalo." Pokud ten sloupec nemá rozhodovací otázku, konec a vlastníka, právě jste archivované pravidlo proměnili v novou evidenci. Gratuluji, archiv se vrátil s převlekem a malým knírkem.
+
+Použijte krátkou privacy-first větu:
+
+```text
+Po prvním použití archivního minima nevzniká:
+```
+
+Příklad:
+
+```text
+Po prvním použití archivního minima nevzniká:
+Nový CRM atribut pro rozpočet, pomocná tabulka výjimek ani kopie zákaznické odpovědi mimo obchodní vlákno.
+```
+
+Pokud něco přece jen vzniklo, rozhodněte hned:
+
+```text
+Nová stopa:
+
+Účel:
+
+Kdy končí:
+
+Kdo ji smaže nebo zobecní:
+```
+
+Bez těchto čtyř řádků novou stopu nezakládejte. Privacy-first provoz se pozná podle toho, že i malé "pro jistotu" musí projít otázkou účelu.
+
+### Karta prvního použití archivního minima
+
+```text
+Archivní minimum:
+
+Kanonická věta:
+
+Běžná situace použití:
+
+Kde měl člověk větu najít:
+
+Našel ji?
+- ano
+- ne
+- jen s pomocí
+
+Šlo podle ní rozhodnout bez historie?
+- ano
+- ne, věta je moc obecná
+- ne, chybí okraj rozsahu
+
+Co se opravdu stalo:
+
+Co zůstalo zavřené:
+
+Vznikla nová evidence, pole, export, tracker nebo pomocná tabulka?
+
+Privacy-first věta:
+Po prvním použití nevzniká:
+
+Výsledek:
+- funguje samostatně
+- doplnit pracovní kotvu
+- zpřesnit větu
+- vrátit z archivu do lehkého revizního rytmu
+
+Vlastník pracovního místa:
+
+Kde je závěr uložený:
+```
+
+Karta se má použít jednou, ne při každém dalším použití. Pokud po prvním běžném použití začnete sledovat každé další setkání s archivním minimem, archivace se nepovedla. Pravidlo má žít v práci, ne v monitorovacím režimu.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: pojmenujte běžnou situaci použití.
+2. Minuta 2: ověřte, kde byla kanonická věta dostupná.
+3. Minuta 3: řekněte, jestli podle ní šlo rozhodnout bez historie.
+4. Minuta 4: napište, co zůstalo zavřené.
+5. Minuta 5: zkontrolujte, zda nevznikla nová datová stopa.
+6. Minuta 6: vyberte jeden ze čtyř výsledků.
+
+Když se během workshopu objeví potřeba číst původní dlouhou historii, berte to jako signál. Buď věta není dost samostatná, nebo archivace přišla moc brzy. V obou případech opravte nejbližší příčinu. Nezachraňujte špatné archivní minimum tím, že kolem něj postavíte další proces.
+
+### Checklist prvního použití archivního minima
+
+- Testujeme konkrétní běžnou situaci, ne obecnou vzpomínku na téma?
+- Byla kanonická věta dostupná v pracovním místě?
+- Šlo podle ní rozhodnout bez původní karty a bez původního vlastníka?
+- Je jasné, co zůstává mimo rozsah?
+- Nevznikla nová evidence jen proto, že se pravidlo použilo?
+- Pokud vznikla dočasná stopa, má účel, konec a vlastníka?
+- Případná oprava je lokální: kotva, věta nebo okraj rozsahu?
+- Víme, jestli pravidlo funguje samostatně, nebo se musí vrátit z archivu?
+- Zůstává privacy-first hranice viditelná i po přesunu pravidla do běžné práce?
+
+První běžné použití archivního minima má ukázat, jestli se pravidlo opravdu stalo součástí provozu. Když ano, nechte ho být. Když ne, opravte nejbližší větu nebo místo. A když se ukáže, že pravidlo bez historie neobstojí, vraťte ho do lehkého revizního rytmu. Archiv není odpadkový koš na nerozhodnuté věci. Archiv je místo pro pravidla, která už umí pracovat bez doprovodu.
+
 ## Pracovní log
 
+- 2026-07-08: Doplněna úvodní podkapitola o prvním běžném použití archivního minima: ověření kanonické věty bez původní historie, čtyři výsledky použití, SaaS příklad, privacy-first kontrola nové evidence, karta, mini workshop a checklist.
 - 2026-07-08: Doplněna úvodní podkapitola o převodu pasivního standardu do archivního minima: podmínky archivace, SaaS příklad, rozdělení živého pracovního místa a historie, privacy-first archivace, karta, mini workshop a checklist.
 - 2026-07-08: Doplněna úvodní podkapitola o uzavření dalšího přirozeného setkání s pasivním standardem: tři uzavírací věty, SaaS příklad, co po uzavření nevzniká, privacy-first uzavření, karta, mini workshop a checklist.
 - 2026-07-08: Doplněna úvodní podkapitola o dalším přirozeném setkání s pasivním standardem: rozlišení od plánované kontroly, tři výsledky, SaaS příklad, privacy-first hranice evidence, karta, mini workshop a checklist.
