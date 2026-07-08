@@ -310780,8 +310780,232 @@ Když workshop začne řešit obchodní strategii, kvalitu leadů nebo novou pod
 
 Druhé běžné použití archivního minima má potvrdit, že pravidlo už nepotřebuje doprovod. Pokud obstojí, nechte ho být. Pokud neobstojí, opravte nejbližší kotvu, zpřesněte větu nebo ho krátce vraťte do lehkého rytmu. Všechno ostatní je jen elegantně pojmenované rozšiřování práce.
 
+## Uzavření druhého běžného použití archivního minima
+
+Druhé běžné použití archivního minima se musí umět zavřít rychle. Jeho hodnota není v tom, že tým znovu prožije staré rozhodnutí. Hodnota je v jednoduchém zjištění: pravidlo buď funguje bez doprovodu, potřebuje jednu lokální úpravu, nebo dočasně nepatří v archivu. Jakmile závěr přeroste přes tuto hranici, už neuzavíráte archivní minimum. Otevíráte novou práci a měli byste ji tak pojmenovat.
+
+Začněte jednou uzavírací větou:
+
+```text
+Po druhém běžném použití archivního minima platí:
+```
+
+Dobrá věta obsahuje stav, pracovní místo a to, co nevzniká. Například:
+
+```text
+Po druhém běžném použití archivního minima platí: pravidlo o rozpočtu je přenositelné, zůstává u potvrzovací šablony a dál nevzniká pole ve formuláři, CRM atribut ani pomocná evidence rozpočtů.
+```
+
+To je celé. Nevyžaduje poradní román, diagram ani novou tabulku. Kdo přijde později, pochopí, co se rozhodlo, kde to najde a jaký rozsah zůstává zavřený.
+
+Codyho komentář: pokud po druhém použití pravidla píšete třetí stránku vysvětlení, pravidlo buď není dost dobré, nebo se tým bojí rozhodnout. Obojí se dá opravit. Další odstavec mlhy obvykle nepomůže, jen se tváří pracovně.
+
+### Čtyři uzavírací stavy
+
+Po druhém použití vyberte jeden ze čtyř stavů:
+
+- Potvrzené archivní minimum: pravidlo je najitelné, rozhodnutelné a datově střídmé.
+- Archivní minimum s lokální opravou: pravidlo je správné, ale jedna kotva nebo věta potřebuje drobné dočištění.
+- Návrat do lehkého rytmu: pravidlo pořád vyžaduje čerstvou kontrolu nebo u něj vznikají výjimky.
+- Přerámování na nové téma: druhé použití ukázalo, že nejde o staré pravidlo, ale o novou produktovou, obchodní nebo provozní otázku.
+
+Stav `potvrzené archivní minimum` znamená konec zvláštní pozornosti. Neplánujte třetí test, nepište další kontrolní termín a nepřidávejte skrytou poznámku "sledovat". Pravidlo zůstává v běžném pracovním místě a znovu se otevře pouze při návratovém signálu.
+
+Stav `archivní minimum s lokální opravou` má mít jednu změnu. Přesunout větu blíž k šabloně. Doplnit jednu hranici. Smazat starou kopii. Pokud opravujete víc než jedno místo, pravděpodobně už se nejedná o lokální opravu.
+
+Stav `návrat do lehkého rytmu` má mít jasný konec. Napište počet průchodů, datum nebo konkrétní situaci, po které se rozhodne znovu. Bez konce se z lehkého rytmu stane nenápadný nový proces.
+
+Stav `přerámování na nové téma` používejte, když druhé použití odkrylo jiný problém. Třeba že obchod nemá jasnou kvalifikaci poptávek, support používá různé odpovědi nebo produktová změna přepsala původní předpoklad. V takovém případě staré archivní minimum nezatěžujte novým rozsahem. Uzavřete ho nebo pozastavte a otevřete novou pracovní otázku.
+
+### Praktický SaaS příklad
+
+Archivní minimum říká:
+
+```text
+Rozpočet nedáváme do veřejného formuláře. Pokud bez něj nejde navrhnout další krok, ptáme se volitelně v obchodním vlákně a odpověď nepřepisujeme do nového CRM atributu.
+```
+
+Druhé běžné použití proběhlo takto:
+
+```text
+Situace:
+Přišla další relevantní poptávka bez uvedeného rozpočtu.
+
+Použití:
+Obchodník našel kanonickou větu u potvrzovací šablony a odpověděl bez čtení původní rozhodovací karty.
+
+Datová stopa:
+Rozpočet se neuložil do formuláře, CRM atributu ani pomocné tabulky. Zákaznická odpověď zůstala pouze v obchodním vlákně.
+```
+
+Uzavření:
+
+```text
+Stav:
+Potvrzené archivní minimum.
+
+Jednovětý závěr:
+Pravidlo o rozpočtu je po druhém použití přenositelné, zůstává u potvrzovací šablony a neotevíráme formulář, CRM atribut, scoring ani nový review rytmus.
+
+Návratový signál:
+Téma otevřeme znovu pouze pokud dvě relevantní poptávky za sebou nepůjde kvalifikovat bez trvalé evidence rozpočtu.
+```
+
+Varianta s lokální opravou:
+
+```text
+Stav:
+Archivní minimum s lokální opravou.
+
+Zjištění:
+Obchodník větu našel, ale nebylo z ní jasné, že volitelná otázka patří pouze do obchodního vlákna.
+
+Oprava:
+Do kanonické věty doplnit "pouze v obchodním vlákně a pouze pro návrh dalšího kroku".
+
+Co zůstává zavřené:
+Formulář, CRM atribut, scoring, export i revize celé kvalifikace.
+```
+
+Varianta s návratem do lehkého rytmu:
+
+```text
+Stav:
+Návrat do lehkého rytmu.
+
+Zjištění:
+Tým znovu vytvořil pomocnou tabulku poptávek bez rozpočtu, aby měl přehled mimo CRM.
+
+Lehký rytmus:
+U dalších dvou relevantních poptávek ověřit, zda nejde o problém ve formulaci obchodní odpovědi.
+
+Privacy-first hranice:
+Tabulka se neponechává jako trvalá evidence. Pokud pro ověření vznikne dočasná poznámka, má vlastníka, účel a datum smazání.
+```
+
+Každá varianta drží stejnou disciplínu: závěr je menší než původní problém. Nezačíná přestavbou formuláře ani změnou obchodního procesu. Nejdřív zavírá přesně to, co druhé použití skutečně ukázalo.
+
+### Co propsat zpět
+
+Po uzavření druhého použití propsujte jen tři typy informací:
+
+- Kanonickou větu nebo její drobnou opravu.
+- Stav pravidla po druhém použití.
+- Návratový signál nebo jasné rozhodnutí, že další zvláštní kontrola není plánovaná.
+
+Nepropsujte zákaznické detaily, celé obchodní vlákno, historickou argumentaci ani interní debatu. Archivní minimum má být použitelné bez staré historie. Pokud do něj historii znovu nalijete, právě jste si vyrobili malý archiv v archivu. To je hezký důkaz, že lidé umí vynalézat složitost i tam, kde už byla uklizená.
+
+Praktický zápis u pracovního místa:
+
+```text
+Stav po druhém použití:
+Potvrzené archivní minimum. Věta zůstává u potvrzovací šablony. Další zvláštní kontrolu neplánujeme; návratový signál jsou dvě relevantní poptávky za sebou, které nejdou kvalifikovat bez trvalé evidence rozpočtu.
+```
+
+Pokud existuje lokální oprava, napište ji přímo do stejného místa:
+
+```text
+Lokální oprava po druhém použití:
+Do věty doplněno, že volitelný dotaz na rozpočet patří pouze do obchodního vlákna a pouze pro návrh dalšího kroku. Ostatní rozsah zůstává zavřený.
+```
+
+Tím se čtenář dostane k pravidlu i k poslednímu důležitému závěru bez procházení starých karet.
+
+### Privacy-first uzavření
+
+Uzavření druhého použití je poslední dobré místo pro úklid dočasných stop. Zkontrolujte hlavně, jestli během ověření nevzniklo něco, co už nemá důvod existovat:
+
+- dočasná tabulka,
+- screenshot formuláře nebo e-mailu,
+- kopie zákaznické odpovědi v poznámkách,
+- pomocný štítek v CRM,
+- export pro interní kontrolu,
+- komentář s osobními nebo obchodními detaily.
+
+Ke každé stopě napište jednu ze tří akcí:
+
+```text
+Ponechat, protože:
+
+Zobecnit na poznatek:
+
+Smazat do:
+```
+
+Většina stop by měla skončit ve druhé nebo třetí možnosti. Do pracovního pravidla patří obecný poznatek, ne konkrétní zákaznická situace. Pokud si tým musí nechat konkrétní detail, měl by zůstat v systému, kde má jasný účel, přístupová pravidla a běžnou retenci. Ne v nové pomocné vrstvě, kterou nikdo za měsíc nebude chtít vlastnit.
+
+Příklad privacy-first uzavření:
+
+```text
+Po uzavření druhého použití ponecháváme pouze kanonickou větu a stav pravidla. Dočasnou poznámku s konkrétní odpovědí zákazníka mažeme, protože poznatek je už zobecněný a obchodní vlákno zůstává jediným místem pro konkrétní komunikaci.
+```
+
+Tahle věta je malá, ale provozně silná. Říká, že soukromí není jen volba nástroje. Je to i zvyk nenechávat po sobě pomocné kopie dat, které už nepotřebujete.
+
+### Karta uzavření druhého použití archivního minima
+
+```text
+Archivní minimum:
+
+Kanonická věta po druhém použití:
+
+Druhá běžná situace:
+
+Vybraný uzavírací stav:
+- potvrzené archivní minimum
+- archivní minimum s lokální opravou
+- návrat do lehkého rytmu
+- přerámování na nové téma
+
+Jednovětý závěr:
+
+Lokální oprava, pokud existuje:
+
+Co se propsalo zpět do pracovního místa:
+
+Co zůstává výslovně zavřené:
+
+Dočasné datové stopy a jejich úklid:
+
+Návratový signál:
+
+Kde je závěr uložený:
+
+Vlastník:
+```
+
+Kartu nevyplňujte automaticky u každé drobnosti. Pokud je závěr čistý a pravidlo není rizikové, stačí jednovětá stopa u pracovního místa. Karta má smysl tam, kde pravidlo chrání důležité rozhodnutí, datovou střídmost nebo opakovanou práci více lidí.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte výsledek druhého použití.
+2. Minuta 2: vyberte jeden ze čtyř uzavíracích stavů.
+3. Minuta 3: napište jednovětý závěr.
+4. Minuta 4: určete, co se propsalo zpět a co zůstává zavřené.
+5. Minuta 5: projděte dočasné datové stopy a rozhodněte ponechat, zobecnit nebo smazat.
+6. Minuta 6: zapište návratový signál nebo ukončení zvláštní kontroly.
+
+Pokud se během workshopu objeví nové téma, nezpracovávejte ho ve stejné kartě. Dejte mu vlastní otázku. Uzavření druhého použití má zavřít ověření přenositelnosti, ne absorbovat všechno, co se zrovna připomnělo.
+
+### Checklist uzavření druhého použití archivního minima
+
+- Vybrali jsme jeden uzavírací stav?
+- Je jednovětý závěr srozumitelný bez čtení staré historie?
+- Je jasné, kde kanonická věta po druhém použití bydlí?
+- Pokud vznikla lokální oprava, dotýká se jen nejbližšího pracovního místa?
+- Pokud se pravidlo vrací do lehkého rytmu, má tento rytmus konec?
+- Pokud vzniklo nové téma, nepřilepili jsme ho ke starému archivnímu minimu?
+- Je zapsané, co zůstává výslovně zavřené?
+- Zkontrolovali jsme dočasné tabulky, screenshoty, exporty, CRM štítky a poznámky?
+- Zůstávají konkrétní zákaznické detaily pouze tam, kde mají původní účel a běžnou retenci?
+- Je návratový signál konkrétní a rozpoznatelný?
+- Pokud pravidlo obstálo, skončila zvláštní pozornost?
+
+Uzavřené druhé použití archivního minima má být tiché. Pravidlo se vrací do běžné práce, historie zůstává v archivu a tým si nenese další sledování jen proto, že jednou něco kontroloval. Když se později objeví skutečný návratový signál, bude mít čisté místo, ze kterého začít. Když se neobjeví, tím lépe. Dobré pravidlo pracuje nejvíc právě tehdy, když o něm nemusíte mluvit.
+
 ## Pracovní log
 
+- 2026-07-08: Doplněna úvodní podkapitola o uzavření druhého běžného použití archivního minima: čtyři uzavírací stavy, SaaS příklady, propsání zpět do pracovního místa, privacy-first úklid dočasných stop, karta, mini workshop a checklist.
 - 2026-07-08: Doplněna úvodní podkapitola o druhém běžném použití archivního minima: kdy ho otevřít, co sledovat, SaaS příklady, čtyři výsledky, privacy-first kontrola datové stopy, karta, mini workshop a checklist.
 - 2026-07-08: Doplněna úvodní podkapitola o uzavření prvního běžného použití archivního minima: čtyři uzavírací stavy, SaaS příklady, privacy-first rozdělení poznatku a dat, karta, mini workshop a checklist.
 - 2026-07-08: Doplněna úvodní podkapitola o prvním běžném použití archivního minima: ověření kanonické věty bez původní historie, čtyři výsledky použití, SaaS příklad, privacy-first kontrola nové evidence, karta, mini workshop a checklist.
