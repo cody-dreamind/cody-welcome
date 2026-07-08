@@ -309444,8 +309444,200 @@ Druhé běžné použití po uzavřeném návratovém signálu má pasivnímu st
 
 Po čistém druhém použití už neplánujte třetí kontrolu jen proto, že by vypadala pečlivě. Místo toho nechte u pracovního místa jednu větu: standard byl použit bez historie, bez lokální opravy a bez nové evidence. Další práce začíná až ve chvíli, kdy přijde nový návratový signál, ne když se v kalendáři objeví volné okénko pro další revizi.
 
+## Uzavření druhého běžného použití po uzavřeném návratovém signálu
+
+Druhé běžné použití po uzavřeném návratovém signálu uzavírejte rychle. Jeho úkol není najít další zlepšení. Jeho úkol je rozhodnout, jestli pasivní standard po návratu znovu unese obyčejnou práci bez doprovodné péče.
+
+Pracovní otázka zní:
+
+```text
+Můžeme po druhém běžném použití nechat pasivní standard zase v klidu, protože fungoval bez historie, bez nové evidence a bez další kontroly?
+```
+
+Pokud odpověď zní ano, uzavření má být krátké. Nechte jednu větu v kanonickém místě a zbytek smažte, zobecněte nebo nechte tam, kde přirozeně patří. Pokud odpověď zní ne, nerozšiřujte druhé použití do třetího. Vyberte jeden konkrétní následek: lokální opravu, nový návratový signál, nebo zastavení zbytečné péče.
+
+Codyho komentář: tohle je moment, kdy tým často začne vyrábět "ještě poslední kontrolu". Poslední kontrola je v pracovním prostředí něco jako poslední záložka v prohlížeči. Všichni víme, jak to dopadá. Zavřít, uložit jednu větu, jít dělat práci.
+
+### Čtyři uzavírací stavy
+
+Po druhém běžném použití vyberte jeden ze čtyř stavů:
+
+- Uzavřeno do pasivního klidu: standard fungoval i v druhé situaci a žádná další péče nevzniká.
+- Uzavřeno s lokální hranicí: standard platí, ale do jednoho pracovního místa se doplní drobná hranice.
+- Uzavřeno zastavením nové péče: druhé použití ukázalo spíš chuť měřit než skutečný problém.
+- Neuzavřeno, otevřen nový návratový signál: druhé použití odhalilo změnu, kterou původní standard nepokrývá.
+
+`Uzavřeno do pasivního klidu` je nejlepší výsledek:
+
+```text
+Druhé běžné použití potvrdilo přenos pasivního standardu. Standard zůstává v partnerské šabloně, další kontrola nevzniká a dočasná poznámka se maže.
+```
+
+Po takovém závěru už nepřidávejte kontrolní termín. Kdyby měl pasivní standard kontrolní termín po každém použití, nebyl by pasivní. Byl by to pravidelný meeting s maskou.
+
+`Uzavřeno s lokální hranicí` použijte jen tehdy, když stačí jedna přesná věta:
+
+```text
+Do partnerské šablony doplňujeme hranici: na rozpočet se ptáme ručně pouze tehdy, když bez něj nejde doporučit konkrétní další krok. Veřejný formulář, CRM pole a scoring zůstávají beze změny.
+```
+
+Lokální hranice nesmí potichu otevřít širší téma. Jestli potřebujete měnit formulář, CRM, onboarding a sales skript, už nejde o lokální hranici. To je nová iterace a musí mít vlastní pracovní otázku.
+
+`Uzavřeno zastavením nové péče` je zdravý stav, když druhé použití proběhlo v pořádku, ale tým se bojí pustit kontrolu:
+
+```text
+Druhé použití neotevírá nový partnerský monitoring. Nejistota vznikla z nedostatku čerstvé paměti, ne z chyby standardu. Další návrat vznikne jen při konkrétním selhání v práci.
+```
+
+`Neuzavřeno, otevřen nový návratový signál` patří jen na reálnou změnu. Například partner posílá nový typ poptávek, kde bez rozpočtu nejde rozlišit konzultaci od dlouhodobého vývoje. Pak napište nový návratový signál a původní standard nechte platit tam, kde pořád funguje.
+
+### Praktický SaaS příklad
+
+Pasivní standard říká:
+
+```text
+Rozpočet se ve veřejném formuláři nevyžaduje. U partnerských poptávek se na něj ptáme až v ruční odpovědi, pokud bez něj nejde doporučit další konkrétní krok.
+```
+
+První běžné použití potvrdilo, že obchodník najde pravidlo v šabloně. Druhé běžné použití ověřilo přenos na jiného člověka. Ten odpověděl na partnerskou poptávku bez čtení starého vlákna, neotevřel formulář, nepřidal CRM pole a použil ruční otázku jen v odpovědi.
+
+Čisté uzavření:
+
+```text
+Pasivní standard obstál i při druhém běžném použití jiným člověkem. Partnerská šablona stačí, veřejný formulář zůstává beze změny, nová evidence nevzniká a další kontrola není plánovaná.
+```
+
+Slabší uzavření s lokální hranicí:
+
+```text
+Druhý člověk použil standard správně, ale nebylo jasné, zda věta platí i pro malé partnerské poptávky. Do šablony doplňujeme jednu hranici: pravidlo platí pro všechny partnerské poptávky, kde bez rozpočtu nejde doporučit konkrétní další krok.
+```
+
+Špatné uzavření:
+
+```text
+Zavedeme měsíční přehled všech partnerských poptávek, abychom viděli, jestli se někdo na rozpočet ptá moc často.
+```
+
+To není uzavření. To je nový dohled bez rozhodovací otázky. Pokud opravdu potřebujete měřit frekvenci dotazů na rozpočet, napište novou pracovní otázku: co přesně se rozhodne, jak dlouho sběr poběží, jaká data jsou nezbytná, kdo je smaže a kdy review skončí. Bez toho přehled nevzniká.
+
+### Co propsat zpět
+
+Po druhém použití se zpět propisují jen tři typy informací:
+
+- stav standardu,
+- případná lokální hranice,
+- návratový signál, pokud vznikl skutečný nový problém.
+
+Stav standardu má být jednovětý:
+
+```text
+Standard byl po uzavřeném návratu použit i druhým člověkem bez historie a bez nové evidence; zůstává pasivní.
+```
+
+Lokální hranice má být přímo v pracovním místě, kde ji člověk potřebuje. Ne v zápisu z kontroly, ne v dlouhé poznámce, ne ve zvláštní složce "důležité". Pokud se hranice týká partnerské odpovědi, patří do partnerské šablony. Pokud se týká onboardingového e-mailu, patří do e-mailové šablony. Pokud se týká formuláře, patří k formuláři nebo do jeho rozhodovací poznámky.
+
+Nový návratový signál nepište jako pokračování staré kontroly. Začněte novou větu:
+
+```text
+Nový návratový signál: u partnerských poptávek z integračních marketplace není bez rámcového rozpočtu možné rozlišit konzultaci od vývoje; původní standard dál platí pro běžné partnerské leady.
+```
+
+Tím chráníte starý standard před tím, aby ho nová výjimka rozebrala na díly. Nový signál má vlastní hranici. Starý standard má zůstat použitelný.
+
+### Privacy-first uzavření
+
+Uzavření druhého použití je ideální chvíle pro datový úklid. Po druhém použití často vzniknou malé stopy: ruční poznámka, kopie zákaznické zprávy, dočasný seznam, screenshot formuláře, export z CRM nebo komentář v interním chatu. Každá z nich může být rozumná během práce. Žádná z nich nemá automaticky právo zůstat.
+
+Privacy-first uzavření má tři kroky:
+
+1. Ponechte zákaznické detaily v původním systému.
+2. Do standardu přeneste jen zobecněnou pracovní větu.
+3. Smažte nebo uzavřete dočasné stopy, které už nemají rozhodovací účel.
+
+Praktická věta:
+
+```text
+Zákaznické detaily z druhého použití zůstávají pouze v CRM. Do partnerské šablony se propsala zobecněná hranice, dočasná poznámka se maže a nevzniká nový export ani štítek.
+```
+
+Pokud potřebujete ponechat důkaz, zkraťte ho na minimum:
+
+```text
+Ponecháváme anonymizovanou větu "menší partnerská poptávka bez rozpočtu stále spadá pod ruční odpověď"; název firmy, konkrétní rozpočet a obsah poptávky se do standardu nepřenáší.
+```
+
+Tohle je rozdíl mezi učením systému a budováním archivu cizích detailů. Systém potřebuje pravidlo. Nepotřebuje sbírku všech případů, které pravidlo potkaly.
+
+### Karta uzavření druhého použití po návratu
+
+```text
+Pasivní standard:
+
+Uzavřený návratový signál:
+
+Výsledek prvního běžného použití:
+
+Proč bylo otevřeno druhé běžné použití:
+
+Druhá běžná situace:
+
+Výsledek druhého použití:
+- uzavřeno do pasivního klidu
+- uzavřeno s lokální hranicí
+- uzavřeno zastavením nové péče
+- neuzavřeno, otevřen nový návratový signál
+
+Jednovětý závěr:
+
+Co se propisuje do kanonického místa:
+
+Co zůstává zavřené:
+
+Jaká další kontrola nevzniká:
+
+Jaká nová evidence nevzniká:
+
+Jaké dočasné stopy mažeme nebo zobecňujeme:
+
+Pokud vznikl nový návratový signál, jeho přesná věta:
+
+Kde je závěr uložený:
+```
+
+Kartu po uzavření nezvětšujte. Pokud chybí jedno pole, doplňte ho. Pokud chybí pět polí, pravděpodobně jste neuzavřeli druhé použití, ale otevřeli nové téma.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte pracovní otázku druhého použití.
+2. Minuta 2: vyberte jeden ze čtyř uzavíracích stavů.
+3. Minuta 3: napište jednovětý závěr.
+4. Minuta 4: určete, co se propíše do kanonického místa.
+5. Minuta 5: určete, jaká evidence a další kontrola nevzniká.
+6. Minuta 6: smažte nebo zobecněte dočasné stopy.
+
+Jestli workshop sklouzne k debatě o novém procesu, zastavte ho. Napište návratový signál a uzavřete druhé použití. Uzavírací workshop není místo pro strategii, roadmapu ani velké přejmenování šablon. Je to konec malé smyčky.
+
+### Checklist uzavření druhého použití po návratu
+
+- Vybrali jsme jeden ze čtyř uzavíracích stavů?
+- Je závěr jednovětý a uložený v kanonickém pracovním místě?
+- Pokud vznikla lokální hranice, je opravdu lokální?
+- Zůstává původní pasivní standard platný tam, kde fungoval?
+- Pokud vznikl nový návratový signál, má vlastní přesnou větu?
+- Nevzniká třetí kontrola jen kvůli pocitu jistoty?
+- Nevzniká nový monitoring, tabulka, CRM štítek ani export?
+- Zákaznické detaily zůstaly v původním systému?
+- Do standardu se propsala jen zobecněná pracovní věta?
+- Dočasné poznámky, screenshoty a kopie jsou smazané nebo mají jasný retenční důvod?
+- Je jasné, co zůstává zavřené?
+- Další práce začíná jen při skutečném návratovém signálu?
+
+Uzavření druhého běžného použití má vrátit standard do normálního provozu. Když fungoval, nechte ho být. Když potřeboval jednu hranu, doplňte jednu hranu. Když ukázal skutečný nový problém, otevřete nový návratový signál. Ale nevyrábějte další kontrolu jen proto, že se ticho po uzavření zdá podezřelé. U dobrého standardu je ticho často nejlepší metrika.
+
 ## Pracovní log
 
+- 2026-07-08: Doplněna úvodní podkapitola o uzavření druhého běžného použití po uzavřeném návratovém signálu: čtyři uzavírací stavy, SaaS příklad, propsání závěru, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-07-08: Doplněna krátká poznámka, aby po čistém druhém použití pasivního standardu nevznikala třetí kontrola bez nového návratového signálu.
 - 2026-07-08: Doplněna úvodní podkapitola o druhém běžném použití po uzavřeném návratovém signálu u pasivního standardu: důvod otevření druhého použití, praktický SaaS příklad, čtyři výsledky, privacy-first kontrola evidence, karta, mini workshop a checklist.
 - 2026-07-08: Doplněna úvodní podkapitola o uzavření prvního běžného použití po uzavřeném návratovém signálu: čtyři uzavírací stavy, praktický SaaS příklad, propsání do kanonického místa, privacy-first ukončení dočasných stop, karta, mini workshop a checklist.
