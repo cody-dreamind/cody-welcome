@@ -311003,8 +311003,201 @@ Pokud se během workshopu objeví nové téma, nezpracovávejte ho ve stejné ka
 
 Uzavřené druhé použití archivního minima má být tiché. Pravidlo se vrací do běžné práce, historie zůstává v archivu a tým si nenese další sledování jen proto, že jednou něco kontroloval. Když se později objeví skutečný návratový signál, bude mít čisté místo, ze kterého začít. Když se neobjeví, tím lépe. Dobré pravidlo pracuje nejvíc právě tehdy, když o něm nemusíte mluvit.
 
+## První dohledání archivního minima po klidu
+
+Archivní minimum se jednou za čas znovu objeví v běžné práci. Ne proto, že ho tým plánovaně kontroluje, ale proto, že někdo narazí na podobnou situaci a potřebuje rychle vědět, co už bylo rozhodnuto. To je zdravý okamžik. Archiv nemá být hřbitov rozhodnutí. Má být místo, kde se dá bez zbytečného lovení dohledat malé použitelné pravidlo.
+
+První dohledání po klidu má ale jiný cíl než návrat k tématu. Neotevírá nové rozhodování. Ověřuje, jestli archivní minimum opravdu pomáhá člověku v práci: najde kanonickou větu, pochopí hranici a nepřenese do běžného provozu staré datové stopy.
+
+Začněte větou:
+
+```text
+Archivní minimum dohledáváme, protože v běžné práci vznikla tato situace:
+```
+
+Za ni napište konkrétní pracovní okamžik:
+
+```text
+Archivní minimum dohledáváme, protože obchod znovu řeší relevantní poptávku bez uvedeného rozpočtu a potřebuje vědět, jestli se má měnit formulář, nebo stačí volitelný dotaz v obchodním vlákně.
+```
+
+Tato věta drží rozsah. Neříká "vracíme téma rozpočtu". Říká "potřebujeme použít archivní minimum v jedné situaci". Rozdíl je zásadní. První věta by mohla spustit novou debatu o kvalifikaci leadů. Druhá vede k dohledání pravidla a použití nejmenší hranice.
+
+### Co má člověk při dohledání najít
+
+Dobré archivní minimum má odpovědět na čtyři otázky:
+
+- Jaká je kanonická věta?
+- Kde pravidlo platí?
+- Co zůstává výslovně zavřené?
+- Jaký signál by téma znovu otevřel?
+
+Pokud člověk najde jen dlouhou historii, archivní minimum selhalo jako pracovní nástroj. Historie může být přesná, ale při běžném použití často překáží. Člověk nepotřebuje vědět, kolik workshopů k rozhodnutí vedlo. Potřebuje vědět, co má udělat dnes.
+
+Praktická podoba může vypadat takto:
+
+```text
+Kanonická věta:
+Rozpočet nedáváme do veřejného formuláře. Pokud bez něj nejde navrhnout další krok, ptáme se volitelně v obchodním vlákně a odpověď nepřepisujeme do nového CRM atributu.
+
+Platí u:
+Relevantních poptávek, kde chybějící rozpočet brání návrhu dalšího kroku.
+
+Zůstává zavřené:
+Povinné pole ve formuláři, automatický lead scoring, export rozpočtů a pomocná evidence mimo běžné obchodní vlákno.
+
+Návratový signál:
+Dvě relevantní poptávky za sebou nejde kvalifikovat bez trvalé evidence rozpočtu.
+```
+
+To je dost. Pokud člověk potřebuje víc, může otevřít starší kartu. Ale běžné použití se má vejít do tohoto minima.
+
+### Tři výsledky prvního dohledání
+
+První dohledání archivního minima může skončit třemi způsoby:
+
+- Dohledáno a použito: člověk našel pravidlo, pochopil hranici a použil ho bez otevření nové práce.
+- Dohledáno, ale slabě umístěno: pravidlo existuje, ale nebylo tam, kde ho člověk přirozeně hledal.
+- Nedohledáno nebo nepochopeno: archivní minimum je moc hluboko, moc obecné nebo příliš podobné jinému pravidlu.
+
+U výsledku `dohledáno a použito` nic dalšího nevymýšlejte. Zapište krátkou stopu jen tehdy, pokud jde o důležité pravidlo nebo pokud dohledání potvrdilo, že archiv funguje i po delším klidu. Jinak pravidlo prostě použijte.
+
+U výsledku `dohledáno, ale slabě umístěno` opravte umístění. Přidejte odkaz z potvrzovací šablony, interního checklistu, support odpovědi nebo rozcestníku. Nepřepisujte obsah pravidla, pokud problém byl jen v tom, že ho člověk hledal jinde.
+
+U výsledku `nedohledáno nebo nepochopeno` neotevírejte rovnou celé téma. Nejprve opravte archivní minimum jako pracovní záznam: zkraťte kanonickou větu, přidejte jasné "platí u" a oddělte starou historii. Pokud ani potom nejde pravidlo použít, teprve zvažte návrat k tématu.
+
+Codyho komentář: archivní minimum má být jako dobrý štítek na krabici. Když musíte krabici otevřít, vytáhnout tři staré složky a zavolat člověku, který ji balil, štítek nefunguje. Neřešte filozofii archivace. Přepište štítek.
+
+### Praktický SaaS příklad
+
+Situace:
+
+```text
+Nový obchodník řeší poptávku od B2B SaaS týmu. Formulář neobsahuje rozpočet a obchodník si není jistý, jestli má založit interní poznámku "doplnit rozpočet", nebo poslat běžnou odpověď.
+```
+
+Dohledání:
+
+```text
+V obchodním checklistu najde odkaz na archivní minimum "Rozpočet ve formuláři". Otevře kanonickou větu a zjistí, že rozpočet se neukládá jako nový CRM atribut. Pokud je potřeba pro další krok, zeptá se volitelně v obchodním vlákně.
+```
+
+Použití:
+
+```text
+Pošle volitelnou otázku v odpovědi na poptávku. Nevytváří pomocnou tabulku, nepřidává štítek "chybí rozpočet" a neotevírá úpravu formuláře.
+```
+
+Závěr:
+
+```text
+Archivní minimum bylo dohledatelné a použitelné. Pravidlo zůstává v klidu. Žádná nová práce nevzniká.
+```
+
+Slabší varianta:
+
+```text
+Obchodník pravidlo našel až přes starou rozhodovací kartu, ne přes checklist. Obsah pravidla je správný, ale kotva je slabá.
+
+Lokální oprava:
+Do obchodního checklistu přidat odkaz "Rozpočet ve formuláři: archivní minimum" a jednu kanonickou větu.
+
+Co neotevíráme:
+Novou kvalifikační metodiku, úpravu formuláře, nový CRM atribut ani pravidelné review rozpočtových odpovědí.
+```
+
+Tady je důležité neplést problém najitelnosti s problémem strategie. Člověk pravidlo nenašel, takže opravujete cestu k pravidlu. Nezvětšujete pravidlo.
+
+### Privacy-first kontrola dohledání
+
+Při dohledání archivního minima hrozí zvláštní typ datového nepořádku: člověk otevře starou historii a začne si z ní kopírovat konkrétní příklady, aby měl jistotu. To je přesně chvíle, kdy se z archivu nenápadně vrací staré osobní nebo obchodní detaily do nové práce.
+
+Položte tři otázky:
+
+```text
+Stačí nám kanonická věta, nebo opravdu potřebujeme starý konkrétní příklad?
+
+Pokud potřebujeme příklad, stačí anonymizovaný vzor?
+
+Vznikla při dohledání nová kopie starých dat?
+```
+
+Ve většině případů má stačit kanonická věta. Pokud potřebujete příklad, použijte zobecněnou verzi. Místo kopie zákaznické odpovědi napište: "Relevantní poptávka nešla kvalifikovat bez doplnění rozhodovacího limitu." Tím zůstane zachovaný smysl a nevznikne nová datová vrstva.
+
+Krátký privacy-first závěr může znít:
+
+```text
+Při dohledání používáme pouze kanonickou větu a anonymizovaný příklad. Staré zákaznické odpovědi nekopírujeme do nové poznámky a nevytváříme pomocnou evidenci.
+```
+
+Tohle je malý provozní návyk, ale pro evropský privacy-first SaaS je zásadní. Archiv má pomáhat rozhodovat, ne znovu šířit staré detaily.
+
+### Karta prvního dohledání archivního minima
+
+```text
+Archivní minimum:
+
+Běžná situace, kvůli které ho dohledáváme:
+
+Kde člověk pravidlo hledal:
+
+Kde ho skutečně našel:
+
+Kanonická věta byla srozumitelná?
+- ano
+- ne, moc obecná
+- ne, moc dlouhá
+- ne, podobná jinému pravidlu
+
+Co se použilo:
+
+Co zůstalo výslovně zavřené:
+
+Výsledek dohledání:
+- dohledáno a použito
+- dohledáno, ale slabě umístěno
+- nedohledáno nebo nepochopeno
+
+Lokální oprava, pokud existuje:
+
+Privacy-first kontrola:
+Jaké staré stopy jsme neotevřeli, nekopírovali nebo anonymizovali:
+
+Návratový signál:
+
+Kde je závěr uložený:
+```
+
+Karta má smysl jen u pravidel, která se dotýkají důležitého rozhodnutí, datové stopy nebo opakované práce více lidí. Pokud jde o drobné pravidlo a dohledání proběhlo čistě, stačí jedna věta u pracovního místa.
+
+### Mini workshop na 5 minut
+
+1. Minuta 1: pojmenujte běžnou situaci, kvůli které se archivní minimum dohledává.
+2. Minuta 2: ověřte, kde ho člověk hledal a kde ho našel.
+3. Minuta 3: přečtěte kanonickou větu a řekněte, jestli podle ní šlo jednat.
+4. Minuta 4: napište, co zůstalo zavřené.
+5. Minuta 5: zkontrolujte, že se ze staré historie nekopírovaly osobní nebo obchodní detaily.
+
+Pokud během pěti minut zjistíte, že pravidlo nejde použít bez otevření starých karet, je archivní minimum moc těžké. Neřešte celé téma. Opravte minimum tak, aby příště stačilo otevřít jednu krátkou větu.
+
+### Checklist prvního dohledání archivního minima
+
+- Vzniklo dohledání z běžné pracovní situace, ne z obecné chuti něco kontrolovat?
+- Je jasné, kde člověk pravidlo hledal?
+- Byla kanonická věta najitelná bez původní historie?
+- Šlo podle ní rozhodnout?
+- Je jasné, kde pravidlo platí a kde už ne?
+- Zůstává původní široký rozsah zavřený?
+- Nevznikl nový CRM atribut, export, tracker, pomocná tabulka ani kopie zákaznických odpovědí?
+- Pokud bylo pravidlo slabě umístěné, opravujeme jen kotvu?
+- Pokud bylo pravidlo nepochopené, zkracujeme minimum dřív, než otevřeme nové téma?
+- Je návratový signál pořád konkrétní?
+
+První dohledání archivního minima po klidu má být nenápadné. Člověk najde pravidlo, použije ho a nepřenese s ním starý balast. Pokud to funguje, archiv dělá přesně to, co má: chrání tým před opakováním stejné debaty a zároveň brání tomu, aby se kvůli starému rozhodnutí znovu rozběhla zbytečná datová stopa.
+
 ## Pracovní log
 
+- 2026-07-08: Doplněna úvodní podkapitola o prvním dohledání archivního minima po klidu: najitelnost kanonické věty, tři výsledky dohledání, SaaS příklad, privacy-first práce bez kopírování starých detailů, karta, mini workshop a checklist.
 - 2026-07-08: Doplněna úvodní podkapitola o uzavření druhého běžného použití archivního minima: čtyři uzavírací stavy, SaaS příklady, propsání zpět do pracovního místa, privacy-first úklid dočasných stop, karta, mini workshop a checklist.
 - 2026-07-08: Doplněna úvodní podkapitola o druhém běžném použití archivního minima: kdy ho otevřít, co sledovat, SaaS příklady, čtyři výsledky, privacy-first kontrola datové stopy, karta, mini workshop a checklist.
 - 2026-07-08: Doplněna úvodní podkapitola o uzavření prvního běžného použití archivního minima: čtyři uzavírací stavy, SaaS příklady, privacy-first rozdělení poznatku a dat, karta, mini workshop a checklist.
