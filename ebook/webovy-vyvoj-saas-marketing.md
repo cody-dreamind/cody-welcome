@@ -308457,8 +308457,185 @@ Pokud se workshop začne rozšiřovat na otázku "jak celkově pracujeme s rozpo
 
 Uzavření druhého běžného použití pasivního standardu má standard pustit z ruky. Ne zapomenout. Ne zamknout navždy. Jen ho přestat obcházet s baterkou pokaždé, když se ozve běžná práce. Když pravidlo dvakrát obstálo, nejpraktičtější další krok je často klid. A klid je v dobrém provozu překvapivě produktivní věc.
 
+## První návratový signál u pasivního standardu
+
+Pasivní standard se nemá kontrolovat jen proto, že existuje. Má se znovu otevřít až ve chvíli, kdy přijde návratový signál: změna kontextu, opakovaná výjimka, nové pracovní místo nebo důkaz, že rozhodovací věta už nestačí. První takový signál po delším klidu je citlivý. Tým může udělat dvě chyby najednou: buď ho odbýt jako náhodu, nebo kvůli němu probudit celý starý proces.
+
+Správná reakce je menší. Nejdřív pojmenujte, co se opravdu změnilo, a ověřte, jestli signál patří k pasivnímu standardu. Teprve potom vyberte nejmenší návrat: lokální zpřesnění, omezenou výjimku, nebo skutečné otevření části pravidla.
+
+Pracovní otázka zní:
+
+```text
+Co přesně se stalo, proč to stačí nebo nestačí jako návratový signál a jaký nejmenší rozsah práce z toho plyne?
+```
+
+Tahle věta brání reflexu "něco se ozvalo, pojďme to celé předělat". Pasivní standard už jednou prošel běžným použitím. Má tedy určitou důvěru. Návratový signál ji nemá zahodit, ale otestovat v konkrétním místě, kde se realita změnila.
+
+### Co je a není návratový signál
+
+Návratový signál není každá připomínka, nespokojenost nebo jeden zvláštní případ. Aby stálo za to standard otevřít, musí být splněná aspoň jedna z těchto podmínek:
+
+- změnil se segment, nabídka, cena, kanál nebo právní/provozní kontext, pro který standard vznikl,
+- stejná výjimka se objevila opakovaně a brání běžnému rozhodnutí,
+- člověk bez původní historie nedokáže podle standardu udělat bezpečný další krok,
+- standard by při doslovném použití vedl ke sběru zbytečných dat, špatné komunikaci nebo horšímu zákaznickému výsledku,
+- kanonické pracovní místo se přesunulo a stará věta už není tam, kde ji tým používá.
+
+Naopak návratový signál obvykle není:
+
+- nový nápad, který se standardu jen volně dotýká,
+- chuť "to po čase projít",
+- jeden extrémní zákaznický případ bez dopadu na běžné rozhodování,
+- interní nejistota, kterou vyřeší přečtení existující věty,
+- požadavek na další report jen proto, že standard je důležitý.
+
+Rozdíl není akademický. Pokud z každého podnětu uděláte návrat, pasivní standard přestane být pasivní. Pokud skutečný návrat ignorujete, standard začne chránit minulost místo dnešní práce. Ani jedno není moc chytré. Jedno vyrábí administrativu, druhé zatuchlinu. Krásná dvojka, pokud chcete tým potichu otrávit.
+
+### Čtyři první reakce
+
+Po prvním signálu vyberte jeden ze čtyř stavů:
+
+- Signál nepatří ke standardu: jde o jiné téma, jiný proces nebo nový nápad.
+- Signál je slabý: zapište krátkou poznámku, ale standard zůstává zavřený.
+- Signál vyžaduje lokální zpřesnění: opravte jedno pracovní místo, větu nebo odkaz.
+- Signál otevírá omezený návrat: otevřete jen tu část standardu, které se nový důkaz týká.
+
+Stav `signál nepatří ke standardu` je důležitý hlavně pro ochranu rozsahu. Například obchodní tým chce změnit ceník, ale odkazuje se na standard pro první kontakt bez rozpočtu. To může být legitimní obchodní téma, ale není to návrat tohoto standardu. Zapište oddělení a nepoužívejte staré pravidlo jako vstupenku do nové debaty.
+
+Stav `signál je slabý` znamená, že podnět stojí za krátkou stopu, ale ne za práci. Typicky jeden člověk váhal, pak našel větu a použil ji správně. Závěr může být jednoduchý:
+
+```text
+Podnět zatím neotevírá standard; rozhodovací věta byla použitelná po dohledání a další evidence nevzniká.
+```
+
+Stav `signál vyžaduje lokální zpřesnění` používejte, když standard platí, ale jeho použití drhne v nejbližším místě. Opravte formulaci u šablony, název odkazu, příklad nebo vlastnictví. Neotvírejte celou historii rozhodnutí.
+
+Stav `signál otevírá omezený návrat` používejte, když se změnila reálná rozhodovací situace. Návrat ale pořád nesmí být větší než důkaz. Pokud se problém týká enterprise poptávek, neotevírejte celý formulář pro všechny segmenty. Pokud se týká jednoho e-mailu, nezačínejte měnit web, CRM a onboarding najednou.
+
+### Praktický SaaS příklad
+
+Pasivní standard pořád říká:
+
+```text
+Rozpočet se v prvním kontaktu nesbírá povinně. Zeptej se volitelně jen tehdy, když bez něj nejde domluvit další konkrétní krok.
+```
+
+Po několika měsících přijde nový typ poptávek z partnerského kanálu. U dvou z nich se ukáže, že bez rámcového rozpočtu nejde ani určit, jestli má partner poslat kontakt do konzultace, nebo do samoobslužné varianty produktu.
+
+Špatná reakce by byla:
+
+```text
+Přidáme do všech formulářů povinné pole rozpočet a budeme sledovat, jak se to chová.
+```
+
+Lepší první reakce:
+
+```text
+Návratový signál se týká pouze partnerského kanálu. Obecný formulář zůstává beze změny, neotevíráme scoring ani povinné pole pro všechny poptávky. Ověříme jednu partnerskou větu: "Pokud bez rámcového rozpočtu nejde doporučit další krok, zeptejte se na rozpětí v odpovědi, ne ve veřejném formuláři."
+```
+
+Tím zůstává zachovaná původní hodnota standardu: běžné poptávky nejsou zatížené dalším polem, zákazník nedává citlivější obchodní informaci dřív, než je nutné, a tým řeší konkrétní návrat v místě, kde opravdu vznikl.
+
+Pokud se později ukáže, že partnerský kanál potřebuje jiný vstupní režim, otevře se samostatná partnerská větev. Pořád ale nemusí vzniknout nové univerzální pole. Často stačí upravit partnerskou instrukci, první odpověď nebo kvalifikační otázku v ručním kroku.
+
+### Privacy-first kontrola návratu
+
+První návratový signál je nebezpečný pro data. Tým má pocit, že potřebuje "trochu víc vidět", a velmi snadno vznikne dočasná evidence: tabulka výjimek, nový atribut v CRM, export z formuláře, poznámka u zákazníka, interní štítek nebo krátký seznam pro vyhodnocení. Dočasné věci mají pozoruhodný talent přežít lidi, kteří je založili. Ano, je to skoro evoluce, jen bez výhod.
+
+Před jakýmkoliv sběrem napište:
+
+```text
+Jaké nové údaje by začaly vznikat kvůli návratu a kdy přesně by skončily?
+```
+
+Pokud odpověď není jasná, nesbírejte nic nového. Začněte zobecněným popisem signálu a pracujte s informacemi tam, kde už oprávněně existují. Konkrétní zákaznické údaje nepřenášejte do rozhodovací karty, pokud to není nezbytné.
+
+Dobrá privacy-first věta:
+
+```text
+Návrat vyhodnocujeme ze zobecněného popisu dvou partnerských situací. Nepřidáváme nové pole do formuláře, nezakládáme seznam výjimek a konkrétní zákaznické údaje zůstávají v původním obchodním systému.
+```
+
+Pokud je dočasná evidence opravdu nutná, musí mít účel, vlastníka, konec a retenci:
+
+```text
+Po dobu 14 dnů sledujeme pouze počet partnerských poptávek, u kterých bez rámcového rozpočtu nejde doporučit další krok. Nesbíráme konkrétní částky ve veřejném formuláři. Po review se pomocný přehled smaže nebo převede do zobecněného závěru.
+```
+
+Codyho komentář: nejhezčí návratový signál je ten, který zlepší rozhodování bez nové datové skládky. Když musíte sbírat víc, sbírejte méně, kratší dobu a s jasným koncem. Jo, ta věta zní jako účetní poezie. Ale přesně takhle se drží provoz čistý.
+
+### Karta prvního návratového signálu
+
+```text
+Pasivní standard:
+
+Kanonické pracovní místo:
+
+Co se stalo:
+
+Proč to může být návratový signál:
+
+Co se změnilo proti poslednímu platnému kontextu:
+
+Co se ze starého kontextu nepřenáší:
+
+První reakce:
+- signál nepatří ke standardu
+- signál je slabý
+- signál vyžaduje lokální zpřesnění
+- signál otevírá omezený návrat
+
+Nejmenší rozsah práce:
+
+Co zůstává zavřené:
+
+Vzniká nová evidence?
+Ne / ano, pouze s účelem, vlastníkem, koncem a retencí:
+
+Privacy-first věta:
+
+Kde je závěr uložený:
+
+Kdy se k tomu vrátíme:
+Pouze pokud:
+```
+
+Kartu nepoužívejte jako nový registr všech podnětů. Má smysl ve chvíli, kdy podnět vypadá jako návratový signál a tým potřebuje rozhodnout, jestli standard otevřít. Pokud je podnět očividně mimo, stačí jednověté oddělení.
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: popište podnět bez interpretace.
+2. Minuta 2: najděte pasivní standard a jeho kanonické pracovní místo.
+3. Minuta 3: napište, co se změnilo proti poslednímu platnému kontextu.
+4. Minuta 4: vyberte jednu ze čtyř prvních reakcí.
+5. Minuta 5: určete nejmenší rozsah práce nebo napište, že práce nevzniká.
+6. Minuta 6: napište, co zůstává zavřené a jaká data nepřidáváte.
+7. Minuta 7: uložte jednovětý závěr nebo kartu k pracovnímu místu.
+
+Když se během workshopu začne probírat širší strategie, vraťte se k první větě. Širší strategie může být správné téma, ale první návratový signál u pasivního standardu má nejdřív odpovědět, jestli staré pravidlo potřebuje konkrétní malý zásah.
+
+### Checklist prvního návratového signálu
+
+- Víme, který pasivní standard se signálu údajně týká?
+- Je jasné kanonické pracovní místo standardu?
+- Popsali jsme, co se opravdu změnilo proti poslednímu platnému kontextu?
+- Oddělili jsme nový nápad od návratového signálu?
+- Vybrali jsme jednu ze čtyř prvních reakcí?
+- Pokud je signál slabý, necháváme standard zavřený?
+- Pokud vzniká lokální zpřesnění, týká se jednoho pracovního místa?
+- Pokud se otevírá omezený návrat, je jeho rozsah menší než původní standard?
+- Je napsané, co zůstává zavřené?
+- Nepřidáváme nové pole, CRM atribut, tracker, export ani seznam výjimek bez jasného účelu?
+- Pokud vzniká dočasná evidence, má vlastníka, konec a retenci?
+- Pracujeme se zobecněným popisem místo zbytečného kopírování zákaznických detailů?
+- Je závěr uložený tam, kde se standard přirozeně používá?
+- Ví tým, jaký další signál by téma znovu otevřel?
+
+První návratový signál u pasivního standardu má být malý test reality. Ne oslava návratu starého projektu. Pokud signál nestačí, standard zůstává klidný. Pokud stačí, otevřete jen nejmenší potřebný kus. Tak se z pasivního standardu nestane ani dogma, ani věčně rozdělaná věc.
+
 ## Pracovní log
 
+- 2026-07-08: Doplněna úvodní podkapitola o prvním návratovém signálu u pasivního standardu: rozlišení skutečného signálu od podnětu, čtyři první reakce, praktický SaaS příklad, privacy-first kontrola nové evidence, karta, mini workshop a checklist.
 - 2026-07-07: Doplněna úvodní podkapitola o uzavření druhého běžného použití pasivního standardu: tři uzavírací stavy, praktický SaaS příklad, ukončení mimořádné péče, privacy-first nepřidávání evidence, karta, mini workshop a checklist.
 - 2026-07-07: Doplněna úvodní podkapitola o druhém běžném použití pasivního standardu: přenositelnost bez původní historie, poslední lokální zpřesnění, oddělení výjimky, privacy-first nepřidávání evidence, karta, mini workshop a checklist.
 - 2026-07-07: Doplněna úvodní podkapitola o uzavření prvního běžného použití pasivního standardu: tři uzavírací stavy, praktický SaaS příklad, privacy-first nepřidávání evidence, karta, mini workshop a checklist.
