@@ -309635,8 +309635,183 @@ Jestli workshop sklouzne k debatě o novém procesu, zastavte ho. Napište návr
 
 Uzavření druhého běžného použití má vrátit standard do normálního provozu. Když fungoval, nechte ho být. Když potřeboval jednu hranu, doplňte jednu hranu. Když ukázal skutečný nový problém, otevřete nový návratový signál. Ale nevyrábějte další kontrolu jen proto, že se ticho po uzavření zdá podezřelé. U dobrého standardu je ticho často nejlepší metrika.
 
+## Další přirozené setkání s pasivním standardem
+
+Po uzavřeném druhém použití už pasivní standard nemá vlastní kontrolní trasu. To ale neznamená, že ho tým nikdy neuvidí. Naopak: dobrý standard se čas od času objeví v běžné práci. Někdo použije šablonu, odpoví na poptávku, upraví onboardingový e-mail, řeší support nebo předává kontext novému člověku. V takové chvíli nejde o plánovanou kontrolu. Jde o další přirozené setkání.
+
+Rozdíl je praktický. Kontrola se ptá: "Máme jít ověřit, jestli pravidlo pořád funguje?" Přirozené setkání se ptá: "Když jsme na pravidlo při práci narazili, ukázalo se něco, co vyžaduje rozhodnutí?" První otázka vytváří práci. Druhá chrání práci před zbytečným růstem.
+
+Pracovní otázka zní:
+
+```text
+Objevilo se při běžném použití pasivního standardu něco, co mění jeho hranici, nebo standard prostě dál funguje bez nové péče?
+```
+
+Pokud odpověď zní "funguje", nic dalšího nevzniká. Nezapisujte z toho novou kontrolu, nevytvářejte kartu a neplánujte navazující review. Stačí nechat standard tam, kde je. Pokud se ukáže drobná nejasnost, opravte jednu větu v pracovním místě. Pokud se ukáže skutečná změna situace, otevřete nový návratový signál. To je celé. Ano, metodicky velmi neokázalé. Přesně proto to může fungovat.
+
+### Kdy setkání vůbec pojmenovat
+
+Většinu přirozených setkání není potřeba zapisovat. Standard se použil, práce pokračovala a nikdo nepotřeboval další vysvětlení. To je ideální výsledek.
+
+Setkání pojmenujte jen tehdy, když nastane aspoň jedna z těchto věcí:
+
+- Člověk standard našel, ale musel hádat jeho hranici.
+- Standard fungoval, ale v pracovním místě chybí jedna jasná věta.
+- Běžná práce ukázala novou situaci, kterou standard zjevně nepokrývá.
+- Někdo začal vytvářet novou evidenci jen proto, že se bál standard nechat být.
+- Při použití vznikla dočasná stopa se zákaznickými nebo obchodními detaily.
+
+Pokud nenastalo nic z toho, setkání nechte bez zápisu. Pasivní standard není věc, kterou je potřeba pochválit pokaždé, když se nerozpadne. Jeho úkolem je být po ruce, ne sbírat docházku.
+
+### Tři výsledky přirozeného setkání
+
+Další přirozené setkání má mít jen tři výsledky:
+
+- Bez akce: standard byl použit a nevznikla nejasnost, nová evidence ani změna rozsahu.
+- Lokální dočištění: standard platí, ale jedno pracovní místo potřebuje přesnější větu, odkaz nebo hranici.
+- Nový návratový signál: objevila se změna, kterou původní pasivní standard nepokrývá.
+
+`Bez akce` je normální výsledek:
+
+```text
+Pasivní standard byl použit při běžné odpovědi na partnerskou poptávku. Nevznikla nová evidence, formulář zůstává beze změny a další kontrola se neplánuje.
+```
+
+Tuto větu pište jen tehdy, když je užitečná pro dohledání u pracovního místa. Pokud by zápis existoval jen proto, aby někde bylo vidět, že se něco stalo, nepište ho. Viditelnost bez rozhodovací hodnoty je jen úhledně zabalené rušení.
+
+`Lokální dočištění` má být malé:
+
+```text
+Do partnerské šablony doplňujeme větu: pokud rozpočet není potřeba k doporučení dalšího kroku, neptáme se na něj ani v ruční odpovědi.
+```
+
+Tady se nemění standard, jen se zpřesňuje místo, kde ho člověk používá. Nedělejte z toho novou kapitolu procesu. Jedna věta dovnitř, žádná nová evidence ven.
+
+`Nový návratový signál` musí mít vlastní hranici:
+
+```text
+Nový návratový signál: u poptávek z integračního marketplace bez rámcového rozpočtu nejde rozlišit konzultaci od implementace. Původní pasivní standard dál platí pro běžné partnerské leady.
+```
+
+Tato věta je důležitá, protože chrání starý standard před tím, aby ho nová situace zbytečně rozebrala. Nový signál neznamená, že všechno staré bylo špatně. Znamená jen, že vznikl nový okraj, který si zaslouží vlastní malou smyčku.
+
+### Praktický SaaS příklad
+
+Tým má pasivní standard:
+
+```text
+Rozpočet není povinné pole ve veřejném formuláři. Ptáme se na něj ručně jen tehdy, když bez něj nejde doporučit další konkrétní krok.
+```
+
+Za měsíc přijde běžná partnerská poptávka. Obchodník použije šablonu, neotevře staré rozhodovací zápisy a nepožaduje nové pole ve formuláři. Při odpovědi zjistí, že současná věta stačí. Výsledek:
+
+```text
+Bez akce. Standard fungoval v běžné partnerské odpovědi, žádná další evidence nevzniká.
+```
+
+O týden později přijde menší poptávka od partnera. Člověk váhá, jestli se pravidlo týká i malých zakázek, protože v šabloně je příklad jen pro větší implementaci. To není důvod měnit formulář. Je to lokální dočištění:
+
+```text
+Do šablony doplňujeme, že pravidlo platí i pro menší partnerské poptávky; rozpočet se ptáme jen tehdy, když bez něj nejde doporučit další krok.
+```
+
+Později se objeví nový kanál, kde partner posílá velmi stručné marketplace leady bez kontextu. Tam už bez rámcového rozpočtu nejde rozlišit krátkou konzultaci od větší implementace. To je nový návratový signál, ale jen pro nový kanál:
+
+```text
+Nový návratový signál se týká marketplace leadů. Původní veřejný formulář a běžné partnerské poptávky zůstávají podle pasivního standardu beze změny.
+```
+
+Tak tým postupuje prakticky: běžné použití nechá být, malou nejasnost opraví na místě a skutečně novou situaci otevře bez toho, aby strhl celý původní standard zpět do aktivní péče.
+
+### Privacy-first hranice
+
+Přirozené setkání s pasivním standardem často svádí k malé evidenci. "Jen si poznamenáme, kolikrát se to stalo." "Jen přidáme štítek." "Jen si uložíme příklady." Slovo "jen" je v privacy-first provozu podezřelé. Ne proto, že by každá evidence byla špatná, ale proto, že malá evidence často vzniká bez jasného konce.
+
+Před jakýmkoli zápisem se zeptejte:
+
+```text
+Jaké rozhodnutí tento zápis později umožní a kdy ho smažeme, pokud rozhodnutí nepřijde?
+```
+
+Pokud odpověď nemáte, zápis nevzniká. Pokud odpověď máte, zkraťte stopu na minimum. Zákaznické detaily nepatří do standardu. Do standardu patří zobecněná pracovní věta.
+
+Správně:
+
+```text
+Do šablony doplňujeme obecnou hranici pro marketplace leady. Konkrétní poptávka zůstává v CRM a do standardu se nepřenáší název firmy, rozpočet ani obsah zprávy.
+```
+
+Špatně:
+
+```text
+Založíme tabulku marketplace leadů s názvem firmy, zdrojem, rozpočtem a poznámkou, jestli obchodník rozpočet potřeboval.
+```
+
+Taková tabulka může mít smysl jen jako nový, časově omezený experiment s jasnou otázkou, retencí a vlastníkem. Nemá vzniknout jako vedlejší produkt toho, že se pasivní standard potkal s realitou.
+
+### Karta přirozeného setkání
+
+Kartu použijte pouze při lokálním dočištění nebo novém návratovém signálu:
+
+```text
+Pasivní standard:
+
+Kde se přirozeně použil:
+
+Co se při použití ukázalo:
+
+Výsledek:
+- bez akce
+- lokální dočištění
+- nový návratový signál
+
+Pokud jde o lokální dočištění, přesná věta:
+
+Pokud jde o nový návratový signál, přesná věta:
+
+Co zůstává beze změny:
+
+Jaká další kontrola nevzniká:
+
+Jaká nová evidence nevzniká:
+
+Kde zůstávají zákaznické detaily:
+
+Co mažeme nebo zobecňujeme:
+```
+
+Pokud vyplňujete kartu pro stav `bez akce`, pravděpodobně už vyrábíte práci navíc. Výjimkou je situace, kdy tým potřebuje jednorázově ukázat, proč se po použití nic dalšího neotevírá. I tehdy stačí jedna věta u pracovního místa.
+
+### Mini workshop na 5 minut
+
+1. Minuta 1: pojmenujte, kde se standard přirozeně použil.
+2. Minuta 2: rozhodněte, zda vznikl důvod k akci.
+3. Minuta 3: vyberte jeden ze tří výsledků.
+4. Minuta 4: napište jednu větu pro lokální dočištění nebo návratový signál.
+5. Minuta 5: určete, jaká evidence a kontrola nevzniká.
+
+Když během pěti minut neumíte rozhodnout, neprodlužujte workshop. Buď chybí skutečný signál, nebo už řešíte nové téma. V prvním případě nechte standard být. Ve druhém napište nový návratový signál a zavřete přirozené setkání.
+
+### Checklist přirozeného setkání
+
+- Šlo opravdu o běžné použití, ne o plánovanou kontrolu?
+- Víme, který pasivní standard se použil?
+- Ukázalo se něco, co mění hranici standardu?
+- Pokud ne, nevzniká žádná další kontrola?
+- Pokud ano, jde jen o lokální dočištění, nebo o nový návratový signál?
+- Je lokální dočištění omezené na jednu větu, odkaz nebo pracovní místo?
+- Má nový návratový signál vlastní přesnou větu?
+- Zůstává původní standard platný tam, kde fungoval?
+- Nevzniká nová tabulka, CRM štítek, export ani tracker bez rozhodovací otázky?
+- Zákaznické detaily zůstávají v původním systému?
+- Do standardu se propisuje jen zobecněné pravidlo?
+- Je jasné, co se po setkání dál nesleduje?
+
+Další přirozené setkání má pasivnímu standardu potvrdit obyčejnost. Když funguje, nepřidávejte mu proces. Když drhne jedna věta, opravte jednu větu. Když se změnil svět kolem něj, otevřete nový návratový signál. Všechno ostatní je jen administrativní ozvěna po práci, která už skončila.
+
 ## Pracovní log
 
+- 2026-07-08: Doplněna úvodní podkapitola o dalším přirozeném setkání s pasivním standardem: rozlišení od plánované kontroly, tři výsledky, SaaS příklad, privacy-first hranice evidence, karta, mini workshop a checklist.
 - 2026-07-08: Doplněna úvodní podkapitola o uzavření druhého běžného použití po uzavřeném návratovém signálu: čtyři uzavírací stavy, SaaS příklad, propsání závěru, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-07-08: Doplněna krátká poznámka, aby po čistém druhém použití pasivního standardu nevznikala třetí kontrola bez nového návratového signálu.
 - 2026-07-08: Doplněna úvodní podkapitola o druhém běžném použití po uzavřeném návratovém signálu u pasivního standardu: důvod otevření druhého použití, praktický SaaS příklad, čtyři výsledky, privacy-first kontrola evidence, karta, mini workshop a checklist.
