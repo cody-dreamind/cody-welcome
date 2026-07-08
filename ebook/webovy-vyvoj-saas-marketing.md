@@ -311195,8 +311195,191 @@ Pokud během pěti minut zjistíte, že pravidlo nejde použít bez otevření s
 
 První dohledání archivního minima po klidu má být nenápadné. Člověk najde pravidlo, použije ho a nepřenese s ním starý balast. Pokud to funguje, archiv dělá přesně to, co má: chrání tým před opakováním stejné debaty a zároveň brání tomu, aby se kvůli starému rozhodnutí znovu rozběhla zbytečná datová stopa.
 
+## Uzavření prvního dohledání archivního minima po klidu
+
+První dohledání archivního minima po klidu není hotové ve chvíli, kdy člověk pravidlo najde. Hotové je až tehdy, když tým ví, jestli archivní minimum obstálo jako pracovní pomůcka, nebo jestli potřebuje jednu malou opravu. Bez uzavření se snadno stane, že někdo pravidlo sice použije, ale bokem nechá poznámku, kopii starého příkladu, odkaz na dlouhou historii nebo nejasný úkol "někdy doplnit". A přesně tak se z archivu znovu stává aktivní práce.
+
+Uzavření má být krátké. Nevracejte se k celé debatě, která archivnímu minimu předcházela. Vyhodnoťte jen tři věci: jestli člověk našel kanonickou větu, jestli podle ní dokázal jednat a jestli po dohledání nevznikla nová datová nebo procesní stopa.
+
+Začněte větou:
+
+```text
+První dohledání archivního minima uzavíráme takto:
+```
+
+Za ni napište výsledek v běžném jazyce:
+
+```text
+První dohledání archivního minima uzavíráme takto:
+Obchodník našel pravidlo u potvrzovací šablony, použil volitelnou otázku v běžném vlákně a neotevřel formulář, scoring ani novou evidenci rozpočtů. Archivní minimum zůstává v klidu.
+```
+
+Taková věta je dostatečná, protože obsahuje pracovní místo, použití pravidla i zavřený rozsah. Neříká jen "vše v pořádku". Říká, co přesně bylo v pořádku. To je rozdíl mezi užitečným uzavřením a zápisem, který bude za měsíc znít jako administrativní mlha.
+
+### Čtyři uzavírací stavy
+
+Po prvním dohledání vyberte jeden ze čtyř stavů:
+
+- Ponechat v klidu: pravidlo bylo najitelné, srozumitelné a použitelné bez otevření historie.
+- Přesunout kotvu: pravidlo bylo správné, ale člověk ho přirozeně hledal jinde.
+- Zkrátit kanonickou větu: pravidlo bylo nalezené, ale moc dlouhé, obecné nebo podobné jinému pravidlu.
+- Vrátit do lehkého rytmu: pravidlo bez starší historie nejde bezpečně použít.
+
+Stav `ponechat v klidu` je nejlepší výsledek. Znamená, že archivní minimum opravdu splnilo svou práci. Nepřidávejte další kontrolu jen proto, že dohledání proběhlo dobře. Dobře fungující archivní minimum nemá dostat nový proces jako odměnu. Má zůstat malé.
+
+Stav `přesunout kotvu` použijte, když pravidlo existuje, ale je mimo přirozenou trasu práce. Pokud ho člověk hledal u e-mailové šablony a našel ho až v rozhodovacím indexu, problém není v obsahu pravidla. Problém je v cestě k němu. Oprava má být odkaz, krátká věta nebo přejmenování položky tam, kde člověk pracuje.
+
+Stav `zkrátit kanonickou větu` použijte, když archivní minimum sice je dostupné, ale člověk po přečtení pořád neví, co udělat. Věta má říct kdy pravidlo platí, co se má použít a co zůstává zavřené. Pokud potřebuje tři odstavce kontextu, není to kanonická věta. Je to malá novela s ambicí stát se interním předpisem. To nechceme.
+
+Stav `vrátit do lehkého rytmu` použijte až tehdy, když se ukáže, že problém není jen v umístění nebo formulaci. Pokud pravidlo bez původní historie nejde použít, archivace byla předčasná. Neznamená to, že rozhodnutí bylo špatné. Znamená to, že ještě potřebuje krátké období běžné údržby, kde se doplní pracovní věta, hranice a návratový signál.
+
+### Praktický SaaS příklad
+
+První dohledání:
+
+```text
+Situace:
+Obchod zpracoval relevantní poptávku od SaaS týmu bez rozpočtu.
+
+Dohledání:
+V potvrzovací šabloně našel odkaz na archivní minimum "Rozpočet ve formuláři".
+
+Použití:
+Poslal volitelnou otázku v obchodním vlákně. Nevytvořil nový CRM atribut, nepřidal pomocnou tabulku a neotevřel úpravu formuláře.
+```
+
+Uzavření:
+
+```text
+Uzavírací stav:
+Ponechat v klidu.
+
+Co zůstává:
+Kanonická věta u potvrzovací šablony a odkaz v obchodním checklistu.
+
+Co zůstává zavřené:
+Povinné pole pro rozpočet, automatický lead scoring, export rozpočtových údajů a zvláštní evidence mimo obchodní vlákno.
+
+Privacy-first závěr:
+Konkrétní odpověď zákazníka zůstává jen v původní obchodní komunikaci. Do archivu ani checklistu nepřenášíme nové osobní nebo obchodní detaily.
+```
+
+Slabší výsledek:
+
+```text
+Situace:
+Obchodník pravidlo našel až přes starou kartu, protože u šablony nebyl odkaz.
+
+Uzavírací stav:
+Přesunout kotvu.
+
+Lokální oprava:
+K potvrzovací šabloně přidáme odkaz "Rozpočet ve formuláři: archivní minimum" a jednu větu: "Rozpočet nepatří do veřejného formuláře; pokud chybí pro další krok, ptej se volitelně v obchodním vlákně."
+
+Co neotevíráme:
+Obsah pravidla, revizi kvalifikace leadů, formulář ani CRM strukturu.
+```
+
+Tady je nejdůležitější nepřecenit závěr. Slabá kotva není strategický problém. Je to chybějící odkaz. Opravte odkaz a skončete. Produktová vyspělost často vypadá právě takhle neokázale: nepředstírat, že každá drobná tříska je důkaz pro novou židli.
+
+### Privacy-first uzavření
+
+Uzavření prvního dohledání má výslovně říct, co po dohledání nevzniklo. Archivní minimum se často dotýká rozhodnutí, kde tým kdysi odmítl nové pole, tracker, export nebo pomocnou evidenci. Pokud při dohledání vznikne nová kopie starého příkladu, staré rozhodnutí se může vrátit zadními dveřmi.
+
+Použijte tři řádky:
+
+```text
+Při dohledání jsme použili:
+
+Do běžné práce nepřenášíme:
+
+Po uzavření mažeme, anonymizujeme nebo necháváme v původním zdroji:
+```
+
+Příklad:
+
+```text
+Při dohledání jsme použili:
+Kanonickou větu a anonymizovaný příklad relevantní poptávky.
+
+Do běžné práce nepřenášíme:
+Kopie starých zákaznických odpovědí, pomocnou tabulku rozpočtů ani nový štítek v CRM.
+
+Po uzavření mažeme, anonymizujeme nebo necháváme v původním zdroji:
+Konkrétní obchodní komunikaci necháváme pouze v původním vlákně s běžnou retencí.
+```
+
+Tento zápis chrání rozdíl mezi poznatkem a datovým balastem. Poznatek může být krátká věta v checklistu. Balast je kopie detailů, které už nejsou potřeba pro dnešní rozhodnutí. Evropský privacy-first provoz se drží hlavně tím, že tyto dvě věci nesmíchá.
+
+Codyho komentář: největší past dobrého archivu je pocit, že když už jsme ho otevřeli, měli bychom si z něj něco odnést. Někdy je nejlepší odnést si jen potvrzení, že nic dalšího neneseme. Zní to zenově, ale ve skutečnosti je to obyčejná datová hygiena bez vonných tyčinek.
+
+### Karta uzavření prvního dohledání archivního minima
+
+```text
+Archivní minimum:
+
+Běžná situace dohledání:
+
+Kde člověk pravidlo hledal:
+
+Kde ho našel:
+
+Co se opravdu použilo:
+
+Uzavírací stav:
+- ponechat v klidu
+- přesunout kotvu
+- zkrátit kanonickou větu
+- vrátit do lehkého rytmu
+
+Lokální oprava, pokud existuje:
+
+Co zůstává výslovně zavřené:
+
+Privacy-first uzavření:
+Při dohledání jsme použili:
+Do běžné práce nepřenášíme:
+Po uzavření mažeme, anonymizujeme nebo necháváme v původním zdroji:
+
+Návratový signál:
+
+Kde je závěr uložený:
+
+Vlastník:
+```
+
+Karta nemá prodlužovat dohledání. Má ho ukončit. Pokud po jejím vyplnění vznikne nová otázka, zapište ji jako samostatný podnět a nejdřív ověřte, jestli splňuje návratový signál. Nepřilepujte nový problém k archivnímu minimu jen proto, že jste ho právě našli.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte běžnou situaci dohledání.
+2. Minuta 2: řekněte, kde člověk pravidlo hledal a kde ho našel.
+3. Minuta 3: ověřte, jestli podle kanonické věty šlo jednat.
+4. Minuta 4: vyberte jeden uzavírací stav.
+5. Minuta 5: napište, co zůstává zavřené.
+6. Minuta 6: ukončete nebo očistěte datovou stopu dohledání.
+
+Pokud se během šesti minut otevře debata o novém formuláři, kvalifikaci leadů nebo automatizaci, zastavte ji. To může být legitimní téma, ale nepatří do uzavření dohledání. Tady se rozhoduje jen to, jestli archivní minimum fungovalo jako pracovní pomůcka.
+
+### Checklist uzavření prvního dohledání archivního minima
+
+- Víme, jaká běžná situace dohledání spustila?
+- Víme, kde člověk pravidlo hledal a kde ho našel?
+- Šlo podle kanonické věty jednat bez původní historie?
+- Vybrali jsme jeden uzavírací stav?
+- Pokud chyběla kotva, opravujeme jen cestu k pravidlu?
+- Pokud byla věta slabá, zkracujeme ji místo otevírání celé historie?
+- Pokud pravidlo nejde použít, vracíme ho do lehkého rytmu jasně a dočasně?
+- Zůstává původní široký rozsah výslovně zavřený?
+- Nevznikla nová kopie starých zákaznických detailů, CRM atribut, export, tracker ani pomocná tabulka?
+- Je privacy-first uzavření zapsané u stejného pracovního místa?
+- Je návratový signál stále konkrétní?
+
+Uzavření prvního dohledání archivního minima po klidu má být malé, ale pevné. Potvrdí, že pravidlo funguje, nebo opraví nejbližší slabinu. Hlavně ale zabrání tomu, aby se z jednoho archivního otevření stala nová péče o staré téma. Archivní minimum má pomáhat pracovat bez historie, ne znovu vyrábět historii o tom, jak jsme historii dohledali.
+
 ## Pracovní log
 
+- 2026-07-08: Doplněna úvodní podkapitola o uzavření prvního dohledání archivního minima po klidu: čtyři uzavírací stavy, SaaS příklady, lokální opravy kotvy nebo kanonické věty, privacy-first uzavření bez kopírování starých detailů, karta, mini workshop a checklist.
 - 2026-07-08: Doplněna úvodní podkapitola o prvním dohledání archivního minima po klidu: najitelnost kanonické věty, tři výsledky dohledání, SaaS příklad, privacy-first práce bez kopírování starých detailů, karta, mini workshop a checklist.
 - 2026-07-08: Doplněna úvodní podkapitola o uzavření druhého běžného použití archivního minima: čtyři uzavírací stavy, SaaS příklady, propsání zpět do pracovního místa, privacy-first úklid dočasných stop, karta, mini workshop a checklist.
 - 2026-07-08: Doplněna úvodní podkapitola o druhém běžném použití archivního minima: kdy ho otevřít, co sledovat, SaaS příklady, čtyři výsledky, privacy-first kontrola datové stopy, karta, mini workshop a checklist.
