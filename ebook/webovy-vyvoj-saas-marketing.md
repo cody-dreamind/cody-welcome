@@ -309809,8 +309809,165 @@ Když během pěti minut neumíte rozhodnout, neprodlužujte workshop. Buď chyb
 
 Další přirozené setkání má pasivnímu standardu potvrdit obyčejnost. Když funguje, nepřidávejte mu proces. Když drhne jedna věta, opravte jednu větu. Když se změnil svět kolem něj, otevřete nový návratový signál. Všechno ostatní je jen administrativní ozvěna po práci, která už skončila.
 
+## Uzavření dalšího přirozeného setkání s pasivním standardem
+
+Přirozené setkání s pasivním standardem se má zavřít rychle. Ne proto, že by bylo nedůležité, ale protože jeho hlavní hodnota je v tom, že standard dál slouží bez vlastní agendy. Pokud po každém setkání vznikne kontrola, tabulka, meeting nebo nový štítek v CRM, pasivní standard přestal být pasivní. Stal se procesem, který jen nosí klidnější kabát.
+
+Uzavření proto nemá dokazovat, že tým udělal hodně práce. Má potvrdit jednu ze tří věcí: nic se nemění, drobná věta je opravená, nebo vznikl nový návratový signál s vlastní hranicí. Jakmile je jedna z těchto vět napsaná, setkání končí.
+
+Pracovní otázka zní:
+
+```text
+Jaká jedna věta po tomto setkání stačí, aby pasivní standard zůstal použitelný bez další péče?
+```
+
+Pokud na otázku odpovíte odstavcem, pravděpodobně jste otevřeli nové téma. Zkraťte ho. Pokud nejde zkrátit, přiznejte nový návratový signál a oddělte ho od původního standardu. V obou případech se vyplatí hlídat hranici: uzavíráte setkání, ne píšete novou metodiku.
+
+### Tři uzavírací věty
+
+Uzavření přirozeného setkání má mít jednu z těchto podob:
+
+```text
+Bez akce:
+Pasivní standard byl použit při běžné práci a nevznikla nejasnost, nová evidence ani důvod k další kontrole.
+```
+
+```text
+Lokální dočištění:
+Do pracovního místa doplňujeme jednu větu, která zpřesňuje použití standardu; samotný standard, formulář ani evidence se nemění.
+```
+
+```text
+Nový návratový signál:
+Nová situace se týká pouze [konkrétní okraj]; původní pasivní standard dál platí pro [původní rozsah].
+```
+
+Tyto věty nejsou dekorace. Jsou brzda proti tomu, aby se z drobného dotyku stalo plíživé rozšíření práce. Když uzavírací věta neříká, co se nemění, chybí jí polovina hodnoty.
+
+### Praktický SaaS příklad
+
+SaaS tým má pasivní standard pro poptávkový formulář:
+
+```text
+Ve veřejném formuláři nesbíráme rozpočet. Pokud je rozpočet potřeba k doporučení dalšího kroku, ptáme se na něj ručně v konkrétním obchodním kontextu.
+```
+
+Při běžné odpovědi na partnerský lead obchodník zjistí, že pravidlo stačí. Odpověď odejde bez nového pole, bez tabulky a bez doplňkového štítku. Uzavření:
+
+```text
+Pasivní standard fungoval při partnerské poptávce bez další pomoci. Veřejný formulář, CRM pole i revizní rytmus zůstávají beze změny.
+```
+
+Jindy se ukáže, že šablona ruční odpovědi používá příliš úzký příklad. Lidé kvůli tomu váhají, jestli pravidlo platí i pro malé projekty. Uzavření:
+
+```text
+Do obchodní šablony doplňujeme větu, že pravidlo platí i pro malé poptávky. Rozpočet dál nesbíráme ve formuláři a nezakládáme samostatné sledování malých zakázek.
+```
+
+Třetí situace: nový marketplace kanál posílá tak krátké leady, že bez rámcového rozpočtu nejde rozlišit konzultaci od implementace. Uzavření:
+
+```text
+Vzniká nový návratový signál pouze pro marketplace leady. Původní veřejný formulář a běžné partnerské poptávky zůstávají podle pasivního standardu beze změny.
+```
+
+Všimněte si rozdílu. První uzavření nic nezakládá. Druhé opravuje jedno pracovní místo. Třetí otevírá nový okraj, ale chrání původní standard před plošným rozebráním. To je praktická disciplína: řešit nové jen tam, kde nové opravdu vzniklo.
+
+### Co po uzavření nevzniká
+
+Po uzavření přirozeného setkání výslovně nevzniká:
+
+- třetí kontrola jen proto, že standard byl znovu použit,
+- nový checklist pro běžné použití,
+- tabulka výskytů bez jasné rozhodovací otázky,
+- CRM štítek, který nikdo nevyhodnotí,
+- kopie zákaznických příkladů v metodice,
+- nový review rytmus bez návratového signálu.
+
+Pokud některá z těchto věcí opravdu vzniknout musí, už nejde o běžné uzavření. Pak napište nový návratový signál, jeho vlastníka, stop podmínku a privacy-first hranici. Jinak bude tým za měsíc spravovat evidenci, která vznikla jen proto, že se někdo bál nechat funkční pravidlo v klidu.
+
+### Privacy-first uzavření
+
+Privacy-first uzavření má být konkrétní. Nestačí napsat "data chráníme". Napište, která data díky uzavření nezačnou vznikat a kde zůstávají ta, která už existují.
+
+Dobrá věta:
+
+```text
+Do standardu nepřenášíme název firmy, rozpočet ani obsah poptávky; konkrétní obchodní detail zůstává jen v původním CRM záznamu s běžnou retencí.
+```
+
+Ještě lepší je přidat, co se smaže nebo zobecní:
+
+```text
+Pracovní poznámku s příkladem po úpravě šablony mažeme a do metodiky propisujeme jen obecnou hranici pro marketplace leady.
+```
+
+Codyho komentář: nejlevnější privacy-first rozhodnutí je často to, které nikdy nevytvoří nový datový objekt. Žádný export, žádný štítek, žádná tabulka "pro jistotu". To nezní hrdinsky, ale provozně je to nádhera. Ticho v databázi je občas nejlepší feature.
+
+### Karta uzavření přirozeného setkání
+
+Kartu použijte jen tehdy, když se něco skutečně mění nebo když je potřeba dohledat, proč se nic dalšího neotevřelo:
+
+```text
+Pasivní standard:
+
+Kde se přirozeně použil:
+
+Výsledek setkání:
+- bez akce
+- lokální dočištění
+- nový návratový signál
+
+Uzavírací věta:
+
+Co se mění:
+
+Co zůstává beze změny:
+
+Jaká další kontrola nevzniká:
+
+Jaká nová evidence nevzniká:
+
+Kde zůstávají původní zákaznické nebo obchodní detaily:
+
+Co mažeme, zobecňujeme nebo nepřenášíme:
+
+Kde je závěr uložený:
+
+Vlastník, pokud něco zůstává k dočištění:
+```
+
+U stavu `bez akce` by karta měla být výjimka. Jedna věta u pracovního místa většinou stačí. Pokud karta vzniká pokaždé, standard není pasivní; jen jste přesunuli práci do hezčí šablony.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: pojmenujte pasivní standard a pracovní místo, kde se použil.
+2. Minuta 2: vyberte jeden ze tří výsledků setkání.
+3. Minuta 3: napište uzavírací větu.
+4. Minuta 4: doplňte, co se výslovně nemění.
+5. Minuta 5: napište, jaká evidence nebo kontrola nevzniká.
+6. Minuta 6: smažte nebo zobecněte pracovní detaily, které nemají zůstat v metodice.
+
+Pokud šest minut nestačí, zastavte se. Buď je setkání moc složitě popsané, nebo nejde o uzavření, ale o nový návratový signál. V obou případech pomůže zmenšit větu, ne prodloužit schůzku.
+
+### Checklist uzavření přirozeného setkání
+
+- Má setkání jeden jasný výsledek?
+- Je uzavírací věta krátká a dohledatelná?
+- Říká věta nejen co se stalo, ale i co se nemění?
+- Pokud jde o lokální dočištění, je omezené na jedno pracovní místo?
+- Pokud vznikl nový návratový signál, má vlastní hranici?
+- Zůstává původní pasivní standard platný v původním rozsahu?
+- Nevzniká třetí kontrola bez nového důvodu?
+- Nevzniká tabulka, štítek, export ani tracker bez rozhodovací otázky?
+- Zákaznické a obchodní detaily zůstávají v původním systému?
+- Pracovní poznámky jsou smazané nebo zobecněné?
+- Je jasné, kde tým závěr najde při dalším běžném použití?
+
+Uzavření přirozeného setkání je dobré tehdy, když po něm tým nemusí nic držet v hlavě. Standard buď dál tiše funguje, jedno místo je čistší, nebo nový okraj dostal vlastní malý návrat. Vše ostatní zůstává zavřené. Přesně tak má pasivní standard vydělávat na svůj název.
+
 ## Pracovní log
 
+- 2026-07-08: Doplněna úvodní podkapitola o uzavření dalšího přirozeného setkání s pasivním standardem: tři uzavírací věty, SaaS příklad, co po uzavření nevzniká, privacy-first uzavření, karta, mini workshop a checklist.
 - 2026-07-08: Doplněna úvodní podkapitola o dalším přirozeném setkání s pasivním standardem: rozlišení od plánované kontroly, tři výsledky, SaaS příklad, privacy-first hranice evidence, karta, mini workshop a checklist.
 - 2026-07-08: Doplněna úvodní podkapitola o uzavření druhého běžného použití po uzavřeném návratovém signálu: čtyři uzavírací stavy, SaaS příklad, propsání závěru, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-07-08: Doplněna krátká poznámka, aby po čistém druhém použití pasivního standardu nevznikala třetí kontrola bez nového návratového signálu.
