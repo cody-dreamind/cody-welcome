@@ -310341,8 +310341,204 @@ Když se během workshopu objeví potřeba číst původní dlouhou historii, be
 
 První běžné použití archivního minima má ukázat, jestli se pravidlo opravdu stalo součástí provozu. Když ano, nechte ho být. Když ne, opravte nejbližší větu nebo místo. A když se ukáže, že pravidlo bez historie neobstojí, vraťte ho do lehkého revizního rytmu. Archiv není odpadkový koš na nerozhodnuté věci. Archiv je místo pro pravidla, která už umí pracovat bez doprovodu.
 
+## Uzavření prvního běžného použití archivního minima
+
+První běžné použití archivního minima je test. Uzavření tohoto použití je rozhodnutí, co se s výsledkem stane. Bez uzavření se snadno vytvoří podivný mezistav: pravidlo už je v archivu, ale někdo ho ještě mimořádně sleduje, někdo doplňuje poznámky bokem a někdo čeká, jestli se z prvního použití náhodou nevyrobí nový projekt. To je přesně chvíle, kdy archivní minimum přestává být minimum.
+
+Uzavření začněte jednou větou:
+
+```text
+První běžné použití archivního minima uzavíráme takto:
+```
+
+Za ni napište stav pravidla, nejbližší opravu a datovou hranici. Neopakujte celou historii. Historie už jednou skončila v archivu. Teď potřebujete vědět, jestli kanonická věta obstála v běžné práci.
+
+Dobrá uzavírací věta může znít takto:
+
+```text
+První běžné použití archivního minima uzavíráme takto:
+Kanonická věta byla u potvrzovací šablony, obchodník podle ní rozhodl bez původní historie a nevznikl nový CRM atribut ani pomocná tabulka. Pravidlo necháváme v běžném pracovním místě bez další mimořádné kontroly.
+```
+
+Tahle věta je praktická právě tím, že není ambiciózní. Neříká "otevíráme novou kvalifikační strategii". Neříká ani "budeme to ještě sledovat". Říká, že pravidlo fungovalo, zůstává malé a datová stopa se nezvětšila. V provozu je to velmi dobrý výsledek, i když se s tím špatně pózuje na interním all-hands.
+
+### Čtyři uzavírací stavy
+
+Po prvním použití archivního minima vyberte jeden ze čtyř stavů:
+
+- Ponechat v archivu: kanonická věta byla najitelná, použitelná a nevznikla nová evidence.
+- Doplnit pracovní kotvu: věta je správná, ale nebyla u místa, kde se rozhodovalo.
+- Zpřesnit kanonickou větu: věta byla najitelná, ale člověk podle ní nerozhodl dost jistě.
+- Vrátit do lehkého revizního rytmu: pravidlo bez historie neobstálo a znovu otevřelo výjimky, staré otázky nebo novou datovou stopu.
+
+Stav `ponechat v archivu` znamená, že už není co vymýšlet. Pravidlo prošlo běžným použitím a může dál žít jako krátká věta v pracovním místě. Nezakládejte druhé ověření jen proto, že první dopadlo dobře. Úspěšné archivní minimum nemá dostat pečovatelský plán.
+
+Stav `doplnit pracovní kotvu` je lokální oprava umístění. Pokud obchodník musel hledat větu ve staré kartě, přesuňte ji k potvrzovací šabloně. Pokud vývojář musel hledat rozhodnutí o formuláři v logu, dejte krátkou poznámku k místu, kde se formulář upravuje. Neměňte pravidlo; jen ho posaďte tam, kde má pracovat.
+
+Stav `zpřesnit kanonickou větu` použijte, když věta zněla hezky, ale slabě. Typicky obsahovala náladu místo rozhodnutí. "Rozpočet řešíme citlivě" nestačí. "Rozpočet nedáváme do veřejného formuláře; ptáme se volitelně až v obchodním vlákně, pokud bez něj nejde navrhnout další krok" už vede člověka k akci.
+
+Stav `vrátit do lehkého revizního rytmu` je poctivé přiznání, že archivace přišla brzy. Není to selhání. Selhání by bylo držet pravidlo v archivu a přitom kolem něj znovu budovat sledování, tabulky a výjimky. Když první použití vyžaduje starou historii, pravidlo ještě není samostatné.
+
+### Praktický SaaS příklad
+
+První použití dopadlo čistě:
+
+```text
+Situace:
+Přišla relevantní SaaS poptávka bez uvedeného rozpočtu.
+
+Použití:
+Obchodník našel kanonickou větu u potvrzovací šablony a položil volitelnou otázku v odpovědi.
+
+Výsledek:
+Další krok šel navrhnout bez úpravy formuláře, bez nového CRM atributu a bez pomocné tabulky.
+```
+
+Uzavření:
+
+```text
+Uzavírací stav:
+Ponechat v archivu.
+
+Co ponecháváme:
+Kanonickou větu u potvrzovací šablony a stejnou hranici v poznámce k formuláři.
+
+Co zůstává zavřené:
+Povinné pole pro rozpočet, automatický lead scoring a export rozpočtových údajů.
+
+Privacy-first závěr:
+Konkrétní rozpočtový kontext zůstává jen v obchodním vlákně. Do pracovního pravidla ukládáme pouze zobecněnou větu.
+```
+
+Slabší výsledek:
+
+```text
+Situace:
+Obchodník větu našel až ve staré archivní kartě a musel se ptát, jestli pořád platí.
+
+Uzavírací stav:
+Doplnit pracovní kotvu.
+
+Oprava:
+Stejnou kanonickou větu přenášíme k potvrzovací šabloně.
+
+Co neotevíráme:
+Nové review pravidla, úpravu formuláře, CRM atribut ani tabulku výjimek.
+```
+
+Nejslabší výsledek:
+
+```text
+Situace:
+Použití znovu otevřelo debatu, zda rozpočet přece jen sbírat ve formuláři, a tým začal ručně značit poptávky bez rozpočtu.
+
+Uzavírací stav:
+Vrátit do lehkého revizního rytmu.
+
+Další krok:
+Na dva týdny otevřeme malou otázku: kde opravdu vzniká tření při kvalifikaci rozpočtu?
+
+Privacy-first hranice:
+Nepřidáváme povinné pole ani trvalý CRM atribut. Pokud vznikne dočasná poznámka, musí mít vlastníka a konec.
+```
+
+Třetí varianta je nepříjemná, ale zdravá. Lepší je pravidlo vytáhnout z archivu a zmenšit otázku, než si lhát, že archivní minimum funguje, zatímco tým potichu vytváří novou evidenci.
+
+### Privacy-first uzavření
+
+Uzavření prvního použití archivního minima musí říct, co po použití nevzniká. Bez této věty má tým sklon nechávat si malé provozní stopy "pro jistotu". Jenže každá taková stopa je malý závazek: někdo ji musí chránit, vysvětlit, smazat nebo aktualizovat.
+
+Použijte tři řádky:
+
+```text
+Do pracovního místa přenášíme:
+
+Do archivu necháváme:
+
+Do provozu nepřenášíme:
+```
+
+Příklad:
+
+```text
+Do pracovního místa přenášíme:
+Jednu kanonickou větu u potvrzovací šablony.
+
+Do archivu necháváme:
+Historii rozhodnutí, staré příklady a původní karty ověření.
+
+Do provozu nepřenášíme:
+Pomocnou tabulku výjimek, kopie zákaznických odpovědí, nový CRM atribut ani další kontrolní rytmus.
+```
+
+Tím oddělíte poznatek od dat. Poznatek má být blízko práce. Data mají zůstat jen tam, kde mají jasný účel. Codyho komentář: nejlevnější databáze je ta, kterou nemusíte zakládat, čistit, auditovat ani za půl roku rozpačitě vysvětlovat. Překvapivě elegantní technologie.
+
+### Karta uzavření prvního použití archivního minima
+
+```text
+Archivní minimum:
+
+Kanonická věta:
+
+První běžné použití:
+
+Co se opravdu stalo:
+
+Uzavírací stav:
+- ponechat v archivu
+- doplnit pracovní kotvu
+- zpřesnit kanonickou větu
+- vrátit do lehkého revizního rytmu
+
+Co se propisuje do pracovního místa:
+
+Co zůstává v archivu jen jako historie:
+
+Co zůstává výslovně zavřené:
+
+Privacy-first uzavření:
+Do pracovního místa přenášíme:
+Do archivu necháváme:
+Do provozu nepřenášíme:
+
+Návratový signál pro další otevření:
+
+Vlastník pracovního místa:
+
+Kde je závěr uložený:
+```
+
+Karta nemá prodlužovat život archivního minima. Má ho buď potvrdit, nebo vrátit do lehkého režimu, kde se dá poctivě opravit. Pokud po vyplnění karty vznikne další otázka, zapište ji zvlášť. Nelepte nový problém na archivní pravidlo jen proto, že bylo zrovna otevřené.
+
+### Mini workshop na 5 minut
+
+1. Minuta 1: přečtěte kanonickou větu a první běžné použití.
+2. Minuta 2: pojmenujte, co se opravdu stalo.
+3. Minuta 3: vyberte jeden uzavírací stav.
+4. Minuta 4: napište, co se propisuje do pracovního místa a co zůstává v archivu.
+5. Minuta 5: zapište privacy-first uzavření a návratový signál.
+
+Když pět minut nestačí, pravděpodobně neuzavíráte první použití. Otevíráte nové téma, starou výjimku nebo debatu o rozsahu. Pojmenujte ji zvlášť a archivní minimum nechte nést jen to, co opravdu patří k jeho použití.
+
+### Checklist uzavření prvního použití archivního minima
+
+- Máme konkrétní popis prvního běžného použití?
+- Víme, zda člověk našel kanonickou větu v pracovním místě?
+- Šlo podle věty rozhodnout bez původní historie?
+- Vybrali jsme jeden ze čtyř uzavíracích stavů?
+- Pokud doplňujeme kotvu, je oprava jen u nejbližšího pracovního místa?
+- Pokud zpřesňujeme větu, je nová formulace rozhodovací, ne pocitová?
+- Pokud vracíme pravidlo do lehkého revizního rytmu, máme konkrétní otázku?
+- Je jasné, co zůstává jen archivní historie?
+- Nepřenášíme do provozu nové osobní nebo obchodní údaje bez účelu?
+- Nevzniká nový review rytmus jen proto, že se pravidlo jednou použilo?
+- Má další otevření konkrétní návratový signál?
+
+Uzavření prvního běžného použití archivního minima má být krátké a trochu nekompromisní. Buď pravidlo funguje samo, nebo potřebuje nejbližší lokální opravu, nebo ještě nepatří do archivu. Všechny tři výsledky jsou použitelné. Nepoužitelný je jen mlhavý mezistav, ve kterém se archiv tváří jako hotovo a provoz si mezitím zakládá nové poznámky bokem.
+
 ## Pracovní log
 
+- 2026-07-08: Doplněna úvodní podkapitola o uzavření prvního běžného použití archivního minima: čtyři uzavírací stavy, SaaS příklady, privacy-first rozdělení poznatku a dat, karta, mini workshop a checklist.
 - 2026-07-08: Doplněna úvodní podkapitola o prvním běžném použití archivního minima: ověření kanonické věty bez původní historie, čtyři výsledky použití, SaaS příklad, privacy-first kontrola nové evidence, karta, mini workshop a checklist.
 - 2026-07-08: Doplněna úvodní podkapitola o převodu pasivního standardu do archivního minima: podmínky archivace, SaaS příklad, rozdělení živého pracovního místa a historie, privacy-first archivace, karta, mini workshop a checklist.
 - 2026-07-08: Doplněna úvodní podkapitola o uzavření dalšího přirozeného setkání s pasivním standardem: tři uzavírací věty, SaaS příklad, co po uzavření nevzniká, privacy-first uzavření, karta, mini workshop a checklist.
