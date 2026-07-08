@@ -311583,8 +311583,198 @@ Pokud workshop začne řešit nový proces, nové pole nebo novou automatizaci, 
 
 Druhé dohledání archivního minima je zkouška bez dramatu. Když pravidlo obstojí, nechte ho být. Když neobstojí, opravte nejmenší čitelnou část: hranici, kotvu nebo návrat do lehkého rytmu. Archivní minimum má být užitečné právě tím, že po něm nezůstane nová péče, nové kopie a nový pocit, že staré rozhodnutí zase ožilo.
 
+## Uzavření druhého dohledání archivního minima po klidu
+
+Druhé dohledání archivního minima po klidu se musí zavřít rychleji než první. První dohledání ještě testovalo, jestli záznam po pauze vůbec najdete a pochopíte. Druhé už má přísnější otázku: obstálo archivní minimum jako normální pracovní pomůcka, nebo pořád potřebuje zvláštní péči?
+
+Začněte uzavírací větou:
+
+```text
+Druhé dohledání archivního minima uzavíráme takto:
+```
+
+Za ni nepište celý příběh. Napište výsledek, který další člověk použije bez původní historie:
+
+```text
+Druhé dohledání archivního minima uzavíráme takto:
+Pravidlo bylo dohledatelné i pro support, kanonická věta stačila v příbuzné zákaznické situaci a rozpočet dál nepřenášíme do nového CRM atributu. Archivní minimum zůstává v klidu; přidáváme pouze odkaz ze supportního handoffu na existující kanonickou větu.
+```
+
+Taková věta ukončí tři věci najednou. Řekne, že pravidlo obstálo. Řekne, že nevzniká nový sběr dat. A řekne, jaká drobná oprava se případně udělala, aniž by z ní byla nová procesní kapitola.
+
+### Čtyři uzavírací stavy
+
+Po druhém dohledání vyberte jeden ze čtyř stavů:
+
+- Zavřít do archivního klidu: pravidlo bylo najitelné, srozumitelné a použitelné i bez čerstvé paměti.
+- Dočistit hranici platnosti: pravidlo fungovalo, ale jedna příbuzná situace potřebuje přesnější větu.
+- Přidat roli kotvu: jiná role pravidlo použila správně, ale hledala ho jinde než původní tým.
+- Vrátit záznam do lehkého rytmu: druhé dohledání ukázalo, že archivní minimum ještě neumí vést práci samostatně.
+
+Stav `zavřít do archivního klidu` je konec mimořádné péče. Zapište jednu větu k pracovnímu místu a už nepřidávejte třetí kontrolu. Pokud pravidlo obstálo dvakrát po klidu, další kontrola má vzniknout až z návratového signálu nebo z běžné revize archivu.
+
+Stav `dočistit hranici platnosti` má být malý. Přidejte jednu větu typu: "Platí také pro existující zákaznická vlákna, pokud údaj slouží jen k návrhu dalšího kroku." Nepřidávejte seznam výjimek pro každou situaci, která by jednou mohla nastat. To není hranice. To je pokus uhodnout budoucnost v dokumentu, který má zůstat krátký.
+
+Stav `přidat roli kotvu` znamená, že pravidlo se nekopíruje. Přidá se odkaz, alias nebo krátká pracovní věta v místě, kde daná role opravdu pracuje. Obchod může mít kotvu u potvrzovací šablony, support u handoffu, produkt u rozhodovacího indexu. Zdroj pravdy zůstává jeden.
+
+Stav `vrátit záznam do lehkého rytmu` použijte jen tehdy, když druhé dohledání selhalo v obsahu, ne jen v cestě. Pokud člověk pravidlo nenašel, opravte cestu. Pokud věta neumí rozhodnout ani po lokálním zpřesnění, vraťte ji do lehkého rytmu s konkrétní otázkou. Bez konkrétní otázky se z návratu stane jen elegantní název pro nejistotu.
+
+### Praktický SaaS příklad
+
+Druhé dohledání:
+
+```text
+Support řešil existujícího zákazníka, který chtěl rozšířit SaaS projekt, ale neuvedl rozhodovací limit.
+```
+
+Archivní minimum:
+
+```text
+Rozpočet nezakládáme jako trvalý CRM atribut, pokud stačí volitelný dotaz v existujícím pracovním vlákně.
+```
+
+Uzavření:
+
+```text
+Uzavírací stav:
+Přidat roli kotvu.
+
+Proč:
+Support pravidlo použil správně, ale dohledal ho přes obchodní šablonu. Obsah pravidla obstál, cesta pro support byla slabá.
+
+Co děláme:
+Do supportního handoffu přidáváme odkaz "rozpočet / rozhodovací limit" na existující archivní minimum.
+
+Co zůstává zavřené:
+Nový CRM atribut, povinné pole v zákaznickém formuláři, export rozhodovacích limitů a pomocná tabulka rozpočtů.
+```
+
+Jiný výsledek:
+
+```text
+Uzavírací stav:
+Dočistit hranici platnosti.
+
+Proč:
+Pravidlo mluvilo jen o nových poptávkách, ale druhé dohledání ukázalo stejný princip u existujících zákaznických vláken.
+
+Oprava kanonické věty:
+Platí pro nové poptávky i existující zákaznická vlákna, pokud údaj potřebujeme jen k návrhu dalšího kroku a nemusí se stát trvalým profilem zákazníka.
+
+Co neotevíráme:
+Novou kvalifikační taxonomii, rozšíření CRM ani automatické značkování účtů.
+```
+
+Oba příklady jsou drobné. To je záměr. Uzavření druhého dohledání nemá být návrat starého tématu na poradní stůl. Má jen potvrdit, jestli archivní minimum funguje i mimo původní stopu.
+
+### Privacy-first uzavření
+
+Při uzavření druhého dohledání hlídejte hlavně to, aby se z užitečného pravidla nestal nový zvyk kopírovat příklady. Druhé použití často svádí k větě: "Přidejme si ještě jeden konkrétní případ, ať je to jasné." Někdy to dává smysl, ale většinou stačí zobecněná věta.
+
+Použijte krátký záznam:
+
+```text
+Do uzavření přenášíme:
+
+Do archivu nepřidáváme:
+
+Po uzavření dál nesbíráme:
+
+Původní systémy necháváme:
+```
+
+Příklad:
+
+```text
+Do uzavření přenášíme:
+Zobecněný poznatek, že pravidlo platí i pro existující zákaznická vlákna.
+
+Do archivu nepřidáváme:
+Kopii zákaznické zprávy, screenshot z CRM, konkrétní částku ani jméno účtu.
+
+Po uzavření dál nesbíráme:
+Rozpočet jako povinný údaj, rozhodovací limit jako CRM atribut ani ruční segment "citlivý na cenu".
+
+Původní systémy necháváme:
+Běžnou zákaznickou komunikaci s existující retencí a přístupovými právy.
+```
+
+Privacy-first hodnota je v přesném oddělení poznatku od dat. Poznatek může zůstat. Konkrétní detaily nemusí cestovat do další vrstvy jen proto, že se hodí jako ilustrace. Ilustrace bez jasného účelu je často jen přebytečná kopie v hezkém kabátě.
+
+Codyho komentář: druhé dohledání je dobrý test dospělosti pravidla. Pokud po něm chcete založit další tabulku, pravidlo možná nevyrostlo. Pokud po něm stačí jedna věta, jeden odkaz a žádná nová evidence, gratuluju, provoz právě udělal něco užitečného a skoro neviditelného. To je podezřele dobrý výsledek.
+
+### Karta uzavření druhého dohledání
+
+```text
+Archivní minimum:
+
+Druhá běžná situace:
+
+Co pravidlo umožnilo rozhodnout:
+
+Stačilo bez původní historie?
+- ano
+- částečně, chyběla hranice platnosti
+- částečně, chyběla kotva pro roli
+- ne, vracíme do lehkého rytmu
+
+Uzavírací stav:
+- zavřít do archivního klidu
+- dočistit hranici platnosti
+- přidat roli kotvu
+- vrátit záznam do lehkého rytmu
+
+Jednovětý závěr:
+
+Lokální oprava, pokud existuje:
+
+Co zůstává výslovně zavřené:
+
+Privacy-first uzavření:
+Do uzavření přenášíme:
+Do archivu nepřidáváme:
+Po uzavření dál nesbíráme:
+Původní systémy necháváme:
+
+Návratový signál:
+
+Kde je závěr uložený:
+
+Vlastník:
+```
+
+Karta má být krátká. Pokud se začne plnit dlouhými odstavci, pravděpodobně už neuzavíráte dohledání, ale píšete novou podkapitolu pravidla. Zastavte se a vyberte jeden nejbližší výsledek.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte druhou běžnou situaci a kanonickou větu.
+2. Minuta 2: řekněte, jestli pravidlo stačilo bez původní historie.
+3. Minuta 3: vyberte jeden uzavírací stav.
+4. Minuta 4: napište jednovětý závěr.
+5. Minuta 5: určete nejmenší lokální opravu, pokud je potřeba.
+6. Minuta 6: zavřete privacy-first stopu a napište, co dál nesbíráte.
+
+Když se během workshopu objeví nový návrh, nepřilepujte ho k uzavření. Buď splňuje návratový signál a otevře vlastní malý krok, nebo ho zapíšete jako podnět bez práce. Uzavření druhého dohledání nemá být brána pro všechno, co se zrovna někomu vybavilo.
+
+### Checklist uzavření druhého dohledání
+
+- Víme, jakou běžnou situaci druhé dohledání řešilo?
+- Stačila kanonická věta bez původní historie?
+- Vybrali jsme jeden uzavírací stav?
+- Pokud pravidlo obstálo, nepřidáváme třetí kontrolu bez návratového signálu?
+- Pokud chyběla hranice platnosti, doplnili jsme ji jednou pracovní větou?
+- Pokud chyběla kotva pro jinou roli, přidali jsme odkaz místo kopie pravidla?
+- Pokud záznam vracíme do lehkého rytmu, má konkrétní otázku a dočasnou hranici?
+- Zůstává původní široký rozsah výslovně zavřený?
+- Nepřidali jsme nové zákaznické kopie, CRM atributy, exporty, pomocné tabulky ani trackery?
+- Je privacy-first závěr uložený u stejného pracovního místa?
+- Dá se podle jedné věty poznat, co se při druhém dohledání rozhodlo?
+
+Uzavření druhého dohledání archivního minima po klidu je místo, kde se rozhoduje, jestli staré téma opravdu zůstane lehké. Když pravidlo obstojí, dejte mu ticho. Když potřebuje malou opravu, opravte nejbližší hranu. Když neobstojí, vraťte ho do lehkého rytmu s přesnou otázkou. Hlavně z něj nedělejte novou produkční evidenci jen proto, že se archiv po delší době zase ukázal jako užitečný.
+
 ## Pracovní log
 
+- 2026-07-08: Doplněna úvodní podkapitola o uzavření druhého dohledání archivního minima po klidu: čtyři uzavírací stavy, SaaS příklady, role kotvy, privacy-first uzavření bez nových kopií dat, karta, mini workshop a checklist.
 - 2026-07-08: Doplněna úvodní podkapitola o druhém dohledání archivního minima po klidu: ověření bez čerstvé paměti, hranice platnosti, druhá kotva, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-07-08: Doplněna úvodní podkapitola o uzavření prvního dohledání archivního minima po klidu: čtyři uzavírací stavy, SaaS příklady, lokální opravy kotvy nebo kanonické věty, privacy-first uzavření bez kopírování starých detailů, karta, mini workshop a checklist.
 - 2026-07-08: Doplněna úvodní podkapitola o prvním dohledání archivního minima po klidu: najitelnost kanonické věty, tři výsledky dohledání, SaaS příklad, privacy-first práce bez kopírování starých detailů, karta, mini workshop a checklist.
