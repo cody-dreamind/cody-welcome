@@ -309965,8 +309965,187 @@ Pokud šest minut nestačí, zastavte se. Buď je setkání moc složitě popsan
 
 Uzavření přirozeného setkání je dobré tehdy, když po něm tým nemusí nic držet v hlavě. Standard buď dál tiše funguje, jedno místo je čistší, nebo nový okraj dostal vlastní malý návrat. Vše ostatní zůstává zavřené. Přesně tak má pasivní standard vydělávat na svůj název.
 
+## Převod pasivního standardu do archivního minima
+
+Pasivní standard nemá žít věčně jako samostatné téma. Pokud několik běžných použití, přirozených setkání a drobných návratů ukáže, že pravidlo už nevyžaduje zvláštní pozornost, může se přesunout do archivního minima. To neznamená, že přestane platit. Znamená to, že z něj přestane být kapitola práce.
+
+Archivní minimum je nejmenší dohledatelná stopa, která týmu stačí k tomu, aby pravidlo našel, pochopil a použil bez obnovování celé historie. V praxi jde často o jednu rozhodovací větu u pracovního místa, odkaz na kanonické pravidlo a krátký návratový signál. Zbytek se smaže, zobecní nebo nechá ve starém záznamu bez další péče.
+
+Pracovní otázka zní:
+
+```text
+Co musí z pasivního standardu zůstat, aby šel použít i za půl roku bez nové evidence a bez otevírání staré diskuse?
+```
+
+Pokud odpověď vyžaduje stránku vysvětlení, standard ještě není připravený na archivní minimum. Buď je pravidlo moc složité, nebo tým pořád potřebuje kontext, který se nedá předat jednou větou. V takovém případě není ostuda nechat standard ještě v pasivním provozu. Ostuda je archivovat ho tak brzy, že za měsíc všichni hledají, proč vlastně existoval.
+
+### Tři podmínky archivace
+
+Pasivní standard převádějte do archivního minima až tehdy, když platí tři věci:
+
+- pravidlo bylo použité bez původní historie,
+- poslední setkání nevytvořilo novou kontrolu ani novou evidenci,
+- návratový signál je jasnější než seznam výjimek.
+
+První podmínka chrání použitelnost. Pokud pravidlo umí použít jen člověk, který byl u jeho vzniku, není archivní. Je osobní vzpomínka v převleku.
+
+Druhá podmínka chrání provoz. Pokud se po každém použití ještě něco dočišťuje, standard sice může být dobrý, ale pořád není hotový pro tichý režim.
+
+Třetí podmínka chrání rozsah. Archivní minimum nemá nést seznam všech situací, které se kdy řešily. Má nést hranici, podle které tým pozná, kdy pravidlo dál stačí a kdy vzniká nový důvod otevřít malý návrat.
+
+Praktická věta:
+
+```text
+Standard převádíme do archivního minima, protože byl použit bez původní historie, poslední přirozené setkání skončilo bez nové evidence a návratový signál je omezený na marketplace leady s nedostatečným zadáním.
+```
+
+Taková věta není román. A přesně proto je dobrá.
+
+### Praktický SaaS příklad
+
+Tým má pasivní standard pro poptávkový formulář:
+
+```text
+Ve veřejném formuláři nesbíráme rozpočet. Pokud je rozpočet potřeba k doporučení dalšího kroku, ptáme se na něj ručně v konkrétním obchodním kontextu.
+```
+
+Pravidlo prošlo několika použitími. Obchod ho použil u přímé poptávky, marketing podle něj neupravoval formulář a produkt nezakládal nové CRM pole. Jediný okraj, který se ukázal jako odlišný, jsou marketplace leady s příliš krátkým zadáním. Ty už mají vlastní návratový signál.
+
+Archivní minimum může vypadat takto:
+
+```text
+Kanonická věta:
+Veřejný formulář nesbírá rozpočet; rozpočet řešíme až ručně, když je potřeba pro doporučení dalšího kroku.
+
+Platí pro:
+přímé poptávky, partnerské poptávky a běžný kontaktní formulář.
+
+Neplatí automaticky pro:
+marketplace leady s tak krátkým zadáním, že nejde odlišit konzultaci od implementace.
+
+Návratový signál:
+tři marketplace leady za sebou nepůjdou rozumně kvalifikovat bez rámcového rozpočtu.
+
+Datová hranice:
+nepřidáváme veřejné pole pro rozpočet, CRM scoring ani novou tabulku výjimek.
+```
+
+To stačí. Nepotřebujete přepisovat celou historii, kdo kdy navrhl nové pole, kdo byl proti a jak přesně zněla první šablona odpovědi. Pokud se k tématu někdo za půl roku vrátí, potřebuje současné pravidlo, hranici a signál. Ne archeologii interního váhání, byť by byla dramatická a s pěknými odrážkami.
+
+### Co archivovat a co nechat u pracovního místa
+
+Archivní minimum není úklid do sklepa. Je to rozdělení mezi živé pracovní místo a starou historii.
+
+U pracovního místa nechte:
+
+- jednu kanonickou větu,
+- rozsah platnosti,
+- návratový signál,
+- privacy-first datovou hranici,
+- odkaz na starší rozhodnutí, pokud je opravdu potřeba.
+
+Do archivu nebo starého záznamu patří:
+
+- průběžné poznámky z dočištění,
+- konkrétní zákaznické příklady,
+- staré varianty rozhodovací věty,
+- dočasné kontrolní otázky,
+- záznamy o setkáních, která skončila bez akce.
+
+Smazat nebo zobecnit se mají hlavně pracovní detaily, které už nemají rozhodovací hodnotu. Typicky jména zákazníků, rozpočty, části poptávek, interní poznámky obchodníka nebo dočasné exporty. Pokud detail nepomůže budoucímu rozhodnutí, nemá v metodice co dělat.
+
+Codyho komentář: archivní minimum je chvíle, kdy se ukáže, jestli tým opravdu věří svému pravidlu. Kdo mu nevěří, schová kolem něj deset poznámek "pro jistotu". Kdo mu věří, nechá mu jednu dobrou větu a zbytek uklidí. Minimalismus, ale bez vonné svíčky.
+
+### Privacy-first archivace
+
+Privacy-first archivace má jednoduchý cíl: pravidlo zůstane použitelné, ale nezůstane po něm zbytečná datová stopa.
+
+Před převodem položte čtyři otázky:
+
+```text
+Obsahuje archivní stopa konkrétní zákaznické údaje?
+
+Obsahuje obchodní detaily, které nejsou nutné pro budoucí rozhodnutí?
+
+Vzniká nová evidence jen proto, že pravidlo archivujeme?
+
+Umíme pravidlo zachovat obecněji, bez kopírování původních příkladů?
+```
+
+Dobrá archivace často znamená, že se text zkrátí a zároveň zlepší. Například:
+
+```text
+Špatně:
+U klienta Acme jsme zjistili, že rozpočet 80 000 Kč nestačil na implementaci, proto rozpočet nesbíráme ve formuláři.
+
+Lépe:
+Rozpočet ve veřejném formuláři nesbíráme, protože v první fázi rozhoduje hlavně cíl projektu a vhodný další krok; obchodní detaily řešíme až v konkrétním kontextu.
+```
+
+Druhá věta je přenosnější a méně citlivá. Neříká všechno, co se kdysi stalo. Říká jen to, co tým potřebuje k dobrému příštímu rozhodnutí.
+
+### Karta archivního minima
+
+```text
+Název pasivního standardu:
+
+Kanonická věta, která zůstává:
+
+Kde věta bydlí:
+
+Rozsah platnosti:
+
+Co zůstává mimo rozsah:
+
+Návratový signál:
+
+Privacy-first datová hranice:
+
+Co mažeme nebo zobecňujeme:
+
+Jaká kontrola po archivaci nevzniká:
+
+Kde je starší rozhodnutí, pokud ho někdo potřebuje:
+
+Vlastník pracovního místa:
+
+Datum převodu do archivního minima:
+```
+
+Karta nemá být nový permanentní formulář. Vyplňte ji při převodu a potom z ní přeneste živé části tam, kde se pravidlo používá. Pokud karta zůstane jediným místem, kde pravidlo existuje, archivace se nepovedla. Archivní minimum má být po ruce v práci, ne zamčené v dokumentu, který všichni otevřou až při auditu nebo při hledání viny.
+
+### Mini workshop na 8 minut
+
+1. Minuta 1: přečtěte pasivní standard nahlas.
+2. Minuta 2: ověřte, jestli byl použitelný bez původní historie.
+3. Minuta 3: napište jednu kanonickou větu.
+4. Minuta 4: určete rozsah platnosti a jeden okraj mimo rozsah.
+5. Minuta 5: napište návratový signál.
+6. Minuta 6: určete, jaká nová evidence po archivaci nevzniká.
+7. Minuta 7: označte pracovní detaily ke smazání nebo zobecnění.
+8. Minuta 8: přeneste živou větu do pracovního místa.
+
+Pokud se ve čtvrté minutě objeví víc než tři okraje mimo rozsah, nepřevádějte standard do archivu. Ještě není stabilní. Zvolte jeden okraj, otevřete k němu malý návratový signál a archivaci odložte. Lepší je pravidlo ponechat chvíli viditelné než archivovat balík výjimek, který bude za měsíc stejně někdo rozbalovat.
+
+### Checklist archivního minima
+
+- Byl standard použit bez původní historie?
+- Skončilo poslední přirozené setkání bez nové evidence?
+- Má standard jednu kanonickou větu?
+- Je jasné, kde tato věta bydlí v běžné práci?
+- Je rozsah platnosti kratší než historie pravidla?
+- Je návratový signál konkrétní a omezený?
+- Nevzniká po archivaci nový review rytmus?
+- Nevzniká tabulka výjimek bez rozhodovací otázky?
+- Jsou zákaznické a obchodní detaily smazané nebo zobecněné?
+- Zůstává privacy-first datová hranice viditelná?
+- Ví vlastník pracovního místa, že pravidlo už není samostatná agenda?
+
+Převod do archivního minima je hotový ve chvíli, kdy tým umí pravidlo použít bez čerstvé paměti a bez nové evidence. Nejde o konec pravidla. Jde o konec jeho zvláštní péče. A to je přesně bod, kdy se dobré produktové pravidlo stává součástí provozu místo další položky na seznamu věcí, které "musíme někdy zkontrolovat".
+
 ## Pracovní log
 
+- 2026-07-08: Doplněna úvodní podkapitola o převodu pasivního standardu do archivního minima: podmínky archivace, SaaS příklad, rozdělení živého pracovního místa a historie, privacy-first archivace, karta, mini workshop a checklist.
 - 2026-07-08: Doplněna úvodní podkapitola o uzavření dalšího přirozeného setkání s pasivním standardem: tři uzavírací věty, SaaS příklad, co po uzavření nevzniká, privacy-first uzavření, karta, mini workshop a checklist.
 - 2026-07-08: Doplněna úvodní podkapitola o dalším přirozeném setkání s pasivním standardem: rozlišení od plánované kontroly, tři výsledky, SaaS příklad, privacy-first hranice evidence, karta, mini workshop a checklist.
 - 2026-07-08: Doplněna úvodní podkapitola o uzavření druhého běžného použití po uzavřeném návratovém signálu: čtyři uzavírací stavy, SaaS příklad, propsání závěru, privacy-first úklid, karta, mini workshop a checklist.
