@@ -312369,8 +312369,200 @@ Pokud během workshopu začnete znovu řešit, jestli má SaaS sbírat rozpočet
 
 První běžný návrat po archivní revizi má být důkaz, že archivní minimum žije bez neustálé péče. Když funguje, nechte ho být. Když chybí kotva, opravte cestu. Když je věta moc osekaná, vraťte jednu rozhodovací hranu. A když se objeví skutečný návratový signál, otevřete malý rytmus s přesnou otázkou. Všechno ostatní je jen další způsob, jak si z archivu vyrobit produktový seriál, který nikdo neobjednal.
 
+## Uzavření prvního běžného návratu po archivní revizi
+
+První běžný návrat po archivní revizi nekončí tím, že se pravidlo našlo nebo nenašlo. Končí až rozhodnutím, co se s archivním minimem stane dál. Jinak tým zůstane v podivném mezistavu: archivní minimum se použilo, ale nikdo neví, jestli obstálo, jestli potřebuje lokální kotvu, nebo jestli se má znovu otevřít širší téma.
+
+Uzavření držte krátké. Nevracejte se do celé historie, kvůli které archivní minimum vzniklo. Historie už jednou prošla úklidem. Teď hodnotíte jen dnešní návrat: člověk potřeboval pravidlo v běžné práci, našel kanonickou větu, dokázal podle ní rozhodnout a nepřidal zbytečnou datovou stopu.
+
+Začněte větou:
+
+```text
+První běžný návrat po archivní revizi uzavíráme takto:
+```
+
+Za ni napište jeden jasný závěr:
+
+```text
+První běžný návrat po archivní revizi uzavíráme takto:
+Kanonická věta byla dohledatelná z obchodního checklistu, stačila k rozhodnutí a původní rozsah zůstává zavřený. Archivní minimum necháváme beze změny a neplánujeme další kontrolu bez nového návratového signálu.
+```
+
+Tahle věta má být použitelná i za měsíc. Nemá vysvětlovat celý příběh. Má říct, jestli pravidlo obstálo, co se případně opravilo a jaká hranice dál platí.
+
+### Čtyři uzavírací stavy
+
+Po prvním běžném návratu vyberte jeden ze čtyř stavů:
+
+- Archivní minimum obstálo: kanonická věta byla najitelná, rozhodnutí bylo jasné a nevznikla nová evidence.
+- Doplnit jednu lokální kotvu: pravidlo je v pořádku, ale člověk ho nenašel v místě běžné práce.
+- Zpřesnit kanonickou větu: pravidlo bylo nalezené, ale nedalo se podle něj bezpečně rozhodnout.
+- Otevřít nový úzký návratový signál: dnešní návrat ukázal nový problém, který už není jen otázka dohledání nebo formulace.
+
+Stav `archivní minimum obstálo` je nejčistší. Znamená, že archiv opravdu funguje jako minimum: člověk nemusel číst staré karty, nemusel se ptát původního autora a nemusel zakládat další poznámku. Takový výsledek nepotřebuje oslavu ani nový rytmus. Potřebuje zůstat malý.
+
+Stav `doplnit jednu lokální kotvu` použijte, když je problém v cestě k pravidlu. Typicky chybí odkaz v checklistu, šabloně, interním rozcestníku nebo poznámce u formuláře. Oprava má být link nebo jedna věta, ne nové školení a už vůbec ne návrat celé historie.
+
+Stav `zpřesnit kanonickou větu` patří situacím, kdy je pravidlo moc úsporné. Archivní minimum má být krátké, ale nesmí být tajemné. Věta "rozpočet řešíme volitelně" je slabá. Věta "u relevantní poptávky bez rozpočtu lze poslat volitelnou otázku v potvrzovacím e-mailu; formulář, scoring ani CRM atribut se nemění" už nese pracovní rozhodnutí.
+
+Stav `otevřít nový úzký návratový signál` použijte opatrně. Ne každé tření je nový signál. Nový signál vzniká až ve chvíli, kdy běžné použití ukáže problém mimo samotný archiv: například pravidlo funguje pro malé SaaS poptávky, ale opakovaně selhává u enterprise nákupu, protože rozhodovací proces je úplně jiný. To už není chyba věty. To je nové pracovní téma.
+
+Codyho komentář: archivní minimum je dobrý sluha a špatný protagonista. Jakmile kolem něj začnete stavět seriál dalších kontrol, z minima se stává nový proces v kostýmu úklidu. A proces v kostýmu úklidu je pořád proces, jen s lepší výmluvou.
+
+### Praktický příklad
+
+Čisté uzavření:
+
+```text
+Dnešní situace:
+Obchodník potřeboval rozhodnout, zda u relevantní SaaS poptávky bez rozpočtu poslat volitelnou otázku.
+
+Co se stalo:
+V obchodním checklistu našel odkaz na archivní minimum, přečetl kanonickou větu a poslal volitelnou otázku v potvrzovacím e-mailu.
+
+Uzavírací stav:
+Archivní minimum obstálo.
+
+Co zůstává zavřené:
+Povinné pole pro rozpočet, automatický lead scoring, CRM atribut pro rozhodovací limit a pomocná tabulka odpovědí.
+
+Privacy-first závěr:
+Nevznikla nová evidence. Rozpočtový kontext zůstává jen v běžném obchodním vlákně.
+```
+
+Uzavření s lokální kotvou:
+
+```text
+Dnešní situace:
+Obchodník pravidlo potřeboval, ale našel ho až přes archivní index, ne přes obchodní checklist.
+
+Uzavírací stav:
+Doplnit jednu lokální kotvu.
+
+Oprava:
+Do obchodního checklistu přidáváme odkaz "Rozpočet u relevantní poptávky: volitelná otázka, formulář beze změny".
+
+Co neotevíráme:
+Nepřepisujeme archivní kartu, neměníme formulář a nezakládáme novou evidenci rozpočtů.
+```
+
+Uzavření se zpřesněním věty:
+
+```text
+Problém:
+Kanonická věta byla nalezená, ale neříkala, jestli volitelnou otázku posílat všem poptávkám, nebo jen těm relevantním.
+
+Uzavírací stav:
+Zpřesnit kanonickou větu.
+
+Nová věta:
+"Volitelnou otázku na rámcový rozpočet posílej jen u relevantní poptávky, kde bez odpovědi nejde navrhnout další konkrétní krok; formulář, scoring ani CRM atribut se nemění."
+
+Privacy-first závěr:
+Zpřesnění mění instrukci, ne datový model.
+```
+
+Všimněte si, že ani jedna varianta nezačíná velkým projektem. Všechny drží práci blízko místa, kde se návrat opravdu stal. To je u archivního minima zásadní: čím dál od běžného použití se vydáte, tím snáz znovu otevřete přesně tu historickou váhu, kterou jste předtím uklidili.
+
+### Privacy-first uzavření
+
+Při uzavření prvního návratu se ptejte, jestli návrat nevytvořil novou datovou stopu jen proto, že někdo hledal jistotu. Typické nenápadné stopy jsou kopie zákaznické odpovědi v interním dokumentu, screenshot starého e-mailu, pomocná tabulka, ruční štítek v CRM nebo nová poznámka u leadu.
+
+Použijte tři řádky:
+
+```text
+Po návratu ponecháváme:
+
+Po návratu mažeme nebo nepřenášíme:
+
+Dál výslovně nesbíráme:
+```
+
+Příklad:
+
+```text
+Po návratu ponecháváme:
+Jednu zpřesněnou větu u obchodního checklistu a odkaz na archivní minimum.
+
+Po návratu mažeme nebo nepřenášíme:
+Dočasnou kopii zákaznické odpovědi v pracovní poznámce.
+
+Dál výslovně nesbíráme:
+Rozpočet jako povinné pole, rozhodovací limit jako CRM atribut, behaviorální událost pro rozpočtový zájem ani export odpovědí do další tabulky.
+```
+
+Tento zápis je malý, ale důležitý. Archivní minimum má snižovat provozní i datovou váhu. Pokud po každém návratu necháte další pomocný artefakt, archiv se sice tváří stručně, ale za ním roste skládka. Privacy-first provoz se pozná podle toho, že poznatek přežije a nadbytečná stopa ne.
+
+### Karta uzavření prvního návratu po archivní revizi
+
+```text
+Archivní minimum:
+
+Dnešní běžný návrat:
+
+Kde člověk pravidlo hledal:
+
+Našel kanonickou větu bez staré historie?
+
+Šlo podle ní rozhodnout?
+
+Uzavírací stav:
+- archivní minimum obstálo
+- doplnit jednu lokální kotvu
+- zpřesnit kanonickou větu
+- otevřít nový úzký návratový signál
+
+Nejmenší oprava, pokud existuje:
+
+Co zůstává beze změny:
+
+Co zůstává výslovně zavřené:
+
+Po návratu ponecháváme:
+
+Po návratu mažeme nebo nepřenášíme:
+
+Dál výslovně nesbíráme:
+
+Další návratový signál:
+
+Kde je závěr uložený:
+
+Vlastník:
+```
+
+Karta má uzavřít konkrétní návrat, ne založit nový životopis pravidla. Pokud je všechno v pořádku, vyplňte ji jednou větou u pracovního místa. Plnou kartu použijte jen tehdy, když se něco opravuje, vznikla dočasná stopa, nebo je potřeba odlišit lokální kotvu od nového návratového signálu.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte dnešní běžný návrat jednou větou.
+2. Minuta 2: ověřte, zda člověk našel kanonickou větu bez staré historie.
+3. Minuta 3: řekněte, jestli podle věty šlo rozhodnout.
+4. Minuta 4: vyberte jeden uzavírací stav.
+5. Minuta 5: napište nejmenší opravu, nebo potvrďte, že žádná není.
+6. Minuta 6: uzavřete privacy-first stopu: co ponecháváte, co nepřenášíte a co dál nesbíráte.
+
+Když se během workshopu objeví návrh na druhou revizi archivu, zastavte se a napište otázku, kterou má revize zodpovědět. Pokud otázka neexistuje, druhá revize je jen elegantní odklad závěru. Archivní minimum nemá být posilovna pro týmovou nejistotu.
+
+### Checklist uzavření prvního návratu
+
+- Máme konkrétní popis dnešního běžného návratu?
+- Víme, odkud člověk hledal kanonickou větu?
+- Ověřili jsme, jestli šlo rozhodnout bez staré historie?
+- Vybrali jsme jeden uzavírací stav?
+- Pokud chyběla kotva, opravujeme jen cestu k pravidlu?
+- Pokud byla věta slabá, zpřesňujeme jen rozhodovací hranu?
+- Pokud se objevil nový signál, je úzký a oddělený od archivní karty?
+- Zůstává původní široký rozsah výslovně zavřený?
+- Nevznikla nová evidence, tabulka, CRM položka, tracker nebo kopie zákaznických detailů bez jasného účelu?
+- Je zapsané, co ponecháváme, co nepřenášíme a co dál nesbíráme?
+- Ví další člověk, jestli archivní minimum funguje, nebo kde byla provedena lokální oprava?
+
+Uzavření prvního běžného návratu po archivní revizi má vrátit archivní minimum do klidu. Když obstálo, nechte ho pracovat. Když neobstálo, opravte nejbližší cestu nebo větu. A když se objevil nový signál, otevřete ho jako nové malé téma, ne jako návrat celé historie. Tím archiv zůstane archivem, práce zůstane malá a data nezačnou znovu bobtnat pod záminkou lepší paměti.
+
 ## Pracovní log
 
+- 2026-07-08: Doplněna úvodní podkapitola o uzavření prvního běžného návratu po archivní revizi: čtyři uzavírací stavy, SaaS příklady, privacy-first uzavření nové datové stopy, karta, mini workshop a checklist.
 - 2026-07-08: Doplněna úvodní podkapitola o prvním běžném návratu po archivní revizi: ověření kanonické věty bez staré historie, čtyři výsledky návratu, SaaS příklady, privacy-first kontrola nové datové stopy, karta, mini workshop a checklist.
 - 2026-07-08: Doplněna úvodní podkapitola o uzavření běžné archivní revize: čtyři uzavírací stavy, SaaS příklad, co po uzavření nedělat, privacy-first úklid archivní stopy, karta, mini workshop a checklist.
 - 2026-07-08: Doplněna úvodní podkapitola o běžné archivní revizi po druhém dohledání archivního minima: kontrola kanonické věty, pracovních kotev, hranice platnosti a datové stopy, SaaS příklady, privacy-first zkrácení archivu, karta, mini workshop a checklist.
