@@ -309015,8 +309015,224 @@ Pokud workshop přeroste pět minut, pravděpodobně už neřešíte první bě�
 
 První běžné použití po uzavřeném návratovém signálu je malý test, jestli tým opravdu zavřel dveře a nenechal v nich nohu. Když standard funguje, nechte ho být. Když drhne umístění, opravte umístění. Když se objeví nový důkaz, otevřete nový návratový signál s vlastní hranicí. A když vzniká nová evidence jen z nejistoty, ukliďte ji dřív, než se začne tvářit jako systém.
 
+## Uzavření prvního běžného použití po uzavřeném návratovém signálu
+
+První běžné použití má hodnotu až ve chvíli, kdy ho tým uzavře. Samotné konstatování "použili jsme to" nestačí. Bez uzavření zůstane ve vzduchu otázka, jestli pasivní standard opravdu funguje, jestli lokální tření potřebuje opravu, nebo jestli se staré téma nenápadně vrací do péče.
+
+Uzavření proto nemá být další rozbor. Má převést výsledek prvního použití do jedné pracovní věty a rozhodnout, co se děje dál. Ve většině případů se nemá dít nic. To je dobrá zpráva, i když vypadá podezřele neproduktivně. Standard, který se po návratu dá použít bez zvláštní pozornosti, má zůstat tichý.
+
+Pracovní otázka zní:
+
+```text
+Co po prvním běžném použití po uzavřeném návratu zůstává v pasivním standardu, co se lokálně dočišťuje a co se dál nesleduje?
+```
+
+Pokud na otázku neumíte odpovědět jednou větou, pravděpodobně mícháte tři věci: výsledek použití, novou hypotézu a starou nejistotu. Oddělte je. Výsledek použití uzavřete. Novou hypotézu otevřete jen tehdy, když má vlastní návratový signál. Starou nejistotu nemažte novou evidencí, ale zavřete ji stejnou hranicí, kterou už měl pasivní standard.
+
+### Čtyři uzavírací stavy
+
+Po prvním běžném použití vyberte jeden ze čtyř uzavíracích stavů:
+
+- Potvrzeno bez změny: standard fungoval a žádná další práce nevzniká.
+- Uzavřeno s lokálním dočištěním: standard platí, ale opravuje se jedno místo.
+- Uzavřeno se zastavením skryté péče: standard platí, ale tým musí ukončit nový monitoring, tabulku nebo debatu.
+- Předáno do nového návratového signálu: první použití odhalilo skutečnou změnu, kterou staré uzavření nepokrývá.
+
+`Potvrzeno bez změny` je nejlehčí varianta:
+
+```text
+První běžné použití potvrdilo uzavřený pasivní standard; partnerská instrukce stačila, veřejný formulář zůstává beze změny a další evidence nevzniká.
+```
+
+Takový závěr uložte tam, kde se standard používá. Nepište k němu novou kartu, pokud nic nedrhlo. Záznam má být dohledatelný, ne slavnostní.
+
+`Uzavřeno s lokálním dočištěním` má mít úzký rozsah:
+
+```text
+Uzavíráme první použití s jediným dočištěním: do partnerské šablony přidáváme odkaz na kanonickou větu. Rozsah standardu, formulář, scoring a datová mapa se nemění.
+```
+
+Důležité je slovo "jediným". Jakmile lokální dočištění obsahuje tři různé úpravy na třech místech, už to není uzavření prvního použití. Je to nová malá iterace a zaslouží si vlastní hranici.
+
+`Uzavřeno se zastavením skryté péče` použijte, když první použití proběhlo v zásadě dobře, ale někdo k němu přidal pojistku:
+
+```text
+Uzavíráme první použití a rušíme dočasný přehled partnerských poptávek. Uzavřený návrat dovolil lokální instrukci, ne nový sledovací režim.
+```
+
+Tento stav je nepříjemný, protože vypadá jako brzdění opatrnosti. Ve skutečnosti brzdí jen falešnou jistotu. Pokud pasivní standard potřebuje novou trvalou evidenci, už není pasivní. Pokud ji nepotřebuje, má evidence zmizet.
+
+`Předáno do nového návratového signálu` je výjimka. Používejte ho, když první použití opravdu ukázalo nový stav reality:
+
+```text
+První použití neuzavíráme jako běžné potvrzení, protože nový partnerský kanál přináší poptávky s jiným rozhodovacím procesem. Otevíráme samostatný návratový signál pro partnerský kanál; původní veřejný formulář zůstává zavřený.
+```
+
+I tady chraňte starý rozsah. Nový návratový signál má vlastní hranici, ne právo přepsat všechno, co se kdy kolem tématu řešilo.
+
+### Praktický SaaS příklad
+
+Pasivní standard po předchozím návratu říká:
+
+```text
+Rozpočet se v prvním veřejném formuláři nesbírá povinně. U partnerských poptávek se na rámcový rozpočet ptáme pouze v ruční odpovědi, pokud bez něj nejde doporučit další krok.
+```
+
+Při prvním běžném použití člověk odpověděl partnerskému leadu bez úpravy formuláře. Všechno proběhlo správně, ale po cestě si vytvořil pomocnou poznámku se jménem firmy, rozpočtem a vlastním komentářem "sledovat další partnery".
+
+Dobré uzavření není:
+
+```text
+Budeme měsíc sledovat partnerské leady, ať máme jistotu.
+```
+
+Dobré uzavření je:
+
+```text
+První použití potvrdilo pasivní standard. Pomocnou poznámku mažeme po propsání zobecněné věty "partnerská instrukce stačila bez změny formuláře"; nový seznam partnerských leadů nevzniká.
+```
+
+Tým tím neztrácí informaci. Ztrácí jen zbytečnou datovou stopu. Do pracovního místa se uloží zobecněný závěr a zákaznické detaily zůstanou tam, kde už měly legitimní důvod existovat.
+
+Slabší situace:
+
+```text
+Člověk použil správnou větu, ale našel ji jen ve starém vlákně.
+```
+
+Uzavření:
+
+```text
+První použití uzavíráme s lokálním dočištěním: kanonickou větu přesouváme z vlákna do partnerské šablony. Staré vlákno neprodlužujeme, nové pole ani evidence nevznikají.
+```
+
+Špatná situace:
+
+```text
+Nový partner posílá leady, u kterých bez rozpočtu nejde rozlišit konzultaci od větší implementace.
+```
+
+Uzavření:
+
+```text
+První použití neuzavíráme jako potvrzení standardu. Otevíráme nový návratový signál pro nový partnerský kanál; původní veřejný formulář a obecný pasivní standard zůstávají beze změny, dokud nový signál neprojde vlastní hranicí.
+```
+
+Tím se tým vyhne dvěma extrémům: ignorovat nový důkaz, nebo kvůli jednomu novému kanálu předělat celý systém.
+
+### Co propsat zpět
+
+Po uzavření prvního použití se zpět propisují jen tři typy informací:
+
+- Stav: potvrzeno, lokálně dočištěno, zastavena skrytá péče, nebo otevřen nový návratový signál.
+- Jedna pracovní věta: co má další člověk vědět bez čtení historie.
+- Privacy-first závěr: jaká nová evidence nevzniká, nebo která dočasná stopa končí.
+
+Nepřepisujte do standardu celý příběh. Standard nemá vysvětlovat každý krok, kterým se k němu tým dostal. Má umožnit další správné použití. Historie patří do archivu nebo rozhodovací paměti, ne do pracovního místa, které člověk potřebuje použít za dvě minuty.
+
+Dobrá pracovní věta:
+
+```text
+U partnerských poptávek stačí ruční odpověď podle šablony; veřejný formulář kvůli rámcovému rozpočtu neměníme a partnerské leady kvůli tomu zvlášť nesledujeme.
+```
+
+Špatná pracovní věta:
+
+```text
+Po několika diskusích a návratu k původní otázce jsme se rozhodli zatím nic neměnit, ale budeme opatrní.
+```
+
+Druhá věta je měkká. Neříká člověku, co má dělat, co nesmí otevřít ani jaká data nesmí začít sbírat. Je to nálada, ne standard.
+
+### Privacy-first uzavření
+
+Privacy-first uzavření má být konkrétní. Nestačí napsat "bez dopadu na data". Napište, co přesně nevzniká nebo končí:
+
+```text
+Nevzniká nový CRM štítek, export partnerských poptávek ani sledovací tabulka. Do partnerské šablony se propsala pouze zobecněná věta bez názvu zákazníka, rozpočtu a detailů poptávky.
+```
+
+Pokud vznikla dočasná stopa, uzavření musí říct, co s ní:
+
+```text
+Dočasnou poznámku mažeme po propsání zobecněného závěru. Původní zákaznická komunikace zůstává jen v obchodním systému podle běžné retence.
+```
+
+Pokud stopu nemůžete smazat hned, napište důvod a konec:
+
+```text
+Dočasnou poznámku necháváme do pátku pouze kvůli dokončení odpovědi zákazníkovi; potom se smaže a do standardu se přenese jen zobecněná věta.
+```
+
+Codyho komentář: "jen dočasně" je v provozu velmi ambiciózní slib. Pokud dočasná stopa nemá vlastní konec, je to trvalá stopa v převleku. A převleky se v datové mapě hledají mizerně.
+
+### Karta uzavření prvního použití
+
+```text
+Pasivní standard:
+
+Uzavřený návratový signál:
+
+První běžné použití:
+
+Výsledek použití:
+- potvrzeno bez změny
+- uzavřeno s lokálním dočištěním
+- uzavřeno se zastavením skryté péče
+- předáno do nového návratového signálu
+
+Jednovětý závěr:
+
+Co se případně dočišťuje:
+
+Co zůstává zavřené:
+
+Vznikla dočasná datová stopa?
+Ne / ano:
+
+Jak se maže, omezuje nebo zobecňuje:
+
+Co se propisuje do kanonického místa:
+
+Kde je závěr uložený:
+
+Další kontrola:
+Žádná / pouze při návratovém signálu / konkrétní datum:
+```
+
+Kartu používejte, když první použití nebylo úplně čisté. Pokud bylo čisté, stačí jednovětý závěr. Tím chráníte pasivní standard před paradoxem: čím lépe funguje, tím méně papírování kolem sebe potřebuje.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte jednovětý výsledek prvního použití.
+2. Minuta 2: vyberte jeden ze čtyř uzavíracích stavů.
+3. Minuta 3: napište, co zůstává zavřené.
+4. Minuta 4: zkontrolujte dočasné poznámky, tabulky, štítky a kopie.
+5. Minuta 5: přeneste do pracovního místa jen zobecněný závěr.
+6. Minuta 6: napište, zda další kontrola nevzniká, nebo vzniká jen při novém návratovém signálu.
+
+Pokud workshop potřebuje víc času, nepřidávejte minuty. Změňte typ práce. Buď řešíte nový návratový signál, nebo lokální dočištění přerostlo svůj rozsah.
+
+### Checklist uzavření prvního použití
+
+- Vybrali jsme jeden uzavírací stav?
+- Má uzavření jednovětý závěr použitelný bez historie?
+- Je jasné, co zůstává zavřené?
+- Pokud je potřeba dočištění, týká se jednoho pracovního místa?
+- Nevznikla z dočištění nová mini iterace bez hranice?
+- Zastavili jsme případnou skrytou péči, monitoring nebo tabulku "pro jistotu"?
+- Pokud vznikl nový návratový signál, má vlastní hranici a nepřepisuje starý rozsah?
+- Propsali jsme do standardu jen zobecněný závěr, ne celý příběh?
+- Zákaznické detaily zůstaly v původním systému?
+- Dočasné poznámky, kopie, exporty nebo štítky mají jasné smazání nebo už byly odstraněny?
+- Další kontrola vzniká jen tehdy, když má skutečný návratový signál?
+- Umí další člověk podle uzavření jednat bez další schůzky?
+
+Uzavření prvního běžného použití je drobná, ale důležitá brzda proti věčnému polootevření. Buď standard funguje a necháte ho v klidu. Nebo potřebuje jedno lokální dočištění. Nebo vznikl nový návratový signál. Všechny tři možnosti jsou v pořádku. Nejhorší je čtvrtá, nepojmenovaná možnost: "budeme to trochu sledovat". To je obvykle jen práce bez odvahy říct, co se vlastně rozhodlo.
+
 ## Pracovní log
 
+- 2026-07-08: Doplněna úvodní podkapitola o uzavření prvního běžného použití po uzavřeném návratovém signálu: čtyři uzavírací stavy, praktický SaaS příklad, propsání do kanonického místa, privacy-first ukončení dočasných stop, karta, mini workshop a checklist.
 - 2026-07-08: Doplněna úvodní podkapitola o prvním běžném použití po uzavřeném návratovém signálu u pasivního standardu: najitelnost bez historie, čtyři výsledky použití, praktický SaaS příklad, privacy-first úklid nové evidence, karta, mini workshop a checklist.
 - 2026-07-08: Doplněna úvodní podkapitola o uzavření prvního návratového signálu u pasivního standardu: čtyři uzavírací stavy, praktický SaaS příklad, úklid dočasných stop, privacy-first datová věta, karta, mini workshop a checklist.
 - 2026-07-08: Doplněna úvodní podkapitola o prvním návratovém signálu u pasivního standardu: rozlišení skutečného signálu od podnětu, čtyři první reakce, praktický SaaS příklad, privacy-first kontrola nové evidence, karta, mini workshop a checklist.
