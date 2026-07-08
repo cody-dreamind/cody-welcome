@@ -311772,8 +311772,212 @@ Když se během workshopu objeví nový návrh, nepřilepujte ho k uzavření. B
 
 Uzavření druhého dohledání archivního minima po klidu je místo, kde se rozhoduje, jestli staré téma opravdu zůstane lehké. Když pravidlo obstojí, dejte mu ticho. Když potřebuje malou opravu, opravte nejbližší hranu. Když neobstojí, vraťte ho do lehkého rytmu s přesnou otázkou. Hlavně z něj nedělejte novou produkční evidenci jen proto, že se archiv po delší době zase ukázal jako užitečný.
 
+## Běžná archivní revize po druhém dohledání archivního minima
+
+Když archivní minimum obstojí i při druhém dohledání, nemá dostat třetí zvláštní kontrolu. Má se vrátit do běžného archivního rytmu. To je méně efektní než nový proces, ale podstatně zdravější. Pokud pravidlo dvakrát pomohlo bez původní historie, další péče má vzniknout jen ze skutečného návratového signálu, změny pracovního kontextu nebo pravidelné revize archivu.
+
+Běžná archivní revize není pokračování starého tématu. Je to krátká kontrola, jestli archivní minimum pořád plní svůj účel: pomáhá najít kanonickou větu, neudržuje zbytečná data a nepředstírá, že živé rozhodnutí je stále aktivní projekt. Jinými slovy: revize nemá pravidlo probudit. Má ověřit, že může dál klidně spát a přitom být dohledatelné, když ho někdo potřebuje.
+
+Začněte jednoduchou větou:
+
+```text
+Archivní minimum revidujeme v běžném rytmu, protože:
+```
+
+Dobrá odpověď není "už jsme ho dlouho neviděli". Dobrá odpověď má pracovní důvod:
+
+```text
+Archivní minimum revidujeme v běžném rytmu, protože probíhá pololetní úklid rozhodovacích pravidel u obchodních a supportních šablon.
+```
+
+Tím se revize drží u archivu. Neotevíráte otázku, jestli se rozpočet má znovu sbírat. Kontrolujete jen to, jestli archivní záznam pořád sedí na skutečné pracovní místo, má správný odkaz a neobsahuje zbytečné detaily.
+
+### Co při archivní revizi kontrolovat
+
+Stačí pět věcí:
+
+- Kanonická věta: je pořád srozumitelná bez původní historie?
+- Pracovní kotvy: vedou odkazy z míst, kde lidé pravidlo hledají?
+- Hranice platnosti: je jasné, kdy pravidlo použít a kdy už jde o nové téma?
+- Datová stopa: nezůstaly v archivu kopie, screenshoty, konkrétní zákaznické údaje nebo pomocné tabulky?
+- Návratový signál: je stále rozpoznatelný, nebo se z něj stala mlhavá věta?
+
+Pokud těchto pět bodů projde, nevzniká práce. Napište jednu větu a archiv zavřete. Běžná revize má být krátká právě proto, že pravidlo už dvakrát obstálo. Když z ní uděláte hlubokou analýzu, trestáte systém za to, že něco funguje. To je manažersky kreativní, ale prakticky dost pochybná disciplína.
+
+### Čtyři výsledky běžné archivní revize
+
+Běžná archivní revize má mít jen čtyři výsledky:
+
+- Ponechat v archivu beze změny: kanonická věta, kotvy, hranice i datová stopa jsou v pořádku.
+- Opravit archivní metadata: změnil se název šablony, odkaz, vlastník nebo místo, kde se pravidlo hledá.
+- Zkrátit archivní stopu: záznam obsahuje víc detailů, než je potřeba pro budoucí rozhodnutí.
+- Vrátit do lehkého rytmu: revize ukázala, že pravidlo už nedokáže vést práci bez nového ověření.
+
+`Ponechat v archivu beze změny` je plnohodnotný výsledek. Neznamená, že revize nic nepřinesla. Znamená, že archivní minimum pořád plní roli a není potřeba přidávat další péči.
+
+`Opravit archivní metadata` je technická údržba, ne produktové rozhodnutí. Pokud se obchodní checklist přejmenoval nebo support používá nové interní rozcestí, opravte odkaz. Nepřepisujte kvůli tomu kanonickou větu, pokud pořád funguje.
+
+`Zkrátit archivní stopu` použijte, když archiv obsahuje příliš mnoho historických detailů. Starý příklad mohl být užitečný při prvním zápisu, ale po druhém dohledání často stačí obecný poznatek. Pokud konkrétní částka, jméno účtu nebo kopie odpovědi nepomáhá budoucímu rozhodnutí, do archivního minima nepatří.
+
+`Vrátit do lehkého rytmu` je výjimka. Použijte ji jen tehdy, když se změnil produkt, segment, role nebo pracovní místo natolik, že stará kanonická věta už neumí rozhodnout. I tehdy se nevracejte k původní široké změně. Otevřete krátkou otázku: co přesně dnes pravidlo neumí rozhodnout?
+
+### Praktický SaaS příklad
+
+Archivní minimum:
+
+```text
+Rozpočet nezakládáme jako trvalý CRM atribut, pokud stačí volitelný dotaz v existujícím pracovním vlákně.
+```
+
+Běžná archivní revize:
+
+```text
+Důvod revize:
+Pololetní úklid obchodních a supportních rozhodovacích pravidel.
+
+Kontrola:
+Kanonická věta je pořád srozumitelná. Obchodní šablona i supportní handoff na ni odkazují. Hranice platnosti sedí pro nové poptávky i existující zákaznická vlákna.
+
+Privacy-first zjištění:
+V archivním záznamu zůstala stará anonymizovaná ukázka, která už nepřidává rozhodovací hodnotu.
+
+Výsledek:
+Zkrátit archivní stopu.
+
+Oprava:
+Necháváme kanonickou větu a návratový signál. Mažeme starou ukázku a ponecháváme jen obecnou větu, že pravidlo bylo ověřené v obchodním i supportním použití.
+```
+
+Jiná varianta:
+
+```text
+Výsledek:
+Opravit archivní metadata.
+
+Oprava:
+Supportní handoff se přesunul do nového interního rozcestníku. Měníme pouze odkaz na kanonickou větu. Pravidlo, hranice platnosti ani datová stopa se nemění.
+```
+
+V obou příkladech se neotevírá nová produktová práce. Revize se chová jako údržba archivu, ne jako záminka ke starému rozhodnutí. To je přesně rozdíl mezi živým pravidlem a archivním minimem.
+
+### Privacy-first archivní revize
+
+Archivní revize je dobré místo pro otázku, kterou týmy často odkládají:
+
+```text
+Potřebujeme v archivu pořád tolik detailů, kolik jsme potřebovali při původním rozhodnutí?
+```
+
+Odpověď bývá často ne. Při rozhodování se hodí konkrétní příklady. Při archivaci po druhém dohledání už často stačí zobecněný poznatek, kanonická věta, hranice platnosti a návratový signál. Konkrétní zákaznické detaily, screenshoty, kopie vláken nebo pracovní tabulky by měly přežít jen tehdy, když mají jasný účel, retenci a přístupová práva.
+
+Použijte krátký privacy-first záznam:
+
+```text
+V archivu ponecháváme:
+
+Z archivu odstraňujeme nebo zobecňujeme:
+
+Dál nesbíráme:
+
+Návratový signál zůstává:
+```
+
+Příklad:
+
+```text
+V archivu ponecháváme:
+Kanonickou větu, hranici platnosti, odkaz na obchodní šablonu a supportní handoff.
+
+Z archivu odstraňujeme nebo zobecňujeme:
+Starou ukázku zákaznické odpovědi převádíme na obecnou větu bez částky a bez identifikace účtu.
+
+Dál nesbíráme:
+Rozpočet jako povinné pole, rozhodovací limit jako CRM atribut, ruční segmenty citlivosti na cenu a export rozpočtových odpovědí.
+
+Návratový signál zůstává:
+K pravidlu se vrátíme pouze pokud volitelný dotaz třikrát za sebou nepomůže navrhnout další krok a bez trvalejší evidence vznikne opakované zdržení.
+```
+
+Codyho komentář: archiv není muzeum důkazů. Je to místo, kde má budoucí člověk rychle pochopit, co se rozhodlo a kdy to znovu otevřít. Pokud k tomu nepotřebuje kopii starého detailu, detail pryč. Data, která nepotřebují existovat, mají jeden skvělý bezpečnostní benefit: nejdou ztratit.
+
+### Karta běžné archivní revize
+
+```text
+Archivní minimum:
+
+Důvod běžné revize:
+
+Kanonická věta:
+
+Je stále srozumitelná bez původní historie?
+- ano
+- ne, potřebuje zpřesnit
+
+Pracovní kotvy:
+
+Jsou odkazy a vlastníci aktuální?
+- ano
+- ne, opravit metadata
+
+Hranice platnosti:
+
+Datová stopa v archivu:
+
+Výsledek revize:
+- ponechat v archivu beze změny
+- opravit archivní metadata
+- zkrátit archivní stopu
+- vrátit do lehkého rytmu
+
+Co se mění:
+
+Co zůstává výslovně zavřené:
+
+Privacy-first závěr:
+V archivu ponecháváme:
+Z archivu odstraňujeme nebo zobecňujeme:
+Dál nesbíráme:
+
+Návratový signál:
+
+Kde je revize zapsaná:
+
+Vlastník:
+```
+
+Karta má být servisní, ne slavnostní. Pokud se u ní objeví nová produktová otázka, oddělte ji. Archivní revize může odhalit návratový signál, ale nemá ho řešit ve stejné větě.
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: otevřete archivní minimum a přečtěte kanonickou větu.
+2. Minuta 2: ověřte pracovní kotvy a vlastníka.
+3. Minuta 3: zkontrolujte hranici platnosti a návratový signál.
+4. Minuta 4: projděte datovou stopu v archivu.
+5. Minuta 5: vyberte jeden ze čtyř výsledků revize.
+6. Minuta 6: proveďte nejmenší metadata nebo privacy-first úklid.
+7. Minuta 7: zapište jednovětý závěr a zavřete revizi.
+
+Pokud se během sedmi minut ukáže, že kanonická věta už neodpovídá dnešní práci, nezachraňujte ji v rámci workshopu. Zapište návrat do lehkého rytmu s konkrétní otázkou a archivní revizi ukončete. Dvě práce v jedné kartě jsou spolehlivý způsob, jak mít za měsíc nejasno v obou.
+
+### Checklist běžné archivní revize
+
+- Má revize konkrétní běžný důvod, ne jen pocit, že by se archiv měl projít?
+- Je kanonická věta pořád srozumitelná bez původní historie?
+- Vedou pracovní kotvy z míst, kde lidé pravidlo hledají?
+- Je hranice platnosti pořád pravdivá pro dnešní segment, produkt a role?
+- Je návratový signál konkrétní?
+- Neobsahuje archiv zbytečné zákaznické detaily, screenshoty, kopie vláken, exporty nebo pomocné tabulky?
+- Vybrali jsme jeden ze čtyř výsledků revize?
+- Pokud opravujeme metadata, neměníme přitom zbytečně obsah pravidla?
+- Pokud zkracujeme stopu, necháváme budoucímu člověku dost kontextu pro rozhodnutí?
+- Pokud vracíme pravidlo do lehkého rytmu, má návrat přesnou otázku a dočasnou hranici?
+- Je jasně napsané, co zůstává zavřené a co dál nesbíráme?
+
+Běžná archivní revize po druhém dohledání archivního minima je údržba ticha. Pravidlo, které dvakrát obstálo, nepotřebuje péči navíc. Potřebuje být dohledatelné, stručné a datově střídmé. Když to splňuje, zavřete archiv a jděte dělat něco, co opravdu potřebuje lidskou pozornost.
+
 ## Pracovní log
 
+- 2026-07-08: Doplněna úvodní podkapitola o běžné archivní revizi po druhém dohledání archivního minima: kontrola kanonické věty, pracovních kotev, hranice platnosti a datové stopy, SaaS příklady, privacy-first zkrácení archivu, karta, mini workshop a checklist.
 - 2026-07-08: Doplněna úvodní podkapitola o uzavření druhého dohledání archivního minima po klidu: čtyři uzavírací stavy, SaaS příklady, role kotvy, privacy-first uzavření bez nových kopií dat, karta, mini workshop a checklist.
 - 2026-07-08: Doplněna úvodní podkapitola o druhém dohledání archivního minima po klidu: ověření bez čerstvé paměti, hranice platnosti, druhá kotva, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-07-08: Doplněna úvodní podkapitola o uzavření prvního dohledání archivního minima po klidu: čtyři uzavírací stavy, SaaS příklady, lokální opravy kotvy nebo kanonické věty, privacy-first uzavření bez kopírování starých detailů, karta, mini workshop a checklist.
