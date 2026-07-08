@@ -309442,8 +309442,11 @@ Pokud workshop potřebuje víc času, nejspíš řešíte něco většího než 
 
 Druhé běžné použití po uzavřeném návratovém signálu má pasivnímu standardu vrátit obyčejnost. Když obstojí i mimo první situaci, přestaňte ho obcházet s baterkou a zápisníkem. Nechte ho pracovat. Pokud drhne jedna hrana, opravte jednu hranu. Pokud se objeví nový důkaz, otevřete nový návrat. A pokud vzniká evidence jen proto, že se týmu nechce věřit vlastnímu uzavření, smažte ji dřív, než dostane název a začne chodit na porady.
 
+Po čistém druhém použití už neplánujte třetí kontrolu jen proto, že by vypadala pečlivě. Místo toho nechte u pracovního místa jednu větu: standard byl použit bez historie, bez lokální opravy a bez nové evidence. Další práce začíná až ve chvíli, kdy přijde nový návratový signál, ne když se v kalendáři objeví volné okénko pro další revizi.
+
 ## Pracovní log
 
+- 2026-07-08: Doplněna krátká poznámka, aby po čistém druhém použití pasivního standardu nevznikala třetí kontrola bez nového návratového signálu.
 - 2026-07-08: Doplněna úvodní podkapitola o druhém běžném použití po uzavřeném návratovém signálu u pasivního standardu: důvod otevření druhého použití, praktický SaaS příklad, čtyři výsledky, privacy-first kontrola evidence, karta, mini workshop a checklist.
 - 2026-07-08: Doplněna úvodní podkapitola o uzavření prvního běžného použití po uzavřeném návratovém signálu: čtyři uzavírací stavy, praktický SaaS příklad, propsání do kanonického místa, privacy-first ukončení dočasných stop, karta, mini workshop a checklist.
 - 2026-07-08: Doplněna úvodní podkapitola o prvním běžném použití po uzavřeném návratovém signálu u pasivního standardu: najitelnost bez historie, čtyři výsledky použití, praktický SaaS příklad, privacy-first úklid nové evidence, karta, mini workshop a checklist.
