@@ -315573,8 +315573,188 @@ Pokud se během workshopu objeví nové téma, nezapojujte ho do uzavření. Zap
 
 Uzavření prvního pravidelného review má být krátké a pevné. Když pravidlo funguje, vraťte ho do klidu. Když potřebuje opravu, udělejte nejbližší lokální krok. A když review ukázalo skutečný návratový signál, otevřete malý návrat bez toho, aby se s ním svezl celý starý rozsah.
 
+## První běžné použití po uzavřeném pravidelném review
+
+Uzavřené pravidelné review ještě neznamená, že pravidlo opravdu žije v běžném provozu. Znamená jen, že jste mu po kontrole dali jasný stav. Skutečný test přijde při prvním dalším použití, kdy už nikdo nesedí v review režimu, nikdo neotevírá staré poznámky a člověk u práce potřebuje rychle poznat, co má udělat.
+
+Tahle situace je důležitá hlavně u pravidel, která chrání rozsah práce a datovou střídmost. Review mohlo říct, že onboardingová šablona zůstává beze změny, že se doplní jeden příklad, nebo že se zpřesní návratový signál. Při prvním použití se ale ukáže, jestli je závěr opravdu v místě práce, nebo jen v hezkém zápisu, který si nikdo při další poptávce neotevře.
+
+Začněte jednou větou:
+
+```text
+Po uzavřeném review pravidlo poprvé používáme v této běžné situaci:
+```
+
+Za větu doplňte konkrétní provozní okamžik:
+
+```text
+Po uzavřeném review pravidlo poprvé používáme v této běžné situaci:
+Customer success připravuje první import zákaznických dat a rozhoduje, jestli má nabídnout upřesňující call.
+```
+
+Tím se vyhnete tomu, že budete znovu hodnotit celé pravidlo. Neřešíte "onboarding obecně". Řešíte jeden import, jednu šablonu a jednu rozhodovací větu.
+
+### Co první použití ověřuje
+
+První použití po review má ověřit tři věci:
+
+- Najitelnost: člověk najde závěr tam, kde skutečně pracuje.
+- Použitelnost: závěr mu řekne, co má udělat bez dlouhého výkladu.
+- Střídmost: použití pravidla nevytvoří nový sběr dat, report, štítek nebo kontrolní rytmus.
+
+Najitelnost je praktická, ne dokumentační vlastnost. Pokud je závěr uložený jen v kartě review, ale člověk pracuje v e-mailové šabloně, pravidlo je pořád daleko. Přesuňte jednu rozhodovací větu k šabloně. Ne celou historii, jen větu, která pomůže při práci.
+
+Použitelnost znamená, že pravidlo nemá znít jako interní úvaha. Věta "zohlednit připravenost dat" je mlha. Věta "pokud chybí CSV se sloupci e-mail, firma a stav souhlasu, nabídni krátký upřesňující call" už je pracovní instrukce.
+
+Střídmost hlídá, aby se z prvního použití nestal nový proces. Když člověk při použití pravidla vytvoří tabulku výjimek, nový CRM štítek a pomocný seznam zákazníků, review sice možná skončilo, ale provoz právě začal sbírat další data. To nechcete dělat jen proto, že se někdo chtěl cítit jistěji.
+
+### Čtyři výsledky prvního použití
+
+První použití po uzavřeném review může skončit čtyřmi výsledky:
+
+- Funguje bez zásahu: pravidlo je najitelné, použitelné a nevzniká nová datová stopa.
+- Chybí pracovní věta: závěr existuje, ale člověk nepozná přesný krok.
+- Chybí pracovní místo: věta je dobrá, ale není u místa, kde se rozhoduje.
+- Použití otevírá nový signál: běžná práce ukázala konkrétní problém, který splňuje návratový signál.
+
+U výsledku "funguje bez zásahu" nedělejte další optimalizaci. Zapište krátké potvrzení, že první běžné použití proběhlo bez mimořádné péče, a nechte pravidlo v klidu. Úspěšné použití není důvod přidat dashboard.
+
+U chybějící pracovní věty neopravujte celý dokument. Přepište jednu větu do použitelného tvaru a uložte ji tam, kde se pravidlo používá. Pokud k pochopení potřebujete tři odstavce kontextu, pravidlo ještě není pracovní.
+
+U chybějícího pracovního místa nepřidávejte nové úložiště. Najděte nejbližší existující místo: šablonu e-mailu, checklist podpory, interní popis importu, formulářovou nápovědu nebo obchodní skript. Pravidlo má bydlet tam, kde ho člověk potřebuje, ne tam, kde vypadá nejhezčeji v dokumentaci.
+
+U nového signálu zastavte rozšiřování a napište, co se opravdu stalo. Pokud signál splňuje podmínku návratu, otevřete malý návrat. Pokud ji nesplňuje, zapište běžné použití a nechte pravidlo zavřené. "Trochu to připomíná starý problém" není návratový signál. Je to jen dobrý kandidát na poznámku.
+
+### Praktický SaaS příklad
+
+Uzavřené review:
+
+```text
+Stav:
+Lokální dočištění.
+
+Co se změnilo:
+Do onboardingové šablony jsme doplnili obecný příklad použitelného CSV.
+
+Co zůstává zavřené:
+Nový formulář pro připravenost dat, CRM scoring, samostatný report importů a redesign onboardingu.
+
+Návratový signál:
+K širšímu onboardingovému kroku se vrátíme pouze pokud dva zákazníci za sebou ani po doplněném příkladu nedodají použitelná zdrojová data.
+```
+
+První běžné použití:
+
+```text
+Situace:
+Customer success připravuje import pro nového zákazníka.
+
+Použití:
+Zákazník poslal CSV se správnými sloupci podle příkladu v šabloně. Nebyl potřeba upřesňující call.
+
+Závěr:
+Pravidlo funguje bez zásahu. Nezakládáme nový report ani štítek připravenosti dat.
+```
+
+Slabší, ale pořád dobrý výsledek:
+
+```text
+Situace:
+Zákazník poslal export s jinými názvy sloupců.
+
+Problém:
+Customer success našel příklad v šabloně, ale nevěděl, zda má export rovnou vrátit, nebo nabídnout call.
+
+Lokální oprava:
+K příkladu doplňujeme jednu větu: "Pokud export obsahuje stejné informace pod jinými názvy sloupců, import nejdřív ručně posuď; call nabízej až ve chvíli, kdy chybí obsah, ne jen správný název."
+
+Co neotevíráme:
+Nový formulář, scoring, report ani redesign onboardingu.
+```
+
+V obou případech zůstává zásah malý. Buď pravidlo funguje, nebo se opraví jedna věta. Tým se nenechá svést k tomu, aby z prvního běžného použití udělal další review.
+
+### Privacy-first kontrola
+
+Po prvním použití si položte tři otázky:
+
+```text
+Vznikl nový údaj, který review výslovně neschválilo?
+
+Je údaj nutný pro další rozhodnutí, nebo stačí běžná komunikace se zákazníkem?
+
+Má údaj jasné místo a konec, nebo ho nemáme vůbec zakládat?
+```
+
+U onboardingového příkladu často stačí ponechat komunikaci v zákaznickém vlákně a obecnou větu v šabloně. Není nutné ukládat "připravenost dat" jako nový atribut, pokud podle něj neřídíte proces. Pokud se podobná potíž začne opakovat, použijte návratový signál a otevřete malý návrat. Do té doby držte provoz lehký.
+
+Codyho komentář: první použití po review je malý test dospělosti. Nedělá se kvůli pocitu, že "máme proces". Dělá se proto, aby člověk u práce nemusel luštit staré rozhodnutí jako archeolog s kofeinem. Jedna dobrá věta na správném místě často porazí celý nový dashboard.
+
+### Karta prvního použití po review
+
+```text
+Uzavřené pravidelné review:
+
+Pracovní místo:
+
+Běžná situace prvního použití:
+
+Výsledek:
+- funguje bez zásahu
+- chybí pracovní věta
+- chybí pracovní místo
+- použití otevírá nový signál
+
+Co člověk udělal:
+
+Co bylo nejasné, pokud něco:
+
+Lokální oprava, pokud je potřeba:
+
+Co zůstává výslovně zavřené:
+
+Jaká data, štítky, exporty nebo reporty nezakládáme:
+
+Vznikly nějaké dočasné stopy?
+
+Co s nimi uděláme:
+
+Kde je závěr uložený:
+
+Návratový signál po použití:
+```
+
+Kartu použijte jen tehdy, když první použití něco odhalí. Pokud pravidlo funguje bez zásahu, stačí krátká poznámka u pracovního místa. Smyslem není vyrábět další papír. Smyslem je nenechat první běžné použití potichu změnit rozsah práce.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: pojmenujte běžnou situaci prvního použití.
+2. Minuta 2: ověřte, jestli člověk závěr našel u pracovního místa.
+3. Minuta 3: ověřte, jestli podle něj šlo rozhodnout.
+4. Minuta 4: vyberte jeden ze čtyř výsledků.
+5. Minuta 5: napište, co zůstává zavřené a jaká data nezakládáte.
+6. Minuta 6: uložte krátký závěr nebo lokální opravu.
+
+Pokud se workshop začne měnit v nové review, zastavte ho. První použití má ověřit provozní použitelnost uzavřeného závěru. Nemá znovu otevřít celý příběh pravidla.
+
+### Checklist prvního použití po review
+
+- Popisujeme konkrétní běžnou situaci, ne obecné téma?
+- Byl závěr review najitelný u pracovního místa?
+- Šlo podle závěru rozhodnout bez původních účastníků review?
+- Vybrali jsme jeden ze čtyř výsledků?
+- Pokud chyběla věta, opravili jsme jen nejbližší větu?
+- Pokud chybělo místo, přesunuli jsme závěr k existujícímu pracovnímu místu?
+- Pokud vznikl nový signál, ověřili jsme ho proti návratové podmínce?
+- Je jasné, co zůstává zavřené?
+- Nezaložili jsme nový report, štítek, export ani ruční kontrolu bez samostatného rozhodnutí?
+- Uložili jsme závěr tam, kde se pravidlo příště použije?
+
+První běžné použití po uzavřeném review má být malé a praktické. Buď potvrdí, že pravidlo umí žít samo, nebo ukáže jednu nejbližší opravu. V obou případech chrání tým před dvěma zlozvyky: opakovaným vysvětlováním starého rozhodnutí a sběrem dat "pro jistotu".
+
 ## Pracovní log
 
+- 2026-07-09: Doplněna navazující podkapitola o prvním běžném použití po uzavřeném pravidelném review: najitelnost závěru, použitelnost pracovní věty, privacy-first kontrola datové stopy, karta, mini workshop a checklist.
 - 2026-07-09: Doplněna navazující podkapitola o uzavření prvního pravidelného review po návratu pravidla do rytmu: čtyři uzavírací stavy, SaaS příklad, privacy-first uzavření pomocných stop, karta, mini workshop a checklist.
 - 2026-07-09: Doplněna navazující podkapitola o prvním pravidelném review po návratu pravidla do rytmu: běžný provozní okamžik, čtyři výsledky review, SaaS příklad, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-07-09: Doplněna navazující podkapitola o uzavření druhého běžného použití po návratu pravidla do rytmu: čtyři uzavírací stavy, SaaS příklad, úklid dočasných stop, privacy-first uzavření, karta, mini workshop a checklist.
