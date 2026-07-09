@@ -316086,8 +316086,167 @@ Když se během workshopu objeví chuť udělat pravidlu vlastní dashboard, zep
 
 Druhé běžné použití po uzavřeném review má pravidlu dát klid. Pokud je přenositelné, nechte ho v provozu. Pokud potřebuje poslední drobnou hranu, doplňte ji u pracovního místa. Pokud ukáže skutečný návratový signál, otevřete malý krok. V žádné variantě z něj nedělejte důvod k novému sběru dat bez jasného rozhodnutí.
 
+## Uzavření druhého běžného použití po uzavřeném review
+
+Druhé běžné použití po uzavřeném review je už dostatečný signál k tomu, abyste rozhodli, jestli pravidlo patří do klidného provozu, potřebuje poslední drobné dotažení, nebo ukázalo nový návratový signál. Nenechávejte ho viset jako "ještě uvidíme". To je nebezpečně pohodlná věta: zní opatrně, ale často jen drží otevřenou práci, kterou nikdo nechce zavřít.
+
+Uzavření druhého použití má být krátké. Neopakujte celé review, první použití ani historii vzniku pravidla. Stačí pojmenovat druhou situaci, výsledek, stav pravidla a datovou stopu. Pokud jste po druhém použití schopni napsat jednu větu, která člověku příště řekne co dělat, máte hotovo.
+
+Začněte větou:
+
+```text
+Druhé běžné použití po uzavřeném review uzavíráme takto:
+```
+
+Potom vyberte jeden ze čtyř stavů:
+
+- Převést do klidného provozu: pravidlo obstálo podruhé a nepotřebuje zvláštní péči.
+- Doplnit poslední lokální hranu: pravidlo funguje, ale jedna věta u pracovního místa musí být přesnější.
+- Přesunout pravidlo blíž k práci: obsah je správný, ale člověk ho včas nenašel.
+- Otevřít malý návratový signál: druhé použití ukázalo opakovaný problém, který už mění rozhodnutí.
+
+Stav `převést do klidného provozu` je nejčistší. Znamená, že pravidlo prošlo dvěma běžnými situacemi a dál nemá mít vlastní kontrolní režim. Zůstává u pracovního místa, kde se používá, a další návrat vznikne jen podle jasného signálu.
+
+Stav `doplnit poslední lokální hranu` použijte, když pravidlo funguje, ale druhý případ ukázal malou mezeru. Například věta správně rozlišuje chybějící obsah od technického formátu souboru, ale neříká, že technický převod má nejdřív zkusit interní tým. Oprava patří do stejného checklistu. Ne do nového procesu, ne do nové tabulky, ne do slavnostního projektu s názvem, který by se styděl i flipchart.
+
+Stav `přesunout pravidlo blíž k práci` je pro slabé umístění. Pokud člověk pravidlo našel až ve starém review zápisu, přesuňte krátkou rozhodovací větu do šablony, checklistu, provozní karty nebo interního rozcestníku. Historii nechte v archivu. Pracovní místo potřebuje instrukci, ne archeologii.
+
+Stav `otevřít malý návratový signál` používejte opatrně. Dvě běžné situace mohou ukázat vzor, ale vzor ještě není povolenka otevřít celý starý rozsah. Návrat má být menší než původní téma a má mít vlastní otázku. Pokud se například dvakrát ukáže problém s technickou podobou importního souboru, první krok může být krátká interní kontrola formátu, ne nový zákaznický scoring připravenosti dat.
+
+### Praktický SaaS příklad
+
+Po review vzniklo pravidlo:
+
+```text
+Pokud export obsahuje správné informace, ale liší se názvy sloupců nebo technický formát, nejdřív ho interně posuď; zákaznický call nabízej až ve chvíli, kdy chybí obsah nebo rozhodnutí.
+```
+
+Druhé použití:
+
+```text
+Situace:
+Druhý zákazník poslal obsahově správný export s jiným oddělovačem a kódováním.
+
+Výsledek:
+Customer success pravidlo našel v onboardingovém checklistu a předal soubor technikovi. Call se zákazníkem nebyl potřeba.
+
+Uzavírací stav:
+Převést do klidného provozu.
+
+Co zůstává zavřené:
+Skóre připravenosti zákazníka, nový CRM atribut, měsíční report kvality exportů a povinný technický dotazník před onboardingem.
+
+Privacy-first závěr:
+Do checklistu necháváme obecnou větu o interním posouzení formátu. Dočasné poznámky z obou použití mažeme nebo zobecňujeme; zákaznické příklady dál neskladujeme.
+```
+
+Slabší výsledek:
+
+```text
+Situace:
+Člověk pravidlo použil správně, ale až po dotazu na původního autora review.
+
+Uzavírací stav:
+Přesunout pravidlo blíž k práci.
+
+Oprava:
+Stejnou rozhodovací větu dáváme přímo do checklistu importu vedle kroku "ověřit obsah exportu".
+
+Co neotevíráme:
+Novou importní dokumentaci, samostatné školení ani pravidelný report chyb exportu.
+```
+
+Oba závěry jsou dobré, pokud odpovídají skutečnosti. Špatný závěr by byl udělat z druhého použití obecnou transformaci onboardingu. Druhé použití má uzavřít pravidlo, ne hledat nový důvod, proč předělat všechno okolo.
+
+### Datová hranice při uzavření
+
+Uzavření druhého použití je poslední dobrý okamžik pro úklid pomocných stop. Pokud jste při prvním a druhém použití ukládali příklady, interní poznámky, screenshoty nebo ruční seznam případů, rozhodněte, co s nimi. V klidném provozu obvykle nepotřebujete konkrétní zákaznické detaily. Potřebujete jen pracovní pravidlo, které vzniklo z jejich zobecnění.
+
+Použijte čtyři řádky:
+
+```text
+Do pravidla přenášíme:
+
+Z pracovních stop mažeme nebo zobecňujeme:
+
+Dál výslovně nesbíráme:
+
+Návrat vznikne pouze pokud:
+```
+
+Tento zápis brání tichému hromadění důkazů. Když pravidlo funguje, důkazy už nemají žít jako soukromá galerie zákaznických detailů. Stačí zobecněná věta. Ano, je méně dramatická. Ale taky se mnohem lépe spravuje, předává a maže.
+
+Codyho komentář: týmy často věří, že víc příkladů znamená lepší pravidlo. Někdy ano. Často ale víc příkladů znamená jen víc citlivých stop, které se nikdo neodváží smazat, protože "se třeba budou hodit". Pokud se pravidlo po dvou použitích dá napsat jasně, nechte příklady odejít do důchodu.
+
+### Karta uzavření druhého použití po review
+
+```text
+Uzavřené review:
+
+První běžné použití:
+
+Druhé běžné použití:
+
+Pracovní místo:
+
+Výsledek druhého použití:
+
+Uzavírací stav:
+- převést do klidného provozu
+- doplnit poslední lokální hranu
+- přesunout pravidlo blíž k práci
+- otevřít malý návratový signál
+
+Jedna pracovní věta pro další použití:
+
+Co se mění, pokud něco:
+
+Co zůstává výslovně zavřené:
+
+Jaká data, štítky, exporty, reporty nebo kontrolní rytmy nezakládáme:
+
+Jaké dočasné stopy mažeme nebo zobecňujeme:
+
+Kde je závěr uložený:
+
+Vlastník:
+
+Návratový signál:
+```
+
+Kartu vyplňujte jen při změně nebo návratovém signálu. Pokud druhé použití čistě potvrdilo přenositelnost pravidla, stačí jedna pracovní věta u pracovního místa a krátký záznam v changelogu. Klidný provoz nemá dostat vlastní administrativu jen proto, že se umí chovat slušně.
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: přečtěte výsledek prvního a druhého běžného použití.
+2. Minuta 2: rozhodněte, jestli druhé použití potvrdilo stejné pravidlo, nebo ukázalo nový problém.
+3. Minuta 3: vyberte jeden uzavírací stav.
+4. Minuta 4: napište jednu pracovní větu pro další použití.
+5. Minuta 5: napište, co zůstává zavřené.
+6. Minuta 6: rozhodněte, které dočasné stopy smažete nebo zobecníte.
+7. Minuta 7: uložte závěr k pracovnímu místu a zrušte mimořádnou pozornost, pokud není nový návratový signál.
+
+Když během workshopu vznikne chuť "ještě chvíli sledovat", napište přesně co, proč, kde to skončí a jaké rozhodnutí sledování změní. Pokud to napsat nejde, nesledujte. Jen zavřete stav a nechte pravidlo pracovat.
+
+### Checklist uzavření druhého použití po review
+
+- Máme popsaný výsledek prvního i druhého běžného použití?
+- Vybrali jsme přesně jeden uzavírací stav?
+- Umíme napsat jednu pracovní větu pro další použití?
+- Pokud pravidlo funguje, převádíme ho do klidného provozu bez nové administrativy?
+- Pokud doplňujeme hranu, je lokální a u stejného pracovního místa?
+- Pokud přesouváme pravidlo, jde do existující šablony, checklistu nebo provozní karty?
+- Pokud otevíráme návratový signál, je menší než původní téma?
+- Je jasně napsané, co dál výslovně neotevíráme?
+- Nezakládáme nový zákaznický údaj, štítek, export, report ani kontrolní rytmus bez jasného rozhodnutí?
+- Smazali jsme nebo zobecnili dočasné poznámky, které už se promítly do pravidla?
+- Ví další člověk, kde pravidlo najde a kdy se k němu vrátit?
+
+Uzavření druhého běžného použití po review má být konec mimořádné pozornosti. Buď pravidlo obstálo a patří do klidného provozu, nebo potřebuje jednu poslední lokální opravu, nebo vznikl malý návratový signál. Všechny tři cesty jsou v pořádku. Špatná je jen čtvrtá: nechat za sebou rozmazaný mezistav, pár zákaznických poznámek a pocit, že "se to nějak sleduje". To není provoz. To je odložené rozhodnutí v převleku.
+
 ## Pracovní log
 
+- 2026-07-09: Doplněna navazující podkapitola o uzavření druhého běžného použití po uzavřeném review: čtyři uzavírací stavy, SaaS příklady, privacy-first datová hranice, karta, mini workshop a checklist.
 - 2026-07-09: Doplněna navazující podkapitola o druhém běžném použití po uzavřeném review: přenositelnost pravidla, samostatnost bez čerstvého vysvětlení, SaaS příklad s onboardingovým importem, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-07-09: Doplněna navazující podkapitola o uzavření prvního běžného použití po review: čtyři uzavírací stavy, SaaS příklad, privacy-first datová věta, karta, mini workshop a checklist.
 - 2026-07-09: Doplněna navazující podkapitola o prvním běžném použití po uzavřeném pravidelném review: najitelnost závěru, použitelnost pracovní věty, privacy-first kontrola datové stopy, karta, mini workshop a checklist.
