@@ -313820,8 +313820,168 @@ Když se tým zasekne mezi "ponechat lokální opravu" a "otevřít návratový 
 
 Uzavření druhé běžné kontroly po dlouhodobém klidu má tým vrátit z mimořádné pozornosti do normální práce. Pokud lokální oprava funguje, nechte ji být malou. Pokud nefunguje, opravte poslední nejbližší větu. A pokud se ukázal skutečný návratový signál, otevřete ho s hranicí. V každé variantě ale ukončete dočasné stopy, nepřidávejte data bez rozhodovací hodnoty a nenechte kontrolu žít déle než problém, kvůli kterému vznikla.
 
+## První běžné použití po návratu do dlouhodobého klidu
+
+Po uzavření druhé kontroly se pravidlo vrací do normální práce. To zní klidně, skoro nudně, a přesně tak to má být. První běžné použití po návratu do dlouhodobého klidu ale pořád stojí za krátké všimnutí. Ne proto, že byste měli znovu otevírat kontrolní režim, ale proto, že právě tady se ukáže, jestli se tým opravdu přestal opírat o čerstvou paměť.
+
+Rozdíl je jemný. V kontrolním režimu lidé vědí, že se něco ověřuje. Dávají větší pozor, hledají správnou větu a často si pamatují, proč oprava vznikla. V dlouhodobém klidu nic z toho neplatí. Člověk přijde k pracovnímu místu s běžným úkolem, použije pravidlo, nebo ho nepoužije, a jde dál. Pokud pravidlo obstojí tady, začíná být opravdu součástí systému.
+
+První běžné použití proto nemá vytvářet novou agendu. Má jen zanechat krátkou stopu, pokud se něco důležitého ukázalo. Základní otázka zní:
+
+```text
+Dokázal člověk použít pravidlo bez mimořádného vysvětlení, bez návratu do historie a bez nové datové stopy?
+```
+
+Pokud ano, není co slavit tabulkou. Zapište jednu větu u pracovního místa a nechte věc běžet. Pokud ne, vyberte nejmenší lokální reakci. Tohle není pozvánka k nové revizi celé historie. Je to poslední sanity check v běžném provozu.
+
+### Co pozorovat
+
+Sledujte jen čtyři věci:
+
+- najitelnost: člověk ví, kde pravidlo hledat,
+- rozhodnutelnost: pravidlo pomáhá udělat konkrétní rozhodnutí,
+- samostatnost: není potřeba ptát se původního autora,
+- datová střídmost: použití nevytváří nové pole, export, screenshot, poznámku nebo sledování.
+
+Praktický příklad:
+
+```text
+Pracovní místo:
+Potvrzovací e-mail po relevantní poptávce.
+
+Pravidlo:
+Na rozpočet se ptáme volitelně jen tehdy, když bez odpovědi nejde navrhnout další konkrétní krok.
+
+Běžné použití:
+Nový obchodník zpracoval poptávku, našel větu u šablony a neposlal otázku na rozpočet, protože další krok šel navrhnout podle popsaného cíle.
+
+Závěr:
+Pravidlo obstálo v běžném použití. Nic nepřidáváme, nic neměříme, žádnou další kontrolu neplánujeme.
+```
+
+To je ideální výsledek. Není potřeba z něj vyrábět interní case study. Stačí vědět, že pravidlo funguje bez přítomnosti lidí, kteří ho ladili.
+
+Slabší výsledek:
+
+```text
+Běžné použití:
+Nový obchodník našel šablonu, ale nevšiml si věty o rozpočtu a ptal se podle starého zvyku.
+
+Závěr:
+Neotevíráme návrat pravidla. Děláme lokální opravu: větu přesouváme nad volitelné doplňující otázky v potvrzovací šabloně. Další práce vznikne pouze pokud se stejná chyba zopakuje u dalšího člověka.
+```
+
+Tady problém není v pravidle. Problém je v místě. Opravuje se proto viditelnost jedné věty, ne obchodní proces. Ano, někdy je největší strategický zásah posunout řádek o deset centimetrů výš. Produktová poezie, ale funguje.
+
+Skutečný návratový signál:
+
+```text
+Běžné použití:
+Dva různí lidé pravidlo našli, ale v obou případech nedokázali rozhodnout, zda lze další krok navrhnout bez rozpočtu. Oba se museli ptát původního autora.
+
+Závěr:
+Otevíráme nový návratový signál. Neotevíráme formulář ani CRM. Nejmenší další krok je doplnit k pravidlu dva anonymizované příklady rozhodnutí a ověřit je při další relevantní poptávce.
+```
+
+Tady už nejde jen o najitelnost. Pravidlo je příliš abstraktní. I tak se ale nezačíná novým polem ve formuláři. Začíná se příkladem u stejného pracovního místa.
+
+### Tři výsledky prvního běžného použití
+
+První běžné použití po návratu do dlouhodobého klidu má mít tři možné výsledky:
+
+- Zůstává v klidu: pravidlo je najitelné, rozhodnutelné a nevytváří novou datovou stopu.
+- Děláme lokální dotažení: problém je jen v umístění, formulaci nebo krátkém příkladu.
+- Otevíráme návratový signál: problém se netýká jen kotvy, ale samotné rozhodovací hodnoty pravidla.
+
+Nepřidávejte stav "budeme to sledovat". Pokud je potřeba sledovat, napište, jaké rozhodnutí má sledování umožnit, kdy skončí a co se po něm smaže. Pokud to napsat neumíte, nejspíš jen prodlužujete péči o věc, která se měla vrátit do klidu.
+
+### Privacy-first poznámka
+
+Po návratu do dlouhodobého klidu je hlavní riziko nenápadná evidence. Někdo si pro jistotu začne značit, kdy pravidlo použil. Někdo udělá screenshot dobrého příkladu. Někdo si otevře pomocnou tabulku. Všechno to vypadá nevinně, dokud se po třech měsících neptáte, proč máte vedle jednoduché šablony malý sklad provozních detailů.
+
+Použijte krátkou privacy-first větu:
+
+```text
+Při běžném použití pravidla nevzniká samostatná evidence. Pokud se objeví problém, zapisujeme jen anonymizovaný závěr u pracovního místa a konkrétní zákaznické detaily nepřenášíme.
+```
+
+Pokud potřebujete příklad, zkraťte ho do rozhodovacího tvaru:
+
+```text
+Stačí:
+Poptávku šlo kvalifikovat podle cíle projektu bez dotazu na rozpočet.
+
+Není potřeba:
+Kopie e-mailu, jméno zákazníka, screenshot CRM, přepis interní diskuse ani tabulka všech podobných případů.
+```
+
+Tím chráníte dvě věci najednou: soukromí lidí a mentální kapacitu týmu. Čím méně provozních drobků vzniká, tím méně jich musí někdo vlastnit, mazat, vysvětlovat a přenášet do dalších nástrojů.
+
+### Karta prvního běžného použití po návratu do klidu
+
+```text
+Pravidlo nebo pracovní věta:
+
+Kde pravidlo bydlí:
+
+Dnešní běžné použití:
+
+Použil ho člověk bez mimořádného vysvětlení?
+
+Bylo pravidlo najitelné?
+
+Pomohlo udělat rozhodnutí?
+
+Vznikla nová datová stopa?
+
+Výsledek:
+- zůstává v klidu
+- děláme lokální dotažení
+- otevíráme návratový signál
+
+Jednovětý závěr:
+
+Pokud děláme lokální dotažení, co přesně měníme:
+
+Pokud otevíráme návratový signál, jaký důkaz ho spustil:
+
+Co výslovně nezavádíme:
+
+Co mažeme nebo nepřenášíme:
+
+Kde je závěr uložený:
+```
+
+Kartu vyplňujte jen tehdy, když se při použití něco ukázalo. Pokud pravidlo prostě fungovalo, stačí jednovětý závěr u pracovního místa. Karta je nástroj pro hranu, ne razítko pro každý normální den.
+
+### Mini workshop na 5 minut
+
+1. Minuta 1: pojmenujte pracovní místo a pravidlo.
+2. Minuta 2: řekněte, co se stalo při běžném použití.
+3. Minuta 3: odpovězte na najitelnost, rozhodnutelnost a samostatnost.
+4. Minuta 4: napište privacy-first větu o tom, co nevzniká a co nepřenášíte.
+5. Minuta 5: vyberte výsledek: zůstává v klidu, lokální dotažení, nebo návratový signál.
+
+Pokud se tým během pěti minut začne vracet k celé historii pravidla, zastavte ho. Historie už jednou posloužila. Teď jde o dnešní použití. Starý kontext otevřete jen tehdy, když dnešní důkaz opravdu mění rozhodnutí.
+
+### Checklist prvního běžného použití po návratu do klidu
+
+- Šlo o běžné použití, ne domluvenou kontrolu?
+- Věděl člověk, kde pravidlo hledat?
+- Pomohlo pravidlo rozhodnout, co udělat nebo neudělat?
+- Nebylo potřeba ptát se původního autora?
+- Nevznikla nová tabulka, export, screenshot, CRM atribut ani sledovací značka?
+- Pokud pravidlo fungovalo, nechali jsme ho v klidu bez další kontroly?
+- Pokud nefungovalo lokálně, opravujeme jen nejbližší pracovní místo?
+- Pokud vznikl návratový signál, má konkrétní důkaz a hranici dalšího kroku?
+- Je zapsané, co výslovně nezavádíme?
+- Jsou konkrétní zákaznické detaily smazané, anonymizované nebo vůbec nepřenesené?
+
+První běžné použití po návratu do dlouhodobého klidu je zkouška tichosti. Dobré pravidlo nemusí volat o pozornost. Stačí, že je ve správném místě, pomůže člověku rozhodnout a nezanechá po sobě zbytečná data. Když tím projde, nechte ho pracovat. Když ne, opravte nejbližší hranu. A když se ukáže skutečný návratový signál, otevřete ho malým krokem, ne návratem ke všemu, co už bylo jednou zavřené.
+
 ## Pracovní log
 
+- 2026-07-09: Doplněna navazující podkapitola o prvním běžném použití po návratu do dlouhodobého klidu: najitelnost, rozhodnutelnost, samostatnost, privacy-first datová střídmost, karta, mini workshop a checklist.
 - 2026-07-09: Doplněna navazující podkapitola o uzavření druhé běžné kontroly po dlouhodobém klidu: uzavírací stavy, SaaS příklady, co po uzavření nedělat, privacy-first datové ukončení, karta, mini workshop a checklist.
 - 2026-07-09: Doplněna navazující podkapitola o druhé běžné kontrole po dlouhodobém klidu: ověření lokální opravy, čtyři výsledné stavy, SaaS příklady, privacy-first uzavření, karta, mini workshop a checklist.
 - 2026-07-09: Doplněna navazující podkapitola o uzavření první běžné kontroly po dlouhodobém klidu: uzavírací stavy, SaaS příklady, privacy-first datová věta, karta, mini workshop a checklist.
