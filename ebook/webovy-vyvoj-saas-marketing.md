@@ -313981,8 +313981,195 @@ Pokud se tým během pěti minut začne vracet k celé historii pravidla, zastav
 
 První běžné použití po návratu do dlouhodobého klidu je zkouška tichosti. Dobré pravidlo nemusí volat o pozornost. Stačí, že je ve správném místě, pomůže člověku rozhodnout a nezanechá po sobě zbytečná data. Když tím projde, nechte ho pracovat. Když ne, opravte nejbližší hranu. A když se ukáže skutečný návratový signál, otevřete ho malým krokem, ne návratem ke všemu, co už bylo jednou zavřené.
 
+## Uzavření prvního běžného použití po návratu do klidu
+
+První běžné použití po návratu do dlouhodobého klidu nemá zůstat viset jako nenápadná poznámka bez konce. Buď potvrdí, že pravidlo opravdu žije v běžné práci, nebo ukáže jednu lokální hranu, kterou je potřeba dočistit, nebo otevře nový návratový signál. Uzavření je krátký krok, který z této situace udělá rozhodnutí místo dalšího pozorování.
+
+Začněte jednou větou:
+
+```text
+První běžné použití po návratu do klidu uzavíráme takto:
+```
+
+Za dvojtečku nepište historii. Napište výsledek dnešního použití, stav pravidla a datovou stopu. Dobrá věta má tři části:
+
+- co člověk při běžné práci udělal,
+- zda pravidlo zůstává v klidu, dostává lokální dotažení, nebo otevírá návratový signál,
+- co díky tomu dál nevzniká jako data, evidence nebo další kontrola.
+
+Příklad čistého uzavření:
+
+```text
+První běžné použití po návratu do klidu uzavíráme takto:
+obchodník našel větu u potvrzovací šablony, rozhodl bez pomoci původního autora a pravidlo zůstává v dlouhodobém klidu; nevzniká nová evidence použití, žádný CRM atribut ani další kontrolní rytmus.
+```
+
+Tím je hotovo. Nezakládejte z toho report. Nevolejte tomu "milník". Nezvěte pravidlo na oslavu do další dokumentace, kde se za dva měsíce ztratí mezi podobně slavnými odstavci. Stačí jedna dohledatelná věta u pracovního místa.
+
+### Čtyři uzavírací stavy
+
+Po prvním běžném použití vyberte jeden ze čtyř stavů:
+
+- Zůstává v dlouhodobém klidu: pravidlo bylo najitelné, rozhodnutelné a nevytvořilo novou datovou stopu.
+- Uzavíráme lokální dotažení: opravili jsme kotvu, formulaci nebo příklad a neplánujeme další péči bez nového signálu.
+- Otevíráme návratový signál: dnešní použití ukázalo konkrétní problém, který přesahuje jednu kotvu.
+- Archivujeme slabou větev: ukázalo se, že pravidlo se v běžné práci už nepoužívá, nemá vlastníka nebo jeho pracovní místo zaniklo.
+
+První stav je výchozí ideál. Znamená, že systém unesl běžnou práci bez mimořádné pozornosti. Druhý stav je pořád zdravý: drobná hrana se opraví a tím končí. Třetí stav je pro skutečný důkaz, ne pro pocit, že by se téma možná mohlo rozšířit. Čtvrtý stav je méně častý, ale užitečný. Někdy první běžné použití po návratu do klidu ukáže, že pravidlo už vlastně nikdo nepotřebuje. Pak ho nedržte při životě jen proto, že stálo práci ho napsat.
+
+Codyho komentář: nejdražší věty v týmu nejsou vždycky ty dlouhé. Někdy je to krátká věta, kterou nikdo nepoužívá, ale všichni se bojí ji smazat, protože "určitě k něčemu byla". Byla. Teď už možná není. Dokumentace nemá nárok na doživotní rentu.
+
+### Praktický SaaS příklad
+
+Pravidlo po návratu do klidu:
+
+```text
+U relevantní poptávky bez rozpočtu se ptáme volitelně jen tehdy, když bez odpovědi nejde navrhnout další konkrétní krok.
+```
+
+První běžné použití:
+
+```text
+Nový obchodník otevřel potvrzovací e-mailovou šablonu, našel pracovní větu a u poptávky bez rozpočtu se neptal, protože další krok šel navrhnout podle popsaného cíle.
+```
+
+Uzavření:
+
+```text
+První běžné použití po návratu do klidu uzavíráme stavem zůstává v dlouhodobém klidu. Pravidlo je najitelné u šablony, pomohlo rozhodnout bez další pomoci a nevzniká žádná nová evidence použití. Původní povinné rozpočtové pole zůstává zavřené.
+```
+
+Lokální dotažení:
+
+```text
+Nový obchodník pravidlo našel, ale až po otevření interního checklistu. V potvrzovací šabloně byl jen nepřesný odkaz.
+```
+
+Uzavření:
+
+```text
+První běžné použití uzavíráme stavem uzavíráme lokální dotažení. K šabloně přidáváme jednu přesnou větu a odkaz na checklist; další kontrolu neplánujeme. Téma se vrátí pouze pokud další člověk pravidlo znovu nenajde při běžném zpracování poptávky.
+```
+
+Návratový signál:
+
+```text
+Dva lidé pravidlo našli, ale ani jeden nedokázal rozhodnout, kdy je další krok bez rozpočtu dost konkrétní.
+```
+
+Uzavření:
+
+```text
+První běžné použití uzavíráme stavem otevíráme návratový signál. Neotevíráme formulář ani scoring. Nejmenší další krok je doplnit dva anonymizované příklady rozhodnutí k šabloně a ověřit je při další relevantní poptávce.
+```
+
+Archivace slabé větve:
+
+```text
+Původní potvrzovací šablona už se nepoužívá, protože tým mezitím přešel na kratší ruční odpověď podle typu projektu.
+```
+
+Uzavření:
+
+```text
+První běžné použití uzavíráme stavem archivujeme slabou větev. Staré pravidlo nepřenášíme do nové odpovědi automaticky. V nové šabloně ponecháváme jen obecnou hranici: na rozpočet se neptáme dřív, než víme, jaké rozhodnutí má odpověď umožnit.
+```
+
+Archivace není porážka. Je to úklid. Pokud se pracovní místo změnilo, pravidlo nemá právo přestěhovat se do nového procesu jen ze setrvačnosti.
+
+### Privacy-first uzavření
+
+Uzavření prvního běžného použití je dobrý okamžik zastavit pomocné stopy dřív, než si zvyknou existovat. Zeptejte se:
+
+```text
+Vzniklo při tomto použití něco, co nepotřebujeme držet po uzavření?
+```
+
+Může jít o poznámku s konkrétním zákaznickým příkladem, dočasný screenshot, ruční seznam podobných situací, komentář v CRM nebo kopii e-mailu. Pokud výsledek říká "zůstává v klidu", tyto věci nemají důvod žít dál. Ponechte jen zobecněný závěr.
+
+Krátká privacy-first věta:
+
+```text
+Po uzavření ponecháváme pouze pracovní závěr u šablony. Nepřenášíme konkrétní e-maily, zákaznické detaily, screenshoty ani pomocnou evidenci použití.
+```
+
+Pokud vzniká návratový signál, buďte stejně úsporní:
+
+```text
+Pro návratový signál ukládáme jen anonymizovaný vzor problému a hranici dalšího kroku. Konkrétní poptávky nepřenášíme do nové evidence; pokud jsou potřeba jako příklad, popíšeme je bez identifikujících detailů.
+```
+
+Privacy-first provoz se často nepozná podle velkých prohlášení. Pozná se podle toho, že i malý závěr umí říct: tohle víme, tohle nepotřebujeme držet, tohle dál nesbíráme.
+
+### Karta uzavření prvního běžného použití po návratu do klidu
+
+```text
+Pravidlo nebo pracovní věta:
+
+Kde pravidlo bydlí:
+
+Dnešní běžné použití:
+
+Co člověk dokázal bez mimořádné pomoci:
+
+Co mu chybělo, pokud něco:
+
+Výsledek uzavření:
+- zůstává v dlouhodobém klidu
+- uzavíráme lokální dotažení
+- otevíráme návratový signál
+- archivujeme slabou větev
+
+Jednověté uzavření:
+
+Co se mění:
+
+Co se nemění:
+
+Co zůstává výslovně zavřené:
+
+Co dál nesbíráme nebo nezavádíme:
+
+Jaké pomocné stopy mažeme, anonymizujeme nebo nepřenášíme:
+
+Kde je závěr uložený:
+
+Kdy se téma vrátí, pokud vůbec:
+```
+
+Kartu nevyplňujte pro čisté použití, které nepotřebuje nic víc než jednu větu. Použijte ji tehdy, když je potřeba zavřít lokální dotažení, otevřít návratový signál nebo archivovat slabou větev. Formulář má pomoct rozhodnout, ne vyrábět pocit, že každé tiché použití zaslouží svou mini dokumentaci.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte pracovní větu a místo, kde bydlí.
+2. Minuta 2: popište dnešní běžné použití bez zákaznických detailů.
+3. Minuta 3: vyberte jeden ze čtyř uzavíracích stavů.
+4. Minuta 4: napište jednověté uzavření.
+5. Minuta 5: napište, co zůstává zavřené a co dál nesbíráte.
+6. Minuta 6: smažte, anonymizujte nebo nepřeneste pomocné stopy.
+
+Pokud se tým během workshopu začne ptát, zda by se pravidlo nemělo pro jistotu zkontrolovat ještě jednou, vraťte ho k výsledku. Buď existuje konkrétní návratový signál, nebo ne. "Pro jistotu" není signál. Je to emoce v pracovním kabátě.
+
+### Checklist uzavření prvního běžného použití po návratu do klidu
+
+- Je jasné, jaké pravidlo bylo použité?
+- Šlo o běžné použití, ne domluvenou kontrolu?
+- Víme, zda člověk pravidlo našel a použil bez mimořádné pomoci?
+- Vybrali jsme jeden uzavírací stav?
+- Pokud pravidlo zůstává v klidu, nevzniká další kontrola ze zvyku?
+- Pokud děláme lokální dotažení, je opravdu omezené na nejbližší pracovní místo?
+- Pokud otevíráme návratový signál, má konkrétní důkaz a nejmenší další krok?
+- Pokud archivujeme slabou větev, víme, co se nepřenáší do nového procesu?
+- Je napsané, co zůstává výslovně zavřené?
+- Je zapsané, co dál nesbíráme, neměříme nebo nezavádíme?
+- Jsou pomocné poznámky, screenshoty, kopie e-mailů nebo zákaznické detaily smazané, anonymizované nebo nepřenesené?
+- Je závěr uložený u pracovního místa, kde ho člověk příště přirozeně najde?
+
+Uzavření prvního běžného použití po návratu do klidu má chránit klid. Když pravidlo funguje, nedělejte z něj nový projekt. Když potřebuje drobnou opravu, zavřete ji lokálně. Když se objeví návratový signál, otevřete ho malým krokem. A když pravidlo ztratilo pracovní místo, archivujte ho bez nostalgie. V každé variantě platí totéž: ponechat rozhodnutí, ne data navíc.
+
 ## Pracovní log
 
+- 2026-07-09: Doplněna navazující podkapitola o uzavření prvního běžného použití po návratu do klidu: čtyři uzavírací stavy, SaaS příklady, privacy-first uzavření, karta, mini workshop a checklist.
 - 2026-07-09: Doplněna navazující podkapitola o prvním běžném použití po návratu do dlouhodobého klidu: najitelnost, rozhodnutelnost, samostatnost, privacy-first datová střídmost, karta, mini workshop a checklist.
 - 2026-07-09: Doplněna navazující podkapitola o uzavření druhé běžné kontroly po dlouhodobém klidu: uzavírací stavy, SaaS příklady, co po uzavření nedělat, privacy-first datové ukončení, karta, mini workshop a checklist.
 - 2026-07-09: Doplněna navazující podkapitola o druhé běžné kontrole po dlouhodobém klidu: ověření lokální opravy, čtyři výsledné stavy, SaaS příklady, privacy-first uzavření, karta, mini workshop a checklist.
