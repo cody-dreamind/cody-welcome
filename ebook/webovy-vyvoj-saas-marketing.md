@@ -314167,8 +314167,180 @@ Pokud se tým během workshopu začne ptát, zda by se pravidlo nemělo pro jist
 
 Uzavření prvního běžného použití po návratu do klidu má chránit klid. Když pravidlo funguje, nedělejte z něj nový projekt. Když potřebuje drobnou opravu, zavřete ji lokálně. Když se objeví návratový signál, otevřete ho malým krokem. A když pravidlo ztratilo pracovní místo, archivujte ho bez nostalgie. V každé variantě platí totéž: ponechat rozhodnutí, ne data navíc.
 
+## Druhé běžné použití po návratu do dlouhodobého klidu
+
+Druhé běžné použití po návratu do dlouhodobého klidu je dobrý test, jestli pravidlo opravdu přestalo potřebovat pozornost. První použití často ještě nese zbytek čerstvé paměti: někdo si pamatuje poslední úpravu, někdo zahlédl nový závěr v kanálu, někdo byl u uzavření. Druhé použití už bývá obyčejnější. A právě proto je cenné.
+
+Smyslem není znovu otevřít kontrolní režim. Smyslem je ověřit, že pravidlo funguje i bez dozvuku poslední práce. Pokud druhé běžné použití proběhne čistě, nechte pravidlo v klidu a nepřidávejte další plánovanou kontrolu. Pokud se objeví drobné tření, opravte nejbližší pracovní místo. Pokud se opakuje stejný problém jako minule, už nejde o náhodu, ale o signál, že pravidlo možná není dost rozhodnutelné.
+
+Základní otázka zní:
+
+```text
+Potvrdilo druhé běžné použití, že pravidlo funguje bez čerstvé paměti, bez mimořádné pomoci a bez nové datové stopy?
+```
+
+Odpověď má být krátká. Nevracejte se k celé historii. Stačí porovnat dnešní použití s posledním uzavřením a vybrat jeden výsledek.
+
+### Co porovnat s prvním použitím
+
+Porovnávejte jen čtyři věci:
+
+- jestli člověk našel stejné pracovní místo,
+- jestli pravidlo vedlo ke stejnému typu rozhodnutí,
+- jestli se nezopakovala lokální chyba,
+- jestli nevznikla nová pomocná evidence.
+
+Praktický příklad čistého druhého použití:
+
+```text
+První použití:
+Obchodník našel větu u potvrzovací šablony a neptal se na rozpočet, protože další krok šel navrhnout podle cíle projektu.
+
+Druhé použití:
+Jiný obchodník použil stejnou šablonu u jiné poptávky a rozhodl stejně bez pomoci původního autora.
+
+Závěr:
+Pravidlo potvrzuje dlouhodobý klid. Nepřidáváme další kontrolu, evidenci použití ani nové pole do formuláře.
+```
+
+Tohle je stav, který chcete. Druhé použití nevyrobilo nové poznání, ale potvrdilo samostatnost. To je v provozu výhra, i když nevypadá dramaticky. Většina dobrých pravidel má časem vypadat nudně. Nuda je tady známka toho, že systém nedýchá přes člověka, který ho napsal.
+
+Lokální tření:
+
+```text
+Druhé použití:
+Člověk pravidlo našel, ale použil starý odkaz v interním checklistu, který vedl na delší historickou poznámku místo na aktuální větu u šablony.
+
+Závěr:
+Pravidlo zůstává v klidu, ale dočišťujeme starý odkaz. Historickou poznámku nepřenášíme, pouze ji označíme jako archiv a necháme aktuální větu u šablony jako kanonické místo.
+```
+
+Tady není potřeba přepisovat pravidlo. Problém je ve staré cestě. Opravte cestu, ne celé město. Ano, dokumentace občas připomíná cedule v budově po rekonstrukci: místnost už je jinde, ale šipka pořád sebevědomě ukazuje do zdi.
+
+Opakovaný problém:
+
+```text
+Druhé použití:
+Druhý člověk stejně jako první našel pravidlo, ale nedokázal rozhodnout, kdy je další krok dost konkrétní bez dotazu na rozpočet.
+
+Závěr:
+Otevíráme návratový signál k rozhodnutelnosti pravidla. Nejmenší další krok je doplnit dva anonymizované příklady a jednu hranici: kdy už se na rozpočet zeptat smí.
+```
+
+Opakování je důležité. Jedna nejistota může být chyba čtení. Dvě stejné nejistoty u dvou lidí už často ukazují slabou větu. Pořád ale nezačínejte sběrem dalších dat. Nejdřív opravte rozhodovací oporu na místě, kde se pravidlo používá.
+
+### Čtyři výsledky druhého použití
+
+Druhé běžné použití po návratu do dlouhodobého klidu má čtyři praktické výsledky:
+
+- Potvrzený klid: pravidlo použil další člověk nebo další situace bez pomoci a bez nové evidence.
+- Poslední lokální úklid: pravidlo funguje, ale jedna stará cesta, kotva nebo formulace mate čtenáře.
+- Návratový signál: opakuje se problém v rozhodovací hodnotě pravidla, ne jen v jeho umístění.
+- Archivace nepoužité větve: druhé použití ukázalo, že pravidlo už nemá reálné pracovní místo.
+
+Potvrzený klid je výchozí výsledek. Neplánujte třetí kontrolu jen proto, že dvě dopadly dobře. To by byla zvláštní odměna: pravidlo funguje, takže mu přidáme práci. Ne. Fungující pravidlo má dostat méně pozornosti, ne více.
+
+Poslední lokální úklid je dovolený, ale musí být opravdu poslední a lokální. Typicky jde o starý odkaz, duplicitní formulaci, chybějící větu v šabloně nebo archivní poznámku, která se tváří jako aktuální. Jakmile úklid sahá na víc pracovních míst, už to není lokální úklid, ale nové téma.
+
+Návratový signál otevřete pouze tehdy, když druhé použití mění důvěru v pravidlo. Nestačí, že by šlo pravidlo napsat hezčeji. Musí být vidět, že člověk podle něj neumí rozhodnout, dělá opakované chyby, nebo kvůli němu vzniká zbytečná datová stopa.
+
+Archivace nepoužité větve je zdravá údržba. Pokud se pravidlo při druhém použití znovu nepotkalo s realitou, protože pracovní místo mezitím zmizelo, nepřenášejte ho mechanicky dál. Zapište, co se nepřenáší, a nechte v novém procesu jen obecnou hranici, pokud je pořád užitečná.
+
+### Privacy-first porovnání
+
+Druhé použití je dobré místo pro kontrolu, jestli se z prvního použití náhodou nestala tichá evidence. Položte si tři otázky:
+
+```text
+Vznikl po prvním použití seznam, tabulka nebo značka, kterou dnes někdo použil?
+Obsahuje konkrétní zákaznické nebo obchodní detaily?
+Pomáhá tato evidence rozhodnout, nebo jen uklidňuje tým, že něco sleduje?
+```
+
+Pokud evidence nepomáhá rozhodnout, zrušte ji. Ponechte jen zobecněný závěr u pracovního místa. Privacy-first provoz není jen o tom, že neinstalujete trackery. Je i o tom, že si v interní práci nevyrábíte malé stíny zákaznických situací, které nikdo nepotřebuje.
+
+Krátká věta po druhém použití:
+
+```text
+Druhé běžné použití potvrdilo, že pravidlo funguje bez evidence případů; ponecháváme jen pracovní větu u šablony a nepřenášíme konkrétní poptávky, screenshoty ani pomocné seznamy.
+```
+
+Pokud se otevírá návratový signál:
+
+```text
+Pro návrat ukládáme jen anonymizovaný vzor problému: dva lidé neuměli rozhodnout hranici konkrétního dalšího kroku. Neukládáme celé poptávky, jména, rozpočty ani kopie komunikace.
+```
+
+Tím udržíte návrat užitečný a malý. Data mají sloužit rozhodnutí, ne pocitu bezpečí.
+
+### Karta druhého běžného použití po návratu do klidu
+
+```text
+Pravidlo nebo pracovní věta:
+
+Kanonické pracovní místo:
+
+Co bylo uzavřeno po prvním použití:
+
+Dnešní druhé běžné použití:
+
+Byl použit stejný zdroj pravdy?
+
+Dokázal člověk rozhodnout bez původního autora?
+
+Zopakovalo se stejné tření jako minule?
+
+Vznikla nová datová stopa?
+
+Výsledek:
+- potvrzený klid
+- poslední lokální úklid
+- návratový signál
+- archivace nepoužité větve
+
+Jednovětý závěr:
+
+Co se případně dočišťuje:
+
+Co zůstává zavřené:
+
+Co dál nesbíráme, neměříme ani nepřenášíme:
+
+Kde je závěr uložený:
+
+Kdy se téma vrátí, pokud vůbec:
+```
+
+Kartu vyplňujte jen tehdy, když druhé použití ukázalo něco nového. Pokud jen potvrdilo klid, stačí jednovětý závěr. Formulář není medaile za opakovanou stabilitu. Stabilita se pozná i tím, že kolem ní ubývá papíru.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte jednověté uzavření prvního použití.
+2. Minuta 2: popište druhé běžné použití bez zákaznických detailů.
+3. Minuta 3: porovnejte najitelnost, rozhodnutelnost a samostatnost.
+4. Minuta 4: zkontrolujte, jestli nevznikla pomocná evidence.
+5. Minuta 5: vyberte výsledek.
+6. Minuta 6: napište závěr a smažte, anonymizujte nebo nepřeneste zbytečné stopy.
+
+Když se během workshopu objeví chuť zavést pravidelné sledování, zastavte se u otázky, jaké rozhodnutí by sledování změnilo. Pokud žádné, sledování nepotřebujete. Pokud nějaké ano, napište konec sledování dřív, než ho spustíte.
+
+### Checklist druhého běžného použití po návratu do klidu
+
+- Šlo opravdu o druhé běžné použití, ne o plánovanou kontrolu?
+- Porovnali jsme ho s uzavřením prvního použití?
+- Použil člověk stejné kanonické pracovní místo?
+- Dokázal podle pravidla rozhodnout bez původního autora?
+- Nezopakovalo se stejné tření?
+- Pokud se tření zopakovalo, označili jsme ho jako návratový signál nebo jasně omezený lokální úklid?
+- Nevznikla nová evidence případů, tabulka, značka, screenshot nebo CRM atribut?
+- Pokud nějaká pomocná stopa vznikla, víme, proč ji držíme a kdy skončí?
+- Je jasné, co zůstává zavřené?
+- Je závěr uložený u pracovního místa, ne v nové izolované poznámce?
+
+Druhé běžné použití po návratu do dlouhodobého klidu má pravidlu ubrat péči. Když obstojí, nechte ho být. Když drhne jen stará cesta, ukliďte ji. Když se opakuje problém v rozhodnutí, otevřete malý návratový signál. A když pravidlo ztratilo pracovní místo, archivujte ho. V každém případě hlídejte stejnou hranici: méně mimořádné pozornosti, méně zbytečných dat, více práce na správném místě.
+
 ## Pracovní log
 
+- 2026-07-09: Doplněna navazující podkapitola o druhém běžném použití po návratu do dlouhodobého klidu: porovnání s prvním použitím, čtyři výsledky, privacy-first porovnání, karta, mini workshop a checklist.
 - 2026-07-09: Doplněna navazující podkapitola o uzavření prvního běžného použití po návratu do klidu: čtyři uzavírací stavy, SaaS příklady, privacy-first uzavření, karta, mini workshop a checklist.
 - 2026-07-09: Doplněna navazující podkapitola o prvním běžném použití po návratu do dlouhodobého klidu: najitelnost, rozhodnutelnost, samostatnost, privacy-first datová střídmost, karta, mini workshop a checklist.
 - 2026-07-09: Doplněna navazující podkapitola o uzavření druhé běžné kontroly po dlouhodobém klidu: uzavírací stavy, SaaS příklady, co po uzavření nedělat, privacy-first datové ukončení, karta, mini workshop a checklist.
