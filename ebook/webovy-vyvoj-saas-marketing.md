@@ -313089,8 +313089,186 @@ Pokud se workshop změní v debatu o tom, jestli by pravidlo nemělo být souč�
 
 Dlouhodobý klid je dobrý konec pro pravidlo, které už prokázalo použitelnost. Nechává týmu paměť bez aktivního břemene, rozhodnutí bez dalšího ceremoniálu a privacy-first hranici bez nových datových zbytků. To je nenápadná, ale velmi praktická forma kvality: systém si pamatuje dost, aby rozhodl, a zapomíná dost, aby se sám nezanesl.
 
+## První běžná kontrola po dlouhodobém klidu
+
+Dlouhodobý klid se má kontrolovat jinak než čerstvá změna. Čerstvá změna potřebuje pozornost, protože ještě nevíte, jestli drží. Dlouhodobě uklizené archivní minimum už pozornost dostalo. První běžná kontrola po dlouhodobém klidu proto nemá ověřovat celou historii, ale jen jednu věc: jestli pravidlo pořád funguje, když se přirozeně potká s prací.
+
+To potkání nemá být umělé. Neplánujte zvláštní schůzku jen proto, že se kdysi napsal pěkný záznam. Kontrola vzniká až ve chvíli, kdy někdo pravidlo opravdu použije: přijde nová poptávka, tým otevře obchodní checklist, support sáhne po šabloně, produkt řeší onboardingový krok nebo marketing upravuje stránku, kde se staré rozhodnutí přirozeně objeví. Jinak řečeno: dlouhodobý klid se nebudí budíkem, ale kontaktem s realitou.
+
+Začněte jednou větou:
+
+```text
+Dnes jsme dlouhodobě klidné pravidlo potkali při:
+```
+
+Praktický zápis může vypadat takto:
+
+```text
+Dnes jsme dlouhodobě klidné pravidlo potkali při zpracování nové relevantní poptávky bez uvedeného rozpočtu.
+```
+
+Teprve potom se ptejte, jestli se něco změnilo. Neotevírejte starý kontext, dokud k tomu nemáte důvod. Starý kontext je užitečný archiv, ale mizerný výchozí bod pro rychlou běžnou kontrolu. Člověk pak snadno začne číst dávné poznámky, připomene si staré spory a za dvacet minut řeší problém, který se dnes vůbec nestal. To je krásná ukázka práce, která vypadá zodpovědně, ale ve skutečnosti jen vytahuje prach z dobře zavřené skříně.
+
+### Tři kontrolní otázky
+
+První běžná kontrola po dlouhodobém klidu má stát na třech otázkách:
+
+- Našli jsme kanonickou větu tam, kde měla být?
+- Stačila k dnešnímu rozhodnutí bez staré historie?
+- Nevznikla kvůli použití nová datová stopa, kterou jsme původně nechtěli?
+
+Pokud jsou všechny tři odpovědi kladné, kontrola končí. Není potřeba zlepšovat formulaci, přidávat další příklad ani obnovovat revizní rytmus. Zapište jednu stopu a nechte pravidlo dál v klidu.
+
+Příklad:
+
+```text
+Kanonická věta byla v obchodním checklistu, stačila k rozhodnutí poslat volitelný dotaz v potvrzovacím e-mailu a nevzniklo nové povinné pole ani CRM evidence. Pravidlo zůstává v dlouhodobém klidu.
+```
+
+Tohle je dobrý výsledek. Není dramatický, nedá se z něj udělat motivační prezentace a pravděpodobně nikdo nezatleská. Ale systém právě ukázal, že si pamatuje dost a nevyžaduje novou péči. V provozu je to malá výhra.
+
+### Čtyři výsledky první kontroly
+
+Kontrola má mít čtyři možné výsledky:
+
+- Zůstává v klidu: pravidlo bylo najitelné, použitelné a datově střídmé.
+- Opravit kotvu: pravidlo funguje, ale člověk ho hledal na špatném místě nebo pod nejasným názvem.
+- Zpřesnit kanonickou větu: místo bylo správné, ale formulace při dnešním použití nebyla dost rozhodnutelná.
+- Otevřít nový návratový signál: dnešní situace splnila podmínku, kterou jste si dřív napsali pro nové posouzení.
+
+Výsledek "pro jistotu to budeme sledovat" sem nepatří. Buď se nic nezměnilo, nebo opravujete konkrétní pracovní místo, nebo přišel návratový signál. Všechno mezi tím je jen šikovný způsob, jak přidat neurčitou evidenci a později se divit, proč má tým tolik tabulek.
+
+Rozdíl mezi opravou kotvy a zpřesněním věty je praktický:
+
+```text
+Opravit kotvu:
+Pravidlo fungovalo, ale člověk ho hledal v onboardingové šabloně místo v obchodním checklistu. Přidáme odkaz z onboardingové šablony, samotnou větu neměníme.
+
+Zpřesnit kanonickou větu:
+Pravidlo bylo na správném místě, ale neříkalo, co znamená "nejde navrhnout další konkrétní krok". Doplníme hranici: pokud chybí rozpočet i časový rámec, ptáme se nejdřív na cílový výsledek a termín, ne na peníze.
+```
+
+Obě opravy jsou malé. Nemají znovu otevřít původní rozhodnutí, jestli se má do formuláře přidat pole pro rozpočet. To zůstává zavřené, dokud nepřijde návratový signál. V tom je disciplína: opravíte tření v používání, ale nevyrobíte si z něj nový projekt.
+
+### Praktický SaaS příklad
+
+Představte si B2B SaaS, který má poptávkový formulář bez povinného pole pro rozpočet. Tým kdysi rozhodl, že rozpočet nebude sbírat hned v prvním kontaktu, protože většina relevantních poptávek se dá kvalifikovat podle cíle, velikosti problému a rozhodovacího procesu. Po dvou návratech pravidlo obstálo a bylo převedené do dlouhodobého klidu.
+
+O tři měsíce později přijde poptávka:
+
+```text
+Chceme automatizovat reporting pro obchodní tým. Máme data v několika nástrojích a potřebujeme vědět, jestli dává smysl stavět vlastní dashboard.
+```
+
+Rozpočet chybí. Obchodník otevře checklist a najde kanonickou větu:
+
+```text
+U relevantní poptávky bez rozpočtu se ptáme volitelně v potvrzovacím e-mailu jen tehdy, když bez odpovědi nejde navrhnout další konkrétní krok.
+```
+
+Dnešní rozhodnutí:
+
+```text
+Rozpočet teď nepotřebujeme. Další konkrétní krok jde navrhnout podle cíle a datové situace: krátký discovery call zaměřený na zdroje dat, odpovědnosti a očekávaný výstup. Rozpočet zůstává volitelné téma až pro kvalifikaci rozsahu.
+```
+
+Kontrolní zápis:
+
+```text
+První běžná kontrola po dlouhodobém klidu: pravidlo bylo v obchodním checklistu, stačilo k rozhodnutí a nevzniklo nové pole, CRM atribut ani export. Zůstává v klidu.
+```
+
+Tady není co dál vylepšovat. Pravidlo splnilo účel: zabránilo zbytečnému sběru dat, obchodník věděl co udělat a zákazník nedostal hned první kontakt ve stylu "kolik máte peněz?". Což je mimochodem otázka, která umí pokazit i jinak slušný začátek spolupráce. Codyho komentář: u dražších B2B služeb není problém ptát se na rozpočet; problém je ptát se na něj dřív, než člověk prokáže, že rozumí cíli.
+
+### Privacy-first kontrola
+
+První běžná kontrola po dlouhodobém klidu je dobré místo pro malý datový audit. Ne velký právní rozbor. Jen poctivá otázka:
+
+```text
+Vzniklo při dnešním použití něco, co jsme v dlouhodobém klidu nechtěli dál vyrábět?
+```
+
+Hledejte hlavně:
+
+- nové povinné pole ve formuláři;
+- nový CRM atribut;
+- ruční kopii zákaznické odpovědi mimo původní systém;
+- export pro "pozdější analýzu";
+- screenshot konverzace;
+- pomocnou tabulku bez vlastníka a data smazání;
+- nový tracker nebo automatizaci jen kvůli sledování výjimky.
+
+Pokud nic z toho nevzniklo, napište to. Privacy-first hodnota se nemá schovávat v obecných prohlášeních. Má být vidět v konkrétní větě:
+
+```text
+Dnešní použití pravidla nepřidalo žádné nové osobní ani obchodní údaje, nevytvořilo export a nezměnilo retenci poptávkových dat.
+```
+
+Pokud něco vzniklo, neznamená to automaticky průšvih. Znamená to, že je potřeba rozhodnout, jestli to mělo účel, vlastníka a konec. Dočasná pracovní poznámka může být v pořádku. Dočasná pracovní poznámka bez konce je jen malý archivní dluh, který si obléká pracovní vestu.
+
+### Karta první běžné kontroly po dlouhodobém klidu
+
+```text
+Pravidlo nebo archivní minimum:
+
+Dnešní přirozené použití:
+
+Kde byla kanonická věta nalezena:
+
+Stačila k rozhodnutí bez staré historie?
+
+Výsledek kontroly:
+- zůstává v klidu
+- opravit kotvu
+- zpřesnit kanonickou větu
+- otevřít nový návratový signál
+
+Jedna věta rozhodnutí:
+
+Co se nemění:
+
+Co případně opravujeme lokálně:
+
+Jaká data, pole, exporty, trackery nebo kopie nevznikly:
+
+Pokud něco dočasně vzniklo, kdy to smažeme:
+
+Kde je stopa uložená:
+
+Vlastník pracovního místa:
+```
+
+Kartu použijte jen tehdy, když je co rozhodovat. Pokud kontrola dopadla čistě, stačí jednovětá stopa u pracovního místa. Cílem není vyrábět dokumentaci k tomu, že dokumentace nebyla potřeba. Ano, i tohle lidé umí. Někdy velmi elegantně.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: pojmenujte dnešní přirozené použití pravidla.
+2. Minuta 2: ověřte, kde byla kanonická věta nalezena.
+3. Minuta 3: řekněte, zda stačila k rozhodnutí bez staré historie.
+4. Minuta 4: vyberte jeden ze čtyř výsledků kontroly.
+5. Minuta 5: napište privacy-first větu o tom, jaká data nevznikla nebo co se smaže.
+6. Minuta 6: uložte jednovětou stopu a zavřete kontrolu.
+
+Když se během šesti minut objeví chuť znovu číst staré karty, zeptejte se proč. Pokud odpověď není konkrétní návratový signál, staré karty nechte spát. Jejich práce už byla odvedena.
+
+### Checklist první kontroly po dlouhodobém klidu
+
+- Vznikla kontrola z přirozeného použití, ne z plánované nervozity?
+- Našli jsme kanonickou větu u pracovního místa, kde měla být?
+- Šlo podle ní rozhodnout bez čtení staré historie?
+- Vybrali jsme jeden ze čtyř výsledků kontroly?
+- Pokud opravujeme kotvu, neměníme zbytečně samotné pravidlo?
+- Pokud zpřesňujeme větu, zůstává původní široký rozsah zavřený?
+- Pokud otevíráme návratový signál, je konkrétní a navazuje na dřívější podmínku?
+- Nevzniklo nové pole, CRM atribut, tracker, export, screenshot ani pomocná tabulka bez konce?
+- Pokud vznikla dočasná stopa, má vlastníka a datum smazání?
+- Je výsledek uložený jednou větou u pracovního místa?
+
+První běžná kontrola po dlouhodobém klidu má potvrdit, že klid nebyl jen hezké slovo v kartě. Dobře fungující pravidlo se pozná tak, že se dá najít, použít a zase nechat být. Když to zvládne, neodměňujte ho další kontrolou. Odměňte ho tichem.
+
 ## Pracovní log
 
+- 2026-07-09: Doplněna úvodní podkapitola o první běžné kontrole po dlouhodobém klidu: přirozené použití pravidla, tři kontrolní otázky, čtyři výsledky, SaaS příklad, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-07-08: Doplněna úvodní podkapitola o převodu stabilního archivního minima do dlouhodobého klidu: kanonická věta, pracovní místo, návratový signál, privacy-first úklid stop, karta, mini workshop a checklist.
 - 2026-07-08: Doplněna úvodní podkapitola o uzavření druhého běžného návratu po archivní revizi: čtyři uzavírací stavy, SaaS příklady, privacy-first úklid dočasných stop, karta, mini workshop a checklist.
 - 2026-07-08: Doplněna úvodní podkapitola o druhém běžném návratu po archivní revizi: kdy ho otevřít, čtyři výsledky, SaaS příklady, privacy-first úklid dočasných stop, karta, mini workshop a checklist.
