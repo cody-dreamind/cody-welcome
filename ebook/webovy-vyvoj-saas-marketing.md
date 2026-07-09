@@ -316828,8 +316828,185 @@ Pokud workshop potřebuje víc než sedm minut, nejspíš se objevilo nové tém
 
 Druhé běžné setkání po klidové stopě má potvrdit, že systém nepotřebuje ruku na rameni. Pokud pravidlo obstojí, vraťte ho do provozu a nepřidávejte péči. Pokud neobstojí, opravte nejbližší větu nebo otevřete jasný návrat. V obou případech držte datovou stopu malou. Provoz, který umí zůstat malý, má často větší výdrž než provoz, který si na každé zaváhání založí vlastní tabulku.
 
+## Uzavření druhého běžného setkání po klidové stopě
+
+Druhé běžné setkání má po sobě nechat jasný konec. Pokud jste ho otevřeli kvůli jedné lokální opravě, přenositelnosti pravidla nebo ověření, že klidová stopa funguje i bez čerstvého vysvětlení, nesmí po něm vzniknout další šedá zóna. Buď se pravidlo vrací do klidu, nebo se opravuje poslední nejbližší věta, nebo se otevírá nový návratový signál. Všechno ostatní je jen opatrnost převlečená za práci.
+
+Začněte jednou uzavírací větou:
+
+```text
+Druhé běžné setkání uzavíráme takto:
+```
+
+Za ni napište, co se potvrdilo, kde pravidlo dál bydlí a jaká datová stopa nevzniká:
+
+```text
+Druhé běžné setkání uzavíráme takto:
+Doplněný odkaz u importní šablony stačil i pro dalšího člověka, klidová stopa zůstává u tohoto pracovního místa a nevzniká nový CRM štítek, export ani report nestandardních souborů.
+```
+
+Tato věta má být krátká, protože jejím účelem není znovu vyprávět historii. Má ukončit mimořádnou pozornost. Když uzavření potřebuje dlouhé vysvětlování, pravděpodobně jste během druhého setkání otevřeli nové téma a snažíte se ho schovat do staré karty. Nedělejte to. Staré pravidlo zavřete a nové téma pojmenujte samostatně.
+
+### Tři uzavírací stavy
+
+Po druhém setkání vyberte jeden ze tří stavů:
+
+- Vrátit do klidu: pravidlo bylo najitelné, použitelné a nevznikla nová evidence.
+- Dopsat poslední lokální větu: pravidlo fungovalo, ale jedno slovo, odkaz nebo okraj rozsahu ještě mate.
+- Otevřít omezený návrat: druhé setkání splnilo návratový signál nebo ukázalo problém, který už nejde vyřešit jednou lokální větou.
+
+Stav `vrátit do klidu` je cílový. Neplánujte třetí setkání jen proto, že druhé dopadlo dobře. Úspěšná kontrola není pozvánka k dalšímu sledování. Je to důvod přestat pravidlo doprovázet.
+
+Stav `dopsat poslední lokální větu` používejte jen pro opravu přímo u pracovního místa. Typicky jde o doplnění definice, přesnější odkaz, jednu výjimku mimo rozsah nebo krátkou datovou hranici. Pokud opravujete víc míst, už nejde o poslední větu, ale o širší vzor.
+
+Stav `otevřít omezený návrat` musí mít návratový signál, vlastníka a hranici. Nesmí automaticky obnovit původní široký návrh. Pokud druhé setkání ukázalo problém v importní šabloně, nezačínejte hned přepisovat celý onboarding. Začněte tam, kde se problém opravdu objevil.
+
+### Praktický SaaS příklad
+
+Po prvním setkání jste do importní šablony doplnili odkaz na klidovou stopu:
+
+```text
+Obsahově kompletní export s odlišnými názvy sloupců nejdřív posuzujeme interně. Zákaznický call otevíráme až ve chvíli, kdy chybí obsah nebo rozhodnutí.
+```
+
+Druhé setkání:
+
+```text
+Situace:
+Jiný člověk řeší další zákaznický export s jinými názvy sloupců.
+
+Co se stalo:
+Našel odkaz v importní šabloně, porovnal povinné sloupce a rozhodl, že call není potřeba.
+
+Datová stopa:
+Nevznikl nový štítek, pomocná tabulka ani kopie zákaznického souboru mimo onboardingový tok.
+```
+
+Uzavření:
+
+```text
+Stav:
+Vrátit do klidu.
+
+Jednovětý závěr:
+Klidová stopa funguje i při druhém setkání, zůstává u importní šablony a další kontrolu neplánujeme.
+
+Co zůstává zavřené:
+Nový report exportů, CRM štítek "nestandardní soubor" a zákaznický call jen kvůli názvům sloupců.
+```
+
+Slabší výsledek:
+
+```text
+Stav:
+Dopsat poslední lokální větu.
+
+Zjištění:
+Člověk našel pravidlo, ale nevěděl, zda doporučené sloupce blokují interní posouzení.
+
+Oprava:
+K importní šabloně doplňujeme větu: "Obsahově kompletní znamená všechny povinné sloupce; doporučené sloupce neblokují interní posouzení."
+
+Co neotevíráme:
+Nový onboardingový proces, report exportů ani ruční evidenci doporučených sloupců.
+```
+
+Omezený návrat:
+
+```text
+Stav:
+Otevřít omezený návrat.
+
+Signál:
+Druhý export za sebou měl kompletní data, ale chyběla informace, kdo u zákazníka smí potvrdit mapování sloupců.
+
+Nejmenší návrat:
+Ověřit pouze rozhodovací roli v importní odpovědi, ne celý onboarding.
+
+Privacy-first hranice:
+Nepřidáváme nový seznam kontaktních osob ani trvalý atribut role. Řešíme jen větu v existujícím onboardingovém vlákně.
+```
+
+### Privacy-first uzavření
+
+Při uzavření druhého setkání napište konkrétní datovou brzdu. Ne obecné "data zůstávají pod kontrolou", ale přesné vymezení:
+
+```text
+Po uzavření druhého setkání nevzniká:
+```
+
+Příklady:
+
+```text
+Po uzavření druhého setkání nevzniká nový CRM štítek pro nestandardní exporty, měsíční report importních výjimek ani kopie zákaznického souboru mimo onboardingový tok.
+```
+
+```text
+Po uzavření druhého setkání nevzniká pomocná tabulka rozpočtů, povinné pole ve formuláři ani export obchodních odpovědí do marketingového nástroje.
+```
+
+Datová brzda má zůstat u pracovního místa. Když ji schováte jen do rozhodovací historie, člověk ji neuvidí ve chvíli, kdy bude chtít založit nový štítek, tabulku nebo export. Privacy-first pravidlo má být tam, kde vzniká pokušení sbírat víc dat.
+
+### Karta uzavření druhého setkání
+
+```text
+Klidová stopa:
+
+Proč proběhlo druhé setkání:
+
+Co se při druhém setkání stalo:
+
+Uzavírací stav:
+- vrátit do klidu
+- dopsat poslední lokální větu
+- otevřít omezený návrat
+
+Jednovětý závěr:
+
+Pokud dočišťujeme, jakou jednu větu nebo kotvu upravujeme:
+
+Pokud otevíráme návrat, jaký signál ho spustil:
+
+Co zůstává výslovně zavřené:
+
+Jaká data, štítky, exporty, reporty nebo kopie nevznikají:
+
+Kde zůstává kanonická stopa:
+
+Kdy se téma znovu otevře:
+```
+
+Karta má uzavřít druhé setkání, ne založit nový rytmus. Pokud je výsledek čistý, stačí ji zkrátit na jednovětý závěr a datovou brzdu.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte důvod druhého setkání.
+2. Minuta 2: napište, co se reálně stalo.
+3. Minuta 3: vyberte jeden ze tří uzavíracích stavů.
+4. Minuta 4: napište jednovětý závěr.
+5. Minuta 5: určete, co zůstává zavřené.
+6. Minuta 6: zapište datovou brzdu a místo, kde závěr zůstane.
+
+Pokud během šesti minut vznikne víc než jedna oprava, přestaňte to nazývat uzavřením druhého setkání. Otevřete novou otázku. Malý konec má zůstat malý.
+
+### Checklist uzavření druhého setkání
+
+- Víme, proč druhé setkání vůbec proběhlo?
+- Máme konkrétní výsledek z běžné práce?
+- Vybrali jsme jeden ze tří uzavíracích stavů?
+- Je jednovětý závěr použitelný bez staré historie?
+- Pokud dočišťujeme, opravujeme jen jedno nejbližší místo?
+- Pokud otevíráme návrat, je signál konkrétní?
+- Zůstává původní široký návrh zavřený?
+- Je zapsané, jaká data, štítky, exporty, reporty nebo kopie nevznikají?
+- Je kanonická stopa u pracovního místa, ne jen v logu?
+- Končí zvláštní pozornost, pokud pravidlo obstálo?
+
+Uzavření druhého běžného setkání je dobré tehdy, když po něm není potřeba nic hlídat bokem. Pravidlo buď stojí samo, dostane jednu poslední lokální větu, nebo se otevře omezený návrat s jasným signálem. Všechny tři výsledky jsou zdravé. Nezdravé je jen nechat pravidlo napůl v klidu a napůl pod dohledem, protože tým neměl odvahu napsat poslední větu.
+
 ## Pracovní log
 
+- 2026-07-09: Doplněna navazující podkapitola o uzavření druhého běžného setkání po klidové stopě: tři uzavírací stavy, SaaS příklad s importní šablonou, privacy-first datová brzda, karta, mini workshop a checklist.
 - 2026-07-09: Doplněna navazující podkapitola o druhém běžném setkání po klidové stopě: ověření lokální opravy bez čerstvého vysvětlování, SaaS příklad, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-07-09: Doplněna navazující podkapitola o uzavření prvního běžného setkání po klidové stopě: tři uzavírací stavy, SaaS příklad, privacy-first datová brzda, karta, mini workshop a checklist.
 - 2026-07-09: Doplněna navazující podkapitola o prvním běžném setkání po klidové stopě: ověření najitelnosti, pracovní věty, návratového signálu, privacy-first datové hranice, karta, mini workshop a checklist.
