@@ -313615,8 +313615,214 @@ Když se během workshopu otevře širší debata, zastavte ji otázkou: vznikl 
 
 Druhá běžná kontrola po dlouhodobém klidu má být poslední jemné dotažení, ne nový rytmus. Když lokální oprava funguje, vraťte pravidlo do ticha. Když nefunguje, opravte jednu nejbližší větu. A když se opravdu ukáže nový problém, otevřete návratový signál vědomě, bez automatického zvětšení rozsahu a bez zbytečného sběru dat.
 
+## Uzavření druhé běžné kontroly po dlouhodobém klidu
+
+Uzavření druhé běžné kontroly po dlouhodobém klidu je malé, ale důležité gesto. Říká: ověřili jsme poslední lokální opravu, víme, jestli obstála, a teď končí mimořádná péče. Pokud tento krok přeskočíte, druhá kontrola se může tiše proměnit v další otevřenou větev. Nikdo ji možná nepojmenuje jako projekt, ale někde začne žít poznámka, pomocný dokument, připomínka v kalendáři nebo tabulka "ještě pro jistotu".
+
+Dobré uzavření má proto tři části:
+
+- výsledek druhé kontroly,
+- větu, co se po ní mění nebo nemění,
+- privacy-first větu, jaká data a pracovní stopy dál nevznikají.
+
+Základní uzavírací věta:
+
+```text
+Druhou běžnou kontrolu po dlouhodobém klidu uzavíráme stavem:
+```
+
+Za ni doplňte jeden ze čtyř stavů:
+
+- Vracíme do dlouhodobého klidu.
+- Ponecháváme lokální opravu bez dalšího šíření.
+- Děláme poslední lokální zpřesnění.
+- Otevíráme nový návratový signál.
+
+První stav je nejčistší. Lokální oprava se našla, stačila k rozhodnutí a nevytvořila novou evidenci. Závěr má být krátký a uložený u pracovního místa, ne v samostatném rituálu.
+
+Druhý stav je pro situaci, kdy oprava funguje, ale jen tam, kde vznikla. To není chyba. Ne každé užitečné pravidlo musí být roznesené po celém systému. Pokud obchodní věta pomáhá u potvrzovací e-mailové šablony, nemusí se nutně objevit v homepage, CRM, interním onboardingu a kvartálním reportu. Čím víc kopií, tím víc budoucího úklidu. Ano, dokumentace umí být nakažlivá. Chovejme se k ní s hygienou.
+
+Třetí stav připouští jednu poslední drobnou opravu. Slovo "poslední" je důležité. Pokud druhá kontrola našla ještě jednu nejasnost, opravte ji co nejblíž místu použití a napište, že další práce vznikne pouze při návratovém signálu. Bez této věty se z posledního zpřesnění snadno stane třetí kontrola, pak čtvrtá a potom už jen týmový folklor.
+
+Čtvrtý stav probouzí téma ze spánku. Použijte ho jen tehdy, když druhá kontrola opravdu ukázala opakovaný problém mimo lokální opravu. Návratový signál musí mít konkrétní důkaz, pracovní místo a hranici dalšího kroku. Pokud máte jen nespokojený pocit, nezakládejte novou větev. Zapište poznámku, že důkaz nestačí.
+
+### Praktický SaaS příklad
+
+Původní pravidlo po dlouhodobém klidu:
+
+```text
+U relevantní poptávky bez rozpočtu se ptáme volitelně v potvrzovacím e-mailu jen tehdy, když bez odpovědi nejde navrhnout další konkrétní krok.
+```
+
+První kontrola našla slabinu:
+
+```text
+Obchodník pravidlo hledal u potvrzovací e-mailové šablony a našel ho až v obchodním checklistu.
+```
+
+Lokální oprava:
+
+```text
+K potvrzovací šabloně přidáváme odkaz na obchodní checklist a jednu pracovní větu.
+```
+
+Druhá kontrola:
+
+```text
+Jiný obchodník zpracoval poptávku bez čerstvého vysvětlení, našel větu u šablony a rozhodl se neposílat otázku na rozpočet, protože další krok šel navrhnout podle cíle projektu.
+```
+
+Uzavření:
+
+```text
+Druhou běžnou kontrolu po dlouhodobém klidu uzavíráme stavem vracíme do dlouhodobého klidu. Lokální kotva u potvrzovací šablony funguje, pravidlo se nemění, formulář zůstává bez povinného pole a nevzniká nový CRM atribut, scoring ani export.
+```
+
+Tohle je dobrý konec. Není potřeba dělat z pravidla nový obchodní playbook. Není potřeba připravovat školení. Není potřeba měřit počet případů, kdy se otázka neposlala. Stačí nechat větu tam, kde pomáhá.
+
+Slabší, ale pořád lokální varianta:
+
+```text
+Obchodník větu našel, ale nebylo mu jasné, zda se má ptát na rozpočet u všech relevantních poptávek bez rozpočtu, nebo jen tam, kde bez odpovědi nejde navrhnout další krok.
+```
+
+Uzavření:
+
+```text
+Druhou běžnou kontrolu uzavíráme stavem děláme poslední lokální zpřesnění. Větu u šablony upravujeme tak, aby výslovně říkala, že otázku neposíláme, pokud lze další krok navrhnout bez rozpočtu. Další kontrolu neplánujeme; téma se vrátí pouze při třech relevantních poptávkách za sebou, které bez rozpočtu nepůjde kvalifikovat.
+```
+
+Zase se drží hranice. Opravuje se věta, ne formulář. Mění se pracovní místo, ne datový model. Návratový signál je konkrétní, takže tým nebude téma probouzet jen proto, že někdo příště řekne "rozpočet by se stejně hodil".
+
+Varianta s opravdovým návratem:
+
+```text
+Po lokální opravě dvě různé poptávky nešlo kvalifikovat bez rozpočtu a tým nedokázal navrhnout další krok bez ručního doptání.
+```
+
+Uzavření:
+
+```text
+Druhou běžnou kontrolu uzavíráme stavem otevíráme nový návratový signál. Neotevíráme rovnou povinné pole ve formuláři. Otevíráme nejmenší další krok: otestovat jednu volitelnou větu v potvrzovacím e-mailu u tří relevantních poptávek a po testu rozhodnout, zda stačí komunikace, nebo je potřeba změna formuláře.
+```
+
+I tady návrat nezačíná největší změnou. Začíná nejmenším místem, kde se problém ukázal. To je rozdíl mezi produktovým rozhodnutím a reflexem "přidejme další pole, protože tabulky mají hlad".
+
+### Co po uzavření nedělat
+
+Po uzavření druhé kontroly nedělejte tyto věci:
+
+- nezakládejte třetí kontrolu jen pro pocit jistoty,
+- nekopírujte lokální větu do všech souvisejících dokumentů,
+- nepřidávejte nové pole, štítek, export ani dashboard bez návratového signálu,
+- nenechávejte pomocné poznámky s konkrétními zákaznickými detaily,
+- neměňte původní pravidlo, pokud problém byl jen v kotvě nebo formulaci.
+
+Nejčastější chyba je přesně opačná než lenost. Tým udělá dobrý malý krok, ten zafunguje, a pak ho začne poctivě rozšiřovat. Výsledkem není lepší systém, ale větší povrch údržby. Pokud druhá kontrola potvrdila, že lokální oprava stačí, nejprofesionálnější práce je přestat.
+
+### Privacy-first uzavření
+
+Privacy-first uzavření druhé kontroly má být přísnější než běžné "data beze změny". Po druhém použití totiž často vzniká dojem, že už máme vzor a můžeme ho začít sledovat strukturovaně. Někdy ano. Ale pouze pokud existuje návratový signál a jasná rozhodovací otázka.
+
+Použijte krátký zápis:
+
+```text
+Po druhé kontrole zůstává trvale:
+
+Po druhé kontrole mažeme nebo nepřenášíme:
+
+Po druhé kontrole nezavádíme:
+
+Téma se vrátí pouze pokud:
+```
+
+Příklad:
+
+```text
+Po druhé kontrole zůstává trvale:
+Jedna pracovní věta a odkaz u potvrzovací e-mailové šablony.
+
+Po druhé kontrole mažeme nebo nepřenášíme:
+Pomocné poznámky z konkrétních poptávek a interní screenshoty e-mailů.
+
+Po druhé kontrole nezavádíme:
+Povinné rozpočtové pole, CRM atribut, lead scoring, export rozpočtových odpovědí ani dashboard dotazů na rozpočet.
+
+Téma se vrátí pouze pokud:
+Tři relevantní poptávky za sebou nepůjde kvalifikovat bez ručního doptání na rozpočet.
+```
+
+Tento zápis nechává týmu poznatek a bere mu pokušení držet zbytečné detaily. To je v evropském privacy-first provozu praktická výhoda: méně dat k hlídání, méně dodavatelů k prověřování, méně výjimek k vysvětlování a méně budoucího mazání. Někdy je nejlepší compliance práce ta, kterou jste si nemuseli přidat.
+
+### Karta uzavření druhé kontroly po dlouhodobém klidu
+
+```text
+Pravidlo nebo archivní minimum:
+
+Lokální oprava ověřovaná druhou kontrolou:
+
+Dnešní použití:
+
+Výsledek druhé kontroly:
+- vracíme do dlouhodobého klidu
+- ponecháváme lokální opravu bez dalšího šíření
+- děláme poslední lokální zpřesnění
+- otevíráme nový návratový signál
+
+Jednověté uzavření:
+
+Co se po uzavření mění:
+
+Co se po uzavření nemění:
+
+Co zůstává výslovně zavřené:
+
+Po druhé kontrole zůstává trvale:
+
+Po druhé kontrole mažeme nebo nepřenášíme:
+
+Po druhé kontrole nezavádíme:
+
+Kde je závěr uložený:
+
+Kdo vlastní pracovní místo:
+
+Téma se vrátí pouze pokud:
+```
+
+Karta má být krátká. Pokud ji neumíte vyplnit bez návratu do celé historie, pravděpodobně jste ještě neuzavřeli druhou kontrolu, ale znovuotevřeli analýzu. V takovém případě napište novou pracovní otázku a začněte menší smyčku. Nemíchejte uzavření s novým objevováním.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte lokální opravu, kvůli které druhá kontrola vznikla.
+2. Minuta 2: napište, co se stalo při dnešním použití.
+3. Minuta 3: vyberte jeden ze čtyř uzavíracích stavů.
+4. Minuta 4: napište jednověté uzavření u pracovního místa.
+5. Minuta 5: napište privacy-first větu o tom, co nezavádíte a co nepřenášíte.
+6. Minuta 6: smažte nebo uzavřete pomocné stopy a určete návratový signál, pokud existuje.
+
+Když se tým zasekne mezi "ponechat lokální opravu" a "otevřít návratový signál", zeptejte se: máme nový důkaz, že problém přesahuje opravené pracovní místo? Pokud ne, ponechte lokální opravu. Pokud ano, otevřete návrat. Ale nedržte obě možnosti zároveň. To je jen nerozhodnost s lepším názvem.
+
+### Checklist uzavření druhé kontroly
+
+- Víme, jaká lokální oprava se druhou kontrolou ověřovala?
+- Je zapsané dnešní použití bez zbytečných zákaznických detailů?
+- Vybrali jsme jeden uzavírací stav?
+- Pokud se pravidlo vrací do dlouhodobého klidu, neplánujeme třetí kontrolu ze zvyku?
+- Pokud ponecháváme lokální opravu, nekopírujeme ji do míst, kde zatím nevznikla potřeba?
+- Pokud děláme poslední zpřesnění, je opravdu jen jednověté nebo lokální?
+- Pokud otevíráme návratový signál, má konkrétní důkaz, pracovní místo a hranici dalšího kroku?
+- Je jasné, co se mění a co se nemění?
+- Zůstává původní široký návrh výslovně zavřený?
+- Je zapsané, co po druhé kontrole nezavádíme: pole, exporty, trackery, scoring, screenshoty nebo pomocné tabulky?
+- Jsou pomocné poznámky s konkrétními údaji smazané, anonymizované nebo vědomě nepřenesené?
+- Je závěr uložený u pracovního místa, kde se pravidlo příště přirozeně použije?
+
+Uzavření druhé běžné kontroly po dlouhodobém klidu má tým vrátit z mimořádné pozornosti do normální práce. Pokud lokální oprava funguje, nechte ji být malou. Pokud nefunguje, opravte poslední nejbližší větu. A pokud se ukázal skutečný návratový signál, otevřete ho s hranicí. V každé variantě ale ukončete dočasné stopy, nepřidávejte data bez rozhodovací hodnoty a nenechte kontrolu žít déle než problém, kvůli kterému vznikla.
+
 ## Pracovní log
 
+- 2026-07-09: Doplněna navazující podkapitola o uzavření druhé běžné kontroly po dlouhodobém klidu: uzavírací stavy, SaaS příklady, co po uzavření nedělat, privacy-first datové ukončení, karta, mini workshop a checklist.
 - 2026-07-09: Doplněna navazující podkapitola o druhé běžné kontrole po dlouhodobém klidu: ověření lokální opravy, čtyři výsledné stavy, SaaS příklady, privacy-first uzavření, karta, mini workshop a checklist.
 - 2026-07-09: Doplněna navazující podkapitola o uzavření první běžné kontroly po dlouhodobém klidu: uzavírací stavy, SaaS příklady, privacy-first datová věta, karta, mini workshop a checklist.
 - 2026-07-09: Doplněna úvodní podkapitola o první běžné kontrole po dlouhodobém klidu: přirozené použití pravidla, tři kontrolní otázky, čtyři výsledky, SaaS příklad, privacy-first kontrola, karta, mini workshop a checklist.
