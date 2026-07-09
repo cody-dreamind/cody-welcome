@@ -315752,8 +315752,166 @@ Pokud se workshop začne měnit v nové review, zastavte ho. První použití m�
 
 První běžné použití po uzavřeném review má být malé a praktické. Buď potvrdí, že pravidlo umí žít samo, nebo ukáže jednu nejbližší opravu. V obou případech chrání tým před dvěma zlozvyky: opakovaným vysvětlováním starého rozhodnutí a sběrem dat "pro jistotu".
 
+## Uzavření prvního běžného použití po review
+
+První běžné použití po review není hotové ve chvíli, kdy člověk podle pravidla nějak projde práci. Hotové je až tehdy, když tým ví, co z toho plyne. Bez uzavření se z malého provozního testu snadno stane zvláštní mezistav: pravidlo se použilo, ale nikdo neví, jestli se má dál hlídat, opravit, přesunout, nebo nechat být.
+
+Uzavření má být krátké. Neopisujte znovu celé review, nepřidávejte novou historii a nevyhlašujte další ověřovací režim jen proto, že první použití dopadlo zajímavě. Vezměte výsledek prvního použití a převeďte ho do jednoho z těchto stavů:
+
+- Pravidlo zůstává v provozu beze změny.
+- Pravidlo dostává jednu lokální opravu.
+- Pravidlo se přesouvá k lepšímu pracovnímu místu.
+- Vzniká malý návratový signál.
+
+Každý stav musí říct dvě věci: co se stane s pravidlem a co se nestane s rozsahem práce. Druhá část je stejně důležitá jako první. Pokud napíšete jen "doplníme příklad", ale neřeknete, že neotevíráte nový report, formulář ani scoring, necháváte dveře pootevřené. A otevřené dveře v provozu milují průvan.
+
+Začněte jednou uzavírací větou:
+
+```text
+Po prvním běžném použití po review pravidlo [stav] a dál neotevíráme [zavřený rozsah].
+```
+
+Příklad:
+
+```text
+Po prvním běžném použití po review pravidlo zůstává v onboardingové šabloně beze změny a dál neotevíráme nový report připravenosti dat, CRM štítek ani další kontrolní rytmus.
+```
+
+Tahle věta stačí u čistého výsledku. Pokud je potřeba lokální oprava, doplňte druhou větu:
+
+```text
+Do stejné šablony doplňujeme jednu větu k ručnímu posouzení přejmenovaných sloupců; onboardingový formulář, scoring a samostatný export zůstávají zavřené.
+```
+
+### Čtyři uzavírací stavy
+
+První stav je stabilní provoz. Pravidlo bylo najitelné, člověk podle něj rozhodl a nevznikla nová datová stopa. V takovém případě neplánujte druhé zvláštní použití. Nechte pravidlo v běžném rytmu a k tématu se vraťte jen při domluveném návratovém signálu.
+
+Druhý stav je lokální oprava věty. Použití ukázalo, že pravidlo je na správném místě, ale jedna formulace nestačí. Opravte ji tam, kde se rozhoduje. Neotevírejte celé review, pokud problém vyřeší jedna přesnější pracovní věta.
+
+Třetí stav je přesun pracovního místa. Věta je dobrá, ale člověk ji nenašel v okamžiku práce. Přesuňte nebo zkopírujte krátký závěr k existující šabloně, checklistu nebo procesu. Nepřidávejte nové úložiště jen proto, že staré bylo daleko. Nové místo má být pracovní, ne slavnostní.
+
+Čtvrtý stav je malý návratový signál. Použití ukázalo problém, který odpovídá návratové podmínce nebo ji jasně zpřesňuje. I tady nezačínejte velkou analýzou. Napište, co se stalo, jaký nejmenší krok to otevírá a co zůstává mimo rozsah.
+
+Rozhodovací pomůcka:
+
+```text
+Šlo podle pravidla rozhodnout?
+- Ano, bez nové evidence: stabilní provoz.
+- Ano, ale s jednou nejasnou větou: lokální oprava věty.
+- Ne, protože závěr nebyl u práce: přesun pracovního místa.
+- Ne, protože se potvrdil domluvený problém: malý návratový signál.
+```
+
+### Praktický SaaS příklad
+
+Předchozí review doplnilo do onboardingové šablony příklad použitelného CSV. První běžné použití pak ukázalo, že zákazník poslal export se stejnými údaji, ale jinak pojmenovanými sloupci. Customer success si nebyl jistý, jestli má export vrátit, nebo ručně posoudit.
+
+Špatné uzavření:
+
+```text
+Musíme lépe řešit připravenost dat v onboardingu.
+```
+
+Tahle věta je moc široká. Může vést k formuláři, reportu, callu navíc, novému checklistu i redesignu onboardingu. Vypadá rozhodně, ale ve skutečnosti rozmnožuje možnosti.
+
+Lepší uzavření:
+
+```text
+Po prvním běžném použití po review doplňujeme do onboardingové šablony jednu větu: "Pokud export obsahuje stejné informace pod jinými názvy sloupců, nejdřív ho ručně posuď; call nabízej až ve chvíli, kdy chybí obsah." Nový formulář, scoring připravenosti dat, report importů a redesign onboardingu zůstávají zavřené.
+```
+
+Takové uzavření je menší, ale silnější. Říká, co přesně se mění, kde se to mění a jaký širší rozsah se neotevírá. Příště člověk u práce nemusí pátrat v historii review. Vidí větu v šabloně a rozhodne.
+
+Čistý stabilní výsledek může být ještě kratší:
+
+```text
+Po prvním běžném použití po review pravidlo fungovalo bez zásahu. Zůstává v onboardingové šabloně, další mimořádnou kontrolu neplánujeme a nezakládáme žádný nový údaj o připravenosti dat.
+```
+
+Tohle je dobrý konec. Žádný ohňostroj, žádný nový dashboard, žádná tabulka "pro jistotu". Jen provozní věta, která nechá pravidlo pracovat.
+
+### Privacy-first uzavření
+
+Uzavření prvního použití je poslední chvíle, kdy můžete zastavit nenápadné bobtnání dat. Při použití pravidla často vznikne pokušení zaznamenat si víc: kdo měl problém, jaký typ exportu poslal, kdo musel rozhodnout, jak dlouho to trvalo, jestli by se to nehodilo do CRM. Někdy to smysl má. Často je to ale jen nervozita převlečená za analytiku.
+
+Do uzavření proto napište jednu datovou větu:
+
+```text
+Po tomto použití nezakládáme žádný nový osobní údaj, zákaznický štítek, export, report ani ruční seznam; ponecháváme jen obecné pravidlo u pracovního místa.
+```
+
+Pokud nějaká dočasná stopa vznikla, uzavření musí říct, co s ní bude:
+
+```text
+Dočasnou poznámku z prvního použití mažeme po propsání obecné věty do šablony, protože neobsahuje rozhodnutí potřebné pro další zákaznickou práci.
+```
+
+Nenechávejte dočasné poznámky žít jen proto, že "by se mohly hodit". Pokud opravdu mohou změnit budoucí rozhodnutí, převeďte je do návratového signálu bez osobních detailů. Pokud ne, smažte je nebo je shrňte obecně. Privacy-first provoz není jen otázka nástrojů v Evropě. Je to i schopnost neukládat každou drobnou nejistotu jako provozní artefakt.
+
+Codyho komentář: dobré uzavření poznáte podle toho, že po něm ubude napětí i papíru. Pravidlo buď běží, nebo dostalo jednu nejbližší opravu. Pokud po uzavření vznikly tři nové tabulky, pravděpodobně jste neuzavřeli pravidlo, ale otevřeli malý festival evidence. A ten mívá překvapivě dlouhý program.
+
+### Karta uzavření prvního použití
+
+```text
+První běžné použití:
+
+Původní závěr review:
+
+Pracovní místo:
+
+Výsledek použití:
+- stabilní provoz
+- lokální oprava věty
+- přesun pracovního místa
+- malý návratový signál
+
+Uzavírací věta:
+
+Co se mění, pokud něco:
+
+Kde je změna uložená:
+
+Co zůstává výslovně zavřené:
+
+Jaká data, štítky, exporty, reporty nebo kontroly nezakládáme:
+
+Jaké dočasné stopy mažeme nebo zobecňujeme:
+
+Kdy se k tématu vrátíme:
+```
+
+Kartu nevyplňujte automaticky. U čistého stabilního provozu stačí jednovětý závěr u pracovního místa. Karta je užitečná ve chvíli, kdy něco měníte, přesouváte nebo otevíráte návratový signál. Jinak by jen dokazovala, že umíte vyrobit formulář. Gratuluji, to umí i tiskárna.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte závěr prvního běžného použití.
+2. Minuta 2: vyberte jeden ze čtyř uzavíracích stavů.
+3. Minuta 3: napište jednu uzavírací větu.
+4. Minuta 4: určete, co zůstává výslovně zavřené.
+5. Minuta 5: napište datovou větu: co nezakládáte, co mažete nebo co zobecňujete.
+6. Minuta 6: uložte výsledek k pracovnímu místu a ukončete mimořádnou pozornost.
+
+Když workshop začne řešit, jak by se dal celý proces zlepšit, vraťte se k otázce: co musí být uzavřeno po tomto jednom použití? Všechno ostatní patří do návratového signálu nebo do poznámek mimo aktuální smyčku.
+
+### Checklist uzavření prvního použití po review
+
+- Vybrali jsme jeden ze čtyř uzavíracích stavů?
+- Máme jednu uzavírací větu?
+- Je jasné, jestli pravidlo zůstává, dostává lokální opravu, přesouvá se, nebo otevírá malý návrat?
+- Je výslovně zapsané, co se dál neotevírá?
+- Pokud měníme větu, měníme jen nejbližší pracovní formulaci?
+- Pokud přesouváme pravidlo, ukládáme ho k existujícímu pracovnímu místu?
+- Pokud vznikl návratový signál, je malý a ověřitelný?
+- Nezakládáme nový report, štítek, export, ruční seznam ani kontrolní rytmus bez samostatného důvodu?
+- Víme, které dočasné poznámky smazat nebo zobecnit?
+- Zůstane závěr dohledatelný přesně tam, kde se pravidlo příště použije?
+
+Uzavření prvního běžného použití po review má pravidlu ubrat mimořádnou péči. Pokud funguje, nechte ho pracovat. Pokud drhne, opravte nejbližší větu nebo místo. Pokud se opravdu objevil návratový signál, otevřete jen ten nejmenší. V každé variantě držte datovou stopu krátkou. Produktivita není počet zachovaných poznámek, ale počet rozhodnutí, která příště nepotřebují doprovodný výklad.
+
 ## Pracovní log
 
+- 2026-07-09: Doplněna navazující podkapitola o uzavření prvního běžného použití po review: čtyři uzavírací stavy, SaaS příklad, privacy-first datová věta, karta, mini workshop a checklist.
 - 2026-07-09: Doplněna navazující podkapitola o prvním běžném použití po uzavřeném pravidelném review: najitelnost závěru, použitelnost pracovní věty, privacy-first kontrola datové stopy, karta, mini workshop a checklist.
 - 2026-07-09: Doplněna navazující podkapitola o uzavření prvního pravidelného review po návratu pravidla do rytmu: čtyři uzavírací stavy, SaaS příklad, privacy-first uzavření pomocných stop, karta, mini workshop a checklist.
 - 2026-07-09: Doplněna navazující podkapitola o prvním pravidelném review po návratu pravidla do rytmu: běžný provozní okamžik, čtyři výsledky review, SaaS příklad, privacy-first úklid, karta, mini workshop a checklist.
