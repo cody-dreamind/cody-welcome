@@ -314662,8 +314662,189 @@ Pokud se workshop začne měnit v plán dalšího sledování, vraťte se k otá
 
 Návrat do běžného rytmu je dobrý konec. Pravidlo je najitelné, použitelné a datově střídmé. Když bude potřeba, vrátí se přes jasný signál. Do té doby má dělat práci tiše. Což je u dobře napsaného provozního pravidla asi nejvyšší kompliment.
 
+## První běžné použití po návratu pravidla do rytmu
+
+Jakmile se pravidlo vrátí do běžného rytmu, přijde první okamžik, kdy ho někdo použije bez mimořádné péče. To je důležitější test než všechna předchozí ověřování. Při ověřování totiž lidé vědí, že se něco sleduje. V běžném rytmu už pravidlo nemá reflektor, doprovodný komentář ani autora změny po ruce. Buď samo pomůže v práci, nebo začne být vidět, že z něj zůstala hezká věta na špatném místě.
+
+První běžné použití po návratu do rytmu nemá otevírat nový projekt. Má odpovědět na jednu otázku:
+
+```text
+Dokáže pravidlo pomoct v normální práci bez toho, aby člověk musel otevírat historii ověřování?
+```
+
+Pokud ano, pravidlo zůstává v rytmu. Pokud ne, neznamená to automaticky velkou opravu. Nejčastěji stačí zlepšit jeho najitelnost, zkrátit větu nebo doplnit jeden hraniční příklad. Velká změna přichází až ve chvíli, kdy první běžné použití ukáže skutečný návratový signál.
+
+Praktický příklad:
+
+```text
+Situace:
+Obchodník zpracovává relevantní B2B poptávku a u šablony najde větu pro doplnění kontextu bez povinného pole ve formuláři.
+
+Výsledek:
+Větu použije, poptávku kvalifikuje a nevznikne nová evidence použití.
+
+Závěr:
+Pravidlo prošlo prvním běžným použitím. Zůstává u šablony, dál se mimořádně nesleduje a formulář se nemění.
+```
+
+Tohle je nudný výsledek. Výborně. Běžný rytmus má být nudný. Pokud je každé použití pravidla dramatické, pravidlo ještě není provozní. Je to jen zlepšení, které pořád potřebuje obsluhu.
+
+### Co při prvním použití sledovat
+
+Sledujte pouze pracovní cestu, ne výkon člověka. Cílem není zjistit, jestli obchodník, support nebo marketér "správně pochopil" pravidlo. Cílem je zjistit, jestli je pravidlo uložené, napsané a ohraničené tak, aby ho člověk při normální práci mohl použít bez nápovědy.
+
+Stačí tři kontrolní body:
+
+- Najitelnost: člověk pravidlo našel tam, kde práci opravdu dělal.
+- Rozhodnutelnost: člověk podle něj poznal, co má a nemá udělat.
+- Datová střídmost: použití pravidla nevytvořilo novou zbytečnou stopu.
+
+Příklad u SaaS onboardingu:
+
+```text
+Najitelnost:
+Poznámka je přímo u e-mailové šablony pro první import dat.
+
+Rozhodnutelnost:
+Člověk pozná, že má nabídnout krátký call jen při chybějících zdrojových datech, ne každému novému zákazníkovi.
+
+Datová střídmost:
+Nevzniká nový štítek "potřebuje call", pokud stačí jednorázová poznámka u onboardingové karty.
+```
+
+Pokud jeden z bodů selže, opravujte nejbližší místo. Neotevírejte celou historii rozhodnutí. První běžné použití je test provozní použitelnosti, ne pozvánka k archeologii.
+
+### Čtyři možné výsledky
+
+Po prvním běžném použití vyberte jeden ze čtyř stavů:
+
+- Ponechat v rytmu: pravidlo bylo nalezené, použité a nevytvořilo zbytečnou datovou stopu.
+- Lokálně dočistit: pravidlo funguje, ale potřebuje drobnou úpravu u stejného pracovního místa.
+- Vrátit na návratový signál: ukázalo se přesně to, co mělo pravidlo znovu otevřít.
+- Archivovat chybnou větev: pravidlo se v běžné práci nepotkává s realitou a nemá už pracovní místo.
+
+Každý stav má jinou reakci. U stavu Ponechat nevzniká úkol. U lokálního dočištění upravte jen nejbližší text, odkaz, pořadí nebo příklad. U návratového signálu otevřete malý krok s jasnou hranicí. U archivace napište, co se nepřenáší dál, a zavřete větev.
+
+Příklad lokálního dočištění:
+
+```text
+Stav:
+Lokálně dočistit.
+
+Nález:
+Pravidlo je správné, ale člověk ho hledal v CRM poznámce, zatímco práce začíná v e-mailové šabloně.
+
+Úprava:
+Krátkou větu přesouváme přímo do šablony. CRM poznámku mažeme, aby nevznikly dvě verze.
+```
+
+Příklad návratového signálu:
+
+```text
+Stav:
+Vrátit na návratový signál.
+
+Nález:
+Dvě relevantní poptávky za sebou nešly kvalifikovat bez ručního doptání na rozpočet.
+
+Další krok:
+Otevíráme malou úpravu potvrzovacího e-mailu. Formulář a lead scoring zůstávají zavřené.
+```
+
+Rozdíl mezi těmito příklady je zásadní. V prvním případě selhalo umístění pravidla. Ve druhém se potvrdil problém, kvůli kterému bylo pravidlo vůbec připravené k návratu.
+
+### Privacy-first kontrola prvního použití
+
+První běžné použití často láká k nové evidenci. Někdo chce vědět, kolikrát se pravidlo použilo, kdo ho použil, jak dlouho rozhodování trvalo a jestli by z toho nešel udělat report. Nejdřív napište rozhodnutí, které by taková evidence změnila. Pokud žádné neexistuje, evidenci nezakládejte.
+
+Privacy-first kontrola má tři věty:
+
+```text
+Při použití pravidla vznikla tato nová data:
+
+Pro další práci stačí ponechat:
+
+Dál nezakládáme:
+```
+
+Vyplněný příklad:
+
+```text
+Při použití pravidla vznikla tato nová data:
+Jedna pracovní poznámka u konkrétní poptávky.
+
+Pro další práci stačí ponechat:
+Krátký závěr v poptávkové kartě a obecná věta u e-mailové šablony.
+
+Dál nezakládáme:
+Tabulku použití, nový CRM atribut, export poptávek ani sledování jednotlivých obchodníků.
+```
+
+Tím se chrání hlavní hodnota: pravidlo zlepšuje práci, ale nerozšiřuje datový stín jen proto, že někdo chce mít pocit kontroly.
+
+### Karta prvního běžného použití
+
+```text
+Pravidlo nebo pracovní věta:
+
+Kde se pravidlo použilo:
+
+Normální pracovní situace:
+
+Najitelnost:
+
+Rozhodnutelnost:
+
+Datová střídmost:
+
+Výsledek:
+- ponechat v rytmu
+- lokálně dočistit
+- vrátit na návratový signál
+- archivovat chybnou větev
+
+Nejmenší další krok, pokud existuje:
+
+Co zůstává výslovně zavřené:
+
+Privacy-first poznámka:
+Vzniklo:
+Ponecháváme:
+Dál nezakládáme:
+
+Kde je závěr uložený:
+```
+
+Karta je pomůcka pro situace, kde hrozí nejasnost. Pokud pravidlo prostě fungovalo, stačí jedna věta u pracovního místa. Nepište kartu jen proto, že existuje šablona. Šablona je nástroj, ne nový proces s vlastním kalendářem.
+
+### Mini workshop na 5 minut
+
+1. Minuta 1: popište normální situaci, kde se pravidlo použilo.
+2. Minuta 2: zkontrolujte najitelnost a rozhodnutelnost.
+3. Minuta 3: napište, jaká data při použití vznikla.
+4. Minuta 4: vyberte jeden ze čtyř výsledků.
+5. Minuta 5: uložte závěr u pracovního místa a zavřete vše, co se nemění.
+
+Pokud workshop začne růst přes pět minut, pravděpodobně už neřešíte první běžné použití. Buď máte návratový signál, nebo nové téma. Obojí si zaslouží vlastní malý krok, ne nafouknutí této kontroly.
+
+### Checklist prvního běžného použití
+
+- Použilo se pravidlo v normální práci, ne v umělém testu?
+- Našel ho člověk u pracovního místa bez otevírání historie?
+- Bylo jasné, co podle pravidla udělat a co nedělat?
+- Nevznikla nová evidence jen kvůli pocitu jistoty?
+- Vybrali jsme jeden ze čtyř výsledků?
+- Pokud pravidlo fungovalo, nevytváříme další mimořádnou kontrolu?
+- Pokud je potřeba dočištění, zůstává u stejného pracovního místa?
+- Pokud se potvrdil návratový signál, je další krok menší než původní široký problém?
+- Je zapsané, co zůstává zavřené?
+- Je závěr dohledatelný tam, kde další člověk pravidlo přirozeně použije?
+
+První běžné použití má potvrdit, že se pravidlo umí chovat jako součást práce. Ne jako slavnostní artefakt z minulé iterace, ne jako důvod pro nový dashboard a ne jako další povinný rituál. Když pomůže tiše, vyhrálo.
+
 ## Pracovní log
 
+- 2026-07-09: Doplněna navazující podkapitola o prvním běžném použití po návratu pravidla do rytmu: najitelnost, rozhodnutelnost, datová střídmost, čtyři výsledné stavy, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-07-09: Doplněna navazující podkapitola o návratu uzavřeného pravidla do běžného rytmu: kanonické pracovní místo, zrušení mimořádné péče, privacy-first úklid dočasných stop, karta, mini workshop a checklist.
 - 2026-07-09: Doplněna navazující podkapitola o uzavření druhého běžného použití po návratu do klidu: čtyři uzavírací stavy, SaaS příklad, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-07-09: Doplněna navazující podkapitola o druhém běžném použití po návratu do dlouhodobého klidu: porovnání s prvním použitím, čtyři výsledky, privacy-first porovnání, karta, mini workshop a checklist.
