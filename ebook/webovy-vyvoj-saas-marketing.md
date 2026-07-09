@@ -315023,8 +315023,198 @@ Pokud workshop začne vyrábět návrh trvalého měření, zastavte se u rozhod
 
 Druhé běžné použití je bod, kde pravidlo přestává být příběhem změny a začíná být obyčejným kusem provozu. Když funguje, neoslavujte ho novou evidencí. Nechte ho být na správném místě, s jasnou hranicí a s co nejmenší datovou stopou. To je nenápadné, ale přesně tak vypadá dospělý systém.
 
+## Uzavření druhého běžného použití po návratu pravidla do rytmu
+
+Druhé běžné použití po návratu pravidla do rytmu nestačí jen zapsat. Je potřeba ho uzavřít. Jinak se pravidlo tváří jako stabilní, ale kolem něj pořád zůstává malý oblak mimořádné pozornosti: někdo se ptá, jestli se má ještě sledovat, někdo nechává dočasnou poznámku v CRM, někdo čeká na třetí potvrzení. To je přesně chvíle, kdy se z dobrého provozního pravidla může stát drobná administrativní mlha.
+
+Uzavření má odpovědět na jednu otázku:
+
+```text
+Co se po druhém běžném použití mění v běžném provozu a co se naopak definitivně nepřenáší dál?
+```
+
+Nejčastější odpověď má být krátká:
+
+```text
+Pravidlo po druhém běžném použití uzavíráme jako součást běžného rytmu; zůstává u pracovního místa, další kontrola vznikne jen při návratovém signálu a dočasné poznámky z ověřování mažeme.
+```
+
+V takové větě jsou tři důležité části. Pravidlo má své místo. Mimořádná péče končí. Datová stopa se uklízí. Pokud některá část chybí, uzavření není hotové. Pravidlo pak sice může fungovat, ale tým kolem něj pořád drží starý proces, který už nemá důvod existovat.
+
+### Čtyři uzavírací stavy
+
+Po druhém běžném použití vyberte jeden ze čtyř stavů:
+
+- Uzavřít do běžného rytmu: pravidlo funguje bez čerstvého vysvětlení a nevytváří zbytečná data.
+- Uzavřít po lokálním dočištění: pravidlo funguje, ale ještě se opraví jedna drobnost u stejného pracovního místa.
+- Vrátit k přepisu pravidla: druhé použití ukázalo slabý přenos a pravidlo musí být srozumitelnější samo o sobě.
+- Otevřít nový návratový signál: druhé použití potvrdilo problém, který už není jen otázkou umístění nebo formulace.
+
+Uzavřít do běžného rytmu znamená přestat pravidlo zvlášť opečovávat:
+
+```text
+Pravidlo zůstává u potvrzovací e-mailové šablony. Dál ho nesledujeme v samostatné tabulce, nepočítáme použití a k tématu se vrátíme jen tehdy, když dvě relevantní poptávky za sebou nepůjdou kvalifikovat bez ručního doptání.
+```
+
+Uzavřít po lokálním dočištění znamená, že opravíte poslední konkrétní tření a tím věc zavřete:
+
+```text
+Zkracujeme název odkazu u šablony, aby člověk pravidlo našel bez staré poznámky. Obsah pravidla, formulář, CRM atributy ani reporting se nemění. Po úpravě pravidlo zůstává v běžném rytmu.
+```
+
+Vrátit k přepisu pravidla je potřeba ve chvíli, kdy druhé použití fungovalo jen díky paměti člověka, který znal historii:
+
+```text
+Pravidlo zatím neuzavíráme jako stabilní, protože druhý člověk potřeboval ústní vysvětlení hranice. Přepisujeme větu u pracovního místa tak, aby sama říkala, kdy se použije a co zůstává zavřené.
+```
+
+Otevřít nový návratový signál je nejvýraznější stav, ale pořád nemá spustit starý široký návrh:
+
+```text
+Druhé použití potvrdilo návratový signál. Otevíráme malou úpravu potvrzovacího e-mailu a kontrolu na dalších pěti relevantních poptávkách. Formulář, lead scoring, povinné pole a nový CRM atribut zůstávají zavřené.
+```
+
+Tahle čtyři rozlišení chrání tým před univerzálním závěrem "ještě to doladíme". Ten zní neškodně, ale často znamená, že nikdo nechce vybrat skutečný stav. Uzavření je užitečné právě proto, že stav vybrat musí.
+
+### Praktický SaaS příklad
+
+Představte si B2B SaaS, který po několika iteracích ponechal u onboardingové šablony pravidlo:
+
+```text
+Pokud zákazník nemá připravená zdrojová data pro první import, nabídni mu krátký upřesňující call. Pokud data připravená má, neposílej ho do dalšího plánování a pokračuj importem.
+```
+
+První běžné použití ukázalo, že customer success větu našel a použil správně. Druhé běžné použití proběhlo o dva týdny později u jiného člověka. Ten pravidlo našel ve stejné šabloně, poznal hranici a neposlal zákazníka do zbytečného callu. Nevznikl nový štítek, tabulka ani report.
+
+Uzavření může vypadat takto:
+
+```text
+Druhé běžné použití potvrdilo, že pravidlo funguje i bez čerstvého vysvětlení. Věta zůstává u onboardingové šablony, další mimořádné kontroly neplánujeme a k tématu se vrátíme jen tehdy, když dva zákazníci za sebou uvíznou na stejném kroku importu kvůli nejasným zdrojovým datům.
+```
+
+Privacy-first doplněk:
+
+```text
+Dočasné poznámky z ověřování mažeme. U šablony zůstává jen obecná věta a návratový signál bez zákaznických detailů. Nezakládáme seznam zákazníků, kteří potřebovali call.
+```
+
+Všimněte si, že dobrý výsledek nevede k většímu sledování. Vede k menšímu provoznímu hluku. Pravidlo splnilo svou práci, takže nepotřebuje vlastní pódium.
+
+### Co po uzavření odstranit
+
+Po uzavření druhého běžného použití projděte malé provozní zbytky:
+
+- Dočasné ověřovací poznámky.
+- Screenshoty, příklady a kopie komunikace, které vznikly jen kvůli kontrole.
+- Pomocné CRM štítky nebo ruční značky.
+- Tabulky použití, pokud už nemění žádné rozhodnutí.
+- Staré odkazy na původní návrh, které by člověka vedly mimo běžné pracovní místo.
+
+Nemusíte mazat rozhodovací log. Ten má hodnotu jako stopa, proč pravidlo existuje. Ale do běžné práce nepřenášejte surové podklady, které byly užitečné jen při ověřování. Rozdíl je jednoduchý: rozhodovací log vysvětluje hranici, pomocné podklady často jen drží staré detaily.
+
+Praktická věta:
+
+```text
+Po uzavření necháváme rozhodovací větu u šablony a krátký záznam v logu. Mažeme dočasný seznam příkladů, protože už neovlivňuje žádné rozhodnutí.
+```
+
+Pokud se někdo bojí mazat, zeptejte se, kdy by se daný podklad znovu použil a jaké rozhodnutí by změnil. Když odpověď neexistuje, podklad není znalost. Je to starý lepicí papírek v digitální podobě.
+
+### Privacy-first uzavření
+
+Uzavření druhého běžného použití je dobrý moment pro datovou dietu. Pravidlo se právě ukázalo jako použitelné. To znamená, že už nepotřebuje mimořádné důkazy kolem sebe.
+
+Použijte tři řádky:
+
+```text
+Do běžného provozu ponecháváme:
+
+Po ověření mažeme nebo anonymizujeme:
+
+Dál výslovně nezakládáme:
+```
+
+Vyplněný příklad:
+
+```text
+Do běžného provozu ponecháváme:
+Obecnou pracovní větu u onboardingové šablony a návratový signál bez zákaznických detailů.
+
+Po ověření mažeme nebo anonymizujeme:
+Dočasné poznámky ke dvěma použitím a kopii interního komentáře s názvem zákazníka.
+
+Dál výslovně nezakládáme:
+CRM atribut, tabulku použití, měsíční report, export onboardingových případů ani sledování jednotlivých lidí.
+```
+
+Tohle není právní kouzlo, ale dobrá provozní hygiena. Čím méně zbytečných stop kolem pravidla necháte, tím snáz se bude později vysvětlovat, proč data existují, kdo je používá a kdy mají zmizet.
+
+Codyho komentář: privacy-first přístup často nevypadá jako velké strategické rozhodnutí. Častěji vypadá jako nudná věta "tu tabulku po ověření mažeme". A přesně proto funguje. Velké hodnoty se v provozu brání malými návyky, ne plakátem v patičce webu.
+
+### Karta uzavření druhého běžného použití po návratu do rytmu
+
+```text
+Pravidlo nebo pracovní věta:
+
+Kde pravidlo žije:
+
+Co potvrdilo druhé běžné použití:
+
+Vybraný uzavírací stav:
+- uzavřít do běžného rytmu
+- uzavřít po lokálním dočištění
+- vrátit k přepisu pravidla
+- otevřít nový návratový signál
+
+Jednovětý závěr:
+
+Co zůstává výslovně zavřené:
+
+Co se už dál mimořádně nekontroluje:
+
+Návratový signál:
+
+Privacy-first úklid:
+Ponecháváme:
+Mažeme nebo anonymizujeme:
+Dál nezakládáme:
+
+Kde je závěr uložený:
+
+Vlastník běžného místa:
+```
+
+Kartu vyplňujte jen tehdy, když druhé použití něco rozhoduje nebo po něm zůstaly pomocné stopy. U jednoduchého stabilního výsledku stačí jednovětý závěr u pracovního místa. Karta nemá být cena za to, že pravidlo fungovalo.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte výsledek druhého běžného použití.
+2. Minuta 2: vyberte jeden ze čtyř uzavíracích stavů.
+3. Minuta 3: napište jednovětý závěr.
+4. Minuta 4: zapište, co zůstává zavřené a co se dál mimořádně nekontroluje.
+5. Minuta 5: smažte, anonymizujte nebo nepřeneste dočasné datové stopy.
+6. Minuta 6: uložte závěr u pracovního místa.
+
+Pokud se během workshopu objeví potřeba další pravidelné kontroly, pojmenujte rozhodnutí, které by kontrola změnila. Bez něj další kontrolu nezakládejte. Stabilní pravidlo nepotřebuje vlastní docházku.
+
+### Checklist uzavření druhého běžného použití po návratu do rytmu
+
+- Vybrali jsme jeden ze čtyř uzavíracích stavů?
+- Je jasné, jestli pravidlo zůstává v běžném rytmu, potřebuje lokální dočištění, přepis, nebo nový návratový signál?
+- Má závěr jednu pracovní větu, kterou lze uložit u pracovního místa?
+- Víme, co zůstává výslovně zavřené?
+- Víme, co se už dál mimořádně nekontroluje?
+- Má pravidlo návratový signál místo dalšího preventivního sledování?
+- Uklidili jsme dočasné poznámky, příklady, screenshoty, štítky, exporty nebo tabulky?
+- Nevznikl nový CRM atribut, tracker, report ani formulářové pole jen proto, že pravidlo bylo použité dvakrát?
+- Je privacy-first poznámka konkrétní: co ponecháváme, co mažeme nebo anonymizujeme a co dál nezakládáme?
+- Najde další člověk závěr tam, kde bude pravidlo skutečně používat?
+
+Uzavření druhého běžného použití po návratu do rytmu má z pravidla sundat pracovní lešení. Pokud pravidlo funguje, nechte mu jen správné místo, jasnou hranici a návratový signál. Všechno ostatní je podezřele podobné práci navíc, která se převlékla za pečlivost.
+
 ## Pracovní log
 
+- 2026-07-09: Doplněna navazující podkapitola o uzavření druhého běžného použití po návratu pravidla do rytmu: čtyři uzavírací stavy, SaaS příklad, úklid dočasných stop, privacy-first uzavření, karta, mini workshop a checklist.
 - 2026-07-09: Doplněna navazující podkapitola o druhém běžném použití po návratu pravidla do rytmu: přenositelnost bez čerstvého vysvětlení, čtyři výsledné stavy, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-07-09: Doplněna navazující podkapitola o prvním běžném použití po návratu pravidla do rytmu: najitelnost, rozhodnutelnost, datová střídmost, čtyři výsledné stavy, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-07-09: Doplněna navazující podkapitola o návratu uzavřeného pravidla do běžného rytmu: kanonické pracovní místo, zrušení mimořádné péče, privacy-first úklid dočasných stop, karta, mini workshop a checklist.
