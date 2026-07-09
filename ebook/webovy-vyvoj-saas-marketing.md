@@ -316665,8 +316665,172 @@ Pokud se během šesti minut ukáže, že potřebujete řešit staré rozhodnut�
 
 Dobré uzavření prvního setkání je nenápadné. Nechává pravidlo v provozu, opravuje jen nejbližší tření a brání zbytečné evidenci. Když se povede, výsledek není velkolepý. Jen další člověk najde správnou větu, rozhodne rychleji a nepřidá data, která nikdo nepotřeboval. Což je přesně ten typ provozního luxusu, který se časem velmi příjemně sčítá.
 
+## Druhé běžné setkání po klidové stopě
+
+Druhé běžné setkání po klidové stopě má smysl jen tehdy, když první setkání něco lokálně dočistilo nebo když se pravidlo poprvé potká s jiným člověkem, jiným kanálem nebo lehce jinou situací. Není to další revize. Je to krátké ověření, že klidová stopa opravdu přežila běžný provoz a nepotřebuje speciální doprovod.
+
+Začněte větou:
+
+```text
+Druhé běžné setkání sledujeme jen proto, že:
+```
+
+Za dvojtečku doplňte jeden konkrétní důvod:
+
+```text
+Druhé běžné setkání sledujeme jen proto, že po prvním setkání jsme doplnili odkaz z onboardingové šablony na kanonické pravidlo a chceme ověřit, že ho další člověk najde bez vysvětlování.
+```
+
+Pokud takovou větu neumíte napsat, druhé setkání pravděpodobně nepotřebujete. Běžný provoz není nekonečný testovací režim. Když pravidlo funguje, nechte ho pracovat. Když nefunguje, otevřete návratový signál. Druhé setkání je prostor mezi tím: ověřit jednu drobnou opravu a potom ji pustit z ruky.
+
+### Co druhé setkání ověřuje
+
+Druhé setkání má tři úzké otázky:
+
+- Fungovala lokální oprava bez čerstvého vysvětlení?
+- Zůstala klidová stopa u stejného pracovního místa?
+- Nevznikla nová evidence jen proto, že se téma objevilo podruhé?
+
+První otázka chrání samostatnost. Pokud se po prvním setkání doplnil odkaz, přepsala věta nebo přesunul záznam blíž k práci, druhé setkání ověřuje právě tuto opravu. Neřeší, jestli bylo původní rozhodnutí geniální. Neřeší, jestli by šla vymyslet lepší architektura procesu. Jen se ptá, jestli člověk v běžné práci našel správnou větu a uměl podle ní jednat.
+
+Druhá otázka chrání místo. Klidová stopa má zůstat u pracovní situace, kde se používá. Pokud se začne kopírovat do dalších dokumentů, checklistů a poznámek, vzniká nenápadná duplicita. Ta je zpočátku pohodlná, ale za pár měsíců se z ní stane otázka, která verze vlastně platí. Jedna klidová stopa, jedno kanonické místo, odkazy tam, kde pomáhají. To je nudné, a právě proto dobré.
+
+Třetí otázka chrání data. Druhé setkání často svádí k větě "když už se to stalo dvakrát, pojďme to sledovat". Možná ano, ale jen pokud druhé setkání splnilo návratový signál. Samotné opakování nestačí. Pokud pravidlo dvakrát pomohlo bez nové evidence, je to spíš argument pro klid, ne pro tabulku.
+
+Codyho komentář: druhé setkání je trochu jako kontrola, jestli opravená klika opravdu drží. Když drží, nezačínáte projekt "Dveře 360". Prostě jimi projdete a jdete dělat něco užitečnějšího.
+
+### Praktický SaaS příklad
+
+V SaaS onboardingu jste po prvním setkání doplnili odkaz z importní šablony na klidovou stopu:
+
+```text
+Obsahově kompletní export s odlišnými názvy sloupců nejdřív posuzujeme interně. Zákaznický call otevíráme až ve chvíli, kdy chybí obsah nebo rozhodnutí.
+```
+
+Při druhém setkání řeší export jiný člověk. Najde odkaz přímo v šabloně, porovná názvy sloupců s importním slovníkem a zjistí, že data jsou kompletní. Zákaznický call nevznikne. CRM štítek nevznikne. Pomocná tabulka "nestandardní exporty" nevznikne.
+
+Dobré uzavření druhého setkání:
+
+```text
+Druhé setkání potvrdilo, že doplněný odkaz stačí. Klidová stopa zůstává u importní šablony, další kontrolu neplánujeme a nezavádíme nový štítek ani report exportů.
+```
+
+Slabší výsledek:
+
+```text
+Druhý člověk pravidlo našel, ale nevěděl, jestli "obsahově kompletní" znamená všechny povinné sloupce, nebo i doporučené sloupce.
+```
+
+Tady není potřeba otevírat celý návrat. Stačí lokální zpřesnění definice:
+
+```text
+Do importní šablony doplňujeme větu: "Obsahově kompletní znamená všechny povinné sloupce; doporučené sloupce neblokují interní posouzení." Klidová stopa zůstává v provozu a nové sledování nezakládáme.
+```
+
+To je správná velikost zásahu. Problém nebyl v pravidle, ale ve slově, které mělo příliš mnoho prostoru pro interpretaci. Opravte slovo. Nezakládejte proces pro smutek ze slov.
+
+### Čtyři výsledky druhého setkání
+
+Druhé běžné setkání může skončit čtyřmi způsoby:
+
+- Potvrdit klid: lokální oprava fungovala a pravidlo se vrací do běžného provozu bez další péče.
+- Dopsat poslední větu: pravidlo fungovalo, ale jedna definice nebo hranice potřebuje zpřesnit.
+- Vrátit k pracovnímu místu: pravidlo je správné, ale pořád není tam, kde člověk pracuje.
+- Otevřít návrat: setkání splnilo návratový signál nebo ukázalo nový konkrétní problém.
+
+`Potvrdit klid` je nejlepší výsledek. Napište jednu větu a skončete. Žádná nová karta, žádný review rytmus, žádný report pro pocit jistoty.
+
+`Dopsat poslední větu` je vhodné pro drobné jazykové tření. Definice, příklad, hranice použití. Tato oprava musí být malá a musí žít přímo u pracovního místa.
+
+`Vrátit k pracovnímu místu` použijte, když člověk pravidlo zná, ale musí pro něj chodit jinam. Oprava je odkaz, přesun nebo krátká kotva. Ne nová dokumentační vrstva.
+
+`Otevřít návrat` použijte až ve chvíli, kdy druhé setkání přinese důkaz, který klidová stopa neumí obsloužit. Pak napište návratový signál a otevřete omezený návrat. Neotevírejte automaticky starý široký návrh.
+
+### Privacy-first kontrola
+
+Druhé setkání je poslední dobré místo, kde zastavit nenápadnou datovou expanzi. Zkontrolujte hlavně tři věci:
+
+```text
+Nevznikl po prvním setkání dočasný seznam, který už není potřeba?
+
+Nepřepisujeme zákaznický detail do nové interní evidence?
+
+Nevzniká nový report jen proto, že pravidlo bylo použito podruhé?
+```
+
+Pokud odpověď ukazuje na zbytečnou stopu, ukliďte ji hned. Nečekejte na "později". Později je oblíbené místo, kde umírají dobré úmysly a rodí se staré exporty s nejasným vlastníkem.
+
+Privacy-first závěr může znít:
+
+```text
+Po druhém setkání potvrzujeme, že zákaznické exporty zůstávají jen v onboardingovém toku podle běžné retence. Nevzniká nový CRM štítek, pomocná tabulka ani měsíční report.
+```
+
+Tahle věta je praktická. Neříká jen, že chráníte soukromí. Říká, jak přesně se provoz nerozšiřuje.
+
+### Karta druhého setkání
+
+```text
+Klidová stopa:
+
+Proč sledujeme druhé běžné setkání:
+
+Běžná situace:
+
+Použil pravidlo jiný člověk nebo jiné pracovní místo?
+
+Co fungovalo bez vysvětlování:
+
+Co ještě drhlo:
+
+Výsledek druhého setkání:
+- potvrdit klid
+- dopsat poslední větu
+- vrátit k pracovnímu místu
+- otevřít návrat
+
+Jedna lokální oprava, pokud existuje:
+
+Co dál výslovně neotevíráme:
+
+Jaká nová data, štítky, exporty, reporty nebo kopie nevznikají:
+
+Kde zůstává kanonická stopa:
+
+Kdy se téma znovu otevře:
+```
+
+Kartu používejte jen tehdy, když druhé setkání skutečně něco ověřuje. Pokud jste ho naplánovali bez důvodu, nejlepší karta je žádná karta a jedna věta: "Druhé setkání neplánujeme, protože první uzavření stačí." To je také rozhodnutí.
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: přečtěte důvod druhého setkání.
+2. Minuta 2: ověřte, jestli lokální oprava fungovala bez vysvětlování.
+3. Minuta 3: zkontrolujte, jestli pravidlo zůstalo u pracovního místa.
+4. Minuta 4: vyberte jeden ze čtyř výsledků.
+5. Minuta 5: napište případnou jednu lokální opravu.
+6. Minuta 6: napište, co dál výslovně neotevíráte.
+7. Minuta 7: uzavřete datovou stopu a rozhodněte, zda se pravidlo vrací do klidu.
+
+Pokud workshop potřebuje víc než sedm minut, nejspíš se objevilo nové téma. Oddělte ho. Druhé setkání nemá sloužit jako maskovaný produktový audit.
+
+### Checklist druhého setkání
+
+- Má druhé setkání konkrétní důvod?
+- Ověřujeme jednu lokální opravu, ne celou historii pravidla?
+- Našel člověk klidovou stopu u pracovního místa?
+- Šlo podle ní rozhodnout bez vysvětlování?
+- Pokud něco drhlo, je oprava jen jedna a lokální?
+- Zůstává původní široký návrh zavřený?
+- Nevzniká nový tracker, štítek, export, report, tabulka nebo kopie zákaznického důkazu?
+- Je jasné, kde zůstává kanonická stopa?
+- Víme, kdy se téma znovu otevře, nebo ho vracíme do klidu bez dalšího budíku?
+
+Druhé běžné setkání po klidové stopě má potvrdit, že systém nepotřebuje ruku na rameni. Pokud pravidlo obstojí, vraťte ho do provozu a nepřidávejte péči. Pokud neobstojí, opravte nejbližší větu nebo otevřete jasný návrat. V obou případech držte datovou stopu malou. Provoz, který umí zůstat malý, má často větší výdrž než provoz, který si na každé zaváhání založí vlastní tabulku.
+
 ## Pracovní log
 
+- 2026-07-09: Doplněna navazující podkapitola o druhém běžném setkání po klidové stopě: ověření lokální opravy bez čerstvého vysvětlování, SaaS příklad, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-07-09: Doplněna navazující podkapitola o uzavření prvního běžného setkání po klidové stopě: tři uzavírací stavy, SaaS příklad, privacy-first datová brzda, karta, mini workshop a checklist.
 - 2026-07-09: Doplněna navazující podkapitola o prvním běžném setkání po klidové stopě: ověření najitelnosti, pracovní věty, návratového signálu, privacy-first datové hranice, karta, mini workshop a checklist.
 - 2026-07-09: Doplněna navazující podkapitola o klidové stopě po druhém běžném použití: kanonické pracovní místo, návratový signál, privacy-first datová hranice, karta, mini workshop a checklist.
