@@ -317004,8 +317004,178 @@ Pokud během šesti minut vznikne víc než jedna oprava, přestaňte to nazýva
 
 Uzavření druhého běžného setkání je dobré tehdy, když po něm není potřeba nic hlídat bokem. Pravidlo buď stojí samo, dostane jednu poslední lokální větu, nebo se otevře omezený návrat s jasným signálem. Všechny tři výsledky jsou zdravé. Nezdravé je jen nechat pravidlo napůl v klidu a napůl pod dohledem, protože tým neměl odvahu napsat poslední větu.
 
+## Dlouhodobý klid po uzavřeném druhém setkání
+
+Po uzavřeném druhém běžném setkání už pravidlo nepotřebuje doprovod. Pokud obstálo ve dvou obyčejných situacích, je čas ho nechat pracovat samo. To neznamená, že se na něj navždy zapomene. Znamená to, že se z mimořádné péče stane běžná provozní paměť: pravidlo zůstává u pracovního místa, návratový signál je jasný a nikdo kvůli němu nezakládá další kontrolní tabulku. Ano, tabulka by působila poctivě. Taky by byla přesně tím druhem poctivosti, který nenápadně vyrábí další práci.
+
+Dlouhodobý klid začíná krátkou větou:
+
+```text
+Pravidlo necháváme v dlouhodobém klidu, protože:
+```
+
+Za ni napište důvod, místo a návratový signál:
+
+```text
+Pravidlo necháváme v dlouhodobém klidu, protože dvě běžná setkání ukázala, že importní šablona stačí k rozhodnutí bez zákaznického callu. Kanonická stopa zůstává u šablony a téma znovu otevřeme pouze tehdy, když dva obsahově kompletní exporty za sebou nepůjde interně posoudit bez doptání na rozhodovací roli.
+```
+
+Tato věta má dělat tři věci najednou. Uzavírá mimořádnou pozornost, říká lidem, kde pravidlo najdou, a chrání tým před tím, aby za měsíc otevřel stejné téma jen proto, že si někdo matně vzpomněl na starý problém. Dlouhodobý klid není prázdno. Je to dobře pojmenovaný stav.
+
+### Co v dlouhodobém klidu už nedělat
+
+Největší riziko po dobrém uzavření není chyba v pravidle. Největší riziko je přehnaná péče. Tým si řekne, že "pro jistotu" ještě jednou zkontroluje používání, "pro lepší přehled" přidá report, nebo "abychom měli data" začne značit případy v CRM. Tím se z jednoduchého pravidla znovu stává proces.
+
+Po uzavřeném druhém setkání proto výslovně nedělejte:
+
+- neplánujte třetí běžné setkání bez návratového signálu,
+- nezakládejte novou evidenci jen kvůli potvrzení, že pravidlo funguje,
+- nerozšiřujte pravidlo do dalších pracovních míst, dokud se tam opravdu neobjeví stejný problém,
+- nepřenášejte staré příklady do onboardingu, sales materiálů nebo znalostní báze, pokud nejsou nutné pro samostatné použití,
+- neměňte návratový signál pokaždé, když někdo přinese novou obavu.
+
+Každé "ještě pro jistotu" musí projít stejnou otázkou:
+
+```text
+Co konkrétně se změnilo od posledního uzavření?
+```
+
+Pokud odpověď není konkrétní pracovní situace, nevzniká nová práce. Vzniká jen poznámka, že pravidlo zůstává v klidu.
+
+### Tři stavy dlouhodobého klidu
+
+Dlouhodobý klid může mít tři zdravé stavy:
+
+- Stabilní klid: pravidlo je najitelné, používá se bez vysvětlování a nevznikají nové pomocné stopy.
+- Klid s běžnou údržbou: pravidlo samo stojí, ale při plánované údržbě pracovního místa se může upravit formulace, odkaz nebo příklad.
+- Klid s jasným návratem: pravidlo se nehlídá průběžně, ale návratový signál je tak konkrétní, že při jeho splnění vznikne nová malá iterace.
+
+Stabilní klid je ideální výsledek. Nevyžaduje meeting, dashboard ani pravidelné připomínky. Stačí, že pravidlo leží tam, kde ho lidé při práci potkají.
+
+Klid s běžnou údržbou je praktický u pravidel připojených k živým šablonám, formulářům nebo onboardingovým textům. Když se jednou za čas upravuje samotné pracovní místo, zkontrolujte i pravidlo. Ale jen v rámci stejné údržby. Nezakládejte kvůli tomu samostatný revizní rituál, pokud ho místo už nemá.
+
+Klid s jasným návratem je vhodný, když pravidlo souvisí s citlivějším tokem: poptávky, importy zákaznických dat, fakturace, přístupy, support nebo komunikace incidentu. Tady má smysl návratový signál napsat přesněji. Ne kvůli strachu, ale kvůli tomu, aby se tým nemusel rozhodovat znovu od nuly.
+
+### Praktický SaaS příklad
+
+Tým řešil, zda u nestandardních importních souborů zakládat zákaznický call. Po dvou běžných setkáních se ukázalo, že obsahově kompletní export lze posoudit interně, i když má jiné názvy sloupců.
+
+Závěr pro dlouhodobý klid:
+
+```text
+Pravidlo:
+Obsahově kompletní export s odlišnými názvy sloupců nejdřív posuzujeme interně. Zákaznický call otevíráme až ve chvíli, kdy chybí obsah nebo rozhodnutí.
+
+Kanonické místo:
+Importní šablona a onboardingová odpověď.
+
+Stav:
+Stabilní klid.
+
+Návratový signál:
+Dva obsahově kompletní exporty za sebou nepůjde interně posoudit bez doptání na rozhodovací roli.
+
+Co neděláme:
+Nezakládáme CRM štítek pro nestandardní exporty, měsíční report importních výjimek ani nový zákaznický call jen kvůli názvům sloupců.
+```
+
+Za měsíc někdo navrhne přidat do CRM štítek "nestandardní export", aby bylo vidět, kolikrát se situace objevuje. Správná první reakce není "super, budeme mít data". Správná první reakce je:
+
+```text
+Splnil se návratový signál?
+```
+
+Pokud se nesplnil, štítek nevzniká. Můžete zapsat jednu větu:
+
+```text
+Návrh na CRM štítek neotevíráme, protože od uzavření pravidla nevznikly dva obsahově kompletní exporty, které by nešly interně posoudit bez doptání na rozhodovací roli.
+```
+
+Tohle je nudná věta. Skvěle. Nudné věty často chrání provoz líp než dramatické iniciativy.
+
+### Privacy-first klid
+
+Dlouhodobý klid má být vidět i v datové stopě. Když pravidlo stojí, nepotřebujete kvůli němu nový tracker, štítek, export ani pomocnou evidenci. Privacy-first provoz není jen o tom, kde data leží. Je také o tom, zda vůbec vznikají.
+
+Ke klidové větě proto přidejte jednu datovou větu:
+
+```text
+V dlouhodobém klidu nevzniká:
+```
+
+Příklady:
+
+```text
+V dlouhodobém klidu nevzniká nový CRM štítek, export importních výjimek ani kopie zákaznických souborů mimo onboardingový tok.
+```
+
+```text
+V dlouhodobém klidu nevzniká nové pole ve formuláři, behaviorální sledování detailu formuláře ani propojení poptávek do dalšího marketingového nástroje.
+```
+
+Datová věta má být konkrétní. Pokud napíšete jen "nepřidáváme zbytečná data", nikdo za dva měsíce nepozná, co přesně bylo zbytečné. Pokud napíšete "nevzniká CRM štítek ani měsíční export", další člověk ví, kde má brzdit.
+
+### Karta dlouhodobého klidu
+
+```text
+Pravidlo nebo pracovní stopa:
+
+Proč ho necháváme v dlouhodobém klidu:
+
+Kanonické pracovní místo:
+
+Stav klidu:
+- stabilní klid
+- klid s běžnou údržbou
+- klid s jasným návratem
+
+Jednovětý závěr:
+
+Návratový signál:
+
+Co výslovně neplánujeme:
+
+Jaká data, štítky, exporty, reporty nebo kopie nevznikají:
+
+Kdy se pravidlo může potkat s běžnou údržbou:
+
+Kdo ví, kde pravidlo najít:
+```
+
+Kartu nepoužívejte jako nový dokument, pokud stačí jedna věta u pracovního místa. Její hodnota je hlavně v tom, že ukazuje, co má být jasné. U malého pravidla může výsledný zápis vypadat takto:
+
+```text
+Pravidlo necháváme v dlouhodobém klidu: dvě běžná setkání potvrdila, že importní šablona stačí. Téma otevřeme jen při dvou obsahově kompletních exportech za sebou, které nejdou interně posoudit bez doptání na rozhodovací roli. Nevzniká CRM štítek, report výjimek ani kopie souborů mimo onboardingový tok.
+```
+
+### Mini workshop na 5 minut
+
+1. Minuta 1: přečtěte jednovětý závěr druhého setkání.
+2. Minuta 2: vyberte stav dlouhodobého klidu.
+3. Minuta 3: napište návratový signál.
+4. Minuta 4: napište, co se výslovně neplánuje.
+5. Minuta 5: doplňte konkrétní datovou větu a místo, kde zůstane.
+
+Pokud se během pěti minut neumíte shodnout na návratovém signálu, nejste ještě v dlouhodobém klidu. Vraťte se k uzavření druhého setkání a napište přesněji, co se potvrdilo. Klid bez návratového signálu není klid. Je to jen odložená nejistota v měkkém svetru.
+
+### Checklist dlouhodobého klidu
+
+- Je jasné, proč pravidlo po druhém setkání už nepotřebuje mimořádnou péči?
+- Leží pravidlo u pracovního místa, kde ho člověk opravdu použije?
+- Vybrali jsme jeden ze tří stavů klidu?
+- Máme návratový signál, který nejde splést s obecným pocitem?
+- Je výslovně zapsané, co teď neplánujeme?
+- Nevzniká nová evidence jen proto, abychom sledovali funkční pravidlo?
+- Je konkrétně napsané, jaké štítky, exporty, reporty, trackery nebo kopie nevznikají?
+- Ví tým, že běžná údržba není automatické znovuotevření tématu?
+- Umí nový člověk pravidlo použít bez čtení celé historie?
+- Končí mimořádná pozornost opravdu teď?
+
+Dlouhodobý klid je produktová disciplína. Většina týmů umí něco otevřít, opravit a chvíli sledovat. Méně týmů umí po dobrém výsledku přestat přidávat péči. Právě tam se pozná zralý provoz: pravidlo stojí, data zbytečně nepřibývají a další práce čeká až na skutečný signál.
+
 ## Pracovní log
 
+- 2026-07-09: Doplněna navazující podkapitola o dlouhodobém klidu po uzavřeném druhém setkání: stavy klidu, SaaS příklad, privacy-first datová věta, karta, mini workshop a checklist.
 - 2026-07-09: Doplněna navazující podkapitola o uzavření druhého běžného setkání po klidové stopě: tři uzavírací stavy, SaaS příklad s importní šablonou, privacy-first datová brzda, karta, mini workshop a checklist.
 - 2026-07-09: Doplněna navazující podkapitola o druhém běžném setkání po klidové stopě: ověření lokální opravy bez čerstvého vysvětlování, SaaS příklad, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-07-09: Doplněna navazující podkapitola o uzavření prvního běžného setkání po klidové stopě: tři uzavírací stavy, SaaS příklad, privacy-first datová brzda, karta, mini workshop a checklist.
