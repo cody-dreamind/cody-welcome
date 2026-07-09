@@ -316244,8 +316244,145 @@ Když během workshopu vznikne chuť "ještě chvíli sledovat", napište přesn
 
 Uzavření druhého běžného použití po review má být konec mimořádné pozornosti. Buď pravidlo obstálo a patří do klidného provozu, nebo potřebuje jednu poslední lokální opravu, nebo vznikl malý návratový signál. Všechny tři cesty jsou v pořádku. Špatná je jen čtvrtá: nechat za sebou rozmazaný mezistav, pár zákaznických poznámek a pocit, že "se to nějak sleduje". To není provoz. To je odložené rozhodnutí v převleku.
 
+## Jak zapsat klidovou stopu po druhém běžném použití
+
+Když pravidlo obstálo ve druhém běžném použití, nemá dostat další vrstvu řízení. Potřebuje jen klidovou stopu: krátký zápis, který říká, kde pravidlo žije, kdy se znovu otevře a jaká data kvůli němu dál nevznikají. Klidová stopa je opak mimořádného dohledu. Nehlídá pravidlo každý týden. Jen brání tomu, aby se po půl roce znovu hledalo, proč se něco kdysi zavřelo.
+
+Začněte jednou větou:
+
+```text
+Pravidlo prošlo dvěma běžnými použitími, zůstává v [pracovní místo] a znovu se otevře pouze při [návratový signál].
+```
+
+Příklad:
+
+```text
+Pravidlo prošlo dvěma běžnými použitími, zůstává v onboardingovém checklistu importu a znovu se otevře pouze tehdy, když dva zákazníci za sebou dodají obsahově správný export, který tým nedokáže interně posoudit bez dalšího zákaznického hovoru.
+```
+
+Tahle věta má tři části: potvrzení, domov a návratový signál. Pokud některá chybí, pravidlo se buď začne znovu vysvětlovat, nebo naopak zmizí tak hluboko, že ho při dalším problému nikdo nenajde.
+
+### Co do klidové stopy patří
+
+Klidová stopa má být krátká. Patří do ní jen to, co bude užitečné při dalším běžném použití nebo při skutečném návratu:
+
+- aktuální pracovní věta;
+- kanonické pracovní místo;
+- datum posledního ověření;
+- návratový signál;
+- datová hranice;
+- odkaz na rozhodovací záznam, pokud existuje.
+
+Nepatří do ní celý příběh opravy, jména lidí, zákaznické detaily, screenshoty, exporty ani staré varianty šablon. Tyto věci možná pomohly při ověření, ale v klidovém provozu většinou jen zvyšují šum a datovou stopu.
+
+Dobrá klidová stopa:
+
+```text
+Aktuální pravidlo:
+Obsahově správný export nejdřív interně posoudíme i při odlišných názvech sloupců, oddělovači nebo kódování. Zákaznický call nabízíme až ve chvíli, kdy chybí obsah nebo rozhodnutí.
+
+Domov:
+Onboardingový checklist importu.
+
+Návratový signál:
+Dva relevantní importy za sebou nejdou interně posoudit bez dalšího zákaznického hovoru.
+
+Datová hranice:
+Nezakládáme skóre připravenosti zákazníka, nový CRM atribut ani měsíční report exportů.
+```
+
+To je dost. Člověk příště ví, co udělat, kde pravidlo najít a kdy ho znovu otevřít. Nemusí znát historii a nemusí vytvářet nový doklad pro každé použití.
+
+### Kam klidovou stopu uložit
+
+Klidová stopa má bydlet tam, kde se rozhodnutí znovu potká s prací. Pokud pravidlo řídí import dat, patří k importnímu checklistu. Pokud řídí obchodní kvalifikaci, patří k discovery šabloně. Pokud řídí obsahovou revizi, patří k redakčnímu checklistu. Rozhodovací log může mít delší záznam, ale pracovní místo potřebuje krátkou aktuální větu.
+
+Nepřidávejte samostatnou složku "uzavřená pravidla", pokud ji nikdo přirozeně neotevře při práci. Taková složka bude vypadat uklizeně a zároveň bude prakticky neviditelná. To je nebezpečná kombinace: pořádek pro autora, zmatek pro provoz.
+
+Jednoduché pravidlo:
+
+```text
+Když člověk řeší danou situaci, má klidovou stopu vidět dřív, než začne hledat v historii.
+```
+
+Pokud ji nevidí, není uložená správně. Neznamená to, že potřebujete nový systém dokumentace. Často stačí přidat jednu větu k existující šabloně a z rozhodovacího logu nechat jen odkaz.
+
+### Privacy-first klid
+
+Klidový provoz má jednu velkou výhodu: nemusí sbírat další důkazy. Pravidlo už prošlo dvěma běžnými použitími. Pokud nevznikl návratový signál, není důvod přidávat nový tracker, ruční seznam, CRM pole, report ani kontrolní tabulku.
+
+Do klidové stopy napište:
+
+```text
+V klidovém provozu dál nesbíráme:
+```
+
+Příklad:
+
+```text
+V klidovém provozu dál nesbíráme skóre připravenosti zákazníka, technické štítky exportů ani osobní poznámky k jednotlivým importům. Ponecháváme jen obecné pravidlo u checklistu a konkrétní zákaznické soubory zůstávají v původním pracovním toku podle běžné retence.
+```
+
+Tato věta je praktická pojistka. Až někdo později navrhne "měřit to pro jistotu", tým uvidí, že absence měření nebyla opomenutí. Bylo to rozhodnutí. Privacy-first provoz stojí právě na takových malých větách, ne jen na velkých prohlášeních o hodnotách.
+
+Codyho komentář: klidová stopa je ideální místo pro provozní minimalismus. Ne proto, že bychom byli líní. Protože systém, který si pamatuje jen to, co potřebuje pro další dobré rozhodnutí, je obvykle rychlejší, levnější a méně otravný při auditu. Což je vzácná trojkombinace.
+
+### Karta klidové stopy
+
+```text
+Pravidlo:
+
+Prošlo těmito běžnými použitími:
+
+Kanonické pracovní místo:
+
+Aktuální pracovní věta:
+
+Návratový signál:
+
+Běžný revizní rytmus, pokud existuje:
+
+Co zůstává zavřené:
+
+V klidovém provozu dál nesbíráme:
+
+Co po ověření mažeme, zkracujeme nebo necháváme v původním zdroji:
+
+Kde je delší rozhodovací záznam, pokud je potřeba:
+
+Datum klidové stopy:
+```
+
+Kartu nepoužívejte jako nový povinný formulář pro každé pravidlo. Má smysl u pravidel, která prošla mimořádnou smyčkou a hrozí, že se k nim tým bude vracet ze zvyku. U úplně běžných rozhodnutí stačí krátká věta v šabloně.
+
+### Mini workshop na 5 minut
+
+1. Minuta 1: přečtěte závěr druhého běžného použití.
+2. Minuta 2: napište aktuální pracovní větu.
+3. Minuta 3: určete kanonické pracovní místo.
+4. Minuta 4: napište návratový signál a co zůstává zavřené.
+5. Minuta 5: napište privacy-first větu a ukliďte pomocné stopy.
+
+Pokud se během pěti minut objeví potřeba znovu vysvětlovat historii, klidová stopa je moc ambiciózní. Zkraťte ji na aktuální pravidlo, domov a návratový signál. Historie může zůstat v rozhodovacím záznamu, ale běžná práce ji nemá nést na zádech.
+
+### Checklist klidové stopy
+
+- Má pravidlo za sebou dvě běžná použití nebo jiné dostatečné ověření?
+- Je aktuální pracovní věta srozumitelná bez historie?
+- Má pravidlo jedno kanonické pracovní místo?
+- Je návratový signál konkrétní a rozpoznatelný?
+- Je jasné, co zůstává zavřené?
+- Je napsané, jaká data, štítky, exporty, reporty nebo kontroly dál nevznikají?
+- Uklidili jsme dočasné poznámky, zákaznické příklady, screenshoty nebo pracovní kopie?
+- Nezakládáme nový dokument jen proto, že se nám nechce vybrat existující domov pravidla?
+- Umí další člověk použít pravidlo bez čtení původního review?
+- Ví tým, kdy se pravidlo znovu otevře, a kdy ho má naopak nechat být?
+
+Klidová stopa je dobrý konec pracovní smyčky. Neoslavuje pravidlo, nesleduje ho zbytečně dál a netahá za sebou zákaznické detaily. Jen nechává v provozu přesnou větu, která pomůže příště rozhodnout bez další debaty.
+
 ## Pracovní log
 
+- 2026-07-09: Doplněna navazující podkapitola o klidové stopě po druhém běžném použití: kanonické pracovní místo, návratový signál, privacy-first datová hranice, karta, mini workshop a checklist.
 - 2026-07-09: Doplněna navazující podkapitola o uzavření druhého běžného použití po uzavřeném review: čtyři uzavírací stavy, SaaS příklady, privacy-first datová hranice, karta, mini workshop a checklist.
 - 2026-07-09: Doplněna navazující podkapitola o druhém běžném použití po uzavřeném review: přenositelnost pravidla, samostatnost bez čerstvého vysvětlení, SaaS příklad s onboardingovým importem, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-07-09: Doplněna navazující podkapitola o uzavření prvního běžného použití po review: čtyři uzavírací stavy, SaaS příklad, privacy-first datová věta, karta, mini workshop a checklist.
