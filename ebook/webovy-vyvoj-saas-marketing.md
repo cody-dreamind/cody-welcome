@@ -315909,8 +315909,186 @@ Když workshop začne řešit, jak by se dal celý proces zlepšit, vraťte se k
 
 Uzavření prvního běžného použití po review má pravidlu ubrat mimořádnou péči. Pokud funguje, nechte ho pracovat. Pokud drhne, opravte nejbližší větu nebo místo. Pokud se opravdu objevil návratový signál, otevřete jen ten nejmenší. V každé variantě držte datovou stopu krátkou. Produktivita není počet zachovaných poznámek, ale počet rozhodnutí, která příště nepotřebují doprovodný výklad.
 
+## Druhé běžné použití po uzavřeném review
+
+Druhé běžné použití po uzavřeném review je test přenositelnosti. První použití mohlo dopadnout dobře proto, že u něj ještě byla čerstvá paměť review, člověk znal předchozí diskusi nebo se řešil podobný případ jako v příkladu. Druhé použití má ukázat, jestli pravidlo obstojí i v trochu jiné běžné situaci.
+
+Nejde o nové review. Nejde ani o pokračování mimořádné péče. Pokud jste po prvním použití pravidlo uzavřeli, druhé použití má být normální pracovní okamžik: někdo otevře šablonu, formulář, checklist nebo obchodní skript a podle krátké věty rozhodne. Bez archeologie v poznámkách. Bez schůzky. Bez nové tabulky "jen pro jistotu".
+
+Začněte jednou větou:
+
+```text
+Pravidlo podruhé používáme po uzavřeném review v této běžné situaci:
+```
+
+Příklad:
+
+```text
+Pravidlo podruhé používáme po uzavřeném review v této běžné situaci:
+Customer success dostal export od jiného zákazníka, kde jsou data obsahově správná, ale oddělovač a kódování nejsou podle očekávání.
+```
+
+Tahle věta drží práci u konkrétního místa. Neřešíte znovu celý onboarding. Ověřujete, jestli pravidlo, které prošlo prvním použitím, pomůže i ve druhém přirozeném případě.
+
+### Co druhé použití ověřuje
+
+Druhé použití ověřuje tři věci:
+
+- Přenositelnost: pravidlo platí i pro druhý běžný případ, ne jen pro ten první.
+- Samostatnost: člověk podle něj rozhodne bez čerstvého vysvětlení od autora review.
+- Nezvětšení provozu: druhé použití nepřidá nový report, štítek, export, ruční seznam ani neformální evidenci.
+
+Přenositelnost neznamená univerzálnost. Pravidlo nemusí pokrýt všechny budoucí situace. Má pokrýt stejný typ rozhodnutí v druhém reálném případu. Pokud se druhý případ liší jen detailem, pravidlo by mělo stačit. Pokud se liší samotným typem problému, necpěte ho násilím do staré věty.
+
+Samostatnost je tvrdší test. Pokud člověk musí volat původnímu vlastníkovi pravidla a ptát se, "jak jste to tehdy mysleli", pravidlo ještě není hotové. Možná stačí doplnit jednu pracovní větu. Možná je potřeba přesunout závěr blíž k práci. Ale určitě není dobrý nápad založit nový kontrolní rituál, ve kterém se bude každé použití konzultovat.
+
+Nezvětšení provozu hlídá privacy-first hranici. Druhé použití často svádí k větě "už se nám to stalo dvakrát, pojďme to měřit". Někdy ano. Ale nejdřív si řekněte, jestli měření opravdu změní rozhodnutí, nebo jen uklidní nervy. Dvě běžné situace nejsou automaticky důvod začít sbírat další zákaznické atributy.
+
+### Čtyři výsledky druhého použití
+
+Druhé použití po uzavřeném review může skončit čtyřmi výsledky:
+
+- Pravidlo je přenositelné: druhý případ šel vyřešit stejnou větou bez nové evidence.
+- Stačí poslední lokální zpřesnění: pravidlo funguje, ale potřebuje jednu přesnější hranu.
+- Pravidlo je na slabém místě: člověk by rozhodl správně, kdyby větu našel včas.
+- Vzniká nový návratový signál: druhý případ ukazuje opakovaný problém, který už má rozhodovací hodnotu.
+
+U přenositelného pravidla nic nepřidávejte. Zapište jednověté potvrzení a nechte pravidlo v běžném rytmu. Druhé úspěšné použití není pozvánka k tomu, aby se z pravidla stal proces s vlastní administrativou.
+
+U posledního lokálního zpřesnění opravte nejbližší hranu. Třeba doplňte větu, že ruční posouzení se týká i jiného oddělovače nebo kódování, pokud obsah dat odpovídá domluvenému příkladu. Neotevírejte celý importní proces jen proto, že jedna technická varianta nebyla napsaná dost jasně.
+
+U slabého pracovního místa opravte umístění, ne pravidlo. Pokud je závěr schovaný v review zápisu a člověk pracuje v interním checklistu importu, přesuňte krátkou větu do checklistu. Nevytvářejte nové úložiště, pokud existující pracovní místo stačí.
+
+U nového návratového signálu napište přesně, co se opakuje. Ne "zákazníci mají problém s daty", ale třeba "dva zákazníci za sebou dodali obsahově správný export, který se zasekl jen na formátu souboru". To je jiný problém než chybějící data a zaslouží si jiný malý krok.
+
+### Praktický SaaS příklad
+
+První použití po review doplnilo do onboardingové šablony větu:
+
+```text
+Pokud export obsahuje stejné informace pod jinými názvy sloupců, nejdřív ho ručně posuď; call nabízej až ve chvíli, kdy chybí obsah.
+```
+
+Druhé použití:
+
+```text
+Situace:
+Nový zákazník poslal CSV se správnými údaji, ale soubor měl jiné kódování a oddělovač.
+
+Použití pravidla:
+Customer success poznal, že obsah nechybí, a předal soubor technikovi k rychlému převodu. Call se zákazníkem nebyl potřeba.
+
+Závěr:
+Pravidlo je přenositelné. Do šablony nedoplňujeme nový formulář ani štítek připravenosti dat; k internímu checklistu importu přidáváme pouze poznámku, že technický formát souboru se nejdřív ověřuje interně.
+```
+
+Pozor na špatný závěr:
+
+```text
+Už podruhé řešíme data, musíme zavést skóre připravenosti zákazníka.
+```
+
+Tohle zní akčně, ale míchá různé problémy. V prvním případě šlo o názvy sloupců, ve druhém o technický formát souboru. Ani jeden případ neprokázal, že zákazník není připravený. Skóre by vytvořilo nový zákaznický údaj, aniž by pomohlo lepšímu rozhodnutí.
+
+Lepší závěr:
+
+```text
+Druhé použití potvrzuje, že pravidlo má rozlišovat chybějící obsah od technické podoby souboru. Zůstává u onboardingové šablony a interního checklistu importu; nezakládáme skóre připravenosti, nový report ani další zákaznický atribut.
+```
+
+Tady je zásah přesný. Tým ví, jak rozhodnout příště, a zároveň nezvětšil datovou stopu.
+
+### Privacy-first kontrola
+
+Po druhém použití si položte čtyři otázky:
+
+```text
+Potvrdilo se opakování stejného problému, nebo jen podobně znějící situace?
+
+Pomohlo by nové ukládané pole k lepšímu rozhodnutí, nebo stačí lepší pracovní věta?
+
+Lze závěr zobecnit bez osobních a zákaznických detailů?
+
+Které dočasné poznámky po druhém použití smažeme, protože už se promítly do pravidla?
+```
+
+Privacy-first odpověď často není "nikdy nic neměřit". Je to "měřit až ve chvíli, kdy víme, jaké rozhodnutí tím zlepšíme". Pokud druhé použití jen potvrzuje, že pravidlo funguje, nejlepší datová stopa je žádná nová datová stopa. Nechte obecnou větu u pracovního místa a smažte pomocné poznámky, které už nemají samostatnou hodnotu.
+
+Pokud druhé použití opravdu otevírá návratový signál, i tehdy držte důkaz střídmý. Zapište typ problému, pracovní místo a nejmenší další krok. Nepřenášejte do návratu zákaznické detaily, které nejsou nutné pro rozhodnutí.
+
+Codyho komentář: druhé použití je skvělý detektor procesního přehánění. Když pravidlo funguje podruhé, spousta týmů má chuť ho "profesionalizovat". V překladu: přidat formulář, štítek, dashboard a jeden pravidelný meeting, protože klid je podezřelý. Odolejte. Fungující pravidlo si zaslouží hlavně nechat na pokoji.
+
+### Karta druhého použití po review
+
+```text
+Uzavřené review:
+
+První běžné použití:
+
+Druhá běžná situace:
+
+Pracovní místo:
+
+Výsledek:
+- pravidlo je přenositelné
+- stačí poslední lokální zpřesnění
+- pravidlo je na slabém místě
+- vzniká nový návratový signál
+
+Jak člověk rozhodl:
+
+Co se ukázalo proti prvnímu použití:
+
+Co se mění, pokud něco:
+
+Kde je změna uložená:
+
+Co zůstává výslovně zavřené:
+
+Jaká data, štítky, exporty, reporty nebo kontroly nezakládáme:
+
+Jaké dočasné stopy mažeme nebo zobecňujeme:
+
+Kdy se k tématu vrátíme:
+```
+
+Kartu použijte jen tehdy, když druhé použití přinese změnu, slabé místo nebo návratový signál. U čistého přenositelného použití stačí jedna věta:
+
+```text
+Druhé běžné použití potvrdilo přenositelnost pravidla; zůstává u pracovního místa a nezakládáme žádnou novou evidenci.
+```
+
+To je celá pointa. Pravidlo nemá sbírat razítka za každý normální den v práci.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: pojmenujte druhou běžnou situaci.
+2. Minuta 2: porovnejte ji s prvním použitím.
+3. Minuta 3: ověřte, jestli člověk rozhodl bez čerstvého vysvětlení.
+4. Minuta 4: vyberte jeden ze čtyř výsledků.
+5. Minuta 5: napište, co zůstává zavřené a jaká data nezakládáte.
+6. Minuta 6: uložte jednu větu, lokální zpřesnění nebo malý návratový signál.
+
+Když se během workshopu objeví chuť udělat pravidlu vlastní dashboard, zeptejte se, jaké rozhodnutí dashboard změní. Pokud odpověď není jasná, dashboard nepatří do druhého použití. Patří maximálně do poznámky, kterou pravděpodobně později s radostí smažete.
+
+### Checklist druhého použití po review
+
+- Popisujeme druhou konkrétní běžnou situaci?
+- Porovnali jsme ji s prvním použitím bez otevírání celé historie?
+- Šlo podle pravidla rozhodnout samostatně?
+- Je jasné, jestli se potvrdila přenositelnost, lokální mezera, slabé místo nebo návratový signál?
+- Pokud zpřesňujeme pravidlo, jde jen o nejbližší pracovní větu?
+- Pokud přesouváme pravidlo, jde do existujícího pracovního místa?
+- Pokud vzniká návratový signál, je konkrétní a menší než původní téma?
+- Je výslovně napsané, co dál neotevíráme?
+- Nezakládáme nový zákaznický údaj, štítek, report, export ani kontrolní rytmus jen proto, že se pravidlo použilo podruhé?
+- Smazali jsme nebo zobecnili dočasné poznámky, které už nejsou potřeba?
+
+Druhé běžné použití po uzavřeném review má pravidlu dát klid. Pokud je přenositelné, nechte ho v provozu. Pokud potřebuje poslední drobnou hranu, doplňte ji u pracovního místa. Pokud ukáže skutečný návratový signál, otevřete malý krok. V žádné variantě z něj nedělejte důvod k novému sběru dat bez jasného rozhodnutí.
+
 ## Pracovní log
 
+- 2026-07-09: Doplněna navazující podkapitola o druhém běžném použití po uzavřeném review: přenositelnost pravidla, samostatnost bez čerstvého vysvětlení, SaaS příklad s onboardingovým importem, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-07-09: Doplněna navazující podkapitola o uzavření prvního běžného použití po review: čtyři uzavírací stavy, SaaS příklad, privacy-first datová věta, karta, mini workshop a checklist.
 - 2026-07-09: Doplněna navazující podkapitola o prvním běžném použití po uzavřeném pravidelném review: najitelnost závěru, použitelnost pracovní věty, privacy-first kontrola datové stopy, karta, mini workshop a checklist.
 - 2026-07-09: Doplněna navazující podkapitola o uzavření prvního pravidelného review po návratu pravidla do rytmu: čtyři uzavírací stavy, SaaS příklad, privacy-first uzavření pomocných stop, karta, mini workshop a checklist.
