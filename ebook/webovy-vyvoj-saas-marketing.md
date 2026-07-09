@@ -335,6 +335,8 @@ Nejlepší stopa po takové kontrole je jedna věta v místě, kde se původní 
 
 Když tuto větu ukládáte, nepřidávejte k ní nové přílohy jen pro pocit jistoty. Stačí odkaz na původní záznam a aktuální závěr; další důkaz má vzniknout až tehdy, když opravdu mění rozhodnutí.
 
+U jednověté stopy si zároveň ověřte, že nepotřebuje zvláštní připomínku mimo běžný rytmus práce. Pokud by vyžadovala nový kalendář, hlídání nebo opakovanou ruční kontrolu, nejde už jen o klidné zavření; buď chybí jasný návratový signál, nebo je téma ve skutečnosti pořád otevřené.
+
 ## Návrat k neotevřenému kroku
 
 Neotevřený krok se někdy vrátí. To není chyba původního rozhodnutí. Dobrý záznam nemá téma navždy zamknout do sklepa; má zajistit, že se otevře až ve chvíli, kdy přijde lepší důvod než minule. Rozdíl je v tom, že návrat neznamená automatické spuštění původního návrhu. Znamená novou kontrolu: jestli se opravdu objevil návratový signál, jestli pořád platí stejná pracovní otázka a jestli lze otevřít menší krok než ten, který byl minule zamítnutý.
@@ -315541,3 +315543,4 @@ První běžné použití po návratu do dlouhodobého klidu je zkouška tichost
 - 2026-07-06: Doplněna krátká poznámka k běžné kontrole neotevřeného kroku, aby její závěr končil jednou dohledatelnou větou místo novou mini analýzou.
 - 2026-07-07: Doplněna krátká poznámka k jednověté stopě po běžné kontrole, aby nevznikaly nové přílohy bez rozhodovací hodnoty.
 - 2026-07-07: Doplněna úvodní podkapitola o druhém přirozeném review tichého standardu: ověření bez čerstvé historie, lokální oprava, ukončení návratu do péče, privacy-first datová věta, karta, mini workshop a checklist.
+- 2026-07-09: Doplněna krátká poznámka k jednověté stopě, aby se z ní nestal nový mimořádný kontrolní rytmus bez návratového signálu.
