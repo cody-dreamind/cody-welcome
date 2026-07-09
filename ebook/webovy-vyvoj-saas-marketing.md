@@ -315212,8 +315212,190 @@ Pokud se během workshopu objeví potřeba další pravidelné kontroly, pojmenu
 
 Uzavření druhého běžného použití po návratu do rytmu má z pravidla sundat pracovní lešení. Pokud pravidlo funguje, nechte mu jen správné místo, jasnou hranici a návratový signál. Všechno ostatní je podezřele podobné práci navíc, která se převlékla za pečlivost.
 
+## První pravidelné review po návratu pravidla do rytmu
+
+Když se pravidlo po dvou běžných použitích vrátí do rytmu, další krok nemá být třetí mimořádné ověření. Má to být první normální review v místě, kde se pravidlo stejně potkává s prací: měsíční kontrola šablon, review onboardingových případů, obchodní retrospektiva, údržba helpdesku nebo krátké produktové kolečko. Rozdíl je malý, ale důležitý. Mimořádné ověření hledá, jestli pravidlo přežije. Pravidelné review se ptá, jestli pravidlo pořád slouží běžné práci.
+
+První pravidelné review má odpovědět na jednu otázku:
+
+```text
+Funguje pravidlo v běžném rytmu bez speciální péče, nebo se při přirozené práci ukázal konkrétní důvod k malé úpravě?
+```
+
+Všimněte si slov "při přirozené práci". Nezakládejte kvůli review nový report, nevolejte lidi na extra schůzku a neprocházejte starou historii jen proto, že pravidlo existuje. Podívejte se na to, co byste stejně otevřeli. Pokud pravidlo v běžné práci nepotkáte, není to automaticky problém. Možná jen nemělo být každý měsíc na stole.
+
+Dobré review má proto tři hranice:
+
+- Používá běžný provozní okamžik.
+- Kontroluje jen aktuální pracovní místo, ne celou historii rozhodnutí.
+- Končí jednou větou, malou lokální úpravou, nebo návratovým signálem.
+
+Praktická pracovní věta:
+
+```text
+Při měsíční kontrole onboardingové šablony pravidlo zůstává srozumitelné, nebylo potřeba mimořádné vysvětlení a další review neotevíráme; k tématu se vrátíme jen při domluveném návratovém signálu.
+```
+
+Taková věta je nudná, stručná a velmi užitečná. Nevyvolává novou práci, ale zanechá stopu, že pravidlo prošlo běžným provozem a nepotřebuje péči navíc.
+
+### Co při prvním review kontrolovat
+
+Nepřidávejte široký audit. Stačí pět praktických otázek:
+
+- Je pravidlo pořád u pracovního místa, kde ho člověk potřebuje?
+- Rozumí mu člověk bez znalosti původní diskuse?
+- Nevede pravidlo k novému ručnímu obcházení?
+- Nevznikly kolem něj nové zbytečné poznámky, štítky, exporty nebo tabulky?
+- Platí návratový signál, nebo je potřeba ho zpřesnit?
+
+Pokud odpovědi neukazují problém, pravidlo nechte být. Review není soutěž v hledání úprav. Je to kontrola, že se běžný rytmus nezměnil v tiché prodloužení staré mimořádné péče.
+
+Příklad pro SaaS onboarding:
+
+```text
+Pravidlo:
+Pokud zákazník nemá připravená zdrojová data pro první import, nabídni krátký upřesňující call. Pokud data připravená má, pokračuj importem.
+
+První pravidelné review:
+Šablona je pořád u onboardingového kroku. Customer success ji našel bez vysvětlení. Nevznikl nový CRM štítek ani seznam výjimek. Návratový signál zůstává: dva zákazníci za sebou uvíznou na importu kvůli nejasným zdrojovým datům.
+
+Závěr:
+Pravidlo zůstává v běžném rytmu bez úprav.
+```
+
+To je hotové review. Žádný velký zápis, žádná tabulka úspěšnosti, žádné "raději to ještě měsíc sledujme". Pokud se opravdu nic nezměnilo, nejlepší produktová práce je nechat věc klidně fungovat.
+
+### Čtyři výsledky prvního review
+
+Po prvním pravidelném review vyberte jeden stav:
+
+- Bez změny: pravidlo je najitelné, srozumitelné a nevytváří zbytečnou datovou stopu.
+- Lokální dočištění: opraví se název, umístění, příklad nebo jedna věta u stejného pracovního místa.
+- Zpřesnit návratový signál: pravidlo funguje, ale signál pro další návrat je moc mlhavý.
+- Otevřít malý návrat: review ukázalo konkrétní opakovaný problém v běžné práci.
+
+Bez změny vypadá takto:
+
+```text
+Pravidlo ponecháváme beze změny. První pravidelné review nepotvrdilo žádné nové tření a další kontrola proběhne jen v běžném rytmu šablony.
+```
+
+Lokální dočištění má zůstat opravdu lokální:
+
+```text
+Přejmenujeme odkaz na pravidlo z "Import - výjimky" na "Kdy nabídnout call před importem". Obsah pravidla, formulář, CRM atributy ani reporting se nemění.
+```
+
+Zpřesnění návratového signálu je vhodné, když pravidlo funguje, ale budoucí hranice je moc obecná:
+
+```text
+Návratový signál měníme z "když se import opakovaně zasekne" na "když dva zákazníci za sebou nedodají použitelná zdrojová data ani po potvrzovacím e-mailu".
+```
+
+Malý návrat otevírejte jen tehdy, když review přinese konkrétní důkaz:
+
+```text
+Review ukázalo dvě po sobě jdoucí situace, kdy zákazník data měl, ale nevěděl, v jakém formátu je dodat. Otevíráme malou úpravu potvrzovacího e-mailu. Onboardingový formulář, CRM scoring a nový report zůstávají zavřené.
+```
+
+Tady je důležitá disciplína. Review nemá oprávnění otevřít celý starý problém jen proto, že se objevil jeden nový detail. Pokud detail patří do potvrzovacího e-mailu, opravte potvrzovací e-mail. Nepřepisujte kvůli tomu onboarding, helpdesk, web a obchodní skript v jednom nadšeném sprintu. Nadšení je fajn, ale rozsah už méně.
+
+### Privacy-first review
+
+První pravidelné review je ideální místo pro kontrolu, jestli se kolem pravidla nezačala tvořit nenápadná evidence. Ta často nevzniká zlým úmyslem. Někdo si jen "pro jistotu" vede tabulku, nechává si screenshoty, přidává ruční štítek nebo kopíruje zákaznické příklady do poznámek. Po čase z toho může být malý datový sklad bez jasného účelu.
+
+Položte tři otázky:
+
+```text
+Jaká data vznikla jen proto, že jsme pravidlo kontrolovali?
+
+Která z nich ještě mění rozhodnutí?
+
+Co můžeme smazat, anonymizovat nebo nepřenést do dalšího rytmu?
+```
+
+Vyplněný příklad:
+
+```text
+Vzniklo:
+Tři interní poznámky ke konkrétním onboardingům a jeden pomocný seznam případů.
+
+Ještě mění rozhodnutí:
+Ne. Pravidlo se používá přímo v šabloně a seznam už není potřeba.
+
+Úklid:
+Seznam mažeme. U šablony necháváme jen obecné pravidlo, návratový signál a jednovětý závěr review bez zákaznických detailů.
+```
+
+Codyho komentář: privacy-first provoz se často pozná podle toho, že tým umí po dobrém výsledku ubrat evidenci. Špatný návyk je přidat měření pokaždé, když něco funguje. Dobrý návyk je nechat fungující věc bez zbytečné datové přítěže. To je méně efektní na prezentaci, ale mnohem zdravější v reálném provozu.
+
+### Karta prvního pravidelného review
+
+```text
+Pravidlo nebo pracovní věta:
+
+Běžný rytmus, ve kterém review proběhlo:
+
+Pracovní místo:
+
+Co jsme skutečně viděli v běžné práci:
+
+Vybraný výsledek:
+- bez změny
+- lokální dočištění
+- zpřesnit návratový signál
+- otevřít malý návrat
+
+Jednovětý závěr:
+
+Co se mění, pokud něco:
+
+Co zůstává výslovně zavřené:
+
+Návratový signál:
+
+Privacy-first úklid:
+Ponecháváme:
+Mažeme nebo anonymizujeme:
+Dál nezakládáme:
+
+Kde je závěr uložený:
+
+Kdy se pravidlo příště přirozeně potká s prací:
+```
+
+Kartu vyplňujte celou jen tehdy, když review něco mění nebo uklízí. Pokud pravidlo normálně funguje, stačí jednovětý závěr u pracovního místa. Karta nemá dokazovat, že jste pracovali. Má pomoct, když je co rozhodnout.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: otevřete pracovní místo, ne starou historii.
+2. Minuta 2: odpovězte na pět kontrolních otázek.
+3. Minuta 3: vyberte jeden ze čtyř výsledků.
+4. Minuta 4: napište jednovětý závěr.
+5. Minuta 5: ukliďte nebo výslovně nepřeneste dočasné datové stopy.
+6. Minuta 6: uložte závěr tam, kde se pravidlo příště použije.
+
+Pokud workshop začne sklouzávat k širší debatě, vraťte se k pracovnímu místu. První pravidelné review není velká retrospektiva. Je to krátká kontrola, že pravidlo po návratu do rytmu opravdu žije bez opěrných koleček.
+
+### Checklist prvního pravidelného review
+
+- Proběhlo review v běžném provozním okamžiku, ne jako nová mimořádná kontrola?
+- Dívali jsme se na aktuální pracovní místo místo celé historie rozhodnutí?
+- Je pravidlo pořád najitelné tam, kde ho člověk potřebuje?
+- Je pravidlo srozumitelné bez čerstvého vysvětlení?
+- Nevzniklo ruční obcházení, které by signalizovalo slabé pravidlo?
+- Nevznikly kolem pravidla nové poznámky, štítky, exporty, tabulky nebo reporty bez rozhodovací hodnoty?
+- Vybrali jsme jeden ze čtyř výsledků review?
+- Pokud něco měníme, je to lokální úprava nebo jasně malý návrat?
+- Je jasné, co zůstává zavřené?
+- Má závěr jednu větu uloženou u pracovního místa?
+- Uklidili jsme dočasnou datovou stopu nebo výslovně řekli, proč zůstává?
+
+První pravidelné review má pravidlu vrátit normální měřítko. Pokud funguje, nechte ho pracovat. Pokud drhne, opravte nejbližší hranu. A pokud jen láká k další péči, připomeňte si, že stabilita se často pozná podle toho, že už kolem ní není co řídit.
+
 ## Pracovní log
 
+- 2026-07-09: Doplněna navazující podkapitola o prvním pravidelném review po návratu pravidla do rytmu: běžný provozní okamžik, čtyři výsledky review, SaaS příklad, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-07-09: Doplněna navazující podkapitola o uzavření druhého běžného použití po návratu pravidla do rytmu: čtyři uzavírací stavy, SaaS příklad, úklid dočasných stop, privacy-first uzavření, karta, mini workshop a checklist.
 - 2026-07-09: Doplněna navazující podkapitola o druhém běžném použití po návratu pravidla do rytmu: přenositelnost bez čerstvého vysvětlení, čtyři výsledné stavy, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-07-09: Doplněna navazující podkapitola o prvním běžném použití po návratu pravidla do rytmu: najitelnost, rozhodnutelnost, datová střídmost, čtyři výsledné stavy, privacy-first kontrola, karta, mini workshop a checklist.
