@@ -316380,8 +316380,149 @@ Pokud se během pěti minut objeví potřeba znovu vysvětlovat historii, klidov
 
 Klidová stopa je dobrý konec pracovní smyčky. Neoslavuje pravidlo, nesleduje ho zbytečně dál a netahá za sebou zákaznické detaily. Jen nechává v provozu přesnou větu, která pomůže příště rozhodnout bez další debaty.
 
+## První běžné setkání po klidové stopě
+
+Klidová stopa není zakonzervování pravidla do vitríny. Dřív nebo později se s ní někdo potká při normální práci: při poptávce, importu, support ticketu, revizi stránky, přípravě kampaně nebo předání úkolu novému člověku. V tu chvíli není cílem znovu otevřít celou historii. Cílem je ověřit, že krátká stopa stačí k rozhodnutí.
+
+První běžné setkání po klidové stopě proto začíná jednoduchou otázkou:
+
+```text
+Pomohla klidová stopa rozhodnout v dnešní situaci bez návratu k mimořádné péči?
+```
+
+Pokud ano, nezakládejte novou kontrolu. Stačí jednověté potvrzení u pracovního místa. Pokud ne, neopravujte hned celý systém. Nejdřív určete, co přesně selhalo: najitelnost, srozumitelnost, návratový signál, nebo datová hranice.
+
+### Čtyři věci k ověření
+
+Při prvním setkání po klidové stopě kontrolujte jen čtyři věci:
+
+- člověk stopu našel tam, kde pracoval;
+- pracovní věta stačila k rozhodnutí;
+- návratový signál nebyl zaměněn za obecný pocit nejistoty;
+- datová hranice zabránila nové zbytečné evidenci.
+
+Všechno ostatní je šum, pokud se neobjevil skutečný návratový signál. Nečtěte staré review jen proto, že existuje. Dlouhodobý provoz má být schopný použít aktuální pravidlo bez archeologické výpravy do minulosti. Archeologie je krásná věda, ale špatný onboardingový nástroj.
+
+Praktický příklad:
+
+```text
+Situace:
+Nový zákazník poslal export pro import dat. Sloupce mají jiné názvy, ale obsahově jsou kompletní.
+
+Klidová stopa říká:
+Obsahově správný export nejdřív interně posoudíme i při odlišných názvech sloupců, oddělovači nebo kódování. Zákaznický call nabízíme až ve chvíli, kdy chybí obsah nebo rozhodnutí.
+
+Výsledek:
+Tým export posoudil interně, neotevřel zákaznický call a nepřidal nový štítek "nestandardní export".
+```
+
+To je dobré první setkání. Pravidlo pomohlo, rozsah zůstal zavřený a nevznikla nová datová stopa. Není potřeba přidávat další odstavec do klidové stopy jen proto, že pravidlo zafungovalo. Fungující pravidla se mají používat, ne dekorovat.
+
+### Tři výsledky prvního setkání
+
+První běžné setkání po klidové stopě může skončit třemi výsledky:
+
+- Potvrzený klid: stopa byla najitelná, srozumitelná a rozhodnutí proběhlo bez nové evidence.
+- Lokální dočištění: stopa pomohla, ale chyběl odkaz, přesnější slovo nebo lepší umístění u pracovního místa.
+- Skutečný návrat: dnešní situace splnila návratový signál nebo ukázala lepší konkrétní signál než ten původní.
+
+Nepřidávejte výsledek "budeme to raději chvíli sledovat". Pokud potřebujete sledování, napište, jaké rozhodnutí má změnit a kdy skončí. Jinak jde jen o tichý návrat mimořádné péče zadními dveřmi.
+
+U potvrzeného klidu napište jen:
+
+```text
+Klidová stopa dnes stačila k rozhodnutí v běžné práci; pravidlo zůstává v [pracovní místo] a nic dalšího neotevíráme.
+```
+
+U lokálního dočištění napište:
+
+```text
+Klidová stopa pomohla, ale upravujeme [jedno místo], aby další člověk našel pravidlo bez hledání v historii.
+```
+
+U skutečného návratu napište:
+
+```text
+Dnešní situace splnila návratový signál [konkrétní signál], proto otevíráme nejmenší krok v [pracovní místo] a původní širší rozsah zůstává zavřený.
+```
+
+### Privacy-first kontrola setkání
+
+První běžné setkání je důležité hlavně proto, že ukáže, jestli klidová stopa opravdu brání zbytečnému sběru dat. Typické riziko není velké rozhodnutí. Typické riziko je drobný obchvat: někdo si začne vést pomocnou tabulku, přidá CRM štítek, uloží screenshot pro jistotu nebo nechá zákaznický soubor v novém místě, protože "se to možná bude hodit".
+
+Do závěru setkání proto přidejte jednu datovou větu:
+
+```text
+Díky klidové stopě dnes nevznikl nový [štítek/export/report/seznam] a pracovní důkaz zůstává v původním toku podle běžné retence.
+```
+
+Příklad:
+
+```text
+Díky klidové stopě dnes nevznikl nový CRM štítek pro nestandardní exporty, žádný měsíční report importních výjimek ani kopie zákaznického souboru mimo běžný onboardingový tok.
+```
+
+Tato věta není právní poezie. Je to provozní pojistka. Až se někdo později zeptá, proč nic neměříte "pro jistotu", odpověď už existuje: protože pravidlo stačilo a návratový signál nenastal.
+
+### Karta prvního setkání po klidové stopě
+
+```text
+Pracovní situace:
+
+Kde člověk klidovou stopu našel:
+
+Aktuální pracovní věta stačila?
+
+Návratový signál nastal?
+
+Výsledek:
+- potvrzený klid
+- lokální dočištění
+- skutečný návrat
+
+Co zůstává zavřené:
+
+Jaká nová data, štítky, exporty nebo kontroly dnes nevznikly:
+
+Pokud dočišťujeme, jaké jedno místo upravujeme:
+
+Pokud otevíráme návrat, jaký nejmenší krok vzniká:
+
+Jednovětý závěr:
+```
+
+Kartu vyplňujte celou jen tehdy, když setkání něco změnilo nebo odhalilo slabinu. U potvrzeného klidu stačí jednovětý závěr u pracovního místa. Klidová stopa nemá kolem sebe vyrábět nový formulář pokaždé, když se chová správně.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: pojmenujte dnešní pracovní situaci.
+2. Minuta 2: ověřte, kde byla klidová stopa nalezena.
+3. Minuta 3: přečtěte pracovní větu a rozhodněte, jestli stačila.
+4. Minuta 4: zkontrolujte návratový signál.
+5. Minuta 5: napište datovou větu o tom, co dnes nevzniklo.
+6. Minuta 6: vyberte jeden výsledek a uložte jednovětý závěr.
+
+Pokud se během šesti minut otevře dlouhá debata o původním rozhodnutí, zastavte ji a vraťte se k dnešní situaci. Buď klidová stopa stačí, nebo je potřeba lokální dočištění, nebo nastal návratový signál. Čtvrtá možnost "pojďme si připomenout úplně všechno" obvykle znamená, že dokumentace začala řídit tým místo práce.
+
+### Checklist prvního setkání
+
+- Šlo o běžnou pracovní situaci, ne o mimořádné review?
+- Našel člověk klidovou stopu u pracovního místa?
+- Stačila pracovní věta k rozhodnutí?
+- Je jasné, jestli návratový signál nastal, nebo nenastal?
+- Vybrali jsme přesně jeden výsledek?
+- Pokud dočišťujeme, upravujeme jen jedno nejbližší místo?
+- Pokud otevíráme návrat, je menší než původní téma?
+- Je napsané, co dál zůstává zavřené?
+- Nevznikl nový tracker, CRM štítek, export, report, screenshotová sbírka ani pomocná tabulka bez jasného důvodu?
+- Zůstávají zákaznické soubory a pracovní důkazy v původním toku podle běžné retence?
+- Stačí závěr dalšímu člověku bez čtení celé historie?
+
+První setkání po klidové stopě je test skromnosti. Pokud pravidlo pomůže a nic dalšího se nemusí stát, je to výhra. Ne každá výhra potřebuje nový proces. Někdy stačí nechat v provozu jednu přesnou větu a nepřidat žádný další sběr dat. To je praktické, levné a docela dospělé, což je v produktové práci pořád překvapivě konkurenční výhoda.
+
 ## Pracovní log
 
+- 2026-07-09: Doplněna navazující podkapitola o prvním běžném setkání po klidové stopě: ověření najitelnosti, pracovní věty, návratového signálu, privacy-first datové hranice, karta, mini workshop a checklist.
 - 2026-07-09: Doplněna navazující podkapitola o klidové stopě po druhém běžném použití: kanonické pracovní místo, návratový signál, privacy-first datová hranice, karta, mini workshop a checklist.
 - 2026-07-09: Doplněna navazující podkapitola o uzavření druhého běžného použití po uzavřeném review: čtyři uzavírací stavy, SaaS příklady, privacy-first datová hranice, karta, mini workshop a checklist.
 - 2026-07-09: Doplněna navazující podkapitola o druhém běžném použití po uzavřeném review: přenositelnost pravidla, samostatnost bez čerstvého vysvětlení, SaaS příklad s onboardingovým importem, privacy-first kontrola, karta, mini workshop a checklist.
