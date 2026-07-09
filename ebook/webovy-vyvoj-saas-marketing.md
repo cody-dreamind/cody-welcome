@@ -316520,8 +316520,154 @@ Pokud se během šesti minut otevře dlouhá debata o původním rozhodnutí, za
 
 První setkání po klidové stopě je test skromnosti. Pokud pravidlo pomůže a nic dalšího se nemusí stát, je to výhra. Ne každá výhra potřebuje nový proces. Někdy stačí nechat v provozu jednu přesnou větu a nepřidat žádný další sběr dat. To je praktické, levné a docela dospělé, což je v produktové práci pořád překvapivě konkurenční výhoda.
 
+## Uzavření prvního běžného setkání po klidové stopě
+
+První běžné setkání po klidové stopě se nesmí nechat viset ve vzduchu. Pokud se jen řekne "fungovalo to", tým za měsíc neví, jestli má pravidlo dál nechat v klidu, lokálně ho dočistit, nebo se k němu vrátit s větší péčí. Uzavření má proto udělat jednu věc: převést výsledek setkání do běžného provozu bez toho, aby vznikl nový kontrolní režim.
+
+Začněte větou:
+
+```text
+Po prvním běžném setkání zůstává klidová stopa ve stavu:
+```
+
+Za dvojtečku doplňte jeden ze tří stavů:
+
+- ponechat beze změny;
+- lokálně dočistit a ponechat v klidu;
+- otevřít omezený návrat.
+
+Všechno ostatní je podezřelé. "Ještě se na to podíváme" obvykle znamená, že tým nechce rozhodnout. "Budeme sbírat další příklady" často znamená, že se vrací mimořádná péče, jen v civilu. A "přidáme malý report" je krásně nenápadný způsob, jak z jedné užitečné věty vyrobit datový návyk. Hezké, uklizené, a přesně ten typ zbytečnosti, kterému se privacy-first provoz snaží vyhnout.
+
+### Tři uzavírací stavy
+
+`Ponechat beze změny` použijte, když klidová stopa pomohla rozhodnout, člověk ji našel u pracovního místa a nevznikla nová evidence. Uzavírací věta může znít:
+
+```text
+Klidová stopa dnes stačila k rozhodnutí; pravidlo zůstává v běžném provozu beze změny a další kontrolu neplánujeme bez návratového signálu.
+```
+
+To je celé. Nepřidávejte kartu jen proto, že se něco povedlo. Stabilní pravidlo nepotřebuje pravidelný slavnostní zápis. Stačí, že funguje.
+
+`Lokálně dočistit a ponechat v klidu` použijte, když pravidlo fungovalo, ale jedno nejbližší místo zbytečně drhlo. Typicky chyběl odkaz z šablony, název pravidla nebyl stejný jako v pracovním nástroji, nebo datová věta byla srozumitelná jen člověku, který ji psal. Dočištění má být malé a musí se zavřít hned:
+
+```text
+Klidová stopa pomohla, ale doplňujeme odkaz z onboardingové šablony na kanonické pravidlo. Pravidlo zůstává v klidu a neotevíráme nový review rytmus.
+```
+
+`Otevřít omezený návrat` použijte jen tehdy, když dnešní situace skutečně splnila návratový signál nebo ukázala konkrétnější signál než původní. Otevřený návrat nesmí automaticky obnovit celý starý rozsah:
+
+```text
+Dnešní import splnil návratový signál: dvakrát po sobě chyběla informace nutná k rozhodnutí bez zákaznického callu. Otevíráme pouze úpravu vstupní instrukce k exportu; starý nápad na nový CRM štítek zůstává zavřený.
+```
+
+Tahle věta je důležitá. Návrat není pozvánka na festival všech starých nápadů. Je to přesně ohraničená reakce na dnešní důkaz.
+
+### Praktický SaaS příklad
+
+Představte si SaaS nástroj, který přijímá zákaznické exporty pro onboarding. Tým dřív zvažoval, že každý "nestandardní" export bude označovat v CRM a jednou měsíčně z něj dělat report. Po několika použitích ale zjistil, že většina exportů je obsahově v pořádku a problém je jen v názvech sloupců. Místo nového štítku vznikla klidová stopa:
+
+```text
+Obsahově kompletní export s odlišnými názvy sloupců nejdřív posuzujeme interně. Zákaznický call otevíráme až ve chvíli, kdy chybí obsah nebo rozhodnutí.
+```
+
+Při prvním běžném setkání přijde další export. Člověk najde pravidlo, interně ověří obsah a nepotřebuje zákaznický call. Jediný problém: pravidlo našel přes starou poznámku, ne přímo v onboardingové šabloně.
+
+Správné uzavření není:
+
+```text
+Budeme další měsíc sledovat, kolikrát se to stane.
+```
+
+Správné uzavření je:
+
+```text
+Klidová stopa pomohla rozhodnout bez zákaznického callu. Doplňujeme odkaz z onboardingové šablony na kanonické pravidlo a dál nezavádíme CRM štítek, report ani pomocnou tabulku exportů.
+```
+
+Rozdíl je v hranici. První věta otevírá novou evidenci bez jasného rozhodnutí. Druhá věta dočistí nejbližší pracovní místo a zavře zbytek.
+
+### Privacy-first uzavření
+
+Uzavření prvního setkání má vždy obsahovat datovou brzdu. Ne proto, že každá poznámka je právní dokument. Protože právě v takových drobných chvílích vzniká nejvíc zbytečné evidence: "jen dočasná" tabulka, "jen interní" štítek, "jen pro jistotu" kopie souboru.
+
+Použijte jednu větu:
+
+```text
+Po uzavření nevzniká nový [tracker/štítek/export/report/kopie] a pracovní důkaz zůstává v [běžný tok] podle [běžná retence nebo pravidlo úklidu].
+```
+
+Příklady:
+
+```text
+Po uzavření nevzniká nový CRM štítek pro nestandardní exporty a zákaznický soubor zůstává jen v onboardingovém toku podle běžné retence.
+```
+
+```text
+Po uzavření nevzniká nový měsíční report support výjimek; jednovětý závěr zůstává u support šablony a žádné zákaznické screenshoty neukládáme mimo ticket.
+```
+
+```text
+Po uzavření nevzniká nový seznam ručních zásahů do kampaní; lokální odkaz upravujeme přímo v publikačním checklistu a starou pracovní poznámku mažeme.
+```
+
+Datová brzda má být konkrétní. Věta "nepřidáváme zbytečná data" je hezká, ale slabá. Silnější je napsat, který štítek, export, kopii nebo report nevznikl. Tým pak přesně ví, co nedělat, až se stejný nápad vrátí v civilizovanějším obleku.
+
+### Karta uzavření prvního setkání
+
+```text
+Pracovní situace:
+
+Výsledek prvního setkání:
+- ponechat beze změny
+- lokálně dočistit a ponechat v klidu
+- otevřít omezený návrat
+
+Jednovětý závěr:
+
+Pokud dočišťujeme, jaké jedno místo upravujeme:
+
+Pokud otevíráme návrat, jaký signál ho spustil:
+
+Co výslovně zůstává zavřené:
+
+Jaká nová data, štítky, exporty, reporty nebo kopie nevznikají:
+
+Kde závěr zůstává uložený:
+
+Kdy se téma znovu otevře:
+```
+
+Kartu používejte jen tam, kde uzavření něco mění nebo chrání důležitou datovou hranici. Pokud první setkání jen potvrdilo klid, stačí jednovětý závěr u pracovního místa. Účelem není vytvořit dokument o tom, že dokument nevznikl. Lidstvo už vynalezlo dost zvláštních věcí, tohle nemusíme přidávat do sbírky.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte jednovětý výsledek prvního setkání.
+2. Minuta 2: vyberte jeden ze tří uzavíracích stavů.
+3. Minuta 3: napište jednovětý závěr.
+4. Minuta 4: pokud je potřeba dočištění, určete přesně jedno místo.
+5. Minuta 5: napište datovou brzdu.
+6. Minuta 6: uložte závěr k pracovnímu místu a zavřete setkání.
+
+Pokud se během šesti minut ukáže, že potřebujete řešit staré rozhodnutí, rozsah, metriky i odpovědnosti, nejste v uzavření prvního setkání. Otevřeli jste nový návrat nebo nové téma. To může být legitimní, ale musí to mít vlastní návratový signál a vlastní hranici.
+
+### Checklist uzavření prvního setkání
+
+- Vybrali jsme přesně jeden uzavírací stav?
+- Je jednovětý závěr srozumitelný bez čtení staré historie?
+- Pokud pravidlo fungovalo, nepřidali jsme nový kontrolní rytmus?
+- Pokud dočišťujeme, jde opravdu jen o jedno nejbližší pracovní místo?
+- Pokud otevíráme návrat, je jasné, který signál ho spustil?
+- Zůstává původní širší rozsah výslovně zavřený?
+- Je napsané, jaká nová data, štítky, exporty, reporty nebo kopie nevznikají?
+- Jsou zákaznické důkazy ponechané v původním toku podle běžné retence?
+- Je závěr uložený tam, kde se pravidlo příště použije?
+- Nezaložili jsme kartu jen proto, že chceme mít pocit dokončené práce?
+
+Dobré uzavření prvního setkání je nenápadné. Nechává pravidlo v provozu, opravuje jen nejbližší tření a brání zbytečné evidenci. Když se povede, výsledek není velkolepý. Jen další člověk najde správnou větu, rozhodne rychleji a nepřidá data, která nikdo nepotřeboval. Což je přesně ten typ provozního luxusu, který se časem velmi příjemně sčítá.
+
 ## Pracovní log
 
+- 2026-07-09: Doplněna navazující podkapitola o uzavření prvního běžného setkání po klidové stopě: tři uzavírací stavy, SaaS příklad, privacy-first datová brzda, karta, mini workshop a checklist.
 - 2026-07-09: Doplněna navazující podkapitola o prvním běžném setkání po klidové stopě: ověření najitelnosti, pracovní věty, návratového signálu, privacy-first datové hranice, karta, mini workshop a checklist.
 - 2026-07-09: Doplněna navazující podkapitola o klidové stopě po druhém běžném použití: kanonické pracovní místo, návratový signál, privacy-first datová hranice, karta, mini workshop a checklist.
 - 2026-07-09: Doplněna navazující podkapitola o uzavření druhého běžného použití po uzavřeném review: čtyři uzavírací stavy, SaaS příklady, privacy-first datová hranice, karta, mini workshop a checklist.
