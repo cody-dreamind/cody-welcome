@@ -313266,8 +313266,156 @@ Když se během šesti minut objeví chuť znovu číst staré karty, zeptejte s
 
 První běžná kontrola po dlouhodobém klidu má potvrdit, že klid nebyl jen hezké slovo v kartě. Dobře fungující pravidlo se pozná tak, že se dá najít, použít a zase nechat být. Když to zvládne, neodměňujte ho další kontrolou. Odměňte ho tichem.
 
+## Uzavření první běžné kontroly po dlouhodobém klidu
+
+První běžná kontrola po dlouhodobém klidu nekončí tím, že si tým řekne "vypadá to v pořádku". To je pocit, ne závěr. Uzavření má z běžné kontroly udělat malou provozní stopu: co se při použití stalo, jestli pravidlo zůstává v klidu, co se případně lokálně opravuje a jaká datová stopa dál nevzniká.
+
+Dobré uzavření má být kratší než samotná kontrola. Pokud se po dlouhodobém klidu pravidlo našlo, stačilo k rozhodnutí a nevytvořilo novou evidenci, není potřeba znovu vyprávět celou historii. Stačí jedna přesná věta uložená u pracovního místa.
+
+Základní věta:
+
+```text
+První běžnou kontrolu po dlouhodobém klidu uzavíráme takto:
+```
+
+Za ni doplňte jeden ze čtyř stavů:
+
+- Zůstává v klidu: pravidlo bylo najitelné, použitelné a datově střídmé.
+- Lokálně opravit kotvu: pravidlo fungovalo, ale člověk ho hledal jinde, než měl.
+- Lokálně zpřesnit větu: pravidlo bylo na správném místě, ale formulace nestačila k samostatnému rozhodnutí.
+- Otevřít návratový signál: dnešní situace splnila dříve domluvenou podmínku pro nové posouzení.
+
+Stav `zůstává v klidu` je nejlepší konec. Ne proto, že je nejpohodlnější, ale proto, že potvrzuje původní smysl dlouhodobého klidu: pravidlo se dá použít bez mimořádné péče. Zapište stopu a nepřidávejte další kontrolní rytmus. Systém, který funguje, nemusí dostat odměnou další proces. To by bylo jako koupit si pořadač na účtenku za kávu. Technicky organizované, prakticky trochu podezřelé.
+
+Stav `lokálně opravit kotvu` znamená, že obsah pravidla je pořád správný, ale místo selhalo. Tady neopravujte pravidlo. Opravte cestu k němu: odkaz v checklistu, název šablony, poznámku u formuláře, interní rozcestník nebo krátký popisek u pracovního místa. Kotva má člověka dovést k rozhodnutí ve chvíli práce, ne ho poslat na malou archeologickou expedici.
+
+Stav `lokálně zpřesnit větu` použijte, když byla kotva správně, ale pravidlo znělo příliš měkce. Například "ptej se na rozpočet citlivě" je dobrý úmysl, ale špatná pracovní instrukce. Lepší věta říká, kdy se ptát, kde se ptát a co zůstává zavřené.
+
+Stav `otevřít návratový signál` je jediný případ, kdy se dlouhodobý klid opravdu probudí. Nestačí, že někdo dostal nový nápad. Nestačí ani to, že dnešní případ byl trochu nepříjemný. Návratový signál musí odpovídat podmínce, kterou jste si dřív napsali, nebo ji vědomě nahradit lepším důkazem. Jinak zůstáváte v uzavření kontroly, ne v novém návratu.
+
+### Praktický příklad
+
+Dlouhodobě klidné pravidlo:
+
+```text
+U relevantní poptávky bez rozpočtu se ptáme volitelně v potvrzovacím e-mailu jen tehdy, když bez odpovědi nejde navrhnout další konkrétní krok.
+```
+
+První běžná kontrola:
+
+```text
+Dnešní poptávka šla kvalifikovat podle cíle, datové situace a rozhodovacího procesu. Rozpočet nebyl potřeba pro návrh dalšího kroku.
+```
+
+Uzavření:
+
+```text
+První běžnou kontrolu po dlouhodobém klidu uzavíráme stavem zůstává v klidu. Pravidlo bylo v obchodním checklistu, stačilo k rozhodnutí neposílat rozpočtovou otázku a nevzniklo nové pole, CRM evidence ani export.
+```
+
+To je hotové. Není potřeba dopisovat další příklad, měnit formulář ani svolávat kontrolu za měsíc. Pravidlo splnilo práci a zase mizí do běžného provozu.
+
+Slabší varianta:
+
+```text
+Dnešní poptávka šla kvalifikovat bez rozpočtu, ale obchodník hledal pravidlo v e-mailové šabloně a našel ho až v obchodním checklistu.
+```
+
+Uzavření:
+
+```text
+První běžnou kontrolu uzavíráme stavem lokálně opravit kotvu. Do e-mailové šablony přidáváme odkaz na obchodní checklist. Samotné pravidlo neměníme, formulář zůstává bez povinného pole a nevzniká nová evidence rozpočtu.
+```
+
+Všimněte si velikosti opravy. Problém byl v dohledání, takže oprava je odkaz. Ne nová metodika, ne přepis formuláře, ne report rozpočtových dotazů. Dobrá provozní práce často vypadá skoro nudně, protože přesně odmítá zvětšit problém.
+
+### Privacy-first uzavření
+
+Uzavření kontroly musí výslovně říct, co se nestalo s daty. Nestačí napsat "bez změny". Bez změny čeho? Formuláře? CRM? Retence? Exportu? Pomocné tabulky? Když to nezapíšete, za pár týdnů se může objevit tichá náhražka: někdo si začne rozpočty kopírovat do poznámky, někdo přidá štítek "budget unknown", někdo si udělá pomocný export pro jistotu. A "pro jistotu" je v privacy-first provozu věta, která si zaslouží zvednuté obočí.
+
+Použijte proto krátkou datovou větu:
+
+```text
+Po uzavření kontroly nevzniká:
+```
+
+A doplňte konkrétní věci:
+
+```text
+Po uzavření kontroly nevzniká nové povinné pole, CRM atribut, lead scoring, export, screenshot zákaznické odpovědi ani pomocná tabulka.
+```
+
+Pokud během kontroly dočasná stopa vznikla, uzavřete ji stejně konkrétně:
+
+```text
+Dočasnou poznámku z kontroly mažeme po propsání anonymizovaného závěru do obchodního checklistu.
+```
+
+Tohle je malá věta, ale velký rozdíl. Tým si nechá poznatek, ne konkrétní zákaznický detail. Privacy-first hodnota Dreamindu se tím drží v každodenním provozu, ne jen v prezentaci.
+
+### Karta uzavření první kontroly po dlouhodobém klidu
+
+```text
+Pravidlo nebo archivní minimum:
+
+Dnešní přirozené použití:
+
+Výsledek první kontroly:
+- zůstává v klidu
+- lokálně opravit kotvu
+- lokálně zpřesnit větu
+- otevřít návratový signál
+
+Jednověté uzavření:
+
+Co se nemění:
+
+Co případně opravujeme lokálně:
+
+Co zůstává výslovně zavřené:
+
+Jaká data, pole, exporty, trackery nebo kopie nevznikají:
+
+Jakou dočasnou stopu mažeme nebo nepřenášíme:
+
+Kde je závěr uložený:
+
+Vlastník pracovního místa:
+
+Další kontrola vznikne pouze pokud:
+```
+
+Kartu používejte jen tehdy, když kontrola odhalila něco k opravě nebo úklidu. Pokud pravidlo hladce zůstává v klidu, stačí jednověté uzavření. Cílem není vyplnit formulář o tom, že formulář nebyl potřeba. Lidská kreativita v administrativě je fascinující, ale nemusíme ji krmit.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte jednou větou dnešní přirozené použití.
+2. Minuta 2: vyberte jeden ze čtyř uzavíracích stavů.
+3. Minuta 3: napište, co se nemění a co zůstává zavřené.
+4. Minuta 4: určete případnou lokální opravu kotvy nebo věty.
+5. Minuta 5: napište privacy-first větu o tom, jaká data nevznikají nebo co se maže.
+6. Minuta 6: uložte jednověté uzavření u pracovního místa a kontrolu zavřete.
+
+Pokud během workshopu někdo začne navrhovat nový dashboard, další export nebo změnu formuláře, vraťte se k uzavíracímu stavu. Pokud jste nevybrali `otevřít návratový signál`, nejste ve fázi nového návrhu. Jste ve fázi uzavření kontroly. To je menší práce a má tak zůstat.
+
+### Checklist uzavření první kontroly po dlouhodobém klidu
+
+- Máme konkrétní popis dnešního přirozeného použití?
+- Vybrali jsme jeden uzavírací stav?
+- Pokud pravidlo zůstává v klidu, nepřidali jsme další kontrolu ze zvyku?
+- Pokud opravujeme kotvu, měníme jen místo dohledání, ne celé pravidlo?
+- Pokud zpřesňujeme větu, zůstává původní široký rozsah zavřený?
+- Pokud otevíráme návratový signál, odpovídá dříve domluvené podmínce?
+- Je zapsané, co se nemění?
+- Je jasné, jaká data, pole, exporty, trackery nebo kopie nevznikají?
+- Smazali jsme nebo nepřenesli dočasné pracovní stopy bez další hodnoty?
+- Je uzavření uložené u pracovního místa, kde se pravidlo příště přirozeně použije?
+
+Uzavření první běžné kontroly po dlouhodobém klidu je důkaz, že tým umí pravidlo použít bez toho, aby ho znovu proměnil v projekt. Když je vše v pořádku, nechá pravidlo spát. Když něco drhne, opraví nejbližší kotvu nebo větu. A když se opravdu objeví návratový signál, otevře ho vědomě, s hranicí a bez automatického sběru dalších dat.
+
 ## Pracovní log
 
+- 2026-07-09: Doplněna navazující podkapitola o uzavření první běžné kontroly po dlouhodobém klidu: uzavírací stavy, SaaS příklady, privacy-first datová věta, karta, mini workshop a checklist.
 - 2026-07-09: Doplněna úvodní podkapitola o první běžné kontrole po dlouhodobém klidu: přirozené použití pravidla, tři kontrolní otázky, čtyři výsledky, SaaS příklad, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-07-08: Doplněna úvodní podkapitola o převodu stabilního archivního minima do dlouhodobého klidu: kanonická věta, pracovní místo, návratový signál, privacy-first úklid stop, karta, mini workshop a checklist.
 - 2026-07-08: Doplněna úvodní podkapitola o uzavření druhého běžného návratu po archivní revizi: čtyři uzavírací stavy, SaaS příklady, privacy-first úklid dočasných stop, karta, mini workshop a checklist.
