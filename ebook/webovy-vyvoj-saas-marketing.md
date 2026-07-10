@@ -318223,8 +318223,173 @@ Pokud se během šesti minut začnete vracet do původní historie, zastavte se.
 
 První přirozené setkání po návratu do tichého provozu má být nenápadné. Když pravidlo funguje, nechte ho projít kolem bez fanfár. Když potvrdí jednu hranu, zapište jednu větu. Když opravdu spustí návratový signál, otevřete malý návrat. Všechno ostatní je jen snaha přidat řízení tam, kde stačí dobré pracovní místo.
 
+## Uzavření prvního přirozeného setkání po návratu do tichého provozu
+
+První přirozené setkání má smysl uzavřít hned, dokud je jasné, co se opravdu stalo. Nečekejte na další schůzku, další podobnou situaci ani na chuť "udělat k tomu krátké shrnutí". Uzavření má být menší než samotné setkání: jedna věta, jeden malý zápis, nebo jasné otevření návratu. Pokud z něj vznikne nový dokument, pravděpodobně jste tichý provoz právě probudili klaksonem.
+
+Uzavírací otázka zní:
+
+```text
+Co se má po tomto setkání změnit v běžné práci, pokud vůbec něco?
+```
+
+Slovo `pokud vůbec něco` je důležité. Mnoho prvních setkání nepotřebuje změnu. Pravidlo bylo nalezené, použilo se a nevznikla nová datová stopa. To je dobrý výsledek. V takovém případě uzavření neznamená "ještě něco dopsat", ale vědomě nechat pravidlo běžet dál.
+
+### Tři uzavírací stavy
+
+Použijte jen tři stavy:
+
+- Zavřít bez zásahu: pravidlo fungovalo bez tření a není potřeba nová stopa.
+- Zapsat jednu větu: setkání potvrdilo užitečnou hranici, kterou stojí za to ponechat v kanonickém místě.
+- Otevřít malý návrat: setkání splnilo dříve pojmenovaný návratový signál.
+
+Stav `zavřít bez zásahu` je nejčistší. Tým udělá práci, pravidlo pomůže a nic dalšího nevznikne. Nezapisujte "ověřeno", pokud tím jen vytváříte nový důkaz pro pocit jistoty. Tiché pravidlo nepotřebuje album svých úspěchů.
+
+Stav `zapsat jednu větu` použijte ve chvíli, kdy setkání zpřesní hranici pravidla. Věta má být použitelná příště, ne pamětní. Dobrá věta říká, jak se má člověk rozhodnout, až se podobná situace objeví znovu.
+
+Příklad:
+
+```text
+I u partnerské poptávky zůstává rozpočet otázkou follow-upu; první formulář dál sbírá jen cíl, kontakt a kontext rozhodnutí.
+```
+
+Stav `otevřít malý návrat` má být vzácný. Neznamená "znovu promyslet pravidlo". Znamená "splnila se podmínka, kterou jsme si sami dali jako důvod návratu". Návrat proto začněte na nejbližším pracovním místě, kde se problém ukázal, a výslovně nechte původní širší rozsah zavřený.
+
+### Praktický SaaS příklad
+
+V SaaS produktu je uzavřené pravidlo:
+
+```text
+Do prvního importního e-mailu nevkládáme technický slovník sloupců; zákazníkovi nejdřív posíláme jen tři příklady povinných údajů v běžném jazyce.
+```
+
+Po návratu do tichého provozu přijde další zákazník s podobným exportem. Customer success použije e-mailovou šablonu bez úprav, zákazník odpoví s použitelným souborem a nevznikne nové doptávání.
+
+Uzavření:
+
+```text
+Zavřít bez zásahu:
+Šablona fungovala v běžné práci a není potřeba nový záznam.
+```
+
+O týden později přijde partnerský zákazník, který má stejný problém, ale jiný typ dat. Šablona pořád funguje, jen se ukáže užitečná hranice: příklady mají zůstat oborové, ne zákaznicky konkrétní.
+
+Uzavření:
+
+```text
+Zapsat jednu větu:
+Importní šablona může používat oborový příklad, ale nepřebírá konkrétní názvy polí ze zákaznického exportu.
+```
+
+Třetí varianta je tvrdší. Tři zákazníci za sebou pošlou soubor, kde jsou povinné údaje rozdělené mezi více listů a customer success bez pomoci nepozná, zda je import kompletní. To už splňuje návratový signál.
+
+Uzavření:
+
+```text
+Otevřít malý návrat:
+Otevíráme pouze rozhodovací pravidlo pro rozdělené listy v exportu. Neotevíráme nový importní formulář, slovník všech sloupců ani sběr zákaznických ukázek.
+```
+
+Všimněte si hranice. I když se problém opakuje, návrat není povolenka přestavět celý import. Je to povolenka opravit nejbližší rozhodovací místo. Ano, méně dramatické. Také méně drahé, méně invazivní a výrazně méně náchylné k tomu, že si tým vyrobí vlastní labyrint.
+
+### Marketingový příklad
+
+Marketing má pravidlo:
+
+```text
+U případových studií nevyžadujeme gated PDF; veřejná verze má být dostupná na stabilní URL a měření probíhá přes agregované návštěvy a přímé dotazy.
+```
+
+První přirozené setkání přijde při obchodním follow-upu. Obchod pošle odkaz na veřejnou case study, zákazník odpoví konkrétní otázkou a není potřeba sbírat e-mail výměnou za stažení.
+
+Uzavření bez zásahu je v pořádku. Pokud ale obchod opakovaně posílá stejnou doplňující větu, může vzniknout jedna hranice:
+
+```text
+Case study zůstává veřejná; obchodní follow-up může přidat jednu situační větu, ale nevytváříme gated variantu ani nový formulář.
+```
+
+Tohle je přesně typ věty, která chrání marketing před reflexem "udělejme z toho lead magnet". Někdy je nejlepší lead magnet dobrá stránka, která se dá normálně poslat. Revoluční myšlenka, skoro jako používat dveře místo trychtýře.
+
+### Privacy-first uzavření
+
+Uzavření prvního přirozeného setkání musí zkontrolovat, jestli se kolem pravidla nezačaly hromadit nové stopy. Největší riziko není velký tracker. Často je to malá pomocná kopie: screenshot zákaznického exportu, výřez z e-mailu, ručně vedený seznam příkladů, nový CRM štítek nebo interní poznámka s údaji, které už nemají rozhodovací hodnotu.
+
+Při uzavření si proto položte tři otázky:
+
+- Vznikla během setkání kopie dat, kterou už nepotřebujeme?
+- Vznikl nový způsob označování nebo sledování, který nemá jasný konec?
+- Stačí pro budoucí použití typový příklad místo reálných zákaznických dat?
+
+Pokud ano, uzavření má obsahovat úklid. Ne "někdy uklidit". Teď. Dokud všichni vědí, proč kopie vznikla a proč už není potřeba. Privacy-first provoz se nedělá jedním velkým auditem ročně; dělá se tím, že malé dočasné stopy nezískají trvalý nájem.
+
+Dobrá uzavírací věta může vypadat takto:
+
+```text
+Setkání uzavíráme jednou obecnou větou v importní šabloně; screenshot zákaznického exportu mažeme a nezakládáme nový seznam příkladů.
+```
+
+Tím tým chrání znalost i data najednou. Zůstane pravidlo, nezůstane zbytečný otisk zákaznické reality.
+
+### Karta uzavření prvního přirozeného setkání
+
+```text
+Pravidlo v tichém provozu:
+
+Kde se přirozeně potkalo s prací:
+
+Co se stalo v jedné větě:
+
+Uzavírací stav:
+- zavřít bez zásahu
+- zapsat jednu větu
+- otevřít malý návrat
+
+Pokud zavíráme bez zásahu, proč není potřeba další stopa:
+
+Pokud zapisujeme jednu větu, její přesné znění:
+
+Pokud otevíráme malý návrat, jaký návratový signál se splnil:
+
+Co zůstává výslovně zavřené:
+
+Jaké dočasné podklady, kopie, exporty, screenshoty, štítky nebo poznámky mažeme:
+
+Kde zůstává výsledný zápis, pokud nějaký vzniká:
+
+Kdo uzavření provedl:
+```
+
+Kartu použijte jen tehdy, když vzniká rozhodnutí. Pokud uzavíráte bez zásahu a nikde nevznikla stopa, není nutné vyplňovat kartu o nevyplnění karty. Byrokracie umí být velmi kreativní, když dostane propisku.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte pravidlo a dnešní běžnou situaci.
+2. Minuta 2: napište jednou větou, co se stalo.
+3. Minuta 3: vyberte uzavírací stav.
+4. Minuta 4: pokud vzniká stopa, napište její přesné znění.
+5. Minuta 5: pojmenujte, co zůstává zavřené.
+6. Minuta 6: smažte nebo označte k úklidu dočasné datové stopy.
+
+Když se workshop začne měnit v nové zkoumání původního pravidla, vraťte se k otázce: "Co se má po tomto setkání změnit v běžné práci?" Pokud odpověď není jasná, pravděpodobně se nemá měnit nic.
+
+### Checklist uzavření prvního přirozeného setkání
+
+- Je jasné, že šlo o přirozené setkání v běžné práci?
+- Umíme popsat, co se stalo, jednou větou?
+- Vybrali jsme jeden ze tří stavů: bez zásahu, jedna věta, malý návrat?
+- Pokud zavíráme bez zásahu, nevzniká zbytečná stopa jen pro pocit jistoty?
+- Pokud zapisujeme větu, pomůže příštímu rozhodnutí?
+- Pokud otevíráme návrat, je navázaný na dříve domluvený návratový signál?
+- Je jasně napsané, co zůstává zavřené?
+- Uklidili jsme dočasné kopie, screenshoty, exporty, štítky nebo pomocné poznámky?
+- Nevytváříme nový tracker, formulář, CRM pole ani report bez rozhodovací hodnoty?
+- Zůstává pravidlo po uzavření v tichém provozu, pokud se opravdu neotevřel malý návrat?
+
+Uzavření prvního přirozeného setkání má chránit dvě věci: praktickou použitelnost pravidla a klid systému. Když pravidlo funguje, nechte ho fungovat. Když potřebuje jednu větu, napište jednu větu. Když se opravdu splní návratový signál, otevřete malý návrat a držte ho na uzdě. Všechno ostatní je jen dobře oblečené rozšiřování práce.
+
 ## Pracovní log
 
+- 2026-07-10: Doplněna navazující podkapitola o uzavření prvního přirozeného setkání po návratu do tichého provozu: tři uzavírací stavy, SaaS a marketingové příklady, privacy-first úklid dočasných stop, karta, mini workshop a checklist.
 - 2026-07-10: Doplněna navazující podkapitola o prvním přirozeném setkání po návratu pravidla do tichého provozu: rozlišení běžného použití od umělé kontroly, tři výsledky, SaaS příklad, privacy-first hranice, karta, mini workshop a checklist.
 - 2026-07-10: Doplněna navazující podkapitola o uzavření druhého použití po lokálním přenosu pravidla: čtyři uzavírací stavy, SaaS a marketingové příklady, privacy-first úklid dočasných stop, karta, mini workshop a checklist.
 - 2026-07-10: Doplněna navazující podkapitola o druhém použití po lokálním přenosu pravidla: rozdíl proti prvnímu použití, čtyři výsledné stavy, SaaS a marketingové příklady, privacy-first datová věta, karta, mini workshop a checklist.
