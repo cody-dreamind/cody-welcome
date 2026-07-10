@@ -65,6 +65,8 @@ K takovému zápisu přidejte i jednu věc, která zůstává v běžném rytmu 
 
 Krátký zápis má také říct, kde ho člověk při běžné práci najde. Není nutné zakládat nový dokument; často stačí poznámka u stejného formuláře, šablony nebo karty pravidla. Důležité je, aby se uzavření dalo dohledat právě ve chvíli, kdy se stejný podnět vrátí.
 
+Pokud se k takovému zápisu nikdo nevrací, je to v pořádku. Jednovětá stopa nemá sama vytvářet nový kontrolní zvyk; její hodnota je v tom, že při dalším přirozeném setkání s tématem rychle ukáže, proč se práce naposledy neotevřela.
+
 ## Záznam neotevřeného kroku
 
 Neotevřený krok je zvláštní typ výsledku. Na první pohled vypadá jako nic: žádný commit, žádná nová obrazovka, žádný upravený formulář, žádný nový report. Ve skutečnosti ale může být velmi cenný, pokud zabrání práci, která by jen rozšířila rozsah, přidala data bez účelu nebo znovu otevřela starý problém bez dnešního důvodu.
@@ -319652,3 +319654,4 @@ Uzavření druhého použití po lokálním přenosu má být tečka za mimořá
 - 2026-07-07: Doplněna krátká poznámka k jednověté stopě po běžné kontrole, aby nevznikaly nové přílohy bez rozhodovací hodnoty.
 - 2026-07-07: Doplněna úvodní podkapitola o druhém přirozeném review tichého standardu: ověření bez čerstvé historie, lokální oprava, ukončení návratu do péče, privacy-first datová věta, karta, mini workshop a checklist.
 - 2026-07-09: Doplněna krátká poznámka k jednověté stopě, aby se z ní nestal nový mimořádný kontrolní rytmus bez návratového signálu.
+- 2026-07-10: Doplněna krátká poznámka, aby se jednovětá stopa nevracela do práce sama bez přirozeného setkání s tématem.
