@@ -317696,8 +317696,191 @@ Když během workshopu někdo navrhne širší zlepšení, zapište ho bokem jen
 
 Uzavření prvního použití po lokálním přenosu má tým zbavit nejistoty. Pravidlo buď funguje, dostane jednu blízkou hranu, nebo otevře malý návrat. Všechny tři výsledky jsou v pořádku, pokud jsou přesné. Špatný výsledek je jen mlha: trochu jsme to použili, trochu budeme sledovat, trochu to někdy zlepšíme. Mlha není strategie. Je to jen horší viditelnost s pracovním názvem.
 
+## Druhé použití po lokálním přenosu pravidla
+
+Druhé použití po lokálním přenosu pravidla není další slavnostní kontrola. Je to obyčejný provozní okamžik, který má ověřit jednu věc: jestli pravidlo funguje i bez čerstvé paměti prvního použití. První použití často nese stopu nedávné debaty. Lidé si ještě pamatují, proč se věta přesouvala, kdo ji dopisoval a jaký příklad u toho ležel na stole. Druhé použití už bývá poctivější. Ukáže, zda pravidlo opravdu bydlí ve správném pracovním místě.
+
+Základní otázka zní:
+
+```text
+Použil člověk přenesené pravidlo podruhé samostatně, bez staré historie a bez mimořádného vysvětlování?
+```
+
+Pokud ano, přenos se může vrátit do tichého provozu. Pokud ne, řešte nejbližší hranu. Neotvírejte celý původní problém jen proto, že druhé použití přineslo jiný detail než první. Pravidlo má být praktická opora, ne háček, na který pověsíte všechno, co se v procesu zrovna tváří trochu podobně.
+
+### Co se při druhém použití liší
+
+První použití ověřuje, že pravidlo po přenosu nezmizelo. Druhé použití ověřuje, že pravidlo přežije bez čerstvého kontextu.
+
+Sledujte čtyři rozdíly:
+
+- Časový odstup: člověk si už nemusí pamatovat původní debatu.
+- Jiný případ: situace není totožná s prvním příkladem.
+- Jiný člověk nebo role: pravidlo nepoužívá jen autor změny.
+- Bez mimořádné péče: nevzniká dodatečné vysvětlování, kontrolní tabulka ani ruční hlídání.
+
+Nemusí platit všechny čtyři body najednou. Stačí, že druhé použití přidá aspoň trochu reality navíc. Když stejný člověk použije pravidlo o den později ve skoro stejné situaci, pořád je to slabý signál. Když ho po týdnu použije někdo jiný u podobného, ale ne totožného případu, už se dozvíte víc.
+
+Praktický SaaS příklad:
+
+```text
+Přenesené pravidlo:
+Customer success může obsahově kompletní import posoudit interně i tehdy, když zákazník použije jiné názvy sloupců.
+
+První použití:
+Import s jinými názvy sloupců, ale se všemi povinnými údaji, prošel interním posouzením.
+
+Druhé použití:
+Jiný zákazník poslal export, kde byly povinné údaje rozdělené do dvou listů. Customer success našel pravidlo v onboardingové odpovědi, ověřil obsahovou kompletnost a neplánoval zákaznický call.
+
+Závěr:
+Přenos obstál i mimo první příklad. Pravidlo zůstává v onboardingové odpovědi a mimořádné sledování končí.
+```
+
+Slabší druhé použití:
+
+```text
+Druhé použití:
+Customer success pravidlo našel, ale nebylo jasné, zda se obsahová kompletnost posuzuje po listech, nebo za celý soubor.
+
+Lokální oprava:
+Doplňujeme jednu větu: "Pokud jsou povinné údaje rozdělené do více listů, posuzujeme kompletnost za celý soubor."
+
+Co neotevíráme:
+Neměníme importní proces, nezavádíme nový report typů souborů a nevyžadujeme od zákazníka nový formát exportu.
+```
+
+Tady se pravidlo nerozbilo. Jen narazilo na hranu, kterou první příklad neukázal. To je přesně typ opravy, který má zůstat lokální.
+
+### Čtyři výsledky druhého použití
+
+Druhé použití po lokálním přenosu může skončit čtyřmi stavy:
+
+- Přenos je stabilní: pravidlo se použilo samostatně v jiné běžné situaci.
+- Dopsat poslední lokální hranu: pravidlo platí, ale chybí jedna věta pro novou variantu.
+- Vrátit do prvního použití: druhé použití bylo ve skutečnosti jen zopakování prvního příkladu a nepřidalo nový důkaz.
+- Otevřít malý návrat: splnil se konkrétní návratový signál.
+
+Stav `vrátit do prvního použití` zní divně, ale je užitečný. Někdy tým označí za druhé použití situaci, která nic nového neověřila. Stejný člověk, stejný typ případu, stejná čerstvá paměť, stejná ruční pomoc. V takové chvíli si nelžete do kapsy. Napište, že přenos ještě nemá druhé samostatné použití, a nechte pravidlo v běžném provozu bez nové kontrolní kampaně. Až přijde opravdu jiný případ, použijete tento rámec znovu.
+
+Příklad pro marketingový formulář:
+
+```text
+Přenos je stabilní:
+Obchod podruhé použil pravidlo, že rozpočet není povinné pole v prvním kontaktu. Tentokrát šlo o poptávku z partnerského odkazu, ne z homepage, a kvalifikace proběhla bez nového pole.
+
+Dopsat poslední lokální hranu:
+Pravidlo bylo jasné pro homepage formulář, ale ne pro follow-up e-mail po partnerské poptávce. Doplňujeme jednu větu do follow-up šablony.
+
+Vrátit do prvního použití:
+Druhé použití řešil stejný obchodník se stejným typem poptávky hned druhý den. Nebereme to jako samostatné ověření přenosu.
+
+Otevřít malý návrat:
+Tři relevantní poptávky za sebou nešlo kvalifikovat bez doptání na rozpočet. To splňuje návratový signál a otevíráme pouze otázku rozpočtové formulace.
+```
+
+Důležité je, aby druhé použití nevyrobilo pátý stav: "radši začneme všechno měřit". To je oblíbená zkratka k tomu, jak z malé nejistoty udělat trvalou datovou povinnost.
+
+### Privacy-first kontrola druhého použití
+
+Druhé použití je přesně místo, kde se pozná, jestli privacy-first pravidlo opravdu drží. Po prvním použití si tým možná ještě dá pozor. Při druhém už se ukáže zvyk. Pokud se při každé nejistotě začne přidávat štítek, export, screenshot, pomocná tabulka nebo nové pole, pravidlo sice formálně existuje, ale provoz si kolem něj staví datovou skládku. Krásný výhled, špatné sousedství.
+
+Použijte krátkou datovou větu:
+
+```text
+Při druhém použití potvrzujeme, že dál nevzniká:
+```
+
+Příklady:
+
+```text
+Při druhém použití potvrzujeme, že dál nevzniká kopie zákaznického exportu mimo onboardingový tok, nový štítek pro nestandardní názvy sloupců ani měsíční report importních odchylek.
+```
+
+```text
+Při druhém použití potvrzujeme, že dál nevzniká povinné rozpočtové pole, behaviorální sledování formuláře ani export poptávek do dalšího marketingového nástroje.
+```
+
+Pokud dopisujete lokální hranu, datová věta má říct, že oprava nahrazuje sběr dat:
+
+```text
+Místo nové evidence typů souborů doplňujeme jednu obecnou větu do onboardingové odpovědi. Konkrétní zákaznické exporty nepřenášíme do šablony ani do pomocné tabulky.
+```
+
+Tohle je praktická podoba evropského privacy-first provozu: méně vedlejších kopií, méně zbytečných údajů, více jasných vět na správném místě.
+
+### Karta druhého použití po přenosu
+
+```text
+Přenesené pravidlo:
+
+Nové pracovní místo:
+
+První použití uzavřelo:
+
+Druhé běžné použití:
+
+Co je proti prvnímu použití jiné:
+
+Použil pravidlo stejný člověk, nebo někdo další?
+
+Potřeboval starou historii, autora pravidla nebo mimořádné vysvětlení?
+
+Výsledek:
+- přenos je stabilní
+- dopsat poslední lokální hranu
+- vrátit do prvního použití
+- otevřít malý návrat
+
+Pokud dopisujeme hranu, jakou jednu větu nebo kotvu měníme:
+
+Pokud otevíráme návrat, jaký návratový signál se splnil:
+
+Co zůstává výslovně zavřené:
+
+Při druhém použití potvrzujeme, že dál nevzniká:
+
+Kde zůstává kanonická stopa:
+```
+
+U stabilního výsledku stačí stručná věta:
+
+```text
+Druhé použití potvrdilo lokální přenos pravidla: jiný onboardingový případ šel posoudit bez staré historie, pravidlo zůstává v nové odpovědi a dál nevzniká report výjimek, CRM štítek ani kopie exportů mimo onboardingový tok.
+```
+
+Tato věta má být konec, ne začátek dalšího sledování. Pokud není návratový signál, pravidlo jde zpět do tichého provozu.
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: připomeňte jednou větou, co uzavřelo první použití.
+2. Minuta 2: popište druhou běžnou situaci.
+3. Minuta 3: napište, co je proti prvnímu použití jiné.
+4. Minuta 4: ověřte, zda pravidlo fungovalo bez staré historie.
+5. Minuta 5: vyberte jeden ze čtyř výsledků.
+6. Minuta 6: napište, co zůstává zavřené.
+7. Minuta 7: doplňte privacy-first datovou větu a kanonické místo.
+
+Pokud se workshop zasekne na debatě, zda druhé použití bylo "dost jiné", neprodlužujte ho. Zapište stav `vrátit do prvního použití` a počkejte na přirozeně jinou situaci. Není potřeba vyrábět testovací případ jen proto, aby měla karta hezčí konec.
+
+### Checklist druhého použití po přenosu
+
+- Víme, co přesně uzavřelo první použití?
+- Je druhé použití opravdu běžná pracovní situace?
+- Přidává druhé použití nový důkaz, nebo jen opakuje první příklad?
+- Použil pravidlo někdo bez čerstvé historie původní změny?
+- Bylo jasné, co pravidlo dál neotevírá?
+- Pokud chyběla hrana, opravujeme jen jednu větu, kotvu nebo příklad?
+- Pokud se otevírá návrat, splnil se konkrétní návratový signál?
+- Nevzniká nový štítek, export, report, tracker, povinné pole nebo kopie?
+- Je závěr uložený v kanonickém pracovním místě?
+- Končí druhé použití návratem do tichého provozu, pokud není skutečný důvod pokračovat?
+
+Druhé použití po lokálním přenosu je dobrý reality check. Neptá se, jestli je pravidlo dokonalé. Ptá se, jestli je dost jasné na to, aby pomohlo i ve chvíli, kdy už kolem něj nestojí tým s čerstvou pamětí. Pokud ano, nechte ho pracovat. Tichý provoz je v tomhle případě výhra, ne nuda.
+
 ## Pracovní log
 
+- 2026-07-10: Doplněna navazující podkapitola o druhém použití po lokálním přenosu pravidla: rozdíl proti prvnímu použití, čtyři výsledné stavy, SaaS a marketingové příklady, privacy-first datová věta, karta, mini workshop a checklist.
 - 2026-07-10: Doplněna navazující podkapitola o uzavření prvního použití po lokálním přenosu pravidla: tři uzavírací stavy, SaaS příklad, privacy-first úklid datové stopy, karta, mini workshop a checklist.
 - 2026-07-10: Doplněna navazující podkapitola o prvním použití po lokálním přenosu pravidla: ověření bez staré historie, tři výsledky, privacy-first datová věta, karta, mini workshop a checklist.
 - 2026-07-10: Doplněna navazující podkapitola o běžné údržbě pravidla v dlouhodobém klidu: údržbová otázka, tři výsledky, SaaS příklady, privacy-first datová věta, karta, mini workshop a checklist.
