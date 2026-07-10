@@ -451,14 +451,206 @@ Vyber jednu veřejnou stránku, která má obchodní význam: homepage, pricing,
 
 Potom vyber jednu opravu, která sníží riziko nebo zlepší zkušenost uživatele. Typicky: opravit špatný title, zmenšit hlavní obrázek, odstranit nepotřebný skript, doplnit label ve formuláři nebo sepsat postup obnovy. Malá technická hygiena je nudná jen do chvíle, kdy díky ní nemusíš hasit požár.
 
+## 4. Obsahový systém, blog a distribuce přes RSS
+
+Obsahový systém není jen administrace, kde někdo vyplní titulek a klikne na publikovat. Je to provozní část produktu. Rozhoduje o tom, jak rychle umíš vydat nový text, jak snadno ho opravíš, jestli má článek správná metadata, jestli se dostane do RSS a jestli za rok poznáš, co je pořád platné a co už by mělo zmizet do digitálního kompostu.
+
+U malého SaaS nebo odborné firmy má obsah často tři práce najednou:
+
+- přivádí lidi z vyhledávání a doporučení,
+- vysvětluje produkt, službu nebo způsob práce,
+- snižuje počet opakovaných dotazů v obchodě a supportu.
+
+Když blog bereš jen jako marketingový kanál, skončíš u nahodilého kalendáře témat. Když ho bereš jako součást produktu, začneš se ptát lépe: jaké rozhodnutí má čtenář po přečtení udělat, jaký problém mu článek vyřeší a jak zapadne do další cesty na webu.
+
+### CMS je workflow, ne logo nástroje
+
+Výběr CMS se často zvrhne v debatu o oblíbeném nástroji. To je lákavé, protože nástroje mají screenshoty a workflow má tabulky. Jenže pro provoz je důležitější, jestli systém odpoví na praktické otázky:
+
+- Kdo může obsah vytvořit, upravit, schválit a publikovat?
+- Kde je zdroj pravdy: Markdown v repozitáři, databáze, headless CMS nebo klasická administrace?
+- Jak se řeší návrhy, korektury a historie změn?
+- Jak vzniká URL a kdo hlídá, aby se nerozbila?
+- Jak článek dostane title, meta description, canonical URL, Open Graph data, strukturovaná data, RSS položku a záznam v sitemapě?
+- Jak poznáme, že článek zestárl a potřebuje aktualizaci?
+
+Pro malý tým bývá dobrý výchozí stav jednoduchý: obsah držet co nejblíž kódu nebo jasně spravovanému CMS, mít review před publikací a automaticky generovat metadata z povinných polí. Čím víc věcí se vyplňuje ručně pokaždé znovu, tím větší šance, že někdo zapomene na popis, špatně nastaví datum nebo vytvoří dvě podobné URL.
+
+Codyho komentář: Nejlepší CMS není ten, který má nejvíc možností. Nejlepší je ten, ve kterém tým pravidelně publikuje kvalitní obsah bez toho, aby každý článek připomínal malý deploy s modlitbou.
+
+### Navrhni obsahový model
+
+Obsahový model je seznam polí a pravidel, která každý typ obsahu potřebuje. U blogu nestačí jen `title` a `body`. Praktický model článku může vypadat takto:
+
+| Pole | Účel | Poznámka |
+| --- | --- | --- |
+| Titulek | Hlavní název stránky | Má být konkrétní, ne jen chytlavý |
+| Slug | Čitelná část URL | Neměnit po publikaci bez přesměrování |
+| Perex | Shrnutí pro seznamy, meta description a sdílení | Piš ho jako slib hodnoty, ne jako obecný úvod |
+| Datum publikace | Kdy text vyšel | Důležité pro archiv a feed |
+| Datum aktualizace | Kdy se změnil obsah | U právních, technických a nástrojových témat zásadní |
+| Autor | Kdo za text odpovídá | U firemního blogu klidně role nebo tým |
+| Kategorie | Hlavní tematická oblast | Jedna hlavní kategorie stačí |
+| Tagy | Jemnější štítky | Nepoužívej deset tagů jen pro pocit SEO magie |
+| Canonical URL | Preferovaná veřejná adresa | Nutné při duplicitách nebo republishingu |
+| Open Graph obrázek | Náhled při sdílení | Bez externích trackerů a social widgetů |
+| Další krok | Co má čtenář udělat | Interní odkaz, checklist, demo, kontakt, RSS odběr |
+| Stav údržby | Platné, aktualizovat, archivovat | Pomáhá proti obsahovému hřbitovu |
+
+Tento model nemusí být složitý. Důležité je, aby byl vynutitelný. Pokud článek bez perexu, data a slugu vůbec nejde publikovat, systém chrání kvalitu. Pokud se vše řeší „až si někdo vzpomene“, systém chrání hlavně budoucí zmatek. Ten je sice kreativní, ale obvykle drahý.
+
+### Piš pro zákaznickou cestu
+
+Blog není jen horní část marketingového trychtýře. U odborných služeb a SaaS produktů může jeden článek pomáhat v několika fázích najednou:
+
+- Před problémem: čtenář si uvědomí riziko nebo příležitost.
+- Při výběru: porovná přístupy, náklady a kompromisy.
+- Před nákupem: pochopí, co se bude dít dál.
+- Po nákupu: zvládne onboarding nebo konkrétní úkol.
+- Při retenci: objeví pokročilejší hodnotu produktu.
+
+K tématu si proto vždy napiš jednu větu:
+
+„Tento článek pomáhá člověku typu ___ rozhodnout se ___ bez toho, aby musel ___.“
+
+Příklady:
+
+- „Tento článek pomáhá zakladateli B2B SaaS rozhodnout se, jaké metriky měřit v prvních 90 dnech, bez toho, aby nasadil invazivní tracking.“
+- „Tento článek pomáhá marketingovému týmu vybrat témata pro blog, bez toho, aby vyráběl obecnou SEO vatu.“
+- „Tento článek pomáhá provozovateli webu zkontrolovat cookies, bez toho, aby z právní povinnosti dělal designovou tragikomedii.“
+
+Jakmile věta nejde doplnit, téma je buď moc široké, nebo ještě nemá jasný účel. To neznamená, že ho musíš zahodit. Znamená to, že potřebuješ zúžit segment, rozhodnutí nebo situaci.
+
+### RSS jako přímý distribuční kanál
+
+RSS a Atom jsou staré technologie v tom nejlepším smyslu: otevřené, jednoduché a nezávislé na algoritmu sociální platformy. RSS 2.0 má dlouhodobě stabilní specifikaci a Atom je standardizovaný formát popsaný v RFC 4287. Pro privacy-first web je feed velmi praktický, protože umožňuje odběr bez reklamního profilu, newsletterového formuláře a cizího skriptu.
+
+Minimum pro dobrý feed:
+
+- feed je dostupný na stabilní URL, například `/rss.xml` nebo `/feed.xml`,
+- stránka na něj odkazuje v HTML hlavičce přes `rel="alternate"`,
+- odkaz na RSS je viditelný i pro lidi, typicky v patičce nebo u blogu,
+- každá položka má stabilní identifikátor, název, URL a datum publikace,
+- položky neobsahují rozbité relativní odkazy na obrázky,
+- feed se aktualizuje při publikaci i opravě článku,
+- funguje validace XML a čtečky ho umí načíst.
+
+Rozhodni se také, jestli bude feed obsahovat celé články nebo jen perex. Celý článek je vstřícnější k čtenáři a lépe odpovídá duchu otevřeného webu. Perex může dávat smysl, pokud potřebuješ přivést lidi na interaktivní obsah, ukázky nebo aktualizované tabulky. Privacy-first pravidlo je jednoduché: nevybírej variantu podle toho, jak nejlépe vynutí tracking. Vyber ji podle toho, co nejlépe slouží čtenáři a údržbě obsahu.
+
+Praktický detail: Nepřidávej do RSS odkazů automaticky agresivní UTM parametry. Pokud chceš měřit zájem o feed, často stačí agregovaná návštěvnost feedu, počet kliků z přímých odkazů nebo kvalita následných kontaktů. Čtenář RSS není podezřelý objekt. Je to člověk, který ti právě dal nejhezčí možný signál: chce tvoje další texty bez algoritmického divadla.
+
+### Metadata a strukturovaná data bez magie
+
+Každý článek by měl mít základní metadata, která vznikají z obsahového modelu:
+
+- HTML `<title>` pro vyhledávání a záložky,
+- meta description jako krátké shrnutí,
+- canonical URL,
+- Open Graph a další metadata pro náhledy při sdílení bez vkládání sledovacích skriptů,
+- datum publikace a aktualizace viditelné na stránce,
+- strukturovaná data typu `Article` nebo `BlogPosting`, pokud dávají smysl.
+
+Google u článků popisuje, že strukturovaná data mohou pomoci vyhledávači lépe porozumět stránce a pracovat s titulkem, obrázky a datem ve výsledcích. Schema.org definuje typ `BlogPosting` jako specializaci článku pro blogové příspěvky. Neber strukturovaná data jako trik. Ber je jako strojově čitelný štítek na dobře napsaném obsahu.
+
+Příklad provozního pravidla:
+
+„Každý článek musí mít perex do 160 znaků, canonical URL, datum publikace, datum poslední věcné aktualizace a jeden doporučený další krok.“
+
+Tohle pravidlo je mnohem užitečnější než nekonečný checklist SEO drobností bez vlastníka.
+
+### Editorial pipeline: od nápadu po údržbu
+
+Obsah potřebuje pipeline stejně jako produktové úkoly. Nemusí být těžkopádná. Stačí fáze, které brání chaosu:
+
+1. Nápad: stručný popis, segment, problém a očekávaný další krok.
+2. Osnova: nadpisy, příklady, zdroje a rozhodnutí, která má článek podpořit.
+3. Draft: první verze textu bez ladění každé věty.
+4. Review: věcná kontrola, zdroje, tón, metadata a privacy dopad.
+5. Publikace: URL, RSS, sitemap, interní odkazy a kontrola náhledu.
+6. Distribuce: přímé odkazy, newsletter jen pro přihlášené, sociální sítě jako doplněk.
+7. Údržba: datum revize, opravy, přesměrování nebo archivace.
+
+U článků s právními, cenovými, bezpečnostními nebo nástrojovými tvrzeními přidej povinné pole „ověřené zdroje“. Když zdroj zestárne, článek se má vrátit do revize. Pokud to nejde udržet, napiš text více principově nebo jasně označ časový kontext.
+
+Privacy-first review by mělo obsahovat tři otázky:
+
+- Nepřidává článek zbytečný externí embed nebo tracker?
+- Nenutíme čtenáře k odevzdání e-mailu, když stačí veřejný obsah nebo RSS?
+- Neříkáme o soukromí víc, než technicky umíme dodržet?
+
+### Gated obsah používej opatrně
+
+Stažení e-booku za e-mail může být obchodně lákavé. Někdy dává smysl. Ale jako výchozí nastavení často ničí důvěru: člověk ještě neví, jestli máš hodnotu, a už po něm chceš kontakt. U privacy-first značky je lepší začít otevřeně.
+
+Rozumné alternativy:
+
+- veřejný článek s plnou hodnotou,
+- PDF jako dobrovolná verze bez povinného formuláře,
+- RSS odběr pro nové texty,
+- e-mailový odběr s jasnou frekvencí a snadným odhlášením,
+- přímé CTA na konzultaci až tam, kde je opravdu relevantní.
+
+Pokud obsah přece jen zamykáš, řekni férově, co člověk dostane, jak často mu budeš psát a jak data použiješ. Neslibuj „bez spamu“ a pak neposílej pět automatických follow-upů, které se tváří jako osobní starost. To není nurture. To je robotická vytrvalost v obleku.
+
+### Recyklace obsahu bez ztráty kontroly
+
+Dobrý obsah má dlouhý život, když ho umíš rozumně rozdělit:
+
+- z praktického článku vznikne checklist,
+- z checklistu vznikne interní šablona pro sales nebo onboarding,
+- z kapitoly vznikne krátký post s odkazem na vlastní web,
+- z častých dotazů vznikne aktualizace dokumentace,
+- z případové studie vznikne sekce na produktové stránce.
+
+Základní pravidlo: vlastní web je archiv a zdroj pravdy. Sociální sítě jsou distribuce. Newsletter je dobrovolný vztah. Prodejní materiály jsou deriváty. Když se něco změní, opravuješ nejdřív originál a pak odvozené materiály.
+
+Tím si chráníš SEO, důvěru i provozní pořádek. A hlavně se vyhneš situaci, kdy má firma pět verzí stejného slibu v pěti kanálech a nikdo neví, která je pravda. To je hezké jen pro fanoušky chaosu, kterých je naštěstí v produktových týmech pořád méně, než se občas zdá.
+
+### Checklist: Obsahový systém a RSS
+
+- [ ] Každý typ obsahu má povinná pole a jasný obsahový model.
+- [ ] Články mají stabilní slug a canonical URL.
+- [ ] Publikační workflow zahrnuje věcné review, metadata a zdroje.
+- [ ] Článek má jeden jasný další krok pro čtenáře.
+- [ ] RSS nebo Atom feed má stabilní URL a je odkazovaný z HTML hlavičky.
+- [ ] Feed obsahuje platné položky se stabilním identifikátorem, URL a datem.
+- [ ] Blog má viditelný odkaz na RSS bez nutnosti hledat v kódu stránky.
+- [ ] Metadata článku vznikají z jednoho zdroje pravdy, ne ručním kopírováním.
+- [ ] Strukturovaná data odpovídají skutečnému obsahu stránky.
+- [ ] Externí embedy jsou omezené a mají privacy-first alternativu.
+- [ ] Gated obsah není výchozí náhradou za veřejnou hodnotu.
+- [ ] Existuje plán aktualizace nebo archivace starších článků.
+- [ ] Sociální sítě slouží jako distribuce, ne jako jediný archiv.
+
+### Mini úkol
+
+Vyber jeden existující článek nebo plánované téma a vyplň tento pracovní list:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Pro koho přesně je článek? |  |
+| Jaké rozhodnutí čtenáři usnadní? |  |
+| Jaký je jeden férový další krok? |  |
+| Jaký slug bude mít URL? |  |
+| Jaký bude perex/meta description? |  |
+| Které zdroje je nutné ověřit? |  |
+| Má článek patřit do RSS celý, nebo jako perex? |  |
+| Kdy má proběhnout revize platnosti? |  |
+
+Potom udělej jednu konkrétní úpravu v systému: přidej chybějící pole do šablony článku, zviditelni RSS odkaz, doplň canonical URL, nastav datum aktualizace nebo vytvoř jednoduchý stav „aktualizovat“. Obsahový systém se nezlepší velkým prohlášením. Zlepší se tím, že další článek vyjde o kus čistěji než ten předchozí.
+
 ## Zdroje
 
 - European Commission: Data protection - pravidla ochrany osobních dat v EU a mimo EU: https://commission.europa.eu/law/law-topic/data-protection_en
 - European Commission: Legal framework of EU data protection - přehled právního rámce včetně GDPR: https://commission.europa.eu/law/law-topic/data-protection/legal-framework-eu-data-protection_en
 - European Data Protection Board: Guidelines 05/2020 on consent under Regulation 2016/679 - pokyny k platnému souhlasu podle GDPR: https://www.edpb.europa.eu/documents/guideline/guidelines-052020-on-consent-under-regulation-2016679_en
+- RSS Advisory Board / Berkman Klein Center: RSS 2.0 Specification - stabilní specifikace RSS 2.0: https://cyber.harvard.edu/rss/rss.html
+- IETF: RFC 4287 The Atom Syndication Format - standard Atom feedů: https://datatracker.ietf.org/doc/html/rfc4287
 - web.dev: Web Vitals - aktuální metriky LCP, INP a CLS včetně doporučených hranic: https://web.dev/articles/vitals
 - Google Search Central: Build and submit a sitemap - tvorba a odesílání sitemap: https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap
 - Google Search Central: Robots.txt Introduction and Guide - použití a limity robots.txt: https://developers.google.com/search/docs/crawling-indexing/robots/intro
+- Google Search Central: Article structured data - použití strukturovaných dat pro články a blogové příspěvky: https://developers.google.com/search/docs/appearance/structured-data/article
+- Schema.org: BlogPosting - typ strukturovaných dat pro blogový příspěvek: https://schema.org/BlogPosting
 - MDN Web Docs: Cache-Control header - pravidla pro HTTP cache: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Cache-Control
 - MDN Web Docs: ETag header - identifikace verze zdroje pro efektivnější cache: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/ETag
 - W3C: Web Content Accessibility Guidelines 2.2 - doporučení pro přístupný webový obsah: https://www.w3.org/TR/WCAG22/
@@ -466,6 +658,7 @@ Potom vyber jednu opravu, která sníží riziko nebo zlepší zkušenost uživa
 
 ## Pracovní log
 
+- 2026-07-10: Doplněna kapitola 4 o obsahovém systému, blogu, RSS/Atom distribuci, metadatech, editorial pipeline, gated obsahu, recyklaci obsahu, checklistu a mini úkolu; přidány ověřené zdroje k RSS, Atom a strukturovaným datům.
 - 2026-07-10: Doplněna kapitola 3 o technickém základu webu: doména, DNS, hosting, rychlost, cache, přístupnost, technické SEO, provozní dokumentace, checklist a mini úkol; přidány ověřené zdroje k výkonu, SEO, cache a WCAG.
 - 2026-07-10: Obnoven smysluplný obsah po placeholderu a doplněna kapitola 2 o webu jako produktu, včetně rámce pro stránky, webového backlogu, privacy-first měření, checklistu a mini úkolu.
 - 2026-07-10: Založena první verze e-booku: název, cíl, osnova a kapitola 1 o privacy-first základech včetně checklistu, mini úkolu a zdrojů.
