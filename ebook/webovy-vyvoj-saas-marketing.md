@@ -318067,8 +318067,165 @@ Když workshop skončí větou "pojďme to ještě chvíli sledovat", vraťte se
 
 Uzavření druhého použití po lokálním přenosu má být tečka za mimořádnou péčí. Pokud pravidlo obstálo, nechte ho pracovat. Pokud potřebuje jednu hranu, dopište ji a ukliďte po sobě. Pokud důkaz ještě není dost jiný, nelžete si, ale ani nevyrábějte nový režim. A pokud se opravdu splnil návratový signál, otevřete malý návrat s pevnou hranicí. Tohle je celý trik: pravidla nemají růst pokaždé, když se jich někdo dotkne.
 
+## První přirozené setkání po návratu do tichého provozu
+
+Když pravidlo po druhém použití zavřete do tichého provozu, práce tím nekončí dramaticky. Nekončí vůbec dramaticky. Pravidlo prostě začne žít ve svém pracovním místě a tým se k němu nemá vracet, dokud se s ním přirozeně nepotká. První takové setkání je důležité právě proto, že nemá vypadat jako kontrola. Nemá se svolávat, nemá mít vlastní tabulku a nemá spustit nové sledování. Má jen ukázat, jestli se pravidlo používá bez mimořádné pozornosti.
+
+Přirozené setkání nastane třeba ve chvíli, kdy obchod použije stejnou formulaci u další poptávky, customer success znovu řeší podobný import, marketing upravuje stránku, na které pravidlo leží, nebo nový člověk najde šablonu bez vysvětlování autora. V tu chvíli stačí jedna otázka:
+
+```text
+Použilo se pravidlo v běžné práci tak, jak bylo uzavřeno, bez nové mimořádné péče?
+```
+
+Pokud ano, nevzniká nový záznam plný detailů. Stačí krátká stopa v kanonickém místě nebo vůbec nic, pokud stopa nepřidá rozhodovací hodnotu. Tichý provoz znamená, že systém funguje bez toho, aby si pokaždé říkal o potlesk. Produktová práce není talentová soutěž pro šablony.
+
+### Co není přirozené setkání
+
+Za přirozené setkání nepovažujte situaci, kterou tým vyrobil jen proto, aby měl pocit jistoty. Umělý test, ruční kontrola po týdnu, nové připomenutí v kalendáři nebo dotaz "tak co, pořád to funguje?" často jen vrací mimořádnou péči zadními dveřmi.
+
+Přirozené setkání má tři znaky:
+
+- vzniklo v běžné práci, ne kvůli kontrole pravidla,
+- člověk musel podle pravidla opravdu jednat nebo se rozhodnout,
+- výsledek se dá popsat bez otevírání celé historie.
+
+Pokud některý znak chybí, nevadí. Jen tomu neříkejte ověření tichého provozu. Můžete si všimnout, že pravidlo existuje, ale nevyrábějte z toho závěr.
+
+Praktický rozdíl:
+
+```text
+Přirozené setkání:
+Při další partnerské poptávce obchod použil pravidlo, že rozpočet není povinné pole v prvním formuláři, a kvalifikoval poptávku přes cíl projektu.
+
+Nepřirozené setkání:
+Tým si po týdnu otevřel formulář a debatoval, jestli by rozpočet přece jen nebyl užitečný.
+```
+
+První případ ukazuje pravidlo v práci. Druhý případ ukazuje, že tým má ruce a umí kliknout na formulář. To je hezké, ale pro rozhodnutí skoro k ničemu.
+
+### Tři výsledky setkání
+
+První přirozené setkání po návratu do tichého provozu má mít jen tři výsledky:
+
+- Bez záznamu: pravidlo fungovalo hladce a nevznikl žádný nový poznatek.
+- Jednovětá stopa: pravidlo fungovalo, ale stojí za to zachytit, kde se použilo nebo jaká hranice se potvrdila.
+- Návratový signál: objevilo se něco, co splňuje dříve popsanou podmínku pro návrat.
+
+Stav `bez záznamu` je legitimní. Pokud šablona pomohla, nikdo nezaváhal, nevznikla nová data a pravidlo se drželo svého místa, nemusíte zapisovat další důkaz. Někdy je nejlepší dokumentace ta, která nevznikne, protože systém nepotřeboval další oporu.
+
+Stav `jednovětá stopa` použijte tehdy, když setkání potvrdí konkrétní hranici, která by se příště mohla plést. Například:
+
+```text
+Pravidlo rozpočtu se použilo i u partnerské poptávky: rozpočet zůstává obchodní otázkou ve follow-upu, ne povinným polem prvního formuláře.
+```
+
+To je dost. Žádný screenshot, žádný export poptávky, žádný nový štítek "partnerský rozpočet". Jedna věta drží hranici a zbytek práce může jít dál.
+
+Stav `návratový signál` použijte jen tehdy, když se opravdu stalo něco, co bylo dříve pojmenované jako důvod návratu. Ne když někdo znovu otevře oblíbený nápad. Ne když nová varianta vypadá zajímavě. Ne když má tým chuť "se na to podívat". Návratový signál musí být rozpoznatelný i bez nálady v místnosti.
+
+### Praktický SaaS příklad
+
+Customer success má pravidlo:
+
+```text
+Kompletnost importu posuzujeme podle povinných údajů, ne podle přesných názvů sloupců v zákaznickém exportu.
+```
+
+Po druhém použití bylo pravidlo zavřené do tichého provozu. O dva týdny později přijde nový import. Export má jiné názvy sloupců, ale obsahuje všechny povinné údaje. Customer success použije pravidlo, import pustí dál a nemusí žádat zákazníka o nový soubor.
+
+Možné výsledky:
+
+```text
+Bez záznamu:
+Pravidlo se použilo hladce, nikdo nezaváhal a nevznikla nová otázka.
+
+Jednovětá stopa:
+Pravidlo se použilo i u exportu z jiného CRM; pořád posuzujeme povinné údaje, ne přesné názvy sloupců.
+
+Návratový signál:
+Tři importy za sebou obsahovaly povinné údaje rozdělené tak, že customer success nedokázal bez pomoci rozhodnout, zda je soubor kompletní.
+```
+
+V prvních dvou stavech se neotevírá nový projekt. Ve třetím se neotevírá celý importní systém. Otevírá se jen malý návrat k rozhodovací větě: jak posuzovat rozdělené údaje bez kopírování zákaznických exportů do pomocné evidence.
+
+### Privacy-first hranice setkání
+
+Přirozené setkání po návratu do tichého provozu je lákavé místo pro sběr "příkladů". Tým si řekne, že by bylo dobré mít pár reálných ukázek pro budoucí školení. Někdy ano. Často ale vznikne složka plná exportů, screenshotů, e-mailů a poznámek, které už nikdo nepotřebuje.
+
+Použijte proto brzdu:
+
+```text
+Potřebujeme pro další rozhodnutí konkrétní data z tohoto setkání, nebo stačí obecná věta?
+```
+
+Ve většině případů stačí obecná věta. Pokud potřebujete příklad do šablony, anonymizujte ho a přepište do typového tvaru:
+
+```text
+Místo kopie zákaznického exportu ponecháváme typový příklad: "povinné údaje mohou mít jiné názvy sloupců, pokud je jejich význam jednoznačný".
+```
+
+To je praktická privacy-first disciplína. Nezakazuje učení. Jen brání tomu, aby se každé učení platilo trvalou kopií zákaznické reality.
+
+### Karta prvního přirozeného setkání
+
+```text
+Pravidlo v tichém provozu:
+
+Kanonické pracovní místo:
+
+Běžná situace, kde se pravidlo potkalo s prací:
+
+Použilo se pravidlo bez mimořádné péče?
+- ano
+- ne
+- částečně
+
+Výsledek:
+- bez záznamu
+- jednovětá stopa
+- návratový signál
+
+Pokud vzniká jednovětá stopa, její přesné znění:
+
+Pokud vzniká návratový signál, jaká dříve domluvená podmínka se splnila:
+
+Co dál výslovně neotevíráme:
+
+Jaká konkrétní data, kopie, exporty, screenshoty nebo štítky nevytváříme:
+
+Kde případná stopa zůstává:
+```
+
+Kartu nevyplňujte pokaždé. Použijte ji jen tehdy, když se při setkání objeví drobná nejistota, nová hranice nebo návratový signál. Hladké použití nepotřebuje formulář o tom, že nepotřebovalo formulář. To už by byl procesový humor, a ten je nebezpečně blízko poradě bez agendy.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: pojmenujte pravidlo v tichém provozu.
+2. Minuta 2: popište běžnou situaci, kde se objevilo.
+3. Minuta 3: rozhodněte, zda se použilo bez mimořádné péče.
+4. Minuta 4: vyberte výsledek: bez záznamu, jednovětá stopa, návratový signál.
+5. Minuta 5: napište, co dál výslovně neotevíráte.
+6. Minuta 6: zkontrolujte, že nevznikají zbytečné datové kopie.
+
+Pokud se během šesti minut začnete vracet do původní historie, zastavte se. Přirozené setkání má hodnotit dnešní použití pravidla, ne znovu soudit celý příběh jeho vzniku.
+
+### Checklist prvního přirozeného setkání
+
+- Vzniklo setkání v běžné práci, ne jako umělá kontrola?
+- Musel někdo podle pravidla opravdu jednat nebo rozhodnout?
+- Šlo pravidlo použít bez autora, staré historie a mimořádného vysvětlování?
+- Víme, zda výsledek nevyžaduje záznam, potřebuje jednu větu, nebo splňuje návratový signál?
+- Pokud vzniká stopa, je opravdu jednovětá a uložená v kanonickém místě?
+- Pokud vzniká návrat, opírá se o dříve popsanou podmínku?
+- Je jasné, co dál výslovně neotevíráme?
+- Nevzniká nový export, screenshot, štítek, report, tracker ani kopie zákaznických dat?
+- Nevracíme pravidlo do mimořádné péče jen proto, že se ho někdo dotkl?
+
+První přirozené setkání po návratu do tichého provozu má být nenápadné. Když pravidlo funguje, nechte ho projít kolem bez fanfár. Když potvrdí jednu hranu, zapište jednu větu. Když opravdu spustí návratový signál, otevřete malý návrat. Všechno ostatní je jen snaha přidat řízení tam, kde stačí dobré pracovní místo.
+
 ## Pracovní log
 
+- 2026-07-10: Doplněna navazující podkapitola o prvním přirozeném setkání po návratu pravidla do tichého provozu: rozlišení běžného použití od umělé kontroly, tři výsledky, SaaS příklad, privacy-first hranice, karta, mini workshop a checklist.
 - 2026-07-10: Doplněna navazující podkapitola o uzavření druhého použití po lokálním přenosu pravidla: čtyři uzavírací stavy, SaaS a marketingové příklady, privacy-first úklid dočasných stop, karta, mini workshop a checklist.
 - 2026-07-10: Doplněna navazující podkapitola o druhém použití po lokálním přenosu pravidla: rozdíl proti prvnímu použití, čtyři výsledné stavy, SaaS a marketingové příklady, privacy-first datová věta, karta, mini workshop a checklist.
 - 2026-07-10: Doplněna navazující podkapitola o uzavření prvního použití po lokálním přenosu pravidla: tři uzavírací stavy, SaaS příklad, privacy-first úklid datové stopy, karta, mini workshop a checklist.
