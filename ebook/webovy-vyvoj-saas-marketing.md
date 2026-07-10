@@ -835,8 +835,173 @@ Vyber jednu SaaS myšlenku, funkci nebo existující onboarding a vyplň pracovn
 
 Potom udělej jednu konkrétní změnu: zkrať registraci, přidej ukázková data, přepiš prázdný stav, odstraň povinný tutoriál nebo zavolej jednomu zákazníkovi a zeptej se na poslední reálnou situaci. SaaS se nevyjasní v interním brainstormingu. Vyjasní se v kontaktu s realitou, což je nepříjemné hlavně proto, že realita nemá ráda roadmapové iluze.
 
+## 6. Pricing, balíčky a jednoduché rozhodování pro zákazníka
+
+Pricing není jen tabulka s cenou. Je to produktové rozhraní pro rozhodnutí. Dobrá pricing stránka pomáhá zákazníkovi rychle pochopit, jestli produkt odpovídá jeho situaci, jak poroste cena s hodnotou a co se stane po registraci nebo objednávce.
+
+Špatná otázka zní: „Kolik si můžeme říct?“
+
+Lepší otázka zní: „Za jaký výsledek zákazník platí, podle čeho pozná správný plán a kde by se mohl cítit podvedený?“
+
+To poslední není moralizování. Je to obchodní hygiena. Nielsen Norman Group dlouhodobě upozorňuje, že B2B zákazníci cenu na webu potřebují a její absence je frustruje. Evropská komise u spotřebitelských pravidel zároveň zdůrazňuje jasné a transparentní zobrazování cen včetně povinných a nevyhnutelných nákladů. I když prodáváš B2B SaaS, praktický směr je stejný: méně mlhy, méně překvapení, méně schovaných háčků.
+
+### Cena má odrážet hodnotu, ne interní náklady
+
+Interní náklady jsou důležité pro marži, ale zákazník nekupuje tvůj server, framework ani počet hodin v backlogu. Kupuje výsledek: méně ruční práce, menší riziko, rychlejší rozhodnutí, lepší spolupráci nebo vyšší výnos.
+
+Při návrhu ceny si napiš tři vrstvy:
+
+| Vrstva | Otázka | Příklad |
+| --- | --- | --- |
+| Hodnota | Co zákazník získá? | Méně ručního plánování výjezdů |
+| Měřítko | S čím hodnota roste? | Počet techniků, zakázek nebo dispečerů |
+| Náklad | Co stojí provoz? | Výpočetní výkon, podpora, integrace, datové úložiště |
+
+Když cena stojí jen na nákladu, často skončíš příliš nízko a budeš dohánět marži objemem. Když stojí jen na hodnotě bez ohledu na náklad, můžeš vytvořit plán, který se krásně prodává a tiše prodělává. Pricing je nudně praktické místo, kde se musí potkat produkt, obchod, finance i provoz.
+
+### Vyber měřítko, kterému zákazník rozumí
+
+Měřítko ceny má být propojené s hodnotou a snadno předvídatelné. Stripe v dokumentaci k opakovanému účtování rozlišuje například flat rate, per-seat, tiered, package, volume a usage-based modely. Každý má jiné chování a jiné riziko pro zákazníka.
+
+Praktické varianty:
+
+- Pevná cena za plán: jednoduchá, vhodná pro malé produkty a jasné balíčky.
+- Cena za uživatele nebo sedadlo: srozumitelná u týmových nástrojů, ale může trestat rozšíření produktu v organizaci.
+- Cena podle objemu: dává smysl, když náklad a hodnota rostou s počtem položek, kontaktů, dokumentů nebo transakcí.
+- Usage-based cena: férová u infrastruktury a API, ale vyžaduje dobré limity, upozornění a předvídatelnost.
+- Hybrid: základní plán plus zahrnutý objem a doplatek za překročení.
+
+Nejlepší měřítko není to, které maximalizuje účetní kreativitu. Je to to, které zákazník umí vysvětlit kolegovi bez otevření kalkulačky, tabulky a malé modlitby.
+
+Privacy-first poznámka: Měřítko ceny by nemělo motivovat ke zbytečnému sběru osobních dat. Pokud účtuješ podle kontaktů, uživatelů nebo profilů, ptej se, jestli opravdu potřebuješ osobní identifikaci každé položky. Někdy jde hodnotu měřit agregovaněji: počet projektů, počet týmů, objem zpracování, počet publikovaných dokumentů nebo anonymizovaný limit událostí.
+
+### Balíčky mají mapovat segmenty, ne manipulovat
+
+Tři plány na pricing stránce nejsou magické zaklínadlo. Fungují jen tehdy, když odpovídají skutečným segmentům a rozhodovacím situacím.
+
+Dobré balíčky vznikají z rozdílů v potřebách:
+
+- Solo: jeden člověk řeší vlastní workflow a chce rychle začít.
+- Team: více lidí potřebuje spolupráci, role a sdílení.
+- Business: firma potřebuje audit, správu přístupů, integrace a podporu.
+- Enterprise: zákazník má specifické smlouvy, bezpečnostní požadavky, SSO, SLA nebo nákupní proces.
+
+Slabé balíčky vznikají z umělého přiškrcení hodnoty:
+
+- základní plán bez nutné funkce, takže skoro nejde použít,
+- vyšší plán jen kvůli exportu vlastních dat,
+- schované limity, které zákazník zjistí až po migraci,
+- „kontaktujte nás“ u každé věci, která by mohla mít alespoň orientační rámec.
+
+Jestli zákazník nepozná, který plán je pro něj, problém není v jeho pozornosti. Problém je v balení hodnoty.
+
+### Pricing stránka má snižovat nejistotu
+
+Pricing stránka má odpovědět na otázky, které blokují rozhodnutí:
+
+- Co přesně je v ceně?
+- Co není v ceně?
+- Co se stane při překročení limitu?
+- Je cena bez DPH, nebo s DPH?
+- Jak funguje fakturace, obnova a zrušení?
+- Jde změnit plán nahoru i dolů?
+- Co se stane s daty po zrušení?
+- Jaké role, integrace a bezpečnostní funkce jsou v jednotlivých plánech?
+- Kdy dává smysl domluvit individuální plán?
+
+Transparentnost neznamená, že musíš veřejně vypsat každou enterprise smlouvu. Znamená, že člověk nemá odcházet s pocitem, že cenu zjistí až po obchodním výslechu. U složitějších B2B produktů může stačit orientační rámec: od jaké částky plán začíná, pro koho je, co typicky obsahuje a proč se finální cena počítá individuálně.
+
+Praktický blok na pricing stránce:
+
+| Otázka | Doporučená odpověď |
+| --- | --- |
+| Komu plán sedí? | Jedna věta podle segmentu |
+| Hlavní hodnota | 3 až 5 konkrétních výsledků |
+| Limity | Jasné množství, ne poznámka pod čarou |
+| Překročení | Co se stane a kolik to stojí |
+| Data | Kde jsou data, export, smazání |
+| Zrušení | Jak zrušit a co se stane potom |
+| Support | Kanál, reakční doba nebo realistické očekávání |
+
+### Trial a freemium nejsou náhrada za positioning
+
+Trial může pomoct, když uživatel rychle zažije hodnotu. Freemium může fungovat, když má produkt přirozenou expanzi, nízký provozní náklad na bezplatné účty a jasnou cestu k placené hodnotě. Ani jedno ale neopraví rozmazaný segment, nejasný onboarding nebo pricing, kterému nikdo nerozumí.
+
+Před zavedením trialu si odpověz:
+
+- Dostane se uživatel k první hodnotě během trialu bez ruční pomoci?
+- Je jasné, co se stane po skončení trialu?
+- Posíláme upozornění férově a včas?
+- Nevyžadujeme platební kartu dřív, než to odpovídá hodnotě a očekávání?
+- Umíme rozlišit člověka, který potřebuje pomoc, od člověka, který produkt jen zkouší ze zvědavosti?
+
+U freemia navíc hlídej provozní realitu:
+
+- Kolik stojí aktivní bezplatný účet?
+- Jaká akce přirozeně vede k placenému plánu?
+- Neblokuje bezplatný plán podporu pro platící zákazníky?
+- Je export dat dostupný i člověku, který neplatí?
+
+Codyho komentář: Freemium je skvělé, když šíří produkt. Je příšerné, když šíří jen support tickety. Zdarma není strategie. Je to distribuční mechanismus s účtem za provoz.
+
+### Neprodávej soukromí jako drahý doplněk
+
+Privacy-first produkt nemá základní ochranu dat zamčenou v enterprise plánu. Bezpečný provoz, rozumná retence, export, smazání dat a jasné vysvětlení zpracování patří do základní důvěryhodnosti produktu.
+
+Co může být legitimně ve vyšších plánech:
+
+- pokročilé role a oprávnění,
+- SSO a enterprise identity management,
+- audit logy pro větší organizace,
+- individuální DPA nebo bezpečnostní dotazníky,
+- dedikovaný region nebo speciální retenční pravidla,
+- vyšší SLA a priorita podpory.
+
+Co by nemělo být luxusní zboží:
+
+- možnost odejít s vlastními daty,
+- smazání účtu a dat podle pravidel,
+- základní šifrování přenosu,
+- férové informace o tom, kde data běží,
+- odmítnutí marketingového trackingu.
+
+Privacy-first pricing má říkat: „Za vyšší cenu dostaneš větší provozní schopnosti.“ Nemá říkat: „Za vyšší cenu tě budeme konečně respektovat.“
+
+### Checklist: Pricing a balíčky
+
+- [ ] Každý plán odpovídá konkrétnímu segmentu nebo situaci.
+- [ ] Zákazník pozná správný plán bez obchodního hovoru, pokud nejde o opravdu individuální prodej.
+- [ ] Cena používá měřítko, které souvisí s hodnotou a zákazník mu rozumí.
+- [ ] Limity, doplatky a překročení jsou vysvětlené před nákupem.
+- [ ] Je jasné, jestli ceny obsahují DPH a jak funguje fakturace.
+- [ ] Trial nebo freemium má jasnou cestu k první hodnotě.
+- [ ] Zrušení, export a smazání dat jsou popsané srozumitelně.
+- [ ] Základní privacy a bezpečnost nejsou schované jako drahý doplněk.
+- [ ] Pricing stránka odpovídá skutečnému produktu a prodejnímu procesu.
+- [ ] Tým jednou měsíčně projde otázky zákazníků k ceně a upraví text nebo balíčky.
+
+### Mini úkol
+
+Vezmi současnou pricing stránku, nabídku nebo interní ceník a vyplň tabulku:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Pro koho je nejlevnější placený plán? |  |
+| Jaký výsledek zákazník kupuje? |  |
+| Podle čeho cena roste? |  |
+| Který limit může zákazníka překvapit? |  |
+| Co se stane při překročení limitu? |  |
+| Jak zákazník zruší službu a exportuje data? |  |
+| Která otázka k ceně se opakuje v sales nebo supportu? |  |
+| Co můžeme na pricing stránce vysvětlit bez dalšího hovoru? |  |
+
+Potom udělej jednu konkrétní úpravu: přidej vysvětlení limitu, doplň informaci o DPH, popiš zrušení a export dat, přejmenuj plány podle segmentů nebo přidej orientační cenu tam, kde je dnes jen mlhavé „kontaktujte nás“. Pricing není hotový, když je hezký. Je hotový, když zrychluje správné rozhodnutí a nevyrábí nedůvěru.
+
 ## Zdroje
 
+- Nielsen Norman Group: Pricing information gives B2B sites a competitive advantage - proč B2B zákazníci potřebují vidět cenu na webu: https://www.nngroup.com/articles/show-price/
+- European Commission: Sweeps - pravidla a kontroly transparentního zobrazování cen v EU spotřebitelském prostředí: https://commission.europa.eu/topics/consumers/consumer-rights-and-complaints/enforcement-consumer-protection/sweeps_en
+- Stripe Documentation: Recurring pricing models - přehled flat rate, per-seat, tiered, package, volume a usage-based modelů pro předplatné: https://docs.stripe.com/products-prices/pricing-models
 - European Commission: Data protection - pravidla ochrany osobních dat v EU a mimo EU: https://commission.europa.eu/law/law-topic/data-protection_en
 - European Commission: Legal framework of EU data protection - přehled právního rámce včetně GDPR: https://commission.europa.eu/law/law-topic/data-protection/legal-framework-eu-data-protection_en
 - European Data Protection Board: Guidelines 05/2020 on consent under Regulation 2016/679 - pokyny k platnému souhlasu podle GDPR: https://www.edpb.europa.eu/documents/guideline/guidelines-052020-on-consent-under-regulation-2016679_en
@@ -858,6 +1023,7 @@ Potom udělej jednu konkrétní změnu: zkrať registraci, přidej ukázková da
 
 ## Pracovní log
 
+- 2026-07-10: Doplněna kapitola 6 o pricingu a balíčcích: hodnotové měřítko ceny, modely účtování, transparentní pricing stránka, trial/freemium, privacy-first pravidla pro data, checklist a mini úkol; přidány ověřené zdroje k B2B cenám, transparentnosti cen a modelům předplatného.
 - 2026-07-10: Doplněna kapitola 5 o SaaS produktu: problém, segment, rozhovory s uživateli, první hodnota, onboarding, aktivace, prioritizace, checklist a mini úkol; přidány ověřené zdroje k user needs, rozhovorům a onboardingu.
 - 2026-07-10: Doplněna kapitola 4 o obsahovém systému, blogu, RSS/Atom distribuci, metadatech, editorial pipeline, gated obsahu, recyklaci obsahu, checklistu a mini úkolu; přidány ověřené zdroje k RSS, Atom a strukturovaným datům.
 - 2026-07-10: Doplněna kapitola 3 o technickém základu webu: doména, DNS, hosting, rychlost, cache, přístupnost, technické SEO, provozní dokumentace, checklist a mini úkol; přidány ověřené zdroje k výkonu, SEO, cache a WCAG.
