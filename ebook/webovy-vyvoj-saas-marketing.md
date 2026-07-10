@@ -317878,8 +317878,196 @@ Pokud se workshop zasekne na debatě, zda druhé použití bylo "dost jiné", ne
 
 Druhé použití po lokálním přenosu je dobrý reality check. Neptá se, jestli je pravidlo dokonalé. Ptá se, jestli je dost jasné na to, aby pomohlo i ve chvíli, kdy už kolem něj nestojí tým s čerstvou pamětí. Pokud ano, nechte ho pracovat. Tichý provoz je v tomhle případě výhra, ne nuda.
 
+## Uzavření druhého použití po lokálním přenosu pravidla
+
+Uzavření druhého použití po lokálním přenosu pravidla má zabránit dvěma opačným chybám. První chyba je předčasně prohlásit pravidlo za univerzální standard jen proto, že dvakrát pomohlo. Druhá chyba je držet kolem něj zvláštní péči, i když už běžná práce ukázala, že ji nepotřebuje. Ani jedno není dobrý provoz. Pravidlo má skončit ve správném režimu: stabilní, lokálně doplněné, vrácené k dalšímu běžnému použití, nebo otevřené jen v přesně vymezeném návratu.
+
+Základní uzavírací otázka zní:
+
+```text
+Co se po druhém použití mění v běžném pracovním místě a co se naopak výslovně dál neotevírá?
+```
+
+Pokud na otázku neumíte odpovědět jednou větou, druhé použití ještě není uzavřené. Možná chybí jasný výsledek, možná se do něj přimíchal nový problém, možná se tým bojí napsat, že teď opravdu stačí. To poslední je častější, než by bylo zdrávo. Některé týmy by nejraději každé malé pravidlo nechaly "ještě chvíli sledovat", protože sledování zní odpovědně. Ve skutečnosti je to často jen pracovní limbo s lepším PR.
+
+### Čtyři uzavírací stavy
+
+Po druhém použití vyberte jeden ze čtyř stavů:
+
+- Přenos zavřít do tichého provozu: pravidlo fungovalo samostatně i v jiné běžné situaci.
+- Zavřít s jednou lokální úpravou: pravidlo fungovalo, ale potřebovalo doplnit jednu blízkou hranu.
+- Nechat čekat na skutečné druhé použití: druhý případ nepřidal nový důkaz a byl jen slabým opakováním prvního.
+- Otevřít malý návrat: splnil se dříve domluvený návratový signál.
+
+Každý stav musí mít jinou akci. Stabilní přenos nepotřebuje další kontrolní tabulku. Lokální úprava nepotřebuje nový projekt. Slabé druhé použití nepotřebuje simulované testování. Malý návrat nepotřebuje otevřít celou původní historii.
+
+Uzavírací věty mohou vypadat takto:
+
+```text
+Přenos zavíráme do tichého provozu, protože pravidlo podruhé pomohlo v jiné běžné situaci bez staré historie a bez mimořádného vysvětlování.
+```
+
+```text
+Přenos zavíráme s jednou lokální úpravou: do onboardingové odpovědi doplňujeme větu o posuzování kompletnosti za celý soubor, ale neměníme importní proces ani neotevíráme nový report výjimek.
+```
+
+```text
+Případ zatím nebereme jako druhé samostatné použití, protože šlo o stejný typ situace řešený stejným člověkem s čerstvou pamětí. Pravidlo necháváme v běžném místě a neplánujeme zvláštní sledování.
+```
+
+```text
+Otevíráme malý návrat, protože se splnil návratový signál: tři relevantní poptávky za sebou nešly kvalifikovat bez doptání na rozpočet. Otevíráme pouze formulaci rozpočtové otázky, ne celý poptávkový formulář.
+```
+
+Všimněte si poslední věty u každého příkladu. Uzavření vždy chrání rozsah. Když ji vynecháte, tým si snadno domyslí, že se "možná ještě podíváme" na sousední věci. A sousední věci jsou přesně místo, kde se z malého pravidla stane nečekaně dlouhá expedice.
+
+### Praktický SaaS příklad
+
+Představte si SaaS, který pomáhá zákazníkům importovat obchodní data. Tým dříve přenesl pravidlo z interní poznámky do onboardingové odpovědi:
+
+```text
+Pokud import obsahuje všechna povinná pole, customer success může posoudit kompletnost interně i tehdy, když se názvy sloupců liší od doporučené šablony.
+```
+
+První použití ukázalo, že pravidlo je najitelné a funguje pro jednoduchý export. Druhé použití přineslo složitější případ: povinné údaje byly rozdělené do dvou listů. Customer success pravidlo našel, ale na chvíli váhal, jestli kompletnost posuzovat po listech, nebo za celý soubor.
+
+Dobré uzavření nevypadá takto:
+
+```text
+Budeme sledovat nestandardní importy a uděláme si přehled typů souborů.
+```
+
+To je moc široké. Z jedné chybějící věty vzniká evidence, která začne sbírat zákaznické provozní detaily. Lepší uzavření:
+
+```text
+Druhé použití potvrzuje přenos pravidla, ale doplňujeme jednu lokální hranu: kompletnost posuzujeme za celý soubor, i když jsou povinné údaje ve více listech. Nezavádíme evidenci typů souborů, nekopírujeme zákaznické exporty mimo onboardingový tok a neotevíráme změnu importního procesu.
+```
+
+Takový závěr je nudně přesný. Což je u provozního pravidla pochvala, ne urážka. Člověk ví, kam sáhnout, co se změnilo a co se nemá rozjet bokem.
+
+Marketingový příklad:
+
+```text
+Pravidlo:
+Rozpočet není povinné pole v prvním poptávkovém formuláři.
+
+Druhé použití:
+Poptávka přišla přes partnerský odkaz. Obchod ji dokázal kvalifikovat přes cíl projektu a rozhodovací proces, bez rozpočtového pole.
+
+Uzavření:
+Pravidlo zavíráme do tichého provozu i pro partnerské poptávky. Rozpočet zůstává otázkou v obchodním rozhovoru, ne povinným polem ve formuláři. Nevzniká nový CRM štítek, heatmapa formuláře ani export poptávek do dalšího nástroje.
+```
+
+Tady je důležité nepřidat měření jen proto, že partnerský kanál vypadá jako nový kontext. Pokud kvalifikace funguje a návratový signál se nesplnil, není co otevírat.
+
+### Privacy-first uzavření
+
+Uzavření druhého použití je vhodný moment pro malý datový úklid. Ne velký audit. Jen kontrolu, zda kolem přenosu nezůstaly pomocné stopy, které vznikly během ověřování.
+
+Zeptejte se:
+
+```text
+Co vzniklo jen proto, abychom ověřili přenos, a může teď zmizet?
+```
+
+Typické položky:
+
+- dočasná poznámka v issue nebo kartě,
+- pracovní kopie zákaznického příkladu,
+- screenshot formuláře,
+- export použitý jen pro vysvětlení,
+- pomocný štítek,
+- kontrolní tabulka,
+- připomenutí v kalendáři nebo chatu.
+
+Ne všechno musíte smazat. Některé věci patří do kanonického místa jako obecné pravidlo nebo anonymizovaný příklad. Ale konkrétní provozní a zákaznické detaily nemají zůstávat jen proto, že "se možná budou hodit". Tato věta je mimochodem jeden z nejdražších skladovacích programů v dějinách malých firem.
+
+Privacy-first uzavírací věta:
+
+```text
+Po uzavření druhého použití ponecháváme pouze obecnou větu v kanonickém pracovním místě; mažeme dočasnou kontrolní poznámku a nepřenášíme konkrétní zákaznické exporty, screenshoty ani pomocné štítky do trvalé týmové paměti.
+```
+
+Pokud otevíráte malý návrat, privacy-first věta má být ještě přísnější:
+
+```text
+Pro malý návrat použijeme jen agregovaný popis tří případů a nebudeme zakládat novou průběžnou evidenci, dokud nebude jasné, jaké rozhodnutí má podpořit a kdy skončí.
+```
+
+Tím držíte evropský provoz v praxi: méně dat, jasnější účel, kratší životnost pomocných stop.
+
+### Karta uzavření druhého použití po přenosu
+
+```text
+Přenesené pravidlo:
+
+Kanonické pracovní místo:
+
+Co uzavřelo první použití:
+
+Druhé použití:
+
+Co druhé použití opravdu ověřilo:
+
+Uzavírací stav:
+- zavřít do tichého provozu
+- zavřít s jednou lokální úpravou
+- čekat na skutečné druhé použití
+- otevřít malý návrat
+
+Jedna uzavírací věta:
+
+Pokud doplňujeme lokální úpravu, jaká přesná věta, kotva nebo příklad se mění:
+
+Pokud čekáme na skutečné druhé použití, jak poznáme dost odlišnou situaci:
+
+Pokud otevíráme malý návrat, jaký návratový signál se splnil:
+
+Co zůstává výslovně zavřené:
+
+Jaké dočasné stopy po ověřování mažeme nebo zobecňujeme:
+
+Jaká data dál nevznikají:
+
+Kde je závěr uložený:
+
+Kdo odpovídá za případnou lokální úpravu:
+```
+
+U stabilního přenosu stačí vyplnit kartu velmi stručně. Pokud potřebujete půl stránky vysvětlování, pravděpodobně nejde o stabilní přenos, ale o další malý návrat. To není průšvih. Jen tomu dejte správné jméno.
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: přečtěte závěr prvního použití.
+2. Minuta 2: popište druhé použití jednou pracovní větou.
+3. Minuta 3: určete, co druhé použití opravdu ověřilo.
+4. Minuta 4: vyberte jeden ze čtyř uzavíracích stavů.
+5. Minuta 5: napište jednu uzavírací větu včetně toho, co zůstává zavřené.
+6. Minuta 6: zapište privacy-first úklid dočasných stop.
+7. Minuta 7: určete kanonické místo závěru a vlastníka případné lokální úpravy.
+
+Když workshop skončí větou "pojďme to ještě chvíli sledovat", vraťte se na minutu 4. Sledování není uzavírací stav. Může být součástí malého návratu, ale jen s účelem, koncem a jasným rozhodnutím, které má podpořit.
+
+### Checklist uzavření druhého použití po přenosu
+
+- Víme, co první použití skutečně uzavřelo?
+- Popsali jsme druhé použití bez staré historie a bez dojmové omáčky?
+- Vybrali jsme jeden ze čtyř uzavíracích stavů?
+- Je uzavírací věta dost konkrétní, aby podle ní mohl jednat někdo jiný?
+- Pokud doplňujeme lokální hranu, měníme jen jednu větu, kotvu nebo příklad?
+- Pokud čekáme na skutečné druhé použití, nevyrábíme umělý test ani novou evidenci?
+- Pokud otevíráme malý návrat, je rozsah omezený na splněný návratový signál?
+- Je jasné, co zůstává výslovně zavřené?
+- Uklidili jsme dočasné poznámky, screenshoty, exporty, štítky nebo kontrolní tabulky?
+- Nevzniká nový tracker, report, pole, CRM štítek nebo trvalá kopie bez rozhodovací hodnoty?
+- Je závěr uložený v kanonickém pracovním místě?
+- Ví tým, zda pravidlo odteď běží v tichém provozu, čeká na opravdové druhé použití, nebo má malý návrat?
+
+Uzavření druhého použití po lokálním přenosu má být tečka za mimořádnou péčí. Pokud pravidlo obstálo, nechte ho pracovat. Pokud potřebuje jednu hranu, dopište ji a ukliďte po sobě. Pokud důkaz ještě není dost jiný, nelžete si, ale ani nevyrábějte nový režim. A pokud se opravdu splnil návratový signál, otevřete malý návrat s pevnou hranicí. Tohle je celý trik: pravidla nemají růst pokaždé, když se jich někdo dotkne.
+
 ## Pracovní log
 
+- 2026-07-10: Doplněna navazující podkapitola o uzavření druhého použití po lokálním přenosu pravidla: čtyři uzavírací stavy, SaaS a marketingové příklady, privacy-first úklid dočasných stop, karta, mini workshop a checklist.
 - 2026-07-10: Doplněna navazující podkapitola o druhém použití po lokálním přenosu pravidla: rozdíl proti prvnímu použití, čtyři výsledné stavy, SaaS a marketingové příklady, privacy-first datová věta, karta, mini workshop a checklist.
 - 2026-07-10: Doplněna navazující podkapitola o uzavření prvního použití po lokálním přenosu pravidla: tři uzavírací stavy, SaaS příklad, privacy-first úklid datové stopy, karta, mini workshop a checklist.
 - 2026-07-10: Doplněna navazující podkapitola o prvním použití po lokálním přenosu pravidla: ověření bez staré historie, tři výsledky, privacy-first datová věta, karta, mini workshop a checklist.
