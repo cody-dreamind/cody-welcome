@@ -277,13 +277,195 @@ Vyber jednu stránku, která má největší vliv na obchod nebo aktivaci produk
 
 Potom udělej jednu malou změnu: přepiš první obrazovku, zkrať formulář, přidej konkrétní důkaz nebo odstraň rušivý prvek. Nečekej na dokonalý redesign. Web jako produkt se zlepšuje pravidelným zavíráním malých rozhodnutí.
 
+## 3. Technický základ: doména, hosting, rychlost, přístupnost a SEO
+
+Technický základ webu není seznam hraček pro vývojáře. Je to část produktu, která rozhoduje o tom, jestli se stránka načte, jestli ji člověk najde, jestli jí může věřit a jestli ji zvládne používat i mimo ideální podmínky.
+
+Dobrá technická platforma má být nudná. Ne proto, že by byla bez ambicí, ale protože nevytváří zbytečné drama. Když marketing potřebuje upravit stránku, nemusí čekat tři týdny. Když vyjde nový článek, objeví se v RSS a sitemapě. Když přijde návštěvník z mobilu na horším připojení, nedostane animovaný mramorový pomník místo obsahu. Ano, mramorový pomník je umělecký. Lead z něj ale obvykle není.
+
+### Doména a DNS: vlastnictví před pohodlím
+
+Doména je jedna z mála věcí, které u webu opravdu vlastníš. Sociální profil, reklamní účet nebo marketplace listing jsou pronajatý prostor. Doména je tvoje adresa. Chovej se k ní podle toho.
+
+Praktický základ:
+
+- registruj doménu na účet, ke kterému má přístup firma, ne jen jeden člověk,
+- zapni dvoufaktorové ověření u registrátora i DNS poskytovatele,
+- udržuj přehled DNS záznamů a jejich účelu,
+- nastav rozumné TTL podle typu změn,
+- dokumentuj, kdo smí měnit DNS a jak se změny schvalují.
+
+U malého týmu často stačí jednoduchá tabulka:
+
+| Záznam | Účel | Vlastník | Poznámka |
+| --- | --- | --- | --- |
+| `A` / `AAAA` | Webový server | Tech | Kam míří produkce |
+| `CNAME` | Subdomény | Tech | Například `www` nebo dokumentace |
+| `MX` | E-mail | Ops | Kdo provozuje poštu |
+| `TXT` | SPF, DKIM, ověření služeb | Ops | Nemaž bez kontroly |
+
+Privacy-first poznámka: DNS a CDN nejsou neutrální detail. Pokud veškerý provoz ženeš přes cizí proxy jen kvůli pohodlí, ptej se, kdo vidí metadata návštěvnosti, logy a konfiguraci. Někdy to dává smysl. Jen to nemá být autopilot.
+
+### Hosting: nejdřív provozní otázky, pak logo dodavatele
+
+Hosting vybírej podle provozních vlastností, ne podle toho, kdo má nejhezčí landing page pro vývojáře. U evropského privacy-first projektu si předem odpověz:
+
+- Kde fyzicky běží aplikace, databáze, souborové úložiště a zálohy?
+- Umí dodavatel evropský region nebo evropského provozovatele?
+- Jak se dostanu k logům a jak dlouho se drží?
+- Jak fungují zálohy a obnova?
+- Co se stane, když potřebujeme odejít?
+- Kdo má přístup do produkce a jak se auditují změny?
+
+Ne každá firma potřebuje Kubernetes, multi-region failover a noční směnu SRE. Malý SaaS ale potřebuje vědět, jak obnoví databázi, kdo má klíče a kde jsou data. To není enterprise přepych. To je rozdíl mezi „máme incident“ a „máme incident a ještě hledáme heslo“.
+
+Minimum pro první produkční verzi:
+
+- oddělené produkční a vývojové prostředí,
+- automatický deploy nebo alespoň opakovatelný deploy postup,
+- HTTPS všude,
+- zálohy databáze a souborů,
+- základní monitoring dostupnosti,
+- přístupová práva podle rolí,
+- dokument „jak obnovit provoz“, který pochopí i někdo jiný než autor aplikace.
+
+### Rychlost: optimalizuj pro člověka, ne pro skóre
+
+Výkon webu není soutěž o zelenou známku v nástroji. Je to otázka uživatelské trpělivosti a důvěry. Pomalý web působí nejistě, zvyšuje tření a často trestá přesně ty lidi, kteří nejsou na rychlé kancelářské Wi-Fi.
+
+Jako praktický kompas používej Core Web Vitals. Aktuální metriky jsou:
+
+- LCP: jak rychle se zobrazí hlavní obsah stránky,
+- INP: jak rychle stránka reaguje na interakce,
+- CLS: jak moc stránka během načítání vizuálně poskakuje.
+
+Podle web.dev je dobrý cíl LCP do 2,5 sekundy, INP do 200 ms a CLS do 0,1. Neber to jako náboženství. Ber to jako užitečný semafor, který ti pomůže najít praktické problémy.
+
+Typické opravy, které mají velký dopad:
+
+- komprimuj a správně rozměruj obrázky,
+- načítej kritické CSS před zbytkem,
+- neposílej na první stránku zbytečný JavaScript,
+- nepoužívej obří font balíčky jen kvůli dvěma řezům,
+- nastav cache pro statické soubory,
+- rezervuj místo pro obrázky a prvky, aby stránka neposkakovala,
+- měř reálné stránky, ne jen prázdnou šablonu.
+
+Privacy-first bonus: Čím méně externích skriptů a trackerů, tím jednodušší výkon. Marketingový pixel, chat widget, heatmapa a tři A/B platformy nejsou „jen malé snippetky“. Jsou to další síťové požadavky, další riziko a další kus cizího kódu v uživatelském prohlížeči.
+
+### Cache a statické soubory: levná rychlost
+
+Správné cache hlavičky jsou jeden z nejlevnějších způsobů, jak zrychlit web. Pro statické soubory s verzovaným názvem můžeš použít dlouhou cache. Pro HTML buď opatrnější, aby uživatelé neviděli starý obsah po releasu. Hlavičky `Cache-Control` říkají prohlížečům a mezilehlým cache, jak s odpovědí zacházet. `ETag` zase pomáhá poznat, jestli se konkrétní verze zdroje změnila.
+
+Praktické pravidlo:
+
+- HTML: kratší cache, možnost rychlé aktualizace.
+- CSS/JS s hashem v názvu: dlouhá cache.
+- Obrázky a fonty: dlouhá cache, pokud se URL mění při změně obsahu.
+- API odpovědi: podle citlivosti a čerstvosti dat, raději explicitně než náhodou.
+
+Tohle není sexy práce, takže se na ni snadno zapomíná. Právě proto patří do checklistu před spuštěním.
+
+### Přístupnost: kvalita rozhraní, ne charita
+
+Přístupnost není speciální režim pro „někoho jiného“. Je to kvalita produktu. Dobře pojmenované formuláře, kontrastní text, ovládání klávesnicí a rozumná struktura nadpisů pomáhají lidem s asistivními technologiemi, lidem na mobilu, unaveným lidem i vyhledávačům.
+
+WCAG 2.2 stojí na čtyřech principech: obsah má být vnímatelný, ovladatelný, srozumitelný a robustní. Pro běžný firemní web nebo SaaS onboarding z toho vyplývá několik praktických návyků:
+
+- používej skutečné nadpisy místo vizuálně zvětšeného textu,
+- formulářová pole propojuj s popisky,
+- tlačítka pojmenovávej podle akce,
+- neodlišuj důležité stavy jen barvou,
+- drž dostatečný kontrast textu,
+- umožni ovládání klávesnicí,
+- u chyb ve formuláři napiš, co se stalo a jak to opravit,
+- testuj stránku na mobilu a se zvětšeným textem.
+
+Codyho komentář: Přístupnost je často nejlepší detektor odfláknutého UI. Když stránka nedává smysl bez myši, bez dokonalého zraku nebo bez kontextu designéra stojícího za ramenem, problém není uživatel. Problém je rozhraní.
+
+### Technické SEO: pomoz vyhledávačům, ale piš pro lidi
+
+Technické SEO má jednoduchý cíl: vyhledávač má najít správné URL, pochopit obsah a neztrácet čas balastem. Není to alchymie. Je to provozní hygiena.
+
+Minimum pro web:
+
+- každá důležitá stránka má unikátní `<title>` a meta description,
+- existuje kanonická URL pro stránky, které by mohly mít duplicity,
+- `sitemap.xml` obsahuje důležité veřejné URL,
+- `robots.txt` neblokuje omylem produkční obsah,
+- chybové stránky vrací správné HTTP statusy,
+- přesměrování jsou úmyslná a netvoří řetězy,
+- interní odkazy vedou na trvalé URL,
+- obrázky mají smysluplný alternativní text tam, kde nesou význam.
+
+Google uvádí, že sitemap je pomůcka pro vyhledávač a její odeslání negarantuje indexaci. `robots.txt` zase není bezpečnostní mechanismus; slušným crawlerům říká, kam nemají chodit, ale citlivé soubory musí být chráněné přístupem, ne nadějí, že si jich nikdo nevšimne.
+
+Privacy-first SEO znamená také čistou distribuci. Čitelné URL, RSS feed, sitemap, rychlé stránky a dobrá interní navigace často udělají víc než hromada sledovacích skriptů a agresivních pop-upů. Měř výsledky, ale nepleť si měření s hodnotou pro čtenáře.
+
+### Provozní dokumentace: zachraňuje budoucí pátek
+
+Technický základ není hotový, dokud ho umí někdo provozovat. Do repozitáře nebo interní wiki si dej krátký provozní dokument:
+
+- jak se spouští lokální vývoj,
+- jak se nasazuje produkce,
+- kde jsou proměnné prostředí,
+- kde jsou logy,
+- jak se obnoví záloha,
+- jak se přidá nová stránka nebo článek,
+- jak se aktualizuje sitemap a RSS,
+- kdo je vlastník domény, hostingu a analytiky.
+
+Dokument nemusí být román. Stačí přesný návod. Nejlepší provozní dokumentace je ta, kterou použiješ při malé změně dřív, než ji budeš potřebovat při velkém problému.
+
+### Checklist: Technický základ před spuštěním
+
+- [ ] Doména je na firemním účtu a má zapnuté dvoufaktorové ověření.
+- [ ] DNS záznamy mají popsaný účel a vlastníka.
+- [ ] Web běží přes HTTPS a přesměrování jsou otestovaná.
+- [ ] Hosting, databáze, logy a zálohy mají známou lokalitu a retenční pravidla.
+- [ ] Existuje obnovitelná záloha a někdo ji skutečně otestoval.
+- [ ] Produkční deploy je opakovatelný a popsaný.
+- [ ] Core Web Vitals jsou zkontrolované na klíčových stránkách.
+- [ ] Statické soubory mají rozumné cache hlavičky.
+- [ ] Stránky mají unikátní title, meta description a kanonické URL.
+- [ ] `sitemap.xml` a `robots.txt` odpovídají produkčnímu obsahu.
+- [ ] Formuláře mají popisky, chybové stavy a jdou používat klávesnicí.
+- [ ] Externí skripty jsou omezené na nezbytné minimum.
+- [ ] RSS nebo jiný přímý odběr obsahu funguje bez sociální platformy.
+- [ ] V repozitáři je krátký provozní návod.
+
+### Mini úkol
+
+Vyber jednu veřejnou stránku, která má obchodní význam: homepage, pricing, hlavní službu, registraci nebo dokumentaci. Udělej technický audit v této tabulce:
+
+| Oblast | Stav | Nejmenší oprava |
+| --- | --- | --- |
+| HTTPS a přesměrování |  |  |
+| Title a meta description |  |  |
+| Sitemap a robots.txt |  |  |
+| Rychlost na mobilu |  |  |
+| Obrázky a fonty |  |  |
+| Formuláře a přístupnost |  |  |
+| Externí skripty |  |  |
+| Zálohy a provozní dokumentace |  |  |
+
+Potom vyber jednu opravu, která sníží riziko nebo zlepší zkušenost uživatele. Typicky: opravit špatný title, zmenšit hlavní obrázek, odstranit nepotřebný skript, doplnit label ve formuláři nebo sepsat postup obnovy. Malá technická hygiena je nudná jen do chvíle, kdy díky ní nemusíš hasit požár.
+
 ## Zdroje
 
 - European Commission: Data protection - pravidla ochrany osobních dat v EU a mimo EU: https://commission.europa.eu/law/law-topic/data-protection_en
 - European Commission: Legal framework of EU data protection - přehled právního rámce včetně GDPR: https://commission.europa.eu/law/law-topic/data-protection/legal-framework-eu-data-protection_en
 - European Data Protection Board: Guidelines 05/2020 on consent under Regulation 2016/679 - pokyny k platnému souhlasu podle GDPR: https://www.edpb.europa.eu/documents/guideline/guidelines-052020-on-consent-under-regulation-2016679_en
+- web.dev: Web Vitals - aktuální metriky LCP, INP a CLS včetně doporučených hranic: https://web.dev/articles/vitals
+- Google Search Central: Build and submit a sitemap - tvorba a odesílání sitemap: https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap
+- Google Search Central: Robots.txt Introduction and Guide - použití a limity robots.txt: https://developers.google.com/search/docs/crawling-indexing/robots/intro
+- MDN Web Docs: Cache-Control header - pravidla pro HTTP cache: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Cache-Control
+- MDN Web Docs: ETag header - identifikace verze zdroje pro efektivnější cache: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/ETag
+- W3C: Web Content Accessibility Guidelines 2.2 - doporučení pro přístupný webový obsah: https://www.w3.org/TR/WCAG22/
+- W3C WAI: WCAG 2 Overview - principy vnímatelnosti, ovladatelnosti, srozumitelnosti a robustnosti: https://www.w3.org/WAI/standards-guidelines/wcag/
 
 ## Pracovní log
 
+- 2026-07-10: Doplněna kapitola 3 o technickém základu webu: doména, DNS, hosting, rychlost, cache, přístupnost, technické SEO, provozní dokumentace, checklist a mini úkol; přidány ověřené zdroje k výkonu, SEO, cache a WCAG.
 - 2026-07-10: Obnoven smysluplný obsah po placeholderu a doplněna kapitola 2 o webu jako produktu, včetně rámce pro stránky, webového backlogu, privacy-first měření, checklistu a mini úkolu.
 - 2026-07-10: Založena první verze e-booku: název, cíl, osnova a kapitola 1 o privacy-first základech včetně checklistu, mini úkolu a zdrojů.
