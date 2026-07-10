@@ -317335,8 +317335,191 @@ Pokud se během šesti minut objeví skutečný návratový signál, workshop uk
 
 Běžná údržba pravidla v dlouhodobém klidu má být nenápadná. Udrží pravidlo na místě, zachová jeho hranu a nepustí do provozu zbytečná data. Pokud po ní nikdo nemá pocit velké produktové události, je to často znamení, že proběhla správně.
 
+## První použití po lokálním přenosu pravidla
+
+Lokální přenos pravidla je malá věc, ale zaslouží si jedno obyčejné použití v realitě. Ne proto, že by se z něj měla stát nová kontrolní etapa. Proto, že při přesunu věty, odkazu nebo kotvy do nového pracovního místa může pravidlo ztratit hranu. Na papíře vypadá stejně, v provozu ale člověk neví, kdy ho použít, co neotevírat nebo kde končí jeho odpovědnost.
+
+První použití po lokálním přenosu má odpovědět na jednu otázku:
+
+```text
+Použil člověk přenesené pravidlo při běžné práci bez návratu ke staré historii?
+```
+
+Pokud ano, lokální přenos je uzavřený. Pokud ne, opravte nejbližší větu nebo kotvu. Nevracejte se k celému původnímu rozhodnutí, pokud se nesplnil návratový signál. To je důležitá hranice: ověřujete přenos, ne znovu smysl pravidla.
+
+### Co při prvním použití sledovat
+
+První použití po lokálním přenosu má čtyři malé kontrolní body:
+
+- Člověk pravidlo našel tam, kde dnes pracoval.
+- Pochopil, jaké rozhodnutí má pravidlo podpořit.
+- Nepotřeboval starý rozhodovací záznam, schůzku ani vysvětlení autora.
+- Nepřidal kvůli nejistotě nový tracker, štítek, export, pole nebo kopii.
+
+To je celé. Pokud začnete z prvního použití dělat měření adopce, sbírat příklady a porovnávat všechny podobné šablony, už nejste v ověření lokálního přenosu. Otevřeli jste širší téma. To může být oprávněné, ale jen když existuje konkrétní signál. Samotná zvědavost není signál. Je to hlad po tabulce v převleku za péči.
+
+Praktický SaaS příklad:
+
+```text
+Lokální přenos:
+Pravidlo o interním posouzení obsahově kompletního exportu se přesunulo ze staré importní šablony do nové onboardingové odpovědi.
+
+První použití:
+Přišel export s jinými názvy sloupců, ale se všemi povinnými údaji.
+
+Pozorování:
+Customer success našel pravidlo v onboardingové odpovědi a posoudil soubor interně bez zákaznického callu.
+
+Závěr:
+Lokální přenos funguje. Pravidlo zůstává v nové onboardingové odpovědi a další kontrolu neplánujeme.
+```
+
+Slabší výsledek vypadá jinak:
+
+```text
+Pozorování:
+Customer success našel pravidlo, ale nebylo jasné, zda se "obsahově kompletní" vztahuje i na volitelné sloupce.
+
+Lokální oprava:
+K pravidlu doplňujeme větu: "Volitelné sloupce neblokují interní posouzení, pokud jsou vyplněné všechny povinné údaje."
+
+Co neotevíráme:
+Neměníme importní proces, nezakládáme nový report výjimek a nevracíme pravidlo do mimořádné péče.
+```
+
+Třetí varianta je skutečný návrat:
+
+```text
+Pozorování:
+Dva obsahově kompletní exporty za sebou nešlo interně posoudit, protože u nich chyběla rozhodovací role zákazníka.
+
+Výsledek:
+Splnil se původní návratový signál. Otevíráme malý návrat pouze k otázce rozhodovací role, ne k celému importnímu onboardingu.
+```
+
+Rozdíl mezi slabším výsledkem a návratem je zásadní. Slabší výsledek říká: pravidlo stojí, jen potřebuje jasnější větu. Návrat říká: objevila se situace, kvůli které jsme si slíbili téma znovu otevřít.
+
+### Tři výsledky prvního použití
+
+První použití po lokálním přenosu má mít jen tři výsledky:
+
+- Přenos obstál: pravidlo se použilo samostatně a zůstává v klidu.
+- Dopsat lokální hranu: pravidlo je správně, ale novému pracovnímu místu chybí jedna věta, odkaz nebo příklad.
+- Otevřít návrat: při použití se splnil konkrétní návratový signál.
+
+Nepřidávejte stav "budeme to chvíli pozorovat". Pokud přenos obstál, není co pozorovat. Pokud neobstál, opravte nejbližší hranu. Pokud se splnil návratový signál, otevřete malý návrat. Mezistav většinou jen znamená, že tým nechce napsat jednoduchý závěr.
+
+U marketingového formuláře může zápis vypadat takto:
+
+```text
+Přenos obstál:
+V nové kvalifikační otázce zůstává věta, že rozpočet nezjišťujeme povinným polem v prvním kontaktu. Obchod poptávku kvalifikoval bez nového pole, takže přenos je uzavřený.
+
+Dopsat lokální hranu:
+Obchod našel pravidlo, ale nebylo jasné, zda se má rozpočet zmínit ve follow-up e-mailu. Doplňujeme jednu větu k follow-up šabloně a formulář dál neměníme.
+
+Otevřít návrat:
+Tři relevantní poptávky za sebou nešlo kvalifikovat bez doptání na rozpočet. To splňuje návratový signál a otevíráme malý návrat pouze k rozpočtové otázce.
+```
+
+Takové rozlišení chrání tým před dvěma chybami najednou: nepřeceňuje drobné tření a zároveň nepřehlédne skutečný signál.
+
+### Privacy-first použití
+
+První použití po lokálním přenosu je citlivé místo pro datovou stopu. Člověk si není jistý, pravidlo se přesunulo, stará opora zmizela, a tak přirozeně vzniká pokušení "pro jistotu" něco označit, vyexportovat nebo uložit bokem. Právě tady má privacy-first přístup držet hranici.
+
+Ke každému výsledku napište krátkou datovou větu:
+
+```text
+Při prvním použití po přenosu nevzniká:
+```
+
+Příklady:
+
+```text
+Při prvním použití po přenosu nevzniká nový CRM štítek, kopie importního souboru mimo onboardingový tok ani měsíční evidence nestandardních názvů sloupců.
+```
+
+```text
+Při prvním použití po přenosu nevzniká povinné pole pro rozpočet, behaviorální sledování formuláře ani export poptávek do dalšího nástroje.
+```
+
+Pokud se otevře návrat, datová věta se nemá ztratit. Jen se změní tvar:
+
+```text
+Pro návrat používáme pouze existující poptávky a onboardingová vlákna. Nezakládáme novou pomocnou databázi, dokud nerozhodneme, že je pro další krok nezbytná.
+```
+
+To není formalita. Je to způsob, jak zabránit tomu, aby každé ověření pravidla vyrábělo novou vrstvu provozního prachu.
+
+### Karta prvního použití po přenosu
+
+```text
+Přenesené pravidlo:
+
+Původní pracovní místo:
+
+Nové pracovní místo:
+
+První běžná situace, kde se pravidlo použilo:
+
+Našel člověk pravidlo bez staré historie?
+
+Bylo jasné, jaké rozhodnutí pravidlo podporuje?
+
+Výsledek:
+- přenos obstál
+- dopsat lokální hranu
+- otevřít návrat
+
+Pokud dopisujeme lokální hranu, jakou jednu větu nebo kotvu měníme:
+
+Pokud otevíráme návrat, jaký návratový signál se splnil:
+
+Co zůstává výslovně zavřené:
+
+Při prvním použití po přenosu nevzniká:
+
+Kde zůstává kanonická stopa:
+```
+
+U čistého výsledku kartu zkraťte na jednu větu:
+
+```text
+Přenos pravidla do nové onboardingové odpovědi obstál při prvním importu: soubor šel posoudit interně, zákaznický call nevzniká a nepřidáváme nový štítek, report ani kopii souboru mimo onboardingový tok.
+```
+
+Tohle je přesně ten typ zápisu, který má přežít. Krátký, dohledatelný a dost konkrétní na to, aby další člověk nevymýšlel znovu stejnou otázku.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: pojmenujte přenesené pravidlo a nové pracovní místo.
+2. Minuta 2: popište první běžnou situaci, kde se pravidlo použilo.
+3. Minuta 3: ověřte, zda člověk pravidlo našel bez staré historie.
+4. Minuta 4: vyberte jeden ze tří výsledků.
+5. Minuta 5: napište, co zůstává zavřené.
+6. Minuta 6: doplňte datovou větu a kanonické místo.
+
+Když se během šesti minut objeví debata o původním smyslu pravidla, zastavte ji otázkou: splnil se návratový signál? Pokud ne, vraťte se k lokálnímu přenosu. Pokud ano, ukončete workshop a otevřete malý návrat.
+
+### Checklist prvního použití po přenosu
+
+- Je jasné, jaké pravidlo bylo lokálně přeneseno?
+- Víme, z jakého místa na jaké místo se přesunulo?
+- Proběhlo první použití v běžné práci, ne v umělém testu?
+- Našel člověk pravidlo bez staré historie?
+- Bylo z pravidla jasné, jaké rozhodnutí má podpořit?
+- Neotevřeli jsme při ověření celý původní problém?
+- Pokud chyběla jasnost, opravujeme jen jednu lokální větu nebo kotvu?
+- Pokud se otevírá návrat, splnil se konkrétní návratový signál?
+- Je zapsané, jaká data, štítky, exporty, reporty nebo kopie nevznikají?
+- Končí ověření přenosu bez nového mimořádného rytmu?
+
+První použití po lokálním přenosu má být rychlé a uzavřené. Buď pravidlo v novém místě funguje, nebo potřebuje jednu drobnou hranu, nebo se objevil skutečný návratový signál. Všechno ostatní je většinou jen nejistota, která se snaží vypadat jako proces.
+
 ## Pracovní log
 
+- 2026-07-10: Doplněna navazující podkapitola o prvním použití po lokálním přenosu pravidla: ověření bez staré historie, tři výsledky, privacy-first datová věta, karta, mini workshop a checklist.
 - 2026-07-10: Doplněna navazující podkapitola o běžné údržbě pravidla v dlouhodobém klidu: údržbová otázka, tři výsledky, SaaS příklady, privacy-first datová věta, karta, mini workshop a checklist.
 - 2026-07-09: Doplněna navazující podkapitola o dlouhodobém klidu po uzavřeném druhém setkání: stavy klidu, SaaS příklad, privacy-first datová věta, karta, mini workshop a checklist.
 - 2026-07-09: Doplněna navazující podkapitola o uzavření druhého běžného setkání po klidové stopě: tři uzavírací stavy, SaaS příklad s importní šablonou, privacy-first datová brzda, karta, mini workshop a checklist.
