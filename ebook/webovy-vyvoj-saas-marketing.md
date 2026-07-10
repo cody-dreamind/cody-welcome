@@ -639,6 +639,202 @@ Vyber jeden existující článek nebo plánované téma a vyplň tento pracovn�
 
 Potom udělej jednu konkrétní úpravu v systému: přidej chybějící pole do šablony článku, zviditelni RSS odkaz, doplň canonical URL, nastav datum aktualizace nebo vytvoř jednoduchý stav „aktualizovat“. Obsahový systém se nezlepší velkým prohlášením. Zlepší se tím, že další článek vyjde o kus čistěji než ten předchozí.
 
+## 5. SaaS produkt: problém, segment, onboarding a první hodnota
+
+SaaS nezačíná formulářem na registraci. Začíná problémem, který je pro konkrétní skupinu lidí dost bolestivý, častý nebo drahý na to, aby kvůli němu změnili svoje chování. Kód, design a marketing přijdou potom. Ano, vývojářská duše právě trochu zavzdychala. Ale produkt bez ostrého problému je jen dobře hostovaná hypotéza.
+
+Dobrá první otázka nezní: „Jaké funkce postavíme?“
+
+Lepší otázka zní: „Kdo má jaký problém, co dnes dělá místo nás a proč mu to nestačí?“
+
+GOV.UK Service Manual popisuje user needs jako potřeby, které musí služba splnit, aby uživatel dosáhl správného výsledku. To je dobrý kompas i pro SaaS: neprodáváš obrazovky, ale schopnost něco dokončit rychleji, bezpečněji, levněji nebo s menším stresem.
+
+### Segment není demografie v kostýmu
+
+„Malé firmy“ není segment. Je to široké hřiště. Segment je skupina, která sdílí podobný kontext, problém, rozhodovací proces a ochotu něco změnit.
+
+Příklad rozdílu:
+
+- Široké: malé firmy.
+- Lepší: české servisní firmy s 5 až 30 techniky, které plánují výjezdy v tabulkách a ztrácí přehled o zakázkách.
+- Ještě praktičtější: majitel servisní firmy, který každý pátek ručně skládá plán na další týden, řeší telefonáty techniků a neví, které zakázky se zpozdily.
+
+Čím přesnější segment, tím jednodušší jsou produktová rozhodnutí:
+
+- víš, jaký jazyk použít na webu,
+- poznáš, které integrace jsou opravdu důležité,
+- umíš napsat relevantní onboarding,
+- snadněji odmítneš funkce pro lidi, kteří nejsou tvoje první cílová skupina,
+- získáš lepší reference, protože zákazníci poznají sami sebe.
+
+Praktická segmentační věta:
+
+„Pomáháme ___, kteří ___, aby ___ bez ___.“
+
+Příklady:
+
+- „Pomáháme účetním kancelářím, které ztrácí čas ručním sběrem dokladů, aby měly klientské podklady na jednom místě bez nahánění e-mailem.“
+- „Pomáháme B2B týmům, které prodávají přes konzultace, aby poznaly kvalitu poptávek bez reklamního profilování návštěvníků.“
+- „Pomáháme provozovatelům evropských SaaS aplikací, aby měli základní produktovou analytiku bez zbytečných osobních dat.“
+
+Pokud věta nejde doplnit bez obecných slov jako „efektivita“, „inovace“ a „digitalizace“, segment nebo problém ještě není dost ostrý. Není to ostuda. Je to signál, že máš mluvit s lidmi dřív, než přidáš další modul.
+
+### Rozhovory s uživateli: ptej se na realitu, ne na komplimenty
+
+Rozhovory nejsou anketa o tom, jestli se lidem líbí tvůj nápad. Lidé jsou slušní, optimističtí a často nechtějí zranit tvoje produktové ego. Ptej se proto na minulost a konkrétní situace.
+
+Dobré otázky:
+
+- Kdy se vám tento problém stal naposledy?
+- Co jste tehdy udělali?
+- Kolik času, peněz nebo nervů to stálo?
+- Kdo další se do řešení zapojil?
+- Jak to řešíte dnes?
+- Co jste už zkusili a proč to nestačilo?
+- Co by se muselo změnit, abyste přešli na nové řešení?
+
+Slabší otázky:
+
+- Líbí se vám tento nápad?
+- Používali byste to?
+- Kolik byste za to zaplatili?
+- Jaké funkce byste chtěli?
+
+YC Startup Library dlouhodobě zdůrazňuje mluvení s uživateli jako základ raného produktu. Pro privacy-first SaaS to má ještě jeden bonus: kvalitativní rozhovor často nahradí hromadu spekulativního trackingu. Nepotřebuješ sledovat každý pohyb myši, když se umíš zeptat na skutečný pracovní postup a potom ověřit pár jasných produktových signálů.
+
+Po každém rozhovoru si zapiš strukturované poznámky:
+
+| Pole | Co zapsat |
+| --- | --- |
+| Segment | Kdo mluvil a v jakém kontextu |
+| Situace | Kdy problém naposledy nastal |
+| Současné řešení | Jak to člověk řeší dnes |
+| Náklad problému | Čas, peníze, riziko, frustrace |
+| Spouštěč změny | Co by ho donutilo hledat nové řešení |
+| Citace | Jedna přesná věta, která vystihuje problém |
+| Signál | Slabý, střední nebo silný důkaz potřeby |
+
+Nepiš si jen „zákazník chce dashboard“. Zapiš si, proč ho chce, kdy mu chyběl a jaké rozhodnutí bez něj neumí udělat. Funkce je povrch. Potřeba je pod ním.
+
+### První hodnota: co musí uživatel zažít co nejdřív
+
+Onboarding není prohlídka všech funkcí. Onboarding je cesta k prvnímu smysluplnému výsledku. Uživatel po registraci nemá chuť absolvovat muzeum tlačítek. Chce poznat, jestli mu produkt pomůže.
+
+První hodnota může být:
+
+- importovaný seznam zákazníků, se kterým jde hned pracovat,
+- první automaticky vytvořený report,
+- první vyřešený supportní požadavek,
+- první naplánovaná zakázka,
+- první sdílený odkaz klientovi,
+- první zjištění, které by bez produktu neviděl.
+
+Definuj si ji jednou větou:
+
+„Uživatel poprvé získá hodnotu, když ___.“
+
+Příklady:
+
+- „Uživatel poprvé získá hodnotu, když uvidí seznam zpožděných zakázek bez ručního procházení tabulek.“
+- „Uživatel poprvé získá hodnotu, když odešle klientovi bezpečný odkaz na podklady a vidí stav vyřízení.“
+- „Uživatel poprvé získá hodnotu, když v dashboardu pozná, které kampaně přivádí kvalifikované poptávky, aniž by profiloval jednotlivé návštěvníky.“
+
+Od této věty odvozuj první obrazovky, e-maily, nápovědu i ukázková data. Pokud první hodnota vyžaduje 12 kroků, tři integrace a ruční import podle dokumentace schované v rohu, nejsi v onboardingu. Jsi v přijímacím řízení.
+
+### Onboarding navrhuj jako zkrácení cesty
+
+Nielsen Norman Group u onboardingu upozorňuje, že úvodní tutoriály mohou uživatele vyrušovat a rychle se zapomínají; často lépe funguje kontextová pomoc ve chvíli, kdy ji člověk potřebuje. Prakticky to znamená: méně povinných slajdů, více jasných stavů, ukázkových dat a malých kroků přímo v produktu.
+
+Dobré onboardingové prvky:
+
+- ukázkový projekt, který jde bezpečně smazat,
+- prázdný stav s jedním jasným dalším krokem,
+- import s náhledem a možností vrátit změnu,
+- checklist prvních tří kroků,
+- kontextová nápověda u složitého rozhodnutí,
+- možnost přeskočit nepovinné nastavení,
+- jasné vysvětlení, proč produkt žádá konkrétní údaj.
+
+Privacy-first onboarding má navíc vlastní pravidla:
+
+- Neptej se na data, která nejsou nutná pro první hodnotu.
+- Vysvětli, proč požaduješ přístup k integraci nebo souboru.
+- Dej uživateli možnost začít s ukázkovými daty.
+- Nedávej marketingové souhlasy doprostřed produktového nastavení.
+- Neukládej importovaná data déle, než je potřeba.
+- Pokud posíláš onboardingové e-maily, ať jsou užitečné a snadno odhlásitelné.
+
+Příklad: Produkt pro plánování práce nemusí při registraci znát obrat firmy, počet všech zaměstnanců, telefon a marketingový souhlas. Možná potřebuje jen název pracovního prostoru, první typ úkolu a jednu ukázkovou zakázku. Všechno ostatní může přijít později, až existuje důvěra a důvod.
+
+### Aktivace: měř pár signálů, které opravdu něco znamenají
+
+Aktivace není „uživatel se přihlásil“. Přihlášení je technický fakt. Aktivace je stav, kdy uživatel udělal akci, která výrazně zvyšuje šanci, že pochopil hodnotu produktu.
+
+Příklady aktivačních signálů:
+
+- vytvořil první projekt a pozval kolegu,
+- importoval data a opravil první položku,
+- dokončil první objednávku,
+- nastavil první automatizaci,
+- poslal první klientský odkaz,
+- vrátil se druhý den a dokončil rozpracovaný workflow.
+
+Měř jen to, co použiješ pro rozhodnutí. U prvních zákazníků často stačí jednoduchá tabulka:
+
+| Uživatel nebo účet | Segment | První hodnota | Kde se zasekl | Další krok |
+| --- | --- | --- | --- | --- |
+|  |  |  |  |  |
+
+Tahle tabulka může být cennější než komplikovaný eventový slovník, pokud tým každý týden projde konkrétní zablokování a opraví jednu věc. Později ji nahradíš nebo doplníš produktovou analytikou. Ne opačně.
+
+### Co stavět jako první
+
+První verze SaaS má vyřešit celý úzký problém, ne deset polovičních problémů. „Celý“ neznamená dokonalý. Znamená, že uživatel projde od vstupu k výsledku bez ručního divadla, které produkt slibuje odstranit.
+
+Prioritizační otázky:
+
+- Je tato funkce nutná pro první hodnotu?
+- Pomáhá nejdůležitějšímu segmentu, nebo jen hypotetickému budoucímu trhu?
+- Nahrazuje bolestivý ruční krok?
+- Snižuje riziko, nejistotu nebo čas do výsledku?
+- Dá se ověřit jednodušším způsobem?
+- Přidává osobní data, integrace nebo provozní riziko?
+
+Codyho komentář: Největší zabiják raného SaaS není chybějící graf v nastavení. Je to rozmazanost. Produkt se snaží zalíbit všem, onboarding vysvětluje všechno, marketing slibuje všechno a uživatel neví, proč má dnes udělat první krok. Ostrý produkt je zpočátku menší, ale čitelnější. A čitelnost prodává.
+
+### Checklist: SaaS problém, segment a onboarding
+
+- [ ] Umíš jednou větou popsat segment, problém, výsledek a hlavní překážku.
+- [ ] Máš alespoň několik konkrétních rozhovorů založených na skutečných situacích, ne na obecných názorech.
+- [ ] Víš, jak zákazník řeší problém dnes.
+- [ ] Umíš popsat náklad problému: čas, peníze, riziko nebo frustraci.
+- [ ] První hodnota je definovaná jednou větou.
+- [ ] Onboarding vede k první hodnotě, ne k prohlídce všech funkcí.
+- [ ] Prázdné stavy říkají, co udělat dál.
+- [ ] Produkt sbírá při registraci jen data nutná pro další krok.
+- [ ] Aktivační signály jsou spojené s reálnou hodnotou, ne jen s přihlášením.
+- [ ] Tým každý týden projde, kde se noví uživatelé zasekli.
+- [ ] Existuje privacy-first vysvětlení pro každou integraci a citlivé oprávnění.
+- [ ] První verze řeší jeden úzký problém od začátku do konce.
+
+### Mini úkol
+
+Vyber jednu SaaS myšlenku, funkci nebo existující onboarding a vyplň pracovní list:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Kdo je první cílový segment? |  |
+| Jaký konkrétní problém řeší? |  |
+| Jak ho řeší dnes? |  |
+| Co je náklad problému? |  |
+| Jaká je první hodnota v produktu? |  |
+| Kolik kroků k ní vede dnes? |  |
+| Který krok lze odstranit, přeskočit nebo vysvětlit později? |  |
+| Jaký jeden aktivační signál budeme sledovat? |  |
+| Jaká data při registraci můžeme nesbírat? |  |
+
+Potom udělej jednu konkrétní změnu: zkrať registraci, přidej ukázková data, přepiš prázdný stav, odstraň povinný tutoriál nebo zavolej jednomu zákazníkovi a zeptej se na poslední reálnou situaci. SaaS se nevyjasní v interním brainstormingu. Vyjasní se v kontaktu s realitou, což je nepříjemné hlavně proto, že realita nemá ráda roadmapové iluze.
+
 ## Zdroje
 
 - European Commission: Data protection - pravidla ochrany osobních dat v EU a mimo EU: https://commission.europa.eu/law/law-topic/data-protection_en
@@ -655,9 +851,14 @@ Potom udělej jednu konkrétní úpravu v systému: přidej chybějící pole do
 - MDN Web Docs: ETag header - identifikace verze zdroje pro efektivnější cache: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/ETag
 - W3C: Web Content Accessibility Guidelines 2.2 - doporučení pro přístupný webový obsah: https://www.w3.org/TR/WCAG22/
 - W3C WAI: WCAG 2 Overview - principy vnímatelnosti, ovladatelnosti, srozumitelnosti a robustnosti: https://www.w3.org/WAI/standards-guidelines/wcag/
+- GOV.UK Service Manual: Learning about users and their needs - definice user needs a práce s uživatelskými potřebami: https://www.gov.uk/service-manual/user-research/start-by-learning-user-needs
+- Y Combinator Startup Library: How to talk to users - doporučení pro rozhovory s uživateli v rané fázi produktu: https://www.ycombinator.com/library/Iq-how-to-talk-to-users
+- Nielsen Norman Group: Onboarding: Skip it When Possible - rizika povinných úvodních instrukcí v onboardingu: https://www.nngroup.com/videos/onboarding-skip-it-when-possible/
+- Nielsen Norman Group: Onboarding Tutorials vs. Contextual Help - rozdíl mezi úvodními tutoriály a kontextovou pomocí: https://www.nngroup.com/articles/onboarding-tutorials/
 
 ## Pracovní log
 
+- 2026-07-10: Doplněna kapitola 5 o SaaS produktu: problém, segment, rozhovory s uživateli, první hodnota, onboarding, aktivace, prioritizace, checklist a mini úkol; přidány ověřené zdroje k user needs, rozhovorům a onboardingu.
 - 2026-07-10: Doplněna kapitola 4 o obsahovém systému, blogu, RSS/Atom distribuci, metadatech, editorial pipeline, gated obsahu, recyklaci obsahu, checklistu a mini úkolu; přidány ověřené zdroje k RSS, Atom a strukturovaným datům.
 - 2026-07-10: Doplněna kapitola 3 o technickém základu webu: doména, DNS, hosting, rychlost, cache, přístupnost, technické SEO, provozní dokumentace, checklist a mini úkol; přidány ověřené zdroje k výkonu, SEO, cache a WCAG.
 - 2026-07-10: Obnoven smysluplný obsah po placeholderu a doplněna kapitola 2 o webu jako produktu, včetně rámce pro stránky, webového backlogu, privacy-first měření, checklistu a mini úkolu.
