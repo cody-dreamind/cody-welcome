@@ -2225,6 +2225,95 @@ Vezmi produkt, web nebo marketingový kanál, který běží déle než týden, 
 
 Potom udělej jednu konkrétní změnu: oprav největší tření v hlavní cestě, smaž nepotřebný event, přepiš často nepochopenou část pricingu, doplň dokumentaci k opakovanému dotazu nebo ukonči aktivitu, která jen vyrábí práci. Prvních 90 dní nemá dokázat, že původní plán byl dokonalý. Má dokázat, že se tým umí učit bez toho, aby ztratil respekt k lidem a jejich datům.
 
+## Závěr: Udělej z toho pracovní systém
+
+E-book je užitečný jen tehdy, když se podle něj něco změní. Přečíst si kapitoly o privacy-first webu, SaaS, marketingu a provozu je příjemný začátek. Skutečná hodnota vznikne až ve chvíli, kdy se jedna konkrétní věc dostane do backlogu, někdo ji vlastní a tým ji dotáhne.
+
+Neber tento text jako seznam všeho, co musí být hotové najednou. To by byl spolehlivý recept na tabulku, která vypadá profesionálně a nikdy se neotevře podruhé. Ber ho jako sadu provozních čoček: jednou se díváš na web, jednou na onboarding, jednou na pricing, jednou na data, jednou na bezpečnost.
+
+Codyho komentář: Dobrý systém není ten, který vyvolá pocit, že máš pod kontrolou celý vesmír. Dobrý systém je ten, který ti příští týden pomůže udělat jednu lepší změnu bez toho, aby se firma utopila v procesu. Vesmír zatím necháme být, má dost vlastních problémů.
+
+### Vyber jednu hlavní osu
+
+Před prvním použitím e-booku si vyber jednu osu podle aktuální situace:
+
+| Situace | Začni tady | Typický výstup |
+| --- | --- | --- |
+| Web existuje, ale nepřivádí správné poptávky | Kapitoly 2, 3, 4 a 7 | audit klíčové stránky, obsahový backlog, lepší CTA |
+| SaaS má registrace, ale slabou aktivaci | Kapitoly 5, 8 a 12 | definice první hodnoty, kratší onboarding, aktivační review |
+| Pricing vyvolává otázky nebo nedůvěru | Kapitola 6 | jasnější balíčky, limity, export a zrušení |
+| Tým je zahlcený provozem | Kapitoly 9, 10 a 11 | rozhodovací log, přístupová revize, release checklist |
+| Privacy slib není dost propojený s realitou | Kapitoly 1, 8 a 10 | mapa dat, úklid analytiky, vendor checklist |
+
+Vyber jen jednu osu na měsíc. Když se pokusíš řešit všechno, skončíš u velké transformace, která má krásný název a nulový dopad. Malý tým potřebuje rytmus, ne manifest na zeď.
+
+### Čtyřtýdenní rytmus
+
+Praktický měsíční cyklus může vypadat takto:
+
+| Týden | Fokus | Výstup |
+| --- | --- | --- |
+| 1 | Audit a výběr problému | jedna stránka, workflow nebo systém s jasným třením |
+| 2 | Nejmenší oprava | změna textu, formuláře, eventu, dokumentu nebo nastavení |
+| 3 | Ověření v provozu | agregovaná data, support poznámky, rozhovor nebo ruční kontrola |
+| 4 | Rozhodnutí a úklid | ponechat, upravit, vrátit, zapsat do logu |
+
+Tento rytmus funguje pro web, produkt i interní provoz. Důležité je, aby každý měsíc skončil uzavřeným rozhodnutím. Ne jen dojmem, že „se na tom pracuje“. Tahle věta je v malých týmech zvlášť nebezpečná, protože zní jako pokrok, ale často znamená jen to, že úkol získal pohodlné křeslo v backlogu.
+
+Příklad:
+
+1. Týden 1: Zjistíte, že pricing stránka přivádí dotazy na rozdíl mezi dvěma plány.
+2. Týden 2: Přepíšete popis plánů podle segmentů, doplníte limity a vysvětlíte export dat.
+3. Týden 3: Sledujete agregované kliky na CTA a poznámky ze sales.
+4. Týden 4: Rozhodnete, jestli změna snížila počet dotazů, a zapíšete výsledek do rozhodovacího logu.
+
+Žádný velký redesign. Žádná nová platforma. Jedna oprava, jeden signál, jedno rozhodnutí.
+
+### Jednostránkový provozní přehled
+
+K e-booku si vytvoř jednu pracovní stránku. Může být v repozitáři, wiki, issue trackeru nebo dokumentu. Hlavní je, aby měla vlastníka a pravidelně se otevírala.
+
+Šablona:
+
+| Pole | Obsah |
+| --- | --- |
+| Aktuální měsíční osa | web, onboarding, pricing, analytika, bezpečnost, marketing |
+| Hlavní problém | jedna věta bez obecné mlhy |
+| Důkaz | data, dotazy, rozhovory, ruční audit |
+| Nejmenší oprava | konkrétní změna do jednoho týdne |
+| Privacy dopad | jaká data, skripty, přístupy nebo dodavatelé se mění |
+| Vlastník | jeden člověk nebo tým |
+| Datum kontroly | kdy se rozhodne, co dál |
+| Výsledek | ponechat, upravit, vrátit, škálovat |
+
+Privacy-first pole nevynechávej ani u malých změn. I jednoduchá úprava může přidat externí script, nový formulář, další export nebo širší přístup. Když se na data ptáš pokaždé, není z toho panika. Je z toho zvyk.
+
+### Co nedělat
+
+Stejně důležité jako checklisty jsou věci, které si tým vědomě zakáže:
+
+- Nezavádět nový nástroj bez vlastníka, exportu a popisu dat.
+- Nepřidávat tracking jen proto, že odpověď není hned vidět v dashboardu.
+- Nezamykat užitečný obsah za e-mail, pokud cílem není skutečný vztah.
+- Nepsat pricing tak, aby ho pochopil jen obchodník po třetí kávě.
+- Nedržet staré eventy, exporty a účty jen proto, že „se někdy můžou hodit“.
+- Neřešit privacy až po návrhu kampaně, formuláře nebo onboardingu.
+
+Tahle omezení nejsou brzda růstu. Jsou ochrana před falešnou rychlostí. Falešná rychlost je, když tým dnes přidá tři nástroje a za půl roku zjistí, že neumí vysvětlit, kde jsou data, proč tam jsou a kdo k nim má přístup.
+
+### Poslední checklist pro opakované použití
+
+- [ ] Vybrali jsme jednu osu na příští měsíc.
+- [ ] Problém je popsaný jednou větou a má důkaz.
+- [ ] Nejmenší oprava jde dokončit do týdne.
+- [ ] Víme, jak změna ovlivní data, souhlasy, skripty, dodavatele nebo přístupy.
+- [ ] Máme jeden signál, podle kterého změnu vyhodnotíme.
+- [ ] Rozhodnutí po vyhodnocení zapíšeme do logu.
+- [ ] Co nepoužíváme, smažeme nebo archivujeme.
+- [ ] Co funguje, zjednodušíme a zopakujeme.
+
+Pokud si z celého e-booku odneseš jen jednu věc, ať je to tahle: web, SaaS i marketing se dají dělat prakticky, ziskově a s respektem k datům lidí. Privacy-first není výmluva pro pomalost. Je to způsob, jak stavět menší, srozumitelnější a důvěryhodnější systém. A takový systém se mnohem lépe opravuje, prodává i provozuje.
+
 ## Zdroje
 
 - European Data Protection Board: Respect individuals' rights - přehled práv subjektů údajů v GDPR pro malé a střední organizace: https://www.edpb.europa.eu/sme-data-protection-guide/respect-individuals-rights_en
@@ -2268,6 +2357,7 @@ Potom udělej jednu konkrétní změnu: oprav největší tření v hlavní cest
 
 ## Pracovní log
 
+- 2026-07-10: Doplněn závěr e-booku jako pracovní systém: výběr hlavní osy, čtyřtýdenní rytmus, jednostránkový provozní přehled, seznam věcí k vědomému nedělání a opakovaný checklist pro praktické použití.
 - 2026-07-10: Doplněna kapitola 12 s checklistem pro prvních 90 dní po spuštění: první týden provozu, první měsíc oprav tření, filtrování signálů ve druhém měsíci, 90denní review, privacy úklid, checklist a mini úkol.
 - 2026-07-10: Doplněna kapitola 11 s předstartovním checklistem: vymezení releasu, rozdělení blokerů a nápadů, privacy a právní minimum, technická kontrola hlavních cest, obsah a důvěra, měření po spuštění, provozní plán, checklist a mini úkol.
 - 2026-07-10: Doplněna kapitola 10 o bezpečnosti, právech uživatelů a evropském provozu: mapa dat a přístupů, identita, vyřizování práv uživatelů, zálohy, logy, incident plán, dodavatelé, NIS2 kontext, checklist a mini úkol; přidány ověřené zdroje k EDPB, Evropské komisi, ENISA a NIS2.
