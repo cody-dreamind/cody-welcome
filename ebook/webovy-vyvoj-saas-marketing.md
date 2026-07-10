@@ -2024,6 +2024,207 @@ Vezmi aktuální projekt a vyplň tento release list:
 
 Potom vyber tři položky: jeden skutečný bloker, jednu kritickou opravu a jeden nápad, který patří až po spuštění. Pokud neumíš žádný nápad odložit, spuštění se ti pravděpodobně nafukuje. Ano, i ten „malý“ popup. Hlavně ten.
 
+## 12. Checklist pro prvních 90 dní
+
+Prvních 90 dní po spuštění není období, kdy má tým panicky přidávat funkce podle každé nové poznámky. Je to období, kdy se má naučit, jestli produkt, web nebo marketingová změna plní svůj účel v reálném provozu. Realita je po spuštění užitečnější než interní odhady, protože konečně přináší skutečné chování, skutečné otázky a skutečné tření.
+
+Špatná otázka zní: „Co všechno ještě rychle přidáme?“
+
+Lepší otázka zní: „Co jsme se naučili, co podle toho změníme a co vědomě necháme být?“
+
+První tři měsíce by měly mít rytmus. Bez rytmu se tým snadno rozpadne mezi support, nové nápady, marketingové pokusy a technické dluhy. S rytmem se každý týden zavře něco malého, ale důležitého.
+
+### Prvních 7 dní: sleduj, jestli hlavní cesta vůbec funguje
+
+První týden není čas na velké interpretace. Hlavní úkol je ověřit, že lidé projdou základní cestou bez zásadního problému.
+
+U webu sleduj:
+
+- jestli se klíčové stránky načítají a nejsou rozbité na mobilu,
+- jestli hlavní CTA vede na správné místo,
+- jestli formulář doručuje zprávy a potvrzení,
+- jestli analytika měří jen domluvené signály,
+- jestli RSS, sitemap a důležité URL fungují,
+- jestli se neobjevují chyby v logu nebo monitoringu.
+
+U SaaS sleduj:
+
+- jestli jde založit účet nebo workspace,
+- jestli nový uživatel pochopí první další krok,
+- jestli dosáhne první hodnoty,
+- kde se zastaví,
+- jaké otázky posílá na support,
+- jestli e-maily a notifikace pomáhají, nebo jen překážejí.
+
+Praktický režim prvního týdne:
+
+| Den | Fokus | Výstup |
+| --- | --- | --- |
+| 1 | Dostupnost a hlavní cesta | opravené blokery |
+| 2-3 | Formuláře, onboarding, e-maily | seznam nejčastějších tření |
+| 4-5 | První kvalita poptávek nebo aktivace | jedna produktová nebo obsahová úprava |
+| 6-7 | Shrnutí prvního týdne | rozhodnutí, co opravit příští týden |
+
+Privacy-first poznámka: První týden je lákavé přidat další tracking, protože „nevíme dost“. Nejdřív se podívej, jestli se ptáš správných otázek. Často stačí agregovaná čísla, support poznámky, ruční průchod a pár rozhovorů. Přidat invazivní skript je snadné. Vysvětlit později, proč tam byl, už méně.
+
+### Prvních 30 dní: oprav největší tření
+
+Po měsíci už by tým měl vidět první vzory. Ne dokonalou statistiku, ale opakující se signály:
+
+- lidé nechápou nabídku,
+- pricing vyvolává stejnou otázku,
+- onboarding se zasekává ve stejném kroku,
+- formulář chce příliš mnoho údajů,
+- článek přivádí návštěvnost, ale ne správný segment,
+- support ručně vysvětluje věc, která má být v produktu nebo dokumentaci.
+
+Měsíční review by mělo skončit jedním až třemi rozhodnutími, ne seznamem dvaceti přání.
+
+Pracovní tabulka:
+
+| Signál | Důkaz | Dopad | Nejmenší oprava | Vlastník |
+| --- | --- | --- | --- | --- |
+| Lidé se ptají na rozdíl mezi plány | 5 dotazů v sales | zdržuje nákup | přepsat pricing FAQ |  |
+| Uživatelé nevytvoří první projekt | support a aktivační signál | slabá aktivace | přidat ukázkový projekt |  |
+| Formulář má nízké dokončení | agregované měření | méně poptávek | odebrat nepovinná pole |  |
+
+Dobré opravy v prvních 30 dnech jsou malé a měřitelné:
+
+- přepsat hero sekci podle skutečných dotazů,
+- zkrátit registraci,
+- doplnit jeden důkaz na pricing,
+- přidat prázdný stav s jasným dalším krokem,
+- upravit jeden onboarding e-mail,
+- doplnit dokumentaci k nejčastější otázce,
+- vypnout marketingovou aktivitu, která přivádí špatný typ kontaktu.
+
+Codyho komentář: První měsíc není soutěž o počet deployů. Je to soutěž o počet odstraněných překážek. Což zní méně sexy, ale zákazníkům je překvapivě jedno, jak moc sexy byl sprint.
+
+### Prvních 60 dní: odděl signál od šumu
+
+Druhý měsíc přináší nebezpečí: tým začne slyšet hodně názorů. Každý zákazník chce něco trochu jiného, každý kanál slibuje jinou příležitost a každý interní nápad se tváří jako „rychlá výhra“.
+
+Potřebuješ filtr.
+
+Před přidáním nové funkce, kampaně nebo integrace se zeptej:
+
+- Pomáhá to hlavnímu segmentu, nebo jen jednomu hlasitému případu?
+- Posouvá to uživatele k první nebo opakované hodnotě?
+- Snižuje to riziko, nejistotu nebo ruční práci?
+- Umíme to vysvětlit na webu a v onboardingu?
+- Přidává to nová osobní data, oprávnění nebo dodavatele?
+- Co se stane, když to neuděláme teď?
+
+Užitečný formát pro rozhodnutí:
+
+```markdown
+## Rozhodnutí
+Uděláme / neuděláme / odložíme.
+
+## Proč
+Jaký signál k tomu máme.
+
+## Dopad
+Co se zlepší a co tím zkomplikujeme.
+
+## Kontrola
+Kdy se k rozhodnutí vrátíme.
+```
+
+Tento jednoduchý zápis chrání tým před dvěma extrémy: před chaotickým přidáváním všeho a před tvrdohlavým odmítáním reality. Produkt se má učit, ale nemá se nechat vláčet každým komentářem.
+
+### Prvních 90 dní: rozhodni, co škálovat, upravit nebo zahodit
+
+Po třech měsících by měl tým udělat hlubší review. Ne proto, aby vyrobil dlouhou prezentaci, ale aby se rozhodl, kam dát energii dál.
+
+Rozděl výsledek do tří skupin:
+
+| Skupina | Otázka | Příklad rozhodnutí |
+| --- | --- | --- |
+| Škálovat | Co funguje a má smysl posílit? | napsat navazující obsah, rozšířit partnerství, zlepšit onboarding |
+| Upravit | Co má signál, ale potřebuje změnu? | přepsat pricing, zúžit segment, změnit aktivační krok |
+| Zahodit | Co spotřebovává energii bez výsledku? | vypnout kanál, odstranit funkci, ukončit nástroj |
+
+Praktické otázky pro 90denní review:
+
+- Který segment reagoval nejlépe?
+- Který segment jsme si jen přáli, ale realita ho nepotvrdila?
+- Jaký obsah nebo stránka pomohla rozhodnutí zákazníka?
+- Kde lidé pořád naráží na stejné tření?
+- Které metriky jsme opravdu použili k rozhodnutí?
+- Které metriky, eventy nebo exporty můžeme odstranit?
+- Který nástroj přidal víc provozního rizika než hodnoty?
+- Co jsme slíbili na webu a ještě technicky nedodržujeme dost dobře?
+- Co bude hlavní cíl dalších 90 dní?
+
+Privacy-first review přidej jako samostatný blok:
+
+- Zkontroluj mapu dat a nová zpracování.
+- Projdi přístupy do produkce, analytiky, CRM, helpdesku a fakturace.
+- Ověř, že retence logů a analytiky odpovídá účelu.
+- Smaž testovací exporty a dočasné soubory.
+- Zkontroluj, že marketingové nástroje nedostaly víc dat, než potřebují.
+- Aktualizuj veřejné privacy texty, pokud se realita změnila.
+
+Tohle je přesně místo, kde privacy-first přístup šetří práci. Když sbíráš málo dat a držíš nástroje pod kontrolou, kvartální úklid je normální provozní hygiena. Když sbíráš všechno, je to archeologická expedice s právním oddělením v zádech.
+
+### Jak udržet tempo bez vyhoření týmu
+
+Prvních 90 dní může být intenzivních. Proto nastav rozumný provozní rytmus:
+
+- každý týden jedna hlavní produktová nebo obsahová oprava,
+- každý týden krátký přehled supportu a sales dotazů,
+- každý měsíc review metrik a privacy dopadů,
+- každých 90 dní rozhodnutí o směru, ne jen report,
+- průběžné zapisování rozhodnutí do logu.
+
+Ne každý signál potřebuje okamžitou reakci. Některé věci stačí zapsat a počkat, jestli se opakují. Některé je potřeba opravit hned, protože blokují hodnotu nebo zvyšují riziko. Rozdíl poznáš podle dopadu:
+
+| Typ signálu | Reakce |
+| --- | --- |
+| Blokuje hlavní cestu | opravit hned |
+| Opakuje se u správného segmentu | naplánovat úpravu |
+| Je to přání jednoho okrajového zákazníka | zapsat, zatím nedělat |
+| Zvyšuje privacy nebo bezpečnostní riziko | posoudit okamžitě |
+| Je to interní nápad bez důkazu | dát do parkoviště |
+
+Parkoviště nápadů není hřbitov. Je to filtr. Dobrý nápad přežije i dva týdny bez implementace. Špatný nápad se často mezitím sám rozpustí, což je nejlevnější forma prioritizace.
+
+### Checklist: Prvních 90 dní
+
+- [ ] První týden je otestovaná hlavní cesta a opravené blokery.
+- [ ] Existuje místo, kam se zapisují chyby, otázky, nápady a rozhodnutí.
+- [ ] Support, sales a produkt jednou týdně sdílí opakující se tření.
+- [ ] Každý měsíc tým zavře jednu až tři konkrétní opravy podle signálů.
+- [ ] Nové funkce prochází filtrem: segment, hodnota, riziko, data, provoz.
+- [ ] Metriky slouží rozhodnutí; nepoužité metriky se archivují nebo odstraňují.
+- [ ] Marketingové kanály se hodnotí podle kvality kontaktů, ne podle hluku.
+- [ ] Onboarding se ladí podle první hodnoty, ne podle počtu obrazovek.
+- [ ] Dokumentace se doplňuje podle opakovaných dotazů.
+- [ ] Privacy review kontroluje data, přístupy, retenci, dodavatele a veřejné texty.
+- [ ] Po 90 dnech tým rozhodne, co škálovat, upravit nebo zahodit.
+- [ ] Dalších 90 dní má jeden hlavní cíl a několik měřitelných signálů.
+
+### Mini úkol
+
+Vezmi produkt, web nebo marketingový kanál, který běží déle než týden, a vyplň 90denní pracovní list:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jaký byl původní cíl spuštění? |  |
+| Jaký segment reagoval nejlépe? |  |
+| Kde lidé naráží na největší tření? |  |
+| Jaká jedna oprava by nejvíc pomohla první hodnotě? |  |
+| Který kanál nebo aktivita přivádí kvalitní kontakt? |  |
+| Která metrika se ukázala jako zbytečná? |  |
+| Jaká data nebo přístupy můžeme omezit? |  |
+| Co budeme škálovat? |  |
+| Co upravíme? |  |
+| Co zahodíme nebo odložíme? |  |
+| Jaký je hlavní cíl dalších 90 dní? |  |
+
+Potom udělej jednu konkrétní změnu: oprav největší tření v hlavní cestě, smaž nepotřebný event, přepiš často nepochopenou část pricingu, doplň dokumentaci k opakovanému dotazu nebo ukonči aktivitu, která jen vyrábí práci. Prvních 90 dní nemá dokázat, že původní plán byl dokonalý. Má dokázat, že se tým umí učit bez toho, aby ztratil respekt k lidem a jejich datům.
+
 ## Zdroje
 
 - European Data Protection Board: Respect individuals' rights - přehled práv subjektů údajů v GDPR pro malé a střední organizace: https://www.edpb.europa.eu/sme-data-protection-guide/respect-individuals-rights_en
@@ -2067,6 +2268,7 @@ Potom vyber tři položky: jeden skutečný bloker, jednu kritickou opravu a jed
 
 ## Pracovní log
 
+- 2026-07-10: Doplněna kapitola 12 s checklistem pro prvních 90 dní po spuštění: první týden provozu, první měsíc oprav tření, filtrování signálů ve druhém měsíci, 90denní review, privacy úklid, checklist a mini úkol.
 - 2026-07-10: Doplněna kapitola 11 s předstartovním checklistem: vymezení releasu, rozdělení blokerů a nápadů, privacy a právní minimum, technická kontrola hlavních cest, obsah a důvěra, měření po spuštění, provozní plán, checklist a mini úkol.
 - 2026-07-10: Doplněna kapitola 10 o bezpečnosti, právech uživatelů a evropském provozu: mapa dat a přístupů, identita, vyřizování práv uživatelů, zálohy, logy, incident plán, dodavatelé, NIS2 kontext, checklist a mini úkol; přidány ověřené zdroje k EDPB, Evropské komisi, ENISA a NIS2.
 - 2026-07-10: Doplněna kapitola 9 o produktivitě malého týmu: dokumentace podle potřeb, rozhodovací log, automatizace rutin, meetingový rytmus, lepší zadávání úkolů, inventura nástrojů, checklist a mini úkol; přidány ověřené zdroje k Diátaxis, ADR, CI a toil.
