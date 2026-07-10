@@ -1852,6 +1852,178 @@ Vyber jeden systém, ve kterém jsou osobní nebo obchodně citlivá data: produ
 
 Potom udělej jednu konkrétní změnu: zapni 2FA, odeber starý účet, zkrať retenci logů, doplň exportní postup, otestuj obnovu zálohy nebo založ incident šablonu. Bezpečnost se nebuduje heroickým víkendem. Buduje se tím, že tým pravidelně zavírá malé díry dřív, než se z nich stane drahý příběh.
 
+## 11. Checklist před spuštěním
+
+Před spuštěním webu nebo SaaS produktu se snadno ztratíš v detailech. Někdo řeší poslední pixel v patičce, někdo chce ještě přepsat headline, někdo přidá „jen jednu drobnou integraci“ a najednou je release rozmazaný jako fotka z firemního večírku. Předstartovní checklist má opačný účel: zúžit pozornost na věci, které chrání zákazníka, firmu a schopnost učit se po spuštění.
+
+Launch není maturita z dokonalosti. Je to kontrolovaný přechod do provozu.
+
+### Nejdřív napiš, co přesně spouštíš
+
+Před spuštěním musí existovat jedna krátká věta:
+
+„Spouštíme [co] pro [koho], aby mohl [jaký výsledek], a po spuštění budeme sledovat [jak poznáme, že to funguje].“
+
+Příklady:
+
+- „Spouštíme novou pricing stránku pro malé agentury, aby rychleji pochopily rozdíl mezi plány, a budeme sledovat kliky na konzultaci, kvalitu poptávek a dotazy na cenu.“
+- „Spouštíme první verzi onboarding flow pro zakladatele B2B SaaS, aby dokázali založit workspace a pozvat tým bez asistence supportu, a budeme sledovat dokončení workspace, první pozvánku a opakované dotazy.“
+- „Spouštíme veřejný blog s RSS pro evropské firmy, aby měly přímý kanál k praktickému obsahu, a budeme sledovat publikování, odběry feedu, interní prokliky a kvalitu příchozích poptávek.“
+
+Když větu neumíš napsat, nespouštíš produktovou změnu. Spouštíš pocit. Pocity jsou fajn, ale špatně se debugují.
+
+### Rozděl kontrolu na blokery a pozdější úkoly
+
+Ne každý nedostatek blokuje spuštění. Rozdíl mezi „musí být hotovo“ a „bylo by hezké“ chrání tým před nekonečným odkládáním.
+
+Praktické dělení:
+
+| Typ položky | Význam | Příklad | Rozhodnutí |
+| --- | --- | --- | --- |
+| Bloker | Bez opravy hrozí škoda, právní problém, ztráta dat nebo nefunkční hlavní cesta | Registrace nejde dokončit, formulář posílá osobní data do špatného nástroje | Nespouštět |
+| Kritická oprava | Spuštění je možné, ale riziko je vysoké a musí mít vlastníka | Chybí jasné chybové hlášky u platby | Spustit jen s datem opravy |
+| Po spuštění | Zlepšení, které neohrožuje hlavní účel | Jemnější filtrování v adminu | Přesunout do backlogu |
+| Nápad | Zajímavé, ale neověřené rozšíření | Nový kanál, nový popup, další integrace | Nechat mimo release |
+
+Před spuštěním si projdi každou otevřenou položku a napiš k ní jednu z těchto kategorií. Tým se pak nebaví abstraktně o „ještě nejsme ready“, ale konkrétně o riziku.
+
+### Privacy a právní minimum
+
+Privacy-first spuštění začíná otázkou: „Změnilo se něco v tom, jak sbíráme, používáme, sdílíme nebo mažeme data?“
+
+Pokud ano, zkontroluj:
+
+- zda je účel zpracování jasný a popsaný lidsky,
+- zda formuláře sbírají jen údaje potřebné pro další krok,
+- zda analytika neposílá osobní údaje nebo identifikátory bez dobrého důvodu,
+- zda marketingové a reklamní skripty neběží před odpovídajícím souhlasem,
+- zda privacy policy, cookie informace a produktové texty odpovídají reálnému provozu,
+- zda existuje postup pro export, opravu a výmaz dat,
+- zda nový dodavatel nebo integrace má popsané umístění dat, subdodavatele a exportní cestu,
+- zda je jasné, kdo je správce, zpracovatel a vlastník interního nástroje.
+
+Evropská komise i EDPB zdůrazňují transparentnost, práva lidí nad jejich daty a srozumitelné informace o zpracování osobních údajů. Pro tým to neznamená psát delší právní texty. Znamená to, že produkt, web a provoz nesmí říkat tři různé příběhy.
+
+Toto není právní rada. Je to release otázka: „Umíme obhájit, proč data potřebujeme, kde jsou a jak s nimi naložíme?“
+
+### Technická kontrola hlavních cest
+
+Před spuštěním netestuj jen homepage. Otestuj cestu, kvůli které web nebo produkt existuje.
+
+Pro marketingový web:
+
+1. Otevři homepage na mobilu i desktopu.
+2. Přejdi na hlavní službu, pricing nebo produktovou stránku.
+3. Vyplň formulář nebo klikni na primární CTA.
+4. Zkontroluj potvrzení, doručení e-mailu a zápis do CRM nebo inboxu.
+5. Ověř, že chybové stavy dávají smysl.
+6. Zkus stránku bez přihlášení, v anonymním okně a na pomalejší síti.
+
+Pro SaaS:
+
+1. Založ nový účet jako běžný uživatel.
+2. Dokonči první hodnotovou akci.
+3. Pozvi dalšího člověka nebo vytvoř první pracovní objekt.
+4. Zkontroluj e-maily, notifikace a odhlášení.
+5. Ověř reset hesla, změnu e-mailu nebo jinou základní správu účtu.
+6. Zkontroluj, že role a oprávnění neukazují data jiného zákazníka.
+
+Rychlost a SEO ber jako provozní základ, ne jako kosmetiku. Web Vitals na web.dev, sitemap dokumentace Google Search Central a pravidla pro robots.txt nejsou magické návody na první pozici ve vyhledávání. Jsou to dobré kontrolní body, že web je čitelný pro lidi i stroje.
+
+### Obsah, důvěra a další krok
+
+Před spuštěním se často ladí texty podle vkusu týmu. Lepší je ladit je podle rozhodnutí návštěvníka.
+
+Na každé klíčové stránce zkontroluj:
+
+- Je do pár sekund jasné, pro koho stránka je?
+- Říká stránka konkrétní problém nebo výsledek?
+- Je hlavní CTA srozumitelné bez interního žargonu?
+- Je vidět důkaz: reference, screenshot, scénář, veřejný výsledek nebo konkrétní příklad?
+- Jsou ceny, limity nebo další krok vysvětlené tak, aby člověk nemusel hádat?
+- Existuje sekundární cesta pro člověka, který ještě nechce koupit nebo poslat poptávku?
+- Jsou URL čitelné a stabilní?
+- Existuje RSS nebo přímý způsob sledování nového obsahu bez sociální platformy?
+
+Privacy-first detail: Nepoužívej důvěru jako dekoraci. Pokud slibuješ evropský provoz, minimum trackerů nebo kontrolu nad daty, musí to sedět i technicky. Jinak je to reputační dluh.
+
+### Měření po spuštění
+
+Před spuštěním si napiš, co budeš sledovat první týden a první měsíc. Ne všechno. Jen rozhodovací signály.
+
+Příklad pro nový web:
+
+| Otázka | Signál | Kde se bere | Co uděláme podle výsledku |
+| --- | --- | --- | --- |
+| Lidé najdou hlavní nabídku? | Klik na stránku služby nebo pricing | Agregovaná analytika | Upravíme navigaci a hero |
+| Formulář neodrazuje? | Zobrazení formuláře vs. odeslání | Analytika + inbox | Zkrátíme pole nebo přepíšeme instrukce |
+| Poptávky dávají smysl? | Kvalita a segment leadů | CRM nebo ruční štítky | Upravíme positioning |
+| Obsah přivádí relevantní lidi? | Interní prokliky z článků | Agregovaná analytika | Přidáme lepší další kroky |
+
+Příklad pro SaaS:
+
+| Otázka | Signál | Kde se bere | Co uděláme podle výsledku |
+| --- | --- | --- | --- |
+| Uživatel zažije první hodnotu? | Dokončení aktivační akce | Produktová analytika | Zjednodušíme onboarding |
+| Naráží na stejnou překážku? | Opakované support dotazy | Helpdesk, poznámky | Přidáme kontextovou pomoc |
+| Funguje týmový scénář? | Pozvánka kolegy nebo sdílení | Produktová událost | Vylepšíme role a pozvánky |
+| Platba nebo upgrade nebrzdí? | Zahájení vs. dokončení checkoutu | Platební systém | Opravíme copy, chyby nebo balíčky |
+
+Měření má mít vlastníka. Dashboard bez člověka je jen dekorace s grafy. Hezky se na něj kouká, ale nikdo podle něj neřídí produkt.
+
+### Provozní plán na první dny
+
+První dny po spuštění nejsou čas na dovolenou hlavního vývojáře, vypnutý support a tajemné „uvidíme“. Stačí lehký provozní plán:
+
+- kdo drží technickou pohotovost,
+- kdo sleduje formuláře, e-mail, objednávky a support,
+- kde se zapisují chyby a poznatky,
+- kdo rozhoduje o rollbacku nebo vypnutí funkce,
+- jak rychle tým reaguje na kritický problém,
+- kdy proběhne první krátké vyhodnocení,
+- které změny se nedělají během prvních 24 hodin, pokud nejde o opravu.
+
+Rollback není ostuda. Ostuda je nemít cestu zpět, když hlavní tok přestane fungovat. U statického webu to může být návrat na předchozí commit. U SaaS to může být feature flag, vypnutí nové integrace, migrace s plánem návratu nebo ruční postup pro podporu zákazníků.
+
+### Checklist: Před spuštěním
+
+- [ ] Existuje jedna věta, co spouštíme, pro koho, proč a jak poznáme úspěch.
+- [ ] Všechny otevřené položky jsou rozdělené na blokery, kritické opravy, úkoly po spuštění a nápady.
+- [ ] Hlavní cesta je otestovaná na mobilu i desktopu.
+- [ ] Formuláře, registrace, platba, e-maily a potvrzení fungují end-to-end.
+- [ ] Chybové stavy jsou srozumitelné a neodhalují interní detaily.
+- [ ] Analytika měří jen rozhodovací signály a neposílá zbytečné osobní údaje.
+- [ ] Cookie/consent režim odpovídá skutečným skriptům a účelům.
+- [ ] Privacy policy, obchodní texty a technický provoz si neodporují.
+- [ ] Nové nástroje a dodavatelé mají popsaná data, lokalitu provozu, export a vlastníka.
+- [ ] Klíčové stránky mají jasný segment, hodnotu, důkaz a další krok.
+- [ ] URL, title, meta description, Open Graph, sitemap, robots.txt a strukturovaná data jsou zkontrolované podle typu webu.
+- [ ] RSS nebo přímý distribuční kanál funguje, pokud web publikuje obsah.
+- [ ] Přístupnost a čitelnost jsou ověřené aspoň základní ruční kontrolou.
+- [ ] Rychlost a Core Web Vitals nejsou ignorované, zejména na mobilu.
+- [ ] Existuje plán sledování prvního týdne a prvního měsíce.
+- [ ] Je jasné, kdo řeší support, chyby, incidenty a případný rollback.
+- [ ] Kritické přístupy, 2FA, zálohy a logy byly zkontrolované před veřejným provozem.
+- [ ] Po spuštění je v kalendáři krátké vyhodnocení, ne jen tiché doufání.
+
+### Mini úkol
+
+Vezmi aktuální projekt a vyplň tento release list:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Co přesně spouštíme? |  |
+| Pro koho to je? |  |
+| Jaký výsledek má uživatel získat? |  |
+| Jak poznáme úspěch první týden? |  |
+| Jaký je největší bloker? |  |
+| Jaké riziko vědomě přijímáme? |  |
+| Kdo drží provoz po spuštění? |  |
+| Jaká je cesta zpět? |  |
+| Jaká jedna věc se po spuštění vyhodnotí jako první? |  |
+
+Potom vyber tři položky: jeden skutečný bloker, jednu kritickou opravu a jeden nápad, který patří až po spuštění. Pokud neumíš žádný nápad odložit, spuštění se ti pravděpodobně nafukuje. Ano, i ten „malý“ popup. Hlavně ten.
+
 ## Zdroje
 
 - European Data Protection Board: Respect individuals' rights - přehled práv subjektů údajů v GDPR pro malé a střední organizace: https://www.edpb.europa.eu/sme-data-protection-guide/respect-individuals-rights_en
@@ -1895,6 +2067,7 @@ Potom udělej jednu konkrétní změnu: zapni 2FA, odeber starý účet, zkrať 
 
 ## Pracovní log
 
+- 2026-07-10: Doplněna kapitola 11 s předstartovním checklistem: vymezení releasu, rozdělení blokerů a nápadů, privacy a právní minimum, technická kontrola hlavních cest, obsah a důvěra, měření po spuštění, provozní plán, checklist a mini úkol.
 - 2026-07-10: Doplněna kapitola 10 o bezpečnosti, právech uživatelů a evropském provozu: mapa dat a přístupů, identita, vyřizování práv uživatelů, zálohy, logy, incident plán, dodavatelé, NIS2 kontext, checklist a mini úkol; přidány ověřené zdroje k EDPB, Evropské komisi, ENISA a NIS2.
 - 2026-07-10: Doplněna kapitola 9 o produktivitě malého týmu: dokumentace podle potřeb, rozhodovací log, automatizace rutin, meetingový rytmus, lepší zadávání úkolů, inventura nástrojů, checklist a mini úkol; přidány ověřené zdroje k Diátaxis, ADR, CI a toil.
 - 2026-07-10: Doplněna kapitola 8 o analytice s minimem dat: rozhodovací metriky, návrh eventů, omezení osobních údajů, cookie/consent režim, dashboardy, kombinace čísel s rozhovory, retence, checklist a mini úkol; přidány ověřené zdroje k GDPR článkům 5 a 25, privacy by design a analytice.
