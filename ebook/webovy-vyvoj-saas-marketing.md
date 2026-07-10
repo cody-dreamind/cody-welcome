@@ -1205,10 +1205,231 @@ Vyber jeden marketingový kanál, kterému teď věnuješ čas, a vyplň tabulku
 
 Potom udělej jednu konkrétní úpravu: přepiš jednu cold zprávu, doplň jasné odhlášení, přidej článek odpovídající na reálnou námitku, zjednoduš měření kampaně nebo ukonči kanál, který jen spotřebovává energii. Marketing bez spamu není tichý marketing. Je to marketing, po kterém se nemusíš sprchovat zevnitř.
 
+## 8. Analytika s minimem dat: události, metriky a rozhodování
+
+Analytika má pomáhat rozhodovat. Nemá být skladištěm všeho, co šlo technicky zachytit. Malý tým nepotřebuje vědět, kudy každý člověk jel kurzorem, jak dlouho se díval na každou část stránky a na kterém zařízení si v úterý večer třikrát rozmyslel kliknutí. Potřebuje poznat, co brání pochopení, aktivaci, nákupu nebo retenci.
+
+Špatná otázka zní: „Jaká data ještě můžeme sbírat?“
+
+Lepší otázka zní: „Které rozhodnutí tento týden uděláme lépe díky těmto datům?“
+
+GDPR v článku 5 pracuje mimo jiné se zásadou minimalizace údajů: osobní údaje mají být přiměřené, relevantní a omezené na to, co je nezbytné pro účel zpracování. Článek 25 pak řeší ochranu dat už v návrhu a ve výchozím nastavení. EDPB k tomu ve svých pokynech k data protection by design and by default zdůrazňuje, že vhodná opatření se mají řešit už při plánování zpracování a průběžně během provozu. Přeloženo do produktové řeči: analytiku navrhuj dřív, než nasadíš první tracker, a pravidelně ji uklízej.
+
+### Začni rozhodovacím stromem, ne eventovým slovníkem
+
+Eventový slovník je užitečný, ale nemá být první krok. První krok je seznam rozhodnutí, která chce tým dělat pravidelně.
+
+Příklady rozhodnutí:
+
+- Máme přepsat homepage, protože návštěvníci nechápou specializaci?
+- Máme zkrátit registraci, protože lidé odpadávají před první hodnotou?
+- Máme změnit pricing, protože zákazníci nerozumí limitům?
+- Máme investovat do článků pro jeden segment, protože přivádí kvalitní poptávky?
+- Máme odstranit funkci, kterou skoro nikdo nepoužívá a zvyšuje provozní riziko?
+
+Ke každému rozhodnutí si napiš:
+
+| Rozhodnutí | Signál | Zdroj dat | Jak často | Co uděláme podle výsledku |
+| --- | --- | --- | --- | --- |
+| Zlepšit pricing stránku | Klik na plán, otázky v sales, poptávky podle plánu | Agregovaná analytika + CRM poznámky | Měsíčně | Přepsat limity nebo doplnit FAQ |
+| Zkrátit onboarding | Dosažení první hodnoty, nejčastější blokující krok | Produktové události + rozhovory | Týdně | Odebrat krok, přidat ukázková data |
+| Rozvíjet blogové téma | Kvalita poptávek z článku, přímé zmínky v hovorech | Agregovaná návštěvnost + sales poznámky | Měsíčně | Napsat navazující článek nebo interní odkaz |
+
+Teprve potom navrhuj události. Když událost neodpovídá žádnému rozhodnutí, je podezřelá. Možná je zbytečná, možná jen nemá vlastníka. Obojí je dobrý důvod ji neposílat do produkce.
+
+### Měř méně věcí, ale s lepším významem
+
+Metrika má být srozumitelná i mimo tým, který ji implementoval. „button_click_hero_primary_v3“ může být technicky přesné, ale produktově prázdné, pokud nikdo neví, jak souvisí s hodnotou.
+
+Lepší metriky:
+
+- návštěva klíčové stránky podle zdroje v agregaci,
+- klik na hlavní CTA,
+- dokončení formuláře,
+- registrace pracovního prostoru,
+- dosažení první hodnoty,
+- pozvání kolegy,
+- opakované použití klíčového workflow,
+- export dat nebo zrušení účtu jako signál problému,
+- kvalifikovaná poptávka podle segmentu.
+
+Slabší metriky:
+
+- všechny kliky na stránce bez účelu,
+- počet pageviews bez segmentu a dalšího kroku,
+- scroll depth jako hlavní důkaz zájmu,
+- délka session bez kontextu,
+- open rate jako důkaz důvěry,
+- počet eventů jako měřítko kvality analytiky.
+
+Codyho komentář: Pokud dashboard vypadá jako kokpit letadla, ale tým podle něj neudělá žádné rozhodnutí, není to řízení. Je to drahá tapeta.
+
+### Eventy pojmenuj lidsky a stabilně
+
+Dobře navržený event říká, co se stalo v produktovém jazyce. Neprozrazuje zbytečná osobní data a nepřenáší obsah, který analytika nepotřebuje.
+
+Praktický formát:
+
+| Event | Kdy vzniká | Vlastnosti | Neposílat |
+| --- | --- | --- | --- |
+| `signup_started` | Člověk začne registraci | plán, zdroj v agregaci | e-mail, jméno, IP v detailu |
+| `workspace_created` | Vznikne pracovní prostor | typ segmentu, zvolený plán | název firmy, osobní poznámky |
+| `first_value_reached` | Uživatel dokončí první hodnotu | typ workflow, čas od registrace | obsah importovaných dat |
+| `pricing_plan_selected` | Zákazník vybere plán | název plánu, měsíční/roční volba | platební údaje |
+| `data_export_requested` | Uživatel požádá o export | typ exportu | obsah exportu |
+
+U každého eventu si drž krátkou dokumentaci:
+
+- název,
+- účel,
+- vlastník,
+- kdy vzniká,
+- jaké vlastnosti obsahuje,
+- jak dlouho se drží,
+- jaké rozhodnutí podporuje,
+- od kdy platí a kdy se má revidovat.
+
+Stabilita je důležitá. Když každý deploy přejmenuje event, srovnání přes čas se rozpadne. Když naopak držíš mrtvé eventy pět let „pro jistotu“, analytika se změní v archeologii. Ideální stav je nudný: málo eventů, jasná dokumentace, pravidelný úklid.
+
+### Osobní údaje do analytiky nepatří automaticky
+
+Analytika často nepotřebuje e-mail, jméno, telefon, přesnou IP adresu ani obsah formuláře. Pokud potřebuješ propojit produktové chování s účtem, zvaž pseudonymní identifikátor a odděl provozní data od marketingových dat. Pokud stačí agregace, nepřidávej identifikátor vůbec.
+
+Praktické návyky:
+
+- neposílej do analytiky volný text z formulářů,
+- neposílej e-mail jako vlastnost eventu,
+- neposílej celé URL s citlivými query parametry,
+- neukládej přesné IP adresy déle, než je nutné pro bezpečnost a provoz,
+- odděl bezpečnostní logy od marketingové analytiky,
+- nastav retenci podle účelu, ne podle výchozího nastavení nástroje,
+- dokumentuj, kdo má k analytice přístup.
+
+Příklad: U SaaS pro účetní kanceláře může být užitečné vědět, že účet dosáhl první hodnoty po importu 12 klientských složek. Není nutné posílat názvy klientů, jejich IČO nebo obsah dokumentů do produktové analytiky. Rozdíl mezi „12 složek“ a „seznam konkrétních klientů“ je přesně místo, kde privacy-first přístup šetří budoucí právní i reputační bolest.
+
+### Cookie a consent řeš podle skutečného zpracování
+
+Ne každá analytika je stejná. Rozdíl je mezi agregovaným měřením návštěvnosti bez identifikace člověka a reklamním sledováním napříč weby. CNIL ve své praktické příručce k analytice popisuje podmínky, za kterých mohou být cookies pro měření návštěvnosti ve francouzském kontextu osvobozené od souhlasu: mimo jiné informování uživatelů, možnost námitky, omezení účelu na měření publika nebo A/B testování a zákaz kombinování s dalšími zpracováními. Neznamená to univerzální evropskou propustku pro jakýkoliv tracker. Znamená to užitečný směr: čím užší účel, menší identifikace a větší kontrola uživatele, tím menší provozní tření.
+
+Praktický postup:
+
+1. Popiš, jaká data analytika sbírá.
+2. Rozliš technicky nutné cookies, analytiku, marketing a bezpečnostní logy.
+3. U každé kategorie urči účel a právní základ s právníkem nebo odpovědnou osobou.
+4. Pokud je potřeba souhlas, nespouštěj zpracování před souhlasem.
+5. Pokud pracuješ bez souhlasu na jiném základě nebo v režimu výjimky, drž podmínky přísně: minimální data, žádné sdílení pro reklamu, možnost námitky, transparentní informace.
+6. Zkontroluj přeshraniční přenosy, zpracovatele a retenční lhůty.
+
+Toto není právní rada. Je to produktový checklist, aby se analytika neřešila až poté, co už tři skripty posílají data na pět míst.
+
+### Dashboard má mít vlastníka a rytmus
+
+Dashboard bez vlastníka je obrazovka na zdi. Dashboard s vlastníkem a rytmem je nástroj řízení.
+
+Pro malý SaaS stačí často tři pohledy:
+
+| Pohled | Otázka | Typické metriky |
+| --- | --- | --- |
+| Web a marketing | Přichází správní lidé a dělají další krok? | návštěvy klíčových stránek, CTA, poptávky, zdroj v agregaci |
+| Aktivace | Dostanou se noví uživatelé k první hodnotě? | registrace, první hodnota, blokující krok, čas do první hodnoty |
+| Retence a hodnota | Vrací se účty k důležitému workflow? | opakované použití, aktivní účty, pozvaní kolegové, zrušení, export |
+
+Každý pohled má mít:
+
+- vlastníka,
+- frekvenci kontroly,
+- definici metrik,
+- hranici, kdy se něco řeší,
+- místo pro poznámky z rozhovorů a supportu.
+
+Příklad měsíčního review:
+
+| Otázka | Výsledek | Rozhodnutí |
+| --- | --- | --- |
+| Která stránka přivádí nejkvalitnější poptávky? |  | Přidat interní odkazy, rozšířit téma |
+| Kde lidé odpadávají před první hodnotou? |  | Zkrátit krok, přidat ukázková data |
+| Který plán vyvolává nejvíc nejasností? |  | Přepsat pricing a limity |
+| Jaké osobní údaje v analytice už nepotřebujeme? |  | Smazat vlastnost, zkrátit retenci |
+
+Metrika bez rozhodnutí se má archivovat nebo odstranit. To zní tvrdě, ale každá zbytečná metrika stojí pozornost, údržbu a někdy i právní riziko.
+
+### Kombinuj kvantitu s rozhovory
+
+Čísla řeknou, kde se něco děje. Sama často neřeknou proč. Když vidíš, že lidé opouští onboarding ve druhém kroku, může to znamenat dlouhý formulář, nejasnou hodnotu, chybějící integraci, technickou chybu nebo strach dát produktu přístup k datům. Bez rozhovoru hádáš.
+
+Praktická kombinace:
+
+- analytika ukáže krok, kde lidé odpadávají,
+- support a sales doplní opakované otázky,
+- rozhovor s uživatelem ukáže skutečný kontext,
+- malá produktová změna ověří hypotézu,
+- další review rozhodne, jestli změnu nechat.
+
+Privacy-first výhoda: Čím lépe mluvíš s lidmi, tím méně potřebuješ sbírat šedou zónu dat. Rozhovor s pěti správnými zákazníky může vysvětlit víc než tisíc anonymních událostí bez kontextu. Ano, rozhovor je pracnější než další dashboard. Proto je taky užitečnější.
+
+### Retence a mazání jsou součást analytiky
+
+Analytická data nemají zůstávat navždy jen proto, že disk je levný. Disk je levný. Nejasný účel a stará data v incidentu levná nejsou.
+
+Nastav si retenční pravidla:
+
+| Typ dat | Příklad | Doporučený přístup |
+| --- | --- | --- |
+| Agregovaná návštěvnost | měsíční počet návštěv stránky | držet dlouhodobě, pokud neobsahuje identifikátory |
+| Produktové eventy | aktivace, použití workflow | držet podle rozhodovacího cyklu a smluvních pravidel |
+| Bezpečnostní logy | přihlášení, podezřelé požadavky | odděleně, podle bezpečnostního účelu |
+| Debug logy | chyby, payloady | krátká retence, maskování citlivých dat |
+| Exporty reportů | CSV z analytiky | kontrolovat přístupy a mazat staré kopie |
+
+Jednou za kvartál projdi:
+
+- které eventy už nikdo nepoužívá,
+- které vlastnosti obsahují osobní nebo citlivá data,
+- kdo má přístup do analytiky,
+- jaké exporty vznikly mimo hlavní systém,
+- jestli se retence skutečně vynucuje technicky.
+
+Nejhorší analytická data jsou ta, o kterých už nikdo neví. Nejsou užitečná, ale pořád mohou bolet.
+
+### Checklist: Analytika s minimem dat
+
+- [ ] Každá metrika podporuje konkrétní rozhodnutí.
+- [ ] Eventy mají dokumentovaný účel, vlastníka a retenční pravidlo.
+- [ ] Do analytiky neposíláme e-maily, volné texty, citlivé query parametry ani obsah zákaznických dat.
+- [ ] Produktová, marketingová a bezpečnostní data jsou logicky oddělená.
+- [ ] Cookie a consent režim odpovídá skutečnému zpracování, ne přání týmu.
+- [ ] Uživatelé dostávají srozumitelnou informaci o analytice a možnost volby tam, kde je potřeba.
+- [ ] Dashboardy mají vlastníka, rytmus kontroly a rozhodovací prahy.
+- [ ] Kombinujeme agregovaná čísla s rozhovory, supportem a sales poznámkami.
+- [ ] Retence analytických dat je nastavená technicky, ne jen v dokumentu.
+- [ ] Jednou za kvartál proběhne úklid eventů, vlastností, přístupů a exportů.
+- [ ] Marketingové trackery nejsou výchozí odpověď na produktovou nejistotu.
+- [ ] Dokážeme vysvětlit, kde analytická data běží a kdo k nim má přístup.
+
+### Mini úkol
+
+Vyber jeden dashboard, analytický nástroj nebo seznam eventů a vyplň pracovní list:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jaké tři rozhodnutí má analytika podporovat? |  |
+| Které metriky se kvůli nim opravdu sledují? |  |
+| Které eventy nikdo nepoužil poslední měsíc? |  |
+| Které vlastnosti mohou obsahovat osobní údaje? |  |
+| Jak dlouho se data drží? |  |
+| Kdo má přístup do nástroje? |  |
+| Jak je popsaná analytika uživatelům? |  |
+| Kterou jednu metriku nebo vlastnost odstraníme? |  |
+
+Potom udělej jednu konkrétní změnu: smaž zbytečný event, přestaň posílat e-mail do analytiky, zkrať retenci debug logů, doplň dokumentaci k metrice nebo nastav měsíční review dashboardu. Analytika se zlepší hlavně tím, že přestane předstírat vševědoucnost a začne sloužit rozhodnutím.
+
 ## Zdroje
 
 - European Commission: Digital privacy - přehled vztahu ePrivacy Directive a GDPR v digitálním soukromí: https://digital-strategy.ec.europa.eu/en/policies/digital-privacy
 - EUR-Lex: Directive 2002/58/EC, Article 13 - pravidla pro nevyžádanou komunikaci a direct marketing v ePrivacy směrnici: https://eur-lex.europa.eu/eli/dir/2002/58/oj/eng
+- EUR-Lex: Regulation (EU) 2016/679, GDPR - právní text včetně zásad zpracování, minimalizace údajů a ochrany údajů ve výchozím nastavení: https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng
+- European Data Protection Board: Guidelines 4/2019 on Article 25 Data Protection by Design and by Default - praktický výklad GDPR článku 25: https://www.edpb.europa.eu/documents/guideline/guidelines-42019-on-article-25-data-protection-by-design-and-by-default_en
+- CNIL: Sheet n°16 - Use analytics on your websites and applications - podmínky pro analytiku a měření návštěvnosti v režimu omezeného účelu: https://www.cnil.fr/en/sheet-ndeg16-use-analytics-your-websites-and-applications
 - European Commission: Can data received from a third party be used for marketing? - praktický příklad právního základu a marketingového použití osobních dat: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/legal-grounds-processing-data/can-data-received-third-party-be-used-marketing_en
 - European Data Protection Board: Guidelines 1/2024 on processing of personal data based on Article 6(1)(f) GDPR - legitimní zájem a jeho limity včetně direct marketingu: https://www.edpb.europa.eu/system/files/2024-10/edpb_guidelines_202401_legitimateinterest_en.pdf
 - Nielsen Norman Group: Pricing information gives B2B sites a competitive advantage - proč B2B zákazníci potřebují vidět cenu na webu: https://www.nngroup.com/articles/show-price/
@@ -1235,6 +1456,7 @@ Potom udělej jednu konkrétní úpravu: přepiš jednu cold zprávu, doplň jas
 
 ## Pracovní log
 
+- 2026-07-10: Doplněna kapitola 8 o analytice s minimem dat: rozhodovací metriky, návrh eventů, omezení osobních údajů, cookie/consent režim, dashboardy, kombinace čísel s rozhovory, retence, checklist a mini úkol; přidány ověřené zdroje k GDPR článkům 5 a 25, privacy by design a analytice.
 - 2026-07-10: Doplněna kapitola 7 o marketingu bez spamu: segmentace, obsah podle nákupní nejistoty, direct outreach, partnerství, komunita, privacy-first měření, checklist a mini úkol; přidány ověřené zdroje k ePrivacy a legitimnímu zájmu.
 - 2026-07-10: Doplněna kapitola 6 o pricingu a balíčcích: hodnotové měřítko ceny, modely účtování, transparentní pricing stránka, trial/freemium, privacy-first pravidla pro data, checklist a mini úkol; přidány ověřené zdroje k B2B cenám, transparentnosti cen a modelům předplatného.
 - 2026-07-10: Doplněna kapitola 5 o SaaS produktu: problém, segment, rozhovory s uživateli, první hodnota, onboarding, aktivace, prioritizace, checklist a mini úkol; přidány ověřené zdroje k user needs, rozhovorům a onboardingu.
