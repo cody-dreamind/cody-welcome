@@ -317173,8 +317173,171 @@ Pokud se během pěti minut neumíte shodnout na návratovém signálu, nejste j
 
 Dlouhodobý klid je produktová disciplína. Většina týmů umí něco otevřít, opravit a chvíli sledovat. Méně týmů umí po dobrém výsledku přestat přidávat péči. Právě tam se pozná zralý provoz: pravidlo stojí, data zbytečně nepřibývají a další práce čeká až na skutečný signál.
 
+## Běžná údržba pravidla v dlouhodobém klidu
+
+Pravidlo v dlouhodobém klidu se dřív nebo později potká s běžnou údržbou pracovního místa. Někdo upraví onboardingovou odpověď, zkrátí formulář, přepíše šablonu nabídky, přesune interní dokumentaci nebo sjednotí texty na webu. V tu chvíli se může ozvat známý hlas: "Když už jsme tady, neměli bychom znovu otevřít i to staré rozhodnutí?"
+
+Někdy ano. Většinou ne.
+
+Běžná údržba není návratový signál sama o sobě. Je to příležitost zkontrolovat, zda pravidlo pořád leží na správném místě, dá se přečíst bez staré historie a nepřidává datovou stopu, kterou už nepotřebuje. Pokud se nic z toho nezměnilo, pravidlo zůstává v klidu. Údržba ho může oprášit, ale nemá ho probudit jen proto, že kolem něj někdo prošel s hadříkem.
+
+Použijte jednu údržbovou otázku:
+
+```text
+Mění dnešní údržba pracovní místo tak, že pravidlo přestane být najitelné, srozumitelné nebo datově střídmé?
+```
+
+Pokud odpověď zní ne, nedělejte z pravidla nový úkol. Pokud odpověď zní ano, opravte nejbližší místo. Ne celou historii, ne všechny podobné šablony, ne starý spor o to, proč pravidlo vzniklo. Jen místo, které se dnešní údržbou opravdu mění.
+
+### Co při údržbě kontrolovat
+
+Údržba pravidla v dlouhodobém klidu má čtyři malé kontroly:
+
+- Najitelnost: zůstává pravidlo u místa, kde ho člověk při práci potřebuje?
+- Srozumitelnost: dá se pravidlo použít bez čtení starého rozhodovacího záznamu?
+- Hranice: je pořád jasné, co pravidlo neotevírá?
+- Datová střídmost: nevzniká kvůli údržbě nový tracker, štítek, export, pole nebo kopie?
+
+To stačí. Pokud začnete přidávat metriky, grafy, rozhovory a historický průzkum, už nejste v běžné údržbě. Otevřeli jste novou iteraci. To může být v pořádku, ale musí k tomu existovat návratový signál. Údržba šablony není vstupenka do produktového archeologického muzea. Někdy je šablona prostě šablona.
+
+Praktický příklad:
+
+```text
+Dnešní údržba:
+Zkracujeme onboardingovou odpověď pro import dat.
+
+Pravidlo v klidu:
+Obsahově kompletní export s odlišnými názvy sloupců nejdřív posuzujeme interně.
+
+Kontrola:
+Pravidlo zůstává u onboardingové odpovědi, ale po zkrácení textu by zmizela věta, kdy otevřít zákaznický call.
+
+Údržbová oprava:
+Do zkrácené odpovědi přidáváme jednu větu: "Zákaznický call otevíráme až tehdy, když chybí obsah nebo rozhodnutí."
+
+Co neotevíráme:
+Neměníme importní proces, nezavádíme CRM štítek a neplánujeme další kontrolní setkání.
+```
+
+Tady údržba pravidlo nevrací do mimořádné péče. Jen hlídá, aby se při zkracování neztratila hrana, která pravidlu dává smysl.
+
+### Tři výsledky údržby
+
+Běžná údržba pravidla v dlouhodobém klidu má mít jen tři výsledky:
+
+- Beze změny: pracovní místo se změnilo, ale pravidlo zůstává najitelné, srozumitelné a datově střídmé.
+- Lokální přenos: pravidlo se musí přesunout, zkrátit nebo doplnit jednou větou, aby přežilo úpravu pracovního místa.
+- Návratový signál: údržba odhalila konkrétní situaci, která splňuje dříve zapsanou podmínku návratu.
+
+Čtvrtý výsledek "radši to začneme sledovat" sem nepatří. Pokud něco začínáte sledovat, napište proč, kde to skončí a jaká data tím vzniknou. Bez toho jde často jen o pohodlnější náhradu rozhodnutí.
+
+Příklad rozdílu:
+
+```text
+Beze změny:
+Při zkrácení formuláře zůstala věta o neotevřeném rozpočtovém poli u kvalifikační otázky. Nic dalšího neměníme.
+
+Lokální přenos:
+Při přesunu sales šablony do nového kanonického dokumentu přenášíme i větu, že rozpočet nezjišťujeme v prvním kontaktu povinným polem.
+
+Návratový signál:
+Při údržbě obchodních odpovědí jsme našli tři poslední relevantní poptávky, které nešlo kvalifikovat bez doptání na rozpočet. To splňuje původní návratový signál a otevíráme malý návrat pouze k rozpočtové otázce.
+```
+
+První dva výsledky patří do údržby. Třetí už otevírá návrat, ale jen proto, že se objevil konkrétní důvod. Ne proto, že někdo zrovna upravoval dokument.
+
+### Privacy-first údržba
+
+Údržba je časté místo, kde vznikají zbytečná data. Ne úmyslně. Prostě někdo "pro přehled" přidá nový sloupec, "pro jistotu" začne značit výjimky, nebo "abychom příště věděli" uloží kopii zákaznického souboru mimo původní tok. Přitom původní pravidlo v klidu možná právě tomu bránilo.
+
+Při každé údržbě proto napište jednu datovou větu:
+
+```text
+Po této údržbě nevzniká:
+```
+
+Příklady:
+
+```text
+Po této údržbě nevzniká nový CRM štítek pro nestandardní exporty, kopie zákaznických souborů mimo onboardingový tok ani měsíční report importních výjimek.
+```
+
+```text
+Po této údržbě nevzniká povinné pole pro rozpočet, behaviorální sledování formuláře ani export poptávek do dalšího marketingového nástroje.
+```
+
+Datová věta je malá, ale důležitá. Říká, že údržba nebyla záminkou k rozšíření sběru dat. Privacy-first provoz se často nerozbije velkým rozhodnutím. Rozbije se sérií drobných "to se bude hodit", které nikdo nepojmenoval.
+
+### Karta údržby pravidla v klidu
+
+```text
+Pravidlo v dlouhodobém klidu:
+
+Dnešní údržba pracovního místa:
+
+Co se mění na pracovním místě:
+
+Kontrola najitelnosti:
+
+Kontrola srozumitelnosti:
+
+Kontrola hranice:
+
+Kontrola datové střídmosti:
+
+Výsledek údržby:
+- beze změny
+- lokální přenos
+- návratový signál
+
+Pokud jde o lokální přenos, jaká jedna věta nebo kotva se mění:
+
+Pokud jde o návratový signál, jaká původní podmínka se splnila:
+
+Co zůstává výslovně zavřené:
+
+Po této údržbě nevzniká:
+
+Kde zůstává kanonická stopa:
+```
+
+Kartu vyplňujte celou jen tehdy, když údržba pravidlo skutečně posouvá. U čistého výsledku stačí krátká věta:
+
+```text
+Při údržbě onboardingové odpovědi zůstává pravidlo o interním posouzení exportu beze změny; nevzniká nový štítek, report ani kopie souborů mimo onboardingový tok.
+```
+
+To je dobrý konec. Ne každý dotyk s pravidlem potřebuje vlastní dokumentaci. Někdy je nejpraktičtější výstup věta, která říká: kontrola proběhla, pravidlo stojí, data nepřibývají.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: pojmenujte dnešní údržbu pracovního místa.
+2. Minuta 2: najděte pravidlo v dlouhodobém klidu, kterého se údržba dotýká.
+3. Minuta 3: zkontrolujte najitelnost a srozumitelnost.
+4. Minuta 4: napište, co zůstává zavřené.
+5. Minuta 5: vyberte jeden ze tří výsledků údržby.
+6. Minuta 6: doplňte datovou větu a kanonické místo.
+
+Pokud se během šesti minut objeví skutečný návratový signál, workshop ukončete jako údržbu a otevřete samostatný malý návrat. Nemíchejte tyto dva režimy. Údržba má chránit klid. Návrat má řešit nový důvod.
+
+### Checklist běžné údržby
+
+- Víme, jaké pracovní místo se dnes opravdu udržuje?
+- Dotýká se údržba pravidla v dlouhodobém klidu?
+- Zůstává pravidlo tam, kde ho člověk při práci najde?
+- Dá se pravidlo použít bez čtení staré historie?
+- Je jasné, co pravidlo dál neotevírá?
+- Nepřidává údržba nový tracker, štítek, export, pole, report nebo kopii?
+- Pokud se pravidlo mění, jde jen o lokální přenos?
+- Pokud se otevírá návrat, splnil se konkrétní návratový signál?
+- Je datová věta uložená u pracovního místa?
+- Končí údržba bez nového mimořádného rytmu?
+
+Běžná údržba pravidla v dlouhodobém klidu má být nenápadná. Udrží pravidlo na místě, zachová jeho hranu a nepustí do provozu zbytečná data. Pokud po ní nikdo nemá pocit velké produktové události, je to často znamení, že proběhla správně.
+
 ## Pracovní log
 
+- 2026-07-10: Doplněna navazující podkapitola o běžné údržbě pravidla v dlouhodobém klidu: údržbová otázka, tři výsledky, SaaS příklady, privacy-first datová věta, karta, mini workshop a checklist.
 - 2026-07-09: Doplněna navazující podkapitola o dlouhodobém klidu po uzavřeném druhém setkání: stavy klidu, SaaS příklad, privacy-first datová věta, karta, mini workshop a checklist.
 - 2026-07-09: Doplněna navazující podkapitola o uzavření druhého běžného setkání po klidové stopě: tři uzavírací stavy, SaaS příklad s importní šablonou, privacy-first datová brzda, karta, mini workshop a checklist.
 - 2026-07-09: Doplněna navazující podkapitola o druhém běžném setkání po klidové stopě: ověření lokální opravy bez čerstvého vysvětlování, SaaS příklad, privacy-first kontrola, karta, mini workshop a checklist.
