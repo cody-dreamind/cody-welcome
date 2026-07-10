@@ -997,8 +997,220 @@ Vezmi současnou pricing stránku, nabídku nebo interní ceník a vyplň tabulk
 
 Potom udělej jednu konkrétní úpravu: přidej vysvětlení limitu, doplň informaci o DPH, popiš zrušení a export dat, přejmenuj plány podle segmentů nebo přidej orientační cenu tam, kde je dnes jen mlhavé „kontaktujte nás“. Pricing není hotový, když je hezký. Je hotový, když zrychluje správné rozhodnutí a nevyrábí nedůvěru.
 
+## 7. Marketing bez spamu: obsah, partnerství, direct outreach a komunita
+
+Marketing bez spamu nezačíná u nástroje na kampaně. Začíná u respektu k pozornosti člověka. Když někdo otevře článek, e-mail, demo stránku nebo zprávu na LinkedInu, půjčuje ti kousek svého dne. Privacy-first marketing se podle toho chová: říká pravdu, měří jen to, co potřebuje, a nesnaží se člověka nahnat do trychtýře jako balík na pásu.
+
+Špatná otázka zní: „Jak dostaneme víc lidí do sekvence?“
+
+Lepší otázka zní: „Komu dokážeme férově pomoct a jak se k němu dostaneme bez manipulace?“
+
+Marketing malého SaaS nebo odborné firmy nemusí být hlasitý. Musí být přesný, pravidelný a důvěryhodný.
+
+### Začni trhem, ne kanálem
+
+Kanály se mění rychleji než problém zákazníka. Jednou funguje organický LinkedIn, potom newsletter, potom partnerský webinář, potom komunitní Slack. Pokud začneš kanálem, budeš honit taktiky. Pokud začneš trhem, víš, co hledáš.
+
+Pro každou marketingovou aktivitu si napiš:
+
+- Jaký segment oslovujeme?
+- Jaký problém už teď řeší?
+- Kde si o něm zjišťuje informace?
+- Komu už důvěřuje?
+- Jaké riziko cítí před nákupem?
+- Jaký další krok je pro něj přirozený?
+
+Příklad: Prodáváš SaaS pro plánování servisních techniků. Segment „malé firmy“ je moc široký. Segment „servisní firmy s 5 až 30 techniky, které dnes plánují výjezdy v Excelu a po telefonu“ už říká, kde hledat témata, jak mluvit o bolesti a jaký důkaz bude fungovat. Takový zákazník často nepotřebuje vidět obecnou větu „zvyšte efektivitu“. Potřebuje pochopit, jak se přestanou ztrácet změny v rozvrhu, kdo vidí aktuální stav výjezdu a co se stane, když technik nemá signál.
+
+Privacy-first dopad: Čím přesněji chápeš segment, tím méně potřebuješ plošný tracking. Nemusíš šmírovat tisíce anonymních návštěvníků, když umíš vést dvacet dobrých rozhovorů a publikovat odpovědi na skutečné otázky trhu.
+
+### Obsah má odpovídat na nákupní nejistotu
+
+Obsahový marketing často selže proto, že vyrábí objem, ne rozhodnutí. Článek vyjde, sdílí se, možná přinese návštěvnost, ale nikdo neumí říct, k čemu měl být. Praktický obsah má jednu z těchto prací:
+
+- vysvětlit problém,
+- porovnat možnosti,
+- snížit vnímané riziko,
+- ukázat postup,
+- dokázat odbornost,
+- pomoci stávajícímu zákazníkovi uspět.
+
+Místo generického článku „10 trendů v digitalizaci servisu“ napiš raději:
+
+- „Jak poznat, že Excel už nestačí na plánování servisních výjezdů“
+- „Co musí umět systém pro servisní techniky v terénu“
+- „Checklist před migrací servisního plánování z tabulek“
+- „Jak nastavit role, aby dispečer viděl vše a technik jen svoje výjezdy“
+
+Takový obsah je užitečný i bez agresivní konverzní vrstvy. Na konci může být přirozený další krok: demo, kontakt, šablona, srovnání, případová studie nebo odkaz na dokumentaci. Ne každého čtenáře musíš hned zavřít do pop-upu. Někteří lidé si tě raději uloží do RSS a vrátí se za měsíc. To je v pořádku. Důvěra se někdy načítá pomaleji než JavaScript, ale drží déle.
+
+Praktická matice témat:
+
+| Fáze rozhodování | Otázka zákazníka | Vhodný obsah |
+| --- | --- | --- |
+| Problém | „Máme to vůbec řešit?“ | Symptomy, kalkulačka ztrát, příklady chaosu |
+| Možnosti | „Jaké jsou cesty?“ | Porovnání tabulka vs. SaaS vs. vlastní systém |
+| Riziko | „Co se pokazí?“ | Migrační plán, bezpečnostní FAQ, ukázka podpory |
+| Nákup | „Co přesně dostanu?“ | Pricing, demo scénáře, implementační kroky |
+| Úspěch | „Jak z toho vytěžit hodnotu?“ | Dokumentace, checklisty, návody, changelog |
+
+### Direct outreach dělej jako výzkum a pomoc
+
+Přímé oslovení není špatné samo o sobě. Špatné je, když vypadá jako hromadná zpráva s vyměněným jménem a falešnou větou „narazil jsem na váš profil“. V Evropě je navíc potřeba u direct marketingu řešit právní základ, ePrivacy pravidla pro elektronickou komunikaci a národní implementace. Toto není právní rada; praktické pravidlo zní: čím víc zpráva připomíná hromadnou reklamu, tím opatrnější musíš být.
+
+Privacy-first outreach má tři zásady:
+
+1. Oslovuj úzký segment, kde máš konkrétní důvod.
+2. Nepředstírej osobní vztah, který neexistuje.
+3. Dej člověku jednoduchou cestu, jak další kontakt odmítnout.
+
+Dobrá zpráva není dlouhá. Je konkrétní.
+
+Příklad slabé zprávy:
+
+„Dobrý den, pomáháme firmám s digitalizací a rádi bychom vám ukázali, jak můžete zefektivnit procesy. Máte 30 minut příští týden?“
+
+Příklad lepší zprávy:
+
+„Dobrý den, všiml jsem si, že provozujete servisní tým ve více regionech. Děláme plánování výjezdů pro firmy, které přecházejí z Excelu a telefonu na sdílený dispečink. Sepsal jsem krátký checklist migrace bez výpadku provozu: [odkaz]. Pokud dnes řešíte plánování podobně, rád pošlu i ukázkový postup pro první dva týdny. Pokud ne, nebudu vás dál kontaktovat.“
+
+Druhá zpráva pořád není kouzelná vstupenka do inboxu. Ale je konkrétní, ověřitelná a člověk chápe, proč ji dostal. Nevyžaduje sledovací pixel, skryté přesměrování ani pět automatických follow-upů.
+
+Minimum pro outreach:
+
+- Vedený seznam oslovení s důvodem kontaktu.
+- Zdroj kontaktu a právní úvaha, proč je kontakt férový.
+- Krátká zpráva bez zavádějících tvrzení.
+- Žádné automatické sekvence bez kontroly relevance.
+- Okamžité respektování odmítnutí nebo odhlášení.
+- Retence kontaktů: staré nerelevantní kontakty nemaž až za „někdy“, ale podle pravidla.
+
+Codyho komentář: Když potřebuješ poslat osm follow-upů, aby si tě člověk všiml, možná nemáš cadence. Možná máš problém s relevancí. Au, já vím. Ale inbox není boxovací pytel.
+
+### Partnerství poráží placený dosah, když je důvěryhodné
+
+Malé firmy často nemají rozpočet na velké kampaně. Mají ale šanci být užitečné v ekosystému. Partnerství funguje, když obě strany přinášejí publiku hodnotu, ne když si jen vymění loga.
+
+Typy partnerství:
+
+- společný praktický článek,
+- webinář bez prodejního divadla,
+- integrace dvou nástrojů,
+- doporučení mezi komplementárními službami,
+- společný checklist nebo šablona,
+- případová studie s reálným zákazníkem,
+- hostování v komunitě nebo podcastu.
+
+Příklad: SaaS pro plánování techniků se může spojit s firmou, která dodává účetní nebo skladový systém pro servisní firmy. Společný obsah nemusí být „digitální transformace 2026“. Může být mnohem praktičtější: „Jak propojit servisní výjezd, skladový díl a fakturaci bez ručního přepisování“. To je téma, které má přímou hodnotu a přirozeně ukazuje oba produkty.
+
+Privacy-first pravidla pro partnerství:
+
+- Nesdílej seznam kontaktů jen proto, že partner chce „follow-up“.
+- Pokud sbíráte registrace na společnou akci, jasně napište, kdo data dostane.
+- Nepřidávej účastníky automaticky do dvou newsletterů.
+- Používej přímé odkazy bez zbytečných reklamních identifikátorů, pokud je nepotřebuješ.
+- Vyhodnocuj úspěch agregovaně: účasti, relevantní poptávky, kvalita konverzací, ne osobní sledování každého kliknutí.
+
+Partnerství má dobrý signál: po akci by měl člověk vědět víc než před ní, i kdyby nikdy nic nekoupil.
+
+### Komunita není distribuční kanál na steroidech
+
+Komunita se nedá koupit nástrojem. Může běžet na fóru, Discordu, Slacku, Matrixu, Mastodonu, komentářích pod blogem nebo na pravidelných setkáních. Nástroj je vedlejší. Důležité je, jestli lidé mají důvod se vracet a jestli je prostor bezpečný, užitečný a moderovaný.
+
+Než založíš komunitu, odpověz si:
+
+- Jaký společný problém nebo identita lidi spojuje?
+- Co dostanou členové i bez nákupu?
+- Kdo bude odpovídat, moderovat a udržovat kvalitu?
+- Jak se bude řešit spam, self-promo a konflikty?
+- Jaká data členů budeš sbírat a proč?
+- Co se stane, když komunita neporoste?
+
+Někdy je lepší nepřidávat další komunitu na internet. Vážně. Místo toho můžeš být užitečný tam, kde cílová skupina už je: odpovídat na otázky, publikovat otevřené návody, přispívat do oborových diskuzí, podporovat open-source projekt nebo pořádat malé pracovní setkání.
+
+Privacy-first komunitní provoz:
+
+- Nevyžaduj víc údajů, než je nutné pro účet nebo účast.
+- Odděl komunitní účet od marketingového souhlasu.
+- Neprodávej ani nepředávej členský seznam.
+- Měj jasná pravidla mazání účtu a obsahu.
+- Preferuj veřejně dostupné znalostní výstupy: shrnutí, FAQ, návody, RSS.
+
+Komunita má být vztah, ne past na kontakty.
+
+### Měř marketing tak, aby šel řídit
+
+Marketing bez měření se snadno změní v pocitovou gymnastiku. Privacy-first ale neznamená slepotu. Znamená menší, promyšlenější sadu metrik.
+
+Dobré marketingové metriky pro malý tým:
+
+- počet relevantních návštěv klíčových stránek,
+- kliky na hlavní CTA v agregaci,
+- nové poptávky podle zdroje,
+- kvalita poptávek podle segmentu,
+- počet rozhovorů se správným typem zákazníka,
+- konverze z obsahu do konkrétního dalšího kroku,
+- retence čtenářů přes RSS nebo přímé návštěvy,
+- otázky, které se opakují v sales a supportu.
+
+Horší metriky, pokud stojí samy o sobě:
+
+- impressions bez dopadu,
+- obecný traffic bez segmentu,
+- počet followers bez vztahu k pipeline,
+- open rate jako hlavní cíl,
+- počet odeslaných cold e-mailů,
+- „engagement“ bez dalšího rozhodnutí.
+
+Praktický měsíční marketing review:
+
+| Otázka | Co zkontrolovat |
+| --- | --- |
+| Který segment reagoval nejlépe? | Poptávky, odpovědi, schůzky, kvalita fitu |
+| Který obsah pomohl rozhodnutí? | CTA, přímé zmínky v hovorech, interní sales poznámky |
+| Který kanál přivedl důvěryhodný kontakt? | Zdroj leadu bez osobního profilování |
+| Co se opakovaně nepochopilo? | Dotazy, námitky, opuštěné kroky |
+| Co příští měsíc vypneme? | Kanály a aktivity bez jasného rozhodnutí |
+| Co příští měsíc zlepšíme? | Jeden obsah, jedna stránka, jeden outreach scénář |
+
+Tento review se dá dělat s jednoduchou analytikou, CRM poznámkami a rozhovory. Nepotřebuješ k tomu sledovat člověka napříč internetem jako podezřelý kufr na letišti.
+
+### Checklist: Marketing bez spamu
+
+- [ ] Máme jasně popsaný segment, ne jen obecnou cílovku.
+- [ ] Každý obsahový kus odpovídá na konkrétní otázku zákazníka.
+- [ ] Hlavní marketingové kanály mají vlastníka a rytmus.
+- [ ] Outreach má konkrétní důvod kontaktu, ne jen personalizační proměnnou.
+- [ ] U direct marketingu řešíme právní základ, ePrivacy pravidla a lokální požadavky.
+- [ ] Odmítnutí dalšího kontaktu respektujeme hned.
+- [ ] Partnerství nepoužíváme jako záminku ke sdílení kontaktů bez jasného souhlasu.
+- [ ] Newsletter nebo odběr obsahu je oddělený od registrace do produktu, pokud to není nutné.
+- [ ] Marketing měříme agregovaně tam, kde to stačí.
+- [ ] Jednou měsíčně vypneme nebo upravíme aktivitu, která nepomáhá rozhodnutí.
+
+### Mini úkol
+
+Vyber jeden marketingový kanál, kterému teď věnuješ čas, a vyplň tabulku:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Pro jaký segment kanál používáme? |  |
+| Jaký problém tam řešíme? |  |
+| Jaký typ obsahu nebo kontaktu funguje nejlépe? |  |
+| Jaký další krok je férový pro člověka? |  |
+| Jaká data sbíráme a proč? |  |
+| Co můžeme měřit agregovaně? |  |
+| Co bychom měli přestat dělat? |  |
+| Jakou jednu změnu uděláme příští měsíc? |  |
+
+Potom udělej jednu konkrétní úpravu: přepiš jednu cold zprávu, doplň jasné odhlášení, přidej článek odpovídající na reálnou námitku, zjednoduš měření kampaně nebo ukonči kanál, který jen spotřebovává energii. Marketing bez spamu není tichý marketing. Je to marketing, po kterém se nemusíš sprchovat zevnitř.
+
 ## Zdroje
 
+- European Commission: Digital privacy - přehled vztahu ePrivacy Directive a GDPR v digitálním soukromí: https://digital-strategy.ec.europa.eu/en/policies/digital-privacy
+- EUR-Lex: Directive 2002/58/EC, Article 13 - pravidla pro nevyžádanou komunikaci a direct marketing v ePrivacy směrnici: https://eur-lex.europa.eu/eli/dir/2002/58/oj/eng
+- European Commission: Can data received from a third party be used for marketing? - praktický příklad právního základu a marketingového použití osobních dat: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/legal-grounds-processing-data/can-data-received-third-party-be-used-marketing_en
+- European Data Protection Board: Guidelines 1/2024 on processing of personal data based on Article 6(1)(f) GDPR - legitimní zájem a jeho limity včetně direct marketingu: https://www.edpb.europa.eu/system/files/2024-10/edpb_guidelines_202401_legitimateinterest_en.pdf
 - Nielsen Norman Group: Pricing information gives B2B sites a competitive advantage - proč B2B zákazníci potřebují vidět cenu na webu: https://www.nngroup.com/articles/show-price/
 - European Commission: Sweeps - pravidla a kontroly transparentního zobrazování cen v EU spotřebitelském prostředí: https://commission.europa.eu/topics/consumers/consumer-rights-and-complaints/enforcement-consumer-protection/sweeps_en
 - Stripe Documentation: Recurring pricing models - přehled flat rate, per-seat, tiered, package, volume a usage-based modelů pro předplatné: https://docs.stripe.com/products-prices/pricing-models
@@ -1023,6 +1235,7 @@ Potom udělej jednu konkrétní úpravu: přidej vysvětlení limitu, doplň inf
 
 ## Pracovní log
 
+- 2026-07-10: Doplněna kapitola 7 o marketingu bez spamu: segmentace, obsah podle nákupní nejistoty, direct outreach, partnerství, komunita, privacy-first měření, checklist a mini úkol; přidány ověřené zdroje k ePrivacy a legitimnímu zájmu.
 - 2026-07-10: Doplněna kapitola 6 o pricingu a balíčcích: hodnotové měřítko ceny, modely účtování, transparentní pricing stránka, trial/freemium, privacy-first pravidla pro data, checklist a mini úkol; přidány ověřené zdroje k B2B cenám, transparentnosti cen a modelům předplatného.
 - 2026-07-10: Doplněna kapitola 5 o SaaS produktu: problém, segment, rozhovory s uživateli, první hodnota, onboarding, aktivace, prioritizace, checklist a mini úkol; přidány ověřené zdroje k user needs, rozhovorům a onboardingu.
 - 2026-07-10: Doplněna kapitola 4 o obsahovém systému, blogu, RSS/Atom distribuci, metadatech, editorial pipeline, gated obsahu, recyklaci obsahu, checklistu a mini úkolu; přidány ověřené zdroje k RSS, Atom a strukturovaným datům.
