@@ -1631,8 +1631,235 @@ Vyber jednu oblast, kde tým opakovaně ztrácí čas, a vyplň pracovní list:
 
 Potom udělej jednu konkrétní změnu: založ rozhodovací log, sepiš deploy postup, přidej šablonu úkolu, nastav automatickou kontrolu RSS/sitemap, nebo smaž nástroj, který nikdo nevlastní a jen drží data ze zvyku. Produktivita není víc pohybu. Je to méně tření mezi záměrem a výsledkem.
 
+## 10. Bezpečnost, práva uživatelů a provoz v Evropě
+
+Bezpečnost není poslední kapitola, kterou někdo dopíše před enterprise prodejem. Je to provozní vlastnost produktu. U privacy-first SaaS navíc nejde jen o to, aby útočník neprošel dovnitř. Jde i o to, aby tým věděl, jaká data drží, kdo k nim má přístup, jak splní práva uživatelů a co udělá, když se něco pokazí.
+
+Malý tým nepotřebuje bezpečnostní divadlo. Potřebuje pár návyků, které se skutečně používají:
+
+- méně dat,
+- méně přístupů,
+- jasné vlastnictví,
+- pravidelné zálohy,
+- rychlou reakci na incident,
+- dodavatele, u kterých ví, kde data končí.
+
+Codyho komentář: Nejhorší bezpečnostní dokument je ten, který vypadá profesionálně a nikdo podle něj neumí postupovat. Raději jedna stránka přesného postupu než třicet stran uklidňující mlhy.
+
+### Začni mapou dat a přístupů
+
+Bezpečnost se špatně řídí, když tým neví, co vlastně chrání. První praktický krok je jednoduchá mapa dat:
+
+| Oblast | Jaká data | Kde jsou | Kdo má přístup | Retence | Poznámka |
+| --- | --- | --- | --- | --- | --- |
+| Uživatelské účty | E-mail, jméno, role | Produkční databáze | Aplikace, admin role | Po dobu účtu | Export a smazání přes support |
+| Fakturace | Firma, adresa, objednávky | Fakturační systém | Finance, support | Podle účetních povinností | Oddělit od produktové analytiky |
+| Analytika | Agregované události | EU analytika | Produkt, marketing | 12 měsíců | Bez osobních identifikátorů |
+| Logy | Technické chyby, IP podle potřeby | Log server | Tech | Krátká retence | Neposílat obsah formulářů |
+| Support | Dotazy a přílohy | Helpdesk | Support | Podle pravidel supportu | Nepřikládat zbytečná osobní data |
+
+Mapa nemusí být dokonalá hned. Musí být použitelná. Když přidáš nový formulář, integraci nebo databázovou tabulku, doplň ji do mapy. Pokud to nejde popsat jedním řádkem, pravděpodobně je zpracování příliš nejasné.
+
+K mapě dat patří matice přístupů:
+
+- kdo má produkční admin,
+- kdo vidí osobní data zákazníků,
+- kdo může exportovat data,
+- kdo může mazat data,
+- kdo může měnit DNS, hosting, platební nastavení a e-mailové domény,
+- kdo má přístup k zálohám.
+
+Praktické pravidlo: Přístup nemá být odměna za důvěru, ale nástroj k práci. Kdo ho nepotřebuje pro konkrétní roli, nemá ho mít. Kdo ho potřebuje dočasně, má ho dostat dočasně.
+
+### Identita a oprávnění: nejdřív zavři běžné díry
+
+Většina malých týmů nezkolabuje na nedostatku exotické kryptografie. Zkolabuje na sdíleném hesle, starém admin účtu, chybějícím 2FA nebo člověku, který odešel a pořád má přístup do produkce.
+
+Minimum pro SaaS a firemní web:
+
+- správce hesel pro tým,
+- dvoufaktorové ověření u e-mailu, GitHubu, hostingu, DNS, fakturace a produkčních nástrojů,
+- unikátní účty místo sdílených loginů,
+- role podle práce, ne podle seniority,
+- pravidelná revize přístupů,
+- offboarding checklist pro lidi, kteří mění roli nebo odcházejí,
+- oddělené produkční a vývojové přístupy,
+- auditní log u kritických nástrojů, pokud ho nástroj nabízí.
+
+Offboarding je bezpečnostní rutina, ne nepříjemná formalita. Checklist může být krátký:
+
+1. Zrušit přístup k e-mailu, repozitářům, hostingu, analytice, CRM, helpdesku a fakturaci.
+2. Převzít vlastnictví dokumentů, automatizací a API klíčů.
+3. Rotovat sdílená tajemství, pokud existovala.
+4. Zkontrolovat naplánované úlohy a integrace běžící pod osobním účtem.
+5. Zapsat datum a vlastníka provedení.
+
+Privacy-first dopad je přímý: čím méně lidí má přístup k osobním datům, tím menší je riziko úniku, omylu i zbytečného interního slídění. Ano, i interní slídění je slídění. Jen má firemní tričko.
+
+### Práva uživatelů musí být provozní postup, ne jen text v zásadách
+
+Evropská ochrana osobních údajů dává lidem konkrétní práva: být informován, získat přístup k datům, opravit nepřesnosti, požádat o výmaz, omezit zpracování, získat data v přenositelném formátu, vznést námitku a nebýt předmětem některých čistě automatizovaných rozhodnutí. EDPB i Evropská komise tato práva popisují prakticky pro organizace i jednotlivce.
+
+Pro produktový tým z toho plyne jednoduchý závěr: nestačí mít stránku „Privacy policy“. Musíš vědět, jak žádost vyřídit.
+
+Praktický postup pro žádosti uživatelů:
+
+| Typ žádosti | Co musí tým umět | Poznámka |
+| --- | --- | --- |
+| Přístup k datům | Najít data o účtu a vysvětlit zpracování | Nevracet interní poznámky bez kontroly kontextu |
+| Oprava | Opravit nepřesné údaje | Udržet audit, co se změnilo |
+| Výmaz | Smazat nebo anonymizovat data, která už není nutné držet | Účetní a právní povinnosti mohou mít vlastní režim |
+| Přenositelnost | Exportovat data v běžném strojově čitelném formátu | CSV nebo JSON bývá praktičtější než PDF |
+| Námitka | Posoudit právní základ a zastavit zpracování, kde je to potřeba | Typicky marketing nebo profilování |
+| Omezení | Dočasně pozastavit určité zpracování | Produkt musí vědět, co to znamená technicky |
+
+Nejjednodušší export dat je ten, který produkt umí vygenerovat automaticky. Druhá nejlepší varianta je přesný interní postup pro support. Nejhorší varianta je hledání v databázi pokaždé jinak podle nálady člověka na směně.
+
+Mini šablona interního postupu:
+
+| Krok | Vlastník | Hotovo |
+| --- | --- | --- |
+| Ověřit identitu žadatele přiměřeně riziku | Support |  |
+| Zapsat typ žádosti a datum přijetí | Support |  |
+| Najít dotčené systémy podle mapy dat | Ops |  |
+| Připravit export, opravu, výmaz nebo odpověď | Tech/Ops |  |
+| Zkontrolovat právní výjimky a retenční povinnosti | Odpovědná osoba |  |
+| Odeslat odpověď srozumitelným jazykem | Support |  |
+| Zapsat výsledek a datum uzavření | Support |  |
+
+Toto není právní rada. Je to provozní minimum, aby privacy-first slib nebyl jen odstavec, který nikdo neumí naplnit.
+
+### Zálohy a obnova: netestovaná záloha je přání
+
+Záloha není hotová tím, že někde existuje soubor. Hotová je ve chvíli, kdy tým umí data obnovit a ví, jak dlouho to trvá. ENISA ve svých materiálech pro malé a střední firmy opakovaně zdůrazňuje základní kyberhygienu, včetně záloh, aktualizací, řízení přístupů a přípravy na incidenty.
+
+Pro SaaS si napiš tři čísla:
+
+- RPO: kolik dat si můžeš dovolit ztratit,
+- RTO: jak dlouho může služba rozumně nefungovat,
+- retence záloh: jak dlouho držíš staré kopie.
+
+Nemusí to být akademické. Pro malý B2B SaaS může první verze vypadat takto:
+
+| Systém | RPO | RTO | Retence | Test obnovy |
+| --- | --- | --- | --- | --- |
+| Produkční databáze | 24 hodin | 4 hodiny | 30 dní | 1x za kvartál |
+| Uploady uživatelů | 24 hodin | 8 hodin | 30 dní | 1x za kvartál |
+| Konfigurace infrastruktury | Po změně | 2 hodiny | Historie v repozitáři | Při větší změně |
+| Fakturace | Podle dodavatele | 1 pracovní den | Podle účetních pravidel | Ověřit export |
+
+Privacy-first detail: Zálohy jsou také data. Pokud uživatel požádá o výmaz, musíš vědět, co se stane v aktivní databázi, v analytice, v supportu a v zálohách. Někdy se data v zálohách nemažou okamžitě kus po kusu, ale zálohy mají omezenou retenci a po obnově se musí znovu aplikovat výmaz. Důležité je mít popsané pravidlo, ne improvizovat.
+
+### Logy a monitoring bez sběru všeho
+
+Logy jsou potřeba pro provoz, bezpečnost a ladění. Zároveň se z nich snadno stane skládka osobních údajů. Typický problém: aplikace při chybě zaloguje celý request včetně e-mailu, tokenu, adresy, obsahu formuláře nebo fakturačních údajů. Debug radost, privacy smutek.
+
+Pravidla pro logování:
+
+- neloguj hesla, tokeny, session cookies ani celé autorizační hlavičky,
+- neposílej do logů obsah soukromých zpráv, formulářů nebo dokumentů,
+- maskuj e-maily a identifikátory, pokud stačí částečný údaj,
+- odděl aplikační logy, auditní logy a bezpečnostní události,
+- nastav retenci podle účelu,
+- přístup k logům dej jen lidem, kteří ho potřebují,
+- zkontroluj, kam logy odchází u hostingu, monitoringu a chybových nástrojů.
+
+Auditní log je jiná věc než analytika. U admin akcí může být oprávněné držet informaci, kdo změnil roli, exportoval data nebo smazal účet. Ale i tam platí: účel, omezený přístup, rozumná retence.
+
+### Incident plán: co uděláte v prvních hodinách
+
+Incident není jen velký hack v titulcích. Může to být omylem veřejný soubor, špatně nastavený bucket, uniklý API klíč, chybně poslaný export, malware v účtu zaměstnance nebo chyba, která zpřístupní data jiného zákazníka.
+
+GDPR pracuje s osobními daty a porušením zabezpečení osobních údajů. Pokud incident pravděpodobně představuje riziko pro práva a svobody lidí, správce má oznamovací povinnost vůči dozorovému úřadu bez zbytečného odkladu a pokud možno do 72 hodin od zjištění. Pokud je riziko vysoké, může být potřeba informovat i dotčené osoby. EDPB má k oznamování porušení zabezpečení osobních údajů samostatné pokyny.
+
+První verze incident plánu:
+
+| Fáze | Otázky | Výstup |
+| --- | --- | --- |
+| Zjištění | Co se stalo, kdy, kdo to našel? | Incident záznam |
+| Zastavení škody | Jak omezíme další dopad? | Revokace klíče, vypnutí funkce, oprava konfigurace |
+| Rozsah | Jaká data a účty mohou být dotčené? | Seznam systémů a odhad dopadu |
+| Povinnosti | Jde o osobní data? Je riziko pro lidi? | Rozhodnutí o oznámení |
+| Komunikace | Koho informovat interně, zákaznicky, právně? | Krátké, přesné sdělení |
+| Náprava | Jak zabráníme opakování? | Úkoly, vlastník, datum |
+| Poučení | Co změnit v systému nebo procesu? | Post-incident záznam |
+
+Incident komunikace má být věcná. Ne marketingová. Neschovávej se za „mohlo dojít k neoprávněnému přístupu“, pokud víš víc. Zároveň neslibuj jistotu, kterou nemáš. Dobrý incident update řekne: co víme, co nevíme, co jsme udělali, koho se to týká, co má člověk udělat a kdy přijde další informace.
+
+### Dodavatelé a evropský provoz
+
+Privacy-first provoz v Evropě neznamená odmítat všechny dodavatele mimo vlastní kancelář. Znamená to vybírat vědomě a držet kontrolu nad daty.
+
+U každého dodavatele si zapiš:
+
+- jaká data zpracovává,
+- zda je správce nebo zpracovatel,
+- kde data běží a kde jsou zálohy,
+- zda existuje evropský region nebo evropský provozovatel,
+- jaké jsou podmínky pro subdodavatele,
+- jak funguje export a výmaz,
+- jak se řeší incidenty,
+- kdo v týmu je vlastník nástroje,
+- co se stane při odchodu od dodavatele.
+
+NIS2 se nevztahuje automaticky na každý malý SaaS. Směrnice míří na vybrané základní a důležité subjekty v definovaných sektorech a členské státy ji promítají do národní úpravy. Její logika je ale užitečná i pro menší firmy: řízení rizik, incident reporting, bezpečnost dodavatelského řetězce, business continuity a odpovědnost vedení nejsou enterprise ozdoby. Jsou to normální provozní otázky.
+
+Praktický vendor checklist:
+
+| Otázka | Ano/Ne | Poznámka |
+| --- | --- | --- |
+| Víme, jaká data nástroj dostává? |  |  |
+| Umí EU region nebo evropského provozovatele? |  |  |
+| Máme exportní cestu? |  |  |
+| Umíme smazat data zákazníka? |  |  |
+| Máme smluvně a provozně jasné role? |  |  |
+| Víme, kdo jsou subdodavatelé? |  |  |
+| Má vlastník nástroje nastavenou revizi? |  |  |
+| Existuje plán náhrady, kdyby nástroj skončil nebo zdražil? |  |  |
+
+Pokud nástroj projde jen proto, že „ho všichni používají“, není to rozhodnutí. Je to outsourcing přemýšlení.
+
+### Checklist: Bezpečnost a evropský provoz
+
+- [ ] Existuje aktuální mapa dat, systémů a přístupů.
+- [ ] Produkční, fakturační, DNS, e-mailové a repozitářové účty mají 2FA.
+- [ ] Kritické přístupy jsou osobní, ne sdílené.
+- [ ] Tým má offboarding checklist a používá ho.
+- [ ] Produkt nebo support umí vyřídit žádost o přístup, opravu, výmaz, omezení, přenositelnost a námitku.
+- [ ] Je jasné, která data lze smazat hned a která se drží kvůli zákonné nebo smluvní povinnosti.
+- [ ] Zálohy mají definované RPO, RTO, retenci a test obnovy.
+- [ ] Logy neobsahují hesla, tokeny, celé formuláře ani zbytečné osobní údaje.
+- [ ] Existuje jednoduchý incident plán pro první hodiny.
+- [ ] Tým ví, kdy řešit oznámení porušení zabezpečení osobních údajů.
+- [ ] Každý důležitý dodavatel má vlastníka, popsaná data, lokalitu provozu, subdodavatele a exportní cestu.
+- [ ] Nové nástroje prochází privacy a security otázkami před nasazením, ne až po prvním problému.
+
+### Mini úkol
+
+Vyber jeden systém, ve kterém jsou osobní nebo obchodně citlivá data: produkční databázi, CRM, helpdesk, analytiku, fakturační nástroj nebo hosting. Vyplň pracovní list:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jaká data systém drží? |  |
+| Kdo má přístup a proč? |  |
+| Kde data fyzicky nebo smluvně končí? |  |
+| Jak dlouho data držíme? |  |
+| Jak data exportujeme? |  |
+| Jak data smažeme nebo anonymizujeme? |  |
+| Jak poznáme incident? |  |
+| Koho voláme v první hodině? |  |
+| Jaká jedna oprava sníží riziko nejvíc? |  |
+
+Potom udělej jednu konkrétní změnu: zapni 2FA, odeber starý účet, zkrať retenci logů, doplň exportní postup, otestuj obnovu zálohy nebo založ incident šablonu. Bezpečnost se nebuduje heroickým víkendem. Buduje se tím, že tým pravidelně zavírá malé díry dřív, než se z nich stane drahý příběh.
+
 ## Zdroje
 
+- European Data Protection Board: Respect individuals' rights - přehled práv subjektů údajů v GDPR pro malé a střední organizace: https://www.edpb.europa.eu/sme-data-protection-guide/respect-individuals-rights_en
+- European Commission: Information for individuals - praktický přehled práv jednotlivců podle ochrany osobních údajů v EU: https://commission.europa.eu/law/law-topic/data-protection/information-individuals_en
+- European Data Protection Board: Guidelines 9/2022 on personal data breach notification under GDPR - pokyny k oznamování porušení zabezpečení osobních údajů: https://www.edpb.europa.eu/documents/guideline/guidelines-92022-on-personal-data-breach-notification-under-gdpr_en
+- EUR-Lex: Directive (EU) 2022/2555, NIS2 Directive - právní text směrnice o vysoké společné úrovni kybernetické bezpečnosti v EU: https://eur-lex.europa.eu/eli/dir/2022/2555/oj/eng
+- ENISA: Cybersecurity guide for SMEs - 12 steps to securing your business - praktický bezpečnostní základ pro malé a střední firmy: https://www.enisa.europa.eu/publications/cybersecurity-guide-for-smes
+- ENISA: SMEs Cybersecurity - přehled nástrojů a doporučení ENISA pro kyberbezpečnost malých a středních firem: https://www.enisa.europa.eu/topics/awareness-and-cyber-hygiene/smes-cybersecurity
 - Diátaxis: Documentation framework - čtyři typy dokumentace podle potřeb uživatele: https://diataxis.fr/
 - Cognitect: Documenting Architecture Decisions - původní lehký formát pro Architecture Decision Records od Michaela Nygarda: https://www.cognitect.com/blog/2011/11/15/documenting-architecture-decisions
 - GitHub Docs: Continuous integration with GitHub Actions - CI workflow pro build a testy v repozitáři: https://docs.github.com/en/actions/get-started/continuous-integration
@@ -1668,6 +1895,7 @@ Potom udělej jednu konkrétní změnu: založ rozhodovací log, sepiš deploy p
 
 ## Pracovní log
 
+- 2026-07-10: Doplněna kapitola 10 o bezpečnosti, právech uživatelů a evropském provozu: mapa dat a přístupů, identita, vyřizování práv uživatelů, zálohy, logy, incident plán, dodavatelé, NIS2 kontext, checklist a mini úkol; přidány ověřené zdroje k EDPB, Evropské komisi, ENISA a NIS2.
 - 2026-07-10: Doplněna kapitola 9 o produktivitě malého týmu: dokumentace podle potřeb, rozhodovací log, automatizace rutin, meetingový rytmus, lepší zadávání úkolů, inventura nástrojů, checklist a mini úkol; přidány ověřené zdroje k Diátaxis, ADR, CI a toil.
 - 2026-07-10: Doplněna kapitola 8 o analytice s minimem dat: rozhodovací metriky, návrh eventů, omezení osobních údajů, cookie/consent režim, dashboardy, kombinace čísel s rozhovory, retence, checklist a mini úkol; přidány ověřené zdroje k GDPR článkům 5 a 25, privacy by design a analytice.
 - 2026-07-10: Doplněna kapitola 7 o marketingu bez spamu: segmentace, obsah podle nákupní nejistoty, direct outreach, partnerství, komunita, privacy-first měření, checklist a mini úkol; přidány ověřené zdroje k ePrivacy a legitimnímu zájmu.
