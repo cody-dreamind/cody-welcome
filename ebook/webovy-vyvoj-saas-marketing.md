@@ -318581,8 +318581,210 @@ Pokud se workshop zasekne na tom, jestli druhé setkání bylo "dost jiné", ne�
 
 Druhé přirozené setkání má dodat klid, ne novou chuť všechno řídit. Když pravidlo obstojí v jiné běžné situaci, berte to jako signál, že může dál pracovat bez dozoru. Když potřebuje jednu hranu, dopište ji. Když se splní návratový signál, otevřete malý návrat. A pokud se nestane nic zajímavého, gratuluji: systém právě udělal přesně to, kvůli čemu jste ho stavěli.
 
+## Uzavření druhého přirozeného setkání po návratu do tichého provozu
+
+Uzavření druhého přirozeného setkání má rozhodnout, jestli pravidlo opravdu zůstává v tichém provozu, jestli dostane jednu drobnou oporu, nebo jestli se má otevřít malý návrat. Není to místo pro souhrnnou prezentaci, nový audit ani velké "pojďme si to celé projít". Pokud se pravidlo dvakrát potkalo s běžnou prací, závěr má být krátký a použitelný.
+
+Hlavní otázka zní:
+
+```text
+Co po druhém přirozeném setkání měníme v kanonickém pracovním místě a co už dál necháváme v klidu?
+```
+
+Slovo `kanonické` je tady důležité. Pokud závěr zapíšete jen do chatu, interní poznámky nebo hlavy člověka, který zrovna vedl debatu, pravidlo se za pár týdnů zase ztratí. Uzavření má žít tam, kde se bude příště rozhodovat: v šabloně, formuláři, obchodním skriptu, onboardingové odpovědi, produktovém pravidle nebo provozní instrukci.
+
+Závěr nemá dokazovat, že tým pracoval pečlivě. Má umožnit, aby příští člověk nemusel pečlivost opakovat. To je rozdíl mezi znalostí a administrativním suvenýrem.
+
+### Čtyři uzavírací stavy
+
+Po druhém přirozeném setkání vyberte jeden ze čtyř stavů:
+
+- Zavřít bez zápisu: pravidlo fungovalo a nové použití nepřineslo žádnou rozhodovací hodnotu navíc.
+- Zavřít jednou přenosovou větou: druhé setkání potvrdilo užitečnou hranici, kterou má smysl nechat v kanonickém místě.
+- Zavřít jednou lokální úpravou: pravidlo zůstává správné, ale potřebuje drobnou formulaci, kotvu nebo příklad.
+- Otevřít malý návrat: splnil se dříve domluvený návratový signál.
+
+`Zavřít bez zápisu` je legitimní výsledek. Někdy je nejlepší dokumentace žádná nová dokumentace. Pokud se pravidlo použilo samostatně, nevznikla nejistota, nevznikla data navíc a nikdo nepotřeboval starý kontext, další poznámka by byla jen procesní ozdoba. Ozdoby jsou fajn na stromeček. V provozu mají tendenci chytat prach.
+
+`Zavřít jednou přenosovou větou` použijte, když druhé setkání ukáže formulaci, která bude příště šetřit rozhodování. Věta má být obecná, ne přepis konkrétního případu.
+
+Příklad:
+
+```text
+U partnerských follow-upů zůstává case study veřejná; obchod doplňuje kontext v e-mailu, ne v nové gated variantě.
+```
+
+`Zavřít jednou lokální úpravou` je vhodné, když pravidlo fungovalo, ale člověk musel chvíli hledat přesnou hranici. Úprava má být malá a blízká místu použití.
+
+Příklad:
+
+```text
+Do importní šablony doplňujeme větu: "Rozdělené adresní údaje posuzujeme společně, pokud z nich lze jednoznačně složit povinný kontakt."
+```
+
+`Otevřít malý návrat` použijte jen tehdy, když je splněná návratová podmínka. Ne když se někomu otevřela chuť na zlepšování. Chuť na zlepšování je sympatická, ale bez hranice umí sežrat celé odpoledne a ještě si říct o dezert.
+
+### SaaS příklad
+
+Pravidlo v tichém provozu:
+
+```text
+Když zákazník pošle import s jinými názvy sloupců, posuzujeme význam povinných údajů, ne shodu názvů.
+```
+
+První přirozené setkání potvrdilo, že customer success umí pravidlo najít v importní šabloně. Druhé setkání přišlo u exportu z jiného systému. Pravidlo znovu pomohlo, ale člověk krátce zaváhal u adresy rozdělené do více sloupců.
+
+Špatné uzavření:
+
+```text
+Začneme sbírat příklady nestandardních exportů a vyhodnotíme typy odchylek.
+```
+
+Tohle je moc široké. Jedno zaváhání kolem adresy neznamená, že potřebujete databázi zákaznických exportů. Potřebujete jednu větu.
+
+Dobré uzavření:
+
+```text
+Druhé přirozené setkání zavíráme lokální úpravou importní šablony: rozdělené adresní údaje posuzujeme společně, pokud z nich lze jednoznačně složit povinný kontakt. Nezakládáme seznam zákaznických exportů, nový CRM štítek ani report odchylek.
+```
+
+Tento závěr dělá tři věci najednou. Zlepšuje rozhodnutelnost pravidla, nechává rozsah zavřený a chrání zákaznická data před tím, aby se z nich stala výuková sbírka. Výukové sbírky mají ve firmách zvláštní schopnost přežít původní důvod své existence o celé roky. Pak se někdo zeptá, proč máme ve složce staré exporty, a všichni najednou obdivují strop.
+
+### Marketingový příklad
+
+Pravidlo v tichém provozu:
+
+```text
+Evergreen články hodnotíme podle agregované návštěvnosti, přímých dotazů a obchodní použitelnosti; nepřidáváme osobní tracking čtenáře.
+```
+
+První setkání ukázalo, že obchod umí článek použít v kvalifikaci. Druhé setkání přišlo při aktualizaci staršího návodu. Marketing měl agregovanou návštěvnost, obchodní poznámku a dva konkrétní dotazy od zákazníků. To stačilo k rozhodnutí, že článek se má udržovat.
+
+Uzavření bez zápisu může být v pořádku, pokud kanonická věta už existuje a druhé setkání nic nového nepřidalo. Pokud ale tým chce předejít návrhu na gated PDF, může dát do pravidla jednu přenosovou větu:
+
+```text
+U evergreen návodů rozhoduje agregovaný výkon a obchodní použitelnost; osobní tracking čtenářů, gated PDF ani nový formulář nejsou výchozí způsob měření hodnoty.
+```
+
+To je dobrá věta, protože chrání rozhodnutí před běžnou marketingovou gravitací: když nevíme, jak něco vyhodnotit, přidáme formulář. Formulář je někdy užitečný. Jindy je to jen způsob, jak vyměnit důvěru za tabulku.
+
+### Co po uzavření nedělat
+
+Po druhém přirozeném setkání nedělejte tyto věci:
+
+- Nezakládejte nový tracker jen proto, že pravidlo fungovalo dvakrát.
+- Nevytvářejte složku reálných příkladů, pokud stačí typová věta.
+- Nepřidávejte CRM štítek, report nebo formulářové pole bez jasného rozhodnutí, které má podpořit.
+- Neotevírejte původní problém, pokud se nesplnil návratový signál.
+- Nepište dlouhý zápis tam, kde stačí nechat pravidlo v klidu.
+
+Největší chyba je přidat kontrolu z dobrého pocitu. Tým si řekne: "Funguje to, pojďme si to hlídat." Jenže hlídání bez rizika je často jen nový zvyk. A nový zvyk bez rozhodovací hodnoty je provozní náklad převlečený za odpovědnost.
+
+### Privacy-first uzavření
+
+Privacy-first uzavření má dvě části: co ponecháváme a co mažeme nebo vůbec nevytváříme.
+
+Ponechávejte:
+
+- obecnou rozhodovací větu,
+- anonymizovaný typový příklad,
+- odkaz na kanonické pracovní místo,
+- návratový signál, pokud opravdu existuje.
+
+Mažte nebo nevytvářejte:
+
+- zákaznické exporty použité jen pro ověření,
+- screenshoty formulářů a e-mailů,
+- pomocné seznamy reálných případů,
+- dočasné štítky,
+- kontrolní tabulky bez konce,
+- kopie osobních nebo obchodních údajů mimo původní účel.
+
+Dobrá privacy-first věta:
+
+```text
+Po uzavření ponecháváme pouze obecnou formulaci v importní šabloně; dočasný screenshot mažeme, zákaznický export nekopírujeme a nezakládáme novou evidenci nestandardních souborů.
+```
+
+U marketingu:
+
+```text
+Po uzavření ponecháváme přenosovou větu u pravidla pro evergreen články; nesbíráme osobní čtenářské profily, nevytváříme gated PDF a rozhodnutí dál opíráme o agregovaná data a přímé obchodní použití.
+```
+
+Tohle je praktická evropská disciplína: znalost zůstává, zbytečná data ne. A ano, je to méně efektní než další dashboard. Také je to výrazně levnější na vysvětlování, údržbu a svědomí.
+
+### Karta uzavření druhého přirozeného setkání
+
+```text
+Pravidlo v tichém provozu:
+
+Kanonické pracovní místo:
+
+První přirozené setkání:
+
+Druhé přirozené setkání:
+
+Co druhé setkání přineslo navíc:
+
+Uzavírací stav:
+- zavřít bez zápisu
+- zavřít jednou přenosovou větou
+- zavřít jednou lokální úpravou
+- otevřít malý návrat
+
+Pokud zavíráme bez zápisu, proč nová stopa nepřidá rozhodovací hodnotu:
+
+Pokud zapisujeme přenosovou větu, její přesné znění:
+
+Pokud děláme lokální úpravu, jaká věta, kotva nebo příklad se mění:
+
+Pokud otevíráme malý návrat, jaký návratový signál se splnil:
+
+Co zůstává výslovně zavřené:
+
+Jaká data, exporty, screenshoty, štítky, reporty nebo kopie nevytváříme:
+
+Jaké dočasné stopy mažeme nebo zobecňujeme:
+
+Kde zůstává výsledek:
+
+Vlastník:
+```
+
+Kartu nepoužívejte jako rituál. Použijte ji, když vzniká rozhodnutí, věta, úprava nebo návrat. Pokud je jediný výsledek "všechno fungovalo a nic dalšího není potřeba", může být nejlepší kartu nevyplnit. Schopnost nevyrobit dokument je podceňovaná manažerská dovednost.
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: připomeňte pravidlo a kanonické pracovní místo.
+2. Minuta 2: popište druhé přirozené setkání jednou větou.
+3. Minuta 3: řekněte, co přineslo navíc proti prvnímu setkání.
+4. Minuta 4: vyberte jeden ze čtyř uzavíracích stavů.
+5. Minuta 5: napište přesnou větu, úpravu nebo důvod, proč nic nezapisujete.
+6. Minuta 6: ukliďte dočasné stopy a potvrďte, jaká data dál nevznikají.
+
+Pokud během workshopu vzniknou tři nové nápady, zapište maximálně ten, který má vlastní návratový signál. Zbytek nechte mimo uzavření. Uzavření není inbox pro všechno, co se při debatě zatvářilo chytře.
+
+### Checklist uzavření druhého přirozeného setkání
+
+- Víme, kde pravidlo žije v kanonickém pracovním místě?
+- Popisujeme druhé setkání jako běžnou práci, ne jako audit?
+- Umíme říct, co přineslo navíc proti prvnímu setkání?
+- Vybrali jsme jeden ze čtyř uzavíracích stavů?
+- Pokud zavíráme bez zápisu, je jasné, proč nová stopa nepřidá hodnotu?
+- Pokud zapisujeme přenosovou větu, je obecná a použitelná pro příští rozhodnutí?
+- Pokud děláme lokální úpravu, měníme jen nejbližší větu, kotvu nebo příklad?
+- Pokud otevíráme malý návrat, splnil se konkrétní návratový signál?
+- Je napsané, co zůstává výslovně zavřené?
+- Uklidili jsme dočasné exporty, screenshoty, štítky, kopie nebo poznámky?
+- Nevzniká nový tracker, CRM pole, report, gated obsah nebo osobní sledování bez rozhodovací hodnoty?
+- Zůstává pravidlo po uzavření v tichém provozu, pokud se opravdu neotevřel návrat?
+
+Uzavření druhého přirozeného setkání je malá tečka s velkým dopadem. Buď nechá pravidlo v klidu, nebo mu dá jednu přesnou oporu, nebo otevře omezený návrat. Nic víc. Pokud se po uzavření cítíte trochu nedramaticky, je to dobré znamení. Provozní kvalita málokdy vstupuje do místnosti s fanfárou.
+
 ## Pracovní log
 
+- 2026-07-10: Doplněna navazující podkapitola o uzavření druhého přirozeného setkání po návratu do tichého provozu: čtyři uzavírací stavy, SaaS a marketingové příklady, privacy-first uzavření, karta, mini workshop a checklist.
 - 2026-07-10: Doplněna navazující podkapitola o druhém přirozeném setkání po návratu do tichého provozu: rozdíl proti prvnímu setkání, čtyři výsledky, SaaS a marketingové příklady, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-07-10: Doplněna navazující podkapitola o uzavření prvního přirozeného setkání po návratu do tichého provozu: tři uzavírací stavy, SaaS a marketingové příklady, privacy-first úklid dočasných stop, karta, mini workshop a checklist.
 - 2026-07-10: Doplněna navazující podkapitola o prvním přirozeném setkání po návratu pravidla do tichého provozu: rozlišení běžného použití od umělé kontroly, tři výsledky, SaaS příklad, privacy-first hranice, karta, mini workshop a checklist.
