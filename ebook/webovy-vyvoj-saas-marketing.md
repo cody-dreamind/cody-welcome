@@ -318387,8 +318387,203 @@ Když se workshop začne měnit v nové zkoumání původního pravidla, vraťte
 
 Uzavření prvního přirozeného setkání má chránit dvě věci: praktickou použitelnost pravidla a klid systému. Když pravidlo funguje, nechte ho fungovat. Když potřebuje jednu větu, napište jednu větu. Když se opravdu splní návratový signál, otevřete malý návrat a držte ho na uzdě. Všechno ostatní je jen dobře oblečené rozšiřování práce.
 
+## Druhé přirozené setkání po návratu do tichého provozu
+
+Druhé přirozené setkání je první chvíle, kdy se ukáže, jestli pravidlo opravdu patří do běžného provozu, nebo jestli první hladké použití bylo jen šťastná náhoda. Pořád to ale není audit, review ani záminka k novému projektu. Je to obyčejná pracovní situace, ve které se pravidlo znovu objeví bez pozvánky.
+
+Hlavní otázka zní:
+
+```text
+Použilo se pravidlo podruhé v dost jiné běžné situaci, aniž by potřebovalo mimořádné vysvětlování?
+```
+
+Slova `dost jiné` jsou důležitá. Pokud obchod pošle stejný odkaz stejnému typu zákazníka o den později, pořád je to užitečné použití, ale ne moc silný důkaz přenositelnosti. Pokud se pravidlo použije u jiné role, jiného segmentu, jiného kanálu nebo jiné fáze práce, začíná být zajímavé. Ne proto, že byste museli vyrábět tabulku úspěchů. Proto, že pravidlo ukazuje samostatnost.
+
+Druhé setkání má ověřit tři věci:
+
+- pravidlo je najitelné bez autora,
+- rozhodovací věta dává smysl i mimo původní příklad,
+- tichý provoz nezačal potichu vytvářet novou datovou stopu.
+
+Pokud všechny tři věci projdou, pravidlo nechte být. To je pointa. Stabilní pravidlo se nemá po každém použití vracet na stůl jako student k tabuli. Má dělat práci.
+
+### Kdy druhé setkání počítat
+
+Druhé setkání počítejte jen tehdy, když splní dvě podmínky:
+
+- vzniklo přirozeně v běžném provozu,
+- přidalo aspoň malou novou informaci o použitelnosti pravidla.
+
+Praktický rozdíl:
+
+```text
+Počítá se:
+Marketing použil pravidlo veřejné case study u nového typu obchodního follow-upu a nemusel vytvářet gated PDF.
+
+Nepočítá se:
+Tým si znovu přečetl pravidlo na interním review a shodl se, že pořád zní rozumně.
+```
+
+Interní review může být užitečné, ale není to druhé přirozené setkání. Pravidlo se má potkat s realitou, ne se souhlasným kýváním. Souhlas je levný. Použití je lepší měna.
+
+Někdy druhé setkání přijde velmi pozdě. To nevadí. Tichý provoz nemá termín jen proto, aby tým cítil pohyb. Pokud pravidlo leží na místě, kde se daná situace objevuje dvakrát ročně, druhé setkání po třech měsících je pořád normální. Nevyrábějte testovací příležitost jen proto, že kalendář vypadá prázdně.
+
+### Čtyři výsledky druhého setkání
+
+Druhé přirozené setkání má čtyři rozumné výsledky:
+
+- Potvrdit tichý provoz: pravidlo se použilo samostatně a není potřeba další zásah.
+- Zapsat jednu přenosovou větu: pravidlo fungovalo, ale druhá situace odhalila užitečnou hranici.
+- Doplnit lokální hranu: pravidlo je správné, ale v kanonickém místě chybí drobná kotva, příklad nebo formulace.
+- Otevřít malý návrat: druhé setkání splnilo dříve popsaný návratový signál.
+
+`Potvrdit tichý provoz` znamená nedělat nic navíc. Někdy stačí, že práce proběhla. Pokud pravidlo nikdo nehledal, nikdo nevysvětloval a nevznikla nová data, máte dobrý výsledek bez zápisu.
+
+`Zapsat jednu přenosovou větu` použijte tehdy, když druhá situace potvrdí hranici, která bude příště užitečná. Věta nemá popisovat celý případ. Má říct, jak se rozhodovat:
+
+```text
+Veřejná case study zůstává bez brány i při partnerském follow-upu; obchod doplňuje kontext v e-mailu, ne v novém formuláři.
+```
+
+Tady `bez brány` znamená bez výměny e-mailu za PDF, bez skrytého formuláře a bez malého marketingového rituálu "dej nám kontakt a my ti dáme soubor, který mohl být normální stránka".
+
+`Doplnit lokální hranu` je vhodné, když pravidlo fungovalo, ale člověk musel chvíli hledat přesnou formulaci. Neotevírejte celé pravidlo. Dopište jednu větu nebo příklad do místa, kde zaváhání vzniklo.
+
+`Otevřít malý návrat` použijte jen tehdy, když se opravdu splní návratová podmínka. Pokud se při druhém setkání ukáže jen nový okrajový nápad, dejte ho stranou. Druhé setkání není burza možností.
+
+### SaaS příklad
+
+V SaaS onboardingu existuje pravidlo:
+
+```text
+Když zákazník pošle import s jinými názvy sloupců, posuzujeme význam povinných údajů, ne shodu názvů.
+```
+
+První přirozené setkání proběhlo u malého zákazníka z CRM exportu. Druhé přijde u většího zákazníka, který posílá export z účetního systému. Názvy sloupců jsou jiné, ale povinné údaje jsou jasné. Customer success pravidlo najde v importní šabloně, rozhodne bez autora a nepožádá zákazníka o nový soubor.
+
+Výsledek:
+
+```text
+Potvrdit tichý provoz:
+Pravidlo obstálo i u exportu z jiného systému. Není potřeba nový záznam ani nová evidence příkladů.
+```
+
+Pokud se ale ukáže, že člověk zaváhal u rozdělených adres, může stačit lokální hrana:
+
+```text
+Doplňujeme jednu větu:
+Adresa může být rozdělená do více sloupců, pokud z nich lze jednoznačně složit povinný kontaktní údaj.
+```
+
+To je dobrá úprava. Nezakládá slovník všech exportů, nesbírá zákaznické soubory a nepřidává nové importní pole. Jen zvyšuje rozhodnutelnost v místě, kde pravidlo pracuje.
+
+### Marketingový příklad
+
+Marketing má pravidlo:
+
+```text
+Výkon článku hodnotíme podle agregované návštěvnosti, přímých dotazů a použití v obchodním rozhovoru; nepřidáváme osobní tracking čtenáře.
+```
+
+První setkání proběhlo u článku poslaného obchodem. Druhé přijde při aktualizaci staršího návodu. Tým chce vědět, jestli má článek cenu udržovat. Stačí agregovaná návštěvnost, dva konkrétní dotazy od zákazníků a poznámka obchodu, že odkaz použil v kvalifikaci. Nevzniká potřeba sledovat jednotlivé čtenáře.
+
+Dobrá přenosová věta:
+
+```text
+U evergreen návodů stačí pro rozhodnutí o údržbě agregovaný výkon a obchodní použitelnost; nezavádíme osobní tracking čtenářů ani gated verzi článku.
+```
+
+Tahle věta pomůže příště, až někdo navrhne "jen malý pixel". Malé pixely mívají velké provozní ocasy. A pak se všichni diví, proč má jednoduchý blog víc vysvětlování než účetní závěrka.
+
+### Privacy-first kontrola druhého setkání
+
+Druhé setkání je zrádné, protože potvrzení pravidla svádí ke sběru důkazů. Tým si řekne: "Když už to fungovalo dvakrát, pojďme si schovat příklady." Někdy stačí jedna anonymizovaná formulace. Skoro nikdy není potřeba schovávat celé exporty, e-maily, screenshoty nebo seznam zákazníků.
+
+Použijte tři otázky:
+
+- Jakou znalost chceme přenést do budoucna?
+- Jde ji zapsat typově, bez konkrétních osobních nebo obchodních dat?
+- Co smažeme, když z typové věty vznikne stabilní pravidlo?
+
+Příklad privacy-first zápisu:
+
+```text
+Z druhého setkání neponecháváme zákaznický export ani screenshot. Do šablony doplňujeme typovou větu o rozdělené adrese a dočasnou poznámku mažeme po úpravě kanonického místa.
+```
+
+Takový zápis je lepší než složka "příklady pro budoucnost". Budoucnost nepotřebuje všechno. Budoucnost potřebuje rozhodnutelnou větu.
+
+### Karta druhého přirozeného setkání
+
+```text
+Pravidlo v tichém provozu:
+
+Kanonické pracovní místo:
+
+První přirozené setkání potvrdilo:
+
+Druhé přirozené setkání:
+
+V čem bylo druhé setkání jiné než první:
+
+Použilo se pravidlo bez mimořádné péče?
+- ano
+- částečně
+- ne
+
+Výsledek:
+- potvrdit tichý provoz
+- zapsat jednu přenosovou větu
+- doplnit lokální hranu
+- otevřít malý návrat
+
+Pokud zapisujeme větu nebo hranu, přesné znění:
+
+Pokud otevíráme návrat, jaká dříve domluvená podmínka se splnila:
+
+Co zůstává výslovně zavřené:
+
+Jaká data, exporty, screenshoty, štítky, reporty nebo kopie nevytváříme:
+
+Jaké dočasné stopy mažeme nebo zobecňujeme:
+
+Kde zůstává výsledek:
+```
+
+Kartu používejte jen tehdy, když vzniká věta, lokální hrana nebo návrat. Pokud druhé setkání jen potvrdí tichý provoz a nepřinese žádný nový poznatek, nevyrábějte zápis o tom, že se nic nezapisuje. To je procesní akrobacie, ne řízení znalostí.
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: pojmenujte pravidlo a první přirozené setkání.
+2. Minuta 2: popište druhé setkání jednou větou.
+3. Minuta 3: určete, v čem bylo druhé setkání jiné.
+4. Minuta 4: rozhodněte, jestli pravidlo fungovalo bez mimořádné péče.
+5. Minuta 5: vyberte jeden ze čtyř výsledků.
+6. Minuta 6: napište případnou přenosovou větu nebo lokální hranu.
+7. Minuta 7: ukliďte dočasné datové stopy a potvrďte, co dál nesbíráte.
+
+Pokud se workshop zasekne na tom, jestli druhé setkání bylo "dost jiné", neřešte filozofii podobnosti. Zeptejte se praktičtěji: naučilo nás něco, co pomůže příštímu rozhodnutí? Pokud ne, nechte pravidlo v klidu.
+
+### Checklist druhého přirozeného setkání
+
+- Vzniklo setkání v běžné práci, ne jako umělá kontrola?
+- Bylo aspoň trochu jiné než první setkání?
+- Musel podle pravidla někdo opravdu jednat nebo rozhodnout?
+- Šlo pravidlo najít a použít bez autora a staré historie?
+- Vybrali jsme jeden ze čtyř výsledků?
+- Pokud zapisujeme přenosovou větu, pomůže příštímu rozhodnutí?
+- Pokud doplňujeme lokální hranu, měníme jen nejbližší pracovní místo?
+- Pokud otevíráme návrat, je navázaný na dříve popsaný návratový signál?
+- Je jasné, co zůstává zavřené?
+- Nevytváříme nový tracker, report, export, CRM štítek, formulářové pole ani složku reálných příkladů?
+- Uklidili jsme dočasné poznámky, screenshoty nebo kopie dat?
+- Zůstává pravidlo po druhém setkání v tichém provozu, pokud se opravdu neotevřel malý návrat?
+
+Druhé přirozené setkání má dodat klid, ne novou chuť všechno řídit. Když pravidlo obstojí v jiné běžné situaci, berte to jako signál, že může dál pracovat bez dozoru. Když potřebuje jednu hranu, dopište ji. Když se splní návratový signál, otevřete malý návrat. A pokud se nestane nic zajímavého, gratuluji: systém právě udělal přesně to, kvůli čemu jste ho stavěli.
+
 ## Pracovní log
 
+- 2026-07-10: Doplněna navazující podkapitola o druhém přirozeném setkání po návratu do tichého provozu: rozdíl proti prvnímu setkání, čtyři výsledky, SaaS a marketingové příklady, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-07-10: Doplněna navazující podkapitola o uzavření prvního přirozeného setkání po návratu do tichého provozu: tři uzavírací stavy, SaaS a marketingové příklady, privacy-first úklid dočasných stop, karta, mini workshop a checklist.
 - 2026-07-10: Doplněna navazující podkapitola o prvním přirozeném setkání po návratu pravidla do tichého provozu: rozlišení běžného použití od umělé kontroly, tři výsledky, SaaS příklad, privacy-first hranice, karta, mini workshop a checklist.
 - 2026-07-10: Doplněna navazující podkapitola o uzavření druhého použití po lokálním přenosu pravidla: čtyři uzavírací stavy, SaaS a marketingové příklady, privacy-first úklid dočasných stop, karta, mini workshop a checklist.
