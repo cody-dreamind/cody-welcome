@@ -1423,8 +1423,220 @@ Vyber jeden dashboard, analytický nástroj nebo seznam eventů a vyplň pracovn
 
 Potom udělej jednu konkrétní změnu: smaž zbytečný event, přestaň posílat e-mail do analytiky, zkrať retenci debug logů, doplň dokumentaci k metrice nebo nastav měsíční review dashboardu. Analytika se zlepší hlavně tím, že přestane předstírat vševědoucnost a začne sloužit rozhodnutím.
 
+## 9. Produktivita malého týmu: dokumentace, automatizace a rozhodovací log
+
+Produktivita malého týmu není o tom, že každý člověk vyplní víc políček v nástroji na úkoly. Je o tom, že se méně věcí ztrácí, méně rozhodnutí se opakuje, rutinní práce se automatizuje a nový člověk se dokáže zorientovat bez toho, aby musel vyslechnout ústní historii firmy u kávovaru.
+
+Špatná otázka zní: „Jaký nástroj na produktivitu si pořídíme?“
+
+Lepší otázka zní: „Které informace, rozhodnutí a rutiny dnes brzdí práci, protože nejsou jasně zachycené nebo opakovatelné?“
+
+Malý tým nemá prostor na procesní divadlo. Každý dokument, meeting a automatizace musí mít jasný účel. Když ho nemá, je to další administrativní nájemník v hlavě lidí, kteří už tak řeší produkt, zákazníky, prodej, support a provoz.
+
+### Dokumentace má snižovat opakované vyrušení
+
+Dobrá dokumentace není archiv všeho, co někdo věděl. Je to nástroj, který snižuje opakované otázky a zrychluje rozhodnutí. Když se stejná věc vysvětluje potřetí ve zprávách, patří do dokumentace. Když se někdo bojí nasadit změnu, protože postup zná jen jeden člověk, patří do dokumentace. Když sales slibuje něco jiného než produkt umí, patří to do veřejného nebo interního zdroje pravdy.
+
+Diátaxis rozlišuje čtyři základní typy dokumentace: tutoriály, návody, reference a vysvětlení. Pro malý SaaS je to užitečné hlavně proto, že brání míchání různých potřeb do jednoho chaotického textu.
+
+Prakticky:
+
+- Tutoriál vede člověka prvním úspěšným průchodem.
+- Návod pomáhá dokončit konkrétní úkol.
+- Reference popisuje přesné chování systému.
+- Vysvětlení dává kontext a důvody.
+
+Příklad: „Jak vytvořit první projekt“ je návod. „Co znamenají role Owner, Admin a Member“ je reference. „Proč oddělujeme zákaznická data podle workspace“ je vysvětlení. Když to všechno nacpeš do jednoho článku, začátečník se utopí a pokročilý člověk bude zuřit, že musí lovit jednu větu v esejistickém rybníku.
+
+Minimum dokumentace pro malý tým:
+
+| Oblast | Co má obsahovat | Kdo ji používá |
+| --- | --- | --- |
+| Lokální vývoj | instalace, proměnné, spuštění, testy | vývoj |
+| Deploy | postup nasazení, rollback, kontrola po deployi | vývoj a provoz |
+| Produkt | hlavní workflow, limity, známé kompromisy | produkt, sales, support |
+| Support | časté problémy, odpovědi, eskalace | support a obchod |
+| Data | kde jsou data, retence, export, smazání | provoz, právní odpovědnost |
+| Marketing | positioning, segmenty, schválené formulace | marketing a sales |
+
+Privacy-first poznámka: Dokumentace nesmí být skládka citlivých dat. Nepiš do ní produkční hesla, osobní údaje zákazníků, plné payloady z incidentů ani interní exporty. Dokumentuj postup a rozhodnutí, ne kopie dat, které by při úniku bolely víc než samotný problém.
+
+### Rozhodovací log chrání tým před opakováním debat
+
+Malé týmy často neztrácí čas proto, že by málo pracovaly. Ztrácí čas tím, že znovu otevírají stejné debaty: proč používáme tento hosting, proč nemáme tenhle tracker, proč je pricing po workspace a ne po uživateli, proč jsme odmítli integraci, kterou zákazník znovu požaduje.
+
+Rozhodovací log je jednoduchý způsob, jak zachytit důležitá rozhodnutí a jejich kontext. Michael Nygard v textu o Architecture Decision Records navrhl lehký formát pro architektonicky významná rozhodnutí: status, kontext, rozhodnutí a důsledky. Stejný princip funguje i mimo čistou architekturu.
+
+Praktická šablona:
+
+```markdown
+# 2026-07-10: Nepoužijeme reklamní pixel na hlavním webu
+
+## Status
+Přijato
+
+## Kontext
+Chceme vyhodnocovat kvalitu marketingových kanálů, ale značka stojí na privacy-first provozu v Evropě. Reklamní pixel by přidal externí skript a osobní sledování, které není nutné pro současné rozhodování.
+
+## Rozhodnutí
+Budeme měřit agregovanou návštěvnost, kliky na hlavní CTA a kvalitu poptávek v CRM. Reklamní pixel nenasadíme.
+
+## Důsledky
+Nebudeme mít detailní remarketing. Získáme jednodušší consent režim, rychlejší web a konzistentnější privacy pozici.
+```
+
+Není potřeba zapisovat každé mikro rozhodnutí. Zapisuj ta, která:
+
+- ovlivňují architekturu, data nebo bezpečnost,
+- mění pricing, segment nebo positioning,
+- zavádí nebo odmítají významný nástroj,
+- mají právní nebo privacy dopad,
+- se pravděpodobně vrátí jako otázka za tři měsíce,
+- vysvětlují kompromis, který by bez kontextu vypadal divně.
+
+Codyho komentář: Rozhodovací log je takový protijed na firemní archeologii. Když po roce někdo najde zvláštní technické rozhodnutí, nemá začínat výkopové práce ve Slacku. Má otevřít log a zjistit, co tehdy tým věděl, čeho se bál a co vědomě obětoval.
+
+### Automatizuj rutiny, ne zmatek
+
+Automatizace je užitečná, když nahrazuje opakovatelný, jasně popsaný postup. Je nebezpečná, když jen zrychlí chaos. Pokud tým neumí ručně vysvětlit, co se má stát, automatizace to pravděpodobně neopraví. Jen to bude rozbíjet věci rychleji a s větší sebedůvěrou.
+
+Google SRE kniha popisuje toil jako práci spojenou s provozem služby, která bývá manuální, opakovatelná, automatizovatelná, taktická, bez dlouhodobé hodnoty a roste s velikostí služby. Pro malý tým je to dobrý filtr: automatizuj hlavně práci, která se vrací, unavuje a nepřidává novou hodnotu.
+
+Kandidáti na automatizaci:
+
+- spuštění testů a lintů při změně kódu,
+- generování sitemap a RSS při publikaci obsahu,
+- kontrola rozbitých odkazů,
+- zálohy a ověření obnovy,
+- upozornění na expirovaný certifikát nebo nefunkční web,
+- vytvoření šablony pro nový článek, ADR nebo release notes,
+- pravidelné mazání dočasných exportů,
+- kontrola, že do analytiky neodchází zakázané vlastnosti.
+
+Naopak opatrně:
+
+- automatické rozesílání outreach zpráv,
+- automatické odpovědi na citlivé supportní dotazy,
+- automatické mazání zákaznických dat bez kontrolního procesu,
+- automatické změny pricingu nebo obsahu smluv,
+- automatické sdílení dat mezi marketingovými nástroji.
+
+Privacy-first automatizace má mít tři brzdy:
+
+1. Minimální přístup: skript má jen oprávnění, která opravdu potřebuje.
+2. Auditovatelný výstup: tým ví, co automatizace udělala a kdy.
+3. Bezpečný rollback nebo ruční kontrolu u citlivých kroků.
+
+GitHub Actions dokumentace popisuje CI jako workflow, které může buildit kód a spouštět testy v repozitáři. Princip je obecnější než konkrétní platforma: každá opakovaná kontrola, kterou člověk zapomene udělat, je kandidát na automatický guardrail. Guardrail není byrokracie. Je to levnější než ruční připomínání.
+
+### Meetingy nahraď rytmem rozhodnutí
+
+Meeting není špatný. Špatný je meeting bez rozhodnutí, vlastníka a výstupu. Malý tým by měl mít málo pravidelných setkání, ale jasný rytmus:
+
+- Týdně: co blokuje produkt, zákazníky nebo prodej.
+- Měsíčně: co říkají metriky, support a obchod.
+- Kvartálně: co se mění ve strategii, segmentu, ceně a provozním riziku.
+
+Každý meeting má mít tři výstupy:
+
+- rozhodnutí,
+- vlastníka,
+- další krok nebo explicitní zavření tématu.
+
+Pokud žádný výstup nevznikl, meeting byl pravděpodobně status divadlo. Status patří do krátké asynchronní zprávy. Diskuze patří tam, kde je potřeba rozhodnout, srovnat rizika nebo odblokovat práci.
+
+Praktická agenda pro týdenní produktový rytmus:
+
+| Blok | Otázka | Výstup |
+| --- | --- | --- |
+| Zákazníci | Co se opakovalo v supportu nebo sales? | jedna oprava nebo článek |
+| Produkt | Kde lidé nedosáhli první hodnoty? | jedna produktová úprava |
+| Provoz | Co zvyšuje riziko nebo manuální práci? | jedna automatizace nebo dokument |
+| Marketing | Co přivedlo relevantní poptávky? | jedna distribuce nebo obsah |
+| Rozhodnutí | Co jsme dnes zavřeli? | zápis do logu |
+
+Tým, který každý týden zavře jednu malou věc, často postupuje rychleji než tým, který každý měsíc otevře deset velkých iniciativ a pak je hrdinsky přelévá mezi sloupci.
+
+### Úkoly piš jako výsledek, ne jako aktivitu
+
+„Vyřešit onboarding“ není úkol. Je to přání v montérkách. Dobrý úkol říká, jaký výsledek má vzniknout, pro koho, podle čeho poznáme hotovo a jaké jsou hranice.
+
+Lepší formát:
+
+```markdown
+## Zkrátit registraci pro první workspace
+
+Problém:
+Noví uživatelé musí před první hodnotou vyplnit údaje, které nepotřebujeme pro vytvoření workspace.
+
+Výsledek:
+Registrace chce jen e-mail, heslo a název workspace. Ostatní údaje se ptají později v nastavení.
+
+Hotovo znamená:
+- test registrace pro nový účet prochází,
+- prázdný stav ukazuje první další krok,
+- analytika neposílá e-mail jako vlastnost eventu,
+- dokumentace onboardingu je aktualizovaná.
+```
+
+Tento formát je delší než jednovětný ticket, ale šetří čas při realizaci. Vývojář ví, co má dodat. Produkt ví, proč se to dělá. Support ví, co se změní. A budoucí tým vidí, že cílem nebylo „překopat registraci“, ale odstranit konkrétní tření.
+
+### Nástrojů měj méně, vlastnictví víc
+
+Malé týmy se často zahltí nástroji dřív než prací. Jeden nástroj na úkoly, druhý na dokumentaci, třetí na poznámky, čtvrtý na roadmapu, pátý na feedback, šestý na automatizace a sedmý na to, aby všem připomněl, že mají aktualizovat prvních šest. Tady už nepomůže productivity hack. Tady pomůže inventura.
+
+U každého nástroje si napiš:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jaké rozhodnutí nebo workflow podporuje? |  |
+| Kdo je vlastník? |  |
+| Jaká data v něm jsou? |  |
+| Kde data fyzicky a právně končí? |  |
+| Jak se exportují? |  |
+| Jak dlouho je držíme? |  |
+| Co se stane, když nástroj vypneme? |  |
+
+Privacy-first pravidlo: Nový nástroj nepřidávej jen proto, že řeší drobnou nepohodlnost. Každý nástroj je další účet, další zpracovatel, další přístupová práva, další export a další místo, kde se mohou povalovat data. Pokud stejnou věc vyřeší repozitář, Markdown, issue tracker nebo jednoduchá tabulka bez citlivých dat, začni tam.
+
+### Checklist: Produktivita malého týmu
+
+- [ ] Opakované otázky z vývoje, sales a supportu končí v dokumentaci.
+- [ ] Dokumentace rozlišuje návody, reference, vysvětlení a první průchody.
+- [ ] Existuje rozhodovací log pro architekturu, privacy, pricing a významné nástroje.
+- [ ] Každé důležité rozhodnutí má kontext, rozhodnutí a důsledky.
+- [ ] Automatizace nahrazuje jasně popsané rutiny, ne nejasný proces.
+- [ ] CI nebo jiná kontrola automaticky spouští základní testy a linty tam, kde dávají smysl.
+- [ ] Automatizace má minimální oprávnění, auditovatelný výstup a bezpečný rollback u citlivých kroků.
+- [ ] Pravidelné meetingy mají rozhodnutí, vlastníka a další krok.
+- [ ] Statusy se řeší asynchronně, pokud není potřeba rozhodnutí.
+- [ ] Úkoly popisují problém, výsledek a definici hotovo.
+- [ ] Nástroje mají vlastníka, exportní cestu a popsaný datový dopad.
+- [ ] Jednou za kvartál tým uklidí dokumentaci, rozhodovací log, automatizace a přístupy.
+
+### Mini úkol
+
+Vyber jednu oblast, kde tým opakovaně ztrácí čas, a vyplň pracovní list:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Co se opakuje nebo pořád vysvětluje? |  |
+| Je problém v dokumentaci, rozhodnutí, automatizaci nebo vlastnictví? |  |
+| Kdo je vlastník oblasti? |  |
+| Jaký je nejmenší dokument, který pomůže? |  |
+| Jaký krok lze bezpečně automatizovat? |  |
+| Jaká data nebo oprávnění automatizace potřebuje? |  |
+| Jak poznáme, že se vyrušení snížilo? |  |
+| Kdy výsledek zrevidujeme? |  |
+
+Potom udělej jednu konkrétní změnu: založ rozhodovací log, sepiš deploy postup, přidej šablonu úkolu, nastav automatickou kontrolu RSS/sitemap, nebo smaž nástroj, který nikdo nevlastní a jen drží data ze zvyku. Produktivita není víc pohybu. Je to méně tření mezi záměrem a výsledkem.
+
 ## Zdroje
 
+- Diátaxis: Documentation framework - čtyři typy dokumentace podle potřeb uživatele: https://diataxis.fr/
+- Cognitect: Documenting Architecture Decisions - původní lehký formát pro Architecture Decision Records od Michaela Nygarda: https://www.cognitect.com/blog/2011/11/15/documenting-architecture-decisions
+- GitHub Docs: Continuous integration with GitHub Actions - CI workflow pro build a testy v repozitáři: https://docs.github.com/en/actions/get-started/continuous-integration
+- Google SRE Book: Eliminating Toil - definice toil a důvod pro automatizaci opakované provozní práce: https://sre.google/sre-book/eliminating-toil/
 - European Commission: Digital privacy - přehled vztahu ePrivacy Directive a GDPR v digitálním soukromí: https://digital-strategy.ec.europa.eu/en/policies/digital-privacy
 - EUR-Lex: Directive 2002/58/EC, Article 13 - pravidla pro nevyžádanou komunikaci a direct marketing v ePrivacy směrnici: https://eur-lex.europa.eu/eli/dir/2002/58/oj/eng
 - EUR-Lex: Regulation (EU) 2016/679, GDPR - právní text včetně zásad zpracování, minimalizace údajů a ochrany údajů ve výchozím nastavení: https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng
@@ -1456,6 +1668,7 @@ Potom udělej jednu konkrétní změnu: smaž zbytečný event, přestaň posíl
 
 ## Pracovní log
 
+- 2026-07-10: Doplněna kapitola 9 o produktivitě malého týmu: dokumentace podle potřeb, rozhodovací log, automatizace rutin, meetingový rytmus, lepší zadávání úkolů, inventura nástrojů, checklist a mini úkol; přidány ověřené zdroje k Diátaxis, ADR, CI a toil.
 - 2026-07-10: Doplněna kapitola 8 o analytice s minimem dat: rozhodovací metriky, návrh eventů, omezení osobních údajů, cookie/consent režim, dashboardy, kombinace čísel s rozhovory, retence, checklist a mini úkol; přidány ověřené zdroje k GDPR článkům 5 a 25, privacy by design a analytice.
 - 2026-07-10: Doplněna kapitola 7 o marketingu bez spamu: segmentace, obsah podle nákupní nejistoty, direct outreach, partnerství, komunita, privacy-first měření, checklist a mini úkol; přidány ověřené zdroje k ePrivacy a legitimnímu zájmu.
 - 2026-07-10: Doplněna kapitola 6 o pricingu a balíčcích: hodnotové měřítko ceny, modely účtování, transparentní pricing stránka, trial/freemium, privacy-first pravidla pro data, checklist a mini úkol; přidány ověřené zdroje k B2B cenám, transparentnosti cen a modelům předplatného.
