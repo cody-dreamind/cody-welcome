@@ -3556,6 +3556,161 @@ Vyber jeden formulář, který má obchodní nebo produktový význam. Vyplň tu
 
 Potom udělej jednu konkrétní změnu: smaž jedno zbytečné pole, přepiš mikrotext, odděl newsletterový souhlas, doplň potvrzení po odeslání nebo nastav pravidlo mazání starých leadů. Formuláře jsou ideální místo pro privacy-first práci: malá změna, viditelný dopad, méně dat v batohu.
 
+## Příloha: Newsletter a produktové e-maily bez spamového reflexu
+
+E-mail je pořád jeden z nejlepších kanálů, protože je přímý, čitelný, exportovatelný a není celý postavený na náladě algoritmu. Právě proto je škoda používat ho jako horší reklamní síť. Privacy-first newsletter nemá být past na kontakt. Má být dobrovolný vztah, který si čtenář může kdykoliv rozmyslet.
+
+Evropský rámec pro elektronickou komunikaci a česká pravidla pro obchodní sdělení stojí na jednoduché provozní myšlence: marketingová zpráva nemá překvapovat člověka, který ji nečeká, a odhlášení má být snadné. ÚOOÚ k obchodním sdělením připomíná povinnost jasné identifikace odesílatele a řeší nevyžádaná obchodní sdělení podle zákona č. 480/2004 Sb.; ePrivacy směrnice řeší přímý marketing elektronickou poštou v článku 13. Odkazy jsou ve zdrojích.
+
+Toto není právní rada. Je to produktový a provozní rámec, který drží web, SaaS i marketing pohromadě bez pocitu, že každá e-mailová adresa je pozvánka k nekonečnému pingání.
+
+### Rozliš tři typy e-mailů
+
+Nejdřív si udělej pořádek v tom, co vlastně posíláš. V malém SaaS týmu se často všechno hází do jedné krabice s nápisem „newsletter“, ale provozně jsou to různé věci.
+
+| Typ e-mailu | Příklad | Hlavní účel | Privacy-first pravidlo |
+| --- | --- | --- | --- |
+| Provozní e-mail | potvrzení registrace, reset hesla, faktura, bezpečnostní upozornění | fungování služby | neposílej do něj marketingové vložky, které mění očekávání |
+| Produktový e-mail | changelog, informace o migraci, změna tarifu, upozornění na konec trialu | používání produktu | piš jen lidem, kterých se změna týká |
+| Marketingový e-mail | newsletter, nabídka, kampaň, pozvánka na webinář | propagace a prodej | potřebuje jasný základ, identitu odesílatele a snadné odhlášení |
+
+Praktický problém vzniká ve chvíli, kdy se provozní e-mail začne tvářit jako reklamní plocha. Faktura s malým odstavcem „mimochodem kupte si nový balíček“ možná projde interním pocitem „vždyť už jim píšeme“, ale z pohledu důvěry je to zbytečné kalení vody. Provozní zprávy mají být nudně spolehlivé. Ano, nudně. V e-mailu o resetu hesla opravdu nikdo netouží po kampani měsíce.
+
+### Přihlášení má být dobrovolná akce
+
+Newsletter přihlašuj jako samostatné rozhodnutí, ne jako vedlejší efekt formuláře.
+
+Dobré vzory:
+
+- samostatné pole pro odběr newsletteru u článku nebo v patičce,
+- nezaškrtnutý checkbox u poptávkového formuláře,
+- jasný text, co bude člověk dostávat a jak často,
+- potvrzení odběru tam, kde chceš mít kvalitnější evidenci souhlasu,
+- jednoduchý záznam, kdy a přes jaký formulář se člověk přihlásil.
+
+Špatné vzory:
+
+- předzaškrtnutý marketingový checkbox,
+- věta „odesláním formuláře souhlasíte s newsletterem“ u poptávky,
+- skryté přihlášení po stažení PDF,
+- automatické přidání všech zákazníků do obecné kampaně bez kontroly účelu,
+- nákup databáze kontaktů a modlitba k doručitelnosti. Spoiler: modlitba není deliverability strategie.
+
+U vlastních zákazníků může v některých situacích existovat režim pro podobné produkty nebo služby, ale i tam má být komunikace rozumná, identifikovaná a s jednoduchým odmítnutím. Prakticky: pokud si nejsi jistý, jestli je zpráva očekávaná, odděl ji jako marketing a pracuj se souhlasem nebo jiným jasně posouzeným základem.
+
+### Piš slib odběru jako mini smlouvu s čtenářem
+
+Formulář pro odběr newsletteru nepotřebuje román. Potřebuje konkrétní slib.
+
+Šablona:
+
+```text
+Jednou za 2 týdny posílám praktické poznámky o webovém vývoji, SaaS, marketingu a privacy-first provozu v Evropě. Žádný reklamní pixel, žádný prodej databáze. Odhlášení je v každém e-mailu.
+```
+
+Pro produktový changelog:
+
+```text
+Pošleme vám jen důležité změny produktu, které se týkají vašeho účtu, bezpečnosti, tarifu nebo práce v aplikaci. Marketingový newsletter je samostatný odběr.
+```
+
+Pro lead magnet:
+
+```text
+Pošleme odkaz na šablonu a můžete si samostatně zvolit, jestli chcete odebírat další praktické návody. Stažení šablony není podmíněné newsletterem.
+```
+
+Codyho komentář: Čím přesněji odběr popíšeš, tím méně budeš potřebovat triků. Lidé nemají problém s e-maily. Mají problém s překvapením, frekvencí mimo slib a odhlašovacím labyrintem.
+
+### Odhlášení navrhni jako první třídu funkce
+
+Odhlašovací proces není nepřítel marketingu. Je to ventil důvěry. Když nejde odejít snadno, lidé kliknou na spam, přestanou věřit značce nebo si vytvoří pravidlo v mailboxu. Ani jedna varianta není výhra.
+
+Privacy-first odhlášení:
+
+1. Je v každém marketingovém e-mailu.
+2. Funguje bez přihlášení do účtu.
+3. Nevyžaduje vysvětlení důvodu.
+4. Potvrdí, co přesně bylo odhlášeno.
+5. Rozlišuje marketingový odběr od provozních zpráv.
+6. Zapíše změnu do systému, ze kterého se opravdu posílá.
+
+Pokud máš více kategorií odběru, nabídni preference, ale nepoužívej je jako překážku. Dobrá preference stránka může mít dvě volby:
+
+- „Upravit témata“
+- „Odhlásit všechen marketing“
+
+Tlačítko pro úplné odhlášení nemá být šedá past ve spodním rohu. Jestli obsah stojí za to, část lidí zůstane. Jestli ne, preference centrum ho nezachrání. Tvrdé, ale levnější než reputační problém.
+
+### Segmentuj podle kontextu, ne podle zvědavosti
+
+Segmentace může být užitečná, když snižuje šum. Nemá být výmluva pro sběr dalších dat.
+
+Rozumné segmenty:
+
+- zákazník, trial, bývalý zákazník,
+- téma odběru zvolené čtenářem,
+- jazyk komunikace,
+- role v produktu, pokud je nutná pro relevantní provozní zprávu,
+- zájem projevený jasnou akcí, například stažení konkrétní šablony.
+
+Rizikové segmenty:
+
+- importované profily z cizích databází,
+- detailní skóre chování napříč webem bez jasného účelu,
+- spojování marketingu, supportu a produktu jen proto, že to nástroj umí,
+- automatické kampaně založené na citlivém nebo překvapivém kontextu.
+
+Privacy-first pravidlo: segment má zlepšit relevanci pro příjemce, ne jen zvýšit počet příležitostí k oslovení. Pokud segment nedokážeš vysvětlit jednou lidskou větou, je moc chytrý na vlastní dobro.
+
+### Měř e-mail jednoduše a bez posedlosti jednotlivcem
+
+U newsletteru obvykle stačí několik agregovaných metrik:
+
+- počet přihlášení,
+- počet odhlášení,
+- doručitelnost a bounce rate,
+- kliky na hlavní odkazy,
+- odpovědi a přímé reakce,
+- konverze, kterou už stejně eviduješ v CRM nebo produktu.
+
+Open rate ber opatrně. Některé e-mailové klienty chrání soukromí a otevírání se může chovat nepřesně. Mnohem lepší signál je odpověď, klik na relevantní zdroj, kvalitní poptávka nebo nižší počet opakovaných dotazů po dobrém produktovém e-mailu.
+
+Příklad pro B2B SaaS:
+
+Místo „zvýšit open rate newsletteru“ si dej cíl „každý měsíc poslat jeden praktický návod, který přivede aspoň tři kvalifikované odpovědi nebo rozhovory se zákazníky“. Takový cíl podporuje hodnotu. Open rate podporuje předměty typu „Tohle vám nikdo neřekl“. A pak už zbývá jen blikající GIF a morální kocovina.
+
+### Checklist: Newsletter bez spamu
+
+- [ ] Máš oddělené provozní, produktové a marketingové e-maily.
+- [ ] Newsletter je samostatné rozhodnutí, ne vedlejší efekt formuláře.
+- [ ] Text odběru říká téma, frekvenci a očekávání.
+- [ ] Marketingový checkbox není předzaškrtnutý.
+- [ ] U odběru eviduješ zdroj, čas a znění souhlasu nebo jiný posouzený základ.
+- [ ] Každý marketingový e-mail jasně identifikuje odesílatele.
+- [ ] Odhlášení je v každém marketingovém e-mailu a funguje bez přihlášení.
+- [ ] Odhlášení se propíše do všech nástrojů, které posílají kampaně.
+- [ ] Segmentace má jasný přínos pro příjemce.
+- [ ] Nespojuješ marketingová data se supportem nebo produktem bez jasného účelu.
+- [ ] Měříš agregované signály a nepřeháníš profilování jednotlivců.
+- [ ] Staré neaktivní kontakty pravidelně čistíš nebo znovu žádáš o potvrzení zájmu.
+
+### Mini úkol
+
+Vyber jeden existující newsletter, onboarding sekvenci nebo produktový mailing. Vyplň tabulku:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Proč tento e-mail posíláme? |  |
+| Je provozní, produktový, nebo marketingový? |  |
+| Kdo ho dostává a proč právě on? |  |
+| Jak se člověk přihlásil nebo proč je zpráva očekávaná? |  |
+| Kde je odhlášení nebo změna preferencí? |  |
+| Jaká jedna metrika ukáže, že e-mail pomohl? |  |
+| Jak dlouho držíme související data? |  |
+
+Potom udělej jednu úpravu: přepiš slib odběru, odděl marketingový checkbox, zjednoduš odhlášení, vyčisti starý segment nebo změň metriku z „otevření“ na odpověď, klik či skutečný další krok. E-mail marketing má být vztahový nástroj, ne sběrna náhodných adres.
+
 ## Zdroje
 
 - European Data Protection Board: Respect individuals' rights - přehled práv subjektů údajů v GDPR pro malé a střední organizace: https://www.edpb.europa.eu/sme-data-protection-guide/respect-individuals-rights_en
@@ -3573,6 +3728,9 @@ Potom udělej jednu konkrétní změnu: smaž jedno zbytečné pole, přepiš mi
 - Google SRE Book: Eliminating Toil - definice toil a důvod pro automatizaci opakované provozní práce: https://sre.google/sre-book/eliminating-toil/
 - European Commission: Digital privacy - přehled vztahu ePrivacy Directive a GDPR v digitálním soukromí: https://digital-strategy.ec.europa.eu/en/policies/digital-privacy
 - EUR-Lex: Directive 2002/58/EC, Article 13 - pravidla pro nevyžádanou komunikaci a direct marketing v ePrivacy směrnici: https://eur-lex.europa.eu/eli/dir/2002/58/oj/eng
+- ÚOOÚ: Obchodní sdělení - rozcestník a informace úřadu k nevyžádaným obchodním sdělením: https://uoou.gov.cz/cinnost/obchodni-sdeleni
+- ÚOOÚ: Často kladené otázky k zákonu č. 480/2004 Sb. - praktické odpovědi k identifikaci odesílatele a pravidlům obchodních sdělení: https://uoou.gov.cz/cinnost/obchodni-sdeleni/casto-kladene-otazky-k-zakonu-c-4802004-sb
+- ÚOOÚ: Informace pro e-shopy - výklad k zasílání obchodních sdělení vlastním zákazníkům a podmínkám odmítnutí: https://uoou.gov.cz/profesional/qa-otazky-a-odpovedi/informace-pro-e-shopy
 - EUR-Lex: Regulation (EU) 2016/679, GDPR - právní text včetně zásad zpracování, minimalizace údajů a ochrany údajů ve výchozím nastavení: https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng
 - European Data Protection Board: Guidelines 4/2019 on Article 25 Data Protection by Design and by Default - praktický výklad GDPR článku 25: https://www.edpb.europa.eu/documents/guideline/guidelines-42019-on-article-25-data-protection-by-design-and-by-default_en
 - CNIL: Sheet n°16 - Use analytics on your websites and applications - podmínky pro analytiku a měření návštěvnosti v režimu omezeného účelu: https://www.cnil.fr/en/sheet-ndeg16-use-analytics-your-websites-and-applications
@@ -3604,6 +3762,7 @@ Potom udělej jednu konkrétní změnu: smaž jedno zbytečné pole, přepiš mi
 
 ## Pracovní log
 
+- 2026-07-11: Doplněna příloha o newsletteru a produktových e-mailech bez spamového reflexu: rozlišení provozních, produktových a marketingových e-mailů, dobrovolné přihlášení, slib odběru, odhlášení, segmentace, agregované měření, checklist a mini úkol; přidány ověřené zdroje ÚOOÚ k obchodním sdělením a e-shopům.
 - 2026-07-11: Doplněna příloha o privacy-first formulářích pro leady, registrace a support: účel formuláře, rozdělení polí na nutná, užitečná a zvědavá, mikrotext, oddělení souhlasu od hlavní akce, agregované měření, příklady minimálních formulářů, checklist a mini úkol; přidány ověřené zdroje Evropské komise k principům GDPR a právním základům zpracování.
 - 2026-07-11: Doplněna příloha o týdenním produktovém review bez dashboardového divadla: tři vstupy, oddělení signálu od nálady, karta rozhodnutí, privacy-first kontrola dopadu, 30minutový rytmus, checklist a mini úkol.
 - 2026-07-11: Doplněna příloha o privacy-first landing page za jeden den: zadání stránky jednou větou, obsahová kostra, formulář s vysvětlením dat, měření bez slídění, kontrola před publikací, textová šablona, checklist a mini úkol.
