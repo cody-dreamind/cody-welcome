@@ -2314,6 +2314,147 @@ Tahle omezení nejsou brzda růstu. Jsou ochrana před falešnou rychlostí. Fal
 
 Pokud si z celého e-booku odneseš jen jednu věc, ať je to tahle: web, SaaS i marketing se dají dělat prakticky, ziskově a s respektem k datům lidí. Privacy-first není výmluva pro pomalost. Je to způsob, jak stavět menší, srozumitelnější a důvěryhodnější systém. A takový systém se mnohem lépe opravuje, prodává i provozuje.
 
+## Příloha: Praktické šablony pro první audit
+
+Tahle příloha je pracovní sada pro chvíli, kdy nechceš jen číst, ale něco opravdu zkontrolovat. Vezmi jednu šablonu, vyplň ji pro konkrétní web, produkt nebo kampaň a podle výsledku udělej jednu změnu. Ne celou transformaci. Jednu změnu. Tabulky nejsou oltář, jsou nářadí.
+
+Codyho komentář: Nejlepší audit není ten, který má dvacet stran a vypadá důležitě. Nejlepší audit je ten, po kterém někdo vypne zbytečný skript, zkrátí formulář, opraví onboarding nebo konečně napíše, proč se sbírá konkrétní údaj.
+
+### Šablona 1: Mapa dat pro web nebo SaaS
+
+Mapu dat si udělej před spuštěním, po větší změně a potom aspoň jednou za kvartál. Neřeš nejdřív právnickou dokonalost. Začni tím, že bude jasné, co se kde děje.
+
+| Oblast | Jaká data vznikají | Účel | Kde jsou uložena | Kdo má přístup | Retence | Další krok |
+| --- | --- | --- | --- | --- | --- | --- |
+| Webová analytika |  |  |  |  |  |  |
+| Kontaktní formulář |  |  |  |  |  |  |
+| Registrace |  |  |  |  |  |  |
+| Fakturace |  |  |  |  |  |  |
+| Support |  |  |  |  |  |  |
+| Aplikační logy |  |  |  |  |  |  |
+| E-mailing nebo RSS |  |  |  |  |  |  |
+| Integrace třetích stran |  |  |  |  |  |  |
+
+Jak s tabulkou pracovat:
+
+- Pokud neumíš vyplnit účel, údaj je kandidát na odstranění.
+- Pokud neumíš vyplnit přístup, je potřeba udělat přístupový audit.
+- Pokud neumíš vyplnit retenci, nastav výchozí dobu uchování a důvod.
+- Pokud je uložení mimo Evropu, napiš proč a jestli existuje rozumná evropská alternativa.
+- Pokud je další krok prázdný u rizikové položky, není to hotový audit. Je to jen hezký seznam starostí.
+
+Mini příklad:
+
+| Oblast | Jaká data vznikají | Účel | Kde jsou uložena | Kdo má přístup | Retence | Další krok |
+| --- | --- | --- | --- | --- | --- | --- |
+| Kontaktní formulář | jméno, e-mail, firma, zpráva | odpověď na poptávku | CRM v EU regionu | sales a jednatel | podle obchodního cyklu | zkrátit formulář a odstranit telefon jako povinné pole |
+
+### Šablona 2: Specifikace jedné metriky
+
+Než přidáš nový event, vyplň krátkou specifikaci. Pomáhá to odlišit měření od digitální sběratelské vášně.
+
+| Pole | Odpověď |
+| --- | --- |
+| Název metriky nebo eventu |  |
+| Jaké rozhodnutí má podpořit |  |
+| Hypotéza |  |
+| Kde vzniká |  |
+| Jaká data se ukládají |  |
+| Je potřeba identifikovat člověka? |  |
+| Dá se měřit agregovaně? |  |
+| Kdo metriku kontroluje |  |
+| Kdy ji vyhodnotíme |  |
+| Kdy ji smažeme nebo archivujeme |  |
+
+Dobrá metrika má konec. Když ověřuješ změnu formuláře, nepotřebuješ ji sledovat navždy jen proto, že už existuje v dashboardu. Po vyhodnocení ji nech jen tehdy, když dál slouží rozhodování.
+
+Příklad:
+
+| Pole | Odpověď |
+| --- | --- |
+| Název metriky nebo eventu | klik na hlavní CTA na pricing stránce |
+| Jaké rozhodnutí má podpořit | jestli nový text plánů vede k poptávce |
+| Hypotéza | jasnější popis balíčků zvýší podíl návštěvníků, kteří otevřou formulář |
+| Kde vzniká | pricing stránka |
+| Jaká data se ukládají | počet kliků za den a zdroj stránky v agregaci |
+| Je potřeba identifikovat člověka? | ne |
+| Dá se měřit agregovaně? | ano |
+| Kdo metriku kontroluje | produkt nebo marketing |
+| Kdy ji vyhodnotíme | po 30 dnech |
+| Kdy ji smažeme nebo archivujeme | pokud nebude použita v dalším rozhodnutí |
+
+### Šablona 3: Karta dodavatele
+
+Každý nový nástroj si zaslouží krátkou kartu. Ne proto, aby tým trávil život byrokracií, ale proto, aby za půl roku věděl, proč se nástroj zavedl a co by se stalo při odchodu.
+
+| Pole | Odpověď |
+| --- | --- |
+| Název nástroje |  |
+| K čemu ho používáme |  |
+| Jaká data do něj posíláme |  |
+| Kde se data ukládají |  |
+| Kdo má účet nebo administrátorský přístup |  |
+| Existuje export |  |
+| Jak by vypadal odchod |  |
+| Alternativa nebo plán odchodu |  |
+| Vlastník v týmu |  |
+| Datum další revize |  |
+
+Praktické pravidlo: pokud nástroj nemá vlastníka, časem se z něj stane šum. Pokud nemá export, stává se z něj riziko. Pokud nikdo neumí popsat odchod, nástroj možná není levný, jen zatím neposlal fakturu v podobě migrace.
+
+### Šablona 4: Audit jedné klíčové stránky
+
+Vyber jednu stránku. Ne celý web. Ideálně stránku, která má přivádět poptávky, registrace, demo nebo pochopení produktu.
+
+| Otázka | Odpověď |
+| --- | --- |
+| Pro koho stránka je |  |
+| Jaký problém má člověk před návštěvou |  |
+| Jakou jednu hlavní akci má udělat |  |
+| Co musí pochopit v prvních několika sekundách |  |
+| Jaký důkaz stránka ukazuje |  |
+| Co může návštěvníka brzdit |  |
+| Jaká data stránka sbírá |  |
+| Jaké externí skripty se načítají |  |
+| Co změříme po úpravě |  |
+| Nejmenší oprava do týdne |  |
+
+Při auditu se nedívej jen na text a design. Otevři stránku jako člověk, který tě nezná, nechce řešit tvoji interní terminologii a nemá povinnost být trpělivý. Pokud musí přemýšlet, co vlastně nabízíš, stránka si říká o práci.
+
+Rychlý checklist:
+
+- [ ] Nadpis říká konkrétní hodnotu nebo kategorii, ne interní slogan.
+- [ ] Primární CTA je viditelné a jasné.
+- [ ] Stránka obsahuje důkaz, ne jen tvrzení.
+- [ ] Formulář nechce údaje, které nejsou potřeba pro další krok.
+- [ ] Externí skripty mají jasný důvod.
+- [ ] Stránka funguje i bez marketingového souhlasu.
+- [ ] Další krok je srozumitelný i pro člověka, který ještě nechce mluvit se sales.
+
+### Šablona 5: Měsíční privacy-first review
+
+Jednou měsíčně si dej krátkou kontrolu. Nemá to být celodenní audit. Stačí 30 až 60 minut, pokud tým průběžně zapisuje změny.
+
+| Oblast | Kontrolní otázka | Výsledek | Akce |
+| --- | --- | --- | --- |
+| Data | Přibylo nové zpracování dat? |  |  |
+| Měření | Použili jsme metriky k rozhodnutí? |  |  |
+| Skripty | Přibyl nový externí script nebo pixel? |  |  |
+| Přístupy | Má někdo přístup, který už nepotřebuje? |  |  |
+| Exporty | Leží někde dočasné CSV nebo testovací dumpy? |  |  |
+| Obsah | Slibuje web něco, co provoz technicky nedodržuje? |  |  |
+| Dodavatelé | Změnil se nástroj, region, cena nebo podmínky? |  |  |
+| Support | Opakují se dotazy na data, soukromí nebo zrušení účtu? |  |  |
+
+Výstup review má být krátký:
+
+- Co smažeme nebo omezíme.
+- Co opravíme v textu, nastavení nebo dokumentaci.
+- Co necháme být, protože to má jasný účel.
+- Co bude hlavní privacy-first riziko příštího měsíce.
+
+Tahle příloha je schválně obyčejná. Privacy-first provoz nestojí na jednom velkém dokumentu, ale na opakovatelných malých kontrolách. Když je tým dělá pravidelně, soukromí není panika před releasem. Je to normální součást práce.
+
 ## Zdroje
 
 - European Data Protection Board: Respect individuals' rights - přehled práv subjektů údajů v GDPR pro malé a střední organizace: https://www.edpb.europa.eu/sme-data-protection-guide/respect-individuals-rights_en
@@ -2357,6 +2498,7 @@ Pokud si z celého e-booku odneseš jen jednu věc, ať je to tahle: web, SaaS i
 
 ## Pracovní log
 
+- 2026-07-11: Doplněna praktická příloha se šablonami pro první audit: mapa dat, specifikace metriky, karta dodavatele, audit klíčové stránky a měsíční privacy-first review.
 - 2026-07-10: Doplněn závěr e-booku jako pracovní systém: výběr hlavní osy, čtyřtýdenní rytmus, jednostránkový provozní přehled, seznam věcí k vědomému nedělání a opakovaný checklist pro praktické použití.
 - 2026-07-10: Doplněna kapitola 12 s checklistem pro prvních 90 dní po spuštění: první týden provozu, první měsíc oprav tření, filtrování signálů ve druhém měsíci, 90denní review, privacy úklid, checklist a mini úkol.
 - 2026-07-10: Doplněna kapitola 11 s předstartovním checklistem: vymezení releasu, rozdělení blokerů a nápadů, privacy a právní minimum, technická kontrola hlavních cest, obsah a důvěra, měření po spuštění, provozní plán, checklist a mini úkol.
