@@ -4342,8 +4342,157 @@ Vyber jeden pilot, který chceš nabídnout nebo který už běží. Vyplň kart
 
 Potom udělej jednu konkrétní změnu: napiš pilot kartu, zmenši datový vzorek, doplň řádek „mimo rozsah“, nastav datum závěrečného review nebo připrav postup smazání dat po neúspěšném pilotu. První placený pilot má být důkaz hodnoty, ne neřízená zkratka k zakázkovému vývoji.
 
+## Příloha: Changelog a release notes jako tichý marketing
+
+Changelog není jen interní seznam commitů a release notes nejsou jen povinná poznámka po deployi. Pro SaaS, webovou službu nebo odborný produkt jsou to tři věci najednou: důkaz, že produkt žije; praktická dokumentace změn; a nenápadný marketingový kanál, který nemusí sledovat lidi po internetu.
+
+Špatná otázka zní: „Co jsme tento týden nasadili?“
+
+Lepší otázka zní: „Co se pro zákazníka změnilo, proč na tom záleží a co má případně udělat?“
+
+Pokud umíš na druhou otázku odpovědět, máš materiál pro changelog, release notes, krátký blogový zápis, RSS položku, onboardingovou poznámku i interní sales enablement. Jedna dobře napsaná změna může pracovat na pěti místech. To je lepší než pět prázdných statusů na sociálních sítích, kde algoritmus stejně dělá, že tě nezná.
+
+### Rozliš interní changelog a veřejné release notes
+
+Interní changelog pomáhá týmu. Má být přesný, dohledatelný a užitečný pro vývoj, support i obchod. Veřejné release notes pomáhají uživateli. Mají vysvětlit změnu jazykem výsledku, ne jazykem implementace.
+
+Příklad rozdílu:
+
+| Interní zápis | Veřejný zápis |
+| --- | --- |
+| Upraven dotaz nad `invoices`, přidán index na `customer_id` | Přehled faktur se u větších účtů načítá rychleji. |
+| Refaktor import workeru a retry fronty | Importy CSV jsou odolnější proti dočasným výpadkům a jasněji ukazují stav zpracování. |
+| Přidán feature flag `self_serve_invites` | Správci workspace mohou pozvat kolegy bez zásahu supportu. |
+| Opraven edge case v validaci telefonu | Formulář už neodmítá česká telefonní čísla se správnou mezinárodní předvolbou. |
+
+Interní detail není špatně. Jen nepatří automaticky do veřejného textu. Uživatel většinou nechce vědět, jaký index jsi přidal. Chce vědět, že se mu rychleji otevře stránka, kvůli které platí předplatné.
+
+### Zapisuj změny průběžně, ne až při release
+
+Nejhorší release notes vznikají večer před publikací. Tým se snaží vzpomenout, co se vlastně stalo, někdo vytáhne git log, někdo přidá tři interní zkratky a výsledek zní jako zpráva z jiného oddělení.
+
+Praktičtější je držet nahoře sekci „připravované“ a doplňovat do ní položky už během práce. Inspirace Keep a Changelog doporučuje udržovat změny pro lidi, seskupovat podobné typy změn a mít sekci pro ještě nevydané změny. Pro běžný SaaS si to můžeš zjednodušit takto:
+
+| Kategorie | Kdy ji použít | Otázka pro autora |
+| --- | --- | --- |
+| Přidáno | nová schopnost, integrace, obrazovka, export | Co uživatel nově zvládne? |
+| Změněno | upravené chování, lepší tok, rychlejší práce | Co bude jinak oproti včerejšku? |
+| Opraveno | chyba, rozbitý scénář, nepřesnost | Koho chyba trápila a jak pozná opravu? |
+| Bezpečnost | bezpečnostní oprava nebo zpevnění provozu | Co je bezpečné říct veřejně a co patří jen dotčeným zákazníkům? |
+| Odstraněno | zrušená funkce, pole, integrace | Co má uživatel udělat místo toho? |
+
+U technických produktů dává smysl propojit changelog s verzemi. Semantic Versioning používá formát MAJOR.MINOR.PATCH a váže hlavní změnu verze na kompatibilitu veřejného API. U produktového SaaS nemusíš nutně ukazovat každé číslo verze zákazníkům, ale interně je dobré vědět, kdy jde o opravu, běžné rozšíření a kdy o změnu, která může rozbít integraci nebo zvyklost uživatele.
+
+### Piš podle dopadu, ne podle námahy
+
+Tým má přirozenou tendenci psát nejvíc o tom, co bylo nejtěžší. Zákazníka ale zajímá hlavně dopad. Dvouhodinová oprava ve formuláři může být pro uživatele důležitější než třídenní refaktor, který ještě žádný viditelný výsledek nepřinesl.
+
+Dobrá release poznámka odpovídá na tři otázky:
+
+1. Co se změnilo?
+2. Pro koho je to důležité?
+3. Co má uživatel udělat, pokud se ho to týká?
+
+Příklad:
+
+| Slabý zápis | Lepší zápis |
+| --- | --- |
+| Vylepšili jsme onboarding. | Nový workspace teď po registraci nabídne první projekt a vzorový úkol, takže správce rychleji ověří, jestli nastavení odpovídá jeho týmu. |
+| Přidali jsme export. | Administrátoři mohou exportovat seznam faktur do CSV včetně období, stavu a interní poznámky. Export najdete ve Fakturace -> Export. |
+| Opravili jsme notifikace. | E-mailové upozornění na dokončený import už chodí jen uživatelům, kteří import spustili nebo spravují daný workspace. |
+
+Codyho komentář: „Vylepšili jsme“ je někdy jen elegantní obal pro „nevíme, jak to říct konkrétně“. Když nejde napsat dopad, možná ještě není jasné, proč změna existuje.
+
+### Privacy-first distribuce changelogu
+
+Changelog je ideální kandidát na přímou distribuci. Nepotřebuje reklamní pixel, remarketing ani uzavřenou platformu. Potřebuje stabilní URL, RSS nebo Atom feed, interní odkaz z aplikace a rozumný archiv.
+
+Praktické distribuční vrstvy:
+
+| Vrstva | Co zveřejnit | Privacy-first poznámka |
+| --- | --- | --- |
+| `/changelog` na webu | veřejné release notes po verzích nebo datu | stabilní URL, žádné social share skripty |
+| RSS/Atom feed | každá významná změna jako položka | odběr bez účtu a bez profilování |
+| In-app oznámení | jen změny relevantní pro danou roli | měř agregovaně zobrazení a klik, ne chování jednotlivce |
+| Dokumentace | změny API, integrací a oprávnění | uveď datum účinnosti a dopad na stávající implementace |
+| Support/sales poznámka | interní dopad pro zákaznické rozhovory | nelep do CRM citlivé technické detaily bez účelu |
+
+Pokud posíláš release notes e-mailem, drž se slibu odběru. Člověk, který chce provozní upozornění, nemusí chtít marketingový newsletter. Naopak člověk, který sleduje novinky přes RSS, nepotřebuje ještě tři další připomínky v aplikaci. Kanál má odpovídat kontextu, ne touze týmu „dostat to všude“.
+
+### Bezpečnostní a citlivé změny piš opatrně
+
+Ne každá změna patří okamžitě do veřejného detailu. Bezpečnostní opravy, incidenty, zranitelnosti, změny oprávnění a práce s daty potřebují přesnost a načasování.
+
+Rozumný postup:
+
+1. Interně zapiš technický detail, dopad, časovou osu a vlastníka.
+2. Dotčeným zákazníkům pošli konkrétní informaci, pokud je změna ovlivňuje.
+3. Veřejně publikuj tolik detailu, kolik pomáhá uživatelům jednat a zároveň nezvyšuje riziko.
+4. Po dořešení doplň veřejný changelog o stručný, věcný záznam.
+
+Příklad veřejného textu:
+
+„Zpřesnili jsme kontrolu oprávnění u exportu projektů. Export je teď dostupný pouze správcům workspace a uživatelům s rolí Exporty. Týmy s vlastními rolemi najdou detail v nastavení oprávnění.“
+
+To je užitečné, protože říká, co se změnilo a kde to zkontrolovat. Neříká zbytečně, jak přesně byla původní kontrola implementovaná.
+
+### Šablona release poznámky
+
+Použij krátký formát, který nutí autora myslet na uživatele:
+
+| Pole | Otázka |
+| --- | --- |
+| Nadpis | Jak by změnu pojmenoval zákazník? |
+| Typ | Přidáno, změněno, opraveno, bezpečnost, odstraněno |
+| Pro koho | Role, segment nebo scénář |
+| Co se změnilo | Jedna až tři věty bez interních zkratek |
+| Co udělat | Žádná akce, zapnout, zkontrolovat, migrovat, kontaktovat podporu |
+| Odkaz | Dokumentace, nastavení, API reference, blog nebo ticket |
+| Privacy poznámka | Mění se sběr, zpracování, export, oprávnění nebo retence dat? |
+
+Ukázka:
+
+| Pole | Příklad |
+| --- | --- |
+| Nadpis | Export faktur podle období |
+| Typ | Přidáno |
+| Pro koho | Administrátoři a finance |
+| Co se změnilo | V přehledu faktur lze stáhnout CSV za vybrané období včetně stavu faktury a interní poznámky. |
+| Co udělat | Otevřít Fakturace -> Export a vybrat období. |
+| Odkaz | Dokumentace exportů |
+| Privacy poznámka | Export obsahuje zákaznické údaje, proto je dostupný jen rolím s oprávněním k fakturaci. |
+
+### Checklist: Changelog, který pracuje pro produkt
+
+- [ ] Existuje jedno místo, kam tým průběžně zapisuje připravované změny.
+- [ ] Veřejné release notes jsou psané jazykem dopadu na uživatele.
+- [ ] Interní technické detaily nejsou automaticky kopírované do veřejného textu.
+- [ ] Každá významná změna má typ: přidáno, změněno, opraveno, bezpečnost nebo odstraněno.
+- [ ] U změn API, exportů, oprávnění a dat je jasně popsaný dopad.
+- [ ] Changelog má stabilní URL a ideálně RSS nebo Atom feed.
+- [ ] In-app oznámení se ukazuje jen tehdy, když změna pomáhá v daném kontextu.
+- [ ] E-mailové release notes respektují původní slib odběru.
+- [ ] Bezpečnostní změny mají oddělený interní detail a opatrný veřejný text.
+- [ ] Support a sales vědí, které změny mají zmínit zákazníkům.
+
+### Mini úkol
+
+Vezmi posledních pět změn v produktu nebo na webu a přepiš je do této tabulky:
+
+| Změna | Typ | Pro koho | Dopad pro uživatele | Je potřeba akce? | Privacy dopad |
+| --- | --- | --- | --- | --- | --- |
+|  |  |  |  |  |  |
+|  |  |  |  |  |  |
+|  |  |  |  |  |  |
+|  |  |  |  |  |  |
+|  |  |  |  |  |  |
+
+Potom vyber jednu změnu a publikuj ji jako krátkou release poznámku na stabilní URL nebo do interního changelogu. Pokud změna souvisí s daty, exportem, oprávněními nebo bezpečností, přidej zvlášť větu o dopadu na soukromí a přístupy.
+
 ## Zdroje
 
+- Keep a Changelog: Keep a Changelog 1.1.0 - principy lidsky psaného changelogu, typy změn a sekce pro nevydané změny: https://keepachangelog.com/en/1.1.0/
+- Semantic Versioning: Semantic Versioning 2.0.0 - pravidla MAJOR.MINOR.PATCH a komunikace kompatibility veřejného API: https://semver.org/
 - European Commission: AI Act - rizikový přístup, GPAI pravidla, transparentní povinnosti a aktuální harmonogram uplatňování AI Actu: https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai
 - European Commission AI Act Service Desk: Timeline for the Implementation of the EU AI Act - postupné uplatňování AI Actu včetně pravidel pro GPAI, transparentnost a high-risk systémy: https://ai-act-service-desk.ec.europa.eu/en/ai-act/timeline/timeline-implementation-eu-ai-act
 - European Data Protection Board: Artificial intelligence - rozcestník EDPB k AI, GDPR a ochraně osobních údajů při vývoji a používání AI technologií: https://www.edpb.europa.eu/topics/ai-and-technology/artificial-intelligence_en
@@ -4399,6 +4548,7 @@ Potom udělej jednu konkrétní změnu: napiš pilot kartu, zmenši datový vzor
 
 ## Pracovní log
 
+- 2026-07-11: Doplněna příloha o changelogu a release notes jako tichém marketingu: rozdíl mezi interním changelogem a veřejnými poznámkami, průběžné zapisování změn, psaní podle dopadu, privacy-first distribuce, citlivé bezpečnostní změny, šablona, checklist a mini úkol; ověřeny zdroje Keep a Changelog a Semantic Versioning.
 - 2026-07-11: Doplněna příloha o prvním placeném pilotu bez datového chaosu: rozdíl mezi trialem a pilotem, definice výsledku, pilot karta, minimalizace dat po dávkách, komunikační rytmus, předem domluvené vyhodnocení, checklist a mini úkol.
 - 2026-07-11: Doplněna příloha o supportu bez datového nepořádku: rozdělení supportních dat podle účelu, minimální dotazy, práce se screenshoty a přílohami, věcné interní poznámky, oddělení supportu od marketingu, proces pro práva uživatelů, checklist a mini úkol; při psaní ověřeny zdroje EDPB a Evropské komise k právům subjektů údajů, rolím správce/zpracovatele a bezpečnostním incidentům.
 - 2026-07-11: Doplněna příloha o retenční mapě dat bez právnické mlhy: kategorie dat, účel a konec životnosti, rozdíl mezi aktivními daty, archivem, zálohami, exporty a logy, technické vynucení retence, checklist a mini úkol; při psaní ověřeny primární zdroje Evropské komise a EDPB k principům GDPR, právům lidí a privacy by design/default.
