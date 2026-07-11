@@ -3878,6 +3878,129 @@ Vyber jedno místo, kde tým používá nebo chce používat AI. Vyplň kartu:
 
 Potom udělej jednu konkrétní změnu: napiš interní pravidlo pro prompty, vytvoř bezpečnou šablonu briefu, vypni trénování na firemních datech, zkrať retenci, nebo přesuň citlivý use case do samostatně posouzeného prostředí. AI má týmu přidat sílu, ne nový neviditelný sklad dat.
 
+## Příloha: Retenční mapa dat bez právnické mlhy
+
+Retence je jednoduchá myšlenka s překvapivě drahými následky: data nemají zůstávat ve firmě déle, než dávají smysl pro jasný účel. Evropská komise u principů GDPR popisuje mimo jiné omezení uchování, minimalizaci dat a transparentnost. EDPB v praktickém průvodci pro malé firmy připomíná, že organizace mají znát svoje datové toky, být připravené na žádosti lidí a dokumentovat odpovědi. Přeloženo do provozu: nestačí napsat „data mažeme podle zákona“. Tým musí vědět, která data, kde, kdy, kdo a jak.
+
+Toto není právní rada. Je to pracovní šablona, aby se retence nestala tajemnou větou v privacy policy, kterou nikdo neumí splnit.
+
+### Začni kategoriemi, ne databázovými tabulkami
+
+Retenční mapa má být srozumitelná lidem mimo vývoj. Když začneš interními názvy tabulek, obchod, support a marketing se rychle ztratí. Začni oblastmi, které tým opravdu používá:
+
+| Kategorie dat | Příklad | Typický vlastník |
+| --- | --- | --- |
+| Lead a poptávka | e-mail, firma, zpráva z formuláře | sales nebo marketing |
+| Zákaznický účet | uživatelé, role, workspace, nastavení | produkt nebo support |
+| Fakturace | objednávky, faktury, fakturační údaje | finance |
+| Support | tikety, přílohy, komunikace | support |
+| Produktová analytika | agregované eventy, aktivace, retence | produkt |
+| Webová analytika | návštěvy, zdroje, CTA v agregaci | marketing |
+| Bezpečnostní logy | přihlášení, podezřelé požadavky, auditní akce | tech nebo security |
+| Dočasné exporty | CSV, dumpy, reporty, testovací soubory | vlastník exportu |
+
+Do mapy nedávej jen „produkční databáze“. Produkční databáze může držet data s různými účely a různou dobou života. Fakturační údaje, auditní log a neaktivní trial účet nemají automaticky stejný režim jen proto, že žijí ve stejném systému.
+
+### U každé kategorie napiš účel a konec života
+
+Nejdůležitější otázka retence zní: „Kdy tato data přestanou být potřebná?“
+
+Praktická tabulka:
+
+| Kategorie | Účel | Start retence | Konec retence | Co se stane potom |
+| --- | --- | --- | --- | --- |
+| Poptávka z formuláře | odpověď a obchodní návaznost | přijetí formuláře | konec obchodního procesu plus interní lhůta | smazat nebo anonymizovat |
+| Trial účet bez aktivity | umožnit vyzkoušení produktu | založení účtu | konec trialu plus období pro návrat | upozornit a smazat workspace |
+| Faktura | účetní a daňová evidence | vystavení dokladu | podle zákonných povinností | archiv podle pravidel finance |
+| Support tiket | vyřešení problému a historie podpory | přijetí tiketu | podle supportní politiky | smazat přílohy nebo tiket anonymizovat |
+| Debug log | ladění chyby | vznik logu | krátká technická lhůta | automaticky smazat |
+| Agregovaná metrika | dlouhodobé rozhodování | agregace období | dokud podporuje rozhodování | ponechat bez identifikátorů |
+
+Start retence je často stejně důležitý jako konec. Jinak tým neví, jestli se lhůta počítá od registrace, poslední aktivity, uzavření tiketu, zrušení účtu, vystavení faktury nebo exportu dat. Bez startu se z retence stane poetický odhad. Poezie je fajn. Ne v databázi.
+
+### Odliš aktivní data, archiv a zálohy
+
+Jedna z nejčastějších chyb je mluvit o „smazání dat“ jako o jedné akci. V reálném provozu existuje několik vrstev:
+
+| Vrstva | Co znamená | Praktické pravidlo |
+| --- | --- | --- |
+| Aktivní systém | data, se kterými produkt nebo tým běžně pracuje | mazání nebo anonymizace musí být rychlé a ověřitelné |
+| Archiv | data držená kvůli povinnosti, smlouvě nebo obraně nároků | omezený přístup a jasný důvod |
+| Záloha | kopie pro obnovu po havárii | omezená retence a postup po případné obnově |
+| Export | ruční CSV, report, dump, příloha | krátká retence, vlastník a úklid |
+| Log | provozní nebo bezpečnostní záznam | samostatná pravidla podle účelu |
+
+Privacy-first tým má vědět, co se stane při výmazu v každé vrstvě. U záloh může být prakticky nemožné mazat jednotlivé záznamy v každé historické kopii okamžitě. Pak je potřeba mít omezenou retenci záloh a postup, že po obnově se znovu aplikuje výmaz nebo anonymizace. Důležité je mít to popsané, ne objevit to při první žádosti.
+
+### Dočasné exporty jsou největší nepořádek
+
+Produkční databáze mívá vlastníka. CRM taky. Ale CSV export na ploše, testovací dump v repozitáři, příloha v chatu nebo report poslaný e-mailem často nemá nikoho. A právě proto bolí.
+
+Pravidla pro exporty:
+
+- Export vzniká jen pro konkrétní účel.
+- Každý export má vlastníka.
+- Název souboru nesmí obsahovat citlivá data.
+- Export se ukládá jen na schválené místo.
+- Před sdílením se odstraní nepotřebné sloupce.
+- Po použití se smaže podle krátké lhůty.
+- Citlivé exporty se neposílají do běžných AI nástrojů ani externích služeb bez posouzení.
+
+Mini šablona:
+
+| Export | Účel | Vlastník | Obsahuje osobní data? | Kde je uložený | Smazat do |
+| --- | --- | --- | --- | --- | --- |
+|  |  |  |  |  |  |
+
+Codyho komentář: Kdybych měl vybrat jedno místo, kde se v malých týmech data potichu množí, nejsou to databázové migrace. Jsou to „jen rychlé exporty“. Slovo „rychlé“ tu obvykle znamená „bez budoucího úklidu“.
+
+### Retence musí být technicky vynucená
+
+Dokument je začátek. Automatické mazání, anonymizace, expirace nebo pravidelný review je teprve provoz.
+
+Možnosti podle typu dat:
+
+- automatické smazání neaktivních trial účtů po upozornění,
+- anonymizace starých analytických eventů,
+- expirace debug logů po krátké době,
+- pravidelné mazání dočasných exportů ze schváleného úložiště,
+- ruční review support tiketů s přílohami,
+- oddělení archivních fakturačních dat od produktové analytiky,
+- audit přístupů k archivům a zálohám.
+
+Když retenci neumíš vynutit technicky, napiš aspoň provozní rytmus: kdo kontroluje, kdy, podle jakého seznamu a kde zapíše výsledek. Ruční proces není ideál, ale je lepší než slavnostní tabulka bez člověka.
+
+### Checklist: Retenční mapa
+
+- [ ] Každá kategorie dat má účel, vlastníka a konec životnosti.
+- [ ] Retence se nepočítá mlhavě; je jasné, od které události běží.
+- [ ] Aktivní data, archiv, zálohy, logy a exporty mají odlišná pravidla.
+- [ ] Dočasné exporty mají vlastníka, místo uložení a datum smazání.
+- [ ] Zálohy mají omezenou retenci a postup po obnově.
+- [ ] Staré trial účty, neaktivní leady a nepoužívané eventy se pravidelně mažou nebo anonymizují.
+- [ ] Fakturační a právně povinná data jsou oddělená od marketingu a produktové analytiky.
+- [ ] Retenční pravidla jsou technicky vynucená tam, kde to jde.
+- [ ] Support a produkt ví, co se stane při žádosti o výmaz nebo export.
+- [ ] Retenční mapa se kontroluje po každé větší změně formuláře, analytiky, dodavatele nebo datového modelu.
+
+### Mini úkol
+
+Vyber jednu kategorii dat, která ve firmě vzniká opakovaně: leady, support tikety, produktové eventy, debug logy nebo exporty. Vyplň kartu:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jaká data přesně vznikají? |  |
+| Proč je potřebujeme? |  |
+| Kdo je vlastník? |  |
+| Kdy retence začíná? |  |
+| Kdy má retence skončit? |  |
+| Co se smaže, anonymizuje nebo archivuje? |  |
+| Jsou data v zálohách nebo exportech? |  |
+| Jak je smazání technicky vynucené? |  |
+| Co zkontrolujeme za měsíc? |  |
+
+Potom udělej jednu konkrétní změnu: smaž starý export, nastav expiraci debug logů, doplň vlastníka leadů, anonymizuj staré eventy nebo přidej upozornění před smazáním neaktivního trial účtu. Retence není velké gesto. Je to pravidelný úklid, který chrání produkt před vlastním datovým bordelem.
+
 ## Zdroje
 
 - European Commission: AI Act - rizikový přístup, GPAI pravidla, transparentní povinnosti a aktuální harmonogram uplatňování AI Actu: https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai
@@ -3933,6 +4056,7 @@ Potom udělej jednu konkrétní změnu: napiš interní pravidlo pro prompty, vy
 
 ## Pracovní log
 
+- 2026-07-11: Doplněna příloha o retenční mapě dat bez právnické mlhy: kategorie dat, účel a konec životnosti, rozdíl mezi aktivními daty, archivem, zálohami, exporty a logy, technické vynucení retence, checklist a mini úkol; při psaní ověřeny primární zdroje Evropské komise a EDPB k principům GDPR, právům lidí a privacy by design/default.
 - 2026-07-11: Doplněna příloha o AI asistentech v SaaS a marketingu bez úniku dat: rozdělení AI použití podle rizika, bezpečný prompt brief, výběr nástroje podle dat, marketing a support mantinely, AI rozhodovací karta, checklist a mini úkol; přidány ověřené zdroje Evropské komise a EDPB k AI Actu a GDPR v AI.
 - 2026-07-11: Doplněna příloha o newsletteru a produktových e-mailech bez spamového reflexu: rozlišení provozních, produktových a marketingových e-mailů, dobrovolné přihlášení, slib odběru, odhlášení, segmentace, agregované měření, checklist a mini úkol; přidány ověřené zdroje ÚOOÚ k obchodním sdělením a e-shopům.
 - 2026-07-11: Doplněna příloha o privacy-first formulářích pro leady, registrace a support: účel formuláře, rozdělení polí na nutná, užitečná a zvědavá, mikrotext, oddělení souhlasu od hlavní akce, agregované měření, příklady minimálních formulářů, checklist a mini úkol; přidány ověřené zdroje Evropské komise k principům GDPR a právním základům zpracování.
