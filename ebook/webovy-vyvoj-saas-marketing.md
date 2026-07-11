@@ -2541,6 +2541,156 @@ Tyhle věty si klidně dej do šablony issue, ADR nebo release checklistu:
 
 Když na některou otázku nejde odpovědět, není to důvod k panice. Je to důvod nepředstírat hotovo. Což je otravné, ale pořád levnější než opravovat důvěru po špatném rozhodnutí.
 
+## Příloha: 30denní akční plán pro privacy-first web nebo SaaS
+
+Tenhle plán je pro tým, který nechce čekat na velký redesign, velkou strategii nebo velkou tabulku s třiceti prioritami. Cílem je za měsíc udělat jednu viditelnou změnu, která zlepší web, produkt nebo provoz a zároveň sníží datový nepořádek.
+
+Použij ho po přečtení e-booku jako první praktický sprint. Neřeš všechno. Vyber jednu osu, projdi kroky a na konci měsíce napiš rozhodnutí. Pokud zůstane jen pocit, že „to bylo užitečné“, plán selhal. Pokud vznikne opravená stránka, kratší formulář, jasnější onboarding, lepší metrika nebo smazaný zbytečný skript, plán splnil účel.
+
+Codyho komentář: Nejlepší 30denní plán není ten, který vypadá jako invaze do Normandie. Nejlepší je ten, který tým opravdu otevře v pondělí ráno a v pátek podle něj zavře konkrétní úkol.
+
+### Den 1: Vyber jednu osu
+
+Začni jednou větou:
+
+„Tento měsíc zlepšíme ___ pro ___, protože ___, a poznáme to podle ___.“
+
+Příklady:
+
+- „Tento měsíc zlepšíme pricing stránku pro malé B2B týmy, protože zákazníci nerozumí rozdílu mezi plány, a poznáme to podle menšího počtu opakovaných dotazů v sales.“
+- „Tento měsíc zlepšíme první hodnotu v onboardingu pro nové uživatele, protože po registraci nevědí, co udělat dál, a poznáme to podle vyššího dokončení prvního klíčového kroku.“
+- „Tento měsíc zlepšíme analytiku webu pro marketing, protože měří moc věcí bez rozhodnutí, a poznáme to podle menšího počtu eventů s jasným vlastníkem.“
+
+Jedna osa stačí. Když si tým vybere tři, obvykle se ve skutečnosti nevybral nic. To zní filozoficky, ale je to hlavně backlogová fyzika.
+
+### Dny 2 až 5: Udělej rychlou inventuru
+
+Inventura má najít tření, ne napsat auditní román. Pro vybranou osu projdi tyto otázky:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Kdo je hlavní uživatel nebo zákazník této části? |  |
+| Jaký úkol se snaží dokončit? |  |
+| Kde se dnes nejčastěji zasekne? |  |
+| Jaký máme důkaz: data, dotazy, rozhovory, ruční pozorování? |  |
+| Jaká data, skripty, formuláře nebo dodavatelé se této části týkají? |  |
+| Co můžeme zjednodušit bez ztráty hodnoty? |  |
+| Jaká jedna oprava jde dokončit do týdne? |  |
+
+Praktické zdroje signálů:
+
+- support a sales dotazy,
+- poznámky z onboardingových hovorů,
+- agregovaná analytika,
+- ruční průchod hlavní cestou na mobilu,
+- seznam eventů a formulářových polí,
+- poslední tři incidenty, bugy nebo ruční workaroundy.
+
+Privacy-first pravidlo: pokud při inventuře najdeš data bez účelu, přístup bez vlastníka nebo externí skript bez jasného důvodu, napiš to jako kandidáta na odstranění. Ne jako „někdy zkontrolovat“. Tahle fráze je šuplík, ne plán.
+
+### Dny 6 až 10: Navrhni nejmenší opravu
+
+Nejmenší oprava není kompromisní verze velkého snu. Je to samostatná změna, která může obstát sama o sobě.
+
+Dobré příklady:
+
+- zkrátit kontaktní formulář o dvě pole,
+- přepsat první obrazovku pricingu podle segmentů,
+- doplnit jasný další krok do prázdného stavu v aplikaci,
+- odstranit nepoužívaný marketingový skript,
+- sloučit nebo smazat eventy, které nikdo nepoužívá,
+- doplnit provozní návod pro obnovu zálohy,
+- přidat RSS odkaz do patičky blogu,
+- vysvětlit export a smazání dat na stránce s plány.
+
+Špatné příklady:
+
+- „vylepšit celý onboarding“,
+- „udělat nový web“,
+- „nasadit lepší analytiku“,
+- „zvýšit důvěru“,
+- „modernizovat obsah“.
+
+Tyto formulace nejsou úkoly. Jsou to mlhavé počasí. Přepiš je na změnu, kterou jde zkontrolovat.
+
+### Dny 11 až 17: Proveď změnu a hlídej rozsah
+
+Při realizaci si drž krátký pracovní záznam:
+
+| Pole | Obsah |
+| --- | --- |
+| Co měníme | konkrétní stránka, formulář, event, text, proces nebo nastavení |
+| Proč | jeden problém a důkaz |
+| Co neměníme | vědomé hranice rozsahu |
+| Privacy dopad | data, souhlasy, skripty, dodavatelé, přístupy, retence |
+| Jak ověříme výsledek | jeden až tři signály |
+| Kdo rozhodne | vlastník změny |
+
+Hranice rozsahu napiš schválně. Když opravuješ pricing text, neřeš současně nový checkout, nový design systém a rebranding. To není disciplína pro radost z omezení. To je ochrana před tím, aby se malá oprava přeměnila v projekt, který tři týdny rozhrabe všechno a nedokončí nic.
+
+### Dny 18 až 24: Ověř dopad bez slídění
+
+Ověření nemusí znamenat osobní profilování. Vyber signál podle typu změny:
+
+| Změna | Rozumný signál |
+| --- | --- |
+| Upravená pricing stránka | méně opakovaných dotazů, více relevantních poptávek, agregované kliky na hlavní CTA |
+| Kratší formulář | poměr otevření a odeslání, kvalita doručených poptávek |
+| Jednodušší onboarding | dokončení prvního hodnotového kroku, support dotazy, krátké rozhovory |
+| Úklid analytiky | počet eventů s vlastníkem, smazané osobní údaje, jasnější dashboard |
+| RSS nebo obsahová distribuce | přímé návštěvy, odkazy z vlastních kanálů, kvalitativní zpětná vazba |
+| Provozní dokumentace | dokáže ji použít někdo jiný než autor změny |
+
+Nepiš do dashboardu víc dat jen proto, že se bojíš rozhodnout. Když signál nestačí, doplň krátký rozhovor, ruční kontrolu nebo support poznámky. Produktové poznání není jen graf. Někdy je to věta od zákazníka, která vysvětlí víc než čtyři segmenty v analytice.
+
+### Dny 25 až 30: Uzavři rozhodnutí
+
+Na konci měsíce napiš krátké rozhodnutí. Klidně do issue, changelogu, rozhodovacího logu nebo interní poznámky.
+
+Šablona:
+
+| Pole | Odpověď |
+| --- | --- |
+| Co jsme změnili |  |
+| Jaký problém jsme řešili |  |
+| Jaký byl privacy dopad |  |
+| Co ukázaly signály |  |
+| Co ponecháme |  |
+| Co upravíme nebo vrátíme |  |
+| Co smažeme, archivujeme nebo přestaneme dělat |  |
+| Jaká je další měsíční osa |  |
+
+Nejdůležitější řádek je „co smažeme, archivujeme nebo přestaneme dělat“. Růst není jen přidávání. Malý tým získává rychlost i tím, že odstraňuje nefunkční věci: staré eventy, zbytečné formuláře, mrtvé kampaně, nepoužívané exporty, složité texty a dodavatele bez vlastníka.
+
+### Checklist: 30denní plán
+
+- [ ] Máme jednu měsíční osu a jednu větu cíle.
+- [ ] Inventura obsahuje důkaz, ne jen dojem.
+- [ ] Vybraná oprava jde dokončit do týdne.
+- [ ] U změny je popsaný privacy dopad.
+- [ ] Ověření používá minimum dat potřebných pro rozhodnutí.
+- [ ] Výsledek se zapíše do rozhodovacího logu nebo jiného trvalého místa.
+- [ ] Nepoužité metriky, skripty, exporty nebo texty se smažou nebo archivují.
+- [ ] Další měsíc nezačne novým chaosem, ale jednou další osou.
+
+### Mini úkol
+
+Vyber jednu z těchto startovních variant:
+
+| Varianta | Kdy ji zvolit | První krok |
+| --- | --- | --- |
+| Web a poptávky | lidé chodí na web, ale neposílají kvalitní poptávky | audit jedné klíčové stránky |
+| Onboarding | uživatelé se registrují, ale nedojdou k hodnotě | projít první session jako nový uživatel |
+| Pricing | zákazníci se ptají na stejné věci k ceně | sepsat tři nejčastější otázky a upravit text |
+| Analytika | dashboard existuje, ale nerozhoduje se podle něj | vybrat jednu metriku a zbytek označit k revizi |
+| Privacy provoz | tým neví, kde končí data a kdo má přístup | vyplnit mapu dat pro jednu hlavní cestu |
+
+Pak si založ jeden úkol s názvem:
+
+„Do 30 dní uzavřít: ___“
+
+Slovo „uzavřít“ je důležité. Ne „začít řešit“, ne „podívat se na“, ne „promyslet“. Uzavřít znamená, že na konci existuje změna, rozhodnutí nebo vědomé zastavení. Přesně to odděluje pracovní systém od hezkého dokumentu.
+
 ## Zdroje
 
 - European Data Protection Board: Respect individuals' rights - přehled práv subjektů údajů v GDPR pro malé a střední organizace: https://www.edpb.europa.eu/sme-data-protection-guide/respect-individuals-rights_en
@@ -2584,6 +2734,7 @@ Když na některou otázku nejde odpovědět, není to důvod k panice. Je to d�
 
 ## Pracovní log
 
+- 2026-07-11: Doplněna příloha s 30denním akčním plánem pro privacy-first web nebo SaaS: výběr jedné osy, rychlá inventura, nejmenší oprava, ověření bez slídění, uzavření rozhodnutí, checklist a mini úkol.
 - 2026-07-11: Doplněna příloha se slovníčkem pro rychlé rozhodování: privacy a data pojmy, web/product analytics pojmy, provozní bezpečnostní pojmy a sada kontrolních vět pro týmové porady.
 - 2026-07-11: Doplněna praktická příloha se šablonami pro první audit: mapa dat, specifikace metriky, karta dodavatele, audit klíčové stránky a měsíční privacy-first review.
 - 2026-07-10: Doplněn závěr e-booku jako pracovní systém: výběr hlavní osy, čtyřtýdenní rytmus, jednostránkový provozní přehled, seznam věcí k vědomému nedělání a opakovaný checklist pro praktické použití.
