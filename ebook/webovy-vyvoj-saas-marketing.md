@@ -2897,6 +2897,166 @@ Vyber jeden nástroj, který už tým používá a který drží zákaznická, m
 
 Potom udělej jednu konkrétní změnu: odeber staré účty, ověř export, doplň vlastníka, zkrať retenci, smaž testovací data nebo napiš krátký exit plán. Dodavatelé nemají být neviditelná infrastruktura důvěry. Mají být řízená součást produktu.
 
+## Příloha: Obsahový kalendář bez obsahové vaty
+
+Obsahový kalendář nemá být tabulka, která týmu připomíná, že zase nestíhá článek na úterý. Má být rozhodovací nástroj. Pomáhá vybrat témata, která mají obchodní smysl, produktovou hodnotu a dají se distribuovat bez toho, aby firma musela sledovat každého čtenáře přes půl internetu.
+
+Privacy-first obsahový systém stojí na jednoduché myšlence: čtenář má dostat hodnotu i tehdy, když se nepřihlásí, neodevzdá e-mail a nenechá se profilovat reklamní platformou. Když je téma dobré, čistá URL, RSS feed, interní odkazy, přímý outreach a partnerství často udělají víc než další vrstva skriptů.
+
+Codyho komentář: Největší nepřítel firemního obsahu není nedostatek AI nástrojů. Je to kalendář plný témat, u kterých nikdo neumí říct, komu pomáhají a jaké rozhodnutí mají urychlit. To pak nepíšeš marketing. Pěstuješ digitální seno.
+
+### Začni obsahovou hypotézou
+
+Každý plánovaný text by měl mít jednu obsahovou hypotézu. Ne jen pracovní název, ale větu, která propojí segment, problém, výsledek a další krok.
+
+Použij formát:
+
+| Část | Otázka | Příklad |
+| --- | --- | --- |
+| Segment | Komu přesně pomáháme? | Zakladatel B2B SaaS před prvním placeným pilotem |
+| Problém | Jaké rozhodnutí ho brzdí? | Neví, co měřit bez invazivní analytiky |
+| Výsledek | Co bude po přečtení umět? | Vybere 3 aktivační metriky a nastaví měsíční review |
+| Další krok | Co je férové nabídnout dál? | Šablona metriky, konzultace, související kapitola |
+| Důkaz | Čím text nebude jen názor? | Příklad eventu, checklist, anonymizovaný scénář |
+
+Z toho vznikne věta:
+
+„Tento článek pomůže zakladateli B2B SaaS před prvním placeným pilotem vybrat tři aktivační metriky bez invazivní analytiky a pošle ho na šablonu metriky.“
+
+Taková věta chrání text před rozpliznutím. Když při psaní vznikne odstavec, který této větě nepomáhá, pryč s ním. Nemusí být špatný. Jen patří jinam.
+
+### Rozděl témata podle práce, kterou mají udělat
+
+Ne všechna témata mají stejnou roli. Některá přivádějí nové lidi. Některá vysvětlují rozdíl mezi přístupy. Některá pomáhají salesu. Některá zlepšují onboarding. Když všechno měříš stejnou metrikou, začneš trestat užitečné texty, které nejsou určené k okamžité konverzi.
+
+Praktické rozdělení:
+
+| Typ obsahu | Úloha | Příklad | Měření bez slídění |
+| --- | --- | --- | --- |
+| Průvodce problémem | Pomoci člověku pojmenovat situaci | Jak poznat, že web brzdí sales | Návštěvy, čtenost, interní prokliky |
+| Porovnání přístupů | Zjednodušit výběr | Cookie analytika vs. agregované měření | Klik na související checklist |
+| Praktický návod | Umožnit akci hned teď | Audit formuláře za 30 minut | Stažení šablony bez povinného e-mailu, přímá odpověď |
+| Důkaz a reference | Snížit riziko | Jak jsme zkrátili onboarding | Dotazy ve formuláři, citace v sales hovorech |
+| Dokumentační článek | Snížit podporu | Jak nastavit RSS odběr | Méně opakovaných dotazů, interní odkazy ze supportu |
+| Názorový text | Ukázat principy a pozici | Proč nesbíráme víc dat, než potřebujeme | Kvalitní reakce, odkazy, partnerství |
+
+Obsahový kalendář má mít mix. Pokud publikuješ jen průvodce problémem, přivádíš lidi, ale nepomáháš jim rozhodnout se. Pokud publikuješ jen prodejní důkazy, mluvíš hlavně na lidi, kteří už skoro nakupují. Pokud publikuješ jen názory, budeš možná sympatický, ale tým bude pořád ručně vysvětlovat základní věci.
+
+### Plánuj v měsíčních tématech, ne v denním paniku
+
+Malý tým nepotřebuje vydavatelský provoz s padesáti položkami. Potřebuje konzistentní rytmus. Dobře funguje měsíční téma, které se rozpadne do několika menších výstupů.
+
+Příklad měsíčního tématu: „Privacy-first analytika pro první verzi SaaS.“
+
+Z jednoho tématu může vzniknout:
+
+- hlavní článek: jak vybrat první metriky,
+- praktická šablona: specifikace jedné události,
+- krátká poznámka: proč neměřit každý klik,
+- dokumentační stránka: jak číst dashboard,
+- direct outreach zpráva pro relevantní kontakty,
+- interní checklist pro sales nebo onboarding.
+
+Tohle není recyklace ve smyslu kopírování stejného textu na šest míst. Je to rozumné rozpracování jednoho problému pro různé situace. Čtenář na blogu potřebuje kontext. Zákazník v onboardingu potřebuje postup. Partner potřebuje krátké vysvětlení, proč téma stojí za sdílení.
+
+### Vytvoř jednoduchou redakční kartu
+
+Každé větší téma si zaslouží kartu. Nemusí být v drahém nástroji. Markdown, issue nebo tabulka stačí.
+
+| Pole | Vyplň |
+| --- | --- |
+| Pracovní název |  |
+| Segment |  |
+| Problém |  |
+| Obsahová hypotéza |  |
+| Typ obsahu | průvodce / porovnání / návod / důkaz / dokumentace / názor |
+| Primární další krok |  |
+| Související interní odkazy |  |
+| Potřebný důkaz nebo příklad |  |
+| Zdroje k ověření |  |
+| Riziko zastarávání | nízké / střední / vysoké |
+| Datum revize |  |
+| Distribuce | RSS / přímý odkaz / partner / komunita / e-mail |
+| Metrika rozhodnutí |  |
+
+Povinné pole „riziko zastarávání“ je důležité. Text o principu může vydržet dlouho. Text o konkrétním nástroji, ceně, právní povinnosti nebo benchmarku musí mít datum revize a zdroje. Jinak z něj časem vznikne SEO pastička na vlastní důvěryhodnost.
+
+### Distribuuj přes kanály, které respektují čtenáře
+
+Distribuce není jen „postneme to na sítě“. Privacy-first distribuce preferuje kanály, kde člověk vidí, kam kliká, a firma nemusí prodat duši reklamnímu dashboardu.
+
+Použitelný mix:
+
+- RSS feed pro pravidelné čtenáře,
+- přímé odkazy v dokumentaci a relevantních článcích,
+- krátký e-mail lidem, kteří si ho výslovně vyžádali,
+- osobní zpráva partnerovi nebo zákazníkovi, kterému text reálně pomůže,
+- komunitní sdílení tam, kde je téma užitečné a ne jen sebepropagace,
+- odkazy ze sales a support odpovědí,
+- veřejný changelog, pokud obsah vysvětluje změnu produktu.
+
+Ke každému textu si dopředu napiš distribuční plán:
+
+| Kanál | Pro koho | Text odkazu | Kdy | Jak poznáme dopad |
+| --- | --- | --- | --- | --- |
+| RSS | pravidelní čtenáři | titulek a perex | při publikaci | návštěvy článku |
+| Dokumentace | uživatelé v nastavení | související návod | při vydání | méně dotazů |
+| Sales follow-up | otevřené leady | „Tady je praktický checklist...“ | podle situace | kvalita odpovědí |
+| Partner | publikum s podobným problémem | krátký kontext, proč je to užitečné | po publikaci | přímé odkazy |
+
+Metrika dopadu nemusí být osobní profil. U obsahu často stačí kombinace agregovaných návštěv, interních prokliků, kvalitních odpovědí, opakovaného použití v sales/supportu a měsíčního rozhodnutí, jestli téma rozvíjet.
+
+### Udržuj obsah stejně jako produkt
+
+Obsah stárne. Někdy potichu. Nejvíc rizikové jsou texty o nástrojích, právu, cenách, integracích, bezpečnosti a srovnáních. U nich musí být revize součástí kalendáře, ne hrdinský úklid jednou za dva roky.
+
+Praktické stavy obsahu:
+
+| Stav | Co znamená | Akce |
+| --- | --- | --- |
+| Platné | Text je aktuální a použitelný | ponechat, interně odkazovat |
+| Aktualizovat | Jádro je dobré, ale část zestárla | opravit, doplnit datum aktualizace |
+| Sloučit | Téma se překrývá s jiným textem | spojit a přesměrovat |
+| Archivovat | Text už nepomáhá nebo je zavádějící | označit, stáhnout z navigace, přesměrovat |
+| Přepsat | Změnil se pohled nebo produkt | udělat novou verzi |
+
+Jednou měsíčně vyber tři důležité texty a zkontroluj:
+
+- jestli pořád odpovídají produktu,
+- jestli odkazy fungují,
+- jestli další krok dává smysl,
+- jestli nejsou potřeba nové zdroje,
+- jestli je text pořád férový k čtenáři.
+
+### Checklist: Obsahový kalendář, který něco řídí
+
+- [ ] Každé téma má obsahovou hypotézu v jedné větě.
+- [ ] Víme, komu text pomáhá a jaké rozhodnutí má urychlit.
+- [ ] Kalendář obsahuje různé typy obsahu, ne jen obecné články.
+- [ ] U každého textu je jasný další krok bez manipulativního nátlaku.
+- [ ] Distribuce počítá s RSS, interními odkazy a přímým sdílením.
+- [ ] Gated obsah je výjimka, ne výchozí režim.
+- [ ] U aktuálních nebo rizikových témat máme zdroje a datum revize.
+- [ ] Měříme dopad agregovaně a podle rozhodnutí, ne podle zvědavosti.
+- [ ] Sales a support ví, které texty mohou používat v odpovědích.
+- [ ] Jednou měsíčně proběhne revize nejdůležitějších obsahových položek.
+
+### Mini úkol
+
+Vyber jedno téma, které už dlouho leží v marketingovém backlogu. Nezačínej psaním titulku. Vyplň nejdřív tuto kartu:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Komu má téma pomoct? |  |
+| Jaké rozhodnutí má urychlit? |  |
+| Jaký konkrétní příklad nebo checklist bude obsahovat? |  |
+| Jaký další krok nabídne bez nátlaku? |  |
+| Kde se bude distribuovat kromě sociálních sítí? |  |
+| Jak poznáme za měsíc, že mělo smysl? |  |
+| Kdy ho bude potřeba znovu zkontrolovat? |  |
+
+Potom udělej jednu věc: napiš osnovu, najdi chybějící důkaz, připrav interní odkaz, nebo zruš téma, které po vyplnění karty očividně nemá komu pomoct. Zrušené téma není selhání. Je to ušetřený čas, který můžeš dát textu, který opravdu něco změní.
+
 ## Zdroje
 
 - European Data Protection Board: Respect individuals' rights - přehled práv subjektů údajů v GDPR pro malé a střední organizace: https://www.edpb.europa.eu/sme-data-protection-guide/respect-individuals-rights_en
@@ -2942,6 +3102,7 @@ Potom udělej jednu konkrétní změnu: odeber staré účty, ověř export, dop
 
 ## Pracovní log
 
+- 2026-07-11: Doplněna příloha o obsahovém kalendáři bez obsahové vaty: obsahová hypotéza, typy obsahu podle práce, měsíční tematický rytmus, redakční karta, privacy-first distribuce, údržba obsahu, checklist a mini úkol.
 - 2026-07-11: Doplněna příloha o výběru evropských dodavatelů bez vendor lock-inu: kategorizace nástrojů podle rizika, evropský provoz, vendor karta, bezpečný proof of concept, exit plán, kvartální revize, checklist a mini úkol; přidány zdroje Evropské komise k mezinárodním přenosům dat a standardním smluvním doložkám.
 - 2026-07-11: Doplněna příloha s 30denním akčním plánem pro privacy-first web nebo SaaS: výběr jedné osy, rychlá inventura, nejmenší oprava, ověření bez slídění, uzavření rozhodnutí, checklist a mini úkol.
 - 2026-07-11: Doplněna příloha se slovníčkem pro rychlé rozhodování: privacy a data pojmy, web/product analytics pojmy, provozní bezpečnostní pojmy a sada kontrolních vět pro týmové porady.
