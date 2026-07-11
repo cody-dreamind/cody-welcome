@@ -6101,8 +6101,162 @@ Vyber jeden nástroj, který používáš pro zákaznická data, a vyplň kartu:
 
 Potom udělej jednu konkrétní opravu: doplň dodavatele do seznamu, najdi DPA, zapni oznámení o změně subzpracovatelů, přepni službu do EU regionu, zakaž posílání payloadů do monitoringu, přidej vlastníkovi revizi do kalendáře nebo odstraň nástroj, který už nikdo nepoužívá. Privacy-first provoz není o tom mít nejdelší dokument. Je o tom vědět, komu dáváš data a proč.
 
+## Příloha: DPIA bez tabulkového pekla
+
+DPIA, tedy posouzení vlivu na ochranu osobních údajů, zní jako dokument, který vzniká proto, aby někdo mohl říct „splněno“ a uložit další PDF do složky compliance. To je škoda. V dobrém týmu je DPIA praktický produktový nástroj: donutí tě předem pojmenovat, co se může pokazit lidem, jejichž data zpracováváš, a jak tomu zabráníš.
+
+Ne každé zpracování potřebuje DPIA. GDPR ji požaduje hlavně tam, kde je zpracování pravděpodobně vysoce rizikové pro práva a svobody lidí. Evropská komise jako typické příklady uvádí rozsáhlé profilování, rozsáhlé zpracování citlivých údajů a rozsáhlé systematické monitorování veřejných prostor. ÚOOÚ k tomu publikuje české metodiky a seznamy operací, které mohou pomoct s rozhodnutím, jestli DPIA provést.
+
+Toto není právní rada. Je to provozní rámec pro malý SaaS tým, který nechce zjistit rizika až při auditu nebo incidentu.
+
+### DPIA dělej před změnou, ne po průšvihu
+
+Nejhorší moment pro DPIA je týden po releasu, když už nová funkce sbírá data, zákazníci ji používají a tým zjistí, že neví, jak vysvětlit účel, retenci ani přístupy. V tu chvíli už není DPIA návrhový nástroj, ale archeologie. A archeologie v produkční databázi je velmi drahý koníček.
+
+DPIA screening udělej vždy, když zavádíš nebo významně měníš:
+
+- AI funkci, která pracuje se zákaznickým obsahem,
+- scoring, profilování nebo automatizované doporučování,
+- monitoring chování uživatelů ve větším rozsahu,
+- zpracování citlivějších dat,
+- nový datový tok do třetí strany,
+- integraci, která spojuje data z více zdrojů,
+- funkci pro zaměstnance, zákazníky nebo děti, kde je nerovnováha moci nebo zvýšená zranitelnost,
+- bezpečnostní nebo anti-fraud mechanismus, který může lidem omezit přístup ke službě.
+
+Screening není plná DPIA. Je to krátké rozhodnutí, jestli plnou DPIA potřebuješ. Pokud si nejsi jistý, udělej raději lehkou DPIA než hrdinské mávnutí rukou.
+
+### Začni popisem zpracování lidskou řečí
+
+První část DPIA nemá být právní báseň. Má vysvětlit, co systém dělá.
+
+Dobře:
+
+„Funkce navrhuje obchodníkovi další krok u leadu. Využívá historii komunikace, stav obchodní příležitosti a ručně vyplněný segment. Nenavrhuje cenu, neodmítá zákazníka a neposílá zprávy automaticky.“
+
+Špatně:
+
+„Systém provádí optimalizované zpracování obchodních dat za účelem zvýšení efektivity.“
+
+Popis musí odpovědět na otázky:
+
+- Kdo jsou lidé, kterých se zpracování týká?
+- Jaká data vstupují do systému?
+- Odkud data pochází?
+- Co systém s daty dělá?
+- Kdo vidí výstup?
+- Jaký dopad může mít výstup na člověka?
+- Jak dlouho data držíme?
+- Kteří dodavatelé nebo subzpracovatelé jsou zapojení?
+
+Privacy-first trik: Pokud popis zpracování nejde vysvětlit obchodníkovi, vývojáři a zákazníkovi stejnými větami, pravděpodobně ještě nemáš jasno.
+
+### Nezbytnost a přiměřenost nejsou formalita
+
+DPIA nemá jen vyjmenovat rizika. Má taky ověřit, jestli zpracování dává smysl vzhledem k účelu. Tady se často ukáže, že problém není bezpečnostní opatření, ale přestřelený návrh.
+
+Ptej se:
+
+- Potřebujeme osobní data, nebo stačí agregace?
+- Potřebujeme přesný text, nebo stačí kategorie?
+- Potřebujeme historii za dva roky, nebo posledních 30 dní?
+- Potřebujeme automatické rozhodnutí, nebo jen doporučení pro člověka?
+- Potřebujeme posílat data dodavateli, nebo lze zpracovat lokálně / v EU regionu / anonymizovaně?
+- Umí člověk rozumně pochopit, co se děje s jeho daty?
+
+Příklad: Chceš zjistit, které části onboardingu zdržují nové uživatele. Nemusíš nahrávat celé session, ukládat obsah formulářů a spojovat chování s konkrétní osobou. Často stačí agregované kroky: registrace zahájena, workspace vytvořen, první pozvánka odeslána, integrace připojena. Méně dat, méně rizika, pořád použitelné rozhodnutí. Není to magie, jen méně datového hladovění.
+
+### Riziko popisuj jako dopad na člověka
+
+„Únik databáze“ je technická událost. Riziko pro člověka je něco jiného: ztráta soukromí, diskriminace, finanční škoda, ztráta kontroly nad účtem, neoprávněné sledování, poškození pověsti, nemožnost opravit chybný údaj nebo nejasné automatizované rozhodnutí.
+
+Praktická tabulka:
+
+| Scénář | Koho se týká | Dopad na člověka | Pravděpodobnost | Závažnost | Opatření |
+| --- | --- | --- | --- | --- | --- |
+| Supportní příloha obsahuje osobní údaje třetích osob | Zákazník, jeho klienti | Nechtěné zpřístupnění dat týmu | Střední | Střední | Krátká retence příloh, omezené přístupy, varování před nahráním |
+| AI shrnutí ticketu odešle citlivý kontext externímu modelu | Uživatelé v ticketu | Ztráta kontroly nad daty | Nízká až střední | Vysoká | Redakce vstupu, EU režim, zákaz citlivých polí, audit promptů |
+| Automatický scoring označí lead jako nízkou prioritu | Kontaktní osoba leadu | Horší zacházení bez vysvětlení | Střední | Nízká až střední | Scoring jen jako doporučení, jasná kritéria, možnost ruční změny |
+
+Riziko nehodnoť jen podle toho, co je nepříjemné pro firmu. DPIA je o lidech. Ano, firma také nechce průšvih, ale GDPR se primárně neptá, jestli bude trapné vysvětlovat incident na poradě.
+
+### Opatření musí být konkrétní a ověřitelná
+
+„Budeme dbát na bezpečnost“ není opatření. To je přání v obleku.
+
+Dobré opatření má vlastníka, technickou nebo procesní podobu a způsob ověření:
+
+- Pole `message_body` se neposílá do analytiky; test kontroluje payload eventů v CI.
+- Přílohy support ticketů se mažou po 30 dnech; měsíční job má monitoring selhání.
+- AI funkce používá jen vybraná pole; vstupní mapper má allowlist.
+- Administrátorský export je dostupný jen roli `owner`; každý export se loguje bez obsahu exportu.
+- Zákazník vidí v dokumentaci, jaké typy dat funkce používá a jak ji vypnout.
+
+U každého opatření si napiš:
+
+| Opatření | Vlastník | Kde je implementované | Jak ověříme | Termín |
+| --- | --- | --- | --- | --- |
+|  |  |  |  |  |
+
+Pokud opatření nejde ověřit, pravděpodobně se časem rozpadne.
+
+### Kdy zastavit release
+
+DPIA není jen dokumentace. Má umět říct „teď ne“.
+
+Release zastav nebo odlož, pokud:
+
+- nevíš, jaký je účel zpracování,
+- neumíš vysvětlit právní základ nebo informační povinnost,
+- zpracováváš víc dat, než potřebuješ,
+- nemáš jasno v dodavatelích a přenosech,
+- zůstává vysoké riziko bez přiměřeného opatření,
+- neexistuje cesta pro výmaz, opravu nebo omezení dat,
+- tým neumí funkci bezpečně vypnout.
+
+GDPR počítá i s předchozí konzultací s dozorovým úřadem, pokud by zpracování po opatřeních pořád znamenalo vysoké riziko. Pro malý tým je praktický závěr jednoduchý: když neumíš riziko snížit na rozumnou úroveň, nenasazuj to potichu.
+
+### Checklist: DPIA bez tabulkového pekla
+
+- [ ] U nové nebo změněné funkce jsme udělali DPIA screening.
+- [ ] Víme, jestli zpracování spadá do vysoce rizikových scénářů nebo seznamů ÚOOÚ.
+- [ ] Zpracování je popsané lidskou řečí: kdo, jaká data, odkud, proč, komu, jak dlouho.
+- [ ] Nezbytnost a přiměřenost jsme ověřili před výběrem technického řešení.
+- [ ] Každé riziko je popsané jako dopad na člověka, ne jen jako technická chyba.
+- [ ] Opatření mají vlastníka, termín a způsob ověření.
+- [ ] Dodavatelé, subzpracovatelé a přenosy mimo EU/EHP jsou pojmenované.
+- [ ] Dokumentace pro zákazníka odpovídá skutečnému zpracování.
+- [ ] Víme, jak funkci vypnout nebo omezit, když se ukáže problém.
+- [ ] DPIA má datum další revize nebo spouštěč revize při změně funkce.
+
+### Mini úkol
+
+Vyber jednu funkci, která pracuje s citlivějším kontextem: AI shrnutí, lead scoring, supportní přílohy, produktová analytika, exporty, monitoring, CRM enrichment nebo anti-fraud.
+
+Vyplň krátký screening:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jaká funkce nebo změna se posuzuje? |  |
+| Koho se zpracování týká? |  |
+| Jaká osobní data vstupují do systému? |  |
+| Jaký je účel zpracování? |  |
+| Jaký dopad může mít výstup na člověka? |  |
+| Jde o profilování, rozsáhlé monitorování, citlivá data nebo zranitelnou skupinu? |  |
+| Jsou zapojení noví dodavatelé nebo přenos mimo EU/EHP? |  |
+| Dá se účel splnit s méně daty? |  |
+| Jaké je největší riziko pro člověka? |  |
+| Jaké jedno opatření riziko sníží před releasem? |  |
+| Potřebujeme plnou DPIA? |  |
+
+Na konci napiš jedno rozhodnutí: „pokračujeme bez plné DPIA“, „děláme plnou DPIA“, „odkládáme release do doplnění opatření“ nebo „funkci zjednodušujeme, protože zpracování je zbytečně rizikové“. Codyho komentář: poslední možnost je často nejlevnější. Jen se hůř prodává na poradě, protože nezní jako „inovace“.
+
 ## Zdroje
 
+- EUR-Lex: Regulation (EU) 2016/679, GDPR Article 35 and 36 - povinnost posouzení vlivu na ochranu osobních údajů a předchozí konzultace při vysokém zbytkovém riziku: https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng
+- European Commission: When is a Data Protection Impact Assessment (DPIA) required? - praktický přehled situací, kdy je DPIA vyžadována: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/obligations/when-data-protection-impact-assessment-dpia-required_en
+- European Data Protection Board: Data Protection impact assessments High risk processing - pokyny WP248 rev.01 k určení vysokého rizika a DPIA: https://www.edpb.europa.eu/documents/guideline/data-protection-impact-assessments-high-risk-processing_en
+- ÚOOÚ: Posouzení vlivu na ochranu osobních údajů (DPIA) - český rozcestník, metodiky a seznamy operací zpracování pro DPIA: https://uoou.gov.cz/profesional/posouzeni-vlivu-na-ochranu-osobnich-udaju-dpia
 - EUR-Lex: Regulation (EU) 2016/679, GDPR Article 28 - požadavky na zpracovatele, smlouvu se zpracovatelem, zapojení dalšího zpracovatele, návrat nebo výmaz dat a doložení souladu: https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng
 - OWASP Cheat Sheet Series: Logging Cheat Sheet - doporučení k tomu, co logovat, co nelogovat, jak chránit logy a jak nastavit bezpečnostní monitoring podle účelu a rizika: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
 - OpenTelemetry Docs: Signals - přehled základních observability signálů jako traces, metrics, logs a profiles: https://opentelemetry.io/docs/concepts/signals/
@@ -6168,6 +6322,7 @@ Potom udělej jednu konkrétní opravu: doplň dodavatele do seznamu, najdi DPA,
 
 ## Pracovní log
 
+- 2026-07-11: Doplněna příloha o DPIA bez tabulkového pekla: kdy dělat screening, jak popsat zpracování lidskou řečí, ověřit nezbytnost a přiměřenost, popsat rizika jako dopad na člověka, navrhnout ověřitelná opatření, zastavit rizikový release, checklist a mini úkol; ověřeny zdroje EUR-Lex, Evropské komise, EDPB a ÚOOÚ k DPIA.
 - 2026-07-11: Doplněna příloha o zpracovatelských smlouvách a subdodavatelích bez právního šumu: role správce a zpracovatele, DPA kontrolní karta, subzpracovatelé, přenosy mimo EU/EHP, veřejný seznam subdodavatelů, nákupní rozhodovací karta, checklist a mini úkol; ověřeny oficiální zdroje Evropské komise, EUR-Lex a Standard Contractual Clauses.
 - 2026-07-11: Doplněna příloha o chybách, logování a observabilitě bez datového vysavače: rozhodovací účel signálů, rozlišení metrik, logů, traces a profilů, zakázaná data v logu, bezpečné chybové hlášky s korelačním ID, alerty, retence, přístupy k logům, checklist a mini úkol; ověřeny zdroje OWASP Logging Cheat Sheet a OpenTelemetry Signals.
 - 2026-07-11: Doplněna příloha o tajemstvích, API klíčích a konfiguraci bez úniku do repozitáře: rozdělení konfigurace a secrets, lokální vývoj, CI/CD tajemství, rotace, postup při úniku, secret scanning, checklist a mini úkol; ověřeny zdroje OWASP, Twelve-Factor App a GitHub Docs.
