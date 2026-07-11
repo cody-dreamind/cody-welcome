@@ -2691,6 +2691,212 @@ Pak si založ jeden úkol s názvem:
 
 Slovo „uzavřít“ je důležité. Ne „začít řešit“, ne „podívat se na“, ne „promyslet“. Uzavřít znamená, že na konci existuje změna, rozhodnutí nebo vědomé zastavení. Přesně to odděluje pracovní systém od hezkého dokumentu.
 
+## Příloha: Výběr evropských dodavatelů bez vendor lock-inu
+
+Dodavatel není jen faktura a logo v seznamu nástrojů. U privacy-first webu nebo SaaS je dodavatel součást provozního modelu: může vidět data, ovlivnit dostupnost, změnit cenu, přidat subdodavatele nebo zkomplikovat odchod. Proto se výběr nástroje nemá řídit jen tím, jestli má hezké API a oblíbený dark mode. I když, uznávám, hezký dark mode umí člověka na chvíli obměkčit.
+
+Špatná otázka zní: „Používají to ostatní?“
+
+Lepší otázka zní: „Jaká data tomuto nástroji svěříme, kde skončí, kdo je uvidí a jak odejdeme, když přestane dávat smysl?“
+
+Tahle příloha není nákupní bible. Je to pracovní filtr pro malé týmy, které chtějí používat moderní nástroje, ale nechtějí se za půl roku probudit v systému, kde se data rozutekla po pěti platformách a nikdo neví, kdo má klíče.
+
+### Nejdřív urči, jak kritický nástroj je
+
+Ne každý dodavatel potřebuje stejnou hloubku kontroly. Nástroj na interní návrhy bez osobních dat je jiná kategorie než hosting produkční databáze, platební brána nebo analytika návštěvníků.
+
+Praktické rozdělení:
+
+| Kategorie | Příklad | Hloubka kontroly |
+| --- | --- | --- |
+| Kritická infrastruktura | hosting, databáze, DNS, e-mailová doména | velmi vysoká |
+| Zákaznická data | CRM, helpdesk, fakturace, produktová analytika | vysoká |
+| Marketing a obsah | CMS, newsletter, formuláře, webová analytika | střední až vysoká |
+| Interní produktivita | úkoly, dokumentace, poznámky | podle obsahu dat |
+| Experimentální nástroj | prototyp, jednorázový audit, testovací export | omezený přístup a krátká retence |
+
+Čím kritičtější nástroj, tím víc chceš vědět předem. Ne až při incidentu. Incident není ideální okamžik pro otázku „mimochodem, kde vlastně leží naše zálohy?“
+
+### Preferuj evropský provoz, ale nepředstírej, že region vyřeší všechno
+
+Evropský region nebo evropský provozovatel je silný výchozí bod. Není to ale kouzelné razítko. U dodavatele se ptej na několik vrstev:
+
+- kde běží primární data,
+- kde jsou zálohy,
+- kdo provozuje infrastrukturu,
+- kdo jsou subdodavatelé,
+- odkud má support nebo administrace přístup,
+- jak se řeší incidenty,
+- jak se data exportují a mažou,
+- jak se mění podmínky a jak se o změnách dozvíš.
+
+Evropská komise popisuje, že přenos osobních údajů mimo EU/EHP musí stát na pravidlech pro mezinárodní přenosy, například na rozhodnutí o odpovídající ochraně nebo vhodných zárukách, mezi které patří standardní smluvní doložky. Praktický dopad pro tým je jednoduchý: pokud data opouští evropský prostor nebo je může obsluhovat mimoevropský subjekt, potřebuješ vědět proč, na jakém základě a jaké jsou alternativy.
+
+Toto není právní rada. Je to provozní pravidlo: evropská lokalita dat je začátek kontroly, ne konec due diligence.
+
+### Vendor karta před nákupem
+
+Před zavedením nástroje vyplň jednu krátkou kartu. Pokud ji nejde vyplnit do deseti až patnácti minut, nástroj možná není špatný, ale tým o něm zatím neví dost.
+
+| Pole | Odpověď |
+| --- | --- |
+| Název nástroje |  |
+| Vlastník v týmu |  |
+| Jaký problém řeší |  |
+| Jaká data dostane |  |
+| Obsahuje osobní nebo citlivá data |  |
+| Kde jsou primární data |  |
+| Kde jsou zálohy |  |
+| Kdo jsou subdodavatelé |  |
+| Jak funguje export |  |
+| Jak funguje výmaz |  |
+| Jaká je retence |  |
+| Jaký je plán odchodu |  |
+| Jaký je nejmenší bezpečný test |  |
+| Datum další revize |  |
+
+Nejdůležitější pole jsou vlastník, data, export a plán odchodu. Bez vlastníka nástroj chátrá. Bez znalosti dat je rizikový. Bez exportu se z něj stává past. Bez plánu odchodu je levný jen do chvíle, kdy se rozhodneš odejít.
+
+### Proof of concept dělej s minimem dat
+
+Test nástroje nemá začínat importem celé produkční databáze. První ověření má odpovědět na otázku, jestli nástroj řeší konkrétní problém. K tomu většinou stačí:
+
+- syntetická data,
+- anonymizovaný vzorek,
+- ručně vytvořený testovací projekt,
+- jeden interní účet,
+- krátký časový limit testu,
+- jasné kritérium ukončení.
+
+Příklad: Chceš otestovat helpdesk. Nemusíš importovat pět let historie zákaznické komunikace. Stačí vytvořit několik typických tiketů bez osobních údajů, ověřit workflow, role, export, notifikace a mazání. Pokud nástroj projde, teprve potom řeš migraci reálných dat.
+
+Privacy-first testovací pravidlo:
+
+| Otázka | Doporučení |
+| --- | --- |
+| Potřebujeme reálná osobní data? | Použij je až po rozhodnutí a s jasným účelem |
+| Stačí syntetická data? | Začni tam |
+| Jak dlouho test poběží? | Nastav datum ukončení |
+| Co se po testu smaže? | Smaž účet, exporty i testovací soubory |
+| Kdo test vyhodnotí? | Jeden vlastník, ne všeobecné „uvidíme“ |
+
+Codyho komentář: „Jen to tam nahrajeme na zkoušku“ je věta, která v privacy-first týmu spouští kontrolku. Ne proto, že by testování bylo špatně. Protože „na zkoušku“ často znamená „bez vlastníka, bez retence a bez plánu úklidu“.
+
+### Exit plán napiš dřív, než nástroj zakoření
+
+Vendor lock-in nevzniká v den podpisu smlouvy. Vzniká pomalu: jeden export navíc, jedna automatizace, pár vlastních polí, workflow vázané na konkrétní API, tým zvyklý na jedno rozhraní a dokumentace, která předpokládá, že nástroj zůstane navždy.
+
+Exit plán nemusí být dlouhý. Má odpovědět:
+
+- Jak dostaneme data ven?
+- V jakém formátu?
+- Jak dlouho export trvá?
+- Co ztratíme: historii, metadata, přílohy, oprávnění, automatizace?
+- Jaký je náhradní nástroj nebo minimální fallback?
+- Kdo odchod provede?
+- Jak zkontrolujeme, že u původního dodavatele nezůstala data mimo retenční pravidla?
+
+Praktická exit tabulka:
+
+| Oblast | Otázka | Stav |
+| --- | --- | --- |
+| Data | Existuje úplný export ve srozumitelném formátu? |  |
+| Identita | Lze převést účty, role a oprávnění? |  |
+| Integrace | Které automatizace se rozbijí? |  |
+| Historie | Co zůstane jen v původním nástroji? |  |
+| Retence | Kdy dodavatel smaže zbylá data? |  |
+| Fallback | Jak poběží provoz během migrace? |  |
+
+Pokud exit plán zní „nějak to pak vyexportujeme“, nástroj ještě není provozně pochopený. Možná ho stejně zvolíš, protože přínos převáží riziko. Ale napiš to jako vědomý kompromis, ne jako mlhu.
+
+### Kdy zvolit mimoevropský nástroj
+
+Privacy-first neznamená automaticky „nikdy žádný mimoevropský dodavatel“. Znamená to, že mimoevropský nástroj musí mít jasný důvod a lepší kontrolu. Typicky může dávat smysl, když:
+
+- neexistuje realistická evropská alternativa,
+- nástroj nepracuje s osobními ani citlivými daty,
+- data lze minimalizovat nebo pseudonymizovat,
+- existuje platný mechanismus pro přenos dat,
+- tým zná subdodavatele a bezpečnostní režim,
+- existuje export a plán odchodu,
+- přínos pro uživatele převyšuje provozní a právní složitost.
+
+Rozhodnutí si zapiš do logu. Stačí krátce:
+
+```markdown
+# 2026-07-11: Použijeme mimoevropský nástroj pro ___
+
+## Kontext
+Evropské alternativy neřeší ___ nebo by znamenaly ___.
+
+## Rozhodnutí
+Nástroj použijeme pouze pro ___ a neposíláme do něj ___.
+
+## Opatření
+Minimalizace dat, exportní test, revize za 90 dní, vlastník ___.
+
+## Důsledky
+Získáme ___, ale přidáváme riziko ___.
+```
+
+Tím se z „všichni to používají“ stane opravdové rozhodnutí.
+
+### Revize dodavatelů jednou za kvartál
+
+Dodavatelský audit nemusí být obří projekt. Jednou za kvartál projdi hlavní nástroje a polož si:
+
+- Používáme nástroj pořád aktivně?
+- Přibyly do něj nové typy dat?
+- Změnil se region, cena, podmínky nebo subdodavatelé?
+- Má pořád správného vlastníka?
+- Mají přístup jen lidé, kteří ho potřebují?
+- Funguje export?
+- Existují staré exporty nebo testovací účty?
+- Je pořád nejlepší volbou, nebo jen setrvačností?
+
+Výstup má být konkrétní:
+
+| Nástroj | Rozhodnutí | Akce | Vlastník | Termín |
+| --- | --- | --- | --- | --- |
+|  | ponechat | zkontrolovat export |  |  |
+|  | omezit | odebrat staré účty |  |  |
+|  | nahradit | vybrat EU alternativu |  |  |
+|  | zrušit | exportovat a smazat data |  |  |
+
+Vendor review je jedno z míst, kde se privacy-first provoz mění z hodnoty na návyk. Neřešíš data jen při právním auditu. Řešíš je pravidelně, klidně a prakticky.
+
+### Checklist: Evropský dodavatel bez pasti
+
+- [ ] Víme, jaký problém nástroj řeší a kdo ho vlastní.
+- [ ] Víme, jaká data do nástroje posíláme a proč.
+- [ ] Preferujeme evropského provozovatele nebo alespoň evropský region, pokud nástroj pracuje s osobními daty.
+- [ ] Známe zálohy, subdodavatele, supportní přístupy a incidentní postup.
+- [ ] U mimoevropských přenosů máme popsaný právní a provozní základ.
+- [ ] Test nástroje běží na syntetických nebo minimalizovaných datech.
+- [ ] Existuje exportní cesta ve srozumitelném formátu.
+- [ ] Existuje exit plán a fallback pro kritické workflow.
+- [ ] Přístupy jsou osobní, omezené a pravidelně revidované.
+- [ ] Po testu mažeme testovací účty, exporty a dočasné soubory.
+- [ ] Jednou za kvartál kontrolujeme, jestli nástroj pořád dává smysl.
+
+### Mini úkol
+
+Vyber jeden nástroj, který už tým používá a který drží zákaznická, marketingová nebo provozně citlivá data. Vyplň tabulku:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jaký problém nástroj řeší? |  |
+| Kdo je vlastník? |  |
+| Jaká data do něj posíláme? |  |
+| Kde jsou data a zálohy? |  |
+| Kdo má přístup? |  |
+| Umíme udělat úplný export? |  |
+| Jak smažeme data po ukončení? |  |
+| Jaký je plán odchodu? |  |
+| Jaká jedna změna sníží riziko nejvíc? |  |
+
+Potom udělej jednu konkrétní změnu: odeber staré účty, ověř export, doplň vlastníka, zkrať retenci, smaž testovací data nebo napiš krátký exit plán. Dodavatelé nemají být neviditelná infrastruktura důvěry. Mají být řízená součást produktu.
+
 ## Zdroje
 
 - European Data Protection Board: Respect individuals' rights - přehled práv subjektů údajů v GDPR pro malé a střední organizace: https://www.edpb.europa.eu/sme-data-protection-guide/respect-individuals-rights_en
@@ -2715,6 +2921,8 @@ Slovo „uzavřít“ je důležité. Ne „začít řešit“, ne „podívat s
 - Stripe Documentation: Recurring pricing models - přehled flat rate, per-seat, tiered, package, volume a usage-based modelů pro předplatné: https://docs.stripe.com/products-prices/pricing-models
 - European Commission: Data protection - pravidla ochrany osobních dat v EU a mimo EU: https://commission.europa.eu/law/law-topic/data-protection_en
 - European Commission: Legal framework of EU data protection - přehled právního rámce včetně GDPR: https://commission.europa.eu/law/law-topic/data-protection/legal-framework-eu-data-protection_en
+- European Commission: International dimension of data protection - pravidla pro přenos osobních dat mimo EU včetně rozhodnutí o odpovídající ochraně: https://commission.europa.eu/law/law-topic/data-protection/international-dimension-data-protection_en
+- European Commission: Standard Contractual Clauses - standardní smluvní doložky pro vybrané přenosy osobních dat mimo EU/EHP: https://commission.europa.eu/law/law-topic/data-protection/international-dimension-data-protection/standard-contractual-clauses-scc_en
 - European Data Protection Board: Guidelines 05/2020 on consent under Regulation 2016/679 - pokyny k platnému souhlasu podle GDPR: https://www.edpb.europa.eu/documents/guideline/guidelines-052020-on-consent-under-regulation-2016679_en
 - RSS Advisory Board / Berkman Klein Center: RSS 2.0 Specification - stabilní specifikace RSS 2.0: https://cyber.harvard.edu/rss/rss.html
 - IETF: RFC 4287 The Atom Syndication Format - standard Atom feedů: https://datatracker.ietf.org/doc/html/rfc4287
@@ -2734,6 +2942,7 @@ Slovo „uzavřít“ je důležité. Ne „začít řešit“, ne „podívat s
 
 ## Pracovní log
 
+- 2026-07-11: Doplněna příloha o výběru evropských dodavatelů bez vendor lock-inu: kategorizace nástrojů podle rizika, evropský provoz, vendor karta, bezpečný proof of concept, exit plán, kvartální revize, checklist a mini úkol; přidány zdroje Evropské komise k mezinárodním přenosům dat a standardním smluvním doložkám.
 - 2026-07-11: Doplněna příloha s 30denním akčním plánem pro privacy-first web nebo SaaS: výběr jedné osy, rychlá inventura, nejmenší oprava, ověření bez slídění, uzavření rozhodnutí, checklist a mini úkol.
 - 2026-07-11: Doplněna příloha se slovníčkem pro rychlé rozhodování: privacy a data pojmy, web/product analytics pojmy, provozní bezpečnostní pojmy a sada kontrolních vět pro týmové porady.
 - 2026-07-11: Doplněna praktická příloha se šablonami pro první audit: mapa dat, specifikace metriky, karta dodavatele, audit klíčové stránky a měsíční privacy-first review.
