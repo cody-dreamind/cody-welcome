@@ -5220,6 +5220,198 @@ Vytvoř incidentní kartu pro svůj produkt:
 
 Potom udělej jednu konkrétní změnu: založ šablonu incident karty, napiš první zákaznickou komunikační šablonu, ověř přístup k zálohám, projdi admin účty nebo doplň do mapy dat jednoho dodavatele. Incidentní plán nemusí být dokonalý. Musí být použitelný ve chvíli, kdy nikdo nemá náladu číst román.
 
+## Příloha: Zálohy a obnova bez falešného pocitu bezpečí
+
+Záloha není soubor někde v cloudu. Záloha je schopnost obnovit provoz, data a důvěru v rozumném čase. Pokud nikdo nezkusil obnovu, nemáš zálohovací strategii. Máš optimistickou dekoraci.
+
+U malého webu nebo SaaS se zálohy často řeší pozdě, protože „to přece dělá hosting“. Možná ano. Ale otázka není, jestli někde existuje snapshot. Otázka je, kdo ho umí najít, obnovit, ověřit a použít bez toho, aby při tom přepsal správná data špatnými.
+
+Privacy-first pohled je jednoduchý: záloha má chránit zákazníka i provoz, ale nemá se stát černou dírou, kde osobní data žijí navždy a mimo kontrolu.
+
+### Rozliš data podle obnovy, ne podle technické vrstvy
+
+Nezačínej tím, že vypíšeš databáze, buckety a servery. Začni tím, co musíš umět obnovit.
+
+Typické kategorie:
+
+| Kategorie | Co zahrnuje | Otázka obnovy |
+| --- | --- | --- |
+| Produkční databáze | účty, nastavení, objednávky, obsah, auditní metadata | Umíme obnovit konkrétní čas bez ztráty novějších správných změn? |
+| Uživatelské soubory | nahrané dokumenty, obrázky, exporty, přílohy | Víme, které soubory patří kterému účtu a jak je smazat i v zálohách podle pravidel? |
+| Konfigurace | proměnné prostředí, DNS, deploy nastavení, feature flags | Umíme znovu postavit službu bez hledání v chatu? |
+| Kód a migrace | repozitář, tagy, databázové migrace, build artefakty | Umíme obnovit verzi aplikace kompatibilní s daty? |
+| Provozní dokumentace | runbooky, incident šablony, kontakty, mapa dodavatelů | Je dostupná i když hlavní systém nefunguje? |
+
+Tento pohled rychle ukáže nepříjemné mezery. Například databázi možná zálohuješ každý den, ale DNS konfigurace je jen v hlavě jednoho člověka. Nebo máš snapshot serveru, ale žádný postup, jak zjistit, zda po obnově neunikla data mezi tenanty.
+
+### Napiš dvě čísla: RPO a RTO lidsky
+
+Nemusíš z toho dělat korporátní divadlo. Stačí dvě věty pro každou kritickou část.
+
+RPO odpovídá na otázku: kolik dat si můžeme dovolit ztratit?
+
+RTO odpovídá na otázku: jak rychle musíme službu rozumně obnovit?
+
+Příklad:
+
+| Část systému | RPO | RTO |
+| --- | --- | --- |
+| Marketingový web | můžeme ztratit změny z posledního dne, pokud je máme v gitu nebo CMS historii | obnovit základní dostupnost do 4 hodin |
+| SaaS databáze | maximálně jednotky hodin dat, podle typu zákazníků | kritické funkce obnovit do 8 hodin |
+| Fakturační podklady | nesmí zmizet bez ověřitelné náhrady | přístup obnovit do 1 pracovního dne |
+| Dokumentace obnovy | nesmí být dostupná jen v nefunkčním systému | dostupná okamžitě z alternativního místa |
+
+Čísla musí odpovídat realitě. Pokud píšeš RTO 30 minut, ale obnovu nikdo nikdy nezkoušel a přístup má jeden člověk na dovolené, není to cíl. Je to fantasy žánr s tabulkou.
+
+### Záloha musí mít vlastníka a rytmus
+
+U každé zálohované oblasti si napiš:
+
+- kdo za ni odpovídá,
+- jak často vzniká,
+- kde je uložená,
+- kdo k ní má přístup,
+- jak dlouho se drží,
+- jak se šifruje nebo jinak chrání,
+- jak se testuje obnova,
+- jak se řeší data, která mají být smazaná.
+
+Tohle je důležitější než název nástroje. Skvělý nástroj s nejasným vlastníkem stejně skončí jako tichá hromádka rizika.
+
+Privacy-first pravidlo: přístup k zálohám má být vzácnější než přístup k produkci. Záloha často obsahuje hodně dat najednou a obchází běžné aplikační kontroly. Kdo umí stáhnout celou zálohu, umí způsobit velký problém velmi rychle.
+
+### Test obnovy je produktová rutina
+
+Obnovu testuj dřív, než ji potřebuješ. Malému týmu stačí jednoduchý rytmus:
+
+- jednou měsíčně ověřit, že zálohy vznikají a dají se najít,
+- jednou kvartálně obnovit vybranou část do izolovaného prostředí,
+- po větší změně databáze nebo infrastruktury udělat mimořádný test,
+- po incidentu zapsat, co obnova skutečně ukázala.
+
+Test obnovy nemá dokazovat, že je všechno krásné. Má odhalit, co by tě při skutečném výpadku zpomalilo.
+
+Při testu si zapiš:
+
+- kdo test spustil,
+- jaká záloha byla použita,
+- jak dlouho trvalo najít správnou verzi,
+- jak dlouho trvala technická obnova,
+- co nešlo podle návodu,
+- jak se ověřilo, že data dávají smysl,
+- co se musí opravit v runbooku.
+
+Praktický detail: testovací obnova nesmí automaticky rozesílat e-maily, webhooks, faktury nebo notifikace zákazníkům. Obnovené prostředí odděl od produkčních integrací. Jinak máš z testu obnovy produkční překvapení. A ty bývají dražší než káva.
+
+### Obnova není vždy návrat celého světa
+
+Někdy potřebuješ obnovit celou službu. Častěji ale potřebuješ obnovit konkrétní část:
+
+- jeden smazaný dokument,
+- chybně upravené nastavení účtu,
+- obsah stránky,
+- konfiguraci integrace,
+- tabulku po špatné migraci,
+- export pro zákazníka,
+- starší verzi textu nebo šablony.
+
+Proto je dobré rozlišit tři typy obnovy:
+
+1. Celková obnova systému po vážném výpadku.
+2. Částečná obnova konkrétního zákazníka, objektu nebo souboru.
+3. Referenční obnova do izolovaného prostředí pro porovnání a vyšetření.
+
+Částečná obnova je často technicky nejtěžší, protože musí respektovat současný stav. Nechceš vrátit celý účet o dva dny zpět jen proto, že se smazala jedna příloha. U důležitých doménových objektů proto zvaž historii změn, soft delete s krátkou retencí nebo auditní záznamy. Ne kvůli sběru dat navíc, ale kvůli bezpečné opravě chyb.
+
+### Retence záloh má mít konec
+
+Zálohy nesmí být tajná výjimka ze všech pravidel. Pokud aktivní data mažeš po určité době, musíš vědět, co se s nimi děje v zálohách.
+
+Praktický kompromis:
+
+- aktivní systém smaže data podle běžného procesu,
+- zálohy mají omezenou retenční dobu,
+- ze záloh se data běžně neobnovují zpět bez důvodu,
+- při obnově se znovu aplikuje aktuální stav výmazů tam, kde je to potřeba,
+- zákaznické a právní texty popisují realitu bez přehnaných slibů.
+
+Neslibuj „okamžité smazání ze všech záloh“, pokud to neumíš technicky dodržet. Lepší je jasně popsat, že data se z aktivních systémů smažou podle procesu a ze záloh zmizí po uplynutí retenční doby, pokud není nutný jiný oprávněný důvod. Konkrétní formulaci má posoudit právník nebo data owner, ne adrenalinový vývojář v pátek večer.
+
+### Runbook obnovy napiš pro unaveného člověka
+
+Runbook obnovy nemá být krásná esej. Má být použitelný, když je někdo ve stresu.
+
+Struktura:
+
+```text
+Název: Obnova produkční databáze do izolovaného prostředí
+
+Kdy použít:
+- potřebujeme ověřit stav dat z minulosti
+- potřebujeme porovnat data po incidentu
+- nechceme přepsat produkci
+
+Kdo může spustit:
+- primární owner
+- náhrada
+
+Předpoklady:
+- přístup k zálohovacímu úložišti
+- přístup k izolovanému prostředí
+- vypnuté produkční integrace
+
+Kroky:
+1. Vyber čas obnovy.
+2. Najdi odpovídající zálohu.
+3. Ověř kontrolní součet nebo integritu podle dostupného postupu.
+4. Obnov data do izolovaného prostředí.
+5. Spusť migrace pouze pokud odpovídají obnovované verzi aplikace.
+6. Vypni e-mail, webhooks a externí joby.
+7. Ověř základní konzistenci dat.
+8. Zapiš výsledek do logu testu nebo incidentu.
+
+Co nikdy nedělat:
+- neobnovovat přímo přes produkci bez schválení incident ownera
+- neposílat export zálohy do osobního úložiště
+- nezapínat produkční integrace v testovací obnově
+```
+
+Runbook drž vedle ostatní provozní dokumentace a ulož ho tak, aby byl dostupný i při výpadku hlavní aplikace. Pokud je celý postup jen v interním SaaS nástroji, který právě nefunguje, gratuluju: dokumentace se zúčastnila incidentu jako další oběť.
+
+### Checklist: Zálohy a obnova
+
+- [ ] Víme, co musíme obnovit podle kategorií dat a provozu.
+- [ ] U kritických částí máme lidsky napsané RPO a RTO.
+- [ ] Každá záloha má vlastníka, rytmus, místo uložení a retenční pravidlo.
+- [ ] Přístup k zálohám je omezený a pravidelně revidovaný.
+- [ ] Zálohy jsou chráněné proti ztrátě i neoprávněnému přístupu.
+- [ ] Umíme obnovit data do izolovaného prostředí bez produkčních integrací.
+- [ ] Test obnovy probíhá pravidelně a má krátký zápis.
+- [ ] Runbook obnovy je dostupný i při výpadku hlavního systému.
+- [ ] Víme, jak se v zálohách chovají data po výmazu z aktivního systému.
+- [ ] Neslibujeme zákazníkům rychlejší výmaz nebo obnovu, než reálně umíme.
+- [ ] Po změnách databáze, infrastruktury nebo dodavatelů kontrolujeme dopad na zálohy.
+- [ ] Obnova je součást incidentního plánu, ne samostatná magie.
+
+### Mini úkol
+
+Vyber jednu kritickou část produktu a vyplň obnovovací kartu:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Co přesně obnovujeme? |  |
+| Proč je to kritické? |  |
+| Jaká je přijatelná ztráta dat? |  |
+| Jak rychle to musíme obnovit? |  |
+| Kde je poslední záloha? |  |
+| Kdo k ní má přístup? |  |
+| Kdy naposledy proběhl test obnovy? |  |
+| Kam obnovujeme pro bezpečné ověření? |  |
+| Jak vypneme produkční integrace? |  |
+| Jak poznáme, že obnova dopadla správně? |  |
+
+Potom udělej nejmenší užitečný test: obnov jednu neprodukční zálohu do izolovaného prostředí, projdi runbook od začátku do konce nebo aspoň ověř, že správný člověk umí najít poslední zálohu bez hledání v historii chatu. Zálohy mají jednu skvělou vlastnost: dokud je neotestuješ, pořád vypadají lépe, než jaké jsou.
+
 ## Zdroje
 
 - Keep a Changelog: Keep a Changelog 1.1.0 - principy lidsky psaného changelogu, typy změn a sekce pro nevydané změny: https://keepachangelog.com/en/1.1.0/
@@ -5279,6 +5471,7 @@ Potom udělej jednu konkrétní změnu: založ šablonu incident karty, napiš p
 
 ## Pracovní log
 
+- 2026-07-11: Doplněna příloha o zálohách a obnově bez falešného pocitu bezpečí: kategorie obnovy, RPO/RTO lidsky, vlastnictví a rytmus záloh, test obnovy, částečná obnova, retence záloh, runbook, checklist a mini úkol.
 - 2026-07-11: Doplněna příloha o incidentním plánu pro malé SaaS týmy bez krizového divadla: detekce incidentu, rozlišení technické a datové vrstvy, role v malém týmu, první hodina, incident log, komunikace, postmortem, checklist a mini úkol; ověřeny oficiální zdroje Evropské komise, EDPB a ENISA k data breach a bezpečnostní hygieně.
 - 2026-07-11: Doplněna příloha o offboardingu zákazníka bez držení dat jako rukojmí: zrušení účtu jako běžný provozní scénář, export jako produktová funkce, vrstvy výmazu, oddělení retence od obchodní naděje, dobrovolná zpětná vazba, oddělení účtu, fakturace a marketingu, checklist a mini úkol; ověřeny oficiální zdroje Evropské komise a EDPB k právům jednotlivců.
 - 2026-07-11: Doplněna příloha o onboardingu nového člověka bez rozdání zbytečných přístupů a dat: první hodnota role, přístupy po vlnách, anonymizovaná testovací data, checklist prvního týdne, bezpečný první úkol, revize přístupů, dokumentace implicitních pravidel, checklist a mini úkol.
