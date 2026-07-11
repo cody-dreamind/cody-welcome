@@ -4172,6 +4172,176 @@ Vyber posledních deset support ticketů a projdi je podle tabulky:
 
 Potom udělej jednu konkrétní změnu: přidej instrukci k přílohám, vytvoř štítek pro žádosti podle GDPR, zkrať retenci support screenshotů, přepiš jednu odpověď do znalostní báze nebo smaž starý export v ticketu. Support má zákazníkovi pomoct, ne tiše budovat druhou databázi produktu.
 
+## Příloha: První placený pilot bez datového chaosu
+
+První placený pilot je zvláštní okamžik. Produkt ještě není hotový ve smyslu „máme všechno“, ale už musí být dost skutečný na to, aby zákazník zaplatil, vložil čas a svěřil ti část svého provozu. Právě tady se ukáže, jestli SaaS řeší ostrý problém, nebo jestli jen pěkně demonstruje budoucí možnost.
+
+Špatná otázka zní: „Co všechno ještě musíme postavit, aby zákazník souhlasil?“
+
+Lepší otázka zní: „Jaký úzký výsledek dokážeme zákazníkovi bezpečně dodat během pilotu a podle čeho obě strany poznají, že má smysl pokračovat?“
+
+Privacy-first pilot má jednu výhodu: nutí tým předem pojmenovat rozsah, data, odpovědnosti a konec zkoušky. To zní méně romanticky než „pojďme to prostě zkusit“. Ale romantika v pilotu často končí tím, že někde zůstane export zákaznických dat, nikdo neví, kdo má přístup, a obchod se ptá, jestli „už to můžeme dát do case study“. Ne. Nejdřív pořádek.
+
+### Pilot není neomezený trial
+
+Trial je typicky samoobslužná ochutnávka produktu. Pilot je řízené ověření hodnoty v konkrétním zákaznickém kontextu. Má vlastní cíl, časový rámec, rozsah dat a výstup.
+
+Praktické rozdíly:
+
+| Oblast | Trial | Placený pilot |
+| --- | --- | --- |
+| Cíl | Uživatel si vyzkouší produkt | Obě strany ověří konkrétní obchodní výsledek |
+| Rozsah | Standardní produktový tok | Vybraný use case, segment nebo tým |
+| Zapojení týmu | Nízké až střední | Vyšší, často onboarding a review |
+| Data | Minimum pro účet | Předem popsaná sada dat pro pilot |
+| Konec | Upgrade, zrušení nebo expirace | Rozhodnutí: pokračovat, upravit, nepokračovat |
+
+Pilot bez konce je jen levně prodaný projekt. Pilot bez ceny zase často přitahuje lidi, kteří chtějí konzultaci zdarma, ne zákazníky s reálnou bolestí. Cena nemusí být vysoká, ale má potvrdit, že problém stojí za řešení.
+
+### Definuj výsledek jednou větou
+
+Před pilotem napiš větu:
+
+„Během pilotu pomůžeme [komu] dosáhnout [jakého výsledku] na [jakém rozsahu] a vyhodnotíme to podle [signálů].“
+
+Příklady:
+
+- „Během pilotu pomůžeme dispečerovi servisní firmy naplánovat výjezdy pro jeden region na dva týdny a vyhodnotíme počet ručních změn, zpoždění a dotazů techniků.“
+- „Během pilotu pomůžeme marketingovému týmu nahradit invazivní webovou analytiku agregovaným měřením hlavních CTA a vyhodnotíme, jestli tým umí dělat měsíční rozhodnutí bez osobních identifikátorů.“
+- „Během pilotu pomůžeme účetní kanceláři sbírat klientské podklady přes bezpečný workspace pro pět klientů a vyhodnotíme čas do kompletních podkladů a počet e-mailových urgencí.“
+
+Když věta obsahuje „zlepšíme procesy“, „otestujeme platformu“ nebo „ověříme spolupráci“, je moc měkká. Pilot má být konkrétnější než obchodní prezentace. Jinak bude vyhodnocení připomínat věštění z dashboardu.
+
+### Sepiš pilot kartu
+
+Pilot karta je jedna stránka, která drží obchod, produkt, support a privacy v jedné realitě.
+
+| Pole | Odpověď |
+| --- | --- |
+| Zákazník a segment |  |
+| Problém, který pilot ověřuje |  |
+| Rozsah pilotu | tým, region, počet uživatelů, počet objektů, období |
+| Co výslovně není součástí |  |
+| Cena pilotu |  |
+| Délka pilotu |  |
+| Úspěch znamená |  |
+| Data potřebná pro pilot |  |
+| Kde data poběží |  |
+| Kdo má přístup |  |
+| Co se stane po skončení | pokračování, export, smazání, archiv |
+| Vlastník u dodavatele |  |
+| Vlastník u zákazníka |  |
+| Datum vyhodnocení |  |
+
+Nejdůležitější řádek je „co výslovně není součástí“. Chrání pilot před tím, aby se z něj stal potichu enterprise projekt. Pokud zákazník během pilotu požádá o integraci, která nesouvisí s ověřovaným výsledkem, zapiš ji jako navazující možnost. Nepřidávej ji do pilotu jen proto, že se bojíš říct „teď ne“.
+
+Codyho komentář: „Teď ne“ je v pilotu jedna z nejziskovějších vět. Samozřejmě musí být slušná. Ale pořád je levnější než tři týdny práce na věci, která neověří hlavní hodnotu.
+
+### Data do pilotu ber po dávkách
+
+Pilot často potřebuje reálná data, jinak neověří skutečný provoz. To ale neznamená, že má první krok být import celé historie zákazníka.
+
+Začni nejmenší sadou, která stačí k ověření:
+
+- jeden tým místo celé firmy,
+- jeden region místo všech poboček,
+- několik klientů místo kompletní databáze,
+- poslední měsíc místo pěti let historie,
+- anonymizovaný nebo syntetický vzorek pro technický test importu,
+- ručně připravený vzorek před automatickou integrací.
+
+Praktická datová tabulka:
+
+| Datová sada | Proč je potřeba | Minimum pro pilot | Kdo ji dodá | Co se stane po pilotu |
+| --- | --- | --- | --- | --- |
+| Uživatelé pilotu | přístupy a role | jméno, pracovní e-mail, role | zákazník | ponechat jen při pokračování |
+| Pracovní objekty | ověření workflow | vzorek zakázek/projektů | zákazník | export nebo smazání |
+| Historická data | porovnání před/po | pouze nutné období | zákazník | smazat po vyhodnocení, pokud není pokračování |
+| Logy nebo chyby | ladění pilotu | technický kontext bez obsahu zákaznických dat | dodavatel | krátká retence |
+
+Pokud se během pilotu ukáže, že potřebuješ víc dat, doplň důvod do pilot karty. Neber to jako samozřejmost. Rozšíření dat je změna rozsahu, i když se tváří jako „jen další CSV“.
+
+### Nastav komunikační rytmus
+
+Pilot bez rytmu se rozpadne do náhodných zpráv. Zákazník pošle dotaz, tým opraví jednu věc, někdo slíbí další funkci a za měsíc nikdo neví, jestli pilot uspěl.
+
+Stačí jednoduchý rytmus:
+
+| Fáze | Kdy | Výstup |
+| --- | --- | --- |
+| Kickoff | den 0 | cíl, rozsah, data, vlastníci, termín review |
+| První kontrola | po prvním použití | blokery a nejasnosti |
+| Týdenní checkpoint | každý týden | jeden signál, jedna oprava, žádné rozšiřování bez rozhodnutí |
+| Závěrečné review | konec pilotu | pokračovat, upravit, nepokračovat |
+
+Na každém checkpointu se ptej:
+
+- Co se povedlo dokončit?
+- Kde se uživatel zasekl?
+- Jaký signál podporuje pokračování?
+- Jaké nové riziko nebo datová otázka vznikla?
+- Co tento týden výslovně nebudeme přidávat?
+
+Poslední otázka je důležitá. Pilot má tendenci bobtnat, protože každý problém vypadá jako příležitost ukázat ochotu. Ochota je hezká. Nekontrolovaný rozsah je drahý.
+
+### Vyhodnocení napiš předem
+
+Před startem pilotu si domluv, jak bude vypadat závěrečné rozhodnutí. Jinak se po měsíci může stát, že dodavatel slaví „hodně feedbacku“ a zákazník říká „nejsme si jistí“. To nejsou stejná slova pro úspěch.
+
+Praktické výsledky pilotu:
+
+| Výsledek | Co znamená | Další krok |
+| --- | --- | --- |
+| Pokračovat | cíl se potvrdil a zákazník chce běžný provoz | přechod na plán, smlouva, migrace dat |
+| Pokračovat s úpravou | hodnota existuje, ale brzdí ji jasná překážka | jeden navazující scope a nové datum |
+| Odložit | problém je reálný, ale není teď priorita | zapsat důvod a termín návratu |
+| Nepokračovat | hodnota se nepotvrdila nebo náklady převyšují přínos | export/smazání dat, uzavření přístupů |
+
+Závěrečné review:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jaký byl původní cíl? |  |
+| Co se reálně podařilo? |  |
+| Jaké signály hodnoty máme? |  |
+| Co bránilo úspěchu? |  |
+| Jaká data máme smazat, exportovat nebo ponechat? |  |
+| Co zákazník potřebuje pro rozhodnutí? |  |
+| Jaké rozhodnutí děláme teď? |  |
+
+Pokud pilot nekončí pokračováním, není to automaticky selhání. Může to být dobré učení: segment nebyl správný, problém nebyl dost bolestivý, produkt potřebuje jiné pořadí hodnoty nebo zákazník nebyl připravený. Špatný pilot je ten, po kterém tým nemá rozhodnutí a data zůstala ležet v systému „pro jistotu“.
+
+### Checklist: První placený pilot
+
+- [ ] Pilot má jednu větu cíle, rozsahu a signálů úspěchu.
+- [ ] Zákazník i dodavatel mají vlastníka pilotu.
+- [ ] Cena potvrzuje vážnost problému, i když je pilot omezený.
+- [ ] Je napsané, co není součástí pilotu.
+- [ ] Data pro pilot jsou minimalizovaná a popsaná před importem.
+- [ ] Je jasné, kde data poběží, kdo k nim má přístup a co se stane po skončení.
+- [ ] Pilot má kickoff, průběžné checkpointy a závěrečné review.
+- [ ] Nové požadavky se zapisují mimo pilot, pokud neověřují hlavní hodnotu.
+- [ ] Vyhodnocení rozlišuje pokračovat, upravit, odložit a nepokračovat.
+- [ ] Po pilotu se uzavřou přístupy, exporty, testovací data a dočasné účty.
+- [ ] Produktový insight z pilotu je anonymizovaný před použitím v backlogu nebo marketingu.
+
+### Mini úkol
+
+Vyber jeden pilot, který chceš nabídnout nebo který už běží. Vyplň kartu:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jaký konkrétní výsledek má pilot ověřit? |  |
+| Kdo je první uživatel nebo tým u zákazníka? |  |
+| Jaký je nejmenší rozsah dat? |  |
+| Jak dlouho pilot poběží? |  |
+| Co výslovně není součástí? |  |
+| Jaký signál rozhodne o pokračování? |  |
+| Co se stane s daty, když zákazník nepokračuje? |  |
+| Kdo napíše závěrečné rozhodnutí? |  |
+
+Potom udělej jednu konkrétní změnu: napiš pilot kartu, zmenši datový vzorek, doplň řádek „mimo rozsah“, nastav datum závěrečného review nebo připrav postup smazání dat po neúspěšném pilotu. První placený pilot má být důkaz hodnoty, ne neřízená zkratka k zakázkovému vývoji.
+
 ## Zdroje
 
 - European Commission: AI Act - rizikový přístup, GPAI pravidla, transparentní povinnosti a aktuální harmonogram uplatňování AI Actu: https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai
@@ -4229,6 +4399,7 @@ Potom udělej jednu konkrétní změnu: přidej instrukci k přílohám, vytvoř
 
 ## Pracovní log
 
+- 2026-07-11: Doplněna příloha o prvním placeném pilotu bez datového chaosu: rozdíl mezi trialem a pilotem, definice výsledku, pilot karta, minimalizace dat po dávkách, komunikační rytmus, předem domluvené vyhodnocení, checklist a mini úkol.
 - 2026-07-11: Doplněna příloha o supportu bez datového nepořádku: rozdělení supportních dat podle účelu, minimální dotazy, práce se screenshoty a přílohami, věcné interní poznámky, oddělení supportu od marketingu, proces pro práva uživatelů, checklist a mini úkol; při psaní ověřeny zdroje EDPB a Evropské komise k právům subjektů údajů, rolím správce/zpracovatele a bezpečnostním incidentům.
 - 2026-07-11: Doplněna příloha o retenční mapě dat bez právnické mlhy: kategorie dat, účel a konec životnosti, rozdíl mezi aktivními daty, archivem, zálohami, exporty a logy, technické vynucení retence, checklist a mini úkol; při psaní ověřeny primární zdroje Evropské komise a EDPB k principům GDPR, právům lidí a privacy by design/default.
 - 2026-07-11: Doplněna příloha o AI asistentech v SaaS a marketingu bez úniku dat: rozdělení AI použití podle rizika, bezpečný prompt brief, výběr nástroje podle dat, marketing a support mantinely, AI rozhodovací karta, checklist a mini úkol; přidány ověřené zdroje Evropské komise a EDPB k AI Actu a GDPR v AI.
