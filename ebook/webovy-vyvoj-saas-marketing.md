@@ -3711,8 +3711,179 @@ Vyber jeden existující newsletter, onboarding sekvenci nebo produktový mailin
 
 Potom udělej jednu úpravu: přepiš slib odběru, odděl marketingový checkbox, zjednoduš odhlášení, vyčisti starý segment nebo změň metriku z „otevření“ na odpověď, klik či skutečný další krok. E-mail marketing má být vztahový nástroj, ne sběrna náhodných adres.
 
+## Příloha: AI asistenti v SaaS a marketingu bez úniku dat
+
+AI asistenti umí malému týmu ušetřit hodiny práce: pomůžou připravit osnovu článku, zkrátit dokumentaci, navrhnout odpověď zákazníkovi, najít slepá místa v onboardingu nebo vysvětlit technický problém. Zároveň jsou to velmi lákavé vysavače kontextu. Člověk do nich snadno vloží interní strategii, export zákazníků, část databáze, smlouvu, support ticket nebo produkční log, protože „je to jen na chvilku“.
+
+Privacy-first přístup k AI není zákaz používání AI. Je to provozní pravidlo: než něco pošleš do modelu, víš, co v tom je, kam to odchází, proč to potřebuješ a jak dlouho to někde může zůstat.
+
+K 11. 7. 2026 Evropská komise uvádí, že AI Act vstoupil v platnost 1. 8. 2024, některé povinnosti se uplatňují postupně a pravidla pro obecné AI modely se začala uplatňovat od srpna 2025. Většina pravidel a transparentní povinnosti mají evropský rámec postupně dotahovat kolem srpna 2026, přičemž u high-risk systémů je potřeba termíny před konkrétním rozhodnutím ověřit podle aktuálního oficiálního harmonogramu. EDPB zároveň připomíná, že AI inovace musí respektovat GDPR, pokud se pracuje s osobními údaji. Odkazy jsou ve zdrojích.
+
+Toto není právní rada. Je to pracovní systém pro malé týmy, které chtějí AI používat prakticky a bez toho, aby si do nástrojů nalily data, která tam nikdy neměla být.
+
+### Rozděl AI použití podle rizika
+
+Ne každé použití AI je stejné. Návrh titulku blogu z veřejného tématu není stejné riziko jako analýza exportu zákazníků nebo automatické rozhodování o účtu uživatele.
+
+Praktické rozdělení:
+
+| Použití AI | Příklad | Riziko | Výchozí pravidlo |
+| --- | --- | --- | --- |
+| Veřejný obsah | osnova článku, návrh meta description, přepis veřejné dokumentace | nízké | používej veřejné nebo anonymní vstupy |
+| Interní produktová práce | shrnutí backlogu, návrh user stories, kontrola onboarding textů | střední | odstraň jména, e-maily, zákaznické detaily a interní obchodní čísla |
+| Support a sales | návrh odpovědi na ticket, shrnutí hovoru, kvalifikace poptávky | vyšší | pracuj se zkráceným kontextem a nech finální odpověď schválit člověkem |
+| Produktová AI funkce | chatbot v aplikaci, doporučení dalšího kroku, generování obsahu pro uživatele | vysoké | navrhni zpracování, logování, retenci, eskalaci a lidský dohled |
+| Automatizované rozhodování | blokace účtu, scoring člověka, výběr kandidátů, úvěrové nebo podobně citlivé rozhodnutí | velmi vysoké | bez právního a bezpečnostního posouzení nestavět na autopilota |
+
+Cílem není vyrobit strach. Cílem je zabránit tomu, aby se z pomocníka na texty stal tichý zpracovatel citlivých dat bez smluv, pravidel a vlastníka.
+
+### Vstup do AI piš jako bezpečný brief
+
+Největší úniky často nevznikají v modelu. Vznikají v promptu. Člověk do něj vloží příliš mnoho kontextu, protože chce lepší odpověď. Jenže lepší odpověď nepotřebuje vždy surová data.
+
+Bezpečný AI brief má pět částí:
+
+1. Úkol: co má AI udělat.
+2. Veřejný nebo anonymizovaný kontext.
+3. Omezení: tón, formát, délka, publikum.
+4. Zakázaná práce: co nemá vymýšlet, rozhodovat nebo ukládat.
+5. Kontrola: co má označit jako nejisté.
+
+Špatný prompt:
+
+```text
+Tady je export našich leadů za poslední kvartál včetně e-mailů, poznámek ze schůzek a interního skóre. Navrhni follow-up kampaň.
+```
+
+Lepší prompt:
+
+```text
+Pomoz mi navrhnout follow-up kampaň pro B2B SaaS leady. Segmenty jsou anonymní:
+- Segment A: malé agentury, problém s ručním reportingem, 18 kontaktů.
+- Segment B: interní marketingové týmy, problém s GDPR a analytikou, 11 kontaktů.
+- Segment C: e-shopy, problém s retencí dat, 7 kontaktů.
+
+Navrhni 3 varianty hodnotového e-mailu. Nepiš manipulační urgenci, nepředstírej osobní znalost příjemce a označ místa, kde by bylo potřeba doplnit reálný důkaz.
+```
+
+Ještě lepší je vytvořit interní pravidlo: do běžného AI nástroje bez schváleného režimu nepatří hesla, tokeny, produkční data, celé zákaznické exporty, zdravotní údaje, finanční detaily, neveřejné smlouvy ani osobní údaje, které nejsou nutné pro úkol.
+
+### Vyber nástroj podle dat, ne podle dema
+
+AI nástroj vybírej podobně jako jiného dodavatele, jen s větší pozorností k vstupům a výstupům. Nestačí otázka „umí to česky a má hezký chat“. Potřebuješ vědět:
+
+- kde se zpracovávají vstupy a výstupy,
+- jestli se data používají pro trénování nebo zlepšování služby,
+- jak se nastavuje retence promptů a odpovědí,
+- jestli existuje firemní režim, smlouva o zpracování a seznam subdodavatelů,
+- kdo ve firmě vidí historii konverzací,
+- jestli jde vypnout sdílení citlivého obsahu,
+- jak se exportují a mažou data,
+- jestli jde provozovat model nebo část pipeline v evropském prostředí.
+
+Pro málo citlivé úkoly může stačit běžný firemní AI nástroj s jasnými pravidly. Pro citlivější práci zvaž oddělený režim: evropský cloud, self-hosted model, lokální zpracování, redakční RAG nad veřejnou dokumentací nebo nástroj, který do modelu posílá jen minimální kontext.
+
+Privacy-first poznámka: „Máme enterprise plán“ není automatická odpověď na všechno. Enterprise plán může být dobrý začátek, ale pořád potřebuješ znát retenci, přístupy, region, smlouvy a praktické chování týmu.
+
+### AI v marketingu má pomáhat, ne předstírat člověka
+
+V marketingu je AI užitečná hlavně jako editor, sparing partner a kontrolor struktury. Umí navrhnout osnovu, zkrátit text, najít nejasné CTA, vytvořit varianty titulku nebo připravit první verzi checklistu. Nemá ale nahrazovat faktické ověření, zkušenost se zákazníky ani odpovědnost autora.
+
+Praktické pravidlo pro obsah:
+
+- AI může pomoci s návrhem struktury.
+- Fakta, aktuální data, zákony, ceny a nástroje ověř člověk ze zdrojů.
+- Vlastní názor označ jako názor.
+- Veřejný text před publikací přečte člověk, který rozumí tématu.
+- Pokud AI výrazně pomohla s veřejným informativním obsahem, zvaž transparentní poznámku podle povahy použití a aktuálních pravidel.
+
+Evropská komise u AI Actu popisuje transparentní povinnosti pro vybrané AI výstupy, včetně označování některého AI generovaného obsahu. Pro malý tým je rozumné mít jednoduchou interní normu: když AI výstup může člověka zmást v tom, jestli mluví s člověkem, sleduje reálnou událost nebo čte fakticky ověřený odborný text, zvyš transparentnost a přidej lidskou kontrolu.
+
+Codyho komentář: AI text bez vlastního názoru je často jako instantní polévka bez vody. Nějaký prášek tam je, ale člověk by si měl rozmyslet, jestli to chce servírovat zákazníkům.
+
+### AI v supportu potřebuje mantinely
+
+Support je citlivé místo, protože obsahuje reálné lidi, problémy, faktury, technické potíže a někdy i frustraci. AI tu může pomoct, ale špatně navržený chatbot umí velmi rychle poškodit důvěru.
+
+Bezpečnější postup:
+
+1. Začni interním návrhem odpovědí pro support tým.
+2. Používej jen zkrácený ticket bez zbytečných osobních údajů.
+3. Nech člověka schválit odpověď před odesláním.
+4. Měř kvalitu agregovaně: vyřešené tickety, eskalace, opakované dotazy.
+5. Teprve potom zvaž veřejného asistenta.
+
+Pokud stavíš veřejného AI asistenta v produktu:
+
+- jasně řekni, že jde o AI asistenta,
+- omez znalostní bázi na schválené zdroje,
+- nedovol mu měnit účet, tarif nebo data bez dalšího potvrzení,
+- u citlivých témat nabídni kontakt na člověka,
+- loguj jen to, co potřebuješ pro provoz a kvalitu,
+- nastav retenci konverzací,
+- vyřaď obsah, který do podpory nepatří.
+
+Dobrá support AI funkce neslibuje vševědoucnost. Slibuje rychlejší nalezení odpovědi, jasnou eskalaci a méně opakované ruční práce.
+
+### Zaveď AI rozhodovací kartu
+
+Každé nové AI použití si zaslouží krátkou kartu. Ne powerpointovou slavnost, jen jednu stránku, která zabrání tomu, aby se citlivý experiment tvářil jako běžná produktivní hračka.
+
+Šablona:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jaký úkol AI řeší? |  |
+| Kdo je vlastník použití? |  |
+| Jaká data vstupují do modelu? |  |
+| Jsou ve vstupech osobní nebo citlivé údaje? |  |
+| Kde se data zpracovávají a ukládají? |  |
+| Používají se vstupy pro trénování nebo zlepšování služby? |  |
+| Jak dlouho se drží prompty, výstupy a logy? |  |
+| Kdo kontroluje výstup před dopadem na zákazníka? |  |
+| Jak poznáme, že AI opravdu pomáhá? |  |
+| Jak použití vypneme, když nebude fungovat? |  |
+
+Tahle karta je jednoduchá a záměrně protivná. Pokud ji neumíš vyplnit, AI použití není připravené. Ne proto, že by bylo špatné. Protože tým ještě neví, jak ho provozovat.
+
+### Checklist: AI bez úniku dat
+
+- [ ] Máš interní pravidla, jaké typy dat do běžných AI nástrojů nepatří.
+- [ ] Každé AI použití má vlastníka a účel.
+- [ ] Prompty používají minimální nutný kontext.
+- [ ] Osobní údaje, zákaznické exporty a produkční logy se anonymizují nebo vůbec neposílají.
+- [ ] U AI dodavatele znáš region, retenci, trénování na datech, subdodavatele a mazání.
+- [ ] Marketingový obsah vytvořený s AI prochází lidskou faktickou kontrolou.
+- [ ] Support AI nezačíná veřejným chatbotem, ale kontrolovanou interní asistencí.
+- [ ] AI výstupy nemění účty, tarify, práva ani data bez jasného potvrzení a dohledu.
+- [ ] U veřejného AI asistenta je jasné, že uživatel komunikuje s AI.
+- [ ] Logy AI konverzací mají účel a retenční dobu.
+- [ ] U high-risk nebo právně citlivého použití ověříš aktuální AI Act, GDPR a sektorová pravidla.
+- [ ] Existuje vypínač: tým ví, jak AI funkci pozastavit, když dává špatné odpovědi.
+
+### Mini úkol
+
+Vyber jedno místo, kde tým používá nebo chce používat AI. Vyplň kartu:
+
+| Oblast | Odpověď |
+| --- | --- |
+| Úkol AI |  |
+| Typ vstupních dat |  |
+| Nejcitlivější údaj, který by se mohl omylem objevit |  |
+| Jak vstup zkrátíme nebo anonymizujeme |  |
+| Kdo výstup kontroluje |  |
+| Jak dlouho držíme prompty a odpovědi |  |
+| Jak poznáme přínos |  |
+| Kdy použití vypneme |  |
+
+Potom udělej jednu konkrétní změnu: napiš interní pravidlo pro prompty, vytvoř bezpečnou šablonu briefu, vypni trénování na firemních datech, zkrať retenci, nebo přesuň citlivý use case do samostatně posouzeného prostředí. AI má týmu přidat sílu, ne nový neviditelný sklad dat.
+
 ## Zdroje
 
+- European Commission: AI Act - rizikový přístup, GPAI pravidla, transparentní povinnosti a aktuální harmonogram uplatňování AI Actu: https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai
+- European Commission AI Act Service Desk: Timeline for the Implementation of the EU AI Act - postupné uplatňování AI Actu včetně pravidel pro GPAI, transparentnost a high-risk systémy: https://ai-act-service-desk.ec.europa.eu/en/ai-act/timeline/timeline-implementation-eu-ai-act
+- European Data Protection Board: Artificial intelligence - rozcestník EDPB k AI, GDPR a ochraně osobních údajů při vývoji a používání AI technologií: https://www.edpb.europa.eu/topics/ai-and-technology/artificial-intelligence_en
+- European Data Protection Board: Opinion on AI models - GDPR principles support responsible AI - stanovisko k anonymitě AI modelů, legitimnímu zájmu a dopadům nezákonně zpracovaných osobních údajů: https://www.edpb.europa.eu/news/edpb-opinion-on-ai-models-gdpr-principles-support-responsible-ai_en
 - European Data Protection Board: Respect individuals' rights - přehled práv subjektů údajů v GDPR pro malé a střední organizace: https://www.edpb.europa.eu/sme-data-protection-guide/respect-individuals-rights_en
 - European Commission: Information for individuals - praktický přehled práv jednotlivců podle ochrany osobních údajů v EU: https://commission.europa.eu/law/law-topic/data-protection/information-individuals_en
 - European Commission: Principles of the GDPR - přehled principů jako transparentnost, účelové omezení, minimalizace dat a omezení uchování: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr_en
@@ -3762,6 +3933,7 @@ Potom udělej jednu úpravu: přepiš slib odběru, odděl marketingový checkbo
 
 ## Pracovní log
 
+- 2026-07-11: Doplněna příloha o AI asistentech v SaaS a marketingu bez úniku dat: rozdělení AI použití podle rizika, bezpečný prompt brief, výběr nástroje podle dat, marketing a support mantinely, AI rozhodovací karta, checklist a mini úkol; přidány ověřené zdroje Evropské komise a EDPB k AI Actu a GDPR v AI.
 - 2026-07-11: Doplněna příloha o newsletteru a produktových e-mailech bez spamového reflexu: rozlišení provozních, produktových a marketingových e-mailů, dobrovolné přihlášení, slib odběru, odhlášení, segmentace, agregované měření, checklist a mini úkol; přidány ověřené zdroje ÚOOÚ k obchodním sdělením a e-shopům.
 - 2026-07-11: Doplněna příloha o privacy-first formulářích pro leady, registrace a support: účel formuláře, rozdělení polí na nutná, užitečná a zvědavá, mikrotext, oddělení souhlasu od hlavní akce, agregované měření, příklady minimálních formulářů, checklist a mini úkol; přidány ověřené zdroje Evropské komise k principům GDPR a právním základům zpracování.
 - 2026-07-11: Doplněna příloha o týdenním produktovém review bez dashboardového divadla: tři vstupy, oddělení signálu od nálady, karta rozhodnutí, privacy-first kontrola dopadu, 30minutový rytmus, checklist a mini úkol.
