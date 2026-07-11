@@ -4993,6 +4993,233 @@ Vezmi jeden existující produkt, pilot nebo službu a vyplň offboarding kartu:
 
 Potom udělej jednu konkrétní změnu: napiš text o zrušení do nápovědy, přidej exportní tlačítko, popiš retenční lhůtu, odděl newsletter od produktového účtu nebo vytvoř interní checklist pro support. Dobrý offboarding je tichá známka zralého produktu. Nikdo ho nechválí v sales decku, ale každý si ho zapamatuje, když ho potřebuje.
 
+## Příloha: Incidentní plán pro malé SaaS týmy bez krizového divadla
+
+Incidentní plán není tlustý dokument, který spí v šuplíku a probudí se až po průšvihu. Pro malý SaaS tým je to hlavně dohoda: kdo se dívá, kdo rozhoduje, kdo komunikuje, co se zapisuje a kdy se incident uzavírá. Bez téhle dohody se při výpadku nebo úniku dat improvizuje. A improvizace pod stresem je sice dramatická, ale málokdy elegantní.
+
+Špatná otázka zní: „Jak uděláme incident response jako velká korporace?“
+
+Lepší otázka zní: „Jak poznáme problém rychle, omezíme škodu, splníme povinnosti a poučíme se bez hledání viníka?“
+
+Evropská komise popisuje porušení zabezpečení osobních údajů jako bezpečnostní incident, který vede k porušení důvěrnosti, dostupnosti nebo integrity osobních údajů. Pokud je pravděpodobné riziko pro práva a svobody lidí, nastupuje oznámení dozorovému úřadu bez zbytečného odkladu a nejpozději do 72 hodin od zjištění; u vysokého rizika může být potřeba informovat i dotčené osoby. EDPB k tomu vydává detailní pokyny a ENISA má praktický bezpečnostní základ pro malé a střední firmy. Odkazy jsou ve zdrojích.
+
+Toto není právní rada. Je to provozní minimum, které pomůže týmu nezamrznout ve chvíli, kdy je potřeba jednat.
+
+### Incident začíná detekcí, ne panikou
+
+Incident není jen „někdo se naboural do databáze“. Pro web a SaaS mohou být incidenty například:
+
+- únik exportu s osobními údaji,
+- chyba v oprávnění, kdy zákazník vidí cizí data,
+- ztracený notebook s nešifrovanými daty,
+- kompromitovaný účet administrátora,
+- omylem veřejný storage bucket,
+- chybně poslaný hromadný e-mail s viditelnými adresami,
+- výpadek služby, který znemožní zákazníkům přístup k jejich datům,
+- smazání dat bez dostupné obnovy,
+- podezřelý přístup v logu.
+
+První úkol není napsat dlouhý status. První úkol je incident pojmenovat a dát mu vlastníka.
+
+Praktická první karta:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Co se stalo nebo čeho jsme si všimli? |  |
+| Kdy jsme si toho všimli? |  |
+| Kdo je incident owner? |  |
+| Jaké systémy jsou zasažené? |  |
+| Může jít o osobní údaje? |  |
+| Je problém stále aktivní? |  |
+| Jaké první omezení škody uděláme? |  |
+
+Tuhle kartu může vést support, vývojář nebo zakladatel. Důležité je, aby existovala jedna živá verze. Incident, který má pět paralelních poznámek v chatu, nemá dokumentaci. Má mlhu.
+
+### Rozděl technický incident a data incident
+
+Ne každý výpadek je porušení zabezpečení osobních údajů. A ne každý únik dat shodí aplikaci. Proto incident rozděl do dvou vrstev.
+
+Technická vrstva:
+
+- běží služba,
+- funguje přihlášení,
+- funguje databáze,
+- jsou dostupné zálohy,
+- dají se zastavit škodlivé požadavky,
+- víme, která verze kódu běží.
+
+Datová vrstva:
+
+- byla zasažena osobní data,
+- šlo o důvěrnost, integritu nebo dostupnost,
+- kolika lidí nebo zákazníků se to může týkat,
+- jaký typ dat byl zasažen,
+- zda jsou data šifrovaná nebo jinak chráněná,
+- zda máme povinnost eskalovat právně, zákazníkovi nebo dozorovému úřadu.
+
+Příklad: Výpadek cache, který na 20 minut zpomalí web, je technický incident. Chyba v kontrole oprávnění, která ukáže faktury cizího zákazníka, je datový incident i tehdy, když aplikace běží nádherně rychle. Rychlost špatné věci není výhoda.
+
+### Měj čtyři role, i když jste dva
+
+Malý tým nemusí mít bezpečnostní oddělení. Potřebuje ale role. Jeden člověk může mít víc rolí, pokud je to zapsané a dává to smysl.
+
+| Role | Zodpovědnost |
+| --- | --- |
+| Incident owner | drží přehled, svolává lidi, hlídá další krok |
+| Technický řešitel | zastavuje problém, sbírá fakta, nasazuje opravu |
+| Komunikace | píše zákazníkům, status page, interní shrnutí |
+| Data/legal owner | posuzuje osobní údaje, riziko, zákaznické a regulatorní povinnosti |
+
+U malé firmy může být incident owner zakladatel, technický řešitel vývojář, komunikace support a data owner externí právník nebo někdo, kdo spravuje privacy dokumentaci. Pointa není mít organizační diagram. Pointa je, že se při incidentu neptáš: „Kdo to má vlastně řešit?“
+
+Praktické pravidlo: u každé role měj primární osobu a náhradu. Incidenty mají nepříjemný zvyk chodit ve chvíli, kdy je jediný člověk s přístupem zrovna mimo. Ano, vesmír má smysl pro timing.
+
+### První hodina rozhoduje o škodě
+
+První hodina nemá být dokonalá. Má být disciplinovaná.
+
+Doporučený rytmus:
+
+| Čas | Co udělat |
+| --- | --- |
+| 0-15 minut | potvrdit incident, určit ownera, založit incident kartu |
+| 15-30 minut | omezit aktivní škodu: vypnout funkci, změnit klíče, zablokovat účet, rollback |
+| 30-45 minut | sepsat známá fakta a neznámé otázky |
+| 45-60 minut | rozhodnout další eskalaci: interně, zákazníkovi, právně, bezpečnostně |
+
+V první hodině se vyhni dvěma extrémům:
+
+- všechno tajit, dokud nemáš stoprocentní jistotu,
+- všechno zveřejnit, než víš základní fakta.
+
+Dobrá komunikace může říct: „Vyšetřujeme problém s přístupem k části dat. Službu jsme dočasně omezili, abychom zabránili dalšímu dopadu. Další aktualizaci pošleme do 60 minut.“ To je lepší než ticho i než román psaný adrenalinem.
+
+### Loguj fakta, ne dojmy
+
+Incident log není místo pro obviňování. Je to časová osa.
+
+Zapisuj:
+
+- kdy byl problém zjištěn,
+- kdo ho zjistil,
+- jaký signál k tomu vedl,
+- jaké systémy byly zasažené,
+- jaké kroky tým provedl,
+- kdo krok provedl,
+- jaký byl výsledek,
+- co je stále neznámé,
+- jaká rozhodnutí padla a proč.
+
+Nepíš:
+
+- „Petr to pokazil“,
+- „asi to bylo od minulého týdne“ bez důkazu,
+- „zákazníci šílí“ místo konkrétního počtu ticketů,
+- interní vtipy,
+- citlivé osobní údaje, které do logu nepatří.
+
+Privacy-first incident log sbírá minimum dat potřebných k řešení a poučení. Pokud do logu vložíš celé exporty, screenshoty s osobními údaji nebo tajné klíče, vytvořil jsi druhý incident. Gratuluju, ale ne tím dobrým způsobem.
+
+### Komunikace má být rychlá, přesná a střídmá
+
+Při incidentu komunikuj podle publika.
+
+Interně tým potřebuje:
+
+- co se ví,
+- co se neví,
+- kdo je owner,
+- jaký je další krok,
+- kde je incident karta.
+
+Zákazník potřebuje:
+
+- zda se ho incident týká,
+- jaký je praktický dopad,
+- co má udělat,
+- co děláte vy,
+- kdy přijde další informace.
+
+Veřejnost potřebuje jen to, co je relevantní pro dostupnost nebo důvěru služby. Status page není místo pro spekulace ani právní esej.
+
+U datových incidentů si připrav tři šablony:
+
+1. Interní oznámení týmu.
+2. Krátké zákaznické upozornění.
+3. Následné shrnutí po uzavření.
+
+Příklad zákaznického upozornění:
+
+```text
+Zjistili jsme incident, který se může týkat části dat ve vašem účtu. Problém jsme zastavili a ověřujeme rozsah dopadu. V tuto chvíli doporučujeme [konkrétní krok, pokud existuje]. Další aktualizaci pošleme nejpozději [čas]. Po uzavření incidentu pošleme shrnutí příčiny, dopadu a přijatých opatření.
+```
+
+Neslibuj věci, které ještě nevíš. Neříkej „žádná data neunikla“, pokud jsi zatím jen nenašel důkaz. Lepší je „zatím nemáme důkaz o...“ nebo „ověřujeme...“. Přesnost je důvěryhodnější než uklidňovací mlha.
+
+### Po incidentu oprav systém, ne jen tiket
+
+Incident končí až postmortem. Ne proto, že procesní tabulka chce oběť, ale protože bez poučení se stejný problém vrátí v dražší verzi.
+
+Dobré postmortem má:
+
+- stručné shrnutí,
+- časovou osu,
+- dopad na zákazníky a data,
+- technickou příčinu,
+- procesní příčinu,
+- co fungovalo dobře,
+- co nefungovalo,
+- konkrétní nápravné kroky,
+- vlastníka a termín každého kroku.
+
+Nápravné kroky mají být praktické:
+
+- přidat test oprávnění,
+- zkrátit platnost exportních odkazů,
+- zapnout šifrování notebooků,
+- oddělit produkční a testovací přístup,
+- doplnit alert na neobvyklý export,
+- zavést kvartální revizi admin účtů,
+- upravit supportní postup pro přílohy.
+
+Špatný výstup je „budeme opatrnější“. To není opatření. To je přání po kávě.
+
+Codyho komentář: Nejlepší incidentní kultura není ta, která tvrdí, že incidenty nemá. Nejlepší je ta, která incident rychle pozná, omezí, férově vysvětlí a přeloží do menšího rizika příště. Bez divadla, bez hrdinství, bez honu na člověka.
+
+### Checklist: Incidentní plán pro malé SaaS týmy
+
+- [ ] Máme jednu incident kartu nebo šablonu.
+- [ ] Víme, kdo je incident owner a kdo je náhrada.
+- [ ] Máme oddělené posouzení technického dopadu a dopadu na osobní data.
+- [ ] Víme, kde najít mapu systémů, dat a dodavatelů.
+- [ ] Máme postup pro změnu klíčů, vypnutí funkce, rollback a blokaci účtu.
+- [ ] Incident log zapisuje fakta, čas, vlastníka a rozhodnutí.
+- [ ] Log neobsahuje zbytečná osobní data, tajné klíče ani surové exporty.
+- [ ] Máme kontakt na právní nebo data/privacy odpovědnou osobu.
+- [ ] Máme šablonu pro interní, zákaznickou a status komunikaci.
+- [ ] Víme, kdy eskalovat zákazníkům, zpracovatelům, správcům nebo dozorovému úřadu.
+- [ ] Po incidentu děláme krátké postmortem bez hledání viníka.
+- [ ] Každé postmortem končí konkrétními nápravnými kroky s vlastníkem.
+
+### Mini úkol
+
+Vytvoř incidentní kartu pro svůj produkt:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Kde incident kartu založíme? |  |
+| Kdo je incident owner? |  |
+| Kdo je náhrada ownera? |  |
+| Jak poznáme, že incident může zahrnovat osobní data? |  |
+| Kde je mapa dat a dodavatelů? |  |
+| Jak rychle umíme vypnout rizikovou funkci? |  |
+| Kdo píše zákaznickou komunikaci? |  |
+| Kdo posuzuje regulatorní nebo smluvní eskalaci? |  |
+| Kde bude incident log? |  |
+| Jaký bude formát postmortem? |  |
+
+Potom udělej jednu konkrétní změnu: založ šablonu incident karty, napiš první zákaznickou komunikační šablonu, ověř přístup k zálohám, projdi admin účty nebo doplň do mapy dat jednoho dodavatele. Incidentní plán nemusí být dokonalý. Musí být použitelný ve chvíli, kdy nikdo nemá náladu číst román.
+
 ## Zdroje
 
 - Keep a Changelog: Keep a Changelog 1.1.0 - principy lidsky psaného changelogu, typy změn a sekce pro nevydané změny: https://keepachangelog.com/en/1.1.0/
@@ -5052,6 +5279,7 @@ Potom udělej jednu konkrétní změnu: napiš text o zrušení do nápovědy, p
 
 ## Pracovní log
 
+- 2026-07-11: Doplněna příloha o incidentním plánu pro malé SaaS týmy bez krizového divadla: detekce incidentu, rozlišení technické a datové vrstvy, role v malém týmu, první hodina, incident log, komunikace, postmortem, checklist a mini úkol; ověřeny oficiální zdroje Evropské komise, EDPB a ENISA k data breach a bezpečnostní hygieně.
 - 2026-07-11: Doplněna příloha o offboardingu zákazníka bez držení dat jako rukojmí: zrušení účtu jako běžný provozní scénář, export jako produktová funkce, vrstvy výmazu, oddělení retence od obchodní naděje, dobrovolná zpětná vazba, oddělení účtu, fakturace a marketingu, checklist a mini úkol; ověřeny oficiální zdroje Evropské komise a EDPB k právům jednotlivců.
 - 2026-07-11: Doplněna příloha o onboardingu nového člověka bez rozdání zbytečných přístupů a dat: první hodnota role, přístupy po vlnách, anonymizovaná testovací data, checklist prvního týdne, bezpečný první úkol, revize přístupů, dokumentace implicitních pravidel, checklist a mini úkol.
 - 2026-07-11: Doplněna příloha o kvalifikaci leadů bez agresivního profilování: definice fitu, přímé otázky místo skrytého sledování, vysvětlitelný stav leadu, malý scoring podle fitu, bolesti a timingu, CRM hygiena, follow-up s koncem, sdílení agregovaných signálů mezi marketingem, sales a produktem, checklist a mini úkol.
