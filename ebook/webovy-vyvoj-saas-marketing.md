@@ -5708,8 +5708,209 @@ Vyber jednu aplikaci, repozitář nebo CI pipeline a vyplň kartu:
 
 Potom udělej jednu konkrétní změnu: přidej `.env.example`, zapni secret scanning, odeber produkční secret z lokálního návodu, rozděl staging a produkční klíč, nastav maskování logů nebo napiš rotační postup pro jeden kritický token. Tajemství se nechrání tím, že se o nich nemluví. Chrání se tím, že mají vlastníka, hranice a plán.
 
+## Příloha: Chyby, logy a observabilita bez datového vysavače
+
+Malý SaaS tým potřebuje vědět, že se něco rozbilo. Potřebuje najít příčinu, obnovit službu a poznat, jestli se problém opakuje. Nepotřebuje kvůli tomu ukládat celé požadavky, osobní údaje, autorizační hlavičky, texty zpráv a každý krok uživatele od prvního kliknutí po odhlášení.
+
+Observabilita privacy-first stojí na jednoduché disciplíně: sbírej provozní signály, které pomáhají rozhodnout a opravit, ale nedělej z logů druhou databázi zákaznických dat.
+
+OWASP Logging Cheat Sheet zdůrazňuje, že je špatně logovat příliš málo i příliš mnoho, a doporučuje nastavovat rozsah logování podle účelu a rizika. OpenTelemetry popisuje základní signály observability jako traces, metrics, logs a profiles. Odkazy jsou ve zdrojích.
+
+Codyho komentář: Logy jsou skvělý sluha a mizerný archiv života uživatele. Jakmile se z nich stane „pro jistotu ukládáme všechno“, vznikne skládka, kterou jednou někdo bude muset vysvětlovat. A hádej kdo. Přesně.
+
+### Nejprve si napiš, jaké rozhodnutí má signál podpořit
+
+Před přidáním nového logu, metriky nebo trace atributu si polož stejnou otázku jako u analytiky:
+
+„Jaké rozhodnutí bez tohoto signálu neuděláme?“
+
+Dobré odpovědi:
+
+- poznáme, že registrace selhává kvůli chybě e-mailového provideru,
+- odlišíme pomalou databázi od pomalého externího API,
+- zjistíme, kolik požadavků končí chybou po releasu,
+- zachytíme opakované neúspěšné přihlášení nebo podezřelý přístup,
+- najdeme konkrétní request podle interního korelačního ID.
+
+Slabé odpovědi:
+
+- mohlo by se to někdy hodit,
+- takhle to loguje framework,
+- konkurence má určitě lepší dashboard,
+- produkt chce „vidět chování uživatele“,
+- debugovali jsme jednou problém a od té doby ukládáme všechno.
+
+Praktické pravidlo: observabilita má vysvětlit stav systému, ne tajně rekonstruovat člověka. Pokud signál nepotřebuje identitu, nedávej do něj identitu. Pokud stačí agregace, použij agregaci. Pokud stačí korelační ID, nepřidávej e-mail.
+
+### Rozlišuj signály podle práce, kterou dělají
+
+Metriky, logy a traces nejsou tři názvy pro stejný chaos.
+
+| Signál | K čemu slouží | Co do něj patří | Co do něj nepatří |
+| --- | --- | --- | --- |
+| Metriky | trend, alert, rychlý stav služby | počty, latence, chybovost, fronty, saturace | osobní údaje, texty zpráv, celé URL s citlivými parametry |
+| Logy | diskrétní událost s kontextem | typ události, čas, služba, request ID, výsledek, bezpečný důvod chyby | hesla, tokeny, session ID, platební údaje, celé request/response body |
+| Traces | cesta požadavku přes služby | span ID, služba, operace, latence, status, bezpečné atributy | payloady, privátní hlavičky, osobní poznámky uživatele |
+| Profily | výkon kódu a spotřeba zdrojů | technické informace o běhu aplikace | zákaznický obsah a tajemství |
+
+U malého produktu často stačí jednoduchý základ:
+
+- metriky pro dostupnost, latenci a chyby,
+- aplikační logy pro kritické události,
+- korelační ID napříč requestem,
+- alerty jen na věci, které vyžadují akci,
+- krátká retenční politika pro provozní data.
+
+Nezačínej nákupem velké platformy. Začni mapou rozhodnutí: co potřebuješ vědět při incidentu, při pomalém endpointu, po releasu a při podezřelém přístupu.
+
+### Neloguj data, která bys nechtěl hledat v incidentu
+
+Do logů často protečou věci, které nikdo vědomě nenavrhl: query parametry, celé payloady, HTTP hlavičky, stack trace s konfigurací, debug výpis objektu uživatele. To je pohodlné při vývoji a nepříjemné v produkci.
+
+Zakázaný základ:
+
+- hesla a jednorázové kódy,
+- API klíče, access tokeny, refresh tokeny a session identifikátory,
+- autorizační hlavičky a cookies,
+- platební údaje a bankovní identifikátory,
+- celé texty soukromých zpráv, dokumentů nebo ticketů,
+- citlivé osobní údaje a údaje zvláštních kategorií,
+- interní secrets, connection stringy a privátní klíče,
+- celé request/response body bez jasného omezení a maskování.
+
+Bezpečnější alternativa:
+
+```text
+event=login_failed user_ref=usr_8f3a reason=invalid_password request_id=req_1c92
+```
+
+Místo:
+
+```text
+Login failed for ondrej@example.com with password=... headers={authorization: Bearer ...}
+```
+
+Ano, první varianta je méně pohodlná, když někdo chce rychle grepovat podle e-mailu. To je pointa. Provozní diagnostika nemá automaticky dostat víc osobních dat, než potřebuje.
+
+### Chybové hlášky uživateli a log pro tým jsou dvě různé věci
+
+Uživatel potřebuje vědět, co má udělat dál. Tým potřebuje vědět, co se stalo uvnitř. Když tyto dvě potřeby smícháš, vznikne buď děsivá interní chyba pro člověka, nebo bezcenný log pro vývojáře.
+
+Příklad pro formulář:
+
+| Situace | Text pro uživatele | Interní log |
+| --- | --- | --- |
+| E-mail provider neodpověděl | „Zprávu se teď nepodařilo odeslat. Zkuste to prosím znovu za chvíli.“ | `event=form_submit_failed provider=email status=timeout request_id=...` |
+| Neplatný vstup | „Zkontrolujte prosím e-mailovou adresu.“ | `event=form_validation_failed field=email rule=format request_id=...` |
+| Chybí oprávnění | „K této části nemáte přístup.“ | `event=access_denied actor_ref=... resource_type=project role=viewer request_id=...` |
+| Neočekávaná chyba | „Něco se pokazilo. Kód chyby: REQ-1C92.“ | `event=unexpected_error request_id=req_1c92 service=api error_class=...` |
+
+Uživatel nikdy nemá dostat stack trace, SQL chybu, název interní služby nebo detail bezpečnostního pravidla. Tým naopak nemá dostat do logu celé osobní pozadí uživatele jen proto, že se zobrazila chyba.
+
+Korelační ID je elegantní kompromis. Člověk ho může poslat supportu a tým podle něj najde bezpečný provozní kontext bez toho, aby veřejná chyba vyzrazovala interní detaily.
+
+### Alerty mají budit člověka, ne krmit úzkost
+
+Alert není dashboardová dekorace. Alert říká: „Někdo má něco udělat.“ Pokud nikdo neví co, není to alert, ale hlučná poznámka.
+
+Dobré alerty:
+
+- produkční chybovost po releasu překročila domluvený práh,
+- registrace nebo platby selhávají déle než několik minut,
+- databáze se blíží limitu kapacity,
+- opakuje se bezpečnostně významná událost,
+- záloha nebo plánovaný job nedoběhl.
+
+Špatné alerty:
+
+- každý jednotlivý 404,
+- každý pomalý request bez dopadu,
+- vývojové chyby ze stagingu ve stejném kanálu jako produkce,
+- metrika bez vlastníka,
+- upozornění, které se pravidelně ignoruje.
+
+Každý alert má mít krátkou kartu:
+
+| Pole | Odpověď |
+| --- | --- |
+| Název alertu |  |
+| Co znamená |  |
+| Kdy se spouští |  |
+| Koho budí |  |
+| První kontrola |  |
+| Kdy eskalovat |  |
+| Jak se vypne falešný poplach |  |
+| Jaká data alert používá |  |
+
+Privacy-first detail: alertovací kanál často běží v externím nástroji. Neposílej do něj celé payloady, e-maily zákazníků, tokeny ani screenshoty s daty. Stačí služba, prostředí, typ chyby, dopad, čas, request ID a odkaz do interního systému.
+
+### Retence logů má být kratší než paměť týmu
+
+Logy se často hromadí, protože mazání není priorita. Jenže provozní data mají vlastní riziko: mohou obsahovat osobní údaje, bezpečnostní detaily, interní cesty, chybové vzory a obchodní kontext.
+
+Rozumný start pro malý SaaS:
+
+- detailní debug logy v produkci vypínej standardně a zapínej jen dočasně,
+- aplikační logy drž krátce podle potřeby podpory a incidentů,
+- bezpečnostní logy drž odděleně a s přístupem jen pro lidi, kteří je opravdu řeší,
+- metriky agreguj déle než raw události,
+- staré logy maž automaticky, ne ručním slibem,
+- retenci dokumentuj v retenční mapě dat.
+
+Když potřebuješ delší historii pro bezpečnost nebo audit, napiš proč, kdo k ní má přístup a kdy končí. „Možná se bude hodit“ není retenční politika. Je to odložený úklid s právním nádechem.
+
+### Provozní přístup k logům je také přístup k datům
+
+Log management bývá v týmech podceňovaný. Přitom člověk s přístupem k produkčním logům často vidí víc než člověk s přístupem do administrace. Vidí chyby, identifikátory, interní stav, někdy i data, která tam nikdy neměla být.
+
+Praktický režim:
+
+- odděl přístup k produkčním logům od běžného vývojového přístupu,
+- používej role podle potřeby: vývoj, support, incident response, administrace,
+- logy s bezpečnostním významem drž v přísnějším režimu,
+- audituj přístupy stejně jako u databáze,
+- při offboardingu odeber přístup k logovací platformě,
+- v supportu používej bezpečné výřezy místo plošného přístupu.
+
+Pokud support potřebuje ověřit stav objednávky nebo registrace, neznamená to, že má mít přístup do všech produkčních logů. Lepší je interní nástroj, který ukáže omezený stav a neotevře celý technický sklep.
+
+### Checklist: Privacy-first observabilita
+
+- [ ] U každého nového logu, metriky nebo trace atributu víme, jaké rozhodnutí podporuje.
+- [ ] Produkční logy neobsahují hesla, tokeny, cookies, autorizační hlavičky ani connection stringy.
+- [ ] Request a response body se nelogují plošně.
+- [ ] E-maily a osobní údaje jsou nahrazené interním referenčním ID tam, kde to stačí.
+- [ ] Chybové hlášky pro uživatele neprozrazují interní detaily.
+- [ ] Uživatel dostane korelační ID, podle kterého tým najde bezpečný kontext.
+- [ ] Alerty mají vlastníka, první krok a jasný práh.
+- [ ] Staging a produkce neposílají šum do stejného kritického kanálu.
+- [ ] Logy mají nastavenou automatickou retenci.
+- [ ] Přístup k produkčním logům je omezený a kontrolovaný.
+- [ ] Externí observability nástroj neukládá zákaznická data bez jasného důvodu.
+- [ ] Debug logování v produkci je dočasné, zdokumentované a po vyřešení vypnuté.
+
+### Mini úkol
+
+Vyber jeden produkční endpoint, formulář nebo background job a udělej malý log audit:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jaká událost se loguje při úspěchu? |  |
+| Jaká událost se loguje při selhání? |  |
+| Je v logu osobní údaj, token, cookie nebo celé body požadavku? |  |
+| Dá se použít interní referenční ID místo přímé identity? |  |
+| Jak uživatel pozná, co má udělat dál? |  |
+| Jak tým najde chybu podle request ID? |  |
+| Jak dlouho se tento log drží? |  |
+| Kdo k němu má přístup? |  |
+| Jaká jedna změna sníží riziko bez zhoršení diagnostiky? |  |
+
+Potom udělej jednu konkrétní opravu: zamaskuj autorizační hlavičku, přestaň logovat celé body, přidej korelační ID do chybové stránky, zkrať retenci debug logů, odděl staging alerty, nebo napiš kartu pro jeden kritický alert. Observabilita má týmu rozsvítit cestu, ne osvětlit celý soukromý byt uživatele.
+
 ## Zdroje
 
+- OWASP Cheat Sheet Series: Logging Cheat Sheet - doporučení k tomu, co logovat, co nelogovat, jak chránit logy a jak nastavit bezpečnostní monitoring podle účelu a rizika: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
+- OpenTelemetry Docs: Signals - přehled základních observability signálů jako traces, metrics, logs a profiles: https://opentelemetry.io/docs/concepts/signals/
 - OWASP Cheat Sheet Series: Secrets Management Cheat Sheet - doporučení pro životní cyklus tajemství, ukládání, přístup, rotaci, revokaci, audit a incidentní reakci: https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html
 - The Twelve-Factor App: Config - princip oddělení konfigurace od kódu a používání proměnných prostředí pro konfiguraci aplikace: https://12factor.net/config
 - GitHub Docs: Secret scanning - detekce hardcodovaných přístupových údajů v historii repozitáře a ochrana proti úniku secrets: https://docs.github.com/code-security/secret-scanning/about-secret-scanning
@@ -5772,6 +5973,7 @@ Potom udělej jednu konkrétní změnu: přidej `.env.example`, zapni secret sca
 
 ## Pracovní log
 
+- 2026-07-11: Doplněna příloha o chybách, logování a observabilitě bez datového vysavače: rozhodovací účel signálů, rozlišení metrik, logů, traces a profilů, zakázaná data v logu, bezpečné chybové hlášky s korelačním ID, alerty, retence, přístupy k logům, checklist a mini úkol; ověřeny zdroje OWASP Logging Cheat Sheet a OpenTelemetry Signals.
 - 2026-07-11: Doplněna příloha o tajemstvích, API klíčích a konfiguraci bez úniku do repozitáře: rozdělení konfigurace a secrets, lokální vývoj, CI/CD tajemství, rotace, postup při úniku, secret scanning, checklist a mini úkol; ověřeny zdroje OWASP, Twelve-Factor App a GitHub Docs.
 - 2026-07-11: Doplněna příloha o cookie a tracking auditu bez otravných bannerů: inventura cookies, storage, pixelů a embedů, rozdělení podle nutnosti, test tří stavů, dvoukrokové načítání externího obsahu, pravdivý banner, checklist a mini úkol; ověřeny oficiální zdroje Evropské komise a EDPB k cookies a technickému rozsahu ePrivacy.
 - 2026-07-11: Doplněna příloha o zálohách a obnově bez falešného pocitu bezpečí: kategorie obnovy, RPO/RTO lidsky, vlastnictví a rytmus záloh, test obnovy, částečná obnova, retence záloh, runbook, checklist a mini úkol.
