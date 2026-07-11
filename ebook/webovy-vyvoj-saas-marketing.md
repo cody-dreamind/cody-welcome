@@ -4001,6 +4001,177 @@ Vyber jednu kategorii dat, která ve firmě vzniká opakovaně: leady, support t
 
 Potom udělej jednu konkrétní změnu: smaž starý export, nastav expiraci debug logů, doplň vlastníka leadů, anonymizuj staré eventy nebo přidej upozornění před smazáním neaktivního trial účtu. Retence není velké gesto. Je to pravidelný úklid, který chrání produkt před vlastním datovým bordelem.
 
+## Příloha: Support bez datového nepořádku
+
+Support je místo, kde privacy-first provoz často narazí na realitu. Zákazník pošle screenshot, vývojář chce log, obchod přepošle e-mail, někdo přidá interní poznámku a najednou je v ticketu víc dat než v samotném produktu. Ne proto, že by tým chtěl slídit. Protože řeší problém a spěchá.
+
+Dobrý support systém proto nespoléhá na hrdinství jednotlivců. Má jednoduchá pravidla: co se smí žádat, co se nesmí žádat, co se má začernit, jak dlouho se přílohy drží a kdo smí vidět interní poznámky. EDPB v průvodci pro malé firmy připomíná, že organizace mají znát datové toky, usnadnit výkon práv lidí, odpovídat na žádosti včas a dokumentovat odpovědi. Support je přesně místo, kde se to musí přeložit do každodenní práce.
+
+Toto není právní rada. Je to provozní návod pro tým, který nechce mít z helpdesku neřízený archiv osobních údajů.
+
+### Rozděl support data podle účelu
+
+Ne každá informace v ticketu má stejný účel. Když se všechno hodí do jedné kategorie „support“, nejde rozumně nastavit přístup, retenci ani export.
+
+Praktické rozdělení:
+
+| Typ dat | Příklad | Účel | Typický vlastník |
+| --- | --- | --- | --- |
+| Identifikace zákazníka | e-mail, firma, workspace, číslo objednávky | najít účet a navázat komunikaci | support |
+| Popis problému | kroky k reprodukci, očekávaný výsledek, dopad | vyřešit ticket | support nebo produkt |
+| Technický kontext | browser, zařízení, chybový kód, čas události | najít chybu | vývoj |
+| Přílohy | screenshot, CSV, export, video obrazovky | pochopit problém | vlastník ticketu |
+| Interní poznámky | priorita, eskalace, hypotéza příčiny | koordinace týmu | support lead |
+| Znalostní báze | anonymizované řešení, postup, FAQ | opakované použití bez osobních dat | support nebo content |
+
+U každého typu dat si napiš, zda patří do zákaznické odpovědi, interní poznámky, technického logu nebo znalostní báze. To je důležité hlavně při exportu dat, žádosti o přístup nebo předávání ticketu dalšímu dodavateli.
+
+### Ptej se na minimum, ale ptej se přesně
+
+Privacy-first support neznamená, že support nesmí nic vědět. Znamená to, že si neříká o celé databáze, když potřebuje jeden chybový kód.
+
+Místo obecné výzvy „pošlete nám co nejvíc detailů“ používej konkrétní otázky:
+
+- Kdy se problém stal? Stačí přibližný čas a časové pásmo.
+- Který workspace, projekt nebo objednávky se problém týká?
+- Jaké kroky vedly k chybě?
+- Jakou hlášku aplikace ukázala?
+- Vidíte problém opakovaně, nebo jednorázově?
+- Můžete poslat screenshot bez osobních údajů ostatních lidí?
+
+Špatný požadavek: „Pošlete nám export celé tabulky.“
+
+Lepší požadavek: „Pošlete prosím tři řádky, na kterých je problém vidět, a odstraňte sloupce se jmény, e-maily, telefonem a poznámkami zákazníků.“
+
+Codyho komentář: Nejrychlejší support není ten, který si vyžádá všechno. Nejrychlejší support je ten, který ví, co přesně potřebuje. Všechno ostatní je jen dražší způsob, jak si vyrobit úklid.
+
+### Screenshoty a přílohy potřebují vlastní pravidla
+
+Screenshot je pohodlný, ale zrádný. Často obsahuje e-maily, jména, adresy, interní komentáře, tokeny, URL s parametry, notifikace nebo otevřené záložky. Uživatel to neřeší, protože chce rychle pomoct. Tým to musí řešit za něj.
+
+Do support formuláře nebo šablony odpovědi přidej krátkou instrukci:
+
+> Před odesláním screenshotu prosím začerněte osobní údaje, tokeny, interní poznámky a údaje třetích osob. Pokud si nejste jistí, pošlete raději jen chybovou hlášku a popis kroků.
+
+Pravidla pro přílohy:
+
+- Přílohy s osobními daty se neukládají mimo helpdesk bez důvodu.
+- Exporty se zkracují na minimální vzorek.
+- Citlivé přílohy mají kratší retenci než samotný ticket.
+- Přílohy se neposílají do AI nástrojů ani externích konvertorů bez posouzení.
+- Když příloha obsahuje data třetích osob, ticket se označí a řeší opatrněji.
+- Řešení se do znalostní báze přepisuje anonymizovaně.
+
+Praktický mikroproces:
+
+1. Přijde příloha.
+2. Vlastník ticketu zkontroluje, zda obsahuje zjevně zbytečná osobní data.
+3. Pokud ano, požádá zákazníka o zkrácenou nebo začerněnou verzi, případně citlivou přílohu po vyřešení smaže podle interního pravidla.
+4. Do ticketu zapíše jen technický závěr, ne celý obsah přílohy.
+
+### Interní poznámky nejsou odpadkový koš
+
+Interní poznámky v supportu bývají nebezpečně upřímné. To samo o sobě není problém, pokud jsou věcné, nutné a přístupné jen lidem, kteří je opravdu potřebují. Problém začíná ve chvíli, kdy se z nich stane skládka osobních hodnocení, domněnek a informací, které nijak nepomáhají řešit ticket.
+
+Dobrá interní poznámka:
+
+- popisuje fakt nebo technickou hypotézu,
+- odděluje jistotu od domněnky,
+- nezesměšňuje zákazníka,
+- neobsahuje citlivé údaje, pokud nejsou nutné,
+- má jasný další krok.
+
+Příklad:
+
+| Slabá poznámka | Lepší poznámka |
+| --- | --- |
+| „Zákazník tomu asi nerozumí.“ | „Zákazník očekával automatické uložení po změně plánu. UI neukazuje stav uložení.“ |
+| „Pošlete to vývoji, celé je to divné.“ | „Chyba se objevila 2026-07-11 kolem 09:20 UTC při exportu faktur. Potřebujeme ověřit logy pro workspace ID X.“ |
+| „Mají tam bordel v datech.“ | „Import obsahuje prázdné hodnoty ve sloupci VAT ID. Validace neukazuje konkrétní řádek.“ |
+
+Support poznámky se mohou později objevit při interním auditu, žádosti o přístup nebo právním sporu. Piš je tak, aby pomáhaly řešit problém i za měsíc. Sarkasmus si nech na kávovar. Ten to unese líp.
+
+### Odděl podporu, produktové učení a marketing
+
+Ticket může být skvělý zdroj produktového učení. Ale to neznamená, že se zákaznická komunikace automaticky přesune do marketingového seznamu, remarketingu nebo veřejné case study.
+
+Rozliš tři výstupy:
+
+| Výstup | Co smí obsahovat | Co vyžaduje opatrnost |
+| --- | --- | --- |
+| Odpověď zákazníkovi | řešení konkrétního problému | zbytečné technické interní detaily |
+| Produktový insight | anonymizovaný vzor problému, dopad, návrh změny | osobní údaje, názvy firem, konkrétní obsah dat |
+| Marketingový materiál | obecný scénář, veřejně schválená citace, anonymní příklad | použití jména, loga, screenshotu nebo detailu zákazníka |
+
+Když se z ticketu stane produktový insight, přepiš ho do neutrální formy:
+
+| Ticket říká | Produktový insight |
+| --- | --- |
+| „Firma ABC nemůže najít export faktur za květen.“ | „Uživatelé po uzávěrce měsíce hledají export podle období, ne podle data vytvoření.“ |
+| „Jana z účtárny se spletla v nastavení role.“ | „Role pro finance nejsou dostatečně vysvětlené při pozvání nového člena.“ |
+| „Zákazník poslal CSV s osobními údaji.“ | „Importní validace má umožnit testovací vzorek bez citlivých sloupců.“ |
+
+Tím získáš produktovou hodnotu bez toho, aby se support stal marketingovou těžbou dat.
+
+### Připrav support na práva uživatelů
+
+Support často jako první pozná, že uživatel uplatňuje právo na přístup, opravu, výmaz, omezení zpracování, přenositelnost nebo námitku. EDPB uvádí, že organizace mají lidem výkon práv usnadnit, odpovídat typicky do jednoho měsíce a odpovědi dokumentovat. Prakticky to znamená, že support nesmí podobné žádosti řešit jako obyčejný dotaz typu „kde najdu fakturu“.
+
+V helpdesku vytvoř štítek nebo typ ticketu:
+
+| Typ žádosti | První reakce supportu |
+| --- | --- |
+| Přístup k datům | ověřit identitu, předat vlastníkovi procesu, potvrdit přijetí |
+| Oprava údajů | zjistit, která data jsou nepřesná a kde se mění |
+| Výmaz | ověřit rozsah, zkontrolovat právní nebo fakturační důvody pro zachování části dat |
+| Přenositelnost | předat na proces exportu ve strojově použitelném formátu, pokud se uplatní |
+| Námitka nebo omezení | označit ticket jako citlivý proces a předat odpovědné osobě |
+| Bezpečnostní incident | okamžitě eskalovat podle incident plánu |
+
+Do interní šablony napiš:
+
+| Pole | Hodnota |
+| --- | --- |
+| Datum přijetí žádosti |  |
+| Kdo žádost podal |  |
+| Jak byla ověřena identita |  |
+| Jakého systému se žádost týká |  |
+| Kdo je vlastník odpovědi |  |
+| Termín odpovědi |  |
+| Co bylo provedeno |  |
+| Komu bylo potřeba předat informaci |  |
+| Datum uzavření |  |
+
+Tohle není byrokracie pro radost z tabulek. Je to pojistka, že žádost nezůstane v inboxu jednoho člověka, který zrovna odjel na dovolenou.
+
+### Checklist: Support bez datového nepořádku
+
+- [ ] Support formulář žádá jen data nutná k řešení problému.
+- [ ] Zákazník vidí instrukci, jak začernit screenshoty a přílohy.
+- [ ] Tým má pravidla pro práci s CSV, exporty, logy a videi obrazovky.
+- [ ] Přílohy s osobními daty mají kratší retenci nebo jasný úklid.
+- [ ] Interní poznámky jsou věcné, nezbytné a přístupné jen odpovědným lidem.
+- [ ] Produktové insighty ze supportu se anonymizují před přesunem do backlogu.
+- [ ] Support nerozšiřuje zákaznické kontakty do marketingu bez samostatného důvodu a pravidel.
+- [ ] Existuje štítek nebo proces pro žádosti podle práv uživatelů.
+- [ ] Bezpečnostní incident ze supportu má jasnou eskalaci.
+- [ ] Znalostní báze neobsahuje osobní údaje ze skutečných ticketů.
+
+### Mini úkol
+
+Vyber posledních deset support ticketů a projdi je podle tabulky:
+
+| Kontrola | Kolik ticketů má problém? | Co upravíme |
+| --- | --- | --- |
+| Obsahují zbytečné osobní údaje |  |  |
+| Mají přílohu bez jasné retence |  |  |
+| Interní poznámka je nejasná nebo nevěcná |  |  |
+| Řešení by šlo přepsat do anonymní znalostní báze |  |  |
+| Ticket naznačuje produktový problém |  |  |
+| Ticket je ve skutečnosti žádost o práva uživatele |  |  |
+
+Potom udělej jednu konkrétní změnu: přidej instrukci k přílohám, vytvoř štítek pro žádosti podle GDPR, zkrať retenci support screenshotů, přepiš jednu odpověď do znalostní báze nebo smaž starý export v ticketu. Support má zákazníkovi pomoct, ne tiše budovat druhou databázi produktu.
+
 ## Zdroje
 
 - European Commission: AI Act - rizikový přístup, GPAI pravidla, transparentní povinnosti a aktuální harmonogram uplatňování AI Actu: https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai
@@ -4011,6 +4182,8 @@ Potom udělej jednu konkrétní změnu: smaž starý export, nastav expiraci deb
 - European Commission: Information for individuals - praktický přehled práv jednotlivců podle ochrany osobních údajů v EU: https://commission.europa.eu/law/law-topic/data-protection/information-individuals_en
 - European Commission: Principles of the GDPR - přehled principů jako transparentnost, účelové omezení, minimalizace dat a omezení uchování: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr_en
 - European Commission: What data can we process and under which conditions? - praktické vysvětlení účelu, rozsahu a základních pravidel zpracování osobních údajů: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr/overview-principles/what-data-can-we-process-and-under-which-conditions_en
+- European Commission: What is a data controller or a data processor? - rozlišení rolí správce a zpracovatele osobních údajů v provozu služeb a dodavatelů: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/obligations/controllerprocessor/what-data-controller-or-data-processor_en
+- European Commission: What is a data breach and what do we have to do in case of a data breach? - praktické vysvětlení oznamování porušení zabezpečení osobních údajů: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/obligations/what-data-breach-and-what-do-we-have-do-case-data-breach_en
 - European Commission: When can personal data be processed? - přehled právních základů zpracování osobních údajů podle GDPR: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/legal-grounds-processing-data/grounds-processing/when-can-personal-data-be-processed_en
 - European Data Protection Board: Guidelines 9/2022 on personal data breach notification under GDPR - pokyny k oznamování porušení zabezpečení osobních údajů: https://www.edpb.europa.eu/documents/guideline/guidelines-92022-on-personal-data-breach-notification-under-gdpr_en
 - EUR-Lex: Directive (EU) 2022/2555, NIS2 Directive - právní text směrnice o vysoké společné úrovni kybernetické bezpečnosti v EU: https://eur-lex.europa.eu/eli/dir/2022/2555/oj/eng
@@ -4056,6 +4229,7 @@ Potom udělej jednu konkrétní změnu: smaž starý export, nastav expiraci deb
 
 ## Pracovní log
 
+- 2026-07-11: Doplněna příloha o supportu bez datového nepořádku: rozdělení supportních dat podle účelu, minimální dotazy, práce se screenshoty a přílohami, věcné interní poznámky, oddělení supportu od marketingu, proces pro práva uživatelů, checklist a mini úkol; při psaní ověřeny zdroje EDPB a Evropské komise k právům subjektů údajů, rolím správce/zpracovatele a bezpečnostním incidentům.
 - 2026-07-11: Doplněna příloha o retenční mapě dat bez právnické mlhy: kategorie dat, účel a konec životnosti, rozdíl mezi aktivními daty, archivem, zálohami, exporty a logy, technické vynucení retence, checklist a mini úkol; při psaní ověřeny primární zdroje Evropské komise a EDPB k principům GDPR, právům lidí a privacy by design/default.
 - 2026-07-11: Doplněna příloha o AI asistentech v SaaS a marketingu bez úniku dat: rozdělení AI použití podle rizika, bezpečný prompt brief, výběr nástroje podle dat, marketing a support mantinely, AI rozhodovací karta, checklist a mini úkol; přidány ověřené zdroje Evropské komise a EDPB k AI Actu a GDPR v AI.
 - 2026-07-11: Doplněna příloha o newsletteru a produktových e-mailech bez spamového reflexu: rozlišení provozních, produktových a marketingových e-mailů, dobrovolné přihlášení, slib odběru, odhlášení, segmentace, agregované měření, checklist a mini úkol; přidány ověřené zdroje ÚOOÚ k obchodním sdělením a e-shopům.
