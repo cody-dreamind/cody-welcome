@@ -3217,6 +3217,170 @@ Vezmi jednu existující landing page a vyplň tuto kartu:
 
 Vyber jednu úpravu a dokonči ji. Neotevírej redesign celé značky, pokud problém zní „formulář chce zbytečně telefon“. To je jako kupovat novou kuchyň kvůli špinavému hrnku. Oprav hrnek. Pak měř, jestli se lidem pije líp.
 
+## Příloha: Týdenní produktové review bez dashboardového divadla
+
+Malý tým nepotřebuje každý týden tříhodinovou poradu, dvanáct grafů a tabulku, která se aktualizuje tak dlouho, až ji nikdo neotevře. Potřebuje krátký rytmus, ve kterém se podívá na realitu, vybere jeden problém a dotáhne jeden další krok.
+
+Týdenní review má chránit produkt před dvěma extrémy. První extrém je chaos: všichni něco tuší, každý slyšel jiný feedback a priority se mění podle poslední zprávy v chatu. Druhý extrém je dashboardové divadlo: metriky vypadají profesionálně, ale nikdo podle nich nic nerozhodne.
+
+Privacy-first přístup tady pomáhá. Když nesbíráš nekonečné množství dat o jednotlivcích, musíš být přesnější v otázkách. Neptáš se „co všechno se stalo“. Ptáš se „co nám tento týden bránilo dodat hodnotu správným lidem“.
+
+### Cíl review napiš jednou větou
+
+Týdenní review není status report pro uklidnění managementu. Je to pracovní smyčka pro učení.
+
+Dobrá věta:
+
+„Každý týden vybereme jeden nejdůležitější signál z provozu, rozhodneme jeden další krok a zapíšeme, proč jsme ho vybrali.“
+
+Špatná věta:
+
+„Projít všechna čísla a pobavit se, co by šlo zlepšit.“
+
+Druhá varianta zní nevinně, ale končí tím, že se tým projde po metrikách jako po výstavě. Hezké obrázky, žádný nákup.
+
+### Připrav tři vstupy, ne celý vesmír
+
+Na review stačí tři typy vstupů:
+
+| Vstup | Co přináší | Příklad |
+| --- | --- | --- |
+| Produktový signál | Co se dělo v používání webu nebo SaaS | Konverze na hlavní CTA klesla, onboarding se zastavuje u importu dat |
+| Kvalitativní signál | Co říkali lidé | Tři zákazníci se ptali na stejný rozdíl mezi plány |
+| Provozní signál | Co bolelo tým nebo systém | Support ručně vysvětloval stejný krok, deploy trval moc dlouho |
+
+Každý vstup má mít vlastníka, který přinese krátké shrnutí. Ne prezentaci. Shrnutí.
+
+Praktický formát:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Co jsme tento týden viděli? |  |
+| Proč je to důležité? |  |
+| Jaký důkaz máme? |  |
+| Co navrhujeme udělat? |  |
+| Co uděláme, když se mýlíme? |  |
+
+Poslední otázka je nepříjemná, a proto užitečná. Nutí tým přiznat, že změna je hypotéza, ne zjevená pravda z produktového nebe.
+
+### Odděl signál od nálady
+
+V malém týmu má jeden hlasitý feedback často velkou váhu. To není chyba. Je to realita. Zakladatel mluvil se zákazníkem, support měl náročný den, obchod slyšel ostrou námitku a najednou se zdá, že celý produkt hoří.
+
+Před rozhodnutím si polož tři otázky:
+
+- Opakovalo se to u více lidí nebo situací?
+- Blokuje to hlavní cestu k hodnotě?
+- Je dopad větší než náklady na opravu?
+
+Pokud je odpověď třikrát ano, problém pravděpodobně patří do aktuální priority. Pokud je odpověď jen „bylo to hodně hlasité“, zapiš signál a vrať se k němu později.
+
+Příklad:
+
+| Situace | Rychlá reakce | Lepší reakce |
+| --- | --- | --- |
+| Jeden zákazník chce export do speciálního formátu | Hned slíbit integraci | Zapsat use case, zjistit četnost, nabídnout ruční export pro ověření |
+| Pět lidí nedokončilo onboarding na stejném kroku | Přidat další tutorial | Nejdřív zjistit, jestli je krok srozumitelný a nutný |
+| Sales dostal dotaz na cenu enterprise podpory | Přepsat celý pricing | Přidat krátkou větu, co se řeší individuálně a proč |
+
+Codyho komentář: Nejrychlejší produktové týmy nejsou ty, které reagují na všechno. Jsou to ty, které umí rychle poznat, na co nereagovat.
+
+### Vyber jen jedno rozhodnutí týdně
+
+Review může odhalit deset problémů. To neznamená, že máš začít deset úprav. Vyber jedno rozhodnutí, které posune produkt nejvíc.
+
+Dobré rozhodnutí má tuto strukturu:
+
+| Část | Příklad |
+| --- | --- |
+| Pozorování | Noví uživatelé často nedokončí import, protože nevědí, jaký formát souboru použít. |
+| Rozhodnutí | Přidáme ukázkový soubor a krátkou kontrolu formátu před importem. |
+| Důvod | Import je první cesta k hodnotě a chyba blokuje aktivaci. |
+| Očekávaný dopad | Méně support dotazů a vyšší dokončení importu. |
+| Kontrola | Za dva týdny porovnáme dokončení importu a zopakované dotazy. |
+
+Tento zápis je krátký, ale chrání tým před paměťovou mlhou. Za měsíc bude jasné, proč se změna udělala a podle čeho se pozná, jestli fungovala.
+
+### Měř dopad bez sledování jednotlivců
+
+U většiny týdenních rozhodnutí nepotřebuješ vědět, který konkrétní člověk kam klikl. Stačí agregovaný trend a kvalitativní kontrola.
+
+Příklady privacy-first kontroly:
+
+- Po změně formuláře porovnej počet dokončených formulářů a kvalitu poptávek.
+- Po úpravě pricingu sleduj opakované dotazy na rozdíly mezi plány.
+- Po zjednodušení onboardingu sleduj dokončení hlavního kroku a počet support zpráv k tomuto kroku.
+- Po publikaci článku sleduj návštěvnost, interní prokliky a ruční feedback od lidí, kteří článek použili.
+
+Důležité je předem říct, jak dlouho budeš změnu sledovat. Jinak se z review stane skladiště neuzavřených hypotéz.
+
+Praktické pravidlo:
+
+- malá textová změna: kontrola za 1 až 2 týdny,
+- změna formuláře nebo onboarding kroku: kontrola za 2 až 4 týdny,
+- větší pricing nebo segmentační změna: kontrola za 4 až 8 týdnů.
+
+Nejde o magické lhůty. Jde o to, aby tým věděl, kdy se k rozhodnutí vrátí.
+
+### Uzavři review konkrétním výstupem
+
+Na konci review musí existovat jedna karta. Ne deset poznámek v chatu, ne „někdo se na to podívá“, ne tiché očekávání, že si to všichni pamatují.
+
+Karta týdenního rozhodnutí:
+
+| Pole | Obsah |
+| --- | --- |
+| Datum |  |
+| Signál |  |
+| Rozhodnutí |  |
+| Vlastník |  |
+| Nejmenší další krok |  |
+| Termín kontroly |  |
+| Jak poznáme dopad |  |
+| Co zatím neděláme |  |
+
+Pole „Co zatím neděláme“ je malé produktové zlato. Pomáhá zavřít boční nápady, které by jinak žily v hlavě týmu jako tichý pocit viny.
+
+### Doporučený 30minutový rytmus
+
+| Čas | Co se děje |
+| --- | --- |
+| 0 až 5 minut | Připomenout minulé rozhodnutí a stav kontroly |
+| 5 až 12 minut | Projít produktový, kvalitativní a provozní signál |
+| 12 až 20 minut | Vybrat jeden problém podle dopadu a důkazu |
+| 20 až 25 minut | Napsat rozhodnutí a nejmenší další krok |
+| 25 až 30 minut | Zapsat, co se zatím nedělá, a domluvit kontrolu |
+
+Když se tým nevejde do 30 minut, často nemá problém s délkou porady. Má problém s přípravou. Review není místo, kde se má teprve lovit realita ze všech systémů.
+
+### Checklist: Týdenní produktové review
+
+- [ ] Review má jasný účel: jeden signál, jedno rozhodnutí, jeden další krok.
+- [ ] Vstupy jsou připravené předem a omezené na produktový, kvalitativní a provozní signál.
+- [ ] Tým odděluje opakovaný signál od jednorázové nálady.
+- [ ] Každé rozhodnutí má důvod, vlastníka a termín kontroly.
+- [ ] Dopad se měří agregovaně, bez profilování jednotlivých lidí.
+- [ ] Neuzavřené hypotézy mají datum návratu, nebo se vědomě zahodí.
+- [ ] Výstupem je jedna karta rozhodnutí, ne volná debata.
+- [ ] Je výslovně napsané, co se zatím nedělá.
+
+### Mini úkol
+
+Připrav první týdenní review pro svůj web nebo SaaS:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jaký produktový signál tento týden stojí za pozornost? |  |
+| Jaký kvalitativní signál se opakoval? |  |
+| Jaký provozní problém brzdil tým? |  |
+| Který z těchto signálů nejvíc souvisí s hlavní hodnotou produktu? |  |
+| Jaké jedno rozhodnutí uděláme? |  |
+| Kdo ho vlastní? |  |
+| Kdy ověříme dopad? |  |
+| Co zatím vědomě neděláme? |  |
+
+Když po review nevznikne žádné rozhodnutí, neznamená to, že tým přemýšlel hluboce. Často to znamená, že jen hezky obešel problém a vrátil ho do příštího týdne. Produktové problémy mají rády recyklaci. Nedávej jim kompostér.
+
 ## Zdroje
 
 - European Data Protection Board: Respect individuals' rights - přehled práv subjektů údajů v GDPR pro malé a střední organizace: https://www.edpb.europa.eu/sme-data-protection-guide/respect-individuals-rights_en
@@ -3262,6 +3426,7 @@ Vyber jednu úpravu a dokonči ji. Neotevírej redesign celé značky, pokud pro
 
 ## Pracovní log
 
+- 2026-07-11: Doplněna příloha o týdenním produktovém review bez dashboardového divadla: tři vstupy, oddělení signálu od nálady, karta rozhodnutí, privacy-first kontrola dopadu, 30minutový rytmus, checklist a mini úkol.
 - 2026-07-11: Doplněna příloha o privacy-first landing page za jeden den: zadání stránky jednou větou, obsahová kostra, formulář s vysvětlením dat, měření bez slídění, kontrola před publikací, textová šablona, checklist a mini úkol.
 - 2026-07-11: Doplněna příloha o obsahovém kalendáři bez obsahové vaty: obsahová hypotéza, typy obsahu podle práce, měsíční tematický rytmus, redakční karta, privacy-first distribuce, údržba obsahu, checklist a mini úkol.
 - 2026-07-11: Doplněna drobná poznámka k transparentním aktualizacím obsahu a checklist položka pro popis významných změn.
