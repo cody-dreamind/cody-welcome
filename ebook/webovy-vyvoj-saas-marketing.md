@@ -5412,6 +5412,136 @@ Vyber jednu kritickou část produktu a vyplň obnovovací kartu:
 
 Potom udělej nejmenší užitečný test: obnov jednu neprodukční zálohu do izolovaného prostředí, projdi runbook od začátku do konce nebo aspoň ověř, že správný člověk umí najít poslední zálohu bez hledání v historii chatu. Zálohy mají jednu skvělou vlastnost: dokud je neotestuješ, pořád vypadají lépe, než jaké jsou.
 
+## Příloha: Cookie a tracking audit bez otravných bannerů
+
+Cookie lišta není privacy strategie. Je to poslední viditelný kousek rozhodnutí, která se měla udělat dávno před návrhem banneru: co web opravdu potřebuje ukládat do prohlížeče, které skripty se načítají, kdo dostává data a jestli se dá stejný účel splnit jednodušeji.
+
+Špatná otázka zní: „Jakou cookie lištu nasadíme?“
+
+Lepší otázka zní: „Které ukládání nebo čtení informací na zařízení návštěvníka vůbec potřebujeme a co můžeme vypnout?“
+
+Evropská komise ve své cookie politice rozlišuje provozní cookies potřebné pro fungování webu a cookies pro analytiku nebo externí obsah, u kterých má člověk dostat možnost volby. EDPB ve finálních Guidelines 2/2023 k technickému rozsahu článku 5(3) ePrivacy Directive zároveň připomíná, že nejde jen o tradiční cookies, ale obecně o ukládání informací do koncového zařízení nebo přístup k informacím v něm. Praktický dopad: audituj cookies, localStorage, sessionStorage, pixely, tag managery, vložené widgety a fingerprintingové techniky jako jeden celek. Ne jen tabulku s názvy cookies.
+
+### Začni inventurou, ne bannerem
+
+Nejdřív si projdi reálnou stránku v čistém profilu prohlížeče a zapiš, co se stane před souhlasem, po odmítnutí a po přijetí. Udělej to na hlavních šablonách: homepage, blogový článek, pricing, kontaktní formulář, registrace a dokumentace.
+
+Pracovní tabulka:
+
+| Prvek | Kde se spouští | Účel | Před souhlasem? | Dodavatel | Data | Další krok |
+| --- | --- | --- | --- | --- | --- | --- |
+| Session cookie | aplikace | přihlášení | ano, jen po loginu | vlastní systém | session ID | ponechat |
+| Analytika | celý web | agregované měření | podle nastavení | analytický nástroj | návštěvy, zdroje | omezit na minimum |
+| Video embed | landing page | ukázka produktu | ne | externí platforma | podle poskytovatele | nahradit náhledem |
+| Chat widget | pricing | kontakt | ne | support nástroj | zpráva, metadata | spouštět až po akci |
+
+Nepiš jen „marketing“. Napiš konkrétní účel: měření konverze formuláře, zapamatování jazykové preference, udržení přihlášení, zobrazení mapy nebo ochrana proti spamu. Obecné štítky jsou pohodlné, ale při auditu moc nepomáhají.
+
+### Rozděl prvky podle nutnosti
+
+Pro každý prvek vyber jednu kategorii:
+
+| Kategorie | Co znamená | Příklad |
+| --- | --- | --- |
+| Nutné pro službu | Bez toho nejde splnit akce, kterou člověk požádal | session při přihlášení, košík, CSRF ochrana |
+| Preferenční | Pomáhá zapamatovat volbu člověka | jazyk, režim zobrazení, zavřený informační box |
+| Analytické | Pomáhá týmu zlepšovat službu | agregované měření návštěv a konverzí |
+| Marketingové | Slouží reklamě, remarketingu nebo profilování | reklamní pixel, cross-site tracking |
+| Externí obsah | Vkládá cizí službu do stránky | video, mapa, social embed, kalendář |
+
+Privacy-first výchozí stav je jednoduchý: nutné prvky drž co nejmenší, analytiku navrhni agregovaně a bez identifikace, marketingové prvky nepouštěj před odpovídající volbou a externí obsah nahrazuj náhledem nebo přímým odkazem, pokud to stačí.
+
+Codyho komentář: Nejlepší cookie banner je často ten, který skoro nemusíš ukazovat, protože web se nechová jako vánoční stromek cizích skriptů. Tiché odstranění tří trackerů je lepší než elegantní modal, který se snaží uhladit zbytečný sběr dat.
+
+### Otestuj tři stavy
+
+Cookie audit bez testu je jen odhad s tabulkou. Pro každou důležitou stránku zkontroluj tři stavy:
+
+1. První návštěva bez volby.
+2. Odmítnutí nepovinných prvků.
+3. Přijetí vybraných nepovinných prvků.
+
+V každém stavu sleduj:
+
+- jaké cookies a localStorage položky vznikly,
+- jaké externí domény se kontaktovaly,
+- jestli se marketingové skripty spustily před volbou,
+- jestli web funguje i po odmítnutí,
+- jestli jde volbu později změnit,
+- jestli odmítnutí není schované výrazně hlouběji než přijetí,
+- jestli text banneru odpovídá realitě.
+
+Praktický postup pro vývojáře:
+
+```text
+1. Otevři stránku v novém profilu prohlížeče.
+2. Zapni Network panel a Application/Storage panel.
+3. Načti stránku bez kliknutí na banner.
+4. Exportuj nebo zapiš externí domény a uložené položky.
+5. Klikni na odmítnutí nepovinných prvků a stránku obnov.
+6. Zkontroluj, co zůstalo a co se přestalo načítat.
+7. Přijmi analytiku nebo marketing a ověř rozdíl.
+8. Zapiš jednu konkrétní opravu.
+```
+
+Nejde o to udělat forenzní studii internetu. Jde o to najít zjevné rozpory: pixel běží před souhlasem, video embed stahuje třetí stranu hned při načtení, odmítnutí nefunguje, stará analytika zůstala v tag manageru, nebo banner slibuje „jen nezbytné cookies“, zatímco web mezitím volá pět marketingových domén.
+
+### Externí embedy nahrazuj důstojnou alternativou
+
+Vložené video, mapa nebo sociální post často přidá víc datového provozu než hodnoty. Privacy-first řešení nemusí být asketické. Stačí použít dvoukrokový vzor:
+
+- nejdřív zobraz vlastní náhled bez externího skriptu,
+- napiš, že obsah načte externí službu,
+- dej tlačítko „Načíst video“, „Otevřít mapu“ nebo přímý odkaz,
+- po kliknutí načti embed nebo otevři novou stránku.
+
+Tento vzor je fér k uživateli i k výkonu webu. Člověk vidí, co dostane, a externí služba se nespouští jen proto, že stránka obsahuje pěkný blok s videem. U blogu často stačí obrázek, krátké shrnutí a přímý odkaz. U produktu může dávat smysl vlastní hostované video nebo statická ukázka.
+
+### Banner má být pravdivé rozhraní, ne manipulace
+
+Když banner potřebuješ, drž ho věcný:
+
+- používej srozumitelná tlačítka,
+- neskrývej odmítnutí za zbytečné kroky,
+- nepoužívej předem zaškrtnuté nepovinné volby,
+- popiš kategorie podle účelu, ne podle marketingového optimismu,
+- umožni změnu volby i později,
+- nepodmiňuj běžný obsah souhlasem s marketingem, pokud pro to nemáš opravdu promyšlený a posouzený důvod.
+
+Tohle není právní rada. Je to produktové pravidlo: souhlas, který člověk odklikne jen proto, že ho rozhraní unavilo, není důvěra. Je to ergonomická kapitulace.
+
+### Checklist: Cookie a tracking audit
+
+- [ ] Máme seznam cookies, storage položek, pixelů, tagů, embedů a externích domén.
+- [ ] Víme, co se spouští před souhlasem, po odmítnutí a po přijetí.
+- [ ] Každý prvek má konkrétní účel, vlastníka a kategorii.
+- [ ] Nutné prvky jsou omezené na skutečně nutné použití.
+- [ ] Analytika funguje s minimem dat a ideálně agregovaně.
+- [ ] Marketingové a reklamní prvky se nespouští před odpovídající volbou.
+- [ ] Externí embedy mají náhled, přímý odkaz nebo dvoukrokové načtení.
+- [ ] Odmítnutí je stejně srozumitelné jako přijetí.
+- [ ] Volbu lze později změnit.
+- [ ] Text cookie banneru odpovídá reálnému technickému chování webu.
+- [ ] Staré tagy a nepoužívané skripty jsou odstraněné, ne jen vypnuté v dokumentaci.
+- [ ] Audit se opakuje po větší změně marketingu, analytiky, designu nebo CMS.
+
+### Mini úkol
+
+Vyber jednu stránku, která má nejvíc externích skriptů, a vyplň krátkou auditní kartu:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jaká stránka se testuje? |  |
+| Které prvky se spustí před volbou? |  |
+| Které externí domény stránka volá? |  |
+| Co se změní po odmítnutí nepovinných prvků? |  |
+| Co se změní po přijetí? |  |
+| Který prvek nemá jasný účel? |  |
+| Který embed lze nahradit náhledem nebo odkazem? |  |
+| Jaká jedna oprava sníží sběr dat nebo počet skriptů? |  |
+
+Potom udělej jednu opravu: smaž nepoužívaný tag, přesuň marketingový skript za souhlas, nahraď embed statickým náhledem, oprav text banneru nebo doplň trvalý odkaz na změnu nastavení. Cookie audit nemá skončit pocitem viny. Má skončit menším, rychlejším a pravdivějším webem.
+
 ## Zdroje
 
 - Keep a Changelog: Keep a Changelog 1.1.0 - principy lidsky psaného changelogu, typy změn a sekce pro nevydané změny: https://keepachangelog.com/en/1.1.0/
@@ -5436,12 +5566,14 @@ Potom udělej nejmenší užitečný test: obnov jednu neprodukční zálohu do 
 - GitHub Docs: Continuous integration with GitHub Actions - CI workflow pro build a testy v repozitáři: https://docs.github.com/en/actions/get-started/continuous-integration
 - Google SRE Book: Eliminating Toil - definice toil a důvod pro automatizaci opakované provozní práce: https://sre.google/sre-book/eliminating-toil/
 - European Commission: Digital privacy - přehled vztahu ePrivacy Directive a GDPR v digitálním soukromí: https://digital-strategy.ec.europa.eu/en/policies/digital-privacy
+- European Commission: Cookies policy - příklad rozlišení provozních, preferenčních, analytických a třetích cookies na webech Evropské komise: https://commission.europa.eu/cookies-policy_en
 - EUR-Lex: Directive 2002/58/EC, Article 13 - pravidla pro nevyžádanou komunikaci a direct marketing v ePrivacy směrnici: https://eur-lex.europa.eu/eli/dir/2002/58/oj/eng
 - ÚOOÚ: Obchodní sdělení - rozcestník a informace úřadu k nevyžádaným obchodním sdělením: https://uoou.gov.cz/cinnost/obchodni-sdeleni
 - ÚOOÚ: Často kladené otázky k zákonu č. 480/2004 Sb. - praktické odpovědi k identifikaci odesílatele a pravidlům obchodních sdělení: https://uoou.gov.cz/cinnost/obchodni-sdeleni/casto-kladene-otazky-k-zakonu-c-4802004-sb
 - ÚOOÚ: Informace pro e-shopy - výklad k zasílání obchodních sdělení vlastním zákazníkům a podmínkám odmítnutí: https://uoou.gov.cz/profesional/qa-otazky-a-odpovedi/informace-pro-e-shopy
 - EUR-Lex: Regulation (EU) 2016/679, GDPR - právní text včetně zásad zpracování, minimalizace údajů a ochrany údajů ve výchozím nastavení: https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng
 - European Data Protection Board: Guidelines 4/2019 on Article 25 Data Protection by Design and by Default - praktický výklad GDPR článku 25: https://www.edpb.europa.eu/documents/guideline/guidelines-42019-on-article-25-data-protection-by-design-and-by-default_en
+- European Data Protection Board: Guidelines 2/2023 on Technical Scope of Art. 5(3) of ePrivacy Directive - finální výklad technického rozsahu ukládání informací nebo přístupu k informacím v koncovém zařízení: https://www.edpb.europa.eu/documents/guideline/guidelines-22023-on-technical-scope-of-art-53-of-eprivacy-directive_en
 - CNIL: Sheet n°16 - Use analytics on your websites and applications - podmínky pro analytiku a měření návštěvnosti v režimu omezeného účelu: https://www.cnil.fr/en/sheet-ndeg16-use-analytics-your-websites-and-applications
 - European Commission: Can data received from a third party be used for marketing? - praktický příklad právního základu a marketingového použití osobních dat: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/legal-grounds-processing-data/can-data-received-third-party-be-used-marketing_en
 - European Data Protection Board: Guidelines 1/2024 on processing of personal data based on Article 6(1)(f) GDPR - legitimní zájem a jeho limity včetně direct marketingu: https://www.edpb.europa.eu/system/files/2024-10/edpb_guidelines_202401_legitimateinterest_en.pdf
@@ -5471,6 +5603,7 @@ Potom udělej nejmenší užitečný test: obnov jednu neprodukční zálohu do 
 
 ## Pracovní log
 
+- 2026-07-11: Doplněna příloha o cookie a tracking auditu bez otravných bannerů: inventura cookies, storage, pixelů a embedů, rozdělení podle nutnosti, test tří stavů, dvoukrokové načítání externího obsahu, pravdivý banner, checklist a mini úkol; ověřeny oficiální zdroje Evropské komise a EDPB k cookies a technickému rozsahu ePrivacy.
 - 2026-07-11: Doplněna příloha o zálohách a obnově bez falešného pocitu bezpečí: kategorie obnovy, RPO/RTO lidsky, vlastnictví a rytmus záloh, test obnovy, částečná obnova, retence záloh, runbook, checklist a mini úkol.
 - 2026-07-11: Doplněna příloha o incidentním plánu pro malé SaaS týmy bez krizového divadla: detekce incidentu, rozlišení technické a datové vrstvy, role v malém týmu, první hodina, incident log, komunikace, postmortem, checklist a mini úkol; ověřeny oficiální zdroje Evropské komise, EDPB a ENISA k data breach a bezpečnostní hygieně.
 - 2026-07-11: Doplněna příloha o offboardingu zákazníka bez držení dat jako rukojmí: zrušení účtu jako běžný provozní scénář, export jako produktová funkce, vrstvy výmazu, oddělení retence od obchodní naděje, dobrovolná zpětná vazba, oddělení účtu, fakturace a marketingu, checklist a mini úkol; ověřeny oficiální zdroje Evropské komise a EDPB k právům jednotlivců.
