@@ -2455,6 +2455,92 @@ Výstup review má být krátký:
 
 Tahle příloha je schválně obyčejná. Privacy-first provoz nestojí na jednom velkém dokumentu, ale na opakovatelných malých kontrolách. Když je tým dělá pravidelně, soukromí není panika před releasem. Je to normální součást práce.
 
+## Příloha: Slovníček pro rychlé rozhodování
+
+Slovníček není právní encyklopedie ani náhrada za konzultaci. Je to překlad nejčastějších pojmů do produktového a provozního jazyka, aby se tým nezasekl pokaždé, když někdo řekne „retence“, „správce“ nebo „RTO“ a zbytek místnosti začne předstírat, že přesně ví, o co jde.
+
+Používej ho při auditu webu, onboardingu nového člověka, návrhu analytiky, výběru dodavatele nebo před releasem.
+
+### Privacy a data
+
+| Pojem | Praktický význam | Otázka pro tým |
+| --- | --- | --- |
+| Osobní údaj | Informace, která se vztahuje k identifikovanému nebo identifikovatelnému člověku. Nemusí jít jen o jméno; často záleží na kontextu. | Dokážeme podle těchto dat člověka přímo nebo nepřímo poznat? |
+| Správce | Ten, kdo určuje účel a prostředky zpracování osobních dat. Typicky firma, která provozuje produkt nebo web. | Rozhodujeme my, proč a jak se data používají? |
+| Zpracovatel | Dodavatel, který zpracovává data pro správce podle jeho pokynů. | Má dodavatel naše zákaznická data a jedná podle našich pokynů? |
+| Subdodavatel | Další služba, kterou používá zpracovatel. Třeba hosting, e-mailová infrastruktura nebo supportní nástroj uvnitř hlavního nástroje. | Víme, kdo další se k datům může dostat přes dodavatele? |
+| Účel zpracování | Konkrétní důvod, proč data používáš. „Abychom měli víc dat“ není účel, to je digitální křeč. | Jaké rozhodnutí, službu nebo povinnost bez těchto dat nezvládneme? |
+| Právní základ | Důvod, o který se zpracování opírá: například smlouva, souhlas, oprávněný zájem nebo právní povinnost. | Umíme ke každému zpracování říct, proč je dovolené? |
+| Minimalizace dat | Sbírat jen data, která jsou přiměřená, relevantní a potřebná pro daný účel. | Které pole, event nebo log můžeme odstranit bez ztráty hodnoty? |
+| Privacy by design | Ochrana dat se řeší už při návrhu produktu, ne až po nasazení. | Ptáme se na data už při návrhu formuláře, analytiky nebo integrace? |
+| Privacy by default | Výchozí nastavení chrání soukromí bez toho, aby uživatel musel všechno vypínat ručně. | Je nejméně invazivní varianta výchozí? |
+| Souhlas | Svobodné, konkrétní, informované a jednoznačné svolení. Hodí se tam, kde má člověk skutečnou volbu. | Umí člověk odmítnout bez trestu a bez schované cesty? |
+| Oprávněný zájem | Jeden z právních základů, který vyžaduje reálný zájem, nezbytnost a vyvážení vůči právům lidí. | Máme zdokumentované, proč náš zájem nepřebíjí práva člověka? |
+| Retence | Doba, po kterou data držíš. | Kdy se data smažou nebo anonymizují a je to technicky vynucené? |
+| Export dat | Možnost dostat data ven ve srozumitelném formátu. | Dokáže zákazník odejít bez rukojmí efektu? |
+| Výmaz | Smazání nebo anonymizace dat, která už není nutné držet. | Víme, co se smaže hned, co zůstane kvůli povinnosti a co je v zálohách? |
+| Pseudonymizace | Nahrazení přímých identifikátorů tak, aby data neukazovala člověka bez dodatečné informace. Pořád může jít o osobní údaje. | Stačí nám pracovat s interním ID místo e-mailu nebo jména? |
+| Anonymizace | Úprava dat tak, aby už člověka nešlo rozumně identifikovat. Musí být skutečná, ne jen přejmenovaná pseudonymizace. | Dokážeme obhájit, že z dat nejde člověka znovu složit? |
+
+Rychlé pravidlo: když neumíš k datům napsat účel, právní základ, vlastníka a retenci, nejsou ještě připravená do produkce. Možná jsou užitečná. Možná ne. Ale zatím jsou neřízená.
+
+### Web, produkt a analytika
+
+| Pojem | Praktický význam | Otázka pro tým |
+| --- | --- | --- |
+| Hlavní cesta | Sekvence kroků, kvůli které web nebo produkt existuje: návštěva, pochopení, registrace, první hodnota, platba nebo poptávka. | Prošli jsme ji ručně na mobilu i desktopu? |
+| První hodnota | První okamžik, kdy uživatel zažije konkrétní užitek produktu. | Co musí člověk dokončit, aby si řekl „aha, tohle mi pomůže“? |
+| Aktivace | Stav, kdy uživatel udělal akci silně spojenou s budoucí hodnotou. Není to jen registrace. | Která akce opravdu ukazuje pochopení hodnoty? |
+| Event | Zaznamenaná událost v produktu nebo na webu. Má mít účel a omezený obsah. | Jaké rozhodnutí tento event podporuje? |
+| Metrika | Číslo, které pomáhá sledovat stav nebo změnu. Dobrá metrika má vlastníka a rozhodnutí. | Kdo se na ni dívá a co podle ní udělá? |
+| Dashboard | Pohled na důležité metriky. Bez rytmu kontroly je to dekorace. | Kdy se dashboard kontroluje a co se stane při změně signálu? |
+| CTA | Výzva k akci: tlačítko, odkaz nebo další krok. | Ví člověk přesně, co se stane po kliknutí? |
+| Canonical URL | Preferovaná URL pro stránku, pokud existují duplicity nebo varianty. | Říkáme vyhledávači i sobě, která adresa je zdroj pravdy? |
+| Sitemap | Soubor se seznamem důležitých URL pro vyhledávače. Nezaručuje indexaci, ale pomáhá objevování. | Obsahuje aktuální veřejné stránky a nevypouští klíčové URL? |
+| Robots.txt | Instrukce pro crawlery, kam nemají chodit. Není to bezpečnostní ochrana. | Nesnažíme se tím chránit něco, co má být za přihlášením? |
+| RSS/Atom | Otevřený feed pro odběr obsahu bez sociálních sítí a newsletterového nátlaku. | Může člověk sledovat nové texty bez účtu u platformy? |
+| Cache-Control | HTTP hlavička, která říká, jak se má odpověď ukládat do cache. | Máme jinou strategii pro HTML a verzované statické soubory? |
+| ETag | Identifikátor verze zdroje, který pomáhá zjistit, jestli se obsah změnil. | Umíme šetřit přenos a přitom neposílat starý obsah? |
+| Core Web Vitals | Praktické metriky uživatelského výkonu: hlavní načtení obsahu, odezva na interakci a vizuální stabilita. | Která klíčová stránka je pomalá nebo vizuálně poskakuje? |
+
+Codyho komentář: Pokud se tým hádá o název metriky déle než o rozhodnutí, které má metrika podpořit, něco je vzhůru nohama. Nejdřív rozhodnutí, potom event.
+
+### Provoz, bezpečnost a dodavatelé
+
+| Pojem | Praktický význam | Otázka pro tým |
+| --- | --- | --- |
+| RPO | Kolik dat si můžeš dovolit ztratit při obnově. | Když spadne databáze, kolik hodin práce je přijatelná ztráta? |
+| RTO | Jak dlouho může trvat obnova služby. | Jak rychle musíme být zpět, aby dopad byl přijatelný? |
+| SLA | Smluvní závazek dostupnosti nebo podpory. | Slibujeme něco, co umíme měřit a splnit? |
+| SLO | Interní cíl spolehlivosti, který pomáhá řídit provoz. | Jaký provozní standard chceme držet i bez smluvní pokuty? |
+| Incident | Událost, která ohrožuje dostupnost, bezpečnost, data nebo důvěru. | Kdo rozhoduje v první hodině a kde je postup? |
+| Auditní log | Záznam důležitých akcí: změna rolí, export dat, smazání účtu, administrace. | Umíme zpětně zjistit, kdo udělal kritickou akci? |
+| Secret | Heslo, token, API klíč nebo jiný citlivý přístupový údaj. | Leží někde v dokumentu, logu nebo repozitáři? |
+| 2FA/MFA | Další faktor přihlášení nad rámec hesla. | Je zapnutý u e-mailu, DNS, hostingu, repozitáře a fakturace? |
+| Offboarding | Odebrání přístupů a převzetí vlastnictví při odchodu člověka nebo změně role. | Existuje checklist a někdo ho opravdu používá? |
+| Vendor lock-in | Závislost na dodavateli, ze které se špatně odchází. | Máme export, alternativu a plán odchodu? |
+| EU region | Provoz nebo uložení dat v evropském regionu dodavatele. | Stačí region, nebo potřebujeme i evropského provozovatele a jasné subdodavatele? |
+| DPA | Smlouva nebo dodatek pro zpracování osobních údajů mezi správcem a zpracovatelem. | Máme u dodavatele vyřešené role, účel, subdodavatele a incidenty? |
+
+Rychlé pravidlo pro nové nástroje: pokud neumíš během deseti minut vyplnit kartu dodavatele, nástroj ještě nepatří do produkčního procesu. Možná bude skvělý. Jen zatím nevíš, co bude stát při odchodu, incidentu nebo auditu.
+
+### Deset vět, které šetří týmové porady
+
+Tyhle věty si klidně dej do šablony issue, ADR nebo release checklistu:
+
+- „Jaké rozhodnutí tím chceme udělat lépe?“
+- „Jaká data k tomu opravdu potřebujeme?“
+- „Jde to změřit agregovaně?“
+- „Kdo je vlastník po spuštění?“
+- „Co se stane, když uživatel odmítne souhlas?“
+- „Jak člověk exportuje nebo smaže svá data?“
+- „Kde data fyzicky a smluvně končí?“
+- „Jak dlouho data držíme a kdo to vynucuje?“
+- „Jak vypadá rollback nebo cesta zpět?“
+- „Co můžeme nedělat, aby systém zůstal jednodušší?“
+
+Když na některou otázku nejde odpovědět, není to důvod k panice. Je to důvod nepředstírat hotovo. Což je otravné, ale pořád levnější než opravovat důvěru po špatném rozhodnutí.
+
 ## Zdroje
 
 - European Data Protection Board: Respect individuals' rights - přehled práv subjektů údajů v GDPR pro malé a střední organizace: https://www.edpb.europa.eu/sme-data-protection-guide/respect-individuals-rights_en
@@ -2498,6 +2584,7 @@ Tahle příloha je schválně obyčejná. Privacy-first provoz nestojí na jedno
 
 ## Pracovní log
 
+- 2026-07-11: Doplněna příloha se slovníčkem pro rychlé rozhodování: privacy a data pojmy, web/product analytics pojmy, provozní bezpečnostní pojmy a sada kontrolních vět pro týmové porady.
 - 2026-07-11: Doplněna praktická příloha se šablonami pro první audit: mapa dat, specifikace metriky, karta dodavatele, audit klíčové stránky a měsíční privacy-first review.
 - 2026-07-10: Doplněn závěr e-booku jako pracovní systém: výběr hlavní osy, čtyřtýdenní rytmus, jednostránkový provozní přehled, seznam věcí k vědomému nedělání a opakovaný checklist pro praktické použití.
 - 2026-07-10: Doplněna kapitola 12 s checklistem pro prvních 90 dní po spuštění: první týden provozu, první měsíc oprav tření, filtrování signálů ve druhém měsíci, 90denní review, privacy úklid, checklist a mini úkol.
