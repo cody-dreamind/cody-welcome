@@ -4834,6 +4834,165 @@ Vezmi jednu roli, kterou tým příště přijme nebo předá interně, a vyplň
 
 Potom udělej jednu konkrétní změnu: vytvoř onboarding checklist pro roli, odeber produkční přístup, který není potřeba, připrav anonymizovaný ukázkový ticket, nebo napiš pravidlo pro používání AI v této roli. Onboarding je ideální chvíle nastavit dobré návyky. Později už tým často jen vysvětluje, proč vznikl chaos, který šel předejít první týden.
 
+## Příloha: Offboarding zákazníka bez držení dat jako rukojmí
+
+Offboarding je poslední část zákaznické zkušenosti. Často se řeší až ve chvíli, kdy někdo ruší účet, žádá export, přechází ke konkurenci nebo končí pilot. To je pozdě. Privacy-first produkt má mít odchod navržený stejně vědomě jako onboarding: s jasným postupem, férovým exportem, bezpečným výmazem a bez obchodního vydírání.
+
+Špatná otázka zní: „Jak zákazníkovi ztížíme zrušení, aby si to rozmyslel?“
+
+Lepší otázka zní: „Jak zákazníkovi umožníme odejít tak, aby nám mohl znovu důvěřovat?“
+
+Odchod zákazníka nemusí být prohra. Někdy produkt nesedí, firma změnila proces, skončil projekt nebo se změnil rozpočet. Když je odchod čistý, zůstává šance na návrat, doporučení nebo aspoň klidné uzavření. Když je odchod chaotický, vzniká přesně ten typ nedůvěry, který marketing potom draze přelepuje hezkými slovy.
+
+### Zrušení účtu není bezpečnostní incident
+
+Zrušení účtu má být normální provozní scénář. Ne ruční výjimka, kterou umí jen jeden člověk ve firmě.
+
+U každého placeného produktu si napiš:
+
+- kdo může účet zrušit,
+- jestli se ruší předplatné, workspace, uživatelský účet nebo všechno najednou,
+- co se stane s aktivními uživateli,
+- kdy končí fakturace,
+- jak dlouho zůstane účet dostupný pro export,
+- kdy se data mažou nebo anonymizují,
+- co zůstává kvůli fakturaci, bezpečnosti nebo oprávněnému provoznímu důvodu,
+- kdo zákazníkovi potvrdí dokončení.
+
+Tato pravidla mají být viditelná před nákupem, ideálně na pricing stránce, v nápovědě nebo v účtu. Pokud se zákazník dozví pravidla až po žádosti o zrušení, už nejsi transparentní. Jsi překvapení v nejhorší možnou chvíli.
+
+### Export dat navrhni jako produktovou funkci
+
+Export není laskavost. Je to součást kontroly nad daty. Evropská komise i EDPB u práv jednotlivců popisují přístup k osobním údajům, výmaz a přenositelnost jako důležité oblasti ochrany dat; v produktu se to prakticky překládá do schopnosti najít, vysvětlit, předat a odstranit data podle jasného procesu. Odkazy jsou ve zdrojích.
+
+U SaaS produktu ale nejde jen o právní minimum. Jde o důvěru. Zákazník by měl vědět, co dokáže získat, v jakém formátu a jak dlouho po zrušení.
+
+Praktické exportní vrstvy:
+
+| Vrstva | Příklad | Doporučený přístup |
+| --- | --- | --- |
+| Účetní data | faktury, objednávky, daňové údaje | dostupné samostatně, oddělené od produktového exportu |
+| Produktová data | projekty, položky, nastavení, dokumenty | strukturovaný export v běžném formátu |
+| Uživatelská data | profily, role, historie přístupů | export podle oprávnění a účelu |
+| Přílohy | soubory, obrázky, nahrané dokumenty | balíček s manifestem nebo odkazy s expirací |
+| Auditní a bezpečnostní data | přihlášení, změny práv, bezpečnostní události | jen tam, kde to dává smysl a neohrozí jiné osoby nebo bezpečnost |
+
+Dobrá exportní funkce má:
+
+- srozumitelný název,
+- popis obsahu exportu,
+- formát, který jde otevřít i mimo produkt,
+- informaci o velikosti nebo době přípravy,
+- omezenou platnost odkazu ke stažení,
+- log, kdo export vytvořil,
+- možnost export znovu vygenerovat před definitivním výmazem.
+
+CSV je často dobrý začátek, ale nestačí na všechno. U složitějších dat použij kombinaci `CSV`, `JSON`, složky se soubory a jednoduchý `README`, který popíše strukturu. Export bez popisu je jako krabice kabelů po stěhování: technicky tam něco je, prakticky přeji hodně štěstí.
+
+### Výmaz rozděl na kroky, ne na magické tlačítko
+
+„Smazat účet“ zní jednoduše, ale v provozu má několik vrstev:
+
+1. Zastavit nové účtování nebo obnovu předplatného.
+2. Umožnit zákazníkovi stáhnout potřebná data.
+3. Odebrat aktivní přístup uživatelům.
+4. Smazat nebo anonymizovat produktová data.
+5. Vyřešit přílohy a dočasné exporty.
+6. Zapsat, co bylo provedeno a kdy.
+7. Omezit nebo ponechat jen data, která mají samostatný důvod, například fakturační evidenci.
+
+Praktický vzor stavů:
+
+| Stav | Co znamená | Co tým hlídá |
+| --- | --- | --- |
+| Aktivní | účet se normálně používá | běžná retence a přístupy |
+| Zrušení naplánováno | zákazník požádal o konec nebo skončí období | upozornění, export, potvrzení dopadu |
+| Pouze pro export | produkt už není aktivní, data lze stáhnout | omezený přístup a datum konce |
+| Výmaz běží | probíhá mazání nebo anonymizace | kontrola vrstev: databáze, soubory, exporty, logy |
+| Uzavřeno | zákazník dostal potvrzení | zůstávají jen data s jasným samostatným důvodem |
+
+Tento model pomáhá hlavně týmům, kde offboarding dělá support, finance a vývoj společně. Každý vidí, v jakém stavu účet je a co ještě chybí.
+
+### Nepleť retenci s obchodní nadějí
+
+Jedna věc je ponechat data po omezenou dobu, aby si zákazník mohl účet obnovit nebo stáhnout export. Jiná věc je držet data neurčitě, protože „třeba se vrátí“. Privacy-first provoz potřebuje konec životnosti.
+
+Rozumný offboarding text může znít:
+
+```text
+Po zrušení předplatného zůstane workspace 30 dní dostupný pouze pro export. Potom produktová data smažeme nebo anonymizujeme podle retenčních pravidel. Fakturační doklady uchováváme samostatně podle účetních povinností. Marketingový odběr můžete spravovat nezávisle na účtu.
+```
+
+Konkrétní lhůty si nastav podle produktu, smluv a právního posouzení. Důležité je, aby byly skutečné, technicky proveditelné a komunikované předem. Lhůta, kterou tým neumí dodržet, není pravidlo. Je to přání v převleku.
+
+### Odchod využij jako zpětnou vazbu, ne jako překážkovou dráhu
+
+Ptát se na důvod zrušení je v pořádku. Nutit zákazníka psát esej, volat obchodníkovi nebo projít tři retenční nabídky už v pořádku není.
+
+Dobrá otázka při zrušení:
+
+- „Co byl hlavní důvod odchodu?“
+- „Co vám chybělo k úspěchu?“
+- „Přejete si, abychom se ozvali za několik měsíců?“
+
+Špatný proces:
+
+- zrušení jde jen přes obchodní schůzku,
+- tlačítko je schované nebo pojmenované nejasně,
+- zákazník musí vysvětlit důvod, jinak nemůže pokračovat,
+- po zrušení automaticky spadne do marketingové sekvence,
+- export je dostupný jen ve vyšším plánu.
+
+Codyho komentář: Pokud produkt potřebuje zákazníka zamknout, aby neodešel, problém není v tlačítku zrušit. Problém je v hodnotě, onboardingu nebo fitu. Tlačítko jen říká pravdu nahlas.
+
+### Odděl účet, billing a marketing
+
+Zákazník, který ruší produkt, nemusí automaticky rušit všechno. A naopak člověk, který chce odejít z marketingu, nemá ztratit přístup k fakturám.
+
+Odděl minimálně:
+
+- produktový účet a workspace,
+- fakturaci a daňové doklady,
+- provozní e-maily,
+- marketingový newsletter,
+- supportní historii,
+- veřejný komunitní profil, pokud existuje.
+
+Toto oddělení snižuje chybovost. Support ví, co se vypíná. Finance ví, co musí zůstat. Marketing ví, že zrušení produktu není automatický souhlas s dalšími kampaněmi. Uživatel ví, že má kontrolu.
+
+### Checklist: Offboarding zákazníka
+
+- [ ] Zákazník umí najít, jak zrušit účet nebo předplatné.
+- [ ] Je jasné, kdo může zrušení provést.
+- [ ] Před zrušením je vidět dopad na fakturaci, uživatele a data.
+- [ ] Export dat je dostupný v použitelném formátu.
+- [ ] Export má popsaný obsah, expiraci odkazu a vlastníka.
+- [ ] Po zrušení existuje omezené období pro export, pokud to odpovídá produktu.
+- [ ] Produktová data, přílohy, exporty, logy a fakturace mají oddělená retenční pravidla.
+- [ ] Marketingový odběr je oddělený od produktového účtu.
+- [ ] Důvod odchodu je dobrovolný a stručný.
+- [ ] Zákazník dostane potvrzení, co bylo zrušeno a co se stane dál.
+- [ ] Support má interní postup pro zrušení, export, výmaz a eskalaci.
+- [ ] Tým pravidelně prochází důvody odchodů a uzavírá jednu zlepšovací akci.
+
+### Mini úkol
+
+Vezmi jeden existující produkt, pilot nebo službu a vyplň offboarding kartu:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Kdo může účet nebo službu zrušit? |  |
+| Kde zákazník najde postup zrušení? |  |
+| Jaká data si může exportovat? |  |
+| V jakém formátu export dostane? |  |
+| Jak dlouho po zrušení jsou data dostupná pro export? |  |
+| Co se smaže, co anonymizuje a co zůstává z jiného důvodu? |  |
+| Jak se oddělí produktový účet, fakturace a marketing? |  |
+| Jaké potvrzení zákazník dostane? |  |
+| Jaký jeden důvod odchodu budeme sledovat agregovaně? |  |
+
+Potom udělej jednu konkrétní změnu: napiš text o zrušení do nápovědy, přidej exportní tlačítko, popiš retenční lhůtu, odděl newsletter od produktového účtu nebo vytvoř interní checklist pro support. Dobrý offboarding je tichá známka zralého produktu. Nikdo ho nechválí v sales decku, ale každý si ho zapamatuje, když ho potřebuje.
+
 ## Zdroje
 
 - Keep a Changelog: Keep a Changelog 1.1.0 - principy lidsky psaného changelogu, typy změn a sekce pro nevydané změny: https://keepachangelog.com/en/1.1.0/
@@ -4893,6 +5052,7 @@ Potom udělej jednu konkrétní změnu: vytvoř onboarding checklist pro roli, o
 
 ## Pracovní log
 
+- 2026-07-11: Doplněna příloha o offboardingu zákazníka bez držení dat jako rukojmí: zrušení účtu jako běžný provozní scénář, export jako produktová funkce, vrstvy výmazu, oddělení retence od obchodní naděje, dobrovolná zpětná vazba, oddělení účtu, fakturace a marketingu, checklist a mini úkol; ověřeny oficiální zdroje Evropské komise a EDPB k právům jednotlivců.
 - 2026-07-11: Doplněna příloha o onboardingu nového člověka bez rozdání zbytečných přístupů a dat: první hodnota role, přístupy po vlnách, anonymizovaná testovací data, checklist prvního týdne, bezpečný první úkol, revize přístupů, dokumentace implicitních pravidel, checklist a mini úkol.
 - 2026-07-11: Doplněna příloha o kvalifikaci leadů bez agresivního profilování: definice fitu, přímé otázky místo skrytého sledování, vysvětlitelný stav leadu, malý scoring podle fitu, bolesti a timingu, CRM hygiena, follow-up s koncem, sdílení agregovaných signálů mezi marketingem, sales a produktem, checklist a mini úkol.
 - 2026-07-11: Doplněna příloha o changelogu a release notes jako tichém marketingu: rozdíl mezi interním changelogem a veřejnými poznámkami, průběžné zapisování změn, psaní podle dopadu, privacy-first distribuce, citlivé bezpečnostní změny, šablona, checklist a mini úkol; ověřeny zdroje Keep a Changelog a Semantic Versioning.
