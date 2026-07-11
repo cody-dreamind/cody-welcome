@@ -4489,6 +4489,187 @@ Vezmi posledních pět změn v produktu nebo na webu a přepiš je do této tabu
 
 Potom vyber jednu změnu a publikuj ji jako krátkou release poznámku na stabilní URL nebo do interního changelogu. Pokud změna souvisí s daty, exportem, oprávněními nebo bezpečností, přidej zvlášť větu o dopadu na soukromí a přístupy.
 
+## Příloha: Kvalifikace leadů bez agresivního profilování
+
+Kvalifikace leadů má jednu jednoduchou práci: pomoct týmu poznat, komu opravdu dokáže pomoct, kdo potřebuje jiný další krok a kdo se do aktuální nabídky nehodí. Nemá být tajný bodovací automat, který sbírá střípky chování po webu, e-mailu, reklamách a supportu jen proto, že to nástroj umí.
+
+Špatná otázka zní: „Jak přesně dokážeme lead skórovat?“
+
+Lepší otázka zní: „Jaké minimum informací potřebujeme, abychom člověku nabídli férový další krok?“
+
+Privacy-first kvalifikace není slepá. Jen odmítá digitální detektivku tam, kde stačí kontext, přímá otázka a rozumný obchodní úsudek. Malý SaaS nebo odborná firma většinou nepotřebuje vědět, že někdo otevřel tři články ve 22:14 a dvakrát najel myší na pricing. Potřebuje vědět, jestli má správný problém, správný segment, reálný časový rámec a důvod jednat.
+
+Codyho komentář: Lead scoring umí být užitečný sluha, ale velmi sebevědomý pán. Jakmile tým začne věřit číslu víc než tomu, co člověk skutečně napsal, máme z marketingu numerologii v SaaS tričku.
+
+### Začni definicí dobrého fitu
+
+Nejdřív si napiš, pro koho je produkt nebo služba teď opravdu dobrá. Ne pro všechny budoucí možnosti. Pro současný stav nabídky, týmu a provozu.
+
+Praktická fit karta:
+
+| Oblast | Otázka | Příklad |
+| --- | --- | --- |
+| Segment | Pro jaký typ firmy nebo týmu jsme silní? | B2B SaaS do 50 lidí, který řeší první placené piloty |
+| Problém | Jaký problém musí lead mít? | Neví, jak měřit aktivaci bez invazivní analytiky |
+| Spouštěč | Proč to řeší teď? | Blíží se launch, audit, migrace analytiky nebo růst trialů |
+| Rozsah | Jak velký problém zvládneme dodat? | Audit, návrh metrik, onboarding review, ne kompletní přepis produktu |
+| Data | Jaká data k práci opravdu potřebujeme? | Popis produktu, hlavní tok, anonymizované signály, ne export všech uživatelů |
+| Nefit | Koho teď obsloužit nechceme? | Projekt bez vlastníka, bez rozpočtu, nebo jen obecná poptávka „něco s AI“ |
+
+Tahle karta chrání sales i marketing. Když přijde lead mimo fit, není to osobní selhání. Je to informace: buď potřebuješ jinou nabídku, partnera, veřejný obsah, nebo slušné odmítnutí.
+
+### Ptej se přímo, ne skrytě
+
+Když potřebuješ vědět, v jaké situaci člověk je, často je lepší se zeptat než skládat profil z nepřímých signálů. Přímá otázka je srozumitelnější, kontrolovatelnější a méně invazivní.
+
+Dobré kvalifikační otázky:
+
+- Co teď řešíte?
+- Co vás k tomu vede právě teď?
+- Jak to řešíte dnes?
+- Co by se mělo změnit, aby spolupráce dávala smysl?
+- Kdo bude výsledek používat nebo schvalovat?
+- Jaký je nejbližší termín nebo rozhodnutí?
+- Jaká data by bylo potřeba zpracovat a kde dnes jsou?
+
+Slabší otázky:
+
+- Jaký máte rozpočet? Bez vysvětlení.
+- Kolik máte zaměstnanců? Pokud to nesouvisí s nabídkou.
+- Jaké nástroje používáte? Pokud z toho neumíš nabídnout lepší další krok.
+- Chcete růst rychleji? Ano, gratuluji, právě jsme objevili podnikání.
+
+Kvalifikační formulář nemá být výslech. Pokud otázka pomáhá připravit relevantní odpověď, napiš proč. Pokud slouží jen zvědavosti, pryč s ní.
+
+### Rozliš stav leadu od hodnoty člověka
+
+Lead není „horký“ proto, že klikl na tři věci. Je připravenější tehdy, když existuje konkrétní problém, vhodný segment a blízké rozhodnutí.
+
+Jednoduchý stavový model:
+
+| Stav | Co znamená | Férový další krok |
+| --- | --- | --- |
+| Nejasný kontext | člověk poslal obecný dotaz nebo jen čte obsah | poslat relevantní článek, checklist nebo jednu upřesňující otázku |
+| Dobrý problém, slabý timing | problém sedí, ale není teď priorita | nabídnout RSS, follow-up jen se souhlasem nebo domluvit návrat |
+| Dobrý fit | segment, problém a rozsah odpovídají nabídce | krátký kvalifikační hovor nebo konkrétní návrh dalšího kroku |
+| Vyžaduje partnera | problém je reálný, ale mimo vaše schopnosti | doporučit jinou cestu, nástroj nebo partnera |
+| Nefit | poptávka odporuje zaměření, hodnotám nebo možnostem | slušně odmítnout a neposílat další marketing bez důvodu |
+
+Tento model se dá vést v CRM, tabulce nebo jednoduchém issue. Důležité je, aby stav nebyl tajemná číselná magie. Každý stav má mít důvod a další krok.
+
+### Lead scoring drž malý a vysvětlitelný
+
+Pokud scoring používáš, drž ho jako pomocný nástroj, ne jako pravdu. Malý tým často vystačí se třemi dimenzemi:
+
+| Dimenze | Otázka | Skóre |
+| --- | --- | --- |
+| Fit | Patří lead do segmentu, kterému teď umíme pomoct? | nízký / střední / vysoký |
+| Bolest | Je problém konkrétní, častý nebo drahý? | nízká / střední / vysoká |
+| Timing | Existuje blízké rozhodnutí nebo událost? | žádný / neurčitý / blízký |
+
+Příklad:
+
+| Lead | Fit | Bolest | Timing | Další krok |
+| --- | --- | --- | --- | --- |
+| B2B SaaS před pilotem | vysoký | vysoká | blízký | kvalifikační hovor |
+| Firma obecně řeší marketing | nízký | neurčitá | žádný | poslat veřejný průvodce |
+| Zákazník chce evropskou analytiku | vysoký | střední | neurčitý | poslat checklist a nabídnout návrat za měsíc |
+
+Nepřidávej do scoringu citlivé nebo překvapivé signály. Nepotřebuješ odhadovat osobnost, ekonomickou situaci jednotlivce, soukromé chování ani detailní historii pohybu po webu. V B2B obchodu se dá mnoho rozhodnout z kontextu firmy, problému a přímé komunikace.
+
+### CRM není skládka poznámek
+
+CRM má pomoct navázat konverzaci a neztratit další krok. Nemá být místo, kam se kopíruje celý život leadu.
+
+Do CRM typicky patří:
+
+- kontakt potřebný pro odpověď,
+- firma nebo projektový kontext,
+- problém a segment,
+- stav leadu,
+- další krok a vlastník,
+- stručné poznámky z komunikace,
+- souhlas nebo preference pro marketing, pokud existují.
+
+Do CRM typicky nepatří:
+
+- kompletní zákaznické exporty,
+- osobní údaje třetích osob bez důvodu,
+- citlivé přílohy z pilotu,
+- přeposlané interní e-maily bez účelu,
+- subjektivní nebo nevěcné poznámky o člověku,
+- data z nástrojů, která obchod nikdy nepoužije.
+
+Praktické pravidlo: Poznámka v CRM má pomoci příští smysluplné interakci. Pokud by bylo trapné nebo rizikové ji zákazníkovi ukázat, pravděpodobně tam nepatří.
+
+### Follow-up má mít důvod a konec
+
+Kvalifikace leadů často selže ve follow-upu. Tým si řekne, že „ještě zkusíme připomenout“, a z jedné poptávky vznikne automatická série, která už dávno nesouvisí s původním dotazem.
+
+Privacy-first follow-up:
+
+- navazuje na konkrétní problém nebo slíbený další krok,
+- nepředstírá osobní znalost, kterou nemáš,
+- má rozumnou frekvenci,
+- končí po předem daném počtu pokusů,
+- respektuje odmítnutí hned,
+- nepřidává člověka do newsletteru bez samostatného důvodu nebo volby.
+
+Jednoduchý rytmus:
+
+| Situace | Follow-up |
+| --- | --- |
+| Člověk požádal o odpověď | odpovědět konkrétně a jednou připomenout, pokud je další krok očekávaný |
+| Člověk stáhl veřejnou šablonu bez e-mailu | žádný follow-up, protože není komu a proč |
+| Člověk se přihlásil k odběru | posílat podle slibu odběru |
+| Člověk odmítl další kontakt | ukončit marketingový kontakt a poznamenat důvod jen věcně |
+
+Codyho komentář: „Jen se připomínám“ je v pohodě jednou. Pošesté už to není připomenutí. To je malý inboxový horor s vlastním kalendářem.
+
+### Sales a marketing musí sdílet signály, ne osobní šum
+
+Marketing potřebuje vědět, které texty a kanály přivádí správné lidi. Sales potřebuje vědět, jaký problém člověk řeší. Produkt potřebuje vědět, co se opakuje. Nikdo z nich ale automaticky nepotřebuje detailní osobní historii každého kontaktu.
+
+Měsíční přehled může vypadat takto:
+
+| Signál | Co sdílet | Co nesdílet |
+| --- | --- | --- |
+| Zdroj leadů | agregovaně: články, partnerství, přímé odkazy | individuální sledovací historie |
+| Kvalita poptávek | segmenty, problémy, fit | osobní detaily bez účelu |
+| Opakované námitky | témata k obsahu nebo pricingu | celé přepisy hovorů |
+| Důvody nefitů | kategorie, které neumíme obsloužit | posměšné nebo subjektivní poznámky |
+| Důvody výhry | hodnoty, které rozhodly | interní informace zákazníka bez souhlasu |
+
+Takový přehled pomůže marketingu psát lepší obsah, produktu zlepšit onboarding a salesu přesněji kvalifikovat. Bez toho, aby se z CRM stal profilovací stroj.
+
+### Checklist: Kvalifikace leadů privacy-first
+
+- [ ] Máme napsanou fit kartu: segment, problém, spouštěč, rozsah, data a nefit.
+- [ ] Kvalifikační otázky jsou přímo navázané na další krok.
+- [ ] Formulář nevyžaduje pole, která nejsou nutná pro první odpověď.
+- [ ] Stav leadu je vysvětlitelný bez tajného skórování.
+- [ ] Pokud používáme scoring, pracuje s fit, bolestí a timingem, ne s invazivním profilem.
+- [ ] CRM obsahuje jen poznámky potřebné pro obchodní návaznost.
+- [ ] Follow-up má důvod, frekvenci a konec.
+- [ ] Odmítnutí dalšího kontaktu se respektuje okamžitě.
+- [ ] Marketing, sales a produkt sdílí agregované signály a anonymizované vzory.
+- [ ] Staré leady, neaktivní segmenty a nepotřebné poznámky se pravidelně čistí.
+
+### Mini úkol
+
+Vyber posledních 20 leadů, poptávek nebo demo requestů a vyplň tuto tabulku:
+
+| Kontrola | Pozorování | Jedna změna |
+| --- | --- | --- |
+| Které leady byly dobrý fit? |  |  |
+| Které otázky ve formuláři opravdu pomohly? |  |  |
+| Které pole nebo poznámka byla zbytečná? |  |  |
+| Který follow-up měl jasný důvod? |  |  |
+| Kde jsme sbírali víc dat, než bylo potřeba? |  |  |
+| Jaký obsah by pomohl nejasným leadům? |  |  |
+
+Potom udělej jednu konkrétní změnu: smaž jedno zbytečné kvalifikační pole, přepiš follow-up tak, aby měl jasný důvod, vytvoř fit kartu, zaveď stav „nefit“ bez další automatické sekvence nebo vyčisti staré CRM poznámky. Kvalifikace leadů má zlepšit rozhodnutí, ne proměnit každý kontakt v datový portrét.
+
 ## Zdroje
 
 - Keep a Changelog: Keep a Changelog 1.1.0 - principy lidsky psaného changelogu, typy změn a sekce pro nevydané změny: https://keepachangelog.com/en/1.1.0/
@@ -4548,6 +4729,7 @@ Potom vyber jednu změnu a publikuj ji jako krátkou release poznámku na stabil
 
 ## Pracovní log
 
+- 2026-07-11: Doplněna příloha o kvalifikaci leadů bez agresivního profilování: definice fitu, přímé otázky místo skrytého sledování, vysvětlitelný stav leadu, malý scoring podle fitu, bolesti a timingu, CRM hygiena, follow-up s koncem, sdílení agregovaných signálů mezi marketingem, sales a produktem, checklist a mini úkol.
 - 2026-07-11: Doplněna příloha o changelogu a release notes jako tichém marketingu: rozdíl mezi interním changelogem a veřejnými poznámkami, průběžné zapisování změn, psaní podle dopadu, privacy-first distribuce, citlivé bezpečnostní změny, šablona, checklist a mini úkol; ověřeny zdroje Keep a Changelog a Semantic Versioning.
 - 2026-07-11: Doplněna příloha o prvním placeném pilotu bez datového chaosu: rozdíl mezi trialem a pilotem, definice výsledku, pilot karta, minimalizace dat po dávkách, komunikační rytmus, předem domluvené vyhodnocení, checklist a mini úkol.
 - 2026-07-11: Doplněna příloha o supportu bez datového nepořádku: rozdělení supportních dat podle účelu, minimální dotazy, práce se screenshoty a přílohami, věcné interní poznámky, oddělení supportu od marketingu, proces pro práva uživatelů, checklist a mini úkol; při psaní ověřeny zdroje EDPB a Evropské komise k právům subjektů údajů, rolím správce/zpracovatele a bezpečnostním incidentům.
