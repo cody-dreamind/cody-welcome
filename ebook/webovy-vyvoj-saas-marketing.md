@@ -3381,10 +3381,188 @@ Připrav první týdenní review pro svůj web nebo SaaS:
 
 Když po review nevznikne žádné rozhodnutí, neznamená to, že tým přemýšlel hluboce. Často to znamená, že jen hezky obešel problém a vrátil ho do příštího týdne. Produktové problémy mají rády recyklaci. Nedávej jim kompostér.
 
+## Příloha: Privacy-first formuláře pro leady, registrace a support
+
+Formulář je malá věc s velkým dopadem. Na webu často rozhoduje o tom, jestli člověk udělá další krok. V SaaS zase otevírá účet, demo, trial, support ticket nebo billing. A protože formulář sbírá data přímo od člověka, je to také místo, kde se privacy-first hodnota buď prokáže, nebo rozpadne na prach.
+
+Dobrá otázka nezní: „Kolik polí ještě snese konverzní poměr?“
+
+Lepší otázka zní: „Co opravdu potřebujeme pro nejbližší další krok a jak to člověku vysvětlíme bez právnické mlhy?“
+
+Evropská komise v přehledu principů GDPR připomíná mimo jiné účelové omezení, minimalizaci dat, transparentnost a omezení uchování. V praxi to pro formuláře znamená jednoduché pravidlo: každé pole musí mít účel, vlastnictví a dobu života. Pokud je nemá, je to kandidát na smazání.
+
+### Začni účelem formuláře
+
+Nejdřív napiš jednu větu:
+
+„Tento formulář slouží k tomu, aby člověk mohl ___ a my mohli ___.“
+
+Příklady:
+
+- Demo request: „Člověk si může domluvit ukázku a my můžeme ověřit, jestli produkt odpovídá jeho situaci.“
+- Trial registrace: „Člověk si může založit workspace a my mu můžeme poslat přístupové a provozní zprávy.“
+- Support: „Zákazník může nahlásit problém a my ho můžeme vyřešit v konkrétním účtu.“
+- Newsletter: „Člověk může dostávat nové články a my mu je můžeme posílat, dokud odběr neukončí.“
+
+Jakmile věta nejde napsat bez kličkování, formulář pravděpodobně míchá víc účelů najednou. Typický hřích: poptávkový formulář, který současně sbírá lead, přihlašuje do newsletteru, ptá se na rozpočet, nutí telefon a ještě přidává marketingový souhlas jako šedý bonus. To není chytré. To je datový guláš s hezkým tlačítkem.
+
+### Rozděl pole na nutná, užitečná a zvědavá
+
+U každého pole si napiš kategorii:
+
+| Pole | Kategorie | Proč ho potřebujeme | Kdy ho můžeme smazat |
+| --- | --- | --- | --- |
+| E-mail | Nutné | Odpověď na poptávku nebo přihlášení | Po vyřízení nebo podle retenčního pravidla |
+| Jméno | Užitečné | Lidské oslovení v komunikaci | Pokud komunikace skončí |
+| Firma | Užitečné | Kontext B2B poptávky | Pokud z leadu nic nebude |
+| Telefon | Často zvědavé | Potřebný jen při domluveném hovoru | Když není výslovně nutný pro další krok |
+| Rozpočet | Kontextové | Pomáhá kvalifikovat projekt | Pokud je dobrovolný a férově vysvětlený |
+| Velikost týmu | Kontextové | Pomáhá vybrat plán nebo onboarding | Po ukončení obchodního procesu |
+
+Nutné pole je takové, bez kterého nejde splnit bezprostřední účel. Užitečné pole pomáhá, ale nesmí zablokovat člověka, který ho nechce nebo neumí vyplnit. Zvědavé pole existuje hlavně proto, že by se „mohlo hodit“. To je nejdražší druh pole, protože zvyšuje tření, odpovědnost i riziko.
+
+Praktické pravidlo:
+
+- První krok sbírá minimum.
+- Další informace si vyžádej až ve chvíli, kdy jsou opravdu potřeba.
+- Volitelná pole označ jako volitelná a vysvětli, proč pomáhají.
+- Citlivá data do běžných marketingových formulářů vůbec nepouštěj.
+
+### Mikrotext má vysvětlovat, ne uklidňovat
+
+Věta „Vaše data jsou u nás v bezpečí“ je hezká, ale sama o sobě nic neříká. Lepší mikrotext je konkrétní:
+
+- „E-mail použijeme jen pro odpověď na poptávku.“
+- „Telefon je volitelný. Zavoláme jen v případě, že ho vyplníte.“
+- „Do newsletteru vás nepřidáme bez samostatného souhlasu.“
+- „Přílohu nahrajte jen tehdy, pokud neobsahuje zbytečné osobní údaje.“
+- „Po vyřízení požadavku tiket ponecháme podle interní retenční lhůty.“
+
+Takový text snižuje nejistotu a zároveň nutí tým vědět, co se s daty opravdu děje. Pokud neumíš mikrotext napsat konkrétně, není problém v copywritingu. Problém je v procesu.
+
+### Souhlas nemíchej s hlavní akcí
+
+Evropská komise popisuje několik situací, kdy lze osobní data zpracovávat, například souhlas, smluvní povinnost, právní povinnost nebo legitimní zájem. U formulářů z toho plyne praktická věc: ne všechno se má řešit jedním univerzálním checkboxem.
+
+Příklady:
+
+- Registrace do SaaS typicky potřebuje data pro vytvoření a provoz účtu. To není totéž jako souhlas s marketingovým newsletterem.
+- Poptávkový formulář potřebuje kontakt pro odpověď. To neznamená automatické přihlášení do kampaně.
+- Support ticket potřebuje technické detaily problému. To neznamená povolení použít obsah tiketu v případové studii.
+
+Marketingový souhlas má být samostatný, srozumitelný a nepředzaškrtnutý. Když člověk formulář odešle bez marketingového souhlasu, pořád má dostat odpověď na poptávku, pokud je to účel formuláře. Jinak řečeno: službu neber jako rukojmí pro newsletter. Newsletter se má získat hodnotou, ne nenápadným checkboxem.
+
+### Formulář navrhuj jako produktovou cestu
+
+Privacy-first formulář není jen méně polí. Je to celý tok:
+
+1. Člověk chápe, proč formulář existuje.
+2. Vidí, co se stane po odeslání.
+3. Vyplňuje jen údaje pro nejbližší další krok.
+4. Dostane potvrzení, které odpovídá realitě.
+5. Tým ví, kde data skončila.
+6. Existuje retenční pravidlo a způsob smazání.
+
+U demo formuláře může potvrzení říkat:
+
+„Díky, ozveme se do dvou pracovních dnů. Údaje použijeme pro přípravu odpovědi a domluvu ukázky. Do marketingového odběru vás nepřidáváme.“
+
+U trial registrace:
+
+„Workspace je vytvořený. E-mail používáme pro přihlášení, bezpečnostní upozornění a provozní zprávy k účtu. Marketingový odběr je samostatný.“
+
+Tohle nejsou právní zásady. Jsou to produktové věty, které mají odpovídat skutečnému provozu.
+
+### Měř formuláře bez špehování lidí
+
+Pro zlepšování formulářů obvykle stačí agregované signály:
+
+- počet zobrazení formuláře,
+- počet úspěšných odeslání,
+- počet validačních chyb podle pole,
+- počet opuštění mezi kroky u vícekrokového formuláře,
+- kvalita přijatých poptávek podle interního hodnocení,
+- opakované dotazy lidí po odeslání.
+
+Nepotřebuješ nahrávat každou session, sledovat kurzor a spojovat každého návštěvníka s reklamním profilem. Pokud má formulář 12 polí a lidé odcházejí, první hypotéza není tajemná: možná chceš moc věcí moc brzy. Sherlock by si dal kafe a škrtl pět polí.
+
+Praktický test:
+
+1. Zkrať formulář na pole nutná pro první odpověď.
+2. Ostatní informace přesuň do následného e-mailu, onboardingu nebo schůzky.
+3. Měř agregovaně dokončení a kvalitu poptávek po dobu 30 dní.
+4. Pokud kvalita neklesla a dokončení vzrostlo, kratší formulář vyhrál.
+
+### Příklady minimálních formulářů
+
+Demo pro B2B SaaS:
+
+| Pole | Povinnost | Poznámka |
+| --- | --- | --- |
+| Pracovní e-mail | Povinné | Kam odpovědět |
+| Firma | Povinné nebo volitelné podle segmentu | Kontext pro demo |
+| Co chcete řešit | Povinné | Krátký text, největší hodnota pro přípravu |
+| Telefon | Volitelné | Jen pokud člověk chce zavolat |
+
+Kontakt na službu:
+
+| Pole | Povinnost | Poznámka |
+| --- | --- | --- |
+| E-mail | Povinné | Odpověď |
+| Typ projektu | Volitelné výběrové pole | Pomáhá nasměrovat odpověď |
+| Zpráva | Povinné | Hlavní obsah poptávky |
+| Rozpočet | Volitelné | Vysvětlit, že pomáhá navrhnout rozsah |
+
+Newsletter:
+
+| Pole | Povinnost | Poznámka |
+| --- | --- | --- |
+| E-mail | Povinné | Jediný nutný údaj |
+| Témata | Volitelné | Pokud opravdu posíláš segmentovaný obsah |
+
+Support:
+
+| Pole | Povinnost | Poznámka |
+| --- | --- | --- |
+| E-mail nebo účet | Povinné | Identifikace zákazníka |
+| Typ problému | Povinné | Rychlejší triage |
+| Popis | Povinné | Co se děje |
+| Příloha | Volitelné | Upozornit na zbytečná osobní data |
+
+### Checklist: Privacy-first formulář
+
+- [ ] Formulář má jednu hlavní úlohu napsanou jednou větou.
+- [ ] Každé pole má jasný účel a vlastníka.
+- [ ] Povinná jsou jen pole nutná pro nejbližší další krok.
+- [ ] Volitelná pole jsou opravdu volitelná a vysvětlená.
+- [ ] Marketingový souhlas není spojený s odesláním poptávky nebo registrací.
+- [ ] Mikrotext říká, k čemu se data použijí.
+- [ ] Potvrzení po odeslání říká, co se stane dál.
+- [ ] Data z formuláře nekončí automaticky v nástrojích, které je nepotřebují.
+- [ ] Existuje retenční pravidlo pro leady, tikety a neaktivní účty.
+- [ ] Měření formuláře používá agregované signály, ne profilování jednotlivců.
+- [ ] Formulář má popisky, chybové stavy a jde použít na mobilu i klávesnicí.
+- [ ] Tým umí vyřídit žádost o přístup, opravu nebo smazání dat.
+
+### Mini úkol
+
+Vyber jeden formulář, který má obchodní nebo produktový význam. Vyplň tuto tabulku:
+
+| Pole | Povinné? | Účel | Co se stane, když pole smažeme? | Retence |
+| --- | --- | --- | --- | --- |
+|  |  |  |  |  |
+|  |  |  |  |  |
+|  |  |  |  |  |
+
+Potom udělej jednu konkrétní změnu: smaž jedno zbytečné pole, přepiš mikrotext, odděl newsletterový souhlas, doplň potvrzení po odeslání nebo nastav pravidlo mazání starých leadů. Formuláře jsou ideální místo pro privacy-first práci: malá změna, viditelný dopad, méně dat v batohu.
+
 ## Zdroje
 
 - European Data Protection Board: Respect individuals' rights - přehled práv subjektů údajů v GDPR pro malé a střední organizace: https://www.edpb.europa.eu/sme-data-protection-guide/respect-individuals-rights_en
 - European Commission: Information for individuals - praktický přehled práv jednotlivců podle ochrany osobních údajů v EU: https://commission.europa.eu/law/law-topic/data-protection/information-individuals_en
+- European Commission: Principles of the GDPR - přehled principů jako transparentnost, účelové omezení, minimalizace dat a omezení uchování: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr_en
+- European Commission: What data can we process and under which conditions? - praktické vysvětlení účelu, rozsahu a základních pravidel zpracování osobních údajů: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr/overview-principles/what-data-can-we-process-and-under-which-conditions_en
+- European Commission: When can personal data be processed? - přehled právních základů zpracování osobních údajů podle GDPR: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/legal-grounds-processing-data/grounds-processing/when-can-personal-data-be-processed_en
 - European Data Protection Board: Guidelines 9/2022 on personal data breach notification under GDPR - pokyny k oznamování porušení zabezpečení osobních údajů: https://www.edpb.europa.eu/documents/guideline/guidelines-92022-on-personal-data-breach-notification-under-gdpr_en
 - EUR-Lex: Directive (EU) 2022/2555, NIS2 Directive - právní text směrnice o vysoké společné úrovni kybernetické bezpečnosti v EU: https://eur-lex.europa.eu/eli/dir/2022/2555/oj/eng
 - ENISA: Cybersecurity guide for SMEs - 12 steps to securing your business - praktický bezpečnostní základ pro malé a střední firmy: https://www.enisa.europa.eu/publications/cybersecurity-guide-for-smes
@@ -3426,6 +3604,7 @@ Když po review nevznikne žádné rozhodnutí, neznamená to, že tým přemý�
 
 ## Pracovní log
 
+- 2026-07-11: Doplněna příloha o privacy-first formulářích pro leady, registrace a support: účel formuláře, rozdělení polí na nutná, užitečná a zvědavá, mikrotext, oddělení souhlasu od hlavní akce, agregované měření, příklady minimálních formulářů, checklist a mini úkol; přidány ověřené zdroje Evropské komise k principům GDPR a právním základům zpracování.
 - 2026-07-11: Doplněna příloha o týdenním produktovém review bez dashboardového divadla: tři vstupy, oddělení signálu od nálady, karta rozhodnutí, privacy-first kontrola dopadu, 30minutový rytmus, checklist a mini úkol.
 - 2026-07-11: Doplněna příloha o privacy-first landing page za jeden den: zadání stránky jednou větou, obsahová kostra, formulář s vysvětlením dat, měření bez slídění, kontrola před publikací, textová šablona, checklist a mini úkol.
 - 2026-07-11: Doplněna příloha o obsahovém kalendáři bez obsahové vaty: obsahová hypotéza, typy obsahu podle práce, měsíční tematický rytmus, redakční karta, privacy-first distribuce, údržba obsahu, checklist a mini úkol.
