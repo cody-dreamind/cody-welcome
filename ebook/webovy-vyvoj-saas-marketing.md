@@ -5542,8 +5542,177 @@ Vyber jednu stránku, která má nejvíc externích skriptů, a vyplň krátkou 
 
 Potom udělej jednu opravu: smaž nepoužívaný tag, přesuň marketingový skript za souhlas, nahraď embed statickým náhledem, oprav text banneru nebo doplň trvalý odkaz na změnu nastavení. Cookie audit nemá skončit pocitem viny. Má skončit menším, rychlejším a pravdivějším webem.
 
+## Příloha: Tajemství, API klíče a konfigurace bez úniku do repozitáře
+
+Tajemství v aplikaci nejsou tajemná proto, že o nich nikdo nemluví. Jsou tajemná proto, že kdo je získá, může se tvářit jako aplikace, administrátor, integrační služba nebo platební systém. API klíče, databázová hesla, OAuth secrety, SSH klíče, webhook podpisové klíče, tokeny do CI a privátní certifikáty jsou malé řetězce s velkým dopadem.
+
+Špatná otázka zní: „Kam ten klíč rychle vložíme, aby deploy prošel?“
+
+Lepší otázka zní: „Kdo má tento klíč vlastnit, kde bude uložený, kdo ho může použít, jak ho otočíme a co uděláme, když unikne?“
+
+OWASP Secrets Management Cheat Sheet zdůrazňuje celý životní cyklus tajemství: vytvoření, uložení, přístup, rotaci, revokaci, audit a incidentní reakci. Twelve-Factor App zase dlouhodobě doporučuje držet konfiguraci odděleně od kódu, typicky v prostředí. GitHub Docs popisují secret scanning jako ochranu proti hardcodovaným přístupovým údajům v historii repozitáře. Odkazy jsou ve zdrojích.
+
+Codyho komentář: Tajemství v repozitáři je jako náhradní klíč pod rohožkou, jen ta rohožka má fulltext, forky a nekonečnou historii. Praktické? Pět minut. Bolestivé? Klidně roky.
+
+### Nejprve rozděl konfiguraci a tajemství
+
+Ne každá konfigurace je secret. Je dobré to rozlišovat, protože se podle toho liší uložení, přístup i audit.
+
+| Typ | Příklad | Jak s tím zacházet |
+| --- | --- | --- |
+| Veřejná konfigurace | název aplikace, veřejná URL, zapnutý jazyk, feature flag bez citlivého dopadu | může být v kódu nebo veřejné konfiguraci |
+| Prostředí | produkční/staging URL, region, název bucketu, režim logování | oddělit podle prostředí, review před změnou |
+| Tajemství | databázové heslo, API token, privátní klíč, webhook secret | držet ve správci tajemství nebo chráněném prostředí |
+| Vysoce citlivé tajemství | produkční root token, podpisový klíč, master encryption key | minimální přístup, silný audit, rotace, nouzový postup |
+
+Praktické pravidlo: pokud by zveřejnění hodnoty umožnilo přístup, změnu dat, podpis požadavku, obejití limitu nebo vydávání se za systém, je to secret. Nedávej ho do kódu, dokumentace, screenshotů, logů, issue ani chatu.
+
+### Lokální vývoj nesmí být divoký západ
+
+Nejčastější úniky nevznikají v sofistikovaném útoku. Vznikají v lokálním vývoji: `.env` soubor omylem v gitu, screenshot terminálu, debug log s tokenem, testovací klíč vložený do issue, osobní poznámka s produkčním heslem.
+
+Bezpečnější lokální režim:
+
+- v repozitáři drž jen `.env.example` bez skutečných hodnot,
+- skutečné `.env` soubory dej do `.gitignore`,
+- produkční tajemství nepoužívej lokálně, pokud to není výslovně nutné,
+- pro vývoj používej oddělené testovací klíče s omezeným oprávněním,
+- pravidelně kontroluj, že logy nevypisují celé proměnné prostředí,
+- novému člověku nedávej produkční token jen proto, aby „rychle něco vyzkoušel“.
+
+Dobrý `.env.example` nevypadá takto:
+
+```text
+STRIPE_SECRET_KEY=sk_live_...
+DATABASE_URL=postgres://real-user:real-password@prod...
+```
+
+Vypadá takto:
+
+```text
+DATABASE_URL=postgres://user:password@localhost:5432/app_dev
+PAYMENT_API_KEY=replace-with-test-key
+WEBHOOK_SECRET=replace-with-local-webhook-secret
+```
+
+Příklad má učit tvar konfigurace, ne rozdávat funkční klíče. To zní samozřejmě. A přesto je historie repozitářů plná malých „samozřejmostí“, které někdo musel v pátek večer rotovat.
+
+### CI/CD tajemství chraň podle prostředí
+
+CI/CD pipeline často drží nejsilnější přístupy: deploy tokeny, registry hesla, cloud credentials, podpisové klíče, přístup k produkčním proměnným. Pokud pipeline může nasadit produkci, její tajemství jsou produkční riziko.
+
+Praktické rozdělení:
+
+| Prostředí | Tajemství | Pravidlo |
+| --- | --- | --- |
+| Pull request z cizí větve | žádná produkční tajemství | testovat bez citlivých klíčů nebo jen s bezpečnými mocky |
+| Staging | staging tokeny, staging databáze, testovací platební režim | oddělit od produkce, omezená oprávnění |
+| Produkce | deploy tokeny, produkční API klíče, podpisové klíče | chráněné prostředí, schválení, audit |
+| Release | podpis artefaktů, publikace balíčků | minimální oprávnění a jasný vlastník |
+
+Pipeline by neměla mít jeden univerzální token, který umí všechno. Lepší je několik omezených přístupů podle úkolu: build, test, deploy, publikace artefaktu, invalidace cache. Když unikne token s malým rozsahem, bolí to méně než „jeden klíč vládne všem“.
+
+Privacy-first dopad je přímý: produkční tajemství často otevírají cestu k osobním datům. Neřešíš jen technickou čistotu. Řešíš, kdo může nepřímo získat přístup k zákaznickým datům přes deploy, databázi, logy nebo exporty.
+
+### Rotace není trest, ale běžná údržba
+
+Každé tajemství má mít odpověď na tři otázky:
+
+- Kdo ho vlastní?
+- Jak ho otočíme?
+- Co se rozbije při otočení?
+
+Bez těchto odpovědí se rotace odkládá, dokud nepřijde incident. A incident je nejhorší chvíle učit se, kde je klíč nastavený.
+
+Praktická karta tajemství:
+
+| Pole | Odpověď |
+| --- | --- |
+| Název tajemství |  |
+| Účel |  |
+| Prostředí | lokál / staging / produkce |
+| Vlastník |  |
+| Kde je uložené |  |
+| Kdo má přístup |  |
+| Jaká oprávnění dává |  |
+| Kdy bylo naposledy rotované |  |
+| Jak se rotuje |  |
+| Jak poznáme, že stará hodnota už nefunguje |  |
+| Co udělat při úniku |  |
+
+Rotaci testuj na méně kritických klíčích dřív než u produkčního jádra. Začni třeba webhook secretem ve stagingu, testovacím API klíčem nebo tokenem pro neprodukční deploy. Cílem je naučit tým postup bez adrenalinu.
+
+### Když secret unikne, nejdřív ho zneplatni
+
+Únik tajemství se neřeší jen tím, že se smaže řádek z repozitáře. Historie, cache, forky, logy a lokální kopie mohou hodnotu dál držet. První praktický krok je zneplatnění nebo rotace uniklého tajemství.
+
+Nouzový postup:
+
+1. Urči, jaké tajemství uniklo a k čemu dává přístup.
+2. Okamžitě ho revokuj nebo otoč u poskytovatele.
+3. Nasaď novou hodnotu do správného secret storu.
+4. Ověř, že aplikace funguje s novou hodnotou.
+5. Zkontroluj logy a auditní stopy pro podezřelé použití staré hodnoty.
+6. Vyčisti repozitář nebo dokumentaci tak, aby hodnota dál nebyla snadno dostupná.
+7. Zapiš incident a nápravné kroky.
+
+Pokud secret umožňoval přístup k osobním datům, posuzuj ho jako potenciální datový incident, ne jen jako technický nepořádek. Možná se nic nestalo. Ale to musí vyjít z ověření, ne z naděje.
+
+### Secret scanning je pojistka, ne strategie
+
+Automatická detekce tajemství v repozitáři je užitečná. GitHub secret scanning podle dokumentace prochází historii repozitáře a hledá známé typy tajemství; push protection může některé úniky zachytit ještě před uložením do repozitáře. To je dobrý guardrail.
+
+Ale guardrail není licence jezdit poslepu.
+
+Potřebuješ i návyky:
+
+- code review odmítne hardcodované tajemství,
+- `.env.example` neobsahuje skutečné hodnoty,
+- dokumentace používá placeholdery,
+- screenshoty a logy se kontrolují před sdílením,
+- CI proměnné mají vlastníka,
+- přístupy se revidují po odchodu člověka nebo dodavatele,
+- staré klíče se ruší, ne jen zapomínají.
+
+Secret scanning pomáhá najít chyby. Dobrá správa tajemství snižuje šanci, že chyba vůbec vznikne.
+
+### Checklist: Tajemství a konfigurace
+
+- [ ] Repozitář obsahuje `.env.example`, ale ne skutečné `.env` hodnoty.
+- [ ] Produkční tajemství nejsou v kódu, dokumentaci, issue, chatu ani logu.
+- [ ] Staging a produkce používají oddělené klíče a databáze.
+- [ ] CI/CD tajemství jsou rozdělená podle prostředí a mají minimální oprávnění.
+- [ ] Pull requesty z nedůvěryhodného kontextu nedostávají produkční secrets.
+- [ ] Každé důležité tajemství má vlastníka, uložiště a rotační postup.
+- [ ] Víme, jak rychle revokovat databázové heslo, API token, webhook secret a deploy klíč.
+- [ ] Secret scanning nebo podobná kontrola je zapnutá tam, kde dává smysl.
+- [ ] Logy maskují tokeny, hesla, autorizační hlavičky a citlivé query parametry.
+- [ ] Offboarding člověka nebo dodavatele zahrnuje kontrolu osobních tokenů a automatizací.
+- [ ] Po úniku tajemství se hodnota revokuje, ne jen maže z viditelného souboru.
+- [ ] Incidentní plán počítá se scénářem uniklého klíče.
+
+### Mini úkol
+
+Vyber jednu aplikaci, repozitář nebo CI pipeline a vyplň kartu:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Kde jsou uložena produkční tajemství? |  |
+| Kdo k nim má přístup? |  |
+| Která tajemství jsou sdílená mezi více službami? |  |
+| Který klíč by při úniku způsobil největší škodu? |  |
+| Jak ho revokujeme nebo otočíme? |  |
+| Kde se mohou tajemství omylem objevit v logu nebo dokumentaci? |  |
+| Je zapnutá detekce tajemství v repozitáři? |  |
+| Jaká jedna změna sníží riziko nejvíc? |  |
+
+Potom udělej jednu konkrétní změnu: přidej `.env.example`, zapni secret scanning, odeber produkční secret z lokálního návodu, rozděl staging a produkční klíč, nastav maskování logů nebo napiš rotační postup pro jeden kritický token. Tajemství se nechrání tím, že se o nich nemluví. Chrání se tím, že mají vlastníka, hranice a plán.
+
 ## Zdroje
 
+- OWASP Cheat Sheet Series: Secrets Management Cheat Sheet - doporučení pro životní cyklus tajemství, ukládání, přístup, rotaci, revokaci, audit a incidentní reakci: https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html
+- The Twelve-Factor App: Config - princip oddělení konfigurace od kódu a používání proměnných prostředí pro konfiguraci aplikace: https://12factor.net/config
+- GitHub Docs: Secret scanning - detekce hardcodovaných přístupových údajů v historii repozitáře a ochrana proti úniku secrets: https://docs.github.com/code-security/secret-scanning/about-secret-scanning
 - Keep a Changelog: Keep a Changelog 1.1.0 - principy lidsky psaného changelogu, typy změn a sekce pro nevydané změny: https://keepachangelog.com/en/1.1.0/
 - Semantic Versioning: Semantic Versioning 2.0.0 - pravidla MAJOR.MINOR.PATCH a komunikace kompatibility veřejného API: https://semver.org/
 - European Commission: AI Act - rizikový přístup, GPAI pravidla, transparentní povinnosti a aktuální harmonogram uplatňování AI Actu: https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai
@@ -5603,6 +5772,7 @@ Potom udělej jednu opravu: smaž nepoužívaný tag, přesuň marketingový skr
 
 ## Pracovní log
 
+- 2026-07-11: Doplněna příloha o tajemstvích, API klíčích a konfiguraci bez úniku do repozitáře: rozdělení konfigurace a secrets, lokální vývoj, CI/CD tajemství, rotace, postup při úniku, secret scanning, checklist a mini úkol; ověřeny zdroje OWASP, Twelve-Factor App a GitHub Docs.
 - 2026-07-11: Doplněna příloha o cookie a tracking auditu bez otravných bannerů: inventura cookies, storage, pixelů a embedů, rozdělení podle nutnosti, test tří stavů, dvoukrokové načítání externího obsahu, pravdivý banner, checklist a mini úkol; ověřeny oficiální zdroje Evropské komise a EDPB k cookies a technickému rozsahu ePrivacy.
 - 2026-07-11: Doplněna příloha o zálohách a obnově bez falešného pocitu bezpečí: kategorie obnovy, RPO/RTO lidsky, vlastnictví a rytmus záloh, test obnovy, částečná obnova, retence záloh, runbook, checklist a mini úkol.
 - 2026-07-11: Doplněna příloha o incidentním plánu pro malé SaaS týmy bez krizového divadla: detekce incidentu, rozlišení technické a datové vrstvy, role v malém týmu, první hodina, incident log, komunikace, postmortem, checklist a mini úkol; ověřeny oficiální zdroje Evropské komise, EDPB a ENISA k data breach a bezpečnostní hygieně.
