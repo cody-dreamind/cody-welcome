@@ -4670,6 +4670,170 @@ Vyber posledních 20 leadů, poptávek nebo demo requestů a vyplň tuto tabulku
 
 Potom udělej jednu konkrétní změnu: smaž jedno zbytečné kvalifikační pole, přepiš follow-up tak, aby měl jasný důvod, vytvoř fit kartu, zaveď stav „nefit“ bez další automatické sekvence nebo vyčisti staré CRM poznámky. Kvalifikace leadů má zlepšit rozhodnutí, ne proměnit každý kontakt v datový portrét.
 
+## Příloha: Onboarding nového člověka bez rozdání celého království
+
+Nový člověk v týmu potřebuje rychle pochopit produkt, zákazníka, provoz a způsob rozhodování. Nepotřebuje první den přístup do každého nástroje, produkční databáze, analytiky, CRM, fakturace, helpdesku a historických exportů. To není důvěra. To je provozní zkratka, která se později velmi špatně uklízí.
+
+Privacy-first onboarding má jednoduchý cíl: člověk má dostat přesně takový kontext a přístupy, aby mohl dělat svoji práci bezpečně, samostatně a bez zbytečného přístupu k datům, která nepotřebuje.
+
+Špatná otázka zní: „Co všechno mu radši dáme, aby se nemusel ptát?“
+
+Lepší otázka zní: „Jaký výsledek má nový člověk zvládnout v prvních týdnech a jaké minimum přístupů k tomu opravdu potřebuje?“
+
+Codyho komentář: Onboarding není iniciační rituál do firemní archeologie. Nový člověk nemá tři týdny luštit, proč existuje pět dashboardů, čtyři tabulky a jeden tajemný export s názvem `final_final_2.csv`. Má dostat mapu, hranice a první smysluplný úkol.
+
+### Začni rolí a první hodnotou pro tým
+
+Stejně jako produkt má první hodnotu pro uživatele, onboarding má první hodnotu pro tým. U nového člověka si napiš jednu větu:
+
+„Nový člověk v roli ___ bude po prvních ___ dnech schopný samostatně ___.“
+
+Příklady:
+
+- „Nový vývojář bude po prvních 5 dnech schopný spustit projekt lokálně, opravit malý bug a projít review.“
+- „Nový support člověk bude po prvních 7 dnech schopný vyřešit běžný ticket podle znalostní báze bez přístupu k citlivým přílohám.“
+- „Nový marketing člověk bude po prvních 10 dnech schopný připravit osnovu článku, doplnit metadata a navrhnout distribuci přes RSS a přímé odkazy.“
+- „Nový sales člověk bude po prvních 14 dnech schopný kvalifikovat lead podle fit karty a zapsat věcnou poznámku do CRM.“
+
+Tahle věta pomáhá rozlišit, co je nutné hned, co stačí později a co člověk nepotřebuje vůbec. Bez ní se onboarding snadno změní v náhodný seznam účtů a dokumentů.
+
+### Přístupy dávej po vlnách
+
+Přístupová práva se mají rozšiřovat podle práce, ne podle nadšení. První den nový člověk potřebuje identitu, komunikaci, základní dokumentaci a bezpečné vývojové nebo testovací prostředí. Produkční a citlivé nástroje přijdou až ve chvíli, kdy existuje konkrétní úkol a vlastník.
+
+Praktické vlny:
+
+| Vlna | Kdy | Typické přístupy | Kontrola |
+| --- | --- | --- | --- |
+| Start | den 1 | e-mail, chat, dokumentace, issue tracker, onboarding checklist | 2FA, správce hesel, základní pravidla |
+| První úkol | dny 2 až 5 | repozitář, staging, testovací data, omezený CMS nebo helpdesk | review změny a práce s daty |
+| Role v provozu | týden 2 až 4 | nástroje nutné pro roli: CRM, analytika, monitoring, support | oprávnění podle role, ne plošný admin |
+| Vyšší důvěra | po ověření potřeby | produkční admin, fakturace, exporty, incident role | schválení vlastníkem a auditní stopa |
+
+Ne každý člověk projde všemi vlnami. Marketing pravděpodobně nepotřebuje produkční databázi. Vývojář nepotřebuje fakturaci. Support nepotřebuje plný přístup do reklamních účtů. Pokud se objeví výjimka, zapiš důvod a datum revize.
+
+### Používej testovací a anonymizovaná data
+
+Nový člověk se má učit na datech, která neublíží. Reálná zákaznická data používej až tehdy, když je to nutné pro konkrétní práci a člověk zná pravidla.
+
+Bezpečnější onboardingové materiály:
+
+- syntetický workspace s ukázkovými zákazníky,
+- anonymizovaný support ticket,
+- demo CRM záznam bez skutečných kontaktů,
+- zkrácený log bez tokenů, e-mailů a payloadů,
+- screenshoty se začerněnými osobními údaji,
+- veřejný changelog, dokumentace a blog jako první orientace.
+
+Špatný onboardingový zvyk je poslat novému člověku „pár reálných příkladů“ bez kontroly. Příklad má učit princip, ne přinášet do onboardingového dokumentu jména zákazníků, soukromé poznámky, fakturační údaje nebo interní obchodní kontext.
+
+### První týden má mít checklist, ne lov informací
+
+Onboarding checklist nemusí být dlouhý. Má odstranit tiché předpoklady: kde je dokumentace, jak se pracuje s úkoly, co se nesmí posílat do AI nástrojů, jak se hlásí incident a kdo schvaluje přístup k datům.
+
+První týden:
+
+| Oblast | Co má nový člověk pochopit | Důkaz hotovo |
+| --- | --- | --- |
+| Produkt | pro koho je, jaký problém řeší, co je první hodnota | umí jednou větou popsat segment a výsledek |
+| Privacy | jaká data sbíráme, proč a kde jsou hranice | projde mapu dat nebo zkrácenou verzi pro roli |
+| Nástroje | kde jsou úkoly, dokumentace a komunikace | zvládne najít aktuální zdroj pravdy |
+| Přístupy | jak žádat o práva a proč nejsou plošná | má jen potřebné role a 2FA |
+| Práce | jak vypadá dobrý úkol, review a rozhodnutí | dokončí první malý úkol |
+| Bezpečnost | co dělat při chybě, úniku, podezřelém e-mailu nebo ztrátě přístupu | zná eskalační kontakt a incident šablonu |
+
+Checklist nemá být jen zaškrtávací divadlo. U každé položky má být ověřitelný výstup: člověk něco spustí, najde, vysvětlí, opraví nebo zapíše.
+
+### První úkol vyber podle bezpečného dopadu
+
+První úkol má být skutečný, ale omezený. Nemá jít o kritickou migraci, změnu práv uživatelů, přepis pricingu nebo zásah do produkční databáze. Cílem je naučit se systém, styl práce a hranice.
+
+Dobré první úkoly:
+
+- opravit malý text v dokumentaci a doplnit interní odkaz,
+- přidat test k existující malé funkci,
+- anonymizovat jednu šablonu support odpovědi,
+- projít jednu landing page podle checklistu a navrhnout jednu změnu,
+- připravit redakční kartu pro článek,
+- zkontrolovat jeden nástroj podle vendor karty,
+- vyčistit jeden starý neaktivní segment v testovacím prostředí.
+
+Slabé první úkoly:
+
+- „podívej se do produkce a něco navrhni“,
+- „pročti si celý Slack a zorientuj se“,
+- „vezmi si tenhle velký backlog a vyber si“,
+- „dej si admin přístup, ono se to bude hodit“.
+
+První úkol má mít jasný konec a review. Nový člověk se tak naučí, jak tým přemýšlí, ne jen kde jsou tlačítka.
+
+### Přístupový audit naplánuj hned při nástupu
+
+U každého nového člověka rovnou nastav datum revize přístupů. Typicky po 30 nebo 60 dnech. Důvod je jednoduchý: během onboardingu se často dočasně přidá víc práv, než bude dlouhodobě potřeba.
+
+Revizní tabulka:
+
+| Nástroj | Přístup | Proč existuje | Ponechat? | Úprava |
+| --- | --- | --- | --- | --- |
+| Repozitář | write | práce na kódu | ano/ne |  |
+| CRM | read | příprava kvalifikace leadů | ano/ne |  |
+| Helpdesk | omezený agent | řešení běžných ticketů | ano/ne |  |
+| Analytika | viewer | čtení agregovaných metrik | ano/ne |  |
+| Produkce | žádný / omezený / admin | konkrétní provozní role | ano/ne |  |
+
+Pokud se při revizi ukáže, že člověk přístup nepoužil nebo ho nepotřebuje pro roli, odeber ho. Není to trest. Je to normální hygiena.
+
+### Dokumentuj implicitní pravidla
+
+Každý tým má nepsaná pravidla. Čím déle existuje, tím víc jich má. Pro nového člověka jsou neviditelná a někdy drahá.
+
+Zapiš například:
+
+- kdy se píše do issue a kdy do chatu,
+- kdo může změnit pricing text,
+- kdo schvaluje nový externí skript,
+- jak se pracuje s produkčními exporty,
+- kdy se používá AI a jaký kontext do ní nepatří,
+- jak se zapisuje rozhodnutí,
+- co se dává do veřejného changelogu,
+- kdy se zákazníkovi slibuje termín,
+- kdo může potvrdit výmaz nebo export dat.
+
+Nemusí to být dokonalá příručka. Stačí stránka „Jak tu pracujeme“, která se při každém onboardingovém zmatení doplní. Pokud se nový člověk na něco zeptá a odpověď je užitečná i pro dalšího člověka, patří do dokumentace.
+
+### Checklist: Privacy-first onboarding člověka
+
+- [ ] Role má definovanou první hodnotu pro tým.
+- [ ] Přístupy jsou rozdělené do vln a nejsou plošné.
+- [ ] Všechny účty mají 2FA a osobní přihlašování.
+- [ ] Nový člověk dostane testovací nebo anonymizovaná data, ne surovou produkci.
+- [ ] První týden má checklist s ověřitelnými výstupy.
+- [ ] První úkol je skutečný, malý a bezpečný.
+- [ ] Existuje jasné pravidlo, co nepatří do AI nástrojů.
+- [ ] Nový člověk zná mapu dat aspoň v rozsahu své role.
+- [ ] Produkční a citlivé přístupy mají vlastníka a důvod.
+- [ ] Revize přístupů je naplánovaná už při nástupu.
+- [ ] Interní pravidla nejsou jen v hlavách zakladatelů.
+- [ ] Po onboardingu se doplní dokumentace o věci, které novému člověku chyběly.
+
+### Mini úkol
+
+Vezmi jednu roli, kterou tým příště přijme nebo předá interně, a vyplň onboarding kartu:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jaká je první hodnota této role pro tým? |  |
+| Co má člověk zvládnout po 7 dnech? |  |
+| Které přístupy potřebuje první den? |  |
+| Které přístupy dostane až po konkrétním úkolu? |  |
+| Jaká testovací nebo anonymizovaná data použije? |  |
+| Jaký bude první bezpečný úkol? |  |
+| Kdo provede review prvního úkolu? |  |
+| Kdy proběhne revize přístupů? |  |
+| Jaké jedno nepsané pravidlo musíme doplnit do dokumentace? |  |
+
+Potom udělej jednu konkrétní změnu: vytvoř onboarding checklist pro roli, odeber produkční přístup, který není potřeba, připrav anonymizovaný ukázkový ticket, nebo napiš pravidlo pro používání AI v této roli. Onboarding je ideální chvíle nastavit dobré návyky. Později už tým často jen vysvětluje, proč vznikl chaos, který šel předejít první týden.
+
 ## Zdroje
 
 - Keep a Changelog: Keep a Changelog 1.1.0 - principy lidsky psaného changelogu, typy změn a sekce pro nevydané změny: https://keepachangelog.com/en/1.1.0/
@@ -4729,6 +4893,7 @@ Potom udělej jednu konkrétní změnu: smaž jedno zbytečné kvalifikační po
 
 ## Pracovní log
 
+- 2026-07-11: Doplněna příloha o onboardingu nového člověka bez rozdání zbytečných přístupů a dat: první hodnota role, přístupy po vlnách, anonymizovaná testovací data, checklist prvního týdne, bezpečný první úkol, revize přístupů, dokumentace implicitních pravidel, checklist a mini úkol.
 - 2026-07-11: Doplněna příloha o kvalifikaci leadů bez agresivního profilování: definice fitu, přímé otázky místo skrytého sledování, vysvětlitelný stav leadu, malý scoring podle fitu, bolesti a timingu, CRM hygiena, follow-up s koncem, sdílení agregovaných signálů mezi marketingem, sales a produktem, checklist a mini úkol.
 - 2026-07-11: Doplněna příloha o changelogu a release notes jako tichém marketingu: rozdíl mezi interním changelogem a veřejnými poznámkami, průběžné zapisování změn, psaní podle dopadu, privacy-first distribuce, citlivé bezpečnostní změny, šablona, checklist a mini úkol; ověřeny zdroje Keep a Changelog a Semantic Versioning.
 - 2026-07-11: Doplněna příloha o prvním placeném pilotu bez datového chaosu: rozdíl mezi trialem a pilotem, definice výsledku, pilot karta, minimalizace dat po dávkách, komunikační rytmus, předem domluvené vyhodnocení, checklist a mini úkol.
