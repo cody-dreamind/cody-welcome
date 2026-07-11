@@ -3060,6 +3060,163 @@ Vyber jedno téma, které už dlouho leží v marketingovém backlogu. Nezačín
 
 Potom udělej jednu věc: napiš osnovu, najdi chybějící důkaz, připrav interní odkaz, nebo zruš téma, které po vyplnění karty očividně nemá komu pomoct. Zrušené téma není selhání. Je to ušetřený čas, který můžeš dát textu, který opravdu něco změní.
 
+## Příloha: Privacy-first landing page za jeden den
+
+Landing page není plakát. Je to malý rozhodovací systém. Člověk na ni přijde s nějakou nejistotou, nedostatkem času a často i s podezřením, že čte další nafouknutý marketing. Úloha stránky není oslnit. Úloha stránky je férově zkrátit cestu k rozhodnutí.
+
+Privacy-first landing page má jednu příjemnou výhodu: nutí tě říct věci přímo. Když nechceš spoléhat na agresivní remarketing, skryté pixely a pozdější nahánění po internetu, musí stránka odvést víc práce sama. Musí být jasná, rychlá, konkrétní a důvěryhodná.
+
+Cílem této přílohy je připravit použitelnou první verzi za jeden pracovní den. Ne dokonalou. Použitelnou. Dokonalost si nech na situaci, kdy už máš data, zpětnou vazbu a trochu méně kávy v krvi.
+
+### Ráno: napiš jednu větu o práci stránky
+
+Než otevřeš Figma, editor nebo CMS, napiš jednu větu:
+
+„Tato stránka pomáhá člověku typu ___ pochopit ___ a udělat ___.“
+
+Příklady:
+
+- „Tato stránka pomáhá zakladateli malého B2B SaaS pochopit, jak mu audit analytiky sníží právní a produktové riziko, a objednat úvodní konzultaci.“
+- „Tato stránka pomáhá provozovateli e-shopu pochopit, jestli potřebuje privacy-first měření, a stáhnout checklist bez předávání e-mailu.“
+- „Tato stránka pomáhá CFO ve střední firmě pochopit, jak SaaS sníží ruční reporting, a poslat kvalifikovanou poptávku.“
+
+Když větu neumíš napsat, stránka ještě nemá zadání. Nepomůže ti lepší hero obrázek ani další sekce s ikonami. Nejdřív musíš vědět, komu stránka slouží a jaké rozhodnutí má usnadnit.
+
+### Dopoledne: postav obsahovou kostru
+
+První verze landing page nemusí mít deset sekcí. Stačí kostra, která odpoví na hlavní otázky návštěvníka ve správném pořadí:
+
+1. Pro koho to je.
+2. Jaký problém řeší.
+3. Jaký výsledek člověk získá.
+4. Proč tomu může věřit.
+5. Co přesně se stane po dalším kroku.
+6. Jaká data po něm chceš a proč.
+
+Praktická struktura:
+
+| Sekce | Otázka návštěvníka | Co napsat |
+| --- | --- | --- |
+| Hero | Jsem tu správně? | Segment, problém, výsledek, jeden primární další krok |
+| Problém | Rozumíte mojí situaci? | Konkrétní tření, riziko nebo ztráta času |
+| Řešení | Co se změní? | 3 až 5 praktických výstupů, ne obecné vlastnosti |
+| Důkaz | Proč vám mám věřit? | Ukázka, reference, mini case study, veřejný výsledek nebo screenshot |
+| Proces | Co bude dál? | Krátký popis kroků po odeslání formuláře nebo registraci |
+| Privacy | Co uděláte s daty? | Jasně popsaná data, účel, doba držení a nástroje |
+| CTA | Jaký je další krok? | Jedna hlavní akce a jedna méně závazná alternativa |
+
+Hero sekce má být konkrétní. Místo „Pomáháme firmám růst v digitálním světě“ napiš raději „Auditujeme SaaS analytiku tak, aby ukazovala rozhodovací metriky bez zbytečného sběru osobních dat.“ Druhá věta možná nevyhraje básnickou cenu. Zato člověk pochopí, co nabízíš.
+
+### Po obědě: zkrať formulář a vysvětli data
+
+Formulář je často místo, kde stránka ztratí důvěru. Ne proto, že by lidé neuměli psát do políček. Protože firma chce moc informací příliš brzy.
+
+U prvního kontaktu obvykle stačí:
+
+- jméno,
+- pracovní e-mail,
+- firma nebo web,
+- krátký popis problému,
+- volitelně preferovaný způsob odpovědi.
+
+Telefon, rozpočet, velikost firmy, počet zaměstnanců a deset kvalifikačních otázek mohou dávat smysl později. Pokud je opravdu potřebuješ hned, napiš proč. „Telefon potřebujeme, protože první audit domlouváme krátkým hovorem“ je fér. Tiché povinné pole bez vysvětlení je jen tření v obleku.
+
+Privacy-first mikrotext pod formulářem:
+
+„Údaje použijeme jen pro odpověď na poptávku. Nepřidáme vás do newsletteru bez souhlasu a data neprodáváme reklamním platformám.“
+
+Ještě lepší je být konkrétní podle reality:
+
+„Zprávu uložíme v e-mailu a interním CRM, aby na ni mohl navázat tým. Pokud spolu nezačneme spolupracovat, poptávku po 6 měsících smažeme.“
+
+Nepíšeme právní román. Píšeme srozumitelný slib, který musí provoz umět splnit.
+
+### Odpoledne: nastav měření bez slídění
+
+Pro první verzi landing page nepotřebuješ sledovat každý pohyb kurzoru. Potřebuješ zjistit, jestli stránka plní svoji práci.
+
+Minimum událostí:
+
+| Metrika | Proč existuje | Jaké rozhodnutí umožní |
+| --- | --- | --- |
+| Návštěva stránky | Víme, jestli na stránku někdo chodí | Řešit distribuci nebo obsah |
+| Klik na hlavní CTA | Vidíme zájem před formulářem | Upravit nabídku nebo pozici CTA |
+| Odeslání formuláře | Měříme dokončený další krok | Zjednodušit formulář nebo kvalifikaci |
+| Klik na alternativní další krok | Vidíme potřebu méně závazné cesty | Přidat checklist, článek nebo ukázku |
+
+K tomu si každý týden zapiš kvalitativní poznámku:
+
+- Jaké otázky se opakovaly v poptávkách?
+- Který slib lidé citovali?
+- Co musel obchod nebo support vysvětlovat ručně?
+- Které pole ve formuláři působilo zbytečně?
+- Jaký jeden text na stránce bychom měli přepsat?
+
+Agregovaná analytika ti řekne, kde se něco děje. Rozhovory a poptávky ti často řeknou proč. Dohromady to stačí na lepší rozhodnutí bez profilování jednotlivých návštěvníků.
+
+### Večer: udělej kontrolu před publikací
+
+Než stránku pustíš ven, projdi ji jako unavený člověk na mobilu. To je velmi přesný test. Unavený člověk neodpouští marketingovou mlhu, malé písmo, schované ceny ani formulář, který se tváří jako přijímací řízení.
+
+Rychlá kontrola:
+
+- První obrazovka říká pro koho stránka je, co řeší a co udělat dál.
+- Primární CTA je vidět bez lovu v menu.
+- Text nepoužívá prázdné fráze typu „komplexní řešení na míru“ bez konkrétního vysvětlení.
+- Důkaz je skutečný: ukázka, reference, screenshot, proces nebo veřejný výsledek.
+- Formulář chce jen data nutná pro další krok.
+- U formuláře je srozumitelný privacy mikrotext.
+- Stránka funguje na mobilu a s klávesnicí.
+- Obrázky nejsou zbytečně velké a stránka se načítá svižně.
+- Title, meta description, canonical URL a Open Graph náhled odpovídají obsahu.
+- Stránka je v sitemapě a má interní odkaz z relevantního místa.
+- Externí skripty jsou jen ty, které opravdu potřebuješ.
+- RSS nebo blog nabízí návštěvníkovi přímou cestu k dalšímu obsahu bez sociální platformy.
+
+### Šablona textu pro první verzi
+
+Použij tuto šablonu jako pracovní kostru:
+
+| Část | Text |
+| --- | --- |
+| Pro koho | Pro ___, kteří řeší ___ |
+| Výsledek | Pomůžeme vám ___ bez toho, abyste museli ___ |
+| Důkaz | Ukážeme ___ / máme zkušenost s ___ / výstupem je ___ |
+| Proces | 1. Pošlete krátký kontext. 2. Ozveme se s doplňujícími otázkami. 3. Dostanete návrh dalšího kroku. |
+| Privacy | Sbíráme jen ___, používáme to pro ___, držíme to ___ |
+| Hlavní CTA | Poslat poptávku / Domluvit konzultaci / Vyzkoušet demo |
+| Alternativa | Stáhnout checklist / Přečíst průvodce / Zobrazit příklad výstupu |
+
+### Checklist: Landing page za jeden den
+
+- [ ] Stránka má jednu větu o cílovém člověku, problému a dalším kroku.
+- [ ] Hero sekce je konkrétní a bez obecné marketingové mlhy.
+- [ ] Nabídka popisuje výstupy a změnu pro zákazníka, ne jen interní proces.
+- [ ] Je přítomný alespoň jeden důkaz důvěry.
+- [ ] Formulář sbírá jen údaje potřebné pro první odpověď.
+- [ ] Privacy mikrotext odpovídá skutečnému provozu.
+- [ ] Měření se omezuje na několik rozhodovacích signálů.
+- [ ] Stránka má technické minimum: rychlost, přístupnost, metadata, sitemapu a interní odkaz.
+- [ ] Existuje méně závazný další krok pro člověka, který ještě není připravený na kontakt.
+- [ ] Je naplánovaná první revize po 14 nebo 30 dnech.
+
+### Mini úkol
+
+Vezmi jednu existující landing page a vyplň tuto kartu:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Pro koho přesně stránka je? |  |
+| Jaký jeden problém řeší? |  |
+| Jaký je hlavní další krok? |  |
+| Jaký důkaz stránka ukazuje? |  |
+| Které pole ve formuláři lze odstranit nebo vysvětlit? |  |
+| Jaký privacy mikrotext chybí nebo je moc obecný? |  |
+| Které 3 metriky stačí na první měsíc? |  |
+| Jakou jednu úpravu uděláme dnes? |  |
+
+Vyber jednu úpravu a dokonči ji. Neotevírej redesign celé značky, pokud problém zní „formulář chce zbytečně telefon“. To je jako kupovat novou kuchyň kvůli špinavému hrnku. Oprav hrnek. Pak měř, jestli se lidem pije líp.
+
 ## Zdroje
 
 - European Data Protection Board: Respect individuals' rights - přehled práv subjektů údajů v GDPR pro malé a střední organizace: https://www.edpb.europa.eu/sme-data-protection-guide/respect-individuals-rights_en
@@ -3105,6 +3262,7 @@ Potom udělej jednu věc: napiš osnovu, najdi chybějící důkaz, připrav int
 
 ## Pracovní log
 
+- 2026-07-11: Doplněna příloha o privacy-first landing page za jeden den: zadání stránky jednou větou, obsahová kostra, formulář s vysvětlením dat, měření bez slídění, kontrola před publikací, textová šablona, checklist a mini úkol.
 - 2026-07-11: Doplněna příloha o obsahovém kalendáři bez obsahové vaty: obsahová hypotéza, typy obsahu podle práce, měsíční tematický rytmus, redakční karta, privacy-first distribuce, údržba obsahu, checklist a mini úkol.
 - 2026-07-11: Doplněna drobná poznámka k transparentním aktualizacím obsahu a checklist položka pro popis významných změn.
 - 2026-07-11: Doplněna příloha o výběru evropských dodavatelů bez vendor lock-inu: kategorizace nástrojů podle rizika, evropský provoz, vendor karta, bezpečný proof of concept, exit plán, kvartální revize, checklist a mini úkol; přidány zdroje Evropské komise k mezinárodním přenosům dat a standardním smluvním doložkám.
