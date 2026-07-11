@@ -3010,6 +3010,8 @@ Metrika dopadu nemusí být osobní profil. U obsahu často stačí kombinace ag
 
 Obsah stárne. Někdy potichu. Nejvíc rizikové jsou texty o nástrojích, právu, cenách, integracích, bezpečnosti a srovnáních. U nich musí být revize součástí kalendáře, ne hrdinský úklid jednou za dva roky.
 
+Když text aktualizuješ, neschovávej změnu jako kosmetiku. Krátká poznámka „aktualizováno“ s důvodem úpravy pomáhá čtenáři poznat, jestli se změnil jen odkaz, nebo i samotné doporučení. Důvěra neroste tím, že web vypadá věčně čerstvě. Roste tím, že je jasné, co se změnilo a proč.
+
 Praktické stavy obsahu:
 
 | Stav | Co znamená | Akce |
@@ -3037,6 +3039,7 @@ Jednou měsíčně vyber tři důležité texty a zkontroluj:
 - [ ] Distribuce počítá s RSS, interními odkazy a přímým sdílením.
 - [ ] Gated obsah je výjimka, ne výchozí režim.
 - [ ] U aktuálních nebo rizikových témat máme zdroje a datum revize.
+- [ ] U významných aktualizací je krátce popsáno, co se změnilo a proč.
 - [ ] Měříme dopad agregovaně a podle rozhodnutí, ne podle zvědavosti.
 - [ ] Sales a support ví, které texty mohou používat v odpovědích.
 - [ ] Jednou měsíčně proběhne revize nejdůležitějších obsahových položek.
@@ -3103,6 +3106,7 @@ Potom udělej jednu věc: napiš osnovu, najdi chybějící důkaz, připrav int
 ## Pracovní log
 
 - 2026-07-11: Doplněna příloha o obsahovém kalendáři bez obsahové vaty: obsahová hypotéza, typy obsahu podle práce, měsíční tematický rytmus, redakční karta, privacy-first distribuce, údržba obsahu, checklist a mini úkol.
+- 2026-07-11: Doplněna drobná poznámka k transparentním aktualizacím obsahu a checklist položka pro popis významných změn.
 - 2026-07-11: Doplněna příloha o výběru evropských dodavatelů bez vendor lock-inu: kategorizace nástrojů podle rizika, evropský provoz, vendor karta, bezpečný proof of concept, exit plán, kvartální revize, checklist a mini úkol; přidány zdroje Evropské komise k mezinárodním přenosům dat a standardním smluvním doložkám.
 - 2026-07-11: Doplněna příloha s 30denním akčním plánem pro privacy-first web nebo SaaS: výběr jedné osy, rychlá inventura, nejmenší oprava, ověření bez slídění, uzavření rozhodnutí, checklist a mini úkol.
 - 2026-07-11: Doplněna příloha se slovníčkem pro rychlé rozhodování: privacy a data pojmy, web/product analytics pojmy, provozní bezpečnostní pojmy a sada kontrolních vět pro týmové porady.
