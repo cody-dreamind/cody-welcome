@@ -5907,8 +5907,203 @@ Vyber jeden produkční endpoint, formulář nebo background job a udělej malý
 
 Potom udělej jednu konkrétní opravu: zamaskuj autorizační hlavičku, přestaň logovat celé body, přidej korelační ID do chybové stránky, zkrať retenci debug logů, odděl staging alerty, nebo napiš kartu pro jeden kritický alert. Observabilita má týmu rozsvítit cestu, ne osvětlit celý soukromý byt uživatele.
 
+## Příloha: Zpracovatelské smlouvy a subdodavatelé bez právního šumu
+
+Privacy-first SaaS nestojí jen na tom, že aplikace sbírá málo dat. Stojí i na tom, že tým ví, kdo s těmi daty dál pracuje. Hosting, e-mailing, CRM, support, analytika, platební brána, logovací nástroj, AI služba, zálohy, monitoring, kalendář pro demo hovory a formulářový nástroj mohou být z pohledu dat stejně důležité jako vlastní databáze.
+
+Špatná otázka zní: „Má ten dodavatel někde GDPR stránku?“
+
+Lepší otázka zní: „Jakou roli v našem zpracování má, jaká data vidí, za jakým účelem, s jakými subdodavateli, v jakém regionu, podle jaké smlouvy a jak z toho odejdeme?“
+
+Evropská komise vysvětluje rozdíl mezi správcem a zpracovatelem tak, že správce určuje účely a prostředky zpracování, zatímco zpracovatel zpracovává osobní data jménem správce. GDPR článek 28 pak řeší požadavky na zpracovatele, smlouvu, subzpracovatele, návrat nebo výmaz dat a povinnost doložit soulad. Odkazy jsou ve zdrojích.
+
+Toto není právní rada. Je to provozní rámec pro malý tým, aby se v dodavatelích neutopil a nevěřil, že slovo „compliance“ na landing page magicky vyřešilo datový tok.
+
+Codyho komentář: Zpracovatelská smlouva není PDF amulet. Když nevíš, jaká data dodavatel dostává a jak ho vypneš, máš jen hezkou složku v Drive. A složka v Drive ještě nikdy sama nevrátila zákaznický export.
+
+### Nejprve urči roli, ne název nástroje
+
+Stejný nástroj může být v jednom kontextu zpracovatel a v jiném samostatný správce nebo společný správce. Neřeš jen kategorii služby. Řeš konkrétní tok dat.
+
+Praktické rozlišení:
+
+| Situace | Typická role | Co si ověřit |
+| --- | --- | --- |
+| Hosting aplikace a databáze | zpracovatel | region, přístupy administrátorů, zálohy, subdodavatelé, výmaz po ukončení |
+| Platební brána | často samostatný správce nebo kombinace rolí | jaké údaje zpracovává pro platbu, fakturaci, fraud prevenci a své právní povinnosti |
+| E-mailing pro vlastní newsletter | zpracovatel | souhlas nebo jiný právní základ, importy kontaktů, tracking, odhlášení, subdodavatelé |
+| Support nástroj | zpracovatel | přílohy, interní poznámky, přístup supportu, retence ticketů |
+| Externí konzultant s přístupem do CRM | podle činnosti | mlčenlivost, rozsah přístupu, exporty, offboarding |
+| Reklamní síť s vlastním profilováním | často samostatný správce nebo společné role | jestli ji vůbec potřebuješ, consent, přenosy, profilování |
+
+U každého dodavatele si napiš jednu větu:
+
+„Dodavatel X zpracovává data Y za účelem Z v roli R.“
+
+Když větu neumíš napsat bez mlhy, nemáš připravený nákup. Máš teprve otázku pro dodavatele.
+
+### Zpracovatelská smlouva má popisovat realitu
+
+Smlouva se zpracovatelem nemá být jen formalita připojená k objednávce. Má odpovídat tomu, co služba opravdu dělá.
+
+V provozním překladu potřebuješ znát:
+
+- předmět a dobu zpracování,
+- povahu a účel zpracování,
+- typy osobních údajů,
+- kategorie lidí, kterých se data týkají,
+- práva a povinnosti správce,
+- povinnost zpracovávat data podle doložených pokynů,
+- důvěrnost lidí s přístupem k datům,
+- bezpečnostní opatření,
+- pravidla pro subzpracovatele,
+- pomoc při právech uživatelů a incidentech,
+- návrat nebo výmaz dat po ukončení služby,
+- informace potřebné k doložení souladu a auditu.
+
+Pro malý SaaS to převeď do kontrolní tabulky. Nečekej, že ji vyplní právník za tým. Produkt, vývoj, marketing a provoz musí dodat realitu.
+
+| Pole | Odpověď |
+| --- | --- |
+| Dodavatel |  |
+| Služba |  |
+| Role | správce / zpracovatel / společný správce / nejasné |
+| Účel |  |
+| Typy dat |  |
+| Kategorie lidí | zákazníci / uživatelé / leady / zaměstnanci / návštěvníci |
+| Region zpracování |  |
+| Subzpracovatelé |  |
+| Smluvní dokument | DPA / hlavní smlouva / SCC / jiné |
+| Retence po ukončení |  |
+| Export dat |  |
+| Výmaz dat |  |
+| Incidentní kontakt |  |
+| Vlastník v týmu |  |
+| Datum poslední revize |  |
+
+Tato tabulka není byrokracie. Je to mapa toho, kde tvoje data končí. Bez mapy se privacy-first provoz rychle změní na „snad to někdo ví“.
+
+### Subzpracovatelé nejsou drobné písmo
+
+Subzpracovatel je další dodavatel, kterého tvůj dodavatel používá pro část služby. Typicky infrastruktura, e-mail delivery, monitoring, support, analytika, CDN, ticketing nebo AI komponenta.
+
+GDPR článek 28 říká, že zpracovatel nemá zapojit dalšího zpracovatele bez předchozího konkrétního nebo obecného písemného oprávnění správce. Při obecném oprávnění má zpracovatel informovat o zamýšlených změnách, aby správce mohl vznést námitku.
+
+Prakticky to znamená:
+
+- najdi veřejný seznam subzpracovatelů,
+- přihlas se k oznámením změn, pokud existují,
+- rozliš kritické a méně kritické subdodavatele,
+- sleduj regiony a přenosy mimo EU/EHP,
+- u citlivých služeb si napiš, co uděláš při změně subzpracovatele,
+- neber „máme spoustu partnerů“ jako dostatečnou odpověď.
+
+Ne každý nový subzpracovatel je problém. Problém je, když o něm nevíš, neumíš vyhodnotit dopad a nemáš exit plán.
+
+### Přenos mimo EU/EHP řeš před nákupem
+
+Privacy-first evropský provoz preferuje EU region a dodavatele, kteří umí data držet v Evropě. Někdy ale služba zahrnuje přenos nebo vzdálený přístup mimo EU/EHP. Pak nestačí pokrčit rameny, že „to používají všichni“.
+
+U každého dodavatele se ptej:
+
+- Kde jsou primárně uložená data?
+- Kde jsou zálohy?
+- Odkud má support nebo administrace přístup?
+- Používá dodavatel subzpracovatele mimo EU/EHP?
+- Jaký transfer mechanismus používá, pokud data míří do třetí země?
+- Existují Standard Contractual Clauses nebo jiné vhodné záruky?
+- Dá se služba provozovat v EU regionu bez funkčního omezení?
+
+Evropská komise uvádí Standard Contractual Clauses jako předem schválené smluvní doložky pro vybrané přenosy osobních dat do třetích zemí. To ale není automatická omluvenka pro každý nástroj. Je to právní mechanismus, který musí odpovídat reálnému toku dat a riziku.
+
+Codyho komentář: Pokud dodavatel odpoví na otázku „kde jsou data?“ marketingovou básní o bezpečnosti, ptej se znovu. Básně jsou fajn. Jen ne jako architektura zpracování osobních údajů.
+
+### Veřejný seznam subdodavatelů pomáhá i obchodu
+
+Když prodáváš B2B SaaS, zákazníci se dřív nebo později zeptají:
+
+- kde běžíte,
+- kdo jsou vaši subdodavatelé,
+- jak řešíte support,
+- jestli používáte AI služby,
+- jestli data odcházejí mimo EU,
+- jak smažete data po ukončení.
+
+Pokud na to pokaždé skládáš odpověď ručně, ztrácíš čas a zvyšuješ riziko nekonzistence. Lepší je mít jednoduchou veřejnou nebo alespoň zákaznicky dostupnou stránku:
+
+| Dodavatel | Účel | Typ služby | Region | Poznámka |
+| --- | --- | --- | --- | --- |
+| EU hosting provider | provoz aplikace a databáze | infrastruktura | EU | produkční data |
+| E-mail provider | provozní e-maily | komunikace | EU / dle smlouvy | bez marketingového trackingu, pokud to jde |
+| Platební brána | platby a fakturace | billing | dle poskytovatele | část rolí může být samostatný správce |
+| Monitoring | dostupnost a chyby | observabilita | EU preferovaně | bez payloadů a osobních údajů |
+
+Nemusíš zveřejňovat interní detaily, které by zhoršily bezpečnost. Ale transparentní seznam kategorií a hlavních dodavatelů zrychlí sales, support i bezpečnostní dotazníky.
+
+### Nákup nástroje zakonči rozhodnutím, ne dojmem
+
+Před přidáním nového nástroje do produkce udělej krátkou kartu. Stačí deset minut, když má tým disciplínu.
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jaký problém nástroj řeší? |  |
+| Jaká data do něj pošleme? |  |
+| Je dodavatel správce, zpracovatel nebo obojí? |  |
+| Máme DPA nebo odpovídající smluvní dokument? |  |
+| Kde jsou data a subdodavatelé? |  |
+| Je potřeba přenos mimo EU/EHP? |  |
+| Jak měníme souhlas, privacy policy nebo interní dokumentaci? |  |
+| Jak data exportujeme a smažeme? |  |
+| Kdo nástroj vlastní v týmu? |  |
+| Kdy proběhne první revize? |  |
+
+Rozhodnutí může být:
+
+- schválit,
+- schválit jen pro testovací data,
+- schválit jen pro EU region,
+- odložit do doplnění DPA,
+- odmítnout kvůli datům, subdodavatelům nebo nejasnému účelu.
+
+Tohle je praktická brzda proti SaaS nepořádku. Nezakazuje nástroje. Jen nutí pojmenovat cenu v datech.
+
+### Checklist: Dodavatelé, DPA a subzpracovatelé
+
+- [ ] Máme seznam dodavatelů, kteří zpracovávají osobní data.
+- [ ] U každého dodavatele známe roli: správce, zpracovatel, společný správce nebo nejasné.
+- [ ] U každého zpracovatele máme DPA nebo jiný odpovídající smluvní dokument.
+- [ ] Víme, jaké typy dat a kategorie lidí dodavatel zpracovává.
+- [ ] Víme, kde jsou data, zálohy a administrativní přístup.
+- [ ] Máme přehled subzpracovatelů a změnových oznámení.
+- [ ] Přenosy mimo EU/EHP jsou pojmenované a mají odpovídající mechanismus.
+- [ ] Nový nástroj nesmí do produkce bez vlastníka a datové karty.
+- [ ] Marketingové, supportní a AI nástroje mají zvláštní pozornost, protože často tahají nejvíc kontextu.
+- [ ] Po ukončení služby víme, jak data exportovat, vrátit nebo smazat.
+- [ ] Zákazníkům umíme stručně vysvětlit hlavní subdodavatele a datové regiony.
+- [ ] Seznam dodavatelů se reviduje aspoň kvartálně nebo po větší změně produktu.
+
+### Mini úkol
+
+Vyber jeden nástroj, který používáš pro zákaznická data, a vyplň kartu:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jaký nástroj kontrolujeme? |  |
+| Jaká zákaznická nebo návštěvnická data do něj jdou? |  |
+| Jakou roli má dodavatel? |  |
+| Kde je DPA nebo smluvní dokument? |  |
+| Kde jsou data uložena? |  |
+| Kteří subzpracovatelé jsou relevantní? |  |
+| Je tam přenos mimo EU/EHP? |  |
+| Jak data smažeme po ukončení? |  |
+| Kdo je vlastník nástroje v týmu? |  |
+| Jaká jedna změna sníží riziko nebo zvýší transparentnost? |  |
+
+Potom udělej jednu konkrétní opravu: doplň dodavatele do seznamu, najdi DPA, zapni oznámení o změně subzpracovatelů, přepni službu do EU regionu, zakaž posílání payloadů do monitoringu, přidej vlastníkovi revizi do kalendáře nebo odstraň nástroj, který už nikdo nepoužívá. Privacy-first provoz není o tom mít nejdelší dokument. Je o tom vědět, komu dáváš data a proč.
+
 ## Zdroje
 
+- EUR-Lex: Regulation (EU) 2016/679, GDPR Article 28 - požadavky na zpracovatele, smlouvu se zpracovatelem, zapojení dalšího zpracovatele, návrat nebo výmaz dat a doložení souladu: https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng
 - OWASP Cheat Sheet Series: Logging Cheat Sheet - doporučení k tomu, co logovat, co nelogovat, jak chránit logy a jak nastavit bezpečnostní monitoring podle účelu a rizika: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
 - OpenTelemetry Docs: Signals - přehled základních observability signálů jako traces, metrics, logs a profiles: https://opentelemetry.io/docs/concepts/signals/
 - OWASP Cheat Sheet Series: Secrets Management Cheat Sheet - doporučení pro životní cyklus tajemství, ukládání, přístup, rotaci, revokaci, audit a incidentní reakci: https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html
@@ -5973,6 +6168,7 @@ Potom udělej jednu konkrétní opravu: zamaskuj autorizační hlavičku, přest
 
 ## Pracovní log
 
+- 2026-07-11: Doplněna příloha o zpracovatelských smlouvách a subdodavatelích bez právního šumu: role správce a zpracovatele, DPA kontrolní karta, subzpracovatelé, přenosy mimo EU/EHP, veřejný seznam subdodavatelů, nákupní rozhodovací karta, checklist a mini úkol; ověřeny oficiální zdroje Evropské komise, EUR-Lex a Standard Contractual Clauses.
 - 2026-07-11: Doplněna příloha o chybách, logování a observabilitě bez datového vysavače: rozhodovací účel signálů, rozlišení metrik, logů, traces a profilů, zakázaná data v logu, bezpečné chybové hlášky s korelačním ID, alerty, retence, přístupy k logům, checklist a mini úkol; ověřeny zdroje OWASP Logging Cheat Sheet a OpenTelemetry Signals.
 - 2026-07-11: Doplněna příloha o tajemstvích, API klíčích a konfiguraci bez úniku do repozitáře: rozdělení konfigurace a secrets, lokální vývoj, CI/CD tajemství, rotace, postup při úniku, secret scanning, checklist a mini úkol; ověřeny zdroje OWASP, Twelve-Factor App a GitHub Docs.
 - 2026-07-11: Doplněna příloha o cookie a tracking auditu bez otravných bannerů: inventura cookies, storage, pixelů a embedů, rozdělení podle nutnosti, test tří stavů, dvoukrokové načítání externího obsahu, pravdivý banner, checklist a mini úkol; ověřeny oficiální zdroje Evropské komise a EDPB k cookies a technickému rozsahu ePrivacy.
