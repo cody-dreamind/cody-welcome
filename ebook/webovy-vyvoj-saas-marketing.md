@@ -6532,6 +6532,125 @@ Vyber jeden kritický nástroj, ideálně e-mail/identitu, hosting, repozitář,
 
 Potom udělej jednu konkrétní změnu: odeber starý účet, zúž admin roli, vypni export pro člověka, který ho nepotřebuje, zapni 2FA, nebo napiš vlastníka k nástroji, který ho nemá. Přístupový audit je nudný přesně tím dobrým způsobem: po správném nudném auditu je méně cest, kudy může utéct problém.
 
+## Příloha: Konverzní cesta bez šmírovacího cirkusu
+
+Konverzní cesta je posloupnost kroků, ve kterých se člověk rozhoduje, jestli ti dá pozornost, kontakt, registraci nebo peníze. U firemního webu to může být článek, stránka služby, pricing a poptávkový formulář. U SaaS to může být homepage, registrace, první workspace a první hodnota. U newsletteru to může být článek, odběrový formulář, potvrzení a první e-mail.
+
+Špatná otázka zní: „Jak na této cestě nasadíme víc měření?“
+
+Lepší otázka zní: „Kde člověk potřebuje víc jistoty, méně práce nebo jasnější další krok?“
+
+Privacy-first optimalizace konverzí nezačíná heatmapou a nahráváním session. Začíná čtením stránky, kliknutím na vlastní CTA a odesláním vlastního formuláře. Ano, je to tak prosté, až to bolí. Spousta problémů se dá najít bez toho, aby sis ukládal pohyb myši každého návštěvníka jako amatérský dokumentární film.
+
+### Nakresli cestu jako rozhodnutí, ne jako funnel
+
+Trychtýř svádí k tomu, že lidé jsou jen procenta mezi kroky. Prakticky je lepší popsat, jaké rozhodnutí se v každém kroku děje.
+
+| Krok | Otázka člověka | Co mu má stránka dát | Privacy-first signál |
+| --- | --- | --- | --- |
+| Článek | Rozumí firma mému problému? | konkrétní postup, příklad, další odkaz | agregovaná návštěvnost, klik na relevantní odkaz |
+| Stránka služby | Je to pro náš typ firmy? | segment, výsledek, důkaz, rizika | klik na CTA, kvalita poptávek |
+| Pricing | Kolik to bude stát a kde je háček? | plány, limity, zrušení, export dat | výběr plánu, opakované otázky v sales |
+| Formulář | Co se stane, když ho odešlu? | krátký formulář, vysvětlení polí, očekávání | dokončení formuláře, opuštěný krok v agregaci |
+| Děkovací stránka | Co mám čekat dál? | čas reakce, další zdroj, možnost upravit žádost | žádný extra tracker není nutný |
+
+Tahle tabulka má jednu velkou výhodu: nutí tě řešit zkušenost člověka, ne jen propad v grafu. Když na pricingu lidé odchází, nemusí to znamenat, že potřebuješ agresivnější CTA. Možná jen neříkáš, co se stane při překročení limitu. Když lidé nedokončují formulář, nemusí to znamenat, že potřebuješ retargeting. Možná se ptáš na telefon dřív, než jsi vysvětlil proč.
+
+### Oprav nejdřív tření, které vidíš i bez dat
+
+Než přidáš další nástroj, projdi cestu ručně:
+
+- otevři stránku na mobilu,
+- přečti první obrazovku nahlas,
+- klikni na hlavní CTA,
+- vyplň formulář jako nový člověk,
+- zkontroluj chybové hlášky,
+- podívej se, jestli po odeslání víš, co bude dál,
+- ověř, že stránka nevyžaduje souhlas s marketingem jen proto, aby člověk dokončil hlavní akci.
+
+Typické opravy bez nového trackingu:
+
+| Problém | Lepší řešení |
+| --- | --- |
+| CTA říká jen „Kontaktujte nás“ | Napiš konkrétně „Domluvit 20minutovou konzultaci“ nebo „Poslat poptávku k nacenění“ |
+| Formulář chce moc údajů | Nech jen údaje nutné pro další krok a zbytek zeptej později |
+| Člověk neví, kdy dostane odpověď | Přidej realistické očekávání: „Ozveme se do 1 pracovního dne“ |
+| Chybová hláška říká „Invalid input“ | Napiš, co přesně opravit a kde |
+| Pricing schovává export dat | Přidej krátkou větu o exportu, zrušení a smazání účtu |
+| Důkaz je obecný | Přidej konkrétní scénář, screenshot, referenci nebo ukázku výsledku |
+
+Codyho komentář: Optimalizace konverzí bez respektu k člověku často skončí jako manipulativní posilovna: větší tlačítka, víc urgencí, víc pop-upů. Krátkodobě se může něco pohnout. Dlouhodobě tím trénuješ zákazníky, aby ti nevěřili.
+
+### Měř jen signály, které povedou k úpravě
+
+Konverzní cesta se dá řídit s malým počtem signálů:
+
+- návštěva klíčové stránky,
+- klik na hlavní CTA,
+- začátek formuláře,
+- úspěšné odeslání formuláře,
+- kvalita poptávky podle segmentu,
+- opakované otázky ze sales nebo supportu,
+- dosažení první hodnoty po registraci.
+
+Ke každému signálu si napiš rozhodnutí:
+
+| Signál | Kdy ho použijeme | Možná úprava |
+| --- | --- | --- |
+| Nízký klik na CTA | Lidé čtou stránku, ale nejdou dál | přepsat CTA, posunout důkaz, zjednodušit další krok |
+| Vysoký začátek formuláře, nízké dokončení | Lidé chtějí pokračovat, ale formulář brzdí | zkrátit pole, zlepšit chyby, vysvětlit citlivé údaje |
+| Hodně nekvalifikovaných poptávek | Stránka láká špatný segment | zpřesnit positioning, přidat pro koho to není |
+| Častý dotaz na cenu | Pricing je nejasný | doplnit limity, DPH, doplatky, příklady plánů |
+| Registrace bez první hodnoty | Onboarding nekončí výsledkem | přidat ukázková data, zkrátit nastavení, zlepšit prázdný stav |
+
+Pokud nevíš, jakou úpravu podle signálu uděláš, signál teď neměř. Možná se k němu vrátíš později. Teď by jen přidával šum.
+
+### Consent a hlavní akce nemíchej do jedné pasti
+
+Formulář má mít hlavní účel. Poptávka je poptávka. Registrace je registrace. Stažení dokumentu je stažení dokumentu. Marketingový odběr je jiný účel a má být oddělený, dobrovolný a srozumitelný.
+
+Prakticky:
+
+- Souhlas s newsletterem nedávej jako povinnou podmínku poptávky.
+- Checkbox pro marketing neoznačuj předem.
+- Vysvětli, proč chceš citlivější údaj, například telefon nebo velikost firmy.
+- Pokud údaj není nutný, označ ho jako nepovinný nebo ho odstraň.
+- Po odeslání formuláře neinstaluj člověku další sledování jen proto, že projevil zájem.
+
+Tady se potkává UX, obchod i ochrana dat. Když formulář působí férově, často zvedne důvěru víc než další prodejní argument. Lidé poznají, když se firma ptá jen na to, co potřebuje.
+
+### Checklist: Konverzní cesta bez slídění
+
+- [ ] Každý krok cesty má popsanou otázku člověka a jeden hlavní další krok.
+- [ ] CTA říká konkrétní akci, ne obecné „více“ nebo „kontaktujte nás“ bez kontextu.
+- [ ] Formuláře sbírají jen údaje nutné pro další krok.
+- [ ] Nepovinné údaje jsou opravdu nepovinné a dávají smysl.
+- [ ] Marketingový souhlas je oddělený od hlavní akce.
+- [ ] Chybové hlášky říkají, co opravit.
+- [ ] Po odeslání formuláře člověk ví, kdy a co se stane dál.
+- [ ] Pricing nebo nabídka vysvětluje limity, zrušení, export a práci s daty.
+- [ ] Měříme jen signály, podle kterých uděláme konkrétní rozhodnutí.
+- [ ] Kvalitu poptávek vyhodnocujeme podle segmentu a skutečné relevance, ne jen podle počtu leadů.
+- [ ] Nepoužíváme session recording, heatmapy ani reklamní pixely jako výchozí náhradu za ruční audit a rozhovor.
+- [ ] Jednou měsíčně projdeme jednu klíčovou cestu od začátku do konce jako nový člověk.
+
+### Mini úkol
+
+Vyber jednu konverzní cestu: článek -> poptávka, homepage -> demo, pricing -> registrace nebo onboarding -> první hodnota. Vyplň pracovní list:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jaký je první krok cesty? |  |
+| Jaký je poslední úspěšný výsledek? |  |
+| Jakou otázku si člověk klade v každém kroku? |  |
+| Které pole ve formuláři je nejvíc podezřelé? |  |
+| Kde člověk neví, co se stane dál? |  |
+| Jaký jeden signál měříme agregovaně? |  |
+| Jaké měření nebo skript můžeme odstranit? |  |
+| Jakou jednu úpravu uděláme tento týden? |  |
+
+Potom udělej jednu konkrétní změnu: přepiš CTA, zkrať formulář, doplň očekávání po odeslání, vysvětli důvod citlivějšího pole, přidej důkaz na pricing nebo odstraň tracker, který nepodporuje žádné rozhodnutí. Konverzní cesta má být krátká hlavně tam, kde člověku bere energii. Ne tam, kde potřebuje férové informace.
+
 ## Zdroje
 
 - EUR-Lex: Regulation (EU) 2016/679, GDPR Article 35 and 36 - povinnost posouzení vlivu na ochranu osobních údajů a předchozí konzultace při vysokém zbytkovém riziku: https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng
@@ -6603,6 +6722,7 @@ Potom udělej jednu konkrétní změnu: odeber starý účet, zúž admin roli, 
 
 ## Pracovní log
 
+- 2026-07-12: Doplněna příloha o konverzní cestě bez šmírovacího cirkusu: mapování kroků podle rozhodnutí člověka, ruční audit před dalším trackingem, měření jen rozhodovacích signálů, oddělení marketingového souhlasu od hlavní akce, checklist a mini úkol.
 - 2026-07-12: Doplněna příloha o přístupovém auditu za 30 minut: kritická místa, rozlišení rolí od lidí, staré a příliš široké přístupy, export jako zvláštní oprávnění, pravidelný rytmus kontrol, pracovní tabulka, komunikace odebrání přístupu, checklist a mini úkol.
 - 2026-07-12: Doplněna příloha o produktové dokumentaci bez supportního odpadu: dělení dokumentace podle práce uživatele, propojení s onboardingem, dokumentace datově citlivých funkcí, vlastnictví stránek, převod opakovaných supportních odpovědí do dokumentace, checklist a mini úkol; navázáno na existující zdroje Diátaxis, GDPR principy a privacy by design.
 - 2026-07-11: Doplněna příloha o DPIA bez tabulkového pekla: kdy dělat screening, jak popsat zpracování lidskou řečí, ověřit nezbytnost a přiměřenost, popsat rizika jako dopad na člověka, navrhnout ověřitelná opatření, zastavit rizikový release, checklist a mini úkol; ověřeny zdroje EUR-Lex, Evropské komise, EDPB a ÚOOÚ k DPIA.
