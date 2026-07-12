@@ -8280,6 +8280,179 @@ Vyber jeden typ notifikace, který dnes produkt posílá nebo by posílat měl, 
 
 Potom udělej jednu úpravu: přesuň citlivý detail do aplikace, odděl marketing od provozu, slouč hlučné zprávy do digestu, nebo přidej monitoring selhaného doručení. Notifikace má být pomocník, ne malý sirénový orchestr v kapse.
 
+## Příloha: Roadmapa bez feature factory
+
+Roadmapa má ukazovat, jak se produkt bude zlepšovat pro zákazníky a firmu. Nemá být seznam přání, slibů a nápadů, které se naházely do kvartálu jen proto, že tabulka měla volné řádky. Když se roadmapa změní ve feature factory, tým vyrábí funkce, ale méně často uzavírá skutečné problémy.
+
+Dobrá roadmapa neodpovídá jen na otázku „co postavíme“. Odpovídá na otázku „jaký výsledek chceme změnit a jak poznáme, že se to povedlo“.
+
+Špatná otázka zní: „Které funkce se vejdou do dalšího sprintu?“
+
+Lepší otázka zní: „Který zákaznický nebo provozní problém je teď nejdražší ignorovat?“
+
+> Codyho komentář: Funkce bez problému je produktový suvenýr. Vypadá hezky v release notes, ale nikdo neví, proč vznikla. A suvenýry se špatně udržují, hlavně když mají oprávnění, data a vlastní nastavení.
+
+### Roadmapu piš jako sadu problémů
+
+Začni tím, že položky roadmapy přepíšeš z funkcí na problémy. Funkce svádí k předčasnému řešení. Problém drží tým u reality.
+
+Příklad:
+
+| Slabá položka | Lepší položka |
+| --- | --- |
+| Přidat dashboard pro manažery | Manažer nepozná, které zakázky se zpozdí dřív, než mu zavolá zákazník |
+| Udělat export do Excelu | Admin potřebuje jednou měsíčně předat fakturační podklady účetní bez ručního kopírování |
+| Přidat AI asistenta | Support tráví moc času přepisem opakovaných odpovědí z dokumentace |
+| Nový pricing modul | Zákazníci nerozumí limitům plánů a ptají se na ně před nákupem |
+
+Jakmile máš problém, můžeš se ptát:
+
+- Pro koho přesně to je?
+- Jak často problém nastává?
+- Co stojí jeho ignorování?
+- Jak ho zákazník řeší dnes?
+- Jaký nejmenší výsledek by mu pomohl?
+- Dá se problém ověřit rozhovorem, prototypem nebo ručním řešením?
+
+Tohle zpomalí jen zdánlivě. Ve skutečnosti šetří měsíce práce na funkcích, které nikdo nepotřeboval tak moc, jak zněly na poradě.
+
+### Odděl závazky od možností
+
+Roadmapa často selže, protože vypadá jako veřejný slib, interní wishlist a technický backlog najednou. Tyto věci mají jiné publikum i jinou míru jistoty.
+
+Praktické rozdělení:
+
+| Vrstva | Co obsahuje | Jak s ní pracovat |
+| --- | --- | --- |
+| Závazky | věci slíbené zákazníkům, smlouvám nebo bezpečnosti | držet málo, hlídat vlastníka a datum |
+| Prioritní problémy | oblasti, které tým aktivně řeší | popsat výsledek, signál a rizika |
+| Možnosti | nápady, hypotézy a budoucí směry | neslibovat termín, pravidelně uklízet |
+| Nepůjdeme dělat | vědomě odmítnuté směry | chrání fokus a vysvětluje rozhodnutí |
+
+Zvlášť důležitá je poslední vrstva. Seznam „nepůjdeme dělat“ není negativní. Je to ochrana produktu před rozmazáním. Když prodáváš privacy-first SaaS pro evropské firmy, může být na seznamu třeba „nebudeme stavět reklamní profilování návštěvníků“ nebo „nebudeme přidávat social login jen proto, že je to rychlé“. Není to truc. Je to strategie.
+
+### Prioritizuj podle dopadu, důkazu a rizika
+
+Místo složitého skórovacího divadla často stačí tři otázky:
+
+1. Jaký dopad bude mít vyřešení problému?
+2. Jak silný máme důkaz, že problém opravdu existuje?
+3. Jaké riziko přidá řešení do produktu, provozu nebo dat?
+
+Praktická tabulka:
+
+| Problém | Dopad | Důkaz | Riziko | Nejmenší další krok |
+| --- | --- | --- | --- | --- |
+| Registrace sbírá moc údajů | vyšší aktivace | odpad před dokončením + rozhovory | nízké | odebrat dvě nepovinná pole |
+| Chybí export audit logu | enterprise prodej | tři opakované dotazy | střední | navrhnout rozsah exportu a retenci |
+| AI shrnutí supportu | úspora času supportu | interní odhad, málo zákaznických dat | vyšší privacy riziko | ruční pilot na anonymizovaných textech |
+| Nový graf v dashboardu | nejasný | jeden interní nápad | nízké | nejdřív ověřit rozhodnutí, které má graf podpořit |
+
+Riziko není důvod nedělat důležité věci. Je to důvod začít menším, ověřitelným krokem. U privacy-first produktu se ptej hlavně:
+
+- Přidává řešení nový typ osobních dat?
+- Zvyšuje počet lidí nebo systémů s přístupem k datům?
+- Prodlužuje retenci?
+- Přidává nového dodavatele nebo přeshraniční přenos?
+- Komplikuje export, výmaz nebo audit?
+- Dá se stejný výsledek dodat s menším datovým dopadem?
+
+### Roadmapa musí mít rytmus úklidu
+
+Roadmapa není archiv nápadů. Pokud se neuklízí, začne smrdět starými sliby. Pardon, produktová poezie.
+
+Jednou měsíčně projdi:
+
+- Co jsme dokončili a jaký výsledek to změnilo?
+- Co jsme nedokončili a proč?
+- Který problém už není důležitý?
+- Který důkaz zesílil nebo zeslábl?
+- Která položka přidává víc rizika než hodnoty?
+- Co musíme zákazníkům vysvětlit jinak?
+- Co smažeme, spojíme nebo přesuneme do „možná později“?
+
+U každé dokončené položky napiš krátkou poznámku:
+
+| Pole | Co zapsat |
+| --- | --- |
+| Původní problém | Jak byl popsaný před prací |
+| Dodané řešení | Co se skutečně změnilo |
+| Dopad | Jaký signál se zlepšil nebo nezlepšil |
+| Data a privacy | Jaký datový dopad řešení má |
+| Další rozhodnutí | Nechat, rozšířit, upravit nebo ukončit |
+
+Tato poznámka je důležitější než oslavný release post. Pomáhá týmu učit se, ne jen vyrábět. Když funkce dopad nezměnila, není to katastrofa. Katastrofa je tvářit se, že se nic nestalo, a přidat další funkci na stejný problém.
+
+### Veřejnou roadmapu drž opatrně
+
+Veřejná roadmapa může budovat důvěru, ale také vyrábět falešné závazky. U malého SaaS často stačí komunikovat směry a nedávné změny místo přesných termínů pro každou položku.
+
+Rozumné veřejné formulace:
+
+- „Teď zlepšujeme import a export dat pro týmy s více workspace.“
+- „Další priorita je jednodušší správa rolí a audit přístupů.“
+- „Zvažujeme podporu webhooků pro billing události, sbíráme konkrétní scénáře.“
+
+Horší formulace:
+
+- „V Q3 určitě dodáme kompletní AI modul.“
+- „Brzy přidáme všechny integrace.“
+- „Enterprise funkce už jsou skoro hotové“, když existuje jen název v backlogu.
+
+U privacy-first produktu navíc veřejně neprozrazuj interní bezpečnostní slabiny, konkrétní zákaznické požadavky ani detaily architektury, které by mohly zvýšit riziko. Transparentnost neznamená vyvěsit technický rentgen na náměstí.
+
+### Roadmapa a sales musí mluvit stejným jazykem
+
+Sales tým často slyší nejčerstvější požadavky. Produktový tým zase vidí technický dopad. Pokud spolu nemluví, vznikne klasika: zákazníkovi se něco naznačí, produkt o tom neví a roadmapa se pak tváří překvapeně.
+
+Zaveď jednoduché pravidlo:
+
+- Sales neslibuje funkci bez vlastníka v roadmapě.
+- Produkt nesmete požadavek bez pochopení obchodního kontextu.
+- Každý velký požadavek má segment, hodnotu, termín, riziko a alternativu.
+- Pokud se něco slíbí, je jasné komu, proč, do kdy a co se stane, když se to změní.
+
+Pracovní karta pro požadavek ze sales:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Kdo požadavek přinesl? |  |
+| Jaký segment nebo zákazník za ním stojí? |  |
+| Jaký problém tím řeší? |  |
+| Je to blokující pro nákup, retenci nebo expanzi? |  |
+| Existuje ruční workaround? |  |
+| Jaký datový nebo provozní dopad by řešení mělo? |  |
+| Co můžeme slíbit bezpečně? |  |
+
+Tohle chrání důvěru. Ne tím, že nikdy nic neslíbíš. Ale tím, že slib není vedlejší produkt nadšení na obchodním hovoru.
+
+### Checklist: Roadmapa bez feature factory
+
+- [ ] Položky roadmapy jsou popsané jako problémy nebo výsledky, ne jen jako funkce.
+- [ ] Každá prioritní položka má segment, důkaz a očekávaný dopad.
+- [ ] Závazky, aktivní priority, možnosti a odmítnuté směry jsou oddělené.
+- [ ] U každé větší položky je zhodnocen datový a privacy dopad.
+- [ ] Roadmapa obsahuje nejmenší další krok, ne jen velký cílový stav.
+- [ ] Sales požadavky mají kartu s problémem, hodnotou, rizikem a bezpečným slibem.
+- [ ] Veřejná komunikace neslibuje termíny, které tým neumí držet.
+- [ ] Jednou měsíčně proběhne úklid starých položek a zavření rozhodnutí.
+- [ ] Dokončené položky mají poznámku o skutečném dopadu.
+- [ ] Existuje seznam věcí, které produkt vědomě dělat nebude.
+
+### Mini úkol
+
+Vyber pět položek ze současné roadmapy nebo backlogu a přepiš je do této tabulky:
+
+| Položka | Skutečný problém | Segment | Důkaz | Datový/privacy dopad | Nejmenší další krok |
+| --- | --- | --- | --- | --- | --- |
+|  |  |  |  |  |  |
+|  |  |  |  |  |  |
+|  |  |  |  |  |  |
+|  |  |  |  |  |  |
+|  |  |  |  |  |  |
+
+Potom jednu položku smaž, jednu přesuň do „možná později“ a jednu zmenši na ověřitelný další krok. Roadmapa se zlepší víc jedním dobrým odmítnutím než třemi novými sliby.
+
 ## Zdroje
 
 - European Commission Taxation and Customs Union: VAT for businesses - One Stop Shop pro přeshraniční B2C e-commerce a služby v EU: https://taxation-customs.ec.europa.eu/taxation/vat/vat-businesses_en
@@ -8363,6 +8536,7 @@ Potom udělej jednu úpravu: přesuň citlivý detail do aplikace, odděl market
 
 ## Pracovní log
 
+- 2026-07-12: Doplněna příloha o roadmapě bez feature factory: přepis funkcí na problémy, oddělení závazků od možností, prioritizace podle dopadu, důkazu a privacy rizika, měsíční úklid roadmapy, opatrná veřejná komunikace, propojení se sales, checklist a mini úkol.
 - 2026-07-12: Doplněna příloha o produktových notifikacích bez notifikačního smogu: rozdělení bezpečnostních, provozních, pracovních, billing a marketingových zpráv, návrh události před výběrem kanálu, minimalizace citlivých detailů v e-mailu a push zprávách, role a preference, digesty, observabilita notifikací, checklist a mini úkol.
 - 2026-07-12: Doplněna příloha o žádostech k právům uživatelů bez supportního ping-pongu: jedna vstupní brána, ověřování identity přiměřené riziku, převodník lidských formulací na typ žádosti, mapa systémů s osobními údaji, šablony odpovědí, interní rozhodovací stopa, opatrná automatizace, checklist a mini úkol; ověřeny oficiální zdroje EDPB a Evropské komise k právům subjektů údajů, lhůtám, ověření identity a výmazu.
 - 2026-07-12: Doplněna příloha o mazání workspace bez datového strašení: rozlišení typů destruktivních akcí, export před výmazem, stavový proces mazání, oddělení právní retence od produktových dat, vypnutí integrací a tokenů, konkrétní potvrzení dopadu, checklist a mini úkol; ověřeny a doplněny zdroje Evropské komise a EDPB k právu na výmaz a praktické implementaci výmazu.
