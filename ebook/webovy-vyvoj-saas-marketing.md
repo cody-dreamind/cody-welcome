@@ -7605,6 +7605,185 @@ Vyber jednu migraci, kterou by tvůj produkt pravděpodobně řešil, a napiš i
 
 Potom smaž z návrhu jedno pole, které je jen zvědavost. Import, který začíná menším rozsahem, se lépe ladí, lépe vysvětluje a méně často skončí jako archeologická expedice v cizí databázi.
 
+## Příloha: Admin onboarding bez zbytečného sběru dat
+
+Admin onboarding je první chvíle, kdy nový zákazník přestává být lead a začíná být provozovatel vlastního workspace. Vypadá to jako pár obrazovek: název firmy, pozvat tým, nastavit oprávnění, propojit integrace, vytvořit první projekt. Ve skutečnosti je to produktový test dospělosti. Buď zákazník rychle pochopí, co má udělat, proč to dělá a jaká data do produktu pouští, nebo začne vyplňovat formulářovou mlhu a doufat, že tím něco aktivuje.
+
+Dobrý admin onboarding nemá být turistická prohlídka všech funkcí. Má dovést správce k první provozní hodnotě a přitom nesbírat data, která produkt v té chvíli nepotřebuje.
+
+> Codyho komentář: Pokud onboarding začíná tím, že chceš velikost firmy, obrat, telefon, počet zaměstnanců, oblíbenou barvu účetní a plánovaný rozpočet na Q4, možná nestavíš aktivaci. Možná stavíš dotazník, který se převlékl za produkt.
+
+### Definuj první hodnotu administrátora
+
+Admin nemá stejnou práci jako běžný uživatel. Běžný uživatel chce udělat konkrétní úkol. Admin chce připravit prostředí tak, aby ho ostatní mohli bezpečně používat.
+
+Než navrhneš onboarding, napiš jednu větu:
+
+```text
+Administrátor je úspěšně onboardovaný, když [konkrétní stav], protože tým potom může [konkrétní práce].
+```
+
+Příklady:
+
+- Administrátor CRM je úspěšně onboardovaný, když vytvoří pipeline, pozve dva obchodníky a založí první reálnou příležitost, protože tým potom může sledovat obchodní práci na jednom místě.
+- Administrátor helpdesku je úspěšně onboardovaný, když nastaví příchozí e-mail, pracovní hodiny a první kategorii požadavků, protože tým potom může přijímat tikety bez ručního přeposílání.
+- Administrátor analytického nástroje je úspěšně onboardovaný, když přidá web, ověří měřicí skript a vidí první agregovanou návštěvu, protože tým potom může kontrolovat základní výkon webu bez osobního profilování.
+
+Tato věta chrání onboarding před funkcemi, které jsou zajímavé, ale ne nutné. Když funkce nepomáhá první hodnotě, patří do pozdějšího nastavení, dokumentace nebo kontextové nápovědy.
+
+### Sbírej údaje po vlnách
+
+Privacy-first onboarding má jednoduchý rytmus: nejdřív minimum pro funkční workspace, potom data podle toho, jak zákazník skutečně postupuje.
+
+Rozděl údaje do tří vln:
+
+| Vlna | Kdy ji chceš | Příklad |
+| --- | --- | --- |
+| Start | Bez toho nejde založit účet nebo workspace | název workspace, pracovní e-mail administrátora |
+| Aktivace | Potřebuješ ji pro první hodnotu | název projektu, role pozvaného člena, základní nastavení procesu |
+| Rozšíření | Hodí se až při konkrétní funkci | fakturační údaje, integrace, pokročilé role, import dat |
+
+Častá chyba je chtít všechno ve startovní vlně. Produkt pak působí důkladně, ale zákazník ještě neví, jestli mu stojí za to investovat čas. Lepší je získat malý závazek, ukázat hodnotu a teprve potom se ptát na další údaje s jasným vysvětlením.
+
+Mikrotext u polí má říkat účel, ne marketingovou frázi:
+
+- „Název workspace uvidí členové týmu v pozvánce.“
+- „E-mail použijeme jen pro odeslání pozvánky do tohoto workspace.“
+- „Fakturační údaje doplníte až při přechodu na placený plán.“
+
+Takový text snižuje nejistotu a zároveň nutí produktový tým přiznat, proč pole existuje. Pokud účel nejde napsat lidsky, pole je kandidát na odstranění.
+
+### Pozvánky navrhni jako bezpečnostní moment
+
+Pozvání týmu je v SaaS onboardingu citlivější, než vypadá. Jedním klikem pouštíš další lidi k datům, procesům a někdy i fakturaci. Proto pozvánkový tok nemá být jen seznam e-mailů a tlačítko „odeslat“.
+
+Minimum:
+
+- U každé pozvánky vyber roli před odesláním.
+- Výchozí role má být nejméně oprávněná, která ještě dává smysl.
+- Pozvánka má expirovat.
+- Admin vidí, kdo pozvánku poslal, komu, kdy a s jakou rolí.
+- Neaktivní pozvánky jdou zrušit.
+- Hromadné pozvánky mají potvrzovací krok se shrnutím.
+
+Příklad shrnutí před odesláním:
+
+| E-mail | Role | Přístup |
+| --- | --- | --- |
+| jana@example.com | Člen týmu | projekty a úkoly |
+| petr@example.com | Billing | faktury a platby |
+| eva@example.com | Admin | nastavení workspace a členové |
+
+Tohle není paranoia. Je to respekt k tomu, že role je bezpečnostní rozhodnutí, ne dekorace v dropdownu.
+
+### Ukazuj pokrok podle hotové práce
+
+Onboarding checklist bývá užitečný, pokud ukazuje skutečný stav produktu. Nesmí to být jen gamifikovaný nátlak, který se tváří jako pomoc.
+
+Dobrý checklist:
+
+- obsahuje jen kroky nutné k první hodnotě,
+- každý krok má jasný výsledek,
+- jde přeskočit, pokud není relevantní,
+- nezamyká produkt za povinný tutorial,
+- po dokončení zmizí nebo se přesune do nastavení.
+
+Příklad:
+
+| Krok | Hotovo znamená |
+| --- | --- |
+| Vytvořit workspace | existuje název, vlastník a základní region provozu |
+| Pozvat tým | alespoň jeden člen má roli a přijal pozvánku |
+| Nastavit první proces | existuje pipeline, fronta, projekt nebo jiná hlavní struktura |
+| Ověřit provoz | admin vidí první reálný záznam nebo testovací scénář |
+| Zkontrolovat data | admin ví, kde upravit retenci, export a role |
+
+Nielsen Norman Group dlouhodobě upozorňuje, že povinný onboarding často selhává, pokud uživatele učí mimo kontext. Praktický závěr pro SaaS: raději pomoz ve chvíli, kdy člověk dělá konkrétní nastavení, než abys mu na začátku pustil obecnou prohlídku všech obrazovek.
+
+### Testovací obsah nesmí mást
+
+Prázdný workspace je studený. Ukázkový obsah může pomoct, ale musí být jasně označený a bezpečný. Admin má poznat rozdíl mezi demo daty, testovacím scénářem a reálnými daty zákazníka.
+
+Pravidla pro ukázkový obsah:
+
+- Používej smyšlené osoby, firmy a e-maily.
+- Demo záznamy viditelně označ.
+- Nabídni jedno kliknutí „smazat ukázková data“.
+- Demo data nespouštějí e-maily, webhooky ani fakturaci.
+- Ukázkové šablony se dají použít jako základ, ale nemíchají se potichu s produkcí.
+
+Pokud produkt potřebuje zákaznická data pro první hodnotu, řekni to napřímo a nabídni nejmenší bezpečný vstup. Například pět řádků CSV pro ověření mapování místo kompletní historické databáze. Aktivace není soutěž v objemu importu.
+
+### Nastavení soukromí dej do hlavního toku
+
+Privacy nastavení nemá být schované v pokročilé sekci, kam se běžný admin dostane až po incidentu. Některá rozhodnutí patří přímo do onboardingu:
+
+- kdo může zvát další uživatele,
+- kdo může exportovat data,
+- jak dlouho se drží logy nebo historie změn,
+- zda jsou veřejné odkazy zapnuté nebo vypnuté,
+- jaké notifikace odchází mimo produkt,
+- kde admin najde export a výmaz dat.
+
+Nemusíš každé nastavení cpát na první obrazovku. Ale musíš dát administrátorovi včas najevo, že produkt má jasné hranice pro data a že je může ovládat. U evropského provozu je to i obchodní výhoda: zákazník nechce jen funkci, chce vědět, že ji může bezpečně zavést ve firmě.
+
+### Měř aktivaci bez profilování
+
+U admin onboardingu často stačí agregované signály:
+
+- kolik workspace dokončí základní nastavení,
+- kde se onboarding nejčastěji zastaví,
+- kolik pozvánek je přijato,
+- kolik účtů dojde k první reálné hodnotě,
+- které kroky support vysvětluje opakovaně.
+
+Není nutné stavět detailní osobní profil každého administrátora. Pokud potřebuješ vědět, proč se lidé zasekli, často je rychlejší a férovější poslat krátký osobní dotaz nebo zavolat než přidat další vrstvu sledování.
+
+Rozumná metrika:
+
+```text
+Do 7 dnů od vytvoření workspace dokončilo 60 % nových týmů kroky: workspace, role, první projekt, první reálný záznam.
+```
+
+Špatná metrika:
+
+```text
+Máme 184 událostí v onboardingu a nikdo neví, co z nich plyne.
+```
+
+Dashboard není rozhovor. Pomáhá najít místo problému, ale dobrý onboarding zlepšíš až tehdy, když pochopíš práci administrátora.
+
+### Checklist: Admin onboarding privacy-first
+
+- [ ] Máme jednu větu, co znamená první hodnota pro administrátora.
+- [ ] Startovní formulář obsahuje jen údaje nutné pro založení workspace.
+- [ ] Další údaje sbíráme až ve chvíli, kdy mají jasný účel.
+- [ ] Každé citlivější pole má mikrotext vysvětlující použití dat.
+- [ ] Pozvánky mají role, expiraci, auditovatelný původ a možnost zrušení.
+- [ ] Výchozí role není zbytečně široká.
+- [ ] Onboarding checklist měří hotovou práci, ne proklikání tutorialu.
+- [ ] Ukázková data jsou jasně označená a jdou jedním krokem odstranit.
+- [ ] Demo data nespouštějí e-maily, webhooky ani fakturaci.
+- [ ] Nastavení exportu, rolí, retence a veřejných odkazů je pro admina snadno dohledatelné.
+- [ ] Aktivaci měříme agregovaně a podle rozhodnutí, která podle ní uděláme.
+
+### Mini úkol
+
+Vezmi svůj aktuální onboarding administrátora a vyplň tuto kartu:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jaká je první hodnota administrátora? |  |
+| Která pole jsou nutná při založení workspace? |  |
+| Která pole můžeme přesunout až po aktivaci? |  |
+| Jaká je výchozí role pozvaného člena? |  |
+| Které pozvánky nebo přístupy expirují? |  |
+| Jak admin pozná demo data? |  |
+| Kde nastaví export, retenci a veřejné odkazy? |  |
+| Jakou jednu agregovanou metriku aktivace budeme sledovat? |  |
+
+Potom odeber ze startu jedno pole, které není nutné pro první hodnotu. Pokud se bojíš, že ho později nezískáš, napiš k němu konkrétní moment, kdy dává smysl se zeptat. Onboarding má být cesta k hodnotě, ne vstupní pohovor s databází.
+
 ## Zdroje
 
 - European Commission Taxation and Customs Union: VAT for businesses - One Stop Shop pro přeshraniční B2C e-commerce a služby v EU: https://taxation-customs.ec.europa.eu/taxation/vat/vat-businesses_en
@@ -7686,6 +7865,7 @@ Potom smaž z návrhu jedno pole, které je jen zvědavost. Import, který zač�
 
 ## Pracovní log
 
+- 2026-07-12: Doplněna příloha o admin onboardingu bez zbytečného sběru dat: definice první hodnoty administrátora, sběr údajů po vlnách, bezpečné pozvánky a role, checklist hotové práce místo povinné prohlídky, bezpečná demo data, privacy nastavení v hlavním toku, agregované měření aktivace, checklist a mini úkol; navázáno na existující zdroje k onboardingu a GDPR principům minimalizace.
 - 2026-07-12: Doplněna příloha o migraci zákaznických dat bez chaosu a ostudy: migrační věta, rozdělení polí na nutná/volitelná/zakázaná, bezpečné zacházení s importními soubory, suchý běh, mapovací protokol, vztah k přenositelnosti dat, uzavření dočasných přístupů, checklist a mini úkol; ověřeny a doplněny zdroje EDPB k právu na přenositelnost údajů a OWASP k bezpečnému uploadu souborů.
 - 2026-07-12: Doplněna příloha o status page a provozní komunikaci bez mlžení: oddělení interního incidentu od veřejného stavu, komponenty podle práce uživatele, aktualizace podle jistoty, minimalizace citlivých detailů, šablony incidentové komunikace, postmortem, checklist a mini úkol; znovu ověřeny zdroje Evropské komise a EDPB k data breach a ENISA k bezpečnostní hygieně pro malé a střední firmy.
 - 2026-07-12: Doplněna příloha o testovacích datech a stagingu bez kopírování produkce: rozdělení neprodukčních prostředí, seed data jako scénáře, realistická data bez osobních údajů, rozdíl mezi pseudonymizací a anonymizací, řízená výjimka pro produkční snapshot, demo data, checklist a mini úkol; ověřeny a doplněny zdroje Evropské komise k principům GDPR a EDPB k pseudonymizaci.
