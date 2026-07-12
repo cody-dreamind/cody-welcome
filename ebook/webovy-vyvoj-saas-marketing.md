@@ -9374,6 +9374,154 @@ Vyber jednu činnost zpracování, která je pro produkt důležitá: registrace
 
 Potom oprav jednu konkrétní nejasnost: doplň vlastníka, najdi chybějícího dodavatele, přidej retenční pravidlo, odděl billing od workspace dat nebo propojuj kartu s privacy notice. Záznam o zpracování má hodnotu až tehdy, když podle něj někdo udělá lepší rozhodnutí než včera.
 
+## Příloha: Předání webu nebo SaaS projektu bez rukojmí
+
+Předání projektu není poslední ZIP, heslo poslané v chatu a věta „kdyby něco, ozvi se“. U webu nebo SaaS produktu je předání provozní proces: klient, tým nebo budoucí správce musí umět projekt spustit, upravit, zabezpečit, zaplatit, monitorovat a případně převést jinam bez toho, aby se stal rukojmím původního dodavatele.
+
+Privacy-first předání má ještě jednu vrstvu navíc. Nejde jen o kód a přístupy. Jde také o to, kdo drží data, kde běží služby, jak se řeší zálohy, jak se mažou osobní údaje, kdo odpovídá na žádosti uživatelů a co se stane, když spolupráce skončí. Pokud tohle není jasné při předání, objeví se to později v nejhorší možné chvíli: při incidentu, výpadku, právním dotazu nebo změně dodavatele.
+
+### Předávej schopnost provozu, ne jen soubory
+
+Hotový projekt není totéž co provozovatelný projekt. Klient nepotřebuje jen repozitář. Potřebuje vědět, jak se z repozitáře stane běžící služba a co se nesmí rozbít.
+
+Minimální předávací balík:
+
+- kde je repozitář a kdo je jeho vlastník,
+- jak se nastavuje lokální vývojové prostředí,
+- jak se spouští testy, lint a build,
+- jak se dělá deployment,
+- kde běží produkce, staging a další prostředí,
+- jaké proměnné prostředí a tajemství projekt potřebuje,
+- kde jsou domény, DNS, e-mailové služby, analytika a monitoring,
+- kdo platí jednotlivé služby,
+- kde jsou zálohy a jak se ověřuje obnova,
+- kdo má administrátorský přístup.
+
+Tohle může být jeden soubor `OPERATIONS.md`, interní stránka v dokumentaci nebo předávací karta v projektovém systému. Forma je méně důležitá než pravdivost. Dokument, který vypadá uhlazeně, ale nejde podle něj obnovit službu, je dekorace. Hezká dekorace, ale pořád dekorace.
+
+### Vlastnictví účtů musí být u správné strany
+
+Častý problém malých projektů: doména je koupená na účet dodavatele, hosting běží pod agenturou, analytika je ve workspace freelancera a faktury chodí někam, kam klient nevidí. Dokud všechno funguje, působí to pohodlně. Jakmile se mění dodavatel nebo řeší incident, je to past.
+
+Praktické pravidlo:
+
+| Oblast | Kdo má být vlastník | Poznámka |
+| --- | --- | --- |
+| Doména | klient nebo jeho firma | Dodavatel může mít technický přístup, ale nemá být jediný vlastník |
+| DNS | klient nebo jasně spravovaný firemní účet | Změny musí být dohledatelné |
+| Hosting | podle smlouvy, ideálně klientský účet | U SaaS provozu rozhoduje odpovědnost za data a incidenty |
+| Repozitář | klientská organizace nebo domluvený firemní prostor | Přístupy mají být přes role, ne osobní improvizaci |
+| Analytika | správce webu nebo produktu | Musí být jasné, kdo rozhoduje o účelu měření |
+| E-mailing/support | klient nebo provozovatel služby | Obsahuje osobní a obchodně citlivá data |
+| Platební brána | firma, která přijímá platby | Dodavatel nemá držet platební vztah za klienta |
+
+Dodavatel může projekt spravovat dál. To je normální. Rozdíl je v tom, že správa je delegovaná, ne vydíraná technickým vlastnictvím. Klient má mít možnost přístup odebrat, přidat jiného správce a exportovat data.
+
+### Přístupy předávej přes role, ne přes hesla
+
+Předání přístupů není přeposílání hesel. Správný postup je vytvořit účty pro konkrétní lidi nebo role, zapnout vícefaktorové ověření tam, kde to dává smysl, odebrat dočasné účty a sepsat, kdo má jakou úroveň oprávnění.
+
+Předávací tabulka přístupů:
+
+| Systém | Účel | Vlastník | Role | Kdo má přístup | MFA | Poznámka |
+| --- | --- | --- | --- | --- | --- | --- |
+| GitHub/GitLab | kód a CI |  | admin/write/read |  |  |  |
+| Hosting | produkce |  | owner/admin/viewer |  |  |  |
+| DNS | doména a záznamy |  | admin/editor |  |  |  |
+| Analytika | agregované metriky |  | admin/viewer |  |  |  |
+| Support | zákaznické zprávy |  | admin/agent |  |  |  |
+| Billing | faktury a platby |  | owner/billing |  |  |  |
+
+Po předání udělej malý offboarding původního projektu:
+
+- zruš osobní účty lidí, kteří už projekt nespravují,
+- zneplatni dočasné tokeny a pozvánky,
+- otoč sdílená tajemství, pokud šla přes ruční kanál,
+- odeber testovací webhooky a staré integrace,
+- ověř, že klient má alespoň dva důvěryhodné administrátory.
+
+> Codyho komentář: Když jediný admin odjede na dovolenou a doména expiruje, není to dobrodružství. Je to organizační chyba v klobouku technického problému.
+
+### Data a privacy předávej jako mapu, ne jako slib
+
+U privacy-first projektu nestačí říct „GDPR je vyřešené“. Předání má obsahovat mapu hlavních datových toků a odpovědností. Nemusí být dokonalá, ale musí pomoct člověku, který za tři měsíce řeší dotaz zákazníka nebo novou integraci.
+
+Předávací datová mapa:
+
+| Situace | Jaká data vznikají | Kde jsou | Kdo je správce/zpracovatel | Retence | Poznámka |
+| --- | --- | --- | --- | --- | --- |
+| Návštěva webu | agregovaná návštěvnost, technické logy |  |  |  |  |
+| Kontaktní formulář | kontaktní údaje a zpráva |  |  |  |  |
+| Registrace | účet, e-mail, organizace |  |  |  |  |
+| Workspace data | obsah vložený zákazníkem |  |  |  |  |
+| Support | zprávy, screenshoty, přílohy |  |  |  |  |
+| Billing | fakturační údaje, platební stav |  |  |  |  |
+
+U každé položky napiš, kde je veřejně popsaná: privacy notice, obchodní podmínky, dokumentace, DPA nebo interní záznam o zpracování. Pokud veřejný text neodpovídá realitě, předání není hotové. Ne proto, že by každý projekt měl mít právní román, ale protože uživatelé a zákazníci mají dostat pravdivé informace.
+
+### Deployment předveď, ne jen popiš
+
+Nejlepší test předání je řízený release. Původní dodavatel nesmí být jediný člověk, který umí projekt nasadit.
+
+Praktický scénář:
+
+1. Klient nebo nový správce si stáhne repozitář.
+2. Spustí lokální prostředí podle dokumentace.
+3. Udělá malou bezpečnou změnu, třeba text v interní testovací stránce.
+4. Spustí kontrolu: test, lint nebo build podle projektu.
+5. Nasadí změnu do stagingu.
+6. Ověří výsledek.
+7. Původní dodavatel jen sleduje a doplňuje dokumentaci tam, kde něco chybí.
+
+Tohle je trapně účinné. Během jedné hodiny odhalí chybějící proměnné prostředí, nejasné příkazy, ruční kroky, tajné znalosti v hlavě vývojáře i zastaralé README. Přesně ty věci, které by později bolely.
+
+### Odděl předání od podpory po předání
+
+Předání neznamená, že původní tým musí navždy zdarma vysvětlovat historii každého rozhodnutí. A zároveň neznamená, že klient zůstane bez opory. Pomáhá rozdělit věci na tři vrstvy:
+
+| Vrstva | Co obsahuje | Jak ji domluvit |
+| --- | --- | --- |
+| Předání | dokumentace, přístupy, datová mapa, release test | součást dokončení projektu |
+| Záruka na chyby | opravy vad proti zadání | časově omezené a konkrétní |
+| Provozní podpora | aktualizace, incidenty, drobné změny, konzultace | samostatný support nebo retainer |
+
+Tahle hranice chrání obě strany. Klient ví, co dostává. Dodavatel ví, co už je nová práce. A projekt má menší šanci skončit v mlhavé zóně „to přece bylo jasné“. Nebylo. Proto to píšeme.
+
+### Checklist: Předání bez rukojmí
+
+- [ ] Repozitář je ve správné organizaci a klient nebo provozovatel má vlastnický přístup.
+- [ ] Doména, DNS, hosting, platební brána, analytika a support jsou pod správnými účty.
+- [ ] Existuje stručný provozní dokument s lokálním spuštěním, buildem, testy a deploymentem.
+- [ ] Proměnné prostředí jsou popsané bez vyzrazení tajemství.
+- [ ] Secrets nejsou v repozitáři, dokumentaci ani chatu.
+- [ ] Přístupy jsou přes role a osobní účty, ne přes sdílená hesla.
+- [ ] Dočasné účty, tokeny, testovací webhooky a staré pozvánky jsou zrušené.
+- [ ] Je jasné, kdo platí a vlastní jednotlivé služby.
+- [ ] Datová mapa popisuje hlavní situace, systémy, role, dodavatele a retenci.
+- [ ] Privacy notice, DPA nebo dokumentace odpovídají tomu, jak projekt skutečně funguje.
+- [ ] Zálohy mají vlastníka, rytmus a alespoň jednou ověřený postup obnovy.
+- [ ] Nový správce provedl malý deployment podle dokumentace.
+- [ ] Je oddělené dokončení předání, záruka na vady a placená provozní podpora.
+
+### Mini úkol
+
+Vyber jeden aktuální web, SaaS nebo klientský projekt a udělej 45minutový test předání:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Kdo vlastní doménu? |  |
+| Kdo vlastní DNS? |  |
+| Kde je repozitář a kdo je owner? |  |
+| Kdo umí nasadit produkci kromě původního vývojáře? |  |
+| Kde jsou popsány proměnné prostředí? |  |
+| Kde jsou zálohy a kdy se naposledy testovala obnova? |  |
+| Které účty jsou pořád osobní nebo dočasné? |  |
+| Jaká zákaznická nebo osobní data projekt drží? |  |
+| Kde je popsána retence? |  |
+| Jak by projekt šel převést jinému správci? |  |
+
+Na konci vyber jednu věc, která nejvíc zvyšuje závislost na jednom člověku nebo dodavateli, a oprav ji. Převést doménu na správný účet, přidat druhého administrátora, dopsat deployment krok nebo zrušit starý token je malý úkol. Ale přesně z takových malých úkolů vzniká projekt, který se dá normálně vlastnit.
+
 ## Zdroje
 
 - EUR-Lex: Regulation (EU) 2016/679, GDPR Article 30 - právní text k záznamům o činnostech zpracování pro správce a zpracovatele: https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng
@@ -9461,6 +9609,7 @@ Potom oprav jednu konkrétní nejasnost: doplň vlastníka, najdi chybějícího
 
 ## Pracovní log
 
+- 2026-07-12: Doplněna příloha o předání webu nebo SaaS projektu bez rukojmí: provozní balík, vlastnictví účtů, role a přístupy, datová mapa, předvedení deploymentu, oddělení předání od podpory, checklist a mini úkol.
 - 2026-07-12: Doplněna příloha o záznamu o činnostech zpracování bez tabulky pro tabulku: procesní pohled místo databázových tabulek, karta činnosti, rozlišení rolí správce/zpracovatele, vazba na retenci, release proces, nákup nástrojů, čitelnost pro tým, checklist a mini úkol; ověřen a doplněn zdroj EUR-Lex k GDPR článku 30.
 - 2026-07-12: Doplněna příloha o privacy notice bez právnické mlhy: mapa datových situací, psaní podle otázek člověka, spojení účelu s právním základem, vrstvení informací v produktu, dodavatelé a EU provoz, retence jako konec životnosti, verzování změn, checklist a mini úkol; ověřeny a doplněny oficiální zdroje Evropské komise a EDPB k transparentnosti a informačním povinnostem podle GDPR.
 - 2026-07-12: Doplněna příloha o technickém dluhu bez věčného odkládání: rozlišení dluhu, rizika a nepořádku, popis dluhu jako dopadu, splácení při souvisejících změnách, rytmus údržby závislostí, rozpočet času, definice hotovo pro refaktor, checklist a mini úkol.
