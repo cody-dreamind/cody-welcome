@@ -7937,6 +7937,188 @@ Vezmi jeden destruktivní tok ve svém produktu a vyplň tuto kartu:
 
 Potom oprav jednu věc: buď přejmenuj matoucí tlačítko, přidej jasný seznam dopadů, nebo doplň export před výmazem. Mazání je jedna z těch funkcí, které vypadají nudně, dokud přes ně neztratíš důvěru zákazníka.
 
+## Příloha: Žádosti o práva uživatelů bez supportního ping-pongu
+
+Žádost o přístup, opravu, výmaz, omezení zpracování nebo přenositelnost dat není otravný právní tiket. Je to moment, kdy člověk testuje, jestli tvoje sliby o soukromí fungují i mimo hezkou landing page. Pokud tým neví, kdo žádost přijímá, jak ověřit identitu, kde hledat data a co odpovědět, začne se z privacy-first hodnoty stávat improvizace v supportním vlákně.
+
+EDPB ve svém průvodci pro malé firmy připomíná, že správce má lidem výkon práv usnadnit, odpovídat jasně a srozumitelně, držet přehled o datových tocích, odpovědět zpravidla do jednoho měsíce a žádosti dokumentovat. Evropská komise zároveň vysvětluje, že některá práva neplatí ve všech situacích a například výmaz může mít výjimky, když existuje zákonná povinnost nebo obhajoba právních nároků. Praktický závěr pro SaaS: neřeš práva lidí až jako právní nouzovku. Udělej z nich malý provozní proces.
+
+Codyho komentář: Nejhorší odpověď na žádost o data není pomalá odpověď. Nejhorší je sebevědomé „to nejde“, po kterém někdo v týmu otevře databázi a začne ručně lovit e-maily. To je compliance ve stylu hledání ponožek ve tmě.
+
+### Dej žádostem jednu vstupní bránu
+
+Člověk nemá hádat, jestli má napsat na support, privacy e-mail, account managerovi nebo do chatu. Na webu a v aplikaci uveď jednu jasnou cestu:
+
+- e-mail typu `privacy@firma.cz`,
+- odkaz v nastavení účtu,
+- jednoduchý formulář pro přihlášené uživatele,
+- informace v privacy policy, která není napsaná jen pro právníky.
+
+Pro malý tým stačí jedna adresa a interní štítek v helpdesku. Důležité je, aby se žádost neztratila mezi běžnými dotazy typu „kde změním fakturační adresu“. Jakmile dorazí zpráva, která se týká osobních údajů, práv uživatele, exportu, opravy, výmazu nebo námitky, musí dostat jiný režim než běžný support.
+
+Praktický štítek:
+
+```text
+privacy-request
+```
+
+K němu přidej tři povinná pole:
+
+| Pole | Proč existuje |
+| --- | --- |
+| Typ žádosti | Přístup, oprava, výmaz, omezení, přenositelnost, námitka, automatizované rozhodování |
+| Deadline | Aby tým nepřekročil lhůtu kvůli zapomenutému tiketu |
+| Vlastník | Jeden člověk odpovídá za uzavření, i když práci dělá víc rolí |
+
+### Ověř identitu bez datového výslechu
+
+Před vydáním dat musíš vědět, že komunikuješ se správným člověkem. To ale neznamená vyžádat si občanku pokaždé, když někdo napíše z přihlášeného účtu. EDPB uvádí, že při rozumných pochybnostech o identitě může organizace požádat o dodatečné informace. Produktově z toho plyne jednoduché pravidlo: ověřuj přiměřeně riziku.
+
+Příklady:
+
+- Přihlášený uživatel žádá export vlastních dat v aplikaci: potvrď akci heslem, passkey nebo druhým faktorem.
+- E-mail přichází ze stejné adresy, která je v účtu: může stačit potvrzovací odkaz do schránky nebo přihlášení do účtu.
+- E-mail přichází z jiné adresy a chce výmaz firemního workspace: požaduj přihlášení ownera nebo interně ověřený postup pro správce.
+- Někdo žádá data o jiné osobě: zastav, neeskaluj data do odpovědi, ověř oprávnění.
+
+Nežádej víc údajů, než je potřeba k ověření. Pokud kvůli ověření nahraješ sken dokladu, právě jsi vytvořil další citlivý datový problém. U běžného SaaS účtu je lepší ověřovat přes existující autentizaci než sbírat nové dokumenty.
+
+### Rozliš typ žádosti podle práce, ne podle právního názvu
+
+Uživatel často nenapíše „uplatňuji právo podle článku 15 GDPR“. Napíše:
+
+```text
+Pošlete mi všechno, co o mně máte.
+```
+
+nebo:
+
+```text
+Smažte mě ze systému.
+```
+
+Support proto potřebuje převodník lidských vět na provozní akce:
+
+| Co člověk píše | Pravděpodobná práce |
+| --- | --- |
+| Chci vědět, co o mně máte | Přístup k údajům |
+| Opravte moje údaje | Oprava nepřesných dat |
+| Smažte můj účet nebo e-mail | Výmaz nebo ukončení zpracování pro konkrétní účel |
+| Nechci, abyste s tím něco dělali | Omezení zpracování nebo námitka |
+| Chci si data odnést jinam | Přenositelnost dat |
+| Nechci automatické rozhodnutí | Přezkum automatizovaného rozhodování |
+
+Tento převodník není právní posouzení. Je to první třídění, aby žádost neskončila jako obecný support ticket. U složitějších případů zapoj právníka nebo DPO, pokud ho firma má. U běžných produktových žádostí ale tým musí umět bezpečně začít.
+
+### Data hledej podle mapy, ne podle intuice
+
+Žádost o data je praktický test retenční mapy. Pokud nevíš, kde data jsou, odpověď bude pomalá a neúplná. Připrav si jednoduchý seznam systémů:
+
+| Systém | Typ dat | Vlastník | Umíme export? | Umíme opravit/smazat? |
+| --- | --- | --- | --- | --- |
+| Produktová databáze | účet, projekty, nastavení | Produkt/Tech |  |  |
+| Billing | faktury, plátce, platby | Finance/Ops |  |  |
+| CRM | obchodní komunikace, lead stav | Sales |  |  |
+| Support | tikety, přílohy, poznámky | Support |  |  |
+| Analytika | agregované eventy, případně identifikátory | Produkt |  |  |
+| Logy | bezpečnostní a provozní záznamy | Tech/Ops |  |  |
+| E-mailing | odběry, odhlášení, preference | Marketing |  |  |
+
+Privacy-first design tu pomáhá brutálně jednoduše: čím méně systémů obsahuje osobní údaje, tím snáz žádost vyřídíš. Když se osobní údaje kopírují do každého nástroje, každá žádost se mění na malou archeologickou expedici.
+
+### Odpověď piš jako stav procesu
+
+U žádostí o práva nepiš neurčité věty. Piš, co jste přijali, co ověřujete, co uděláte a kdy se ozvete. Pokud žádost nejde splnit celá, vysvětli proč a odděl části, které splnit lze.
+
+Šablona přijetí:
+
+```text
+Dobrý den,
+
+přijali jsme vaši žádost týkající se osobních údajů.
+Nejdřív ověříme, že se týká správného účtu, a potom ji zpracujeme podle typu žádosti.
+Pokud budeme potřebovat doplňující informace k ověření identity nebo rozsahu, ozveme se.
+
+Odpověď pošleme nejpozději do jednoho měsíce od přijetí žádosti.
+```
+
+Šablona částečného výmazu:
+
+```text
+Dobrý den,
+
+smazali jsme produktová data spojená s účtem [název/e-mail].
+Fakturační doklady uchováváme kvůli zákonné povinnosti.
+Bezpečnostní logy držíme podle retenčního plánu a nepoužíváme je pro marketing.
+
+Pokud chcete upřesnit rozsah výmazu, napište nám prosím.
+```
+
+Neuváděj v odpovědi víc osobních údajů, než je nutné. U přístupu k údajům pošli export bezpečnou cestou, ne jako přílohu plnou osobních dat do nekonečného e-mailového vlákna.
+
+### Měj interní rozhodovací stopu
+
+Ke každé žádosti ulož krátký interní záznam:
+
+- kdy žádost přišla,
+- jak byl ověřen žadatel,
+- jaký typ žádosti tým vyhodnotil,
+- které systémy se kontrolovaly,
+- co bylo provedeno,
+- co nebylo provedeno a proč,
+- kdy a jak byla odeslána odpověď,
+- kdo žádost uzavřel.
+
+Záznam nemá být skladiště obsahu exportu. Má dokazovat proces. Nepiš do něj subjektivní poznámky typu „otravný zákazník“ nebo „zase tenhle člověk“. Za prvé je to neprofesionální. Za druhé přesně takové poznámky se jednou objeví ve chvíli, kdy bys nejradši byl neviditelný.
+
+### Automatizuj opatrně
+
+Automatický export, odhlášení nebo smazání účtu může být skvělá funkce. Automatizace ale musí respektovat oprávnění, typ účtu a dopad na ostatní lidi.
+
+Pozor hlavně na:
+
+- firemní workspace, kde jeden uživatel není vlastník všech dat,
+- sdílené projekty s více lidmi,
+- billing údaje oddělené od produktového účtu,
+- support tikety s osobními údaji dalších osob,
+- auditní a bezpečnostní logy,
+- data předaná zpracovatelům nebo integracím.
+
+Dobrá automatizace má stavový model: přijato, ověřuje se, čeká na doplnění, zpracovává se, částečně vyřízeno, vyřízeno, odmítnuto s důvodem. Špatná automatizace má jedno tlačítko „smazat všechno“ a tým doufá, že to trefí. Naděje není architektura. Je to jen drahý komentář v backlogu.
+
+### Checklist: Žádosti o práva uživatelů
+
+- [ ] Na webu a v aplikaci existuje jasná cesta pro žádosti o osobní údaje.
+- [ ] Support umí poznat žádost i bez právních formulací.
+- [ ] Každá žádost dostane vlastníka, typ a deadline.
+- [ ] Identitu ověřujeme přiměřeně riziku, ideálně přes existující účet.
+- [ ] Nevyžadujeme nové citlivé dokumenty, pokud to není opravdu nutné.
+- [ ] Máme mapu systémů, kde mohou být osobní údaje.
+- [ ] Umíme oddělit produktová data, billing, support, marketing, logy a zálohy.
+- [ ] Odpovědi píšeme jasně: co přijímáme, co děláme, co nejde a proč.
+- [ ] Exporty neposíláme nechráněnou cestou.
+- [ ] U každé žádosti držíme stručnou interní rozhodovací stopu.
+- [ ] Výjimky z výmazu mají účel, právní důvod, retenci a vlastníka.
+- [ ] Proces jednou za čas testujeme na fiktivní žádosti.
+
+### Mini úkol
+
+Vezmi poslední nebo modelovou žádost týkající se osobních údajů a vyplň kartu:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jak by ji uživatel nejspíš napsal vlastními slovy? |  |
+| Jaký typ žádosti to pravděpodobně je? |  |
+| Kdo je vlastník vyřízení? |  |
+| Jak ověříme identitu bez nového sběru citlivých dat? |  |
+| Které systémy musíme zkontrolovat? |  |
+| Co můžeme splnit automaticky? |  |
+| Co vyžaduje ruční kontrolu nebo právní posouzení? |  |
+| Jakou odpověď dostane uživatel? |  |
+| Jaký interní záznam po sobě necháme? |  |
+
+Potom udělej jednu konkrétní opravu: přidej privacy štítek do helpdesku, napiš šablonu přijetí žádosti, doplň mapu systémů nebo vytvoř testovací export. Žádosti o práva lidí nejsou jen právní povinnost. Jsou to kontrolka, jestli produkt skutečně ví, co dělá s daty.
+
 ## Zdroje
 
 - European Commission Taxation and Customs Union: VAT for businesses - One Stop Shop pro přeshraniční B2C e-commerce a služby v EU: https://taxation-customs.ec.europa.eu/taxation/vat/vat-businesses_en
@@ -8020,6 +8202,7 @@ Potom oprav jednu věc: buď přejmenuj matoucí tlačítko, přidej jasný sezn
 
 ## Pracovní log
 
+- 2026-07-12: Doplněna příloha o žádostech k právům uživatelů bez supportního ping-pongu: jedna vstupní brána, ověřování identity přiměřené riziku, převodník lidských formulací na typ žádosti, mapa systémů s osobními údaji, šablony odpovědí, interní rozhodovací stopa, opatrná automatizace, checklist a mini úkol; ověřeny oficiální zdroje EDPB a Evropské komise k právům subjektů údajů, lhůtám, ověření identity a výmazu.
 - 2026-07-12: Doplněna příloha o mazání workspace bez datového strašení: rozlišení typů destruktivních akcí, export před výmazem, stavový proces mazání, oddělení právní retence od produktových dat, vypnutí integrací a tokenů, konkrétní potvrzení dopadu, checklist a mini úkol; ověřeny a doplněny zdroje Evropské komise a EDPB k právu na výmaz a praktické implementaci výmazu.
 - 2026-07-12: Doplněna příloha o admin onboardingu bez zbytečného sběru dat: definice první hodnoty administrátora, sběr údajů po vlnách, bezpečné pozvánky a role, checklist hotové práce místo povinné prohlídky, bezpečná demo data, privacy nastavení v hlavním toku, agregované měření aktivace, checklist a mini úkol; navázáno na existující zdroje k onboardingu a GDPR principům minimalizace.
 - 2026-07-12: Doplněna příloha o migraci zákaznických dat bez chaosu a ostudy: migrační věta, rozdělení polí na nutná/volitelná/zakázaná, bezpečné zacházení s importními soubory, suchý běh, mapovací protokol, vztah k přenositelnosti dat, uzavření dočasných přístupů, checklist a mini úkol; ověřeny a doplněny zdroje EDPB k právu na přenositelnost údajů a OWASP k bezpečnému uploadu souborů.
