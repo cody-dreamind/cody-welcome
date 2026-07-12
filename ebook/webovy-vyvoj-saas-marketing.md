@@ -9060,8 +9060,169 @@ Vyber jednu část produktu, které se tým bojí dotknout, a vyplň krátkou ka
 
 Potom udělej jednu malou splátku: odstraň nepoužívanou závislost, sjednoť jednu validaci, doplň test ke kritické cestě, popiš runbook nebo zavři starou TODO poznámku tím, že z ní vznikne skutečná karta. Technický dluh se neporazí hrdinským refaktorem jednou za rok. Porazí se tím, že ho tým přestane nechávat růst potichu.
 
+## Příloha: Privacy notice bez právnické mlhy
+
+Zásady zpracování osobních údajů často vzniknou jako poslední dokument před spuštěním webu. Někdo najde šablonu, přepíše název firmy, přidá hromadu obecných vět a doufá, že tím je hotovo. Formálně to možná vypadá jako dokument. Produktově je to problém.
+
+Privacy notice má člověku vysvětlit, co se s jeho daty děje, proč, komu se předávají, jak dlouho se drží a co s tím může dělat. GDPR staví transparentnost a informování lidí do středu zpracování: zejména články 12, 13 a 14 řeší, jak mají být informace podané a co mají obsahovat. Evropská komise k tomu má praktický přehled pro organizace a EDPB navazuje pokyny k transparentnosti. Viz zdroje na konci e-booku.
+
+Privacy-first produkt proto nebere privacy notice jako jednorázovou právní přílohu. Bere ji jako veřejný provozní popis datových toků.
+
+> Codyho komentář: Pokud zásady zpracování neumí přečíst ani člověk, který produkt staví, nejsou to zásady. Je to kouřová clona v PDFku. A kouřová clona je v privacy-first produktu dost blbý stavební materiál.
+
+### Začni mapou situací, ne dokumentem
+
+Nejdřív si napiš, kdy a proč člověk předává data. Teprve potom piš text. Jinak skončíš u generických frází typu „zpracováváme osobní údaje za účelem poskytování služeb“, což je sice oblíbená věta, ale člověk z ní nepozná skoro nic.
+
+U malého SaaS nebo firemního webu si typicky rozděl situace takto:
+
+| Situace | Kdo předává data | Jaká data | Proč | Kde se to vysvětluje |
+| --- | --- | --- | --- | --- |
+| Návštěva webu | návštěvník | technické logy, agregovaná analytika | bezpečný provoz a zlepšování webu | privacy notice, cookie stránka |
+| Poptávkový formulář | zájemce | jméno, e-mail, firma, zpráva | odpověď na poptávku | formulář, privacy notice |
+| Registrace do SaaS | uživatel | e-mail, heslo nebo SSO identita, workspace | vytvoření účtu | onboarding, privacy notice |
+| Billing | plátce | fakturační údaje, platební stav | smlouva, účetnictví, platby | objednávka, billing, privacy notice |
+| Support | uživatel nebo admin | zpráva, screenshot, technické údaje | vyřešení problému | support formulář, privacy notice |
+| Marketingový odběr | odběratel | e-mail, preference | zasílání obsahu | přihlášení odběru, privacy notice |
+
+Tahle tabulka není právní finále. Je to pracovní kostra. Pomůže ti zjistit, jestli dokument odpovídá produktu, nebo jen opakuje prázdné formulace.
+
+### Piš podle otázek člověka
+
+Dobrá privacy notice odpovídá na praktické otázky:
+
+- Kdo je správce dat?
+- Jaká data sbíráte v konkrétních situacích?
+- Proč je sbíráte?
+- Na jakém právním základu je zpracování postavené?
+- Kdo data dostává nebo k nim má přístup?
+- Jdou data mimo EU nebo EHP?
+- Jak dlouho data držíte?
+- Jaká má člověk práva a kam se ozvat?
+- Co je nutné pro službu a co je volitelné?
+
+Nepřeháněj detail do nesrozumitelnosti. Člověk nepotřebuje vidět interní názvy databázových tabulek. Potřebuje pochopit dopad. Místo „zpracováváme identifikační a kontaktní údaje“ napiš třeba:
+
+„Když nám pošlete poptávku, uložíme jméno, e-mail, firmu a text zprávy, abychom vám mohli odpovědět a navázat na předchozí komunikaci.“
+
+To je pořád jednoduché, ale užitečné.
+
+### Právní základ spoj s účelem
+
+Právní základ nedávej jako samostatný odstavec plný zkratek. Spoj ho s konkrétním účelem. V praxi tak vznikne čitelnější přehled:
+
+| Účel | Příklad dat | Právní základ | Typická retence |
+| --- | --- | --- | --- |
+| Odpověď na poptávku | e-mail, zpráva, firma | jednání o smlouvě nebo oprávněný zájem podle situace | po dobu obchodní komunikace a přiměřené navazující doby |
+| Vedení uživatelského účtu | e-mail, role, workspace | plnění smlouvy | po dobu aktivního účtu a následné retence podle pravidel služby |
+| Fakturace | fakturační údaje, platby | právní povinnost a plnění smlouvy | podle účetních a daňových povinností |
+| Bezpečnostní logy | IP adresa v logu, čas, endpoint | oprávněný zájem na bezpečnosti | krátká provozní retence podle rizika |
+| Newsletter | e-mail, preference odběru | souhlas nebo zákonný režim pro vlastní zákazníky podle konkrétní situace | do odhlášení nebo ukončení účelu |
+
+Toto není právní rada. Je to způsob, jak donutit tým říct nahlas, proč data drží. Přesný právní základ si u sporných situací ověř s právníkem nebo DPO, hlavně u marketingu, profilování, citlivějších segmentů a předávání mimo EU.
+
+### Vrstvi informace podle místa
+
+Jeden dlouhý dokument nestačí. Informace má být dostupná tam, kde člověk rozhodnutí dělá.
+
+Příklad pro poptávkový formulář:
+
+- U pole e-mail: krátký mikrotext „Použijeme ho jen pro odpověď na poptávku.“
+- Pod formulářem: „Odesláním nám předáváte údaje z formuláře, abychom mohli odpovědět. Podrobnosti najdete v zásadách zpracování.“
+- V privacy notice: plný popis účelu, právního základu, příjemců, retence a práv.
+
+Příklad pro produktovou analytiku:
+
+- V nastavení workspace: přehled, jestli je zapnutá agregovaná analytika a co měří.
+- V dokumentaci: vysvětlení událostí, které produkt používá pro zlepšování služby.
+- V privacy notice: účel, rozsah, právní základ, retence a dodavatelé.
+
+Privacy-first design tím získá jednu příjemnou vlastnost: člověk nemusí číst všechno najednou, ale když chce detail, najde ho.
+
+### Příjemce a dodavatele pojmenuj lidsky
+
+„Vaše údaje můžeme předávat našim obchodním partnerům“ je věta, po které by měl někdo v týmu zvednout obočí. Kterým partnerům? Proč? Mají data zákazníků, návštěvníků, nebo jen billing kontaktů?
+
+Lepší je popsat kategorie podle funkce:
+
+- hosting a infrastruktura,
+- e-mailové doručování,
+- platební a fakturační služba,
+- support nástroj,
+- analytika,
+- účetnictví a právní služby,
+- bezpečnostní monitoring.
+
+U rizikovějších oblastí přidej konkrétní seznam dodavatelů nebo veřejnou stránku se subdodavateli. U SaaS je to často lepší než schovávat seznam v PDF, které nikdo neaktualizuje. Když se dodavatel změní, aktualizuješ jeden zdroj pravdy.
+
+Evropský provoz je tady konkurenční výhoda. Pokud držíš hosting, analytiku a support v EU, řekni to konkrétně. Ne jako marketingovou fanfáru, ale jako fakt: kde data běží, kdo je zpracovatel a jestli dochází k přenosům mimo EU/EHP.
+
+### Retenci piš jako konec životnosti
+
+„Údaje uchováváme po dobu nezbytně nutnou“ je někdy pravda, ale samo o sobě je to slabé. Člověk neví, jestli jde o týden, rok nebo věčnost s elegantním kloboukem.
+
+U každé kategorie si napiš konec životnosti:
+
+- poptávka: uzavření komunikace plus přiměřená doba pro navázání,
+- uživatelský účet: aktivní používání služby plus proces zrušení a retence podle smlouvy,
+- fakturace: zákonné účetní a daňové lhůty,
+- bezpečnostní logy: krátká technická retence podle rizika,
+- newsletter: do odhlášení nebo zániku účelu,
+- support ticket: po vyřešení a retenční době pro návazné dotazy.
+
+Pokud přesné číslo ještě nevíš, je to signál pro retenční mapu, ne důvod nechat text mlhavý. Privacy notice a interní retenční pravidla se mají navzájem držet za ruku. Když veřejně slíbíš mazání po 90 dnech a systém drží data dva roky, problém není v textu. Problém je v provozu.
+
+### Verze a změny ber jako součást produktu
+
+Privacy notice se mění s produktem. Nový support nástroj, nová analytika, nový billing flow, nový AI pomocník nebo export dat nejsou jen technické změny. Mohou měnit informování uživatelů.
+
+Zaveď jednoduchý proces:
+
+1. Každá změna, která přidává nový typ dat, nový účel, nového dodavatele nebo nový přenos mimo EU/EHP, dostane privacy kontrolu.
+2. Privacy notice má datum poslední aktualizace.
+3. Významné změny mají krátký changelog v dokumentu nebo samostatné oznámení.
+4. Starší verze ukládej interně, aby šlo dohledat, co platilo v době zpracování.
+5. U zásadních změn informuj uživatele přímo, ne jen tichým přepsáním stránky.
+
+Prakticky: do produktového pull requestu přidej otázku „Mění tato změna osobní údaje, účel, retenci, dodavatele nebo přenos mimo EU/EHP?“ Pokud ano, privacy notice není až úkol pro pátek večer. Je součást releasu.
+
+### Checklist: Privacy notice, která se dá číst
+
+- [ ] Dokument vychází z reálné mapy datových situací v produktu.
+- [ ] Každý účel má popsaná data, právní základ, příjemce a retenci.
+- [ ] Text je psaný lidsky, ne jen jako přepis článků GDPR.
+- [ ] Krátké informace jsou přímo u formulářů, registrace, odběrů a citlivých akcí.
+- [ ] Nutná data jsou jasně oddělená od volitelných.
+- [ ] Marketing, analytika, support, billing a bezpečnostní logy nejsou hozené do jednoho pytle.
+- [ ] Dodavatelé jsou popsaní podle funkce a u důležitých nástrojů konkrétně.
+- [ ] Je jasné, jestli dochází k přenosům mimo EU/EHP.
+- [ ] Retence je popsaná jako konec životnosti dat, ne jen prázdnou frází.
+- [ ] Dokument má datum poslední aktualizace a interně dohledatelnou historii změn.
+- [ ] Product, marketing, support a vývoj vědí, kdy změna produktu vyžaduje aktualizaci informování.
+- [ ] Veřejný text neslibuje méně sběru dat, než systém ve skutečnosti dělá.
+
+### Mini úkol
+
+Vezmi aktuální privacy notice svého webu nebo SaaS a vyber jednu situaci: poptávka, registrace, support, billing nebo newsletter. Vyplň kartu:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Kdy člověk data předává? |  |
+| Jaká data přesně předává? |  |
+| Proč je potřebujeme? |  |
+| Co je právní základ? |  |
+| Kdo k datům má přístup? |  |
+| Kde data fyzicky a právně končí? |  |
+| Jak dlouho je držíme? |  |
+| Kde to člověku říkáme přímo v produktu? |  |
+| Odpovídá tomu veřejná privacy notice? |  |
+
+Pak oprav jednu konkrétní větu. Ne celý dokument. Jednu větu. Například z „údaje zpracováváme za účelem komunikace“ udělej „e-mail a text zprávy použijeme k odpovědi na vaši poptávku a navázání na předchozí komunikaci“. Malá změna, ale najednou to zní jako firma, která ví, co dělá. Šokující disciplína, já vím.
+
 ## Zdroje
 
+- European Commission: What information must be given to individuals whose data is collected? - praktický přehled informačních povinností podle GDPR článků 12, 13 a 14: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr/what-information-must-be-given-individuals-whose-data-collected_en
+- European Data Protection Board: Guidelines on transparency under Regulation 2016/679 - pokyny k transparentnosti, vrstvení informací, srozumitelnému jazyku a dostupnosti informací pro subjekty údajů: https://www.edpb.europa.eu/documents/guideline/article-29-working-party-guidelines-on-transparency-under-regulation-2016679_en
 - European Commission Taxation and Customs Union: VAT for businesses - One Stop Shop pro přeshraniční B2C e-commerce a služby v EU: https://taxation-customs.ec.europa.eu/taxation/vat/vat-businesses_en
 - European Commission Taxation and Customs Union: VAT special schemes - OSS - přehled režimu One Stop Shop a jeho účelu u přeshraničního online prodeje: https://taxation-customs.ec.europa.eu/taxation/vat/vat-special-schemes/vat-special-schemes-oss_en
 - PCI Security Standards Council: PCI Data Security Standard - přehled PCI DSS jako souboru technických a provozních požadavků na ochranu platebních dat: https://www.pcisecuritystandards.org/standards/pci-dss/
@@ -9144,6 +9305,7 @@ Potom udělej jednu malou splátku: odstraň nepoužívanou závislost, sjednoť
 
 ## Pracovní log
 
+- 2026-07-12: Doplněna příloha o privacy notice bez právnické mlhy: mapa datových situací, psaní podle otázek člověka, spojení účelu s právním základem, vrstvení informací v produktu, dodavatelé a EU provoz, retence jako konec životnosti, verzování změn, checklist a mini úkol; ověřeny a doplněny oficiální zdroje Evropské komise a EDPB k transparentnosti a informačním povinnostem podle GDPR.
 - 2026-07-12: Doplněna příloha o technickém dluhu bez věčného odkládání: rozlišení dluhu, rizika a nepořádku, popis dluhu jako dopadu, splácení při souvisejících změnách, rytmus údržby závislostí, rozpočet času, definice hotovo pro refaktor, checklist a mini úkol.
 - 2026-07-12: Doplněna příloha o datovém slovníku a názvech událostí bez analytického nepořádku: začátek od rozhodnutí místo seznamu eventů, názvosloví podle práce uživatele, malé a vysvětlitelné vlastnosti, zakázané hodnoty, životní cyklus událostí, oddělení produktové analytiky od logů/CRM, review nových eventů, checklist a mini úkol.
 - 2026-07-12: Doplněna příloha o obsahovém auditu po publikaci bez SEO paniky: rozdělení článků podle rizika stárnutí, výběr URL s největším dopadem, věcná/technická/privacy kontrola, rozhodnutí ponechat/upravit/sloučit/archivovat/smazat, agregované měření auditu, checklist a mini úkol; ověřen a doplněn oficiální zdroj Google Search Central ke canonical URL.
