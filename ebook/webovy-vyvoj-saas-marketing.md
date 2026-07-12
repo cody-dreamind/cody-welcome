@@ -8620,6 +8620,109 @@ Vyber jednoho anonymizovaného zákazníka nebo typický segment a vyplň kartu:
 
 Potom udělej jednu změnu: přejmenuj health score na lidské stavy, smaž jeden zbytečný signál, napiš konkrétní playbook pro zaseknutý onboarding nebo uprav upsell zprávu tak, aby vycházela z hodnoty, ne z tlaku. Customer success nemá být dohledové centrum. Má to být místo, kde zákazník pozná, že někdo chápe jeho práci.
 
+## Příloha: Obsahový audit po publikaci bez SEO paniky
+
+Publikací článek nekončí. Jen přestane být draftem a začne se chovat jako součást produktu. Někdo na něj přijde z vyhledávání, někdo z RSS, někdo z přímého odkazu v obchodním e-mailu a někdo ho najde za rok, kdy už v něm může být zastaralý screenshot, stará cena, neplatný odkaz nebo doporučení, které mezitím produkt přerostl.
+
+Obsahový audit není hon na dokonalost. Je to pravidelný úklid, který chrání důvěru. U privacy-first webu má ještě jednu roli navíc: hlídá, aby staré články nepoužívaly staré trackery, zbytečné embedy, rozbité formuláře nebo sliby o datech, které už neodpovídají realitě.
+
+Codyho komentář: Starý dobrý článek je aktivum. Starý nepravdivý článek je nenápadný dluh s veřejnou URL. A dluh s veřejnou URL má tu nepříjemnou vlastnost, že ho umí najít zákazník přesně ve chvíli, kdy se rozhoduje.
+
+### Rozděl obsah podle rizika
+
+Ne každý článek potřebuje stejný rytmus kontroly. Principový text o rozhodování může vydržet dlouho. Návod k integraci, pricingu, právním povinnostem nebo konkrétním nástrojům stárne rychleji.
+
+Použij jednoduché štítky:
+
+| Typ obsahu | Riziko stárnutí | Doporučený rytmus kontroly |
+| --- | --- | --- |
+| Principy a strategie | Nízké | Jednou ročně |
+| Produktové návody | Střední | Po větší změně produktu a nejméně jednou za půl roku |
+| Integrace a technické postupy | Vyšší | Po změně API nebo jednou za kvartál |
+| Pricing, právní texty, nástroje | Vysoké | Při každé změně a s jasným datem ověření |
+| Case studies | Střední | Jednou za půl roku nebo po změně vztahu se zákazníkem |
+
+U každého článku stačí mít tři provozní pole: stav, datum další revize a vlastník. Stav může být `platné`, `ověřit`, `aktualizovat`, `sloučit`, `archivovat`. Víc workflow kroků přidej až ve chvíli, kdy je opravdu používáš.
+
+### Audituj nejdřív stránky s dopadem
+
+Nezačínej od nejstaršího článku jen proto, že je nejstarší. Začni od obsahu, který ovlivňuje rozhodnutí nebo provoz:
+
+- stránky, které posíláš leadům a zákazníkům,
+- články s pravidelnou organickou návštěvností,
+- návody odkazované ze supportu,
+- texty napojené na onboarding,
+- stránky s formulářem, pricingem nebo právním vysvětlením,
+- články s konkrétními nástroji, cenami, povinnostmi nebo benchmarky.
+
+Když máš málo času, vyber pět URL s největším obchodním nebo supportním dopadem. Lepší je opravit pět důležitých článků než vytvořit tabulku 200 URL, na kterou se už nikdy nikdo nepodívá. Ano, tabulka bude krásná. Ale zákazník si z ní nepřečte opravený návod.
+
+### Kontroluj obsah jako produktovou cestu
+
+U každé auditované URL projdi čtyři vrstvy:
+
+1. Věcná platnost: Je text pořád pravdivý? Nezměnil se produkt, legislativa, API, cena, proces nebo doporučení?
+2. Další krok: Je CTA pořád férové a relevantní? Nevede na starý formulář, neexistující demo nebo stránku bez kontextu?
+3. Technická hygiena: Fungují odkazy, canonical URL, title, meta description, strukturovaná data, RSS položka a obrázky?
+4. Privacy dopad: Nepřibyl externí embed, tracker, formulářové pole nebo měření, které není nutné pro účel stránky?
+
+Technická SEO kontrola má být praktická, ne mystická. Sitemap pomáhá vyhledávačům najít veřejné URL, canonical signály pomáhají u podobných nebo duplicitních stránek a strukturovaná data mají odpovídat skutečnému obsahu. Když článek změníš věcně, aktualizuj i viditelné datum poslední úpravy a metadata, která z něj vycházejí.
+
+### Rozhodni: ponechat, upravit, sloučit, archivovat
+
+Audit nemá končit poznámkou „někdy opravit“. Každá URL má dostat jedno rozhodnutí:
+
+| Rozhodnutí | Kdy dává smysl | Co udělat |
+| --- | --- | --- |
+| Ponechat | Text je platný a užitečný | Zapsat datum kontroly |
+| Upravit | Jádro je dobré, ale část zestárla | Opravit text, metadata, odkazy a datum aktualizace |
+| Sloučit | Více článků řeší totéž | Vytvořit silnější stránku a nastavit přesměrování |
+| Archivovat | Text už nemá hodnotu nebo je zavádějící | Stáhnout z aktivní navigace, vysvětlit stav nebo přesměrovat |
+| Smazat | Obsah je škodlivý, duplicitní nebo právně rizikový | Odstranit a vyřešit interní odkazy, sitemapu a případné redirecty |
+
+Archivace není ostuda. Ostuda je nechat na webu text, který tvrdí něco, čemu už tým sám nevěří. U důležitých starších článků může být nejlepší přidat krátkou poznámku nahoře: „Tento článek byl aktualizován dne...“ nebo „Tento postup nahrazuje novější návod...“. Čtenář pak nemusí hádat, jestli narazil na zdroj pravdy nebo na digitální fosilii.
+
+### Měř audit bez sledování lidí
+
+Obsahový audit nepotřebuje osobní profily čtenářů. Stačí provozní signály:
+
+- návštěvnost URL v agregaci,
+- počet kliků na další krok,
+- počet support dotazů, které článek řeší nebo neřeší,
+- odkazy ze sales materiálů a dokumentace,
+- počet rozbitých odkazů,
+- datum poslední věcné kontroly,
+- počet článků ve stavu `ověřit` nebo `aktualizovat`.
+
+Dobrá měsíční otázka zní: „Který obsah teď nejvíc pomůže rozhodnutí zákazníka nebo sníží opakované dotazy?“ Ne „který článek má nejvíc pageviews“. Návštěvnost je signál, ne šéf.
+
+### Checklist: Obsahový audit po publikaci
+
+- [ ] Každý důležitý článek má vlastníka a datum další revize.
+- [ ] Rizikové texty s právními, cenovými, technickými nebo nástrojovými tvrzeními mají povinné zdroje.
+- [ ] Věcné aktualizace mění i datum poslední úpravy.
+- [ ] Canonical URL, sitemap, RSS položka a strukturovaná data odpovídají aktuální verzi obsahu.
+- [ ] Interní odkazy nevedou na archivované nebo neplatné stránky.
+- [ ] Staré CTA nevedou na zrušené formuláře, trialy nebo nabídky.
+- [ ] Externí embedy a skripty jsou znovu zkontrolované z pohledu soukromí.
+- [ ] Duplicitní články mají rozhodnutí: sloučit, přesměrovat nebo ponechat s jasným účelem.
+- [ ] Archivovaný obsah má čitelný stav nebo rozumné přesměrování.
+- [ ] Audit končí jednou konkrétní opravou, ne jen seznamem problémů.
+
+### Mini úkol
+
+Vyber pět URL, které nejčastěji posíláš zákazníkům, leadům nebo kolegům. Vyplň tabulku:
+
+| URL | Účel | Stav | Nejbližší riziko | Rozhodnutí | Vlastník |
+| --- | --- | --- | --- | --- | --- |
+|  |  |  |  |  |  |
+|  |  |  |  |  |  |
+|  |  |  |  |  |  |
+|  |  |  |  |  |  |
+|  |  |  |  |  |  |
+
+Potom jednu URL skutečně oprav: aktualizuj zastaralý odstavec, doplň datum úpravy, odstraň rozbitý odkaz, vyměň neaktuální CTA nebo smaž externí embed. Obsahový audit má hodnotu až ve chvíli, kdy po něm web říká pravdivější věci než před ním.
+
 ## Zdroje
 
 - European Commission Taxation and Customs Union: VAT for businesses - One Stop Shop pro přeshraniční B2C e-commerce a služby v EU: https://taxation-customs.ec.europa.eu/taxation/vat/vat-businesses_en
@@ -8690,6 +8793,7 @@ Potom udělej jednu změnu: přejmenuj health score na lidské stavy, smaž jede
 - web.dev: Web Vitals - aktuální metriky LCP, INP a CLS včetně doporučených hranic: https://web.dev/articles/vitals
 - Google Search Central: Build and submit a sitemap - tvorba a odesílání sitemap: https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap
 - Google Search Central: Robots.txt Introduction and Guide - použití a limity robots.txt: https://developers.google.com/search/docs/crawling-indexing/robots/intro
+- Google Search Central: How to specify a canonical URL with rel=canonical and other methods - doporučení pro určení preferované URL u duplicitního nebo velmi podobného obsahu: https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls
 - Google Search Central: Article structured data - použití strukturovaných dat pro články a blogové příspěvky: https://developers.google.com/search/docs/appearance/structured-data/article
 - Schema.org: BlogPosting - typ strukturovaných dat pro blogový příspěvek: https://schema.org/BlogPosting
 - MDN Web Docs: Cache-Control header - pravidla pro HTTP cache: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Cache-Control
@@ -8703,6 +8807,7 @@ Potom udělej jednu změnu: přejmenuj health score na lidské stavy, smaž jede
 
 ## Pracovní log
 
+- 2026-07-12: Doplněna příloha o obsahovém auditu po publikaci bez SEO paniky: rozdělení článků podle rizika stárnutí, výběr URL s největším dopadem, věcná/technická/privacy kontrola, rozhodnutí ponechat/upravit/sloučit/archivovat/smazat, agregované měření auditu, checklist a mini úkol; ověřen a doplněn oficiální zdroj Google Search Central ke canonical URL.
 - 2026-07-12: Doplněna příloha o customer success bez sledovacího health score: definice zákaznického úspěchu jako výsledku, účelové signály místo plošného sledování, lidské health stavy, playbooky, privacy-first upsell, customer review, checklist a mini úkol; ověřen a využit existující zdroj Evropské komise k ochraně osobních údajů a GDPR principům.
 - 2026-07-12: Doplněna příloha o roadmapě bez feature factory: přepis funkcí na problémy, oddělení závazků od možností, prioritizace podle dopadu, důkazu a privacy rizika, měsíční úklid roadmapy, opatrná veřejná komunikace, propojení se sales, checklist a mini úkol.
 - 2026-07-12: Doplněna příloha o produktových notifikacích bez notifikačního smogu: rozdělení bezpečnostních, provozních, pracovních, billing a marketingových zpráv, návrh události před výběrem kanálu, minimalizace citlivých detailů v e-mailu a push zprávách, role a preference, digesty, observabilita notifikací, checklist a mini úkol.
