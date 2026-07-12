@@ -9219,8 +9219,164 @@ Vezmi aktuální privacy notice svého webu nebo SaaS a vyber jednu situaci: pop
 
 Pak oprav jednu konkrétní větu. Ne celý dokument. Jednu větu. Například z „údaje zpracováváme za účelem komunikace“ udělej „e-mail a text zprávy použijeme k odpovědi na vaši poptávku a navázání na předchozí komunikaci“. Malá změna, ale najednou to zní jako firma, která ví, co dělá. Šokující disciplína, já vím.
 
+## Příloha: Záznam o zpracování bez tabulky pro tabulku
+
+Záznam o činnostech zpracování je interní mapa toho, co firma s osobními údaji dělá. Ne marketingový text, ne právnická ozdoba do šuplíku, ale provozní dokument, ze kterého má jít odpovědět na jednoduché otázky: jaká data zpracováváme, proč, kde, kdo k nim má přístup, jak dlouho je držíme a co se stane při změně produktu.
+
+GDPR článek 30 popisuje záznamy o činnostech zpracování pro správce i zpracovatele. Přesný právní rozsah povinnosti vždy ověř podle aktuální role, velikosti organizace, rizika a typu zpracování. Praktický smysl je ale širší než povinnost: i malému SaaS týmu záznam pomůže udržet pořádek mezi privacy notice, retenční mapou, dodavateli, DPIA, supportem a technickým provozem.
+
+> Codyho komentář: Když tým neví, kde má osobní data, nemá privacy-first provoz. Má jen optimistickou mapu pokladu bez mapy. A optimismus je fajn vlastnost u zakladatele, horší u retenční politiky.
+
+### Začni procesem, ne databázovou tabulkou
+
+Nejdřív popiš situace, ve kterých data vznikají. Databázové tabulky přijdou později. Člověk totiž nepředává data do tabulky `users`. Člověk se registruje, posílá poptávku, platí fakturu, píše supportu, zve kolegu nebo ruší účet.
+
+Praktické činnosti zpracování pro web a SaaS:
+
+- návštěva webu a technický provoz,
+- poptávkový formulář,
+- registrace a správa účtu,
+- používání produktu a workspace dat,
+- billing a fakturace,
+- support a zákaznická komunikace,
+- bezpečnostní logy a auditní stopa,
+- marketingový odběr,
+- produktová analytika v agregaci,
+- integrace se zákaznickými systémy.
+
+Každá činnost má mít vlastní účel. Neslévej všechno do jedné řádky „poskytování služeb“. To je sice pohodlné, ale při první změně produktu z toho nebude jasné skoro nic. Když později přidáš AI asistenta, nový support nástroj nebo export do účetnictví, potřebuješ vědět, které činnosti se mění.
+
+### Použij záznam jako pracovní kartu
+
+Minimální karta činnosti může vypadat takto:
+
+| Pole | Co vyplnit |
+| --- | --- |
+| Název činnosti | Lidský název, například „Poptávkový formulář“ |
+| Účel | Proč data potřebujeme |
+| Kategorie lidí | Návštěvníci, uživatelé, admini, plátci, odběratelé |
+| Kategorie dat | Kontaktní, účetní, technická, obsahová, provozní |
+| Právní základ | Smlouva, právní povinnost, souhlas, oprávněný zájem podle situace |
+| Systémy | Kde data vznikají a kde se ukládají |
+| Příjemci a dodavatelé | Kdo data zpracovává nebo k nim má přístup |
+| Přenos mimo EU/EHP | Ano/ne, případně jaký mechanismus |
+| Retence | Kdy data končí nebo kdy se mažou |
+| Bezpečnostní opatření | Přístupy, šifrování, audit, zálohy, omezení exportu |
+| Veřejné informování | Kde to člověku říká privacy notice nebo produkt |
+| Vlastník | Kdo za činnost odpovídá |
+| Datum kontroly | Kdy byla karta naposledy ověřena |
+
+Tahle tabulka není cíl. Je to rozhraní mezi produktem, právem a provozem. Když nejde vyplnit jednoduše, není problém v tabulce. Problém je v tom, že zpracování není dost jasné.
+
+### Odděl správce, zpracovatele a interní role
+
+U SaaS je častá chyba házet všechny role do jednoho pytle. Firma může být správcem u vlastního marketingu a billingu, zpracovatelem u zákaznických dat v produktu a zároveň používat další zpracovatele pro hosting, e-mail nebo support.
+
+Příklad:
+
+| Situace | Typická role | Poznámka |
+| --- | --- | --- |
+| Návštěva vlastního webu | správce | Firma určuje účel analytiky, formulářů a logů |
+| Billing zákazníka | správce | Firma řeší smlouvu, fakturaci a účetnictví |
+| Workspace data zákazníka | často zpracovatel | Zákazník určuje účel obsahu, firma poskytuje službu |
+| Hosting infrastruktura | dodavatel jako zpracovatel | Potřebuje smluvní a technická pravidla |
+| Support ticket | podle obsahu a kontextu | Může obsahovat vlastní i zákaznická data |
+
+Tohle rozlišení má praktický dopad. Ovlivňuje smlouvy, odpovědnosti, exporty, mazání, bezpečnostní incidenty i odpovědi na žádosti uživatelů. Když role nejsou jasné v záznamu, nebudou jasné ani v incidentu. A incident je dost špatné místo na filozofii.
+
+### Propoj záznam s retencí a mazáním
+
+Záznam o zpracování bez retence je jen inventář. U každé činnosti napiš, kdy data končí.
+
+Příklady:
+
+- Poptávky: po dobu obchodní komunikace a navazující přiměřené doby.
+- Uživatelský účet: po dobu používání služby a procesu zrušení.
+- Fakturace: podle účetních a daňových povinností.
+- Bezpečnostní logy: krátká provozní retence podle rizika.
+- Support: po dobu řešení a navazující podpory.
+- Newsletter: do odhlášení nebo zániku účelu.
+
+Pokud se data mažou v produktu, ale zůstávají v exportech, zálohách nebo support přílohách, napiš to. Ne proto, aby dokument vypadal děsivě, ale aby tým věděl, kde musí existovat pravidla. Privacy-first provoz není slib „smažeme všechno hned“. Je to schopnost pravdivě říct, co se maže, kdy, odkud a proč něco dočasně zůstává.
+
+### Záznam musí žít s releasem
+
+Největší slabina záznamů je zastarávání. Jednou se vyplní, všichni si oddechnou a za půl roku produkt používá nový billing nástroj, podporu přes jiný systém a analytiku s dalšími eventy. Dokument mezitím leží v koutě a předstírá aktuálnost.
+
+Přidej do vývojového procesu krátkou otázku:
+
+„Mění tato změna osobní data, účel, právní základ, dodavatele, přenos, retenci nebo veřejné informování?“
+
+Pokud ano, aktualizuj příslušnou kartu. Nemusí to být velký privacy meeting. U menší změny stačí pull request checklist nebo krátká poznámka v release kartě. U citlivé změny, nové integrace, AI funkce, rozsáhlejší analytiky nebo přenosu mimo EU/EHP už je na místě hlubší review.
+
+### Používej záznam při nákupu nástrojů
+
+Nový nástroj se často vybírá podle funkcí a ceny. Záznam o zpracování přidává třetí rozměr: datový dopad.
+
+Před zavedením nástroje si polož:
+
+- Jakou činnost zpracování nástroj podporuje?
+- Jaké kategorie dat do něj půjdou?
+- Je dodavatel správce, zpracovatel nebo samostatný správce?
+- Kde data běží a kam se zálohují?
+- Jak se data exportují a mažou?
+- Máme DPA, seznam subzpracovatelů a informaci o přenosech?
+- Umíme nástroj vypnout bez ztráty kontroly nad daty?
+
+Tím se z privacy nedělá brzda nákupu. Dělá se z ní normální provozní otázka. Stejně jako řešíš cenu a dostupnost, řešíš i data. Nudné, zdravé, dospělé.
+
+### Udělej záznam čitelný pro tým
+
+Záznam nemá být dokument, kterému rozumí jen právník. Vývojář z něj má poznat, jestli nová událost do analytiky smí obsahovat volný text. Support má poznat, co dělat se screenshotem. Marketing má poznat, jestli newsletter používá souhlas nebo jiný režim. Product má poznat, kdy nová funkce mění privacy notice.
+
+Proto používej:
+
+- lidské názvy činností,
+- jasné vlastníky,
+- odkazy na systémy, DPA, privacy notice a retenční pravidla,
+- stav karty: platné, ověřit, aktualizovat, ukončené,
+- datum poslední kontroly,
+- krátkou poznámku „co se změnilo“.
+
+Pokud záznam nejde používat při reálné práci, zjednoduš ho. Lepší je deset dobře udržovaných karet než padesát řádků, které nikdo neotevře.
+
+### Checklist: Záznam o zpracování, který pomáhá provozu
+
+- [ ] Záznam je rozdělený podle reálných situací a procesů, ne jen podle databázových tabulek.
+- [ ] Každá činnost má účel, kategorii lidí, kategorii dat, systémy, dodavatele a vlastníka.
+- [ ] Role správce, zpracovatele a dodavatele jsou u důležitých činností jasně rozlišené.
+- [ ] U každé činnosti je uvedená retence nebo aspoň konkrétní úkol ji doplnit.
+- [ ] Je jasné, jestli data jdou mimo EU/EHP a na jakém základě.
+- [ ] Záznam odkazuje na privacy notice, DPA, seznam subdodavatelů a retenční mapu.
+- [ ] Nové produktové změny mají kontrolní otázku na dopad do záznamu.
+- [ ] Nové nástroje se před nákupem kontrolují podle datového dopadu.
+- [ ] Karty mají stav, datum poslední kontroly a vlastníka.
+- [ ] Záznam je napsaný tak, aby ho použil product, vývoj, support i marketing.
+
+### Mini úkol
+
+Vyber jednu činnost zpracování, která je pro produkt důležitá: registrace, billing, support, analytika, integrace nebo mazání účtu. Vyplň kartu:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jak se činnost jmenuje lidsky? |  |
+| Proč data zpracováváme? |  |
+| Koho se týká? |  |
+| Jaké kategorie dat obsahuje? |  |
+| Ve kterých systémech data jsou? |  |
+| Kdo je vlastník činnosti? |  |
+| Jsme správce, zpracovatel, nebo obojí podle kontextu? |  |
+| Kteří dodavatelé se zapojují? |  |
+| Jdou data mimo EU/EHP? |  |
+| Kdy data mažeme nebo anonymizujeme? |  |
+| Kde to vysvětluje privacy notice? |  |
+| Kdy kartu znovu ověříme? |  |
+
+Potom oprav jednu konkrétní nejasnost: doplň vlastníka, najdi chybějícího dodavatele, přidej retenční pravidlo, odděl billing od workspace dat nebo propojuj kartu s privacy notice. Záznam o zpracování má hodnotu až tehdy, když podle něj někdo udělá lepší rozhodnutí než včera.
+
 ## Zdroje
 
+- EUR-Lex: Regulation (EU) 2016/679, GDPR Article 30 - právní text k záznamům o činnostech zpracování pro správce a zpracovatele: https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng
 - European Commission: What information must be given to individuals whose data is collected? - praktický přehled informačních povinností podle GDPR článků 12, 13 a 14: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr/what-information-must-be-given-individuals-whose-data-collected_en
 - European Data Protection Board: Guidelines on transparency under Regulation 2016/679 - pokyny k transparentnosti, vrstvení informací, srozumitelnému jazyku a dostupnosti informací pro subjekty údajů: https://www.edpb.europa.eu/documents/guideline/article-29-working-party-guidelines-on-transparency-under-regulation-2016679_en
 - European Commission Taxation and Customs Union: VAT for businesses - One Stop Shop pro přeshraniční B2C e-commerce a služby v EU: https://taxation-customs.ec.europa.eu/taxation/vat/vat-businesses_en
@@ -9305,6 +9461,7 @@ Pak oprav jednu konkrétní větu. Ne celý dokument. Jednu větu. Například z
 
 ## Pracovní log
 
+- 2026-07-12: Doplněna příloha o záznamu o činnostech zpracování bez tabulky pro tabulku: procesní pohled místo databázových tabulek, karta činnosti, rozlišení rolí správce/zpracovatele, vazba na retenci, release proces, nákup nástrojů, čitelnost pro tým, checklist a mini úkol; ověřen a doplněn zdroj EUR-Lex k GDPR článku 30.
 - 2026-07-12: Doplněna příloha o privacy notice bez právnické mlhy: mapa datových situací, psaní podle otázek člověka, spojení účelu s právním základem, vrstvení informací v produktu, dodavatelé a EU provoz, retence jako konec životnosti, verzování změn, checklist a mini úkol; ověřeny a doplněny oficiální zdroje Evropské komise a EDPB k transparentnosti a informačním povinnostem podle GDPR.
 - 2026-07-12: Doplněna příloha o technickém dluhu bez věčného odkládání: rozlišení dluhu, rizika a nepořádku, popis dluhu jako dopadu, splácení při souvisejících změnách, rytmus údržby závislostí, rozpočet času, definice hotovo pro refaktor, checklist a mini úkol.
 - 2026-07-12: Doplněna příloha o datovém slovníku a názvech událostí bez analytického nepořádku: začátek od rozhodnutí místo seznamu eventů, názvosloví podle práce uživatele, malé a vysvětlitelné vlastnosti, zakázané hodnoty, životní cyklus událostí, oddělení produktové analytiky od logů/CRM, review nových eventů, checklist a mini úkol.
