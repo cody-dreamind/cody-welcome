@@ -6651,8 +6651,163 @@ Vyber jednu konverzní cestu: článek -> poptávka, homepage -> demo, pricing -
 
 Potom udělej jednu konkrétní změnu: přepiš CTA, zkrať formulář, doplň očekávání po odeslání, vysvětli důvod citlivějšího pole, přidej důkaz na pricing nebo odstraň tracker, který nepodporuje žádné rozhodnutí. Konverzní cesta má být krátká hlavně tam, kde člověku bere energii. Ne tam, kde potřebuje férové informace.
 
+## Příloha: API integrace a webhooky bez datového chaosu
+
+Integrace jsou pro SaaS lákavé. Jedním propojením se produkt dostane do účetnictví, CRM, helpdesku, e-mailingu, analytiky nebo interní automatizace zákazníka. Jenže každá integrace je zároveň nový datový tok, nové oprávnění, nový dodavatel, nový log a nové místo, kde se může rozbít důvěra.
+
+Špatná otázka zní: „Jak rychle to napojíme?“
+
+Lepší otázka zní: „Jaký konkrétní výsledek má integrace dodat, jaká minimální data k tomu potřebuje, kdo ji může zapnout, jak poznáme chybu a jak ji bezpečně vypneme?“
+
+OWASP API Security Top 10 upozorňuje na typické API problémy jako rozbitá autorizace na úrovni objektů, slabá autentizace, příliš široký přístup k vlastnostem objektů, neomezená spotřeba zdrojů nebo nebezpečné API endpointy. OWASP REST Security Cheat Sheet k tomu prakticky zdůrazňuje HTTPS, správnou autentizaci, validaci vstupů, omezení chybových detailů a bezpečnou práci s tokeny. Přeloženo do malého SaaS: integrace není „jen endpoint“. Je to veřejná smlouva o datech, chování a riziku.
+
+Codyho komentář: Nejzrádnější integrace nejsou ty složité. Nejzrádnější jsou ty „jen rychlé“. Rychle pošleme payload do CRM, rychle přidáme webhook, rychle dáme token do nastavení. A pak se rychle divíme, proč má třetí nástroj víc dat než produkt samotný.
+
+### Začni integrační větou
+
+Každá integrace má mít jednu větu:
+
+„Integrace propojuje ___ s ___, aby ___, a posílá pouze ___.“
+
+Příklady:
+
+- „Integrace posílá kvalifikované poptávky z webu do CRM, aby sales neztratil další krok, a posílá pouze kontakt, firmu, zdroj v agregaci a text poptávky.“
+- „Webhook oznamuje účetnímu systému vystavení faktury, aby se aktualizovala evidence, a posílá pouze ID faktury, částku, stav a odkaz na detail v aplikaci.“
+- „Integrace s helpdeskem vytváří ticket po chybě importu, aby support viděl dopad na zákazníka, a neposílá obsah importovaného souboru.“
+
+Když věta obsahuje „synchronizuje všechno“, zastav se. „Všechno“ není rozsah. Je to budoucí incident v pohodlném oblečení.
+
+### Datový kontrakt je důležitější než endpoint
+
+Před implementací napiš datový kontrakt. Nemusí být formální OpenAPI specifikace hned od první hodiny, ale má být jasné, co přesně teče ven a dovnitř.
+
+| Pole | Otázka |
+| --- | --- |
+| Směr toku | Posíláme data ven, přijímáme data, nebo obojí? |
+| Spouštěč | Co přesně událost vyvolá? |
+| Povinná pole | Bez čeho integrace nefunguje? |
+| Nepovinná pole | Co pomáhá, ale nesmí blokovat tok? |
+| Zakázaná pole | Co se nikdy neposílá? |
+| Identifikátory | Používáme interní ID, externí ID, nebo osobní údaj? |
+| Retence | Jak dlouho držíme payloady, chyby a retry záznamy? |
+| Vlastník | Kdo kontrakt mění a schvaluje? |
+
+Praktické pravidlo: do integračního payloadu neposílej volný text, přílohy, celé objekty ani osobní údaje „pro jistotu“. Posílej minimum, které přijímající systém skutečně použije. Pokud CRM potřebuje vědět, že vznikla poptávka, nepotřebuje automaticky kompletní historii návštěv, všechny formulářové pokusy a interní skóre člověka.
+
+### Oprávnění nastav podle akce, ne podle pohodlí
+
+API token nebo OAuth přístup má mít rozsah podle konkrétní práce. Token pro zápis leadu do CRM nemá umět mazat kontakty, exportovat databázi ani měnit nastavení účtu.
+
+Kontrolní otázky:
+
+- Jaké konkrétní endpointy integrace volá?
+- Potřebuje číst, zapisovat, mazat, nebo jen přijímat události?
+- Jde použít token omezený na jeden workspace, projekt nebo účet?
+- Jde token časově omezit nebo snadno rotovat?
+- Kdo u zákazníka může integraci zapnout?
+- Kdo u vás vidí tokeny, chyby a payloady?
+
+U zákaznických integrací je zvlášť důležité oddělit roli „může používat produkt“ od role „může napojit externí systém“. Připojení integrace často znamená předání dat mimo původní produkt. To má dělat vlastník workspace, admin nebo člověk s jasným oprávněním, ne každý uživatel, který najde tlačítko.
+
+### Webhooky podepisuj a ověřuj
+
+Webhook je příchozí dveře do produktu. Když ho necháš bez ověření, kdokoliv může zkusit poslat událost, která se bude tvářit jako důvěryhodný systém.
+
+Minimum pro webhook:
+
+- přijímat jen přes HTTPS,
+- ověřovat podpis payloadu nebo jiný důvěryhodný mechanismus,
+- kontrolovat časové razítko kvůli replay útokům,
+- validovat schéma payloadu před zpracováním,
+- ignorovat nebo odmítnout neznámá pole podle režimu kompatibility,
+- používat idempotency key nebo event ID,
+- logovat bezpečný technický stav, ne celý citlivý payload,
+- mít jasný retry režim.
+
+Idempotence je praktická pojistka. Webhooky se mohou doručit dvakrát, přijít pozdě nebo selhat uprostřed zpracování. Pokud událost `invoice_paid` dorazí dvakrát, nemá vzniknout dvojí faktura, dvojí e-mail nebo dvojí změna stavu. U každé události si proto drž unikátní ID a výsledek zpracování.
+
+### Chyby integrace řeš jako produktový stav
+
+Integrace se rozbíjejí normálně: token expiruje, externí API zpomalí, zákazník odebere oprávnění, endpoint vrátí novou chybu, payload překročí limit nebo dodavatel změní pole. Produkt má s těmito stavy počítat.
+
+Rozumné stavy integrace:
+
+| Stav | Co znamená | Co má produkt ukázat |
+| --- | --- | --- |
+| Aktivní | poslední synchronizace proběhla | čas posledního úspěchu |
+| Vyžaduje pozornost | token expiruje, chybí oprávnění nebo opakovaná chyba | jasný krok pro admina |
+| Pozastavená | integrace se dočasně nevykonává | kdo ji pozastavil a proč |
+| Odpojená | token zrušen, data už netečou | co zůstává v historii a jak dlouho |
+
+Chybová hláška „integration failed“ je líná. Lepší je: „CRM token už nemá oprávnění vytvořit kontakt. Připojení může obnovit vlastník workspace v Nastavení -> Integrace.“ Uživatel nemusí znát stack trace. Potřebuje vědět, kdo má co udělat.
+
+### Retry fronta nesmí být nekonečná skládka dat
+
+Retry mechanismus je užitečný, ale snadno se z něj stane neviditelná databáze payloadů. Nastav:
+
+- kolikrát se událost zkusí znovu,
+- jak dlouho se drží neúspěšný payload,
+- kdo vidí detail chyby,
+- zda payload obsahuje osobní údaje,
+- jak se payload smaže po vyřešení nebo expiraci,
+- jak se zákazník dozví o trvalém selhání.
+
+Pokud payload obsahuje osobní údaje, retry fronta patří do retenční mapy stejně jako databáze, logy a exporty. Není to technický detail mimo privacy. Je to další místo, kde data čekají na zpracování.
+
+### Dokumentuj, co integrace dělá s daty
+
+Zákazník nemá hádat, co se po zapnutí integrace stane. U každé významné integrace napiš krátkou dokumentaci:
+
+- co integrace umí,
+- jaká data posílá a přijímá,
+- kdo ji může zapnout,
+- jaká oprávnění vyžaduje,
+- kde se zobrazí stav a chyby,
+- jak se odpojí,
+- co se stane s daty po odpojení,
+- jaké limity nebo zpoždění jsou normální.
+
+Privacy-first dokumentace nemá skrývat nepohodlné věci. Pokud externí nástroj dostane e-mail zákazníka, napiš to. Pokud se posílá jen interní ID a stav, napiš to taky. Transparentnost není právní dekorace. Je to způsob, jak snížit support a zvýšit důvěru.
+
+### Checklist: API integrace a webhooky
+
+- [ ] Integrace má jednu větu účelu, směru toku a minimálního rozsahu dat.
+- [ ] Existuje datový kontrakt s povinnými, nepovinnými a zakázanými poli.
+- [ ] Tokeny a oprávnění jsou omezené na konkrétní akce.
+- [ ] Integraci může zapnout jen role, která rozumí dopadu na data.
+- [ ] Webhooky používají HTTPS, podpis, časové razítko a validaci schématu.
+- [ ] Události jsou idempotentní a mají stabilní event ID.
+- [ ] Retry fronta má limit pokusů, retenci a vlastníka.
+- [ ] Payloady, chyby a logy neobsahují zbytečné osobní údaje.
+- [ ] Produkt ukazuje stav integrace a srozumitelný další krok při chybě.
+- [ ] Odpojení integrace řeší tokeny, fronty, historická data a dokumentaci.
+- [ ] Integrace je v mapě dat, vendor kartě a případně seznamu subdodavatelů.
+- [ ] Po změně kontraktu existuje migrační nebo kompatibilní režim.
+
+### Mini úkol
+
+Vyber jednu existující nebo plánovanou integraci a vyplň kartu:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jaký výsledek má integrace dodat? |  |
+| Jaká data posíláme ven? |  |
+| Jaká data přijímáme dovnitř? |  |
+| Která pole jsou zakázaná? |  |
+| Jak je omezený token nebo oprávnění? |  |
+| Jak ověřujeme webhook? |  |
+| Co se stane při duplicitní události? |  |
+| Jak dlouho držíme neúspěšné payloady? |  |
+| Kdo může integraci zapnout nebo vypnout? |  |
+| Jaká jedna změna sníží datové nebo bezpečnostní riziko? |  |
+
+Potom udělej jednu konkrétní změnu: zmenši payload, přidej podpis webhooku, nastav idempotency key, omez token, zkrať retenci retry fronty, doplň stav integrace do UI nebo napiš dokumentaci k odpojení. Integrace má produkt rozšiřovat, ne potichu otevírat boční dveře k datům.
+
 ## Zdroje
 
+- OWASP: API Security Top 10 2023 - přehled nejčastějších API rizik včetně rozbité autorizace objektů, slabé autentizace, neomezené spotřeby zdrojů a nebezpečných API: https://owasp.org/API-Security/editions/2023/en/0x00-header/
+- OWASP Cheat Sheet Series: REST Security Cheat Sheet - praktická doporučení k HTTPS, autentizaci, validaci vstupů, bezpečným chybám a práci s tokeny u REST API: https://cheatsheetseries.owasp.org/cheatsheets/REST_Security_Cheat_Sheet.html
+- OWASP Cheat Sheet Series: Web Service Security Cheat Sheet - obecná doporučení pro zabezpečení webových služeb a prevenci typických rizik při integracích: https://cheatsheetseries.owasp.org/cheatsheets/Web_Service_Security_Cheat_Sheet.html
 - EUR-Lex: Regulation (EU) 2016/679, GDPR Article 35 and 36 - povinnost posouzení vlivu na ochranu osobních údajů a předchozí konzultace při vysokém zbytkovém riziku: https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng
 - European Commission: When is a Data Protection Impact Assessment (DPIA) required? - praktický přehled situací, kdy je DPIA vyžadována: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/obligations/when-data-protection-impact-assessment-dpia-required_en
 - European Data Protection Board: Data Protection impact assessments High risk processing - pokyny WP248 rev.01 k určení vysokého rizika a DPIA: https://www.edpb.europa.eu/documents/guideline/data-protection-impact-assessments-high-risk-processing_en
@@ -6722,6 +6877,7 @@ Potom udělej jednu konkrétní změnu: přepiš CTA, zkrať formulář, doplň 
 
 ## Pracovní log
 
+- 2026-07-12: Doplněna příloha o API integracích a webhook mechanismech bez datového chaosu: integrační věta, datový kontrakt, minimální oprávnění, ověřování webhooků, idempotence, produktové stavy integrací, retence retry fronty, dokumentace integrace, checklist a mini úkol; ověřeny zdroje OWASP API Security Top 10, REST Security Cheat Sheet a Web Service Security Cheat Sheet.
 - 2026-07-12: Doplněna příloha o konverzní cestě bez šmírovacího cirkusu: mapování kroků podle rozhodnutí člověka, ruční audit před dalším trackingem, měření jen rozhodovacích signálů, oddělení marketingového souhlasu od hlavní akce, checklist a mini úkol.
 - 2026-07-12: Doplněna příloha o přístupovém auditu za 30 minut: kritická místa, rozlišení rolí od lidí, staré a příliš široké přístupy, export jako zvláštní oprávnění, pravidelný rytmus kontrol, pracovní tabulka, komunikace odebrání přístupu, checklist a mini úkol.
 - 2026-07-12: Doplněna příloha o produktové dokumentaci bez supportního odpadu: dělení dokumentace podle práce uživatele, propojení s onboardingem, dokumentace datově citlivých funkcí, vlastnictví stránek, převod opakovaných supportních odpovědí do dokumentace, checklist a mini úkol; navázáno na existující zdroje Diátaxis, GDPR principy a privacy by design.
