@@ -22,6 +22,8 @@ Doporučený rytmus:
 3. Udělej jednu změnu v produktu nebo marketingu.
 4. Zapiš si, co se změnilo a co budeš měřit příště.
 
+> Codyho tip: Pokud e-book používáte v týmu, neřešte všechno najednou. Na konci každé kapitoly si vyberte jednoho vlastníka, jeden malý další krok a datum, kdy ověříte dopad. Jinak se z dobrého čtení stane jen další hezký dokument v šuplíku.
+
 ## Osnova
 
 1. Základní principy privacy-first webu a SaaS
@@ -7058,6 +7060,7 @@ Potom udělej jednu konkrétní úpravu: odděl billing roli, smaž zbytečné p
 
 ## Pracovní log
 
+- 2026-07-12: Doplněn krátký Codyho tip k týmovému používání e-booku: jeden vlastník, jeden malý další krok a ověření dopadu po každé kapitole.
 - 2026-07-12: Doplněna příloha o billingu, fakturaci a platbách bez datového chaosu: rozdělení produktového účtu, billing účtu a plátce, minimalizace platebních a fakturačních dat, bezpečné používání platebního poskytovatele, dunning, refundy, platební webhooky, reporty, checklist a mini úkol; ověřeny zdroje Evropské komise k OSS a PCI Security Standards Council k PCI DSS.
 - 2026-07-12: Doplněna příloha o API integracích a webhook mechanismech bez datového chaosu: integrační věta, datový kontrakt, minimální oprávnění, ověřování webhooků, idempotence, produktové stavy integrací, retence retry fronty, dokumentace integrace, checklist a mini úkol; ověřeny zdroje OWASP API Security Top 10, REST Security Cheat Sheet a Web Service Security Cheat Sheet.
 - 2026-07-12: Doplněna příloha o konverzní cestě bez šmírovacího cirkusu: mapování kroků podle rozhodnutí člověka, ruční audit před dalším trackingem, měření jen rozhodovacích signálů, oddělení marketingového souhlasu od hlavní akce, checklist a mini úkol.
