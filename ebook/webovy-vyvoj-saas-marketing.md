@@ -7310,6 +7310,157 @@ Vyber jedno neprodukční prostředí a vyplň krátkou kartu:
 
 Potom udělej jednu konkrétní opravu: nahraď reálné e-maily testovací doménou, smaž starý snapshot, přidej seed scénář pro chybějící bug, odděl demo od produkční integrace, zkrať retenci preview prostředí, nebo napiš kartu výjimky pro dataset, který opravdu potřebuješ. Testovací data mají pomáhat vývoji, ne tajně rozšiřovat produkční odpovědnost.
 
+## Příloha: Status page a provozní komunikace bez mlžení
+
+Status page není marketingová dekorace pro velké firmy. Je to veřejný provozní nástroj, který říká zákazníkům: víme, co se děje, pracujeme na tom a nebudeme vás nutit psát supportu, abyste zjistili základní stav služby.
+
+Malý SaaS často status page odkládá, protože „zatím nejsme dost velcí“. Jenže právě v malém týmu je každý zbytečný dotaz během výpadku drahý. Když tři lidé píšou zákazníkům ručně, nikdo neřeší příčinu. Když se zákazníci dozvídají o problému až z vlastního testování, důvěra mizí rychleji než cache po špatném deployi.
+
+> Codyho komentář: Dobrá status page není slib dokonalosti. Je to slib, že při problému nebudeš mlčet za hezkým logem.
+
+### Odděl interní incident od veřejného stavu
+
+Ne každý interní problém patří okamžitě na veřejnou status page. Ale každý problém musí mít jasné rozhodnutí, jestli se zákazníků týká.
+
+Rozliš tři vrstvy:
+
+| Vrstva | Příklad | Kam patří |
+| --- | --- | --- |
+| Interní technický signál | zvýšená latence databáze bez dopadu na uživatele | incident log, observabilita |
+| Zákaznický dopad | nejde se přihlásit, nejdou exporty, zpožďují se webhooky | status page a support |
+| Datový nebo bezpečnostní dopad | možný únik, ztráta, změna nebo nedostupnost osobních údajů | incident proces, právní posouzení, případně oznámení |
+
+Status page má popisovat zákaznický dopad. Nemusí vysvětlovat každý detail infrastruktury, verzi databáze ani interní hypotézy. Má odpovědět na čtyři otázky:
+
+- Co je ovlivněné?
+- Koho se to pravděpodobně týká?
+- Co už tým dělá?
+- Kdy bude další aktualizace?
+
+Pokud jde o osobní údaje, nestačí veřejný status. Evropská komise popisuje porušení zabezpečení osobních údajů jako bezpečnostní incident s dopadem na důvěrnost, dostupnost nebo integritu dat a připomíná oznamovací povinnosti podle rizika. EDPB k tomu má samostatné pokyny k oznamování data breach. Prakticky: status page může být komunikační kanál, ale nenahrazuje právní vyhodnocení incidentu.
+
+### Komponenty pojmenuj podle práce uživatele
+
+Status page často kopíruje technickou architekturu: API gateway, primary database, queue worker, object storage. Tým tomu rozumí, zákazník méně. Lepší je pojmenovat komponenty podle toho, co člověk reálně dělá.
+
+Příklad komponent:
+
+| Technický název | Lepší veřejný název |
+| --- | --- |
+| `auth-service` | Přihlášení a správa účtu |
+| `billing-webhooks` | Platby a fakturace |
+| `worker-export` | Exporty dat |
+| `mail-queue` | E-mailová oznámení |
+| `public-api` | Veřejné API |
+| `admin-frontend` | Administrace aplikace |
+
+Tím si pomůžeš i uvnitř týmu. Když incident říká „Exporty dat jsou zpožděné“, support hned ví, co říct zákazníkovi. Když incident říká „worker-export má backlog 48k jobs“, půlka firmy slyší jen technologické mumlání v kravatě.
+
+### Aktualizace piš podle jistoty
+
+Během incidentu je lákavé napsat moc, nebo naopak nic. Obojí škodí. Zákazník nepotřebuje román, ale potřebuje vědět, že informace nejsou zatuchlé.
+
+Používej jednoduché stavy:
+
+- Investigating: vidíme problém a ověřujeme dopad.
+- Identified: známe pravděpodobnou příčinu nebo postiženou část.
+- Monitoring: oprava je nasazená a sledujeme, jestli se stav drží.
+- Resolved: dopad skončil a incident uzavíráme.
+- Postmortem pending: připravujeme stručné vysvětlení a preventivní kroky.
+
+Každá aktualizace má mít čas, dopad a další krok:
+
+| Slabé sdělení | Lepší sdělení |
+| --- | --- |
+| „Máme technické potíže.“ | „Od 09:14 CET část zákazníků nemůže dokončit export dat. Přihlášení, API a fakturace fungují. Další aktualizace do 30 minut.“ |
+| „Oprava probíhá.“ | „Identifikovali jsme problém ve zpracování exportní fronty. Nové exporty se přijímají, dokončení je zpožděné. Nasazujeme opravu.“ |
+| „Vše je v pořádku.“ | „Exporty od 10:06 CET dobíhají normálně. Sledujeme frontu dalších 30 minut a potom incident uzavřeme.“ |
+
+Neuváděj spekulace jako fakta. Když nevíš, napiš, co ověřuješ. Když víš jen rozsah dopadu, napiš rozsah dopadu. Když se odhad změnil, řekni to přímo. Mlžení v incidentu je dražší než přiznání nejistoty.
+
+### Neprozrazuj víc, než zákazník potřebuje
+
+Transparentnost není totéž co veřejný výpis interních detailů. Status page nesmí pomáhat útočníkovi, prozrazovat jména zákazníků, ukazovat interní topologii nebo opisovat data z logů.
+
+Do veřejné komunikace nepatří:
+
+- konkrétní IP adresy, interní hostnames a tajemství,
+- jména zákazníků postižených incidentem bez důvodu a oprávnění,
+- osobní údaje z tiketů, logů nebo screenshotů,
+- přesný popis zranitelnosti před opravou,
+- interní obviňování dodavatelů nebo lidí,
+- právní závěry napsané dřív, než jsou ověřené.
+
+Privacy-first provoz znamená i to, že incidentová komunikace sbírá minimum dalších dat. Pokud nabízíš odběr status aktualizací e-mailem, nepropojuj ho automaticky s marketingem. Pokud má status page RSS nebo Atom feed, dej mu přednost: zákazník může sledovat provoz bez nového účtu, pixelu a reklamního profilu.
+
+### Připrav šablony dřív než výpadek
+
+Incident není dobrý čas na literární tvorbu. Připrav si tři krátké šablony a drž je v repozitáři nebo provozním runbooku.
+
+Úvodní aktualizace:
+
+```text
+Vyšetřujeme problém s [oblast]. Dopad: [koho/co ovlivňuje]. Ostatní části služby: [co funguje]. Další aktualizace: [čas].
+```
+
+Průběžná aktualizace:
+
+```text
+Zjistili jsme [ověřený fakt]. Aktuální dopad je [dopad]. Děláme [další krok]. Další aktualizace: [čas].
+```
+
+Uzavření:
+
+```text
+Incident je vyřešený od [čas]. Dopad trval [od-do] a týkal se [oblast]. Budeme doplňovat [postmortem / preventivní krok], pokud je relevantní.
+```
+
+U incidentů s možným dopadem na osobní údaje přidej interní stopku: veřejné uzavření neznamená konec právního posouzení. Nejdřív se musí vyhodnotit, jestli došlo k porušení zabezpečení osobních údajů, jaké je riziko pro lidi a jestli vzniká oznamovací povinnost. Viz zdroje Evropské komise a EDPB v závěru e-booku.
+
+### Postmortem piš jako provozní závazek
+
+Postmortem nemusí být dlouhé. Má ale být konkrétní. Slabé postmortem říká „provedli jsme opatření“. Dobré postmortem říká, co se změní, kdo to vlastní a jak se pozná, že je hotovo.
+
+Struktura pro malé týmy:
+
+1. Co se stalo.
+2. Jaký byl dopad na zákazníky.
+3. Jak jsme incident zjistili.
+4. Co jsme udělali během incidentu.
+5. Co uděláme, aby se riziko snížilo.
+6. Co se rozhodně nebude měnit, protože by to nepomohlo.
+
+Poslední bod je užitečný. Po incidentu vzniká tlak přidat další nástroj, další alert, další proces, další meeting. Někdy je správná oprava jednoduchá: kratší timeout, lepší health check, jasnější rollback, menší release, test obnovy, nebo lepší text chyby pro uživatele.
+
+ENISA v materiálech pro malé a střední firmy zdůrazňuje praktickou bezpečnostní hygienu a přípravu. Přeloženo do provozu SaaS: méně hrdinství při incidentu, víc připravených postupů předem.
+
+### Checklist: Status page a provozní komunikace
+
+- [ ] Máme jasně určené, kdy se problém publikuje na status page.
+- [ ] Komponenty status page jsou pojmenované podle práce uživatele, ne jen podle infrastruktury.
+- [ ] Každý incident má veřejný stav, vlastníka a čas další aktualizace.
+- [ ] Úvodní zpráva odděluje ověřená fakta od toho, co se teprve vyšetřuje.
+- [ ] Status page neobsahuje interní hostnames, IP adresy, tajemství ani osobní údaje.
+- [ ] Odběr status aktualizací není automaticky marketingový souhlas.
+- [ ] Kritické aktualizace mají i RSS/Atom nebo jiný přímý kanál bez trackerů.
+- [ ] Incident s možným dopadem na osobní údaje spouští samostatné právní a bezpečnostní vyhodnocení.
+- [ ] Po významném incidentu vznikne krátké postmortem s konkrétními preventivními kroky.
+- [ ] Tým má připravené šablony pro úvodní, průběžnou a závěrečnou komunikaci.
+
+### Mini úkol
+
+Vyber jednu službu nebo SaaS produkt a napiš návrh veřejné status page:
+
+| Oblast | Veřejný název komponenty | Jak poznáme dopad | Kdo komunikuje | Kanál |
+| --- | --- | --- | --- | --- |
+| Přihlášení |  |  |  |  |
+| API |  |  |  |  |
+| Exporty |  |  |  |  |
+| Fakturace |  |  |  |  |
+| E-mailová oznámení |  |  |  |  |
+
+Potom připrav jednu šablonu úvodní aktualizace pro nejpravděpodobnější incident. Nenasazuj další monitoring jen proto, že to zní dospěle. Nejdřív napiš, co přesně potřebuje zákazník vědět a kdo to v první půlhodině řekne.
+
 ## Zdroje
 
 - European Commission Taxation and Customs Union: VAT for businesses - One Stop Shop pro přeshraniční B2C e-commerce a služby v EU: https://taxation-customs.ec.europa.eu/taxation/vat/vat-businesses_en
@@ -7389,6 +7540,7 @@ Potom udělej jednu konkrétní opravu: nahraď reálné e-maily testovací dom�
 
 ## Pracovní log
 
+- 2026-07-12: Doplněna příloha o status page a provozní komunikaci bez mlžení: oddělení interního incidentu od veřejného stavu, komponenty podle práce uživatele, aktualizace podle jistoty, minimalizace citlivých detailů, šablony incidentové komunikace, postmortem, checklist a mini úkol; znovu ověřeny zdroje Evropské komise a EDPB k data breach a ENISA k bezpečnostní hygieně pro malé a střední firmy.
 - 2026-07-12: Doplněna příloha o testovacích datech a stagingu bez kopírování produkce: rozdělení neprodukčních prostředí, seed data jako scénáře, realistická data bez osobních údajů, rozdíl mezi pseudonymizací a anonymizací, řízená výjimka pro produkční snapshot, demo data, checklist a mini úkol; ověřeny a doplněny zdroje Evropské komise k principům GDPR a EDPB k pseudonymizaci.
 - 2026-07-12: Doplněna příloha o experimentech a A/B testech bez sledovací laboratoře: konkrétní hypotéza, volba jednoduššího ověření místo zbytečného A/B testu, agregované měření, bezpečné používání feature flagů, privacy kontrola experimentu, vyhodnocení jako rozhodnutí, checklist a mini úkol; ověřeny a využity zdroje EDPB k technickému rozsahu ePrivacy a CNIL k analytice.
 - 2026-07-12: Doplněn krátký Codyho tip k týmovému používání e-booku: jeden vlastník, jeden malý další krok a ověření dopadu po každé kapitole.
