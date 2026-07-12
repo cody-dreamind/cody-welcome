@@ -7784,6 +7784,159 @@ Vezmi svůj aktuální onboarding administrátora a vyplň tuto kartu:
 
 Potom odeber ze startu jedno pole, které není nutné pro první hodnotu. Pokud se bojíš, že ho později nezískáš, napiš k němu konkrétní moment, kdy dává smysl se zeptat. Onboarding má být cesta k hodnotě, ne vstupní pohovor s databází.
 
+## Příloha: Mazání workspace bez datového strašení
+
+Smazání účtu, workspace nebo projektu není okrajová funkce pro pár nespokojených zákazníků. Je to důkaz, že produkt bere kontrolu nad daty vážně. Pokud uživatel umí data snadno vložit, pozvat tým a propojit integrace, musí také rozumět tomu, co se stane při ukončení používání.
+
+Špatný model zní: „Mazání řeší support ručně, nějak to vyčistíme.“
+
+Lepší model zní: „Máme jasný stavový proces, export před výmazem, oddělené právní retence a auditovatelný konec přístupů.“
+
+Evropský rámec k tomu dává praktický důvod. Právo na výmaz není absolutní ve všech situacích, ale osobní data se nemají držet déle, než je potřeba pro daný účel. Evropská komise k tomu uvádí výjimky, například zákonnou povinnost uchování, a EDPB ve své koordinované akci k právu na výmaz popisuje opakované problémy firem s interními postupy a informováním lidí. Překlad do produktové řeči: mazání nemá být improvizace v ticketu.
+
+### Nejprve pojmenuj, co se vlastně maže
+
+„Smazat účet“ může znamenat několik různých věcí:
+
+- odebrat jednoho uživatele z týmu,
+- zrušit osobní profil uživatele,
+- smazat celý workspace firmy,
+- archivovat projekt, ale ponechat zákaznický účet,
+- ukončit předplatné, ale nechat fakturační historii,
+- odpojit integrace a zneplatnit tokeny.
+
+Tyto akce nesmí mít jedno tlačítko se stejným textem. Uživatel potřebuje vidět dopad lidsky:
+
+| Akce | Co zmizí | Co zůstane | Kdo to může udělat |
+| --- | --- | --- | --- |
+| Archivovat projekt | Skryje se z běžné práce | Data zůstávají pro obnovu | Editor nebo admin |
+| Smazat projekt | Projekt a jeho pracovní data | Auditní záznam a zákonné minimum | Admin |
+| Zrušit člena týmu | Přístup člověka | Obsah vytvořený pro firmu podle nastavení | Admin |
+| Smazat workspace | Pracovní data týmu | Fakturační a právní záznamy podle retence | Owner |
+
+Nejde o právnickou poezii. Jde o to, aby se zákazník nemusel ptát supportu, jestli kliknutím omylem smaže faktury, pozvánky, exporty nebo data ostatních lidí.
+
+### Export dej před nevratný krok
+
+Privacy-first produkt nesmí držet data jako rukojmí. Před smazáním workspace nabídni export tam, kde to dává smysl: projekty, kontakty, dokumenty, nastavení, auditní záznamy dostupné zákazníkovi a další provozní data, která patří do jeho pracovní reality.
+
+Dobré rozhraní před výmazem říká:
+
+- co export obsahuje,
+- v jakém formátu bude,
+- jak dlouho bude odkaz dostupný,
+- kdo v týmu export uvidí,
+- zda export obsahuje osobní údaje,
+- co se po smazání už obnovit nedá.
+
+Export není jen technická funkce. Je to moment důvěry. Když zákazník odchází bez boje, může se vrátit. Když musí prosit o svoje data, bude si to pamatovat. Bohužel ne jako dojemnou značkovou zkušenost.
+
+### Rozděl mazání na stavy
+
+Okamžitý hard delete je lákavě jednoduchý, dokud někdo nesmaže workspace omylem nebo dokud se neukáže, že účet má aktivní fakturaci, integrace, běžící import nebo právní retenční povinnost.
+
+Praktičtější je stavový proces:
+
+1. Aktivní: workspace normálně funguje.
+2. Pozastavený: přístupy a automatizace jsou omezené, data zatím existují.
+3. Naplánovaný k výmazu: běží ochranná lhůta, owner dostal potvrzení, tým ví dopad.
+4. Mazaný: systém vypíná integrace, fronty, tokeny, veřejné odkazy a pracovní data.
+5. Smazaný: zůstávají jen záznamy, které mají jasný právní nebo bezpečnostní účel.
+
+Ochranná lhůta nemusí být dlouhá. Důležité je, aby byla popsaná a aby produkt věděl, co se v ní smí stát. Například: owner může výmaz zrušit, ale noví členové už nejdou pozvat a nové exporty může vytvořit jen vlastník.
+
+### Právní retenci odděl od produktové lenosti
+
+Ne všechno musí zmizet ve stejný den. Fakturační údaje, účetní doklady, bezpečnostní záznamy nebo důkazní materiál k incidentu mohou mít jiný režim než pracovní data v produktu. To je v pořádku, pokud je důvod konkrétní, popsaný a časově omezený.
+
+Špatná formulace:
+
+```text
+Data můžeme uchovávat pro zlepšování služeb.
+```
+
+Lepší formulace:
+
+```text
+Po smazání workspace odstraníme pracovní data do 30 dnů. Fakturační doklady uchováváme podle zákonné povinnosti. Bezpečnostní logy držíme maximálně 90 dnů, pokud nejsou součástí řešení incidentu.
+```
+
+Čísla si musí tým nastavit podle své reality a právní rady. Produktový princip je ale jasný: každá výjimka z výmazu má mít vlastníka, účel, retenci a místo, kde ji umíš zákazníkovi srozumitelně vysvětlit.
+
+### Zavři přístupy a integrace dřív než smažeš data
+
+Mazání workspace není jen databázový dotaz. Před výmazem musí systém ukončit věci, které by po smazání mohly dál pracovat s daty:
+
+- API klíče,
+- OAuth tokeny,
+- webhooky,
+- veřejné odkazy,
+- pozvánky,
+- sdílené exporty,
+- naplánované importy,
+- automatizace a e-mailové fronty,
+- přístupy externích konzultantů nebo supportu.
+
+Dobré pravidlo: nejdřív zastav pohyb dat, potom maž uložená data. Jinak můžeš workspace smazat, ale integrace ti ho vesele znovu naplní importem z noci. Software je v tomhle jako účetnictví po třetí kávě: udělá přesně to, co mu dovolíš, ne to, co jsi doufal.
+
+### Potvrzení má být konkrétní, ne vyděračské
+
+Destruktivní akce potřebuje potvrzení. Nepotřebuje manipulaci.
+
+Dobré potvrzení obsahuje:
+
+- název workspace,
+- počet projektů nebo hlavních objektů,
+- informaci o exportu,
+- datum plánovaného výmazu,
+- jasný seznam věcí, které zůstanou kvůli retenci,
+- pole pro opsání názvu jen u opravdu nevratné akce.
+
+Špatný vzor je stránka, která uživatele trestá: pět varování, skryté tlačítko, nutnost kontaktovat sales a žádná informace o datech. To není retence zákazníka. To je panika v kabátě UX.
+
+### Potvrzení po výmazu je součást produktu
+
+Po dokončení výmazu pošli potvrzení ownerovi a ulož interní auditní záznam. Potvrzení nemá obsahovat osobní data navíc. Stačí:
+
+```text
+Workspace „Acme Demo“ byl smazán 12. 7. 2026.
+Odstranili jsme pracovní projekty, členství, API klíče, webhooky a veřejné odkazy.
+Fakturační doklady uchováváme podle zákonné povinnosti.
+Bezpečnostní logy budou odstraněny podle retenčního plánu.
+```
+
+Pokud výmaz selže, nepiš uživateli obecné „něco se pokazilo“. Interně založ incident nebo provozní úkol, veřejně řekni, co se stalo s procesem a kdy dostane potvrzení. U mazání dat je mlžení horší než pomalost.
+
+### Checklist: Mazání workspace privacy-first
+
+- [ ] Rozlišujeme smazání uživatele, projektu, workspace a ukončení předplatného.
+- [ ] U každé akce víme, co zmizí, co zůstane a proč.
+- [ ] Před nevratným výmazem nabízíme relevantní export.
+- [ ] Export má jasný formát, rozsah, expiraci a oprávnění.
+- [ ] Výmaz má stavový proces, ne ruční improvizaci v supportu.
+- [ ] Právní a účetní retence je oddělená od pracovních produktových dat.
+- [ ] Před mazáním zneplatníme tokeny, webhooky, veřejné odkazy, pozvánky a fronty.
+- [ ] Potvrzení destruktivní akce ukazuje konkrétní název a dopad.
+- [ ] Po dokončení výmazu posíláme stručné potvrzení bez zbytečných osobních dat.
+- [ ] Selhání výmazu má interní provozní postup a auditní stopu.
+
+### Mini úkol
+
+Vezmi jeden destruktivní tok ve svém produktu a vyplň tuto kartu:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Co přesně uživatel maže? |  |
+| Kdo smí akci spustit? |  |
+| Jaký export nabídneme před výmazem? |  |
+| Jak dlouhá je ochranná lhůta? |  |
+| Které integrace a tokeny musíme vypnout první? |  |
+| Co zůstává kvůli zákonné nebo bezpečnostní retenci? |  |
+| Jak uživatel dostane potvrzení? |  |
+| Jak poznáme, že výmaz selhal? |  |
+
+Potom oprav jednu věc: buď přejmenuj matoucí tlačítko, přidej jasný seznam dopadů, nebo doplň export před výmazem. Mazání je jedna z těch funkcí, které vypadají nudně, dokud přes ně neztratíš důvěru zákazníka.
+
 ## Zdroje
 
 - European Commission Taxation and Customs Union: VAT for businesses - One Stop Shop pro přeshraniční B2C e-commerce a služby v EU: https://taxation-customs.ec.europa.eu/taxation/vat/vat-businesses_en
@@ -7811,6 +7964,8 @@ Potom odeber ze startu jedno pole, které není nutné pro první hodnotu. Pokud
 - European Data Protection Board: Artificial intelligence - rozcestník EDPB k AI, GDPR a ochraně osobních údajů při vývoji a používání AI technologií: https://www.edpb.europa.eu/topics/ai-and-technology/artificial-intelligence_en
 - European Data Protection Board: Opinion on AI models - GDPR principles support responsible AI - stanovisko k anonymitě AI modelů, legitimnímu zájmu a dopadům nezákonně zpracovaných osobních údajů: https://www.edpb.europa.eu/news/edpb-opinion-on-ai-models-gdpr-principles-support-responsible-ai_en
 - European Data Protection Board: Respect individuals' rights - přehled práv subjektů údajů v GDPR pro malé a střední organizace: https://www.edpb.europa.eu/sme-data-protection-guide/respect-individuals-rights_en
+- European Commission: Do we always have to delete personal data if a person asks? - praktické vysvětlení práva na výmaz a výjimek, kdy organizace nemusí data odstranit: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/dealing-citizens/do-we-always-have-delete-personal-data-if-person-asks_en
+- European Data Protection Board: 2025 Coordinated Enforcement Action - Implementation of the right to erasure by controllers - report z 10. února 2026 k praxi správců, interním postupům, retenci, zálohám a anonymizaci při právu na výmaz: https://www.edpb.europa.eu/system/files/documents/2026-02/edpb_cef-report_2025_right-to-erasure_en.pdf
 - European Data Protection Board: Guidelines on the right to data portability under Regulation 2016/679, WP242 rev.01 - pokyny k právu na přenositelnost údajů a použitelným strukturovaným formátům: https://www.edpb.europa.eu/documents/guideline/guidelines-on-the-right-to-data-portability-under-regulation-2016679-wp242_en
 - European Commission: Information for individuals - praktický přehled práv jednotlivců podle ochrany osobních údajů v EU: https://commission.europa.eu/law/law-topic/data-protection/information-individuals_en
 - European Commission: Principles of the GDPR - přehled principů jako transparentnost, účelové omezení, minimalizace dat a omezení uchování: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr_en
@@ -7865,6 +8020,7 @@ Potom odeber ze startu jedno pole, které není nutné pro první hodnotu. Pokud
 
 ## Pracovní log
 
+- 2026-07-12: Doplněna příloha o mazání workspace bez datového strašení: rozlišení typů destruktivních akcí, export před výmazem, stavový proces mazání, oddělení právní retence od produktových dat, vypnutí integrací a tokenů, konkrétní potvrzení dopadu, checklist a mini úkol; ověřeny a doplněny zdroje Evropské komise a EDPB k právu na výmaz a praktické implementaci výmazu.
 - 2026-07-12: Doplněna příloha o admin onboardingu bez zbytečného sběru dat: definice první hodnoty administrátora, sběr údajů po vlnách, bezpečné pozvánky a role, checklist hotové práce místo povinné prohlídky, bezpečná demo data, privacy nastavení v hlavním toku, agregované měření aktivace, checklist a mini úkol; navázáno na existující zdroje k onboardingu a GDPR principům minimalizace.
 - 2026-07-12: Doplněna příloha o migraci zákaznických dat bez chaosu a ostudy: migrační věta, rozdělení polí na nutná/volitelná/zakázaná, bezpečné zacházení s importními soubory, suchý běh, mapovací protokol, vztah k přenositelnosti dat, uzavření dočasných přístupů, checklist a mini úkol; ověřeny a doplněny zdroje EDPB k právu na přenositelnost údajů a OWASP k bezpečnému uploadu souborů.
 - 2026-07-12: Doplněna příloha o status page a provozní komunikaci bez mlžení: oddělení interního incidentu od veřejného stavu, komponenty podle práce uživatele, aktualizace podle jistoty, minimalizace citlivých detailů, šablony incidentové komunikace, postmortem, checklist a mini úkol; znovu ověřeny zdroje Evropské komise a EDPB k data breach a ENISA k bezpečnostní hygieně pro malé a střední firmy.
