@@ -7461,6 +7461,150 @@ Vyber jednu službu nebo SaaS produkt a napiš návrh veřejné status page:
 
 Potom připrav jednu šablonu úvodní aktualizace pro nejpravděpodobnější incident. Nenasazuj další monitoring jen proto, že to zní dospěle. Nejdřív napiš, co přesně potřebuje zákazník vědět a kdo to v první půlhodině řekne.
 
+## Příloha: Migrace zákaznických dat bez chaosu a ostudy
+
+Migrace dat je jeden z okamžiků, kdy se hezké sliby o privacy-first provozu potkají s realitou. Zákazník chce přejít z jiného systému, obchod chce onboarding urychlit, produkt chce ukázat hodnotu a vývojář najednou dostane CSV export, ve kterém je všechno od fakturačních údajů po poznámky z roku 2018. Někde v koutě tiše pláče validace vstupů.
+
+Dobrá migrace není jen technický import. Je to produktový proces s jasným účelem, omezením rozsahu, kontrolou kvality, bezpečným zpracováním souborů a plánem, co se stane s dočasnými daty po dokončení.
+
+> Codyho komentář: Import dat má být most do produktu, ne nový datový sklad pod stolem. Pokud dočasný importní soubor přežije déle než původní projektový Slack thread, někde se stala chyba.
+
+### Začni migrační větou
+
+Před technickým návrhem napiš jednu větu:
+
+```text
+Migrujeme [jaká data] od [koho] do [jaké části produktu], aby zákazník mohl [konkrétní první hodnota], a data po migraci držíme [kde a jak dlouho].
+```
+
+Příklady:
+
+- Migrujeme seznam firem a kontaktů z původního CRM do workspace zákazníka, aby obchodní tým mohl navázat na aktivní příležitosti, a importní soubory smažeme do 14 dnů po potvrzení.
+- Migrujeme projekty a úkoly z tabulky do nové aplikace, aby tým mohl začít plánovat sprint, a historické komentáře bez jasného účelu nepřenášíme.
+- Migrujeme fakturační kontakty do billing modulu, aby zákazník mohl vystavit první objednávku, a platební údaje do importu vůbec nebereme.
+
+Tato věta chrání rozsah. Když někdo později řekne „vezměme radši celý export, ono se to může hodit“, máš se k čemu vrátit. Privacy-first odpověď zní: vezměme to, co podporuje účel migrace, zbytek nechme venku.
+
+### Rozděl data na nutná, volitelná a zakázaná
+
+Importní šablona nemá kopírovat databázi starého systému. Má popsat minimální datový model pro první hodnotu v novém produktu.
+
+Rozděl pole do tří skupin:
+
+| Skupina | Co znamená | Příklad |
+| --- | --- | --- |
+| Nutná | Bez pole nejde vytvořit smysluplný záznam | název firmy, e-mail uživatele pro pozvánku |
+| Volitelná | Zlepší onboarding, ale produkt funguje i bez ní | interní štítek, poznámka k segmentu |
+| Zakázaná | Pro účel migrace ji nechceš a nemáš ji zpracovávat | rodná čísla, čísla karet, volné poznámky s citlivými údaji |
+
+U volných textových polí buď zvlášť opatrný. Poznámky z CRM, supportu nebo tabulek často obsahují osobní údaje, které nikdo nikdy neplánoval migrovat: zdravotní informace, interní dohady, staré konflikty, soukromé telefony, jména rodinných příslušníků nebo přístupové údaje napsané „dočasně“. Dočasně je nejslavnější trvalý stav v IT.
+
+Praktické pravidlo: Pokud pole nedokážeš vysvětlit v onboardingové dokumentaci zákazníkovi, nepatří do první migrace automaticky.
+
+### Importní soubor ber jako citlivý artefakt
+
+CSV, XLSX nebo ZIP export je často nejrizikovější část migrace, protože obchází běžné produktové kontroly. Najednou má někdo plochý soubor s velkou částí zákaznických dat, poslaný e-mailem, uložený lokálně a nahraný do admin rozhraní.
+
+Minimální bezpečnostní pravidla:
+
+- Importní soubory neposílej běžným e-mailem, pokud obsahují osobní nebo obchodně citlivá data.
+- Používej dočasný upload s expirací a přístupem jen pro určené lidi.
+- Omez velikost souboru, typy příloh a počet souborů na migraci.
+- Validuj příponu i skutečný obsah, nejen název souboru.
+- U ZIP souborů kontroluj rozbalenou velikost a cesty souborů.
+- Importní soubor ukládej odděleně od běžných produktových příloh.
+- Po dokončení migrace soubor smaž podle předem dané retence.
+
+OWASP File Upload Cheat Sheet zdůrazňuje validaci typu, velikosti, názvu, uložení mimo webroot, kontrolu oprávnění a ochranu před škodlivými soubory. Přeloženo do SaaS migrace: importní upload není „jen interní nástroj“. Je to veřejně nebo zákaznicky dosažitelný vstup do systému a zaslouží stejné bezpečnostní uvažování jako běžná produktová funkce.
+
+### Udělej suchý běh a mapovací protokol
+
+První import nemá být ostrý zápis do produkce. Nejprve udělej suchý běh: načti soubor, zvaliduj ho, ukaž chyby, spočítej dopady a nic trvale nezapiš.
+
+Suchý běh má odpovědět:
+
+- Kolik záznamů se vytvoří?
+- Kolik záznamů se přeskočí a proč?
+- Která pole se mapují na jaké produktové vlastnosti?
+- Která data budou zahozena?
+- Vzniknou duplicity?
+- Budou někomu odeslány pozvánky, e-maily nebo webhooky?
+- Jak import vrátíme zpět, když zákazník potvrdí špatné mapování?
+
+Mapovací protokol může být jednoduchá tabulka:
+
+| Zdrojové pole | Cílové pole | Povinné | Transformace | Poznámka |
+| --- | --- | --- | --- | --- |
+| `Company Name` | Firma: název | ano | trim mezer |  |
+| `Owner Email` | Vlastník záznamu | ne | malá písmena | musí existovat uživatel |
+| `Private Notes` | nepřenáší se | ne | žádná | volný text mimo účel migrace |
+
+Zákazníkovi neukazuj jen „import proběhl“. Ukaž mu shrnutí, které může potvrdit: co se přeneslo, co se nepřeneslo a co se stane dál. Tím snížíš počet supportních tiketů i riziko, že zákazník za měsíc zjistí, že se mu do nového systému přenesl starý nepořádek.
+
+### Přenositelnost dat není totéž co nekonečný import
+
+GDPR obsahuje právo na přenositelnost údajů a EDPB k němu vydal pokyny. Praktický produktový závěr: když uživatel nebo zákazník potřebuje export svých dat ve strukturovaném a použitelném formátu, nemá dostat zamčený chaos. To ale neznamená, že nový SaaS musí bez otázek importovat každý export z každého nástroje a každou historickou poznámku.
+
+Rozliš dvě věci:
+
+- Export z tvého produktu má být férový, srozumitelný a použitelný.
+- Import do tvého produktu má být omezený účelem, bezpečností a kvalitou dat.
+
+Dobrá strategie je podporovat několik stabilních formátů:
+
+- CSV šablona pro běžné seznamy,
+- JSON export pro technické integrace,
+- API import pro větší zákazníky,
+- ruční migrační konzultace pro složité případy.
+
+Nepředstírej univerzální kompatibilitu, pokud ji neumíš provozně udržet. Lepší je jasně napsat „umíme importovat tyto entity a tato pole“ než slibovat „import všeho“ a pak ručně opravovat překvapení v každém druhém onboardingu.
+
+### Po migraci zavři dočasná vrata
+
+Migrace často vytváří dočasné přístupy, skripty, bucket, feature flag, admin endpoint, lokální kopii souboru a výjimku v monitoringu. Pokud se po migraci neuklidí, zůstane v systému tajná zadní chodba.
+
+Po každé migraci udělej uzavření:
+
+1. Zákazník potvrdil, že hlavní data sedí.
+2. Importní soubory byly smazány nebo označeny k automatickému smazání.
+3. Dočasné účty a oprávnění byly odebrány.
+4. Importní skript byl uložen jako auditovatelný artefakt nebo odstraněn.
+5. Chyby a ruční opravy byly zapsány do migračního protokolu.
+6. Produktový tým ví, které části importu se mají zautomatizovat příště.
+
+Privacy-first provoz není jen o tom, jak data dostaneš dovnitř. Je i o tom, že víš, kdy dočasná kopie přestane existovat.
+
+### Checklist: Migrace zákaznických dat
+
+- [ ] Máme jednu migrační větu s účelem, rozsahem a retencí dočasných dat.
+- [ ] Importní šablona rozlišuje nutná, volitelná a zakázaná pole.
+- [ ] Volná textová pole se nepřenášejí automaticky bez kontroly účelu.
+- [ ] Importní soubory se neposílají běžným e-mailem, pokud obsahují citlivá data.
+- [ ] Upload má omezení typu, velikosti, oprávnění a retence.
+- [ ] První krok importu je suchý běh bez trvalého zápisu.
+- [ ] Zákazník vidí shrnutí, co se přenese, přeskočí nebo zahodí.
+- [ ] Import nespouští e-maily, pozvánky ani webhooky bez výslovného potvrzení.
+- [ ] Existuje plán rollbacku nebo opravy špatného mapování.
+- [ ] Po migraci se mažou dočasné soubory, přístupy a výjimky.
+
+### Mini úkol
+
+Vyber jednu migraci, kterou by tvůj produkt pravděpodobně řešil, a napiš importní kartu:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jakou první hodnotu má migrace umožnit? |  |
+| Které entity přenášíme? |  |
+| Která pole jsou nutná? |  |
+| Která pole jsou zakázaná? |  |
+| Jak zákazník soubor bezpečně předá? |  |
+| Jak dlouho držíme importní soubor? |  |
+| Jak vypadá suchý běh? |  |
+| Kdo potvrdí ostrý import? |  |
+| Jak zavřeme dočasné přístupy? |  |
+
+Potom smaž z návrhu jedno pole, které je jen zvědavost. Import, který začíná menším rozsahem, se lépe ladí, lépe vysvětluje a méně často skončí jako archeologická expedice v cizí databázi.
+
 ## Zdroje
 
 - European Commission Taxation and Customs Union: VAT for businesses - One Stop Shop pro přeshraniční B2C e-commerce a služby v EU: https://taxation-customs.ec.europa.eu/taxation/vat/vat-businesses_en
@@ -7470,6 +7614,7 @@ Potom připrav jednu šablonu úvodní aktualizace pro nejpravděpodobnější i
 - OWASP: API Security Top 10 2023 - přehled nejčastějších API rizik včetně rozbité autorizace objektů, slabé autentizace, neomezené spotřeby zdrojů a nebezpečných API: https://owasp.org/API-Security/editions/2023/en/0x00-header/
 - OWASP Cheat Sheet Series: REST Security Cheat Sheet - praktická doporučení k HTTPS, autentizaci, validaci vstupů, bezpečným chybám a práci s tokeny u REST API: https://cheatsheetseries.owasp.org/cheatsheets/REST_Security_Cheat_Sheet.html
 - OWASP Cheat Sheet Series: Web Service Security Cheat Sheet - obecná doporučení pro zabezpečení webových služeb a prevenci typických rizik při integracích: https://cheatsheetseries.owasp.org/cheatsheets/Web_Service_Security_Cheat_Sheet.html
+- OWASP Cheat Sheet Series: File Upload Cheat Sheet - doporučení pro validaci, omezení velikosti, ukládání, oprávnění a bezpečné zpracování nahrávaných souborů: https://cheatsheetseries.owasp.org/cheatsheets/File_Upload_Cheat_Sheet.html
 - EUR-Lex: Regulation (EU) 2016/679, GDPR Article 35 and 36 - povinnost posouzení vlivu na ochranu osobních údajů a předchozí konzultace při vysokém zbytkovém riziku: https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng
 - European Commission: When is a Data Protection Impact Assessment (DPIA) required? - praktický přehled situací, kdy je DPIA vyžadována: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/obligations/when-data-protection-impact-assessment-dpia-required_en
 - European Data Protection Board: Data Protection impact assessments High risk processing - pokyny WP248 rev.01 k určení vysokého rizika a DPIA: https://www.edpb.europa.eu/documents/guideline/data-protection-impact-assessments-high-risk-processing_en
@@ -7487,6 +7632,7 @@ Potom připrav jednu šablonu úvodní aktualizace pro nejpravděpodobnější i
 - European Data Protection Board: Artificial intelligence - rozcestník EDPB k AI, GDPR a ochraně osobních údajů při vývoji a používání AI technologií: https://www.edpb.europa.eu/topics/ai-and-technology/artificial-intelligence_en
 - European Data Protection Board: Opinion on AI models - GDPR principles support responsible AI - stanovisko k anonymitě AI modelů, legitimnímu zájmu a dopadům nezákonně zpracovaných osobních údajů: https://www.edpb.europa.eu/news/edpb-opinion-on-ai-models-gdpr-principles-support-responsible-ai_en
 - European Data Protection Board: Respect individuals' rights - přehled práv subjektů údajů v GDPR pro malé a střední organizace: https://www.edpb.europa.eu/sme-data-protection-guide/respect-individuals-rights_en
+- European Data Protection Board: Guidelines on the right to data portability under Regulation 2016/679, WP242 rev.01 - pokyny k právu na přenositelnost údajů a použitelným strukturovaným formátům: https://www.edpb.europa.eu/documents/guideline/guidelines-on-the-right-to-data-portability-under-regulation-2016679-wp242_en
 - European Commission: Information for individuals - praktický přehled práv jednotlivců podle ochrany osobních údajů v EU: https://commission.europa.eu/law/law-topic/data-protection/information-individuals_en
 - European Commission: Principles of the GDPR - přehled principů jako transparentnost, účelové omezení, minimalizace dat a omezení uchování: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr_en
 - European Commission: What data can we process and under which conditions? - praktické vysvětlení účelu, rozsahu a základních pravidel zpracování osobních údajů: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr/overview-principles/what-data-can-we-process-and-under-which-conditions_en
@@ -7540,6 +7686,7 @@ Potom připrav jednu šablonu úvodní aktualizace pro nejpravděpodobnější i
 
 ## Pracovní log
 
+- 2026-07-12: Doplněna příloha o migraci zákaznických dat bez chaosu a ostudy: migrační věta, rozdělení polí na nutná/volitelná/zakázaná, bezpečné zacházení s importními soubory, suchý běh, mapovací protokol, vztah k přenositelnosti dat, uzavření dočasných přístupů, checklist a mini úkol; ověřeny a doplněny zdroje EDPB k právu na přenositelnost údajů a OWASP k bezpečnému uploadu souborů.
 - 2026-07-12: Doplněna příloha o status page a provozní komunikaci bez mlžení: oddělení interního incidentu od veřejného stavu, komponenty podle práce uživatele, aktualizace podle jistoty, minimalizace citlivých detailů, šablony incidentové komunikace, postmortem, checklist a mini úkol; znovu ověřeny zdroje Evropské komise a EDPB k data breach a ENISA k bezpečnostní hygieně pro malé a střední firmy.
 - 2026-07-12: Doplněna příloha o testovacích datech a stagingu bez kopírování produkce: rozdělení neprodukčních prostředí, seed data jako scénáře, realistická data bez osobních údajů, rozdíl mezi pseudonymizací a anonymizací, řízená výjimka pro produkční snapshot, demo data, checklist a mini úkol; ověřeny a doplněny zdroje Evropské komise k principům GDPR a EDPB k pseudonymizaci.
 - 2026-07-12: Doplněna příloha o experimentech a A/B testech bez sledovací laboratoře: konkrétní hypotéza, volba jednoduššího ověření místo zbytečného A/B testu, agregované měření, bezpečné používání feature flagů, privacy kontrola experimentu, vyhodnocení jako rozhodnutí, checklist a mini úkol; ověřeny a využity zdroje EDPB k technickému rozsahu ePrivacy a CNIL k analytice.
