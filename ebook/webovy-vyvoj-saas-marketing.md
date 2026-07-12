@@ -8897,6 +8897,169 @@ Vyber deset nejdůležitějších událostí ve svém produktu nebo webu a vypl�
 
 Potom udělej jednu konkrétní opravu: přejmenuj jeden nesrozumitelný event, smaž jednu zbytečnou vlastnost, doplň zakázané hodnoty nebo vypni signál, který nikdo nepoužívá. Datový slovník má hodnotu až ve chvíli, kdy brání novému nepořádku, ne jen popisuje ten starý.
 
+## Příloha: Technický dluh bez věčného odkládání
+
+Technický dluh není nadávka na starý kód. Je to rozdíl mezi tím, jak systém funguje dnes, a tím, co bude tým potřebovat zítra, aby mohl bezpečně měnit produkt. Dluh vzniká z kompromisů, spěchu, neznalosti, změny směru i z dobrých rozhodnutí, která zestárla. Problém není, že dluh existuje. Problém je, když ho nikdo neumí pojmenovat, ocenit a pravidelně splácet.
+
+U malého SaaS týmu se technický dluh často schová za větu „vrátíme se k tomu později“. Později se ale chová jako kalendářní mlha: vypadá prostorně, dokud do ní nevjede produkční incident, pomalý release nebo bezpečnostní oprava na poslední chvíli.
+
+Codyho komentář: Technický dluh není hřích. Hřích je tvářit se, že neexistuje, a pak být překvapený, že každá malá změna vyžaduje archeologickou výpravu a tři opatrné výdechy.
+
+### Rozliš dluh, riziko a nepořádek
+
+Ne všechno, co v kódu nevypadá elegantně, je urgentní dluh. A ne všechno urgentní je nutně refaktor. Nejdřív si polož tři otázky:
+
+- Brání nám to dodat hodnotu zákazníkovi?
+- Zvyšuje to bezpečnostní, provozní nebo privacy riziko?
+- Zpomaluje to tým opakovaně, nebo jen esteticky dráždí jednoho člověka?
+
+Praktické rozdělení:
+
+| Typ | Příklad | Jak s tím zacházet |
+| --- | --- | --- |
+| Produktový dluh | Funkce má složitý tok a zákazníci se v ní ztrácí | Řešit podle dopadu na aktivaci, retenci nebo support |
+| Technický dluh | Sdílená část kódu nejde bezpečně měnit bez vedlejších efektů | Naplánovat před další změnou v dané oblasti |
+| Bezpečnostní dluh | Staré závislosti, slabá oprávnění, tajemství mimo správu secrets | Prioritizovat podle rizika, ne podle nálady |
+| Datový dluh | Nejasné retence, duplicitní pole, exporty mimo kontrolu | Spojit s mapou dat a privacy review |
+| Provozní dluh | Neexistuje runbook, obnova záloh není otestovaná | Řešit před růstem provozu nebo týmu |
+| Kosmetický nepořádek | Nekonzistentní názvy v interní části bez dopadu | Uklidit při práci v okolí, nevydávat za krizi |
+
+Toto rozlišení chrání tým před dvěma extrémy: buď se ignoruje všechno, nebo se refaktoruje všechno. Ani jedno není strategie. První vede k zatuhnutí produktu, druhé k nekonečné dílně bez zákaznické hodnoty.
+
+### Každý dluh popiš jako dopad
+
+Backlog plný položek typu „přepsat auth“, „uklidit komponenty“ nebo „refactor billing“ je málo užitečný. Neříká, proč je práce důležitá, co se stane bez ní a kdy je hotovo.
+
+Lepší karta technického dluhu obsahuje:
+
+- oblast systému,
+- konkrétní problém,
+- dopad na zákazníka, tým, bezpečnost nebo privacy,
+- důkaz,
+- nejmenší rozumný krok,
+- riziko odkladu,
+- vlastníka.
+
+Příklad:
+
+| Pole | Hodnota |
+| --- | --- |
+| Oblast | Import zákaznických dat |
+| Problém | Validace importu je rozdělená ve třech místech a chová se odlišně |
+| Dopad | Zákazník dostává jiné chyby podle cesty importu, support musí ručně vysvětlovat rozdíly |
+| Důkaz | Tři support tickety za měsíc, dva odlišné chybové stavy v logu |
+| Nejmenší krok | Sjednotit validaci pro CSV import a ruční vložení |
+| Riziko odkladu | Nová integrace zdědí třetí variantu stejné logiky |
+| Vlastník | Engineering + product vlastník importu |
+
+Taková karta už není vývojářské povzdechnutí. Je to produktové rozhodnutí. Dá se porovnat s jinou prací, naplánovat a po dokončení ověřit.
+
+### Splácej dluh u změn, které se ho dotýkají
+
+Nejlepší čas na opravu technického dluhu je často chvíle, kdy tým stejně mění danou část systému. Samostatný velký refaktor může dávat smysl u kritických oblastí, ale běžnější je praktičtější režim: když otevřeš modul kvůli nové hodnotě, nech ho v lepším stavu.
+
+Použij pravidlo tří úrovní:
+
+1. Pokud je dluh mimo oblast změny, zapiš ho a nesahej na něj.
+2. Pokud změnu zpomaluje, oprav nejmenší část nutnou pro bezpečné dokončení.
+3. Pokud změna bez opravy zvyšuje riziko, udělej opravu součástí dodávky.
+
+Příklad: Přidáváš nový typ exportu. Všimneš si, že staré exporty mají nekonzistentní kontrolu oprávnění. To není vedlejší estetika. Je to bezpečnostní hranice. Nový export by neměl přidat čtvrtý styl kontroly. Nejmenší rozumný krok může být sjednocená funkce pro ověření oprávnění u exportů a test pro hlavní scénáře.
+
+Naopak když při práci na exportu najdeš špatně pojmenovanou CSS třídu v nastavení profilu, zapiš ji nebo ji ignoruj. Vývojářský lov drobných nesrovnalostí je příjemný, ale umí se tvářit jako produktivita i ve chvíli, kdy jen odkládá hlavní práci.
+
+### U závislostí řeš rytmus, ne paniku
+
+Závislosti stárnou i v projektech, do kterých nikdo nesahá. U SaaS produktu je potřeba mít jednoduchý rytmus údržby:
+
+- pravidelně kontrolovat dostupné aktualizace,
+- oddělovat bezpečnostní opravy od běžných minor updatů,
+- testovat kritické cesty po větších upgradech,
+- držet seznam knihoven, které mají přístup k datům, síti nebo autentizaci,
+- mazat nepoužívané balíčky,
+- dokumentovat větší migrační kroky.
+
+Privacy-first pohled: každá nová závislost je i nový důvěryhodný kód v systému. Ptej se, co balíček dělá, kdo ho udržuje, jaké má transitive závislosti a jestli opravdu potřebuje běžet na serveru, v prohlížeči nebo v CI. Přidat knihovnu kvůli pěti řádkům pohodlí může být v pořádku. Jen to má být vědomé rozhodnutí, ne automatický reflex.
+
+Praktická karta pro novou závislost:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jaký problém řeší? |  |
+| Jde použít existující knihovna nebo platformní API? |  |
+| Běží na serveru, klientovi, v buildu nebo v CI? |  |
+| Má přístup k osobním údajům, tokenům nebo síti? |  |
+| Kdo ji bude aktualizovat? |  |
+| Jak poznáme, že ji můžeme odstranit? |  |
+
+Tato karta nemusí vznikat pro každou drobnou vývojovou utilitu. Ale u knihoven v autentizaci, platbách, uploadu, analytice, editoru obsahu nebo komunikaci se zákazníkem se krátké zastavení vyplatí.
+
+### Dluh musí mít rozpočet času
+
+Technický dluh se nevyřeší tím, že ho tým dá do backlogu a bude mu říkat „důležité“. Potřebuje kapacitu. Nemusí to být pevné procento pro každou firmu, ale musí existovat rytmus.
+
+Možné režimy:
+
+- jedna menší dluhová položka v každém sprintu,
+- jeden půlden měsíčně na provozní a bezpečnostní hygienu,
+- pravidelný upgrade den pro závislosti a build nástroje,
+- splátka dluhu jako povinná součást větší změny v dané oblasti,
+- krátké technické review před každým kvartálním plánováním.
+
+Důležité je, aby dluh nesoutěžil jen s novými funkcemi podle hlasitosti. Jinak vždy prohraje proti viditelnější práci, dokud nezačne hořet. A jakmile hoří, už tomu nikdo neříká technický dluh. Říká se tomu incident, zdržení releasu nebo nepříjemný hovor se zákazníkem.
+
+### Refaktor má mít definici hotovo
+
+Refaktor bez hranic je nebezpečně pohodlný. Vždycky jde ještě něco zlepšit. Proto si předem napiš, co bude po opravě pravda.
+
+Dobrá definice hotovo:
+
+- konkrétní tok používá jednu sdílenou validaci,
+- stará větev kódu je odstraněná,
+- test pokrývá hlavní rizikový scénář,
+- dokumentace popisuje nový způsob práce,
+- metrika nebo support signál ukáže, jestli problém zmizel,
+- žádná nová osobní data ani širší oprávnění nepřibyla bez review.
+
+Slabá definice hotovo:
+
+- kód je hezčí,
+- architektura je čistší,
+- technicky je to lepší,
+- jednou se to bude hodit.
+
+Hezčí kód je příjemný. Ale pro plánování potřebuješ vědět, jaký dopad oprava přinesla. Technická kvalita má být viditelná v rychlejší změně, menším riziku, jednodušším testování, menším supportu nebo bezpečnějším provozu.
+
+### Checklist: Technický dluh, který se dá řídit
+
+- [ ] Technický dluh je rozdělený podle typu: produktový, technický, bezpečnostní, datový, provozní nebo kosmetický.
+- [ ] Každá důležitá položka popisuje dopad, důkaz a riziko odkladu.
+- [ ] Dluh se prioritizuje podle zákaznického dopadu, rizika a opakovaného zpomalení týmu.
+- [ ] Opravy se přednostně dělají v oblastech, kterých se právě dotýká produktová změna.
+- [ ] Bezpečnostní a privacy dluh má jasně vyšší prioritu než estetický úklid.
+- [ ] Závislosti mají pravidelný rytmus aktualizace a odstraňování.
+- [ ] Nové citlivé závislosti procházejí krátkou kontrolou účelu a přístupu k datům.
+- [ ] Refaktor má definici hotovo, ne jen obecný slib lepší architektury.
+- [ ] Tým má vyhrazenou kapacitu na údržbu, ne jen seznam přání.
+- [ ] Po opravě se zavře původní dluhová karta a zapíše se, co se změnilo.
+
+### Mini úkol
+
+Vyber jednu část produktu, které se tým bojí dotknout, a vyplň krátkou kartu:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Která oblast systému to je? |  |
+| Jaký konkrétní problém tam opakovaně vzniká? |  |
+| Koho to brzdí nebo ohrožuje? |  |
+| Jaký máme důkaz? |  |
+| Jaké je privacy nebo bezpečnostní riziko? |  |
+| Jaký je nejmenší bezpečný krok? |  |
+| Co bude po opravě pravda? |  |
+| Kdy se k tomu vrátíme, pokud to teď neuděláme? |  |
+
+Potom udělej jednu malou splátku: odstraň nepoužívanou závislost, sjednoť jednu validaci, doplň test ke kritické cestě, popiš runbook nebo zavři starou TODO poznámku tím, že z ní vznikne skutečná karta. Technický dluh se neporazí hrdinským refaktorem jednou za rok. Porazí se tím, že ho tým přestane nechávat růst potichu.
+
 ## Zdroje
 
 - European Commission Taxation and Customs Union: VAT for businesses - One Stop Shop pro přeshraniční B2C e-commerce a služby v EU: https://taxation-customs.ec.europa.eu/taxation/vat/vat-businesses_en
@@ -8981,6 +9144,7 @@ Potom udělej jednu konkrétní opravu: přejmenuj jeden nesrozumitelný event, 
 
 ## Pracovní log
 
+- 2026-07-12: Doplněna příloha o technickém dluhu bez věčného odkládání: rozlišení dluhu, rizika a nepořádku, popis dluhu jako dopadu, splácení při souvisejících změnách, rytmus údržby závislostí, rozpočet času, definice hotovo pro refaktor, checklist a mini úkol.
 - 2026-07-12: Doplněna příloha o datovém slovníku a názvech událostí bez analytického nepořádku: začátek od rozhodnutí místo seznamu eventů, názvosloví podle práce uživatele, malé a vysvětlitelné vlastnosti, zakázané hodnoty, životní cyklus událostí, oddělení produktové analytiky od logů/CRM, review nových eventů, checklist a mini úkol.
 - 2026-07-12: Doplněna příloha o obsahovém auditu po publikaci bez SEO paniky: rozdělení článků podle rizika stárnutí, výběr URL s největším dopadem, věcná/technická/privacy kontrola, rozhodnutí ponechat/upravit/sloučit/archivovat/smazat, agregované měření auditu, checklist a mini úkol; ověřen a doplněn oficiální zdroj Google Search Central ke canonical URL.
 - 2026-07-12: Doplněna příloha o customer success bez sledovacího health score: definice zákaznického úspěchu jako výsledku, účelové signály místo plošného sledování, lidské health stavy, playbooky, privacy-first upsell, customer review, checklist a mini úkol; ověřen a využit existující zdroj Evropské komise k ochraně osobních údajů a GDPR principům.
