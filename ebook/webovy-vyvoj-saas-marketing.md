@@ -9522,9 +9522,162 @@ Vyber jeden aktuální web, SaaS nebo klientský projekt a udělej 45minutový t
 
 Na konci vyber jednu věc, která nejvíc zvyšuje závislost na jednom člověku nebo dodavateli, a oprav ji. Převést doménu na správný účet, přidat druhého administrátora, dopsat deployment krok nebo zrušit starý token je malý úkol. Ale přesně z takových malých úkolů vzniká projekt, který se dá normálně vlastnit.
 
+## Příloha: SLO a provozní odpovědnost bez enterprise divadla
+
+Malý SaaS tým často začne řešit spolehlivost až ve chvíli, kdy zákazník napíše „nefunguje nám to“. Pak se rychle lepí monitoring, hledá se člověk s přístupem k serveru a vymýšlí se, co vlastně bylo slíbeno. To je drahé hlavně proto, že tým improvizuje pod tlakem.
+
+SLO není tabulka pro korporátní rituál. Je to dohoda týmu, jakou úroveň služby chce držet a podle čeho pozná, že má zpomalit s novými funkcemi a opravit provoz. Google SRE rozlišuje SLI jako měřený ukazatel, SLO jako cílovou hodnotu a SLA jako smluvní závazek s následkem při nedodržení. Pro malé týmy je nejdřív užitečné mít interní SLO. SLA do smlouvy dávej až tehdy, když víš, že ho umíš měřit, komunikovat a finančně unést.
+
+> Codyho komentář: SLA bez měření je přání s právní kravatou. Vypadá seriózně, dokud se něco nerozbije.
+
+### Začni uživatelskou prací
+
+Nezačínej otázkou „jakou dostupnost chceme slíbit“. Začni tím, co zákazník v produktu dělá.
+
+Příklady dobrých provozních schopností:
+
+- zákazník se přihlásí,
+- administrátor pozve nového člověka,
+- uživatel uloží změnu v důležitém záznamu,
+- aplikace odešle produktovou notifikaci,
+- billing správně zpracuje změnu tarifu,
+- veřejný web zobrazí pricing a formulář.
+
+Teprve k těmto schopnostem vyber signály. Pro uživatelské webové a API služby často dává smysl sledovat dostupnost, latenci, chybovost a objem provozu. Google SRE je popisuje jako praktické ukazatele pro uživatelsky orientované systémy a v monitoringu často zmiňuje čtyři základní signály: latenci, provoz, chyby a saturaci.
+
+Praktická věta:
+
+„Pro zákazníka je kritické, aby se mohl přihlásit, otevřít workspace a uložit změnu. Budeme měřit úspěšnost těchto tří cest, ne jen to, jestli server odpovídá na ping.“
+
+Ping je fajn. Ale zákazník neplatí za ping. Platí za hotovou práci.
+
+### Vyber málo SLI, ale definuj je přesně
+
+SLI má být měřitelný ukazatel služby. Ne nálada, ne pocit, ne „aplikace je rychlá“. U každého SLI napiš:
+
+- co přesně měříš,
+- odkud měření bereš,
+- jaké požadavky do něj patří,
+- jaké požadavky z něj vědomě vynecháváš,
+- v jakém časovém okně ho vyhodnocuješ,
+- kdo se na něj dívá.
+
+Příklad:
+
+| SLI | Definice | Zdroj | Okno |
+| --- | --- | --- | --- |
+| Úspěšné přihlášení | podíl dokončených přihlášení bez serverové chyby | aplikační metrika | 7 dní |
+| Uložení změny | podíl úspěšných požadavků `save` pro hlavní objekt | backend metrika | 7 dní |
+| Latence hlavní API akce | 95. percentil času odpovědi pro vybrané endpointy | APM nebo server metrika | 24 hodin |
+| Odeslání notifikace | podíl notifikací doručených poskytovateli bez trvalé chyby | fronta a provider stav | 24 hodin |
+
+Pozor na průměry. Průměrná latence může vypadat krásně, i když část uživatelů čeká nesnesitelně dlouho. Proto se u latence často používají percentily. Pro tým je lepší vědět, že 95 % požadavků se vejde do cíle, než si hladit průměr, který schová dlouhý ocas pomalých odpovědí.
+
+### SLO nastav jako pracovní cíl, ne marketingový slib
+
+SLO říká, jaká hodnota SLI je pro tým přijatelná. Má být dost konkrétní na rozhodování a dost realistické na provoz.
+
+Příklady:
+
+- 99,5 % pokusů o přihlášení skončí úspěšně v měsíčním okně.
+- 95 % požadavků na uložení hlavního záznamu odpoví do 800 ms v týdenním okně.
+- 99 % produktových notifikací je předáno poskytovateli do 5 minut.
+- Veřejný pricing a kontaktní formulář jsou dostupné 99,9 % času v měsíčním okně.
+
+Nezačínej 99,99 %, protože to vypadá hezky ve smlouvě. Každá další devítka zvyšuje nároky na architekturu, tým, pohotovost, testování, redundanci a incidentní proces. U malého B2B SaaS může být lepší čestné 99,5 % s rychlou komunikací a dobrým exportem dat než teatrální slib, který tým potichu nesplňuje.
+
+Privacy-first úhel: SLO měř agregovaně. Provozní spolehlivost většinou nepotřebuje sledovat konkrétního člověka napříč produktem. Potřebuje vědět, jestli kritická cesta funguje. Pokud potřebuješ drill-down pro incident, drž přístup omezený, logy s rozumnou retencí a bez zbytečných osobních údajů.
+
+### Alertuj na dopad, ne na každý šum
+
+Špatný alert říká: „CPU je divné.“ Dobrý alert říká: „Uživatelé nemohou dokončit kritickou akci a někdo má vstát.“
+
+Alert má mít odpověď na čtyři otázky:
+
+- Koho to budí nebo vyrušuje?
+- Jaký uživatelský dopad tím chráníme?
+- Co má člověk udělat jako první?
+- Kde je runbook?
+
+Příklad alertu:
+
+| Alert | Spouštěč | První krok |
+| --- | --- | --- |
+| Přihlášení selhává | úspěšnost přihlášení pod SLO za 15 minut | zkontrolovat auth provider, aplikační chyby a poslední release |
+| Ukládání hlavního objektu má vysokou chybovost | error rate endpointu nad limit | ověřit databázi, frontu a poslední migrace |
+| Notifikace se hromadí | fronta roste a provider vrací trvalé chyby | přepnout provider režim, zastavit retry bouři, informovat support |
+
+Naopak nebuď tým kvůli každému krátkému výkyvu, který nemá dopad na zákazníka. Alert fatigue je reálný provozní dluh: lidé přestanou věřit monitoringu a začnou ignorovat i důležité signály. To je přesně ten druh automatizace, která předstírá profesionalitu a vyrábí chaos. Výborně, stroj nám pomohl být unavenější.
+
+### SLA dávej do smlouvy až po provozní zkoušce
+
+SLA je smluvní závazek. Může obsahovat dostupnost, dobu reakce podpory, dobu obnovy nebo kompenzaci. Jakmile má následky, není to interní přání týmu.
+
+Před tím, než SLA slíbíš zákazníkovi, projdi si kontrolu:
+
+- Umíme závazek objektivně měřit?
+- Je jasné, co se počítá jako výpadek?
+- Jsou plánované odstávky popsané?
+- Máme monitoring mimo stejnou infrastrukturu jako služba?
+- Víme, kdo komunikuje incident?
+- Umíme splnit závazek o víkendu, o svátku a při dovolené?
+- Je případná kompenzace finančně přijatelná?
+- Nevyžaduje SLA sběr osobních dat, která jinak nepotřebujeme?
+
+U služeb pro menší zákazníky často stačí transparentní status page, rozumná dostupnost, export dat, jasný support kanál a poctivá incidentní komunikace. U enterprise zákazníků může být SLA nutná, ale pak je to obchodní produkt, ne věta přilepená do podmínek.
+
+### Provozní review drž krátké
+
+Jednou týdně nebo jednou za dva týdny udělej 30minutové provozní review. Cílem není procházet všechny grafy. Cílem je rozhodnout, jestli služba drží slib, který tým považuje za důležitý.
+
+Agenda:
+
+1. Které SLO bylo porušené nebo blízko porušení?
+2. Jaký byl dopad na zákazníky?
+3. Který alert byl užitečný a který byl šum?
+4. Co se opakovalo víc než jednou?
+5. Jaká jedna oprava sníží riziko příští týden?
+
+Z review musí vypadnout akce, ne pocit. „Zlepšit monitoring“ není akce. „Přidat syntetickou kontrolu přihlášení z EU regionu a runbook pro auth výpadek“ už akce je.
+
+### Checklist: SLO bez enterprise divadla
+
+- [ ] Máme pojmenované 3 až 5 kritických uživatelských schopností.
+- [ ] Každá schopnost má jeden nebo dva měřitelné SLI.
+- [ ] U každého SLI je jasný zdroj dat, okno a zahrnuté požadavky.
+- [ ] SLO je realistické a používá se pro rozhodování, ne jen pro ozdobu dashboardu.
+- [ ] Latenci nehodnotíme jen průměrem, ale sledujeme i percentil nebo jiné rozumné rozložení.
+- [ ] Alerty jsou navázané na uživatelský dopad a mají runbook.
+- [ ] Služba má jednoduchý provozní review rytmus.
+- [ ] SLA neslibujeme dřív, než máme měření, komunikaci a incidentní proces.
+- [ ] Provozní měření je agregované a nevyžaduje zbytečný tracking jednotlivců.
+- [ ] Retence logů a metrik odpovídá účelu, ne sběratelské vášni.
+
+### Mini úkol
+
+Vyber jednu kritickou cestu v produktu nebo webu a napiš pro ni provozní kartu:
+
+| Položka | Odpověď |
+| --- | --- |
+| Kritická schopnost |  |
+| Co uživatel považuje za úspěch |  |
+| SLI |  |
+| Zdroj měření |  |
+| Navržené SLO |  |
+| Co se stane při porušení |  |
+| Kdo reaguje |  |
+| Kde je runbook |  |
+| Jaká data se při měření ukládají |  |
+| Jak dlouho se drží |  |
+
+Začni jednou kartou. Když bude užitečná, přidej další. Když nebude, nezakládej provozní katedrálu. Uprav kartu tak, aby ji tým skutečně používal.
+
 ## Zdroje
 
 - EUR-Lex: Regulation (EU) 2016/679, GDPR Article 30 - právní text k záznamům o činnostech zpracování pro správce a zpracovatele: https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng
+- Google SRE Book: Service Level Objectives - vysvětlení rozdílu mezi SLI, SLO a SLA, volby ukazatelů, percentilů a error budgetu: https://sre.google/sre-book/service-level-objectives/
+- Google SRE Book: Monitoring Distributed Systems - praktický přehled monitoringu distribuovaných služeb a čtyř základních signálů latence, provozu, chyb a saturace: https://sre.google/sre-book/monitoring-distributed-systems/
+- Google SRE Workbook: Alerting on SLOs - doporučení, jak převádět SLO do alertů podle dopadu a spotřeby error budgetu: https://sre.google/workbook/alerting-on-slos/
 - European Commission: What information must be given to individuals whose data is collected? - praktický přehled informačních povinností podle GDPR článků 12, 13 a 14: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr/what-information-must-be-given-individuals-whose-data-collected_en
 - European Data Protection Board: Guidelines on transparency under Regulation 2016/679 - pokyny k transparentnosti, vrstvení informací, srozumitelnému jazyku a dostupnosti informací pro subjekty údajů: https://www.edpb.europa.eu/documents/guideline/article-29-working-party-guidelines-on-transparency-under-regulation-2016679_en
 - European Commission Taxation and Customs Union: VAT for businesses - One Stop Shop pro přeshraniční B2C e-commerce a služby v EU: https://taxation-customs.ec.europa.eu/taxation/vat/vat-businesses_en
@@ -9609,6 +9762,7 @@ Na konci vyber jednu věc, která nejvíc zvyšuje závislost na jednom člověk
 
 ## Pracovní log
 
+- 2026-07-12: Doplněna příloha o SLO a provozní odpovědnosti bez enterprise divadla: uživatelské schopnosti, SLI/SLO/SLA, percentily, alerty podle dopadu, SLA kontrola, provozní review, checklist a mini úkol; ověřeny a doplněny zdroje Google SRE Book a SRE Workbook k SLO, monitoringu a alertingu.
 - 2026-07-12: Doplněna příloha o předání webu nebo SaaS projektu bez rukojmí: provozní balík, vlastnictví účtů, role a přístupy, datová mapa, předvedení deploymentu, oddělení předání od podpory, checklist a mini úkol.
 - 2026-07-12: Doplněna příloha o záznamu o činnostech zpracování bez tabulky pro tabulku: procesní pohled místo databázových tabulek, karta činnosti, rozlišení rolí správce/zpracovatele, vazba na retenci, release proces, nákup nástrojů, čitelnost pro tým, checklist a mini úkol; ověřen a doplněn zdroj EUR-Lex k GDPR článku 30.
 - 2026-07-12: Doplněna příloha o privacy notice bez právnické mlhy: mapa datových situací, psaní podle otázek člověka, spojení účelu s právním základem, vrstvení informací v produktu, dodavatelé a EU provoz, retence jako konec životnosti, verzování změn, checklist a mini úkol; ověřeny a doplněny oficiální zdroje Evropské komise a EDPB k transparentnosti a informačním povinnostem podle GDPR.
