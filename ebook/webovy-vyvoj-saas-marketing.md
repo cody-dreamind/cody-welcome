@@ -7153,6 +7153,163 @@ Vyber jednu změnu, kterou tým plánuje „otestovat“. Vyplň kartu:
 
 Potom udělej jednu konkrétní úpravu: zúž hypotézu, odstraň zbytečnou identifikaci, nahraď A/B test ručním auditem, přidej ochrannou metriku nebo nastav datum vypnutí flagu. Experiment má pomáhat produktu učit se. Nemá z webu dělat sledovací laboratoř s hezkým grafem.
 
+## Příloha: Testovací data a staging bez kopírování produkce
+
+Staging má být místo, kde tým bezpečně ověřuje změny. Nemá to být tajná druhá produkce s horšími hesly, volnějšími přístupy a kopií skutečných zákaznických dat „jen na chvíli“. To „jen na chvíli“ má v IT zvláštní fyziku: vydrží déle než většina roadmap.
+
+Privacy-first přístup k testovacím datům začíná jednoduchou větou:
+
+„Neprodukční prostředí smí obsahovat jen data, která jsou pro testování nezbytná, řízená a srozumitelně odstranitelná.“
+
+Pokud tato věta neplatí, staging není pomocník. Je to provozní riziko v kapuci.
+
+### Produkční data nejsou seed databáze
+
+Kopírovat produkční databázi do lokálu nebo stagingu je lákavé, protože okamžitě řeší tři problémy:
+
+- aplikace má realistický objem dat,
+- vývojář vidí skutečné hrany produktu,
+- testy odhalí problémy, které se na umělých datech neukážou.
+
+Jenže tím často vzniknou čtyři větší problémy:
+
+- osobní údaje se přesunou do slaběji chráněného prostředí,
+- přístupy k nim získají lidé nebo služby, které je pro svou práci nepotřebují,
+- retence a výmaz přestanou odpovídat realitě popsané v dokumentaci,
+- chyby, debug nástroje a logování mohou začít ukládat data, která by v produkci nikdy projít neměla.
+
+Praktické pravidlo: produkční snapshot není výchozí řešení. Je to výjimka, která potřebuje důvod, vlastníka, schválení, transformační postup a datum smazání.
+
+### Rozděl prostředí podle rizika
+
+Ne všechna neprodukční prostředí mají stejný účel. Lokální vývoj, CI testy, preview branch a staging pro obchodní demo jsou různé světy.
+
+| Prostředí | Typ dat | Přístup | Retence |
+| --- | --- | --- | --- |
+| Lokální vývoj | syntetická data, malé fixtures | konkrétní vývojář | ručně obnovitelné, bez dlouhodobého držení |
+| CI | testovací fixtures, generovaná data | CI runner a maintainers | smazat po běhu nebo krátké technické retenci |
+| Preview prostředí | syntetická data pro jednu změnu | autor změny, reviewer | smazat po mergi nebo zavření větve |
+| Staging | řízená sada realistických, ale neprodukčních dat | omezený tým | pravidelná obnova a čištění |
+| Demo | smyšlené scénáře bez osobních údajů skutečných lidí | sales, zákazník podle potřeby | reset po demu nebo kampani |
+
+Toto rozdělení pomáhá i produktově. Když víš, k čemu prostředí slouží, víš také, jaká data tam nepatří. Lokální vývoj nepotřebuje celou fakturační historii zákazníků. Demo nepotřebuje reálné e-maily. CI nepotřebuje deset let supportních tiketů. Překvapivé? Jen do chvíle, než se to jednou uklidí.
+
+### Seed data piš jako produktový artefakt
+
+Dobrá testovací data nejsou náhodný export. Jsou to scénáře.
+
+Místo anonymní hromady záznamů si vytvoř malou knihovnu seed dat:
+
+- nový uživatel bez dokončeného onboardingu,
+- aktivní tým s více rolemi,
+- zákazník po trialu,
+- účet s nezaplacenou fakturou,
+- projekt bez obsahu,
+- projekt s velkým objemem položek,
+- uživatel s omezeným oprávněním,
+- zrušený účet čekající na export nebo výmaz.
+
+Každý scénář má mít název a důvod. Když se objeví bug, který seed data nepokrývají, nepřidávej slepě kopii produkce. Přidej nový scénář. Tím se testovací data zlepšují stejně jako dokumentace nebo test suite.
+
+Praktický příklad:
+
+| Scénář | Co ověřuje | Zakázaná data |
+| --- | --- | --- |
+| `trial-expired-team` | omezení funkcí po konci trialu | reálné e-maily, reálné faktury |
+| `viewer-role-user` | oprávnění jen pro čtení | skutečná jména zákazníků |
+| `large-project-5000-items` | výkon seznamu a stránkování | produkční obsah dokumentů |
+| `deletion-request-pending` | proces exportu a výmazu | skutečná žádost člověka |
+
+### Realističnost neznamená osobní údaje
+
+Některé chyby se ukážou až na datech, která mají správný tvar: dlouhá jména, prázdná pole, diakritiku, různé měny, víc týmů, staré stavy objednávek, velké projekty nebo divné kombinace oprávnění.
+
+To ale neznamená, že musíš použít skutečná data. Většinu realističnosti jde vytvořit bezpečněji:
+
+- generátorem syntetických záznamů,
+- ručně udržovanými fixtures pro kritické scénáře,
+- importem veřejných nebo interně vytvořených neosobních dat,
+- zmenšeným datasetem, který zachovává tvar, ne identitu,
+- testy nad hranami produktu místo testů nad historií zákazníků.
+
+Když potřebuješ ověřit výkon, obvykle potřebuješ objem a strukturu. Nepotřebuješ reálné e-maily, jména, fakturační adresy ani texty z podpory.
+
+### Pseudonymizace není anonymizace
+
+Pokud se rozhodneš použít transformovaná produkční data, rozliš dvě věci:
+
+- Pseudonymizace nahrazuje přímé identifikátory, ale při existenci dodatečné informace může být člověk znovu přiřazen.
+- Anonymizace má odstranit možnost rozumné opětovné identifikace.
+
+EDPB ve svých pokynech k pseudonymizaci pracuje s tím, že pseudonymizovaná data mohou zůstat osobními údaji, pokud je lze pomocí dodatečných informací spojit zpět s člověkem. Praktický dopad je jednoduchý: pseudonymizovaná staging databáze pořád potřebuje právní, technická a přístupová pravidla. Není to kouzelný plášť neviditelnosti, bohužel.
+
+Bezpečnější transformační postup vypadá takto:
+
+1. Export produkčních dat proběhne jen v řízeném prostředí.
+2. Přímé identifikátory se odstraní nebo nahradí ještě před uložením do stagingu.
+3. Vztahovací klíče se drží odděleně, nebo se vůbec negenerují, pokud nejsou nutné.
+4. Volné texty, přílohy, poznámky a logy se mažou nebo nahrazují šablonami.
+5. Výsledný dataset má vlastní retenci, přístupový seznam a auditní stopu.
+6. Tým má napsané, proč dataset existuje a kdy bude smazán.
+
+### Produkční snapshot povol jen jako řízenou výjimku
+
+Občas může existovat dobrý důvod pro práci s odvozeným produkčním datasetem: migrační test, výkonový test, oprava komplikované datové konzistence nebo ověření nové retenční logiky. I tehdy se vyplatí mít krátkou kartu výjimky.
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jaké rozhodnutí bez snapshotu nejde udělat? |  |
+| Které tabulky nebo objekty jsou skutečně potřeba? |  |
+| Jaká pole se odstraní, maskují nebo nahradí? |  |
+| Kdo smí dataset vytvořit a kdo k němu smí přistoupit? |  |
+| Kde dataset fyzicky poběží? |  |
+| Kdy bude smazán? |  |
+| Jak ověříme, že se nedostal do logů, exportů nebo záloh? |  |
+
+Pokud na tyto otázky nejde rychle odpovědět, snapshot není připravený. Je to jen export s lepším názvem.
+
+### Demo data nesmí lhát ani prozrazovat
+
+Demo prostředí má zvláštní riziko: často ho vidí lidé mimo tým. Zákazník, partner, investor, někdy veřejné video. Proto do demo dat nepatří nic, co by mohlo omylem připomínat skutečného zákazníka, interní projekt nebo privátní obchodní situaci.
+
+Dobrá demo data:
+
+- používají smyšlené firmy a osoby,
+- ukazují realistický workflow,
+- obsahují hrany produktu, ale ne citlivé příběhy,
+- dají se resetovat jedním postupem,
+- nejsou napojená na produkční e-mailing, billing ani externí integrace.
+
+Pokud demo posílá e-maily, používej testovací domény nebo sandbox. Pokud ukazuje billing, používej testovací platební režim. Pokud má integrace, používej mock nebo oddělený testovací účet. Demo má prodávat hodnotu produktu, ne náhodně rozeslat pozvánky do reálného světa. To je marketing, který nechceš.
+
+### Checklist: Testovací data bez kopírování produkce
+
+- [ ] Každé neprodukční prostředí má jasný účel.
+- [ ] Lokál, CI, preview, staging a demo mají oddělená data i secrets.
+- [ ] Výchozí stav je syntetický nebo ručně vytvořený dataset.
+- [ ] Produkční snapshot je řízená výjimka, ne běžná rutina.
+- [ ] Před použitím produkčních dat existuje transformační postup.
+- [ ] Volné texty, přílohy, logy a poznámky se netahají do stagingu automaticky.
+- [ ] Pseudonymizovaná data se pořád berou jako riziková, pokud mohou vést zpět k člověku.
+- [ ] Dataset má vlastníka, přístupový seznam a datum smazání.
+- [ ] Demo data neobsahují skutečné zákazníky, projekty ani interní obchodní informace.
+- [ ] Seed data pokrývají hlavní produktové scénáře a hraniční případy.
+
+### Mini úkol
+
+Vyber jedno neprodukční prostředí a vyplň krátkou kartu:
+
+| Otázka | Odpověď |
+| --- | --- |
+| K čemu prostředí slouží? |  |
+| Jaká data v něm jsou? |  |
+| Kdo k nim má přístup? |  |
+| Jsou data syntetická, pseudonymizovaná, anonymizovaná nebo produkční? |  |
+| Kdy se naposledy obnovila nebo smazala? |  |
+| Co je největší zbytečné riziko? |  |
+
+Potom udělej jednu konkrétní opravu: nahraď reálné e-maily testovací doménou, smaž starý snapshot, přidej seed scénář pro chybějící bug, odděl demo od produkční integrace, zkrať retenci preview prostředí, nebo napiš kartu výjimky pro dataset, který opravdu potřebuješ. Testovací data mají pomáhat vývoji, ne tajně rozšiřovat produkční odpovědnost.
+
 ## Zdroje
 
 - European Commission Taxation and Customs Union: VAT for businesses - One Stop Shop pro přeshraniční B2C e-commerce a služby v EU: https://taxation-customs.ec.europa.eu/taxation/vat/vat-businesses_en
@@ -7202,6 +7359,7 @@ Potom udělej jednu konkrétní úpravu: zúž hypotézu, odstraň zbytečnou id
 - EUR-Lex: Regulation (EU) 2016/679, GDPR - právní text včetně zásad zpracování, minimalizace údajů a ochrany údajů ve výchozím nastavení: https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng
 - European Data Protection Board: Guidelines 4/2019 on Article 25 Data Protection by Design and by Default - praktický výklad GDPR článku 25: https://www.edpb.europa.eu/documents/guideline/guidelines-42019-on-article-25-data-protection-by-design-and-by-default_en
 - European Data Protection Board: Guidelines 2/2023 on Technical Scope of Art. 5(3) of ePrivacy Directive - finální výklad technického rozsahu ukládání informací nebo přístupu k informacím v koncovém zařízení: https://www.edpb.europa.eu/documents/guideline/guidelines-22023-on-technical-scope-of-art-53-of-eprivacy-directive_en
+- European Data Protection Board: Guidelines 01/2025 on Pseudonymisation - pokyny k používání pseudonymizace jako technického a organizačního opatření a k tomu, že pseudonymizovaná data mohou zůstat osobními údaji: https://www.edpb.europa.eu/public-consultations/guidelines-012025-on-pseudonymisation_en
 - CNIL: Sheet n°16 - Use analytics on your websites and applications - podmínky pro analytiku a měření návštěvnosti v režimu omezeného účelu: https://www.cnil.fr/en/sheet-ndeg16-use-analytics-your-websites-and-applications
 - European Commission: Can data received from a third party be used for marketing? - praktický příklad právního základu a marketingového použití osobních dat: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/legal-grounds-processing-data/can-data-received-third-party-be-used-marketing_en
 - European Data Protection Board: Guidelines 1/2024 on processing of personal data based on Article 6(1)(f) GDPR - legitimní zájem a jeho limity včetně direct marketingu: https://www.edpb.europa.eu/system/files/2024-10/edpb_guidelines_202401_legitimateinterest_en.pdf
@@ -7231,6 +7389,7 @@ Potom udělej jednu konkrétní úpravu: zúž hypotézu, odstraň zbytečnou id
 
 ## Pracovní log
 
+- 2026-07-12: Doplněna příloha o testovacích datech a stagingu bez kopírování produkce: rozdělení neprodukčních prostředí, seed data jako scénáře, realistická data bez osobních údajů, rozdíl mezi pseudonymizací a anonymizací, řízená výjimka pro produkční snapshot, demo data, checklist a mini úkol; ověřeny a doplněny zdroje Evropské komise k principům GDPR a EDPB k pseudonymizaci.
 - 2026-07-12: Doplněna příloha o experimentech a A/B testech bez sledovací laboratoře: konkrétní hypotéza, volba jednoduššího ověření místo zbytečného A/B testu, agregované měření, bezpečné používání feature flagů, privacy kontrola experimentu, vyhodnocení jako rozhodnutí, checklist a mini úkol; ověřeny a využity zdroje EDPB k technickému rozsahu ePrivacy a CNIL k analytice.
 - 2026-07-12: Doplněn krátký Codyho tip k týmovému používání e-booku: jeden vlastník, jeden malý další krok a ověření dopadu po každé kapitole.
 - 2026-07-12: Doplněna příloha o billingu, fakturaci a platbách bez datového chaosu: rozdělení produktového účtu, billing účtu a plátce, minimalizace platebních a fakturačních dat, bezpečné používání platebního poskytovatele, dunning, refundy, platební webhooky, reporty, checklist a mini úkol; ověřeny zdroje Evropské komise k OSS a PCI Security Standards Council k PCI DSS.
