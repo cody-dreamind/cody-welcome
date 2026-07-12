@@ -8119,6 +8119,167 @@ Vezmi poslední nebo modelovou žádost týkající se osobních údajů a vypl�
 
 Potom udělej jednu konkrétní opravu: přidej privacy štítek do helpdesku, napiš šablonu přijetí žádosti, doplň mapu systémů nebo vytvoř testovací export. Žádosti o práva lidí nejsou jen právní povinnost. Jsou to kontrolka, jestli produkt skutečně ví, co dělá s daty.
 
+## Příloha: Produktové notifikace bez notifikačního smogu
+
+Notifikace jsou drobná věc, dokud jich produkt neposílá moc, pozdě, špatným lidem nebo na kanál, který si nikdo nevybral. Pak se z nich stane tichý generátor odhlášení, supportních dotazů a nedůvěry. U SaaS produktu navíc notifikace často nesou citlivý kontext: změny v účtu, pozvánky, fakturaci, exportech, incidentech, integracích nebo právech uživatelů.
+
+Dobrá notifikace má jednu práci: doručit správnému člověku informaci, podle které může něco udělat. Ne připomenout, že produkt existuje. Ne vyrobit falešnou aktivitu. Ne obejít fakt, že hlavní rozhraní neumí ukázat stav.
+
+> Codyho komentář: Pokud musí produkt každý den křičet e-mailem, aby si ho někdo všiml, možná nemáš notifikační problém. Možná máš problém s hodnotou, onboardingem nebo očekáváním. Notifikace nejsou defibrilátor pro nudný produkt.
+
+### Rozděl notifikace podle účelu
+
+Nejdřív si pojmenuj typy zpráv. Jinak se ti v jednom systému potkají bezpečnostní alerty, marketingové novinky, billing upozornění, komentáře z projektu a týdenní digest, a všichni budou předstírat, že je to jedna preference „posílat e-maily“.
+
+Praktické rozdělení:
+
+| Typ | Příklad | Výchozí přístup |
+| --- | --- | --- |
+| Bezpečnostní | nové přihlášení, změna hesla, nový API klíč | poslat, nejde snadno vypnout |
+| Provozní | výpadek integrace, dokončený export, selhaný import | poslat relevantní roli |
+| Produktové pracovní | komentář, přiřazený úkol, čekající schválení | nastavitelné podle role a frekvence |
+| Billing | neúspěšná platba, nová faktura, změna plánu | poslat billing kontaktu a ownerovi podle dopadu |
+| Marketingové | nová funkce, webinář, nabídka | jen podle souhlasu nebo jasného odběru |
+| Souhrnné | denní nebo týdenní digest | opt-in nebo rozumně vypnutelné |
+
+Toto rozdělení pomáhá právně i produktově, ale hlavně snižuje chaos. Když uživatel vypne marketing, nemá tím přijít o bezpečnostní upozornění. Když vypne komentáře, nemá přestat dostávat faktury. A když nechce týdenní souhrn, neznamená to, že nechce vědět o selhaném exportu dat.
+
+### Začni událostí, ne kanálem
+
+Špatný návrh notifikací začíná větou: „Pošleme na to e-mail.“
+
+Lepší návrh začíná kartou události:
+
+| Otázka | Příklad odpovědi |
+| --- | --- |
+| Co se stalo? | Export zákaznických dat je připravený ke stažení |
+| Kdo to potřebuje vědět? | Uživatel, který export spustil, případně admin |
+| Proč to potřebuje vědět? | Export má omezenou platnost a může obsahovat osobní údaje |
+| Jak rychle musí reagovat? | Do 24 hodin, než odkaz expiruje |
+| Jaký je nejmenší užitečný obsah zprávy? | Název exportu, expirace, odkaz do aplikace |
+| Kde se má akce dokončit? | V aplikaci po přihlášení |
+
+Teprve potom vybírej kanál. Některé věci patří do aplikace, některé do e-mailu, některé do webhooku a některé jen do auditního logu. Pokud kanál vybereš před účelem, začneš posílat zprávy, které sice technicky dorazí, ale nikomu nepomůžou.
+
+### Posílej detail až po přihlášení
+
+Privacy-first notifikace nevyzrazuje víc, než musí. E-mail nebo push zpráva může snadno skončit ve sdílené schránce, přeposlaném vlákně, notifikaci na zamčené obrazovce nebo v externím helpdesku. Proto citlivý detail často patří až za přihlášení do produktu.
+
+Místo:
+
+```text
+Export kontaktů firmy Acme obsahující 12 482 záznamů je připravený. Stáhněte CSV zde: ...
+```
+
+raději:
+
+```text
+Export dat je připravený.
+Otevřete export v aplikaci. Odkaz je dostupný do 13. 7. 2026.
+```
+
+V aplikaci potom ukaž přesný rozsah, formát, expiraci, auditní stopu a tlačítko pro stažení. E-mail má doručit signál, ne nést celý obsah databáze na výlet po internetu.
+
+Stejné pravidlo platí pro fakturaci, support, bezpečnost a incidenty. V notifikaci popiš dopad a další krok. Citlivé položky, osobní údaje, interní poznámky a technické detaily nech v prostředí, kde máš autentizaci, oprávnění a audit.
+
+### Preference navrhni podle práce člověka
+
+Jedna stránka s dvaceti checkboxy je technicky flexibilní a lidsky často nepoužitelná. Uživatel nechce studovat notifikační taxonomii. Chce říct, co je pro něj důležité.
+
+Lepší model:
+
+- role určuje rozumné výchozí notifikace,
+- kanál se nastavuje podle typu práce,
+- frekvence se nastavuje tam, kde zprávy nejsou urgentní,
+- kritické bezpečnostní a billing zprávy mají zvláštní režim,
+- marketingové odběry jsou oddělené od produktových upozornění.
+
+Příklad pro týmový SaaS:
+
+| Role | Výchozí notifikace |
+| --- | --- |
+| Owner | bezpečnost, billing, exporty, změny plánu, kritické incidenty |
+| Admin | pozvánky, role, integrace, importy, exporty, provozní problémy |
+| Člen týmu | přiřazené úkoly, komentáře, zmínky, vlastní exporty |
+| Billing kontakt | faktury, platby, daňové údaje, změny fakturačního režimu |
+
+Preference mají mít tlačítko „poslat testovací notifikaci“ tam, kde na doručení záleží. U webhooků a e-mailů pro incidenty je test levnější než zjištění při prvním ostrém problému.
+
+### Souhrny používej jako úklid, ne jako spam v obleku
+
+Digest je dobrý sluha, když nahrazuje deset malých vyrušení jedním užitečným souhrnem. Je špatný pán, když každý týden opakuje, že „se něco děje“, ale příjemce podle toho nemá co udělat.
+
+Dobrý digest obsahuje:
+
+- jen změny relevantní pro roli příjemce,
+- jasný časový rozsah,
+- odkazy do konkrétních míst v aplikaci,
+- oddělení informací a akcí,
+- možnost změnit frekvenci nebo odběr vypnout.
+
+Příklad struktury:
+
+```text
+Týdenní souhrn workspace
+
+Vyžaduje akci:
+- 2 pozvánky čekají na potvrzení role.
+- 1 integrace selhala a neposílá data.
+
+Informativně:
+- Dokončeno 14 úkolů.
+- Vytvořeny 3 exporty.
+
+Nastavení souhrnu: [odkaz do aplikace]
+```
+
+Souhrn nesmí být marketingový newsletter převlečený za produktovou zprávu. Pokud do něj přidáš promo akci, rozbiješ důvěru v provozní kanál. Ano, otevřenost možná klesne pomaleji než morálka v pátek odpoledne, ale klesne.
+
+### Notifikace musí mít vlastní observabilitu
+
+Když se notifikace neposílají, produkt může technicky běžet a přesto selhávat. Uživatel nedostane pozvánku, admin neví o neúspěšném importu, billing kontakt přehlédne problém s platbou a support začne hasit věci, které měl systém vyřešit sám.
+
+Sleduj alespoň provozní signály:
+
+- počet vytvořených notifikačních událostí,
+- počet doručených e-mailů nebo webhooků,
+- chyby odesílání podle kanálu,
+- zpoždění fronty,
+- opakované pokusy a jejich konec,
+- odhlášení nebo vypnutí kategorií,
+- supportní dotazy typu „nepřišlo mi upozornění“.
+
+Nepotřebuješ kvůli tomu osobní profilování. Stačí agregované technické metriky a auditní stopa konkrétní notifikace v účtu, kde má uživatel oprávnění ji vidět.
+
+### Checklist: Produktové notifikace privacy-first
+
+- [ ] Každý typ notifikace má jasný účel a vlastníka.
+- [ ] Bezpečnostní, provozní, billing, pracovní a marketingové zprávy jsou oddělené.
+- [ ] Marketingové odběry nejsou smíchané s provozními notifikacemi.
+- [ ] U každé události víme, kdo ji potřebuje a co má udělat.
+- [ ] Citlivý detail posíláme až po přihlášení do aplikace.
+- [ ] Výchozí notifikace vycházejí z role, ne z jedné globální volby.
+- [ ] Neurgentní události umíme sloučit do souhrnu.
+- [ ] Uživatel může rozumně změnit frekvenci nebo kanál.
+- [ ] Kritické notifikace mají test doručení a provozní monitoring.
+- [ ] Webhooky, e-maily a fronty mají retry limit, stav a auditní stopu.
+
+### Mini úkol
+
+Vyber jeden typ notifikace, který dnes produkt posílá nebo by posílat měl, a vyplň kartu:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jaká událost notifikaci spouští? |  |
+| Kdo ji opravdu potřebuje dostat? |  |
+| Jaké rozhodnutí nebo akci má příjemce udělat? |  |
+| Který detail musí být až za přihlášením? |  |
+| Je zpráva bezpečnostní, provozní, pracovní, billing nebo marketingová? |  |
+| Jak ji může uživatel nastavit nebo vypnout? |  |
+| Jak poznáme, že se neposílá správně? |  |
+
+Potom udělej jednu úpravu: přesuň citlivý detail do aplikace, odděl marketing od provozu, slouč hlučné zprávy do digestu, nebo přidej monitoring selhaného doručení. Notifikace má být pomocník, ne malý sirénový orchestr v kapse.
+
 ## Zdroje
 
 - European Commission Taxation and Customs Union: VAT for businesses - One Stop Shop pro přeshraniční B2C e-commerce a služby v EU: https://taxation-customs.ec.europa.eu/taxation/vat/vat-businesses_en
@@ -8202,6 +8363,7 @@ Potom udělej jednu konkrétní opravu: přidej privacy štítek do helpdesku, n
 
 ## Pracovní log
 
+- 2026-07-12: Doplněna příloha o produktových notifikacích bez notifikačního smogu: rozdělení bezpečnostních, provozních, pracovních, billing a marketingových zpráv, návrh události před výběrem kanálu, minimalizace citlivých detailů v e-mailu a push zprávách, role a preference, digesty, observabilita notifikací, checklist a mini úkol.
 - 2026-07-12: Doplněna příloha o žádostech k právům uživatelů bez supportního ping-pongu: jedna vstupní brána, ověřování identity přiměřené riziku, převodník lidských formulací na typ žádosti, mapa systémů s osobními údaji, šablony odpovědí, interní rozhodovací stopa, opatrná automatizace, checklist a mini úkol; ověřeny oficiální zdroje EDPB a Evropské komise k právům subjektů údajů, lhůtám, ověření identity a výmazu.
 - 2026-07-12: Doplněna příloha o mazání workspace bez datového strašení: rozlišení typů destruktivních akcí, export před výmazem, stavový proces mazání, oddělení právní retence od produktových dat, vypnutí integrací a tokenů, konkrétní potvrzení dopadu, checklist a mini úkol; ověřeny a doplněny zdroje Evropské komise a EDPB k právu na výmaz a praktické implementaci výmazu.
 - 2026-07-12: Doplněna příloha o admin onboardingu bez zbytečného sběru dat: definice první hodnoty administrátora, sběr údajů po vlnách, bezpečné pozvánky a role, checklist hotové práce místo povinné prohlídky, bezpečná demo data, privacy nastavení v hlavním toku, agregované měření aktivace, checklist a mini úkol; navázáno na existující zdroje k onboardingu a GDPR principům minimalizace.
