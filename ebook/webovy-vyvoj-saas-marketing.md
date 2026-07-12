@@ -6251,6 +6251,141 @@ Vyplň krátký screening:
 
 Na konci napiš jedno rozhodnutí: „pokračujeme bez plné DPIA“, „děláme plnou DPIA“, „odkládáme release do doplnění opatření“ nebo „funkci zjednodušujeme, protože zpracování je zbytečně rizikové“. Codyho komentář: poslední možnost je často nejlevnější. Jen se hůř prodává na poradě, protože nezní jako „inovace“.
 
+## Příloha: Produktová dokumentace bez supportního odpadu
+
+Dokumentace není místo, kam se odkládá všechno, co se nevešlo do rozhraní. Dobrá dokumentace šetří support, zrychluje onboarding, zvyšuje důvěru před nákupem a pomáhá týmu držet stejnou pravdu o produktu. Špatná dokumentace je skládka starých screenshotů, interních zkratek a vět typu „jednoduše klikněte“. Jednoduše, jasně.
+
+Privacy-first SaaS má ještě jeden důvod dokumentaci nepodceňovat: dokumentace říká zákazníkovi, co se děje s jeho daty, jak službu bezpečně nastavit a jak odejít bez držení dat jako rukojmí. To není právnický bonus. To je součást produktu.
+
+### Začni otázkou, jakou práci má stránka udělat
+
+Jedna dokumentační stránka nemá odpovídat na všechny možné otázky. Před psaním si napiš typ potřeby:
+
+- Tutoriál: člověk jde poprvé od nuly k výsledku.
+- Návod: člověk ví, co chce udělat, a potřebuje kroky.
+- Reference: člověk hledá přesné chování, parametr, limit nebo stav.
+- Vysvětlení: člověk potřebuje pochopit princip, rozhodnutí nebo obchodní kontext.
+
+Toto dělení odpovídá frameworku Diátaxis, který je v dokumentaci užitečný hlavně proto, že brání míchání motivačního textu, krokového návodu a API reference do jedné polévky. Když stránka neví, jaký typ práce dělá, čtenář to pozná rychleji než tým.
+
+Příklad:
+
+- „Vytvoření prvního workspace“ je tutoriál.
+- „Jak pozvat dalšího člena týmu“ je návod.
+- „Role a oprávnění“ je reference.
+- „Jak funguje retence dat v pracovních prostorech“ je vysvětlení.
+
+### Dokumentace má být součást onboardingu
+
+Onboarding v produktu a dokumentace se nemají tvářit jako dva oddělené světy. Pokud nový uživatel zakládá účet, dokumentace má být dostupná přesně v místech nejistoty: role, import dat, integrace, billing, export, nastavení soukromí.
+
+Neposílej člověka na obecnou stránku „Nápověda“. Posílej ho na konkrétní odpověď.
+
+Dobré odkazy v rozhraní:
+
+- U nastavení role: „Co může role editor dělat?“
+- U importu dat: „Jak připravit CSV a co se uloží?“
+- U analytiky: „Jaké eventy měříme a jak dlouho je držíme?“
+- U exportu: „Co export obsahuje a co v něm není?“
+- U smazání workspace: „Co se smaže hned, co později a co zůstává kvůli zákonné povinnosti?“
+
+Špatný odkaz: „Více informací“. To je dokumentační ekvivalent pokrčení ramen.
+
+### Piš podle rozhodnutí, ne podle obrazovek
+
+Dokumentace často kopíruje navigaci produktu: Dashboard, Nastavení, Uživatelé, Fakturace. To je dobré pro referenci, ale slabé pro člověka, který řeší úkol. Uživatel nemyslí „potřebuji stránku Nastavení“. Myslí „potřebuji bezpečně předat účet kolegovi“.
+
+Piš stránky podle práce:
+
+| Slabý název | Lepší název |
+| --- | --- |
+| Nastavení účtu | Změna e-mailu, hesla a dvoufázového ověření |
+| Uživatelé | Pozvání člena týmu a nastavení jeho role |
+| Export | Export dat před auditem nebo odchodem |
+| Integrace | Připojení účetního systému bez importu zbytečných polí |
+| Fakturace | Změna plánu, fakturačních údajů a zrušení předplatného |
+
+Když chceš udržet dokumentaci přehlednou, kombinuj oba přístupy: navigace může kopírovat produkt, ale názvy stránek mají mluvit jazykem úkolu.
+
+### Privacy-first dokumentace říká i nepohodlné věci
+
+Pokud produkt pracuje s daty zákazníka, dokumentace nemá jen prodávat hladký scénář. Má popsat také limity a důsledky.
+
+U datově citlivých funkcí dokumentuj:
+
+- jaká data funkce používá,
+- odkud data přichází,
+- zda se data posílají dodavateli nebo integraci,
+- jak dlouho se data drží,
+- kdo k nim má přístup,
+- jak se funkce vypne,
+- co se stane při exportu nebo smazání,
+- jaké chování je záměrný limit, ne chyba.
+
+Příklad pro AI shrnutí ticketu:
+
+„Shrnutí používá text ticketu, interní poznámky se do shrnutí neposílají. Přílohy se nezpracovávají automaticky. Shrnutí je návrh pro pracovníka podpory, ne automatické rozhodnutí pro zákazníka. Funkci může vypnout vlastník workspace v nastavení.“
+
+Tohle je lepší než marketingová mlha „využíváme nejmodernější AI“. Jednak je to konkrétnější, jednak se po tom méně potí právník i support.
+
+### Každá důležitá stránka má vlastníka a datum kontroly
+
+Dokumentace stárne tiše. Produkt se změní, screenshot zůstane, zákazník kliká jinam a support dostává ticket „podle návodu to nejde“. Výsledek: tým přestane dokumentaci věřit a začne místo ní posílat dlouhé ruční odpovědi. Gratuluji, právě vznikl ruční CMS v inboxu.
+
+U každé důležité stránky drž minimum metadat:
+
+| Pole | Příklad |
+| --- | --- |
+| Vlastník | Product / Support / Engineering |
+| Typ stránky | Návod |
+| Navázaná část produktu | Nastavení > Členové týmu |
+| Poslední kontrola | 2026-07-12 |
+| Spouštěč revize | Změna rolí, onboarding flow nebo audit přístupů |
+| Support tag | `roles`, `team-invite`, `access` |
+
+Nemusí to být složitý systém. Stačí front matter v Markdownu, tabulka v repozitáři nebo pole v CMS. Hlavní je, aby dokumentace měla vlastníka. Stránka bez vlastníka je budoucí lež.
+
+### Support odpovědi převáděj zpět do dokumentace
+
+Když support třikrát odpoví na stejnou otázku, není to jen supportní problém. Je to signál, že dokumentace nebo produkt nerozumí uživateli.
+
+Zaveď jednoduché pravidlo:
+
+1. První opakovaná otázka: support pošle odpověď a označí tag.
+2. Druhá opakovaná otázka: tým zkontroluje, jestli existuje dokumentace.
+3. Třetí opakovaná otázka: vznikne nebo se upraví stránka, a odpověď v supportu odkazuje na konkrétní místo.
+
+Privacy-first detail: Do dokumentace nepřenášej reálné zákaznické příklady s osobními údaji. Používej anonymizované scénáře nebo vymyšlené příklady, které zachovají problém, ne identitu.
+
+### Checklist: Dokumentace, která šetří provoz
+
+- [ ] Každá nová stránka má jasný typ: tutoriál, návod, reference nebo vysvětlení.
+- [ ] Důležité produktové cesty odkazují na konkrétní dokumentační stránku, ne na obecnou nápovědu.
+- [ ] Názvy stránek popisují práci uživatele, ne jen interní navigaci.
+- [ ] Datově citlivé funkce vysvětlují vstupy, výstupy, retenci, vypnutí a zapojené dodavatele.
+- [ ] Dokumentace neobsahuje reálné osobní údaje ze supportu, screenshotů ani testovacích účtů.
+- [ ] Každá kritická stránka má vlastníka a spouštěč revize.
+- [ ] Support tagy ukazují, které otázky se mají promítnout do dokumentace.
+- [ ] Změna produktu má v release checklistu položku „dopad na dokumentaci“.
+- [ ] Dokumentace obsahuje férové limity produktu, ne jen ideální scénář.
+- [ ] Export, výmaz, role, billing a bezpečnostní nastavení jsou vysvětlené bez marketingové mlhy.
+
+### Mini úkol
+
+Vyber jednu supportní otázku, která se v týmu opakuje. Vytvoř z ní krátkou dokumentační kartu:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jaký úkol uživatel řeší? |  |
+| Jaký typ dokumentace potřebuje? | Tutoriál / návod / reference / vysvětlení |
+| Kde v produktu nejistota vzniká? |  |
+| Jaká konkrétní stránka má vzniknout nebo se upravit? |  |
+| Jaké datové nebo privacy informace musí stránka obsahovat? |  |
+| Kdo stránku vlastní? |  |
+| Kdy se má znovu zkontrolovat? |  |
+
+Pak napiš první verzi odpovědi ve třech částech: co se stane, jak to udělat, co si pohlídat. Codyho komentář: když se odpověď nevejde do těchto tří částí, možná není problém v dokumentaci, ale v produktu. Au. Ale užitečné au.
+
 ## Zdroje
 
 - EUR-Lex: Regulation (EU) 2016/679, GDPR Article 35 and 36 - povinnost posouzení vlivu na ochranu osobních údajů a předchozí konzultace při vysokém zbytkovém riziku: https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng
@@ -6322,6 +6457,7 @@ Na konci napiš jedno rozhodnutí: „pokračujeme bez plné DPIA“, „dělám
 
 ## Pracovní log
 
+- 2026-07-12: Doplněna příloha o produktové dokumentaci bez supportního odpadu: dělení dokumentace podle práce uživatele, propojení s onboardingem, dokumentace datově citlivých funkcí, vlastnictví stránek, převod opakovaných supportních odpovědí do dokumentace, checklist a mini úkol; navázáno na existující zdroje Diátaxis, GDPR principy a privacy by design.
 - 2026-07-11: Doplněna příloha o DPIA bez tabulkového pekla: kdy dělat screening, jak popsat zpracování lidskou řečí, ověřit nezbytnost a přiměřenost, popsat rizika jako dopad na člověka, navrhnout ověřitelná opatření, zastavit rizikový release, checklist a mini úkol; ověřeny zdroje EUR-Lex, Evropské komise, EDPB a ÚOOÚ k DPIA.
 - 2026-07-11: Doplněna příloha o zpracovatelských smlouvách a subdodavatelích bez právního šumu: role správce a zpracovatele, DPA kontrolní karta, subzpracovatelé, přenosy mimo EU/EHP, veřejný seznam subdodavatelů, nákupní rozhodovací karta, checklist a mini úkol; ověřeny oficiální zdroje Evropské komise, EUR-Lex a Standard Contractual Clauses.
 - 2026-07-11: Doplněna příloha o chybách, logování a observabilitě bez datového vysavače: rozhodovací účel signálů, rozlišení metrik, logů, traces a profilů, zakázaná data v logu, bezpečné chybové hlášky s korelačním ID, alerty, retence, přístupy k logům, checklist a mini úkol; ověřeny zdroje OWASP Logging Cheat Sheet a OpenTelemetry Signals.
