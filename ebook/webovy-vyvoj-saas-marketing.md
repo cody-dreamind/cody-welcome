@@ -6982,6 +6982,177 @@ Vyber jeden billing tok: první platbu, obnovu předplatného, neúspěšnou pla
 
 Potom udělej jednu konkrétní úpravu: odděl billing roli, smaž zbytečné pole z fakturačního formuláře, přestaň logovat platební payload, ověř podpis webhooku, přepiš dunning e-mail nebo zmenši export pro měsíční report. Billing má vybírat peníze a držet pořádek, ne vyrábět datové bahno.
 
+## Příloha: Experimenty a A/B testy bez sledovací laboratoře
+
+Experiment je dobrý sluha a dost podezřelý pán. Pomáhá zjistit, jestli změna skutečně zlepšila produkt, ale snadno se z něj stane výmluva pro masivní tracking, nekonečné tagy, manipulativní rozhraní a rozhodování podle šumu. Privacy-first tým má experimenty používat střídmě, jasně a s respektem k člověku, který web nebo produkt používá.
+
+Nejdřív si ujasni rozdíl mezi třemi věcmi:
+
+- produktová hypotéza: co si myslíme, že zlepší hodnotu pro uživatele nebo obchod,
+- experiment: jak to ověříme v omezeném rozsahu,
+- měření: jaké minimum signálů potřebujeme k rozhodnutí.
+
+Když začneš měřením, skončíš u „dejme tam všechno, ať něco máme“. Když začneš hypotézou, často zjistíš, že ti stačí jeden agregovaný ukazatel, pár rozhovorů a jasné datum vyhodnocení.
+
+### Hypotéza má být konkrétní a vyvratitelná
+
+Špatná hypotéza:
+
+„Nový hero bude lepší.“
+
+Lepší hypotéza:
+
+„Když na homepage v prvním viewportu jasně pojmenujeme segment a výsledek, více návštěvníků z cílového segmentu otevře stránku služeb nebo poptávkový formulář.“
+
+Ještě praktičtější zápis:
+
+| Část | Příklad |
+| --- | --- |
+| Pro koho | zakladatel B2B SaaS do 30 lidí |
+| Co měníme | první obrazovku homepage |
+| Proč | dnes není jasné, že řešíme privacy-first SaaS provoz v Evropě |
+| Co očekáváme | více kliků na služby a méně nefit poptávek |
+| Jak poznáme výsledek | agregovaný klik na primární CTA, počet a kvalita poptávek za 30 dní |
+| Kdy končíme | po 30 dnech nebo po domluveném minimálním počtu relevantních návštěv |
+
+Hypotéza musí jít vyvrátit. Pokud každé číslo po experimentu nějak ohýbáš do závěru „vlastně to vyšlo“, neděláš experiment. Děláš prezentaci pro vlastní ego. To je levnější než vývoj, ale hůř se z toho žije.
+
+### Ne každý experiment potřebuje A/B test
+
+A/B test je užitečný, když máš dost návštěvnosti, jasnou variantu, stabilní cílovou metriku a rozumné riziko. Malý B2B web nebo raný SaaS často nic z toho nemá. Padesát návštěv za týden není statistická laboratoř. Je to spíš křehký signál, že někdo přišel.
+
+Alternativy, které často stačí:
+
+- ruční audit stránky podle zákaznických otázek,
+- pět rozhovorů s lidmi z cílového segmentu,
+- interní review prodejních hovorů a support tiketů,
+- jednorázová úprava stránky s jasným před a po,
+- měsíční porovnání kvality poptávek,
+- krátký pilot s jedním segmentem zákazníků,
+- feature flag pro postupné zapnutí změny bez dlouhodobého profilování.
+
+A/B test používej tam, kde opravdu pomůže rozhodnout. Nepoužívej ho jako rituál, který má dodat vědecký lesk malému textovému přepisu.
+
+### Měř rozhodnutí, ne identitu
+
+Experiment obvykle nepotřebuje vědět, kdo přesně člověk je. Potřebuje vědět, jestli varianta splnila účel. U marketingové stránky to může být:
+
+- zobrazení varianty v agregaci,
+- klik na hlavní CTA,
+- dokončený formulář,
+- kvalita leadu posouzená podle předem daných kritérií,
+- počet opakovaných dotazů po změně textu,
+- technické chyby, které brání dokončení.
+
+Naopak buď velmi opatrný u:
+
+- spojování experimentu s identitou napříč návštěvami,
+- ukládání detailní historie chování jednotlivce,
+- předávání událostí do reklamních platforem,
+- fingerprintingu kvůli stabilnímu přiřazení varianty,
+- session replay jako výchozího nástroje,
+- automatické segmentace podle citlivých nebo odvozených vlastností.
+
+EDPB ve finálních Guidelines 2/2023 k technickému rozsahu článku 5(3) ePrivacy Directive připomíná, že relevantní není jen klasická cookie, ale obecně ukládání informací do zařízení nebo přístup k informacím v něm. CNIL u analytiky popisuje, že nástroje pro měření návštěvnosti typicky pracují s informacemi o navigaci a že režim souhlasu závisí mimo jiné na účelu a způsobu měření. Prakticky: když experiment potřebuje zapisovat identifikátor varianty do prohlížeče, vyhodnoť ho stejně poctivě jako ostatní tracking. Neříkej mu „technický detail“ jen proto, že má hezký název v dashboardu.
+
+### Variantu drž krátce a čitelně
+
+Každý experiment potřebuje konec. Bez konce z něj vznikne permanentní vrstva podmínek, cookie hodnot, flagů a starých textů, kterým už nikdo nevěří.
+
+Před spuštěním si napiš:
+
+- kdo experiment vlastní,
+- kdy začíná,
+- kdy končí,
+- jaká je primární metrika,
+- jaká metrika hlídá škodu,
+- kdo rozhodne o výsledku,
+- co se smaže nebo vypne po vyhodnocení.
+
+Metrika hlídající škodu je důležitá. Když zvedneš klik na CTA tím, že ho uděláš agresivní nebo nejasné, můžeš zhoršit kvalitu leadů, zvýšit počet support dotazů nebo poškodit důvěru. Experiment nemá vyhrát jen proto, že vyrobil víc kliků. Klik není zákazník. Občas je to jen člověk, který se snaží uniknout z matoucí stránky.
+
+### Feature flag není datový sklad
+
+Feature flag je výborný nástroj pro postupné zapnutí změny, rollback a omezení rizika. Není to ale automatické povolení sbírat podrobný profil uživatele.
+
+Dobrá pravidla:
+
+- flag pojmenuj podle změny, ne podle člověka,
+- variantu ukládej jen po dobu experimentu nebo potřeby rollout řízení,
+- nepoužívej flag systém jako paralelní CRM,
+- omez přístup k administraci flagů,
+- dokumentuj, které flagy mohou ovlivnit billing, bezpečnost nebo soukromí,
+- staré flagy pravidelně maž.
+
+U SaaS produktu navíc odděl technický rollout od obchodního experimentu. Je v pořádku zapnout novou funkci nejdřív 10 procentům workspace kvůli stabilitě. Je něco jiného začít podle toho skrytě měnit cenu, onboarding nebo komunikační tlak bez jasného účelu a vyhodnocení.
+
+### Experiment nesmí obcházet souhlas
+
+Někdy tým řekne: „Tohle není tracking, to je jen experiment.“ To je nebezpečná věta. Pokud experiment ukládá nebo čte informace v zařízení, propojuje chování s identitou, posílá data třetí straně nebo mění marketingové měření, patří do stejné privacy kontroly jako ostatní analytika.
+
+Privacy-first kontrola před experimentem:
+
+- Je experiment nutný pro konkrétní rozhodnutí?
+- Jde ho udělat agregovaně?
+- Jde ho udělat bez identifikace člověka?
+- Jaká data ukládáme do prohlížeče nebo aplikace?
+- Kdo je zpracovatel, pokud používáme externí experimentační nástroj?
+- Jak dlouho data držíme?
+- Co se stane, když člověk odmítne analytické nebo marketingové cookies?
+- Má uživatel pořád férovou zkušenost bez experimentální vrstvy?
+
+Odmítnutí souhlasu nesmí znamenat rozbitý web. Může znamenat, že člověk uvidí výchozí variantu a nebude zahrnut do měření. To je normální cena za respekt k volbě. Ano, dashboard bude mít méně dokonalý graf. Svět se překvapivě nezhroutí.
+
+### Vyhodnocení napiš jako rozhodnutí
+
+Po experimentu nestačí věta „varianta B vyhrála“. Napiš krátké rozhodnutí:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Co jsme testovali? |  |
+| Proč jsme to testovali? |  |
+| Jaká byla primární metrika? |  |
+| Jaká byla ochranná metrika? |  |
+| Co výsledek znamená pro uživatele? |  |
+| Co nasazujeme, vypínáme nebo mažeme? |  |
+| Co z toho plyne pro další backlog? |  |
+
+Když výsledek není jasný, řekni to. „Nemáme dost signálu“ je lepší závěr než vymýšlet příběh z náhodného výkyvu. Produktová disciplína není jen v tom, že experiment spustíš. Je hlavně v tom, že ho umíš ukončit bez divadla.
+
+### Checklist: Privacy-first experiment
+
+- [ ] Experiment má jednu konkrétní hypotézu.
+- [ ] Je jasné, jaké rozhodnutí podle výsledku uděláme.
+- [ ] Nevolíme A/B test, pokud stačí audit, rozhovor nebo jednorázová úprava.
+- [ ] Primární metrika je agregovaná všude, kde to jde.
+- [ ] Máme ochrannou metriku proti zhoršení kvality, důvěry nebo podpory.
+- [ ] Nepoužíváme fingerprinting ani zbytečné spojování chování s identitou.
+- [ ] Víme, co experiment ukládá do prohlížeče nebo aplikace.
+- [ ] Externí experimentační nástroj prošel dodavatelskou a privacy kontrolou.
+- [ ] Uživatel bez souhlasu má použitelnou výchozí zkušenost.
+- [ ] Experiment má vlastníka, začátek, konec a datum vyhodnocení.
+- [ ] Po vyhodnocení smažeme staré varianty, nepotřebná data a mrtvé flagy.
+- [ ] Výsledek zapíšeme jako rozhodnutí, ne jako dekorativní graf.
+
+### Mini úkol
+
+Vyber jednu změnu, kterou tým plánuje „otestovat“. Vyplň kartu:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jaká je hypotéza? |  |
+| Jaké rozhodnutí uděláme podle výsledku? |  |
+| Musí to být A/B test, nebo stačí jednodušší ověření? |  |
+| Jaká je primární metrika? |  |
+| Jaká metrika hlídá škodu? |  |
+| Jaká data se ukládají do zařízení nebo účtu? |  |
+| Která data se nesmí sbírat? |  |
+| Jak dlouho experiment poběží? |  |
+| Kdo ho vyhodnotí? |  |
+| Co po vyhodnocení smažeme nebo vypneme? |  |
+
+Potom udělej jednu konkrétní úpravu: zúž hypotézu, odstraň zbytečnou identifikaci, nahraď A/B test ručním auditem, přidej ochrannou metriku nebo nastav datum vypnutí flagu. Experiment má pomáhat produktu učit se. Nemá z webu dělat sledovací laboratoř s hezkým grafem.
+
 ## Zdroje
 
 - European Commission Taxation and Customs Union: VAT for businesses - One Stop Shop pro přeshraniční B2C e-commerce a služby v EU: https://taxation-customs.ec.europa.eu/taxation/vat/vat-businesses_en
@@ -7060,6 +7231,7 @@ Potom udělej jednu konkrétní úpravu: odděl billing roli, smaž zbytečné p
 
 ## Pracovní log
 
+- 2026-07-12: Doplněna příloha o experimentech a A/B testech bez sledovací laboratoře: konkrétní hypotéza, volba jednoduššího ověření místo zbytečného A/B testu, agregované měření, bezpečné používání feature flagů, privacy kontrola experimentu, vyhodnocení jako rozhodnutí, checklist a mini úkol; ověřeny a využity zdroje EDPB k technickému rozsahu ePrivacy a CNIL k analytice.
 - 2026-07-12: Doplněn krátký Codyho tip k týmovému používání e-booku: jeden vlastník, jeden malý další krok a ověření dopadu po každé kapitole.
 - 2026-07-12: Doplněna příloha o billingu, fakturaci a platbách bez datového chaosu: rozdělení produktového účtu, billing účtu a plátce, minimalizace platebních a fakturačních dat, bezpečné používání platebního poskytovatele, dunning, refundy, platební webhooky, reporty, checklist a mini úkol; ověřeny zdroje Evropské komise k OSS a PCI Security Standards Council k PCI DSS.
 - 2026-07-12: Doplněna příloha o API integracích a webhook mechanismech bez datového chaosu: integrační věta, datový kontrakt, minimální oprávnění, ověřování webhooků, idempotence, produktové stavy integrací, retence retry fronty, dokumentace integrace, checklist a mini úkol; ověřeny zdroje OWASP API Security Top 10, REST Security Cheat Sheet a Web Service Security Cheat Sheet.
