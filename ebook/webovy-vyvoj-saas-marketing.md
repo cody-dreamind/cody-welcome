@@ -6803,8 +6803,189 @@ Vyber jednu existující nebo plánovanou integraci a vyplň kartu:
 
 Potom udělej jednu konkrétní změnu: zmenši payload, přidej podpis webhooku, nastav idempotency key, omez token, zkrať retenci retry fronty, doplň stav integrace do UI nebo napiš dokumentaci k odpojení. Integrace má produkt rozšiřovat, ne potichu otevírat boční dveře k datům.
 
+## Příloha: Billing, fakturace a platby bez datového chaosu
+
+Billing je produktová funkce, ne jen technická napojka na platební bránu. Rozhoduje o tom, kdy zákazník začne platit, kdo dostane fakturu, kdo může změnit plán, co se stane při neúspěšné platbě a jaká data skončí v účetnictví, supportu, CRM a reportech.
+
+U privacy-first SaaS je billing citlivý hlavně proto, že spojuje několik světů najednou: identitu zákazníka, platební prostředek, fakturační údaje, smluvní vztah, daňové povinnosti, historii objednávek, exporty pro účetnictví a často i automatické e-maily. Když se to navrhne ledabyle, vznikne z něj tichá databáze osobních a finančních údajů, kterou nikdo pořádně nevlastní.
+
+Codyho komentář: Platba je moment důvěry. Uživatel ti právě říká: „Tady máš peníze a kus identity.“ To není vhodná chvíle na kreativní experiment s osmi trackery, třemi webhooky a logováním celého payloadu. Fakt ne.
+
+### Rozděl účet, billing a plátce
+
+První praktický krok je oddělit tři věci, které se v malých produktech často slepí dohromady:
+
+| Vrstva | Co znamená | Typická data |
+| --- | --- | --- |
+| Produktový účet | Kdo používá aplikaci | jméno, e-mail, role, workspace |
+| Billing účet | Kdo spravuje předplatné | plán, stav předplatného, fakturační e-mail, daňové údaje |
+| Plátce | Kdo reálně platí | platební metoda u poskytovatele, fakturační kontakt, objednávka |
+
+U freelancera to může být jedna osoba. U firmy často ne. Produkt používá tým, plán spravuje admin a faktury chce účetní. Když tyto role nerozlišíš, začneš posílat faktury vývojáři, účetní dáš přístup do produktu nebo supportu ukážeš víc finančních dat, než potřebuje.
+
+Praktické pravidlo:
+
+- uživatel produktu nemá automaticky měnit billing,
+- billing admin nemá automaticky vidět všechna produktová data,
+- fakturační e-mail nemusí být přihlašovací účet,
+- vlastník workspace musí vidět, kdo má billing oprávnění,
+- změny plánu a platební metody patří do auditu událostí.
+
+Audit nemusí obsahovat citlivé detaily. Stačí vědět: kdo změnu udělal, kdy, z jakého plánu na jaký plán, s jakým výsledkem a jaké potvrzení odešlo zákazníkovi.
+
+### Neber platební kartu do vlastních rukou
+
+Pokud nemusíš zpracovávat karetní údaje přímo, nedělej to. Moderní platební poskytovatelé umí hostované checkouty, uložené platební metody přes tokeny a zákaznické portály. Pro malý SaaS je často lepší uložit interní ID zákazníka u platebního poskytovatele a stav předplatného než tahat platební údaje do vlastní databáze.
+
+PCI Security Standards Council popisuje PCI DSS jako základ technických a provozních požadavků na ochranu platebních účtů a dat držitelů karet. Překlad do produktového rozhodování je jednoduchý: čím méně karetních dat se dotkne tvého systému, tím menší bezpečnostní a provozní plocha.
+
+Minimum:
+
+- nikdy neloguj číslo karty, CVC ani celé platební payloady,
+- do databáze ukládej token, customer ID nebo subscription ID od poskytovatele, ne karetní údaje,
+- platební stránku raději nech provozovat specializovaným poskytovatelem, pokud nemáš jasný důvod jinak,
+- supportu zobrazuj jen bezpečný popis platební metody, například značku a poslední čtyři číslice, pokud je to opravdu potřeba,
+- přístup do administrace platební brány omez na lidi, kteří řeší finance nebo billing,
+- exporty z platební brány ukládej jen tam, kde mají účetní nebo provozní účel.
+
+Tohle není lenost. Je to rozumné zmenšení rizika.
+
+### Fakturační údaje sbírej podle účelu
+
+Fakturační formulář má často tendenci bobtnat. Produkt začne pro jistotu chtít firmu, IČ, DIČ, adresu, stát, telefon, interní poznámku, obor, počet zaměstnanců a ideálně i datum narození zakladatele, protože proč si neudělat malou archeologii.
+
+Lepší postup:
+
+- pro B2B zákazníka sbírej údaje potřebné k vystavení a doručení faktury,
+- pro B2C zákazníka odděl daňovou potřebu od marketingové zvědavosti,
+- telefon žádej jen tehdy, když má jasnou práci,
+- fakturační e-mail odděl od e-mailu uživatele,
+- nepoužívej fakturační adresu jako skrytý zdroj marketingové segmentace,
+- změny fakturačních údajů zapisuj do historie faktur rozumně, ne jako nekonečné verzování osobních údajů všude.
+
+U přeshraničního prodeje v EU řeš DPH a režimy jako OSS s účetní nebo daňovým poradcem. Evropská komise popisuje One Stop Shop jako mechanismus pro firmy v přeshraniční B2C e-commerce, který umožňuje deklarovat a odvádět DPH pro vybrané prodeje přes registraci v jednom členském státě. Produktově z toho plyne: billing musí znát zemi zákazníka, typ zákazníka a daňový režim, ale nemá z toho dělat datovou hostinu.
+
+Praktická karta fakturačního pole:
+
+| Pole | Proč ho potřebujeme | Kde se používá | Kdo ho vidí | Kdy ho smažeme nebo archivujeme |
+| --- | --- | --- | --- | --- |
+| Fakturační e-mail | doručení faktury | billing, účetnictví | billing admin, finance | podle účetních pravidel |
+| Název firmy | fakturační identita | faktura, účetnictví | finance, billing admin | podle účetních pravidel |
+| Země | DPH režim a měna | billing výpočet | finance, systém | podle účetních pravidel |
+| Telefon | pouze pokud řeší platební nebo doručovací problém | support/finance | omezeně | smazat, pokud není potřeba |
+
+Konkrétní retenční lhůty pro účetní a daňové doklady nehádej z blogu. Napiš si je podle jurisdikce a potvrď s účetní. E-book není účetní kancelář, i když se dnes každý Markdown tváří důležitě.
+
+### Platební chyby navrhni jako normální stav
+
+Neúspěšná platba není drama. Je to běžný provozní stav. Karta expiruje, banka odmítne transakci, limit je nízký, zákazník mění kartu nebo firemní účetnictví řeší novou objednávku.
+
+Produkt má mít jasný dunning režim:
+
+- kolikrát se platba zkusí znovu,
+- kdy a komu odejde upozornění,
+- kdo může upravit platební metodu,
+- kdy se účet omezí,
+- co zůstane dostupné kvůli exportu dat,
+- kdy se předplatné ukončí,
+- jak se zákazník vrátí zpět bez ručního zásahu supportu.
+
+E-maily k platbě piš věcně. Nepatří do nich marketingové triky, falešná urgence ani zbytečné detaily o platebním prostředku. U firemního zákazníka navíc mysli na to, že e-mail může číst účetní, vlastník nebo admin. Každý potřebuje trochu jiný kontext.
+
+Příklad:
+
+„Platbu za workspace `Acme` se nepodařilo zpracovat. Platební metodu může upravit billing admin v nastavení fakturace. Přístup k exportu dat zůstane dostupný do 15. srpna 2026.“
+
+To je lepší než „Oops, card failed“. Člověk ví, co se stalo, koho se to týká a co má udělat.
+
+### Refund a zrušení nejsou totéž
+
+Zákazník může zrušit předplatné, požádat o refund, změnit plán, odejít po trialu nebo jen vyměnit platební metodu. Tyto scénáře mají jiné dopady na data.
+
+Rozděl je:
+
+- zrušení obnovování předplatného,
+- okamžité ukončení přístupu,
+- refund platby,
+- dobropis nebo účetní oprava,
+- export dat před odchodem,
+- výmaz produktových dat,
+- zachování účetních dokladů podle povinností.
+
+Privacy-first offboarding neznamená, že smažeš faktury, které musíš držet kvůli účetnictví. Znamená, že zákazníkovi jasně řekneš, co se smaže z produktu, co zůstane kvůli právním nebo účetním povinnostem, kdo k tomu má přístup a jak dlouho to bude v režimu retence.
+
+### Webhooky z platební brány ber vážně
+
+Platební brána obvykle posílá webhooky: platba uspěla, předplatné se obnovilo, faktura je zaplacená, chargeback, refund, změna metody. To jsou události, které mohou změnit přístup zákazníka k produktu. Proto s nimi zacházej stejně pečlivě jako s jinými integracemi.
+
+Minimum:
+
+- ověřuj podpis webhooku,
+- používej event ID a idempotenci,
+- stav předplatného neměň jen podle URL parametru po návratu z checkoutu,
+- při pochybnosti si stav ověř u platebního poskytovatele přes API,
+- loguj technický výsledek, ne celý payload,
+- nastav retenci neúspěšných webhooků,
+- ruční zásah admina zaznamenej jako samostatnou událost.
+
+Nebezpečný vzor: „Uživatel se vrátil na `/success`, takže mu aktivujeme plán.“ Bez ověřené platební události je to přání, ne důkaz. Stránka úspěchu je UI. Zdroj pravdy je ověřený stav platby nebo předplatného.
+
+### Reporty a exporty jsou také datový produkt
+
+Finance, sales a vedení budou chtít reporty: MRR, churn, dlužné faktury, aktivní předplatná, refundy, trial konverze. To je legitimní. Jen z toho nedělej volný export všeho.
+
+Dobré reporty:
+
+- používají agregace tam, kde stačí agregace,
+- oddělují finanční data od produktového chování,
+- skrývají osobní údaje v přehledech, kde nejsou potřeba,
+- mají vlastníka a přístupová práva,
+- mají popsaný účel,
+- pravidelně se mažou nebo archivují,
+- nejdou poslat do náhodného sdíleného disku bez kontroly.
+
+Příklad: Pro měsíční review většinou nepotřebuješ seznam všech e-mailů zákazníků s jejich kartami a fakturačními adresami. Potřebuješ počet nových platících účtů, změny plánů, refundy, selhané platby a poznámky k hlavním příčinám. Detail osobních údajů patří tam, kde se řeší konkrétní účetní nebo supportní případ.
+
+### Checklist: Billing a platby privacy-first
+
+- [ ] Produktový účet, billing účet a plátce jsou rozlišené.
+- [ ] Billing oprávnění nejsou automaticky stejná jako produktová role.
+- [ ] Platební karta se nezpracovává ani neukládá ve vlastním systému, pokud to není nezbytné.
+- [ ] Do databáze se ukládají jen bezpečné identifikátory od platebního poskytovatele.
+- [ ] Fakturační formulář sbírá jen údaje s jasným účelem.
+- [ ] Fakturační e-mail je oddělený od přihlašovací identity.
+- [ ] Platební webhooky mají podpis, idempotenci a bezpečné logování.
+- [ ] Dunning e-maily říkají věcně, co se stalo a kdo má další krok.
+- [ ] Refund, zrušení, export a výmaz dat jsou samostatné procesy.
+- [ ] Účetní retence je popsaná a oddělená od produktové retence.
+- [ ] Reporty používají agregace a neexportují osobní údaje bez účelu.
+- [ ] Přístup do platební brány a účetních exportů se pravidelně kontroluje.
+
+### Mini úkol
+
+Vyber jeden billing tok: první platbu, obnovu předplatného, neúspěšnou platbu, refund nebo zrušení. Vyplň kartu:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jaký stav spouští billing tok? |  |
+| Kdo je produktový uživatel, billing admin a plátce? |  |
+| Jaká data posíláme platebnímu poskytovateli? |  |
+| Jaká data ukládáme u sebe? |  |
+| Která data se nesmí logovat? |  |
+| Jak ověřujeme platební webhook? |  |
+| Kdo dostane e-mail a proč? |  |
+| Co se stane při selhání? |  |
+| Jak dlouho držíme účetní a produktová data? |  |
+| Jaká jedna změna sníží riziko nebo zmatek? |  |
+
+Potom udělej jednu konkrétní úpravu: odděl billing roli, smaž zbytečné pole z fakturačního formuláře, přestaň logovat platební payload, ověř podpis webhooku, přepiš dunning e-mail nebo zmenši export pro měsíční report. Billing má vybírat peníze a držet pořádek, ne vyrábět datové bahno.
+
 ## Zdroje
 
+- European Commission Taxation and Customs Union: VAT for businesses - One Stop Shop pro přeshraniční B2C e-commerce a služby v EU: https://taxation-customs.ec.europa.eu/taxation/vat/vat-businesses_en
+- European Commission Taxation and Customs Union: VAT special schemes - OSS - přehled režimu One Stop Shop a jeho účelu u přeshraničního online prodeje: https://taxation-customs.ec.europa.eu/taxation/vat/vat-special-schemes/vat-special-schemes-oss_en
+- PCI Security Standards Council: PCI Data Security Standard - přehled PCI DSS jako souboru technických a provozních požadavků na ochranu platebních dat: https://www.pcisecuritystandards.org/standards/pci-dss/
+- PCI Security Standards Council: Merchant Resources - rozcestník k PCI DSS v4.x, quick reference guide a dalším zdrojům pro obchodníky pracující s platebními kartami: https://www.pcisecuritystandards.org/merchants/
 - OWASP: API Security Top 10 2023 - přehled nejčastějších API rizik včetně rozbité autorizace objektů, slabé autentizace, neomezené spotřeby zdrojů a nebezpečných API: https://owasp.org/API-Security/editions/2023/en/0x00-header/
 - OWASP Cheat Sheet Series: REST Security Cheat Sheet - praktická doporučení k HTTPS, autentizaci, validaci vstupů, bezpečným chybám a práci s tokeny u REST API: https://cheatsheetseries.owasp.org/cheatsheets/REST_Security_Cheat_Sheet.html
 - OWASP Cheat Sheet Series: Web Service Security Cheat Sheet - obecná doporučení pro zabezpečení webových služeb a prevenci typických rizik při integracích: https://cheatsheetseries.owasp.org/cheatsheets/Web_Service_Security_Cheat_Sheet.html
@@ -6877,6 +7058,7 @@ Potom udělej jednu konkrétní změnu: zmenši payload, přidej podpis webhooku
 
 ## Pracovní log
 
+- 2026-07-12: Doplněna příloha o billingu, fakturaci a platbách bez datového chaosu: rozdělení produktového účtu, billing účtu a plátce, minimalizace platebních a fakturačních dat, bezpečné používání platebního poskytovatele, dunning, refundy, platební webhooky, reporty, checklist a mini úkol; ověřeny zdroje Evropské komise k OSS a PCI Security Standards Council k PCI DSS.
 - 2026-07-12: Doplněna příloha o API integracích a webhook mechanismech bez datového chaosu: integrační věta, datový kontrakt, minimální oprávnění, ověřování webhooků, idempotence, produktové stavy integrací, retence retry fronty, dokumentace integrace, checklist a mini úkol; ověřeny zdroje OWASP API Security Top 10, REST Security Cheat Sheet a Web Service Security Cheat Sheet.
 - 2026-07-12: Doplněna příloha o konverzní cestě bez šmírovacího cirkusu: mapování kroků podle rozhodnutí člověka, ruční audit před dalším trackingem, měření jen rozhodovacích signálů, oddělení marketingového souhlasu od hlavní akce, checklist a mini úkol.
 - 2026-07-12: Doplněna příloha o přístupovém auditu za 30 minut: kritická místa, rozlišení rolí od lidí, staré a příliš široké přístupy, export jako zvláštní oprávnění, pravidelný rytmus kontrol, pracovní tabulka, komunikace odebrání přístupu, checklist a mini úkol.
