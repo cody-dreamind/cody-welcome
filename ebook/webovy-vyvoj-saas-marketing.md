@@ -9852,6 +9852,204 @@ Vezmi poslední tři prodejní dema nebo konzultace a vyplň tabulku:
 
 Potom uprav jednu věc: napiš kratší před-demo otázku, připrav lepší demo dataset, přepiš follow-up šablonu nebo smaž z CRM pole, které nemá jasný účel. Demo proces se zlepší tehdy, když každá schůzka trochu zrychlí další rozhodnutí.
 
+## Příloha: Reporting bez datového exhibicionismu
+
+Reporting je zvláštní disciplína. Má uklidnit, vysvětlit a pomoct rozhodnout, ale velmi snadno se z něj stane přehlídka screenshotů, exportů a tabulek, které dokazují hlavně to, že někdo umí kliknout na „download CSV“.
+
+Privacy-first reporting říká: ukaž práci, výsledek a další rozhodnutí, ale nevytahuj víc dat, než je nutné. Zákazník, investor, partner nebo vedení nepotřebují vidět každý řádek produkčních dat. Potřebují pochopit, co se změnilo, proč na tom záleží a co bude následovat.
+
+Špatná otázka zní: „Co všechno můžeme do reportu přiložit?“
+
+Lepší otázka zní: „Jaké rozhodnutí má příjemce reportu po přečtení udělat?“
+
+Pokud report nevede k rozhodnutí, je to často jen drahý rituál s přílohou.
+
+### Začni rozhodnutím, ne exportem
+
+Každý report by měl mít jednu hlavní práci. Jinak se začne nafukovat a po třech měsících z něj bude dokument, který nikdo nečte, ale všichni se bojí zrušit. Krásná firemní tradice, něco jako špatná káva v zasedačce.
+
+Příklady hlavní práce reportu:
+
+- Klientský marketingový report: „Ukázat, které obsahové aktivity přinesly kvalitní poptávky a co příští měsíc zastavíme nebo posílíme.“
+- SaaS provozní report: „Ukázat, jestli služba plní domluvenou spolehlivost a které incidenty vyžadují produktové opatření.“
+- Produktový report pro vedení: „Vybrat jednu nejdůležitější překážku aktivace a rozhodnout, kdo ji odstraní.“
+- Investor update: „Shrnout pokrok, rizika, runway a jednu konkrétní prosbu o pomoc.“
+- Partnerský report: „Ukázat společný pipeline stav bez předávání detailů o lidech, kteří k tomu nedali jasný důvod.“
+
+Jedna hlavní práce neznamená jeden graf. Znamená to, že každý graf, tabulka nebo komentář musí umět odpovědět na otázku: „Pomáhá to rozhodnutí?“
+
+### Reportuj agregovaně, pokud detail není nutný
+
+Agregace je v reportingu kamarád. Místo seznamu konkrétních návštěvníků, leadů nebo uživatelů často stačí ukázat souhrn:
+
+- počet relevantních poptávek podle segmentu,
+- konverzi mezi kroky,
+- počet aktivovaných účtů,
+- rozdělení důvodů ztráty,
+- opakující se typy supportních požadavků,
+- splnění nebo nesplnění provozního cíle,
+- trend za poslední týdny nebo měsíce.
+
+Detail ukazuj až tehdy, když je nezbytný pro konkrétní rozhodnutí a příjemce má oprávněný důvod ho vidět. I v takovém případě se ptej:
+
+- Stačí pseudonym nebo interní ID místo jména?
+- Stačí ukázat vzorek místo celého exportu?
+- Stačí popsat pattern místo konkrétní osoby?
+- Stačí ponechat detail uvnitř systému a do reportu dát odkaz pro oprávněné lidi?
+- Stačí anonymizovaná ukázka?
+
+Pozor na slovíčko „anonymizované“. Pokud jde data stále spojit s konkrétním člověkem, nebo to jde udělat pomocí dalších informací, nejsou opravdu anonymní. V praxi je bezpečnější psát „agregovaný souhrn“, „pseudonymizovaná ukázka“ nebo „redigovaný příklad“ a nepředstírat kouzla. Viz zdroje EDPB a Evropské komise k osobním údajům a principům GDPR.
+
+### Surová data nech jako výjimku
+
+Surový export má své místo: audit, účetnictví, technická diagnostika, právní požadavek, migrace nebo přesně domluvená analýza. Nemá ale být výchozí příloha každého reportu.
+
+Než pošleš CSV, polož si kontrolní otázky:
+
+- Obsahuje export osobní údaje, obchodní tajemství nebo citlivé interní poznámky?
+- Potřebuje příjemce všechna pole?
+- Má příjemce důvod vidět jednotlivé řádky?
+- Jde export omezit na konkrétní období, segment nebo sloupce?
+- Jak se export bezpečně předá?
+- Kdy se má export smazat?
+- Kdo bude vlastníkem dalšího zpracování?
+
+Praktický rozdíl:
+
+- Špatně: „Posílám celý export leadů za kvartál, ať se na to mrknete.“
+- Lépe: „V reportu jsou agregované výsledky podle zdroje a segmentu. Pro kontrolu kvality přikládám redigovaný vzorek 12 leadů bez osobních kontaktů. Plný export zůstává v CRM a přístup má obchodní vlastník.“
+
+To druhé je možná méně efektní. Ale taky méně připomíná datový piknik bez ubrusu.
+
+### Screenshoty rediguj dřív, než opustí systém
+
+Screenshot je nejrychlejší cesta, jak do reportu nechtěně dostat jméno zákazníka, e-mail, interní poznámku, token, URL s parametrem, výpis chyb nebo část objednávky.
+
+Pravidla pro screenshoty:
+
+- Neposílej screenshot z produkce, pokud stačí staging nebo demo účet.
+- Před vložením zkontroluj horní lištu, URL, menu, postranní panely a notifikace.
+- Zakryj jména, e-maily, interní ID a obsah zpráv, které nejsou nutné.
+- Nepoužívej screenshoty z účtu konkrétního zákazníka jako marketingový důkaz bez souhlasu.
+- U technického reportu raději vlož výřez relevantní části než celou obrazovku.
+- U bezpečnostní chyby neukazuj přesný exploit detail širšímu publiku, pokud ho nepotřebuje.
+
+Dobrá praxe je mít samostatný demo workspace pro reporty a prezentace. Obsahuje realistická data, ale ne skutečné lidi. Když produkt nemá demo režim, reporting ho často bolestivě odhalí jako chybějící produktovou funkci.
+
+### Jména zákazníků a loga nejsou volná dekorace
+
+Reference, loga a case studies patří do marketingu, ale nejsou samozřejmý majetek dodavatele. I když je spolupráce dobrá, veřejné použití jména zákazníka by mělo být domluvené. U interního reportu partnerům nebo investorům je situace podobná: někdy stačí segment, velikost firmy a typ problému místo názvu.
+
+Bezpečnější formulace:
+
+- „výrobní firma s 80 zaměstnanci“ místo názvu,
+- „B2B SaaS v účetnictví“ místo konkrétní značky,
+- „tři enterprise poptávky z DACH regionu“ místo seznamu kontaktů,
+- „jeden zákazník požádal o export dat“ místo screenshotu ticketu.
+
+Když jméno použít potřebuješ, napiš si krátkou interní poznámku:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Kdo schválil použití názvu nebo loga? |  |
+| Kde se název objeví? |  |
+| Je použití veřejné, nebo jen interní? |  |
+| Je schválený přesný text? |  |
+| Kdy se má reference znovu ověřit? |  |
+
+Taková mini evidence je nudná, ale zachraňuje nepříjemné „hele, proč jsme v té prezentaci?“.
+
+### Komentář je důležitější než další graf
+
+Dobrý report neříká jen „číslo se změnilo“. Říká, co si z toho tým bere.
+
+U každé důležité metriky napiš tři řádky:
+
+- Co vidíme.
+- Co si myslíme, že to znamená.
+- Co uděláme dál.
+
+Příklad:
+
+„Konverze z pricing stránky do poptávky klesla z 4,1 % na 2,8 %. Největší pokles je u návštěv z článků o enterprise integracích, kde pricing neodpovídá otázkám o bezpečnosti a podpoře. Příští týden doplníme krátké enterprise FAQ, odkaz na bezpečnostní stránku a budeme měřit klik na kontakt z této sekce.“
+
+Tohle je užitečnější než pět grafů bez věty. Číslo bez interpretace často jen přesune práci na čtenáře.
+
+### Odděl interní, klientský a veřejný report
+
+Stejná realita může mít tři různé vrstvy:
+
+- Interní report: může obsahovat pracovní detail, odpovědnosti, chyby a otevřené technické problémy.
+- Klientský nebo partnerský report: má ukázat výsledek, dopad, rizika a další kroky bez zbytečného interního šumu.
+- Veřejný report: má být výrazně opatrnější, agregovaný a bez neveřejných detailů.
+
+Nekopíruj interní report ven jen proto, že je hotový. Interní poznámky často obsahují zkratky, pracovní domněnky, jména lidí, debug detaily nebo nehotová rozhodnutí. Pro externí publikum vytvoř raději čistou verzi.
+
+Praktické označení na začátek dokumentu:
+
+| Pole | Příklad |
+| --- | --- |
+| Publikum | Klientský měsíční report |
+| Účel | Rozhodnout priority na další měsíc |
+| Citlivost | Bez osobních údajů, bez surových exportů |
+| Vlastník | Account nebo product owner |
+| Retence | Uložit ve sdíleném projektovém prostoru, exporty mazat po 30 dnech |
+
+Ano, je to pět řádků navíc. Ne, svět se nezhroutí. Zato za půl roku bude jasné, proč dokument existuje.
+
+### Reporting cadence drž krátký a předvídatelný
+
+Report má mít rytmus. Pokud pokaždé vzniká od nuly, bude pokaždé jiný, drahý a trochu podezřelý.
+
+Jednoduchý měsíční report může mít tuto strukturu:
+
+1. Shrnutí jednou větou.
+2. Co se změnilo od minula.
+3. Tři hlavní metriky.
+4. Co jsme se naučili.
+5. Rizika nebo blokery.
+6. Rozhodnutí pro další období.
+7. Přílohy jen pokud jsou nutné.
+
+U týdenního reportu stačí ještě méně:
+
+- hotovo,
+- rozpracováno,
+- blokery,
+- jedno rozhodnutí nebo žádost.
+
+Privacy-first pointa je jednoduchá: pravidelný malý report s agregovanými daty je lepší než občasný obří dump. Čtenář ví, co čekat, a tým nemusí pokaždé hledat „nějaká zajímavá čísla“, což je oblíbená zkratka do metrikové mlhy.
+
+### Checklist: Report, který informuje a nevyváží data
+
+- [ ] Report má jednu hlavní práci a jasné publikum.
+- [ ] Každá metrika pomáhá konkrétnímu rozhodnutí.
+- [ ] Výchozí forma je agregovaný souhrn, ne surový export.
+- [ ] Osobní údaje, interní poznámky a citlivé obchodní detaily jsou odstraněné nebo omezené.
+- [ ] Screenshoty jsou redigované a neobsahují URL tokeny, e-maily ani produkční obsah bez účelu.
+- [ ] Jména zákazníků, loga a citace jsou použité jen se schválením nebo nahrazené popisem segmentu.
+- [ ] Interní, klientská a veřejná verze reportu jsou oddělené.
+- [ ] Přílohy mají vlastníka, bezpečný způsob předání a datum smazání.
+- [ ] Report obsahuje interpretaci: co vidíme, co to znamená, co uděláme dál.
+- [ ] Rytmus reportu je předvídatelný a nepřidává pokaždé nové metriky ze zvědavosti.
+
+### Mini úkol
+
+Vezmi poslední report, který tým poslal klientovi, partnerovi, vedení nebo investorovi. Projdi ho po řádcích a označ:
+
+| Kontrola | Výsledek |
+| --- | --- |
+| Jaké rozhodnutí měl report vyvolat? |  |
+| Které metriky nikdo nepoužil? |  |
+| Obsahoval surový export? |  |
+| Šel export nahradit agregací nebo vzorkem? |  |
+| Byly screenshoty redigované? |  |
+| Objevila se jména zákazníků nebo lidí bez jasného důvodu? |  |
+| Byly oddělené interní poznámky od externí verze? |  |
+| Co bude příště kratší? |  |
+
+Potom uprav šablonu reportu: smaž jednu nepoužívanou metriku, přidej sekci „co uděláme dál“ a nastav pravidlo, že surové exporty se neposílají jako výchozí příloha. Malá změna, velký rozdíl. Report má být kompas, ne skladiště.
+
 ## Zdroje
 
 - EUR-Lex: Regulation (EU) 2016/679, GDPR Article 30 - právní text k záznamům o činnostech zpracování pro správce a zpracovatele: https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng
@@ -9890,6 +10088,7 @@ Potom uprav jednu věc: napiš kratší před-demo otázku, připrav lepší dem
 - European Data Protection Board: Guidelines on the right to data portability under Regulation 2016/679, WP242 rev.01 - pokyny k právu na přenositelnost údajů a použitelným strukturovaným formátům: https://www.edpb.europa.eu/documents/guideline/guidelines-on-the-right-to-data-portability-under-regulation-2016679-wp242_en
 - European Commission: Information for individuals - praktický přehled práv jednotlivců podle ochrany osobních údajů v EU: https://commission.europa.eu/law/law-topic/data-protection/information-individuals_en
 - European Commission: Principles of the GDPR - přehled principů jako transparentnost, účelové omezení, minimalizace dat a omezení uchování: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr_en
+- European Data Protection Board: FAQ for small business - praktické odpovědi k osobním údajům, pseudonymizaci, anonymizaci, právům jednotlivců a rolím správce/zpracovatele: https://www.edpb.europa.eu/sme/find-practical-info/faq_en
 - European Commission: What data can we process and under which conditions? - praktické vysvětlení účelu, rozsahu a základních pravidel zpracování osobních údajů: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr/overview-principles/what-data-can-we-process-and-under-which-conditions_en
 - European Commission: What is a data controller or a data processor? - rozlišení rolí správce a zpracovatele osobních údajů v provozu služeb a dodavatelů: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/obligations/controllerprocessor/what-data-controller-or-data-processor_en
 - European Commission: What is a data breach and what do we have to do in case of a data breach? - praktické vysvětlení oznamování porušení zabezpečení osobních údajů: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/obligations/what-data-breach-and-what-do-we-have-do-case-data-breach_en
@@ -9942,6 +10141,7 @@ Potom uprav jednu věc: napiš kratší před-demo otázku, připrav lepší dem
 
 ## Pracovní log
 
+- 2026-07-12: Doplněna příloha o reportingu bez datového exhibicionismu: rozhodovací účel reportu, agregace místo surových exportů, redigování screenshotů, opatrné používání jmen zákazníků, oddělení interní/klientské/veřejné verze, reporting cadence, checklist a mini úkol; ověřeny a doplněny zdroje Evropské komise a EDPB k principům GDPR, osobním údajům, pseudonymizaci a anonymizaci.
 - 2026-07-12: Doplněna příloha o prodejním demu bez nátlaku a datového chaosu: kvalifikace před demem, scénář podle zákaznického problému, bezpečná demo data, opatrné nahrávání, CRM poznámky, follow-up, produktové učení z opakovaných otázek, checklist a mini úkol.
 - 2026-07-12: Doplněna příloha o SLO a provozní odpovědnosti bez enterprise divadla: uživatelské schopnosti, SLI/SLO/SLA, percentily, alerty podle dopadu, SLA kontrola, provozní review, checklist a mini úkol; ověřeny a doplněny zdroje Google SRE Book a SRE Workbook k SLO, monitoringu a alertingu.
 - 2026-07-12: Doplněna příloha o předání webu nebo SaaS projektu bez rukojmí: provozní balík, vlastnictví účtů, role a přístupy, datová mapa, předvedení deploymentu, oddělení předání od podpory, checklist a mini úkol.
