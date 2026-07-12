@@ -6386,6 +6386,152 @@ Vyber jednu supportní otázku, která se v týmu opakuje. Vytvoř z ní krátko
 
 Pak napiš první verzi odpovědi ve třech částech: co se stane, jak to udělat, co si pohlídat. Codyho komentář: když se odpověď nevejde do těchto tří částí, možná není problém v dokumentaci, ale v produktu. Au. Ale užitečné au.
 
+## Příloha: Přístupový audit za 30 minut
+
+Přístupový audit zní jako věc, která patří do velké firmy s bezpečnostním oddělením, průkazkami a tabulkou, kterou nikdo nechce otevřít. Jenže malý SaaS tým má často větší problém: přístupy se přidávají rychle, odebírají pomalu a časem nikdo přesně neví, kdo vidí produkci, CRM, analytiku, fakturaci, helpdesk nebo zálohy.
+
+Privacy-first provoz nezačíná u šifrovacího sloganu. Začíná u obyčejné otázky: kdo se k datům opravdu dostane?
+
+Špatná otázka zní: „Komu všemu to radši dáme, aby se práce nezdržovala?“
+
+Lepší otázka zní: „Jaký nejmenší přístup člověk potřebuje pro konkrétní práci a kdy ho znovu zkontrolujeme?“
+
+Codyho komentář: Přístup, který „se může hodit“, je jako kabel v šuplíku. Jeden nevadí. Po roce máš klubko, nikdo neví k čemu je, ale všichni se bojí ho vyhodit.
+
+### Začni seznamem kritických míst
+
+Neaudituj celý vesmír. Vyber systémy, kde je největší dopad při chybě:
+
+| Oblast | Typické riziko | Co zkontrolovat |
+| --- | --- | --- |
+| E-mail a identita | převzetí účtu, reset hesel, přístup k dalším službám | 2FA, admini, recovery metody |
+| Repozitář a CI/CD | změna kódu, únik secrets, deploy | write/admin role, secrets, chráněné větve |
+| Hosting a databáze | přístup k produkčním datům | admin účty, SSH, databázové role |
+| DNS a doména | přesměrování provozu, výpadek webu | registrátor, DNS admini, 2FA |
+| CRM a leady | obchodní data, osobní kontakty | role, exporty, staré účty |
+| Helpdesk | tikety, přílohy, zákaznický kontext | agenti, admini, retence příloh |
+| Analytika a logy | chování uživatelů, technické detaily | přístup k raw datům, exporty |
+| Fakturace | účetní údaje, platby, adresy | finance role, exporty, API klíče |
+| Zálohy | velký objem dat najednou | kdo umí stáhnout nebo obnovit zálohu |
+
+Pokud má tým málo času, začni identitou, hostingem, repozitářem a fakturací. Tyto systémy často otevírají dveře ke všemu ostatnímu.
+
+### Rozliš role od lidí
+
+Audit se špatně dělá, když se ptáš jen „má Petr přístup?“. Lepší je ptát se: „Jakou roli Petr vykonává a jaký přístup k ní patří?“
+
+Praktické role:
+
+| Role | Potřebuje typicky | Nepotřebuje typicky |
+| --- | --- | --- |
+| Vývojář | repozitář, staging, omezené logy, testovací data | CRM exporty, fakturační admin, marketingové kontakty |
+| Support | helpdesk, omezený stav účtu, dokumentace | plnou databázi, CI secrets, DNS |
+| Marketing | CMS, agregovanou analytiku, obsahový kalendář | produkční logy, fakturaci, zákaznické přílohy |
+| Sales | CRM, fit kartu, pricing podklady | raw produktovou analytiku, produkční admin |
+| Finance | fakturaci, smluvní a účetní data | produktové logy, supportní přílohy |
+| Admin/owner | správu účtů a kritických nastavení | každodenní používání osobního adminu bez důvodu |
+
+Admin účet nemá být běžný pracovní režim. Pokud někdo potřebuje admin oprávnění jen občas, ať existuje oddělený postup: požadavek, důvod, časové omezení, záznam.
+
+### Hledej čtyři typy problémů
+
+Při rychlém auditu hledej hlavně tyto kategorie:
+
+| Problém | Jak vypadá | Co udělat |
+| --- | --- | --- |
+| Starý přístup | člověk odešel, změnil roli nebo dodavatel dokončil práci | odebrat účet nebo roli |
+| Příliš široká role | viewer má admin, support vidí vše, externista má write do produkce | zúžit oprávnění |
+| Sdílený účet | jeden login používá více lidí | nahradit osobními účty |
+| Nejasný vlastník | nikdo neví, kdo nástroj spravuje | určit vlastníka a datum další revize |
+
+Nejrychlejší výhra bývají staré účty. Jejich odebrání nevyžaduje architektonickou debatu, jen trochu odvahy kliknout na správné tlačítko.
+
+### Export je zvláštní oprávnění
+
+Přístup k obrazovce a možnost exportovat data nejsou totéž. Export často znamená, že data opustí kontrolované prostředí a skončí v CSV, e-mailu, lokální složce nebo dalším nástroji.
+
+U každého systému se ptej:
+
+- Kdo může exportovat data?
+- Jaký typ dat export obsahuje?
+- Zapisuje se, kdo export vytvořil?
+- Má export omezenou platnost nebo vlastníka?
+- Kam se export typicky ukládá?
+- Existuje pravidlo pro smazání exportu?
+
+Privacy-first pravidlo: pokud člověk potřebuje vidět záznam v systému, ještě automaticky nepotřebuje právo stáhnout všechny záznamy ven. Export je násobič dopadu. Chovej se k němu podle toho.
+
+### Audit dělej v krátkém rytmu
+
+Přístupový audit nemusí být roční horor. Lepší je menší kontrola pravidelně:
+
+| Rytmus | Co zkontrolovat |
+| --- | --- |
+| Měsíčně | nové účty, externisté, admin role, exporty |
+| Kvartálně | všechny kritické nástroje, vlastníci, 2FA, role |
+| Po odchodu člověka | e-mail, repo, hosting, CRM, helpdesk, fakturace, osobní tokeny |
+| Po incidentu | systémy spojené s incidentem, logy, secrets, dodavatelé |
+| Po zavedení nástroje | role, export, DPA/vendor karta, vlastník revize |
+
+Krátký audit má mít výstup. Ne jen „zkontrolováno“. Napiš: co bylo odebráno, co bylo zúženo, co zůstává vědomě a kdy se to zkontroluje znovu.
+
+### Pracovní tabulka pro 30 minut
+
+Použij jednoduchou tabulku. Nečekej na dokonalý IAM systém.
+
+| Systém | Uživatel/role | Přístup dnes | Potřebuje? | Akce | Vlastník |
+| --- | --- | --- | --- | --- | --- |
+|  |  | admin / editor / viewer / export | ano / ne / dočasně | odebrat / zúžit / ponechat / ověřit |  |
+|  |  |  |  |  |  |
+|  |  |  |  |  |  |
+
+U položky „dočasně“ rovnou doplň datum konce. Dočasný přístup bez data je jen permanentní přístup s lepším marketingem.
+
+### Komunikuj odebrání bez dramatu
+
+Odebrání přístupu není nedůvěra. Je to normální provozní hygiena.
+
+Dobrá interní věta:
+
+```text
+V rámci pravidelné revize zúžím přístup do CRM na roli viewer, protože pro aktuální práci není potřeba export ani úprava záznamů. Pokud bude potřeba vyšší oprávnění pro konkrétní úkol, přidáme ho dočasně s vlastníkem.
+```
+
+Tím se z bezpečnosti nestane osobní věc. Je to systémové pravidlo, které chrání tým i zákazníky.
+
+### Checklist: Přístupový audit
+
+- [ ] Víme, které systémy jsou kritické pro data, provoz a fakturaci.
+- [ ] Každý kritický systém má vlastníka.
+- [ ] Admin účty jsou omezené na lidi, kteří je opravdu potřebují.
+- [ ] Sdílené účty jsou nahrazené osobními účty, kde to jde.
+- [ ] 2FA je zapnuté u e-mailu, repo, hostingu, DNS, fakturace a dalších kritických nástrojů.
+- [ ] Externisté a bývalí členové týmu nemají aktivní přístupy.
+- [ ] Export dat je samostatně kontrolované oprávnění.
+- [ ] Dočasné přístupy mají datum konce.
+- [ ] Offboarding zahrnuje osobní tokeny, API klíče, automatizace a vlastnictví dokumentů.
+- [ ] Přístupy k logům, zálohám a produkční databázi jsou přísnější než běžné produktové role.
+- [ ] Výsledek auditu je zapsaný: odebráno, zúženo, ponecháno, další kontrola.
+
+### Mini úkol
+
+Vyber jeden kritický nástroj, ideálně e-mail/identitu, hosting, repozitář, CRM nebo helpdesk. Vyplň kartu:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jaký nástroj kontrolujeme? |  |
+| Jaká data nebo provoz ovlivňuje? |  |
+| Kdo je vlastník nástroje? |  |
+| Kdo má admin přístup? |  |
+| Kdo může exportovat data? |  |
+| Který účet nebo role vypadá zbytečně široce? |  |
+| Existuje sdílený účet? |  |
+| Je zapnuté 2FA? |  |
+| Jaký jeden přístup dnes odebereme nebo zúžíme? |  |
+| Kdy proběhne další revize? |  |
+
+Potom udělej jednu konkrétní změnu: odeber starý účet, zúž admin roli, vypni export pro člověka, který ho nepotřebuje, zapni 2FA, nebo napiš vlastníka k nástroji, který ho nemá. Přístupový audit je nudný přesně tím dobrým způsobem: po správném nudném auditu je méně cest, kudy může utéct problém.
+
 ## Zdroje
 
 - EUR-Lex: Regulation (EU) 2016/679, GDPR Article 35 and 36 - povinnost posouzení vlivu na ochranu osobních údajů a předchozí konzultace při vysokém zbytkovém riziku: https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng
@@ -6457,6 +6603,7 @@ Pak napiš první verzi odpovědi ve třech částech: co se stane, jak to uděl
 
 ## Pracovní log
 
+- 2026-07-12: Doplněna příloha o přístupovém auditu za 30 minut: kritická místa, rozlišení rolí od lidí, staré a příliš široké přístupy, export jako zvláštní oprávnění, pravidelný rytmus kontrol, pracovní tabulka, komunikace odebrání přístupu, checklist a mini úkol.
 - 2026-07-12: Doplněna příloha o produktové dokumentaci bez supportního odpadu: dělení dokumentace podle práce uživatele, propojení s onboardingem, dokumentace datově citlivých funkcí, vlastnictví stránek, převod opakovaných supportních odpovědí do dokumentace, checklist a mini úkol; navázáno na existující zdroje Diátaxis, GDPR principy a privacy by design.
 - 2026-07-11: Doplněna příloha o DPIA bez tabulkového pekla: kdy dělat screening, jak popsat zpracování lidskou řečí, ověřit nezbytnost a přiměřenost, popsat rizika jako dopad na člověka, navrhnout ověřitelná opatření, zastavit rizikový release, checklist a mini úkol; ověřeny zdroje EUR-Lex, Evropské komise, EDPB a ÚOOÚ k DPIA.
 - 2026-07-11: Doplněna příloha o zpracovatelských smlouvách a subdodavatelích bez právního šumu: role správce a zpracovatele, DPA kontrolní karta, subzpracovatelé, přenosy mimo EU/EHP, veřejný seznam subdodavatelů, nákupní rozhodovací karta, checklist a mini úkol; ověřeny oficiální zdroje Evropské komise, EUR-Lex a Standard Contractual Clauses.
