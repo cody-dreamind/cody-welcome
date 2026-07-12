@@ -8453,6 +8453,173 @@ Vyber pět položek ze současné roadmapy nebo backlogu a přepiš je do této 
 
 Potom jednu položku smaž, jednu přesuň do „možná později“ a jednu zmenši na ověřitelný další krok. Roadmapa se zlepší víc jedním dobrým odmítnutím než třemi novými sliby.
 
+## Příloha: Customer success bez sledovacího health score
+
+Customer success je často místo, kde se dobrý úmysl potká se špatným datovým reflexem. Tým chce poznat, kdo je spokojený, kdo je v riziku a komu nabídnout další hodnotu. To je legitimní produktová práce. Problém začne ve chvíli, kdy se z toho stane tajné skóre postavené na každém kliku, každé minutě v aplikaci a každém otevřeném e-mailu.
+
+Privacy-first customer success má jiný cíl: pomáhat zákazníkovi dosáhnout výsledku, ne vytvořit jeho behaviorální profil pro interní pocit kontroly.
+
+Špatná otázka zní: „Jak spočítáme co nejpřesnější health score?“
+
+Lepší otázka zní: „Jak poznáme, že zákazník nedosahuje hodnoty, a jak mu férově pomůžeme?“
+
+### Úspěch definuj jako výsledek zákazníka
+
+Nejdřív napiš, co znamená úspěch pro konkrétní segment. Ne pro tvůj dashboard. Pro zákazníka.
+
+Příklady:
+
+- Servisní firma má každý týden naplánované výjezdy bez ručního přepisování tabulek.
+- Účetní kancelář má klientské podklady na jednom místě a méně urgencí e-mailem.
+- Marketingový tým vidí kvalitu poptávek bez reklamního profilování návštěvníků.
+- SaaS administrátor zvládne přidat uživatele, nastavit role a bezpečně předat workspace týmu.
+
+Z takové věty se dají odvodit rozumné signály. Pokud ale začínáš metrikou „počet kliků na uživatele za den“, pravděpodobně měříš pohodlí nástroje, ne hodnotu zákazníka.
+
+Praktická karta zákaznického úspěchu:
+
+| Pole | Příklad |
+| --- | --- |
+| Segment | Servisní firma s 5 až 30 techniky |
+| Slíbený výsledek | Přehledný plán výjezdů bez ručního skládání |
+| První hodnota | První týdenní plán vytvořený v produktu |
+| Opakovaná hodnota | Plán se používá každý týden a změny vidí dispečer i technik |
+| Rizikový signál | Firma se vrací k tabulkám nebo ručnímu volání |
+| Férová pomoc | Nabídnout úpravu workflow, šablonu nebo krátké provozní review |
+
+Tahle karta je nudnější než tajný algoritmus. Proto je užitečnější.
+
+### Signály sbírej podle účelu
+
+Customer success nepotřebuje sledovat všechno. Potřebuje signály, které vedou ke konkrétní pomoci.
+
+Rozumné signály:
+
+- aktivace klíčového workflow,
+- dokončení prvního důležitého nastavení,
+- opakované použití funkce, která nese hlavní hodnotu,
+- počet otevřených supportních požadavků k témuž problému,
+- dlouho neuzavřený onboardingový krok,
+- přímá zpětná vazba ze schůzky, supportu nebo e-mailu,
+- fakturační nebo provozní stav, který může přerušit službu.
+
+Slabé nebo rizikové signály:
+
+- čas strávený v aplikaci bez kontextu,
+- otevření každého marketingového e-mailu jako údaj o spokojenosti,
+- detailní sledování pohybu uživatele po obrazovce,
+- automatické odvozování nálady zákazníka z příliš malého vzorku,
+- spojování produktových, supportních a marketingových dat bez jasného účelu.
+
+Evropská ochrana osobních údajů stojí na zásadách účelovosti, minimalizace a transparentnosti; Evropská komise k tomu v přehledu ochrany dat uvádí rámec GDPR a informace pro firmy i jednotlivce. Praktický dopad pro customer success je jednoduchý: u každého signálu má být jasné, proč existuje, kdo ho používá a jakou akci vyvolá.
+
+### Health stav piš lidsky
+
+Místo jednoho magického čísla použij několik srozumitelných stavů. Číslo často vypadá přesněji, než je. Stav nutí tým říct, co se opravdu děje.
+
+Příklad stavů:
+
+| Stav | Co znamená | Další krok |
+| --- | --- | --- |
+| Nový onboarding | Zákazník ještě nedosáhl první hodnoty | Pomoci dokončit první workflow |
+| Aktivní hodnota | Zákazník pravidelně používá hlavní workflow | Sbírat zpětnou vazbu a udržet jednoduchost |
+| Zaseknutý | Chybí klíčový krok nebo se opakuje stejný problém | Nabídnout konkrétní pomoc, ne obecný check-in |
+| Riziko odchodu | Zákazník ztrácí hodnotu, má incident nebo eskalaci | Pojmenovat problém a domluvit rozhodnutí |
+| Kandidát na rozšíření | Zákazník dosáhl výsledku a má další relevantní potřebu | Nabídnout rozšíření podle problému, ne podle kvóty |
+
+Ke každému stavu patří důkaz. Ne „pocit account manažera“, ne „vypadá to špatně“, ale konkrétní důvod: nedokončený import, tři opakované support tikety, nevyužitá klíčová integrace, změna vlastníka, nezaplacená faktura nebo přímá věta zákazníka.
+
+Codyho komentář: Health score bez vysvětlitelného důvodu je firemní horoskop. Vypadá sofistikovaně, ale když podle něj voláš zákazníkovi, začneš znít jako někdo, kdo ví moc a chápe málo.
+
+### Playbook má pomáhat, ne tlačit
+
+Customer success playbook je sada předem domluvených reakcí. Má zabránit panice a náhodným follow-upům. Nemá být spamovací automat.
+
+Příklad:
+
+| Situace | Neposílat | Lepší reakce |
+| --- | --- | --- |
+| Nedokončený import | Tři obecné e-maily „potřebujete pomoc?“ | Jedna zpráva s odkazem na návod a nabídkou konkrétního termínu |
+| Opakovaný support dotaz | Upsell na vyšší plán | Opravit dokumentaci nebo navrhnout změnu workflow |
+| Neaktivní klíčová funkce | Automatické strašení zrušením účtu | Zeptat se, zda je funkce pořád relevantní, a nabídnout ukázkový scénář |
+| Úspěšně dokončený onboarding | Okamžitý sales tlak | Krátce potvrdit dosažený výsledek a ukázat jeden další dobrovolný krok |
+| Změna admina | Mlčet a doufat | Poslat nový bezpečný onboarding administrátora |
+
+Dobrá customer success zpráva má být konkrétní:
+
+„Vidím, že import zakázek zůstal ve stavu návrhu. Pokud chcete, pošlu vám krátký postup pro kontrolu sloupců, nebo můžeme projít jeden import společně.“
+
+Špatná zpráva:
+
+„Všimli jsme si, že jste dlouho nebyli aktivní. Nechcete si zavolat?“
+
+První varianta popisuje situaci a pomoc. Druhá varianta zní jako CRM, kterému došly nápady.
+
+### Rozšíření prodávej podle hodnoty, ne podle špionáže
+
+Expansion a upsell nejsou sprostá slova. Problém je, když zákazník cítí, že nabídka vznikla z tichého sledování místo z pochopení jeho práce.
+
+Privacy-first pravidla pro rozšíření:
+
+- Nabízej vyšší plán až ve chvíli, kdy existuje zjevná potřeba nebo dosažená hodnota.
+- Vysvětli důvod nabídky lidsky: „Máte tři týmy, které řeší stejný workflow,“ ne „náš model vás vyhodnotil jako kandidáta“.
+- Nepoužívej citlivé supportní informace jako prodejní munici.
+- Odděl provozní pomoc od marketingového nátlaku.
+- Dej zákazníkovi možnost říct, že teď rozšíření neřeší, a respektuj to.
+
+Příklad dobrého rozšíření:
+
+„Vidím, že stejný plán výjezdů začaly používat dva další týmy. Pokud chcete udržet přístupy a role čistěji, může dávat smysl týmový plán. Posílám srovnání a klidně zůstane všechno při starém.“
+
+Tón je důležitý. Zákazník nemá mít pocit, že každá úspěšná akce v produktu otevře nové prodejní okno.
+
+### Customer review jako jednoduchý rituál
+
+U menších zákazníků stačí lehké měsíční review. U větších účtů může být kvartální. Důležité je, aby review vedlo k rozhodnutí.
+
+Struktura review:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jaký výsledek zákazník očekával? |  |
+| Dosáhl první nebo opakované hodnoty? |  |
+| Kde se zasekl? |  |
+| Jaký důkaz máme? |  |
+| Jaká pomoc je férová a konkrétní? |  |
+| Jaká data k tomu nepotřebujeme? |  |
+| Co uděláme do dalšího review? |  |
+
+Do review zahrň i negativní signály, které nejsou v analytice: ticho po schůzce, změna kontaktní osoby, interní reorganizace zákazníka, opakované odkládání rozhodnutí, nejasný vlastník u zákazníka. Ne všechno důležité má podobu eventu v databázi. Některé signály jsou prostě lidské. Šokující, já vím.
+
+### Checklist: Customer success privacy-first
+
+- [ ] Úspěch zákazníka je definovaný jako konkrétní výsledek, ne interní aktivita.
+- [ ] Každý health signál má účel, vlastníka a navazující akci.
+- [ ] Nepoužíváte jedno tajné skóre bez vysvětlitelného důvodu.
+- [ ] Supportní, produktová a marketingová data se nespojují bez jasného účelu.
+- [ ] Playbooky pomáhají konkrétním problémům, ne automatickému tlaku.
+- [ ] Onboardingové a retenční zprávy jdou snadno omezit nebo odhlásit, pokud nejsou provozně nutné.
+- [ ] Rozšíření plánu se nabízí podle dosažené hodnoty nebo zjevné potřeby.
+- [ ] Citlivé supportní informace neslouží jako prodejní munice.
+- [ ] Customer review končí jedním konkrétním dalším krokem.
+- [ ] U každého nového signálu se ptáte: jaké rozhodnutí bez něj neuděláme?
+
+### Mini úkol
+
+Vyber jednoho anonymizovaného zákazníka nebo typický segment a vyplň kartu:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jaký výsledek si zákazník koupil? |  |
+| Jak poznáme první hodnotu? |  |
+| Jak poznáme opakovanou hodnotu? |  |
+| Jaký je jeden rizikový signál? |  |
+| Jaký důkaz k němu potřebujeme? |  |
+| Jaká pomoc je konkrétní a férová? |  |
+| Který sledovací signál můžeme nesbírat? |  |
+
+Potom udělej jednu změnu: přejmenuj health score na lidské stavy, smaž jeden zbytečný signál, napiš konkrétní playbook pro zaseknutý onboarding nebo uprav upsell zprávu tak, aby vycházela z hodnoty, ne z tlaku. Customer success nemá být dohledové centrum. Má to být místo, kde zákazník pozná, že někdo chápe jeho práci.
+
 ## Zdroje
 
 - European Commission Taxation and Customs Union: VAT for businesses - One Stop Shop pro přeshraniční B2C e-commerce a služby v EU: https://taxation-customs.ec.europa.eu/taxation/vat/vat-businesses_en
@@ -8536,6 +8703,7 @@ Potom jednu položku smaž, jednu přesuň do „možná později“ a jednu zme
 
 ## Pracovní log
 
+- 2026-07-12: Doplněna příloha o customer success bez sledovacího health score: definice zákaznického úspěchu jako výsledku, účelové signály místo plošného sledování, lidské health stavy, playbooky, privacy-first upsell, customer review, checklist a mini úkol; ověřen a využit existující zdroj Evropské komise k ochraně osobních údajů a GDPR principům.
 - 2026-07-12: Doplněna příloha o roadmapě bez feature factory: přepis funkcí na problémy, oddělení závazků od možností, prioritizace podle dopadu, důkazu a privacy rizika, měsíční úklid roadmapy, opatrná veřejná komunikace, propojení se sales, checklist a mini úkol.
 - 2026-07-12: Doplněna příloha o produktových notifikacích bez notifikačního smogu: rozdělení bezpečnostních, provozních, pracovních, billing a marketingových zpráv, návrh události před výběrem kanálu, minimalizace citlivých detailů v e-mailu a push zprávách, role a preference, digesty, observabilita notifikací, checklist a mini úkol.
 - 2026-07-12: Doplněna příloha o žádostech k právům uživatelů bez supportního ping-pongu: jedna vstupní brána, ověřování identity přiměřené riziku, převodník lidských formulací na typ žádosti, mapa systémů s osobními údaji, šablony odpovědí, interní rozhodovací stopa, opatrná automatizace, checklist a mini úkol; ověřeny oficiální zdroje EDPB a Evropské komise k právům subjektů údajů, lhůtám, ověření identity a výmazu.
