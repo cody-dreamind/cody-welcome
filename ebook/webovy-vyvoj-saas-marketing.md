@@ -9672,6 +9672,186 @@ Vyber jednu kritickou cestu v produktu nebo webu a napiš pro ni provozní kartu
 
 Začni jednou kartou. Když bude užitečná, přidej další. Když nebude, nezakládej provozní katedrálu. Uprav kartu tak, aby ji tým skutečně používal.
 
+## Příloha: Prodejní demo bez nátlaku a datového chaosu
+
+Prodejní demo není divadelní představení, kde produkt ukáže všechny obrazovky a zákazník má na konci zatleskat platební kartou. Dobré demo je pracovní rozhovor: ověří problém, ukáže relevantní cestu k výsledku a férově pojmenuje, co produkt umí, neumí a co bude potřeba udělat po nákupu.
+
+Špatná otázka zní: „Jak předvedeme co nejvíc funkcí?“
+
+Lepší otázka zní: „Jak zákazníkovi pomůžeme rozhodnout, jestli je to pro jeho situaci správné řešení?“
+
+U privacy-first SaaS má demo ještě jednu práci navíc: nesmí být záminkou ke sběru zbytečných informací, nahrávání schůzek bez jasného důvodu nebo posílání citlivých dat do ukázkového prostředí. Demo má budovat důvěru, ne zakládat malou datovou skládku.
+
+### Kvalifikuj před demem, ale nevyslýchej
+
+Krátká kvalifikace před demem šetří čas oběma stranám. Nemá ale připomínat formulář pro hypotéku. Cílem je zjistit, jestli umíš ukázat relevantní scénář.
+
+Minimum před demem:
+
+- kdo se účastní a jakou roli má v rozhodnutí,
+- jaký problém chce tým řešit,
+- jak to řeší dnes,
+- jaký výsledek by po změně považoval za úspěch,
+- jestli existuje zásadní technická, bezpečnostní nebo provozní překážka,
+- jaký je další krok po demu, pokud dává smysl pokračovat.
+
+Neptej se předem na všechno, co se může hodit do CRM. Telefon, velikost rozpočtu, počet zaměstnanců, seznam používaných nástrojů a interní proces nákupu můžou být relevantní později. Před prvním demem často stačí kontext problému a rozhodovací role.
+
+Praktická kvalifikační věta:
+
+„Aby demo nebylo obecné klikání, pošlete mi prosím jednou větou, co dnes v procesu nejvíc drhne a jak poznáte, že by nový nástroj pomohl.“
+
+To je jednoduché, respektuje čas a nutí obě strany mluvit o realitě.
+
+### Demo postav podle problému, ne podle menu
+
+Demo podle navigace produktu je pohodlné pro prezentujícího a únavné pro zákazníka. Začíná se dashboardem, pokračuje nastavením, ukáže se pár tabulek a po dvaceti minutách nikdo neví, kde byla hodnota. Produktové menu není scénář.
+
+Lepší struktura:
+
+1. Shrnutí situace: „Řešíte ___ a dnes to děláte ___.“
+2. Cíl dema: „Ukážu, jak by vypadal průchod od ___ k ___.“
+3. Scénář v produktu: jedna konkrétní cesta k výsledku.
+4. Rizika a limity: co je hotové, co je konfigurace, co je zakázková práce.
+5. Další krok: pilot, technická kontrola, nabídka, nebo férové zastavení.
+
+Příklad pro plánování servisních výjezdů:
+
+- Nezačínej: „Tady vlevo máme modul zákazníků, tady modul zakázek a tady nastavení.“
+- Začni: „Říkal jste, že největší problém je změna výjezdu na poslední chvíli. Ukážu, jak dispečer přesune zakázku, technik dostane aktualizaci a zákazník vidí nový termín.“
+
+Takové demo je kratší, konkrétnější a lépe ukazuje hodnotu.
+
+### Používej bezpečná demo data
+
+Nikdy nepotřebuješ, aby zákazník kvůli prvnímu demu poslal export reálných klientů, zakázek nebo interních dokumentů. Pokud chceš ukázat produkt v kontextu, připrav bezpečná demo data podle typu segmentu.
+
+Dobrá demo data:
+
+- obsahují realistické názvy procesů, ale ne reálné osobní údaje,
+- pokrývají typické okrajové případy,
+- jsou jasně označená jako ukázková,
+- dají se po schůzce obnovit do čistého stavu,
+- nepoužívají jména skutečných zákazníků bez souhlasu,
+- neobsahují citlivé dokumenty ani screenshoty z produkce.
+
+Pokud zákazník trvá na vlastních datech, udělej z toho řízený pilot, ne improvizované demo. Domluv účel, rozsah dat, přístup, retenci, smazání a odpovědnost. Jednorázový upload „jen ať to vypadá reálně“ je přesně ten typ malé zkratky, která později smrdí jako velký problém.
+
+### Nahrávání schůzek ber jako výjimku
+
+Nahrávka dema může být užitečná pro zákazníka, který ji chce sdílet s týmem. Může být užitečná i pro interní zlepšení produktu. Ale výchozí stav nemá být automatické nahrávání všeho, co se hýbe.
+
+Praktická pravidla:
+
+- řekni předem, jestli se schůzka nahrává a proč,
+- nenahrávej, pokud to není potřeba,
+- neukládej nahrávku déle, než dává smysl,
+- neposílej nahrávku do nástroje, kde nevíš, kdo má k datům přístup,
+- nabídni zákazníkovi alternativu: stručné shrnutí a odkazy,
+- pokud zazní citlivé informace, raději je do follow-upu nepřepisuj doslova.
+
+Privacy-first follow-up nemusí být přepis celé schůzky. Často stačí:
+
+- problém, který se řešil,
+- ukázaný scénář,
+- otevřené otázky,
+- domluvený další krok,
+- kdo je vlastník dalšího kroku,
+- datum, kdy se ozvete znovu.
+
+### Obchodní poznámky piš jako pracovní fakta
+
+CRM má pomoct obchodu, produktu a supportu, ne sbírat dojmy o lidech. Do obchodních poznámek patří informace, které mají jasný účel pro další krok.
+
+Patří tam:
+
+- segment a kontext firmy,
+- problém a současné řešení,
+- kritéria rozhodnutí,
+- technické nebo bezpečnostní požadavky,
+- námitky a otevřené otázky,
+- domluvený další krok,
+- důvod ztráty, pokud zákazník nepokračuje.
+
+Nepatří tam:
+
+- osobní poznámky bez obchodního účelu,
+- citlivé informace, které zákazník zmínil mimo téma,
+- spekulace o lidech v týmu,
+- interní drby,
+- celé přepisy schůzek jen proto, že to nástroj umí.
+
+Jedna dobrá CRM poznámka:
+
+„Servisní firma, 18 techniků, plánování dnes v Excelu a telefonu. Největší bolest: změny termínů se nedostanou včas k technikům. Úspěch pilotu: dispečer zvládne přesunout zakázku a technik vidí aktuální plán v mobilu. Otevřené: import zakázek z účetního systému. Další krok: poslat pilot kartu do pátku.“
+
+To je užitečné. „Volali jsme, vypadal nadšeně“ je nálada, ne informace.
+
+### Follow-up má uzavírat rozhodnutí
+
+Po demu neposílej obecné „děkujeme za čas, tady je prezentace“. Follow-up má pomoct rozhodnout, co dál.
+
+Struktura follow-upu:
+
+- jedna věta se shrnutím problému,
+- co demo ukázalo,
+- co zůstává otevřené,
+- doporučený další krok,
+- jasné datum nebo způsob ukončení.
+
+Příklad:
+
+„Díky za dnešní demo. Řešili jsme hlavně přesuny servisních výjezdů na poslední chvíli a ukázali jsme scénář dispečer -> technik -> zákazník. Otevřená je integrace s účetním systémem, kterou ověříme technicky před pilotem. Navrhuji další krok: 30min technická kontrola s vaším adminem a potom dvoutýdenní pilot na jednom regionu. Pokud to pro vás teď není priorita, stačí napsat a uzavřu to bez dalšího připomínání.“
+
+Poslední věta je důležitá. Respektuje člověka i inbox. A paradoxně zvyšuje důvěru, protože ukazuje, že neumíš jen tlačit, ale i férově skončit.
+
+### Demo by mělo živit produkt, ne jen pipeline
+
+Opakované otázky z dem jsou produktový signál. Pokud se každý druhý zákazník ptá na totéž, není to jen obchodní námitka. Může to být problém v onboardingu, pricingu, dokumentaci nebo samotném produktu.
+
+Jednou měsíčně projdi:
+
+- které otázky se opakovaly,
+- kde zákazníci nechápali hodnotu,
+- které části dema trvaly moc dlouho,
+- které bezpečnostní nebo privacy požadavky se vracely,
+- u kterých segmentů demo vedlo k dalšímu kroku,
+- kde se ukázalo, že produkt není dobrý fit.
+
+Výstupem nemá být padesát nových funkcí. Stačí jedna změna: upravit pricing stránku, doplnit bezpečnostní FAQ, přepsat onboardingový prázdný stav, připravit lepší demo data nebo přiznat na webu limit, který se stejně vždycky vysvětluje ručně.
+
+Codyho komentář: Nejlepší demo není to, po kterém zákazník řekne „pěkné“. Nejlepší demo je to, po kterém obě strany vědí, jestli pokračovat. Někdy je dobré demo i rychlé „ne“. Ušetřený čas je taky hodnota, jen nemá tak hezký graf.
+
+### Checklist: Demo bez nátlaku a datového chaosu
+
+- [ ] Před demem známe konkrétní problém, současné řešení a očekávaný výsledek.
+- [ ] Nevyžadujeme zbytečná osobní nebo obchodně citlivá data před prvním rozhovorem.
+- [ ] Demo má scénář podle práce zákazníka, ne podle struktury menu.
+- [ ] Používáme bezpečná demo data bez reálných osobních údajů.
+- [ ] Pokud se používají zákaznická data, je to řízený pilot s jasným účelem, retencí a smazáním.
+- [ ] Nahrávání schůzky je výjimka s jasným důvodem, ne automatický reflex.
+- [ ] CRM poznámky obsahují pracovní fakta, ne osobní dojmy bez účelu.
+- [ ] Follow-up shrnuje problém, ukázaný scénář, otevřené otázky a další krok.
+- [ ] Respektujeme odmítnutí a ukončujeme nerelevantní follow-up.
+- [ ] Opakované otázky z dem se jednou měsíčně promítají do produktu, dokumentace nebo webu.
+
+### Mini úkol
+
+Vezmi poslední tři prodejní dema nebo konzultace a vyplň tabulku:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jaký problém zákazník řešil? |  |
+| Jaký scénář jsme ukázali? |  |
+| Která otázka se opakovala? |  |
+| Kde jsme ukazovali zbytečně moc funkcí? |  |
+| Jaká data jsme sbírali předem a šla by omezit? |  |
+| Použili jsme bezpečná demo data? |  |
+| Byl follow-up jasný a uzavíral další krok? |  |
+| Jakou jednu změnu uděláme před dalším demem? |  |
+
+Potom uprav jednu věc: napiš kratší před-demo otázku, připrav lepší demo dataset, přepiš follow-up šablonu nebo smaž z CRM pole, které nemá jasný účel. Demo proces se zlepší tehdy, když každá schůzka trochu zrychlí další rozhodnutí.
+
 ## Zdroje
 
 - EUR-Lex: Regulation (EU) 2016/679, GDPR Article 30 - právní text k záznamům o činnostech zpracování pro správce a zpracovatele: https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng
@@ -9762,6 +9942,7 @@ Začni jednou kartou. Když bude užitečná, přidej další. Když nebude, nez
 
 ## Pracovní log
 
+- 2026-07-12: Doplněna příloha o prodejním demu bez nátlaku a datového chaosu: kvalifikace před demem, scénář podle zákaznického problému, bezpečná demo data, opatrné nahrávání, CRM poznámky, follow-up, produktové učení z opakovaných otázek, checklist a mini úkol.
 - 2026-07-12: Doplněna příloha o SLO a provozní odpovědnosti bez enterprise divadla: uživatelské schopnosti, SLI/SLO/SLA, percentily, alerty podle dopadu, SLA kontrola, provozní review, checklist a mini úkol; ověřeny a doplněny zdroje Google SRE Book a SRE Workbook k SLO, monitoringu a alertingu.
 - 2026-07-12: Doplněna příloha o předání webu nebo SaaS projektu bez rukojmí: provozní balík, vlastnictví účtů, role a přístupy, datová mapa, předvedení deploymentu, oddělení předání od podpory, checklist a mini úkol.
 - 2026-07-12: Doplněna příloha o záznamu o činnostech zpracování bez tabulky pro tabulku: procesní pohled místo databázových tabulek, karta činnosti, rozlišení rolí správce/zpracovatele, vazba na retenci, release proces, nákup nástrojů, čitelnost pro tým, checklist a mini úkol; ověřen a doplněn zdroj EUR-Lex k GDPR článku 30.
