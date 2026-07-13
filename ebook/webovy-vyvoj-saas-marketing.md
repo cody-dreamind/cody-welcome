@@ -10050,8 +10050,218 @@ Vezmi poslední report, který tým poslal klientovi, partnerovi, vedení nebo i
 
 Potom uprav šablonu reportu: smaž jednu nepoužívanou metriku, přidej sekci „co uděláme dál“ a nastav pravidlo, že surové exporty se neposílají jako výchozí příloha. Malá změna, velký rozdíl. Report má být kompas, ne skladiště.
 
+## Příloha: Doménová hygiena bez křehkého provozu
+
+Doména je malý řádek v registru, který drží pohromadě web, e-mail, přihlášení, fakturaci, dokumentaci, integrace a důvěru zákazníků. Přesto se k ní v malých týmech často přistupuje jako k něčemu, co „někdo kdysi koupil“. To je přesně ta věta, která jednou spustí páteční večer plný paniky.
+
+Doménová hygiena není jen DNS tabulka. Je to provozní disciplína: vlastnictví, přístupy, obnova, e-mailová reputace, bezpečné přesměrování, subdomény, certifikáty, hlavičky a jasný postup při změně dodavatele.
+
+> Codyho komentář: Doména je jeden z nejlevnějších assetů firmy a zároveň jeden z nejdražších, když se ztratí. Pokud stojí produkt na `example.com`, nechovej se k ní jako k účtence za toner.
+
+### Začni vlastnictvím, ne DNS záznamy
+
+První otázka není „jaký máme A record“. První otázka je: kdo doménu právně a provozně ovládá?
+
+U každé důležité domény si napiš:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Kdo je registrant nebo vlastník účtu u registrátora? |  |
+| Jaký e-mail dostává renewal a bezpečnostní notifikace? |  |
+| Je účet chráněný MFA? |  |
+| Kdo má administrátorský přístup? |  |
+| Kdy doména expiruje? |  |
+| Je zapnuté automatické obnovení a je platební metoda aktuální? |  |
+| Kde je nouzový postup pro převod nebo obnovu? |  |
+
+ICANN upozorňuje, že doména je registrovaná jen na zvolené období a pokud ji neobnovíš, můžeš o ni dočasně nebo i trvale přijít. To není teoretická poznámka pro právníky. Pro SaaS to znamená výpadek webu, e-mailu, webhooků, OAuth redirectů a důvěry.
+
+Praktické minimum:
+
+- nepoužívej osobní e-mail zakladatele jako jediný registrátorský kontakt,
+- nastav renewal notifikace do sdílené schránky nebo provozního aliasu,
+- zapni MFA u registrátora i DNS poskytovatele,
+- drž doménu v účtu, který patří firmě, ne dodavateli,
+- expiraci domény dej do provozního kalendáře stejně jako certifikáty a důležité smlouvy.
+
+### DNS změny dělej jako release
+
+DNS změna vypadá malá, ale může rozbít hodně věcí najednou. Změna MX záznamu může odříznout e-mail. Špatný CNAME může znefunkčnit aplikaci. Zapomenutá subdoména může ukazovat na službu, která už nikomu nepatří.
+
+Každou netriviální DNS změnu proto ber jako malý release:
+
+1. Popiš účel změny jednou větou.
+2. Zapiš aktuální stav záznamů před úpravou.
+3. Urči, koho změna ovlivní: web, e-mail, API, zákaznické domény, interní nástroje.
+4. Připrav návratový krok.
+5. Proveď změnu v době, kdy ji někdo může ověřit.
+6. Po změně otestuj skutečné chování, ne jen to, že záznam vypadá hezky v administraci.
+
+Příklad karty změny:
+
+| Pole | Příklad |
+| --- | --- |
+| Účel | Přesun `docs.example.com` na nový evropský hosting |
+| Dotčené služby | Dokumentace, odkazy z aplikace, sitemap |
+| Riziko | Chybné CNAME nebo certifikát způsobí nedostupnost dokumentace |
+| Před změnou | Export DNS záznamů a screenshot konfigurace |
+| Návrat | Vrátit původní CNAME, ověřit certifikát |
+| Ověření | `curl`, prohlížeč, interní odkazy, monitoring |
+
+Ano, je to byrokracie. Ale taková ta užitečná, co stojí pět minut a šetří půl dne hledání, proč nechodí e-maily.
+
+### E-mailová autentizace chrání značku i zákazníky
+
+Pokud z domény posíláš e-maily, potřebuješ řešit autentizaci. Ne kvůli tabulce v auditu, ale proto, že zákazník má poznat, jestli zpráva opravdu přišla od tebe.
+
+Základní trojice:
+
+- SPF říká, které servery smí posílat e-mail za doménu.
+- DKIM podepisuje zprávy a pomáhá ověřit jejich integritu.
+- DMARC říká příjemcům, jak zacházet se zprávami, které neprojdou ověřením, a umožňuje reportování.
+
+IETF popisuje DMARC jako mechanismus, kterým vlastník domény vyjadřuje politiku a preference pro validaci a zpracování zpráv. Prakticky: doména by neměla mlčet, když někdo posílá podvržené e-maily jejím jménem.
+
+Rozumný postup pro malý tým:
+
+1. Seznam všechny systémy, které posílají e-mail za doménu: produkt, fakturace, support, CRM, marketing, monitoring.
+2. Zkontroluj SPF, aby obsahoval jen skutečné odesílací služby.
+3. Zapni DKIM u každého legitimního odesílatele.
+4. Nastav DMARC nejdřív opatrně s reportováním.
+5. Sleduj, kdo se za doménu pokouší posílat.
+6. Po vyčištění legitimních odesílatelů zpřísňuj politiku.
+
+Privacy-first poznámka: DMARC reporty a logy doručitelnosti mohou obsahovat provozní metadata. Neházej je bez rozmyslu do cizího nástroje jen proto, že má barevný dashboard. Vyber provoz s jasnou retencí, omezenými přístupy a ideálně evropským zpracováním.
+
+### Subdomény mají mít vlastníka
+
+Subdoména bez vlastníka je budoucí archeologická vykopávka. `old-demo`, `staging2`, `campaign-2023`, `client-test`, `beta-app` a podobné klenoty často přežijí svůj účel o roky.
+
+U každé subdomény si drž jednoduchý inventář:
+
+| Subdoména | Účel | Služba | Vlastník | Citlivost | Konec životnosti |
+| --- | --- | --- | --- | --- | --- |
+| `app.example.com` | Produkční aplikace | EU hosting | Produkt | Vysoká | Aktivní |
+| `docs.example.com` | Veřejná dokumentace | CMS | Produkt marketing | Nízká | Aktivní |
+| `pilot.example.com` | Časově omezený pilot | Staging | Sales/product | Střední | 2026-09-30 |
+
+Když subdoména nemá účel, vlastníka ani konec životnosti, je kandidát na odstranění. Před smazáním ověř:
+
+- jestli na ni nevedou veřejné odkazy,
+- jestli ji nepoužívá aplikace, webhook nebo OAuth redirect,
+- jestli neexistují zákaznické materiály s danou URL,
+- jestli DNS záznam neukazuje na službu, kterou už neovládáš.
+
+Toto je privacy-first i bezpečnostní věc. Starý staging s reálnými daty, zapomenutou basic auth a indexovatelnou URL není „interní drobnost“. Je to pozvánka na problém s mašlí.
+
+### Přesměrování a kanonické URL drž čisté
+
+Doména má být pro lidi i vyhledávače předvídatelná. Pokud existuje `www`, bez `www`, staré slugy, jazykové varianty a kampaně, potřebuješ jasnou mapu přesměrování.
+
+Pravidla:
+
+- vyber jednu kanonickou variantu domény,
+- staré důležité URL přesměruj na nejbližší relevantní novou URL, ne vždy na homepage,
+- nepoužívej řetězy pěti redirectů,
+- po migraci zkontroluj sitemapu, canonical tagy a interní odkazy,
+- u krátkodobých kampaní předem rozhodni, co se stane po jejich konci.
+
+Příklad:
+
+| Starý stav | Lepší stav |
+| --- | --- |
+| `/lp/ai-2025` po kampani vrací 404 | Přesměrování na aktuální stránku služby nebo archiv kampaně |
+| `www` i non-`www` běží paralelně bez canonical | Jedna varianta jako hlavní, druhá trvale přesměruje |
+| Blogové články mění slug bez mapy | Slug se nemění, nebo má explicitní redirect |
+
+Čistá URL struktura není jen SEO. Je to důvěra. Když zákazník otevře odkaz z faktury, dokumentace nebo starého e-mailu a dostane rozumný obsah, produkt působí stabilně.
+
+### Bezpečnostní hlavičky ověřuj jako provozní kontrolu
+
+HTTP bezpečnostní hlavičky nejsou všelék, ale patří mezi levné obranné vrstvy. OWASP má k nim praktický cheat sheet a MDN HTTP Observatory umí automaticky zkontrolovat běžné konfigurace.
+
+Pro web nebo SaaS si hlídej hlavně:
+
+- HTTPS všude,
+- HSTS tam, kde rozumíš dopadu a máš stabilní HTTPS,
+- rozumnou Content Security Policy,
+- omezení vkládání do cizích rámců,
+- Referrer-Policy,
+- bezpečné zacházení s cookies,
+- minimální únik technických detailů v hlavičkách.
+
+Nedělej z toho slepé sbírání skóre. Cílem není mít hezké písmeno v nástroji a rozbít aplikaci. Cílem je pochopit, které hlavičky dávají smysl pro konkrétní web, zavést je postupně a otestovat hlavní uživatelské cesty.
+
+Praktický rytmus:
+
+- po velké změně frontendu spusť kontrolu hlaviček,
+- po změně hostingu ověř HTTPS, HSTS a redirecty,
+- po přidání externího embed obsahu zkontroluj CSP,
+- jednou za kvartál udělej krátký audit produkčních domén.
+
+### Doménová dokumentace má být krátká
+
+Doménová dokumentace nemusí být román. Stačí jedna stránka, která odpoví na otázku: „Když se něco rozbije, kdo ví co dělat?“
+
+Šablona:
+
+| Sekce | Co obsahuje |
+| --- | --- |
+| Domény | Seznam produkčních, marketingových a technických domén |
+| Vlastnictví | Registrátor, účet, odpovědný vlastník |
+| DNS | DNS poskytovatel, odkaz na administraci, pravidlo pro změny |
+| E-mail | Odesílací služby, SPF/DKIM/DMARC stav |
+| Subdomény | Účel, vlastník, konec životnosti |
+| Redirecty | Kanonická doména, důležité staré URL |
+| Kontroly | Renewal, hlavičky, certifikáty, monitoring |
+| Nouze | Koho kontaktovat a jak vrátit poslední změnu |
+
+Tuhle stránku drž mimo veřejný web, ale tak, aby ji našel tým, který řeší provoz. Dokument, který zná jen jeden člověk a leží v jeho soukromém disku, je skoro jako žádný dokument. Jen s lepším fontem.
+
+### Checklist: Doména, DNS a e-mail bez křehkého místa
+
+- [ ] Firemní domény jsou v účtu, který ovládá firma.
+- [ ] Registrátor a DNS poskytovatel mají zapnuté MFA.
+- [ ] Renewal notifikace chodí na provozní nebo sdílený kontakt.
+- [ ] Expirace domén je v provozním kalendáři.
+- [ ] DNS změny mají účel, návratový krok a ověření.
+- [ ] Existuje inventář produkčních subdomén.
+- [ ] Staré a dočasné subdomény mají vlastníka nebo plán odstranění.
+- [ ] E-mailové odesílací služby jsou zdokumentované.
+- [ ] SPF, DKIM a DMARC odpovídají skutečným odesílatelům.
+- [ ] DMARC reporty a doručitelnostní data mají jasnou retenci a přístupy.
+- [ ] Kanonická doména, redirecty a důležité staré URL jsou zkontrolované.
+- [ ] Bezpečnostní hlavičky jsou ověřené po změně hostingu nebo frontendu.
+- [ ] Doménová dokumentace má vlastníka a nouzový postup.
+
+### Mini úkol
+
+Vyber jednu hlavní doménu produktu nebo firmy a udělej třicetiminutový audit:
+
+| Kontrola | Stav |
+| --- | --- |
+| Kdo vlastní registrátorský účet? |  |
+| Kdy doména expiruje? |  |
+| Kam chodí renewal upozornění? |  |
+| Je zapnuté MFA? |  |
+| Kdo smí měnit DNS? |  |
+| Kolik existuje produkčních subdomén? |  |
+| Které subdomény jsou dočasné nebo podezřele staré? |  |
+| Které služby posílají e-mail za doménu? |  |
+| Je nastavené SPF, DKIM a DMARC? |  |
+| Existuje návratový postup pro poslední DNS změnu? |  |
+
+Na konci neplánuj velký bezpečnostní program. Udělej jednu konkrétní opravu: zapni MFA, oprav renewal kontakt, smaž mrtvou subdoménu, zdokumentuj odesílatele e-mailů nebo založ jednoduchou doménovou kartu. Doménová hygiena se nevyhrává jedním heroickým auditem. Vyhrává se tím, že se nezanedbávají nudné věci.
+
 ## Zdroje
 
+- ICANN: Information for Domain Name Registrants - práva a odpovědnosti držitelů domén včetně správy, obnovy a převodu doménové registrace: https://www.icann.org/registrants
+- ICANN: Renewing Domain Names - vysvětlení obnovy domén, rizika expirace a nutnosti držet registraci aktivní: https://www.icann.org/resources/pages/renew-domain-name-2018-12-07-en
+- IETF RFC 7208: Sender Policy Framework (SPF) - specifikace mechanismu SPF pro autorizaci odesílacích serverů domény: https://www.rfc-editor.org/info/rfc7208
+- IETF RFC 6376: DomainKeys Identified Mail (DKIM) Signatures - specifikace DKIM podpisů pro ověřování e-mailových zpráv: https://www.rfc-editor.org/info/rfc6376
+- IETF RFC 9989: Domain-Based Message Authentication, Reporting, and Conformance (DMARC) - aktuální standardní specifikace DMARC protokolu pro ověřování domén v e-mailu: https://www.rfc-editor.org/info/rfc9989/
+- OWASP Cheat Sheet Series: HTTP Security Response Headers Cheat Sheet - praktická doporučení k bezpečnostním HTTP hlavičkám: https://cheatsheetseries.owasp.org/cheatsheets/HTTP_Headers_Cheat_Sheet.html
+- MDN Web Docs: HTTP Observatory - nástroj pro automatickou kontrolu HTTP hlaviček a bezpečnostních konfigurací webu: https://developer.mozilla.org/en-US/observatory
 - EUR-Lex: Regulation (EU) 2016/679, GDPR Article 30 - právní text k záznamům o činnostech zpracování pro správce a zpracovatele: https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng
 - Google SRE Book: Service Level Objectives - vysvětlení rozdílu mezi SLI, SLO a SLA, volby ukazatelů, percentilů a error budgetu: https://sre.google/sre-book/service-level-objectives/
 - Google SRE Book: Monitoring Distributed Systems - praktický přehled monitoringu distribuovaných služeb a čtyř základních signálů latence, provozu, chyb a saturace: https://sre.google/sre-book/monitoring-distributed-systems/
@@ -10141,6 +10351,7 @@ Potom uprav šablonu reportu: smaž jednu nepoužívanou metriku, přidej sekci 
 
 ## Pracovní log
 
+- 2026-07-13: Doplněna příloha o doménové hygieně bez křehkého provozu: vlastnictví domény, renewal, MFA, DNS změny jako release, e-mailová autentizace SPF/DKIM/DMARC, inventář subdomén, redirecty, bezpečnostní hlavičky, krátká doménová dokumentace, checklist a mini úkol; ověřeny a doplněny zdroje ICANN, IETF RFC 7208/6376/9989, OWASP a MDN.
 - 2026-07-12: Doplněna příloha o reportingu bez datového exhibicionismu: rozhodovací účel reportu, agregace místo surových exportů, redigování screenshotů, opatrné používání jmen zákazníků, oddělení interní/klientské/veřejné verze, reporting cadence, checklist a mini úkol; ověřeny a doplněny zdroje Evropské komise a EDPB k principům GDPR, osobním údajům, pseudonymizaci a anonymizaci.
 - 2026-07-12: Doplněna příloha o prodejním demu bez nátlaku a datového chaosu: kvalifikace před demem, scénář podle zákaznického problému, bezpečná demo data, opatrné nahrávání, CRM poznámky, follow-up, produktové učení z opakovaných otázek, checklist a mini úkol.
 - 2026-07-12: Doplněna příloha o SLO a provozní odpovědnosti bez enterprise divadla: uživatelské schopnosti, SLI/SLO/SLA, percentily, alerty podle dopadu, SLA kontrola, provozní review, checklist a mini úkol; ověřeny a doplněny zdroje Google SRE Book a SRE Workbook k SLO, monitoringu a alertingu.
