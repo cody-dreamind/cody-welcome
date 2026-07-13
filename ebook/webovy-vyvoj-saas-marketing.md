@@ -14000,6 +14000,188 @@ Vyber jednu aktuální nebo nedávnou spolupráci s externistou a vyplň kartu:
 
 Potom udělej jednu konkrétní věc: odeber starý přístup, vytvoř role místo sdíleného účtu, přepiš zadání pro dodavatele, přesuň práci na staging, nastav expiraci tokenu nebo doplň offboarding checklist do šablony projektu. Externí spolupráce má firmu zrychlit. Nemá z ní udělat průchozí nádraží pro data.
 
+## Příloha: Klientské schvalování změn bez nekonečného kolečka
+
+Klientské schvalování webu, kampaně nebo SaaS změny umí být tichý zabiják tempa. Ne proto, že by klienti byli problém. Problém je většinou systém: nejasný rozsah, komentáře v pěti kanálech, screenshoty bez kontextu, změny bez vlastníka a věta „ještě drobnost“ použitá jako univerzální zaklínadlo pro další týden práce.
+
+Privacy-first přístup ke schvalování znamená dvě věci najednou: chránit data a chránit rozhodnutí. Klient má vidět přesně to, co potřebuje pro schválení, ne interní zákulisí, produkční exporty, citlivé poznámky nebo celé backlogové drama.
+
+Špatná otázka zní: „Kdo všechno se k tomu chce vyjádřit?“
+
+Lepší otázka zní: „Kdo může schválit konkrétní rozhodnutí a podle jakých kritérií poznáme, že je hotovo?“
+
+### Schvalování začíná definicí hotovo
+
+Bez definice hotovo se feedback mění v nekonečnou mlhu. Každý má jiný pocit, co se vlastně schvaluje: text, design, funkce, právní formulace, technické chování, SEO metadata, měření, nebo jen celkový dojem. A celkový dojem je krásná věc, dokud podle něj nemáš uzavřít release.
+
+Před posláním práce klientovi napiš krátkou schvalovací větu:
+
+„Schvalujeme ___ podle kritérií ___, mimo rozsah je ___.“
+
+Příklady:
+
+- „Schvalujeme text a strukturu landing page podle srozumitelnosti nabídky, CTA a faktické přesnosti; mimo rozsah je kompletní redesign značky.“
+- „Schvalujeme onboardingový flow podle toho, jestli nový admin vytvoří workspace a pozve prvního kolegu; mimo rozsah jsou billing obrazovky.“
+- „Schvalujeme případovou studii podle věcné přesnosti, schválených citací a bezpečnosti zveřejněných detailů; mimo rozsah jsou nové obchodní claimy.“
+
+Tato věta není formalita. Je to zábradlí. Bez ní se i dobrý feedback rozlije do všech směrů a tým pak hrdinně optimalizuje věci, které nikdo neobjednal.
+
+### Odděl typy připomínek
+
+Ne každá připomínka má stejnou váhu. Když klient napíše „nelíbí se mi to“, tým často začne hádat, jestli jde o blocker, preferenci, právní riziko nebo jen rychlou reakci mezi schůzkami. Lepší je nabídnout jednoduché kategorie.
+
+| Typ připomínky | Co znamená | Příklad |
+| --- | --- | --- |
+| Blokující | Bez opravy nelze publikovat nebo nasadit | Chybné tvrzení, právní problém, nefunkční formulář |
+| Věcná | Zlepšuje přesnost nebo použitelnost | Upravit popis segmentu, doplnit chybějící krok |
+| Preferenční | Vkus nebo styl bez zásadního dopadu | Jiný obrat v textu, jemnější vizuální varianta |
+| Nový požadavek | Není součástí schvalovaného rozsahu | Přidat kalkulačku, integraci, novou sekci |
+| Otázka | Potřebuje vysvětlení před rozhodnutím | Proč měříme právě tento signál? |
+
+Klientovi můžeš poslat krátké pravidlo:
+
+„Prosím označte připomínky jako blokující, věcné, preferenční, nový požadavek nebo otázka. Blokující opravíme před vydáním, nové požadavky dáme do dalšího rozhodnutí.“
+
+Ano, je to trochu suché. Ale suché procesy jsou někdy to, co brání mokrému požáru.
+
+### Jeden kanál, jeden vlastník, jedna verze pravdy
+
+Schvalování přes e-mail, chat, komentáře ve Figma souboru, Google dokument, telefonát a poznámku ze schůzky je recept na archeologii. Po třech dnech nikdo neví, která připomínka platí, kdo ji uzavřel a jestli je screenshot ještě aktuální.
+
+Praktické minimum:
+
+- jeden hlavní kanál pro komentáře,
+- jeden vlastník na straně dodavatele,
+- jeden vlastník na straně klienta,
+- jedna schvalovaná URL, dokument nebo návrh,
+- jasné datum uzávěrky feedbacku,
+- stručný seznam rozhodnutí po každém kole.
+
+U webu nebo SaaS změny je ideální posílat preview URL nebo staging prostředí s demo daty. Pokud posíláš screenshoty, vždy přidej odkaz na verzi, datum a co přesně se má hodnotit. Screenshot bez verze je časová kapsle bez víka.
+
+### Neposílej citlivá data jako důkaz
+
+Klient často potřebuje schválit, jak změna vypadá na reálném příkladu. To neznamená, že mu máš poslat produkční export, screenshot zákaznického účtu nebo interní support ticket s osobními údaji.
+
+Privacy-first schvalování používá bezpečné podklady:
+
+- demo účet s realistickými, ale vymyšlenými daty,
+- anonymizované scénáře,
+- redigované screenshoty,
+- agregované metriky,
+- citace schválené pro konkrétní použití,
+- testovací dokumenty bez osobních údajů,
+- preview prostředí oddělené od produkce.
+
+Pokud se produkční data opravdu použít musí, popiš výjimku:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Proč demo data nestačí? |  |
+| Jaký nejmenší rozsah produkčních dat je nutný? |  |
+| Která pole se odstraní nebo začerní? |  |
+| Kdo data uvidí? |  |
+| Kde budou uložena? |  |
+| Kdy a jak se smažou? |  |
+
+Tento krok je zvlášť důležitý u případových studií, administrací, CRM obrazovek, billing změn, supportních scénářů a produktových exportů. Data, která jednou odejdou do schvalovacího kolečka, se umí rozmnožovat pozoruhodně kreativně. A ne, přiložený screenshot v desáté odpovědi e-mailového vlákna není bezpečný archiv.
+
+### Feedback sbírej podle rozhodnutí, ne podle obrazovek
+
+Komentáře typu „posunout o kousek“, „větší logo“, „jiný nadpis“ mohou být užitečné, ale často zakrývají skutečnou otázku. Lepší je vést feedback podle rozhodnutí, která má klient udělat.
+
+Příklad pro landing page:
+
+| Rozhodnutí | Kontrolní otázka |
+| --- | --- |
+| Segment | Pozná správný návštěvník, že je stránka pro něj? |
+| Hodnota | Je jasné, jaký výsledek nabízíme? |
+| Důkaz | Je reference nebo ukázka pravdivá a bezpečně zveřejnitelná? |
+| Další krok | Je CTA konkrétní a férové? |
+| Data | Sbírá formulář jen nutná pole? |
+| Měření | Měříme jen signály potřebné pro rozhodnutí? |
+
+Příklad pro SaaS funkci:
+
+| Rozhodnutí | Kontrolní otázka |
+| --- | --- |
+| První hodnota | Dostane se uživatel k výsledku bez zbytečného kroku? |
+| Práva | Vidí uživatel jen data, která má vidět? |
+| Chybové stavy | Umí rozhraní vysvětlit, co se stalo a co dál? |
+| Export | Je jasné, co export obsahuje a kdo ho smí stáhnout? |
+| Logování | Nezapisujeme do logů citlivý obsah? |
+| Dokumentace | Ví support a klient, jak změnu používat? |
+
+Tím se diskuse posune od pocitu k účelu. Ne vždy to odstraní subjektivní debatu. Ale aspoň ji posadí na židli a dá jí jmenovku.
+
+### Nové požadavky patří do backlogu, ne do schválení
+
+Během schvalování se často objeví dobré nápady. To je v pořádku. Problém nastane, když se každý dobrý nápad automaticky tváří jako součást aktuální dodávky.
+
+Používej jednoduché pravidlo:
+
+- chyba v domluveném rozsahu: opravit před schválením,
+- nejasnost v domluveném rozsahu: rozhodnout s vlastníkem,
+- nový nápad: zapsat do backlogu s odhadem dopadu,
+- riziko pro data nebo práva uživatelů: zastavit release, dokud není jasné řešení,
+- preferenční drobnost bez dopadu: sloučit do jednoho malého kola, ne řešit po kapkách.
+
+Praktická odpověď:
+
+„Tohle je dobrý nápad, ale není součástí aktuálního schvalování. Zapisuju ho jako samostatnou položku: přidat porovnávací tabulku plánů. Teď uzavíráme text a formulář pro první verzi.“
+
+Codyho komentář: Scope creep málokdy přijde s cedulí „pozor, jdu zdražit projekt“. Většinou přijde jako nevinná věta „a šlo by ještě“. Ano, šlo. Otázka je, jestli teď.
+
+### Uzavření kola napiš písemně
+
+Po každém kole feedbacku pošli krátké shrnutí:
+
+- co bylo schváleno,
+- co se opraví před vydáním,
+- co jde do backlogu,
+- co zůstává mimo rozsah,
+- kdo má poslední schvalovací slovo,
+- kdy proběhne další kontrola nebo release.
+
+Příklad:
+
+„Schválená je struktura landing page a primární CTA. Před publikací opravíme dvě věcné formulace a zkrátíme formulář o telefon. Návrh kalkulačky dáváme do backlogu jako samostatný úkol. Publikační kontrola proběhne ve čtvrtek na staging URL s demo daty.“
+
+Tohle shrnutí chrání obě strany. Klient ví, co dostane. Tým ví, co má dokončit. Budoucí já ví, proč se něco rozhodlo. Budoucí já obvykle děkuje potichu, protože má zrovna moc práce.
+
+### Checklist: Klientské schvalování privacy-first
+
+- [ ] Každé schvalování má jednu větu „co schvalujeme a co je mimo rozsah“.
+- [ ] Existuje jeden hlavní kanál pro připomínky.
+- [ ] Na straně klienta i dodavatele je jasný vlastník rozhodnutí.
+- [ ] Připomínky se třídí na blokující, věcné, preferenční, nové požadavky a otázky.
+- [ ] Preview nebo staging používá demo data, ne produkční zákaznické údaje.
+- [ ] Screenshoty jsou redigované a označené verzí nebo datem.
+- [ ] Produkční data se pro schválení používají jen jako výjimka s popsaným rozsahem a smazáním.
+- [ ] Feedback se vztahuje k rozhodnutím, ne jen k pocitům z jednotlivých obrazovek.
+- [ ] Nové požadavky se zapisují do backlogu a nemíchají se potichu do aktuální dodávky.
+- [ ] Po každém kole existuje stručné písemné shrnutí rozhodnutí.
+- [ ] Před releasem je jasné, kdo dal finální souhlas.
+- [ ] Po vydání se uloží schválená verze, datum a seznam otevřených navazujících úkolů.
+
+### Mini úkol
+
+Vezmi jednu rozpracovanou změnu, která čeká na klienta nebo interního schvalovatele, a vyplň kartu:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Co přesně se schvaluje? |  |
+| Co je mimo rozsah tohoto kola? |  |
+| Kdo má finální schvalovací slovo? |  |
+| Kde se sbírá feedback? |  |
+| Jaké jsou blokující kritéria? |  |
+| Jaké podklady obsahují osobní nebo citlivá data? |  |
+| Jak je nahradíme demo daty, anonymizací nebo redakcí? |  |
+| Které nové nápady patří do backlogu? |  |
+| Jaká věta uzavře aktuální kolo? |  |
+
+Potom udělej jednu konkrétní opravu: napiš schvalovací větu, přesuň komentáře do jednoho kanálu, začerni citlivý screenshot, založ backlog položku pro nový požadavek nebo pošli shrnutí, co je schválené. Schvalování nemá být test trpělivosti. Má být mechanismus, který pomůže dobré práci bezpečně ven.
+
 ## Zdroje
 
 - ICANN: Information for Domain Name Registrants - práva a odpovědnosti držitelů domén včetně správy, obnovy a převodu doménové registrace: https://www.icann.org/registrants
@@ -14119,6 +14301,7 @@ Potom udělej jednu konkrétní věc: odeber starý přístup, vytvoř role mís
 
 ## Pracovní log
 
+- 2026-07-13: Doplněna příloha o klientském schvalování změn bez nekonečného kolečka: definice hotovo, typy připomínek, jeden kanál a vlastník, bezpečné preview bez produkčních dat, feedback podle rozhodnutí, oddělení nových požadavků od aktuální dodávky, písemné uzavření kola, checklist a mini úkol.
 - 2026-07-13: Doplněna příloha o externí spolupráci bez předání klíčů od provozu: zadání před přístupem, role externistů, staging a demo data jako výchozí stav, bezpečné předávání secrets, smluvní a datová kontrolní karta, auditní stopa změn, offboarding dodavatelů, checklist a mini úkol; navázáno na existující zdroje Evropské komise, GDPR článku 28, SCC a OWASP Secrets Management.
 - 2026-07-13: Doplněna příloha o referencích a případových studiích bez úniku důvěry: účel důkazu, karta schválení reference, anonymizované case studies, kontext čísel, bezpečné screenshoty, schvalování citací, struktura případové studie, revize, checklist a mini úkol.
 - 2026-07-13: Doplněna příloha o open-source závislostech bez supply-chain chaosu: důvod závislosti, rozlišení runtime/build/dev rizika, karta významné knihovny, licence, rytmus aktualizací, klientský bundle jako privacy a výkonový dopad, checklist a mini úkol; navázáno na existující zdroje OWASP SCVS, GitHub Docs, npm Docs, OpenSSF, SPDX a OSI.
