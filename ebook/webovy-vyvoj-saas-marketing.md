@@ -10873,6 +10873,178 @@ Vyber jeden produkt, službu nebo aktuální marketingovou kampaň a vyplň prac
 
 Potom udělej jednu konkrétní úpravu: přepiš segmentační větu, zkrať poptávkový formulář, doplň negativní ICP do sales poznámek, uprav demo scénář pro nejlepší segment nebo smaž obohacovací pole, které nikdo neumí obhájit. Segmentace má zostřit hodnotu, ne rozšířit sběr dat.
 
+## Příloha: Uživatelský výzkum bez nahrávacího vysavače
+
+Uživatelský výzkum nemusí znamenat hodiny nahrávek, přepisy plné osobních údajů a složku s názvem „research“, do které se po měsíci nikdo nevrátí. V malém SaaS týmu je výzkum hlavně pracovní způsob, jak přestat hádat: proč člověk přišel, kde se zasekl, co dělá dnes místo produktu a jak pozná, že se mu vyplatí změnit návyk.
+
+Privacy-first výzkum má jednoduché pravidlo: ptej se na realitu, zapisuj jen to, co potřebuješ pro rozhodnutí, a nezacházej s rozhovorem jako s povolením uložit celý život respondenta.
+
+Špatná otázka zní: „Jak získáme co nejvíc insightů?“
+
+Lepší otázka zní: „Jaké rozhodnutí potřebujeme udělat a jaký nejmenší výzkum nám sníží nejistotu?“
+
+Codyho komentář: Nahrávka rozhovoru je pohodlná, protože slibuje, že nic neztratíš. Jenže často neztratíš ani věci, které jsi nikdy nepotřeboval držet. Pohodlí bez retence je jen datový batoh s dírou.
+
+### Začni rozhodnutím, ne scénářem rozhovoru
+
+Než pozveš člověka na hovor, napiš jednu větu:
+
+„Potřebujeme rozhodnout ___ a rozhovor má ověřit ___.“
+
+Příklady:
+
+- „Potřebujeme rozhodnout, jestli zkrátit registraci, a rozhovor má ověřit, které údaje uživatel považuje před první hodnotou za zbytečné.“
+- „Potřebujeme rozhodnout, jestli pricing rozdělit podle workspace nebo uživatelů, a rozhovor má ověřit, jak zákazník přemýšlí o růstu týmu.“
+- „Potřebujeme rozhodnout, jestli napsat další článek o migraci analytiky, a rozhovor má ověřit, jaké otázky tým řeší před odchodem od starého nástroje.“
+
+Bez této věty snadno vznikne příjemný rozhovor, po kterém má tým hodně poznámek a málo rozhodnutí. To je lepší než nic, ale horší než výzkum, který přímo odblokuje produktovou práci.
+
+### Ptej se na minulé chování
+
+Lidé umí skvěle popsat, co by možná dělali v ideálním světě. Produkt ale žije v neideálním světě, kde jsou termíny, staré nástroje, interní schvalování, rozpočty a únava. Proto se ptej na konkrétní poslední situaci.
+
+Dobré otázky:
+
+- Kdy jste tento problém řešili naposledy?
+- Co jste udělali jako první?
+- Kdo další do toho vstoupil?
+- Co vás zdrželo?
+- Jaký workaround používáte dnes?
+- Co jste zkoušeli předtím a proč to nestačilo?
+- Která informace vám chyběla pro rozhodnutí?
+
+Slabší otázky:
+
+- Líbila by se vám taková funkce?
+- Používali byste to každý týden?
+- Kolik byste za to zaplatili, kdyby to bylo perfektní?
+- Co všechno by produkt měl umět?
+
+To neznamená, že se nikdy nesmíš ptát na budoucnost. Jen ji neber jako důkaz. Věta „to bychom určitě používali“ je hypotéza. Věta „minulý pátek jsme tři hodiny ručně skládali report pro vedení“ je signál.
+
+### Nahrávej jen s důvodem
+
+Nahrávka může být užitečná, když potřebuješ přesnou citaci, složitý průběh úkolu, sdílení s týmem nebo kontrolu interpretace. Nemá být výchozí reflex.
+
+Před nahráváním si odpověz:
+
+| Otázka | Praktická odpověď |
+| --- | --- |
+| Proč nahrávku potřebujeme? | přesná citace, sdílení s výzkumným týmem, pozdější analýza |
+| Co v ní může být citlivé? | jména klientů, interní proces, obrazovka, obchodní čísla |
+| Kdo ji uvidí? | jen lidé zapojení do rozhodnutí |
+| Jak dlouho ji budeme držet? | konkrétní datum smazání |
+| Stačí místo ní poznámky? | pokud ano, nenahrávat |
+
+Když nahráváš, řekni to jasně předem. Vysvětli účel, kdo se k záznamu dostane a kdy se smaže. Pokud člověk nahrávání odmítne, rozhovor má pořád hodnotu. Jen si dělej lepší poznámky. Ano, tužka a mozek jsou pořád podporované technologie.
+
+### Poznámky piš jako rozhodovací materiál
+
+Neukládej všechno, co člověk řekl. Ukládej to, co pomáhá rozhodnutí.
+
+Dobrá výzkumná poznámka:
+
+| Pole | Co zapsat |
+| --- | --- |
+| Kontext | role respondenta, segment, relevantní situace |
+| Poslední případ | kdy problém nastal a co se dělo |
+| Současné řešení | nástroje, workaroundy, lidé v procesu |
+| Dopad | čas, peníze, riziko, frustrace, zpoždění |
+| Citace | jedna věta, která vystihuje problém |
+| Signál | co to znamená pro aktuální rozhodnutí |
+| Další krok | ověřit, změnit, zahodit, napsat obsah |
+
+Co do poznámek typicky nepatří:
+
+- celé jméno třetích osob,
+- interní drby zákazníka,
+- citlivé obchodní detaily bez účelu,
+- screenshoty plné osobních údajů,
+- syrový přepis rozhovoru, který nikdo nebude číst,
+- domněnky o člověku místo pozorování.
+
+Příklad lepší poznámky:
+
+| Slabá poznámka | Lepší poznámka |
+| --- | --- |
+| „Nelíbí se jim onboarding.“ | „Správce workspace se zasekl u importu, protože nevěděl, jaký formát CSV očekáváme. Dnes to řeší tak, že posílá soubor supportu.“ |
+| „Chtějí lepší reporting.“ | „Každý pátek ručně kopírují tři čísla do prezentace pro vedení. Potřebují týdenní export podle týmu, ne obecný dashboard.“ |
+| „Pricing je zmatený.“ | „Nechápou rozdíl mezi limitem uživatelů a limitem projektů. Obávají se překvapivého účtu při růstu týmu.“ |
+
+### Kombinuj rozhovor s pozorováním
+
+Když člověk popisuje workflow, nech si ho ukázat na bezpečném příkladu. Nemusí sdílet produkční obrazovku plnou dat. Stačí demo účet, anonymizovaný soubor, papírový náčrt nebo slovní průchod poslední situací.
+
+Možnosti podle rizika:
+
+| Metoda | Kdy ji použít | Privacy poznámka |
+| --- | --- | --- |
+| Rozhovor bez sdílení obrazovky | když stačí pochopit rozhodování | nejméně dat, dobrý první krok |
+| Průchod demo scénářem | když ověřuješ UI nebo onboarding | používej testovací data |
+| Anonymizovaný vzorek | když potřebuješ pochopit strukturu dat | odstraň osobní a citlivé sloupce |
+| Moderovaný test | když sleduješ konkrétní úkol | nahrávej jen s důvodem a lhůtou |
+| Support rozbor | když se problém opakuje v tiketech | anonymizuj před přesunem do backlogu |
+
+Pozorování je cenné, protože lidé často přeskočí kroky, které jim přijdou samozřejmé. Právě ty bývají pro produkt nejdůležitější.
+
+### Výstup musí být rozhodnutí, ne archiv
+
+Po každém výzkumném kole napiš krátké shrnutí:
+
+| Pole | Odpověď |
+| --- | --- |
+| Jaké rozhodnutí jsme řešili |  |
+| Kolik rozhovorů nebo pozorování proběhlo |  |
+| Jaké tři signály se opakovaly |  |
+| Co jsme se naučili proti původní hypotéze |  |
+| Co uděláme teď |  |
+| Co zatím neuděláme |  |
+| Jaké poznámky, nahrávky nebo exporty smažeme |  |
+
+Poslední řádek je důležitý. Výzkum nekončí tím, že tým našel insight. Končí tím, že se uzavře i datová stopa: nahrávky mají retenci, citace jsou anonymizované, exporty smazané a poznámky zůstávají jen v rozsahu, který podporuje rozhodnutí.
+
+### Výzkum napoj na backlog
+
+Insight bez dalšího kroku se rychle vypaří. Přepiš ho do backlogu jako problém, ne jako okamžité řešení.
+
+| Výzkumný signál | Slabý backlog item | Lepší backlog item |
+| --- | --- | --- |
+| Lidé nevědí, jaký CSV formát importovat | Přidat video tutorial | U importu ukázat vzorový soubor a validovat formát před odesláním |
+| Zákazníci nerozumí limitům v plánech | Přepsat pricing | Vysvětlit limity projektů a uživatelů přímo v tabulce plánů |
+| Support opakuje stejný postup | Udělat knowledge base | Napsat jeden návod pro nejčastější problém a propojit ho z prázdného stavu |
+
+Tím se výzkum stane součástí produktu, ne samostatným rituálem.
+
+### Checklist: Uživatelský výzkum privacy-first
+
+- [ ] Každé výzkumné kolo začíná konkrétním rozhodnutím.
+- [ ] Otázky míří na poslední reálnou situaci, ne na obecné sliby.
+- [ ] Nahrávání má jasný účel, omezený přístup a datum smazání.
+- [ ] Poznámky obsahují jen kontext potřebný pro rozhodnutí.
+- [ ] Citlivé údaje, screenshoty a exporty se anonymizují nebo vůbec neukládají.
+- [ ] Respondent ví, k čemu rozhovor slouží a co se stane s výstupy.
+- [ ] Výzkum kombinuje rozhovor, pozorování a existující support nebo sales signály.
+- [ ] Výstupem je rozhodnutí, další krok a seznam věcí, které zatím neděláme.
+- [ ] Backlog popisuje problém a dopad, ne jen vysněné řešení.
+- [ ] Po vyhodnocení se smažou nahrávky, exporty a dočasné poznámky, které už nemají účel.
+
+### Mini úkol
+
+Vyber jedno rozhodnutí, které teď tým odkládá kvůli nejistotě. Připrav malé výzkumné kolo:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jaké rozhodnutí potřebujeme udělat? |  |
+| Jakou hypotézu ověřujeme? |  |
+| S kým potřebujeme mluvit? |  |
+| Jaké tři otázky položíme na poslední reálnou situaci? |  |
+| Budeme nahrávat? Proč ano/ne? |  |
+| Jaké údaje do poznámek nepatří? |  |
+| Kdy výstupy vyhodnotíme? |  |
+| Kdy smažeme dočasné materiály? |  |
+
+Potom udělej jednu konkrétní věc: domluv dva rozhovory, přepiš scénář otázek na minulé chování, smaž staré nahrávky bez účelu, nebo převeď jeden support vzor do anonymizovaného produktového insightu. Výzkum má snížit nejistotu, ne vytvořit další archiv, který bude jednou někdo statečně ignorovat.
+
 ## Zdroje
 
 - ICANN: Information for Domain Name Registrants - práva a odpovědnosti držitelů domén včetně správy, obnovy a převodu doménové registrace: https://www.icann.org/registrants
@@ -10974,6 +11146,7 @@ Potom udělej jednu konkrétní úpravu: přepiš segmentační větu, zkrať po
 
 ## Pracovní log
 
+- 2026-07-13: Doplněna příloha o uživatelském výzkumu bez nahrávacího vysavače: výzkum od rozhodnutí, otázky na minulé chování, opatrné nahrávání, rozhodovací poznámky, pozorování bez produkčních dat, napojení na backlog, checklist a mini úkol.
 - 2026-07-13: Zpřesněn doporučený rytmus práce s e-bookem o vědomé rozhodnutí, co příště neměřit, aby praktické kroky zůstaly privacy-first.
 - 2026-07-13: Doplněna příloha o ICP a segmentaci bez profilovacího chaosu: popis ideálního zákazníka podle práce a kontextu, férové používání segmentačních údajů, malé vysvětlitelné lead skóre, negativní ICP, měsíční revize segmentů, checklist a mini úkol.
 - 2026-07-13: Doplněna příloha o SaaS metrikách bez vanity dashboardu: rozhodovací rámec podle fáze produktu, severní metrika s ochrannými metrikami, oddělení akvizice/aktivace/retence/revenue/provozu, čtení MRR v kontextu, vlastnictví metrik, dashboard review zakončené rozhodnutím, checklist a mini úkol.
