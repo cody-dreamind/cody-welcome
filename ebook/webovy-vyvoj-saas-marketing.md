@@ -10705,6 +10705,174 @@ Vyber pět metrik, které tým dnes sleduje, a vyplň tabulku:
 
 Potom jednu metriku smaž nebo archivuj. Ne tu nejméně hezkou. Tu, podle které se nikdo nerozhoduje. Dashboard bude menší a tým bude mít víc pozornosti na čísla, která opravdu mění práci.
 
+## Příloha: ICP a segmentace bez profilovacího chaosu
+
+ICP, tedy ideální zákaznický profil, není seznam firem, které chceš bombardovat reklamou. Je to pracovní definice zákazníka, pro kterého umíš vytvořit největší hodnotu s nejmenším provozním odpadem. Dobré ICP pomáhá produktu, marketingu, sales i supportu mluvit o stejném člověku a stejném problému.
+
+Špatná otázka zní: „Koho všechno bychom mohli oslovit?“
+
+Lepší otázka zní: „U koho máme nejjasnější problém, nejrychlejší cestu k hodnotě a férový důvod začít rozhovor?“
+
+Privacy-first segmentace se nesnaží tajně odhadovat člověka podle všeho, co o něm internet prozradí. Začíná od kontextu, který je relevantní k nákupu a používání produktu: typ firmy, situace, bolest, spouštěč změny, omezení a rozhodovací proces. Čím lépe segment chápeš, tím méně potřebuješ šedou zónu dat.
+
+### ICP popiš podle práce, ne podle fantazie
+
+Slabé ICP vypadá jako obecná demografie:
+
+- malé a střední firmy,
+- B2B segment,
+- technologicky otevření zákazníci,
+- firmy, které chtějí růst.
+
+Tohle je hezké na prezentaci, ale špatné pro rozhodování. Neříká to, jak napsat homepage, koho pozvat na rozhovor, jaký onboarding postavit ani které leady odmítnout.
+
+Praktičtější ICP popisuje práci a kontext:
+
+| Vrstva | Otázka | Příklad |
+| --- | --- | --- |
+| Firma | Jaký typ organizace má problém? | Servisní firma s 5 až 30 techniky |
+| Role | Kdo problém cítí nejvíc? | Majitel, dispečer, vedoucí provozu |
+| Situace | Kdy problém vzniká? | Páteční plánování výjezdů a změny během dne |
+| Současné řešení | Co používají dnes? | Excel, telefon, e-mail, papírové poznámky |
+| Náklad | Co je bolí? | Zpoždění, chaos, ruční přepisování, nespokojení klienti |
+| Spouštěč | Proč by měnili zrovna teď? | Růst týmu, nový region, ztracené zakázky |
+| Omezení | Co jim brání? | Málo času, odpor techniků, strach z migrace |
+
+Z takové tabulky už vznikne lepší text, demo i produktová priorita. Najednou víš, že nemáš psát „zvyšte efektivitu“, ale „přestaňte v pátek skládat výjezdy ručně a řešit změny po telefonu“.
+
+### Segmentace má pomáhat výběru, ne vylučovat lidi potají
+
+Segmentace je užitečná, když pomáhá týmu dělat jasnější rozhodnutí:
+
+- jaký problém vysvětlit na webu,
+- jaký use case ukázat v demu,
+- jaké otázky dát do kvalifikace leadu,
+- jaký onboarding připravit,
+- které funkce zatím nestavět,
+- komu produkt férově nedoporučit.
+
+Nebezpečná je ve chvíli, kdy se změní v profilování bez jasného účelu: sbíráš data „pro jistotu“, skóruješ lidi podle neprůhledných pravidel a pak jim ukazuješ jiné ceny, jiné sliby nebo agresivnější kampaně, aniž by tomu rozuměli.
+
+Praktické pravidlo: Pokud segmentační údaj neumíš vysvětlit zákazníkovi v jedné normální větě, pravděpodobně ho nemáš sbírat.
+
+Příklad férové věty:
+
+„Ptáme se na velikost servisního týmu, abychom doporučili vhodný onboarding a ukázali relevantní příklad plánování.“
+
+Příklad podezřelé věty:
+
+„Sbíráme desítky signálů, abychom interně odhadli ochotu zaplatit a automaticky upravili tlak kampaně.“
+
+Ta druhá věta zní jako něco, co by mělo zůstat v místnosti bez oken. Přesně proto ji nepoužívej jako produktovou strategii.
+
+### Použij veřejný kontext a přímé otázky
+
+Privacy-first ICP nepotřebuje tajné obohacování dat na každém kroku. Často stačí kombinace:
+
+- veřejně dostupného kontextu firmy,
+- informací, které člověk sám zadá ve formuláři,
+- poznámek z rozhovoru,
+- agregovaných signálů z webu a produktu,
+- kvality poptávky podle toho, co zákazník reálně řeší.
+
+Ve formuláři se ptej jen na to, co pomůže dalšímu kroku. U B2B poptávky může dávat smysl:
+
+- pracovní e-mail,
+- firma,
+- role nebo odpovědnost,
+- velikost týmu v hrubých pásmech,
+- hlavní problém,
+- preferovaný další krok.
+
+Naopak si dej pozor na sběr údajů, které zní užitečně jen proto, že jsou dostupné:
+
+- osobní profily ze sociálních sítí,
+- detailní historie návštěv napříč weby,
+- obohacené osobní kontakty bez jasného důvodu,
+- automatické skóre podle netransparentního dodavatele,
+- volné poznámky s citlivými detaily, které nikdo nepotřebuje.
+
+Když sales potřebuje vědět víc, ať se zeptá přímo a vysvětlí proč. Důvěra často roste právě ve chvíli, kdy člověk vidí, že nesbíráš data bokem jen proto, že se někde technicky nabízejí.
+
+### ICP skóre drž malé a vysvětlitelné
+
+Skórování leadů nemusí být složitý algoritmus. Pro malý SaaS je často lepší jednoduchá karta:
+
+| Oblast | Otázka | Hodnocení |
+| --- | --- | --- |
+| Fit segmentu | Odpovídá firma cílovému segmentu? | nízký / střední / vysoký |
+| Síla problému | Je problém konkrétní a častý? | nízká / střední / vysoká |
+| Timing | Existuje důvod řešit to teď? | teď / později / nejasné |
+| Cesta k hodnotě | Umíme dodat první hodnotu rychle? | snadná / střední / těžká |
+| Privacy soulad | Nepotřebuje řešení datové kompromisy, které nechceme dělat? | v pořádku / ověřit / stop |
+
+Tahle karta je čitelná. Sales ví, proč je lead prioritní. Marketing ví, jaký obsah přitahuje správný typ zákazníků. Produkt ví, kde onboarding funguje. A zákazník není zredukovaný na tajemné číslo, které nikdo neumí vysvětlit.
+
+Skóre používej jako pomůcku, ne jako rozsudek. Když malá firma mimo ideální segment přinese ostrý problém a silný signál, může být lepší pilot než velký lead s krásným logem a mlhavou potřebou. ICP má zlepšit úsudek, ne ho nahradit.
+
+### Negativní ICP je stejně důležité
+
+Dobré ICP říká i to, komu produkt zatím neslouží dobře. To není arogance. To je ochrana zákazníka i týmu.
+
+Příklady negativního ICP:
+
+- zákazník potřebuje on-premise provoz, který produkt neumí bezpečně dodat,
+- zákazník požaduje rozsáhlé osobní profilování, které je proti hodnotám produktu,
+- zákazník chce enterprise SLA, ale tým nemá provozní kapacitu,
+- zákazník potřebuje integrace, které by první verzi odvedly od hlavního segmentu,
+- zákazník nechce změnit současný proces a hledá jen levnější tabulku.
+
+Negativní ICP pomáhá psát férovější web i lepší sales odpovědi. Místo slibu „umíme všechno“ můžeš říct: „Toto je pro týmy, které chtějí X. Pokud potřebujete Y, pravděpodobně pro vás zatím nejsme správná volba.“ Krátkodobě to může bolet. Dlouhodobě to šetří support, churn i reputaci.
+
+### Segmenty pravidelně reviduj
+
+ICP není kámen v logu. Je to pracovní hypotéza. Jakmile přijdou první zákazníci, poptávky, odmítnutí a support dotazy, aktualizuj ji.
+
+Měsíční review může být velmi jednoduché:
+
+| Otázka | Co hledat |
+| --- | --- |
+| Který segment měl nejrychlejší první hodnotu? | onboarding, aktivace, ruční pomoc |
+| Který segment nejlépe platil a zůstával? | revenue, retence, rozšíření použití |
+| Který segment vyráběl nejvíc supportu? | tickety, schůzky, ruční zásahy |
+| Který segment chtěl nevhodné kompromisy? | privacy, bezpečnost, provozní riziko |
+| Která námitka se opakuje? | pricing, migrace, důvěra, integrace |
+| Co změníme v textu, produktu nebo kvalifikaci? | jedna konkrétní úprava |
+
+Změny zapisuj do rozhodovacího logu. Když se za půl roku tým zeptá, proč se produkt zaměřuje na servisní firmy a ne obecně na „provozní týmy“, odpověď nemá být firemní legenda. Má být dohledatelný důvod.
+
+### Checklist: ICP bez profilovacího chaosu
+
+- [ ] ICP popisuje konkrétní firmu, roli, situaci, problém a spouštěč změny.
+- [ ] Segmentační údaje sbíráme jen tehdy, když pomáhají dalšímu kroku.
+- [ ] Umíme zákazníkovi vysvětlit, proč se na daný údaj ptáme.
+- [ ] Nepoužíváme skryté osobní profilování jako náhradu za rozhovor a positioning.
+- [ ] Lead scoring je malý, lidsky čitelný a pravidelně revidovaný.
+- [ ] Negativní ICP chrání tým před nevhodnými zakázkami a zákazníka před špatným fittem.
+- [ ] Marketing, sales, produkt a support používají stejný popis segmentu.
+- [ ] ICP se aktualizuje podle aktivace, retence, kvality poptávek a support zátěže.
+- [ ] Segmentace nevede k neférovým cenám, slibům nebo tlaku kampaní.
+- [ ] Důležité změny ICP jsou zapsané v rozhodovacím logu.
+
+### Mini úkol
+
+Vyber jeden produkt, službu nebo aktuální marketingovou kampaň a vyplň pracovní list:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Kdo je ideální zákazník podle práce, ne podle obecné kategorie? |  |
+| Jaká role problém nejvíc cítí? |  |
+| Kdy problém naposledy vzniká v reálném provozu? |  |
+| Jaké současné řešení používá? |  |
+| Co je náklad problému? |  |
+| Jaký spouštěč změny ho přivede k nákupu? |  |
+| Jaký údaj opravdu potřebujeme pro kvalifikaci? |  |
+| Jaký údaj můžeme přestat sbírat? |  |
+| Kdo je negativní ICP a proč? |  |
+| Jakou jednu větu na webu nebo ve formuláři změníme? |  |
+
+Potom udělej jednu konkrétní úpravu: přepiš segmentační větu, zkrať poptávkový formulář, doplň negativní ICP do sales poznámek, uprav demo scénář pro nejlepší segment nebo smaž obohacovací pole, které nikdo neumí obhájit. Segmentace má zostřit hodnotu, ne rozšířit sběr dat.
+
 ## Zdroje
 
 - ICANN: Information for Domain Name Registrants - práva a odpovědnosti držitelů domén včetně správy, obnovy a převodu doménové registrace: https://www.icann.org/registrants
@@ -10806,6 +10974,7 @@ Potom jednu metriku smaž nebo archivuj. Ne tu nejméně hezkou. Tu, podle kter�
 
 ## Pracovní log
 
+- 2026-07-13: Doplněna příloha o ICP a segmentaci bez profilovacího chaosu: popis ideálního zákazníka podle práce a kontextu, férové používání segmentačních údajů, malé vysvětlitelné lead skóre, negativní ICP, měsíční revize segmentů, checklist a mini úkol.
 - 2026-07-13: Doplněna příloha o SaaS metrikách bez vanity dashboardu: rozhodovací rámec podle fáze produktu, severní metrika s ochrannými metrikami, oddělení akvizice/aktivace/retence/revenue/provozu, čtení MRR v kontextu, vlastnictví metrik, dashboard review zakončené rozhodnutím, checklist a mini úkol.
 - 2026-07-13: Doplněna příloha o spam ochraně formulářů bez datového výletu: mapa zneužití podle typu formuláře, vrstvená ochrana, honeypot, rate limit, opatrné používání externí CAPTCHA, karanténa rizikových vstupů, checklist a mini úkol.
 - 2026-07-13: Doplněna příloha o e-mailové doručitelnosti bez sledovacích pixelů: rozdělení transakčních, produktových, marketingových, sales a bezpečnostních e-mailů, autentizace SPF/DKIM/DMARC, one-click unsubscribe, měření bez spoléhání na open pixel, práce se suppression listem, frekvence, checklist a mini úkol; ověřeny a doplněny zdroje Gmail Help a IETF RFC 2369/8058.
