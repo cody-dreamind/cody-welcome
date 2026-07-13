@@ -10253,6 +10253,181 @@ Vyber jednu hlavní doménu produktu nebo firmy a udělej třicetiminutový audi
 
 Na konci neplánuj velký bezpečnostní program. Udělej jednu konkrétní opravu: zapni MFA, oprav renewal kontakt, smaž mrtvou subdoménu, zdokumentuj odesílatele e-mailů nebo založ jednoduchou doménovou kartu. Doménová hygiena se nevyhrává jedním heroickým auditem. Vyhrává se tím, že se nezanedbávají nudné věci.
 
+## Příloha: E-mailová doručitelnost bez sledovacích pixelů
+
+E-mail je pořád jeden z nejlepších přímých kanálů, které firma vlastní. Není to sociální feed, kde algoritmus rozhodne, jestli se vůbec dostaneš k vlastním lidem. Zároveň je to kanál, který se dá velmi snadno zničit: koupeným seznamem, chaotickými odesílateli, špatnou autentizací, nedůstojným odhlašováním nebo posedlostí otevřením každého e-mailu.
+
+Privacy-first doručitelnost stojí na jednoduchém postoji: posílej lidem zprávy, které čekají, z domény, kterou umíš ověřit, s jasným odhlášením a s měřením, které nepotřebuje dělat z každé schránky sledovací zařízení.
+
+> Codyho komentář: Tracking pixel v e-mailu často odpovídá na špatnou otázku. Ne „pomohl tento e-mail člověku?“, ale „otevřel klient obrázek v konkrétním kontextu, který možná blokuje proxy, čtečka, firewall nebo nastavení soukromí?“. To je dost křehká věštírna na to, aby podle ní firma řídila vztahy se zákazníky.
+
+### Rozliš typy e-mailů podle očekávání
+
+Nejdřív rozděl e-maily podle toho, jakou práci dělají:
+
+| Typ e-mailu | Příklad | Očekávání příjemce | Odhlašování |
+| --- | --- | --- | --- |
+| Transakční | potvrzení objednávky, reset hesla, faktura | zpráva je nutná pro službu | neodhlašuj hlavní nutný účel |
+| Produktový | upozornění na stav, pozvánka do workspace, týdenní souhrn práce | souvisí s používáním produktu | preference podle typu zprávy |
+| Marketingový | newsletter, pozvánka na webinář, nabídka služby | dobrovolný odběr nebo jiný jasný právní základ | snadné odhlášení vždy |
+| Sales follow-up | reakce na poptávku, domluva dema | navazuje na konkrétní vztah | konec sekvence a respekt k nezájmu |
+| Bezpečnostní | nové přihlášení, změna hesla, export dat | důležitá ochrana účtu | neodhlašuj, ale neposílej marketing |
+
+Chyba je míchat typy dohromady. Do faktury nepatří promo odstavec, který se tváří jako provozní informace. Do bezpečnostního upozornění nepatří měřicí pixel a cross-sell. Do newsletteru nepatří naléhavost ve stylu „RE: poslední šance“, pokud to není skutečná odpověď. Gmail sender guidelines výslovně varují před zavádějícími hlavičkami, display name a kombinováním různých typů obsahu v jedné zprávě.
+
+Praktické pravidlo:
+
+- jeden účel na jednu zprávu,
+- jeden stabilní odesílatel pro jednu kategorii,
+- jedna jasná preference nebo odhlášení pro dobrovolný odběr,
+- žádné maskování marketingu jako provozní zprávy.
+
+### Autentizace je vstupenka, ne optimalizace
+
+Doručitelnost nezačíná textem předmětu. Začíná tím, jestli příjemce může ověřit, že zpráva opravdu pochází z tvé domény.
+
+Minimum:
+
+- SPF obsahuje skutečné odesílací služby,
+- DKIM je zapnutý pro každého legitimního odesílatele,
+- DMARC existuje pro odesílací doménu,
+- doména v `From` odpovídá autentizaci podle DMARC alignment,
+- odesílací servery mají validní forward a reverse DNS,
+- e-mail se přenáší přes TLS,
+- hromadné zprávy mají funkční odhlášení.
+
+Gmail od února 2024 vyžaduje u všech odesílatelů na osobní Gmail účty alespoň SPF nebo DKIM, u větších objemů nad 5 000 zpráv denně také SPF, DKIM a DMARC, a u marketingových nebo subscribed zpráv podporu one-click unsubscribe. I když neposíláš takové objemy, ber tato pravidla jako dobrý provozní standard. Čím dřív je nastavíš, tím méně bolestivý bude růst.
+
+U malého týmu si vytvoř tabulku:
+
+| Odesílatel | Typ zpráv | Doména From | SPF | DKIM | DMARC | Vlastník |
+| --- | --- | --- | --- | --- | --- | --- |
+| Produkt | reset hesla, pozvánky | `app@example.com` |  |  |  |  |
+| Fakturace | faktury, platby | `billing@example.com` |  |  |  |  |
+| Newsletter | nové články | `news@example.com` |  |  |  |  |
+| Sales | follow-up | `hello@example.com` |  |  |  |  |
+
+Jakmile nevíš, kdo za doménu posílá, nemáš e-mailový systém. Máš rozesílací klub s překvapením.
+
+### Odhlášení navrhni jako důvěru, ne překážku
+
+Odhlášení není selhání. Je to signál, že člověk nechce konkrétní typ komunikace. Když mu to ztížíš, často nezískáš loajalitu. Získáš spam complaint, horší reputaci a tichou ztrátu důvěry.
+
+Pro marketingové a subscribed zprávy používej dvě vrstvy:
+
+- viditelný odkaz v těle e-mailu,
+- technické hlavičky `List-Unsubscribe` a u podporovaných schránek také `List-Unsubscribe-Post`.
+
+RFC 2369 popisuje hlavičky pro příkazy mailing listů včetně odhlášení. RFC 8058 doplňuje one-click mechanismus, kdy poštovní klient může odhlášení provést POST požadavkem bez toho, aby uživatele honil přes formulář. Gmail sender guidelines na tyto RFC přímo odkazují a u větších odesílatelů one-click unsubscribe vyžadují pro marketingové a subscribed zprávy.
+
+Praktický návrh odhlášení:
+
+1. Člověk klikne na odhlášení.
+2. Systém ho odhlásí z daného typu komunikace bez přihlášení.
+3. Stránka nabídne preference, ale nevyžaduje další potvrzení.
+4. Suppression list se propíše do všech rozesílacích nástrojů.
+5. Tým vidí agregovaný důvod odhlášení, pokud ho člověk dobrovolně vyplní.
+
+Co nedělat:
+
+- nutit člověka přihlásit se, aby se mohl odhlásit,
+- schovat odhlášení za několik obrazovek,
+- odhlásit jen jednu kampaň, ale dál posílat totéž z jiného seznamu,
+- ptát se na důvod jako povinné pole,
+- po odhlášení poslat „ještě poslední marketingový e-mail“.
+
+To poslední je oblíbený malý trapas. Ne, opravdu to není hezké rozloučení. Je to další zpráva po žádosti o méně zpráv.
+
+### Měř doručitelnost bez otevření každé schránky
+
+Open rate je stále méně spolehlivý signál. Obrázky se blokují, přednačítají, proxyují a některé e-mailové klienty chrání soukromí uživatele tak, že otevření technicky zkreslí. Privacy-first přístup proto nepoužívá pixel jako hlavní pravdu o vztahu.
+
+Užitečnější signály:
+
+- doručeno, bounce, deferred a rejected podle SMTP odpovědí,
+- spam complaint rate tam, kde ho poskytovatel ukazuje,
+- odhlášení podle typu zprávy,
+- kliky na jasné odkazy, pokud jsou opravdu potřeba pro rozhodnutí,
+- odpovědi na e-mail,
+- konverze na straně webu nebo produktu v agregaci,
+- kvalita následných poptávek nebo supportních reakcí.
+
+Pokud tracking pixel používáš, popiš ho v privacy notice a dej si férovou otázku: jaké rozhodnutí podle otevření skutečně děláme? Pokud odpověď zní „jen chceme vědět, kdo se díval“, je to slabý důvod. Pokud potřebuješ vyhodnotit newsletter, často stačí kombinace doručitelnosti, odhlášení, kliků na hlavní odkazy a přímých odpovědí.
+
+Jednoduchý měsíční report:
+
+| Metrika | Proč ji sledujeme | Co uděláme při zhoršení |
+| --- | --- | --- |
+| Bounce rate | hygienický stav seznamu a technický problém | zastavit segment, vyčistit adresy, zkontrolovat odesílatele |
+| Spam complaints | důvěra a relevance | snížit frekvenci, zkontrolovat zdroj kontaktů, upravit obsah |
+| Unsubscribe rate | očekávání a frekvence | zpřesnit slib odběru, nabídnout preference |
+| Klik na hlavní odkaz | zájem o konkrétní téma | pokračovat tématem nebo upravit CTA |
+| Odpovědi | kvalita vztahu | převést otázky do obsahu, sales nebo produktu |
+
+### Seznam kontaktů je závazek, ne kořist
+
+Koupené seznamy a automaticky zaškrtnuté opt-iny jsou rychlá cesta k reputačnímu dluhu. Gmail guidelines doporučují posílat zprávy lidem, kteří je chtějí dostávat, potvrzovat adresy před přihlášením a nekupovat e-mailové adresy. Z privacy-first pohledu je to úplné minimum.
+
+Zdravý seznam má:
+
+- jasný zdroj přihlášení,
+- datum a kontext odběru,
+- slib frekvence a tématu,
+- možnost změnit preference,
+- suppression list pro odhlášené a nedoručitelné adresy,
+- pravidelný úklid neaktivních nebo vracejících se adres,
+- omezený přístup v týmu.
+
+Suppression list je citlivý artefakt. Obsahuje lidi, kterým nemáš psát. To není marketingová databáze pro budoucí „reaktivační“ kouzla. Chraň ho stejně jako jiné osobní údaje: omez přístup, synchronizuj jen tam, kde je nutné, a nenechávej exporty válet po discích.
+
+### Frekvence má být slib, ne momentální nálada
+
+Při přihlášení napiš, co bude člověk dostávat a jak často. Potom to dodržuj. Pokud slíbíš měsíční přehled a začneš posílat tři prodejní e-maily týdně, problém není v deliverability nástroji. Problém je v respektu.
+
+Praktická frekvenční pravidla:
+
+- newsletter: raději pravidelně a méně často než nárazově a agresivně,
+- produktové souhrny: nastavitelné podle role a pracovního rytmu,
+- onboarding: ukončená sekvence s jasným cílem,
+- sales follow-up: omezený počet zpráv a jasný konec,
+- bezpečnostní zprávy: okamžitě, ale jen s nutným obsahem.
+
+Při zhoršení doručitelnosti nejdřív zpomal. Gmail u větších objemů doporučuje zvyšovat objem postupně, sledovat server responses, spam rate a reputaci domény, a při bounce nebo deferral problémech objem snížit. To je dobrá disciplína i pro menší odesílatele.
+
+### Checklist: Doručitelnost bez sledovacího nepořádku
+
+- [ ] E-maily jsou rozdělené na transakční, produktové, marketingové, sales a bezpečnostní.
+- [ ] Každý typ má vlastní účel a stabilní odesílatelskou adresu.
+- [ ] SPF, DKIM a DMARC jsou nastavené pro všechny legitimní odesílatele.
+- [ ] Odesílací doména v `From` je sladěná s autentizací.
+- [ ] Marketingové a subscribed zprávy mají viditelné odhlášení.
+- [ ] `List-Unsubscribe` a `List-Unsubscribe-Post` jsou nastavené tam, kde dávají smysl.
+- [ ] Odhlášení funguje bez přihlášení a bez povinného důvodu.
+- [ ] Suppression list je chráněný a synchronizovaný mezi nástroji.
+- [ ] Newsletter nespoléhá na open pixel jako hlavní metriku.
+- [ ] Report doručitelnosti obsahuje bounce, spam complaints, odhlášení, kliky a odpovědi.
+- [ ] Frekvence odpovídá slibu při přihlášení.
+- [ ] Koupené seznamy a automaticky zaškrtnuté opt-iny nejsou součástí procesu.
+- [ ] Exporty kontaktů mají vlastníka, účel a konec životnosti.
+
+### Mini úkol
+
+Vyber jeden e-mailový tok: newsletter, onboarding, fakturaci, reset hesla nebo sales follow-up. Vyplň kartu:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jaký typ e-mailu to je? |  |
+| Proč ho člověk dostává? |  |
+| Jaký odesílatel a doména se používá? |  |
+| Je zapnuté SPF, DKIM a DMARC? |  |
+| Má e-mail jasný účel bez přimíchaného marketingu? |  |
+| Jak se člověk odhlásí nebo změní preference? |  |
+| Používáme tracking pixel? Pokud ano, proč? |  |
+| Jaké metriky skutečně vedou k rozhodnutí? |  |
+| Kde končí suppression list a kdo k němu má přístup? |  |
+
+Potom udělej jednu opravu: nastav chybějící DKIM, přidej viditelné odhlášení, odděl transakční a marketingovou šablonu, smaž open rate z hlavního reportu nebo zdokumentuj suppression list. E-mailový kanál se nejlépe chrání tím, že se k němu chováš jako k dlouhodobému vztahu, ne jako k nekonečnému zásobníku kliků.
+
 ## Zdroje
 
 - ICANN: Information for Domain Name Registrants - práva a odpovědnosti držitelů domén včetně správy, obnovy a převodu doménové registrace: https://www.icann.org/registrants
@@ -10260,6 +10435,9 @@ Na konci neplánuj velký bezpečnostní program. Udělej jednu konkrétní opra
 - IETF RFC 7208: Sender Policy Framework (SPF) - specifikace mechanismu SPF pro autorizaci odesílacích serverů domény: https://www.rfc-editor.org/info/rfc7208
 - IETF RFC 6376: DomainKeys Identified Mail (DKIM) Signatures - specifikace DKIM podpisů pro ověřování e-mailových zpráv: https://www.rfc-editor.org/info/rfc6376
 - IETF RFC 9989: Domain-Based Message Authentication, Reporting, and Conformance (DMARC) - aktuální standardní specifikace DMARC protokolu pro ověřování domén v e-mailu: https://www.rfc-editor.org/info/rfc9989/
+- Gmail Help: Email sender guidelines - požadavky a doporučení pro odesílatele e-mailů včetně SPF/DKIM/DMARC, TLS, spam rate, one-click unsubscribe a postupného zvyšování objemu: https://support.google.com/mail/answer/81126
+- IETF RFC 2369: The Use of URLs as Meta-Syntax for Core Mail List Commands and their Transport through Message Header Fields - specifikace listových hlaviček včetně `List-Unsubscribe`: https://www.rfc-editor.org/info/rfc2369
+- IETF RFC 8058: Signaling One-Click Functionality for List Email Headers - specifikace `List-Unsubscribe-Post` a one-click odhlášení pro mailing listy: https://www.rfc-editor.org/info/rfc8058
 - OWASP Cheat Sheet Series: HTTP Security Response Headers Cheat Sheet - praktická doporučení k bezpečnostním HTTP hlavičkám: https://cheatsheetseries.owasp.org/cheatsheets/HTTP_Headers_Cheat_Sheet.html
 - MDN Web Docs: HTTP Observatory - nástroj pro automatickou kontrolu HTTP hlaviček a bezpečnostních konfigurací webu: https://developer.mozilla.org/en-US/observatory
 - EUR-Lex: Regulation (EU) 2016/679, GDPR Article 30 - právní text k záznamům o činnostech zpracování pro správce a zpracovatele: https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng
@@ -10351,6 +10529,7 @@ Na konci neplánuj velký bezpečnostní program. Udělej jednu konkrétní opra
 
 ## Pracovní log
 
+- 2026-07-13: Doplněna příloha o e-mailové doručitelnosti bez sledovacích pixelů: rozdělení transakčních, produktových, marketingových, sales a bezpečnostních e-mailů, autentizace SPF/DKIM/DMARC, one-click unsubscribe, měření bez spoléhání na open pixel, práce se suppression listem, frekvence, checklist a mini úkol; ověřeny a doplněny zdroje Gmail Help a IETF RFC 2369/8058.
 - 2026-07-13: Doplněna příloha o doménové hygieně bez křehkého provozu: vlastnictví domény, renewal, MFA, DNS změny jako release, e-mailová autentizace SPF/DKIM/DMARC, inventář subdomén, redirecty, bezpečnostní hlavičky, krátká doménová dokumentace, checklist a mini úkol; ověřeny a doplněny zdroje ICANN, IETF RFC 7208/6376/9989, OWASP a MDN.
 - 2026-07-12: Doplněna příloha o reportingu bez datového exhibicionismu: rozhodovací účel reportu, agregace místo surových exportů, redigování screenshotů, opatrné používání jmen zákazníků, oddělení interní/klientské/veřejné verze, reporting cadence, checklist a mini úkol; ověřeny a doplněny zdroje Evropské komise a EDPB k principům GDPR, osobním údajům, pseudonymizaci a anonymizaci.
 - 2026-07-12: Doplněna příloha o prodejním demu bez nátlaku a datového chaosu: kvalifikace před demem, scénář podle zákaznického problému, bezpečná demo data, opatrné nahrávání, CRM poznámky, follow-up, produktové učení z opakovaných otázek, checklist a mini úkol.
