@@ -11729,6 +11729,184 @@ Vyber jednu klíčovou stránku nebo cestu a vyplň pracovní list:
 
 Potom udělej jednu malou opravu: lazy-loadni embed, odstraň nepoužívaný font řez, zmenši produktový screenshot, načítej chat až po kliknutí, přidej rozměry obrázkům, nebo dopiš fallback pro formulář. Performance budget se nevyhrává heroickým víkendem. Vyhrává se tím, že každá změna zaplatí svůj účet.
 
+## Příloha: Feature flagy a postupné releasy bez sledovací laboratoře
+
+Feature flag je užitečný sluha a mizerný pán. Umí oddělit nasazení kódu od zapnutí funkce, pustit změnu nejdřív interně, rychle vypnout rizikovou část produktu a zmenšit nervozitu kolem releasu. Umí ale také vytvořit džungli podmínek, skrytých variant, nejasných oprávnění a produktového chování, které už nikdo neumí vysvětlit.
+
+Privacy-first tým používá feature flagy hlavně k řízení rizika a učení, ne k tajnému profilování lidí. Dobrá otázka nezní: „Komu všemu můžeme ukázat jinou verzi?“
+
+Lepší otázka zní: „Jak bezpečně ověříme tuto změnu s nejmenším množstvím dat a nejmenším překvapením pro uživatele?“
+
+### Rozliš typy flagů podle účelu
+
+Ne každý flag je stejný. Když je házíš do jedné hromady, rychle se ztratí rozdíl mezi provozní pojistkou a dlouhodobou produktovou variantou.
+
+Praktické rozdělení:
+
+- Release flag: kód je nasazený, funkce ještě není veřejně zapnutá.
+- Kill switch: rychlé vypnutí části funkcionality při incidentu nebo degradaci.
+- Permission flag: funkce je dostupná jen pro roli, plán, workspace nebo interní tým.
+- Experiment flag: krátké ověření konkrétní hypotézy.
+- Migration flag: dočasný přepínač mezi starým a novým tokem při technické změně.
+- Operational flag: řízení externí integrace, fronty, limitu nebo fallbacku.
+
+Každý typ má jinou životnost. Kill switch může žít dlouho, pokud je součástí provozního plánu. Migration flag má po migraci zmizet. Experiment flag bez vyhodnocení je jen zapomenutá odbočka v produktu. A zapomenuté odbočky mají zvláštní talent stát se budoucí produkční realitou. Díky, vesmíre, přesně tohle jsme potřebovali.
+
+### Každý flag musí mít kartu
+
+Flag není jen řádek v administraci. Je to produktové a provozní rozhodnutí. Minimální karta může být krátká:
+
+| Pole | Příklad |
+| --- | --- |
+| Název | `new_pricing_table` |
+| Účel | Ověřit, jestli jednodušší porovnání plánů sníží dotazy na sales |
+| Typ | Release flag / experiment |
+| Vlastník | Produkt + frontend |
+| Kdo ho uvidí | Interní tým, potom 10 % anonymní návštěvnosti pricingu |
+| Jaká data se měří | Agregovaný klik na plán a odeslaný formulář |
+| Co se nesmí měřit | Individuální historie návštěvníka, session recording, e-mail bez odeslání formuláře |
+| Datum revize | 2026-08-15 |
+| Kdy se smaže | Po rozhodnutí ponechat / vrátit / upravit |
+| Fallback | Původní pricing tabulka |
+
+Karta nemusí být složitá. Může žít v issue, ADR, Notionu, Markdownu nebo přímo u flagu, pokud to nástroj umožňuje. Důležité je, aby se tým uměl podívat na přepínač a pochopit, proč existuje.
+
+### Cílení drž vysvětlitelné
+
+Privacy-first cílení má být čitelné a obhajitelné. Bezpečné příklady:
+
+- interní uživatelé,
+- konkrétní testovací workspace,
+- zákazníci v pilotu, kteří o tom vědí,
+- role v produktu,
+- tarif nebo modul, který si zákazník objednal,
+- náhodný vzorek bez dlouhodobého osobního profilu,
+- země nebo jazyk jen tehdy, když to souvisí s lokalizací, právním textem nebo podporou.
+
+Rizikovější příklady:
+
+- cílení podle citlivých odhadů,
+- skryté skóre ochoty platit,
+- kombinace mnoha signálů, které už fakticky tvoří profil člověka,
+- dlouhodobé držení varianty bez jasného účelu,
+- přepínání ceny nebo podmínek bez férového vysvětlení.
+
+Codyho komentář: Když cílení neumíš vysvětlit zákazníkovi normální větou, pravděpodobně si stavíš problém. Technicky elegantní profilování je pořád profilování. Jen má hezčí dashboard.
+
+### Postupný release má mít brzdy
+
+Postupné zapínání není jen hezká křivka z 1 % na 100 %. Potřebuje zastávky a podmínky pro návrat.
+
+Jednoduchý plán:
+
+1. Lokál a testy: funkce projde základními scénáři bez produkčních dat.
+2. Interní zapnutí: tým ji používá v reálném produktu nebo preview prostředí.
+3. Pilot: omezená skupina zákazníků ví, co se ověřuje a komu má hlásit problém.
+4. Malé veřejné procento: sledují se jen předem popsané agregované signály.
+5. Rozšíření: procento roste jen tehdy, když nejsou blokující chyby.
+6. Uzavření: flag se smaže, nebo se funkce vrátí.
+
+U každého kroku si předem napiš stop signály:
+
+- roste chybovost konkrétní cesty,
+- padá dokončení důležité akce,
+- support hlásí opakovaný zmatek,
+- zákazník nemůže dokončit práci,
+- změna zhoršuje výkon, dostupnost nebo privacy profil stránky,
+- rollback by byl složitější než přínos dalšího čekání.
+
+Stop signál není selhání týmu. Je to důkaz, že postupný release měl smysl.
+
+### Měř jen rozhodnutí, která potřebuješ
+
+Feature flagy svádějí k měření všeho kolem varianty. Odolej. Pro většinu malých SaaS týmů stačí:
+
+- kdo měl flag zapnutý v technickém smyslu,
+- agregovaný počet zobrazení nebo použití funkce,
+- dokončení hlavní akce,
+- chyby a latence relevantní cesty,
+- kvalifikovaná zpětná vazba z pilotu,
+- dopad na support nebo sales otázky.
+
+Naopak si dej pozor na:
+
+- ukládání kompletní historie variant u každého uživatele bez důvodu,
+- exporty surových eventů do marketingových nástrojů,
+- spojování experimentů s CRM profilem jen proto, že to jde,
+- session replay jako výchozí nástroj ověření,
+- delší retenci detailních experimentálních dat než samotné rozhodnutí potřebuje.
+
+Příklad: Pokud ověřuješ nový onboarding checklist, nepotřebuješ nahrávat celé obrazovky. Můžeš měřit agregovaně dokončení tří kroků, počet otevřených support ticketů a deset krátkých rozhovorů s pilotními zákazníky. Méně špionáže, víc užitečné práce. Radikální koncept, já vím.
+
+### Flagy uklízej jako technický dluh
+
+Každý dlouho žijící flag zvyšuje počet stavů produktu. Tím roste složitost testů, supportu, dokumentace i incidentů.
+
+Pravidla úklidu:
+
+- Release flag smaž po plném zapnutí funkce.
+- Experiment flag smaž po rozhodnutí, i když výsledek není slavný.
+- Migration flag smaž po dokončení migrace a kontrole dat.
+- Permission flag nech jen tehdy, když odpovídá skutečnému produktovému modelu.
+- Kill switch dokumentuj v runbooku a pravidelně ověř, že stále funguje.
+
+Do měsíčního technického review přidej krátký seznam:
+
+| Flag | Typ | Vlastník | Stáří | Stav | Další krok |
+| --- | --- | --- | --- | --- | --- |
+|  |  |  |  | ponechat / zapnout / vypnout / smazat |  |
+
+Pokud flag nemá vlastníka, je to kandidát na smazání nebo okamžité převzetí. „Nikdo neví“ není provozní stav. Je to tikající TODO s lepším PR.
+
+### Dokumentace a support musí vědět, co uživatel vidí
+
+Postupný release často rozbije podporu ne kvůli kódu, ale kvůli rozdílné realitě. Jeden zákazník vidí nový onboarding, druhý starý, dokumentace popisuje třetí verzi a support odpovídá podle screenshotu z minulého měsíce.
+
+Při každém flagu si ověř:
+
+- zda dokumentace uvádí stav funkce správně,
+- zda support pozná, kterou variantu zákazník vidí,
+- zda administrátor vidí relevantní nastavení nebo omezení,
+- zda chybová hláška odpovídá oběma variantám,
+- zda veřejný changelog neoznamuje funkci, která je dostupná jen části lidí.
+
+U pilotů je fér říct přímo: „Tuto funkci vám zapínáme v pilotu, může se změnit, zpětnou vazbu posílejte sem.“ Transparentnost často vyřeší víc než další vnitřní dashboard.
+
+### Checklist: Feature flagy privacy-first
+
+- [ ] Každý flag má typ: release, kill switch, permission, experiment, migration nebo operational.
+- [ ] Každý flag má vlastníka, účel, datum revize a plán odstranění.
+- [ ] Cílení je vysvětlitelné normální větou.
+- [ ] Experimentální cílení netvoří skrytý dlouhodobý profil člověka.
+- [ ] Před zapnutím existují stop signály a rollback postup.
+- [ ] Měří se jen signály potřebné pro konkrétní rozhodnutí.
+- [ ] Detailní experimentální data mají krátkou retenci.
+- [ ] Support a dokumentace vědí, kdo vidí jakou verzi.
+- [ ] Kill switch je otestovaný a popsaný v provozním runbooku.
+- [ ] Staré flagy se revidují aspoň jednou měsíčně.
+- [ ] Po rozhodnutí se flag smaže, ne jen přejmenuje na „legacy“ a nechá žít navěky.
+
+### Mini úkol
+
+Vyber tři existující nebo plánované flagy a vyplň tabulku:
+
+| Flag | Typ | Proč existuje | Kdo ho vidí | Co měříme | Kdy skončí |
+| --- | --- | --- | --- | --- | --- |
+|  |  |  |  |  |  |
+|  |  |  |  |  |  |
+|  |  |  |  |  |  |
+
+Potom udělej jednu konkrétní akci:
+
+- smaž flag, který už nemá účel,
+- přidej datum revize,
+- dopiš fallback,
+- omez měření na agregované rozhodovací signály,
+- přepiš cílení tak, aby šlo vysvětlit zákazníkovi,
+- nebo přidej support poznámku, podle které tým pozná variantu.
+
+Feature flagy mají zmenšovat riziko. Pokud riziko jen přesouvají do neviditelné konfigurace, nejsou to flagy. Jsou to produkční tajemství s hezkým přepínačem.
+
 ## Zdroje
 
 - ICANN: Information for Domain Name Registrants - práva a odpovědnosti držitelů domén včetně správy, obnovy a převodu doménové registrace: https://www.icann.org/registrants
@@ -11834,6 +12012,7 @@ Potom udělej jednu malou opravu: lazy-loadni embed, odstraň nepoužívaný fon
 
 ## Pracovní log
 
+- 2026-07-13: Doplněna příloha o feature flazích a postupných releasech bez sledovací laboratoře: typy flagů, karta přepínače, vysvětlitelné cílení, postupné zapínání se stop signály, měření jen pro rozhodnutí, úklid flagů, dopad na dokumentaci/support, checklist a mini úkol.
 - 2026-07-13: Doplněna příloha o performance budgetu bez honby za skóre: uživatelské cesty, rozdělení budgetu na obsah/interakce/třetí strany/stabilitu, karta externích skriptů, pravidla pro obrázky, fonty a JavaScript, kontrola při releasu, postup při překročení budgetu, checklist a mini úkol; navázáno na existující zdroje k Web Vitals, cache a technickému SEO.
 - 2026-07-13: Doplněna příloha o lokálním vývoji a preview bez produkčních dat: účel prostředí, seed scénáře, řízené výjimky pro produkční dumpy, bezpečné `.env.example`, preview pravidla, tupé lokální integrace, onboarding prvního běhu, checklist a mini úkol; navázáno na existující zdroje OWASP, Twelve-Factor App a GitHub Docs.
 - 2026-07-13: Doplněna příloha o retenci marketingových a analytických dat bez nekonečného skladu: rozdělení dat podle životnosti, retenční karta, agregace detailu, CRM stavy, pravidla pro exporty, technické vynucení, checklist a mini úkol; ověřen a doplněn zdroj Evropské komise k době uchování osobních údajů.
