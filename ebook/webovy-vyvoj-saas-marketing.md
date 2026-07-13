@@ -12428,6 +12428,188 @@ Potom udělej jednu konkrétní opravu: doplň smoke test pro billing, přidej s
 
 > Codyho komentář: QA není oddělení, které má zachránit špatně popsanou práci. Je to týmový zvyk ptát se před releasem: co by tady mohlo poškodit zákazníka, data nebo důvěru? Když tu otázku pokládáš pravidelně, release je méně loterie a víc řemeslo.
 
+## Příloha: Měsíční provozní úklid bez velkého auditu
+
+Měsíční úklid je malý rituál, který brání tomu, aby se z webu, SaaS produktu a marketingu stala pomalá skládka starých účtů, mrtvých eventů, neplatných textů, dočasných exportů a nástrojů, které "se možná ještě budou hodit". Nejde o velký audit. Jde o pravidelnou hodinu až dvě, kdy tým vědomě zavře pár věcí, které by jinak tiše bobtnaly.
+
+Špatná otázka zní: "Co všechno musíme zkontrolovat?"
+
+Lepší otázka zní: "Které malé nepořádky dnes nejvíc zvyšují riziko, matou zákazníka nebo berou týmu pozornost?"
+
+Privacy-first provoz se láme právě tady. Ne ve velkých prohlášeních, ale v tom, jestli někdo smaže starý export, odebere přístup bývalému dodavateli, vypne nepoužívaný event, opraví privacy text po změně formuláře a doplní vlastníka k nástroji, který zatím vlastnil hlavně optimismus.
+
+> Codyho komentář: Úklid není sexy. Ale víš, co je ještě míň sexy? Vysvětlovat po půl roce, proč má starý testovací nástroj produkční data, admin přístup a nikdo neví, kdo ho zapnul.
+
+### Vyber pět oblastí, ne celý vesmír
+
+Měsíční úklid musí být malý, jinak se z něj stane projekt. Projekt dostane název, název dostane tabulku, tabulka dostane vlastníka a za tři měsíce se zjistí, že se vlastně nic nesmazalo.
+
+Začni pěti oblastmi:
+
+| Oblast | Co hledat | Typická akce |
+| --- | --- | --- |
+| Přístupy | staré účty, zbyteční admini, exportní oprávnění | odebrat, zúžit, nastavit datum revize |
+| Data | dočasné exporty, staré leady, debug logy, testovací soubory | smazat, anonymizovat, zkrátit retenci |
+| Měření | eventy bez vlastníka, dashboardy bez rozhodnutí, staré kampaně | vypnout, archivovat, přepsat účel |
+| Obsah | zastaralé články, neplatné sliby, rozbité odkazy, staré screenshoty | aktualizovat, sloučit, archivovat |
+| Nástroje | nepoužívané SaaS účty, integrace, embedy a skripty | zrušit, přiřadit vlastníka, doplnit vendor kartu |
+
+Nesnaž se každý měsíc projít všechno do hloubky. Střídej fokus. Jeden měsíc víc přístupy, další měsíc obsah, potom analytika. Důležité je, aby každý běh skončil konkrétní změnou, ne jen dojmem, že "máme lepší přehled".
+
+### Začni seznamem posledních změn
+
+Úklid nemá začínat abstraktním auditem. Začni tím, co se za poslední měsíc opravdu změnilo:
+
+- nový formulář,
+- nová landing page,
+- nová integrace,
+- změna pricingu,
+- nový event v analytice,
+- nový dodavatel,
+- nové onboardingové e-maily,
+- nový export,
+- nový člověk nebo externista,
+- ukončený pilot nebo zákazník.
+
+Ke každé změně si polož otázku:
+
+| Změna | Co mohla zanechat za sebou? |
+| --- | --- |
+| Nový formulář | nová data, nový účel, nové retenční pravidlo, nový mikrotext |
+| Pilot | dočasná data, demo účet, exporty, přístupy, poznámky v CRM |
+| Integrace | tokeny, webhooky, retry frontu, logy, dokumentaci |
+| Článek | zdroje k budoucí revizi, interní odkazy, RSS položku, metadatový slib |
+| Externista | přístupy, osobní tokeny, dokumenty, vlastnictví automatizací |
+
+Tím se úklid napojí na realitu. Nehledáš nepořádek náhodně. Hledáš stopy po změnách, které mají největší šanci vytvořit nový datový nebo provozní dluh.
+
+### Zavři dočasné věci
+
+Dočasné věci jsou největší lež v provozu. Dočasný export. Dočasný admin. Dočasný token. Dočasný testovací bucket. Dočasný skript v cron tabulce. Všechny se tváří nevinně a pak zestárnou do podoby "raději na to nesahejme".
+
+Měsíčně projdi:
+
+- dočasné exporty a CSV,
+- preview prostředí,
+- testovací účty,
+- pilotní workspace,
+- sdílené odkazy,
+- integrační tokeny,
+- jednorázové skripty,
+- ručně vytvořené reporty,
+- nahrané screenshoty a přílohy,
+- rozpracované dokumenty s citlivým kontextem.
+
+U každé položky rozhodni:
+
+| Rozhodnutí | Kdy použít |
+| --- | --- |
+| Smazat | účel skončil a není samostatný důvod držet data |
+| Anonymizovat | obsah je užitečný jako vzor, identita není potřeba |
+| Archivovat | existuje právní, účetní nebo provozní důvod |
+| Ponechat s revizí | položka má účel, ale potřebuje datum návratu |
+| Převést do produktu | opakovaná ruční věc má být funkce, dokumentace nebo automatizace |
+
+Nejhorší rozhodnutí je žádné rozhodnutí. To je přesně okamžik, kdy se z dočasného souboru stane trvalá odpovědnost.
+
+### Zkontroluj, jestli veřejné texty sedí s realitou
+
+Privacy-first značka si nemůže dovolit, aby web říkal něco jiného než provoz. Jednou měsíčně vyber několik veřejných míst a ověř je proti skutečnému stavu:
+
+- privacy policy,
+- cookie informace,
+- pricing stránka,
+- stránka o bezpečnosti,
+- dokumentace exportu a smazání,
+- onboarding mikrotexty,
+- formulářové potvrzení,
+- changelog nebo release notes,
+- články s aktuálním doporučením.
+
+Kontrolní otázky:
+
+- Slibujeme méně dat, než reálně sbíráme?
+- Říkáme, že odhlášení je snadné, a opravdu je?
+- Popisujeme export, který produkt umí dodat?
+- Tvrdíme evropský provoz tam, kde nový dodavatel přidal nejasný přenos?
+- Mluvíme o agregované analytice, ale někde zůstal starý tracker?
+- Uvádíme starý pricing, starý limit nebo starou cestu zrušení?
+
+Když najdeš nesoulad, oprav buď text, nebo provoz. Jen si nevybírej třetí variantu: nechat oboje a doufat, že si toho nikdo nevšimne. To je compliance verze schovávání špinavého nádobí do trouby.
+
+### Vyčisti rozhodovací systém
+
+Backlog, roadmapa, analytika a dokumentace mají týmu pomáhat rozhodovat. Když se neuklízí, začnou rozhodování brzdit.
+
+Měsíčně se podívej na:
+
+| Místo | Otázka |
+| --- | --- |
+| Backlog | Které položky jsou staré hypotézy bez vlastníka? |
+| Roadmapa | Které závazky už neodpovídají realitě segmentu? |
+| Dashboard | Které metriky nikdo nepoužil k rozhodnutí? |
+| Dokumentace | Která stránka způsobuje víc ticketů než odpovědí? |
+| Changelog | Které změny nebyly vysvětlené zákazníkům nebo supportu? |
+| CRM | Které leady už nemají férový další krok? |
+
+Každý měsíc něco zavři. Ne jen přesuň. Zavřít může znamenat:
+
+- smazat mrtvý event,
+- archivovat nápad,
+- spojit duplicitní dokumentaci,
+- označit článek k přepisu,
+- ukončit kampaň,
+- odebrat kanál z pravidelného review,
+- napsat rozhodnutí, proč se něco nebude dělat.
+
+Produktivita malého týmu neroste jen tím, že dělá víc. Roste i tím, že méně věcí nechává otevřených.
+
+### Vytvoř měsíční kartu úklidu
+
+Nepotřebuješ nový nástroj. Stačí jedna karta v issue trackeru, Markdown souboru nebo rozhodovacím logu.
+
+| Pole | Odpověď |
+| --- | --- |
+| Měsíc |  |
+| Fokus úklidu | přístupy / data / měření / obsah / nástroje |
+| Co se za poslední měsíc změnilo |  |
+| Co jsme smazali nebo zúžili |  |
+| Co jsme aktualizovali |  |
+| Co ponecháváme vědomě a proč |  |
+| Jaké riziko zůstává |  |
+| Kdo vlastní další krok |  |
+| Datum příští kontroly |  |
+
+Nejdůležitější řádky jsou "co jsme smazali nebo zúžili" a "co ponecháváme vědomě". Úklid bez mazání je často jen inventura. Inventura je užitečná, ale sama o sobě ještě neodlehčí systému.
+
+### Checklist: Měsíční provozní úklid
+
+- [ ] Vybrali jsme jeden hlavní fokus měsíce.
+- [ ] Prošli jsme změny za poslední měsíc a jejich datové/provozní stopy.
+- [ ] Smazali nebo anonymizovali jsme dočasné exporty, které už nemají účel.
+- [ ] Zkontrolovali jsme staré přístupy, admin role a exportní oprávnění.
+- [ ] Vypnuli jsme alespoň jeden nepoužívaný event, skript, kampaň, nástroj nebo dokumentační slib, pokud existoval.
+- [ ] Veřejné texty odpovídají reálnému provozu u vybraných stránek.
+- [ ] Dashboardy a metriky mají vlastníka nebo jdou pryč.
+- [ ] U ponechaných rizik je napsané proč, kdo je vlastní a kdy se vrátíme.
+- [ ] Výsledek úklidu je zapsaný jako rozhodnutí, ne jako pocit.
+- [ ] Další měsíc má navržený fokus.
+
+### Mini úkol
+
+Vezmi posledních 30 dní práce na webu nebo SaaS a vyplň krátkou tabulku:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jaká změna přidala nový formulář, event, skript, export nebo dodavatele? |  |
+| Který dočasný soubor, účet nebo přístup už nemá důvod existovat? |  |
+| Který veřejný text může být po změnách nepřesný? |  |
+| Kterou metriku nikdo nepoužil k rozhodnutí? |  |
+| Který nástroj nebo integrace nemá jasného vlastníka? |  |
+| Co dnes smažeme, zúžíme nebo archivujeme? |  |
+
+Potom udělej jednu konkrétní věc: smaž starý export, odeber přístup, vypni nepoužívaný event, oprav jednu privacy větu, archivuj mrtvý backlog nápad nebo doplň vlastníka k nástroji. Měsíční úklid není o perfektním pořádku. Je o tom, aby systém každý měsíc trochu zhubnul tam, kde zbytečně nabral riziko.
+
 ## Zdroje
 
 - ICANN: Information for Domain Name Registrants - práva a odpovědnosti držitelů domén včetně správy, obnovy a převodu doménové registrace: https://www.icann.org/registrants
@@ -12543,6 +12725,7 @@ Potom udělej jednu konkrétní opravu: doplň smoke test pro billing, přidej s
 
 ## Pracovní log
 
+- 2026-07-13: Doplněna příloha o měsíčním provozním úklidu bez velkého auditu: výběr pěti oblastí, kontrola stop po posledních změnách, zavírání dočasných exportů a přístupů, ověření veřejných textů proti realitě, úklid backlogu/dashboardů/dokumentace, měsíční karta úklidu, checklist a mini úkol.
 - 2026-07-13: Doplněna příloha o QA a release kontrole bez klikacího pekla: kritické cesty podle práce uživatele, definice hotovo s ověřením, automatizace nudných kontrol, krátký smoke test, bezpečná testovací data, release karta, privacy-first bug reporty, měsíční převod QA signálů do backlogu, checklist a mini úkol.
 - 2026-07-13: Doplněna příloha o open-source licencích bez právního chaosu: licenční kontrola při přidání závislosti, týmový semafor licencí, práce se SPDX identifikátory, rozdíl mezi interním použitím a distribucí, kontrola assetů, licenční výstup pro zákaznický audit, postup při nejasné licenci, checklist a mini úkol; ověřeny a doplněny zdroje SPDX, OSI, GitHub Docs a npm Docs.
 - 2026-07-13: Doplněna příloha o správě závislostí bez update paniky: inventář balíčků a externích skriptů, rozlišení bezpečnostních patchů/údržby/major upgradů, karta alertu, dependency review v PR, aktualizační rytmus, přísnější kontrola browser závislostí, výjimky, checklist a mini úkol; ověřeny a doplněny zdroje OWASP SCVS, GitHub Docs, npm Docs a OpenSSF Scorecard.
