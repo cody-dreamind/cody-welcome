@@ -11250,6 +11250,148 @@ Vyber jednu plánovanou nebo historicky bolavou změnu URL a připrav její migr
 
 Potom udělej jednu konkrétní věc: oprav jeden redirect řetězec, vyhoď starou URL ze sitemap, doplň chybějící canonical, nebo napiš migrační mapu pro pět nejdůležitějších URL. SEO migrace není loterie. Je to úklid cesty, po které už někdo chodí.
 
+## Příloha: Retence marketingových a analytických dat bez nekonečného skladu
+
+Retence je nudné slovo pro velmi praktickou věc: jak dlouho držíš data, než je smažeš, agreguješ nebo anonymizuješ. V marketingu a analytice se často řeší až ve chvíli, kdy už existuje pět exportů, tři dashboardy, CRM plné historických poznámek a nikdo neví, jestli starý lead z roku 2019 ještě něco znamená. To není strategie. To je datová půda, na kterou se bojíš vlézt bez respirátoru.
+
+Privacy-first retence začíná jednoduchou větou: data mají žít tak dlouho, dokud slouží jasnému účelu. Evropská komise k GDPR principům uvádí, že osobní data mají být uložena co nejkratší dobu s ohledem na důvod zpracování a případné zákonné povinnosti: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr/how-long-can-data-be-kept-and-it-necessary-update-it_en. Tohle není právní rada pro všechny situace. Je to dobrý produktový výchozí bod: nejdřív účel, potom doba, potom technické vynucení.
+
+Špatná otázka zní: "Co kdyby se nám ta data někdy hodila?"
+
+Lepší otázka zní: "Jaké rozhodnutí z těchto dat ještě reálně uděláme a kdy už budou spíš riziko než pomoc?"
+
+### Rozděl data podle životnosti
+
+Ne všechna marketingová a analytická data mají stejnou hodnotu v čase. Klik na CTA z dnešního landing page testu může být užitečný příští týden, ale za dva roky většinou ne. Fakturační údaje mají jiné povinnosti než anonymní počet návštěv. Supportní poznámka o problému zákazníka může být relevantní během řešení, ale nemá automaticky žít v marketingové segmentaci.
+
+Praktické rozdělení:
+
+| Kategorie | Typický účel | Retenční otázka |
+| --- | --- | --- |
+| Agregovaná webová analytika | trend návštěvnosti, konverze, výkon obsahu | potřebujeme detail po dnech, nebo stačí měsíční souhrn? |
+| Produktové eventy | aktivace, retence, používání funkcí | kdy už událost nepomůže rozhodnout o produktu? |
+| Lead data v CRM | obchodní navázání, kvalifikace, historie komunikace | kdy lead přestává být aktivní obchodní příležitost? |
+| Marketingové souhlasy | doložení, k čemu se člověk přihlásil | jak dlouho potřebujeme důkaz a jak ho umíme odvolat? |
+| Suppression list | neoslovovat, respektovat odhlášení nebo námitku | jak zachovat zákaz bez držení zbytečného detailu? |
+| Exporty a reporty | sdílení výsledků, audit, rozhodnutí | kdy má export zmizet z pracovního prostoru? |
+
+Tahle tabulka není právní rozpis lhůt. Je to způsob, jak zabránit jedné nebezpečné větě: "Všechno necháme navždy, protože disk je levný." Disk je levný. Únik dat, špatná odpověď na žádost o výmaz a chaos v týmu levné nejsou.
+
+### Retenci navrhni už při vzniku dat
+
+Každý nový formulář, event, import nebo dashboard by měl mít malou retenční kartu. Nemusí to být enterprise román. Stačí šest polí:
+
+| Pole | Otázka |
+| --- | --- |
+| Účel | Jaké rozhodnutí nebo provozní práci data podporují? |
+| Kategorie dat | Jsou data osobní, pseudonymizovaná, agregovaná nebo anonymní? |
+| Vlastník | Kdo smí rozhodnout o změně nebo prodloužení uchování? |
+| Výchozí doba | Kdy se data smažou, agregují nebo anonymizují? |
+| Výjimka | Co se stane při právní povinnosti, sporu, incidentu nebo aktivním zákaznickém vztahu? |
+| Technické vynucení | Jak systém pozná, že má akci provést? |
+
+Příklad pro B2B lead:
+
+| Pole | Příklad |
+| --- | --- |
+| Účel | vyhodnotit poptávku a navázat obchodní komunikaci |
+| Kategorie dat | jméno, pracovní e-mail, firma, problém, stav leadu |
+| Vlastník | sales owner |
+| Výchozí doba | aktivní příležitost plus domluvené období následného follow-upu |
+| Výjimka | smluvní vztah, právní povinnost, odhlášení nebo námitka |
+| Technické vynucení | měsíční CRM review, automatický stav "k uzavření", suppression list pro zákaz oslovení |
+
+Codyho komentář: Retence bez vlastníka je jako pokoj "na později". Všechno se tam vejde, nic se odtamtud nevrací a jednou zjistíš, že tam bydlí polovina firmy.
+
+### Nejprve agreguj, potom smaž detail
+
+U analytiky často nepotřebuješ stejnou granularitu navždy. Pro produktové rozhodnutí po releasu můžeš chtít denní data. Pro kvartální pohled často stačí týdenní nebo měsíční souhrn. Pro veřejné reporty někdy stačí trend bez jakéhokoli detailu.
+
+Praktický model:
+
+1. Krátké období: detail pro ověření releasu, experimentu nebo chyby.
+2. Střední období: agregované metriky pro produktové a marketingové rozhodování.
+3. Dlouhé období: jen anonymní nebo velmi agregované trendy, pokud mají smysl.
+4. Konec života: smazání detailu, exportů a pracovních kopií.
+
+Příklad: U landing page kampaně držíš po dobu kampaně a krátkého vyhodnocení denní návštěvy, kliky na CTA a dokončené formuláře. Po uzavření kampaně uložíš shrnutí: zdroj, období, počet návštěv, počet poptávek, kvalita leadů, rozhodnutí. Detailní exporty smažeš. Tým má znalost, ale ne nekonečnou stopu.
+
+### CRM není muzeum dávných nadějí
+
+Největší retenční chaos bývá v CRM. Staré leady se nikdy nezavřou, poznámky se hromadí, segmenty se dědí z kampaně na kampaň a marketing po letech osloví člověka, který už dávno řekl "ne". To není growth. To je digitální nepořádek v obleku.
+
+Zaveď jednoduché stavy:
+
+- Aktivní příležitost: existuje další domluvený krok.
+- Nurture se souhlasem nebo relevantním vztahem: člověk ví, proč komunikaci dostává.
+- Uzavřeno bez dalšího oslovení: konec obchodní komunikace.
+- Suppressed: zákaz oslovení, odhlášení nebo námitka.
+- K revizi: starý záznam bez jasného účelu.
+
+Každý stav má mít pravidlo, co se smí dělat dál. "K revizi" není nová dlouhodobá police. Je to krátký mezistav před uzavřením, smazáním, agregací nebo potvrzením konkrétního účelu.
+
+### Exporty maž rychleji než hlavní systém
+
+Data v hlavním systému aspoň někdo vidí a spravuje. Exporty v tabulkách, prezentacích, stažených CSV a složkách "final_final" jsou horší. Často nemají audit, přístupová pravidla, automatické mazání ani kontext.
+
+Pravidla pro export:
+
+- Export má mít účel, vlastníka a datum smazání.
+- Export nesmí obsahovat víc polí, než úkol potřebuje.
+- Citlivá pole maskuj nebo vynech.
+- Ve sdílených složkách používej časově omezený přístup.
+- Po rozhodnutí smaž pracovní kopie.
+- Do reportu přenášej závěr, ne celý surový soubor.
+
+Pokud někdo říká, že "si to radši nechá pro jistotu", požádej ho o větu: "Za jakých podmínek ten export otevřeme a jaké rozhodnutí podle něj uděláme?" Když odpověď není, export nemá životní plán.
+
+### Retence musí být technická rutina
+
+Retenční pravidlo napsané v dokumentu je dobrý začátek, ale samo o sobě nic nesmaže. Potřebuješ provozní mechanismus.
+
+Možnosti:
+
+- databázový job, který anonymizuje nebo maže staré eventy,
+- nastavení retence v analytickém nástroji,
+- CRM workflow pro staré leady bez aktivity,
+- pravidelný review report "data k uzavření",
+- automatické mazání dočasných exportů ve sdíleném úložišti,
+- release checklist, který u nového eventu vyžaduje retenční pravidlo.
+
+Nezačínej hned dokonalou automatizací. Začni jedním místem s největším rizikem: staré CRM leady, analytické eventy s identifikátory, exporty z kampaní nebo supportní přílohy. Jedna funkční rutina je lepší než dokument, který se tváří jako firemní ústava a nikdo ho nečetl.
+
+### Checklist: Retence marketingových a analytických dat
+
+- [ ] Každá kategorie marketingových a analytických dat má jasný účel.
+- [ ] U každé kategorie víme, jestli jde o osobní, pseudonymizovaná, agregovaná nebo anonymní data.
+- [ ] Retenční doba vychází z účelu a případných zákonných povinností, ne z pohodlí.
+- [ ] U analytiky máme plán, kdy detail nahradí agregace.
+- [ ] CRM má stavy pro aktivní, uzavřené, suppressed a k revizi.
+- [ ] Suppression list drží nutné minimum pro respektování odhlášení, námitky nebo zákazu oslovení.
+- [ ] Exporty mají vlastníka, účel a datum smazání.
+- [ ] Do reportů se neposílají surová data, pokud stačí závěr nebo agregace.
+- [ ] Retence je technicky vynucená nebo alespoň pravidelně kontrolovaná.
+- [ ] Privacy notice, interní záznam o zpracování a reálné chování systému si neodporují.
+- [ ] Tým ví, kdo smí prodloužit uchování dat a jak se takové rozhodnutí zdokumentuje.
+
+### Mini úkol
+
+Vyber jednu oblast: webová analytika, produktové eventy, CRM leady, newsletter, kampaně nebo exporty. Vyplň retenční kartu:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jaká data držíme? |  |
+| Proč je držíme? |  |
+| Jaké rozhodnutí podle nich ještě uděláme? |  |
+| Jsou osobní, pseudonymizovaná, agregovaná nebo anonymní? |  |
+| Kdo je vlastník? |  |
+| Kdy se smažou, agregují nebo anonymizují? |  |
+| Jaká výjimka může uchování prodloužit? |  |
+| Kde existují exporty nebo kopie? |  |
+| Jak technicky ověříme, že pravidlo funguje? |  |
+
+Potom udělej jednu malou opravu: nastav datum smazání exportu, zavři deset starých CRM leadů bez dalšího kroku, přepiš jeden event bez osobních údajů, nebo vytvoř automatickou připomínku pro měsíční review. Retence se nestaví jedním velkým úklidem. Retence se stává normální údržbou.
+
 ## Zdroje
 
 - ICANN: Information for Domain Name Registrants - práva a odpovědnosti držitelů domén včetně správy, obnovy a převodu doménové registrace: https://www.icann.org/registrants
@@ -11298,6 +11440,7 @@ Potom udělej jednu konkrétní věc: oprav jeden redirect řetězec, vyhoď sta
 - European Data Protection Board: Guidelines on the right to data portability under Regulation 2016/679, WP242 rev.01 - pokyny k právu na přenositelnost údajů a použitelným strukturovaným formátům: https://www.edpb.europa.eu/documents/guideline/guidelines-on-the-right-to-data-portability-under-regulation-2016679-wp242_en
 - European Commission: Information for individuals - praktický přehled práv jednotlivců podle ochrany osobních údajů v EU: https://commission.europa.eu/law/law-topic/data-protection/information-individuals_en
 - European Commission: Principles of the GDPR - přehled principů jako transparentnost, účelové omezení, minimalizace dat a omezení uchování: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr_en
+- European Commission: For how long can data be kept and is it necessary to update it? - praktické vysvětlení omezení doby uložení, mazání nebo review dat a vazby na účel zpracování: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr/how-long-can-data-be-kept-and-it-necessary-update-it_en
 - European Data Protection Board: FAQ for small business - praktické odpovědi k osobním údajům, pseudonymizaci, anonymizaci, právům jednotlivců a rolím správce/zpracovatele: https://www.edpb.europa.eu/sme/find-practical-info/faq_en
 - European Commission: What data can we process and under which conditions? - praktické vysvětlení účelu, rozsahu a základních pravidel zpracování osobních údajů: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr/overview-principles/what-data-can-we-process-and-under-which-conditions_en
 - European Commission: What is a data controller or a data processor? - rozlišení rolí správce a zpracovatele osobních údajů v provozu služeb a dodavatelů: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/obligations/controllerprocessor/what-data-controller-or-data-processor_en
@@ -11354,6 +11497,7 @@ Potom udělej jednu konkrétní věc: oprav jeden redirect řetězec, vyhoď sta
 
 ## Pracovní log
 
+- 2026-07-13: Doplněna příloha o retenci marketingových a analytických dat bez nekonečného skladu: rozdělení dat podle životnosti, retenční karta, agregace detailu, CRM stavy, pravidla pro exporty, technické vynucení, checklist a mini úkol; ověřen a doplněn zdroj Evropské komise k době uchování osobních údajů.
 - 2026-07-13: Doplněna příloha o SEO migracích bez paniky a datového přejídání: rozhodování, kdy měnit URL, migrační mapa, redirecty, canonical/sitemap/interní odkazy, release runbook, privacy-first monitoring, checklist a mini úkol; ověřeny a doplněny zdroje Google Search Central k site moves, redirectům, sitemap a recrawlu.
 - 2026-07-13: Doplněna příloha o uživatelském výzkumu bez nahrávacího vysavače: výzkum od rozhodnutí, otázky na minulé chování, opatrné nahrávání, rozhodovací poznámky, pozorování bez produkčních dat, napojení na backlog, checklist a mini úkol.
 - 2026-07-13: Zpřesněn doporučený rytmus práce s e-bookem o vědomé rozhodnutí, co příště neměřit, aby praktické kroky zůstaly privacy-first.
