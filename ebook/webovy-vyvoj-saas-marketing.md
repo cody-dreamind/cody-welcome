@@ -12226,6 +12226,208 @@ Na konci uzavři jednu věc:
 
 > Codyho komentář: Licence nejsou protivývojářský vynález. Jsou to pravidla provozu cizí práce. Když je respektuješ průběžně, zůstane open source výhoda. Když je ignoruješ, stane se z něj skrytý dluh s právnickým kloboukem.
 
+## Příloha: QA a release kontrola bez klikacího pekla
+
+Kvalita se v malém týmu často řeší dvěma extrémy. Buď se všechno ručně prokliká těsně před nasazením, ideálně v pátek odpoledne, protože osud má smysl pro humor. Nebo se tým uklidňuje tím, že "máme testy", aniž by někdo věděl, jestli testy pokrývají skutečnou práci zákazníka.
+
+Privacy-first SaaS potřebuje QA, které chrání uživatele, data i tempo týmu. Nejde o dokonalou testovací pyramidu na plakát. Jde o jednoduchý systém, který odpoví na tři otázky:
+
+- Co se nesmí rozbít?
+- Jak to poznáme dřív než zákazník?
+- Jak ověříme změnu bez kopírování produkčních dat a bez slídění?
+
+Dobré QA není brzda releasu. Je to dohoda, které riziko už tým nechce pokaždé znovu objevovat.
+
+### Testuj podle práce uživatele
+
+Začni hlavními schopnostmi produktu, ne seznamem obrazovek. Uživatel neříká "otestoval jsem route `/settings/billing`". Říká: "Potřebuju stáhnout fakturu", "pozvat kolegu", "importovat kontakty", "zrušit účet" nebo "odeslat poptávku".
+
+Praktický seznam kritických cest:
+
+| Cesta | Proč je kritická | Co musí platit |
+| --- | --- | --- |
+| Registrace a první přihlášení | Bez ní není aktivace | uživatel založí účet, dostane správný e-mail, vidí první krok |
+| Pozvání člena týmu | SaaS často roste přes tým | pozvánka má správná oprávnění a nejde zneužít |
+| Billing a faktura | Přímý dopad na peníze a důvěru | plán, platba, faktura a zrušení dávají smysl |
+| Export dat | Důvěra a kontrola nad daty | export obsahuje správný rozsah a neobsahuje cizí data |
+| Smazání nebo uzavření účtu | Privacy-first závazek | uživatel chápe dopad a systém spustí správný proces |
+| Support formulář | Záchranná cesta při problému | zpráva odejde, sbírá minimum údajů a má jasný stav |
+
+Tento seznam nemusí být dlouhý. Má být živý. Když přidáš novou důležitou schopnost produktu, přidej i testovací scénář. Když funkce zestárne nebo změní význam, scénář uprav. QA podle staré reality je jen nostalgie s checkboxy.
+
+### Definice hotovo musí obsahovat ověření
+
+Každý úkol by měl mít jasné, jak se pozná, že je hotový. Ne jen "implementováno", ale "ověřeno takto".
+
+Příklad slabé definice:
+
+- Přidat export faktur.
+
+Lepší definice:
+
+- Administrátor stáhne PDF faktury za vybrané období.
+- Běžný člen týmu bez billing oprávnění export nevidí.
+- Prázdné období ukáže srozumitelný stav.
+- Export neobsahuje interní poznámky ani údaje jiného workspace.
+- Změna má test pro oprávnění a smoke test v preview.
+
+Privacy-first doplněk: u každé změny, která pracuje s daty, si napiš i negativní ověření. Co se nesmí stát? Nejen "data se zobrazí", ale také "nezobrazí se data cizího účtu", "neodešle se e-mail člověku bez vztahu k workspace" a "log neobsahuje celý obsah zprávy".
+
+### Automatizuj nudné, ručně kontroluj úsudek
+
+Automatické testy jsou nejlepší tam, kde je kontrola opakovatelná a chyba drahá:
+
+- oprávnění a role,
+- výpočty ceny, limitů a stavů,
+- validace formulářů,
+- API kontrakty,
+- migrace databáze,
+- generování e-mailů,
+- kritické produktové workflow,
+- bezpečné fallbacky při chybě integrace.
+
+Ručně má smysl kontrolovat věci, kde záleží na úsudku:
+
+- jestli text vysvětluje dopad akce lidsky,
+- jestli onboarding působí jasně,
+- jestli je chybový stav použitelný,
+- jestli privacy text odpovídá reálnému chování,
+- jestli změna nezhoršila důvěru nebo rozhodování zákazníka.
+
+Špatný ruční QA proces je desetistránkový checklist, který lidé odkliknou bez přemýšlení. Dobrý ruční QA proces je krátký smoke test kritických cest plus několik otázek, které nutí tým přemýšlet o riziku.
+
+### Smoke test drž krátký a nemilosrdně praktický
+
+Smoke test po releasu nebo před releasem má odpovědět: "Dá se produkt pořád používat pro hlavní práci?"
+
+Příklad pro malý B2B SaaS:
+
+1. Vytvoř nový testovací účet.
+2. Dokonči onboarding a vytvoř první pracovní objekt.
+3. Pozvi uživatele s nižší rolí.
+4. Ověř jednu placenou nebo limitovanou funkci.
+5. Odešli support zprávu nebo interní notifikaci do testovacího kanálu.
+6. Zkontroluj billing nebo export podle typu produktu.
+7. Ověř, že odhlášení, smazání nebo zavření účtu nezačne padat.
+
+Sedm kroků stačí, pokud pokrývají skutečný produktový život. Třicet kroků nestačí, pokud jen opisují menu.
+
+Smoke test má mít vlastníka a jasný výsledek:
+
+- prošlo,
+- prošlo s drobnou poznámkou,
+- blokuje release,
+- release povolen s výjimkou a plánem opravy.
+
+Výjimka musí mít důvod, vlastníka a termín. "Víme o tom" není plán. Je to jen věta, která si oblékla pracovní tričko.
+
+### Testovací data nesmí být produkční zkratka
+
+QA potřebuje realistická data, ale ne reálné osobní údaje. Používej scénáře:
+
+- účet bez dat,
+- účet s velkým objemem položek,
+- uživatel s omezenou rolí,
+- zákazník po expiraci trialu,
+- workspace s dlouhými názvy a diakritikou,
+- import se špatnými řádky,
+- fakturační kontakt odlišný od administrátora,
+- export, který má respektovat oprávnění.
+
+U každého scénáře popiš, co ověřuje. Tím se testovací data stanou dokumentací produktu. Když někdo opraví bug, přidej scénář, který bug příště zachytí. Takhle se QA postupně učí.
+
+Privacy-first pravidla pro QA data:
+
+- Nepoužívej produkční dump jako běžnou pomůcku.
+- Screenshoty z testů nesmí obsahovat reálné zákaznické údaje.
+- Testovací e-maily posílej do lokální schránky nebo testovací domény.
+- Platební a CRM integrace v QA používej v sandboxu.
+- Exporty a logy z testů pravidelně maž.
+- Demo osoby pojmenuj zjevně fiktivně, aby se nepletly se skutečnými lidmi.
+
+### Release checklist má hlídat riziko, ne uklidňovat svědomí
+
+Checklist před releasem nemá být formální rituál. Má zachytit věci, které se v malém týmu reálně zapomínají.
+
+Krátká release karta:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Co se mění pro uživatele? |  |
+| Které kritické cesty to může ovlivnit? |  |
+| Jaké testy nebo smoke testy proběhly? |  |
+| Pracuje změna s osobními nebo zákaznickými daty? |  |
+| Mění se role, oprávnění, export, retence nebo notifikace? |  |
+| Je potřeba update dokumentace, changelogu nebo support poznámky? |  |
+| Jak poznáme problém po releasu bez sledování jednotlivců? |  |
+| Jaký je rollback nebo vypnutí funkce? |  |
+
+Poslední dvě otázky jsou důležité. Monitoring po releasu nemá znamenat "nahrajeme každému obrazovku". Často stačí agregované chyby, počet dokončených akcí, latence, support signály a ruční kontrola kritické cesty.
+
+### Chyby zapisuj tak, aby šly opravit
+
+Bug report bez kontextu je drahá hádanka. Dobrý bug report má být krátký, ale reprodukovatelný:
+
+- prostředí: produkce, staging, preview, lokál,
+- role uživatele a stav účtu,
+- kroky k reprodukci,
+- očekávaný výsledek,
+- skutečný výsledek,
+- dopad na uživatele,
+- citlivost dat,
+- screenshot nebo log jen pokud neobsahuje zbytečné osobní údaje,
+- priorita podle dopadu, ne podle hlasitosti.
+
+Privacy-first bug report neukládá víc dat, než je potřeba. Když screenshot obsahuje e-mail, jméno zákazníka, fakturační údaje nebo obsah zprávy, rediguj ho před vložením do issue. Když log obsahuje token nebo osobní data, nejdřív řeš únik a až potom pohodlí debugování.
+
+### QA výstup má živit produktový backlog
+
+QA není jen brána před releasem. Je to zdroj produktového učení. Pokud se stejné věci opakují, není to "uživatelé jsou nepozorní". Možná je onboarding nejasný, formulář chce moc údajů, oprávnění jsou divně pojmenovaná nebo chybová hláška říká technickou pravdu, ale lidsky nic.
+
+Jednou za měsíc projdi:
+
+- nejčastější chyby z releasů,
+- opakované support dotazy,
+- testovací scénáře, které se nejvíc rozbíjely,
+- místa, kde QA potřebovalo produkční kontext,
+- výjimky v releasu,
+- bugy s privacy nebo oprávněními.
+
+Z toho vyber jednu systémovou opravu. Ne deset. Jednu. Přidat lepší seed data, zjednodušit formulář, doplnit test oprávnění, upravit chybovou hlášku nebo přepsat release checklist. Kvalita roste rytmem, ne jedním hrdinským týdnem.
+
+### Checklist: QA a release kontrola privacy-first
+
+- [ ] Máme seznam kritických cest podle práce uživatele.
+- [ ] Každý větší úkol má definici hotovo včetně ověření.
+- [ ] Změny s daty mají i negativní kontrolu: co se nesmí zobrazit, odeslat nebo zalogovat.
+- [ ] Smoke test je krátký, aktuální a má vlastníka.
+- [ ] Testovací data jsou scénáře, ne běžný produkční dump.
+- [ ] QA e-maily, platby, CRM a webhooky běží v bezpečném testovacím režimu.
+- [ ] Release karta kontroluje dopad na role, oprávnění, export, retenci a notifikace.
+- [ ] Monitoring po releasu používá agregované signály a provozní chyby, ne plošné sledování lidí.
+- [ ] Bug reporty neobsahují zbytečná osobní data, tokeny ani zákaznické detaily.
+- [ ] Výjimky v releasu mají důvod, vlastníka a termín opravy.
+- [ ] Opakované QA problémy se mění v backlogové položky, ne v povzdechy na poradě.
+
+### Mini úkol
+
+Vyber jeden produkt nebo web a sestav první verzi QA mapy:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jakých pět cest se nesmí rozbít? |  |
+| Která cesta má největší privacy riziko? |  |
+| Jaká testovací data pro ni dnes existují? |  |
+| Který krok se kontroluje ručně a proč? |  |
+| Co umíme automatizovat tento měsíc? |  |
+| Kde se dnes používají screenshoty, logy nebo exporty s citlivými údaji? |  |
+| Jaký je nejkratší smoke test před releasem? |  |
+| Kdo rozhoduje o release výjimce? |  |
+
+Potom udělej jednu konkrétní opravu: doplň smoke test pro billing, přidej seed scénář pro uživatele bez oprávnění, vytvoř release kartu, zrediguj vzor bug reportu, nebo přidej negativní test, že export neobsahuje data cizího workspace.
+
+> Codyho komentář: QA není oddělení, které má zachránit špatně popsanou práci. Je to týmový zvyk ptát se před releasem: co by tady mohlo poškodit zákazníka, data nebo důvěru? Když tu otázku pokládáš pravidelně, release je méně loterie a víc řemeslo.
+
 ## Zdroje
 
 - ICANN: Information for Domain Name Registrants - práva a odpovědnosti držitelů domén včetně správy, obnovy a převodu doménové registrace: https://www.icann.org/registrants
@@ -12341,6 +12543,7 @@ Na konci uzavři jednu věc:
 
 ## Pracovní log
 
+- 2026-07-13: Doplněna příloha o QA a release kontrole bez klikacího pekla: kritické cesty podle práce uživatele, definice hotovo s ověřením, automatizace nudných kontrol, krátký smoke test, bezpečná testovací data, release karta, privacy-first bug reporty, měsíční převod QA signálů do backlogu, checklist a mini úkol.
 - 2026-07-13: Doplněna příloha o open-source licencích bez právního chaosu: licenční kontrola při přidání závislosti, týmový semafor licencí, práce se SPDX identifikátory, rozdíl mezi interním použitím a distribucí, kontrola assetů, licenční výstup pro zákaznický audit, postup při nejasné licenci, checklist a mini úkol; ověřeny a doplněny zdroje SPDX, OSI, GitHub Docs a npm Docs.
 - 2026-07-13: Doplněna příloha o správě závislostí bez update paniky: inventář balíčků a externích skriptů, rozlišení bezpečnostních patchů/údržby/major upgradů, karta alertu, dependency review v PR, aktualizační rytmus, přísnější kontrola browser závislostí, výjimky, checklist a mini úkol; ověřeny a doplněny zdroje OWASP SCVS, GitHub Docs, npm Docs a OpenSSF Scorecard.
 - 2026-07-13: Doplněna příloha o feature flazích a postupných releasech bez sledovací laboratoře: typy flagů, karta přepínače, vysvětlitelné cílení, postupné zapínání se stop signály, měření jen pro rozhodnutí, úklid flagů, dopad na dokumentaci/support, checklist a mini úkol.
