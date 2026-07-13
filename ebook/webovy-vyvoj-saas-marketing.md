@@ -10428,6 +10428,142 @@ Vyber jeden e-mailový tok: newsletter, onboarding, fakturaci, reset hesla nebo 
 
 Potom udělej jednu opravu: nastav chybějící DKIM, přidej viditelné odhlášení, odděl transakční a marketingovou šablonu, smaž open rate z hlavního reportu nebo zdokumentuj suppression list. E-mailový kanál se nejlépe chrání tím, že se k němu chováš jako k dlouhodobému vztahu, ne jako k nekonečnému zásobníku kliků.
 
+## Příloha: Spam ochrana formulářů bez datového výletu
+
+Spam ve formulářích je otrava. Umí zaplavit inbox, znečistit CRM, spouštět zbytečné automatizace, ničit reporting a v horším případě zkoušet posílat škodlivé odkazy nebo přílohy. Reakce malého týmu bývá rychlá: vložit externí CAPTCHA widget, přidat další skript a doufat, že problém zmizí.
+
+Privacy-first přístup začíná jinak. Nejdřív se ptá: jak formulář zneužívají, co opravdu potřebujeme blokovat, jaké minimum signálů k tomu stačí a jestli kvůli spamu nemusíme posílat každého slušného návštěvníka přes cizí sledovací mechanismus.
+
+Špatná otázka zní: „Jaký anti-spam nástroj tam nalepíme?“
+
+Lepší otázka zní: „Jak navrhneme formulář tak, aby běžný člověk prošel snadno a robot musel dělat práci navíc?“
+
+> Codyho komentář: Když kvůli třem spam zprávám týdně pošleš všechny návštěvníky přes těžký externí script, možná jsi problém nevyřešil. Možná jsi jen vyměnil bordel v inboxu za bordel v datových tocích.
+
+### Začni mapou zneužití
+
+Ne každý formulář má stejné riziko. Kontaktní formulář, newsletter, registrace do SaaS, support s přílohami a demo request potřebují odlišnou ochranu.
+
+Praktická mapa:
+
+| Formulář | Co se může pokazit | Dopad | První ochrana |
+| --- | --- | --- | --- |
+| Kontakt | spam, odkazy, falešné poptávky | šum v inboxu a CRM | honeypot, rate limit, validace URL |
+| Newsletter | hromadné přihlášení cizích adres | špatná reputace odesílatele | double opt-in nebo potvrzení adresy |
+| Registrace | falešné účty, zneužití trialu | náklady, spam, riziko abuse | ověření e-mailu, limit podle IP a domény |
+| Support | škodlivé přílohy, citlivá data | bezpečnost a datový nepořádek | omezení typů souborů, sken, retence |
+| Demo request | nekvalitní leady, automatizace do sales | špatný reporting | jednoduchá kvalifikace a ruční kontrola |
+
+Nejdřív chraň nejdražší dopad. Pokud spam jen občas dorazí do inboxu, nepotřebuješ stejnou obranu jako u veřejné registrace, která vytváří účty, posílá e-maily a spouští trial infrastrukturu.
+
+### Vrstvy jsou lepší než jedna velká překážka
+
+Dobrá ochrana formuláře je několik malých vrstev:
+
+- serverová validace všech polí,
+- honeypot pole skryté pro lidi, viditelné pro jednoduché boty,
+- minimální čas vyplnění formuláře,
+- rate limit podle IP, účtu, e-mailové domény nebo workspace,
+- omezení počtu odkazů ve zprávě,
+- blokace zjevně jednorázových nebo podezřelých vzorů podle kontextu,
+- potvrzení e-mailu u akcí, které vytváří účet nebo odběr,
+- fronta pro ruční kontrolu u rizikovějších vstupů,
+- krátká retence odmítnutých pokusů.
+
+Výhoda vrstev je jednoduchá: běžný člověk si jich skoro nevšimne, ale automatizovaný spam musí překonat víc malých bariér. Externí CAPTCHA pak nemusí být výchozí odpověď. Může být až poslední možnost pro konkrétní scénář, kde mírnější obrana nestačí.
+
+### Honeypot má být tichý, ne chytřejší než tým
+
+Honeypot je skryté pole, které člověk nemá vyplnit. Jednoduchý bot ho často vyplní, protože mechanicky vyplňuje všechna pole. Když se pole vyplní, formulář může požadavek odmítnout nebo ho poslat do karantény.
+
+Pravidla:
+
+- pole pojmenuj neutrálně, ne `honeypot`,
+- neschovávej ho způsobem, který mate asistivní technologie,
+- na serveru ověřuj, že zůstalo prázdné,
+- při zachycení nevracej robotovi detailní důvod,
+- neloguj celý obsah zprávy jen proto, že byla podezřelá.
+
+Honeypot není dokonalý. Je ale levný, rychlý, privacy-friendly a u mnoha malých webů sníží šum bez dalšího dodavatele.
+
+### Rate limit navrhni podle škody
+
+Rate limit nemá trestat člověka, který se spletl ve formuláři. Má zastavit automatizované zneužití.
+
+Praktické limity:
+
+| Scénář | Limit |
+| --- | --- |
+| Kontaktní formulář | několik pokusů za krátký čas z jedné IP nebo fingerprintu bez osobního profilování |
+| Newsletter | limit na počet přihlášení jedné adresy a potvrzení vlastnictví e-mailu |
+| Registrace | limit podle IP, domény, workspace a počtu neověřených účtů |
+| Support přílohy | limit velikosti, typu souboru a počtu pokusů |
+
+U limitů si napiš, co se stane při zásahu. Někdy stačí tiché odmítnutí. Jindy je lepší ukázat větu „Zkuste to prosím za chvíli“ a nabídnout e-mailovou alternativu. Pokud blokneš legitimního člověka bez cesty dál, ochrana se změnila v překážku.
+
+### Externí CAPTCHA používej jako výjimku
+
+Externí CAPTCHA nebo risk-scoring widget může dávat smysl u silně zneužívaných formulářů. Ale není zadarmo. Přidává třetí stranu, další skript, výkonový dopad, přístupnostní tření a otázky kolem dat.
+
+Před nasazením si vyplň:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Který konkrétní abuse scénář řešíme? |  |
+| Proč nestačí honeypot, rate limit a e-mailové ověření? |  |
+| Jaká data dostává dodavatel? |  |
+| Běží skript před souhlasem nebo až při akci? |  |
+| Existuje přístupná alternativa? |  |
+| Co se stane, když widget nejde načíst? |  |
+| Jak budeme měřit, že snížil spam bez zhoršení konverze? |  |
+
+Privacy-first výchozí stav: nejdřív vlastní lehké vrstvy, potom teprve externí těžká obrana. Ne naopak.
+
+### Moderuj rizikové vstupy místo plošného blokování
+
+U některých formulářů je lepší karanténa než okamžité odmítnutí. Například demo request s podezřelým odkazem nemusí jít rovnou do CRM a automatické sekvence. Může skončit ve frontě pro ruční kontrolu.
+
+Karanténa se hodí, když:
+
+- formulář spouští automatický e-mail,
+- data padají do CRM nebo helpdesku,
+- zpráva obsahuje mnoho odkazů,
+- příloha má neobvyklý typ,
+- účet vytváří velký počet objektů hned po registraci.
+
+I karanténa má mít retenci. Podezřelé zprávy nejsou poklad. Pokud se nepoužijí pro bezpečnostní nebo provozní analýzu, smaž je po krátké době.
+
+### Checklist: Spam ochrana formulářů
+
+- [ ] Víme, jaký typ zneužití každý formulář řeší.
+- [ ] Validace probíhá na serveru, ne jen v prohlížeči.
+- [ ] Formulář má honeypot nebo jinou lehkou obranu bez třetí strany.
+- [ ] Rate limit odpovídá škodě a má lidskou cestu ven.
+- [ ] Newsletter a registrace ověřují e-mail tam, kde to dává smysl.
+- [ ] Support přílohy mají omezení typu, velikosti a retence.
+- [ ] Podezřelé vstupy nejdou automaticky do CRM, sales sekvence nebo produktových automatizací.
+- [ ] Externí CAPTCHA je výjimka s datovou kartou, ne výchozí reflex.
+- [ ] Ochrana formuláře nezhoršuje přístupnost bez alternativy.
+- [ ] Odmítnuté a karanténní pokusy mají krátkou retenci.
+- [ ] Tým měří spam, false positives a dopad na dokončení formuláře agregovaně.
+
+### Mini úkol
+
+Vyber jeden formulář, který dostává spam nebo vytváří rizikový další krok. Vyplň kartu:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jaký formulář kontrolujeme? |  |
+| Jaký spam nebo abuse se objevuje? |  |
+| Co se stane po odeslání formuláře? |  |
+| Jaké ochrany už existují? |  |
+| Jaká ochrana přidá nejmenší datový dopad? |  |
+| Co nesmí odcházet do třetí strany? |  |
+| Jak poznáme, že ochrana funguje? |  |
+| Jak poznáme, že blokuje legitimní lidi? |  |
+
+Potom udělej jednu konkrétní změnu: přidej honeypot, nastav rate limit, omez počet odkazů, přidej potvrzení e-mailu, zkrať retenci podezřelých zpráv nebo přesuň rizikové vstupy do ruční kontroly. Spam ochrana má chránit tým i uživatele. Nemá z každého formuláře dělat hraniční přechod.
+
 ## Zdroje
 
 - ICANN: Information for Domain Name Registrants - práva a odpovědnosti držitelů domén včetně správy, obnovy a převodu doménové registrace: https://www.icann.org/registrants
@@ -10529,6 +10665,7 @@ Potom udělej jednu opravu: nastav chybějící DKIM, přidej viditelné odhlá�
 
 ## Pracovní log
 
+- 2026-07-13: Doplněna příloha o spam ochraně formulářů bez datového výletu: mapa zneužití podle typu formuláře, vrstvená ochrana, honeypot, rate limit, opatrné používání externí CAPTCHA, karanténa rizikových vstupů, checklist a mini úkol.
 - 2026-07-13: Doplněna příloha o e-mailové doručitelnosti bez sledovacích pixelů: rozdělení transakčních, produktových, marketingových, sales a bezpečnostních e-mailů, autentizace SPF/DKIM/DMARC, one-click unsubscribe, měření bez spoléhání na open pixel, práce se suppression listem, frekvence, checklist a mini úkol; ověřeny a doplněny zdroje Gmail Help a IETF RFC 2369/8058.
 - 2026-07-13: Doplněna příloha o doménové hygieně bez křehkého provozu: vlastnictví domény, renewal, MFA, DNS změny jako release, e-mailová autentizace SPF/DKIM/DMARC, inventář subdomén, redirecty, bezpečnostní hlavičky, krátká doménová dokumentace, checklist a mini úkol; ověřeny a doplněny zdroje ICANN, IETF RFC 7208/6376/9989, OWASP a MDN.
 - 2026-07-12: Doplněna příloha o reportingu bez datového exhibicionismu: rozhodovací účel reportu, agregace místo surových exportů, redigování screenshotů, opatrné používání jmen zákazníků, oddělení interní/klientské/veřejné verze, reporting cadence, checklist a mini úkol; ověřeny a doplněny zdroje Evropské komise a EDPB k principům GDPR, osobním údajům, pseudonymizaci a anonymizaci.
