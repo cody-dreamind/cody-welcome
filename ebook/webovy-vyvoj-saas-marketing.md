@@ -13472,6 +13472,140 @@ Vyber jednu běžící nebo plánovanou kampaň a udělej malý audit odkazů:
 
 Potom udělej jednu opravu: smaž osobní údaj z URL, sjednoť názvy kampaní, přidej kampaňovou kartu, nastav čistší sdílecí odkaz, nebo ověř `Referrer-Policy` na landing page. Malá URL hygiena je nudná práce. Přesně proto umí ušetřit hodně pozdějšího vysvětlování.
 
+## Příloha: Open-source závislosti bez supply-chain chaosu
+
+Open-source knihovny jsou jeden z největších zrychlovačů webového vývoje. Díky nim malý tým nemusí psát vlastní router, editor, validátor, build nástroj, platební SDK ani parser CSV. To je výhra. Jenže každá závislost je zároveň kus cizího kódu, který běží ve tvém produktu, buildu, CI nebo prohlížeči zákazníka.
+
+Privacy-first SaaS proto neřeší závislosti jen jako technické pohodlí. Řeší je jako součást provozu: kdo balíček udržuje, jaké má oprávnění, jestli běží na serveru nebo v prohlížeči, jestli může vidět osobní data, jak se aktualizuje a jak se z produktu odstraní, když přestane dávat smysl.
+
+> Codyho komentář: `npm install` je nejrychlejší způsob, jak do projektu pozvat cizí kód. Někdy je to skvělý host. Někdy je to host, který si přivedl dalších 180 kamarádů a všichni chtějí běžet v produkci.
+
+### Závislost má mít důvod
+
+Než přidáš nový balíček, napiš si jednu větu:
+
+```text
+Přidáváme ___, protože potřebujeme ___ a nechceme/nezvládneme rozumně ___.
+```
+
+Příklady:
+
+- Přidáváme knihovnu pro validaci formulářů, protože potřebujeme konzistentní pravidla na klientu i serveru.
+- Přidáváme platební SDK, protože nechceme sami implementovat citlivé platební protokoly.
+- Přidáváme parser CSV, protože importy musí bezpečně zvládat různé oddělovače, kódování a chybové stavy.
+
+Slabší důvody:
+
+- „Používají to všichni.“
+- „Bude se to možná hodit.“
+- „Je to rychlejší než přemýšlet.“
+- „Framework to někde doporučil v blogpostu z roku 2019.“
+
+Knihovna nemusí být špatná jen proto, že je velká. Ale čím větší dopad má na data, build nebo runtime, tím víc si zaslouží krátké zastavení.
+
+### Rozliš runtime, build a vývojovou závislost
+
+Ne každá závislost má stejnou rizikovost.
+
+| Typ závislosti | Příklad | Typické riziko |
+| --- | --- | --- |
+| Runtime server | auth knihovna, ORM, platební SDK | přístup k datům, síti, tokenům a databázi |
+| Runtime klient | editor, analytický klient, UI widget | výkon, data v prohlížeči, třetí strany, XSS plocha |
+| Build/CI | bundler, test runner, generátor kódu | přístup k secrets v CI, možnost měnit artefakt |
+| Dev-only | formatter, lokální helper | menší runtime dopad, ale pořád supply-chain riziko |
+
+Balíček, který běží jen při lokálním formátování, není totéž jako balíček, který zpracovává přihlašovací tokeny. Podle toho nastavuj review. U citlivých oblastí jako autentizace, platby, uploady, šifrování, analytika, logging a AI integrace buď přísnější.
+
+### Udělej malou kartu závislosti
+
+U důležitějších knihoven stačí krátká tabulka:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jaký problém řeší? |  |
+| Kde běží? | server / klient / build / CI |
+| Má přístup k osobním datům, tokenům nebo síti? |  |
+| Kolik přidává transitivních závislostí? |  |
+| Jaká je licence? |  |
+| Kdo ji udržuje? |  |
+| Jak ji aktualizujeme? |  |
+| Jak ji odstraníme, pokud bude potřeba? |  |
+
+Tahle karta není pro každou drobnou utilitu. Ale pro knihovnu, která sedí v kritické cestě produktu, je to levná pojistka. GitHub dependency graph, dependency review, Dependabot alerts, `npm audit`, OpenSSF Scorecard a OWASP Software Component Verification Standard jsou užitečné zdroje pro kontrolu bezpečnostních a supply-chain signálů. Neber je jako náhradu úsudku. Ber je jako guardrail, který občas zachytí problém dřív než incident.
+
+### Licence nejsou dekorace
+
+Licence říká, co smíš s kódem dělat. U interního nástroje může být riziko menší, ale u SaaS, distribuovaného balíčku, SDK nebo klientské aplikace už licence není detail.
+
+Praktické minimum:
+
+- Zkontroluj licenci u přímých závislostí.
+- U citlivých produktů zkontroluj i významné transitivní závislosti.
+- Používej SPDX identifikátory tam, kde to jde.
+- U privátních balíčků jasně nastav `UNLICENSED`, pokud nemají být veřejně použitelné.
+- U nejasné nebo chybějící licence nepředpokládej, že „open-source na GitHubu“ znamená volné použití.
+
+GitHub i npm dokumentace připomínají, že licence je potřeba pro skutečně jasné použití kódu. Veřejný repozitář bez licence neznamená automaticky, že můžeš kód vzít a vložit do produktu. Ano, internet je plný copy-paste pokušení. Ne, právní realita se tím nezmění.
+
+### Aktualizace plánuj jako běžnou údržbu
+
+Závislosti nestárnou podle toho, jestli na ně myslíš. Stárnou pořád.
+
+Rozumný rytmus:
+
+- bezpečnostní aktualizace řeš průběžně,
+- běžné minor/patch aktualizace seskupuj do pravidelného okna,
+- major upgrade dělej jako samostatnou změnu s testem hlavních cest,
+- nepoužívané balíčky maž,
+- po větším upgradu zkontroluj build, bundle size, hlavní workflow a logy.
+
+Automatické PR od Dependabotu nebo podobného nástroje je dobrý začátek, ne hotová práce. PR musí projít testy a někdo musí rozumět dopadu. Zvlášť u balíčků, které se dotýkají autentizace, requestů, serializace, plateb, uploadů nebo klientského JavaScriptu.
+
+### Klientský bundle je privacy i výkon
+
+Frontend závislost není jen otázka velikosti. Je to kód, který běží v prohlížeči člověka. Pokud přidáš velký widget, editor, mapu, chat nebo analytický klient, ptej se:
+
+- Potřebuje běžet hned při prvním načtení?
+- Jde načíst až po akci uživatele?
+- Posílá data třetí straně?
+- Funguje bez marketingového souhlasu?
+- Zhorší Core Web Vitals nebo přístupnost?
+- Existuje jednodušší varianta?
+
+Privacy-first výkon je často stejná práce: méně cizího JavaScriptu, méně trackerů, méně překvapení. Pokud knihovna slouží jen jednomu okrajovému widgetu, nenech ji zatížit každou stránku.
+
+### Checklist: Open-source závislosti
+
+- [ ] Nová významná závislost má jasný důvod a vlastníka.
+- [ ] Víme, jestli běží na serveru, klientu, v buildu nebo CI.
+- [ ] Citlivé závislosti pro auth, platby, uploady, analytiku, logy a AI mají přísnější review.
+- [ ] Kontrolujeme bezpečnostní upozornění a dependency diff v pull requestech.
+- [ ] Licence přímých závislostí jsou známé a kompatibilní s použitím produktu.
+- [ ] Nepoužívané balíčky pravidelně odstraňujeme.
+- [ ] Major upgrady mají vlastní test hlavních cest.
+- [ ] Klientské závislosti se nenačítají na každé stránce bez důvodu.
+- [ ] Build a CI závislosti nemají zbytečný přístup k produkčním secrets.
+- [ ] U kritických balíčků víme, jak je nahradit nebo odstranit.
+
+### Mini úkol
+
+Vyber deset největších nebo nejcitlivějších závislostí v projektu a vyplň tabulku:
+
+| Balíček | Kde běží | Proč ho máme | Přístup k datům/secrets | Licence | Akce |
+| --- | --- | --- | --- | --- | --- |
+|  |  |  |  |  |  |
+|  |  |  |  |  |  |
+|  |  |  |  |  |  |
+|  |  |  |  |  |  |
+|  |  |  |  |  |  |
+|  |  |  |  |  |  |
+|  |  |  |  |  |  |
+|  |  |  |  |  |  |
+|  |  |  |  |  |  |
+|  |  |  |  |  |  |
+
+Potom udělej jednu konkrétní změnu: smaž nepoužívaný balíček, zapni dependency review, doplň licenci do interního balíčku, přesuň těžký klientský import na lazy load nebo napiš kartu pro knihovnu, která zpracovává citlivá data. Supply-chain bezpečnost není velké kouzlo. Je to opakovaný zvyk nepouštět do produktu cizí kód bez otázky „proč a za jakou cenu“.
+
 ## Zdroje
 
 - ICANN: Information for Domain Name Registrants - práva a odpovědnosti držitelů domén včetně správy, obnovy a převodu doménové registrace: https://www.icann.org/registrants
@@ -13591,6 +13725,7 @@ Potom udělej jednu opravu: smaž osobní údaj z URL, sjednoť názvy kampaní,
 
 ## Pracovní log
 
+- 2026-07-13: Doplněna příloha o open-source závislostech bez supply-chain chaosu: důvod závislosti, rozlišení runtime/build/dev rizika, karta významné knihovny, licence, rytmus aktualizací, klientský bundle jako privacy a výkonový dopad, checklist a mini úkol; navázáno na existující zdroje OWASP SCVS, GitHub Docs, npm Docs, OpenSSF, SPDX a OSI.
 - 2026-07-13: Doplněna příloha o kampaních a UTM bez analytického nepořádku: rozhodnutí před parametry, malý stabilní slovník, zákaz osobních údajů v URL, kampaňová karta, úklid parametrů po příchodu, referrer policy, direct outreach bez sledování jednotlivců, vyhodnocení jako rozhodnutí, checklist a mini úkol; ověřeny a doplněny zdroje MDN k URLSearchParams, Referer a Referrer-Policy.
 - 2026-07-13: Doplněna příloha o preference centru bez nátlakového UI: rozdělení preferencí podle účelu, rovnocenné přijetí a odmítnutí, férové vysvětlení dopadu vypnutí, technické napojení na e-mailing, analytiku, embedy a CRM, životní cyklus změny preference, testovací scénáře, checklist a mini úkol; ověřeny a doplněny zdroje EDPB k souhlasu, ePrivacy a deceptive design patterns.
 - 2026-07-13: Doplněna příloha o vyhledávání v produktu bez profilovacího stínu: účel search funkcí, rozsah indexu, krátké a chudé query logy, bezpečný našeptávač, zlepšování relevance z agregovaných signálů, oddělení veřejného/interního/support vyhledávání, release testy, checklist a mini úkol; navázáno na existující zdroje Evropské komise, EDPB a OWASP k minimalizaci dat, retenci a logování.
