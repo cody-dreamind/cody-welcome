@@ -12610,6 +12610,223 @@ Vezmi posledních 30 dní práce na webu nebo SaaS a vyplň krátkou tabulku:
 
 Potom udělej jednu konkrétní věc: smaž starý export, odeber přístup, vypni nepoužívaný event, oprav jednu privacy větu, archivuj mrtvý backlog nápad nebo doplň vlastníka k nástroji. Měsíční úklid není o perfektním pořádku. Je o tom, aby systém každý měsíc trochu zhubnul tam, kde zbytečně nabral riziko.
 
+## Příloha: Zákaznický export dat bez zipového chaosu
+
+Export dat je jeden z nejviditelnějších testů důvěry. Dokud zákazník produkt používá, může věřit hezkým slovům o kontrole nad daty. Ve chvíli, kdy chce odejít, migrovat, udělat audit nebo odpovědět vlastnímu zákazníkovi, se ukáže realita: jde data získat srozumitelně, bezpečně a bez supportního lovu?
+
+Špatná otázka zní: "Jak rychle umíme vygenerovat nějaký soubor?"
+
+Lepší otázka zní: "Jaký export zákazník skutečně potřebuje, kdo ho smí získat, co v něm nesmí být a jak dlouho má existovat?"
+
+Evropská komise u práv jednotlivců popisuje mimo jiné právo na přístup, výmaz a přenositelnost; EDPB má samostatné pokyny k právu na přenositelnost údajů. Praktický produktový závěr není "všechno dej do jednoho obřího ZIPu a modli se". Závěr je: navrhni export jako normální produktovou schopnost, která má rozsah, formát, oprávnění, auditní stopu a konec životnosti. Odkazy jsou ve zdrojích.
+
+> Codyho komentář: Export, který jde vytvořit jen ručním SQL dotazem od jediného vývojáře, není funkce. Je to interní rituál se zvýšeným tlakem. Funguje přesně do dne, kdy ten vývojář jede na dovolenou nebo se zákazník zeptá, proč v souboru vidí data, která tam nemají co dělat.
+
+### Rozliš účel exportu
+
+Ne každý export je stejný. Produkt často potřebuje několik typů:
+
+| Typ exportu | K čemu slouží | Typické riziko |
+| --- | --- | --- |
+| Uživatelský export | člověk chce kopii vlastních údajů | smíchání dat jiných lidí |
+| Workspace export | zákazník chce data celého účtu nebo týmu | příliš široké oprávnění žadatele |
+| Administrativní export | interní tým řeší audit, billing nebo support | zbytečný rozsah a dlouhá retence |
+| Migrační export | zákazník odchází do jiného nástroje | nepoužitelný formát nebo chybějící vazby |
+| Reportovací export | tým potřebuje agregovaný přehled | export detailů místo souhrnu |
+
+Začni rozhodovací větou:
+
+"Tento export pomáhá ___ získat ___ za účelem ___, bez toho, aby obsahoval ___."
+
+Příklady:
+
+- "Tento export pomáhá administrátorovi workspace stáhnout seznam projektů a úkolů pro migraci, bez toho, aby obsahoval interní supportní poznámky."
+- "Tento export pomáhá uživateli získat kopii jeho profilu a aktivit, bez toho, aby obsahoval data kolegů."
+- "Tento export pomáhá účetnímu týmu získat fakturační přehled, bez toho, aby exportoval produktová data zákazníků."
+
+Když věta nejde napsat, export je pravděpodobně moc široký. A široký export je skoro vždycky bezpečnostní i provozní problém.
+
+### Formát má být použitelný, ne jen technicky pravdivý
+
+Export má být čitelný pro člověka a zpracovatelný strojem podle účelu. Neexistuje jeden ideální formát pro všechno.
+
+Praktické pravidlo:
+
+- CSV pro tabulková data, která bude někdo otevírat nebo importovat.
+- JSON pro strukturovaná data s vazbami, konfigurací a historií.
+- PDF jen pro lidsky čitelné potvrzení, fakturu nebo souhrn, ne jako jediný zdroj dat.
+- ZIP jen jako obal pro více souborů, ne jako omluva pro nejasnou strukturu.
+- README v exportu, pokud soubor obsahuje více tabulek, vazby nebo kódy stavů.
+
+Příklad jednoduché struktury migračního exportu:
+
+```text
+workspace-export-2026-07-13/
+  README.md
+  projects.csv
+  tasks.csv
+  users.csv
+  comments.json
+  files-manifest.csv
+```
+
+`README.md` má vysvětlit:
+
+- kdo export vytvořil,
+- pro jaký workspace,
+- kdy vznikl,
+- jaká časová zóna a formát data se používá,
+- jaké soubory obsahuje,
+- co export záměrně neobsahuje,
+- kam se obrátit při problému.
+
+Tohle je malá věc s velkým dopadem. Zákazník nemusí hádat, co znamená sloupec `status_id`, a support nemusí odpovídat na stejné dotazy pokaždé znovu.
+
+### Oprávnění a identitu ověř podle rizika
+
+Export je citlivá akce. Ne proto, že je technicky složitá, ale protože koncentruje data do přenositelného balíku. To je přesně situace, kde se má produkt zeptat: "Kdo to žádá a má na to právo?"
+
+Minimální pravidla:
+
+- běžný uživatel exportuje jen vlastní data,
+- administrátor exportuje workspace data podle role,
+- billing kontakt exportuje fakturační data, ne automaticky produktová data,
+- support nesmí vytvořit zákaznický export bez ověřeného procesu,
+- interní admin exporty mají být auditované a výjimečné,
+- velké exporty vyžadují potvrzení dopadu.
+
+U citlivějších exportů přidej druhý krok:
+
+| Situace | Rozumné ověření |
+| --- | --- |
+| Uživatel stahuje vlastní nastavení | aktivní přihlášení |
+| Admin stahuje workspace export | aktivní přihlášení plus role admin |
+| Export obsahuje osobní údaje více lidí | potvrzení rozsahu a auditní záznam |
+| Support spouští export na žádost | ověřený tiket a interní schválení |
+| Export vzniká po ukončení smlouvy | kontrola oprávněné kontaktní osoby |
+
+Nepřeháněj to pro nízké riziko, ale nebuď naivní u vysokého. Export je jedna z mála funkcí, kde je trochu tření zdravé. Hlavně když je jasné, proč tam je.
+
+### Co do exportu nepatří
+
+Nejčastější chyba je vzít databázovou tabulku a poslat ji ven. Databáze ale často obsahuje technické, interní nebo cizí informace, které v zákaznickém exportu nemají být.
+
+Před každým exportem projdi vylučovací seznam:
+
+- interní supportní poznámky,
+- interní score, rizikové štítky a neveřejné komentáře,
+- bezpečnostní logy s IP adresami, pokud nejsou nutné pro účel,
+- tokeny, tajemství, webhook podpisy a API klíče,
+- data jiných workspace nebo účtů,
+- systémové identifikátory, které zákazník nepotřebuje,
+- smazaná data, která už nemají být obnovena jen kvůli exportu,
+- marketingové segmenty bez jasného účelu,
+- osobní údaje zaměstnanců dodavatele nebo supportu.
+
+To neznamená, že export má být prázdný nebo kosmetický. Znamená to, že má být účelový. Zákazník má dostat data, která mu patří k danému účelu, ne interní provozní zákulisí produktu.
+
+### Export má mít životní cyklus
+
+Export není jen soubor. Je to proces:
+
+1. Žádost nebo akce v produktu.
+2. Ověření oprávnění a rozsahu.
+3. Vytvoření exportu.
+4. Bezpečné zpřístupnění.
+5. Stažení nebo expirace.
+6. Smazání dočasného balíku.
+7. Auditní záznam bez zbytečného obsahu.
+
+Dočasný export by neměl žít navždy. Nastav mu expiraci, typicky v řádu dnů, ne měsíců. Pokud zákazník potřebuje nový export, vytvoří se nový balík s aktuálním rozsahem a auditní stopou.
+
+Praktické nastavení:
+
+| Prvek | Doporučení |
+| --- | --- |
+| URL ke stažení | jednorázová nebo časově omezená |
+| Retence souboru | krátká, předem popsaná |
+| Log | kdo požádal, kdy, jaký typ exportu, výsledek |
+| Obsah logu | metadata procesu, ne kopie exportovaných dat |
+| Notifikace | jen oprávněným osobám |
+| Opakování | nový export místo prodlužování starého odkazu |
+
+Privacy-first detail: Pokud export posíláš e-mailem jako přílohu, právě sis vyrobil nový problém. Lepší je oznámit, že je export připravený, a poslat člověka do přihlášeného prostředí nebo na časově omezený odkaz s odpovídajícím ověřením.
+
+### Asynchronní export není výmluva pro horší UX
+
+Velké exporty někdy nejdou vytvořit okamžitě. To je v pořádku. Uživatel ale potřebuje vědět, co se děje.
+
+Dobrý tok:
+
+- uživatel vybere typ exportu,
+- produkt ukáže, co export bude a nebude obsahovat,
+- uživatel potvrdí rozsah,
+- produkt zobrazí stav "připravuje se",
+- po dokončení přijde stručná notifikace,
+- odkaz má expiraci,
+- po stažení nebo expiraci se export smaže podle pravidel.
+
+Špatný tok:
+
+- tlačítko zmizí,
+- nic se neděje,
+- po hodině přijde e-mail s přílohou,
+- soubor se jmenuje `export_final_2.zip`,
+- uvnitř je směs CSV bez vysvětlení,
+- support netuší, jak export vznikl.
+
+U exportů je klidné rozhraní důležitější než rychlé divadlo. Když proces trvá déle, řekni to. Když některá data nejsou zahrnutá, řekni proč. Když export expiruje, ukaž datum.
+
+### Exporty testuj jako kritickou cestu
+
+Export se často testuje až ve chvíli, kdy ho někdo potřebuje. To je pozdě. Přidej ho do QA a release kontroly stejně jako login, billing nebo mazání účtu.
+
+Testovací scénáře:
+
+- běžný uživatel nevidí workspace export,
+- admin stáhne jen data svého workspace,
+- export neobsahuje interní supportní poznámky,
+- export neobsahuje tokeny ani secrets,
+- smazaný uživatel se v exportu zobrazí podle pravidel retence a anonymizace,
+- expirovaný odkaz nejde použít,
+- auditní log obsahuje akci, ale ne citlivý obsah exportu,
+- velký export nezablokuje běžný provoz.
+
+Jednou za čas export reálně otevři a zkus ho použít. Ne jen ověřit, že soubor existuje. Zkus importovat CSV do tabulky, přečíst README, spojit vazby mezi tabulkami a odpovědět na otázku: "Dokázal by s tím zákazník rozumně pracovat?"
+
+### Checklist: Zákaznický export dat
+
+- [ ] Každý typ exportu má jasný účel a cílového uživatele.
+- [ ] Export má popsaný rozsah: co obsahuje a co záměrně neobsahuje.
+- [ ] Běžný uživatel, admin, billing kontakt a support mají oddělená oprávnění.
+- [ ] U citlivých exportů existuje ověření identity nebo oprávněné role.
+- [ ] Formát je použitelný pro daný účel: CSV, JSON, PDF nebo kombinace s README.
+- [ ] Export neobsahuje interní poznámky, cizí workspace data, tokeny ani secrets.
+- [ ] Dočasný export má expiraci a po ní se maže.
+- [ ] Odkaz ke stažení není trvalá veřejná URL.
+- [ ] Auditní log zapisuje procesní metadata, ne kopii exportovaných dat.
+- [ ] Export je součástí QA scénářů a release kontroly.
+- [ ] Dokumentace říká, jak export získat, jak dlouho trvá a co obsahuje.
+- [ ] Support ví, kdy může pomoci a kdy musí žádost předat odpovědné roli.
+
+### Mini úkol
+
+Vyber jeden existující nebo plánovaný export a vyplň exportní kartu:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Kdo export žádá? |  |
+| Jaký účel export řeší? |  |
+| Jaká data musí obsahovat? |  |
+| Jaká data v něm být nesmí? |  |
+| Jak se ověří oprávnění? |  |
+| Jaký formát je pro zákazníka použitelný? |  |
+| Jak dlouho bude export dostupný? |  |
+| Kde se zapíše auditní stopa? |  |
+| Jaký test zabrání úniku cizích dat? |  |
+
+Potom udělej jednu konkrétní opravu: přidej README do exportu, zkrať expiraci odkazu, odděl billing export od produktového exportu, doplň negativní test na cizí workspace nebo smaž staré ručně vytvořené exporty. Dobrý export není ten největší. Je to ten, který pomůže zákazníkovi a současně nezvětší datové riziko.
+
 ## Zdroje
 
 - ICANN: Information for Domain Name Registrants - práva a odpovědnosti držitelů domén včetně správy, obnovy a převodu doménové registrace: https://www.icann.org/registrants
@@ -12725,6 +12942,7 @@ Potom udělej jednu konkrétní věc: smaž starý export, odeber přístup, vyp
 
 ## Pracovní log
 
+- 2026-07-13: Doplněna příloha o zákaznickém exportu dat bez zipového chaosu: typy exportů podle účelu, použitelné formáty, ověřování oprávnění, vylučovací seznam citlivých interních dat, životní cyklus dočasného exportu, asynchronní UX, QA scénáře, checklist a mini úkol; ověřeny oficiální zdroje Evropské komise a EDPB k právům jednotlivců a přenositelnosti dat.
 - 2026-07-13: Doplněna příloha o měsíčním provozním úklidu bez velkého auditu: výběr pěti oblastí, kontrola stop po posledních změnách, zavírání dočasných exportů a přístupů, ověření veřejných textů proti realitě, úklid backlogu/dashboardů/dokumentace, měsíční karta úklidu, checklist a mini úkol.
 - 2026-07-13: Doplněna příloha o QA a release kontrole bez klikacího pekla: kritické cesty podle práce uživatele, definice hotovo s ověřením, automatizace nudných kontrol, krátký smoke test, bezpečná testovací data, release karta, privacy-first bug reporty, měsíční převod QA signálů do backlogu, checklist a mini úkol.
 - 2026-07-13: Doplněna příloha o open-source licencích bez právního chaosu: licenční kontrola při přidání závislosti, týmový semafor licencí, práce se SPDX identifikátory, rozdíl mezi interním použitím a distribucí, kontrola assetů, licenční výstup pro zákaznický audit, postup při nejasné licenci, checklist a mini úkol; ověřeny a doplněny zdroje SPDX, OSI, GitHub Docs a npm Docs.
