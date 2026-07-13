@@ -13606,6 +13606,218 @@ Vyber deset největších nebo nejcitlivějších závislostí v projektu a vypl
 
 Potom udělej jednu konkrétní změnu: smaž nepoužívaný balíček, zapni dependency review, doplň licenci do interního balíčku, přesuň těžký klientský import na lazy load nebo napiš kartu pro knihovnu, která zpracovává citlivá data. Supply-chain bezpečnost není velké kouzlo. Je to opakovaný zvyk nepouštět do produktu cizí kód bez otázky „proč a za jakou cenu“.
 
+## Příloha: Reference a případové studie bez úniku důvěry
+
+Reference, loga zákazníků a případové studie umí prodat víc než obecný slib. Ukazují, že produkt nebo služba funguje v reálném provozu. Jenže právě proto jsou citlivé: pracují s konkrétní firmou, problémem, čísly, screenshoty, jmény lidí a někdy i s interním procesem zákazníka.
+
+Privacy-first marketing neznamená, že se nesmíš pochlubit výsledkem. Znamená to, že důkaz nevyrábíš na úkor důvěry zákazníka. Dobrá case study pomáhá dalšímu zákazníkovi poznat podobnou situaci, ale neprozradí víc, než bylo domluveno.
+
+> Codyho komentář: Pokud musíš doufat, že si někdo nevšimne detailu ve screenshotu, nejsi v marketingu. Jsi v hazardu s důvěrou.
+
+### Začni účelem důkazu
+
+Případová studie nemá být firemní trofej. Má odpovědět na konkrétní pochybnost budoucího zákazníka.
+
+Doplň si větu:
+
+```text
+Tato reference má člověku typu ___ ukázat, že ___ jde vyřešit bez ___.
+```
+
+Příklady:
+
+- „Tato reference má majiteli servisní firmy ukázat, že plánování výjezdů jde přesunout z tabulek do SaaS bez výpadku provozu.“
+- „Tato reference má zakladateli B2B SaaS ukázat, že marketingovou analytiku lze zjednodušit bez reklamního profilování návštěvníků.“
+- „Tato reference má provoznímu týmu ukázat, že evropský hosting a minimum trackerů nejsou brzda rychlého webu.“
+
+Jakmile účel znáš, snáz rozhodneš, co do textu patří. Možná nepotřebuješ jméno klienta. Možná nepotřebuješ přesná čísla. Možná stačí segment, výchozí stav, postup, rozhodnutí a výsledek.
+
+### Domluv rozsah před psaním
+
+Nejhorší čas na řešení schválení je pět minut před publikací. U každé reference si předem domluv:
+
+- zda můžeš použít název firmy,
+- zda můžeš použít logo,
+- zda můžeš citovat konkrétní osobu,
+- zda můžeš zveřejnit čísla,
+- zda můžeš ukázat screenshoty,
+- zda zákazník chce schválit finální verzi,
+- jak dlouho může reference zůstat veřejná,
+- kdo je kontaktní osoba pro budoucí aktualizace.
+
+Jednoduchá karta reference:
+
+| Pole | Odpověď |
+| --- | --- |
+| Zákazník nebo anonymní označení |  |
+| Segment |  |
+| Veřejné použití názvu | ano / ne |
+| Veřejné použití loga | ano / ne |
+| Schválená citace |  |
+| Schválená čísla |  |
+| Schválené screenshoty |  |
+| Co nesmí být zveřejněno |  |
+| Datum schválení |  |
+| Datum další revize |  |
+| Vlastník reference |  |
+
+Tato karta není byrokracie. Je to ochrana před budoucí otázkou: „Kdo nám dovolil zveřejnit tenhle detail?“ Pokud odpověď zní „asi někdo v e-mailu“, máš marketingovou detektivku.
+
+### Anonymizovaná case study může být silnější než logo
+
+Logo známé firmy pomáhá, ale anonymizovaná případová studie může být praktičtější, pokud ukáže reálný problém bez citlivého kontextu.
+
+Porovnej:
+
+- Slabé: „Pomohli jsme významné firmě zlepšit procesy.“
+- Lepší: „Pomohli jsme české servisní firmě s 18 techniky snížit ruční přepisování zakázek mezi dispečinkem a fakturací.“
+
+Druhá věta neříká jméno firmy, ale dává čtenáři užitečný kontext: typ firmy, velikost, problém a oblast dopadu. Pro mnoho B2B rozhodnutí je to lepší než logo bez příběhu.
+
+Anonymizuj hlavně:
+
+- názvy zákazníků, pokud nejsou výslovně schválené,
+- jména zaměstnanců a kontaktní údaje,
+- přesné obraty, počty zákazníků nebo interní KPI, pokud nejsou veřejné,
+- screenshoty s reálnými daty,
+- URL neveřejných prostředí,
+- názvy dodavatelů, pokud by odhalily interní architekturu nebo smluvní vztahy,
+- časové údaje, které by umožnily zákazníka snadno dohledat.
+
+Anonymizace ale nemá zničit užitečnost. „Firma z oboru služeb“ je moc mlhavé. „Účetní kancelář s 12 lidmi, která sbírá podklady od zhruba 180 klientů“ už dává praktický obraz.
+
+### Čísla piš s kontextem
+
+Čísla bez kontextu vypadají hezky, ale často zavádí.
+
+Slabé tvrzení:
+
+„Zvýšili jsme konverzi o 40 %.“
+
+Lepší tvrzení:
+
+„Po zkrácení poptávkového formuláře z 9 polí na 4 vzrostl podíl dokončených formulářů během 30 dnů z 5 % na 7 %. Tým zároveň ručně zkontroloval kvalitu poptávek, aby nárůst nebyl jen více šumu.“
+
+Druhá varianta říká, co se změnilo, jak dlouho se měřilo, jaká byla výchozí hodnota, jaký byl výsledek a jak tým hlídal kvalitu.
+
+Pokud číslo nemůžeš zveřejnit přesně, použij interval nebo relativní popis:
+
+- „nižší jednotky hodin týdně“,
+- „desítky ručních úprav měsíčně“,
+- „zhruba třetina opakovaných dotazů zmizela po úpravě dokumentace“,
+- „první hodnota se zkrátila z několika dnů na jeden pracovní blok“.
+
+Hlavní pravidlo: číslo má vysvětlit dopad, ne ohromit bez možnosti ověření.
+
+### Screenshoty ber jako datový export
+
+Screenshot vypadá neškodně, ale často obsahuje víc informací než text: jména, e-maily, ID zákazníků, interní poznámky, časové značky, URL, tokeny v adrese, názvy projektů, stav fakturace nebo části dokumentů.
+
+Před použitím screenshotu zkontroluj:
+
+- nejsou vidět osobní údaje,
+- nejsou vidět neveřejná obchodní data,
+- nejsou vidět interní poznámky,
+- URL neobsahuje token nebo citlivý query parametr,
+- časové značky neodhalují citlivý proces,
+- data jsou demo, syntetická nebo schválená,
+- zákazník schválil konkrétní obrázek, ne jen obecnou myšlenku.
+
+Praktická alternativa je vytvořit demonstrační screenshot se stejným workflow, ale bezpečnými daty. Pokud screenshot slouží jako důkaz výsledku, doplň textem, co je demo a co je skutečný dopad. Čtenář nepotřebuje vidět reálný seznam klientů, aby pochopil, že workflow funguje.
+
+### Citace neupravuj za hranici pravdy
+
+Citace má znít lidsky, ale nesmí říkat něco, co zákazník neřekl nebo neschválil. Je v pořádku opravit překlep, zkrátit větu nebo odstranit vatu. Není v pořádku přepsat opatrnou zkušenost na nadšený billboard.
+
+Praktický postup:
+
+1. Po rozhovoru napiš návrh citace.
+2. Označ, kde byla věta zkrácena nebo upravena.
+3. Pošli ji zákazníkovi ke schválení v kontextu stránky.
+4. Ulož finální schválenou verzi a datum.
+5. Při pozdější změně textu citaci znovu schval, pokud se mění význam.
+
+Dobrá citace je konkrétní:
+
+„Dřív jsme každý pátek ručně skládali plán výjezdů. Teď dispečer vidí změny na jednom místě a technici dostanou aktuální úkol bez dalšího telefonátu.“
+
+Slabá citace je obecná:
+
+„Spolupráce byla skvělá a doporučujeme.“
+
+Obecná pochvala neurazí, ale ani moc nepomůže. Konkrétní věta ukazuje práci, kontext a výsledek.
+
+### Struktura případové studie
+
+Praktická case study nemusí být dlouhá. Drž ji jako pracovní příběh:
+
+| Část | Co má říct |
+| --- | --- |
+| Kontext | kdo měl problém a v jaké situaci |
+| Problém | co nefungovalo, co to stálo a proč to vadilo |
+| Omezení | co nešlo porušit: data, provoz, čas, integrace, rozpočet |
+| Řešení | co se udělalo a proč právě tak |
+| Privacy rozhodnutí | jak se minimalizovala data, přístupy, trackery nebo exporty |
+| Výsledek | co se změnilo a jak se to poznalo |
+| Poučení | co by tým příště udělal stejně nebo jinak |
+| Další krok | relevantní odkaz, šablona, demo nebo kontakt |
+
+Privacy rozhodnutí nedávej jen do patičky. Pokud je evropský provoz, minimum trackerů nebo kontrola nad daty součást hodnoty, ukaž to v příběhu konkrétně: jaký nástroj jste odmítli, jaký údaj jste nesbírali, jak jste řešili export, jak jste omezili přístupy.
+
+### Reference pravidelně reviduj
+
+Reference stárnou. Zákazník změní název, produkt se vyvine, čísla přestanou platit, spolupráce skončí nebo původní schválení už neodpovídá dnešnímu použití.
+
+Nastav jednoduchý rytmus:
+
+- veřejná loga: kontrola jednou za půl roku,
+- case studies: kontrola jednou za půl roku nebo po významné změně produktu,
+- citace: kontrola při změně stránky nebo kontextu,
+- screenshoty: kontrola při změně UI, datového modelu nebo zákaznického vztahu,
+- anonymizované příklady: kontrola, jestli nejdou zpětně snadno přiřadit.
+
+Když reference zastará, máš tři možnosti:
+
+- aktualizovat ji,
+- archivovat ji s poznámkou,
+- odstranit ji a nahradit obecnějším příkladem.
+
+Nech na webu raději méně důkazů, které jsou pravdivé, než galerii starých slibů.
+
+### Checklist: Reference a případové studie privacy-first
+
+- [ ] Každá reference má jasný účel: jakou pochybnost má snížit.
+- [ ] Je domluvené, zda lze použít název firmy, logo, citaci, čísla a screenshoty.
+- [ ] Existuje karta reference s datem schválení, omezeními a vlastníkem.
+- [ ] Anonymizovaná case study obsahuje dost kontextu, ale neodhaluje zákazníka zbytečně.
+- [ ] Čísla mají časový rámec, výchozí stav a vysvětlení dopadu.
+- [ ] Screenshoty neobsahují osobní údaje, interní poznámky, tokeny, neveřejné URL ani citlivá obchodní data.
+- [ ] Citace jsou schválené v kontextu, ve kterém se publikují.
+- [ ] Case study popisuje i privacy a provozní rozhodnutí, pokud jsou součástí hodnoty.
+- [ ] Reference mají datum další revize.
+- [ ] Staré nebo neplatné reference se aktualizují, archivují nebo mažou.
+- [ ] Sales, marketing a produkt používají stejný zdroj pravdy pro schválené důkazy.
+- [ ] Zákazník má jasnou kontaktní cestu, pokud chce referenci změnit nebo stáhnout.
+
+### Mini úkol
+
+Vyber jednu existující referenci, logo nebo případovou studii a vyplň kartu:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jakou pochybnost má reference snížit? |  |
+| Je schválené použití názvu zákazníka? |  |
+| Je schválené použití loga? |  |
+| Která citace je schválená a kdy? |  |
+| Jaká čísla se smí zveřejnit? |  |
+| Obsahuje screenshot reálná nebo demo data? |  |
+| Co se nesmí publikovat? |  |
+| Kdy proběhne další revize? |  |
+| Kdo je vlastník reference? |  |
+| Jaký jeden detail teď odstraníme nebo zpřesníme? |  |
+
+Potom udělej jednu konkrétní opravu: přidej datum revize, nahraď reálný screenshot demo daty, přepiš obecnou pochvalu na schválenou konkrétní citaci, anonymizuj citlivý detail, nebo odstraň logo, u kterého neumíš doložit schválení. Případová studie má být důkaz důvěry, ne důkaz, že marketing našel sdílený disk se screenshoty.
+
 ## Zdroje
 
 - ICANN: Information for Domain Name Registrants - práva a odpovědnosti držitelů domén včetně správy, obnovy a převodu doménové registrace: https://www.icann.org/registrants
@@ -13725,6 +13937,7 @@ Potom udělej jednu konkrétní změnu: smaž nepoužívaný balíček, zapni de
 
 ## Pracovní log
 
+- 2026-07-13: Doplněna příloha o referencích a případových studiích bez úniku důvěry: účel důkazu, karta schválení reference, anonymizované case studies, kontext čísel, bezpečné screenshoty, schvalování citací, struktura případové studie, revize, checklist a mini úkol.
 - 2026-07-13: Doplněna příloha o open-source závislostech bez supply-chain chaosu: důvod závislosti, rozlišení runtime/build/dev rizika, karta významné knihovny, licence, rytmus aktualizací, klientský bundle jako privacy a výkonový dopad, checklist a mini úkol; navázáno na existující zdroje OWASP SCVS, GitHub Docs, npm Docs, OpenSSF, SPDX a OSI.
 - 2026-07-13: Doplněna příloha o kampaních a UTM bez analytického nepořádku: rozhodnutí před parametry, malý stabilní slovník, zákaz osobních údajů v URL, kampaňová karta, úklid parametrů po příchodu, referrer policy, direct outreach bez sledování jednotlivců, vyhodnocení jako rozhodnutí, checklist a mini úkol; ověřeny a doplněny zdroje MDN k URLSearchParams, Referer a Referrer-Policy.
 - 2026-07-13: Doplněna příloha o preference centru bez nátlakového UI: rozdělení preferencí podle účelu, rovnocenné přijetí a odmítnutí, férové vysvětlení dopadu vypnutí, technické napojení na e-mailing, analytiku, embedy a CRM, životní cyklus změny preference, testovací scénáře, checklist a mini úkol; ověřeny a doplněny zdroje EDPB k souhlasu, ePrivacy a deceptive design patterns.
