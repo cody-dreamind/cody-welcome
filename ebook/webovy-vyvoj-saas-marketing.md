@@ -12997,6 +12997,158 @@ Vyber jednu interní automatizaci, která už běží nebo se chystá. Vyplň ka
 
 Potom udělej jednu opravu: odeber nepotřebné pole, přepni osobní token na servisní účet, zkrať retenci payloadů, doplň chybovou frontu nebo napiš postup vypnutí. Automatizace má šetřit práci. Nemá vyrábět datovou archeologii pro budoucí tým.
 
+## Příloha: Vyhledávání v produktu bez profilovacího stínu
+
+Vyhledávání je nenápadná funkce s velkou mocí. Člověk do něj píše přesně to, co neví, co potřebuje najít nebo co ho právě trápí. Ve veřejném webu to může být název služby, problém nebo chyba. V SaaS produktu to může být jméno zákazníka, interní projekt, číslo faktury, e-mail, zdravotní poznámka, obsah support ticketu nebo úplně obyčejný překlep, který se později tváří jako analytický signál.
+
+Proto vyhledávání nenavrhuj jen jako technickou komponentu. Navrhuj ho jako místo, kde vznikají citlivé dotazy, indexy, logy, našeptávače a exporty. Právní a privacy vrstva tu navazuje na zásady minimalizace, účelového omezení a omezení uložení osobních údajů, viz zdroje Evropské komise a EDPB na konci e-booku.
+
+### Začni účelem vyhledávání
+
+Nejdřív si napiš, jakou práci má vyhledávání dělat:
+
+- najít veřejný článek na webu,
+- najít stránku v dokumentaci,
+- najít zákaznický záznam v administraci,
+- najít objekt v aplikaci podle názvu nebo ID,
+- pomoci supportu najít relevantní ticket,
+- nabídnout uživateli rychlou navigaci.
+
+Každý účel má jiný rozsah dat. Veřejný blog nepotřebuje indexovat interní drafty. Administrace nepotřebuje posílat dotazy do externí služby, pokud se v nich běžně objevují zákaznická data. Support vyhledávání nepotřebuje ukládat celý dotaz navždy jen proto, že jednou pomůže v ladění relevance.
+
+Praktická věta:
+
+„Vyhledávání v [část produktu] slouží k [uživatelská práce] a indexuje pouze [typy obsahu], protože [rozhodnutí nebo hodnota].“
+
+Pokud věta nejde napsat jednoduše, rozsah je pravděpodobně moc široký.
+
+### Index není skládka obsahu
+
+Vyhledávací index často vznikne jako technická kopie dat. Tým si řekne, že je to jen optimalizace. Jenže z pohledu provozu je to další místo, kde data existují, mají přístupy, zálohy, retenci a incidentní riziko.
+
+U každého indexu si napiš:
+
+| Otázka | Příklad odpovědi |
+| --- | --- |
+| Co je zdroj pravdy? | Databáze článků, CRM, dokumentace, ticket systém |
+| Co se do indexu kopíruje? | Název, popis, stav, veřejná URL, interní ID |
+| Co se záměrně nekopíruje? | Poznámky, přílohy, volný text se zákaznickými daty |
+| Kdo může hledat? | Veřejnost, přihlášený uživatel, admin, support |
+| Jak se řeší práva? | Filtrování podle oprávnění před zobrazením výsledku |
+| Jak dlouho index drží smazaná data? | Do nejbližší reindexace nebo explicitního výmazu |
+
+Nejčastější chyba: výsledky se sice schovají v UI, ale index obsahuje víc dat, než uživatel smí vidět. To je technicky pohodlné a bezpečnostně ošklivé. Search musí respektovat oprávnění stejně vážně jako běžné API.
+
+### Query logy drž krátké a chudé
+
+Dotazy jsou cenné pro zlepšování produktu, ale ne všechny dotazy si zaslouží archiv. Pokud už loguješ vyhledávání, odděl tři úrovně:
+
+- provozní metriky: počet dotazů, latence, chybovost, počet výsledků,
+- produktové signály: agregované dotazy bez výsledku, nejčastější kategorie hledání,
+- ladicí záznamy: konkrétní dotaz pro krátké období při řešení problému.
+
+Výchozí režim má být agregace. Konkrétní dotazy ukládej jen tehdy, když máš jasný účel, omezenou retenci a ochranu přístupu. Volný text je zrádný: lidé do něj píšou osobní údaje, tajemství i interní kontext, protože zrovna potřebují něco najít, ne přemýšlet nad datovou politikou.
+
+Příklad rozumného nastavení:
+
+- počítat počet vyhledávání a podíl dotazů bez výsledku,
+- ukládat normalizovaný agregovaný seznam častých dotazů bez výsledku až po dosažení minimálního počtu opakování,
+- u ladění konkrétní chyby zapnout detailní log maximálně na několik dní,
+- nikdy neposílat query logy do marketingové analytiky jako identifikovaný profil.
+
+### Našeptávač má pomáhat, ne prozrazovat
+
+Autocomplete může omylem odhalit data, která člověk ještě nemá vidět. Stačí našeptat název neveřejného projektu, e-mail zákazníka nebo interní štítek a problém je na světě.
+
+Bezpečný našeptávač:
+
+- nabízí jen položky, které má uživatel právo otevřít,
+- u veřejného webu pracuje s veřejným obsahem,
+- u citlivých objektů raději čeká na delší dotaz,
+- nezobrazuje zbytečné osobní detaily v náhledu,
+- má stejné permission kontroly jako výsledková stránka,
+- umí vrátit prázdný stav bez prozrazení, že něco existuje.
+
+Někdy je lepší pomalejší, ale přesnější vyhledávání než efektní našeptávač, který z produktu dělá únikový kanál. Ano, méně magie. Více spánku.
+
+### Relevance se dá zlepšovat bez sledování jednotlivců
+
+Pro zlepšení relevance nepotřebuješ vědět, že konkrétní Jana hledala konkrétní dotaz v úterý ve 14:03. Často stačí:
+
+- dotazy bez výsledků agregované po týdnech,
+- typy obsahu, které se často otevírají po hledání,
+- ruční revize dokumentace a názvů podle opakovaných support dotazů,
+- synonymní slovník pro běžné výrazy zákazníků,
+- interní přesměrování pro často hledané termíny.
+
+Produktová otázka nezní: „Kdo přesně to hledal?“
+
+Lepší otázka zní: „Jaký obsah nebo navigace chybí, když to lidé opakovaně hledají?“
+
+Tím se search stává zdrojem učení, ne sledovací vrstvou. Když deset lidí hledá „faktury“, možná nepotřebuješ detailní profilování. Možná jen potřebuješ přejmenovat položku „billing history“ na něco, čemu zákazníci rozumí.
+
+### Interní vyhledávání odděl od veřejného
+
+Veřejný web, dokumentace, zákaznická aplikace a interní administrace nemají sdílet jeden bezstarostný index. Mají jiné publikum, jiná oprávnění a jinou toleranci k chybě.
+
+Praktické rozdělení:
+
+- veřejný web: indexuje jen publikované stránky, blog, dokumentaci a veřejné changelogy,
+- app search: indexuje objekty daného workspace nebo účtu podle oprávnění,
+- admin search: má přísnější přístupy, audit a minimální náhledy,
+- support search: ukazuje jen nutný kontext pro řešení ticketu,
+- developer search: používá technická ID, log korelace a krátkou retenci.
+
+Pokud jeden engine obsluhuje více oblastí, odděl indexy, API klíče, oprávnění, retenci a monitoring. Jeden univerzální klíč pro všechno je rychlý způsob, jak si budoucí incident zbytečně okořenit.
+
+### Search změny testuj jako bezpečnostní změny
+
+Vyhledávání se často mění nenápadně: nový filtr, lepší ranking, přidané pole, rychlejší indexace, našeptávač v hlavičce. Každá z těchto změn může změnit, co je vidět.
+
+Před releasem otestuj minimálně:
+
+- uživatel bez přístupu nevidí název ani náhled cizího objektu,
+- smazaný nebo archivovaný obsah zmizí z indexu v očekávaném čase,
+- neveřejný draft se neukáže ve veřejném hledání,
+- našeptávač nevrací citlivé objekty podle krátkých dotazů,
+- chybový stav neprozradí existenci cizí položky,
+- query log neobsahuje data, která nechceš skladovat.
+
+Tady se vyplatí automatizovaný test vedle ruční kontroly. Ne proto, že testy vyřeší úsudek, ale protože u oprávnění nechceš spoléhat na paměť člověka před pátkem.
+
+### Checklist: Vyhledávání privacy-first
+
+- [ ] Každé vyhledávání má popsaný účel a publikum.
+- [ ] Index obsahuje jen pole potřebná pro hledání a zobrazení výsledku.
+- [ ] Citlivý volný text, poznámky a přílohy nejsou v indexu bez jasného důvodu.
+- [ ] Výsledky i našeptávač respektují oprávnění před zobrazením dat.
+- [ ] Veřejné, produktové, admin a support vyhledávání jsou oddělené rozsahem nebo indexem.
+- [ ] Query logy jsou primárně agregované.
+- [ ] Detailní query log má krátkou retenci, vlastníka a důvod.
+- [ ] Dotazy se neposílají do marketingových profilů.
+- [ ] Smazaná data mizí z indexu podle definovaného procesu.
+- [ ] Search release má testy na oprávnění, drafty, smazání a autocomplete.
+- [ ] Tým pravidelně převádí agregované dotazy bez výsledku do úprav obsahu, navigace nebo synonym.
+
+### Mini úkol
+
+Vyber jedno vyhledávání ve webu nebo produktu a vyplň kartu:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Kdo hledá? |  |
+| Co přesně hledá? |  |
+| Jaký index nebo služba se používá? |  |
+| Jaká pole jsou v indexu? |  |
+| Která pole by tam být nemusela? |  |
+| Jak se kontrolují oprávnění? |  |
+| Co se loguje z dotazů? |  |
+| Jak dlouho query logy žijí? |  |
+| Co se stane po smazání zdrojového záznamu? |  |
+| Kdo vlastní relevanci a synonymní slovník? |  |
+
+Potom udělej jednu malou změnu: vypni detailní ukládání dotazů, odstraň z indexu zbytečné pole, přidej test na cizí workspace, zkrať retenci, odděl veřejný a interní index nebo založ seznam dotazů bez výsledku jako vstup pro dokumentaci. Search má lidem pomoct najít věci. Nemá se stát druhou databází, o které nikdo nemluví.
+
 ## Zdroje
 
 - ICANN: Information for Domain Name Registrants - práva a odpovědnosti držitelů domén včetně správy, obnovy a převodu doménové registrace: https://www.icann.org/registrants
@@ -13112,6 +13264,7 @@ Potom udělej jednu opravu: odeber nepotřebné pole, přepni osobní token na s
 
 ## Pracovní log
 
+- 2026-07-13: Doplněna příloha o vyhledávání v produktu bez profilovacího stínu: účel search funkcí, rozsah indexu, krátké a chudé query logy, bezpečný našeptávač, zlepšování relevance z agregovaných signálů, oddělení veřejného/interního/support vyhledávání, release testy, checklist a mini úkol; navázáno na existující zdroje Evropské komise, EDPB a OWASP k minimalizaci dat, retenci a logování.
 - 2026-07-13: Doplněna příloha o interních automatizacích bez datového přelévání: výběr vhodných procesů, karta workflow, minimalizace polí, servisní účty, minimální oprávnění, chybová fronta, logování bez kopírování obsahu, vlastnictví, revize, checklist a mini úkol; navázáno na existující zdroje Evropské komise, OWASP a Google SRE k GDPR principům, secrets managementu a toil.
 - 2026-07-13: Doplněna příloha o zákaznickém exportu dat bez zipového chaosu: typy exportů podle účelu, použitelné formáty, ověřování oprávnění, vylučovací seznam citlivých interních dat, životní cyklus dočasného exportu, asynchronní UX, QA scénáře, checklist a mini úkol; ověřeny oficiální zdroje Evropské komise a EDPB k právům jednotlivců a přenositelnosti dat.
 - 2026-07-13: Doplněna příloha o měsíčním provozním úklidu bez velkého auditu: výběr pěti oblastí, kontrola stop po posledních změnách, zavírání dočasných exportů a přístupů, ověření veřejných textů proti realitě, úklid backlogu/dashboardů/dokumentace, měsíční karta úklidu, checklist a mini úkol.
