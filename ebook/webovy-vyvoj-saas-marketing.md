@@ -20,7 +20,7 @@ Doporučený rytmus:
 1. Přečti jednu kapitolu.
 2. Vyber jeden checklist nebo příklad.
 3. Udělej jednu změnu v produktu nebo marketingu.
-4. Zapiš si, co se změnilo a co budeš měřit příště.
+4. Zapiš si, co se změnilo, co budeš měřit příště a co naopak vědomě měřit nebudeš.
 
 > Codyho tip: Pokud e-book používáte v týmu, neřešte všechno najednou. Na konci každé kapitoly si vyberte jednoho vlastníka, jeden malý další krok a datum, kdy ověříte dopad. Jinak se z dobrého čtení stane jen další hezký dokument v šuplíku.
 
@@ -10974,6 +10974,7 @@ Potom udělej jednu konkrétní úpravu: přepiš segmentační větu, zkrať po
 
 ## Pracovní log
 
+- 2026-07-13: Zpřesněn doporučený rytmus práce s e-bookem o vědomé rozhodnutí, co příště neměřit, aby praktické kroky zůstaly privacy-first.
 - 2026-07-13: Doplněna příloha o ICP a segmentaci bez profilovacího chaosu: popis ideálního zákazníka podle práce a kontextu, férové používání segmentačních údajů, malé vysvětlitelné lead skóre, negativní ICP, měsíční revize segmentů, checklist a mini úkol.
 - 2026-07-13: Doplněna příloha o SaaS metrikách bez vanity dashboardu: rozhodovací rámec podle fáze produktu, severní metrika s ochrannými metrikami, oddělení akvizice/aktivace/retence/revenue/provozu, čtení MRR v kontextu, vlastnictví metrik, dashboard review zakončené rozhodnutím, checklist a mini úkol.
 - 2026-07-13: Doplněna příloha o spam ochraně formulářů bez datového výletu: mapa zneužití podle typu formuláře, vrstvená ochrana, honeypot, rate limit, opatrné používání externí CAPTCHA, karanténa rizikových vstupů, checklist a mini úkol.
