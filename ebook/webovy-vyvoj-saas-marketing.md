@@ -11392,6 +11392,171 @@ Vyber jednu oblast: webová analytika, produktové eventy, CRM leady, newsletter
 
 Potom udělej jednu malou opravu: nastav datum smazání exportu, zavři deset starých CRM leadů bez dalšího kroku, přepiš jeden event bez osobních údajů, nebo vytvoř automatickou připomínku pro měsíční review. Retence se nestaví jedním velkým úklidem. Retence se stává normální údržbou.
 
+## Příloha: Lokální vývoj a preview bez produkčních dat
+
+Lokální vývoj je místo, kde se privacy-first zásady často nenápadně rozpadnou. Produkce má role, audit, monitoring a procesy. Lokál má stažený dump databáze, `.env` poslaný přes chat, screenshot zákaznického účtu v issue a větu "to je jen dočasně". Dočasně je krásné slovo. V technice často znamená "najde se to při incidentu".
+
+Dobré vývojové prostředí má pomoct týmu rychle pracovat bez toho, aby kopírovalo produkční rizika. Vývojář potřebuje realistické scénáře, ne reálná osobní data. QA potřebuje ověřit onboarding, billing nebo migraci, ne číst skutečné zprávy zákazníků. Product potřebuje preview změny, ne administrátorský přístup do produkce.
+
+Špatná otázka zní: "Jak dostaneme produkční data k vývojářům?"
+
+Lepší otázka zní: "Jak vytvoříme dost realistické prostředí bez toho, abychom produkční data vůbec tahali ven?"
+
+### Lokál má mít jasný účel
+
+Ne každé prostředí potřebuje stejná data a stejné přístupy. Rozděl si práci podle účelu:
+
+| Prostředí | Účel | Data | Přístupy |
+| --- | --- | --- | --- |
+| Lokální vývoj | rychlá práce na funkcích a opravách | seed data, fixture scénáře, anonymní ukázky | minimální, osobní vývojářské tokeny |
+| Preview pro větev | kontrola UI, copy, workflow a review | dočasná testovací data | omezené, ideálně bez produkčních integrací |
+| Staging | ověření releasu, migrací a integrací | syntetická nebo pečlivě anonymizovaná data | podobné produkci, ale oddělené |
+| Produkce | skutečná služba pro zákazníky | reálná data | přísně řízené role a audit |
+
+Tahle tabulka brání jedné časté zkratce: "vezmeme produkční dump, bude to nejrealističtější." Ano, bude. Bude také nejrizikovější. Realističnost se dá často získat scénáři, objemem a hraničními případy, ne jmény skutečných lidí.
+
+### Seed data piš jako produktové scénáře
+
+Dobrá testovací data nejsou náhodné řádky v databázi. Jsou to scénáře, které pokrývají důležité práce uživatele.
+
+Příklady seed scénářů:
+
+- nový workspace bez dat,
+- tým s administrátorem, členem a pozvaným uživatelem,
+- trial před expirací,
+- účet s překročeným limitem,
+- zákazník s fakturační chybou,
+- projekt s dlouhým názvem a prázdnou poznámkou,
+- import s validními i chybnými řádky,
+- uživatel bez oprávnění k exportu,
+- zrušený účet v ochranné lhůtě.
+
+Každý scénář by měl mít krátký popis: co ověřuje, jak ho spustit a kdy je výsledek správný. Tím získáš víc než kopií produkce. Testuješ věci, které se mají stát, i věci, které se nesmí stát.
+
+Codyho komentář: Náhodná demo data jsou dobrá tak maximálně na screenshoty, které nikdo nečte. Produktové scénáře jsou lepší, protože ukazují chování systému. A systém se obvykle nerozbije na průměrném řádku. Rozbije se na hraně.
+
+### Produkční dump ber jako řízenou výjimku
+
+Někdy může nastat chyba, kterou bez produkčního kontextu těžko najdeš: složitá migrace, problém s historickou strukturou dat, výkonový propad nebo bug v kombinaci stavů, kterou seed data nepokrývají. Ani tehdy ale nemá být produkční dump běžná vývojářská pomůcka.
+
+Řízená výjimka má mít pravidla:
+
+1. Popiš, proč seed data nestačí.
+2. Omez rozsah na nejmenší nutnou část dat.
+3. Odstraň nebo anonymizuj osobní a citlivé údaje před předáním.
+4. Použij izolované prostředí s omezeným přístupem.
+5. Nastav datum smazání a vlastníka.
+6. Zapiš, kdo měl přístup a proč.
+7. Po vyřešení vytvoř seed scénář, aby se příště dump neopakoval.
+
+OWASP File Upload Cheat Sheet a Logging Cheat Sheet v různých kontextech připomínají stejnou myšlenku: vstupy, soubory a logy musí mít omezení, kontrolu a účel. U dumpů databáze to platí dvojnásob. Dump je koncentrované riziko v jednom souboru.
+
+### Tajemství drž mimo repozitář i mimo chat
+
+Lokální vývoj svádí ke sdílení `.env` souborů. Jeden člověk ho pošle druhému, ten ho upraví, třetí ho přidá do přílohy issue a za měsíc nikdo neví, kde všude jsou klíče. Twelve-Factor App doporučuje oddělit konfiguraci od kódu a držet ji v prostředí. OWASP Secrets Management Cheat Sheet řeší celý životní cyklus tajemství: vytvoření, uložení, přístup, rotaci, revokaci a audit. Odkazy jsou ve zdrojích.
+
+Praktická pravidla:
+
+- Do repozitáře patří `.env.example`, ne reálný `.env`.
+- Ukázkové hodnoty mají být neplatné a zjevně testovací.
+- Lokální tajemství rozdávej přes správce hesel nebo vault, ne přes chat.
+- Preview prostředí používá vlastní omezené tokeny, ne produkční klíče.
+- Tokeny pro integrace mají nejmenší možný rozsah oprávnění.
+- Při odchodu člověka nebo úniku se token rotuje, ne jen "už se nebude používat".
+- Secret scanning je pojistka, ne povolení být neopatrný.
+
+Ukázka dobrého `.env.example`:
+
+```env
+DATABASE_URL=postgres://app:app@localhost:5432/app_dev
+APP_URL=http://localhost:3000
+MAIL_PROVIDER=console
+PAYMENT_PROVIDER=fake
+ANALYTICS_ENABLED=false
+```
+
+Všimni si dvou věcí: mail a platby míří na bezpečné náhražky, analytika je lokálně vypnutá. Vývojář může pracovat. Zákazník nedostane testovací e-mail. Platební brána nedostane omylem experimentální požadavek. Svět je o chlup méně absurdní.
+
+### Preview prostředí nejsou malá produkce
+
+Preview pro každou větev je výborná věc: designer vidí změnu, produkt zkontroluje text, vývojář dostane rychlejší feedback. Ale preview prostředí nemá automaticky dědit produkční data, produkční webhooky a plné integrační tokeny.
+
+Preview pravidla:
+
+- Každé preview má dočasnou URL a dočasná data.
+- Databáze se po zavření větve smaže nebo resetuje.
+- Externí e-maily se neposílají skutečným zákazníkům.
+- Webhooky míří do testovacího endpointu nebo se jen logují.
+- Analytika je vypnutá nebo oddělená od produkčních dat.
+- Přístup k interním preview není veřejný, pokud obsahují neveřejné informace.
+- Preview má jasný štítek, aby si ho nikdo nespletl s produkcí.
+
+Pro marketing a obsah je důležité ještě jedno pravidlo: screenshoty z preview nesmí obsahovat reálná zákaznická data. Pokud potřebuješ ukázat dashboard, použij demo účet. Pokud potřebuješ ukázat bug, zamaskuj údaje dřív, než screenshot opustí bezpečné prostředí.
+
+### Integrace v lokálu musí být bezpečně tupé
+
+Mnoho SaaS aplikací se rozbije ne kvůli hlavní databázi, ale kvůli vedlejším efektům: odeslání e-mailu, webhook do CRM, vytvoření faktury, synchronizace kalendáře, export do analytiky. Lokální a preview prostředí by mělo mít tyto efekty pod kontrolou.
+
+Praktické náhražky:
+
+| Integrace | Bezpečný lokální režim |
+| --- | --- |
+| E-mail | lokální mailbox, console log, testovací doména |
+| Platby | sandbox poskytovatele, fake provider, testovací karty |
+| Webhooky | lokální endpoint, fronta bez odeslání, podepsaný test |
+| CRM | testovací workspace bez reálných kontaktů |
+| Analytika | vypnutá, nebo samostatný testovací projekt |
+| Soubory | lokální storage nebo oddělený bucket s krátkou retencí |
+| AI nástroje | syntetické prompty bez zákaznických dat |
+
+Každá integrace má mít v dokumentaci větu: "V lokálním vývoji se chová takto." Pokud ta věta chybí, někdo ji jednou zjistí experimentem. Experiment s fakturací nebo e-mailem bývá dražší než krátký odstavec.
+
+### Vývojářský onboarding ověř prvním během
+
+Lokální prostředí není hotové, dokud nový člověk nezvládne první běh podle dokumentace. Ideální výsledek:
+
+1. Naklonuje repozitář.
+2. Spustí instalaci závislostí.
+3. Vytvoří lokální konfiguraci podle `.env.example`.
+4. Spustí databázi a seed data.
+5. Přihlásí se do demo účtu.
+6. Projde jeden klíčový scénář.
+7. Spustí testy nebo základní kontrolu.
+
+Když nový člověk potřebuje tajný komentář "jo, ten krok v README neplatí", dokumentace není aktuální. Když potřebuje produkční přístup, aby vůbec spustil aplikaci, prostředí je navržené špatně. Když musí dostat dump dat, protože seed neexistuje, tým právě našel dobrou první opravu.
+
+### Checklist: Vývoj a preview bez produkčních dat
+
+- [ ] Lokální vývoj, preview, staging a produkce mají popsaný účel.
+- [ ] Vývojář spustí aplikaci bez produkční databáze.
+- [ ] Existují seed data pro hlavní produktové scénáře.
+- [ ] Produkční dump je řízená výjimka s vlastníkem, rozsahem a datem smazání.
+- [ ] `.env.example` obsahuje jen neplatné nebo testovací hodnoty.
+- [ ] Reálná tajemství se nesdílí přes chat ani issue.
+- [ ] Preview prostředí používá testovací data a vlastní omezené tokeny.
+- [ ] E-maily, platby, webhooky, CRM a analytika mají bezpečný lokální režim.
+- [ ] Screenshoty a bug reporty neobsahují reálná zákaznická data.
+- [ ] Nový člověk projde první běh podle dokumentace bez ústního rituálu.
+- [ ] Po každé výjimce s produkčními daty vznikne seed scénář nebo test, aby se výjimka neopakovala.
+
+### Mini úkol
+
+Vyber jeden repozitář nebo produkt a vyplň pracovní list:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Dá se aplikace spustit bez produkčních dat? |  |
+| Kde je `.env.example` a je aktuální? |  |
+| Jaké integrace se lokálně opravdu volají? |  |
+| Jaké seed scénáře existují? |  |
+| Který scénář chybí nejvíc? |  |
+| Kdo má přístup ke stagingu a preview? |  |
+| Jak se mažou dočasná preview data? |  |
+| Kde se dnes mohou povalovat dumpy, exporty nebo screenshoty? |  |
+| Jakou jednu změnu uděláme tento týden? |  |
+
+Potom udělej jednu konkrétní opravu: doplň `.env.example`, přidej seed pro prázdný workspace, vypni analytiku v preview, přesměruj e-maily do lokální schránky, nebo smaž starý anonymizační dump po dokončení úkolu. Lokální vývoj má šetřit čas, ne pašovat produkční riziko do každého notebooku.
+
 ## Zdroje
 
 - ICANN: Information for Domain Name Registrants - práva a odpovědnosti držitelů domén včetně správy, obnovy a převodu doménové registrace: https://www.icann.org/registrants
@@ -11497,6 +11662,7 @@ Potom udělej jednu malou opravu: nastav datum smazání exportu, zavři deset s
 
 ## Pracovní log
 
+- 2026-07-13: Doplněna příloha o lokálním vývoji a preview bez produkčních dat: účel prostředí, seed scénáře, řízené výjimky pro produkční dumpy, bezpečné `.env.example`, preview pravidla, tupé lokální integrace, onboarding prvního běhu, checklist a mini úkol; navázáno na existující zdroje OWASP, Twelve-Factor App a GitHub Docs.
 - 2026-07-13: Doplněna příloha o retenci marketingových a analytických dat bez nekonečného skladu: rozdělení dat podle životnosti, retenční karta, agregace detailu, CRM stavy, pravidla pro exporty, technické vynucení, checklist a mini úkol; ověřen a doplněn zdroj Evropské komise k době uchování osobních údajů.
 - 2026-07-13: Doplněna příloha o SEO migracích bez paniky a datového přejídání: rozhodování, kdy měnit URL, migrační mapa, redirecty, canonical/sitemap/interní odkazy, release runbook, privacy-first monitoring, checklist a mini úkol; ověřeny a doplněny zdroje Google Search Central k site moves, redirectům, sitemap a recrawlu.
 - 2026-07-13: Doplněna příloha o uživatelském výzkumu bez nahrávacího vysavače: výzkum od rozhodnutí, otázky na minulé chování, opatrné nahrávání, rozhodovací poznámky, pozorování bez produkčních dat, napojení na backlog, checklist a mini úkol.
