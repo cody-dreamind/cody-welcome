@@ -10564,6 +10564,147 @@ Vyber jeden formulář, který dostává spam nebo vytváří rizikový další 
 
 Potom udělej jednu konkrétní změnu: přidej honeypot, nastav rate limit, omez počet odkazů, přidej potvrzení e-mailu, zkrať retenci podezřelých zpráv nebo přesuň rizikové vstupy do ruční kontroly. Spam ochrana má chránit tým i uživatele. Nemá z každého formuláře dělat hraniční přechod.
 
+## Příloha: SaaS metriky bez vanity dashboardu
+
+SaaS metriky mají řídit rozhodnutí. Nemají dokazovat, že produkt „nějak roste“, protože graf jde nahoru a někdo mu dal zelenou barvu. Malý tým nepotřebuje dvacet dashboardů a tajemné zkratky, které se každý měsíc přepočítávají jinak. Potřebuje pár čísel, kterým rozumí produkt, obchod i provoz, a podle kterých se dá udělat další krok.
+
+Špatná otázka zní: „Jaké metriky ukážeme na poradě?“
+
+Lepší otázka zní: „Které rozhodnutí bez těchto metrik uděláme hůř?“
+
+> Codyho komentář: Vanity metrika je číslo, které se hezky prezentuje a špatně používá. Když po grafu nikdo nezmění produkt, pricing, onboarding nebo marketing, možná nemáš metriku. Možná máš tapetu.
+
+### Začni jedním rozhodovacím rámcem
+
+Nejdřív si napiš, jaký typ rozhodnutí teď firma řeší. Raný SaaS obvykle nepotřebuje stejnou metriku jako zralý produkt s desítkami zákazníků.
+
+| Situace | Hlavní otázka | Užitečné signály |
+| --- | --- | --- |
+| Hledáme první segment | Kdo má problém dost silný na změnu? | rozhovory, placené piloty, opakované námitky |
+| Máme první registrace | Dostanou se lidé k první hodnotě? | aktivace, blokující krok, čas do první hodnoty |
+| Máme první platící zákazníky | Vrací se k hlavnímu workflow? | opakované použití, support tření, churn důvody |
+| Ladíme pricing | Platí cena za hodnotu, nebo mate? | otázky k plánům, upgrade/downgrade, kvalita leadů |
+| Rosteme přes obsah | Přivádí obsah správné lidi? | kvalifikované poptávky, interní prokliky, sales zmínky |
+
+Tento rámec chrání tým před jednou častou chybou: měřit všechno stejně důležitě. Návštěvnost webu může být užitečná, ale pokud onboarding netvoří první hodnotu, další návštěvnost jen rychleji posílá lidi do nejasného produktu.
+
+### Vyber jednu severní metriku, ale neuctívej ji
+
+North Star metrika může pomoct, když opravdu vyjadřuje dodanou hodnotu. Nesmí se z ní stát firemní náboženství. Jedno číslo nikdy nepopíše celý produkt, ale může držet fokus.
+
+Dobrá severní metrika:
+
+- souvisí s hodnotou pro zákazníka,
+- roste jen tehdy, když produkt skutečně pomáhá,
+- dá se ovlivnit produktovou prací,
+- nejde snadno nafouknout prázdnou aktivitou,
+- má ochranné metriky, které hlídají škodu.
+
+Příklady:
+
+| Produkt | Slabá metrika | Lepší metrika |
+| --- | --- | --- |
+| Nástroj pro plánování výjezdů | počet přihlášení | týdně dokončené plány výjezdů |
+| Helpdesk | počet ticketů | vyřešené požadavky bez opakovaného kontaktu |
+| Analytika | počet eventů | rozhodnutí udělaná podle agregovaných metrik |
+| Dokumentační SaaS | počet vytvořených stránek | aktivně používané návody navázané na support dotazy |
+
+Ochranné metriky jsou stejně důležité jako hlavní metrika. Pokud hlavní metrika roste tím, že produkt posílá víc notifikací, ale zároveň rostou odhlášení a support stížnosti, růst není zdravý. Je jen hlučný.
+
+### Odděl akviziční, aktivační a retenční metriky
+
+Jedna tabulka pro celý produkt často stačí:
+
+| Vrstva | Co sleduje | Příklad metriky | Typická reakce |
+| --- | --- | --- | --- |
+| Akvizice | Přichází správní lidé? | kvalifikované poptávky podle segmentu | zpřesnit obsah, positioning nebo kanál |
+| Aktivace | Zažijí první hodnotu? | dokončení prvního workflow do 7 dnů | zkrátit onboarding, přidat ukázková data |
+| Retence | Vrací se k hodnotě? | opakované použití klíčového workflow | opravit tření, dokumentaci nebo chybějící roli |
+| Revenue | Platí cena za hodnotu? | upgrade, downgrade, churn důvody | upravit balíčky, limity nebo komunikaci ceny |
+| Provoz | Funguje služba spolehlivě? | dostupnost kritické cesty, chybovost | opravit incidentní příčinu, runbook, monitoring |
+
+Metriky se nemají hádat o pozornost. Mají vyprávět cestu: správný člověk přišel, pochopil hodnotu, dosáhl výsledku, vrátil se, zaplatil a služba ho nezklamala.
+
+### MRR bez kontextu nestačí
+
+MRR je důležité číslo, ale samo neřekne, jestli produkt zdravě roste. Může růst díky jednomu velkému zákazníkovi, zatímco malé účty odcházejí. Může růst kvůli ročním slevám, které později zabolí. Může růst i tehdy, když onboarding nefunguje, protože sales dočasně tlačí silněji než produkt.
+
+K revenue metrikám proto přidej kontext:
+
+- nový MRR podle segmentu,
+- expansion a contraction odděleně,
+- churn důvody v lidských kategoriích,
+- poměr placených pilotů k dlouhodobým zákazníkům,
+- kvalitu zákazníků podle fitu, ne jen podle částky,
+- počet účtů, které dosáhly hodnoty před platbou nebo krátce po ní.
+
+Privacy-first detail: Finanční report obvykle nepotřebuje osobní jména uživatelů. Segment, plán, stav účtu a agregované důvody často stačí. Detail konkrétního zákazníka nech v CRM nebo billingu pro lidi, kteří ho opravdu potřebují.
+
+### Každá metrika má mít vlastníka
+
+Metrika bez vlastníka je číslo bez následku. U každé klíčové metriky si napiš:
+
+| Pole | Otázka |
+| --- | --- |
+| Název | Jak se metrika jmenuje lidsky? |
+| Definice | Co přesně se počítá a co ne? |
+| Zdroj | Odkud data pochází? |
+| Vlastník | Kdo ji kontroluje a rozhoduje? |
+| Rytmus | Kdy se vyhodnocuje? |
+| Reakce | Co uděláme při zlepšení nebo zhoršení? |
+| Privacy limit | Jaká data do metriky nesmí vstoupit? |
+
+Příklad:
+
+| Pole | Odpověď |
+| --- | --- |
+| Název | První hodnota v onboardingu |
+| Definice | Workspace vytvořil první reálný projekt a pozval aspoň jednoho člena týmu |
+| Zdroj | Produktové eventy v agregaci |
+| Vlastník | Product owner onboardingu |
+| Rytmus | Týdně |
+| Reakce | Pokud klesá, projít poslední blokující krok a support dotazy |
+| Privacy limit | Neposílat názvy projektů, e-maily pozvaných ani obsah úkolů |
+
+Taková karta je malá, ale účinná. Brání tomu, aby se dashboard tvářil přesněji, než ve skutečnosti je.
+
+### Dashboard zavři rozhodnutím
+
+Každé měsíční nebo týdenní review metrik má skončit jednou ze čtyř vět:
+
+- Ponecháme směr, protože signál je zdravý.
+- Upravíme konkrétní část produktu nebo marketingu.
+- Zastavíme aktivitu, protože nepřináší hodnotu.
+- Metriku vypneme nebo změníme, protože nepomáhá rozhodnutí.
+
+Pokud review končí větou „budeme to sledovat“, doplň datum, kdy se rozhodne. Nekonečné sledování je jen odklad v elegantním oblečení.
+
+### Checklist: SaaS metriky bez vanity dashboardu
+
+- [ ] Každá klíčová metrika odpovídá na konkrétní rozhodnutí.
+- [ ] Hlavní metrika souvisí s hodnotou pro zákazníka, ne jen s aktivitou v produktu.
+- [ ] Existují ochranné metriky pro kvalitu, důvěru, support a provoz.
+- [ ] Akvizice, aktivace, retence, revenue a provoz nejsou smíchané do jednoho čísla.
+- [ ] MRR se čte společně se segmentem, churnem, expansion a dosaženou hodnotou.
+- [ ] Metriky mají vlastníka, definici, zdroj a rytmus vyhodnocení.
+- [ ] Do metrik neposíláme osobní údaje, volné texty ani obsah zákaznických dat, pokud nejsou nutné.
+- [ ] Dashboard review končí rozhodnutím, ne jen debatou.
+- [ ] Nepoužívané metriky se archivují nebo mažou.
+
+### Mini úkol
+
+Vyber pět metrik, které tým dnes sleduje, a vyplň tabulku:
+
+| Metrika | Jaké rozhodnutí podporuje? | Kdo je vlastník? | Co uděláme při změně? | Dá se měřit s méně daty? |
+| --- | --- | --- | --- | --- |
+|  |  |  |  |  |
+|  |  |  |  |  |
+|  |  |  |  |  |
+|  |  |  |  |  |
+|  |  |  |  |  |
+
+Potom jednu metriku smaž nebo archivuj. Ne tu nejméně hezkou. Tu, podle které se nikdo nerozhoduje. Dashboard bude menší a tým bude mít víc pozornosti na čísla, která opravdu mění práci.
+
 ## Zdroje
 
 - ICANN: Information for Domain Name Registrants - práva a odpovědnosti držitelů domén včetně správy, obnovy a převodu doménové registrace: https://www.icann.org/registrants
@@ -10665,6 +10806,7 @@ Potom udělej jednu konkrétní změnu: přidej honeypot, nastav rate limit, ome
 
 ## Pracovní log
 
+- 2026-07-13: Doplněna příloha o SaaS metrikách bez vanity dashboardu: rozhodovací rámec podle fáze produktu, severní metrika s ochrannými metrikami, oddělení akvizice/aktivace/retence/revenue/provozu, čtení MRR v kontextu, vlastnictví metrik, dashboard review zakončené rozhodnutím, checklist a mini úkol.
 - 2026-07-13: Doplněna příloha o spam ochraně formulářů bez datového výletu: mapa zneužití podle typu formuláře, vrstvená ochrana, honeypot, rate limit, opatrné používání externí CAPTCHA, karanténa rizikových vstupů, checklist a mini úkol.
 - 2026-07-13: Doplněna příloha o e-mailové doručitelnosti bez sledovacích pixelů: rozdělení transakčních, produktových, marketingových, sales a bezpečnostních e-mailů, autentizace SPF/DKIM/DMARC, one-click unsubscribe, měření bez spoléhání na open pixel, práce se suppression listem, frekvence, checklist a mini úkol; ověřeny a doplněny zdroje Gmail Help a IETF RFC 2369/8058.
 - 2026-07-13: Doplněna příloha o doménové hygieně bez křehkého provozu: vlastnictví domény, renewal, MFA, DNS změny jako release, e-mailová autentizace SPF/DKIM/DMARC, inventář subdomén, redirecty, bezpečnostní hlavičky, krátká doménová dokumentace, checklist a mini úkol; ověřeny a doplněny zdroje ICANN, IETF RFC 7208/6376/9989, OWASP a MDN.
