@@ -13149,6 +13149,181 @@ Vyber jedno vyhledávání ve webu nebo produktu a vyplň kartu:
 
 Potom udělej jednu malou změnu: vypni detailní ukládání dotazů, odstraň z indexu zbytečné pole, přidej test na cizí workspace, zkrať retenci, odděl veřejný a interní index nebo založ seznam dotazů bez výsledku jako vstup pro dokumentaci. Search má lidem pomoct najít věci. Nemá se stát druhou databází, o které nikdo nemluví.
 
+## Příloha: Preference centrum bez nátlakového UI
+
+Preference centrum je místo, kde se potkává produkt, marketing, právní realita a důvěra. Špatně navržené preference centrum je jen hezčí název pro past: člověk chce odmítnout marketing, změnit cookies nebo vypnout notifikace, ale rozhraní ho pošle do labyrintu přepínačů, potvrzení a výčitek.
+
+Dobře navržené preference centrum dělá opačnou práci. Říká: „Tady máš kontrolu. Tohle potřebujeme pro provoz služby. Tohle je volitelné. Tohle můžeš změnit.“ Není to jen právní kryt. Je to produktová funkce důvěry.
+
+EDPB ve svých pokynech k souhlasu podle GDPR popisuje souhlas jako svobodný, konkrétní, informovaný a jednoznačný projev vůle. Ve finálních pokynech k technickému rozsahu ePrivacy článku 5(3) zároveň zdůrazňuje, že nejde jen o klasické cookies, ale obecně o ukládání informací do zařízení nebo přístup k nim. A v pokynech k deceptive design patterns ukazuje, jak rozhraní může lidi tlačit, mást nebo odrazovat od voleb souvisejících se soukromím.
+
+Codyho komentář: Preference centrum není místo, kde má designér vyhrát nad uživatelem. Když potřebuješ člověka unavit, aby klikl na „souhlasím“, nevyrábíš důvěru. Vyrábíš budoucí problém s hezkým modálním oknem.
+
+### Rozděl preference podle účelu
+
+První chyba je naházet všechno do jednoho přepínače. „Souhlasím se zpracováním údajů“ neříká skoro nic. Člověk má rozumět tomu, k čemu se rozhoduje.
+
+Praktické skupiny:
+
+- nutné provozní nastavení,
+- analytika s omezeným účelem,
+- produktové notifikace,
+- marketingové e-maily,
+- personalizace obsahu,
+- externí embedy a média,
+- reklamní nebo remarketingové nástroje.
+
+Nutné provozní nastavení nemá být zamíchané mezi marketingové volby. Pokud je něco opravdu nezbytné pro přihlášení, bezpečnost, uložení košíku, fakturaci nebo provoz účtu, vysvětli to a neprezentuj to jako volitelný marketingový souhlas.
+
+Naopak volitelné věci nebal do provozního jazyka. „Vylepšení služby“ může znamenat rozumnou agregovanou analytiku, ale také detailní reklamní profilování. Když jedna formulace schová pět různých účelů, není to srozumitelnost. Je to mlha.
+
+### Používej stejnou náročnost pro ano i ne
+
+Rozhraní má člověku umožnit volbu bez nátlaku. Prakticky:
+
+- odmítnutí nemá být složitější než přijetí,
+- tlačítko pro odmítnutí nemá být schované v druhé vrstvě,
+- změna volby má být dostupná i později,
+- text nemá vyvolávat falešnou vinu,
+- výchozí stav volitelných kategorií nemá předstírat rozhodnutí člověka,
+- služba má zůstat použitelná i bez marketingového souhlasu.
+
+Špatný vzor:
+
+„Přijmout vše“ jako výrazné tlačítko a „nastavení“ jako nenápadný odkaz, ve kterém je odmítnutí až dole po pěti kategoriích.
+
+Lepší vzor:
+
+„Přijmout volitelné“, „Odmítnout volitelné“ a „Upravit nastavení“ vedle sebe v jasném jazyce. V detailu pak každá kategorie vysvětluje účel, typ dat, dodavatele a dopad vypnutí.
+
+Ano, konverzní graf může vypadat méně slavnostně. Zato budeš měřit rozhodnutí, které člověk skutečně udělal, ne výsledek ergonomického tlaku.
+
+### Vysvětli dopad vypnutí bez strašení
+
+Preference centrum má říct, co se stane, když člověk volbu vypne. Ne proto, aby se bál, ale aby věděl.
+
+Příklady férových textů:
+
+- „Bez analytiky neuvidíme agregované statistiky používání této stránky. Produkt bude fungovat dál.“
+- „Bez produktových e-mailů můžete přijít o tipy k novým funkcím. Bezpečnostní a fakturační zprávy budeme posílat dál, protože jsou nutné pro provoz účtu.“
+- „Bez externích videí se média nenačtou automaticky. Můžete je spustit ručně.“
+- „Bez marketingových e-mailů vám nebudeme posílat novinky a nabídky. Transakční zprávy tím nejsou dotčené.“
+
+Špatné texty:
+
+- „Vypnutím ohrozíte kvalitu služby.“
+- „Odmítnutím přijdete o nejlepší zážitek.“
+- „Opravdu nechcete podporovat náš produkt?“
+- „Některé funkce nemusí fungovat“, když ve skutečnosti jde jen o reklamní měření.
+
+Mikrocopy má být konkrétní. Pokud tým neumí popsat dopad vypnutí, pravděpodobně nemá dost jasno ani v účelu zapnutí.
+
+### Preference musí být napojené na systémy
+
+Hezké preference centrum bez technického napojení je dekorace. Volba člověka se musí propsat do reálného chování produktu.
+
+Zkontroluj hlavní místa:
+
+| Preference | Kde se vynucuje | Co ověřit |
+| --- | --- | --- |
+| Marketingové e-maily | e-mailing, CRM, sales sekvence | kontakt se nedostane do kampaně po odmítnutí |
+| Analytika | frontend, tag manager, serverové eventy | volitelné eventy se neposílají bez odpovídající volby |
+| Externí embedy | komponenty článků, dokumentace, produkt | třetí strana se nenačte před akcí nebo souhlasem |
+| Produktové notifikace | notifikační služba, preference uživatele | vypnutí neblokuje bezpečnostní a billing zprávy |
+| Personalizace | doporučení, dashboard, e-maily | vypnutí nezanechá starý stav v cache |
+| Reklamní nástroje | pixel, remarketing, exporty publik | odmítnutý uživatel není posílán do audience |
+
+Tady se často ukáže, že preference nejsou jeden přepínač, ale malý distribuovaný systém. Potřebuje vlastníka, testy a logiku pro změny stavu.
+
+### Udělej změnu preference jako událost s životním cyklem
+
+Změna preference není jen update řádku v databázi. Má dopady:
+
+- uložit nový stav,
+- zaznamenat čas a verzi textu, pokud je potřeba doložit souhlas,
+- propsat změnu do e-mailingu, analytiky nebo notifikační služby,
+- zastavit budoucí zpracování, které už není povolené,
+- podle situace vyřešit data, která byla zpracována před změnou,
+- zobrazit člověku potvrzení.
+
+Pro malé produkty stačí jednoduchý model:
+
+| Pole | Příklad |
+| --- | --- |
+| Uživatel nebo kontakt | interní ID, ne veřejně sdílený identifikátor |
+| Kategorie preference | marketing_email, optional_analytics, external_embeds |
+| Stav | enabled / disabled |
+| Čas změny | kdy člověk volbu změnil |
+| Zdroj změny | preference centrum, odhlášení z e-mailu, support žádost |
+| Verze textu | odkaz na text souhlasu nebo preference |
+| Systémy k synchronizaci | e-mailing, CRM, tag manager |
+
+Nepotřebuješ z toho dělat datové monstrum. Potřebuješ umět odpovědět: jaká volba platí teď, odkud přišla, a které systémy ji respektují.
+
+### Nepleť preference s právním základem
+
+Preference centrum může spravovat souhlasy, ale nemusí spravovat jen souhlasy. Některá nastavení jsou produktové preference, některá jsou komunikační preference, některá souvisí s oprávněným zájmem nebo smluvním provozem. To není slovíčkaření. Když všechno nazveš souhlasem, začneš pod jedním tlačítkem míchat věci, které mají jiný důvod a jiný dopad.
+
+Praktické rozlišení:
+
+- Souhlas: člověk říká ano volitelnému zpracování, například marketingovému newsletteru nebo určitým cookies.
+- Produktová preference: člověk nastavuje, jak chce používat službu, například jazyk, téma nebo digest notifikace.
+- Nutná provozní komunikace: zpráva nutná pro účet, fakturaci, bezpečnost nebo změnu služby.
+- Námitka nebo opt-out: člověk odmítá určité zpracování tam, kde je k tomu proces a právní rámec.
+
+V UI nemusíš člověka zahlcovat právnickými kategoriemi. Interně ale potřebuješ vědět, co která volba znamená. Jinak support, marketing a produkt začnou používat stejný přepínač pro různé věci. To je nenápadný začátek chaosu.
+
+### Testuj preference jako kritickou cestu
+
+Preference centrum se často otestuje jen vizuálně: otevře se modal, přepínače fungují, hotovo. To nestačí. Testuj chování systému.
+
+Minimální scénáře:
+
+- nový návštěvník odmítne volitelné cookies a marketingové skripty se nespustí,
+- přihlášený uživatel vypne marketingové e-maily a další kampaň ho přeskočí,
+- uživatel vypne produktový digest, ale dostane bezpečnostní upozornění,
+- člověk změní volbu z mobilu a desktop respektuje stejný stav,
+- odhlášení v e-mailu se propíše do preference centra,
+- externí video se nenačte před ruční akcí nebo odpovídající volbou,
+- support umí na žádost změnit preference a změna má auditní stopu,
+- export kontaktů pro marketing respektuje aktuální stav.
+
+Přidej tyto scénáře do release checklistu, kdykoli měníš tag manager, e-mailing, notifikace, embed komponenty nebo CRM synchronizaci. Preference centrum je malý ovládací panel nad datovým provozem. Když se rozbije, uživatel ztrácí kontrolu a tým ztrácí důkaz, že kontrolu respektoval.
+
+### Checklist: Preference centrum privacy-first
+
+- [ ] Každá preference má jasný účel a vlastníka.
+- [ ] Nutné provozní věci nejsou schované mezi volitelným marketingem.
+- [ ] Volitelné kategorie nejsou předem zapnuté bez skutečné volby člověka.
+- [ ] Přijetí, odmítnutí a úprava nastavení jsou podobně snadné.
+- [ ] Texty vysvětlují dopad vypnutí bez strašení a manipulace.
+- [ ] Preference centrum je dostupné i po první návštěvě nebo registraci.
+- [ ] Odhlášení z e-mailu se propisuje do stejného zdroje pravdy.
+- [ ] Tagy, embedy, e-maily, CRM exporty a produktové notifikace respektují aktuální stav.
+- [ ] U souhlasů je jasné, jaká verze textu platila při udělení.
+- [ ] Support má postup pro ruční změnu preference bez hádání.
+- [ ] Release testy zahrnují odmítnutí, změnu a synchronizaci preference.
+- [ ] Tým pravidelně maže staré kategorie, které už nic neřídí.
+
+### Mini úkol
+
+Vyber jedno preference centrum, cookie banner nebo odhlašovací tok a vyplň kartu:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jaké preference člověk reálně nastavuje? |  |
+| Které z nich jsou nutné a které volitelné? |  |
+| Je odmítnutí stejně snadné jako přijetí? |  |
+| Jaký text vysvětluje dopad vypnutí? |  |
+| Kde je zdroj pravdy pro aktuální stav? |  |
+| Do kterých systémů se změna propisuje? |  |
+| Jak se preference testuje při releasu? |  |
+| Která kategorie je zbytečná nebo matoucí? |  |
+| Umí uživatel preference změnit později? |  |
+| Co se stane při odhlášení z e-mailu? |  |
+
+Potom udělej jednu konkrétní opravu: přidej viditelné „odmítnout volitelné“, přepiš manipulativní text, napoj odhlášení z e-mailu na preference centrum, zastav embed před ruční akcí, nebo napiš test, který ověří, že odmítnutý uživatel nejde do marketingové audience. Důvěra se nebuduje tím, že lidem dáš přepínač. Buduje se tím, že ten přepínač skutečně něco vypne.
+
 ## Zdroje
 
 - ICANN: Information for Domain Name Registrants - práva a odpovědnosti držitelů domén včetně správy, obnovy a převodu doménové registrace: https://www.icann.org/registrants
@@ -13242,6 +13417,7 @@ Potom udělej jednu malou změnu: vypni detailní ukládání dotazů, odstraň 
 - European Commission: International dimension of data protection - pravidla pro přenos osobních dat mimo EU včetně rozhodnutí o odpovídající ochraně: https://commission.europa.eu/law/law-topic/data-protection/international-dimension-data-protection_en
 - European Commission: Standard Contractual Clauses - standardní smluvní doložky pro vybrané přenosy osobních dat mimo EU/EHP: https://commission.europa.eu/law/law-topic/data-protection/international-dimension-data-protection/standard-contractual-clauses-scc_en
 - European Data Protection Board: Guidelines 05/2020 on consent under Regulation 2016/679 - pokyny k platnému souhlasu podle GDPR: https://www.edpb.europa.eu/documents/guideline/guidelines-052020-on-consent-under-regulation-2016679_en
+- European Data Protection Board: Guidelines 03/2022 on deceptive design patterns in social media platform interfaces - finální pokyny k rozpoznání a vyhnutí se manipulative design patterns v rozhraních souvisejících se soukromím a právy lidí: https://www.edpb.europa.eu/documents/guideline/guidelines-032022-on-deceptive-design-patterns-in-social-media-platform_en
 - RSS Advisory Board / Berkman Klein Center: RSS 2.0 Specification - stabilní specifikace RSS 2.0: https://cyber.harvard.edu/rss/rss.html
 - IETF: RFC 4287 The Atom Syndication Format - standard Atom feedů: https://datatracker.ietf.org/doc/html/rfc4287
 - web.dev: Web Vitals - aktuální metriky LCP, INP a CLS včetně doporučených hranic: https://web.dev/articles/vitals
@@ -13264,6 +13440,7 @@ Potom udělej jednu malou změnu: vypni detailní ukládání dotazů, odstraň 
 
 ## Pracovní log
 
+- 2026-07-13: Doplněna příloha o preference centru bez nátlakového UI: rozdělení preferencí podle účelu, rovnocenné přijetí a odmítnutí, férové vysvětlení dopadu vypnutí, technické napojení na e-mailing, analytiku, embedy a CRM, životní cyklus změny preference, testovací scénáře, checklist a mini úkol; ověřeny a doplněny zdroje EDPB k souhlasu, ePrivacy a deceptive design patterns.
 - 2026-07-13: Doplněna příloha o vyhledávání v produktu bez profilovacího stínu: účel search funkcí, rozsah indexu, krátké a chudé query logy, bezpečný našeptávač, zlepšování relevance z agregovaných signálů, oddělení veřejného/interního/support vyhledávání, release testy, checklist a mini úkol; navázáno na existující zdroje Evropské komise, EDPB a OWASP k minimalizaci dat, retenci a logování.
 - 2026-07-13: Doplněna příloha o interních automatizacích bez datového přelévání: výběr vhodných procesů, karta workflow, minimalizace polí, servisní účty, minimální oprávnění, chybová fronta, logování bez kopírování obsahu, vlastnictví, revize, checklist a mini úkol; navázáno na existující zdroje Evropské komise, OWASP a Google SRE k GDPR principům, secrets managementu a toil.
 - 2026-07-13: Doplněna příloha o zákaznickém exportu dat bez zipového chaosu: typy exportů podle účelu, použitelné formáty, ověřování oprávnění, vylučovací seznam citlivých interních dat, životní cyklus dočasného exportu, asynchronní UX, QA scénáře, checklist a mini úkol; ověřeny oficiální zdroje Evropské komise a EDPB k právům jednotlivců a přenositelnosti dat.
