@@ -13324,6 +13324,154 @@ Vyber jedno preference centrum, cookie banner nebo odhlašovací tok a vyplň ka
 
 Potom udělej jednu konkrétní opravu: přidej viditelné „odmítnout volitelné“, přepiš manipulativní text, napoj odhlášení z e-mailu na preference centrum, zastav embed před ruční akcí, nebo napiš test, který ověří, že odmítnutý uživatel nejde do marketingové audience. Důvěra se nebuduje tím, že lidem dáš přepínač. Buduje se tím, že ten přepínač skutečně něco vypne.
 
+## Příloha: Kampaně a UTM bez analytického nepořádku
+
+Kampaňové odkazy jsou užitečné, když pomáhají odpovědět na jednoduchou otázku: odkud přišla pozornost, která vedla k dalšímu kroku? Problém začne ve chvíli, kdy se z UTM parametrů stane skrytý CRM, interní poznámkový blok a osobní identifikátor v jednom. URL pak nenese jen zdroj návštěvy, ale i segment, jméno kampaně, hypotézu, obchodníka, variantu textu, někdy dokonce e-mail nebo ID kontaktu. To už není měření. To je datový nepořádek na výletě.
+
+Privacy-first přístup neříká „neměř kampaně“. Říká: měř je tak, aby odkaz zůstal čitelný, sdílitelný a bezpečný i mimo kontext původního nástroje.
+
+> Codyho komentář: UTM parametry jsou jako koření. Trocha pomůže zjistit, co fungovalo. Když jich nasypeš deset a ještě do nich schováš osobní údaje, nevaříš marketing. Vyrábíš logovací guláš.
+
+### Začni rozhodnutím, ne parametrem
+
+Než vytvoříš kampaňový odkaz, napiš si jednu větu:
+
+„Po kampani chceme rozhodnout, jestli ___ má smysl opakovat, upravit nebo zastavit.“
+
+Příklady dobrých rozhodnutí:
+
+- Zjistit, jestli článek pro zakladatele SaaS přivádí relevantní poptávky.
+- Porovnat, jestli partnerství s konkrétní komunitou přivádí lepší leady než běžný sociální post.
+- Ověřit, jestli nový positioning na landing page přináší víc dokončených formulářů.
+- Rozlišit návštěvnost z newsletteru, RSS anotace a osobního direct outreach.
+
+Příklady špatných rozhodnutí:
+
+- „Chceme vědět všechno.“
+- „Ať máme data do budoucna.“
+- „Marketing to možná někdy použije.“
+- „Nástroj má pole, tak ho vyplníme.“
+
+Pokud rozhodnutí neumíš napsat, nedoplňuj další parametr. Nejdřív si ujasni, co budeš po kampani dělat jinak.
+
+### Drž slovník malý a stabilní
+
+Malý tým nepotřebuje dvacet pojmenovacích pravidel. Potřebuje pár stabilních hodnot, které lidé používají stejně. Praktický základ:
+
+- `utm_source`: místo nebo partner, odkud člověk přišel, například `blog`, `rss`, `linkedin`, `partner-acme`.
+- `utm_medium`: typ kanálu, například `organic`, `email`, `community`, `partner`, `direct-outreach`.
+- `utm_campaign`: konkrétní iniciativa, například `saas-pricing-guide-2026` nebo `privacy-first-audit-q3`.
+- `utm_content`: varianta obsahu jen tehdy, když podle ní opravdu rozhodneš.
+- `utm_term`: používej hlavně tam, kde má jasný význam; nepoužívej ho jako odpadní šuplík.
+
+Důležité pravidlo: hodnoty mají popisovat kampaň, ne člověka. Do URL nepatří e-mail, jméno, telefon, název konkrétní firmy, interní CRM ID ani poznámka typu `high_value_lead`. URL se může dostat do logů, screenshotů, přeposlaných zpráv, ticketů, analytiky, historie prohlížeče a u odchozích odkazů i do referrer kontextu podle nastavení webu. MDN připomíná, že query string je normální součást URL parametrů a že `Referer` může zahrnovat i cestu a query string podle referrer policy. To stačí jako varování: co dáš do URL, nepovažuj za soukromé.
+
+### Vytvoř kampaňovou kartu
+
+Kampaňová karta je malý dokument, který drží měření při zemi. Stačí jedna tabulka:
+
+| Pole | Příklad |
+| --- | --- |
+| Název kampaně | `privacy-first-audit-q3` |
+| Rozhodnutí | Zopakovat auditovou nabídku jako měsíční evergreen, nebo ji ukončit |
+| Cílový segment | Malé B2B SaaS týmy v EU |
+| Hlavní URL | `/privacy-first-audit/` |
+| Povolené parametry | `utm_source`, `utm_medium`, `utm_campaign`, volitelně `utm_content` |
+| Zakázané hodnoty | osobní údaje, CRM ID, firma, e-mail, interní skóre |
+| Primární signál | dokončený poptávkový formulář |
+| Kvalitativní signál | ruční poznámka ze sales: proč se ozvali |
+| Datum vyhodnocení | 14 dní po spuštění |
+| Vlastník |  |
+
+Karta má dvě výhody. Zaprvé lidé nevymýšlí hodnoty pokaždé znovu. Zadruhé je jasné, kdy kampaň skončila a co se z ní má vyčíst. Bez karty se z kampaní stává věčný šum v analytice.
+
+### Odkazy po příchodu ukliď
+
+UTM parametry potřebuješ hlavně při příchodu na web. Návštěvník je nepotřebuje nosit celou cestu webem jako přilepenou cedulku. Praktický postup:
+
+1. Při první návštěvě si agregovaně zaznamenej povolené kampaňové hodnoty.
+2. Nepřepisuj jimi identitu člověka; jsou to údaje o cestě, ne o osobnosti.
+3. Pokud není důvod je držet v adrese, po načtení stránky nabídni čistou kanonickou URL nebo parametry odstraň pomocí historie prohlížeče.
+4. Interní odkazy generuj bez zbytečného kopírování UTM.
+5. U sdílecích odkazů používej čistou URL, ne marketingový odkaz pro dashboard.
+
+Tohle pomáhá SEO, podpoře i obyčejné lidské čitelnosti. Když zákazník pošle supportu odkaz na stránku, nechceš řešit třířádkovou URL s historickým zbytkem kampaně. Chceš vědět, na které stránce byl a co nefungovalo.
+
+### Referrer policy je součást hygieny
+
+Když web odkazuje ven, prohlížeč může podle pravidel poslat cílovému serveru informaci o stránce, ze které člověk přišel. Ne vždy je to problém, ale u URL s query parametry to problém být může. `Referrer-Policy` nastavuje, kolik referrer informací se má posílat dál. Pro většinu marketingových webů je rozumné mít politiku, která nepouští plnou cestu a query string na cizí domény, pokud k tomu není jasný důvod.
+
+Praktické minimum:
+
+- Nepoužívej politiku `unsafe-url`; posílá příliš mnoho kontextu.
+- Ověř, že externí odkazy z citlivějších stránek neposílají zbytečnou cestu a parametry.
+- U partnerů a embedů počítej s tím, že odchozí requesty mohou nést referrer podle nastavení stránky.
+- Pokud používáš zkracovač odkazů, ověř, co loguje, kde běží a jak dlouho data drží.
+
+Tohle není náhrada za souhlas ani za právní posouzení. Je to technická hygiena, která snižuje množství údajů, které opouští tvůj web jen proto, že někdo klikl dál.
+
+### Direct outreach neměř jako sledovací test osob
+
+U direct outreach je lákavé dát každému člověku unikátní odkaz a sledovat, kdo klikl. Ve většině malých B2B situací to nepotřebuješ. Lepší je měřit na úrovni kampaně a kvalitu vyhodnotit ručně.
+
+Privacy-first varianta:
+
+- Jeden odkaz pro jednu outreach vlnu, ne unikátní URL pro každého adresáta.
+- Odpověď v e-mailu nebo formuláři ber jako silnější signál než tajný klik.
+- Do CRM zapisuj pracovní fakta: problém, segment, další krok, ne domněnky z chování.
+- Pokud posíláš personalizovaný odkaz kvůli bezpečnému přístupu, nepleť ho s marketingovým měřením.
+
+Příklad:
+
+Místo `/demo?utm_source=email&utm_campaign=founders-july&person=jan-novak&score=high` použij `/demo?utm_source=direct-outreach&utm_medium=email&utm_campaign=founders-july`. Když Jan odpoví, že řeší onboarding zákazníků, je to kvalitní obchodní informace získaná přímo. Tajný klik na hero sekci je vedle toho slabý čaj.
+
+### Vyhodnocuj kampaně jako rozhodnutí
+
+Po kampani neotevírej dashboard jen proto, abys obdivoval návštěvnost. Otevři kartu a doplň:
+
+- Kolik lidí přišlo z kampaně v agregaci?
+- Kolik udělalo primární krok?
+- Jaká byla kvalita poptávek, odpovědí nebo registrací?
+- Co se opakovalo v otázkách lidí?
+- Který prvek zjevně nefungoval?
+- Co uděláme příště jinak?
+- Které parametry, exporty nebo dočasné seznamy můžeme smazat?
+
+Kampaň je hotová až ve chvíli, kdy vznikne rozhodnutí. „Měli jsme 1 200 návštěv“ není rozhodnutí. „Partnerství zopakujeme, ale landing page přepíšeme pro menší týmy a zrušíme variantu B, protože nepřinesla lepší leady“ už rozhodnutí je.
+
+### Checklist: Kampaně a UTM privacy-first
+
+- [ ] Každá kampaň má předem napsané rozhodnutí, které má měření podpořit.
+- [ ] Slovník hodnot je malý, stabilní a sdílený v týmu.
+- [ ] URL parametry popisují kampaň, ne identitu člověka.
+- [ ] Do URL se nedávají e-maily, jména, telefonní čísla, CRM ID, firma ani interní skóre.
+- [ ] Existuje kampaňová karta s vlastníkem a datem vyhodnocení.
+- [ ] Interní odkazy nekopírují UTM parametry zbytečně dál.
+- [ ] Sdílecí odkazy používají čistou kanonickou URL.
+- [ ] Referrer policy omezuje únik plné cesty a query parametrů na cizí domény.
+- [ ] Zkracovače odkazů a partner nástroje mají jasné logování, retenci a provozní odpovědnost.
+- [ ] Direct outreach se nehodnotí podle tajného sledování jednotlivců.
+- [ ] Po kampani vznikne rozhodnutí, ne jen report.
+- [ ] Dočasné exporty, seznamy a varianty se po vyhodnocení uklidí.
+
+### Mini úkol
+
+Vyber jednu běžící nebo plánovanou kampaň a udělej malý audit odkazů:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jaké rozhodnutí má kampaň podpořit? |  |
+| Jaká je hlavní čistá URL? |  |
+| Jaké parametry jsou povolené? |  |
+| Obsahuje některý odkaz osobní nebo interní údaj? |  |
+| Kopírují se parametry dál po webu? |  |
+| Jaká referrer policy platí pro stránku? |  |
+| Kde se hodnoty ukládají a jak dlouho? |  |
+| Kdy kampaň vyhodnotíme? |  |
+| Jaký bude jeden možný další krok? |  |
+
+Potom udělej jednu opravu: smaž osobní údaj z URL, sjednoť názvy kampaní, přidej kampaňovou kartu, nastav čistší sdílecí odkaz, nebo ověř `Referrer-Policy` na landing page. Malá URL hygiena je nudná práce. Přesně proto umí ušetřit hodně pozdějšího vysvětlování.
+
 ## Zdroje
 
 - ICANN: Information for Domain Name Registrants - práva a odpovědnosti držitelů domén včetně správy, obnovy a převodu doménové registrace: https://www.icann.org/registrants
@@ -13429,6 +13577,9 @@ Potom udělej jednu konkrétní opravu: přidej viditelné „odmítnout volitel
 - Google Search Central: How to specify a canonical URL with rel=canonical and other methods - doporučení pro určení preferované URL u duplicitního nebo velmi podobného obsahu: https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls
 - Google Search Central: Article structured data - použití strukturovaných dat pro články a blogové příspěvky: https://developers.google.com/search/docs/appearance/structured-data/article
 - Schema.org: BlogPosting - typ strukturovaných dat pro blogový příspěvek: https://schema.org/BlogPosting
+- MDN Web Docs: URLSearchParams - rozhraní pro práci s query stringem URL a jednotlivými parametry: https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams
+- MDN Web Docs: Referer header - vysvětlení, že `Referer` může obsahovat origin, path a query string podle referrer policy a má dopady na analytiku, logování a soukromí: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Referer
+- MDN Web Docs: Referrer-Policy header - HTTP hlavička pro řízení množství referrer informací posílaných s požadavky: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Referrer-Policy
 - MDN Web Docs: Cache-Control header - pravidla pro HTTP cache: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Cache-Control
 - MDN Web Docs: ETag header - identifikace verze zdroje pro efektivnější cache: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/ETag
 - W3C: Web Content Accessibility Guidelines 2.2 - doporučení pro přístupný webový obsah: https://www.w3.org/TR/WCAG22/
@@ -13440,6 +13591,7 @@ Potom udělej jednu konkrétní opravu: přidej viditelné „odmítnout volitel
 
 ## Pracovní log
 
+- 2026-07-13: Doplněna příloha o kampaních a UTM bez analytického nepořádku: rozhodnutí před parametry, malý stabilní slovník, zákaz osobních údajů v URL, kampaňová karta, úklid parametrů po příchodu, referrer policy, direct outreach bez sledování jednotlivců, vyhodnocení jako rozhodnutí, checklist a mini úkol; ověřeny a doplněny zdroje MDN k URLSearchParams, Referer a Referrer-Policy.
 - 2026-07-13: Doplněna příloha o preference centru bez nátlakového UI: rozdělení preferencí podle účelu, rovnocenné přijetí a odmítnutí, férové vysvětlení dopadu vypnutí, technické napojení na e-mailing, analytiku, embedy a CRM, životní cyklus změny preference, testovací scénáře, checklist a mini úkol; ověřeny a doplněny zdroje EDPB k souhlasu, ePrivacy a deceptive design patterns.
 - 2026-07-13: Doplněna příloha o vyhledávání v produktu bez profilovacího stínu: účel search funkcí, rozsah indexu, krátké a chudé query logy, bezpečný našeptávač, zlepšování relevance z agregovaných signálů, oddělení veřejného/interního/support vyhledávání, release testy, checklist a mini úkol; navázáno na existující zdroje Evropské komise, EDPB a OWASP k minimalizaci dat, retenci a logování.
 - 2026-07-13: Doplněna příloha o interních automatizacích bez datového přelévání: výběr vhodných procesů, karta workflow, minimalizace polí, servisní účty, minimální oprávnění, chybová fronta, logování bez kopírování obsahu, vlastnictví, revize, checklist a mini úkol; navázáno na existující zdroje Evropské komise, OWASP a Google SRE k GDPR principům, secrets managementu a toil.
