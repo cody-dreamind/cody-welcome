@@ -12069,6 +12069,163 @@ Na konci nepiš dlouhou studii. Uzavři jednu akci:
 
 Cílem není mít nulové riziko. Cílem je vědět, jaké riziko držíš, proč ho držíš a kdy ho znovu otevřeš.
 
+## Příloha: Open-source licence bez právního chaosu
+
+Open source není „kód zdarma, se kterým si můžeme dělat cokoliv“. Je to sada konkrétních oprávnění a podmínek. V malém SaaS týmu se na licence často zapomíná, protože většina balíčků prostě přijde přes package manager, testy projdou a produkt běží. Jenže licence se neozve v runtime. Nehodí chybu. Nezastaví build. Jen ti potichu vzniká povinnost, kterou budeš řešit až při due diligence, enterprise nákupu, bezpečnostním auditu nebo nepříjemném dotazu od zákazníka.
+
+GitHub ve svých licenčních doporučeních připomíná, že bez licence platí výchozí autorskoprávní režim a ostatní nemají automaticky právo kód reprodukovat, distribuovat nebo z něj tvořit odvozená díla. OSI zase udržuje přehled schválených open-source licencí a SPDX poskytuje standardizované identifikátory licencí, které používají nástroje a package registry. Viz zdroje na konci e-booku.
+
+Toto není právní rada. Je to provozní hygienický rámec pro tým, který nechce z licencí dělat týdenní drama.
+
+### Licence řeš při přidání závislosti
+
+Nejlevnější okamžik pro licenční kontrolu je pull request, ve kterém nová závislost vzniká. Když ji odložíš na „někdy potom“, skončíš s výpisem dvou set balíčků, z nichž polovina je transitivní, tři mají nejasnou licenci a jeden autor v README píše něco jiného než v `package.json`.
+
+Do PR checklistu pro novou produkční závislost přidej:
+
+- proč balíček potřebujeme,
+- kde běží: server, browser, CI, lokální vývoj,
+- jestli se balíček distribuuje zákazníkům nebo jen používá interně,
+- jakou má licenci podle manifestu a repozitáře,
+- jestli licence odpovídá běžnému seznamu schválených licencí týmu,
+- jestli přidává binárku, font, ikony, data, model nebo jiný ne-kódový obsah,
+- jestli má nejasnou nebo chybějící licenci.
+
+Privacy-first poznámka: Licenční kontrola není náhrada privacy kontroly. Balíček může mít úplně v pořádku MIT licenci a zároveň posílat telemetry mimo Evropu. Licence odpovídá na otázku „smíme to použít tímto způsobem?“. Privacy kontrola odpovídá na otázku „co to dělá s daty lidí?“ Potřebuješ obě.
+
+### Udělej malý seznam povolených licencí
+
+Malý tým nepotřebuje encyklopedii právních výkladů. Potřebuje jednoduchý pracovní semafor:
+
+| Stav | Příklad licencí | Co dělat |
+| --- | --- | --- |
+| Běžně povolené | MIT, ISC, BSD-2-Clause, BSD-3-Clause, Apache-2.0 | Zkontroluj zdroj licence a pokračuj. |
+| Vyžaduje pozornost | MPL-2.0, LGPL, EPL, EUPL | Ověř způsob použití, distribuci a povinnosti. |
+| Blokované bez schválení | GPL, AGPL, vlastní licence, chybějící licence | Nezařazuj do produktu bez právní nebo technické revize. |
+| Ne-kódový obsah | fonty, ikony, fotky, datasety, modely | Ověř zvláštní podmínky pro komerční použití a distribuci. |
+
+Tento semafor není univerzální zákon. Je to týmové pravidlo. Některé firmy budou mít přísnější politiku, některé volnější. Důležité je, aby vývojář nemusel při každém `npm install` luštit právní horoskop.
+
+### SPDX identifikátory ber jako jazyk pro nástroje
+
+SPDX License List obsahuje standardizované krátké identifikátory, plné názvy a odkazy na texty licencí. npm dokumentace doporučuje u běžných licencí používat aktuální SPDX identifikátory a u více licencí SPDX výraz. Prakticky to znamená: `MIT` je srozumitelné pro lidi i nástroje, zatímco „free for commercial use probably“ je červená vlajka s konfety.
+
+Při kontrole manifestu si dej pozor na tyto případy:
+
+- `license` chybí,
+- licence je napsaná volným textem,
+- manifest říká jednu licenci a repozitář druhou,
+- balíček má `SEE LICENSE IN ...`, ale soubor v balíčku chybí,
+- licence je v README, ale ne v distribuovaném balíčku,
+- transitivní závislost přináší licenci mimo týmový semafor,
+- balíček obsahuje vendorizovaný kód třetí strany s vlastní licencí.
+
+U interního privátního balíčku, který nechceš licencovat pro veřejné použití, npm dokumentace uvádí hodnotu `UNLICENSED` a doporučuje nastavit také `private: true`, aby se balíček omylem nepublikoval. To je malý detail, který umí zabránit velkému trapasu.
+
+### Odděl používání služby od distribuce kódu
+
+Licenční riziko závisí na tom, co s kódem děláš. Jinak vypadá knihovna používaná jen ve vlastním backendu, jinak JavaScript posílaný do browseru, jinak desktopová aplikace distribuovaná zákazníkům a jinak open-source plugin, který zákazník instaluje k sobě.
+
+Praktický rozhodovací strom:
+
+1. Používáme balíček jen interně při vývoji?
+2. Běží balíček v produkčním backendu jako součást služby?
+3. Posíláme jeho kód zákazníkovi do browseru, mobilní aplikace nebo balíčku?
+4. Upravujeme zdrojový kód balíčku?
+5. Distribuujeme upravenou verzi dál?
+6. Je balíček propojený s naším vlastním kódem způsobem, který může spouštět povinnosti copyleft licence?
+
+Čím blíž jsi distribuci, úpravám a propojení se zákaznickým prostředím, tím méně stačí „asi je to v pohodě“. U nejistých případů raději změň knihovnu, izoluj použití, nebo si nech udělat právní kontrolu. Ano, právní kontrola zní nudně. Pořád je levnější než přepisovat část produktu dva dny před enterprise podpisem.
+
+### Nezapomeň na fonty, ikony, fotky a data
+
+Vývojáři často kontrolují npm balíčky, ale přehlédnou assety. Přitom právě tam bývají záludnosti:
+
+- ikon set stažený z webu bez jasné licence,
+- komerční font použitý i v PDF exportech nebo aplikaci,
+- fotka v landing page bez doloženého zdroje,
+- dataset použitý pro demo, benchmark nebo AI funkci,
+- design šablona s omezením redistribuce,
+- zvuk nebo video vložené do marketingového materiálu.
+
+U každého assetu drž minimální evidenci:
+
+| Asset | Zdroj | Licence / podmínky | Kde se používá | Doklad |
+| --- | --- | --- | --- | --- |
+| Font pro app UI |  |  | web, PDF, aplikace | odkaz / smlouva |
+| Ikony |  |  | produkt, landing page | odkaz / LICENSE |
+| Demo dataset |  |  | staging, demo | původ / souhlas |
+| Fotky |  |  | blog, case study | zdroj / povolení |
+
+Privacy-first doplněk: U demo datasetů a fotek řeš nejen licenci, ale i osobní údaje. Obrázek z reálného zákaznického prostředí může být licenčně v pořádku a privacy katastrofa zároveň. To je nepříjemná kombinace, kterou nechceš objevovat v tiskové sadě.
+
+### Licenční výstup připrav pro zákazníky a audit
+
+Pokud prodáváš B2B SaaS, dřív nebo později se někdo zeptá na použitý open source. Ne vždy to bude právník. Někdy security tým zákazníka, někdy procurement, někdy investor. Měj připravený rozumný výstup, ne ruční lov v lockfilu.
+
+Minimální licenční balík:
+
+- seznam přímých produkčních závislostí,
+- licenční souhrn vygenerovaný z lockfile nebo dependency graphu,
+- seznam výjimek a jejich vysvětlení,
+- odkaz na vlastní licenci repozitáře, pokud je projekt veřejný,
+- pravidlo, kdo odpovídá na licenční dotazy zákazníků,
+- datum poslední kontroly.
+
+GitHub dependency graph umí u podporovaných ekosystémů ukazovat verzi, licenční informace, manifest a známé zranitelnosti závislostí. To je dobrý vstup, ale ne definitivní razítko. Nástroje můžou minout vlastní assety, vendorizovaný kód, privátní balíčky nebo rozdíl mezi tím, co je v repozitáři, a tím, co reálně distribuuješ.
+
+### Když licence chybí nebo nesedí, zastav se
+
+Chybějící licence není „open source s méně papírováním“. Je to nejasné oprávnění. GitHub výslovně upozorňuje, že veřejný repozitář bez licence automaticky nedává ostatním práva k použití, změně nebo distribuci mimo rámec daný platformou.
+
+Postup při nejasné licenci:
+
+1. Zkontroluj repozitář, distribuovaný balíček, README a release artifact.
+2. Ověř, jestli nejde o chybu v metadatech a licence je jasně uvedená jinde.
+3. Najdi alternativu s jasnější licencí.
+4. Pokud balíček opravdu potřebuješ, založ issue u maintainera nebo požádej o právní posouzení.
+5. Dočasnou výjimku zapiš s vlastníkem a datem revize.
+
+Špatně: „Má to hodně hvězdiček, takže to bude dobré.“
+
+Lépe: „Balíček nemá licenci v manifestu, ale repozitář obsahuje `LICENSE` s MIT a release tarball ji zahrnuje. Přidáváme do výjimkového seznamu do další verze, zároveň ověřujeme alternativu.“
+
+### Checklist: Open-source licence pod kontrolou
+
+- [ ] Projekt má vlastní licenci nebo jasně uvedeno, že je privátní a nelicencovaný pro veřejné použití.
+- [ ] Nové produkční závislosti prochází licenční kontrolou v PR.
+- [ ] Tým má jednoduchý semafor povolených, opatrných a blokovaných licencí.
+- [ ] Používáme SPDX identifikátory tam, kde to ekosystém podporuje.
+- [ ] Nejasné, vlastní a chybějící licence neprochází bez výjimky.
+- [ ] Kontrolujeme také fonty, ikony, fotky, datasety, modely a šablony.
+- [ ] Víme, které závislosti se distribuují zákazníkům a které běží jen interně.
+- [ ] Máme licenční souhrn pro zákaznický nebo investorský audit.
+- [ ] Výjimky mají vlastníka, důvod a datum další revize.
+- [ ] Licenční kontrola je propojená se správou závislostí, ale neplete se s privacy kontrolou.
+
+### Mini úkol
+
+Vyber jeden aktivní repozitář a udělej 45minutový licenční průchod:
+
+| Kontrola | Výsledek | Další krok |
+| --- | --- | --- |
+| Má repozitář vlastní licenci nebo jasný privátní režim? |  |  |
+| Kolik přímých produkčních závislostí má nejasnou licenci? |  |  |
+| Existuje závislost mimo týmový semafor? |  |  |
+| Posíláme některý open-source kód do browseru nebo zákaznického balíčku? |  |  |
+| Máme doložené licence pro fonty, ikony a demo assety? |  |  |
+| Umíme vygenerovat licenční souhrn pro zákazníka? |  |  |
+
+Na konci uzavři jednu věc:
+
+- doplň vlastní `LICENSE`,
+- nastav `private: true` u interního balíčku,
+- nahraď balíček s nejasnou licencí,
+- přidej licenční kontrolu do PR checklistu,
+- nebo vytvoř první verzi týmového licenčního semaforu.
+
+> Codyho komentář: Licence nejsou protivývojářský vynález. Jsou to pravidla provozu cizí práce. Když je respektuješ průběžně, zůstane open source výhoda. Když je ignoruješ, stane se z něj skrytý dluh s právnickým kloboukem.
+
 ## Zdroje
 
 - ICANN: Information for Domain Name Registrants - práva a odpovědnosti držitelů domén včetně správy, obnovy a převodu doménové registrace: https://www.icann.org/registrants
@@ -12098,7 +12255,12 @@ Cílem není mít nulové riziko. Cílem je vědět, jaké riziko držíš, pro�
 - OWASP Software Component Verification Standard - rámec aktivit, kontrol a dobrých praktik pro snižování rizika v softwarovém supply chainu: https://owasp.org/www-project-software-component-verification-standard/
 - GitHub Docs: Dependabot alerts - upozornění na zranitelné závislosti v repozitáři a návaznost na dependency graph: https://docs.github.com/en/code-security/concepts/supply-chain-security/dependabot-alerts
 - GitHub Docs: Dependency review - kontrola změn závislostí v pull requestech a upozornění na rizikové dependency změny: https://docs.github.com/en/code-security/concepts/supply-chain-security/dependency-review
+- GitHub Docs: Dependency graph - souhrn manifestů a lockfile v repozitáři včetně verzí, licenčních informací, manifestů a známých zranitelností u závislostí: https://docs.github.com/en/code-security/concepts/supply-chain-security/dependency-graph
+- GitHub Docs: Licensing a repository - vysvětlení, proč veřejný repozitář potřebuje licenci pro skutečné open-source použití a jak GitHub detekuje licence: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/licensing-a-repository
 - npm Docs: npm audit - audit závislostí proti známým bezpečnostním zranitelnostem v npm ekosystému: https://docs.npmjs.com/cli/v10/commands/npm-audit/
+- npm Docs: package.json license field - doporučení používat SPDX identifikátory, SPDX výrazy, `SEE LICENSE IN <filename>` a `UNLICENSED` pro privátní balíčky: https://docs.npmjs.com/cli/v11/configuring-npm/package-json/#license
+- SPDX: SPDX License List - standardizované krátké identifikátory, plné názvy, texty a trvalé URL pro licence a výjimky: https://spdx.org/licenses/
+- Open Source Initiative: OSI Approved Licenses - seznam licencí schválených podle Open Source Definition: https://opensource.org/licenses
 - OpenSSF Scorecard - projekt OpenSSF pro automatizované kontroly vybraných signálů bezpečnostní praxe open source projektů: https://openssf.org/projects/scorecard/
 - EUR-Lex: Regulation (EU) 2016/679, GDPR Article 35 and 36 - povinnost posouzení vlivu na ochranu osobních údajů a předchozí konzultace při vysokém zbytkovém riziku: https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng
 - European Commission: When is a Data Protection Impact Assessment (DPIA) required? - praktický přehled situací, kdy je DPIA vyžadována: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/obligations/when-data-protection-impact-assessment-dpia-required_en
@@ -12179,6 +12341,7 @@ Cílem není mít nulové riziko. Cílem je vědět, jaké riziko držíš, pro�
 
 ## Pracovní log
 
+- 2026-07-13: Doplněna příloha o open-source licencích bez právního chaosu: licenční kontrola při přidání závislosti, týmový semafor licencí, práce se SPDX identifikátory, rozdíl mezi interním použitím a distribucí, kontrola assetů, licenční výstup pro zákaznický audit, postup při nejasné licenci, checklist a mini úkol; ověřeny a doplněny zdroje SPDX, OSI, GitHub Docs a npm Docs.
 - 2026-07-13: Doplněna příloha o správě závislostí bez update paniky: inventář balíčků a externích skriptů, rozlišení bezpečnostních patchů/údržby/major upgradů, karta alertu, dependency review v PR, aktualizační rytmus, přísnější kontrola browser závislostí, výjimky, checklist a mini úkol; ověřeny a doplněny zdroje OWASP SCVS, GitHub Docs, npm Docs a OpenSSF Scorecard.
 - 2026-07-13: Doplněna příloha o feature flazích a postupných releasech bez sledovací laboratoře: typy flagů, karta přepínače, vysvětlitelné cílení, postupné zapínání se stop signály, měření jen pro rozhodnutí, úklid flagů, dopad na dokumentaci/support, checklist a mini úkol.
 - 2026-07-13: Doplněna příloha o performance budgetu bez honby za skóre: uživatelské cesty, rozdělení budgetu na obsah/interakce/třetí strany/stabilitu, karta externích skriptů, pravidla pro obrázky, fonty a JavaScript, kontrola při releasu, postup při překročení budgetu, checklist a mini úkol; navázáno na existující zdroje k Web Vitals, cache a technickému SEO.
