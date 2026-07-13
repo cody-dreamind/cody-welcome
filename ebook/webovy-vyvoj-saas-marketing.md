@@ -13818,6 +13818,188 @@ Vyber jednu existující referenci, logo nebo případovou studii a vyplň kartu
 
 Potom udělej jednu konkrétní opravu: přidej datum revize, nahraď reálný screenshot demo daty, přepiš obecnou pochvalu na schválenou konkrétní citaci, anonymizuj citlivý detail, nebo odstraň logo, u kterého neumíš doložit schválení. Případová studie má být důkaz důvěry, ne důkaz, že marketing našel sdílený disk se screenshoty.
 
+## Příloha: Externí spolupráce bez předání klíčů od provozu
+
+Externí vývojář, copywriter, agentura nebo konzultant může firmu výrazně zrychlit. Může také během jednoho odpoledne získat přístup k produkci, analytice, CRM, reklamním účtům, zákaznickým datům a interním dokumentům, protože „potřebuje něco zkontrolovat“. Tady začíná ta zábavná část, kde z malé zakázky vznikne bezpečnostní a privacy problém v botách.
+
+Privacy-first spolupráce neznamená, že nikomu nevěříš. Znamená to, že důvěru převádíš do jasného rozsahu práce, přiměřených přístupů, kontrolovatelného předání a uklizeného konce spolupráce.
+
+Špatná otázka zní: „Co všechno externista potřebuje, aby měl klid?“
+
+Lepší otázka zní: „Jaký nejmenší přístup stačí k dokončení konkrétní práce a kdy ho zase odebereme?“
+
+Evropská komise ve svých materiálech rozlišuje správce a zpracovatele podle toho, kdo určuje účely a prostředky zpracování osobních údajů a kdo zpracovává data jménem správce. GDPR článek 28 pak řeší smluvní rámec pro zpracovatele. Prakticky: jakmile dodavatel pracuje s osobními údaji zákazníků, leadů, uživatelů nebo zaměstnanců, nestačí poslat mu pozvánku do nástroje a doufat, že se vesmír zachová profesionálně. Viz zdroje k rolím správce/zpracovatele, GDPR článku 28 a standardním smluvním doložkám.
+
+### Začni zadáním, ne přístupem
+
+Mnoho spoluprací se rozbije už v první větě. „Mrkni nám na web“ není zadání. Je to pozvánka k chaosu. Externista potom neví, jestli má řešit texty, SEO, rychlost, analytiku, design, konverze nebo to, že v patičce straší rok 2021.
+
+Dobré zadání obsahuje:
+
+- výsledek, který má vzniknout,
+- rozsah stránek, modulů nebo kampaní,
+- data a nástroje, které jsou skutečně potřeba,
+- věci, do kterých dodavatel sahat nemá,
+- způsob schvalování změn,
+- termín odebrání přístupů,
+- kontakt na interního vlastníka.
+
+Příklad slabého zadání:
+
+„Zlepšit onboarding.“
+
+Příklad použitelného zadání:
+
+„Navrhnout novou první obrazovku onboardingu pro administrátora malého B2B účtu. Dodavatel dostane přístup do stagingu s demo daty a read-only přístup k anonymizovaným poznámkám z pěti rozhovorů. Nesmí pracovat s produkční databází ani kontaktovat zákazníky bez schválení. Výstupem je návrh textů, wireframe a seznam měřených aktivačních signálů.“
+
+To je méně romantické než „zlepšit onboarding“, ale výrazně bezpečnější. Navíc se na tom dá fakt pracovat.
+
+### Rozděl přístupy podle práce
+
+Externí spolupráce často selhává na pohodlném sdílení účtů. Jeden společný login do CMS, jeden export zákazníků v tabulce, jeden produkční SSH klíč v chatu. Krátkodobě rychlé, dlouhodobě špatný nápad s fakturou za budoucí incident.
+
+Používej raději pracovní role:
+
+| Role | Typický přístup | Co nemá dostat automaticky |
+| --- | --- | --- |
+| Copywriter | Drafty článků, tone of voice, veřejné reference | CRM export, analytika na úrovni lidí, produkční CMS publikaci bez review |
+| SEO konzultant | Search konzole, sitemap, technické reporty, read-only CMS | Přístup k billing údajům, zákaznickým datům, deploy klíčům |
+| Vývojář | Repozitář podle scope, staging, issue tracker | Produkční databázi, secrets, administraci domény bez důvodu |
+| Designér | Design soubory, komponenty, anonymizované scénáře | Reálné support tickety se jmény, produkční screenshoty s osobními údaji |
+| Marketingová agentura | Kampaně, agregované výsledky, schválené publikum | Všechny kontakty, plné session záznamy, trvalý admin účet |
+
+Když někdo potřebuje širší přístup, napiš důvod. Ne jako byrokratický trest, ale jako malou pojistku proti automatickému rozšiřování práv. Věta „potřebuje na 48 hodin read-only export objednávek kvůli kontrole chyb ve fakturačním feedu“ je úplně jiná liga než „dej mu admina, ať to neřešíme“.
+
+### Staging a demo data jsou výchozí stav
+
+Externí lidé nemají jako první dostat produkční data. Výchozí pracovní prostor má být staging, preview prostředí, demo účet nebo anonymizovaný export. Produkční přístup je výjimka s důvodem, časovým omezením a vlastníkem.
+
+Praktické pravidlo:
+
+- návrhy textů a designu: veřejný obsah, demo scénáře, anonymizované rozhovory,
+- technické opravy: staging a reprodukovatelný bug report,
+- analytika: agregované metriky a rozhodovací otázka,
+- supportní zlepšení: anonymizované příklady dotazů,
+- billing a platby: testovací režim poskytovatele, ne reálné platební údaje.
+
+Pokud externista tvrdí, že bez produkčního exportu nejde pokračovat, zastav se a napiš výjimku:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jaký konkrétní problém bez produkčních dat nejde vyřešit? |  |
+| Jaký nejmenší vzorek stačí? |  |
+| Která pole lze odstranit nebo nahradit? |  |
+| Kdo export vytvoří a kde bude uložen? |  |
+| Kdy se export smaže? |  |
+| Kdo potvrdí smazání? |  |
+
+Tahle tabulka zabere pět minut. Budoucí vysvětlování, proč zákaznický export ležel tři měsíce v cizím nástroji, zabere podstatně víc.
+
+### Secrets se neposílají jako příloha odvahy
+
+API klíče, hesla, SSH klíče, webhook secrety a produkční tokeny nejsou běžná dokumentace. OWASP popisuje životní cyklus tajemství: vznik, rotaci, revokaci a expiraci. Pro externí spolupráci to znamená jednoduchou disciplínu:
+
+- nevkládej secrets do e-mailu, chatu, dokumentu ani issue,
+- vytvářej samostatné účty a tokeny pro dodavatele,
+- nastav minimální oprávnění a expiraci,
+- token označ účelem a vlastníkem,
+- po skončení práce ho zruš,
+- při podezření na únik token okamžitě rotuj.
+
+Příklad názvu tokenu:
+
+`agency-seo-readonly-search-console-2026-07-exp-2026-08-15`
+
+Není to nejkrásnější poezie, ale za měsíc poznáš, proč existuje. A to je u provozních názvů často důležitější než estetický zážitek.
+
+### Smlouva má sedět realitě práce
+
+Smlouva nemusí být román, ale musí odpovídat tomu, co se skutečně děje. Pokud dodavatel jen navrhne veřejný text bez osobních údajů, řešíš hlavně autorská práva, odpovědnost, mlčenlivost a schvalování. Pokud pracuje s osobními údaji, potřebuješ jasně vyřešit role, účely, pokyny, bezpečnost, subdodavatele, návrat nebo výmaz dat po skončení a případné přenosy mimo EU/EHP.
+
+Praktická kontrolní karta:
+
+| Oblast | Co zkontrolovat |
+| --- | --- |
+| Role | Je dodavatel zpracovatel, samostatný správce, nebo obojí podle části práce? |
+| Účel | Proč data zpracovává a pro jaký výsledek? |
+| Rozsah dat | Jaké kategorie dat uvidí nebo uloží? |
+| Přístupy | Do kterých systémů dostane účet a s jakou rolí? |
+| Subdodavatelé | Používá další nástroje nebo lidi? |
+| Lokalita | Kde data běží a zda dochází k přenosu mimo EU/EHP? |
+| Retence | Kdy musí data vrátit, smazat nebo anonymizovat? |
+| Incident | Jak rychle a komu hlásí bezpečnostní problém? |
+| Konec | Kdo odebere přístupy a ověří smazání pracovních kopií? |
+
+U mezinárodních přenosů dat mimo EU/EHP se nespoléhej na větu „jsme globální firma, všechno v pohodě“. Evropská komise popisuje standardní smluvní doložky jako jeden z mechanismů pro přenosy do třetích zemí. V praxi to znamená: vědět, kam data tečou, proč, na jakém základě a jestli existuje přiměřené bezpečnostní opatření. Právník z toho nebude dojatý, ale aspoň nebude muset hádat z marketingové brožury.
+
+### Průběžná práce má mít auditní stopu
+
+Externí spolupráce bez stop vypadá rychle, dokud nepotřebuješ zjistit, kdo změnil DNS, proč zmizel formulář nebo odkud se vzal nový tracker. Každá významnější změna má mít:
+
+- úkol nebo ticket,
+- vlastníka na straně firmy,
+- schválení rozsahu,
+- odkaz na pull request, návrh nebo dokument,
+- stručné rozhodnutí,
+- datum nasazení nebo publikace.
+
+U webu a marketingu je to stejně důležité jako u kódu. Nový skript na webu je technická změna. Nový formulář je datová změna. Nový claim na landing page je obchodní závazek. Když je všechno „jen rychlá úprava“, za chvíli není jasné nic. A „nic“ je špatný základ pro provoz.
+
+### Ukončení spolupráce je součást zadání
+
+Offboarding dodavatele si naplánuj už při onboardingu. Ne až ve chvíli, kdy se po půl roce někdo zeptá, proč má bývalá agentura pořád admin přístup do analytiky.
+
+Konec spolupráce má obsahovat:
+
+- seznam odebraných účtů a rolí,
+- revokaci tokenů, webhook secretů a SSH klíčů,
+- potvrzení smazání pracovních exportů,
+- předání zdrojových souborů a dokumentace,
+- seznam nedokončených otevřených rizik,
+- kontrolu, zda dodavatel nemá aktivní napojení přes vlastní nástroje,
+- aktualizaci vlastníků v interních dokumentech.
+
+Příklad offboarding věty:
+
+„K 2026-08-15 odebereme agentuře přístup do CMS, analytiky a repozitáře, zrušíme integrační token pro import kampaní, uložíme finální zdroje do firemního úložiště a necháme potvrdit smazání dočasných exportů.“
+
+Není to drama. Je to zavření smyčky. Otevřené smyčky jsou v provozu drahé.
+
+### Checklist: Externí spolupráce privacy-first
+
+- [ ] Zadání popisuje konkrétní výsledek, rozsah a vlastníka.
+- [ ] Každý dodavatel má vlastní účet, ne sdílené přihlašovací údaje.
+- [ ] Přístupy jsou omezené podle práce a časově ohraničené.
+- [ ] Produkční data nejsou výchozí pracovní materiál.
+- [ ] Staging, demo data nebo anonymizované exporty jsou připravené před začátkem práce.
+- [ ] U výjimek pro produkční data je popsaný účel, rozsah, uložení a smazání.
+- [ ] Secrets se nepředávají e-mailem, chatem ani v dokumentech.
+- [ ] Tokeny a klíče mají vlastníka, účel, minimální oprávnění a plán revokace.
+- [ ] Smlouva nebo objednávka odpovídá skutečnému zpracování dat.
+- [ ] Subdodavatelé a nástroje dodavatele jsou známé alespoň u citlivější práce.
+- [ ] Přenosy mimo EU/EHP jsou zkontrolované před předáním dat.
+- [ ] Změny na webu, v analytice, DNS, CMS a repozitáři mají auditní stopu.
+- [ ] Offboarding dodavatele je součást plánu už při startu.
+- [ ] Po skončení práce jsou účty, tokeny a exporty skutečně uklizené.
+
+### Mini úkol
+
+Vyber jednu aktuální nebo nedávnou spolupráci s externistou a vyplň kartu:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jaký konkrétní výsledek měl dodavatel dodat? |  |
+| Které systémy skutečně potřeboval? |  |
+| Které přístupy byly širší, než bylo nutné? |  |
+| Pracoval s produkčními nebo osobními daty? |  |
+| Existuje smluvní nebo objednávkový rámec pro skutečný rozsah práce? |  |
+| Které tokeny, exporty nebo účty mají datum expirace? |  |
+| Co se musí odebrat nebo zrušit po dokončení? |  |
+| Kdo je interní vlastník spolupráce? |  |
+| Jaká jedna oprava se udělá ještě dnes? |  |
+
+Potom udělej jednu konkrétní věc: odeber starý přístup, vytvoř role místo sdíleného účtu, přepiš zadání pro dodavatele, přesuň práci na staging, nastav expiraci tokenu nebo doplň offboarding checklist do šablony projektu. Externí spolupráce má firmu zrychlit. Nemá z ní udělat průchozí nádraží pro data.
+
 ## Zdroje
 
 - ICANN: Information for Domain Name Registrants - práva a odpovědnosti držitelů domén včetně správy, obnovy a převodu doménové registrace: https://www.icann.org/registrants
@@ -13937,6 +14119,7 @@ Potom udělej jednu konkrétní opravu: přidej datum revize, nahraď reálný s
 
 ## Pracovní log
 
+- 2026-07-13: Doplněna příloha o externí spolupráci bez předání klíčů od provozu: zadání před přístupem, role externistů, staging a demo data jako výchozí stav, bezpečné předávání secrets, smluvní a datová kontrolní karta, auditní stopa změn, offboarding dodavatelů, checklist a mini úkol; navázáno na existující zdroje Evropské komise, GDPR článku 28, SCC a OWASP Secrets Management.
 - 2026-07-13: Doplněna příloha o referencích a případových studiích bez úniku důvěry: účel důkazu, karta schválení reference, anonymizované case studies, kontext čísel, bezpečné screenshoty, schvalování citací, struktura případové studie, revize, checklist a mini úkol.
 - 2026-07-13: Doplněna příloha o open-source závislostech bez supply-chain chaosu: důvod závislosti, rozlišení runtime/build/dev rizika, karta významné knihovny, licence, rytmus aktualizací, klientský bundle jako privacy a výkonový dopad, checklist a mini úkol; navázáno na existující zdroje OWASP SCVS, GitHub Docs, npm Docs, OpenSSF, SPDX a OSI.
 - 2026-07-13: Doplněna příloha o kampaních a UTM bez analytického nepořádku: rozhodnutí před parametry, malý stabilní slovník, zákaz osobních údajů v URL, kampaňová karta, úklid parametrů po příchodu, referrer policy, direct outreach bez sledování jednotlivců, vyhodnocení jako rozhodnutí, checklist a mini úkol; ověřeny a doplněny zdroje MDN k URLSearchParams, Referer a Referrer-Policy.
