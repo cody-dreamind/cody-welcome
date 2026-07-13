@@ -11557,6 +11557,178 @@ Vyber jeden repozitář nebo produkt a vyplň pracovní list:
 
 Potom udělej jednu konkrétní opravu: doplň `.env.example`, přidej seed pro prázdný workspace, vypni analytiku v preview, přesměruj e-maily do lokální schránky, nebo smaž starý anonymizační dump po dokončení úkolu. Lokální vývoj má šetřit čas, ne pašovat produkční riziko do každého notebooku.
 
+## Příloha: Performance budget bez honby za skóre
+
+Rychlost webu a aplikace se snadno zvrhne ve sportovní disciplínu: zelené skóre, screenshot z auditu, pár optimalizačních triků a pocit, že je hotovo. Jenže uživatel nevidí skóre. Vidí, jestli se stránka otevře, jestli tlačítko reaguje, jestli se layout nehýbe pod prstem a jestli se mu kvůli pěti externím skriptům nerozpadne mobilní připojení na malé osobní utrpení.
+
+Performance budget je praktický limit, který týmu říká: tolik si smíme dovolit poslat do prohlížeče, tolik externích závislostí tolerujeme, tak rychle musí fungovat hlavní cesta. Není to trest pro design, marketing nebo vývoj. Je to dohoda, že rychlost je vlastnost produktu, ne úklid po releasu.
+
+Privacy-first pohled je tady příjemně přímočarý: čím méně zbytečných třetích stran, trackerů, widgetů a obřích balíků, tím menší datová stopa i výkonové riziko. Rychlejší web a méně slídění nejsou soupeři. Často jsou to dvě strany stejného rozhodnutí.
+
+### Budget začni uživatelskou cestou
+
+Nezačínej otázkou „kolik kilobajtů JavaScriptu je správně“. Začni tím, co má člověk zvládnout.
+
+Příklady uživatelských cest:
+
+- Návštěvník otevře homepage, pochopí nabídku a přejde na kontakt nebo pricing.
+- Čtenář otevře článek z RSS a bez čekání čte hlavní obsah.
+- Nový uživatel vytvoří workspace a pozve prvního kolegu.
+- Administrátor otevře billing a stáhne fakturu.
+- Zákazník vyplní support formulář na mobilu.
+
+Každá cesta má jiné nároky. Článek má být čitelný rychle, i když se zbytek stránky ještě dočítá. Onboarding potřebuje rychlou interakci a jasné chyby. Billing musí být spolehlivý a opatrný s daty. Homepage nesmí čekat na marketingové hračky, které návštěvník ani nevidí.
+
+Praktická budget věta:
+
+„Na mobilním připojení se hlavní obsah klíčové stránky zobrazí rychle, stránka reaguje bez zjevného zpoždění a žádný externí skript se nespustí bez jasného účelu a kontroly.“
+
+Ta věta není metrika. Je to produktový závazek. Metriky z ní teprve odvodíš.
+
+### Rozděl budget na čtyři části
+
+Jeden celkový limit obvykle nestačí. Tým potřebuje vědět, kde se výkon utrácí.
+
+Použij čtyři jednoduché oblasti:
+
+| Oblast | Co hlídá | Typická otázka |
+| --- | --- | --- |
+| Obsah | HTML, text, obrázky, fonty | Dostane člověk hlavní hodnotu rychle? |
+| Interakce | JavaScript, hydratace, formuláře | Reaguje stránka, když člověk něco udělá? |
+| Třetí strany | analytika, chat, embeds, platební prvky | Kdo další běží v prohlížeči a proč? |
+| Stabilita | layout, načítání médií, chybové stavy | Nehýbe se UI a nerozbije se při pomalé síti? |
+
+Toto rozdělení brání klasickému problému: vývojář zmenší vlastní bundle, ale marketing přidá tři externí skripty; designer optimalizuje obrázek, ale produkt přidá povinný widget; tým má hezké skóre na homepage, ale registrační formulář se na mobilu chová jako test trpělivosti.
+
+Codyho komentář: Performance budget má být trochu nepříjemný. Když není nikdy potřeba o ničem diskutovat, není to budget, ale dekorace v dokumentaci.
+
+### Třetí strany ber jako náklad, ne jako maličkost
+
+Externí skript není „jen snippet“. Je to další dodavatel v uživatelově prohlížeči, další síťové spojení, další potenciální chyba, další právní a bezpečnostní otázka a často další kus výkonového dluhu.
+
+U každé třetí strany si napiš kartu:
+
+| Otázka | Odpověď |
+| --- | --- |
+| K čemu přesně slouží? |  |
+| Na kterých stránkách se opravdu musí načítat? |  |
+| Běží před souhlasem, nebo až po něm? |  |
+| Posílá osobní údaje nebo identifikátory? |  |
+| Jak poznáme, že přestala fungovat? |  |
+| Kdo ji vlastní v týmu? |  |
+| Jak ji odstraníme, když přestane dávat smysl? |  |
+
+Praktické pravidlo: pokud nástroj pomáhá jen jedné stránce, nenačítej ho globálně. Pokud je potřeba jen po kliknutí, nenačítej ho před kliknutím. Pokud existuje serverová nebo statická alternativa bez předávání dat třetí straně, zvaž ji dřív než pohodlný embed.
+
+Příklad: Video reference může být skvělá. Ale nemusí automaticky znamenat externí iframe hned při načtení stránky. Můžeš zobrazit vlastní náhled, krátký textový výtah a video načíst až po jasné akci uživatele. Člověk má kontrolu, stránka je lehčí a privacy dopad je srozumitelnější.
+
+### Obrázky a fonty optimalizuj podle práce stránky
+
+Obrázky obvykle neselhávají proto, že by tým neznal moderní formáty. Selhávají proto, že nikdo nepojmenoval jejich práci. Hlavní produktový screenshot, ilustrační fotka, avatar autora a ikonka ve feature listu nejsou stejný typ obsahu.
+
+Pro každý opakovaný typ média si napiš pravidlo:
+
+- Hero obrázek: přesný rozměr podle layoutu, vhodný moderní formát, záložní rozměr pro mobil.
+- Produktový screenshot: čitelný detail, žádná citlivá data, stabilní poměr stran.
+- Blogový obrázek: slouží tématu, není jen výplň, má smysluplný alternativní text, pokud nese informaci.
+- Ikony: používej systémově, ne jako sadu náhodných obrázků.
+- Avatary a loga: drž malé, verzované a bez externího hotlinkování.
+
+U fontů se ptej podobně prakticky:
+
+- Kolik řezů opravdu potřebujeme?
+- Dá se použít systémový font bez ztráty značky?
+- Má font rozumné fallbacky?
+- Nečeká první obrazovka zbytečně na dekorativní řez?
+
+Typická malá výhra: omezit počet font weightů, přednačíst jen opravdu kritický řez, definovat rozměry obrázků a odstranit dekorativní média, která nepomáhají rozhodnutí člověka. Ano, dekorativní obrázek se bude bránit. Dekorativní obrázky mají silný pud sebezáchovy.
+
+### JavaScript má mít vlastníka
+
+JavaScript není špatný. Špatný je JavaScript bez vlastníka, účelu a konce. U SaaS aplikace často dává smysl bohaté klientské rozhraní. U článku nebo jednoduché landing page ale může být stejné množství klientského kódu zbytečné.
+
+Každou větší klientskou funkci popiš takto:
+
+| Funkce | Proč běží v prohlížeči | Kdy se načítá | Co se stane při selhání |
+| --- | --- | --- | --- |
+| Pricing kalkulačka | Uživatel mění počet sedadel a vidí cenu | Jen na pricingu | Zobrazí se statická tabulka |
+| Formulář validace | Okamžitá zpětná vazba | Na stránce s formulářem | Server vrátí jasné chyby |
+| Chat widget | Rychlý kontakt u podpory | Až po kliknutí nebo na support stránce | Zůstane e-mail / formulář |
+
+Tahle tabulka je nepříjemně jednoduchá, a právě proto funguje. Když neumíš vyplnit „co se stane při selhání“, nejspíš nemáš progresivní návrh, ale křehkou závislost.
+
+Privacy-first bonus: fallbacky často snižují tlak na externí widgety. Místo chat nástroje na každé stránce může stačit viditelný support formulář, přímý e-mail, dokumentace a chat až tam, kde opravdu pomáhá.
+
+### Budget kontroluj při změně, ne jednou za rok
+
+Performance audit jednou ročně je užitečný asi jako čištění kuchyně až po tom, co se do ní bojíš vstoupit. Lepší je malý kontrolní bod u každé změny, která může výkon ovlivnit:
+
+- nový skript,
+- nový font,
+- velký obrázek nebo video,
+- redesign homepage,
+- nový onboarding krok,
+- embed třetí strany,
+- analytická nebo marketingová integrace,
+- změna frameworku, bundleru nebo cache pravidel.
+
+Do pull requestu nebo release checklistu dej tři otázky:
+
+1. Přidává změna nový kód, média nebo třetí stranu na klíčovou cestu?
+2. Je jasné, proč je to nutné a kde se to načítá?
+3. Zhoršila se měřená rychlost, interakce nebo stabilita na hlavních stránkách?
+
+Nemusíš při každé změně dělat velký audit. Stačí, aby se výkon nestal neviditelným vedlejším efektem. Když změna přidá externí závislost, měla by mít vlastníka a datum revize stejně jako dodavatel v privacy kartě.
+
+### Když budget praskne, škrtni podle hodnoty
+
+Budget dřív nebo později praskne. To není tragédie. Tragédie je, když tým předstírá, že se nic nestalo.
+
+Postupuj v tomto pořadí:
+
+1. Zjisti, která cesta se zhoršila.
+2. Rozděl problém na vlastní kód, média, třetí strany, server a cache.
+3. Najdi největší položky, které nepomáhají hlavní práci stránky.
+4. Odlož, podmíněně načti nebo odstraň to, co má nízkou hodnotu.
+5. Uprav budget nebo design jen tehdy, když víš, proč limit přestal dávat smysl.
+
+Příklad rozhodnutí:
+
+„Na pricing stránce necháme kalkulačku, protože snižuje nejistotu při výběru plánu. Chat widget se bude načítat až po kliknutí, protože na první obrazovce nepomáhá rozhodnutí a zhoršuje výkon i privacy profil stránky.“
+
+To je zdravé rozhodnutí. Neříká „všechno musí být co nejmenší“. Říká „platíme výkonem jen za hodnotu, kterou umíme obhájit“.
+
+### Checklist: Performance budget privacy-first
+
+- [ ] Máme vybrané klíčové uživatelské cesty, ne jen homepage.
+- [ ] U každé klíčové cesty víme, co má být rychlé: obsah, interakce, formulář, onboarding nebo platba.
+- [ ] Externí skripty mají účel, vlastníka, rozsah načítání a datum revize.
+- [ ] Marketingové a analytické nástroje se nenačítají globálně jen ze zvyku.
+- [ ] Obrázky mají správné rozměry, formát, popis a neobsahují citlivá data.
+- [ ] Fonty jsou omezené na potřebné řezy a mají rozumné fallbacky.
+- [ ] Větší klientské funkce mají popsaný fallback při selhání.
+- [ ] Cache pravidla rozlišují HTML, statické soubory, média a API.
+- [ ] Release checklist obsahuje kontrolu dopadu na výkon a třetí strany.
+- [ ] Když budget praskne, řešíme hodnotu prvků, ne jen technické minifikování.
+- [ ] Výkonové rozhodnutí se zapisuje stejně jako jiné produktové rozhodnutí.
+
+### Mini úkol
+
+Vyber jednu klíčovou stránku nebo cestu a vyplň pracovní list:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jakou práci má člověk na této cestě udělat? |  |
+| Co se musí zobrazit jako první? |  |
+| Které skripty běží před první interakcí? |  |
+| Které třetí strany se načítají a proč? |  |
+| Který obrázek, font nebo widget má nejnižší hodnotu? |  |
+| Co se stane, když JavaScript nebo externí widget selže? |  |
+| Jaká jedna změna nejvíc zlepší rychlost nebo privacy profil? |  |
+| Kdo bude budget hlídat při příštím releasu? |  |
+
+Potom udělej jednu malou opravu: lazy-loadni embed, odstraň nepoužívaný font řez, zmenši produktový screenshot, načítej chat až po kliknutí, přidej rozměry obrázkům, nebo dopiš fallback pro formulář. Performance budget se nevyhrává heroickým víkendem. Vyhrává se tím, že každá změna zaplatí svůj účet.
+
 ## Zdroje
 
 - ICANN: Information for Domain Name Registrants - práva a odpovědnosti držitelů domén včetně správy, obnovy a převodu doménové registrace: https://www.icann.org/registrants
@@ -11662,6 +11834,7 @@ Potom udělej jednu konkrétní opravu: doplň `.env.example`, přidej seed pro 
 
 ## Pracovní log
 
+- 2026-07-13: Doplněna příloha o performance budgetu bez honby za skóre: uživatelské cesty, rozdělení budgetu na obsah/interakce/třetí strany/stabilitu, karta externích skriptů, pravidla pro obrázky, fonty a JavaScript, kontrola při releasu, postup při překročení budgetu, checklist a mini úkol; navázáno na existující zdroje k Web Vitals, cache a technickému SEO.
 - 2026-07-13: Doplněna příloha o lokálním vývoji a preview bez produkčních dat: účel prostředí, seed scénáře, řízené výjimky pro produkční dumpy, bezpečné `.env.example`, preview pravidla, tupé lokální integrace, onboarding prvního běhu, checklist a mini úkol; navázáno na existující zdroje OWASP, Twelve-Factor App a GitHub Docs.
 - 2026-07-13: Doplněna příloha o retenci marketingových a analytických dat bez nekonečného skladu: rozdělení dat podle životnosti, retenční karta, agregace detailu, CRM stavy, pravidla pro exporty, technické vynucení, checklist a mini úkol; ověřen a doplněn zdroj Evropské komise k době uchování osobních údajů.
 - 2026-07-13: Doplněna příloha o SEO migracích bez paniky a datového přejídání: rozhodování, kdy měnit URL, migrační mapa, redirecty, canonical/sitemap/interní odkazy, release runbook, privacy-first monitoring, checklist a mini úkol; ověřeny a doplněny zdroje Google Search Central k site moves, redirectům, sitemap a recrawlu.
