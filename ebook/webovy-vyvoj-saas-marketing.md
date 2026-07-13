@@ -11907,6 +11907,168 @@ Potom udělej jednu konkrétní akci:
 
 Feature flagy mají zmenšovat riziko. Pokud riziko jen přesouvají do neviditelné konfigurace, nejsou to flagy. Jsou to produkční tajemství s hezkým přepínačem.
 
+## Příloha: Správa závislostí bez update paniky
+
+Moderní web nebo SaaS nestojí jen na vlastním kódu. Stojí na balíčcích, frameworku, build nástrojích, GitHub Actions, kontejnerech, pluginech, externích skriptech a někdy i na jedné zapomenuté knihovně, kterou nikdo neviděl od doby, kdy všichni psali „rychle to dáme do MVP“. Gratuluju, právě jsme našli supply chain v jeho přirozeném prostředí.
+
+Správa závislostí není honba za zeleným dashboardem. Je to provozní rytmus, který má snížit tři rizika:
+
+- známá zranitelnost zůstane v produkci moc dlouho,
+- aktualizace rozbije důležitou cestu uživatele,
+- nový balíček začne posílat data, přidá tracker nebo rozšíří práva víc, než produkt potřebuje.
+
+OWASP Software Component Verification Standard bere supply chain jako kombinaci viditelnosti, kontrol a postupného zlepšování. GitHub dependency review a Dependabot alerty zase pomáhají zachytit změny a známé zranitelnosti v repozitáři. Viz zdroje na konci e-booku.
+
+### Nejdřív věz, co v produktu běží
+
+Bez inventáře se závislosti řídí podle pocitu. To funguje přesně do první nepříjemné CVE, kdy tým zjistí, že neví, kde se knihovna používá, jestli je v produkčním bundle, kdo ji přidal a jestli aktualizace rozbije checkout.
+
+Minimální inventář pro malý tým:
+
+| Oblast | Kde je zdroj pravdy | Kdo vlastní | Jak často kontrolujeme |
+| --- | --- | --- | --- |
+| Aplikační balíčky | lockfile, dependency graph | technický vlastník produktu | týdně / při PR |
+| Build a CI nástroje | workflow soubory, lockfile, image tagy | vlastník releasu | měsíčně |
+| Produkční image | Dockerfile, registry, deployment manifest | provoz | měsíčně / při incidentu |
+| Externí skripty na webu | seznam třetích stran, CSP, tag konfigurace | produkt + marketing | při každé změně |
+| Browser embed a widgety | komponenty, CMS bloky, privacy mapa | vlastník stránky | při obsahovém auditu |
+
+Privacy-first poznámka: Externí skript na webu není jen technická závislost. Je to potenciální datový vztah. Pokud skript běží v prohlížeči návštěvníka, ptej se stejně přísně jako u analytiky: co vidí, kam volá, kdy se načítá a jestli existuje evropská nebo self-hosted alternativa.
+
+### Rozliš bezpečnostní update, údržbu a upgrade
+
+Všechny aktualizace nevypadají stejně. Když je hodíš do jednoho pytle, tým buď panikaří, nebo ignoruje všechno.
+
+Praktické dělení:
+
+- Bezpečnostní patch: opravuje známou zranitelnost nebo malware riziko. Má prioritu podle dopadu, dostupnosti exploitu, expozice služby a toho, zda je kód reálně dosažitelný.
+- Rutinní údržba: minor a patch verze bez akutního rizika. Patří do pravidelného okna, aby se dluh nehromadil.
+- Velký upgrade: major verze frameworku, runtime nebo databázového klienta. Potřebuje plán, testovací scénář a často vlastní release.
+- Odstranění závislosti: nejlepší update je někdy smazání balíčku, který řeší tři řádky kódu nebo už není používaný.
+- Změna externí služby: není to jen `npm install`. Je to vendor změna s dopadem na data, provoz a smluvní vztahy.
+
+Příklad: Alert na knihovnu používanou jen ve vývojovém lint nástroji není totéž jako zranitelnost v parseru souborů, který zpracovává uploady od zákazníků. Obě věci řeš, ale nesmí mít stejný poplachový tón. Jinak si tým vypěstuje imunitu na varování. A to je evoluce, kterou v backlogu nechceš.
+
+### Alert musí skončit rozhodnutím
+
+Dependabot, `npm audit`, security scanner nebo registry report jsou vstupy, ne náhrada úsudku. Každý důležitý alert převeď na krátkou kartu:
+
+| Pole | Co vyplnit |
+| --- | --- |
+| Balíček / komponenta | Název, verze, přímá nebo transitivní závislost |
+| Kde běží | produkce / build / test / lokál / browser |
+| Expozice | veřejný vstup, interní admin, CI, nepoužité |
+| Dopad | co by útočník nebo chyba reálně mohla způsobit |
+| Oprava | update, konfigurace, workaround, odstranění, akceptace rizika |
+| Test | jak ověříme, že produkt dál funguje |
+| Vlastník a termín | kdo to uzavře a kdy |
+
+U malého SaaS často stačí pár řádků v issue nebo PR popisu. Důležité je, aby po měsíci bylo jasné, proč se alert opravil, odložil nebo označil jako neaplikovatelný.
+
+### Dependency review dej do PR, ne až do incidentu
+
+Nejlevnější kontrola je ve chvíli, kdy se závislost přidává. V PR se ptej:
+
+- Proč potřebujeme nový balíček?
+- Je to přímá produkční závislost, dev závislost nebo jen build pomůcka?
+- Kolik dalších transitivních balíčků přidává?
+- Má aktivní údržbu a rozumnou historii releasů?
+- Běží v browseru, na serveru, v CI nebo jen lokálně?
+- Přidává síťová volání, telemetry, reklamní nebo analytické funkce?
+- Jde problém vyřešit existujícím balíčkem v projektu nebo pár řádky vlastního kódu?
+
+GitHub dependency review umí zobrazit změny v závislostech v pull requestu a upozornit na rizikové změny podle dostupných dat. OpenSSF Scorecard zase pomáhá hodnotit vybrané signály bezpečnostní praxe open source projektu. Neber skóre jako svaté písmo, ber ho jako začátek otázky.
+
+### Aktualizační rytmus drž malý a pravidelný
+
+Nejhorší strategie je půl roku nic neaktualizovat a pak udělat jeden heroický PR, který mění framework, bundler, test runner, UI knihovnu a půl internetu. Takový PR se špatně reviewuje, špatně testuje a při chybě se špatně vrací.
+
+Lepší rytmus:
+
+- Bezpečnostní alerty triaguj průběžně.
+- Patch a minor aktualizace slučuj po menších dávkách.
+- Major upgrady plánuj samostatně a piš k nim migrační poznámky.
+- Lockfile commituj vždy spolu se změnou manifestu.
+- Po větší aktualizaci projdi kritické uživatelské cesty, ne jen testy.
+- Nepoužívané balíčky maž při běžných změnách v dané oblasti.
+
+Pro web nebo SaaS si definuj tři úrovně testu:
+
+| Úroveň | Kdy stačí | Co ověřit |
+| --- | --- | --- |
+| Rychlý test | dev dependency, malý patch | instalace, lint/test/build |
+| Produktový smoke test | produkční dependency | registrace, login, hlavní workflow, formuláře |
+| Release test | major upgrade, runtime, framework | migrace, rollback, monitoring, dokumentace, support poznámka |
+
+### Browser závislosti kontroluj přísněji
+
+Balíček na serveru může být rizikový. Balíček v prohlížeči může být rizikový a zároveň přímo u návštěvníka.
+
+U frontendu si dej zvláštní pozor na:
+
+- analytické SDK,
+- chat widgety,
+- A/B testing knihovny,
+- social embed skripty,
+- font a media hostované třetí stranou,
+- mapy, video přehrávače a formulářové služby,
+- knihovny, které si dynamicky stahují další skripty.
+
+Privacy-first pravidlo: Pokud externí browser skript není nutný pro hlavní práci stránky, načítej ho až po jasné akci uživatele nebo ho nahraď statickou, serverovou nebo self-hosted variantou. Video může být obyčejný odkaz. Mapa může být statický obrázek s odkazem. Social embed může být citace a přímý link. Web nezemře, jen se přestane tvářit jako vánoční stromek datových requestů.
+
+### Výjimky piš jako dočasné dluhy
+
+Někdy opravu nejde nasadit hned. Balíček nemá kompatibilní release, aktualizace rozbije plugin, nebo zranitelnost sedí v části, kterou nepoužíváš. To se stává. Problém není výjimka. Problém je výjimka bez konce.
+
+Každá výjimka má mít:
+
+- důvod,
+- popis reálné expozice,
+- dočasné opatření,
+- vlastníka,
+- datum další revize,
+- podmínku, kdy se výjimka zavře.
+
+Špatně: „False positive.“
+
+Lépe: „Zranitelná funkce se používá jen v CLI části balíčku, kterou v produkci nespouštíme. Balíček je transitivní přes build nástroj. Sledujeme upstream issue, další revize 2026-08-15, vlastník Jana.“
+
+### Checklist: Závislosti pod kontrolou
+
+- [ ] Projekt má lockfile a změny lockfile se reviewují.
+- [ ] Nové produkční balíčky mají v PR jasný důvod.
+- [ ] Browser skripty třetích stran mají privacy kontrolu.
+- [ ] Bezpečnostní alerty mají vlastníka, dopad, termín a rozhodnutí.
+- [ ] Dev, build a produkční závislosti se nerozlišují jen pocitově.
+- [ ] Rutinní patch/minor aktualizace probíhají v malých dávkách.
+- [ ] Major upgrady mají samostatný plán, smoke test a rollback úvahu.
+- [ ] Nepoužívané balíčky se mažou při související práci.
+- [ ] Výjimky mají datum další revize a nejsou schované v komentáři navždy.
+- [ ] Externí skripty na webu jsou uvedené v datové mapě nebo privacy inventáři.
+- [ ] Tým umí za 10 minut říct, které závislosti jsou nejkritičtější pro hlavní uživatelskou cestu.
+
+### Mini úkol
+
+Vyber jeden repozitář a udělej 30minutovou kontrolu:
+
+| Kontrola | Výsledek | Další krok |
+| --- | --- | --- |
+| Kolik nových dependency změn bylo v posledních 30 dnech? |  |  |
+| Existuje bezpečnostní alert bez vlastníka? |  |  |
+| Které balíčky běží v browseru a volají třetí strany? |  |  |
+| Je v projektu balíček, který by šel smazat? |  |  |
+| Kdy naposledy prošel major upgrade smoke testem? |  |  |
+
+Na konci nepiš dlouhou studii. Uzavři jednu akci:
+
+- oprav jeden bezpečnostní alert,
+- smaž jednu nepoužívanou závislost,
+- přidej dependency review do PR checklistu,
+- zapiš externí skript do privacy mapy,
+- nebo naplánuj jeden major upgrade jako samostatnou práci.
+
+Cílem není mít nulové riziko. Cílem je vědět, jaké riziko držíš, proč ho držíš a kdy ho znovu otevřeš.
+
 ## Zdroje
 
 - ICANN: Information for Domain Name Registrants - práva a odpovědnosti držitelů domén včetně správy, obnovy a převodu doménové registrace: https://www.icann.org/registrants
@@ -11933,6 +12095,11 @@ Feature flagy mají zmenšovat riziko. Pokud riziko jen přesouvají do nevidite
 - OWASP Cheat Sheet Series: REST Security Cheat Sheet - praktická doporučení k HTTPS, autentizaci, validaci vstupů, bezpečným chybám a práci s tokeny u REST API: https://cheatsheetseries.owasp.org/cheatsheets/REST_Security_Cheat_Sheet.html
 - OWASP Cheat Sheet Series: Web Service Security Cheat Sheet - obecná doporučení pro zabezpečení webových služeb a prevenci typických rizik při integracích: https://cheatsheetseries.owasp.org/cheatsheets/Web_Service_Security_Cheat_Sheet.html
 - OWASP Cheat Sheet Series: File Upload Cheat Sheet - doporučení pro validaci, omezení velikosti, ukládání, oprávnění a bezpečné zpracování nahrávaných souborů: https://cheatsheetseries.owasp.org/cheatsheets/File_Upload_Cheat_Sheet.html
+- OWASP Software Component Verification Standard - rámec aktivit, kontrol a dobrých praktik pro snižování rizika v softwarovém supply chainu: https://owasp.org/www-project-software-component-verification-standard/
+- GitHub Docs: Dependabot alerts - upozornění na zranitelné závislosti v repozitáři a návaznost na dependency graph: https://docs.github.com/en/code-security/concepts/supply-chain-security/dependabot-alerts
+- GitHub Docs: Dependency review - kontrola změn závislostí v pull requestech a upozornění na rizikové dependency změny: https://docs.github.com/en/code-security/concepts/supply-chain-security/dependency-review
+- npm Docs: npm audit - audit závislostí proti známým bezpečnostním zranitelnostem v npm ekosystému: https://docs.npmjs.com/cli/v10/commands/npm-audit/
+- OpenSSF Scorecard - projekt OpenSSF pro automatizované kontroly vybraných signálů bezpečnostní praxe open source projektů: https://openssf.org/projects/scorecard/
 - EUR-Lex: Regulation (EU) 2016/679, GDPR Article 35 and 36 - povinnost posouzení vlivu na ochranu osobních údajů a předchozí konzultace při vysokém zbytkovém riziku: https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng
 - European Commission: When is a Data Protection Impact Assessment (DPIA) required? - praktický přehled situací, kdy je DPIA vyžadována: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/obligations/when-data-protection-impact-assessment-dpia-required_en
 - European Data Protection Board: Data Protection impact assessments High risk processing - pokyny WP248 rev.01 k určení vysokého rizika a DPIA: https://www.edpb.europa.eu/documents/guideline/data-protection-impact-assessments-high-risk-processing_en
@@ -12012,6 +12179,7 @@ Feature flagy mají zmenšovat riziko. Pokud riziko jen přesouvají do nevidite
 
 ## Pracovní log
 
+- 2026-07-13: Doplněna příloha o správě závislostí bez update paniky: inventář balíčků a externích skriptů, rozlišení bezpečnostních patchů/údržby/major upgradů, karta alertu, dependency review v PR, aktualizační rytmus, přísnější kontrola browser závislostí, výjimky, checklist a mini úkol; ověřeny a doplněny zdroje OWASP SCVS, GitHub Docs, npm Docs a OpenSSF Scorecard.
 - 2026-07-13: Doplněna příloha o feature flazích a postupných releasech bez sledovací laboratoře: typy flagů, karta přepínače, vysvětlitelné cílení, postupné zapínání se stop signály, měření jen pro rozhodnutí, úklid flagů, dopad na dokumentaci/support, checklist a mini úkol.
 - 2026-07-13: Doplněna příloha o performance budgetu bez honby za skóre: uživatelské cesty, rozdělení budgetu na obsah/interakce/třetí strany/stabilitu, karta externích skriptů, pravidla pro obrázky, fonty a JavaScript, kontrola při releasu, postup při překročení budgetu, checklist a mini úkol; navázáno na existující zdroje k Web Vitals, cache a technickému SEO.
 - 2026-07-13: Doplněna příloha o lokálním vývoji a preview bez produkčních dat: účel prostředí, seed scénáře, řízené výjimky pro produkční dumpy, bezpečné `.env.example`, preview pravidla, tupé lokální integrace, onboarding prvního běhu, checklist a mini úkol; navázáno na existující zdroje OWASP, Twelve-Factor App a GitHub Docs.
