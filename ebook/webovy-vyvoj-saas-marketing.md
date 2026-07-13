@@ -12827,6 +12827,176 @@ Vyber jeden existující nebo plánovaný export a vyplň exportní kartu:
 
 Potom udělej jednu konkrétní opravu: přidej README do exportu, zkrať expiraci odkazu, odděl billing export od produktového exportu, doplň negativní test na cizí workspace nebo smaž staré ručně vytvořené exporty. Dobrý export není ten největší. Je to ten, který pomůže zákazníkovi a současně nezvětší datové riziko.
 
+## Příloha: Interní automatizace bez datového přelévání
+
+Automatizace v malém týmu umí být výborná páka. Přepíše opakovanou ruční práci, připomene kontrolu, přenese stav mezi systémy a ušetří lidem hlavu na rozhodování. Stejně rychle ale umí vyrobit datový průvan: CRM posílá všechno do tabulky, tabulka do helpdesku, helpdesk do chatu, chat do AI nástroje a za měsíc nikdo neví, kde skončil e-mail zákazníka, screenshot s osobními údaji nebo interní poznámka.
+
+Privacy-first automatizace nezačíná otázkou "co všechno jde propojit". Začíná otázkou "který ruční krok je opakovaný, dobře popsaný a stojí za to ho zrychlit".
+
+Google SRE Book popisuje toil jako opakovanou, manuální a automatizovatelnou provozní práci. To je dobrý filtr i mimo infrastrukturu: automatizuj rutinu, ne nejistotu. Evropská komise ve svých materiálech k principům GDPR připomíná účelové omezení, minimalizaci dat a omezení uchování; OWASP Secrets Management Cheat Sheet zase řeší životní cyklus tajemství. Odkazy jsou ve zdrojích.
+
+### Automatizuj proces, ne pocit viny
+
+Špatný důvod pro automatizaci zní: "Někdo na to pořád zapomíná."
+
+Lepší důvod zní: "Máme jasný postup, který se opakuje, má jednoznačný vstup, výstup, vlastníka a bezpečné chování při chybě."
+
+Příklady dobrých kandidátů:
+
+- po odeslání demo formuláře založit lead s omezeným rozsahem polí,
+- při vydání nové verze vytvořit položku do interního changelogu,
+- jednou týdně poslat souhrn nevyřešených support tiketů vlastníkům,
+- po zrušení účtu spustit kontrolní seznam offboardingu,
+- po vytvoření exportu naplánovat jeho expiraci a smazání.
+
+Příklady špatných kandidátů:
+
+- automaticky obohatit každý lead externími daty bez jasného účelu,
+- posílat všechny support přílohy do sdíleného disku,
+- spouštět sales sekvenci na každý formulář bez ruční kontroly kvality,
+- kopírovat produkční data do testovacího nástroje, protože "se to hodí",
+- nechat osobní token jednoho člověka obsluhovat kritický firemní workflow.
+
+Codyho komentář: Automatizace je zesilovač. Když zesílí dobrý proces, tým je rychlejší. Když zesílí špatný proces, tým je rychlejší hlavně v produkci nepořádku.
+
+### Každý workflow popiš jednou větou
+
+Před výběrem nástroje napiš integrační větu:
+
+"Když nastane ___, systém ___ vytvoří/změní/pošle ___ do ___, aby ___, a uloží jen ___."
+
+Příklad:
+
+"Když návštěvník odešle formulář na demo, web vytvoří lead v CRM se jménem, pracovním e-mailem, firmou, velikostí týmu a textem požadavku, aby sales věděl, jestli má reagovat, a neukládá technické otisky prohlížeče ani data z jiných zdrojů."
+
+Tahle věta odhalí většinu problémů dřív, než vznikne automatizační diagram s dvanácti šipkami. Pokud neumíš doplnit účel, rozsah dat nebo příjemce, workflow ještě není připravený na automatizaci.
+
+Praktická karta automatizace:
+
+| Pole | Otázka |
+| --- | --- |
+| Název | Jak se workflow jmenuje lidsky? |
+| Spouštěč | Co přesně ho spustí? |
+| Vstupní data | Jaká data bere a odkud? |
+| Výstup | Co vytvoří, upraví nebo pošle? |
+| Účel | Jaké rozhodnutí nebo práci podporuje? |
+| Oprávnění | Jaký účet nebo role ho smí spustit? |
+| Retence | Jak dlouho žijí data, logy a mezisoubory? |
+| Selhání | Co se stane, když krok neproběhne? |
+| Vlastník | Kdo to udržuje a vypne při problému? |
+
+### Data posílej po dávkách, ne lopatou
+
+No-code a integrační nástroje často svádějí k mapování všech polí, protože "kdyby se někdy hodila". To je přesně chvíle, kdy má privacy-first tým zvednout obočí.
+
+U každého pole se zeptej:
+
+- Potřebuje cílový systém toto pole pro svůj účel?
+- Umí ho zobrazit jen lidem, kteří ho potřebují?
+- Má pole stejnou retenci jako původní systém?
+- Je jasné, jak se opraví nebo smaže?
+- Neobsahuje volný text, přílohu nebo poznámku, kde může být cokoliv?
+
+Volná textová pole jsou zvlášť zrádná. Poznámka v CRM, popis tiketu nebo obsah formuláře může obsahovat osobní údaje, obchodní tajemství i interní kontext. Neznamená to, že je nikdy nesmíš automatizovat. Znamená to, že s nimi nemáš zacházet jako s obyčejným štítkem typu `segment`.
+
+Dobré pravidlo: do prvního návrhu workflow přidej jen povinná pole. Užitečná pole doplň až po první reálné kontrole. Zvědavá pole nech venku. Ano, budeš mít méně dat. To je pointa, ne chyba v matrixu.
+
+### Používej servisní účty a minimální oprávnění
+
+Automatizace spuštěná osobním účtem je budoucí problém s odloženou splatností. Člověk odejde, změní heslo, zapne nové MFA, ztratí přístup nebo si odpojí aplikaci a najednou stojí workflow, které "vždycky nějak běželo".
+
+Pro kritické automatizace používej:
+
+- servisní účet nebo dedikovanou aplikaci,
+- minimální oprávnění jen pro potřebné akce,
+- samostatné API klíče podle prostředí,
+- uložená tajemství mimo repozitář a chat,
+- jasný postup rotace a revokace,
+- audit, kdo klíč vytvořil, použil a kdy se měnil.
+
+Nepřidávej automatizaci do role `admin`, pokud potřebuje jen založit tiket nebo přečíst stav objednávky. Široké oprávnění je pohodlné asi pět minut. Potom je to riziko, které se tváří jako produktivita.
+
+### Selhání musí být normální stav
+
+Každý workflow někdy selže. API vrátí chybu, limit se vyčerpá, data neprojdou validací, cílový systém je pomalý nebo se změní pole. Rozdíl mezi zralou a křehkou automatizací je v tom, jestli selhání skončí viditelným stavem, nebo tichým chaosem.
+
+Navrhni tři věci:
+
+1. Frontu chyb: kde skončí položky, které se nepovedly.
+2. Retry pravidla: kdy se pokus opakuje a kdy už ne.
+3. Ruční zásah: kdo může položku opravit, znovu spustit nebo uzavřít.
+
+Příklad: Pokud se demo lead nepřenese do CRM, nemá zmizet. Má se uložit do interní fronty s důvodem chyby, časem, původním formulářem a bez zbytečných technických detailů. Vlastník sales operací dostane krátké upozornění a workflow se neopakuje donekonečna každou minutu jako strojový záchvat sebevědomí.
+
+### Loguj proces, ne obsah člověka
+
+Automatizace potřebuje auditní stopu, ale log není skládka dat. Dobrá stopa říká:
+
+- co se spustilo,
+- kdy,
+- z jakého systému,
+- s jakým výsledkem,
+- kdo nebo co akci spustilo,
+- kde najít detail v původním systému.
+
+Nemá bez důvodu kopírovat celé zprávy, přílohy, poznámky, tokeny, osobní údaje ani kompletní payloady. Pokud potřebuješ payload pro debugging, nastav krátkou retenci, omezený přístup a jasné maskování citlivých polí.
+
+Praktická věta do dokumentace:
+
+"Log automatizace obsahuje procesní metadata a identifikátor záznamu, ne kopii zákaznického obsahu."
+
+Tohle pravidlo je nudné, přesné a extrémně užitečné. Nejlepší druh provozní věty.
+
+### Automatizace má mít vlastníka a datum revize
+
+Nejnebezpečnější automatizace je ta, kterou nikdo nevlastní, ale všichni na ni spoléhají. Vypadá jako infrastruktura, ale vznikla v pátek odpoledne v no-code editoru a od té doby se jí tým bojí dotknout.
+
+Každý workflow musí mít:
+
+- vlastníka,
+- krátký popis účelu,
+- seznam systémů,
+- přehled oprávnění,
+- datum poslední revize,
+- postup vypnutí,
+- kontakt při incidentu nebo chybě.
+
+Jednou za měsíc projdi automatizace stejně jako přístupy a dočasné exporty. Hledej hlavně staré workaroundy, osobní tokeny, workflow bez běhu za poslední období, nedokumentované výjimky a kroky, které posílají data dál, než tým původně zamýšlel.
+
+### Checklist: Interní automatizace privacy-first
+
+- [ ] Workflow má jednu větu se spouštěčem, výstupem, účelem a rozsahem dat.
+- [ ] Automatizace nahrazuje jasný opakovaný proces, ne nevyjasněné rozhodnutí.
+- [ ] Do cílového systému jdou jen pole potřebná pro konkrétní účel.
+- [ ] Volný text, přílohy a poznámky mají zvláštní kontrolu.
+- [ ] Kritické workflow neběží pod osobním účtem.
+- [ ] Servisní účet má minimální oprávnění.
+- [ ] API klíče a tajemství nejsou v repozitáři, dokumentaci ani chatu.
+- [ ] Existuje fronta chyb, retry pravidla a ruční fallback.
+- [ ] Auditní log ukládá procesní metadata, ne kopii zákaznického obsahu.
+- [ ] Mezivýstupy, dočasné soubory a payloady mají krátkou retenci.
+- [ ] Workflow má vlastníka, dokumentaci a datum další revize.
+- [ ] Automatizaci jde bezpečně vypnout bez hádání, co všechno se rozbije.
+
+### Mini úkol
+
+Vyber jednu interní automatizaci, která už běží nebo se chystá. Vyplň kartu:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jaký ruční proces nahrazuje? |  |
+| Co ji spouští? |  |
+| Jaká data bere? |  |
+| Která pole jsou povinná a která jen pohodlná? |  |
+| Kam data posílá? |  |
+| Pod jakým účtem běží? |  |
+| Jaké má oprávnění? |  |
+| Co se stane při chybě? |  |
+| Jak dlouho žijí logy a mezisoubory? |  |
+| Kdo je vlastník a kdy proběhne revize? |  |
+
+Potom udělej jednu opravu: odeber nepotřebné pole, přepni osobní token na servisní účet, zkrať retenci payloadů, doplň chybovou frontu nebo napiš postup vypnutí. Automatizace má šetřit práci. Nemá vyrábět datovou archeologii pro budoucí tým.
+
 ## Zdroje
 
 - ICANN: Information for Domain Name Registrants - práva a odpovědnosti držitelů domén včetně správy, obnovy a převodu doménové registrace: https://www.icann.org/registrants
@@ -12942,6 +13112,7 @@ Potom udělej jednu konkrétní opravu: přidej README do exportu, zkrať expira
 
 ## Pracovní log
 
+- 2026-07-13: Doplněna příloha o interních automatizacích bez datového přelévání: výběr vhodných procesů, karta workflow, minimalizace polí, servisní účty, minimální oprávnění, chybová fronta, logování bez kopírování obsahu, vlastnictví, revize, checklist a mini úkol; navázáno na existující zdroje Evropské komise, OWASP a Google SRE k GDPR principům, secrets managementu a toil.
 - 2026-07-13: Doplněna příloha o zákaznickém exportu dat bez zipového chaosu: typy exportů podle účelu, použitelné formáty, ověřování oprávnění, vylučovací seznam citlivých interních dat, životní cyklus dočasného exportu, asynchronní UX, QA scénáře, checklist a mini úkol; ověřeny oficiální zdroje Evropské komise a EDPB k právům jednotlivců a přenositelnosti dat.
 - 2026-07-13: Doplněna příloha o měsíčním provozním úklidu bez velkého auditu: výběr pěti oblastí, kontrola stop po posledních změnách, zavírání dočasných exportů a přístupů, ověření veřejných textů proti realitě, úklid backlogu/dashboardů/dokumentace, měsíční karta úklidu, checklist a mini úkol.
 - 2026-07-13: Doplněna příloha o QA a release kontrole bez klikacího pekla: kritické cesty podle práce uživatele, definice hotovo s ověřením, automatizace nudných kontrol, krátký smoke test, bezpečná testovací data, release karta, privacy-first bug reporty, měsíční převod QA signálů do backlogu, checklist a mini úkol.
