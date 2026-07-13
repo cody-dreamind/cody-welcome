@@ -11045,6 +11045,211 @@ Vyber jedno rozhodnutí, které teď tým odkládá kvůli nejistotě. Připrav 
 
 Potom udělej jednu konkrétní věc: domluv dva rozhovory, přepiš scénář otázek na minulé chování, smaž staré nahrávky bez účelu, nebo převeď jeden support vzor do anonymizovaného produktového insightu. Výzkum má snížit nejistotu, ne vytvořit další archiv, který bude jednou někdo statečně ignorovat.
 
+## Příloha: SEO migrace bez paniky a datového přejídání
+
+SEO migrace je každá změna, při které se může změnit způsob, jakým lidé a vyhledávače nacházejí obsah: nová doména, změna URL struktury, sloučení webů, přepis blogu, přesun dokumentace, změna CMS nebo větší úklid starých článků. Není to magický rituál s tabulkou o tisíci řádcích. Je to provozní změna, která potřebuje mapu, test, release a klidné sledování dopadu.
+
+Privacy-first migrace má ještě jednu zásadu: kvůli strachu z poklesu návštěvnosti nezačni najednou instalovat každý měřicí skript pod sluncem. Většinu rozhodnutí zvládneš udělat z agregovaných dat, serverových stavů, Search Console, vlastních logů s krátkou retencí a ruční kontroly důležitých URL. Ano, zní to méně dramaticky než "war room". To je přesně výhoda.
+
+Špatná otázka zní: "Jak přesměrujeme všechno, aby Google nebyl naštvaný?"
+
+Lepší otázka zní: "Které URL mají hodnotu pro lidi, jakou mají novou adresu a jak ověříme, že se po releasu dostanou na správné místo?"
+
+### Nejdřív rozhodni, jestli URL opravdu měníš
+
+Ne každá redesignová chuť potřebuje novou URL strukturu. URL je uživatelské rozhraní, distribuční kanál a často i historická smlouva s lidmi, kteří na obsah odkazují. Když URL změníš jen proto, že nová struktura vypadá čistěji v interní tabulce, můžeš si přidat práci bez reálného přínosu.
+
+Rozumné důvody ke změně:
+
+- mění se doména nebo jazyková struktura,
+- slučuješ duplicitní obsah,
+- stará URL obsahuje interní nebo zavádějící názvy,
+- obsah se přesouvá do jiné produktové nebo dokumentační části,
+- starý CMS generoval křehké, dlouhé nebo nečitelné adresy,
+- potřebuješ opravit historický chaos, který brání údržbě.
+
+Slabé důvody:
+
+- "Nové slugy vypadají moderněji."
+- "Chci mít všechno stejně, i když staré URL fungují."
+- "Agentura říkala, že kratší je vždycky lepší."
+- "Při redesignu se přece mění všechno."
+
+Codyho komentář: Pokud je stará URL trochu ošklivá, ale lidé ji používají, vyhledávače ji znají a tým ji umí udržovat, možná není problém v URL. Možná je problém v tom, že někomu vadí pohled na minulá rozhodnutí. Což je lidské. Ale ne vždycky release-worthy.
+
+### Udělej migrační mapu
+
+Migrační mapa je pracovní tabulka, ne dekorace do projektového řízení. Každý důležitý starý zdroj má mít rozhodnutí:
+
+| Pole | Co vyplnit |
+| --- | --- |
+| Stará URL | přesná adresa včetně lomítka na konci, pokud je relevantní |
+| Nová URL | cílová kanonická adresa |
+| Typ změny | ponechat, přesměrovat, sloučit, odstranit |
+| Stavový kód | 200, 301/308, 404, 410 |
+| Důvod | proč se s URL děje právě tohle |
+| Vlastník | kdo potvrdí obsah a techniku |
+| Kontrola po releasu | jak ověříme výsledek |
+
+Začni u URL s největší hodnotou:
+
+- homepage a hlavní produktové stránky,
+- pricing,
+- kontaktní a registrační cesty,
+- dokumentace,
+- články s dlouhodobou návštěvností,
+- URL, na které vedou kampaně, partneři, e-maily a interní odkazy,
+- stránky s kvalitními externími odkazy.
+
+Nemusíš mapovat každý historický nesmysl ručně, pokud má web tisíce málo hodnotných URL. Ale musíš mít pravidlo, co se s nimi stane. Například: "Staré tag stránky bez návštěvnosti vrací 410, staré články s náhradou jdou 301 na nový článek, staré články bez náhrady mají vlastní 404 s odkazem na archiv tématu."
+
+### Přesměrování dělej jako produktové rozhodnutí
+
+Google Search Central u přesunů s viditelnou změnou URL doporučuje server-side permanentní přesměrování, typicky `301` nebo `308`, pokud je přesun trvalý: https://developers.google.com/search/docs/crawling-indexing/site-move-with-url-changes. Dokumentace k přesměrování zároveň rozlišuje trvalé a dočasné redirecty podle toho, kterou URL má vyhledávač považovat za kanonickou: https://developers.google.com/search/docs/crawling-indexing/301-redirects.
+
+Prakticky:
+
+- Trvalý přesun stránky: použij `301` nebo `308`.
+- Dočasný experiment nebo krátkodobá varianta: použij `302`, ne trvalý redirect.
+- Odstraněná stránka s dobrou náhradou: přesměruj na nejbližší relevantní obsah.
+- Odstraněná stránka bez náhrady: vrať poctivý `404` nebo `410`.
+- Duplicitní adresa: přesměruj na preferovanou kanonickou verzi.
+- Všechno na homepage: nedělej to, pokud homepage není opravdu nejlepší odpověď.
+
+Největší migrační zlo nejsou jednotlivé chyby. Největší zlo jsou redirect řetězce:
+
+`/stary-clanek` -> `/blog/stary-clanek` -> `/blog/novy-clanek` -> `/novinky/novy-clanek`
+
+Lepší:
+
+`/stary-clanek` -> `/novinky/novy-clanek`
+
+Google umí následovat více kroků, ale sám doporučuje řetězení omezit a posílat na finální destinaci přímo. A kromě vyhledávačů tu jsou pořád lidé, prohlížeče, starší klienti, RSS čtečky, firewally a obyčejná latence.
+
+### Sjednoť canonical, sitemap a interní odkazy
+
+Redirect je jen jedna část migrace. Když přesměruješ starou URL, ale sitemap, interní odkazy, canonical tagy a RSS feed dál ukazují starý svět, vytváříš provozní šum.
+
+Po migraci zkontroluj:
+
+- sitemap obsahuje jen nové kanonické URL,
+- canonical tag na stránce ukazuje na sebe nebo na správnou preferovanou URL,
+- interní odkazy nevedou přes staré redirecty,
+- navigace, patička a CTA používají nové URL,
+- strukturovaná data obsahují nové `url` a `mainEntityOfPage`, pokud je používáš,
+- RSS nebo Atom feed nepublikuje zbytečně staré přesměrované odkazy,
+- `robots.txt` obsahuje aktuální odkaz na sitemap.
+
+Google v dokumentaci k sitemap uvádí, že sitemap říká vyhledávačům, které URL preferuješ zobrazovat ve výsledcích, a že do ní patří kanonické URL: https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap. Sitemap není záruka indexace. Je to signál a provozní inventář. Ber ji tak.
+
+### Release rozděl na před, během a po
+
+SEO migrace se neřídí pocitem po nasazení. Připrav si jednoduchý runbook.
+
+Před releasem:
+
+- vyexportuj seznam současných důležitých URL,
+- ověř aktuální stavové kódy,
+- projdi hlavní šablony a metadata,
+- připrav redirect pravidla,
+- vygeneruj novou sitemap,
+- zkontroluj staging na vzorku hlavních URL,
+- domluv čas releasu mimo nejcitlivější obchodní okno,
+- zapiš, co záměrně neměníš.
+
+Během releasu:
+
+- nasaď redirecty a nový obsah společně, pokud to jde,
+- ověř homepage, pricing, registraci, formuláře, dokumentaci a top články,
+- otestuj staré URL z migrační mapy,
+- zkontroluj sitemap a `robots.txt`,
+- sleduj chybové stavy na serveru.
+
+Po releasu:
+
+- projdi vzorek starých URL a ověř cíle,
+- sleduj `404`, `410`, `5xx` a redirect řetězce,
+- oprav interní odkazy, které pořád vedou přes redirect,
+- monitoruj Search Console a agregovanou návštěvnost,
+- po několika dnech zkontroluj formuláře a kvalitu poptávek,
+- napiš krátké shrnutí dopadu a další kroky.
+
+U nově změněných stránek můžeš požádat o recrawl, ale Google upozorňuje, že procházení může trvat dny až týdny a request není záruka okamžité indexace: https://developers.google.com/search/docs/crawling-indexing/ask-google-to-recrawl. Tohle je užitečné pro očekávání týmu. Ne každý výkyv hodinu po releasu je incident.
+
+### Měř dopad bez sledovacího reflexu
+
+Při migraci chce tým vidět, jestli se něco nerozbilo. To neznamená, že musíš zapnout session replay, reklamní pixely a detailní profilování návštěvníků.
+
+Stačí sada signálů:
+
+| Signál | Co rozhoduje | Privacy poznámka |
+| --- | --- | --- |
+| Stavové kódy | jestli URL fungují nebo padají | agreguj, drž krátkou retenci logů |
+| Redirect řetězce | jestli lidé nejdou přes zbytečné mezikroky | není potřeba identifikovat člověka |
+| Search Console | indexace, chyby, dotazy a stránky | používej agregovaně |
+| Webová analytika | návštěvy hlavních stránek a konverze | bez cookies a bez osobních profilů, pokud to jde |
+| Formuláře a objednávky | jestli hlavní cesta vydělává | měř dokončení, ne každý pohyb myši |
+| Support a sales dotazy | jestli lidé něco nemohou najít | anonymizuj příklady před backlogem |
+
+Migrační dashboard má odpovídat na otázky:
+
+- Fungují hlavní staré URL?
+- Fungují hlavní nové URL?
+- Roste počet chyb, které člověku brání v cestě?
+- Ztratili jsme důležitou konverzní cestu?
+- Které opravy mají největší dopad?
+
+Všechno ostatní je hezké, ale často jen drahá mlha.
+
+### Nepleť migraci s obsahovým úklidem
+
+Migrace je lákavý moment, kdy chce tým opravit úplně všechno: URL, texty, design, positioning, formuláře, měření, dokumentaci i pricing. Někdy to dává smysl, ale čím víc věcí změníš najednou, tím hůř poznáš, co mělo jaký dopad.
+
+Rozděl změny:
+
+| Typ změny | Doporučení |
+| --- | --- |
+| Technický přesun bez změny obsahu | drž obsah a metadata co nejstabilnější |
+| Sloučení duplicitních článků | vyber nejlepší cílovou URL a vysvětli sloučení v poznámce |
+| Přepis positioning stránky | měř konverzi před a po, ale neměň současně formulář i pricing |
+| Odstranění starého obsahu | rozhodni 404/410/redirect podle skutečné náhrady |
+| Změna domény | drž strukturu co nejpodobnější, pokud nemáš silný důvod měnit i ji |
+
+Když zároveň měníš obsah i URL, zapiš to do migrační mapy. Budoucí ty bude vděčný. Současný ty bude brblat, ale to přežije.
+
+### Checklist: SEO migrace privacy-first
+
+- [ ] Víme, proč URL měníme a co se má po migraci zlepšit.
+- [ ] Máme seznam hlavních starých URL podle obchodní a uživatelské hodnoty.
+- [ ] Každá důležitá stará URL má cílový stav: 200, 301/308, 404 nebo 410.
+- [ ] Redirecty vedou přímo na finální cílovou URL bez zbytečných řetězců.
+- [ ] Nepřesměrováváme všechno bez rozmyslu na homepage.
+- [ ] Sitemap obsahuje nové kanonické URL.
+- [ ] Canonical tagy, interní odkazy, navigace, CTA a RSS/Atom odkazy jsou sjednocené.
+- [ ] `robots.txt` ukazuje na aktuální sitemap a neblokuje důležité části webu.
+- [ ] Máme předem připravený test hlavních cest po releasu.
+- [ ] Monitoring po releasu stojí na agregovaných signálech, ne na invazivním trackingu.
+- [ ] Serverové logy pro migraci mají omezený účel, přístup a retenci.
+- [ ] Po migraci vznikne krátké shrnutí: co funguje, co opravujeme, co už nemažeme dál.
+
+### Mini úkol
+
+Vyber jednu plánovanou nebo historicky bolavou změnu URL a připrav její migrační kartu:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jaká stará URL nebo skupina URL se mění? |  |
+| Proč se mění? |  |
+| Jaká je nová kanonická URL? |  |
+| Jaký stavový kód použijeme? |  |
+| Kde se musí změnit interní odkazy? |  |
+| Je URL v sitemap nebo RSS/Atom feedu? |  |
+| Jak ověříme výsledek po releasu? |  |
+| Jaké údaje budeme sledovat a jak dlouho? |  |
+| Kdo rozhodne, že je migrace hotová? |  |
+
+Potom udělej jednu konkrétní věc: oprav jeden redirect řetězec, vyhoď starou URL ze sitemap, doplň chybějící canonical, nebo napiš migrační mapu pro pět nejdůležitějších URL. SEO migrace není loterie. Je to úklid cesty, po které už někdo chodí.
+
 ## Zdroje
 
 - ICANN: Information for Domain Name Registrants - práva a odpovědnosti držitelů domén včetně správy, obnovy a převodu doménové registrace: https://www.icann.org/registrants
@@ -11130,7 +11335,10 @@ Potom udělej jednu konkrétní věc: domluv dva rozhovory, přepiš scénář o
 - RSS Advisory Board / Berkman Klein Center: RSS 2.0 Specification - stabilní specifikace RSS 2.0: https://cyber.harvard.edu/rss/rss.html
 - IETF: RFC 4287 The Atom Syndication Format - standard Atom feedů: https://datatracker.ietf.org/doc/html/rfc4287
 - web.dev: Web Vitals - aktuální metriky LCP, INP a CLS včetně doporučených hranic: https://web.dev/articles/vitals
+- Google Search Central: Site moves and migrations - doporučení pro přesuny webu se změnou URL, server-side permanentní redirecty a omezení redirect řetězců: https://developers.google.com/search/docs/crawling-indexing/site-move-with-url-changes
+- Google Search Central: Redirects and Google Search - rozlišení trvalých a dočasných redirectů a jejich vliv na kanonickou URL ve vyhledávání: https://developers.google.com/search/docs/crawling-indexing/301-redirects
 - Google Search Central: Build and submit a sitemap - tvorba a odesílání sitemap: https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap
+- Google Search Central: Ask Google to recrawl your URLs - možnosti požádat o nové procházení změněných URL a upozornění, že recrawl může trvat dny až týdny: https://developers.google.com/search/docs/crawling-indexing/ask-google-to-recrawl
 - Google Search Central: Robots.txt Introduction and Guide - použití a limity robots.txt: https://developers.google.com/search/docs/crawling-indexing/robots/intro
 - Google Search Central: How to specify a canonical URL with rel=canonical and other methods - doporučení pro určení preferované URL u duplicitního nebo velmi podobného obsahu: https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls
 - Google Search Central: Article structured data - použití strukturovaných dat pro články a blogové příspěvky: https://developers.google.com/search/docs/appearance/structured-data/article
@@ -11146,6 +11354,7 @@ Potom udělej jednu konkrétní věc: domluv dva rozhovory, přepiš scénář o
 
 ## Pracovní log
 
+- 2026-07-13: Doplněna příloha o SEO migracích bez paniky a datového přejídání: rozhodování, kdy měnit URL, migrační mapa, redirecty, canonical/sitemap/interní odkazy, release runbook, privacy-first monitoring, checklist a mini úkol; ověřeny a doplněny zdroje Google Search Central k site moves, redirectům, sitemap a recrawlu.
 - 2026-07-13: Doplněna příloha o uživatelském výzkumu bez nahrávacího vysavače: výzkum od rozhodnutí, otázky na minulé chování, opatrné nahrávání, rozhodovací poznámky, pozorování bez produkčních dat, napojení na backlog, checklist a mini úkol.
 - 2026-07-13: Zpřesněn doporučený rytmus práce s e-bookem o vědomé rozhodnutí, co příště neměřit, aby praktické kroky zůstaly privacy-first.
 - 2026-07-13: Doplněna příloha o ICP a segmentaci bez profilovacího chaosu: popis ideálního zákazníka podle práce a kontextu, férové používání segmentačních údajů, malé vysvětlitelné lead skóre, negativní ICP, měsíční revize segmentů, checklist a mini úkol.
