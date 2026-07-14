@@ -15938,6 +15938,187 @@ Vezmi jeden živý projekt a vyplň průběžnou kontrolní kartu:
 
 Potom udělej jednu opravu: přepiš tři nejasné úkoly na ověřitelné výstupy, zapiš poslední rozhodnutí, zavři jeden starý přístup, nebo pošli krátký status podle šablony. Projektové řízení není divadlo pro tabulky. Je to způsob, jak dostat práci do světa bez zbytečných překvapení.
 
+## Příloha: Projektová retrospektiva bez obviňování a datové skládky
+
+Projektová retrospektiva není terapie týmu ani povinný rituál pro hezký pocit. Je to poslední šance převést zkušenost z projektu do lepšího systému: upravit šablony, změnit rytmus komunikace, uklidit přístupy, zlepšit odhadování a zapsat rozhodnutí, která by příště neměla vznikat znovu od nuly.
+
+Špatná otázka zní: „Co se komu líbilo a nelíbilo?“
+
+Lepší otázka zní: „Co jsme se naučili tak konkrétně, že podle toho změníme další projekt, produkt nebo provoz?“
+
+Privacy-first retrospektiva má ještě jeden cíl navíc: nezaměnit učení za hromadění citlivých detailů. Pro zlepšení procesu obvykle nepotřebuješ kopii chatu, nahrávku celé schůzky, export ticketů ani seznam jmen lidí, kteří něco zdrželi. Potřebuješ vzory, rozhodnutí a jednu až tři změny systému.
+
+### Retrospektivu dělej po milníku, ne až po vyhoření
+
+Retrospektiva po ročním projektu je často archeologie. Lidé si pamatují poslední stres, ne přesný průběh. U webu, SaaS nebo marketingové spolupráce dává větší smysl krátká retrospektiva po každé významné fázi:
+
+| Milník | Co vyhodnotit |
+| --- | --- |
+| Po discovery | zda byly jasné problém, segment, datový rozsah a další krok |
+| Po kickoffu | zda fungovaly přístupy, komunikační kanál a první týden práce |
+| Po releasu | zda release splnil definici hotovo, měření a provozní připravenost |
+| Po prvním měsíci provozu | kde vzniklo tření, supportní dotazy a nečekané riziko |
+| Po ukončení spolupráce | co převést do šablon, dokumentace, backlogu nebo podpory |
+
+Krátká retrospektiva může mít 30 minut a jeden dokument. Není potřeba z ní dělat festival barevných lístečků. Ty jsou fajn, ale samy o sobě ještě nikdy nesmazaly starý produkční přístup.
+
+### Začni fakty, ne dojmy
+
+Dojmy jsou užitečné, ale bez faktů se z retrospektivy stane soutěž paměti a nálady. Připrav si pár bezpečných vstupů:
+
+- původní cíl a scope,
+- rozhodovací log,
+- seznam změnových požadavků,
+- dokončené výstupy,
+- blokery a jejich dopad,
+- supportní nebo klientské dotazy v agregované podobě,
+- seznam dočasných přístupů, exportů a preview odkazů,
+- stručný provozní stav po releasu.
+
+Pozor na větu „vezmeme si celý chat a projdeme ho“. Chat je špatný zdroj pravdy a často obsahuje víc osobních údajů, interních poznámek a náhodných detailů, než retrospektiva potřebuje. Pokud v něm něco důležitého je, přepiš to do shrnutí: rozhodnutí, bloker, riziko nebo akce.
+
+Praktická karta faktů:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jaký byl cíl fáze? |  |
+| Co bylo dodáno? |  |
+| Co se změnilo proti původnímu scope? |  |
+| Který bloker měl největší dopad? |  |
+| Které rozhodnutí přišlo pozdě? |  |
+| Jaká data, přístupy nebo exporty vznikly dočasně? |  |
+| Co zůstává v provozu po releasu? |  |
+
+Teprve potom se ptej na interpretaci. Fakta nastaví společnou mapu. Dojmy pomůžou najít, proč se věci staly.
+
+### Odděl proces, produkt a vztah
+
+Když se všechno smíchá do jedné diskuze, retrospektiva sklouzne k větám typu „komunikace byla složitá“. To je možná pravda, ale nedá se podle ní nic opravit.
+
+Rozděl učení do tří oblastí:
+
+| Oblast | Typická otázka |
+| --- | --- |
+| Proces | Jak fungovaly schůzky, statusy, rozhodování, schvalování a změny rozsahu? |
+| Produkt | Co se ukázalo o uživatelích, hodnotě, onboardingu, obsahu nebo technickém řešení? |
+| Vztah | Kde chybělo očekávání, vlastník, kontext nebo důvěra? |
+
+Příklad:
+
+- Proces: klient schvaloval texty ve třech kanálech.
+- Produkt: pricing stránka pořád neodpovídá na rozdíl mezi plány.
+- Vztah: tým se bál říct, že produkční data pro první audit nejsou potřeba.
+
+Každá oblast potřebuje jiný typ opravy. Proces opravíš šablonou a pravidlem. Produkt opravíš backlogem a experimentem. Vztah opravíš jasnější komunikací a hranicemi. Když se to plete, vznikne univerzální závěr „musíme se líp domlouvat“. To je manažerská vůně do auta: chvíli je cítit, ale motor neopraví.
+
+### Piš učení jako změnu systému
+
+Retrospektivní poznámka má být použitelná příště. Ne „příště si dáme pozor“. To není akce, to je přání v pracovním kabátě.
+
+Lepší formát:
+
+| Pozorování | Dopad | Změna systému | Vlastník | Do kdy |
+| --- | --- | --- | --- | --- |
+| Klient poslal produkční export před podpisem DPA | tým musel řešit mazání a kanály | přidat do discovery šablony větu, co zatím neposílat |  |  |
+| Schvalování probíhalo v e-mailu i chatu | část připomínek se ztratila | nastavit jeden schvalovací kanál a definici hotovo v kickoff briefu |  |  |
+| Release notes vznikaly až po nasazení | support nevěděl, co se změnilo | přidat release notes jako akceptační kritérium každého releasu |  |  |
+
+Codyho komentář: Retrospektiva bez vlastníka je jen dobře strukturované povzdechnutí. A povzdechy se špatně commitují.
+
+### Úklid dat a přístupů je součást retro
+
+Projekt nekončí jen tím, že je výstup schválený. Končí i tím, že se uklidí dočasné věci:
+
+- preview odkazy,
+- demo účty,
+- exporty,
+- importní soubory,
+- nahrávky schůzek,
+- screenshoty s interními údaji,
+- dočasné role v CMS, hostingu, analytice nebo CRM,
+- sdílené dokumenty s širším přístupem, než je potřeba po projektu.
+
+Retro karta pro privacy úklid:
+
+| Položka | Kde je | Vlastník | Akce | Termín |
+| --- | --- | --- | --- | --- |
+| Preview prostředí |  |  | smazat / převést do údržby |  |
+| Demo účet |  |  | resetovat / ponechat s vlastníkem |  |
+| Export klientských dat |  |  | smazat a zapsat potvrzení |  |
+| Dočasný přístup |  |  | odebrat / zúžit roli |  |
+| Nahrávka schůzky |  |  | smazat / ponechat podle účelu a retence |  |
+
+Tohle je nudná část, která dělá privacy-first provoz skutečným. Hodnoty se nepoznají podle slidu na začátku projektu. Poznají se podle toho, jestli po projektu nezůstane datový prach pod kobercem.
+
+### Zákaznický feedback přepiš na rozhodnutí
+
+Po projektu často přijde směs pochval, připomínek, drobných stížností a nápadů. Nesyp to celé do backlogu jako surovinu. Přepiš feedback na rozhodnutí:
+
+| Feedback | Co z něj plyne | Typ další akce |
+| --- | --- | --- |
+| „Nevěděli jsme, co máme dodat před prvním týdnem.“ | kickoff brief musí obsahovat seznam podkladů a co neposílat | šablona |
+| „Nová homepage je lepší, ale pořád se ptají na cenu.“ | pricing obsah je slabší než hero | backlog |
+| „Preview link jsme poslali interně dál a někdo viděl rozpracovaný text.“ | preview potřebuje expiraci nebo přístupové omezení | provozní pravidlo |
+
+Ne každý feedback je úkol. Některý je signál, některý je kontext a některý je jen názor jednoho člověka po dlouhém týdnu. Dobrá retrospektiva chrání backlog před tím, aby se stal skladem pocitů.
+
+### Co sdílet s klientem
+
+Interní retrospektiva může být upřímnější než klientské shrnutí, ale nesmí být toxická. Klientské shrnutí má být věcné:
+
+```text
+Co jsme dodali:
+- [výstup]
+
+Co se v projektu ukázalo:
+- [procesní nebo produktové učení bez osobních soudů]
+
+Co doporučujeme dál:
+- [jedna až tři konkrétní akce]
+
+Co jsme uklidili:
+- [přístupy, exporty, preview, dočasná data]
+
+Co zůstává otevřené:
+- [rozhodnutí, backlog, provozní otázka]
+```
+
+Neposílej klientovi interní historky, osobní hodnocení ani kompletní diskuzi. Minimum disclosure platí i tady: sdílej to, co pomůže dalšímu kroku, důvěře a provozu.
+
+### Checklist: Projektová retrospektiva privacy-first
+
+- [ ] Retro probíhá po konkrétním milníku, ne až po zapomenutí detailů.
+- [ ] Vstupem jsou cíl, dodané výstupy, rozhodnutí, změny scope, blokery a provozní stav.
+- [ ] Chaty, nahrávky a tickety se nepoužívají jako surová datová skládka.
+- [ ] Učení je rozdělené na proces, produkt a vztah.
+- [ ] Každé důležité pozorování má dopad a změnu systému.
+- [ ] Akce z retro mají vlastníka a termín.
+- [ ] Dočasné přístupy, exporty, preview odkazy a demo účty mají úklidovou akci.
+- [ ] Zákaznický feedback je přepsaný na rozhodnutí, backlog nebo pravidlo.
+- [ ] Klientské shrnutí je věcné a neobsahuje interní osobní hodnocení.
+- [ ] Šablony, checklisty nebo dokumentace se upraví hned, dokud je zkušenost čerstvá.
+- [ ] Backlog nedostane všechen feedback, jen rozhodnuté další kroky.
+- [ ] Po retro je jasné, co se v příštím projektu změní.
+
+### Mini úkol
+
+Vezmi poslední dokončený projekt, release nebo větší fázi a vyplň retro kartu:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jaký milník hodnotíme? |  |
+| Co bylo skutečně dodáno? |  |
+| Které rozhodnutí přišlo pozdě? |  |
+| Který bloker měl největší dopad? |  |
+| Jaká změna scope se objevila? |  |
+| Co jsme se naučili o produktu nebo zákazníkovi? |  |
+| Která šablona, checklist nebo pravidlo se má upravit? |  |
+| Jaké přístupy, exporty nebo preview odkazy se mají uklidit? |  |
+| Co pošleme klientovi jako věcné shrnutí? |  |
+| Jaká jedna změna bude příště vidět už v kickoffu? |  |
+
+Potom udělej jednu konkrétní opravu: doplň větu do discovery šablony, uprav kickoff brief, smaž starý export, odeber dočasný přístup, nebo vytvoř malý rozhodovací log pro příští projekt. Retrospektiva je užitečná až ve chvíli, kdy změní další práci. Jinak je to jen slušně moderované vzpomínání.
+
 ## Zdroje
 
 - ICANN: Information for Domain Name Registrants - práva a odpovědnosti držitelů domén včetně správy, obnovy a převodu doménové registrace: https://www.icann.org/registrants
@@ -16064,6 +16245,7 @@ Potom udělej jednu opravu: přepiš tři nejasné úkoly na ověřitelné výst
 
 ## Pracovní log
 
+- 2026-07-14: Doplněna příloha o projektové retrospektivě bez obviňování a datové skládky: retrospektiva po milnících, bezpečné vstupy místo surových chatů, rozdělení učení na proces/produkt/vztah, změny systému s vlastníkem, privacy úklid přístupů a exportů, přepis feedbacku na rozhodnutí, klientské shrnutí, checklist a mini úkol.
 - 2026-07-14: Doplněna příloha o průběžném řízení projektu bez statusového divadla: rytmus podle rizika, krátký status, ověřitelné úkoly, práce s blokery, malá dema, rozhodovací log, komunikace bez osobních soudů, změnové požadavky, checklist a mini úkol.
 - 2026-07-14: Doplněna příloha o kickoffu projektu bez rozjezdu do mlhy: rozdíl mezi nabídkou a pracovním startem, kickoff brief, přístupy po vlnách, datová pravidla před prvním uploadem, malý ověřitelný výstup prvního týdne, rozhodovací log, změnové požadavky, checklist a mini úkol.
 - 2026-07-14: Doplněna příloha o discovery callu bez obchodního výslechu a datového přetlaku: rámec před hovorem, otázky podle rozhodnutí, oddělení fitu od auditu, vylučovací seznam citlivých dat, discovery brief, červené vlajky, čisté odmítnutí nefitové spolupráce, checklist a mini úkol.
