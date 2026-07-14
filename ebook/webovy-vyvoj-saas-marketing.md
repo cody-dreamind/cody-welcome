@@ -16647,6 +16647,207 @@ Vezmi aktuální nebo plánovaný trial a vyplň kartu:
 
 Potom udělej jednu konkrétní opravu: zkrať registraci, přidej demo data, odstraň povinnou platební kartu, napiš pravidlo konce trialu, uprav jeden nátlakový e-mail, nebo přidej export do read-only režimu po skončení. Trial má být pozvánka k hodnotě, ne datový vysavač s odpočtem.
 
+## Příloha: Upgrade momenty bez nátlakového paywallu
+
+Trial, freemium a nízký tarif často nekončí jedním velkým prodejním rozhodnutím. Častěji se člověk dostane k hranici: potřebuje dalšího člena týmu, delší historii, produkční integraci, pokročilejší oprávnění, vyšší objem nebo jistější podporu. To je upgrade moment.
+
+Špatná otázka zní: „Kam dáme paywall, aby co nejvíc lidí muselo zaplatit?“
+
+Lepší otázka zní: „Ve kterém okamžiku uživatel jasně chápe hodnotu placené funkce a umíme mu férově vysvětlit, co získá, co se stane s daty a jak může pokračovat bez pasti?“
+
+Paywall není jen obchodní plocha. Je to produktový text, stav účtu, datové pravidlo a důkaz, jestli firma respektuje zákazníka i ve chvíli, kdy chce peníze. Drobný detail: přesně v té chvíli se důvěra láme nejrychleji.
+
+### Začni mapou hodnoty, ne seznamem zamčených funkcí
+
+Nejdřív si napiš, proč má vyšší tarif existovat. Ne interně jako „potřebujeme monetizaci“, ale zákaznicky jako „tady začíná vyšší hodnota nebo vyšší provozní nárok“.
+
+Typické důvody pro upgrade:
+
+- větší tým potřebuje role, oprávnění a auditní stopu,
+- vyšší objem zvyšuje provozní náklady,
+- produkční integrace vyžaduje bezpečnější správu tokenů a podporu,
+- delší historie má hodnotu pro reporty, compliance nebo práci manažerů,
+- pokročilá automatizace šetří víc času než základní workflow,
+- placený plán zahrnuje garanci podpory nebo provozní odpovědnost.
+
+Horší důvody:
+
+- uživatel už nahrál data, tak nemá kam utéct,
+- export schováme za vyšší tarif,
+- bezpečnost dáme jen do enterprise plánu,
+- zablokujeme hlavní rozpracovanou práci přesně uprostřed úkolu,
+- necháme člověka kliknout na funkci a až potom mu řekneme, že nic neuloží.
+
+Codyho komentář: Paywall má být dveře do vyšší hodnoty, ne hrábě položené před běžnou práci. Ano, hrábě občas zvýší konverzi v tabulce. Taky umí snížit důvěru v hlavě člověka, což dashboard měří hůř.
+
+### Upgrade moment pojmenuj lidsky
+
+Když uživatel narazí na limit, potřebuje tři věci:
+
+1. Co se stalo.
+2. Proč existuje limit.
+3. Jaké má možnosti.
+
+Špatný text:
+
+```text
+Limit exceeded. Upgrade required.
+```
+
+Lepší text:
+
+```text
+Dosáhli jste limitu 3 aktivních projektů v tarifu Start. Další projekt můžete archivovat, smazat, nebo přejít na tarif Team, který podporuje neomezené aktivní projekty a týmové role.
+```
+
+Ještě lepší je přidat dopad na data:
+
+```text
+Archivace projekt nemaže. Zůstane dostupný v read-only režimu a kdykoli ho můžete znovu aktivovat místo jiného projektu.
+```
+
+Tady není magie copywritingu. Jen respekt k tomu, že člověk potřebuje rozhodnout, ne dekódovat produktový šum.
+
+### Nedělej z upgrade modalu slepou uličku
+
+Nátlakový paywall často vypadá tak, že má jedno velké tlačítko „Upgrade“ a malý únikový křížek. Privacy-first a zákaznicky fér varianta ukáže reálné cesty.
+
+Podle situace můžeš nabídnout:
+
+- přejít na vyšší tarif,
+- upravit aktuální využití,
+- archivovat nebo smazat nepotřebnou položku,
+- exportovat data,
+- požádat o demo nebo konzultaci,
+- pokračovat v read-only režimu,
+- vrátit se zpět bez ztráty rozpracované práce.
+
+Ne každá možnost patří do každého modalu. Ale pokud jediná cesta ven vede přes platbu, máš spíš past než produktové rozhodnutí.
+
+Praktické pravidlo: upgrade výzva nesmí zničit uživatelský kontext. Když člověk píše dokument, nastavuje integraci nebo zve kolegu, ulož rozpracovaný stav a jasně řekni, kam se po rozhodnutí vrátí.
+
+### Vysvětli hodnotu podle práce uživatele
+
+Seznam funkcí je často slabší než vysvětlení konkrétní práce.
+
+Místo:
+
+- „Advanced roles“
+- „Longer history“
+- „Priority support“
+
+Piš:
+
+- „Oddělte práva lidí, kteří obsah píšou, schvalují a publikují.“
+- „Vraťte se k rozhodnutím a změnám starším než 90 dní.“
+- „Získejte garantovanou odpověď pro produkční incidenty.“
+
+Uživatel nekupuje abstraktní funkci. Kupuje menší riziko, rychlejší tým, lepší kontrolu nebo méně ruční práce. Pokud to neumíš napsat bez interního názvu funkce, možná ještě nemáš jasnou hodnotu.
+
+### Upgrade měř jako rozhodnutí, ne jako hon na člověka
+
+Upgrade momenty se dají měřit privacy-first. Nepotřebuješ sledovat každý pohyb myši ani skládat psychologický profil.
+
+Rozumné signály:
+
+| Signál | K čemu slouží |
+| --- | --- |
+| limit zobrazen | víme, kde lidé narážejí na hranici plánu |
+| vybraná možnost | víme, jestli volí upgrade, archivaci, export nebo návrat |
+| upgrade dokončen | víme, jestli obchodní tok funguje |
+| downgrade nebo zrušení po upgrade | víme, jestli slib odpovídal realitě |
+| dotaz na support po paywallu | víme, kde text nebo cena není jasná |
+
+Co je naopak podezřelé:
+
+- posílat obsah rozpracované práce do marketingové analytiky,
+- spojovat upgrade výzvy s reklamním retargetingem bez jasného účelu a souhlasu,
+- ukládat jemné behaviorální profily jen proto, že nástroj umí skórovat „intent“,
+- měřit frustraci uživatele místo opravy špatného limitu.
+
+Dobrá metrika upgrade momentu vede k rozhodnutí: změnit limit, přepsat text, upravit tarif, přidat mezikrok, nebo odstranit paywall z místa, kde škodí.
+
+### Bezpečnost a data nedávej za trest
+
+Některé funkce jsou dobré kandidáty na vyšší tarif, jiné by měly být základní součást důvěryhodného produktu.
+
+Opatrně s placeným omezením u:
+
+- exportu vlastních dat,
+- výmazu účtu nebo workspace,
+- základního zabezpečení účtu,
+- možnosti odhlásit marketing,
+- správy souhlasů a preferencí,
+- přístupu k informacím o tom, co se s daty děje.
+
+Naopak vyšší tarif může férově obsahovat:
+
+- pokročilé role a schvalovací workflow,
+- auditní logy pro větší týmy,
+- delší retenční historii tam, kde má jasný účel,
+- SSO nebo pokročilou správu identity,
+- vyšší limity automatizací,
+- garantovanou podporu,
+- produkční integrační kapacity.
+
+Rozdíl je jednoduchý: základní práva a bezpečný odchod nejsou prémiový zážitek. Pokročilá správa, provozní nároky a týmová koordinace už mohou být placená hodnota.
+
+### Downgrade navrhni stejně pečlivě jako upgrade
+
+Kdo umí férově přijmout upgrade, má umět férově zpracovat i downgrade. Tady se pozná, jestli pricing drží vodu, nebo jen doufá, že zákazník zůstane ze setrvačnosti.
+
+Při downgradu řekni:
+
+- co se stane s funkcemi, které nový tarif nepokrývá,
+- které projekty, členové nebo integrace zůstanou aktivní,
+- co přejde do read-only režimu,
+- jak dlouho zůstanou data dostupná,
+- co může uživatel exportovat,
+- kdy změna začne platit,
+- jak se dá vrátit zpět.
+
+Příklad:
+
+```text
+Po přechodu na tarif Start zůstanou aktivní 3 vybrané projekty. Ostatní projekty uložíme jako read-only archiv. Archiv nemažeme automaticky; můžete ho exportovat nebo znovu aktivovat přechodem na vyšší tarif.
+```
+
+Tohle je výrazně lepší než „některé funkce přestanou být dostupné“. Některé? Které? Kdy? Proč mi teď cuká oko?
+
+### Checklist: Upgrade momenty privacy-first
+
+- [ ] Každý paywall má napsaný zákaznický důvod, ne jen interní monetizační cíl.
+- [ ] Limit odpovídá hodnotě, provoznímu nákladu nebo týmové složitosti.
+- [ ] Uživatel předem chápe, co je v jeho tarifu a kde jsou hranice.
+- [ ] Upgrade text říká, co se stalo, proč a jaké jsou možnosti.
+- [ ] Paywall nabízí férovou alternativu, pokud existuje: archiv, export, úpravu využití nebo read-only stav.
+- [ ] Rozpracovaná práce se při upgrade výzvě neztratí.
+- [ ] Základní bezpečnost, export, výmaz a preference nejsou trest za nižší tarif.
+- [ ] Upgrade metriky sledují rozhodnutí a produktové tření, ne osobní profil člověka.
+- [ ] Marketingové follow-upy jsou oddělené od provozních upozornění.
+- [ ] Downgrade má jasná pravidla pro funkce, data, integrace a čas účinnosti.
+- [ ] Support umí vysvětlit limity stejnými slovy jako produkt.
+- [ ] Tým pravidelně kontroluje, jestli paywally nepřesouvají nejasný pricing do frustrace uživatele.
+
+### Mini úkol
+
+Vyber jeden aktuální nebo plánovaný upgrade moment a vyplň kartu:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Kde uživatel narazí na limit? |  |
+| Jakou hodnotu vyšší tarif opravdu přidává? |  |
+| Jaký je férový důvod limitu? |  |
+| Co se stane s rozpracovanou prací? |  |
+| Jaké alternativy má uživatel kromě platby? |  |
+| Jak vysvětlíme dopad na data? |  |
+| Jaké metriky potřebujeme pro rozhodnutí? |  |
+| Co měřit nebudeme, protože by to bylo zbytečně invazivní? |  |
+| Co se stane při pozdějším downgradu? |  |
+| Jakou otázku bude nejspíš řešit support? |  |
+
+Potom udělej jednu konkrétní opravu: přepiš text limitu, přidej read-only stav, doplň export před blokací, vysvětli downgrade dopad, odstraň paywall ze základní bezpečnostní funkce, nebo změň metriku z osobního sledování na agregovaný signál. Upgrade má působit jako logický další krok, ne jako zhasnutá chodba s terminálem na kartu.
+
 ## Zdroje
 
 - ICANN: Information for Domain Name Registrants - práva a odpovědnosti držitelů domén včetně správy, obnovy a převodu doménové registrace: https://www.icann.org/registrants
@@ -16773,6 +16974,7 @@ Potom udělej jednu konkrétní opravu: zkrať registraci, přidej demo data, od
 
 ## Pracovní log
 
+- 2026-07-14: Doplněna příloha o upgrade momentech bez nátlakového paywallu: mapa hodnoty před zamčenými funkcemi, lidské vysvětlení limitů, férové alternativy k platbě, měření upgrade rozhodnutí bez profilování, opatrnost u základní bezpečnosti a datových práv, pravidla downgradu, checklist a mini úkol.
 - 2026-07-14: Doplněna příloha o trialu a freemium modelu bez datového dluhu: volba modelu podle rizika a nákupního chování, první hodnota bez produkčních dat, limity free plánu, aktivační měření, pomocné trial e-maily, konec trialu, support hranice, checklist a mini úkol.
 - 2026-07-14: Doplněna příloha o rozhodování build vs. buy bez drahého autopilota: popis schopnosti místo názvu nástroje, čtyři varianty rozhodnutí, datový dopad, kdy koupit a kdy stavět, bezpečný pilot, provozní cena, rozhodovací karta, checklist a mini úkol.
 - 2026-07-14: Doplněna příloha o projektovém playbooku bez zapomenutého učení: převod retrospektivních zjištění do konkrétních změn šablon a checklistů, členění playbooku podle momentu práce, hlavičky šablon, zabudování privacy pravidel do běžné operativy, měsíční údržba playbooku, příklad změn po projektu, checklist a mini úkol.
