@@ -16277,6 +16277,166 @@ Vyber poslední retrospektivu nebo projektové poučení a přepiš ho do jedné
 
 Hotovo není „máme poznámku z retro“. Hotovo je až ve chvíli, kdy člověk v dalším projektu narazí na lepší otázku, jasnější checklist nebo bezpečnější výchozí postup.
 
+## Příloha: Build vs. buy bez drahého autopilota
+
+Každý malý SaaS tým dřív nebo později narazí na otázku, jestli určitou věc postavit sám, koupit jako službu, použít open-source nástroj, nebo ji zatím nedělat vůbec. Typicky jde o analytiku, billing, CMS, helpdesk, e-mailing, vyhledávání, monitoring, CRM, autentizaci, exporty, formuláře nebo interní automatizace.
+
+Špatná otázka zní: „Co bude nejrychlejší nasadit?“
+
+Lepší otázka zní: „Která varianta nám dá potřebnou schopnost, aniž by vytvořila neřízený datový, provozní nebo vendor lock-in dluh?“
+
+Rychlost je důležitá. Jenže nejrychlejší cesta v pondělí může být nejdražší provozní rozhodnutí v pátek. Privacy-first tým proto neporovnává jen cenu licence a počet funkcí. Porovnává data, kontrolu, odchod, integraci, údržbu a důvěru.
+
+Codyho komentář: „Koupíme hotový nástroj a bude klid“ je krásná věta. Někdy pravdivá. Někdy znamená „přesuneme problém do dalšího dashboardu a přidáme mu měsíční fakturu“. Rozdíl poznáš až podle rozhodovací karty, ne podle landing page dodavatele.
+
+### Nejdřív pojmenuj schopnost, ne nástroj
+
+Tým často skočí rovnou na výběr nástroje: „Potřebujeme Intercom“, „potřebujeme HubSpot“, „potřebujeme PostHog“, „potřebujeme nový headless CMS“. Jenže nástroj není potřeba. Potřeba je schopnost.
+
+Přepiš větu do tohoto formátu:
+
+„Potřebujeme umět ___, aby ___, bez toho, že ___.“
+
+Příklady:
+
+- „Potřebujeme umět odpovídat na support dotazy z jednoho místa, aby se nic neztratilo, bez toho, že budeme kopírovat zákaznická data do pěti nástrojů.“
+- „Potřebujeme umět měřit aktivaci uživatele, aby tým každý týden zlepšil onboarding, bez toho, že budeme profilovat každého návštěvníka webu.“
+- „Potřebujeme umět publikovat články s metadaty a RSS, aby marketing mohl pravidelně vydávat obsah, bez toho, že každý text bude ruční deploy.“
+
+Jakmile schopnost neumíš popsat bez názvu dodavatele, ještě nejsi ve výběru. Jsi v přání.
+
+### Zvaž čtyři možnosti
+
+U každé schopnosti existují nejméně čtyři varianty:
+
+| Varianta | Kdy dává smysl | Riziko |
+| --- | --- | --- |
+| Nedělat teď | schopnost není nutná pro aktuální cíl | tým může problém jen odkládat |
+| Ruční proces | nízký objem, potřeba učení, nejistý workflow | ruční práce se může potichu změnit v rutinní toil |
+| Koupit nebo použít službu | běžná komoditní oblast, dobrý export, jasný datový režim | vendor lock-in, další zpracovatel, skryté náklady |
+| Postavit vlastní řešení | schopnost je strategická, odlišující nebo datově citlivá | údržba, bezpečnost, dlouhodobé vlastnictví |
+
+Nejpodceňovanější možnost je „nedělat teď“. Někdy tým nepotřebuje další nástroj, ale jasnější proces. Někdy nepotřebuje produktovou analytiku pro deset eventů, ale tři rozhovory a jednu tabulku aktivace. Někdy nepotřebuje nový CMS, ale šablonu článku a RSS v existujícím webu.
+
+### Rozhoduj podle datového dopadu
+
+Privacy-first rozhodnutí začíná otázkou: jaká data daná varianta uvidí?
+
+| Otázka | Proč na ní záleží |
+| --- | --- |
+| Uvidí nástroj osobní údaje? | mění se právní, bezpečnostní a komunikační povinnosti |
+| Uvidí obchodně citlivé informace? | může jít o roadmapu, leady, ceny, interní poznámky nebo zákaznický kontext |
+| Půjdou data mimo EU nebo k mimoevropskému provozovateli? | vyžaduje další posouzení a často i smluvní opatření |
+| Lze data minimalizovat nebo pseudonymizovat? | sníží se riziko i rozsah zpracování |
+| Existuje export a výmaz? | bez toho se z nástroje stává past |
+| Umí tým vysvětlit použití uživateli? | pokud ne, pravděpodobně není připravené |
+
+Příklad: Pro jednoduché měření návštěvnosti blogu nepotřebuješ nástroj, který sbírá detailní profil člověka napříč stránkami a marketingovými kampaněmi. Pro bezpečnostní audit zase možná potřebuješ detailnější logy, ale s krátkou retencí, omezeným přístupem a bez obsahu zákaznických dat. Stejná věta „potřebujeme data“ má v každém scénáři jinou odpovědnost.
+
+### Komoditu nekóduj z ega
+
+Vlastní řešení dává smysl, když je schopnost strategická, datově citlivá nebo tě odlišuje. Nedává smysl jen proto, že tým nemá rád cizí UI.
+
+Typicky nekóduj od nuly:
+
+- základní fakturaci a platební infrastrukturu,
+- běžnou e-mailovou doručitelnost,
+- obecný helpdesk bez specifického workflow,
+- autentizační bezpečnost, pokud nemáš zkušenost a potřebu,
+- monitoring a alerting jen proto, že „to bude jednoduché“.
+
+Typicky zvaž vlastní nebo silně kontrolované řešení:
+
+- klíčovou produktovou logiku,
+- citlivé zpracování zákaznických dat,
+- exporty a mazání dat jako součást důvěry,
+- analytiku, kde chceš přesně řídit eventy, retenci a identifikátory,
+- workflow, které je jádrem produktu a ne jen interní pohodlí.
+
+Vlastní řešení není automaticky privacy-first. Špatně postavený vlastní nástroj může být horší než dobrý dodavatel. Rozdíl je v tom, jestli má vlastníka, dokumentaci, bezpečnostní postupy, testy, retenci a plán údržby.
+
+### Pilotuj s nejmenším bezpečným vzorkem
+
+Když nástroj nebo vlastní řešení testuješ, nezačínej produkčními daty. Ověř nejdřív schopnost.
+
+Bezpečný pilot:
+
+- má datum začátku a konce,
+- má jedno rozhodnutí, které má podpořit,
+- používá syntetická, anonymizovaná nebo zkrácená data,
+- má vlastníka úklidu,
+- předem říká, co se stane, když test nevyjde.
+
+Pilot bez úklidu je jen budoucí incident v pohodlném oblečení. Po skončení testu smaž testovací účty, exporty, dočasné tokeny, ukázková data a přístupy. Pokud nástroj zůstává, přepiš pilot kartu na normální vendor kartu.
+
+### Spočítej provozní cenu, ne jen fakturu
+
+Skutečná cena rozhodnutí zahrnuje:
+
+- měsíční nebo roční licenci,
+- čas integrace,
+- čas školení týmu,
+- údržbu oprávnění,
+- práci s exportem a výmazem,
+- kontrolu subdodavatelů,
+- incidentní postup,
+- migraci při odchodu,
+- dopad na výkon, UX a consent režim,
+- ztrátu flexibility, pokud se workflow přizpůsobí nástroji.
+
+Levný nástroj bez exportu může být drahý. Vlastní funkce bez údržby může být ještě dražší. Nejlepší rozhodnutí není vždy nejlevnější. Je to rozhodnutí, které tým umí provozovat i ve chvíli, kdy už nadšení z novinky zmizí.
+
+### Rozhodnutí zapiš jako kompromis
+
+Build vs. buy rozhodnutí má být krátké a čitelné. Stačí jedna karta:
+
+| Pole | Odpověď |
+| --- | --- |
+| Schopnost | co potřebujeme umět |
+| Aktuální problém | proč to řešíme teď |
+| Varianty | nedělat, ručně, koupit, postavit |
+| Zvolená varianta | co vybíráme |
+| Proč | hlavní důvod |
+| Data | jaká data varianta uvidí |
+| Privacy opatření | minimalizace, region, retence, přístupy, export |
+| Provozní vlastník | kdo to drží po spuštění |
+| Exit plán | jak odejdeme nebo vypneme |
+| Datum revize | kdy zkontrolujeme, jestli rozhodnutí pořád platí |
+
+Nejdůležitější řádek je „proč“. Za půl roku si nikdo nebude pamatovat debatu. Bude vidět jen nástroj, faktura, integrace a pár podivných kompromisů. Karta vysvětlí, proč tehdy dávaly smysl.
+
+### Checklist: Build vs. buy privacy-first
+
+- [ ] Schopnost je popsaná bez názvu konkrétního dodavatele.
+- [ ] Zvažovali jsme varianty nedělat, ručně, koupit a postavit.
+- [ ] Víme, jaká data každá varianta uvidí.
+- [ ] U dodavatele známe region, subdodavatele, export, výmaz, retenci a přístupy.
+- [ ] U vlastního řešení známe vlastníka, údržbu, bezpečnostní dopad a provozní náklady.
+- [ ] Pilot používá nejmenší bezpečný vzorek dat.
+- [ ] Test má datum ukončení a vlastníka úklidu.
+- [ ] Rozhodnutí obsahuje exit plán.
+- [ ] Po spuštění je v kalendáři revize, jestli varianta pořád dává smysl.
+- [ ] Pokud rozhodnutí mění data, souhlasy, skripty nebo dodavatele, je propsané do dokumentace a privacy textů.
+
+### Mini úkol
+
+Vyber jednu schopnost, kterou tým zvažuje koupit nebo postavit, a vyplň kartu:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jakou schopnost opravdu potřebujeme? |  |
+| Jaké rozhodnutí nebo workflow tím zlepšíme? |  |
+| Co se stane, když to tento měsíc neuděláme? |  |
+| Jak vypadá ruční varianta? |  |
+| Jak vypadá koupená varianta? |  |
+| Jak vypadá vlastní varianta? |  |
+| Jaká data každá varianta zpracuje? |  |
+| Která varianta má nejmenší rozumné riziko? |  |
+| Jaký bude pilot a kdy skončí? |  |
+| Jaký je exit plán? |  |
+
+Potom udělej jednu konkrétní změnu: zruš zbytečný nákup, napiš vendor kartu, vymez pilot na syntetická data, rozhodni se dočasně pro ruční proces, nebo zapiš, proč je vlastní řešení strategické. Build vs. buy není hlasování o oblíbeném nástroji. Je to rozhodnutí o kontrole, datech a budoucí údržbě.
+
 ## Zdroje
 
 - ICANN: Information for Domain Name Registrants - práva a odpovědnosti držitelů domén včetně správy, obnovy a převodu doménové registrace: https://www.icann.org/registrants
@@ -16403,6 +16563,7 @@ Hotovo není „máme poznámku z retro“. Hotovo je až ve chvíli, kdy člov�
 
 ## Pracovní log
 
+- 2026-07-14: Doplněna příloha o rozhodování build vs. buy bez drahého autopilota: popis schopnosti místo názvu nástroje, čtyři varianty rozhodnutí, datový dopad, kdy koupit a kdy stavět, bezpečný pilot, provozní cena, rozhodovací karta, checklist a mini úkol.
 - 2026-07-14: Doplněna příloha o projektovém playbooku bez zapomenutého učení: převod retrospektivních zjištění do konkrétních změn šablon a checklistů, členění playbooku podle momentu práce, hlavičky šablon, zabudování privacy pravidel do běžné operativy, měsíční údržba playbooku, příklad změn po projektu, checklist a mini úkol.
 - 2026-07-14: Doplněna příloha o projektové retrospektivě bez obviňování a datové skládky: retrospektiva po milnících, bezpečné vstupy místo surových chatů, rozdělení učení na proces/produkt/vztah, změny systému s vlastníkem, privacy úklid přístupů a exportů, přepis feedbacku na rozhodnutí, klientské shrnutí, checklist a mini úkol.
 - 2026-07-14: Doplněna příloha o průběžném řízení projektu bez statusového divadla: rytmus podle rizika, krátký status, ověřitelné úkoly, práce s blokery, malá dema, rozhodovací log, komunikace bez osobních soudů, změnové požadavky, checklist a mini úkol.
