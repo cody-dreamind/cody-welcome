@@ -14182,6 +14182,174 @@ Vezmi jednu rozpracovanou změnu, která čeká na klienta nebo interního schva
 
 Potom udělej jednu konkrétní opravu: napiš schvalovací větu, přesuň komentáře do jednoho kanálu, začerni citlivý screenshot, založ backlog položku pro nový požadavek nebo pošli shrnutí, co je schválené. Schvalování nemá být test trpělivosti. Má být mechanismus, který pomůže dobré práci bezpečně ven.
 
+## Příloha: Produktové screenshoty a videonávody bez úniku dat
+
+Screenshot a krátké demo video jsou často nejrychlejší způsob, jak vysvětlit produkt, prodat funkci, vyřešit support ticket nebo ukázat klientovi průběh práce. Jsou taky překvapivě rychlý způsob, jak omylem zveřejnit e-mail zákazníka, interní URL, token v adresním řádku, jméno účtu, neveřejnou metriku nebo hlášku z administrace, která měla zůstat doma v papučích.
+
+Privacy-first přístup neříká: „Nedělej screenshoty.“ Říká: „Zacházej se screenshotem jako s malým exportem dat.“ Protože přesně tím je. Obrazovka obsahuje nejen text, ale i kontext: kdo je přihlášený, co má za roli, jaké položky vidí, jaké integrace jsou napojené, jaké chyby se staly a někdy i to, jak firma uvnitř funguje.
+
+Špatná otázka zní: „Co všechno se vejde do obrázku?“
+
+Lepší otázka zní: „Jaký jeden výsledek má člověk z ukázky pochopit a jaký nejmenší bezpečný výřez k tomu stačí?“
+
+### Začni účelem ukázky
+
+Než otevřeš nástroj na nahrávání obrazovky, napiš si jednu větu:
+
+„Tato ukázka má člověku pomoct pochopit ___.“
+
+Příklady:
+
+- „Tato ukázka má novému adminovi pomoct pozvat prvního kolegu.“
+- „Tato ukázka má zákazníkovi ukázat, kde najde export faktur.“
+- „Tato ukázka má investorovi ukázat, že onboarding vede k první hodnotě bez ručního zásahu.“
+- „Tato ukázka má supportu pomoct rozpoznat chybnou konfiguraci webhooku.“
+
+Když účel neexistuje, vznikne univerzální desetiminutové video, kde se kliká na všechno, co se nehýbe. To není dokumentace. To je exkurze do náhodného dne v aplikaci.
+
+### Demo data nejsou výplň, ale bezpečnostní vrstva
+
+Nejlepší screenshot vzniká v prostředí, které bylo připravené pro ukázky. To znamená:
+
+- demo workspace,
+- demo uživatelé,
+- realistické, ale vymyšlené názvy,
+- testovací e-maily na doméně k tomu určené,
+- vymyšlené faktury, objednávky, zprávy a komentáře,
+- vypnuté nebo tupé integrace,
+- role nastavené podle scénáře,
+- žádné produkční exporty v historii stahování.
+
+Demo data nesmí působit jako „Lorem ipsum ve svetru“. Mají být realistická, aby člověk pochopil produkt, ale ne skutečná, aby se nemusel řešit únik. Třeba CRM ukázka nemusí obsahovat reálné leady. Může obsahovat firmu „Kavárna U Mostu“, kontakt „Eva Demo“ a poznámku „Zajímá se o rezervace pro firemní akce“. Je to dost konkrétní pro pochopení, ale nikoho tím neprodáš do datového bazaru.
+
+### Udělej před focením krátký vizuální audit
+
+Před screenshotem nebo nahráváním projdi obrazovku očima člověka, který hledá citlivé věci. Neřeš jen hlavní obsah. Nejčastější úniky bývají na okrajích:
+
+| Místo | Co zkontrolovat |
+| --- | --- |
+| Horní lišta | jméno uživatele, e-mail, avatar, workspace, interní ID |
+| URL | tokeny, query parametry, neveřejné cesty, interní subdomény |
+| Sidebar | názvy zákazníků, počet položek, role, neveřejné moduly |
+| Tabulky | osobní údaje, částky, stavy zakázek, interní poznámky |
+| Notifikace | obsah zpráv, jména lidí, systémové chyby |
+| DevTools | hlavičky, payloady, endpointy, cookies, lokální storage |
+| Desktop | soubory, názvy složek, jiné aplikace, kalendář, chat |
+
+Praktické pravidlo: pokud bys danou informaci neposlal veřejně v textu, nemá být náhodně vidět ani v rohu screenshotu.
+
+### Redakce má být nevratná
+
+Rozmazání v editoru je lepší než nic, ale ne každé rozmazání je bezpečné. U citlivých údajů používej plné překrytí, ořez nebo nahrazení demo daty. Černý obdélník není designová poezie, ale na rozdíl od efektního blur filtru obvykle neprozrazuje délku, strukturu ani část hodnoty.
+
+Dobré postupy:
+
+- ořízni obraz jen na potřebnou část,
+- nahraď data přímo v demo prostředí,
+- citlivé prvky překryj plnou barvou,
+- zkontroluj exportovaný soubor, ne jen náhled v editoru,
+- smaž dočasné pracovní kopie s neredigovanými daty,
+- nepoužívej screenshot s tajemstvím ani v interní prezentaci „jen pro tým“.
+
+Pozor na metadata souborů. U běžných screenshotů to často není hlavní problém, ale u fotek, exportů z grafických nástrojů a nahrávek se může přibalit víc kontextu, než chceš sdílet. Minimální bezpečný zvyk: exportuj finální verzi do nového souboru, pojmenuj ji věcně a zkontroluj, že pracovní originál neopouští interní úložiště.
+
+### Videonávod piš jako scénář, ne jako improvizaci
+
+Video je riskantnější než screenshot, protože zachytí cestu, omyly, notifikace, adresní řádek, přepínání oken a někdy i to, že někdo během nahrávání neumí najít tlačítko. To je lidské. Ale veřejná dokumentace není reality show z produkce.
+
+Krátký scénář před nahráváním:
+
+| Krok | Obsah |
+| --- | --- |
+| Výsledek | Co má uživatel po videu umět? |
+| Publikum | Pro koho je video: nový uživatel, admin, klient, support? |
+| Prostředí | Jaký demo účet a jaká role se použije? |
+| Data | Jaké demo záznamy musí být připravené? |
+| Hranice | Co se ve videu záměrně neukazuje? |
+| Stop signál | Co při nahrávání znamená stop a nový pokus? |
+| Distribuce | Kde bude video uložené a kdo ho uvidí? |
+
+U většiny produktových videí stačí 60 až 180 sekund. Delší video už často není návod, ale malá přednáška. Pokud potřebuješ víc, rozděl téma na samostatné úkoly: vytvoření účtu, nastavení role, export dat, pozvánka kolegy, vyřešení chyby. Člověk nehledá filmový zážitek. Hledá „kde mám kliknout, aby mě produkt přestal nenápadně soudit“.
+
+### Přístupnost není bonus pro hodné projekty
+
+Screenshot bez popisu a video bez titulků často pomůže jen části lidí. Pokud je ukázka součástí dokumentace, supportu, školení nebo veřejného marketingu, přidej textovou alternativu: krátký popis obrázku, kroky pod videem, titulky nebo přepis. W3C WAI doporučuje u audio a video obsahu řešit titulky, přepisy a další alternativy podle typu média a potřeb uživatelů.
+
+Praktické minimum:
+
+- u screenshotu napiš, co má člověk vidět a proč je to důležité,
+- u videa přidej kroky v textu,
+- důležité informace nedávej jen do obrazu bez textu,
+- neříkej ve videu „klikněte sem“ bez pojmenování prvku,
+- kontroluj, že titulky neobsahují špatně přepsaná jména, e-maily nebo interní zkratky,
+- nenechávej přístupnost až na konec, kdy už je video sestříhané a všichni jsou unavení.
+
+Privacy-first a přístupnost spolu nejsou v konfliktu. Textová alternativa může být dokonce bezpečnější než video, protože popíše potřebný krok bez toho, aby ukázala celou obrazovku.
+
+### Veřejná knihovna ukázek potřebuje vlastníka
+
+Screenshoty a videa stárnou rychle. Produkt se změní, text v UI se přepíše, pricing se upraví, právní formulace dostane novou verzi, integrace přestane existovat. Starý screenshot pak není jen nehezký. Může být zavádějící.
+
+Každá veřejná ukázka by měla mít malou kartu:
+
+| Pole | Příklad |
+| --- | --- |
+| Účel | Návod pro admina k pozvání kolegy |
+| Vlastník | Product marketing |
+| Prostředí | Demo workspace `demo-admin` |
+| Data | Vymyšlené osoby a firmy |
+| Umístění | Dokumentace, článek, onboarding e-mail |
+| Poslední revize | 2026-07-14 |
+| Další revize | Po změně navigace nebo do 3 měsíců |
+| Riziko | Ukazuje role a část nastavení účtu |
+
+Nemusí to být velký systém. Stačí tabulka v dokumentaci. Důležité je, aby někdo věděl, které ukázky existují a kdy se mají zahodit. Nejhorší obsahový archiv je složka `final-final-new-2` sdílená přes tři nástroje a jednu vzpomínku.
+
+### Interní sdílení není automaticky bezpečné
+
+„Je to jen interně“ není bezpečnostní plán. Interní screenshoty často končí v chatu, v issue trackeru, v prezentaci, v e-mailu klientovi nebo jako příloha v supportním systému. Proto i interní ukázky potřebují rozumné minimum:
+
+- nepřikládej produkční data, pokud stačí textový popis,
+- u chyb používej korelační ID místo celého payloadu,
+- u supportu odděl screenshot od osobních poznámek,
+- u klientského schvalování používej redigovanou verzi,
+- u incidentů sdílej detail jen s lidmi, kteří ho potřebují řešit,
+- po vyřešení smaž dočasné soubory z pracovních složek.
+
+Codyho komentář: Screenshot je v týmu oblíbený, protože je rychlý. Jenže rychlost bez kontroly je občas jen elegantnější způsob, jak si vytvořit důkazní materiál proti vlastnímu procesu.
+
+### Checklist: Screenshoty a videonávody privacy-first
+
+- [ ] Každá ukázka má jeden jasný účel.
+- [ ] Screenshot nebo video vzniká v demo prostředí, pokud to jde.
+- [ ] Demo data jsou realistická, ale nejsou převzatá z produkce.
+- [ ] Před nahráváním je zkontrolovaná URL, horní lišta, sidebar, notifikace, tabulky a desktop.
+- [ ] Citlivé údaje jsou odstraněné, oříznuté nebo nevratně překryté.
+- [ ] Finální soubor je zkontrolovaný po exportu.
+- [ ] Dočasné pracovní kopie s neredigovanými daty se smažou.
+- [ ] Videonávod má scénář, připravený demo účet a stop signály.
+- [ ] Důležité kroky existují i v textové podobě.
+- [ ] Titulky, přepis nebo popis neobsahují citlivé údaje.
+- [ ] Veřejné ukázky mají vlastníka a datum revize.
+- [ ] Interní screenshoty se neposílají dál jako náhrada bezpečného exportu.
+
+### Mini úkol
+
+Vyber jeden screenshot, video nebo produktovou ukázku, kterou používáš v dokumentaci, sales materiálu, supportu nebo klientském schvalování, a vyplň kartu:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Kde se ukázka používá? |  |
+| Jaký jeden výsledek má vysvětlit? |  |
+| Z jakého prostředí vznikla? |  |
+| Obsahuje reálná jména, e-maily, firmy, částky nebo interní URL? |  |
+| Stačil by menší výřez, demo data nebo textový popis? |  |
+| Kdo je vlastník ukázky? |  |
+| Kdy se má znovu zkontrolovat? |  |
+| Kde jsou uložené pracovní originály? |  |
+
+Potom udělej jednu opravu: nahraď reálné údaje demo daty, ořízni obrázek, dopiš textové kroky pod video, smaž starý neredigovaný soubor nebo přidej datum revize. Návod má člověku pomoct, ne potichu vynést z produktu víc, než bylo potřeba.
+
 ## Zdroje
 
 - ICANN: Information for Domain Name Registrants - práva a odpovědnosti držitelů domén včetně správy, obnovy a převodu doménové registrace: https://www.icann.org/registrants
@@ -14240,6 +14408,7 @@ Potom udělej jednu konkrétní opravu: napiš schvalovací větu, přesuň kome
 - European Data Protection Board: Guidelines on the right to data portability under Regulation 2016/679, WP242 rev.01 - pokyny k právu na přenositelnost údajů a použitelným strukturovaným formátům: https://www.edpb.europa.eu/documents/guideline/guidelines-on-the-right-to-data-portability-under-regulation-2016679-wp242_en
 - European Commission: Information for individuals - praktický přehled práv jednotlivců podle ochrany osobních údajů v EU: https://commission.europa.eu/law/law-topic/data-protection/information-individuals_en
 - European Commission: Principles of the GDPR - přehled principů jako transparentnost, účelové omezení, minimalizace dat a omezení uchování: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr_en
+- European Commission: How much data can be collected? - praktické vysvětlení minimalizace osobních údajů a sběru jen toho, co je nezbytné pro konkrétní účel: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr/how-much-data-can-be-collected_en
 - European Commission: For how long can data be kept and is it necessary to update it? - praktické vysvětlení omezení doby uložení, mazání nebo review dat a vazby na účel zpracování: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr/how-long-can-data-be-kept-and-it-necessary-update-it_en
 - European Data Protection Board: FAQ for small business - praktické odpovědi k osobním údajům, pseudonymizaci, anonymizaci, právům jednotlivců a rolím správce/zpracovatele: https://www.edpb.europa.eu/sme/find-practical-info/faq_en
 - European Commission: What data can we process and under which conditions? - praktické vysvětlení účelu, rozsahu a základních pravidel zpracování osobních údajů: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr/overview-principles/what-data-can-we-process-and-under-which-conditions_en
@@ -14294,6 +14463,7 @@ Potom udělej jednu konkrétní opravu: napiš schvalovací větu, přesuň kome
 - MDN Web Docs: ETag header - identifikace verze zdroje pro efektivnější cache: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/ETag
 - W3C: Web Content Accessibility Guidelines 2.2 - doporučení pro přístupný webový obsah: https://www.w3.org/TR/WCAG22/
 - W3C WAI: WCAG 2 Overview - principy vnímatelnosti, ovladatelnosti, srozumitelnosti a robustnosti: https://www.w3.org/WAI/standards-guidelines/wcag/
+- W3C WAI: Making Audio and Video Media Accessible - praktický přehled titulků, přepisů, audio popisů a dalších alternativ pro audio a video obsah: https://www.w3.org/WAI/media/av/
 - GOV.UK Service Manual: Learning about users and their needs - definice user needs a práce s uživatelskými potřebami: https://www.gov.uk/service-manual/user-research/start-by-learning-user-needs
 - Y Combinator Startup Library: How to talk to users - doporučení pro rozhovory s uživateli v rané fázi produktu: https://www.ycombinator.com/library/Iq-how-to-talk-to-users
 - Nielsen Norman Group: Onboarding: Skip it When Possible - rizika povinných úvodních instrukcí v onboardingu: https://www.nngroup.com/videos/onboarding-skip-it-when-possible/
@@ -14301,6 +14471,7 @@ Potom udělej jednu konkrétní opravu: napiš schvalovací větu, přesuň kome
 
 ## Pracovní log
 
+- 2026-07-14: Doplněna příloha o produktových screenshotech a videonávodech bez úniku dat: účel ukázky, demo data, vizuální audit před nahráváním, nevratná redakce, scénář videonávodu, přístupné alternativy, vlastnictví veřejných ukázek, interní sdílení, checklist a mini úkol; ověřeny a doplněny zdroje Evropské komise k minimalizaci dat a W3C WAI k přístupným audio/video médiím.
 - 2026-07-13: Doplněna příloha o klientském schvalování změn bez nekonečného kolečka: definice hotovo, typy připomínek, jeden kanál a vlastník, bezpečné preview bez produkčních dat, feedback podle rozhodnutí, oddělení nových požadavků od aktuální dodávky, písemné uzavření kola, checklist a mini úkol.
 - 2026-07-13: Doplněna příloha o externí spolupráci bez předání klíčů od provozu: zadání před přístupem, role externistů, staging a demo data jako výchozí stav, bezpečné předávání secrets, smluvní a datová kontrolní karta, auditní stopa změn, offboarding dodavatelů, checklist a mini úkol; navázáno na existující zdroje Evropské komise, GDPR článku 28, SCC a OWASP Secrets Management.
 - 2026-07-13: Doplněna příloha o referencích a případových studiích bez úniku důvěry: účel důkazu, karta schválení reference, anonymizované case studies, kontext čísel, bezpečné screenshoty, schvalování citací, struktura případové studie, revize, checklist a mini úkol.
