@@ -17227,6 +17227,199 @@ Vyber jednu skupinu bývalých zákazníků, kde se od jejich odchodu něco opra
 
 Potom pošli maximálně jednu malou vlnu. Žádná plošná sekvence na všechny bývalé účty, žádné reklamní pronásledování, žádná dramatická sleva jen proto, že graf chce obejmout. Buď konkrétní, stručný a připravený přijmout ticho jako odpověď.
 
+## Příloha: Sales handoff do onboardingu bez ztráty kontextu
+
+Obchod uzavřel zákazníka. Všichni si oddechnou, CRM ukáže hezký stav a tým má pocit, že práce je hotová. Jenže pro zákazníka práce teprve začíná. Pokud se kontext z prodeje nepředá do onboardingu, první týdny často vypadají jako opakovaný výslech: „Co vlastně potřebujete? Kdo u vás rozhoduje? Jaký problém řešíme? Co jsme vám slíbili?“
+
+To je drahé pro tým a nepříjemné pro zákazníka. Navíc to svádí k tomu, aby se do CRM ukládalo všechno, protože „někdy se to může hodit“. Privacy-first handoff dělá opak: předává jen kontext, který pomůže dodat slíbenou hodnotu, a zbytek nechává v minulosti.
+
+Špatná otázka zní: „Jak předáme celý sales thread, všechny poznámky a nahrávku hovoru?“
+
+Lepší otázka zní: „Co musí onboarding tým vědět, aby zákazník rychle dosáhl první hodnoty, bez kopírování zbytečných osobních a obchodně citlivých detailů?“
+
+### Handoff není přeposlání CRM poznámek
+
+CRM poznámky často vznikají pro obchodní rozhodnutí. Onboarding ale potřebuje jiný typ informací: očekávaný výsledek, domluvený rozsah, rizika zavedení, role lidí a první praktický krok.
+
+Dobrá handoff karta má být krátká:
+
+| Oblast | Co předat | Co nepředávat automaticky |
+| --- | --- | --- |
+| Výsledek | Jaký konkrétní výsledek zákazník čeká | obecné dojmy z osobnosti lidí |
+| Use case | Který pracovní scénář řeší první | celý seznam všech možných nápadů |
+| Rozsah | Co bylo slíbeno a co výslovně ne | interní obchodní taktiku |
+| Rizika | Co může zpomalit první hodnotu | spekulace bez důkazu |
+| Role | Kdo je admin, rozhodovatel, technický kontakt | soukromé poznámky o lidech |
+| Data | Jaká data budou potřeba pro start | produkční exporty bez jasného účelu |
+| Termín | Kdy má být první ověřitelný výsledek | tlak typu „musí být nadšený do pátku“ |
+
+Praktické pravidlo: pokud by informace nepomohla onboardingu udělat konkrétní krok, nepatří do handoffu. Může zůstat v obchodní historii podle retenčních pravidel, ale nemá se bezmyšlenkovitě kopírovat do dalšího nástroje.
+
+### Předávej sliby, ne nálady
+
+Nejnebezpečnější věta v onboarding startu je: „Sales asi něco slíbil.“ Když tým neví, co bylo slíbeno, začne improvizovat. Zákazník pak slyší jiné formulace v nabídce, ve smlouvě, v kickoffu a v supportu. To je ideální recept na zklamání. Gratuluju, máme drama z jednoho chybějícího odstavce.
+
+Handoff má obsahovat explicitní seznam závazků:
+
+- jaký plán, rozsah nebo balíček zákazník koupil,
+- které funkce jsou součástí startu,
+- co je individuální konfigurace,
+- co je mimo rozsah,
+- co je závislé na datech nebo součinnosti zákazníka,
+- jaký je první úspěšný milník.
+
+Příklad:
+
+```text
+Zákazník kupuje týmový plán pro 18 lidí. První hodnota: administrátor do 10 pracovních dnů importuje aktivní klienty, nastaví tři role a pozve první pilotní skupinu. Integrace na účetní systém není součástí startu; má se vrátit jako samostatné rozhodnutí po ověření importu.
+```
+
+Tohle je použitelné. „Klient chce modernizovat workflow a je hodně motivovaný“ je hezké, ale onboarding podle toho nepostavíš.
+
+### První hodnota musí přežít předání
+
+Sales často prodává výsledek. Onboarding ho musí převést na první ověřitelnou akci. Pokud se to nestane, nový zákazník dostane přístup, pár instrukcí a očekávání, že si cestu najde sám. Někteří to zvládnou. Ostatní začnou pochybovat, jestli koupili správně.
+
+Převod výsledku na první hodnotu:
+
+| Prodaný výsledek | První hodnota v onboardingu |
+| --- | --- |
+| „Zrychlit práci podpory“ | První tři typické dotazy mají připravené odpovědi nebo workflow. |
+| „Mít přehled o projektech“ | Jeden reálný projekt má nastavené stavy, vlastníky a deadline. |
+| „Omezit ruční přepisování“ | Jeden import proběhne na bezpečném vzorku a zákazník vidí chybový report. |
+| „Zlepšit fakturaci“ | Admin umí vystavit nebo exportovat první testovací doklad v domluveném režimu. |
+
+Onboarding plán nemusí být dlouhý. Má ale chránit jeden konkrétní moment, kdy zákazník poprvé řekne: „Aha, tohle nám opravdu pomůže.“
+
+### Nepřenášej produkční data dřív, než víš proč
+
+Předání ze sales do onboardingu často spustí větu: „Pošlete nám export a my se na to podíváme.“ Někdy je export potřeba. Často je to ale pohodlná zkratka, která přinese víc rizika než užitku.
+
+Nejdřív si napiš:
+
+- Jaký onboarding krok bez dat nejde udělat?
+- Stačí vzorek, demo data nebo anonymizovaná sada?
+- Kdo bude mít k datům přístup?
+- Kde budou data uložená?
+- Kdy se smažou?
+- Jak poznáme, že už nejsou potřeba?
+
+Privacy-first alternativa:
+
+1. Začni demo scénářem nebo prázdným workspace.
+2. Pokud je nutný import, vezmi nejmenší bezpečný vzorek.
+3. Před uploadem zákazníkovi řekni, co nemá posílat.
+4. Po dokončení importu smaž dočasné soubory podle pravidel.
+5. Do handoffu zapiš výsledek importu, ne kopii dat.
+
+Dočasné soubory jsou zvláštní forma technického dluhu. Na začátku vypadají nevinně, po půl roce leží v cizí složce a všichni doufají, že se jmenují „final_final_import.xlsx“ jen z nostalgie.
+
+### Role a přístupy řeš jako onboardingový produkt
+
+Nový zákazník nepotřebuje na začátku rozdané maximum přístupů. Potřebuje správné lidi ve správném pořadí. Rozdíl je velký.
+
+Praktické vlny:
+
+1. Admin nebo vlastník účtu: nastaví základ, fakturaci, role a bezpečnostní pravidla.
+2. Pilotní skupina: ověří první workflow na malém rozsahu.
+3. Zbytek týmu: přidá se až ve chvíli, kdy existuje ověřený postup.
+4. Externisté nebo partneři: dostanou jen konkrétní roli pro konkrétní úkol.
+
+Handoff má říct, kdo je za tyto vlny odpovědný. Ne „někdo od klienta“. Konkrétní role, ideálně jméno jen tam, kde je to pro spolupráci opravdu potřeba.
+
+Příklad role mapy:
+
+| Role | Účel | Kdy ji zapojit | Poznámka |
+| --- | --- | --- | --- |
+| Sponsor | potvrzuje obchodní výsledek | začátek a první review | nepotřebuje každodenní notifikace |
+| Admin | nastavuje produkt | od prvního dne | potřebuje onboarding checklist |
+| Pilotní uživatel | ověřuje workflow | po základním nastavení | pracuje s omezeným scénářem |
+| Finance | kontroluje billing | před první fakturou nebo exportem | nepotřebuje produktová data mimo účel |
+
+### Handoff schůzka má mít pevný výstup
+
+Pokud děláš handoff synchronně, schůzka nemá být volné vyprávění salesu. Má skončit jedním schváleným záznamem, který onboarding tým opravdu použije.
+
+Agenda na 20 minut:
+
+1. Výsledek, který zákazník koupil.
+2. První hodnota a první milník.
+3. Domluvený rozsah a věci mimo rozsah.
+4. Rizika zavedení.
+5. Potřebná data a přístupy.
+6. Další krok, vlastník a datum.
+
+Výstup:
+
+```text
+Handoff uzavřen:
+- první milník:
+- vlastník u zákazníka:
+- vlastník u nás:
+- potřebná data:
+- zakázaná nebo zatím nepotřebná data:
+- hlavní riziko:
+- další krok do:
+```
+
+Bez výstupu to není handoff. Je to podcast s interní licencí.
+
+### Měř předání podle tření v prvních týdnech
+
+Sales handoff nemá vlastní dashboard pro parádu. Stačí několik signálů, které ukážou, jestli předání snižuje tření.
+
+Užitečné signály:
+
+- kolik onboardingů začalo bez jasného prvního milníku,
+- kolikrát se zákazník musel ptát na věc, která byla domluvená už v salesu,
+- kolik závazků bylo nejasných nebo v rozporu s nabídkou,
+- kolik dočasných exportů vzniklo a bylo včas smazáno,
+- kolik přístupů se rozdalo předčasně,
+- jak rychle zákazník dosáhl první hodnoty.
+
+Vyhodnocení napiš jako zlepšení systému:
+
+| Problém | Systémová oprava |
+| --- | --- |
+| Onboarding neznal slíbený rozsah | Přidat povinné pole „závazky a mimo rozsah“ do handoff karty |
+| Zákazník poslal celý export moc brzy | Přidat předuploadový text „co neposílat“ |
+| Admin nevěděl, koho pozvat jako první | Doplnit role mapu do kickoffu |
+| Sales sliboval integraci bez technické kontroly | Zavést předprodejní technický check pro rizikové integrace |
+
+### Checklist: Sales handoff privacy-first
+
+- [ ] Handoff karta obsahuje výsledek, první hodnotu, rozsah, rizika, role, data a další krok.
+- [ ] Onboarding dostává závazky a kontext, ne surový výpis všech CRM poznámek.
+- [ ] Je jasné, co bylo slíbeno, co je mimo rozsah a co je samostatné rozhodnutí.
+- [ ] První hodnota je popsána jako ověřitelný zákaznický milník.
+- [ ] Produkční data se nepřenášejí dřív, než existuje jasný účel.
+- [ ] Pro import nebo migraci existuje nejmenší bezpečný vzorek nebo demo varianta.
+- [ ] Dočasné soubory mají vlastníka, místo uložení a datum smazání.
+- [ ] Role a přístupy se zapojují po vlnách.
+- [ ] Handoff schůzka končí jedním schváleným záznamem.
+- [ ] Tření v prvních týdnech se používá k opravě šablony, ne k hledání viníka.
+- [ ] Sales, onboarding a support sdílí stejnou formulaci hlavního zákaznického výsledku.
+- [ ] Po prvním milníku proběhne krátké review, co příště předat lépe.
+
+### Mini úkol
+
+Vyber jednoho nového nebo nedávno získaného zákazníka a vyplň handoff kartu:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jaký výsledek zákazník koupil? |  |
+| Jaká je první ověřitelná hodnota? |  |
+| Co bylo výslovně slíbeno? |  |
+| Co je mimo rozsah startu? |  |
+| Kdo je admin, sponsor a pilotní uživatel? |  |
+| Jaká data jsou pro první krok opravdu nutná? |  |
+| Jaká data zatím nechceme dostat? |  |
+| Které přístupy budou potřeba v první vlně? |  |
+| Jaké je hlavní riziko zavedení? |  |
+| Jaký je další krok, vlastník a datum? |  |
+
+Potom kartu porovnej s tím, co je dnes v CRM, nabídce a onboarding checklistu. Pokud se liší, neopravuj jen konkrétního zákazníka. Oprav šablonu. Jedno dobré předání má pomoci i dalšímu zákazníkovi, ne jen zalepit aktuální zmatek.
+
 ## Zdroje
 
 - ICANN: Information for Domain Name Registrants - práva a odpovědnosti držitelů domén včetně správy, obnovy a převodu doménové registrace: https://www.icann.org/registrants
@@ -17353,6 +17546,7 @@ Potom pošli maximálně jednu malou vlnu. Žádná plošná sekvence na všechn
 
 ## Pracovní log
 
+- 2026-07-14: Doplněna příloha o sales handoffu do onboardingu bez ztráty kontextu: handoff karta, předávání závazků místo nálad, převod prodaného výsledku na první hodnotu, opatrná práce s produkčními daty, vlny rolí a přístupů, struktura handoff schůzky, měření tření v prvních týdnech, checklist a mini úkol.
 - 2026-07-14: Doplněna příloha o win-backu bez remarketingového stalkingu: výběr vhodných bývalých zákazníků podle skutečné změny, lidský důvod kontaktu, opatrná personalizace, bezpečná reaktivace účtu, agregované měření návratu, použití učení i bez reaktivace, checklist a mini úkol.
 - 2026-07-14: Doplněna příloha o churnu a odchodu zákazníka bez výslechového formuláře: rozlišení typů odchodu, férový zrušovací tok, dobrovolný krátký dotazník, alternativy bez panické slevy, jasný datový dopad, měsíční churn review, oddělení zrušení/výmazu/preferencí, checklist a mini úkol.
 - 2026-07-14: Doplněna příloha o upgrade momentech bez nátlakového paywallu: mapa hodnoty před zamčenými funkcemi, lidské vysvětlení limitů, férové alternativy k platbě, měření upgrade rozhodnutí bez profilování, opatrnost u základní bezpečnosti a datových práv, pravidla downgradu, checklist a mini úkol.
