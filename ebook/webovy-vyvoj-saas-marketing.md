@@ -14669,6 +14669,159 @@ Vyber jednu interní složku, wiki prostor nebo projektovou dokumentaci. Vyplň 
 
 Potom udělej jednu opravu: doplň vlastnickou hlavičku, přesuň zákaznický detail zpět do ticketu, rediguj screenshot, vytvoř krátký rozhodovací záznam, nastav expiraci draftu nebo smaž starý export. Znalostní báze má být paměť týmu, ne datová půda s neznámými dveřmi.
 
+## Příloha: Vícejazyčný web a SaaS bez lokalizačního chaosu
+
+Evropský web dřív nebo později narazí na jazyky. Čeština stačí pro lokální důvěru, angličtina otevírá export, němčina nebo polština můžou zvednout konverzi v konkrétním segmentu. Problém začíná ve chvíli, kdy se lokalizace bere jako jednorázový překlad textů a ne jako produktový systém.
+
+Vícejazyčnost není jen otázka slovníku. Je to rozhodnutí o URL, obsahu, podpoře, cenách, právních textech, e-mailech, vyhledávání, analytice a údržbě. Když se to podcení, vznikne web, kde česká homepage slibuje jednu věc, anglický pricing druhou, německé e-maily třetí a support pak hraje tlumočníka v improvizačním divadle.
+
+> Codyho komentář: Překlad není kouzelný prach na růst. Pokud nemáš kapacitu v daném jazyce odpovídat, prodávat a udržovat obsah, je lepší mít jednu poctivou jazykovou verzi než pět polomrtvých mutací. Ano, i angličtina se dá napsat tak, že bolí fyzicky.
+
+### Začni jazykovou strategií, ne přepínačem v hlavičce
+
+První otázka nezní „kam dáme language switcher“. První otázka zní: „Proč tento jazyk existuje a co v něm umíme obsloužit?“
+
+U každé jazykové verze si napiš krátkou kartu:
+
+| Položka | Příklad |
+| --- | --- |
+| Jazyk a region | čeština pro ČR, angličtina pro EU export, němčina pro DACH segment |
+| Cílový segment | výrobní firmy, SaaS zakladatelé, agentury, veřejný sektor |
+| Hlavní účel | poptávka, self-service registrace, dokumentace, hiring |
+| Rozsah obsahu | celý web, jen landing page, dokumentace, blog, pricing |
+| Vlastník | kdo ručí za věcnou správnost a aktualizace |
+| Podpora | v jakém jazyce odpovídá sales/support |
+| Riziko | právní texty, ceny, lokální reference, zastarávání |
+
+Tahle karta brání tomu, aby se lokalizace rozlezla podle nálady. Pokud anglická verze slouží jen pro exportní landing page, nemusí automaticky obsahovat celý blog, staré tiskové zprávy a interní slovníček. Pokud německá verze míří na placený segment, nestačí přeložit hero. Potřebuje důkaz, pricing, kontakt a follow-up v jazyce, kterému zákazník věří.
+
+### URL struktura je provozní rozhodnutí
+
+Vícejazyčný web potřebuje stabilní URL. Nejčastější praktické varianty:
+
+- `/cs/`, `/en/`, `/de/` pro jazykové složky na jedné doméně,
+- `cs.example.com`, `en.example.com` pro subdomény,
+- samostatné domény pro regiony, když existuje silný obchodní nebo právní důvod.
+
+Pro malou evropskou firmu bývá nejčitelnější jazyková složka na jedné doméně. Drží autoritu webu pohromadě, jednoduše se provozuje a je jasná pro lidi i vyhledávače. Důležité ale je, aby každá jazyková verze měla vlastní konkrétní URL. Automatické překlápění podle IP nebo `Accept-Language` může být pohodlné, ale nesmí člověku sebrat možnost otevřít, sdílet a znovu navštívit konkrétní jazykovou stránku.
+
+Praktické pravidlo:
+
+- Přesměrování podle jazyka prohlížeče používej opatrně.
+- Vždy nech ruční přepnutí jazyka.
+- Ulož preferenci jen tehdy, když je to skutečně preference uživatele.
+- Nedělej z jazykové preference marketingový profil.
+- Každý překlad stránky má mít vlastní canonical logiku a vazbu na ostatní jazykové verze.
+
+### `lang`, `hreflang` a metadata nejsou SEO ozdoba
+
+Technická lokalizace má pomoct lidem, čtečkám, prohlížečům i vyhledávačům pochopit jazyk stránky. W3C doporučuje deklarovat jazyk obsahu v HTML pomocí atributu `lang`; Google Search Central popisuje, jak vyhledávačům sdělit lokalizované verze stránky pomocí `hreflang` a jak přemýšlet o vícejazyčných webech. Nejde o trik. Je to základní provozní hygiena.
+
+Minimální kontrola pro každou jazykovou stránku:
+
+- HTML dokument má správný `lang`, například `cs`, `en` nebo `de`.
+- Titulek, meta description, Open Graph texty a strukturovaná data jsou ve stejném jazyce jako stránka.
+- Jazykové varianty se vzájemně odkazují přes `hreflang`, pokud opravdu existují jako ekvivalentní stránky.
+- Jazykový přepínač vede na odpovídající stránku, ne vždy na homepage.
+- Sitemap obsahuje aktuální URL a nevystavuje staré překlady jako živý obsah.
+- Stránka nemíchá jazyky tak, že primární obsah je česky a CTA anglicky jen proto, že to zůstalo v komponentě.
+
+Příklad chyby: česká stránka `/cs/cenik` má v patičce přepínač na `/en`, protože anglická pricing stránka ještě neexistuje. To není lokalizace, to je teleport do jiné fáze nákupní cesty. Férovější je buď anglický protějšek vytvořit, nebo přepínač vést na nejbližší relevantní anglický obsah s jasným kontextem.
+
+### Nepřekládej všechno najednou
+
+Nejhorší lokalizační plán je „přeložíme celý web“. Je velký, drahý a často skončí tím, že nikdo neví, co se změnilo a kdo to bude udržovat.
+
+Začni podle obchodní hodnoty:
+
+1. Homepage nebo segmentová landing page.
+2. Pricing nebo stránka služby, pokud existuje nákupní úmysl.
+3. Kontaktní/poptávkový tok včetně potvrzovacích e-mailů.
+4. Základní dokumentace k tomu, co zákazník potřebuje před první hodnotou.
+5. Právní a privacy texty, pokud v daném jazyce reálně prodáváš nebo obsluhuješ uživatele.
+6. Blog a dlouhý obsah až ve chvíli, kdy existuje redakční rytmus.
+
+Tím se lokalizace napojí na produktovou cestu. Návštěvník nepřijde na krásně přeloženou landing page a nespadne do českého formuláře s e-mailem „Děkujeme za poptávku, ozveme se“. To je jazykový výmol přesně tam, kde se rozhoduje důvěra.
+
+### Překladové workflow potřebuje vlastníka
+
+Lokalizace se rozbíjí při změnách. Někdo upraví český pricing, ale anglický zůstane starý. Někdo přidá nové pole do formuláře, ale validační hláška zůstane v původním jazyce. Někdo vydá článek a zapomene, že jeho interní odkazy vedou jen na české verze.
+
+Zaveď jednoduchý workflow:
+
+- Každý text má zdrojovou verzi a vlastníka.
+- Každá jazyková verze má stav: aktuální, potřebuje revizi, záměrně chybí, archivováno.
+- Produktové změny obsahují kontrolu dopadu na překlady.
+- Právní, pricing a billing texty se nepřekládají ad hoc bez kontroly.
+- Překladatel nebo AI asistent dostává kontext: cílový segment, tone of voice, zakázané výrazy, význam produktu.
+- Po překladu následuje věcná kontrola někým, kdo rozumí produktu.
+
+AI může pomoct s prvním návrhem, konzistencí a rychlým porovnáním změn. Privacy-first pravidlo je jednoduché: do překladového nástroje neposílej zákaznická data, neveřejné smlouvy, produkční logy ani interní obchodní detaily, pokud k tomu nemáš jasný důvod, smluvní rámec a kontrolu nad daty. Marketingová věta se překládá snadno. Tabulka reálných zákaznických problémů už je jiná disciplína.
+
+### Lokalizuj i produktové okraje
+
+U SaaS nestačí přeložit veřejný web. Zákazník si všimne okrajů:
+
+- registrační formuláře,
+- validační chyby,
+- onboardingové kroky,
+- transakční e-maily,
+- fakturační texty,
+- pozvánky do workspace,
+- notifikace,
+- exporty,
+- support šablony,
+- chybové stránky,
+- stavová stránka,
+- dokumentace a changelog.
+
+Nemusí být všechno hned ve všech jazycích. Musí ale být jasné, co je podporované a co není. Pokud je produktové rozhraní anglicky, ale obchodní landing page česky, napiš to lidsky. Pokud support odpovídá česky a anglicky, nedělej dojem, že zvládne deset jazyků. Důvěra často nevzniká tím, že slíbíš víc. Vzniká tím, že překvapivě přesně držíš to, co slíbíš.
+
+### Měř lokalizaci bez profilování lidí
+
+Vícejazyčnost se dá řídit bez sledování jednotlivců. Stačí malé množství agregovaných signálů:
+
+- návštěvy podle jazykové verze a typu stránky,
+- klik na hlavní CTA v daném jazyce,
+- dokončené formuláře podle jazykové URL,
+- kvalita poptávek podle jazyka a segmentu,
+- opakované support dotazy, které ukazují na slabý překlad nebo chybějící dokumentaci,
+- ruční review nejdůležitějších jazykových cest jednou měsíčně.
+
+Nesbírej jazyk jako další osobní profilovou vlastnost, pokud podle něj neděláš konkrétní férové rozhodnutí. Jazyková preference má primárně sloužit k tomu, aby člověk dostal srozumitelný obsah, ne aby se z něj stala další kolonka v marketingovém scoringu.
+
+### Checklist: Vícejazyčný web privacy-first
+
+- [ ] Každý podporovaný jazyk má jasný účel, segment, rozsah a vlastníka.
+- [ ] Jazykové verze mají stabilní URL, které lze otevřít a sdílet.
+- [ ] Přesměrování podle jazyka neblokuje ruční výběr a konkrétní URL.
+- [ ] Stránky mají správný `lang`, lokalizované titulky, meta popisy a sociální metadata.
+- [ ] Ekvivalentní jazykové stránky jsou propojené přes `hreflang`.
+- [ ] Jazykový přepínač vede na odpovídající obsah, ne slepě na homepage.
+- [ ] Pricing, formuláře, potvrzovací e-maily a chybové stavy odpovídají jazyku nákupní cesty.
+- [ ] Překlady mají stav aktuálnosti a produktové změny kontrolují dopad na lokalizaci.
+- [ ] AI nebo externí překladové nástroje nedostávají citlivá zákaznická nebo interní data bez jasného rámce.
+- [ ] Právní a privacy texty jsou kontrolované jako obsah s dopadem, ne jako běžná marketingová věta.
+- [ ] Měření jazykových verzí pracuje s agregovanými signály a nepřidává zbytečné profilování.
+- [ ] Tým ví, které jazyky umí reálně obsloužit v sales, supportu a provozu.
+
+### Mini úkol
+
+Vyber jednu existující nebo plánovanou jazykovou verzi a vyplň tabulku:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Proč tento jazyk potřebujeme? |  |
+| Pro koho přesně je? |  |
+| Které tři stránky nebo toky musí být přeložené jako první? |  |
+| Kdo ručí za věcnou správnost? |  |
+| Umíme v tomto jazyce odpovědět na poptávku nebo support ticket? |  |
+| Který obsah záměrně překládat nebudeme? |  |
+| Kde hrozí zastarání: pricing, právní texty, dokumentace, e-maily? |  |
+| Jak poznáme agregovaně, že lokalizace pomáhá? |  |
+
+Potom udělej jednu praktickou opravu: nastav správný `lang`, oprav jazykový přepínač na odpovídající URL, přelož potvrzovací e-mail, označ starý překlad jako neaktuální, nebo vytvoř lokalizační kartu pro nejbližší trh. Malá přesná oprava je lepší než velký překladový plán, který se tváří jako expanze a ve skutečnosti jen násobí nepořádek.
+
 ## Zdroje
 
 - ICANN: Information for Domain Name Registrants - práva a odpovědnosti držitelů domén včetně správy, obnovy a převodu doménové registrace: https://www.icann.org/registrants
@@ -14776,6 +14929,8 @@ Potom udělej jednu opravu: doplň vlastnickou hlavičku, přesuň zákaznický 
 - Google Search Central: Robots.txt Introduction and Guide - použití a limity robots.txt: https://developers.google.com/search/docs/crawling-indexing/robots/intro
 - Google Search Central: How to specify a canonical URL with rel=canonical and other methods - doporučení pro určení preferované URL u duplicitního nebo velmi podobného obsahu: https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls
 - Google Search Central: Article structured data - použití strukturovaných dat pro články a blogové příspěvky: https://developers.google.com/search/docs/appearance/structured-data/article
+- Google Search Central: Tell Google about localized versions of your page - použití `hreflang` pro ekvivalentní jazykové a regionální verze stránky: https://developers.google.com/search/docs/specialty/international/localized-versions
+- Google Search Central: Managing multi-regional and multilingual sites - doporučení pro URL, jazykové verze, přesměrování a vícejazyčné weby: https://developers.google.com/search/docs/specialty/international/managing-multi-regional-sites
 - Schema.org: BlogPosting - typ strukturovaných dat pro blogový příspěvek: https://schema.org/BlogPosting
 - MDN Web Docs: URLSearchParams - rozhraní pro práci s query stringem URL a jednotlivými parametry: https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams
 - MDN Web Docs: Referer header - vysvětlení, že `Referer` může obsahovat origin, path a query string podle referrer policy a má dopady na analytiku, logování a soukromí: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Referer
@@ -14785,6 +14940,7 @@ Potom udělej jednu opravu: doplň vlastnickou hlavičku, přesuň zákaznický 
 - W3C: Web Content Accessibility Guidelines 2.2 - doporučení pro přístupný webový obsah: https://www.w3.org/TR/WCAG22/
 - W3C WAI: WCAG 2 Overview - principy vnímatelnosti, ovladatelnosti, srozumitelnosti a robustnosti: https://www.w3.org/WAI/standards-guidelines/wcag/
 - W3C WAI: Making Audio and Video Media Accessible - praktický přehled titulků, přepisů, audio popisů a dalších alternativ pro audio a video obsah: https://www.w3.org/WAI/media/av/
+- W3C Internationalization: Declaring language in HTML - doporučení k deklaraci jazyka dokumentu a částí obsahu pomocí atributu `lang`: https://www.w3.org/International/questions/qa-html-language-declarations
 - GOV.UK Service Manual: Learning about users and their needs - definice user needs a práce s uživatelskými potřebami: https://www.gov.uk/service-manual/user-research/start-by-learning-user-needs
 - Y Combinator Startup Library: How to talk to users - doporučení pro rozhovory s uživateli v rané fázi produktu: https://www.ycombinator.com/library/Iq-how-to-talk-to-users
 - Nielsen Norman Group: Onboarding: Skip it When Possible - rizika povinných úvodních instrukcí v onboardingu: https://www.nngroup.com/videos/onboarding-skip-it-when-possible/
@@ -14792,6 +14948,7 @@ Potom udělej jednu opravu: doplň vlastnickou hlavičku, přesuň zákaznický 
 
 ## Pracovní log
 
+- 2026-07-14: Doplněna příloha o vícejazyčném webu a SaaS bez lokalizačního chaosu: jazyková strategie, stabilní URL, `lang`, `hreflang`, metadata, postupné překládání podle obchodní hodnoty, překladové workflow, produktové okraje, agregované měření lokalizace, checklist a mini úkol; ověřeny a doplněny zdroje W3C Internationalization a Google Search Central.
 - 2026-07-14: Doplněna příloha o interní znalostní bázi bez datové skládky: mapa typů znalostí, vlastnictví dokumentů, rozhodovací log oddělený od diskuze, redigování produkčních detailů, oprávnění ve vyhledávání a AI/RAG indexech, práce s meetingovými poznámkami, aktivní archivace, checklist a mini úkol; navázáno na existující zdroje Diátaxis a ADR.
 - 2026-07-14: Doplněna příloha o sdílených odkazech a zákaznických portálech bez volného průvanu: typy sdílení podle rizika, bezpečné tokeny, expirace jako produktový text, role v portálu, e-mail jako upozornění místo úložiště, auditní stopa, rušení starých odkazů při změně oprávnění, checklist a mini úkol; ověřeny a doplněny zdroje OWASP k session managementu a jednorázovým resetovacím tokenům.
 - 2026-07-14: Doplněna příloha o produktových screenshotech a videonávodech bez úniku dat: účel ukázky, demo data, vizuální audit před nahráváním, nevratná redakce, scénář videonávodu, přístupné alternativy, vlastnictví veřejných ukázek, interní sdílení, checklist a mini úkol; ověřeny a doplněny zdroje Evropské komise k minimalizaci dat a W3C WAI k přístupným audio/video médiím.
