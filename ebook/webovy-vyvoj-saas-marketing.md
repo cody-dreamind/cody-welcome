@@ -17420,6 +17420,168 @@ Vyber jednoho nového nebo nedávno získaného zákazníka a vyplň handoff kar
 
 Potom kartu porovnej s tím, co je dnes v CRM, nabídce a onboarding checklistu. Pokud se liší, neopravuj jen konkrétního zákazníka. Oprav šablonu. Jedno dobré předání má pomoci i dalšímu zákazníkovi, ne jen zalepit aktuální zmatek.
 
+## Příloha: Prvních 30 dní zákazníka bez onboardingového přetlaku
+
+Prvních 30 dní po podpisu rozhoduje o tom, jestli zákazník začne produkt používat jako pracovní nástroj, nebo jako další položku v seznamu věcí, které „musíme někdy nastavit“. Tým má v téhle fázi silné pokušení ukázat všechno: všechny funkce, všechny možnosti, všechny integrace a k tomu tři webináře. Zákazník ale většinou nepotřebuje prohlídku zámku. Potřebuje první místnost, světlo a kliku.
+
+Privacy-first onboarding má ještě jednu výhodu: když se soustředíš na první pracovní výsledek, nepotřebuješ hned kopírovat celý zákaznický provoz do svého produktu. Méně dat, méně chaosu, rychlejší pochopení hodnoty.
+
+Špatná otázka zní: „Jak zákazníkovi během měsíce ukážeme co nejvíc funkcí?“
+
+Lepší otázka zní: „Jaký jeden opakovatelný pracovní výsledek má zákazník do 30 dnů bezpečně zvládnout?“
+
+### Rozděl onboarding na týdny podle změny chování
+
+Onboarding není kalendář e-mailů. Je to řízená změna chování. Každý týden má mít jeden praktický výstup, který zákazník pozná i bez dashboardu adopce.
+
+Jednoduchý plán:
+
+| Týden | Cíl | Výstup | Co zatím nedělat |
+| --- | --- | --- | --- |
+| 1 | Nastavit bezpečný základ | admin, role, první workspace, datová pravidla | hromadný import všech dat |
+| 2 | Ověřit první workflow | jeden reálný scénář proběhne od začátku do konce | školení celého týmu |
+| 3 | Zapojit pilotní skupinu | několik uživatelů používá stejný postup | otevírat všechny integrace |
+| 4 | Uzavřít první review | rozhodnutí, co škálovat, opravit nebo odložit | přidávat další funkce jen z nadšení |
+
+Tahle struktura je schválně nudná. Nudný onboarding je často dobrý onboarding. Lidé vědí, co mají udělat, proč to dělají a kdy je hotovo.
+
+### První týden chrání základ
+
+První týden má vytvořit bezpečné a srozumitelné prostředí. Ne maximum obsahu. Zákazník má pochopit, kdo co může dělat, jaká data má posílat, co se zatím neposílá a jak pozná první úspěch.
+
+První týden typicky obsahuje:
+
+- potvrzení hlavního výsledku z handoffu,
+- vytvoření nebo kontrolu účtu,
+- nastavení administrátora a základních rolí,
+- dohodu na prvním pracovním scénáři,
+- krátký seznam dat, která jsou opravdu potřeba,
+- seznam dat, která zákazník zatím posílat nemá,
+- datum prvního ověřitelného milníku.
+
+Příklad věty pro start:
+
+```text
+Do pátku nechceme nastavit celý systém. Chceme bezpečně projít jeden scénář: admin založí pilotní workspace, nastaví dvě role a připraví ukázkový import pěti položek bez citlivých příloh.
+```
+
+Tohle snižuje tlak. Zákazník ví, že není pozadu, když neposlal celý archiv za posledních pět let. Tým ví, že nemá improvizovat kolem dat, která zatím nepotřebuje.
+
+### Druhý týden ověřuje workflow, ne poslušnost
+
+Druhý týden má ukázat, jestli produkt zapadá do reálné práce. Ne jestli zákazník odklikl tutorial. Klikání průvodcem je slabý důkaz hodnoty. Ověřený pracovní scénář je silnější.
+
+Dobré ověření workflow má čtyři části:
+
+1. Vstup: co uživatel dostane na začátku.
+2. Akce: co v produktu udělá.
+3. Výstup: co vznikne.
+4. Rozhodnutí: co podle výstupu někdo udělá dál.
+
+Příklad:
+
+| Scénář | Vstup | Akce | Výstup | Rozhodnutí |
+| --- | --- | --- | --- | --- |
+| Zpracování support požadavku | jeden typický dotaz | zařadit, odpovědět, předat | uzavřený požadavek se stavem | víme, zda workflow sedí pilotnímu týmu |
+| Příprava nabídky | brief od klienta | vybrat šablonu, doplnit rozsah | draft nabídky | víme, co chybí v šabloně |
+| Import kontaktů | pět bezpečných záznamů | nahrát, opravit chyby | validační report | víme, zda je mapování polí srozumitelné |
+
+Měř jen to, co pomůže workflow opravit: dokončení scénáře, časté chyby, dotazy a místa, kde člověk zastavil. Nepotřebuješ sledovat každý pohyb myší. To není onboarding, to je digitální nervozita.
+
+### Třetí týden zapojuje pilotní skupinu
+
+Pilotní skupina nemá být celý zákaznický tým. Má být dost velká na ověření skutečné práce a dost malá na rychlou opravu. Typicky stačí lidé, kteří budou proces používat, jeden admin a někdo, kdo umí říct, jestli výsledek odpovídá obchodnímu cíli.
+
+Před zapojením pilotu zkontroluj:
+
+- že role nejsou nastavené moc široce,
+- že pilotní data neobsahují zbytečné osobní údaje,
+- že lidé vědí, co je testovaný scénář,
+- že existuje jednoduchý kanál pro dotazy,
+- že support ví, co je v pilotu domluvené,
+- že tým má limit, co se v pilotu ještě nebude řešit.
+
+Pilot bez hranic se rychle změní v přáníčko všech funkcí. Pilot s jasným scénářem ukáže, jestli produkt opravdu pomáhá.
+
+> Codyho komentář: Nejlepší pilotní skupina není ta nejhlasitější. Je to ta, která dělá reálnou práci a umí říct „tady to drhne“ bez toho, aby z každého drhnutí vznikl nový modul.
+
+### Čtvrtý týden uzavírá rozhodnutí
+
+Na konci prvního měsíce nemá vzniknout jen pocit, že „nějak onboardujeme“. Má vzniknout rozhodnutí. Buď zákazník zvládl první hodnotu a rozšiřujete postup, nebo je potřeba opravit překážku, zúžit scénář, dodat chybějící dokumentaci, případně přiznat, že fit není tak dobrý, jak vypadal v salesu.
+
+30denní review drž krátké:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jaká první hodnota byla slíbená? |  |
+| Byla dosažená? |  |
+| Co tomu nejvíc pomohlo? |  |
+| Co nejvíc brzdilo práci? |  |
+| Jaká data jsme použili a proč? |  |
+| Co smažeme, archivujeme nebo už nebudeme potřebovat? |  |
+| Který scénář škálujeme dál? |  |
+| Který požadavek odkládáme jako samostatné rozhodnutí? |  |
+| Jaká změna šablony pomůže dalšímu onboardingu? |  |
+
+Review bez rozhodnutí je jen přátelská konverzace s kalendářovou pozvánkou. Milé, ale drahé.
+
+### Onboarding e-maily piš podle práce
+
+Automatické onboarding e-maily můžou pomoct, pokud respektují realitu zákazníka. Nemají být generická sekvence typu „den 1: vítejte, den 2: pět tipů, den 3: podívejte se na funkci, kterou nepotřebujete“. Piš je podle milníků.
+
+Praktická pravidla:
+
+- posílej e-mail jen tehdy, když má příjemce jasný další krok,
+- nepoužívej otevření e-mailu jako hlavní důkaz zájmu,
+- nedávej do e-mailu citlivé zákaznické detaily,
+- preferuj odkaz na aktuální onboarding checklist před dlouhým textem,
+- umožni lidem vypnout pomocné onboarding zprávy, pokud je nepotřebují,
+- transakční a bezpečnostní zprávy drž odděleně od marketingu.
+
+Příklad:
+
+```text
+Předmět: Další krok k pilotnímu workflow
+
+Dnes stačí udělat jednu věc: vyberte 3-5 bezpečných záznamů pro pilotní import podle domluvených pravidel. Neposílejte zatím celý export ani přílohy s osobními údaji. Po importu projdeme validační report a rozhodneme, jestli je mapování připravené pro širší použití.
+```
+
+Tohle je pomoc. „Už tři dny jste se nepřihlásili, vraťte se“ je výčitka převlečená za produktovou komunikaci.
+
+### Checklist: Prvních 30 dní privacy-first
+
+- [ ] První hodnota je popsaná jednou větou a navazuje na sales handoff.
+- [ ] Onboarding plán je rozdělený na čtyři týdny podle praktických výstupů.
+- [ ] První týden řeší role, základ a datová pravidla, ne kompletní migraci.
+- [ ] Existuje seznam dat, která zákazník zatím nemá posílat.
+- [ ] Druhý týden ověřuje jeden reálný workflow scénář.
+- [ ] Měření sleduje dokončení, chyby a dotazy, ne každý detail chování.
+- [ ] Pilotní skupina má jasný rozsah, role a kanál pro zpětnou vazbu.
+- [ ] Přístupy se rozšiřují po vlnách podle ověřeného postupu.
+- [ ] Onboarding e-maily mají jasný pracovní krok a neobsahují citlivé detaily.
+- [ ] Po 30 dnech proběhne review s rozhodnutím, co škálovat, opravit nebo odložit.
+- [ ] Dočasná data, exporty a pracovní soubory mají vlastníka a datum smazání.
+- [ ] Poznatky z onboardingu se promítnou do šablony, dokumentace nebo produktu.
+
+### Mini úkol
+
+Vezmi poslední onboarding a přepiš ho do 30denní karty:
+
+| Pole | Odpověď |
+| --- | --- |
+| První hodnota do 30 dnů |  |
+| Výstup prvního týdne |  |
+| Výstup druhého týdne |  |
+| Pilotní skupina ve třetím týdnu |  |
+| Rozhodnutí ve čtvrtém týdnu |  |
+| Data nutná pro první scénář |  |
+| Data, která zatím nechceme |  |
+| Největší riziko přetlaku |  |
+| Jedna věc, kterou z onboarding sekvence vyhodíme |  |
+| Jedna změna šablony pro příště |  |
+
+Potom smaž nebo odlož jednu onboarding aktivitu, která zákazníkovi nepomáhá k první hodnotě. Pokud se bojíš ji vyhodit, napiš k ní účel. Když účel nenajdeš, aktivita si o smazání řekla sama. Ano, i hezký e-mail může být zbytečný. Kruté, ale doručené.
+
 ## Zdroje
 
 - ICANN: Information for Domain Name Registrants - práva a odpovědnosti držitelů domén včetně správy, obnovy a převodu doménové registrace: https://www.icann.org/registrants
@@ -17546,6 +17708,7 @@ Potom kartu porovnej s tím, co je dnes v CRM, nabídce a onboarding checklistu.
 
 ## Pracovní log
 
+- 2026-07-14: Doplněna příloha o prvních 30 dnech zákazníka bez onboardingového přetlaku: čtyřtýdenní plán podle změny chování, bezpečný první týden, ověření workflow, pilotní skupina, 30denní review, onboarding e-maily podle práce, checklist a mini úkol.
 - 2026-07-14: Doplněna příloha o sales handoffu do onboardingu bez ztráty kontextu: handoff karta, předávání závazků místo nálad, převod prodaného výsledku na první hodnotu, opatrná práce s produkčními daty, vlny rolí a přístupů, struktura handoff schůzky, měření tření v prvních týdnech, checklist a mini úkol.
 - 2026-07-14: Doplněna příloha o win-backu bez remarketingového stalkingu: výběr vhodných bývalých zákazníků podle skutečné změny, lidský důvod kontaktu, opatrná personalizace, bezpečná reaktivace účtu, agregované měření návratu, použití učení i bez reaktivace, checklist a mini úkol.
 - 2026-07-14: Doplněna příloha o churnu a odchodu zákazníka bez výslechového formuláře: rozlišení typů odchodu, férový zrušovací tok, dobrovolný krátký dotazník, alternativy bez panické slevy, jasný datový dopad, měsíční churn review, oddělení zrušení/výmazu/preferencí, checklist a mini úkol.
