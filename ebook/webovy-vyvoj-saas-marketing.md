@@ -14822,6 +14822,200 @@ Vyber jednu existující nebo plánovanou jazykovou verzi a vyplň tabulku:
 
 Potom udělej jednu praktickou opravu: nastav správný `lang`, oprav jazykový přepínač na odpovídající URL, přelož potvrzovací e-mail, označ starý překlad jako neaktuální, nebo vytvoř lokalizační kartu pro nejbližší trh. Malá přesná oprava je lepší než velký překladový plán, který se tváří jako expanze a ve skutečnosti jen násobí nepořádek.
 
+## Příloha: Design systém bez knihovny na všechno
+
+Design systém není hezká galerie tlačítek. Je to dohoda mezi produktem, vývojem, obsahem a provozem, jak se bude rozhraní chovat opakovaně. Když funguje, zrychluje práci, snižuje počet výjimek a chrání uživatele před tím, aby se každý formulář tvářil jako nový druh hádanky.
+
+Když nefunguje, stane se z něj muzeum komponent, které nikdo nepoužívá, nebo naopak svěrací kazajka, kvůli které tým obchází vlastní pravidla. Privacy-first produkt potřebuje design systém ještě víc než běžný web: některá rozhodnutí o souhlasu, viditelnosti dat, mazání, exportu nebo přístupech se nesmí pokaždé navrhovat od nuly podle nálady sprintu.
+
+> Codyho komentář: Nejlepší design systém pro malý tým není ten největší. Je to ten, který řeší skutečné opakované problémy a dá se udržet i v týdnu, kdy má tým moc práce a málo kávy. Což je, přiznejme si, skoro každý týden.
+
+### Začni produktovými vzory, ne seznamem komponent
+
+Komponenta je konkrétní stavební blok. Produktový vzor je opakovaná situace, kterou uživatel řeší. Malý SaaS často nepotřebuje hned třicet variant karet. Potřebuje jasně navržené vzory pro:
+
+- vytvoření účtu,
+- pozvání dalšího člověka,
+- změnu role,
+- prázdný stav,
+- chybu formuláře,
+- potvrzení destruktivní akce,
+- export dat,
+- vypnutí integrace,
+- změnu fakturačního plánu,
+- žádost o pomoc.
+
+Když začneš vzory, snáz poznáš, které komponenty opravdu chybí. Tlačítko samo o sobě nic neřeší. Vzor „potvrzení výmazu workspace“ už řeší konkrétní riziko: člověk musí pochopit dopad, vědět, co se smaže, co zůstane kvůli retenci, a potvrdit akci tak, aby nešlo jen o nechtěný klik.
+
+Praktická otázka pro backlog: „Které tři situace dnes navrhujeme pokaždé jinak a stojí nás to čas, chyby nebo důvěru?“
+
+### Tokeny jsou dohoda, ne módní slovník
+
+Design tokeny mají smysl, když nahrazují ruční dohadování. Barva, mezera, velikost písma, radius, stín, breakpoint nebo stav komponenty by neměly být pokaždé nové rozhodnutí. Ale tokeny nejsou magická vrstva, která opraví nekonzistentní produkt.
+
+Začni malou sadou:
+
+| Typ tokenu | Příklad významu | Proč ho držet společně |
+| --- | --- | --- |
+| Barvy | text, pozadí, okraj, chyba, varování, úspěch | Kvůli kontrastu, konzistenci a tématům |
+| Typografie | běžný text, popisek, nadpis, číslo v tabulce | Kvůli čitelnosti a rytmu rozhraní |
+| Mezery | malá, střední, velká mezera | Kvůli rychlému skládání obrazovek |
+| Stav | hover, focus, disabled, loading, destructive | Kvůli předvídatelnému chování |
+| Z-index vrstvy | dropdown, modal, toast, sticky lišta | Kvůli menšímu boji s překryvy |
+
+U každého tokenu si napiš, k čemu slouží. `blue-500` je technický název. `color-action-primary` už říká, že barva nese produktový význam. Když později změníš brand, nechceš ručně hledat všechny modré odstíny jako archeolog s lupou.
+
+Privacy-first poznámka: Stejnou logiku použij i na datové a právní stavy. Například texty pro souhlas, odhlášení, export, výmaz, změnu role nebo vypnutí sdílení mají mít společné vzory. Ne proto, aby zněly roboticky, ale aby pokaždé jasně říkaly dopad.
+
+### Komponenta musí mít stavovou kartu
+
+Komponenta bez stavů je demo, ne produkt. U důležitých prvků si udržuj krátkou kartu:
+
+| Oblast | Otázka |
+| --- | --- |
+| Účel | Jakou práci komponenta dělá? |
+| Varianty | Které varianty jsou povolené a proč? |
+| Stavy | Loading, empty, error, disabled, success, destructive? |
+| Data | Jaká data zobrazuje a která nesmí zobrazit? |
+| Přístupnost | Dá se ovládat klávesnicí a přečíst čtečkou? |
+| Text | Kdo vlastní mikrocopy a překlady? |
+| Měření | Je potřeba agregovaný signál, nebo žádné měření? |
+| Riziko | Co se stane při špatném použití? |
+
+Příklad: Komponenta pro zobrazení člena týmu nemá jen avatar, jméno a roli. Musí řešit, co ukáže u deaktivovaného účtu, pozvánky čekající na přijetí, externisty s omezeným přístupem, skrytého e-mailu, anonymizovaného uživatele nebo uživatele po výmazu. To jsou produktové stavy, ne okrajové drobnosti.
+
+### Tlačítka, formuláře a tabulky jsou nejdražší místo chaosu
+
+V marketingovém webu se chaos často schová do hero sekcí. V SaaS aplikaci se schová do formulářů, tabulek a oprávnění. Tam se dělá práce. Tam vzniká nejvíc chyb.
+
+U formulářů sjednoť:
+
+- kdy je pole povinné a jak to poznat,
+- kde se zobrazí validační chyba,
+- jak zní pomocný text,
+- co se děje při ukládání,
+- jak vypadá zrušení změn,
+- co zůstane po chybě serveru,
+- kdy se data ukládají automaticky a kdy až po potvrzení.
+
+U tabulek sjednoť:
+
+- prázdný stav,
+- načítání,
+- filtr bez výsledků,
+- stránkování nebo nekonečné načítání,
+- export,
+- citlivé sloupce,
+- akce nad jedním řádkem,
+- hromadné akce,
+- potvrzení destruktivní změny.
+
+U tlačítek sjednoť význam, ne jen barvu. Primární akce má být jedna v daném kontextu. Destruktivní akce má být vizuálně i textově jasná. Zakázané tlačítko nemá být jediný způsob, jak uživateli vysvětlit, co chybí. Disabled bez vysvětlení je UX verze zavřených dveří bez cedule.
+
+### Přístupnost zabuduj do výchozího chování
+
+W3C popisuje přístupnost přes principy vnímatelnosti, ovladatelnosti, srozumitelnosti a robustnosti. Pro design systém z toho plyne jednoduché pravidlo: přístupnost nemá být checklist na konci releasu, ale výchozí vlastnost komponent.
+
+Prakticky:
+
+- focus stav je součást návrhu, ne prohlížečová nehoda,
+- modaly vrací focus tam, odkud přišly,
+- chybové hlášky jsou navázané na pole,
+- ikony bez textu mají dostupný název,
+- barevný význam má i textovou nebo tvarovou oporu,
+- interaktivní prvky mají dostatečnou klikací oblast,
+- načítání a asynchronní změny dávají srozumitelnou zpětnou vazbu.
+
+Tohle není charita. Je to kvalita produktu. Když komponenta nejde ovládat klávesnicí, často nejde dobře testovat ani automatizovat. Když chybová hláška není spojená s polem, často jí nerozumí ani běžný uživatel. Přístupnost je jen velmi dobrý detektor lenivého rozhraní.
+
+### Privacy vzory navrhni jednou a používej pořád
+
+Privacy-first design systém by měl mít vlastní sadu vzorů pro citlivé situace:
+
+| Situace | Co má vzor hlídat |
+| --- | --- |
+| Souhlas | Jasný účel, rovnocenné odmítnutí, žádné matení |
+| Preference | Dopad zapnutí a vypnutí, napojení na systémy |
+| Export dat | Rozsah, formát, životnost odkazu, oprávnění |
+| Výmaz | Dopad, retence, nevratnost, potvrzení |
+| Sdílení | Komu se data zpřístupní, expirace, zrušení přístupu |
+| Role | Co role umožňuje, kdo ji může změnit |
+| Logy a audit | Co se zapisuje a co se záměrně nezapisuje |
+| Citlivá data | Maskování, redakce, varování před kopírováním |
+
+Tyto vzory nejsou jen pro designéry. Potřebuje je vývoj, support, obchod i obsah. Když support posílá zákazníkovi návod k exportu, měl by používat stejný jazyk jako produkt. Když vývojář přidává novou integraci, měl by vědět, jak vypadá standardní obrazovka pro oprávnění a vypnutí.
+
+### Komponenty nesmí tahat data navíc
+
+Některé UI knihovny a externí widgety vypadají jako zkratka, ale do produktu přidají cizí skripty, vzdálené fonty, telemetrii, CDN requesty nebo licenční omezení. U každé větší UI závislosti si polož stejné otázky jako u dodavatele:
+
+- Běží něco v prohlížeči návštěvníka mimo naši kontrolu?
+- Posílá komponenta telemetrii nebo diagnostiku třetí straně?
+- Jde knihovnu self-hostovat nebo bundlovat bez externích requestů?
+- Umíme komponentu upravit pro přístupnost a lokalizaci?
+- Jak velký kus JavaScriptu přidává do kritické cesty?
+- Co se stane, když knihovna změní licenci, cenu nebo podporu?
+
+U veřejného webu je obzvlášť podezřelé, když kvůli obyčejnému dropdownu načítáš půl frameworku a tři externí domény. U interní aplikace může dávat robustní knihovna smysl, ale pořád musíš vědět, jaký provozní a datový dopad nese.
+
+### Dokumentace má ukazovat správné použití
+
+Design systém nepotřebuje román. Potřebuje jasné příklady. U každého důležitého vzoru ukaž:
+
+- kdy ho použít,
+- kdy ho nepoužít,
+- dobrý příklad textu,
+- špatný příklad textu,
+- povinné stavy,
+- datová omezení,
+- přístupnostní poznámky,
+- vazbu na produktovou metriku nebo rozhodnutí, pokud existuje.
+
+Nejužitečnější dokumentace často není nejdelší. Je to ta, která zabrání špatnému použití. Když tým pořád používá toast pro kritické chyby, napiš pravidlo pro chyby. Když každý formulář vymýšlí vlastní potvrzení uložení, zdokumentuj ukládací vzor. Když se tabulky přetěžují deseti akcemi, zdokumentuj pravidla pro hromadné akce.
+
+### Měření design systému drž při zemi
+
+Design systém se dá měřit bez toho, aby se z něj stal další dashboardový oltář. Praktické signály:
+
+- kolik nových obrazovek používá existující vzory,
+- kolik duplicitních komponent vzniklo za měsíc,
+- kolik accessibility chyb se opakuje,
+- kolik support dotazů vzniká kvůli nejasnému toku,
+- kolik času zabere změna základního brand prvku,
+- kolik destruktivních akcí má jednotné potvrzení.
+
+Není potřeba sledovat každý hover a každý klik v komponentové knihovně. Důležitější je, jestli systém snižuje opakované chyby a zrychluje rozhodování. Design systém, který má krásné statistiky adopce a zároveň produkt plný výjimek, je jen pěkně měřený nepořádek.
+
+### Checklist: Design systém privacy-first
+
+- [ ] Máme pojmenované opakované produktové vzory, nejen seznam komponent.
+- [ ] Tokeny mají význam podle použití, ne jen názvy barev a velikostí.
+- [ ] Důležité komponenty mají popsané stavy, data, přístupnost a rizika.
+- [ ] Formuláře, tabulky, tlačítka a destruktivní akce mají jednotné chování.
+- [ ] Focus, chybové hlášky, názvy ikon a klávesnicové ovládání jsou součást výchozích komponent.
+- [ ] Privacy situace jako souhlas, export, výmaz, sdílení a role mají vlastní opakované vzory.
+- [ ] UI knihovny a widgety netahají zbytečné externí requesty ani telemetrii.
+- [ ] Dokumentace ukazuje správné i špatné použití.
+- [ ] Nové výjimky se zapisují do backlogu a po čase se buď standardizují, nebo odstraní.
+- [ ] Design systém má vlastníka a pravidelnou krátkou revizi.
+
+### Mini úkol
+
+Vyber jednu oblast produktu, kde se dnes rozhraní opakuje nejednotně. Ideálně formuláře, tabulky, role, exporty nebo potvrzení destruktivních akcí. Vyplň krátkou kartu:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Který vzor sjednocujeme? |  |
+| Kde se dnes používá alespoň třikrát? |  |
+| Jaká je nejčastější chyba nebo nejasnost? |  |
+| Jaké stavy musí vzor obsahovat? |  |
+| Jaká data nesmí zobrazit nebo ukládat? |  |
+| Jak se ovládá klávesnicí? |  |
+| Kdo vlastní texty a překlady? |  |
+| Jak poznáme, že sjednocení pomohlo? |  |
+
+Potom udělej jednu malou změnu: sjednoť text potvrzení, přidej chybový stav, oprav focus, odstraň duplicitní variantu tlačítka, nebo napiš jednu stránku dokumentace pro nejčastější vzor. Design systém se nestaví slavnostním založením knihovny. Staví se tím, že příště stejnou chybu neopakuješ ručně.
+
 ## Zdroje
 
 - ICANN: Information for Domain Name Registrants - práva a odpovědnosti držitelů domén včetně správy, obnovy a převodu doménové registrace: https://www.icann.org/registrants
@@ -14948,6 +15142,7 @@ Potom udělej jednu praktickou opravu: nastav správný `lang`, oprav jazykový 
 
 ## Pracovní log
 
+- 2026-07-14: Doplněna příloha o design systému bez knihovny na všechno: produktové vzory místo seznamu komponent, tokeny jako dohoda, stavové karty komponent, formuláře/tabulky/tlačítka, přístupnost ve výchozím chování, privacy vzory pro souhlas/export/výmaz/sdílení, kontrola UI knihoven, dokumentace správného použití, měření adopce, checklist a mini úkol; navázáno na existující zdroje k WCAG, privacy by design a správě závislostí.
 - 2026-07-14: Doplněna příloha o vícejazyčném webu a SaaS bez lokalizačního chaosu: jazyková strategie, stabilní URL, `lang`, `hreflang`, metadata, postupné překládání podle obchodní hodnoty, překladové workflow, produktové okraje, agregované měření lokalizace, checklist a mini úkol; ověřeny a doplněny zdroje W3C Internationalization a Google Search Central.
 - 2026-07-14: Doplněna příloha o interní znalostní bázi bez datové skládky: mapa typů znalostí, vlastnictví dokumentů, rozhodovací log oddělený od diskuze, redigování produkčních detailů, oprávnění ve vyhledávání a AI/RAG indexech, práce s meetingovými poznámkami, aktivní archivace, checklist a mini úkol; navázáno na existující zdroje Diátaxis a ADR.
 - 2026-07-14: Doplněna příloha o sdílených odkazech a zákaznických portálech bez volného průvanu: typy sdílení podle rizika, bezpečné tokeny, expirace jako produktový text, role v portálu, e-mail jako upozornění místo úložiště, auditní stopa, rušení starých odkazů při změně oprávnění, checklist a mini úkol; ověřeny a doplněny zdroje OWASP k session managementu a jednorázovým resetovacím tokenům.
