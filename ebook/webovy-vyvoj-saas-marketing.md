@@ -236,6 +236,8 @@ Místo jednoho obřího projektu si veď jednoduchý webový backlog:
 
 Každá položka má popisovat problém, ne jen řešení. „Přidat video“ je návrh. „Návštěvník nepochopí, jak produkt funguje v prvních 30 sekundách“ je problém. Video může být řešení, ale také nemusí. Někdy stačí screenshot, ukázkový scénář nebo lepší mezititulek. Ano, občas je nudný mezititulek lepší než drahé video. Web umí být krutě praktický.
 
+Dobré pravidlo pro backlog: položka je připravená teprve ve chvíli, kdy se dá zavřít jedním malým releasem a ověřit jedním konkrétním signálem. Pokud potřebuje tři týmy, pět schůzek a nový dashboard, není připravená. Je to zatím téma k rozdělení.
+
 ### Jak měřit web bez zbytečného slídění
 
 Produktové řízení webu nepotřebuje znát identitu každého člověka. Často stačí kombinace čtyř zdrojů:
