@@ -18054,6 +18054,150 @@ Vezmi poslední bezpečnostní nebo privacy dotazník od zákazníka a vyplň ka
 
 Potom udělej jednu konkrétní změnu: založ odpovědní balíček, doplň subdodavatelský seznam, napiš standardní odpověď k retenci, připrav krátký incident kontakt, nebo převeď jednu opakovanou otázku do dokumentace. Bezpečnostní dotazníky nemají být požár. Mají být auditní zrcadlo, které tým pravidelně čistí.
 
+## Příloha: Trust center bez marketingové mlhy
+
+Jakmile se zákazníci začnou ptát na bezpečnost, soukromí, subdodavatele a export dat, tým často skončí u dvou extrémů. Buď všechno schová za e-mail na sales, nebo vytvoří honosnou stránku plnou velkých slov a malých důkazů. Ani jedno moc nepomáhá. Trust center má zkrátit cestu k důvěře, ne vyrobit další vitrínu.
+
+Špatná otázka zní: „Co všechno můžeme dát na stránku, aby to vypadalo enterprise?“
+
+Lepší otázka zní: „Které informace zákazník potřebuje pro rozumné rozhodnutí a které umíme udržovat pravdivé?“
+
+Privacy-first trust center není sbírka odznaků. Je to veřejná nebo poloveřejná vstupní brána k informacím, které už mají existovat v provozu: privacy notice, DPA, subdodavatelé, regiony, bezpečnostní principy, export a výmaz, incidentní kontakt, případně status page a odpovědi na opakované dotazy. Pokud tyto věci neexistují, trust center je jen hezký obal na nepořádek. A obal nechrání data, jen nervy obchodníka do první detailní otázky.
+
+### Začni rozhodovacími otázkami zákazníka
+
+Trust center nenavrhuj podle interní organizační struktury. Zákazník neřeší, jestli dokument vlastní legal, ops nebo product. Potřebuje odpovědi na praktické otázky:
+
+- Jaká data služba typicky zpracovává?
+- Kde data běží a kde jsou zálohy?
+- Kdo jsou hlavní subdodavatelé a k čemu slouží?
+- Jak funguje export, výmaz a offboarding?
+- Jak se řeší incident nebo bezpečnostní dotaz?
+- Jaké jsou základní bezpečnostní principy služby?
+- Jak poznám, že dokument není tři roky starý artefakt z doby bronzové?
+
+Z toho vznikne jednoduchá struktura:
+
+| Sekce | Účel | Typický vlastník |
+| --- | --- | --- |
+| Přehled dat | co služba zpracovává a proč | product + privacy owner |
+| Provoz a regiony | kde služba běží, zálohy, hlavní infrastruktura | ops |
+| Subdodavatelé | kdo pomáhá službu provozovat a k jakému účelu | legal nebo ops |
+| Bezpečnost | přístupy, šifrování na vysoké úrovni, incidentní postup | engineering |
+| Práva a životní cyklus dat | export, výmaz, retence, offboarding | support + ops |
+| Dokumenty | privacy notice, DPA, bezpečnostní FAQ | leadership nebo legal |
+| Kontakt | kam poslat security, privacy nebo vendor otázku | support nebo sales ops |
+
+### Ne všechno musí být veřejné
+
+Dobré trust center má vrstvy. Některé informace mohou být veřejné bez tření, jiné dávají smysl až po obchodním kontextu, NDA nebo konkrétním use case.
+
+Veřejná vrstva typicky obsahuje:
+
+- privacy notice,
+- stručné bezpečnostní principy,
+- seznam hlavních subdodavatelů podle účelu,
+- informaci o evropském provozu nebo dostupných regionech,
+- kontakt pro privacy a security otázky,
+- základní popis exportu, výmazu a offboardingu,
+- datum poslední aktualizace dokumentů.
+
+Kontrolovaná vrstva může obsahovat:
+
+- detailnější odpovědní balíček pro security dotazníky,
+- DPA nebo smluvní přílohy,
+- architektonický přehled bez citlivých detailů,
+- odpovědi k integracím a konkrétním datovým tokům,
+- výsledky auditů nebo certifikací, pokud existují a mají pravidla sdílení.
+
+Nesdílej veřejně interní infrastrukturu do šroubku, produkční screenshoty administrace, přesné bezpečnostní konfigurace, jména běžných zaměstnanců s přístupy, incidentní detaily ani seznam interních nástrojů bez jasného účelu. Transparentnost má zvyšovat důvěru. Nemá zjednodušovat práci útočníkovi ani vytvářet zbytečný osobní katalog týmu.
+
+### Piš lidsky a udržovatelně
+
+Trust center musí být přesné, ale nemusí znít jako smlouva v neprůstřelné vestě. Každá sekce má odpovědět na jednu praktickou otázku a říct, kdy byla naposledy zkontrolována.
+
+Příklad slabého textu:
+
+„Bezpečnost a ochrana dat jsou pro nás absolutní prioritou. Používáme moderní technologie a nejlepší postupy.“
+
+Lepší text:
+
+„Služba běží v evropském regionu. Přístup do produkčních systémů je omezený podle role, chráněný vícefaktorovým ověřením a revidovaný při změně role nebo odchodu člověka. Zákaznická data používáme jen pro provoz služby, podporu a účely popsané v dokumentaci.“
+
+Ten druhý text není kouzelný certifikát. Ale dá se ověřit, udržovat a převést do interního procesu. To je přesně pointa.
+
+### Subdodavatele ukaž jako mapu účelů
+
+Seznam subdodavatelů není katalog log. Zákazník nepotřebuje jen značku nástroje. Potřebuje vědět, proč tam data mohou skončit a jaký typ dat se řeší.
+
+Praktická tabulka:
+
+| Subdodavatel | Účel | Typ dat | Region nebo poznámka | Stav |
+| --- | --- | --- | --- | --- |
+| Hosting | provoz aplikace a databáze | zákaznická a provozní data | EU region | aktivní |
+| E-mailový poskytovatel | transakční e-maily | e-mail, obsah zprávy podle typu notifikace | EU nebo smluvní rámec | aktivní |
+| Platební brána | platby a fakturace | billing údaje, platební metadata | podle poskytovatele | aktivní |
+| Monitoring | dostupnost a chyby | technické logy bez zbytečných osobních údajů | omezená retence | aktivní |
+
+Pokud používáš mimoevropského dodavatele, nesnaž se to zamést pod koberec formulací „globální infrastruktura“. Popiš účel, typ dat, smluvní rámec a alternativy, pokud existují. Zdroje v závěru e-booku odkazují na pravidla Evropské komise k mezinárodním přenosům dat a standardním smluvním doložkám. Tady není prostor na magii, jen na poctivý popis.
+
+### Trust center navazuje na produktový provoz
+
+Největší chyba je vytvořit trust center jako jednorázovou stránku. První měsíc vypadá dobře, po půl roce začne lhát. Přibude nový dodavatel, změní se region, vznikne nová integrace, upraví se retenční pravidla a stránka pořád tvrdí starý svět.
+
+Napoj trust center na provozní změny:
+
+- Nový dodavatel: před nákupem se vyplní vendor karta a po schválení se aktualizuje veřejný nebo kontrolovaný seznam.
+- Nová integrace: dokumentace popíše datový tok, oprávnění, retenci a odpojení integrace.
+- Změna retence: aktualizuje se privacy notice, interní datová mapa a trust center.
+- Nový export nebo výmaz: doplní se help stránka a security FAQ.
+- Incidentní změna: po postmortemu se upraví postup, pokud se mění zákaznická komunikace nebo kontakt.
+
+Každá veřejná sekce má mít vlastníka a datum poslední revize. Ne proto, aby stránka vypadala seriózně, ale protože bez vlastníka se z ní stane muzeum slibů.
+
+### Udělej z něj obchodní zrychlovač, ne nátlak
+
+Trust center může pomoct sales týmu, ale nesmí se stát způsobem, jak odbýt oprávněné otázky. Když zákazník řeší složitější datový tok, nestačí poslat odkaz a tvářit se, že je vyřešeno. Odkaz má zkrátit opakování základů, aby schůzka mohla řešit konkrétní riziko.
+
+Dobré použití:
+
+„Tady je naše trust center se subdodavateli, exportem, retencí a bezpečnostním přehledem. Pro váš konkrétní use case s importem klientských dat navrhuji projít ještě datový tok a role v integraci.“
+
+Špatné použití:
+
+„Všechno je na webu, vyplňte si dotazník sami.“
+
+Codyho komentář: Trust center není štít proti zákaznickým otázkám. Je to mapa. Když se někdo ptá dobře, neodpal ho mapou do lesa. Vezmi mapu a projděte spolu rizikové místo.
+
+### Checklist: Trust center privacy-first
+
+- [ ] Trust center odpovídá na rozhodovací otázky zákazníka, ne na interní organizační strukturu.
+- [ ] Veřejná vrstva obsahuje privacy notice, základní bezpečnostní principy, subdodavatele, regiony, kontakt a datum aktualizace.
+- [ ] Citlivější dokumenty mají kontrolovanou vrstvu a jasná pravidla sdílení.
+- [ ] U každého subdodavatele je účel, typ dat, region nebo smluvní poznámka a stav.
+- [ ] Texty jsou konkrétní, pravdivé a udržovatelné.
+- [ ] Stránka neslibuje certifikace, procesy nebo regiony, které provoz neumí doložit.
+- [ ] Každá sekce má vlastníka a rytmus revize.
+- [ ] Nákup nového nástroje nebo změna datového toku spouští aktualizaci trust center.
+- [ ] Security dotazníky a sales otázky se používají jako zdroj pro zlepšení FAQ.
+- [ ] Veřejně nesdílíme interní infrastrukturu, secrets, produkční screenshoty ani osobní detaily týmu.
+
+### Mini úkol
+
+Navrhni první verzi trust center pro svůj produkt nebo web. Vyplň pouze to, co umíš pravdivě doložit:
+
+| Sekce | Co dnes umíme říct pravdivě | Co chybí | Vlastník | Datum revize |
+| --- | --- | --- | --- | --- |
+| Přehled dat |  |  |  |  |
+| Regiony a provoz |  |  |  |  |
+| Subdodavatelé |  |  |  |  |
+| Bezpečnostní principy |  |  |  |  |
+| Export, výmaz a offboarding |  |  |  |  |
+| Dokumenty a smlouvy |  |  |  |  |
+| Kontakt |  |  |  |  |
+
+Potom udělej jednu malou změnu: publikuj základní bezpečnostní FAQ, doplň datum revize do privacy notice, vytvoř subdodavatelskou tabulku, sjednoť kontakt pro security otázky, nebo přidej interní pravidlo, že nový dodavatel aktualizuje trust center. Nečekej na dokonalost. Jen nepublikuj pohádky. Internet už jich má dost.
+
 ## Zdroje
 
 - ICANN: Information for Domain Name Registrants - práva a odpovědnosti držitelů domén včetně správy, obnovy a převodu doménové registrace: https://www.icann.org/registrants
@@ -18180,6 +18324,7 @@ Potom udělej jednu konkrétní změnu: založ odpovědní balíček, doplň sub
 
 ## Pracovní log
 
+- 2026-07-14: Doplněna příloha o trust center bez marketingové mlhy: rozhodovací otázky zákazníka, veřejná a kontrolovaná vrstva informací, lidské bezpečnostní texty, mapa subdodavatelů podle účelu, napojení na provozní změny, obchodní použití bez odbývání otázek, checklist a mini úkol.
 - 2026-07-14: Doplněna příloha o bezpečnostních dotaznících zákazníka bez panického opisování: odpovědní balíček, pravdivé úrovně detailu, hranice sdílení interních informací, rozlišení rizika zákazníka, převod opakovaných otázek do dokumentace, checklist a mini úkol.
 - 2026-07-14: Doplněna příloha o obnově smlouvy bez vydírání lock-inem: renewal rytmus před fakturou, popis hodnoty podle pracovních výsledků, rozhodovací balíček, férové vysvětlení změn ceny a rozsahu, datové a bezpečnostní review, interní renewal karta, čisté ukončení služby, checklist a mini úkol.
 - 2026-07-14: Doplněna příloha o rozšíření po pilotu bez adopčního nátlaku: rollout rozhodnutí, vlny podle práce a datového rizika, role a přístupy, adopční metriky podle pracovního výsledku, komunikace změny, support balík, review neúspěšné vlny, checklist a mini úkol.
