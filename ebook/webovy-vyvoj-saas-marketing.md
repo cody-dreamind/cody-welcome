@@ -17763,6 +17763,174 @@ Vezmi jeden produkt, proces nebo zákaznický rollout a vyplň kartu další vln
 
 Potom odlož jednu plánovanou rollout aktivitu, která jen „vytváří povědomí“, ale nemění pracovní chování. Pokud nejde spojit s konkrétním workflow, je to možná jen interní reklama. A interní reklama bez práce je nejdražší forma šumu, hned po schůzce bez agendy.
 
+## Příloha: Obnova smlouvy bez vydírání lock-inem
+
+Když zákazník úspěšně prošel pilotem, onboardingem a širším rolloutem, přichází další zkouška vztahu: obnova smlouvy. Špatně navržený renewal proces spoléhá na setrvačnost, složitý odchod, nejasné ceny a poslední chvíli. Krátkodobě to může vypadat jako obchodní úspěch. Dlouhodobě to pálí důvěru, podporu i produktový tým.
+
+Privacy-first obnova stojí na opačném principu: zákazník má rozumět hodnotě, rozsahu, datům, změnám a možnostem včas. Ne proto, že je tým romanticky hodný. Protože zákazník, který obnovuje z jasného důvodu, je stabilnější než zákazník, který obnovil jen proto, že odchod byl bolestivý.
+
+Špatná otázka zní: „Jak zabráníme zákazníkovi odejít?“
+
+Lepší otázka zní: „Jak mu před obnovou srozumitelně ukážeme hodnotu, další plán a férové možnosti rozhodnutí?“
+
+### Renewal začíná dlouho před fakturou
+
+Obnova smlouvy není událost v posledním měsíci. Je to výsledek práce během celého období. Pokud se hodnota vysvětluje až ve chvíli, kdy účetní posílá další fakturu, je pozdě. Zákazník už má vlastní příběh: buď produkt pomáhá, nebo je to další položka v rozpočtu.
+
+Praktický rytmus:
+
+| Moment | Co se má stát | Výstup |
+| --- | --- | --- |
+| 30 dní po startu | ověřit první hodnotu | krátký onboarding závěr |
+| čtvrtletně | projít výsledky, blokery a změny rozsahu | zákaznický review zápis |
+| 90 dní před obnovou | otevřít renewal téma bez tlaku | plán rozhodnutí |
+| 45 dní před obnovou | potvrdit rozsah, cenu, role a datové otázky | návrh obnovy |
+| po obnově | uzavřít, co se mění a co zůstává | nový success plán |
+
+Tento rytmus nemusí být složitý. U malého zákazníka stačí stručný e-mail a jeden review dokument. U většího zákazníka dává smysl schůzka. Podstatné je, aby renewal nebyl překvapení převlečené za administrativu.
+
+### Hodnotu popiš podle práce, ne podle funkcí
+
+Renewal prezentace se často zvrhne v seznam novinek: přidali jsme export, dashboard, role, API, nový editor, tmavý režim a tři další věci, které někdo prosadil na roadmapě. Jenže zákazník neobnovuje kvůli tomu, že tým hodně vydal. Obnovuje proto, že produkt pomohl udělat práci lépe, levněji, bezpečněji nebo klidněji.
+
+Hodnotu piš jako pracovní výsledek:
+
+| Slabé tvrzení | Lepší tvrzení |
+| --- | --- |
+| „Přidali jsme nové workflow.“ | „Obchodní tým má jednu schválenou verzi nabídky před předáním do delivery.“ |
+| „Zvýšila se aktivita uživatelů.“ | „Tři týmy dokončují měsíční kontrolu bez ručního sběru podkladů.“ |
+| „Máte více integrací.“ | „Fakturační data se už nepřepisují ručně mezi dvěma systémy.“ |
+| „Používáte pokročilé role.“ | „Admin už nemusí dávat široký přístup lidem, kteří potřebují jen jeden krok workflow.“ |
+
+Když nemáš jasný pracovní výsledek, nesnaž se ho nahradit dlouhým grafem. Raději to pojmenuj: „Tady jsme očekávanou hodnotu zatím neprokázali a navrhujeme další postup.“ Dospělé zákaznické vztahy unesou pravdu lépe než pěkně obarvený dashboard.
+
+### Renewal balíček má být rozhodovací dokument
+
+Zákazník před obnovou nepotřebuje reklamní deck. Potřebuje materiál, podle kterého může udělat rozhodnutí interně. Často ho neposuzuje jen hlavní sponsor, ale finance, procurement, IT, bezpečnost, právní tým nebo nový manažer, který u původního nákupu nebyl.
+
+Jednostránkový renewal balíček:
+
+| Sekce | Obsah |
+| --- | --- |
+| Používaný pracovní scénář | co přesně produkt ve firmě řeší |
+| Dosažená hodnota | konkrétní výsledky, kvalitativní signály, omezení |
+| Rozsah | uživatelé, týmy, moduly, integrace, support |
+| Změny od posledního období | co přibylo, co skončilo, co se mění v provozu |
+| Data a přístupy | jaké datové oblasti se používají, kdo má klíčové role |
+| Rizika a otevřené body | co může brzdit další hodnotu |
+| Návrh dalšího období | cíl, rozsah, měření, vlastník na obou stranách |
+| Možnosti rozhodnutí | obnovit stejně, upravit rozsah, rozšířit, zúžit, ukončit |
+
+Privacy-first poznámka: renewal balíček nemá být export CRM aktivit ani seznam osobních stop uživatelů. Pokud potřebuješ ukázat využití, používej agregované pracovní signály, role, týmy a dokončené scénáře. Konkrétní jména dávej jen tam, kde mají jasný účel a zákazník s tím počítá.
+
+### Změny ceny vysvětli bez mlhy
+
+Změna ceny je citlivá. Mlžení ji nezlepší. Pokud se mění cena, rozsah nebo balíček, napiš proč a co zákazník dostane nebo ztratí. Ne každá změna ceny je problém. Problém je překvapení, skrytý háček a pocit, že zákazník platí za něco, co nepoužívá.
+
+Dobrá cenová změna odpoví na otázky:
+
+- Co se přesně mění?
+- Od kdy změna platí?
+- Jaký rozsah je v nové ceně?
+- Jaké jsou alternativy, pokud zákazník nechce rozšíření?
+- Jak dlouho zůstává starý rozsah dostupný, pokud existuje přechodné období?
+- Kdo umí odpovědět na fakturační, technické a datové otázky?
+
+Příklad lidské formulace:
+
+```text
+Pro další období navrhujeme přechod z pilotního rozsahu na týmový plán pro 25 uživatelů. Cena se mění, protože workflow bude používat celé obchodní oddělení a přibývá administrátorská podpora, role a pravidelné čtvrtletní review. Pokud chcete zůstat u menšího rozsahu, můžeme obnovit jen pilotní tým bez rozšíření na zbytek oddělení.
+```
+
+Tohle není kouzelná věta, která vyřeší cenu. Ale dává zákazníkovi kontext a možnost volby. Což je překvapivě účinnější než „náš ceník se aktualizoval“ napsané tónem tiskárny bez duše.
+
+### Bezpečnostní a datové review nedělej až při panice
+
+Před obnovou se často znovu otevírají otázky dat, přístupů, dodavatelů, integrací a bezpečnosti. Někdy proto, že zákazník vyrostl. Někdy proto, že má nový interní proces. Někdy proto, že procurement objevil tabulku s třiceti otázkami a rozhodl se z ní udělat sport.
+
+Měj připravený renewal datový přehled:
+
+| Oblast | Co doložit |
+| --- | --- |
+| Data | jaké kategorie dat služba zpracovává a k čemu |
+| Přístupy | klíčové role, admini, servisní účty, exportní oprávnění |
+| Integrace | napojené systémy, datové směry, vlastník integrace |
+| Retence | co se drží aktivně, co v logách, co v zálohách |
+| Export a ukončení | jak zákazník získá data a jak probíhá vypnutí |
+| Subdodavatelé | kde běží kritické části služby a kdo má přístup |
+| Incidenty a změny | významné provozní události, pokud jsou relevantní |
+
+Nemusíš do renewal balíčku dávat tajné interní detaily. Máš ale umět rychle a konzistentně odpovědět. Privacy-first provoz je v renewal fázi obchodní výhoda jen tehdy, když není schovaný v hlavě jednoho člověka.
+
+### Nenech renewal vlastnit jen sales
+
+Obnova smlouvy se sice často uzavírá obchodně, ale hodnota vzniká napříč týmem. Sales zná rozhodovací proces, customer success zná realitu používání, produkt vidí vzory a support slyší tření. Pokud renewal vlastní jen sales, hrozí, že se slíbí rozšíření bez připravené podpory nebo se přehlédne technický problém, který zákazníka tiše štve půl roku.
+
+Krátká interní renewal karta:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jaký výsledek zákazník koupil? |  |
+| Jaký výsledek dnes skutečně dostává? |  |
+| Kdo je sponsor, admin a každodenní owner? |  |
+| Jaké opakované dotazy řešil support? |  |
+| Co produkt slíbil opravit nebo dodat? |  |
+| Jaké datové nebo bezpečnostní otázky jsou otevřené? |  |
+| Jaký další rozsah dává smysl? |  |
+| Co by bylo neférové prodávat teď? |  |
+
+Poslední otázka je důležitá. Někdy je nejlepší renewal strategie neprodávat rozšíření, ale stabilizovat současný workflow. Krátkodobě to vypadá méně ambiciózně. Dlouhodobě to může zachránit účet.
+
+### Ukončení služby je součást férové obnovy
+
+Obnova není férová, pokud zákazník nemá realistickou možnost neobnovit. To neznamená, že má být odchod bez práce. Znamená to, že pravidla ukončení jsou jasná, export dat existuje, přístupy se dají uzavřít a nikdo netlačí zákazníka do rozhodnutí strachem.
+
+Před renewal konverzací měj jasně:
+
+- jak dlouho služba poběží po neobnovení,
+- kdo může požádat o export,
+- jaký export je dostupný,
+- co se stane s integracemi a tokeny,
+- kdy se odeberou přístupy,
+- jak se oddělí produktové ukončení od marketingových preferencí,
+- jaký kontakt řeší poslední fakturační a technické otázky.
+
+> Codyho komentář: Produkt, ze kterého se dá odejít čistě, se paradoxně lépe prodává. Zákazník nekupuje past. Kupuje schopnost. To je lepší obchodní základ než „snad si nevšimnou výpovědní lhůty v PDF z roku raz dva“.
+
+### Checklist: Renewal privacy-first
+
+- [ ] Obnova se řeší včas, ne až při poslední faktuře.
+- [ ] Existuje krátký přehled hodnoty podle pracovních výsledků.
+- [ ] Renewal balíček pomáhá zákazníkovi udělat interní rozhodnutí.
+- [ ] Využití produktu je popsané agregovaně a účelově, ne jako sledování jednotlivců.
+- [ ] Cena, rozsah a změny jsou vysvětlené bez mlhy.
+- [ ] Zákazník vidí férové možnosti: stejný rozsah, úprava, rozšíření, zúžení nebo ukončení.
+- [ ] Bezpečnostní a datové otázky mají připravené odpovědi.
+- [ ] Sales, customer success, produkt a support sdílí jednu renewal kartu.
+- [ ] Tým ví, co by bylo neférové prodávat před stabilizací hodnoty.
+- [ ] Export, ukončení služby a odebrání přístupů jsou popsané před rozhodnutím.
+- [ ] Po obnově vznikne nový success plán, ne jen zaplacená faktura.
+- [ ] Po neobnovení vznikne čistý offboarding, ne tichá pomsta formulářem.
+
+### Mini úkol
+
+Vyber jednoho zákazníka, kterého čeká obnova v dalších měsících, a vyplň renewal kartu:
+
+| Pole | Odpověď |
+| --- | --- |
+| Co zákazník původně koupil |  |
+| Jaký pracovní výsledek dnes dostává |  |
+| Co se povedlo doložit bez osobního sledování |  |
+| Co zůstává otevřené |  |
+| Jaký rozsah má smysl obnovit |  |
+| Co by bylo neférové teď prodávat |  |
+| Jaké datové nebo bezpečnostní otázky očekáváme |  |
+| Jaké jsou možnosti rozhodnutí |  |
+| Kdo je interní vlastník renewal procesu |  |
+| Jak bude vypadat čistý offboarding, pokud zákazník neobnoví |  |
+
+Potom napiš jednu větu, kterou bys zákazníkovi poslal 90 dní před obnovou. Pokud ta věta zní jako tlak, přepiš ji. Renewal nemá začínat zvukem zavírajících se dveří.
+
 ## Zdroje
 
 - ICANN: Information for Domain Name Registrants - práva a odpovědnosti držitelů domén včetně správy, obnovy a převodu doménové registrace: https://www.icann.org/registrants
@@ -17889,6 +18057,7 @@ Potom odlož jednu plánovanou rollout aktivitu, která jen „vytváří pověd
 
 ## Pracovní log
 
+- 2026-07-14: Doplněna příloha o obnově smlouvy bez vydírání lock-inem: renewal rytmus před fakturou, popis hodnoty podle pracovních výsledků, rozhodovací balíček, férové vysvětlení změn ceny a rozsahu, datové a bezpečnostní review, interní renewal karta, čisté ukončení služby, checklist a mini úkol.
 - 2026-07-14: Doplněna příloha o rozšíření po pilotu bez adopčního nátlaku: rollout rozhodnutí, vlny podle práce a datového rizika, role a přístupy, adopční metriky podle pracovního výsledku, komunikace změny, support balík, review neúspěšné vlny, checklist a mini úkol.
 - 2026-07-14: Doplněna příloha o prvních 30 dnech zákazníka bez onboardingového přetlaku: čtyřtýdenní plán podle změny chování, bezpečný první týden, ověření workflow, pilotní skupina, 30denní review, onboarding e-maily podle práce, checklist a mini úkol.
 - 2026-07-14: Doplněna příloha o sales handoffu do onboardingu bez ztráty kontextu: handoff karta, předávání závazků místo nálad, převod prodaného výsledku na první hodnotu, opatrná práce s produkčními daty, vlny rolí a přístupů, struktura handoff schůzky, měření tření v prvních týdnech, checklist a mini úkol.
