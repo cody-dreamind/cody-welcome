@@ -17931,6 +17931,129 @@ Vyber jednoho zákazníka, kterého čeká obnova v dalších měsících, a vyp
 
 Potom napiš jednu větu, kterou bys zákazníkovi poslal 90 dní před obnovou. Pokud ta věta zní jako tlak, přepiš ji. Renewal nemá začínat zvukem zavírajících se dveří.
 
+## Příloha: Bezpečnostní dotazník zákazníka bez panického opisování
+
+Bezpečnostní dotazník od zákazníka je dobré znamení. Někdo bere váš produkt dost vážně na to, aby se ptal, kde běží data, kdo k nim má přístup, jak řešíte incidenty a jestli umíte export nebo výmaz. Problém začíná ve chvíli, kdy tým odpovídá pokaždé znovu, pokaždé trochu jinak a pokaždé v panice deset minut před obchodní schůzkou.
+
+Špatná otázka zní: „Jak dotazník co nejrychleji vyplníme, aby deal nezdržoval?“
+
+Lepší otázka zní: „Jakou pravdivou a opakovatelnou bezpečnostní odpověď umíme dát, aniž bychom odhalili zbytečné interní detaily nebo slíbili víc, než provoz skutečně umí?“
+
+Privacy-first SaaS má v bezpečnostních dotaznících výhodu, pokud má uklizené základy: mapu dat, seznam dodavatelů, retenční pravidla, incidentní postup, přístupový audit a dokumentaci exportu. Když tyto věci existují, dotazník není detektivka. Je to jen převod interní reality do zákaznického jazyka.
+
+### Vytvoř odpovědní balíček
+
+Místo opisování odpovědí z posledních tří dotazníků si připrav jeden udržovaný balíček. Nemusí být veřejný celý, ale tým má vědět, kde leží a kdo ho vlastní.
+
+| Část | Co obsahuje | Vlastník |
+| --- | --- | --- |
+| Přehled služby | co produkt dělá, pro koho, jaká data typicky zpracovává | product |
+| Data a regiony | typy dat, region provozu, zálohy, subdodavatelé | ops nebo privacy owner |
+| Bezpečnostní základy | přístupy, 2FA, logy, incident plán, zálohy | engineering |
+| Práva a retence | export, výmaz, retence, offboarding zákazníka | support nebo ops |
+| Dokumenty | DPA, seznam subdodavatelů, privacy notice, případně certifikace | legal nebo leadership |
+| Kontaktní osoby | kdo odpovídá na technické, právní a obchodní otázky | sales owner |
+
+Balíček má být stručný. Cílem není poslat zákazníkovi interní provozní román. Cílem je odpovídat konzistentně a rychle.
+
+### Odpovídej pravdivě podle úrovně detailu
+
+Bezpečnostní dotazník často obsahuje otázky, které vypadají jednoduše, ale mohou mít špatnou odpověď, pokud tým chce působit větší, než je.
+
+Příklad:
+
+| Otázka zákazníka | Slabá odpověď | Lepší odpověď |
+| --- | --- | --- |
+| Máte pravidelný přístupový audit? | „Ano.“ | „Kritické přístupy kontrolujeme kvartálně a po odchodu člověka. Výstupem je seznam odebraných, zúžených a ponechaných oprávnění.“ |
+| Šifrujete data? | „Všechno je šifrované.“ | „Používáme HTTPS pro přenos. Úložiště a zálohy chráníme podle možností daného poskytovatele. Citlivější klíče a secrets jsou oddělené od kódu.“ |
+| Jak řešíte incidenty? | „Máme incident response.“ | „Máme incident kartu, role pro první hodinu, technické a datové posouzení a postup zákaznické komunikace.“ |
+| Kdo jsou subdodavatelé? | „Používáme ověřené partnery.“ | „Udržujeme seznam hlavních subdodavatelů podle účelu, regionu a typu dat. Změny kritických dodavatelů reviduje vlastník služby.“ |
+
+Lepší odpověď nemusí znít jako korporátní certifikát. Má být konkrétní, pravdivá a ověřitelná. Pokud něco ještě nemáte, napište stav a plán. Přehnaný slib je bezpečnostní dluh s obchodní mašlí.
+
+### Neprozrazuj zbytečné interní detaily
+
+Transparentnost neznamená poslat zákazníkovi všechno. Některé informace pomáhají důvěře, jiné jen zvyšují riziko.
+
+Sdílet typicky můžeš:
+
+- datové regiony a kategorie subdodavatelů,
+- princip přístupových práv,
+- retenční pravidla,
+- postup exportu a výmazu,
+- vysokou úroveň architektury,
+- kontakt pro incidentní nebo security otázky,
+- verzi nebo datum dokumentu.
+
+Nesdílej bez důvodu:
+
+- přesné interní názvy serverů, bucketů a databází,
+- screenshoty produkčních administrací,
+- detailní seznam všech účtů a rolí,
+- neveřejné incidentní logy,
+- tajné klíče, konfiguraci nebo interní IP adresy,
+- celé exporty dat jako „důkaz“.
+
+Codyho komentář: Bezpečnostní dotazník není talentová soutěž v otevřenosti. Má ukázat, že víš, co děláš. Nemá zákazníkovi poslat mapu technického sklepa včetně místa, kde leží náhradní klíč.
+
+### Připrav odpovědi podle rizika zákazníka
+
+Ne každý zákazník potřebuje stejnou hloubku. Malý tým kupující veřejný marketingový nástroj se ptá jinak než enterprise zákazník, který posílá osobní nebo obchodně citlivá data do SaaS.
+
+Rozumné úrovně:
+
+| Úroveň | Kdy stačí | Co dodat |
+| --- | --- | --- |
+| Základní | nízké riziko, žádná citlivá data | stručné FAQ, privacy notice, subdodavatelé, DPA na vyžádání |
+| Standardní B2B | zákaznická data, běžný SaaS provoz | odpovědní balíček, DPA, retenční a exportní postup, incident kontakt |
+| Kritická spolupráce | citlivější data, integrace, vyšší provozní dopad | technické review, datová mapa pro use case, role a přístupy, společný incident kontakt |
+
+Tím chráníš čas i bezpečnost. Ne každý dotazník si zaslouží tříhodinové ruční vyšetřování, ale žádný dotazník by neměl dostat náhodně poskládanou odpověď.
+
+### Z odpovědí udělej backlog zlepšení
+
+Dotazníky nejsou jen obchodní překážka. Jsou dobrý zdroj opakujících se otázek. Když se zákazníci ptají pořád na stejné věci, možná chybí stránka v dokumentaci, jasnější privacy notice, veřejný seznam subdodavatelů nebo interní runbook.
+
+Měsíčně si projdi:
+
+- které otázky se opakovaly,
+- kde odpověď trvala moc dlouho,
+- kde jsme museli říct „nemáme“,
+- kde zákazník nepochopil náš provoz,
+- co by šlo zveřejnit nebo zdokumentovat předem,
+- co je skutečné riziko, ne jen dotazníková formalita.
+
+Pak vyber jednu opravu. Ne deset. Například doplnit exportní postup, vytvořit veřejný seznam subdodavatelů, sepsat incident kontakt, nebo sjednotit odpověď k retenci záloh.
+
+### Checklist: Bezpečnostní dotazník bez paniky
+
+- [ ] Máme jeden udržovaný odpovědní balíček pro security a privacy otázky.
+- [ ] Balíček má vlastníka a datum poslední revize.
+- [ ] Odpovědi jsou pravdivé, konkrétní a nepřehání schopnosti týmu.
+- [ ] Rozlišujeme, co je vhodné sdílet a co by zbytečně zvýšilo bezpečnostní riziko.
+- [ ] Zákazníkům umíme vysvětlit data, regiony, subdodavatele, retenci, export a výmaz.
+- [ ] Máme připravený incident kontakt a stručný popis incidentního procesu.
+- [ ] DPA, seznam subdodavatelů a privacy notice jsou snadno dohledatelné.
+- [ ] Dotazníky vyhodnocujeme jako zdroj opakovaných otázek pro dokumentaci a produkt.
+- [ ] Po každém větším zákaznickém dotazníku aktualizujeme odpovědní balíček, pokud vznikla lepší formulace.
+- [ ] Nesdílíme interní secrets, produkční screenshoty, detailní infrastrukturu ani osobní údaje jako důkaz.
+
+### Mini úkol
+
+Vezmi poslední bezpečnostní nebo privacy dotazník od zákazníka a vyplň kartu:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Které tři otázky se daly zodpovědět hned? |  |
+| Které tři otázky vyžadovaly hledání nebo improvizaci? |  |
+| Která odpověď by měla být v interním odpovědním balíčku? |  |
+| Která odpověď by měla být veřejně v dokumentaci nebo FAQ? |  |
+| Kterou věc jsme slíbili a musíme ověřit v provozu? |  |
+| Co nesmíme příště sdílet příliš detailně? |  |
+| Kdo bude vlastníkem aktualizovaného balíčku? |  |
+
+Potom udělej jednu konkrétní změnu: založ odpovědní balíček, doplň subdodavatelský seznam, napiš standardní odpověď k retenci, připrav krátký incident kontakt, nebo převeď jednu opakovanou otázku do dokumentace. Bezpečnostní dotazníky nemají být požár. Mají být auditní zrcadlo, které tým pravidelně čistí.
+
 ## Zdroje
 
 - ICANN: Information for Domain Name Registrants - práva a odpovědnosti držitelů domén včetně správy, obnovy a převodu doménové registrace: https://www.icann.org/registrants
@@ -18057,6 +18180,7 @@ Potom napiš jednu větu, kterou bys zákazníkovi poslal 90 dní před obnovou.
 
 ## Pracovní log
 
+- 2026-07-14: Doplněna příloha o bezpečnostních dotaznících zákazníka bez panického opisování: odpovědní balíček, pravdivé úrovně detailu, hranice sdílení interních informací, rozlišení rizika zákazníka, převod opakovaných otázek do dokumentace, checklist a mini úkol.
 - 2026-07-14: Doplněna příloha o obnově smlouvy bez vydírání lock-inem: renewal rytmus před fakturou, popis hodnoty podle pracovních výsledků, rozhodovací balíček, férové vysvětlení změn ceny a rozsahu, datové a bezpečnostní review, interní renewal karta, čisté ukončení služby, checklist a mini úkol.
 - 2026-07-14: Doplněna příloha o rozšíření po pilotu bez adopčního nátlaku: rollout rozhodnutí, vlny podle práce a datového rizika, role a přístupy, adopční metriky podle pracovního výsledku, komunikace změny, support balík, review neúspěšné vlny, checklist a mini úkol.
 - 2026-07-14: Doplněna příloha o prvních 30 dnech zákazníka bez onboardingového přetlaku: čtyřtýdenní plán podle změny chování, bezpečný první týden, ověření workflow, pilotní skupina, 30denní review, onboarding e-maily podle práce, checklist a mini úkol.
