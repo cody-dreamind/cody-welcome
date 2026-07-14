@@ -15554,6 +15554,199 @@ Vezmi poslední discovery call, úvodní poptávku nebo první schůzku před na
 
 Potom udělej jednu konkrétní opravu: přidej do šablony předhovorovou větu o neposílání citlivých dat, vytvoř discovery brief, zkrať seznam otázek, nebo odmítni produkční přístup, dokud není jasný účel. Dobrý první hovor nemá vytěžit maximum informací. Má vytvořit dost jasna na správný další krok.
 
+## Příloha: Kickoff projektu bez rozjezdu do mlhy
+
+Kickoff je chvíle, kdy se spolupráce přepne z prodeje do dodávky. Právě tady se často rozhodne, jestli projekt poběží klidně, nebo se za tři týdny začne řešit, kdo vlastně co slíbil, kde jsou podklady, proč někdo dostal produkční přístup a proč se „malá změna“ najednou tváří jako nový produkt.
+
+Špatná otázka zní: „Kdy můžeme začít makat?“
+
+Lepší otázka zní: „Co musí být jasné, aby první týden práce nevytvořil dluh, riziko a komunikační chaos?“
+
+Privacy-first kickoff není pomalejší start. Je to start, který ví, co zatím nepotřebuje.
+
+### Kickoff není opakování nabídky
+
+Nabídka popisuje očekávaný výsledek a rámec spolupráce. Kickoff má převést rámec do pracovního systému: kdo rozhoduje, kde vznikají úkoly, jak se schvalují změny, jaké prostředí se používá, jaká data jsou povolená a kdy se něco považuje za hotové.
+
+Na kickoffu se nemá znovu otevírat celý obchodní příběh. Pokud se ukáže, že klient očekává jiný výsledek než v nabídce, není to detail k vyřešení bokem. Je to změna rozsahu.
+
+Praktická věta:
+
+```text
+Na kickoffu potvrzujeme pracovní způsob dodávky. Pokud objevíme nový cíl nebo větší změnu rozsahu, zapíšeme ji jako změnový požadavek, ne jako tichou úpravu původní dohody.
+```
+
+Ano, zní to suše. Ale méně suše než „mysleli jsme, že to bylo jasné“ po měsíci práce.
+
+### Připrav kickoff brief
+
+Kickoff brief je jednostránkový pracovní dokument, který dostanou všichni důležití lidé před první projektovou schůzkou. Nemá být právní román ani prezentace se třiceti slidovými dekoracemi. Má sjednotit kontext.
+
+Struktura kickoff briefu:
+
+| Sekce | Co obsahuje |
+| --- | --- |
+| Cíl první fáze | konkrétní výsledek, ne obecná ambice |
+| Mimo rozsah | co se teď vědomě nedělá |
+| Vlastníci | kdo rozhoduje za klienta a kdo za dodavatele |
+| Komunikační kanál | kde se řeší úkoly, rozhodnutí a blokery |
+| Prostředí | produkce, staging, demo, lokál, preview |
+| Datový rozsah | jaká data se smí použít a jaká se neposílají |
+| Přístupy | role, účel, expirace, schvalování |
+| Rytmus | standup, týdenní review, schválení milníků |
+| Definice hotovo | jak poznáme, že je část dodaná |
+| Rizika | otevřené otázky, závislosti, blokery |
+
+Kickoff brief má jednu velkou výhodu: když někdo přibude později, nemusí se učit projekt z dvaceti chatových vláken a jedné zapomenuté nahrávky.
+
+### Přístupy dávej po vlnách
+
+Nejčastější startovní chyba je věta „pošlete nám všechno, ať se nezdržujeme“. Zní efektivně, ale vytváří zbytečný bezpečnostní a provozní dluh.
+
+Rozumnější postup:
+
+1. Nejdřív veřejné podklady, read-only reporty, demo účty a anonymizované ukázky.
+2. Potom staging, preview nebo testovací prostředí.
+3. Produkční přístup až ve chvíli, kdy existuje jasný účel, vlastník, rozsah a konec platnosti.
+
+Tabulka pro přístup:
+
+| Systém | Účel | Role | Kdo schvaluje | Expirace | Produkční data? |
+| --- | --- | --- | --- | --- | --- |
+| CMS | úprava obsahu | editor |  |  | ne |
+| Analytika | ověření agregovaných konverzí | viewer |  |  | ne |
+| Hosting | nasazení releasu | scoped deploy role |  |  | ne podle potřeby |
+| CRM | kontrola poptávkové cesty | export vybraných polí nebo demo |  |  | pouze po dohodě |
+
+Pokud systém neumí role, dočasnost nebo auditní stopu, je to informace o riziku. Ne důvod rozdávat admin účet rychleji.
+
+### Datová pravidla napiš před prvním uploadem
+
+Kickoff má jasně říct, jaké podklady jsou bezpečné a jaké zatím nechceš. Tohle šetří trapné situace, kdy klient pošle export zákazníků „pro kontext“ a tým pak řeší, kdo ho stáhl, kam se uložil a jestli se objevil v ticketu.
+
+Jednoduché pravidlo pro klienta:
+
+```text
+Pro první fázi prosím neposílejte produkční databázové exporty, hesla, API klíče, platební údaje ani soubory se zákaznickými osobními údaji. Pokud budeme potřebovat konkrétní data, domluvíme minimální rozsah, bezpečný kanál, dobu uložení a způsob smazání.
+```
+
+Datová pravidla pro tým:
+
+- screenshoty před sdílením redigovat,
+- produkční exporty neukládat do běžného projektového disku,
+- přílohy s osobními údaji nepřeposílat do chatu,
+- AI nástroje nepoužívat na interní nebo zákaznická data bez schváleného účelu a nastavení,
+- testovací data držet odděleně od produkce,
+- po skončení fáze mazat dočasné kopie a přístupy.
+
+Codyho komentář: „Jen pro kontext“ je jedna z nejdražších vět v práci s daty. Kontext má být přesný, ne nekonečný.
+
+### První týden má mít malý ověřitelný výstup
+
+Kickoff nemá skončit pocitem, že se všichni hezky poznali. Má skončit prvním pracovním závazkem, který se dá ověřit. Ideálně něčím malým, co rychle ukáže, jestli komunikace, přístupy a definice hotovo fungují.
+
+Příklady dobrého prvního týdne:
+
+- audit jedné klíčové stránky a návrh tří konkrétních oprav,
+- nastavení preview prostředí s demo daty,
+- přepsání jedné formulářové cesty včetně datové poznámky,
+- mapa současných nástrojů a přístupů,
+- prototyp první obrazovky s akceptačními kritérii,
+- import malého anonymizovaného vzorku dat do testovacího prostředí.
+
+Špatný první týden:
+
+- „sbíráme všechny podklady“,
+- „čekáme na admin přístup“,
+- „probíhá interní debata“,
+- „ladíme celkovou vizi“,
+- „někdo měl dodat export, ale nevíme kdo“.
+
+Malý výstup není málo ambiciózní. Je to test spolupráce.
+
+### Rozhodnutí odděl od diskuze
+
+Kickoff často vytvoří spoustu dobrých debat. Pokud se ale rozhodnutí ztratí v chatu, projekt si začne vyrábět vlastní realitu. Potřebuješ jednoduchý rozhodovací log.
+
+Minimální záznam rozhodnutí:
+
+| Datum | Rozhodnutí | Proč | Dopad | Kdo rozhodl |
+| --- | --- | --- | --- | --- |
+| 2026-07-14 | První fáze řeší pouze poptávkovou cestu, ne celý web | největší dopad na obchod | blog a kariéra mimo rozsah |  |
+| 2026-07-14 | Pro audit se použijí redigované screenshoty a agregované metriky | produkční export není nutný | žádný přístup do CRM v první fázi |  |
+
+Rozhodovací log nemusí být krásný. Musí být dohledatelný. Krásné dokumenty, které nikdo neaktualizuje, jsou jen dražší forma mlhy.
+
+### Změnové požadavky pojmenuj hned
+
+Na kickoffu se často objeví nové nápady. To je v pořádku. Problém vzniká ve chvíli, kdy se nový nápad tváří jako samozřejmá součást už domluvené práce.
+
+Použij jednoduché tři stavy:
+
+| Stav | Co znamená |
+| --- | --- |
+| V rozsahu | patří do aktuální dodávky a má akceptační kritéria |
+| Kandidát | dává smysl, ale čeká na odhad a rozhodnutí |
+| Mimo rozsah | teď se nedělá, případně patří do další fáze |
+
+Věta pro schůzku:
+
+```text
+Tohle může být užitečné, ale není to součást aktuální fáze. Zapíšu to jako kandidáta změny, aby to nezmizelo ani se to nepropsalo do práce bez rozhodnutí.
+```
+
+Tím chráníš klienta před nekontrolovaným rozpočtem a tým před neviditelnou prací. Výjimečně civilizovaný obchodní trik: pojmenovat realitu.
+
+### Kickoff má skončit konkrétním provozním stavem
+
+Po kickoffu má být jasné:
+
+- kdo má jaký přístup,
+- co se čeká od klienta,
+- co dodá tým jako první,
+- kde se píšou úkoly,
+- kde se zapisují rozhodnutí,
+- jak se schvaluje hotová práce,
+- co je mimo rozsah,
+- jaká data se nesmí posílat,
+- kdy bude první review.
+
+Pokud tohle není jasné, kickoff nebyl hotový. Byl to jen příjemný videohovor s budoucím problémem.
+
+### Checklist: Kickoff privacy-first
+
+- [ ] Kickoff brief je poslaný před schůzkou.
+- [ ] Cíl první fáze je napsaný jako konkrétní výsledek.
+- [ ] Mimo rozsah je uvedený stejně jasně jako rozsah.
+- [ ] Existuje jeden vlastník rozhodnutí na straně klienta.
+- [ ] Komunikační kanál pro úkoly, rozhodnutí a blokery je jasný.
+- [ ] Přístupy se dávají po vlnách podle účelu.
+- [ ] Produkční přístupy mají vlastníka, roli, důvod a expiraci.
+- [ ] Datová pravidla říkají, co se zatím neposílá.
+- [ ] První týden má malý ověřitelný výstup.
+- [ ] Rozhodnutí se zapisují odděleně od diskuze.
+- [ ] Nové nápady mají stav: v rozsahu, kandidát, nebo mimo rozsah.
+- [ ] Po kickoffu je naplánované první review.
+
+### Mini úkol
+
+Vezmi aktuální nebo poslední projekt a vyplň kickoff kartu:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jaký je cíl první fáze jednou větou? |  |
+| Co je výslovně mimo rozsah? |  |
+| Kdo rozhoduje za klienta? |  |
+| Kde se zapisují úkoly? |  |
+| Kde se zapisují rozhodnutí? |  |
+| Jaký první malý výstup dodáme do týdne? |  |
+| Jaké přístupy jsou potřeba hned a proč? |  |
+| Jaké přístupy zatím nepotřebujeme? |  |
+| Jaká data klient nesmí posílat bez dohody? |  |
+| Kdy bude první review? |  |
+
+Potom udělej jednu konkrétní opravu: napiš kickoff brief, omez první přístup na read-only, vytvoř rozhodovací log, doplň mimo rozsah, nebo přepiš první týden na malý ověřitelný výstup. Kickoff není ceremonie. Je to pojistka proti tomu, aby projekt nezačal chaosem v hezkém tričku.
+
 ## Zdroje
 
 - ICANN: Information for Domain Name Registrants - práva a odpovědnosti držitelů domén včetně správy, obnovy a převodu doménové registrace: https://www.icann.org/registrants
@@ -15680,6 +15873,7 @@ Potom udělej jednu konkrétní opravu: přidej do šablony předhovorovou větu
 
 ## Pracovní log
 
+- 2026-07-14: Doplněna příloha o kickoffu projektu bez rozjezdu do mlhy: rozdíl mezi nabídkou a pracovním startem, kickoff brief, přístupy po vlnách, datová pravidla před prvním uploadem, malý ověřitelný výstup prvního týdne, rozhodovací log, změnové požadavky, checklist a mini úkol.
 - 2026-07-14: Doplněna příloha o discovery callu bez obchodního výslechu a datového přetlaku: rámec před hovorem, otázky podle rozhodnutí, oddělení fitu od auditu, vylučovací seznam citlivých dat, discovery brief, červené vlajky, čisté odmítnutí nefitové spolupráce, checklist a mini úkol.
 - 2026-07-14: Doplněna příloha o nabídkách a scope projektu bez mlhy a datového chaosu: výsledek místo seznamu funkcí, rozdělení dodávky/spolupráce/mimo rozsah, datový rozsah nabídky, akceptační kritéria, změnové požadavky, komunikační rytmus, provoz po předání, checklist a mini úkol.
 - 2026-07-14: Doplněna příloha o doporučeních a partnerství bez datového handlu: kdy je doporučení férové, referral balíček pro partnera, předávání kontaktů jen s volbou člověka, provize navázaná na kvalitu místo objemu, jednoduché měření bez profilování, společný obsah jako alternativa k výměně leadů, checklist a mini úkol.
