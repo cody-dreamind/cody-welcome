@@ -14350,6 +14350,162 @@ Vyber jeden screenshot, video nebo produktovou ukázku, kterou používáš v do
 
 Potom udělej jednu opravu: nahraď reálné údaje demo daty, ořízni obrázek, dopiš textové kroky pod video, smaž starý neredigovaný soubor nebo přidej datum revize. Návod má člověku pomoct, ne potichu vynést z produktu víc, než bylo potřeba.
 
+## Příloha: Sdílené odkazy a zákaznické portály bez volného průvanu
+
+Sdílený odkaz je krásná produktová zkratka. Zákazník nemusí zakládat účet, kolega se rychle dostane k podkladu, klient schválí návrh bez dalšího e-mailového kolečka. Jenže stejná zkratka se snadno změní v díru: odkaz se přepošle, skončí v chatu, uloží se do ticketu, propíše se do logu nebo zůstane aktivní dlouho po skončení spolupráce.
+
+Privacy-first pravidlo zní: sdílený odkaz není méně citlivý jen proto, že je pohodlný. Pokud odkaz otevře zákaznická data, dokument, export, fakturu, interní náhled nebo schvalovací stránku, navrhuj ho jako přístupový mechanismus s vlastním životním cyklem.
+
+### Začni typem sdílení
+
+Ne každý odkaz potřebuje stejnou ochranu. Nejdřív pojmenuj, co se přes něj vlastně sdílí:
+
+| Typ odkazu | Příklad | Výchozí ochrana |
+| --- | --- | --- |
+| Veřejný obsah | článek, changelog, veřejná dokumentace | trvalá URL, žádný token |
+| Nízké riziko | náhled neosobní šablony, demo stránka | náhodný token, expirace podle účelu |
+| Zákaznický podklad | nabídka, návrh, report, export | přihlášení nebo jednorázový odkaz s expirací |
+| Citlivý obsah | faktury, osobní údaje, smlouvy, produkční data | přihlášení, role, auditní stopa, často bez veřejného odkazu |
+| Schvalovací akce | potvrzení změny, podpis, mazání, billing | přihlášení nebo dodatečné ověření |
+
+Tahle tabulka má být v produktu dřív než tlačítko „Sdílet“. Jinak bude každý tým řešit bezpečnost až podle toho, kdo zrovna nejhlasitěji potřebuje poslat odkaz klientovi.
+
+### Token není název souboru
+
+Sdílený odkaz s tokenem má být neuhodnutelný, bez osobních údajů a bez významu pro člověka. Do URL nepatří e-mail zákazníka, název firmy, číslo faktury, interní ID s předvídatelnou řadou ani popis problému. OWASP u session managementu upozorňuje, že identifikátor v URL může unikat přes odkazy, historii prohlížeče, logy, referrer hlavičku nebo vyhledávače; u sdílených odkazů je riziko podobné, i když nejde o klasickou session.
+
+Praktická pravidla:
+
+- Token generuj náhodně a dostatečně dlouhý.
+- Význam odkazu drž na serveru, ne zakódovaný v URL.
+- Odkaz nikdy nedávej do sitemap, interního vyhledávání ani veřejného indexu.
+- Pro citlivější obsah nastav krátkou expiraci.
+- Umožni ruční zneplatnění odkazu.
+- Po použití jednorázového odkazu ho zneplatni, pokud to odpovídá účelu.
+- Loguj ID odkazu a stav, ne celý token.
+
+Pokud odkaz umožňuje změnu stavu, například schválit nabídku nebo stáhnout export, neber ho jako obyčejnou stránku. Je to akce. A akce má mít kontrolu oprávnění, potvrzení a jasný výsledek.
+
+### Expirace je produktový text, ne jen cron
+
+Expirace nemá být tajná technická vlastnost. Uživatel má vědět, jak dlouho odkaz platí a co se stane potom.
+
+Příklady mikrotextů:
+
+- „Odkaz platí 7 dní. Potom může vlastník projektu vytvořit nový.“
+- „Soubor bude dostupný 24 hodin a pak ho smažeme z dočasného úložiště.“
+- „Tento odkaz je jednorázový. Po otevření si dokument stáhněte nebo požádejte o nový.“
+
+Dobrá expirace vychází z účelu:
+
+- Náhled pro rychlé schválení: dny.
+- Dočasný export: hodiny až jednotky dní.
+- Veřejná dokumentace: trvalá URL bez tajného tokenu.
+- Smlouva nebo faktura: raději zákaznický portál s přihlášením než věčný magický odkaz.
+
+Codyho komentář: „Odkaz platí navždy, protože se to může hodit“ je stejná věta jako „necháme klíče pod rohožkou, kdyby někdo přišel později“. Produktově pohodlné, provozně odvážné, auditně trochu sport.
+
+### Zákaznický portál má mít role, ne jen login
+
+Portál není bezpečný jen proto, že má přihlašovací obrazovku. Důležité je, co člověk po přihlášení uvidí a udělá.
+
+U každé portálové části si napiš:
+
+| Oblast | Kdo ji smí vidět | Kdo ji smí měnit | Riziko |
+| --- | --- | --- | --- |
+| Faktury | vlastník účtu, billing role | billing role | finanční a osobní údaje |
+| Projekty | člen projektu | editor nebo admin | pracovní obsah zákazníka |
+| Export dat | admin nebo vlastník | admin nebo vlastník | hromadný únik dat |
+| Integrace | admin | admin | přístupy do dalších systémů |
+| Uživatelé a role | vlastník, admin | vlastník, admin | eskalace oprávnění |
+
+Role pojmenuj podle práce, ne podle technické hierarchie. „Billing“, „projektový editor“ a „bezpečnostní kontakt“ jsou srozumitelnější než „level 2 user“. Pokud člověk vidí citlivou akci, měl by vidět i její důsledek: co se změní, kdo dostane přístup, jak dlouho bude export dostupný nebo jak se akce dá vrátit.
+
+### E-mail používej jako upozornění, ne jako úložiště
+
+E-mail je dobrý pro upozornění, horší pro citlivý obsah. Zpráva se přeposílá, archivuje, synchronizuje do mobilu a často končí ve sdílených schránkách. Proto do e-mailu nedávej víc detailu, než je nutné.
+
+Lepší vzor:
+
+- E-mail: „V portálu je připravený export dat pro projekt Alfa. Platí do pátku 18:00.“
+- Portál po přihlášení: detail exportu, rozsah dat, tlačítko pro stažení, auditní záznam.
+
+Slabší vzor:
+
+- E-mail s přílohou `export-vsichni-zakaznici.xlsx`.
+- E-mail s magickým odkazem bez expirace.
+- E-mail s citlivým obsahem v předmětu.
+
+Pokud posíláš odkaz bez přihlášení, dej do e-mailu minimum kontextu a v produktu umožni jeho zneplatnění. Pro reset hesla, pozvánky a podobné jednorázové odkazy se hodí stejná disciplína: token má být náhodný, časově omezený a po použití neplatný. OWASP Forgot Password Cheat Sheet tento princip popisuje u resetovacích tokenů; v produktu ho můžeš použít jako dobrý mentální model pro další jednorázové odkazy.
+
+### Auditní stopa má pomáhat bez sledování každého pohybu
+
+U sdílených odkazů nepotřebuješ ukládat každý detail chování člověka. Potřebuješ vědět, kdo odkaz vytvořil, k čemu sloužil, kdy expiruje, jestli byl použit a jestli ho někdo zneplatnil.
+
+Praktický záznam:
+
+| Pole | Příklad |
+| --- | --- |
+| Typ odkazu | export, náhled, schválení, pozvánka |
+| Vlastník | uživatel nebo servisní proces, který odkaz vytvořil |
+| Rozsah | projekt, dokument, export, faktura |
+| Vytvořeno | datum a čas |
+| Expirace | datum a čas |
+| Stav | aktivní, použitý, expirovaný, zneplatněný |
+| Poslední použití | datum a přibližný technický kontext |
+| Důvod zneplatnění | ručně, po použití, po změně oprávnění, po incidentu |
+
+Neukládej do auditní stopy celý token, zbytečné IP adresy navždy ani obsah dokumentu. Audit má odpovědět na provozní otázku, ne vyrábět druhou databázi citlivých detailů.
+
+### Změna oprávnění musí rušit staré zkratky
+
+Častá chyba: uživatel ztratí přístup k projektu, ale staré sdílené odkazy žijí dál. Nebo zákazník zruší účet, ale exportní odkaz v e-mailu pořád funguje. Sdílení musí reagovat na změny oprávnění.
+
+Při těchto událostech zkontroluj a případně zneplatni odkazy:
+
+- odebrání uživatele z workspace,
+- změna role,
+- zrušení zákaznického účtu,
+- ukončení projektu,
+- regenerace exportu,
+- nahlášené přeposlání odkazu špatné osobě,
+- bezpečnostní incident,
+- změna klasifikace dokumentu.
+
+Technicky to může být jednoduché: odkazy se neověřují jen podle tokenu, ale také podle aktuálního stavu zdroje, vlastníka a oprávnění. Token je vstupenka. Ne důvod pustit člověka do budovy, která už neexistuje.
+
+### Checklist: Sdílené odkazy a portály privacy-first
+
+- [ ] Každý typ sdíleného odkazu má popsaný účel a riziko.
+- [ ] Citlivé akce používají přihlášení nebo dodatečné ověření.
+- [ ] Tokeny jsou náhodné, neuhodnutelné a bez osobních údajů.
+- [ ] URL neobsahuje e-mail, název firmy, číslo faktury ani interní citlivý kontext.
+- [ ] Odkazy mají expiraci podle účelu.
+- [ ] Uživatel vidí, jak dlouho odkaz platí.
+- [ ] Existuje ruční zneplatnění odkazu.
+- [ ] Změna role, odchod uživatele nebo zrušení účtu ruší relevantní odkazy.
+- [ ] E-mail obsahuje upozornění, ne citlivý obsah jako přílohu bez důvodu.
+- [ ] Portál má role podle práce uživatele.
+- [ ] Auditní stopa ukládá stav odkazu, ne celý token a zbytečný obsah.
+- [ ] Sdílené odkazy nejsou v sitemap, veřejném indexu ani interním vyhledávání.
+
+### Mini úkol
+
+Vyber jeden typ odkazu nebo portálové akce a vyplň tabulku:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Co odkaz otevírá nebo mění? |  |
+| Kdo ho smí vytvořit? |  |
+| Kdo ho smí otevřít? |  |
+| Jak dlouho má platit? |  |
+| Co se stane po změně role nebo zrušení účtu? |  |
+| Kde se token může propsat do logů, e-mailu nebo referreru? |  |
+| Jak ho uživatel zneplatní? |  |
+| Jaký auditní záznam opravdu potřebujeme? |  |
+
+Potom udělej jednu opravu: zkrať expiraci, odeber citlivý údaj z URL, přidej tlačítko „Zneplatnit odkaz“, přesuň přílohu z e-mailu do portálu nebo zruš staré odkazy při změně role. Sdílení má šetřit čas, ne vyrábět neviditelné zadní dveře.
+
 ## Zdroje
 
 - ICANN: Information for Domain Name Registrants - práva a odpovědnosti držitelů domén včetně správy, obnovy a převodu doménové registrace: https://www.icann.org/registrants
@@ -14376,6 +14532,8 @@ Potom udělej jednu opravu: nahraď reálné údaje demo daty, ořízni obrázek
 - OWASP Cheat Sheet Series: REST Security Cheat Sheet - praktická doporučení k HTTPS, autentizaci, validaci vstupů, bezpečným chybám a práci s tokeny u REST API: https://cheatsheetseries.owasp.org/cheatsheets/REST_Security_Cheat_Sheet.html
 - OWASP Cheat Sheet Series: Web Service Security Cheat Sheet - obecná doporučení pro zabezpečení webových služeb a prevenci typických rizik při integracích: https://cheatsheetseries.owasp.org/cheatsheets/Web_Service_Security_Cheat_Sheet.html
 - OWASP Cheat Sheet Series: File Upload Cheat Sheet - doporučení pro validaci, omezení velikosti, ukládání, oprávnění a bezpečné zpracování nahrávaných souborů: https://cheatsheetseries.owasp.org/cheatsheets/File_Upload_Cheat_Sheet.html
+- OWASP Cheat Sheet Series: Session Management Cheat Sheet - doporučení k session tokenům, životnímu cyklu session, expiraci a rizikům předávání identifikátorů přes URL: https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html
+- OWASP Cheat Sheet Series: Forgot Password Cheat Sheet - praktická doporučení k jednorázovým, náhodným a časově omezeným resetovacím tokenům: https://cheatsheetseries.owasp.org/cheatsheets/Forgot_Password_Cheat_Sheet.html
 - OWASP Software Component Verification Standard - rámec aktivit, kontrol a dobrých praktik pro snižování rizika v softwarovém supply chainu: https://owasp.org/www-project-software-component-verification-standard/
 - GitHub Docs: Dependabot alerts - upozornění na zranitelné závislosti v repozitáři a návaznost na dependency graph: https://docs.github.com/en/code-security/concepts/supply-chain-security/dependabot-alerts
 - GitHub Docs: Dependency review - kontrola změn závislostí v pull requestech a upozornění na rizikové dependency změny: https://docs.github.com/en/code-security/concepts/supply-chain-security/dependency-review
@@ -14471,6 +14629,7 @@ Potom udělej jednu opravu: nahraď reálné údaje demo daty, ořízni obrázek
 
 ## Pracovní log
 
+- 2026-07-14: Doplněna příloha o sdílených odkazech a zákaznických portálech bez volného průvanu: typy sdílení podle rizika, bezpečné tokeny, expirace jako produktový text, role v portálu, e-mail jako upozornění místo úložiště, auditní stopa, rušení starých odkazů při změně oprávnění, checklist a mini úkol; ověřeny a doplněny zdroje OWASP k session managementu a jednorázovým resetovacím tokenům.
 - 2026-07-14: Doplněna příloha o produktových screenshotech a videonávodech bez úniku dat: účel ukázky, demo data, vizuální audit před nahráváním, nevratná redakce, scénář videonávodu, přístupné alternativy, vlastnictví veřejných ukázek, interní sdílení, checklist a mini úkol; ověřeny a doplněny zdroje Evropské komise k minimalizaci dat a W3C WAI k přístupným audio/video médiím.
 - 2026-07-13: Doplněna příloha o klientském schvalování změn bez nekonečného kolečka: definice hotovo, typy připomínek, jeden kanál a vlastník, bezpečné preview bez produkčních dat, feedback podle rozhodnutí, oddělení nových požadavků od aktuální dodávky, písemné uzavření kola, checklist a mini úkol.
 - 2026-07-13: Doplněna příloha o externí spolupráci bez předání klíčů od provozu: zadání před přístupem, role externistů, staging a demo data jako výchozí stav, bezpečné předávání secrets, smluvní a datová kontrolní karta, auditní stopa změn, offboarding dodavatelů, checklist a mini úkol; navázáno na existující zdroje Evropské komise, GDPR článku 28, SCC a OWASP Secrets Management.
