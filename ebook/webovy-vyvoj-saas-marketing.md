@@ -17042,6 +17042,191 @@ Projdi aktuální tok zrušení nebo navrhni první verzi karty odchodu:
 
 Potom udělej jednu konkrétní opravu: zkrať odchodový dotazník, přidej přeskočení, napiš jasný datový dopad, odděl výmaz od zrušení předplatného, doplň export, nebo zaveď měsíční churn review s jednou rozhodovací kartou. Férový odchod není slabost. Je to poslední šance potvrdit, že produkt respektuje zákazníka i bez další faktury.
 
+## Příloha: Win-back bez remarketingového stalkingu
+
+Zákazník odešel. Tečka? Někdy ano. Někdy ale odešel proto, že produkt tehdy nebyl připravený, tým neměl rozpočet, chyběla jedna zásadní funkce, onboarding byl moc těžký, nebo projekt skončil dřív, než se hodnota stihla ukázat. Win-back není lov na člověka, který už řekl ne. Je to opatrný návrat k situaci, kde se něco reálně změnilo.
+
+Špatná otázka zní: „Jak bývalého zákazníka všude doženeme reklamou, dokud se nevrátí?“
+
+Lepší otázka zní: „Kdy máme legitimní důvod ozvat se bývalému zákazníkovi, jak mu dát kontrolu nad dalším kontaktem a jak z toho udělat užitečnou produktovou zpětnou vazbu i v případě, že se nevrátí?“
+
+Privacy-first win-back stojí na zdrženlivosti. Nepotřebuješ tajně spojovat produktová data, CRM poznámky, reklamní publika a osobní historii kliků. Potřebuješ vědět, proč zákazník odešel, jestli se změnil důvod odchodu, a zda má smysl dát mu jednoduchou možnost navázat. To je méně efektní než reklamní mašinerie. Taky je to méně otravné, méně rizikové a často překvapivě dospělé.
+
+### Ne každý odchod je pozvánka k návratu
+
+Začni segmentací podle situace, ne podle touhy zachránit graf. Win-back nemá být jedna sekvence pro všechny zrušené účty.
+
+Praktické skupiny:
+
+- zákazník odešel kvůli chybějící funkci, kterou jste mezitím dokončili,
+- zákazník odešel kvůli ceně a mezitím vznikl vhodnější tarif,
+- zákazník skončil projekt a může řešit podobný nový projekt,
+- zákazník odešel kvůli špatnému onboardingu a vy jste onboarding zásadně zjednodušili,
+- zákazník měl technický problém a vy jste opravili příčinu,
+- zákazník odešel bez jasného důvodu,
+- zákazník výslovně nechce další kontakt,
+- zákazník požádal o výmaz nebo omezení zpracování.
+
+Poslední dvě skupiny nejsou obchodní příležitost. Jsou to hranice. Respektuj je bez kreativního „ale kdybychom to poslali z jiné domény“. Tohle není růstový hack, to je šuplík s budoucím průšvihem.
+
+Win-back kandidát má splnit tři podmínky:
+
+1. Existuje konkrétní změna, která souvisí s důvodem odchodu.
+2. Máš čistý kanál a oprávněný důvod pro kontakt podle vlastních pravidel komunikace.
+3. Zpráva jde snadno odmítnout a odmítnutí se propíše do preference centra nebo CRM.
+
+Pokud jedna podmínka chybí, místo kampaně udělej interní učení. Ne každý signál musí skončit e-mailem.
+
+### Důvod kontaktu napiš lidsky
+
+Win-back zpráva nemá znít jako newsletter v převleku. Má být krátká, konkrétní a férová. Člověk má během pár sekund pochopit, proč mu píšeš právě teď.
+
+Dobrá zpráva obsahuje:
+
+- připomenutí vztahu bez manipulace,
+- jednu relevantní změnu,
+- jasný dopad pro zákazníka,
+- nenátlakovou další akci,
+- jednoduchou možnost už další podobné zprávy nedostávat.
+
+Příklad:
+
+```text
+Ahoj,
+
+před časem jste zrušili účet, protože import dat byl příliš ruční. Od té doby jsme přidali validaci importu, ukázkový soubor a lepší chybové hlášky před spuštěním migrace.
+
+Pokud to téma znovu řešíte, můžeme vám poslat krátký přehled změn nebo otevřít nový testovací workspace. Pokud ne, nic se neděje.
+
+Nechcete podobné produktové návraty dostávat? Dejte nám vědět nebo upravte komunikační preference.
+```
+
+Špatná zpráva:
+
+```text
+Chybíte nám! Máme speciální nabídku jen pro vás, která končí dnes. Klikněte hned, než bude pozdě.
+```
+
+První varianta respektuje kontext. Druhá varianta respektuje hlavně tlak v kvartálním cíli.
+
+Codyho komentář: „Chybíte nám“ je hezké, když to řekne člověk. Když to řekne automatizace třicet dní po zrušení a připojí slevu s odpočtem, zní to jako kalendář s úzkostí.
+
+### Nepřeháněj personalizaci
+
+Personalizace je užitečná, když šetří čas. Je nepříjemná, když ukazuje, kolik toho firma sleduje.
+
+Vhodné použití:
+
+- „Psal jste nám o exportu do CSV, máme k tomu novinku.“
+- „Zrušení bylo spojené s cenou, přidali jsme menší tarif.“
+- „Import z vašeho typu systému má nově šablonu.“
+
+Nevhodné použití:
+
+- „Viděli jsme, že jste minulý týden třikrát otevřel pricing.“
+- „Podle vašich kliků jste připravený na návrat.“
+- „Váš bývalý kolega teď používá konkurenční nástroj.“
+- „Spojili jsme vaše návštěvy webu, e-maily a staré support tikety.“
+
+Pravidlo: použij jen informaci, kterou by bylo normální zmínit v běžném obchodním nebo supportním hovoru. Pokud by věta u stolu zněla divně, do automatizace nepatří.
+
+### Reaktivace účtu není obnova všeho
+
+Návrat zákazníka má být bezpečný provozní proces, ne magické tlačítko „vrátit minulost“. Předem rozhodni, co reaktivace znamená.
+
+Reaktivační karta:
+
+| Oblast | Rozhodnutí |
+| --- | --- |
+| Účet | Vznikne nový účet, nebo se obnoví původní? |
+| Workspace | Je starý workspace dostupný, archivovaný, nebo smazaný? |
+| Data | Která data lze obnovit a která už doběhla podle retence? |
+| Integrace | Tokeny se obnovují ručně a znovu potvrzeně, ne automaticky. |
+| Členové týmu | Pozvánky a role se zkontrolují před návratem. |
+| Fakturace | Nové období, nový tarif nebo individuální dohoda jsou jasně oddělené. |
+| Marketing | Komunikační preference se nepřepíšou jen proto, že se účet vrátil. |
+
+Největší chyba je slibovat „všechno obnovíme“, když retenční pravidla říkají něco jiného. Pokud jsou data smazaná, jsou smazaná. To je pointa mazání, ne bug v obchodním procesu.
+
+### Měř návrat jako rozhodnutí, ne jako sledovací síť
+
+Win-back se dá měřit bez profilovacího festivalu. Potřebuješ vědět, jestli konkrétní typ změny má dopad, ne sledovat každý mikropohyb bývalého zákazníka.
+
+Stačí jednoduché signály:
+
+- kolik kontaktovaných lidí odpovědělo,
+- kolik chtělo krátké demo nebo přehled změn,
+- kolik reaktivovalo účet,
+- který důvod odchodu se nejčastěji mění na návrat,
+- která změna produktu reálně pomohla,
+- kolik lidí požádalo, aby další podobné zprávy nedostávali.
+
+Vyhodnocení piš jako rozhodnutí:
+
+| Signál | Co jsme se naučili | Další krok |
+| --- | --- | --- |
+| Návraty po nové importní šabloně | Odchod nebyl nezájem, ale migrační tření | Přidat šablonu do onboardingu |
+| Nízká reakce na slevu | Cena nebyla hlavní problém | Přestat posílat plošnou slevu |
+| Časté odmítnutí kontaktu | Zpráva je moc obecná nebo kanál není vhodný | Zúžit segment a upravit preference |
+
+Co vědomě neměřit:
+
+- individuální čas čtení e-mailu jako obchodní záměr,
+- opakované návštěvy stránky bez jasného kontextu,
+- cross-device identitu bývalých zákazníků,
+- reklamní publika složená ze zrušených účtů bez jasného základu,
+- detailní historii starých supportních zpráv v marketingovém nástroji.
+
+### Použij win-back i bez návratu
+
+Největší hodnota win-back procesu nemusí být reaktivace. Může to být pochopení, jestli produkt řeší správnou věc.
+
+Po každé malé win-back vlně si polož:
+
+- Který důvod odchodu jsme už skutečně opravili?
+- Který důvod jen maskujeme slevou?
+- Která změna je pro bývalé zákazníky srozumitelná bez dlouhého vysvětlování?
+- Kde marketing sliboval víc než produkt unesl?
+- Kde support opakovaně zachraňoval chybu v onboardingu?
+- Které zákazníky už nemáme kontaktovat?
+- Která data po odchodu držíme zbytečně dlouho jen kvůli hypotetickému návratu?
+
+Poslední otázka je důležitá. „Možná se vrátí“ není univerzální důvod držet všechno navždy. Privacy-first provoz umí říct: tady má obchodní paměť smysl, tady stačí agregovaný signál a tady už má datová stopa skončit.
+
+### Checklist: Win-back privacy-first
+
+- [ ] Win-back spouštíš jen tam, kde existuje relevantní změna nebo jasný důvod kontaktu.
+- [ ] Zákazníci s odmítnutým kontaktem, výmazem nebo omezením zpracování jsou z kampaní vyloučení.
+- [ ] Zpráva vysvětluje, proč přichází právě teď.
+- [ ] Personalizace používá jen informace, které by bylo normální zmínit člověku přímo.
+- [ ] Odmítnutí dalšího kontaktu je jednoduché a propíše se do preferencí.
+- [ ] Reaktivace účtu má jasná pravidla pro data, integrace, role a fakturaci.
+- [ ] Staré tokeny a integrace se neobnovují automaticky.
+- [ ] Komunikační preference se při návratu nepřepisují bez vědomé volby.
+- [ ] Měření win-backu je agregované a vede k rozhodnutí.
+- [ ] Staré churn poznámky nejsou automaticky kopírované do marketingových nástrojů.
+- [ ] Retence bývalých zákazníků má vlastní pravidlo a není nekonečná.
+- [ ] Každá win-back vlna končí úpravou produktu, onboardingu, pricingu nebo pravidel kontaktu.
+
+### Mini úkol
+
+Vyber jednu skupinu bývalých zákazníků, kde se od jejich odchodu něco opravdu změnilo. Vyplň krátkou kartu:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Proč zákazníci odešli? |  |
+| Co se od té doby změnilo? |  |
+| Pro koho je změna opravdu relevantní? |  |
+| Koho z kontaktu musíme vyloučit? |  |
+| Jaký kanál je nejméně invazivní? |  |
+| Jak bude znít jedna konkrétní věta důvodu kontaktu? |  |
+| Jak člověk odmítne další podobné zprávy? |  |
+| Co přesně znamená reaktivace účtu? |  |
+| Jaké staré údaje už nesmíme nebo nechceme používat? |  |
+| Jaké jedno rozhodnutí uděláme po vyhodnocení? |  |
+
+Potom pošli maximálně jednu malou vlnu. Žádná plošná sekvence na všechny bývalé účty, žádné reklamní pronásledování, žádná dramatická sleva jen proto, že graf chce obejmout. Buď konkrétní, stručný a připravený přijmout ticho jako odpověď.
+
 ## Zdroje
 
 - ICANN: Information for Domain Name Registrants - práva a odpovědnosti držitelů domén včetně správy, obnovy a převodu doménové registrace: https://www.icann.org/registrants
@@ -17168,6 +17353,7 @@ Potom udělej jednu konkrétní opravu: zkrať odchodový dotazník, přidej př
 
 ## Pracovní log
 
+- 2026-07-14: Doplněna příloha o win-backu bez remarketingového stalkingu: výběr vhodných bývalých zákazníků podle skutečné změny, lidský důvod kontaktu, opatrná personalizace, bezpečná reaktivace účtu, agregované měření návratu, použití učení i bez reaktivace, checklist a mini úkol.
 - 2026-07-14: Doplněna příloha o churnu a odchodu zákazníka bez výslechového formuláře: rozlišení typů odchodu, férový zrušovací tok, dobrovolný krátký dotazník, alternativy bez panické slevy, jasný datový dopad, měsíční churn review, oddělení zrušení/výmazu/preferencí, checklist a mini úkol.
 - 2026-07-14: Doplněna příloha o upgrade momentech bez nátlakového paywallu: mapa hodnoty před zamčenými funkcemi, lidské vysvětlení limitů, férové alternativy k platbě, měření upgrade rozhodnutí bez profilování, opatrnost u základní bezpečnosti a datových práv, pravidla downgradu, checklist a mini úkol.
 - 2026-07-14: Doplněna příloha o trialu a freemium modelu bez datového dluhu: volba modelu podle rizika a nákupního chování, první hodnota bez produkčních dat, limity free plánu, aktivační měření, pomocné trial e-maily, konec trialu, support hranice, checklist a mini úkol.
