@@ -14506,6 +14506,169 @@ Vyber jeden typ odkazu nebo portálové akce a vyplň tabulku:
 
 Potom udělej jednu opravu: zkrať expiraci, odeber citlivý údaj z URL, přidej tlačítko „Zneplatnit odkaz“, přesuň přílohu z e-mailu do portálu nebo zruš staré odkazy při změně role. Sdílení má šetřit čas, ne vyrábět neviditelné zadní dveře.
 
+## Příloha: Interní znalostní báze bez datové skládky
+
+Znalostní báze je skvělá věc, dokud se z ní nestane půda plná starých rozhodnutí, exportů, screenshotů, meetingových přepisů a tabulek, které nikdo nechce smazat, protože „by se to mohlo hodit“. Malý tým pak nehledá znalosti. Hledá správnou verzi pravdy mezi třemi dokumenty, dvěma chaty a jednou složkou pojmenovanou `final-final`.
+
+Privacy-first znalostní báze má opačný cíl: uchovat kontext, který pomáhá práci, a nenechat interní nástroje stát se druhým CRM, druhým helpdeskem a druhým archivem osobních údajů. Dokumentace má zkracovat rozhodování, ne nenápadně kopírovat produkční data do míst, kde se hůř mažou, hůř exportují a hůř hlídají přístupy.
+
+### Začni mapou typů znalostí
+
+Nejdřív si rozděl, jaké informace v týmu vůbec vznikají. Jedna složka „Docs“ nestačí. Diátaxis rozlišuje dokumentaci podle potřeb uživatele; podobně si interní znalosti rozděl podle práce, kterou mají dělat.
+
+Praktická mapa:
+
+| Typ znalosti | Příklad | Doporučené místo | Riziko |
+| --- | --- | --- | --- |
+| Stabilní návod | Jak nasadit web, jak vytvořit zákaznický export | dokumentace/runbook | zastará a nikdo si toho nevšimne |
+| Rozhodnutí | Proč používáme evropský hosting, proč nemáme marketingový pixel | ADR nebo rozhodovací log | ztratí se kontext a tým rozhodne znovu opačně |
+| Produktový kontext | ICP, onboarding hypotézy, hlavní use cases | produktová dokumentace | smíchá se s osobními daty zákazníků |
+| Provozní evidence | vlastníci nástrojů, přístupy, retenční pravidla | interní provozní karta | obsahuje citlivé informace |
+| Dočasná práce | poznámky z auditu, draft migrace, pracovní checklist | issue nebo projektová složka s expirací | zůstane navždy jako neřízený archiv |
+| Zákaznický detail | ticket, smlouva, faktura, export | původní systém, ne obecná wiki | rozleze se mimo řízené prostředí |
+
+Tahle tabulka není teorie. Je to filtr před každým novým dokumentem: patří informace do znalostní báze, nebo má zůstat v systému, který pro ni má přístupy, retenci a audit?
+
+### Každý důležitý dokument potřebuje vlastníka
+
+Dokument bez vlastníka je text čekající na zastarávání. U interní znalostní báze stačí malá hlavička:
+
+```markdown
+Vlastník: Produkt / Ops / Marketing
+Stav: aktivní / návrh / archiv
+Poslední revize: 2026-07-14
+Další revize: 2026-10-14
+Rozsah: interní / klientské / veřejné
+Citlivost: běžné / omezené / důvěrné
+```
+
+Není potřeba psát román o governance. Stačí, aby člověk při otevření stránky věděl, jestli je text aktuální, kdo za něj odpovídá a jestli ho může použít v klientské komunikaci.
+
+Codyho komentář: „Máme to někde v Notionu“ není proces. Je to zaklínadlo, které funguje přesně do chvíle, než někdo najde tři různé odpovědi a vybere tu nejhezčí.
+
+### Rozhodnutí ukládej odděleně od diskuze
+
+Chat a meeting jsou dobré pro vznik rozhodnutí. Nejsou dobré jako jeho finální zdroj. Důležité rozhodnutí přepiš do krátkého záznamu, podobně jako ADR:
+
+```markdown
+## Rozhodnutí
+
+Použijeme privacy-first analytiku bez cookies pro veřejný web.
+
+## Kontext
+
+Potřebujeme měřit návštěvnost, zdroje a konverze, ale nechceme spouštět marketingové skripty bez souhlasu.
+
+## Důsledky
+
+- Nebudeme mít individuální remarketing.
+- Budeme měřit agregované události a kvalitu poptávek.
+- Marketingové experimenty budou vycházet z obsahu, přímých odkazů a partnerství.
+```
+
+Diskuze může zůstat v issue nebo chatu, ale rozhodovací log má být krátký, čitelný a stabilní. Když se rozhodnutí změní, nevyráběj tichou přepisovací historii. Přidej nový záznam nebo jasnou poznámku, proč se změnilo.
+
+### Do znalostní báze nekopíruj produkční realitu
+
+Nejčastější privacy problém interní dokumentace není zlý úmysl. Je to pohodlí. Někdo vloží screenshot zákaznického účtu, celý support ticket, výpis logu, export leadů nebo kus smlouvy, protože tím nejrychleji vysvětlí problém.
+
+Bezpečnější pravidla:
+
+- Screenshoty nahrazuj demo daty nebo oříznutým výřezem.
+- Místo e-mailu piš roli: „billing kontakt“, „admin workspace“, „supportující kolega“.
+- Místo celé konverzace napiš rozhodovací shrnutí.
+- Logy vkládej redigované, bez tokenů, IP adres, e-mailů a obsahu formulářů.
+- Zákaznické smlouvy, faktury a exporty nech v systémech, které pro ně mají přístupy a retenční pravidla.
+- Pokud musíš použít reálný příklad, označ ho jako důvěrný a nastav datum revize nebo smazání.
+
+Praktický rozdíl:
+
+Slabší zápis:
+
+```text
+Zákazník jan.novak@example.com z firmy Alfa si stěžoval, že po importu export_2026_07_12.xlsx chybí faktury 1245-1260.
+```
+
+Lepší zápis:
+
+```text
+U jednoho zákaznického importu chyběla část faktur kvůli rozdílnému formátu datumu. Oprava: validovat datum před importem a zobrazit počet přeskočených řádků. Detail je v ticketu #1234.
+```
+
+Druhý zápis učí tým stejnou věc, ale nevyrábí nový únikový kanál.
+
+### Vyhledávání respektuje oprávnění
+
+Interní vyhledávání je užitečné, ale snadno zploští hranice. Když vyhledávač indexuje všechno, člověk najde dokument, který by nikdy ručně neotevřel. Proto znalostní bázi navrhuj s oprávněními dřív než s fulltextem.
+
+Rozumné vrstvy:
+
+| Vrstva | Obsah | Přístup |
+| --- | --- | --- |
+| Veřejné | dokumentace, changelog, help centrum | kdokoliv |
+| Interní běžné | procesy, návody, šablony, rozhodnutí | celý tým |
+| Interní omezené | provozní přístupy, incidenty, dodavatelé | konkrétní role |
+| Důvěrné | smlouvy, bezpečnostní detaily, zákaznické exporty | původní systém nebo velmi omezený prostor |
+
+Stejné pravidlo platí pro AI nebo RAG nad interní dokumentací: model nemá dostat širší přístup než člověk, kterému odpovídá. Pokud neumíš vynutit oprávnění a retenci, nezačínej tím, že do indexu nasypeš celou firmu. Začni veřejnou dokumentací, runbooky bez citlivých dat a ručně vybranými šablonami.
+
+### Meetingové poznámky nejsou transkriptová skládka
+
+Automatické přepisy porad jsou pohodlné. Taky umí uložit osobní údaje, obchodní detaily, interní konflikty, neveřejné plány a věty vyřčené v pracovním kontextu, které nikdy neměly být trvalým archivem.
+
+U porad si nastav tři úrovně:
+
+- Krátká poznámka: rozhodnutí, úkoly, vlastníci, termíny.
+- Pracovní zápis: kontext a otevřené otázky pro projekt.
+- Přepis nebo nahrávka: jen když má jasný účel, informované účastníky, vlastníka a dobu uchování.
+
+Pro většinu produktových porad stačí první dvě úrovně. Trvalá hodnota není v tom, kdo přesně co řekl v minutě 37. Trvalá hodnota je rozhodnutí, důvod, další krok a otevřené riziko.
+
+### Archivuj aktivně, ne až při požáru
+
+Znalostní báze se neudržuje sama. Přidej jednoduchý rytmus:
+
+- Každý nový dokument má vlastníka a typ.
+- Každý důležitý dokument má datum další revize.
+- Drafty a pracovní složky mají expiraci.
+- Staré projektové poznámky se po uzavření projektu shrnou a zbytek archivuje nebo smaže.
+- Veřejně použitelné poznatky se přepíšou do dokumentace, blogu nebo changelogu.
+- Citlivé příklady se po vyřešení problému odstraní nebo nahradí anonymním vzorem.
+
+Měsíční úklid nemusí být velký audit. Stačí vybrat pět nejpoužívanějších stránek, pět starých draftů a jednu složku s klientskými ukázkami. Malá pravidelná údržba je lepší než roční archeologie s bolestí hlavy.
+
+### Checklist: Znalostní báze privacy-first
+
+- [ ] Každý dokument má typ: návod, rozhodnutí, produktový kontext, provozní evidence, dočasná práce nebo zákaznický detail.
+- [ ] Důležité dokumenty mají vlastníka, stav, citlivost a datum poslední revize.
+- [ ] Rozhodnutí jsou shrnutá v rozhodovacím logu, ne schovaná jen v chatu.
+- [ ] Zákaznické detaily zůstávají v původních systémech, pokud není jasný důvod je přepsat jinam.
+- [ ] Screenshoty, logy a příklady jsou redigované nebo používají demo data.
+- [ ] Vyhledávání a indexace respektují oprávnění.
+- [ ] AI/RAG nad dokumentací používá jen schválené zdroje a stejná oprávnění jako uživatel.
+- [ ] Meetingové přepisy a nahrávky mají jasný účel, informované účastníky a retenci.
+- [ ] Drafty a pracovní dokumenty mají expiraci nebo revizní datum.
+- [ ] Archivace znamená rozhodnutí: ponechat, shrnout, přesunout, anonymizovat nebo smazat.
+- [ ] Veřejné nebo klientské texty vycházejí jen z dokumentů, které jsou k tomu určené.
+- [ ] Tým ví, kde je jedna aktuální verze pravdy pro procesy, které se často opakují.
+
+### Mini úkol
+
+Vyber jednu interní složku, wiki prostor nebo projektovou dokumentaci. Vyplň tabulku:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jaké typy dokumentů tam jsou? |  |
+| Které tři stránky tým opravdu používá? |  |
+| Které stránky obsahují zákaznická nebo osobní data? |  |
+| Kde chybí vlastník nebo datum revize? |  |
+| Co je dočasný draft a mělo už zmizet? |  |
+| Který dokument má být rozhodovací log místo dlouhé diskuze? |  |
+| Co by nemělo být indexované fulltextem nebo AI nástrojem? |  |
+| Jaký jeden dokument se dá převést na veřejnou dokumentaci nebo blog? |  |
+
+Potom udělej jednu opravu: doplň vlastnickou hlavičku, přesuň zákaznický detail zpět do ticketu, rediguj screenshot, vytvoř krátký rozhodovací záznam, nastav expiraci draftu nebo smaž starý export. Znalostní báze má být paměť týmu, ne datová půda s neznámými dveřmi.
+
 ## Zdroje
 
 - ICANN: Information for Domain Name Registrants - práva a odpovědnosti držitelů domén včetně správy, obnovy a převodu doménové registrace: https://www.icann.org/registrants
@@ -14629,6 +14792,7 @@ Potom udělej jednu opravu: zkrať expiraci, odeber citlivý údaj z URL, přide
 
 ## Pracovní log
 
+- 2026-07-14: Doplněna příloha o interní znalostní bázi bez datové skládky: mapa typů znalostí, vlastnictví dokumentů, rozhodovací log oddělený od diskuze, redigování produkčních detailů, oprávnění ve vyhledávání a AI/RAG indexech, práce s meetingovými poznámkami, aktivní archivace, checklist a mini úkol; navázáno na existující zdroje Diátaxis a ADR.
 - 2026-07-14: Doplněna příloha o sdílených odkazech a zákaznických portálech bez volného průvanu: typy sdílení podle rizika, bezpečné tokeny, expirace jako produktový text, role v portálu, e-mail jako upozornění místo úložiště, auditní stopa, rušení starých odkazů při změně oprávnění, checklist a mini úkol; ověřeny a doplněny zdroje OWASP k session managementu a jednorázovým resetovacím tokenům.
 - 2026-07-14: Doplněna příloha o produktových screenshotech a videonávodech bez úniku dat: účel ukázky, demo data, vizuální audit před nahráváním, nevratná redakce, scénář videonávodu, přístupné alternativy, vlastnictví veřejných ukázek, interní sdílení, checklist a mini úkol; ověřeny a doplněny zdroje Evropské komise k minimalizaci dat a W3C WAI k přístupným audio/video médiím.
 - 2026-07-13: Doplněna příloha o klientském schvalování změn bez nekonečného kolečka: definice hotovo, typy připomínek, jeden kanál a vlastník, bezpečné preview bez produkčních dat, feedback podle rozhodnutí, oddělení nových požadavků od aktuální dodávky, písemné uzavření kola, checklist a mini úkol.
