@@ -15189,6 +15189,196 @@ Vyber jednoho partnera, zákazníka nebo komunitní kontakt, který by mohl fér
 
 Potom udělej jednu konkrétní změnu: napiš referral balíček, vytvoř čistou landing page bez zbytečných skriptů, přidej do formuláře volitelné pole „Kdo vám nás doporučil?“, nebo zruš domluvu, která by stála hlavně na výměně kontaktů. Dobré doporučení má člověku otevřít dveře, ne ho potichu přesunout do cizího CRM.
 
+## Příloha: Nabídka a scope projektu bez mlhy a datového chaosu
+
+Dobrá nabídka není jen obchodní dokument. Je to první verze společného provozního plánu. U webu, SaaS modulu, automatizace nebo marketingového systému určuje, co se bude stavět, co se stavět nebude, kdo dodá podklady, jak se bude rozhodovat a jaká data se při práci použijí.
+
+Špatná otázka zní: „Jak nabídku napsat tak, aby klient rychle podepsal?“
+
+Lepší otázka zní: „Jak nabídku napsat tak, aby obě strany věděly, co přesně kupují, proč to dává smysl, jak se pozná hotovo a jak při tom nevyrobíme datový nepořádek?“
+
+Nabídka, která slibuje všechno všem, často jen odkládá konflikt. Vypadá hezky do chvíle, než přijde první změnový požadavek, chybějící obsah, nejasný přístup do produkce nebo otázka, kdo vlastně schválil import reálných zákaznických dat do testovacího prostředí.
+
+Codyho komentář: Mlžná nabídka je obchodní kofein. Krátkodobě zvedne energii, dlouhodobě rozklepe celý projekt.
+
+### Začni výsledkem, ne seznamem funkcí
+
+Klient většinou nekupuje „implementaci formuláře“, „novou homepage“ nebo „integraci API“. Kupuje menší obchodní nebo provozní změnu:
+
+- více kvalifikovaných poptávek,
+- rychlejší onboarding zákazníka,
+- méně ruční administrativy,
+- jasnější pricing,
+- bezpečnější předávání dat,
+- lepší měření konkrétního rozhodnutí.
+
+První odstavec nabídky proto napiš jako výsledek:
+
+```text
+Cílem projektu je zjednodušit poptávkovou cestu pro B2B zákazníky tak, aby návštěvník rychle pochopil službu, vyplnil kratší formulář a tým dostal dostatek informací pro první odpověď bez zbytečného sběru osobních údajů.
+```
+
+Teprve potom přidej rozsah. Když začneš seznamem obrazovek a komponent, snadno se stane, že dodáš přesně položky ze seznamu, ale mineš důvod projektu.
+
+Praktická kontrola: u každé větší položky rozsahu dopiš větu „pomáhá tím, že...“. Pokud ji neumíš napsat, položka je možná jen přání, ne nutná součást dodávky.
+
+### Scope rozděl na dodávku, spolupráci a mimo rozsah
+
+Největší problémy nevznikají z toho, co je v nabídce napsané. Vznikají z toho, co vypadalo samozřejmě, ale nikdo to nenapsal.
+
+Rozděl scope do tří částí:
+
+| Část | Co obsahuje |
+| --- | --- |
+| Dodáme | konkrétní výstupy, obrazovky, texty, integrace, dokumentaci, školení |
+| Potřebujeme od vás | podklady, rozhodnutí, přístupy, feedback, schválení, odpovědné osoby |
+| Není součástí | věci mimo cenu, mimo termín nebo mimo kompetenci projektu |
+
+Příklad pro web:
+
+- Dodáme: informační architekturu, textový návrh pěti klíčových stránek, implementaci statického webu, základní SEO metadata, RSS, jednoduchou privacy-first analytiku a předávací dokument.
+- Potřebujeme od vás: potvrzení cílových segmentů, reference ke zveřejnění, přístup k doméně nebo DNS správci, jednoho vlastníka zpětné vazby a schválení textů.
+- Není součástí: tvorba kompletní značky, placené kampaně, migrace starého CRM, právní revize obchodních podmínek a dlouhodobá správa obsahu.
+
+Tahle tabulka není obrana proti klientovi. Je to obrana proti chaosu. Když je mimo rozsah napsaný slušně a konkrétně, pozdější změna se dá řešit jako vědomé rozhodnutí, ne jako tichý dluh.
+
+### Datový rozsah napiš stejně jasně jako funkční rozsah
+
+Privacy-first nabídka má obsahovat i datovou část. Ne právnický román. Praktickou kartu, která říká, s jakými daty se bude pracovat.
+
+| Otázka | Příklad odpovědi |
+| --- | --- |
+| Jaká data potřebujeme pro realizaci? | veřejný obsah webu, demo produkty, agregované statistiky, schválené reference |
+| Jaká data nepotřebujeme? | export celé zákaznické databáze, produkční hesla, platební údaje, neveřejné smlouvy |
+| Kde budou data během projektu? | repozitář, projektový nástroj, staging, šifrovaný správce hesel |
+| Kdo k nim bude mít přístup? | konkrétní role, ne neurčité „náš tým“ |
+| Kdy se data smažou nebo vrátí? | po předání, po konci podpory, podle dohodnuté retence |
+| Jak se řeší citlivé výjimky? | samostatné schválení, minimální rozsah, časové omezení |
+
+U SaaS projektu se hodí přidat ještě rozlišení prostředí:
+
+- lokální vývoj používá seed nebo demo data,
+- staging nepoužívá produkční zákaznické údaje bez výslovného důvodu,
+- produkční přístup se uděluje jen pro jasný úkol a jen lidem, kteří ho potřebují,
+- exporty a přílohy mají vlastníka a datum smazání.
+
+Pokud klient posílá screenshoty, exporty nebo přístupy e-mailem, nabídka může rovnou stanovit bezpečnější cestu. Není nutné z toho dělat dramatickou přednášku. Stačí praktická věta: „Produkční přístupy a exporty zákaznických dat si nepředáváme e-mailem; použijeme dohodnutý správce tajemství nebo zabezpečený kanál.“
+
+### Akceptační kritéria šetří nervy
+
+„Hotovo“ je nebezpečně pružné slovo. Pro někoho znamená nasazeno na produkci. Pro jiného schváleno v designu. Pro dalšího „funguje to na mém notebooku“, což je krásná věta hlavně do komedie.
+
+Každá důležitá část nabídky má mít akceptační kritéria:
+
+```text
+Poptávkový formulář je hotový, když:
+- obsahuje jen schválená povinná pole,
+- návštěvník před odesláním vidí, proč údaje posílá a kdo odpoví,
+- validace funguje bez ztráty vyplněných údajů,
+- odeslání vytvoří záznam v dohodnutém systému,
+- tým obdrží notifikaci bez zbytečného kopírování citlivého obsahu,
+- existuje test pro úspěšné odeslání a chybový stav,
+- produkční formulář je ověřen po nasazení.
+```
+
+Akceptační kritéria nejsou mikromanagement. Jsou dohoda o hranici. Díky nim se projekt neuzavírá pocitem, ale ověřením.
+
+### Změnové požadavky nejsou chyba, ale potřebují brzdy
+
+Projekt bez změn skoro neexistuje. Během práce se objeví lepší nápad, chybějící integrace, nový stakeholder nebo problém, který před nabídku nikdo neviděl. To je normální. Nebezpečné je, když změny nemají proces.
+
+Jednoduchý změnový rámec:
+
+1. Co se mění?
+2. Proč je změna důležitá?
+3. Co to přidá nebo odebere z rozsahu?
+4. Jaký je dopad na termín, cenu, riziko a data?
+5. Kdo změnu schvaluje?
+
+Privacy-first dopad přidej jako samostatnou otázku. Nová integrace, formulář, analytická událost, export nebo automatizace často mění datový rozsah projektu. Když změnu posoudíš jen podle ceny a termínu, můžeš přehlédnout, že najednou posíláš osobní údaje dalšímu dodavateli nebo držíš data déle než bylo původně potřeba.
+
+Codyho komentář: Scope creep není příšera. Je to normální změna bez dveří, kliky a zvonku. Dej mu proces a přestane lézt oknem.
+
+### Nabídka má nastavit komunikační rytmus
+
+Mnoho projektů se nerozbije technicky, ale komunikačně. Nabídka by měla popsat, jak se bude rozhodovat:
+
+- kdo je hlavní vlastník na straně klienta,
+- kdo sbírá a slučuje připomínky,
+- jak rychle se očekává odpověď,
+- kde se vedou úkoly a rozhodnutí,
+- jak se potvrzuje schválení,
+- co se stane, když chybí podklady nebo rozhodnutí.
+
+Praktický odstavec:
+
+```text
+Projekt má jednoho schvalovatele za klienta. Připomínky se sbírají do jednoho vlákna nebo projektového nástroje. Pokud připomínky od různých lidí odporují jedna druhé, čekáme na sjednocené rozhodnutí od vlastníka projektu. Termíny se posouvají o dobu, po kterou čekáme na nutné podklady nebo schválení.
+```
+
+Tohle zní tvrdě jen do chvíle, než zažiješ pět paralelních vláken s protichůdnými připomínkami. Pak to zní jako kyslík.
+
+### Nabídka pro SaaS má myslet na provoz po předání
+
+U SaaS a webových aplikací není dodávka konec. Po releasu přijde provoz: bugy, monitoring, aktualizace závislostí, support, nové role, billing, exporty, incidenty a drobná přání, která se umí tvářit jako samozřejmost.
+
+Proto v nabídce odděl:
+
+- projektovou dodávku,
+- záruční opravy nebo stabilizační období,
+- placenou podporu,
+- rozvojový backlog,
+- provozní odpovědnosti.
+
+Příklad:
+
+| Oblast | Kdo odpovídá |
+| --- | --- |
+| Hosting a dostupnost |  |
+| Doména a DNS |  |
+| Zálohy a obnova |  |
+| Aktualizace závislostí |  |
+| Obsahové změny |  |
+| Uživatelský support |  |
+| Bezpečnostní incidenty |  |
+| Vyřizování žádostí o data |  |
+
+Když tohle chybí, klient často předpokládá, že „web běží“ znamená „někdo se o všechno stará“. Dodavatel zase předpokládá, že předáním projekt skončil. Obě strany mohou mít dobrý úmysl a přesto vyrobit provozní díru.
+
+### Checklist: Nabídka bez mlhy
+
+- [ ] Nabídka začíná očekávaným výsledkem, ne jen seznamem funkcí.
+- [ ] Každá větší položka rozsahu má jasný důvod.
+- [ ] Scope je rozdělený na dodáme, potřebujeme od vás a není součástí.
+- [ ] Datový rozsah říká, jaká data potřebujeme a jaká nepotřebujeme.
+- [ ] Produkční data, přístupy a exporty mají bezpečný způsob předání.
+- [ ] Akceptační kritéria popisují ověřitelné „hotovo“.
+- [ ] Změnové požadavky mají proces včetně dopadu na data.
+- [ ] Nabídka stanoví vlastníka rozhodnutí a způsob sběru připomínek.
+- [ ] Termíny počítají s dodáním podkladů a schvalováním.
+- [ ] Provoz po předání je oddělený od projektové dodávky.
+- [ ] Je jasné, kdo odpovídá za hosting, doménu, zálohy, podporu a obsah.
+- [ ] Nabídka neslibuje právní, bezpečnostní nebo datové závěry, které nejsou součástí práce.
+
+### Mini úkol
+
+Vezmi jednu poslední nabídku nebo šablonu nabídky a přidej do ní tuto kartu:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jaký výsledek klient kupuje? |  |
+| Co přesně dodáme? |  |
+| Co potřebujeme od klienta? |  |
+| Co výslovně není součástí? |  |
+| Jaká data pro práci potřebujeme? |  |
+| Jaká data nepotřebujeme a nechceme dostat? |  |
+| Jak poznáme, že je hotovo? |  |
+| Jak se schvalují změny rozsahu? |  |
+| Kdo je vlastník rozhodnutí na straně klienta? |  |
+| Co se děje po předání? |  |
+
+Potom udělej jednu konkrétní opravu: doplň mimo rozsah, napiš akceptační kritéria pro nejrizikovější část, přidej datovou kartu, nebo odděl projektovou dodávku od podpory. Dobrá nabídka není delší proto, že se bojíš. Je přesnější proto, aby projekt nemusel hádat.
+
 ## Zdroje
 
 - ICANN: Information for Domain Name Registrants - práva a odpovědnosti držitelů domén včetně správy, obnovy a převodu doménové registrace: https://www.icann.org/registrants
@@ -15315,6 +15505,7 @@ Potom udělej jednu konkrétní změnu: napiš referral balíček, vytvoř čist
 
 ## Pracovní log
 
+- 2026-07-14: Doplněna příloha o nabídkách a scope projektu bez mlhy a datového chaosu: výsledek místo seznamu funkcí, rozdělení dodávky/spolupráce/mimo rozsah, datový rozsah nabídky, akceptační kritéria, změnové požadavky, komunikační rytmus, provoz po předání, checklist a mini úkol.
 - 2026-07-14: Doplněna příloha o doporučeních a partnerství bez datového handlu: kdy je doporučení férové, referral balíček pro partnera, předávání kontaktů jen s volbou člověka, provize navázaná na kvalitu místo objemu, jednoduché měření bez profilování, společný obsah jako alternativa k výměně leadů, checklist a mini úkol.
 - 2026-07-14: Doplněna příloha o design systému bez knihovny na všechno: produktové vzory místo seznamu komponent, tokeny jako dohoda, stavové karty komponent, formuláře/tabulky/tlačítka, přístupnost ve výchozím chování, privacy vzory pro souhlas/export/výmaz/sdílení, kontrola UI knihoven, dokumentace správného použití, měření adopce, checklist a mini úkol; navázáno na existující zdroje k WCAG, privacy by design a správě závislostí.
 - 2026-07-14: Doplněna příloha o vícejazyčném webu a SaaS bez lokalizačního chaosu: jazyková strategie, stabilní URL, `lang`, `hreflang`, metadata, postupné překládání podle obchodní hodnoty, překladové workflow, produktové okraje, agregované měření lokalizace, checklist a mini úkol; ověřeny a doplněny zdroje W3C Internationalization a Google Search Central.
