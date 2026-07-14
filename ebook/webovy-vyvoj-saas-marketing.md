@@ -18198,6 +18198,182 @@ Navrhni první verzi trust center pro svůj produkt nebo web. Vyplň pouze to, c
 
 Potom udělej jednu malou změnu: publikuj základní bezpečnostní FAQ, doplň datum revize do privacy notice, vytvoř subdodavatelskou tabulku, sjednoť kontakt pro security otázky, nebo přidej interní pravidlo, že nový dodavatel aktualizuje trust center. Nečekej na dokonalost. Jen nepublikuj pohádky. Internet už jich má dost.
 
+## Příloha: Interní admin rozhraní bez datového lunaparku
+
+Interní administrace je často nejmocnější a nejméně navržená část SaaS produktu. Veřejné rozhraní má onboarding, hezké prázdné stavy a promyšlené texty. Admin panel má někdy vyhledávání podle e-mailu, tlačítko „impersonate“, export celé databáze a poznámku „používat opatrně“. To není nástroj. To je nabitá kuše na stole.
+
+Privacy-first admin rozhraní má jednoduchý cíl: pomoct týmu řešit podporu, provoz a fakturaci bez toho, aby každý interní člověk viděl víc zákaznických dat, než potřebuje. Admin má být produkt sám o sobě: má role, workflow, logy, chybové stavy, omezení, vysvětlení a pravidelnou údržbu.
+
+Špatná otázka zní: „Co všechno se nám může hodit vidět?“
+
+Lepší otázka zní: „Jaký interní úkol tím člověk dokončuje a jaké nejmenší množství dat k tomu potřebuje?“
+
+Codyho komentář: Interní admin je místo, kde se krásné privacy sliby mění v realitu. Nebo v improvizovaný rentgen zákaznických dat. Hádej, která varianta se hůř vysvětluje.
+
+### Začni interními úlohami
+
+Nejdřív sepiš, k čemu admin skutečně slouží. Ne podle tabulek v databázi, ale podle práce týmu.
+
+Typické úlohy:
+
+- najít účet kvůli supportnímu dotazu,
+- ověřit stav fakturace nebo plánu,
+- zkontrolovat poslední chybu importu,
+- změnit roli uživatele na žádost správce,
+- připravit export dat,
+- spustit opakované odeslání provozního e-mailu,
+- pozastavit rizikovou integraci,
+- ověřit, jestli byla žádost o výmaz dokončená.
+
+Ke každé úloze napiš kartu:
+
+| Úloha | Kdo ji dělá | Jaká data potřebuje | Jaká data nepotřebuje | Auditní stopa |
+| --- | --- | --- | --- | --- |
+| Vyřešit ticket k importu | support + vývoj | stav importu, chybový kód, čas, workspace ID | obsah importovaného souboru, osobní údaje v řádcích | kdo otevřel detail a co změnil |
+| Ověřit plán zákazníka | support | plán, stav platby, datum obnovy | kompletní fakturační historie, platební údaje | kdo zobrazil billing detail |
+| Změnit roli uživatele | support lead | uživatel, aktuální role, žádost správce | obsah workspace, soukromé poznámky | kdo změnil roli, kdy a proč |
+
+Tahle karta brání tomu, aby admin automaticky zobrazoval „všechno pro jistotu“. Jistota je dobrá věc. V administraci ale často znamená jen širší riziko.
+
+### Role navrhuj podle práce, ne podle seniority
+
+Admin panel nepotřebuje jednu roli „super admin“ pro půl firmy. Potřebuje několik omezených rolí podle úloh.
+
+Praktický model:
+
+| Role | Smí dělat | Nesmí dělat |
+| --- | --- | --- |
+| Support viewer | najít účet, vidět stav plánu, technické stavy a historii tiketů | exportovat data, měnit role, číst obsah souborů |
+| Support lead | měnit vybrané nastavení na žádost zákazníka, eskalovat výmaz nebo export | měnit billing pravidla, rušit audit log |
+| Billing ops | řešit faktury, plány, refundy a obnovy | číst produktový obsah zákazníků |
+| Tech ops | vidět technické logy, spustit bezpečné retry, pozastavit integraci | číst obchodní poznámky nebo marketingové segmenty |
+| Admin owner | spravovat přístupy do adminu a schvalovat citlivé akce | obcházet auditní log |
+
+Citlivé akce přidej zvlášť:
+
+- export zákaznických dat,
+- impersonace uživatele,
+- změna role vlastníka workspace,
+- ruční úprava fakturace,
+- spuštění výmazu,
+- přístup k příloze nebo importnímu souboru,
+- vypnutí integrace pro zákazníka.
+
+U citlivé akce chtěj důvod, případně druhé potvrzení nebo schválení vlastníka. Ne proto, aby tým trpěl. Protože právě tyto akce jsou po incidentu první otázky: kdo, proč, kdy a podle jaké žádosti?
+
+### Maskuj data ve výchozím stavu
+
+Admin nemusí při každém otevření detailu ukazovat celé e-maily, tokeny, adresy, volné texty a přílohy. Výchozí zobrazení má být chudé a užitečné.
+
+Dobré vzory:
+
+- e-mail zobrazit částečně a celé znění ukázat až po kliknutí s důvodem,
+- technické ID ukázat místo jména tam, kde stačí identifikátor,
+- obsah volného textu skrýt za náhled a varování,
+- přílohy zobrazit jen s typem, velikostí, datem a vlastníkem,
+- auditní log ukazovat jako události, ne jako kopii celého payloadu,
+- vyhledávání omezit podle role a účelu.
+
+Příklad:
+
+| Slabé zobrazení | Lepší zobrazení |
+| --- | --- |
+| Celý kontaktní formulář v administraci pro každého support člověka | Shrnutí: stav, typ dotazu, vlastník, poslední odpověď; detail jen pro vlastníka ticketu |
+| Importní CSV dostupné z adminu měsíc po vyřešení | Stav importu, chybové řádky bez citlivých sloupců, původní soubor s krátkou expirací |
+| Volné poznámky ze sales viditelné u účtu v supportu | Stručný handoff: prodaný výsledek, omezení, další krok |
+
+Maskování není všelék. Kdo má oprávněný důvod, může detail zobrazit. Důležité je, aby detail nebyl výchozí odměnou za zvědavost.
+
+### Impersonace musí být výjimečná a viditelná
+
+Přihlášení jako uživatel je pohodlné a nebezpečné. Může pomoci vyřešit složitý problém, ale také obchází přirozenou hranici mezi interním týmem a zákaznickým účtem.
+
+Pravidla pro impersonaci:
+
+- povolit jen vybraným rolím,
+- vyžadovat ticket, důvod a časové omezení,
+- jasně zobrazit internímu člověku, že je v cizím účtu,
+- zapsat začátek, konec a provedené akce do auditního logu,
+- neposílat běžné uživatelské notifikace jako by akci provedl zákazník,
+- nepoužívat impersonaci tam, kde stačí read-only diagnostika.
+
+Ještě lepší je stavět diagnostické nástroje tak, aby impersonace byla poslední možnost, ne první reflex. Když support potřebuje zkontrolovat stav importu, má vidět stav importu. Nemá kvůli tomu vstupovat do zákaznického workspace jako by byl vlastníkem účtu.
+
+### Admin akce musí mít auditní stopu
+
+Auditní log není šmírování zaměstnanců. Je to ochrana zákazníka, týmu i jednotlivce. Když se něco pokazí, log pomůže oddělit fakt od dojmu.
+
+Loguj hlavně:
+
+- zobrazení citlivého detailu,
+- export,
+- změnu role nebo oprávnění,
+- změnu plánu nebo billing stavu,
+- spuštění výmazu nebo obnovy,
+- impersonaci,
+- ruční zásah do dat,
+- změnu integrace,
+- změnu nastavení admin rolí.
+
+Auditní záznam má obsahovat:
+
+| Pole | Příklad |
+| --- | --- |
+| Kdo | interní uživatel nebo servisní účet |
+| Co | typ akce |
+| Kdy | čas v jednotném časovém pásmu |
+| Kde | účet, workspace nebo systém |
+| Proč | ticket, žádost, incident nebo provozní důvod |
+| Výsledek | úspěch, chyba, zrušeno |
+
+Auditní log sám nesmí být druhá databáze citlivých dat. Nepatří do něj celé formuláře, celé exporty ani tajné hodnoty. Patří do něj stopa akce.
+
+### Admin panel pravidelně uklízej
+
+Interní nástroje stárnou rychle. Přibude jednorázové tlačítko pro migraci, dočasný export, diagnostický detail, stará role a malý helper, který „pak smažeme“. Pokud nemá admin vlastní údržbu, dočasné věci se stanou trvalými a trvalé věci nikdo nevlastní.
+
+Jednou měsíčně projdi:
+
+- kdo má přístup do adminu,
+- které role jsou moc široké,
+- které citlivé akce se použily a proč,
+- jestli existují staré dočasné nástroje,
+- zda auditní log obsahuje správné informace,
+- jestli admin nezobrazuje data, která už nejsou nutná,
+- jestli support nepotřebuje lepší diagnostiku místo impersonace.
+
+Výstup review má být malý: odebrat jeden přístup, schovat jedno pole, smazat staré tlačítko, doplnit důvod u citlivé akce nebo vytvořit read-only diagnostiku. Admin se nezlepší velkým přepisem jednou za dva roky. Zlepší se pravidelným odstraňováním zbytečné moci.
+
+### Checklist: Interní admin privacy-first
+
+- [ ] Každá admin obrazovka odpovídá konkrétní interní úloze.
+- [ ] Role jsou navržené podle práce, ne podle seniority nebo pohodlí.
+- [ ] Citlivé akce mají důvod, auditní stopu a podle rizika schválení.
+- [ ] Výchozí zobrazení maskuje data, která nejsou nutná pro běžnou práci.
+- [ ] Volné texty, přílohy a importní soubory nejsou dostupné všem rolím.
+- [ ] Impersonace je časově omezená, logovaná a používá se jen jako poslední možnost.
+- [ ] Exporty, změny rolí, billing zásahy a výmazy se logují.
+- [ ] Auditní log neobsahuje celé payloady, secrets ani zbytečné osobní údaje.
+- [ ] Staré admin role, dočasná tlačítka a diagnostické nástroje se pravidelně mažou.
+- [ ] Support má dost diagnostiky, aby nemusel zbytečně vstupovat do zákaznických účtů.
+
+### Mini úkol
+
+Vyber jednu obrazovku nebo funkci v interní administraci a vyplň kartu:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jakou interní úlohu obrazovka řeší? |  |
+| Kdo ji opravdu potřebuje používat? |  |
+| Jaká data jsou nutná pro úlohu? |  |
+| Jaká data lze maskovat nebo skrýt? |  |
+| Jaké citlivé akce jsou dostupné? |  |
+| Jaký důvod nebo ticket se má zapisovat? |  |
+| Co se dnes loguje? |  |
+| Co můžeme odebrat, omezit nebo rozdělit podle role? |  |
+
+Potom udělej jednu konkrétní změnu: zamaskuj pole, odeber plošný admin přístup, přidej důvod k exportu, omez impersonaci, doplň auditní log nebo smaž starý diagnostický nástroj. Interní admin nemá být tajná zóna mimo produktové standardy. Je to produkt pro tým, který pracuje s cizí důvěrou.
+
 ## Zdroje
 
 - ICANN: Information for Domain Name Registrants - práva a odpovědnosti držitelů domén včetně správy, obnovy a převodu doménové registrace: https://www.icann.org/registrants
@@ -18324,6 +18500,7 @@ Potom udělej jednu malou změnu: publikuj základní bezpečnostní FAQ, doplň
 
 ## Pracovní log
 
+- 2026-07-14: Doplněna příloha o interním admin rozhraní bez datového lunaparku: interní úlohy jako základ návrhu, role podle práce, maskování dat ve výchozím stavu, opatrná impersonace, auditní stopa citlivých akcí, pravidelný úklid adminu, checklist a mini úkol.
 - 2026-07-14: Doplněna příloha o trust center bez marketingové mlhy: rozhodovací otázky zákazníka, veřejná a kontrolovaná vrstva informací, lidské bezpečnostní texty, mapa subdodavatelů podle účelu, napojení na provozní změny, obchodní použití bez odbývání otázek, checklist a mini úkol.
 - 2026-07-14: Doplněna příloha o bezpečnostních dotaznících zákazníka bez panického opisování: odpovědní balíček, pravdivé úrovně detailu, hranice sdílení interních informací, rozlišení rizika zákazníka, převod opakovaných otázek do dokumentace, checklist a mini úkol.
 - 2026-07-14: Doplněna příloha o obnově smlouvy bez vydírání lock-inem: renewal rytmus před fakturou, popis hodnoty podle pracovních výsledků, rozhodovací balíček, férové vysvětlení změn ceny a rozsahu, datové a bezpečnostní review, interní renewal karta, čisté ukončení služby, checklist a mini úkol.
