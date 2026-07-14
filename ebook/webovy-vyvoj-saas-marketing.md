@@ -16437,6 +16437,216 @@ Vyber jednu schopnost, kterou tým zvažuje koupit nebo postavit, a vyplň kartu
 
 Potom udělej jednu konkrétní změnu: zruš zbytečný nákup, napiš vendor kartu, vymez pilot na syntetická data, rozhodni se dočasně pro ruční proces, nebo zapiš, proč je vlastní řešení strategické. Build vs. buy není hlasování o oblíbeném nástroji. Je to rozhodnutí o kontrole, datech a budoucí údržbě.
 
+## Příloha: Trial a freemium bez datového dluhu
+
+Trial, freemium nebo bezplatný účet umí být skvělý způsob, jak dostat SaaS produkt k lidem bez dlouhého obchodního kolečka. Umí ale také vyrobit provozní chaos: falešné účty, nejasnou aktivaci, support pro lidi mimo cílový segment, datový nepořádek a produkt, který sbírá víc informací, než potřebuje.
+
+Špatná otázka zní: „Máme dát produkt zadarmo na 14 dní, nebo navždy omezeně?“
+
+Lepší otázka zní: „Jaký nejmenší bezpečný přístup k produktu pomůže správnému zákazníkovi zažít první hodnotu a nám rozhodnout, jestli má smysl pokračovat?“
+
+Trial není jen pricing taktika. Je to produktový experiment, onboarding, supportní závazek a datové rozhodnutí v jednom. Malý detail, že.
+
+### Nejdřív určete, co má trial dokázat
+
+Trial bez hypotézy se rychle změní v čekání, jestli se něco stane. Před spuštěním si napiš jednu větu:
+
+„Trial má ukázat člověku typu ___ hodnotu ___ do ___, bez toho, že po něm budeme chtít ___.“
+
+Příklady:
+
+- „Trial má ukázat founderovi B2B SaaS hodnotu privacy-first analytiky do jednoho pracovního dne, bez toho, že musí vložit produkční zákaznická data.“
+- „Freemium má malému týmu umožnit publikovat první tři dokumentační stránky, bez toho, že musí zapojit platební kartu.“
+- „Pilotní trial má marketingovému týmu ověřit workflow schvalování obsahu, bez toho, že musí importovat celý archiv článků.“
+
+Jakmile neumíš doplnit segment, hodnotu a čas, trial je moc obecný. Obecný trial často přivede obecné uživatele, obecný feedback a obecnou únavu týmu. To je krásně demokratické, ale mizerně použitelné.
+
+### Vyber model podle rizika a nákupního chování
+
+Trial a freemium nejsou totéž. Každý model vytváří jiné pobídky.
+
+| Model | Kdy dává smysl | Na co si dát pozor |
+| --- | --- | --- |
+| Časově omezený trial | uživatel potřebuje vyzkoušet plnou hodnotu v krátké době | krátké okno může nutit k agresivním nudgingům |
+| Freemium | produkt má dlouhodobou individuální hodnotu a přirozený upgrade moment | free plán může sežrat support a infrastrukturu |
+| Demo workspace | produkt pracuje s citlivými daty nebo složitým nastavením | demo nesmí slibovat víc, než umí reálný provoz |
+| Placený pilot | hodnota vyžaduje onboarding, integrace nebo rozhodnutí více lidí | pilot musí mít výsledek, konec a rozhodovací schůzku |
+| Ruční concierge trial | tým se teprve učí onboarding a use case | ruční práce se nesmí tvářit jako škálovatelná funkce |
+
+Privacy-first výchozí pravidlo: začni modelem, který vyžaduje nejméně osobních a produkčních dat k ověření hodnoty. Pokud uživatel nepotřebuje import zákazníků, neposílej ho k importu. Pokud nepotřebuje platební kartu, nechtěj ji jen proto, že to zvedne „commitment“. Některé konverzní triky vypadají chytře jen do chvíle, než je zažiješ jako zákazník.
+
+### První hodnota nesmí čekat na plný profil
+
+Onboarding trialu má sbírat data po vlnách. Nejdřív to, co je nutné pro vytvoření účtu a první hodnotu. Teprve potom volitelné údaje, které zlepšují nastavení.
+
+Typické minimum:
+
+- e-mail nebo jiný přihlašovací identifikátor,
+- heslo nebo bezpečný login mechanismus,
+- základní název workspace,
+- jedna volba use casu, pokud skutečně mění onboarding,
+- souhlas nebo potvrzení jen tam, kde má jasný účel.
+
+Co často počká:
+
+- telefon,
+- velikost firmy,
+- detailní role všech členů týmu,
+- fakturační údaje,
+- import dat,
+- propojení třetích stran,
+- marketingové preference.
+
+Praktická věta do UI:
+
+```text
+Začněte s demo daty. Skutečná data můžete přidat později, až bude jasné, že vám workflow sedí.
+```
+
+Tohle je malá věta, ale velký signál důvěry. Neříká „dej nám všechno a uvidíme“. Říká „nejdřív si ověř hodnotu bezpečně“.
+
+### Limity mají vést k hodnotě, ne k frustraci
+
+Freemium limity by měly být srozumitelné a spojené s hodnotou. Špatný limit blokuje člověka uprostřed první práce. Dobrý limit nechá zažít hodnotu a potom nabídne rozumný upgrade.
+
+Lepší limity:
+
+- počet projektů nebo workspace,
+- počet aktivních uživatelů,
+- objem automatizací,
+- pokročilé role a oprávnění,
+- delší historie nebo exporty,
+- produkční integrace po ověření workflow.
+
+Horší limity:
+
+- schovat základní bezpečnost za placený plán,
+- omezit export tak, že data držíš jako rukojmí,
+- vynutit platební kartu před první hodnotou,
+- blokovat smazání účtu nebo dat,
+- trestat uživatele za to, že nechce marketingové sledování.
+
+Codyho komentář: Když free plán neumí férově odejít, není to freemium. Je to malá past v hezkém cenovém rámečku.
+
+### Měř aktivaci, ne šmírovací román
+
+Trial potřebuje měření, ale nemusí z každého uživatele dělat detektivní složku. Měř hlavně kroky, které odpovídají hodnotě produktu.
+
+Příklad pro dokumentační SaaS:
+
+| Signál | Proč dává smysl |
+| --- | --- |
+| workspace vytvořen | uživatel začal |
+| první stránka publikována | vznikla první hodnota |
+| pozván člen týmu | produkt se stává týmovým |
+| veřejný odkaz otevřen | obsah se dostal k publiku |
+| upgrade klik | uživatel narazil na placenou hodnotu |
+
+Co naopak často nepotřebuješ:
+
+- nahrávat každou session,
+- ukládat celý obsah draftů do analytiky,
+- posílat detailní eventy do marketingových nástrojů,
+- sledovat uživatele napříč webem a aplikací bez jasného účelu,
+- uchovávat trial eventy navždy.
+
+Dobrá aktivační metrika je taková, podle které změníš onboarding, produkt nebo komunikaci. Pokud metrika jen zdobí dashboard, máš novou dekoraci, ne řízení produktu.
+
+### E-maily v trialu piš jako pomoc, ne jako hon
+
+Trial e-maily mají pomoci uživateli dokončit práci, kterou začal. Nemají předstírat osobní naléhavost, když jde o automatizaci.
+
+Dobrá sekvence může být krátká:
+
+1. Uvítání s jedním dalším krokem.
+2. Kontextová pomoc, pokud uživatel nedokončil první hodnotu.
+3. Připomenutí konce trialu nebo limitu s jasným vysvětlením.
+4. Shrnutí možností: pokračovat, exportovat, smazat, domluvit demo.
+
+Každý e-mail si zaslouží otázku: „Pomáhá tento text uživateli, nebo jen tlačí naši metriku?“ Pokud je odpověď druhá možnost, napiš ho znovu. Nebo ho neposílej. Revoluční marketingový hack: občas mlčet.
+
+Privacy-first pravidla pro trial komunikaci:
+
+- neukládej open tracking jako hlavní signál zájmu,
+- odliš provozní e-maily od marketingových,
+- umožni snadné odhlášení marketingu,
+- nepoužívej falešně osobní automatizované follow-upy,
+- neposílej citlivý obsah workspace do e-mailu,
+- po skončení trialu řekni, co se stane s daty.
+
+### Konec trialu je součást produktu
+
+Když trial skončí, uživatel nemá zůstat v mlze. Potřebuje vědět:
+
+- jestli data zůstávají dostupná,
+- jak dlouho,
+- jak je může exportovat,
+- jak účet smaže,
+- co se stane s pozvanými členy týmu,
+- co se stane s veřejnými odkazy, integracemi a automatizacemi.
+
+U privacy-first SaaS je konec trialu důležitý důkaz hodnot. Není fér tvářit se při registraci přátelsky a při odchodu schovat export za support ticket.
+
+Praktická tabulka pro pravidla konce trialu:
+
+| Stav | Co vidí uživatel | Co se děje s daty |
+| --- | --- | --- |
+| Trial aktivní | plná nebo vymezená funkčnost | data podle účelu trialu |
+| Trial končí | upozornění a možnosti pokračování | žádné nové skryté zpracování |
+| Trial skončil | read-only, export, upgrade nebo výmaz | retence podle napsaného pravidla |
+| Účet smazán | potvrzení a dopady | výmaz aktivních dat, výjimky jen podle jasné retence |
+
+Retence nemusí být dlouhá ani krátká podle pocitu. Má být vysvětlená a technicky vynucená.
+
+### Support pro free uživatele má mít hranice
+
+Free plán neznamená, že tým musí slíbit enterprise support za nula korun. Hranice supportu jsou fér, pokud jsou viditelné.
+
+Rozumné možnosti:
+
+- veřejná dokumentace,
+- komunitní nebo asynchronní kanál,
+- omezená e-mailová podpora,
+- placený onboarding,
+- priorita pro placené plány,
+- jasné SLA jen tam, kde je zaplacené.
+
+Neznamená to ignorovat free uživatele. Znamená to chránit tým před tím, aby supportní fronta rozhodovala produktovou strategii podle toho, kdo nejhlasitěji píše zdarma. Free uživatelé jsou skvělý zdroj učení, ale i tady platí: agreguj signály, hledej vzory, nevyráběj nekonečný seznam individuálních přání.
+
+### Checklist: Trial a freemium privacy-first
+
+- [ ] Trial nebo freemium má jasnou hypotézu: segment, hodnota, čas a bezpečné omezení.
+- [ ] Model odpovídá nákupnímu chování a datovému riziku produktu.
+- [ ] První hodnota nevyžaduje produkční data, pokud to není nezbytné.
+- [ ] Registrace sbírá jen údaje nutné pro účet a první krok.
+- [ ] Volitelné údaje jsou skutečně volitelné a jejich účel je jasný.
+- [ ] Free limity neblokují export, výmaz, základní bezpečnost ani férový odchod.
+- [ ] Aktivační metriky jsou navázané na rozhodnutí, ne na zvědavost.
+- [ ] Trial e-maily pomáhají dokončit práci a neobsahují falešný nátlak.
+- [ ] Marketingová komunikace je oddělená od provozní.
+- [ ] Konec trialu jasně vysvětluje stav dat, export, výmaz a další možnosti.
+- [ ] Free support má viditelné hranice.
+- [ ] Po 30 dnech tým vyhodnotí kvalitu aktivace, ne jen počet registrací.
+
+### Mini úkol
+
+Vezmi aktuální nebo plánovaný trial a vyplň kartu:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Pro koho je trial určený? |  |
+| Jakou první hodnotu má člověk zažít? |  |
+| Do kdy ji má zažít? |  |
+| Jaká data jsou nutná pro první hodnotu? |  |
+| Jaká data teď zbytečně sbíráme nebo chceme sbírat? |  |
+| Který aktivační signál opravdu použijeme pro rozhodnutí? |  |
+| Jaké e-maily jsou provozní a jaké marketingové? |  |
+| Co se stane po skončení trialu? |  |
+| Jak uživatel exportuje nebo smaže data? |  |
+| Jaký free limit je férový a jaký už je past? |  |
+
+Potom udělej jednu konkrétní opravu: zkrať registraci, přidej demo data, odstraň povinnou platební kartu, napiš pravidlo konce trialu, uprav jeden nátlakový e-mail, nebo přidej export do read-only režimu po skončení. Trial má být pozvánka k hodnotě, ne datový vysavač s odpočtem.
+
 ## Zdroje
 
 - ICANN: Information for Domain Name Registrants - práva a odpovědnosti držitelů domén včetně správy, obnovy a převodu doménové registrace: https://www.icann.org/registrants
@@ -16563,6 +16773,7 @@ Potom udělej jednu konkrétní změnu: zruš zbytečný nákup, napiš vendor k
 
 ## Pracovní log
 
+- 2026-07-14: Doplněna příloha o trialu a freemium modelu bez datového dluhu: volba modelu podle rizika a nákupního chování, první hodnota bez produkčních dat, limity free plánu, aktivační měření, pomocné trial e-maily, konec trialu, support hranice, checklist a mini úkol.
 - 2026-07-14: Doplněna příloha o rozhodování build vs. buy bez drahého autopilota: popis schopnosti místo názvu nástroje, čtyři varianty rozhodnutí, datový dopad, kdy koupit a kdy stavět, bezpečný pilot, provozní cena, rozhodovací karta, checklist a mini úkol.
 - 2026-07-14: Doplněna příloha o projektovém playbooku bez zapomenutého učení: převod retrospektivních zjištění do konkrétních změn šablon a checklistů, členění playbooku podle momentu práce, hlavičky šablon, zabudování privacy pravidel do běžné operativy, měsíční údržba playbooku, příklad změn po projektu, checklist a mini úkol.
 - 2026-07-14: Doplněna příloha o projektové retrospektivě bez obviňování a datové skládky: retrospektiva po milnících, bezpečné vstupy místo surových chatů, rozdělení učení na proces/produkt/vztah, změny systému s vlastníkem, privacy úklid přístupů a exportů, přepis feedbacku na rozhodnutí, klientské shrnutí, checklist a mini úkol.
