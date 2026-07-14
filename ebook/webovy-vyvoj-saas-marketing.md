@@ -17582,6 +17582,187 @@ Vezmi poslední onboarding a přepiš ho do 30denní karty:
 
 Potom smaž nebo odlož jednu onboarding aktivitu, která zákazníkovi nepomáhá k první hodnotě. Pokud se bojíš ji vyhodit, napiš k ní účel. Když účel nenajdeš, aktivita si o smazání řekla sama. Ano, i hezký e-mail může být zbytečný. Kruté, ale doručené.
 
+## Příloha: Rozšíření po pilotu bez adopčního nátlaku
+
+Po prvních 30 dnech přichází nebezpečná fáze. Pilot něco ukázal, první tým zvládl základ a v produktu se objevila skutečná hodnota. V tu chvíli často přijde věta: „Tak to zapneme všem.“ Zní rozhodně, ale bývá to zkratka do chaosu. Širší rollout není jen technické rozšíření účtů. Je to změna práce, odpovědností, podpory, dokumentace a často i interní politiky zákazníka.
+
+Privacy-first rollout má jasnou výhodu: škáluje jen ověřený pracovní scénář, ne celou datovou fantazii. Neptá se, kolik lidí dokážeme nahnat do aplikace. Ptá se, která skupina získá další konkrétní hodnotu a jak ji zapojíme bez zbytečného sběru dat, přístupů a notifikací.
+
+Špatná otázka zní: „Jak rychle dostaneme všechny uživatele dovnitř?“
+
+Lepší otázka zní: „Který další tým může bezpečně převzít ověřený workflow a co musí být připravené, aby to zvládl bez ručního vodění?“
+
+### Rollout začni rozhodnutím, ne kampaní
+
+Pilot má skončit rozhodnutím. Ne pocitem. Ne sérií nadšených screenshotů. Rozhodnutím, jestli se daný workflow škáluje, upravuje, zužuje nebo zastavuje. Teprve potom dává smysl plánovat širší adopci.
+
+Rollout rozhodnutí napiš jednou větou:
+
+```text
+Od 1. srpna rozšiřujeme workflow schvalování nabídek z pilotního obchodního týmu na všechny account manažery v Česku, protože pilot ukázal stabilní postup, jasnou odpovědnost a snížil ruční předávání návrhů mezi sales a delivery.
+```
+
+Dobrá rollout věta obsahuje:
+
+- konkrétní workflow,
+- cílovou skupinu,
+- důvod rozšíření,
+- hranici, co se zatím nerozšiřuje,
+- vlastníka změny.
+
+Bez této věty se rollout snadno změní na interní marketing. Lidé dostanou pozvánku, motivační e-mail a tři odkazy, ale nikdo neví, jaká práce se má zítra dělat jinak.
+
+### Rozšiřuj po vlnách podle práce
+
+Vlny nemají kopírovat organizační schéma jen proto, že existuje. Mají kopírovat podobnost práce, riziko dat a připravenost podpory. Někdy je lepší začít jednou pobočkou. Jindy jedním typem role. Jindy zákaznickým segmentem, který má nejčistší data a nejmenší integrační zátěž.
+
+Praktická tabulka rollout vln:
+
+| Vlna | Skupina | Proč právě teď | Co musí být hotové | Co zatím neděláme |
+| --- | --- | --- | --- | --- |
+| 1 | rozšířený pilotní tým | podobný workflow jako pilot | dokumentace, role, support kanál | import historických dat |
+| 2 | sousední tým | sdílí stejný výstup, jiné tempo práce | upravené šablony, trénink admina | automatické integrace |
+| 3 | zbytek oddělení | už existuje interní důkaz a podpora | self-service návod, FAQ, vlastník procesu | zapojení externích partnerů |
+
+Každá vlna má mít stop podmínku. Například:
+
+- nejasná odpovědnost za schvalování,
+- opakované chyby v rolích,
+- vyšší počet dotazů, než support zvládá,
+- požadavky na produkční data, která nejsou pro workflow nutná,
+- nevyřešený konflikt mezi starým a novým procesem.
+
+Stop podmínka není selhání. Je to brzda, která chrání zákazníka i produkt před tím, aby se adopce změnila v požár s hezkým názvem „rollout“.
+
+### Přístupy nepředbíhají schopnost používat produkt
+
+Když se produkt rozšíří na víc lidí, nejjednodušší technické řešení bývá pozvat všechny s širokou rolí a doufat, že si to sedne. Nesedne. Široké přístupy vytvářejí bezpečnostní riziko, matoucí UI a support dotazy, které neměly vzniknout.
+
+Před každou vlnou si rozděl role podle práce:
+
+| Role | Co má dělat | Co nepotřebuje | Kdo ji schvaluje |
+| --- | --- | --- | --- |
+| běžný uživatel | zpracovat vlastní úkoly | exporty, billing, systémové nastavení | týmový admin |
+| týmový admin | spravovat členy týmu a základní nastavení | globální konfiguraci, auditní exporty | zákaznický owner |
+| procesní owner | rozhodovat o šablonách a pravidlech workflow | osobní obsah jednotlivých uživatelů mimo účel | sponsor |
+| support kontakt | hlásit chyby a ověřovat stav | hromadné stahování dat | zákaznický owner |
+
+Privacy-first pravidlo je jednoduché: role dostává oprávnění ve chvíli, kdy má pracovní důvod ho použít. Ne dřív, ne „pro jistotu“, ne proto, že admin nechce řešit další žádost.
+
+> Codyho komentář: „Dejme všem admina, ať se nezdržujeme“ je věta, která zní produktivně asi pět minut. Pak začne fungovat jako generátor auditních poznámek a pasivně agresivních statusů.
+
+### Adopci měř podle pracovního výsledku
+
+Adopce není počet přihlášení. Přihlášení říká, že se člověk dostal dovnitř. Neříká, jestli mu produkt pomohl. Stejně tak počet kliků, čas v aplikaci nebo otevření e-mailu často měří spíš nervozitu než hodnotu.
+
+Lepší adopční signály:
+
+- počet dokončených pracovních scénářů,
+- počet týmů, které používají stejný schválený postup,
+- pokles ručních výjimek a obcházení procesu,
+- počet dotazů, které se přesunuly z individuálního supportu do dokumentace,
+- počet opravených šablon podle opakovaných problémů,
+- kvalita výstupu podle procesního ownera.
+
+Příklad:
+
+| Slabá metrika | Lepší metrika | Proč |
+| --- | --- | --- |
+| počet aktivních uživatelů | počet dokončených schválení nabídky | měří pracovní výstup |
+| počet otevření onboarding e-mailu | počet týmů s nastaveným adminem a rolí | měří připravenost |
+| čas v aplikaci | počet scénářů bez ruční opravy | měří plynulost workflow |
+| počet kliků na nápovědu | top 5 dotazů převedených do dokumentace | vede ke zlepšení systému |
+
+Měř agregovaně, po skupinách a podle účelu. Pokud nepotřebuješ vědět, že konkrétní člověk klikl třináctkrát na stejnou záložku, neměř to. Produktový tým potřebuje vědět, kde workflow drhne, ne sledovat každého uživatele jako podezřelého.
+
+### Komunikace má říkat, co se mění v práci
+
+Rollout oznámení často mluví o produktu: nové funkce, nové možnosti, modernější platforma, lepší efektivita. Uživatel ale potřebuje vědět, co se mění v jeho pracovním dni.
+
+Dobré oznámení odpoví na šest otázek:
+
+1. Od kdy se změna týká mého týmu?
+2. Jakou práci budu dělat jinak?
+3. Co už nemám dělat starým způsobem?
+4. Kde najdu krátký návod?
+5. Kam mám dát dotaz nebo problém?
+6. Kdo rozhoduje o výjimkách?
+
+Příklad krátkého oznámení:
+
+```text
+Od pondělí budou account manažeři připravovat návrhy nabídek v novém workflow. Cílem není vyplnit další systém, ale mít jednu schválenou verzi nabídky před předáním do delivery. Starý sdílený dokument používejte už jen pro dobíhající případy založené před 1. srpnem. Návod je v interní znalostní bázi, dotazy sbírá týmový admin a výjimky schvaluje procesní owner.
+```
+
+Tohle není slavnostní, ale je to použitelné. Lidé nepotřebují ohňostroj. Potřebují vědět, co udělat po obědě.
+
+### Support připrav před rozšířením
+
+Rollout bez support přípravy jen přesune práci z implementačního týmu na první chudáky, kteří odpovídají na dotazy. Před každou vlnou připrav minimální support balík:
+
+- známé dotazy z pilotu,
+- tři nejčastější chyby a jejich řešení,
+- eskalační pravidlo pro blokery,
+- seznam věcí, které support nemá slibovat,
+- šablonu odpovědi na žádost o širší oprávnění,
+- krátký postup pro incident nebo chybu v datech.
+
+Support balík nemusí být dokonalý. Musí být lepší než „ptejte se Karla, on byl u pilotu“. Karel má taky práci, i když o tom kalendář často mlčí.
+
+### Neúspěšnou vlnu přepiš na učení
+
+Někdy se vlna nepovede. Lidé se nechytnou, workflow je moc složitý, role neodpovídají realitě, dokumentace neřeší skutečné otázky nebo sponsor přestane změnu držet. To není důvod přidat agresivnější notifikace a další měření. Je to důvod zastavit se a přepsat problém.
+
+Krátké review vlny:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jaký pracovní výsledek měla vlna přinést? |  |
+| Která skupina byla zapojená? |  |
+| Co se povedlo bez ruční pomoci? |  |
+| Kde lidé obcházeli nový postup? |  |
+| Jaká data nebo přístupy se ukázaly jako zbytečné? |  |
+| Co chybělo v dokumentaci nebo supportu? |  |
+| Co opravíme před další vlnou? |  |
+| Co zatím nerozšiřujeme? |  |
+
+Neúspěšná vlna je drahá jen tehdy, když z ní nevznikne změna systému. Pokud opraví šablonu, role, dokumentaci nebo očekávání, udělala užitečnou práci.
+
+### Checklist: Rozšíření po pilotu privacy-first
+
+- [ ] Pilot skončil jasným rozhodnutím: škálovat, upravit, zúžit nebo zastavit.
+- [ ] Rollout věta popisuje workflow, cílovou skupinu, důvod a hranice.
+- [ ] Vlny jsou navržené podle podobnosti práce, rizika dat a připravenosti podpory.
+- [ ] Každá vlna má stop podmínky a vlastníka rozhodnutí.
+- [ ] Role jsou svázané s konkrétní prací, ne s pohodlím pozvat všechny jako adminy.
+- [ ] Přístupy se rozšiřují po vlnách a dají se snadno odebrat.
+- [ ] Adopce se měří podle dokončeného pracovního výsledku, ne podle slídění po uživatelích.
+- [ ] Komunikace říká, co se mění v práci, co končí a kde je pomoc.
+- [ ] Support má před vlnou připravené známé dotazy, eskalaci a hranice slibů.
+- [ ] Po každé vlně proběhne krátké review a oprava šablon, dokumentace nebo rolí.
+- [ ] Dočasné exporty, pilotní data a pomocné přístupy mají datum úklidu.
+- [ ] Další vlna nezačíná, dokud není uzavřený hlavní problém z předchozí vlny.
+
+### Mini úkol
+
+Vezmi jeden produkt, proces nebo zákaznický rollout a vyplň kartu další vlny:
+
+| Pole | Odpověď |
+| --- | --- |
+| Ověřený workflow z pilotu |  |
+| Cílová skupina další vlny |  |
+| Proč je připravená právě tato skupina |  |
+| Co musí být hotové před pozváním lidí |  |
+| Role a přístupy pro vlnu |  |
+| Data, která vlna opravdu potřebuje |  |
+| Data, která zatím nechceme |  |
+| Adopční signál podle pracovního výsledku |  |
+| Stop podmínka |  |
+| Support vlastník |  |
+| Co uklidíme po vlně |  |
+
+Potom odlož jednu plánovanou rollout aktivitu, která jen „vytváří povědomí“, ale nemění pracovní chování. Pokud nejde spojit s konkrétním workflow, je to možná jen interní reklama. A interní reklama bez práce je nejdražší forma šumu, hned po schůzce bez agendy.
+
 ## Zdroje
 
 - ICANN: Information for Domain Name Registrants - práva a odpovědnosti držitelů domén včetně správy, obnovy a převodu doménové registrace: https://www.icann.org/registrants
@@ -17708,6 +17889,7 @@ Potom smaž nebo odlož jednu onboarding aktivitu, která zákazníkovi nepomáh
 
 ## Pracovní log
 
+- 2026-07-14: Doplněna příloha o rozšíření po pilotu bez adopčního nátlaku: rollout rozhodnutí, vlny podle práce a datového rizika, role a přístupy, adopční metriky podle pracovního výsledku, komunikace změny, support balík, review neúspěšné vlny, checklist a mini úkol.
 - 2026-07-14: Doplněna příloha o prvních 30 dnech zákazníka bez onboardingového přetlaku: čtyřtýdenní plán podle změny chování, bezpečný první týden, ověření workflow, pilotní skupina, 30denní review, onboarding e-maily podle práce, checklist a mini úkol.
 - 2026-07-14: Doplněna příloha o sales handoffu do onboardingu bez ztráty kontextu: handoff karta, předávání závazků místo nálad, převod prodaného výsledku na první hodnotu, opatrná práce s produkčními daty, vlny rolí a přístupů, struktura handoff schůzky, měření tření v prvních týdnech, checklist a mini úkol.
 - 2026-07-14: Doplněna příloha o win-backu bez remarketingového stalkingu: výběr vhodných bývalých zákazníků podle skutečné změny, lidský důvod kontaktu, opatrná personalizace, bezpečná reaktivace účtu, agregované měření návratu, použití učení i bez reaktivace, checklist a mini úkol.
