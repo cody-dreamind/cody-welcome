@@ -15747,6 +15747,197 @@ Vezmi aktuální nebo poslední projekt a vyplň kickoff kartu:
 
 Potom udělej jednu konkrétní opravu: napiš kickoff brief, omez první přístup na read-only, vytvoř rozhodovací log, doplň mimo rozsah, nebo přepiš první týden na malý ověřitelný výstup. Kickoff není ceremonie. Je to pojistka proti tomu, aby projekt nezačal chaosem v hezkém tričku.
 
+## Příloha: Průběžné řízení projektu bez statusového divadla
+
+Po kickoffu začíná méně slavná, ale důležitější část: opakovaná práce. Tady se ukáže, jestli projekt stojí na skutečném systému, nebo jen na dobré náladě z první schůzky. Webový nebo SaaS projekt většinou neselže proto, že chyběla jedna velká tabulka. Selže proto, že se malé nejasnosti nechaly každý týden trochu narůst.
+
+Špatná otázka zní: „Máme pravidelný status meeting?“
+
+Lepší otázka zní: „Ví každý týden správní lidé, co se změnilo, co je hotové, co blokuje další krok, co se rozhodlo a jaká data kvůli tomu opravdu potřebujeme?“
+
+Průběžné řízení privacy-first projektu nemá vyrábět reporty pro reporty. Má držet projekt čitelný, rozhodnutelný a bezpečný.
+
+### Nastav rytmus podle rizika, ne podle kalendáře
+
+Některé projekty potřebují krátký denní kontakt, jiné stačí řídit týdenním asynchronním reportem. Rytmus nemá dokazovat, že tým pracuje. Má chránit tok práce.
+
+Praktické rozdělení:
+
+| Situace | Doporučený rytmus |
+| --- | --- |
+| Nový projekt v prvních dvou týdnech | krátká kontrola 2-3x týdně a týdenní review |
+| Stabilní obsahový nebo webový projekt | týdenní asynchronní status a review podle milníků |
+| Kritická migrace, release nebo incidentní oprava | denní krátká kontrola, jasný rozhodovací kanál a release log |
+| Dlouhodobá údržba | měsíční provozní review a ad hoc blokery |
+
+Pokud je projekt citlivý na data, integrace nebo produkční provoz, zvyš rytmus jen kolem rizikových změn. Nemusíš dělat meeting každý den jen proto, že existuje kalendář. Kalendář není produktový manažer, i když se tak někdy tváří.
+
+### Status má odpovědět na čtyři otázky
+
+Dobrý status report je krátký a použitelný. Nemá popisovat každou hodinu práce. Má dát klientovi nebo týmu jistotu, že projekt má směr a že blokery nezůstávají schované.
+
+Šablona týdenního statusu:
+
+```text
+Hotovo:
+- [konkrétní dokončený výstup]
+
+Teď běží:
+- [aktuální práce a očekávaný výsledek]
+
+Blokery / rozhodnutí:
+- [co potřebuje rozhodnutí, od koho a do kdy]
+
+Rizika a data:
+- [nové riziko, přístup, export, produkční zásah nebo privacy otázka]
+
+Další krok:
+- [jedna až tři konkrétní akce na příští období]
+```
+
+Tato šablona stačí pro většinu malých projektů. Pokud ji tým neumí vyplnit, problém není ve formátu. Problém je v tom, že práce není dost jasně rozdělená.
+
+### Úkoly piš jako ověřitelné výstupy
+
+„Vylepšit formulář“ není úkol. Je to přání. „Zkrátit poptávkový formulář z osmi polí na pět, zachovat povinný e-mail a doplnit mikrotext k účelu zpracování“ už je práce, kterou jde dokončit, zkontrolovat a schválit.
+
+Dobrá položka v projektovém boardu má obsahovat:
+
+- výsledek,
+- důvod,
+- akceptační kritéria,
+- vlastníka,
+- stav,
+- vazbu na rozhodnutí nebo změnový požadavek,
+- poznámku k datům, pokud se dotýká osobních údajů, přístupů, logů, exportů nebo produkce.
+
+Příklad:
+
+| Položka | Slabá verze | Lepší verze |
+| --- | --- | --- |
+| Formulář | Upravit lead formulář | Odebrat pole telefon jako povinné, doplnit vysvětlení účelu e-mailu, ověřit odeslání a zápis do CRM bez ukládání zbytečných polí |
+| Analytika | Přidat tracking | Měřit agregovaný počet odeslaných formulářů a zdroj stránky, bez ukládání identifikátoru návštěvníka |
+| Obsah | Přepsat homepage | Přepsat hero a první sekci tak, aby do 10 sekund vysvětlily segment, problém a další krok |
+
+Codyho komentář: Když úkol nejde ověřit, nejde ho férově schválit. A když nejde schválit, bude se vracet jako bumerang s fakturou navíc.
+
+### Blokery nesmí být společenská hra na čekání
+
+Bloker není „někdo se k tomu nevyjádřil“. Bloker je konkrétní chybějící rozhodnutí, přístup, podklad nebo technické omezení, které zastavuje další práci.
+
+Každý bloker napiš ve formátu:
+
+| Bloker | Dopad | Kdo rozhoduje | Deadline | Bezpečnější alternativa |
+| --- | --- | --- | --- | --- |
+| Chybí potvrzení finálního rozsahu formuláře | nejde dokončit implementaci a test | klientský vlastník |  | nasadit menší variantu bez volitelných polí |
+| Není přístup do produkční analytiky | nejde ověřit historickou konverzi | admin analytiky |  | použít agregovaný export za posledních 30 dní |
+| Klient chce poslat databázový export | riziko zbytečného předání osobních údajů | DPO nebo vlastník projektu |  | anonymizovaný vzorek nebo screenshot struktury |
+
+Bloker má mít majitele. Pokud ho nikdo nevlastní, není to bloker, ale volně poletující problém. Ty mají otravný zvyk přistát v nejhorší možnou chvíli.
+
+### Demo ukazuj v malých dávkách
+
+U webu a SaaS je lepší ukazovat menší hotové části častěji než jednou za měsíc odhalit velkou skládanku a čekat potlesk. Malé demo odhalí nesoulad dřív, než se stane drahým.
+
+Dobré průběžné demo:
+
+- ukazuje jeden scénář nebo jednu cestu,
+- běží na preview nebo stagingu,
+- používá demo nebo redigovaná data,
+- má jasné otázky pro feedback,
+- končí rozhodnutím: schválit, upravit, nebo otevřít změnový požadavek.
+
+Špatné demo:
+
+- ukáže všechno najednou,
+- potřebuje produkční účet klienta,
+- sbírá náhodné komentáře ke každému pixelu,
+- končí větou „pošlete nám prosím všechny připomínky“,
+- nemá vlastníka rozhodnutí.
+
+U demo prostředí si hlídej stejnou věc jako u screenshotů: neukazuj omylem zákaznická jména, interní ceny, tokeny, e-maily, faktury ani nehotové poznámky. Prezentace není bezpečnostní hranice.
+
+### Rozhodnutí zapisuj hned, ne až po sporu
+
+Průběžné řízení stojí na tom, že rozhodnutí nejsou rozptýlená v chatu, e-mailu, komentářích a paměti tří lidí. Každé důležité rozhodnutí má skončit v logu.
+
+Minimální rozhodovací záznam:
+
+| Datum | Rozhodnutí | Důvod | Dopad | Reverzibilní? | Vlastník |
+| --- | --- | --- | --- | --- | --- |
+| 2026-07-14 | Ve formuláři nebude povinný telefon | snížit tření a nesbírat zbytečný údaj | sales bude telefon získávat až v dalším kroku | ano |  |
+| 2026-07-14 | Pro analýzu použijeme agregovaný export | detailní CRM export není potřeba | žádná práce s osobními údaji leadů | ano |  |
+
+Reverzibilita je užitečná. Když je rozhodnutí vratné, nemusí se tým tvářit, že řeší osud civilizace. Když vratné není, potřebuje pečlivější kontrolu.
+
+### Komunikaci drž u práce, ne u osob
+
+Projektová komunikace má popisovat stav práce, rozhodnutí a rizika. Nemá vytvářet psychologický spis o lidech.
+
+Místo:
+
+```text
+Klient zase nedodal podklady a brzdí nás.
+```
+
+Lepší:
+
+```text
+Chybí export kategorií pro navigaci. Bez něj nelze dokončit informační architekturu. Pokud nebude do středy, připravíme variantu podle veřejného webu a označíme ji jako předběžnou.
+```
+
+Tohle není jen slušnost. Je to i datová hygiena. Interní poznámky, které zbytečně hodnotí lidi, mají nepříjemnou schopnost objevit se v exportu, přeposlaném vlákně nebo supportním nástroji. Projekt nepotřebuje literární portréty. Potřebuje rozhodnutelné věty.
+
+### Změny rozsahu řeš jako běžnou součást práce
+
+Změnový požadavek není selhání. Selhání je změna, která se tváří jako drobnost, nikdo ji neodsouhlasí a po dvou týdnech se zjistí, že se kvůli ní posunul termín, cena i datový rozsah.
+
+Jednoduchá karta změny:
+
+| Pole | Co vyplnit |
+| --- | --- |
+| Co se mění | konkrétní požadavek |
+| Proč | obchodní, uživatelský nebo provozní důvod |
+| Dopad na rozsah | co přibude nebo odpadne |
+| Dopad na data | nové údaje, přístupy, exporty, integrace nebo retence |
+| Dopad na termín | žádný / malý / vyžaduje nový odhad |
+| Rozhodnutí | schválit, odložit, zamítnout |
+
+Privacy-first otázka u každé změny: „Přidáváme kvůli tomu nový sběr dat, nový přístup, nového dodavatele nebo nové místo, kde mohou skončit osobní údaje?“ Pokud ano, změna není jen produktová. Je i provozní.
+
+### Checklist: Průběžné řízení projektu privacy-first
+
+- [ ] Projekt má rytmus podle rizika a fáze, ne jen podle zvyku.
+- [ ] Týdenní status odpovídá na hotovo, teď běží, blokery, rizika a další krok.
+- [ ] Úkoly jsou psané jako ověřitelné výstupy.
+- [ ] Každý bloker má dopad, vlastníka a deadline.
+- [ ] Demo probíhá v malých dávkách na bezpečném prostředí.
+- [ ] Feedback se sbírá podle konkrétních otázek, ne jako volný lov připomínek.
+- [ ] Rozhodnutí jsou zapsaná mimo chatovou diskuzi.
+- [ ] Interní poznámky popisují práci a dopad, ne osobní hodnocení lidí.
+- [ ] Změny rozsahu mají vlastní kartu a rozhodnutí.
+- [ ] Každá změna kontroluje dopad na data, přístupy, dodavatele a retenci.
+- [ ] Dočasné přístupy, exporty a preview odkazy mají datum úklidu.
+- [ ] Klient i tým vědí, co se stane, když se bloker nevyřeší včas.
+
+### Mini úkol
+
+Vezmi jeden živý projekt a vyplň průběžnou kontrolní kartu:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jaký je aktuální rytmus řízení projektu? |  |
+| Který výstup byl opravdu dokončený minulý týden? |  |
+| Který úkol není ověřitelný a potřebuje přepsat? |  |
+| Jaký bloker teď nejvíc brzdí další krok? |  |
+| Kdo ho vlastní a do kdy? |  |
+| Kde je poslední zapsané rozhodnutí? |  |
+| Který přístup, export nebo preview odkaz je dočasný a má se uklidit? |  |
+| Jaká změna rozsahu se potichu objevila? |  |
+| Jaký bezpečnější další krok lze udělat bez nových dat? |  |
+
+Potom udělej jednu opravu: přepiš tři nejasné úkoly na ověřitelné výstupy, zapiš poslední rozhodnutí, zavři jeden starý přístup, nebo pošli krátký status podle šablony. Projektové řízení není divadlo pro tabulky. Je to způsob, jak dostat práci do světa bez zbytečných překvapení.
+
 ## Zdroje
 
 - ICANN: Information for Domain Name Registrants - práva a odpovědnosti držitelů domén včetně správy, obnovy a převodu doménové registrace: https://www.icann.org/registrants
@@ -15873,6 +16064,7 @@ Potom udělej jednu konkrétní opravu: napiš kickoff brief, omez první přís
 
 ## Pracovní log
 
+- 2026-07-14: Doplněna příloha o průběžném řízení projektu bez statusového divadla: rytmus podle rizika, krátký status, ověřitelné úkoly, práce s blokery, malá dema, rozhodovací log, komunikace bez osobních soudů, změnové požadavky, checklist a mini úkol.
 - 2026-07-14: Doplněna příloha o kickoffu projektu bez rozjezdu do mlhy: rozdíl mezi nabídkou a pracovním startem, kickoff brief, přístupy po vlnách, datová pravidla před prvním uploadem, malý ověřitelný výstup prvního týdne, rozhodovací log, změnové požadavky, checklist a mini úkol.
 - 2026-07-14: Doplněna příloha o discovery callu bez obchodního výslechu a datového přetlaku: rámec před hovorem, otázky podle rozhodnutí, oddělení fitu od auditu, vylučovací seznam citlivých dat, discovery brief, červené vlajky, čisté odmítnutí nefitové spolupráce, checklist a mini úkol.
 - 2026-07-14: Doplněna příloha o nabídkách a scope projektu bez mlhy a datového chaosu: výsledek místo seznamu funkcí, rozdělení dodávky/spolupráce/mimo rozsah, datový rozsah nabídky, akceptační kritéria, změnové požadavky, komunikační rytmus, provoz po předání, checklist a mini úkol.
