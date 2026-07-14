@@ -15018,6 +15018,177 @@ Vyber jednu oblast produktu, kde se dnes rozhraní opakuje nejednotně. Ideáln�
 
 Potom udělej jednu malou změnu: sjednoť text potvrzení, přidej chybový stav, oprav focus, odstraň duplicitní variantu tlačítka, nebo napiš jednu stránku dokumentace pro nejčastější vzor. Design systém se nestaví slavnostním založením knihovny. Staví se tím, že příště stejnou chybu neopakuješ ručně.
 
+## Příloha: Doporučení a partnerství bez datového handlu
+
+Doporučení je jeden z nejlepších růstových kanálů pro malé SaaS a odborné služby. Ne proto, že by bylo kouzelné. Protože důvěra už částečně existuje dřív, než člověk otevře web. Když spokojený zákazník, partner, konzultant nebo komunitní autor řekne „tohle stojí za pozornost“, zkracuje cestu, kterou by jinak musel vybudovat marketing.
+
+Špatná otázka zní: „Jak získáme seznam kontaktů od partnera?“
+
+Lepší otázka zní: „Jak vytvoříme doporučení, které je užitečné pro příjemce, férové pro partnera a kontrolované z pohledu dat?“
+
+Privacy-first referral systém nestojí na výměně databází, sledovacích odkazech přes pět reklamních nástrojů a automatickém nahánění všech, kdo někdy klikli. Stojí na jasné hodnotě, přímých odkazech, dobrovolném zájmu a malém množství dobře vysvětlených dat.
+
+Codyho komentář: Pokud partnerský program funguje jen tak, že si dvě firmy přehodí kontakty jako pytel brambor, není to partnerství. Je to datový bazar s hezčím názvem.
+
+### Začni tím, co je fér doporučit
+
+Ne každá spokojená firma je dobrý zdroj doporučení. A ne každé doporučení je dobré pro příjemce. Nejdřív si napiš, kdy je doporučení opravdu užitečné.
+
+Praktická věta:
+
+„Doporučení dává smysl, když člověk typu ___ řeší ___ a náš produkt mu může pomoct ___ bez ___.“
+
+Příklady:
+
+- „Doporučení dává smysl, když zakladatel B2B SaaS řeší první produktovou analytiku a náš audit mu pomůže vybrat rozhodovací metriky bez invazivního trackingu.“
+- „Doporučení dává smysl, když agentura předává klientovi web a potřebuje doplnit provozní privacy-first checklist bez dalšího velkého projektu.“
+- „Doporučení dává smysl, když servisní firma přechází z tabulek a telefonů na plánování výjezdů a potřebuje pilot s jasným datovým rozsahem.“
+
+Pokud se věta nedá napsat konkrétně, partner pravděpodobně nebude vědět, koho poslat. Pak vzniká obecné „kdyby někdo něco potřeboval“, což zní mile, ale obchodně je to skoro prázdné.
+
+### Doporučovací balíček má šetřit čas partnerovi
+
+Partnerovi nedávej jen prosbu „pošli nám leady“. Dej mu materiál, který může použít bez přemýšlení a bez porušení důvěry lidí, kterým píše.
+
+Referral balíček může obsahovat:
+
+| Položka | Účel |
+| --- | --- |
+| Jednovětný popis | Partner rychle vysvětlí, komu služba pomáhá |
+| Kdy doporučit | Signály, že člověk má správný problém |
+| Kdy nedoporučovat | Situace mimo fit, aby nevznikala špatná očekávání |
+| Veřejný odkaz | Landing page, článek, checklist nebo případová studie |
+| Krátká zpráva | Text, který partner může poslat vlastními slovy |
+| Privacy poznámka | Co se stane, když člověk klikne nebo vyplní formulář |
+| Kontaktní cesta | Přímý e-mail, formulář nebo kalendář bez zbytečných polí |
+
+Ukázka krátké zprávy pro partnera:
+
+```text
+Ahoj, napadá mě, že by vám mohl pomoct tenhle checklist k privacy-first analytice v SaaS: [odkaz]. Je praktický hlavně pro týmy, které chtějí měřit aktivaci bez reklamních trackerů a osobního profilování. Pokud to sedí na vaši situaci, můžete se jim ozvat přímo přes formulář na stránce.
+```
+
+Všimni si dvou věcí: partner nepředává kontakt bez souhlasu a příjemce má kontrolu nad dalším krokem. To je pomalejší než import databáze. Taky je to mnohem čistší a dlouhodobě důvěryhodnější.
+
+### Nesdílej kontakty bez jasného důvodu a volby
+
+Největší datový problém referral programů je tiché předávání kontaktů. Partner pošle tabulku lidí, obchod ji nahraje do CRM, někdo nastaví follow-up a všichni se tváří, že doporučení automaticky znamená souhlas s obchodní sekvencí.
+
+Lepší vzory:
+
+- Partner pošle člověku veřejný odkaz a člověk se ozve sám.
+- Partner udělá e-mailové představení, kde jsou všichni viditelně v kopii a příjemce může nereagovat.
+- Partner se předem zeptá, jestli může kontakt předat.
+- Společný webinář má jasně napsané, kdo dostane registrační údaje a proč.
+- Referral formulář přijímá jen minimum dat a vysvětluje, jak se použijí.
+
+Horší vzory:
+
+- Import kontaktů od partnera do marketingového nástroje.
+- Skryté přidání účastníků partnerské akce do dvou newsletterů.
+- Sledovací odkazy, které profilují člověka napříč dalšími kampaněmi.
+- Provizní program, který motivuje partnera posílat nerelevantní lidi.
+- Automatická obchodní sekvence jen proto, že někdo klikl na partnerský odkaz.
+
+Privacy-first partnerství má jednoduché pravidlo: kdo má vztah s člověkem, ten ho oslovuje. Druhá strana dostane kontakt až ve chvíli, kdy člověk udělá záměrný další krok nebo k předání výslovně svolí.
+
+### Provize nastav tak, aby nekazila důvěru
+
+Provize může být fér. Partner přivede správného zákazníka, pomůže se zavedením nebo rozšíří hodnotu produktu. Problém vzniká, když provize začne řídit doporučení víc než potřeba zákazníka.
+
+Praktická karta partnerství:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Koho partner přivádí |  |
+| Jak poznáme dobrý fit |  |
+| Co partner smí slíbit |  |
+| Co partner nesmí slíbit |  |
+| Jak se eviduje doporučení |  |
+| Jaká data se předávají |  |
+| Kdy vzniká nárok na odměnu |  |
+| Jak dlouho referral okno trvá |  |
+| Jak se řeší konflikt dvou doporučení |  |
+| Kdo je vlastník partnerství |  |
+
+Odměnu raději navazuj na kvalitní výsledek než na surový počet leadů. Například na kvalifikovanou poptávku, placený pilot, aktivního zákazníka po určité době nebo společně dodaný projekt. Tím snižuješ motivaci posílat šum.
+
+Codyho komentář: Lead za každou cenu je jako levný hosting bez záloh. Vypadá výhodně, dokud nepřijde účet v podobě supportu, špatných očekávání a rozhovorů s lidmi, kterým vůbec nepomůžeš.
+
+### Měř referral bez sledovacího cirkusu
+
+Doporučení se dá měřit jednoduše:
+
+- samostatná landing page pro partnera,
+- čistý referral kód zadaný ve formuláři,
+- volitelné pole „Kdo vám nás doporučil?“,
+- ruční štítek v CRM podle e-mailového představení,
+- agregované počty kvalifikovaných poptávek a zákazníků podle partnera.
+
+Nemusíš stavět profil člověka podle kliků, zařízení a historie návštěv. U referral kanálu je často nejcennější kvalitativní informace: proč partner doporučení udělal, jaký problém člověk řeší a jestli se z toho stal dobrý zákazník.
+
+Praktické měsíční review:
+
+| Otázka | Co zkontrolovat |
+| --- | --- |
+| Který partner poslal relevantní poptávky? | počet a kvalita, ne jen objem |
+| Kde vznikla špatná očekávání? | sliby, texty, cílová stránka |
+| Který veřejný materiál partnerům pomohl? | checklist, článek, případová studie |
+| Jaká data jsme kvůli doporučením zbytečně drželi? | staré kontakty, poznámky, exporty |
+| Co příště zpřesníme? | fit, zprávu, formulář nebo odměnu |
+
+Měřitelnost má sloužit zlepšení partnerství. Ne vytváření dalšího šedého profilu lidí, kteří jen dostali odkaz.
+
+### Společný obsah je často lepší než výměna leadů
+
+Nejčistší partnerství často nezačíná obchodní tabulkou. Začíná společnou hodnotou:
+
+- praktický článek,
+- veřejný checklist,
+- malý workshop,
+- společný návod,
+- otevřená šablona,
+- integrace s dokumentací,
+- anonymizovaná případová studie.
+
+Výhoda je jednoduchá: člověk dostane hodnotu dřív, než něco předá. Pokud ho téma zajímá, ozve se sám nebo se přihlásí k odběru. Pokud ne, nikdo ho nepronásleduje.
+
+Příklad:
+
+Místo aby účetní software předal seznam klientů SaaS nástroji pro sběr dokladů, mohou společně vydat checklist „Jak připravit klienty na bezpečné předávání účetních podkladů bez e-mailových příloh“. Účetní kancelář ho pošle klientům jako užitečný materiál. Kdo chce řešení, klikne dál. Kdo nechce, nedostal se do cizí databáze.
+
+### Checklist: Referral a partnerství privacy-first
+
+- [ ] Víme, kdy je doporučení opravdu užitečné a kdy není dobrý fit.
+- [ ] Partner má krátký balíček: popis, kdy doporučit, kdy nedoporučit, odkaz a vzor zprávy.
+- [ ] Kontakty se nepředávají bez jasné volby nebo aktivního dalšího kroku člověka.
+- [ ] Společné akce jasně říkají, kdo dostane registrační data.
+- [ ] Referral formulář sbírá jen údaje nutné pro první odpověď.
+- [ ] Provize nemotivuje k posílání nerelevantních leadů.
+- [ ] Partner neslibuje cenu, termíny, funkce ani právní závěry, které nemá potvrzené.
+- [ ] Referral se měří jednoduše: kód, landing page, ruční štítek nebo dobrovolná otázka.
+- [ ] Nepoužíváme skryté profilování jen kvůli atribuci partnerství.
+- [ ] Staré referral kontakty, exporty a poznámky se čistí podle retenčních pravidel.
+- [ ] Společný obsah má přednost před výměnou seznamů kontaktů.
+- [ ] Partnerství má vlastníka a měsíční nebo kvartální review.
+
+### Mini úkol
+
+Vyber jednoho partnera, zákazníka nebo komunitní kontakt, který by mohl férově doporučovat tvůj produkt nebo službu. Vyplň kartu:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Komu může partner reálně pomoct doporučením? |  |
+| Jaký problém má doporučený člověk řešit? |  |
+| Jaký veřejný odkaz může partner poslat bez předávání kontaktu? |  |
+| Jaká krátká zpráva bude znít přirozeně a nebude předstírat osobní vztah? |  |
+| Jak se člověk ozve, pokud chce pokračovat? |  |
+| Jaká data při tom získáme a proč? |  |
+| Jak referral změříme bez profilování jednotlivce? |  |
+| Co partner nesmí slibovat? |  |
+
+Potom udělej jednu konkrétní změnu: napiš referral balíček, vytvoř čistou landing page bez zbytečných skriptů, přidej do formuláře volitelné pole „Kdo vám nás doporučil?“, nebo zruš domluvu, která by stála hlavně na výměně kontaktů. Dobré doporučení má člověku otevřít dveře, ne ho potichu přesunout do cizího CRM.
+
 ## Zdroje
 
 - ICANN: Information for Domain Name Registrants - práva a odpovědnosti držitelů domén včetně správy, obnovy a převodu doménové registrace: https://www.icann.org/registrants
@@ -15144,6 +15315,7 @@ Potom udělej jednu malou změnu: sjednoť text potvrzení, přidej chybový sta
 
 ## Pracovní log
 
+- 2026-07-14: Doplněna příloha o doporučeních a partnerství bez datového handlu: kdy je doporučení férové, referral balíček pro partnera, předávání kontaktů jen s volbou člověka, provize navázaná na kvalitu místo objemu, jednoduché měření bez profilování, společný obsah jako alternativa k výměně leadů, checklist a mini úkol.
 - 2026-07-14: Doplněna příloha o design systému bez knihovny na všechno: produktové vzory místo seznamu komponent, tokeny jako dohoda, stavové karty komponent, formuláře/tabulky/tlačítka, přístupnost ve výchozím chování, privacy vzory pro souhlas/export/výmaz/sdílení, kontrola UI knihoven, dokumentace správného použití, měření adopce, checklist a mini úkol; navázáno na existující zdroje k WCAG, privacy by design a správě závislostí.
 - 2026-07-14: Doplněna příloha o vícejazyčném webu a SaaS bez lokalizačního chaosu: jazyková strategie, stabilní URL, `lang`, `hreflang`, metadata, postupné překládání podle obchodní hodnoty, překladové workflow, produktové okraje, agregované měření lokalizace, checklist a mini úkol; ověřeny a doplněny zdroje W3C Internationalization a Google Search Central.
 - 2026-07-14: Doplněna příloha o interní znalostní bázi bez datové skládky: mapa typů znalostí, vlastnictví dokumentů, rozhodovací log oddělený od diskuze, redigování produkčních detailů, oprávnění ve vyhledávání a AI/RAG indexech, práce s meetingovými poznámkami, aktivní archivace, checklist a mini úkol; navázáno na existující zdroje Diátaxis a ADR.
