@@ -16119,6 +16119,164 @@ Vezmi poslední dokončený projekt, release nebo větší fázi a vyplň retro 
 
 Potom udělej jednu konkrétní opravu: doplň větu do discovery šablony, uprav kickoff brief, smaž starý export, odeber dočasný přístup, nebo vytvoř malý rozhodovací log pro příští projekt. Retrospektiva je užitečná až ve chvíli, kdy změní další práci. Jinak je to jen slušně moderované vzpomínání.
 
+## Příloha: Projektový playbook bez zapomenutého učení
+
+Retrospektiva je užitečná jen tehdy, když se její závěr dostane do další zakázky, dalšího releasu nebo dalšího onboardingového procesu. Jinak tým znovu objeví stejnou chybu, jen s jiným logem klienta a čerstvějším kalendářem.
+
+Projektový playbook je jednoduchý soubor pravidel, šablon a kontrol, které tým opravdu používá. Nemá to být firemní encyklopedie. Má odpovídat na otázku: „Jak příště uděláme podobnou práci lépe, rychleji a s menším datovým rizikem?“
+
+> Codyho komentář: Playbook není místo, kam ukládáš všechno, co se někdy stalo. To je digitální půda. Playbook má být sada ostrých pracovních nástrojů. Když se do něj člověk bojí sáhnout, protože neví, co je aktuální, playbook už prohrál.
+
+### Učení přepiš na změnu chování
+
+Špatný zápis zní:
+
+„Kickoff byl nejasný.“
+
+Lepší zápis zní:
+
+„Do kickoff briefu přidáváme sekci `Co v první fázi neděláme`, protože u posledního projektu se klient i tým vraceli k funkcím mimo domluvený scope.“
+
+Ještě lepší zápis má vlastníka a místo, kde se změna projeví:
+
+| Zjištění | Změna playbooku | Vlastník | Hotovo kdy |
+| --- | --- | --- | --- |
+| Klient čekal audit celé analytiky, ale nabídka řešila jen formulářovou cestu. | Do nabídky a kickoff briefu doplnit větu o rozsahu datového auditu. | PM | před další nabídkou |
+| Vývojář dostal plný export CRM, i když stačily agregované počty. | Do datové části kickoffu přidat pravidlo „nejdřív vzorek nebo agregace, export jen po schválení“. | Tech lead | tento týden |
+| Preview odkaz zůstal aktivní po předání. | Do předávacího checklistu přidat rušení preview odkazů a dočasných přístupů. | Ops | při příštím předání |
+
+Tím se z poznámky stane změna systému. A přesně o to jde.
+
+### Playbook rozděl podle momentu práce
+
+Tým nepotřebuje jednu nekonečnou stránku „jak děláme projekty“. Potřebuje rychle najít správnou věc ve správný moment.
+
+Praktické členění:
+
+- Před prodejem: kvalifikace leadu, discovery otázky, červené vlajky, datové minimum pro nabídku.
+- Nabídka: výsledek, scope, mimo rozsah, datový rozsah, akceptační kritéria.
+- Kickoff: role, přístupy, datová pravidla, první ověřitelný výstup.
+- Průběh: status, blokery, rozhodnutí, změnové požadavky, demo.
+- Předání: provozní balík, přístupy, dokumentace, exporty, preview odkazy.
+- Po projektu: retrospektiva, úklid, aktualizace šablon, follow-up se zákazníkem.
+
+Každá část má mít jednu hlavní šablonu a jeden checklist. Když má tým pět verzí šablony nabídky a tři nekompatibilní kickoff dokumenty, playbook není systém, ale archeologická vrstva.
+
+### U každé šablony napiš, kdy se používá
+
+Šablona bez kontextu začne časem škodit. Lidé ji použijí i tam, kde se nehodí, nebo ji ignorují, protože nevědí, jestli je pořád aktuální.
+
+U každé šablony doplň krátkou hlavičku:
+
+| Pole | Příklad |
+| --- | --- |
+| Účel | Kickoff menšího webového nebo SaaS projektu po schválené nabídce. |
+| Kdy použít | Před prvním pracovním meetingem s klientem. |
+| Kdy nepoužít | Pro servisní zásahy pod dvě hodiny nebo interní hotfix bez klientského kickoffu. |
+| Vlastník | PM nebo člověk odpovědný za dodávku. |
+| Poslední revize | 2026-07-14, doplněna pravidla pro datové vstupy. |
+| Privacy kontrola | Obsahuje sekci, jaká data klient nemá posílat před schválením potřeby. |
+
+Tahle hlavička je nudná správným způsobem. Šetří vysvětlování, zmenšuje prostor pro improvizaci a pomáhá novému člověku pochopit, proč dokument existuje.
+
+### Privacy pravidla nedávej jen do právní sekce
+
+Největší privacy chyby v projektech často nevznikají v právním dokumentu. Vznikají v běžné operativě: někdo pošle export, někdo nahraje screenshot s osobními údaji, někdo nechá externistovi přístup o měsíc déle, někdo použije produkční data pro rychlé demo.
+
+Proto privacy pravidla patří přímo do pracovních šablon:
+
+- Discovery brief má mít sekci „co zatím nechceme vidět“.
+- Nabídka má říkat, jaký datový rozsah je součástí práce.
+- Kickoff má vysvětlit, kam se posílají podklady a co neposílat e-mailem.
+- Status report má pracovat s agregovanými závěry, ne s kopiemi zákaznických dat.
+- Bug report má mít pravidlo pro redigované screenshoty a testovací účty.
+- Předávací checklist má rušit dočasné přístupy, preview odkazy a exporty.
+- Retrospektiva má kontrolovat, jestli po projektu nezůstala datová stopa bez účelu.
+
+Privacy-first provoz nevznikne tím, že tým jednou přečte zásady. Vznikne tím, že bezpečnější volba je zabudovaná v nejpoužívanějších dokumentech.
+
+### Změny playbooku dělej malé a okamžité
+
+Po každé retrospektivě nepiš nový manuál. Vyber jednu až tři změny, které budou vidět v další práci.
+
+Dobré změny:
+
+- jedna nová otázka do discovery callu,
+- jedna věta do nabídky,
+- jedno pole do kickoff briefu,
+- jedna položka do předávacího checklistu,
+- jedna ukázková formulace pro klientský status,
+- jedno pravidlo pro práci s exporty,
+- jedno rozhodnutí, co už tým nebude měřit nebo sbírat.
+
+Špatné změny:
+
+- „zlepšit komunikaci“,
+- „víc myslet na scope“,
+- „dávat pozor na data“,
+- „příště to lépe odhadnout“.
+
+Tyhle věty zní dospěle, ale neřídí chování. Pokud změna nejde vložit do konkrétní šablony, checklistu, procesu nebo definice hotovo, ještě není připravená.
+
+### Playbook musí mít údržbu, jinak začne lhát
+
+Zastaralý playbook je horší než žádný playbook. Tým si myslí, že má proces, ale reálně používá ústní tradici a občas klikne na starou šablonu.
+
+Jednou měsíčně udělej patnáctiminutovou kontrolu:
+
+1. Která šablona se za poslední měsíc použila?
+2. Která se obešla ručně nebo přes kopii starého dokumentu?
+3. Kde vznikla výjimka a proč?
+4. Která checklist položka se pravidelně odškrtává formálně, ale nic nekontroluje?
+5. Který privacy nebo bezpečnostní krok se opakovaně odkládá?
+6. Co můžeme smazat, sloučit nebo zjednodušit?
+
+Nejlepší signál není počet dokumentů. Nejlepší signál je, že tým při práci spontánně říká: „Vezmi poslední šablonu, ta už to řeší.“ To je okamžik, kdy playbook začíná vydělávat.
+
+### Příklad: změna po problematickém projektu
+
+Situace: menší SaaS tým dokončil úpravu onboardingového flow pro klienta. Projekt technicky dopadl dobře, ale v průběhu se třikrát měnil scope, klient poslal zbytečně detailní export uživatelů a předání se protáhlo kvůli nejasnému vlastnictví dokumentace.
+
+Z retrospektivy nevznikne román. Vzniknou tři změny playbooku:
+
+| Problém | Změna |
+| --- | --- |
+| Scope se měnil bez jasného dopadu. | Do status šablony přidat sekci „Nový požadavek / dopad / rozhodnutí“. |
+| Klient poslal osobní data moc brzy. | Do kickoffu přidat větu: „Produkční exporty neposílejte, dokud si nepotvrdíme nutný rozsah a bezpečný kanál.“ |
+| Dokumentace neměla vlastníka. | Do předávacího checklistu přidat pole „Vlastník dokumentace po předání“. |
+
+Tohle je malé, ale silné. Příští projekt má o tři opakované problémy méně.
+
+### Checklist: Projektový playbook privacy-first
+
+- [ ] Playbook je rozdělený podle momentu práce, ne podle interní organizační politiky.
+- [ ] Každá používaná šablona má účel, kdy ji použít, kdy ji nepoužít, vlastníka a datum poslední revize.
+- [ ] Z retrospektivy vznikají konkrétní změny v šablonách, checklistech nebo definici hotovo.
+- [ ] Privacy pravidla jsou přímo v discovery, nabídce, kickoffu, statusu, bug reportu, předání a retro.
+- [ ] Tým ví, kde je aktuální verze šablon.
+- [ ] Staré verze šablon nejsou volně kopírované jako „ještě dobré“ dokumenty.
+- [ ] Každý nový checklist bod kontroluje reálné riziko nebo rozhodnutí.
+- [ ] Změny playbooku mají vlastníka a termín.
+- [ ] Playbook se jednou měsíčně krátce uklízí.
+- [ ] Z playbooku se mažou pravidla, která nikdo nepoužívá nebo už neodpovídají realitě.
+- [ ] U datově citlivých kroků je jasné, co se nesmí posílat, kam se podklady dávají a kdo má přístup.
+- [ ] Po projektu se kontroluje, jestli se poučení propsalo do další práce.
+
+### Mini úkol
+
+Vyber poslední retrospektivu nebo projektové poučení a přepiš ho do jedné změny playbooku:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jaký problém se opakoval nebo měl největší dopad? |  |
+| Ve kterém momentu práce vznikl? |  |
+| Která šablona, checklist nebo definice hotovo ho má příště zachytit? |  |
+| Jaká přesná věta nebo položka se doplní? |  |
+| Kdo změnu udělá? |  |
+| Kdy se ověří, že se použila v další práci? |  |
+
+Hotovo není „máme poznámku z retro“. Hotovo je až ve chvíli, kdy člověk v dalším projektu narazí na lepší otázku, jasnější checklist nebo bezpečnější výchozí postup.
+
 ## Zdroje
 
 - ICANN: Information for Domain Name Registrants - práva a odpovědnosti držitelů domén včetně správy, obnovy a převodu doménové registrace: https://www.icann.org/registrants
@@ -16245,6 +16403,7 @@ Potom udělej jednu konkrétní opravu: doplň větu do discovery šablony, upra
 
 ## Pracovní log
 
+- 2026-07-14: Doplněna příloha o projektovém playbooku bez zapomenutého učení: převod retrospektivních zjištění do konkrétních změn šablon a checklistů, členění playbooku podle momentu práce, hlavičky šablon, zabudování privacy pravidel do běžné operativy, měsíční údržba playbooku, příklad změn po projektu, checklist a mini úkol.
 - 2026-07-14: Doplněna příloha o projektové retrospektivě bez obviňování a datové skládky: retrospektiva po milnících, bezpečné vstupy místo surových chatů, rozdělení učení na proces/produkt/vztah, změny systému s vlastníkem, privacy úklid přístupů a exportů, přepis feedbacku na rozhodnutí, klientské shrnutí, checklist a mini úkol.
 - 2026-07-14: Doplněna příloha o průběžném řízení projektu bez statusového divadla: rytmus podle rizika, krátký status, ověřitelné úkoly, práce s blokery, malá dema, rozhodovací log, komunikace bez osobních soudů, změnové požadavky, checklist a mini úkol.
 - 2026-07-14: Doplněna příloha o kickoffu projektu bez rozjezdu do mlhy: rozdíl mezi nabídkou a pracovním startem, kickoff brief, přístupy po vlnách, datová pravidla před prvním uploadem, malý ověřitelný výstup prvního týdne, rozhodovací log, změnové požadavky, checklist a mini úkol.
