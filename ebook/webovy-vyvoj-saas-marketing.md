@@ -16848,6 +16848,200 @@ Vyber jeden aktuální nebo plánovaný upgrade moment a vyplň kartu:
 
 Potom udělej jednu konkrétní opravu: přepiš text limitu, přidej read-only stav, doplň export před blokací, vysvětli downgrade dopad, odstraň paywall ze základní bezpečnostní funkce, nebo změň metriku z osobního sledování na agregovaný signál. Upgrade má působit jako logický další krok, ne jako zhasnutá chodba s terminálem na kartu.
 
+## Příloha: Churn a odchod zákazníka bez výslechového formuláře
+
+Zákazník někdy odejde. Někdy proto, že produkt nesedí. Někdy proto, že skončil projekt, změnil se rozpočet, firma vyrostla jiným směrem, nebo protože jste v důležité chvíli nedodali hodnotu. Churn není jen číslo v reportu. Je to zpráva o tom, kde produkt, pricing, onboarding, support nebo očekávání neudržely slib.
+
+Špatná otázka zní: „Jak zrušení co nejvíc ztížíme, aby si to zákazník rozmyslel?“
+
+Lepší otázka zní: „Jak zákazníkovi umožníme férově odejít, bezpečně naložit s daty a zároveň se z odchodu naučíme jen to, co opravdu potřebujeme pro lepší rozhodnutí?“
+
+Odchodový tok je poslední produktová zkušenost. Pokud vypadá jako past, zákazník si neodnáší vzpomínku na hodnotu, ale na boj s formulářem. Gratuluju, právě jste vytvořili silný důvod, proč vás nedoporučit.
+
+### Rozliš typ odchodu
+
+Ne každý odchod znamená totéž. Pokud házíš všechny zrušené účty do jedné metriky, ztrácíš praktický signál.
+
+Základní typy:
+
+- dobrovolné zrušení, protože zákazník už hodnotu nepotřebuje,
+- zrušení kvůli ceně nebo změně rozpočtu,
+- zrušení kvůli chybějící funkci,
+- zrušení kvůli špatnému onboardingu nebo nepochopené hodnotě,
+- zrušení kvůli výkonu, chybám nebo supportu,
+- technické selhání platby,
+- sezónní nebo projektový konec,
+- odchod do jiného nástroje.
+
+Pro každý typ potřebuješ jinou reakci. Chybějící funkce patří do produktového backlogu. Nejasná hodnota patří do onboardingu a komunikace. Platební selhání patří do billing procesu. Projektový konec může být zdravý odchod, ne selhání produktu.
+
+Praktické pravidlo: churn důvod má být dostatečně hrubý, aby neprofiloval člověka, ale dostatečně konkrétní, aby vedl k rozhodnutí.
+
+### Zrušení účtu nesmí být úniková místnost
+
+Férový produkt nechá zákazníka odejít bez manipulace. Může nabídnout alternativy, ale nesmí skrývat hlavní akci.
+
+Odchodový tok má jasně říct:
+
+- kdy služba skončí,
+- co se stane s fakturací,
+- co se stane s aktivními daty,
+- jak funguje export,
+- jak dlouho budou dostupné archivy nebo read-only režim,
+- kdo z týmu bude o změně informován,
+- jestli jde účet znovu aktivovat,
+- jak kontaktovat support, pokud zákazník řeší problém a nechce nutně odejít.
+
+Špatné vzory:
+
+- zrušení jen přes telefonát,
+- skryté tlačítko za třemi obrazovkami,
+- nejasné „některá data mohou být smazána“,
+- nucený detailní dotazník před dokončením,
+- výhrůžný text místo věcného dopadu,
+- sleva jako první reakce bez pochopení problému.
+
+Codyho komentář: Pokud produkt potřebuje zadržet zákazníka tím, že mu schová dveře, problém není ve dveřích. Problém je v hodnotě, očekávání nebo ceně. Občas ve všech třech, protože software má smysl pro drama.
+
+### Dotazník drž krátký a dobrovolný
+
+Odchodový dotazník má pomáhat produktu, ne vymáhat zpověď. Zákazník už se rozhodl. Respektuj jeho čas.
+
+Dobrá struktura:
+
+1. Jedna dobrovolná otázka na hlavní důvod.
+2. Volitelné krátké textové pole.
+3. Možnost přeskočit.
+4. Jasné vysvětlení, k čemu odpověď použijete.
+
+Příklad:
+
+```text
+Pomůže nám vědět, proč odcházíte? Odpověď je dobrovolná a použijeme ji jen pro zlepšení produktu.
+```
+
+Možnosti důvodu:
+
+- Produkt už nepotřebujeme.
+- Cena neodpovídá hodnotě.
+- Chybí nám konkrétní funkce.
+- Produkt byl moc složitý.
+- Měli jsme technický problém.
+- Přecházíme na jiné řešení.
+- Jiný důvod.
+- Nechci odpovídat.
+
+Textové pole nemá být povinné. Pokud zákazník napíše citlivý detail, interní proces má umět poznámku redigovat nebo omezit její sdílení. Churn feedback není povolenka k ukládání interních dat zákazníka do produktové analytiky.
+
+### Nabídni správnou alternativu, ne panickou slevu
+
+Ne každý zákazník, který klikne na zrušení, chce navždy odejít. Někdy chce snížit tarif, pozastavit účet, exportovat data, vyřešit blokující problém nebo ukončit jen jeden workspace. Alternativy jsou fér, pokud odpovídají situaci a nepřekážejí zrušení.
+
+Možné alternativy:
+
+- downgrade na nižší tarif,
+- pozastavení účtu na omezenou dobu,
+- read-only režim pro archiv,
+- export dat před smazáním,
+- odstranění nepotřebných členů nebo projektů,
+- jednorázová pomoc se setupem,
+- kontakt na support při technickém problému.
+
+Sleva má být opatrná. Pokud je první reakcí na churn sleva, říkáš tím, že původní cena možná nebyla férová. Sleva může dávat smysl při konkrétním krátkodobém problému, ale nemá nahrazovat produktovou hodnotu.
+
+### Data při odchodu popiš bez mlhy
+
+Privacy-first odchod stojí na jasném datovém dopadu. Zákazník potřebuje vědět, co může vzít s sebou, co zůstane kvůli zákonné nebo provozní retenci a co bude odstraněno.
+
+Krátká karta odchodu může obsahovat:
+
+| Oblast | Co se stane |
+| --- | --- |
+| Produktová data | Dostupná k exportu do konkrétního data |
+| Fakturační údaje | Uchovány podle účetních povinností |
+| Support historie | Držena podle retenčních pravidel supportu |
+| Integrace | Tokeny budou zneplatněny při ukončení |
+| Členové týmu | Přístupy se ukončí společně s workspace |
+| Zálohy | Data doběhnou podle retenčního cyklu záloh |
+| Marketing | Odběr zůstává oddělený a lze ho odhlásit samostatně |
+
+Nepotřebuješ zákazníkovi sypat právní esej. Potřebuješ srozumitelně říct, co se stane a kde najde detailní pravidla. To je rozdíl mezi transparentností a dokumentem, který vypadá jako obranný val.
+
+### Churn review dělej jako produktové učení
+
+Jednou měsíčně se podívej na odchody jako na vzorek rozhodnutí, ne jako na seznam jmen.
+
+U každého měsíce si odpověz:
+
+- Kolik odchodů bylo dobrovolných, platebních, technických a hodnotových?
+- Které důvody se opakují?
+- Který segment odchází častěji než ostatní?
+- Který slib v marketingu nebo sales neodpovídá realitě produktu?
+- Který onboardingový krok selhává před prvním hodnotným výsledkem?
+- Který churn důvod vyžaduje jednu konkrétní opravu v backlogu?
+- Co vědomě měřit nebudeme, protože by to bylo invazivní nebo zbytečné?
+
+Výstupem nemá být velký report. Stačí jedna rozhodovací karta:
+
+| Signál | Rozhodnutí | Vlastník | Termín |
+| --- | --- | --- | --- |
+| Časté zrušení po prvním importu | Přidat ukázková data a lepší validaci importu | Produkt |  |
+| Dotazy na rozdíl tarifů před zrušením | Přepsat pricing a doplnit dopad downgrade | Marketing |  |
+| Platební selhání bez reakce | Přidat dunning e-mail a stav v administraci | Ops |  |
+
+Churn review má být krátké, pravidelné a navázané na změny. Pokud jen opakuješ „musíme snížit churn“, vyrábíš firemní mantru. Ta se hezky říká, ale špatně releasuje.
+
+### Odděl zrušení, výmaz a marketingové preference
+
+Uživatel může chtít ukončit placený tarif, ale zachovat účet. Může chtít smazat workspace, ale ponechat fakturační doklady. Může chtít odejít z produktu, ale dál číst newsletter. Nebo přesně opačně.
+
+Proto odděl:
+
+- ukončení předplatného,
+- downgrade,
+- pozastavení,
+- výmaz workspace,
+- výmaz osobního účtu,
+- export dat,
+- odhlášení marketingu,
+- zavření supportního tiketu.
+
+Když tyto akce smícháš do jednoho tlačítka, vytvoříš právní, produktový i supportní chaos. Zákazník má pochopit, co přesně dělá. Tým má umět akci provést bez ručního hádání.
+
+### Checklist: Churn privacy-first
+
+- [ ] Zrušení předplatného je dostupné bez skryté překážky.
+- [ ] Odchodový tok jasně popisuje dopad na službu, fakturaci a data.
+- [ ] Dotazník na důvod odchodu je dobrovolný, krátký a přeskočitelný.
+- [ ] Důvody churnu jsou dost konkrétní pro rozhodnutí, ale nevytvářejí osobní profil.
+- [ ] Zákazník má možnost exportu před ukončením nebo smazáním dat.
+- [ ] Read-only, downgrade nebo pozastavení jsou nabídnuté tam, kde dávají smysl.
+- [ ] Sleva není automatická náplast na nejasnou hodnotu.
+- [ ] Výmaz účtu, ukončení předplatného a marketingové preference jsou oddělené akce.
+- [ ] Support ví, co zákazník vidí v odchodovém toku, a používá stejný jazyk.
+- [ ] Měsíční churn review končí jedním rozhodnutím nebo jednou opravou v backlogu.
+- [ ] Churn feedback se nesype do široce dostupných poznámek bez kontroly citlivých údajů.
+- [ ] Tým pravidelně maže nebo agreguje detailní odchodové poznámky podle retenčních pravidel.
+
+### Mini úkol
+
+Projdi aktuální tok zrušení nebo navrhni první verzi karty odchodu:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jak zákazník zruší předplatné? |  |
+| Jak pozná, kdy služba skončí? |  |
+| Co se stane s fakturací? |  |
+| Co může exportovat a do kdy? |  |
+| Která data zůstávají kvůli retenci? |  |
+| Jaké alternativy jsou férové nabídnout? |  |
+| Jaký dotaz na důvod odchodu je opravdu nutný? |  |
+| Jak se odchodový feedback dostane do backlogu? |  |
+| Co nebudeme měřit ani ukládat? |  |
+| Kdo měsíčně kontroluje churn rozhodnutí? |  |
+
+Potom udělej jednu konkrétní opravu: zkrať odchodový dotazník, přidej přeskočení, napiš jasný datový dopad, odděl výmaz od zrušení předplatného, doplň export, nebo zaveď měsíční churn review s jednou rozhodovací kartou. Férový odchod není slabost. Je to poslední šance potvrdit, že produkt respektuje zákazníka i bez další faktury.
+
 ## Zdroje
 
 - ICANN: Information for Domain Name Registrants - práva a odpovědnosti držitelů domén včetně správy, obnovy a převodu doménové registrace: https://www.icann.org/registrants
@@ -16974,6 +17168,7 @@ Potom udělej jednu konkrétní opravu: přepiš text limitu, přidej read-only 
 
 ## Pracovní log
 
+- 2026-07-14: Doplněna příloha o churnu a odchodu zákazníka bez výslechového formuláře: rozlišení typů odchodu, férový zrušovací tok, dobrovolný krátký dotazník, alternativy bez panické slevy, jasný datový dopad, měsíční churn review, oddělení zrušení/výmazu/preferencí, checklist a mini úkol.
 - 2026-07-14: Doplněna příloha o upgrade momentech bez nátlakového paywallu: mapa hodnoty před zamčenými funkcemi, lidské vysvětlení limitů, férové alternativy k platbě, měření upgrade rozhodnutí bez profilování, opatrnost u základní bezpečnosti a datových práv, pravidla downgradu, checklist a mini úkol.
 - 2026-07-14: Doplněna příloha o trialu a freemium modelu bez datového dluhu: volba modelu podle rizika a nákupního chování, první hodnota bez produkčních dat, limity free plánu, aktivační měření, pomocné trial e-maily, konec trialu, support hranice, checklist a mini úkol.
 - 2026-07-14: Doplněna příloha o rozhodování build vs. buy bez drahého autopilota: popis schopnosti místo názvu nástroje, čtyři varianty rozhodnutí, datový dopad, kdy koupit a kdy stavět, bezpečný pilot, provozní cena, rozhodovací karta, checklist a mini úkol.
