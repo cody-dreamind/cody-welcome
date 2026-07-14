@@ -15379,6 +15379,181 @@ Vezmi jednu poslední nabídku nebo šablonu nabídky a přidej do ní tuto kart
 
 Potom udělej jednu konkrétní opravu: doplň mimo rozsah, napiš akceptační kritéria pro nejrizikovější část, přidej datovou kartu, nebo odděl projektovou dodávku od podpory. Dobrá nabídka není delší proto, že se bojíš. Je přesnější proto, aby projekt nemusel hádat.
 
+## Příloha: Discovery call bez obchodního výslechu a datového přetlaku
+
+Discovery call je první pracovní rozhovor, kde se má zjistit, jestli dává smysl spolupracovat. Není to terapeutické sezení pro celý firemní backlog, ani soutěž v tom, kolik interních detailů dokáže klient poslat před první nabídkou. Dobré discovery šetří čas oběma stranám: vyjasní problém, rozhodovací kontext, rizika, další krok a datový rozsah.
+
+Špatná otázka zní: „Co všechno nám klient může říct, aby se dala napsat nabídka?“
+
+Lepší otázka zní: „Jaké minimum informací potřebujeme, abychom poznali fit, navrhli další krok a neotevřeli zbytečně citlivá data?“
+
+Privacy-first discovery neznamená, že se ptáš méně chytře. Znamená, že se ptáš přesněji.
+
+### Před hovorem pošli krátký rámec
+
+Když klient neví, co se bude řešit, často pošle všechno: přístupy, exporty, screenshoty, staré prezentace, interní tabulky a někdy i věci, které opravdu nikdo nepotřeboval vidět. Tomu se dá předejít jednoduchým rámcem před hovorem.
+
+Krátká zpráva před discovery:
+
+```text
+Cílem hovoru je pochopit problém, aktuální stav, očekávaný výsledek a další rozhodnutí. Prosím neposílejte předem žádná hesla, produkční exporty ani zákaznická data. Pokud budeme potřebovat konkrétní ukázku, domluvíme bezpečný způsob sdílení nebo použijeme demo/anonymizovanou verzi.
+```
+
+Tohle není nedůvěra. Je to slušný provoz. Klient zároveň vidí, že práce s daty nebude improvizace.
+
+### Ptej se na rozhodnutí, ne na všechno v systému
+
+Discovery má zjistit, jaké rozhodnutí má další práce podpořit. Pokud stavíš web, není první potřeba vidět každý historický článek a všechny kampaně. Pokud navrhuješ SaaS onboarding, nepotřebuješ hned produkční databázi. Potřebuješ pochopit, kde dnes vzniká tření.
+
+Praktická sada otázek:
+
+| Oblast | Dobrá otázka |
+| --- | --- |
+| Problém | Co vás donutilo řešit to právě teď? |
+| Dopad | Co se stane, když to necháte další tři měsíce být? |
+| Segment | Pro koho je změna nejdůležitější? |
+| Současný stav | Jak to řešíte dnes a kde to bolí nejvíc? |
+| Výsledek | Jak poznáme, že spolupráce pomohla? |
+| Rozhodování | Kdo musí další krok schválit? |
+| Omezení | Co nesmíme rozbít: provozně, právně, obchodně, datově? |
+| Data | Jaké informace opravdu potřebujeme pro další krok? |
+
+Naopak opatrně s otázkami typu „pošlete všechno, co máte“. Vypadají efektivně, ale často jen přesunou nepořádek z klienta na dodavatele.
+
+### Odděl obchodní fit od technického auditu
+
+První hovor nemusí vyřešit celý technický stav. Má určit, jestli dává smysl udělat další krok: rychlý audit, placený discovery workshop, nabídku, pilot, nebo slušné „tohle není fit“.
+
+Rozdíl:
+
+| Fáze | Cíl | Typ dat |
+| --- | --- | --- |
+| První discovery | pochopit problém a fit | veřejné informace, popis procesu, agregované signály |
+| Audit | ověřit konkrétní stav | read-only přístupy, anonymizované ukázky, technické reporty |
+| Pilot | dodat omezený výsledek | dohodnutý rozsah dat, staging, demo nebo minimální produkční výjimka |
+| Implementace | stavět řešení | řízené přístupy, dokumentovaný datový rozsah, role a odpovědnosti |
+
+Když se tyto fáze smíchají, první hovor se změní v divoký audit bez smlouvy, bez vlastníka a bez jasného konce. To je drahé i tehdy, když je „zdarma“.
+
+### Na začátku si řekni, co zatím nechceš vidět
+
+Privacy-first discovery má mít vylučovací seznam. Ne proto, že by tyto věci nikdy nebyly potřeba, ale protože na první rozhodnutí obvykle potřeba nejsou.
+
+Na první hovor typicky nepatří:
+
+- hesla, API klíče a produkční tokeny,
+- export celé zákaznické databáze,
+- reálné platební údaje,
+- interní smlouvy bez konkrétního důvodu,
+- support tickety se jmény a e-maily,
+- nahrávky zákazníků bez schváleného účelu,
+- plné session recordings,
+- přístup do administrace jen „pro jistotu“.
+
+Co často stačí místo toho:
+
+- popis procesu,
+- anonymizovaný příklad,
+- agregované číslo,
+- screenshot s redigovanými údaji,
+- veřejná URL,
+- krátký seznam opakovaných dotazů,
+- demo účet,
+- export schématu bez osobních dat.
+
+Codyho komentář: Když nabídku nejde napsat bez produkčního exportu, problém možná není v nedostatku dat. Možná ještě neumíme pojmenovat práci, kterou má projekt udělat.
+
+### Z hovoru má vzniknout discovery brief
+
+Po hovoru neposílej jen „díky za čas“. Pošli krátký brief, který uzavře pochopení situace a dá oběma stranám šanci opravit nesoulad dřív, než vznikne nabídka.
+
+Struktura discovery briefu:
+
+| Sekce | Co obsahuje |
+| --- | --- |
+| Kontext | Proč se téma řeší teď |
+| Problém | Jedna až tři konkrétní bolesti |
+| Cílový výsledek | Jak má vypadat zlepšení |
+| První segment | Pro koho je změna nejdůležitější |
+| Omezení | Co nesmíme rozbít nebo ignorovat |
+| Datový rozsah | Co zatím potřebujeme a co nepotřebujeme |
+| Navržený další krok | audit, workshop, nabídka, pilot nebo stop |
+| Otevřené otázky | co chybí pro rozhodnutí |
+
+Příklad:
+
+```text
+Chápu, že hlavní problém není nový web jako takový, ale nízká kvalita poptávek z hlavní služby. První cíl je zpřesnit pozici služby pro segment B2B SaaS týmů, zkrátit formulář a měřit počet relevantních poptávek agregovaně podle zdroje. Pro další krok zatím nepotřebujeme CRM export ani reklamní účty; stačí veřejné URL, tři příklady typických poptávek bez osobních údajů a seznam nejčastějších námitek ze sales.
+```
+
+Takový brief je malý dokument, ale velká pojistka. Když klient odpoví „ne, problém je jinde“, právě jsi ušetřil špatnou nabídku.
+
+### Rozpoznej červené vlajky včas
+
+Discovery není jen prodej. Je to i ochrana před špatnou spoluprací. Některé signály neznamenají automaticky stop, ale vyžadují zpřesnění.
+
+Červené vlajky:
+
+- nikdo neumí říct, kdo rozhoduje,
+- očekávaný výsledek je jen „ať je to moderní“,
+- klient chce předat produkční přístupy před zadáním,
+- projekt má napravit interní politiku bez vlastníka,
+- každý stakeholder chce jiný výsledek,
+- cena má být fixní, ale rozsah je pohyblivý,
+- privacy se bere jako věc, kterou „nějak dopíšeme později“,
+- úspěch se má měřit metrikou, kterou nikdo nebude používat.
+
+Reakce nemusí být dramatická. Stačí říct:
+
+```text
+Než naceníme implementaci, potřebujeme uzavřít cíl první verze, vlastníka rozhodnutí a datový rozsah. Jinak by nabídka jen předstírala přesnost.
+```
+
+To je férové. Pro klienta i pro tým.
+
+### Když fit není, řekni to čistě
+
+Ne každý lead má být zákazník. Pokud projekt nesedí do kompetence, rozpočtu, hodnot, termínu nebo privacy-first způsobu práce, lepší je rychle a slušně skončit.
+
+Dobrá odpověď:
+
+```text
+Podle toho, co jsme probrali, teď nejvíc potřebujete právní revizi zpracování dat a interní rozhodnutí o vlastnictví CRM. Implementace webu by v této chvíli řešila až následek. Doporučil bych nejdřív uzavřít datový rámec a potom se vrátit k návrhu poptávkové cesty.
+```
+
+Taková odpověď možná neuzavře obchod dnes. Ale buduje důvěru. A důvěra je u B2B prodeje nudně pomalá věc, která překvapivě často platí faktury.
+
+### Checklist: Discovery call privacy-first
+
+- [ ] Před hovorem je jasné, co se bude řešit a co se zatím nemá posílat.
+- [ ] Na první hovor nevyžadujeme hesla, produkční exporty ani zákaznická data.
+- [ ] Otázky míří na problém, dopad, segment, výsledek a rozhodování.
+- [ ] Obchodní fit je oddělený od technického auditu.
+- [ ] Vylučovací seznam dat je napsaný stejně jasně jako seznam potřebných podkladů.
+- [ ] Pokud jsou potřeba ukázky, používají se demo data, anonymizace nebo redigované screenshoty.
+- [ ] Po hovoru vznikne krátký discovery brief.
+- [ ] Brief obsahuje datový rozsah: co potřebujeme, co nepotřebujeme a proč.
+- [ ] Otevřené otázky jsou formulované jako rozhodnutí, ne jako nekonečný seznam přání.
+- [ ] Červené vlajky se řeší před nabídkou, ne až po podpisu.
+- [ ] Pokud spolupráce nedává smysl, řekneme to rychle a konkrétně.
+
+### Mini úkol
+
+Vezmi poslední discovery call, úvodní poptávku nebo první schůzku před nabídkou a vyplň kartu:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Proč klient téma řeší právě teď? |  |
+| Jaký konkrétní problém zazněl? |  |
+| Jaký výsledek by byl po měsíci vidět? |  |
+| Kdo rozhoduje o dalším kroku? |  |
+| Jaká data klient poslal nebo chtěl poslat zbytečně brzy? |  |
+| Co stačí jako bezpečnější alternativa? |  |
+| Která červená vlajka zůstává otevřená? |  |
+| Jaký další krok dává smysl: audit, workshop, nabídka, pilot nebo stop? |  |
+
+Potom udělej jednu konkrétní opravu: přidej do šablony předhovorovou větu o neposílání citlivých dat, vytvoř discovery brief, zkrať seznam otázek, nebo odmítni produkční přístup, dokud není jasný účel. Dobrý první hovor nemá vytěžit maximum informací. Má vytvořit dost jasna na správný další krok.
+
 ## Zdroje
 
 - ICANN: Information for Domain Name Registrants - práva a odpovědnosti držitelů domén včetně správy, obnovy a převodu doménové registrace: https://www.icann.org/registrants
@@ -15505,6 +15680,7 @@ Potom udělej jednu konkrétní opravu: doplň mimo rozsah, napiš akceptační 
 
 ## Pracovní log
 
+- 2026-07-14: Doplněna příloha o discovery callu bez obchodního výslechu a datového přetlaku: rámec před hovorem, otázky podle rozhodnutí, oddělení fitu od auditu, vylučovací seznam citlivých dat, discovery brief, červené vlajky, čisté odmítnutí nefitové spolupráce, checklist a mini úkol.
 - 2026-07-14: Doplněna příloha o nabídkách a scope projektu bez mlhy a datového chaosu: výsledek místo seznamu funkcí, rozdělení dodávky/spolupráce/mimo rozsah, datový rozsah nabídky, akceptační kritéria, změnové požadavky, komunikační rytmus, provoz po předání, checklist a mini úkol.
 - 2026-07-14: Doplněna příloha o doporučeních a partnerství bez datového handlu: kdy je doporučení férové, referral balíček pro partnera, předávání kontaktů jen s volbou člověka, provize navázaná na kvalitu místo objemu, jednoduché měření bez profilování, společný obsah jako alternativa k výměně leadů, checklist a mini úkol.
 - 2026-07-14: Doplněna příloha o design systému bez knihovny na všechno: produktové vzory místo seznamu komponent, tokeny jako dohoda, stavové karty komponent, formuláře/tabulky/tlačítka, přístupnost ve výchozím chování, privacy vzory pro souhlas/export/výmaz/sdílení, kontrola UI knihoven, dokumentace správného použití, měření adopce, checklist a mini úkol; navázáno na existující zdroje k WCAG, privacy by design a správě závislostí.
