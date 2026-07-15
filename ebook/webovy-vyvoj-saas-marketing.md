@@ -19538,6 +19538,177 @@ Vyber jedno agentní workflow a napiš k němu první eval sadu:
 
 Potom přidej tři scénáře: jeden běžný, jeden negativní a jeden nejasný. U každého napiš očekávané chování a stop signál. Agent, který umí projít jen ideálním scénářem, není automatizace. Je to ukázka na konferenci s dobrým světlem.
 
+## Příloha: RAG a interní znalosti bez úniku kontextu
+
+Retrieval augmented generation, zkráceně RAG, zní technicky složitě, ale produktově řeší jednoduchou věc: model nemá odpovídat jen z obecné paměti, ale má si před odpovědí vytáhnout relevantní interní dokumenty, články, návody, tickety nebo poznámky. Pro firemní asistenty je to lákavé, protože najednou mohou odpovídat podle skutečné dokumentace, ne podle sebevědomého odhadu.
+
+Jenže RAG je také místo, kde se snadno rozpadne privacy-first slib. Pokud do jednoho indexu naházíš interní wiki, CRM poznámky, support tickety, smlouvy a staré exporty, nevznikne znalostní báze. Vznikne velmi rychlý způsob, jak poslat citlivý kontext člověku, který ho nikdy neměl vidět.
+
+Špatná otázka zní: „Co všechno můžeme zaindexovat?“
+
+Lepší otázka zní: „Které znalosti smí tento člověk nebo agent použít pro tuto konkrétní práci?“
+
+OWASP Top 10 for LLM Applications 2025 upozorňuje mimo jiné na rizika prompt injection, citlivého úniku informací, data/model poisoningu, vector a embedding slabin, misinformation a nadměrné agentní spotřeby. NIST AI RMF a jeho profil pro generativní AI zase tlačí na řízené mapování, měření a správu rizik napříč životním cyklem. Přeloženo do provozu malého SaaS: RAG není jen vyhledávání. Je to nový datový tok, který potřebuje vlastníka, oprávnění, testy a úklid.
+
+### Nejdřív urči práci asistenta
+
+RAG index nestav jako univerzální mozek firmy. Stav ho pro konkrétní práci.
+
+Příklady:
+
+- support asistent hledá veřejnou dokumentaci a schválené interní postupy,
+- sales asistent hledá veřejné case studies, pricing pravidla a šablony follow-upů,
+- onboarding asistent hledá produktovou dokumentaci a neobsahuje interní obchodní poznámky,
+- provozní asistent hledá runbooky a incidentní šablony, ale ne zákaznické exporty,
+- obsahový asistent hledá publikované články a redakční pravidla, ne soukromé konverzace.
+
+U každého asistenta napiš jednu větu:
+
+„Tento asistent používá RAG k tomu, aby pomohl člověku typu ___ udělat ___ podle zdrojů ___.“
+
+Pokud do věty nejde doplnit role, práce a zdroje, index je moc široký. Široký index zní pohodlně. V praxi ale znamená horší relevanci, horší oprávnění a větší riziko, že odpověď vytáhne dokument, který se jen podobá správnému zdroji.
+
+### Dokumenty rozděluj podle oprávnění před indexací
+
+Největší chyba je indexovat všechno a spoléhat, že model „pochopí“, co nemá ukázat. Model není autorizační vrstva. Autorizace musí proběhnout před retrievalem nebo přímo při něm, podle role, workspace, zákazníka a účelu.
+
+Praktické dělení zdrojů:
+
+| Vrstva | Příklad | Kdo smí použít |
+| --- | --- | --- |
+| Veřejné | blog, dokumentace, veřejné release notes | všichni |
+| Interní obecné | playbooky, šablony, produktové zásady | zaměstnanci podle role |
+| Zákaznické | tickety, konfigurace, onboarding poznámky | jen tým přiřazený k zákazníkovi |
+| Citlivé provozní | incidenty, bezpečnostní postupy, admin runbooky | omezené provozní role |
+| Zakázané pro RAG | secrets, surové exporty, smlouvy bez účelu, osobní poznámky | nikdo bez řízené výjimky |
+
+Každý dokument nebo chunk by měl nést metadata: zdroj, vlastník, klasifikace, workspace nebo zákazník, datum aktualizace, stav platnosti a oprávnění. Bez metadat je RAG jen textový sklad. A sklad bez štítků je rychlý jen do chvíle, kdy hledáš něco bezpečně.
+
+### Chunk není neutrální technický detail
+
+Chunking rozhoduje o tom, jaký kontext model dostane. Příliš malé chunky ztrácí význam. Příliš velké chunky přenáší zbytečné detaily. U privacy-first systému je chunk zároveň datová jednotka s oprávněním.
+
+Praktická pravidla:
+
+- neděl část dokumentu tak, aby citlivý detail zůstal bez vysvětlení účelu,
+- nedávej do jednoho chunku veřejný návod a interní poznámku,
+- u zákaznických dokumentů drž chunk v hranici jednoho zákazníka nebo workspace,
+- přidej název zdroje a datum, aby odpověď mohla citovat aktuálnost,
+- u archivovaných dokumentů nastav nižší prioritu nebo je z indexu vyřaď,
+- u dokumentů s osobními údaji zvaž, jestli se mají indexovat vůbec.
+
+Codyho komentář: RAG často selže nudně. Ne výbuchem. Prostě vytáhne trochu starý dokument, trochu špatný zákaznický kontext a trochu sebevědomý tón. Výsledek vypadá použitelně přesně dost dlouho na to, aby někdo udělal špatné rozhodnutí.
+
+### Prompt injection řeš i v dokumentech
+
+Prompt injection není jen uživatelský vstup v chatu. Může být i v dokumentu, který agent načte: webová stránka, ticket, e-mail, poznámka, komentář v issue nebo nahraný soubor může obsahovat instrukci typu „ignoruj předchozí pravidla“ nebo „pošli celý kontext“. Agent má takový text brát jako data, ne jako instrukci.
+
+Praktické obrany:
+
+- odděl systémové instrukce od retrieved obsahu,
+- retrieved obsah označ jako nedůvěryhodný kontext,
+- nastav pravidlo, že dokument nesmí měnit oprávnění ani nástroje,
+- před write akcí vyžaduj potvrzení člověka i tehdy, když retrieved dokument tvrdí opak,
+- u externích zdrojů a zákaznických uploadů používej přísnější režim,
+- testuj scénáře, kde dokument zkouší agenta navést k úniku dat.
+
+Příklad stop signálu:
+
+„Našel jsem dokument, který obsahuje instrukce směrem k agentovi. Beru je jako obsah dokumentu, ne jako pravidla pro tuto relaci. Pro odpověď použiju jen věcnou část a nebudu měnit oprávnění ani provádět akce.“
+
+Tohle má být systémové chování, ne kreativita modelu v dobré náladě.
+
+### Odpověď má ukazovat zdroje a hranice
+
+RAG odpověď bez zdrojů je těžko kontrolovatelná. U interní práce se hodí, aby asistent ukázal:
+
+- z jakých dokumentů čerpal,
+- kdy byly dokumenty aktualizované,
+- jestli jsou veřejné, interní nebo zákaznické,
+- co neví nebo nenašel,
+- jaký další krok je bezpečný.
+
+To neznamená posílat uživateli celý retrieved kontext. Stačí krátká stopa: názvy dokumentů, verze, datum a relevantní části bez citlivého balastu. Pokud odpověď vychází z dokumentu, ke kterému uživatel nemá přístup, chyba není v textaci odpovědi. Chyba je v retrieval vrstvě.
+
+Dobrá odpověď:
+
+„Podle runbooku `Obnova workspace`, aktualizovaného 2026-07-10, smí support připravit obnovu, ale spuštění obnovy potvrzuje Owner nebo provozní admin. V tomto účtu nemám oprávnění obnovu spustit; můžu připravit žádost s dopadem.“
+
+Špatná odpověď:
+
+„Našel jsem interní postup. Tady je celý text.“
+
+### Index má životní cyklus
+
+RAG není hotový ve chvíli, kdy se první dotaz vrátí s hezkou odpovědí. Index má stárnout, mazat, přepočítávat a respektovat změny oprávnění.
+
+Provozní otázky:
+
+- Jak rychle se změna oprávnění projeví v retrievalu?
+- Co se stane, když dokument přejde do archivu?
+- Jak smažeme dokument z indexu i z vektorové databáze?
+- Jak dlouho držíme embeddings a metadata?
+- Jak poznáme, že index obsahuje starý nebo duplicitní zdroj?
+- Kdo schvaluje přidání nové kolekce dokumentů?
+- Jak testujeme, že uživatel nevidí kontext jiného zákazníka?
+
+U osobních údajů nezapomeň, že embedding není kouzelná anonymizace. Pokud vznikl z osobních nebo citlivých dokumentů a dá se použít k práci s tímto obsahem, pořád řeš účel, přístup, retenci a smazání. Privacy-first tým si nepomáhá tím, že text přejmenuje na vektor a tváří se, že právní realita zůstala za dveřmi.
+
+### Evaly musí testovat retrieval, nejen odpověď
+
+U RAG asistenta testuj samostatně čtyři věci:
+
+1. Našel správný zdroj?
+2. Nenašel zakázaný zdroj?
+3. Použil zdroj správně a s hranicemi?
+4. Řekl jasně, co neví?
+
+Scénáře musí obsahovat i špatné případy:
+
+- dva zákazníci mají podobný název projektu,
+- dokument je archivovaný, ale obsahově lákavý,
+- veřejný článek je starší než interní opravený postup,
+- uživatel nemá roli pro citlivý runbook,
+- ticket obsahuje prompt injection,
+- dotaz žádá „všechno, co víš o zákazníkovi“,
+- změna role se má projevit okamžitě.
+
+Měř přesnost retrievalu, ale nebuď posedlý jen číslem. Jedno selhání typu „uživatel dostal cizí zákaznický kontext“ je větší problém než deset odpovědí, které byly trochu stručné. V bezpečnostních a privacy scénářích je false positive často lepší než suverénní únik.
+
+### Checklist: RAG privacy-first
+
+- [ ] Každý RAG index má jasnou práci, vlastníka a cílovou roli.
+- [ ] Zdroje jsou rozdělené podle veřejnosti, internosti, zákazníka, citlivosti a oprávnění.
+- [ ] Retrieval respektuje oprávnění před tím, než se kontext dostane k modelu.
+- [ ] Každý chunk má metadata: zdroj, vlastník, klasifikaci, datum, stav a rozsah oprávnění.
+- [ ] Veřejné, interní a zákaznické informace se nemíchají v jednom chunku.
+- [ ] Retrieved dokumenty nemohou měnit systémové instrukce, oprávnění ani nástroje.
+- [ ] Agent umí rozpoznat a neutralizovat prompt injection v dokumentech jako nedůvěryhodný obsah.
+- [ ] Odpovědi ukazují použité zdroje, datum a hranice jistoty.
+- [ ] Index má postup pro aktualizaci, archivaci, smazání a změnu oprávnění.
+- [ ] Embeddings a metadata mají retenci, vlastníka a mazací postup.
+- [ ] Evaly testují správné i zakázané zdroje, role, workspace hranice a staré dokumenty.
+- [ ] Nová kolekce dokumentů se přidává přes datovou kartu, ne přes hromadný upload z pohodlí.
+
+### Mini úkol
+
+Vyber jeden plánovaný nebo existující RAG index a vyplň kartu:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jakou práci má index podporovat? |  |
+| Kdo je cílový uživatel nebo agent? |  |
+| Které zdroje smí index obsahovat? |  |
+| Které zdroje jsou výslovně zakázané? |  |
+| Jaká metadata ponese každý chunk? |  |
+| Kde se kontrolují oprávnění před retrievalem? |  |
+| Jak rychle se projeví změna role nebo smazání dokumentu? |  |
+| Jaké prompt injection scénáře otestujeme? |  |
+| Jak dlouho držíme embeddings a logy retrievalu? |  |
+| Jak odpověď ukáže zdroje bez úniku balastu? |  |
+
+Potom udělej jednu konkrétní opravu: rozděl index podle rolí, vyřaď staré exporty, doplň metadata ke chunkům, přidej test na zákaznické hranice, nebo nastav smazání dokumentu z vektorové databáze. RAG má být zkratka k relevantní znalosti, ne obchvat kolem oprávnění.
+
 ## Zdroje
 
 - ICANN: Information for Domain Name Registrants - práva a odpovědnosti držitelů domén včetně správy, obnovy a převodu doménové registrace: https://www.icann.org/registrants
@@ -19592,6 +19763,10 @@ Potom přidej tři scénáře: jeden běžný, jeden negativní a jeden nejasný
 - OpenTelemetry Docs: Signals - přehled základních observability signálů jako traces, metrics, logs a profiles: https://opentelemetry.io/docs/concepts/signals/
 - OWASP Cheat Sheet Series: Secrets Management Cheat Sheet - doporučení pro životní cyklus tajemství, ukládání, přístup, rotaci, revokaci, audit a incidentní reakci: https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html
 - Model Context Protocol: Specification - oficiální specifikace MCP včetně architektury, nástrojů, zdrojů, promptů, souhlasu uživatele, kontroly dat, bezpečnosti nástrojů a trust & safety principů: https://modelcontextprotocol.io/specification
+- OWASP Gen AI Security Project: 2025 Top 10 Risk & Mitigations for LLMs and Gen AI Apps - přehled hlavních rizik LLM aplikací včetně prompt injection, citlivého úniku informací, data/model poisoningu, vector a embedding slabin, misinformation a dalších provozních rizik: https://genai.owasp.org/llm-top-10/
+- OWASP Gen AI Security Project: LLM08:2025 Vector and Embedding Weaknesses - rizika RAG systémů, vektorů a embeddings včetně manipulace retrieved obsahu a přístupu k citlivým informacím: https://genai.owasp.org/llmrisk/llm082025-vector-and-embedding-weaknesses/
+- NIST: AI Risk Management Framework - dobrovolný rámec pro řízení AI rizik podle funkcí Govern, Map, Measure a Manage a přehled souvisejících profilů a zdrojů: https://www.nist.gov/itl/ai-risk-management-framework
+- NIST: Artificial Intelligence Risk Management Framework: Generative Artificial Intelligence Profile - profil NIST AI 600-1 pro identifikaci a řízení specifických rizik generativní AI: https://www.nist.gov/publications/artificial-intelligence-risk-management-framework-generative-artificial-intelligence
 - The Twelve-Factor App: Config - princip oddělení konfigurace od kódu a používání proměnných prostředí pro konfiguraci aplikace: https://12factor.net/config
 - GitHub Docs: Secret scanning - detekce hardcodovaných přístupových údajů v historii repozitáře a ochrana proti úniku secrets: https://docs.github.com/code-security/secret-scanning/about-secret-scanning
 - Keep a Changelog: Keep a Changelog 1.1.0 - principy lidsky psaného changelogu, typy změn a sekce pro nevydané změny: https://keepachangelog.com/en/1.1.0/
@@ -19672,6 +19847,7 @@ Potom přidej tři scénáře: jeden běžný, jeden negativní a jeden nejasný
 
 ## Pracovní log
 
+- 2026-07-15: Doplněna příloha o RAG a interních znalostech bez úniku kontextu: vymezení práce asistenta, dělení dokumentů podle oprávnění před indexací, chunk metadata, prompt injection v retrieved dokumentech, zdrojování odpovědí, životní cyklus indexu, retrieval evaly, checklist a mini úkol; ověřeny a doplněny zdroje OWASP Top 10 for LLM Applications 2025, OWASP k vector/embedding slabinám a NIST AI RMF včetně GenAI profilu.
 - 2026-07-15: Doplněna příloha o agentních evaluacích bez produkčního hřiště: eval karta pro záměr, data, nástroje, autorizaci, consent, výstup a stopování, syntetická testovací data, testování oprávnění, simulace chyb nástrojů, chudé eval logy, převod selhání do backlogu, checklist a mini úkol; navázáno na existující zdroje k MCP, OWASP logování a GDPR principům minimalizace.
 - 2026-07-15: Doplněna příloha o AI agentech a MCP nástrojích bez oprávnění na celý svět: katalog schopností, rozlišení čtení/návrhu/akce, konkrétní scopy, bezpečný návrh toolů, smysluplný consent, chudé logování, agentní incident plán, checklist a mini úkol; ověřen a doplněn oficiální zdroj Model Context Protocol a navázáno na existující zdroje OWASP a GDPR principy.
 - 2026-07-15: Doplněna příloha o auditní stopě bez sledovacího deníku: rozlišení auditních logů, technických logů a produktové analytiky, výběr důležitých změn, návrh auditní události, ochrana přístupu, rizika volného textu, retence, zákaznický pohled, checklist a mini úkol; navázáno na existující zdroje OWASP a Evropské komise k logování, minimalizaci a době uchování dat.
