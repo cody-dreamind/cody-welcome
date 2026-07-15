@@ -21740,6 +21740,202 @@ Vyber jedno vyhledávání ve webu, aplikaci, dokumentaci nebo interním adminu.
 
 Potom udělej jednu úpravu: přidej filtr citlivých vzorů, zkrať retenci search logů, změň report na agregovaný, přepiš nulový stav, odděl interní search oprávnění nebo vypni sdílení search chování do marketingových nástrojů. Vyhledávání má zlepšovat produkt, ne stavět tajný profil zvědavosti.
 
+## Příloha: Prázdné stavy a kontextová nápověda bez nátlakového vodění
+
+Prázdný stav je obrazovka, kde produkt ještě nemá co ukázat: žádné projekty, žádné faktury, žádné výsledky hledání, žádné členy týmu, žádné integrace, žádná data v reportu. Vypadá nevinně, ale pro SaaS je to jeden z nejdůležitějších momentů. Člověk právě čeká, že mu produkt pomůže začít. Pokud dostane jen větu „Zatím tu nic není“, produkt promarnil šanci. Pokud dostane deset kroků, tři pop-upy a povinnou prohlídku, produkt z něj dělá školáka v labyrintu.
+
+Privacy-first prázdný stav má jednoduchý cíl:
+
+„Pomoci člověku udělat nejmenší užitečný další krok bez zbytečného sběru dat, manipulace a sledování každého zaváhání.“
+
+To platí i pro kontextovou nápovědu, onboardingové tipy, tooltips, checklisty a malé produktové nudges. Mají podporovat práci, ne tlačit člověka do akce, kterou produkt potřebuje pro vlastní metriku.
+
+### Prázdný stav není dekorace
+
+Prázdný stav má mít vlastní účel. Jiný text patří na první použití produktu, jiný do nulového výsledku hledání, jiný do obrazovky po smazání všech položek a jiný do stavu, kdy uživatel nemá oprávnění.
+
+Rozliš minimálně tyto situace:
+
+| Situace | Co člověk potřebuje | Co je rizikové |
+| --- | --- | --- |
+| První použití | pochopit hodnotu a udělat první krok | obecný motivační text bez akce |
+| Žádná data po filtru | změnit filtr nebo najít důvod prázdna | tvářit se, že data neexistují, když je jen skrývá filtr |
+| Žádná data kvůli oprávnění | vědět, kdo může pomoct | prozradit existenci dat, ke kterým nemá přístup |
+| Dokončený úklid | potvrdit, že akce proběhla | strašit ztrátou dat, když je stav v pořádku |
+| Chyba integrace | opravit konkrétní problém | poslat člověka do obecné dokumentace bez kontextu |
+
+Dobrá věta pro návrh prázdného stavu:
+
+„Když je tato obrazovka prázdná, člověk si pravděpodobně myslí ___ a potřebuje udělat ___.“
+
+Příklad:
+
+„Když je seznam faktur prázdný po prvním přihlášení, administrátor si pravděpodobně myslí, jestli má nejdřív vytvořit fakturu, importovat data, nebo připojit účetnictví. Potřebuje vybrat bezpečný start podle situace.“
+
+Z toho vznikne lepší UI než z generické hlášky „Nemáte žádné faktury“.
+
+### Nabídni jednu primární cestu, ne nákupní centrum
+
+Prázdný stav není místo pro vypsání všech funkcí produktu. Člověk v něm často nemá kontext. Dej mu jednu primární cestu a několik klidných sekundárních možností.
+
+Příklad u projektového nástroje:
+
+- Primární akce: „Vytvořit první projekt“.
+- Sekundární akce: „Importovat ukázkový projekt“.
+- Tichý odkaz: „Přečíst krátký návod“.
+
+Co tam nepatří:
+
+- pět stejně výrazných tlačítek,
+- cross-sell na vyšší plán,
+- povinný onboarding před zobrazením produktu,
+- marketingové video, které nejde přeskočit,
+- sběr telefonu jen proto, že uživatel váhá.
+
+U B2B SaaS často pomůže rozdělit start podle práce:
+
+| Role | Bezpečný první krok |
+| --- | --- |
+| Admin | pozvat jednoho kolegu nebo nastavit workspace |
+| Operátor | vytvořit první pracovní záznam |
+| Manažer | otevřít ukázkový report s demo daty |
+| Vývojář | vytvořit sandbox token nebo otevřít API dokumentaci |
+| Billing kontakt | doplnit fakturační údaje až ve chvíli, kdy jsou potřeba |
+
+Privacy-first detail: Pokud nabízíš demo data, jasně je označ. Uživatel má vědět, že nekouká na cizí produkční obsah. Demo data mají být realistická pro práci, ne reálná ve smyslu „někde jsme našli starý export a trochu ho přejmenovali“.
+
+### Kontextová nápověda má přijít ve správný okamžik
+
+Nápověda je nejlepší tam, kde člověk právě rozhoduje. Ne v desetiminutové prohlídce při prvním loginu. Úvodní tutorial často předpokládá, že člověk ví, co bude potřebovat za pět minut. Většinou neví. Chce se dostat k první hodnotě.
+
+Praktické formáty nápovědy:
+
+- krátký prázdný stav s jednou akcí,
+- tooltip u neznámého pojmu,
+- inline příklad ve formuláři,
+- link na dokumentaci u složitější volby,
+- checklist prvních kroků, který lze zavřít,
+- kontextový banner po neúspěšné akci,
+- bezpečné demo nebo sandbox před použitím produkčních dat.
+
+Každý kus nápovědy má projít otázkou:
+
+„Pomáhá dokončit aktuální práci, nebo jen vysvětluje, jak je produkt chytrý?“
+
+Pokud je odpověď druhá možnost, text zkrať nebo smaž. Produkt nemá v rozhraní pořádat tiskovou konferenci.
+
+### Nudges nesmí být skrytý nátlak
+
+Nudge je jemné postrčení: připomenutí, doporučení, zvýraznění dalšího kroku. Může být užitečný. Může být také manipulační, pokud zneužívá nejistotu člověka.
+
+Rozumné nudges:
+
+- „Chybí vám pozvat účetní. Bez toho neuvidí doklady.“
+- „Import má 3 chyby v datech. Stáhnout seznam řádků k opravě.“
+- „Tento report je prázdný, protože období neobsahuje žádné dokončené objednávky.“
+- „Máte zapnutý filtr `Archivované: ne`. Zobrazit i archivované.“
+
+Rizikové nudges:
+
+- „Jste skoro hotovi, už jen zadejte platební kartu“, když produkt kartu ještě nepotřebuje.
+- „Váš tým ztrácí peníze“, bez důkazu a kontextu.
+- „Ostatní firmy už používají integraci“, když tím jen tlačíš na zapnutí dalšího sběru dat.
+- „Doporučeno pro vás“, pokud doporučení vychází z chování, které člověk nečeká a neumí ovlivnit.
+
+Codyho komentář: Dobrý nudge je jako kolega, který řekne „tady ti chybí podpis“. Špatný nudge je jako prodejce v obchodě, který se tváří, že bez nového kabelu nepřežiješ cestu domů.
+
+### Nezaměňuj aktivaci za poslušnost
+
+Mnoho onboardingů měří, kolik kroků člověk odklikl. To je pohodlné, ale může to být falešný signál. Aktivace není poslušné projití checklistu. Aktivace je chvíle, kdy člověk poprvé zažije hodnotu produktu.
+
+U každého onboardingového kroku si napiš:
+
+| Krok | Jakou hodnotu přináší? | Je nutný hned? | Jaká data vyžaduje? |
+| --- | --- | --- | --- |
+| Pozvat celý tým | společná práce | často ne | e-maily kolegů |
+| Připojit produkční data | reálný provoz | ne vždy | zákaznická data |
+| Vyplnit profil firmy | fakturace nebo personalizace | jen někdy | firemní údaje |
+| Otevřít demo scénář | pochopení workflow | často ano | žádná produkční data |
+| Nastavit role | bezpečná spolupráce | u týmů ano | e-maily a oprávnění |
+
+Začni kroky, které dávají hodnotu s nejmenším datovým rizikem. Produkční data, pozvánky kolegů, fakturační údaje a integrace žádej až ve chvíli, kdy je člověk chápe a opravdu potřebuje.
+
+Tohle není jen soukromí. Je to lepší produkt. Člověk, který nejdřív pochopí hodnotu na demo nebo minimálním scénáři, se rozhoduje klidněji než člověk, kterého první obrazovka požádá o databázový export.
+
+### U stavů oprávnění buď užitečný a diskrétní
+
+Prázdný stav často vznikne kvůli oprávnění: uživatel něco nemá vidět, nemá právo něco vytvořit nebo je v roli, která má omezený rozsah. Tady je potřeba přesnost. Příliš mlhavý text frustruje. Příliš konkrétní text může prozradit existenci dat.
+
+Lepší vzory:
+
+- „Nemáte oprávnění zobrazit tuto část. Požádejte vlastníka workspace o přístup k fakturaci.“
+- „Tato role nemůže zvát nové členy. Pozvánku může poslat admin.“
+- „Pro tento filtr nejsou dostupné žádné položky, které můžete zobrazit.“
+
+Horší vzory:
+
+- „Projekt Acme existuje, ale nemáte k němu přístup.“
+- „V systému je 12 faktur, které nesmíte vidět.“
+- „Kontaktujte support“, bez informace, kdo má v týmu právo rozhodnout.
+
+U interních nástrojů platí totéž. Support nemá díky prázdnému stavu zjistit víc, než mu dovoluje role. Admin rozhraní má pomáhat s prací, ne obcházet model oprávnění zdvořilou hláškou.
+
+### Měř prázdné stavy agregovaně
+
+Prázdné stavy jsou dobrý produktový signál. Ukazují, kde lidé nedokončí první hodnotu, kde filtry matou, kde chybí dokumentace nebo kde oprávnění blokují práci. Nemusíš kvůli tomu sledovat každou session.
+
+Užitečné agregované metriky:
+
+- počet zobrazení konkrétního prázdného stavu,
+- klik na primární akci,
+- dokončení dalšího kroku,
+- opakované návraty do stejného prázdného stavu,
+- počet feedbacků z dané obrazovky,
+- nejčastější kategorie důvodu, pokud ji člověk dobrovolně vybere.
+
+Co držet krátce nebo vůbec:
+
+- celé URL s citlivými parametry,
+- texty filtrů obsahující zákaznická data,
+- user ID v běžném reportu,
+- screenshoty prázdné obrazovky s okolními daty,
+- detailní cesta člověka před každým prázdným stavem.
+
+Pokud potřebuješ zjistit, proč prázdný stav nefunguje, začni ručním testem a několika rozhovory. Teprve potom přidávej měření. Když neumíš problém vysvětlit lidsky, další event ho nezachrání.
+
+### Checklist: Prázdné stavy a nápověda privacy-first
+
+- [ ] Každý důležitý prázdný stav má popsaný důvod a hlavní další krok.
+- [ ] První použití produktu nevyžaduje produkční data dřív, než člověk chápe hodnotu.
+- [ ] Primární akce je jedna a odpovídá práci dané role.
+- [ ] Sekundární akce jsou klidné: demo, dokumentace, změna filtru, požádání admina.
+- [ ] Kontextová nápověda se objevuje ve chvíli rozhodnutí, ne jen při prvním loginu.
+- [ ] Onboardingový checklist lze zavřít nebo přeskočit, pokud člověk ví, co dělá.
+- [ ] Nudges vysvětlují dopad, nevyužívají strach ani falešnou naléhavost.
+- [ ] Stavy oprávnění neprozrazují existenci dat mimo práva uživatele.
+- [ ] Demo data jsou jasně označená a nejsou odvozená z reálných produkčních exportů bez kontroly.
+- [ ] Měření prázdných stavů je agregované a má jasné rozhodnutí.
+- [ ] Feedback z prázdného stavu nesbírá celý kontext obrazovky bez důvodu.
+- [ ] Staré onboardingové bannery a tipy mají vlastníka a pravidelný úklid.
+
+### Mini úkol
+
+Vyber jeden prázdný stav v produktu, webu, dokumentaci nebo interním nástroji. Vyplň kartu:
+
+| Otázka | Odpověď |
+| --- | --- |
+| V jaké situaci stav vzniká? |  |
+| Co si člověk pravděpodobně myslí? |  |
+| Jaký je jeden bezpečný další krok? |  |
+| Jaký sekundární krok pomůže bez tlaku? |  |
+| Žádáme zde data, která ještě nejsou nutná? |  |
+| Může stav prozradit existenci skrytých dat? |  |
+| Jakou jednu agregovanou metriku potřebujeme? |  |
+| Jaký text nebo nudge by mohl působit manipulačně? |  |
+| Kdo je vlastník tohoto stavu? |  |
+
+Potom udělej jednu úpravu: přepiš prázdnou hlášku na konkrétní další krok, přidej demo variantu, zjemni nátlakový nudge, odlož sběr produkčních dat, uprav text oprávnění nebo vypni zbytečné detailní měření. Prázdný stav nemá být prázdný v hlavě produktu.
+
 ## Zdroje
 
 - ICANN: Information for Domain Name Registrants - práva a odpovědnosti držitelů domén včetně správy, obnovy a převodu doménové registrace: https://www.icann.org/registrants
@@ -21889,6 +22085,7 @@ Potom udělej jednu úpravu: přidej filtr citlivých vzorů, zkrať retenci sea
 
 ## Pracovní log
 
+- 2026-07-15: Doplněna příloha o prázdných stavech a kontextové nápovědě bez nátlakového vodění: rozlišení typů prázdných stavů, jedna primární cesta, nápověda ve správný okamžik, férové nudges, aktivace bez zbytečného sběru dat, diskrétní stavy oprávnění, agregované měření, checklist a mini úkol.
 - 2026-07-15: Doplněna příloha o produktovém vyhledávání a filtrech bez sledovacího profilu: rozlišení navigačního, obsahového, datového a interního hledání, omezení search logů, agregované reporty s minimálním prahem, privacy-first pravidla pro filtry, nulové výsledky, interní search oprávnění, checklist a mini úkol.
 - 2026-07-15: Doplněna příloha o feedback widgetu bez datového vysavače: rozlišení typů zpětné vazby, sběr minimálního kontextu, hranice volného textu a screenshotů, oddělení feedbacku od marketingu, triage podle dopadu místo pouhého počtu hlasů, uzavírání smyčky, checklist a mini úkol.
 - 2026-07-15: Doplněna příloha o atribuci a konverzích bez skrytého sledovacího profilu: rozlišení zdroje, relace a obchodního výsledku, ukládání zdroje jen při skutečné práci, opatrné používání cookies a server-side měření, respektování preference soukromí, checklist a mini úkol; ověřeny a doplněny zdroje MDN k `Set-Cookie` a W3C ke Global Privacy Control.
