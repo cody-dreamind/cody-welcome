@@ -20467,6 +20467,115 @@ Vyber jednu schopnost v produktu a vyplň entitlement kartu:
 
 Potom udělej jednu konkrétní opravu: sjednoť kontrolu přístupu mezi UI a API, přepiš zamčený stav na lidské vysvětlení, vytvoř mapu schopností, doplň datum revize k výjimkám nebo napiš test pro downgrade. Entitlement není jen billingová logika. Je to smlouva mezi produktem, zákazníkem a týmem o tom, co je možné, proč a za jakých podmínek.
 
+## Příloha: EU datová rezidence bez falešných slibů
+
+„Data v EU“ zní jednoduše, ale v praxi to může znamenat několik různých věcí. Někdy jde o primární databázi v evropském regionu. Někdy o evropského provozovatele. Někdy o podporu, která k datům přistupuje z jiné země. Někdy o zálohy, logy, analytiku, e-mailing a support, které se tváří jako detail, dokud se zákazník nezeptá, kde přesně jeho data končí.
+
+Privacy-first evropský provoz proto nesmí stát na jedné větě v patičce. Musí být popsaný jako provozní model: jaká data jsou kde, kdo k nim má přístup, jaké subdodavatele používáš, co se děje při incidentu, jak probíhá export a co zůstane v zálohách.
+
+Špatná otázka zní: „Můžeme napsat, že běžíme v EU?“
+
+Lepší otázka zní: „Které vrstvy našeho produktu opravdu běží v EU, kde jsou výjimky a umíme to vysvětlit bez marketingové mlhy?“
+
+Codyho komentář: Evropský region je dobrý začátek. Není to ale kouzelné razítko. Pokud databáze běží ve Frankfurtu, ale supportní exporty leží v náhodném SaaS nástroji a logy posíláš přes půl světa, tvrzení „data jsou v EU“ začíná být spíš poezie než provoz.
+
+### Rozděl data podle vrstev
+
+Nejdřív si napiš, co přesně pod slibem evropského provozu myslíš. Jedna aplikace může mít víc vrstev:
+
+| Vrstva | Typická data | Otázka pro tým |
+| --- | --- | --- |
+| Primární aplikace | účty, workspace, produktová data | V jakém regionu běží databáze a aplikační servery? |
+| Soubory | uploady, přílohy, exporty | Kde jsou uložené objekty a jejich zálohy? |
+| Logy a observabilita | chyby, request ID, technické metadata | Posíláme do logů osobní údaje nebo payloady? |
+| Analytika | produktové a webové metriky | Jde o agregaci, pseudonymní eventy, nebo identifikovatelné profily? |
+| Support a CRM | tikety, leady, poznámky | Kdo má přístup a kde běží nástroj? |
+| E-mail a notifikace | adresy, provozní zprávy, marketing | Jaký provider zprávy zpracovává a odkud je doručuje? |
+| Zálohy | kopie databází, souborů, konfigurace | Má záloha stejný region a retenční pravidlo jako primární data? |
+
+Tahle tabulka rychle odhalí rozdíl mezi „většina produkčních dat je v EU“ a „celý datový tok je řízený evropsky“. Obě věty mohou být legitimní, ale nesmí se zaměňovat.
+
+### Region, provozovatel a přístup nejsou totéž
+
+U dodavatele rozlišuj tři vrstvy:
+
+- kde jsou data uložena,
+- kdo službu provozuje a podle jakých smluv,
+- odkud k datům může přistupovat support, administrace nebo subdodavatel.
+
+EU region u globálního dodavatele může být použitelný, ale pořád potřebuješ znát subzpracovatele, supportní přístupy, mezinárodní přenosy a smluvní záruky. Evropský provozovatel zase není automaticky bez rizika, pokud používá mimoevropskou infrastrukturu nebo posílá data do nástrojů bez jasného účelu.
+
+Praktická vendor otázka:
+
+| Otázka | Proč na ní záleží |
+| --- | --- |
+| Kde jsou primární data? | Určuje základní datovou lokalitu |
+| Kde jsou zálohy? | Zálohy často obsahují největší objem dat |
+| Odkud má support přístup? | Přístup může znamenat přenos nebo další riziko |
+| Kdo jsou subzpracovatelé? | Data často tečou přes víc služeb |
+| Jaký je mechanismus pro přenos mimo EU/EHP? | Potřebuje právní a provozní posouzení |
+| Jak data exportujeme a mažeme? | Bez toho je datová rezidence jen polovina kontroly |
+
+### Nepiš slib širší než realita
+
+Veřejné texty musí odpovídat technickému provozu. Pokud nemáš jistotu ve všech vrstvách, napiš přesněji:
+
+| Mlhavé tvrzení | Přesnější tvrzení |
+| --- | --- |
+| „Všechna data jsou v EU.“ | „Primární aplikační data a soubory ukládáme v EU regionu. Seznam hlavních zpracovatelů a výjimek je v trust centru.“ |
+| „Nikdy neposíláme data mimo Evropu.“ | „Mimo EU/EHP neposíláme produktová data bez samostatného posouzení a smluvních záruk. U vybraných dodavatelů může dojít k omezenému supportnímu nebo provoznímu přístupu podle DPA.“ |
+| „Jsme GDPR compliant.“ | „Zpracování navrhujeme podle minimalizace dat, privacy by design, řízených přístupů, retenčních pravidel a smluv se zpracovateli.“ |
+
+První verze textu nemusí být dlouhá. Musí být pravdivá. Když později zpřesníš provoz, zpřesni i veřejné tvrzení. Trust center, privacy notice a obchodní nabídka nemají vyprávět tři různé příběhy.
+
+### Regionální požadavky řeš jako produktovou schopnost
+
+Někteří zákazníci budou chtít konkrétní region, oddělené prostředí, zvláštní retenční pravidla, lokální support nebo zákaz určitých subdodavatelů. To není jen obchodní požadavek. Je to produktová a provozní schopnost.
+
+Před slibem si ověř:
+
+- umíš vybrat region při založení workspace,
+- umíš zabránit pozdějšímu přesunu dat mimo zvolený region,
+- logy, zálohy, exporty a support respektují stejný režim,
+- dodavatelé mají odpovídající smluvní a technické nastavení,
+- support pozná zákazníka se zvláštním režimem,
+- existuje postup migrace mezi regiony,
+- pricing pokrývá vyšší provozní náklad.
+
+Pokud to neumíš, neslibuj „dedikovaný EU režim“ jen proto, že zní dobře v enterprise nabídce. Nabídni raději menší, pravdivý rozsah: například EU region pro primární data, omezené exporty, přístupový audit a přehled subdodavatelů.
+
+### Checklist: EU datová rezidence
+
+- [ ] Máme mapu vrstev: aplikace, soubory, logy, analytika, support, e-mail, zálohy a exporty.
+- [ ] U každé vrstvy víme, kde jsou primární data a zálohy.
+- [ ] Známe dodavatele, subzpracovatele a supportní přístupy.
+- [ ] Přenosy mimo EU/EHP jsou pojmenované, posouzené a smluvně řešené.
+- [ ] Veřejné sliby nepřehánějí skutečný provoz.
+- [ ] Trust center, privacy notice, DPA a obchodní nabídka používají stejný popis reality.
+- [ ] Regionální požadavky zákazníků nejsou slibované bez technické a provozní podpory.
+- [ ] Exporty, logy a supportní přílohy respektují stejný datový režim jako hlavní produkt.
+- [ ] Při nákupu nového nástroje kontrolujeme region, subdodavatele, export, výmaz a plán odchodu.
+- [ ] Jednou za kvartál kontrolujeme, jestli se regiony, subdodavatelé nebo supportní přístupy nezměnily.
+
+### Mini úkol
+
+Vyber jeden produkt nebo web a vyplň kartu datové rezidence:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Kde běží primární aplikace? |  |
+| Kde je databáze? |  |
+| Kde jsou soubory a uploady? |  |
+| Kde jsou zálohy? |  |
+| Kam odchází logy a chyby? |  |
+| Kde běží analytika? |  |
+| Který support, CRM nebo e-mailový nástroj vidí osobní data? |  |
+| Kteří subdodavatelé jsou mimo EU/EHP nebo mají mimoevropský přístup? |  |
+| Které veřejné tvrzení musíme zpřesnit? |  |
+| Jaká jedna změna nejvíc zlepší kontrolu nad daty? |  |
+
+Potom udělej jednu konkrétní opravu: doplň datovou vrstvu do vendor mapy, zpřesni větu v privacy notice, přesuň logy do EU regionu, vypni zbytečný export do externího nástroje, nebo přidej kvartální revizi subdodavatelů. Evropský provoz se nepozná podle sloganu. Pozná se podle mapy, kterou tým umí použít.
+
 ## Zdroje
 
 - ICANN: Information for Domain Name Registrants - práva a odpovědnosti držitelů domén včetně správy, obnovy a převodu doménové registrace: https://www.icann.org/registrants
@@ -20608,6 +20717,7 @@ Potom udělej jednu konkrétní opravu: sjednoť kontrolu přístupu mezi UI a A
 
 ## Pracovní log
 
+- 2026-07-15: Doplněna příloha o EU datové rezidenci bez falešných slibů: rozdělení dat podle vrstev, rozdíl mezi regionem, provozovatelem a supportním přístupem, přesnější veřejné formulace, regionální požadavky jako produktová schopnost, checklist a mini úkol; navázáno na existující zdroje k GDPR, zpracovatelům, mezinárodním přenosům a vendor kartám.
 - 2026-07-15: Doplněna příloha o entitlementu a přístupu k funkcím bez produktového bludiště: rozlišení schopností od UI prvků, oddělení plánu, role a stavu workspace, mapa schopností, vysvětlení zamčených funkcí, dočasné výjimky, testování rozhodovací matice, privacy-first kontrola placených schopností, checklist a mini úkol.
 - 2026-07-15: Doplněna příloha o produktových limitech a fair use bez skrytých pastí: účel limitů, soft a tvrdé hranice, komunikace před bolestí, fair use podle dopadu, privacy-first kontrola limitů, evidence dočasných výjimek, checklist a mini úkol.
 - 2026-07-15: Doplněna příloha o exportech a importech dat bez ručního chaosu: účelové typy exportů, export jako produktový tok, stabilní formáty, importní validace a mapování, zakázaná data, krátká životnost dočasných souborů, opravitelné stavy selhání, checklist a mini úkol; navázáno na existující zdroje k přenositelnosti dat, uploadům, API bezpečnosti a principům GDPR.
