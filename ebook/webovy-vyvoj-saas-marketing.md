@@ -21936,6 +21936,206 @@ Vyber jeden prázdný stav v produktu, webu, dokumentaci nebo interním nástroj
 
 Potom udělej jednu úpravu: přepiš prázdnou hlášku na konkrétní další krok, přidej demo variantu, zjemni nátlakový nudge, odlož sběr produkčních dat, uprav text oprávnění nebo vypni zbytečné detailní měření. Prázdný stav nemá být prázdný v hlavě produktu.
 
+## Příloha: Plánované úlohy a fronty bez datového autopilota
+
+Každý SaaS dřív nebo později získá druhý život mimo hlavní uživatelské rozhraní. Běží v něm cron úlohy, fronty, retry mechanismy, importy, exporty, připomínky, webhooks, reporty, čištění dat, synchronizace integrací a automatické e-maily. Vypadá to jako technický detail. Ve skutečnosti je to část produktu, která často pracuje s daty bez přímého pohledu člověka.
+
+Privacy-first otázka nezní jen „běží job spolehlivě?“
+
+Lepší otázka zní:
+
+„Umíme vysvětlit, proč tento job existuje, jaká data bere, co mění, jak dlouho drží mezivýsledky a co se stane, když selže?“
+
+Automatizace má šetřit práci. Nemá se stát neviditelným strojem, který navždy kopíruje stará data, posílá zbytečné zprávy a v retry frontě drží půlku zákaznického světa.
+
+### Každý job potřebuje pracovní větu
+
+Stejně jako stránka nebo event má i plánovaná úloha potřebovat jednu jasnou větu. Bez ní se z technického řešení rychle stane sklad historických výjimek.
+
+Dobrá věta:
+
+„Každou noc smažeme dočasné exportní soubory starší než 7 dní, protože po stažení už nemají produktovou práci a zvyšují datové riziko.“
+
+Slabá věta:
+
+„Cron pro úklid souborů.“
+
+U každého jobu popiš:
+
+| Pole | Příklad |
+| --- | --- |
+| Název | `delete_expired_exports` |
+| Účel | odstranit dočasné exporty po konci životnosti |
+| Spouštění | každou noc v 02:30 evropského času |
+| Vstupní data | exportní záznamy se stavem a datem expirace |
+| Výstup | smazané soubory, agregovaný počet, chybové položky |
+| Vlastník | tým nebo konkrétní role |
+| Stop pravidlo | vypnout při nárůstu chyb mazání nebo při chybě oprávnění |
+
+Název jobu má být nudně popisný. `worker-2` nebo `daily-magic` je roztomilé jen do prvního incidentu. Potom všichni najednou touží po nudě. Lidstvo je záhadné.
+
+### Odděl plánované úlohy, fronty a jednorázové opravy
+
+Ne každá práce na pozadí je stejná. Když je smícháš do jedné škatulky, začneš je monitorovat i dokumentovat špatně.
+
+Rozliš minimálně:
+
+| Typ | K čemu slouží | Hlavní riziko |
+| --- | --- | --- |
+| Plánovaný job | pravidelná údržba, report, synchronizace | běží dál, i když ztratil účel |
+| Fronta | zpracování úkolů mimo request | retry drží data příliš dlouho |
+| Jednorázový backfill | oprava nebo doplnění historických dat | špatný rozsah změny |
+| Import/export worker | práce se soubory a transformací | dočasné soubory se stanou archivem |
+| Notifikační worker | odesílání e-mailů nebo zpráv | opakované nebo nevhodné odeslání |
+| Integrační sync | přenos dat mezi systémy | tichý vendor lock-in a duplicita dat |
+
+Jednorázový backfill nepatří do produkce jako věčný cron. Pokud ho potřebuješ zopakovat, napiš runbook a jasně označ rozsah. Pokud ho potřebuješ spouštět pravidelně, už to není backfill, ale produktová schopnost a zaslouží si vlastní návrh.
+
+### Retry není povolení držet data navždy
+
+Retry mechanismus je užitečný. Síť spadne, webhook endpoint neodpoví, platební poskytovatel vrátí dočasnou chybu, e-mailová služba je chvíli nedostupná. Problém začíná ve chvíli, kdy retry fronta nemá konec.
+
+U každé fronty nastav:
+
+- maximální počet pokusů,
+- rozumný backoff mezi pokusy,
+- stav `failed` po vyčerpání pokusů,
+- krátkou retenci payloadu,
+- možnost ručního znovuspuštění jen pro oprávněnou roli,
+- redakci citlivých polí v chybovém detailu,
+- agregované metriky selhání.
+
+Příklad u webhooku:
+
+| Prvek | Rozumné nastavení |
+| --- | --- |
+| První retry | po několika minutách |
+| Další retry | s postupným prodlužováním |
+| Konec | po jasném počtu pokusů nebo časovém okně |
+| Payload | minimální událost, ne celý zákaznický objekt |
+| UI stav | „Doručení se nezdařilo, lze zopakovat“ |
+| Log | ID události, endpoint, status, kategorie chyby |
+
+Nedávej do fronty celý objekt jen proto, že je to jednodušší. Většinou stačí identifikátor události a worker si při zpracování načte aktuální data podle oprávnění a stavu. Starý payload umí poslat dávno neplatnou pravdu.
+
+### Automatizace musí mít ruční brzdu
+
+Každý job, který mění data nebo posílá zprávy, potřebuje způsob bezpečného zastavení. Ne až ve chvíli, kdy poslal tisíc špatných e-mailů a tým hledá, kdo má přístup do produkce.
+
+Brzdy podle rizika:
+
+- konfigurační přepínač pro vypnutí jobu,
+- limit počtu zpracovaných položek za běh,
+- dry-run režim pro nové nebo rizikové změny,
+- potvrzení pro hromadné destruktivní akce,
+- ochrana proti souběžnému běhu stejného jobu,
+- stop při podezřelém nárůstu chyb,
+- alert na opakované selhání důležité úlohy.
+
+U destruktivních jobů si napiš větu:
+
+„Co nejhoršího tento job může změnit během jednoho běhu, pokud má chybný filtr?“
+
+Pokud odpověď zní „smazat všechna data zákazníka“, job potřebuje dávkování, dry-run, auditní stopu a kontrolu rozsahu. Ano, je to otrava. Méně než obnova ze záloh během pátečního odpoledne.
+
+### Joby nemají obcházet produktová oprávnění
+
+Background worker často běží s vysokým technickým oprávněním. To neznamená, že může ignorovat produktová pravidla. Pokud export může spustit jen admin, job zpracovávající export má pořád respektovat stav workspace, roli žadatele a aktuální existenci dat.
+
+Příklady rizik:
+
+- job odešle report uživateli, kterému mezitím byla odebrána role,
+- sync pošle do integrace data po odpojení aplikace,
+- notifikační worker doručí marketingový e-mail člověku po odhlášení,
+- backfill doplní data do archivovaného workspace,
+- export doběhne po zrušení účtu a vytvoří nový soubor.
+
+Praktické pravidlo: dlouho běžící úloha si před citlivým krokem znovu ověří aktuální stav. Nevěří jen tomu, co platilo při zařazení do fronty.
+
+### Loguj provozní zdraví, ne celé zákaznické příběhy
+
+U jobů potřebuješ observabilitu: vědět, jestli běží, kolik toho zpracovaly, kde selhaly a jaký mají dopad. Nepotřebuješ kvůli tomu ukládat celé payloady, texty zpráv, soubory ani obsah zákaznických záznamů. OWASP Logging Cheat Sheet i běžná observability praxe vedou ke stejnému závěru: logy mají pomáhat s provozem a bezpečností, ale citlivá data do nich nepatří, pokud k tomu není jasný důvod a ochrana.
+
+Užitečné metriky:
+
+- počet zpracovaných položek,
+- počet úspěchů a selhání,
+- délka fronty,
+- stáří nejstarší položky ve frontě,
+- doba zpracování,
+- kategorie chyb,
+- počet položek přesunutých do dead-letter stavu,
+- počet ručních zásahů.
+
+Riziková data:
+
+- celé e-mailové texty,
+- obsah exportů a importů,
+- volný text od uživatelů,
+- API tokeny a secrets,
+- fakturační a platební detaily,
+- kompletní URL s citlivými parametry,
+- plný payload webhooku.
+
+Když potřebuješ dočasně zapnout detailnější diagnostiku, nastav časový limit, přístupovou roli a úklid. Debug režim bez konce je jen pomalý únik dat s lepším názvem.
+
+### Čištění dat je také produktová funkce
+
+Úklidové joby bývají podceňované, protože nic nepřidávají. Jenže privacy-first provoz stojí právě na tom, že data mají konec životnosti. Retenční pravidla v dokumentu nestačí, pokud je systém neumí technicky vynutit.
+
+Typické úklidové úlohy:
+
+- mazání expirovaných exportů,
+- odstranění starých importních souborů,
+- anonymizace nebo agregace starých analytických událostí,
+- expirace pozvánek a resetovacích tokenů,
+- čištění starých preview prostředí,
+- mazání dočasných příloh supportu,
+- uzavírání starých retry záznamů,
+- revize dlouho neaktivních integrací.
+
+U každé úklidové úlohy si ověř dvě věci:
+
+1. Úklid odpovídá veřejnému slibu a interní retenční mapě.
+2. Úklid jde doložit bez ukládání nadbytečných detailů o smazaných datech.
+
+„Smazali jsme 124 expirovaných exportů“ je provozní informace. „Tady je seznam všech názvů exportů a jejich obsah“ je skoro jistě zbytečný problém.
+
+### Checklist: Plánované úlohy a fronty privacy-first
+
+- [ ] Každý pravidelný job má jasnou pracovní větu, vlastníka a účel.
+- [ ] Fronty mají maximální počet pokusů, konečný stav selhání a omezenou retenci payloadu.
+- [ ] Payloady obsahují minimum dat; ideálně identifikátor události místo celého objektu.
+- [ ] Joby před citlivým krokem znovu ověřují aktuální stav účtu, role, souhlasu nebo integrace.
+- [ ] Destruktivní a hromadné joby mají dry-run, dávkování nebo jinou ruční brzdu.
+- [ ] Souběžné běhy stejné úlohy jsou ošetřené zámkem nebo idempotencí.
+- [ ] Logy obsahují provozní signály, ne celé zákaznické payloady.
+- [ ] Detailní debug logování má časový limit, vlastníka a úklid.
+- [ ] Úklidové joby technicky vynucují retenční pravidla.
+- [ ] Selhání důležitých jobů má alert podle dopadu na uživatele, ne jen podle existence chyby.
+- [ ] Jednorázové backfilly mají popsaný rozsah, způsob kontroly a plán odstranění dočasného kódu.
+- [ ] Notifikační joby respektují aktuální odhlášení, role a stav účtu.
+
+### Mini úkol
+
+Vyber jednu plánovanou úlohu, frontu nebo worker v produktu. Vyplň kartu:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jak se job jmenuje? |  |
+| Jakou práci dělá jednou větou? |  |
+| Kdo je vlastník? |  |
+| Jak často nebo kdy běží? |  |
+| Jaká data načítá? |  |
+| Jaká data zapisuje, posílá nebo maže? |  |
+| Jak dlouho drží payload, mezisoubory nebo chyby? |  |
+| Co se stane po opakovaném selhání? |  |
+| Jak ho bezpečně zastavíme? |  |
+| Jak poznáme, že běží špatně? |  |
+| Jaké citlivé údaje by se neměly dostat do logu? |  |
+
+Potom udělej jednu konkrétní změnu: zkrať retenci retry payloadu, přidej konečný stav selhání, rediguj logy, doplň ruční brzdu, napiš pracovní větu, omez souběžné běhy, zaveď dry-run nebo přidej úklid dočasných souborů. Automatizace má být spolehlivý kolega, ne temný sklep produktu.
+
 ## Zdroje
 
 - ICANN: Information for Domain Name Registrants - práva a odpovědnosti držitelů domén včetně správy, obnovy a převodu doménové registrace: https://www.icann.org/registrants
@@ -22085,6 +22285,7 @@ Potom udělej jednu úpravu: přepiš prázdnou hlášku na konkrétní další 
 
 ## Pracovní log
 
+- 2026-07-15: Doplněna příloha o plánovaných úlohách a frontách bez datového autopilota: pracovní věta jobu, rozlišení cronů, front a backfillů, retry s konečnou retencí, ruční brzdy, respektování produktových oprávnění, chudé logování, úklidová automatizace, checklist a mini úkol; navázáno na existující zdroje OWASP Logging Cheat Sheet, OpenTelemetry a GDPR principy.
 - 2026-07-15: Doplněna příloha o prázdných stavech a kontextové nápovědě bez nátlakového vodění: rozlišení typů prázdných stavů, jedna primární cesta, nápověda ve správný okamžik, férové nudges, aktivace bez zbytečného sběru dat, diskrétní stavy oprávnění, agregované měření, checklist a mini úkol.
 - 2026-07-15: Doplněna příloha o produktovém vyhledávání a filtrech bez sledovacího profilu: rozlišení navigačního, obsahového, datového a interního hledání, omezení search logů, agregované reporty s minimálním prahem, privacy-first pravidla pro filtry, nulové výsledky, interní search oprávnění, checklist a mini úkol.
 - 2026-07-15: Doplněna příloha o feedback widgetu bez datového vysavače: rozlišení typů zpětné vazby, sběr minimálního kontextu, hranice volného textu a screenshotů, oddělení feedbacku od marketingu, triage podle dopadu místo pouhého počtu hlasů, uzavírání smyčky, checklist a mini úkol.
