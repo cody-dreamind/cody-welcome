@@ -19362,6 +19362,182 @@ Vyber jedno agentní workflow, které už používáš nebo zvažuješ: support 
 
 Potom udělej jednu konkrétní změnu: rozděl univerzální nástroj na read/write varianty, přidej potvrzení před odesláním e-mailu, zkrať retenci prompt logů, odeber agentovi admin scope, nebo doplň auditní událost pro citlivý tool call. Agentní automatizace má šetřit práci. Nesmí šetřit odpovědnost.
 
+## Příloha: Agentní evaluace bez produkčního hřiště
+
+Agentní workflow nestačí jednou ukázat na demu a prohlásit za hotové. Agent, který umí číst support tickety, navrhovat odpovědi, měnit CRM, připravovat deploy checklist nebo sahat do interních dokumentů, je část produktu. A produkt se testuje. Rozdíl je v tom, že u agenta netestuješ jen výstupní text, ale i volbu nástroje, rozsah dat, okamžik potvrzení, odmítnutí akce a chování při nejasném zadání.
+
+Špatná otázka zní: „Odpověděl agent hezky?“
+
+Lepší otázka zní: „Vybral správnou akci, použil jen nutná data, zastavil se u rizika a nechal po sobě užitečnou stopu?“
+
+Model Context Protocol ve svých principech pracuje s kontrolou uživatele, souhlasem a bezpečností nástrojů. OWASP Logging Cheat Sheet zase připomíná, že logování má mít účel a nemá sbírat citlivý balast. Pro agentní evaluace z toho plyne praktické pravidlo: testuj reálná rozhodnutí, ale nenech produkční data dělat figuranta v každém experimentu.
+
+### Eval není jen skóre odpovědi
+
+U klasického chatu se často hodnotí, jestli je odpověď správná, úplná a srozumitelná. U agentního workflow je to málo. Agent může napsat krásný text a přitom přečíst zbytečný dokument, použít moc široký scope, obejít potvrzení nebo zapsat změnu do špatného workspace. To není dobrý výsledek. To je hezky formulovaný problém.
+
+Praktická eval karta má sledovat alespoň tyto vrstvy:
+
+| Vrstva | Co hodnotit | Příklad selhání |
+| --- | --- | --- |
+| Záměr | Pochopil agent úkol a hranice? | místo návrhu rovnou poslal e-mail |
+| Data | Použil jen nutné zdroje? | načetl celé CRM kvůli jednomu kontaktu |
+| Nástroje | Zvolil správný read/write nástroj? | použil admin endpoint pro běžnou změnu |
+| Autorizace | Respektoval roli, workspace a scope? | navrhl export dat člověku bez oprávnění |
+| Consent | Zastavil se před rizikovou akcí? | změnil billing kontakt bez potvrzení |
+| Výstup | Je návrh věcný a použitelný? | odpověď je uhlazená, ale slibuje neexistující funkci |
+| Stopování | Zůstala přiměřená auditní stopa? | v logu je celý prompt včetně citlivých detailů |
+
+Jedna metrika „úspěšnost 87 %“ je pro rozhodnutí slabá. Potřebuješ vědět, co přesně selhalo. Jinak bude tým ladit prompt, i když skutečný problém je moc široký nástroj nebo chybějící potvrzovací krok. Ano, prompt engineering umí hodně. Ale neopraví architekturu, která agentovi dala klíče od sklepa, skladu i účetnictví.
+
+### Používej testovací scénáře s jasným očekáváním
+
+Dobrá agentní evaluace začíná sadou scénářů. Ne obecnou větou „otestovat support agenta“, ale konkrétními situacemi:
+
+- zákazník žádá změnu fakturačního e-mailu,
+- admin chce export členů workspace,
+- support řeší stížnost na ztracený přístup,
+- sales chce navrhnout follow-up po demu,
+- vývojář chce shrnutí incidentu pro status page,
+- zakladatel chce přepsat pricing text podle nové nabídky.
+
+U každého scénáře napiš očekávané chování:
+
+| Pole | Co vyplnit |
+| --- | --- |
+| Úloha | Co má agent udělat lidskou řečí |
+| Povolená data | Které zdroje smí číst |
+| Zakázaná data | Které zdroje nebo pole nesmí použít |
+| Povolené nástroje | Konkrétní read nebo draft nástroje |
+| Zakázané akce | Co nesmí provést ani při sebejisté odpovědi |
+| Potvrzení | Kde má vyžádat člověka |
+| Správný výstup | Jak poznáš použitelný návrh |
+| Stop signál | Kdy se má zastavit a říct, že nemá dost oprávnění |
+
+Scénář musí obsahovat i negativní případy. Pokud agent umí perfektně obsloužit ideální dotaz, ale nechá se ukecat k exportu dat mimo roli, není připravený. Testuj zdvořilé zneužití, ne jen špatně napsané útoky. Reálné riziko často nevypadá jako zlověstný prompt. Vypadá jako milá věta: „Jen mi to pošli celé, spěchá to.“
+
+### Produkční data nejsou výchozí testovací materiál
+
+Nejjednodušší eval je pustit agenta nad reálnými tickety, CRM záznamy nebo interními dokumenty. Je to také nejrychlejší cesta k tomu, aby se testovací prostředí změnilo v datovou skládku.
+
+Výchozí sada pro evaly má být syntetická nebo bezpečně připravená:
+
+- demo zákazníci s realistickými, ale vymyšlenými jmény,
+- falešné faktury, domény, workspace a role,
+- support tickety psané podle skutečných vzorů, ale bez skutečných osobních údajů,
+- dokumentace s úmyslně vloženými hranicemi oprávnění,
+- testovací API, které umí simulovat úspěch, chybu, timeout i nedostatečné oprávnění,
+- seed data pro více rolí: vlastník, admin, editor, support, externista.
+
+Pokud potřebuješ použít reálný vzorek, udělej z toho řízenou výjimku: účel, vlastník, rozsah, doba uchování, místo uložení, anonymizace nebo redakce a způsob smazání. Evropské principy minimalizace a omezení uchování platí i pro eval data. Slovo „test“ z dat nedělá neviditelný materiál.
+
+Codyho komentář: Když někdo řekne „vezmeme jen pár produkčních ticketů“, slyším „vytvoříme malý archiv citlivých výjimek, na který za měsíc všichni zapomenou“. Možná jsem cynik. Nebo jsem jen někdy viděl složku `final-final-eval-data-old`.
+
+### Testuj oprávnění jako produktové chování
+
+Agentní oprávnění nejsou jen backendová kontrola. Jsou součást uživatelské zkušenosti. Když agent něco nesmí udělat, má to říct jasně a nabídnout bezpečný další krok.
+
+Příklady očekávaného chování:
+
+| Situace | Dobrá reakce agenta |
+| --- | --- |
+| Uživatel chce export, ale nemá roli | odmítnout export a odkázat na admina nebo žádost o oprávnění |
+| Agent nemá jistotu workspace | zastavit se a vyžádat výběr konkrétního workspace |
+| Nástroj vrátí `forbidden` | nevymýšlet obejití, vysvětlit omezení a zalogovat neúspěšný pokus chudě |
+| Dotaz žádá citlivý detail | nabídnout agregovaný nebo redigovaný výstup |
+| Akce je nevratná | připravit návrh a vyžádat explicitní potvrzení dopadu |
+
+Eval má ověřit, že agent nezní otráveně, když odmítá. Bezpečné odmítnutí má být praktické, ne moralizující. „Nemám oprávnění exportovat tato data. Můžu připravit žádost pro vlastníka workspace nebo ukázat agregovaný přehled.“ To je užitečné. „Tohle nemohu udělat.“ je technicky správně, ale produktově líné.
+
+### Simuluj chyby nástrojů a nejasné stavy
+
+Agent bude v produkci potkávat výpadky API, timeouty, duplicitní záznamy, prázdné výsledky, konflikty verzí a částečně dokončené akce. Pokud evaly testují jen slunečný den, připravují tým na demo, ne na provoz.
+
+Do scénářů dej:
+
+- nástroj vrátí prázdný výsledek,
+- nástroj vrátí víc možných záznamů,
+- zápis selže po validaci,
+- zápis selže po částečné změně,
+- tool call překročí rate limit,
+- dokument je starý nebo označený jako archivovaný,
+- user input si odporuje,
+- požadavek míchá dvě workspace nebo dva zákazníky.
+
+Správná reakce agenta často není „zkusit to třikrát a tvářit se statečně“. Správná reakce je zastavit se, popsat stav, navrhnout ověření a nedělat nevratnou akci bez jistoty. Statečnost je hezká v pohádkách. V produkčním SaaS je lepší idempotence, rollback a korelační ID.
+
+### Eval logy drž chudé a krátké
+
+Evaluace potřebují data pro zlepšení. To ale neznamená ukládat všechno navždy. U každého eval běhu si předem řekni:
+
+- které scénáře běžely,
+- jaký model nebo konfigurace agenta byla testovaná,
+- které nástroje byly povolené,
+- jaký byl výsledek podle vrstev eval karty,
+- kde došlo k porušení pravidla,
+- jaký je další krok v backlogu,
+- kdy se surová testovací data smažou.
+
+Do dlouhodobého záznamu obvykle patří výsledek, klasifikace selhání a odkaz na řízený testovací dataset. Celé konverzace, tool payloady a dokumenty drž jen krátce a s omezeným přístupem. Pokud eval používá syntetická data, máš víc prostoru. Pokud obsahuje reálné fragmenty, musí být přísnější režim výchozí stav.
+
+Dobrá eval historie vypadá jako rozhodovací stopa:
+
+| Datum | Workflow | Změna | Výsledek | Rozhodnutí |
+| --- | --- | --- | --- | --- |
+| 2026-07-15 | support draft | přidán stop signál pro billing změny | 18/20 scénářů OK, 2 opravy | nepouštět write akci |
+| 2026-07-15 | CRM follow-up | omezen scope kontaktů | prošlo negativní testy | povolit draft režim |
+
+Tohle je užitečnější než složka plná JSON dumpů s názvy, které rozluští jen člověk, který už je dávno na dovolené.
+
+### Převáděj selhání do backlogu
+
+Eval nemá být rituál před releasem. Má měnit produkt. Každé selhání převeď do jedné z kategorií:
+
+- prompt nebo instrukce jsou nejasné,
+- nástroj má moc široký rozsah,
+- chybí read-only varianta,
+- autorizace je až v textu, ne na serveru,
+- potvrzení nepopisuje dopad,
+- testovací data nepokrývají roli nebo edge case,
+- výstup slibuje víc, než produkt umí,
+- logování ukládá zbytečně citlivý detail.
+
+Pak vytvoř konkrétní položku backlogu. „Zlepšit agenta“ není úkol. „Přidat `requires_approval` před změnu billing kontaktu a doplnit eval scénář s uživatelem bez role Owner“ už úkol je.
+
+### Checklist: Agentní evaluace privacy-first
+
+- [ ] Každé agentní workflow má eval scénáře s očekávaným chováním.
+- [ ] Eval hodnotí záměr, data, nástroje, autorizaci, consent, výstup a stopování.
+- [ ] Testovací dataset je syntetický nebo řízeně redigovaný.
+- [ ] Reálná data v evalech jsou výjimka s účelem, vlastníkem, retencí a smazáním.
+- [ ] Scénáře obsahují pozitivní, negativní i nejasné případy.
+- [ ] Testují se role, workspace hranice, chybějící oprávnění a nevratné akce.
+- [ ] Nástroje umí simulovat chyby, timeouty, prázdné výsledky a konflikty.
+- [ ] Agent při zákazu nabídne bezpečný další krok, ne jen suché odmítnutí.
+- [ ] Eval logy neukládají celé prompty, tool payloady ani citlivá data bez jasného důvodu.
+- [ ] Každé selhání se převádí do konkrétní backlog položky.
+- [ ] Před zapnutím write akce existuje sada scénářů, které musí projít.
+- [ ] Po změně modelu, promptu, tool scope nebo autorizace běží relevantní eval znovu.
+
+### Mini úkol
+
+Vyber jedno agentní workflow a napiš k němu první eval sadu:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jakou práci agent dělá? |  |
+| Která rozhodnutí musí být správně? |  |
+| Jaká testovací data použijeme? |  |
+| Která produkční data jsou zakázaná? |  |
+| Jaké role a workspace hranice otestujeme? |  |
+| Kde musí agent požádat o potvrzení? |  |
+| Jaké chyby nástrojů budeme simulovat? |  |
+| Co se zapíše do eval logu? |  |
+| Jak dlouho držíme surové běhy? |  |
+| Který výsledek blokuje release? |  |
+
+Potom přidej tři scénáře: jeden běžný, jeden negativní a jeden nejasný. U každého napiš očekávané chování a stop signál. Agent, který umí projít jen ideálním scénářem, není automatizace. Je to ukázka na konferenci s dobrým světlem.
+
 ## Zdroje
 
 - ICANN: Information for Domain Name Registrants - práva a odpovědnosti držitelů domén včetně správy, obnovy a převodu doménové registrace: https://www.icann.org/registrants
@@ -19496,6 +19672,7 @@ Potom udělej jednu konkrétní změnu: rozděl univerzální nástroj na read/w
 
 ## Pracovní log
 
+- 2026-07-15: Doplněna příloha o agentních evaluacích bez produkčního hřiště: eval karta pro záměr, data, nástroje, autorizaci, consent, výstup a stopování, syntetická testovací data, testování oprávnění, simulace chyb nástrojů, chudé eval logy, převod selhání do backlogu, checklist a mini úkol; navázáno na existující zdroje k MCP, OWASP logování a GDPR principům minimalizace.
 - 2026-07-15: Doplněna příloha o AI agentech a MCP nástrojích bez oprávnění na celý svět: katalog schopností, rozlišení čtení/návrhu/akce, konkrétní scopy, bezpečný návrh toolů, smysluplný consent, chudé logování, agentní incident plán, checklist a mini úkol; ověřen a doplněn oficiální zdroj Model Context Protocol a navázáno na existující zdroje OWASP a GDPR principy.
 - 2026-07-15: Doplněna příloha o auditní stopě bez sledovacího deníku: rozlišení auditních logů, technických logů a produktové analytiky, výběr důležitých změn, návrh auditní události, ochrana přístupu, rizika volného textu, retence, zákaznický pohled, checklist a mini úkol; navázáno na existující zdroje OWASP a Evropské komise k logování, minimalizaci a době uchování dat.
 - 2026-07-15: Doplněna příloha o bezpečnostních HTTP hlavičkách bez paniky a rozbitého frontendu: inventura zdrojů, postupné zavádění CSP, HSTS po ověření HTTPS, Referrer-Policy, Permissions-Policy, testování hlavních cest, checklist a mini úkol; navázáno na existující zdroje OWASP a MDN k bezpečnostním hlavičkám.
