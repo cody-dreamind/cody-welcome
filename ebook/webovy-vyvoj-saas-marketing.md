@@ -20747,6 +20747,136 @@ Vyber jednu důležitou produktovou cestu, třeba registraci, pozvání člena t
 
 Potom udělej jednu konkrétní opravu: smaž zbytečný logovaný payload, zkrať životnost dočasného exportu, doplň vlastníka k CRM synchronizaci, přesuň supportní přílohy do řízeného úložiště, nebo přidej datovou kontrolu do release checklistu. Datová mapa není byrokracie. Je to navigace pro chvíle, kdy už nestačí říct „někde to asi máme“.
 
+## Příloha: Browserová oprávnění bez vyskakovacího přepadu
+
+Moderní web umí požádat o polohu, kameru, mikrofon, notifikace, schránku, přístup k lokálním zařízením a další schopnosti, které dřív patřily spíš do nativních aplikací. To je užitečné. A zároveň je to krásná cesta, jak během prvních pěti sekund zničit důvěru.
+
+Když návštěvník otevře stránku a okamžitě vidí výzvu k notifikacím, polohovou otázku a modal s newsletterem, produkt tím říká: „Ještě nevíme, jestli ti pomůžeme, ale už bychom rádi kus tvého zařízení.“ To není onboarding. To je digitální přepadovka.
+
+Privacy-first pravidlo je jednoduché: oprávnění žádej až ve chvíli, kdy člověk chápe konkrétní užitek a právě dělá akci, která dané oprávnění potřebuje.
+
+### Oprávnění je produktové rozhodnutí
+
+Nejdřív si napiš, proč schopnost potřebuješ. Ne technicky, ale uživatelsky.
+
+| Oprávnění | Slabý důvod | Lepší důvod |
+| --- | --- | --- |
+| Poloha | Chceme personalizovat web | Uživatel chce najít nejbližší servisní místo |
+| Kamera | Budeme mít moderní onboarding | Uživatel skenuje QR kód zařízení |
+| Mikrofon | Hodilo by se hlasové zadávání | Uživatel sám zapne diktování poznámky |
+| Notifikace | Chceme vyšší engagement | Uživatel chce upozornění na konkrétní provozní stav |
+| Schránka | Chceme si zjednodušit import | Uživatel klikne na „vložit ze schránky“ |
+
+Pokud neumíš napsat lepší důvod, oprávnění zatím do produktu nepatří. Možná potřebuješ obyčejné textové pole, ruční výběr regionu nebo e-mailové upozornění. Ano, je to méně lesklé. Taky je to často méně divné.
+
+### Žádej až po lidském vysvětlení
+
+Browserový prompt je krátký, technický a neodpustí špatný timing. Produkt má vysvětlit kontext ještě před ním:
+
+- co chceš použít,
+- proč to potřebuješ,
+- jestli je to povinné,
+- co se stane při odmítnutí,
+- jak to jde později změnit.
+
+Příklad pro kameru:
+
+„Kameru použijeme jen ke skenu QR kódu tohoto zařízení. Fotku neukládáme. Pokud nechceš kameru povolit, můžeš kód opsat ručně.“
+
+Teprve po kliknutí na „Skenovat QR kód“ má smysl zavolat API, které vyvolá systémový prompt. Když prompt spustíš hned při načtení stránky, člověk ještě nemá důvod věřit ani chápat. Prohlížeč pak udělá přesně to, co má: postaví mezi tebe a zařízení uživatele zeď. A právem.
+
+### Navrhni cestu pro odmítnutí
+
+Odmítnuté oprávnění není chyba uživatele. Je to běžný stav produktu. Každý permission flow má mít alternativu:
+
+- Ruční zadání adresy místo polohy.
+- Nahrání souboru místo kamery.
+- E-mail nebo in-app inbox místo push notifikací.
+- Tlačítko „kopírovat“ místo automatického čtení schránky.
+- Jednorázové otevření odkazu místo trvalého přístupu.
+
+Tento fallback není jen pěkné gesto. Pomáhá i v prohlížečích, kde konkrétní API nefunguje stejně, kde je blokované firemní politikou, nebo kde člověk používá zařízení se silnějším nastavením soukromí.
+
+Codyho komentář: Pokud produkt bez oprávnění nejde používat vůbec, nejde o doplňkové oprávnění. Jde o základní vstupní podmínku. Tak ji ukaž dřív, férově a bez schovávání za optimistické tlačítko.
+
+### Drž oprávnění co nejužší
+
+U některých API můžeš omezit rozsah už technicky. U kamery a mikrofonu žádej jen to, co potřebuješ. U iframe nastav `Permissions-Policy` a atributy `allow` tak, aby vložený obsah nemohl žádat víc, než má. U notifikací odděl bezpečnostní nebo provozní upozornění od marketingových zpráv. U schránky preferuj zápis po kliknutí před čtením obsahu.
+
+Praktické návyky:
+
+- Nežádej kameru i mikrofon, když stačí kamera.
+- Neptej se na polohu, když stačí vybrat město.
+- Nepoužívej notifikace jako náhradu za dobrý produktový inbox.
+- Nečti schránku automaticky na pozadí.
+- Nevkládej externí widget s širokými oprávněními bez kontroly.
+- U každého oprávnění si napiš, kdo je vlastník a kde je fallback.
+
+U polohy navíc mysli na přesnost. Pro mnoho služeb stačí město, PSČ nebo ručně zvolený region. Přesné souřadnice jsou citlivější a často zbytečné. Pokud je přece jen potřebuješ, neukládej je déle, než vyžaduje konkrétní účel.
+
+### Nepleť si notifikaci s marketingem
+
+Webové notifikace jsou silný kanál, protože se dostávají mimo stránku. Právě proto by neměly být výchozí marketingovou zkratkou.
+
+Dobré použití:
+
+- „Import dat doběhl.“
+- „Incident u služby, kterou spravuješ, změnil stav.“
+- „Tvůj export bude za 24 hodin smazán.“
+- „Čeká na tebe schválení v pracovním toku.“
+
+Slabé použití:
+
+- „Máme nový blogpost, dovol nám tě honit všude.“
+- „Sleva končí za dvě hodiny.“
+- „Dlouho ses nevrátil, tak zkusíme zatřást prohlížečem.“
+
+Marketingové novinky patří do RSS, e-mailu se souhlasem, veřejného changelogu nebo produktového inboxu. Notifikace si nech pro události, u kterých by člověk zpětně řekl: „Dobře, že mě to upozornilo.“
+
+### Loguj rozhodnutí, ne citlivý obsah
+
+Permission flow potřebuje observabilitu, ale ne deník všeho, co člověk dělal. Většinou stačí agregované signály:
+
+- kolikrát se zobrazilo vysvětlení,
+- kolikrát člověk pokračoval k browser promptu,
+- kolikrát použil fallback,
+- ve kterém kroku tok selhal,
+- jestli oprávnění blokuje klíčovou pracovní cestu.
+
+Neukládej přesnou polohu jen proto, že se někdo ptal na dostupnost v okolí. Neukládej obsah schránky kvůli diagnostice importu. Neukládej snímek z kamery při neúspěšném skenu, pokud to není jasně nutné a vysvětlené. Pro bug report často stačí typ chyby, prohlížeč, čas a korelační ID.
+
+### Checklist: Browserová oprávnění privacy-first
+
+- [ ] Každé oprávnění má popsaný konkrétní uživatelský účel.
+- [ ] Produkt vysvětluje důvod dřív, než se otevře browserový prompt.
+- [ ] Prompt se spouští po uživatelské akci, ne automaticky při načtení stránky.
+- [ ] Existuje rozumný fallback pro odmítnutí nebo nepodporovaný prohlížeč.
+- [ ] Žádáme jen nejmenší nutný rozsah schopnosti.
+- [ ] Přesná poloha se nepoužívá tam, kde stačí region, město nebo ruční volba.
+- [ ] Kamera a mikrofon se zapínají jen pro konkrétní tok a stav je v UI jasně vidět.
+- [ ] Notifikace jsou oddělené podle účelu a nejsou náhradou za marketingový kanál.
+- [ ] Schránka se nečte automaticky bez jasné akce člověka.
+- [ ] Iframe a externí obsah mají omezená oprávnění přes `Permissions-Policy` nebo `allow`.
+- [ ] Logy permission flow neobsahují citlivý obsah, souřadnice, snímky ani text ze schránky bez jasného důvodu.
+- [ ] Dokumentace říká, jak uživatel oprávnění změní nebo jak použije alternativní cestu.
+
+### Mini úkol
+
+Vyber jeden tok, který žádá o browserové oprávnění. Vyplň krátkou kartu:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jaké oprávnění žádáme? |  |
+| Jaký konkrétní užitek tím člověk získá? |  |
+| Kdy přesně se prompt spouští? |  |
+| Jak zní vysvětlení před promptem? |  |
+| Co se stane při odmítnutí? |  |
+| Jaký fallback nabízíme? |  |
+| Co logujeme a co vědomě nelogujeme? |  |
+| Kde je tato schopnost popsaná v dokumentaci nebo privacy notice? |  |
+
+Potom udělej jednu opravu: posuň prompt až za kliknutí, dopiš férové vysvětlení, přidej ruční fallback, omez iframe oprávnění, nebo smaž z logů zbytečný payload. Browserové oprávnění není drobný technický detail. Je to moment, kdy produkt žádá člověka o důvěru. Tak ať si o ni řekne slušně.
+
 ## Zdroje
 
 - ICANN: Information for Domain Name Registrants - práva a odpovědnosti držitelů domén včetně správy, obnovy a převodu doménové registrace: https://www.icann.org/registrants
@@ -20875,6 +21005,11 @@ Potom udělej jednu konkrétní opravu: smaž zbytečný logovaný payload, zkra
 - MDN Web Docs: URLSearchParams - rozhraní pro práci s query stringem URL a jednotlivými parametry: https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams
 - MDN Web Docs: Referer header - vysvětlení, že `Referer` může obsahovat origin, path a query string podle referrer policy a má dopady na analytiku, logování a soukromí: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Referer
 - MDN Web Docs: Referrer-Policy header - HTTP hlavička pro řízení množství referrer informací posílaných s požadavky: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Referrer-Policy
+- MDN Web Docs: Permissions API - programový dotaz na stav oprávnění jako `granted`, `denied` nebo `prompt` a přehled permission-aware API: https://developer.mozilla.org/en-US/docs/Web/API/Permissions_API
+- MDN Web Docs: Geolocation API - webové rozhraní pro sdílení polohy se souhlasem uživatele a dostupností jen v bezpečném kontextu: https://developer.mozilla.org/en-US/docs/Web/API/Geolocation_API
+- MDN Web Docs: MediaDevices.getUserMedia() - přístup ke kameře a mikrofonu v bezpečném kontextu, s povinným souhlasem a požadavky na soukromí a bezpečnost: https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices/getUserMedia
+- MDN Web Docs: Notifications API - systémové notifikace z webových stránek a jejich dostupnost v bezpečném kontextu: https://developer.mozilla.org/en-US/docs/Web/API/Notifications_API
+- MDN Web Docs: Clipboard API - čtení a zápis do systémové schránky v bezpečném kontextu, včetně bezpečnostních omezení a rozdílů mezi prohlížeči: https://developer.mozilla.org/en-US/docs/Web/API/Clipboard_API
 - MDN Web Docs: Cache-Control header - pravidla pro HTTP cache: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Cache-Control
 - MDN Web Docs: ETag header - identifikace verze zdroje pro efektivnější cache: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/ETag
 - W3C: Web Content Accessibility Guidelines 2.2 - doporučení pro přístupný webový obsah: https://www.w3.org/TR/WCAG22/
@@ -20888,6 +21023,7 @@ Potom udělej jednu konkrétní opravu: smaž zbytečný logovaný payload, zkra
 
 ## Pracovní log
 
+- 2026-07-15: Doplněna příloha o browserových oprávněních bez vyskakovacího přepadu: kdy žádat o polohu, kameru, mikrofon, notifikace a schránku, jak vysvětlit užitek před promptem, navrhnout fallback pro odmítnutí, držet rozsah oprávnění co nejužší, oddělit notifikace od marketingu, logovat jen rozhodovací signály, checklist a mini úkol; ověřeny a doplněny zdroje MDN k Permissions API, Geolocation API, getUserMedia, Notifications API a Clipboard API.
 - 2026-07-15: Doplněna příloha o datové mapě produktu bez slepé víry v architekturu: mapování datových situací místo tabulek, vlastníci toků, oddělení zákaznických/provozních/obchodních dat, tichá místa jako exporty a supportní přílohy, napojení mapy na změnový proces a incidenty, checklist a mini úkol; navázáno na existující zdroje k GDPR principům, záznamům o zpracování, retenci, incidentům a privacy by design.
 - 2026-07-15: Doplněna příloha o EU datové rezidenci bez falešných slibů: rozdělení dat podle vrstev, rozdíl mezi regionem, provozovatelem a supportním přístupem, přesnější veřejné formulace, regionální požadavky jako produktová schopnost, checklist a mini úkol; navázáno na existující zdroje k GDPR, zpracovatelům, mezinárodním přenosům a vendor kartám.
 - 2026-07-15: Doplněna příloha o entitlementu a přístupu k funkcím bez produktového bludiště: rozlišení schopností od UI prvků, oddělení plánu, role a stavu workspace, mapa schopností, vysvětlení zamčených funkcí, dočasné výjimky, testování rozhodovací matice, privacy-first kontrola placených schopností, checklist a mini úkol.
