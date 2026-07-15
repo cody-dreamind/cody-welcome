@@ -21587,6 +21587,159 @@ Vyber jeden formulář, widget nebo proces, kterým dnes sbíráš zpětnou vazb
 
 Potom udělej jednu konkrétní změnu: zkrať feedback formulář, udělej kontakt volitelný, přidej mikrotext k citlivým datům, filtruj query parametry, nastav retenci screenshotů nebo přepiš veřejný nápad na anonymizovaný produktový insight. Feedback má zlepšovat produkt, ne vyrábět další sklad dat.
 
+## Příloha: Produktové vyhledávání a filtry bez sledovacího profilu
+
+Vyhledávání v produktu nebo na webu je jeden z nejčistších signálů záměru. Člověk napíše, co hledá, jak tomu říká a kde mu navigace nepomohla. Pro SaaS je to zlato: dotazy ukazují chybějící dokumentaci, nejasné názvy funkcí, rozbitý onboarding, poptávku po integraci nebo práci, kterou uživatel neumí dokončit.
+
+Jenže search log se umí rychle změnit v datovou past. Lidé do vyhledávání píšou e-maily, jména klientů, čísla objednávek, diagnózy, názvy interních projektů, chybové hlášky, tokeny, části smluv a občas i věty typu „proč to zase nefunguje“. Produktový tým pak má v ruce užitečný signál zabalený v osobních a obchodně citlivých datech.
+
+Privacy-first otázka proto nezní „jak uložíme všechny dotazy“. Zní:
+
+„Jak z vyhledávání získáme rozhodnutí pro produkt, obsah nebo podporu, aniž bychom ukládali víc, než potřebujeme?“
+
+### Vyhledávání je produktový signál, ne náhrada navigace
+
+Search je skvělý pomocník, ale špatný alibi mechanismus. Pokud uživatel musí hledat každou základní akci, problém není v algoritmu. Problém je v informační architektuře, názvech, prázdných stavech nebo onboardingu.
+
+Rozliš tři typy hledání:
+
+| Typ hledání | Příklad | Produktová otázka |
+| --- | --- | --- |
+| Navigační | „fakturace“, „nastavení týmu“ | Najde člověk běžnou funkci rychleji přes menu nebo musí hádat? |
+| Obsahové | „jak pozvat účetní“, „API token“ | Chybí dokumentace, nebo používáme jiný slovník než zákazník? |
+| Datové | „Novák“, „INV-2026-041“ | Hledá člověk vlastní záznamy; jak citlivé mohou být dotazy a výsledky? |
+
+Každý typ má jiné riziko. Navigační a obsahové dotazy se dají často agregovat a použít pro lepší menu, texty a dokumentaci. Datové dotazy jsou citlivější, protože mohou přímo obsahovat osobní údaje nebo obchodní informace zákazníka. U nich má být výchozí režim mnohem přísnější.
+
+### Nedělej z query osobní deník
+
+Nejhorší varianta je ukládat každý dotaz navždy společně s uživatelským ID, workspace, IP adresou, výsledky, klikem, session a celým kontextem obrazovky. Technicky lákavé. Produktově často zbytečné. Datově dost výživná polévka.
+
+Praktické minimum pro produktové učení:
+
+- normalizovaný dotaz bez přebytečných mezer a bez jasně zakázaných vzorů,
+- typ hledání nebo místo v produktu,
+- počet výsledků v rozmezí, ne nutně přesný seznam výsledků,
+- zda člověk klikl na výsledek, případně kategorii výsledku,
+- časové okno pro agregaci,
+- volitelně plán nebo segment zákazníka, pokud je to nutné pro rozhodnutí.
+
+Co raději neukládat automaticky:
+
+- celé URL s query parametry,
+- IP adresu u každého hledání,
+- trvalý identifikátor člověka pro běžné produktové reporty,
+- přesné výsledky obsahující zákaznická data,
+- dotazy, které vypadají jako e-mail, telefon, token, číslo dokladu nebo jiný citlivý údaj,
+- volný kontext stránky, pokud není jasné, kdo ho bude číst a proč.
+
+Pokud potřebuješ debugovat konkrétní problém se search kvalitou, udělej krátkodobý diagnostický režim s jasným vlastníkem, omezenou retencí a filtrováním citlivých hodnot. Nezapínej detailní logování jako tichý trvalý standard.
+
+### Search log navrhni jako agregovanou metriku
+
+Užitečný search report nemusí ukazovat konkrétní lidi. Často stačí agregace:
+
+| Metrika | Co říká | Možné rozhodnutí |
+| --- | --- | --- |
+| Top dotazy bez výsledků | Lidé hledají něco, co neumíme najít | doplnit synonymum, stránku, dokumentaci nebo funkci |
+| Dotazy s rychlým opuštěním | Výsledek pravděpodobně nepomohl | upravit ranking, název nebo obsah výsledku |
+| Dotazy podle obrazovky | Kde navigace selhává | změnit menu, prázdný stav nebo kontextovou nápovědu |
+| Dotazy podle role | Jiný slovník administrátora a běžného uživatele | přepsat copy podle práce role |
+| Počet hledání před akcí | Hledání je nutné k dokončení toku | zkrátit cestu k hlavní akci |
+
+U dotazů bez výsledků pozor na mikrosegmenty. Pokud má firma jednoho zákazníka v daném plánu a report ukazuje přesné dotazy, agregace je jen převlek. Nastav minimální práh: například dotaz zobraz až tehdy, když se objevil u více účtů nebo v dostatečném počtu nezávislých relací. Když práh nesplní, drž ho v interním anonymizovaném bucketu typu „ostatní podobné dotazy“ nebo ho vůbec neukazuj.
+
+### Filtry mají vysvětlit rozhodnutí, ne profilovat člověka
+
+Filtry jsou druhá půlka hledání. Pomáhají zúžit výsledek podle stavu, data, typu, vlastníka, ceny, lokality nebo tématu. Problém nastává, když se z filtrů stane tiché profilování: produkt začne odvozovat citlivé preference, segmenty nebo scoring, aniž by to člověk čekal.
+
+Dobré pravidlo: filtr má být buď pracovní nástroj, nebo jasná preference. Ne skrytý psychologický signál.
+
+Příklady rozumného použití:
+
+- v CRM filtrovat leady podle stavu, vlastníka a dalšího kroku,
+- v dokumentaci filtrovat články podle produktu a role,
+- v e-shopu filtrovat podle dostupnosti, ceny a parametrů,
+- v SaaS adminu filtrovat uživatele podle role a stavu pozvánky.
+
+Rizikové vzory:
+
+- ukládat každý filtr jako trvalý marketingový profil,
+- vyvozovat citlivé zájmy z jednorázového hledání,
+- sdílet filtrovací chování do reklamních platforem,
+- předvyplňovat výsledky tak agresivně, že člověk nevidí neutrální pořadí,
+- používat skryté filtry, které nejdou vysvětlit ani vypnout.
+
+Pokud personalizace opravdu pomáhá, pojmenuj ji. „Zapamatovat moje oblíbené filtry“ je férovější než tichý model, který si z každého kliknutí staví profil. A pokud preference není nutná pro fungování, dej člověku možnost ji smazat nebo resetovat.
+
+### Nulové výsledky jsou backlog, ne slepá ulička
+
+Stránka „nic nenalezeno“ je produktový moment. Uživatel právě řekl, co chtěl. Neodpověz mu prázdnou zdí.
+
+Dobrý nulový stav obsahuje:
+
+- zopakování dotazu v bezpečné podobě,
+- návrh opravy překlepu nebo synonym,
+- odkazy na nejbližší relevantní kategorie,
+- možnost odeslat krátký feedback,
+- u datového hledání vysvětlení, zda může být problém v oprávnění,
+- žádné odhalení, že skrytý záznam existuje, pokud k němu člověk nemá přístup.
+
+Příklad u SaaS:
+
+„Nenašli jsme žádný projekt pro tento dotaz. Zkontroluj název, filtr stavu nebo požádej vlastníka workspace o přístup.“
+
+To je lepší než „Projekt Acme existuje, ale nemáš práva“. Druhá věta může prozradit existenci dat, která uživatel nemá vidět.
+
+### Interní hledání má stejná pravidla
+
+Interní admin, support vyhledávání a backoffice bývají ještě rizikovější než veřejný search. Lidé tam hledají zákazníky, účty, faktury, incidenty, e-maily a logy. Přístup ke search poli proto není jen pohodlnost, ale oprávnění.
+
+Interní search drž podle těchto pravidel:
+
+- hledej jen v datech, ke kterým má pracovník oprávnění,
+- odděl běžný support search od bezpečnostního nebo billing search,
+- maskuj citlivé hodnoty ve výsledcích, dokud nejsou potřeba,
+- audituj citlivé otevření výsledku, ne každý nevinný znak v search boxu,
+- nedovol export výsledků bez samostatného oprávnění,
+- u supportu preferuj číslo ticketu nebo workspace před osobním údajem, pokud to stačí.
+
+Codyho komentář: Interní vyhledávání je jako klíč od skladu. Když ho dáš všem a ještě nevíš, co je ve skladu, není to „rychlejší support“. Je to budoucí incident, který si právě obul pohodlné boty.
+
+### Checklist: Vyhledávání privacy-first
+
+- [ ] Víme, které typy hledání produkt podporuje: navigační, obsahové, datové nebo interní.
+- [ ] Search log má jasný účel a vlastníka.
+- [ ] Dotazy se filtrují od zjevných osobních údajů, tokenů, čísel dokladů a citlivých vzorů.
+- [ ] Produktové reporty používají agregace a minimální práh zobrazení.
+- [ ] Detailní diagnostické logování má časové omezení a důvod.
+- [ ] Datové hledání neukládá přesné výsledky bez konkrétní potřeby.
+- [ ] Nulový stav pomáhá pokračovat a neprozrazuje existenci nepřístupných dat.
+- [ ] Filtry se nepoužívají jako skrytý marketingový profil.
+- [ ] Uložené preference filtrů lze vysvětlit, změnit a smazat.
+- [ ] Interní search respektuje role, oprávnění a maskování citlivých polí.
+- [ ] Export výsledků hledání je samostatné oprávnění.
+- [ ] Retence search logů je kratší než „dokud se někdy budou hodit“.
+
+### Mini úkol
+
+Vyber jedno vyhledávání ve webu, aplikaci, dokumentaci nebo interním adminu. Vyplň kartu:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jaký typ hledání to je? |  |
+| Jaké rozhodnutí má search report podporovat? |  |
+| Jaké hodnoty se ukládají při dotazu? |  |
+| Obsahuje dotaz osobní nebo obchodně citlivá data? |  |
+| Ukládáme uživatelské ID, IP, výsledky nebo kliky? |  |
+| Jak dlouho detailní dotazy držíme? |  |
+| Existuje agregovaný report dotazů bez výsledků? |  |
+| Má report minimální práh, aby neodhaloval jednotlivce? |  |
+| Co ukazuje nulový stav? |  |
+| Kdo má přístup k internímu hledání a exportu výsledků? |  |
+
+Potom udělej jednu úpravu: přidej filtr citlivých vzorů, zkrať retenci search logů, změň report na agregovaný, přepiš nulový stav, odděl interní search oprávnění nebo vypni sdílení search chování do marketingových nástrojů. Vyhledávání má zlepšovat produkt, ne stavět tajný profil zvědavosti.
+
 ## Zdroje
 
 - ICANN: Information for Domain Name Registrants - práva a odpovědnosti držitelů domén včetně správy, obnovy a převodu doménové registrace: https://www.icann.org/registrants
@@ -21736,6 +21889,7 @@ Potom udělej jednu konkrétní změnu: zkrať feedback formulář, udělej kont
 
 ## Pracovní log
 
+- 2026-07-15: Doplněna příloha o produktovém vyhledávání a filtrech bez sledovacího profilu: rozlišení navigačního, obsahového, datového a interního hledání, omezení search logů, agregované reporty s minimálním prahem, privacy-first pravidla pro filtry, nulové výsledky, interní search oprávnění, checklist a mini úkol.
 - 2026-07-15: Doplněna příloha o feedback widgetu bez datového vysavače: rozlišení typů zpětné vazby, sběr minimálního kontextu, hranice volného textu a screenshotů, oddělení feedbacku od marketingu, triage podle dopadu místo pouhého počtu hlasů, uzavírání smyčky, checklist a mini úkol.
 - 2026-07-15: Doplněna příloha o atribuci a konverzích bez skrytého sledovacího profilu: rozlišení zdroje, relace a obchodního výsledku, ukládání zdroje jen při skutečné práci, opatrné používání cookies a server-side měření, respektování preference soukromí, checklist a mini úkol; ověřeny a doplněny zdroje MDN k `Set-Cookie` a W3C ke Global Privacy Control.
 - 2026-07-15: Doplněna příloha o kampaňových odkazech a UTM bez úniku dat v URL: URL parametr jako datový tok, allowlist povolených parametrů, zákaz osobních a obchodně citlivých hodnot v query stringu, čištění parametrů po příchodu, vědomé nastavení `Referrer-Policy`, evidence krátkých odkazů, agregované vyhodnocování kampaní, checklist a mini úkol; navázáno na existující zdroje MDN k `URLSearchParams`, `Referer` a `Referrer-Policy`.
