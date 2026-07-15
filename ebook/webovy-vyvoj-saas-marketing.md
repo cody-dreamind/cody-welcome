@@ -19709,6 +19709,212 @@ Vyber jeden plánovaný nebo existující RAG index a vyplň kartu:
 
 Potom udělej jednu konkrétní opravu: rozděl index podle rolí, vyřaď staré exporty, doplň metadata ke chunkům, přidej test na zákaznické hranice, nebo nastav smazání dokumentu z vektorové databáze. RAG má být zkratka k relevantní znalosti, ne obchvat kolem oprávnění.
 
+## Příloha: Veřejné API a developer experience bez datového průvanu
+
+Veřejné API je slib. Ne jen technický endpoint, který někdo rychle vystaví pro integraci s prvním větším zákazníkem. Jakmile ho používá externí vývojář, partner, automatizace nebo zákaznický systém, stává se součástí produktu, obchodu, bezpečnosti i podpory. A u privacy-first SaaS také součástí datové mapy.
+
+Špatná otázka zní: „Jak rychle uděláme endpoint?“
+
+Lepší otázka zní: „Jakou práci má integrace umožnit, jaká data k tomu opravdu potřebuje a jak zákazník pozná, že je pořád pod kontrolou?“
+
+OWASP API Security Top 10 připomíná typická API rizika: rozbitou autorizaci objektů, slabou autentizaci, příliš široký přístup k vlastnostem objektů, neomezenou spotřebu zdrojů nebo nebezpečné endpointy. OpenAPI specifikace zase dává strojově čitelný způsob, jak popsat HTTP API tak, aby mu rozuměli lidé i nástroje bez čtení zdrojového kódu. OAuth 2.0 Security Best Current Practice v RFC 9700 aktualizuje bezpečnostní doporučení pro OAuth 2.0 a RFC 9449 popisuje DPoP jako způsob, jak omezit zneužití ukradených bearer tokenů pomocí důkazu držení klíče. Přeloženo do malého SaaS: API není jen JSON. Je to kontrakt, který musí mít rozsahy, limity, dokumentaci, testy, retenci a plán změn.
+
+### API začíná use casem, ne endpointem
+
+Nejdřív napiš integrační větu:
+
+„Toto API umožňuje systému ___ udělat ___ s daty ___, aby uživatel mohl ___.“
+
+Příklady:
+
+- účetní systém načte fakturační údaje a stav plateb, aby finance nemusely ručně exportovat CSV,
+- interní BI nástroj načte agregované metriky workspace, aby tým viděl trend bez přístupu k osobním detailům,
+- partnerská aplikace vytvoří lead s minimální sadou polí, aby zákazník nemusel přepisovat poptávku,
+- enterprise zákazník synchronizuje členy týmu, aby přístupy končily při odchodu člověka z firmy.
+
+Jakmile věta obsahuje „všechna data“, „kompletní export“ nebo „pro jistotu“, je čas zastavit se. API má být navržené podle práce, ne podle pohodlí databázového dumpu v hezčím kabátě.
+
+### Kontrakt je produktová dokumentace
+
+OpenAPI kontrakt, příklady requestů, chybové odpovědi a changelog nejsou bonus pro vývojáře. Jsou to způsob, jak snížit support, zlepšit bezpečnost a zabránit tomu, aby se integrace rozbila pokaždé, když se v backendu pohne model.
+
+Minimum dobrého API kontraktu:
+
+- stabilní základní URL a verze API,
+- popis autentizace a autorizace,
+- seznam scope a jejich význam,
+- schémata requestů a odpovědí,
+- povinná a volitelná pole,
+- stránkování, řazení a filtrování,
+- chybové kódy s lidsky čitelným vysvětlením,
+- rate limity a retry pravidla,
+- ukázkové příklady pro běžné use cases,
+- changelog s dopadem změn.
+
+Privacy-first detail: Dokumentace má popisovat také datový dopad. Pokud endpoint vrací e-mail, jméno, fakturační údaje nebo identifikátor člověka, napiš proč a pro jaký účel. Vývojář integrace pak nemusí hádat, jestli dané pole použít, uložit nebo poslat dál.
+
+### Scopy mají odpovídat práci
+
+Nejhorší API scope je `admin`. Druhý nejhorší je `read:all`. Oba jsou pohodlné při implementaci a nepříjemné při incidentu. Scope má být nudně konkrétní:
+
+| Scope | Co dovolí | Co výslovně nedovolí |
+| --- | --- | --- |
+| `leads:create` | vytvořit lead z partnerského formuláře | číst existující leady |
+| `billing:read` | číst fakturační profil a stav plateb | měnit platební metodu |
+| `members:read` | číst členy workspace | zvát nové členy |
+| `members:write` | přidat nebo deaktivovat člena | měnit vlastníka workspace |
+| `reports:read_aggregate` | číst agregované reporty | exportovat jednotlivé události |
+
+U každého scope si napiš:
+
+- kdo ho typicky potřebuje,
+- jaký je dopad zneužití,
+- jestli umožňuje čtení, zápis nebo destruktivní akci,
+- jestli pracuje s osobními údaji,
+- jak se scope odebere bez rozbití celé integrace.
+
+Codyho komentář: Scope je jako klíč od kanceláře. Když někdo potřebuje uložit balík na recepci, nedáváš mu univerzální kartu od serverovny, skladu a trezoru. U API to platí taky, jen to méně cinká.
+
+### Tokeny nejsou navždy
+
+API klíče a tokeny musí mít životní cyklus. V ideálním světě má každá integrace vlastní přístup, vlastníka, popis účelu, datum vytvoření, poslední použití, scopy a možnost okamžité revokace.
+
+Praktická pravidla:
+
+- nevydávej jeden sdílený klíč pro celý účet,
+- ukaž poslední použití tokenu a přibližný účel,
+- umožni rotaci bez výpadku přes překryv starého a nového tokenu,
+- staré nepoužívané tokeny označ a navrhni odebrání,
+- u citlivých integrací zvaž OAuth místo statického klíče,
+- u veřejných klientů nepočítej s tím, že umí bezpečně držet secret,
+- token nikdy nezobrazuj znovu po vytvoření.
+
+Pro vyšší riziko může dávat smysl sender-constrained token, například DPoP nebo jiný mechanismus, který omezuje replay ukradeného tokenu. Není to náhrada dobrých scope, expirace a revokace. Je to další vrstva pro situace, kde samotný bearer token nestačí.
+
+### Chybové odpovědi mají pomáhat bez úniku
+
+API chyba má vývojáři pomoct opravit integraci, ale nemá útočníkovi předat mapu systému.
+
+Dobrá chyba:
+
+```json
+{
+  "error": "missing_scope",
+  "message": "Token does not have scope billing:read.",
+  "request_id": "req_01HZY...",
+  "docs_url": "https://example.com/docs/api/errors#missing_scope"
+}
+```
+
+Špatná chyba:
+
+```json
+{
+  "error": "SQL exception in CustomerBillingRepository line 184",
+  "message": "Column customer_private_note is not available for account 48291"
+}
+```
+
+Chybová odpověď by měla obsahovat stabilní kód, krátké vysvětlení, request ID a odkaz na dokumentaci. Interní detaily, query, stack trace, zákaznické poznámky a nečekané osobní údaje patří do chráněného logu, ne do odpovědi partnerovi.
+
+### Rate limit je produktová ochrana
+
+Rate limit není jen obrana proti útoku. Je to ochrana dostupnosti pro všechny zákazníky a férové očekávání pro vývojáře integrace.
+
+Popiš:
+
+- limit podle tokenu, workspace nebo IP,
+- jestli existují rozdíly podle plánu,
+- jak vypadají hlavičky s limitem,
+- co má klient udělat při `429 Too Many Requests`,
+- které endpointy jsou dražší a proč,
+- jak požádat o navýšení pro legitimní integraci.
+
+Privacy-first pohled: Neřeš limity jen sběrem detailního chování každého uživatele. Často stačí kombinace tokenu, workspace, endpointu, času, agregovaného počtu a request ID. Cílem je řídit zátěž, ne vytvořit profil integračního vývojáře.
+
+### Webhooky a exporty mají mít brzdy
+
+Veřejné API často nekončí čtením dat. Přibudou webhooky, exporty, hromadné operace a synchronizace. Tam roste riziko rychle.
+
+Pravidla pro hromadná data:
+
+- exporty vyžadují zvláštní scope,
+- export má auditní stopu,
+- webhook payload obsahuje jen nezbytná pole,
+- detail si klient dotáhne samostatným oprávněným requestem,
+- opakované doručování webhooku má omezenou retenci,
+- podpis webhooku je povinný,
+- testovací webhook nesmí používat produkční osobní data,
+- destruktivní bulk akce vyžadují idempotency key a jasné potvrzení.
+
+Pokud integrace potřebuje kompletní kopii zákaznických dat, je to obchodní a právní rozhodnutí, ne jen větší endpoint. Zapiš účel, rozsah, retenci a exit plán.
+
+### Developer experience bez obětování kontroly
+
+Dobré developer experience neznamená „všechno otevřít“. Znamená, že poctivý vývojář má rychlou cestu a rizikové věci mají jasné mantinely.
+
+Pomáhá:
+
+- sandbox s realistickými, ale neosobními daty,
+- testovací tokeny oddělené od produkce,
+- příklady v dokumentaci bez reálných zákazníků,
+- veřejná stránka se stavem API,
+- changelog a deprecation policy,
+- request ID v každé odpovědi,
+- jasný kontakt pro integrační incident,
+- ukázka minimální integrace pro každý hlavní use case.
+
+Když je API těžké použít správně, lidé si pomůžou obcházením. Začnou sdílet jeden admin token, dělat ruční exporty nebo posílat screenshoty. Dobrá dokumentace a bezpečné výchozí nastavení nejsou pohodlí navíc. Jsou prevence datového chaosu.
+
+### Verze a deprecace bez rozbití důvěry
+
+API změny bolí víc než UI změny, protože je často nevidí člověk, který může hned kliknout jinam. Integrace běží v noci, v účetnictví, v CRM nebo v zákaznickém procesu. Rozbití endpointu může vypadat jako tichý obchodní problém.
+
+Rozumná pravidla:
+
+- breaking změny nedělej bez nové verze nebo dlouhé deprekační lhůty,
+- u každé změny napiš dopad na data a scopy,
+- staré pole nejdřív označ jako deprecated, potom měř agregovaně použití,
+- zákazníky kontaktuj přes přímý kanál, ne jen přes blogpost,
+- drž migrační příklad pro nejčastější use cases,
+- po vypnutí staré verze nech jasnou chybovou odpověď s návodem.
+
+API důvěra se buduje tím, že zákazník ví, co se mění, kdy se to mění a co má udělat. Překvapení je dobré v narozeninovém dortu. V integraci s fakturací už méně.
+
+### Checklist: Veřejné API privacy-first
+
+- [ ] Každé API má integrační větu s prací, daty a cílovým uživatelem.
+- [ ] Existuje kontrakt nebo dokumentace endpointů, schémat, chyb, limitů a příkladů.
+- [ ] OpenAPI nebo podobný popis je zdroj pravdy pro dokumentaci a testy.
+- [ ] Scopy jsou konkrétní podle práce, ne plošné `admin` nebo `read:all`.
+- [ ] Každý token má vlastníka, účel, scopy, poslední použití a možnost revokace.
+- [ ] Rotace tokenů jde provést bez výpadku integrace.
+- [ ] Citlivé endpointy mají zvláštní scope, auditní stopu a rozumné limity.
+- [ ] Chybové odpovědi nevrací interní detaily ani osobní údaje.
+- [ ] Rate limity jsou popsané v dokumentaci a vrací srozumitelné odpovědi.
+- [ ] Webhooky jsou podepsané a payload obsahuje jen nezbytná data.
+- [ ] Sandbox a příklady nepoužívají produkční osobní údaje.
+- [ ] Breaking změny mají verzi, deprekační plán a migrační návod.
+
+### Mini úkol
+
+Vyber jedno existující nebo plánované API a vyplň kartu:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jakou práci API umožňuje? |  |
+| Kdo ho bude používat? |  |
+| Jaká data jsou nutná? |  |
+| Jaká data jsou zakázaná nebo zbytečná? |  |
+| Jaké scopy potřebujeme? |  |
+| Jak vypadá nejmenší bezpečný token? |  |
+| Jaké jsou rate limity a retry pravidla? |  |
+| Jak se loguje export nebo bulk akce? |  |
+| Jak se token rotuje a revokuje? |  |
+| Jak oznámíme breaking změnu? |  |
+
+Potom udělej jednu konkrétní opravu: rozděl příliš široký scope, doplň request ID do chyb, přidej podpis webhooku, napiš první OpenAPI kontrakt, nastav expiraci testovacích tokenů nebo odeber z endpointu pole, které integrace nepotřebuje. Veřejné API má být dveře pro užitečnou integraci, ne průvan do celého domu.
+
 ## Zdroje
 
 - ICANN: Information for Domain Name Registrants - práva a odpovědnosti držitelů domén včetně správy, obnovy a převodu doménové registrace: https://www.icann.org/registrants
@@ -19734,6 +19940,9 @@ Potom udělej jednu konkrétní opravu: rozděl index podle rolí, vyřaď star�
 - OWASP: API Security Top 10 2023 - přehled nejčastějších API rizik včetně rozbité autorizace objektů, slabé autentizace, neomezené spotřeby zdrojů a nebezpečných API: https://owasp.org/API-Security/editions/2023/en/0x00-header/
 - OWASP Cheat Sheet Series: REST Security Cheat Sheet - praktická doporučení k HTTPS, autentizaci, validaci vstupů, bezpečným chybám a práci s tokeny u REST API: https://cheatsheetseries.owasp.org/cheatsheets/REST_Security_Cheat_Sheet.html
 - OWASP Cheat Sheet Series: Web Service Security Cheat Sheet - obecná doporučení pro zabezpečení webových služeb a prevenci typických rizik při integracích: https://cheatsheetseries.owasp.org/cheatsheets/Web_Service_Security_Cheat_Sheet.html
+- OpenAPI Initiative: OpenAPI Specification 3.2.0 - strojově čitelný popis HTTP API, operací, parametrů, schémat, odpovědí, bezpečnostních požadavků a dokumentačních metadat: https://spec.openapis.org/oas/v3.2.0.html
+- IETF RFC 9700: Best Current Practice for OAuth 2.0 Security - bezpečnostní doporučení pro OAuth 2.0 včetně rizik bearer tokenů, redirectů, veřejných klientů a moderních obranných opatření: https://www.rfc-editor.org/info/rfc9700
+- IETF RFC 9449: OAuth 2.0 Demonstrating Proof of Possession (DPoP) - mechanismus sender-constrained tokenů pro omezení replay zneužití přístupových tokenů pomocí důkazu držení klíče: https://www.rfc-editor.org/info/rfc9449
 - OWASP Cheat Sheet Series: File Upload Cheat Sheet - doporučení pro validaci, omezení velikosti, ukládání, oprávnění a bezpečné zpracování nahrávaných souborů: https://cheatsheetseries.owasp.org/cheatsheets/File_Upload_Cheat_Sheet.html
 - OWASP Cheat Sheet Series: Session Management Cheat Sheet - doporučení k session tokenům, životnímu cyklu session, expiraci a rizikům předávání identifikátorů přes URL: https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html
 - OWASP Cheat Sheet Series: Forgot Password Cheat Sheet - praktická doporučení k jednorázovým, náhodným a časově omezeným resetovacím tokenům: https://cheatsheetseries.owasp.org/cheatsheets/Forgot_Password_Cheat_Sheet.html
@@ -19847,6 +20056,7 @@ Potom udělej jednu konkrétní opravu: rozděl index podle rolí, vyřaď star�
 
 ## Pracovní log
 
+- 2026-07-15: Doplněna příloha o veřejném API a developer experience bez datového průvanu: návrh API od integračního use casu, OpenAPI kontrakt, konkrétní scopy, životní cyklus tokenů, bezpečné chybové odpovědi, rate limity, webhooky/exporty, sandbox, verze a deprekační pravidla, checklist a mini úkol; ověřeny a doplněny zdroje OpenAPI 3.2.0, OAuth 2.0 Security Best Current Practice RFC 9700 a DPoP RFC 9449.
 - 2026-07-15: Doplněna příloha o RAG a interních znalostech bez úniku kontextu: vymezení práce asistenta, dělení dokumentů podle oprávnění před indexací, chunk metadata, prompt injection v retrieved dokumentech, zdrojování odpovědí, životní cyklus indexu, retrieval evaly, checklist a mini úkol; ověřeny a doplněny zdroje OWASP Top 10 for LLM Applications 2025, OWASP k vector/embedding slabinám a NIST AI RMF včetně GenAI profilu.
 - 2026-07-15: Doplněna příloha o agentních evaluacích bez produkčního hřiště: eval karta pro záměr, data, nástroje, autorizaci, consent, výstup a stopování, syntetická testovací data, testování oprávnění, simulace chyb nástrojů, chudé eval logy, převod selhání do backlogu, checklist a mini úkol; navázáno na existující zdroje k MCP, OWASP logování a GDPR principům minimalizace.
 - 2026-07-15: Doplněna příloha o AI agentech a MCP nástrojích bez oprávnění na celý svět: katalog schopností, rozlišení čtení/návrhu/akce, konkrétní scopy, bezpečný návrh toolů, smysluplný consent, chudé logování, agentní incident plán, checklist a mini úkol; ověřen a doplněn oficiální zdroj Model Context Protocol a navázáno na existující zdroje OWASP a GDPR principy.
