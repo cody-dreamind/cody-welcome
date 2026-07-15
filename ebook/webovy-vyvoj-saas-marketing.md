@@ -21011,6 +21011,152 @@ Vyber jednu důležitou stránku a udělej embed audit:
 
 Potom udělej jednu opravu: nahraď sociální embed citací a odkazem, přidej click-to-load vrstvu před mapu, doplň textovou alternativu k videu, omez iframe oprávnění, nebo odeber chat widget ze stránek, kde nikomu nepomáhá. Každý odstraněný nebo zkrocený embed je malý návrat kontroly nad vlastním webem. A kontrola je u privacy-first provozu docela dobrý koníček.
 
+## Příloha: Uploady souborů bez datové miny v příloze
+
+Upload souboru vypadá jako obyčejné tlačítko. Vybrat soubor, odeslat, hotovo. Ve skutečnosti je to jedno z nejrizikovějších míst webu nebo SaaS produktu: uživatel do systému vkládá obsah, který může být velký, citlivý, špatně pojmenovaný, technicky neplatný, škodlivý nebo plný osobních údajů třetích osob.
+
+Privacy-first upload nezačíná u antiviru. Začíná otázkou: proč soubor vůbec potřebujeme, jaký nejmenší rozsah stačí a kdy ho zase smažeme?
+
+OWASP File Upload Cheat Sheet připomíná technické základy jako validaci typu souboru, omezení velikosti, bezpečné uložení, kontrolu oprávnění a oddělení nahraného obsahu od spustitelného kódu. Pro produktový tým je stejně důležitý provozní překlad: upload není skládka. Je to dočasný nebo trvalý datový tok se svým účelem, vlastníkem a koncem života.
+
+Codyho komentář: Příloha s názvem `data_final_final.xlsx` je v malém týmu často víc drama než nový framework. Framework aspoň někdo reviewne. Excel někdy jen proletí formulářem rovnou do věčnosti.
+
+### Nejdřív urči typ uploadu
+
+Různé uploady mají různý režim. Nahraný avatar, fakturační příloha, CSV import a screenshot pro support nejsou stejná věc.
+
+| Typ uploadu | Příklad | Hlavní riziko | Doporučený režim |
+| --- | --- | --- | --- |
+| Profilový nebo veřejný soubor | logo, avatar, obrázek článku | nevhodný obsah, metadata, velikost | úprava rozměrů, odstranění metadat, veřejná kontrola |
+| Import dat | CSV klientů, seznam produktů, export z jiného systému | osobní údaje, chybná struktura, dočasný soubor bez úklidu | validace, náhled, krátká retence zdrojového souboru |
+| Support příloha | screenshot, log, krátké video | osobní údaje třetích osob, tokeny, interní data | instrukce k začernění, omezený přístup, kratší retence |
+| Pracovní dokument | smlouva, podklad, PDF | citlivý obsah, přístupová práva, verze | role, audit, export a výmaz podle účelu |
+| Technický artefakt | konfigurace, certifikát, export logu | secrets, škodlivý obsah, chybné zpracování | přísný allowlist, izolované zpracování, žádné veřejné servírování |
+
+U každého uploadu si napiš jednu větu:
+
+„Uživatel nahrává ___, aby ___, a soubor držíme ___ po dobu ___.“
+
+Když věta nejde doplnit, upload je pravděpodobně navržený moc volně.
+
+### Ptej se na soubor až ve chvíli, kdy je nutný
+
+Nenuť člověka nahrát soubor jen proto, že by týmu možná pomohl později. U poptávky často stačí krátký popis problému. U supportu často stačí chybová hláška a čas události. U importu často stačí nejdřív ukázkový vzorek.
+
+Praktické pravidlo:
+
+- Pokud soubor není nutný pro první odpověď, dej ho jako volitelný.
+- Pokud stačí tři řádky, nechtěj celý export.
+- Pokud stačí anonymizovaný vzorek, nechtěj produkční data.
+- Pokud soubor potřebuješ jen pro zpracování, smaž původní upload po dokončení.
+- Pokud soubor zůstává jako součást produktu, vysvětli uživateli, kdo ho uvidí.
+
+Mikrotext u support přílohy může znít:
+
+```text
+Přiložte jen soubor nebo screenshot nutný k vyřešení problému. Před odesláním začerněte osobní údaje jiných lidí, tokeny, interní poznámky a údaje, které s problémem nesouvisí.
+```
+
+Tohle není strašení. Je to ochrana uživatele i týmu před tím, aby se do helpdesku dostal malý archiv cizích dat.
+
+### Validuj podle allowlistu, ne podle naděje
+
+Technická validace má být obranná. Nespoléhej na příponu souboru ani na to, že uživatel posílá to, co napsal formulář.
+
+Minimum:
+
+- povol konkrétní typy souborů podle účelu,
+- nastav maximální velikost,
+- kontroluj skutečný obsah souboru tam, kde to dává smysl,
+- přejmenuj soubor na bezpečný interní název,
+- neukládej soubory do veřejně spustitelného prostoru,
+- nevracej nahraný soubor přes původní název bez ošetření,
+- skenuj rizikové typy nebo používej izolované zpracování,
+- loguj výsledek zpracování bez obsahu souboru.
+
+Allowlist je nudný, ale užitečný. „Povolíme všechno a uvidíme“ je rychlé jen do chvíle, kdy někdo nahraje něco, co se tváří jako obrázek a chová se jako problém.
+
+### U importů odděl soubor od výsledných dat
+
+Import má dvě části: zdrojový soubor a data, která z něj vzniknou. Tyto dvě věci často nepotřebují stejnou retenci.
+
+Příklad CSV importu:
+
+1. Uživatel nahraje soubor.
+2. Systém ověří typ, velikost a strukturu.
+3. Uživatel vidí náhled a chyby.
+4. Po potvrzení vzniknou produktová data.
+5. Původní soubor se po krátké době smaže.
+6. Zůstane jen importní záznam: kdo import spustil, kdy, kolik řádků prošlo, kolik selhalo a jaký byl výsledek.
+
+Importní log nemá obsahovat celé řádky osobních údajů. Pro podporu často stačí číslo řádku, typ chyby a korelační ID. Pokud musíš držet chybový vzorek, omez rozsah a retenci.
+
+### Přístup k souborům je samostatné oprávnění
+
+To, že člověk vidí ticket nebo projekt, ještě neznamená, že má automaticky vidět všechny přílohy. Soubory často obsahují víc citlivého kontextu než text záznamu.
+
+Kontrolní otázky:
+
+- Kdo může soubor nahrát?
+- Kdo ho může zobrazit?
+- Kdo ho může stáhnout?
+- Kdo ho může smazat?
+- Je stažení auditované?
+- Je odkaz ke stažení časově omezený?
+- Co se stane po zrušení účtu, workspace nebo pilotu?
+
+U citlivějších souborů preferuj krátce platné odkazy, role podle práce a audit stahování. Pokud se soubor posílá dál do externího zpracování, patří do vendor mapy a privacy dokumentace.
+
+### Retence uploadů nesmí být „dokud máme disk“
+
+Disk je levný. Neřízené soubory levné nejsou.
+
+Praktický start:
+
+| Typ souboru | Výchozí retence |
+| --- | --- |
+| Dočasný importní soubor | smazat po zpracování nebo po krátké lhůtě pro opravu |
+| Support screenshot | držet jen po dobu řešení a krátkou návaznou lhůtu |
+| Veřejný obrázek obsahu | držet po dobu existence obsahu |
+| Smluvní nebo fakturační příloha | podle obchodního a právního režimu |
+| Technický debug export | velmi krátká retence, jasný vlastník |
+
+Retence má být vidět v produktu nebo dokumentaci tam, kde to ovlivňuje uživatele. Pokud po zrušení účtu smažeš produktová data, zkontroluj i soubory, náhledy, zmenšené varianty, dočasné exporty a cache. Soubory mají nepříjemnou schopnost zůstat v rohu systému, kde je nikdo nehledal.
+
+### Checklist: Uploady privacy-first
+
+- [ ] Každý upload má účel, vlastníka a typ souboru podle práce uživatele.
+- [ ] Soubor je povinný jen tehdy, když je nutný pro nejbližší další krok.
+- [ ] Uživatel vidí instrukci, co do souboru nedávat.
+- [ ] Povolené typy a velikosti souborů jsou omezené allowlistem.
+- [ ] Soubory se přejmenovávají a ukládají mimo veřejně spustitelný prostor.
+- [ ] Importní zdrojové soubory mají kratší retenci než výsledná produktová data.
+- [ ] Chybové logy importu neukládají celé citlivé řádky.
+- [ ] Přístup ke stažení souboru je samostatně řízený a auditovaný u citlivých dat.
+- [ ] Dočasné odkazy ke stažení expirují.
+- [ ] Soubory se neodesílají do externích nástrojů bez jasného účelu a vendor kontroly.
+- [ ] Výmaz účtu nebo workspace zahrnuje i přílohy, náhledy, cache a dočasné exporty.
+- [ ] Support a dokumentace popisují, jak bezpečně nahrát soubor.
+
+### Mini úkol
+
+Vyber jeden upload ve webu nebo SaaS produktu a vyplň kartu:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jaký soubor člověk nahrává? |  |
+| Proč ho potřebujeme? |  |
+| Je soubor povinný, nebo volitelný? |  |
+| Jaké typy a velikosti povolujeme? |  |
+| Jak uživatele varujeme před zbytečnými osobními údaji? |  |
+| Kdo soubor uvidí a kdo ho může stáhnout? |  |
+| Jak dlouho držíme původní soubor? |  |
+| Vznikají z něj náhledy, cache nebo exporty? |  |
+| Jak proběhne výmaz? |  |
+| Jaká jedna změna sníží riziko nejvíc? |  |
+
+Potom udělej jednu konkrétní opravu: přidej instrukci k začernění screenshotů, zmenši povolené typy souborů, nastav expiraci dočasných importů, omez stahování příloh podle role, nebo smaž staré uploady bez vlastníka. Upload je malý formulářový detail jen do chvíle, než se v něm začne hromadit všechno, co nikdo nechtěl řešit.
+
 ## Zdroje
 
 - ICANN: Information for Domain Name Registrants - práva a odpovědnosti držitelů domén včetně správy, obnovy a převodu doménové registrace: https://www.icann.org/registrants
@@ -21158,6 +21304,7 @@ Potom udělej jednu opravu: nahraď sociální embed citací a odkazem, přidej 
 
 ## Pracovní log
 
+- 2026-07-15: Doplněna příloha o uploadech souborů bez datové miny v příloze: rozlišení typů uploadů, účel a retence souborů, bezpečný mikrotext pro support přílohy, allowlist validace, oddělení importního zdrojového souboru od výsledných dat, řízení přístupů ke stažení, checklist a mini úkol; navázáno na existující zdroj OWASP File Upload Cheat Sheet.
 - 2026-07-15: Doplněna příloha o externích embedech bez cizího kódu na každé stránce: inventář map, videí, chatů, kalendářů, sociálních postů a dalších widgetů, načítání až po záměru člověka, omezení iframe přes `sandbox`, `allow`, `loading` a `referrerpolicy`, dostupnost obsahu bez embedu, opatrné používání chat widgetů a sociálních embedů, checklist a mini úkol; ověřen a doplněn zdroj MDN k elementu `iframe`.
 - 2026-07-15: Doplněna příloha o browserových oprávněních bez vyskakovacího přepadu: kdy žádat o polohu, kameru, mikrofon, notifikace a schránku, jak vysvětlit užitek před promptem, navrhnout fallback pro odmítnutí, držet rozsah oprávnění co nejužší, oddělit notifikace od marketingu, logovat jen rozhodovací signály, checklist a mini úkol; ověřeny a doplněny zdroje MDN k Permissions API, Geolocation API, getUserMedia, Notifications API a Clipboard API.
 - 2026-07-15: Doplněna příloha o datové mapě produktu bez slepé víry v architekturu: mapování datových situací místo tabulek, vlastníci toků, oddělení zákaznických/provozních/obchodních dat, tichá místa jako exporty a supportní přílohy, napojení mapy na změnový proces a incidenty, checklist a mini úkol; navázáno na existující zdroje k GDPR principům, záznamům o zpracování, retenci, incidentům a privacy by design.
