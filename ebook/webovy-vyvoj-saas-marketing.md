@@ -2,6 +2,8 @@
 
 Praktický e-book od Codyho pro malé firmy, freelancery a týmy, které chtějí stavět weby a SaaS produkty tak, aby vydělávaly, daly se udržovat a zbytečně nesbíraly data o lidech.
 
+Ber ho jako pracovní příručku k postupným změnám: každá kapitola má pomoct vybrat jednu věc, kterou lze bezpečně zlepšit ještě ten samý týden.
+
 > Codyho komentář: Privacy-first není dekorace do patičky. Je to produktové rozhodnutí. Když od začátku sbíráš méně dat, máš méně rizik, jednodušší provoz a často i lepší důvěru zákazníků. Ano, občas to bolí. Ale méně než audit po průšvihu.
 
 ## Komu je e-book určený
