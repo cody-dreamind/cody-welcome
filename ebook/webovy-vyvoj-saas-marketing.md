@@ -22256,6 +22256,168 @@ Vyber jeden interní report, dashboard export nebo pravidelnou tabulku a vyplň 
 
 Potom udělej jednu konkrétní změnu: smaž starou kopii, odeber e-mailový sloupec, nahraď řádkový export agregací, omez exportní oprávnění nebo doplň expiraci odkazu. Report má pomoct rozhodnout, ne potichu rozmnožit data po firmě.
 
+## Příloha: Týmové chaty a interní upozornění bez úniku kontextu
+
+Týmový chat vypadá jako proud krátkých zpráv, ale prakticky je to často druhá interní databáze. Končí v něm screenshoty z produkce, části logů, odkazy na exporty, jména zákazníků, interní rozhodnutí, incidenty, tokeny v panice, reporty v přílohách a automatická upozornění ze všech systémů, které někdo kdysi dokázal napojit. Chat je pohodlný. Právě proto umí být nebezpečně lepivý.
+
+Privacy-first otázka nezní: „Do kterého kanálu to pošleme?“
+
+Lepší otázka zní: „Kdo tu informaci potřebuje, na jak dlouho a jak málo kontextu stačí k akci?“
+
+Týmový chat má být navigace k práci, ne skládka celé práce. Upozornění má člověku říct, že se má podívat do správného systému. Nemá do otevřeného kanálu vyklopit vše, co systém ví.
+
+### Rozliš konverzaci, rozhodnutí a záznam
+
+Ne každá zpráva v chatu má stejnou hodnotu. Provozní tým si může rychle vyjasnit, kdo zkontroluje incident. Produktový tým může v chatu domluvit, že je potřeba upravit onboarding. Sales může upozornit na opakovaný dotaz zákazníků. To je v pořádku. Problém začíná, když chat nahrazuje místo, kde má být trvalý záznam.
+
+Praktické rozdělení:
+
+| Typ informace | Patří do chatu? | Kde má být zdroj pravdy |
+| --- | --- | --- |
+| Rychlá koordinace | ano | chat nebo vlákno |
+| Rozhodnutí s dopadem | jen odkaz a shrnutí | rozhodovací log, issue, dokumentace |
+| Incidentní průběh | omezeně | incident log |
+| Zákaznický detail | jen minimální kontext | CRM, support systém, ticket |
+| Export nebo report | odkaz s oprávněním | reportovací nástroj nebo úložiště |
+| Přístupový údaj | ne | správce tajemství |
+
+Dobrá chatová zpráva říká, co se děje a kam jít dál. Špatná chatová zpráva přenáší celý problém včetně dat, která už v chatu nikdy nikdo neuklidí.
+
+Příklad:
+
+Slabé: „Tady je screenshot zákaznického účtu, e-mail, faktura a log chyby, koukněte na to.“
+
+Lepší: „V účtu zákazníka `ACME` selhal export faktury po změně plánu. Detail je v ticketu `SUP-1234`, prosím billing tým o kontrolu do 14:00.“
+
+Druhá zpráva stále dává týmu akční kontext, ale neposílá zbytečně osobní údaje, přílohy ani kusy interních systémů do prostoru, kde je uvidí víc lidí, než je potřeba.
+
+### Automatická upozornění piš jako pracovní signál
+
+Integrace do chatu mají sklon začít nevinně: build prošel, formulář přišel, platba selhala, export doběhl, zákazník napsal, backup skončil. Za měsíc už kanál připomíná letištní tabuli v bouřce a nikdo neví, co je důležité. Upozornění bez vlastnictví se mění v hluk. Upozornění s přílišným detailem se mění v únik.
+
+Každé automatické upozornění má mít kartu:
+
+| Pole | Otázka |
+| --- | --- |
+| Název | Jak se upozornění jmenuje? |
+| Účel | Jakou akci má vyvolat? |
+| Publikum | Kdo ho opravdu potřebuje vidět? |
+| Kanál | Kam chodí a proč? |
+| Data | Jaká pole obsahuje? |
+| Zakázaná data | Co se nikdy nesmí poslat do zprávy? |
+| Frekvence | Jak často může přijít bez zahlcení? |
+| Vlastník | Kdo ho upraví, když začne škodit? |
+| Expirace | Kdy zkontrolujeme, jestli je stále potřeba? |
+
+Upozornění by mělo obsahovat:
+
+- stručný stav,
+- dopad nebo prioritu,
+- vlastníka nebo tým,
+- odkaz do systému s oprávněním,
+- nejbližší očekávanou akci.
+
+Upozornění by obvykle nemělo obsahovat:
+
+- celý obsah formuláře,
+- celé chybové stack trace s daty,
+- osobní údaje bez nutnosti,
+- platební nebo přístupové detaily,
+- neveřejné obchodní poznámky,
+- dump payloadu z webhooku,
+- dlouhé přílohy.
+
+Codyho komentář: Pokud upozornění potřebuje tři obrazovky textu, není to upozornění. Je to dokument v převleku. Pošli odkaz na dokument a nech chat dýchat.
+
+### Kanály nejsou oprávnění
+
+To, že někdo vidí kanál, neznamená, že má vidět všechna data, která do něj umí poslat integrace. Týmové chaty často přežijí původní strukturu firmy: lidé mění role, externisté zůstávají ve starých kanálech, projekt skončí, ale integrace dál posílá notifikace. Tohle není dramatická chyba. Je to běžné opotřebení provozu. Právě proto potřebuje rytmus kontroly.
+
+Praktická pravidla:
+
+- Pro citlivější témata používej menší kanály s jasným účelem.
+- Externí spolupracovníky nepřidávej do interních kanálů jen kvůli jedné otázce.
+- U projektových kanálů nastav datum revize nebo archivace.
+- U automatických integrací pravidelně kontroluj, kam posílají zprávy.
+- Neřeš přístup k datům jen přes název kanálu typu `private`.
+- Po změně role nebo odchodu člověka projdi kanály stejně jako aplikace.
+
+Kanál je komunikační prostor. Oprávnění má být navržené v systému, který data drží. Chat má odkazovat na zdroj pravdy, ne ho obcházet.
+
+### Screenshoty, kopie a volný text bolí nejvíc
+
+Nejčastější únik v chatu nebývá sofistikovaný útok. Bývá to screenshot. Někdo chce rychle ukázat chybu a v rohu zůstane e-mail zákazníka, interní poznámka, token v URL, počet objednávek, výše faktury nebo název neveřejného projektu.
+
+Před posláním screenshotu si dej pětisekundovou kontrolu:
+
+- Je vidět jméno, e-mail, telefon, adresa nebo interní ID?
+- Je v URL token, resetovací odkaz nebo citlivý parametr?
+- Je vidět název zákazníka nebo interní komentář?
+- Stačí výřez místo celé obrazovky?
+- Stačí opsat chybovou hlášku bez dat?
+
+U volného textu platí podobná hygiena. Nepiš do chatu celé zákaznické zprávy, pokud stačí shrnutí. Necituj interní obchodní poznámky do širokého kanálu. Neposílej tajemství „jen na minutu“. Minuta v chatu obvykle znamená archiv v několika zařízeních, notifikacích a zálohách. Krásné? Ani trochu.
+
+### Incidentní chat má mít začátek a konec
+
+Při incidentu je chat užitečný. Rychle spojí lidi, zrychlí koordinaci a udrží průběh viditelný. Ale incidentní kanál se nesmí stát jediným incident logem. V panice se do něj snadno dostane příliš detailu a po incidentu zůstane dlouhá historie bez jasného závěru.
+
+Dobré incidentní pravidlo:
+
+1. Otevři dočasný kanál nebo vlákno s jasným názvem.
+2. Připni stručný stav: dopad, vlastníka, čas začátku, odkaz na incident log.
+3. Do chatu piš koordinační zprávy, ne celé datové výpisy.
+4. Citlivé detaily drž v incident logu nebo systému s oprávněním.
+5. Po vyřešení napiš závěr, odkaz na postmortem a kanál archivuj.
+
+Tým pak má rychlou koordinaci i trvalý záznam. Chat slouží jako operační místnost, ne jako černá skříňka.
+
+### Retence chatu není náhrada datové strategie
+
+Retence týmového chatu má být vědomé rozhodnutí. Krátká retence snižuje riziko starých zpráv, ale může komplikovat dohledání rozhodnutí. Dlouhá retence pomáhá vyhledávání, ale mění chat ve velký archiv všeho, co lidé napsali ve spěchu.
+
+Praktický kompromis:
+
+- rozhodnutí ukládej mimo chat,
+- incidenty uzavírej v incident logu,
+- zákaznické detaily drž v CRM nebo support systému,
+- reporty a exporty drž v nástroji s oprávněním a expirací,
+- chat používej pro koordinaci a odkazy,
+- staré projektové kanály archivuj nebo maž podle pravidel.
+
+Retence pak nemusí nést váhu celého firemního poznání. Poznání má být v dokumentaci, rozhodovacím logu, issue trackeru a produktech. Chat je proud práce. Nesnaž se z proudu dělat knihovnu, jinak v ní jednou někdo utopí půl dne a najde hlavně staré omyly.
+
+### Checklist: Týmový chat privacy-first
+
+- [ ] Každý důležitý kanál má jasný účel a publikum.
+- [ ] Automatická upozornění mají vlastníka a popsanou akci.
+- [ ] Upozornění posílají odkaz do systému místo celého obsahu.
+- [ ] Do chatu se neposílají tokeny, celé payloady, exporty ani zbytečné osobní údaje.
+- [ ] Screenshoty se před odesláním kontrolují a ořezávají.
+- [ ] Rozhodnutí se ukládají do rozhodovacího logu, dokumentace nebo issue trackeru.
+- [ ] Incidentní komunikace má vlastníka, odkaz na incident log a jasné uzavření.
+- [ ] Projektové a dočasné kanály mají revizi nebo archivaci.
+- [ ] Přístupy do kanálů se kontrolují při změně role nebo odchodu člověka.
+- [ ] Retence chatu je vědomě nastavená podle účelu, ne ponechaná náhodě.
+
+### Mini úkol
+
+Vyber jeden týmový kanál nebo automatické upozornění a vyplň kartu:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jaký je účel kanálu nebo upozornění? |  |
+| Kdo ho opravdu potřebuje vidět? |  |
+| Jakou akci má vyvolat? |  |
+| Jaká data se do něj dnes posílají? |  |
+| Které údaje jsou zbytečné nebo citlivé? |  |
+| Kde má být zdroj pravdy místo chatu? |  |
+| Jak dlouho má obsah zůstat dostupný? |  |
+| Kdo je vlastník integrace nebo kanálu? |  |
+| Jaká jedna změna sníží riziko nejvíc? |  |
+
+Potom udělej jednu konkrétní změnu: zkrať text automatického upozornění, nahraď detail odkazem do systému, omez publikum kanálu, archivuj starý projektový prostor, přidej pravidlo pro screenshoty nebo přesuň rozhodnutí z chatu do rozhodovacího logu. Chat má zrychlit práci, ne nenápadně vyvážet kontext do všech koutů firmy.
+
 ## Zdroje
 
 - ICANN: Information for Domain Name Registrants - práva a odpovědnosti držitelů domén včetně správy, obnovy a převodu doménové registrace: https://www.icann.org/registrants
@@ -22405,6 +22567,7 @@ Potom udělej jednu konkrétní změnu: smaž starou kopii, odeber e-mailový sl
 
 ## Pracovní log
 
+- 2026-07-15: Doplněna příloha o týmových chatech a interních upozorněních bez úniku kontextu: rozlišení konverzací, rozhodnutí a záznamů, karta automatického upozornění, pravidla pro kanály, screenshoty, incidentní chat, retenci, checklist a mini úkol.
 - 2026-07-15: Doplněna příloha o interních reportech bez tabulkového úniku: report jako rozhodovací výstup, agregace jako výchozí stav, vlastník a expirace reportu, kontrola screenshotů a prezentací, technické brzdy exportů, checklist a mini úkol.
 - 2026-07-15: Doplněna příloha o plánovaných úlohách a frontách bez datového autopilota: pracovní věta jobu, rozlišení cronů, front a backfillů, retry s konečnou retencí, ruční brzdy, respektování produktových oprávnění, chudé logování, úklidová automatizace, checklist a mini úkol; navázáno na existující zdroje OWASP Logging Cheat Sheet, OpenTelemetry a GDPR principy.
 - 2026-07-15: Doplněna příloha o prázdných stavech a kontextové nápovědě bez nátlakového vodění: rozlišení typů prázdných stavů, jedna primární cesta, nápověda ve správný okamžik, férové nudges, aktivace bez zbytečného sběru dat, diskrétní stavy oprávnění, agregované měření, checklist a mini úkol.
