@@ -18843,6 +18843,164 @@ Vyber jeden produkt, workspace nebo návrh SaaS a vyplň identitní kartu:
 
 Potom udělej jednu konkrétní změnu: přidej opětovné ověření před změnu e-mailu, zkrať expiraci resetovacích odkazů, zaveď passkey pro vlastníky, napiš SSO konfigurační kartu, omez import profilových atributů, nebo přidej deaktivaci účtu do offboarding checklistu. Identita není jen vstupní brána. Je to řídicí vrstva důvěry.
 
+## Příloha: Bezpečnostní hlavičky bez paniky a rozbitého frontendu
+
+HTTP bezpečnostní hlavičky jsou levná ochranná vrstva. Nezachrání špatnou autorizaci, uniklé tokeny ani formulář, který bere všechno bez validace. Umí ale prohlížeči říct, co má blokovat, jak má zacházet s referrerem, jestli má trvat na HTTPS, odkud se smí načítat obsah a které prohlížečové schopnosti stránka vůbec nepotřebuje.
+
+Privacy-first web z nich těží dvakrát. Zaprvé snižují dopad běžných chyb. Zadruhé nutí tým zmapovat externí skripty, embedy, fonty a analytiku. Když neumíš napsat rozumnou Content Security Policy, často to není problém hlavičky. Je to signál, že stránka tahá obsah z příliš mnoha míst a nikdo už přesně neví proč.
+
+Špatná otázka zní: „Jak dostaneme nejlepší skóre v online testu?“
+
+Lepší otázka zní: „Které prohlížečové riziko chceme omezit, aniž rozbijeme hlavní uživatelskou cestu?“
+
+OWASP HTTP Security Response Headers Cheat Sheet popisuje praktická doporučení pro běžné bezpečnostní hlavičky a MDN HTTP Observatory pomáhá ověřit konfiguraci zvenku. Ber je jako kontrolní pomůcku, ne jako náhradu za úsudek a testování produktu.
+
+### Začni inventurou, ne kopírováním ukázkové politiky
+
+Nejrychlejší cesta k chaosu je vzít cizí ukázkovou CSP, vložit ji do produkce a čekat, co přestane fungovat. Bezpečnostní hlavičky jsou sice textové řádky, ale popisují skutečnou architekturu frontendu.
+
+Nejdřív si napiš inventuru:
+
+| Oblast | Co ověřit | Typická otázka |
+| --- | --- | --- |
+| Vlastní domény | web, aplikace, API, statické soubory | Odkud se načítá první stránka a assety? |
+| Obrázky a média | obrázky, video, audio, OG náhledy | Jsou na vlastní doméně, nebo u dodavatele? |
+| Fonty | lokální fonty, externí CDN | Potřebujeme externí font server? |
+| Skripty | vlastní JS, analytika, chat, embed | Které skripty jsou nutné pro hlavní práci? |
+| Styly | vlastní CSS, inline styly, UI knihovny | Máme inline styly kvůli frameworku, nebo z lenosti? |
+| Formuláře | akce formulářů, uploady | Kam se odesílají data? |
+| Embedy | mapy, videa, kalendáře, widgety | Existuje privacy-first alternativa nebo dvoukrokové načítání? |
+
+Tahle inventura je užitečná sama o sobě. Pokud zjistíš, že marketingový web načítá pět externích skriptů, dvě CDN, tři font servery a embed, který nikdo nepoužívá, máš bezpečnostní i privacy backlog ještě před první hlavičkou.
+
+### Content Security Policy zaváděj po vrstvách
+
+Content Security Policy říká prohlížeči, odkud smí stránka načítat skripty, styly, obrázky, fonty, rámce a další zdroje. Je to silný nástroj proti části XSS dopadů a proti nečekanému načítání obsahu. Je také výborný detektor nepořádku ve frontendu.
+
+Praktický postup:
+
+1. Vytvoř návrh politiky podle inventury zdrojů.
+2. Začni v report-only režimu, pokud ho tvoje infrastruktura podporuje.
+3. Sbírej porušení krátce a bez osobních dat v reportech.
+4. Oprav legitimní problémy v aplikaci.
+5. Zaveď vynucenou politiku na menším rozsahu nebo na méně rizikové části.
+6. Rozšiřuj a zpřísňuj postupně.
+
+Výchozí policy pro malý web může být zpočátku opatrná, ale čitelná:
+
+| Direktiva | Produktová otázka |
+| --- | --- |
+| `default-src` | Jaký je základní fallback pro zdroje? |
+| `script-src` | Který JavaScript je opravdu povolený? |
+| `style-src` | Odkud se berou styly a je nutný inline styl? |
+| `img-src` | Odkud se načítají obrázky a data URI? |
+| `font-src` | Musí fonty chodit zvenku? |
+| `connect-src` | Kam může frontend volat API, analytiku nebo realtime spojení? |
+| `frame-src` | Které iframe embedy jsou povolené? |
+| `form-action` | Kam se smí odesílat formuláře? |
+| `base-uri` | Kdo smí měnit základní URL pro relativní odkazy? |
+
+Codyho komentář: CSP není místo pro kreativní hvězdičky. `*` ve špatné direktivě je bezpečnostní verze věty „nějak to dopadne“. Občas opravdu potřebuješ výjimku. Ale výjimka má mít vlastníka a důvod, ne jen smutnou poznámku v konfiguraci.
+
+### HSTS zapínej až po ověření HTTPS
+
+Strict-Transport-Security říká prohlížeči, že má k doméně přistupovat přes HTTPS. To je dobré, pokud máš HTTPS správně nastavené na hlavní doméně i subdoménách, které chceš zahrnout. Je to méně dobré, pokud si nejsi jistý certifikáty, redirecty nebo starými subdoménami.
+
+Praktická kontrola před HSTS:
+
+- hlavní doména i `www` fungují přes HTTPS,
+- HTTP požadavky se přesměrují na správnou HTTPS URL,
+- certifikát je platný a obnovuje se automaticky,
+- staré subdomény nejsou zapomenuté na rozbitém hostingu,
+- tým ví, co znamená `includeSubDomains`,
+- existuje postup, co dělat při chybě certifikátu.
+
+Začni kratším `max-age`, ověř provoz a teprve potom zvaž delší hodnotu a zahrnutí subdomén. HSTS není dekorace. Je to slib prohlížeči, že HTTPS cesta bude stabilní.
+
+### Referrer-Policy chrání URL před zbytečným únikem
+
+Referrer může prozradit, z jaké URL člověk přišel. Pokud URL obsahuje kampaňové parametry, interní cesty, hledané výrazy nebo tokeny, může to být problém. Nejlepší obrana je nedávat citlivé údaje do URL. Referrer-Policy je druhá vrstva: omezuje, kolik informací prohlížeč pošle dál.
+
+Pro běžný marketingový web nebo SaaS bývá rozumné nastavení, které na cizí domény neposílá plnou cestu a query string. Přesná volba záleží na měření a integracích, ale produktová otázka je jednoduchá:
+
+„Potřebuje cílová třetí strana znát celou URL, nebo jí stačí origin?“
+
+Pokud odpověď neznáš, neposílej víc, než je nutné. Privacy-first provoz nevypadá tak, že každému externímu odkazu přibalíš interní kontext jako nevyžádanou přílohu.
+
+### Permissions-Policy vypíná schopnosti, které stránka nepotřebuje
+
+Moderní prohlížeče umí pracovat s kamerou, mikrofonem, geolokací, fullscreen režimem, senzory a dalšími schopnostmi. Většina webů je nepotřebuje. Permissions-Policy umožňuje některé schopnosti omezit nebo vypnout pro stránku a její vložený obsah.
+
+Prakticky se ptej:
+
+- Potřebuje marketingový web kameru? Skoro jistě ne.
+- Potřebuje pricing stránka geolokaci? Skoro jistě ne.
+- Potřebuje onboarding mikrofon? Jen pokud je to skutečná funkce.
+- Potřebují iframe embedy víc oprávnění než zobrazení obsahu?
+
+Když schopnost nepotřebuješ, výchozí směr je ji nepovolovat. Ne proto, že by každý web byl nebezpečný, ale protože jasná omezení snižují prostor pro chyby a nečekané chování dodavatelského kódu.
+
+### Ostatní hlavičky drž jednoduché a vědomé
+
+Vedle CSP, HSTS, Referrer-Policy a Permissions-Policy se často řeší i další hlavičky:
+
+- `X-Content-Type-Options: nosniff` omezuje hádání typu obsahu.
+- `X-Frame-Options` nebo CSP `frame-ancestors` řeší, kdo smí stránku vložit do rámce.
+- `Cross-Origin-Opener-Policy`, `Cross-Origin-Embedder-Policy` a `Cross-Origin-Resource-Policy` pomáhají u izolace a cross-origin chování, ale vyžadují opatrnější testování.
+- Cache hlavičky musí odpovídat citlivosti obsahu, aby soukromá data neležela zbytečně v mezicache.
+
+Ne každou hlavičku musí mít každý web ve stejné podobě. Statický blog, interní admin, přihlašovací stránka a produktová aplikace mají jiné riziko. Cílem je mít rozhodnutí, ne slepě zelený report.
+
+### Testuj hlavní cesty po zavedení
+
+Bezpečnostní hlavičky se snadno nastaví centrálně a rozbijí věci, které nikdo nečekal: platby, přihlášení přes SSO, nahrávání obrázků, preview v CMS, embedy ve článcích, analytiku, PDF export nebo zákaznický portál.
+
+Po změně ověř:
+
+- načtení homepage a klíčových landing pages,
+- registraci a login,
+- hlavní produktovou akci,
+- formuláře a uploady,
+- checkout nebo billing,
+- admin rozhraní,
+- RSS a veřejné soubory,
+- externí embedy, pokud jsou povolené,
+- chyby v konzoli prohlížeče a serverové logy.
+
+Pokud něco rozbiješ, neopravuj to přidáním široké výjimky bez komentáře. Nejprve zjisti, jestli je problém legitimní zdroj, starý skript, neudržovaný embed nebo zbytečný externí požadavek. Někdy je nejlepší oprava bezpečnostní hlavičky odstranění závislosti, která tam nikdy neměla být.
+
+### Checklist: Bezpečnostní hlavičky privacy-first
+
+- [ ] Máme inventuru domén, skriptů, stylů, fontů, obrázků, API volání a embedů.
+- [ ] Každý externí zdroj má účel, vlastníka a privacy důvod.
+- [ ] CSP vzniká z inventury, ne kopírováním náhodné ukázky.
+- [ ] CSP se zavádí postupně a po změně se testují hlavní uživatelské cesty.
+- [ ] Reporty porušení CSP neobsahují osobní údaje ani zbytečné plné URL s citlivými parametry.
+- [ ] HSTS je zapnuté až po ověření HTTPS, redirectů, certifikátů a subdomén.
+- [ ] Referrer-Policy neposílá zbytečně plnou cestu a query string cizím doménám.
+- [ ] Permissions-Policy zakazuje schopnosti, které stránka nepotřebuje.
+- [ ] Citlivé stránky nejdou vložit do cizího rámce bez jasného důvodu.
+- [ ] Cache hlavičky odpovídají citlivosti obsahu.
+- [ ] Konfigurace hlaviček je součást release checklistu nebo provozního auditu.
+- [ ] Výjimky mají popsaný důvod a datum další revize.
+
+### Mini úkol
+
+Vyber jednu veřejnou stránku nebo SaaS aplikaci a vyplň kartu hlaviček:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Které externí skripty stránka načítá? |  |
+| Které z nich jsou nutné pro hlavní práci uživatele? |  |
+| Máme CSP? Pokud ano, které direktivy jsou příliš široké? |  |
+| Je HTTPS stabilní na hlavní doméně i subdoménách? |  |
+| Posíláme referrer s plnou URL na cizí domény? |  |
+| Které browser schopnosti stránka nepotřebuje? |  |
+| Který embed nebo externí zdroj lze odstranit? |  |
+| Kterou hlavní cestu musíme po změně otestovat? |  |
+
+Potom udělej jednu konkrétní změnu: nastav `Referrer-Policy`, vypni nepotřebnou schopnost přes `Permissions-Policy`, přidej `X-Content-Type-Options`, zaveď CSP v report-only režimu, nebo odstraň externí skript bez vlastníka. Bezpečnostní hlavičky nejsou velký projekt. Jsou pravidelná hygiena, která drží prohlížeč na straně uživatele.
+
 ## Zdroje
 
 - ICANN: Information for Domain Name Registrants - práva a odpovědnosti držitelů domén včetně správy, obnovy a převodu doménové registrace: https://www.icann.org/registrants
@@ -18976,6 +19134,7 @@ Potom udělej jednu konkrétní změnu: přidej opětovné ověření před změ
 
 ## Pracovní log
 
+- 2026-07-15: Doplněna příloha o bezpečnostních HTTP hlavičkách bez paniky a rozbitého frontendu: inventura zdrojů, postupné zavádění CSP, HSTS po ověření HTTPS, Referrer-Policy, Permissions-Policy, testování hlavních cest, checklist a mini úkol; navázáno na existující zdroje OWASP a MDN k bezpečnostním hlavičkám.
 - 2026-07-15: Doplněna příloha o SSO, passkeys a provisioningu bez identitního bludiště: autorita identity, passkeys/WebAuthn, SAML a OIDC SSO, SCIM provisioning, break-glass přístup, chudé login logy, recovery procesy, checklist a mini úkol; ověřeny a doplněny zdroje OWASP, W3C, OpenID Foundation, OASIS a IETF.
 - 2026-07-15: Doplněna příloha o týmových pozvánkách a rolích bez účtového chaosu: životní cyklus pozvánek, role podle práce, předávání vlastnictví workspace, přístupy po vlnách, externisté, MFA a recovery, pravidelný review členů, audit změn, checklist a mini úkol; ověřeny a doplněny zdroje OWASP k autorizaci a MFA.
 - 2026-07-14: Doplněna příloha o interním admin rozhraní bez datového lunaparku: interní úlohy jako základ návrhu, role podle práce, maskování dat ve výchozím stavu, opatrná impersonace, auditní stopa citlivých akcí, pravidelný úklid adminu, checklist a mini úkol.
