@@ -20276,6 +20276,197 @@ Vyber jeden produktový limit, který dnes existuje nebo se plánuje, a vyplň k
 
 Potom udělej jednu konkrétní opravu: doplň limit do pricingu, přidej upozornění před dosažením hranice, přepiš chybovou hlášku, zaveď kartu výjimky nebo odstraň limit, který nemá jasný účel. Produktové limity mají chránit práci a důvěru. Nemají být překvapení schované pod kobercem.
 
+## Příloha: Entitlement a přístup k funkcím bez produktového bludiště
+
+Entitlement je nudné slovo pro velmi praktickou věc: kdo má v produktu nárok na jakou schopnost. V malém SaaS se často začne jednoduše: free plán vidí méně funkcí, placený plán víc, admin může všechno a hotovo. Jenže časem přibydou trialy, doplňky, enterprise výjimky, role ve workspace, beta funkce, regionální omezení, dočasné kredity, migrace ze starého ceníku a zákazníci, kterým někdo něco slíbil v e-mailu.
+
+Když se entitlement neřeší vědomě, vznikne produktové bludiště. Uživatel neví, proč tlačítko nevidí. Support neví, jestli má funkci zapnout. Sales prodá balíček, který produkt neumí jasně vynutit. Vývojář přidá další `if plan === "business"` a za půl roku už nikdo neví, jestli je to pricing, oprávnění, bezpečnost nebo archeologie.
+
+Špatná otázka zní: „Do kterého plánu tuhle funkci schováme?“
+
+Lepší otázka zní: „Jakou schopnost funkce představuje, kdo ji potřebuje pro svou práci, jaký je její datový dopad a podle jakého pravidla ji produkt zapne nebo omezí?“
+
+### Funkce není totéž co schopnost
+
+Nezačínej seznamem obrazovek. Začni schopnostmi, které produkt nabízí.
+
+Příklad:
+
+| Funkce v UI | Skutečná schopnost |
+| --- | --- |
+| Tlačítko „Pozvat člena“ | Správa přístupů ve workspace |
+| Export CSV | Hromadné předání dat mimo produkt |
+| Audit log | Dohledatelnost důležitých změn |
+| API token | Strojový přístup k datům |
+| Vlastní doména | Veřejná prezentace pod identitou zákazníka |
+| SSO nastavení | Delegování identity na firemního poskytovatele |
+
+Schopnost je lepší jednotka rozhodování než konkrétní komponenta. Jedna schopnost může mít několik UI míst, API endpointů a interních akcí. Pokud zamkneš jen tlačítko, ale API endpoint zůstane otevřený, nemáš entitlement. Máš dekoraci v rozhraní.
+
+Praktické pravidlo: každá důležitá schopnost má jeden název, jeden účel a jedno místo, kde se rozhoduje o přístupu. UI, API, background job i support nástroj se mají ptát stejného pravidla. Jinak se z produktu stane soutěž, kdo najde otevřené okno.
+
+### Odděl plan, roli a stav účtu
+
+Nejčastější chaos vzniká, když se do jedné podmínky smíchají tři různé věci:
+
+- plán zákazníka,
+- role uživatele,
+- stav účtu nebo workspace.
+
+Plán říká, co organizace koupila nebo má k dispozici. Role říká, co konkrétní člověk smí dělat. Stav účtu říká, jestli je workspace aktivní, v trialu, po splatnosti, pozastavený, v migraci nebo připravený k výmazu.
+
+Tyto vrstvy se mají skládat, ne míchat do jedné magické proměnné.
+
+Příklad rozhodnutí pro export dat:
+
+1. Má workspace schopnost `data_export` ve svém plánu nebo doplňku?
+2. Má uživatel roli, která smí spouštět export?
+3. Je workspace ve stavu, kdy export dává smysl?
+4. Nevyžaduje tento konkrétní export další potvrzení, limit nebo auditní stopu?
+
+Teprve kombinace odpoví, jestli akce proběhne. Když export selže, produkt může vysvětlit proč: „Tento plán export neobsahuje“, „Nemáš roli pro export“, „Workspace je pozastavený“, nebo „Tento typ exportu vyžaduje opětovné ověření“. To je mnohem lepší než univerzální „Access denied“. To umí zkazit náladu i člověku, který už kávu měl.
+
+### Entitlement mapa patří do produktu i do týmu
+
+Udržuj jednoduchou mapu schopností. Nemusí to být enterprise katalog za tři měsíce práce. Stačí tabulka, kterou tým opravdu používá.
+
+| Schopnost | Účel | Plány/doplňky | Potřebná role | Datové riziko | Poznámka pro support |
+| --- | --- | --- | --- | --- | --- |
+| `invite_members` | Přidání lidí do workspace | Team+ | Owner/Admin | střední | U externistů doporučit expiraci přístupu |
+| `bulk_export` | Stažení většího objemu dat | Business+ | Owner/Admin | vyšší | Vysvětlit rozsah a expiraci souboru |
+| `api_tokens` | Integrace přes API | Business+ nebo doplněk | Admin/Developer | vyšší | Tokeny mají scopy a expiraci |
+| `audit_log_view` | Kontrola důležitých změn | Business+ | Owner/Admin/Security | střední | Neobsahuje celé technické logy |
+
+Tato mapa pomáhá při pricingu, návrhu UI, dokumentaci, supportu i testování. Když někdo navrhne novou funkci, otázka nezní jen „kam ji dáme v menu“. Zní: „Jaká schopnost to je, kdo ji smí použít, co tím může změnit a co se má stát při omezení?“
+
+Codyho komentář: Entitlement mapa je jako inventář pojistek v domě. Není sexy. Ale když zhasne část produktu, je lepší vědět, která páčka co ovládá, než stát ve tmě a filozofovat nad pricingem.
+
+### UI má vysvětlovat, ne jen zamykat
+
+Existují tři běžné způsoby, jak ukázat nedostupnou funkci:
+
+- funkci úplně skrýt,
+- ukázat ji jako zamčenou,
+- nechat ji dostupnou, ale zastavit akci při použití.
+
+Žádný způsob není univerzálně nejlepší.
+
+Skrývání je vhodné tam, kde by funkce uživatele jen mátla nebo kde ji kvůli roli vůbec nemá znát. Zamčený stav je vhodný tam, kde pomáhá pochopit hodnotu vyššího plánu nebo doplňku. Zastavení při použití dává smysl u akcí, kde se dostupnost mění podle aktuálního stavu: třeba limit, pozastavená platba, dočasně vypnutá integrace nebo nutné ověření.
+
+Dobrý zamčený stav odpovídá na tři otázky:
+
+1. Proč je funkce nedostupná?
+2. Kdo s tím může něco udělat?
+3. Jaká je férová další cesta?
+
+Příklad:
+
+„Hromadný export je dostupný v plánu Business. Pokud ho potřebujete kvůli jednorázové migraci, vlastník workspace může požádat o dočasné zapnutí. Exporty jsou auditované a odkazy expirují.“
+
+To je lepší než „Upgrade now“. Ano, kratší text se líp vejde do tlačítka. Ne, nemusí to znamenat, že je lepší.
+
+### Beta, doplňky a výjimky drž mimo hlavní chaos
+
+Vedle standardních plánů často existují dočasné přístupy:
+
+- beta funkce pro vybrané zákazníky,
+- placené doplňky,
+- jednorázové migrační výjimky,
+- interní demo přístupy,
+- staré grandfathered plány,
+- kompenzace po incidentu,
+- pilotní zapnutí funkce před podpisem smlouvy.
+
+Každý z těchto přístupů má mít důvod, vlastníka a konec. Jinak se z něj stane tiché pravidlo, které jednou rozbije billing, support nebo důvěru zákazníka.
+
+Dobrá karta dočasného entitlementu:
+
+| Pole | Co zapsat |
+| --- | --- |
+| Workspace | Koho se týká |
+| Schopnost | Co se zapíná nebo mění |
+| Důvod | Proč výjimka existuje |
+| Vlastník | Kdo ji schválil |
+| Začátek | Od kdy platí |
+| Konec nebo revize | Kdy se vypne, prodlouží nebo převede do plánu |
+| Datový dopad | Jaká data nebo akce navíc umožňuje |
+| Komunikace | Co ví zákazník a co ví support |
+
+Bez data konce nebo revize je výjimka dluh. A dluh v entitlements je zákeřný, protože nevypadá jako bug. Vypadá jako „u tohohle zákazníka to tak nějak historicky funguje“. Technicky přesné, provozně podezřelé.
+
+### Testuj rozhodovací matici, ne jen šťastnou cestu
+
+Entitlement chyby nejsou vždy vidět ve vizuálním QA. Tlačítko může být správně šedé, ale API akce pořád projde. Nebo admin vidí funkci v UI, ale background job ji odmítne. Nebo zákazník po downgradu přijde o možnost exportu dat v okamžiku, kdy ji nejvíc potřebuje.
+
+Testovací scénáře piš jako kombinace:
+
+- plán,
+- role,
+- stav workspace,
+- stav limitu,
+- typ dat nebo akce,
+- kanál použití: UI, API, automatizace, support nástroj.
+
+Příklad:
+
+| Scénář | Očekávání |
+| --- | --- |
+| Owner v Team plánu chce běžný export | povoleno, pokud je export součástí plánu |
+| Member v Business plánu chce hromadný export | zamítnuto kvůli roli |
+| Admin po downgradu chce stáhnout vlastní data | nabídnout základní export nebo jasný postup |
+| API token bez scope chce číst billing | zamítnuto bez úniku detailů |
+| Workspace po splatnosti chce zobrazit audit log | podle pravidel účtu, ale nezablokovat kritické bezpečnostní informace bez rozmyslu |
+
+U každého zamítnutí testuj i text. Chybová zpráva nemá prozradit interní pravidla, která uživatel nepotřebuje znát, ale má dát smysluplnou další cestu. „Nemáš oprávnění“ je někdy bezpečné. „Nemáš oprávnění, protože interní feature flag `enterprise_export_legacy` je vypnutý“ je malý dárek pro budoucí incident.
+
+### Privacy-first pravidlo: schopnost navíc neznamená data navíc
+
+Vyšší plán nebo doplněk často přidává větší kontrolu: audit, export, API, SSO, delší historii, pokročilé role. To neznamená, že produkt má automaticky sbírat víc osobních údajů.
+
+Při návrhu nové placené schopnosti se ptej:
+
+- Potřebujeme pro ni nová data, nebo jen nový pohled na existující data?
+- Jde ji zapnout bez třetího trackeru, externího pixelu nebo zbytečné integrace?
+- Má zákazník vidět, co schopnost zpřístupní a komu?
+- Umíme schopnost vypnout bez zanechání osiřelých dat?
+- Je základní kontrola nad vlastními daty dostupná i bez drahého plánu?
+
+Dobrá placená schopnost přidává hodnotu, ne datový hlad. Například pokročilý audit log může přidat lepší filtrování, export a delší retenci. Nemusí začít ukládat celé texty zpráv, IP adresy ve všech přehledech a klikací historii každého uživatele. Více kontroly není totéž co více sledování.
+
+### Checklist: Entitlement privacy-first
+
+- [ ] Důležité funkce jsou popsané jako schopnosti, ne jen jako UI prvky.
+- [ ] Každá schopnost má účel, vlastníka a jedno místo rozhodování o přístupu.
+- [ ] Produkt odděluje plán, roli uživatele a stav workspace.
+- [ ] UI, API, background joby i support nástroje používají stejnou logiku přístupu.
+- [ ] Zamčené nebo nedostupné funkce vysvětlují důvod a další férový krok.
+- [ ] Základní export, výmaz a kontrola nad vlastními daty nejsou schované jako luxusní doplněk.
+- [ ] Beta přístupy, výjimky a doplňky mají důvod, vlastníka a datum revize.
+- [ ] Po downgradu je jasné, co zůstane čitelné, co se vypne a co půjde exportovat.
+- [ ] Testy pokrývají kombinace plánů, rolí, stavů účtu, limitů a kanálů použití.
+- [ ] Chybové zprávy neprozrazují interní feature flagy, názvy plánů mimo kontext ani citlivé detaily.
+- [ ] Support má mapu schopností, aby nemusel hádat, co komu patří.
+- [ ] Nové placené schopnosti nepřidávají zbytečný sběr osobních údajů.
+
+### Mini úkol
+
+Vyber jednu schopnost v produktu a vyplň entitlement kartu:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jak se schopnost jmenuje? |  |
+| Jakou práci uživateli umožňuje? |  |
+| Ve kterých plánech nebo doplňcích je dostupná? |  |
+| Jaká role ji smí použít? |  |
+| Jaké stavy workspace ji blokují nebo omezují? |  |
+| Funguje stejně přes UI, API a interní nástroje? |  |
+| Co uvidí uživatel, když ji nemá dostupnou? |  |
+| Jaké osobní údaje kvůli ní nesmíme začít sbírat? |  |
+| Kdo smí schválit dočasnou výjimku? |  |
+| Jak poznáme, že starou výjimku můžeme zavřít? |  |
+
+Potom udělej jednu konkrétní opravu: sjednoť kontrolu přístupu mezi UI a API, přepiš zamčený stav na lidské vysvětlení, vytvoř mapu schopností, doplň datum revize k výjimkám nebo napiš test pro downgrade. Entitlement není jen billingová logika. Je to smlouva mezi produktem, zákazníkem a týmem o tom, co je možné, proč a za jakých podmínek.
+
 ## Zdroje
 
 - ICANN: Information for Domain Name Registrants - práva a odpovědnosti držitelů domén včetně správy, obnovy a převodu doménové registrace: https://www.icann.org/registrants
@@ -20417,6 +20608,7 @@ Potom udělej jednu konkrétní opravu: doplň limit do pricingu, přidej upozor
 
 ## Pracovní log
 
+- 2026-07-15: Doplněna příloha o entitlementu a přístupu k funkcím bez produktového bludiště: rozlišení schopností od UI prvků, oddělení plánu, role a stavu workspace, mapa schopností, vysvětlení zamčených funkcí, dočasné výjimky, testování rozhodovací matice, privacy-first kontrola placených schopností, checklist a mini úkol.
 - 2026-07-15: Doplněna příloha o produktových limitech a fair use bez skrytých pastí: účel limitů, soft a tvrdé hranice, komunikace před bolestí, fair use podle dopadu, privacy-first kontrola limitů, evidence dočasných výjimek, checklist a mini úkol.
 - 2026-07-15: Doplněna příloha o exportech a importech dat bez ručního chaosu: účelové typy exportů, export jako produktový tok, stabilní formáty, importní validace a mapování, zakázaná data, krátká životnost dočasných souborů, opravitelné stavy selhání, checklist a mini úkol; navázáno na existující zdroje k přenositelnosti dat, uploadům, API bezpečnosti a principům GDPR.
 - 2026-07-15: Doplněna příloha o veřejném API a developer experience bez datového průvanu: návrh API od integračního use casu, OpenAPI kontrakt, konkrétní scopy, životní cyklus tokenů, bezpečné chybové odpovědi, rate limity, webhooky/exporty, sandbox, verze a deprekační pravidla, checklist a mini úkol; ověřeny a doplněny zdroje OpenAPI 3.2.0, OAuth 2.0 Security Best Current Practice RFC 9700 a DPoP RFC 9449.
