@@ -21443,6 +21443,150 @@ Vyber jeden report, podle kterého dnes rozhodujete o marketingu nebo obsahu. Vy
 
 Potom udělej jednu úpravu: zkrať životnost atribuční cookie, odeber osobní údaj z konverzního payloadu, přepiš report z počtu kliků na kvalitu poptávek, nebo zdokumentuj chování při odmítnutí cookies. Dobrá atribuce není ta, která ví nejvíc. Dobrá atribuce je ta, podle které uděláš lepší rozhodnutí bez zbytečného sledování.
 
+## Příloha: Feedback widget bez datového vysavače
+
+Feedback widget vypadá jako drobnost. Malé tlačítko v rohu aplikace, formulář po zavření modalu, otázka po neúspěšném importu nebo krátká anketa na dokumentaci. Jenže přesně takové drobnosti často potichu sbírají víc dat, než tým potřebuje: URL s query parametry, screenshot celé obrazovky, e-mail, uživatelské ID, pracovní poznámku, název zákazníka, browser fingerprint a volný text, do kterého člověk vloží cokoliv.
+
+Privacy-first feedback nezačíná otázkou „jak získat co nejvíc odpovědí“. Začíná otázkou:
+
+„Jaký typ zpětné vazby potřebujeme pro nejbližší rozhodnutí a jak ho získáme s nejmenším množstvím dat?“
+
+Feedback má být produktový kompas, ne druhá analytika převlečená za otázku. Když chceš vědět, proč lidé nerozumí prázdnému stavu, nepotřebuješ sledovat celou session. Stačí se zeptat ve správném okamžiku a dát člověku bezpečný prostor napsat, co chybí.
+
+### Rozliš typ zpětné vazby
+
+Nejdřív si ujasni, co vlastně sbíráš. Různé typy feedbacku mají jiný účel, vlastníka i retenci.
+
+| Typ feedbacku | Příklad | K čemu slouží | Co nesbírat automaticky |
+| --- | --- | --- | --- |
+| Blokující problém | „Import nepoznal sloupec s datem.“ | oprava toku nebo chyby | celý soubor, pokud stačí ukázkový řádek |
+| Nejasnost | „Nevím, co znamená role Editor.“ | lepší copy, dokumentace nebo onboarding | kompletní historii účtu |
+| Nápad | „Hodila by se integrace s fakturací.“ | roadmap vstup | osobní profil hlasujícího bez důvodu |
+| Spokojenost | „Tahle změna pomohla.“ | potvrzení hodnoty | trvalý identifikátor, pokud stačí agregace |
+| Odmítnutí | „Teď to nepotřebuji.“ | zlepšení nabídky nebo timing | tlak na detailní vysvětlení |
+
+Když feedback widget míchá všechno dohromady, skončíš s hromadou textu bez rozhodnutí. Lepší je mít jednoduché kategorie a každé odpovědi přiřadit další krok: opravit, vysvětlit, ověřit, odložit, zavřít.
+
+### Ptej se v kontextu, ale neposílej celý kontext
+
+Kontext je užitečný. Tým potřebuje vědět, na které obrazovce člověk byl, jaký krok se snažil dokončit a co se stalo. Ale „kontext“ neznamená nahrát celou obrazovku, všechny DOM prvky, lokální úložiště, posledních třicet eventů a interní identifikátory, které nikdo nebude číst.
+
+Praktické minimum:
+
+- název obrazovky nebo workflow,
+- typ účtu nebo plán, pokud je potřeba pro rozhodnutí,
+- čas odeslání,
+- krátká kategorie feedbacku,
+- volný text od uživatele,
+- volitelný kontakt, pokud člověk chce odpověď.
+
+Opatrně s těmito daty:
+
+- URL s query parametry,
+- screenshoty obsahující zákaznická data,
+- názvy firem, klientů, projektů a dokumentů,
+- celé payloady chyb,
+- e-mail jako povinná součást anonymního feedbacku,
+- interní ID, podle kterých jde snadno propojit zpětnou vazbu s konkrétním člověkem.
+
+Codyho komentář: Když feedback formulář potřebuje víc polí než daňové přiznání, není to výzkum. Je to administrativní překážka s tlačítkem „Odeslat“.
+
+### Volný text potřebuje jasné hranice
+
+Volný text je cenný, protože lidé popíšou problém vlastními slovy. Je zároveň rizikový, protože do něj vloží osobní údaje, tajné informace, interní poznámky nebo data třetích osob. Proto mu dej krátké instrukce.
+
+Dobré mikrotexty:
+
+- „Neposílejte hesla, tokeny ani osobní údaje zákazníků.“
+- „Pokud jde o konkrétní účet, napište prosím jen název workspace nebo číslo požadavku.“
+- „Chcete-li odpověď, doplňte e-mail. Jinak lze feedback poslat bez kontaktu.“
+- „Screenshot přiložte jen po začernění osobních a obchodně citlivých údajů.“
+
+Tento mikrotext není alibismus. Je to pomoc člověku, který chce rychle napsat problém a nemyslí na datovou hygienu. Produkt má myslet s ním.
+
+### Feedback nepatří automaticky do marketingu
+
+Zpětná vazba může obsahovat krásnou větu, která by se hodila na web. To neznamená, že ji můžeš hned použít jako referenci. Interní feedback, support poznámka, odpověď v anketě a veřejná citace jsou různé věci.
+
+Praktické pravidlo:
+
+- Do backlogu přepisuj anonymizovaný vzor problému.
+- Do dokumentace používej zobecněný scénář.
+- Do marketingu dávej jen citace, které jsou výslovně schválené pro veřejné použití.
+- Pokud chceš použít jméno, firmu, logo nebo přesný screenshot, udělej z toho samostatný souhlas a schválení.
+
+Příklad převodu:
+
+| Surový feedback | Produktový insight |
+| --- | --- |
+| „U klienta Novák & syn se nám import faktur zasekl na řádku 214.“ | Import faktur potřebuje u chyb ukázat konkrétní řádek a opravitelný důvod selhání. |
+| „Jana z účetního neví, proč nemůže pozvat kolegu.“ | Role s omezeným oprávněním potřebuje vysvětlit, proč pozvánka není dostupná a kdo ji může poslat. |
+| „Tohle nám ušetřilo dvě hodiny týdně.“ | Změna má signál hodnoty; pro veřejnou citaci je potřeba samostatné schválení. |
+
+### Triage je důležitější než počet hlasů
+
+Hlasování na nápady může být užitečné, ale nesmí nahradit produktové rozhodování. Nejvíc hlasů často dostane viditelná drobnost, zatímco zásadní problém v onboardingovém toku trápí méně lidí, ale blokuje hodnotu.
+
+U každého feedbacku si napiš:
+
+| Otázka | Proč |
+| --- | --- |
+| Týká se hlavního segmentu? | aby roadmapu neřídil náhodný okraj |
+| Blokuje první nebo opakovanou hodnotu? | aby tým řešil dopad, ne jen hluk |
+| Opakuje se v supportu, sales nebo analytice? | aby jeden hlasitý případ nevypadal jako trend |
+| Zvyšuje privacy, bezpečnostní nebo provozní riziko? | aby drobná prosba neotevřela velký problém |
+| Jde ověřit menší změnou? | aby nápad nebobtnal do projektu |
+
+Počet hlasů je jeden signál. Ne verdikt. Produktový tým má rozhodnout, co pomůže správným lidem dosáhnout hodnoty a co jen přidá další tlačítko do už tak přeplněného rozhraní.
+
+### Uzavírej smyčku
+
+Feedback bez odpovědi působí jako černá díra. Nemusíš odpovídat na každý anonymní podnět, ale u důležitých vstupů je fér ukázat, co se stalo.
+
+Možnosti uzavření:
+
+- krátká odpověď člověku, který nechal kontakt,
+- veřejná release poznámka,
+- aktualizace dokumentace,
+- komentář v interním backlogu,
+- měsíční shrnutí „co jsme podle feedbacku změnili“,
+- označení nápadu jako odložený s důvodem.
+
+Privacy-first uzavření neznamená zveřejnit původní text. Znamená ukázat výsledek bez zbytečného odhalení původce a jeho dat.
+
+### Checklist: Feedback privacy-first
+
+- [ ] Každý feedback widget má jasný účel a vlastníka.
+- [ ] Formulář sbírá jen kontext potřebný pro rozhodnutí.
+- [ ] Kontakt je povinný jen tam, kde je opravdu potřeba odpověď nebo řešení účtu.
+- [ ] Volný text má instrukci, aby člověk neposílal citlivá data.
+- [ ] Screenshoty a přílohy mají pravidla začernění a retence.
+- [ ] URL, query parametry a technické kontexty se filtrují před uložením.
+- [ ] Produktové insighty se anonymizují před přesunem do backlogu.
+- [ ] Marketingové použití citací, loga nebo screenshotu vyžaduje samostatné schválení.
+- [ ] Hlasování na nápady je jen jeden signál, ne automatická priorita.
+- [ ] Feedback má stav: nový, ověřit, naplánovat, odložit, hotovo, zavřeno.
+- [ ] Tým pravidelně maže staré exporty feedbacku a nepotřebné přílohy.
+- [ ] U důležitých podnětů existuje způsob, jak uzavřít smyčku.
+
+### Mini úkol
+
+Vyber jeden formulář, widget nebo proces, kterým dnes sbíráš zpětnou vazbu. Vyplň kartu:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jaké rozhodnutí má feedback podporovat? |  |
+| Kdo je vlastník tohoto feedbacku? |  |
+| Která pole jsou nutná? |  |
+| Která pole jsou jen zvědavost? |  |
+| Posílá se URL, screenshot nebo technický kontext? |  |
+| Může volný text obsahovat citlivá data? |  |
+| Jak dlouho feedback a přílohy držíme? |  |
+| Jak se feedback anonymizuje pro backlog? |  |
+| Jak uzavíráme smyčku s uživatelem? |  |
+
+Potom udělej jednu konkrétní změnu: zkrať feedback formulář, udělej kontakt volitelný, přidej mikrotext k citlivým datům, filtruj query parametry, nastav retenci screenshotů nebo přepiš veřejný nápad na anonymizovaný produktový insight. Feedback má zlepšovat produkt, ne vyrábět další sklad dat.
+
 ## Zdroje
 
 - ICANN: Information for Domain Name Registrants - práva a odpovědnosti držitelů domén včetně správy, obnovy a převodu doménové registrace: https://www.icann.org/registrants
@@ -21592,6 +21736,7 @@ Potom udělej jednu úpravu: zkrať životnost atribuční cookie, odeber osobn�
 
 ## Pracovní log
 
+- 2026-07-15: Doplněna příloha o feedback widgetu bez datového vysavače: rozlišení typů zpětné vazby, sběr minimálního kontextu, hranice volného textu a screenshotů, oddělení feedbacku od marketingu, triage podle dopadu místo pouhého počtu hlasů, uzavírání smyčky, checklist a mini úkol.
 - 2026-07-15: Doplněna příloha o atribuci a konverzích bez skrytého sledovacího profilu: rozlišení zdroje, relace a obchodního výsledku, ukládání zdroje jen při skutečné práci, opatrné používání cookies a server-side měření, respektování preference soukromí, checklist a mini úkol; ověřeny a doplněny zdroje MDN k `Set-Cookie` a W3C ke Global Privacy Control.
 - 2026-07-15: Doplněna příloha o kampaňových odkazech a UTM bez úniku dat v URL: URL parametr jako datový tok, allowlist povolených parametrů, zákaz osobních a obchodně citlivých hodnot v query stringu, čištění parametrů po příchodu, vědomé nastavení `Referrer-Policy`, evidence krátkých odkazů, agregované vyhodnocování kampaní, checklist a mini úkol; navázáno na existující zdroje MDN k `URLSearchParams`, `Referer` a `Referrer-Policy`.
 - 2026-07-15: Doplněna příloha o uploadech souborů bez datové miny v příloze: rozlišení typů uploadů, účel a retence souborů, bezpečný mikrotext pro support přílohy, allowlist validace, oddělení importního zdrojového souboru od výsledných dat, řízení přístupů ke stažení, checklist a mini úkol; navázáno na existující zdroj OWASP File Upload Cheat Sheet.
