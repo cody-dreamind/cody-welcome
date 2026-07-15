@@ -21157,6 +21157,153 @@ Vyber jeden upload ve webu nebo SaaS produktu a vyplň kartu:
 
 Potom udělej jednu konkrétní opravu: přidej instrukci k začernění screenshotů, zmenši povolené typy souborů, nastav expiraci dočasných importů, omez stahování příloh podle role, nebo smaž staré uploady bez vlastníka. Upload je malý formulářový detail jen do chvíle, než se v něm začne hromadit všechno, co nikdo nechtěl řešit.
 
+## Příloha: Kampaňové odkazy a UTM bez úniku dat v URL
+
+Kampaňový odkaz vypadá nevinně. Pár parametrů za otazníkem, klik, návštěva, hotovo. Jenže URL není soukromý zápisník marketingu. Může skončit v serverových logách, analytice, supportním screenshotu, CRM poznámce, historii prohlížeče, přeposlaném e-mailu nebo v `Referer` hlavičce při odchodu na jiný web. MDN k `Referer` popisuje, že může nést origin, cestu i query string podle nastavené referrer policy. To z URL dělá datový tok, ne jen měřicí pomůcku.
+
+Privacy-first pravidlo je jednoduché: do kampaně dávej jen takové parametry, které bys bez studu ukázal v interním reportu, v logu a v odkazu přeposlaném zákazníkovi. Pokud by parametr prozradil e-mail, firmu, cenu, stav leadu, interní segment nebo citlivý zájem, do URL nepatří.
+
+### URL parametr je produktové rozhodnutí
+
+UTM parametry mají pomáhat odpovědět na omezený počet rozhodnutí:
+
+- Který kanál přivedl relevantní návštěvy?
+- Která kampaň stojí za další práci?
+- Jaký obsah pomohl člověku udělat další krok?
+- Které partnerství nebo přímý odkaz má smysl zopakovat?
+
+Nemají nahrazovat CRM, osobní profil ani kompletní historii kontaktu. Jakmile do URL začneš dávat identifikátor člověka, obchodní stav nebo detailní segmentaci, z jednoduchého měření je přenos osobních nebo obchodně citlivých dat na místa, která se špatně kontrolují.
+
+Dobrá kampaňová URL:
+
+`/pricing?utm_source=newsletter&utm_medium=email&utm_campaign=pricing-guide-2026-07`
+
+Špatná kampaňová URL:
+
+`/pricing?email=jana@example.com&company=acme&plan=enterprise-hot-lead&utm_campaign=retargeting`
+
+První odkaz říká, odkud přišla návštěva a proč. Druhý odkaz dělá z adresního řádku malý únikový kanál. Gratuluji, právě jsme vytvořili analytiku s vedlejšími účinky.
+
+### Vytvoř allowlist parametrů
+
+Kampaňové parametry mají mít slovník stejně jako eventy v analytice. Bez slovníku vznikne směs `utm_source`, `source`, `ref`, `campaignName`, `utm-campaign` a dalších kreativních výkřiků. Kreativita je fajn v titulku. V query stringu je to budoucí úklid.
+
+Praktický allowlist:
+
+| Parametr | Povolený účel | Příklad |
+| --- | --- | --- |
+| `utm_source` | odkud návštěva přišla | `rss`, `newsletter`, `partner-acme`, `linkedin` |
+| `utm_medium` | typ kanálu | `email`, `organic-social`, `referral`, `cpc` |
+| `utm_campaign` | název kampaně nebo tématu | `pricing-guide-2026-07` |
+| `utm_content` | varianta odkazu, pokud ji opravdu porovnáváš | `footer-link`, `cta-top` |
+| `ref` | interní krátký odkaz nebo partner, pokud nechceš UTM | `partner-acme` |
+
+Zakázané hodnoty:
+
+- e-mail, telefon, celé jméno nebo identifikátor konkrétní osoby,
+- název zákazníka, pokud nejde o veřejné partnerství,
+- obchodní stav leadu,
+- interní poznámky sales týmu,
+- citlivé segmenty,
+- tokeny, kupony vázané na osobu nebo jednorázové přístupové údaje.
+
+Pokud potřebuješ spojit návštěvu s existujícím leadem, dělej to přes kontrolovaný serverový tok, přihlášení nebo CRM proces, ne přes čitelný parametr v URL. URL se ráda šíří. To je její práce. Nesvěřuj jí tajemství.
+
+### Parametry po příchodu uklízej
+
+Landing page často nepotřebuje držet UTM parametry v URL po celou návštěvu. Jakmile si systém agregovaně zapíše zdroj, můžeš URL normalizovat pomocí History API, přesměrování nebo serverové kanonizace. Cílem není schovat měření před člověkem. Cílem je omezit zbytečné kopírování parametrů dál.
+
+Užitečné pravidlo:
+
+- Zapiš jen povolené parametry.
+- Neznámé parametry ignoruj nebo odstraň.
+- Citlivě vypadající hodnoty neukládej.
+- Po načtení stránky zvaž očištění URL v adresním řádku.
+- Canonical URL drž bez kampaně.
+- Interní odkazy na webu generuj bez přenášení UTM parametrů dál.
+
+Technicky je dobré parsovat query string přes strukturované API, například `URLSearchParams`, ne ručním dělením řetězce podle `&` a `=`. Ruční parsování je místo, kde se rády rodí malé chyby s velkým dosahem.
+
+### Referrer-Policy nastav vědomě
+
+Když návštěvník odejde z tvé stránky na jiný web, prohlížeč může poslat informaci o předchozí URL v `Referer` hlavičce. `Referrer-Policy` určuje, kolik této informace se posílá. Pro privacy-first web bývá rozumné neposílat cizím webům celou cestu a query string.
+
+Praktické výchozí nastavení pro mnoho webů:
+
+`Referrer-Policy: strict-origin-when-cross-origin`
+
+Toto nastavení ponechá užitečný kontext pro navigaci v rámci stejného webu a při přechodu na jiný origin posílá méně detailů. U citlivějších částí produktu může dávat smysl přísnější politika, například `no-referrer`. Důležité je otestovat hlavní cesty, platby, přihlášení, dokumentaci a integrace, protože některé starší nástroje se na referrer historicky spoléhaly víc, než by měly.
+
+Codyho komentář: Když nástroj potřebuje celý URL příběh uživatele včetně query stringu jen proto, aby poznal, že přišel z článku, není to analytika. Je to zvědavost s dashboardem.
+
+### Krátké odkazy nepoužívej jako černou skříňku
+
+Krátké odkazy jsou praktické v prezentacích, tisku, podcastu nebo partnerské komunikaci. U privacy-first provozu ale musí být jasné:
+
+- kdo krátký odkaz provozuje,
+- jak dlouho se drží klikací logy,
+- jestli se do odkazu ukládají osobní nebo citlivé parametry,
+- kam odkaz vede po změně kampaně,
+- kdo může cílovou URL upravit.
+
+Pokud používáš vlastní doménu pro krátké odkazy, drž jednoduchý registr:
+
+| Krátký odkaz | Cíl | Účel | Vlastník | Expirace |
+| --- | --- | --- | --- | --- |
+| `/go/pricing-guide` | `/pricing` | článek o cenách | Marketing | 2026-09-30 |
+| `/go/partner-acme` | `/partneri/acme` | veřejné partnerství | Sales | 2026-12-31 |
+
+Nepřidávej krátké odkazy jen proto, aby každá věta vypadala jako kampaň. Čitelná přímá URL je často lepší. Krátký odkaz má smysl tam, kde pomáhá člověku, ne jen reportu.
+
+### Měř výsledek, ne každé přelepení odkazu
+
+U marketingu bez agresivního trackingu stačí často menší sada signálů:
+
+- návštěvy cílové stránky podle agregovaného zdroje,
+- klik na hlavní další krok,
+- dokončený formulář nebo registrace,
+- kvalita poptávky v CRM,
+- ruční poznámka, kde člověk o nabídce slyšel,
+- počet přímých odpovědí nebo objednávek po kampani.
+
+Nesnaž se dokázat absolutní atribuci každého rozhodnutí. U delšího B2B nákupu to stejně často nejde férově. Lepší je mít čitelné kampaně, jasné další kroky a pravidelný review rituál:
+
+„Které tři kampaně přinesly za poslední měsíc nejlepší rozhodovací signály a co podle toho uděláme dál?“
+
+Tohle je mnohem užitečnější než nekonečný hon za tím, kdo se před šesti týdny dotkl kterého odkazu v patičce. Ano, i patička má city. Ne, nemusíme je všechny měřit.
+
+### Checklist: Kampaňové odkazy privacy-first
+
+- [ ] Existuje allowlist povolených URL parametrů.
+- [ ] Do URL se nikdy nedává e-mail, telefon, jméno, stav leadu ani interní segment.
+- [ ] Kampaňové názvy jsou čitelné a neobsahují citlivé informace.
+- [ ] Neznámé parametry se ignorují, odstraňují nebo se neukládají.
+- [ ] Landing page po zápisu zdroje nepřenáší UTM parametry zbytečně dál.
+- [ ] Canonical URL je bez kampaňových parametrů.
+- [ ] Interní odkazy nepřilepují původní UTM na další stránky.
+- [ ] `Referrer-Policy` je nastavená a otestovaná na hlavních tocích.
+- [ ] Krátké odkazy mají vlastníka, účel, cílovou URL a expiraci.
+- [ ] Kampaňové reporty pracují s agregovanými signály a kvalitou výsledku.
+- [ ] Support a sales vědí, že URL ze screenshotů a přeposlaných zpráv může obsahovat data.
+
+### Mini úkol
+
+Vyber jednu aktivní nebo plánovanou kampaň a vyplň kartu:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jaká cílová stránka má být zdrojem pravdy? |  |
+| Jaké rozhodnutí má kampaň ověřit? |  |
+| Které UTM parametry opravdu potřebujeme? |  |
+| Obsahuje některá hodnota osobní nebo obchodně citlivý údaj? |  |
+| Co se stane s neznámými parametry? |  |
+| Bude URL po příchodu očištěná? |  |
+| Jaká `Referrer-Policy` platí pro stránku? |  |
+| Kde budou agregované výsledky kampaně? |  |
+| Jak poznáme, že kampaň pomohla, bez sledování jednotlivce? |  |
+
+Potom udělej jednu opravu: zkrať názvy kampaní, odstraň osobní údaje z parametrů, nastav allowlist, přidej čištění URL po načtení, nebo omez předávání referreru ven z webu. Kampaňový odkaz má být směrovka, ne kapsa plná údajů, která se rozsype při každém přeposlání.
+
 ## Zdroje
 
 - ICANN: Information for Domain Name Registrants - práva a odpovědnosti držitelů domén včetně správy, obnovy a převodu doménové registrace: https://www.icann.org/registrants
@@ -21304,6 +21451,7 @@ Potom udělej jednu konkrétní opravu: přidej instrukci k začernění screens
 
 ## Pracovní log
 
+- 2026-07-15: Doplněna příloha o kampaňových odkazech a UTM bez úniku dat v URL: URL parametr jako datový tok, allowlist povolených parametrů, zákaz osobních a obchodně citlivých hodnot v query stringu, čištění parametrů po příchodu, vědomé nastavení `Referrer-Policy`, evidence krátkých odkazů, agregované vyhodnocování kampaní, checklist a mini úkol; navázáno na existující zdroje MDN k `URLSearchParams`, `Referer` a `Referrer-Policy`.
 - 2026-07-15: Doplněna příloha o uploadech souborů bez datové miny v příloze: rozlišení typů uploadů, účel a retence souborů, bezpečný mikrotext pro support přílohy, allowlist validace, oddělení importního zdrojového souboru od výsledných dat, řízení přístupů ke stažení, checklist a mini úkol; navázáno na existující zdroj OWASP File Upload Cheat Sheet.
 - 2026-07-15: Doplněna příloha o externích embedech bez cizího kódu na každé stránce: inventář map, videí, chatů, kalendářů, sociálních postů a dalších widgetů, načítání až po záměru člověka, omezení iframe přes `sandbox`, `allow`, `loading` a `referrerpolicy`, dostupnost obsahu bez embedu, opatrné používání chat widgetů a sociálních embedů, checklist a mini úkol; ověřen a doplněn zdroj MDN k elementu `iframe`.
 - 2026-07-15: Doplněna příloha o browserových oprávněních bez vyskakovacího přepadu: kdy žádat o polohu, kameru, mikrofon, notifikace a schránku, jak vysvětlit užitek před promptem, navrhnout fallback pro odmítnutí, držet rozsah oprávnění co nejužší, oddělit notifikace od marketingu, logovat jen rozhodovací signály, checklist a mini úkol; ověřeny a doplněny zdroje MDN k Permissions API, Geolocation API, getUserMedia, Notifications API a Clipboard API.
