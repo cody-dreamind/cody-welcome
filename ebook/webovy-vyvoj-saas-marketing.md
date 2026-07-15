@@ -19159,6 +19159,207 @@ Vyber jednu citlivou část produktu, třeba role členů týmu, API klíče, bi
 
 Potom udělej jednu konkrétní změnu: přidej auditní událost pro změnu role, odeber z logu celý JSON payload, vytvoř samostatné oprávnění pro export auditní stopy, zkrať retenci debug logů, nebo napiš krátkou nápovědu k poli „důvod změny“. Auditní stopa má zvyšovat důvěru. Když se z ní stane další nekonečný sklad dat, minula cíl.
 
+## Příloha: AI agenti a MCP nástroje bez oprávnění na celý svět
+
+AI agent v produktu nebo interním workflow není jen chytřejší chatbot. Jakmile umí číst data, volat API, měnit záznamy, posílat e-maily, otevírat tickety nebo spouštět deploy, stává se provozní integrací s vlastním rizikem. To, že má milý textový výstup, z něj nedělá méně citlivý systém. Občas právě naopak: člověk mu věří rychleji, než by věřil obyčejnému skriptu.
+
+Špatná otázka zní: „Co všechno agentovi připojíme, aby byl užitečný?“
+
+Lepší otázka zní: „Jakou konkrétní práci má agent udělat, jaká data k tomu opravdu potřebuje a kde musí člověk rozhodnutí potvrdit?“
+
+Oficiální specifikace Model Context Protocol popisuje MCP jako otevřený protokol pro propojení LLM aplikací s externími datovými zdroji a nástroji. Zároveň výslovně řeší souhlas uživatele, kontrolu nad sdílením dat, bezpečnost nástrojů a opatrnost u operací, které mohou znamenat libovolný přístup k datům nebo spuštění kódu. To je dobrý kompas i pro integrace, které MCP nepoužívají.
+
+Codyho komentář: Agent s přístupem k CRM, e-mailu, repozitáři a produkční databázi není „asistentík“. Je to nový člen týmu, který neumí nést odpovědnost. O to víc ji musí nést systém kolem něj.
+
+### Začni katalogem schopností, ne seznamem nástrojů
+
+Nejdřív popiš práci agenta lidsky. Ne „připojit Gmail, GitHub a fakturaci“, ale například:
+
+| Agentní schopnost | Práce pro uživatele | Riziko | První bezpečná verze |
+| --- | --- | --- | --- |
+| Shrnutí support ticketu | Zrychlit první orientaci supportu | únik obsahu ticketu do nevhodného nástroje | jen čtení jednoho ticketu po kliknutí člověka |
+| Návrh odpovědi zákazníkovi | Připravit text pro kontrolu | nepravdivý slib, sdílení interních detailů | draft bez odeslání |
+| Kontrola PR | Najít rizika v kódu a dokumentaci | přístup k neveřejnému kódu | read-only přístup k vybranému repozitáři |
+| Aktualizace CRM | Zapsat výsledek schůzky | špatná změna zákaznického záznamu | návrh změny před potvrzením |
+| Spuštění provozního runbooku | Zkrátit rutinní zásah | dopad na produkci | checklist a simulace, potom ruční potvrzení kroku |
+
+Tato tabulka ti pomůže odolat pokušení připojit „všechno, co jednou možná bude dobré“. Agent má mít schopnosti podle práce, ne podle toho, které konektory se hezky vyjímají v katalogu.
+
+### Rozliš čtení, návrh a akci
+
+U každé schopnosti odděl tři úrovně:
+
+- čtení: agent může získat kontext a připravit shrnutí,
+- návrh: agent může navrhnout změnu, draft nebo další krok,
+- akce: agent skutečně mění systém, posílá zprávu nebo spouští proces.
+
+Bezpečná výchozí verze je často čtení plus návrh, ne plná akce. U interního asistenta pro sales může agent přečíst poznámky z CRM a připravit follow-up. Odeslání e-mailu má potvrdit člověk. U vývojového asistenta může agent navrhnout patch. Push do hlavní větve, merge nebo deploy má mít stejné schvalování jako běžná změna od vývojáře.
+
+Praktické pravidlo:
+
+| Typ operace | Výchozí režim |
+| --- | --- |
+| Čtení veřejné dokumentace | povolit podle potřeby |
+| Čtení interních dat | omezit na konkrétní účel a rozsah |
+| Vytvoření draftu | povolit s jasným označením autora návrhu |
+| Odeslání zprávy zákazníkovi | potvrzení člověkem |
+| Změna role, billing údajů nebo integrace | silné potvrzení a auditní stopa |
+| Výmaz, export nebo produkční zásah | samostatný proces, ne tichý tool call |
+
+Pokud má agent nástroj, který kombinuje čtení a zápis, rozděl ho. `customer.read_summary` a `customer.update_status` jsou produktově bezpečnější než jeden univerzální `crm_tool`.
+
+### Scopy mají být nudně konkrétní
+
+Nejhorší oprávnění pro agenta je „admin, protože jinak to občas spadne“. To není řešení. To je budoucí incident, který si jen hledá vhodný kalendář.
+
+Dobré scopy popisují:
+
+- jaký systém se používá,
+- které objekty agent smí číst,
+- které objekty smí měnit,
+- jestli smí pracovat se soubory a přílohami,
+- jestli smí volat externí URL,
+- jestli smí ukládat nebo předávat výstup,
+- jak dlouho oprávnění platí,
+- kdo je vlastník oprávnění.
+
+Příklad pro support agenta:
+
+| Scope | Povolit? | Důvod |
+| --- | --- | --- |
+| Číst otevřený ticket po otevření operátorem | ano | nutné pro shrnutí |
+| Číst všechny tickety zákazníka | jen po potvrzení | někdy nutné pro kontext, ne výchozí |
+| Číst billing a smlouvu | ne | supportní shrnutí to běžně nepotřebuje |
+| Vytvořit draft odpovědi | ano | člověk kontroluje výstup |
+| Odeslat odpověď | ne ve výchozím režimu | riziko slibu a sdílení dat |
+| Přidat interní tag | ano, omezený seznam | nízké riziko a jasný účel |
+
+Privacy-first pointa: agent nemá být zkratka kolem existujících rolí. Má používat stejné nebo užší oprávnění než člověk, kterému pomáhá.
+
+### Tool description není bezpečnostní politika
+
+Popis nástroje je užitečný pro model. Není to hranice oprávnění. Pokud nástroj tvrdí „používej mě jen pro bezpečné dotazy“, ale technicky umí smazat databázi, máš problém v návrhu nástroje, ne v promptu.
+
+Bezpečný nástroj má:
+
+- malý a konkrétní účel,
+- validaci vstupů mimo model,
+- serverovou autorizaci podle uživatele a workspace,
+- oddělené read a write operace,
+- idempotenci tam, kde dává smysl,
+- potvrzení u rizikových akcí,
+- auditní událost u změn,
+- chudé logy bez plných promptů, tokenů a osobních údajů.
+
+Příklad špatného nástroje:
+
+`run_sql(query)`
+
+Příklad lepšího rozhraní:
+
+| Nástroj | Co dělá | Bezpečnostní hranice |
+| --- | --- | --- |
+| `customer_search_by_email` | Najde zákazníka podle přesné e-mailové adresy | vrací omezené pole, ne celý profil |
+| `ticket_summarize` | Shrne jeden ticket | ticket musí být otevřený operátorem |
+| `workspace_export_request_create` | Vytvoří žádost o export | export schvaluje admin, neběží okamžitě |
+| `role_change_draft` | Připraví návrh změny role | změnu potvrzuje oprávněný člověk |
+
+Ano, univerzální nástroj je pohodlnější. Stejně jako univerzální klíč od kanceláře, skladu a trezoru. Pohodlí není bezpečnostní argument.
+
+### Consent navrhni jako kontrolu, ne jako otravu
+
+Souhlas a potvrzení nesmí být jen dialog, který všichni mechanicky odkliknou. Musí říkat, co se stane.
+
+Dobré potvrzení před akcí obsahuje:
+
+- název akce,
+- systém, kterého se týká,
+- konkrétní objekt nebo rozsah,
+- co se změní,
+- kdo uvidí výsledek,
+- zda akce jde vrátit,
+- odkaz na detail nebo diff.
+
+Špatně:
+
+„Agent chce použít nástroj. Povolit?“
+
+Lépe:
+
+„Agent chce vytvořit draft odpovědi v ticketu #1842 pro zákazníka Acme. Draft se neodešle bez tvého potvrzení.“
+
+U rizikovější akce:
+
+„Agent chce změnit roli Jana Svobody z Editor na Admin ve workspace Acme. Změna dá přístup k exportu dat a bude zapsána do auditní stopy.“
+
+Takové potvrzení je užitečné i pro uživatele, který AI miluje. Vlastně hlavně pro něj. Nadšení má horší paměť než auditní log.
+
+### Loguj rozhodnutí, ne celý rozhovor
+
+Agentní systémy svádějí k ukládání celých promptů, odpovědí, mezikroků, tool payloadů a dokumentů „pro debug“. Jenže přesně tam bývají osobní údaje, interní poznámky, zákaznické smlouvy, tokeny, URL s citlivými parametry a obsah, který do dlouhodobého logu nepatří.
+
+Pro provoz obvykle stačí:
+
+- kdo agenta spustil,
+- jaká schopnost se použila,
+- jaký nástroj byl zavolán,
+- jaký objekt byl dotčen,
+- zda šlo o čtení, návrh nebo akci,
+- výsledek ve stavu `success`, `failed`, `cancelled`, `requires_approval`,
+- korelační ID pro detailní technický debug,
+- auditní událost u důležité změny.
+
+Celý prompt ukládej jen tehdy, když máš jasný účel, krátkou retenci, omezený přístup a víš, jak ho bezpečně smazat. U citlivých zákaznických scénářů je často lepší ukládat strukturovaný souhrn rozhodnutí než kompletní konverzaci.
+
+### Připrav agentní incident dřív než první demo
+
+Agent může udělat špatný návrh, přečíst víc dat, než měl, odeslat špatný e-mail, změnit nesprávný záznam nebo spustit akci ve špatném workspace. Tvá otázka nemá být, jestli se to někdy stane. Tvá otázka má být, jak rychle to poznáš a zastavíš.
+
+Minimum pro agentní provoz:
+
+- vypínač pro konkrétní schopnost nebo nástroj,
+- možnost odebrat tokeny a servisní účty,
+- auditní stopa tool callů,
+- omezení rate limitů a hromadných operací,
+- testovací režim bez produkčních změn,
+- seznam rizikových akcí, které nikdy neběží bez člověka,
+- postup pro opravu špatně provedené akce,
+- krátká šablona komunikace, pokud došlo k dopadu na zákazníka.
+
+U externích MCP serverů nebo konektorů se ptej stejně tvrdě jako u každého dodavatele: kdo provozuje server, kam odcházejí data, jak se autentizuje, co loguje, jak se aktualizuje, kdo vidí výstupy a jak ho vypneš. Nový protokol nemění starou pravdu: integrace je dodavatelský vztah, i když vypadá jako hezké tlačítko v AI rozhraní.
+
+### Checklist: AI agenti a nástroje privacy-first
+
+- [ ] Každý agent má popsanou konkrétní práci, ne jen seznam připojených systémů.
+- [ ] Schopnosti jsou rozdělené na čtení, návrh a skutečnou akci.
+- [ ] Rizikové akce vyžadují lidské potvrzení s jasným popisem dopadu.
+- [ ] Nástroje mají malé účely a oddělené read/write operace.
+- [ ] Serverová autorizace ověřuje uživatele, workspace, roli a rozsah objektu.
+- [ ] Agent nepoužívá univerzální admin token, pokud k tomu není výslovně řízená výjimka.
+- [ ] Tool cally se logují chudě a strukturovaně, bez plných payloadů a citlivých promptů.
+- [ ] Důležité změny vytvářejí auditní událost viditelnou správným lidem.
+- [ ] Externí MCP server nebo konektor má vlastní bezpečnostní a datovou kartu.
+- [ ] Existuje vypínač pro rizikovou schopnost agenta.
+- [ ] Testovací režim nepoužívá produkční data bez jasného důvodu.
+- [ ] Retence promptů, odpovědí a tool logů má účel, vlastníka a termín mazání.
+
+### Mini úkol
+
+Vyber jedno agentní workflow, které už používáš nebo zvažuješ: support shrnutí, sales follow-up, PR review, generování obsahu, CRM zápis nebo provozní runbook. Vyplň kartu:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jakou konkrétní práci má agent udělat? |  |
+| Která data k tomu opravdu potřebuje? |  |
+| Která data nesmí nikdy číst? |  |
+| Které kroky jsou jen návrh a které mění systém? |  |
+| Kde musí člověk potvrdit akci? |  |
+| Jaké scopy a tokeny agent používá? |  |
+| Co se zaloguje a jak dlouho? |  |
+| Jak workflow vypneme při problému? |  |
+
+Potom udělej jednu konkrétní změnu: rozděl univerzální nástroj na read/write varianty, přidej potvrzení před odesláním e-mailu, zkrať retenci prompt logů, odeber agentovi admin scope, nebo doplň auditní událost pro citlivý tool call. Agentní automatizace má šetřit práci. Nesmí šetřit odpovědnost.
+
 ## Zdroje
 
 - ICANN: Information for Domain Name Registrants - práva a odpovědnosti držitelů domén včetně správy, obnovy a převodu doménové registrace: https://www.icann.org/registrants
@@ -19212,6 +19413,7 @@ Potom udělej jednu konkrétní změnu: přidej auditní událost pro změnu rol
 - OWASP Cheat Sheet Series: Logging Cheat Sheet - doporučení k tomu, co logovat, co nelogovat, jak chránit logy a jak nastavit bezpečnostní monitoring podle účelu a rizika: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
 - OpenTelemetry Docs: Signals - přehled základních observability signálů jako traces, metrics, logs a profiles: https://opentelemetry.io/docs/concepts/signals/
 - OWASP Cheat Sheet Series: Secrets Management Cheat Sheet - doporučení pro životní cyklus tajemství, ukládání, přístup, rotaci, revokaci, audit a incidentní reakci: https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html
+- Model Context Protocol: Specification - oficiální specifikace MCP včetně architektury, nástrojů, zdrojů, promptů, souhlasu uživatele, kontroly dat, bezpečnosti nástrojů a trust & safety principů: https://modelcontextprotocol.io/specification
 - The Twelve-Factor App: Config - princip oddělení konfigurace od kódu a používání proměnných prostředí pro konfiguraci aplikace: https://12factor.net/config
 - GitHub Docs: Secret scanning - detekce hardcodovaných přístupových údajů v historii repozitáře a ochrana proti úniku secrets: https://docs.github.com/code-security/secret-scanning/about-secret-scanning
 - Keep a Changelog: Keep a Changelog 1.1.0 - principy lidsky psaného changelogu, typy změn a sekce pro nevydané změny: https://keepachangelog.com/en/1.1.0/
@@ -19292,6 +19494,7 @@ Potom udělej jednu konkrétní změnu: přidej auditní událost pro změnu rol
 
 ## Pracovní log
 
+- 2026-07-15: Doplněna příloha o AI agentech a MCP nástrojích bez oprávnění na celý svět: katalog schopností, rozlišení čtení/návrhu/akce, konkrétní scopy, bezpečný návrh toolů, smysluplný consent, chudé logování, agentní incident plán, checklist a mini úkol; ověřen a doplněn oficiální zdroj Model Context Protocol a navázáno na existující zdroje OWASP a GDPR principy.
 - 2026-07-15: Doplněna příloha o auditní stopě bez sledovacího deníku: rozlišení auditních logů, technických logů a produktové analytiky, výběr důležitých změn, návrh auditní události, ochrana přístupu, rizika volného textu, retence, zákaznický pohled, checklist a mini úkol; navázáno na existující zdroje OWASP a Evropské komise k logování, minimalizaci a době uchování dat.
 - 2026-07-15: Doplněna příloha o bezpečnostních HTTP hlavičkách bez paniky a rozbitého frontendu: inventura zdrojů, postupné zavádění CSP, HSTS po ověření HTTPS, Referrer-Policy, Permissions-Policy, testování hlavních cest, checklist a mini úkol; navázáno na existující zdroje OWASP a MDN k bezpečnostním hlavičkám.
 - 2026-07-15: Doplněna příloha o SSO, passkeys a provisioningu bez identitního bludiště: autorita identity, passkeys/WebAuthn, SAML a OIDC SSO, SCIM provisioning, break-glass přístup, chudé login logy, recovery procesy, checklist a mini úkol; ověřeny a doplněny zdroje OWASP, W3C, OpenID Foundation, OASIS a IETF.
