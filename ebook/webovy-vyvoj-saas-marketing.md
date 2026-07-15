@@ -22136,6 +22136,126 @@ Vyber jednu plánovanou úlohu, frontu nebo worker v produktu. Vyplň kartu:
 
 Potom udělej jednu konkrétní změnu: zkrať retenci retry payloadu, přidej konečný stav selhání, rediguj logy, doplň ruční brzdu, napiš pracovní větu, omez souběžné běhy, zaveď dry-run nebo přidej úklid dočasných souborů. Automatizace má být spolehlivý kolega, ne temný sklep produktu.
 
+## Příloha: Interní reporty bez tabulkového úniku
+
+Interní report je lákavě nevinný. Pár čísel pro vedení, CSV pro sales, přehled trialů, seznam neaktivních účtů, export ticketů pro support review. Jenže právě reporty často vytahují data z řízených systémů do tabulek, e-mailů, prezentací a osobních složek, kde najednou neplatí stejná oprávnění, retence ani auditní stopa.
+
+Privacy-first otázka nezní: „Jak rychle ten report vyexportujeme?“
+
+Lepší otázka zní: „Jaké rozhodnutí má report podpořit a jak málo detailu k tomu stačí?“
+
+Report nemá být druhá databáze. Má být pracovní výstup s účelem, vlastníkem, omezeným rozsahem a koncem životnosti.
+
+### Začni rozhodnutím
+
+Nejdřív napiš jednu větu:
+
+```text
+Tento report pomáhá [komu] rozhodnout [co] za období [jaké] a nepotřebuje obsahovat [co].
+```
+
+Příklady:
+
+- „Tento report pomáhá product týmu rozhodnout, kde upravit onboarding za posledních 30 dní, a nepotřebuje obsahovat e-maily jednotlivých uživatelů.“
+- „Tento report pomáhá sales týmu projít kvalitu poptávek za měsíc a nepotřebuje exportovat celé zprávy z formulářů.“
+- „Tento report pomáhá ops týmu zkontrolovat neúspěšné exporty a nepotřebuje obsahovat samotný obsah exportovaných souborů.“
+
+Když větu neumíš napsat, report nejspíš nevzniká kvůli rozhodnutí, ale kvůli pocitu kontroly. Ten pocit je pochopitelný. Jen má tendenci vyrábět tabulky, které se po jednom použití dál povalují ve firmě.
+
+### Agregace je výchozí stav
+
+V mnoha situacích nepotřebuješ řádkový export. Potřebuješ agregaci, trend nebo seznam výjimek.
+
+| Potřeba | Místo řádkového exportu použij |
+| --- | --- |
+| Zjistit, jestli roste počet trialů | počet trialů po týdnech a segmentu |
+| Najít problém v onboardingu | kroky s nejvyšším odpadnutím, bez identity uživatelů |
+| Vyhodnotit kvalitu leadů | počty podle fitu a zdroje, pár anonymizovaných poznámek |
+| Zkontrolovat support zátěž | kategorie ticketů, doba první odpovědi, opakované téma |
+| Ověřit billing problém | počet selhaných plateb podle důvodu, ne seznam všech karet |
+
+Řádkový detail použij až ve chvíli, kdy agregace nestačí k rozhodnutí. A i tehdy exportuj jen sloupce, které mají práci. „Radši všechno“ je nejrychlejší cesta k reportu, který už nikdo nechce vlastnit.
+
+### Každý report má mít vlastníka a expiraci
+
+Report bez vlastníka se časem změní v osiřelý soubor. Report bez expirace se změní v archiv. Ani jedno nechceš.
+
+U důležitých reportů drž jednoduchou kartu:
+
+| Pole | Odpověď |
+| --- | --- |
+| Název reportu |  |
+| Rozhodnutí, které podporuje |  |
+| Vlastník |  |
+| Zdrojová data |  |
+| Obsahuje osobní údaje? | ano / ne / částečně |
+| Kdo ho smí vidět |  |
+| Kam se ukládá |  |
+| Jak často vzniká |  |
+| Kdy se maže nebo archivuje |  |
+| Co se nesmí exportovat |  |
+
+Codyho komentář: Pokud je odpověď na „kdy se report maže“ ticho a pohled do stropu, report už pravděpodobně plánuje kariéru jako datový fosil.
+
+### Screenshoty a prezentace jsou také export
+
+Data neutíkají jen přes CSV. Utíkají i přes screenshot dashboardu, prezentaci pro poradu, zkopírovanou tabulku v dokumentu nebo přílohu v chatu.
+
+Před sdílením se zeptej:
+
+- Jsou v obrázku e-maily, jména, názvy zákazníků nebo interní poznámky?
+- Potřebuje publikum vidět jednotlivé záznamy, nebo stačí souhrn?
+- Je dokument uložený na místě se správnými oprávněními?
+- Má prezentace datum a kontext, aby za půl roku nevypadala jako aktuální pravda?
+- Má se po poradě smazat pracovní kopie?
+
+U klientských nebo veřejných reportů buď ještě přísnější. Anonymizovaný příklad má zachovat problém a poučení, ne identitu zákazníka.
+
+### Exporty z reportů omez technicky
+
+Pokud interní nástroj umožňuje export, nastav rozumné brzdy:
+
+- export jen pro role, které ho opravdu potřebují,
+- výchozí sloupce bez citlivých detailů,
+- potvrzení před exportem osobních údajů,
+- auditní záznam exportu bez obsahu souboru,
+- expirace odkazu ke stažení,
+- zákaz exportu do osobního úložiště,
+- pravidelný úklid starých reportů.
+
+Není nutné dělat z každého exportu schvalovací peklo. Stačí, aby tým věděl, že export je datová akce, ne jen pohodlné tlačítko.
+
+### Checklist: Interní report bez úniku
+
+- [ ] Report má jednu větu účelu a rozhodnutí.
+- [ ] Výchozí výstup je agregovaný, pokud detail není nutný.
+- [ ] Řádkový export obsahuje jen sloupce potřebné pro rozhodnutí.
+- [ ] Každý pravidelný report má vlastníka, publikum a datum revize.
+- [ ] Reporty s osobními údaji mají expiraci nebo retenční pravidlo.
+- [ ] Screenshoty a prezentace se kontrolují stejně jako exporty.
+- [ ] Exportní oprávnění je oddělené od běžného čtení dashboardu.
+- [ ] Staré pracovní kopie reportů se pravidelně mažou.
+- [ ] Veřejné a klientské reporty nepoužívají reálné zákaznické detaily bez jasného souhlasu a důvodu.
+- [ ] Tým jednou měsíčně zkontroluje, které reporty už nikdo nepoužívá.
+
+### Mini úkol
+
+Vyber jeden interní report, dashboard export nebo pravidelnou tabulku a vyplň kartu:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jaké rozhodnutí report podporuje? |  |
+| Kdo je vlastník? |  |
+| Kdo ho opravdu potřebuje vidět? |  |
+| Obsahuje osobní údaje nebo zákaznický kontext? |  |
+| Které sloupce lze odstranit? |  |
+| Stačí agregace místo řádků? |  |
+| Kde jsou uložené staré kopie? |  |
+| Kdy se mají smazat? |  |
+| Jaká jedna změna sníží riziko nejvíc? |  |
+
+Potom udělej jednu konkrétní změnu: smaž starou kopii, odeber e-mailový sloupec, nahraď řádkový export agregací, omez exportní oprávnění nebo doplň expiraci odkazu. Report má pomoct rozhodnout, ne potichu rozmnožit data po firmě.
+
 ## Zdroje
 
 - ICANN: Information for Domain Name Registrants - práva a odpovědnosti držitelů domén včetně správy, obnovy a převodu doménové registrace: https://www.icann.org/registrants
@@ -22285,6 +22405,7 @@ Potom udělej jednu konkrétní změnu: zkrať retenci retry payloadu, přidej k
 
 ## Pracovní log
 
+- 2026-07-15: Doplněna příloha o interních reportech bez tabulkového úniku: report jako rozhodovací výstup, agregace jako výchozí stav, vlastník a expirace reportu, kontrola screenshotů a prezentací, technické brzdy exportů, checklist a mini úkol.
 - 2026-07-15: Doplněna příloha o plánovaných úlohách a frontách bez datového autopilota: pracovní věta jobu, rozlišení cronů, front a backfillů, retry s konečnou retencí, ruční brzdy, respektování produktových oprávnění, chudé logování, úklidová automatizace, checklist a mini úkol; navázáno na existující zdroje OWASP Logging Cheat Sheet, OpenTelemetry a GDPR principy.
 - 2026-07-15: Doplněna příloha o prázdných stavech a kontextové nápovědě bez nátlakového vodění: rozlišení typů prázdných stavů, jedna primární cesta, nápověda ve správný okamžik, férové nudges, aktivace bez zbytečného sběru dat, diskrétní stavy oprávnění, agregované měření, checklist a mini úkol.
 - 2026-07-15: Doplněna příloha o produktovém vyhledávání a filtrech bez sledovacího profilu: rozlišení navigačního, obsahového, datového a interního hledání, omezení search logů, agregované reporty s minimálním prahem, privacy-first pravidla pro filtry, nulové výsledky, interní search oprávnění, checklist a mini úkol.
