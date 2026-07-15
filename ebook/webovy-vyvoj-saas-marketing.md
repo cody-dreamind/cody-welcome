@@ -18374,6 +18374,268 @@ Vyber jednu obrazovku nebo funkci v interní administraci a vyplň kartu:
 
 Potom udělej jednu konkrétní změnu: zamaskuj pole, odeber plošný admin přístup, přidej důvod k exportu, omez impersonaci, doplň auditní log nebo smaž starý diagnostický nástroj. Interní admin nemá být tajná zóna mimo produktové standardy. Je to produkt pro tým, který pracuje s cizí důvěrou.
 
+## Příloha: Týmové pozvánky a role bez účtového chaosu
+
+Týmové účty v SaaS vypadají nenápadně. Pozvat kolegu, nastavit roli, odebrat přístup, předat vlastnictví workspace. Jenže právě tady se často rozhoduje, jestli produkt drží kontrolu nad daty, nebo jestli po firmě zůstávají staré účty, nesmyslně široké role a pozvánky, které žijí déle než původní projekt.
+
+Privacy-first týmová správa má jednoduchý cíl: dát správným lidem správný přístup ve správný čas a umět ho čistě odebrat. Nejde jen o bezpečnostní checklist. Jde o běžný produktový tok, který musí být pochopitelný pro administrátora, auditovatelný pro tým a férový k lidem, jejichž data ve workspace jsou.
+
+Špatná otázka zní: „Jak rychle může admin pozvat další lidi?“
+
+Lepší otázka zní: „Jak zajistíme, že pozvánka, role a vlastnictví odpovídají skutečné práci, ne momentální pohodlnosti?“
+
+OWASP Authorization Cheat Sheet doporučuje princip nejmenších oprávnění, deny-by-default přístup a kontrolu oprávnění při každém požadavku. OWASP Multifactor Authentication Cheat Sheet zase připomíná, že recovery cesta nemá být slabší než běžné přihlášení. Prakticky: role a přístupové toky nejsou kosmetika v nastavení. Jsou to bezpečnostní a privacy funkce.
+
+Codyho komentář: Nejrychlejší cesta k chaosu je tlačítko „udělej z něj admina, ať to neřešíme“. Funguje skvěle asi třicet sekund. Potom z něj vznikne provozní dluh s přístupem k datům.
+
+### Pozvánka je bezpečnostní tok, ne jen e-mail
+
+Pozvánka do týmu má mít životní cyklus. Není to jen odkaz, který se pošle a pak se na něj zapomene.
+
+Dobrá pozvánka obsahuje:
+
+- kdo zve,
+- do jakého workspace nebo organizace,
+- s jakou rolí,
+- proč nebo k jaké práci,
+- kdy pozvánka expiruje,
+- co se stane po přijetí,
+- jak ji může admin zrušit,
+- jak se pozvaný člověk dozví, kdo bude správcem jeho účtu v dané organizaci.
+
+U menších produktů nemusí být pole „proč“ povinné u každé pozvánky. U citlivých workspace, externistů, administrátorských rolí nebo zákaznických portálů se ale krátký důvod hodí. Pomáhá při review přístupů a snižuje počet záhadných účtů typu „asi to byl někdo z implementace“.
+
+Praktický model pozvánky:
+
+| Pole | Doporučení |
+| --- | --- |
+| Role | Výchozí role má být nejnižší použitelná, ne admin |
+| Expirace | Krátká, typicky dny, ne měsíce |
+| Přijetí | Pozvaný musí potvrdit účet, ne jen otevřít odkaz |
+| Změna e-mailu | Pozvánka platí pro konkrétní adresu nebo ověřenou doménu |
+| Zrušení | Admin vidí nevyřízené pozvánky a umí je odvolat |
+| Audit | Loguje se vytvoření, přijetí, expirace i zrušení |
+
+Pozvánkový token nemá obsahovat e-mail, název firmy ani roli v čitelné podobě. Má být náhodný, časově omezený a po použití neplatný. Stejná disciplína, kterou používáš u resetu hesla nebo sdílených odkazů, patří i sem.
+
+### Role pojmenuj podle práce
+
+Role nejsou dekorace pro tabulku v nastavení. Role říkají, jakou práci člověk smí dělat a k jakým datům kvůli tomu potřebuje přístup.
+
+Dobré role jsou konkrétní:
+
+- Vlastník: správa fakturace, kritických nastavení, členů a zrušení workspace.
+- Admin: správa členů, nastavení a běžného provozu bez převodu vlastnictví.
+- Editor: vytváření a úprava pracovního obsahu.
+- Viewer: čtení obsahu bez změn.
+- Billing: faktury, plány a platby bez produktového obsahu.
+- Auditor: čtení vybraných logů a nastavení bez zásahu do dat.
+- Externista: omezený přístup k přesně vybraným projektům nebo klientům.
+
+Slabé role jsou obecné:
+
+- Super user,
+- power user,
+- full access,
+- temporary admin,
+- internal,
+- trusted.
+
+Tyto názvy neříkají skoro nic. Když nevíš, co role znamená, neumíš ji bezpečně udělit ani odebrat. A když ji neumíš odebrat, není to role. Je to trvalá výjimka s hezkým názvem.
+
+Při návrhu role použij krátkou kartu:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jakou práci role umožňuje? |  |
+| Jaká data role potřebuje vidět? |  |
+| Jaké akce smí spustit? |  |
+| Co role výslovně nesmí? |  |
+| Kdo smí roli přidělit? |  |
+| Kdy se má role revidovat? |  |
+
+Privacy-first pravidlo: role má být užší než důvěra. I když člověku věříš, produkt mu nemá dávat víc dat a akcí, než potřebuje. Důvěra není náhrada autorizace.
+
+### Vlastnictví workspace musí být předatelné
+
+Každý týmový workspace potřebuje jasného vlastníka. Ne proto, aby měl někdo korunku v nastavení, ale protože některá rozhodnutí mají vyšší dopad: zrušení účtu, export všech dat, změna fakturace, převod domény, přidání SSO, změna retenčních pravidel nebo schválení citlivé integrace.
+
+Typické chyby:
+
+- workspace vlastní bývalý zaměstnanec,
+- jediný vlastník ztratil přístup k e-mailu,
+- vlastnictví je navázané na osobní adresu místo firemní identity,
+- support umí vlastnictví ručně změnit bez ověření,
+- produkt neumí mít záložního vlastníka nebo organizaci.
+
+Praktický návrh:
+
+- umožni více vlastníků tam, kde dává smysl,
+- jasně odliš vlastníka od admina,
+- při převodu vlastnictví vyžaduj potvrzení a auditní stopu,
+- upozorni na workspace s jediným vlastníkem,
+- při deaktivaci posledního vlastníka nabídni kontrolovaný recovery postup,
+- u firemních účtů zvaž vazbu na ověřenou doménu nebo organizaci.
+
+Recovery vlastnictví je citlivý tok. Nemá stačit, že někdo napíše ze stejné domény a tvrdí, že šéf odešel. Potřebuješ postup podle rizika: ověření fakturačního kontaktu, existujícího vlastníka, smlouvy, interního schválení nebo supportního procesu. Čím větší dopad, tím pomaleji a ověřitelněji.
+
+### Přístupy po vlnách jsou lepší než plošné adminství
+
+Když nový zákazník začíná, často chce „pozvat celý tým“. To může být správně, ale nemusí. U citlivějších produktů je lepší přístup po vlnách:
+
+1. Vlastník nebo projektový admin nastaví workspace.
+2. Malá pilotní skupina ověří workflow.
+3. Přidají se editoři pro konkrétní práci.
+4. Přidají se čtenáři nebo širší tým.
+5. Externisté dostanou jen projektově omezený přístup.
+
+Výhoda není jen bezpečnostní. Produktově se lépe pozná, kdo se kde zasekl. Když pozveš stovku lidí najednou, neumíš rozlišit problém v onboardingu od organizačního šumu. Když postupuješ po vlnách, každá vlna má vlastní účel a vlastní kontrolu.
+
+Do onboardingového checklistu pro tým přidej:
+
+- kdo má být první vlastník,
+- kdo bude záložní vlastník,
+- které role budou potřeba první týden,
+- které role počkají,
+- kdo bude schvalovat externí přístupy,
+- kdy proběhne první review členů.
+
+Tohle je malá práce na začátku a velká úspora později. Přístupový nepořádek se nejlépe neuklízí. Nejlépe se nevyrábí.
+
+### Externí lidé potřebují časový a obsahový rámec
+
+Externista může být agentura, implementační partner, účetní, právník, konzultant, auditor nebo zákaznický dodavatel. Není to horší typ člověka. Je to jiný typ rizika, protože často nemá stejnou interní správu účtů, offboarding a kontext.
+
+U externích přístupů proto nastav:
+
+- jasný účel přístupu,
+- omezený rozsah dat,
+- expiraci nebo datum revize,
+- viditelné označení externího člena,
+- zákaz přidávání dalších lidí bez schválení,
+- audit citlivých akcí,
+- jednoduché odebrání přístupu po dokončení práce.
+
+Příklad:
+
+| Situace | Slabé řešení | Lepší řešení |
+| --- | --- | --- |
+| Agentura nastavuje obsah | Admin do celého workspace | Editor jen pro vybrané stránky a období |
+| Auditor kontroluje nastavení | Export všech dat e-mailem | Read-only role pro nastavení a auditní report |
+| Implementační partner migruje data | Trvalý přístup k produkci | Časově omezený importní tok s auditní stopou a kontrolou |
+| Účetní řeší faktury | Přístup do produktu | Billing role bez produktového obsahu |
+
+Externí přístup má mít konec už při začátku. Když konec neurčíš, přístup se často promění v zapomenutou položku v seznamu členů.
+
+### MFA, recovery a změna e-mailu patří do stejné logiky
+
+Týmový produkt nemusí nutit každého člověka do stejné bezpečnostní vrstvy od prvního kliknutí. Musí ale umět rozlišit riziko. Člověk s billing přístupem, vlastník workspace nebo admin s možností exportu má jiné riziko než čtenář veřejných poznámek.
+
+Praktické minimum:
+
+- nabídni MFA pro všechny účty,
+- vyžaduj nebo silně doporuč MFA pro vlastníky a administrátory,
+- upozorni adminy na členy s citlivou rolí bez MFA,
+- při změně e-mailu vyžaduj potvrzení původní i nové adresy, pokud je to možné,
+- při vypnutí MFA nebo recovery procesu loguj událost,
+- recovery cesta nesmí být jednodušší než běžné přihlášení.
+
+Recovery je produktový moment, kde se láme bezpečnost i důvěra. Pokud člověk ztratí telefon, musí existovat cesta zpět. Ale pokud support vypne MFA jen podle jedné e-mailové žádosti, obejdeš přesně tu ochranu, kterou jsi zavedl.
+
+Dobrá recovery karta:
+
+| Riziko účtu | Recovery kontrola |
+| --- | --- |
+| Běžný viewer | Ověření e-mailu a recovery kód |
+| Editor | Ověření e-mailu, recovery kód nebo potvrzení adminem |
+| Admin | Potvrzení vlastníkem nebo silnější interní support proces |
+| Vlastník | Vícekrokové ověření podle smlouvy, fakturace nebo organizace |
+
+Nepiš lidem bezpečnostní texty jako právní varování. Napiš je jako jasný dopad: „Tato změna umožní spravovat členy a exportovat data workspace. Doporučujeme zapnout dvoufaktorové ověření.“ To je užitečnější než tři odstavce mlhy.
+
+### Review členů dělej jako běžnou údržbu
+
+Týmové přístupy se mění pořád: lidé odcházejí, mění role, končí projekt, agentura dokončí práci, pilot se rozšíří, billing přejde na finance. Produkt má adminovi pomoct, ne čekat, že si všechno zapamatuje.
+
+Jednou měsíčně nebo kvartálně nabídni review členů:
+
+- kdo má vlastnickou nebo admin roli,
+- kdo se dlouho nepřihlásil,
+- které pozvánky čekají,
+- kteří externisté mají přístup,
+- které role jsou širší než obvyklé,
+- kdo nemá MFA u citlivé role,
+- které projekty mají neobvykle mnoho členů,
+- kde chybí záložní vlastník.
+
+Tohle review nemusí být složitý dashboard. Stačí obrazovka „Zkontrolovat přístupy“ s doporučenými akcemi:
+
+- odebrat neaktivní pozvánku,
+- snížit roli,
+- potvrdit externí přístup na další období,
+- přidat záložního vlastníka,
+- zapnout MFA pro citlivou roli,
+- exportovat seznam členů pro interní audit.
+
+Privacy-first detail: review nemá být záminka ke sledování aktivity lidí do detailu. Pro údržbu přístupů často stačí poslední přihlášení v hrubém čase, role, typ účtu a stav MFA. Nepotřebuješ číst, co člověk dělal minutu po minutě.
+
+### Audituj změny, ne každé nadechnutí
+
+U týmových rolí loguj hlavně události s dopadem:
+
+- vytvoření, přijetí, expirace a zrušení pozvánky,
+- změna role,
+- přidání nebo odebrání člena,
+- převod vlastnictví,
+- změna e-mailu,
+- zapnutí, vypnutí nebo recovery MFA,
+- export členů,
+- přidání externího člena,
+- změna SSO nebo doménového pravidla.
+
+Auditní log má odpovědět na praktické otázky:
+
+- Kdo dal člověku přístup?
+- Jakou roli dostal?
+- Kdy se změna stala?
+- Kdo ji schválil, pokud šlo o citlivou roli?
+- Kdy byl přístup odebrán?
+
+Do logu nepatří tajné tokeny, recovery kódy, celé pozvánkové URL ani zbytečné osobní poznámky. Audit má být stopa rozhodnutí, ne další skladiště citlivostí.
+
+### Checklist: Týmové pozvánky a role privacy-first
+
+- [ ] Pozvánky mají expiraci a dají se zrušit.
+- [ ] Pozvánkový token je náhodný, jednorázový a neobsahuje osobní údaje v URL.
+- [ ] Výchozí role po pozvání není admin, pokud to není opravdu nutné.
+- [ ] Role jsou pojmenované podle práce a mají jasně popsané pravomoci.
+- [ ] Vlastník workspace je odlišený od běžného admina.
+- [ ] Převod vlastnictví má potvrzení a auditní stopu.
+- [ ] Externí členové mají omezený rozsah a datum revize nebo expirace.
+- [ ] Citlivé role mají doporučené nebo vyžadované MFA.
+- [ ] Recovery MFA a změna e-mailu nejsou slabší než běžné přihlášení.
+- [ ] Admin vidí nevyřízené pozvánky, externisty, citlivé role a chybějící záložní vlastnictví.
+- [ ] Review členů je pravidelný produktový tok, ne ruční panika před auditem.
+- [ ] Auditní log zachycuje změny přístupů bez ukládání tajných tokenů a zbytečných detailů.
+
+### Mini úkol
+
+Vyber jeden týmový workspace, zákaznický účet nebo vlastní SaaS návrh a vyplň kartu přístupů:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Kdo je vlastník workspace? |  |
+| Existuje záložní vlastník? |  |
+| Jaké role dnes existují? |  |
+| Která role je příliš široká? |  |
+| Jak dlouho platí pozvánka? |  |
+| Kdo má externí přístup a proč? |  |
+| Které citlivé role nemají MFA? |  |
+| Co se loguje při změně role nebo vlastnictví? |  |
+| Který přístup lze odebrat, snížit nebo časově omezit? |  |
+
+Potom udělej jednu konkrétní změnu: zkrať expiraci pozvánek, přidej záložního vlastníka, rozděl admin roli na užší role, označ externisty, zapni MFA pro citlivé role, nebo přidej měsíční review členů do provozního checklistu. Týmová správa není vedlejší nastavení. Je to místo, kde produkt každý den potvrzuje, že kontrola nad daty není jen věta v marketingu.
+
 ## Zdroje
 
 - ICANN: Information for Domain Name Registrants - práva a odpovědnosti držitelů domén včetně správy, obnovy a převodu doménové registrace: https://www.icann.org/registrants
@@ -18402,6 +18664,8 @@ Potom udělej jednu konkrétní změnu: zamaskuj pole, odeber plošný admin př
 - OWASP Cheat Sheet Series: File Upload Cheat Sheet - doporučení pro validaci, omezení velikosti, ukládání, oprávnění a bezpečné zpracování nahrávaných souborů: https://cheatsheetseries.owasp.org/cheatsheets/File_Upload_Cheat_Sheet.html
 - OWASP Cheat Sheet Series: Session Management Cheat Sheet - doporučení k session tokenům, životnímu cyklu session, expiraci a rizikům předávání identifikátorů přes URL: https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html
 - OWASP Cheat Sheet Series: Forgot Password Cheat Sheet - praktická doporučení k jednorázovým, náhodným a časově omezeným resetovacím tokenům: https://cheatsheetseries.owasp.org/cheatsheets/Forgot_Password_Cheat_Sheet.html
+- OWASP Cheat Sheet Series: Authorization Cheat Sheet - doporučení k principu nejmenších oprávnění, deny-by-default a kontrole oprávnění při požadavcích: https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html
+- OWASP Cheat Sheet Series: Multifactor Authentication Cheat Sheet - praktická doporučení k MFA, recovery procesům a tomu, aby obnova účtu nebyla slabší než běžná autentizace: https://cheatsheetseries.owasp.org/cheatsheets/Multifactor_Authentication_Cheat_Sheet.html
 - OWASP Software Component Verification Standard - rámec aktivit, kontrol a dobrých praktik pro snižování rizika v softwarovém supply chainu: https://owasp.org/www-project-software-component-verification-standard/
 - GitHub Docs: Dependabot alerts - upozornění na zranitelné závislosti v repozitáři a návaznost na dependency graph: https://docs.github.com/en/code-security/concepts/supply-chain-security/dependabot-alerts
 - GitHub Docs: Dependency review - kontrola změn závislostí v pull requestech a upozornění na rizikové dependency změny: https://docs.github.com/en/code-security/concepts/supply-chain-security/dependency-review
@@ -18500,6 +18764,7 @@ Potom udělej jednu konkrétní změnu: zamaskuj pole, odeber plošný admin př
 
 ## Pracovní log
 
+- 2026-07-15: Doplněna příloha o týmových pozvánkách a rolích bez účtového chaosu: životní cyklus pozvánek, role podle práce, předávání vlastnictví workspace, přístupy po vlnách, externisté, MFA a recovery, pravidelný review členů, audit změn, checklist a mini úkol; ověřeny a doplněny zdroje OWASP k autorizaci a MFA.
 - 2026-07-14: Doplněna příloha o interním admin rozhraní bez datového lunaparku: interní úlohy jako základ návrhu, role podle práce, maskování dat ve výchozím stavu, opatrná impersonace, auditní stopa citlivých akcí, pravidelný úklid adminu, checklist a mini úkol.
 - 2026-07-14: Doplněna příloha o trust center bez marketingové mlhy: rozhodovací otázky zákazníka, veřejná a kontrolovaná vrstva informací, lidské bezpečnostní texty, mapa subdodavatelů podle účelu, napojení na provozní změny, obchodní použití bez odbývání otázek, checklist a mini úkol.
 - 2026-07-14: Doplněna příloha o bezpečnostních dotaznících zákazníka bez panického opisování: odpovědní balíček, pravdivé úrovně detailu, hranice sdílení interních informací, rozlišení rizika zákazníka, převod opakovaných otázek do dokumentace, checklist a mini úkol.
