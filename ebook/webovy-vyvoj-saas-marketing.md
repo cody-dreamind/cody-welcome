@@ -20086,6 +20086,196 @@ Vyber jeden existující nebo plánovaný export/import a vyplň kartu:
 
 Potom udělej jednu konkrétní opravu: přidej expiraci exportních odkazů, napiš popis sloupců, rozděl admin export od běžného uživatelského exportu, doplň náhled importu, zablokuj nechtěné sloupce nebo přestaň posílat exporty e-mailem. Export a import jsou možná nudné funkce, ale přesně nudné funkce často rozhodují, jestli zákazník produktu věří.
 
+## Příloha: Produktové limity a fair use bez skrytých pastí
+
+Limity v SaaS nejsou jen technické brzdy. Jsou součást produktu, pricingu, podpory i důvěry. Dobrý limit chrání službu, pomáhá zákazníkovi vybrat správný plán a dává týmu čas reagovat, když se používání začne chovat jinak než běžný provoz. Špatný limit vypadá jako past: zákazník na něj narazí uprostřed práce, neví proč, neví co dál a má pocit, že produkt záměrně schoval důležitou informaci až za moment bolesti.
+
+Špatná otázka zní: „Kde už nám zákazník začíná být drahý?“
+
+Lepší otázka zní: „Jaké používání odpovídá hodnotě plánu, kde vzniká provozní riziko a jak zákazníka upozorníme dřív, než mu limit rozbije práci?“
+
+Fair use není právnická mlha pro „můžeme vás kdykoliv vypnout“. Má to být čitelná dohoda: co je běžné používání, co už zatěžuje službu nebo ostatní zákazníky, jaké signály sledujeme a jak budeme postupovat před omezením.
+
+### Každý limit musí mít účel
+
+Limit bez účelu je jen překážka. U každého omezení si napiš, kterou práci chrání:
+
+| Limit | Co chrání | Kdo ho potřebuje chápat |
+| --- | --- | --- |
+| Počet členů workspace | Pricing podle velikosti týmu | zákazník, sales, support |
+| Počet projektů | Rozlišení jednoduchého a většího provozu | zákazník, produkt |
+| API požadavky za minutu | Stabilitu služby a integrací | vývojář, ops |
+| Velikost importu | Výkon, validaci a opravitelnost chyb | admin, support |
+| Retence historie | Náklady, privacy a přehlednost | admin, legal/ops |
+| Počet automatizací | Náklady na běh a složitost podpory | zákazník, support |
+
+Když neumíš vysvětlit účel jednou větou, limit pravděpodobně není připravený. Může být jen zděděný z tabulky konkurence, starého incidentu nebo interního strachu.
+
+Dobrá věta:
+
+„Plán Team obsahuje 10 aktivních automatizací, protože je určený pro jeden týmový workflow; vyšší počet už obvykle znamená provoz více oddělení a vyžaduje auditní log a lepší správu oprávnění.“
+
+Slabá věta:
+
+„Tak to máme v ceníku.“
+
+Ta druhá je sice krátká, ale zákazníkovi nepomůže. A supportu taky ne, jen ho naučí unaveně ukazovat na tabulku.
+
+### Soft limit je často lepší první krok než tvrdá zeď
+
+Ne každý limit musí okamžitě zastavit práci. U produktových limitů rozlišuj:
+
+- informační práh: uživatel vidí, že se blíží k hranici,
+- soft limit: produkt dovolí krátké překročení a upozorní,
+- tvrdý limit: další akce už nejde bez změny plánu nebo zásahu,
+- bezpečnostní stop: akce se zastaví kvůli riziku zneužití nebo škody.
+
+Příklad: Pokud zákazník překročí počet projektů o jeden, tvrdé zastavení může být zbytečně agresivní. Lepší je upozornit admina, ukázat možnosti archivace nebo upgrade a dát krátké období na rozhodnutí. Pokud ale integrace začne posílat tisíce chybných API požadavků za minutu, tvrdší omezení chrání službu i zákazníka.
+
+Praktický model:
+
+| Situace | Vhodná reakce |
+| --- | --- |
+| Zákazník se blíží k běžnému plan limitu | upozornění v produktu a e-mail adminovi |
+| Limit je mírně překročený poprvé | krátká tolerance, návrh úklidu nebo upgrade |
+| Limit je dlouhodobě překročený | obchodní nebo supportní kontakt s jasnými možnostmi |
+| Chování ohrožuje dostupnost služby | rate limit, dočasné omezení, incidentní záznam |
+| Chování vypadá jako zneužití | bezpečnostní stop a ruční kontrola |
+
+Codyho komentář: Tvrdý limit je jako zamčené dveře. Někdy zachrání dům. Někdy jen praští dobrého zákazníka do nosu, protože jste zapomněli dát na chodbu ceduli.
+
+### Upozornění patří před bolest, ne až po ní
+
+Limit má být vidět v okamžiku, kdy s ním člověk může něco udělat. Ne až při chybě.
+
+Dobrá místa pro komunikaci limitů:
+
+- pricing stránka,
+- nastavení plánu,
+- obrazovka importu před nahráním souboru,
+- API dokumentace a hlavičky odpovědí,
+- administrátorský přehled využití,
+- e-mail adminovi při dosažení prahu,
+- support dokumentace s příklady.
+
+Špatná místa:
+
+- jen obchodní podmínky,
+- chybová hláška po neúspěšné akci,
+- interní tabulka sales týmu,
+- tooltip, který nikdo nenajde,
+- „kontaktujte support“ bez vysvětlení.
+
+Upozornění má být konkrétní:
+
+„Používáte 9 z 10 aktivních automatizací v plánu Team. Pokud chcete přidat další, můžete jednu archivovat nebo přejít na Business, kde je limit 50 automatizací a auditní log změn.“
+
+To je lepší než:
+
+„Dosáhli jste limitu.“
+
+Druhá věta je technicky pravdivá, ale produktově líná.
+
+### Fair use popiš podle dopadu
+
+Fair use pravidla často selžou, protože jsou buď příliš vágní, nebo příliš trestající. Cílem není sepsat nekonečný seznam zakázaného chování. Cílem je vysvětlit dopady, které produkt nemůže ignorovat.
+
+Praktické oblasti fair use:
+
+- abnormální objem požadavků,
+- automatizace, která obchází produktové limity,
+- masové importy bez domluvy,
+- ukládání dat, která nepatří k účelu produktu,
+- používání produktu jako veřejného úložiště souborů,
+- scraping nebo vytěžování obsahu,
+- opakované chybné webhooky zatěžující fronty,
+- aktivita, která ohrožuje dostupnost služby pro ostatní.
+
+Dobré fair use pravidlo říká:
+
+1. jaký typ chování řeší,
+2. proč je problém,
+3. co tým udělá nejdřív,
+4. kdy může dojít k omezení,
+5. jak zákazník situaci napraví.
+
+Například:
+
+„Pokud integrace opakovaně posílá vysoký počet chybných požadavků, můžeme dočasně snížit rate limit pro daný token, abychom chránili stabilitu služby. Nejdřív pošleme upozornění vlastníkovi integrace, pokud situace nevyžaduje okamžité omezení kvůli dopadu na provoz. Po opravě lze limit vrátit.“
+
+To je férovější než věta „vyhrazujeme si právo službu kdykoliv omezit“. Ta může být právně pohodlná, ale produktově buduje přesně tolik důvěry jako zamračený formulář.
+
+### Limity nemají trestat privacy-first chování
+
+Pozor na limity, které nevědomky motivují zákazníka ke špatnému zacházení s daty.
+
+Rizikové příklady:
+
+- drahý export vlastních dat, takže zákazník raději nechává stará data uvnitř,
+- limit podle počtu kontaktů, který motivuje k slučování lidí do jedné položky,
+- příliš krátká retence auditních záznamů jen proto, aby vyšší plán vypadal hodnotněji,
+- placený přístup k základnímu smazání dat,
+- upgrade nutný pro rozumné role a oprávnění i u malého týmu.
+
+Privacy-first limit říká: základní kontrola nad daty, export, výmaz, bezpečný přístup a vysvětlení zpracování nejsou luxus. Vyšší plán může přidat větší objem, delší historii, pokročilé role, audit pro enterprise nebo individuální retenční pravidla. Nemá ale prodávat respekt jako doplněk.
+
+Praktická otázka při návrhu limitu:
+
+„Když zákazník narazí na tento limit, povede ho to k lepšímu rozhodnutí, nebo k obcházení pravidel a horším datovým návykům?“
+
+Pokud odpověď bolí, limit uprav. To je levnější než pozdější vysvětlování, proč si zákazníci vymýšlejí divné workaroundy.
+
+### Interní výjimky musí mít konec
+
+Každý SaaS časem narazí na výjimku: důležitý zákazník potřebuje vyšší limit, migrace vyžaduje větší import, partner testuje integraci, sales slíbil dočasný objem. Výjimky nejsou problém. Problém jsou věčné výjimky bez vlastníka.
+
+Karta výjimky:
+
+| Pole | Co zapsat |
+| --- | --- |
+| Zákazník nebo workspace | Koho se výjimka týká |
+| Limit | Co se mění |
+| Důvod | Proč výjimka existuje |
+| Rozsah | O kolik a na jak dlouho |
+| Riziko | Dopad na provoz, support, data nebo billing |
+| Vlastník | Kdo výjimku schválil a hlídá |
+| Datum revize | Kdy se vrátí k normálu nebo změní plán |
+
+Bez data revize není výjimka výjimka. Je to nový pricing model, jen o něm nikdo neví. Takové věci pak rostou v produktu jako nezdokumentovaná realita a jednou překvapí finance, support i zákazníka najednou. Efektivní, ale špatným směrem.
+
+### Checklist: Produktové limity a fair use
+
+- [ ] Každý limit má pojmenovaný účel a vlastníka.
+- [ ] Limity jsou viditelné na pricing stránce, v nastavení plánu nebo v dokumentaci.
+- [ ] Produkt upozorňuje před dosažením důležitého limitu.
+- [ ] Rozlišujeme informační práh, soft limit, tvrdý limit a bezpečnostní stop.
+- [ ] Chybové hlášky říkají, co se stalo a jaké jsou další možnosti.
+- [ ] Fair use pravidla popisují dopad a postup, ne jen vágní právo službu omezit.
+- [ ] Rate limity a objemové limity chrání službu, ale jsou vysvětlitelné zákazníkovi.
+- [ ] Limity nemotivují ke zbytečnému sběru, držení nebo obcházení dat.
+- [ ] Základní export, výmaz a kontrola nad daty nejsou zamčené jako luxusní funkce.
+- [ ] Výjimky mají důvod, vlastníka, rozsah a datum revize.
+- [ ] Support má krátký návod, jak limity vysvětlit bez interních dohadů.
+- [ ] Tým pravidelně kontroluje, které limity vyvolávají nejvíc nejasností nebo workaroundů.
+
+### Mini úkol
+
+Vyber jeden produktový limit, který dnes existuje nebo se plánuje, a vyplň kartu:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jaký limit řešíme? |  |
+| Jakou práci, náklad nebo riziko chrání? |  |
+| Kde se o něm zákazník dozví předem? |  |
+| Co se stane při dosažení 80 %, 100 % a překročení? |  |
+| Je limit soft, tvrdý, nebo bezpečnostní? |  |
+| Jaká je férová alternativa: úklid, archivace, upgrade, domluva? |  |
+| Jaké osobní údaje kvůli limitu nesmíme začít sbírat? |  |
+| Kdo smí schválit výjimku a kdy se reviduje? |  |
+| Jakou otázku k limitu nejčastěji dostane support? |  |
+
+Potom udělej jednu konkrétní opravu: doplň limit do pricingu, přidej upozornění před dosažením hranice, přepiš chybovou hlášku, zaveď kartu výjimky nebo odstraň limit, který nemá jasný účel. Produktové limity mají chránit práci a důvěru. Nemají být překvapení schované pod kobercem.
+
 ## Zdroje
 
 - ICANN: Information for Domain Name Registrants - práva a odpovědnosti držitelů domén včetně správy, obnovy a převodu doménové registrace: https://www.icann.org/registrants
@@ -20227,6 +20417,7 @@ Potom udělej jednu konkrétní opravu: přidej expiraci exportních odkazů, na
 
 ## Pracovní log
 
+- 2026-07-15: Doplněna příloha o produktových limitech a fair use bez skrytých pastí: účel limitů, soft a tvrdé hranice, komunikace před bolestí, fair use podle dopadu, privacy-first kontrola limitů, evidence dočasných výjimek, checklist a mini úkol.
 - 2026-07-15: Doplněna příloha o exportech a importech dat bez ručního chaosu: účelové typy exportů, export jako produktový tok, stabilní formáty, importní validace a mapování, zakázaná data, krátká životnost dočasných souborů, opravitelné stavy selhání, checklist a mini úkol; navázáno na existující zdroje k přenositelnosti dat, uploadům, API bezpečnosti a principům GDPR.
 - 2026-07-15: Doplněna příloha o veřejném API a developer experience bez datového průvanu: návrh API od integračního use casu, OpenAPI kontrakt, konkrétní scopy, životní cyklus tokenů, bezpečné chybové odpovědi, rate limity, webhooky/exporty, sandbox, verze a deprekační pravidla, checklist a mini úkol; ověřeny a doplněny zdroje OpenAPI 3.2.0, OAuth 2.0 Security Best Current Practice RFC 9700 a DPoP RFC 9449.
 - 2026-07-15: Doplněna příloha o RAG a interních znalostech bez úniku kontextu: vymezení práce asistenta, dělení dokumentů podle oprávnění před indexací, chunk metadata, prompt injection v retrieved dokumentech, zdrojování odpovědí, životní cyklus indexu, retrieval evaly, checklist a mini úkol; ověřeny a doplněny zdroje OWASP Top 10 for LLM Applications 2025, OWASP k vector/embedding slabinám a NIST AI RMF včetně GenAI profilu.
