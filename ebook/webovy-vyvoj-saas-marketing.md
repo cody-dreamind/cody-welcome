@@ -18636,6 +18636,213 @@ Vyber jeden týmový workspace, zákaznický účet nebo vlastní SaaS návrh a 
 
 Potom udělej jednu konkrétní změnu: zkrať expiraci pozvánek, přidej záložního vlastníka, rozděl admin roli na užší role, označ externisty, zapni MFA pro citlivé role, nebo přidej měsíční review členů do provozního checklistu. Týmová správa není vedlejší nastavení. Je to místo, kde produkt každý den potvrzuje, že kontrola nad daty není jen věta v marketingu.
 
+## Příloha: SSO, passkeys a provisioning bez identitního bludiště
+
+Přihlášení v SaaS je zvláštní funkce. Když funguje, nikdo mu netleská. Když nefunguje, stojí produkt, sales, support i zákaznická důvěra. A když je navržené špatně, začne ti potichu vyrábět účty bez vlastníka, ruční výjimky, sdílené login údaje, slabé recovery procesy a supportní operace typu „nějak mu to prosím odemkni“.
+
+Privacy-first identita má tři cíle:
+
+- člověk se bezpečně dostane k práci, kterou má dělat,
+- organizace umí řídit přístupy bez tabulkového šamanismu,
+- produkt nesbírá a nerozesílá víc identitních údajů, než potřebuje.
+
+Špatná otázka zní: „Přidáme SSO, protože enterprise?“
+
+Lepší otázka zní: „Kdo má být autoritou identity, jak vzniká a zaniká účet a co se stane při rizikové změně?“
+
+OWASP Authentication Cheat Sheet doporučuje vynucovat opětovné ověření při podezřelé aktivitě, account recovery a kritických akcích. WebAuthn definuje přihlašování pomocí veřejných klíčů vázaných na relying party a její origin. OpenID Connect staví autentizační vrstvu nad OAuth 2.0 a pracuje s claimy o uživateli. SAML 2.0 je dlouhodobý standard pro webové single sign-on mezi identity providerem a service providerem. SCIM zase řeší provisioning a správu identit mezi systémy. Přeloženo do produktu: identita není jedno tlačítko. Je to životní cyklus.
+
+### Nejdřív určete autoritu identity
+
+U každého zákaznického účtu si musíš umět odpovědět, odkud přichází pravda o člověku:
+
+| Situace | Autorita identity | Typické řešení | Riziko |
+| --- | --- | --- | --- |
+| Jednotlivec nebo malý tým | Produkt | e-mail, passkey, heslo, MFA | recovery přes support |
+| Firma s vlastní správou účtů | Zákaznický identity provider | SAML nebo OIDC SSO | špatné mapování rolí a domén |
+| Větší organizace s automatizací lifecycle | Zákaznický adresář | SSO plus SCIM | opomenutý offboarding |
+| Externista nebo agentura | Produkt nebo omezená externí identita | pozvánka s rolí a expirací | trvalý přístup po skončení práce |
+
+Tohle rozhodnutí patří do produktové dokumentace. Ne až do enterprise dotazníku, kde ho někdo vymýšlí pod tlakem.
+
+Praktické pravidlo: pokud zákazník chce SSO, neptej se jen na protokol. Ptej se:
+
+- kdo u nich schvaluje přístupy,
+- jestli chtějí vynucené SSO pro všechny členy workspace,
+- co se stane s existujícími lokálními účty,
+- jak budou řešit hosty a externisty,
+- jestli potřebují automatické odebrání účtů přes SCIM,
+- kdo smí vypnout SSO, když se rozbije konfigurace.
+
+Codyho komentář: „Máme SSO“ samo o sobě neznamená bezpečí. Někdy to znamená jen to, že se chyba přesunula z login formuláře do nastavení, kterému rozumí jeden člověk a ten je zrovna na dovolené.
+
+### Passkeys nejsou magické tlačítko, ale dobrý výchozí směr
+
+Passkeys a WebAuthn umí odstranit velkou část problémů s hesly: phishing, reuse hesel, slabá hesla a resetovací únavu. Z pohledu privacy-first produktu je hezké i to, že nemusíš ukládat heslo jako tajemství, které se dá ukrást v použitelné podobě.
+
+Produktově ale mysli na celé chování, ne jen na moderní ikonku v loginu:
+
+- nabídni passkey jako pohodlný a bezpečný způsob přihlášení,
+- ponech srozumitelnou recovery cestu,
+- při přidání nového passkey vyžaduj silné ověření,
+- při odebrání posledního silného faktoru jasně ukaž dopad,
+- u citlivých rolí neber e-mail jako jedinou záchrannou brzdu,
+- loguj přidání a odebrání přihlašovací metody bez ukládání tajných detailů.
+
+Passkey onboarding má být krátký a konkrétní:
+
+„Přidejte passkey pro rychlejší a bezpečnější přihlášení. Passkey je vázaný na tento účet a při příštím přihlášení ho potvrdíte ve svém zařízení.“
+
+Nepotřebuješ lidem vysvětlovat kryptografii na úrovni diplomky. Potřebuješ jim říct, co se změní v jejich práci a jak se dostanou zpět, když přijdou o zařízení.
+
+### SSO prodávej jako provozní kontrolu, ne jako drahou nálepku
+
+SSO má zákazníkovi pomoct řídit přístupy z místa, kde je už stejně spravuje: firemní identity provider, adresář nebo bezpečnostní tým. Pro SaaS to není jen checkbox do enterprise plánu. Je to dohoda o odpovědnosti.
+
+Dobrá SSO konfigurace má kartu:
+
+| Pole | Co zapsat |
+| --- | --- |
+| Protokol | SAML nebo OIDC |
+| Workspace nebo organizace | kde SSO platí |
+| Ověřené domény | domény, pro které smí být SSO vynucené |
+| IdP metadata / issuer | odkud přijde identita |
+| Mapování identity | stabilní subjekt, e-mail, jméno |
+| Mapování skupin nebo rolí | jen pokud je opravdu potřebné |
+| Break-glass účty | kdo se dostane dovnitř při výpadku IdP |
+| Vlastník konfigurace | člověk nebo tým u zákazníka |
+| Testovací scénáře | login, logout, nový uživatel, odebraný uživatel, změna e-mailu |
+
+Nejčastější past je brát e-mail jako věčný identifikátor. E-mail je často kontakt a login jméno, ale v čase se mění: svatba, rebranding firmy, převod domény, externista přes jinou agenturu. Pro technické svázání účtu používej stabilní identifikátor z IdP, pokud ho protokol a zákazník poskytuje. E-mail používej opatrně jako atribut, ne jako jedinou pravdu o člověku.
+
+Další past je automatické přidávání každého člověka s firemní doménou do správného workspace. Doménové ověření může pomoct, ale není náhrada za role a schválení. Člověk z `firma.cz` nemusí mít vidět data každého týmu firmy.
+
+### Provisioning řeší hlavně konec přístupu
+
+SSO často odpovídá na otázku „jak se člověk přihlásí“. SCIM a podobný provisioning odpovídá na otázku „kdo má účet existovat a kdy má zmizet“. To je rozdíl, který bolí hlavně při offboardingu.
+
+Bez provisioningu se stává:
+
+- člověk odejde z firmy,
+- v identity provideru už nemá přístup,
+- v SaaS ale pořád existuje účet, role, exporty, API tokeny nebo vlastnictví objektů,
+- support netuší, jestli účet smazat, zamknout, převést nebo nechat kvůli historii.
+
+SCIM podle RFC 7644 podporuje vytváření, úpravy, čtení a objevování identit jako Users a Groups. Produktově to neznamená „implementuj všechno hned“. Znamená to navrhnout lifecycle:
+
+| Událost | Doporučené chování |
+| --- | --- |
+| Nový uživatel z adresáře | vytvořit účet bez nadbytečných profilových polí |
+| Změna jména nebo e-mailu | aktualizovat kontakt, zachovat stabilní interní identitu |
+| Odebrání ze skupiny | odebrat odpovídající roli nebo přístup |
+| Deaktivace uživatele | zablokovat login, revokovat sessions a zvážit API tokeny |
+| Smazání uživatele | rozlišit produktové odebrání, auditní stopu a právní retenci |
+
+Privacy-first detail: neber SCIM jako pozvánku k importu celého HR profilu. Pro SaaS většinou stačí minimum: stabilní identifikátor, stav účtu, e-mail, jméno pro zobrazení a skupina nebo role, pokud ji opravdu používáš. Datum narození, telefon, adresa, titul, manažer nebo interní zaměstnanecké číslo často nepotřebuješ.
+
+### Break-glass účet není zadní vrátko pro pohodlí
+
+Když zákazník zapne vynucené SSO a IdP spadne, někdo musí umět řešit incident. Proto existuje break-glass přístup: omezený, chráněný a auditovaný způsob, jak spravovat konfiguraci při výpadku.
+
+Špatný break-glass:
+
+- sdílený admin účet,
+- heslo v dokumentu,
+- bez MFA,
+- bez upozornění,
+- bez pravidelného testu,
+- používá se „protože je to rychlejší“.
+
+Dobrý break-glass:
+
+- má konkrétního vlastníka,
+- používá silné MFA nebo passkey,
+- má minimální nutná oprávnění,
+- posílá bezpečnostní upozornění,
+- loguje použití,
+- pravidelně se testuje a rotuje,
+- zákazník ví, kdy a proč existuje.
+
+Break-glass účet je hasicí přístroj. Není to alternativní vchod pro lidi, kterým se nechce přes recepci.
+
+### Login logy drž chudé a užitečné
+
+Identitní systém potřebuje bezpečnostní logy. To ale neznamená, že z každého přihlášení uděláš marketingový profil.
+
+Užitečný bezpečnostní log:
+
+- čas události,
+- typ události,
+- pseudonymní nebo interní identifikátor uživatele,
+- workspace nebo organizace,
+- výsledek,
+- metoda přihlášení,
+- hrubý signál rizika,
+- request ID,
+- IP adresa jen pokud ji opravdu potřebuješ pro bezpečnostní účel a s jasnou retencí.
+
+Do login logu nepatří:
+
+- hesla,
+- recovery kódy,
+- celé session tokeny,
+- celé SAML assertion nebo ID tokeny,
+- detailní fingerprint zařízení pro marketing,
+- obsah uživatelské práce po přihlášení.
+
+Pro produktové rozhodování často stačí agregace: kolik lidí se nedokáže přihlásit, kde padá SSO konfigurace, kolik recovery žádostí končí supportem, kolik workspace má citlivé role bez silného ověření. Nepotřebuješ vědět, že Franta klikl na login třikrát mezi kávou a obědem. Chudší data, klidnější provoz.
+
+### Recovery je součást autentizace
+
+Nejslabší část přihlášení často není heslo, ale obnova účtu. OWASP MFA materiály připomínají, že recovery je alternativní cesta autentizace a nemá být slabší než běžné přihlášení.
+
+U SaaS navrhni recovery podle rizika:
+
+| Akce | Přiměřené ověření |
+| --- | --- |
+| Reset hesla běžného uživatele | potvrzovací odkaz plus limity a expirace |
+| Přidání nové passkey | aktivní session plus opětovné ověření |
+| Vypnutí MFA u vlastníka | silnější ověření, upozornění a případně druhý admin |
+| Změna e-mailu | potvrzení staré i nové adresy nebo silné přihlášení |
+| Převod vlastnictví workspace | explicitní potvrzení dopadu a auditní stopa |
+| Vypnutí vynuceného SSO | break-glass pravidlo nebo schválení vlastníka |
+
+Support nemá být živý bypass bezpečnosti. Dej mu nástroje, které pomáhají ověřit oprávnění bez toho, aby musel lovit citlivé údaje v chatu. A hlavně: do support poznámek nepiš recovery kódy, osobní doklady ani tokeny. To není poznámka. To je budoucí incident převlečený za operativu.
+
+### Checklist: Identita, SSO a provisioning privacy-first
+
+- [ ] Víme, kdo je autoritou identity pro jednotlivce, týmy a enterprise zákazníky.
+- [ ] Lokální účty, SSO účty, externisté a break-glass účty mají jasná pravidla.
+- [ ] Passkeys nebo MFA jsou dostupné pro běžné účty a vyžadované nebo silně doporučené u citlivých rolí.
+- [ ] Recovery cesta není slabší než běžné přihlášení.
+- [ ] SSO konfigurace má vlastníka, ověřené domény, testovací scénáře a bezpečný fallback.
+- [ ] E-mail nepoužíváme jako jediný stabilní identifikátor, pokud máme lepší subject z IdP.
+- [ ] Automatické přidání podle domény neobchází role a schválení přístupu.
+- [ ] Provisioning řeší vytvoření, změnu, deaktivaci i odebrání účtu.
+- [ ] Z identity provideru neimportujeme profilová data, která produkt nepotřebuje.
+- [ ] Login a identity logy neobsahují hesla, tokeny, celé assertion payloady ani zbytečný fingerprint.
+- [ ] Citlivé identity změny posílají upozornění a mají auditní stopu.
+- [ ] Break-glass přístup je omezený, auditovaný, testovaný a nepoužívá se pro běžnou práci.
+
+### Mini úkol
+
+Vyber jeden produkt, workspace nebo návrh SaaS a vyplň identitní kartu:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Kdo je autoritou identity? |  |
+| Jaké přihlašovací metody podporujeme? |  |
+| Které role vyžadují MFA nebo passkey? |  |
+| Co se stane při ztrátě zařízení? |  |
+| Máme SSO? Pokud ano, kdo vlastní konfiguraci? |  |
+| Jak se odebere účet člověku, který odešel? |  |
+| Která identitní data importujeme z IdP? |  |
+| Která z nich nepotřebujeme? |  |
+| Jaký break-glass přístup existuje? |  |
+| Co logujeme při loginu, recovery a změně role? |  |
+
+Potom udělej jednu konkrétní změnu: přidej opětovné ověření před změnu e-mailu, zkrať expiraci resetovacích odkazů, zaveď passkey pro vlastníky, napiš SSO konfigurační kartu, omez import profilových atributů, nebo přidej deaktivaci účtu do offboarding checklistu. Identita není jen vstupní brána. Je to řídicí vrstva důvěry.
+
 ## Zdroje
 
 - ICANN: Information for Domain Name Registrants - práva a odpovědnosti držitelů domén včetně správy, obnovy a převodu doménové registrace: https://www.icann.org/registrants
@@ -18666,6 +18873,11 @@ Potom udělej jednu konkrétní změnu: zkrať expiraci pozvánek, přidej zálo
 - OWASP Cheat Sheet Series: Forgot Password Cheat Sheet - praktická doporučení k jednorázovým, náhodným a časově omezeným resetovacím tokenům: https://cheatsheetseries.owasp.org/cheatsheets/Forgot_Password_Cheat_Sheet.html
 - OWASP Cheat Sheet Series: Authorization Cheat Sheet - doporučení k principu nejmenších oprávnění, deny-by-default a kontrole oprávnění při požadavcích: https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html
 - OWASP Cheat Sheet Series: Multifactor Authentication Cheat Sheet - praktická doporučení k MFA, recovery procesům a tomu, aby obnova účtu nebyla slabší než běžná autentizace: https://cheatsheetseries.owasp.org/cheatsheets/Multifactor_Authentication_Cheat_Sheet.html
+- OWASP Cheat Sheet Series: Authentication Cheat Sheet - doporučení k autentizaci, opětovnému ověření při rizikových akcích, account recovery a bezpečnému zacházení s přihlašovacími toky: https://cheatsheetseries.owasp.org/cheatsheets/Authentication_Cheat_Sheet.html
+- W3C: Web Authentication Level 3 - specifikace WebAuthn pro veřejnoklíčové přihlašovací údaje vázané na relying party a origin: https://www.w3.org/TR/webauthn-3/
+- OpenID Foundation: OpenID Connect Core 1.0 - autentizační vrstva nad OAuth 2.0 a používání claimů k předávání informací o uživateli: https://openid.net/specs/openid-connect-core-1_0.html
+- OASIS: SAML 2.0 Technical Overview - technický přehled Security Assertion Markup Language pro webové single sign-on a federaci identit: https://docs.oasis-open.org/security/saml/Post2.0/sstc-saml-tech-overview-2.0.html
+- IETF RFC 7644: System for Cross-domain Identity Management: Protocol - SCIM protokol pro vytváření, úpravy, čtení a správu identit jako Users a Groups mezi systémy: https://datatracker.ietf.org/doc/html/rfc7644
 - OWASP Software Component Verification Standard - rámec aktivit, kontrol a dobrých praktik pro snižování rizika v softwarovém supply chainu: https://owasp.org/www-project-software-component-verification-standard/
 - GitHub Docs: Dependabot alerts - upozornění na zranitelné závislosti v repozitáři a návaznost na dependency graph: https://docs.github.com/en/code-security/concepts/supply-chain-security/dependabot-alerts
 - GitHub Docs: Dependency review - kontrola změn závislostí v pull requestech a upozornění na rizikové dependency změny: https://docs.github.com/en/code-security/concepts/supply-chain-security/dependency-review
@@ -18764,6 +18976,7 @@ Potom udělej jednu konkrétní změnu: zkrať expiraci pozvánek, přidej zálo
 
 ## Pracovní log
 
+- 2026-07-15: Doplněna příloha o SSO, passkeys a provisioningu bez identitního bludiště: autorita identity, passkeys/WebAuthn, SAML a OIDC SSO, SCIM provisioning, break-glass přístup, chudé login logy, recovery procesy, checklist a mini úkol; ověřeny a doplněny zdroje OWASP, W3C, OpenID Foundation, OASIS a IETF.
 - 2026-07-15: Doplněna příloha o týmových pozvánkách a rolích bez účtového chaosu: životní cyklus pozvánek, role podle práce, předávání vlastnictví workspace, přístupy po vlnách, externisté, MFA a recovery, pravidelný review členů, audit změn, checklist a mini úkol; ověřeny a doplněny zdroje OWASP k autorizaci a MFA.
 - 2026-07-14: Doplněna příloha o interním admin rozhraní bez datového lunaparku: interní úlohy jako základ návrhu, role podle práce, maskování dat ve výchozím stavu, opatrná impersonace, auditní stopa citlivých akcí, pravidelný úklid adminu, checklist a mini úkol.
 - 2026-07-14: Doplněna příloha o trust center bez marketingové mlhy: rozhodovací otázky zákazníka, veřejná a kontrolovaná vrstva informací, lidské bezpečnostní texty, mapa subdodavatelů podle účelu, napojení na provozní změny, obchodní použití bez odbývání otázek, checklist a mini úkol.
