@@ -20576,6 +20576,177 @@ Vyber jeden produkt nebo web a vyplň kartu datové rezidence:
 
 Potom udělej jednu konkrétní opravu: doplň datovou vrstvu do vendor mapy, zpřesni větu v privacy notice, přesuň logy do EU regionu, vypni zbytečný export do externího nástroje, nebo přidej kvartální revizi subdodavatelů. Evropský provoz se nepozná podle sloganu. Pozná se podle mapy, kterou tým umí použít.
 
+## Příloha: Datová mapa produktu bez slepé víry v architekturu
+
+Datová mapa je nudná věc, dokud ji nepotřebuješ. Pak se z ní najednou stane rozdíl mezi klidnou odpovědí a třídenním archeologickým výletem po databázích, logách, integračních skriptech a zapomenutých exportech.
+
+V privacy-first SaaS není datová mapa jen dokument pro právníka. Je to provozní nástroj pro produkt, vývoj, support, sales i bezpečnost. Pomáhá odpovědět na základní otázky: jaká data máme, proč, odkud přišla, kam tečou, kdo je vidí, jak dlouho je držíme a co se stane, když zákazník požádá o export, opravu nebo výmaz.
+
+Špatná otázka zní: „Máme někde diagram architektury?“
+
+Lepší otázka zní: „Umíme podle jedné mapy najít všechny systémy, kde se objeví konkrétní typ zákaznických dat?“
+
+Codyho komentář: Architektura ukazuje, kudy tečou requesty. Datová mapa ukazuje, kde může vzniknout odpovědnost. To jsou příbuzné věci, ale nejsou stejné. Diagram s krabičkami je hezký. Tabulka, podle které support zvládne výmaz bez paniky, je hezčí.
+
+### Mapuj datové situace, ne jen tabulky
+
+Začni od situací, ve kterých data vznikají nebo se přesouvají. Databázové tabulky jsou důležité, ale běžný člověk ani zákazník se neptá na název sloupce. Ptá se, co se děje při registraci, pozvánce kolegy, nahrání souboru, propojení integrace, kontaktování supportu nebo zrušení účtu.
+
+Praktická mapa může začít takto:
+
+| Situace | Data | Účel | Primární systém | Další systémy | Konec životnosti |
+| --- | --- | --- | --- | --- | --- |
+| Registrace administrátora | e-mail, jméno, workspace, čas vytvoření | založení účtu a bezpečnost | aplikace | e-mail, audit log | po zrušení účtu a retenční době |
+| Pozvánka člena týmu | e-mail pozvaného, role, token, expirace | přístup do workspace | aplikace | e-mail, audit log | expirace pozvánky nebo přijetí |
+| Nahrání přílohy | soubor, metadata, vlastník | práce se zákaznickým obsahem | object storage | antivirová kontrola, audit | podle retenčního pravidla workspace |
+| Support ticket | popis problému, přílohy, kontaktní e-mail | pomoc zákazníkovi | support nástroj | CRM podle potřeby | uzavření a supportní retence |
+| Export dat | výběr dat, soubor, audit událost | přenositelnost nebo interní práce | aplikace | dočasné úložiště | krátká expirace exportu |
+
+Tahle úroveň je použitelnější než čistě technický seznam tabulek. Vývojář z ní pořád pozná systémy. Support z ní pozná, kam sáhnout. Produkt z ní pozná, kde přidání nové funkce otevře nové datové riziko.
+
+### Každý tok musí mít důvod a vlastníka
+
+Datový tok bez vlastníka postupně zaroste. Někdo kdysi přidal synchronizaci do CRM, někdo jiný poslal export do analytiky, další člověk přidal logování payloadu kvůli ladění. O rok později už nikdo neví, jestli to něco rozhoduje, ale všichni se bojí to vypnout. Klasika. Technický folklor s právním ocasem.
+
+U každého toku si drž minimálně:
+
+- účel,
+- vlastníka v týmu,
+- právní nebo provozní důvod,
+- zdrojový systém,
+- cílový systém,
+- rozsah dat,
+- pravidlo retence,
+- pravidlo přístupu,
+- způsob výmazu nebo anonymizace,
+- poslední datum revize.
+
+Příklad:
+
+| Tok | Účel | Vlastník | Rozsah | Retence | Revize |
+| --- | --- | --- | --- | --- | --- |
+| Aplikace -> transakční e-mail | odeslání pozvánky a bezpečnostních zpráv | produkt | e-mail, jazyk, typ zprávy | podle e-mailového logu | kvartálně |
+| Aplikace -> CRM | obchodní práce s placenými zákazníky | sales | firma, kontakt, plán, stav smlouvy | podle CRM pravidel | měsíčně |
+| Aplikace -> observabilita | diagnostika chyb a dostupnosti | engineering | request ID, technická metadata, chyba bez payloadu | krátká provozní retence | měsíčně |
+
+Pokud u toku neumíš napsat účel, je to kandidát na vypnutí, omezení nebo aspoň tvrdší revizi. Privacy-first provoz není soutěž v tom, kolik integrací se podaří nalepit na jeden formulář.
+
+### Odděl zákaznická, provozní a obchodní data
+
+Jedna z nejčastějších chyb je házet všechna data do jedné hromady. Produktová data zákazníka, billing, supportní přílohy, marketingové preference a technické logy mají jiný účel, jiný přístupový režim a často jinou retenci.
+
+Rozděl mapu aspoň na tyto vrstvy:
+
+- zákaznický obsah a soubory,
+- identita, role a přístupy,
+- billing a smluvní údaje,
+- support a komunikace,
+- produktová analytika,
+- webová analytika,
+- technické logy a bezpečnostní události,
+- exporty, importy a dočasné soubory,
+- marketingové preference a kampaně.
+
+Toto rozdělení pomůže ve třech praktických situacích. Při výmazu účtu neodstraníš omylem účetní doklady, které musíš držet. Při supportu neotevřeš zákaznický obsah člověku, který potřebuje jen billing stav. Při analytice nepřeneseš marketingové preference do produktového profilu jen proto, že to šlo technicky snadno.
+
+### Nezapomeň na tichá místa
+
+Datová mapa často selže na místech, která nejsou vidět v hlavním produktu. Typicky:
+
+- CSV exporty pro sales nebo zákaznický úspěch,
+- přílohy v support tiketech,
+- screenshoty v bug reportech,
+- logy z jednorázových migračních skriptů,
+- cache a fronty,
+- zálohy a restore prostředí,
+- preview a staging,
+- BI nástroje,
+- ručně sdílené odkazy,
+- staré integrační tokeny,
+- poznámky ze schůzek.
+
+Mini pravidlo: pokud se data dají exportovat, přiložit, zalogovat, nahrát, zkopírovat nebo synchronizovat, patří do mapy. Nemusí mít stejný detail jako hlavní databáze, ale nesmí být neviditelná.
+
+### Datovou mapu napoj na změnový proces
+
+Mapa, kterou nikdo neaktualizuje, je historický dokument. Možná zajímavý. Pro provoz nebezpečný. Proto ji připoj k běžným změnám produktu.
+
+Do zadání nové funkce přidej krátké otázky:
+
+- Vzniká nový typ dat?
+- Mění se účel zpracování?
+- Přidáváme nový systém nebo dodavatele?
+- Posíláme data do jiné země, regionu nebo supportního režimu?
+- Mění se přístupové role?
+- Mění se retence, export, výmaz nebo auditní stopa?
+- Musí se změnit privacy notice, DPA, trust center nebo interní runbook?
+
+Nemusí z toho být velká právní ceremonie. Stačí, aby změna dat nebyla překvapení na konci releasu. U rizikovějších funkcí pak udělej samostatné review, DPIA screening nebo vendor kontrolu.
+
+### Incident začíná otázkou „kde všude?“
+
+Při incidentu, chybě exportu nebo špatně nastaveném oprávnění je nejdůležitější rychle zúžit dopad. Datová mapa má umožnit odpovědět:
+
+- jaký typ dat mohl být dotčen,
+- kterých systémů se to týká,
+- kteří zákazníci nebo role mohli být zasaženi,
+- jestli data odešla mimo hlavní prostředí,
+- jestli existují exporty, cache nebo logy,
+- kdo má provozní vlastnictví jednotlivých míst.
+
+Bez mapy tým často začne hledat podle vzpomínek. To je špatný incidentní nástroj. Paměť lidí je skvělá na kontext, ale mizerná jako evidence systému.
+
+### Udržuj mapu dost malou, aby žila
+
+Nejlepší datová mapa není ta nejdelší. Je to ta, kterou tým skutečně používá. Pokud začne jako padesátisloupcový spreadsheet, pravděpodobně zemře dřív než první quarterly review.
+
+Začni s malým formátem:
+
+| Pole | Proč existuje |
+| --- | --- |
+| Situace nebo tok | Aby se mapa četla podle práce, ne podle interních názvů |
+| Typ dat | Aby bylo jasné, čeho se týká export, výmaz nebo incident |
+| Účel | Aby bylo možné zpochybnit zbytečný sběr |
+| Systémy | Aby tým věděl, kde hledat |
+| Přístup | Aby se oddělily role a citlivá místa |
+| Retence | Aby data neměla nekonečný život |
+| Vlastník | Aby měl někdo odpovědnost za aktualizaci |
+| Poslední revize | Aby šlo poznat zatuchlou část mapy |
+
+Později můžeš přidat region, právní základ, zpracovatele, subzpracovatele, exportní formát nebo bezpečnostní klasifikaci. Ale první verze musí vzniknout rychle a musí odpovědět na praktické otázky.
+
+### Checklist: Datová mapa privacy-first
+
+- [ ] Mapujeme datové situace a toky, ne jen databázové tabulky.
+- [ ] Každý tok má účel, vlastníka, zdroj, cíl a rozsah dat.
+- [ ] Oddělujeme zákaznický obsah, identitu, billing, support, analytiku, logy a marketingové preference.
+- [ ] V mapě jsou i exporty, supportní přílohy, screenshoty, cache, fronty, zálohy a staging.
+- [ ] U každého významného toku známe retenci a způsob výmazu nebo anonymizace.
+- [ ] Nové funkce mají krátkou datovou kontrolu před releasem.
+- [ ] Nákup nového nástroje aktualizuje datovou mapu, vendor kartu a případně trust center.
+- [ ] Incidentní plán používá mapu k rychlému určení dopadu.
+- [ ] Mapa má vlastníka a pravidelnou revizi.
+- [ ] Veřejné texty, DPA a privacy notice odpovídají tomu, co mapa skutečně ukazuje.
+
+### Mini úkol
+
+Vyber jednu důležitou produktovou cestu, třeba registraci, pozvání člena týmu, nahrání souboru, support ticket nebo export dat. Vyplň pro ni krátkou kartu:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jaká situace spouští sběr nebo přesun dat? |  |
+| Jaká data vznikají? |  |
+| Proč je potřebujeme? |  |
+| Kde jsou uložena primárně? |  |
+| Kam se kopírují nebo synchronizují? |  |
+| Kdo k nim má přístup? |  |
+| Jak dlouho je držíme? |  |
+| Jak proběhne export, oprava nebo výmaz? |  |
+| Co by se muselo změnit ve veřejných textech? |  |
+| Který tok je největší kandidát na omezení? |  |
+
+Potom udělej jednu konkrétní opravu: smaž zbytečný logovaný payload, zkrať životnost dočasného exportu, doplň vlastníka k CRM synchronizaci, přesuň supportní přílohy do řízeného úložiště, nebo přidej datovou kontrolu do release checklistu. Datová mapa není byrokracie. Je to navigace pro chvíle, kdy už nestačí říct „někde to asi máme“.
+
 ## Zdroje
 
 - ICANN: Information for Domain Name Registrants - práva a odpovědnosti držitelů domén včetně správy, obnovy a převodu doménové registrace: https://www.icann.org/registrants
@@ -20717,6 +20888,7 @@ Potom udělej jednu konkrétní opravu: doplň datovou vrstvu do vendor mapy, zp
 
 ## Pracovní log
 
+- 2026-07-15: Doplněna příloha o datové mapě produktu bez slepé víry v architekturu: mapování datových situací místo tabulek, vlastníci toků, oddělení zákaznických/provozních/obchodních dat, tichá místa jako exporty a supportní přílohy, napojení mapy na změnový proces a incidenty, checklist a mini úkol; navázáno na existující zdroje k GDPR principům, záznamům o zpracování, retenci, incidentům a privacy by design.
 - 2026-07-15: Doplněna příloha o EU datové rezidenci bez falešných slibů: rozdělení dat podle vrstev, rozdíl mezi regionem, provozovatelem a supportním přístupem, přesnější veřejné formulace, regionální požadavky jako produktová schopnost, checklist a mini úkol; navázáno na existující zdroje k GDPR, zpracovatelům, mezinárodním přenosům a vendor kartám.
 - 2026-07-15: Doplněna příloha o entitlementu a přístupu k funkcím bez produktového bludiště: rozlišení schopností od UI prvků, oddělení plánu, role a stavu workspace, mapa schopností, vysvětlení zamčených funkcí, dočasné výjimky, testování rozhodovací matice, privacy-first kontrola placených schopností, checklist a mini úkol.
 - 2026-07-15: Doplněna příloha o produktových limitech a fair use bez skrytých pastí: účel limitů, soft a tvrdé hranice, komunikace před bolestí, fair use podle dopadu, privacy-first kontrola limitů, evidence dočasných výjimek, checklist a mini úkol.
