@@ -21304,6 +21304,145 @@ Vyber jednu aktivní nebo plánovanou kampaň a vyplň kartu:
 
 Potom udělej jednu opravu: zkrať názvy kampaní, odstraň osobní údaje z parametrů, nastav allowlist, přidej čištění URL po načtení, nebo omez předávání referreru ven z webu. Kampaňový odkaz má být směrovka, ne kapsa plná údajů, která se rozsype při každém přeposlání.
 
+## Příloha: Atribuce a konverze bez skrytého sledovacího profilu
+
+Atribuce je užitečná jen tehdy, když pomáhá rozhodnout, co dělat dál. Jakmile se z ní stane snaha rekonstruovat životní příběh každého návštěvníka přes kampaně, zařízení, e-maily, remarketing a obchodní poznámky, přestává být produktovým nástrojem a začíná být datovým rizikem.
+
+Privacy-first atribuce nezačíná otázkou „jak poznáme úplně všechno“. Začíná otázkou:
+
+„Jaký nejmenší signál nám stačí k rozhodnutí, jestli tento kanál, obsah nebo partnerství stojí za další práci?“
+
+U malého SaaS nebo odborné služby často nepotřebuješ individuální multi-touch model. Potřebuješ vědět, které zdroje přivádějí správné lidi, jaké otázky řeší, jestli vznikají kvalitní poptávky a jestli se investice do obsahu nebo kampaně opakuje smysluplně. To jde udělat s mnohem menším množstvím dat, než si marketingové nástroje rády říkají.
+
+### Rozliš zdroj, relaci a obchodní výsledek
+
+Nejdřív si ujasni, co vlastně měříš. Tři vrstvy se často míchají dohromady:
+
+- Zdroj návštěvy: odkud člověk přišel na web nebo landing page.
+- Relace nebo návštěva: co se stalo během jedné návštěvy.
+- Obchodní výsledek: poptávka, registrace, demo, objednávka, kvalifikovaný lead nebo placený zákazník.
+
+Privacy-first chyba vzniká, když se snažíš všechny vrstvy svázat trvalým identifikátorem člověka jen proto, aby report vypadal chytřeji. U jednoduchého B2B toku může stačit uložit zdroj při odeslání formuláře do CRM a dál pracovat s obchodní kvalitou leadu. Není nutné držet detailní historii každé stránky, kterou člověk předtím viděl.
+
+Praktický příklad:
+
+- Landing page si přečte UTM parametry z povoleného allowlistu.
+- Po odeslání formuláře uloží do CRM hodnoty `source`, `medium`, `campaign` a cílovou URL.
+- Do analytiky jde agregovaná konverze bez e-mailu, telefonu nebo jména.
+- Sales později doplní kvalitu leadu ručně: fit, potřeba, timing, další krok.
+- Měsíční report porovnává počet a kvalitu poptávek podle kampaně, ne chování jednotlivých lidí.
+
+Tohle není dokonalý model světa. Je to dost dobrý model pro rozhodování. A dost dobrý je v privacy-first provozu často velmi dobrá zpráva.
+
+### Nepřeváděj každý klik na identitu
+
+Cookie, lokální úložiště, fingerprinting a serverové identifikátory jsou lákavé, protože slibují spojit střípky dohromady. Jenže každý další identifikátor má cenu: právní, technickou, bezpečnostní i důvěrovou.
+
+Pokud používáš cookie pro legitimní produktový účel, nastav ji úzce:
+
+- krátká životnost podle rozhodovací potřeby,
+- žádná osobní data v hodnotě cookie,
+- `Secure` pro HTTPS,
+- `HttpOnly` tam, kde cookie nemá číst JavaScript,
+- `SameSite` podle skutečného toku,
+- host-only rozsah, pokud nepotřebuješ sdílení přes subdomény.
+
+MDN popisuje atributy `Set-Cookie` včetně `Secure`, `HttpOnly`, `SameSite`, `Domain`, `Path` a `Max-Age`. Praktický závěr pro atribuci je jednoduchý: když už cookie používáš, nechovej se k ní jako k bezednému batohu na marketingové informace. Cookie má nést minimální technickou hodnotu, ne kopii CRM.
+
+Naopak fingerprinting pro běžné měření kampaní do privacy-first e-booku nepatří. Pokud se bez něj report rozpadne, není to důkaz, že potřebuješ agresivnější měření. Je to často důkaz, že rozhodovací otázka je špatně položená.
+
+### Ukládej zdroj jen tam, kde má práci
+
+Častý kompromis: krátkodobě si pamatovat zdroj návštěvy, ale nepřenášet ho dál, než je nutné.
+
+Příklad pro poptávkový formulář:
+
+1. Návštěvník přijde z kampaně na landing page.
+2. Web zpracuje jen povolené parametry.
+3. Parametry se očistí z URL nebo se dál nepřilepují na interní odkazy.
+4. Pokud člověk odešle formulář, uloží se kampaní zdroj k leadu.
+5. Pokud formulář neodešle, zdroj se po krátké době zahodí nebo zůstane jen v agregované analytice.
+
+To chrání před dvěma extrémy. První extrém je neměřit vůbec nic a pak rozhodovat podle nálady. Druhý extrém je sledovat každého člověka celé týdny kvůli tomu, že možná jednou klikne. Privacy-first cesta je skromnější: zdroj má práci v okamžiku rozhodnutí, potom končí.
+
+### Konverze neznamená vždy formulář
+
+U SaaS produktu může být konverze:
+
+- vytvoření workspace,
+- dokončení první konfigurace,
+- pozvání kolegy,
+- import testovacích dat,
+- zapnutí integrace,
+- úspěšné dokončení demo scénáře,
+- žádost o bezpečnostní materiály,
+- odpověď na konkrétní CTA v dokumentaci.
+
+Ne každá konverze ale musí být propojená s marketingovým zdrojem. U produktového onboardingu často stačí agregované aktivační metriky podle týdne, plánu nebo segmentu, který už produkt oprávněně zná. Pokud chceš porovnat kampaně podle aktivace, nastav jasnou hranici: které hodnoty se smí spojit, jak dlouho, kdo k nim má přístup a kdy se vazba rozpadne.
+
+Codyho komentář: Atribuce je trochu jako koření. Špetka pomůže rozhodování. Když jí zasypeš celý produkt, zákazník už necítí hodnotu, jen datový pepř v očích.
+
+### Respektuj signály preference
+
+Privacy-first web by měl počítat s tím, že člověk může dát najevo, že si nepřeje sledování nebo sdílení dat nad nezbytný rámec. Global Privacy Control je standardizační práce W3C pro signál preference soukromí v prohlížeči nebo zařízení. Není to náhrada za vlastní právní posouzení, ale je to užitečný produktový signál: když člověk posílá jasnou preferenci, rozhraní a měření by se neměly tvářit, že nic nevidí.
+
+Prakticky:
+
+- respektuj odmítnutí marketingových cookies,
+- nepouštěj reklamní a remarketingové skripty před souhlasem,
+- nenahrazuj odmítnutí skrytým serverovým sledováním,
+- u preference signálů měj dokumentované, co produkt dělá,
+- v interních reportech označ, že data mohou být neúplná kvůli respektování soukromí.
+
+Neúplnost dat není chyba. Je to vlastnost férového měření. Report má říct „toto víme z dovolených signálů“, ne předstírat absolutní pravdu.
+
+### Server-side měření není kouzelná výjimka
+
+Server-side tracking může zlepšit výkon nebo kontrolu nad tím, co se posílá třetím stranám. Zároveň ale může být horší, pokud se použije jako způsob, jak obejít volbu člověka v prohlížeči. To, že uživatel nevidí skript, neznamená, že zpracování přestalo existovat.
+
+Používej server-side měření konzervativně:
+
+- filtruj události před odesláním dodavateli,
+- neposílej osobní údaje do analytických nebo reklamních systémů,
+- drž mapu, jaké endpointy přijímají měřicí data,
+- odděl produktové logy od marketingové atribuce,
+- respektuj consent a preference stejně jako na frontendu,
+- nastav retenci pro surové eventy, ne jen pro dashboardy.
+
+Pokud neumíš vysvětlit rozdíl mezi serverovým logem, produktovou analytikou a reklamní atribucí jednou větou, ještě to není připravené na produkci. Ano, bolí to hlavně v tabulkách. Tabulky si poradí.
+
+### Checklist: Atribuce privacy-first
+
+- [ ] U každé atribuční metriky je napsané rozhodnutí, které podporuje.
+- [ ] Zdroj kampaně se ukládá jen z povolených parametrů.
+- [ ] Atribuce neobsahuje e-mail, telefon, jméno, IP adresu ani interní poznámky sales.
+- [ ] Cookie nebo jiný identifikátor má krátkou životnost a jasný účel.
+- [ ] Marketingové skripty a remarketing se nespouští před odpovídajícím souhlasem.
+- [ ] Odmítnutí cookies nebo preference soukromí se neobchází serverovým měřením.
+- [ ] Konverze jsou definované podle obchodního nebo produktového výsledku, ne podle náhodného kliknutí.
+- [ ] CRM dostává jen atribuční pole, která sales reálně používá.
+- [ ] Agregované reporty ukazují kvalitu výsledku, ne jen počet návštěv.
+- [ ] Retence surových atribučních dat je kratší než retence obchodních záznamů.
+- [ ] Tým ví, že privacy-first report může být záměrně neúplný.
+
+### Mini úkol
+
+Vyber jeden report, podle kterého dnes rozhodujete o marketingu nebo obsahu. Vyplň kartu:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jaké rozhodnutí má report podporovat? |  |
+| Které atribuční hodnoty jsou opravdu potřeba? |  |
+| Kde se hodnoty poprvé zachytí? |  |
+| Kde se uloží po konverzi? |  |
+| Jak dlouho je držíme v detailu? |  |
+| Kdo k nim má přístup? |  |
+| Co se stane při odmítnutí cookies nebo preference sledování? |  |
+| Jaké údaje z reportu můžeme agregovat nebo smazat? |  |
+| Který jeden graf nebo sloupec už nepodporuje žádné rozhodnutí? |  |
+
+Potom udělej jednu úpravu: zkrať životnost atribuční cookie, odeber osobní údaj z konverzního payloadu, přepiš report z počtu kliků na kvalitu poptávek, nebo zdokumentuj chování při odmítnutí cookies. Dobrá atribuce není ta, která ví nejvíc. Dobrá atribuce je ta, podle které uděláš lepší rozhodnutí bez zbytečného sledování.
+
 ## Zdroje
 
 - ICANN: Information for Domain Name Registrants - práva a odpovědnosti držitelů domén včetně správy, obnovy a převodu doménové registrace: https://www.icann.org/registrants
@@ -21432,6 +21571,8 @@ Potom udělej jednu opravu: zkrať názvy kampaní, odstraň osobní údaje z pa
 - MDN Web Docs: URLSearchParams - rozhraní pro práci s query stringem URL a jednotlivými parametry: https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams
 - MDN Web Docs: Referer header - vysvětlení, že `Referer` může obsahovat origin, path a query string podle referrer policy a má dopady na analytiku, logování a soukromí: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Referer
 - MDN Web Docs: Referrer-Policy header - HTTP hlavička pro řízení množství referrer informací posílaných s požadavky: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Referrer-Policy
+- MDN Web Docs: Set-Cookie header - atributy cookies včetně `Secure`, `HttpOnly`, `SameSite`, `Domain`, `Path` a životnosti: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Set-Cookie
+- W3C: Global Privacy Control - specifikace signálu preference soukromí pro prohlížeče a zařízení: https://www.w3.org/TR/gpc/
 - MDN Web Docs: Permissions API - programový dotaz na stav oprávnění jako `granted`, `denied` nebo `prompt` a přehled permission-aware API: https://developer.mozilla.org/en-US/docs/Web/API/Permissions_API
 - MDN Web Docs: Geolocation API - webové rozhraní pro sdílení polohy se souhlasem uživatele a dostupností jen v bezpečném kontextu: https://developer.mozilla.org/en-US/docs/Web/API/Geolocation_API
 - MDN Web Docs: MediaDevices.getUserMedia() - přístup ke kameře a mikrofonu v bezpečném kontextu, s povinným souhlasem a požadavky na soukromí a bezpečnost: https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices/getUserMedia
@@ -21451,6 +21592,7 @@ Potom udělej jednu opravu: zkrať názvy kampaní, odstraň osobní údaje z pa
 
 ## Pracovní log
 
+- 2026-07-15: Doplněna příloha o atribuci a konverzích bez skrytého sledovacího profilu: rozlišení zdroje, relace a obchodního výsledku, ukládání zdroje jen při skutečné práci, opatrné používání cookies a server-side měření, respektování preference soukromí, checklist a mini úkol; ověřeny a doplněny zdroje MDN k `Set-Cookie` a W3C ke Global Privacy Control.
 - 2026-07-15: Doplněna příloha o kampaňových odkazech a UTM bez úniku dat v URL: URL parametr jako datový tok, allowlist povolených parametrů, zákaz osobních a obchodně citlivých hodnot v query stringu, čištění parametrů po příchodu, vědomé nastavení `Referrer-Policy`, evidence krátkých odkazů, agregované vyhodnocování kampaní, checklist a mini úkol; navázáno na existující zdroje MDN k `URLSearchParams`, `Referer` a `Referrer-Policy`.
 - 2026-07-15: Doplněna příloha o uploadech souborů bez datové miny v příloze: rozlišení typů uploadů, účel a retence souborů, bezpečný mikrotext pro support přílohy, allowlist validace, oddělení importního zdrojového souboru od výsledných dat, řízení přístupů ke stažení, checklist a mini úkol; navázáno na existující zdroj OWASP File Upload Cheat Sheet.
 - 2026-07-15: Doplněna příloha o externích embedech bez cizího kódu na každé stránce: inventář map, videí, chatů, kalendářů, sociálních postů a dalších widgetů, načítání až po záměru člověka, omezení iframe přes `sandbox`, `allow`, `loading` a `referrerpolicy`, dostupnost obsahu bez embedu, opatrné používání chat widgetů a sociálních embedů, checklist a mini úkol; ověřen a doplněn zdroj MDN k elementu `iframe`.
