@@ -19915,6 +19915,177 @@ Vyber jedno existující nebo plánované API a vyplň kartu:
 
 Potom udělej jednu konkrétní opravu: rozděl příliš široký scope, doplň request ID do chyb, přidej podpis webhooku, napiš první OpenAPI kontrakt, nastav expiraci testovacích tokenů nebo odeber z endpointu pole, které integrace nepotřebuje. Veřejné API má být dveře pro užitečnou integraci, ne průvan do celého domu.
 
+## Příloha: Exporty a importy dat bez ručního chaosu
+
+Export a import dat jsou často považované za podpůrné funkce, které se dopíší „někdy potom“. Jenže v SaaS bývají přesně tím místem, kde se láme důvěra. Zákazník chce odejít, přejít z jiného systému, předat data účetnictví, napojit reporting nebo vyhovět internímu auditu. Pokud je odpovědí ruční SQL dump, zip poslaný přes e-mail a slib „to nějak vyčistíme“, produkt právě vystavil účet za roky odkládání.
+
+Špatná otázka zní: „Jak rychle dostaneme data ven nebo dovnitř?“
+
+Lepší otázka zní: „Kdo data potřebuje, pro jaké rozhodnutí nebo přenos, v jakém rozsahu, jak dlouho budou dostupná a jak zabráníme tomu, aby se export stal novou datovou skládkou?“
+
+Právo na přenositelnost údajů, zásady minimalizace a omezení uchování nejsou jen právní kapitoly. V produktové praxi znamenají, že export má být čitelný, účelový, dohledatelný a bezpečně ukončený. Import má být stejně disciplinovaný: nepřijímat všechno, co uživatel nahraje, ale pomoct mu přenést jen data, která produkt opravdu umí používat.
+
+### Export není záloha pro všechno
+
+Export má mít jasný účel. Jinak se z něj stane univerzální tlačítko „stáhni celý život zákazníka“, které je pohodlné při první implementaci a nebezpečné při každém dalším incidentu.
+
+Typické druhy exportu:
+
+- uživatelský export vlastních dat,
+- administrátorský export dat workspace,
+- účetní nebo fakturační export,
+- auditní export změn,
+- reportovací export agregovaných metrik,
+- technický export pro migraci do jiného systému,
+- právní export pro vyřízení konkrétní žádosti.
+
+Každý typ má jiného příjemce, jiný rozsah a jiné riziko. Fakturační export nepotřebuje interní poznámky supportu. Reportovací export často nepotřebuje e-mail jednotlivce. Auditní export nepotřebuje text celé konverzace, pokud cílem je doložit změny oprávnění.
+
+Codyho komentář: Export typu „vezmeme všechno, co je v databázi, a zákazník si to přebere“ je produktová kapitulace v CSV převleku. Někdy je rychlý. Skoro nikdy není dobrý.
+
+### Navrhni export jako produktový tok
+
+Bezpečný export není jen soubor. Je to tok:
+
+1. Uživatel nebo admin vybere účel exportu.
+2. Produkt ukáže rozsah dat a odhad dopadu.
+3. U citlivějších exportů proběhne potvrzení nebo opětovné ověření.
+4. Export se připraví asynchronně, aby nezatěžoval hlavní aplikaci.
+5. Soubor je dostupný omezenou dobu.
+6. Stažení má auditní stopu.
+7. Po expiraci se export smaže.
+
+U malého SaaS nemusí být první verze složitá. Stačí oddělit běžné exporty od rizikových. Třeba agregovaný report může být dostupný hned, zatímco export členů, kontaktů nebo auditních záznamů vyžaduje admin roli, krátkou expiraci odkazu a záznam v audit logu.
+
+Produktový text má být konkrétní:
+
+„Export obsahuje členy workspace, jejich role, stav pozvánky a datum poslední změny role. Neobsahuje hesla, bezpečnostní tokeny, interní supportní poznámky ani technické logy. Soubor bude dostupný 24 hodin.“
+
+To je lepší než „export dat“. Uživatel ví, co dostane. Tým ví, co nesmí přidat omylem.
+
+### Formát má být čitelný i stabilní
+
+Formát exportu vybírej podle práce. CSV je dobré pro tabulková data, ale mizerné pro vnořené vztahy. JSON je lepší pro strukturovaná data, ale horší pro účetní, kteří čekají tabulku. PDF vypadá hezky, ale špatně se zpracovává strojově.
+
+Praktická pravidla:
+
+- CSV používej pro jednoduché řádky se stabilními sloupci.
+- JSON používej pro strukturované objekty, historii a vztahy.
+- PDF používej jen pro lidsky čitelný dokument, ne jako hlavní datový export.
+- Ke každému exportu přidej popis sloupců nebo schéma.
+- Datum a čas drž v konzistentním formátu včetně časové zóny.
+- Identifikátory drž stabilní, ale nevystavuj interní sekvenční ID, pokud to není nutné.
+- Prázdné hodnoty odlišuj od neznámých nebo neaplikovatelných hodnot.
+
+Verzuj formát stejně opatrně jako API. Přidat sloupec může rozbít automatizaci zákazníka, pokud bez varování změníš pořadí nebo název. U důležitých exportů napiš malý changelog: co se změnilo, od kdy a proč.
+
+### Import začíná mapováním, ne uploadem
+
+Import je rizikovější než export, protože špatná data se dostanou dovnitř a začnou ovlivňovat práci lidí. Zákazník často nahraje soubor z jiného systému, kde jsou jiné názvy polí, staré hodnoty, duplicity, neplatné e-maily, poznámky v jednom sloupci a občas i údaje, které v novém produktu vůbec nemají být.
+
+Dobrý import má tři kroky:
+
+1. Validace souboru a základní bezpečnostní kontrola.
+2. Mapování polí na cílový datový model.
+3. Náhled dopadu před skutečným zápisem.
+
+Náhled má ukázat:
+
+- kolik záznamů se vytvoří,
+- kolik se aktualizuje,
+- kolik se přeskočí,
+- jaké chyby brání importu,
+- které sloupce produkt ignoruje,
+- zda import obsahuje potenciálně citlivá nebo zakázaná pole.
+
+Pokud import nedokážeš vysvětlit v náhledu, nedělej ho hned. Ruční oprava po špatném importu je rychlý způsob, jak z supportu udělat forenzní tým. A to není dobrý onboarding, to je trest za důvěru.
+
+### Zakázaná data pojmenuj předem
+
+Privacy-first import má seznam dat, která produkt nechce. Ne proto, že by byla technicky nemožná, ale protože nepatří k účelu.
+
+Příklady zakázaných nebo podezřelých polí:
+
+- rodná čísla, čísla dokladů nebo jiné státní identifikátory,
+- platební karty nebo bankovní přihlašovací údaje,
+- hesla, API klíče a tokeny,
+- zdravotní nebo jiné zvláštní kategorie údajů,
+- volné poznámky z historického CRM bez kontroly obsahu,
+- exporty e-mailových kampaní s lidmi, kteří nedali relevantní souhlas,
+- technické logy s IP adresami bez jasného účelu.
+
+Importér nemusí rozpoznat všechno dokonale. Ale může mít základní detekce, varování a hlavně produktové pravidlo: když zákazník potřebuje přenést riziková data, řeší se to samostatným procesem s jasným účelem, ne jako běžný upload.
+
+### Dočasné soubory nejsou archiv
+
+Importní a exportní soubory mají krátký život. Jsou to pracovní artefakty, ne nový zdroj pravdy.
+
+Nastav pravidla:
+
+- dočasné soubory se mažou automaticky,
+- přístup k nim má omezený okruh lidí nebo rolí,
+- odkazy expirují,
+- soubory nejsou posílané jako příloha e-mailu, pokud to jde jinak,
+- support neukládá kopie na lokální disk,
+- importní chyby neukládají celé řádky s citlivými daty,
+- logy obsahují ID importu/exportu, stav a souhrn, ne celý obsah.
+
+U větších zákazníků se vyplatí mít samostatný „migration workspace“ nebo bezpečný přenosový kanál. Ale i u malého týmu platí jednoduché pravidlo: soubor, který vznikl kvůli jednomu přenosu, nemá tiše přežít další rok v cloudu, ticketu nebo chatu.
+
+### Selhání musí být opravitelné
+
+Import a export selhávají. Soubor je moc velký, má špatné kódování, obsahuje duplicity, zákazník nemá oprávnění, integrace doběhne napůl, export expiroval před stažením. Dobrá funkce nečeká, že se nic z toho nestane.
+
+Navrhni stavy:
+
+- připraveno,
+- běží,
+- čeká na potvrzení,
+- dokončeno,
+- dokončeno s varováním,
+- selhalo opravitelné,
+- selhalo bezpečnostní,
+- expirováno,
+- smazáno.
+
+U každého stavu napiš, co může udělat uživatel a co může udělat support. „Něco se pokazilo“ nestačí. Lepší je: „Import se zastavil, protože 18 řádků nemá platný e-mail. Stáhni soubor chyb, oprav hodnoty a spusť import znovu. Žádná data nebyla zapsána.“
+
+U hromadných změn se rozhodni, zda import zapisuje atomicky, nebo po dávkách. Obě varianty jsou legitimní, ale musí být jasné, co se stane při chybě. Tiché částečné importy bez přehledu jsou ideální recept na supportní archeologii.
+
+### Checklist: Exporty a importy privacy-first
+
+- [ ] Každý export má pojmenovaný účel, příjemce, rozsah a retenci.
+- [ ] Citlivější exporty vyžadují odpovídající roli, opětovné ověření nebo dodatečné potvrzení.
+- [ ] Produkt před exportem ukazuje, jaká data soubor obsahuje a co naopak neobsahuje.
+- [ ] Exportní soubory expirují a po expiraci se mažou.
+- [ ] Stažení exportu má auditní stopu bez zbytečného obsahu souboru.
+- [ ] Formáty exportů jsou popsané, stabilní a verzované.
+- [ ] Import má validaci, mapování a náhled dopadu před zápisem.
+- [ ] Importér umí rozlišit vytvoření, aktualizaci, přeskočení a chybu.
+- [ ] Existuje seznam polí, která produkt nepřijímá nebo vyžaduje zvláštní proces.
+- [ ] Dočasné importní soubory nejsou ukládané natrvalo.
+- [ ] Chybové reporty neobsahují víc osobních údajů, než je nutné k opravě.
+- [ ] Support má postup, jak import nebo export vysvětlit bez ručního posílání dat přes e-mail.
+
+### Mini úkol
+
+Vyber jeden existující nebo plánovaný export/import a vyplň kartu:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Kdo funkci spouští? |  |
+| Jaký je účel přenosu dat? |  |
+| Jaká data jsou nutná? |  |
+| Jaká data jsou výslovně mimo rozsah? |  |
+| Jaký formát použijeme a proč? |  |
+| Jak dlouho bude soubor dostupný? |  |
+| Kdo uvidí auditní stopu? |  |
+| Jaké chyby mají být opravitelné uživatelem? |  |
+| Co se stane při částečném selhání? |  |
+| Jak se dočasné soubory smažou? |  |
+
+Potom udělej jednu konkrétní opravu: přidej expiraci exportních odkazů, napiš popis sloupců, rozděl admin export od běžného uživatelského exportu, doplň náhled importu, zablokuj nechtěné sloupce nebo přestaň posílat exporty e-mailem. Export a import jsou možná nudné funkce, ale přesně nudné funkce často rozhodují, jestli zákazník produktu věří.
+
 ## Zdroje
 
 - ICANN: Information for Domain Name Registrants - práva a odpovědnosti držitelů domén včetně správy, obnovy a převodu doménové registrace: https://www.icann.org/registrants
@@ -20056,6 +20227,7 @@ Potom udělej jednu konkrétní opravu: rozděl příliš široký scope, doplň
 
 ## Pracovní log
 
+- 2026-07-15: Doplněna příloha o exportech a importech dat bez ručního chaosu: účelové typy exportů, export jako produktový tok, stabilní formáty, importní validace a mapování, zakázaná data, krátká životnost dočasných souborů, opravitelné stavy selhání, checklist a mini úkol; navázáno na existující zdroje k přenositelnosti dat, uploadům, API bezpečnosti a principům GDPR.
 - 2026-07-15: Doplněna příloha o veřejném API a developer experience bez datového průvanu: návrh API od integračního use casu, OpenAPI kontrakt, konkrétní scopy, životní cyklus tokenů, bezpečné chybové odpovědi, rate limity, webhooky/exporty, sandbox, verze a deprekační pravidla, checklist a mini úkol; ověřeny a doplněny zdroje OpenAPI 3.2.0, OAuth 2.0 Security Best Current Practice RFC 9700 a DPoP RFC 9449.
 - 2026-07-15: Doplněna příloha o RAG a interních znalostech bez úniku kontextu: vymezení práce asistenta, dělení dokumentů podle oprávnění před indexací, chunk metadata, prompt injection v retrieved dokumentech, zdrojování odpovědí, životní cyklus indexu, retrieval evaly, checklist a mini úkol; ověřeny a doplněny zdroje OWASP Top 10 for LLM Applications 2025, OWASP k vector/embedding slabinám a NIST AI RMF včetně GenAI profilu.
 - 2026-07-15: Doplněna příloha o agentních evaluacích bez produkčního hřiště: eval karta pro záměr, data, nástroje, autorizaci, consent, výstup a stopování, syntetická testovací data, testování oprávnění, simulace chyb nástrojů, chudé eval logy, převod selhání do backlogu, checklist a mini úkol; navázáno na existující zdroje k MCP, OWASP logování a GDPR principům minimalizace.
