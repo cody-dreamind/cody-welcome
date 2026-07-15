@@ -19001,6 +19001,164 @@ Vyber jednu veřejnou stránku nebo SaaS aplikaci a vyplň kartu hlaviček:
 
 Potom udělej jednu konkrétní změnu: nastav `Referrer-Policy`, vypni nepotřebnou schopnost přes `Permissions-Policy`, přidej `X-Content-Type-Options`, zaveď CSP v report-only režimu, nebo odstraň externí skript bez vlastníka. Bezpečnostní hlavičky nejsou velký projekt. Jsou pravidelná hygiena, která drží prohlížeč na straně uživatele.
 
+## Příloha: Auditní stopa bez sledovacího deníku
+
+Auditní stopa má pomoct odpovědět na otázku, co se v systému stalo, kdo spustil důležitou změnu a jak obnovit důvěru po chybě nebo incidentu. Není to tajný deník všeho, co uživatel udělal od rána do večera. Privacy-first produkt potřebuje auditní logy, ale potřebuje je navrhnout stejně vědomě jako formulář, analytiku nebo oprávnění.
+
+Špatná otázka zní: „Můžeme zalogovat všechno, ať máme jistotu?“
+
+Lepší otázka zní: „Které události budeme opravdu potřebovat při bezpečnostní kontrole, sporu, obnově dat nebo vysvětlení změny zákazníkovi?“
+
+OWASP Logging Cheat Sheet doporučuje přemýšlet o účelu logování, výběru událostí, vyloučení citlivých dat, ochraně logů a jejich likvidaci. Evropský princip minimalizace a omezení doby uložení pak připomíná nepříjemně užitečnou věc: i dobrý log je pořád data, která musí mít účel a konec životnosti. Auditní stopa není výjimka z privacy-first pravidel. Je to jejich praktická zkouška.
+
+### Rozliš auditní log, technický log a produktovou analytiku
+
+Nejdřív odděl tři různé světy:
+
+| Typ záznamu | Účel | Typická otázka | Kdo ho používá |
+| --- | --- | --- | --- |
+| Auditní log | Vysvětlit důležité změny v účtu, datech, rolích a konfiguraci | Kdo změnil roli uživatele? | admin, support, bezpečnost, zákazník |
+| Technický log | Diagnostikovat chyby, výkon a provoz | Proč selhal import? | vývoj, provoz |
+| Produktová analytika | Rozhodovat o produktu agregovaně | Kolik týmů dokončilo onboarding? | produkt, marketing |
+
+Když tyto vrstvy smícháš, vznikne chaos. Support hledá změnu role v debug logu, vývojáři vidí víc osobních údajů, než potřebují, a produktový tým si začne plést auditní stopu s měřením adopce. Ano, jeden logovací systém může technicky nést víc typů událostí. Ale produktově musí být jasné, který záznam existuje kvůli čemu.
+
+### Loguj důležité změny, ne každé nadechnutí
+
+Auditní stopa má největší hodnotu u akcí, které mění stav, oprávnění, data nebo peníze. U malého SaaS začni těmito kategoriemi:
+
+- vytvoření, deaktivace a obnovení účtu,
+- pozvání člena týmu a přijetí pozvánky,
+- změna role, vlastníka workspace nebo billing správce,
+- zapnutí nebo vypnutí SSO, MFA, SCIM nebo důležité integrace,
+- export dat, import dat a hromadný výmaz,
+- změna fakturačních údajů, plánu nebo platební metody,
+- změna retenčního nastavení, privacy nastavení nebo sdílení dat,
+- použití impersonace nebo break-glass přístupu,
+- změna API klíče, webhooku nebo přístupového tokenu,
+- zásah supportu do zákaznického účtu.
+
+Naopak auditní log většinou nepotřebuje každý pohyb kurzoru, každé otevření stránky, každé zobrazení seznamu ani každé kliknutí na navigaci. Pokud je čtení citlivých záznamů samo o sobě riziková akce, loguj přístup k dané citlivé oblasti. Ale nedělej z běžného používání produktu špionážní román. Ten žánr se zákazníkům v B2B fakt blbě prodává.
+
+### Navrhni událost jako větu
+
+Dobrá auditní událost se dá přečíst lidsky:
+
+„Petra Nováková změnila roli Jana Svobody ve workspace Acme z Editor na Admin.“
+
+Z takové věty se dá odvodit struktura:
+
+| Pole | Příklad | Poznámka |
+| --- | --- | --- |
+| `event_type` | `member.role_changed` | Stabilní název události |
+| `actor_id` | interní ID Petry | Kdo akci provedl |
+| `actor_type` | `user`, `support`, `system` | Lidská, systémová nebo supportní akce |
+| `workspace_id` | interní ID workspace | Kontext zákazníka |
+| `target_type` | `member` | Co se změnilo |
+| `target_id` | interní ID Jana | Objekt změny |
+| `before` | `Editor` | Jen relevantní hodnota |
+| `after` | `Admin` | Jen relevantní hodnota |
+| `reason` | `role_update` nebo volitelný komentář | Opatrně s volným textem |
+| `request_id` | korelační ID | Spojení s technickým logem bez opisování dat |
+| `created_at` | čas události | Čas v jednotném formátu |
+
+Vyhýbej se ukládání celých objektů před a po změně. Je pohodlné uložit „snapshot všeho“, ale rychle tím dostaneš do auditní stopy adresy, poznámky, tokeny, metadata, interní komentáře nebo osobní údaje, které k vysvětlení změny nepotřebuješ. Auditní log má být ostrý skalpel, ne export databáze v přestrojení.
+
+### Chraň auditní log před běžnou zvědavostí
+
+Auditní stopa může obsahovat citlivý provozní kontext. Proto k ní nepřistupuj jako k běžné administrátorské tabulce, kam koukne každý, kdo má chvíli čas.
+
+Praktická pravidla:
+
+- čtení auditních logů je samostatné oprávnění,
+- export auditních logů je ještě silnější oprávnění než čtení,
+- support vidí jen logy účtů, kde má jasný důvod pomoci,
+- zákaznický admin vidí zákaznickou auditní stopu bez interních technických detailů,
+- interní poznámky supportu se nemíchají do zákaznického audit logu,
+- použití impersonace je v auditní stopě viditelné a těžko přehlédnutelné,
+- auditní logy se nesmí potichu editovat přes běžné admin rozhraní.
+
+Nemusíš hned stavět kryptograficky neporušitelný archiv pro každou malou aplikaci. Ale musíš zabránit tomu, aby člověk s běžným admin přístupem mohl po sobě jednoduše zamést stopy. Minimem je oddělené oprávnění, append-only chování na aplikační úrovni, zálohování a jasný postup, kdo může log číst při incidentu.
+
+### Volný text je past na osobní údaje
+
+Volitelný komentář „důvod změny“ vypadá nevinně. Pak do něj někdo napíše diagnózu zákazníka, osobní problém zaměstnance, heslo z telefonátu nebo celý obsah supportního ticketu. Gratuluju, auditní log právě adoptoval data, která nikdy nechtěl.
+
+Kde to jde, používej předdefinované důvody:
+
+| Situace | Lepší důvod |
+| --- | --- |
+| Změna role po nástupu | `team_change` |
+| Odebrání přístupu po odchodu | `offboarding` |
+| Dočasný supportní zásah | `support_request` |
+| Obnova po incidentu | `incident_response` |
+| Úklid staré integrace | `maintenance` |
+
+Pokud volný text potřebuješ, dej k němu krátkou nápovědu: „Nevkládej hesla, zdravotní údaje, obsah smluv ani zbytečné osobní informace.“ Nápověda nevyřeší všechno, ale sníží počet kreativních katastrof. A kreativní katastrofa v logu je pořád katastrofa, jen má lepší timestamp.
+
+### Retenci nastav podle rizika a účelu
+
+Auditní logy mají často delší životnost než běžné technické logy, protože pomáhají řešit spory, bezpečnostní události a změny v účtech. To ale neznamená „navždy“. Retence má vycházet z účelu, smluvních závazků, právních důvodů a reálné provozní potřeby.
+
+Praktický model:
+
+- běžné debug logy drž krátce, typicky dny až týdny podle provozu,
+- aplikační auditní logy drž déle podle rizika produktu a smluv,
+- bezpečnostní události s vyšším rizikem drž odděleně a s přísnějším přístupem,
+- exporty logů pro zákazníka časově omez,
+- staré auditní události agreguj nebo archivuj jen tehdy, když máš jasný důvod,
+- pravidelně testuj, že mazání nebo archivace opravdu funguje.
+
+Když zákazník smaže workspace, musí být jasné, co se stane s auditní stopou. Některé záznamy můžeš potřebovat pro bezpečnost, účetnictví nebo obhajobu oprávněného postupu. Jiné záznamy už účel nemají. Popiš to v interní retenční mapě a ve veřejných informacích přiměřeně lidsky.
+
+### Auditní log ukaž zákazníkovi tam, kde mu pomůže
+
+Dobře navržená auditní stopa není jen interní pojistka. V B2B SaaS může být i produktová funkce, která snižuje počet supportních ticketů a zvyšuje důvěru.
+
+Zákaznickému adminovi se hodí vidět:
+
+- kdo pozval nového člena,
+- kdo změnil roli nebo odebral přístup,
+- kdy se změnilo SSO nebo MFA nastavení,
+- kdo vytvořil, zneplatnil nebo použil API klíč,
+- kdy proběhl export nebo import dat,
+- kdo změnil billing kontakt nebo plán,
+- kdy support provedl zásah na žádost zákazníka.
+
+Neukazuj mu interní stack trace, IP adresu bez jasného důvodu, kompletní user agent ani surové payloady. Pokud zákazník potřebuje detail pro bezpečnostní šetření, může existovat řízený export nebo supportní proces. Výchozí obrazovka má být čitelná, ne forenzní skládka.
+
+### Checklist: Auditní stopa privacy-first
+
+- [ ] Máme oddělený účel auditních logů, technických logů a produktové analytiky.
+- [ ] Auditujeme hlavně změny stavu, oprávnění, dat, integrací, billing údajů a supportních zásahů.
+- [ ] Každá auditní událost má stabilní název a lidsky čitelný význam.
+- [ ] Neukládáme celé objekty před a po změně, jen relevantní rozdíl.
+- [ ] Do auditní stopy nepatří hesla, tokeny, plné payloady, zbytečné osobní údaje ani citlivý volný text.
+- [ ] Čtení auditních logů a jejich export mají samostatná oprávnění.
+- [ ] Impersonace, break-glass přístup a supportní zásahy jsou v auditní stopě jasně viditelné.
+- [ ] Zákaznický admin vidí užitečný auditní přehled bez interních detailů.
+- [ ] Retence auditních logů má účel, vlastníka a termín revize.
+- [ ] Mazání, archivace nebo agregace starých auditních záznamů je technicky ověřená.
+- [ ] Auditní log je součást incidentního plánu, ne až panická improvizace.
+- [ ] Vývojář při nové citlivé akci musí rozhodnout, zda vzniká auditní událost.
+
+### Mini úkol
+
+Vyber jednu citlivou část produktu, třeba role členů týmu, API klíče, billing nebo export dat, a vyplň kartu auditní stopy:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Které změny tu opravdu potřebujeme vysvětlit zpětně? |  |
+| Kdo může změnu provést? |  |
+| Kdo smí auditní záznam číst? |  |
+| Která pole jsou nutná pro vysvětlení změny? |  |
+| Která pole se nesmí logovat nikdy? |  |
+| Jak dlouho záznam potřebujeme držet? |  |
+| Co se stane se záznamem při smazání workspace? |  |
+| Jak zákazník pozná supportní nebo systémový zásah? |  |
+
+Potom udělej jednu konkrétní změnu: přidej auditní událost pro změnu role, odeber z logu celý JSON payload, vytvoř samostatné oprávnění pro export auditní stopy, zkrať retenci debug logů, nebo napiš krátkou nápovědu k poli „důvod změny“. Auditní stopa má zvyšovat důvěru. Když se z ní stane další nekonečný sklad dat, minula cíl.
+
 ## Zdroje
 
 - ICANN: Information for Domain Name Registrants - práva a odpovědnosti držitelů domén včetně správy, obnovy a převodu doménové registrace: https://www.icann.org/registrants
@@ -19134,6 +19292,7 @@ Potom udělej jednu konkrétní změnu: nastav `Referrer-Policy`, vypni nepotře
 
 ## Pracovní log
 
+- 2026-07-15: Doplněna příloha o auditní stopě bez sledovacího deníku: rozlišení auditních logů, technických logů a produktové analytiky, výběr důležitých změn, návrh auditní události, ochrana přístupu, rizika volného textu, retence, zákaznický pohled, checklist a mini úkol; navázáno na existující zdroje OWASP a Evropské komise k logování, minimalizaci a době uchování dat.
 - 2026-07-15: Doplněna příloha o bezpečnostních HTTP hlavičkách bez paniky a rozbitého frontendu: inventura zdrojů, postupné zavádění CSP, HSTS po ověření HTTPS, Referrer-Policy, Permissions-Policy, testování hlavních cest, checklist a mini úkol; navázáno na existující zdroje OWASP a MDN k bezpečnostním hlavičkám.
 - 2026-07-15: Doplněna příloha o SSO, passkeys a provisioningu bez identitního bludiště: autorita identity, passkeys/WebAuthn, SAML a OIDC SSO, SCIM provisioning, break-glass přístup, chudé login logy, recovery procesy, checklist a mini úkol; ověřeny a doplněny zdroje OWASP, W3C, OpenID Foundation, OASIS a IETF.
 - 2026-07-15: Doplněna příloha o týmových pozvánkách a rolích bez účtového chaosu: životní cyklus pozvánek, role podle práce, předávání vlastnictví workspace, přístupy po vlnách, externisté, MFA a recovery, pravidelný review členů, audit změn, checklist a mini úkol; ověřeny a doplněny zdroje OWASP k autorizaci a MFA.
