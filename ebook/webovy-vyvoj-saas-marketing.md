@@ -20877,6 +20877,140 @@ Vyber jeden tok, který žádá o browserové oprávnění. Vyplň krátkou kart
 
 Potom udělej jednu opravu: posuň prompt až za kliknutí, dopiš férové vysvětlení, přidej ruční fallback, omez iframe oprávnění, nebo smaž z logů zbytečný payload. Browserové oprávnění není drobný technický detail. Je to moment, kdy produkt žádá člověka o důvěru. Tak ať si o ni řekne slušně.
 
+## Příloha: Externí embedy bez cizího kódu na každé stránce
+
+Externí embed je pohodlná zkratka. Mapa, video, kalendář, rezervační widget, chat, formulář, tweet, graf, platební prvek nebo dokument se vloží během pár minut a vypadá hotově. Jenže každý embed je také kus cizího provozu uvnitř tvého webu: načítá skripty, nastavuje požadavky, může posílat referrer, pracovat s cookies, zpomalovat stránku a měnit chování bez tvého releasu.
+
+Privacy-first pravidlo není „nikdy nevkládej nic externího“. To by bylo hezky čisté a často nepraktické. Pravidlo zní: embed musí mít jasný účel, nejmenší nutný rozsah a alternativu, která nespadne jen proto, že člověk odmítl cizí obsah.
+
+Codyho komentář: Embed je jako pozvat dodavatele do kanceláře. Někdy je to potřeba. Ale když přijde bez domluvy, projde všechny místnosti a ještě si odnese seznam návštěvníků, není to integrace. Je to provozní ledabylost v pěkném rámečku.
+
+### Začni inventurou cizího obsahu
+
+Nejdřív si napiš, co na webu skutečně vkládáš. Nepočítej jen velké widgety. Počítej i drobnosti:
+
+- video přehrávače,
+- mapy,
+- kalendáře a rezervační formuláře,
+- chat a support widgety,
+- social proof widgety,
+- vložené příspěvky ze sociálních sítí,
+- platební prvky,
+- formuláře z cizích služeb,
+- dokumentové preview,
+- analytické a reklamní skripty, které vytvářejí vlastní iframe.
+
+Praktická tabulka:
+
+| Embed | Kde je | Účel | Dodavatel | Data / signály | Alternativa |
+| --- | --- | --- | --- | --- | --- |
+| Mapa pobočky | Kontakt | Najít adresu | mapový poskytovatel | IP, referrer, interakce s mapou | statický obrázek + adresa + odkaz |
+| Video demo | Produkt | Ukázat tok | video platforma | načtení přehrávače, cookies podle režimu | vlastní video soubor nebo kliknutí pro načtení |
+| Rezervační widget | Demo | Vybrat termín | scheduling služba | e-mail, jméno, čas, metadata | vlastní formulář + ruční potvrzení |
+
+U každého řádku má být zřejmé, proč embed existuje. Pokud odpověď zní „protože to bylo nejrychlejší“, je to platný historický důvod, ale ne dobrý provozní důvod pro věčnost.
+
+### Načítej až po záměru člověka
+
+Mnoho embedů nemusí běžet při prvním načtení stránky. Video lze načíst až po kliknutí na přehrát. Mapu lze nahradit statickým blokem s adresou a tlačítkem „Otevřít mapu“. Sociální post může být obyčejná citace a přímý odkaz. Kalendář může začít jednoduchým tlačítkem „Vybrat termín“, které až potom otevře externí plánování.
+
+Tím získáš tři výhody:
+
+- stránka je rychlejší,
+- člověk lépe chápe, že opouští čistý první-party kontext,
+- cizí služba se nespustí každému návštěvníkovi jen proto, že projel kolem sekce.
+
+Příklad textu před načtením mapy:
+
+„Mapu načteme z externí mapové služby. Pokud ji nechceš načíst, adresa je níže a můžeš ji otevřít přímo ve své mapové aplikaci.“
+
+To není otravná právničina. Je to slušnost. Člověk ví, co se stane, a má volbu.
+
+### Iframe izoluj podle potřeby
+
+Když embed běží v iframe, používej dostupná omezení vědomě. Element `iframe` podporuje mimo jiné `sandbox`, `allow`, `loading` a `referrerpolicy`. MDN popisuje `sandbox` jako způsob, jak pro vložený obsah zapnout dodatečná omezení, a `referrerpolicy` jako řízení toho, jaký referrer se při načtení iframe odešle.
+
+Praktické zásady:
+
+- nepovoluj schopnosti přes `allow`, pokud je embed nepotřebuje,
+- použij `sandbox` a přidávej výjimky jen pro konkrétní funkci,
+- nastav `referrerpolicy`, aby se zbytečně neposílala celá URL s query parametry,
+- u níže položených embedů používej lazy loading, pokud to nepoškodí funkci,
+- nedávej `allow-scripts` a `allow-same-origin` automaticky jen proto, že příklad na internetu fungoval,
+- po každé změně otestuj hlavní tok, protože příliš tvrdé omezení může rozbít platbu, video nebo formulář.
+
+Nejde o to opsat jednu univerzální konfiguraci. Jde o to, aby každý embed měl nejmenší oprávnění, které jeho práce vyžaduje. Stejný princip jako u rolí, API tokenů a browserových oprávnění. Jen v trochu méně nápadném HTML kabátě.
+
+### Embedy nesmí rozhodovat o dostupnosti obsahu
+
+Když se externí služba nenačte, stránka má pořád dávat smysl. To platí hlavně pro obsah, který nese klíčovou informaci:
+
+- adresa nemá existovat jen v mapě,
+- cena nemá být jen ve vloženém kalkulátoru,
+- reference nemá být jen v social widgetu,
+- návod nemá být jen ve videu bez textové alternativy,
+- termín dema nemá být dostupný jen přes jeden externí skript.
+
+Privacy-first web preferuje vlastní HTML jako zdroj pravdy. Embed může obohatit zkušenost, ale nemá být jediný způsob, jak získat informaci nebo dokončit důležitý krok.
+
+Příklad: U produktového videa přidej krátké textové shrnutí, screenshoty hlavních kroků a přímý odkaz na video. U mapy přidej adresu, dostupnost MHD nebo parkování a odkaz „otevřít v mapách“. U rezervačního widgetu přidej e-mailovou alternativu pro firmy, které externí plánovací služby blokují.
+
+### Chat widget není automaticky support
+
+Chat widget vypadá jako rychlá výhra. Někdo přijde na web, zeptá se, obchod odpoví. V praxi ale chat často přináší cizí skript na každou stránku, profilování návštěvníků, notifikace do dalších nástrojů a supportní data rozházená mimo hlavní systém.
+
+Před nasazením chatu si odpověz:
+
+- Jaký problém řeší lépe než formulář, e-mail nebo produktový inbox?
+- Musí být na každé stránce?
+- Co se stane s konverzací po vyřešení?
+- Kdo má přístup k historii?
+- Jaké přílohy a osobní údaje lidé do chatu posílají?
+- Jde chat načítat až po kliknutí?
+
+Pro malé B2B weby je často lepší dobře napsaný kontaktní formulář, jasné očekávání odpovědi a přímý e-mail pro urgentní věci. Chat použij tam, kde opravdu zkracuje rozhodnutí nebo podporu, ne jako animovanou náplast na nejasný web.
+
+### Sociální embedy nahraď vlastním kontextem
+
+Vložený post ze sociální sítě je pohodlný, ale často načítá velký balík cizího kódu. Pokud potřebuješ citovat veřejný příspěvek, obvykle stačí:
+
+- krátký citovaný výňatek,
+- jméno autora nebo zdroje,
+- datum,
+- přímý odkaz na původní obsah,
+- vlastní komentář, proč je to relevantní.
+
+Tím držíš čtenářský zážitek na vlastním webu, nevnucuješ sociální platformě další návštěvníky a snižuješ výkonový i privacy dopad. Sociální síť má být zdroj nebo distribuční kanál. Ne spoluvlastník každé stránky.
+
+### Checklist: Externí embedy privacy-first
+
+- [ ] Máme inventář všech externích embedů a widgetů na veřejném webu i v aplikaci.
+- [ ] Každý embed má popsaný účel, vlastníka a místo použití.
+- [ ] Embed se nenačítá automaticky, pokud stačí načtení po kliknutí.
+- [ ] Klíčový obsah existuje i bez externího iframe nebo skriptu.
+- [ ] U iframe jsou vědomě nastavené `sandbox`, `allow`, `loading` a `referrerpolicy`, kde dávají smysl.
+- [ ] Cizí widgety nemají širší oprávnění, než potřebují pro konkrétní tok.
+- [ ] Chat, rezervační a formulářové nástroje mají jasnou retenci a pravidla přístupu.
+- [ ] Sociální embedy používáme jen výjimečně; přednost má vlastní text, citace a přímý odkaz.
+- [ ] Embedy jsou zahrnuté v performance budgetu a release kontrole.
+- [ ] Privacy notice nebo dokumentace odpovídá tomu, co se reálně načítá.
+- [ ] Po odstranění nebo zablokování embedu zůstává stránka použitelná.
+
+### Mini úkol
+
+Vyber jednu důležitou stránku a udělej embed audit:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jaké externí embedy se na stránce načítají? |  |
+| Který z nich se načítá bez jasného záměru člověka? |  |
+| Jaký klíčový obsah by zmizel při jeho blokaci? |  |
+| Jaká je nejjednodušší první-party alternativa? |  |
+| Jaké iframe nebo script omezení lze zpřísnit? |  |
+| Co je potřeba doplnit do dokumentace nebo privacy notice? |  |
+
+Potom udělej jednu opravu: nahraď sociální embed citací a odkazem, přidej click-to-load vrstvu před mapu, doplň textovou alternativu k videu, omez iframe oprávnění, nebo odeber chat widget ze stránek, kde nikomu nepomáhá. Každý odstraněný nebo zkrocený embed je malý návrat kontroly nad vlastním webem. A kontrola je u privacy-first provozu docela dobrý koníček.
+
 ## Zdroje
 
 - ICANN: Information for Domain Name Registrants - práva a odpovědnosti držitelů domén včetně správy, obnovy a převodu doménové registrace: https://www.icann.org/registrants
@@ -21010,6 +21144,7 @@ Potom udělej jednu opravu: posuň prompt až za kliknutí, dopiš férové vysv
 - MDN Web Docs: MediaDevices.getUserMedia() - přístup ke kameře a mikrofonu v bezpečném kontextu, s povinným souhlasem a požadavky na soukromí a bezpečnost: https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices/getUserMedia
 - MDN Web Docs: Notifications API - systémové notifikace z webových stránek a jejich dostupnost v bezpečném kontextu: https://developer.mozilla.org/en-US/docs/Web/API/Notifications_API
 - MDN Web Docs: Clipboard API - čtení a zápis do systémové schránky v bezpečném kontextu, včetně bezpečnostních omezení a rozdílů mezi prohlížeči: https://developer.mozilla.org/en-US/docs/Web/API/Clipboard_API
+- MDN Web Docs: `<iframe>`: The Inline Frame element - přehled atributů iframe včetně `sandbox`, `allow`, `loading` a `referrerpolicy` pro omezení a řízení vloženého obsahu: https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/iframe
 - MDN Web Docs: Cache-Control header - pravidla pro HTTP cache: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Cache-Control
 - MDN Web Docs: ETag header - identifikace verze zdroje pro efektivnější cache: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/ETag
 - W3C: Web Content Accessibility Guidelines 2.2 - doporučení pro přístupný webový obsah: https://www.w3.org/TR/WCAG22/
@@ -21023,6 +21158,7 @@ Potom udělej jednu opravu: posuň prompt až za kliknutí, dopiš férové vysv
 
 ## Pracovní log
 
+- 2026-07-15: Doplněna příloha o externích embedech bez cizího kódu na každé stránce: inventář map, videí, chatů, kalendářů, sociálních postů a dalších widgetů, načítání až po záměru člověka, omezení iframe přes `sandbox`, `allow`, `loading` a `referrerpolicy`, dostupnost obsahu bez embedu, opatrné používání chat widgetů a sociálních embedů, checklist a mini úkol; ověřen a doplněn zdroj MDN k elementu `iframe`.
 - 2026-07-15: Doplněna příloha o browserových oprávněních bez vyskakovacího přepadu: kdy žádat o polohu, kameru, mikrofon, notifikace a schránku, jak vysvětlit užitek před promptem, navrhnout fallback pro odmítnutí, držet rozsah oprávnění co nejužší, oddělit notifikace od marketingu, logovat jen rozhodovací signály, checklist a mini úkol; ověřeny a doplněny zdroje MDN k Permissions API, Geolocation API, getUserMedia, Notifications API a Clipboard API.
 - 2026-07-15: Doplněna příloha o datové mapě produktu bez slepé víry v architekturu: mapování datových situací místo tabulek, vlastníci toků, oddělení zákaznických/provozních/obchodních dat, tichá místa jako exporty a supportní přílohy, napojení mapy na změnový proces a incidenty, checklist a mini úkol; navázáno na existující zdroje k GDPR principům, záznamům o zpracování, retenci, incidentům a privacy by design.
 - 2026-07-15: Doplněna příloha o EU datové rezidenci bez falešných slibů: rozdělení dat podle vrstev, rozdíl mezi regionem, provozovatelem a supportním přístupem, přesnější veřejné formulace, regionální požadavky jako produktová schopnost, checklist a mini úkol; navázáno na existující zdroje k GDPR, zpracovatelům, mezinárodním přenosům a vendor kartám.
