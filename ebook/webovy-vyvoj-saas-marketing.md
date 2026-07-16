@@ -23712,6 +23712,211 @@ Vezmi aktuální nebo plánovaný waitlist a vyplň kartu:
 
 Potom udělej jednu změnu: zkrať formulář, přepiš potvrzovací e-mail, odděl newsletter, napiš kritéria bety, nebo nastav úklid kontaktů po skončení programu. Waitlist má být začátek vztahu, ne nejtišší místo, kde firma zapomene staré sliby.
 
+## Příloha: Referral program bez kontaktů na cizí lidi
+
+Doporučení od spokojeného zákazníka je jeden z nejlepších marketingových kanálů, protože začíná důvěrou. Zároveň se z něj umí rychle stát nepříjemná mašina na sběr kontaktů: nahrajte adresář, pozvěte kolegy, pošlete odkaz pěti přátelům, dejte nám e-maily lidí, kteří o vás možná nikdy neslyšeli. To je přesně místo, kde privacy-first značka musí brzdit.
+
+Referral program má pomáhat člověku doporučit produkt ve chvíli, kdy k tomu má reálný důvod. Nemá z uživatele dělat neplaceného obchodníka a z jeho kontaktů datovou zásobu.
+
+Špatná otázka zní: „Jak přimějeme uživatele, aby nám přivedli co nejvíc kontaktů?“
+
+Lepší otázka zní: „Kdy má zákazník dobrý důvod produkt doporučit a jak mu to umožníme bez nátlaku, importu adresáře a skrytého trackingu?“
+
+ÚOOÚ ve svých informacích k obchodním sdělením připomíná, že i zprávy tvářící se jako doporučení od známého mohou být obchodním sdělením, pokud fakticky podporují podnikání. EDPB zase popisuje manipulativní vzorce v digitálních rozhraních jako riziko pro svobodná rozhodnutí lidí. Praktický závěr pro referral je jednoduchý: čím víc program tlačí, maskuje a automatizuje oslovení třetích osob, tím víc páchne. A ne tím příjemným způsobem.
+
+### Referral začíná okamžikem hodnoty
+
+Než vytvoříš odměny, linky a automatické e-maily, napiš si:
+
+„Zákazník má dobrý důvod doporučit produkt, když ___.“
+
+Příklady:
+
+- tým dokončil první společný workflow bez ručního přepisování,
+- zákazník úspěšně exportoval data pro audit,
+- účetní kancelář získala od klientů podklady bez nahánění e-mailem,
+- marketingový tým publikoval první kampaňový report bez invazivních trackerů,
+- administrátor bezpečně pozval další tým a nastavil role.
+
+Doporučení žádej až po takovém okamžiku. Pokud se ptáš hned po registraci, nedostáváš doporučení. Dostáváš sociální dluh, zvědavost nebo snahu získat slevu. To se dá krátkodobě měřit, ale dlouhodobě to kazí kvalitu kontaktů.
+
+Praktické pravidlo:
+
+| Stav zákazníka | Referral výzva |
+| --- | --- |
+| Nová registrace bez hodnoty | neptat se |
+| První dokončený hodnotový krok | nabídnout sdílení odkazu nenápadně |
+| Aktivní účet s opakovaným použitím | ukázat program v nastavení nebo billing části |
+| Zákazník dává pozitivní feedback | nabídnout doporučení jako dobrovolný další krok |
+| Zákazník řeší problém nebo incident | neptat se, nejdřív vyřešit problém |
+
+Codyho komentář: Žádat o referral uprostřed špatného onboardingu je jako chtít recenzi restaurace dřív, než přinesou jídlo. Technicky to jde. Společensky je to smutné.
+
+### Neimportuj adresář
+
+Nejhorší referral vzorec je tlačítko „importujte kontakty“ bez jasného důvodu. Uživatel tím předává údaje lidí, kteří se k produktu nepřihlásili, neznají účel a často ani netuší, že se jejich kontakt dostal do marketingového toku.
+
+Privacy-first varianta je jednodušší:
+
+- nabídni kopírovatelný referral odkaz,
+- umožni uživateli napsat vlastní zprávu ve vlastním kanálu,
+- připrav text jako návrh, ne jako automatické odeslání,
+- neukládej seznam lidí, kterým uživatel odkaz údajně poslal,
+- pokud umožníš pozvánku e-mailem, posílej ji jen na konkrétní adresu zadanou pro jasný účel a bez opakovaných marketingových follow-upů.
+
+Bezpečný návrh textu:
+
+```text
+Používáme [produkt] na [konkrétní práce]. Pomohlo nám to hlavně s [výsledek].
+Tady je odkaz, kdyby ses chtěl podívat: [referral odkaz]
+```
+
+Takový text funguje i bez toho, aby produkt viděl adresátův e-mail. Nejlepší doporučení často vznikne mimo tvůj systém. Ano, hůř se to atribuční tabulce objímá. Ale člověk není rozšíření tvého CRM.
+
+### Odměna nesmí přepsat důvěru
+
+Odměna může být férová. Sleva, kredit, měsíc navíc, dar na dobrou věc nebo bonusová kapacita dávají smysl, pokud jsou jasné. Problém začíná, když odměna motivuje k hromadnému spamování nebo k doporučení produktu lidem, pro které není vhodný.
+
+Napiš si pravidla odměny:
+
+| Otázka | Doporučená odpověď |
+| --- | --- |
+| Kdy vzniká nárok? | až po skutečné aktivaci nebo první platbě, ne po kliknutí |
+| Kdo odměnu dostane? | doporučující, nový zákazník, nebo oba |
+| Jaká je hodnota? | konkrétní částka, kredit nebo období |
+| Jaké jsou limity? | počet odměn, období, zneužití |
+| Co se stane při refundu? | jasné vrácení nebo storno kreditu |
+| Jak se řeší self-referral? | zakázáno nebo technicky omezeno |
+
+Odměna má být poděkování za relevantní doporučení, ne hlavní produktová hodnota. Pokud lidé doporučují hlavně kvůli bonusu a noví zákazníci rychle mizí, referral program jen převádí akviziční problém do hezčí tabulky.
+
+### Doporučený člověk musí vědět, kam přišel
+
+Referral landing page má být transparentní. Nový návštěvník by měl hned pochopit:
+
+- kdo ho doporučil, pokud je to relevantní a doporučující s tím počítá,
+- co je produkt zač,
+- jaká odměna vznikne a komu,
+- jaká data se při registraci zpracují,
+- že registrace není povinná jen proto, že přišel přes odkaz.
+
+Příklad mikrotextu:
+
+```text
+Na tuto stránku jste přišli přes doporučovací odkaz. Pokud se zaregistrujete a začnete produkt používat, doporučující účet může získat kredit podle pravidel programu. Vaše registrační údaje nepředáváme doporučujícímu.
+```
+
+To poslední je důležité. Doporučující člověk nepotřebuje vidět e-mail, jméno nebo aktivitu doporučeného člověka. Obvykle mu stačí stav odměny:
+
+- čeká na aktivaci,
+- splněno,
+- neuznáno podle pravidel,
+- expirováno.
+
+Neukazuj víc detailů jen proto, že to udělá dashboard zajímavější. Zajímavý dashboard je slabá omluva pro zbytečný únik vztahových dat.
+
+### Referral token drž malý a krátký
+
+Referral odkaz nemusí nést žádné osobní údaje. Stačí náhodný token napojený na programová pravidla v serverové databázi.
+
+Dobré vlastnosti tokenu:
+
+- není odvoditelný z e-mailu, jména ani ID zákazníka,
+- má datum vytvoření a expirace,
+- jde zneplatnit,
+- neobsahuje obchodně citlivé informace v URL,
+- funguje i po odhlášení uživatele,
+- nevyžaduje cross-site tracking.
+
+Příklad špatné URL:
+
+```text
+https://example.com/signup?ref=ondrej@example.com&plan=enterprise&company=Acme
+```
+
+Příklad lepší URL:
+
+```text
+https://example.com/r/7f4k2q
+```
+
+Interně si u tokenu drž jen to, co potřebuješ pro odměnu a ochranu proti zneužití: doporučující účet, čas vytvoření, stav, typ programu, případně agregované počty. Pokud potřebuješ řešit fraud, odděl bezpečnostní signály od marketingových dat a nastav retenci. Ochrana programu není důvod stavět tajnou profilovací vrstvu.
+
+### Automatické pozvánky používej opatrně
+
+Pokud produkt umožňuje poslat pozvánku přímo, rozliš:
+
+- týmovou pozvánku do pracovního prostoru,
+- referral doporučení produktu,
+- marketingové obchodní sdělení,
+- transakční zprávu k již existujícímu vztahu.
+
+Tyto věci se nesmí míchat do jedné pohodlné šablony. Týmová pozvánka má pracovní účel: někdo má získat přístup do konkrétního workspace. Referral zpráva je obchodní doporučení. Marketingový follow-up je další režim. U elektronických obchodních sdělení řeš zákon č. 480/2004 Sb., ePrivacy kontext, GDPR právní základ a lokální pravidla. Viz zdroje ÚOOÚ, Evropské komise a EDPB na konci e-booku.
+
+Praktický bezpečný výchozí stav:
+
+- jedna pozvánka na konkrétní adresu,
+- jasný odesílatel,
+- vysvětlení, kdo pozvánku vyvolal,
+- žádné automatické opakování bez nového důvodu,
+- žádné přihlášení adresáta k newsletteru,
+- snadná možnost ignorovat nebo odmítnout,
+- krátká retence nevyužité pozvánky.
+
+### Měř kvalitu, ne počet rozeslaných odkazů
+
+Referral program má měřit, jestli doporučení přivádí správné zákazníky. Ne jestli se podařilo vyrobit víc kliků.
+
+Užitečné metriky:
+
+- počet aktivních doporučujících účtů,
+- počet nových účtů z referral odkazu,
+- podíl doporučených účtů, které dosáhly první hodnoty,
+- kvalita segmentu,
+- retence doporučených účtů,
+- počet uznaných a zamítnutých odměn,
+- opakované zneužití podle ochranných pravidel.
+
+Slabé metriky:
+
+- počet zkopírovaných odkazů bez kontextu,
+- počet odeslaných pozvánek,
+- kliky bez aktivace,
+- velikost importovaného adresáře,
+- odměny vyplacené bez kontroly hodnoty.
+
+Měření drž agregované všude, kde to stačí. U jednotlivých případů eviduj jen stav potřebný k odměně, supportu nebo obraně proti zneužití.
+
+### Checklist: Referral privacy-first
+
+- [ ] Referral výzva se zobrazuje až po reálném okamžiku hodnoty.
+- [ ] Program nepoužívá import adresáře jako výchozí mechanismus.
+- [ ] Uživatel může sdílet vlastní odkaz nebo vlastní zprávu mimo systém.
+- [ ] Odměna má jasná pravidla, limity a okamžik vzniku nároku.
+- [ ] Referral landing page vysvětluje, komu vznikne odměna a jaká data se zpracují.
+- [ ] Doporučující nevidí osobní údaje ani aktivitu doporučeného člověka.
+- [ ] Token v URL neobsahuje e-mail, název firmy ani jiné osobní nebo obchodně citlivé údaje.
+- [ ] Automatické pozvánky jsou oddělené od newsletteru a marketingových sekvencí.
+- [ ] Nevyužité pozvánky, expirované tokeny a zamítnuté odměny mají retenční pravidlo.
+- [ ] Program měří aktivaci a kvalitu doporučených zákazníků, ne jen počet kliků.
+
+### Mini úkol
+
+Vezmi existující nebo plánovaný referral program a vyplň kartu:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Kdy zákazník poprvé zažije hodnotu vhodnou pro doporučení? |  |
+| Jak může doporučit produkt bez předání cizích kontaktů? |  |
+| Jaká odměna vzniká a kdy? |  |
+| Co uvidí doporučený člověk na landing page? |  |
+| Jaké údaje uvidí doporučující účet? |  |
+| Co obsahuje referral token v URL? |  |
+| Jak dlouho držíme nevyužité pozvánky a expirované tokeny? |  |
+| Jak poznáme kvalitu doporučení bez sledovacího profilu? |  |
+
+Potom udělej jednu změnu: vypni import adresáře, zkrať referral URL na neprůhledný token, přepiš landing page mikrotext, odděl pozvánky od newsletteru, nebo nastav expiraci nevyužitých pozvánek. Dobré doporučení má znít jako pomoc, ne jako obchodní trik v převleku za přátelství.
+
 ## Zdroje
 
 - ICANN: Information for Domain Name Registrants - práva a odpovědnosti držitelů domén včetně správy, obnovy a převodu doménové registrace: https://www.icann.org/registrants
@@ -23862,6 +24067,7 @@ Potom udělej jednu změnu: zkrať formulář, přepiš potvrzovací e-mail, odd
 
 ## Pracovní log
 
+- 2026-07-16: Doplněna příloha o referral programu bez kontaktů na cizí lidi: správný okamžik žádosti o doporučení, odmítnutí importu adresáře, férové odměny, transparentní referral landing page, krátké neprůhledné tokeny, oddělení pozvánek od marketingových sdělení, agregované měření kvality, checklist a mini úkol; ověřeny existující zdroje ÚOOÚ k obchodním sdělením a EDPB k deceptive design patterns.
 - 2026-07-16: Doplněna příloha o waitlistu a beta programu bez sběru kontaktů do zásoby: jasný slib waitlistu, minimální formulář, oddělení newsletteru, výběr do bety podle use casu a kapacity, potvrzení očekávání, bezpečné zpracování beta feedbacku, úklid neaktivních kontaktů, checklist a mini úkol.
 - 2026-07-16: Doplněna příloha o webinářích a online akcích bez registrační pasti: jasný slib akce, krátký registrační formulář, výběr platformy podle dat, pravidla pro nahrávky, férový follow-up, agregované měření hodnoty akce, checklist a mini úkol; navázáno na existující zdroje k GDPR principům, ePrivacy a přístupnosti médií.
 - 2026-07-16: Doplněna příloha o SDK a ukázkách kódu bez úniku tokenů: bezpečné copy-paste příklady, placeholdery místo reálných dat, výchozí ochranné chování SDK, zakázané integrační vzory, opatrné webhook ukázky, oddělení sandboxu od produkce, checklist a mini úkol; navázáno na existující zdroje OWASP, API bezpečnosti a správu tajemství.
