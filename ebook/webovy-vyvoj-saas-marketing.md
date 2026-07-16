@@ -26442,6 +26442,203 @@ Vyber jednu funkci, obrazovku, report, integraci nebo obsahovou cestu, která v 
 
 Potom udělej jednu konkrétní změnu: označ funkci jako deprecated, napiš migrační text, aktualizuj dokumentaci, odstraň mrtvý odkaz, vypni zbytečný event, nebo vytvoř datový úklidový ticket s vlastníkem a termínem. Vypnutí funkce není selhání. Selhání je nechat ji dalších pět let strašit v produktu, protože nikdo nechce otevřít šuplík.
 
+## Příloha: Plánovaná údržba bez překvapení a datového stresu
+
+Plánovaná údržba je zdravá věc. Jen nesmí vypadat jako malý incident, který tým předem pojmenoval hezčím slovem. U SaaS, firemního webu nebo zákaznického portálu patří údržba k běžnému provozu: aktualizace databáze, změna infrastruktury, migrace úložiště, bezpečnostní patch, úklid front, upgrade závislostí nebo přesun části služby do jiného prostředí.
+
+Problém není samotná údržba. Problém je údržba bez vlastníka, bez komunikačního plánu, bez rollbacku a bez jasné odpovědi, co se děje s daty.
+
+Špatná otázka zní: „Kdy to uděláme, aby si toho nikdo nevšiml?“
+
+Lepší otázka zní: „Jakou schopnost produktu dočasně omezíme, koho se to dotkne, jak ochráníme data a jak poznáme, že je hotovo?“
+
+> Codyho komentář: Údržba ve dvě ráno není automaticky profesionálnější. Je jen ve dvě ráno. Pokud tým nemá postup, kontrolní body a člověka schopného říct „vracíme se zpět“, noční hodina z toho neudělá disciplínu. Udělá z toho ospalý hazard.
+
+### Rozliš běžný release a údržbové okno
+
+Ne každá změna potřebuje veřejné oznámení a servisní okno. Když měníš text, přidáváš článek nebo opravuješ drobnou vizuální chybu, stačí běžný release proces. Údržbové okno zvaž tam, kde se mění schopnost produktu, dostupnost nebo datová vrstva.
+
+Praktické rozdělení:
+
+| Typ změny | Příklad | Doporučený režim |
+| --- | --- | --- |
+| Běžný release | nový článek, text, malá UI oprava | standardní deploy a smoke test |
+| Tichá technická údržba | rotace interního tokenu bez dopadu | interní runbook a auditní stopa |
+| Omezené okno | upgrade databáze s krátkým read-only režimem | interní plán, status update, kontrolní body |
+| Veřejné údržbové okno | migrace úložiště, větší změna infrastruktury | oznámení předem, status page, support scénář |
+| Riziková změna | zásah do dat, identit, billing nebo exportů | schválení, záloha, rollback, poakční kontrola |
+
+Dobré pravidlo: pokud by zákazník mohl přijít o možnost dokončit důležitou práci, má vědět, co se děje. Pokud by tým mohl potřebovat obnovu dat nebo rollback, má mít plán dřív než terminál.
+
+### Napiš údržbovou kartu
+
+Údržba má mít krátkou kartu. Ne proto, aby vznikla další byrokracie, ale aby se v kritické chvíli nehledalo, kdo má co udělat.
+
+Praktická šablona:
+
+| Pole | Co vyplnit |
+| --- | --- |
+| Název údržby | Lidský popis, ne jen interní číslo ticketu |
+| Důvod | Proč se změna dělá a co zlepší |
+| Dotčené schopnosti | Přihlášení, exporty, platby, API, web, e-mail, administrace |
+| Dotčené segmenty | Všichni, konkrétní plány, region, tenant, interní tým |
+| Datový dopad | Co se čte, migruje, maže, archivuje nebo zamyká |
+| Začátek a konec | Časové okno a poslední moment pro rollback |
+| Vlastník | Jeden člověk, který rozhoduje |
+| Komunikace | Kdo píše status, komu a kdy |
+| Kontroly před | Záloha, test migrace, monitoring, support příprava |
+| Kontroly po | Smoke test, data sanity check, logy, chybovost, feedback |
+| Rollback | Jak se vrátit zpět nebo jak pokračovat v degradovaném režimu |
+
+Karta má být konkrétní. „Zkontrolovat, že vše funguje“ je přání. „Nový uživatel se přihlásí, vytvoří workspace, odešle testovací formulář a exportuje CSV“ je kontrola.
+
+### Datový dopad popiš předem
+
+Privacy-first údržba se neptá jen na dostupnost. Ptá se také na data:
+
+- Budeme číst produkční data ručně?
+- Vzniknou dočasné exporty?
+- Poběží migrační skript nad osobními údaji?
+- Bude část systému v režimu pouze pro čtení?
+- Vzniknou nové logy s citlivým kontextem?
+- Kdo bude mít během údržby zvýšený přístup?
+- Jak se dočasné přístupy a soubory po akci uklidí?
+
+Příklad: databázová migrace nemusí být jen změna schématu. Může vytvořit dočasnou tabulku, export pro kontrolu, debug logy a ruční přístup člověka, který ho běžně nemá. Každá z těchto stop má mít účel, vlastníka a konec života.
+
+Údržbová karta by proto měla obsahovat jednoduché rozhodnutí:
+
+| Datová stopa | Účel | Kdo má přístup | Kdy zmizí |
+| --- | --- | --- | --- |
+| Dočasná záloha před migrací | obnova při selhání | tech vlastník | po ověřené stabilitě podle pravidla záloh |
+| Migrační log | kontrola počtu změněných záznamů | tech tým | po uzavření údržby nebo incidentu |
+| Export pro zákaznickou kontrolu | ověření konkrétního účtu | support vlastník | po potvrzení výsledku |
+
+Pokud neumíš říct, kdy datová stopa zmizí, pravděpodobně se právě rodí budoucí nepořádek.
+
+### Komunikace má být praktická, ne dramatická
+
+Oznámení údržby nemá znít jako právní zaklínadlo ani jako marketingová oslava. Člověk potřebuje vědět:
+
+- co bude omezené,
+- kdy,
+- jak dlouho,
+- jestli má něco udělat předem,
+- kde najde stav,
+- co se stane s rozpracovanou prací,
+- koho kontaktovat, když dopadá na jeho provoz.
+
+Příklad krátkého oznámení:
+
+```text
+V úterý 21:00-21:30 proběhne plánovaná údržba exportů. Aplikace zůstane dostupná, ale nové exporty mohou čekat ve frontě do konce okna. Rozpracované formuláře a uložená data se nemění. Stav budeme aktualizovat na status stránce.
+```
+
+To je lepší než „budeme provádět technické práce“. Technické práce je věta, která říká hlavně to, že autor nechce říct nic konkrétního.
+
+U většího dopadu přidej:
+
+- oznámení v produktu na dotčené obrazovce,
+- e-mail administrátorům,
+- status page update,
+- support makro,
+- krátkou poznámku po dokončení.
+
+Privacy-first detail: Nepiš do veřejného statusu interní názvy systémů, přesné zranitelnosti, identifikátory zákazníků ani detaily, které by pomohly zneužití. Komunikace má být dost konkrétní pro uživatele, ne štědrá k útočníkovi.
+
+### Read-only režim je často lepší než chaos
+
+Když údržba zasahuje do dat, zvaž dočasný read-only režim. Není vždy nutný, ale často je lepší než přijímat zápisy, o kterých si nejsi jistý, jestli projdou migrací správně.
+
+Read-only režim navrhni lidsky:
+
+- stránka jasně řekne, které akce jsou dočasně pozastavené,
+- čtení důležitých dat zůstane dostupné, pokud je to bezpečné,
+- formuláře se nevypaří po kliknutí na odeslat,
+- API vrací srozumitelný stav a doporučení, kdy to zkusit znovu,
+- fronty nepolykají práci potichu,
+- support ví, co uživatelům říct.
+
+Příklad špatného stavu: uživatel vyplní dlouhý formulář, odešle ho, dostane obecnou chybu a přijde o text. Příklad lepšího stavu: formulář před odesláním ukáže, že ukládání je dočasně pozastavené, a nabídne bezpečné uložení konceptu nebo doporučení, kdy se vrátit.
+
+Údržba není omluva pro mizerné chybové stavy. Naopak: právě během údržby se ukáže, jestli produkt rozumí vlastnímu provozu.
+
+### Rollback není hanba, je to funkce plánu
+
+Rollback nemá být poslední zoufalá myšlenka. Má být předem definovaná možnost. U každé údržby si napiš:
+
+- Do kdy se dá bezpečně vrátit?
+- Co se stane s daty vytvořenými během okna?
+- Které části změny jsou vratné a které ne?
+- Jak poznáme, že pokračování je rizikovější než návrat?
+- Kdo má právo rollback vyhlásit?
+
+Některé změny nejsou jednoduše vratné, například migrační skript, který přepočítá data. V takovém případě potřebuješ jiný plán: zálohu, suchý běh, kontrolní součty, postupnou migraci po dávkách, možnost zastavit frontu nebo degradovaný režim.
+
+Praktický stop signál:
+
+```text
+Pokud chybovost exportů po migraci překročí domluvený práh nebo kontrola počtu záznamů nesedí, zastavíme nové exporty, vrátíme UI do read-only režimu a spustíme obnovovací postup podle runbooku.
+```
+
+To je mnohem užitečnější než „budeme monitorovat“. Monitorování bez hranice je jen pozorování problému v přímém přenosu.
+
+### Po údržbě ukliď stopy
+
+Údržba nekončí tím, že aplikace znovu odpovídá. Končí až tehdy, když jsou uzavřené technické, datové a komunikační stopy.
+
+Po akci zkontroluj:
+
+- dočasné přístupy jsou odebrané,
+- debug logy nemají delší retenci, než potřebují,
+- exporty a zálohy mají jasný režim,
+- status page je uzavřená,
+- support ví, jaké dotazy čekat,
+- dokumentace odpovídá novému stavu,
+- alerty se neumlčely natrvalo,
+- eventy a dashboardy neměří starý stav,
+- údržbová karta má výsledek a poznámky.
+
+Krátký post-maintenance zápis může mít tři věty:
+
+```text
+Údržba proběhla v plánovaném okně. Exporty byly pozastavené 18 minut a fronta se zpracovala do 10 minut po obnovení. Do příště upravíme text read-only stavu, protože tři zákazníci se ptali, jestli se dotkne i uložených reportů.
+```
+
+Takhle vzniká provozní paměť. Ne román, ne vina, jen použitelná informace pro příště.
+
+### Checklist: Plánovaná údržba privacy-first
+
+- [ ] Víme, jestli jde o běžný release, tichou údržbu, omezené okno nebo veřejné údržbové okno.
+- [ ] Údržba má vlastníka, časové okno a poslední moment pro rollback.
+- [ ] Dotčené produktové schopnosti jsou popsané lidskou řečí.
+- [ ] Datový dopad je předem zmapovaný: čtení, zápisy, migrace, exporty, logy, zálohy.
+- [ ] Dočasné přístupy, exporty a logy mají konec života.
+- [ ] Existuje kontrola před změnou: záloha, suchý běh, monitoring, support příprava.
+- [ ] Existuje kontrola po změně: smoke test, sanity check dat, chybovost, fronty, support signály.
+- [ ] Zákazníci dostanou komunikaci podle dopadu, ne podle velikosti pull requestu.
+- [ ] Read-only nebo degradovaný režim má srozumitelné texty a neztrácí rozpracovanou práci.
+- [ ] API a fronty nepolykají požadavky potichu.
+- [ ] Status page a interní chat neprozrazují citlivé detaily.
+- [ ] Po údržbě se uklidí dočasné stopy a zapíše se krátké poučení.
+
+### Mini úkol
+
+Vyber jednu plánovanou technickou změnu, která se v týmu odkládá, protože „je trochu riziková“. Vyplň kartu:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jakou schopnost produktu změna ovlivní? |  |
+| Koho se dotkne a kdy nejméně bolí? |  |
+| Jaká data se budou číst, měnit, exportovat nebo zálohovat? |  |
+| Jaká je nejmenší bezpečná verze změny? |  |
+| Jaký je stop signál? |  |
+| Jak vypadá rollback nebo degradovaný režim? |  |
+| Co řekneme zákazníkům předem? |  |
+| Co uklidíme po dokončení? |  |
+
+Potom udělej jednu konkrétní věc: napiš údržbovou kartu, připrav read-only text, otestuj obnovu zálohy, doplň stop signál do runbooku, nebo sepiš zákaznické oznámení. Plánovaná údržba nemá být hrdinský zásah. Má to být obyčejná, čitelná práce, po které produkt stojí pevněji než před ní.
+
 ## Zdroje
 
 - ICANN: Information for Domain Name Registrants - práva a odpovědnosti držitelů domén včetně správy, obnovy a převodu doménové registrace: https://www.icann.org/registrants
@@ -26593,6 +26790,7 @@ Potom udělej jednu konkrétní změnu: označ funkci jako deprecated, napiš mi
 
 ## Pracovní log
 
+- 2026-07-16: Doplněna příloha o plánované údržbě bez překvapení a datového stresu: rozlišení běžného releasu a údržbového okna, údržbová karta, datový dopad, zákaznická komunikace, read-only režim, rollback, úklid po údržbě, checklist a mini úkol; navázáno na existující kapitoly o SLA, runboocích, degradovaném režimu, chybových stavech, retenci a provozní komunikaci.
 - 2026-07-16: Doplněna příloha o odstraňování funkcí bez ztráty důvěry: zjištění skutečné práce funkce, rozlišení tichého úklidu, deprekace a tvrdého vypnutí, návrh migrační cesty, datový konec života, komunikace podle dopadu, úklid interních závislostí, checklist a mini úkol; navázáno na existující kapitoly o chybových stavech, produktových slibech, retenci, changelogu, dokumentaci a privacy-first měření.
 - 2026-07-16: Doplněna příloha o chybových stránkách a neplatných odkazech bez slepé uličky: rozlišení 404/410, přístupových chyb, vypršelých odkazů, rate limitů a 5xx stavů, návrh bezpečných chybových textů, ochrana rozpracovaných formulářů, agregované měření dopadu, checklist a mini úkol; ověřen a doplněn zdroj MDN k HTTP stavovým kódům.
 - 2026-07-16: Doplněna příloha o SLA a provozních závazcích bez falešného klidu: rozlišení SLI/SLO/SLA, definice dostupnosti podle produktových schopností, čitelné měření závazků, oddělení reakční doby od opravy, incidentové kredity, plánovaná údržba, status page, základní transparentnost ve všech plánech, checklist a mini úkol; navázáno na existující zdroje Google SRE k SLO, monitoringu a alertingu a na kapitoly o trust center, runbookách, incidentní komunikaci a produktových slibech.
