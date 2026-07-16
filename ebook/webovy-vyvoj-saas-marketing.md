@@ -25918,6 +25918,201 @@ Vyber jednu stránku nebo dokument, který prodává nebo vysvětluje produkt: p
 
 Potom udělej jednu konkrétní změnu: přepiš přehnané „neomezené“, doplň podmínku exportu, sjednoť pricing s entitlement mapou, aktualizuj supportní odpověď, nebo přidej release kontrolu veřejných slibů. Důvěra nevzniká tím, že slíbíš všechno. Vzniká tím, že zákazník pozná stejnou realitu ve webu, produktu i supportu.
 
+## Příloha: SLA a provozní závazky bez falešného klidu
+
+SLA, dostupnost, reakční doby a incidentové kredity vypadají jako právní nebo enterprise detail. Ve skutečnosti jsou to produktové sliby s provozním dopadem. Když veřejně řekneš „99,9 % dostupnost“, zákazník si nepředstavuje interní výjimky, naplánované údržby, nejasné metriky a supportní frontu bez vlastníka. Představuje si, že služba poběží, a když nepoběží, někdo bude vědět co dělat.
+
+Privacy-first SaaS nemá slibovat neprůstřelný provoz jako divadelní kouř. Má umět vysvětlit, co služba garantuje, jak se dostupnost měří, kde jsou hranice odpovědnosti, jak se komunikuje incident a jak se zákazník dostane ke svým datům i ve chvíli, kdy se něco pokazí.
+
+Špatná otázka zní: „Jak vysoké SLA vypadá dobře v nabídce?“
+
+Lepší otázka zní: „Jaký závazek umíme skutečně provozovat, měřit, komunikovat a po incidentu doložit?“
+
+> Codyho komentář: SLA není kouzelný štítek, který přidáš do enterprise plánu. Je to slib, který si vynucuje monitoring, runbooky, vlastníky, supportní rytmus a někdy i nepříjemné pondělní postmortem. Romantika cloudu, jen s tabulkou.
+
+### Rozliš SLI, SLO a SLA
+
+Nejdřív si ujasni jazyk. Google SRE zdroje v závěru e-booku dobře rozlišují ukazatele, cíle a závazky. Pro praktické použití:
+
+| Pojem | Pracovní význam | Příklad |
+| --- | --- | --- |
+| SLI | měřený signál služby | podíl úspěšných požadavků na API |
+| SLO | interní cíl kvality | 99,5 % úspěšných požadavků za 30 dní |
+| SLA | externí závazek vůči zákazníkovi | kredit při dostupnosti pod domluvenou hranicí |
+
+SLA by nemělo být první číslo, které si tým vymyslí. Nejdřív potřebuješ vědět, co měříš, jak stabilní služba reálně je, jak rychle tým reaguje a jaký dopad má výpadek na zákazníka. Teprve potom má smysl přemýšlet, co dát do smlouvy nebo veřejného trust centra.
+
+Praktické pravidlo: interní SLO má být přísnější než externí SLA. Pokud máš ve smlouvě stejnou hranici, jakou sotva udrží provoz, každá drobná chyba se mění v obchodní problém. To není odpovědnost. To je past s hezkým procentem.
+
+### Definuj službu podle práce uživatele
+
+Dostupnost celé aplikace je moc hrubá metrika. Zákazníka nezajímá, že homepage běží, pokud nejde odeslat fakturu, přihlásit se, stáhnout export nebo dokončit objednávku. Provozní závazky proto definuj podle schopností, které mají pro zákazníka hodnotu.
+
+Příklady produktových schopností:
+
+- uživatel se přihlásí,
+- admin otevře workspace,
+- API přijme a zpracuje požadavek,
+- zákazník stáhne export dat,
+- formulář uloží poptávku,
+- billing vystaví fakturu,
+- webhook doručí událost partnerovi.
+
+U každé schopnosti si napiš:
+
+| Schopnost | Dopad výpadku | Měřitelný signál | Vlastník |
+| --- | --- | --- | --- |
+| Přihlášení | uživatel se nedostane k práci | úspěšné login pokusy a chybovost identity služby | platform |
+| Export dat | zákazník nemůže odejít nebo předat podklady | dokončené exporty a fronta čekání | product/backend |
+| Veřejné API | integrace přestane fungovat | úspěšnost odpovědí, latence a rate limit chyby | API tým |
+
+Tím se vyhneš prázdnému slibu „aplikace běží“. Místo toho víš, které schopnosti chráníš a jak poznáš, že se zhoršily.
+
+### Dostupnost počítej srozumitelně
+
+SLA text má říct, jak se dostupnost počítá. Bez toho je číslo jen dekorace.
+
+Ujasni:
+
+- období měření: měsíc, kvartál, rok,
+- co se počítá jako nedostupnost,
+- jaké endpointy nebo schopnosti se měří,
+- jak se řeší plánovaná údržba,
+- jak se řeší výpadky třetích stran,
+- kdo má nárok na kredit nebo kompenzaci,
+- jak zákazník incident reklamuje,
+- kde najde stav služby a historii incidentů.
+
+Příklad čitelné formulace:
+
+```text
+Dostupnost měříme měsíčně pro produkční aplikaci a veřejné API. Za nedostupnost považujeme stav, kdy přihlášený uživatel nemůže dokončit hlavní pracovní tok kvůli chybě na naší straně. Plánovanou údržbu oznamujeme předem a do měření ji nezahrnujeme, pokud nepřekročí oznámené okno.
+```
+
+Tahle věta není kompletní právní text. Je to základ, kterému rozumí produkt, support i zákazník. Právní přesnost se dá doplnit. Nejasný provozní význam se opravuje hůř.
+
+### Reakční doba není doba opravy
+
+Supportní SLA často míchá dvě věci: kdy někdo odpoví a kdy bude problém vyřešený. To jsou různé závazky.
+
+| Závazek | Co znamená | Riziko špatné formulace |
+| --- | --- | --- |
+| Response time | někdo kvalifikovaný problém přijme a začne řešit | zákazník si myslí, že bude opraveno |
+| Update cadence | zákazník dostává pravidelné informace | ticho během incidentu ničí důvěru |
+| Resolution target | orientační cíl vyřešení | tým slíbí čas, který neumí ovlivnit |
+| Workaround | dočasná cesta k práci | zákazník čeká na fix, i když existuje náhradní postup |
+
+U menšího týmu je často lepší slíbit poctivou reakci a pravidelnou aktualizaci než agresivní čas opravy. Například:
+
+```text
+Kritický produkční incident potvrzujeme do 30 minut v pracovní době a následně aktualizujeme stav nejméně každých 60 minut, dokud neexistuje workaround nebo oprava.
+```
+
+Pokud nenabízíš 24/7 provoz, nepiš texty, které ho naznačují. „Ozveme se co nejdříve“ není SLA. „Kritické incidenty sledujeme v pracovní dny 8:00-18:00 CET a mimo tuto dobu podle individuální smlouvy“ je méně sexy, ale zákazník ví, na čem je.
+
+### Incidentové kredity navrhni jako kompenzaci, ne jako divadlo
+
+Kredity za výpadek mají dva účely: uznat dopad a dát zákazníkovi předvídatelný postup. Nemají být schované v podmínkách tak hluboko, aby je nikdo neuměl použít.
+
+Karta kreditu:
+
+| Otázka | Doporučení |
+| --- | --- |
+| Kdy vzniká nárok? | při dostupnosti pod konkrétní hranicí |
+| Jak se počítá? | procento měsíčního poplatku nebo pevný kredit |
+| Jak zákazník požádá? | jednoduchý postup a lhůta |
+| Co kredit nepokrývá? | nepřímé škody, chyby mimo službu, porušení podmínek |
+| Jak se dokládá incident? | status page, interní incident ID, support ticket |
+
+Kredit nenahradí důvěru. Pokud služba často padá, sleva na další měsíc zákazníka nezachrání. Kredity jsou pojistka pro výjimky, ne obchodní model pro nespolehlivost.
+
+### Plánovaná údržba má mít vlastní pravidla
+
+Údržba není incident, pokud je řízená, oznámená a přiměřená. Pro zákazníka ale může mít stejný dopad: produkt nejde používat. Proto ji komunikuj stejně pečlivě jako release.
+
+Dobrá údržba má:
+
+- důvod,
+- časové okno a časové pásmo,
+- očekávaný dopad na schopnosti produktu,
+- alternativu nebo doporučení pro zákazníka,
+- kontakt při neočekávaném problému,
+- potvrzení dokončení.
+
+Příklad:
+
+```text
+V úterý 21:00-21:30 CET proběhne údržba databáze. Přihlášení a čtení dat zůstane dostupné, exporty a importy mohou být po dobu údržby pozastavené. Pokud údržbu dokončíme dřív, status page aktualizujeme.
+```
+
+Privacy-first detail: při údržbě často vznikají dočasné exporty, snapshoty, debug logy nebo zvýšený přístup techniků. Tyto výjimky musí mít vlastní retenci a úklid. Údržba není volná vstupenka k tomu, aby se produkční data válela v pracovních složkách.
+
+### Status page musí odpovídat smlouvě i realitě
+
+Status page je veřejná vrstva provozního slibu. Pokud SLA mluví o API, exportech a přihlášení, status page by neměla ukazovat jen jeden zelený puntík „All systems operational“. To je uklidňující hlavně do chvíle, kdy zákazník ví, že mu nejde práce.
+
+Rozumné komponenty:
+
+- aplikace,
+- přihlášení,
+- veřejné API,
+- importy a exporty,
+- billing,
+- notifikace a e-mailové doručování,
+- integrace nebo webhooky,
+- dokumentace a support.
+
+Každá komponenta má odpovídat tomu, co tým umí měřit a opravit. Nevyráběj detailní status page jen proto, že vypadá enterprise. Když na komponentu nikdo nemá monitoring ani vlastníka, je to zelená dekorace.
+
+### SLA nesmí být drahý úkryt pro základní důvěru
+
+Vyšší plány mohou mít rychlejší reakční dobu, individuální komunikační kanál, dedikovaný support, vyšší dostupnost nebo smluvní kredity. To je v pořádku. Ale základní provozní slušnost nemá být luxusní doplněk.
+
+Ve všech plánech by mělo být jasné:
+
+- kde zjistit stav služby,
+- jak nahlásit incident,
+- jak získat export dat,
+- co se stane při výpadku,
+- jak produkt komunikuje kritické bezpečnostní problémy,
+- jak zákazník pozná plánovanou údržbu.
+
+Privacy-first produkt nesmí zákazníkovi říkat: „Když si připlatíš, budeme ti teprve pravdivě říkat, co se děje s provozem a daty.“ Vyšší plán může přidat komfort. Nemá přidat základní respekt.
+
+### Checklist: SLA a provozní závazky privacy-first
+
+- [ ] Rozlišujeme interní SLI, interní SLO a externí SLA.
+- [ ] SLA vychází z reálně měřených produktových schopností.
+- [ ] Dostupnost má jasné období, rozsah, výjimky a způsob výpočtu.
+- [ ] Interní SLO je přísnější než externí SLA.
+- [ ] Response time, update cadence a resolution target nejsou smíchané do jedné mlhavé věty.
+- [ ] Kritické incidenty mají vlastníka, runbook a komunikační rytmus.
+- [ ] Incidentové kredity mají jasný nárok, výpočet a postup žádosti.
+- [ ] Plánovaná údržba se oznamuje s dopadem na konkrétní schopnosti produktu.
+- [ ] Dočasné přístupy, debug logy a snapshoty z údržby mají retenci a úklid.
+- [ ] Status page odpovídá schopnostem, které zákazník reálně používá.
+- [ ] Vyšší plán přidává komfort, ne základní transparentnost.
+- [ ] Support, obchodní podmínky, trust center a pricing používají stejný jazyk závazků.
+
+### Mini úkol
+
+Vyber jeden provozní slib: dostupnost aplikace, API, exportů, supportní reakci, plánovanou údržbu nebo incidentové kredity. Vyplň kartu:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jaký přesný závazek zákazník vidí? |  |
+| Je to SLI, SLO, nebo SLA? |  |
+| Jaká produktová schopnost se tím chrání? |  |
+| Jak se závazek měří? |  |
+| Jaké jsou výjimky a plánovaná údržba? |  |
+| Kdo je vlastník monitoringu a komunikace? |  |
+| Jak často zákazník dostává update při incidentu? |  |
+| Jak se počítá případný kredit? |  |
+| Kde je závazek popsán: smlouva, pricing, trust center, status page? |  |
+| Která jedna věta je dnes moc vágní nebo moc odvážná? |  |
+
+Potom udělej jednu konkrétní změnu: přepiš dostupnost podle skutečně měřené schopnosti, rozděl reakční dobu od doby opravy, doplň výjimky plánované údržby, přidej komponentu na status page, nebo zapiš interní SLO před tím, než ho prodáš jako SLA. Provozní slib má uklidnit tím, že je pravdivý, ne tím, že má hezké procento.
+
 ## Zdroje
 
 - ICANN: Information for Domain Name Registrants - práva a odpovědnosti držitelů domén včetně správy, obnovy a převodu doménové registrace: https://www.icann.org/registrants
@@ -26068,6 +26263,7 @@ Potom udělej jednu konkrétní změnu: přepiš přehnané „neomezené“, do
 
 ## Pracovní log
 
+- 2026-07-16: Doplněna příloha o SLA a provozních závazcích bez falešného klidu: rozlišení SLI/SLO/SLA, definice dostupnosti podle produktových schopností, čitelné měření závazků, oddělení reakční doby od opravy, incidentové kredity, plánovaná údržba, status page, základní transparentnost ve všech plánech, checklist a mini úkol; navázáno na existující zdroje Google SRE k SLO, monitoringu a alertingu a na kapitoly o trust center, runbookách, incidentní komunikaci a produktových slibech.
 - 2026-07-16: Doplněna příloha o obchodních podmínkách a produktových slibech bez rozjeté reality: mapa veřejných tvrzení, sladění pricingu s entitlementem, technicky splnitelné privacy sliby, rozlišení hotových schopností od roadmapy a pilotů, release kontrola textů, práce s nesoulady, checklist a mini úkol; navázáno na existující zdroje a kapitoly k transparentnosti, minimalizaci, trust center, limitům a evropskému provozu.
 - 2026-07-16: Doplněna příloha o supportním přístupu k zákaznickému účtu bez tichého nahlížení: rozlišení režimů přístupu, vazba na supportní případ, omezená impersonace, srozumitelná žádost zákazníkovi, audit zásahu bez kopírování obsahu dat, break-glass pravidla, pravidelný úklid rolí, checklist a mini úkol; navázáno na existující zdroje OWASP k autorizaci a logování a na GDPR principy minimalizace a transparentnosti.
 - 2026-07-16: Doplněna příloha o feature request portálu bez veřejného hlasovacího cirkusu: přepis požadavků na problémy, hlasování jako signál místo závazku, ochrana veřejného portálu před citlivým kontextem, lidské stavy roadmapy, slučování návrhů podle problému, anonymizovaný přenos ze supportu, měření kvality požadavků, checklist a mini úkol.
