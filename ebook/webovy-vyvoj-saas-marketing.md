@@ -24444,6 +24444,187 @@ Vyber jeden generovaný dokument: nabídku, report, fakturu, exportní PDF, audi
 
 Potom udělej jednu konkrétní změnu: odeber interní pole ze šablony, zkrať platnost odkazu, přesuň citlivý obsah za přihlášení, vypni automatickou přílohu, přidej verzi šablony nebo napiš vlastníka dokumentu. Generovaný dokument má zrychlit práci, ne vytvořit automatizovaný kanál pro únik kontextu.
 
+## Příloha: Kalkulačky a konfigurátory bez leadové pasti
+
+Kalkulačka ceny, návratnosti, úspory, konfigurace balíčku nebo doporučeného plánu umí být na webu velmi užitečná. Pomáhá člověku přemýšlet nad vlastní situací, porovnat varianty a připravit se na další krok. Právě proto je tak lákavé udělat z ní skrytý sběrný stroj: nejdřív nech člověka vyplnit deset údajů, potom mu výsledek zamkni za e-mail a nakonec ho přidej do sales sekvence, protože „projevil zájem“.
+
+Privacy-first přístup je jednodušší a dlouhodobě důvěryhodnější: kalkulačka má nejdřív pomoct. Kontakt má přijít až ve chvíli, kdy člověk sám chce výsledek uložit, poslat, konzultovat nebo převést do konkrétní nabídky.
+
+Špatná otázka zní: „Jak z kalkulačky vytěžíme co nejvíc leadů?“
+
+Lepší otázka zní: „Jaké minimum údajů potřebujeme, aby člověk dostal užitečný odhad a věděl, co může udělat dál?“
+
+> Codyho komentář: Zamknout výsledek kalkulačky za e-mail je produktový ekvivalent toho, že někomu v obchodě ukážeš cenovku až po odevzdání vizitky. Fungovat to občas může. Elegantní to není.
+
+### Nejdřív napiš pracovní větu nástroje
+
+Kalkulačka není dekorace na landing page. Má mít jednu hlavní práci.
+
+Příklady:
+
+- ROI kalkulačka: „Pomáhá provoznímu manažerovi odhadnout, jestli automatizace ruční práce stojí za pilot.“
+- Pricing konfigurátor: „Pomáhá administrátorovi vybrat plán podle počtu uživatelů, funkcí a očekávaného objemu.“
+- Migrační odhad: „Pomáhá týmu pochopit rozsah migrace bez toho, aby musel posílat produkční data.“
+- Úspora času: „Pomáhá zakladateli přeložit opakovanou práci na hodiny, náklady a možný další krok.“
+
+Pracovní věta drží nástroj při zemi. Pokud kalkulačka slibuje přesný finanční výsledek, ale vstupy jsou jen tři hrubé odhady, zaděláváš si na nedůvěru. Pokud naopak jasně říká „orientační odhad“, může být užitečná i bez složitého modelu.
+
+Praktické pravidlo: výsledek pojmenuj podle jistoty. „Odhad“, „rozsah“, „scénář“ nebo „doporučený další krok“ bývá férovější než „garantovaná úspora“. Marketing unese přesnost. Důvěra hůř snáší přehnanou jistotu.
+
+### Rozděl vstupy na nutné, užitečné a zvědavé
+
+Každé pole v kalkulačce má být obhajitelné. Ne proto, že formulář vypadá plněji, ale proto, že bez něj výsledek bude horší.
+
+| Typ vstupu | Příklad | Co s ním |
+| --- | --- | --- |
+| Nutný | počet uživatelů, objem objednávek, počet hodin ruční práce | použij pro výpočet |
+| Užitečný | typ firmy, přibližná velikost týmu, hlavní use case | použij pro lepší doporučení |
+| Zvědavý | telefon, obrat, konkrétní jméno zákazníka, interní poznámky | neptej se před výsledkem |
+
+U privacy-first kalkulačky se ptej hlavně na intervaly a kategorie:
+
+- 1-10 / 11-50 / 51-200 uživatelů,
+- jednotky / desítky / stovky požadavků týdně,
+- začínáme / rosteme / máme provozní problém,
+- nízká / střední / vysoká složitost.
+
+Interval často stačí pro doporučení a zároveň snižuje citlivost vstupu. Když někdo počítá orientační cenu, nepotřebuje ti hned sdělovat přesný obrat, interní náklady nebo počet zaměstnanců po odděleních.
+
+### Výsledek ukaž bez vydírání kontaktem
+
+Základní výsledek má být dostupný hned. Pokud člověk věnoval čas vyplnění kalkulačky, dostal slib. Ten slib máš splnit dřív, než začneš žádat o kontakt.
+
+Dobrá struktura výsledku:
+
+1. Shrnutí jednou větou.
+2. Vstupy, ze kterých odhad vychází.
+3. Doporučený scénář nebo plán.
+4. Hlavní předpoklady a nejistoty.
+5. Další férový krok: uložit, sdílet, stáhnout, konzultovat nebo upravit vstupy.
+
+Kontakt může být volitelný:
+
+```text
+Chcete výsledek poslat e-mailem nebo ho projít s námi? Zadejte kontakt. Bez toho si výsledek můžete zkopírovat nebo stáhnout jako anonymní PDF.
+```
+
+Tím se mění povaha vztahu. Člověk už neplatí daty za výsledek. Dobrovolně si vybírá pohodlnější pokračování.
+
+### Ukládání výsledků navrhni jako samostatnou funkci
+
+Kalkulačka může fungovat čistě v prohlížeči bez ukládání vstupů na server. To je často nejlepší výchozí stav pro veřejný marketingový nástroj. Pokud výsledek nepotřebuješ uložit, neukládej ho. Nudné? Ano. Výborné? Taky ano.
+
+Ukládání dává smysl, když:
+
+- člověk chce výsledek dostat e-mailem,
+- výsledek se má stát podkladem pro nabídku,
+- uživatel je přihlášený a chce scénář uložit do workspace,
+- tým potřebuje auditní stopu pro reálné obchodní rozhodnutí.
+
+Jakmile ukládáš vstupy nebo výsledek, napiš:
+
+- účel uložení,
+- kdo k výsledku má přístup,
+- jak dlouho výsledek držíš,
+- jak ho člověk smaže nebo zneplatní,
+- zda se výsledek použije pro marketing nebo sales.
+
+Nejhorší varianta je tiché ukládání „pro analýzu“. Pokud chceš vědět, jestli kalkulačka pomáhá, měř agregovaně: počet spuštění, dokončení, volitelných kontaktů a následných kvalifikovaných konverzací. Nepotřebuješ sklad všech individuálních výpočtů.
+
+### Předpoklady ukaž čitelně
+
+Každá kalkulačka má model. Model má předpoklady. Když je schováš, výsledek bude vypadat přesněji, než je. To krátkodobě pomůže prokliku, ale dlouhodobě škodí důvěře.
+
+U výsledku zobraz:
+
+- jaké vstupy byly použité,
+- které hodnoty jsou odhad,
+- jaký interval nejistoty dává smysl,
+- co výpočet nezahrnuje,
+- kdy je lepší mluvit s člověkem.
+
+Příklad mikrotextu:
+
+```text
+Výsledek je orientační rozsah podle zadaného počtu uživatelů a vybraného use casu. Nezahrnuje jednorázovou migraci, individuální integrace ani interní náklady vašeho týmu.
+```
+
+Takový text nesnižuje hodnotu nástroje. Naopak říká, že víš, kde končí automatický odhad a začíná normální obchodní nebo produktová debata.
+
+### Sdílení výsledku nesmí prozradit víc než výsledek
+
+Kalkulačky často generují odkaz na výsledek. To je praktické pro týmové rozhodování, ale rizikové, pokud URL obsahuje citlivé vstupy.
+
+Vyhni se odkazům typu:
+
+```text
+/roi?company=Acme&employees=143&salary=62000&problem=manual-invoices
+```
+
+Taková URL se může propsat do historie prohlížeče, logů, analytiky, screenshotů, e-mailů a referrerů. Pokud potřebuješ sdílit výsledek, lepší možnosti jsou:
+
+- krátký neprůhledný token s expirací,
+- lokální export PDF bez uložení na server,
+- ruční zkopírování shrnutí,
+- uložený scénář dostupný jen po přihlášení.
+
+Veřejné sdílení výsledku používej jen pro opravdu neškodné konfigurace. U citlivějších výpočtů patří výsledek za oprávnění nebo do krátkodobého odkazu.
+
+### Sales návaznost drž dobrovolnou a konkrétní
+
+Kalkulačka může být skvělý most k obchodu. Jen nesmí předstírat pomoc a potichu spustit hon na lead.
+
+Dobrá CTA po výsledku:
+
+- „Projít odhad v 20minutové konzultaci“
+- „Požádat o nabídku podle tohoto scénáře“
+- „Poslat výsledek na e-mail“
+- „Zobrazit pricing pro doporučený plán“
+- „Přečíst si, jak odhad zpřesnit“
+
+Slabá CTA:
+
+- „Získejte výsledky“
+- „Odemknout detail“
+- „Nechte nám kontakt a ozveme se“
+- „Stáhnout report“, když report jen opakuje obrazovku a přidá marketingovou sekvenci
+
+Když se člověk rozhodne zanechat kontakt, ulož do CRM jen to, co obchod opravdu použije. Není nutné přelévat každý mezivýpočet, každé kliknutí a každou úpravu slideru. Pro sales často stačí scénář, rozsah, vybraná varianta, kontakt a dobrovolná poznámka.
+
+### Checklist: Kalkulačky a konfigurátory privacy-first
+
+- [ ] Kalkulačka má jednu pracovní větu a jasný typ výsledku.
+- [ ] Každé vstupní pole je rozdělené na nutné, užitečné nebo zvědavé.
+- [ ] Přesné osobní nebo firemně citlivé hodnoty jsou nahrazené intervaly, pokud to stačí.
+- [ ] Základní výsledek je dostupný bez povinného e-mailu.
+- [ ] Kontakt je volitelný a spojený s konkrétním dalším krokem.
+- [ ] Vstupy se neukládají na server, pokud to není nutné pro jasný účel.
+- [ ] Uložené výsledky mají vlastníka, oprávnění a retenci.
+- [ ] Výsledek ukazuje předpoklady, nejistoty a limity výpočtu.
+- [ ] Sdílené URL neobsahují osobní, obchodní ani citlivé vstupy.
+- [ ] Export nebo PDF neobsahuje víc dat než obrazovka výsledku.
+- [ ] CRM dostává jen údaje potřebné pro navazující obchodní krok.
+- [ ] Úspěšnost kalkulačky se měří agregovaně, ne sledováním každého pohybu člověka.
+
+### Mini úkol
+
+Vyber jednu existující nebo plánovanou kalkulačku, konfigurátor, pricing wizard nebo ROI nástroj. Vyplň kartu:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jaká je pracovní věta nástroje? |  |
+| Jaký výsledek člověk dostane bez kontaktu? |  |
+| Která pole jsou nutná pro výpočet? |  |
+| Která pole jsou jen užitečná? |  |
+| Která pole jsou zvědavá a půjdou pryč? |  |
+| Ukládají se vstupy nebo výsledek na server? Proč? |  |
+| Jak dlouho se uložený výsledek drží? |  |
+| Co se posílá do CRM nebo sales procesu? |  |
+| Obsahuje sdílená URL citlivé hodnoty? |  |
+| Jak vysvětlíme předpoklady výpočtu? |  |
+
+Potom udělej jednu konkrétní změnu: ukaž výsledek bez povinného e-mailu, odeber zvědavé pole, nahraď přesnou hodnotu intervalem, vypni tiché ukládání vstupů, zkrať retenci uložených výsledků nebo přepiš CTA tak, aby nabízelo jasný dobrovolný další krok. Kalkulačka má budovat důvěru ještě před sales hovorem. Když ji používáš jako past, říkáš o svém produktu víc, než bys chtěl.
+
 ## Zdroje
 
 - ICANN: Information for Domain Name Registrants - práva a odpovědnosti držitelů domén včetně správy, obnovy a převodu doménové registrace: https://www.icann.org/registrants
@@ -24594,6 +24775,7 @@ Potom udělej jednu konkrétní změnu: odeber interní pole ze šablony, zkrať
 
 ## Pracovní log
 
+- 2026-07-16: Doplněna příloha o kalkulačkách a konfigurátorech bez leadové pasti: pracovní věta nástroje, dělení vstupů na nutné/užitečné/zvědavé, výsledek bez povinného e-mailu, ukládání jako samostatná funkce, čitelné předpoklady výpočtu, bezpečné sdílení výsledků, dobrovolná sales návaznost, checklist a mini úkol.
 - 2026-07-16: Doplněna příloha o generovaných dokumentech bez automatického úniku dat: typ dokumentu jako datový produkt, povolená a zakázaná pole šablon, oddělení interní a zákaznické verze, kontrola příloh, expirovatelné odkazy, auditní stopa bez kopírování obsahu, verzování šablon, checklist a mini úkol.
 - 2026-07-16: Doplněna příloha o zákaznické komunitě a advisory boardu bez datového rybníku: účel komunity, oddělení členství od marketingového souhlasu, pravidla bezpečného sdílení, nahrávky jako výjimka, rozhodovací poznámky místo surových přepisů, anonymizace výstupů podle použití, pravidelný úklid členů a obsahu, checklist a mini úkol; navázáno na ověřené zdroje Evropské komise a EDPB k účelu, minimalizaci, transparentnosti a omezení uchování.
 - 2026-07-16: Doplněna příloha o případových studiích a referencích bez vyzrazení zákazníka: výběr typu důkazu, oddělené schvalování loga/citací/čísel/screenshotů, psaní podle rozhodnutí budoucího zákazníka, zaokrouhlování citlivých čísel, syntetické screenshoty, pravidelné kontroly referencí, checklist a mini úkol; navázáno na ověřené zdroje Evropské komise k GDPR principům, minimalizaci a transparentnosti.
