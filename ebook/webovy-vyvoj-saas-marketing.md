@@ -22715,6 +22715,147 @@ Vyber jeden opakovaný provozní postup a vyplň runbook kartu:
 
 Potom napiš první verzi runbooku pro jednu věc: restart fronty, ověření zálohy, rotaci webhook secretu, neodeslané e-maily, selhaný deploy nebo žádost o export dat. Nehledej dokonalost. Hledej postup, který příštímu člověku ušetří stres a nezaloží nový datový problém.
 
+## Příloha: Degradovaný režim bez tichého datového chaosu
+
+Ne každý problém musí skončit úplným výpadkem. Často selže jen část produktu: e-maily se zpozdí, export se nedokončí, platební webhook čeká ve frontě, vyhledávání je pomalé, externí integrace neodpovídá nebo administrace neumí načíst report. Právě v těchto napůl rozbitých stavech vzniká nejvíc improvizace.
+
+Degradovaný režim je vědomě navržené chování produktu, když část systému není dostupná. Privacy-first verze k tomu přidává ještě jednu podmínku: produkt nesmí kvůli nouzovému stavu začít sbírat víc dat, posílat citlivější logy nebo přelévat zákaznický kontext do chatu jen proto, že „teď to musíme rychle vyřešit“.
+
+> Codyho komentář: Výpadek je vidět. Špatně navržený polovýpadek je zákeřnější. Produkt se tváří, že běží, lidé klikají, fronty rostou, support opisuje detaily do zpráv a někde v pozadí vzniká hezká malá datová skládka. Přesně ta věc, kterou chceš navrhnout dřív než v pátek večer.
+
+### Rozděl schopnosti podle dopadu
+
+Nejdřív si napiš, jaké schopnosti produkt poskytuje a co se stane, když každá z nich selže. Nepopisuj technické služby, ale práci uživatele.
+
+Příklady schopností:
+
+- uživatel se přihlásí,
+- zákazník vytvoří objednávku,
+- administrátor pozve člena týmu,
+- zákazník stáhne export dat,
+- support najde stav požadavku,
+- systém odešle fakturu,
+- integrace přijme webhook,
+- veřejný web zobrazí pricing.
+
+Ke každé schopnosti přidej dopad:
+
+| Schopnost | Když selže | Přijatelný degradovaný režim | Nepřijatelné chování |
+| --- | --- | --- | --- |
+| Export dat | zákazník čeká na soubor | fronta, stav požadavku, jasné zpoždění | ruční export celé databáze do chatu |
+| Vyhledávání | uživatel nenajde položku | jednodušší filtr nebo poslední položky | logování všech dotazů bez retence |
+| E-mailové notifikace | zpráva se opozdí | opakování ve frontě a stav v administraci | posílání přes osobní e-mail |
+| Analytický report | tým nevidí agregaci | hláška o zpoždění a poslední platná verze | nouzový export řádkových dat všem |
+
+Toto cvičení rychle ukáže, kde produkt potřebuje jasné hranice. Ne každá schopnost musí mít luxusní fallback. Některé mají prostě říct „teď to nejde, zkusíme to znovu a dáme vědět“. To je často lepší než předstírat funkčnost a vyrábět skryté následky.
+
+### Stav ukaž uživateli, ne jen logům
+
+Degradovaný režim má být viditelný tam, kde ovlivňuje práci. Pokud export trvá déle, uživatel má vidět stav exportu. Pokud se webhook nepodařilo doručit, integrace má ukázat poslední pokus a další retry. Pokud report obsahuje data do včerejška, má to být napsané přímo u reportu.
+
+Dobrá hláška odpovídá na čtyři otázky:
+
+- Co se děje?
+- Co může uživatel udělat teď?
+- Co udělá systém automaticky?
+- Kdy má člověk kontaktovat support?
+
+Slabé: „Něco se pokazilo.“
+
+Lepší: „Export čeká ve frontě. Zkusíme ho znovu během několika minut. Nemusíte zadávat nový požadavek. Pokud stav zůstane stejný déle než hodinu, napište supportu a přiložte ID exportu.“
+
+Privacy-first detail: ID exportu nebo požadavku je lepší než kopírování obsahu exportu, e-mailu zákazníka nebo screenshotu celé administrace. Chybová hláška má pomoci dohledat stav, ne vyzvat člověka k poslání dalších osobních údajů.
+
+### Fronty a retry musí mít konec
+
+Opakování neúspěšné práce je užitečné, dokud má hranice. Bez hranic se z retry mechanismu stane sklad starých payloadů. U každé fronty si napiš:
+
+- co se ukládá do zprávy,
+- jestli zpráva obsahuje osobní nebo zákaznická data,
+- kolikrát se akce zopakuje,
+- jak dlouho zpráva zůstává ve frontě,
+- kdy vzniká dead-letter stav,
+- kdo dead-letter stav řeší,
+- co se po vyřešení smaže.
+
+Praktické pravidlo: do fronty dávej identifikátor a minimální pracovní kontext, ne celý svět. Pokud jde pracovní data načíst ze zdroje pravdy až při zpracování, často je lepší uložit jen ID. Když se payload zasekne, nechceš za tři měsíce najít historickou kopii zákaznického souboru jen proto, že retry měl romantickou představu o věčnosti.
+
+### Fallback nesmí obcházet oprávnění
+
+Nouzová cesta je pořád produktová cesta. Když běžné rozhraní kontroluje role, auditní stopu a retenci, fallback to nemá obejít jen proto, že je schovaný v administraci nebo skriptu.
+
+Typické rizikové zkratky:
+
+- „Pošleme zákazníkovi export ručně z databáze.“
+- „Dočasně dáme supportu admina.“
+- „Vypneme kontrolu role, ať jde požadavek dokončit.“
+- „Zkopírujeme payload do ticketu, ať to máme po ruce.“
+- „Pustíme jednorázový skript nad produkcí bez logu rozhodnutí.“
+
+Bezpečnější varianta je mít předem popsané nouzové schopnosti: kdo je smí použít, jak se schvalují, jaký záznam vznikne, jak se ověří výsledek a kdy se oprávnění nebo dočasný režim vypne.
+
+### Poslední platná verze je často lepší než prázdno
+
+U některých částí produktu je lepší ukázat poslední platnou verzi s jasným časem aktualizace než prázdnou chybu. Hodí se to pro agregované reporty, veřejný status, seznam dokumentace, konfiguraci feature flagů nebo číselníky.
+
+Podmínky:
+
+- uživatel vidí, že data nejsou čerstvá,
+- systém neprezentuje starý stav jako aktuální,
+- citlivá data se kvůli cache nedostanou k nesprávnému uživateli,
+- existuje maximální stáří, po kterém se fallback vypne,
+- tým ví, jak poslední platnou verzi obnovit nebo zahodit.
+
+Tady je důležitý rozdíl mezi užitečnou odolností a sebevědomou lží. „Data jsou z poslední úspěšné aktualizace v 09:15“ je užitečné. „Všechno je zelené“, protože status page se neumí aktualizovat, je provozní komedie s drahými vstupenkami.
+
+### Support potřebuje scénáře, ne improvizaci
+
+Degradovaný režim skoro vždy dopadne i na support. Pokud support neví, co říct, začne si vyrábět vlastní postup. To je lidské, ale rizikové. Ke každému důležitému polovýpadku připrav krátkou support kartu:
+
+| Pole | Obsah |
+| --- | --- |
+| Situace | co uživatel vidí |
+| Dopad | jaká práce je omezená |
+| Co říct | stručný text bez slibů mimo realitu |
+| Co nežádat | údaje, screenshoty nebo exporty, které nejsou potřeba |
+| Identifikátor | jaký bezpečný údaj stačí k dohledání |
+| Eskalace | kdy a komu předat |
+| Úklid | co po vyřešení smazat nebo uzavřít |
+
+Tím chráníš uživatele i tým. Support nemusí vymýšlet, vývoj nemusí lovit citlivé detaily v chatu a zákazník dostane klidnější odpověď.
+
+### Checklist: Degradovaný režim privacy-first
+
+- [ ] Máme seznam klíčových schopností produktu podle práce uživatele.
+- [ ] U každé schopnosti víme, co se stane při částečném selhání.
+- [ ] Degradovaný stav je viditelný v produktu, ne jen v logu.
+- [ ] Chybové hlášky používají bezpečný identifikátor místo žádosti o citlivé údaje.
+- [ ] Fronty a retry mechanismy mají limit, dead-letter stav a retenci.
+- [ ] Payloady ve frontách obsahují minimum dat.
+- [ ] Nouzové postupy neobcházejí role, auditní stopu ani schválení.
+- [ ] Poslední platná verze je jasně označená časem a maximálním stářím.
+- [ ] Support má kartu pro běžné polovýpadky.
+- [ ] Po návratu do normálu existuje úklid: dočasné režimy, exporty, oprávnění, fronty a komunikace.
+
+### Mini úkol
+
+Vyber jednu schopnost produktu, která často závisí na frontě, externí službě nebo delším zpracování. Vyplň kartu:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jakou práci uživatele schopnost podporuje? |  |
+| Co přesně se může částečně rozbít? |  |
+| Co má uživatel vidět v degradovaném režimu? |  |
+| Co systém zkusí automaticky? |  |
+| Jaký bezpečný identifikátor stačí supportu? |  |
+| Jaká data se nesmí kopírovat do chatu ani ticketu? |  |
+| Kde je hranice retry a retence? |  |
+| Kdo smí použít nouzový postup? |  |
+| Jak poznáme návrat do normálu? |  |
+| Co se musí po vyřešení uklidit? |  |
+
+Potom uprav jednu věc: přidej stav exportu, napiš lepší chybovou hlášku, omez payload ve frontě, doplň dead-letter pravidlo, vytvoř support kartu nebo označ poslední platnou verzi reportu časem. Cílem není dokonalá odolnost. Cílem je, aby se částečný problém nezměnil v datový nepořádek.
+
 ## Zdroje
 
 - ICANN: Information for Domain Name Registrants - práva a odpovědnosti držitelů domén včetně správy, obnovy a převodu doménové registrace: https://www.icann.org/registrants
@@ -22865,6 +23006,7 @@ Potom napiš první verzi runbooku pro jednu věc: restart fronty, ověření z�
 
 ## Pracovní log
 
+- 2026-07-16: Doplněna příloha o degradovaném režimu bez tichého datového chaosu: mapování produktových schopností, viditelné stavy pro uživatele, bezpečné chybové hlášky, hranice retry/front, fallback bez obcházení oprávnění, poslední platná verze, support karta, checklist a mini úkol.
 - 2026-07-16: Doplněna příloha o runboocích bez hrdinského improvizování: struktura postupu pro stresové provozní situace, hranice oprávnění, zákaz citlivých dat v návodech, testování runbooků, životní cyklus a checklist s mini úkolem.
 - 2026-07-16: Doplněna příloha o interní wiki a znalostní bázi bez nekonečného archivu: pracovní věta stránky, dělení návodů/rozhodnutí/reference/runbooků/slovníku, zdroj pravdy místo kopií, oprávnění podle citlivosti, syntetické příklady, vlastník a review stránky, pravidla archivace, onboarding cesta, checklist a mini úkol; ověřen a doplněn zdroj EDPB k průběžnému souladu.
 - 2026-07-15: Doplněna příloha o týmových chatech a interních upozorněních bez úniku kontextu: rozlišení konverzací, rozhodnutí a záznamů, karta automatického upozornění, pravidla pro kanály, screenshoty, incidentní chat, retenci, checklist a mini úkol.
