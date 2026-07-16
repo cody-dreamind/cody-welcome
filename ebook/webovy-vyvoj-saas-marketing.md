@@ -25002,6 +25002,201 @@ Vyber jeden produktový průzkum, NPS/CSAT otázku, dokumentační „pomohlo?�
 
 Potom udělej jednu konkrétní změnu: zruš plošný popup, přesuň otázku po dokončení workflow, zkrať dotazník na jednu otázku, udělej kontakt volitelný, odeber automatický screenshot, nastav retenci surových textů nebo nahraď individuální report agregovaným měsíčním shrnutím. Dobrý průzkum není ten, který z lidí vyždímá nejvíc odpovědí. Dobrý průzkum položí jednu férovou otázku a promění odpověď v lepší produkt.
 
+## Příloha: Servisní účty bez anonymního superadmina
+
+Servisní účet je účet pro systém, integraci, automatizaci, cron, import, monitoring, CI/CD nebo jiný strojový proces. Na papíře je to nudná provozní věc. V reálném SaaS je to často nejtišší cesta, jak obejít normální pravidla: někdo vytvoří „dočasný“ admin token, napojí ho na automatizaci, automatizace začne zapisovat do CRM, exportovat data nebo mazat staré soubory a za půl roku nikdo neví, kdo účet vlastní a proč má práva na půlku produktu.
+
+Špatná otázka zní: „Jaký token bude fungovat všude?“
+
+Lepší otázka zní: „Jakou přesně práci má tento strojový přístup dělat a jak poznáme, že už ji dělat nemá?“
+
+OWASP Secrets Management Cheat Sheet připomíná životní cyklus tajemství, centralizaci, řízení přístupu, rotaci, revokaci a audit. OWASP Authorization Cheat Sheet stojí na principu nejmenších oprávnění a kontrole přístupu při každém požadavku. OWASP Logging Cheat Sheet zase vede k tomu, aby logy pomáhaly s provozem a bezpečností, ale nestaly se skladem tokenů a payloadů. Přeloženo do produktu: servisní účet nemá být neviditelný administrátor. Má být konkrétní nástroj s vlastníkem, rozsahem, limitem a koncem života.
+
+> Codyho komentář: „Dočasný admin token“ je jeden z nejtrvalejších materiálů ve vesmíru. Pokud mu nedáš expiraci, vlastníka a připomínku úklidu, přežije redesign, týmovou reorganizaci i tři lidi, kteří tvrdili, že to příští týden opraví.
+
+### Rozliš člověka, integraci a strojový proces
+
+První pravidlo: nepoužívej osobní účet člověka pro automatizaci. Když cron běží pod účtem zakladatele, CI používá osobní token vývojáře nebo billing export stahuje účet člověka, který už ve firmě není, vzniká několik problémů najednou:
+
+- offboarding člověka rozbije automatizaci,
+- auditní stopa vypadá, jako by akci dělal člověk,
+- oprávnění jsou často širší, než proces potřebuje,
+- rotace tokenu se odkládá, protože se všichni bojí výpadku,
+- incident nejde rychle přiřadit k jednomu účelu.
+
+Lepší rozdělení:
+
+| Typ přístupu | Použití | Co hlídat |
+| --- | --- | --- |
+| Lidský účet | práce konkrétního člověka | MFA, role, offboarding, audit změn |
+| Servisní účet | interní automatizace nebo job | vlastník, scope, prostředí, rotace, vypnutí |
+| Integrační token | zákaznická nebo partnerská integrace | scopy, workspace, rate limit, revokace |
+| CI/CD identita | build, test, deploy, publikace artefaktů | oddělená prostředí, schválení, minimální oprávnění |
+| Break-glass účet | nouzový zásah při incidentu | velmi omezený počet lidí, silný audit, pravidelné testování |
+
+Každý z těchto přístupů má jiný režim. Když je hodíš do jedné kategorie „admin“, ztratíš schopnost řídit riziko. A pak se divíš, že token pro noční report umí mazat produkční zákazníky. To není chyba tokenu. To je chyba návrhu.
+
+### Dej účtu pracovní větu
+
+Každý servisní účet má mít jednu větu, která vysvětluje jeho práci:
+
+```text
+Servisní účet `billing-export-prod` jednou denně vytvoří agregovaný export fakturačních stavů pro účetnictví za poslední uzavřený den.
+```
+
+Dobrá pracovní věta obsahuje:
+
+- název účtu,
+- prostředí,
+- typ akce,
+- rozsah dat,
+- rytmus nebo spouštěč,
+- příjemce nebo navazující systém,
+- vlastníka v týmu.
+
+Slabá věta:
+
+```text
+Token pro integrace.
+```
+
+Lepší věta:
+
+```text
+Token `crm-lead-sync-prod` zapisuje nové B2B leady z kontaktního formuláře do CRM, bez čtení existujících kontaktů a bez přístupu k billing datům.
+```
+
+Pracovní věta není formalita. Pomůže při review oprávnění, incidentu, rotaci i rozhodnutí, jestli účet ještě potřebuje existovat.
+
+### Oprávnění začni od nejmenšího užitečného rozsahu
+
+Servisní účet nemá dostat práva podle toho, co by se mohlo někdy hodit. Má dostat práva podle jedné konkrétní práce.
+
+Karta oprávnění:
+
+| Otázka | Příklad odpovědi |
+| --- | --- |
+| Jaké objekty smí číst? | faktury za poslední uzavřený den |
+| Jaké objekty smí zapisovat? | žádné, jen vytvořit exportní záznam |
+| Smí mazat? | ne |
+| Smí exportovat hromadná data? | ano, jen agregovaný billing report |
+| Na jaké prostředí platí? | produkce |
+| Jaký tenant nebo workspace smí obsluhovat? | všechny fakturační entity, ne zákaznické workspace detaily |
+| Jaký limit má mít? | jeden export denně, ruční opakování jen přes admin akci |
+| Kdo může token rotovat? | owner billing procesu a tech lead |
+
+Pokud systém neumí takto jemná oprávnění, je to produktový dluh. Ne vždy ho opravíš hned, ale má být viditelný. Mezitím použij kompenzační brzdy: omezené endpointy, allowlist akcí, krátkou expiraci, oddělené prostředí, rate limit, audit a pravidelný review.
+
+### Odděl prostředí a zákaznický rozsah
+
+Testovací automatizace nemá používat produkční přístup. Staging job nemá číst produkční databázi jen proto, že „tam jsou hezčí data“. A servisní účet pro jednoho zákazníka nemá mít přístup k celé platformě, pokud jeho práce patří do jednoho workspace.
+
+Praktické zásady:
+
+- produkční a neprodukční servisní účty drž odděleně,
+- název účtu má obsahovat prostředí nebo jasný kontext,
+- staging tokeny automaticky expirují nebo se pravidelně resetují,
+- zákaznické integrace omezuj na tenant, workspace nebo projekt,
+- interní joby, které musí běžet napříč tenanty, mají mít zvláštní review,
+- kopie produkčních oprávnění do testu je výjimka, ne šablona.
+
+Názvy nejsou kosmetika. `sync-prod-readonly` a `sync-staging-admin` se čtou jinak než `token2`. Když v incidentu hledáš, co vypnout, nechceš luštit archeologii v poznámkách.
+
+### Rotace má být provozní rutina, ne krizový rituál
+
+Token, který nejde rotovat bez výpadku, je provozní riziko. Neznamená to, že všechno musí rotovat každý den. Znamená to, že tým ví, jak rotaci udělat, kdo ji smí spustit a jak pozná, že nová identita funguje.
+
+Základní rotační postup:
+
+1. Vytvoř nový token se stejným nebo menším rozsahem.
+2. Nasaď ho do jednoho prostředí nebo jedné instance procesu.
+3. Ověř úspěšné běhy a chybové stavy.
+4. Přepni zbytek provozu.
+5. Revokuj starý token.
+6. Zapiš datum, důvod a výsledek.
+
+Pokud dodavatel podporuje překryv dvou aktivních tokenů, použij ho. Pokud ne, napiš krátké okno údržby a jasný návratový postup. Nejhorší varianta je starý token ponechat „pro jistotu“. Taková jistota časem vypadá jako druhá produkční identita bez vlastníka.
+
+### Audituj akce, ne tajemství
+
+Auditní záznam má říct, co servisní účet udělal, kdy, v jakém rozsahu a s jakým výsledkem. Nemá ukládat celý token, payload, export, query ani osobní údaje, které k vysvětlení akce nejsou potřeba.
+
+Dobrá auditní událost:
+
+```text
+2026-07-16T02:05:12Z service_account=billing-export-prod action=export.created scope=billing_daily date=2026-07-15 result=success export_id=exp_8f31 request_id=req_91ab
+```
+
+Špatná auditní událost:
+
+```text
+token=... payload={celý export faktur, e-maily, adresy, poznámky}
+```
+
+U servisních účtů sleduj hlavně:
+
+- vytvoření, změnu a zrušení účtu,
+- změnu oprávnění,
+- vytvoření nebo rotaci tajemství,
+- neobvyklý objem akcí,
+- selhání kvůli oprávnění,
+- akce mimo běžný čas nebo rozsah,
+- exporty, mazání a změny bezpečnostních nastavení.
+
+Privacy-first audit není šmírování stroje. Je to možnost včas poznat, že automatizace dělá víc, než měla.
+
+### Vypnutí musí být navržená funkce
+
+Každý servisní účet potřebuje plán vypnutí. Ne až při incidentu. Už při vytvoření.
+
+Plán vypnutí odpovídá na otázky:
+
+- Co se rozbije, když účet zneplatníme?
+- Kdo dostane upozornění?
+- Jak poznáme, že už účet nemá běžet?
+- Existuje záložní postup?
+- Jak dlouho držíme související logy a exporty?
+- Kde je dokumentované obnovení, pokud šlo o chybu?
+
+Tohle je důležité hlavně u starých automatizací. Pokud účet měsíc neběžel, možná je mrtvý. Pokud běží, ale nikdo neví proč, je to horší. Mrtvý účet je odpad. Živý účet bez účelu je riziko.
+
+### Checklist: Servisní účty privacy-first
+
+- [ ] Každý servisní účet má vlastníka, pracovní větu a prostředí.
+- [ ] Automatizace neběží pod osobním účtem člověka.
+- [ ] Oprávnění odpovídají jedné konkrétní práci.
+- [ ] Produkční, staging a lokální přístupy jsou oddělené.
+- [ ] Tenant nebo workspace rozsah je omezený tam, kde to jde.
+- [ ] Účet nemá právo mazat, exportovat nebo měnit nastavení bez výslovného důvodu.
+- [ ] Tokeny a secrets jsou ve správci tajemství nebo chráněném prostředí, ne v dokumentaci, chatu ani repozitáři.
+- [ ] Rotace je otestovaná a má krátký postup.
+- [ ] Starý token se po rotaci opravdu revokuje.
+- [ ] Auditní log ukládá akce a výsledek, ne celé tokeny, payloady nebo exporty.
+- [ ] Neobvyklé objemy, selhání oprávnění a citlivé akce mají rozumné upozornění.
+- [ ] Servisní účty se pravidelně revidují spolu s přístupy, integracemi a automatizacemi.
+- [ ] Každý účet má popsaný postup vypnutí a dopad na produkt.
+
+### Mini úkol
+
+Vyber jeden servisní účet, CI token, integrační klíč nebo automatizaci, která běží bez člověka. Vyplň kartu:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jak se účet nebo token jmenuje? |  |
+| Kdo je vlastník? |  |
+| Jaká je jedna pracovní věta? |  |
+| Jaké prostředí používá? |  |
+| Jaké objekty smí číst? |  |
+| Jaké objekty smí zapisovat nebo mazat? |  |
+| Jaký tenant, workspace nebo projekt smí obsluhovat? |  |
+| Kde je token uložený? |  |
+| Kdy byl naposledy rotovaný? |  |
+| Co se stane při vypnutí? |  |
+| Jaký auditní záznam vzniká při běhu? |  |
+| Jaká jedna oprava sníží riziko ještě tento týden? |  |
+
+Potom udělej jednu konkrétní změnu: přejmenuj účet podle účelu, odeber zbytečný admin scope, odděl staging token od produkce, přidej vlastníka, zapiš pracovní větu, nastav expiraci, doplň audit bez payloadu nebo otestuj rotaci na méně rizikovém přístupu. Servisní účet má být spolehlivý pracovní nástroj, ne zapomenutý superadmin ve stínu.
+
 ## Zdroje
 
 - ICANN: Information for Domain Name Registrants - práva a odpovědnosti držitelů domén včetně správy, obnovy a převodu doménové registrace: https://www.icann.org/registrants
@@ -25152,6 +25347,7 @@ Potom udělej jednu konkrétní změnu: zruš plošný popup, přesuň otázku p
 
 ## Pracovní log
 
+- 2026-07-16: Doplněna příloha o servisních účtech bez anonymního superadmina: rozlišení lidských účtů, servisních účtů, integračních tokenů, CI/CD identit a break-glass účtů, pracovní věta účtu, minimální oprávnění, oddělení prostředí a tenant rozsahu, rotační postup, audit akcí bez ukládání tajemství, plán vypnutí, checklist a mini úkol; navázáno na ověřené zdroje OWASP k secrets managementu, autorizaci a logování a na GDPR princip minimalizace.
 - 2026-07-16: Doplněna příloha o produktových průzkumech bez profilovacího dotazování: rozhodovací věta před výběrem metriky, správný moment otázky, krátké NPS/CSAT a vlastní průzkumy, bezpečné volné texty, chudý kontext, oddělení produktu/supportu/marketingu, agregované reportování, uzavírání smyčky, checklist a mini úkol.
 - 2026-07-16: Doplněna příloha o live chatu a kontaktním widgetu bez sledovacího ocasu: rozhodování, jestli chat na stránku patří, volba režimu pomoci podle práce člověka, datová mapa widgetu, načítání až po záměru, omezení automaticky posílaného kontextu, retence transkriptů, opatrné použití botů a AI asistentů, agregované měření užitečnosti, checklist a mini úkol; navázáno na existující zdroje k GDPR principům, externím embedům, supportu a AI asistentům.
 - 2026-07-16: Doplněna příloha o kalkulačkách a konfigurátorech bez leadové pasti: pracovní věta nástroje, dělení vstupů na nutné/užitečné/zvědavé, výsledek bez povinného e-mailu, ukládání jako samostatná funkce, čitelné předpoklady výpočtu, bezpečné sdílení výsledků, dobrovolná sales návaznost, checklist a mini úkol.
