@@ -24262,6 +24262,188 @@ Vyber jednu existující zákaznickou skupinu, advisory board, beta kanál nebo 
 
 Potom udělej jednu změnu: napiš uvítací pravidla, vypni automatické nahrávání, smaž staré surové zápisy, anonymizuj poznámky v backlogu, zkontroluj neaktivní členy nebo odděl komunitní pozvánku od marketingového odběru. Komunita má budovat důvěru, ne skrytě rozšiřovat datovou stopu.
 
+## Příloha: Generované dokumenty bez automatického úniku dat
+
+Moderní weby a SaaS produkty rády generují dokumenty: nabídky, smluvní přílohy, faktury, exporty, PDF reporty, onboardingové balíčky, auditní výstupy, bezpečnostní dotazníky, rekapitulace schůzek nebo automatické shrnutí supportu. Na první pohled je to pohodlí. Na druhý pohled je to další místo, kde se data mohou smíchat, uložit moc dlouho, poslat špatnému člověku nebo zůstat v dočasné složce, na kterou si nikdo nevzpomene.
+
+Privacy-first přístup neříká „negeneruj dokumenty“. Říká: každý generovaný dokument je datový produkt. Má účel, vstupy, příjemce, oprávnění, retenci a životní cyklus. Když tyto věci nejsou jasné, automatizace jen zrychlí vznik nepořádku.
+
+Špatná otázka zní: „Co všechno do dokumentu můžeme doplnit automaticky?“
+
+Lepší otázka zní: „Jaké minimum informací musí dokument obsahovat, aby příjemce mohl udělat konkrétní rozhodnutí nebo úkol?“
+
+> Codyho komentář: Automaticky vygenerované PDF působí profesionálně i ve chvíli, kdy je uvnitř datový mišmaš. Hezký layout bohužel neumí poznat, že posíláš interní poznámku zákazníkovi. Škoda, byl by to užitečný filtr.
+
+### Začni typem dokumentu a jeho prací
+
+Nejdřív si napiš, k čemu dokument slouží. Bez toho se z něj stane skládka polí, která „by se mohla hodit“.
+
+| Typ dokumentu | Hlavní práce | Typické riziko |
+| --- | --- | --- |
+| Nabídka | pomoct zákazníkovi rozhodnout o rozsahu a ceně | interní marže, neveřejné poznámky, špatný příjemce |
+| Faktura | doložit obchodní a účetní transakci | záměna billing kontaktu, příliš široké sdílení |
+| Produktový report | shrnout stav, hodnotu nebo výsledek | osobní údaje v detailech, export mimo produkt |
+| Auditní výstup | popsat zjištění a doporučení | citlivé technické detaily, screenshoty s daty |
+| Support rekapitulace | uzavřít problém a další krok | interní hypotézy, surové logy, osobní poznámky |
+| Bezpečnostní dotazník | odpovědět na procurement nebo compliance | slib, který provoz neumí splnit |
+
+U každého typu dokumentu napiš jednu větu:
+
+„Tento dokument pomáhá ___ udělat ___ a obsahuje pouze ___.“
+
+Příklad:
+
+„Tento onboardingový report pomáhá administrátorovi poznat, které kroky workspace už dokončil, a obsahuje pouze stav nastavení, role a doporučené další kroky bez surových produktových logů.“
+
+Jakmile do věty potřebuješ přidat „a ještě tam dáme“, zastav se. Možná jde o druhý dokument, přílohu nebo interní poznámku. Ne všechno patří do jednoho výstupu.
+
+### Šablona má mít povolená a zakázaná pole
+
+Dokumentová šablona není jen design. Je to datový kontrakt. U každého pole si napiš, odkud se bere, kdo ho uvidí a jestli je skutečně nutné.
+
+Praktická tabulka:
+
+| Pole | Zdroj | Proč je v dokumentu | Kdo ho uvidí | Povolit? |
+| --- | --- | --- | --- | --- |
+| Název zákazníka | CRM nebo billing | identifikace nabídky | zákazník, sales | ano |
+| Kontaktní osoba | CRM | komu je nabídka určena | zákazník, sales | podle účelu |
+| Interní fit poznámka | CRM | pomáhá salesu, ne zákazníkovi | interně | ne do veřejné verze |
+| Cena a rozsah | nabídka | rozhodnutí o nákupu | zákazník | ano |
+| Interní sleva k vyjednávání | sales poznámka | interní strategie | interně | ne |
+| Technický nález | audit | doporučení opravy | zákazník | ano, přiměřeně |
+| Surový log | observabilita | debug | vývoj | ne do zákaznického PDF |
+
+Nejnebezpečnější jsou volná textová pole. Člověk do nich napíše kontext, který je užitečný interně, ale nepatří do dokumentu: domněnky, jména lidí, obchodní taktiku, citlivé technické detaily nebo data třetích osob. Pokud šablona tahá volný text z CRM, supportu nebo projektu, dej před generování ruční kontrolu nebo vytvoř zvláštní veřejné shrnutí.
+
+### Odděl interní a zákaznickou verzi
+
+Jeden dokument často potřebuje dvě verze:
+
+- interní pracovní verzi pro tým,
+- zákaznickou nebo veřejnou verzi pro sdílení.
+
+Interní verze může obsahovat rozhodovací poznámky, rizika, vlastníka a otevřené otázky. Zákaznická verze má obsahovat výsledek, doporučení, rozsah, dopad, další krok a jen taková data, která příjemce opravdu potřebuje.
+
+Příklad:
+
+| Interní poznámka | Zákaznická formulace |
+| --- | --- |
+| „Zákazník má chaos v rolích, sales slíbil audit.“ | „Doporučujeme projít role a oprávnění před rozšířením týmu.“ |
+| „Logy ukazují hodně 403 u exportů.“ | „Uživatelé naráží na oprávnění u exportů; navrhujeme upravit role a vysvětlení v UI.“ |
+| „Pricing je citlivý, zatím neotevírat enterprise slevu.“ | Do zákaznické verze nepatří. |
+
+Toto oddělení není jen bezpečnost. Je to i kvalita komunikace. Zákazník nepotřebuje vidět interní kuchyni, aby dostal dobrý výsledek. A tým nepotřebuje psát interní poznámky tak opatrně, že se z nich vytratí užitečný kontext. Jen nesmí tyto světy míchat.
+
+### Automatické přílohy kontroluj zvlášť
+
+Největší riziko často neleží v hlavním PDF, ale v přílohách: CSV, XLSX, ZIP, screenshoty, logy, exporty, nahrávky nebo „detailní data“. Příloha se přidá jedním klikem a najednou se s dokumentem posílá mnohem víc informací, než příjemce potřebuje.
+
+Před přidáním přílohy si polož:
+
+- Je příloha nutná pro rozhodnutí?
+- Obsahuje osobní údaje, interní poznámky nebo data třetích osob?
+- Dá se nahradit agregovaným shrnutím?
+- Dá se zkrátit na vzorek?
+- Má příloha vlastní expiraci nebo retenci?
+- Kdo ji může stáhnout?
+
+Dobré pravidlo: hlavní dokument má být čitelný bez surové přílohy. Příloha je důkaz nebo pracovní materiál, ne náhrada za vysvětlení. Pokud zákazník potřebuje otevřít pět CSV souborů, aby pochopil závěr, dokument neodvedl svoji práci.
+
+### Odkazy ke stažení mají expirovat
+
+Generované dokumenty se často posílají jako odkaz. To je dobré, pokud je odkaz chráněný a časově omezený. Je to horší, pokud je odkaz veřejný, věčný a uhádnutelný.
+
+Privacy-first režim pro dokumenty:
+
+- citlivé dokumenty jsou dostupné po přihlášení,
+- veřejné odkazy mají náhodný neprůhledný token,
+- odkazy expirují podle účelu,
+- stažení se loguje bez ukládání obsahu dokumentu do logu,
+- dokument lze zneplatnit,
+- po expiraci je jasné, jak požádat o nový odkaz.
+
+U faktur, exportů a auditů si dej pozor na přeposílání. Když dokument může obsahovat osobní nebo obchodně citlivá data, nedávej do e-mailu celý obsah. Pošli signál a odkaz do bezpečného místa:
+
+```text
+Report je připravený v aplikaci. Otevřete ho po přihlášení v sekci Exporty. Odkaz je dostupný do 7 dnů.
+```
+
+E-mail má být obálka, ne trezor.
+
+### Generování má mít auditní stopu
+
+U důležitých dokumentů potřebuješ vědět:
+
+- kdo dokument vytvořil,
+- pro koho byl určen,
+- jaká šablona a verze se použila,
+- jaká hlavní data dokument obsahoval podle kategorie,
+- kdy byl dokument stažen nebo odeslán,
+- kdy expiruje,
+- kdo ho zneplatnil nebo smazal.
+
+Auditní stopa nemá obsahovat celé PDF ani surová data. Má dokazovat proces. Jinak si při incidentu vytvoříš druhou kopii citlivého dokumentu v logu, což je velmi nešikovný způsob, jak si přidělat práci.
+
+Praktická auditní věta:
+
+```text
+2026-07-16 09:30 UTC: uživatel usr_123 vytvořil zákaznický onboarding report pro workspace ws_456 pomocí šablony onboarding-report-v3. Odkaz expiruje 2026-07-23.
+```
+
+To stačí. Není potřeba logovat každou položku reportu.
+
+### Verze šablon drž pod kontrolou
+
+Šablony stárnou stejně jako dokumentace. Mění se produkt, pricing, právní texty, retenční pravidla, názvy funkcí, limity i bezpečnostní sliby. Pokud generátor dokumentů používá starou šablonu, může dál posílat neaktuální informace dlouho po tom, co web už říká něco jiného.
+
+U každé šablony drž:
+
+| Pole | Proč |
+| --- | --- |
+| Název a verze | aby bylo jasné, co se použilo |
+| Vlastník | kdo odpovídá za obsah |
+| Typ příjemce | interní, zákaznický, veřejný |
+| Povolená pole | co se smí propsat |
+| Zakázaná pole | co do dokumentu nikdy nepatří |
+| Datum poslední kontroly | aby text nestárl potichu |
+| Spouštěč revize | změna pricingu, retence, produktu, dodavatele nebo právního textu |
+
+Šablona bez vlastníka je budoucí chyba s pěkným formátováním.
+
+### Checklist: Generované dokumenty privacy-first
+
+- [ ] Každý typ dokumentu má jasný účel a příjemce.
+- [ ] Šablona má povolená a zakázaná pole.
+- [ ] Volné texty z CRM, supportu a interních poznámek nejdou automaticky do zákaznické verze.
+- [ ] Interní a zákaznická verze jsou oddělené.
+- [ ] Přílohy se přidávají jen s jasným účelem a kontrolou citlivosti.
+- [ ] Citlivé dokumenty se neposílají jako trvalé veřejné odkazy.
+- [ ] Odkazy ke stažení mají expiraci a možnost zneplatnění.
+- [ ] E-mail obsahuje jen nutný signál, ne celý citlivý obsah.
+- [ ] Generování a stažení má auditní stopu bez kopírování obsahu dokumentu.
+- [ ] Šablony mají vlastníka, verzi a datum kontroly.
+- [ ] Po změně produktu, pricingu, retence nebo dodavatele se kontrolují navázané šablony.
+- [ ] Staré dokumenty, dočasné přílohy a expirované odkazy se pravidelně mažou nebo archivují podle účelu.
+
+### Mini úkol
+
+Vyber jeden generovaný dokument: nabídku, report, fakturu, exportní PDF, auditní výstup nebo support rekapitulaci. Vyplň kartu:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Kdo dokument dostává? |  |
+| Jaké rozhodnutí nebo úkol má dokument podpořit? |  |
+| Jaká data jsou opravdu nutná? |  |
+| Která pole jsou interní a do zákaznické verze nepatří? |  |
+| Jaké přílohy se přidávají automaticky? |  |
+| Obsahuje dokument osobní nebo obchodně citlivá data? |  |
+| Jak dlouho je odkaz ke stažení platný? |  |
+| Kdo je vlastník šablony? |  |
+| Kdy proběhla poslední kontrola šablony? |  |
+| Jaká jedna změna sníží riziko úniku nebo zmatku? |  |
+
+Potom udělej jednu konkrétní změnu: odeber interní pole ze šablony, zkrať platnost odkazu, přesuň citlivý obsah za přihlášení, vypni automatickou přílohu, přidej verzi šablony nebo napiš vlastníka dokumentu. Generovaný dokument má zrychlit práci, ne vytvořit automatizovaný kanál pro únik kontextu.
+
 ## Zdroje
 
 - ICANN: Information for Domain Name Registrants - práva a odpovědnosti držitelů domén včetně správy, obnovy a převodu doménové registrace: https://www.icann.org/registrants
@@ -24412,6 +24594,7 @@ Potom udělej jednu změnu: napiš uvítací pravidla, vypni automatické nahrá
 
 ## Pracovní log
 
+- 2026-07-16: Doplněna příloha o generovaných dokumentech bez automatického úniku dat: typ dokumentu jako datový produkt, povolená a zakázaná pole šablon, oddělení interní a zákaznické verze, kontrola příloh, expirovatelné odkazy, auditní stopa bez kopírování obsahu, verzování šablon, checklist a mini úkol.
 - 2026-07-16: Doplněna příloha o zákaznické komunitě a advisory boardu bez datového rybníku: účel komunity, oddělení členství od marketingového souhlasu, pravidla bezpečného sdílení, nahrávky jako výjimka, rozhodovací poznámky místo surových přepisů, anonymizace výstupů podle použití, pravidelný úklid členů a obsahu, checklist a mini úkol; navázáno na ověřené zdroje Evropské komise a EDPB k účelu, minimalizaci, transparentnosti a omezení uchování.
 - 2026-07-16: Doplněna příloha o případových studiích a referencích bez vyzrazení zákazníka: výběr typu důkazu, oddělené schvalování loga/citací/čísel/screenshotů, psaní podle rozhodnutí budoucího zákazníka, zaokrouhlování citlivých čísel, syntetické screenshoty, pravidelné kontroly referencí, checklist a mini úkol; navázáno na ověřené zdroje Evropské komise k GDPR principům, minimalizaci a transparentnosti.
 - 2026-07-16: Doplněna příloha o referral programu bez kontaktů na cizí lidi: správný okamžik žádosti o doporučení, odmítnutí importu adresáře, férové odměny, transparentní referral landing page, krátké neprůhledné tokeny, oddělení pozvánek od marketingových sdělení, agregované měření kvality, checklist a mini úkol; ověřeny existující zdroje ÚOOÚ k obchodním sdělením a EDPB k deceptive design patterns.
