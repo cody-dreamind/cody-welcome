@@ -25197,6 +25197,210 @@ Vyber jeden servisní účet, CI token, integrační klíč nebo automatizaci, k
 
 Potom udělej jednu konkrétní změnu: přejmenuj účet podle účelu, odeber zbytečný admin scope, odděl staging token od produkce, přidej vlastníka, zapiš pracovní větu, nastav expiraci, doplň audit bez payloadu nebo otestuj rotaci na méně rizikovém přístupu. Servisní účet má být spolehlivý pracovní nástroj, ne zapomenutý superadmin ve stínu.
 
+## Příloha: Rezervace demo schůzek bez kalendářového výslechu
+
+Rezervační formulář na demo nebo konzultaci vypadá jako drobnost. Návštěvník klikne, vybere čas, vyplní pár polí a hotovo. Jenže v praxi je to často první místo, kde privacy-first slib narazí na pohodlnou automatizaci: externí kalendářový widget se načte na každé stránce, formulář chce telefon, velikost firmy, rozpočet, používané nástroje, poznámku k projektu a marketingový souhlas, a ještě přidá člověka do sekvence, i když chtěl jen zjistit, jestli má smysl mluvit.
+
+Špatná otázka zní: „Co všechno se může sales týmu hodit před hovorem?“
+
+Lepší otázka zní: „Jaké minimum informací potřebujeme, aby schůzka měla jasný účel, správné lidi a férový další krok?“
+
+Rezervace schůzky není kvalifikační test. Je to dohoda o čase a tématu. Pokud z ní uděláš malý výslech, odradíš přesně ty lidi, kteří chtějí jednat prakticky a věcně.
+
+> Codyho komentář: Když formulář na dvacetiminutové demo vypadá delší než daňové přiznání, problém není v motivaci návštěvníka. Problém je v tom, že firma zaměnila přípravu na schůzku za sběr dat do zásoby.
+
+### Rozliš typ schůzky
+
+Ne každá rezervace má stejný účel. Jedna cesta pro všechny obvykle skončí buď příliš obecným demem, nebo příliš dlouhým formulářem.
+
+Praktické rozdělení:
+
+| Typ schůzky | Účel | Minimum předem |
+| --- | --- | --- |
+| Rychlé demo | ukázat jeden relevantní scénář | role člověka, problém jednou větou |
+| Konzultace | poradit s rozhodnutím nebo směrem | kontext, očekávaný výsledek, omezení |
+| Technická kontrola | ověřit integrace, bezpečnost nebo migraci | systémový kontext bez přístupů a exportů |
+| Pilot review | rozhodnout, jestli pokračovat | stav pilotu, výsledek, otevřené otázky |
+| Supportní hovor | vyřešit konkrétní blokaci | ticket, dopad, čas problému |
+
+Každý typ schůzky má mít vlastní text, délku, účastníky a pole. Když člověk chce rychlé demo, neptej se ho na všechny integrační požadavky. Když chce technickou kontrolu, není vhodné tvářit se, že stačí obecná prodejní prezentace.
+
+### Formulář má připravit schůzku, ne nahradit CRM
+
+Rezervační formulář obvykle potřebuje jen několik věcí:
+
+- jméno nebo pracovní oslovení,
+- e-mail pro potvrzení a změnu termínu,
+- firmu nebo doménu, pokud je relevantní pro B2B kontext,
+- roli nebo vztah k rozhodnutí,
+- jednu větu k problému,
+- volitelnou poznámku, co by člověk chtěl stihnout.
+
+Všechno ostatní si zaslouží otázku „proč teď?“
+
+Pole, která často počkají:
+
+- telefon, pokud se schůzka koná online a není nutný pro organizaci,
+- přesný rozpočet,
+- počet zaměstnanců,
+- seznam všech používaných nástrojů,
+- interní dokumenty,
+- produkční URL s neveřejnými parametry,
+- souhlas s newsletterem,
+- dlouhá kvalifikační škála typu „jak urgentní je váš projekt od 1 do 10“.
+
+Pokud některé pole opravdu potřebuješ, vysvětli proč. Například:
+
+```text
+Firma nebo web nám pomůže připravit relevantní příklad. Nepoužijeme ji k automatickému přidání do marketingového seznamu.
+```
+
+Krátká věta často sníží nejistotu víc než další checkbox.
+
+### Nechtěj citlivé podklady před prvním hovorem
+
+Před první schůzkou obvykle nepotřebuješ přístupy, exporty, databázové vzorky ani kompletní interní prezentace. Pokud je člověk pošle sám, tým má problém navíc: musí rozhodnout, kdo to smí vidět, kde to leží, jak dlouho to zůstane a jestli to vůbec mělo být přijato.
+
+Do rezervační stránky přidej jednoduché pravidlo:
+
+```text
+Před schůzkou prosím neposílejte hesla, API klíče, produkční exporty ani osobní údaje zákazníků. Pokud budeme potřebovat konkrétní ukázku, domluvíme bezpečný způsob sdílení.
+```
+
+Bezpečnější alternativy:
+
+- veřejná URL místo přístupu do administrace,
+- anonymizovaný screenshot místo produkčního exportu,
+- popis procesu místo kopie databáze,
+- ukázkový řádek bez osobních údajů místo celé tabulky,
+- seznam rozhodovacích otázek místo interní prezentace.
+
+Tím chráníš i zákazníka. Mnoho lidí pošle citlivé věci ne proto, že je to správně, ale protože nikdo nenapsal, co stačí.
+
+### Kalendářový widget načítej opatrně
+
+Externí rezervační widget je embed stejně jako mapa, video nebo chat. Může načítat skripty, pracovat s cookies, posílat referrer a zpomalovat stránku. Privacy-first varianta není nutně zákaz všech widgetů. Je to vědomé rozhodnutí, kdy a jak se načtou.
+
+Praktické možnosti:
+
+- obyčejný odkaz na rezervační stránku místo vloženého widgetu,
+- dvoukrokové načtení: nejdřív tlačítko, widget až po záměru člověka,
+- vlastní jednoduchý formulář a ruční výběr termínu u dražších B2B služeb,
+- samostatná stránka pro rezervaci místo widgetu na každé produktové stránce,
+- jasné označení dodavatele, pokud kalendář běží mimo váš systém.
+
+U malého B2B SaaS často stačí tlačítko „Domluvit 20min demo“ vedoucí na samostatnou stránku s krátkým formulářem. Není nutné posílat každého návštěvníka přes cizí kalendářový skript už při čtení pricingu.
+
+### Potvrzení má říct, co se stane dál
+
+Po rezervaci by člověk neměl hádat, jestli se ozve obchod, přijde link, bude potřeba něco připravit nebo se schůzka automaticky nahraje.
+
+Dobré potvrzení obsahuje:
+
+- datum, čas a časové pásmo,
+- odkaz na změnu nebo zrušení termínu,
+- kdo se zúčastní a proč,
+- krátký cíl schůzky,
+- co si připravit,
+- co zatím neposílat,
+- jestli se schůzka nahrává; výchozí stav by neměl být automatická nahrávka,
+- jak bude vypadat follow-up.
+
+Příklad:
+
+```text
+Díky za rezervaci. Cílem hovoru je ověřit, jestli vám umíme pomoct se zkrácením onboardingové cesty. Stačí si připravit jednu konkrétní situaci, kde se dnes nový uživatel zasekne. Neposílejte prosím předem žádná hesla, exporty ani zákaznická data. Po hovoru pošlu krátké shrnutí a doporučený další krok.
+```
+
+Tohle je lepší než generické „těšíme se na setkání“. Člověk ví, proč schůzka existuje a jak se na ni připravit.
+
+### Zrušení a přesun termínu nemají být trest
+
+Možnost změnit termín nebo schůzku zrušit je součást dobré zkušenosti. Pokud člověk musí odpovídat na automatický e-mail, hledat kontakt nebo vysvětlovat důvod zrušení, vzniká zbytečné tření.
+
+Pravidla:
+
+- odkaz na změnu nebo zrušení dej do potvrzení i připomínky,
+- důvod zrušení nech dobrovolný,
+- nezrušené nebo přesunuté schůzky nepoužívej jako záminku pro agresivní sekvenci,
+- po opakovaném přesunu nabídni asynchronní alternativu: stručné otázky e-mailem, nahrané demo bez sledování, dokumentaci nebo checklist,
+- staré rezervace uklízej podle účelu a retence.
+
+Respekt k času je privacy-first hodnota v širším smyslu. Nesbíráš jen méně dat. Nezabíráš ani víc pozornosti, než potřebuješ.
+
+### CRM záznam drž krátký a věcný
+
+Po rezervaci se často vytvoří CRM záznam. To dává smysl, pokud má jasný účel: připravit schůzku a navázat dalším krokem. Nedává smysl ukládat všechno, co nástroj umí zachytit.
+
+Do CRM patří:
+
+- typ schůzky,
+- segment nebo firma,
+- problém jednou větou,
+- role účastníka,
+- domluvený další krok,
+- výsledek: pokračovat, poslat materiál, není fit, bez reakce.
+
+Do CRM nepatří automaticky:
+
+- osobní poznámky bez pracovního účelu,
+- celé přepisy schůzek,
+- citlivé detaily z volné poznámky,
+- seznam všech účastníků interního týmu zákazníka, pokud není potřeba,
+- marketingový souhlas schovaný v rezervaci.
+
+Pokud chceš po schůzce posílat newsletter, zeptej se zvlášť. Rezervace demo schůzky není obecný souhlas s dlouhodobým marketingem.
+
+### Měř kvalitu schůzek, ne délku formuláře
+
+Dlouhý formulář může zvednout pocit kvalifikace, ale také odřízne dobré zákazníky, kteří prostě nechtějí vyplňovat malý dotazník před prvním hovorem. Měř proto kvalitu, ne jen počet polí.
+
+Užitečné signály:
+
+- kolik rezervací vedlo k relevantnímu hovoru,
+- kolik lidí nedorazilo a proč,
+- které typy schůzek vedly k dalšímu kroku,
+- která otázka před hovorem pomohla připravit demo,
+- která pole lidé vyplňují obecně nebo prázdně,
+- kolik schůzek skončilo jako „není fit“ a proč,
+- které opakované otázky patří raději na web, do pricingu nebo dokumentace.
+
+Agregované měření často stačí. Nepotřebuješ profilovat každého návštěvníka rezervační stránky. Potřebuješ poznat, jestli rezervační cesta pomáhá správným lidem domluvit správný rozhovor.
+
+### Checklist: Rezervace demo schůzek privacy-first
+
+- [ ] Každý typ schůzky má jasný účel, délku a očekávaný výstup.
+- [ ] Rezervační formulář sbírá jen data nutná k přípravě schůzky.
+- [ ] Marketingový odběr není schovaný v rezervaci.
+- [ ] Telefon, rozpočet a detailní interní informace nejsou povinné bez jasného důvodu.
+- [ ] Stránka říká, co předem neposílat: hesla, tokeny, exporty a zákaznická data.
+- [ ] Kalendářový widget se nenačítá zbytečně na každé stránce.
+- [ ] Potvrzení vysvětluje cíl schůzky, přípravu, změnu termínu a další krok.
+- [ ] Nahrávání schůzky není výchozí automatický režim.
+- [ ] Přesun nebo zrušení termínu je jednoduché a bez povinného vysvětlování.
+- [ ] CRM záznam obsahuje pracovní fakta, ne surový datový odpad.
+- [ ] Staré rezervace, poznámky a volné texty mají retenční pravidlo.
+- [ ] Kvalita schůzek se vyhodnocuje agregovaně a vede k úpravě webu, demo scénáře nebo formuláře.
+
+### Mini úkol
+
+Vyber jednu rezervační cestu: demo, konzultaci, technickou kontrolu nebo supportní hovor. Vyplň kartu:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jaký typ schůzky člověk rezervuje? |  |
+| Jaký je výstup schůzky? |  |
+| Která pole jsou nutná pro přípravu? |  |
+| Která pole jsou jen pohodlná pro interní tým? |  |
+| Jaký externí widget nebo nástroj se načítá? |  |
+| Co se vytvoří v CRM nebo kalendáři? |  |
+| Co výslovně nechceme dostat před schůzkou? |  |
+| Jak člověk změní nebo zruší termín? |  |
+| Jak dlouho držíme poznámky a volné texty z formuláře? |  |
+| Jakou jednu otázku nebo pole můžeme odstranit? |  |
+
+Potom udělej jednu konkrétní opravu: zkrať formulář, odděl newsletterový souhlas, nahraď embed obyčejným odkazem, přidej větu o neposílání citlivých dat, napiš lepší potvrzení schůzky nebo smaž staré volné poznámky bez účelu. Rezervace má otevřít dobrý rozhovor, ne vyrobit první datový dluh.
+
 ## Zdroje
 
 - ICANN: Information for Domain Name Registrants - práva a odpovědnosti držitelů domén včetně správy, obnovy a převodu doménové registrace: https://www.icann.org/registrants
@@ -25347,6 +25551,7 @@ Potom udělej jednu konkrétní změnu: přejmenuj účet podle účelu, odeber 
 
 ## Pracovní log
 
+- 2026-07-16: Doplněna příloha o rezervaci demo schůzek bez kalendářového výslechu: typy schůzek podle účelu, minimální rezervační formulář, zákaz předčasného posílání citlivých podkladů, opatrné načítání kalendářových widgetů, jasné potvrzení schůzky, jednoduché zrušení nebo přesun, věcné CRM poznámky, agregované měření kvality, checklist a mini úkol; navázáno na existující kapitoly o prodejním demu, discovery callu, externích embedech a GDPR principech minimalizace.
 - 2026-07-16: Doplněna příloha o servisních účtech bez anonymního superadmina: rozlišení lidských účtů, servisních účtů, integračních tokenů, CI/CD identit a break-glass účtů, pracovní věta účtu, minimální oprávnění, oddělení prostředí a tenant rozsahu, rotační postup, audit akcí bez ukládání tajemství, plán vypnutí, checklist a mini úkol; navázáno na ověřené zdroje OWASP k secrets managementu, autorizaci a logování a na GDPR princip minimalizace.
 - 2026-07-16: Doplněna příloha o produktových průzkumech bez profilovacího dotazování: rozhodovací věta před výběrem metriky, správný moment otázky, krátké NPS/CSAT a vlastní průzkumy, bezpečné volné texty, chudý kontext, oddělení produktu/supportu/marketingu, agregované reportování, uzavírání smyčky, checklist a mini úkol.
 - 2026-07-16: Doplněna příloha o live chatu a kontaktním widgetu bez sledovacího ocasu: rozhodování, jestli chat na stránku patří, volba režimu pomoci podle práce člověka, datová mapa widgetu, načítání až po záměru, omezení automaticky posílaného kontextu, retence transkriptů, opatrné použití botů a AI asistentů, agregované měření užitečnosti, checklist a mini úkol; navázáno na existující zdroje k GDPR principům, externím embedům, supportu a AI asistentům.
