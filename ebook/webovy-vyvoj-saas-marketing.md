@@ -25607,6 +25607,152 @@ Vyber posledních deset feature requestů, nápadů ze supportu nebo položek v 
 
 Potom udělej jednu konkrétní změnu: přepiš tři požadavky na problémové karty, doplň mikrotext do request formuláře, anonymizuj veřejný popis, sluč duplicitní návrhy, nebo uzavři jednu položku stavem „neplánujeme“ s jasným důvodem. Roadmapa má být nástroj rozhodování, ne veřejný sklad neurčitých slibů.
 
+## Příloha: Supportní přístup k zákaznickému účtu bez tichého nahlížení
+
+Support občas potřebuje vidět víc než zákaznický e-mail a číslo faktury. Někdy řeší rozbité nastavení, nejasnou integraci, špatně importovaný soubor nebo podezření, že se uživatel zasekl v konkrétním kroku. To ale neznamená, že má mít interní tým univerzální klíč do každého účtu a používat ho podle pocitu.
+
+Supportní přístup je produktová funkce. Má mít účel, rozsah, časové omezení, auditní stopu a jasné vysvětlení pro člověka, jehož dat se týká. Pokud je přístup navržený jen jako skryté admin tlačítko „přihlásit jako zákazník“, vzniká z něj velmi pohodlná zkratka a velmi nepříjemné privacy riziko.
+
+OWASP Authorization Cheat Sheet stojí na principu nejmenších oprávnění, deny-by-default přístupu a kontrole oprávnění při požadavcích. GDPR principy zase vedou k minimalizaci, omezení účelu a transparentnosti. Přeloženo do běžného SaaS: support má vidět jen to, co potřebuje pro vyřešení konkrétního případu, a nemá se z toho stát tiché interní okno do života zákazníka.
+
+> Codyho komentář: „My jsme malý tým, my si věříme“ je lidsky hezké, ale systémově slabé. Dobrý návrh přístupů nepočítá s tím, že lidé jsou zlí. Počítá s tím, že jsou unavení, spěchají a zkratky se časem stanou normou. Přesně proto má produkt zkratkám dát mantinely.
+
+### Rozliš typy supportního přístupu
+
+Ne každý problém potřebuje stejnou hloubku přístupu. Začni tím, že si pojmenuješ režimy:
+
+- Bez přístupu k účtu: support pracuje z ticketu, veřejné dokumentace, billing údajů a obecných provozních metrik.
+- Čtení konfigurace: support vidí nastavení účtu, stav integrací, role, limity a poslední technické chyby, ale neobsah zákaznických dat.
+- Čtení vybraného objektu: support vidí konkrétní import, objednávku, projekt, kampaň nebo záznam, který zákazník sám označil.
+- Dočasná asistovaná správa: support smí provést omezenou změnu nastavení po žádosti nebo potvrzení zákazníka.
+- Break-glass režim: mimořádný provozní nebo bezpečnostní zásah se zvláštním schválením, krátkou platností a povinným zpětným review.
+
+Tyto režimy se nemají lišit jen textem v interní příručce. Mají být oddělené oprávněním v produktu. Když support potřebuje jen zkontrolovat stav webhooku, nemá automaticky vidět obsah všech zákaznických záznamů. Když řeší fakturaci, nemá dostat přístup ke konverzacím uživatelů. Ano, je to víc práce než jedno admin tlačítko. Ale jedno admin tlačítko je přesně ten typ pohodlí, který se později špatně vysvětluje.
+
+### Přístup začínej případem, ne člověkem ze supportu
+
+Nejbezpečnější supportní přístup se váže na konkrétní supportní případ. Ne na obecný status zaměstnance.
+
+Praktická karta přístupu může vypadat takto:
+
+| Pole | Příklad |
+| --- | --- |
+| Supportní případ | `SUP-1842` |
+| Zákaznický účet | Acme EU workspace |
+| Důvod | Import CSV skončil chybou validace |
+| Rozsah | Čtení importního běhu, validačních chyb a mapování sloupců |
+| Zakázáno | Čtení ostatních datových sad, exporty, změna rolí, billing |
+| Platnost | 2 hodiny |
+| Schválil | Zákaznický admin nebo interní senior podle typu případu |
+| Výsledek | Nalezen chybějící povinný sloupec, zákazníkovi poslán návod |
+
+Tím se z přístupu stává řešení konkrétní práce, ne obecný průkaz do cizího účtu. Když se někdo později ptá „proč se support díval do tohoto workspace“, odpověď není lovení v chatu, ale čitelný záznam.
+
+### Impersonace není výchozí diagnostický nástroj
+
+Přihlášení „jako zákazník“ je lákavé, protože rychle ukáže, co člověk vidí. Zároveň je rizikové, protože může míchat identity, auditní stopu a očekávání uživatele. Pokud produkt umožňuje impersonaci, nastav k ní tvrdá pravidla:
+
+- Impersonace musí být viditelná v interním UI po celou dobu relace.
+- Každá akce se zapisuje jako akce supportu, ne jako akce zákazníka.
+- Destruktivní akce, exporty, změny rolí, změny e-mailu a bezpečnostní nastavení jsou v impersonaci vypnuté nebo vyžadují zvláštní schválení.
+- Relace má krátkou platnost a nejde ji tiše prodlužovat celý den.
+- Po ukončení relace vznikne stručný záznam výsledku.
+
+Ještě lepší varianta pro mnoho problémů je „view as“ režim bez schopnosti měnit data. Support vidí stejnou navigaci, stavy a chybové hlášky, ale produkt mu nedovolí omylem upravit zákaznický účet. Diagnostika ano, nechtěná chirurgie ne.
+
+### Zákazník má vědět, co po něm chceš
+
+Ne každý supportní přístup musí mít samostatné klikací schválení v produktu. Záleží na citlivosti dat, typu služby a smluvním nastavení. Ale zákazník má rozumět tomu, co se děje.
+
+Dobrá žádost o přístup je konkrétní:
+
+```text
+Abychom ověřili chybu importu, potřebujeme na 2 hodiny zobrazit importní běh z 12. 7. 2026, mapování sloupců a validační chyby. Nebudeme otevírat ostatní datové sady ani exportovat obsah účtu. Po vyřešení přístup automaticky vyprší a v účtu zůstane záznam zásahu.
+```
+
+Špatná žádost zní:
+
+```text
+Pošlete nám prosím přístup do účtu, mrkneme na to.
+```
+
+To druhé je sice krátké, ale neříká rozsah, účel, dobu ani dopad. Přesně ty věci, které člověk potřebuje vědět, aby mohl důvěřovat zásahu.
+
+### Audituj zásah, ne obsah zákazníka
+
+Auditní stopa nemá být druhá kopie zákaznických dat. Má odpovědět na otázky:
+
+- kdo přístup spustil,
+- k jakému zákaznickému účtu,
+- v jakém režimu,
+- z jakého supportního případu,
+- kdy začal a skončil,
+- jaké typy objektů byly otevřené,
+- jaké administrativní změny byly provedené,
+- kdo přístup schválil nebo proč byl použit break-glass režim.
+
+Do auditu nepatří celé payloady, soubory, texty zákaznických poznámek ani tokeny. Pokud potřebuješ technický detail, loguj identifikátor objektu, typ akce a výsledek. Obsah drž v primárním systému s běžnými oprávněními a retencí. Auditní log má být stopa odpovědnosti, ne tajný export zákaznického účtu pro interní zvědavost.
+
+### Break-glass režim musí být nepohodlný schválně
+
+Mimořádný zásah může být legitimní: bezpečnostní incident, kritický výpadek, chyba migrace nebo akutní problém s daty. Právě proto musí být break-glass režim jasně oddělený od běžného supportu.
+
+Nastav pro něj pravidla:
+
+1. Vyžaduje explicitní důvod a vazbu na incident nebo supportní případ.
+2. Má krátkou platnost, typicky v minutách nebo nízkých hodinách.
+3. Spouští upozornění odpovědné osobě nebo bezpečnostnímu kanálu.
+4. Vypisuje viditelný banner v interním rozhraní.
+5. Po zásahu vyžaduje review: co se stalo, proč běžný přístup nestačil, jestli se má produkt upravit.
+
+Break-glass není tajná zadní branka pro „když se nám nechce řešit role“. Je to nouzový režim. Pokud se používá každý týden, není problém v incidentech. Problém je v návrhu běžných oprávnění.
+
+### Supportní přístup pravidelně uklízej
+
+Supportní oprávnění stárnou rychle. Noví lidé přicházejí, role se mění, zákazníci přecházejí na jiné plány, produkt dostává nové moduly. Bez úklidu se z původně rozumných přístupů stane interní skládka výjimek.
+
+Jednou měsíčně projdi:
+
+- kdo má supportní role,
+- kdo použil citlivý režim přístupu,
+- které zásahy trvaly neobvykle dlouho,
+- které případy vyžadovaly break-glass,
+- zda existují staré permanentní výjimky,
+- jestli zákaznické smlouvy nebo plány nevyžadují zvláštní omezení,
+- zda interní dokumentace odpovídá skutečnému UI.
+
+Výstup nemá být román. Stačí krátká tabulka: nález, riziko, další krok, vlastník, termín. Privacy-first provoz není o tom, že nikdy nikdo nic nevidí. Je o tom, že přístup má smysl, hranice a konec.
+
+### Checklist: Supportní přístup privacy-first
+
+- [ ] Supportní přístup je rozdělený podle režimů, ne jen na „admin“ a „neadmin“.
+- [ ] Každý citlivější přístup se váže na supportní případ, incident nebo konkrétní zákaznickou žádost.
+- [ ] Rozsah přístupu je omezený na data nutná pro vyřešení případu.
+- [ ] Přístup má krátkou platnost a automaticky vyprší.
+- [ ] Impersonace zapisuje akce jako support, ne jako zákazník.
+- [ ] Destruktivní akce, exporty a změny bezpečnostního nastavení jsou v diagnostickém režimu omezené.
+- [ ] Zákazník dostává srozumitelné vysvětlení účelu, rozsahu a doby přístupu.
+- [ ] Auditní log ukládá metadata zásahu, ne obsah zákaznických dat.
+- [ ] Break-glass režim vyžaduje důvod, upozornění a následné review.
+- [ ] Staré výjimky a supportní role se pravidelně uklízejí.
+- [ ] Interní dokumentace říká, kdy použít běžný supportní režim, view-only režim, impersonaci a break-glass.
+- [ ] Produktový backlog obsahuje úkoly na odstranění opakovaných důvodů pro nouzový přístup.
+
+### Mini úkol
+
+Vyber posledních deset supportních případů, kde někdo interně potřeboval nahlédnout do zákaznického účtu. Vyplň tabulku:
+
+| Kontrola | Pozorování | Jedna změna |
+| --- | --- | --- |
+| Jaký byl důvod přístupu? |  |  |
+| Šlo problém vyřešit bez přístupu k obsahu dat? |  |  |
+| Byl rozsah přístupu menší než celý účet? |  |  |
+| Byla platnost přístupu omezená? |  |  |
+| Vidí audit, kdo a proč přístup použil? |  |  |
+| Může produkt příště ukázat bezpečnější diagnostiku? |  |  |
+
+Potom udělej jednu konkrétní změnu: přidej view-only režim pro jednu častou diagnostiku, zkrať platnost supportní role, zakaž exporty při impersonaci, doplň mikrotext žádosti o přístup, nebo přidej měsíční review supportních zásahů. Pokud se stejný typ problému opakuje, neřeš ho věčným nahlížením do účtů. Udělej z něj produktovou diagnostiku.
+
 ## Zdroje
 
 - ICANN: Information for Domain Name Registrants - práva a odpovědnosti držitelů domén včetně správy, obnovy a převodu doménové registrace: https://www.icann.org/registrants
@@ -25757,6 +25903,7 @@ Potom udělej jednu konkrétní změnu: přepiš tři požadavky na problémové
 
 ## Pracovní log
 
+- 2026-07-16: Doplněna příloha o supportním přístupu k zákaznickému účtu bez tichého nahlížení: rozlišení režimů přístupu, vazba na supportní případ, omezená impersonace, srozumitelná žádost zákazníkovi, audit zásahu bez kopírování obsahu dat, break-glass pravidla, pravidelný úklid rolí, checklist a mini úkol; navázáno na existující zdroje OWASP k autorizaci a logování a na GDPR principy minimalizace a transparentnosti.
 - 2026-07-16: Doplněna příloha o feature request portálu bez veřejného hlasovacího cirkusu: přepis požadavků na problémy, hlasování jako signál místo závazku, ochrana veřejného portálu před citlivým kontextem, lidské stavy roadmapy, slučování návrhů podle problému, anonymizovaný přenos ze supportu, měření kvality požadavků, checklist a mini úkol.
 - 2026-07-16: Doplněna příloha o rezervaci demo schůzek bez kalendářového výslechu: typy schůzek podle účelu, minimální rezervační formulář, zákaz předčasného posílání citlivých podkladů, opatrné načítání kalendářových widgetů, jasné potvrzení schůzky, jednoduché zrušení nebo přesun, věcné CRM poznámky, agregované měření kvality, checklist a mini úkol; navázáno na existující kapitoly o prodejním demu, discovery callu, externích embedech a GDPR principech minimalizace.
 - 2026-07-16: Doplněna příloha o servisních účtech bez anonymního superadmina: rozlišení lidských účtů, servisních účtů, integračních tokenů, CI/CD identit a break-glass účtů, pracovní věta účtu, minimální oprávnění, oddělení prostředí a tenant rozsahu, rotační postup, audit akcí bez ukládání tajemství, plán vypnutí, checklist a mini úkol; navázáno na ověřené zdroje OWASP k secrets managementu, autorizaci a logování a na GDPR princip minimalizace.
