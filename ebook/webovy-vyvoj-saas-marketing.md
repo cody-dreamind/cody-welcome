@@ -23535,6 +23535,183 @@ Vyber jednu plánovanou nebo nedávnou online akci a vyplň kartu:
 
 Potom udělej jednu konkrétní změnu: zkrať registrační formulář, odděl newsletterový souhlas, doplň informaci o nahrávání, smaž starý účastnický export, přepiš follow-up na slíbené materiály místo prodejní sekvence nebo vytvoř anonymizované FAQ z otázek účastníků. Dobrá online akce buduje důvěru tím, co učí, ne tím, kolik dat si odnese.
 
+## Příloha: Waitlist a beta program bez sběru kontaktů do zásoby
+
+Waitlist je užitečný nástroj, když produkt ještě není připravený pro každého, ale potřebuješ ověřit zájem, vybrat první správné uživatele nebo postupně řídit kapacitu. Snadno se z něj ale stane lenivá databáze e-mailů: formulář slíbí „early access“, tým nasbírá kontakty, produkt se změní, lidé čekají měsíce a nikdo už přesně neví, k čemu byl kontakt získaný.
+
+Privacy-first waitlist má být malý pracovní závazek, ne marketingový sud bez dna. Člověk má vědět, proč se zapisuje, jaká komunikace přijde, podle čeho se vybírá do bety a co se stane, když produkt nebude relevantní.
+
+Špatná otázka zní: „Kolik e-mailů dokážeme nasbírat před launchí?“
+
+Lepší otázka zní: „Koho potřebujeme pozvat jako první, abychom ověřili konkrétní hodnotu produktu s minimem dat?“
+
+Codyho komentář: Waitlist není důkaz poptávky sám o sobě. Je to seznam lidí, kteří udělali nejlehčí možný krok. Důkaz začíná až ve chvíli, kdy někdo odpoví na konkrétní otázku, dorazí na onboarding, použije produkt nebo řekne „tohle mi šetří práci“ bez toho, aby u toho musel přemýšlet, kde je skrytá past.
+
+### Napiš slib waitlistu jednou větou
+
+Než vytvoříš formulář, napiš:
+
+„Waitlist je pro člověka typu ___, který chce ___, a po zápisu dostane ___.“
+
+Příklady:
+
+- „Waitlist je pro provozovatele menších B2B týmů, kteří chtějí řídit zákaznické exporty bez ručních zipů, a po zápisu dostanou pozvánku do omezené bety podle vhodnosti use casu.“
+- „Waitlist je pro marketingové týmy v EU, které chtějí měřit obsah bez reklamních profilů, a po zápisu dostanou nejdřív krátký dotazník a potom možnost pilotu.“
+- „Waitlist je pro zakladatele SaaS, kteří řeší auditní stopu, a po zápisu dostanou praktickou šablonu i možnost ukázky produktu.“
+
+Když věta končí u „budeme vás informovat o novinkách“, není to waitlist. Je to newsletter. To není špatně, jen to nemá být vydávané za early access. Jasné pojmenování chrání důvěru i interní rozhodování.
+
+### Sbírej jen data, která rozhodnou o dalším kroku
+
+Základní waitlist pro většinu produktů nepotřebuje mnoho polí:
+
+| Pole | Kdy dává smysl | Poznámka |
+| --- | --- | --- |
+| E-mail | poslat potvrzení, pozvánku nebo update | nutné |
+| Jméno | lidská komunikace | často volitelné |
+| Role nebo typ firmy | výběr vhodných beta uživatelů | raději volba než volný román |
+| Hlavní problém | ověření fitu | krátká otázka, ne audit |
+| Souhlas s newsletterem | jen pokud bude samostatná komunikace | oddělit od waitlistu |
+
+Neptej se hned na rozpočet, velikost databáze, celý stack, telefon, počet zaměstnanců a interní procesy, pokud podle toho v příštím kroku nic neuděláš. Každé pole má mít pracovní důvod. Pokud důvod neexistuje, pole jen zvyšuje tření a datový dluh.
+
+Praktický mikrotext:
+
+```text
+E-mail použijeme k potvrzení zápisu a případné pozvánce do bety. Pokud se do bety nevejdete nebo se produkt změní, pošleme krátkou informaci a nepotřebné údaje uklidíme.
+```
+
+Pokud chceš posílat produktový newsletter:
+
+```text
+Novinky o produktu jsou samostatná volba. Zápis na waitlist není automatické přihlášení k newsletteru.
+```
+
+Tato dvě krátká vysvětlení často udělají pro důvěru víc než dlouhá patička plná právních slov, která nikdo nečte a tým stejně neumí naplnit.
+
+### Beta není odměna za pořadí ve frontě
+
+Pořadí zápisu je jednoduché, ale ne vždy nejlepší. U beta programu většinou potřebuješ správnou kombinaci use casů, datového rizika, dostupnosti lidí a schopnosti dát zpětnou vazbu.
+
+Rozumná beta karta:
+
+| Kritérium | Otázka |
+| --- | --- |
+| Use case | Řeší člověk problém, pro který produkt právě stavíme? |
+| Riziko | Dá se beta spustit bez citlivých produkčních dat nebo nevratných změn? |
+| Kapacita | Má tým čas uživatele podpořit? |
+| Zpětná vazba | Umí účastník popsat výsledek a tření? |
+| Segment | Pomůže nám tento případ rozhodnout o dalším směru? |
+
+Tuto logiku klidně řekni veřejně lidskou řečí:
+
+```text
+Do první bety zveme postupně podle podobnosti use casu a kapacity týmu, ne čistě podle pořadí registrace. Když pro vás aktuální verze nebude vhodná, dáme vám vědět.
+```
+
+Je to fér a snižuje tlak na falešnou naléhavost. „Jen prvních 100 míst“ může fungovat jako marketing, ale pokud za tím není skutečná kapacita, je to divadlo s formulářem.
+
+### Potvrzení zápisu má nastavit očekávání
+
+Po odeslání formuláře neposílej jen „děkujeme“. Nastav další krok:
+
+- co se stane teď,
+- kdy přibližně přijde další informace,
+- jestli má člověk doplnit něco dobrovolně,
+- kde najde veřejné aktualizace,
+- jak se může odhlásit nebo požádat o odstranění kontaktu.
+
+Příklad potvrzovacího e-mailu:
+
+```text
+Díky za zápis do bety.
+
+Teď vybíráme první use casy, které odpovídají aktuální verzi produktu. Pokud budete dobrý fit pro první vlnu, ozveme se s krátkým pracovním dotazem. Pokud ne, pošleme stručný update, až bude produkt vhodnější.
+
+Nechceme vás držet v databázi navždy. Pokud už o betu nestojíte, odpovězte „smazat“ a kontakt odstraníme z waitlistu.
+```
+
+Není to nejdramatičtější copy na světě. To je v pořádku. U early accessu je důvěra důležitější než theatrální tajemno.
+
+### Beta feedback nepřelévej automaticky do CRM
+
+Beta přinese otázky, nahrávky, screenshoty, chyby, pracovní postupy a někdy i citlivé popisy interní reality zákazníka. Ne všechno patří do CRM, marketingové automatizace nebo veřejné roadmapy.
+
+Praktické pravidlo:
+
+- do CRM patří obchodní stav a domluvený další krok,
+- do produktového backlogu patří anonymizovaný problém a dopad,
+- do supportu patří konkrétní řešený incident,
+- do dokumentace patří opakovaná otázka přepsaná jako návod,
+- do marketingu patří jen schválený a bezpečně zobecněný důkaz.
+
+Když účastník bety napíše „máme chaos v exportech faktur pro německé pobočky“, interní poznámka nemusí obsahovat název zákazníka, konkrétní částky ani jména lidí. Často stačí:
+
+```text
+Segment: vícepobočková B2B firma
+Problém: exporty faktur pro oddělené účetní jednotky
+Dopad: ruční práce a riziko chyb
+Další krok: ověřit export podle pobočky a období
+```
+
+To je užitečné pro produkt a mnohem šetrnější k datům.
+
+### Uzavři neaktivní a nefit kontakty
+
+Waitlist bez úklidu je tichý datový sklad. Nastav si pravidlo:
+
+- pokud člověk nereaguje na pozvánku do bety, pošli jednu připomínku a potom ho vrať do obecného stavu nebo smaž podle slíbených pravidel,
+- pokud use case není vhodný, pošli stručné vysvětlení a nenatahuj falešnou naději,
+- pokud se produkt zásadně změní, ověř, zda původní zápis ještě odpovídá novému účelu,
+- pokud beta skončí, rozhodni, kdo přechází do zákaznické komunikace, kdo do dobrovolného newsletteru a kdo se odstraní.
+
+Zápis na waitlist není doživotní oprávnění psát člověku o všem, co firma vymyslí. Je to konkrétní kontext. Když kontext skončí, kontakt potřebuje nové rozhodnutí.
+
+### Měř zájem podle kroků, ne podle velikosti seznamu
+
+Velký waitlist vypadá hezky v prezentaci, ale sám o sobě neříká, jestli produkt funguje. Lepší signály:
+
+| Signál | Co říká |
+| --- | --- |
+| dokončení krátkého fit dotazníku | člověk je ochotný dát kontext |
+| odpověď na pozvánku | téma je pořád aktuální |
+| účast na onboardingu | existuje pracovní priorita |
+| první dokončený úkol v betě | produkt začíná vytvářet hodnotu |
+| konkrétní feedback | víš, co zlepšit |
+| dobrovolná žádost o další přístup | hodnota není jen zvědavost |
+
+Tyto signály můžeš měřit agregovaně. Nepotřebuješ tajně profilovat každý pohyb člověka na webu. Stačí vědět, kolik lidí prošlo z registrace do pracovního rozhovoru, z rozhovoru do bety a z bety do první hodnoty.
+
+### Checklist: Waitlist a beta privacy-first
+
+- [ ] Waitlist má jednu větu o cílovém člověku, slibu a dalším kroku.
+- [ ] Formulář sbírá jen e-mail a pole potřebná pro výběr nebo doručení slibu.
+- [ ] Newsletter nebo obecná marketingová komunikace je samostatná volba.
+- [ ] Text u formuláře říká, co se stane po zápisu.
+- [ ] Kritéria výběru do bety jsou interně popsaná a navenek férově vysvětlená.
+- [ ] Beta nevyžaduje produkční data, pokud to není výslovně nutné a bezpečně ošetřené.
+- [ ] Feedback z bety se ukládá podle účelu: CRM, backlog, support, dokumentace nebo marketing.
+- [ ] Citlivé příklady se anonymizují dřív, než se stanou produktovým signálem.
+- [ ] Neaktivní, nefit a zastaralé kontakty mají pravidlo úklidu.
+- [ ] Měření bety sleduje kroky k hodnotě, ne jen velikost seznamu.
+
+### Mini úkol
+
+Vezmi aktuální nebo plánovaný waitlist a vyplň kartu:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Pro koho je waitlist? |  |
+| Jaký konkrétní slib dáváme po zápisu? |  |
+| Která pole jsou nutná pro další krok? |  |
+| Která pole sbíráme jen ze zvědavosti? |  |
+| Podle čeho vybíráme lidi do první bety? |  |
+| Jaký feedback patří do backlogu a co už ne? |  |
+| Kdy uklidíme neaktivní nebo nefit kontakty? |  |
+| Jaký první hodnotový krok budeme měřit? |  |
+
+Potom udělej jednu změnu: zkrať formulář, přepiš potvrzovací e-mail, odděl newsletter, napiš kritéria bety, nebo nastav úklid kontaktů po skončení programu. Waitlist má být začátek vztahu, ne nejtišší místo, kde firma zapomene staré sliby.
+
 ## Zdroje
 
 - ICANN: Information for Domain Name Registrants - práva a odpovědnosti držitelů domén včetně správy, obnovy a převodu doménové registrace: https://www.icann.org/registrants
@@ -23685,6 +23862,7 @@ Potom udělej jednu konkrétní změnu: zkrať registrační formulář, odděl 
 
 ## Pracovní log
 
+- 2026-07-16: Doplněna příloha o waitlistu a beta programu bez sběru kontaktů do zásoby: jasný slib waitlistu, minimální formulář, oddělení newsletteru, výběr do bety podle use casu a kapacity, potvrzení očekávání, bezpečné zpracování beta feedbacku, úklid neaktivních kontaktů, checklist a mini úkol.
 - 2026-07-16: Doplněna příloha o webinářích a online akcích bez registrační pasti: jasný slib akce, krátký registrační formulář, výběr platformy podle dat, pravidla pro nahrávky, férový follow-up, agregované měření hodnoty akce, checklist a mini úkol; navázáno na existující zdroje k GDPR principům, ePrivacy a přístupnosti médií.
 - 2026-07-16: Doplněna příloha o SDK a ukázkách kódu bez úniku tokenů: bezpečné copy-paste příklady, placeholdery místo reálných dat, výchozí ochranné chování SDK, zakázané integrační vzory, opatrné webhook ukázky, oddělení sandboxu od produkce, checklist a mini úkol; navázáno na existující zdroje OWASP, API bezpečnosti a správu tajemství.
 - 2026-07-16: Doplněna příloha o rate limitech a ochraně proti zneužití bez fingerprintingu: limitování podle účelu, rozdíl mezi ochranným, produktovým a bezpečnostním limitem, srozumitelné `429` odpovědi, minimální obranné logy, férové zacházení s legitimními špičkami, opatrné používání CAPTCHA, checklist a mini úkol; navázáno na existující zdroje OWASP k API bezpečnosti a GDPR principy minimalizace.
