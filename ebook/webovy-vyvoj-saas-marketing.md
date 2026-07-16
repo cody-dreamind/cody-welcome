@@ -24092,6 +24092,176 @@ Vezmi jednu existující referenci, case study nebo logo zákazníka na webu a v
 
 Potom udělej jednu změnu: zaokrouhli citlivé číslo, nahraď reálný screenshot syntetickým, odděl schválení loga od citace, přidej datum další kontroly, nebo vytvoř anonymizovanou variantu případové studie. Důvěra se dá prodávat i bez toho, aby se zákazník cítil jako exponát.
 
+## Příloha: Zákaznická komunita a advisory board bez datového rybníku
+
+Zákaznická komunita, uživatelská skupina nebo advisory board může být skvělý zdroj produktového učení. Lidé řeknou, co jim chybí, jak používají produkt v realitě, kde se zasekávají a co by doporučili dalším týmům. Jenže stejný formát se umí rychle změnit v datový rybník: sdílené screenshoty, jména klientů, interní procesy, citlivé use casy, nahrávky schůzek, tabulky účastníků a volné poznámky bez konce životnosti.
+
+Privacy-first komunita nemá být sterilní. Má mít jasná pravidla, rozumné hranice a konkrétní účel. Jinak z ní vznikne klub dobrých úmyslů, který náhodou sbírá víc informací než produkt samotný. To je přesně ten typ ironie, který nepotřebujeme živit.
+
+Špatná otázka zní: „Jak z komunity vytěžíme co nejvíc insightů?“
+
+Lepší otázka zní: „Jaký typ učení potřebujeme a jak ho získáme tak, aby zákazník věděl, co sdílí, proč a kdo to uvidí?“
+
+Evropská komise i EDPB v materiálech pro organizace opakovaně zdůrazňují účel, minimalizaci, transparentnost a omezení uchování osobních údajů. Pro komunitu to přelož prakticky: nepiš si všechno, co zaznělo, nahrávej jen když je to nutné, odděluj osobní poznámky od produktových rozhodnutí a nastav konec životnosti záznamů.
+
+### Začni účelem komunity
+
+Nejdřív si napiš jednu pracovní větu. Bez ní bude komunita dělat všechno a tím pádem nic pořádně.
+
+Příklady:
+
+- „Advisory board pomáhá ověřovat směr roadmapy pro administrátory ve středně velkých B2B týmech.“
+- „Komunita sdílí praktické návody a dotazy k používání produktu, ne interní data zákazníků.“
+- „Beta skupina testuje konkrétní workflow před veřejným releasem a dává zpětnou vazbu k použitelnosti.“
+- „Partnerská skupina koordinuje společné materiály a integrace, ne obchodní informace koncových zákazníků.“
+
+Jakmile máš účel, rozhodneš jednodušeji:
+
+- kdo má být členem,
+- jaké kanály použít,
+- co se smí sdílet,
+- jestli se schůzky nahrávají,
+- jak se zapisují poznámky,
+- jak dlouho se drží kontakty, záznamy a výstupy.
+
+Komunita bez účelu se obvykle časem promění v další chat. A další chat se obvykle promění v archiv, kde se dá najít všechno kromě jasného rozhodnutí.
+
+### Členství není marketingový souhlas
+
+Přihlášení do zákaznické komunity neznamená automatický souhlas s newsletterem, veřejnou referencí, použitím citace, nahráváním schůzek nebo sdílením kontaktu s partnery. Tyto věci odděl.
+
+Praktická členská karta:
+
+| Položka | Co říct jasně |
+| --- | --- |
+| Účel skupiny | proč skupina existuje a co se v ní řeší |
+| Viditelnost členů | kdo uvidí jméno, firmu, roli nebo příspěvky |
+| Kanály | kde komunikace probíhá a kdo má přístup |
+| Nahrávky | jestli se pořizují, proč a jak dlouho se drží |
+| Citace | zda se mohou použít veřejně a jak se schvalují |
+| Produktové poznámky | jak se z diskuse stává backlog nebo rozhodnutí |
+| Odchod | jak člověk skupinu opustí a co se stane s jeho daty |
+
+Pokud komunita používá e-mail, chat nebo event platformu, řekni lidem, kdo nástroj provozuje a jaké údaje v něm budou. Nemusíš z toho dělat právnickou fresku přes tři obrazovky. Stačí pravdivě popsat, co se stane. Ticho není dobrý UX pattern, jen levná půjčka důvěry.
+
+### Sdílení mezi zákazníky potřebuje mantinely
+
+Největší hodnota komunity často vzniká mezi zákazníky. Zároveň tam vzniká největší riziko. Jeden člověk chce pomoct druhému a pošle screenshot, export, jméno klienta nebo detail interního procesu. Nikdo to nemyslí špatně. Právě proto musí být pravidla viditelná dřív, než se něco pokazí.
+
+Napiš krátký kodex sdílení:
+
+- Nesdílej osobní údaje zákazníků, zaměstnanců ani koncových uživatelů.
+- Neposílej exporty, logy, faktury, smlouvy ani screenshoty s reálnými daty.
+- Pokud chceš ukázat problém, použij syntetický příklad nebo anonymizované shrnutí.
+- Citace z komunity nepoužíváme veřejně bez samostatného schválení.
+- Interní informace jiných členů zůstávají uvnitř skupiny.
+- Když si nejsi jistý, pošli raději popis situace než soubor.
+
+Tento kodex dej do uvítací zprávy, připnutého příspěvku a pozvánky na schůzku. Nečekej, že si ho lidé najdou v patičce znalostní báze. To je optimismus, ne design.
+
+### Nahrávky drž jako výjimku
+
+Nahrávka zákaznického callu je pohodlná pro tým, který se nemohl účastnit. Zároveň je to kontejner plný hlasů, jmen, názorů, kontextu, obrazovek a někdy i osobních údajů. Nahrávka nemá být výchozí nastavení jen proto, že tlačítko existuje.
+
+Lepší postup:
+
+1. Předem řekni, jestli se bude nahrávat a proč.
+2. Nabídni možnost účastnit se bez nahrávání citlivé části.
+3. Nahrávku používej pro konkrétní účel, ne jako věčný archiv.
+4. Po schůzce vytvoř stručné produktové poznámky bez zbytečných osobních detailů.
+5. Nahrávku smaž podle předem stanovené retence.
+
+Často stačí nenahrávat vůbec a místo toho psát rozhodovací poznámky:
+
+| Signál | Dopad | Další krok | Citlivost |
+| --- | --- | --- | --- |
+| 4 admini nerozumí rozdílu mezi rolemi Editor a Správce | brzdí onboarding | přepsat popis rolí a doplnit příklad | nízká |
+| Zákazníci obcházejí export přes support | riziko sdílení souborů e-mailem | navrhnout samoobslužný export s expirací | střední |
+| Jeden regulovaný tým potřebuje auditní log pro schválení nákupu | obchodní blokace | připravit trust center stránku | bez identifikace zákazníka |
+
+Tým nepotřebuje vědět, kdo přesně větu řekl, pokud rozhodnutí stojí na opakovaném vzoru. Potřebuje pochopit problém, dopad a další krok.
+
+### Advisory board není hlasovací automat
+
+Advisory board má radit, ne řídit produkt za tebe. Když z něj uděláš hlasování o roadmapě, vzniknou tři problémy: nejhlasitější zákazníci přebijí tiché segmenty, citlivé potřeby se začnou zapisovat moc detailně a tým ztratí odpovědnost za rozhodnutí.
+
+Dobrá agenda má být konkrétní:
+
+- 10 minut: co jsme od minula změnili a proč,
+- 20 minut: jeden produktový problém nebo rozhodnutí,
+- 20 minut: reakce na návrh, prototyp nebo proces,
+- 10 minut: shrnutí, co si tým odnáší a co nebude dělat.
+
+Po schůzce neposílej interní zápis všem jako surový přepis. Pošli krátké shrnutí:
+
+- co tým slyšel,
+- jaké rozhodnutí padlo,
+- co se bude dál ověřovat,
+- co zůstává mimo plán,
+- kam mohou členové poslat doplnění.
+
+Tím ukážeš respekt i bez toho, aby ses zavázal k roadmapě podle aklamace. Produkt není městská anketa. Díkybohu.
+
+### Výstupy anonymizuj podle použití
+
+Komunitní poznámky mohou skončit v backlogu, sales enablementu, dokumentaci, marketingu nebo strategii. Každé použití má jinou hranici.
+
+| Použití | Vhodná forma |
+| --- | --- |
+| Produktový backlog | problém, segment, dopad, důkaz bez jména člověka |
+| Dokumentace | anonymizovaný scénář a řešení |
+| Sales materiály | agregovaný vzor, ne citace bez schválení |
+| Marketing | samostatně schválená reference nebo anonymní trend |
+| Interní strategie | segmentový signál, ne surové přepisy |
+| Support playbook | opakovaný dotaz a doporučená odpověď |
+
+Když chceš použít konkrétní citaci, vrať se za autorem a schval přesné znění, kontext a způsob uvedení. „Řekl jsi to na callu“ není souhlas s billboardem. Ani s blogem. Ani se sales deckem, který záhadně přežije tři rebrandy.
+
+### Pravidelně uklízej členy i obsah
+
+Komunita má životní cyklus. Lidé změní roli, zákazník odejde, beta skončí, kanál se přestane používat a nahrávky zestárnou. Bez úklidu se z komunity stane další místo, kde bývalí členové možná pořád vidí interní kontext.
+
+Nastav rytmus:
+
+- měsíčně zkontroluj nové žádosti, odchody a neaktivní pozvánky,
+- kvartálně projdi členy podle aktuálního vztahu a role,
+- po každé uzavřené betě zruš dočasné kanály nebo je archivuj,
+- u nahrávek a surových poznámek drž krátkou retenci,
+- u produktových výstupů ponech jen anonymizované rozhodovací poznámky,
+- při odchodu zákazníka zkontroluj přístup do komunity stejně jako produktové účty.
+
+Privacy-first komunita není ta, která nikdy nic nesdílí. Je to ta, která ví, proč sdílí, s kým, na jak dlouho a kdy přestane.
+
+### Checklist: Komunita privacy-first
+
+- [ ] Komunita má jednu pracovní větu a jasný účel.
+- [ ] Členství není automaticky marketingový souhlas ani souhlas s citací.
+- [ ] Lidé vědí, kdo uvidí jejich jméno, firmu, roli a příspěvky.
+- [ ] Existuje krátký kodex, co se v komunitě nesdílí.
+- [ ] Nahrávky jsou výjimka s jasným účelem a retencí.
+- [ ] Produktové poznámky zachycují problém, dopad a další krok, ne surový přepis.
+- [ ] Citace a reference se schvalují samostatně.
+- [ ] Výstupy z komunity se anonymizují podle použití.
+- [ ] Dočasné beta kanály a pozvánky se po skončení uklízí.
+- [ ] Členství a přístupy se pravidelně revidují.
+
+### Mini úkol
+
+Vyber jednu existující zákaznickou skupinu, advisory board, beta kanál nebo komunitní prostor a vyplň kartu:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jaký je jeden hlavní účel skupiny? |  |
+| Kdo vidí seznam členů a jejich příspěvky? |  |
+| Jaká data nebo soubory se nesmí sdílet? |  |
+| Nahráváme schůzky? Pokud ano, proč a na jak dlouho? |  |
+| Jak se z diskuse stává produktový backlog? |  |
+| Kdo schvaluje použití citace nebo reference? |  |
+| Kdy revidujeme členy a staré pozvánky? |  |
+| Co můžeme smazat, archivovat nebo anonymizovat tento týden? |  |
+
+Potom udělej jednu změnu: napiš uvítací pravidla, vypni automatické nahrávání, smaž staré surové zápisy, anonymizuj poznámky v backlogu, zkontroluj neaktivní členy nebo odděl komunitní pozvánku od marketingového odběru. Komunita má budovat důvěru, ne skrytě rozšiřovat datovou stopu.
+
 ## Zdroje
 
 - ICANN: Information for Domain Name Registrants - práva a odpovědnosti držitelů domén včetně správy, obnovy a převodu doménové registrace: https://www.icann.org/registrants
@@ -24242,6 +24412,7 @@ Potom udělej jednu změnu: zaokrouhli citlivé číslo, nahraď reálný screen
 
 ## Pracovní log
 
+- 2026-07-16: Doplněna příloha o zákaznické komunitě a advisory boardu bez datového rybníku: účel komunity, oddělení členství od marketingového souhlasu, pravidla bezpečného sdílení, nahrávky jako výjimka, rozhodovací poznámky místo surových přepisů, anonymizace výstupů podle použití, pravidelný úklid členů a obsahu, checklist a mini úkol; navázáno na ověřené zdroje Evropské komise a EDPB k účelu, minimalizaci, transparentnosti a omezení uchování.
 - 2026-07-16: Doplněna příloha o případových studiích a referencích bez vyzrazení zákazníka: výběr typu důkazu, oddělené schvalování loga/citací/čísel/screenshotů, psaní podle rozhodnutí budoucího zákazníka, zaokrouhlování citlivých čísel, syntetické screenshoty, pravidelné kontroly referencí, checklist a mini úkol; navázáno na ověřené zdroje Evropské komise k GDPR principům, minimalizaci a transparentnosti.
 - 2026-07-16: Doplněna příloha o referral programu bez kontaktů na cizí lidi: správný okamžik žádosti o doporučení, odmítnutí importu adresáře, férové odměny, transparentní referral landing page, krátké neprůhledné tokeny, oddělení pozvánek od marketingových sdělení, agregované měření kvality, checklist a mini úkol; ověřeny existující zdroje ÚOOÚ k obchodním sdělením a EDPB k deceptive design patterns.
 - 2026-07-16: Doplněna příloha o waitlistu a beta programu bez sběru kontaktů do zásoby: jasný slib waitlistu, minimální formulář, oddělení newsletteru, výběr do bety podle use casu a kapacity, potvrzení očekávání, bezpečné zpracování beta feedbacku, úklid neaktivních kontaktů, checklist a mini úkol.
