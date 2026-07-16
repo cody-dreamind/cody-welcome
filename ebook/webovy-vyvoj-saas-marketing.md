@@ -24808,6 +24808,200 @@ Vyber jeden chat, kontaktní widget, support bublinu nebo plánovaný chat bot. 
 
 Potom udělej jednu konkrétní změnu: omez widget jen na stránky, kde pomáhá, přepni načítání až po kliknutí, odeber automatické předávání e-mailu, přidej mikrotext proti citlivým údajům, nastav retenci transkriptů nebo z nejčastější otázky vytvoř veřejnou odpověď. Dobrý chat není ten, který vidí nejvíc lidí. Dobrý chat je ten, který pomůže ve správnou chvíli a nezanechá za sebou datovou stopu delší než samotný problém.
 
+## Příloha: Produktové průzkumy bez profilovacího dotazování
+
+Krátký průzkum může být užitečný. Po dokončení onboardingu se zeptáš, co bylo nejasné. Po vyřešení support ticketu zjistíš, jestli člověk opravdu dostal pomoc. Jednou za čas se zákazníka zeptáš, jestli produkt pořád odpovídá jeho práci. To všechno může zlepšit produkt víc než další dashboard s pěti grafy, které vypadají důležitě a nikdo podle nich nerozhodne nic.
+
+Stejný průzkum se ale snadno změní v profilovací dotazník. Vyskočí v nevhodnou chvíli, chce skóre, komentář, roli, obrat firmy, velikost týmu, plán nákupu, důvod odpovědi a e-mail. Pak odpověď automaticky spadne do CRM, marketingové segmentace, nástroje pro customer success a exportu pro vedení. Gratuluju, z jedné otázky o spokojenosti je malá datová továrna.
+
+Špatná otázka zní: „Jak dostaneme víc odpovědí?“
+
+Lepší otázka zní: „Jaké rozhodnutí chceme podle odpovědí udělat a kolik dat k tomu stačí?“
+
+> Codyho komentář: Když se zákazníka zeptáš na jednu věc ve správnou chvíli, často dostaneš lepší signál než z desetiminutového formuláře. Lidé nejsou interní výzkumný panel. Mají práci. Drzé, já vím.
+
+### Začni rozhodnutím, ne metrikou
+
+NPS, CSAT, CES nebo vlastní škála nejsou strategie. Jsou to formáty otázky. Než vybereš metodu, napiš si rozhodovací větu:
+
+| Situace | Lepší rozhodovací věta |
+| --- | --- |
+| Onboarding | Chceme vědět, jestli první nastavení brání dosažení první hodnoty. |
+| Support | Chceme poznat, jestli odpověď skutečně vyřešila problém bez další eskalace. |
+| Dokumentace | Chceme najít stránky, kde čtenář odchází bez použitelné odpovědi. |
+| Renewal | Chceme zjistit, jestli zákazník vidí výsledek, kvůli kterému službu kupoval. |
+| Nová funkce | Chceme ověřit, jestli funkce pomáhá deklarovanému workflow, ne jestli se líbí. |
+
+Metriku vyber až potom. Pokud rozhodnutí zní „přepsat onboarding“, nepotřebuješ deset demografických polí. Potřebuješ signál, kde se člověk zasekl, a pár konkrétních vět od lidí, kteří úsek opravdu prošli.
+
+### Ptej se ve správném momentu
+
+Průzkum položený kdykoliv je rušení. Průzkum položený po relevantní události je součást produktu.
+
+Dobré momenty:
+
+- po dokončení konkrétního pracovního kroku,
+- po vyřešení support ticketu,
+- po prvním úspěšném exportu, importu nebo integraci,
+- po přečtení dokumentace, když člověk dobrovolně klikne na „pomohlo?“,
+- před renewal rozhovorem, pokud je jasné, k čemu odpověď poslouží,
+- po betě nebo pilotu, kde byl feedback součástí domluvy.
+
+Slabé momenty:
+
+- hned po přihlášení, ještě než člověk něco udělal,
+- uprostřed kritického workflow,
+- po každé druhé stránce, protože nástroj to umí,
+- jako překryv přes obsah,
+- po zrušení účtu bez možnosti přeskočit,
+- na veřejném webu bez jasného vztahu k akci návštěvníka.
+
+Praktické pravidlo: pokud by otázka člověku zhoršila dokončení hlavní práce, polož ji později nebo ji dej jako nenápadnou volbu. Zpětná vazba získaná za cenu tření je někdy jen hezky strukturovaná otrava.
+
+### Jedna hlavní otázka většinou stačí
+
+Krátký produktový průzkum má mít jednu hlavní otázku a nanejvýš jeden dobrovolný doplněk.
+
+Příklady:
+
+```text
+Pomohla vám tato stránka dokončit nastavení?
+[Ano] [Ne]
+Co chybělo? Volitelné.
+```
+
+```text
+Vyřešila odpověď supportu váš problém?
+[Vyřešila] [Částečně] [Nevyřešila]
+Chcete doplnit detail? Volitelné.
+```
+
+```text
+Jak náročné bylo připravit první export?
+[Snadné] [Trochu složité] [Zasekl/a jsem se]
+Co by mělo být jasnější? Volitelné.
+```
+
+Volný text je užitečný, ale rizikový. Lidé do něj vloží názvy zákazníků, interní popisy procesů, e-maily, čísla objednávek nebo věci, které by měl řešit support. Proto:
+
+- nenuť komentář jako podmínku odeslání,
+- napiš krátce, co do pole nepatří,
+- neukládej text déle než je potřeba,
+- převáděj insight do backlogu anonymizovaně,
+- citace nepoužívej veřejně bez samostatného schválení.
+
+Mikrotext pod volným polem:
+
+```text
+Neposílejte hesla, osobní údaje třetích osob ani citlivé dokumenty. Pokud potřebujete řešit konkrétní účet, použijte support.
+```
+
+### Kontext přidávej chudě a vysvětlitelně
+
+Průzkum často nepotřebuje automaticky znát celý profil uživatele. Stačí minimum kontextu, které pomůže odpovědi roztřídit.
+
+Obvykle stačí:
+
+- typ momentu, kde otázka vznikla,
+- verze funkce nebo název workflow,
+- jazyk produktu,
+- anonymizovaný typ plánu nebo segmentu, pokud je opravdu nutný pro rozhodnutí,
+- časové období v agregaci.
+
+Často není potřeba:
+
+- celé URL s query parametry,
+- e-mail a jméno u anonymního dotazu,
+- seznam všech navštívených stránek,
+- obsah účtu nebo workspace,
+- detailní role a oprávnění,
+- automatický screenshot bez kontroly člověkem,
+- propojení odpovědi s reklamní nebo e-mailovou segmentací.
+
+Pokud odpověď potřebuje navázat support, dej člověku volbu přidat kontakt. Neudělej z každé odpovědi identifikovaný ticket jen proto, že je to pohodlnější pro interní workflow.
+
+### Nepleť průzkum, support a marketing
+
+Jedna odpověď může být pro produkt cenná, ale to neznamená, že patří všude.
+
+Rozděl si účely:
+
+| Účel | Co se ukládá | Kam to patří |
+| --- | --- | --- |
+| Produktové učení | anonymizovaný insight, typ problému, dopad | backlog nebo research poznámky |
+| Support | konkrétní problém, kontakt, stav řešení | support systém |
+| Customer success | stav zákaznického výsledku, další krok | zákaznický plán nebo CRM |
+| Marketing | schválená citace nebo reference | až po samostatném souhlasu |
+
+Nejhorší zkratka je automatické pravidlo „nízké skóre = sales úkol“ nebo „vysoké skóre = žádost o referenci“. Člověk odpověděl v určitém kontextu. Respektuj ho. Když chceš navázat, napiš lidsky a konkrétně:
+
+```text
+Díky za odpověď k exportu. Psali jste, že mapování polí nebylo jasné. Chcete, abychom se na konkrétní případ podívali přes support?
+```
+
+To je jiné než automatická kampaň „Vidíme, že jste nespokojení, rezervujte si hovor“. Ano, technicky to jde. Ne, není to dobrý nápad.
+
+### Reportuj prahy, ne jednotlivce
+
+Průzkumy mají tým učit, ne vystavovat jednotlivé zákazníky na nástěnce. Výstupy proto agreguj s minimálním prahem, aby jeden člověk nebyl snadno rozpoznatelný.
+
+Praktický měsíční report:
+
+- hlavní otázka,
+- počet odpovědí,
+- podíl odpovědí podle kategorií,
+- tři až pět anonymizovaných motivů,
+- konkrétní rozhodnutí pro produkt, dokumentaci nebo support,
+- co se nebude dělat, protože signál je slabý nebo mimo strategii.
+
+Neposílej do širokého týmu surové exporty s texty odpovědí, pokud to není nutné. Stačí produktový insight. Když někdo potřebuje detail kvůli řešení konkrétního případu, má mít oprávnění a účel.
+
+### Uzavři smyčku bez nátlaku
+
+Zákazník nemusí vidět každý interní krok, ale měl by poznat, že odpovědi nemizí do prázdna. Stačí jednoduché formy:
+
+- krátká poznámka v changelogu,
+- úprava dokumentace s odkazem „často jste se ptali“,
+- osobní odpověď u konkrétního support problému,
+- měsíční produktové shrnutí,
+- zavření průzkumu, který už nepřináší rozhodnutí.
+
+Stejně důležité je průzkumy uklízet. Pokud otázka běží tři měsíce a nikdo ji nevyhodnocuje, vypni ji. Neaktivní průzkum je jen další sběr dat se svědomím na dovolené.
+
+### Checklist: Produktové průzkumy privacy-first
+
+- [ ] Každý průzkum má rozhodovací větu a vlastníka.
+- [ ] Otázka se pokládá po relevantním momentu, ne jako plošné rušení.
+- [ ] Průzkum má jednu hlavní otázku a dobrovolný doplněk.
+- [ ] Volný text není povinný a má mikrotext proti citlivým údajům.
+- [ ] Automatický kontext je omezený na data nutná pro rozhodnutí.
+- [ ] Kontakt je volitelný, pokud nejde o supportní navázání.
+- [ ] Odpovědi se automaticky nepřelévají do marketingu, referencí ani reklamní segmentace.
+- [ ] Surové odpovědi mají omezený přístup a retenci.
+- [ ] Reporty používají agregace a anonymizované motivy.
+- [ ] Nízké skóre nespouští nátlakový sales proces.
+- [ ] Vysoké skóre není souhlas s veřejnou citací.
+- [ ] Průzkumy se pravidelně vypínají nebo upravují, když už nepodporují rozhodnutí.
+
+### Mini úkol
+
+Vyber jeden produktový průzkum, NPS/CSAT otázku, dokumentační „pomohlo?“ nebo plánovaný dotazník. Vyplň kartu:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jaké rozhodnutí má průzkum podpořit? |  |
+| V jakém momentu se otázka pokládá? |  |
+| Co je jedna hlavní otázka? |  |
+| Je komentář dobrovolný? |  |
+| Jaký automatický kontext se ukládá? |  |
+| Potřebujeme identitu člověka, nebo stačí anonymní odpověď? |  |
+| Kam odpověď putuje: produkt, support, CRM, marketing, dokumentace? |  |
+| Jak dlouho držíme surové odpovědi? |  |
+| Kdo smí číst volný text? |  |
+| Jak odpovědi převedeme na rozhodnutí? |  |
+
+Potom udělej jednu konkrétní změnu: zruš plošný popup, přesuň otázku po dokončení workflow, zkrať dotazník na jednu otázku, udělej kontakt volitelný, odeber automatický screenshot, nastav retenci surových textů nebo nahraď individuální report agregovaným měsíčním shrnutím. Dobrý průzkum není ten, který z lidí vyždímá nejvíc odpovědí. Dobrý průzkum položí jednu férovou otázku a promění odpověď v lepší produkt.
+
 ## Zdroje
 
 - ICANN: Information for Domain Name Registrants - práva a odpovědnosti držitelů domén včetně správy, obnovy a převodu doménové registrace: https://www.icann.org/registrants
@@ -24958,6 +25152,7 @@ Potom udělej jednu konkrétní změnu: omez widget jen na stránky, kde pomáh�
 
 ## Pracovní log
 
+- 2026-07-16: Doplněna příloha o produktových průzkumech bez profilovacího dotazování: rozhodovací věta před výběrem metriky, správný moment otázky, krátké NPS/CSAT a vlastní průzkumy, bezpečné volné texty, chudý kontext, oddělení produktu/supportu/marketingu, agregované reportování, uzavírání smyčky, checklist a mini úkol.
 - 2026-07-16: Doplněna příloha o live chatu a kontaktním widgetu bez sledovacího ocasu: rozhodování, jestli chat na stránku patří, volba režimu pomoci podle práce člověka, datová mapa widgetu, načítání až po záměru, omezení automaticky posílaného kontextu, retence transkriptů, opatrné použití botů a AI asistentů, agregované měření užitečnosti, checklist a mini úkol; navázáno na existující zdroje k GDPR principům, externím embedům, supportu a AI asistentům.
 - 2026-07-16: Doplněna příloha o kalkulačkách a konfigurátorech bez leadové pasti: pracovní věta nástroje, dělení vstupů na nutné/užitečné/zvědavé, výsledek bez povinného e-mailu, ukládání jako samostatná funkce, čitelné předpoklady výpočtu, bezpečné sdílení výsledků, dobrovolná sales návaznost, checklist a mini úkol.
 - 2026-07-16: Doplněna příloha o generovaných dokumentech bez automatického úniku dat: typ dokumentu jako datový produkt, povolená a zakázaná pole šablon, oddělení interní a zákaznické verze, kontrola příloh, expirovatelné odkazy, auditní stopa bez kopírování obsahu, verzování šablon, checklist a mini úkol.
