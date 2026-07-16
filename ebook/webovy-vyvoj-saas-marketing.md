@@ -26276,6 +26276,172 @@ Vyber jeden chybový stav, který dnes na webu nebo v SaaS existuje: 404, vyprš
 
 Potom udělej jednu konkrétní opravu: přepiš text 404, přidej odkaz na nový export po expiraci, zachovej bezpečná pole formuláře, doplň request ID, nastav `410` pro záměrně odstraněný obsah, nebo přestaň vracet interní chybu do prohlížeče. Chybový stav není konec produktu. Je to chvíle, kdy produkt ukáže, jestli umí být užitečný i pod tlakem.
 
+## Příloha: Odstraňování funkcí bez ztráty důvěry
+
+Odstranit funkci je někdy zdravější než ji věčně udržovat v polomrtvém stavu. Staré exporty, nepoužívané reporty, beta obrazovky, experimentální integrace nebo zapomenuté marketingové widgety můžou brzdit vývoj, zvyšovat bezpečnostní riziko a mást zákazníky. Jenže vypnutí funkce není jen technický úklid. Je to produktová změna, která se dotýká práce lidí.
+
+Privacy-first tým má při odstraňování funkcí jednu výhodu: už od začátku se ptá, jaká data funkce sbírá, kde končí a kdo ji opravdu potřebuje. Díky tomu se rozhodnutí neopírá jen o pocit „tohle už nikdo nepoužívá“, ale o kombinaci hodnoty, rizika, provozní ceny a náhradní cesty.
+
+Špatná otázka zní: „Můžeme to prostě vypnout?“
+
+Lepší otázka zní: „Kdo na tom dnes závisí, jakou práci tím dělá a jak ho převedeme na bezpečnější nebo jasnější cestu?“
+
+> Codyho komentář: Starou funkci často nikdo nemiluje, dokud ji nevypneš. Pak se z ní náhle stane klíčová infrastruktura pro tři zákazníky, jednoho obchodníka a dashboard, o kterém nikdo nevěděl. Produktová archeologie je sport pro trpělivé.
+
+### Nejdřív zjisti práci funkce
+
+Funkci nehodnoť jen podle názvu v menu. Zjisti, jakou práci reálně dělá. Nepoužívaná obrazovka může být zbytečná, ale také může být sezónní, používaná jen administrátorem jednou za kvartál nebo napojená na interní support proces.
+
+Praktická karta funkce:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Co funkce umožňuje dokončit? |  |
+| Které segmenty ji používají? |  |
+| Jak často a v jakém momentu práce se používá? |  |
+| Jaká data čte, vytváří, exportuje nebo posílá dál? |  |
+| Jaké integrace, reporty nebo support postupy na ní závisí? |  |
+| Jaká je bezpečnostní, provozní nebo UX bolest její údržby? |  |
+| Existuje náhrada v produktu? |  |
+| Co se stane, když ji vypneme bez migrace? |  |
+
+Když neumíš odpovědět, není to důvod funkci nechat navždy. Je to důvod nejdřív udělat krátké zjištění. Stačí kombinace agregované analytiky, support poznámek, sales dotazů, interního hledání v dokumentaci a několika rozhovorů se zákazníky, kteří funkci pravděpodobně používají.
+
+### Rozliš úklid, deprekaci a tvrdé vypnutí
+
+Ne každá změna potřebuje stejný postup. Rozděl ji podle dopadu:
+
+| Typ změny | Příklad | Doporučený postup |
+| --- | --- | --- |
+| Tichý úklid | odstranění nepoužitého interního odkazu | interní zápis, smoke test, bez zákaznické komunikace |
+| Zjednodušení UI | sloučení dvou podobných nastavení | release note, krátké vysvětlení v produktu |
+| Deprekace | starý export nahradí nový export | oznámení, období souběhu, migrační návod |
+| Tvrdé vypnutí | zrušení integrace nebo modulu | individuální komunikace, datum, alternativa, support plán |
+| Bezpečnostní vypnutí | riziková funkce ohrožuje data | rychlá akce, stručné vysvětlení, následná náprava |
+
+Deprekace není omluva pro nekonečné odkládání. Je to řízené období, kdy stará cesta ještě funguje, ale tým už jasně říká, kam se má práce přesunout. Tvrdé vypnutí bez náhrady má být výjimka, ne výchozí styl. Pokud je nutné kvůli bezpečnosti, komunikace má být klidná, věcná a bez detailů, které by zvyšovaly riziko.
+
+### Napiš migrační cestu jako produktový tok
+
+Migrace nemá být jen článek v dokumentaci. Má být navržená cesta:
+
+1. Uživatel pozná, že stará funkce končí.
+2. Chápe, proč se mění.
+3. Vidí, co má udělat dál.
+4. Má možnost exportu nebo převodu dat, pokud funkce drží obsah.
+5. Dostane termín a důsledky.
+6. Po změně nezůstane v prázdné nebo rozbité obrazovce.
+
+Příklad pro starý report:
+
+```text
+Tento report skončí 30. září. Nahrazuje ho nový přehled „Kvalita poptávek“, který používá stejné agregované metriky a neukládá detail jednotlivých návštěvníků. Do konce září můžete starý report exportovat jako CSV. Po vypnutí zůstane historický souhrn dostupný v archivu reportů.
+```
+
+Tohle je lepší než „Legacy report deprecated“. Lidé nepracují s interními názvy. Pracují s úkoly, deadline a obavou, že přijdou o data.
+
+### Data po funkci musí mít konec života
+
+Když funkci vypneš, zůstává po ní datová stopa: tabulky, exporty, soubory, logy, eventy, dashboardy, dokumentace, oprávnění, webhooky, reporty a support šablony. Pokud je neuklidíš, funkce technicky zmizí z UI, ale dál žije jako riziko.
+
+Privacy-first ukončení funkce zahrnuje:
+
+- rozhodnutí, která data se migrují,
+- která data se archivují kvůli smluvnímu nebo provoznímu důvodu,
+- která data se smažou,
+- jak dlouho zůstanou zálohy,
+- kdo má přístup k historickým datům,
+- co se stane s API endpointy, webhooky a exporty,
+- jak se upraví analytika, aby neměřila mrtvou cestu.
+
+Praktický detail: Nezapomeň na volný text a přílohy. Právě staré komentáře, support exporty a dočasné soubory často obsahují víc citlivého kontextu než samotná produktová tabulka.
+
+### Komunikuj podle dopadu, ne podle interní námahy
+
+Tým může mít pocit, že odstranění funkce je malé, protože kód je malý. Zákazník může mít opačný pocit, protože funkce sedí uprostřed jeho workflow. Komunikaci proto navrhuj podle dopadu na práci člověka, ne podle velikosti pull requestu.
+
+Pro malý dopad stačí release note:
+
+```text
+Sloučili jsme dvě podobná nastavení exportu do jednoho kroku. Stávající exportní soubory zůstávají dostupné beze změny.
+```
+
+Pro větší dopad použij víc vrstev:
+
+- oznámení v produktu na dotčené obrazovce,
+- e-mail administrátorům nebo vlastníkům workspace,
+- aktualizovaná dokumentace,
+- release notes,
+- support scénář,
+- datum konce a připomenutí před ním.
+
+Nevysvětluj jen interní důvod. „Snižujeme technický dluh“ je pravda, ale zákazníkovi nepomůže. Přelož to do jeho světa: stabilnější export, jasnější oprávnění, menší riziko úniku dat, jednodušší reporting, méně duplicitních nastavení.
+
+### Náhrada nemusí být stejná funkce
+
+Když starou funkci rušíš, nehledej automaticky jednu ku jedné náhradu. Někdy byla funkce špatný způsob, jak řešit skutečný problém.
+
+Příklady:
+
+- Starý detailní tracking kampaní může nahradit agregovaný report podle zdroje a kvality leadu.
+- Nepoužívaný dashboard může nahradit měsíční export pro jedno konkrétní rozhodnutí.
+- Komplikovanou integraci může nahradit stabilní CSV import s jasnou validací.
+- Veřejné hlasování o funkcích může nahradit interní karta problému a anonymizovaný feedback.
+- Automatický embed třetí strany může nahradit statický náhled a tlačítko „načíst externí obsah“.
+
+Cílem není zachovat každý starý zvyk. Cílem je zachovat schopnost, která má hodnotu, a zbavit se části, která zvyšuje riziko nebo zmatek.
+
+### Interní závislosti ukliď stejně pečlivě jako UI
+
+Odstranění položky z menu je viditelná část. Skutečná práce bývá jinde:
+
+- feature flagy,
+- entitlement mapa,
+- billing plány,
+- help centrum,
+- onboarding checklisty,
+- sales materiály,
+- demo scénáře,
+- API dokumentace,
+- testovací data,
+- alerty,
+- dashboardy,
+- zákaznické sliby v nabídkách a trust center.
+
+Vytvoř si malý release checklist pro rušené funkce. Pokud funkce zůstane v jedné prezentaci, obchod ji bude za tři měsíce omylem slibovat. Pokud zůstane v API dokumentaci, někdo ji integruje. Pokud zůstane v dashboardu, někdo bude řešit prázdnou metriku a tvářit se, že to je strategie.
+
+### Checklist: Odstraňování funkcí privacy-first
+
+- [ ] Funkce má popsanou práci, segmenty a závislosti.
+- [ ] Víme, jaká data funkce čte, vytváří, exportuje nebo posílá dál.
+- [ ] Rozlišili jsme tichý úklid, zjednodušení, deprekaci, tvrdé vypnutí nebo bezpečnostní vypnutí.
+- [ ] Existuje migrační cesta nebo jasné vysvětlení, proč náhrada není potřeba.
+- [ ] Zákazník ví, co se stane s jeho daty.
+- [ ] Historická data mají rozhodnutí: migrovat, archivovat, smazat nebo ponechat s retencí.
+- [ ] API endpointy, webhooky, exporty a integrace mají vlastní plán ukončení.
+- [ ] Dokumentace, onboarding, sales materiály a support šablony jsou aktualizované.
+- [ ] Release notes popisují dopad na práci zákazníka, ne jen interní technický důvod.
+- [ ] Měření staré funkce se ukončí nebo nahradí signálem pro novou cestu.
+- [ ] Po vypnutí neexistuje rozbitá obrazovka, prázdný dashboard ani mrtvý odkaz.
+- [ ] Tým má datum, kdy zkontroluje, jestli migrace nezpůsobila nové tření.
+
+### Mini úkol
+
+Vyber jednu funkci, obrazovku, report, integraci nebo obsahovou cestu, která v produktu nebo webu už nedává jasný smysl. Vyplň kartu:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jakou práci funkce měla dělat? |  |
+| Kdo ji dnes reálně používá? |  |
+| Jaká data přes ni tečou nebo po ní zůstávají? |  |
+| Jaké interní materiály, API nebo support postupy na ní závisí? |  |
+| Je potřeba náhrada, migrace, nebo jen jasné ukončení? |  |
+| Jaký je nejmenší bezpečný krok tento týden? |  |
+| Jak zákazníkům vysvětlíme dopad lidskou řečí? |  |
+| Co po vypnutí smažeme, archivujeme nebo přestaneme měřit? |  |
+
+Potom udělej jednu konkrétní změnu: označ funkci jako deprecated, napiš migrační text, aktualizuj dokumentaci, odstraň mrtvý odkaz, vypni zbytečný event, nebo vytvoř datový úklidový ticket s vlastníkem a termínem. Vypnutí funkce není selhání. Selhání je nechat ji dalších pět let strašit v produktu, protože nikdo nechce otevřít šuplík.
+
 ## Zdroje
 
 - ICANN: Information for Domain Name Registrants - práva a odpovědnosti držitelů domén včetně správy, obnovy a převodu doménové registrace: https://www.icann.org/registrants
@@ -26427,6 +26593,7 @@ Potom udělej jednu konkrétní opravu: přepiš text 404, přidej odkaz na nov�
 
 ## Pracovní log
 
+- 2026-07-16: Doplněna příloha o odstraňování funkcí bez ztráty důvěry: zjištění skutečné práce funkce, rozlišení tichého úklidu, deprekace a tvrdého vypnutí, návrh migrační cesty, datový konec života, komunikace podle dopadu, úklid interních závislostí, checklist a mini úkol; navázáno na existující kapitoly o chybových stavech, produktových slibech, retenci, changelogu, dokumentaci a privacy-first měření.
 - 2026-07-16: Doplněna příloha o chybových stránkách a neplatných odkazech bez slepé uličky: rozlišení 404/410, přístupových chyb, vypršelých odkazů, rate limitů a 5xx stavů, návrh bezpečných chybových textů, ochrana rozpracovaných formulářů, agregované měření dopadu, checklist a mini úkol; ověřen a doplněn zdroj MDN k HTTP stavovým kódům.
 - 2026-07-16: Doplněna příloha o SLA a provozních závazcích bez falešného klidu: rozlišení SLI/SLO/SLA, definice dostupnosti podle produktových schopností, čitelné měření závazků, oddělení reakční doby od opravy, incidentové kredity, plánovaná údržba, status page, základní transparentnost ve všech plánech, checklist a mini úkol; navázáno na existující zdroje Google SRE k SLO, monitoringu a alertingu a na kapitoly o trust center, runbookách, incidentní komunikaci a produktových slibech.
 - 2026-07-16: Doplněna příloha o obchodních podmínkách a produktových slibech bez rozjeté reality: mapa veřejných tvrzení, sladění pricingu s entitlementem, technicky splnitelné privacy sliby, rozlišení hotových schopností od roadmapy a pilotů, release kontrola textů, práce s nesoulady, checklist a mini úkol; navázáno na existující zdroje a kapitoly k transparentnosti, minimalizaci, trust center, limitům a evropskému provozu.
