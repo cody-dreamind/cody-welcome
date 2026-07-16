@@ -26113,6 +26113,169 @@ Vyber jeden provozní slib: dostupnost aplikace, API, exportů, supportní reakc
 
 Potom udělej jednu konkrétní změnu: přepiš dostupnost podle skutečně měřené schopnosti, rozděl reakční dobu od doby opravy, doplň výjimky plánované údržby, přidej komponentu na status page, nebo zapiš interní SLO před tím, než ho prodáš jako SLA. Provozní slib má uklidnit tím, že je pravdivý, ne tím, že má hezké procento.
 
+## Příloha: Chybové stránky a neplatné odkazy bez slepé uličky
+
+Chybová stránka je taky produktová obrazovka. Jen se obvykle navrhuje až ve chvíli, kdy uživatel narazí do zdi. To je škoda, protože právě v chybě se ukáže, jestli web nebo SaaS myslí na člověka, nebo jen vyplivne technickou větu a doufá, že se návštěvník nějak zachrání.
+
+Privacy-first chybový stav má tři úkoly: říct pravdu, pomoct dalším krokem a neprozradit víc dat, než je nutné. Nepotřebuje sledovat každý pohyb člověka na chybové stránce. Potřebuje dát týmu signál, že se něco pokazilo, a uživateli cestu ven.
+
+Špatná otázka zní: „Jak vtipně napíšeme 404?“
+
+Lepší otázka zní: „Co člověk chtěl udělat, proč se mu to nepovedlo a jaký bezpečný další krok mu můžeme nabídnout?“
+
+> Codyho komentář: Roztomilá 404 stránka je fajn. Ale pokud po kliknutí z rozbitého odkazu zmizí práce, formulář nebo důvěra, maskot to nezachrání. Chybový stav není místo pro kreativní mlhu. Je to místo pro klidné řízení škody.
+
+### Rozliš typ chyby podle práce uživatele
+
+Ne každá chyba je stejná. HTTP stavové kódy podle MDN rozdělují odpovědi do tříd 2xx, 3xx, 4xx a 5xx; pro produktový tým je důležité hlavně to, že 4xx obvykle znamená problém požadavku nebo přístupu a 5xx problém na straně služby. Přeloženo do webu: jinak se chová stránka, která neexistuje, jinak vypršelý export a jinak výpadek backendu.
+
+Praktická mapa:
+
+| Stav | Co se stalo | Produktový další krok |
+| --- | --- | --- |
+| `404` | URL neexistuje nebo není dostupná | nabídnout hledání, hlavní sekce, archiv nebo kontakt |
+| `410` | obsah byl záměrně odstraněn | vysvětlit odstranění a nabídnout nejbližší náhradu |
+| `401` / `403` | člověk není přihlášený nebo nemá oprávnění | přihlášení, žádost o přístup, návrat do workspace |
+| Vypršelý odkaz | token, export nebo pozvánka už neplatí | vytvořit nový odkaz nebo kontaktovat vlastníka |
+| `429` | překročen limit | říct, kdy to zkusit znovu a proč limit existuje |
+| `5xx` | služba selhala | omluva, request ID, status page, bezpečný návrat |
+
+Tahle tabulka má být součást návrhu, ne až pozdějšího ladění. Když tým ví, jaký typ chyby řeší, napíše lepší text, nastaví správný status a nebude posílat všechny lidi na homepage jako do odkladiště.
+
+### 404 není automaticky přesměrování na homepage
+
+Přesměrovat každou neznámou URL na homepage vypadá jako rychlá oprava, ale často škodí lidem i vyhledávačům. Uživatel hledal konkrétní článek, nabídku, dokumentaci nebo starou kampaň. Homepage mu neříká, jestli se spletl, obsah zmizel, nebo ho web jen někam hodil.
+
+Lepší 404 obsahuje:
+
+- jasnou větu, že stránka nebyla nalezena,
+- hledání nebo odkaz na relevantní rozcestník,
+- odkazy na nejbližší hlavní sekce,
+- možnost nahlásit rozbitý odkaz, pokud jde o důležitý obsah,
+- žádné technické detaily serveru,
+- správný HTTP status `404`.
+
+Pokud stránka měla hodnotu a existuje náhrada, použij trvalé přesměrování podle migrační mapy. Pokud byla odstraněná bez náhrady, vrať poctivý `404` nebo `410`. SEO hygiena a uživatelská důvěra mají společný základ: nelhat o tom, co se stalo.
+
+### Vypršelý odkaz musí umět vysvětlit bezpečnost
+
+Privacy-first produkty často používají časově omezené odkazy: pozvánky, exporty, reset hesla, stažení faktury, náhled dokumentu nebo schválení nabídky. Když odkaz vyprší, uživatel nesmí skončit v neurčité chybě.
+
+Dobrá obrazovka vypršelého odkazu řekne:
+
+- co přibližně vypršelo, bez vyzrazení citlivého obsahu,
+- proč odkazy expirují,
+- kdo může vytvořit nový odkaz,
+- jestli je potřeba přihlášení,
+- kam pokračovat bezpečně.
+
+Příklad:
+
+```text
+Tento odkaz už neplatí. Exporty držíme jen krátkou dobu, aby se citlivá data zbytečně nepovalovala mimo účet. Přihlaste se do portálu a vytvořte nový export, nebo požádejte vlastníka workspace.
+```
+
+Slabší varianta:
+
+```text
+Invalid token.
+```
+
+Technicky možná pravda. Lidsky dveře do sklepa.
+
+### Chyba formuláře má chránit práci
+
+Formulářová chyba je jedna z nejdražších malých chyb na webu. Člověk vyplní poptávku, registraci, objednávku nebo support ticket a po odeslání dostane neurčité „něco se pokazilo“. Pokud navíc zmizí obsah polí, právě jste mu řekli, že jeho čas není důležitý.
+
+Pravidla pro formuláře:
+
+- validuj co nejblíž poli a piš konkrétně, co opravit,
+- po serverové chybě zachovej vyplněný obsah, pokud je to bezpečné,
+- u citlivých údajů buď opatrný s ukládáním do prohlížeče,
+- u dlouhých formulářů nabídni návrat nebo koncept,
+- rozliš chybu validace, chybu oprávnění a technický výpadek,
+- přidej request ID pro support, ne stack trace.
+
+Příklad lepší chyby:
+
+```text
+Poptávku se nepodařilo odeslat. Text jsme nechali ve formuláři. Zkuste to prosím znovu za chvíli. Pokud problém trvá, napište nám a uveďte kód REQ-8F21.
+```
+
+Tohle je produktová empatie bez zbytečného slídění. Tým dostane korelační ID, uživatel ví, co dělat, a formulář nevyplivne interní chybu databáze.
+
+### Chybový text nesmí prozradit cizí data
+
+Bezpečná chyba není jen kratší chyba. Je to chyba navržená podle rizika.
+
+Pozor na hlášky typu:
+
+- „Účet `petr@example.com` neexistuje.“
+- „Nemáte přístup k faktuře firmy Novák s.r.o.“
+- „Token pro projekt Alfa expiroval.“
+- „SQL error near customer_email.“
+- „Soubor obsahuje rodná čísla na řádcích 12, 18 a 27.“
+
+Někdy jsou detaily užitečné po přihlášení správnému člověku. Ve veřejném nebo neověřeném kontextu ale zbytečně potvrzují existenci účtu, zákazníka, dokumentu nebo interního objektu.
+
+Bezpečnější vzor:
+
+- veřejně: „Odkaz není platný nebo už vypršel.“
+- po přihlášení oprávněného uživatele: „Export projektu Alfa vypršel včera v 18:00. Můžete vytvořit nový.“
+- v interním logu: typ chyby, request ID, rozsah objektu, bez celého tokenu a bez obsahu citlivého souboru.
+
+### Měř chyby agregovaně a opravuj podle dopadu
+
+Chybové stránky jsou dobrý provozní signál. Nemusíš z nich dělat sledovací laboratoř. Stačí sledovat:
+
+- počet 404 podle cesty nebo vzoru URL,
+- nejčastější chybové stavy formulářů,
+- počet vypršelých odkazů podle typu,
+- 5xx podle služby a release,
+- odkud lidé na chybu přichází v agregované podobě,
+- kolik chyb končí support ticketem.
+
+Jednou za měsíc projdi top chyby podle dopadu:
+
+| Chyba | Dopad | Nejmenší oprava |
+| --- | --- | --- |
+| Starý článek má odkazy z partnerů a vrací 404 | ztráta důvěry a návštěvnosti | redirect na aktualizovaný článek |
+| Reset hesla často expiroval | lidé se nedostanou do účtu | prodloužit text instrukce a přidat nový odkaz |
+| Poptávkový formulář padá bez zachování textu | ztráta leadů | uchovat bezpečná pole a přidat request ID |
+| Exportní odkaz vyprší bez další cesty | support musí ručně pomáhat | tlačítko pro nový export v portálu |
+
+Měř to, co povede k opravě. Ne každý jednotlivý detail návštěvy. Pokud se chyba nedá opravit, dokumentuj ji jako známý stav s jasnou komunikací. Pokud se opakuje, patří do backlogu.
+
+### Checklist: Chybové stavy privacy-first
+
+- [ ] Veřejné 404 stránky vrací správný HTTP status a nenahrazují se tichým redirectem na homepage.
+- [ ] Odstraněný obsah má rozhodnutí: redirect, `404`, nebo `410`.
+- [ ] Vypršelé odkazy vysvětlují bezpečnostní důvod a další krok.
+- [ ] Formuláře po technické chybě chrání práci uživatele, pokud je to bezpečné.
+- [ ] Chybové hlášky neprozrazují existenci cizího účtu, dokumentu, zákazníka ani tokenu.
+- [ ] 5xx obrazovky obsahují bezpečné request ID a odkaz na status page nebo support.
+- [ ] Interní logy neukládají celé tokeny, citlivé URL ani obsah formulářů.
+- [ ] Top chyby se jednou měsíčně prochází podle dopadu, ne podle zvědavosti.
+- [ ] Chybové texty existují ve všech podporovaných jazycích nákupní nebo produktové cesty.
+- [ ] Support ví, jak podle request ID najít problém bez žádání o screenshot plný osobních údajů.
+
+### Mini úkol
+
+Vyber jeden chybový stav, který dnes na webu nebo v SaaS existuje: 404, vypršelý odkaz, neúspěšné odeslání formuláře, odmítnutý přístup, rate limit nebo serverovou chybu. Vyplň kartu:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Co chtěl člověk udělat? |  |
+| Jaký stavový kód nebo produktový stav dostane? |  |
+| Říká text pravdu lidskou řečí? |  |
+| Nabízí bezpečný další krok? |  |
+| Neprozrazuje cizí data nebo interní detaily? |  |
+| Zachovává práci uživatele, pokud je to bezpečné? |  |
+| Jaké request ID nebo agregovaný signál tým potřebuje? |  |
+| Která jedna oprava sníží největší tření? |  |
+
+Potom udělej jednu konkrétní opravu: přepiš text 404, přidej odkaz na nový export po expiraci, zachovej bezpečná pole formuláře, doplň request ID, nastav `410` pro záměrně odstraněný obsah, nebo přestaň vracet interní chybu do prohlížeče. Chybový stav není konec produktu. Je to chvíle, kdy produkt ukáže, jestli umí být užitečný i pod tlakem.
+
 ## Zdroje
 
 - ICANN: Information for Domain Name Registrants - práva a odpovědnosti držitelů domén včetně správy, obnovy a převodu doménové registrace: https://www.icann.org/registrants
@@ -26124,6 +26287,7 @@ Potom udělej jednu konkrétní změnu: přepiš dostupnost podle skutečně mě
 - IETF RFC 2369: The Use of URLs as Meta-Syntax for Core Mail List Commands and their Transport through Message Header Fields - specifikace listových hlaviček včetně `List-Unsubscribe`: https://www.rfc-editor.org/info/rfc2369
 - IETF RFC 8058: Signaling One-Click Functionality for List Email Headers - specifikace `List-Unsubscribe-Post` a one-click odhlášení pro mailing listy: https://www.rfc-editor.org/info/rfc8058
 - OWASP Cheat Sheet Series: HTTP Security Response Headers Cheat Sheet - praktická doporučení k bezpečnostním HTTP hlavičkám: https://cheatsheetseries.owasp.org/cheatsheets/HTTP_Headers_Cheat_Sheet.html
+- MDN Web Docs: HTTP response status codes - přehled tříd stavových kódů HTTP a jejich významu pro úspěšné, přesměrované, klientské a serverové odpovědi: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status
 - MDN Web Docs: HTTP Observatory - nástroj pro automatickou kontrolu HTTP hlaviček a bezpečnostních konfigurací webu: https://developer.mozilla.org/en-US/observatory
 - EUR-Lex: Regulation (EU) 2016/679, GDPR Article 30 - právní text k záznamům o činnostech zpracování pro správce a zpracovatele: https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng
 - Google SRE Book: Service Level Objectives - vysvětlení rozdílu mezi SLI, SLO a SLA, volby ukazatelů, percentilů a error budgetu: https://sre.google/sre-book/service-level-objectives/
@@ -26263,6 +26427,7 @@ Potom udělej jednu konkrétní změnu: přepiš dostupnost podle skutečně mě
 
 ## Pracovní log
 
+- 2026-07-16: Doplněna příloha o chybových stránkách a neplatných odkazech bez slepé uličky: rozlišení 404/410, přístupových chyb, vypršelých odkazů, rate limitů a 5xx stavů, návrh bezpečných chybových textů, ochrana rozpracovaných formulářů, agregované měření dopadu, checklist a mini úkol; ověřen a doplněn zdroj MDN k HTTP stavovým kódům.
 - 2026-07-16: Doplněna příloha o SLA a provozních závazcích bez falešného klidu: rozlišení SLI/SLO/SLA, definice dostupnosti podle produktových schopností, čitelné měření závazků, oddělení reakční doby od opravy, incidentové kredity, plánovaná údržba, status page, základní transparentnost ve všech plánech, checklist a mini úkol; navázáno na existující zdroje Google SRE k SLO, monitoringu a alertingu a na kapitoly o trust center, runbookách, incidentní komunikaci a produktových slibech.
 - 2026-07-16: Doplněna příloha o obchodních podmínkách a produktových slibech bez rozjeté reality: mapa veřejných tvrzení, sladění pricingu s entitlementem, technicky splnitelné privacy sliby, rozlišení hotových schopností od roadmapy a pilotů, release kontrola textů, práce s nesoulady, checklist a mini úkol; navázáno na existující zdroje a kapitoly k transparentnosti, minimalizaci, trust center, limitům a evropskému provozu.
 - 2026-07-16: Doplněna příloha o supportním přístupu k zákaznickému účtu bez tichého nahlížení: rozlišení režimů přístupu, vazba na supportní případ, omezená impersonace, srozumitelná žádost zákazníkovi, audit zásahu bez kopírování obsahu dat, break-glass pravidla, pravidelný úklid rolí, checklist a mini úkol; navázáno na existující zdroje OWASP k autorizaci a logování a na GDPR principy minimalizace a transparentnosti.
