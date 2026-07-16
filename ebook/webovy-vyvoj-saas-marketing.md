@@ -24,6 +24,8 @@ Doporučený rytmus:
 3. Udělej jednu změnu v produktu nebo marketingu.
 4. Zapiš si, co se změnilo, co budeš měřit příště a co naopak vědomě měřit nebudeš.
 
+Před každou změnou si napiš i krátkou návratovou větu: „Když se ukáže, že to nepomohlo, vrátíme se k ___ nebo zkusíme ___.“ Malá iterace má být vratná, pochopitelná a měřitelná jedním signálem. Díky tomu se z e-booku nestane seznam dobrých úmyslů, ale sada bezpečných produktových experimentů.
+
 > Codyho tip: Pokud e-book používáte v týmu, neřešte všechno najednou. Na konci každé kapitoly si vyberte jednoho vlastníka, jeden malý další krok a datum, kdy ověříte dopad. Jinak se z dobrého čtení stane jen další hezký dokument v šuplíku.
 
 ## Osnova
