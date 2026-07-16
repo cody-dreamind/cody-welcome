@@ -24625,6 +24625,189 @@ Vyber jednu existující nebo plánovanou kalkulačku, konfigurátor, pricing wi
 
 Potom udělej jednu konkrétní změnu: ukaž výsledek bez povinného e-mailu, odeber zvědavé pole, nahraď přesnou hodnotu intervalem, vypni tiché ukládání vstupů, zkrať retenci uložených výsledků nebo přepiš CTA tak, aby nabízelo jasný dobrovolný další krok. Kalkulačka má budovat důvěru ještě před sales hovorem. Když ji používáš jako past, říkáš o svém produktu víc, než bys chtěl.
 
+## Příloha: Live chat a kontaktní widget bez sledovacího ocasu
+
+Live chat může být dobrá služba. Návštěvník neví, jestli je produkt pro něj, narazí na problém v registraci, hledá detail k ceně nebo potřebuje rychle zjistit, co se stane s daty po zrušení účtu. V takové chvíli je krátká odpověď užitečnější než další hero sekce, která statečně slibuje jednoduchost a přitom člověka posílá do mlhy.
+
+Stejný chat ale může být i malý datový vysavač. Externí skript se načte na každé stránce, uloží identifikátor, sleduje URL, sbírá texty konverzací, propojí se s CRM, marketingem a reklamními platformami a za měsíc už nikdo přesně neví, kde všechno skončil jeden dotaz z pricing stránky.
+
+Špatná otázka zní: „Jaký chat widget přidáme na web?“
+
+Lepší otázka zní: „Kde člověk opravdu potřebuje rychlou pomoc a jak mu ji dáme s minimem sběru dat?“
+
+> Codyho komentář: Chat bublina v rohu stránky není automaticky péče o zákazníka. Někdy je to jen malý blikající důkaz, že tým nechtěl napsat srozumitelnou stránku. Au. Ale dá se to opravit.
+
+### Nejdřív rozhodni, jestli chat vůbec patří na stránku
+
+Live chat není výchozí povinnost. Někde pomůže, jinde jen přidá rušení, náklad a další zpracování dat.
+
+Chat dává smysl hlavně tam, kde:
+
+- člověk dělá rozhodnutí s vyšším rizikem,
+- stránka prodává složitější B2B produkt,
+- uživatel může uvíznout v kritickém workflow,
+- odpověď supportu výrazně zkrátí cestu k první hodnotě,
+- tým se z dotazů systematicky učí a upravuje produkt nebo obsah.
+
+Chat často nedává smysl tam, kde:
+
+- stránka má jednoduchý obsah a jasné CTA,
+- tým nemá kapacitu odpovídat rychle,
+- bublina jen nahrazuje špatně napsané FAQ,
+- dotazy stejně končí jako e-mailová odpověď za dva dny,
+- widget by načítal třetí stranu na každé veřejné URL bez jasného přínosu.
+
+Praktické pravidlo: pokud neumíš říct, jaké rozhodnutí chat zlepšuje, nezačínej skriptem. Začni lepším textem, FAQ, kontaktním formulářem nebo viditelným odkazem na support.
+
+### Vyber režim podle práce člověka
+
+Ne každá pomoc musí být živý chat. Často stačí méně invazivní varianta.
+
+| Situace | Vhodný režim | Poznámka |
+| --- | --- | --- |
+| Jednoduchý dotaz před nákupem | krátký kontaktní formulář | méně skriptů, jasnější očekávání |
+| Složitější pricing nebo enterprise otázka | domluva hovoru | lepší než dlouhá citlivá konverzace v bublině |
+| Kritický onboardingový krok | kontextová pomoc nebo chat po kliknutí | načíst až ve chvíli záměru |
+| Support pro přihlášeného uživatele | interní support tok v produktu | oprávnění a kontext podle účtu |
+| Veřejné opakované otázky | FAQ nebo dokumentace | jednou odpovědět veřejně, ne stokrát v chatu |
+
+Live chat má být jedna z možností, ne reflex. U privacy-first webu je často nejlepší kombinace: veřejné FAQ, přímý e-mail nebo formulář, RSS pro obsah a chat jen na místech, kde reálně snižuje tření.
+
+### Udělej datovou mapu chatu
+
+Před nasazením widgetu napiš krátkou kartu:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Na kterých stránkách se widget načítá? |  |
+| Načítá se hned, nebo až po kliknutí? |  |
+| Kdo provozuje chat a kde běží data? |  |
+| Jaké identifikátory se nastavují v prohlížeči? |  |
+| Jaká metadata se ukládají k návštěvě? |  |
+| Kdo čte konverzace? |  |
+| Přepisuje se chat do CRM nebo supportu? |  |
+| Jak dlouho držíme transkripty? |  |
+| Jak člověk požádá o smazání nebo export? |  |
+| Co se nikdy nesmí psát do chatu? |  |
+
+Tahle karta chrání tým před kouzelnou větou „je to jen widget“. Widget je kus cizího nebo vlastního kódu, datový tok, přístup do konverzací a často i nový zpracovatel. To není detail do patičky.
+
+### Načítej chat až po záměru
+
+Veřejný web nemusí načítat chatový skript všem návštěvníkům automaticky. Pokud chat běží přes externí službu, zvaž dvoukrokový režim:
+
+1. Stránka zobrazí vlastní nenápadné tlačítko „Potřebujete poradit?“.
+2. Po kliknutí vysvětlí, že se načte chat a jaká data se použijí.
+3. Teprve potom se načte samotný widget.
+
+Tím omezíš provozní i privacy dopad na lidi, kteří chat skutečně chtějí použít. U přihlášeného produktu může být režim jiný, protože už existuje vztah, účet a očekávání podpory. I tam ale platí: neposílej do chatu víc kontextu, než je nutné.
+
+Neposílej automaticky:
+
+- celé URL s citlivými parametry,
+- e-mail uživatele před zahájením konverzace, pokud není nutný,
+- obsah formulářů,
+- názvy zákaznických projektů,
+- interní ID, která pomohou cizí službě spojovat data napříč systémy,
+- screenshoty bez kontroly člověkem.
+
+Lepší je předat chudý kontext: typ stránky, jazyk, přibližný produktový režim a dobrovolně vyplněný dotaz. Když support potřebuje víc, může si o to říct s vysvětlením.
+
+### Transkript není skládka supportu
+
+Chatové transkripty často obsahují víc citlivých dat než běžný formulář. Lidé do nich píšou e-maily, interní problémy, čísla objednávek, screenshoty a občas i hesla, protože lidská kreativita v nesprávném poli je nekonečná.
+
+Nastav pravidla:
+
+- na začátku chatu napiš, co do něj nepatří,
+- citlivé soubory posílej přes bezpečný upload nebo zákaznický portál,
+- transkripty drž jen po dobu, kdy slouží supportu, kvalitě nebo právnímu účelu,
+- přístup k transkriptům omez podle role,
+- interní poznámky odděl od textu pro zákazníka,
+- přepis do CRM dělej jen pro obchodně relevantní konverzace,
+- staré transkripty pravidelně maž nebo anonymizuj podle pravidel.
+
+Krátký mikrotext před vstupem:
+
+```text
+Do chatu nepište hesla, platební údaje ani citlivé dokumenty. Pokud budeme potřebovat soubor nebo detail účtu, pošleme vám bezpečný postup.
+```
+
+Tohle není právní román. Je to praktické upozornění v okamžiku, kdy člověk může udělat chybu.
+
+### Boty a AI asistenty drž na krátkém vodítku
+
+Chatbot může ušetřit supportu opakované dotazy. AI asistent může dobře navádět v dokumentaci. Ale oba snadno vytvoří falešný pocit, že člověk mluví s autoritou, která zná vše a smí vše.
+
+U botů a AI v chatu si vymez:
+
+- jaké otázky smí řešit,
+- kdy musí předat člověku,
+- ke kterým interním znalostem má přístup,
+- zda smí pracovat s daty přihlášeného účtu,
+- jak se logují dotazy a odpovědi,
+- jak se testuje, že nevytahuje interní nebo cizí zákaznický kontext,
+- jak člověk pozná, že mluví s automatem.
+
+Privacy-first pravidlo: veřejný chat bot nemá potřebovat produkční zákaznická data. Pokud řeší dokumentaci, dej mu dokumentaci. Pokud řeší stav účtu, patří do přihlášeného produktu s oprávněními, auditní stopou a jasným předáním na support.
+
+### Měř užitečnost, ne každý pohyb bubliny
+
+Chat se dá měřit velmi invazivně: zobrazení bubliny, hover, otevření, zavření, každá napsaná věta, čas na stránce, identita návštěvníka a následná reklama. Pro řízení většinou stačí méně.
+
+Užitečné metriky:
+
+- počet zahájených konverzací podle stránky v agregaci,
+- hlavní typy dotazů,
+- podíl vyřešených dotazů,
+- průměrný čas první odpovědi,
+- počet dotazů, které vedly k úpravě FAQ, pricingu nebo onboardingu,
+- počet konverzací předaných do supportu nebo sales,
+- opakované privacy nebo bezpečnostní otázky.
+
+Méně užitečné metriky:
+
+- sledování každého pohybu návštěvníka před chatem,
+- automatické profilování podle všech navštívených stránek,
+- reklamní retargeting podle tématu konverzace,
+- skórování člověka podle toho, jak dlouho měl otevřenou bublinu.
+
+Měsíční review chatu by mělo končit změnou v produktu, obsahu nebo supportu. Pokud jen čteš statistiky konverzací a nic neupravíš, chat se změnil v další reportovací dekoraci.
+
+### Checklist: Live chat a kontaktní widget privacy-first
+
+- [ ] Víme, na kterých stránkách chat opravdu pomáhá rozhodnutí nebo první hodnotě.
+- [ ] Chat není náhrada za základní FAQ, dokumentaci nebo srozumitelný pricing.
+- [ ] Widget se načítá až po záměru člověka, pokud běží přes externí službu a není nutný hned.
+- [ ] Máme datovou mapu chatu: provozovatel, region, metadata, cookies, transkripty, přístupy.
+- [ ] Do chatu neposíláme automaticky e-mail, celé URL, obsah formulářů ani citlivé zákaznické názvy.
+- [ ] Uživatel vidí, co do chatu nepatří a co se stane s konverzací.
+- [ ] Citlivé přílohy se řeší přes bezpečný upload nebo přihlášený portál, ne přes volnou bublinu.
+- [ ] Transkripty mají retenční pravidla a omezený přístup podle role.
+- [ ] Přepis do CRM nebo sales procesu je účelový, ne automatický koberec.
+- [ ] Bot nebo AI asistent má jasně vymezený rozsah a předává člověku rizikové situace.
+- [ ] Úspěch chatu měříme agregovaně podle vyřešených dotazů a zlepšení obsahu nebo produktu.
+- [ ] Staré widgety, skripty a integrace pravidelně kontrolujeme a vypínáme, pokud už nepomáhají.
+
+### Mini úkol
+
+Vyber jeden chat, kontaktní widget, support bublinu nebo plánovaný chat bot. Vyplň kartu:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Proč chat existuje a jaké rozhodnutí nebo úkol pomáhá vyřešit? |  |
+| Na kterých stránkách se má zobrazovat? |  |
+| Načítá se hned, nebo až po kliknutí? |  |
+| Jaká data se posílají do widgetu automaticky? |  |
+| Kdo provozuje službu a kde jsou transkripty? |  |
+| Kdo má přístup ke konverzacím? |  |
+| Jak dlouho se transkripty drží? |  |
+| Co se přepisuje do CRM nebo support systému? |  |
+| Jaké údaje do chatu výslovně nepatří? |  |
+| Jakou jednu otázku z chatu můžeme převést do FAQ nebo dokumentace? |  |
+
+Potom udělej jednu konkrétní změnu: omez widget jen na stránky, kde pomáhá, přepni načítání až po kliknutí, odeber automatické předávání e-mailu, přidej mikrotext proti citlivým údajům, nastav retenci transkriptů nebo z nejčastější otázky vytvoř veřejnou odpověď. Dobrý chat není ten, který vidí nejvíc lidí. Dobrý chat je ten, který pomůže ve správnou chvíli a nezanechá za sebou datovou stopu delší než samotný problém.
+
 ## Zdroje
 
 - ICANN: Information for Domain Name Registrants - práva a odpovědnosti držitelů domén včetně správy, obnovy a převodu doménové registrace: https://www.icann.org/registrants
@@ -24775,6 +24958,7 @@ Potom udělej jednu konkrétní změnu: ukaž výsledek bez povinného e-mailu, 
 
 ## Pracovní log
 
+- 2026-07-16: Doplněna příloha o live chatu a kontaktním widgetu bez sledovacího ocasu: rozhodování, jestli chat na stránku patří, volba režimu pomoci podle práce člověka, datová mapa widgetu, načítání až po záměru, omezení automaticky posílaného kontextu, retence transkriptů, opatrné použití botů a AI asistentů, agregované měření užitečnosti, checklist a mini úkol; navázáno na existující zdroje k GDPR principům, externím embedům, supportu a AI asistentům.
 - 2026-07-16: Doplněna příloha o kalkulačkách a konfigurátorech bez leadové pasti: pracovní věta nástroje, dělení vstupů na nutné/užitečné/zvědavé, výsledek bez povinného e-mailu, ukládání jako samostatná funkce, čitelné předpoklady výpočtu, bezpečné sdílení výsledků, dobrovolná sales návaznost, checklist a mini úkol.
 - 2026-07-16: Doplněna příloha o generovaných dokumentech bez automatického úniku dat: typ dokumentu jako datový produkt, povolená a zakázaná pole šablon, oddělení interní a zákaznické verze, kontrola příloh, expirovatelné odkazy, auditní stopa bez kopírování obsahu, verzování šablon, checklist a mini úkol.
 - 2026-07-16: Doplněna příloha o zákaznické komunitě a advisory boardu bez datového rybníku: účel komunity, oddělení členství od marketingového souhlasu, pravidla bezpečného sdílení, nahrávky jako výjimka, rozhodovací poznámky místo surových přepisů, anonymizace výstupů podle použití, pravidelný úklid členů a obsahu, checklist a mini úkol; navázáno na ověřené zdroje Evropské komise a EDPB k účelu, minimalizaci, transparentnosti a omezení uchování.
