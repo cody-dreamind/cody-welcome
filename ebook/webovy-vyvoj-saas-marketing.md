@@ -23374,6 +23374,167 @@ Vyber jednu veřejnou nebo interní ukázku integrace a projdi ji podle této ka
 
 Potom udělej jednu konkrétní opravu: nahraď reálně vypadající hodnoty placeholdery, přidej práci s `Retry-After`, doplň webhook signature helper, zkrať payload, nebo přidej odstavec „Nedělejte“. SDK a příklady kódu jsou malé dveře do produktu. Když jsou bezpečné, vývojáři bezpečnost kopírují skoro omylem. Což je nejlepší druh omylu.
 
+## Příloha: Webináře a online akce bez registrační pasti
+
+Webinář, online workshop nebo produktové demo může být výborný marketingový a vzdělávací formát. Lidé dostanou kontext, mohou se ptát a firma ukáže odbornost bez toho, aby musela každého návštěvníka honit přes reklamní publika. Jenže online akce se snadno změní v datovou past: registrační formulář chce příliš mnoho údajů, platforma sbírá metadata, záznam leží roky bez vlastníka a všichni účastníci automaticky skončí v kampani, kterou nečekali.
+
+Privacy-first akce má jednoduchý princip: člověk přesně ví, proč se registruje, co dostane, kdo uvidí jeho údaje, jestli bude záznam a jak se z komunikace po akci odhlásí.
+
+Špatná otázka zní: „Kolik kontaktů z toho vytěžíme?“
+
+Lepší otázka zní: „Jakou hodnotu účastník dostane a jaké minimum dat potřebujeme, abychom mu ji doručili?“
+
+Codyho komentář: Webinář není trik, jak dostat e-mail výměnou za prezentaci, kterou by šlo normálně publikovat. Pokud je obsah dobrý, obstojí i s férovou registrací. Pokud obstojí jen za zamčenými dveřmi a pětikrokovým follow-upem, možná nemáš webinář. Možná máš formulář v obleku.
+
+### Začni slibem akce
+
+Než vybereš platformu, napiš jednu větu:
+
+„Tato akce pomůže člověku typu ___ rozhodnout nebo zvládnout ___ a po akci bude mít ___.“
+
+Příklady:
+
+- „Tato akce pomůže zakladateli B2B SaaS vybrat první tři aktivační metriky bez invazivní analytiky a po akci bude mít vyplněnou šablonu metriky.“
+- „Tento workshop pomůže marketingovému týmu zkontrolovat landing page bez reklamních trackerů a po akci bude mít seznam tří úprav.“
+- „Toto produktové demo pomůže provoznímu manažerovi pochopit plánování pilotu a po akci bude vědět, jaký datový vzorek stačí pro první ověření.“
+
+Když věta končí u „představíme naše řešení“, je to slabé zadání. Představit řešení můžeš v nahraném videu. Živá akce má využít čas lidí lépe: ukázat rozhodování, odpovědět na otázky, projít šablonu, rozebrat anonymizovaný příklad nebo pomoci účastníkům udělat první krok.
+
+### Registrační formulář drž krátký
+
+U většiny otevřených akcí stačí:
+
+| Pole | Proč ho chceš | Poznámka |
+| --- | --- | --- |
+| E-mail | poslat odkaz, připomínku a materiály | nutné |
+| Jméno | oslovení a orientace v otázkách | často volitelné |
+| Firma nebo role | lepší kontext pro obsah | volitelné, pokud není nutné |
+| Otázka předem | přizpůsobení programu | volitelné a bez citlivých dat |
+
+Telefon, velikost firmy, rozpočet, počet zaměstnanců a detailní nákupní záměr nepatří do výchozí registrace na vzdělávací akci. Pokud pořádáš úzký pracovní workshop s omezenou kapacitou, některé otázky mohou dávat smysl. Pak ale napiš proč.
+
+Mikrotext pod registrací:
+
+```text
+E-mail použijeme pro poslání odkazu na akci, připomínky a materiálů po akci. Do newsletteru vás přidáme jen tehdy, pokud si ho samostatně zvolíte.
+```
+
+Pokud bude záznam:
+
+```text
+Akci nahráváme. Otázky z chatu použijeme pro odpovědi a anonymizované zlepšení materiálů. Pokud nechcete být v záznamu, nepoužívejte kameru ani osobní údaje v chatu.
+```
+
+Text musí odpovídat skutečnosti. Když po akci všem pošleš pět obchodních e-mailů, nebyl to materiál po akci. Byla to kampaň.
+
+### Platformu vybírej podle dat a přístupu
+
+Nástroj na online akce není neutrální detail. Může zpracovávat e-maily účastníků, jména, IP adresy, chat, otázky, nahrávky, účastnické reporty a někdy i chování během akce.
+
+Před výběrem platformy si vyplň krátkou kartu:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jaká data platforma dostane? |  |
+| Kde se data a záznam ukládají? |  |
+| Kdo z týmu má administrátorský přístup? |  |
+| Umíme exportovat a smazat registrace? |  |
+| Jak dlouho držíme záznam, chat a report účasti? |  |
+| Je možné vypnout zbytečné sledování účasti nebo engagementu? |  |
+| Jak účastníka informujeme o nahrávání? |  |
+| Jaký je plán, když platforma v den akce selže? |  |
+
+Privacy-first výchozí nastavení:
+
+- vypnout automatické přidávání registrací do marketingových sekvencí,
+- omezit reporty na to, co opravdu použiješ,
+- neexportovat chat do CRM bez důvodu,
+- záznam ukládat na schválené místo,
+- nastavit datum revize nebo smazání záznamu,
+- používat role a osobní účty místo sdíleného admin přístupu.
+
+### Nahrávka není věčná knihovna
+
+Nahrávka je užitečná pro lidi, kteří nemohli přijít, a pro opakované použití obsahu. Zároveň často obsahuje otázky, jména, hlas, obraz, chat a interní kontext. Proto potřebuje vlastní pravidla.
+
+Před nahráváním rozhodni:
+
+- jestli bude záznam veřejný, neveřejný na odkazu, nebo jen interní,
+- zda se vystřihnou otázky účastníků,
+- jak dlouho bude záznam dostupný,
+- kdo může stáhnout soubor,
+- zda se z chatu vytvoří anonymizované FAQ,
+- kde bude uvedeno datum a kontext akce.
+
+Praktické pravidlo: veřejně publikuj spíš upravený záznam nebo článek se shrnutím než surový export celé akce. Surový záznam je rychlý, ale často obsahuje víc dat, než veřejný obsah potřebuje.
+
+Přístupnost není bonus. Pokud video slouží jako dlouhodobý obsah, doplň minimálně smysluplný popis, případně titulky nebo textové shrnutí. W3C WAI k přístupnosti médií popisuje titulky, přepisy a další alternativy jako praktické cesty, jak zpřístupnit audio a video obsah širšímu publiku.
+
+### Follow-up má navázat na slib, ne využít slabou chvilku
+
+Po akci pošli to, co člověk čeká:
+
+- záznam nebo slíbené materiály,
+- odpovědi na otázky, které se nestihly,
+- odkazy na související veřejný obsah,
+- možnost přihlásit se k dalším akcím nebo RSS,
+- nabídku konzultace jen tam, kde dává smysl.
+
+Nedělej automaticky:
+
+- přidání všech účastníků do obecného newsletteru,
+- import účastnického reportu do agresivního lead scoringu,
+- sérii obchodních e-mailů bez jasného očekávání,
+- remarketingové publikum z účasti na vzdělávací akci,
+- sdílení seznamu účastníků s partnerem bez jasné informace a důvodu.
+
+Pokud je akce partnerská, napiš už při registraci, kdo data dostane. „Společný webinář“ neznamená automaticky „společná databáze kontaktů“. Partneři mohou dostat agregované vyhodnocení, anonymizované otázky a veřejný výstup. Osobní kontakty jen tehdy, když je to jasné, férové a odpovídá tomu, co účastník očekával.
+
+### Měř hodnotu akce bez profilu účastníka
+
+U online akce obvykle stačí několik signálů:
+
+| Signál | K čemu slouží |
+| --- | --- |
+| počet registrací | plánování kapacity a zájmu |
+| účast v agregaci | jestli téma a čas seděly |
+| počet relevantních otázek | kvalita tématu a nejasnosti trhu |
+| klik na slíbený materiál | zájem o praktický výstup |
+| dobrovolné odpovědi po akci | kvalita obsahu a možné navazující potřeby |
+| kvalifikované poptávky | obchodní dopad bez profilování všech účastníků |
+
+Nemusíš ukládat detailní minutu po minutě pro každého účastníka, pokud podle toho neuděláš férové a očekávatelné rozhodnutí. Zvlášť opatrně s metrikami typu „engagement score“, které vypadají vědecky, ale často jen překládají běžné chování člověka do obchodní nálepky.
+
+### Checklist: Online akce privacy-first
+
+- [ ] Akce má jednu větu o cílovém člověku, výsledku a dalším kroku.
+- [ ] Registrační formulář sbírá jen údaje nutné pro účast a slíbené materiály.
+- [ ] Newsletter nebo obchodní follow-up je oddělený od registrace.
+- [ ] Účastník ví, zda se akce nahrává a co se stane s chatem a otázkami.
+- [ ] Platforma má vlastníka, popsaná data, přístupy, export a retenci.
+- [ ] Partnerská akce jasně říká, kdo dostane jaká data.
+- [ ] Záznam má pravidlo dostupnosti, úpravy a smazání nebo revize.
+- [ ] Dlouhodobý video obsah má textové shrnutí, titulky nebo jinou přístupnou alternativu podle významu obsahu.
+- [ ] Měření akce používá agregované signály a dobrovolnou zpětnou vazbu.
+- [ ] Po akci se smažou nepotřebné exporty, testovací registrace a pracovní seznamy.
+
+### Mini úkol
+
+Vyber jednu plánovanou nebo nedávnou online akci a vyplň kartu:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Komu měla akce pomoct? |  |
+| Jaký výsledek si měl účastník odnést? |  |
+| Jaká pole byla v registraci opravdu nutná? |  |
+| Byl newsletter nebo follow-up samostatná volba? |  |
+| Kde je záznam, chat a seznam účastníků? |  |
+| Kdy se záznam a exporty smažou nebo zrevidují? |  |
+| Jaký agregovaný signál ukáže, že akce měla hodnotu? |  |
+| Co příště zjednodušíme? |  |
+
+Potom udělej jednu konkrétní změnu: zkrať registrační formulář, odděl newsletterový souhlas, doplň informaci o nahrávání, smaž starý účastnický export, přepiš follow-up na slíbené materiály místo prodejní sekvence nebo vytvoř anonymizované FAQ z otázek účastníků. Dobrá online akce buduje důvěru tím, co učí, ne tím, kolik dat si odnese.
+
 ## Zdroje
 
 - ICANN: Information for Domain Name Registrants - práva a odpovědnosti držitelů domén včetně správy, obnovy a převodu doménové registrace: https://www.icann.org/registrants
@@ -23524,6 +23685,7 @@ Potom udělej jednu konkrétní opravu: nahraď reálně vypadající hodnoty pl
 
 ## Pracovní log
 
+- 2026-07-16: Doplněna příloha o webinářích a online akcích bez registrační pasti: jasný slib akce, krátký registrační formulář, výběr platformy podle dat, pravidla pro nahrávky, férový follow-up, agregované měření hodnoty akce, checklist a mini úkol; navázáno na existující zdroje k GDPR principům, ePrivacy a přístupnosti médií.
 - 2026-07-16: Doplněna příloha o SDK a ukázkách kódu bez úniku tokenů: bezpečné copy-paste příklady, placeholdery místo reálných dat, výchozí ochranné chování SDK, zakázané integrační vzory, opatrné webhook ukázky, oddělení sandboxu od produkce, checklist a mini úkol; navázáno na existující zdroje OWASP, API bezpečnosti a správu tajemství.
 - 2026-07-16: Doplněna příloha o rate limitech a ochraně proti zneužití bez fingerprintingu: limitování podle účelu, rozdíl mezi ochranným, produktovým a bezpečnostním limitem, srozumitelné `429` odpovědi, minimální obranné logy, férové zacházení s legitimními špičkami, opatrné používání CAPTCHA, checklist a mini úkol; navázáno na existující zdroje OWASP k API bezpečnosti a GDPR principy minimalizace.
 - 2026-07-16: Doplněna příloha o multi-tenant izolaci bez víry v hodného uživatele: tenant jako bezpečnostní kontext, objektová oprávnění, cache a search rizika, fronty/webhooky/exporty, interní admin, negativní testy mezi tenanty, checklist a mini úkol; navázáno na existující zdroje OWASP k API bezpečnosti, autorizaci a GDPR principy minimalizace.
