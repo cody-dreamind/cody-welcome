@@ -22856,6 +22856,155 @@ Vyber jednu schopnost produktu, která často závisí na frontě, externí slu�
 
 Potom uprav jednu věc: přidej stav exportu, napiš lepší chybovou hlášku, omez payload ve frontě, doplň dead-letter pravidlo, vytvoř support kartu nebo označ poslední platnou verzi reportu časem. Cílem není dokonalá odolnost. Cílem je, aby se částečný problém nezměnil v datový nepořádek.
 
+## Příloha: Multi-tenant izolace bez víry v hodného uživatele
+
+Většina B2B SaaS produktů dřív nebo později řeší stejnou věc: jeden produkt používá více firem, týmů, workspace nebo klientských účtů. V kódu to často vypadá jako obyčejný sloupec `workspace_id`, `tenant_id` nebo `organization_id`. V reálném provozu je to ale hranice důvěry. Když se rozbije, zákazník neuvidí jen cizí tlačítko. Může vidět cizí faktury, dokumenty, reporty, uživatele, interní poznámky nebo exporty.
+
+Multi-tenant izolace je schopnost produktu držet zákaznická data odděleně napříč databází, API, frontami, vyhledáváním, cache, logy, exporty, podporou a administrací. Privacy-first verze k tomu přidává ještě jednu věc: tým nesmí spoléhat na to, že uživatel bude klikat jen tam, kde mu UI ukázalo cestu.
+
+> Codyho komentář: UI je cedule. Autorizace je zámek. Když produkt schová cizí tlačítko, ale API pořád vydá cizí záznam podle ID, není to bezpečnost. Je to dekorace s dobrým sebevědomím.
+
+OWASP API Security Top 10 upozorňuje na rozbitou autorizaci na úrovni objektů jako na typické a vážné API riziko. OWASP Authorization Cheat Sheet zase doporučuje princip nejmenších oprávnění, deny-by-default a kontrolu oprávnění při každém požadavku. Přeloženo do SaaS: každý přístup k objektu musí odpovědět na otázku „patří tento objekt do kontextu, ve kterém uživatel právě jedná?“
+
+### Tenant je bezpečnostní kontext, ne jen filtr
+
+První chyba je brát tenant jako běžný filtr v seznamu. Filtr může chybět, může být špatně poskládaný a může ho obejít jiná cesta. Tenant má být bezpečnostní kontext, který se táhne celým požadavkem.
+
+Prakticky si napiš:
+
+| Vrstva | Co musí znát | Typické riziko |
+| --- | --- | --- |
+| Session nebo token | aktuální uživatel, tenant, role | uživatel přepne workspace, ale starý token nebo cache drží špatný kontext |
+| API handler | jaký tenant požadavek obsluhuje | endpoint bere `id` objektu a nekontroluje vlastnictví |
+| Databázový dotaz | tenant podmínku u každého zákaznického objektu | zapomenutý `where tenant_id = ...` |
+| Fronta | minimální ID a tenant kontext | job zpracuje objekt bez kontroly oprávnění |
+| Vyhledávání | rozsah indexu a oprávnění výsledků | search vrátí název cizí položky v našeptávači |
+| Export | kdo smí exportovat a z jakého tenant rozsahu | ruční export smíchá více workspace |
+| Support/admin | proč člověk vidí konkrétní účet | interní admin otevře data bez záznamu a důvodu |
+
+Pokud musí vývojář při každém dotazu ručně vzpomenout na tenant podmínku, systém je křehký. Lepší je mít lokální helper, repository vrstvu, policy funkci nebo databázovou ochranu, která dělá správnou věc jako výchozí stav. Ruční výjimka má být nápadná a zdůvodněná.
+
+### Objektové oprávnění kontroluj při čtení i zápisu
+
+Častý vzorec chyby: seznam je správně filtrovaný, ale detail jde načíst přímým URL nebo API voláním. Nebo uživatel nemůže vidět tlačítko „smazat“, ale endpoint smazání přijme ID z cizího tenant prostoru. Testovat musíš obě roviny.
+
+U každého zákaznického objektu si napiš:
+
+- kdo ho smí číst,
+- kdo ho smí vytvořit,
+- kdo ho smí upravit,
+- kdo ho smí smazat,
+- kdo ho smí exportovat,
+- kdo ho smí vidět v agregaci,
+- co se stane po změně role, plánu nebo členství.
+
+Příklad policy věty:
+
+„Člen workspace může číst projekty jen v tomto workspace. Admin workspace může měnit nastavení workspace. Interní support může otevřít workspace jen přes support režim s důvodem, časovým omezením a auditní stopou.“
+
+Tohle není jen bezpečnostní text. Je to zadání pro testy, API, admin rozhraní i support postup.
+
+### Cache a vyhledávání jsou časté tiché díry
+
+Databázový dotaz může být správně, ale cache klíč nebo index už ne. Když cache klíč obsahuje jen `project:123`, ale projektové ID není globálně unikátní nebo se výsledek liší podle tenant kontextu, může se cizí obsah vrátit správnému endpointu ve špatném účtu. To je krásně nudná chyba. Přesně proto bolí.
+
+Praktická pravidla:
+
+- cache klíče pro zákaznická data obsahují tenant kontext,
+- cache se invaliduje při změně role, členství nebo oprávnění,
+- vyhledávací index ukládá tenant a access scope,
+- našeptávač neukazuje názvy objektů mimo oprávnění,
+- agregace používají minimální prahy, pokud by šlo poznat jednotlivce nebo malý účet,
+- preview a thumbnail soubory mají stejné oprávnění jako originál,
+- do logů neukládej celé cache hodnoty ani search výsledky.
+
+Vyhledávání a cache mají být rychlé, ne důvěřivé.
+
+### Fronty, webhooky a exporty musí nést správný rozsah
+
+Asynchronní zpracování často běží mimo původní request. Právě tam se ztrácí kontext: job dostane ID, vezme data z databáze, vytvoří soubor a pošle e-mail. Pokud job neví, jaký tenant obsluhuje a kdo požadavek založil, těžko ověří, že výsledek patří správnému místu.
+
+U každého jobu a webhooku si hlídej:
+
+| Otázka | Proč |
+| --- | --- |
+| Kdo akci spustil? | kvůli auditní stopě a oprávnění |
+| Pro jaký tenant běží? | kvůli izolaci dat |
+| Jaký objekt zpracovává? | kvůli přesnému dohledání |
+| Jaké minimum dat je ve frontě? | kvůli retenci a úniku payloadu |
+| Kdo dostane výstup? | kvůli exportům a e-mailům |
+| Jak dlouho výstup existuje? | kvůli právům a úklidu |
+
+Exporty jsou zvláštní riziko, protože koncentrují hodně dat do jednoho souboru. Export má mít rozsah, vlastníka, expiraci a bezpečný způsob stažení. Pokud se export spouští z adminu nebo supportu, záznam musí říkat proč. „Potřebovali jsme to rychle“ není důvod. Je to popis nálady.
+
+### Interní admin nesmí být druhý internet bez pravidel
+
+Interní admin rozhraní často vzniká jako pomoc pro support a provoz. Časem z něj vyroste místo, kde jde vidět skoro všechno a měnit skoro cokoliv. To je pohodlné až do prvního incidentu.
+
+Admin má mít stejné zásady jako produkt:
+
+- role podle práce, ne jeden univerzální superadmin,
+- hledání zákazníka podle bezpečných identifikátorů,
+- explicitní důvod otevření citlivého účtu,
+- časově omezený support režim,
+- auditní stopa čtení citlivých detailů i změn,
+- zákaz kopírování dat do chatu a poznámek,
+- oddělení produkčních dat od demo a testovacích účtů.
+
+Privacy-first admin rozhraní nepředpokládá, že interní člověk je problém. Předpokládá, že i dobrý člověk může omylem otevřít špatný účet, zkopírovat špatný screenshot nebo nechat export ležet v downloads. Systém má pomáhat neudělat hloupou chybu.
+
+### Testuj izolaci jako hlavní produktovou schopnost
+
+Tenant izolace potřebuje testy, které se tváří jako zlomyslný uživatel. Nestačí test, že vlastník účtu vidí svoje projekty. Potřebuješ test, že nevidí cizí projekty ani přímým ID, ani přes search, ani přes export, ani přes API, ani po změně role.
+
+Minimální sada scénářů:
+
+- dva workspace se stejnými typy dat,
+- uživatel je členem jen jednoho z nich,
+- uživatel zná ID objektu z druhého workspace,
+- endpoint detailu vrátí odmítnutí nebo nenalezeno,
+- update/delete endpoint odmítne cizí objekt,
+- search nevrátí cizí název ani počet,
+- export neobsahuje cizí řádky,
+- změna role se projeví i v cache a UI,
+- odebraný člen ztratí přístup i k dříve vygenerovaným odkazům, kde to dává smysl.
+
+Dobré testovací seed data záměrně používají podobné názvy mezi tenanty. Když má jeden workspace „Projekt Alfa“ a druhý „Projekt Alfa“, rychleji odhalíš, jestli systém opravdu pracuje s kontextem, nebo jen doufá.
+
+### Checklist: Multi-tenant izolace privacy-first
+
+- [ ] Tenant je modelovaný jako bezpečnostní kontext, ne jen UI filtr.
+- [ ] Každý zákaznický objekt má jasnou policy pro čtení, zápis, mazání, export a agregaci.
+- [ ] API kontroluje objektové oprávnění při každém detailu, update, delete a exportu.
+- [ ] Databázové dotazy mají výchozí tenant scope nebo jinou systémovou ochranu.
+- [ ] Cache klíče, search indexy a našeptávače zahrnují tenant a oprávnění.
+- [ ] Fronty, webhooky a joby nesou minimální kontext: kdo, tenant, objekt a účel.
+- [ ] Exporty mají rozsah, vlastníka, expiraci a auditní stopu.
+- [ ] Interní admin má role, důvod přístupu, časové omezení a auditní stopu.
+- [ ] Support postupy nepovolují kopírování zákaznických dat do chatu nebo poznámek.
+- [ ] Testy ověřují i negativní scénáře mezi dvěma tenanty.
+- [ ] Změna role, členství nebo plánu se projeví v API, UI, cache, exportech i sdílených odkazech.
+- [ ] Incident plán počítá s možností úniku mezi tenanty a umí rychle určit rozsah.
+
+### Mini úkol
+
+Vyber jeden objekt, který patří do workspace, organizace nebo zákaznického účtu. Vyplň kartu izolace:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jaký objekt kontrolujeme? |  |
+| Jaký tenant nebo workspace ho vlastní? |  |
+| Kdo ho smí číst? |  |
+| Kdo ho smí upravit nebo smazat? |  |
+| Kde se objekt objevuje mimo hlavní tabulku? | cache, search, export, fronta, logy |
+| Jaký endpoint by mohl obejít UI? |  |
+| Jaký negativní test dnes chybí? |  |
+| Co se stane po odebrání člena z workspace? |  |
+| Jaký bezpečný auditní záznam vzniká při admin přístupu? |  |
+| Jaká jedna oprava sníží riziko nejvíc? |  |
+
+Potom přidej jeden negativní test: uživatel z workspace A zná ID objektu z workspace B a zkusí ho přečíst, upravit, najít ve vyhledávání nebo dostat do exportu. Pokud test selže, neber to jako ostudu. Ber to jako výborně nalezený problém před tím, než ho najde zákazník. To je levnější, tišší a o dost méně trapné.
+
 ## Zdroje
 
 - ICANN: Information for Domain Name Registrants - práva a odpovědnosti držitelů domén včetně správy, obnovy a převodu doménové registrace: https://www.icann.org/registrants
@@ -23006,6 +23155,7 @@ Potom uprav jednu věc: přidej stav exportu, napiš lepší chybovou hlášku, 
 
 ## Pracovní log
 
+- 2026-07-16: Doplněna příloha o multi-tenant izolaci bez víry v hodného uživatele: tenant jako bezpečnostní kontext, objektová oprávnění, cache a search rizika, fronty/webhooky/exporty, interní admin, negativní testy mezi tenanty, checklist a mini úkol; navázáno na existující zdroje OWASP k API bezpečnosti, autorizaci a GDPR principy minimalizace.
 - 2026-07-16: Doplněna příloha o degradovaném režimu bez tichého datového chaosu: mapování produktových schopností, viditelné stavy pro uživatele, bezpečné chybové hlášky, hranice retry/front, fallback bez obcházení oprávnění, poslední platná verze, support karta, checklist a mini úkol.
 - 2026-07-16: Doplněna příloha o runboocích bez hrdinského improvizování: struktura postupu pro stresové provozní situace, hranice oprávnění, zákaz citlivých dat v návodech, testování runbooků, životní cyklus a checklist s mini úkolem.
 - 2026-07-16: Doplněna příloha o interní wiki a znalostní bázi bez nekonečného archivu: pracovní věta stránky, dělení návodů/rozhodnutí/reference/runbooků/slovníku, zdroj pravdy místo kopií, oprávnění podle citlivosti, syntetické příklady, vlastník a review stránky, pravidla archivace, onboarding cesta, checklist a mini úkol; ověřen a doplněn zdroj EDPB k průběžnému souladu.
