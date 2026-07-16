@@ -22418,6 +22418,183 @@ Vyber jeden týmový kanál nebo automatické upozornění a vyplň kartu:
 
 Potom udělej jednu konkrétní změnu: zkrať text automatického upozornění, nahraď detail odkazem do systému, omez publikum kanálu, archivuj starý projektový prostor, přidej pravidlo pro screenshoty nebo přesuň rozhodnutí z chatu do rozhodovacího logu. Chat má zrychlit práci, ne nenápadně vyvážet kontext do všech koutů firmy.
 
+## Příloha: Interní wiki a znalostní báze bez nekonečného archivu
+
+Interní wiki je užitečná přesně do chvíle, než se z ní stane hromada starých pravd, náhodných screenshotů, opsaných zákaznických příběhů, přístupových návodů bez vlastníka a dokumentů, které nikdo nechce smazat, protože „co kdyby“. Znalostní báze má týmu šetřit čas. Nemá být muzeum každého rozhodnutí, exportu a interního omylu od založení firmy.
+
+Privacy-first otázka nezní: „Kam tu informaci uložíme, aby se neztratila?“
+
+Lepší otázka zní: „Kdo ji bude používat, k jakému rozhodnutí, jak dlouho má platit a co se do ní nesmí dostat?“
+
+Dobrá wiki je navigace k práci. Špatná wiki je pomalý únik kontextu: lidé do ní kopírují víc dat, než je nutné, oprávnění časem bobtnají a starý obsah začne působit důvěryhodně jen proto, že má nadpis a datum z minulého roku. To je drahé pro produkt, bezpečnost i onboarding.
+
+### Každá stránka potřebuje pracovní větu
+
+Stránka ve wiki nemá vzniknout jen proto, že někdo „něco sepsal“. Má mít účel. Nejjednodušší filtr je pracovní věta:
+
+„Tato stránka pomáhá [komu] udělat [jakou práci] bez [jakého rizika nebo zdržení].“
+
+Příklady:
+
+- „Tato stránka pomáhá supportu vyřídit žádost o export dat bez posílání surových databázových výpisů.“
+- „Tato stránka pomáhá vývojáři připravit lokální prostředí bez přístupu k produkčním datům.“
+- „Tato stránka pomáhá sales týmu vysvětlit rozdíl mezi plány bez vymýšlení vlastních slibů.“
+- „Tato stránka pomáhá incident ownerovi vést první hodinu incidentu bez zbytečného sdílení citlivých detailů.“
+
+Pokud pracovní větu neumíš napsat, stránka je pravděpodobně poznámka, ne znalostní báze. Poznámky mohou existovat, ale nemají se tvářit jako zdroj pravdy. Codyho komentář: Nejhorší interní dokument je ten, který nikdo nepoužívá, ale všichni se bojí ho smazat. To není znalost. To je digitální talisman.
+
+### Odděl návody, rozhodnutí a referenci
+
+Wiki často bobtná, protože do jedné stránky spadne všechno: proč se něco rozhodlo, jak se to používá, jak to funguje technicky, kdo se ptal, screenshot z produkce a pět komentářů z chatu. Čtenář pak neví, co je aktuální návod a co historická stopa.
+
+Praktické dělení:
+
+| Typ stránky | Účel | Co do ní patří | Co do ní nepatří |
+| --- | --- | --- | --- |
+| Návod | provést konkrétní práci | kroky, vstupy, výstup, časté chyby | dlouhá historie rozhodnutí |
+| Rozhodnutí | vysvětlit volbu a kontext | problém, možnosti, rozhodnutí, datum, vlastník | aktuální provozní postupy |
+| Reference | popsat stabilní věc | API, datové pole, role, limit, stav | diskuse a volné poznámky |
+| Runbook | zvládnout opakovanou situaci | spouštěč, odpovědnost, kroky, eskalace | osobní údaje a celé logy |
+| Slovník | sjednotit význam pojmů | definice, příklady, odkazy | interní spory bez závěru |
+
+Toto dělení je důležité i pro soukromí. Rozhodnutí může potřebovat kontext, ale obvykle nepotřebuje plné zákaznické detaily. Runbook může potřebovat odkaz na logovací systém, ale nemá obsahovat opsané logy. Návod může říct, kde najít export, ale nemá do sebe vkládat reálný export jako příklad.
+
+### Zdroj pravdy musí být jen jeden
+
+Interní wiki se ráda tváří jako centrum firmy. To je lákavé, ale ne vždy správné. Některé informace mají žít jinde:
+
+- produktové úkoly v issue trackeru,
+- zákaznické konverzace v CRM nebo support systému,
+- incidentní průběh v incident logu,
+- technické konfigurace v repozitáři nebo správci konfigurace,
+- tajemství ve správci tajemství,
+- právní dokumenty v řízeném úložišti,
+- datová mapa v místě, kde má vlastníka a review.
+
+Wiki má často odkazovat, ne kopírovat. Kopie je pohodlná dnes a bolestivá za měsíc. Jakmile existují dvě verze stejné informace, jedna z nich lže. Někdy tiše, někdy draze.
+
+Pravidlo pro stránku:
+
+- Pokud je informace akční a často se mění, odkazuj na zdroj pravdy.
+- Pokud je informace vysvětlující a stabilní, může být ve wiki.
+- Pokud obsahuje osobní údaje, zákaznický detail nebo bezpečnostní detail, nejdřív se ptej, jestli do wiki vůbec patří.
+
+Příklad:
+
+Slabé: stránka „Velcí zákazníci“ s tabulkou kontaktů, interními poznámkami, cenami, screenshoty účtů a stavem fakturace.
+
+Lepší: stránka „Jak pracujeme s enterprise zákazníkem“ s procesem, rolemi, rozhodovacími body a odkazy do CRM pro lidi, kteří mají oprávnění. Wiki vysvětluje práci. CRM drží zákaznická data.
+
+### Oprávnění navrhuj podle citlivosti, ne podle organizační nostalgie
+
+V malém týmu je skoro všechno otevřené všem. Na začátku to dává smysl. Později se ale mění role, přicházejí externisté, vznikají klientské projekty, přibývají finance, HR, bezpečnostní poznámky a interní obchodní strategie. Wiki, která zůstane otevřená podle prvního týdne firmy, brzy neodpovídá realitě.
+
+Nedělej z wiki labyrint oprávnění, ale rozliš alespoň základní vrstvy:
+
+- veřejné nebo publikační materiály,
+- běžná interní dokumentace,
+- provozní runbooky s omezeným publikem,
+- zákaznický nebo projektový kontext,
+- bezpečnostní, právní, HR a finanční dokumenty,
+- archivní dokumenty určené jen k dohledání.
+
+Každá citlivější složka má mít vlastníka. Ne „firma“. Ne „všichni“. Konkrétní roli nebo člověka, který chápe, kdo má přístup a proč. Při odchodu člověka nebo změně role se wiki kontroluje stejně jako aplikace. Přístup k dokumentům je přístup k datům, jen v méně technickém oblečení.
+
+### Příklady nesmí prozrazovat reálné lidi
+
+Dokumentace potřebuje příklady. Bez nich je suchá a lidé ji obejdou. Jenže příklad není omluva pro kopírování produkčních dat. Do interní wiki nepatří reálný e-mail zákazníka, telefon, adresa, token, faktura, URL s resetovacím parametrem, celý supportní ticket ani screenshot, kde jsou vidět údaje, které čtenář nepotřebuje.
+
+Bezpečnější příklady:
+
+- syntetická firma `ACME s.r.o.`,
+- testovací e-mail `demo@example.com`,
+- anonymizovaný výřez bez identifikátorů,
+- schéma pole místo reálné hodnoty,
+- krátký přepsaný scénář místo citace zákazníka,
+- odkaz do oprávněného systému místo vložené kopie.
+
+U screenshotů používej stejné pravidlo jako u chatů: výřez, rozmazání, kontrola URL a žádné náhodné okolní panely. Pokud screenshot ukazuje chybu, často stačí opsat hlášku a přidat kroky k reprodukci. Obrázek není důkaz kvality dokumentace. Někdy je to jen dražší způsob, jak omylem uložit cizí data navždy.
+
+### Každá stránka má mít vlastníka, stav a datum další kontroly
+
+Největší problém wiki není tvorba. Je to stárnutí. Interní dokument může být perfektní v úterý a nebezpečně zavádějící za půl roku. Zvlášť u bezpečnosti, práv, onboardingu, pricingu, sales slibů, integrací a provozních runbooků.
+
+Minimální hlavička stránky:
+
+| Pole | Význam |
+| --- | --- |
+| Vlastník | kdo odpovídá za věcnou správnost |
+| Publikum | pro koho stránka je |
+| Stav | draft, platné, k revizi, archiv |
+| Poslední kontrola | kdy někdo ověřil obsah |
+| Další kontrola | kdy se má stránka znovu projít |
+| Zdroj pravdy | odkaz na systém, pokud wiki není hlavní zdroj |
+| Citlivost | běžné interní, omezené, důvěrné |
+
+Tato hlavička není byrokracie pro radost. Je to malá brzda proti tomu, aby se starý dokument tvářil jako aktuální rozhodnutí. GDPR principy minimalizace, účelového omezení a omezení uchování nejsou jen pro databázi. Stejná logika pomáhá i interním dokumentům: držet jen to, co má účel, a umět to zkontrolovat nebo odstranit. Viz zdroje Evropské komise a EDPB na konci e-booku.
+
+### Archiv není odpadkový koš s lepším jménem
+
+Archivace má mít pravidla. Jinak jen přesuneš problém do složky, kam se nikdo nedívá, ale vyhledávání ji pořád najde. Archiv je užitečný pro rozhodnutí, staré smluvní kontexty, významné incidenty nebo historické release poznámky. Není užitečný pro staré exporty, kopie tabulek, dočasné screenshoty a návrhy, které nikdy neplatily.
+
+Praktické pravidlo:
+
+- dokument s dlouhodobou hodnotou archivuj se stavem a důvodem,
+- dokument bez hodnoty smaž,
+- dokument s citlivými daty posuzuj přísněji než běžnou poznámku,
+- archivní dokumenty vyřaď z běžných výsledků hledání, pokud to nástroj umí,
+- jednou za kvartál projdi nejnavštěvovanější i nejstarší dokumenty.
+
+Archiv má odpovědět na otázku „proč jsme to tehdy udělali“. Nemá odpovídat na otázku „kam jsme schovali všechno, co se nikomu nechtělo vyhodit“.
+
+### Onboarding začíná kurátorovanou cestou, ne fulltextem
+
+Nový člověk nepotřebuje vidět celou historii firmy. Potřebuje pochopit svou roli, první bezpečný úkol, základní pojmy, pravidla práce s daty a místo, kde se ptát. Když onboarding stojí na větě „prohledej si wiki“, předáváš nováčkovi chaos v hezkém kabátě.
+
+Lepší je krátká onboarding cesta:
+
+1. Co firma dělá a pro koho.
+2. Jaké datové a privacy-first zásady platí vždy.
+3. Jaké nástroje role používá a proč.
+4. Kde jsou zdroje pravdy.
+5. Co se nikdy neposílá do chatu, wiki ani e-mailu.
+6. První úkol s testovacími nebo syntetickými daty.
+7. Kdo schvaluje přístup k citlivějším dokumentům.
+
+Tato cesta může být jedna stránka. Nemusí být monument. Hlavně musí být aktuální a použitelná. Každý onboarding je zároveň test wiki: pokud nový člověk musí pořád otevírat staré dokumenty a ptát se, co z nich platí, wiki nešetří čas. Jen přesouvá únavu na nováčka. To je docela hloupý welcome balíček.
+
+### Checklist: Interní wiki privacy-first
+
+- [ ] Každá důležitá stránka má pracovní větu a jasné publikum.
+- [ ] Návody, rozhodnutí, reference, runbooky a slovník nejsou smíchané do jedné stránky.
+- [ ] Wiki odkazuje na zdroj pravdy místo kopírování živých dat.
+- [ ] Stránky s citlivějším obsahem mají omezené oprávnění a vlastníka.
+- [ ] Příklady používají syntetická nebo anonymizovaná data.
+- [ ] Screenshoty jsou ořezané a neobsahují osobní údaje, tokeny ani citlivý kontext.
+- [ ] Každá důležitá stránka má stav, vlastníka, datum poslední kontroly a další review.
+- [ ] Staré dokumenty se archivují se smyslem, nebo mažou.
+- [ ] Archivní stránky nejsou běžně zaměňované za aktuální návody.
+- [ ] Onboarding má kurátorovanou cestu místo odkazu na celý fulltext.
+
+### Mini úkol
+
+Vyber jednu často používanou stránku ve wiki a vyplň kartu:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Komu stránka pomáhá? |  |
+| Jakou práci má usnadnit? |  |
+| Je to návod, rozhodnutí, reference, runbook nebo slovník? |  |
+| Kdo je vlastník? |  |
+| Kdy byla naposledy ověřena? |  |
+| Obsahuje osobní údaje, zákaznický detail nebo screenshoty? |  |
+| Co je zdroj pravdy mimo wiki? |  |
+| Kdo stránku opravdu potřebuje vidět? |  |
+| Kdy má být další kontrola? |  |
+| Jaká jedna změna sníží riziko nebo zlepší použitelnost? |  |
+
+Potom udělej jednu konkrétní změnu: doplň vlastníka, smaž starý screenshot, nahraď zákaznický detail syntetickým příkladem, přesuň rozhodnutí do rozhodovacího logu, přidej odkaz na zdroj pravdy nebo označ stránku jako archiv. Wiki má být pracovní mapa, ne nekonečná půda plná krabic bez popisků.
+
 ## Zdroje
 
 - ICANN: Information for Domain Name Registrants - práva a odpovědnosti držitelů domén včetně správy, obnovy a převodu doménové registrace: https://www.icann.org/registrants
@@ -22496,6 +22673,7 @@ Potom udělej jednu konkrétní změnu: zkrať text automatického upozornění,
 - European Commission: How much data can be collected? - praktické vysvětlení minimalizace osobních údajů a sběru jen toho, co je nezbytné pro konkrétní účel: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr/how-much-data-can-be-collected_en
 - European Commission: For how long can data be kept and is it necessary to update it? - praktické vysvětlení omezení doby uložení, mazání nebo review dat a vazby na účel zpracování: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr/how-long-can-data-be-kept-and-it-necessary-update-it_en
 - European Data Protection Board: FAQ for small business - praktické odpovědi k osobním údajům, pseudonymizaci, anonymizaci, právům jednotlivců a rolím správce/zpracovatele: https://www.edpb.europa.eu/sme/find-practical-info/faq_en
+- European Data Protection Board: Be compliant - praktický rozcestník pro malé a střední organizace k dokumentování zpracování, transparentnosti, právním základům a průběžné kontrole souladu: https://www.edpb.europa.eu/sme-data-protection-guide/be-compliant_en
 - European Commission: What data can we process and under which conditions? - praktické vysvětlení účelu, rozsahu a základních pravidel zpracování osobních údajů: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr/overview-principles/what-data-can-we-process-and-under-which-conditions_en
 - European Commission: What is a data controller or a data processor? - rozlišení rolí správce a zpracovatele osobních údajů v provozu služeb a dodavatelů: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/obligations/controllerprocessor/what-data-controller-or-data-processor_en
 - European Commission: What is a data breach and what do we have to do in case of a data breach? - praktické vysvětlení oznamování porušení zabezpečení osobních údajů: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/obligations/what-data-breach-and-what-do-we-have-do-case-data-breach_en
@@ -22567,6 +22745,7 @@ Potom udělej jednu konkrétní změnu: zkrať text automatického upozornění,
 
 ## Pracovní log
 
+- 2026-07-16: Doplněna příloha o interní wiki a znalostní bázi bez nekonečného archivu: pracovní věta stránky, dělení návodů/rozhodnutí/reference/runbooků/slovníku, zdroj pravdy místo kopií, oprávnění podle citlivosti, syntetické příklady, vlastník a review stránky, pravidla archivace, onboarding cesta, checklist a mini úkol; ověřen a doplněn zdroj EDPB k průběžnému souladu.
 - 2026-07-15: Doplněna příloha o týmových chatech a interních upozorněních bez úniku kontextu: rozlišení konverzací, rozhodnutí a záznamů, karta automatického upozornění, pravidla pro kanály, screenshoty, incidentní chat, retenci, checklist a mini úkol.
 - 2026-07-15: Doplněna příloha o interních reportech bez tabulkového úniku: report jako rozhodovací výstup, agregace jako výchozí stav, vlastník a expirace reportu, kontrola screenshotů a prezentací, technické brzdy exportů, checklist a mini úkol.
 - 2026-07-15: Doplněna příloha o plánovaných úlohách a frontách bez datového autopilota: pracovní věta jobu, rozlišení cronů, front a backfillů, retry s konečnou retencí, ruční brzdy, respektování produktových oprávnění, chudé logování, úklidová automatizace, checklist a mini úkol; navázáno na existující zdroje OWASP Logging Cheat Sheet, OpenTelemetry a GDPR principy.
