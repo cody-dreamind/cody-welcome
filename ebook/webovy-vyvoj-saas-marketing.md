@@ -23158,6 +23158,222 @@ Vyber jeden formulář, API endpoint nebo export a vyplň kartu limitu:
 
 Potom udělej jednu konkrétní opravu: přidej `Retry-After`, zkrať retenci rate-limit logů, nahraď IP limit limitem podle API tokenu, napiš retry pravidla do dokumentace, přidej dávkový režim pro exporty nebo odstraň z obranného logu pole, které tam nemá jasný účel. Dobrá brzda není ta, která zastaví všechno. Dobrá brzda zastaví špatný provoz a nechá normální práci plynout.
 
+## Příloha: SDK a ukázky kódu bez úniku tokenů
+
+SDK a ukázky kódu jsou často první místo, kde vývojář opravdu pochopí, jak se produkt používá. Dokumentace může mít krásné principy, ale až copy-paste příklad rozhodne, jestli někdo pošle správný payload, bezpečně uloží token a ošetří chybu bez toho, aby do logu vypsal půl zákaznického účtu.
+
+Špatná otázka zní: „Jak uděláme ukázku co nejkratší?“
+
+Lepší otázka zní: „Jak uděláme ukázku tak, aby nejkratší cesta byla zároveň bezpečná, privacy-first a provozně normální?“
+
+> Codyho komentář: Copy-paste je nejrozšířenější integrační protokol na světě. Jestli ukázka obsahuje špatný návyk, nemáš dokumentaci. Máš distribuovaný bug s hezkým formátováním.
+
+### Příklad nesmí učit špatný provoz
+
+Ukázka kódu má být malá, ale nesmí ignorovat věci, které v produkci rozhodují o bezpečnosti a datovém pořádku. Nemusí obsahovat kompletní framework, ale má ukázat správný směr:
+
+- token se bere z proměnné prostředí nebo secret storu,
+- payload obsahuje jen nutná pole,
+- chyby se ošetřují podle typu,
+- logy neobsahují tokeny ani celé osobní údaje,
+- retry pravidla respektují rate limity,
+- ukázková data nejsou skuteční zákazníci,
+- webhook nebo callback ověřuje podpis.
+
+Slabý příklad:
+
+```js
+const token = "sk_live_real_token";
+const customerEmail = "jana.novakova@example.com";
+
+await fetch("https://api.example.com/v1/export", {
+  method: "POST",
+  headers: { Authorization: `Bearer ${token}` },
+  body: JSON.stringify({ email: customerEmail, includeEverything: true })
+});
+```
+
+Lepší příklad:
+
+```js
+const token = process.env.EXAMPLE_API_TOKEN;
+
+const response = await fetch("https://api.example.com/v1/exports", {
+  method: "POST",
+  headers: {
+    Authorization: `Bearer ${token}`,
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify({
+    export_type: "invoices",
+    period: "2026-07",
+    format: "csv"
+  })
+});
+
+if (response.status === 429) {
+  const retryAfter = response.headers.get("Retry-After");
+  throw new Error(`Rate limit exceeded. Retry after ${retryAfter ?? "a short delay"} seconds.`);
+}
+
+if (!response.ok) {
+  throw new Error(`Export request failed with status ${response.status}`);
+}
+```
+
+Ten druhý příklad není dramaticky delší, ale učí několik dobrých návyků najednou: žádný hardcodovaný token, žádný reálný e-mail, omezený rozsah exportu, základní práce s rate limitem a chyba bez dumpu celého payloadu.
+
+### Placeholdery mají být očividně nefunkční
+
+Ukázkový token nemá vypadat jako skutečný token. Ukázkový e-mail nemá patřit reálnému člověku. Ukázková firma nemá připomínat zákazníka bez souhlasu.
+
+Používej jasné placeholdery:
+
+```text
+EXAMPLE_API_TOKEN=replace-with-your-test-token
+CUSTOMER_ID=cus_test_123
+WORKSPACE_ID=workspace_test_123
+```
+
+Vyhýbej se:
+
+- reálným doménám zákazníků,
+- skutečným osobním e-mailům,
+- tokenům z testovacího účtu, který pořád funguje,
+- interním ID z produkce,
+- screenshotům s URL parametry, cookies nebo identifikátory.
+
+Pokud dokumentace potřebuje ukázat e-mail, použij domény určené pro příklady, například `example.com`, nebo jasně smyšlené interní testovací hodnoty. Pokud ukazuješ fakturu, ticket nebo export, použij syntetická data. Vývojář nepotřebuje vidět reálného zákazníka, aby pochopil formát CSV.
+
+### SDK má chránit výchozí cestu
+
+Dobré SDK není jen tenká obálka kolem HTTP požadavků. Má vývojáři pomoct neudělat typické chyby.
+
+Praktické výchozí chování:
+
+| Oblast | Co má SDK dělat |
+| --- | --- |
+| Autentizace | brát token z konfigurace, nepodporovat token v URL |
+| Retry | respektovat `Retry-After`, používat rozumný backoff a limit pokusů |
+| Logování | nelogovat autorizační hlavičky, payloady s osobními daty ani tokeny |
+| Chyby | vracet bezpečné chybové typy a request ID |
+| Webhooky | mít helper pro ověření podpisu a časového razítka |
+| Exporty | upozorňovat na expiraci odkazu a rozsah dat |
+| Verze API | jasně nastavovat verzi nebo kompatibilní režim |
+
+SDK nemá schovávat důležité rozhodnutí. Pokud metoda `exportAllData()` vytvoří obří export bez potvrzení rozsahu, je pohodlná špatným způsobem. Lepší API je konkrétnější:
+
+```js
+await client.exports.create({
+  type: "invoices",
+  period: "2026-07",
+  format: "csv"
+});
+```
+
+Konkrétní metoda nutí vývojáře pojmenovat účel. To je přesně ten typ malé třecí plochy, který chrání data.
+
+### Dokumentuj zakázané vzory
+
+Dokumentace většinou ukazuje, co dělat. U integrací se vyplatí ukázat i to, co nedělat.
+
+Krátká sekce „Nedělejte“ může obsahovat:
+
+- neposílejte API token v query stringu,
+- neukládejte token do frontendu,
+- neposílejte celé zákaznické objekty, pokud endpoint potřebuje jen ID,
+- nelogujte celé webhook payloady,
+- nepoužívejte produkční data ve staging integraci,
+- neposílejte exportní odkazy do veřejných chatů,
+- neignorujte `429` a neposílejte požadavek okamžitě znovu.
+
+Tohle není mentorování vývojáře z výšky. Je to prevence chyb, které se v integracích opakují. Když víš, že lidé budou kopírovat příklady, ukaž jim i hrany silnice.
+
+### Changelog SDK musí říkat dopad
+
+SDK se mění stejně jako produkt. Pokud změníš retry chování, výchozí timeout, serializaci dat, verzi API nebo způsob ověřování webhooků, nestačí napsat „minor fixes“. Vývojář potřebuje vědět, jestli se musí chovat jinak.
+
+Dobrá release poznámka SDK:
+
+```text
+Změněno: Webhook helper teď odmítá události se starším časovým razítkem než 5 minut.
+Dopad: Pokud testujete webhooky ručně, generujte nový podpis pro každý pokus.
+Proč: Ochrana proti replay útokům.
+```
+
+Slabá release poznámka:
+
+```text
+Security improvements.
+```
+
+Bezpečnostní detail nemusí prozrazovat zranitelnost, ale má říct praktický dopad. Jinak integrátor zjistí změnu až ve chvíli, kdy mu přestanou procházet testy.
+
+### Ukázky pro webhooky musí být opatrné
+
+Webhooky jsou oblíbené místo pro zkratky. Dokumentace ukáže endpoint, který přijme JSON a hned něco provede. Jenže produkční webhook má ověřit podpis, čas, event ID a idempotenci.
+
+Minimum ve webhook ukázce:
+
+- číst raw body pro ověření podpisu,
+- ověřit podpis před parsováním jako důvěryhodné události,
+- zkontrolovat časové razítko,
+- uložit nebo ověřit event ID kvůli duplicitám,
+- vrátit rychlou odpověď a těžkou práci přesunout do fronty,
+- nelogovat celý payload.
+
+Pokud ukázka tyto věci vynechá kvůli stručnosti, napiš výrazné varování: „Tento zjednodušený příklad není vhodný pro produkci.“ Ještě lepší je mít krátký produkční příklad a až potom ultra stručnou verzi pro pochopení konceptu.
+
+### Testovací režim odděl od produkčního
+
+SDK i dokumentace mají jasně rozlišovat testovací a produkční režim:
+
+| Oblast | Test | Produkce |
+| --- | --- | --- |
+| Tokeny | omezené testovací tokeny | produkční tokeny v secret storu |
+| Endpoint | sandbox nebo testovací workspace | produkční API |
+| Data | syntetická nebo anonymizovaná | reálná data podle účelu |
+| Webhooky | testovací signing secret | produkční signing secret |
+| E-maily | sandbox nebo testovací doména | skutečné doručení |
+
+Nejhorší stav je „stejný příklad funguje všude a jen se vymění token“. To sice vypadá jednoduše, ale podporuje záměnu prostředí. Lepší je mít v dokumentaci explicitní blok:
+
+```text
+Tento příklad používejte jen se sandbox tokenem. Produkční token nikdy nevkládejte do lokálního skriptu, repozitáře ani frontendu.
+```
+
+### Checklist: SDK a ukázky kódu privacy-first
+
+- [ ] Ukázky neobsahují skutečné tokeny, reálné e-maily ani produkční ID.
+- [ ] Tokeny se v příkladech berou z proměnné prostředí nebo bezpečné konfigurace.
+- [ ] Payloady obsahují jen pole nutná pro daný účel.
+- [ ] Ukázky chyb nevyzrazují tokeny, payloady ani osobní údaje.
+- [ ] SDK respektuje `Retry-After`, timeouty a rozumný limit retry pokusů.
+- [ ] Dokumentace ukazuje, jak ověřit webhook podpis, timestamp a idempotenci.
+- [ ] Je jasně oddělený sandbox a produkce.
+- [ ] Dokumentace obsahuje krátkou sekci zakázaných vzorů.
+- [ ] Release notes SDK popisují praktický dopad změny.
+- [ ] Screenshoty a konzolové výstupy jsou redigované.
+- [ ] Příklady jsou testované, aby vývojář nekopíroval mrtvý kód.
+
+### Mini úkol
+
+Vyber jednu veřejnou nebo interní ukázku integrace a projdi ji podle této karty:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jaký úkol příklad řeší? |  |
+| Obsahuje token, e-mail, ID nebo payload, který vypadá reálně? |  |
+| Bere token z bezpečné konfigurace? |  |
+| Posílá jen nutná pole? |  |
+| Ošetřuje `429`, timeout a serverovou chybu? |  |
+| Neloguje citlivý obsah? |  |
+| Je jasné, jestli jde o sandbox nebo produkci? |  |
+| Ukazuje správný postup pro webhook nebo export? |  |
+| Jakou jednu změnu uděláme před publikací? |  |
+
+Potom udělej jednu konkrétní opravu: nahraď reálně vypadající hodnoty placeholdery, přidej práci s `Retry-After`, doplň webhook signature helper, zkrať payload, nebo přidej odstavec „Nedělejte“. SDK a příklady kódu jsou malé dveře do produktu. Když jsou bezpečné, vývojáři bezpečnost kopírují skoro omylem. Což je nejlepší druh omylu.
+
 ## Zdroje
 
 - ICANN: Information for Domain Name Registrants - práva a odpovědnosti držitelů domén včetně správy, obnovy a převodu doménové registrace: https://www.icann.org/registrants
@@ -23308,6 +23524,7 @@ Potom udělej jednu konkrétní opravu: přidej `Retry-After`, zkrať retenci ra
 
 ## Pracovní log
 
+- 2026-07-16: Doplněna příloha o SDK a ukázkách kódu bez úniku tokenů: bezpečné copy-paste příklady, placeholdery místo reálných dat, výchozí ochranné chování SDK, zakázané integrační vzory, opatrné webhook ukázky, oddělení sandboxu od produkce, checklist a mini úkol; navázáno na existující zdroje OWASP, API bezpečnosti a správu tajemství.
 - 2026-07-16: Doplněna příloha o rate limitech a ochraně proti zneužití bez fingerprintingu: limitování podle účelu, rozdíl mezi ochranným, produktovým a bezpečnostním limitem, srozumitelné `429` odpovědi, minimální obranné logy, férové zacházení s legitimními špičkami, opatrné používání CAPTCHA, checklist a mini úkol; navázáno na existující zdroje OWASP k API bezpečnosti a GDPR principy minimalizace.
 - 2026-07-16: Doplněna příloha o multi-tenant izolaci bez víry v hodného uživatele: tenant jako bezpečnostní kontext, objektová oprávnění, cache a search rizika, fronty/webhooky/exporty, interní admin, negativní testy mezi tenanty, checklist a mini úkol; navázáno na existující zdroje OWASP k API bezpečnosti, autorizaci a GDPR principy minimalizace.
 - 2026-07-16: Doplněna příloha o degradovaném režimu bez tichého datového chaosu: mapování produktových schopností, viditelné stavy pro uživatele, bezpečné chybové hlášky, hranice retry/front, fallback bez obcházení oprávnění, poslední platná verze, support karta, checklist a mini úkol.
