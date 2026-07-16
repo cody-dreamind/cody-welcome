@@ -22595,6 +22595,126 @@ Vyber jednu často používanou stránku ve wiki a vyplň kartu:
 
 Potom udělej jednu konkrétní změnu: doplň vlastníka, smaž starý screenshot, nahraď zákaznický detail syntetickým příkladem, přesuň rozhodnutí do rozhodovacího logu, přidej odkaz na zdroj pravdy nebo označ stránku jako archiv. Wiki má být pracovní mapa, ne nekonečná půda plná krabic bez popisků.
 
+## Příloha: Runbooky bez hrdinského improvizování
+
+Runbook je návod pro situaci, která se bude opakovat, bude stresující, nebo má jasný dopad na zákazníka, data či provoz. Není to obecná dokumentace. Je to pracovní postup pro chvíli, kdy někdo potřebuje udělat správnou věc rychle a bez lovení kontextu v chatu.
+
+Privacy-first runbook má ještě jednu důležitou vlastnost: neukládá citlivá data do návodu. Popisuje, kde bezpečně ověřit stav, kdo má oprávnění, jaké kroky provést a co nikdy nekopírovat do veřejných kanálů. Runbook není místo pro tokeny, celé logy, zákaznické exporty ani screenshoty s osobními údaji.
+
+> Codyho komentář: Dobrý runbook není literární žánr. Je to brzda proti tomu, aby se v pátek večer řešil incident metodou „zkusíme, co se stane“. Tuhle metodu software zná a nemá ji rád.
+
+### Runbook piš pro unaveného člověka
+
+Runbook se často používá ve chvíli, kdy je někdo pod tlakem: výpadek, rozbitý deploy, neodesílající se faktury, plná fronta, incident se soubory, expirovaný certifikát nebo zákazník čekající na export. Proto má být krátký, konkrétní a lineární.
+
+Základní struktura:
+
+| Část | Co má obsahovat |
+| --- | --- |
+| Kdy použít | jasný spouštěč, například alert, support ticket nebo release krok |
+| Kdo odpovídá | role ownera a náhrada |
+| Předpoklady | potřebná oprávnění, prostředí, odkazy na zdroje pravdy |
+| Kroky | očíslovaný postup bez skrytých předpokladů |
+| Ověření | jak poznáme, že postup zabral |
+| Eskalace | kdy a komu to předat |
+| Co nikdy nedělat | destruktivní nebo datově rizikové zkratky |
+| Úklid | co vypnout, smazat, zapsat nebo zkontrolovat po dokončení |
+
+Nejčastější chyba je, že runbook popisuje ideální stav místo reálného postupu. Věta „zkontrolujte logy“ nestačí. Lepší je „otevřete logovací nástroj, filtrujte podle `request_id`, nekopírujte celé payloady do chatu a hledejte chyby typu `payment_webhook_failed`“.
+
+### Runbook má mít hranice oprávnění
+
+Každý provozní postup pracuje s nějakým přístupem. Někdy stačí read-only monitoring. Jindy je potřeba produkční admin, deploy token, přístup k zálohám nebo právo pozastavit integraci. To musí být v runbooku jasné.
+
+U každého postupu si napiš:
+
+- kdo ho smí spustit,
+- jaké oprávnění k tomu potřebuje,
+- jestli je potřeba druhé schválení,
+- jak se změna zapisuje do auditní stopy,
+- co se dělá, když oprávnění nemáš.
+
+Příklad: Obnova zálohy do izolovaného prostředí může být běžný provozní test. Obnova přes produkci je úplně jiná akce a má potřebovat incident ownera, jasné okno, zálohu současného stavu a potvrzenou komunikaci zákazníkům, pokud hrozí dopad.
+
+### Citlivá data do runbooku nepatří
+
+Runbook má ukazovat na správné místo, ne přepisovat data do sebe. Typické zakázané věci:
+
+- API klíče, hesla, connection stringy a privátní tokeny,
+- celé zákaznické exporty nebo ukázkové CSV z produkce,
+- osobní údaje v příkladech,
+- screenshoty s e-maily, fakturami, interními poznámkami nebo URL s tokenem,
+- celé request/response body z logů,
+- interní bezpečnostní detaily, které nepotřebuje každý čtenář.
+
+Bezpečnější vzor je:
+
+```text
+Tajemství najdete ve správci secrets pod názvem `billing-webhook-secret`.
+Hodnotu nekopírujte do chatu ani do ticketu. Pokud je potřeba rotace, použijte runbook „Rotace webhook secretu“.
+```
+
+Tím runbook pomáhá, ale nerozšiřuje únikový povrch.
+
+### Testuj runbook dřív než incident
+
+Runbook, který nikdo nezkusil, je hypotéza. U kritických postupů udělej suchý běh:
+
+- nový člověk podle něj spustí lokální prostředí,
+- druhý administrátor podle něj najde poslední zálohu,
+- support podle něj vyřídí modelovou žádost o export,
+- vývojář podle něj ověří neúspěšný webhook ve stagingu,
+- incident owner podle něj založí incident kartu a připraví první update.
+
+Při testu si zapiš, kde člověk zaváhal. To je nejcennější část. Pokud runbook vyžaduje znalost, která v něm není napsaná, není chyba v člověku. Chybí krok.
+
+### Runbooky pravidelně zabíjej nebo zjednodušuj
+
+Starý runbook může být horší než žádný. Vede člověka sebevědomě špatným směrem. Proto musí mít vlastník a datum kontroly.
+
+Stavy runbooku:
+
+| Stav | Význam |
+| --- | --- |
+| Platný | postup odpovídá aktuálním systémům |
+| K revizi | něco se změnilo a vlastník musí ověřit kroky |
+| Nahrazený | existuje nový postup, starý zůstává jen kvůli historii |
+| Archiv | postup už se nepoužívá a není součást běžné práce |
+
+Po každém incidentu nebo větším releasu zkontroluj, jestli se runbook nezměnil. Pokud během incidentu někdo musel improvizovat, doplň postup. Pokud se krok ukázal zbytečný, smaž ho. Runbook má být ostrý nástroj, ne kronika všech možností.
+
+### Checklist: Runbook, který pomáhá
+
+- [ ] Má jasný spouštěč a účel.
+- [ ] Má vlastníka, náhradu a datum další kontroly.
+- [ ] Kroky jsou očíslované a použitelné bez znalosti autora.
+- [ ] Rozlišuje read-only kontrolu, změnu nastavení a destruktivní akci.
+- [ ] Neobsahuje tajemství, osobní údaje, celé logy ani produkční exporty.
+- [ ] Odkazuje na zdroj pravdy místo kopírování živých dat.
+- [ ] Má jasné ověření výsledku.
+- [ ] Obsahuje eskalaci a stop podmínky.
+- [ ] Po dokončení popisuje úklid: vypnout dočasné režimy, smazat exporty, zapsat výsledek.
+- [ ] Byl aspoň jednou otestovaný člověkem, který ho nepsal.
+
+### Mini úkol
+
+Vyber jeden opakovaný provozní postup a vyplň runbook kartu:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jaký problém runbook řeší? |  |
+| Jak poznáme, že ho máme použít? |  |
+| Kdo je vlastník a náhrada? |  |
+| Jaké minimální oprávnění je potřeba? |  |
+| Které kroky mohou ovlivnit zákaznická data? |  |
+| Co se do chatu, ticketu ani wiki nesmí kopírovat? |  |
+| Jak ověříme, že postup zabral? |  |
+| Kdy eskalujeme? |  |
+| Co uklidíme po dokončení? |  |
+| Kdy runbook znovu otestujeme? |  |
+
+Potom napiš první verzi runbooku pro jednu věc: restart fronty, ověření zálohy, rotaci webhook secretu, neodeslané e-maily, selhaný deploy nebo žádost o export dat. Nehledej dokonalost. Hledej postup, který příštímu člověku ušetří stres a nezaloží nový datový problém.
+
 ## Zdroje
 
 - ICANN: Information for Domain Name Registrants - práva a odpovědnosti držitelů domén včetně správy, obnovy a převodu doménové registrace: https://www.icann.org/registrants
@@ -22745,6 +22865,7 @@ Potom udělej jednu konkrétní změnu: doplň vlastníka, smaž starý screensh
 
 ## Pracovní log
 
+- 2026-07-16: Doplněna příloha o runboocích bez hrdinského improvizování: struktura postupu pro stresové provozní situace, hranice oprávnění, zákaz citlivých dat v návodech, testování runbooků, životní cyklus a checklist s mini úkolem.
 - 2026-07-16: Doplněna příloha o interní wiki a znalostní bázi bez nekonečného archivu: pracovní věta stránky, dělení návodů/rozhodnutí/reference/runbooků/slovníku, zdroj pravdy místo kopií, oprávnění podle citlivosti, syntetické příklady, vlastník a review stránky, pravidla archivace, onboarding cesta, checklist a mini úkol; ověřen a doplněn zdroj EDPB k průběžnému souladu.
 - 2026-07-15: Doplněna příloha o týmových chatech a interních upozorněních bez úniku kontextu: rozlišení konverzací, rozhodnutí a záznamů, karta automatického upozornění, pravidla pro kanály, screenshoty, incidentní chat, retenci, checklist a mini úkol.
 - 2026-07-15: Doplněna příloha o interních reportech bez tabulkového úniku: report jako rozhodovací výstup, agregace jako výchozí stav, vlastník a expirace reportu, kontrola screenshotů a prezentací, technické brzdy exportů, checklist a mini úkol.
