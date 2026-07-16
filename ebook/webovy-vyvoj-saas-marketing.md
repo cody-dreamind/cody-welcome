@@ -23005,6 +23005,157 @@ Vyber jeden objekt, který patří do workspace, organizace nebo zákaznického 
 
 Potom přidej jeden negativní test: uživatel z workspace A zná ID objektu z workspace B a zkusí ho přečíst, upravit, najít ve vyhledávání nebo dostat do exportu. Pokud test selže, neber to jako ostudu. Ber to jako výborně nalezený problém před tím, než ho najde zákazník. To je levnější, tišší a o dost méně trapné.
 
+## Příloha: Rate limity a ochrana proti zneužití bez fingerprintingu
+
+Rate limit není trest pro uživatele. Je to ochrana služby, zákazníků a týmu před chybou, útokem, rozbitou integrací nebo příliš nadšeným skriptem. Když API, formulář, export nebo vyhledávání nemá žádnou brzdu, jeden klient, bot nebo bug dokáže sežrat kapacitu všem ostatním.
+
+Špatná otázka zní: „Jak poznáme každého člověka za každou cenu?“
+
+Lepší otázka zní: „Jak omezíme škodlivé nebo drahé chování s minimem identifikátorů a bez plošného sledování?“
+
+Privacy-first rate limiting neznamená být naivní. Znamená to, že nezačneš fingerprintingem prohlížeče, skrytým profilem zařízení a věčnou historií IP adres, pokud stejný problém vyřeší limit podle účtu, workspace, API tokenu, formuláře nebo agregovaného provozního signálu. OWASP API Security Top 10 upozorňuje na neomezenou spotřebu zdrojů jako jedno z typických API rizik. Přeloženo do produktu: dostupnost je také bezpečnostní a privacy vlastnost.
+
+> Codyho komentář: Neomezené API je jako samoobslužný bufet bez talířů a bez zavíračky. Chvíli to vypadá štědře. Pak přijde jeden hladový skript a všichni ostatní stojí u prázdného stolu.
+
+### Limituj podle práce, ne podle podezření
+
+Nejdřív si napiš, co přesně chráníš. Jiný limit potřebuje přihlášení, jiný export, jiný veřejné vyhledávání a jiný webhook endpoint.
+
+| Místo | Co chráníš | Rozumný klíč limitu |
+| --- | --- | --- |
+| Přihlášení | účty a autentizaci | účet, IP v krátkém okně, zařízení jen pokud má jasný důvod |
+| Kontaktní formulář | inbox, CRM, reputaci domény | formulář, e-mailová doména, IP v krátké retenci |
+| API | dostupnost a náklady | API token, workspace, plán, endpoint |
+| Export dat | citlivé hromadné výstupy | uživatel, workspace, role, typ exportu |
+| Vyhledávání | databázi a index | workspace, účet, anonymní relace s krátkou retencí |
+| Webhook příjem | fronty a integrace | dodavatel, podpisový klíč, event source |
+
+Začni co nejblíž k účelu. Pokud má zákazník API token, limituj token nebo workspace. Pokud uživatel spouští export, limituj uživatele a workspace. IP adresa může být pomocný signál pro veřejné formuláře a anonymní provoz, ale nemá být výchozí odpověď na všechno. Sdílené sítě, VPN a mobilní operátoři umí z IP udělat dost hrubý nástroj.
+
+### Rozliš ochranný limit, obchodní limit a bezpečnostní blokaci
+
+Tyto tři věci se často pletou:
+
+| Typ | Účel | Příklad |
+| --- | --- | --- |
+| Ochranný limit | chrání stabilitu služby | maximálně 60 požadavků za minutu na API token |
+| Produktový limit | odpovídá plánu nebo fair use | 10 exportů za den v základním plánu |
+| Bezpečnostní blokace | zastaví rizikový vzor | dočasné omezení po mnoha neúspěšných přihlášeních |
+
+Ochranný limit má být předvídatelný a technicky zdokumentovaný. Produktový limit má být viditelný před nákupem a v produktu. Bezpečnostní blokace má být opatrná, aby neuzamkla legitimního uživatele bez cesty zpět.
+
+Když všechny tři vrstvy schováš pod jednu hlášku „překročen limit“, zákazník neví, jestli má počkat, upgradovat, opravit integraci, nebo psát supportu. To je špatné UX i špatná provozní diagnostika.
+
+### Chybová odpověď má říct další krok
+
+Rate limit bez jasné odpovědi je jen rozbitý požadavek s lepším názvem. U API používej odpověď, která vývojáři pomůže:
+
+```text
+HTTP 429 Too Many Requests
+Retry-After: 60
+
+{
+  "error": "rate_limit_exceeded",
+  "message": "Limit pro tento API token je 60 požadavků za minutu.",
+  "retry_after_seconds": 60,
+  "request_id": "req_8f3a"
+}
+```
+
+U produktu piš lidsky:
+
+„Exporty pro tento workspace jsou dočasně omezené, protože dnes proběhl vysoký počet exportů. Další export půjde spustit za 20 minut. Pokud jde o migraci, kontaktujte support a napište request ID.“
+
+Neprozrazuj interní detaily obrany. Uživatel nepotřebuje znát přesný algoritmus blokace, interní prahy ani bezpečnostní signály. Potřebuje vědět, co se stalo, kdy to může zkusit znovu a kdo může pomoci.
+
+### Loguj minimum potřebné pro obranu
+
+Ochrana proti zneužití svádí k tomu ukládat všechno: IP, user agent, fingerprint, historii kliků, payload, e-mail, geolokaci a skóre rizika. To je pohodlné pro vyšetřování, ale drahé pro soukromí.
+
+Začni menším záznamem:
+
+| Pole | Proč |
+| --- | --- |
+| čas | časové okno limitu |
+| typ akce | login, export, API request, formulář |
+| bezpečný subjekt | token ID, workspace ID, interní user ID |
+| výsledek | povoleno, omezeno, blokováno |
+| request ID | dohledání v logu bez osobních detailů |
+| hrubý důvod | překročen limit, mnoho chyb, podezřelý objem |
+
+IP adresu používej jen tam, kde má jasný bezpečnostní účel, a drž ji krátce nebo v omezené podobě, pokud to stačí. Volný text, payloady formulářů, tokeny, cookies a celé hlavičky do rate-limit logu nepatří. Obranný log se má dát použít při incidentu, ne se stát novou databází chování.
+
+### Limity musí být spravedlivé k dobrým zákazníkům
+
+Rate limit, který chrání infrastrukturu, ale rozbíjí legitimní práci, je špatně navržený. Zvlášť u B2B SaaS mysli na špičky:
+
+- migrace dat,
+- měsíční fakturační export,
+- import katalogu,
+- hromadné pozvánky,
+- synchronizace integrace po výpadku,
+- zákaznický skript, který se po chybě pokouší vše dohnat.
+
+Pro tyto situace použij produktové stavy místo tiché blokace:
+
+- fronta s odhadem dokončení,
+- dávkový import,
+- explicitní migrační režim,
+- vyšší limit po schválení vlastníkem workspace,
+- dokumentovaná retry pravidla,
+- upozornění před úplným zastavením integrace.
+
+Dobrá integrace má vědět, jak se chovat při `429`: počkat, zpomalit, použít exponential backoff a neposílat stejný požadavek donekonečna. Pokud API dokumentace retry pravidla neříká, nebuď překvapený, že klienti hádají. A hádání ve frontě požadavků bývá hlučné.
+
+### CAPTCHA není první ani jediná obrana
+
+CAPTCHA může být užitečná, ale není zadarmo. Přidává externí službu, tření, přístupnostní problém a často i další datový tok. U privacy-first webu ji ber jako jednu z posledních vrstev, ne jako reflex.
+
+Před CAPTCHA zvaž:
+
+- honeypot pole,
+- časové pravidlo pro odeslání formuláře,
+- limit podle formuláře a krátkého okna,
+- validaci odkazů a příloh,
+- e-mailové ověření u citlivější akce,
+- ruční karanténu rizikových vstupů,
+- dočasné zpřísnění jen při útoku.
+
+Pokud CAPTCHA nasadíš, napiš si vendor kartu: jaká data dostává, kde se zpracovávají, jaký má účel, jaký je fallback a co se stane, když ji člověk nemůže použít. Obrana proti botům nemá zablokovat lidi, kteří používají asistivní technologie nebo přísnější prohlížeč.
+
+### Checklist: Rate limity privacy-first
+
+- [ ] Víme, jakou schopnost nebo zdroj každý limit chrání.
+- [ ] Limitujeme co nejblíž účelu: token, účet, workspace, endpoint nebo formulář.
+- [ ] IP adresa není výchozí identifikátor tam, kde existuje přesnější a méně invazivní kontext.
+- [ ] Rozlišujeme ochranný limit, produktový limit a bezpečnostní blokaci.
+- [ ] API vrací `429`, `Retry-After`, bezpečný chybový kód a request ID.
+- [ ] UI říká, co se stalo a kdy nebo jak pokračovat.
+- [ ] Rate-limit log neobsahuje tokeny, cookies, celé payloady ani volný text.
+- [ ] Limity mají dokumentovaný vlastník, účel, retenci a revizi.
+- [ ] Integrace mají popsaná retry pravidla a backoff.
+- [ ] Hromadné legitimní operace mají dávkový nebo migrační režim.
+- [ ] CAPTCHA nebo externí anti-abuse služba má vendor kartu a fallback.
+- [ ] Po incidentu zneužití upravujeme pravidla podle důkazu, ne podle paniky.
+
+### Mini úkol
+
+Vyber jeden formulář, API endpoint nebo export a vyplň kartu limitu:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jaký zdroj nebo schopnost chráníme? |  |
+| Jaký je legitimní špičkový provoz? |  |
+| Podle čeho limitujeme dnes? |  |
+| Jaký méně invazivní klíč limitu by šel použít? |  |
+| Co dostane člověk nebo integrace při překročení limitu? |  |
+| Jak dlouho držíme obranné logy? |  |
+| Obsahují logy osobní údaje, payloady nebo tokeny? |  |
+| Jaký je postup pro oprávněné navýšení limitu? |  |
+| Jaká jedna změna sníží riziko bez zbytečného sledování? |  |
+
+Potom udělej jednu konkrétní opravu: přidej `Retry-After`, zkrať retenci rate-limit logů, nahraď IP limit limitem podle API tokenu, napiš retry pravidla do dokumentace, přidej dávkový režim pro exporty nebo odstraň z obranného logu pole, které tam nemá jasný účel. Dobrá brzda není ta, která zastaví všechno. Dobrá brzda zastaví špatný provoz a nechá normální práci plynout.
+
 ## Zdroje
 
 - ICANN: Information for Domain Name Registrants - práva a odpovědnosti držitelů domén včetně správy, obnovy a převodu doménové registrace: https://www.icann.org/registrants
@@ -23155,6 +23306,7 @@ Potom přidej jeden negativní test: uživatel z workspace A zná ID objektu z w
 
 ## Pracovní log
 
+- 2026-07-16: Doplněna příloha o rate limitech a ochraně proti zneužití bez fingerprintingu: limitování podle účelu, rozdíl mezi ochranným, produktovým a bezpečnostním limitem, srozumitelné `429` odpovědi, minimální obranné logy, férové zacházení s legitimními špičkami, opatrné používání CAPTCHA, checklist a mini úkol; navázáno na existující zdroje OWASP k API bezpečnosti a GDPR principy minimalizace.
 - 2026-07-16: Doplněna příloha o multi-tenant izolaci bez víry v hodného uživatele: tenant jako bezpečnostní kontext, objektová oprávnění, cache a search rizika, fronty/webhooky/exporty, interní admin, negativní testy mezi tenanty, checklist a mini úkol; navázáno na existující zdroje OWASP k API bezpečnosti, autorizaci a GDPR principy minimalizace.
 - 2026-07-16: Doplněna příloha o degradovaném režimu bez tichého datového chaosu: mapování produktových schopností, viditelné stavy pro uživatele, bezpečné chybové hlášky, hranice retry/front, fallback bez obcházení oprávnění, poslední platná verze, support karta, checklist a mini úkol.
 - 2026-07-16: Doplněna příloha o runboocích bez hrdinského improvizování: struktura postupu pro stresové provozní situace, hranice oprávnění, zákaz citlivých dat v návodech, testování runbooků, životní cyklus a checklist s mini úkolem.
