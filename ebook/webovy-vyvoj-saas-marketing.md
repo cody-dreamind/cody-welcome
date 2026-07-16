@@ -25401,6 +25401,212 @@ Vyber jednu rezervační cestu: demo, konzultaci, technickou kontrolu nebo suppo
 
 Potom udělej jednu konkrétní opravu: zkrať formulář, odděl newsletterový souhlas, nahraď embed obyčejným odkazem, přidej větu o neposílání citlivých dat, napiš lepší potvrzení schůzky nebo smaž staré volné poznámky bez účelu. Rezervace má otevřít dobrý rozhovor, ne vyrobit první datový dluh.
 
+## Příloha: Feature request portál bez veřejného hlasovacího cirkusu
+
+Feature request portál může být skvělý nástroj. Zákazníci vidí, že tým naslouchá, support má kam odkazovat opakované nápady a produkt získá přehled o tom, co lidi skutečně brzdí. Může se z něj ale stát i veřejná aukce hlasů, kde vyhrává nejhlasitější skupina, interní roadmapa se mění na slibovací automat a v komentářích se potichu hromadí zákaznická data.
+
+Špatná otázka zní: „Jak nasbíráme co nejvíc hlasů pro funkce?“
+
+Lepší otázka zní: „Jak z opakovaných požadavků poznáme skutečné problémy a rozhodneme, co udělat, aniž bychom zákazníky nutili veřejně sdílet citlivý kontext?“
+
+Privacy-first feature request systém není tichý. Jen nepředstírá, že počet hlasů je produktová strategie.
+
+### Začni problémem, ne názvem funkce
+
+Zákazník často popíše řešení, ne problém. Napíše „potřebujeme export do XLSX“, ale skutečný problém může být „finance každý pátek ručně přepisují data do účetního systému“. Pokud tým slepě přidá XLSX, možná vyřeší část bolesti. Možná také jen přidá další export, který se bude posílat e-mailem a žít mimo kontrolu.
+
+Každý požadavek proto přepiš do produktové karty:
+
+| Pole | Otázka |
+| --- | --- |
+| Původní požadavek | Co zákazník napsal nebo řekl? |
+| Skutečný problém | Jakou práci se snaží dokončit? |
+| Segment | U koho se problém opakuje? |
+| Důkaz | Kolikrát se objevil a v jakém kontextu? |
+| Data dopad | Přidává export, import, oprávnění, integraci nebo citlivé pole? |
+| Nejmenší ověření | Jak ověřit hodnotu bez velkého vývoje? |
+| Rozhodnutí | Udělat, odložit, sloučit, odmítnout, zjistit víc |
+
+Tahle karta chrání tým před tím, aby z feature request portálu vznikl katalog přání. Produkt nevzniká sčítáním nápadů. Vzniká řešením opakovaných problémů pro správný segment.
+
+### Hlasování je signál, ne závazek
+
+Veřejné hlasování vypadá férově, ale snadno klame. Hlasitý segment může přehlasovat strategicky důležitější problém. Zákazníci mohou hlasovat pro funkci, která by ve skutečnosti zvýšila složitost produktu. A tým může skončit jako provozovatel ankety, ne vlastník produktu.
+
+Pokud hlasování používáš, napiš pravidla viditelně:
+
+- hlas pomáhá určit zájem, ale není slib implementace,
+- tým rozhoduje podle segmentu, dopadu, strategie, provozního rizika a datového dopadu,
+- podobné požadavky se slučují do problémů,
+- položky mohou být odmítnuté s vysvětlením,
+- veřejná roadmapa ukazuje směr, ne pevný kontrakt pro každý nápad.
+
+Dobrá formulace:
+
+```text
+Hlasování nám pomáhá poznat, kde se problém opakuje. Neznamená automatický závazek funkci postavit. Před rozhodnutím hodnotíme dopad na zákazníky, produktovou strategii, provoz, bezpečnost a data.
+```
+
+Codyho komentář: Pokud je roadmapa řízená jen počtem hlasů, produktový tým se právě proměnil ve výbor pro populární tlačítka. To zní demokraticky, ale uživatelé obvykle nevidí náklady, oprávnění, migrace, support a údržbu. Někdo to vidět musí. Gratuluji, jsi to ty.
+
+### Veřejný portál nemá sbírat citlivý kontext
+
+Feature request často láká lidi k tomu, aby popsali svůj konkrétní provoz: jména zákazníků, interní procesy, obraty, smlouvy, screenshoty, exporty a chyby. Veřejný portál na to není dobré místo.
+
+Do formuláře dej jasný mikrotext:
+
+```text
+Neposílejte prosím osobní údaje, zákaznické exporty, smlouvy, tokeny ani interní screenshoty. Popište problém obecně. Pokud budeme potřebovat detail, ozveme se bezpečnějším kanálem.
+```
+
+Praktické nastavení:
+
+- veřejný název požadavku piš obecně,
+- detailní zákaznický kontext drž interně,
+- přílohy ve veřejném portálu raději vypni nebo silně omez,
+- komentáře moderuj před zveřejněním, pokud hrozí únik citlivých dat,
+- u interních odkazů nepřenášej do portálu CRM poznámky ani celé support tickety,
+- zákaznická jména používej jen tam, kde k tomu existuje jasný důvod a souhlas.
+
+Veřejný portál má ukázat problém a stav. Nemá být náhradní support, CRM ani otevřený archiv zákaznických bolestí.
+
+### Stav požadavku piš lidsky
+
+Stavy jako `planned`, `in progress` a `done` jsou užitečné, ale často málo říkají. Zákazník chce vědět, jestli má čekat, hledat workaround, nebo přijmout, že směr produktu je jiný.
+
+Použitelné stavy:
+
+| Stav | Význam | Co napsat |
+| --- | --- | --- |
+| Sbíráme kontext | problém známe, ale nerozumíme dopadu | jaký kontext tým hledá |
+| Zvažujeme | požadavek souvisí se strategií, ale není rozhodnutý | co bude rozhodovat |
+| Naplánováno | tým se rozhodl řešit problém | orientační směr bez přehnaného slibu |
+| Ve vývoji | práce probíhá | co se staví a co není součástí |
+| Vydáno | změna je venku | kde ji najít a co udělat |
+| Odloženo | není priorita teď | proč a kdy se k tomu vrátit |
+| Neplánujeme | tým požadavek vědomě odmítl | důvod a případná alternativa |
+
+Stav „neplánujeme“ je zdravý. Není to selhání komunikace. Je to ochrana produktu před nekonečným očekáváním. Když požadavek odmítneš věcně, zákazník má jasno. Když ho necháš tři roky ve stavu „zvažujeme“, jen vyrábíš pasivní zklamání.
+
+### Sloučení požadavků dělej podle problému
+
+Tři zákazníci mohou napsat tři různá řešení:
+
+- „Chci export do XLSX.“
+- „Potřebuji API endpoint pro faktury.“
+- „Hodilo by se propojení s účetním systémem.“
+
+Možná jsou to tři různé věci. Možná je to jeden problém: finance potřebují předat fakturační data bez ručního přepisování. Pokud požadavky sloučíš podle problému, tým může najít lepší řešení než součet všech návrhů.
+
+Sloučená karta:
+
+| Původní návrhy | Společný problém | Možná řešení |
+| --- | --- | --- |
+| XLSX, API, integrace | Finance ručně přepisují faktury do účetnictví | export, API, webhook, integrace, lepší report |
+
+Tím chráníš roadmapu před duplicitami a zároveň zákazníkům ukážeš, že jsi jejich návrh nezahodil. Jen jsi ho přeložil z „chci tlačítko“ na „potřebuju dokončit práci“.
+
+### Interní priorita nesmí být veřejný slib
+
+Je v pořádku mít interní prioritu, skóre nebo odhad. Není vždy rozumné ukazovat je veřejně. Jakmile napíšeš „vysoká priorita“, zákazník si často přečte „brzy“. Jakmile napíšeš kvartál, zákazník si přečte datum. Jakmile datum mineš, důvěra klesne, i kdyby důvod byl dobrý.
+
+Veřejně raději komunikuj:
+
+- problém, který tým řeší,
+- proč je důležitý,
+- co je součástí a co ne,
+- jaký je další krok,
+- kdy přijde další update, pokud je to potřeba.
+
+Interně si klidně drž:
+
+- dopad na segment,
+- počet souvisejících zákazníků,
+- očekávanou hodnotu,
+- technickou náročnost,
+- privacy a bezpečnostní riziko,
+- provozní náklady,
+- vazbu na strategii.
+
+Rozdíl mezi interní a veřejnou verzí není manipulace. Je to přesnost. Zákazník potřebuje vědět, co se děje a co může čekat. Nepotřebuje vidět polotovar prioritizační tabulky, která se zítra změní po technickém odhadu.
+
+### Přenos ze supportu dělej anonymizovaně
+
+Support je nejčastější zdroj dobrých feature requestů. Zároveň obsahuje nejvíc detailů, které do portálu nepatří. Když support převádí ticket na produktový požadavek, má ho přepsat.
+
+| Support ticket | Produktový požadavek |
+| --- | --- |
+| „Firma Novák servis poslala CSV se jmény techniků a chce vlastní sloupec pro region.“ | „Servisní týmy potřebují plánovat práci podle regionu technika.“ |
+| „Zákazník ABC má ve fakturách interní projektová čísla a chce je dostat do exportu.“ | „Finance potřebují v exportu faktur interní identifikátor projektu.“ |
+| „Jana nemůže pozvat kolegu, protože nemá admin roli.“ | „Týmy potřebují jemnější oprávnění pro pozvánky bez plného admina.“ |
+
+Produkt získá insight. Veřejný portál nezíská osobní nebo obchodní detail. Přesně takhle má datová minimalizace vypadat v každodenní práci: ne jako zákaz mluvit se zákazníky, ale jako lepší překlad reality.
+
+### Měř kvalitu požadavků, ne jen počet hlasů
+
+Počet hlasů je snadno měřitelný, ale ne vždy užitečný. Lepší měsíční review feature requestů může sledovat:
+
+- kolik požadavků se sloučilo do skutečných problémů,
+- které segmenty opakovaně naráží na stejnou překážku,
+- které požadavky souvisí s první hodnotou, aktivací nebo retencí,
+- kolik veřejných položek má nejasný stav,
+- kolik položek je potřeba odmítnout nebo archivovat,
+- které požadavky by přidaly nové datové zpracování, export nebo oprávnění.
+
+Pracovní tabulka:
+
+| Problém | Segment | Důkaz | Dopad | Privacy riziko | Rozhodnutí |
+| --- | --- | --- | --- | --- | --- |
+|  |  |  |  |  | udělat / zjistit víc / odložit / neplánujeme |
+
+Privacy riziko do prioritizace patří. Funkce, která přinese hodnotu, ale otevře nový export osobních dat nebo sdílení mezi rolemi, nemusí být špatná. Jen potřebuje návrh oprávnění, retence, auditní stopy a komunikace. Když to neřešíš při prioritizaci, budeš to řešit později pod tlakem.
+
+### Uzavírej smyčku
+
+Když požadavek vydáš, odložíš nebo odmítneš, napiš krátký update. Ne marketingový proslov. Stačí věcně:
+
+```text
+Vydáno: Administrátoři mohou exportovat faktury podle období. Export obsahuje zákaznická data, proto je dostupný jen rolím s oprávněním k fakturaci. Detail je v dokumentaci exportů.
+```
+
+Nebo:
+
+```text
+Neplánujeme: Veřejné profily zákazníků do produktu nepřidáme. U části týmů by to zjednodušilo sdílení, ale zároveň by to měnilo privacy očekávání produktu a vyžadovalo nový souhlasový a moderovací režim. Místo toho rozšíříme privátní sdílené odkazy.
+```
+
+Dobré odmítnutí je lepší než tiché čekání. Ukazuje, že tým rozhoduje podle principů, ne podle nálady. A někdy zákazník víc ocení jasné „ne“ než věčné „možná“.
+
+### Checklist: Feature request portál privacy-first
+
+- [ ] Požadavky se přepisují na problém, segment a dopad.
+- [ ] Veřejné hlasování je popsáno jako signál, ne závazek.
+- [ ] Formulář výslovně říká, že do něj nepatří osobní údaje, exporty, tokeny ani citlivé screenshoty.
+- [ ] Veřejná položka neobsahuje zákaznická jména, interní procesy ani support detaily bez důvodu a souhlasu.
+- [ ] Podobné požadavky se slučují podle problému, ne jen podle navržené funkce.
+- [ ] Stavy jsou lidské a vysvětlují, co může zákazník čekat.
+- [ ] „Neplánujeme“ je legitimní stav s věcným vysvětlením.
+- [ ] Interní priorita, skóre a termíny se nezveřejňují jako nechtěný slib.
+- [ ] Přenos ze supportu do produktu je anonymizovaný a věcný.
+- [ ] Prioritizace bere v úvahu datový, bezpečnostní a provozní dopad.
+- [ ] Staré položky se pravidelně archivují, slučují nebo uzavírají.
+- [ ] Vydané změny se propojí s dokumentací, changelogem nebo release notes.
+
+### Mini úkol
+
+Vyber posledních deset feature requestů, nápadů ze supportu nebo položek v roadmapě. Vyplň tabulku:
+
+| Kontrola | Pozorování | Jedna změna |
+| --- | --- | --- |
+| Kolik položek popisuje funkci místo problému? |  |  |
+| Které položky obsahují zákaznický nebo osobní detail? |  |  |
+| Které návrhy jde sloučit podle stejného problému? |  |  |
+| Který požadavek přidává export, oprávnění nebo nové zpracování dat? |  |  |
+| Který veřejný stav je nejasný nebo přehnaně slibuje? |  |  |
+| Kterou položku je fér odmítnout nebo archivovat? |  |  |
+
+Potom udělej jednu konkrétní změnu: přepiš tři požadavky na problémové karty, doplň mikrotext do request formuláře, anonymizuj veřejný popis, sluč duplicitní návrhy, nebo uzavři jednu položku stavem „neplánujeme“ s jasným důvodem. Roadmapa má být nástroj rozhodování, ne veřejný sklad neurčitých slibů.
+
 ## Zdroje
 
 - ICANN: Information for Domain Name Registrants - práva a odpovědnosti držitelů domén včetně správy, obnovy a převodu doménové registrace: https://www.icann.org/registrants
@@ -25551,6 +25757,7 @@ Potom udělej jednu konkrétní opravu: zkrať formulář, odděl newsletterový
 
 ## Pracovní log
 
+- 2026-07-16: Doplněna příloha o feature request portálu bez veřejného hlasovacího cirkusu: přepis požadavků na problémy, hlasování jako signál místo závazku, ochrana veřejného portálu před citlivým kontextem, lidské stavy roadmapy, slučování návrhů podle problému, anonymizovaný přenos ze supportu, měření kvality požadavků, checklist a mini úkol.
 - 2026-07-16: Doplněna příloha o rezervaci demo schůzek bez kalendářového výslechu: typy schůzek podle účelu, minimální rezervační formulář, zákaz předčasného posílání citlivých podkladů, opatrné načítání kalendářových widgetů, jasné potvrzení schůzky, jednoduché zrušení nebo přesun, věcné CRM poznámky, agregované měření kvality, checklist a mini úkol; navázáno na existující kapitoly o prodejním demu, discovery callu, externích embedech a GDPR principech minimalizace.
 - 2026-07-16: Doplněna příloha o servisních účtech bez anonymního superadmina: rozlišení lidských účtů, servisních účtů, integračních tokenů, CI/CD identit a break-glass účtů, pracovní věta účtu, minimální oprávnění, oddělení prostředí a tenant rozsahu, rotační postup, audit akcí bez ukládání tajemství, plán vypnutí, checklist a mini úkol; navázáno na ověřené zdroje OWASP k secrets managementu, autorizaci a logování a na GDPR princip minimalizace.
 - 2026-07-16: Doplněna příloha o produktových průzkumech bez profilovacího dotazování: rozhodovací věta před výběrem metriky, správný moment otázky, krátké NPS/CSAT a vlastní průzkumy, bezpečné volné texty, chudý kontext, oddělení produktu/supportu/marketingu, agregované reportování, uzavírání smyčky, checklist a mini úkol.
