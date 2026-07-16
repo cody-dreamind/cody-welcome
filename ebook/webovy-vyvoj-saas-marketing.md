@@ -25753,6 +25753,171 @@ Vyber posledních deset supportních případů, kde někdo interně potřeboval
 
 Potom udělej jednu konkrétní změnu: přidej view-only režim pro jednu častou diagnostiku, zkrať platnost supportní role, zakaž exporty při impersonaci, doplň mikrotext žádosti o přístup, nebo přidej měsíční review supportních zásahů. Pokud se stejný typ problému opakuje, neřeš ho věčným nahlížením do účtů. Udělej z něj produktovou diagnostiku.
 
+## Příloha: Obchodní podmínky a produktové sliby bez rozjeté reality
+
+Obchodní podmínky, ceník, privacy notice, DPA, dokumentace, onboardingové e-maily a prodejní prezentace mají jednu společnou vlastnost: zákazník je čte jako slib. Produktový tým je často čte jako „nějaký text někde na webu“. A právě tady vzniká problém. Pokud marketing slíbí evropský provoz, pricing slíbí neomezené používání, dokumentace slíbí export jedním klikem a produkt ve skutečnosti drží export za supportním tiketem, důvěra se netrhá jedním velkým incidentem. Trhá se po vláknech.
+
+Tahle příloha není právní rada. Je to provozní rámec, jak držet veřejné sliby, produktové limity a interní realitu v jedné linii. Právník může text zkontrolovat. Produkt ho ale musí umět splnit.
+
+Špatná otázka zní: „Máme v podmínkách dostatečně širokou formulaci?“
+
+Lepší otázka zní: „Co přesně zákazník podle našich textů očekává a umí to produkt opravdu dodat?“
+
+### Sliby hledej ve všech kanálech
+
+Slib není jen věta v obchodních podmínkách. Slib vzniká kdekoliv, kde člověk získá očekávání o produktu.
+
+Typická místa:
+
+- homepage a produktové stránky,
+- pricing tabulka,
+- FAQ,
+- onboardingové a trial e-maily,
+- dokumentace a help centrum,
+- veřejný changelog,
+- trust center,
+- privacy notice a DPA,
+- sales prezentace a nabídky,
+- potvrzení rezervace dema,
+- texty v produktu u limitů, exportů, výmazu a oprávnění.
+
+Praktický příklad: V pricingu stojí „neomezené projekty“, v produktu existuje soft limit 500 projektů kvůli výkonu a support ví, že větší zákazníci musí požádat o navýšení. To nemusí být špatně. Špatně je, když o tom zákazník zjistí až při importu 501. projektu. „Neomezené“ má v SaaS často skrytý účet za přesnost.
+
+Codyho komentář: Slovo „neomezené“ je marketingový cukr. Chutná dobře, ale když se dávkuje bez rozmyslu, skončí tým s bolavým supportem a zákazník s pocitem, že mu někdo prodal mlhu v tabulce.
+
+### Udělej mapu veřejných tvrzení
+
+Jednou za čas projdi veřejné a polo-veřejné texty a vytáhni tvrzení, která mají provozní dopad.
+
+| Tvrzení | Kde je | Co musí být pravda | Vlastník | Stav |
+| --- | --- | --- | --- | --- |
+| Data běží v EU | homepage, trust center | primární data, zálohy, logy a supportní přístupy odpovídají popisu | ops/privacy | ověřit |
+| Export dat kdykoliv | pricing, dokumentace | export je dostupný v produktu nebo existuje jasný postup a lhůta | produkt | upravit |
+| Neomezené projekty | pricing | existuje fair use popis a viditelné upozornění před limitem | product marketing | přepsat |
+| Smazání účtu | help centrum | výmaz má stavový proces a vysvětlené výjimky retence | support/privacy | platí |
+| Integrace bez kódu | landing page | běžný use case nevyžaduje zásah vývojáře | produkt | ověřit |
+
+Do mapy nepiš všechno. Vyber tvrzení, která mohou změnit rozhodnutí zákazníka, práci supportu, právní odpovědnost nebo technickou architekturu. „Moderní rozhraní“ je vágní marketing. „Export do CSV v každém plánu“ je provozní slib.
+
+### Pricing musí odpovídat schopnostem produktu
+
+Pricing stránka často vzniká rychleji než systém entitlementu. To je pochopitelné. Ale pokud produkt neumí přesně vynutit a vysvětlit plány, pricing se změní v zdroj výjimek.
+
+U každé položky v ceníku si polož otázky:
+
+- Je to funkce, schopnost, limit, nebo služba?
+- Kdo v produktu pozná, že na ni má zákazník nárok?
+- Co se stane při downgradu?
+- Co zůstane dostupné kvůli exportu, bezpečnosti nebo právům uživatele?
+- Kde se položka vysvětluje v dokumentaci?
+- Co řekne support, když se zákazník zeptá „proč to nemám“?
+
+Příklad lepší formulace:
+
+„Plán Team obsahuje 10 aktivních automatizací. Při dosažení limitu můžete automatizaci archivovat nebo přejít na Business. Bezpečnostní export workspace zůstává dostupný ve všech placených plánech.“
+
+Horší formulace:
+
+„Pokročilé automatizace: ano/ne.“
+
+Ta druhá je krátká, ale neříká, co se stane v reálné práci. Pricing nemá být hádanka s kreditní kartou na konci.
+
+### Privacy slib musí být technicky splnitelný
+
+Privacy-first značka nesmí používat soukromí jako ozdobné slovo. Když veřejně říkáš, že sbíráš minimum dat, musí tomu odpovídat formuláře, analytika, logy, supportní nástroje, embedy i interní reporty. Evropské zdroje v závěru e-booku opakovaně pracují s principy účelového omezení, minimalizace, transparentnosti a omezení uchování. Produktově to znamená: neříkej „minimum“, pokud má každý widget vlastní datový ocásek.
+
+Kontrolní otázky:
+
+- Kde přesně běží data, o kterých veřejně mluvíme?
+- Které výjimky nejsou v textu vidět?
+- Posíláme některá data dodavateli, kterého v trust center nebo privacy notice nezmiňujeme?
+- Má support nebo zákaznický úspěch přístup, který by zákazník nečekal?
+- Držíme staré exporty, transkripty, screenshoty nebo reporty déle, než texty naznačují?
+- Pokud zákazník požádá o export nebo výmaz, odpovídá proces tomu, co slibujeme?
+
+Praktická věta do interního review:
+
+„Tento veřejný text je pravdivý jen tehdy, pokud platí také pro produkci, zálohy, logy, support, analytiku a dodavatele.“
+
+Ano, je to přísné. Přesně proto je to užitečné.
+
+### Sales nesmí prodávat budoucí produkt jako hotovou realitu
+
+U malého SaaS je lákavé slíbit v nabídce něco, co „určitě brzy doděláme“. Někdy je to férové, pokud je jasné, že jde o roadmapu, pilot nebo individuální rozšíření. Jindy je to jen budoucí supportní problém se smluvním razítkem.
+
+Rozlišuj:
+
+| Typ věty | Jak ji psát |
+| --- | --- |
+| Hotová schopnost | „Produkt umí exportovat faktury do CSV.“ |
+| Omezená schopnost | „Export faktur je dostupný pro adminy v plánu Business.“ |
+| Plánovaná schopnost | „Funkci zvažujeme, ale není součástí aktuální nabídky.“ |
+| Pilot | „V pilotu ověříme ruční postup a po 30 dnech rozhodneme o implementaci.“ |
+| Individuální závazek | „Dodáme integraci X do data Y podle samostatného rozsahu.“ |
+
+Nejhorší věta je: „To nebude problém.“ Obvykle znamená „problém jsme ještě nepojmenovali“. Pokud zákazník potřebuje konkrétní schopnost pro nákup, napiš ji konkrétně: rozsah, datum, odpovědnost, data, výjimky a co se stane, když se ukáže, že to nedává smysl.
+
+### Změny textů dělej jako release
+
+Veřejné podmínky a produktové sliby nejsou statický PDF nábytek. Mění se s produktem. Když přidáš nový export, nový region, nový AI modul, nové limity, nového dodavatele nebo nový pricing, zkontroluj navázané texty.
+
+Release kontrola slibů:
+
+- mění se data, která sbíráme nebo posíláme dál?
+- mění se dostupnost funkce podle plánu nebo role?
+- mění se limity, fair use nebo rate limit?
+- mění se retenční pravidla?
+- mění se dodavatel, region nebo supportní přístup?
+- mění se postup exportu, výmazu nebo ukončení účtu?
+- mění se slib v sales materiálech, dokumentaci nebo onboardingových e-mailech?
+
+Pokud odpověď zní ano, nestačí upravit kód. Uprav také text, dokumentaci, supportní playbook a případně trust center. Jinak produkt běží v jedné verzi a sliby v jiné. To je A/B test důvěry, který nechceš vyhrát ani prohrát.
+
+### Když realita nesedí, oprav text nebo produkt
+
+Při auditu najdeš tři typy nesouladu:
+
+| Nesoulad | Příklad | Nejmenší férová oprava |
+| --- | --- | --- |
+| Text slibuje víc než produkt | „Export kdykoliv“, ale export dělá support ručně | přepsat text a dát export do backlogu |
+| Produkt dělá víc než text říká | nový support nástroj vidí přílohy | aktualizovat datovou mapu a privacy texty |
+| Tým má výjimku bez vysvětlení | enterprise zákazník má zvláštní retenci | zapsat výjimku, vlastníka a revizi |
+
+Ne každá oprava musí být velký projekt. Někdy stačí přepsat přehnané tvrzení. Někdy stačí doplnit mikrotext k limitu. Někdy je ale lepší změnit produkt, protože původní slib byl dobrý a realita je pozadu. Rozhodnutí musí být vědomé, ne náhodné.
+
+### Checklist: Produktové sliby pod kontrolou
+
+- [ ] Máme mapu veřejných tvrzení s provozním dopadem.
+- [ ] Pricing položky odpovídají skutečným schopnostem, limitům a entitlementu.
+- [ ] Slova jako „neomezené“, „kdykoliv“, „bezpečné“, „EU“ a „privacy-first“ mají konkrétní provozní význam.
+- [ ] Privacy notice, DPA, trust center, dokumentace a produktové UI si neodporují.
+- [ ] Sales materiály rozlišují hotovou schopnost, pilot, roadmapu a individuální závazek.
+- [ ] Support ví, jak vysvětlit limity, export, výmaz, downgrade a výjimky.
+- [ ] Změna produktu spouští kontrolu navázaných textů.
+- [ ] Změna pricingu spouští kontrolu entitlementu, dokumentace a supportních odpovědí.
+- [ ] Nový dodavatel nebo datový tok se propíše do datové mapy a relevantních veřejných textů.
+- [ ] Staré onboardingové, trial a sales e-maily se kontrolují stejně jako web.
+- [ ] Nesoulady se řeší konkrétní volbou: opravit text, opravit produkt, nebo zapsat výjimku s koncem.
+- [ ] Tým má jedno místo, kde se sleduje, které sliby se musí ověřit před větším releasem.
+
+### Mini úkol
+
+Vyber jednu stránku nebo dokument, který prodává nebo vysvětluje produkt: pricing, homepage, trust center, obchodní nabídku, onboardingový e-mail nebo help stránku. Vyplň kartu:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jaké konkrétní sliby text obsahuje? |  |
+| Který slib může ovlivnit nákupní rozhodnutí? |  |
+| Který slib se týká dat, limitů, dostupnosti nebo exportu? |  |
+| Kde v produktu se slib technicky plní? |  |
+| Kdo je vlastník slibu? |  |
+| Co by zákazník čekal po přečtení textu? |  |
+| Kde realita nesedí nebo není ověřená? |  |
+| Opravíme text, produkt, dokumentaci, nebo výjimku? |  |
+| Jaká jedna věta má být přesnější? |  |
+
+Potom udělej jednu konkrétní změnu: přepiš přehnané „neomezené“, doplň podmínku exportu, sjednoť pricing s entitlement mapou, aktualizuj supportní odpověď, nebo přidej release kontrolu veřejných slibů. Důvěra nevzniká tím, že slíbíš všechno. Vzniká tím, že zákazník pozná stejnou realitu ve webu, produktu i supportu.
+
 ## Zdroje
 
 - ICANN: Information for Domain Name Registrants - práva a odpovědnosti držitelů domén včetně správy, obnovy a převodu doménové registrace: https://www.icann.org/registrants
@@ -25903,6 +26068,7 @@ Potom udělej jednu konkrétní změnu: přidej view-only režim pro jednu čast
 
 ## Pracovní log
 
+- 2026-07-16: Doplněna příloha o obchodních podmínkách a produktových slibech bez rozjeté reality: mapa veřejných tvrzení, sladění pricingu s entitlementem, technicky splnitelné privacy sliby, rozlišení hotových schopností od roadmapy a pilotů, release kontrola textů, práce s nesoulady, checklist a mini úkol; navázáno na existující zdroje a kapitoly k transparentnosti, minimalizaci, trust center, limitům a evropskému provozu.
 - 2026-07-16: Doplněna příloha o supportním přístupu k zákaznickému účtu bez tichého nahlížení: rozlišení režimů přístupu, vazba na supportní případ, omezená impersonace, srozumitelná žádost zákazníkovi, audit zásahu bez kopírování obsahu dat, break-glass pravidla, pravidelný úklid rolí, checklist a mini úkol; navázáno na existující zdroje OWASP k autorizaci a logování a na GDPR principy minimalizace a transparentnosti.
 - 2026-07-16: Doplněna příloha o feature request portálu bez veřejného hlasovacího cirkusu: přepis požadavků na problémy, hlasování jako signál místo závazku, ochrana veřejného portálu před citlivým kontextem, lidské stavy roadmapy, slučování návrhů podle problému, anonymizovaný přenos ze supportu, měření kvality požadavků, checklist a mini úkol.
 - 2026-07-16: Doplněna příloha o rezervaci demo schůzek bez kalendářového výslechu: typy schůzek podle účelu, minimální rezervační formulář, zákaz předčasného posílání citlivých podkladů, opatrné načítání kalendářových widgetů, jasné potvrzení schůzky, jednoduché zrušení nebo přesun, věcné CRM poznámky, agregované měření kvality, checklist a mini úkol; navázáno na existující kapitoly o prodejním demu, discovery callu, externích embedech a GDPR principech minimalizace.
