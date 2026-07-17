@@ -30154,6 +30154,144 @@ Vezmi jednu produkční URL a napiš k ní tři kontroly:
 
 Potom udělej jednu konkrétní opravu: odstraň `-k` z health checku, přidej samostatný certifikátový alert, doplň kontrolu redirectů, přidej jednoduchý obsahový smoke test nebo rozděl jeden neurčitý alarm na DNS/TLS/HTTP. Externí monitoring má být nepříjemně pravdivý. Přesně proto ho chceš.
 
+## Příloha: Databázové migrace bez tichého datového překvapení
+
+Databázová migrace vypadá na první pohled jako technická změna: přidat sloupec, přejmenovat tabulku, doplnit index, převést starou hodnotu na novou. Jenže v SaaS produktu je migrace často i produktová, bezpečnostní a privacy změna. Může změnit, která data existují, jak dlouho zůstanou, kdo je uvidí, co skončí v logu a jestli starší část aplikace ještě rozumí novému stavu.
+
+Špatná otázka zní: „Projde migrace na mém stroji?“
+
+Lepší otázka zní: „Umíme změnit strukturu nebo význam dat tak, aby produkt zůstal dostupný, oprávnění platila stejně jako předtím a nevznikly dočasné kopie bez vlastníka?“
+
+Evropské principy zpracování osobních údajů připomínají účel, minimalizaci, přesnost, omezení uložení a integritu s důvěrností. OWASP zase u logování a SQL bezpečnosti vede k tomu, aby se s produkčními daty pracovalo účelově, bezpečně a bez skládání dotazů z volných řetězců. Odkazy jsou ve zdrojích. Prakticky: migrace není jen DDL příkaz. Je to malý release nad živou pamětí produktu.
+
+### Rozliš změnu schématu, významu a dat
+
+Ne každá migrace má stejné riziko. Pomáhá ji pojmenovat podle toho, co opravdu dělá:
+
+| Typ změny | Příklad | Hlavní riziko |
+| --- | --- | --- |
+| Schéma | nový sloupec, index, tabulka | lock databáze, kompatibilita aplikace |
+| Význam | `status=active` začne znamenat něco jiného | rozbitá logika, matoucí reporty |
+| Data | backfill historických záznamů | špatný rozsah, dlouhý běh, citlivý log |
+| Oprávnění | nová vazba na workspace nebo roli | únik mezi tenanty, chybné zobrazení |
+| Retence | nové datum expirace, archivace, anonymizace | držení dat déle, než bylo slíbeno |
+
+Nejnebezpečnější jsou migrace, které se tváří jako malé schéma, ale mění význam. Například přidání pole `deleted_at` může být jen technická příprava na soft delete. Nebo také změna celého životního cyklu dat: co vidí uživatel, co exportuje support, co zůstává v zálohách a co se ukáže v auditní stopě.
+
+### Piš migrační větu dřív než SQL
+
+Před migrací napiš jednu pracovní větu:
+
+„Tato migrace mění ___, protože ___; dotkne se ___ dat; poběží ___; při selhání uděláme ___.“
+
+Příklad:
+
+„Tato migrace přidává `workspace_id` k historickým API tokenům, protože tokeny nově vyhodnocujeme v tenant kontextu; dotkne se aktivních a nedávno revokovaných tokenů; poběží jako dávkový backfill po 500 záznamech; při selhání zastavíme worker, ponecháme původní autorizaci a doplníme chybějící vazby ručně podle auditovaného seznamu.“
+
+Tahle věta odhalí, jestli tým ví, co dělá. Pokud neumíš vyplnit „dotkne se ___ dat“, nemáš migrační plán. Máš optimismus v kabátě SQL.
+
+### Expand a contract šetří nervy
+
+U živého SaaS je často bezpečnější rozdělit změnu do několika kroků:
+
+1. Expand: přidej nové pole, tabulku nebo index tak, aby starý kód dál fungoval.
+2. Dual write nebo kompatibilní zápis: nová verze aplikace zapisuje starý i nový tvar, pokud je to potřeba.
+3. Backfill: historická data doplň po dávkách a s měřitelným stavem.
+4. Read switch: čtení přepni na nový tvar až ve chvíli, kdy je ověřený.
+5. Contract: starý sloupec, starý index nebo starou logiku odstraň až po bezpečném období.
+
+Ano, je to víc kroků než jeden odvážný příkaz. Ale u produkčních dat je odvaha často jen špatně pojmenovaná zkratka. Malé kroky dávají prostor pro rollback aplikace, zastavení backfillu a ověření tenant izolace.
+
+### Backfill má mít limit, stav a brzdu
+
+Backfill je migrace s provozním životem. Nemá běžet jako anonymní skript, který někdo spustil v terminálu a pak šel spát.
+
+Dobrá pravidla:
+
+- Zpracovávej data po dávkách.
+- Loguj počet zpracovaných záznamů, ne jejich obsah.
+- Ukládej checkpoint, aby šlo pokračovat bez duplicit.
+- Měj maximální souběh a limit zátěže databáze.
+- Rozliš stavy `pending`, `running`, `failed`, `done`, `skipped`.
+- Připrav ruční brzdu bez deploye.
+- Po doběhnutí smaž dočasný kód, frontu nebo pomocnou tabulku.
+
+Privacy-first detail: pokud backfill pracuje s osobními údaji, logy a chybové záznamy nesmí obsahovat plné hodnoty polí. Většinou stačí interní ID, tenant ID, typ chyby a korelační ID. Pokud potřebuješ vzorek dat pro ladění, napiš proč, kdo ho uvidí, kde bude uložený a kdy se smaže.
+
+### Testuj oprávnění, ne jen počet řádků
+
+Úspěšná migrace není jen „počet řádků sedí“. U SaaS musí sedět i produktové a bezpečnostní vlastnosti:
+
+- uživatel nevidí data jiného workspace,
+- role fungují stejně nebo podle vědomě změněného pravidla,
+- export neobsahuje nová interní pole,
+- auditní stopa rozlišuje automatickou migraci od lidské akce,
+- supportní admin nevidí víc než před migrací,
+- vyhledávání a cache nevrací starý tvar dat,
+- API odpovědi zůstávají kompatibilní nebo mají zdokumentovanou změnu.
+
+Praktický test pro multi-tenant produkt: vytvoř dva testovací workspaces, stejný typ objektu v obou, spusť migraci a ověř čtení přes UI, API, export, search, cache a background job. Pokud kontroluješ jen databázi, testuješ místo, kde uživatel nikdy nebydlí.
+
+### Rollback není vždy návrat dat
+
+U kódu je rollback často jednoduchý: vrátíš předchozí verzi. U dat to tak snadné není. Jakmile migrace smaže sloupec, přepočítá hodnoty nebo sloučí záznamy, návrat může být nemožný nebo drahý.
+
+Proto si u každé rizikové migrace napiš:
+
+- Lze vrátit aplikaci bez vrácení dat?
+- Lze migraci bezpečně spustit znovu?
+- Které kroky jsou nevratné?
+- Potřebujeme před krokem snapshot nebo export?
+- Kdo rozhodne o pokračování po částečném selhání?
+- Co zákazník uvidí, když migrace doběhne jen z části?
+
+Někdy je nejlepší rollback zastavení v kompatibilním mezistavu, ne snaha vrátit svět do včerejška. Proto je expand a contract vzor tak užitečný: dává produktu bezpečný přechodový prostor.
+
+### Migrační artefakty mají krátký život
+
+Migrace často vytvoří vedlejší stopy:
+
+- dočasné tabulky,
+- CSV kontroly,
+- debug logy,
+- backfill fronty,
+- snapshoty před změnou,
+- ruční seznamy výjimek,
+- supportní poznámky.
+
+Každá stopa potřebuje vlastníka a datum smazání. Jinak se z migrace stane nový datový tok, o kterém neví privacy notice, datová mapa ani support. To je přesně ten typ nudného nepořádku, který bolí až za půl roku.
+
+### Checklist: Databázové migrace privacy-first
+
+- [ ] Migrace má jednu pracovní větu s účelem, rozsahem a fallbackem.
+- [ ] Je jasné, zda mění schéma, význam dat, obsah dat, oprávnění nebo retenci.
+- [ ] Riziková změna je rozdělená na expand, backfill, read switch a contract.
+- [ ] Starý i nový kód jsou kompatibilní po dobu přechodu.
+- [ ] Backfill běží po dávkách, má checkpoint a ruční brzdu.
+- [ ] Logy neobsahují osobní údaje ani celé hodnoty migrovaných polí.
+- [ ] Testy ověřují tenant izolaci, role, API, export, search, cache a background joby.
+- [ ] Rollback plán rozlišuje návrat aplikace a návrat dat.
+- [ ] Dočasné tabulky, exporty, snapshoty a debug logy mají datum smazání.
+- [ ] Po migraci se aktualizuje datová mapa, dokumentace a případně supportní odpovědi.
+
+### Mini úkol
+
+Vyber jednu plánovanou nebo nedávnou databázovou migraci a vyplň kartu:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jaká je migrační věta? |  |
+| Mění schéma, význam, data, oprávnění nebo retenci? |  |
+| Kterých tenantů nebo workspace se dotkne? |  |
+| Jak dlouho může běžet? |  |
+| Jak poznáme bezpečný postup po dávkách? |  |
+| Co se loguje a co se nesmí logovat? |  |
+| Jaký je rollback aplikace? |  |
+| Jaký je plán pro částečně změněná data? |  |
+| Jaké dočasné artefakty vzniknou a kdy se smažou? |  |
+
+Potom udělej jednu konkrétní opravu: rozděl velkou migraci na expand a contract kroky, přidej checkpoint do backfillu, smaž starou dočasnou tabulku, doplň tenant test, omez logování hodnot nebo napiš rollback poznámku. Databázová migrace má být nudná zvenku a velmi promyšlená uvnitř.
+
 ## Zdroje
 
 - curl: curl man page - volby pro časové limity, TLS ověřování a režim `--insecure`: https://curl.se/docs/manpage.html
@@ -30332,6 +30470,7 @@ Potom udělej jednu konkrétní opravu: odstraň `-k` z health checku, přidej s
 
 ## Pracovní log
 
+- 2026-07-17: Doplněna příloha o databázových migracích bez tichého datového překvapení: rozlišení změn schématu, významu, dat, oprávnění a retence, migrační věta, expand/contract postup, dávkový backfill s checkpointem a ruční brzdou, testy tenant izolace, opatrné logování, rollback plán, úklid dočasných artefaktů, checklist a mini úkol; navázáno na existující zdroje Evropské komise k principům zpracování osobních údajů a OWASP k logování a bezpečné práci s databází.
 - 2026-07-17: Doplněna příloha o externí HTTPS kontrole bez falešného klidu: rozlišení interního health endpointu, veřejného DNS/TLS/HTTP monitoringu a produktového smoke testu, riziko proxy a `curl -k`, diagnostické alerty, checklist a mini úkol; ověřen a doplněn zdroj curl man page k TLS ověřování a provozním volbám.
 - 2026-07-17: Doplněna příloha o TLS certifikátech bez tichého výpadku: certifikát jako součást dostupnosti, monitoring expirace, automatická obnova, reload služby po obnově, interní a externí testy, incidentní otázky, checklist a mini úkol; ověřeny zdroje Let’s Encrypt a Certbot k platnosti certifikátů a automatickému renewal.
 - 2026-07-17: Doplněna příloha o background jobech a frontách bez neviditelného skladu dat: účel jobu jednou větou, minimalizace payloadu přes referenční ID, retry a idempotence, dead-letter queue s retencí, karty scheduled jobů, kill switch, observabilita bez logování citlivých payloadů, checklist a mini úkol.
