@@ -29758,6 +29758,180 @@ Vyber jednu existující nebo plánovanou push notifikaci a vyplň kartu:
 
 Potom udělej jednu konkrétní změnu: odstraň marketingový push typ, přepiš payload bez citlivého detailu, přidej kontextový prompt před permission dialog, zaveď kategorie preferencí, zneplatni subscriptions po odebrání z workspace nebo doplň agregovanou metriku vypnutí podle typu. Push notifikace má být tichý pomocník pro důležité momenty, ne další kanál pro produktovou nervozitu.
 
+## Příloha: Background joby a fronty bez neviditelného skladu dat
+
+Background joby jsou nevděčná část SaaS. Když fungují, nikdo si jich nevšimne. Když nefungují, zákazník nedostane e-mail, import se zasekne, export visí ve vzduchu, webhook se pošle třikrát a support začne lovit stav v logu. A když jsou navržené ledabyle, vznikne z nich ještě jeden skrytý datový sklad: payloady ve frontě, retry záznamy, dead-letter queue, debug exporty a naplánované úlohy, které běží dlouho po tom, co měly skončit.
+
+Privacy-first přístup neříká, že fronty jsou špatně. Říká, že asynchronní zpracování musí mít stejná pravidla jako zbytek produktu: jasný účel, minimum dat, vlastníka, retenci, auditovatelný stav a bezpečnou možnost zastavení.
+
+> Codyho komentář: Fronta je jako čekárna. Praktická, dokud víš, kdo v ní sedí, proč tam je a kdy odejde. Jakmile v ní necháš staré payloady bydlet natrvalo, není to čekárna. Je to archiv s horším osvětlením.
+
+### Začni větou, proč job existuje
+
+Každý background job má mít jednu pracovní větu:
+
+```text
+Job zpracovává ___, aby ___, používá k tomu ___ a po dokončení drží ___.
+```
+
+Příklady:
+
+- Job vytvoří export faktur, aby billing admin nemusel čekat na dlouhý výpočet v prohlížeči, používá ID workspace a období, výsledek drží jako soubor s expirací.
+- Job odešle provozní e-mail po změně role, aby vlastník workspace věděl o citlivé změně, používá ID události a šablonu, neukládá kopii celého e-mailu.
+- Job zpracuje import CSV, aby zákazník mohl převést základní seznam projektů, používá dočasný importní soubor a po potvrzení maže zdrojový upload podle retenčního pravidla.
+
+Pokud věta nejde napsat bez „pro jistotu zpracuje všechno“, job ještě není navržený. Je to jen přesunutý problém z requestu do fronty.
+
+### Payload má být odkaz, ne kufr
+
+Nejbezpečnější payload ve frontě často neobsahuje data samotná, ale bezpečný odkaz na práci, kterou má job udělat: ID importu, ID exportu, ID workspace, typ události, verzi schématu a korelační ID.
+
+Špatný payload:
+
+```json
+{
+  "email": "zakaznik@example.com",
+  "fullName": "Jana Nováková",
+  "invoiceRows": [...],
+  "privateNotes": "...",
+  "csvContent": "..."
+}
+```
+
+Lepší payload:
+
+```json
+{
+  "jobType": "billing_export",
+  "workspaceId": "wsp_123",
+  "exportId": "exp_456",
+  "schemaVersion": 2,
+  "requestId": "req_abc"
+}
+```
+
+Job si potřebná data načte z kontrolovaného systému podle oprávnění a aktuálního stavu. Tím se sníží riziko, že ve frontě zůstane stará kopie osobních údajů, kterou už aktivní systém smazal, opravil nebo omezil.
+
+Praktická pravidla:
+
+- Neposílej do fronty celé formuláře, CSV soubory ani volné texty, pokud stačí referenční ID.
+- Neposílej e-mail jako identifikátor, pokud stačí interní ID účtu.
+- Neposílej secret, token ani podepsaný odkaz, který má delší životnost než job.
+- Přidej verzi payloadu, aby staré joby nepadaly po změně schématu potichu.
+- Loguj stav jobu, ne celý obsah payloadu.
+
+### Retry není nekonečný pokus o štěstí
+
+Opakování je užitečné u dočasných chyb: externí API neodpovědělo, e-mail provider má výpadek, databáze odmítla spojení, worker se restartoval. Retry ale nesmí běžet navždy a nesmí opakovat destruktivní akce bez idempotence.
+
+U každého jobu si napiš:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Které chyby se opakují automaticky? |  |
+| Kolikrát se job zkusí znovu? |  |
+| Jak dlouho se drží neúspěšný payload? |  |
+| Je akce idempotentní? |  |
+| Co se stane po vyčerpání pokusů? |  |
+| Kdo dostane upozornění? |  |
+
+Idempotence znamená, že opakované zpracování stejné události nevyrobí dvojí škodu. Dvakrát doručený webhook nemá vytvořit dvě faktury. Dvakrát spuštěný export nemá poslat dva různé odkazy s různým obsahem. Dvakrát opakovaný e-mail nemá zákazníkovi připomínat, že systém sice umí fronty, ale neumí klid.
+
+### Dead-letter queue je pracovní stůl, ne skládka
+
+Dead-letter queue je místo pro joby, které se nepodařilo zpracovat. Je užitečná, pokud ji někdo pravidelně otevírá. Je nebezpečná, pokud v ní payloady leží měsíce.
+
+Pravidla:
+
+- Každý typ dead-letter jobu má vlastníka.
+- Queue má retenční dobu.
+- Záznam ukazuje důvod selhání a bezpečný kontext.
+- Citlivý payload se maskuje nebo se vůbec neukládá.
+- Ruční opakování jobu vyžaduje pochopení dopadu.
+- Po opravě příčiny se queue vyčistí, ne nechá jako historická galerie chyb.
+
+Pokud job obsahuje zákaznická data, dead-letter queue patří do mapy dat a retenčního review. Není mimo produkt jen proto, že má technický název.
+
+### Naplánované úlohy mají mít konec a vlastníka
+
+Crony a scheduled joby jsou skvělé pro údržbu, reporty, čištění, upozornění a synchronizace. Zároveň se z nich snadno stane neviditelný provozní dluh.
+
+U každé naplánované úlohy drž krátkou kartu:
+
+| Pole | Odpověď |
+| --- | --- |
+| Název jobu |  |
+| Účel |  |
+| Frekvence |  |
+| Vlastník |  |
+| Jaká data čte |  |
+| Jaká data mění |  |
+| Co se stane při selhání |  |
+| Kdy proběhne další revize |  |
+
+Zvlášť hlídej joby, které posílají e-maily, mažou data, mění role, synchronizují integrace, exportují reporty nebo pracují s billingem. Tady nestačí „někde to běží“. Tým musí vědět kde, proč a jak to vypnout.
+
+### Kill switch není známka slabosti
+
+U důležitých background procesů navrhni možnost bezpečného zastavení:
+
+- pozastavit konkrétní typ jobu,
+- zastavit joby pro jeden workspace,
+- vypnout odesílání e-mailů bez ztráty pracovní fronty,
+- zastavit exporty při podezření na chybu oprávnění,
+- zastavit integraci, která vrací špatná data,
+- přepnout worker do režimu pouze čtení nebo dry-run.
+
+Kill switch má mít auditní záznam a jasný dopad. Kdo ho zapnul? Proč? Co se přestalo zpracovávat? Jak se zpracování obnoví? Bez těchto odpovědí je vypínač jen další rizikové tlačítko.
+
+### Observabilita jobů má ukazovat stav práce
+
+U background zpracování většinou potřebuješ vědět:
+
+- kolik jobů čeká,
+- jak dlouho čekají,
+- kolik jich selhalo,
+- které typy selhávají opakovaně,
+- zda joby zpracovávají správnou verzi payloadu,
+- zda fronta neroste rychleji, než ji workery stíhají odbavovat,
+- zda retry a dead-letter queue neobsahují citlivý datový odpad.
+
+Nepotřebuješ kvůli tomu ukládat celé payloady do dashboardu. Stačí typ jobu, stav, čas, počet pokusů, bezpečný důvod chyby, workspace referenčně a korelační ID. Detail patří do kontrolovaného systému, ne do monitoringu jako surový výpis.
+
+### Checklist: Background joby privacy-first
+
+- [ ] Každý job má jasný účel, vlastníka a datový rozsah.
+- [ ] Payload obsahuje referenční ID místo kopie osobních nebo citlivých dat, pokud to jde.
+- [ ] Joby mají verzi payloadu a bezpečné chování při starší verzi.
+- [ ] Retry má limit, backoff a jasné pravidlo pro selhání.
+- [ ] Destruktivní nebo externě viditelné akce jsou idempotentní.
+- [ ] Dead-letter queue má vlastníka, retenci a pravidelný úklid.
+- [ ] Naplánované úlohy mají kartu s účelem, frekvencí a dopadem na data.
+- [ ] Existuje kill switch pro rizikové typy jobů nebo konkrétní workspace.
+- [ ] Logy a monitoring neukládají celé payloady, tokeny ani zákaznický obsah.
+- [ ] Joby respektují odhlášení, změnu role, zrušení workspace a revokaci integrace.
+- [ ] Výsledek dlouhé úlohy má expiraci, pokud obsahuje export nebo citlivý soubor.
+- [ ] Po incidentu nebo větší změně datového modelu se fronty a scheduled joby revidují.
+
+### Mini úkol
+
+Vyber jeden background job, který posílá e-mail, zpracovává import, vytváří export, synchronizuje integraci nebo maže data. Vyplň kartu:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jaký job kontrolujeme? |  |
+| Jaký má účel? |  |
+| Co přesně obsahuje payload? |  |
+| Která data v payloadu lze nahradit referenčním ID? |  |
+| Kolik retry pokusů dává smysl? |  |
+| Je akce idempotentní? |  |
+| Co skončí v dead-letter queue? |  |
+| Jak dlouho se drží neúspěšné záznamy? |  |
+| Kdo je vlastník jobu? |  |
+| Jak job bezpečně vypneme? |  |
+
+Potom udělej jednu konkrétní změnu: zmenši payload, přidej idempotency key, nastav retenci dead-letter queue, doplň vlastníka scheduled jobu, zamaskuj logovaný obsah nebo vytvoř kill switch pro rizikový typ úlohy. Background job má být spolehlivý pracovník, ne tajný sklep plný starých dat.
+
 ## Zdroje
 
 - MDN Web Docs: Web app manifests - přehled manifestu jako JSON souboru s metadaty webové aplikace včetně názvu, ikon, startovní URL, display režimu a dalších vlastností používaných při instalaci PWA: https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps/Manifest
@@ -29933,6 +30107,7 @@ Potom udělej jednu konkrétní změnu: odstraň marketingový push typ, přepi�
 
 ## Pracovní log
 
+- 2026-07-17: Doplněna příloha o background jobech a frontách bez neviditelného skladu dat: účel jobu jednou větou, minimalizace payloadu přes referenční ID, retry a idempotence, dead-letter queue s retencí, karty scheduled jobů, kill switch, observabilita bez logování citlivých payloadů, checklist a mini úkol.
 - 2026-07-17: Doplněna příloha o webových push notifikacích bez permission spamu: rozlišení událostí vhodných pro push, kontextová žádost o oprávnění, preference kategorií, bezpečný payload bez citlivého obsahu, minimální datový model subscription, revokace napříč produktem a zařízeními, agregované měření užitečnosti, checklist a mini úkol; ověřeny a doplněny zdroje MDN k Notifications API, Push API a `showNotification()` a web.dev k permission UX.
 - 2026-07-17: Doplněna příloha o workspace policy bez administrátorského bludiště: rozhodovací věty pro pravidla, rozlišení rolí, policy a výjimek, vynucení v UI/API/integracích/jobech/supportu, opatrné výchozí hodnoty, dopadové potvrzení změn, hlášky pro uživatele, checklist a mini úkol; navázáno na existující privacy-first pravidla k minimalizaci, oprávněním, auditní stopě a bezpečnému B2B provozu.
 - 2026-07-17: Doplněna příloha o instalovatelné PWA bez falešné aplikace: pracovní důvod instalace, manifest jako veřejný slib, bezpečné `scope` a `start_url`, nenátlakový install prompt, pracovní shortcuts, ikony, consent a oprávnění, release kontrola, checklist a mini úkol; ověřeny a doplněny zdroje MDN, W3C a web.dev k Web App Manifestu a instalovatelnosti PWA.
