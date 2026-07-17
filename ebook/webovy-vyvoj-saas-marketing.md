@@ -28127,10 +28127,194 @@ Vyber jednu OAuth nebo „připojit aplikaci“ integraci a vyplň kartu:
 
 Potom udělej jednu malou změnu: přepiš generický scope na konkrétní text, přidej provozovatele aplikace na consent obrazovku, odděl staging redirect URI od produkce, doplň přehled připojených aplikací, nebo zajisti, že revokace vypne i webhooky a sync joby. OAuth integrace má být vztah s jasnými hranicemi, ne slepý podpis pod prázdnou stránku.
 
+## Příloha: Vulnerability disclosure a security.txt bez honu na výzkumníky
+
+Bezpečnostní chyba se občas objeví i v produktu, který má dobrý tým, testy a rozumnou architekturu. Důležitý rozdíl není v tom, jestli se chyba nikdy nestane. Rozdíl je v tom, jestli člověk, který ji najde, ví kam ji bezpečně poslat, co od týmu čekat a jak neohrozit zákaznická data cestou k opravě.
+
+Špatná otázka zní: „Jak zabráníme lidem, aby nám psali o chybách?“
+
+Lepší otázka zní: „Jak vytvoříme jasný, bezpečný a přiměřený kanál pro hlášení zranitelností, aby se problém dostal k týmu dřív než na veřejnost nebo do incidentu?“
+
+RFC 9116 definuje `security.txt` jako strojově čitelný soubor, který organizacím pomáhá popsat kontakt a pravidla pro hlášení zranitelností. OWASP k vulnerability disclosure přidává praktický rámec pro příjem, triage, komunikaci a nápravu. ENISA dlouhodobě popisuje coordinated vulnerability disclosure jako proces, ve kterém spolupracují nálezce, provozovatel, výrobce, případně koordinátor. Přeloženo do jazyka malého SaaS: bezpečnostní kontakt není dekorace. Je to provozní tok.
+
+> Codyho komentář: Nejhorší security policy je ticho. Výzkumník najde chybu, hledá kontakt, dostane obecný formulář „napište nám“ a po třech dnech automatickou odpověď z marketingu. Gratuluji, právě jste vulnerability disclosure proměnili v únikovou hru. A nikdo si ji nechtěl zahrát.
+
+### Nejdřív rozhodni, co chceš přijímat
+
+Vulnerability disclosure program nemusí být hned veřejný bug bounty s odměnami. Pro mnoho menších týmů je první zdravý krok jednodušší: jasný bezpečnostní kontakt, stručná policy a interní postup, co se stane po přijetí hlášení.
+
+Rozliš minimálně tři věci:
+
+| Typ hlášení | Příklad | Kam patří |
+| --- | --- | --- |
+| Zranitelnost produktu | obejití oprávnění, XSS, únik dat přes API | vulnerability disclosure proces |
+| Bezpečnostní incident | podezření na kompromitaci účtu nebo systému | incident response proces |
+| Běžný support problém | nejde se přihlásit, chyba v UI, dotaz na nastavení | support |
+
+Tyto toky se mohou potkat, ale nemají být jeden zmatený inbox. Když někdo nahlásí možný únik dat, může se z vulnerability reportu stát incident. Když někdo pošle screenshot chybové hlášky bez bezpečnostního dopadu, může to skončit v supportu. Důležité je, aby první příjemce věděl, jak report předat dál a co nemačkat ve stresu.
+
+### security.txt má být přesný a udržovaný
+
+`security.txt` patří u webové služby primárně na:
+
+```text
+https://example.com/.well-known/security.txt
+```
+
+Praktické minimum:
+
+```text
+Contact: mailto:security@example.com
+Policy: https://example.com/security
+Preferred-Languages: cs, en
+Expires: 2026-12-31T23:59:00Z
+Canonical: https://example.com/.well-known/security.txt
+```
+
+Podle RFC 9116 jsou pole `Contact` a `Expires` povinná. `Policy`, `Canonical`, `Encryption`, `Acknowledgments` nebo `Preferred-Languages` pomáhají, pokud je umíš udržovat. Nepřidávej do souboru sliby, které interně neumíš splnit. `Acknowledgments` nedává smysl, pokud nemáš proces schválení zveřejnění. `Encryption` nedává smysl, pokud nikdo neumí číst šifrované zprávy. `Expires` nedává smysl, pokud ho nikdo neobnoví a soubor po půl roce vypadá jako opuštěná vývěska.
+
+Dobré provozní pravidlo:
+
+```text
+Každá změna domény, produktu, podpory nebo bezpečnostního procesu ověřuje i security.txt a veřejnou disclosure policy.
+```
+
+Tohle je malá věc, která šetří hodně trapnosti.
+
+### Policy má dát výzkumníkovi bezpečné mantinely
+
+Veřejná policy nemusí být právnický traktát. Má odpovědět na otázky:
+
+- Co je v rozsahu?
+- Co je mimo rozsah?
+- Jak report bezpečně poslat?
+- Jaké informace má report obsahovat?
+- Jak rychle tým potvrdí přijetí?
+- Co výzkumník nemá dělat?
+- Jak se bude řešit zveřejnění nebo poděkování?
+
+Příklad rozsahu:
+
+| V rozsahu | Mimo rozsah |
+| --- | --- |
+| produkční web, API a zákaznický portál | sociální sítě a cizí platformy |
+| autentizace, autorizace, tenant izolace | spam, phishing na zaměstnance bez domluvy |
+| veřejná dokumentace a SDK | fyzické útoky a sociální inženýrství |
+| bezpečnostní hlavičky s reálným dopadem | obecný výpis chyb bez dopadu |
+
+Privacy-first detail: policy má výzkumníka výslovně požádat, aby neexfiltroval zákaznická data, nevytvářel trvalou škodu a neposílal do reportu víc osobních údajů, než je nutné pro reprodukci problému. Když potřebuje ukázat dopad, má stačit minimální důkaz: vlastní testovací účet, syntetická data, krátký popis a redigovaný screenshot.
+
+### Příjem reportu musí mít vlastníka
+
+Bez vlastníka je bezpečnostní inbox jen další forma ticha. U každého reportu musí být rychle jasné:
+
+- kdo potvrzuje přijetí,
+- kdo dělá první triage,
+- kdo rozhodne o závažnosti,
+- kdo komunikuje s nálezcem,
+- kdo vlastní opravu,
+- kdy se eskaluje incident,
+- co se zapisuje do interního logu.
+
+Jednoduchá triage karta:
+
+| Pole | Co zapsat |
+| --- | --- |
+| ID reportu | interní identifikátor |
+| Datum přijetí | kdy přišlo hlášení |
+| Kontakt nálezce | jen nezbytné kontaktní údaje |
+| Dotčený systém | produkt, doména, API, integrace |
+| Typ problému | autentizace, autorizace, XSS, konfigurace, data |
+| Dopad | jaký je nejhorší realistický dopad |
+| Důkaz | odkaz na minimální reprodukci nebo redigovaný podklad |
+| Stav | nové, triage, opravuje se, ověřuje se, uzavřeno |
+| Incident? | ano/ne a odkaz na incident log, pokud ano |
+
+Tahle karta nemá kopírovat payloady, zákaznická data ani tajemství. Má držet rozhodovací stopu. Pokud report obsahuje citlivý důkaz, ulož ho do omezeného prostoru a do karty dej jen odkaz a klasifikaci.
+
+### Komunikuj rychle, i když ještě nemáš opravu
+
+Výzkumník nepotřebuje slyšet „už to zítra opravíme“, pokud to nevíš. Potřebuje vědět, že report někdo převzal a že existuje další krok.
+
+Praktické odpovědi:
+
+- Do 1 pracovního dne: potvrzení přijetí.
+- Po triage: zda je report validní, nevalidní, duplicitní nebo vyžaduje doplnění.
+- Při opravě: realistický stav bez interních detailů.
+- Po opravě: potvrzení, co bylo změněno z hlediska dopadu.
+- Před zveřejněním: dohoda, co se smí zveřejnit a kdy.
+
+Neposílej výzkumníkovi interní stack trace, zákaznické ID, přesné názvy serverů, tokeny ani detaily, které nejsou nutné. Transparentnost není totéž co vysypání produkčního šuplíku.
+
+### Odměny nejsou povinnost, ale pravidla ano
+
+Bug bounty je samostatný produktový a provozní závazek. Pokud slibuješ odměny, musíš mít rozpočet, pravidla závažnosti, výluky, způsob výplaty a férové řešení duplicit. Pokud to nemáš, neříkej „bug bounty“. Řekni „vulnerability disclosure“ a buď poctivý.
+
+I bez odměn můžeš nabídnout:
+
+- potvrzení přijetí,
+- věcnou komunikaci,
+- poděkování po dohodě,
+- veřejné acknowledgement bez technických detailů,
+- jasné safe harbor mantinely pro dobré víře provedený výzkum.
+
+Safe harbor formuluj opatrně a nech si ho zkontrolovat právníkem, pokud má mít právní váhu. Produktový princip je ale jednoduchý: nechceš trestat člověka, který ti rozumně a bez škody hlásí chybu. Chceš ho odlišit od člověka, který zneužívá přístup, stahuje data nebo vydírá firmu.
+
+### Oprava končí ověřením a úklidem
+
+Zavřít ticket po mergi nestačí. U vulnerability reportu projdi:
+
+- Je oprava nasazená ve všech dotčených prostředích?
+- Ověřil tým, že původní reprodukce už nefunguje?
+- Neexistuje stejný vzor chyby jinde?
+- Je potřeba rotovat tokeny, ukončit session nebo informovat zákazníky?
+- Vznikl incident podle GDPR nebo interní politiky?
+- Je potřeba aktualizovat testy, checklist, dokumentaci nebo threat model?
+- Co se smaže nebo zrediguje po uzavření reportu?
+
+Privacy-first provoz bere i bezpečnostní report jako datový tok. Report má účel, vlastníka, omezený přístup a konec života. Archivuj rozhodnutí a důkazy přiměřeně riziku. Nenechávej citlivé screenshoty, payloady a exporty žít věčně jen proto, že přišly ve jménu bezpečnosti.
+
+### Checklist: Vulnerability disclosure privacy-first
+
+- [ ] Máme veřejný bezpečnostní kontakt, který někdo opravdu čte.
+- [ ] `security.txt` je na `/.well-known/security.txt` a obsahuje alespoň `Contact` a `Expires`.
+- [ ] Veřejná policy říká rozsah, výluky, bezpečné chování a očekávanou komunikaci.
+- [ ] Reporty mají vlastníka, triage kartu a stav.
+- [ ] Rozlišujeme vulnerability report, incident a běžný support.
+- [ ] Výzkumníky žádáme o minimální důkaz bez stahování zákaznických dat.
+- [ ] Citlivé přílohy a payloady nejdou do běžného chatu ani do dlouhé retence.
+- [ ] Komunikujeme přijetí rychle, i když oprava ještě není hotová.
+- [ ] Bug bounty neslibujeme, pokud nemáme rozpočet a pravidla.
+- [ ] Po opravě ověřujeme původní reprodukci i podobné vzory.
+- [ ] Incidentní dopad řešíme odděleně podle provozních a právních pravidel.
+- [ ] Po uzavření uklidíme dočasné přístupy, důkazy, exporty a poznámky.
+
+### Mini úkol
+
+Vyber jeden veřejný produkt, web nebo API a vyplň kartu:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Kde je bezpečnostní kontakt? |  |
+| Existuje `/.well-known/security.txt`? |  |
+| Kdo čte bezpečnostní inbox? |  |
+| Co je v rozsahu reportů? |  |
+| Co je mimo rozsah? |  |
+| Jak rychle potvrzujeme přijetí? |  |
+| Kde se ukládají citlivé důkazy? |  |
+| Kdy report přechází do incident procesu? |  |
+| Jak po opravě ověříme reprodukci? |  |
+| Kdy report a přílohy uklidíme? |  |
+
+Potom udělej jednu konkrétní změnu: přidej `security.txt`, nastav alias `security@`, napiš krátkou disclosure policy, vytvoř triage kartu, doplň safe instrukce pro důkaz bez zákaznických dat, nebo přidej security report do měsíčního provozního review. Bezpečnostní hlášení není ostuda. Ostuda je nemít dveře, na které se dá slušně zaklepat.
+
 ## Zdroje
 
 - OWASP Cheat Sheet Series: SQL Injection Prevention Cheat Sheet - doporučení k prevenci SQL injection včetně parametrizovaných dotazů, bezpečných uložených procedur, allowlist validace a principu nejmenších oprávnění: https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html
 - OWASP Cheat Sheet Series: Query Parameterization Cheat Sheet - praktické příklady parametrizovaných dotazů napříč běžnými jazyky a databázemi: https://cheatsheetseries.owasp.org/cheatsheets/Query_Parameterization_Cheat_Sheet.html
+- IETF RFC 9116: A File Format to Aid in Security Vulnerability Disclosure - formát `security.txt`, umístění v `/.well-known/`, povinná pole `Contact` a `Expires` a další pole pro policy, šifrování, kanonickou URL a preferované jazyky: https://www.rfc-editor.org/info/rfc9116
+- OWASP Cheat Sheet Series: Vulnerability Disclosure Cheat Sheet - praktický rámec pro příjem, triage, komunikaci, opravu a uzavření bezpečnostních hlášení: https://cheatsheetseries.owasp.org/cheatsheets/Vulnerability_Disclosure_Cheat_Sheet.html
+- ENISA: Good Practice Guide on Vulnerability Disclosure - doporučení a role pro coordinated vulnerability disclosure, práci s nálezci, organizacemi a koordinátory: https://www.enisa.europa.eu/publications/vulnerability-disclosure
 - European Commission: Data protection explained - přehled, kdy se GDPR použije, co je zpracování osobních údajů a jaké jsou hlavní principy zpracování včetně minimalizace, přesnosti, omezení uložení, integrity a důvěrnosti: https://commission.europa.eu/law/law-topic/data-protection/data-protection-explained_en
 - ICANN: Information for Domain Name Registrants - práva a odpovědnosti držitelů domén včetně správy, obnovy a převodu doménové registrace: https://www.icann.org/registrants
 - ICANN: Renewing Domain Names - vysvětlení obnovy domén, rizika expirace a nutnosti držet registraci aktivní: https://www.icann.org/resources/pages/renew-domain-name-2018-12-07-en
@@ -28281,6 +28465,7 @@ Potom udělej jednu malou změnu: přepiš generický scope na konkrétní text,
 
 ## Pracovní log
 
+- 2026-07-17: Doplněna příloha o vulnerability disclosure a `security.txt` bez honu na výzkumníky: rozlišení bezpečnostního hlášení, incidentu a supportu, minimální `security.txt`, disclosure policy, bezpečné mantinely pro důkazy bez zákaznických dat, triage karta, komunikace s nálezcem, rozdíl mezi disclosure programem a bug bounty, ověření opravy, checklist a mini úkol; ověřeny a doplněny zdroje RFC 9116, OWASP Vulnerability Disclosure Cheat Sheet a ENISA Good Practice Guide on Vulnerability Disclosure.
 - 2026-07-17: Doplněna příloha o připojených OAuth aplikacích bez slepého souhlasu: rozlišení přihlášení, instalace aplikace, delegovaného přístupu a servisní integrace, rozhodovací consent obrazovka, srozumitelné scopy, admin consent bez obcházení rolí, bezpečné redirecty, přehled připojených aplikací, úplná revokace včetně webhooků a jobů, checklist a mini úkol; navázáno na ověřené zdroje RFC 9700, OWASP Authorization, OWASP API Security a GDPR principy minimalizace.
 - 2026-07-17: Doplněna příloha o zákaznických API tokenech bez věčného klíče: rozlišení typů tokenů, bezpečný tok vytvoření, srozumitelné scopy, výchozí expirace, rotace bez výpadku, přiměřené zobrazení posledního použití, rychlá revokace, ochrana tokenů v logování, checklist a mini úkol; navázáno na existující zdroje OWASP k API, autorizaci, správě tajemství a logování a na RFC 9700 a RFC 9449.
 - 2026-07-17: Doplněna příloha o demo workspace a ukázkových datech bez úniku reality: návrh demo scénáře od rozhodnutí zákazníka, syntetická data místo produkčních exportů, oddělení demo prostředí od produkce, vypnutí reálných e-mailů, webhooků, plateb a integrací, průběžná údržba demo karty, checklist a mini úkol.
