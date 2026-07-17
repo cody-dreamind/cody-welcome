@@ -26797,8 +26797,192 @@ Vyber jednu akci, která má v produktu nebo provozu vyšší dopad: změna role
 
 Potom udělej jednu změnu: odstraň z auditního logu zbytečný obsah, doplň důvod zásahu, nastav retenci, odděl exportní oprávnění, nebo přepiš zákaznický název akce tak, aby byl pochopitelný bez interního slovníku. Auditní stopa má svítit na odpovědnost, ne pálit díru do soukromí.
 
+## Příloha: Ruční datové opravy bez produkční kovbojky
+
+Každý SaaS tým dřív nebo později narazí na situaci, kdy je potřeba opravit data mimo běžné uživatelské rozhraní. Špatně spárovaná faktura, duplicitní workspace, import, který skončil v půlce, zákazník, který omylem smazal důležitou konfiguraci, nebo migrace, která odhalila starý okrajový případ. To není selhání. Selhání je tvářit se, že ruční zásah je jen „rychlé SQLko“ bez vlastníka, bez kontroly a bez stopy.
+
+Ruční datová oprava je produkční změna. Má dopad na zákazníka, důvěru, audit, support a někdy i právní povinnosti. Evropská komise u ochrany osobních údajů připomíná, že zpracování zahrnuje i přístup k databázi s osobními údaji a že mezi principy GDPR patří minimalizace, přesnost, omezení uložení a integrita s důvěrností. OWASP u SQL injection dlouhodobě doporučuje oddělovat data od dotazů pomocí parametrizovaných dotazů a používat bezpečné postupy místo skládání dotazů z řetězců. Praktický dopad: i jednorázová oprava má mít stejnou disciplínu jako malý release.
+
+Codyho komentář: produkční databáze není místo pro kreativní freestyle. Kreativita patří do návrhu řešení. V databázi má být klid, záloha a někdo, kdo umí říct „stop“ dřív, než se z opravy stane archeologická expedice.
+
+### Rozliš opravu, migraci a supportní zásah
+
+Nejdřív pojmenuj, co vlastně děláš. Všechny ruční zásahy nejsou stejné.
+
+| Typ zásahu | Příklad | Správný režim |
+| --- | --- | --- |
+| Jednotlivá datová oprava | oprava špatného billing kontaktu po chybě importu | ticket, schválení, malý patch, audit |
+| Hromadná datová oprava | doplnění chybějícího příznaku u 180 workspace | skript, suchý běh, kontrolní dotaz, rollback plán |
+| Produktová migrace | změna struktury dat při releasu | běžný migrační proces, testy, monitoring |
+| Supportní zásah | obnovení nastavení na žádost zákazníka | vazba na supportní případ a omezený přístup |
+| Incidentní zásah | zastavení poškozené fronty nebo náprava chybné akce | incident log, jasný velitel, postmortem |
+
+Když tým nazve hromadnou opravu „jen supportem“, přeskočí kontrolu dopadu. Když incidentní zásah schová do běžné migrace, ztratí časovou osu. Když datovou opravu udělá vývojář z lokálního klienta bez ticketu, nikdo později neví, proč se data změnila.
+
+Dobrá pracovní věta zní:
+
+```text
+Na žádost zákazníka ACME opravujeme u workspace_1842 špatně přiřazený billing kontakt po importu z 2026-07-15. Změna se týká jen billing profilu, nemění uživatelská oprávnění ani historické faktury.
+```
+
+Tahle věta rovnou omezuje rozsah. A omezený rozsah je nejlepší kamarád produkčního klidu.
+
+### Nepouštěj ruční SQL jako první nápad
+
+Ruční SQL v produkci je někdy potřeba. Ale nemá být první reflex. Před dotazem se zeptej:
+
+- existuje administrátorská funkce, která stejnou změnu udělá bezpečněji,
+- dá se oprava udělat přes interní job se stejnou validací jako běžný produkt,
+- je problém opakovatelný a zaslouží si malý opravný skript,
+- má změna projít aplikační doménovou logikou, aby nezůstala rozbitá odvozená data,
+- bude potřeba stejný typ opravy příště.
+
+Pokud oprava obchází aplikační logiku, musíš vědět, co tím obcházíš. Například změna plánu zákazníka nemusí být jen jeden sloupec v tabulce `subscriptions`. Může ovlivnit entitlement, fakturaci, limity, auditní záznam, notifikaci adminovi a cache. Jedno `UPDATE` může vypadat elegantně a zároveň nechat produkt ve stavu „na obrazovce Premium, v backendu Basic, ve fakturaci něco mezi“. Takový stav je dražší než o deset minut delší příprava opravy.
+
+Bezpečnější vzor:
+
+1. Nejprve napiš kontrolní dotaz, který jen čte dotčené záznamy.
+2. Ověř počet řádků proti očekávání.
+3. Připrav opravu jako skript nebo parametrizovaný dotaz.
+4. Spusť suchý běh, který vypíše plánované změny.
+5. Nech změnu zkontrolovat druhým člověkem u zásahů s větším dopadem.
+6. Spusť opravu s transakcí nebo jasným rollback plánem.
+7. Hned po změně spusť kontrolní dotaz a produktový smoke test.
+
+U malého týmu nemusí druhý člověk znamenat formální change board. Stačí stručná kontrola: „Tady je ticket, dotčený tenant, před/po, počet řádků, rollback.“ To není byrokracie. To je pojistka proti špatnému `WHERE`.
+
+### Používej samostatný přístup pro opravy
+
+Datové opravy nemají běžet z osobního superadmin účtu, který umí všechno a nikdo neví proč. Vytvoř režim pro opravy:
+
+- read-only přístup pro diagnostiku,
+- omezený write přístup jen pro schválené opravy,
+- oddělené přístupy pro produkci, staging a lokální vývoj,
+- krátká životnost zvýšeného oprávnění,
+- zákaz sdílených databázových účtů,
+- audit přihlášení, spuštěného skriptu a výsledku.
+
+Pokud používáš bastion, admin konzoli nebo interní nástroj, přístup k němu má být stejně přísný jako k databázi. Interní UI s tlačítkem „opravit data“ není kouzelně bezpečné jen proto, že je hezčí než terminál. Musí mít role, validaci vstupu, audit a jasné texty dopadu.
+
+Praktická role může vypadat takto:
+
+```text
+data_fix_operator:
+- smí číst diagnostický pohled pro konkrétní tenant,
+- smí spustit schválený opravný skript s parametry ticket_id a workspace_id,
+- nesmí exportovat celé tabulky,
+- nesmí měnit role, billing ani identitu mimo výslovně povolené operace,
+- oprávnění vyprší po 4 hodinách.
+```
+
+Tohle je nudné. Výborně. Nudná oprávnění mají v produkci lepší pověst než dobrodružná.
+
+### Každá oprava má mít kartu
+
+Před opravou vyplň krátkou kartu. Ne jako slohovku, ale jako brzdu proti zkratkám.
+
+| Pole | Otázka |
+| --- | --- |
+| Důvod | Jaký konkrétní problém opravujeme? |
+| Zdroj | Kdo nebo co problém nahlásilo? |
+| Zákazník / tenant | Koho se zásah týká? |
+| Rozsah dat | Které tabulky, objekty nebo produktové schopnosti se změní? |
+| Zakázané zásahy | Čeho se oprava výslovně nesmí dotknout? |
+| Kontrola před | Jak ověříme aktuální stav? |
+| Provedení | Jaký skript, job nebo admin akce změnu udělá? |
+| Rollback | Jak vrátíme chybnou opravu nebo zastavíme dopad? |
+| Kontrola po | Jak ověříme výsledek v datech a produktu? |
+| Komunikace | Kdo a co řekne zákazníkovi nebo supportu? |
+| Audit | Kde zůstane stopa zásahu? |
+| Retence | Co po zásahu smažeme, agregujeme nebo ponecháme? |
+
+U menší opravy stačí vyplnit kartu v ticketu. U větší opravy ji dej do runbooku nebo změnového záznamu. Důležité je, aby se k ní dalo vrátit za měsíc, až se někdo zeptá: „Proč má tenhle účet jiný stav než ostatní?“
+
+### Chraň zákaznický obsah i při diagnostice
+
+Diagnostika často sežere víc dat než samotná oprava. Člověk hledá příčinu, stáhne export, otevře přílohu, zkopíruje řádek do chatu, pošle screenshot. A najednou máš citlivá data na pěti místech, přestože oprava měnila jeden příznak.
+
+Privacy-first diagnostika:
+
+- začíná metadaty, ne obsahem dokumentů,
+- používá interní ID místo jmen a e-mailů, pokud to stačí,
+- filtruje na konkrétní tenant, období a objekt,
+- neexportuje celé tabulky „pro jistotu“,
+- nezapisuje zákaznický obsah do ticketu,
+- screenshoty rediguje před vložením do interního chatu,
+- po zásahu maže dočasné soubory a lokální výstupy.
+
+Příklad špatné poznámky:
+
+```text
+Uživatel jana@firma.cz měl v importu fakturu s částkou 182 430 Kč a poznámkou o interním rozpočtu. Opravil jsem to.
+```
+
+Lepší poznámka:
+
+```text
+U workspace_1842 byl importní řádek 38 přiřazen ke špatnému billing profilu. Opraveno podle ticketu SUP-912, historické faktury nezměněny, kontrolní dotaz vrací 1 dotčený záznam.
+```
+
+Support i vývoj pochopí, co se stalo. Zákaznický obsah přitom necestuje po interních systémech jako suvenýr z incidentu.
+
+### Oprava má končit ověřením, ne pocitem
+
+„Hotovo“ u datové opravy neznamená, že dotaz doběhl. Znamená to, že produkt je v očekávaném stavu a tým ví, co se změnilo.
+
+Po opravě udělej minimálně:
+
+- kontrolní dotaz na přesný počet změněných záznamů,
+- kontrolu produktového toku, kterého se změna týká,
+- kontrolu navazujících dat: cache, search index, entitlement, billing, notifikace, exporty,
+- zápis výsledku do ticketu nebo auditní stopy,
+- úklid dočasných exportů, lokálních souborů a zvýšených oprávnění,
+- rozhodnutí, jestli se má z příčiny stát bugfix, test nebo produktová funkce.
+
+Největší hodnota ruční opravy často není samotná oprava. Je to učení, které z ní vznikne. Pokud stejný typ zásahu opakuješ potřetí, už to není výjimka. Je to chybějící nástroj, validace nebo produktový tok.
+
+### Checklist: Ruční datová oprava privacy-first
+
+- [ ] Víme, jestli jde o jednotlivou opravu, hromadnou opravu, migraci, supportní zásah nebo incidentní zásah.
+- [ ] Oprava má vlastníka, ticket a pracovní větu.
+- [ ] Rozsah je omezený na konkrétní tenant, objekt, období nebo sadu záznamů.
+- [ ] Existuje kontrolní read-only dotaz před změnou.
+- [ ] Počet očekávaných změněných záznamů je známý před spuštěním.
+- [ ] Ruční SQL není první volba, pokud existuje bezpečnější aplikační nebo skriptový postup.
+- [ ] Dotazy nebo skripty používají parametrizaci a validované vstupy.
+- [ ] Zásah běží přes omezený účet, ne sdílený superadmin přístup.
+- [ ] Vyšší oprávnění má krátkou životnost.
+- [ ] Zákaznický obsah se nekopíruje do ticketů, chatů ani auditních záznamů bez jasného důvodu.
+- [ ] Existuje rollback, transakce nebo jiný stop plán podle rizika.
+- [ ] Po změně proběhl kontrolní dotaz a produktový smoke test.
+- [ ] Dočasné exporty, soubory a oprávnění jsou uklizené.
+- [ ] Zásah je zapsaný do auditní stopy nebo změnového záznamu.
+- [ ] Opakující se příčina má navazující úkol: bugfix, validace, admin funkce nebo test.
+
+### Mini úkol
+
+Vyber poslední ruční datovou opravu, kterou tým dělal nebo by se jí bál dělat. Vyplň kartu:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jaký problém opravujeme? |  |
+| Koho se oprava týká? |  |
+| Jaký je nejmenší bezpečný rozsah změny? |  |
+| Jak ověříme stav před změnou? |  |
+| Jaký postup změnu provede? |  |
+| Kolik záznamů očekáváme změnit? |  |
+| Co se nesmí dostat do ticketu ani chatu? |  |
+| Jak vypadá rollback nebo stop plán? |  |
+| Jak ověříme výsledek? |  |
+| Co z opravy převedeme do produktu nebo testů? |  |
+
+Potom udělej jednu konkrétní úpravu: vytvoř šablonu datové opravy v ticketovacím systému, přidej read-only diagnostický dotaz, napiš suchý běh pro opakovaný skript, zaveď expiraci zvýšeného oprávnění, nebo odstraň z interních poznámek zbytečné osobní údaje. Ruční opravy nezmizí. Můžou ale přestat být malá produkční loterie.
+
 ## Zdroje
 
+- OWASP Cheat Sheet Series: SQL Injection Prevention Cheat Sheet - doporučení k prevenci SQL injection včetně parametrizovaných dotazů, bezpečných uložených procedur, allowlist validace a principu nejmenších oprávnění: https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html
+- OWASP Cheat Sheet Series: Query Parameterization Cheat Sheet - praktické příklady parametrizovaných dotazů napříč běžnými jazyky a databázemi: https://cheatsheetseries.owasp.org/cheatsheets/Query_Parameterization_Cheat_Sheet.html
+- European Commission: Data protection explained - přehled, kdy se GDPR použije, co je zpracování osobních údajů a jaké jsou hlavní principy zpracování včetně minimalizace, přesnosti, omezení uložení, integrity a důvěrnosti: https://commission.europa.eu/law/law-topic/data-protection/data-protection-explained_en
 - ICANN: Information for Domain Name Registrants - práva a odpovědnosti držitelů domén včetně správy, obnovy a převodu doménové registrace: https://www.icann.org/registrants
 - ICANN: Renewing Domain Names - vysvětlení obnovy domén, rizika expirace a nutnosti držet registraci aktivní: https://www.icann.org/resources/pages/renew-domain-name-2018-12-07-en
 - IETF RFC 7208: Sender Policy Framework (SPF) - specifikace mechanismu SPF pro autorizaci odesílacích serverů domény: https://www.rfc-editor.org/info/rfc7208
@@ -26948,6 +27132,7 @@ Potom udělej jednu změnu: odstraň z auditního logu zbytečný obsah, doplň 
 
 ## Pracovní log
 
+- 2026-07-17: Doplněna příloha o ručních datových opravách bez produkční kovbojky: rozlišení jednotlivých oprav, hromadných zásahů, migrací, supportních a incidentních zásahů, pravidla pro bezpečný postup místo prvního ručního SQL, omezené přístupy, karta opravy, ochrana zákaznického obsahu při diagnostice, ověření po zásahu, checklist a mini úkol; ověřeny a doplněny zdroje OWASP k SQL injection a parametrizaci dotazů a Evropské komise k principům zpracování osobních údajů.
 - 2026-07-17: Doplněna příloha o auditní stopě bez interního šmírování: účelové auditování významných akcí, oddělení systémových logů od auditu, zákaz kopírování obsahu dat do záznamů, omezené přístupy, karta auditované akce, retence, zákaznický auditní pohled, checklist a mini úkol; ověřeny a využity existující zdroje Evropské komise k době uchování dat a OWASP k bezpečnému logování.
 - 2026-07-16: Doplněna příloha o plánované údržbě bez překvapení a datového stresu: rozlišení běžného releasu a údržbového okna, údržbová karta, datový dopad, zákaznická komunikace, read-only režim, rollback, úklid po údržbě, checklist a mini úkol; navázáno na existující kapitoly o SLA, runboocích, degradovaném režimu, chybových stavech, retenci a provozní komunikaci.
 - 2026-07-16: Doplněna příloha o odstraňování funkcí bez ztráty důvěry: zjištění skutečné práce funkce, rozlišení tichého úklidu, deprekace a tvrdého vypnutí, návrh migrační cesty, datový konec života, komunikace podle dopadu, úklid interních závislostí, checklist a mini úkol; navázáno na existující kapitoly o chybových stavech, produktových slibech, retenci, changelogu, dokumentaci a privacy-first měření.
