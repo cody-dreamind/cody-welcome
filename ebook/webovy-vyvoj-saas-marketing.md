@@ -29606,6 +29606,158 @@ Vyber jeden workspace nebo týmový produkt a vyplň tabulku:
 
 Potom udělej jednu konkrétní opravu: přepiš popis rizikového přepínače, přidej auditní záznam změny, doplň serverovou kontrolu k pravidlu, zablokuj supportní obcházení, nastav opatrnější výchozí hodnotu nebo napiš test, že API respektuje stejnou policy jako UI. Workspace policy má zákazníkovi dát kontrolu nad týmovým provozem, ne vyrobit další administrátorskou místnost, kde nikdo nechce uklízet.
 
+## Příloha: Webové push notifikace bez permission spamu
+
+Webové push notifikace vypadají jako lákavá zkratka k návratu uživatele. Prohlížeč umí požádat o oprávnění, service worker umí přijmout zprávu i mimo otevřenou stránku a systémová notifikace umí vyskočit vedle běžných aplikací. Technicky pěkné. Produktově nebezpečné, pokud se z toho stane další kanál pro „ještě jednu drobnou připomínku“.
+
+Špatná otázka zní: „Kde všude můžeme požádat o povolení notifikací?“
+
+Lepší otázka zní: „Která událost je pro uživatele tak důležitá, že ji chce dostat i mimo otevřenou aplikaci?“
+
+Push notifikace nejsou levnější newsletter. Jsou zásah do pracovního prostoru člověka. Když je používáš bez rozmyslu, prohraješ důvěru rychleji než špatným bannerem. Banner člověk zavře. Otravné notifikace si zapamatuje.
+
+### Začni typem události, ne kanálem
+
+Nejdřív rozděl události podle toho, jakou akci od člověka skutečně potřebují.
+
+| Typ události | Patří do push? | Příklad |
+| --- | --- | --- |
+| Bezpečnostní riziko | často ano | nové přihlášení, kritická změna přístupu, podezřelá aktivita |
+| Časově citlivá práce | někdy ano | čeká schválení, selhal import, končí sdílená session |
+| Provozní stav | opatrně | plánovaná údržba pro adminy, dokončený dlouhý export |
+| Produktový tip | většinou ne | „vyzkoušejte novou funkci“ |
+| Marketing | skoro nikdy | sleva, blog, obecná novinka |
+
+Tahle tabulka není zákon. Je to brzda. Push má řešit situace, kdy zpoždění škodí práci nebo bezpečnosti. Pokud se zpráva dá klidně poslat v digestu, e-mailu, changelogu nebo zobrazit při příštím otevření aplikace, pravděpodobně do systémové notifikace nepatří.
+
+### Permission prompt je až druhý krok
+
+Prohlížečový dialog o oprávnění je hrubý nástroj. Uživatel v něm většinou nevidí tvoje produktové nuance, jen otázku, jestli web smí posílat notifikace. Podle MDN vyžadují notifikace oprávnění uživatele a žádost má být volána při uživatelské akci; web.dev zároveň doporučuje nejdřív vysvětlit hodnotu a ptát se v kontextu, ne hned po příchodu na stránku.
+
+Praktický tok:
+
+1. Uživatel dokončí práci, u které push dává smysl.
+2. Produkt ukáže vlastní nenásilný prompt s konkrétním důvodem.
+3. Uživatel si vybere typ upozornění, ne jen „všechno nebo nic“.
+4. Až potom aplikace otevře systémový permission dialog.
+5. Když uživatel odmítne, produkt to respektuje a dál netlačí.
+
+Příklad dobrého interního promptu:
+
+„Chcete dostat upozornění, až import doběhne nebo selže? Posíláme jen stav importu, ne marketingové zprávy.“
+
+Příklad špatného promptu:
+
+„Povolte notifikace, ať vám nic neunikne.“
+
+„Nic“ je přesně ten produktový rozsah, který privacy-first tým nechce slyšet. Je to jako pozvánka na schůzku bez agendy. Podezřelé už z principu.
+
+### Preference musí být jemnější než jeden vypínač
+
+Samotné oprávnění v prohlížeči říká jen to, jestli smíš notifikaci poslat. Neříká, jestli máš posílat všechny typy zpráv. Proto potřebuješ vlastní preference v produktu.
+
+Minimální model pro B2B SaaS:
+
+| Kategorie | Výchozí stav | Kdo ji řídí |
+| --- | --- | --- |
+| Bezpečnostní upozornění | zapnuto, nejde úplně vypnout pro ownera | uživatel a workspace policy |
+| Dlouhé úlohy a importy | zapnuto po aktivním přihlášení k typu úlohy | uživatel |
+| Schválení a workflow | vypnuto, nabídnout v kontextu role | uživatel nebo admin |
+| Provozní údržba | zapnuto pro administrátorské role | admin preference |
+| Produktové novinky | vypnuto pro push, použij changelog nebo e-mailový odběr | uživatel |
+
+Preference mají být dostupné z místa, kde notifikace vznikla, i z účtu uživatele. Pokud člověk dostane push o exportu, má být jasné, kde si nastaví další exportní notifikace. Ne hon na skrytý přepínač v podzemí nastavení.
+
+### Payload navrhuj jako veřejnou zprávu
+
+Push notifikace se objevují mimo aplikaci: na zamčené obrazovce, v operačním systému, v notifikačním centru, někdy před kolegy nebo klientem. Proto do nich nepatří citlivý obsah.
+
+Bezpečnější vzory:
+
+| Situace | Slabý text | Lepší text |
+| --- | --- | --- |
+| Nový komentář | „Jana Nováková napsala: Klient Acme má problém s platbou...“ | „V projektu Acme čeká nový komentář.“ |
+| Export | „Export zákazníků s e-maily je hotový“ | „Export je připravený ke stažení v aplikaci.“ |
+| Bezpečnost | „Přihlášení z IP 203.0.113.10 pro účet ondrej@...“ | „Zaznamenali jsme nové přihlášení k účtu.“ |
+| Schválení | „Faktura 2026-144 na 248 000 Kč čeká na schválení“ | „Čeká položka ke schválení.“ |
+
+Notifikace má říct, že se něco stalo a kam bezpečně pokračovat. Detail patří do autentizované aplikace. Pokud notifikace potřebuje citovat osobní údaje nebo obchodně citlivý obsah, zkus nejdřív navrhnout lepší in-app stav.
+
+### Push subscription je také datový objekt
+
+Technicky push subscription obsahuje endpoint a klíče potřebné k doručení zprávy. MDN popisuje, že aplikace potřebuje aktivní service worker a že subscription poskytuje informace nutné k odeslání push zprávy. Produktově to znamená: subscription je evidence, komu a kam smíš posílat systémové zprávy.
+
+Ulož k ní jen minimum:
+
+- ID uživatele nebo zařízení podle potřeby,
+- typ zařízení nebo prohlížeče jen pokud pomáhá supportu,
+- kategorie povolených notifikací,
+- datum vytvoření a posledního úspěšného použití,
+- stav: aktivní, pozastavená, selhává, odvolaná,
+- vazbu na workspace, pokud jsou notifikace týmové.
+
+Neukládej k ní historii citlivých payloadů. Neopisuj celé zprávy do logů. Nespojuj subscription s marketingovým profilem jen proto, že endpoint vypadá jako další identifikátor. Vypadá. Právě proto ho nepoužívej jako nový sledovací háček.
+
+### Odhlášení a revokace musí fungovat všude
+
+Uživatel může notifikace vypnout v produktu, v prohlížeči, v operačním systému nebo jen ztratit zařízení. Produkt s tím musí počítat.
+
+Praktická pravidla:
+
+- V nastavení účtu ukaž aktuální stav push notifikací pro dané zařízení.
+- Nabídni vypnutí kategorií i úplné odpojení zařízení.
+- Když push endpoint začne vracet chyby, subscription deaktivuj a dál na ni neposílej.
+- Při odhlášení ze sdíleného zařízení nabídni vypnutí notifikací pro toto zařízení.
+- Při odebrání uživatele z workspace zneplatni týmové notifikace pro daný workspace.
+- Při změně role přepočítej, které notifikace smí uživatel dostávat.
+
+Revokace není jen UI přepínač. Musí se propsat do fronty zpráv, background jobů a případných retry mechanismů. Jinak člověk vypne notifikace a další den mu stejně přijde dávka starých zpráv. To je přesně ten moment, kdy produkt působí jako posedlý kalendář. Technicky vysvětlitelné, lidsky neobhajitelné.
+
+### Měř užitečnost, ne zvědavost
+
+U push notifikací je lákavé měřit otevření, kliknutí, čas reakce, zařízení, denní dobu a spoustu dalších detailů. Privacy-first verze začíná menší sadou:
+
+- počet aktivních subscriptions podle kategorie,
+- počet odeslaných a doručených notifikací podle typu,
+- počet deaktivací po typu notifikace,
+- počet chyb doručení,
+- počet akcí dokončených po otevření aplikace v agregaci.
+
+Nepotřebuješ profilovat, v kolik hodin konkrétní člověk nejčastěji kliká. Potřebuješ vědět, jestli notifikace pomáhá dokončit práci, nebo lidi štve. Když má určitý typ vysokou míru vypnutí, nepřidávej chytřejší timing. Nejdřív se zeptej, jestli ta notifikace vůbec má právo existovat.
+
+### Checklist: Webové push notifikace privacy-first
+
+- [ ] Každý typ push notifikace má jasnou pracovní nebo bezpečnostní událost.
+- [ ] Marketingové a obecné produktové novinky nejsou ve výchozím stavu posílané přes push.
+- [ ] Systémový permission dialog se spouští až po uživatelské akci a kontextovém vysvětlení.
+- [ ] Uživatel si vybírá kategorie notifikací, ne jen globální „ano/ne“.
+- [ ] Payload neobsahuje citlivý obsah, osobní údaje ani obchodní detaily, které patří jen do aplikace.
+- [ ] Push subscription má minimální datový model a jasný stav.
+- [ ] Odhlášení funguje z produktu, prohlížeče, zařízení i po změně role nebo odebrání z workspace.
+- [ ] Fronty a retry joby respektují vypnuté nebo odvolané subscriptions.
+- [ ] Logy neukládají celé texty citlivých notifikací.
+- [ ] Měření je agregované podle typu notifikace a slouží rozhodnutí o užitečnosti.
+- [ ] Security a workspace policy pravidla mají přednost před pohodlným doručením zprávy.
+- [ ] Dokumentace vysvětluje, jaké notifikace produkt posílá a jak je vypnout.
+
+### Mini úkol
+
+Vyber jednu existující nebo plánovanou push notifikaci a vyplň kartu:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jaká událost ji spouští? |  |
+| Proč ji člověk potřebuje mimo otevřenou aplikaci? |  |
+| Jaká role ji má dostat? |  |
+| Jaký nejmenší text stačí? |  |
+| Kde se zobrazí detail po kliknutí? |  |
+| Jak ji uživatel vypne? |  |
+| Jak ji vypne admin policy? |  |
+| Co se nesmí dostat do payloadu ani logů? |  |
+| Jak poznáme, že je užitečná? |  |
+
+Potom udělej jednu konkrétní změnu: odstraň marketingový push typ, přepiš payload bez citlivého detailu, přidej kontextový prompt před permission dialog, zaveď kategorie preferencí, zneplatni subscriptions po odebrání z workspace nebo doplň agregovanou metriku vypnutí podle typu. Push notifikace má být tichý pomocník pro důležité momenty, ne další kanál pro produktovou nervozitu.
+
 ## Zdroje
 
 - MDN Web Docs: Web app manifests - přehled manifestu jako JSON souboru s metadaty webové aplikace včetně názvu, ikon, startovní URL, display režimu a dalších vlastností používaných při instalaci PWA: https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps/Manifest
@@ -29763,6 +29915,9 @@ Potom udělej jednu konkrétní opravu: přepiš popis rizikového přepínače,
 - MDN Web Docs: Geolocation API - webové rozhraní pro sdílení polohy se souhlasem uživatele a dostupností jen v bezpečném kontextu: https://developer.mozilla.org/en-US/docs/Web/API/Geolocation_API
 - MDN Web Docs: MediaDevices.getUserMedia() - přístup ke kameře a mikrofonu v bezpečném kontextu, s povinným souhlasem a požadavky na soukromí a bezpečnost: https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices/getUserMedia
 - MDN Web Docs: Notifications API - systémové notifikace z webových stránek a jejich dostupnost v bezpečném kontextu: https://developer.mozilla.org/en-US/docs/Web/API/Notifications_API
+- MDN Web Docs: Push API - rozhraní pro příjem push zpráv ze serveru přes aktivní service worker včetně `PushSubscription` s endpointem a šifrovacími klíči: https://developer.mozilla.org/en-US/docs/Web/API/Push_API
+- MDN Web Docs: ServiceWorkerRegistration.showNotification() - metoda service worker registrace pro zobrazení persistentní notifikace s volbami jako `body`, `icon`, `tag`, `data`, `actions` nebo `requireInteraction`: https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorkerRegistration/showNotification
+- web.dev: Permission UX - doporučení k žádosti o oprávnění pro push notifikace až po vysvětlení hodnoty a ve vhodném uživatelském kontextu: https://web.dev/articles/push-notifications-permissions-ux
 - MDN Web Docs: Clipboard API - čtení a zápis do systémové schránky v bezpečném kontextu, včetně bezpečnostních omezení a rozdílů mezi prohlížeči: https://developer.mozilla.org/en-US/docs/Web/API/Clipboard_API
 - MDN Web Docs: `<iframe>`: The Inline Frame element - přehled atributů iframe včetně `sandbox`, `allow`, `loading` a `referrerpolicy` pro omezení a řízení vloženého obsahu: https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/iframe
 - MDN Web Docs: Cache-Control header - pravidla pro HTTP cache: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Cache-Control
@@ -29778,6 +29933,7 @@ Potom udělej jednu konkrétní opravu: přepiš popis rizikového přepínače,
 
 ## Pracovní log
 
+- 2026-07-17: Doplněna příloha o webových push notifikacích bez permission spamu: rozlišení událostí vhodných pro push, kontextová žádost o oprávnění, preference kategorií, bezpečný payload bez citlivého obsahu, minimální datový model subscription, revokace napříč produktem a zařízeními, agregované měření užitečnosti, checklist a mini úkol; ověřeny a doplněny zdroje MDN k Notifications API, Push API a `showNotification()` a web.dev k permission UX.
 - 2026-07-17: Doplněna příloha o workspace policy bez administrátorského bludiště: rozhodovací věty pro pravidla, rozlišení rolí, policy a výjimek, vynucení v UI/API/integracích/jobech/supportu, opatrné výchozí hodnoty, dopadové potvrzení změn, hlášky pro uživatele, checklist a mini úkol; navázáno na existující privacy-first pravidla k minimalizaci, oprávněním, auditní stopě a bezpečnému B2B provozu.
 - 2026-07-17: Doplněna příloha o instalovatelné PWA bez falešné aplikace: pracovní důvod instalace, manifest jako veřejný slib, bezpečné `scope` a `start_url`, nenátlakový install prompt, pracovní shortcuts, ikony, consent a oprávnění, release kontrola, checklist a mini úkol; ověřeny a doplněny zdroje MDN, W3C a web.dev k Web App Manifestu a instalovatelnosti PWA.
 - 2026-07-17: Doplněna příloha o PWA a offline režimu bez lokální datové skládky: definice offline scénáře od práce uživatele, rozdělení dat podle rizika, lidsky popsané cache strategie, stavový model synchronizace, odhlášení a sdílená zařízení, bezpečná diagnostika, release kontrola service workeru, checklist a mini úkol; ověřeny a doplněny zdroje MDN k Service Worker API, Cache API a Storage API.
