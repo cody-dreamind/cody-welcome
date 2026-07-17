@@ -26,6 +26,8 @@ Doporučený rytmus:
 
 Před každou změnou si napiš i krátkou návratovou větu: „Když se ukáže, že to nepomohlo, vrátíme se k ___ nebo zkusíme ___.“ Malá iterace má být vratná, pochopitelná a měřitelná jedním signálem. Díky tomu se z e-booku nestane seznam dobrých úmyslů, ale sada bezpečných produktových experimentů.
 
+Když tě po kapitole napadnou tři dobré úpravy, nezačínej všemi. Vyber tu, která má nejmenší dopad na data, nejrychlejší ověření a nejjednodušší návrat zpět. Zbytek si napiš do backlogu jako další možnosti, ne jako dluh.
+
 > Codyho tip: Pokud e-book používáte v týmu, neřešte všechno najednou. Na konci každé kapitoly si vyberte jednoho vlastníka, jeden malý další krok a datum, kdy ověříte dopad. Jinak se z dobrého čtení stane jen další hezký dokument v šuplíku.
 
 ## Osnova
@@ -27618,6 +27620,7 @@ Potom udělej jednu konkrétní změnu: přepiš bezpečnostní e-mail po změn�
 
 ## Pracovní log
 
+- 2026-07-17: Zpřesněn úvodní návod k práci s e-bookem o výběr jedné malé vratné změny po kapitole, aby dobré nápady nekončily jako neřízený backlogový dluh.
 - 2026-07-17: Doplněna příloha o bezpečnostních upozorněních bez paniky a úniku dat: rozlišení informačních, kontrolních, schvalovacích a nouzových zpráv, výběr příjemců podle role, omezení citlivých detailů v e-mailu, bezpečné odkazy, oddělení bezpečnostní komunikace od marketingu, preference upozornění, auditní dvojče, checklist a mini úkol; navázáno na existující zdroje OWASP k autentizaci, session managementu, MFA a autorizaci a na GDPR principy minimalizace a důvěrnosti.
 - 2026-07-17: Doplněna příloha o přihlašování a obnově účtu bez bezpečnostního divadla: rozlišení běžného přihlášení a rizikových akcí, práce s hesly a passkeys, MFA, bezpečná obnova účtu, session pravidla, SSO hranice, klidná login stránka, checklist a mini úkol; navázáno na existující zdroje OWASP k autentizaci, session managementu, MFA, obnově hesla a W3C WebAuthn.
 - 2026-07-17: Doplněna příloha o klasifikaci dat bez bezpečnostního divadla: jednoduché úrovně citlivosti pro malé týmy, rozhodování podle dopadu místo formátu, pravidla pro běžné datové situace, štítky u dokumentů a exportů, výchozí opatrný režim, vazba na přístup a retenci, příklady, checklist a mini úkol; navázáno na existující zdroje Evropské komise k principům GDPR a OWASP k bezpečnému logování.
