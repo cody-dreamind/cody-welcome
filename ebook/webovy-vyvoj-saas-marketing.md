@@ -29932,8 +29932,132 @@ Vyber jeden background job, který posílá e-mail, zpracovává import, vytvá�
 
 Potom udělej jednu konkrétní změnu: zmenši payload, přidej idempotency key, nastav retenci dead-letter queue, doplň vlastníka scheduled jobu, zamaskuj logovaný obsah nebo vytvoř kill switch pro rizikový typ úlohy. Background job má být spolehlivý pracovník, ne tajný sklep plný starých dat.
 
+## Příloha: TLS certifikáty bez tichého výpadku
+
+TLS certifikát je drobný soubor s velkým dopadem. Když vyprší, aplikace může pořád běžet, databáze může být zdravá a web server může vracet obsah. Pro běžného člověka je ale web rozbitý: prohlížeč varuje, integrace odmítají spojení a důvěra mizí rychleji než vysvětlení „jen certifikát“.
+
+Špatná otázka zní: „Kdo ten certifikát obnoví, až si někdo všimne?“
+
+Lepší otázka zní: „Jak zajistíme, že se certifikát obnoví automaticky, server načte novou verzi a tým dostane varování dřív než zákazník?“
+
+Let’s Encrypt ve FAQ uvádí, že výchozí certifikáty jsou platné 90 dní a doporučuje obnovovat 90denní certifikáty každých 60 dní. Certbot dokumentace popisuje, že většina instalací má automatické obnovování přednastavené a že na Linuxu/BSD lze ověřit cron nebo systemd timer hledáním příkazu `certbot renew`. Odkazy jsou ve zdrojích.
+
+Codyho komentář: Certifikát není jednorázová instalace HTTPS. Je to provozní rutina. Pokud se o něm tým dozví až z prohlížeče, rutina neexistuje. Existuje jen optimismus s datem expirace.
+
+### Certifikát je součást dostupnosti
+
+U monitoringu webu nestačí testovat jen to, že server odpoví na portu 443. Potřebuješ vědět:
+
+- certifikát není expirovaný,
+- doména v certifikátu odpovídá hostu,
+- řetězec certifikátů je důvěryhodný,
+- automatická obnova opravdu běží,
+- web server po obnově načte novou verzi,
+- alert přijde dostatečně dopředu.
+
+Praktický alert:
+
+| Signál | Kdy varovat | Proč |
+| --- | --- | --- |
+| Certifikát expiruje | 21 dní předem | čas opravit renewal bez paniky |
+| Certifikát expiruje brzy | 7 dní předem | eskalace vlastníkovi provozu |
+| Certifikát expiroval | okamžitě | incident dostupnosti |
+| Renewal job selhal | při prvním selhání a opakovaně podle rytmu | problém řešit dřív než expiraci |
+| Reload web serveru selhal | okamžitě | nový certifikát může existovat, ale server ho nepoužívá |
+
+Alert má mít vlastníka. „Někdo z tech týmu“ není vlastník. Je to skupinové přání.
+
+### Obnova musí končit reloadem služby
+
+Častý problém: certifikát se obnoví na disku, ale nginx, Apache, HAProxy nebo jiná služba pořád používá starou verzi načtenou v paměti. Proto renewal postup nesmí končit jen příkazem `certbot renew`. Musí zahrnovat i bezpečný reload služby, která certifikát používá.
+
+Provozní karta certifikátu:
+
+| Pole | Odpověď |
+| --- | --- |
+| Doména |  |
+| Kdo je vlastník |  |
+| Kde se certifikát vydává |  |
+| Jaký nástroj obnovuje certifikát |  |
+| Kde běží scheduled renewal | cron / systemd timer / jiný mechanismus |
+| Jak se testuje dry-run |  |
+| Jaká služba se po obnově reloaduje | nginx / Apache / HAProxy / jiná |
+| Kde jsou logy obnovy |  |
+| Kdo dostane alert před expirací |  |
+| Jaký je ruční nouzový postup |  |
+
+U ručního nouzového postupu napiš i návrat: jak ověříš, že se nepřepsala konfigurace, že HTTP-01 nebo DNS-01 challenge funguje a že se automatická obnova po ručním zásahu nerozbila.
+
+### Testuj zvenku i zevnitř
+
+Interní kontrola renewal jobu říká, že automatizace běží. Externí kontrola říká, co vidí uživatel. Potřebuješ obě.
+
+Interně kontroluj:
+
+- `systemctl list-timers` nebo cron záznam podle způsobu instalace,
+- výsledek `certbot renew --dry-run` na vhodném místě,
+- renewal hooky a reload web serveru,
+- logy z posledního běhu,
+- přístupová práva ke klíči a certifikátu.
+
+Externě kontroluj:
+
+- HTTPS odpověď bez ignorování certifikátu,
+- datum expirace certifikátu,
+- správné SAN názvy pro hlavní doménu i subdomény,
+- redirecty z HTTP na HTTPS,
+- případný dopad HSTS.
+
+Privacy-first detail: monitoring dostupnosti může běžet bez osobního sledování návštěvníků. Pro kontrolu certifikátu nepotřebuješ session recording, analytics pixel ani identitu uživatele. Stačí technický check domény a alert.
+
+### Incident s certifikátem ber jako provozní signál
+
+Když certifikát expiruje, oprav nejdřív dostupnost. Potom se vrať k systému:
+
+| Otázka | Proč |
+| --- | --- |
+| Proč automatická obnova neproběhla? | job, DNS challenge, firewall, token, zastaralý klient |
+| Proč se problém nechytil dřív? | chyběl alert, alert šel špatnému člověku, nikdo ho nevlastnil |
+| Proč server nepoužil nový certifikát? | chyběl reload, reload selhal, více proxy vrstev |
+| Jak poznáme opakování? | nový monitoring, runbook, kalendář revize |
+
+Nepiš postmortem typu „pohlídáme si to“. Přidej konkrétní opatření: alert 21/7 dní před expirací, kontrola renewal timeru, `--dry-run` po změně DNS, reload hook, dokumentovaný vlastník.
+
+### Checklist: TLS certifikáty bez výpadku
+
+- [ ] Každá produkční doména má vlastníka certifikátu.
+- [ ] Víme, jaký nástroj certifikát vydává a obnovuje.
+- [ ] Automatická obnova běží přes cron, systemd timer nebo jiný popsaný mechanismus.
+- [ ] Renewal postup zahrnuje reload služby, která certifikát používá.
+- [ ] Existuje externí monitoring expirace certifikátu.
+- [ ] Alert chodí před expirací, ne až po ní.
+- [ ] Nouzový ruční postup nepoškodí automatickou obnovu.
+- [ ] Hlavní doména, `www`, API a další subdomény jsou pokryté správným SAN nebo samostatným certifikátem.
+- [ ] Po změně DNS, proxy nebo hostingu se ověřuje i certifikát.
+- [ ] HSTS se zapíná až ve chvíli, kdy renewal a subdomény dávají provozně smysl.
+- [ ] Incident s certifikátem končí konkrétní opravou monitoringu nebo runbooku.
+
+### Mini úkol
+
+Vyber jednu produkční doménu a vyplň kartu:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jaká doména se kontroluje? |  |
+| Kdy certifikát expiruje? |  |
+| Kdo je vlastník obnovy? |  |
+| Kde běží automatický renewal? |  |
+| Jaký mechanismus reloaduje web server? |  |
+| Kde uvidíme poslední selhání obnovy? |  |
+| Kdo dostane alert 21 dní před expirací? |  |
+| Jaká jedna změna zabrání tichému výpadku? |  |
+
+Potom udělej jednu konkrétní opravu: zapni externí kontrolu expirace, doplň vlastníka certifikátu, ověř `certbot renew --dry-run`, přidej reload hook, napiš runbook pro ruční obnovu nebo přidej certifikát do incidentního checklistu. HTTPS má být nudné. Nuda v certifikátech je výhra.
+
 ## Zdroje
 
+- Let’s Encrypt: FAQ - platnost výchozích certifikátů a doporučený rytmus obnovy: https://letsencrypt.org/docs/faq/
+- Certbot documentation: User Guide - obnovování certifikátů, automatické obnovy, kontrola cron/systemd timerů a `certbot renew --dry-run`: https://eff-certbot.readthedocs.io/en/stable/using.html
 - MDN Web Docs: Web app manifests - přehled manifestu jako JSON souboru s metadaty webové aplikace včetně názvu, ikon, startovní URL, display režimu a dalších vlastností používaných při instalaci PWA: https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps/Manifest
 - W3C: Web Application Manifest - specifikace členů manifestu jako `name`, `short_name`, `icons`, `start_url`, `scope`, `display` a `shortcuts`: https://www.w3.org/TR/appmanifest/
 - web.dev: Add a web app manifest - praktický přehled manifestu, jeho propojení přes HTML, ikon, display režimů a vztahu k instalovatelnosti PWA: https://web.dev/learn/pwa/web-app-manifest
@@ -30107,6 +30231,7 @@ Potom udělej jednu konkrétní změnu: zmenši payload, přidej idempotency key
 
 ## Pracovní log
 
+- 2026-07-17: Doplněna příloha o TLS certifikátech bez tichého výpadku: certifikát jako součást dostupnosti, monitoring expirace, automatická obnova, reload služby po obnově, interní a externí testy, incidentní otázky, checklist a mini úkol; ověřeny zdroje Let’s Encrypt a Certbot k platnosti certifikátů a automatickému renewal.
 - 2026-07-17: Doplněna příloha o background jobech a frontách bez neviditelného skladu dat: účel jobu jednou větou, minimalizace payloadu přes referenční ID, retry a idempotence, dead-letter queue s retencí, karty scheduled jobů, kill switch, observabilita bez logování citlivých payloadů, checklist a mini úkol.
 - 2026-07-17: Doplněna příloha o webových push notifikacích bez permission spamu: rozlišení událostí vhodných pro push, kontextová žádost o oprávnění, preference kategorií, bezpečný payload bez citlivého obsahu, minimální datový model subscription, revokace napříč produktem a zařízeními, agregované měření užitečnosti, checklist a mini úkol; ověřeny a doplněny zdroje MDN k Notifications API, Push API a `showNotification()` a web.dev k permission UX.
 - 2026-07-17: Doplněna příloha o workspace policy bez administrátorského bludiště: rozhodovací věty pro pravidla, rozlišení rolí, policy a výjimek, vynucení v UI/API/integracích/jobech/supportu, opatrné výchozí hodnoty, dopadové potvrzení změn, hlášky pro uživatele, checklist a mini úkol; navázáno na existující privacy-first pravidla k minimalizaci, oprávněním, auditní stopě a bezpečnému B2B provozu.
