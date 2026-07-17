@@ -27145,6 +27145,159 @@ Vyber tři místa, kde se ve vašem týmu nejčastěji kopírují data: support 
 
 Potom udělej jednu malou změnu: přidej štítek do šablony support ticketu, vytvoř pravidlo pro screenshoty, nastav omezenou složku pro exporty, doplň do AI prompt pravidel zakázané vstupy, nebo smaž staré reporty, které nemají vlastníka. Klasifikace dat je užitečná teprve tehdy, když se projeví v místě, kde člověk právě pracuje.
 
+## Příloha: Přihlašování a obnova účtu bez bezpečnostního divadla
+
+Přihlašování je první bezpečnostní funkce, kterou uživatel skutečně používá. Když je slabé, otevírá dveře cizím lidem. Když je přehnaně otravné, učí uživatele obcházet pravidla, sdílet účty nebo odkládat práci. Privacy-first SaaS potřebuje přihlašování, které chrání účet, ale nevyrábí zbytečný sběr dat a záchranné rituály.
+
+Dobrá otázka nezní: „Kolik bezpečnostních prvků tam ještě přidáme?“
+
+Lepší otázka zní: „Jak ověříme správného člověka v důležitém momentu, s nejmenším nutným třením a bez sběru dat, která pro přihlášení nepotřebujeme?“
+
+OWASP ve svých doporučeních k autentizaci, správě session, MFA a obnově hesla opakovaně zdůrazňuje praktické věci: nepoužívat slabé recovery postupy, chránit session tokeny, znovu ověřovat rizikové akce a neprozrazovat útočníkovi zbytečné informace. WebAuthn zase ukazuje směr k přihlašování veřejnoklíčovou kryptografií místo sdílených tajemství. Odkazy jsou ve zdrojích.
+
+> Codyho komentář: Bezpečnost přihlášení se často měří počtem překážek. To je jako měřit kvalitu dveří počtem cedulek „neotvírat“. Důležitější je, jestli správný člověk projde, špatný neprojde a support nemusí každý pátek ručně luštit identitu podle pocitu.
+
+### Rozliš běžné přihlášení a rizikovou akci
+
+Ne každá akce v produktu potřebuje stejné ověření. Přihlášení do dashboardu, změna e-mailu, export zákaznických dat a vypnutí MFA nejsou stejná rizika.
+
+Praktické rozdělení:
+
+| Situace | Riziko | Doporučený přístup |
+| --- | --- | --- |
+| Běžné přihlášení | neoprávněný vstup do účtu | silná autentizace, bezpečná session, detekce neobvyklého chování |
+| Změna hesla nebo e-mailu | převzetí účtu | znovu ověřit uživatele a poslat bezpečnostní upozornění |
+| Zapnutí nebo vypnutí MFA | oslabení nebo posílení účtu | potvrzení heslem nebo silnějším faktorem, auditní záznam |
+| Export dat | únik zákaznických nebo osobních údajů | re-auth, role, účel, audit a případně čekací doba |
+| Změna billing údajů | finanční dopad | re-auth, potvrzení změny, audit |
+| Pozvání administrátora | rozšíření oprávnění | kontrola role, re-auth a viditelný záznam pro vlastníka účtu |
+
+Tento model pomáhá držet rovnováhu. Uživatel nemusí potvrzovat každé kliknutí kódem, ale při akci s dopadem systém přitvrdí. Bezpečnost má být kontextová, ne plošně otravná.
+
+### Hesla ber jako přechodný kompromis
+
+Hesla jsou pořád běžná, ale nejsou ideální. Lidé je recyklují, ukládají do špatných míst a support potom řeší obnovy účtů. Pokud hesla používáš, nastav minimálně zdravý základ:
+
+- podporuj dlouhá hesla a správce hesel,
+- neomezuj nesmyslně maximální délku,
+- nevyžaduj absurdní kombinace znaků, které vedou k předvídatelným vzorům,
+- kontroluj hesla proti známým kompromitovaným hodnotám, pokud to umíš bezpečně,
+- ukládej pouze bezpečné hashované hodnoty, nikdy plaintext,
+- rate-limituj pokusy o přihlášení,
+- chybové hlášky piš tak, aby neprozrazovaly, jestli účet existuje.
+
+Ještě lepší je nabídnout modernější cesty: passkeys přes WebAuthn, SSO pro týmy, magic link jen tam, kde dává smysl, a MFA jako přirozenou součást účtu. Passkeys nejsou kouzelná náhrada všech procesů, ale umí odstranit velkou část problémů se sdílenými tajemstvími.
+
+Privacy-first poznámka: Přihlašování nepotřebuje znát víc osobních údajů jen proto, že je to „bezpečnost“. Bezpečnostní signály mají mít jasný účel, omezenou retenci a nemají se míchat do marketingové analytiky.
+
+### MFA navrhni jako ochranu, ne trest
+
+Multi-factor authentication má největší smysl u administrátorů, billing rolí, exportů, produkčních integrací a účtů s citlivými daty. Zároveň musí mít promyšlenou obnovu. MFA, které jde vypnout jedním e-mailem supportu bez ověření, je bezpečnostní kulisa.
+
+Praktická pravidla:
+
+- Nabídni TOTP, passkeys nebo bezpečnostní klíče podle cílové skupiny.
+- U privilegovaných rolí MFA vyžaduj nebo alespoň silně doporuč.
+- Ukaž jasně, které akce MFA chrání.
+- Recovery kódy zobraz jednou, vysvětli jejich význam a umožni je znovu vygenerovat po ověření.
+- Ztrátu faktoru řeš procesem podle rizika účtu, ne jedním univerzálním formulářem.
+- Vypnutí MFA audituj a oznam vlastníkovi účtu.
+
+Příklad: U běžného čtenářského účtu může být MFA dobrovolné. U workspace administrátora, který může exportovat zákaznická data a pozvat další administrátory, má být MFA standard. Role rozhoduje o riziku.
+
+### Obnova účtu nesmí být slabší než přihlášení
+
+Útočník často nejde přes hlavní dveře. Jde přes „zapomněl jsem heslo“, starý e-mail, supportní výjimku nebo telefonát s naléhavou historkou. Proto musí být obnova účtu navržená stejně pečlivě jako přihlášení.
+
+Bezpečný základ:
+
+- Resetovací odkaz je jednorázový, náhodný a časově omezený.
+- Po použití resetu se staré session podle rizika ukončí.
+- Chybová hláška neprozradí, jestli e-mail existuje.
+- E-mail s obnovou neobsahuje zbytečná osobní nebo interní data.
+- Support nemůže ručně změnit přístup bez ověřeného procesu.
+- U privilegovaných účtů existuje přísnější cesta obnovy.
+- Změny přihlašovacích údajů se posílají jako bezpečnostní upozornění.
+
+Obnova má mít také stop plán. Když uživatel hlásí podezření na převzetí účtu, support musí vědět, jak dočasně zablokovat přístup, odpojit aktivní session, zkontrolovat poslední rizikové akce a eskalovat incident. Bez toho se z obnovy účtu stane improvizace s produkčním dopadem.
+
+### Session je citlivý klíč, ne technický detail
+
+Po přihlášení uživatele chrání hlavně session. Pokud session token unikne, útočník se často nemusí ptát na heslo. Proto session navrhuj jako bezpečnostní objekt:
+
+- používej `Secure`, `HttpOnly` a rozumné `SameSite` u cookie, pokud jde o webovou session,
+- neukládej session tokeny do URL,
+- nastav expiraci a obnovování podle rizika produktu,
+- odděl krátkodobé přihlašovací session od dlouhodobých API tokenů,
+- umožni uživateli zobrazit a ukončit aktivní session,
+- při změně hesla, MFA nebo e-mailu zvaž ukončení ostatních session,
+- session logy drž chudé: čas, typ akce, přibližný kontext, ne obsah práce.
+
+Příklad: Produkt s citlivými zákaznickými daty může mít běžnou session pro práci a krátké opětovné ověření pro export nebo změnu administrátora. Uživatel není neustále vyrušovaný, ale rizikové akce mají vlastní bránu.
+
+### SSO a firemní identita potřebují jasné hranice
+
+U B2B SaaS často přijde požadavek na Google Workspace, Microsoft Entra ID, Okta nebo jiné SSO. SSO může výrazně zlepšit správu přístupů, ale musí být jasné, co přebírá identitní provider a co pořád hlídá aplikace.
+
+Praktické otázky:
+
+- Které domény nebo organizace se mohou přes SSO přihlásit?
+- Jak vzniká účet při prvním přihlášení?
+- Kdo mapuje role: identitní provider, aplikace, nebo administrátor?
+- Co se stane, když člověk odejde z firmy?
+- Podporuje zákazník SCIM nebo jiný provisioning, nebo jde jen o přihlášení?
+- Jak řešíme break-glass administrátora, když SSO nefunguje?
+
+SSO neznamená, že aplikace může přestat kontrolovat oprávnění. Identita říká, kdo člověk je. Autorizace říká, co smí udělat. Tyto dvě věci drž odděleně, jinak se z „přihlásil se správně“ snadno stane „vidí příliš mnoho“.
+
+### Přihlašovací obrazovka má být klidná a pravdivá
+
+Login stránka není místo pro dark patterns. Nepřidávej do ní marketingové souhlasy, sociální widgety, zbytečné trackery ani otázky, které s přihlášením nesouvisí. Člověk chce bezpečně pokračovat do produktu.
+
+Dobré návyky:
+
+- jasně označ, do jakého produktu nebo workspace se člověk hlásí,
+- podporuj správce hesel a autocomplete atributy,
+- zobraz srozumitelnou chybu bez prozrazení existence účtu,
+- u SSO vysvětli, kdy se použije firemní přihlášení,
+- odkazy na reset hesla, podporu a bezpečnostní informace drž viditelné,
+- nepoužívej přihlašovací stránku jako billboard pro pět kampaní.
+
+Přihlašování má budovat důvěru. Když uživatel na loginu vidí tři externí skripty, sociální tlačítka, newsletterový checkbox a animovaný hero, důvěra nezačíná ideálně. Hezké přihlášení je hlavně klidné, rychlé a předvídatelné.
+
+### Checklist: Přihlašování a obnova privacy-first
+
+- [ ] Rozlišujeme běžné přihlášení, rizikové akce a administrátorské změny.
+- [ ] Hesla podporují správce hesel, dlouhé hodnoty a bezpečné ukládání.
+- [ ] Přihlašovací chyby neprozrazují existenci účtu.
+- [ ] MFA je dostupné a u privilegovaných rolí vyžadované nebo silně doporučené.
+- [ ] Recovery kódy a obnova MFA mají jasný proces.
+- [ ] Reset hesla používá jednorázový časově omezený token.
+- [ ] Změna hesla, e-mailu, MFA a role vytváří auditní záznam a bezpečnostní upozornění.
+- [ ] Session tokeny nejsou v URL a cookie mají bezpečné atributy.
+- [ ] Uživatel nebo administrátor může ukončit aktivní session.
+- [ ] Export dat, billing změny a pozvání administrátora vyžadují re-auth podle rizika.
+- [ ] SSO neobchází aplikační autorizaci.
+- [ ] Login stránka nepoužívá zbytečné trackery ani marketingové souhlasy.
+- [ ] Bezpečnostní logy se nepoužívají jako marketingová analytika.
+
+### Mini úkol
+
+Vyber jeden přihlašovací nebo recovery tok a vyplň pracovní list:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jakou práci uživatel dělá? |  |
+| Jaké riziko má zneužití tohoto toku? |  |
+| Jak dnes ověřujeme identitu? |  |
+| Co je nejslabší recovery cesta? |  |
+| Které akce by měly vyžadovat re-auth? |  |
+| Jaké bezpečnostní upozornění uživatel dostane? |  |
+| Jaké údaje v logu opravdu potřebujeme? |  |
+| Co můžeme z loginu nebo resetu odstranit? |  |
+
+Potom udělej jednu malou změnu: doplň `HttpOnly` a `Secure` u session cookie, přidej bezpečnostní e-mail po změně hesla, zkrať resetovací token, přidej re-auth před export, sepiš recovery postup pro ztracené MFA, nebo odstraň z login stránky marketingový skript. Přihlašování není hotové tím, že člověk projde formulářem. Je hotové tehdy, když chrání účet i ve chvíli, kdy se něco pokazí.
+
 ## Zdroje
 
 - OWASP Cheat Sheet Series: SQL Injection Prevention Cheat Sheet - doporučení k prevenci SQL injection včetně parametrizovaných dotazů, bezpečných uložených procedur, allowlist validace a principu nejmenších oprávnění: https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html
@@ -27299,6 +27452,7 @@ Potom udělej jednu malou změnu: přidej štítek do šablony support ticketu, 
 
 ## Pracovní log
 
+- 2026-07-17: Doplněna příloha o přihlašování a obnově účtu bez bezpečnostního divadla: rozlišení běžného přihlášení a rizikových akcí, práce s hesly a passkeys, MFA, bezpečná obnova účtu, session pravidla, SSO hranice, klidná login stránka, checklist a mini úkol; navázáno na existující zdroje OWASP k autentizaci, session managementu, MFA, obnově hesla a W3C WebAuthn.
 - 2026-07-17: Doplněna příloha o klasifikaci dat bez bezpečnostního divadla: jednoduché úrovně citlivosti pro malé týmy, rozhodování podle dopadu místo formátu, pravidla pro běžné datové situace, štítky u dokumentů a exportů, výchozí opatrný režim, vazba na přístup a retenci, příklady, checklist a mini úkol; navázáno na existující zdroje Evropské komise k principům GDPR a OWASP k bezpečnému logování.
 - 2026-07-17: Doplněna příloha o ručních datových opravách bez produkční kovbojky: rozlišení jednotlivých oprav, hromadných zásahů, migrací, supportních a incidentních zásahů, pravidla pro bezpečný postup místo prvního ručního SQL, omezené přístupy, karta opravy, ochrana zákaznického obsahu při diagnostice, ověření po zásahu, checklist a mini úkol; ověřeny a doplněny zdroje OWASP k SQL injection a parametrizaci dotazů a Evropské komise k principům zpracování osobních údajů.
 - 2026-07-17: Doplněna příloha o auditní stopě bez interního šmírování: účelové auditování významných akcí, oddělení systémových logů od auditu, zákaz kopírování obsahu dat do záznamů, omezené přístupy, karta auditované akce, retence, zákaznický auditní pohled, checklist a mini úkol; ověřeny a využity existující zdroje Evropské komise k době uchování dat a OWASP k bezpečnému logování.
