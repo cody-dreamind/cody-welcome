@@ -28640,6 +28640,159 @@ Vyber jeden aktivní repozitář a projdi deset runtime závislostí:
 
 Potom udělej jednu konkrétní změnu: doplň `license` do vlastního `package.json`, založ `THIRD_PARTY_NOTICES.md`, nastav licenční allowlist v dependency review, odstraň balíček bez jasné licence, nebo napiš krátké pravidlo pro copyleft komponenty. Licence není právnická mlha na konec projektu. Je to součást technické hygieny, stejně jako testy, aktualizace a zálohy.
 
+## Příloha: SBOM bez inventáře pro šuplík
+
+Software Bill of Materials, zkráceně SBOM, je seznam softwarových komponent a vztahů mezi nimi. Vypadá jako technický výstup pro bezpečnostní tým, ale pro malý SaaS je užitečný hlavně proto, že odpovídá na jednoduché provozní otázky: co v produktu běží, v jaké verzi, odkud to přišlo, jakou to má licenci a koho se dotkne bezpečnostní nebo licenční problém.
+
+Špatná otázka zní: „Umíme vygenerovat SBOM soubor?“
+
+Lepší otázka zní: „Umíme podle inventáře rychle rozhodnout, jestli nás nová zranitelnost, změna licence nebo zákaznický audit opravdu zasahuje?“
+
+CISA a dřívější práce NTIA popisují minimální prvky SBOM jako identifikaci dodavatele, komponenty, verze, jedinečných identifikátorů, vztahů mezi komponentami, autora záznamu a časového razítka. CycloneDX a SPDX jsou běžné formáty, které umí SBOM zapsat strojově čitelně. Odkazy jsou ve zdrojích.
+
+> Codyho komentář: SBOM není trofej pro compliance vitrínu. Je to mapa cizího kódu v produktu. Když ji nikdo neumí použít při alertu, je to jen dražší verze `npm ls` s kravatou.
+
+### Začni účelem, ne formátem
+
+Nejdřív si napiš, k čemu SBOM potřebuješ. Formát vyber až potom.
+
+Praktické účely:
+
+| Účel | Co potřebuješ vědět |
+| --- | --- |
+| Bezpečnostní triage | jestli zranitelná komponenta běží v produkci a je dosažitelná |
+| Licenční kontrola | jaké licence jsou v runtime, klientském bundlu, SDK nebo distribuci |
+| Zákaznický audit | jak doložit relevantní komponenty bez vyzrazení interní architektury navíc |
+| Incident response | které služby, buildy a zákaznické balíčky obsahují problémovou verzi |
+| Údržba produktu | které komponenty jsou opuštěné, duplicitní nebo zbytečně těžké |
+
+Jiný SBOM potřebuje backend SaaS, jiný klientská aplikace, jiný SDK a jiný self-hosted image. Jeden univerzální soubor pro všechno se rychle změní v inventář, kterému nikdo nevěří.
+
+### SBOM má patřit k artefaktu
+
+SBOM má největší hodnotu, když popisuje konkrétní vydaný artefakt: Docker image, build frontendu, release balíčku, SDK verzi nebo self-hosted instalaci. Inventář z vývojové větve je užitečný signál, ale zákazníka a incident často zajímá přesná vydaná verze.
+
+Praktická vazba:
+
+| Artefakt | Kde držet SBOM |
+| --- | --- |
+| Docker image | připojit k image nebo release artefaktům |
+| Frontend build | uložit k release verzi a commit SHA |
+| npm/Python/Ruby balíček | generovat při publikaci balíčku |
+| Self-hosted bundle | dodat ve stažitelném balíku nebo dokumentaci |
+| Interní SaaS release | archivovat v release složce nebo artefakt storage |
+
+Do SBOM nepatří tajemství, produkční konfigurace, zákaznická data ani interní poznámky. Má popisovat komponenty a vztahy, ne vyprávět celý provozní deník.
+
+### Minimální pole musí být stabilní
+
+SBOM bez názvů, verzí a vztahů je jen seznam slov. Drž se malého minima, které nástroje i lidé dokážou použít.
+
+U každé komponenty se hodí:
+
+- název komponenty,
+- verze,
+- ekosystém nebo package URL, pokud ji používáš,
+- dodavatel nebo původ,
+- licence podle SPDX, pokud je známá,
+- hash nebo jiný identifikátor artefaktu, pokud dává smysl,
+- vztah k produktu: přímá závislost, transitivní závislost, build tool, runtime, test/dev,
+- čas vytvoření SBOM a nástroj, který ho vytvořil.
+
+Privacy-first doplněk: pole „supplier“ nebo „author“ neplň osobními údaji vývojářů jen proto, že je nástroj umí najít z git historie. Pro rozhodování obvykle stačí organizace, projekt nebo registry metadata.
+
+### Rozliš runtime, build a dev svět
+
+Když SBOM smíchá produkční runtime, testovací nástroje a lokální utility do jedné nerozlišené hromady, bezpečnostní alerty budou hlučné a pomalé.
+
+Praktické rozdělení:
+
+| Vrstva | Jak s ní zacházet |
+| --- | --- |
+| Produkční runtime | nejvyšší priorita pro bezpečnost, licence a incidenty |
+| Klientský bundle | kontrolovat i výkon, externí requesty a uživatelské soukromí |
+| Build pipeline | chránit kvůli možnosti ovlivnit artefakt nebo ukrást secrets |
+| Test/dev závislosti | nižší produkční dopad, ale pořád riziko pro repo a CI |
+| Dokumentační ukázky | hlídat, protože je zákazník může kopírovat do svého prostředí |
+
+U každé komponenty nemusíš mít dokonalou ontologii. Stačí, aby při alertu tým rychle poznal, zda jde o knihovnu v produkčním API, nebo o lokální formatter. To je rozdíl mezi rozumnou triage a poplachem kvůli každému řádku v lockfile.
+
+### SBOM nevyráběj ručně
+
+Ručně psaný SBOM zastará rychleji než poznámka „dočasně“. Generuj ho z manifestů, lockfile, build artefaktů a image vrstev. Ruční práce má být review výjimek, ne opisování verzí.
+
+Zdravý postup v CI:
+
+1. Nainstaluj závislosti deterministicky podle lockfile.
+2. Sestav artefakt.
+3. Vygeneruj SBOM pro konkrétní artefakt.
+4. Ulož ho s verzí, commitem a časem buildu.
+5. Proveď základní kontrolu: formát validní, runtime komponenty viditelné, licence nechybí tam, kde je čekáš.
+6. Při releasu připoj SBOM k internímu release záznamu nebo zákaznickému balíku podle typu produktu.
+
+Ne každý interní experiment potřebuje stejnou váhu. Ale pokud jde artefakt do produkce nebo k zákazníkovi, inventář komponent má vzniknout automaticky.
+
+### Zákazníkovi dávej odpověď, ne celý sklep
+
+Enterprise zákazník se může ptát na SBOM, open-source licence, známé zranitelnosti nebo bezpečnostní proces. To neznamená, že mu máš poslat surový interní export se všemi build tooly, názvy interních balíčků a historickými poznámkami.
+
+Připrav tři režimy výstupu:
+
+| Režim | Použití |
+| --- | --- |
+| Interní plný SBOM | security, engineering, incident response |
+| Zákaznický relevantní SBOM | komponenty dodané v produktu, SDK nebo self-hosted artefaktu |
+| Veřejný přehled | obecný popis supply-chain procesu, formátů a kontaktní cesty |
+
+U SaaS, který zákazník nestahuje, často dává větší smysl říct, jak SBOM vzniká, jak se váže na release, jak řešíš zranitelnosti a jak dodáš relevantní výpis při bezpečnostním požadavku. U self-hosted produktu, SDK nebo agentu instalovaného u zákazníka je přesný artefaktový SBOM mnohem důležitější.
+
+### SBOM musí mít životní cyklus
+
+Inventář komponent není jednorázový audit. Potřebuje životní cyklus:
+
+- vznik při buildu nebo releasu,
+- uložení s verzí artefaktu,
+- kontrolu zranitelností a licencí,
+- vazbu na výjimky a dočasná rizika,
+- retenci podle životnosti produktu,
+- postup pro zákaznický dotaz,
+- úklid starých výstupů, které už nemají provozní hodnotu.
+
+Když přijde nová zranitelnost, tým má umět projít: které artefakty obsahují komponentu, zda běží v produkci, které zákaznické balíky ji dostaly, zda existuje oprava, kdo vlastní update a jaký je komunikační plán. Bez této vazby je SBOM jen archivní sport.
+
+### Checklist: SBOM privacy-first
+
+- [ ] Víme, proč SBOM generujeme: bezpečnost, licence, zákaznický audit, incidenty nebo release evidence.
+- [ ] SBOM se váže ke konkrétnímu artefaktu, verzi a commit SHA.
+- [ ] Generování je automatické v CI nebo release procesu.
+- [ ] Rozlišujeme runtime, klientský bundle, build pipeline a dev/test závislosti.
+- [ ] Komponenty mají název, verzi, původ, licenci a vztah k produktu, pokud to nástroj podporuje.
+- [ ] SBOM neobsahuje secrets, produkční konfiguraci, zákaznická data ani zbytečné osobní údaje.
+- [ ] Umíme podle SBOM ověřit dopad nové zranitelnosti nebo licenční změny.
+- [ ] Zákaznický výstup je relevantní k dodanému produktu, ne syrový interní výpis všeho.
+- [ ] Staré SBOM výstupy mají retenci podle životnosti podporovaných verzí.
+- [ ] Výjimky a nejasné komponenty mají vlastníka a datum další kontroly.
+- [ ] SBOM je propojený s aktualizacemi závislostí, licenčním review a vulnerability disclosure procesem.
+
+### Mini úkol
+
+Vyber jeden artefakt: produkční Docker image, frontend build, SDK, self-hosted balík nebo hlavní backend release. Vyplň kartu:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jaký konkrétní artefakt SBOM popisuje? |  |
+| Kdy a čím se SBOM generuje? |  |
+| Kde je uložený a jak se váže na commit nebo release? |  |
+| Obsahuje runtime komponenty odděleně od dev nástrojů? |  |
+| Jsou u komponent licence a verze? |  |
+| Co se stane při nové zranitelnosti jedné komponenty? |  |
+| Co můžeme bezpečně poslat zákazníkovi? |  |
+| Co naopak z výstupu nesmí uniknout? |  |
+| Kdo vlastní výjimky a nejasné komponenty? |  |
+| Jak dlouho SBOM držíme pro staré verze? |  |
+
+Potom udělej jednu malou změnu: zapni generování CycloneDX nebo SPDX v CI, ulož SBOM k release artefaktu, přidej do release checklistu kontrolu runtime komponent, vytvoř zákaznickou odpověď na otázku „máte SBOM?“, nebo odstraň z generovaného výstupu citlivá metadata. SBOM má být pracovní nástroj pro rychlejší rozhodnutí, ne další dokument, který všichni hledají až ve chvíli, kdy hoří.
+
 ## Zdroje
 
 - OWASP Cheat Sheet Series: SQL Injection Prevention Cheat Sheet - doporučení k prevenci SQL injection včetně parametrizovaných dotazů, bezpečných uložených procedur, allowlist validace a principu nejmenších oprávnění: https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html
@@ -28695,6 +28848,10 @@ Potom udělej jednu konkrétní změnu: doplň `license` do vlastního `package.
 - SPDX: SPDX License List - standardizované krátké identifikátory, plné názvy, texty a trvalé URL pro licence a výjimky: https://spdx.org/licenses/
 - Open Source Initiative: OSI Approved Licenses - seznam licencí schválených podle Open Source Definition: https://opensource.org/licenses
 - OpenSSF Scorecard - projekt OpenSSF pro automatizované kontroly vybraných signálů bezpečnostní praxe open source projektů: https://openssf.org/projects/scorecard/
+- CISA: Software Bill of Materials (SBOM) - rozcestník k SBOM, minimálním prvkům, formátům, nástrojům a používání inventáře komponent v řízení softwarového supply chainu: https://www.cisa.gov/sbom
+- NTIA: The Minimum Elements For a Software Bill of Materials (SBOM) - původní definice minimálních datových polí, podpůrné automatizace a praktik pro sdílení SBOM: https://www.ntia.gov/report/2021/minimum-elements-software-bill-materials-sbom
+- CycloneDX: CycloneDX Specification Overview - přehled standardu pro SBOM, vztahy komponent, služby, zranitelnosti, licence a další metadata v supply-chain evidenci: https://cyclonedx.org/specification/overview/
+- SPDX: SPDX Specifications - standardy pro popis softwarových komponent, licencí, copyright informací, bezpečnostních referencí a dalších vztahů v softwarovém balíku: https://spdx.dev/specifications/
 - EUR-Lex: Regulation (EU) 2016/679, GDPR Article 35 and 36 - povinnost posouzení vlivu na ochranu osobních údajů a předchozí konzultace při vysokém zbytkovém riziku: https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng
 - European Commission: When is a Data Protection Impact Assessment (DPIA) required? - praktický přehled situací, kdy je DPIA vyžadována: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/obligations/when-data-protection-impact-assessment-dpia-required_en
 - European Data Protection Board: Data Protection impact assessments High risk processing - pokyny WP248 rev.01 k určení vysokého rizika a DPIA: https://www.edpb.europa.eu/documents/guideline/data-protection-impact-assessments-high-risk-processing_en
@@ -28797,6 +28954,7 @@ Potom udělej jednu konkrétní změnu: doplň `license` do vlastního `package.
 
 ## Pracovní log
 
+- 2026-07-17: Doplněna příloha o SBOM bez inventáře pro šuplík: účel SBOM podle bezpečnosti, licencí, zákaznických auditů a incidentů, vazba na konkrétní artefakt, minimální pole komponent, rozlišení runtime/build/dev závislostí, automatické generování v CI, zákaznické režimy výstupu, životní cyklus, checklist a mini úkol; ověřeny a doplněny zdroje CISA, NTIA, CycloneDX a SPDX.
 - 2026-07-17: Doplněna příloha o licencích open-source komponent bez právní mlhy: rozlišení interního použití, runtime, klientského bundlu, distribuce a úprav, práce se SPDX identifikátory, licenční review závislostí, notices, copyleft rozhodování, privacy-first kontrola telemetrie a externích requestů, změny licencí při updatech, checklist a mini úkol; navázáno na ověřené zdroje GitHub Licensing, GitHub dependency graph, npm license metadata a SPDX License List.
 - 2026-07-17: Doplněna příloha o aktualizacích závislostí bez páteční loterie: rozlišení security patchů, rutinních aktualizací, major migrací a transitive změn, mapa runtime/build/dev rizik, triage karta pro bezpečnostní alerty, pravidla pro malé automatické PR, ověřování podle dopadu, práce s lockfilem, rytmus údržby, výjimky, checklist a mini úkol; navázáno na ověřené zdroje OWASP SCVS, GitHub Dependabot/dependency review/dependency graph, npm audit, SemVer, Keep a Changelog a OpenSSF Scorecard.
 - 2026-07-17: Doplněna příloha o vulnerability disclosure a `security.txt` bez honu na výzkumníky: rozlišení bezpečnostního hlášení, incidentu a supportu, minimální `security.txt`, disclosure policy, bezpečné mantinely pro důkazy bez zákaznických dat, triage karta, komunikace s nálezcem, rozdíl mezi disclosure programem a bug bounty, ověření opravy, checklist a mini úkol; ověřeny a doplněny zdroje RFC 9116, OWASP Vulnerability Disclosure Cheat Sheet a ENISA Good Practice Guide on Vulnerability Disclosure.
