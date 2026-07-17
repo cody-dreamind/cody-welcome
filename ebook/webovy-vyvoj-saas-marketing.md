@@ -26978,6 +26978,173 @@ Vyber poslední ruční datovou opravu, kterou tým dělal nebo by se jí bál d
 
 Potom udělej jednu konkrétní úpravu: vytvoř šablonu datové opravy v ticketovacím systému, přidej read-only diagnostický dotaz, napiš suchý běh pro opakovaný skript, zaveď expiraci zvýšeného oprávnění, nebo odstraň z interních poznámek zbytečné osobní údaje. Ruční opravy nezmizí. Můžou ale přestat být malá produkční loterie.
 
+## Příloha: Klasifikace dat bez bezpečnostního divadla
+
+Malý tým často nepotřebuje dvacetistránkovou politiku s pěti barvami štítků a prezentací, kterou nikdo nečte. Potřebuje jednoduchý společný jazyk: co je veřejné, co je interní, co je důvěrné, co je zákaznické a co se nesmí kopírovat do náhodného nástroje jen proto, že to zrovna šetří dvě minuty.
+
+Klasifikace dat není nálepka pro audit. Je to provozní zkratka pro rozhodnutí: kdo to smí vidět, kam to smí odejít, jak dlouho to držíme, jak to sdílíme a co se stane při incidentu. Evropská komise u principů GDPR popisuje minimalizaci, účelové omezení, omezení uchování a integritu s důvěrností; OWASP u logování opakuje podobně praktickou věc: nezapisuj a nešíř data, která pro daný účel nepotřebuješ. Odkazy jsou ve zdrojích.
+
+> Codyho komentář: Štítek sám o sobě data neochrání. Ale když tým nemá ani štítek, každé sdílení začíná otázkou „tohle asi můžeme, ne?“ A tahle věta je matka většiny datových trapasů.
+
+### Začni čtyřmi úrovněmi, ne korporátním labyrintem
+
+První verze klasifikace má být tak jednoduchá, aby ji člověk použil i ve stresu. Pro malý web, SaaS nebo agenturní provoz často stačí čtyři úrovně:
+
+| Úroveň | Co to znamená | Příklady | Výchozí pravidlo |
+| --- | --- | --- | --- |
+| Veřejné | Může být zveřejněno bez škody a je určeno ven | blog, veřejný changelog, dokumentace, ceník | publikovat přes běžný proces |
+| Interní | Patří týmu, ale neobsahuje citlivý zákaznický obsah | roadmapa, interní rozhodnutí, provozní checklist | sdílet jen v pracovních nástrojích týmu |
+| Důvěrné | Únik by poškodil firmu, zákazníka nebo bezpečnost | smlouvy, obchodní podmínky před vydáním, bezpečnostní dotazníky, finanční reporty | omezený přístup, žádné veřejné nástroje bez posouzení |
+| Zákaznická / osobní data | Data o zákaznících, uživatelích nebo jejich práci | support tikety, exporty, fakturační údaje, obsah účtu, produkční logy s identifikátory | používat jen pro konkrétní účel, krátce a auditovatelně |
+
+Není nutné vymyslet dokonalý model pro všechny budoucí situace. Důležité je, aby tým přestal házet všechno do kategorie „interní“. Interní poznámka z porady a CSV export zákazníků nejsou stejný typ rizika, i když leží ve stejné složce.
+
+### Klasifikuj podle dopadu, ne podle formátu
+
+Formát neříká, jak citlivá data jsou. PDF může být veřejný ceník nebo neveřejná smlouva. Screenshot může být neškodná ukázka prázdného stavu nebo záběr produkčního účtu s e-maily. Log může být technická metrika nebo osobní deník chyb jednoho uživatele.
+
+Při klasifikaci se ptej:
+
+- Komu by únik reálně uškodil?
+- Obsahuje to osobní údaje, zákaznický obsah, obchodní tajemství nebo bezpečnostní detail?
+- Je to potřeba pro aktuální práci, nebo jen pohodlný kontext navíc?
+- Musí to vidět celý tým, nebo jen konkrétní role?
+- Má to datum, kdy to přestane být potřeba?
+
+Příklad: „report za kvartál“ zní neškodně. Pokud obsahuje jen agregované metriky návštěvnosti a rozhodnutí pro další měsíc, může být interní. Pokud obsahuje seznam leadů, e-maily, názvy firem a poznámky ze schůzek, je to zákaznické nebo obchodně důvěrné. Pokud je v něm screenshot administrace s tokenem v URL, není to report. Je to incident čekající na pozvánku.
+
+### Vytvoř pravidla pro běžné situace
+
+Klasifikace začne fungovat až ve chvíli, kdy ovlivní každodenní rozhodnutí. Napiš pět až deset jednoduchých pravidel pro místa, kde data nejčastěji cestují.
+
+Praktický základ:
+
+- Produkční exporty se neukládají na osobní plochu ani do běžného chatu.
+- Screenshoty do ticketu musí být začerněné, pokud obsahují osobní údaje, tokeny, interní poznámky nebo cizí data.
+- Do veřejné dokumentace patří syntetické příklady, ne reálné zákaznické případy bez kontroly.
+- Do AI nástroje bez schváleného režimu nepatří produkční data, smlouvy, zákaznické exporty, tajemství ani celé interní strategie.
+- Do logů nepatří obsah formulářů, souborů, zpráv ani citlivé hodnoty, pokud není jasný bezpečnostní důvod a omezená retence.
+- Sdílený odkaz k důvěrnému materiálu má mít expiraci a konkrétní příjemce.
+- Externí spolupracovník dostává nejmenší datový vzorek, který stačí k jeho práci.
+
+Tahle pravidla nemají tým brzdit. Mají odstranit improvizaci. Když člověk ví, že zákaznický export nepatří do běžného chatu, nemusí při každém incidentu znovu vymýšlet morální filozofii datového provozu.
+
+### Přidej štítek k místu, kde vzniká riziko
+
+Štítek v samostatném dokumentu je slabý. Štítek u souboru, ticketu, reportu, dashboardu nebo šablony je užitečný.
+
+Příklady dobrých míst pro štítek:
+
+- hlavička interního dokumentu,
+- název reportu nebo složky,
+- šablona support ticketu,
+- exportní dialog v aplikaci,
+- popis dashboardu,
+- karta dodavatele,
+- rozhodovací log,
+- runbook nebo incidentní šablona.
+
+Jednoduchý štítek může vypadat takto:
+
+```text
+Klasifikace: zákaznická / osobní data
+Účel: diagnostika importu workspace_1842
+Přístup: support lead, odpovědný vývojář
+Uložit do: schválený support systém
+Smazat do: 2026-08-01
+Zakázáno: kopírovat do chatu, AI nástrojů nebo veřejné dokumentace
+```
+
+Tím se z klasifikace stane produktový návod, ne právnický šperk.
+
+### Výchozí pravidlo má být opatrné
+
+Když si člověk není jistý, data mají spadnout do vyšší citlivosti, ne do pohodlnější. To neznamená, že se všechno zamkne navždy. Znamená to, že nejdřív zvolíš bezpečný režim a potom ho můžeš vědomě uvolnit.
+
+Dobré výchozí pravidlo:
+
+```text
+Pokud dokument, ticket, screenshot, export nebo log obsahuje zákaznický obsah, osobní údaje, obchodní čísla, bezpečnostní detaily nebo neveřejné smluvní informace, zacházíme s ním jako s důvěrným materiálem, dokud vlastník neurčí užší a bezpečnější režim.
+```
+
+Špatné výchozí pravidlo:
+
+```text
+Když je to v interním nástroji, je to v pohodě.
+```
+
+Interní nástroj není automaticky bezpečný. Může mít široké přístupy, dlouhou retenci, externí subdodavatele, indexaci do vyhledávání, notifikace do e-mailu a exporty. Interní je jen místo. Citlivost určuje obsah a dopad.
+
+### Klasifikace má ovlivnit retenci a přístup
+
+Štítek bez následku je dekorace. U každé úrovně napiš minimálně:
+
+- kdo může data číst,
+- kdo je může exportovat,
+- kam se smějí ukládat,
+- jestli se smějí posílat externě,
+- jestli se smějí používat v AI nástrojích,
+- jak dlouho se drží,
+- co se loguje při přístupu nebo změně.
+
+Praktická matice:
+
+| Úroveň | Přístup | Externí sdílení | Retence | Audit |
+| --- | --- | --- | --- | --- |
+| Veřejné | celý tým | ano, po publikační kontrole | podle životnosti obsahu | změny obsahu |
+| Interní | tým podle role | jen s důvodem | dokud má pracovní hodnotu | významné změny |
+| Důvěrné | omezené role | jen schválený kanál a příjemce | nejkratší praktická lhůta | přístup a změny |
+| Zákaznická / osobní data | konkrétní účel a role | výjimečně, podle smlouvy a procesu | podle účelu, retence a práv | přístup, export, změny, výmaz |
+
+Tato matice nemusí být složitá. Musí být používaná. Když někdo vytvoří nový report nebo export, má podle ní hned vědět, jestli patří do obecné složky, omezeného prostoru, nebo vůbec nemá vzniknout.
+
+### Uč tým na příkladech, ne na definicích
+
+Definice jsou nutné, ale lidé se učí na situacích. Udělej krátký seznam příkladů z vlastní práce.
+
+| Situace | Klasifikace | Správné zacházení |
+| --- | --- | --- |
+| Návrh blogového článku bez interních dat | interní | běžný redakční nástroj |
+| Publikovaný článek | veřejné | web, RSS, přímé odkazy |
+| Screenshot chyby s e-mailem zákazníka | zákaznická / osobní data | začernit nebo uložit jen do support systému |
+| Export leadů pro follow-up | zákaznická / osobní data | CRM, omezený přístup, žádný chat |
+| Bezpečnostní dotazník s architekturou | důvěrné | sdílet jen schválenému příjemci |
+| Syntetická demo data | interní nebo veřejné podle použití | možné použít v dokumentaci po kontrole |
+| Produkční log s request ID bez obsahu | interní nebo důvěrné podle kontextu | krátká retence a omezený přístup |
+
+Jednou za čas vezmi tři reálné dokumenty nebo exporty a zkus je klasifikovat s týmem. Pokud se lidé neshodnou, není to ostuda. Je to signál, že pravidlo potřebuje lepší příklad.
+
+### Checklist: Klasifikace dat privacy-first
+
+- [ ] Máme nejvýše čtyři až pět úrovní citlivosti, kterým tým opravdu rozumí.
+- [ ] Úrovně jsou popsané podle dopadu, ne podle formátu souboru.
+- [ ] Produkční exporty, screenshoty, logy, reporty a AI vstupy mají jasná pravidla.
+- [ ] Výchozí pravidlo při nejistotě je opatrnější klasifikace.
+- [ ] Každá úroveň říká, kdo smí číst, exportovat, sdílet a mazat.
+- [ ] Důvěrná a zákaznická data mají omezené místo uložení.
+- [ ] Sdílené odkazy k citlivým datům mají expiraci a konkrétní příjemce.
+- [ ] Veřejné materiály používají syntetické nebo zkontrolované příklady.
+- [ ] Do běžných AI nástrojů se neposílají produkční data ani neveřejné citlivé materiály bez schváleného režimu.
+- [ ] Klasifikace je součástí šablon pro tickety, reporty, exporty, runbooky a rozhodovací log.
+- [ ] Retence a přístup se řídí citlivostí, ne tím, kdo soubor vytvořil.
+- [ ] Tým má krátký seznam příkladů z vlastní práce.
+
+### Mini úkol
+
+Vyber tři místa, kde se ve vašem týmu nejčastěji kopírují data: support ticket, report, interní chat, AI prompt, export, screenshot nebo klientský dokument. Ke každému vyplň:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jaký typ dat tu vzniká nebo cestuje? |  |
+| Jaká je výchozí klasifikace? |  |
+| Kdo to opravdu potřebuje vidět? |  |
+| Kam se to smí uložit? |  |
+| Kam se to nesmí kopírovat? |  |
+| Jak dlouho to má žít? |  |
+| Jaký příklad nebo šablonu doplníme, aby tým nemusel hádat? |  |
+
+Potom udělej jednu malou změnu: přidej štítek do šablony support ticketu, vytvoř pravidlo pro screenshoty, nastav omezenou složku pro exporty, doplň do AI prompt pravidel zakázané vstupy, nebo smaž staré reporty, které nemají vlastníka. Klasifikace dat je užitečná teprve tehdy, když se projeví v místě, kde člověk právě pracuje.
+
 ## Zdroje
 
 - OWASP Cheat Sheet Series: SQL Injection Prevention Cheat Sheet - doporučení k prevenci SQL injection včetně parametrizovaných dotazů, bezpečných uložených procedur, allowlist validace a principu nejmenších oprávnění: https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html
@@ -27132,6 +27299,7 @@ Potom udělej jednu konkrétní úpravu: vytvoř šablonu datové opravy v ticke
 
 ## Pracovní log
 
+- 2026-07-17: Doplněna příloha o klasifikaci dat bez bezpečnostního divadla: jednoduché úrovně citlivosti pro malé týmy, rozhodování podle dopadu místo formátu, pravidla pro běžné datové situace, štítky u dokumentů a exportů, výchozí opatrný režim, vazba na přístup a retenci, příklady, checklist a mini úkol; navázáno na existující zdroje Evropské komise k principům GDPR a OWASP k bezpečnému logování.
 - 2026-07-17: Doplněna příloha o ručních datových opravách bez produkční kovbojky: rozlišení jednotlivých oprav, hromadných zásahů, migrací, supportních a incidentních zásahů, pravidla pro bezpečný postup místo prvního ručního SQL, omezené přístupy, karta opravy, ochrana zákaznického obsahu při diagnostice, ověření po zásahu, checklist a mini úkol; ověřeny a doplněny zdroje OWASP k SQL injection a parametrizaci dotazů a Evropské komise k principům zpracování osobních údajů.
 - 2026-07-17: Doplněna příloha o auditní stopě bez interního šmírování: účelové auditování významných akcí, oddělení systémových logů od auditu, zákaz kopírování obsahu dat do záznamů, omezené přístupy, karta auditované akce, retence, zákaznický auditní pohled, checklist a mini úkol; ověřeny a využity existující zdroje Evropské komise k době uchování dat a OWASP k bezpečnému logování.
 - 2026-07-16: Doplněna příloha o plánované údržbě bez překvapení a datového stresu: rozlišení běžného releasu a údržbového okna, údržbová karta, datový dopad, zákaznická komunikace, read-only režim, rollback, úklid po údržbě, checklist a mini úkol; navázáno na existující kapitoly o SLA, runboocích, degradovaném režimu, chybových stavech, retenci a provozní komunikaci.
