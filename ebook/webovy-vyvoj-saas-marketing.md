@@ -29449,6 +29449,163 @@ Vyber jednu existující PWA nebo produkt, kde o instalaci uvažujete, a vyplň 
 
 Potom udělej jednu konkrétní změnu: zuž `scope`, uprav `start_url`, odstraň trackingový parametr, přepiš install prompt podle užitku, doplň maskable ikonu, odliš staging nebo vyhoď zkratku, která slouží spíš marketingu než práci. Instalovatelná PWA má zrychlit návrat k hodnotě, ne převléct web za aplikaci bez odpovědnosti.
 
+## Příloha: Workspace policy bez administrátorského bludiště
+
+U B2B SaaS se dřív nebo později objeví otázka: kdo v týmu smí co zapnout, vypnout, exportovat, propojit, pozvat nebo smazat. Dokud má zákazník jednoho zakladatele a dva uživatele, dá se hodně věcí vyřešit ručně. Jakmile produkt používá větší tým, agentura, oddělení nebo firma s vlastním IT, nestačí mít jeden přepínač „admin“. Potřebuješ srozumitelná pravidla workspace.
+
+Špatná otázka zní: „Kolik nastavení dáme do administrace?“
+
+Lepší otázka zní: „Která pravidla musí zákazník bezpečně řídit sám, protože jinak bude obcházet produkt přes support, sdílené účty nebo exporty?“
+
+Workspace policy není enterprise ozdoba. Je to vrstva, která chrání data, zkracuje support a dává zákazníkovi kontrolu. Když chybí, lidé si začnou vytvářet vlastní pravidla mimo produkt: jeden sdílený účet pro tým, exporty posílané e-mailem, integrační token v dokumentu, ručně domluvené výjimky a věta „tohle může jen kolega, který je dnes na dovolené“. To není agilita. To je účetní kniha budoucích incidentů.
+
+### Začni rozhodovací větou pro každé pravidlo
+
+Každé administrátorské nastavení má mít pracovní větu:
+
+„Správce workspace potřebuje řídit ___, protože jinak hrozí ___, a změna se projeví ___.“
+
+Příklady:
+
+- Správce workspace potřebuje řídit, kdo smí zvát nové členy, protože pozvánka vytváří přístup k týmovým datům, a změna se projeví u nových i existujících pozvánek.
+- Billing admin potřebuje řídit fakturační údaje odděleně od produktových dat, protože účetní role nemá automaticky vidět obsah zákaznické práce.
+- Owner potřebuje zakázat veřejné sdílení odkazem, protože workspace pracuje s citlivými klientskými daty, a změna zneplatní nové veřejné odkazy a označí existující k revizi.
+- Security admin potřebuje vynutit SSO nebo MFA, protože heslové účty jsou pro tento tým moc rizikové, a změna se uplatní při dalším přihlášení.
+
+Pokud větu neumíš napsat, nastavení pravděpodobně není připravené. Možná je to jen interní feature flag převlečený za zákaznickou kontrolu.
+
+### Rozlišuj role, pravidla a výjimky
+
+Častý problém je míchat tři různé věci do jednoho UI:
+
+| Vrstva | Co řeší | Příklad |
+| --- | --- | --- |
+| Role | Co smí konkrétní člověk | Member může číst projekty, Admin může zvát lidi |
+| Policy | Jaké chování je povolené v celém workspace | Externí sdílení je vypnuté, exporty smí jen vybrané role |
+| Výjimka | Dočasné povolení mimo běžné pravidlo | Konzultant má přístup do projektu do konce měsíce |
+
+Role odpovídá na otázku „kdo“. Policy odpovídá na otázku „jaká pravidla tu platí“. Výjimka odpovídá na otázku „proč zrovna teď a dokdy“. Když to smícháš, skončíš u rolí typu `SuperAdminButNoBillingExceptExportsMaybe`. Název sám o sobě volá po čaji a refaktoru.
+
+Privacy-first produkt má držet policy čitelné. Správce má poznat, co nastavení dělá, koho se týká, jestli má dopad na existující data a jak ho vrátit zpět.
+
+### Dej do administrace jen pravidla, která umíš vynutit
+
+Nejhorší workspace policy je taková, která vypadá hezky, ale systém ji nedodržuje všude. Přepínač „Zakázat exporty“ musí platit pro UI, API, hromadné akce, naplánované reporty, integrace i supportní nástroje. Pokud vypne jen tlačítko ve frontendové administraci, není to policy. Je to dekorace na dveřích, které jdou obejít oknem.
+
+U každého pravidla si napiš kontrolní mapu:
+
+| Policy | UI | API | Integrace | Background joby | Support/admin | Audit |
+| --- | --- | --- | --- | --- | --- | --- |
+| Exporty jen pro roli Export admin | blokovat tlačítko | kontrola oprávnění | žádný export bez scope | reporty respektují role | ruční export jen s důvodem | zaznamenat žádost |
+| Veřejné odkazy vypnuté | skrýt vytvoření linku | odmítnout endpoint | zrušit sdílení v embedech | expirovat existující linky | support neobchází pravidlo | log změny |
+| Povinné MFA | upozornit uživatele | vynutit při session | tokeny bez interaktivní výjimky | blokovat citlivé joby | break-glass podle postupu | log výjimky |
+
+Technicky to často znamená, že policy nemá žít jen ve frontendu. Musí být blízko autorizační vrstvě, API a serverovým procesům. Jinak bude produkt zákazníkovi slibovat kontrolu, kterou neumí dodat.
+
+### Vysvětli dopad před uložením
+
+Administrátorské nastavení často mění práci celého týmu. Proto má UI vysvětlit dopad před uložením, ne až v supportním ticketu.
+
+Dobré potvrzení obsahuje:
+
+- co se mění,
+- koho se změna týká,
+- jestli ovlivní existující data nebo jen nové akce,
+- kdy se změna projeví,
+- jak se dá vrátit zpět,
+- kdo změnu uvidí v auditní stopě.
+
+Příklad:
+
+„Vypínáte veřejné sdílení pro workspace Acme. Nové veřejné odkazy nepůjde vytvořit. Existující veřejné odkazy se zneplatní do 10 minut. Interní sdílení s členy workspace zůstane zapnuté. Změna se zapíše do auditního logu.“
+
+To je lepší než „Uložit nastavení?“. Ano, tlačítko je kratší. Taky méně užitečné.
+
+### Výchozí hodnoty mají být opatrné, ne pohodlné pro akvizici
+
+Výchozí nastavení často rozhoduje víc než dokumentace. Pokud nový workspace automaticky povolí pozvánky komukoli, veřejné linky, exporty pro všechny role a široké integrace, privacy-first slib se rozpadá ještě před první poradou.
+
+Praktické výchozí hodnoty pro B2B SaaS:
+
+| Oblast | Opatrný výchozí stav |
+| --- | --- |
+| Pozvánky | zvát může Owner nebo Admin |
+| Exporty | exportovat může role s výslovným oprávněním |
+| Veřejné sdílení | vypnuté nebo omezené na konkrétní typy obsahu |
+| Integrace | připojuje Admin, scopy jsou minimální |
+| API tokeny | vypnuté, dokud je někdo záměrně nevytvoří |
+| Audit log | zapnutý pro významné administrátorské akce |
+| Notifikace | bezpečnostní a provozní zprávy zapnuté, marketing zvlášť |
+| Retence | podle jasného výchozího pravidla, ne nekonečno |
+
+Omezený výchozí stav nemusí být nepříjemný. Stačí vysvětlit, proč existuje, a nabídnout rychlé zapnutí tam, kde to odpovídá práci týmu. Zákazník nechce být chráněn před vlastním produktem. Chce rozumět riziku.
+
+### Změny policy nejsou běžné kliknutí
+
+Změna pravidel workspace by měla mít vyšší úroveň jistoty než přepnutí vzhledu aplikace. Nemusí z ní být rituál s pěti schváleními, ale citlivé změny mají vyžadovat přiměřenou kontrolu.
+
+Rozděl policy změny podle dopadu:
+
+- Nízký dopad: změna názvu workspace, defaultní zobrazení, interní štítky.
+- Střední dopad: kdo může zvát lidi, kdo může exportovat, povolené typy sdílení.
+- Vysoký dopad: vypnutí MFA, změna SSO, povolení externích integrací s velkým rozsahem, smazání retenčního pravidla.
+
+Pro střední a vysoký dopad zvaž:
+
+- re-auth administrátora,
+- potvrzení konkrétního dopadu,
+- notifikaci ownerům nebo security roli,
+- krátkou prodlevu u rizikové změny,
+- auditní záznam s důvodem,
+- možnost rychlého návratu k předchozí konfiguraci.
+
+Ne každá firma potřebuje schvalovací workflow. Ale každá firma ocení, když kritické pravidlo nejde vypnout omylem při pátečním úklidu nastavení.
+
+### Policy musí být vidět i mimo administraci
+
+Pokud uživatel narazí na omezení, nemá dostat tichý zákaz. Má dostat vysvětlení podle své role.
+
+Příklady:
+
+| Situace | Slabá hláška | Lepší hláška |
+| --- | --- | --- |
+| Uživatel chce exportovat | „Nemáte oprávnění“ | „Exporty jsou v tomto workspace povolené jen roli Export admin. Požádejte správce workspace.“ |
+| Člen chce vytvořit veřejný odkaz | „Akce zakázána“ | „Veřejné odkazy jsou pro tento workspace vypnuté. Interní sdílení s členy týmu je dostupné.“ |
+| Integrace žádá moc práv | „Nelze připojit“ | „Tuto integraci může připojit Admin, protože získá přístup k projektům a kontaktům.“ |
+| Přihlášení bez MFA | „Přístup zamítnut“ | „Tento workspace vyžaduje MFA. Dokončete nastavení druhého faktoru a pokračujte.“ |
+
+Hláška nemá vyzrazovat citlivé interní detaily. Má ale člověku říct, jestli je problém v jeho roli, v pravidle workspace, v bezpečnostním požadavku nebo v dočasném stavu.
+
+### Checklist: Workspace policy privacy-first
+
+- [ ] Každé pravidlo má pracovní větu: co řídí, proč existuje a kdy se projeví.
+- [ ] Produkt rozlišuje role, workspace policy a dočasné výjimky.
+- [ ] Policy se vynucují v UI, API, integracích, background jobech i supportních nástrojích.
+- [ ] Citlivé změny vyžadují přiměřené potvrzení nebo re-auth.
+- [ ] UI před uložením vysvětluje dopad na existující data, členy a odkazy.
+- [ ] Výchozí hodnoty jsou opatrné a srozumitelně vysvětlené.
+- [ ] Administrátor vidí historii významných změn.
+- [ ] Uživatelé dostávají jasné hlášky, když je akce blokovaná policy.
+- [ ] Support nemá nezdokumentovanou možnost policy obejít.
+- [ ] Existuje postup pro dočasnou výjimku včetně vlastníka a konce platnosti.
+- [ ] Policy změny jsou součástí testů autorizační vrstvy.
+- [ ] Dokumentace popisuje praktické dopady pravidel, ne jen názvy přepínačů.
+
+### Mini úkol
+
+Vyber jeden workspace nebo týmový produkt a vyplň tabulku:
+
+| Policy | Proč existuje | Kdo ji mění | Kde se vynucuje | Dopad na existující data | Jak se vrací zpět |
+| --- | --- | --- | --- | --- | --- |
+| Pozvánky |  |  |  |  |  |
+| Exporty |  |  |  |  |  |
+| Veřejné sdílení |  |  |  |  |  |
+| Integrace |  |  |  |  |  |
+| MFA/SSO |  |  |  |  |  |
+| Retence |  |  |  |  |  |
+
+Potom udělej jednu konkrétní opravu: přepiš popis rizikového přepínače, přidej auditní záznam změny, doplň serverovou kontrolu k pravidlu, zablokuj supportní obcházení, nastav opatrnější výchozí hodnotu nebo napiš test, že API respektuje stejnou policy jako UI. Workspace policy má zákazníkovi dát kontrolu nad týmovým provozem, ne vyrobit další administrátorskou místnost, kde nikdo nechce uklízet.
+
 ## Zdroje
 
 - MDN Web Docs: Web app manifests - přehled manifestu jako JSON souboru s metadaty webové aplikace včetně názvu, ikon, startovní URL, display režimu a dalších vlastností používaných při instalaci PWA: https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps/Manifest
@@ -29621,6 +29778,7 @@ Potom udělej jednu konkrétní změnu: zuž `scope`, uprav `start_url`, odstra�
 
 ## Pracovní log
 
+- 2026-07-17: Doplněna příloha o workspace policy bez administrátorského bludiště: rozhodovací věty pro pravidla, rozlišení rolí, policy a výjimek, vynucení v UI/API/integracích/jobech/supportu, opatrné výchozí hodnoty, dopadové potvrzení změn, hlášky pro uživatele, checklist a mini úkol; navázáno na existující privacy-first pravidla k minimalizaci, oprávněním, auditní stopě a bezpečnému B2B provozu.
 - 2026-07-17: Doplněna příloha o instalovatelné PWA bez falešné aplikace: pracovní důvod instalace, manifest jako veřejný slib, bezpečné `scope` a `start_url`, nenátlakový install prompt, pracovní shortcuts, ikony, consent a oprávnění, release kontrola, checklist a mini úkol; ověřeny a doplněny zdroje MDN, W3C a web.dev k Web App Manifestu a instalovatelnosti PWA.
 - 2026-07-17: Doplněna příloha o PWA a offline režimu bez lokální datové skládky: definice offline scénáře od práce uživatele, rozdělení dat podle rizika, lidsky popsané cache strategie, stavový model synchronizace, odhlášení a sdílená zařízení, bezpečná diagnostika, release kontrola service workeru, checklist a mini úkol; ověřeny a doplněny zdroje MDN k Service Worker API, Cache API a Storage API.
 - 2026-07-17: Doplněna příloha o browserových rozšířeních bez oprávnění na celý internet: rozhodování, zda je rozšíření opravdu potřeba, návrh host a optional permissions podle nejmenší pracovní plochy, sběr jen očekávaného výřezu dat, oddělení tokenů a workspace autorizace, chudé provozní logování, release karta pro změny oprávnění, checklist a mini úkol; ověřeny a doplněny zdroje MDN WebExtensions a Chrome Extensions k permissions.
