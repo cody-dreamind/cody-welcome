@@ -27749,6 +27749,216 @@ Vyber jedno demo, sandbox nebo ukázkový workspace a vyplň kartu:
 
 Potom udělej jednu konkrétní změnu: nahraď reálný screenshot syntetickým, vypni odesílání e-mailů z demo prostředí, odděl demo analytiku, doplň vlastníka demo workspace nebo nastav automatický reset. Dobré demo má ukázat hodnotu produktu, ne interní nepořádek.
 
+## Příloha: Zákaznické API tokeny bez věčného klíče
+
+Zákaznický API token je malá produktová funkce s velkým dopadem. Na obrazovce často vypadá jako jedno tlačítko „Create token“. V provozu ale rozhoduje o tom, kdo může číst data, zapisovat do systému, spouštět exporty, měnit integrace a občas i obejít běžné uživatelské rozhraní. Když je navržený líně, stane se z něj věčný klíč, který kdysi někdo vytvořil pro „dočasnou integraci“ a dnes se ho všichni bojí vypnout.
+
+Špatná otázka zní: „Jak rychle zákazníkovi vygenerujeme API klíč?“
+
+Lepší otázka zní: „Jakou práci má token umožnit, jaký nejmenší rozsah k tomu potřebuje a jak bezpečně skončí?“
+
+OWASP u API a správy tajemství opakovaně vede k principu nejmenších oprávnění, bezpečné práci s tokeny, revokaci, auditování a opatrnému logování. OAuth 2.0 Security Best Current Practice v RFC 9700 připomíná rizika bearer tokenů a modernější obranné vzory; DPoP v RFC 9449 ukazuje jednu cestu, jak omezit replay ukradeného tokenu. Přeloženo do malého SaaS: zákaznický token není jen náhodný řetězec. Je to produktový kontrakt s oprávněním, vlastníkem, životností a stopou.
+
+### Začni typem tokenu
+
+Ne každý token má stejnou práci. Pokud je všechny nazveš „API key“, tým časem přestane vidět rozdíl mezi bezpečným integračním přístupem a nebezpečným univerzálním heslem.
+
+Praktické rozdělení:
+
+| Typ tokenu | Typické použití | Hlavní riziko |
+| --- | --- | --- |
+| Osobní token | vývojář automatizuje vlastní práci | přežije odchod člověka nebo změní auditní stopu |
+| Workspace token | zákaznická integrace za celý tým | příliš široký přístup k datům workspace |
+| Servisní token zákazníka | strojová synchronizace konkrétní integrace | nikdo neví, kdo ho vlastní a kdy ho vypnout |
+| Krátkodobý access token | OAuth tok nebo dočasný přístup | špatná expirace, refresh a ukládání |
+| Testovací token | sandbox, dokumentace, ukázky kódu | omylem míří na produkci nebo má produkční data |
+
+U každého typu napiš, kdo ho smí vytvořit, kde ho uvidí, jaké scopy může dostat, jak dlouho má žít a co se stane při odchodu uživatele, zrušení workspace nebo vypnutí integrace.
+
+> Codyho komentář: Token bez typu je jako krabice ve skladu s nápisem „věci“. Možná je v ní kabel. Možná produkční přístup. Super hra, pokud máš rád páteční incidenty.
+
+### Vytvoření tokenu je riziková akce
+
+Vytvoření nového tokenu nemá být skryté v běžném nastavení účtu bez kontroly. Je to událost, která může otevřít data mimo hlavní UI.
+
+Bezpečný tok vytvoření:
+
+1. Admin vybere účel tokenu nebo konkrétní integraci.
+2. Produkt nabídne jen relevantní scopy.
+3. U citlivějšího rozsahu proběhne opětovné ověření.
+4. Token dostane název, vlastníka, expiraci a prostředí.
+5. Token se zobrazí jen jednou.
+6. Vznikne auditní záznam bez hodnoty tokenu.
+7. Relevantní správci dostanou bezpečnostní upozornění.
+
+Název tokenu nemá být volný chaos typu `test`, `new-key`, `token2`. Produkt může pomoct jednoduchým mikrotextem:
+
+```text
+Pojmenujte token podle systému a účelu, například `crm-lead-sync-prod`.
+Nepoužívejte jména lidí, zákaznická tajemství ani hodnotu tokenu.
+```
+
+Token má mít také prostředí. Produkční token v dokumentaci, testovací token v produkční integraci nebo sandbox token s reálnými daty jsou tři různé cesty ke stejnému bolení hlavy.
+
+### Scopy musí být srozumitelné zákazníkovi
+
+Scope není interní permission enum pro vývojáře. Je to text, podle kterého zákazník rozhoduje, jestli tokenu věří. Proto má být konkrétní a čitelný.
+
+Slabé scopy:
+
+- `admin`
+- `full_access`
+- `data:read`
+- `integration`
+
+Lepší scopy:
+
+| Scope | Zákaznický popis | Co nedovolí |
+| --- | --- | --- |
+| `leads:create` | Vytvářet nové leady z externího formuláře | číst nebo mazat existující leady |
+| `invoices:read` | Číst faktury a stav plateb | měnit fakturační údaje |
+| `members:read` | Číst seznam členů workspace | zvát, mazat nebo měnit role |
+| `reports:read_aggregate` | Číst agregované reporty | exportovat jednotlivé události |
+| `webhooks:manage` | Nastavit endpointy webhooků | číst zákaznický obsah mimo webhook konfiguraci |
+
+U citlivých scope přidej krátký dopad:
+
+```text
+Tento scope může zpřístupnit osobní údaje členů workspace externímu systému.
+Použijte ho jen pro integrace, které tyto údaje skutečně potřebují.
+```
+
+Ano, je to méně pohodlné než tabulka interních kódů. Ale zákazník, který rozumí dopadu, udělá lepší rozhodnutí a support nebude luštit, proč si někdo omylem otevřel půlku účtu.
+
+### Expirace má být výchozí, ne pokročilá volba
+
+Token bez expirace je pohodlný hlavně pro budoucí problém. Ne každý token musí žít hodinu, ale každý má mít důvod, proč žije tak dlouho.
+
+Praktické výchozí hodnoty:
+
+| Situace | Doporučená životnost |
+| --- | --- |
+| sandbox nebo ukázka | hodiny až dny |
+| krátký import nebo migrace | dny až týdny |
+| běžná zákaznická integrace | měsíce, s připomínkou rotace |
+| vysoce citlivá integrace | kratší expirace, OAuth nebo silnější vazba tokenu |
+| dočasný supportní workaround | co nejkratší doba a automatické vypnutí |
+
+Produkt má před expirací ukázat upozornění správnému člověku a nabídnout rotaci bez výpadku. Když zákazník musí v panice hledat starý token v chatu, návrh selhal.
+
+### Rotace musí být normální workflow
+
+Rotace tokenu není incidentní rituál. Je to běžná údržba. Navrhni ji tak, aby zákazník nemusel vypnout integraci jen proto, že chce přejít na nový klíč.
+
+Dobré rotační workflow:
+
+1. Vytvořit nový token se stejným nebo menším rozsahem.
+2. Krátce provozovat starý i nový token vedle sebe.
+3. Ukázat poslední použití obou tokenů.
+4. Doporučit zneplatnění starého tokenu.
+5. Po domluvené době starý token automaticky vypnout nebo výrazně označit.
+
+V UI pomáhá jednoduchý stav:
+
+| Stav | Význam |
+| --- | --- |
+| Aktivní | token se používá a není po expiraci |
+| Nepoužitý | token nebyl použit od vytvoření |
+| Starý | token se dlouho nepoužil nebo nemá vlastníka |
+| Končí | token brzy expiruje |
+| Revokovaný | token už nefunguje, ale auditní záznam zůstává |
+
+Nikdy nezobrazuj hodnotu tokenu znovu po vytvoření. Pokud ji někdo ztratil, správná cesta je nový token a revokace starého, ne „ukázat tajemství ještě jednou, protože jsme hodní“.
+
+### Poslední použití ukazuj užitečně, ne invazivně
+
+Zákazník potřebuje poznat, jestli token ještě žije. Nepotřebuje kompletní sledovací profil integračního systému.
+
+Užitečný přehled:
+
+- název tokenu,
+- typ tokenu,
+- vlastník nebo role,
+- scopy,
+- prostředí,
+- datum vytvoření,
+- datum expirace,
+- poslední použití,
+- poslední endpoint nebo kategorie akce,
+- stav a možnost revokace.
+
+Opatrně s IP adresami, user agenty, payloady a detailními URL. Někdy dávají smysl v bezpečnostním přehledu, ale běžný seznam tokenů nemá být malý forenzní nástroj bez kontextu a retence. Pokud detail ukládáš, napiš proč, jak dlouho a kdo ho smí vidět.
+
+### Revokace nesmí být schovaná
+
+Když zákazník zjistí, že token unikl, musí ho umět rychle zneplatnit. Tlačítko revokace nemá být o tři obrazovky dál za dokumentací a supportem.
+
+Dobrá revokace:
+
+- jasně ukáže dopad na integraci,
+- vyžádá potvrzení u produkčních tokenů,
+- okamžitě přestane přijímat nové requesty,
+- bezpečně doběhne nebo zastaví probíhající akce podle rizika,
+- zapíše auditní záznam,
+- nabídne vytvoření náhradního tokenu s menším rozsahem,
+- pošle bezpečnostní upozornění správcům.
+
+Revokace není smazání historie. Auditní stopa má zůstat, ale bez hodnoty tokenu a bez zbytečných payloadů. Potřebuješ vědět, že token existoval, kdo ho vytvořil, jaké měl scopy a kdy byl vypnut. Nepotřebuješ z něj udělat druhou databázi zákaznických dat.
+
+### Logy nesmí opsat tajemství
+
+API tokeny často unikají ne přes samotné UI, ale přes logy, chybové hlášky, monitoring, screenshoty nebo support tikety.
+
+Zakázaná místa pro hodnotu tokenu:
+
+- aplikační logy,
+- request/response tracing,
+- analytics eventy,
+- URL query parametry,
+- support tikety,
+- e-mailové notifikace,
+- dokumentace s reálnými příklady,
+- screenshoty z administrace.
+
+Když token přijde v hlavičce `Authorization`, loguj maximálně bezpečně maskovanou identifikaci tokenu, například interní `token_id` nebo poslední čtyři znaky hashovaného otisku. Nikdy neloguj celý bearer token. A pokud se to už stalo, nepiš „asi dobrý“. Rotuj, zkontroluj přístup k logům, zkrať retenci a oprav maskování.
+
+### Checklist: Zákaznické API tokeny privacy-first
+
+- [ ] Rozlišujeme osobní, workspace, servisní, krátkodobé a testovací tokeny.
+- [ ] Vytvoření produkčního tokenu je auditovaná riziková akce.
+- [ ] Citlivé tokeny vyžadují opětovné ověření nebo silnější kontrolu.
+- [ ] Token má název, vlastníka, prostředí, scopy, expiraci a stav.
+- [ ] Scopy jsou srozumitelné zákazníkovi a popisují dopad na data.
+- [ ] Výchozí volba není `admin`, `read:all` ani token bez expirace.
+- [ ] Token se po vytvoření zobrazí jen jednou.
+- [ ] Existuje workflow rotace bez výpadku integrace.
+- [ ] Zákazník vidí poslední použití tokenu bez zbytečného profilování.
+- [ ] Revokace je rychlá, viditelná a zapisuje auditní záznam.
+- [ ] Tokeny se nikdy neposílají v URL ani nelogují v čitelné podobě.
+- [ ] Testovací tokeny jsou oddělené od produkce a automaticky končí.
+- [ ] Odchod uživatele, zrušení workspace a vypnutí integrace řeší související tokeny.
+- [ ] Bezpečnostní upozornění rozlišují vytvoření, rozšíření scope, rotaci a revokaci.
+
+### Mini úkol
+
+Vyber jeden tokenový tok ve svém produktu a vyplň kartu:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jaký typ tokenu vytváříme? |  |
+| Kdo ho smí vytvořit? |  |
+| Jaký účel musí uživatel vyplnit nebo vybrat? |  |
+| Jaké scopy nabízíme? |  |
+| Který scope je nejrizikovější a proč? |  |
+| Jaká je výchozí expirace? |  |
+| Jak se token rotuje bez výpadku? |  |
+| Kde uživatel uvidí poslední použití? |  |
+| Jak rychle jde token revokovat? |  |
+| Kde by se token mohl omylem zalogovat? |  |
+| Co se stane při odchodu vlastníka nebo zrušení workspace? |  |
+
+Potom udělej jednu konkrétní změnu: přidej expiraci testovacím tokenům, rozbij `read:all` na dvě konkrétní oprávnění, doplň poslední použití, schovej hodnotu tokenu po vytvoření, přidej auditní záznam revokace, nebo nastav maskování `Authorization` hlavičky v logování. Token má zákazníkovi otevřít přesně ty dveře, které potřebuje. Ne celý dům i s náhradními klíči.
+
 ## Zdroje
 
 - OWASP Cheat Sheet Series: SQL Injection Prevention Cheat Sheet - doporučení k prevenci SQL injection včetně parametrizovaných dotazů, bezpečných uložených procedur, allowlist validace a principu nejmenších oprávnění: https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html
@@ -27903,6 +28113,7 @@ Potom udělej jednu konkrétní změnu: nahraď reálný screenshot syntetickým
 
 ## Pracovní log
 
+- 2026-07-17: Doplněna příloha o zákaznických API tokenech bez věčného klíče: rozlišení typů tokenů, bezpečný tok vytvoření, srozumitelné scopy, výchozí expirace, rotace bez výpadku, přiměřené zobrazení posledního použití, rychlá revokace, ochrana tokenů v logování, checklist a mini úkol; navázáno na existující zdroje OWASP k API, autorizaci, správě tajemství a logování a na RFC 9700 a RFC 9449.
 - 2026-07-17: Doplněna příloha o demo workspace a ukázkových datech bez úniku reality: návrh demo scénáře od rozhodnutí zákazníka, syntetická data místo produkčních exportů, oddělení demo prostředí od produkce, vypnutí reálných e-mailů, webhooků, plateb a integrací, průběžná údržba demo karty, checklist a mini úkol.
 - 2026-07-17: Doplněna příloha o změně kontaktního e-mailu bez převzetí účtu: rozlišení přihlašovacího, bezpečnostního, billing, workspace a marketingového e-mailu, re-auth u rizikové změny, potvrzení nové adresy, upozornění staré adresy, zacházení s magic linky a reset tokeny, opatrnost u telefonu, omezené propisování změny do dalších systémů, checklist a mini úkol; navázáno na existující zdroje OWASP k autentizaci, session managementu, MFA a obnově hesla a na GDPR principy přesnosti, minimalizace, integrity a důvěrnosti.
 - 2026-07-17: Zpřesněn úvodní návod k práci s e-bookem o výběr jedné malé vratné změny po kapitole, aby dobré nápady nekončily jako neřízený backlogový dluh.
