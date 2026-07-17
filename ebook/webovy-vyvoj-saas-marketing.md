@@ -29259,8 +29259,201 @@ Vyber jednu aplikaci nebo produktovou část, kde se uvažuje o offline režimu,
 
 Potom udělej jednu konkrétní změnu: omez rozsah cachovaných dat, přidej úklid při odhlášení, pojmenuj stavy synchronizace, rozděl cache podle workspace, nastav expiraci fronty nebo doplň release test pro service worker. Offline režim má být spolehlivá pomoc, ne tajný sklad dat v prohlížeči.
 
+## Příloha: Instalovatelná PWA bez falešné aplikace
+
+Instalovatelná PWA je lákavá zkratka: web najednou vypadá jako aplikace, má ikonu, může běžet v samostatném okně a uživatel ji najde vedle ostatních nástrojů. Pro SaaS to může být praktické. Jenže instalace není jen technický badge. Je to slib, že produkt se bude chovat spolehlivěji, soustředěněji a předvídatelněji než běžná záložka v prohlížeči.
+
+Špatná otázka zní: „Jak dostaneme install prompt před co nejvíc lidí?“
+
+Lepší otázka zní: „Kdy uživatel opravdu získá hodnotu z toho, že má web jako samostatnou aplikaci, a jak mu to vysvětlíme bez nátlaku?“
+
+MDN popisuje web app manifest jako JSON soubor, který prohlížeči říká, jak se webová aplikace jmenuje, jaké má ikony, startovní URL, režim zobrazení a další metadata. W3C specifikace Web App Manifestu definuje mimo jiné členy jako `name`, `short_name`, `icons`, `start_url`, `display`, `scope` a `shortcuts`. web.dev k instalovatelnosti PWA zdůrazňuje kombinaci manifestu, bezpečného kontextu přes HTTPS, service workeru a uživatelsky smysluplného zážitku. Přeloženo do produktové řeči: manifest není kosmetika. Je to kontrakt mezi webem, prohlížečem a očekáváním uživatele.
+
+### Instalace má začít pracovním důvodem
+
+Ne každá webová stránka má být instalovatelná. Blog, landing page nebo dokumentace většinou nepotřebují ikonu na ploše. Produktová aplikace, kterou člověk používá opakovaně, rychle a ve specifickém pracovním kontextu, už může dávat smysl.
+
+Napiš si instalační větu:
+
+„Uživatel typu ___ si aplikaci instaluje, protože pravidelně potřebuje ___.“
+
+Příklady:
+
+- Technik si instaluje aplikaci, protože každý den otevírá zakázky v terénu.
+- Obchodník si instaluje CRM pohled, protože před schůzkou rychle kontroluje stav dealu.
+- Editor si instaluje redakční nástroj, protože často pokračuje v rozepsané práci.
+- Supportní tým si instaluje interní konzoli, protože ji používá celý den a potřebuje méně rozptýlení.
+
+Pokud věta zní „abychom vypadali víc jako appka“, instalaci zatím vynech. Uživatel neinstaluje produkt kvůli tvému pocitu modernosti. Instaluje ho, protože mu zkrátí cestu k opakované práci.
+
+### Manifest piš jako veřejný slib
+
+Manifest je technický soubor, ale jeho hodnoty se propisují do uživatelského rozhraní operačního systému a prohlížeče. Název, zkrácený název, ikona, startovní URL i režim zobrazení ovlivňují, co člověk po instalaci očekává.
+
+Praktická karta manifestu:
+
+| Pole | Otázka | Doporučení |
+| --- | --- | --- |
+| `name` | Jak se aplikace jmenuje v systému? | Použij skutečný produktový název, ne marketingovou větu |
+| `short_name` | Jak název přežije úzké místo? | Krátký, čitelný, bez zkratek pro interní tým |
+| `start_url` | Kam se uživatel vrátí po spuštění? | Na pracovní domov, ne na obecnou landing page |
+| `scope` | Které URL patří do aplikace? | Omez na skutečnou aplikaci, ne celý web |
+| `display` | Jak moc se má skrýt prohlížeč? | `standalone` jen tam, kde tok funguje i bez běžné navigace |
+| `icons` | Pozná uživatel aplikaci mezi ostatními? | Připrav více velikostí a zkontroluj kontrast i maskování |
+| `shortcuts` | Jaké rychlé akce dávají smysl? | Jen opakované pracovní vstupy, ne promo odkazy |
+
+Privacy-first detail: `start_url` nepoužívej jako tichý trackingový sklad. Nepřidávej do něj osobní identifikátory, e-mail, interní segment ani dlouhé kampaně. Pokud potřebuješ poznat, kolik lidí používá instalovanou variantu, používej agregovaný, nevýmluvný parametr nebo serverový signál bez identifikace člověka. Ikona na ploše není pozvánka ke sledování.
+
+### Scope a start_url brání produktovému zmatku
+
+`scope` říká, které stránky se mají chovat jako součást instalované aplikace. Když ho necháš příliš široký, může se v aplikaci otevřít blog, dokumentace, marketingová stránka nebo externě laděný obsah bez běžné browser navigace. Uživatel pak neví, jestli je v produktu, na webu, nebo v podivném okně bez kontextu.
+
+Dobré pravidlo:
+
+- Produktová aplikace: scope například `/app/`.
+- Admin nebo portál: scope například `/admin/` nebo `/portal/`.
+- Veřejný web a blog: mimo scope, pokud nemají aplikační chování.
+- Dokumentace: samostatně, jen pokud je opravdu součást každodenní práce.
+
+`start_url` má vést na stav, který dává smysl po studeném startu. Ne na stránku, která bez předchozí relace ukáže chybu, ani na marketingový homepage, kde se přihlášený uživatel musí znovu proklikat do práce.
+
+U SaaS obvykle dává smysl:
+
+- dashboard posledního workspace,
+- výběr workspace,
+- dnešní pracovní fronta,
+- poslední otevřený bezpečný kontext,
+- přihlášení s návratem na zamýšlený cíl.
+
+Pozor na poslední otevřený kontext. Pokud může prozradit jméno zákazníka, citlivý projekt nebo interní případ na sdíleném zařízení, raději po startu ukaž neutrální rozcestník.
+
+### Install prompt nesmí být pop-up s ambicemi
+
+Prohlížeče instalaci řídí různě a uživatel má poslední slovo. Produkt by proto neměl na instalaci tlačit hned při první návštěvě. V tu chvíli člověk ještě neví, jestli mu produkt stojí za místo v systému.
+
+Lepší okamžiky pro nabídku instalace:
+
+- po dokončení první hodnoty,
+- po opakovaném použití stejné pracovní cesty,
+- když uživatel aktivně zapne offline nebo terénní režim,
+- když se vrátí na produkt z mobilu několikrát během krátké doby,
+- v nastavení nebo profilu jako klidná volba.
+
+Text má říct konkrétní užitek:
+
+| Slabé | Lepší |
+| --- | --- |
+| „Nainstalujte naši aplikaci“ | „Přidat pracovní frontu na plochu“ |
+| „Získejte lepší zážitek“ | „Otevřít zakázky jedním klepnutím i při slabém signálu“ |
+| „Použijte appku“ | „Spouštět portál bez hledání záložky“ |
+
+Codyho komentář: Install prompt v prvních pěti sekundách je digitální ekvivalent člověka, který ti při podání ruky podává i stěhovací krabice. Nejdřív ukaž hodnotu. Pak nabídni trvalejší vztah.
+
+### Shortcuts jsou pracovní zkratky, ne reklamní plocha
+
+Manifest může obsahovat zkratky, které se zobrazí v kontextové nabídce aplikace. To je užitečné, pokud vedou na časté úkoly:
+
+- vytvořit nový úkol,
+- otevřít dnešní plán,
+- přejít na support frontu,
+- založit nový dokument,
+- otevřít import,
+- zobrazit notifikace nebo schválení.
+
+Nepoužívej shortcuts na:
+
+- aktuální promo kampaň,
+- blogový článek týdne,
+- upsell stránku bez kontextu,
+- externí sledovací URL,
+- funkci, která většině uživatelů zobrazí zamčený paywall.
+
+Každá zkratka má projít stejnou kontrolou jako hlavní navigace: kdo ji použije, jak často, co se stane po kliknutí a jak vypadá prázdný nebo neoprávněný stav. Pokud zkratka vede na stránku, která vyžaduje vyšší roli, ukaž klidné vysvětlení a bezpečnou cestu zpět. Ne interní `403` s duší serverové skříně.
+
+### Ikony a název jsou důvěryhodnost, ne dekorace
+
+Instalovaná aplikace se objeví v prostředí uživatele vedle banky, kalendáře, e-mailu a interních nástrojů. Ikona má být rozpoznatelná, čitelná v malé velikosti a nemá se tvářit jako systémová aplikace, pokud jí není.
+
+Zkontroluj:
+
+- ikona funguje na světlém i tmavém pozadí,
+- maskable ikona nepřijde o důležitou část loga,
+- název se vejde na mobilní obrazovce,
+- testovací a produkční aplikace se nedají splést,
+- interní staging nemá stejnou ikonu a název jako produkce,
+- favicon, manifest ikony a Open Graph obrázek si neodporují.
+
+U interních aplikací dej stagingu viditelné označení. Není nic vtipnějšího než člověk, který celý den pracuje ve stagingu a večer zjistí, že realita mezitím nikam nepokročila. Dobře, trochu vtipné to je. Ale jen pro někoho jiného.
+
+### Instalace nesmí obejít consent a oprávnění
+
+PWA instalace sama o sobě nedává produktu nové právo sbírat data, posílat notifikace nebo ukládat citlivý obsah. Pořád platí stejná pravidla:
+
+- notifikace žádej až v kontextu jasného užitku,
+- offline data ukládej podle scénáře a retence,
+- analytiku drž agregovanou a účelovou,
+- marketingové souhlasy nebal do instalačního toku,
+- respektuj odhlášení a odpojení zařízení,
+- citlivé lokální stavy maž při ztrátě relace.
+
+Instalovaná aplikace může působit „víc vlastní“ než web v prohlížeči. Z pohledu ochrany dat ale není méně odpovědná. Naopak: pokud produkt působí jako aplikace, uživatel od něj čeká větší klid, méně překvapení a jasnější chování.
+
+### Release kontrola instalovatelnosti
+
+Před vydáním PWA instalační vrstvy projdi jednu kartu:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Pro jaký segment má instalace smysl? |  |
+| Jakou práci zkracuje? |  |
+| Kam vede `start_url` bez aktivní session? |  |
+| Co přesně zahrnuje `scope`? |  |
+| Jak vypadá instalovaná aplikace na mobilu a desktopu? |  |
+| Které zkratky jsou opravdu pracovní? |  |
+| Jak se liší produkce, staging a preview? |  |
+| Jak se měří používání bez identifikace člověka? |  |
+| Co se stane při odhlášení, zrušení účtu a odebrání workspace? |  |
+
+Testuj nejen „jde nainstalovat“, ale i „dává smysl používat“. Otevři aplikaci po restartu prohlížeče, bez sítě, po odhlášení, na účtu bez oprávnění a na zařízení s tmavým režimem. Instalační vrstva je součást UX. Ne certifikát, který se nalepí na hotový web.
+
+### Checklist: Instalovatelná PWA privacy-first
+
+- [ ] Instalace má jasnou pracovní větu a segment.
+- [ ] Manifest používá pravdivý název, krátký název, ikony, startovní URL a scope.
+- [ ] `scope` nezahrnuje zbytečně marketingový web, blog ani externí obsah.
+- [ ] `start_url` neobsahuje osobní ani citlivé trackingové parametry.
+- [ ] Install prompt se nabízí až po relevantním signálu hodnoty.
+- [ ] Text nabídky instalace vysvětluje konkrétní užitek.
+- [ ] Shortcuts vedou na časté pracovní akce, ne na promo nebo nátlak.
+- [ ] Ikony jsou čitelné, maskable a odlišují produkci od testovacích prostředí.
+- [ ] Instalace neobchází souhlas s notifikacemi, analytikou ani offline ukládáním.
+- [ ] Odhlášení a zrušení účtu řeší lokální stavy instalované aplikace.
+- [ ] Používání instalované varianty se měří agregovaně a účelově.
+- [ ] Release kontrola zahrnuje mobil, desktop, offline stav, odhlášení a účty bez oprávnění.
+
+### Mini úkol
+
+Vyber jednu existující PWA nebo produkt, kde o instalaci uvažujete, a vyplň tabulku:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Pro koho má instalace smysl? |  |
+| Jakou opakovanou práci zkracuje? |  |
+| Jaký bude `name` a `short_name`? |  |
+| Jaká bude bezpečná `start_url`? |  |
+| Jaký nejmenší `scope` stačí? |  |
+| Které zkratky jsou skutečně pracovní? |  |
+| Jak odlišíme produkci od stagingu? |  |
+| Kdy nabídneme instalaci? |  |
+| Co nesmíme měřit ani ukládat jen kvůli instalaci? |  |
+
+Potom udělej jednu konkrétní změnu: zuž `scope`, uprav `start_url`, odstraň trackingový parametr, přepiš install prompt podle užitku, doplň maskable ikonu, odliš staging nebo vyhoď zkratku, která slouží spíš marketingu než práci. Instalovatelná PWA má zrychlit návrat k hodnotě, ne převléct web za aplikaci bez odpovědnosti.
+
 ## Zdroje
 
+- MDN Web Docs: Web app manifests - přehled manifestu jako JSON souboru s metadaty webové aplikace včetně názvu, ikon, startovní URL, display režimu a dalších vlastností používaných při instalaci PWA: https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps/Manifest
+- W3C: Web Application Manifest - specifikace členů manifestu jako `name`, `short_name`, `icons`, `start_url`, `scope`, `display` a `shortcuts`: https://www.w3.org/TR/appmanifest/
+- web.dev: Add a web app manifest - praktický přehled manifestu, jeho propojení přes HTML, ikon, display režimů a vztahu k instalovatelnosti PWA: https://web.dev/learn/pwa/web-app-manifest
 - MDN Web Docs: Service Worker API - vysvětlení role service workeru jako skriptu běžícího odděleně od stránky, který může zachytávat síťové požadavky a podporovat offline scénáře: https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API
 - MDN Web Docs: Cache API - programovatelné úložiště objektů `Request` a `Response`, často používané společně se service workery pro offline podporu a řízené cachování zdrojů: https://developer.mozilla.org/en-US/docs/Web/API/Cache
 - MDN Web Docs: Storage API - rozhraní pro práci s úložištěm dostupným pro webovou aplikaci, včetně odhadu využití a dostupného prostoru: https://developer.mozilla.org/en-US/docs/Web/API/Storage_API
@@ -29428,6 +29621,7 @@ Potom udělej jednu konkrétní změnu: omez rozsah cachovaných dat, přidej ú
 
 ## Pracovní log
 
+- 2026-07-17: Doplněna příloha o instalovatelné PWA bez falešné aplikace: pracovní důvod instalace, manifest jako veřejný slib, bezpečné `scope` a `start_url`, nenátlakový install prompt, pracovní shortcuts, ikony, consent a oprávnění, release kontrola, checklist a mini úkol; ověřeny a doplněny zdroje MDN, W3C a web.dev k Web App Manifestu a instalovatelnosti PWA.
 - 2026-07-17: Doplněna příloha o PWA a offline režimu bez lokální datové skládky: definice offline scénáře od práce uživatele, rozdělení dat podle rizika, lidsky popsané cache strategie, stavový model synchronizace, odhlášení a sdílená zařízení, bezpečná diagnostika, release kontrola service workeru, checklist a mini úkol; ověřeny a doplněny zdroje MDN k Service Worker API, Cache API a Storage API.
 - 2026-07-17: Doplněna příloha o browserových rozšířeních bez oprávnění na celý internet: rozhodování, zda je rozšíření opravdu potřeba, návrh host a optional permissions podle nejmenší pracovní plochy, sběr jen očekávaného výřezu dat, oddělení tokenů a workspace autorizace, chudé provozní logování, release karta pro změny oprávnění, checklist a mini úkol; ověřeny a doplněny zdroje MDN WebExtensions a Chrome Extensions k permissions.
 - 2026-07-17: Doplněna příloha o výjimkách z privacy-first pravidel bez šedé zóny: rozlišení výjimky, změny pravidla a nového procesu, karta výjimky, omezení rozsahu, přiměřené schvalování, viditelný stavový model, uzavírací checklist, checklist a mini úkol.
