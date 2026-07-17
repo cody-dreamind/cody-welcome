@@ -28484,6 +28484,162 @@ Vyber jeden repozitář a projdi posledních pět změn v závislostech:
 
 Potom udělej jednu konkrétní změnu: rozděl automatické update PR podle typu, doplň dependency review do CI, vytvoř triage šablonu pro security alert, zapiš pravidlo pro major aktualizace, nebo odstraň jednu nepoužívanou knihovnu. Závislosti jsou součást produktu. Když je necháš žít vlastním životem, jednou ti pošlou fakturu v nejméně vhodný moment.
 
+## Příloha: Licence open-source komponent bez právní mlhy
+
+Open-source knihovna není „kód zdarma“. Je to cizí práce s konkrétními podmínkami použití. Většinou jsou rozumné a praktické. Problém začíná ve chvíli, kdy tým neví, co přesně používá, jaká licence se na komponentu vztahuje, jestli ji smí dát do komerčního SaaS a co musí dodat zákazníkovi nebo uživateli.
+
+Špatná otázka zní: „Prošlo to instalací?“
+
+Lepší otázka zní: „Víme, pod jakými podmínkami tuto komponentu používáme, distribuujeme a upravujeme?“
+
+GitHub připomíná, že veřejný repozitář bez licence není automaticky open source v praktickém smyslu: licence dává ostatním jasné právo software používat, měnit a šířit. SPDX udržuje standardizované identifikátory licencí a npm doporučuje v `package.json` používat SPDX výrazy nebo odkaz na vlastní licenční soubor. Odkazy jsou ve zdrojích.
+
+> Codyho komentář: Licence jsou nudné přesně do chvíle, než zákazník v enterprise procurementu položí otázku „máte přehled open-source komponent a jejich licencí?“ Pak se z nudy stane rychlý archeologický výzkum v `node_modules`. Doporučuji levnější variantu: vědět to průběžně.
+
+### Rozliš použití, distribuci a úpravu
+
+Licenční riziko nezávisí jen na názvu licence. Záleží i na tom, co s komponentou děláš.
+
+Praktické rozdělení:
+
+| Situace | Příklad | Co řešit |
+| --- | --- | --- |
+| Interní použití | CLI nástroj v CI nebo lokální utilita | jestli licence dovoluje interní použití a zda nástroj neposílá data ven |
+| Serverový runtime | knihovna běží v backendu SaaS | licence, bezpečnost, aktualizace, případné povinnosti při poskytování služby |
+| Klientský bundle | knihovna se dostane do browseru uživatele | licence, notices, velikost, externí requesty, privacy dopad |
+| Distribuovaný software | zákazník dostane balíček, aplikaci, SDK nebo self-hosted verzi | licenční texty, notices, copyleft dopad, zdrojové povinnosti |
+| Upravená knihovna | fork s vlastní opravou | evidence změny, licence původního projektu, návrat upstreamu |
+| Dokumentační ukázka | copy-paste kód v docs nebo starter šabloně | zda licenci nepřenášíš do zákaznického projektu nejasně |
+
+SaaS často nespočívá v klasické distribuci binárky, ale to není univerzální omluva ignorovat licence. Jakmile dodáváš SDK, desktop helper, self-hosted image, šablonu, plugin nebo klientský balík, právní povrch se mění.
+
+### SPDX identifikátor je lepší než slovní dojem
+
+„MIT-like“ nebo „BSD style“ není evidence. Používej přesné SPDX identifikátory: `MIT`, `Apache-2.0`, `BSD-3-Clause`, `GPL-3.0-only`, `GPL-3.0-or-later`, případně SPDX výraz jako `(MIT OR Apache-2.0)`.
+
+Do interní evidence si u komponenty zapisuj:
+
+- název balíčku,
+- verzi,
+- zdroj,
+- licenci podle SPDX,
+- kde se používá,
+- jestli běží v klientu, serveru, buildu nebo dokumentaci,
+- kdo ji schválil pro daný typ použití,
+- co se má stát při změně licence nebo opuštění projektu.
+
+U vlastního balíčku buď stejně přesný. Pokud je projekt interní a nechceš dávat veřejnou licenci, nepiš neurčité „private“. V npm ekosystému se pro neveřejně licencovaný balíček běžně používá `UNLICENSED` a `private: true`, případně vlastní licence přes `SEE LICENSE IN <filename>`, pokud ji opravdu máš. Důležité je, aby metadata odpovídala realitě.
+
+### Licence patří do review závislostí
+
+Bezpečnostní review závislostí se často soustředí na zranitelnosti. To je nutné, ale ne úplné. Nový balíček může být bezpečný a zároveň licenčně nevhodný pro komerční produkt.
+
+Do review přidej tři jednoduché otázky:
+
+1. Má balíček jasnou licenci?
+2. Je licence povolená pro tento typ použití?
+3. Přidává balíček další transitive závislosti s jinou licencí?
+
+Praktická allowlist politika pro malý tým může vypadat takto:
+
+| Kategorie | Režim |
+| --- | --- |
+| Běžně povolené | `MIT`, `ISC`, `BSD-2-Clause`, `BSD-3-Clause`, `Apache-2.0` |
+| Vyžaduje kontrolu | `MPL-2.0`, `LGPL-*`, duální licence, vlastní komerční licence |
+| Blokovat bez právního posouzení | `GPL-*`, `AGPL-*`, nejasná nebo chybějící licence |
+| Nepoužívat bez vlastníka | opuštěný projekt, nejasný fork, balíček s konfliktními metadaty |
+
+Tohle není univerzální právní pravidlo. Je to praktický filtr, který brání tomu, aby vývojář ve středu večer přidal balíček s dopadem, který bude firma vysvětlovat v pátek na due diligence.
+
+### Notices nejsou až problém před auditem
+
+Některé licence vyžadují zachování copyright notice, licenčního textu nebo dalších upozornění. I když licence dovoluje komerční použití, neznamená to, že můžeš odstranit původní texty a tvářit se, že kód spadl z oblaků.
+
+Pro produkt si vytvoř jednoduchý `THIRD_PARTY_NOTICES.md` nebo interní generovaný výstup, který umí odpovědět:
+
+- které open-source komponenty používáme,
+- jakou mají licenci,
+- jaké notices musíme zachovat,
+- kde je plný text licence,
+- kdo výstup aktualizuje při releasu.
+
+U webového SaaS nemusí být notices vždy viditelné v UI. Mohou být v dokumentaci, v právní sekci, v distribuci balíčku nebo v repozitáři podle typu produktu a licence. Hlavní je nedělat to ručně až ve chvíli, kdy zákazník požádá o seznam komponent.
+
+### Copyleft ber jako produktové rozhodnutí
+
+Copyleft licence nejsou špatné. Jsou jen záměrné. Mají chránit svobody uživatelů a podmínky sdílení odvozených děl. Pro komerční SaaS nebo distribuovaný produkt ale mohou znamenat povinnosti, které musí tým chápat před přidáním knihovny.
+
+Prakticky:
+
+- `GPL` knihovna v distribuovaném klientovi je jiné riziko než `GPL` nástroj použitý jen lokálně při vývoji.
+- `AGPL` může být citlivá u síťově poskytovaných služeb.
+- `LGPL` může být použitelná za určitých podmínek, ale chce přesnější kontrolu propojení a distribuce.
+- Duální licence může znamenat, že open-source varianta má podmínky, které nechceš, a komerční licence je normální náklad.
+
+Nedělej z toho ideologickou válku. Udělej z toho rozhodnutí: chceme tuto komponentu, rozumíme povinnostem a máme proces, jak je splnit?
+
+### Privacy-first detail: licence a data jsou dvě různé věci
+
+Licenčně povolená komponenta nemusí být privacy-first vhodná. Balíček může mít dobrou licenci a zároveň přidávat telemetrii, externí CDN, font loader, mapový widget nebo volání do účtu dodavatele.
+
+U každé nové klientské nebo serverové komponenty se ptej:
+
+- Posílá data mimo náš produkt?
+- Načítá kód z externí domény?
+- Má vlastní telemetry nebo crash reporting?
+- Dá se telemetrie vypnout?
+- Je datový tok popsaný v naší mapě dodavatelů?
+- Má komponenta evropskou alternativu nebo self-hosted režim?
+
+Open-source licence řeší práva ke kódu. Neřeší automaticky soukromí uživatele. Tyto dvě kontroly patří vedle sebe.
+
+### Licence musí přežít změnu balíčku
+
+Licence se mohou změnit mezi verzemi, projekt může přejít na komerční model, maintainer může archivovat repozitář a fork může mít jiné podmínky než původní projekt. Proto nestačí jednou schválit název knihovny navždy.
+
+Při větší aktualizaci kontroluj:
+
+- změnu licence v manifestu nebo repozitáři,
+- přidání nových transitive závislostí,
+- změnu z open-source na source-available nebo komerční model,
+- nový povinný cloud účet nebo telemetry,
+- změnu maintainera nebo převzetí balíčku,
+- rozdíl mezi licencí v `package.json`, repozitáři a distribuovaném balíčku.
+
+Když se metadata liší, nehádej. Zastav update, napiš krátkou otázku do karty a rozhodni s vlastníkem produktu nebo právníkem. Jedna zdržující otázka je levnější než tichý licenční dluh.
+
+### Checklist: Licence open-source komponent privacy-first
+
+- [ ] Každá nová runtime závislost má před přidáním zkontrolovanou licenci.
+- [ ] Používáme přesné SPDX identifikátory místo neurčitých slovních popisů.
+- [ ] Máme jednoduchý allowlist a režim pro licence vyžadující kontrolu.
+- [ ] Rozlišujeme interní použití, serverový runtime, klientský bundle, distribuci a úpravy.
+- [ ] Transitive závislosti se kontrolují aspoň u runtime a distribuovaných balíčků.
+- [ ] Vlastní balíčky mají metadata licence odpovídající realitě.
+- [ ] Notices a texty licencí umíme vygenerovat nebo udržovat bez ruční paniky.
+- [ ] Copyleft a duální licence nejdou do produktu bez vědomého rozhodnutí.
+- [ ] Update závislosti kontroluje i změnu licence, ne jen testy a zranitelnosti.
+- [ ] Klientské komponenty kontrolujeme také z pohledu externích requestů a telemetrie.
+- [ ] Open-source komponenty jsou součástí supply-chain evidence, ne poznámka bokem.
+- [ ] Při zákaznickém dotazu umíme dodat srozumitelný seznam relevantních komponent a licencí.
+
+### Mini úkol
+
+Vyber jeden aktivní repozitář a projdi deset runtime závislostí:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Které závislosti běží v produkčním runtime? |  |
+| Které se dostanou do klientského bundlu? |  |
+| Jakou mají SPDX licenci? |  |
+| Která licence je nejasná, chybí nebo vyžaduje kontrolu? |  |
+| Přibyly transitive závislosti s jiným režimem? |  |
+| Máme k nim notices nebo licenční texty? |  |
+| Posílá některá komponenta data mimo produkt? |  |
+| Kdo schvaluje výjimky? |  |
+
+Potom udělej jednu konkrétní změnu: doplň `license` do vlastního `package.json`, založ `THIRD_PARTY_NOTICES.md`, nastav licenční allowlist v dependency review, odstraň balíček bez jasné licence, nebo napiš krátké pravidlo pro copyleft komponenty. Licence není právnická mlha na konec projektu. Je to součást technické hygieny, stejně jako testy, aktualizace a zálohy.
+
 ## Zdroje
 
 - OWASP Cheat Sheet Series: SQL Injection Prevention Cheat Sheet - doporučení k prevenci SQL injection včetně parametrizovaných dotazů, bezpečných uložených procedur, allowlist validace a principu nejmenších oprávnění: https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html
@@ -28641,6 +28797,7 @@ Potom udělej jednu konkrétní změnu: rozděl automatické update PR podle typ
 
 ## Pracovní log
 
+- 2026-07-17: Doplněna příloha o licencích open-source komponent bez právní mlhy: rozlišení interního použití, runtime, klientského bundlu, distribuce a úprav, práce se SPDX identifikátory, licenční review závislostí, notices, copyleft rozhodování, privacy-first kontrola telemetrie a externích requestů, změny licencí při updatech, checklist a mini úkol; navázáno na ověřené zdroje GitHub Licensing, GitHub dependency graph, npm license metadata a SPDX License List.
 - 2026-07-17: Doplněna příloha o aktualizacích závislostí bez páteční loterie: rozlišení security patchů, rutinních aktualizací, major migrací a transitive změn, mapa runtime/build/dev rizik, triage karta pro bezpečnostní alerty, pravidla pro malé automatické PR, ověřování podle dopadu, práce s lockfilem, rytmus údržby, výjimky, checklist a mini úkol; navázáno na ověřené zdroje OWASP SCVS, GitHub Dependabot/dependency review/dependency graph, npm audit, SemVer, Keep a Changelog a OpenSSF Scorecard.
 - 2026-07-17: Doplněna příloha o vulnerability disclosure a `security.txt` bez honu na výzkumníky: rozlišení bezpečnostního hlášení, incidentu a supportu, minimální `security.txt`, disclosure policy, bezpečné mantinely pro důkazy bez zákaznických dat, triage karta, komunikace s nálezcem, rozdíl mezi disclosure programem a bug bounty, ověření opravy, checklist a mini úkol; ověřeny a doplněny zdroje RFC 9116, OWASP Vulnerability Disclosure Cheat Sheet a ENISA Good Practice Guide on Vulnerability Disclosure.
 - 2026-07-17: Doplněna příloha o připojených OAuth aplikacích bez slepého souhlasu: rozlišení přihlášení, instalace aplikace, delegovaného přístupu a servisní integrace, rozhodovací consent obrazovka, srozumitelné scopy, admin consent bez obcházení rolí, bezpečné redirecty, přehled připojených aplikací, úplná revokace včetně webhooků a jobů, checklist a mini úkol; navázáno na ověřené zdroje RFC 9700, OWASP Authorization, OWASP API Security a GDPR principy minimalizace.
