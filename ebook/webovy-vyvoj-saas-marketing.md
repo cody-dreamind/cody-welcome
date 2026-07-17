@@ -27298,6 +27298,172 @@ Vyber jeden přihlašovací nebo recovery tok a vyplň pracovní list:
 
 Potom udělej jednu malou změnu: doplň `HttpOnly` a `Secure` u session cookie, přidej bezpečnostní e-mail po změně hesla, zkrať resetovací token, přidej re-auth před export, sepiš recovery postup pro ztracené MFA, nebo odstraň z login stránky marketingový skript. Přihlašování není hotové tím, že člověk projde formulářem. Je hotové tehdy, když chrání účet i ve chvíli, kdy se něco pokazí.
 
+## Příloha: Bezpečnostní upozornění bez paniky a úniku dat
+
+Bezpečnostní upozornění jsou nenápadná, ale důležitá část důvěry. Uživatel se z nich dozví, že se v účtu stalo něco významného: změna hesla, nové přihlášení, zapnutí MFA, export dat, pozvání administrátora, změna role nebo připojení integrace. Když upozornění chybí, člověk často zjistí problém pozdě. Když jsou přehnaná, začne je ignorovat. Když obsahují příliš dat, samy se stanou novým únikem.
+
+Dobrá otázka nezní: „Co všechno můžeme poslat e-mailem?“
+
+Lepší otázka zní: „Které akce má člověk nebo vlastník workspace rychle poznat, aby mohl zastavit škodu, a jak mu to řekneme bez prozrazení zbytečných detailů?“
+
+OWASP doporučení k autentizaci, session managementu, MFA a autorizaci vedou stejným směrem: rizikové akce mají být chráněné, ověřitelné a auditovatelné. GDPR principy minimalizace a integrity s důvěrností zase připomínají, že i bezpečnostní komunikace má posílat jen údaje, které pro daný účel potřebuje. Odkazy jsou ve zdrojích.
+
+> Codyho komentář: Bezpečnostní e-mail nemá znít jako výhružka z banky ani jako marketingový newsletter s helmou. Má být krátký, přesný a užitečný. Pokud uživatel po přečtení neví, jestli má něco udělat, upozornění selhalo.
+
+### Rozliš informaci, varování a akci
+
+Ne každá bezpečnostní událost potřebuje stejný tón. Když všechno označíš jako kritické, kritické přestane existovat. Rozděl upozornění podle toho, co má příjemce udělat.
+
+| Typ upozornění | Příklad | Co má příjemce udělat |
+| --- | --- | --- |
+| Informační | MFA bylo zapnuto | nic, jen vědět |
+| Kontrolní | nové přihlášení z neznámého zařízení | zkontrolovat, jestli to byl on |
+| Schvalovací | žádost o přidání administrátora | potvrdit nebo zamítnout |
+| Nouzové | reset hesla a ukončení session po podezření | jednat hned podle návodu |
+
+Toto rozdělení pomůže i textům. Informační zpráva má být klidná. Kontrolní zpráva má mít jasné „pokud jste to nebyli vy“. Schvalovací zpráva nemá udělat změnu jen proto, že někdo klikl na první velké tlačítko ve stresu. Nouzová zpráva má vést ke konkrétnímu dalšímu kroku, ne k lovu v dokumentaci.
+
+### Posílej upozornění na správnou roli
+
+U B2B SaaS často nestačí poslat zprávu jen člověku, který akci provedl. Některé akce mají zajímat vlastníka workspace, bezpečnostního správce nebo billing roli.
+
+Praktické pravidlo:
+
+- změna vlastního hesla jde uživateli,
+- změna administrátorské role jde dotčenému člověku i vlastníkovi workspace,
+- export zákaznických dat jde aktérovi a podle nastavení i adminovi,
+- připojení nové integrace jde vlastníkovi integrací nebo workspace,
+- vypnutí MFA u privilegované role jde bezpečnostnímu kontaktu,
+- změna fakturačních údajů jde billing kontaktu.
+
+Neposílej ale všechno všem. Široká kopie bezpečnostních zpráv může vyzradit interní strukturu, jména lidí, názvy zákazníků nebo typy používaných integrací. Lepší je role podle účelu než e-mailová lavina.
+
+### E-mail není bezpečné úložiště detailů
+
+Bezpečnostní upozornění má často odejít mimo produkt, protože člověk nemusí být přihlášený. To je užitečné, ale e-mail není místo pro celé logy, exportní odkazy nebo citlivé payloady.
+
+Do e-mailu obvykle patří:
+
+- název produktu nebo workspace,
+- typ události,
+- čas,
+- obecný kontext, například „nové přihlášení“ nebo „změna role“,
+- bezpečný odkaz do přihlášeného produktu,
+- návod, co dělat, pokud akci příjemce nepoznává.
+
+Do e-mailu obvykle nepatří:
+
+- celý obsah exportu,
+- dlouhý seznam zákaznických dat,
+- session tokeny nebo reset tokeny v čitelném textu,
+- interní IP adresy a stack trace,
+- citlivé názvy dokumentů, zpráv nebo příloh,
+- marketingové bloky, trackovací pixely a sociální widgety.
+
+Příklad lepšího textu:
+
+```text
+Ve workspace Dreamind Demo byl 17. 7. 2026 v 09:42 UTC vytvořen export dat.
+
+Akci provedl uživatel s rolí Administrátor. Pokud to odpovídá vaší práci, není potřeba nic dělat.
+
+Pokud export nepoznáváte, otevřete bezpečnostní přehled v aplikaci a zkontrolujte aktivní session, role a poslední exporty.
+```
+
+Text neprozrazuje obsah exportu, ale dává příjemci smysluplnou cestu.
+
+### Odkazy navrhuj jako bezpečnostní funkci
+
+Odkaz v bezpečnostním upozornění má být opatrný. U některých toků stačí odkaz na přihlášení do aplikace a konkrétní sekci. U jiných může dávat smysl jednorázový akční odkaz, ale ten musí mít krátkou platnost, jasný účel a ochranu proti náhodnému nebo přeposlanému kliknutí.
+
+Pravidla:
+
+- neukládej citlivé rozhodnutí jen do query parametru,
+- nepoužívej dlouho platné odkazy pro rizikové akce,
+- u schvalování citlivé změny vyžaduj přihlášení nebo re-auth,
+- po kliknutí ukaž srozumitelný stav: platné, použité, vypršelé nebo zrušené,
+- při vypršení nabídni bezpečnou další cestu,
+- odkazy v e-mailu nemají obcházet aplikační oprávnění.
+
+Bezpečnostní odkaz není zkratka kolem produktu. Je to vstup do produktu s jasným kontextem a pravidly.
+
+### Nepoužívej bezpečnostní události pro marketing
+
+Bezpečnostní komunikace má mít čistý účel. Když uživateli po změně hesla pošleš e-mail s reklamním bannerem, doporučeným plánem a měřicím pixelem, mícháš dva režimy, které mají zůstat oddělené.
+
+Špatné vzory:
+
+- bezpečnostní e-mail obsahuje newsletterový blok,
+- odkaz na „zkontrolovat účet“ vede přes marketingovou přesměrovací službu,
+- otevření bezpečnostního e-mailu se používá pro lead scoring,
+- upozornění na export spouští sales follow-up,
+- bezpečnostní preference jsou schované v marketingových preferencích.
+
+Privacy-first pravidlo: bezpečnostní upozornění je provozní komunikace. Měření doručení a chyb má sloužit spolehlivosti zprávy, ne profilování člověka.
+
+### Nastav preference, ale nenech vypnout kritické zprávy
+
+Uživatelé mají mít kontrolu nad hlukem. Zároveň některá upozornění nesmí být vypnutá, protože chrání účet a odpovědnost.
+
+Rozumné rozdělení:
+
+| Kategorie | Příklad | Vypnutí |
+| --- | --- | --- |
+| Kritické bezpečnostní | změna hesla, vypnutí MFA, podezření na převzetí účtu | ne |
+| Administrátorské | změna rolí, pozvání admina, nový API token | jen podle role a politiky workspace |
+| Provozní kontrolní | nový export, připojení integrace, změna billing údajů | omezeně |
+| Informační digest | týdenní přehled bezpečnostních událostí | ano |
+
+Preference piš lidsky. „Security event category B“ nikomu nepomůže. „Upozornění na změny administrátorů“ už ano.
+
+### Upozornění musí mít auditní dvojče
+
+E-mail se může ztratit, skončit ve spamu nebo být přeposlaný. Proto má důležitá událost existovat také v auditní stopě nebo bezpečnostním přehledu v produktu.
+
+U významné bezpečnostní akce ukládej:
+
+- typ akce,
+- čas,
+- aktéra,
+- dotčený účet nebo workspace,
+- výsledek,
+- kanál upozornění,
+- případně důvod nebo ticket, pokud jde o interní zásah.
+
+Neukládej do auditu celý obsah e-mailu ani citlivé payloady. Audit má potvrdit, že se akce a upozornění staly. Nemá se stát druhou databází zákaznických dat.
+
+### Checklist: Bezpečnostní upozornění privacy-first
+
+- [ ] Máme seznam akcí, které vyžadují bezpečnostní upozornění.
+- [ ] Každá akce má typ: informační, kontrolní, schvalovací nebo nouzový.
+- [ ] Příjemce je určen podle role a účelu, ne plošně celý tým.
+- [ ] E-mail neobsahuje citlivý obsah, tokeny, exporty ani interní technické detaily.
+- [ ] Odkazy mají krátkou životnost tam, kde jde o rizikovou akci.
+- [ ] Citlivé schválení vyžaduje přihlášení nebo re-auth.
+- [ ] Bezpečnostní e-maily neobsahují marketingové bloky ani trackovací pixely.
+- [ ] Kritická upozornění nejdou vypnout běžnou marketingovou preferencí.
+- [ ] Uživatel má jasný návod, co dělat, když akci nepoznává.
+- [ ] Důležité události jsou vidět také v bezpečnostním přehledu nebo auditní stopě.
+- [ ] Retence bezpečnostních upozornění a auditních záznamů má vlastníka a účel.
+- [ ] Support ví, jak reagovat na odpověď „tohle jsem nebyl já“.
+
+### Mini úkol
+
+Vyber jednu bezpečnostní událost: změna hesla, vypnutí MFA, nový export, pozvání administrátora, nový API token nebo připojení integrace. Vyplň kartu:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jaká událost nastala? |  |
+| Jaké riziko má pro účet nebo workspace? |  |
+| Kdo má upozornění dostat? |  |
+| Co musí příjemce vědět hned v e-mailu? |  |
+| Co má zůstat jen v přihlášeném produktu? |  |
+| Jaký další krok má člověk udělat, když akci nepoznává? |  |
+| Jak dlouho má upozornění a auditní záznam žít? |  |
+| Jak poznáme, že upozornění funguje bez zbytečného hluku? |  |
+
+Potom udělej jednu konkrétní změnu: přepiš bezpečnostní e-mail po změně hesla, odstraň tracking pixel, přidej odkaz na bezpečnostní přehled, nastav upozornění vlastníkovi workspace při změně admin role, nebo vytvoř support postup pro podezřelé přihlášení. Bezpečnostní upozornění má být jako dobrý alarm: ozve se včas, řekne proč a nebudí celý dům kvůli toustu.
+
 ## Zdroje
 
 - OWASP Cheat Sheet Series: SQL Injection Prevention Cheat Sheet - doporučení k prevenci SQL injection včetně parametrizovaných dotazů, bezpečných uložených procedur, allowlist validace a principu nejmenších oprávnění: https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html
@@ -27452,6 +27618,7 @@ Potom udělej jednu malou změnu: doplň `HttpOnly` a `Secure` u session cookie,
 
 ## Pracovní log
 
+- 2026-07-17: Doplněna příloha o bezpečnostních upozorněních bez paniky a úniku dat: rozlišení informačních, kontrolních, schvalovacích a nouzových zpráv, výběr příjemců podle role, omezení citlivých detailů v e-mailu, bezpečné odkazy, oddělení bezpečnostní komunikace od marketingu, preference upozornění, auditní dvojče, checklist a mini úkol; navázáno na existující zdroje OWASP k autentizaci, session managementu, MFA a autorizaci a na GDPR principy minimalizace a důvěrnosti.
 - 2026-07-17: Doplněna příloha o přihlašování a obnově účtu bez bezpečnostního divadla: rozlišení běžného přihlášení a rizikových akcí, práce s hesly a passkeys, MFA, bezpečná obnova účtu, session pravidla, SSO hranice, klidná login stránka, checklist a mini úkol; navázáno na existující zdroje OWASP k autentizaci, session managementu, MFA, obnově hesla a W3C WebAuthn.
 - 2026-07-17: Doplněna příloha o klasifikaci dat bez bezpečnostního divadla: jednoduché úrovně citlivosti pro malé týmy, rozhodování podle dopadu místo formátu, pravidla pro běžné datové situace, štítky u dokumentů a exportů, výchozí opatrný režim, vazba na přístup a retenci, příklady, checklist a mini úkol; navázáno na existující zdroje Evropské komise k principům GDPR a OWASP k bezpečnému logování.
 - 2026-07-17: Doplněna příloha o ručních datových opravách bez produkční kovbojky: rozlišení jednotlivých oprav, hromadných zásahů, migrací, supportních a incidentních zásahů, pravidla pro bezpečný postup místo prvního ručního SQL, omezené přístupy, karta opravy, ochrana zákaznického obsahu při diagnostice, ověření po zásahu, checklist a mini úkol; ověřeny a doplněny zdroje OWASP k SQL injection a parametrizaci dotazů a Evropské komise k principům zpracování osobních údajů.
