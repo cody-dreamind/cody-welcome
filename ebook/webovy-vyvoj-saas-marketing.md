@@ -28934,8 +28934,171 @@ Vyber jednu aktuální nebo nedávnou výjimku a vyplň kartu:
 
 Potom udělej jednu konkrétní změnu: zapiš datum konce, odeber starý dočasný přístup, smaž export po auditu, vypni zapomenuté debug logování nebo převeď opakovanou výjimku na normální proces. Výjimky nejsou problém, když jsou malé, viditelné a konečné. Problém je výjimka, která se tváří jako detail a po půl roce drží půlku provozu pohromadě izolepou.
 
+## Příloha: Browserová rozšíření bez oprávnění na celý internet
+
+Rozšíření do prohlížeče může být pro SaaS skvělá zkratka: uloží odkaz, vyplní formulář, přidá komentář k dokumentu, pomůže s research workflow nebo propojí produkt s nástrojem, kde uživatel právě pracuje. Je to ale také jeden z nejcitlivějších typů integrace. Běží přímo v prohlížeči, může vidět stránky, URL, vybraný text, formuláře, obsah záložek a někdy i cookies nebo síťové požadavky.
+
+Špatná otázka zní: „Jaká oprávnění si vyžádáme, aby nám to fungovalo všude?“
+
+Lepší otázka zní: „Na které konkrétní stránce, po jaké akci člověka a s jakými daty má rozšíření skutečně pracovat?“
+
+MDN i Chrome dokumentace rozlišují běžná oprávnění API, host permissions pro přístup ke konkrétním webům a optional permissions, které lze žádat až v okamžiku potřeby. Pro privacy-first SaaS z toho plyne jednoduché pravidlo: instalace rozšíření nemá být bianko šek na celý webový život uživatele.
+
+### Nejdřív ověř, jestli rozšíření vůbec potřebuješ
+
+Rozšíření je silný nástroj, ne výchozí odpověď na každé „chceme být blíž workflow“. Před návrhem si napiš pracovní větu:
+
+„Rozšíření pomáhá uživateli typu ___ udělat ___ na stránce nebo v nástroji ___ bez toho, aby musel ___.“
+
+Příklady dobrých vět:
+
+- „Rozšíření umožní obchodníkovi uložit veřejnou stránku firmy jako lead do CRM jedním kliknutím, bez kopírování URL a názvu.“
+- „Rozšíření umožní výzkumníkovi přidat vybraný veřejný text do poznámky k projektu, bez ukládání celé stránky.“
+- „Rozšíření umožní administrátorovi ověřit implementaci tagu na vlastní doméně, bez session recordingu návštěvníků.“
+
+Pokud věta zní „rozšíření bude sbírat kontext z prohlížeče pro lepší personalizaci“, zastav se. To není produktová věta. To je začátek datového vysavače s ikonou v toolbaru.
+
+Někdy stačí obyčejná alternativa:
+
+- bookmarklet pro jednorázové uložení URL,
+- serverový import přes API,
+- kopírovatelná adresa pro sdílení,
+- ruční formulář s předvyplněnou URL,
+- integrace přes OAuth s konkrétním nástrojem,
+- dokumentovaný postup místo trvalého rozšíření.
+
+Rozšíření zvol až tehdy, když opravdu potřebuješ kontext aktuální stránky nebo akci přímo v prohlížeči.
+
+### Oprávnění navrhuj podle nejmenší pracovní plochy
+
+Host permissions určují, na kterých webech může rozšíření pracovat. Podle MDN se používají pro API, která čtou nebo mění data na konkrétních hostech, a Chrome dokumentace upozorňuje, že host permissions umožňují interakci s URL podle match patternů. Přeloženo do produktu: `https://app.example.com/*` je jiné rozhodnutí než `<all_urls>`.
+
+Praktická hierarchie:
+
+1. Bez host permission: rozšíření pracuje jen s vlastním popupem nebo stránkou.
+2. Jedna vlastní doména: například jen `https://app.example.com/*`.
+3. Konkrétní integrační domény: jen ty služby, kde má funkce jasný účel.
+4. Aktivní tab po akci uživatele: rozšíření pracuje s aktuální stránkou až po kliknutí.
+5. Všechny weby: výjimka, která potřebuje silné zdůvodnění, review a viditelnou kontrolu.
+
+Pokud potřebuješ široký přístup jen pro jednu pokročilou funkci, zvaž optional permissions. Chrome i MDN popisují model, kdy se některá oprávnění deklarují jako volitelná a vyžádají se až za běhu. Uživatel tak nemusí při instalaci schvalovat něco, co možná nikdy nepoužije.
+
+Codyho komentář: `Access your data on all websites` je věta, která by měla produktového člověka probudit rychleji než studená káva. Někdy je oprávněná. Ale pokud ji neumíš vysvětlit jednou konkrétní uživatelskou prací, pravděpodobně nechceš funkci. Chceš pohodlí.
+
+### Sbírej výřez, ne celou stránku
+
+Největší privacy chyba rozšíření je posílat na server víc kontextu, než uživatel čeká. Když člověk klikne na „uložit citaci“, neznamená to „ulož celý DOM, URL, metadata, screenshot a seznam otevřených tabů“. Pokud klikne na „zkontrolovat vlastní stránku“, neznamená to „pošli nám obsah formulářů a interní tokeny v adrese“.
+
+Pro každý tok si napiš datový kontrakt:
+
+| Akce | Minimální data | Zakázaná data |
+| --- | --- | --- |
+| Uložit odkaz | URL, název stránky, workspace ID | celý obsah stránky, cookies, formuláře |
+| Uložit vybraný text | výběr, URL zdroje, poznámka uživatele | celý dokument, okolní citlivý obsah |
+| Zkontrolovat implementaci | výsledek kontroly, verze skriptu, doména | session data, osobní údaje návštěvníků |
+| Vyplnit interní šablonu | pole, která uživatel potvrdí | automaticky přečtené skryté inputy |
+
+Dobré rozšíření má potvrzovací mezikrok tam, kde opouštějí prohlížeč data z cizí stránky. Uživatel má vidět, co se odešle. Ne jako právnický román, ale jako praktický náhled: zdroj, výběr, cílový workspace a možnost odstranit citlivý detail.
+
+### Tokeny a identitu drž odděleně
+
+Rozšíření často potřebuje přihlášení do SaaS. Neznamená to, že má dostat věčný univerzální token. Ber ho jako klienta s omezeným rizikem:
+
+- používej krátkodobé tokeny nebo obnovu přes bezpečný tok,
+- token nevkládej do URL,
+- nerozšiřuj scope jen proto, že je jednodušší použít jeden backend endpoint,
+- při odhlášení token zneplatni,
+- při odebrání rozšíření nabídni revokaci přístupu v účtu,
+- v administraci ukaž připojená rozšíření stejně jako jiné aplikace.
+
+U B2B SaaS přidej workspace kontrolu. To, že je člověk přihlášený v prohlížeči, neznamená, že smí uložit data do libovolného workspace. Každá akce má znovu projít autorizací na serveru. Rozšíření není bezpečnostní hranice. Je to klientské rozhraní, které se dá pokazit, obejít nebo napodobit.
+
+### Loguj provoz, ne obsah prohlížeče
+
+Potřebuješ vědět, jestli rozšíření funguje: chyby, verze, typ akce, latence, počet úspěšných uložení, odmítnuté oprávnění, selhání autorizace. Nepotřebuješ proto ukládat celé stránky, vybraný text bez účelu, screenshoty ani názvy všech navštívených webů.
+
+Privacy-first log události může vypadat takto:
+
+| Pole | Příklad |
+| --- | --- |
+| `extension_version` | `1.4.2` |
+| `action_type` | `save_selected_text` |
+| `result` | `success` / `permission_denied` / `auth_failed` |
+| `workspace_id` | interní ID, pokud je potřeba |
+| `domain_category` | `own_app`, `approved_integration`, `other` |
+| `request_id` | pro podporu a debug |
+
+Naopak se vyhni:
+
+- ukládání plných URL s query stringem bez důvodu,
+- kopírování vybraného textu do error logu,
+- session recordingu práce s rozšířením,
+- odesílání seznamu tabů,
+- automatickému sběru obsahu stránky při každém načtení.
+
+Když support potřebuje debug, dej uživateli tlačítko „vygenerovat diagnostiku“ a ukaž, co obsahuje. Diagnostika má být jednorázová, redigovatelná a časově omezená. Ne tichý proud dat od instalace až do konce světa.
+
+### Aktualizace oprávnění ber jako produktovou změnu
+
+Změna oprávnění v rozšíření není jen technický update. Je to změna důvěry. Pokud nová verze potřebuje širší přístup, napiš proč:
+
+- jakou funkci oprávnění umožní,
+- zda je oprávnění povinné nebo volitelné,
+- jaká data se budou číst nebo posílat,
+- jak uživatel oprávnění odmítne nebo později odebere,
+- co se stane se stávající funkcí bez nového oprávnění.
+
+U malého týmu stačí před release krátká karta:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jaké oprávnění přidáváme? |  |
+| Která uživatelská práce ho vyžaduje? |  |
+| Proč nestačí užší doména nebo optional permission? |  |
+| Jak to vysvětlíme v UI a release notes? |  |
+| Jak se oprávnění revokuje? |  |
+| Jaké logy a retence se mění? |  |
+
+Tato karta chrání tým před plíživým rozšiřováním rozsahu. Dnes přidáš jednu doménu, zítra `<all_urls>`, pozítří debug payloady a za měsíc nikdo přesně neví, proč rozšíření ví tolik věcí. Klasika. Ne ta dobrá.
+
+### Checklist: Browserové rozšíření privacy-first
+
+- [ ] Umíme jednou větou říct, proč rozšíření potřebujeme.
+- [ ] Ověřili jsme, že nestačí bookmarklet, API integrace, sdílecí URL nebo ruční formulář.
+- [ ] Každé oprávnění má konkrétní uživatelskou práci a vlastníka.
+- [ ] Nepoužíváme `<all_urls>`, pokud nejde o výslovně schválenou výjimku.
+- [ ] Široká nebo pokročilá oprávnění jsou volitelná, pokud to platforma a funkce dovolí.
+- [ ] Rozšíření odesílá jen výřez dat, který uživatel očekává.
+- [ ] U citlivější akce uživatel vidí náhled dat před odesláním.
+- [ ] Tokeny mají omezený scope, dají se revokovat a nejsou v URL.
+- [ ] Server znovu ověřuje workspace, roli a oprávnění u každé akce.
+- [ ] Logy neobsahují celý obsah stránek, vybrané texty bez účelu ani seznam tabů.
+- [ ] Diagnostika je jednorázová, viditelná a redigovatelná.
+- [ ] Změna oprávnění má release kartu, vysvětlení a plán revokace.
+
+### Mini úkol
+
+Vezmi jedno existující nebo plánované rozšíření a vyplň tabulku:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jakou jednu práci má rozšíření udělat? |  |
+| Na kterých doménách skutečně musí fungovat? |  |
+| Která oprávnění jsou nutná při instalaci? |  |
+| Která mohou být volitelná až při použití funkce? |  |
+| Jaká data opouštějí prohlížeč? |  |
+| Co se nikdy nesmí posílat ani logovat? |  |
+| Jak uživatel nebo admin oprávnění odebere? |  |
+
+Potom udělej jednu konkrétní opravu: zúž host permission, přesuň pokročilou schopnost do optional permission, přidej náhled odesílaných dat, omez logování URL, doplň revokaci v účtu nebo přepiš release poznámku k novému oprávnění. Rozšíření má uživateli pomoct v práci, ne si potichu pronajmout celý prohlížeč.
+
 ## Zdroje
 
+- MDN Web Docs: WebExtensions permissions - přehled oprávnění rozšíření v manifestu včetně host permissions a rozdílu mezi API oprávněními a přístupem ke konkrétním URL: https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/manifest.json/permissions
+- MDN Web Docs: WebExtensions host_permissions - použití `host_permissions` v Manifest V3 pro API, která čtou nebo mění data na konkrétních hostech: https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/manifest.json/host_permissions
+- MDN Web Docs: WebExtensions optional_permissions - volitelná oprávnění a poznámka k `optional_host_permissions` u Manifest V3: https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/manifest.json/optional_permissions
+- Chrome for Developers: Declare permissions - vysvětlení oprávnění rozšíření, host permissions a principu žádání jen potřebných oprávnění: https://developer.chrome.com/docs/extensions/develop/concepts/declare-permissions
+- Chrome for Developers: chrome.permissions API - práce s required a optional permissions v rozšířeních a žádání oprávnění až při použití funkce: https://developer.chrome.com/docs/extensions/reference/api/permissions
 - OWASP Cheat Sheet Series: SQL Injection Prevention Cheat Sheet - doporučení k prevenci SQL injection včetně parametrizovaných dotazů, bezpečných uložených procedur, allowlist validace a principu nejmenších oprávnění: https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html
 - OWASP Cheat Sheet Series: Query Parameterization Cheat Sheet - praktické příklady parametrizovaných dotazů napříč běžnými jazyky a databázemi: https://cheatsheetseries.owasp.org/cheatsheets/Query_Parameterization_Cheat_Sheet.html
 - IETF RFC 9116: A File Format to Aid in Security Vulnerability Disclosure - formát `security.txt`, umístění v `/.well-known/`, povinná pole `Contact` a `Expires` a další pole pro policy, šifrování, kanonickou URL a preferované jazyky: https://www.rfc-editor.org/info/rfc9116
@@ -29095,6 +29258,7 @@ Potom udělej jednu konkrétní změnu: zapiš datum konce, odeber starý dočas
 
 ## Pracovní log
 
+- 2026-07-17: Doplněna příloha o browserových rozšířeních bez oprávnění na celý internet: rozhodování, zda je rozšíření opravdu potřeba, návrh host a optional permissions podle nejmenší pracovní plochy, sběr jen očekávaného výřezu dat, oddělení tokenů a workspace autorizace, chudé provozní logování, release karta pro změny oprávnění, checklist a mini úkol; ověřeny a doplněny zdroje MDN WebExtensions a Chrome Extensions k permissions.
 - 2026-07-17: Doplněna příloha o výjimkách z privacy-first pravidel bez šedé zóny: rozlišení výjimky, změny pravidla a nového procesu, karta výjimky, omezení rozsahu, přiměřené schvalování, viditelný stavový model, uzavírací checklist, checklist a mini úkol.
 - 2026-07-17: Doplněna příloha o SBOM bez inventáře pro šuplík: účel SBOM podle bezpečnosti, licencí, zákaznických auditů a incidentů, vazba na konkrétní artefakt, minimální pole komponent, rozlišení runtime/build/dev závislostí, automatické generování v CI, zákaznické režimy výstupu, životní cyklus, checklist a mini úkol; ověřeny a doplněny zdroje CISA, NTIA, CycloneDX a SPDX.
 - 2026-07-17: Doplněna příloha o licencích open-source komponent bez právní mlhy: rozlišení interního použití, runtime, klientského bundlu, distribuce a úprav, práce se SPDX identifikátory, licenční review závislostí, notices, copyleft rozhodování, privacy-first kontrola telemetrie a externích requestů, změny licencí při updatech, checklist a mini úkol; navázáno na ověřené zdroje GitHub Licensing, GitHub dependency graph, npm license metadata a SPDX License List.
