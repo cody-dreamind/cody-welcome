@@ -27616,6 +27616,139 @@ Vyber jeden tok změny kontaktu v produktu a vyplň kartu:
 
 Potom udělej jednu malou opravu: přidej re-auth před změnu přihlašovacího e-mailu, odděl billing e-mail od loginu, přepiš bezpečnostní upozornění staré adrese, zkrať platnost potvrzovacího odkazu, nebo zastav automatické propsání login e-mailu do marketingového seznamu. Změna kontaktu není formulářová drobnost. Je to identitní změna s provozním dopadem.
 
+## Příloha: Demo workspace a ukázková data bez úniku reality
+
+Demo workspace je často první místo, kde zákazník pochopí produkt. Může být součástí sales dema, trialu, onboardingového průvodce, dokumentace nebo veřejné ukázky. Když je dobrý, zkrátí cestu k první hodnotě. Když je špatný, buď vypadá jako sterilní hračka bez souvislosti s realitou, nebo naopak obsahuje skutečná data, která v ukázce nikdy neměla být.
+
+Dobrá otázka nezní: „Jak rychle naplníme demo něčím, co vypadá věrohodně?“
+
+Lepší otázka zní: „Jaká ukázková situace pomůže správnému člověku pochopit hodnotu produktu bez použití reálných zákaznických dat?“
+
+Privacy-first demo má zvláštní úkol: musí být dost realistické pro rozhodnutí, ale dost oddělené od produkce, aby se z něj nestal únik kontextu. Ukázková data nejsou odpadkový koš pro staré exporty. Jsou to produktové materiály se stejnou péčí jako landing page nebo onboarding.
+
+> Codyho komentář: Demo s reálnými jmény zákazníků je rychlé asi pět minut. Pak začne být drahé. Ukázková data mají učit scénář, ne dokazovat, že tým umí kopírovat produkci do prezentace.
+
+### Začni scénářem, ne importem
+
+Demo workspace má vyprávět konkrétní pracovní situaci. Nejdřív napiš jednu větu:
+
+„Toto demo pomáhá člověku typu ___ pochopit, jak produkt vyřeší ___ během ___ kroků.“
+
+Příklady:
+
+- „Toto demo pomáhá dispečerovi servisní firmy pochopit, jak naplánuje týden výjezdů a uvidí zpožděné zakázky.“
+- „Toto demo pomáhá zakladateli B2B SaaS pochopit, jak sledovat první hodnotu bez osobních identifikátorů v analytice.“
+- „Toto demo pomáhá účetní kanceláři pochopit, jak sbírat podklady od klientů bez e-mailového chaosu.“
+
+Když věta chybí, demo se obvykle naplní náhodnými položkami: pár uživatelů, pár projektů, pár grafů, pár falešných firem. Vypadá to živě, ale nevede to k rozhodnutí.
+
+### Ukázková data navrhni jako produktový obsah
+
+Dobrá ukázková data mají tři vlastnosti:
+
+- jsou realistická pro cílový segment,
+- neobsahují skutečné osobní ani zákaznické údaje,
+- ukazují důležitý workflow od začátku do výsledku.
+
+Praktická tabulka:
+
+| Oblast | Co ukázat | Čemu se vyhnout |
+| --- | --- | --- |
+| Uživatelé | role, oprávnění, týmový scénář | skutečná jména zaměstnanců nebo zákazníků |
+| Projekty | typické stavy, priority, termíny | kopie reálných zakázek |
+| Analytika | agregované trendy a rozhodovací signály | export skutečných návštěvníků nebo leadů |
+| Fakturace | fiktivní fakturační scénář | reálné firmy, adresy, IČO a částky |
+| Support | anonymní problém a řešení | skutečný ticket s interní poznámkou |
+
+Fiktivní data mají být záměrně fiktivní. Použij smyšlené firmy, interní testovací domény, generické e-maily typu `demo@example.com` a popisy, které nepřipomínají skutečného zákazníka. Pokud demo potřebuje český kontext, použij realistické názvy situací, ne reálné názvy lidí.
+
+### Odděl demo od produkce
+
+Demo workspace nemá sdílet produkční účty, integrace ani notifikace. Zvlášť hlídej:
+
+- aby demo neposílalo e-maily skutečným lidem,
+- aby webhooks nemířily do produkčních systémů zákazníků,
+- aby platební funkce běžely v testovacím režimu,
+- aby importy a exporty používaly testovací úložiště,
+- aby demo role neměly přístup do produkčních účtů,
+- aby analytika demo provozu nemíchala signály se skutečným používáním.
+
+Praktický stav pro demo prostředí:
+
+| Prvek | Doporučení |
+| --- | --- |
+| E-mail | zachytávat do testovací schránky nebo vypnout odesílání |
+| Platby | jen testovací režim a jasné označení |
+| Integrace | sandbox nebo mock, ne produkční API |
+| Exporty | ukázkový obsah, krátká retence |
+| Přístupy | oddělené role a samostatní demo uživatelé |
+| Analytika | označit jako demo a oddělit od produktových metrik |
+
+Demo, které omylem pošle notifikaci reálnému zákazníkovi, přestává být demo. Je to provozní incident v kostýmu prezentace.
+
+### Udržuj demo stejně jako produkt
+
+Demo workspace stárne. Produkt se změní, onboarding se zkrátí, pricing se přepíše, role dostanou nové názvy a staré demo najednou ukazuje něco, co už neplatí. Proto má demo mít vlastníka a datum revize.
+
+Demo karta:
+
+| Pole | Odpověď |
+| --- | --- |
+| Pro koho je demo |  |
+| Jaký scénář ukazuje |  |
+| Kde demo běží |  |
+| Kdo ho vlastní |  |
+| Jaká data obsahuje |  |
+| Které integrace jsou vypnuté nebo mockované |  |
+| Kdy proběhne další revize |  |
+| Co se má po prezentaci smazat nebo resetovat |  |
+
+U veřejných sandboxů přidej automatický reset. U sales dema po schůzce smaž dočasné poznámky, nahrané soubory a testovací uživatele. U onboardingového demo workspace řekni uživateli, co je ukázkové a co se stane, když začne pracovat s vlastními daty.
+
+### Nepleť ukázku s důkazem
+
+Demo ukazuje, jak produkt funguje. Důkaz ukazuje, že přináší hodnotu v realitě. Tyto dvě věci nemíchej.
+
+Pokud chceš ukázat reálný výsledek, použij:
+
+- veřejně schválenou případovou studii,
+- anonymizovaný agregovaný výsledek,
+- screenshot bez osobních údajů a interních detailů,
+- citaci se souhlasem zákazníka,
+- syntetický scénář založený na opakovaném vzoru, jasně označený jako příklad.
+
+Nepoužívej skutečné zákaznické dashboardy jen proto, že „to bude přesvědčivější“. Přesvědčivost nesmí stát na tom, že porušíš důvěru někoho jiného.
+
+### Checklist: Demo workspace privacy-first
+
+- [ ] Demo má jednu větu o cílovém člověku, scénáři a výsledku.
+- [ ] Ukázková data jsou syntetická nebo bezpečně anonymizovaná.
+- [ ] Demo neobsahuje skutečná jména, e-maily, firmy, faktury, tickety ani exporty bez jasného schválení.
+- [ ] Demo prostředí je oddělené od produkce.
+- [ ] E-maily, webhooks, platby a externí integrace běží v testovacím režimu nebo jsou vypnuté.
+- [ ] Demo analytika se nemíchá s reálnými produktovými metrikami.
+- [ ] Demo má vlastníka a datum revize.
+- [ ] Po prezentaci nebo trialu se dočasné soubory, uživatelé a poznámky mažou nebo resetují.
+- [ ] Veřejné sandboxy mají omezený přístup, rate limity a resetovací pravidla.
+- [ ] Reálné důkazy hodnoty jsou oddělené od ukázkových dat a použité jen se souhlasem nebo v agregaci.
+
+### Mini úkol
+
+Vyber jedno demo, sandbox nebo ukázkový workspace a vyplň kartu:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jaký scénář má demo ukázat? |  |
+| Pro jaký segment je připravené? |  |
+| Která data jsou syntetická? |  |
+| Která data mohou připomínat realitu a proč? |  |
+| Jak jsou vypnuté e-maily, webhooks a platby? |  |
+| Kdo má k demo prostředí přístup? |  |
+| Jak se demo resetuje po použití? |  |
+| Kdy ho znovu zkontrolujeme? |  |
+
+Potom udělej jednu konkrétní změnu: nahraď reálný screenshot syntetickým, vypni odesílání e-mailů z demo prostředí, odděl demo analytiku, doplň vlastníka demo workspace nebo nastav automatický reset. Dobré demo má ukázat hodnotu produktu, ne interní nepořádek.
+
 ## Zdroje
 
 - OWASP Cheat Sheet Series: SQL Injection Prevention Cheat Sheet - doporučení k prevenci SQL injection včetně parametrizovaných dotazů, bezpečných uložených procedur, allowlist validace a principu nejmenších oprávnění: https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html
@@ -27770,6 +27903,7 @@ Potom udělej jednu malou opravu: přidej re-auth před změnu přihlašovacího
 
 ## Pracovní log
 
+- 2026-07-17: Doplněna příloha o demo workspace a ukázkových datech bez úniku reality: návrh demo scénáře od rozhodnutí zákazníka, syntetická data místo produkčních exportů, oddělení demo prostředí od produkce, vypnutí reálných e-mailů, webhooků, plateb a integrací, průběžná údržba demo karty, checklist a mini úkol.
 - 2026-07-17: Doplněna příloha o změně kontaktního e-mailu bez převzetí účtu: rozlišení přihlašovacího, bezpečnostního, billing, workspace a marketingového e-mailu, re-auth u rizikové změny, potvrzení nové adresy, upozornění staré adresy, zacházení s magic linky a reset tokeny, opatrnost u telefonu, omezené propisování změny do dalších systémů, checklist a mini úkol; navázáno na existující zdroje OWASP k autentizaci, session managementu, MFA a obnově hesla a na GDPR principy přesnosti, minimalizace, integrity a důvěrnosti.
 - 2026-07-17: Zpřesněn úvodní návod k práci s e-bookem o výběr jedné malé vratné změny po kapitole, aby dobré nápady nekončily jako neřízený backlogový dluh.
 - 2026-07-17: Doplněna příloha o bezpečnostních upozorněních bez paniky a úniku dat: rozlišení informačních, kontrolních, schvalovacích a nouzových zpráv, výběr příjemců podle role, omezení citlivých detailů v e-mailu, bezpečné odkazy, oddělení bezpečnostní komunikace od marketingu, preference upozornění, auditní dvojče, checklist a mini úkol; navázáno na existující zdroje OWASP k autentizaci, session managementu, MFA a autorizaci a na GDPR principy minimalizace a důvěrnosti.
