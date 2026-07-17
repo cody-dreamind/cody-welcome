@@ -27466,6 +27466,156 @@ Vyber jednu bezpečnostní událost: změna hesla, vypnutí MFA, nový export, p
 
 Potom udělej jednu konkrétní změnu: přepiš bezpečnostní e-mail po změně hesla, odstraň tracking pixel, přidej odkaz na bezpečnostní přehled, nastav upozornění vlastníkovi workspace při změně admin role, nebo vytvoř support postup pro podezřelé přihlášení. Bezpečnostní upozornění má být jako dobrý alarm: ozve se včas, řekne proč a nebudí celý dům kvůli toustu.
 
+## Příloha: Změna kontaktního e-mailu bez převzetí účtu
+
+Kontaktní e-mail v SaaS účtu vypadá jako běžné nastavení. Ve skutečnosti je to často kořen identity: chodí na něj reset hesla, bezpečnostní upozornění, faktury, pozvánky, exporty, supportní odpovědi a někdy i magic linky. Když se změna e-mailu navrhne ledabyle, vznikne tichá cesta k převzetí účtu nebo k tomu, že citlivé zprávy začnou odcházet na špatnou adresu.
+
+Dobrá otázka nezní: „Jak uživateli dovolíme přepsat e-mail v profilu?“
+
+Lepší otázka zní: „Jak bezpečně ověříme, že změnu chce oprávněný člověk, že nová adresa opravdu existuje a že stará adresa dostane šanci zareagovat, pokud jde o omyl nebo útok?“
+
+OWASP doporučení k autentizaci, MFA, session managementu a obnově hesla tady platí velmi prakticky: změna identity je riziková akce, má vyžadovat opětovné ověření, nemá prozrazovat zbytečné informace a má být auditovatelná. GDPR principy přesnosti, minimalizace, integrity a důvěrnosti zase připomínají, že kontaktní údaje musí odpovídat účelu a nesmí se z nich stát univerzální marketingová zásobárna. Odkazy jsou ve zdrojích.
+
+> Codyho komentář: Změna e-mailu je malé tlačítko s velkým dopadem. Když ji chráníš hůř než změnu barvy avataru, produkt tím říká, že identita je dekorace. Není.
+
+### Rozliš přihlašovací, kontaktní a billing e-mail
+
+Jeden e-mail může plnit více rolí, ale produkt by měl vědět, kterou roli právě mění. Jinak se snadno stane, že uživatel chce změnit fakturační kontakt a omylem přesune i obnovu účtu.
+
+Praktické rozdělení:
+
+| Typ e-mailu | K čemu slouží | Riziko změny |
+| --- | --- | --- |
+| Přihlašovací e-mail | identita uživatele, reset hesla, magic link | převzetí osobního účtu |
+| Bezpečnostní e-mail | upozornění na rizikové akce | ztráta signálu při útoku |
+| Billing e-mail | faktury, platby, dunning | únik finančních údajů nebo ztracené platby |
+| Workspace kontakt | správa týmu, incidenty, provozní zprávy | špatná komunikace s vlastníkem účtu |
+| Marketingový e-mail | dobrovolný odběr obsahu | spam, neplatný souhlas, špatné preference |
+
+U malého produktu může být na začátku jeden kontaktní e-mail. I tehdy si do datového modelu a textů napiš, co přesně znamená. „E-mail“ je málo. „E-mail pro přihlášení a bezpečnostní upozornění“ už říká, jak opatrně se k němu chovat.
+
+### Riziková změna vyžaduje re-auth
+
+Změna přihlašovacího e-mailu nemá být dostupná jen proto, že má uživatel otevřenou starou session. Otevřený notebook v kanceláři, sdílený počítač nebo ukradená session by pak stačily k převzetí účtu.
+
+Bezpečný základ:
+
+- před změnou vyžaduj opětovné ověření heslem, passkey, SSO nebo MFA podle typu účtu,
+- u administrátorů, billing rolí a účtů s exportem dat považuj změnu e-mailu za vysoké riziko,
+- po změně zvaž ukončení ostatních session,
+- u podezřelé změny přidej čekací dobu nebo ruční kontrolu,
+- změnu vždy zapiš do auditní stopy,
+- neukazuj v chybách, zda nová adresa už patří jinému účtu, pokud to není nutné pro přihlášeného oprávněného uživatele.
+
+Re-auth má chránit konkrétní akci, ne obtěžovat plošně. Když člověk jen mění jazyk rozhraní, není potřeba bezpečnostní rituál. Když mění adresu pro obnovu účtu, rituál smysl má.
+
+### Potvrď novou adresu, upozorni starou
+
+U změny e-mailu existují dvě důležité strany: stará adresa a nová adresa. Nová musí potvrdit, že ji člověk ovládá. Stará má vědět, že se něco mění.
+
+Rozumný tok:
+
+1. Přihlášený uživatel požádá o změnu.
+2. Produkt vyžádá re-auth.
+3. Na novou adresu odejde potvrzovací odkaz s krátkou platností.
+4. Na starou adresu odejde bezpečnostní upozornění bez citlivých detailů.
+5. Změna se dokončí až po potvrzení nové adresy.
+6. Uživatel vidí v produktu stav: čeká na potvrzení, dokončeno, vypršelo nebo zrušeno.
+
+U vysoce rizikových účtů může dávat smysl krátká ochranná lhůta, během které se stará adresa může ozvat nebo vlastník workspace změnu zruší. Nepoužívej ji ale jako univerzální brzdu pro každý malý účet. Bezpečnost má odpovídat dopadu.
+
+### Magic link a reset hesla ber jako zvláštní riziko
+
+Pokud produkt používá magic linky, e-mail je prakticky přihlašovací faktor. Pokud přes e-mail obnovuješ heslo, je zároveň recovery kanál. Změna takové adresy musí být opatrnější než změna běžného kontaktního pole.
+
+Pravidla:
+
+- po změně e-mailu zneplatni staré pending magic linky a resetovací odkazy,
+- reset hesla neposílej na novou adresu, dokud není potvrzená,
+- u změny e-mailu nezobrazuj celé staré ani nové adresy v místech, kde je nepotřebuje každý člen workspace,
+- pokud se e-mail používá pro SSO, jasně odděl změnu profilu od identity provideru,
+- při podezření na převzetí účtu umožni rychle zablokovat magic linky, reset tokeny a aktivní session.
+
+Příklad: Uživatel změní přihlašovací e-mail z `jana@firma.cz` na `jana.osobni@example.com`. Produkt nemá okamžitě začít posílat reset hesla na novou adresu, dokud není potvrzená. Billing faktury navíc nemusí automaticky následovat, pokud jejich příjemcem má být firemní účetní.
+
+### Telefon není bezpečnostní zkratka
+
+Telefonní číslo bývá lákavé jako rychlé ověření. Jenže SMS nejsou zázračně bezpečný faktor a telefon je také osobní údaj s vlastním účelem. Nepřidávej ho jen proto, že „se bude hodit“.
+
+U telefonu si napiš:
+
+- proč ho potřebuješ,
+- jestli je povinný,
+- kdo ho uvidí,
+- zda slouží k bezpečnosti, supportu, billing komunikaci nebo obchodu,
+- jak ho uživatel změní a ověří,
+- kdy ho smažeš.
+
+Pokud telefon používáš pro MFA nebo recovery, vysvětli to. Pokud ho chceš jen pro sales follow-up, nemá být schovaný v bezpečnostním nastavení. A pokud ho nepotřebuješ, nesbírej ho. Ano, i když kolonka na telefon vypadá v CRM tak hezky prázdná.
+
+### Nepropaguj změnu do všech systémů bez rozmyslu
+
+Změna kontaktního údaje často spouští synchronizaci do CRM, billing systému, e-mailingu, supportu a datového skladu. Privacy-first produkt má rozlišit, kam změna opravdu patří.
+
+Příklad rozhodnutí:
+
+| Systém | Má dostat nový e-mail? | Poznámka |
+| --- | --- | --- |
+| Autentizace | ano, pokud jde o přihlašovací e-mail | po potvrzení nové adresy |
+| Billing | jen pokud se mění fakturační kontakt | může být jiná osoba |
+| Support | ano pro budoucí odpovědi | staré tickety nemazat bez důvodu |
+| Marketing | jen při platném odběru nebo preferenci | změna loginu není souhlas s newsletterem |
+| Audit | ano jako událost | neukládat zbytečný obsah komunikace |
+
+Nejčastější chyba je automatické pravidlo „když se změní e-mail, přepiš ho všude“. Někdy je to správně. Často tím ale zničíš historický kontext, pošleš marketing na adresu bez souhlasu nebo přesuneš faktury člověku, který je nemá dostávat.
+
+### Ukaž stav a nabídni bezpečné zrušení
+
+Uživatel by neměl hádat, co se po změně stalo. Stav změny má být viditelný a srozumitelný.
+
+Dobré stavy:
+
+- čeká na potvrzení nové adresy,
+- potvrzeno a dokončeno,
+- odkaz vypršel,
+- změna zrušena,
+- změna pozastavena kvůli bezpečnostní kontrole.
+
+Pokud starý e-mail dostane upozornění „váš e-mail se mění“, dej mu jasnou cestu: přihlásit se a zkontrolovat účet, kontaktovat support, případně zrušit pending změnu po ověření. Neposílej do e-mailu velké tlačítko, které samo bez přihlášení vrátí citlivou změnu. I obranný odkaz může být zneužitý, pokud se přepošle nebo zachytí.
+
+### Checklist: Změna kontaktního e-mailu privacy-first
+
+- [ ] Rozlišujeme přihlašovací, bezpečnostní, billing, workspace a marketingový e-mail.
+- [ ] Změna přihlašovacího e-mailu vyžaduje re-auth.
+- [ ] Nová adresa se musí potvrdit před dokončením změny.
+- [ ] Stará adresa dostane bezpečnostní upozornění bez zbytečných detailů.
+- [ ] Pending potvrzovací odkazy mají krátkou platnost a jdou zneplatnit.
+- [ ] Staré resetovací odkazy a magic linky se po změně ruší podle rizika.
+- [ ] Změna e-mailu vytváří auditní záznam.
+- [ ] Billing a marketing kontakty se nepřepisují automaticky bez účelu.
+- [ ] Chybové hlášky neprozrazují zbytečně existenci cizího účtu.
+- [ ] Uživatel vidí stav změny a bezpečnou cestu ke zrušení podezřelé akce.
+- [ ] Telefonní číslo sbíráme jen s jasným účelem.
+- [ ] Support má postup pro podezření na neoprávněnou změnu kontaktu.
+
+### Mini úkol
+
+Vyber jeden tok změny kontaktu v produktu a vyplň kartu:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jaký kontaktní údaj se mění? |  |
+| Slouží k přihlášení, bezpečnosti, fakturaci, supportu nebo marketingu? |  |
+| Jak dnes ověřujeme člověka před změnou? |  |
+| Kdo dostane upozornění na starý kontakt? |  |
+| Jak potvrzujeme nový kontakt? |  |
+| Jaké tokeny nebo session se mají zneplatnit? |  |
+| Do kterých systémů se změna propisuje a proč? |  |
+| Jak změnu zapíšeme do auditu bez zbytečných dat? |  |
+| Co udělá support, když člověk změnu nepoznává? |  |
+
+Potom udělej jednu malou opravu: přidej re-auth před změnu přihlašovacího e-mailu, odděl billing e-mail od loginu, přepiš bezpečnostní upozornění staré adrese, zkrať platnost potvrzovacího odkazu, nebo zastav automatické propsání login e-mailu do marketingového seznamu. Změna kontaktu není formulářová drobnost. Je to identitní změna s provozním dopadem.
+
 ## Zdroje
 
 - OWASP Cheat Sheet Series: SQL Injection Prevention Cheat Sheet - doporučení k prevenci SQL injection včetně parametrizovaných dotazů, bezpečných uložených procedur, allowlist validace a principu nejmenších oprávnění: https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html
@@ -27620,6 +27770,7 @@ Potom udělej jednu konkrétní změnu: přepiš bezpečnostní e-mail po změn�
 
 ## Pracovní log
 
+- 2026-07-17: Doplněna příloha o změně kontaktního e-mailu bez převzetí účtu: rozlišení přihlašovacího, bezpečnostního, billing, workspace a marketingového e-mailu, re-auth u rizikové změny, potvrzení nové adresy, upozornění staré adresy, zacházení s magic linky a reset tokeny, opatrnost u telefonu, omezené propisování změny do dalších systémů, checklist a mini úkol; navázáno na existující zdroje OWASP k autentizaci, session managementu, MFA a obnově hesla a na GDPR principy přesnosti, minimalizace, integrity a důvěrnosti.
 - 2026-07-17: Zpřesněn úvodní návod k práci s e-bookem o výběr jedné malé vratné změny po kapitole, aby dobré nápady nekončily jako neřízený backlogový dluh.
 - 2026-07-17: Doplněna příloha o bezpečnostních upozorněních bez paniky a úniku dat: rozlišení informačních, kontrolních, schvalovacích a nouzových zpráv, výběr příjemců podle role, omezení citlivých detailů v e-mailu, bezpečné odkazy, oddělení bezpečnostní komunikace od marketingu, preference upozornění, auditní dvojče, checklist a mini úkol; navázáno na existující zdroje OWASP k autentizaci, session managementu, MFA a autorizaci a na GDPR principy minimalizace a důvěrnosti.
 - 2026-07-17: Doplněna příloha o přihlašování a obnově účtu bez bezpečnostního divadla: rozlišení běžného přihlášení a rizikových akcí, práce s hesly a passkeys, MFA, bezpečná obnova účtu, session pravidla, SSO hranice, klidná login stránka, checklist a mini úkol; navázáno na existující zdroje OWASP k autentizaci, session managementu, MFA, obnově hesla a W3C WebAuthn.
