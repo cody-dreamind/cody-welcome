@@ -26639,6 +26639,164 @@ Vyber jednu plánovanou technickou změnu, která se v týmu odkládá, protože
 
 Potom udělej jednu konkrétní věc: napiš údržbovou kartu, připrav read-only text, otestuj obnovu zálohy, doplň stop signál do runbooku, nebo sepiš zákaznické oznámení. Plánovaná údržba nemá být hrdinský zásah. Má to být obyčejná, čitelná práce, po které produkt stojí pevněji než před ní.
 
+## Příloha: Auditní stopa bez interního šmírování
+
+Auditní stopa má odpovědět na otázku „co se stalo a kdo za to nesl odpovědnost“. Nemá se z ní stát nekonečný záznam každého pohybu člověka v produktu, supportu nebo administraci. Rozdíl je důležitý: první přístup pomáhá bezpečnosti, provozu a důvěře. Druhý vytváří datový sklad plný citlivých detailů, který bude jednou bolet. A jak známe software, „jednou“ občas znamená příští úterý.
+
+Privacy-first auditní stopa je krátká, účelová a použitelná. Umožní dohledat zásadní akce, ale nekopíruje obsah zákaznických dat, neslouží jako skrytý nástroj hodnocení zaměstnanců a nemá nekonečnou retenci „pro jistotu“. Evropská komise u principu omezení uložení vysvětluje, že osobní údaje mají být uchovávány jen po dobu nezbytnou pro účel zpracování; OWASP u logování doporučuje logovat bezpečnostně relevantní události, chránit logy a vyhnout se citlivým údajům v záznamech. Prakticky: auditní stopu navrhuj jako produktovou funkci s vlastními pravidly, ne jako vedlejší efekt debugování.
+
+### Začni účelem auditu
+
+Nejdřív si napiš, proč auditní stopu potřebuješ. Různé účely mají různé detaily, přístupy i dobu uchování.
+
+Typické účely:
+
+- bezpečnost: kdo změnil přístup, token, roli nebo nastavení účtu,
+- provoz: kdo spustil migraci, údržbu, export, import nebo rollback,
+- support: kdo otevřel zákaznický účet v režimu podpory a k jakému případu,
+- billing: kdo změnil plán, fakturační údaje, slevu nebo způsob platby,
+- compliance: kdy byla vyřízena žádost uživatele, export, výmaz nebo změna souhlasu,
+- produktová odpovědnost: kdo publikoval veřejný text, pricing, obchodní slib nebo konfiguraci funkce.
+
+Špatná auditní věta zní: „Budeme logovat všechno.“
+
+Dobrá auditní věta zní: „U změn rolí ukládáme čas, aktéra, cílový účet, původní a nový rozsah oprávnění, důvod změny a odkaz na interní ticket po dobu 18 měsíců.“
+
+Druhá věta je méně dramatická a mnohem užitečnější. Má účel, rozsah i konec života.
+
+### Loguj akci, ne obsah dat
+
+Auditní stopa má popsat událost, ne vytvořit druhou databázi zákaznického obsahu. Když admin upraví fakturační e-mail, auditní záznam nemusí obsahovat celý nový e-mail, starý e-mail, text poznámky a screenshot obrazovky. Často stačí:
+
+- typ akce,
+- čas,
+- aktér,
+- cílový objekt,
+- kategorie změny,
+- výsledek,
+- korelační ID,
+- důvod nebo odkaz na ticket.
+
+Příklad záznamu:
+
+```text
+2026-07-17T09:14:03Z | user.role.changed | actor=admin_42 | target=user_918 | scope=billing_admin_added | reason=ticket_1842 | result=success
+```
+
+To je auditní stopa. Ne obsah zákaznické faktury, ne osobní poznámka supportu, ne surový export formuláře.
+
+U citlivějších změn může dávat smysl uložit starý a nový stav jako omezenou hodnotu, například `role=user -> billing_admin`. U volných textů, příloh, zpráv, dokumentů a zákaznického obsahu buď opatrný. Tam audituj, že došlo k vytvoření, změně, exportu nebo smazání, ale nekopíruj obsah do logu.
+
+### Rozliš systémové logy a auditní stopu
+
+Systémové logy pomáhají ladit a provozovat aplikaci. Auditní stopa pomáhá doložit odpovědnost za významné akce. Když je smícháš, vznikne nepřehledný balík, který nikdo nechce číst a všichni se ho bojí mazat.
+
+Praktické rozdělení:
+
+| Typ záznamu | Účel | Příklad | Retence |
+| --- | --- | --- | --- |
+| Aplikační log | Ladění a provoz | Chyba API, timeout, výjimka | Krátká podle potřeby provozu |
+| Bezpečnostní log | Detekce rizika | Neúspěšná přihlášení, podezřelé tokeny | Delší podle rizika |
+| Auditní stopa | Odpovědnost za akce | Změna role, export, smazání dat | Podle účelu a povinnosti |
+| Produktová analytika | Rozhodování o produktu | Agregovaná aktivace funkce | Jen dokud podporuje rozhodnutí |
+
+Tím se zjednoduší přístupová práva. Vývojář možná potřebuje aplikační logy pro incident. Neznamená to, že má automaticky číst auditní historii supportních zásahů nebo billing změn. Support možná potřebuje vidět, že export proběhl. Neznamená to, že má číst technické stack trace.
+
+### Přístup k auditu má být omezený a auditovaný
+
+Auditní stopa je citlivá sama o sobě. Ukazuje chování lidí, interní procesy, zákaznické události a někdy i bezpečnostní reakce. Proto k ní nemá mít přístup každý, kdo má přístup do administrace.
+
+Nastav aspoň tyto vrstvy:
+
+- běžný uživatel vidí vlastní významné akce, pokud mu to pomáhá,
+- zákaznický admin vidí audit své organizace v omezeném rozsahu,
+- support vidí jen záznamy relevantní ke konkrétnímu případu,
+- bezpečnost nebo ops vidí širší auditní stopu podle role,
+- export auditní stopy je zvláštní oprávnění,
+- čtení citlivého auditního záznamu se samo zaznamená.
+
+Ano, audit čtení auditu zní trochu jako zrcadlová síň. Ale u citlivých dat je to praktické. Pokud někdo otevře historii supportní impersonace nebo exportů, je dobré vědět kdo, kdy a proč.
+
+### Navrhni záznam jako kartu
+
+U každého auditovaného typu akce si udělej jednoduchou kartu:
+
+| Pole | Otázka |
+| --- | --- |
+| Název akce | Co se stalo? |
+| Účel | Proč to auditujeme? |
+| Aktér | Kdo akci provedl nebo který systém ji spustil? |
+| Cíl | Koho nebo čeho se akce týkala? |
+| Kontext | Jaký ticket, případ, workspace nebo release k tomu patří? |
+| Citlivá data | Co do záznamu výslovně nesmí? |
+| Přístup | Kdo smí záznam číst a exportovat? |
+| Retence | Kdy se záznam smaže nebo agreguje? |
+| Kontrola | Jak poznáme podezřelé nebo chybné použití? |
+
+Tahle karta je nudná správným způsobem. Pomůže vývojáři, supportu, právníkovi i budoucímu člověku, který bude řešit incident v pátek večer a nebude mít náladu luštit historické rozhodnutí ukryté v názvu tabulky.
+
+### Retence není „navždy, kdyby něco“
+
+Auditní stopa potřebuje dobu uchování. Některé záznamy má smysl držet déle kvůli bezpečnosti, smlouvám, fakturaci nebo doložení vyřízení práv uživatele. Jiné záznamy po pár týdnech ztrácí hodnotu a zvyšují riziko.
+
+Rozděl auditní záznamy podle životnosti:
+
+- krátké: provozní události s nízkým rizikem,
+- střední: změny nastavení, role, supportní zásahy,
+- dlouhé: billing, smluvní změny, bezpečnostní incidenty, právní žádosti,
+- agregované: historické statistiky bez detailu jednotlivce.
+
+U každé skupiny napiš, kdo dobu uchování schválil a jak se technicky vynucuje. Ruční „někdy to promažeme“ není retence. To je přání s kalendářem bez pozvánky.
+
+### Auditní stopa má pomáhat zákazníkovi
+
+U B2B SaaS je auditní log často součást důvěry. Zákaznický admin chce vědět, kdo pozval nového uživatele, změnil oprávnění, stáhl export nebo zapnul integraci. Nemusí vidět interní stack trace ani osobní poznámky supportu.
+
+Dobrá zákaznická auditní historie:
+
+- má čitelné názvy akcí,
+- ukazuje čas v srozumitelném formátu a ideálně s časovou zónou,
+- umožní filtrovat podle uživatele, typu akce a období,
+- neprozrazuje data jiného tenantu,
+- rozlišuje člověka, servisní účet a systémovou akci,
+- vysvětluje, co znamená interní zásah podpory,
+- umožní export jen lidem s odpovídajícím oprávněním.
+
+Když produkt nabízí enterprise plán, auditní stopa bývá jedna z funkcí, která skutečně pomáhá prodeji. Ne proto, že vypadá draze, ale protože zákazníkovi umožňuje obhájit používání služby interně.
+
+### Checklist: Auditní stopa privacy-first
+
+- [ ] Každý auditovaný typ akce má jasný účel.
+- [ ] Auditní záznam popisuje akci, ne kopii zákaznického obsahu.
+- [ ] Systémové logy, bezpečnostní logy, auditní stopa a produktová analytika jsou oddělené.
+- [ ] U záznamů je definovaný aktér, cíl, čas, výsledek a důvod nebo odkaz na případ.
+- [ ] Volné texty, přílohy, tajemství a citlivé údaje nejsou ukládané do auditní stopy bez výslovného důvodu.
+- [ ] Přístup k auditním záznamům je omezený podle rolí.
+- [ ] Export auditní stopy je zvláštní oprávnění.
+- [ ] Čtení citlivých auditních záznamů se také zaznamenává.
+- [ ] Každá kategorie auditních záznamů má retenci a technické mazání.
+- [ ] Zákaznický auditní pohled neprozrazuje interní ani cizí data.
+- [ ] Podezřelé auditní události mají návaznost na bezpečnostní nebo provozní proces.
+- [ ] Auditní stopa je pravidelně kontrolovaná na zbytečné údaje.
+
+### Mini úkol
+
+Vyber jednu akci, která má v produktu nebo provozu vyšší dopad: změna role, export dat, supportní přístup, smazání workspace, změna plánu, zapnutí integrace nebo nasazení migrace. Vyplň kartu:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jak se akce jmenuje lidskou řečí? |  |
+| Proč ji auditujeme? |  |
+| Kdo ji může provést? |  |
+| Jaký objekt nebo účet ovlivňuje? |  |
+| Jaký minimální záznam stačí? |  |
+| Co se do záznamu nesmí dostat? |  |
+| Kdo záznam uvidí? |  |
+| Jak dlouho ho držíme? |  |
+| Jak poznáme podezřelé použití? |  |
+
+Potom udělej jednu změnu: odstraň z auditního logu zbytečný obsah, doplň důvod zásahu, nastav retenci, odděl exportní oprávnění, nebo přepiš zákaznický název akce tak, aby byl pochopitelný bez interního slovníku. Auditní stopa má svítit na odpovědnost, ne pálit díru do soukromí.
+
 ## Zdroje
 
 - ICANN: Information for Domain Name Registrants - práva a odpovědnosti držitelů domén včetně správy, obnovy a převodu doménové registrace: https://www.icann.org/registrants
@@ -26790,6 +26948,7 @@ Potom udělej jednu konkrétní věc: napiš údržbovou kartu, připrav read-on
 
 ## Pracovní log
 
+- 2026-07-17: Doplněna příloha o auditní stopě bez interního šmírování: účelové auditování významných akcí, oddělení systémových logů od auditu, zákaz kopírování obsahu dat do záznamů, omezené přístupy, karta auditované akce, retence, zákaznický auditní pohled, checklist a mini úkol; ověřeny a využity existující zdroje Evropské komise k době uchování dat a OWASP k bezpečnému logování.
 - 2026-07-16: Doplněna příloha o plánované údržbě bez překvapení a datového stresu: rozlišení běžného releasu a údržbového okna, údržbová karta, datový dopad, zákaznická komunikace, read-only režim, rollback, úklid po údržbě, checklist a mini úkol; navázáno na existující kapitoly o SLA, runboocích, degradovaném režimu, chybových stavech, retenci a provozní komunikaci.
 - 2026-07-16: Doplněna příloha o odstraňování funkcí bez ztráty důvěry: zjištění skutečné práce funkce, rozlišení tichého úklidu, deprekace a tvrdého vypnutí, návrh migrační cesty, datový konec života, komunikace podle dopadu, úklid interních závislostí, checklist a mini úkol; navázáno na existující kapitoly o chybových stavech, produktových slibech, retenci, changelogu, dokumentaci a privacy-first měření.
 - 2026-07-16: Doplněna příloha o chybových stránkách a neplatných odkazech bez slepé uličky: rozlišení 404/410, přístupových chyb, vypršelých odkazů, rate limitů a 5xx stavů, návrh bezpečných chybových textů, ochrana rozpracovaných formulářů, agregované měření dopadu, checklist a mini úkol; ověřen a doplněn zdroj MDN k HTTP stavovým kódům.
