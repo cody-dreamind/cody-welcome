@@ -30054,8 +30054,109 @@ Vyber jednu produkční doménu a vyplň kartu:
 
 Potom udělej jednu konkrétní opravu: zapni externí kontrolu expirace, doplň vlastníka certifikátu, ověř `certbot renew --dry-run`, přidej reload hook, napiš runbook pro ruční obnovu nebo přidej certifikát do incidentního checklistu. HTTPS má být nudné. Nuda v certifikátech je výhra.
 
+## Příloha: Externí HTTPS kontrola bez falešného klidu
+
+Monitoring, který běží ze stejného prostředí jako aplikace, umí potvrdit hodně věcí: proces žije, port odpovídá, databáze není úplně mrtvá. Neumí ale vždy potvrdit, co vidí člověk venku. U HTTPS je to obzvlášť zrádné. Aplikace může vracet `200 OK`, ale prohlížeč ji stejně odmítne kvůli expirovanému certifikátu, špatnému řetězci nebo neodpovídajícímu názvu domény.
+
+Špatná otázka zní: „Vrací server nějakou odpověď?“
+
+Lepší otázka zní: „Dostane běžný klient z veřejného internetu důvěryhodnou HTTPS odpověď bez výjimek, proxy triků a ignorování certifikátu?“
+
+Codyho komentář: `curl -k` je výborný diagnostický šroubovák a mizerný monitoring. Pomůže zjistit, že aplikace za rozbitým TLS ještě žije. Jakmile se ale stane součástí health checku, právě sis vyrobil alarm, který spí přesně ve chvíli, kdy má křičet.
+
+### Testuj uživatelský zážitek, ne jen proces
+
+Externí kontrola produkčního webu má odpovědět na několik vrstev najednou:
+
+- DNS vede na očekávané místo,
+- HTTP se přesměruje na HTTPS bez smyčky,
+- TLS certifikát je platný a patří správné doméně,
+- certifikační řetězec je důvěryhodný pro běžné klienty,
+- server vrací očekávaný HTTP status,
+- stránka obsahuje základní očekávaný signál, například title nebo stabilní text,
+- kontrola neběží přes lokální proxy, která maskuje skutečný certifikát.
+
+Poslední bod je nenápadný. Firemní proxy, testovací brána nebo lokální vývojový tunel může nahradit certifikát vlastním. To je užitečné pro řízené prostředí, ale ne pro ověření veřejného stavu webu. Pokud monitor vidí certifikát proxy, nevidí totéž co zákazník.
+
+### Rozděl kontroly podle otázky
+
+Jedna obří kontrola často skončí nicneříkajícím stavem „web nefunguje“. Lepší je mít malé kontroly s jasným významem:
+
+| Kontrola | Co odpovídá | Typický nástroj |
+| --- | --- | --- |
+| DNS | Doména se překládá na očekávaný cíl | `dig`, DNS monitoring |
+| TLS expirace | Certifikát platí dost dlouho | certifikátový check, `openssl` |
+| HTTPS status | Veřejná URL vrací správný status | `curl` bez `-k` |
+| Redirect | HTTP přesměruje na HTTPS správně | `curl -I -L` s limitem redirectů |
+| Obsah | Stránka není prázdná nebo cizí | syntetický check textu |
+| Aplikace | Health endpoint umí ověřit interní závislosti | interní `/health` |
+
+`curl` dokumentace popisuje mimo jiné volby pro časový limit, práci s TLS a nebezpečný režim `--insecure`; v provozním monitoringu má být výchozí stav bez ignorování ověření certifikátu. Odkaz je ve zdrojích.
+
+### Health endpoint není veřejná pravda
+
+Endpoint `/health` nebo `/api/health` je užitečný, ale nesmí být jediným signálem dostupnosti. Často běží uvnitř stejné sítě, neřeší public DNS, neprochází stejnou TLS cestou a někdy záměrně neověřuje obsah stránky.
+
+Dobré rozdělení:
+
+- Interní health: proces, databáze, fronty, storage, migrace, základní závislosti.
+- Externí availability: DNS, TLS, redirect, HTTP status, načtení veřejné URL.
+- Produktový smoke test: jedna kritická uživatelská cesta bez osobních dat.
+
+Privacy-first smoke test nemá vytvářet reálné zákazníky, posílat e-maily ani zapisovat citlivá data. Stačí veřejná stránka, testovací tenant nebo speciální neprodukční scénář s jasnou značkou. Monitoring má chránit provoz, ne nenápadně vyrábět datový nepořádek.
+
+### Alert má říct, co se rozbilo
+
+U HTTPS incidentu potřebuje člověk rychle vědět, jestli má jít do DNS, certifikátů, nginxu, aplikace nebo obsahu. Alert typu „website down“ je začátek, ne diagnóza.
+
+Lepší alert obsahuje:
+
+- veřejnou URL,
+- název kontroly,
+- poslední úspěšný běh,
+- technický důvod selhání,
+- zda selhalo TLS ověření, HTTP status nebo obsah,
+- odkaz na runbook,
+- vlastníka služby.
+
+Příklad krátkého interního textu:
+
+„`https://example.com` selhává na TLS ověření: certifikát expiroval. Aplikace přes interní health odpovídá. Postup: obnovit certifikát, reload web serveru, ověřit externí HTTPS bez `-k`, doplnit postmortem otázku k renewal alertu.“
+
+Tohle je mnohem užitečnější než panický výkřik do chatu. Panika má špatnou ergonomii a mizerné SLA.
+
+### Checklist: Externí HTTPS monitoring
+
+- [ ] Produkční web má externí kontrolu HTTPS bez ignorování certifikátu.
+- [ ] Kontrola neběží jen přes lokální proxy nebo interní síť.
+- [ ] HTTP na HTTPS redirect je samostatně ověřený.
+- [ ] Expirace certifikátu má alert dřív než v den konce platnosti.
+- [ ] Monitoring rozlišuje DNS, TLS, HTTP status, obsah a interní health.
+- [ ] Health endpoint nevrací citlivé detaily o infrastruktuře.
+- [ ] Smoke test nepoužívá reálná zákaznická data.
+- [ ] Alert obsahuje vlastníka a odkaz na runbook.
+- [ ] Po každém TLS incidentu se kontroluje, proč selhal renewal nebo alert.
+- [ ] `curl -k` a podobné bypassy jsou povolené jen pro diagnostiku, ne pro běžný health check.
+
+### Mini úkol
+
+Vezmi jednu produkční URL a napiš k ní tři kontroly:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jaká veřejná URL se ověřuje? |  |
+| Jak ověříme HTTPS bez ignorování certifikátu? |  |
+| Jak ověříme, že redirect z HTTP nekončí smyčkou? |  |
+| Jaký stabilní obsah má stránka obsahovat? |  |
+| Jaký interní health endpoint používáme zvlášť? |  |
+| Kdo dostane alert při DNS/TLS/HTTP selhání? |  |
+| Kde je runbook pro ruční obnovu? |  |
+
+Potom udělej jednu konkrétní opravu: odstraň `-k` z health checku, přidej samostatný certifikátový alert, doplň kontrolu redirectů, přidej jednoduchý obsahový smoke test nebo rozděl jeden neurčitý alarm na DNS/TLS/HTTP. Externí monitoring má být nepříjemně pravdivý. Přesně proto ho chceš.
+
 ## Zdroje
 
+- curl: curl man page - volby pro časové limity, TLS ověřování a režim `--insecure`: https://curl.se/docs/manpage.html
 - Let’s Encrypt: FAQ - platnost výchozích certifikátů a doporučený rytmus obnovy: https://letsencrypt.org/docs/faq/
 - Certbot documentation: User Guide - obnovování certifikátů, automatické obnovy, kontrola cron/systemd timerů a `certbot renew --dry-run`: https://eff-certbot.readthedocs.io/en/stable/using.html
 - MDN Web Docs: Web app manifests - přehled manifestu jako JSON souboru s metadaty webové aplikace včetně názvu, ikon, startovní URL, display režimu a dalších vlastností používaných při instalaci PWA: https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps/Manifest
@@ -30231,6 +30332,7 @@ Potom udělej jednu konkrétní opravu: zapni externí kontrolu expirace, doplň
 
 ## Pracovní log
 
+- 2026-07-17: Doplněna příloha o externí HTTPS kontrole bez falešného klidu: rozlišení interního health endpointu, veřejného DNS/TLS/HTTP monitoringu a produktového smoke testu, riziko proxy a `curl -k`, diagnostické alerty, checklist a mini úkol; ověřen a doplněn zdroj curl man page k TLS ověřování a provozním volbám.
 - 2026-07-17: Doplněna příloha o TLS certifikátech bez tichého výpadku: certifikát jako součást dostupnosti, monitoring expirace, automatická obnova, reload služby po obnově, interní a externí testy, incidentní otázky, checklist a mini úkol; ověřeny zdroje Let’s Encrypt a Certbot k platnosti certifikátů a automatickému renewal.
 - 2026-07-17: Doplněna příloha o background jobech a frontách bez neviditelného skladu dat: účel jobu jednou větou, minimalizace payloadu přes referenční ID, retry a idempotence, dead-letter queue s retencí, karty scheduled jobů, kill switch, observabilita bez logování citlivých payloadů, checklist a mini úkol.
 - 2026-07-17: Doplněna příloha o webových push notifikacích bez permission spamu: rozlišení událostí vhodných pro push, kontextová žádost o oprávnění, preference kategorií, bezpečný payload bez citlivého obsahu, minimální datový model subscription, revokace napříč produktem a zařízeními, agregované měření užitečnosti, checklist a mini úkol; ověřeny a doplněny zdroje MDN k Notifications API, Push API a `showNotification()` a web.dev k permission UX.
