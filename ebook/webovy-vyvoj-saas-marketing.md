@@ -27959,6 +27959,174 @@ Vyber jeden tokenový tok ve svém produktu a vyplň kartu:
 
 Potom udělej jednu konkrétní změnu: přidej expiraci testovacím tokenům, rozbij `read:all` na dvě konkrétní oprávnění, doplň poslední použití, schovej hodnotu tokenu po vytvoření, přidej auditní záznam revokace, nebo nastav maskování `Authorization` hlavičky v logování. Token má zákazníkovi otevřít přesně ty dveře, které potřebuje. Ne celý dům i s náhradními klíči.
 
+## Příloha: Připojené OAuth aplikace bez slepého souhlasu
+
+OAuth integrace vypadá pro uživatele jako krátká obrazovka: aplikace žádá přístup, klikne se na „Povolit“ a hotovo. V provozu je to ale dlouhodobý vztah mezi zákazníkem, tvým SaaS produktem a externí aplikací. Pokud obrazovka souhlasu jen schová technické scopy za modré tlačítko, uživatel neodsouhlasí informované rozhodnutí. Jen se snaží dostat dál.
+
+Špatná otázka zní: „Jak zkrátíme consent flow na jedno kliknutí?“
+
+Lepší otázka zní: „Rozumí zákazník tomu, která aplikace získá jaký přístup, proč ho potřebuje, kdo ho schvaluje a jak ho později vypne?“
+
+RFC 9700 popisuje aktuální bezpečnostní doporučení pro OAuth 2.0, včetně ochrany redirect toků, PKCE, rizik bearer tokenů a slabých vzorů. OWASP Authorization Cheat Sheet připomíná deny-by-default, princip nejmenších oprávnění a kontrolu oprávnění při každém požadavku. Přeloženo do produktu: OAuth consent není právní ani designová formalita. Je to bezpečnostní a privacy brána.
+
+### Rozliš instalaci, přihlášení a delegovaný přístup
+
+„Connect with ...“ může znamenat několik různých věcí:
+
+| Tok | Co uživatel očekává | Hlavní riziko |
+| --- | --- | --- |
+| Přihlášení přes identitu | ověření, kdo jsem | záměna identity za oprávnění v produktu |
+| Instalace aplikace do workspace | integrace bude pracovat za tým | příliš široký přístup k datům workspace |
+| Delegovaný přístup uživatele | aplikace jedná jménem konkrétního člověka | přístup přežije změnu role nebo odchod člověka |
+| Servisní OAuth integrace | strojový tok mezi systémy | nikdo neví, kdo ji vlastní a kdy ji vypnout |
+
+Nejhorší zkratka je tvářit se, že „přihlásil se přes OAuth“ znamená „může dělat všechno, co daná aplikace umí“. Identita říká, kdo uživatel je. Autorizace říká, co smí. Consent říká, co uživatel nebo admin dovolil externí aplikaci. Tyto tři vrstvy drž odděleně, jinak se chyba v textu tlačítka promění v chybu v přístupu k datům.
+
+### Consent obrazovka má být rozhodovací, ne dekorativní
+
+Dobrá consent obrazovka odpoví na praktické otázky:
+
+- Která aplikace žádá přístup?
+- Kdo ji provozuje?
+- Pro jaký workspace nebo účet bude přístup platit?
+- Jaké konkrétní schopnosti získá?
+- Která data může číst, zapisovat nebo mazat?
+- Jak dlouho přístup potrvá?
+- Kdo přístup uvidí a může ho odebrat?
+
+Slabý text:
+
+```text
+Aplikace chce přístup k vašemu účtu.
+```
+
+Lepší text:
+
+```text
+Aplikace „Invoice Sync“ chce ve workspace „Praha servis“ číst faktury a vytvářet účetní exporty.
+Nebude moci měnit členy týmu, číst support tikety ani mazat zákaznická data.
+Přístup může odebrat workspace admin v Nastavení -> Připojené aplikace.
+```
+
+Ano, je to delší. Ale uživatel konečně ví, co dělá. Tlačítko „Povolit“ bez srozumitelného dopadu je spíš test důvěřivosti než produktový souhlas.
+
+### Scopy piš podle práce, ne podle interní databáze
+
+Scope `read` je skoro vždycky podezřelý. Číst co? V jakém workspace? Pro jaký účel? S jakým dopadem?
+
+Praktičtější sada scope:
+
+| Scope | Popis pro zákazníka | Nedovolí |
+| --- | --- | --- |
+| `invoices:read` | Číst faktury a stav plateb | měnit fakturační údaje nebo členy týmu |
+| `invoices:export` | Vytvářet účetní exporty faktur | číst support tikety nebo produktová data |
+| `contacts:create` | Vytvářet nové kontakty z externího formuláře | číst všechny existující kontakty |
+| `webhooks:manage` | Nastavovat endpointy webhooků | číst zákaznický obsah mimo konfiguraci |
+| `reports:read_aggregate` | Číst agregované reporty | stahovat jednotlivé události nebo osobní data |
+
+Pokud aplikace žádá hodně citlivý scope, nerozbíjej to jen varovnou ikonou. Nabídni menší alternativu, pokud existuje. Například místo `contacts:read_all` může integrace často používat `contacts:create` a vracet vlastní externí ID. Méně dat, méně rizika, méně budoucího vysvětlování.
+
+### Admin consent není výmluva pro všechno
+
+U B2B SaaS často potřebuje připojení aplikace schválit admin. To je správně u workspace přístupu, billing dat, členů týmu, plošných exportů nebo integrací, které působí na více uživatelů. Admin consent ale neznamená, že se jednotlivým lidem nemusí nic ukázat.
+
+Pravidlo:
+
+- Admin schvaluje dopad na workspace.
+- Uživatel schvaluje přístup ke své osobní akci nebo identitě, pokud integrace jedná jeho jménem.
+- Produkt pořád kontroluje role a oprávnění při každém API požadavku.
+
+Příklad: Admin povolí integraci s účetním systémem pro faktury. Běžný člen týmu bez billing role tím nemá získat nepřímý přístup k fakturám jen proto, že umí kliknout na tlačítko integrace. OAuth není kouzelná propustka kolem RBAC. Je to další vrstva, která musí RBAC respektovat.
+
+### Redirecty a callbacky ber jako produkční povrch
+
+OAuth redirect URI je malý řádek v nastavení a velký bezpečnostní povrch. RFC 9700 doporučuje přesné porovnávání registrovaných redirect URI a varuje před open redirectory. V praxi to znamená:
+
+- nepovoluj wildcard redirecty pro produkční aplikace,
+- odděl produkční, staging a lokální redirect URI,
+- nepřijímej libovolnou návratovou URL z query parametru,
+- chraň `state`, `nonce` a PKCE hodnoty před opakovaným použitím,
+- po dokončení toku neukazuj tokeny v URL,
+- změna redirect URI má být auditovaná akce.
+
+Produktový detail: pokud zákazník nastavuje vlastní OAuth aplikaci, ukaž mu přesnou callback URL ke zkopírování a jasně označ prostředí. „Nějak tam dejte URL z dokumentace“ je recept na chyby, které support pak loví půl dne.
+
+### Připojené aplikace mají mít vlastní přehled
+
+Zákazník nemá zjišťovat aktivní OAuth integrace z auditního logu nebo supportu. V nastavení potřebuje jasný přehled.
+
+Minimální karta připojené aplikace:
+
+| Pole | Proč tam je |
+| --- | --- |
+| Název aplikace a provozovatel | zákazník ví, komu dal přístup |
+| Workspace nebo účet | je jasný rozsah dopadu |
+| Scopy lidskou řečí | rozhodnutí bez interního slovníku |
+| Kdo schválil | odpovědnost a dohledatelnost |
+| Kdy byla připojena | audit a úklid |
+| Poslední použití | poznání mrtvých integrací |
+| Expirace nebo review datum | konec života přístupu |
+| Tlačítko odebrat | rychlá revokace |
+
+Detail posledního použití drž chudý: datum, typ akce, případně kategorie endpointu. Běžný přehled připojených aplikací nemá ukládat payloady, celé URL s identifikátory, IP historii bez retence ani zákaznický obsah.
+
+### Revokace musí vypnout i vedlejší dveře
+
+Odpojit aplikaci neznamená jen smazat řádek v tabulce `oauth_connections`. Zkontroluj i navazující stopy:
+
+- access a refresh tokeny,
+- webhook endpointy vytvořené integrací,
+- naplánované sync joby,
+- dočasné exporty,
+- cache a fronty,
+- servisní účty nebo role vytvořené kvůli integraci,
+- bezpečnostní upozornění a auditní stopu.
+
+Dobré odpojení ukáže dopad:
+
+```text
+Odpojením aplikace „Invoice Sync“ zastavíte nové synchronizace faktur a zneplatníte její přístupové tokeny.
+Historické auditní záznamy zůstanou uložené podle retenčních pravidel.
+```
+
+Po odpojení nepiš marketingové strašení typu „opravdu chcete přijít o super automatizaci?“. U bezpečnostní akce má být tón klidný a přesný. Když zákazník vypíná přístup k datům, neprodávej mu pocit viny.
+
+### Checklist: OAuth aplikace privacy-first
+
+- [ ] Rozlišujeme přihlášení, instalaci aplikace, delegovaný přístup a servisní integraci.
+- [ ] Consent obrazovka ukazuje aplikaci, provozovatele, workspace, scopy, dopad a možnost odebrání.
+- [ ] Scopy jsou konkrétní, úzké a popsané lidskou řečí.
+- [ ] Citlivé scopy mají admin schválení, re-auth nebo další kontrolu podle rizika.
+- [ ] OAuth přístup respektuje produktové role a oprávnění při každém požadavku.
+- [ ] Redirect URI jsou přesně registrované a oddělené podle prostředí.
+- [ ] Používáme `state`, `nonce` a PKCE podle typu toku.
+- [ ] Tokeny se neukazují v URL, nelogují se a neposílají do analytiky.
+- [ ] Připojené aplikace mají vlastní zákaznický přehled.
+- [ ] Revokace je viditelná, rychlá a vypíná tokeny, webhooky, joby i navazující přístupy.
+- [ ] Admini dostanou upozornění na nové citlivé připojení, změnu scope a revokaci.
+- [ ] Neaktivní integrace mají review datum nebo expiraci.
+- [ ] Auditní stopa ukládá rozhodující akce bez payloadů a tajemství.
+
+### Mini úkol
+
+Vyber jednu OAuth nebo „připojit aplikaci“ integraci a vyplň kartu:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Je to přihlášení, instalace aplikace, delegovaný přístup nebo servisní integrace? |  |
+| Který workspace nebo účet ovlivní? |  |
+| Kdo ji smí schválit? |  |
+| Jaké scopy žádá? |  |
+| Který scope je nejrizikovější? |  |
+| Umíme nabídnout menší scope? |  |
+| Jak přesně zní text consent obrazovky? |  |
+| Kde zákazník uvidí připojenou aplikaci? |  |
+| Jak ji odpojí? |  |
+| Co všechno revokace technicky vypne? |  |
+| Jaký auditní záznam vznikne? |  |
+
+Potom udělej jednu malou změnu: přepiš generický scope na konkrétní text, přidej provozovatele aplikace na consent obrazovku, odděl staging redirect URI od produkce, doplň přehled připojených aplikací, nebo zajisti, že revokace vypne i webhooky a sync joby. OAuth integrace má být vztah s jasnými hranicemi, ne slepý podpis pod prázdnou stránku.
+
 ## Zdroje
 
 - OWASP Cheat Sheet Series: SQL Injection Prevention Cheat Sheet - doporučení k prevenci SQL injection včetně parametrizovaných dotazů, bezpečných uložených procedur, allowlist validace a principu nejmenších oprávnění: https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html
@@ -28113,6 +28281,7 @@ Potom udělej jednu konkrétní změnu: přidej expiraci testovacím tokenům, r
 
 ## Pracovní log
 
+- 2026-07-17: Doplněna příloha o připojených OAuth aplikacích bez slepého souhlasu: rozlišení přihlášení, instalace aplikace, delegovaného přístupu a servisní integrace, rozhodovací consent obrazovka, srozumitelné scopy, admin consent bez obcházení rolí, bezpečné redirecty, přehled připojených aplikací, úplná revokace včetně webhooků a jobů, checklist a mini úkol; navázáno na ověřené zdroje RFC 9700, OWASP Authorization, OWASP API Security a GDPR principy minimalizace.
 - 2026-07-17: Doplněna příloha o zákaznických API tokenech bez věčného klíče: rozlišení typů tokenů, bezpečný tok vytvoření, srozumitelné scopy, výchozí expirace, rotace bez výpadku, přiměřené zobrazení posledního použití, rychlá revokace, ochrana tokenů v logování, checklist a mini úkol; navázáno na existující zdroje OWASP k API, autorizaci, správě tajemství a logování a na RFC 9700 a RFC 9449.
 - 2026-07-17: Doplněna příloha o demo workspace a ukázkových datech bez úniku reality: návrh demo scénáře od rozhodnutí zákazníka, syntetická data místo produkčních exportů, oddělení demo prostředí od produkce, vypnutí reálných e-mailů, webhooků, plateb a integrací, průběžná údržba demo karty, checklist a mini úkol.
 - 2026-07-17: Doplněna příloha o změně kontaktního e-mailu bez převzetí účtu: rozlišení přihlašovacího, bezpečnostního, billing, workspace a marketingového e-mailu, re-auth u rizikové změny, potvrzení nové adresy, upozornění staré adresy, zacházení s magic linky a reset tokeny, opatrnost u telefonu, omezené propisování změny do dalších systémů, checklist a mini úkol; navázáno na existující zdroje OWASP k autentizaci, session managementu, MFA a obnově hesla a na GDPR principy přesnosti, minimalizace, integrity a důvěrnosti.
