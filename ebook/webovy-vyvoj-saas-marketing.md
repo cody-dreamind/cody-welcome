@@ -29092,8 +29092,178 @@ Vezmi jedno existující nebo plánované rozšíření a vyplň tabulku:
 
 Potom udělej jednu konkrétní opravu: zúž host permission, přesuň pokročilou schopnost do optional permission, přidej náhled odesílaných dat, omez logování URL, doplň revokaci v účtu nebo přepiš release poznámku k novému oprávnění. Rozšíření má uživateli pomoct v práci, ne si potichu pronajmout celý prohlížeč.
 
+## Příloha: PWA a offline režim bez lokální datové skládky
+
+Progressive web app může být pro SaaS velmi užitečná: rychlejší načtení, instalovatelný zážitek, práce při výpadku sítě, fronta akcí a lepší pocit z produktu na mobilu. Jenže offline režim má i druhou stranu. Najednou ukládáš data do prohlížeče, řešíš synchronizaci, konflikty, mazání cache a otázku, co zůstane na zařízení po odhlášení.
+
+Špatná otázka zní: „Co všechno můžeme dát offline?“
+
+Lepší otázka zní: „Kterou konkrétní práci má uživatel dokončit i bez sítě a jaká nejmenší data k tomu potřebuje?“
+
+MDN popisuje service worker jako skript běžící odděleně od hlavního vlákna stránky, který může zprostředkovat síťové požadavky a pracovat s cache. Cache API je programovatelné úložiště požadavků a odpovědí. Storage API zase pomáhá zjišťovat a spravovat úložiště dostupné pro webovou aplikaci. Přeloženo z dokumentace do provozní češtiny: PWA není jen „rychlejší web“. Je to malá distribuovaná aplikace v uživatelově prohlížeči. Chovej se k ní podle toho.
+
+### Offline začíná scénářem, ne technologií
+
+Než napíšeš první service worker, napiš pracovní větu:
+
+„Uživatel typu ___ potřebuje bez stabilního připojení dokončit ___, aby ___.“
+
+Příklady:
+
+- Technik v terénu potřebuje otevřít dnešní zakázky a zapsat výsledek kontroly, aby nemusel čekat na signál.
+- Obchodník potřebuje vidět poslední domluvené kroky u schůzky, aby nepůsobil nepřipraveně.
+- Správce obsahu potřebuje rozepsat článek a uložit koncept, aby nepřišel o práci při výpadku Wi-Fi.
+- Zákazník potřebuje otevřít fakturu nebo potvrzení, které už jednou viděl, aby nemusel znovu kontaktovat support.
+
+Pokud věta nejde napsat konkrétně, offline režim je pravděpodobně jen technologická touha. Ta bývá drahá, protože vyrobí cache, synchronizaci a supportní scénáře bez jasné hodnoty.
+
+### Rozděl data podle offline rizika
+
+Ne všechna data patří do lokálního úložiště. Prakticky si je rozděl do čtyř skupin:
+
+| Typ dat | Offline režim | Příklad |
+| --- | --- | --- |
+| Veřejné statické zdroje | Bezpečné cachovat dlouho | CSS, JS, ikony, veřejné obrázky |
+| Opakovaně čtený pracovní kontext | Cachovat omezeně a účelově | seznam dnešních úkolů, šablony, poslední otevřený dokument |
+| Citlivá zákaznická data | Jen při silném důvodu a s krátkou retencí | smlouvy, osobní údaje, interní poznámky |
+| Tajemství a tokeny | Necachovat jako běžná data | API klíče, reset tokeny, exportní odkazy |
+
+Privacy-first offline režim preferuje lokální minimum. Uživatel nepotřebuje celou databázi workspace jen proto, aby v metru otevřel jednu zakázku. Potřebuje malý, vysvětlitelný výřez.
+
+Praktické pravidlo: offline cache má odpovídat poslední konkrétní práci uživatele, ne ambici produktu vědět všechno dopředu. Pokud se data nikdy nezobrazila nebo nejsou nutná pro jasný offline scénář, nemají se preventivně ukládat.
+
+### Cache strategie napiš lidsky
+
+Technická cache strategie se často popisuje slovy jako cache-first, network-first nebo stale-while-revalidate. To je užitečné pro vývojáře, ale pro tým je lepší mít i lidský popis:
+
+| Obsah | Strategie | Proč |
+| --- | --- | --- |
+| Verze aplikace | Cache-first s verzovanými assety | Rychlost a spolehlivé načtení |
+| HTML shell | Network-first s rozumným fallbackem | Uživatel má dostat aktuální aplikaci |
+| Veřejná dokumentace | Stale-while-revalidate | Čtení má být rychlé, aktualizace může doběhnout |
+| Uživatelská pracovní data | Network-first, omezený offline snapshot | Citlivost a čerstvost jsou důležitější než pohodlí |
+| Odesílané akce | Fronta s potvrzením a limitem | Akce nesmí tiše zmizet ani se opakovat bez kontroly |
+
+U každé kategorie napiš, jak dlouho data zůstávají v zařízení a co se stane při odhlášení, změně účtu nebo odebrání přístupu. Cache bez životního cyklu je jen dočasný odpad, který ještě nikdo neuklidil.
+
+### Synchronizace nesmí lhát
+
+Offline zápisy jsou produktově citlivější než offline čtení. Pokud uživatel něco upraví bez sítě, aplikace musí jasně ukázat stav:
+
+- uloženo lokálně,
+- čeká na odeslání,
+- odesílá se,
+- synchronizováno,
+- konflikt,
+- selhalo a vyžaduje zásah.
+
+Nejhorší stav je falešný klid. Uživatel vidí hotovo, server o ničem neví a support za týden luští, proč práce zmizela. Tohle není edge case. To je účet za nepoctivý stavový model.
+
+Pro akce ve frontě si napiš kartu:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jaká akce se může provést offline? |  |
+| Jak dlouho může čekat ve frontě? |  |
+| Je akce idempotentní, nebo hrozí duplicita? |  |
+| Co se stane při změně oprávnění před synchronizací? |  |
+| Jak zobrazíme konflikt? |  |
+| Jak uživatel akci zruší? |  |
+
+Server musí znovu ověřit oprávnění i u opožděné akce. To, že byla akce povolená v okamžiku lokálního kliknutí, neznamená, že je povolená o dvě hodiny později po odebrání role nebo změně workspace.
+
+### Odhlášení a sdílené zařízení ber vážně
+
+Lokální data jsou citlivá hlavně na sdílených nebo ztracených zařízeních. SaaS v prohlížeči se často používá na pracovním notebooku, ale i na cizím počítači, mobilu v terénu nebo zařízení, kde se střídá víc lidí.
+
+Při odhlášení:
+
+- smaž uživatelské offline snapshoty,
+- zastav nebo vyprázdni frontu akcí, které uživatel nepotvrdil,
+- zneplatni lokální session stav,
+- ponech jen veřejné statické assety, pokud nedokážou prozradit citlivý kontext,
+- jasně řekni, pokud nějaká lokální práce ještě nebyla synchronizovaná.
+
+Při přepnutí účtu nebo workspace se nesmí míchat cache. Každý tenant, uživatel a prostředí potřebuje oddělený namespace nebo jasný klíč. Multi-tenant izolace se dá rozbít i lokálně, nejen v databázi. Stačí, aby nový uživatel viděl starý offline seznam. Trapné? Ano. Bezpečnostně zajímavé? Bohužel taky.
+
+### Diagnostika offline chyb bez sběru obsahu
+
+PWA bude mít zvláštní chyby: starý service worker, poškozená cache, neodeslaná fronta, konflikt verzí, plné úložiště nebo rozdíl mezi stavem v UI a serverem. Potřebuješ diagnostiku, ale ne výpis celého lokálního obsahu.
+
+Rozumný diagnostický výstup:
+
+| Pole | Příklad |
+| --- | --- |
+| `app_version` | `2026.07.17` |
+| `service_worker_version` | `sw-42` |
+| `cache_schema` | `v8` |
+| `pending_actions_count` | `3` |
+| `last_sync_result` | `conflict` |
+| `storage_estimate_bucket` | `low`, `normal`, `high` |
+| `request_id` | identifikátor pro support |
+
+Naopak neposílej:
+
+- obsah dokumentů čekajících ve frontě,
+- názvy zákazníků bez důvodu,
+- celé URL s citlivými parametry,
+- screenshoty bez výslovného potvrzení,
+- lokální kopie formulářů jako součást error logu.
+
+U složitějších problémů dej uživateli viditelnou akci „vygenerovat diagnostiku“ a ukaž, co odejde. Stejný princip jako u supportních příloh: pomoc ano, tiché vytěžování ne.
+
+### Aktualizace service workeru je release
+
+Service worker může ovlivnit, co se načítá, co se cachuje a kdy se uživatel dostane k nové verzi. Proto změna service workeru patří do release kontroly, ne do rohu, kam se nikdo nedívá.
+
+Před releasem ověř:
+
+- nová verze neponechá staré citlivé cache,
+- migrační kód umí uklidit staré klíče a fronty,
+- uživatel nedostane rozbitou kombinaci starého shellu a nového API,
+- offline fallback neukazuje nepravdivý stav,
+- testuješ odhlášení, přepnutí workspace a odebrání oprávnění,
+- máš způsob, jak uživateli pomoct při zaseknuté cache.
+
+Codyho komentář: „Smažte si cache“ není produktová strategie. Je to nouzová věta, kterou má tým použít jednou za dlouho a pak se stydět dost na to, aby opravil release proces.
+
+### Checklist: PWA a offline režim privacy-first
+
+- [ ] Offline režim má jednu konkrétní pracovní větu.
+- [ ] Rozlišujeme veřejné assety, pracovní kontext, citlivá data a tajemství.
+- [ ] Necachujeme data preventivně jen proto, že by se mohla hodit.
+- [ ] Každý typ cache má strategii, retenci a úklidový krok.
+- [ ] Offline zápisy mají viditelný stav a možnost řešit selhání.
+- [ ] Opožděné akce znovu procházejí serverovou autorizací.
+- [ ] Fronta akcí má limit, expiraci a ochranu proti duplicitám.
+- [ ] Odhlášení maže uživatelské offline snapshoty a řeší neodeslanou práci.
+- [ ] Cache je oddělená podle uživatele, workspace a prostředí.
+- [ ] Diagnostika neposílá obsah lokálních dat ani citlivé URL.
+- [ ] Aktualizace service workeru je součást release kontroly.
+- [ ] Existuje postup pro zaseknutou nebo poškozenou cache bez ručního zoufalství.
+
+### Mini úkol
+
+Vyber jednu aplikaci nebo produktovou část, kde se uvažuje o offline režimu, a vyplň tabulku:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jakou práci má uživatel dokončit bez sítě? |  |
+| Jaká nejmenší data k tomu potřebuje? |  |
+| Která data se nesmí ukládat lokálně? |  |
+| Jak dlouho offline snapshot žije? |  |
+| Co se stane při odhlášení? |  |
+| Jak poznáme čekající akce? |  |
+| Jak řešíme konflikt nebo odebrané oprávnění? |  |
+| Jakou diagnostiku může support bezpečně dostat? |  |
+
+Potom udělej jednu konkrétní změnu: omez rozsah cachovaných dat, přidej úklid při odhlášení, pojmenuj stavy synchronizace, rozděl cache podle workspace, nastav expiraci fronty nebo doplň release test pro service worker. Offline režim má být spolehlivá pomoc, ne tajný sklad dat v prohlížeči.
+
 ## Zdroje
 
+- MDN Web Docs: Service Worker API - vysvětlení role service workeru jako skriptu běžícího odděleně od stránky, který může zachytávat síťové požadavky a podporovat offline scénáře: https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API
+- MDN Web Docs: Cache API - programovatelné úložiště objektů `Request` a `Response`, často používané společně se service workery pro offline podporu a řízené cachování zdrojů: https://developer.mozilla.org/en-US/docs/Web/API/Cache
+- MDN Web Docs: Storage API - rozhraní pro práci s úložištěm dostupným pro webovou aplikaci, včetně odhadu využití a dostupného prostoru: https://developer.mozilla.org/en-US/docs/Web/API/Storage_API
 - MDN Web Docs: WebExtensions permissions - přehled oprávnění rozšíření v manifestu včetně host permissions a rozdílu mezi API oprávněními a přístupem ke konkrétním URL: https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/manifest.json/permissions
 - MDN Web Docs: WebExtensions host_permissions - použití `host_permissions` v Manifest V3 pro API, která čtou nebo mění data na konkrétních hostech: https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/manifest.json/host_permissions
 - MDN Web Docs: WebExtensions optional_permissions - volitelná oprávnění a poznámka k `optional_host_permissions` u Manifest V3: https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/manifest.json/optional_permissions
@@ -29258,6 +29428,7 @@ Potom udělej jednu konkrétní opravu: zúž host permission, přesuň pokroči
 
 ## Pracovní log
 
+- 2026-07-17: Doplněna příloha o PWA a offline režimu bez lokální datové skládky: definice offline scénáře od práce uživatele, rozdělení dat podle rizika, lidsky popsané cache strategie, stavový model synchronizace, odhlášení a sdílená zařízení, bezpečná diagnostika, release kontrola service workeru, checklist a mini úkol; ověřeny a doplněny zdroje MDN k Service Worker API, Cache API a Storage API.
 - 2026-07-17: Doplněna příloha o browserových rozšířeních bez oprávnění na celý internet: rozhodování, zda je rozšíření opravdu potřeba, návrh host a optional permissions podle nejmenší pracovní plochy, sběr jen očekávaného výřezu dat, oddělení tokenů a workspace autorizace, chudé provozní logování, release karta pro změny oprávnění, checklist a mini úkol; ověřeny a doplněny zdroje MDN WebExtensions a Chrome Extensions k permissions.
 - 2026-07-17: Doplněna příloha o výjimkách z privacy-first pravidel bez šedé zóny: rozlišení výjimky, změny pravidla a nového procesu, karta výjimky, omezení rozsahu, přiměřené schvalování, viditelný stavový model, uzavírací checklist, checklist a mini úkol.
 - 2026-07-17: Doplněna příloha o SBOM bez inventáře pro šuplík: účel SBOM podle bezpečnosti, licencí, zákaznických auditů a incidentů, vazba na konkrétní artefakt, minimální pole komponent, rozlišení runtime/build/dev závislostí, automatické generování v CI, zákaznické režimy výstupu, životní cyklus, checklist a mini úkol; ověřeny a doplněny zdroje CISA, NTIA, CycloneDX a SPDX.
