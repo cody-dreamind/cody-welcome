@@ -28308,6 +28308,182 @@ Vyber jeden veřejný produkt, web nebo API a vyplň kartu:
 
 Potom udělej jednu konkrétní změnu: přidej `security.txt`, nastav alias `security@`, napiš krátkou disclosure policy, vytvoř triage kartu, doplň safe instrukce pro důkaz bez zákaznických dat, nebo přidej security report do měsíčního provozního review. Bezpečnostní hlášení není ostuda. Ostuda je nemít dveře, na které se dá slušně zaklepat.
 
+## Příloha: Aktualizace závislostí bez páteční loterie
+
+Závislosti jsou tichá část produktu. Většinu času jen pomáhají, aby tým nemusel psát všechno od nuly. Pak přijde bezpečnostní alert, nový major release nebo rozbitý balíček v transitive stromu a najednou se ukáže, jestli má tým proces, nebo jen naději, že `npm install` dnes nebude náladový.
+
+Špatná otázka zní: „Můžeme prostě aktualizovat všechno najednou?“
+
+Lepší otázka zní: „Které aktualizace snižují riziko, jak ověříme dopad na produkt a jak zabráníme tomu, aby z běžné údržby vznikl incident?“
+
+OWASP SCVS bere softwarový supply chain jako oblast, kde je potřeba viditelnost, kontrola a postupné zlepšování. GitHub dokumentace k dependency graphu, dependency review a Dependabot alertům ukazuje praktický směr: vědět, co používáš, vidět rizikové změny v pull requestu a reagovat na známé zranitelnosti. `npm audit` je užitečný signál pro npm ekosystém, ale není produktové rozhodnutí samo o sobě. Odkazy jsou ve zdrojích.
+
+> Codyho komentář: Automatický PR od bota není údržba. Je to pozvánka k rozhodnutí. Když tým jen hromadí zelené a červené robotické lístečky, neřídí bezpečnost. Pěstuje si digitální šanon výčitek.
+
+### Rozliš typ aktualizace
+
+Ne každá aktualizace má stejnou naléhavost. Když se všechno označí jako „security“, tým vyhoří nebo začne upozornění ignorovat.
+
+Praktické rozdělení:
+
+| Typ změny | Příklad | Doporučený režim |
+| --- | --- | --- |
+| Bezpečnostní patch | oprava známé zranitelnosti v runtime knihovně | rychlá triage, cílený PR, ověření dopadu |
+| Rutinní patch | oprava chyby bez bezpečnostního dopadu | sloučit v běžném údržbovém okně |
+| Minor update | nová kompatibilní funkce nebo změna chování | otestovat hlavní cesty a changelog |
+| Major update | možná nekompatibilní změna | samostatná karta, plán migrace, rollback |
+| Transitive update | změna nepřímé závislosti přes lockfile | ověřit, proč se změnila a co zasáhla |
+| Nástrojová aktualizace | bundler, test runner, framework build | testovat lokální vývoj, CI a deploy |
+
+SemVer pomáhá číst záměr verze, ale není smlouva s realitou. Patch může rozbít edge case. Minor může změnit default. Major může být banální. Proto verzi používej jako signál pro rozsah kontroly, ne jako náhradu testování.
+
+### Runtime závislost je jiné riziko než dev tool
+
+Knihovna, která běží v prohlížeči zákazníka nebo na serveru v produkci, má jiný dopad než formatter v lokálním vývoji. Tým má umět rychle poznat, kde závislost žije.
+
+Jednoduchá mapa:
+
+| Vrstva | Otázka | Riziko |
+| --- | --- | --- |
+| Klientský runtime | Dostane se kód do browseru uživatele? | výkon, soukromí, XSS, supply chain |
+| Serverový runtime | Zpracovává požadavky, soubory nebo data? | únik dat, RCE, DoS, logování |
+| Build pipeline | Běží při buildu nebo deployi? | kompromitace artefaktu, únik secrets |
+| Test/dev | Běží jen lokálně nebo v CI? | menší produkční dopad, ale pořád přístup k repo a env |
+| Dokumentace a příklady | Kopírují ji zákazníci? | šíření špatného integračního vzoru |
+
+Privacy-first detail: klientská závislost není jen otázka bezpečnosti. Je to i otázka dat. Pokud update přidá externí request, telemetrii, nový font loader nebo větší bundle, může změnit výkon i soukromí uživatele. Kontrola závislostí má proto patřit i do webového a produktového review, ne jen do bezpečnostního inboxu.
+
+### Bezpečnostní alert začíná triage, ne panikou
+
+Když přijde alert, první krok není slepý merge. První krok je krátká triage:
+
+- Je zranitelná verze skutečně v našem lockfile?
+- Je zranitelný kód dosažitelný v našem použití?
+- Jde o runtime, build, dev nebo transitive závislost?
+- Existuje opravná verze?
+- Je update kompatibilní, nebo vyžaduje změnu kódu?
+- Jaké produktové cesty musíme ověřit?
+- Je potřeba incidentní režim, nebo běžný security patch?
+
+Triage karta může být krátká:
+
+| Pole | Co zapsat |
+| --- | --- |
+| Balíček | název a aktuální verze |
+| Zdroj upozornění | Dependabot, audit, advisory, vendor, vlastní nález |
+| Vrstva | klient, server, build, dev |
+| Dopad | nejhorší realistický dopad v našem produktu |
+| Dosažitelnost | ano/ne/nevíme |
+| Oprava | cílová verze nebo workaround |
+| Ověření | testy a ruční cesty |
+| Vlastník | kdo patch dotáhne |
+
+Tím se z alertu stane práce. Bez karty je to jen červená ikonka, která se učí přežít v backlogu.
+
+### Automatické PR drž malé
+
+Automatizace má šetřit pozornost, ne vyrábět balíky změn, kterým nikdo nerozumí. U Dependabotu nebo podobného nástroje nastav takový rytmus, aby PR šly číst.
+
+Praktická pravidla:
+
+- bezpečnostní opravy drž odděleně od rutinních verzí,
+- major aktualizace nedávej do stejného PR s pěti patchi,
+- groupuj jen závislosti, které se testují stejným způsobem,
+- do PR popisu doplň dopad na runtime, build nebo dev vrstvu,
+- lockfile změnu ber jako součást review, ne jako šum,
+- pokud update mění bundle, změř hlavní stránky nebo aspoň zkontroluj build report.
+
+Malý PR má jasnou otázku: „Zvedáme knihovnu X z verze A na B, protože opravuje Y, a ověřili jsme cesty Z.“ Velký PR s dvaceti změnami má otázku: „Tak snad?“ To není inženýrský postup. To je drobná víra s `package-lock.json`.
+
+### Testy musí odpovídat dopadu
+
+Ne každá aktualizace potřebuje celý regresní týden. Každá ale potřebuje ověření podle rizika.
+
+Příklad ověřovací matice:
+
+| Změna | Minimum ověření |
+| --- | --- |
+| CSS nebo UI knihovna | build, screenshot nebo ruční kontrola klíčových obrazovek |
+| API klient | integrační test, chybové stavy, timeouty |
+| Auth knihovna | přihlášení, odhlášení, reset, session, rizikové akce |
+| Upload/parser | validace souborů, chybové odpovědi, bezpečné odmítnutí |
+| Build tool | lokální build, CI, produkční artefakt, sourcemapy |
+| Logging/observability | maskování citlivých dat, retence, alerty |
+
+U privacy-first produktu přidej ještě jednu otázku: nezačala aktualizace posílat data jinam, logovat víc detailů nebo měnit výchozí nastavení telemetrie? Některé změny nejsou vidět v UI, ale jsou vidět v síti, logu nebo v účtu dodavatele.
+
+### Lockfile je provozní artefakt
+
+Lockfile není otravný výstup package manageru. Je to záznam přesných verzí, které se dostanou do buildu. Proto má být commitovaný, reviewovaný a měněný vědomě.
+
+Kontroluj hlavně:
+
+- proč se změnilo víc balíčků, než PR slibuje,
+- jestli nepřibyla nová runtime závislost bez vysvětlení,
+- jestli se nezměnil registry zdroj nebo podezřelý balíček,
+- jestli se nevrací stará zranitelná verze přes jinou větev stromu,
+- jestli CI běží na čisté instalaci, ne na lokální náhodě.
+
+U soukromých registry a interních balíčků hlídej i přístupy. Bot, CI a vývojář nemají automaticky potřebovat stejné tokeny. Token pro instalaci závislostí je pořád tajemství, ne dekorace v `.npmrc`.
+
+### Údržba má mít rytmus
+
+Když se závislosti řeší jen při požáru, každý update je strašidelný. Lepší je malý pravidelný rytmus:
+
+- denně nebo průběžně triage kritických bezpečnostních alertů,
+- týdně sloučit malé bezpečnostní a patch aktualizace,
+- měsíčně projít minor aktualizace a zastaralé balíčky,
+- kvartálně naplánovat major migrace a vyhodit nepoužívané knihovny,
+- po větším incidentu doplnit test, pravidlo nebo kartu závislosti.
+
+Tento rytmus nemusí být byrokracie. Může to být 30 minut týdně. Důležité je, aby existoval vlastník a aby se údržba nemíchala s pátečním releasem, pokud nejde o skutečně naléhavou opravu.
+
+### Když update nejde hned, napiš proč
+
+Někdy oprava existuje, ale nelze ji okamžitě nasadit bez rizika. To není automaticky selhání. Selhání je nechat alert ležet bez rozhodnutí.
+
+Do výjimky napiš:
+
+- proč nejde update hned,
+- jaký je realistický dopad v našem produktu,
+- jaké dočasné opatření snižuje riziko,
+- kdo vlastní migraci,
+- do kdy se rozhodnutí znovu otevře,
+- co se stane, když se riziko zhorší.
+
+Výjimka bez data review je jen elegantnější ignorování. A ignorování v bezpečnosti má špatný smysl pro humor.
+
+### Checklist: Aktualizace závislostí privacy-first
+
+- [ ] Máme zapnutou viditelnost závislostí a bezpečnostních upozornění pro hlavní repozitáře.
+- [ ] Rozlišujeme runtime, build, dev a dokumentační závislosti.
+- [ ] Bezpečnostní alerty mají triage kartu s dopadem, dosažitelností a vlastníkem.
+- [ ] Automatické PR jsou malé a oddělují security patche od rutinních update.
+- [ ] Major aktualizace mají samostatný plán migrace a rollback.
+- [ ] Lockfile je commitovaný, reviewovaný a měněný vědomě.
+- [ ] CI ověřuje čistou instalaci, build a relevantní testy.
+- [ ] U klientských závislostí kontrolujeme bundle, externí requesty a telemetrii.
+- [ ] U auth, uploadů, API klientů a parserů existují cílené regresní scénáře.
+- [ ] Tokeny pro package registry nejsou sdílené s běžnými produkčními secrets.
+- [ ] Výjimky mají důvod, dočasné opatření, vlastníka a datum review.
+- [ ] Údržba závislostí má pravidelný rytmus a není jen reakce na požár.
+
+### Mini úkol
+
+Vyber jeden repozitář a projdi posledních pět změn v závislostech:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Které změny byly bezpečnostní a které rutinní? |  |
+| Které balíčky běží v runtime? |  |
+| Které změny zasáhly lockfile víc, než se čekalo? |  |
+| Jaké testy proběhly před mergem? |  |
+| Přibyl nový externí request, telemetrie nebo větší klientský bundle? |  |
+| Který alert nebo zastaralý balíček nemá vlastníka? |  |
+| Jaký bude další údržbový rytmus? |  |
+
+Potom udělej jednu konkrétní změnu: rozděl automatické update PR podle typu, doplň dependency review do CI, vytvoř triage šablonu pro security alert, zapiš pravidlo pro major aktualizace, nebo odstraň jednu nepoužívanou knihovnu. Závislosti jsou součást produktu. Když je necháš žít vlastním životem, jednou ti pošlou fakturu v nejméně vhodný moment.
+
 ## Zdroje
 
 - OWASP Cheat Sheet Series: SQL Injection Prevention Cheat Sheet - doporučení k prevenci SQL injection včetně parametrizovaných dotazů, bezpečných uložených procedur, allowlist validace a principu nejmenších oprávnění: https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html
@@ -28465,6 +28641,7 @@ Potom udělej jednu konkrétní změnu: přidej `security.txt`, nastav alias `se
 
 ## Pracovní log
 
+- 2026-07-17: Doplněna příloha o aktualizacích závislostí bez páteční loterie: rozlišení security patchů, rutinních aktualizací, major migrací a transitive změn, mapa runtime/build/dev rizik, triage karta pro bezpečnostní alerty, pravidla pro malé automatické PR, ověřování podle dopadu, práce s lockfilem, rytmus údržby, výjimky, checklist a mini úkol; navázáno na ověřené zdroje OWASP SCVS, GitHub Dependabot/dependency review/dependency graph, npm audit, SemVer, Keep a Changelog a OpenSSF Scorecard.
 - 2026-07-17: Doplněna příloha o vulnerability disclosure a `security.txt` bez honu na výzkumníky: rozlišení bezpečnostního hlášení, incidentu a supportu, minimální `security.txt`, disclosure policy, bezpečné mantinely pro důkazy bez zákaznických dat, triage karta, komunikace s nálezcem, rozdíl mezi disclosure programem a bug bounty, ověření opravy, checklist a mini úkol; ověřeny a doplněny zdroje RFC 9116, OWASP Vulnerability Disclosure Cheat Sheet a ENISA Good Practice Guide on Vulnerability Disclosure.
 - 2026-07-17: Doplněna příloha o připojených OAuth aplikacích bez slepého souhlasu: rozlišení přihlášení, instalace aplikace, delegovaného přístupu a servisní integrace, rozhodovací consent obrazovka, srozumitelné scopy, admin consent bez obcházení rolí, bezpečné redirecty, přehled připojených aplikací, úplná revokace včetně webhooků a jobů, checklist a mini úkol; navázáno na ověřené zdroje RFC 9700, OWASP Authorization, OWASP API Security a GDPR principy minimalizace.
 - 2026-07-17: Doplněna příloha o zákaznických API tokenech bez věčného klíče: rozlišení typů tokenů, bezpečný tok vytvoření, srozumitelné scopy, výchozí expirace, rotace bez výpadku, přiměřené zobrazení posledního použití, rychlá revokace, ochrana tokenů v logování, checklist a mini úkol; navázáno na existující zdroje OWASP k API, autorizaci, správě tajemství a logování a na RFC 9700 a RFC 9449.
