@@ -28793,6 +28793,147 @@ Vyber jeden artefakt: produkční Docker image, frontend build, SDK, self-hosted
 
 Potom udělej jednu malou změnu: zapni generování CycloneDX nebo SPDX v CI, ulož SBOM k release artefaktu, přidej do release checklistu kontrolu runtime komponent, vytvoř zákaznickou odpověď na otázku „máte SBOM?“, nebo odstraň z generovaného výstupu citlivá metadata. SBOM má být pracovní nástroj pro rychlejší rozhodnutí, ne další dokument, který všichni hledají až ve chvíli, kdy hoří.
 
+## Příloha: Výjimky z privacy-first pravidel bez šedé zóny
+
+Každý dobrý provozní princip jednou narazí na realitu. Potřebuješ dočasně prodloužit retenci logů kvůli incidentu, dát externímu specialistovi omezený přístup, poslat zákazníkovi nestandardní export, použít mimoevropský nástroj pro úzký technický test nebo ponechat starý tracker pár dní kvůli migraci měření. Výjimky nejsou automaticky selhání. Selhání je, když výjimka nemá vlastníka, konec a důvod.
+
+Privacy-first tým si proto nemá lhát, že výjimky nikdy nebudou. Má mít jednoduchý způsob, jak je pojmenovat, schválit, omezit a zavřít.
+
+Špatná otázka zní: „Můžeme to tentokrát nějak obejít?“
+
+Lepší otázka zní: „Jak tuto výjimku omezíme tak, aby měla jasný účel, nejmenší rozsah, datum konce a kontrolu po uzavření?“
+
+> Codyho komentář: Výjimka bez data konce není výjimka. Je to nové pravidlo, které se stydí říct své jméno.
+
+### Rozliš výjimku od změny pravidla
+
+Nejdřív si ujasni, jestli jde opravdu o jednorázovou výjimku, nebo o signál, že pravidlo už neodpovídá realitě.
+
+| Situace | Co to spíš je | Jak reagovat |
+| --- | --- | --- |
+| Prodloužení debug logů na 7 dní kvůli incidentu | Výjimka | Schválit s vlastníkem a smazáním po incidentu |
+| Pravidelné držení debug logů „pro jistotu“ | Změna pravidla | Přepsat retenční politiku nebo záměr odmítnout |
+| Jednorázový export pro zákaznický audit | Výjimka | Omezit pole, kanál a datum smazání |
+| Každý měsíc ručně posílaný export do tabulky | Proces | Navrhnout bezpečný report nebo automatizaci |
+| Externí konzultant na týdenní bezpečnostní review | Výjimka | Dočasný přístup a offboarding |
+| Externista dlouhodobě spravuje produkci | Role dodavatele | Vendor karta, smlouva, přístupy, audit |
+
+Toto rozlišení šetří spoustu mlhy. Výjimka se zavírá. Nové pravidlo se dokumentuje. Proces se navrhuje. Když se všechno nazývá výjimkou, tým jen maskuje neřízený provoz.
+
+### Každá výjimka potřebuje kartu
+
+Karta výjimky má být krátká. Pokud její vyplnění trvá déle než samotné rozhodnutí, je moc složitá. Pokud ji nejde vyplnit vůbec, výjimka není připravená.
+
+| Pole | Odpověď |
+| --- | --- |
+| Název výjimky |  |
+| Proč ji potřebujeme |  |
+| Jaké pravidlo nebo standard obchází |  |
+| Jaká data, přístupy nebo systémy zasahuje |  |
+| Nejmenší možný rozsah |  |
+| Vlastník |  |
+| Kdo schválil |  |
+| Datum začátku |  |
+| Datum konce |  |
+| Jak ji zavřeme |  |
+| Jak ověříme úklid |  |
+
+Nejdůležitější pole jsou rozsah, vlastník a datum konce. Bez nich se výjimka postupně stane součástí provozu. A nejhorší provozní části jsou ty, o kterých už nikdo neví, proč vznikly.
+
+### Omez rozsah dřív než riziko omluvíš
+
+U výjimky se neptej jen „je riziko přijatelné“. Nejdřív se ptej, jestli jde zmenšit.
+
+Praktické způsoby omezení:
+
+- zkrátit dobu trvání,
+- použít menší datový vzorek,
+- odstranit volné texty a přílohy,
+- dát přístup jen pro čtení,
+- použít staging nebo anonymizovaná data,
+- omezit výstup na agregace,
+- použít jednorázový odkaz s expirací,
+- zapnout auditní log,
+- předem připravit mazací krok.
+
+Příklad: Zákazník chce export všech aktivit kvůli internímu auditu. Výjimka nemusí znamenat „pošleme celý dump“. Menší rozsah může být export jen za konkrétní období, jen pro dotčený workspace, bez interních poznámek, s expirací odkazu a s potvrzením, kdo ho stáhl.
+
+### Schválení má odpovídat dopadu
+
+Ne každá výjimka potřebuje stejné kolečko. Malá dočasná změna v neprodukčním prostředí je jiná než rozšíření přístupu k produkčním zákaznickým datům.
+
+| Dopad | Příklad | Schválení |
+| --- | --- | --- |
+| Nízký | Delší retence neosobních build logů ve stagingu | Vlastník oblasti |
+| Střední | Dočasný export omezených zákaznických dat | Vlastník dat + support/ops |
+| Vyšší | Externí přístup k produkčním logům | Engineering/ops + data owner |
+| Vysoký | Nový mimoevropský nástroj se zákaznickými daty | Vedení + právní/privacy posouzení |
+
+Tým si může nastavit vlastní prahy. Důležité je, aby výjimku neschvaloval člověk, který zároveň nejvíc spěchá na její použití a ignoruje dopad. Rychlost je dobrý sluha, ale mizerný kontrolor.
+
+### Výjimka musí být viditelná v provozu
+
+Výjimka schovaná v chatu je skoro totéž jako žádná evidence. Drž ji tam, kde tým hledá provozní pravdu: v issue trackeru, rozhodovacím logu, security backlogu nebo interní wiki.
+
+Minimální stavový model:
+
+| Stav | Význam |
+| --- | --- |
+| Navrženo | Výjimka je popsaná, ale ještě neschválená |
+| Aktivní | Výjimka běží a má datum konce |
+| K uzavření | Skončila doba platnosti, probíhá úklid |
+| Uzavřeno | Přístup, data nebo nastavení jsou vrácené do normálu |
+| Převedeno na pravidlo | Tým vědomě změnil standard a dokumentaci |
+
+Jednou týdně nebo měsíčně projdi aktivní výjimky. Pokud je některá po datu konce, neprodlužuj ji automaticky. Buď ji zavři, nebo z ní udělej vědomé rozhodnutí se stejnou úrovní kontroly jako novou změnu.
+
+### Zavření je stejně důležité jako schválení
+
+Výjimka nekončí tím, že problém přestal bolet. Končí až úklidem.
+
+Uzavírací checklist:
+
+- dočasný přístup je odebraný,
+- export nebo dataset je smazaný,
+- debug logování je vypnuté,
+- token nebo jednorázové heslo je zneplatněné,
+- externí nástroj už nedostává nová data,
+- dočasná dokumentace nebo zákaznický odkaz je archivovaný,
+- vlastník potvrdil, že se stav vrátil do pravidelného režimu.
+
+Pokud se výjimka opakuje potřetí, je to signál pro návrh lepšího procesu. Možná potřebuješ bezpečný report, lepší exportní funkci, dočasné role, kratší debug režim nebo jasnější zákaznický postup. Opakovaná výjimka je produktová zpětná vazba. Jen má na sobě provozní reflexní vestu.
+
+### Checklist: Výjimky bez šedé zóny
+
+- [ ] Tým rozlišuje jednorázovou výjimku, změnu pravidla a nový proces.
+- [ ] Každá výjimka má důvod, vlastníka, schválení a datum konce.
+- [ ] Výjimka popisuje, jaké pravidlo obchází a proč to nejde vyřešit běžným postupem.
+- [ ] Rozsah je omezený na minimum: data, přístupy, čas, systémy a osoby.
+- [ ] U vyššího dopadu je zapojen data/privacy nebo bezpečnostní vlastník.
+- [ ] Aktivní výjimky jsou viditelné v provozním zdroji pravdy, ne jen v chatu.
+- [ ] Výjimka má předem napsaný uzavírací krok.
+- [ ] Po konci se ověří odebrání přístupů, smazání dat a vypnutí dočasných nastavení.
+- [ ] Opakované výjimky se mění na procesní nebo produktovou práci.
+- [ ] Žádná výjimka nesmí sloužit jako tiché trvalé oslabení privacy-first hodnoty.
+
+### Mini úkol
+
+Vyber jednu aktuální nebo nedávnou výjimku a vyplň kartu:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Co jsme dovolili mimo běžné pravidlo? |  |
+| Proč to bylo nutné? |  |
+| Jaké pravidlo to obešlo? |  |
+| Jaká data nebo přístupy tím vznikly? |  |
+| Jak jsme omezili rozsah? |  |
+| Kdo je vlastník? |  |
+| Kdy výjimka končí? |  |
+| Jak ověříme úklid? |  |
+| Opakuje se to tak často, že potřebujeme lepší proces? |  |
+
+Potom udělej jednu konkrétní změnu: zapiš datum konce, odeber starý dočasný přístup, smaž export po auditu, vypni zapomenuté debug logování nebo převeď opakovanou výjimku na normální proces. Výjimky nejsou problém, když jsou malé, viditelné a konečné. Problém je výjimka, která se tváří jako detail a po půl roce drží půlku provozu pohromadě izolepou.
+
 ## Zdroje
 
 - OWASP Cheat Sheet Series: SQL Injection Prevention Cheat Sheet - doporučení k prevenci SQL injection včetně parametrizovaných dotazů, bezpečných uložených procedur, allowlist validace a principu nejmenších oprávnění: https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html
@@ -28954,6 +29095,7 @@ Potom udělej jednu malou změnu: zapni generování CycloneDX nebo SPDX v CI, u
 
 ## Pracovní log
 
+- 2026-07-17: Doplněna příloha o výjimkách z privacy-first pravidel bez šedé zóny: rozlišení výjimky, změny pravidla a nového procesu, karta výjimky, omezení rozsahu, přiměřené schvalování, viditelný stavový model, uzavírací checklist, checklist a mini úkol.
 - 2026-07-17: Doplněna příloha o SBOM bez inventáře pro šuplík: účel SBOM podle bezpečnosti, licencí, zákaznických auditů a incidentů, vazba na konkrétní artefakt, minimální pole komponent, rozlišení runtime/build/dev závislostí, automatické generování v CI, zákaznické režimy výstupu, životní cyklus, checklist a mini úkol; ověřeny a doplněny zdroje CISA, NTIA, CycloneDX a SPDX.
 - 2026-07-17: Doplněna příloha o licencích open-source komponent bez právní mlhy: rozlišení interního použití, runtime, klientského bundlu, distribuce a úprav, práce se SPDX identifikátory, licenční review závislostí, notices, copyleft rozhodování, privacy-first kontrola telemetrie a externích requestů, změny licencí při updatech, checklist a mini úkol; navázáno na ověřené zdroje GitHub Licensing, GitHub dependency graph, npm license metadata a SPDX License List.
 - 2026-07-17: Doplněna příloha o aktualizacích závislostí bez páteční loterie: rozlišení security patchů, rutinních aktualizací, major migrací a transitive změn, mapa runtime/build/dev rizik, triage karta pro bezpečnostní alerty, pravidla pro malé automatické PR, ověřování podle dopadu, práce s lockfilem, rytmus údržby, výjimky, checklist a mini úkol; navázáno na ověřené zdroje OWASP SCVS, GitHub Dependabot/dependency review/dependency graph, npm audit, SemVer, Keep a Changelog a OpenSSF Scorecard.
