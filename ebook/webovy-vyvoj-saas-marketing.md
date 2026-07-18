@@ -31740,7 +31740,7 @@ Tento e-book je už dost dlouhý na to, aby dával smysl tematický vstup. Prvn�
 | formuláře a leady | Privacy-first formuláře | Spam ochrana formulářů, kvalifikace leadů, CRM hygiena |
 | SaaS pricing | Pricing a balíčky | Trial/freemium, první placený pilot, billing |
 | obsah a distribuci | Obsahový systém, blog a RSS | Obsahový kalendář, obsahový audit, changelog |
-| provozní spolehlivost | Runbooky | TLS certifikáty, externí HTTPS kontrola, incidentní eskalace |
+| provozní spolehlivost | Runbooky | TLS certifikáty, externí HTTPS kontrola, incidentní eskalace, expirační kalendář |
 | přístupy a bezpečnost | Tajemství a API klíče | Přístupový audit, servisní účty, auditní stopa |
 | práci s daty | Retenční mapa dat | Datová mapa, práva uživatelů, záznam o činnostech |
 | předání projektu | Předání webu nebo SaaS projektu | Provozní záchranný balík, dokumentace, deployment postup |
@@ -32090,6 +32090,157 @@ Vyber jeden produkční web nebo veřejnou aplikaci a vyplň tři řádky:
 
 Pokud některý řádek neumíš vyplnit do deseti minut, nevytvářej další dashboard. Doplň produkční kartu, označ správný repozitář, nebo přidej verzi do health kontroly. Provozní klid často nevzniká z větší infrastruktury, ale z toho, že základní otázky konečně mají konkrétní odpověď.
 
+## Příloha: Expirační kalendář bez provozního budíčku až po požáru
+
+Některé výpadky nepřijdou jako chyba v kódu. Přijdou jako datum, které všichni znali, ale nikdo ho neměl v práci. Doména vyprší. TLS certifikát doběhne. Platební karta u dodavatele se odmítne obnovit. API token měl „dočasnou“ platnost a najednou je dočasně mrtvé všechno kolem něj.
+
+Špatná otázka zní: „Kdo si to měl pohlídat?“
+
+Lepší otázka zní: „Které provozní věci mají konec platnosti, kdo je vlastní a jak dlouho předem se o tom dozvíme?“
+
+Expirační kalendář není kalendář narozenin pro infrastrukturu. Je to malý provozní registr věcí, které umí shodit web nebo SaaS bez jediné změny v aplikaci. Navazuje na doménovou hygienu, TLS obnovu, záchranný balík a produkční kartu. Rozdíl je v tom, že tady nehledáš aktuální incident. Hledáš budoucí incident, který už má v občance napsané datum.
+
+> Codyho komentář: Expirace je provozní trapas s velmi slušným předstihem. Když tě překvapí datum, problém většinou nebyl v datu. Problém byl v tom, že datum nemělo vlastníka, alert a náhradníka. Kalendář sám o sobě web nezachrání, ale dá ti šanci nebýt hlavní postavou malé certifikátové tragikomedie.
+
+### Co patří do expiračního kalendáře
+
+Začni věcmi, které mají přímý dopad na dostupnost, bezpečnost, billing nebo právní důvěru. Nezapisuj každý balíček v `package-lock.json`. Zapisuj věci, u kterých konec platnosti znamená reálný problém pro zákazníka nebo tým.
+
+Praktické kategorie:
+
+| Kategorie | Příklady | Dopad expirace |
+| --- | --- | --- |
+| Domény | hlavní doména, produktové subdomény, krátké odkazy | web, e-mail nebo odkazy přestanou fungovat |
+| TLS certifikáty | veřejný web, API, interní admin, webhook endpointy | prohlížeče a klienti odmítnou spojení |
+| E-mailová důvěra | DKIM klíče, DMARC reporting mailbox, odesílací domény | horší doručitelnost nebo ztráta kontroly nad reputací |
+| Dodavatelé | hosting, transakční e-mail, platby, monitoring, support | služba se vypne, omezí nebo přejde do nouzového režimu |
+| API přístupy | OAuth klienti, refresh tokeny, webhook podpisové klíče | integrace začnou selhávat |
+| Právní a bezpečnostní artefakty | `security.txt`, DPA revize, certifikace, pojistky | veřejný signál důvěry nebo smluvní závazek zastará |
+| Lidské přístupy | break-glass účet, doménový registrátor, hosting admin | incident nejde opravit včas |
+
+U TLS a domén se můžeš opřít o existující zdroje v této knize: Let's Encrypt dokumentuje krátkou platnost certifikátů a doporučený rytmus obnovy, Certbot popisuje automatické obnovy a suchý běh, ICANN připomíná odpovědnosti držitelů domén. Expirační kalendář z těchto faktů dělá každodenní provozní návyk.
+
+### Každý záznam má mít akci, ne jen datum
+
+Pouhé datum expirace je slabé. Když kalendář zařve „zítra končí certifikát“, ale nikdo neví, kde se obnovuje a kdo smí reloadnout nginx, máš hezkou notifikaci a pořád stejný problém.
+
+Minimální záznam:
+
+| Pole | Co vyplnit |
+| --- | --- |
+| Název | `cody.dreamind.cz TLS certifikát` |
+| Kategorie | TLS, doména, dodavatel, token, právní artefakt |
+| Datum expirace nebo revize | konkrétní datum a čas v UTC, pokud existuje |
+| Primární vlastník | člověk nebo role, která smí věc obnovit |
+| Náhradník | kdo zvládne stejný postup při nedostupnosti vlastníka |
+| Kde se obnovuje | registrátor, hosting, server, CI/CD, správce tajemství |
+| Jak se ověřuje obnova | veřejný `curl`, interní dashboard, test integrace |
+| První alert | kdy má přijít první upozornění |
+| Poslední bezpečný den | kdy už se z preventivní práce stává incidentní režim |
+| Odkaz na runbook | krátký postup bez tajemství |
+
+U tokenů a klíčů přidej ještě rozsah oprávnění a dopad rotace. U dodavatelů přidej, co se stane při nezaplacené faktuře nebo zamítnuté kartě. U právních artefaktů přidej, kdo schvaluje změnu textu. Tohle není byrokracie. Tohle je levnější forma paměti.
+
+### Alerty nastav podle času na opravu
+
+Ne všechny expirace potřebují stejný předstih. Doména, která drží web, e-mail i zákaznické odkazy, si zaslouží větší rezervu než jednorázový sandbox token. TLS certifikát s automatickou obnovou potřebuje alert na selhání obnovy a alert na blížící se expiraci. Dodavatelská smlouva potřebuje čas na rozhodnutí, ne jen na kliknutí „renew“.
+
+Jednoduché pravidlo:
+
+| Typ věci | První upozornění | Eskalační upozornění | Proč |
+| --- | --- | --- | --- |
+| Doména | 60 až 90 dní předem | 30, 14 a 7 dní | obnova může narazit na platbu, přístup nebo převod |
+| TLS certifikát | 30 dní předem | 14, 7 a 3 dny | automatika může selhat tiše nebo bez reloadu |
+| Kritický dodavatel | 60 dní před koncem období | 30 a 14 dní | je potřeba rozhodnutí, ne jen technický klik |
+| API token | podle rizika integrace | před rotačním oknem | rotace musí projít testem |
+| `security.txt` nebo veřejný trust artefakt | 30 dní předem | 7 dní | veřejná důvěra nemá vypadat opuštěně |
+
+Čísla nejsou dogma. Důležité je nastavit předstih podle nejdelší části opravy. Pokud k obnově domény potřebuješ přístup člověka, který je občas na dovolené, alert den předem je jen elegantní způsob, jak si naplánovat stres.
+
+### Kalendář nesmí být další tajné místo
+
+Expirační kalendář má být dostupný lidem, kteří řeší provoz, ale nemá obsahovat tajemství. Piš do něj mapu, ne klíče.
+
+Do kalendáře patří:
+
+- název služby,
+- datum expirace,
+- vlastník a náhradník,
+- odkaz na runbook,
+- místo obnovy popsané obecně,
+- dopad expirace,
+- výsledek poslední kontroly.
+
+Do kalendáře nepatří:
+
+- privátní klíče,
+- recovery kódy,
+- hesla k registrátorovi,
+- plné hodnoty tokenů,
+- osobní údaje zákazníků,
+- interní logy s citlivým obsahem.
+
+Privacy-first provoz znamená, že i interní dokumentace drží minimum dat. Kalendář má zrychlit opravu, ne vytvořit nový trezor v tabulce. Pokud potřebuješ odkazovat na tajemství, odkazuj na správce tajemství nebo administrátorský panel podle role, ne na hodnotu tajemství.
+
+### Udělej měsíční revizi za patnáct minut
+
+Expirační kalendář bez rytmu zastará stejně jako každý jiný dokument. Stačí krátká měsíční kontrola:
+
+1. Otevři položky s expirací nebo revizí v příštích 90 dnech.
+2. U každé ověř, že existuje vlastník a náhradník.
+3. Zkontroluj, jestli runbook pořád odpovídá realitě.
+4. U automatických obnov najdi poslední úspěšný běh.
+5. U kritických položek ověř veřejný signál, ne jen interní stav.
+6. Uzavři hotové obnovy a zapiš datum ověření.
+7. Vytvoř úkol pro každou položku, která nemá jasný další krok.
+
+Tahle revize nemusí mít meeting s deseti lidmi. Stačí jeden vlastník provozu a krátký zápis. Pokud se během patnácti minut ukáže, že nevíš, kdo vlastní doménu, není to selhání revize. Je to její nejdůležitější nález.
+
+### Příklad záznamu pro malý web
+
+```text
+Název: example.com produkční TLS
+Kategorie: TLS
+Datum expirace: 2026-10-16 19:35 UTC
+Dopad: prohlížeče a klienti odmítnou HTTPS spojení
+Primární vlastník: provozní role WebOps
+Náhradník: technický lead
+Kde se obnovuje: server s nginx a Certbotem
+Runbook: docs/runbooks/tls-renewal.md
+První alert: 30 dní před expirací
+Eskalace: 14, 7 a 3 dny před expirací
+Ověření: curl bez --insecure z veřejné sítě + kontrola notAfter
+Poslední ověření: 2026-07-18
+Poznámka: kalendář neobsahuje privátní klíče ani přístupy
+```
+
+U SaaS přidej stejný záznam pro API doménu, webhook endpoint, e-mailovou doménu, platebního poskytovatele a hlavní monitoring. Ne proto, že tabulky léčí svět. Protože pět kritických expirací bez vlastníka umí vyrobit víc škody než jedna nepovedená komponenta.
+
+### Checklist: Expirační kalendář
+
+- [ ] Máme seznam domén, TLS certifikátů, kritických dodavatelů, tokenů a veřejných trust artefaktů.
+- [ ] Každá položka má datum expirace nebo datum příští revize.
+- [ ] Každá kritická položka má primárního vlastníka a náhradníka.
+- [ ] U každé položky je popsané místo obnovy bez uložení tajemství.
+- [ ] Alerty jsou nastavené podle času potřebného na opravu, ne podle optimismu.
+- [ ] Automatické obnovy mají kontrolu posledního úspěšného běhu.
+- [ ] Veřejné služby se ověřují zvenku, ne jen z interního dashboardu.
+- [ ] Runbooky obsahují obnovu, reload a ověření výsledku.
+- [ ] Měsíční revize pracuje s horizontem aspoň 90 dní.
+- [ ] Kalendář neobsahuje hesla, tokeny, recovery kódy ani osobní data zákazníků.
+
+### Mini úkol
+
+Vyber jednu veřejnou doménu nebo SaaS službu a vyplň tři položky:
+
+| Položka | Odpověď |
+| --- | --- |
+| Co přesně může expirovat? |  |
+| Kdo to umí obnovit a kdo je náhradník? |  |
+| Kolik dní předem musí přijít první alert, aby šla oprava udělat v klidu? |  |
+
+Potom nastav jeden konkrétní alert nebo vytvoř jeden úkol do měsíční revize. Nečekej, až se kalendář naplní dokonale. První zachráněná expirace zaplatí i trochu nehezkou první verzi.
+
 ## Zdroje
 
 - curl: curl man page - volby pro časové limity, TLS ověřování a režim `--insecure`: https://curl.se/docs/manpage.html
@@ -32268,6 +32419,7 @@ Pokud některý řádek neumíš vyplnit do deseti minut, nevytvářej další d
 
 ## Pracovní log
 
+- 2026-07-18: Doplněna příloha o expiračním kalendáři bez provozního budíčku až po požáru: seznam kritických expirací pro domény, TLS, dodavatele, tokeny a trust artefakty, záznam s vlastníkem, náhradníkem, místem obnovy a ověřením, alerty podle času na opravu, pravidla bez ukládání tajemství, měsíční revize, příklad záznamu, checklist a mini úkol; navázáno na dnešní zjištění expirovaného veřejného certifikátu a existující zdroje k Let's Encrypt, Certbotu a ICANN.
 - 2026-07-18: Doplněna příloha o produkčním webu bez ztraceného artefaktu: rozlišení zdroje, artefaktu, runtime, proxy a konfigurace, produkční karta, bezpečný identifikátor verze, opakovatelný deploy postup, riziko repozitáře bez aplikace, smoke test správného artefaktu, diagnostický balíček při chybě bez opravného přístupu, checklist a mini úkol; navázáno na existující zdroje k Twelve-Factor konfiguraci, GitHub Actions, SRE automatizaci a předchozí provozní přílohy.
 - 2026-07-18: Doplněna příloha o revizním průchodu Markdown e-bookem bez rozbití struktury: výběr jedné osy kontroly, čtení `git diff` jako produktového signálu, práce s kotvami v dlouhém souboru, privacy-first revize příkladů, stručný pracovní log, checklist a mini úkol; navázáno na předchozí části o živém e-booku a tematickém indexu.
 - 2026-07-18: Doplněna příloha o tematickém indexu bez sledování čtenářů: navigace podle práce čtenáře, malá taxonomie pro dlouhý e-book, rozhodovací věty u odkazů, ruční údržba indexu, příklad vstupní mapy pro tento e-book, checklist a mini úkol; navázáno na předchozí část o živém e-booku a privacy-first princip, že lepší struktura snižuje potřebu invazivního měření.
