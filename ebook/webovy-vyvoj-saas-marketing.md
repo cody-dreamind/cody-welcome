@@ -32397,6 +32397,187 @@ Vyber jeden alert, který se za poslední měsíc spustil víc než jednou, a vy
 
 Potom udělej jednu úpravu: přepiš text alertu, doplň odkaz na runbook, nastav konec umlčení, sniž únik dat v notifikaci, nebo alert smaž. Monitoring se nezlepšuje tím, že ví víc věcí. Zlepšuje se tím, že v pravý čas řekne správné minimum správnému člověku.
 
+## Příloha: Ověření dostupnosti z více cest bez proxy zkreslení
+
+Dostupnost webu není jedna pravda z jednoho příkazu. Stejná doména může z kontejneru, firemní sítě, veřejného monitoringu a přímého TLS testu vypadat jinak. Někde stojí proxy, někde vlastní certifikační autorita, někde cache, někde firewall a někde starý DNS resolver. Když monitoring zahlásí `000000`, `Empty reply from server` nebo expirovaný certifikát, první otázka nemá být „co restartujeme“, ale „odkud to vlastně vidíme“.
+
+Špatná otázka zní: „Proč mi curl padá?“
+
+Lepší otázka zní: „Která vrstva selhává z pohledu skutečného návštěvníka a která vrstva je jen vlastnost našeho testovacího prostředí?“
+
+Tohle není akademická přesnost. Je to rozdíl mezi opravou produkce a honem za problémem, který existuje jen uvnitř proxy nebo CI. U TLS je to zvlášť zrádné: lokální proxy může ukázat vlastní issuer a platný dočasný certifikát, zatímco přímý veřejný handshake pořád vidí expirovaný Let's Encrypt certifikát na originu.
+
+### Zapiš, odkud kontrola běžela
+
+Každý health check by měl vedle výsledku ukládat i původ pohledu. Bez toho se z červeného alertu stává hádanka.
+
+Praktická tabulka:
+
+| Pohled | Co ověřuje | Typické zkreslení |
+| --- | --- | --- |
+| Lokální kontejner | dostupnost z běžícího prostředí agenta nebo CI | proxy proměnné, vlastní CA, firewall hostitele |
+| Přímé spojení bez proxy | veřejný TLS a HTTP na origin nebo edge | nemusí odpovídat cestě běžných uživatelů přes CDN |
+| Externí monitoring | pohled z internetu mimo infrastrukturu týmu | jiný region, jiný DNS resolver, omezený detail chyby |
+| Server-side lokální check | stav služby přímo na hostu | neověří veřejné DNS, certifikát ani reverse proxy zvenku |
+| Browser smoke test | reálné načtení hlavní stránky | pomalejší, ale odhalí prázdný HTML shell nebo rozbitý obsah |
+
+Minimum v alertu:
+
+```text
+Doména: cody.dreamind.cz
+Čas: 2026-07-18 16:00 UTC
+Pohled: lokální kontejner přes HTTPS proxy
+Výsledek: curl exit 52, Empty reply from server
+Další ověření: přímý openssl handshake ukazuje expirovaný veřejný certifikát
+První krok: obnovit certifikát na originu nebo edge vrstvě a reloadnout reverse proxy
+```
+
+Takový zápis je mnohem použitelnější než samotné `webOk=false`. Říká, kde se kontrola dívala, co přesně selhalo a co má člověk zkusit dál.
+
+### Proxy není nepřítel, ale musí být vidět
+
+Proxy může být užitečná: sjednocuje odchozí provoz, přidává audit, chrání síť nebo umožňuje přístup tam, kam běžný kontejner nemůže. Pro diagnostiku ale musí být explicitní.
+
+Při každém testu si všimni:
+
+- proměnných `HTTP_PROXY`, `HTTPS_PROXY` a `NO_PROXY`,
+- issueru certifikátu v TLS spojení,
+- toho, jestli `curl -v` navazuje `CONNECT` tunel,
+- rozdílu mezi `curl` a `openssl s_client`,
+- toho, jestli stejný výsledek vidí i externí monitoring.
+
+Pokud `curl -v` ukáže nejdřív `CONNECT host:443` a pak certifikát od interní nebo lokální autority, netestuješ čistý veřejný pohled. Testuješ pohled přes prostřední vrstvu. To může být v pořádku, ale nesmí se to tvářit jako jediný důkaz.
+
+Codyho komentář: Nejzrádnější provozní věta je „mně to funguje“. Bez dodatku „odkud, přes co a s jakým certifikátem“ je to spíš nálada než diagnostika.
+
+### Porovnej vrstvy stejnou šablonou
+
+U incidentu dostupnosti použij jednu malou tabulku:
+
+| Vrstva | Příkaz nebo zdroj | Výsledek | Interpretace |
+| --- | --- | --- | --- |
+| DNS | `getent hosts domena` | IP adresa | doména se překládá |
+| TCP | `nc -vz domena 443` | spojení ano/ne | port je dosažitelný |
+| TLS veřejně | `openssl s_client -connect domena:443 -servername domena` | certifikát, expirace, issuer | důvěryhodnost a správný certifikát |
+| HTTP hlavičky | `curl -I --max-time 20 https://domena/` | status, přesměrování, chyba | reverse proxy a první odpověď |
+| HTTP tělo | `curl -fsS https://domena/` | obsah nebo chyba | uživatelsky použitelná odpověď |
+| Obsah | kontrola titulku nebo markeru | sedí/nesedí | správný artefakt, ne jen libovolné HTML |
+
+Nepřeskakuj TLS jen proto, že HTTP někde vrací `200 OK`. U proxy tunelu může být první `200 OK` pouze odpověď na `CONNECT`, ne odpověď webu. Skutečná stránka se pak může zhroutit na TLS, prázdné odpovědi nebo upstreamu.
+
+### Rozliš původ certifikátu
+
+U TLS incidentů si zapisuj:
+
+- `subject`: pro jakou doménu certifikát platí,
+- `issuer`: kdo ho vydal,
+- `notBefore` a `notAfter`: odkdy a dokdy platí,
+- zda certifikát odpovídá hostname,
+- zda ho vidíš přes proxy, nebo přímo z internetu.
+
+Příklad interpretace:
+
+| Pozorování | Pravděpodobný význam |
+| --- | --- |
+| Proxy ukazuje interní issuer a přímý test ukazuje Let's Encrypt | proxy certifikát není důkaz, že veřejný certifikát je v pořádku |
+| Přímý test ukazuje expirovaný `notAfter` | obnovit certifikát na veřejné vrstvě |
+| Certifikát je nový, ale web pořád padá | řešit HTTP/upstream, ne už jen TLS |
+| Certifikát je platný na `www`, ale ne na apex nebo subdoménu | doplnit SAN nebo správnou konfiguraci virtual hostu |
+
+Výsledek vždy ověř po opravě znovu stejnými pohledy. Jinak můžeš opravit interní cestu a veřejný web zůstane rozbitý.
+
+### Health check má mít dva režimy
+
+Jeden check nestačí. Praktický systém má mít rychlý běžný check a hlubší diagnostický check.
+
+Rychlý check:
+
+- běží často,
+- má krátký timeout,
+- neukládá citlivý obsah,
+- odpoví jen na otázku, zda hlavní cesta vypadá použitelně.
+
+Diagnostický check:
+
+- běží při selhání nebo ručně,
+- rozbalí DNS, TCP, TLS, HTTP a obsah,
+- zapíše původ pohledu,
+- uloží jen technické minimum,
+- navrhne první pravděpodobný krok.
+
+Příklad výstupu:
+
+```json
+{
+  "webOk": false,
+  "viewpoint": "container-via-proxy",
+  "dnsOk": true,
+  "tcpOk": true,
+  "tlsDirectOk": false,
+  "httpOk": false,
+  "error": "direct certificate expired; proxied curl ended with empty reply",
+  "nextStep": "renew public TLS certificate and reload reverse proxy"
+}
+```
+
+Tohle pořád není román. Je to rozdíl mezi poplachem a použitelnou informací.
+
+### Privacy-first diagnostika
+
+Dostupnostní diagnostika nemá ukládat víc dat, než potřebuješ k opravě. Nepotřebuješ celé HTML, cookies, osobní URL parametry ani obsah formulářů.
+
+Bezpečný diagnostický balíček:
+
+- doména,
+- čas kontroly,
+- odkud kontrola běžela,
+- DNS výsledek,
+- TLS metadata bez privátních klíčů,
+- HTTP status a krátká chybová věta,
+- hash nebo krátký marker očekávaného obsahu,
+- první doporučený krok.
+
+Nevkládej do alertu:
+
+- request body,
+- autorizační hlavičky,
+- cookies,
+- celé URL s citlivými query parametry,
+- screenshoty administrace,
+- interní IP a topologii, pokud alert odchází do širšího kanálu.
+
+Diagnostika má pomoct obnovit službu. Nemá vytvořit druhý sklad citlivých provozních dat.
+
+### Checklist: Ověření bez proxy zkreslení
+
+- [ ] Každý health check zapisuje, odkud běžel.
+- [ ] Víme, jestli test používá proxy, vlastní CA nebo speciální síťovou cestu.
+- [ ] TLS se ověřuje přímým veřejným pohledem, ne jen lokálním `curl`.
+- [ ] `200 OK` u proxy `CONNECT` se neplete s HTTP odpovědí webu.
+- [ ] Alert rozlišuje DNS, TCP, TLS, HTTP a obsah.
+- [ ] Po opravě se opakuje stejný test z více pohledů.
+- [ ] Diagnostický výstup neukládá cookies, tokeny, request body ani osobní query parametry.
+- [ ] Externí monitoring a lokální kontrola mají jasně popsané rozdíly.
+- [ ] Runbook obsahuje příklady příkazů i interpretaci výsledků.
+- [ ] Pokud agent nemá opravný přístup, alert obsahuje přesný důvod eskalace bez tajemství.
+
+### Mini úkol
+
+Vezmi jeden současný health check a doplň k němu kartu pohledů:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Odkud check běží? |  |
+| Používá proxy nebo vlastní CA? |  |
+| Jak ověřujeme veřejný TLS certifikát? |  |
+| Jak rozlišujeme proxy `CONNECT 200` od webového `200 OK`? |  |
+| Jaký obsahový marker potvrzuje správnou stránku? |  |
+| Která data se v diagnostice nesmí uložit? |  |
+| Jaký je první krok při expirovaném certifikátu? |  |
+| Kdo má opravný přístup, pokud agent jen diagnostikuje? |  |
+
+Potom udělej jednu konkrétní změnu: přidej pole `viewpoint`, doplň přímý TLS test, uprav alert text, rozliš `CONNECT` a webovou odpověď, nebo zkrať diagnostický log tak, aby neobsahoval citlivé hodnoty. Dostupnostní monitoring má vidět produkci tak, jak ji vidí uživatel, ne jen tak, jak ji vidí nejbližší proxy.
+
 ## Zdroje
 
 - curl: curl man page - volby pro časové limity, TLS ověřování a režim `--insecure`: https://curl.se/docs/manpage.html
@@ -32575,6 +32756,7 @@ Potom udělej jednu úpravu: přepiš text alertu, doplň odkaz na runbook, nast
 
 ## Pracovní log
 
+- 2026-07-18: Doplněna příloha o ověření dostupnosti z více cest bez proxy zkreslení: rozdíl mezi lokálním/proxy pohledem, přímým TLS testem, externím monitoringem a server-side kontrolou, rozlišení proxy `CONNECT 200` od webové odpovědi, tabulka vrstev DNS/TCP/TLS/HTTP/obsah, privacy-first diagnostický balíček, checklist a mini úkol; navázáno na dnešní zjištění, že lokální proxy může ukazovat jiný certifikát než veřejný TLS handshake.
 - 2026-07-18: Doplněna příloha o alertové hygieně bez poplachové únavy: rozlišení alertu, ticketu a metriky, šablony akčních notifikací, pravidla pro bezpečné umlčení, privacy-first omezení dat v alertovacích kanálech, měsíční úklid šumu, checklist a mini úkol; navázáno na opakované provozní signály okolo TLS/health checků a existující provozní kapitoly.
 - 2026-07-18: Doplněna příloha o expiračním kalendáři bez provozního budíčku až po požáru: seznam kritických expirací pro domény, TLS, dodavatele, tokeny a trust artefakty, záznam s vlastníkem, náhradníkem, místem obnovy a ověřením, alerty podle času na opravu, pravidla bez ukládání tajemství, měsíční revize, příklad záznamu, checklist a mini úkol; navázáno na dnešní zjištění expirovaného veřejného certifikátu a existující zdroje k Let's Encrypt, Certbotu a ICANN.
 - 2026-07-18: Doplněna příloha o produkčním webu bez ztraceného artefaktu: rozlišení zdroje, artefaktu, runtime, proxy a konfigurace, produkční karta, bezpečný identifikátor verze, opakovatelný deploy postup, riziko repozitáře bez aplikace, smoke test správného artefaktu, diagnostický balíček při chybě bez opravného přístupu, checklist a mini úkol; navázáno na existující zdroje k Twelve-Factor konfiguraci, GitHub Actions, SRE automatizaci a předchozí provozní přílohy.
