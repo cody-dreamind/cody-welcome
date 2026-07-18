@@ -30573,6 +30573,130 @@ Vezmi jeden existující health check a vyplň kartu:
 
 Potom udělej jednu konkrétní změnu: přidej `curl` exit code do JSON výstupu, rozděl `000000` podle příčiny, přidej obsahový smoke test, odstraň `--insecure`, zkrať timeout nebo doplň runbook odkaz do alertu. Monitoring nemá být dramatický. Má být nudně užitečný právě v okamžiku, kdy web přestane odpovídat.
 
+## Příloha: Postmortem po provozním incidentu bez hledání viníka
+
+Když web nebo SaaS vypadne, první priorita je obnova služby. Druhá priorita je zabránit tomu, aby se stejný problém vracel jako levný horor s dražším obsazením. Postmortem nemá být firemní soudní síň. Má být krátký technický a produktový dokument, který přepíše incident na lepší monitoring, jednodušší runbook a menší dopad na zákazníka.
+
+U malého týmu stačí velmi praktický přístup: jeden incident, jeden vlastník, jeden záznam, několik konkrétních úprav. Žádná epická prezentace. Žádné „příště si dáme pozor“. To není opatření, to je přání v reflexní vestě.
+
+Lepší otázka zní: „Co v systému dovolilo, aby problém vznikl, nebyl včas vidět nebo nešel rychle opravit?“
+
+Codyho komentář: Postmortem bez viny neznamená postmortem bez odpovědnosti. Znamená to, že nehledáš člověka na pranýř, ale systémovou změnu, která přežije další pátek, nemoc, dovolenou i půl roku zapomenutou konfiguraci.
+
+### Odděl obnovu od učení
+
+Během incidentu nedělej hlubokou analýzu všeho, pokud tím nezrychlíš obnovu. V tu chvíli potřebuješ:
+
+- potvrdit dopad na uživatele,
+- najít nejkratší bezpečnou cestu k obnově,
+- zapisovat časovou osu,
+- komunikovat podle skutečného dopadu,
+- chránit data a přístupy před zbrklými zásahy.
+
+Učení přijde hned potom. Ideálně stejný nebo další pracovní den, dokud jsou fakta čerstvá a logy dostupné. Pokud čekáš týden, z postmortemu se často stane archeologie s horší pamětí a lepšími výmluvami.
+
+Praktické pravidlo: incident log piš už během opravy, ale závěry piš až po obnově služby. Do logu patří fakta, časy a pozorování. Do závěrů patří příčiny, rozhodnutí a úkoly.
+
+### Minimální šablona incidentu
+
+Pro malé SaaS nebo web stačí jedna karta:
+
+| Pole | Co napsat |
+| --- | --- |
+| Incident | krátký název podle dopadu, ne podle domnělé příčiny |
+| Dopad | co nešlo udělat z pohledu uživatele nebo zákazníka |
+| Začátek dopadu | kdy problém reálně začal, pokud to víš |
+| Detekce | kdo nebo co problém odhalilo |
+| Obnova | kdy byla služba znovu použitelná |
+| Kořenové přispívající faktory | technické, procesní a vlastnické důvody |
+| Co fungovalo | signály, runbooky nebo lidé, kteří obnovu zrychlili |
+| Co selhalo | monitoring, alerty, přístupy, dokumentace, automatizace |
+| Opatření | konkrétní úkoly s vlastníkem a termínem |
+| Privacy dopad | zda došlo k práci s osobními údaji, logy, exporty nebo zákaznickým obsahem |
+
+Všimni si slova „přispívající“. U provozních incidentů bývá jedna příčina lákavá, ale často neúplná. Certifikát expiroval. Proč? Renewal neběžel. Proč? Timer byl vypnutý. Proč to nikdo nevěděl? Nebyl externí alert. Proč nešel rychle opravit? Nikdo neměl napsaný přístupový a reload postup. Jedna chyba, několik systémových děr. Krása provozu, pokud má člověk rád hlavolamy.
+
+### Piš dopad jazykem zákazníka
+
+„TLS handshake failed“ je užitečné pro technika. Pro postmortem ale začni dopadem:
+
+- návštěvníci se nedostali na web kvůli chybě certifikátu,
+- zákazník nemohl dokončit registraci,
+- admin neviděl faktury,
+- webhooky se nedoručovaly,
+- část uživatelů dostávala chybu při ukládání formuláře.
+
+Technickou příčinu doplň až potom. Tento pořádek pomáhá správně prioritizovat opatření. Pokud problém zablokoval hlavní konverzní cestu, nestačí úkol „opravit skript“. Potřebuješ i lepší externí monitoring, jasnou odpovědnost a možná jednoduchý status nebo komunikační postup.
+
+Privacy-first detail: do postmortemu nekopíruj celé requesty, osobní údaje, tokeny, zákaznický obsah ani screenshoty s citlivými daty. Pokud potřebuješ důkaz, použij redigovaný výřez, agregovaný počet, korelační ID nebo odkaz do omezeného interního logu s retencí. Postmortem má vysvětlit incident, ne vyrobit druhý datový problém.
+
+### Opatření musí být ověřitelná
+
+Slabá opatření:
+
+- „Budeme to víc hlídat.“
+- „Dáme si pozor na expiraci.“
+- „Zlepšíme monitoring.“
+- „Někdo doplní dokumentaci.“
+
+Silnější opatření:
+
+- „Přidat externí TLS check bez `--insecure`, alert 30/14/7/3 dny před expirací, vlastník: provoz, termín: pátek.“
+- „Doplnit nginx reload hook po renewal a ověřit `certbot renew --dry-run`, vlastník: backend, termín: zítra.“
+- „Upravit health check, aby rozlišoval DNS, TCP, TLS, HTTP a obsah, vlastník: infra, termín: tento sprint.“
+- „Doplnit runbook: obnova certifikátu, reload služby, veřejné ověření, fallback kontakt, vlastník: provoz, termín: do 48 hodin.“
+
+Dobré opatření má čtyři vlastnosti:
+
+1. Je konkrétní.
+2. Má vlastníka.
+3. Má termín.
+4. Dá se ověřit bez víry v dobrou náladu týmu.
+
+Když opatření nejde ověřit, není to opatření. Je to Slack zpráva s lepším make-upem.
+
+### Uzavři smyčku
+
+Postmortem je hotový až ve chvíli, kdy jsou opatření buď dokončená, nebo vědomě odmítnutá s důvodem. Jinak jen vyrábíš katalog starých průšvihů.
+
+Jednou týdně si projdi otevřená incidentní opatření:
+
+- Které už je hotové a ověřené?
+- Které se zaseklo na přístupu, vlastnictví nebo nejasném rozsahu?
+- Které už nedává smysl, protože se změnila architektura?
+- Které opatření by snížilo dopad i u jiného typu incidentu?
+
+U malého týmu je lepší uzavřít tři malé opravy než mít deset velkých opatření v backlogu. Provozní spolehlivost roste po malých kusech: alert, runbook, test obnovy, lepší chyba, kratší retence logů, jasnější vlastník. Není to sexy. Funguje to, což je v provozu docela luxus.
+
+### Checklist: Postmortem bez viny a bez mlhy
+
+- [ ] Incident je popsaný dopadem na uživatele, ne jen technickou chybou.
+- [ ] Existuje časová osa detekce, diagnostiky, obnovy a komunikace.
+- [ ] Je jasné, co problém odhalilo a co ho mělo odhalit dřív.
+- [ ] Postmortem neobsahuje osobní údaje, tajemství ani celé citlivé logy.
+- [ ] Opatření jsou konkrétní, ověřitelná, mají vlastníka a termín.
+- [ ] Aspoň jedno opatření zlepšuje monitoring nebo alerting.
+- [ ] Aspoň jedno opatření zlepšuje runbook, automatizaci nebo vlastnictví.
+- [ ] Je rozhodnuto, zda incident vyžaduje zákaznickou komunikaci, status page nebo právní posouzení.
+- [ ] Po dokončení opatření někdo ověřil, že oprava opravdu funguje zvenku.
+- [ ] Tým ví, kde najde poslední postmortemy a otevřená opatření.
+
+### Mini úkol
+
+Vezmi poslední provozní problém a vyplň krátkou kartu:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Co nešlo udělat z pohledu uživatele? |  |
+| Jak jsme problém zjistili? |  |
+| Co nás mělo upozornit dřív? |  |
+| Co obnovu zdrželo? |  |
+| Jaké citlivé informace jsme při opravě viděli nebo mohli vidět? |  |
+| Jaké jedno opatření dokončíme do 48 hodin? |  |
+| Jak ověříme, že opatření funguje? |  |
+
+Potom uzavři jednu věc. Ne pět. Jednu. Přidej alert, oprav renewal hook, napiš runbook, omez citlivé logy, nebo doplň vlastníka. Postmortem má být krátká cesta od bolesti ke změně. Ne pamětní deska.
+
 ## Zdroje
 
 - curl: curl man page - volby pro časové limity, TLS ověřování a režim `--insecure`: https://curl.se/docs/manpage.html
@@ -30751,6 +30875,7 @@ Potom udělej jednu konkrétní změnu: přidej `curl` exit code do JSON výstup
 
 ## Pracovní log
 
+- 2026-07-18: Doplněna příloha o postmortemu po provozním incidentu bez hledání viníka: oddělení obnovy od učení, minimální incidentní karta, popis dopadu jazykem zákazníka, privacy-first práce s logy a důkazy, ověřitelná opatření, uzavírání otevřených úkolů, checklist a mini úkol; navázáno na existující provozní kapitoly o TLS, health checku, runboocích a monitoringu.
 - 2026-07-18: Doplněna příloha o health check skriptu bez slepé hodnoty `000000`: rozlišení HTTP statusu a exit codu, diagnostický strom DNS/TCP/TLS/HTTP/obsah, privacy-first rozsah logování, obsahové smoke testy, alert s prvním krokem, checklist a mini úkol; navázáno na existující zdroje k `curl`, HTTP statusům a externímu HTTPS monitoringu.
 - 2026-07-18: Doplněna příloha o provozním vlastnictví HTTPS bez certifikátu na poslední chvíli: doménová karta s vlastníky DNS/hostingu/TLS/monitoringu, diagnostika podle vrstev DNS/TCP/TLS/HTTP/obsah/aplikace, runbook pro obnovu certifikátu a reload služby, předstihové alerty expirace, kvartální test opravitelnosti, checklist a mini úkol; navázáno na existující zdroje k curl, Let’s Encrypt, Certbotu a doménové hygieně.
 - 2026-07-17: Doplněna příloha o databázových migracích bez tichého datového překvapení: rozlišení změn schématu, významu, dat, oprávnění a retence, migrační věta, expand/contract postup, dávkový backfill s checkpointem a ruční brzdou, testy tenant izolace, opatrné logování, rollback plán, úklid dočasných artefaktů, checklist a mini úkol; navázáno na existující zdroje Evropské komise k principům zpracování osobních údajů a OWASP k logování a bezpečné práci s databází.
