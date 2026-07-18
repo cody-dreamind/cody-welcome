@@ -30422,6 +30422,157 @@ Vyber jednu produkční doménu a vyplň kartu:
 
 Potom udělej jednu konkrétní změnu: doplň vlastníka do provozní karty, přidej alert před expirací, ověř reload po obnově, napiš runbook pro certifikát nebo odeber starý sdílený přístup k DNS. HTTPS má být nudná rutina, ne hodinové pátrání, proč zámek přestal existovat.
 
+## Příloha: Health check skript bez slepé hodnoty 000000
+
+Jedno číslo v monitoringu umí být velmi zrádné. `200` většinou uklidní, `500` většinou probudí, ale `000000` často jen říká: „neumím z toho udělat HTTP status“. A to je důležitý rozdíl. Neznamená to automaticky, že aplikace vrátila zvláštní stav. Znamená to, že klient nedostal běžnou HTTP odpověď, kterou by mohl zařadit mezi stavové kódy.
+
+Špatná otázka zní: „Proč web vrátil 000000?“
+
+Lepší otázka zní: „Ve které vrstvě se spojení rozbilo dřív, než vznikla normální HTTP odpověď?“
+
+`curl` umí přes `--write-out` vypsat HTTP status a přes časové limity, TLS ověřování a výstup chyb pomoct odlišit transportní selhání od aplikační odpovědi. MDN zase popisuje význam běžných HTTP stavových kódů. Odkazy jsou ve zdrojích. Prakticky: `000000` není status webu. Je to diagnostická stopa klienta.
+
+Codyho komentář: Když monitoring zahlásí `httpStatus: 000000`, netvař se, že máš šest nul důkazů. Máš jednu velkou nulu informací, pokud k ní nepřidáš exit code, chybovou hlášku a vrstvu selhání. Nula bez kontextu je prostě kulaté rameny pokrčení.
+
+### Rozliš HTTP status a exit code
+
+Health check by měl ukládat dvě různé věci:
+
+| Signál | Co znamená | Příklad |
+| --- | --- | --- |
+| HTTP status | server vrátil HTTP odpověď | `200`, `301`, `404`, `500` |
+| Exit code klienta | kontrolní nástroj dokončil nebo selhal | timeout, TLS chyba, prázdná odpověď, DNS chyba |
+| Chybová vrstva | kde se požadavek rozbil | DNS, TCP, TLS, HTTP, obsah |
+| Doba odpovědi | jestli web jen nezpomaluje | latence v ms |
+| Ověřovací text | jestli odpovídá správná stránka | title, health token, stabilní text |
+
+Pokud ukládáš jen `httpStatus`, všechny chyby před HTTP vypadají stejně. DNS chyba, odmítnuté spojení, expirovaný certifikát, timeout i prázdná odpověď skončí v jedné krabici. To je pohodlné pro JSON, ale mizerné pro incident.
+
+### Navrhni check jako malý diagnostický strom
+
+Jednoduchý externí check může mít tyto kroky:
+
+1. Ověřit DNS překlad domény.
+2. Ověřit TCP spojení na port 443.
+3. Ověřit TLS bez vypínání certifikátové kontroly.
+4. Vyžádat veřejnou URL s krátkým, ale realistickým timeoutem.
+5. Uložit HTTP status, exit code a stručnou chybu.
+6. Ověřit stabilní obsah, ne jen libovolnou odpověď.
+7. Při selhání přidat odkaz na správný runbook podle vrstvy.
+
+Pro malý tým to nemusí být složitý observability systém. Stačí skript, který nevyrobí falešný klid. Příklad minimálního výstupu:
+
+```json
+{
+  "webOk": false,
+  "httpStatus": "000000",
+  "curlExitCode": 52,
+  "failureLayer": "http",
+  "reason": "empty_reply_from_server",
+  "checkedUrl": "https://example.com/",
+  "checkedAt": "2026-07-18T01:00:00Z"
+}
+```
+
+Hodnota `curlExitCode` není sama o sobě produktová metrika. Je to provozní zkratka pro člověka nebo automatizaci, která rozhoduje další krok. Když je důvod `tls_certificate_expired`, půjdeš jinam než při `content_mismatch`.
+
+### Neukládej víc dat, než potřebuje incident
+
+Health check je provozní nástroj, ne další analytika návštěvníků. Do logu obvykle nepatří:
+
+- celé HTML odpovědi,
+- cookies,
+- autorizační hlavičky,
+- IP adresy běžných návštěvníků,
+- screenshoty s osobními údaji,
+- payloady formulářů,
+- tajemství z interních endpointů.
+
+Naopak užitečné je držet:
+
+- kontrolovanou URL,
+- čas kontroly,
+- vrstvu selhání,
+- HTTP status, pokud existuje,
+- exit code kontrolního nástroje,
+- zkrácenou technickou chybu,
+- dobu odpovědi,
+- identifikátor runbooku nebo vlastníka.
+
+Privacy-first monitoring má být chudý na data a bohatý na rozhodnutí. Pokud z logu nejde poznat další krok, je moc chudý. Pokud obsahuje půlku odpovědi aplikace, je moc zvědavý.
+
+### `200 OK` ještě neznamená, že je všechno v pořádku
+
+Opačný problém je falešně zelený monitoring. Server může vracet `200`, ale posílat prázdnou šablonu, chybný tenant, stránku údržby, přihlašovací obrazovku místo veřejného webu nebo obsah z jiné aplikace po špatném deployi.
+
+Proto u klíčových veřejných stránek přidej obsahový smoke test:
+
+| URL | Očekávaný signál | Proč |
+| --- | --- | --- |
+| Homepage | stabilní title nebo text značky | web není prázdný ani cizí |
+| Pricing | text hlavního plánu nebo CTA | obchodní stránka se renderuje |
+| Dokumentace | nadpis hlavní sekce | help obsah je dostupný |
+| Status page | komponenty nebo stav systému | zákazník najde provozní informaci |
+| API health | strojově čitelný stav bez detailů | integrace poznají dostupnost |
+
+Obsahový test nemá být křehký na každý copywriting. Vyber stabilní signál, který se mění jen vědomě. Pokud je změna textu legitimní, upravíš test v rámci release, stejně jako bys upravil screenshot nebo dokumentaci.
+
+### Alert má umět navrhnout první krok
+
+Když check selže, alert nemá posílat jen „web down“. Má říct:
+
+- co přesně bylo kontrolováno,
+- zda existuje HTTP status,
+- jaký je exit code nebo důvod selhání,
+- která vrstva pravděpodobně selhala,
+- kdy naposledy kontrola prošla,
+- kdo je vlastník,
+- který runbook otevřít.
+
+Příklady:
+
+| Selhání | První krok |
+| --- | --- |
+| DNS nejde přeložit | zkontrolovat DNS záznamy a registraci domény |
+| TCP connection refused | zkontrolovat webserver, firewall, hosting |
+| TLS hostname mismatch | ověřit certifikát, SAN a proxy konfiguraci |
+| Empty reply | zkontrolovat reverse proxy a upstream aplikaci |
+| HTTP 502 | ověřit upstream proces a nginx log |
+| HTTP 200, ale chybí obsah | prověřit deploy, routování, build nebo šablonu |
+
+Takhle alert zkracuje dobu do opravy. Ne proto, že by byl chytrý jako celý tým, ale protože přestal být líný.
+
+### Checklist: Health check bez slepých nul
+
+- [ ] Skript ukládá HTTP status i exit code kontrolního nástroje.
+- [ ] Selhání před HTTP odpovědí nekončí jen jako neurčité `000000`.
+- [ ] Monitoring rozlišuje DNS, TCP, TLS, HTTP status a obsah.
+- [ ] TLS kontrola běží bez `--insecure` v běžném health checku.
+- [ ] Check má realistický timeout a nedrží incident minuty v tichu.
+- [ ] U klíčových stránek existuje stabilní obsahový smoke test.
+- [ ] Alert obsahuje poslední úspěšný běh, vlastníka a runbook.
+- [ ] Logy health checku neobsahují cookies, tajemství ani celé odpovědi.
+- [ ] Interní `/health` neprozrazuje citlivé detaily infrastruktury.
+- [ ] Po incidentu se upraví skript, pokud selhání neuměl dobře pojmenovat.
+
+### Mini úkol
+
+Vezmi jeden existující health check a vyplň kartu:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jakou URL kontroluje? |  |
+| Jaký timeout používá? |  |
+| Ukládá HTTP status? |  |
+| Ukládá exit code nebo technický důvod selhání? |  |
+| Rozlišuje DNS, TLS, HTTP a obsah? |  |
+| Jaký stabilní obsah ověřuje? |  |
+| Co přesně posílá v alertu? |  |
+| Jaká data z odpovědi nesmí ukládat? |  |
+| Kdo je vlastník runbooku? |  |
+
+Potom udělej jednu konkrétní změnu: přidej `curl` exit code do JSON výstupu, rozděl `000000` podle příčiny, přidej obsahový smoke test, odstraň `--insecure`, zkrať timeout nebo doplň runbook odkaz do alertu. Monitoring nemá být dramatický. Má být nudně užitečný právě v okamžiku, kdy web přestane odpovídat.
+
 ## Zdroje
 
 - curl: curl man page - volby pro časové limity, TLS ověřování a režim `--insecure`: https://curl.se/docs/manpage.html
@@ -30600,6 +30751,7 @@ Potom udělej jednu konkrétní změnu: doplň vlastníka do provozní karty, p�
 
 ## Pracovní log
 
+- 2026-07-18: Doplněna příloha o health check skriptu bez slepé hodnoty `000000`: rozlišení HTTP statusu a exit codu, diagnostický strom DNS/TCP/TLS/HTTP/obsah, privacy-first rozsah logování, obsahové smoke testy, alert s prvním krokem, checklist a mini úkol; navázáno na existující zdroje k `curl`, HTTP statusům a externímu HTTPS monitoringu.
 - 2026-07-18: Doplněna příloha o provozním vlastnictví HTTPS bez certifikátu na poslední chvíli: doménová karta s vlastníky DNS/hostingu/TLS/monitoringu, diagnostika podle vrstev DNS/TCP/TLS/HTTP/obsah/aplikace, runbook pro obnovu certifikátu a reload služby, předstihové alerty expirace, kvartální test opravitelnosti, checklist a mini úkol; navázáno na existující zdroje k curl, Let’s Encrypt, Certbotu a doménové hygieně.
 - 2026-07-17: Doplněna příloha o databázových migracích bez tichého datového překvapení: rozlišení změn schématu, významu, dat, oprávnění a retence, migrační věta, expand/contract postup, dávkový backfill s checkpointem a ruční brzdou, testy tenant izolace, opatrné logování, rollback plán, úklid dočasných artefaktů, checklist a mini úkol; navázáno na existující zdroje Evropské komise k principům zpracování osobních údajů a OWASP k logování a bezpečné práci s databází.
 - 2026-07-17: Doplněna příloha o externí HTTPS kontrole bez falešného klidu: rozlišení interního health endpointu, veřejného DNS/TLS/HTTP monitoringu a produktového smoke testu, riziko proxy a `curl -k`, diagnostické alerty, checklist a mini úkol; ověřen a doplněn zdroj curl man page k TLS ověřování a provozním volbám.
