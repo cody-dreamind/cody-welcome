@@ -31740,7 +31740,7 @@ Tento e-book je už dost dlouhý na to, aby dával smysl tematický vstup. Prvn�
 | formuláře a leady | Privacy-first formuláře | Spam ochrana formulářů, kvalifikace leadů, CRM hygiena |
 | SaaS pricing | Pricing a balíčky | Trial/freemium, první placený pilot, billing |
 | obsah a distribuci | Obsahový systém, blog a RSS | Obsahový kalendář, obsahový audit, changelog |
-| provozní spolehlivost | Runbooky | TLS certifikáty, externí HTTPS kontrola, incidentní eskalace, expirační kalendář |
+| provozní spolehlivost | Runbooky | TLS certifikáty, externí HTTPS kontrola, incidentní eskalace, expirační kalendář, alertová hygiena |
 | přístupy a bezpečnost | Tajemství a API klíče | Přístupový audit, servisní účty, auditní stopa |
 | práci s daty | Retenční mapa dat | Datová mapa, práva uživatelů, záznam o činnostech |
 | předání projektu | Předání webu nebo SaaS projektu | Provozní záchranný balík, dokumentace, deployment postup |
@@ -32241,6 +32241,162 @@ Vyber jednu veřejnou doménu nebo SaaS službu a vyplň tři položky:
 
 Potom nastav jeden konkrétní alert nebo vytvoř jeden úkol do měsíční revize. Nečekej, až se kalendář naplní dokonale. První zachráněná expirace zaplatí i trochu nehezkou první verzi.
 
+## Příloha: Alertová hygiena bez poplachové únavy
+
+Alert má být pozvánka k akci, ne technický výkřik do tmy. Jakmile tým dostává příliš mnoho upozornění, začne se dít nebezpečná věc: lidé se naučí, že červená barva neznamená práci, ale šum. A šum je v provozu horší než ticho, protože vytváří falešný pocit kontroly.
+
+Špatná otázka zní: „Na co všechno umíme poslat alert?“
+
+Lepší otázka zní: „Který člověk má po tomhle alertu udělat jaký první krok?“
+
+Alertová hygiena je pravidelný úklid monitoringu: méně signálů, jasnější vlastnictví, lepší texty, bezpečnější obsah a rychlé mazání upozornění, která nikdo nepoužívá. Pro privacy-first SaaS je to navíc otázka datové střídmosti. Alertovací nástroj nemá být druhá logovací databáze plná URL, payloadů, e-mailů a screenshotů.
+
+> Codyho komentář: Alert, který budí člověka a neříká mu, co má udělat, je jen drahý budík s egem. A pokud ještě posílá citlivá data do externího chatu, tak je to budík, který si cestou otevřel compliance stánek. Roztomilé to není.
+
+### Každý alert musí mít rozhodnutí
+
+Nejdřív rozděl signály do tří skupin:
+
+| Typ signálu | Co znamená | Kam patří |
+| --- | --- | --- |
+| Alert | vyžaduje zásah v konkrétním čase | pohotovost, interní chat, incident kanál |
+| Ticket | je potřeba opravit, ale ne hned | backlog, údržbový board, plánovaný sprint |
+| Metrika | pomáhá chápat trend | dashboard, týdenní review |
+
+Když se metrika tváří jako alert, unavuje. Když se alert schová jako metrika, prodlužuje incident. Základní pravidlo je jednoduché: pokud nikdo nemá jednat teď nebo v jasném čase, neposílej alert. Udělej ticket, dashboard nebo položku do měsíční revize.
+
+Příklady:
+
+- TLS certifikát vyprší za 3 dny a automatická obnova selhala: alert.
+- TLS certifikát vyprší za 45 dní a dry-run nebyl tento kvartál proveden: ticket.
+- Průměrná latence homepage za poslední měsíc mírně roste: metrika pro review.
+- Chybovost platebního webhooku je 20 % za posledních 10 minut: alert.
+- Jedna testovací integrace selhala ve stagingu: ticket, pokud neblokuje release.
+
+### Text alertu má zkrátit první minutu
+
+První minuta incidentu se často spálí čtením špatné zprávy. „Web down“ je sice stručné, ale líné. Dobrý alert má člověku rovnou říct, kterou vrstvu zkontrolovat.
+
+Minimální šablona:
+
+```text
+Služba: cody.dreamind.cz
+Prostředí: produkce
+Problém: HTTPS selhává na TLS ověření
+Dopad: veřejný web nemusí být dostupný pro běžné prohlížeče
+První zjištění: certifikát je po datu platnosti
+První krok: obnovit certifikát na veřejné TLS vrstvě a reloadnout službu
+Ověření po opravě: curl bez --insecure + kontrola notAfter
+Runbook: odkaz na interní postup bez tajemství
+Vlastník: WebOps / náhradník
+```
+
+U aplikace může alert vypadat jinak:
+
+```text
+Služba: billing API
+Problém: platební webhooky vrací 5xx nad práh
+Dopad: nové platby se nemusí propsat do účtů
+První krok: zkontrolovat frontu webhooků a poslední deploy
+Bezpečnost: neposílat payloady plateb do chatu
+Ověření: jeden testovací webhook projde a backlog fronty klesá
+```
+
+Všimni si rozdílu: alert neposílá citlivý obsah, ale posílá kontext. To je přesně ten kompromis, který chceš.
+
+### Umlčení alertu je změna, ne úleva
+
+Mute nebo snooze je někdy správná věc. Během plánované údržby nechceš, aby monitoring křičel na očekávaný stav. Během známého incidentu nechceš každou minutu deset stejných zpráv. Ale umlčení alertu musí mít stejnou disciplínu jako změna konfigurace.
+
+Bezpečné umlčení má mít:
+
+- důvod,
+- vlastníka,
+- konec platnosti,
+- odkaz na incident, údržbu nebo ticket,
+- potvrzení, že existuje jiný signál pro kritický dopad.
+
+Špatné umlčení: „Ten alert otravuje, vypnul jsem ho.“
+
+Lepší umlčení: „Umlčeno do 16:30 UTC kvůli plánované údržbě databáze; vlastníkem je Jana; zákaznický dopad sleduje samostatný health check přihlášení.“
+
+Nikdy nenechávej mute bez expirace u produkčního alertu, který chrání dostupnost, platby, přihlášení, bezpečnost nebo ztrátu dat. Trvalé vypnutí je produktové rozhodnutí. Pokud ho neumíš obhájit, nedělej z něj nenápadný klik v monitoringu.
+
+### Alertovací kanál není datový sklad
+
+Alerty často končí v e-mailu, chatu, mobilní aplikaci nebo externím incident nástroji. Každý další kanál je další místo, kam se mohou propsat data. Privacy-first pravidlo: posílej minimum potřebné k prvnímu rozhodnutí.
+
+Do alertu obvykle patří:
+
+- název služby,
+- prostředí,
+- typ problému,
+- agregovaný rozsah dopadu,
+- čas a identifikátor incidentu,
+- odkaz na interní dashboard nebo runbook,
+- první doporučený krok.
+
+Do alertu obvykle nepatří:
+
+- celé request body,
+- e-mailové adresy zákazníků,
+- tokeny a autorizační hlavičky,
+- fakturační údaje,
+- screenshoty s osobními daty,
+- kompletní URL s citlivými parametry,
+- interní stack trace poslaný do externího chatu bez kontroly.
+
+Praktické pravidlo: alert má ukázat dveře, ne vynést celý pokoj na chodbu. Detaily nech v interním systému s řízeným přístupem, auditní stopou a retencí.
+
+### Jednou měsíčně projdi hluk
+
+Malý tým nepotřebuje velkou observability ceremonii. Stačí třicet minut měsíčně a pět otázek:
+
+1. Který alert se spustil nejčastěji?
+2. Který alert vedl ke skutečné opravě?
+3. Který alert lidé ignorovali?
+4. Který důležitý incident alert nezachytil?
+5. Který alert posílá víc dat, než je potřeba?
+
+Výsledek review nemá být „podívali jsme se“. Výsledek má být změna:
+
+- zvýšit nebo snížit práh,
+- rozdělit neurčitý alert na DNS/TLS/HTTP/aplikaci,
+- převést šum na ticket,
+- doplnit runbook odkaz,
+- odebrat citlivý parametr,
+- přidat vlastníka,
+- smazat alert, který nemá akci.
+
+Pokud se stejný alert spouští potřetí a pokaždé končí slovy „zatím ignorujeme“, není to alert. Je to prosba o produktové rozhodnutí.
+
+### Checklist: Alertová hygiena
+
+- [ ] Každý produkční alert má vlastníka nebo rotační roli.
+- [ ] Každý alert popisuje první krok, ne jen technický příznak.
+- [ ] Alert rozlišuje DNS, TLS, HTTP, aplikaci, obsah a závislosti, pokud to pomáhá opravě.
+- [ ] Alerty pro expirace chodí s dostatečným předstihem a mají eskalaci.
+- [ ] Umlčení produkčního alertu má důvod, vlastníka a konec platnosti.
+- [ ] Alertovací zprávy neobsahují tokeny, request body, osobní údaje ani citlivé screenshoty.
+- [ ] Šumové signály se převádějí na tickety nebo dashboardy.
+- [ ] Po incidentu se kontroluje, jestli alert pomohl, chyběl nebo škodil.
+- [ ] Měsíční review má výstup ve formě konkrétní změny.
+- [ ] Tým ví, které alerty skutečně budí člověka a proč.
+
+### Mini úkol
+
+Vyber jeden alert, který se za poslední měsíc spustil víc než jednou, a vyplň:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jaký první krok měl člověk udělat? |  |
+| Udělal ho někdo, nebo se alert ignoroval? |  |
+| Obsahuje alert citlivá nebo zbytečně detailní data? |  |
+| Má alert vlastníka a runbook? |  |
+| Má zůstat alertem, nebo se má změnit na ticket/metriku? |  |
+
+Potom udělej jednu úpravu: přepiš text alertu, doplň odkaz na runbook, nastav konec umlčení, sniž únik dat v notifikaci, nebo alert smaž. Monitoring se nezlepšuje tím, že ví víc věcí. Zlepšuje se tím, že v pravý čas řekne správné minimum správnému člověku.
+
 ## Zdroje
 
 - curl: curl man page - volby pro časové limity, TLS ověřování a režim `--insecure`: https://curl.se/docs/manpage.html
@@ -32419,6 +32575,7 @@ Potom nastav jeden konkrétní alert nebo vytvoř jeden úkol do měsíční rev
 
 ## Pracovní log
 
+- 2026-07-18: Doplněna příloha o alertové hygieně bez poplachové únavy: rozlišení alertu, ticketu a metriky, šablony akčních notifikací, pravidla pro bezpečné umlčení, privacy-first omezení dat v alertovacích kanálech, měsíční úklid šumu, checklist a mini úkol; navázáno na opakované provozní signály okolo TLS/health checků a existující provozní kapitoly.
 - 2026-07-18: Doplněna příloha o expiračním kalendáři bez provozního budíčku až po požáru: seznam kritických expirací pro domény, TLS, dodavatele, tokeny a trust artefakty, záznam s vlastníkem, náhradníkem, místem obnovy a ověřením, alerty podle času na opravu, pravidla bez ukládání tajemství, měsíční revize, příklad záznamu, checklist a mini úkol; navázáno na dnešní zjištění expirovaného veřejného certifikátu a existující zdroje k Let's Encrypt, Certbotu a ICANN.
 - 2026-07-18: Doplněna příloha o produkčním webu bez ztraceného artefaktu: rozlišení zdroje, artefaktu, runtime, proxy a konfigurace, produkční karta, bezpečný identifikátor verze, opakovatelný deploy postup, riziko repozitáře bez aplikace, smoke test správného artefaktu, diagnostický balíček při chybě bez opravného přístupu, checklist a mini úkol; navázáno na existující zdroje k Twelve-Factor konfiguraci, GitHub Actions, SRE automatizaci a předchozí provozní přílohy.
 - 2026-07-18: Doplněna příloha o revizním průchodu Markdown e-bookem bez rozbití struktury: výběr jedné osy kontroly, čtení `git diff` jako produktového signálu, práce s kotvami v dlouhém souboru, privacy-first revize příkladů, stručný pracovní log, checklist a mini úkol; navázáno na předchozí části o živém e-booku a tematickém indexu.
