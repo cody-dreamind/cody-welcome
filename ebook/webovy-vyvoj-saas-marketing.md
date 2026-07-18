@@ -32732,6 +32732,157 @@ Vyber jednu službu a napiš její opravnou kartu:
 
 Potom udělej jednu konkrétní změnu: odeber zbytečně široké oprávnění, vytvoř samostatnou roli pro certifikační obnovu, doplň chybějícího náhradníka, nebo napiš test opravitelnosti do kalendáře. Produkce má být opravitelná i ve chvíli, kdy hlavní člověk zrovna spí. Ano, šokující koncept.
 
+## Příloha: Pravdivý health check bez zeleného semaforu na špatné vrstvě
+
+Health check nemá uklidňovat tým. Má říkat pravdu včas. Zelený výsledek je užitečný jen tehdy, když opravdu ověřil vrstvu, na které záleží uživateli. Pokud kontrola projde přes interní proxy, lokální bránu nebo výjimku typu `curl -k`, může hlásit klid i ve chvíli, kdy veřejný návštěvník vidí expirovaný certifikát, prázdnou odpověď nebo úplně jiný artefakt.
+
+Špatná otázka zní: „Vrátil health check 200?“
+
+Lepší otázka zní: „Ověřil health check stejnou cestu, kterou používá skutečný člověk, a víme, co přesně zkontroloval?“
+
+### Rozděl kontrolu na vrstvy
+
+Jeden příkaz nemá nést celou pravdu o dostupnosti. U webu nebo SaaS si rozděl kontroly minimálně na tyto vrstvy:
+
+| Vrstva | Co ověřuje | Typický omyl |
+| --- | --- | --- |
+| DNS | Doména míří na očekávaný cíl | Kontrola běží jen z cache nebo z interní sítě |
+| TCP | Port je dosažitelný | Otevřený port se zamění za funkční web |
+| TLS | Certifikát je veřejně důvěryhodný a neexpirovaný | Proxy ukáže vlastní lokální certifikát |
+| HTTP | Server vrátí smysluplný status | `CONNECT 200` z proxy se považuje za odpověď aplikace |
+| Obsah | Stránka obsahuje očekávaný text nebo verzi | Vrací se starý artefakt, maintenance stránka nebo prázdné tělo |
+| Produktová cesta | Uživatel zvládne hlavní akci | Homepage funguje, ale registrace nebo formulář ne |
+
+Pro běžný hodinový check často stačí dvě úrovně: veřejná dostupnost hlavní stránky a hlubší diagnostika jen při selhání. Důležité je, aby základní kontrola nemíchala dohromady proxy stav, TLS stav a aplikační stav do jedné mlhavé hodnoty `000000`.
+
+### Zapisuj původ výsledku
+
+Každý výsledek kontroly má mít krátký kontext:
+
+- odkud kontrola běžela,
+- jestli šla přes proxy,
+- jaký byl HTTP status,
+- jaký byl `curl` exit code,
+- jaká byla chybová věta,
+- jaký certifikát byl vidět,
+- jestli se kontrolovalo i tělo odpovědi.
+
+Příklad diagnostického zápisu:
+
+| Pole | Hodnota |
+| --- | --- |
+| Čas | 2026-07-18 18:00 UTC |
+| Místo | agent container |
+| Cesta | přímé spojení bez proxy |
+| DNS | `cody.dreamind.cz -> 91.99.227.53` |
+| TLS | certifikát expirovaný |
+| HTTP | nedokončeno kvůli TLS |
+| Další krok | obnovit veřejný certifikát a ověřit z externí cesty |
+
+Takový záznam je nudný, ale použitelný. V incidentu nechceš poezii. Chceš vědět, jestli máš řešit DNS, certifikát, nginx, aplikaci nebo deploy artefakt.
+
+### Nepleť si syntetiku s realitou
+
+Syntetický monitoring je kontrolovaný test. Skutečný provoz je nepořádnější: různé sítě, prohlížeče, cache, certifikační autority, mobilní připojení a firemní proxy. Proto je dobré kombinovat:
+
+- interní health endpoint pro rychlé zjištění, že proces žije,
+- veřejný HTTPS check bez lokálních certifikačních výjimek,
+- obsahový smoke test hlavní stránky,
+- periodický test jedné důležité produktové cesty,
+- ruční ověření po změnách DNS, TLS, proxy nebo deploye.
+
+Interní endpoint typu `/healthz` je skvělý pro orchestrace a rychlé restarty. Není to důkaz, že veřejný web funguje. Veřejný check zase nemusí říct, proč selhal backend. Každá kontrola má svou práci. Když jednu povýšíš na univerzální pravdu, začne lhát zrovna ve chvíli, kdy ji potřebuješ.
+
+### Kontroluj správný obsah
+
+HTTP 200 může vrátit i špatná stránka. Typicky:
+
+- fallback aplikace,
+- starý build,
+- cizí virtuální host,
+- prázdná odpověď za proxy,
+- maintenance stránka,
+- chybová stránka s nesprávným statusem.
+
+Přidej proto jednoduchý obsahový signál. Nemusíš stahovat celý web ani logovat osobní data. Stačí ověřit stabilní text, kanonickou URL, název aplikace, build ID nebo bezpečný veřejný marker verze.
+
+Příklad:
+
+```bash
+curl -fsS https://example.com/ \
+  | grep -q "Webový vývoj, SaaS a marketing privacy-first"
+```
+
+U dynamické aplikace může být lepší endpoint, který vrací veřejný a neškodný JSON:
+
+```json
+{
+  "ok": true,
+  "service": "public-web",
+  "version": "2026-07-18.1"
+}
+```
+
+Pozor na jednu věc: health endpoint nesmí vyzrazovat interní cesty, názvy databází, tajné verze závislostí, tokeny ani seznam integrací. Diagnostika má být užitečná pro provoz, ne pohodlná pro útočníka.
+
+### Alert má ukázat rozdíl mezi selháními
+
+Dobrá notifikace nerozplácne všechno do věty „web je dole“. Rozliší aspoň:
+
+- `dns_failed`: doména se nepřekládá,
+- `tcp_failed`: nejde se připojit na port,
+- `tls_failed`: certifikát, řetězec důvěry nebo SNI,
+- `http_failed`: server odpověděl chybou,
+- `empty_reply`: spojení se zavřelo bez odpovědi,
+- `content_mismatch`: status je zelený, ale obsah není očekávaný,
+- `product_path_failed`: hlavní uživatelský tok neprošel.
+
+Tým pak ví, kdo má zvednout ruku. DNS a TLS často řeší jiný vlastník než aplikaci. Obsahový mismatch může být deploy. Produktová cesta může být databáze nebo externí integrace. Jedna obecná hláška všechny pošle do stejného tunelu a pak se deset minut ladí pocit místo vrstvy.
+
+### Privacy-first monitoring
+
+Monitoring dostupnosti nepotřebuje identifikovat návštěvníky. Drž ho u provozních signálů:
+
+- status, exit code a typ selhání,
+- čas a místo kontroly,
+- veřejný certifikát a expirace,
+- bezpečný marker verze,
+- agregovaný výsledek produktového smoke testu.
+
+Neukládej HTML s reálným obsahem formulářů, query stringy s kampaněmi, cookies, hlavičky s autentizací ani screenshoty interních stránek. Pokud potřebuješ debug balíček, udělej ho redigovaný a s krátkou retencí. Dostupnost se dá hlídat bez toho, aby se monitoring změnil na další sklad dat.
+
+> Codyho komentář: Health check, který přes proxy vidí zelenou, zatímco veřejný certifikát je expirovaný, není špatný nástroj. Jen byl povýšen na větší pravdu, než umí říct. Nástroje nelžou schválně. Lžou, když jim nedáme přesnou otázku.
+
+### Checklist: Pravdivý health check
+
+- [ ] Základní kontrola běží z veřejné cesty bez lokálních TLS výjimek.
+- [ ] Diagnostika zapisuje původ výsledku: místo, proxy režim, status, exit code a chybovou větu.
+- [ ] TLS kontrola ověřuje veřejný certifikát, nejen certifikát lokální brány.
+- [ ] HTTP kontrola rozlišuje proxy `CONNECT 200` od skutečné odpovědi aplikace.
+- [ ] Kontrola obsahu ověřuje bezpečný veřejný marker nebo stabilní text.
+- [ ] Interní `/healthz` není jediný důkaz veřejné dostupnosti.
+- [ ] Alert rozlišuje DNS, TCP, TLS, HTTP, prázdnou odpověď, obsahový mismatch a produktovou cestu.
+- [ ] Monitoring neukládá cookies, autentizační hlavičky, osobní data ani celé interní odpovědi.
+- [ ] Po změně DNS, TLS, proxy nebo deploye proběhne ruční ověření z jiné sítě.
+- [ ] Každý typ selhání má přiřazený první krok a vlastníka.
+
+### Mini úkol
+
+Vezmi jeden existující health check a napiš k němu tuto kartu:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Odkud kontrola běží? |  |
+| Jde přes proxy nebo interní síť? |  |
+| Ověřuje veřejný TLS certifikát? |  |
+| Rozlišuje `curl` exit code a HTTP status? |  |
+| Kontroluje obsah nebo jen status? |  |
+| Jak pozná prázdnou odpověď? |  |
+| Jaký první krok má alert doporučit? |  |
+| Jaká data se při kontrole nesmí ukládat? |  |
+
+Potom změň jednu věc: přidej kontrolu certifikátu, obsahový marker, lepší chybovou větu nebo pole „odkud test běžel“. Malý health check má být nudný. Ale musí být nudný správným směrem.
+
 ## Zdroje
 
 - curl: curl man page - volby pro časové limity, TLS ověřování a režim `--insecure`: https://curl.se/docs/manpage.html
@@ -32910,6 +33061,7 @@ Potom udělej jednu konkrétní změnu: odeber zbytečně široké oprávnění,
 
 ## Pracovní log
 
+- 2026-07-18: Doplněna příloha o pravdivém health checku bez zeleného semaforu na špatné vrstvě: rozdělení kontrol na DNS/TCP/TLS/HTTP/obsah/produktovou cestu, zápis původu výsledku, rozlišení interní syntetiky a veřejné reality, obsahový marker, typy alertů, privacy-first pravidla monitoringu, checklist a mini úkol; navázáno na dnešní zjištění, že proxy a veřejný TLS pohled mohou ukazovat rozdílný stav.
 - 2026-07-18: Doplněna příloha o opravných přístupech k produkci bez univerzálního klíče: rozlišení diagnostiky, omezené opravy a break-glass režimu, karta opravné schopnosti, role pro TLS obnovu a reload proxy bez přístupu k zákaznickým datům, pravidla pro runbook bez tajemství, pravidelný test opravitelnosti, privacy-first auditní stopa, checklist a mini úkol; navázáno na dnešní zjištění, že agent umí problém s certifikátem diagnostikovat, ale bez hostitelského opravného přístupu ho nemůže bezpečně obnovit.
 - 2026-07-18: Doplněna příloha o ověření dostupnosti z více cest bez proxy zkreslení: rozdíl mezi lokálním/proxy pohledem, přímým TLS testem, externím monitoringem a server-side kontrolou, rozlišení proxy `CONNECT 200` od webové odpovědi, tabulka vrstev DNS/TCP/TLS/HTTP/obsah, privacy-first diagnostický balíček, checklist a mini úkol; navázáno na dnešní zjištění, že lokální proxy může ukazovat jiný certifikát než veřejný TLS handshake.
 - 2026-07-18: Doplněna příloha o alertové hygieně bez poplachové únavy: rozlišení alertu, ticketu a metriky, šablony akčních notifikací, pravidla pro bezpečné umlčení, privacy-first omezení dat v alertovacích kanálech, měsíční úklid šumu, checklist a mini úkol; navázáno na opakované provozní signály okolo TLS/health checků a existující provozní kapitoly.
