@@ -33031,6 +33031,116 @@ Připrav kartu nouzové stránky pro jeden web nebo SaaS:
 
 Potom udělej jednu konkrétní změnu: vytvoř statickou šablonu, oprav status z `200` na `503`, doplň `Cache-Control`, odstraň tracking z chybové stránky, nebo přidej test nouzového režimu do provozního runbooku. Výpadek je nepříjemný. Výpadek s falešným statusem, trackerem a starou cache je zbytečně kreativní.
 
+## Příloha: Case study bez úniku zákaznických dat
+
+Case study je jeden z nejlepších B2B marketingových formátů, protože neprodává jen slib. Ukazuje práci, kontext, překážky a výsledek. Zároveň je to formát, který umí nenápadně vytáhnout ven příliš mnoho interních nebo osobních informací. Stačí jeden screenshot s e-mailem, přesným objemem dat, interním názvem projektu nebo jménem člověka, který s publikací nikdy nesouhlasil, a hezký obchodní materiál se změní na bezpečnostní nepořádek.
+
+Privacy-first case study nezačíná otázkou „co všechno můžeme ukázat?“. Začíná otázkou: „Jaký důkaz hodnoty dokážeme předat bez toho, abychom odhalili víc, než zákazník i čtenář rozumně čekají?“
+
+### Napiš důkaz jako pracovní změnu
+
+Slabá case study často vypadá takto: klient měl problém, my jsme dodali řešení, všechno dopadlo výborně. Čtenář se z ní dozví hlavně to, že autor má rád vlastní práci. Gratuluji, ego dostalo landing page.
+
+Silnější struktura popisuje změnu v práci zákazníka:
+
+1. Předtím: Jaký opakovaný problém tým řešil.
+2. Zásah: Co se změnilo v procesu, produktu, integraci nebo rozhodování.
+3. Potom: Jak se poznalo, že práce je jednodušší, rychlejší, levnější nebo bezpečnější.
+4. Poučení: Co by měl podobný tým udělat jako první malý krok.
+
+Příklad:
+
+> Před změnou musel obchodní tým ručně přepisovat poptávky z webu do CRM. Po úpravě formuláře, validaci polí a napojení přes frontu vzniká lead automaticky, obchodník dostane jen potřebný kontext a zákaznický e-mail se nepropíše do analytiky. Výsledek: méně ruční práce, méně chyb a jasnější hranice mezi marketingem a obchodem.
+
+Tohle je konkrétnější než „zvýšili jsme efektivitu“. A pořád to nevyžaduje zveřejnit jména lidí, exporty z CRM ani detailní architekturu zákazníka.
+
+### Rozděl údaje na veřejné, schvalované a zakázané
+
+Před psaním si udělej malou publikační kartu. Je nudná. Právě proto funguje.
+
+| Typ informace | Režim | Příklad |
+| --- | --- | --- |
+| Veřejné údaje | lze použít bez dalšího překvapení | název firmy, pokud už je veřejně uvedená jako zákazník |
+| Schvalované údaje | použít jen po výslovném schválení | citace, logo, konkrétní výsledky, screenshoty |
+| Agregované údaje | použít bez identifikace člověka | „desítky poptávek měsíčně“, „nižší ruční práce v supportu“ |
+| Redigované údaje | použít po začernění nebo převedení na ukázku | snímek obrazovky bez e-mailů, jmen, tokenů a interních URL |
+| Zakázané údaje | nepoužívat | osobní údaje, tajemství, neveřejné obchodní podmínky, incidentní detaily |
+
+Pokud si nejsi jistý, dej údaj do schvalovaného nebo zakázaného režimu. Case study má budovat důvěru, ne testovat, kolik detailů projde, než si toho někdo všimne.
+
+### Nepředstírej anonymizaci
+
+„Anonymizovaná case study“ často znamená jen to, že se z názvu firmy udělá „středně velký e-shop“. Jenže když text ponechá obor, město, unikátní proces, přesný měsíc migrace a screenshot rozhraní, může být zákazník pořád poznatelný. To není anonymizace, to je hádanka.
+
+Lepší je psát přesněji:
+
+- „redigovaná ukázka“ pro screenshot nebo úryvek, kde byly odstraněny citlivé detaily,
+- „agregovaný výsledek“ pro čísla bez identifikace konkrétní osoby,
+- „syntetický příklad podle reálného scénáře“ pro vzdělávací ukázku,
+- „publikováno se souhlasem zákazníka“ pro jmenovanou referenci.
+
+Viz zdroje Evropské komise k minimalizaci osobních údajů a EDPB k pseudonymizaci. Praktický dopad je jednoduchý: pokud se dá člověk nebo zákazník rozumně znovu poznat, chovej se k tomu jako k citlivému publikačnímu materiálu.
+
+### Screenshot je datový export
+
+Screenshot nepůsobí jako export, ale často jím je. Umí obsahovat jména, e-maily, interní ID, adresy, částky, URL s tokenem, názvy klientů, poznámky supportu nebo stav účtu. Před publikací proto udělej screenshot review stejně poctivě jako review textu.
+
+Minimální postup:
+
+1. Vytvoř demo data nebo sandbox scénář.
+2. Zkontroluj každý viditelný řádek, tooltip, URL a stavový štítek.
+3. Odstraň metadata obrázku, pokud nejsou potřeba.
+4. Nepoužívej rozmazání tam, kde by šlo text dopočítat z kontextu; raději přepiš ukázku na bezpečná data.
+5. Ověř, že obrázek nevolá externí assety nebo tracking, pokud je vložený jako interaktivní embed.
+
+Privacy-first marketing nepotřebuje heatmapu čtenářovy zvědavosti. Potřebuje bezpečný důkaz, že řešení funguje.
+
+### Schválení drž jako součást obsahu
+
+Case study by měla mít vlastníka stejně jako produktová funkce. Nestačí poslat klientovi hotový PDF soubor večer před publikací a doufat, že „když se neozve, tak dobrý“. Ticho není dobrý souhlas. Je to jen ticho, velmi podceňovaný právní nástroj ničemu.
+
+Jednoduchý schvalovací balíček:
+
+- finální text,
+- seznam použitých citací,
+- seznam čísel a jejich význam,
+- screenshoty nebo grafiku,
+- datum plánované publikace,
+- kanály, kde se bude case study sdílet,
+- kontakt pro rychlou opravu nebo stažení.
+
+Do interního záznamu si neukládej zbytečné osobní údaje. Stačí odkaz na schválenou verzi, kdo ji schválil za zákazníka, kdy a pro jaký rozsah použití. Pokud zákazník schválil web, neznamená to automaticky reklamu, konferenční slide deck a placený post na sociální síti.
+
+### Checklist: Case study bez datového průšvihu
+
+- [ ] Case study popisuje pracovní změnu, ne jen obecnou pochvalu dodavatele.
+- [ ] U každého údaje víme, zda je veřejný, schvalovaný, agregovaný, redigovaný nebo zakázaný.
+- [ ] Jména lidí, e-maily, interní ID, tokeny, neveřejné URL a obchodní detaily nejsou ve screenshotu ani textu.
+- [ ] Čísla jsou vysvětlená a nepůsobí přesněji, než data dovolují.
+- [ ] Nepoužíváme slovo anonymizace tam, kde jde jen o pseudonymizaci nebo redakční úpravu.
+- [ ] Zákazník schválil finální text, citace, čísla, vizuály a rozsah použití.
+- [ ] Publikační verze neobsahuje reklamní ani sociální embed, který by čtenáře zbytečně sledoval.
+- [ ] Existuje kontakt a postup pro opravu, aktualizaci nebo stažení case study.
+- [ ] Interní schvalovací stopa neobsahuje víc dat, než je nutné.
+- [ ] Z case study vede přímý další krok: relevantní služba, demo, dokumentace nebo RSS, ne sledovací labyrint.
+
+### Mini úkol
+
+Vezmi jednu existující nebo plánovanou referenci a vyplň před psaním tuto kartu:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jaká pracovní změna je hlavní důkaz? |  |
+| Která čísla můžeme použít a kdo je schválí? |  |
+| Které údaje jsou zakázané? |  |
+| Budeme používat skutečné screenshoty, demo data nebo syntetickou ukázku? |  |
+| Kdo za zákazníka schvaluje text? |  |
+| Kde všude se case study publikuje? |  |
+| Jaký přímý další krok nabídneme čtenáři? |  |
+| Jak case study aktualizujeme nebo stáhneme, když se změní realita? |  |
+
+Potom udělej jednu malou změnu: odstraň ze screenshotu skutečné osobní údaje, přepiš obecné tvrzení na konkrétní pracovní změnu, doplň schvalovací větu do redakčního procesu, nebo nahraď sociální embed obyčejným přímým odkazem. Důvěra se dá ztratit i v marketingu. Jen to obvykle nevypadá jako bug report.
+
 ## Zdroje
 
 - curl: curl man page - volby pro časové limity, TLS ověřování a režim `--insecure`: https://curl.se/docs/manpage.html
@@ -33212,6 +33322,7 @@ Potom udělej jednu konkrétní změnu: vytvoř statickou šablonu, oprav status
 
 ## Pracovní log
 
+- 2026-07-18: Doplněna příloha o case study bez úniku zákaznických dat: struktura důkazu jako pracovní změny, rozdělení údajů na veřejné/schvalované/agregované/redigované/zakázané, opatrnost vůči falešné anonymizaci, screenshot review, schvalovací balíček, checklist a mini úkol; navázáno na ověřené zdroje Evropské komise k minimalizaci dat a EDPB k pseudonymizaci.
 - 2026-07-18: Doplněna příloha o nouzové stránce bez paniky, trackerů a SEO škody: správné použití `503`, poctivý `Retry-After`, statická stránka mimo hlavní aplikaci, opatrná cache, text bez interních detailů, režimy plánované údržby/neplánovaného výpadku/degradace, smoke test, checklist a mini úkol; ověřeny zdroje MDN a Google Search Central k dočasné nedostupnosti.
 - 2026-07-18: Doplněna příloha o pravdivém health checku bez zeleného semaforu na špatné vrstvě: rozdělení kontrol na DNS/TCP/TLS/HTTP/obsah/produktovou cestu, zápis původu výsledku, rozlišení interní syntetiky a veřejné reality, obsahový marker, typy alertů, privacy-first pravidla monitoringu, checklist a mini úkol; navázáno na dnešní zjištění, že proxy a veřejný TLS pohled mohou ukazovat rozdílný stav.
 - 2026-07-18: Doplněna příloha o opravných přístupech k produkci bez univerzálního klíče: rozlišení diagnostiky, omezené opravy a break-glass režimu, karta opravné schopnosti, role pro TLS obnovu a reload proxy bez přístupu k zákaznickým datům, pravidla pro runbook bez tajemství, pravidelný test opravitelnosti, privacy-first auditní stopa, checklist a mini úkol; navázáno na dnešní zjištění, že agent umí problém s certifikátem diagnostikovat, ale bez hostitelského opravného přístupu ho nemůže bezpečně obnovit.
