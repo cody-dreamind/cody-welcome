@@ -31149,6 +31149,119 @@ Vezmi poslední `000000` výpadek nebo falešný alert a vyplň kartu:
 
 Potom udělej jednu konkrétní změnu: přidej `exitcode` a `errormsg` do health checku, doplň do alertu první krok, napiš postup pro `Empty reply from server`, přidej smoke test hlavní stránky nebo zapiš, odkud monitoring běží. `000000` nemá být konec diagnostiky. Má být začátek čitelné věty.
 
+## Příloha: Přesměrování URL bez SEO a datového chaosu
+
+Změna URL vypadá jako drobnost, dokud nezjistíš, že staré odkazy vedou do prázdna, organická návštěvnost klesla, sales posílá zákazníkům neplatné odkazy a analytika najednou nerozlišuje, jestli návštěvník přišel z článku, newsletteru nebo ze starého PDF. Přesměrování není jen technické pravidlo v konfiguraci serveru. Je to migrace důvěry.
+
+Špatná otázka zní: „Kam to rychle přesměrujeme?“
+
+Lepší otázka zní: „Která stará adresa má jakou hodnotu, jaký nový obsah jí odpovídá a jak ověříme, že člověk i vyhledávač skončí na správném místě?“
+
+Google Search Central u přesunů webu doporučuje mapovat staré URL na nové ekvivalenty, používat trvalá serverová přesměrování tam, kde se adresa mění natrvalo, a omezovat zbytečné řetězení redirectů. Pro privacy-first tým k tomu přidej ještě jednu vrstvu: nepřenášej z URL citlivé query parametry, které už nepotřebuješ, a nelep na redirecty měřicí identifikátory jen proto, že je to pohodlné.
+
+Codyho komentář: Rozbitý redirect je takový pasivně-agresivní support ticket. Nikdo ho přímo nevytvořil, ale zákazník ho stejně dostane.
+
+### Nejdřív udělej mapu starých a nových adres
+
+Před změnou slugů, struktury blogu, domény nebo produktu si vytvoř jednoduchou mapu. Ne začít konfigurací. Začít rozhodnutím.
+
+| Stará URL | Nová URL | Typ změny | Důvod | Priorita |
+| --- | --- | --- | --- | --- |
+| `/blog/stary-clanek` | `/blog/privacy-first-analytika` | trvalá | přepsaný článek se stejným účelem | vysoká |
+| `/pricing-old` | `/pricing` | trvalá | sjednocení adresy | vysoká |
+| `/ebook-download` | `/ebook` | trvalá | otevřená stránka bez gated formuláře | střední |
+| `/campaign/spring` | žádná | ukončeno | stará kampaň bez evergreen obsahu | nízká |
+
+U každé URL si napiš, jestli má skutečný nový ekvivalent. Pokud ano, použij přesměrování na konkrétní stránku. Pokud ne, necpát všechno na homepage. Homepage není popelnice na staré URL. Lepší je relevantní kategorie, archivní stránka, nebo u opravdu zrušeného obsahu jasný stav.
+
+### Rozliš trvalou změnu, dočasnou akci a zrušený obsah
+
+Ne každá změna chce stejnou odpověď.
+
+| Situace | Doporučený přístup |
+| --- | --- |
+| Článek má nový slug, ale obsah pokračuje | trvalý redirect na nový článek |
+| Produktová stránka se přesunula | trvalý redirect na nový ekvivalent |
+| Kampaň běží jen krátce | dočasný redirect nebo samostatná landing page s koncem |
+| Obsah je sloučený | redirect na silnější sloučený obsah |
+| Obsah je zastaralý a nemá náhradu | archiv, vysvětlení nebo správný zrušený stav podle situace |
+
+Praktické pravidlo: redirect má respektovat záměr člověka. Kdo klikl na článek o exportu dat, nemá skončit na obecné stránce služeb jen proto, že je nejblíž obchodnímu cíli. To není optimalizace. To je navigační podraz.
+
+### Query parametry uklízej vědomě
+
+URL často obsahují parametry: `utm_source`, interní campaign ID, token pro jednorázový přístup, vyhledávací dotaz, filtr, e-mailový identifikátor nebo referral kód. Při redirectu rozhodni, co se smí přenést dál.
+
+Bezpečnější výchozí pravidla:
+
+- marketingové UTM parametry přenes jen tehdy, když je opravdu používáš agregovaně,
+- jednorázové tokeny nepřenášej na veřejné cílové stránky,
+- parametry s e-mailem, telefonem, jménem nebo zákaznickým ID z URL odstraň,
+- citlivé hodnoty nedávej do URL vůbec, pokud můžeš použít serverový stav,
+- nastav `Referrer-Policy`, aby cizí weby nedostávaly víc cesty a query stringu, než potřebují.
+
+MDN u hlavičky `Referer` připomíná, že podle referrer policy může odchozí požadavek obsahovat origin, cestu i query string. To je přesně důvod, proč URL nesmí být odpadkový koš na citlivé údaje. Co je v URL, rádo cestuje dál: do logů, analytiky, screenshotů, support ticketů a někdy i k externímu webu.
+
+### Redirect řetězy jsou technický dluh s vlastním kufrem
+
+Řetěz `A -> B -> C -> D` zpomaluje stránku, komplikuje diagnostiku a zvyšuje šanci, že se někde ztratí parametry nebo skončíš ve smyčce. U migrace webu si proto po nasazení ověř:
+
+- stará URL vrací očekávaný status,
+- přesměrování končí na finální stránce bez dalšího řetězu,
+- `http` jde na `https`,
+- `www` a non-`www` varianta mají jasnou preferenci,
+- slash na konci URL je konzistentní,
+- canonical URL odpovídá finální adrese,
+- sitemap obsahuje nové URL, ne staré redirectované adresy,
+- interní odkazy vedou rovnou na nové adresy.
+
+Když necháš staré interní odkazy mířit přes redirect, web sice funguje, ale učíš vlastní systém chodit přes objížďku. Oprav zdroj odkazu.
+
+### Po nasazení ověř hlavní cesty, ne jen konfiguraci
+
+Redirect pravidlo může vypadat správně a přesto rozbít hlavní cestu. Po nasazení projdi praktický smoke test:
+
+| Kontrola | Co ověřit |
+| --- | --- |
+| Nejnavštěvovanější staré URL | končí na relevantní nové stránce |
+| Hlavní CTA odkazy | nevedou přes starý slug |
+| RSS a sitemap | obsahují finální adresy |
+| Open Graph náhledy | ukazují nový title, popis a obrázek |
+| Formuláře | po redirectu neztratí bezpečný stav ani chybové hlášky |
+| Analytika | měří novou cestu bez duplicit a osobních parametrů |
+| Externí odkazy | klíčoví partneři a dokumentace mají aktualizovanou adresu |
+
+Privacy-first detail: Při testování redirectů neloguj celé URL s citlivými parametry do sdílených reportů. Pokud potřebuješ ukázat problém, rediguj tokeny, e-maily a interní ID. Debug screenshot s privátním query stringem je jen jiný druh úniku.
+
+### Checklist: Redirect migrace
+
+- [ ] Existuje mapa starých a nových URL.
+- [ ] Každá důležitá stará URL má relevantní nový ekvivalent.
+- [ ] Nepřesměrováváme všechno bezmyšlenkovitě na homepage.
+- [ ] Trvalé a dočasné změny jsou odlišené podle skutečného účelu.
+- [ ] Query parametry mají pravidla: co přenést, co zahodit, co nikdy nedávat do URL.
+- [ ] `Referrer-Policy` odpovídá tomu, kolik informací má web posílat dál.
+- [ ] Redirecty netvoří řetězy ani smyčky.
+- [ ] Sitemap, canonical URL, RSS a interní odkazy ukazují na finální adresy.
+- [ ] Nejnavštěvovanější staré URL prošly smoke testem.
+- [ ] Monitoring a analytika pracují s novými adresami bez duplicit a osobních identifikátorů.
+
+### Mini úkol
+
+Vyber pět starých URL, které mají návštěvnost, zpětné odkazy nebo obchodní význam, a vyplň kartu:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jaká stará URL se mění? |  |
+| Jaký byl původní záměr člověka? |  |
+| Jaká nová URL je nejrelevantnější? |  |
+| Jde o trvalou, nebo dočasnou změnu? |  |
+| Které query parametry se mají zahodit? |  |
+| Kde je potřeba opravit interní odkaz? |  |
+| Jak ověříme redirect po nasazení? |  |
+
+Potom udělej jednu konkrétní opravu: zkrať redirect řetěz, oprav interní odkaz na finální URL, odstraň citlivý query parametr, doplň starou důležitou adresu do migrační mapy nebo aktualizuj sitemap. Přesměrování má být tichý most, ne dobrodružná objížďka přes půl webu.
+
 ## Zdroje
 
 - curl: curl man page - volby pro časové limity, TLS ověřování a režim `--insecure`: https://curl.se/docs/manpage.html
@@ -31327,6 +31440,7 @@ Potom udělej jednu konkrétní změnu: přidej `exitcode` a `errormsg` do healt
 
 ## Pracovní log
 
+- 2026-07-18: Doplněna příloha o přesměrování URL bez SEO a datového chaosu: mapa starých a nových adres, rozlišení trvalých/dočasných změn a zrušeného obsahu, pravidla pro query parametry a `Referrer-Policy`, úklid redirect řetězů, smoke test po nasazení, checklist a mini úkol; navázáno na existující zdroje Google Search Central k migracím, redirectům, canonical URL a sitemapám a MDN k referrer policy.
 - 2026-07-18: Doplněna příloha o první reakci na `000000` bez náhodného restartu: rozlišení HTTP statusu, curl exit codu a chybové věty, postup přes DNS/TCP/TLS/HTTP/aplikaci, praktická interpretace `Empty reply from server`, restart jako cílený zásah, alert s prvním krokem, checklist a mini úkol; navázáno na dnešní selhání kontroly webu i existující části o health checku, HTTPS monitoringu, runboocích a TLS obnově.
 - 2026-07-18: Zpřesněna karta suchého běhu TLS o pole, odkud test běžel, aby bylo jasné, zda výsledek pochází z veřejného monitoringu, lokální sítě, CI nebo proxy.
 - 2026-07-18: Doplněna příloha o suchém běhu obnovy TLS bez čekání na expiraci: karta domény, rozlišení renewal mechanismu, challenge, reloadu a veřejného ověření, bezpečné hranice testu, privacy-first pravidla pro runbook bez tajemství, výsledek suchého běhu jako konkrétní provozní úkol, checklist a mini úkol; navázáno na existující zdroje k curl, Let’s Encrypt a Certbotu i předchozí kapitoly o TLS, health checku a provozním záchranném balíku.
