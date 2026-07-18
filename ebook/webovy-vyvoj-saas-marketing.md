@@ -30892,6 +30892,7 @@ Pro každou kritickou doménu si udělej krátkou kartu:
 | Kde jsou logy obnovy |  |
 | Jaká služba potřebuje reload | nginx / Apache / HAProxy / app server / není potřeba |
 | Jak ověřit veřejný certifikát | externí check bez `--insecure` |
+| Odkud test běžel | veřejný monitoring / lokální síť / CI / proxy |
 | Kdo je vlastník |  |
 | Kdy byl poslední suchý běh |  |
 | Jaký problém by dnes bránil obnově |  |
@@ -31194,6 +31195,7 @@ Potom udělej jednu konkrétní změnu: doplň kartu suchého běhu, přidej ale
 
 ## Pracovní log
 
+- 2026-07-18: Zpřesněna karta suchého běhu TLS o pole, odkud test běžel, aby bylo jasné, zda výsledek pochází z veřejného monitoringu, lokální sítě, CI nebo proxy.
 - 2026-07-18: Doplněna příloha o suchém běhu obnovy TLS bez čekání na expiraci: karta domény, rozlišení renewal mechanismu, challenge, reloadu a veřejného ověření, bezpečné hranice testu, privacy-first pravidla pro runbook bez tajemství, výsledek suchého běhu jako konkrétní provozní úkol, checklist a mini úkol; navázáno na existující zdroje k curl, Let’s Encrypt a Certbotu i předchozí kapitoly o TLS, health checku a provozním záchranném balíku.
 - 2026-07-18: Doplněna příloha o provozním záchranném balíku bez ukládání tajemství do repozitáře: karta kritické služby, oddělení mapy od hesel a klíčů, read-only diagnostika, dostupnost runbooků při výpadku hlavního systému, rotace a revokace přístupů, checklist a mini úkol; navázáno na existující zdroje OWASP k secrets managementu a autorizaci, Twelve-Factor App ke konfiguraci a předchozí provozní kapitoly o TLS, runboocích a postmortemech.
 - 2026-07-18: Doplněna příloha o postmortemu po provozním incidentu bez hledání viníka: oddělení obnovy od učení, minimální incidentní karta, popis dopadu jazykem zákazníka, privacy-first práce s logy a důkazy, ověřitelná opatření, uzavírání otevřených úkolů, checklist a mini úkol; navázáno na existující provozní kapitoly o TLS, health checku, runboocích a monitoringu.
