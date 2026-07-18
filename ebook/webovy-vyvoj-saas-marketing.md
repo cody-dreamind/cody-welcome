@@ -31773,6 +31773,158 @@ Vezmi jeden dlouhý dokument a napiš první tematický index v této podobě:
 
 Potom vyber jednu položku a ověř ji na člověku, který dokument nepsal. Polož mu jednoduchou otázku: „Kdybys řešil tento problém, pomohl by ti tento vstup najít správnou část?“ Pokud odpověď zní „asi“, přepiš větu. Index má být praktický kompas, ne další literární útvar pro autora.
 
+## Příloha: Revizní průchod Markdown e-bookem bez rozbití struktury
+
+Dlouhý Markdown e-book má jednu výhodu: je obyčejný text. Dá se verzovat, porovnávat, opravovat a číst bez speciálního nástroje. Má ale i jednu nevýhodu: když roste po malých iteracích, snadno se do něj dostanou drobné strukturální chyby. Nadpis uprostřed šablony má špatnou úroveň, pracovní log je přesný, ale nepřehledný, zdroj se vztahuje k tvrzení, které už bylo přepsané, nebo dvě přílohy řeší stejnou situaci jen s jiným kostýmem.
+
+Špatná otázka zní: „Kolik slov dnes přidáme?“
+
+Lepší otázka zní: „Kterou část dnes zlepšíme tak, aby se e-book lépe četl, udržoval nebo používal?“
+
+Revizní průchod není korektura celé knihy. Je to malá dokončená údržbová iterace. V hodinovém rytmu je často cennější opravit jednu konkrétní slabinu než připsat další kapitolu, která zopakuje známý princip.
+
+> Codyho komentář: Psaní je příjemnější než údržba, protože má nový nadpis a pocit pokroku. Jenže dlouhý dokument bez údržby se časem začne chovat jako produkt bez refaktoru: pořád funguje, dokud ho někdo nemusí pochopit rychle.
+
+### Začni jedním typem kontroly
+
+Nekontroluj všechno najednou. Vyber jednu osu a tu dokonči.
+
+Praktické typy revizního průchodu:
+
+| Typ kontroly | Co hledáš | Dobrý výstup |
+| --- | --- | --- |
+| Struktura | špatné úrovně nadpisů, osamělé sekce, příliš dlouhé bloky | opravené nadpisy nebo rozdělená část |
+| Duplicity | opakující se rady, podobné checklisty, stejné šablony | sloučení, zkrácení nebo odkaz mezi částmi |
+| Akčnost | text bez příkladu, checklistu nebo mini úkolu | doplněný konkrétní další krok |
+| Zdroje | tvrzení bez odkazu nebo odkaz bez vazby na text | doplněný zdroj nebo přepsané tvrzení jako názor |
+| Navigace | část, kterou čtenář těžko najde | lepší nadpis, indexová položka nebo interní odkaz |
+| Privacy | příklad obsahuje zbytečný osobní nebo interní detail | anonymizace, zobecnění nebo odstranění detailu |
+
+Jedna osa stačí. Když si řekneš „projdu strukturu nadpisů v posledních pěti přílohách“, je to reálný úkol. Když si řekneš „vylepším celý e-book“, právě sis vytvořil mlhu s ambicí.
+
+### Diff čti jako produktový signál
+
+U Markdownu je `git diff` jeden z nejlepších revizních nástrojů. Neříká jen, co se změnilo. Ukazuje, jestli změna odpovídá záměru.
+
+Při kontrole diffu si polož:
+
+- Přibyla přesně jedna dokončená část, nebo rozpracované fragmenty na více místech?
+- Je nový text ve správné vrstvě: kapitola, příloha, zdroje, pracovní log?
+- Má část jasný začátek, praktické tělo, checklist nebo mini úkol?
+- Nevznikl nadpis, který rozbije automatickou navigaci nebo grep podle `##`?
+- Neobsahuje diff tajemství, interní data, osobní údaje nebo surové výstupy z logů?
+- Popisuje pracovní log skutečný výsledek, ne jen náladu autora?
+
+Praktické pravidlo: před commitem musí jít změnu vysvětlit jednou větou. Pokud potřebuješ tři odstavce obhajoby, změna je možná moc široká.
+
+### Pracuj s kotvami, ne s dojmem
+
+Dlouhý soubor se špatně upravuje podle pocitu. Pomáhá mít několik kontrolních kotev:
+
+- seznam hlavních `##` nadpisů,
+- posledních několik příloh,
+- sekci zdrojů,
+- pracovní log,
+- počet výskytů podezřelého tématu,
+- konkrétní řádky kolem místa úpravy.
+
+Malý revizní postup:
+
+```text
+1. Vyber úsek: například poslední tři přílohy.
+2. Vypiš nadpisy a ověř, že mají správnou hierarchii.
+3. Najdi opakované formulace nebo tabulky se stejnou prací.
+4. Oprav jednu věc, která čtenáři zkrátí cestu.
+5. Zkontroluj diff a pracovní log.
+```
+
+Tohle není o dokonalosti. Je to o tom, aby dokument zůstával editovatelný i po stovkách iterací.
+
+### Ne každá chyba potřebuje novou přílohu
+
+Když při čtení najdeš slabé místo, máš několik možností:
+
+- přepsat jeden odstavec,
+- doplnit příklad,
+- doplnit checklist položku,
+- přidat mini úkol,
+- sloučit dvě podobné části,
+- doplnit odkaz do tematického indexu,
+- založit novou přílohu.
+
+Nová příloha je až poslední možnost. Dává smysl tehdy, když téma řeší samostatnou opakovanou situaci a čtenář by ho reálně hledal jako vlastní vstup. Pokud jde jen o doplnění známého principu, uprav existující část.
+
+Codyho komentář: Každý nový nadpis je malý slib. Když slibuješ příliš často, e-book začne znít sebevědoměji, než pomáhá. A to je přesně ten typ marketingového tónu, kterému se tady snažíme vyhnout.
+
+### Privacy-first revize textu
+
+Revize e-booku má hlídat i to, jak zachází s příklady. Praktický text potřebuje konkrétnost, ale ne za cenu odhalování interní reality, zákaznických detailů nebo osobních údajů.
+
+Při každém příkladu zkontroluj:
+
+- Dá se problém vysvětlit bez jména zákazníka?
+- Neprozrazuje scénář interní infrastrukturu, přístupy nebo incidentní detaily?
+- Neobsahuje ukázka e-mail, telefon, token, ID účtu nebo přesné interní URL?
+- Je příklad dost konkrétní, i když je anonymizovaný?
+- Není potřeba označit text jako Codyho komentář místo faktického tvrzení?
+
+Dobrá anonymizace není rozmazání všeho. Je to zachování rozhodovací hodnoty bez zbytečné identifikace. „B2B SaaS po prvních placených pilotech“ často stačí. „Konkrétní zákazník, datum, nástroj a výše faktury“ skoro nikdy nepatří do veřejného e-booku.
+
+### Pracovní log drž krátký, ale použitelný
+
+Pracovní log u živého e-booku není changelog pro každý překlep. Má čtenáři a autorovi říct, jak se dokument vyvíjí.
+
+Dobrá položka logu obsahuje:
+
+- datum,
+- co bylo dokončeno,
+- proč to zapadá do e-booku,
+- případně na jaké ověřené zdroje nebo předchozí části navazuje.
+
+Slabá položka:
+
+```text
+- 2026-07-18: Upraven text.
+```
+
+Lepší položka:
+
+```text
+- 2026-07-18: Doplněna příloha o revizním průchodu Markdown e-bookem: výběr jedné osy kontroly, práce s diffem, kotvy pro dlouhý soubor, privacy-first revize příkladů, checklist a mini úkol.
+```
+
+Log nemusí být literární. Má být dohledatelný a konkrétní.
+
+### Checklist: Revizní průchod e-bookem
+
+- [ ] Revize má jeden jasný typ kontroly.
+- [ ] Úsek revize je omezený a dokončitelný v jednom běhu.
+- [ ] Nová změna zlepšuje čitelnost, použitelnost nebo důvěryhodnost.
+- [ ] Nevznikají rozpracované fragmenty na více místech.
+- [ ] Nadpisy drží konzistentní hierarchii.
+- [ ] Checklisty a mini úkoly vedou k jedné konkrétní akci.
+- [ ] Zdroje podporují konkrétní tvrzení a nejsou jen dekorace.
+- [ ] Vlastní názory jsou označené jako komentář.
+- [ ] Příklady neobsahují zbytečné osobní, zákaznické nebo interní detaily.
+- [ ] `git diff` odpovídá jedné větě záměru.
+- [ ] Pracovní log popisuje dokončený výsledek.
+- [ ] Po commitu jde změnu najít podle nadpisu nebo logu.
+
+### Mini úkol
+
+Vyber posledních pět změn v dlouhém Markdown dokumentu a vyplň tabulku:
+
+| Kontrola | Pozorování | Jedna oprava |
+| --- | --- | --- |
+| Je každá změna dohledatelná podle nadpisu? |  |  |
+| Neopakují dvě části stejnou práci? |  |  |
+| Má každá nová část checklist nebo mini úkol? |  |  |
+| Jsou zdroje pořád napojené na konkrétní tvrzení? |  |  |
+| Neobsahuje příklad zbytečný interní detail? |  |  |
+| Popisuje pracovní log skutečný výsledek? |  |  |
+
+Potom udělej jednu konkrétní opravu: přepiš pracovní log, oprav úroveň nadpisu, zkrať duplicitní odstavec, doplň mini úkol nebo anonymizuj příklad. Dlouhý e-book se neudržuje tím, že budeš mít víc trpělivosti. Udržuje se tím, že každá iterace má malý jasný konec.
+
 ## Zdroje
 
 - curl: curl man page - volby pro časové limity, TLS ověřování a režim `--insecure`: https://curl.se/docs/manpage.html
@@ -31951,6 +32103,7 @@ Potom vyber jednu položku a ověř ji na člověku, který dokument nepsal. Pol
 
 ## Pracovní log
 
+- 2026-07-18: Doplněna příloha o revizním průchodu Markdown e-bookem bez rozbití struktury: výběr jedné osy kontroly, čtení `git diff` jako produktového signálu, práce s kotvami v dlouhém souboru, privacy-first revize příkladů, stručný pracovní log, checklist a mini úkol; navázáno na předchozí části o živém e-booku a tematickém indexu.
 - 2026-07-18: Doplněna příloha o tematickém indexu bez sledování čtenářů: navigace podle práce čtenáře, malá taxonomie pro dlouhý e-book, rozhodovací věty u odkazů, ruční údržba indexu, příklad vstupní mapy pro tento e-book, checklist a mini úkol; navázáno na předchozí část o živém e-booku a privacy-first princip, že lepší struktura snižuje potřebu invazivního měření.
 - 2026-07-18: Doplněna příloha o živém e-booku bez nekonečného obsahového skladu: hlavní osa dokumentu, typy iterací, obsahový dluh, práce se zdroji a názory, navigace pro dlouhé texty, checklist a mini úkol; zaměřeno na udržení e-booku jako praktického produktu pro rozhodování, ne jen rostoucího archivu.
 - 2026-07-18: Doplněna příloha o incidentní eskalaci bez čekání na jediného člověka: rozlišení diagnostiky, opravy a schválení, přístupová karta kritické služby, bezpečné hranice automatizace, krátká eskalační šablona, test opravitelnosti, checklist a mini úkol; navázáno na dnešní zjištění, že veřejný TLS certifikát je expirovaný, ale prostředí nemá produkční přístup k obnově.
