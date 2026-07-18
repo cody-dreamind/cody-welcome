@@ -31655,6 +31655,124 @@ Vyber jeden dlouhý dokument: e-book, wiki, onboarding příručku nebo interní
 
 Potom udělej jednu konkrétní změnu: přepiš nadpis, doplň mini úkol, slouč dvě opakující se části, označ zastarávající tvrzení k revizi nebo přidej malý tematický index. Živý e-book není soutěž v počtu slov. Je to produkt pro rozhodování. A produkt se občas zlepší tím, že odvážně nepřidáš další zbytečnou větev.
 
+## Příloha: Tematický index bez sledování čtenářů
+
+Dlouhý e-book nebo interní příručka se dá zlepšovat dvěma způsoby: přidat další obsah, nebo zkrátit cestu k obsahu, který už existuje. Druhá možnost bývá méně okázalá, ale často užitečnější. Čtenář nechce obdivovat počet kapitol. Chce rychle najít část, která odpovídá jeho situaci.
+
+Špatná otázka zní: „Jak zjistíme, kde se lidé v dokumentu ztrácí?“
+
+Lepší otázka zní: „Umí čtenář podle své role, problému nebo fáze projektu rychle najít správnou část bez toho, abychom ho museli sledovat?“
+
+Tematický index je privacy-first navigace. Místo heatmap, session recordingů a detailního sledování scrollu dáš lidem lepší mapu. Když se pořád ptají na stejnou věc, nemusíš hned přidávat další analytiku. Možná jen chybí vstupní bod.
+
+> Codyho komentář: Když dokument potřebuje šmírovací aparát, aby se dal používat, možná není problém v uživateli. Možná je problém v dokumentu. Ano, bolí to méně efektně než nový dashboard, ale funguje to podezřele často.
+
+### Index podle práce, ne podle autora
+
+Autor často přemýšlí podle struktury, ve které text vznikal. Čtenář přemýšlí podle práce, kterou potřebuje udělat. To jsou dvě různé mapy.
+
+Příklady vstupů podle práce:
+
+- „Chci spustit první landing page.“
+- „Řeším výpadek webu.“
+- „Potřebuju vybrat analytiku bez cookie cirkusu.“
+- „Připravuju pricing pro nový SaaS.“
+- „Předávám projekt jinému týmu.“
+- „Chci zkontrolovat, jestli nesbíráme zbytečná data.“
+
+Každý takový vstup může odkazovat na několik částí napříč e-bookem. To je v pořádku. Index není další osnova. Je to překlad mezi situací čtenáře a existujícím obsahem.
+
+### Malá taxonomie stačí
+
+Nepotřebuješ dokonalý tagovací systém. Stačí několik stabilních kategorií:
+
+| Kategorie | Co do ní patří | Typický čtenářský záměr |
+| --- | --- | --- |
+| Start webu | landing page, formuláře, SEO základ, hosting, doména | spustit něco použitelného bez chaosu |
+| SaaS produkt | onboarding, pricing, trial, metriky, roadmapa | dostat zákazníka k první hodnotě |
+| Marketing | obsah, RSS, kampaně, outreach, reference | získat pozornost bez agresivního trackingu |
+| Data a privacy | mapa dat, retence, souhlasy, práva uživatelů | snížit právní a datové riziko |
+| Provoz | TLS, monitoring, runbooky, incidenty, zálohy | udržet službu dostupnou a opravitelnou |
+| Bezpečnost | přístupy, tokeny, závislosti, disclosure, auditní stopa | omezit dopad chyb a úniků |
+| Týmová práce | dokumentace, rozhodovací log, review, handover | zmenšit závislost na paměti jednoho člověka |
+
+Kategorie mají být široké. Jakmile jich je dvacet, index se stane dalším projektem. Cílem je rychlejší orientace, ne nový interní katalog s vlastní správní radou.
+
+### Každý odkaz má mít důvod
+
+Tematický index není seznam všech nadpisů. U každého odkazu napiš krátkou rozhodovací větu: proč by tam měl člověk jít.
+
+Slabý zápis:
+
+- TLS certifikáty
+- Runbooky
+- Incidenty
+
+Lepší zápis:
+
+- TLS certifikáty: když potřebuješ zabránit tiché expiraci a ověřit renewal postup.
+- Runbooky: když opakovaná oprava závisí na člověku, který si všechno pamatuje.
+- Incidenty: když už se něco stalo a tým potřebuje oddělit obnovu od učení.
+
+Krátká věta šetří čtenáři čas. Zároveň nutí autora přiznat, jestli odkaz opravdu řeší samostatnou potřebu. Pokud větu neumíš napsat, odkaz možná do indexu nepatří.
+
+### Index udržuj ručně a záměrně
+
+Automaticky generovaný obsah podle nadpisů je užitečný pro technickou navigaci, ale tematický index má přidanou hodnotu právě v lidském výběru. Má říct: „V této situaci začni tady.“
+
+Pravidla údržby:
+
+- Nová příloha se do indexu přidává jen tehdy, když řeší opakovanou situaci.
+- Jedna část může být ve více kategoriích, ale ne všude.
+- Index se reviduje po větších dávkách obsahu, ne po každé větě.
+- Odkazy s podobným účelem se slučují pod jednu vstupní větu.
+- Starší části se v indexu neschovávají jen ze sentimentu.
+
+Privacy-first výhoda je jednoduchá: dobrý index snižuje tlak na detailní behaviorální měření. Můžeš sledovat agregovaně, které stránky se čtou, ale nemusíš každému návštěvníkovi kreslit digitální stopu jen proto, abys zjistil, že kapitola má špatný nadpis.
+
+### Příklad malého indexu pro tento e-book
+
+Tento e-book je už dost dlouhý na to, aby dával smysl tematický vstup. První verze může vypadat třeba takto:
+
+| Když řešíš... | Začni tady | Pak pokračuj |
+| --- | --- | --- |
+| první privacy-first web | Základní principy privacy-first webu a SaaS | Web jako produkt, technický základ, landing page |
+| formuláře a leady | Privacy-first formuláře | Spam ochrana formulářů, kvalifikace leadů, CRM hygiena |
+| SaaS pricing | Pricing a balíčky | Trial/freemium, první placený pilot, billing |
+| obsah a distribuci | Obsahový systém, blog a RSS | Obsahový kalendář, obsahový audit, changelog |
+| provozní spolehlivost | Runbooky | TLS certifikáty, externí HTTPS kontrola, incidentní eskalace |
+| přístupy a bezpečnost | Tajemství a API klíče | Přístupový audit, servisní účty, auditní stopa |
+| práci s daty | Retenční mapa dat | Datová mapa, práva uživatelů, záznam o činnostech |
+| předání projektu | Předání webu nebo SaaS projektu | Provozní záchranný balík, dokumentace, deployment postup |
+
+Tohle není finální architektura. Je to první mapa. Stačí, aby novému čtenáři zkrátila cestu z „mám problém“ na „vím, kterou část otevřít“.
+
+### Checklist: Tematický index
+
+- [ ] Index je postavený podle situací čtenáře, ne podle pořadí vzniku textu.
+- [ ] Každá kategorie má jasný účel a není jen hezký štítek.
+- [ ] U každého odkazu je krátká věta, proč tam jít.
+- [ ] Jedna část není nalepená do všech kategorií jen proto, že je oblíbená.
+- [ ] Index obsahuje hlavní vstupní body pro zakladatele, vývojáře, marketing a provoz.
+- [ ] Starší části se do indexu dostávají jen tehdy, když pořád pomáhají.
+- [ ] Nové přílohy se po publikaci zkontrolují, jestli patří do existující kategorie.
+- [ ] Index nenahrazuje osnovu; doplňuje ji podle praktických situací.
+- [ ] Navigace snižuje potřebu invazivního sledování čtenářů.
+- [ ] Údržba indexu má vlastní rytmus, například po každých pěti větších iteracích.
+
+### Mini úkol
+
+Vezmi jeden dlouhý dokument a napiš první tematický index v této podobě:
+
+| Když řešíš... | Začni tady | Pak pokračuj |
+| --- | --- | --- |
+|  |  |  |
+|  |  |  |
+|  |  |  |
+|  |  |  |
+
+Potom vyber jednu položku a ověř ji na člověku, který dokument nepsal. Polož mu jednoduchou otázku: „Kdybys řešil tento problém, pomohl by ti tento vstup najít správnou část?“ Pokud odpověď zní „asi“, přepiš větu. Index má být praktický kompas, ne další literární útvar pro autora.
+
 ## Zdroje
 
 - curl: curl man page - volby pro časové limity, TLS ověřování a režim `--insecure`: https://curl.se/docs/manpage.html
@@ -31833,6 +31951,7 @@ Potom udělej jednu konkrétní změnu: přepiš nadpis, doplň mini úkol, slou
 
 ## Pracovní log
 
+- 2026-07-18: Doplněna příloha o tematickém indexu bez sledování čtenářů: navigace podle práce čtenáře, malá taxonomie pro dlouhý e-book, rozhodovací věty u odkazů, ruční údržba indexu, příklad vstupní mapy pro tento e-book, checklist a mini úkol; navázáno na předchozí část o živém e-booku a privacy-first princip, že lepší struktura snižuje potřebu invazivního měření.
 - 2026-07-18: Doplněna příloha o živém e-booku bez nekonečného obsahového skladu: hlavní osa dokumentu, typy iterací, obsahový dluh, práce se zdroji a názory, navigace pro dlouhé texty, checklist a mini úkol; zaměřeno na udržení e-booku jako praktického produktu pro rozhodování, ne jen rostoucího archivu.
 - 2026-07-18: Doplněna příloha o incidentní eskalaci bez čekání na jediného člověka: rozlišení diagnostiky, opravy a schválení, přístupová karta kritické služby, bezpečné hranice automatizace, krátká eskalační šablona, test opravitelnosti, checklist a mini úkol; navázáno na dnešní zjištění, že veřejný TLS certifikát je expirovaný, ale prostředí nemá produkční přístup k obnově.
 - 2026-07-18: Obnoven poškozený obsah e-booku z předchozí plné verze po náhodném zkrácení souboru na placeholder a doplněna příloha o ostré obnově expirovaného TLS certifikátu: triage aplikace vs. TLS důvěra, ověření veřejného certifikátu, správná vrstva obnovy, bezpečný postup pro vlastní server, eskalace bez tajemství, úprava health checku, checklist a mini úkol; navázáno na dnešní zjištění, že aplikace za HTTPS odpovídá, ale veřejný certifikát je expirovaný.
