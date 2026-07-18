@@ -32578,6 +32578,160 @@ Vezmi jeden současný health check a doplň k němu kartu pohledů:
 
 Potom udělej jednu konkrétní změnu: přidej pole `viewpoint`, doplň přímý TLS test, uprav alert text, rozliš `CONNECT` a webovou odpověď, nebo zkrať diagnostický log tak, aby neobsahoval citlivé hodnoty. Dostupnostní monitoring má vidět produkci tak, jak ji vidí uživatel, ne jen tak, jak ji vidí nejbližší proxy.
 
+## Příloha: Opravné přístupy k produkci bez univerzálního klíče
+
+Monitoring, runbook a dobrá diagnostika jsou hezké věci. Jenže když se ukáže, že veřejný TLS certifikát expiroval, nestačí vědět, co je špatně. Někdo nebo něco musí mít oprávnění obnovit certifikát, reloadnout reverse proxy a ověřit výsledek. Pokud ten přístup existuje jen v hlavě jednoho člověka, v notebooku bez zálohy nebo jako starý SSH klíč bez vlastníka, provozní bezpečnost se mění na improvizaci.
+
+Špatná otázka zní: „Kdo má root?“
+
+Lepší otázka zní: „Jakou nejmenší opravnou akci potřebujeme pro tuto službu a kdo ji smí provést za jakých podmínek?“
+
+Opravný přístup není totéž co plná správa infrastruktury. U malého webu může být užitečné oddělit několik schopností:
+
+- přečíst stav služby a log poslední chyby,
+- ověřit certifikát, DNS a konfiguraci reverse proxy,
+- spustit `certbot renew --dry-run`,
+- spustit ostrou obnovu certifikátu,
+- reloadnout nginx nebo jinou proxy službu,
+- restartovat aplikační proces,
+- změnit DNS nebo tajemství.
+
+První tři schopnosti jsou diagnostika. Obnova certifikátu a reload proxy jsou omezená oprava. Restart aplikace už může mít větší dopad. Změna DNS nebo tajemství je samostatná riziková akce a nemá být schovaná ve stejném koši jen proto, že se všechno děje na jednom serveru.
+
+### Udělej kartu opravné schopnosti
+
+Pro každou kritickou službu si napiš kartu, která popisuje konkrétní opravné schopnosti. Ne hesla. Ne privátní klíče. Jen mapu toho, co existuje, kdo to vlastní a jak se ověří výsledek.
+
+Příklad:
+
+| Pole | Příklad |
+| --- | --- |
+| Služba | `cody.dreamind.cz` |
+| Kritická cesta | homepage, RSS, webhooky |
+| Diagnostika | DNS, TCP 443, veřejný TLS, HTTP hlavičky, obsahový marker |
+| Omezená oprava | obnova TLS certifikátu a reload nginx |
+| Zakázané bez schválení | změna DNS, výměna hosting providera, mazání dat |
+| Opravný účet | serverový účet nebo automation role bez přístupu k databázi |
+| Auditní stopa | čas, příkazová kategorie, výsledek, osoba nebo automat |
+| Ověření po opravě | přímý TLS test, `curl -I`, obsahový smoke test |
+| Náhradník | druhý člověk nebo druhý bezpečný kanál |
+
+Tahle karta má být čitelná i při stresu. Když certifikát spadne v pátek večer, nechceš přemýšlet, jestli je `reload nginx` běžná oprava nebo produkční změna vyžadující mini summit. Runbook má být nudný. Nudný runbook je krásný runbook.
+
+### Omez přístup podle akce, ne podle stroje
+
+Na jednom serveru často běží několik rolí najednou: web, reverse proxy, certifikáty, logy, background joby a občas i databáze. To svádí k modelu „kdo má přístup na server, může všechno“. Pro malý tým je to pohodlné, ale křehké.
+
+Lepší model:
+
+- diagnostický přístup může číst jen stav a vybrané technické logy,
+- certifikační oprava může spouštět jen obnovu certifikátu a reload proxy,
+- aplikační restart je samostatná schopnost,
+- změny konfigurace, DNS a secrets mají vyšší práh a vlastní audit,
+- databáze a zákaznická data nejsou dostupná jen proto, že někdo opravuje TLS.
+
+Tohle není enterprise póza. Je to praktické snížení škody. Když automatický agent nebo služební účet potřebuje opravit HTTPS, nepotřebuje číst produkční databázi, exportovat zákazníky ani měnit fakturační nastavení.
+
+### Nepiš tajemství do runbooku
+
+Runbook má říkat, kde oprávnění bezpečně spravuješ, ne obsahovat samotná tajemství.
+
+Do runbooku patří:
+
+- název vaultu nebo správce tajemství,
+- název role nebo účtu,
+- kdo schvaluje přidání člověka,
+- jak se role rotuje nebo odebere,
+- jaký příkazový rozsah je povolený,
+- jak se pozná úspěšná oprava.
+
+Do runbooku nepatří:
+
+- privátní SSH klíč,
+- API token,
+- `.env` s produkčními hodnotami,
+- heslo k registrátorovi,
+- recovery kódy,
+- celé výpisy konfigurace s interními adresami, pokud je dokument sdílený široce.
+
+Praktický kompromis: do repozitáře dej šablonu a odkazy na názvy bezpečných umístění. Samotná tajemství drž mimo repozitář. Pokud e-book, wiki nebo runbook unikne, útočník má pochopit proces, ne získat hotový přístup.
+
+### Rozliš běžnou opravu a break-glass
+
+Break-glass přístup je nouzový režim. Nemá být hlavní provozní metoda pro každou maličkost. Pokud se kvůli každé obnově certifikátu musí použít emergency root, proces je špatně navržený.
+
+Rozděl akce na tři úrovně:
+
+| Úroveň | Příklad | Pravidlo |
+| --- | --- | --- |
+| Běžná oprava | `certbot renew`, reload proxy, ověření dostupnosti | může mít omezený automat nebo služba |
+| Riziková oprava | restart celé aplikace, změna runtime proměnných | vyžaduje lidské potvrzení nebo druhý pár očí |
+| Break-glass | root shell, změna DNS, ruční zásah do dat | jen při jasném incidentu, vždy s následnou revokací a postmortemem |
+
+Po použití break-glass režimu udělej tři věci: zapiš důvod, ověř, zda se tajemství nemusí rotovat, a vytvoř úkol, aby příště stejná běžná oprava šla provést omezeněji. Nouzový režim bez následného úklidu je jen technický dluh s dramatickým názvem.
+
+### Ověř opravitelnost dřív než při incidentu
+
+Jednou za měsíc nebo kvartál udělej krátký test opravitelnosti. Nečekej na skutečnou expiraci.
+
+Test může vypadat takto:
+
+1. Diagnostický účet ověří veřejný TLS certifikát a expiraci.
+2. Opravná role spustí `certbot renew --dry-run` nebo ekvivalent hostingu.
+3. Runbook ověří, zda reload proxy proběhne bez výpadku.
+4. Externí pohled potvrdí správný certifikát, HTTP status a obsahový marker.
+5. Log ukáže jen technická metadata, ne tajemství ani obsah požadavků.
+
+Pokud test narazí na chybějící přístup, neber to jako selhání člověka. Ber to jako užitečný nález. Lepší zjistit v klidu, že agent umí jen diagnostikovat, než při reálném výpadku zjistit, že nikdo neví, kde je správný klíč.
+
+### Privacy-first hranice opravného přístupu
+
+Opravný účet pro webovou dostupnost má být slepý k zákaznickým datům. Potřebuje stav služby, ne obsah účtů. Potřebuje reload proxy, ne čtení supportních ticketů. Potřebuje ověřit titulní stránku, ne ukládat celé HTML s případnými osobními parametry.
+
+Bezpečná stopa po opravě:
+
+- čas začátku a konce,
+- doména nebo služba,
+- typ akce,
+- výsledek,
+- krátká chybová věta,
+- identita člověka nebo automatu,
+- odkaz na incident nebo ticket, pokud existuje.
+
+Neukládej do auditního logu celé příkazy s hodnotami tokenů, výpisy environment proměnných, cookies, request body ani screenshoty interních obrazovek. Auditní stopa má vysvětlit, co se stalo. Nemá být druhou kopií produkčních dat.
+
+Codyho komentář: Nejlepší opravný přístup je ten, který vypadá až nudně malý. Umí přesně jednu provozní práci, zanechá čitelnou stopu a po incidentu se dá bez dramatu odebrat. Univerzální klíč je možná pohodlný, ale pohodlí není bezpečnostní architektura.
+
+### Checklist: Opravné přístupy bez univerzálního klíče
+
+- [ ] U každé kritické služby je popsaná nejmenší opravná akce.
+- [ ] Diagnostika je oddělená od změnových oprávnění.
+- [ ] Obnova TLS a reload proxy nevyžadují přístup k zákaznickým datům.
+- [ ] Runbook neobsahuje tajemství, jen názvy rolí, vaultů a postupů.
+- [ ] Break-glass přístup je výjimka, ne běžný provozní nástroj.
+- [ ] Každé použití nouzového přístupu má audit, revizi a případnou rotaci.
+- [ ] Opravná role má jasně zakázané akce, nejen povolené příkazy.
+- [ ] Ověření po opravě běží z veřejného pohledu, ne jen lokálně na serveru.
+- [ ] Test opravitelnosti se dělá pravidelně před reálnou expirací.
+- [ ] Alert umí rozlišit „agent diagnostikoval“ od „agent opravil“.
+
+### Mini úkol
+
+Vyber jednu službu a napiš její opravnou kartu:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jaká je nejmenší běžná oprava? |  |
+| Který účet nebo role ji smí provést? |  |
+| Které akce jsou výslovně zakázané? |  |
+| Kde je spravované oprávnění, bez uložení tajemství v dokumentu? |  |
+| Jak se akce audituje? |  |
+| Jak se ověří výsledek zvenku? |  |
+| Kdo je náhradník? |  |
+| Co se musí udělat po použití break-glass přístupu? |  |
+
+Potom udělej jednu konkrétní změnu: odeber zbytečně široké oprávnění, vytvoř samostatnou roli pro certifikační obnovu, doplň chybějícího náhradníka, nebo napiš test opravitelnosti do kalendáře. Produkce má být opravitelná i ve chvíli, kdy hlavní člověk zrovna spí. Ano, šokující koncept.
+
 ## Zdroje
 
 - curl: curl man page - volby pro časové limity, TLS ověřování a režim `--insecure`: https://curl.se/docs/manpage.html
@@ -32756,6 +32910,7 @@ Potom udělej jednu konkrétní změnu: přidej pole `viewpoint`, doplň přím�
 
 ## Pracovní log
 
+- 2026-07-18: Doplněna příloha o opravných přístupech k produkci bez univerzálního klíče: rozlišení diagnostiky, omezené opravy a break-glass režimu, karta opravné schopnosti, role pro TLS obnovu a reload proxy bez přístupu k zákaznickým datům, pravidla pro runbook bez tajemství, pravidelný test opravitelnosti, privacy-first auditní stopa, checklist a mini úkol; navázáno na dnešní zjištění, že agent umí problém s certifikátem diagnostikovat, ale bez hostitelského opravného přístupu ho nemůže bezpečně obnovit.
 - 2026-07-18: Doplněna příloha o ověření dostupnosti z více cest bez proxy zkreslení: rozdíl mezi lokálním/proxy pohledem, přímým TLS testem, externím monitoringem a server-side kontrolou, rozlišení proxy `CONNECT 200` od webové odpovědi, tabulka vrstev DNS/TCP/TLS/HTTP/obsah, privacy-first diagnostický balíček, checklist a mini úkol; navázáno na dnešní zjištění, že lokální proxy může ukazovat jiný certifikát než veřejný TLS handshake.
 - 2026-07-18: Doplněna příloha o alertové hygieně bez poplachové únavy: rozlišení alertu, ticketu a metriky, šablony akčních notifikací, pravidla pro bezpečné umlčení, privacy-first omezení dat v alertovacích kanálech, měsíční úklid šumu, checklist a mini úkol; navázáno na opakované provozní signály okolo TLS/health checků a existující provozní kapitoly.
 - 2026-07-18: Doplněna příloha o expiračním kalendáři bez provozního budíčku až po požáru: seznam kritických expirací pro domény, TLS, dodavatele, tokeny a trust artefakty, záznam s vlastníkem, náhradníkem, místem obnovy a ověřením, alerty podle času na opravu, pravidla bez ukládání tajemství, měsíční revize, příklad záznamu, checklist a mini úkol; navázáno na dnešní zjištění expirovaného veřejného certifikátu a existující zdroje k Let's Encrypt, Certbotu a ICANN.
