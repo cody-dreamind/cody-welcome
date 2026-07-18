@@ -30850,6 +30850,172 @@ Vyber jednu kritickou službu a vyplň záchrannou kartu:
 
 Potom udělej jednu konkrétní opravu: odstraň tajemství z dokumentu, doplň záložního vlastníka, přidej odkaz na TLS runbook, vytvoř read-only diagnostický přístup nebo naplánuj suchý běh. Záchranný balík nemá být velký. Má být použitelný ve chvíli, kdy se věci začnou tvářit kreativně špatně.
 
+## Příloha: Suchý běh obnovy TLS bez čekání na expiraci
+
+Automatická obnova certifikátu je skvělá věc až do chvíle, kdy nikdo neověřil, že opravdu běží, má platné přístupy, projde challenge a po obnově reloadne správnou službu. Certifikát má známé datum konce, takže čekat na ostrý incident je zbytečně sportovní disciplína.
+
+Špatná otázka zní: „Máme tam přece certbot, ne?“
+
+Lepší otázka zní: „Kdy jsme naposledy bezpečně ověřili celý obnovovací řetězec od veřejné domény po reload služby?“
+
+Tahle příloha navazuje na kapitoly o TLS, externím HTTPS monitoringu, health checku, postmortemu a provozním záchranném balíku. Jejím cílem není naučit konkrétní příkaz pro každý hosting. Cílem je vytvořit pravidelný test opravitelnosti, který ukáže problém dřív než prohlížeč zákazníka.
+
+Codyho komentář: „Certifikát se obnovuje automaticky“ je věta, která musí mít důkaz. Jinak je to jen provozní uklidňovadlo s devadesátidenním poločasem rozpadu.
+
+### Suchý běh není ostrá obnova
+
+Suchý běh má odpovědět, jestli by obnova prošla, kdyby byla potřeba. Nemá bezhlavě měnit produkční konfiguraci uprostřed dne.
+
+Rozděl test na čtyři části:
+
+| Část | Co ověřuje | Co nechceš rozbít |
+| --- | --- | --- |
+| Inventář | víš, která doména a služba certifikát používá | nezaměnit web, API a webhook |
+| Renewal mechanismus | cron, systemd timer, hosting job nebo managed certifikát existuje | nepřepsat produkční certifikát z ruční paniky |
+| Challenge | HTTP-01, DNS-01 nebo hostingová automatizace má potřebné podmínky | nerozbít DNS, redirecty nebo firewall |
+| Reload a veřejné ověření | služba načte nový certifikát a venku je vidět správný stav | nereloadnout špatný proces nebo neověřit jen interní proxy |
+
+Praktický detail: u spravovaných hostingů nemusíš mít `certbot`. I tam ale musí existovat odpověď na stejné otázky: kdo obnovu zajišťuje, jak poznáš selhání, kdo dostane alert, jak ověříš veřejný certifikát a co se stane při změně DNS nebo proxy.
+
+### Karta suchého běhu
+
+Pro každou kritickou doménu si udělej krátkou kartu:
+
+| Pole | Odpověď |
+| --- | --- |
+| Doména |  |
+| Služba | web / aplikace / API / webhook / dokumentace |
+| Dopad výpadku | nízký / střední / vysoký |
+| Nástroj obnovy | certbot / hosting / load balancer / jiný |
+| Typ challenge | HTTP-01 / DNS-01 / managed |
+| Kde běží scheduled obnova | systemd timer / cron / hosting job |
+| Kde jsou logy obnovy |  |
+| Jaká služba potřebuje reload | nginx / Apache / HAProxy / app server / není potřeba |
+| Jak ověřit veřejný certifikát | externí check bez `--insecure` |
+| Kdo je vlastník |  |
+| Kdy byl poslední suchý běh |  |
+| Jaký problém by dnes bránil obnově |  |
+
+Poslední řádek je nejdůležitější. Pokud neumíš napsat žádný problém, neznamená to, že žádný není. Často to znamená, že test ještě nešel dost hluboko.
+
+### Před suchým během si stanov hranice
+
+Suchý běh má být bezpečný. Před spuštěním si napiš:
+
+- co se smí ověřovat read-only,
+- který příkaz nebo akce může měnit stav,
+- kdy se test zastaví,
+- kdo drží rozhodnutí o ostré obnově,
+- jak se vrátí změna, pokud test odkryje špatnou konfiguraci.
+
+Příklad hranic:
+
+```text
+Cíl: ověřit, že obnova TLS pro app.example.com má funkční timer,
+challenge, reload nginxu a externí kontrolu.
+
+Bezpečné kroky: přečíst timer, logy, aktuální certifikát,
+spustit podporovaný dry-run, ověřit veřejný certifikát zvenku.
+
+Zakázané kroky bez schválení: měnit DNS, mazat certifikát,
+měnit nginx config, restartovat databázi, vypínat firewall.
+
+Stop signál: dry-run chce změnu DNS, renewal hlásí rate limit,
+nebo reload config test neprojde.
+```
+
+Tohle zní formálně jen do chvíle, než se někdo v incidentu zeptá, jestli má restartovat „ten server“. V tu chvíli je krátká hranice velmi levná pojistka.
+
+### Ověř celý řetězec, ne jeden příkaz
+
+U vlastní infrastruktury nestačí spustit jeden příkaz a odškrtnout hotovo. Projdi řetězec:
+
+1. Veřejně ověř aktuální certifikát, hostname a datum expirace.
+2. Ověř, kde certifikát fyzicky vzniká a kdo má k mechanismu přístup.
+3. Zkontroluj timer nebo scheduled job.
+4. Zkontroluj log poslední úspěšné a poslední neúspěšné obnovy.
+5. Spusť podporovaný `dry-run`, pokud ho nástroj nabízí.
+6. Ověř konfigurační test web serveru před reloadem.
+7. Ověř renewal hook nebo jiný reload mechanismus.
+8. Ověř zvenku, že monitor nepoužívá `--insecure`.
+9. Zapiš výsledek do provozního logu.
+
+Pokud běží certifikát přes managed službu, přelož stejné kroky do jejího světa: dashboard, audit log, alerty, DNS validace, vlastník účtu, přístup náhradníka a veřejný check certifikátu.
+
+### Privacy-first pravidla pro runbook
+
+Runbook k TLS obnově má být použitelný, ale nemá být trezor.
+
+Do runbooku patří:
+
+- role, které mohou obnovu spustit,
+- názvy služeb a bezpečné diagnostické příkazy,
+- cesta k oficiálnímu místu se secrets,
+- postup ověření zvenku,
+- stop signály a eskalace,
+- datum posledního suchého běhu.
+
+Do runbooku nepatří:
+
+- privátní klíče,
+- hesla k DNS,
+- API tokeny pro DNS challenge,
+- kopie `.env`,
+- screenshoty s citlivými údaji,
+- plné interní logy z incidentu.
+
+Privacy-first provoz není jen o tom, co sbíráš od zákazníků. Je i o tom, jak málo citlivých provozních údajů rozházíš po dokumentaci, chatech a exportech, když se něco rozbije.
+
+### Výsledek musí mít akci
+
+Suchý běh bez závěru je jen technická meditace. Po testu zapiš jednu ze tří možností:
+
+| Výsledek | Co znamená | Další krok |
+| --- | --- | --- |
+| Prošlo | obnova, reload a externí ověření dávají smysl | zapsat datum další kontroly |
+| Prošlo s rizikem | služba běží, ale je slabé místo | založit konkrétní úkol s vlastníkem |
+| Neprošlo | renewal nebo ověření je rozbité | řešit jako provozní riziko před expirací |
+
+Příklady dobrých úkolů:
+
+- „Doplnit reload hook po úspěšné obnově certifikátu.“
+- „Přidat alert 30/14/7 dní před expirací.“
+- „Přepsat health check tak, aby neukládal jen `000000`, ale TLS důvod selhání.“
+- „Doplnit záložního vlastníka s přístupem k DNS.“
+- „Ověřit DNS-01 token a jeho rotaci mimo repozitář.“
+
+Špatný úkol je „pohlídat certifikát“. Nemá vlastníka, nemá ověření a v backlogu se tváří jako morální závazek. Backlog není svědomí.
+
+### Checklist: Suchý běh TLS obnovy
+
+- [ ] Každá kritická doména má kartu suchého běhu.
+- [ ] Víme, zda obnovu řeší certbot, hosting, load balancer nebo jiný nástroj.
+- [ ] Známe typ challenge a podmínky, které musí fungovat.
+- [ ] Timer, cron nebo hosting job má ověřené poslední běhy.
+- [ ] Existuje bezpečný dry-run nebo ekvivalentní managed kontrola.
+- [ ] Reload služby je součástí řetězce, ne ruční poznámka bokem.
+- [ ] Externí ověření certifikátu běží bez `--insecure`.
+- [ ] Runbook neobsahuje tajemství ani kopie privátních klíčů.
+- [ ] Výsledek suchého běhu končí konkrétním úkolem nebo datem další kontroly.
+- [ ] Náhradník umí najít postup bez ptaní v chatu.
+
+### Mini úkol
+
+Vyber jednu doménu a udělej třicetiminutový suchý běh bez produkčního hazardu:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Kdy certifikát expiruje? |  |
+| Jaký mechanismus ho obnovuje? |  |
+| Kdy naposledy obnova proběhla? |  |
+| Jak se ověří dry-run nebo managed kontrola? |  |
+| Která služba se musí reloadnout? |  |
+| Jak ověříme veřejný certifikát zvenku? |  |
+| Kde je runbook bez tajemství? |  |
+| Co by dnes obnovu nejspíš zdrželo? |  |
+
+Potom udělej jednu konkrétní změnu: doplň kartu suchého běhu, přidej alert před expirací, oprav reload hook, vyčisti runbook od tajemství, přidej náhradníka nebo založ provozní úkol k DNS challenge. Cílem není certifikát heroicky zachránit. Cílem je, aby příště neměl co zachraňovat.
+
 ## Zdroje
 
 - curl: curl man page - volby pro časové limity, TLS ověřování a režim `--insecure`: https://curl.se/docs/manpage.html
@@ -31028,6 +31194,7 @@ Potom udělej jednu konkrétní opravu: odstraň tajemství z dokumentu, doplň 
 
 ## Pracovní log
 
+- 2026-07-18: Doplněna příloha o suchém běhu obnovy TLS bez čekání na expiraci: karta domény, rozlišení renewal mechanismu, challenge, reloadu a veřejného ověření, bezpečné hranice testu, privacy-first pravidla pro runbook bez tajemství, výsledek suchého běhu jako konkrétní provozní úkol, checklist a mini úkol; navázáno na existující zdroje k curl, Let’s Encrypt a Certbotu i předchozí kapitoly o TLS, health checku a provozním záchranném balíku.
 - 2026-07-18: Doplněna příloha o provozním záchranném balíku bez ukládání tajemství do repozitáře: karta kritické služby, oddělení mapy od hesel a klíčů, read-only diagnostika, dostupnost runbooků při výpadku hlavního systému, rotace a revokace přístupů, checklist a mini úkol; navázáno na existující zdroje OWASP k secrets managementu a autorizaci, Twelve-Factor App ke konfiguraci a předchozí provozní kapitoly o TLS, runboocích a postmortemech.
 - 2026-07-18: Doplněna příloha o postmortemu po provozním incidentu bez hledání viníka: oddělení obnovy od učení, minimální incidentní karta, popis dopadu jazykem zákazníka, privacy-first práce s logy a důkazy, ověřitelná opatření, uzavírání otevřených úkolů, checklist a mini úkol; navázáno na existující provozní kapitoly o TLS, health checku, runboocích a monitoringu.
 - 2026-07-18: Doplněna příloha o health check skriptu bez slepé hodnoty `000000`: rozlišení HTTP statusu a exit codu, diagnostický strom DNS/TCP/TLS/HTTP/obsah, privacy-first rozsah logování, obsahové smoke testy, alert s prvním krokem, checklist a mini úkol; navázáno na existující zdroje k `curl`, HTTP statusům a externímu HTTPS monitoringu.
