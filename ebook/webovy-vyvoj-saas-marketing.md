@@ -30697,6 +30697,159 @@ Vezmi poslední provozní problém a vyplň krátkou kartu:
 
 Potom uzavři jednu věc. Ne pět. Jednu. Přidej alert, oprav renewal hook, napiš runbook, omez citlivé logy, nebo doplň vlastníka. Postmortem má být krátká cesta od bolesti ke změně. Ne pamětní deska.
 
+## Příloha: Provozní záchranný balík bez trezoru v repozitáři
+
+Když vypadne web, certifikát, DNS, platby nebo e-mail, tým často zjistí nepříjemnou věc: technický problém není jen v serveru. Skutečný problém je v tom, že nikdo rychle neví, kdo má přístup, kde je runbook, jaký je správný deploy nebo koho zavolat. V horší verzi se začne hledat v chatu, ve starých poznámkách a v repozitáři. Přesně tam, kde by tajemství být neměla.
+
+Provozní záchranný balík je krátký dokument nebo sada dokumentů, která při incidentu odpoví na otázku: „Jak bezpečně zjistíme, kdo a kde může problém opravit?“ Neobsahuje hesla, privátní klíče, tokeny ani exporty. Obsahuje mapu odpovědností, odkazy na správné systémy a hranice toho, co se smí dělat.
+
+OWASP Secrets Management Cheat Sheet připomíná, že tajemství mají svůj životní cyklus: vytvoření, uložení, přístup, rotaci, revokaci, audit a incidentní reakci. OWASP Authorization Cheat Sheet zase stojí na principu nejmenších oprávnění. Přeloženo do běžného provozu: záchranný balík má pomoct najít oprávněného člověka a správný postup, ne z každého čtenáře udělat superadmina. Odkazy jsou ve zdrojích.
+
+> Codyho komentář: Nejhorší provozní dokument je ten, který problém vyřeší jen tím, že do něj někdo nalepí privátní klíč. Ano, incident je pak krátký. Audit potom bývá delší a výrazně méně zábavný.
+
+### Odděl mapu od tajemství
+
+Záchranný balík má být použitelný i pro člověka, který nemá plný produkční přístup. To znamená, že v něm může být:
+
+- název služby,
+- účel služby,
+- doména nebo interní identifikátor,
+- vlastník služby,
+- záložní vlastník,
+- kde se spravuje DNS,
+- kde se spravuje hosting nebo aplikace,
+- kde jsou certifikáty nebo kdo je obnovuje,
+- kde je monitoring,
+- kde je runbook,
+- jaký je eskalační kontakt.
+
+Nemá v něm být:
+
+- heslo,
+- privátní klíč,
+- recovery kód,
+- API token,
+- celý `.env` soubor,
+- databázový connection string,
+- screenshot administračního rozhraní s citlivými údaji,
+- zákaznický export „pro příklad“.
+
+Dobrá věta v záchranném balíku zní:
+
+„TLS pro `app.example.com` obnovuje automatizace na produkčním hostingu. Ověření expirace je v externím monitoringu. Ruční obnovu smí spustit role `Ops Admin`; postup je v runbooku `TLS obnova`. Kontakty: primární vlastník provoz, záložní vlastník backend.“
+
+Špatná věta zní:
+
+„Privátní klíč je tady, kdyby něco.“
+
+To není záchrana. To je budoucí incident s lepší startovní pozicí.
+
+### Udělej kartu kritické služby
+
+Pro každou kritickou službu stačí jedna karta. Nemusí být krásná. Musí být přesná.
+
+| Pole | Co napsat |
+| --- | --- |
+| Služba | lidský název, například veřejný web, billing, e-mail, API |
+| Kritická schopnost | co uživatel nebo tým nedokáže bez této služby |
+| Veřejná URL nebo identifikátor | doména, subdoména, název aplikace, ne tajemství |
+| Primární vlastník | role nebo člověk odpovědný za provoz |
+| Záložní vlastník | kdo může převzít opravu |
+| DNS | kde se spravuje a kdo smí měnit záznamy |
+| Hosting nebo runtime | kde běží aplikace a kde je deploy |
+| TLS | kdo obnovuje certifikát, jak se ověřuje expirace, kde je runbook |
+| Monitoring | jaký externí a interní check existuje |
+| Logy | kde hledat diagnostiku a jaká data nekopírovat |
+| Runbook | odkaz na postup obnovy |
+| Eskalace | kdy volat člověka, kdy otevřít incident, kdy komunikovat zákazníkům |
+
+Tahle karta nemá suplovat detailní dokumentaci. Je to rozcestník. Když je všechno zelené, skoro nikoho nezajímá. Když je všechno červené, je to rozdíl mezi klidnou obnovou a detektivkou v historii chatu.
+
+### Read-only přístup je provozní nástroj
+
+Ne každý, kdo diagnostikuje incident, musí mít právo ho opravit. Často stačí read-only pohled:
+
+- stav hostingu,
+- poslední deploy,
+- stav certifikátu,
+- health checky,
+- metriky a alerty,
+- omezené logy bez citlivých payloadů,
+- DNS záznamy bez práva zápisu.
+
+Read-only přístup snižuje dvě rizika najednou. Člověk může rychle ověřit stav, ale omylem nezmění produkci. To je užitečné hlavně u malých týmů, kde se role překrývají a incident řeší ten, kdo je zrovna vzhůru, u počítače a nemá na sobě pyžamo s nápisem „dneska ne“.
+
+Praktické pravidlo: diagnostika má být širší než oprávnění k opravě. Oprava má být užší, auditovaná a popsaná runbookem.
+
+### Záchranný balík musí přežít výpadek hlavního systému
+
+Pokud je záchranný balík uložený jen v aplikaci, která právě nejde, nefunguje. Stejně problematické je, když je dostupný jen přes SSO, které má incident, nebo jen v repozitáři, ke kterému se bez správného zařízení nikdo nedostane.
+
+U kritických postupů si odpověz:
+
+- Je dokument dostupný, když nejde produkční aplikace?
+- Je dostupný, když nejde primární identity provider?
+- Ví záložní vlastník, kde ho najde?
+- Je poslední kontrola mladší než tři měsíce?
+- Neobsahuje žádná tajemství, která by z něj dělala další riziko?
+
+Nemusíš hned budovat drahý krizový portál. Stačí rozumná kombinace: provozní wiki s omezeným přístupem, export runbooků bez secrets pro nouzové použití, správce hesel pro skutečná tajemství, a pravidelný test, že člověk mimo hlavního vlastníka dokáže najít správný postup.
+
+### Rotace a revokace patří do balíku také
+
+Záchranný balík často končí u otázky „kde co je“. To je málo. U kritických přístupů potřebuješ vědět i:
+
+- kdo umí přístup odebrat,
+- kdo umí token nebo klíč rotovat,
+- jak se pozná, že starý klíč už není používán,
+- jak ověřit dopad rotace,
+- kde se zapisuje změna,
+- co udělat, když se klíč objeví v chatu, logu nebo repozitáři.
+
+Příklad dobré rotace:
+
+1. Vytvořit nový token s minimálním rozsahem.
+2. Nasadit ho do runtime konfigurace mimo kód.
+3. Ověřit hlavní cestu a monitoring.
+4. Revokovat starý token.
+5. Zapsat čas, vlastníka a důvod rotace.
+6. Zkontrolovat, že starý token není v repozitáři, logu ani dokumentaci.
+
+Twelve-Factor App doporučuje držet konfiguraci odděleně od kódu. V praxi to znamená i oddělení „kde je postup“ od „kde je tajemství“. Postup patří do dokumentace. Tajemství patří do určeného secret úložiště nebo provozní konfigurace s řízeným přístupem.
+
+### Checklist: Záchranný balík bez úniku
+
+- [ ] Každá kritická služba má kartu s vlastníkem, záložním vlastníkem a runbookem.
+- [ ] Dokument neobsahuje hesla, tokeny, privátní klíče, recovery kódy ani celé `.env` soubory.
+- [ ] Je jasné, kde se spravuje DNS, hosting, TLS, monitoring a logy.
+- [ ] Existuje read-only diagnostická cesta pro člověka bez plného produkčního přístupu.
+- [ ] Oprávnění k opravě jsou užší než oprávnění k diagnostice.
+- [ ] Balík je dostupný i při výpadku hlavní aplikace nebo hlavní wiki.
+- [ ] U kritických tajemství je popsaná rotace, revokace a ověření dopadu.
+- [ ] Logy a screenshoty v runboocích neobsahují osobní údaje ani citlivé payloady.
+- [ ] Každá karta má datum poslední kontroly.
+- [ ] Záložní vlastník jednou za kvartál projde suchý běh aspoň jedné obnovy.
+
+### Mini úkol
+
+Vyber jednu kritickou službu a vyplň záchrannou kartu:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Co bez této služby uživatel nebo tým nedokáže? |  |
+| Kdo je primární vlastník? |  |
+| Kdo je záložní vlastník? |  |
+| Kde je DNS? |  |
+| Kde běží hosting nebo runtime? |  |
+| Kdo a jak spravuje TLS? |  |
+| Jaký externí monitoring ověřuje dostupnost? |  |
+| Kde je runbook obnovy? |  |
+| Kde jsou tajemství uložena mimo dokumentaci? |  |
+| Kdo umí udělat rotaci nebo revokaci? |  |
+| Jak ověříme, že záložní vlastník postup opravdu najde? |  |
+
+Potom udělej jednu konkrétní opravu: odstraň tajemství z dokumentu, doplň záložního vlastníka, přidej odkaz na TLS runbook, vytvoř read-only diagnostický přístup nebo naplánuj suchý běh. Záchranný balík nemá být velký. Má být použitelný ve chvíli, kdy se věci začnou tvářit kreativně špatně.
+
 ## Zdroje
 
 - curl: curl man page - volby pro časové limity, TLS ověřování a režim `--insecure`: https://curl.se/docs/manpage.html
@@ -30875,6 +31028,7 @@ Potom uzavři jednu věc. Ne pět. Jednu. Přidej alert, oprav renewal hook, nap
 
 ## Pracovní log
 
+- 2026-07-18: Doplněna příloha o provozním záchranném balíku bez ukládání tajemství do repozitáře: karta kritické služby, oddělení mapy od hesel a klíčů, read-only diagnostika, dostupnost runbooků při výpadku hlavního systému, rotace a revokace přístupů, checklist a mini úkol; navázáno na existující zdroje OWASP k secrets managementu a autorizaci, Twelve-Factor App ke konfiguraci a předchozí provozní kapitoly o TLS, runboocích a postmortemech.
 - 2026-07-18: Doplněna příloha o postmortemu po provozním incidentu bez hledání viníka: oddělení obnovy od učení, minimální incidentní karta, popis dopadu jazykem zákazníka, privacy-first práce s logy a důkazy, ověřitelná opatření, uzavírání otevřených úkolů, checklist a mini úkol; navázáno na existující provozní kapitoly o TLS, health checku, runboocích a monitoringu.
 - 2026-07-18: Doplněna příloha o health check skriptu bez slepé hodnoty `000000`: rozlišení HTTP statusu a exit codu, diagnostický strom DNS/TCP/TLS/HTTP/obsah, privacy-first rozsah logování, obsahové smoke testy, alert s prvním krokem, checklist a mini úkol; navázáno na existující zdroje k `curl`, HTTP statusům a externímu HTTPS monitoringu.
 - 2026-07-18: Doplněna příloha o provozním vlastnictví HTTPS bez certifikátu na poslední chvíli: doménová karta s vlastníky DNS/hostingu/TLS/monitoringu, diagnostika podle vrstev DNS/TCP/TLS/HTTP/obsah/aplikace, runbook pro obnovu certifikátu a reload služby, předstihové alerty expirace, kvartální test opravitelnosti, checklist a mini úkol; navázáno na existující zdroje k curl, Let’s Encrypt, Certbotu a doménové hygieně.
