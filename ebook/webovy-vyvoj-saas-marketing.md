@@ -31405,6 +31405,131 @@ Vezmi jednu produkční doménu a vyplň po obnově kartu:
 
 Potom udělej jednu věc, která odstraní příčinu opakování: oprav timer, doplň reload hook, přidej externí TLS expiry alert, napiš chybějící přístupovou kartu nebo vyzkoušej obnovu s náhradníkem. Obnova certifikátu je jen první pomoc. Skutečná oprava je systém, který příště začne křičet dřív než prohlížeč.
 
+## Příloha: Incidentní eskalace bez čekání na jediného člověka
+
+Monitoring může správně odhalit problém, ale oprava se pořád může zaseknout na přístupu. U expirovaného certifikátu je to bolestivě vidět: agent nebo externí kontrola dokáže říct, že veřejný certifikát je po datu platnosti, ale pokud nemá právo obnovit certifikát, reloadnout nginx, upravit managed certifikát nebo otevřít hostingový panel, incident se nepohne. Diagnóza bez opravitelnosti je užitečná jen napůl.
+
+Špatná otázka zní: „Kdo to kdysi nastavoval?“
+
+Lepší otázka zní: „Kdo má dnes oprávnění udělat konkrétní opravu a kdo je jeho náhradník?“
+
+Tohle není výzva rozdávat produkční klíče všem automatům. Privacy-first provoz má držet přístupy omezené. Znamená to ale, že pro kritické služby musí existovat předem popsaná cesta od alertu k opravě. Když je jediná odpověď „zeptáme se člověka, který možná spí, možná je na dovolené a možná si pamatuje heslo“, systém není bezpečný. Je jen křehký s dobrou náladou.
+
+### Rozliš diagnostiku, opravu a schválení
+
+Ne každý účastník incidentu potřebuje stejná práva. Praktické rozdělení rolí:
+
+| Role | Co smí dělat | Co typicky nepotřebuje |
+| --- | --- | --- |
+| Monitor | zjistit dostupnost, TLS chybu, HTTP status, expiraci certifikátu | produkční shell, privátní klíče, zákaznická data |
+| Diagnostik | přečíst runbook, ověřit veřejný certifikát, zkontrolovat read-only dashboardy | měnit DNS, restartovat služby, číst obsah databáze |
+| Opravář | obnovit certifikát, reloadnout správnou vrstvu, spustit připravený runbook | trvalý superadmin všude |
+| Schvalovatel | potvrdit rizikový zásah, výjimku nebo nouzovou změnu | technické tajemství samotné |
+| Komunikátor | napsat status pro zákazníky nebo tým | interní logy, tokeny, konfiguraci |
+
+U malého týmu může jednu roli zastávat stejný člověk. Důležité je pojmenovat schopnost, ne titul. „Petr má root“ není provozní plán. „Primární opravář pro TLS může obnovit certifikát na webovém serveru a reloadnout nginx; náhradník má stejný postup otestovaný při kvartálním dry-runu“ už plán připomíná.
+
+### Přístupová karta kritické služby
+
+Ke každé veřejné službě drž jednoduchou kartu. Neobsahuje hesla ani privátní klíče. Obsahuje cestu k opravě.
+
+| Pole | Co vyplnit |
+| --- | --- |
+| Služba | doména, aplikace nebo veřejná schopnost |
+| Kritická práce | co uživatel nedokáže, když služba selže |
+| Monitor | odkud běží kontrola a koho budí |
+| Diagnostický rozsah | co může agent nebo člověk ověřit bez write přístupu |
+| Opravný rozsah | jaké konkrétní akce jsou potřeba pro běžné incidenty |
+| Primární opravář | role nebo člověk s přístupem |
+| Náhradník | kdo umí totéž bez hledání v chatu |
+| Nouzová brzda | co lze dočasně vypnout, přesměrovat nebo degradovat |
+| Runbook | kde je postup a kdy byl naposledy vyzkoušen |
+| Eskalace | kdy a komu se hlásí, že oprava není proveditelná |
+
+U TLS incidentu může karta říct: monitor smí ověřit `curl` a veřejné datum expirace; opravář smí spustit obnovu certifikátu nebo použít hostingový panel; po obnově musí proběhnout reload správné vrstvy a externí kontrola bez `--insecure`. To je krátké, ale v incidentu stačí. Hlavně je zřejmé, kde končí diagnostika a začíná akce.
+
+### Automatizace má mít připravené hranice
+
+Automatický agent může být výborný pro triage: DNS, TCP, TLS, HTTP, obsahový smoke test, rozdíl mezi přímým spojením a proxy. U opravy je potřeba větší opatrnost. Restart služby, změna DNS, certifikátový renewal nebo zásah do load balanceru jsou produkční akce. Měly by mít:
+
+- jasný runbook,
+- omezené oprávnění jen pro danou službu,
+- auditní stopu,
+- idempotentní nebo bezpečně opakovatelný postup,
+- potvrzení u zásahů s vyšším rizikem,
+- veřejné ověření výsledku po akci.
+
+Praktický kompromis pro malý tým:
+
+1. Agent automaticky provede read-only diagnostiku.
+2. Pokud problém odpovídá známému runbooku, připraví přesnou opravnou větu.
+3. U nízkorizikové akce s omezeným oprávněním může spustit fix.
+4. U rizikové nebo nejasné akce eskaluje člověku se všemi potřebnými fakty.
+5. Po opravě vždy ověří výsledek zvenku a zapíše pracovní log.
+
+Codyho komentář: „Agent to opraví“ není strategie, pokud agent nemá právo opravit správnou vrstvu. Je to jen rychlejší způsob, jak zjistit, že nemáme přístup. Což je užitečné, ale pořád to není obnovený web.
+
+### Eskalace má být krátká a použitelná
+
+Když diagnostika narazí na hranici oprávnění, zpráva má člověku zkrátit cestu k akci. Neposílej dlouhý log. Pošli rozhodovací minimum:
+
+```text
+Služba: cody.dreamind.cz
+Stav: veřejné HTTPS selhává kvůli certifikátu.
+Přímý test: klient vidí expirovaný certifikát.
+Proxy test: může ukazovat jiný mezilehlý certifikát, proto je potřeba ověřit přímý internet.
+Pravděpodobná oprava: obnovit certifikát na vrstvě, která ho servíruje veřejným klientům, a reloadnout tuto vrstvu.
+Co chybí: produkční přístup nebo člověk s právem obnovy.
+Po opravě ověřit: curl bez --insecure a datum veřejného certifikátu.
+```
+
+Tahle zpráva neobsahuje tajemství, ale obsahuje práci. Člověk ví, co má otevřít, co neřešit a jak poznat konec. To je rozdíl mezi „web nejde“ a „potřebujeme obnovit veřejný TLS certifikát na správné vrstvě“.
+
+### Opravitelnost testuj stejně jako obnovu
+
+Dry-run obnovy TLS nemá končit jen technickým příkazem. Jednou za čas ověř i lidskou a přístupovou část:
+
+- Dostane alert správný člověk?
+- Rozumí alertu někdo mimo autora skriptu?
+- Ví náhradník, kde je runbook?
+- Má náhradník skutečně potřebný přístup?
+- Umí se přihlásit bez osobního zařízení jediného člověka?
+- Je jasné, kdy agent smí jen diagnostikovat a kdy smí opravit?
+- Umíme po opravě ověřit veřejný výsledek bez interní proxy?
+
+Tohle se dá otestovat bez rozbíjení produkce. Stačí tabletop cvičení: vybereš doménu, přečteš poslední alert, jdeš podle runbooku až k bodu před ostrou změnou a zapíšeš, kde se postup zasekl. Pokud se zasekne na „nevíme, kdo má přístup“, máš užitečný nález. Lepší teď u kávy než v noci u expirovaného certifikátu.
+
+### Checklist: Opravitelnost incidentu
+
+- [ ] Kritická služba má kartu s monitorem, primárním opravářem a náhradníkem.
+- [ ] Diagnostika má read-only rozsah a nepotřebuje produkční tajemství.
+- [ ] Opravný postup je v runbooku, ne jen v hlavě jednoho člověka.
+- [ ] Přístupy jsou omezené na potřebné akce, ale reálně použitelné při incidentu.
+- [ ] Náhradník prošel suchým během alespoň po bod před ostrou změnou.
+- [ ] Eskalační zpráva obsahuje službu, vrstvu, důkaz, pravděpodobnou opravu a ověření.
+- [ ] Alert rozlišuje problém TLS, HTTP, aplikace a obsahu.
+- [ ] Po opravě se ověřuje veřejný výsledek bez `--insecure`.
+- [ ] Incidentní log neobsahuje privátní klíče, tokeny ani zbytečné osobní údaje.
+- [ ] Každý výpadek končí jedním konkrétním opatřením proti opakování.
+
+### Mini úkol
+
+Vyber jednu kritickou veřejnou službu a vyplň kartu opravitelnosti:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jaká služba se kontroluje? |  |
+| Jaký alert ji probudí? |  |
+| Co smí ověřit agent nebo monitor? |  |
+| Jaká akce je nejčastější oprava? |  |
+| Kdo má právo ji provést? |  |
+| Kdo je náhradník? |  |
+| Kde je runbook? |  |
+| Jak poznáme, že oprava zabrala? |  |
+| Které tajemství do incidentního logu nikdy nepatří? |  |
+
+Potom udělej jednu konkrétní opravu: doplň náhradníka, přidej odkaz na runbook do alertu, omez a pojmenuj servisní účet, vyzkoušej read-only diagnostiku zvenku nebo napiš eskalační šablonu. Incident, který nejde opravit bez archeologie v chatu, není jen technický problém. Je to chybějící provozní vlastnictví.
+
 ## Zdroje
 
 - curl: curl man page - volby pro časové limity, TLS ověřování a režim `--insecure`: https://curl.se/docs/manpage.html
@@ -31583,6 +31708,7 @@ Potom udělej jednu věc, která odstraní příčinu opakování: oprav timer, 
 
 ## Pracovní log
 
+- 2026-07-18: Doplněna příloha o incidentní eskalaci bez čekání na jediného člověka: rozlišení diagnostiky, opravy a schválení, přístupová karta kritické služby, bezpečné hranice automatizace, krátká eskalační šablona, test opravitelnosti, checklist a mini úkol; navázáno na dnešní zjištění, že veřejný TLS certifikát je expirovaný, ale prostředí nemá produkční přístup k obnově.
 - 2026-07-18: Obnoven poškozený obsah e-booku z předchozí plné verze po náhodném zkrácení souboru na placeholder a doplněna příloha o ostré obnově expirovaného TLS certifikátu: triage aplikace vs. TLS důvěra, ověření veřejného certifikátu, správná vrstva obnovy, bezpečný postup pro vlastní server, eskalace bez tajemství, úprava health checku, checklist a mini úkol; navázáno na dnešní zjištění, že aplikace za HTTPS odpovídá, ale veřejný certifikát je expirovaný.
 - 2026-07-18: Doplněna příloha o přesměrování URL bez SEO a datového chaosu: mapa starých a nových adres, rozlišení trvalých/dočasných změn a zrušeného obsahu, pravidla pro query parametry a `Referrer-Policy`, úklid redirect řetězů, smoke test po nasazení, checklist a mini úkol; navázáno na existující zdroje Google Search Central k migracím, redirectům, canonical URL a sitemapám a MDN k referrer policy.
 - 2026-07-18: Doplněna příloha o první reakci na `000000` bez náhodného restartu: rozlišení HTTP statusu, curl exit codu a chybové věty, postup přes DNS/TCP/TLS/HTTP/aplikaci, praktická interpretace `Empty reply from server`, restart jako cílený zásah, alert s prvním krokem, checklist a mini úkol; navázáno na dnešní selhání kontroly webu i existující části o health checku, HTTPS monitoringu, runboocích a TLS obnově.
