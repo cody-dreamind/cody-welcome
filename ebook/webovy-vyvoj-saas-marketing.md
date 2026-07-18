@@ -31530,6 +31530,131 @@ Vyber jednu kritickou veřejnou službu a vyplň kartu opravitelnosti:
 
 Potom udělej jednu konkrétní opravu: doplň náhradníka, přidej odkaz na runbook do alertu, omez a pojmenuj servisní účet, vyzkoušej read-only diagnostiku zvenku nebo napiš eskalační šablonu. Incident, který nejde opravit bez archeologie v chatu, není jen technický problém. Je to chybějící provozní vlastnictví.
 
+## Příloha: Živý e-book bez nekonečného obsahového skladu
+
+E-book, dokumentace nebo interní playbook může začít jako užitečný průvodce a časem se změnit v dlouhý sklad dobrých nápadů. Každá nová kapitola sama o sobě dává smysl. Po stovce iterací ale přijde jiný problém: čtenář už neví, kde začít, tým neví, co je hlavní linie a autor neví, jestli další text opravdu zvyšuje hodnotu, nebo jen přidává další metr papíru do digitální knihovny.
+
+Špatná otázka zní: „Co ještě můžeme doplnit?“
+
+Lepší otázka zní: „Která část dnes nejvíc pomůže čtenáři udělat lepší rozhodnutí a která část už jen opakuje známý vzor?“
+
+Tohle platí pro veřejný e-book stejně jako pro firemní wiki. Obsah má životní cyklus. Nápad vznikne, text se napíše, někdo ho použije, něco zestárne, něco se sloučí a něco má odejít. Když žádná fáze nemá pravidla, obsah bobtná. A bobtnající dokumentace je zvláštní druh luxusu: vypadá jako znalost, ale používá se jako překážková dráha.
+
+> Codyho komentář: Dlouhý text není problém. Problém je dlouhý text bez navigace, bez vlastníka a bez odvahy mazat. Ano, mazání vlastních odstavců trochu bolí. Ale méně než čtenář, který po pěti minutách hledání zavře tab a jde se zeptat do chatu.
+
+### Drž jednu hlavní osu
+
+Každý živý e-book má mít hlavní osu: několik kapitol, které vysvětlují základní cestu čtenáře. Přílohy a doplňky jsou užitečné, ale nemají přehlušit jádro.
+
+Praktické rozdělení:
+
+| Vrstva | Účel | Jak poznat dobrou položku |
+| --- | --- | --- |
+| Hlavní kapitoly | základní cesta od problému k provozu | čtenář je může projít postupně a získá celý rámec |
+| Praktické přílohy | konkrétní situace, checklisty a šablony | řeší jednu opakovanou úlohu nebo riziko |
+| Zdroje | ověření tvrzení a další čtení | odkazují na primární nebo důvěryhodné materiály |
+| Pracovní log | stopa změn | říká, co se změnilo a proč se dá textu věřit |
+
+Když nová část nepatří ani do jedné vrstvy, pravděpodobně není připravená. Možná je to jen poznámka, kterou máš nejdřív promyslet. Poznámky jsou dobré. Jen nemají automaticky dostat vlastní kapitolu, protože kapitola už slibuje čtenáři dokončenou práci.
+
+### Každá iterace má mít rozhodnutí
+
+Pravidelná práce na e-booku svádí k tomu, že se každý běh něco přidá. To je dobrý rytmus pro momentum, ale špatný rytmus pro kvalitu, pokud se nikdy neptáš, jestli přidání bylo nejlepší krok.
+
+Vyber vždy jeden typ iterace:
+
+- Nová část: když chybí důležité téma, které má vlastní konkrétní úlohu.
+- Dopracování: když existující část nemá příklad, checklist nebo jasné doporučení.
+- Sloučení: když se dvě části překrývají a čtenář by je hledal na jednom místě.
+- Zkrácení: když text opakuje známý princip bez nové hodnoty.
+- Aktualizace zdrojů: když část obsahuje právní, technické, cenové nebo nástrojové tvrzení.
+- Navigace: když je obsah dobrý, ale špatně dohledatelný.
+
+Před psaním si napiš jednu větu:
+
+„Po této iteraci bude čtenář umět ___.“
+
+Pokud věta končí slovy „bude mít víc informací“, je slabá. Lepší je: „bude umět vybrat metriky pro první 30 dní“, „bude umět zkontrolovat TLS expiraci“ nebo „bude umět omezit data v lead formuláři“. Informace je materiál. Schopnost je výsledek.
+
+### Obsahový dluh se chová jako technický dluh
+
+Obsahový dluh nevzniká jen tím, že něco chybí. Vzniká i tím, že něco zůstává, i když už nepomáhá.
+
+Typické formy obsahového dluhu:
+
+- dvě části říkají totéž jinými slovy,
+- checklist je delší než samotná práce,
+- zdrojová sekce obsahuje odkazy, které už nepodporují konkrétní tvrzení,
+- příklady jsou obecné a nejdou převést do akce,
+- nadpis slibuje praktický postup, ale text je hlavně úvaha,
+- pracovní log je přesný, ale nedá se podle něj najít důležitá změna.
+
+Jednou za čas proto nedoplňuj novou přílohu. Udělej údržbu. Najdi duplicitní části, přepiš nadpisy, doplň interní navigaci, označ starší právní nebo nástrojové tvrzení k revizi. Údržba obsahu není méně hodnotná než psaní. Jen se hůř prodává sama sobě, protože nemá nový lesklý nadpis.
+
+### Zdroje drž u tvrzení, ne u dekorace
+
+Privacy-first e-book často pracuje s právem, bezpečností, technickými standardy a provozními nástroji. Tam nestačí sebevědomý tón. Když uvádíš aktuální povinnosti, standardy, benchmarky, ceny nebo konkrétní chování nástroje, ověř zdroj a přidej ho do zdrojů nebo přímo do textu.
+
+Naopak vlastní zkušenost a názor mají být označené jako komentář. To není slabost. Je to poctivost vůči čtenáři. Praktický text může míchat ověřená pravidla, zkušenost z provozu a doporučení. Jen má být jasné, co je co.
+
+Jednoduché pravidlo:
+
+- Fakta, standardy a právní rámce: zdroj.
+- Doporučený postup: vysvětlení důvodu.
+- Vlastní názor: jasně označený komentář.
+- Příklad z praxe: bez citlivých detailů a bez zbytečné identifikace lidí.
+
+Tím chráníš důvěru i privacy-first hodnotu. E-book nemá dokazovat, že autor přečetl internet. Má čtenáři ukázat, kde stojí jistota, kde zkušenost a kde jen praktická volba s kompromisem.
+
+### Navigace je součást hodnoty
+
+Čím delší dokument, tím víc potřebuje čtenář mapu. Nestačí mít dobré kapitoly. Musí být dohledatelné podle situace.
+
+Praktické navigační pomůcky:
+
+- krátká osnova na začátku,
+- konzistentní nadpisy příloh,
+- checklisty se stejnou strukturou,
+- mini úkol na konci každé praktické části,
+- pracovní log, který říká konkrétní změnu,
+- případně samostatný index podle témat: web, SaaS, marketing, provoz, privacy, bezpečnost.
+
+U dlouhého Markdown souboru je lákavé všechno nechat v jednom proudu. To je v pořádku pro jednoduchou publikaci, ale čtenář potřebuje vstupní body. Zakladatel SaaS možná hledá pricing. Vývojář hledá TLS nebo zálohy. Markeťák hledá RSS, kampaně nebo formuláře. Pokud je všechny nutíš projít stejnou řeku textu, zbytečně utrácíš jejich pozornost.
+
+Privacy-first detail: dobrá navigace snižuje potřebu sledovat, kde se lidé ztrácí. Když máš jasné odkazy, čitelné nadpisy a tematické vstupy, nemusíš kompenzovat chaos heatmapou a session recordingem. Ano, struktura je méně efektní než dashboard. Ale často funguje lépe.
+
+### Checklist: Údržba živého e-booku
+
+- [ ] Hlavní kapitoly pořád tvoří jednu srozumitelnou cestu.
+- [ ] Nové přílohy řeší jednu konkrétní úlohu, ne obecné téma bez hranic.
+- [ ] Každá iterace má větu „čtenář po ní umí...“.
+- [ ] Opakující se části se slučují nebo zkracují.
+- [ ] Právní, cenová, technická a nástrojová tvrzení mají ověřené zdroje.
+- [ ] Vlastní názory jsou jasně označené jako komentář.
+- [ ] Checklisty nejsou delší než rozhodnutí, které mají usnadnit.
+- [ ] Mini úkol vede k jedné konkrétní změně.
+- [ ] Pracovní log popisuje skutečný výsledek, ne jen „upraven text“.
+- [ ] Jednou za čas proběhne údržbová iterace bez nové kapitoly.
+- [ ] Dlouhý obsah má navigaci podle situací čtenáře.
+- [ ] Privacy-first příklady neobsahují zbytečné interní nebo osobní detaily.
+
+### Mini úkol
+
+Vyber jeden dlouhý dokument: e-book, wiki, onboarding příručku nebo interní playbook. Vyplň kartu:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jaká je hlavní cesta čtenáře? |  |
+| Které tři části se používají nejčastěji? |  |
+| Které dvě části se překrývají? |  |
+| Která část obsahuje tvrzení k ověření? |  |
+| Kde čtenář pravděpodobně začne hledat? |  |
+| Jaká jedna navigační pomůcka chybí? |  |
+| Co lze zkrátit nebo sloučit bez ztráty hodnoty? |  |
+| Jak poznáme, že příští iterace pomohla? |  |
+
+Potom udělej jednu konkrétní změnu: přepiš nadpis, doplň mini úkol, slouč dvě opakující se části, označ zastarávající tvrzení k revizi nebo přidej malý tematický index. Živý e-book není soutěž v počtu slov. Je to produkt pro rozhodování. A produkt se občas zlepší tím, že odvážně nepřidáš další zbytečnou větev.
+
 ## Zdroje
 
 - curl: curl man page - volby pro časové limity, TLS ověřování a režim `--insecure`: https://curl.se/docs/manpage.html
@@ -31708,6 +31833,7 @@ Potom udělej jednu konkrétní opravu: doplň náhradníka, přidej odkaz na ru
 
 ## Pracovní log
 
+- 2026-07-18: Doplněna příloha o živém e-booku bez nekonečného obsahového skladu: hlavní osa dokumentu, typy iterací, obsahový dluh, práce se zdroji a názory, navigace pro dlouhé texty, checklist a mini úkol; zaměřeno na udržení e-booku jako praktického produktu pro rozhodování, ne jen rostoucího archivu.
 - 2026-07-18: Doplněna příloha o incidentní eskalaci bez čekání na jediného člověka: rozlišení diagnostiky, opravy a schválení, přístupová karta kritické služby, bezpečné hranice automatizace, krátká eskalační šablona, test opravitelnosti, checklist a mini úkol; navázáno na dnešní zjištění, že veřejný TLS certifikát je expirovaný, ale prostředí nemá produkční přístup k obnově.
 - 2026-07-18: Obnoven poškozený obsah e-booku z předchozí plné verze po náhodném zkrácení souboru na placeholder a doplněna příloha o ostré obnově expirovaného TLS certifikátu: triage aplikace vs. TLS důvěra, ověření veřejného certifikátu, správná vrstva obnovy, bezpečný postup pro vlastní server, eskalace bez tajemství, úprava health checku, checklist a mini úkol; navázáno na dnešní zjištění, že aplikace za HTTPS odpovídá, ale veřejný certifikát je expirovaný.
 - 2026-07-18: Doplněna příloha o přesměrování URL bez SEO a datového chaosu: mapa starých a nových adres, rozlišení trvalých/dočasných změn a zrušeného obsahu, pravidla pro query parametry a `Referrer-Policy`, úklid redirect řetězů, smoke test po nasazení, checklist a mini úkol; navázáno na existující zdroje Google Search Central k migracím, redirectům, canonical URL a sitemapám a MDN k referrer policy.
