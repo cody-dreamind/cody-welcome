@@ -33395,8 +33395,139 @@ Vyber jednu dlouhou stránku, e-book nebo dokumentaci a udělej malou odkazovou 
 
 Potom oprav jednu věc: prázdný odkaz, starou kotvu, redirect řetěz, nejasný text odkazu, nebo zdroj, který už neodpovídá tvrzení. Nečekej na velký publikační den. Rozbité odkazy stárnou potichu, ale čtenář je potká nahlas.
 
+## Příloha: SSH opravný přístup bez slepého host key promptu
+
+Když produkční web spadne kvůli TLS certifikátu, reverzní proxy nebo backendu za ní, první otázka často nezní „jaký je správný příkaz“. Zní mnohem protivněji: „Má tým vůbec bezpečný opravný přístup na správný server?“ Pokud je odpověď nejasná, incident se rychle změní z technického problému na provozní improvizaci.
+
+SSH je silný nástroj právě proto, že umí ověřovat identitu serveru a přihlašovat konkrétní oprávněné účty. Jenže v praxi se při prvním incidentu často objeví hláška o neznámém host key, někdo ve stresu přidá `StrictHostKeyChecking=no`, jiný hledá starý klíč v poznámkách a třetí člověk se modlí, aby heslo v chatu ještě platilo. To není incident response. To je únik důvěry v pomalém záběru.
+
+Špatná otázka zní: „Jak se tam rychle dostaneme?“
+
+Lepší otázka zní: „Jak se dostaneme na správný stroj, s ověřenou identitou, omezeným oprávněním a auditovatelnou akcí?“
+
+OpenSSH klient umí v režimu `BatchMode=yes` vypnout interaktivní dotazy, což se hodí pro skripty a plánované úlohy. `StrictHostKeyChecking=yes` zase odmítá automatické přidávání nových host keys a chrání proti připojení na nečekaný server. RFC 4255 popisuje možnost publikovat SSH fingerprinty přes DNS záznamy SSHFP, ale upozorňuje, že důvěra stojí na bezpečném ověření záznamů a politice klienta. Přeloženo: automatizace je fajn, ale nesmí si sama vymýšlet, komu věří.
+
+### Host key je identita serveru, ne obtěžující hláška
+
+Host key prompt není dekorace terminálu. Je to varování, že klient ještě neví, jestli vzdálený server je skutečně ten, za který se vydává. V běžném provozu má být fingerprint známý dřív, než je potřeba opravovat produkci.
+
+Praktická karta serveru:
+
+| Pole | Co zapsat |
+| --- | --- |
+| Hostname | veřejné DNS jméno, například `app.example.com` |
+| IP adresa | aktuální produkční adresa nebo rozsah |
+| SSH port | výchozí `22` nebo vlastní port |
+| Host key fingerprint | algoritmus a fingerprint ověřený mimo incident |
+| Způsob ověření | konzole hostingu, interní runbook, SSHFP s DNSSEC, out-of-band potvrzení |
+| Povolení uživatelé | role nebo účty, ne osobní legenda v hlavě jednoho člověka |
+| Povolené opravné akce | například reload nginx, certbot dry-run, restart konkrétní služby |
+| Audit | kde se zaznamená kdo, kdy a proč zasáhl |
+
+Do repozitáře nedávej privátní klíče ani tajemství. Karta má obsahovat ověřitelné metadata a odkazy na správné místo, ne samotné přístupové údaje.
+
+### První připojení nedělej poprvé při incidentu
+
+Opravný přístup se má testovat v klidu. Minimální smoke test může být jen neškodný příkaz:
+
+```bash
+ssh -o BatchMode=yes -o StrictHostKeyChecking=yes ops@app.example.com 'hostname && uptime'
+```
+
+Pokud test selže na neznámém host key, není to drobná nepříjemnost. Je to chybějící onboarding stroje do provozní důvěry. Pokud selže na `Permission denied`, chybí oprávnění nebo správný klíč. Pokud se připojí, ale účet nemá právo na konkrétní opravnou akci, chybí oprávnění v provozní roli.
+
+Tento test nemá dávat agentovi ani člověku univerzální root přístup. Má ověřit, že existuje konkrétní cesta pro konkrétní práci. Třeba:
+
+- ověřit stav `nginx`,
+- spustit `certbot renew --dry-run`,
+- obnovit certifikát,
+- reloadnout proxy,
+- restartovat jednu aplikační službu,
+- přečíst omezené provozní logy bez zákaznických dat.
+
+Codyho komentář: Přístup, který se testuje až ve chvíli, kdy web leží, je jako hasicí přístroj za zamčenými dveřmi a návodem v PDF na tom samém serveru. Poetické, ale blbě hořící.
+
+### Nepoužívej slepou důvěru jako opravu
+
+`StrictHostKeyChecking=accept-new` může být praktické pro první řízené připojení, když zároveň ověřuješ fingerprint z důvěryhodného zdroje. Nemá být výchozí incidentní reflex. `StrictHostKeyChecking=no` je ještě horší zkratka: snižuje ochranu přesně ve chvíli, kdy tým jedná pod tlakem.
+
+Bezpečnější postup:
+
+1. Zjisti DNS a IP z více pohledů.
+2. Získej host key fingerprint přes nezávislý kanál: hosting konzole, dokumentovaná karta, bezpečně spravovaný `known_hosts`, SSHFP s ověřením DNSSEC nebo ruční potvrzení od správce.
+3. Porovnej fingerprint s tím, co nabízí server.
+4. Teprve potom aktualizuj `known_hosts` nebo konfiguraci opravného účtu.
+5. Zapiš změnu host key do provozního logu včetně důvodu.
+
+Pokud se host key změnil bez plánované výměny serveru, rebuild image nebo obnovy instance, ber to jako bezpečnostní signál, ne jako otravnou překážku. Možná je vše v pořádku. Ale nejdřív to ověř.
+
+### Opravný účet má umět málo věcí dobře
+
+Nejhorší opravný přístup je sdílený root klíč. Je pohodlný, dokud se neztratí, nezůstane u bývalého dodavatele nebo se nepoužije k úpravě něčeho, co s incidentem nesouvisí.
+
+Lepší model:
+
+| Role | Povolené akce | Nepovolovat |
+| --- | --- | --- |
+| `tls-maintainer` | ověřit certifikát, spustit obnovu, reload proxy | číst databázi, měnit aplikaci |
+| `app-restart` | restartovat konkrétní službu, zkontrolovat status | shell bez omezení, editovat secrets |
+| `log-reader` | číst omezené provozní logy | export zákaznických dat |
+| `deploy-bot` | nasadit podepsaný artefakt | ruční editace produkčních souborů |
+
+U malého týmu nemusí být všechno dokonalé od prvního dne. Ale i jednoduché `sudoers` pravidlo pro jeden bezpečný příkaz je lepší než „všichni mají všechno, protože někdy hoří“. Produkce občas hoří. To není důvod skladovat benzín vedle runbooku.
+
+### Runbook má oddělit diagnostiku a zásah
+
+Opravný runbook by měl jasně říkat, co je read-only diagnostika a co je změna produkce.
+
+Příklad struktury:
+
+| Krok | Typ | Příkaz nebo akce | Stop podmínka |
+| --- | --- | --- | --- |
+| Ověřit veřejný TLS certifikát | diagnostika | `openssl s_client ... | openssl x509 -noout -dates` | pokud DNS míří jinam než očekáváme |
+| Ověřit backend za proxy | diagnostika | interní health endpoint z hostu | pokud odpověď obsahuje citlivá data |
+| Spustit dry-run obnovy | nízké riziko | `certbot renew --dry-run` | pokud validace domény selže |
+| Obnovit certifikát | zásah | `certbot renew` | pokud není jasný vlastník DNS/proxy |
+| Reload proxy | zásah | `systemctl reload nginx` | pokud `nginx -t` selže |
+| Ověřit veřejnou URL | diagnostika | `curl -fsS https://...` | pokud cert stále nesedí |
+
+Každý zásah má mít vlastníka a důvod. Ne kvůli papírování, ale kvůli tomu, aby další člověk za hodinu věděl, co se stalo. Incident bez logu je příští incident s horší pamětí.
+
+### Checklist: SSH opravný přístup
+
+- [ ] Každý produkční host má zdokumentovaný hostname, IP, SSH port a host key fingerprint.
+- [ ] Fingerprint je ověřený mimo incident, ne slepě přijatý při prvním připojení.
+- [ ] `known_hosts` nebo host certificate politika je spravovaná a obnovitelná.
+- [ ] Automatizované skripty používají `BatchMode=yes` a selžou bez interaktivního dotazu.
+- [ ] Opravné účty mají nejmenší oprávnění pro konkrétní akce.
+- [ ] Sdílený root přístup není běžný provozní mechanismus.
+- [ ] Runbook rozlišuje diagnostiku, nízké riziko a produkční zásah.
+- [ ] Každá změna host key má zapsaný důvod a ověření.
+- [ ] Opravný přístup se testuje pravidelně neškodným příkazem.
+- [ ] Logy a výstupy z oprav neobsahují zákaznická data ani secrets.
+
+### Mini úkol
+
+Vyber jeden produkční web nebo SaaS a vyplň opravnou přístupovou kartu:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jaký host opravujeme při výpadku webu? |  |
+| Kde je ověřený host key fingerprint? |  |
+| Kdo má opravnou roli a kdo je náhradník? |  |
+| Které příkazy smí opravná role spustit? |  |
+| Jak ověříme TLS obnovu bez změny produkce? |  |
+| Jaká je stop podmínka, kdy se nezasahuje dál? |  |
+| Kde se zapisuje zásah a výsledek? |  |
+| Kdy se naposledy testoval přístup? |  |
+
+Potom udělej jednu malou opravu: doplň host key fingerprint do runbooku, nastav read-only diagnostický příkaz, omez `sudo` na konkrétní reload služby, nebo přidej měsíční test opravného přístupu. Bezpečný přístup není luxus pro enterprise. Je to rozdíl mezi rychlou obnovou a lovem klíčů ve tmě.
+
 ## Zdroje
 
+- OpenBSD manual: ssh_config(5) - klientská konfigurace OpenSSH včetně `BatchMode`, `StrictHostKeyChecking`, `CheckHostIP` a `VerifyHostKeyDNS`: https://man.openbsd.org/ssh_config
+- OpenBSD manual: ssh-keygen(1) - správa SSH klíčů, práce s `known_hosts`, odstranění host key záznamů přes `-R` a generování SSHFP záznamů přes `-r`: https://man.openbsd.org/ssh-keygen
+- IETF RFC 4255: Using DNS to Securely Publish Secure Shell (SSH) Key Fingerprints - formát SSHFP DNS záznamů a bezpečnostní poznámky k ověřování SSH host keys přes DNS/DNSSEC: https://www.rfc-editor.org/info/rfc4255/
 - CommonMark: Current specification - syntaxe Markdown odkazů, link destinations a reference link definitions: https://spec.commonmark.org/current/
 - IETF RFC 3986: Uniform Resource Identifier (URI): Generic Syntax - obecná syntaxe URI a fragment identifier za `#`: https://www.rfc-editor.org/info/rfc3986/
 - W3C: Link Checker - kontrola odkazů, kotvic a referencovaných objektů v HTML dokumentech a webech: https://validator.w3.org/checklink
@@ -33579,6 +33710,7 @@ Potom oprav jednu věc: prázdný odkaz, starou kotvu, redirect řetěz, nejasn�
 
 ## Pracovní log
 
+- 2026-07-18: Doplněna příloha o SSH opravném přístupu bez slepého host key promptu: karta produkčního hostu, ověření host key mimo incident, bezpečné první připojení, omezené opravné role pro TLS/proxy/backend zásahy, rozdělení diagnostiky a produkčního zásahu v runbooku, checklist a mini úkol; ověřeny a doplněny zdroje OpenBSD man pages k `ssh_config` a `ssh-keygen` a RFC 4255 k SSHFP.
 - 2026-07-18: Doplněna příloha o kontrole odkazů v e-booku bez ručního proklikávání do bezvědomí: rozdělení kontrol na Markdown zdroj, HTML export a veřejnou URL, priorita interních kotvic, zdrojů tvrzení a CTA, stabilní kotvy, privacy-first kontrola externích odkazů bez měřicích redirectů, karta problému, checklist a mini úkol; ověřeny a doplněny zdroje CommonMark, RFC 3986 a W3C Link Checker.
 - 2026-07-18: Doplněna příloha o publikaci e-booku bez rozbitých odkazů a datového ocasu: zdroj pravdy pro Markdown, kontrola HTML/PDF/RSS výstupů, metadata veřejné verze, dobrovolný PDF export bez leadové pasti, údržba zdrojů, release pass, checklist a mini úkol; navázáno na existující části o RSS, metadatech, živém e-booku a privacy-first distribuci.
 - 2026-07-18: Doplněna příloha o case study bez úniku zákaznických dat: struktura důkazu jako pracovní změny, rozdělení údajů na veřejné/schvalované/agregované/redigované/zakázané, opatrnost vůči falešné anonymizaci, screenshot review, schvalovací balíček, checklist a mini úkol; navázáno na ověřené zdroje Evropské komise k minimalizaci dat a EDPB k pseudonymizaci.
