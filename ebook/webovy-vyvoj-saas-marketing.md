@@ -33141,6 +33141,147 @@ Vezmi jednu existující nebo plánovanou referenci a vyplň před psaním tuto 
 
 Potom udělej jednu malou změnu: odstraň ze screenshotu skutečné osobní údaje, přepiš obecné tvrzení na konkrétní pracovní změnu, doplň schvalovací větu do redakčního procesu, nebo nahraď sociální embed obyčejným přímým odkazem. Důvěra se dá ztratit i v marketingu. Jen to obvykle nevypadá jako bug report.
 
+## Příloha: Publikace e-booku bez rozbitých odkazů a datového ocasu
+
+Markdown e-book je skvělý pracovní formát, protože se dobře verzují změny, jednoduše se čte diff a text nejde schovat za vizuální pozlátko. Jenže ve chvíli, kdy z něj vzniká veřejná stránka, PDF, interní dokumentace nebo newsletterový úryvek, začíná druhá část práce: publikace. A publikace umí pokazit i dobrý text.
+
+Špatná otázka zní: „Jak z Markdownu rychle uděláme hezké PDF?“
+
+Lepší otázka zní: „Jak zajistíme, že každá verze e-booku má jasný zdroj pravdy, funkční odkazy, správná metadata a nepřidává čtenáři sledovací zátěž?“
+
+Privacy-first e-book není jen text o soukromí. Je to i způsob distribuce: přímé URL, RSS, čitelné HTML, dobrovolný PDF export a žádné skryté měření, které odporuje tomu, co kniha doporučuje.
+
+### Urči zdroj pravdy a výstupy
+
+Nejdřív si napiš, která verze je zdroj pravdy. U dlouhého dokumentu to typicky bude jeden Markdown soubor nebo složka kapitol v repozitáři. Vše ostatní jsou výstupy.
+
+Praktická mapa:
+
+| Vrstva | Účel | Pravidlo |
+| --- | --- | --- |
+| Markdown | zdroj pravdy, review, historie změn | editovat jen tady |
+| HTML stránka | veřejné čtení, interní odkazy, SEO | generovat nebo ručně držet podle zdroje |
+| PDF | offline čtení, sdílení zákazníkovi | export bez povinného formuláře |
+| RSS položka | oznámení nové verze nebo kapitoly | odkaz na veřejnou URL |
+| Krátké úryvky | sociální sítě, e-mail, prezentace | vždy odkazovat zpět na zdroj |
+
+Jakmile lidé začnou opravovat překlep v PDF, jiný člověk upraví HTML a třetí přepíše Markdown, vznikají tři pravdy. To není distribuce. To je závod v budoucí ostudě.
+
+### Každý výstup musí mít vlastní kontrolu
+
+Markdown může být správný a export přesto rozbitý. PDF může useknout tabulku, HTML může ztratit kotvy, RSS může ukázat starý perex a interní odkazy mohou po změně nadpisu mířit do prázdna.
+
+Před publikací zkontroluj:
+
+- nadpisy jsou ve správné hierarchii a neskáčou náhodně z `##` na `####`,
+- interní odkazy míří na existující kapitoly nebo stabilní kotvy,
+- externí odkazy fungují a mají smysluplný text,
+- tabulky jsou čitelné i na mobilu nebo mají alternativní rozdělení,
+- PDF neusekává dlouhé řádky, checklisty ani zdroje,
+- HTML má `title`, meta description a canonical URL,
+- datum aktualizace odpovídá věcné změně, ne jen drobné opravě formátování,
+- výstup nepřidává marketingové skripty, které zdrojový text nevyžaduje.
+
+Codyho komentář: Rozbitý odkaz v e-booku působí jako malá věc. Jenže praktická příručka s rozbitými odkazy říká čtenáři: „Doporučujeme provozní hygienu, ale vlastní kartáček jsme ztratili.“ To není ideální značka.
+
+### Metadata nejsou kosmetika
+
+Veřejný e-book potřebuje metadata stejně jako článek. Čtenář je možná neuvidí, ale vyhledávač, čtečka, sdílení a archiv ano.
+
+Minimum pro veřejnou verzi:
+
+| Pole | Proč |
+| --- | --- |
+| Název | jasná identita dokumentu |
+| Krátký popis | náhled ve vyhledávání a sdílení |
+| Autor nebo organizace | odpovědnost a důvěra |
+| Datum publikace | historický kontext |
+| Datum poslední věcné aktualizace | signál údržby |
+| Canonical URL | zdroj pravdy pro veřejné odkazy |
+| Jazyk dokumentu | přístupnost, vyhledávání a čtečky |
+| Licence nebo pravidla použití | co čtenář smí s textem dělat |
+| Odkaz na RSS nebo changelog | přímý způsob sledování změn |
+
+U dlouhého e-booku přidej i krátkou větu „jak citovat nebo odkazovat“. Ne kvůli akademické póze. Kvůli tomu, aby se po internetu nešířily staré PDF kopie bez kontextu a data aktualizace.
+
+### PDF nech dobrovolné, ne jako leadovou past
+
+PDF je užitečné pro offline čtení, interní sdílení nebo práci na poradě. Nemá být povinná brána k obsahu, pokud cílem e-booku je vzdělávat a budovat důvěru.
+
+Privacy-first přístup:
+
+- HTML verze zůstává veřejná a odkazovatelná.
+- PDF lze stáhnout bez povinného e-mailu.
+- Pokud nabízíš e-mailový odběr aktualizací, je oddělený a dobrovolný.
+- Odkazy v PDF vedou přímo na zdroj, ne přes zbytečné přesměrovací trackery.
+- PDF má datum exportu a odkaz na aktuální verzi.
+- Staré PDF verze mají jasný stav: aktuální, archivní nebo nahrazené.
+
+Tím neříkám, že e-book nikdy nemůže být součást lead magnetu. Říkám, že když značka staví na privacy-first hodnotě, nemá začínat vztah větou „dej e-mail, jinak si nepřečteš checklist“. To je zvláštní způsob, jak mluvit o respektu.
+
+### Zdroje a odkazy udržuj jako provozní závazek
+
+Čím delší e-book, tím víc zdrojů může zestárnout. Odkaz může zmizet, dokument se může přesunout, specifikace se může aktualizovat a nástroj může změnit chování. Proto zdroje nejsou příloha na konec a hotovo. Jsou součást údržby.
+
+Praktická pravidla:
+
+- u rychle se měnících témat piš datum ověření nebo časový kontext,
+- u právních, bezpečnostních a technických tvrzení preferuj primární zdroje,
+- pokud zdroj zmizí, nahraď ho ekvivalentním zdrojem nebo tvrzení zjemni,
+- neodkazuj na náhodný článek jen proto, že potvrzuje tvůj názor,
+- u vlastního názoru použij jasné označení, třeba „Codyho komentář“,
+- při větší aktualizaci doplň pracovní log, co se věcně změnilo.
+
+U e-booku, který se vyvíjí postupně, je pracovní log stejně důležitý jako obsah. Čtenář vidí, že dokument žije, a tým vidí, proč přibyly nové části.
+
+### Kontrola před publikací nové verze
+
+Před každým veřejným vydáním udělej malý release pass:
+
+| Kontrola | Otázka |
+| --- | --- |
+| Struktura | Přibyla část na správné místo a má jasný účel? |
+| Odkazy | Fungují interní i externí odkazy? |
+| Metadata | Sedí title, description, canonical a datum aktualizace? |
+| Formát | Čte se HTML i PDF bez useknutých tabulek? |
+| Privacy | Nepřibyl tracker, povinný formulář nebo zbytečný embed? |
+| Zdroje | Jsou aktuální tvrzení ověřená a odkázaná? |
+| Changelog | Je jasně napsané, co se změnilo? |
+| Distribuce | Vedou odkazy na zdroj pravdy, ne na starou kopii? |
+
+Tahle kontrola má být krátká. Pokud se z ní stane půldenní ceremoniál, tým ji přestane dělat. Lepší je osm otázek, které se opravdu otevřou, než třicet položek, které se jednou slavnostně založí a pak žijí už jen ve vzpomínkách.
+
+### Checklist: Publikace e-booku
+
+- [ ] Máme jeden zdroj pravdy pro text.
+- [ ] HTML, PDF a další výstupy vznikají ze stejného obsahu nebo mají jasný proces synchronizace.
+- [ ] Veřejná verze má title, popis, canonical URL, jazyk a datum aktualizace.
+- [ ] PDF obsahuje odkaz na aktuální veřejnou verzi.
+- [ ] Stahování PDF není podmíněné e-mailem, pokud to není jasně dobrovolná obchodní výměna.
+- [ ] RSS nebo changelog informuje o významných aktualizacích.
+- [ ] Interní odkazy, kotvy a externí zdroje jsou před vydáním zkontrolované.
+- [ ] Export neobsahuje skryté trackery, sociální embedy ani zbytečné přesměrování.
+- [ ] Staré verze mají stav: aktuální, archivní nebo nahrazené.
+- [ ] Pracovní log popisuje věcnou změnu, ne jen „upraveno“.
+
+### Mini úkol
+
+Vezmi jeden existující e-book, whitepaper, dlouhý článek nebo interní příručku a vyplň publikační kartu:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Kde je zdroj pravdy? |  |
+| Jaké výstupy existují? |  |
+| Která verze je veřejně odkazovaná? |  |
+| Kde je datum poslední věcné aktualizace? |  |
+| Má dokument canonical URL nebo jiný zdroj pravdy? |  |
+| Jak se kontrolují odkazy? |  |
+| Jak čtenář získá aktualizace bez sociální platformy? |  |
+| Jaká data sbírá distribuce dokumentu? |  |
+| Který výstup může být starý nebo rozbitý? |  |
+
+Potom udělej jednu konkrétní opravu: doplň odkaz na aktuální verzi do PDF, přidej datum aktualizace, oprav rozbitou kotvu, zviditelni RSS, smaž povinný lead formulář u veřejného textu nebo založ jednoduchý checklist pro příští export. Publikace není poslední kliknutí. Je to provozní slib, že čtenář nedostane starou pravdu v hezkém obalu.
+
 ## Zdroje
 
 - curl: curl man page - volby pro časové limity, TLS ověřování a režim `--insecure`: https://curl.se/docs/manpage.html
@@ -33322,6 +33463,7 @@ Potom udělej jednu malou změnu: odstraň ze screenshotu skutečné osobní úd
 
 ## Pracovní log
 
+- 2026-07-18: Doplněna příloha o publikaci e-booku bez rozbitých odkazů a datového ocasu: zdroj pravdy pro Markdown, kontrola HTML/PDF/RSS výstupů, metadata veřejné verze, dobrovolný PDF export bez leadové pasti, údržba zdrojů, release pass, checklist a mini úkol; navázáno na existující části o RSS, metadatech, živém e-booku a privacy-first distribuci.
 - 2026-07-18: Doplněna příloha o case study bez úniku zákaznických dat: struktura důkazu jako pracovní změny, rozdělení údajů na veřejné/schvalované/agregované/redigované/zakázané, opatrnost vůči falešné anonymizaci, screenshot review, schvalovací balíček, checklist a mini úkol; navázáno na ověřené zdroje Evropské komise k minimalizaci dat a EDPB k pseudonymizaci.
 - 2026-07-18: Doplněna příloha o nouzové stránce bez paniky, trackerů a SEO škody: správné použití `503`, poctivý `Retry-After`, statická stránka mimo hlavní aplikaci, opatrná cache, text bez interních detailů, režimy plánované údržby/neplánovaného výpadku/degradace, smoke test, checklist a mini úkol; ověřeny zdroje MDN a Google Search Central k dočasné nedostupnosti.
 - 2026-07-18: Doplněna příloha o pravdivém health checku bez zeleného semaforu na špatné vrstvě: rozdělení kontrol na DNS/TCP/TLS/HTTP/obsah/produktovou cestu, zápis původu výsledku, rozlišení interní syntetiky a veřejné reality, obsahový marker, typy alertů, privacy-first pravidla monitoringu, checklist a mini úkol; navázáno na dnešní zjištění, že proxy a veřejný TLS pohled mohou ukazovat rozdílný stav.
