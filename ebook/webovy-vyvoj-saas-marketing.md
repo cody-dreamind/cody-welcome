@@ -33282,8 +33282,124 @@ Vezmi jeden existující e-book, whitepaper, dlouhý článek nebo interní př�
 
 Potom udělej jednu konkrétní opravu: doplň odkaz na aktuální verzi do PDF, přidej datum aktualizace, oprav rozbitou kotvu, zviditelni RSS, smaž povinný lead formulář u veřejného textu nebo založ jednoduchý checklist pro příští export. Publikace není poslední kliknutí. Je to provozní slib, že čtenář nedostane starou pravdu v hezkém obalu.
 
+## Příloha: Kontrola odkazů v e-booku bez ručního proklikávání do bezvědomí
+
+Dlouhý e-book má zvláštní typ technického dluhu: odkazy vypadají jako obsah, ale chovají se jako infrastruktura. Když se změní nadpis, přejmenuje sekce, smaže příloha nebo přesune externí zdroj, čtenář dostane slepou uličku. U krátkého článku to bolí trochu. U praktické příručky to bolí víc, protože rozbitý odkaz často rozbije právě ten krok, který měl člověku pomoct něco udělat.
+
+Špatná otázka zní: „Proklikáme to před vydáním ručně?“
+
+Lepší otázka zní: „Jak nastavíme kontrolu odkazů tak, aby našla chyby v Markdownu, v HTML exportu i ve veřejné verzi bez zbytečného sběru dat o čtenářích?“
+
+CommonMark popisuje, že Markdown odkaz má viditelný text a cíl, případně může používat referenční definice jinde v dokumentu. RFC 3986 popisuje fragmenty URI jako část za `#`, která odkazuje na sekundární zdroj nebo část dokumentu. W3C Link Checker zase prakticky kontroluje odkazy, kotvy a referencované objekty v HTML dokumentech. Přeloženo z technické řeči: nestačí ověřit, že URL nějak existuje. Musíš ověřit i to, že odkaz vede na správné místo.
+
+### Rozliš tři vrstvy kontroly
+
+Jedna kontrola obvykle nestačí, protože chyba může vzniknout v různých krocích.
+
+| Vrstva | Co hledá | Typická chyba |
+| --- | --- | --- |
+| Markdown zdroj | syntaxi odkazů, prázdné cíle, duplicitní referenční odkazy | `[text]()` nebo zapomenutá definice |
+| HTML export | vygenerované `href`, kotvy, relativní cesty | změněný nadpis vytvoří jiné `id` |
+| Veřejná URL | HTTP status, redirecty, TLS, skutečný obsah | stránka vrací `200`, ale chybí kapitola |
+
+Markdown kontrola je rychlá a levná, ale nevidí všechno. HTML kontrola odhalí chyby po exportu. Veřejná kontrola ukáže, jestli se rozbil deploy, canonical cesta, TLS nebo přesměrování. Ano, zní to jako tři práce. Ve skutečnosti jsou to tři malé kontroly, které šetří jedno dlouhé trapné hledání.
+
+### Ne každý odkaz má stejnou váhu
+
+Udržuj odkazy podle dopadu, ne podle abecedy. Odkaz na vlastní kapitolu, zdroj právního tvrzení a CTA na další krok nemají stejnou prioritu jako volitelný doplňkový článek.
+
+Praktické rozdělení:
+
+| Typ odkazu | Dopad při rozbití | Kontrola |
+| --- | --- | --- |
+| Interní kapitola | čtenář ztrácí orientaci | kontrola kotvic při každém exportu |
+| Zdroj tvrzení | ztrácí se důvěryhodnost | pravidelná kontrola a náhradní zdroj |
+| CTA nebo kontakt | ztrácí se obchodní hodnota | smoke test veřejné verze |
+| Obrázek nebo ukázka | rozpadá se kontext | kontrola assetů v HTML/PDF |
+| Archivní odkaz | nižší dopad, ale matoucí signál | označit jako archivní nebo nahradit |
+
+Když kontrola najde dvacet problémů, nezačínej panikou. Nejdřív oprav odkazy, které brání práci čtenáře nebo podpírají faktické tvrzení. Pak uklízej zbytek.
+
+### Kotvy dělej stabilně
+
+Automaticky generované kotvy z nadpisů jsou pohodlné, ale křehké. Stačí upravit formulaci nadpisu a odkaz na kapitolu přestane fungovat. U dlouhého dokumentu se to stane. Ne proto, že je tým neschopný, ale proto, že lidé občas vylepšují věty. Skandální, já vím.
+
+Pro důležité části používej stabilní pravidla:
+
+- významné kapitoly mají krátké, předvídatelné názvy,
+- odkazy v indexu a obsahu se kontrolují po každé změně nadpisů,
+- u veřejného HTML exportu zvaž ručně definované stabilní `id` u klíčových sekcí,
+- staré veřejně odkazované kotvy po přejmenování nepouštěj potichu do prázdna,
+- u PDF udržuj odkaz na aktuální HTML verzi, kde lze chyby opravit rychleji.
+
+Codyho komentář: Nadpis je pro člověka text. Kotva je pro web adresa. Když v jednom prvku spojíš literární ambici a routování, občas z toho vznikne drobná bolest. Proto mají důležité kotvy dostat provozní respekt, ne jen hezčí formulaci.
+
+### Externí odkazy kontroluj bez sledovacího ocasu
+
+Privacy-first kontrola odkazů nemá znamenat, že každého čtenáře pošleš přes měřicí redirect. Ověření patří do redakčního a publikačního procesu, ne do čtenářovy cesty.
+
+Lepší postup:
+
+- v textu drž přímé odkazy na zdroje,
+- kontrolu dostupnosti spouštěj z CI, lokálně nebo z interního publikačního skriptu,
+- do veřejných odkazů nepřidávej tracking parametry jen kvůli internímu reportu,
+- u důležitých zdrojů si zapiš, proč jsou použité a co by je mohlo nahradit,
+- u zdrojů, které často mění URL, používej oficiální landing stránku nebo specifikační stránku místo náhodné kopie.
+
+Pokud potřebuješ měřit, že lidé používají zdroje, měř agregovaně klik na kategorii nebo sekci. Nemusíš vědět, že konkrétní člověk klikl v 22:14 na šestý odkaz v příloze o TLS. To už není péče o e-book. To je zvědavost s kravatou.
+
+### Kontrola má končit rozhodnutím
+
+Výstup kontroly odkazů má být krátký a akční. Samotný seznam chyb nestačí, protože neříká, co udělat dál.
+
+Dobrá karta problému:
+
+| Pole | Příklad |
+| --- | --- |
+| Odkaz | `https://example.com/old-guide` |
+| Místo v dokumentu | kapitola / nadpis / řádek |
+| Typ chyby | `404`, redirect řetěz, chybějící kotva, TLS chyba |
+| Dopad | zdroj právního tvrzení, CTA, doplňkový odkaz |
+| Oprava | nahradit zdroj, upravit kotvu, označit archiv |
+| Vlastník | autor kapitoly nebo editor |
+
+U dlouhého e-booku se vyplatí mít toleranci pro dočasné chyby, ale jen s důvodem. `TODO později` není důvod. „Zdroj má plánovanou migraci, kontrola znovu v pátek, tvrzení je podložené alternativním primárním zdrojem“ už důvod je.
+
+### Checklist: Kontrola odkazů v e-booku
+
+- [ ] Markdown neobsahuje prázdné odkazy ani zapomenuté referenční definice.
+- [ ] Interní odkazy a kotvy fungují po exportu do HTML.
+- [ ] Obsah a tematický index odkazují na existující kapitoly.
+- [ ] Externí zdroje používané pro faktická tvrzení jsou dostupné nebo mají náhradu.
+- [ ] Důležité CTA, kontakt a RSS odkazy jsou součástí smoke testu veřejné verze.
+- [ ] Veřejné odkazy nevedou přes zbytečné měřicí redirecty.
+- [ ] PDF obsahuje odkaz na aktuální HTML verzi.
+- [ ] Redirecty a archivní odkazy jsou vědomě označené, ne jen přehlédnuté.
+- [ ] Kontrola odkazů ukládá jen technický výsledek, ne čtenářské profily.
+- [ ] Pracovní log popisuje opravy odkazů, pokud mění význam nebo použité zdroje.
+
+### Mini úkol
+
+Vyber jednu dlouhou stránku, e-book nebo dokumentaci a udělej malou odkazovou kartu:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Který soubor je zdroj pravdy? |  |
+| Jak vzniká HTML nebo PDF výstup? |  |
+| Jak se generují kotvy z nadpisů? |  |
+| Které interní odkazy jsou kritické pro navigaci? |  |
+| Které externí odkazy podpírají faktická tvrzení? |  |
+| Jak často se kontrolují odkazy? |  |
+| Kdo rozhoduje, zda zdroj nahradit nebo tvrzení zjemnit? |  |
+| Sbírá kontrola nebo distribuce odkazu nějaká data o čtenáři? |  |
+
+Potom oprav jednu věc: prázdný odkaz, starou kotvu, redirect řetěz, nejasný text odkazu, nebo zdroj, který už neodpovídá tvrzení. Nečekej na velký publikační den. Rozbité odkazy stárnou potichu, ale čtenář je potká nahlas.
+
 ## Zdroje
 
+- CommonMark: Current specification - syntaxe Markdown odkazů, link destinations a reference link definitions: https://spec.commonmark.org/current/
+- IETF RFC 3986: Uniform Resource Identifier (URI): Generic Syntax - obecná syntaxe URI a fragment identifier za `#`: https://www.rfc-editor.org/info/rfc3986/
+- W3C: Link Checker - kontrola odkazů, kotvic a referencovaných objektů v HTML dokumentech a webech: https://validator.w3.org/checklink
 - curl: curl man page - volby pro časové limity, TLS ověřování a režim `--insecure`: https://curl.se/docs/manpage.html
 - Let’s Encrypt: FAQ - platnost výchozích certifikátů a doporučený rytmus obnovy: https://letsencrypt.org/docs/faq/
 - Certbot documentation: User Guide - obnovování certifikátů, automatické obnovy, kontrola cron/systemd timerů a `certbot renew --dry-run`: https://eff-certbot.readthedocs.io/en/stable/using.html
@@ -33463,6 +33579,7 @@ Potom udělej jednu konkrétní opravu: doplň odkaz na aktuální verzi do PDF,
 
 ## Pracovní log
 
+- 2026-07-18: Doplněna příloha o kontrole odkazů v e-booku bez ručního proklikávání do bezvědomí: rozdělení kontrol na Markdown zdroj, HTML export a veřejnou URL, priorita interních kotvic, zdrojů tvrzení a CTA, stabilní kotvy, privacy-first kontrola externích odkazů bez měřicích redirectů, karta problému, checklist a mini úkol; ověřeny a doplněny zdroje CommonMark, RFC 3986 a W3C Link Checker.
 - 2026-07-18: Doplněna příloha o publikaci e-booku bez rozbitých odkazů a datového ocasu: zdroj pravdy pro Markdown, kontrola HTML/PDF/RSS výstupů, metadata veřejné verze, dobrovolný PDF export bez leadové pasti, údržba zdrojů, release pass, checklist a mini úkol; navázáno na existující části o RSS, metadatech, živém e-booku a privacy-first distribuci.
 - 2026-07-18: Doplněna příloha o case study bez úniku zákaznických dat: struktura důkazu jako pracovní změny, rozdělení údajů na veřejné/schvalované/agregované/redigované/zakázané, opatrnost vůči falešné anonymizaci, screenshot review, schvalovací balíček, checklist a mini úkol; navázáno na ověřené zdroje Evropské komise k minimalizaci dat a EDPB k pseudonymizaci.
 - 2026-07-18: Doplněna příloha o nouzové stránce bez paniky, trackerů a SEO škody: správné použití `503`, poctivý `Retry-After`, statická stránka mimo hlavní aplikaci, opatrná cache, text bez interních detailů, režimy plánované údržby/neplánovaného výpadku/degradace, smoke test, checklist a mini úkol; ověřeny zdroje MDN a Google Search Central k dočasné nedostupnosti.
