@@ -31925,6 +31925,171 @@ Vyber posledních pět změn v dlouhém Markdown dokumentu a vyplň tabulku:
 
 Potom udělej jednu konkrétní opravu: přepiš pracovní log, oprav úroveň nadpisu, zkrať duplicitní odstavec, doplň mini úkol nebo anonymizuj příklad. Dlouhý e-book se neudržuje tím, že budeš mít víc trpělivosti. Udržuje se tím, že každá iterace má malý jasný konec.
 
+## Příloha: Produkční web bez ztraceného artefaktu
+
+Někdy monitoring nehlásí velkou dramatickou chybu. Doména se přeloží. TLS spojení vznikne. Reverse proxy odpoví. A pak přijde ticho: prázdná odpověď, špatný upstream, starý build, chybějící proces, nebo repozitář, který už neobsahuje aplikaci, kterou veřejný web očekává.
+
+Tohle je jiný typ provozního problému než expirovaný certifikát nebo chyba v kódu. Není to jen otázka „co spadlo“. Je to otázka „co vlastně běží a odkud se to opravuje“.
+
+Špatná otázka zní: „Nemůžeme to prostě redeploynout?“
+
+Lepší otázka zní: „Víme jistě, který zdrojový kód, build artefakt, konfigurace a služba tvoří veřejnou verzi webu?“
+
+Pokud odpověď není rychlá, web není dobře vlastněný. Může mít hezký design, správná meta data a solidní obsah, ale provozně je to skříň bez štítků. Dokud je zavřená, působí uklizeně. Jakmile něco hledáš, začne se ztrácet čas.
+
+> Codyho komentář: Nejhorší deploy dokumentace není ta, která chybí. Nejhorší je ta, která vypadá pravděpodobně správně, ale patří k minulému životu projektu. To je provozní ekvivalent mapy k bytu, ve kterém už nebydlíš.
+
+### Odděl zdroj, artefakt a runtime
+
+U malého webu se často řekne „je to v repu“. Jenže produkce se obvykle skládá z několika věcí:
+
+| Vrstva | Co musí být jasné | Typický problém |
+| --- | --- | --- |
+| Zdroj | který repozitář a větev jsou pravda | produkce běží z jiné větve nebo starého repa |
+| Artefakt | co se buildí a jak se pozná verze | na serveru zůstal ručně nahraný build |
+| Runtime | jaký proces/služba artefakt spouští | port poslouchá starý proces nebo neposlouchá nic |
+| Proxy | kam posílá veřejná doména provoz | nginx míří na port, kde už aplikace není |
+| Konfigurace | odkud se berou proměnné prostředí | lokální `.env` na serveru neodpovídá repozitáři |
+| Rollback | jak se vrátí poslední funkční stav | tým ví commit, ale nemá artefakt ani postup |
+
+Jakmile tyto vrstvy smícháš, incident se řeší hádáním. Vývojář hledá chybu v kódu, provozní člověk restartuje proces, někdo třetí mačká deploy tlačítko a nikdo neví, jestli všichni sahají na stejný systém.
+
+Praktické minimum je krátká produkční karta:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Veřejná URL |  |
+| Zdrojový repozitář |  |
+| Produkční větev nebo tag |  |
+| Build příkaz |  |
+| Artefakt nebo image |  |
+| Runtime služba |  |
+| Port nebo endpoint za proxy |  |
+| Reverse proxy konfigurace |  |
+| Kde jsou proměnné prostředí |  |
+| Kde jsou logy |  |
+| Jak poznáme aktuální verzi na produkci |  |
+| Jak uděláme rollback |  |
+
+Karta neobsahuje hesla, tokeny ani privátní klíče. Má obsahovat mapu. Tajemství patří do správce tajemství, CI/CD prostředí nebo hostingového panelu, ne do Markdownu v repozitáři.
+
+### Produkce má umět říct, co na ní běží
+
+Když má web nebo SaaS veřejnou produkční verzi, měla by existovat jednoduchá cesta, jak poznat její původ. Ne nutně pro každého návštěvníka, ale pro tým, který řeší incident.
+
+Užitečné signály:
+
+- commit SHA nebo release tag v interním health endpointu,
+- build čas a název artefaktu v deploy logu,
+- odkaz z deploy runu na commit,
+- anotace v monitoring incidentu,
+- release poznámka u veřejné změny,
+- záznam v pracovním logu nebo changelogu.
+
+Pozor na bezpečnost: veřejný endpoint nemusí vyzrazovat detailní interní cesty, názvy serverů, verze knihoven nebo hodnoty konfigurace. Stačí například interní `/health` chráněný přístupem, nebo provozní dashboard dostupný jen týmu. Veřejná stránka může mít jen neškodný build identifikátor, pokud to dává smysl.
+
+Privacy-first pohled je jednoduchý: identifikace verze má pomáhat opravě, ne sbírat data o návštěvnících. Nepotřebuje cookies, fingerprinting ani session záznam. Potřebuje odpovědět na otázku, jestli běží očekávaný artefakt.
+
+### Deploy postup musí být opakovatelný z čisté hlavy
+
+Dobrá otázka pro každý web: dokáže nový člověk s přiměřeným přístupem nasadit malou bezpečnou změnu podle dokumentace?
+
+Ne produkční databázovou migraci v pátek večer. Stačí drobný text, statická stránka, oprava meta popisu nebo přidání neškodného odkazu. Pokud ani takový deploy nejde projít podle dokumentace, tým nemá deploy postup. Má vzpomínku.
+
+Opakovatelný postup by měl říct:
+
+1. Jak stáhnout aktuální zdroj.
+2. Jak ověřit čistý pracovní strom.
+3. Jak spustit lokální kontrolu nebo build.
+4. Jak vytvořit artefakt.
+5. Jak artefakt dostat do produkčního runtime.
+6. Jak ověřit veřejnou URL.
+7. Jak poznat, že produkce běží novou verzi.
+8. Jak vrátit poslední funkční verzi.
+
+Twelve-Factor App doporučuje držet konfiguraci mimo kód v prostředí. GitHub Actions dokumentace ukazuje CI jako opakovatelný způsob buildů a kontrol. Google SRE zase opakovaně připomíná, že opakovaná manuální provozní práce má být co nejvíc automatizovaná. Odkazy jsou ve zdrojích. Pro malý tým z toho plyne praktická věc: deploy nesmí být rituál jednoho člověka.
+
+### Repo bez aplikace není deploy zdroj
+
+U živých projektů se stává, že se repozitář časem promění. Webová aplikace se přesune jinam, starý build zůstane na serveru, původní workflow se smaže, obsahový repozitář pokračuje dál a veřejná doména pořád míří na runtime, který už nikdo aktivně nespravuje.
+
+To není morální selhání. Je to běžný důsledek růstu. Problém vzniká až ve chvíli, kdy se taková změna nezapíše.
+
+Když se repozitář rozdělí nebo změní účel, udělej tři věci:
+
+- Do starého repozitáře napiš, zda už není produkčním zdrojem webu.
+- Do produkční karty přepiš nový zdroj, workflow a vlastníka.
+- Ověř monitoring, aby nekontroloval jen doménu, ale i očekávaný obsah.
+
+Příklad dobré poznámky v `README` nebo provozním dokumentu:
+
+```text
+Tento repozitář už neobsahuje produkční aplikaci pro example.com.
+Slouží pouze pro obsahový e-book. Produkční web běží z repozitáře
+org/example-web, deploy workflow "Deploy production", runtime služba
+example-web.service. Poslední ověření: 2026-07-18.
+```
+
+Taková věta ušetří během incidentu víc času než dlouhá debata v chatu.
+
+### Smoke test musí ověřit správný artefakt
+
+Po deployi nestačí vědět, že URL vrací `200`. Potřebuješ vědět, že vrací správnou věc.
+
+Malý smoke test pro veřejný web:
+
+| Kontrola | Příklad signálu | Proč |
+| --- | --- | --- |
+| HTTPS | validní certifikát bez `--insecure` | důvěryhodné spojení |
+| Redirect | HTTP přesměruje na správné HTTPS | jedna kanonická cesta |
+| Obsah | stabilní text značky nebo titulku | neběží prázdná/cizí aplikace |
+| Verze | commit nebo release identifikátor v interní kontrole | víme, co je nasazené |
+| RSS/sitemap | veřejné indexační soubory odpovídají | obsahová distribuce žije |
+| Bezpečnost | základní hlavičky a žádný debug výpis | produkce není v dev režimu |
+
+Obsahový signál vybírej tak, aby byl stabilní, ale ne citlivý. Pro blog to může být název webu, RSS link nebo poslední publikovaný veřejný titulek. Pro SaaS to může být veřejná landing page a interní health endpoint bez osobních dat.
+
+### Když opravný přístup chybí, zlepši aspoň opravitelnost
+
+Někdy agent, vývojář nebo support člověk dokáže problém diagnostikovat, ale nemá právo ho opravit. V tu chvíli je špatný reflex mlčet, protože „to nejde“. Správný výstup je krátký, použitelný balíček pro člověka s přístupem.
+
+Balíček má obsahovat:
+
+- přesný čas kontroly,
+- testovanou URL,
+- výsledek DNS/TLS/HTTP/obsah,
+- pravděpodobnou vrstvu selhání,
+- co bylo vyloučeno,
+- kde dokumentace chybí,
+- konkrétní další krok pro vlastníka.
+
+Nepřidávej tajemství, celé HTML odpovědi ani interní logy, pokud k tomu není jasný důvod a bezpečný kanál. Cíl není poslat román. Cíl je, aby opravář nezačínal od nuly.
+
+### Checklist: Produkční artefakt bez ztracení
+
+- [ ] Víme, který repozitář a větev jsou zdrojem produkčního webu.
+- [ ] Produkce umí ukázat commit, release tag nebo jiný bezpečný identifikátor verze.
+- [ ] Deploy postup je popsaný bez závislosti na paměti jednoho člověka.
+- [ ] Reverse proxy konfigurace má jasně popsaný upstream.
+- [ ] Runtime služba, port a logy jsou dohledatelné v provozní kartě.
+- [ ] Konfigurace a tajemství nejsou v repozitáři, ale jejich umístění je popsané.
+- [ ] Smoke test po deployi ověřuje HTTPS, redirect, obsah a verzi.
+- [ ] Staré repozitáře jasně říkají, zda ještě slouží jako produkční zdroj.
+- [ ] Rollback postup odkazuje na konkrétní artefakt nebo release, ne jen na „minulou verzi“.
+- [ ] Při chybě bez opravného přístupu vznikne krátký diagnostický balíček pro vlastníka.
+
+### Mini úkol
+
+Vyber jeden produkční web nebo veřejnou aplikaci a vyplň tři řádky:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Který repozitář a větev dnes tvoří produkci? |  |
+| Jak poznáš aktuálně nasazený commit nebo release? |  |
+| Jaký je nejkratší bezpečný deploy a rollback postup? |  |
+
+Pokud některý řádek neumíš vyplnit do deseti minut, nevytvářej další dashboard. Doplň produkční kartu, označ správný repozitář, nebo přidej verzi do health kontroly. Provozní klid často nevzniká z větší infrastruktury, ale z toho, že základní otázky konečně mají konkrétní odpověď.
+
 ## Zdroje
 
 - curl: curl man page - volby pro časové limity, TLS ověřování a režim `--insecure`: https://curl.se/docs/manpage.html
@@ -32103,6 +32268,7 @@ Potom udělej jednu konkrétní opravu: přepiš pracovní log, oprav úroveň n
 
 ## Pracovní log
 
+- 2026-07-18: Doplněna příloha o produkčním webu bez ztraceného artefaktu: rozlišení zdroje, artefaktu, runtime, proxy a konfigurace, produkční karta, bezpečný identifikátor verze, opakovatelný deploy postup, riziko repozitáře bez aplikace, smoke test správného artefaktu, diagnostický balíček při chybě bez opravného přístupu, checklist a mini úkol; navázáno na existující zdroje k Twelve-Factor konfiguraci, GitHub Actions, SRE automatizaci a předchozí provozní přílohy.
 - 2026-07-18: Doplněna příloha o revizním průchodu Markdown e-bookem bez rozbití struktury: výběr jedné osy kontroly, čtení `git diff` jako produktového signálu, práce s kotvami v dlouhém souboru, privacy-first revize příkladů, stručný pracovní log, checklist a mini úkol; navázáno na předchozí části o živém e-booku a tematickém indexu.
 - 2026-07-18: Doplněna příloha o tematickém indexu bez sledování čtenářů: navigace podle práce čtenáře, malá taxonomie pro dlouhý e-book, rozhodovací věty u odkazů, ruční údržba indexu, příklad vstupní mapy pro tento e-book, checklist a mini úkol; navázáno na předchozí část o živém e-booku a privacy-first princip, že lepší struktura snižuje potřebu invazivního měření.
 - 2026-07-18: Doplněna příloha o živém e-booku bez nekonečného obsahového skladu: hlavní osa dokumentu, typy iterací, obsahový dluh, práce se zdroji a názory, navigace pro dlouhé texty, checklist a mini úkol; zaměřeno na udržení e-booku jako praktického produktu pro rozhodování, ne jen rostoucího archivu.
