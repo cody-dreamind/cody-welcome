@@ -30292,6 +30292,136 @@ Vyber jednu plánovanou nebo nedávnou databázovou migraci a vyplň kartu:
 
 Potom udělej jednu konkrétní opravu: rozděl velkou migraci na expand a contract kroky, přidej checkpoint do backfillu, smaž starou dočasnou tabulku, doplň tenant test, omez logování hodnot nebo napiš rollback poznámku. Databázová migrace má být nudná zvenku a velmi promyšlená uvnitř.
 
+## Příloha: Provozní vlastnictví HTTPS bez certifikátu na poslední chvíli
+
+HTTPS není jen zelený zámek v prohlížeči. Je to slib dostupnosti, identity a základní důvěry. Když certifikát expiruje, DNS míří špatně nebo po obnově nikdo nereloadne webserver, uživatele nezajímá, že aplikace uvnitř možná běží krásně. Zvenku je produkt rozbitý.
+
+Špatná otázka zní: „Kdo má někde přístup k serveru?“
+
+Lepší otázka zní: „Kdo vlastní veřejnou dostupnost této domény, jak pozná problém a jak ho umí opravit i v noci, bez hledání klíčů v historii chatu?“
+
+Tahle příloha doplňuje technický monitoring a TLS kontrolu o jednu často chybějící věc: provozní vlastnictví. Monitoring může správně zakřičet, že certifikát expiroval. Pokud ale tým neví, kdo má DNS, server, certbot timer, reload nginxu a fallback komunikaci, alert je jen siréna bez hasicího přístroje.
+
+### Vlastník domény není totéž co vlastník webu
+
+U každé produkční domény si napiš jednu kartu:
+
+| Pole | Odpověď |
+| --- | --- |
+| Doména nebo subdoména |  |
+| Co na ní běží | web, aplikace, API, dokumentace, status page |
+| Obchodní dopad výpadku | nízký / střední / vysoký |
+| DNS vlastník | kdo může měnit záznamy |
+| Server nebo hosting vlastník | kdo může restartovat nebo redeploynout službu |
+| TLS vlastník | kdo řeší certifikát a obnovu |
+| Monitoring vlastník | kdo dostane alert a rozhoduje první krok |
+| Runbook | kde je postup opravy |
+| Náhrada vlastníka | kdo to umí, když primární člověk není dostupný |
+
+Tahle karta má být krátká, ale musí být pravdivá. Pokud je u některého řádku odpověď „asi Ondřej“, „někdo z vývoje“ nebo „to bude v hostingu“, není to vlastnictví. Je to přání.
+
+Codyho komentář: Nejhorší provozní role je „někdo“. Někdo má přístup, někdo to opraví, někdo ví, kde je server. Někdo je mimochodem velmi nespolehlivý kolega a nikdy nechodí na incidenty včas.
+
+### Rozděl problém podle vrstvy
+
+Když web neodpovídá, neházej všechno do jedné krabice „spadl web“. Rozděl diagnostiku na vrstvy:
+
+| Vrstva | Co ověřit | Typická oprava |
+| --- | --- | --- |
+| DNS | doména míří na správnou IP nebo CNAME | opravit záznam, TTL, špatnou subdoménu |
+| TCP | port 80/443 je dostupný zvenku | firewall, security group, webserver |
+| TLS | certifikát platí, sedí hostname a řetězec | obnovit certifikát, reloadnout službu |
+| HTTP | server vrací správný status a redirect | opravit nginx, aplikaci, upstream |
+| Obsah | stránka vrací očekávaný obsah | rollback, redeploy, oprava routingu |
+| Aplikace | hlavní cesta funguje | incident aplikace, databáze, externí služba |
+
+Praktické pravidlo: TLS chyba není stejná věc jako 500 v aplikaci. DNS chyba není stejná věc jako rozbitý redirect. Když alert řekne jen „web down“, první minuty incidentu se spálí diagnostikou, kterou mohl udělat monitoring.
+
+### Certifikát potřebuje obnovu i reload
+
+Automatická obnova certifikátu nestačí, pokud služba dál používá starý certifikát v paměti. U každého serveru nebo reverse proxy ověř:
+
+- kdo certifikát vydává,
+- kde je uložený,
+- jak často běží obnova,
+- jestli existuje `dry-run` kontrola,
+- co se stane po obnově,
+- která služba se musí reloadnout,
+- jak poznáš, že veřejně běží nový certifikát.
+
+Runbook může být krátký:
+
+```text
+1. Ověřit veřejný stav certifikátu bez --insecure.
+2. Přihlásit se na server nebo hosting.
+3. Zkontrolovat stav renewal timeru.
+4. Spustit bezpečný dry-run, pokud je čas a incident není aktivní.
+5. Při expiraci obnovit certifikát podle používaného nástroje.
+6. Reloadnout nginx nebo jinou službu, která certifikát používá.
+7. Zvenku ověřit hostname, platnost certifikátu, HTTP redirect a obsah homepage.
+8. Zapsat příčinu a nápravný krok do provozního logu.
+```
+
+Do runbooku nedávej tajemství. Dej tam cestu, role, příkazy a ověřovací kroky. Přístupy patří do správce tajemství nebo řízeného provozního systému, ne do Markdownu vedle textu „heslo sem“.
+
+### Alert musí přijít dřív než uživatel
+
+U certifikátů nestačí alert v den expirace. Dej si několik prahů:
+
+| Stav | Reakce |
+| --- | --- |
+| 30 dní do expirace | zkontrolovat automatickou obnovu |
+| 14 dní do expirace | ověřit dry-run a vlastníka |
+| 7 dní do expirace | ruční eskalace, pokud obnova pořád neproběhla |
+| 2 dny do expirace | incidentní priorita, ověřit přístup a postup |
+| expirováno | incident dostupnosti, oprava a zákaznická komunikace podle dopadu |
+
+Tohle není paranoidní. Certifikát má známé datum konce. Když tě překvapí, systém nehlídal něco, co bylo napsané přímo v certifikátu.
+
+### Opravitelnost je součást monitoringu
+
+Monitoring bez přístupu k opravě je poloviční práce. U každé kritické URL si proto jednou za kvartál udělej malý provozní test:
+
+1. Najdi runbook bez ptaní v chatu.
+2. Ověř, kdo má aktuální přístup k DNS a hostingu.
+3. Zkontroluj, že náhradník se umí přihlásit.
+4. Ověř, že alert jde správným lidem.
+5. Projdi veřejný test HTTPS, redirectu a obsahu.
+6. Zapiš jednu věc, která by při incidentu zdržovala.
+
+Privacy-first dopad je nepřímý, ale důležitý: když tým nemá řízené přístupy, často vznikají sdílené účty, ops hesla v chatu a staré klíče u lidí, kteří je už nepotřebují. Dostupnost a kontrola nad daty spolu souvisí víc, než se zdá.
+
+### Checklist: HTTPS vlastnictví
+
+- [ ] Každá produkční doména má vlastníka DNS, hostingu, TLS a monitoringu.
+- [ ] Existuje náhradník pro kritické přístupy.
+- [ ] Runbook popisuje obnovu certifikátu, reload služby a veřejné ověření.
+- [ ] Monitoring rozlišuje DNS, TLS, HTTP, redirect a obsahový smoke test.
+- [ ] Alert na expiraci certifikátu přichází v několika předstihových prahových hodnotách.
+- [ ] Automatická obnova je pravidelně testovaná nebo aspoň ověřená.
+- [ ] Přístupy k DNS a hostingu jsou osobní, s 2FA a pravidelnou revizí.
+- [ ] Po incidentu se zapisuje příčina, oprava a prevence opakování.
+- [ ] Veřejné privacy a provozní sliby neříkají víc, než tým umí reálně provozovat.
+
+### Mini úkol
+
+Vyber jednu produkční doménu a vyplň kartu:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Kdo vlastní DNS? |  |
+| Kdo vlastní hosting nebo server? |  |
+| Kdo obnovuje TLS certifikát? |  |
+| Kdo je náhradník? |  |
+| Kde je runbook? |  |
+| Kdy certifikát expiruje? |  |
+| Jak poznáme, že renewal opravdu proběhl? |  |
+| Jaká služba se musí reloadnout? |  |
+| Kdo dostane alert 14 dní před expirací? |  |
+| Jaký jeden krok dnes sníží riziko výpadku? |  |
+
+Potom udělej jednu konkrétní změnu: doplň vlastníka do provozní karty, přidej alert před expirací, ověř reload po obnově, napiš runbook pro certifikát nebo odeber starý sdílený přístup k DNS. HTTPS má být nudná rutina, ne hodinové pátrání, proč zámek přestal existovat.
+
 ## Zdroje
 
 - curl: curl man page - volby pro časové limity, TLS ověřování a režim `--insecure`: https://curl.se/docs/manpage.html
@@ -30470,6 +30600,7 @@ Potom udělej jednu konkrétní opravu: rozděl velkou migraci na expand a contr
 
 ## Pracovní log
 
+- 2026-07-18: Doplněna příloha o provozním vlastnictví HTTPS bez certifikátu na poslední chvíli: doménová karta s vlastníky DNS/hostingu/TLS/monitoringu, diagnostika podle vrstev DNS/TCP/TLS/HTTP/obsah/aplikace, runbook pro obnovu certifikátu a reload služby, předstihové alerty expirace, kvartální test opravitelnosti, checklist a mini úkol; navázáno na existující zdroje k curl, Let’s Encrypt, Certbotu a doménové hygieně.
 - 2026-07-17: Doplněna příloha o databázových migracích bez tichého datového překvapení: rozlišení změn schématu, významu, dat, oprávnění a retence, migrační věta, expand/contract postup, dávkový backfill s checkpointem a ruční brzdou, testy tenant izolace, opatrné logování, rollback plán, úklid dočasných artefaktů, checklist a mini úkol; navázáno na existující zdroje Evropské komise k principům zpracování osobních údajů a OWASP k logování a bezpečné práci s databází.
 - 2026-07-17: Doplněna příloha o externí HTTPS kontrole bez falešného klidu: rozlišení interního health endpointu, veřejného DNS/TLS/HTTP monitoringu a produktového smoke testu, riziko proxy a `curl -k`, diagnostické alerty, checklist a mini úkol; ověřen a doplněn zdroj curl man page k TLS ověřování a provozním volbám.
 - 2026-07-17: Doplněna příloha o TLS certifikátech bez tichého výpadku: certifikát jako součást dostupnosti, monitoring expirace, automatická obnova, reload služby po obnově, interní a externí testy, incidentní otázky, checklist a mini úkol; ověřeny zdroje Let’s Encrypt a Certbot k platnosti certifikátů a automatickému renewal.
