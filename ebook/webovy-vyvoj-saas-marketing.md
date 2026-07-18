@@ -32883,6 +32883,154 @@ Vezmi jeden existující health check a napiš k němu tuto kartu:
 
 Potom změň jednu věc: přidej kontrolu certifikátu, obsahový marker, lepší chybovou větu nebo pole „odkud test běžel“. Malý health check má být nudný. Ale musí být nudný správným směrem.
 
+## Příloha: Nouzová stránka bez paniky, trackerů a SEO škody
+
+Když web nebo SaaS spadne, tým často řeší dvě věci najednou: opravit příčinu a nějak slušně odpovědět lidem, kteří mezitím přijdou. Pokud není připravená nouzová stránka, vznikne improvizace. Někdo vrátí `200 OK` s textem „údržba“, někdo nechá proxy ukazovat technickou chybu, někdo přidá chat widget na rozbitou stránku a někdo doufá, že si toho vyhledávače nevšimnou. Doufání je sice levné, ale jako provozní strategie má mizernou dostupnost.
+
+Špatná otázka zní: „Jak rychle schováme chybu?“
+
+Lepší otázka zní: „Jak návštěvníkovi, klientovi a vyhledávači pravdivě řekneme, že jde o dočasný stav, aniž bychom sbírali zbytečná data nebo maskovali problém?“
+
+Nouzová stránka není dekorace incidentu. Je to malý provozní produkt. Má mít správný status, jasný text, minimum závislostí a cestu k dalším informacím.
+
+### Vrať správný stav, ne hezkou lež
+
+Pokud jde o dočasnou nedostupnost služby, patří sem typicky `503 Service Unavailable`. MDN popisuje `503` jako stav, kdy server není připraven požadavek obsloužit, například kvůli údržbě nebo přetížení, a doporučuje u dočasného stavu přidat `Retry-After`, pokud jde odhadnout návrat služby. Google Search Central u plánované odstávky také doporučuje používat `503`, aby vyhledávač nebral dočasnou údržbu jako trvalou změnu obsahu.
+
+Praktické pravidlo:
+
+| Situace | Vhodná odpověď | Poznámka |
+| --- | --- | --- |
+| Plánovaná krátká údržba | `503` + `Retry-After` | stránka vysvětlí, kdy zkusit znovu |
+| Neplánovaný výpadek | `503` | `Retry-After` jen pokud je odhad poctivý |
+| Trvale odstraněný obsah | `404` nebo `410` | nepoužívej údržbu jako skládku starých URL |
+| Přesměrovaná stránka | `301`, `308` nebo dočasně `302` | podle toho, zda je změna trvalá |
+| Přístup jen pro přihlášené | `401` nebo `403` | neskrývej auth problém jako výpadek |
+
+Nejhorší kompromis je vracet `200 OK` s textem „momentálně nefungujeme“. Pro člověka je to matoucí, pro monitoring falešně zelené a pro vyhledávač signál, že stránka normálně existuje s tímto obsahem. Hezký HTML kabát neopraví špatný HTTP status.
+
+### Stránka má být statická a chudá
+
+Nouzová stránka se má zobrazit právě ve chvíli, kdy hlavní aplikace, databáze, build nebo upstream mohou být rozbité. Proto nemá záviset na stejných věcech jako běžný web.
+
+Dobrá nouzová stránka:
+
+- je statický HTML soubor nebo jednoduchá odpověď z reverse proxy,
+- nepoužívá JavaScript pro zobrazení základního textu,
+- nenačítá analytiku, reklamní pixely, heatmapy ani chat,
+- má lokální CSS nebo velmi jednoduchý inline styl,
+- nevyžaduje databázi ani přihlášení,
+- neukazuje stack trace, interní hostnames ani verze služeb,
+- obsahuje přímý odkaz na status page, podporu nebo RSS/kanál aktualizací, pokud existuje.
+
+Privacy-first pohled je jednoduchý: člověk při výpadku nepřišel darovat další signály. Přišel zjistit, co se děje. Nouzová stránka nemá být moment, kdy se mu do prohlížeče nasype třetí strana jen proto, že hlavní produkt zrovna mlčí.
+
+### Text má říct málo, ale přesně
+
+Dobrá nouzová zpráva není omluvná esej ani technický výpis.
+
+Stačí:
+
+- co je omezené,
+- zda jde o dočasný stav,
+- co může člověk udělat teď,
+- kde najde aktualizaci,
+- kdy má zkusit znovu, pokud to víš.
+
+Příklad:
+
+```text
+Služba je dočasně nedostupná.
+
+Pracujeme na obnově hlavního webu. Zkuste stránku obnovit za několik minut.
+Aktuální stav najdete na status stránce: https://status.example.com
+```
+
+Pokud jde o citlivý produkt, nepřidávej podrobnosti typu „spadla databáze zákazníků“ nebo „řešíme chybu v billing migraci“. Transparentnost je důležitá, ale veřejná nouzová stránka není incidentní log.
+
+Codyho komentář: Údržbová stránka má být jako cedule na dveřích. Řekne, že je zavřeno, kdy se zkusit vrátit a kam volat v nouzi. Nemá na chodník vysypat inventář celé firmy.
+
+### Cache nastav opatrně
+
+U `503` je cache zvlášť citlivá. MDN upozorňuje, že u dočasného stavu je potřeba dát pozor na cache hlavičky, aby klienti nedostávali starou chybovou stránku i po opravě.
+
+Bezpečný výchozí režim pro nouzovou stránku:
+
+```http
+HTTP/1.1 503 Service Unavailable
+Retry-After: 300
+Cache-Control: no-store
+Content-Type: text/html; charset=utf-8
+```
+
+`Retry-After` může být počet sekund nebo datum. Použij ho jen tehdy, když máš rozumný odhad. Falešné „za 5 minut“ opakované hodinu je dobrý způsob, jak zákazníka naučit nevěřit žádné další provozní zprávě.
+
+### Připrav tři režimy dopředu
+
+Nouzová stránka by neměla vznikat až v incidentu. Připrav si tři režimy:
+
+| Režim | Kdy použít | Co obsahuje |
+| --- | --- | --- |
+| Plánovaná údržba | dopředu oznámené okno | čas, důvod v lidské řeči, `Retry-After`, status page |
+| Neplánovaný výpadek | služba neodpovídá nebo je degradovaná | stručná informace, bezpečný kontakt, žádný odhad bez jistoty |
+| Degradovaný režim | část služby funguje, část ne | co lze dělat, co je pozastavené, kde sledovat stav |
+
+U SaaS je často lepší umožnit aspoň čtení, export nebo zobrazení statusu než zavřít všechno jednou stránkou. Ale pokud si nejsi jistý integritou dat, dočasné omezení zápisu je férovější než tiché přijímání akcí, které se potom ztratí.
+
+### Nouzová stránka patří do deploy a smoke testu
+
+Jednou za čas otestuj, že nouzová stránka skutečně funguje. Ne na produkčním incidentu. V testovacím prostředí nebo přes staging konfiguraci.
+
+Kontrola:
+
+```bash
+curl -I https://example.com/maintenance-test
+curl -fsS https://example.com/maintenance-test | grep -q "dočasně nedostupná"
+```
+
+Ověř:
+
+- správný status `503`,
+- přítomnost nebo nepřítomnost `Retry-After` podle režimu,
+- žádné externí trackery,
+- žádné cookies,
+- žádné detailní interní informace,
+- funkční odkaz na status nebo podporu,
+- čitelnost na mobilu,
+- správné `lang` v HTML.
+
+Pokud nouzovou stránku servíruje nginx, load balancer nebo hosting, zapiš to do provozní karty. Při výpadku aplikace nemá tým hledat, jestli se chyba přepíná v kódu, proxy, DNS nebo panelu poskytovatele.
+
+### Checklist: Nouzová stránka bez další škody
+
+- [ ] Dočasná nedostupnost vrací `503`, ne falešný `200`.
+- [ ] `Retry-After` se používá jen s poctivým odhadem.
+- [ ] Nouzová stránka je statická nebo servírovaná mimo hlavní aplikaci.
+- [ ] Stránka neobsahuje analytiku, reklamní pixely, heatmapy ani chat widget.
+- [ ] Cache hlavičky brání držení staré chybové stránky po obnově.
+- [ ] Text říká, co je omezené, co má člověk udělat a kde sledovat stav.
+- [ ] Veřejná stránka neprozrazuje interní infrastrukturu, stack trace ani citlivé detaily incidentu.
+- [ ] Existují varianty pro plánovanou údržbu, neplánovaný výpadek a degradovaný režim.
+- [ ] Smoke test ověřuje status, obsah a absenci zbytečných externích requestů.
+- [ ] Runbook říká, kde se nouzová stránka zapíná a vypíná.
+
+### Mini úkol
+
+Připrav kartu nouzové stránky pro jeden web nebo SaaS:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Kdo smí zapnout nouzovou stránku? |  |
+| Kde se zapíná: aplikace, nginx, load balancer, hosting? |  |
+| Jaký status vrací plánovaná údržba? |  |
+| Kdy použijeme `Retry-After`? |  |
+| Jaký text uvidí člověk? |  |
+| Které externí skripty jsou zakázané? |  |
+| Jak zabráníme cache staré údržbové stránky? |  |
+| Jak ověříme návrat běžné stránky? |  |
+
+Potom udělej jednu konkrétní změnu: vytvoř statickou šablonu, oprav status z `200` na `503`, doplň `Cache-Control`, odstraň tracking z chybové stránky, nebo přidej test nouzového režimu do provozního runbooku. Výpadek je nepříjemný. Výpadek s falešným statusem, trackerem a starou cache je zbytečně kreativní.
+
 ## Zdroje
 
 - curl: curl man page - volby pro časové limity, TLS ověřování a režim `--insecure`: https://curl.se/docs/manpage.html
@@ -32915,6 +33063,9 @@ Potom změň jednu věc: přidej kontrolu certifikátu, obsahový marker, lepš�
 - IETF RFC 8058: Signaling One-Click Functionality for List Email Headers - specifikace `List-Unsubscribe-Post` a one-click odhlášení pro mailing listy: https://www.rfc-editor.org/info/rfc8058
 - OWASP Cheat Sheet Series: HTTP Security Response Headers Cheat Sheet - praktická doporučení k bezpečnostním HTTP hlavičkám: https://cheatsheetseries.owasp.org/cheatsheets/HTTP_Headers_Cheat_Sheet.html
 - MDN Web Docs: HTTP response status codes - přehled tříd stavových kódů HTTP a jejich významu pro úspěšné, přesměrované, klientské a serverové odpovědi: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status
+- MDN Web Docs: 503 Service Unavailable - dočasný stav, kdy server není připraven požadavek obsloužit, typicky při údržbě nebo přetížení, včetně doporučení k `Retry-After` a opatrnosti s cache: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/503
+- MDN Web Docs: Retry-After header - HTTP hlavička pro informaci, jak dlouho má klient počkat před dalším požadavkem, používaná například u `503 Service Unavailable` nebo `429 Too Many Requests`: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Retry-After
+- Google Search Central Blog: How to deal with planned site downtime - doporučení pro plánovanou údržbu webu včetně použití `503 Service Unavailable`, aby dočasný stav nepoškodil indexovaný obsah: https://developers.google.com/search/blog/2011/01/how-to-deal-with-planned-site-downtime
 - MDN Web Docs: HTTP Observatory - nástroj pro automatickou kontrolu HTTP hlaviček a bezpečnostních konfigurací webu: https://developer.mozilla.org/en-US/observatory
 - EUR-Lex: Regulation (EU) 2016/679, GDPR Article 30 - právní text k záznamům o činnostech zpracování pro správce a zpracovatele: https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng
 - Google SRE Book: Service Level Objectives - vysvětlení rozdílu mezi SLI, SLO a SLA, volby ukazatelů, percentilů a error budgetu: https://sre.google/sre-book/service-level-objectives/
@@ -33061,6 +33212,7 @@ Potom změň jednu věc: přidej kontrolu certifikátu, obsahový marker, lepš�
 
 ## Pracovní log
 
+- 2026-07-18: Doplněna příloha o nouzové stránce bez paniky, trackerů a SEO škody: správné použití `503`, poctivý `Retry-After`, statická stránka mimo hlavní aplikaci, opatrná cache, text bez interních detailů, režimy plánované údržby/neplánovaného výpadku/degradace, smoke test, checklist a mini úkol; ověřeny zdroje MDN a Google Search Central k dočasné nedostupnosti.
 - 2026-07-18: Doplněna příloha o pravdivém health checku bez zeleného semaforu na špatné vrstvě: rozdělení kontrol na DNS/TCP/TLS/HTTP/obsah/produktovou cestu, zápis původu výsledku, rozlišení interní syntetiky a veřejné reality, obsahový marker, typy alertů, privacy-first pravidla monitoringu, checklist a mini úkol; navázáno na dnešní zjištění, že proxy a veřejný TLS pohled mohou ukazovat rozdílný stav.
 - 2026-07-18: Doplněna příloha o opravných přístupech k produkci bez univerzálního klíče: rozlišení diagnostiky, omezené opravy a break-glass režimu, karta opravné schopnosti, role pro TLS obnovu a reload proxy bez přístupu k zákaznickým datům, pravidla pro runbook bez tajemství, pravidelný test opravitelnosti, privacy-first auditní stopa, checklist a mini úkol; navázáno na dnešní zjištění, že agent umí problém s certifikátem diagnostikovat, ale bez hostitelského opravného přístupu ho nemůže bezpečně obnovit.
 - 2026-07-18: Doplněna příloha o ověření dostupnosti z více cest bez proxy zkreslení: rozdíl mezi lokálním/proxy pohledem, přímým TLS testem, externím monitoringem a server-side kontrolou, rozlišení proxy `CONNECT 200` od webové odpovědi, tabulka vrstev DNS/TCP/TLS/HTTP/obsah, privacy-first diagnostický balíček, checklist a mini úkol; navázáno na dnešní zjištění, že lokální proxy může ukazovat jiný certifikát než veřejný TLS handshake.
