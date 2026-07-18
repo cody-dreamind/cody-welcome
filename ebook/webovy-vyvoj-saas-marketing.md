@@ -31017,6 +31017,138 @@ Vyber jednu doménu a udělej třicetiminutový suchý běh bez produkčního ha
 
 Potom udělej jednu konkrétní změnu: doplň kartu suchého běhu, přidej alert před expirací, oprav reload hook, vyčisti runbook od tajemství, přidej náhradníka nebo založ provozní úkol k DNS challenge. Cílem není certifikát heroicky zachránit. Cílem je, aby příště neměl co zachraňovat.
 
+## Příloha: První reakce na `000000` bez náhodného restartu
+
+Health check někdy vrátí jen `000000`. To není HTTP status. Je to signál, že klient nedostal použitelnou HTTP odpověď: požadavek mohl spadnout na DNS, TCP spojení, TLS, proxy, timeoutu, prázdné odpovědi upstreamu nebo chybě aplikace, která zavřela spojení dřív, než poslala status.
+
+Špatná otázka zní: „Co rychle restartujeme?“
+
+Lepší otázka zní: „Na které vrstvě se odpověď rozpadla a jaký nejmenší zásah ji obnoví?“
+
+Tahle příloha je krátký provozní postup pro první reakci. Navazuje na části o health checku, externí HTTPS kontrole, TLS vlastnictví, záchranném balíku a suchém běhu obnovy certifikátu.
+
+Codyho komentář: `000000` je krásně neužitečná hodnota. Říká „něco je špatně“, ale neřekne, jestli je to DNS, TLS, aplikace, proxy nebo tvoje pondělní karma. Proto se musí rozbalit na vrstvy.
+
+### Nejdřív odděl status, exit code a chybovou větu
+
+Do alertu nebo ruční diagnostiky ukládej tři věci:
+
+| Položka | Proč je důležitá | Příklad |
+| --- | --- | --- |
+| HTTP status | co server skutečně odpověděl | `200`, `301`, `500`, prázdné |
+| Exit code klienta | proč nástroj skončil chybou | `6` DNS, `7` connect, `28` timeout, `35` TLS, `52` empty reply |
+| Chybová věta | lidský popis selhání | `Empty reply from server` |
+
+Praktický `curl` výstup může být:
+
+```bash
+curl -sS -o /tmp/health-body.txt \
+  -w 'http_code=%{http_code} exit=%{exitcode} err=%{errormsg}\n' \
+  --max-time 20 https://example.com/ || true
+```
+
+Pokud dostaneš `http_code=000 exit=52 err=Empty reply from server`, DNS, TCP a TLS mohly projít, ale server nebo proxy zavřely spojení bez HTTP odpovědi. To je jiný problém než expirovaný certifikát nebo nedostupná doména.
+
+### Diagnostikuj od kraje dovnitř
+
+Použij vrstvy v pevném pořadí:
+
+| Vrstva | Otázka | Typická kontrola | Typická akce |
+| --- | --- | --- | --- |
+| DNS | Překládá doména správně? | `dig`, `host`, externí DNS check | opravit záznam nebo delegaci |
+| TCP | Dostanu se na port? | `curl -v`, `nc`, monitoring | opravit firewall, load balancer nebo službu |
+| TLS | Sedí certifikát a handshake? | `curl -v`, `openssl s_client` | obnovit certifikát, reloadnout proxy |
+| HTTP | Přijde status a hlavičky? | `curl -I`, `curl -v` | opravit reverse proxy nebo upstream |
+| Aplikace | Vrací hlavní cesta obsah? | smoke test titulku nebo health endpointu | rollback, restart aplikace, oprava configu |
+| Monitoring | Hlásí stejnou věc zvenku? | veřejný check, jiná síť | opravit alert nebo odlišit proxy problém |
+
+Nejdřív si ověř, že problém vidíš z více míst. Pokud kontrola běží přes korporátní proxy, lokální tunel nebo CI, zapiš to. Selhání z proxy není stejné jako selhání z veřejného internetu, i když obě vypadají v tabulce stejně červeně.
+
+### `Empty reply` ukazuje na konkrétní skupinu podezřelých
+
+Prázdná odpověď po úspěšném TLS spojení obvykle znamená, že se požadavek dostal blízko k serveru, ale něco ho zavřelo dřív, než vznikl HTTP status.
+
+Nejčastější podezřelí:
+
+- reverse proxy neumí předat požadavek upstreamu,
+- aplikace přijme spojení a spadne před odpovědí,
+- backend běží na špatném portu nebo protokolu,
+- TLS terminace posílá HTTP na službu, která čeká něco jiného,
+- health endpoint zavírá spojení kvůli chybné konfiguraci host headeru,
+- middleware ukončí request bez chybové stránky,
+- lokální nebo síťová proxy zkresluje odpověď.
+
+První opravy podle vrstvy:
+
+| Zjištění | Nejmenší další krok |
+| --- | --- |
+| TLS projde, ale HTTP je prázdné | zkontrolovat reverse proxy error log a upstream stav |
+| `HEAD` i `GET` padají stejně | hledat problém před aplikací nebo v základním handleru |
+| Jen `/health` funguje, `/` padá | řešit aplikaci nebo rendering hlavní stránky |
+| Jen externí check padá | porovnat DNS, proxy, firewall a geolokaci monitoru |
+| Jen lokální check padá | ověřit lokální proxy, certifikátovou cestu a síť kontejneru |
+
+### Restart je zásah, ne diagnostika
+
+Restart může být správná akce, ale až když víš, co restartuješ a proč. Náhodné restartování všech služeb může zhoršit incident: smaže užitečné stopy, přeruší běžící joby, spustí fronty dvakrát nebo schová skutečnou příčinu.
+
+Před restartem si napiš krátkou kartu:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Která služba se restartuje? |  |
+| Jaký důkaz ukazuje, že právě ona je problém? |  |
+| Jaký je dopad restartu na uživatele? |  |
+| Kde jsou logy před restartem? |  |
+| Jak poznáme, že restart pomohl? |  |
+| Co uděláme, když nepomůže? |  |
+
+Když odpověď na druhou otázku zní „nevím, ale mohlo by“, ještě chvíli diagnostikuj. Pokud hlavní cesta nefunguje a služba je zjevně mrtvá, restartuj cíleně a zapiš výsledek. Pragmatismus není panika v rychlých botách.
+
+### Alert má obsahovat první použitelný krok
+
+Alert „web je dole, status 000“ je lepší než nic, ale člověk po probuzení pořád neví, co dělat. Lepší alert:
+
+```text
+cody.dreamind.cz nevrátil HTTP odpověď.
+curl: http_code=000, exit=52, err=Empty reply from server.
+TLS handshake prošel, problém je pravděpodobně HTTP/upstream/proxy.
+První krok: zkontrolovat reverse proxy error log a stav aplikačního upstreamu.
+Runbook: [interní odkaz bez tajemství]
+```
+
+Do alertu nepatří tajemství, privátní logy, celé hlavičky s tokeny ani exporty. Patří tam minimum, které zkrátí první rozhodnutí.
+
+### Checklist: První reakce na `000000`
+
+- [ ] Alert rozlišuje HTTP status, exit code a chybovou větu.
+- [ ] Víme, odkud kontrola běžela: veřejný monitoring, lokální síť, CI, kontejner nebo proxy.
+- [ ] Diagnostika postupuje přes DNS, TCP, TLS, HTTP, aplikaci a monitoring.
+- [ ] `Empty reply from server` řešíme jako HTTP/upstream/proxy problém, pokud TLS prošlo.
+- [ ] Před restartem máme důkaz, kterou službu restartovat.
+- [ ] Před zásahem uložíme relevantní logy bez citlivých payloadů.
+- [ ] Health check má runbook s prvním použitelným krokem.
+- [ ] Smoke test ověřuje i obsah hlavní cesty, ne jen existenci spojení.
+- [ ] Incident nebo falešný poplach končí úpravou monitoringu, runbooku nebo provozní karty.
+
+### Mini úkol
+
+Vezmi poslední `000000` výpadek nebo falešný alert a vyplň kartu:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jaký byl HTTP status, exit code a chybová věta? |  |
+| Odkud kontrola běžela? |  |
+| Prošel DNS překlad? |  |
+| Prošlo TCP spojení? |  |
+| Prošel TLS handshake? |  |
+| Přišla HTTP odpověď? |  |
+| Který log byl první užitečný? |  |
+| Který restart nebo zásah byl opravdu nutný? |  |
+| Co doplníme do alertu nebo runbooku? |  |
+
+Potom udělej jednu konkrétní změnu: přidej `exitcode` a `errormsg` do health checku, doplň do alertu první krok, napiš postup pro `Empty reply from server`, přidej smoke test hlavní stránky nebo zapiš, odkud monitoring běží. `000000` nemá být konec diagnostiky. Má být začátek čitelné věty.
+
 ## Zdroje
 
 - curl: curl man page - volby pro časové limity, TLS ověřování a režim `--insecure`: https://curl.se/docs/manpage.html
@@ -31195,6 +31327,7 @@ Potom udělej jednu konkrétní změnu: doplň kartu suchého běhu, přidej ale
 
 ## Pracovní log
 
+- 2026-07-18: Doplněna příloha o první reakci na `000000` bez náhodného restartu: rozlišení HTTP statusu, curl exit codu a chybové věty, postup přes DNS/TCP/TLS/HTTP/aplikaci, praktická interpretace `Empty reply from server`, restart jako cílený zásah, alert s prvním krokem, checklist a mini úkol; navázáno na dnešní selhání kontroly webu i existující části o health checku, HTTPS monitoringu, runboocích a TLS obnově.
 - 2026-07-18: Zpřesněna karta suchého běhu TLS o pole, odkud test běžel, aby bylo jasné, zda výsledek pochází z veřejného monitoringu, lokální sítě, CI nebo proxy.
 - 2026-07-18: Doplněna příloha o suchém běhu obnovy TLS bez čekání na expiraci: karta domény, rozlišení renewal mechanismu, challenge, reloadu a veřejného ověření, bezpečné hranice testu, privacy-first pravidla pro runbook bez tajemství, výsledek suchého běhu jako konkrétní provozní úkol, checklist a mini úkol; navázáno na existující zdroje k curl, Let’s Encrypt a Certbotu i předchozí kapitoly o TLS, health checku a provozním záchranném balíku.
 - 2026-07-18: Doplněna příloha o provozním záchranném balíku bez ukládání tajemství do repozitáře: karta kritické služby, oddělení mapy od hesel a klíčů, read-only diagnostika, dostupnost runbooků při výpadku hlavního systému, rotace a revokace přístupů, checklist a mini úkol; navázáno na existující zdroje OWASP k secrets managementu a autorizaci, Twelve-Factor App ke konfiguraci a předchozí provozní kapitoly o TLS, runboocích a postmortemech.
