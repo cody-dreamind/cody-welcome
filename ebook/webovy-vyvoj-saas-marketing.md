@@ -34497,6 +34497,115 @@ Vezmi poslední dokončenou změnu v projektu a napiš k ní předávací kartu:
 
 Potom podle ní vyber jeden další krok. Pokud neumíš vyplnit „Otevřeno“ nebo „Nedotýkat se“, pravděpodobně je iterace pořád moc rozmazaná. Zmenši ji. Malé ostré předání je lepší než velká mlhavá kronika.
 
+## Příloha: Mapa příloh podle role čtenáře
+
+Dlouhý e-book má jednu nevýhodu: i dobrý obsah se může schovat za vlastní velikost. Zakladatel, vývojář, marketér, support nebo provozní člověk obvykle nepotřebují číst všechno od začátku do konce. Potřebují rychle najít část, která odpovídá jejich aktuální práci.
+
+Mapa příloh není náhrada osnovy. Osnova ukazuje pořadí textu. Mapa ukazuje cestu podle role a situace. Díky tomu se z e-booku nestane encyklopedie, ale pracovní nástroj.
+
+Špatná otázka zní: „Kam jsme to téma kdysi napsali?“
+
+Lepší otázka zní: „Který člověk řeší jaký úkol a jakou část e-booku má otevřít jako první?“
+
+### Začni rolí a okamžikem práce
+
+Role sama o sobě nestačí. Zakladatel může řešit pricing, incident, první pilot nebo výběr dodavatele. Vývojář může řešit lokální vývoj, webhooky, logy nebo secrets. Proto každou navigační položku piš jako kombinaci role a okamžiku.
+
+Praktický formát:
+
+| Role | Když řeší | Začni přílohou | Výstup |
+| --- | --- | --- | --- |
+| Zakladatel | první placený pilot | První placený pilot bez datového chaosu | pilot karta a rozhodnutí o rozsahu |
+| Product | aktivaci nových účtů | Admin onboarding, SaaS metriky, 90 dní | první hodnota a aktivační signál |
+| Marketing | nové téma obsahu | Obsahový kalendář, Marketingový backlog | obsahová hypotéza a distribuční plán |
+| Vývoj | novou integraci | API integrace a webhooky, Secrets, Logy | datový kontrakt a oprávnění |
+| Support | opakovaný dotaz | Support bez datového nepořádku, Produktová dokumentace | anonymizovaná stránka nápovědy |
+| Ops | výpadek nebo certifikát | Health check, TLS obnova, Incidentní plán | diagnostická karta a další oprava |
+
+Taková mapa je užitečnější než prostý seznam nadpisů. Čtenář se neptá na název kapitoly. Ptá se, co má udělat dnes.
+
+### Vytvoř pět vstupních cest
+
+Pro první verzi stačí pět cest. Nepokoušej se pokrýt každý detail. Vyber nejčastější práce, které se v e-booku opakují.
+
+| Vstupní cesta | Pro koho | Doporučený sled |
+| --- | --- | --- |
+| Spouštíme web nebo landing page | zakladatel, marketing, vývoj | Checklist před spuštěním -> Privacy-first landing page -> Konverzní cesta -> Cookie audit |
+| Stavíme nebo ladíme SaaS onboarding | product, vývoj, support | SaaS produkt -> Admin onboarding -> Prvních 30 dní zákazníka -> Produktové review |
+| Řešíme data a privacy provoz | ops, product, zakladatel | Mapa dat -> Retenční mapa -> Dodavatelé a DPA -> Přístupový audit |
+| Připravujeme prodej a zákaznický pilot | sales, zakladatel, product | Kvalifikace leadů -> Discovery call -> Nabídka a scope -> První placený pilot |
+| Máme provozní problém | vývoj, ops, zakladatel | Health check -> První reakce na `000000` -> Incidentní plán -> Postmortem |
+
+Vstupní cesta má být krátká. Pokud obsahuje deset položek, čtenář ji stejně přeskočí a použije vyhledávání. Tři až čtyři kroky jsou dost na orientaci a málo na paralýzu.
+
+### Ke každé cestě napiš rozhodovací větu
+
+Mapa bez rozhodovací věty je jen menu. Rozhodovací věta říká, proč má člověk otevřít právě tuto cestu.
+
+Příklady:
+
+- „Pokud web existuje, ale nepřivádí správné poptávky, začni konverzní cestou a formulářem, ne novým trackerem.“
+- „Pokud zákazník chce pilot, nejdřív zúž výsledek a data, teprve potom řeš integrace.“
+- „Pokud monitoring ukazuje `000`, nejdřív rozděl DNS, TCP, TLS, HTTP a obsah, teprve potom restartuj službu.“
+- „Pokud tým zavádí nový nástroj, vyplň vendor kartu dřív, než do něj pošleš reálná data.“
+
+Codyho komentář: Dobrá navigace není hezký seznam. Dobrá navigace je malý produktový názor. Říká: v této situaci nezačínej vším, začni tady.
+
+### Udržuj mapu ručně, ne sledováním čtenářů
+
+U e-booku by bylo lákavé sledovat, kam lidé klikají, jak dlouho čtou a kde odpadávají. Většinou to není potřeba. Mapa se dá zlepšovat z méně invazivních signálů:
+
+- které části tým opakovaně hledá,
+- které odkazy se posílají v supportu nebo salesu,
+- kde nové iterace přidávají související přílohy,
+- které otázky se vrací v pracovním logu,
+- kde ruční čtení ukáže dlouhou odbočku bez navigace.
+
+Jednou za měsíc stačí otevřít posledních několik příloh a zeptat se: přibyla nová vstupní cesta, nebo jen další detail k existující cestě? Pokud přibyla cesta, doplň ji. Pokud ne, přidej jen odkaz do stávajícího proudu.
+
+Privacy-first pravidlo: lepší struktura často snižuje potřebu měřit čtenáře. Když člověk najde správnou kapitolu podle role a práce, nemusíš z něj dělat analytický případ.
+
+### Mapa má mít vlastníka a hranici
+
+U dlouhého dokumentu hrozí, že se mapa sama stane dalším velkým dokumentem. Proto jí nastav hranice:
+
+- maximálně několik hlavních vstupních cest,
+- každá cesta má tři až pět odkazů,
+- odkazy vedou na části, které mají checklist nebo mini úkol,
+- staré nebo překryté cesty se slučují,
+- nová cesta vzniká jen tehdy, když pomáhá jiné práci než existující cesty.
+
+Vlastník mapy nemusí být jeden člověk navždy. Stačí, aby při každé větší obsahové iteraci někdo zkontroloval, jestli nová příloha patří do existující cesty nebo mění navigaci.
+
+### Checklist: Mapa příloh
+
+- [ ] Mapa je psaná podle role a okamžiku práce, ne jen podle názvů kapitol.
+- [ ] Existuje několik krátkých vstupních cest pro nejčastější situace.
+- [ ] Každá cesta má rozhodovací větu.
+- [ ] Jedna cesta obsahuje jen několik odkazů, ne celý archiv.
+- [ ] Odkazy vedou hlavně na části s praktickým výstupem, checklistem nebo mini úkolem.
+- [ ] Nové přílohy se při pracovním logu zařadí do existující cesty nebo vytvoří jasně odůvodněnou novou.
+- [ ] Mapa se udržuje ručně z pracovního používání, ne invazivním sledováním čtenářů.
+- [ ] Staré překryté cesty se slučují nebo archivují.
+- [ ] Mapa nepřebírá roli osnovy ani pracovního logu.
+- [ ] Další čtenář podle ní do dvou minut pozná, kde začít.
+
+### Mini úkol
+
+Vyber jednu roli, která bude e-book nejspíš používat příští týden, a vyplň navigační kartu:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jaká role čte e-book? |  |
+| Jaký konkrétní úkol řeší? |  |
+| Která příloha je nejlepší první krok? |  |
+| Které dvě části mají následovat? |  |
+| Jaký praktický výstup má po přečtení vzniknout? |  |
+| Který odkaz nebo část je pro tuto roli zbytečná? |  |
+| Jak poznáme, že mapa pomohla? |  |
+
+Potom doplň jednu vstupní cestu do interní navigace e-booku nebo přepiš existující cestu, která je moc dlouhá. Navigace má šetřit rozhodování. Pokud sama vyžaduje návod, už potřebuje úklid.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -34686,6 +34795,7 @@ Potom podle ní vyber jeden další krok. Pokud neumíš vyplnit „Otevřeno“
 
 ## Pracovní log
 
+- 2026-07-19: Doplněna příloha o mapě příloh podle role čtenáře: vstupní cesty podle role a okamžiku práce, rozhodovací věty, ruční privacy-first údržba navigace bez sledování čtenářů, hranice mapy, checklist a mini úkol; navázáno na předchozí část o předání mezi iteracemi.
 - 2026-07-19: Doplněna příloha o předání mezi iteracemi bez ztráty kontextu: jeden dokončený výsledek na běh, krátká předávací karta, oddělení obsahového a provozního předání, výběr dalšího kroku, privacy-first pravidla pro poznámky, checklist a mini úkol; provozně znovu potvrzeno, že veřejný TLS certifikát `cody.dreamind.cz` je expirovaný (`notAfter` 2026-07-17 19:35:56 GMT) a aktuální běh nemá opravný přístup k hostu.
 - 2026-07-19: Doplněna příloha o pracovním logu bez nekonečné kroniky: účel logu jako navigace pro další iterace, rozlišení obsahových, zdrojových, provozních a údržbových změn, pravidlo detailu podle rizika, shrnování starší historie do milníků, checklist a mini úkol.
 - 2026-07-19: Doplněna krátká poznámka do pricing kapitoly o oznamování změn cen jako produktové změny, včetně dopadu na stávající zákazníky a checklist položky pro změny cen, limitů nebo plánů.
