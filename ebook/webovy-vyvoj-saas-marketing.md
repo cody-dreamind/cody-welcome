@@ -33523,8 +33523,171 @@ Vyber jeden produkční web nebo SaaS a vyplň opravnou přístupovou kartu:
 
 Potom udělej jednu malou opravu: doplň host key fingerprint do runbooku, nastav read-only diagnostický příkaz, omez `sudo` na konkrétní reload služby, nebo přidej měsíční test opravného přístupu. Bezpečný přístup není luxus pro enterprise. Je to rozdíl mezi rychlou obnovou a lovem klíčů ve tmě.
 
+## Příloha: Incidentní deník bez datového skladiště
+
+Když se web tváří mrtvě, první minuty jsou chaotické i v malém týmu. Někdo vidí `curl` s `000000`, někdo má v prohlížeči varování o certifikátu, někdo jiný kouká na uptime aplikace a říká, že backend přece běží. Všichni mohou mít pravdu, a právě proto je potřeba incidentní deník. Ne jako compliance sešit pro šuplík, ale jako živá paměť toho, co víme, co jsme zkusili, co se změnilo a kdo teď drží další krok.
+
+Google SRE Book v kapitole o řízení incidentů zdůrazňuje předem připravený proces, jasné role, živý incidentní dokument a průběžnou komunikaci. NIST SP 800-61 Rev. 3 popisuje incident response jako součást širšího řízení kyberbezpečnostních rizik, která má pomáhat s přípravou, detekcí, reakcí i obnovou. OWASP Logging Cheat Sheet k tomu přidává privacy-first brzdu: logování má mít účel, chránit citlivá data a nelogovat zbytečný balast. Odkazy jsou ve zdrojích.
+
+Špatná otázka zní: „Kam si to rychle poznamenáme?“
+
+Lepší otázka zní: „Jaký minimální záznam pomůže obnovit službu, předat kontext a nevyrobit nový datový problém?“
+
+### Deník není chat
+
+Chat je dobrý na koordinaci. Deník je dobrý na stav. Když všechno necháš jen v chatu, důležité věci se ztratí mezi reakcemi, dotazy, opakováním a nervózními statusy. Incidentní deník má být krátký, chronologický a rozhodovací.
+
+Minimální záznam:
+
+| Pole | Příklad |
+| --- | --- |
+| Čas | `2026-07-19 00:03 UTC` |
+| Služba | `cody.dreamind.cz` |
+| Signál | veřejný HTTPS check selhal |
+| Vrstva | TLS |
+| Důkaz | přímý `curl` hlásí expirovaný certifikát |
+| Dopad | uživatelé mohou vidět bezpečnostní varování nebo nedostupnost |
+| Aktuální vlastník | osoba nebo role, která řeší další krok |
+| Další akce | obnovit veřejný TLS certifikát a reloadnout proxy |
+| Stop podmínka | bez opravného přístupu nezkoušet obcházet TLS ani měnit DNS |
+
+Tohle není román. Je to lešení pro další rozhodnutí. Při incidentu nechceš literární cenu, chceš méně hádání.
+
+### Zapisuj fakta, ne dojmy
+
+Incidentní deník má oddělovat pozorování, interpretaci a zásah. Když napíšeš „web je rozbitý“, nikdo neví, jestli selhalo DNS, TCP, TLS, HTTP, obsah, login, platba nebo jen monitorovací proxy. Když napíšeš „přímý TLS handshake na `91.99.227.53:443` selhal na expiraci certifikátu, kontrola přes interní proxy skončila prázdnou odpovědí“, další člověk ví, kam se nedívat.
+
+Používej tři typy řádků:
+
+| Typ | Co obsahuje | Příklad |
+| --- | --- | --- |
+| Pozorování | co nástroj opravdu vrátil | `curl exit 60: certificate has expired` |
+| Interpretace | co z toho pravděpodobně plyne | veřejný klient odmítá TLS důvěru |
+| Zásah | co jsme změnili | spuštěn renewal, reload nginxu, ověřena URL |
+
+Interpretace bez pozorování je dojem. Zásah bez důvodu je budoucí archeologie.
+
+### Neloguj víc dat jen proto, že hoří
+
+Incident zvedá tlak a snižuje zábrany. Najednou se do chatu lepí celé requesty, screenshoty administrace, výpisy prostředí, tokeny v URL, části databázových řádků a osobní údaje uživatelů. To je přesně chvíle, kdy privacy-first pravidla nemají jít na oběd.
+
+Do incidentního deníku typicky patří:
+
+- veřejná doména, cesta a status,
+- čas testu a odkud test běžel,
+- anonymizovaný nebo agregovaný dopad,
+- korelační ID bez payloadu,
+- název služby, komponenty a verze artefaktu,
+- rozhodnutí, vlastník a další krok.
+
+Do deníku typicky nepatří:
+
+- access tokeny, cookies, session ID a privátní klíče,
+- celé hlavičky požadavků bez redakce,
+- osobní údaje zákazníků,
+- interní URL s tajnými parametry,
+- screenshoty administrace bez redakce,
+- surové exporty logů jako příloha „pro jistotu“.
+
+Codyho komentář: Nejhorší incidentní deník je ten, který po obnově služby musíš řešit jako samostatný bezpečnostní incident. To je jako vytřít rozlitou kávu produkční databází. Výsledek sice vypadá akčně, ale hygiena pláče.
+
+### Šablona pro první hodinu
+
+Pro malý web nebo SaaS stačí šablona, která se dá vyplnit za dvě minuty:
+
+```markdown
+# Incident: [služba] [stručný problém]
+
+Stav: vyšetřujeme / mitigujeme / obnoveno / uzavřeno
+Začátek: [čas a timezone]
+Vlastník: [role nebo člověk]
+Dopad: [uživatelský dopad bez citlivých detailů]
+Aktuální hypotéza: [jedna věta]
+Další update: [čas]
+
+## Časová osa
+
+- [čas] Pozorování: ...
+- [čas] Interpretace: ...
+- [čas] Zásah: ...
+- [čas] Výsledek: ...
+
+## Rozhodnutí
+
+| Čas | Rozhodnutí | Proč | Vlastník |
+| --- | --- | --- | --- |
+|  |  |  |  |
+
+## Otevřené kroky
+
+- [ ] [konkrétní krok, vlastník, stop podmínka]
+```
+
+Hlavní pravidlo: nahoře musí být aktuální stav. Historie je důležitá, ale člověk, který přijde po dvaceti minutách, nejdřív potřebuje vědět, jestli má opravovat, komunikovat, eskalovat nebo čekat.
+
+### Předání je součást obnovy
+
+Incident nekončí tím, že první člověk pochopil problém. Končí až ve chvíli, kdy služba běží, dopad je ověřený a další člověk umí z deníku poznat, co se stalo. U delšího incidentu nastav rytmus aktualizací, i kdyby update zněl: „bez změny, čekáme na přístup k TLS obnově, další kontrola v 15:30“. Ticho u incidentu není klid. Je to prostor pro dohady.
+
+Při předání napiš:
+
+- co je aktuálně ověřené,
+- co byla slepá ulička,
+- co se změnilo v produkci,
+- co se nesmí dělat dál,
+- kdo drží další akci,
+- kdy bude další update.
+
+Tohle je levnější než opakovaná diagnostika od nuly. A méně trapné než tři lidi, kteří každý restartují něco jiného, protože „jen koukali“.
+
+### Po incidentu deník zredukuj
+
+Živý deník může být trochu špinavý. Finální záznam má být čitelný. Po obnově služby projdi deník a nech jen to, co má provozní nebo rozhodovací hodnotu:
+
+- čas začátku, detekce, mitigace, obnovy a uzavření,
+- uživatelský dopad,
+- potvrzená příčina nebo zatím nejlepší známé vysvětlení,
+- provedené zásahy,
+- co fungovalo,
+- co chybělo,
+- konkrétní úkoly s vlastníkem a termínem.
+
+Surové výstupy a screenshoty rediguj nebo smaž podle retenčních pravidel. Pokud záznam potřebuje zůstat kvůli bezpečnosti, supportu nebo smluvnímu závazku, dej mu vlastníka a konec životnosti. „Necháme to někde pro případ“ není retence. Je to digitální půda, kde bydlí budoucí průšvih.
+
+### Checklist: Incidentní deník
+
+- [ ] Existuje jednoduchá šablona pro první hodinu incidentu.
+- [ ] Deník rozlišuje pozorování, interpretaci a zásah.
+- [ ] Nahoře je vždy aktuální stav, dopad, vlastník a další update.
+- [ ] Každý zásah má důvod, čas a člověka nebo roli.
+- [ ] Deník neobsahuje tokeny, cookies, secrets ani zákaznické payloady.
+- [ ] Screenshoty a logy se před uložením redigují.
+- [ ] Předání obsahuje ověřená fakta, slepé uličky a stop podmínky.
+- [ ] Po obnově se z deníku udělá stručný finální záznam.
+- [ ] Otevřené úkoly mají vlastníka a termín.
+- [ ] Incidentní záznam má retenci a přístupová pravidla.
+
+### Mini úkol
+
+Vezmi poslední provozní problém a přepiš ho do incidentní karty:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jaký byl první signál? |  |
+| Která vrstva selhala? |  |
+| Jaký byl uživatelský dopad? |  |
+| Jaký důkaz to potvrzuje? |  |
+| Co se změnilo v produkci? |  |
+| Kdo držel další krok? |  |
+| Co v deníku nemělo být kvůli datům? |  |
+| Jaký jeden úkol sníží opakování? |  |
+
+Potom udělej jednu drobnou opravu: vytvoř šablonu incidentního deníku, přidej do monitoringu pole `source`, doplň stop podmínku pro TLS zásahy, nebo nastav pravidlo, že se do incidentního chatu neposílají surové requesty bez redakce. Malý deník dnes, menší chaos příště.
+
 ## Zdroje
 
+- Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
+- NIST SP 800-61 Rev. 3: Incident Response Recommendations and Considerations for Cybersecurity Risk Management - doporučení k přípravě, detekci, reakci a obnově v rámci incident response a CSF 2.0: https://csrc.nist.gov/pubs/sp/800/61/r3/final
 - OpenBSD manual: ssh_config(5) - klientská konfigurace OpenSSH včetně `BatchMode`, `StrictHostKeyChecking`, `CheckHostIP` a `VerifyHostKeyDNS`: https://man.openbsd.org/ssh_config
 - OpenBSD manual: ssh-keygen(1) - správa SSH klíčů, práce s `known_hosts`, odstranění host key záznamů přes `-R` a generování SSHFP záznamů přes `-r`: https://man.openbsd.org/ssh-keygen
 - IETF RFC 4255: Using DNS to Securely Publish Secure Shell (SSH) Key Fingerprints - formát SSHFP DNS záznamů a bezpečnostní poznámky k ověřování SSH host keys přes DNS/DNSSEC: https://www.rfc-editor.org/info/rfc4255/
@@ -33710,6 +33873,7 @@ Potom udělej jednu malou opravu: doplň host key fingerprint do runbooku, nasta
 
 ## Pracovní log
 
+- 2026-07-19: Doplněna příloha o incidentním deníku bez datového skladiště: rozdíl mezi chatem a deníkem, rozlišení pozorování/interpretace/zásahu, minimální šablona první hodiny, privacy-first pravidla pro logy a screenshoty, předání incidentu, úklid finálního záznamu, checklist a mini úkol; ověřeny a doplněny zdroje Google SRE k incident managementu a NIST SP 800-61 Rev. 3 k incident response.
 - 2026-07-18: Doplněna příloha o SSH opravném přístupu bez slepého host key promptu: karta produkčního hostu, ověření host key mimo incident, bezpečné první připojení, omezené opravné role pro TLS/proxy/backend zásahy, rozdělení diagnostiky a produkčního zásahu v runbooku, checklist a mini úkol; ověřeny a doplněny zdroje OpenBSD man pages k `ssh_config` a `ssh-keygen` a RFC 4255 k SSHFP.
 - 2026-07-18: Doplněna příloha o kontrole odkazů v e-booku bez ručního proklikávání do bezvědomí: rozdělení kontrol na Markdown zdroj, HTML export a veřejnou URL, priorita interních kotvic, zdrojů tvrzení a CTA, stabilní kotvy, privacy-first kontrola externích odkazů bez měřicích redirectů, karta problému, checklist a mini úkol; ověřeny a doplněny zdroje CommonMark, RFC 3986 a W3C Link Checker.
 - 2026-07-18: Doplněna příloha o publikaci e-booku bez rozbitých odkazů a datového ocasu: zdroj pravdy pro Markdown, kontrola HTML/PDF/RSS výstupů, metadata veřejné verze, dobrovolný PDF export bez leadové pasti, údržba zdrojů, release pass, checklist a mini úkol; navázáno na existující části o RSS, metadatech, živém e-booku a privacy-first distribuci.
