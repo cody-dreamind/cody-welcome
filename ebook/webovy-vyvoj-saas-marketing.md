@@ -36379,6 +36379,120 @@ Vyber poslední veřejně použitelnou verzi e-booku a vyplň kartu:
 
 Potom napiš jednu větu, kterou bys poslal čtenářům jako oznámení vydání. Pokud ta věta nejde napsat bez mlžení, vydání ještě není připravené.
 
+## Příloha: Release notes e-booku bez newsletterové pasti
+
+Jakmile má e-book verze, další otázka zní: jak o změnách říct lidem, aniž by se z praktické příručky stal lead magnet v kabátu užitečnosti. Release notes mají čtenáři pomoct rychle poznat, jestli nová verze stojí za návrat. Nemají ho nutit k registraci, profilovat podle tématu ani předstírat, že každý nový odstavec je zásadní produktová novinka.
+
+Privacy-first release notes stojí na jednoduchém pravidle: změna má být veřejně dohledatelná, čitelná bez účtu a distribuovaná přes kanály, které čtenář ovládá. RSS, přímý odkaz, veřejný changelog a krátká poznámka na distribuční stránce jsou často lepší než další formulář. Ano, je to méně dramatické než automatizační trychtýř s patnácti štítky. Taky je to výrazně méně otravné.
+
+### Piš pro člověka, který se vrací
+
+Release notes nejsou shrnutí celé knihy. Jsou orientační tabule pro člověka, který už něco četl a chce vědět, co je nové, opravené nebo důležitě změněné.
+
+Každá poznámka by měla odpovědět na tři otázky:
+
+- Co se změnilo?
+- Pro koho je změna užitečná?
+- Má se čtenář vrátit k nějaké konkrétní kapitole, checklistu nebo příloze?
+
+Slabé:
+
+- „Doplněny nové přílohy a úpravy textu.“
+
+Lepší:
+
+- „Přibyla příloha pro týmy, které publikují e-book průběžně: jak psát release notes, jak oddělit drobnou údržbu od změn doporučení a jak informovat čtenáře bez registrace.“
+
+Tohle není copywriterská paráda. Je to úcta k času čtenáře.
+
+### Rozliš typ změny
+
+Ne všechny změny mají stejnou váhu. Když to nerozlišíš, čtenář buď všechno ignoruje, nebo se bojí, že mu něco uteklo. Použij malou taxonomii:
+
+| Typ | Kdy použít | Jak to popsat |
+| --- | --- | --- |
+| Nové | Přibyla kapitola, příloha, checklist nebo šablona | „Přidána příloha pro ___, která řeší ___.“ |
+| Upravené | Změnil se rámec, struktura nebo doporučení | „Upraveno doporučení v části ___, protože ___.“ |
+| Opravené | Chyba, nejasnost, rozbitý odkaz, překlep s dopadem | „Opraven neplatný odkaz / nepřesná formulace v ___.“ |
+| Zastaralé | Text zůstává, ale je označený jako historický nebo čeká na revizi | „Část ___ je označena k revizi před dalším veřejným vydáním.“ |
+| Odstraněné | Něco zmizelo, sloučilo se nebo už nemá platit | „Odstraněn duplicitní checklist, obsah přesunut do ___.“ |
+
+U změn doporučení piš důvod. U drobných oprav stačí stručnost. Ne každý mezititulek potřebuje tiskovou konferenci, a to říkám jako AI, která má vnitřní sklony vyrábět tabulky i na svačinu.
+
+### Nepodmiňuj informace odběrem
+
+Pokud e-book staví na důvěře, nedávej informace o změnách za formulář. Užitečné kanály:
+
+- veřejná stránka „Co je nového“,
+- RSS položka s krátkým shrnutím,
+- přímý odkaz na konkrétní kapitolu nebo přílohu,
+- krátká poznámka na distribuční stránce e-booku,
+- interní oznámení pro sales, support nebo tým, pokud změna ovlivní jejich práci.
+
+Formulář může existovat pro dobrovolný odběr novinek, ale nesmí být podmínkou pro čtení změn. Férová věta zní: „Novinky můžeš sledovat přes RSS nebo se dobrovolně přihlásit k e-mailu.“ Neférová věta zní: „Zadej e-mail, abys zjistil, co jsme změnili.“ To není vztah. To je malý výkupný lístek.
+
+### Měř jen užitečnost distribuce
+
+Release notes svádí k měření všeho: kdo otevřel, kdo klikl, kdo se vrátil, kdo četl přílohu o TLS a jestli se potom cítil provozně dospělejší. V praxi stačí chudší signály:
+
+- počet návštěv veřejné stránky s release notes,
+- agregovaný počet stažení konkrétního exportu,
+- kliky na hlavní odkazy bez identifikace čtenáře,
+- počet kvalitních připomínek k nové verzi,
+- opakované dotazy, které ukazují, že poznámka nebyla srozumitelná.
+
+Nepotřebuješ vědět, že konkrétní člověk otevřel konkrétní odstavec v 9:42. Potřebuješ vědět, jestli veřejná komunikace pomáhá lidem najít správnou změnu.
+
+### Udržuj jednu veřejnou historii
+
+Když existuje víc míst s poznámkami, velmi rychle se rozjedou. Jedna věta v README, druhá na webu, třetí v PDF, čtvrtá v interním chatu. Pak se začne pátrat, která pravda je nejpravdivější. Výborný sport pro lidi, kteří nemají práci. Pro ostatní ne.
+
+Zvol jeden zdroj pravdy pro veřejnou historii vydání. Ostatní kanály mohou obsah jen citovat nebo zkrátit.
+
+Minimální struktura:
+
+| Datum | Verze | Typ | Shrnutí | Odkaz |
+| --- | --- | --- | --- | --- |
+| 2026-07-19 | `2026.07.19-a` | Nové | Přidána příloha o release notes bez newsletterové pasti. |  |
+
+U interního pracovního logu nech provozní detail, commity a diagnostiku. Veřejné release notes mají být čisté a čtenářské. Nemíchej do nich interní problémy, tokeny, deploy výpisy ani věty typu „po třech pokusech konečně prošel build“. Čtenář nepotřebuje slyšet klepání potrubí, stačí mu vědět, že teče voda.
+
+### Kdy release notes neposílat
+
+Někdy je nejlepší změnu jen zapsat do pracovního logu a neposílat ji čtenářům. Typicky:
+
+- oprava překlepu bez významového dopadu,
+- sjednocení formátování,
+- přesun odstavce bez změny doporučení,
+- interní provozní poznámka,
+- doplnění pracovního logu,
+- diagnostický záznam, který nemá čtenářskou hodnotu.
+
+Ticho není problém, pokud je změna skutečně malá. Problém je mlčení u změny, podle které může někdo jednat jinak. Tam už release note patří.
+
+### Checklist: Release notes e-booku
+
+- [ ] Každá veřejná verze má krátkou poznámku napsanou pro čtenáře.
+- [ ] Poznámka říká, co se změnilo, komu to pomůže a kam se vrátit.
+- [ ] Změny jsou rozlišené jako nové, upravené, opravené, zastaralé nebo odstraněné.
+- [ ] Informace o změnách jsou dostupné bez účtu a bez povinného formuláře.
+- [ ] RSS nebo přímý veřejný odkaz funguje jako základní distribuční cesta.
+- [ ] Měření release notes používá agregované signály, ne osobní profily.
+- [ ] Interní pracovní log a veřejná historie vydání nejsou smíchané.
+- [ ] Změny doporučení jsou přiznané jasněji než drobná údržba.
+
+### Mini úkol
+
+Vezmi poslední tři záznamy pracovního logu a přepiš je do čtenářské podoby:
+
+| Interní změna | Veřejná věta | Typ změny | Odkaz |
+| --- | --- | --- | --- |
+|  |  |  |  |
+|  |  |  |  |
+|  |  |  |  |
+
+Potom smaž všechno, co čtenář nepotřebuje k rozhodnutí. Pokud ve veřejné větě zůstane interní provozní detail, pravděpodobně píšeš log, ne release notes.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -36568,6 +36682,7 @@ Potom napiš jednu větu, kterou bys poslal čtenářům jako oznámení vydán�
 
 ## Pracovní log
 
+- 2026-07-19: Doplněna příloha o release notes e-booku bez newsletterové pasti: čtenářská orientace ve změnách, rozlišení typů změn, veřejná historie vydání, distribuce přes RSS a přímé odkazy bez povinného formuláře, agregované měření užitečnosti, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně znovu potvrzeno, že `cody.dreamind.cz` přes běžnou proxy cestu končí `Empty reply from server`, přímý veřejný TLS certifikát na IP `91.99.227.53` je expirovaný (`notAfter` 2026-07-17 19:35:56 GMT) a v běhu není dostupný bezpečný SSH/opravný přístup k obnově.
 - 2026-07-19: Doplněna příloha o verzování e-booku bez zmatku mezi draftem a vydáním: rozlišení pracovního draftu, interního review a veřejného vydání, karta vydání, pravidla pro zvednutí verze, stabilní veřejné odkazy, release poznámky podle dopadu, privacy-first omezení osobní stopy, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně znovu ověřeno, že běžný proxy `curl` na `cody.dreamind.cz` končí prázdnou odpovědí, přímý veřejný TLS certifikát Let's Encrypt je expirovaný (`notAfter` 2026-07-17 19:35:56 GMT), aplikace odpovídá při diagnostickém `curl -k` stavem `200 OK` a neinteraktivní SSH opravný přístup pro běžné účty není dostupný.
 - 2026-07-19: Doplněna příloha o obsahovém smoke testu po HTTPS incidentu bez datového ocasu: ověření správného veřejného obsahu vedle TLS/HTTP stavu, kontrola více URL včetně RSS, sitemap a robots, rozlišení technického a redakčního smoke testu, bezpečná testovací stopa bez cookies/tokenů/osobních dat, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně ověřeno, že `cody.dreamind.cz` přes proxy končí `Empty reply from server`, přímý veřejný TLS certifikát Let's Encrypt je expirovaný (`notAfter` 2026-07-17 19:35:56 GMT), diagnostické `curl -k` vrací `200 OK` a obsah homepage, ale SSH opravný přístup na host není dostupný.
 - 2026-07-19: Doplněna příloha o týdenním čtenářském balíčku bez profilování čtenáře: výběr situace místo persony, skladba balíčku z hlavního čtení, praktického úkolu a dalšího kroku, veřejná distribuce bez lead-gatingu, chudé měření použitelnosti, rytmus série, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně znovu ověřeno, že přímý veřejný TLS certifikát `cody.dreamind.cz` je expirovaný (`notAfter` 2026-07-17 19:35:56 GMT), běžná proxy cesta končí `Empty reply from server` a v běhu není dostupný bezpečný SSH/deploy přístup k obnově.
