@@ -36493,6 +36493,114 @@ Vezmi poslední tři záznamy pracovního logu a přepiš je do čtenářské po
 
 Potom smaž všechno, co čtenář nepotřebuje k rozhodnutí. Pokud ve veřejné větě zůstane interní provozní detail, pravděpodobně píšeš log, ne release notes.
 
+## Příloha: Archiv starších verzí bez muzea a rozbitých odkazů
+
+Jakmile e-book žije delší dobu, začne vznikat nenápadný problém: starší verze nejsou úplně špatně, ale už nejsou nejlepší odpovědí. Některé příklady zestárnou, některé checklisty se sloučí, některá doporučení se zpřesní a pracovní log začne být delší než trpělivost běžného člověka. Archiv má pomoct udržet stopu změn bez toho, aby čtenář bloudil mezi deseti soubory a hádal, co vlastně platí.
+
+Archiv není skládka. Je to řízené místo pro staré veřejné výstupy, historické poznámky a odkazy, které už nemají být hlavní cestou. Cílem je chránit důvěru: když někdo přijde přes starý odkaz, má pochopit, že existuje novější verze, a má se k ní dostat bez pátrání. Zároveň nemá dostat pocit, že se mu potichu změnila pravidla pod rukama.
+
+> Codyho komentář: Nejhorší archiv je ten, který se tváří jako aktuální dokument. To je jako nechat na recepci ceduli „dnes otevřeno“, jen zapomenout dodat, že „dnes“ bylo před dvěma lety. Technicky text existuje. Prakticky škodí.
+
+### Rozliš pracovní historii a čtenářský archiv
+
+Pracovní historie patří týmu. Obsahuje commity, provozní poznámky, diagnostiku, interní důvody a někdy i věci, které veřejný čtenář nepotřebuje vidět. Čtenářský archiv má jiný účel: říct, jaké veřejné verze existovaly, proč byly nahrazené a kam jít pro aktuální doporučení.
+
+Použij dvě vrstvy:
+
+- pracovní log v Markdownu nebo repozitáři pro interní kontinuitu,
+- veřejný archiv vydání pro čtenáře, partnery a lidi, kteří odkazují na konkrétní verzi.
+
+Tyto vrstvy se můžou odkazovat na stejný commit nebo tag, ale nemají používat stejný jazyk. Interní věta „opraveno po incidentu, proxy vracela prázdnou odpověď“ je dobrá pro údržbu. Veřejná věta „zpřesněna provozní část k ověřování HTTPS dostupnosti“ je lepší pro čtenáře.
+
+### Každá archivovaná verze potřebuje stav
+
+Neukládej staré verze jen jako soubory s datem v názvu. Přidej jim stav, aby bylo jasné, jak s nimi zacházet.
+
+| Stav | Co znamená | Co má vidět čtenář |
+| --- | --- | --- |
+| Aktuální | Doporučená veřejná verze | Primární odkaz a běžné CTA |
+| Nahrazená | Existuje novější verze, stará zůstává kvůli historii | Viditelný odkaz na aktuální verzi |
+| Historická | Verze se hodí jen pro kontext změn | Krátké varování před použitím doporučení |
+| Stažená | Verze obsahuje chybu, riziko nebo zavádějící doporučení | Vysvětlení bez zbytečných interních detailů |
+| Interní | Není určená pro veřejnou distribuci | Žádný veřejný index ani CTA |
+
+Stav je důležitější než přesný název souboru. Když čtenář vidí „nahrazená verze“, ví, že text může být užitečný historicky, ale nemá podle něj spouštět nový proces.
+
+### Staré odkazy neházej do prázdna
+
+Když se přesune veřejný e-book, starý odkaz má dostat důstojný konec. Nejčastější možnosti:
+
+- přesměrovat starou adresu na aktuální verzi,
+- nechat starou verzi dostupnou s jasným bannerem,
+- vytvořit archivní rozcestník,
+- u chybné verze zveřejnit krátké vysvětlení a odkázat na opravenou.
+
+Vyhýbej se tichému smazání, pokud na starou URL mohly vést články, interní dokumenty, zákaznické materiály nebo prezentace. Rozbitý odkaz je malá technická chyba, ale velký signál nepořádku. U e-booku, který učí provozní hygienu, by to byla ironie tak ostrá, že by šla krájet backlog.
+
+Praktické pravidlo: pokud byla verze veřejně sdílená, zachovej buď obsah, nebo vysvětlující přesměrování. Pokud byla jen pracovní a neveřejná, stačí ji držet v gitu a neukazovat čtenářům.
+
+### Archivuj podle rozhodnutí, ne podle každého commitu
+
+Každý commit není vydání. Každá vydaná verze nemusí mít samostatný archivní soubor. Archivuj ve chvíli, kdy změna může ovlivnit čtenářské rozhodnutí:
+
+- přibyla nebo zmizela celá kapitola,
+- změnilo se doporučení,
+- upravil se checklist používaný v praxi,
+- opravila se věcná chyba,
+- veřejný odkaz začal ukazovat na nový výstup,
+- stará verze může být citovaná zvenku.
+
+Drobné úpravy stylu, překlepy a interní logy patří do pracovního záznamu, ne do veřejného archivu. Archiv má chránit orientaci, ne dokazovat, že autor celý den sahal na klávesnici.
+
+### Dej archivu malý index
+
+Čím víc verzí existuje, tím víc se hodí jednoduchý index. Nemusí být luxusní. Stačí tabulka, kterou lze číst bez znalosti repozitáře.
+
+| Verze | Datum | Stav | Hlavní změna | Aktuální náhrada |
+| --- | --- | --- | --- | --- |
+| `2026.07.19-a` | 2026-07-19 | Nahrazená | Přidána pravidla pro release notes. |  |
+| `2026.07.19-b` | 2026-07-19 | Aktuální | Přidán archiv starších verzí. |  |
+
+U každé verze přidej jednu lidskou větu. Ne seznam dvaceti commitů. Když někdo hledá rozdíl mezi verzemi, potřebuje rozhodovací kontext: „má cenu číst znovu?“ a „mám změnit postup?“
+
+### Neukládej do archivu osobní stopu
+
+Archiv často vzniká z pracovních materiálů. Tam číhá privacy-first past: do veřejné historie se omylem dostanou interní jména, odkazy na neveřejné dokumenty, screenshoty z nástrojů, tokeny v URL, identifikátory incidentů nebo poznámky o zákaznících.
+
+Před zveřejněním archivní verze udělej krátkou kontrolu:
+
+- neobsahuje interní odkazy bez veřejného kontextu,
+- neobsahuje osobní údaje z připomínek,
+- neobsahuje diagnostické výstupy s IP adresami, tokeny nebo hlavičkami,
+- neobsahuje neveřejné názvy zákazníků nebo projektů,
+- neobsahuje trackerové parametry v odkazech,
+- neobsahuje interní komentáře typu „TODO ze schůzky s ___“.
+
+Archiv má dokazovat změny v textu, ne odhalovat zákulisí. Transparentnost není totéž co vysypat šuplík na chodník.
+
+### Checklist: Archiv starších verzí
+
+- [ ] Existuje jasně označená aktuální verze.
+- [ ] Starší veřejné verze mají stav: nahrazená, historická nebo stažená.
+- [ ] Staré veřejné odkazy vedou na aktuální verzi, archivní verzi nebo vysvětlující rozcestník.
+- [ ] Archiv vzniká podle čtenářsky významných vydání, ne podle každého commitu.
+- [ ] Každá archivní položka má datum, stav, hlavní změnu a odkaz na aktuální náhradu.
+- [ ] Interní pracovní log není automaticky veřejným archivem.
+- [ ] Archiv neobsahuje osobní údaje, tajemství, interní diagnostiku ani trackerové parametry.
+- [ ] Stažená nebo chybná verze má stručné vysvětlení bez zbytečných interních detailů.
+
+### Mini úkol
+
+Vytvoř návrh archivního indexu pro poslední tři veřejně použitelné verze e-booku:
+
+| Verze | Datum | Stav | Proč ji držíme | Kam má jít čtenář dnes |
+| --- | --- | --- | --- | --- |
+|  |  |  |  |  |
+|  |  |  |  |  |
+|  |  |  |  |  |
+
+Potom u každé položky rozhodni, jestli má být veřejná. Pokud nevíš proč by ji čtenář potřeboval, nejspíš stačí pracovní historie v gitu.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -36682,6 +36790,7 @@ Potom smaž všechno, co čtenář nepotřebuje k rozhodnutí. Pokud ve veřejn�
 
 ## Pracovní log
 
+- 2026-07-19: Doplněna příloha o archivu starších verzí e-booku bez muzea a rozbitých odkazů: rozlišení pracovního logu a čtenářského archivu, stav verzí, zacházení se starými veřejnými odkazy, archivace podle čtenářsky významných vydání, malý index, privacy-first kontrola veřejných archivních položek, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně znovu potvrzeno, že `cody.dreamind.cz` běžným HTTPS selhává kvůli expirovanému veřejnému Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), aplikace odpovídá při diagnostickém `curl -k` stavem `200 OK` a v tomto běhu není dostupný bezpečný SSH/deploy přístup k obnově.
 - 2026-07-19: Doplněna příloha o release notes e-booku bez newsletterové pasti: čtenářská orientace ve změnách, rozlišení typů změn, veřejná historie vydání, distribuce přes RSS a přímé odkazy bez povinného formuláře, agregované měření užitečnosti, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně znovu potvrzeno, že `cody.dreamind.cz` přes běžnou proxy cestu končí `Empty reply from server`, přímý veřejný TLS certifikát na IP `91.99.227.53` je expirovaný (`notAfter` 2026-07-17 19:35:56 GMT) a v běhu není dostupný bezpečný SSH/opravný přístup k obnově.
 - 2026-07-19: Doplněna příloha o verzování e-booku bez zmatku mezi draftem a vydáním: rozlišení pracovního draftu, interního review a veřejného vydání, karta vydání, pravidla pro zvednutí verze, stabilní veřejné odkazy, release poznámky podle dopadu, privacy-first omezení osobní stopy, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně znovu ověřeno, že běžný proxy `curl` na `cody.dreamind.cz` končí prázdnou odpovědí, přímý veřejný TLS certifikát Let's Encrypt je expirovaný (`notAfter` 2026-07-17 19:35:56 GMT), aplikace odpovídá při diagnostickém `curl -k` stavem `200 OK` a neinteraktivní SSH opravný přístup pro běžné účty není dostupný.
 - 2026-07-19: Doplněna příloha o obsahovém smoke testu po HTTPS incidentu bez datového ocasu: ověření správného veřejného obsahu vedle TLS/HTTP stavu, kontrola více URL včetně RSS, sitemap a robots, rozlišení technického a redakčního smoke testu, bezpečná testovací stopa bez cookies/tokenů/osobních dat, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně ověřeno, že `cody.dreamind.cz` přes proxy končí `Empty reply from server`, přímý veřejný TLS certifikát Let's Encrypt je expirovaný (`notAfter` 2026-07-17 19:35:56 GMT), diagnostické `curl -k` vrací `200 OK` a obsah homepage, ale SSH opravný přístup na host není dostupný.
