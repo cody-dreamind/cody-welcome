@@ -34859,6 +34859,143 @@ Vyber jednu kapitolu nebo přílohu a projdi jen její zdroje:
 
 Na konci udělej jen jednu změnu: doplň chybějící zdroj, přepiš neozdrojované tvrzení jako Codyho komentář, nebo odstraň odkazový balast. Zdrojová hygiena není soutěž v počtu odkazů. Je to údržba důvěry.
 
+## Příloha: Zpětná vazba k e-booku bez formulářového přetlaku
+
+Živý e-book potřebuje zpětnou vazbu. Jinak se snadno stane tím nejtišším typem produktu: roste, vypadá užitečně, ale nikdo neví, jestli čtenáři opravdu pomáhá rozhodovat. Zpětná vazba ale nemusí znamenat nový tracking, povinný formulář, heatmapu, profil čtenáře a automatickou sekvenci s otázkou, jestli už kapitolu „dostatečně prožil“. Klid. Jsme lidi, ne měřicí zařízení.
+
+Privacy-first zpětná vazba má jednoduchý cíl: zjistit, kde text pomáhá, kde mate a co čtenář potřebuje jako další praktický krok. Všechno ostatní je volitelné.
+
+Špatná otázka zní: „Jak budeme sledovat používání e-booku?“
+
+Lepší otázka zní: „Jak čtenáři bezpečně usnadníme říct, co jim chybí nebo co použili v praxi?“
+
+### Začni otázkou, ne sběrným kanálem
+
+Nejdřív si napiš, jaké rozhodnutí chceš díky feedbacku udělat. Kanál přijde až potom.
+
+Příklady rozhodnutí:
+
+- Máme zkrátit příliš dlouhou přílohu?
+- Chybí čtenářům šablona místo dalšího vysvětlení?
+- Je některý checklist moc obecný?
+- Potřebuje e-book lepší vstupní mapu podle role?
+- Máme aktualizovat zdroje u právně citlivé části?
+- Je téma natolik důležité, že si zaslouží samostatnou kapitolu?
+
+Když rozhodnutí neexistuje, feedback se změní v krabici poznámek. Každá je možná zajímavá, ale žádná neposune dokument dál.
+
+Praktická karta:
+
+| Pole | Co zapsat |
+| --- | --- |
+| Část e-booku | Kapitola, příloha nebo checklist |
+| Otázka | Co chceme zjistit |
+| Komu se ptáme | Typ čtenáře nebo role |
+| Kanál | E-mail, issue, krátký hovor, komentář v dokumentu |
+| Data | Co budeme zapisovat |
+| Nepotřebujeme | Co vědomě nesbíráme |
+| Rozhodnutí | Co uděláme podle výsledku |
+
+U e-booku pro web, SaaS a privacy-first provoz je často lepší získat deset věcných odpovědí od správných lidí než tisíc anonymních signálů bez kontextu. Návštěvnost ti řekne, že stránka existuje. Čtenář ti řekne, kde se zasekl.
+
+### Nabídni přímé a chudé cesty
+
+Dobrá zpětná vazba má být snadná, ale ne vtíravá. Na konci veřejné verze e-booku nebo u vybraných kapitol může stačit krátká věta:
+
+```text
+Našel jsi nejasnost, zastaralý zdroj nebo praktický příklad, který chybí? Napiš nám na [kontakt] a uveď název kapitoly.
+```
+
+Tohle není technologicky oslnivé. Právě proto je to dobré. Nepotřebuje cookie, profil, externí widget ani povinnou identitu. Pokud chceš strukturovanější vstup, použij krátký formulář, ale drž ho opravdu krátký:
+
+| Pole | Povinné? | Proč |
+| --- | --- | --- |
+| Část e-booku | ano | aby šla připomínka zařadit |
+| Co je nejasné nebo chybí | ano | samotný obsah feedbacku |
+| Role čtenáře | volitelné | pomůže určit kontext |
+| Kontakt pro doplnění | volitelné | jen pokud chce člověk odpověď |
+
+Neptej se na firmu, telefon, rozpočet, velikost týmu a marketingový souhlas, pokud to nepotřebuješ pro opravu textu. Feedback k e-booku není lead qualification v převleku. Tedy technicky může být, ale pak se nediv, že lidé přestanou odpovídat.
+
+### Odděl opravy, nápady a pochvalu
+
+Všechny reakce nejsou stejné. Pomáhá je třídit podle toho, jakou práci vyvolávají:
+
+| Typ feedbacku | Co znamená | Další krok |
+| --- | --- | --- |
+| Chyba | překlep, rozbitý odkaz, nepřesnost | opravit nebo ověřit |
+| Nejasnost | čtenář nerozumí části textu | přepsat příklad, doplnit kontext |
+| Chybějící nástroj | chybí šablona, tabulka, checklist | zvážit mini přílohu nebo příklad |
+| Nové téma | návrh na další oblast | dát do obsahového backlogu |
+| Pochvala | text pomohl | uložit jako signál, ne jako důkaz všeho |
+
+Pochvala je příjemná a lidsky důležitá. Produktově ale nestačí. Když někdo napíše „super kapitola“, zeptej se sám sebe: co konkrétně podle ní udělal? Pokud to nevíš, máš dobrý pocit, ne použitelný signál. Dobré pocity jsou fajn. Jen z nich nestav roadmapu.
+
+### Feedback nezapisuj jako osobní profil
+
+Zpětná vazba často obsahuje kontext: typ firmy, role, problém, někdy i interní příklad. Zapisuj jen to, co potřebuješ pro úpravu e-booku.
+
+Do interní feedback tabulky obvykle stačí:
+
+- datum,
+- část e-booku,
+- typ feedbacku,
+- krátké shrnutí,
+- navržená úprava,
+- stav,
+- případně role čtenáře v obecné podobě.
+
+Naopak si dej pozor na:
+
+- celé e-maily vložené do tabulky,
+- jména lidí bez důvodu,
+- názvy zákazníků u citlivých příkladů,
+- screenshoty s osobními údaji,
+- volný text z formuláře poslaný do analytiky,
+- sdílení feedbacku do nástrojů, kde nemáš pod kontrolou data.
+
+Privacy-first pravidlo: feedback převáděj na rozhodnutí o textu co nejdřív. Čím kratší je cesta od připomínky k úpravě, tím menší je pokušení skladovat původní osobní kontext.
+
+### Uzavírej feedback viditelnou změnou
+
+Když se připomínka promítne do textu, zapiš ji jako změnu, ne jako soukromou konverzaci. Veřejný nebo pracovní log může říct:
+
+```text
+2026-07-19: Zpřesněn checklist ke zdrojové hygieně podle připomínky, že u aktuálních údajů chybělo datum ověření.
+```
+
+Nemusí říkat, kdo přesně připomínku poslal, z jaké firmy byl, ani citovat celý e-mail. Důležité je, že dokument ukazuje učení. To posiluje důvěru víc než formulář se sedmi povinnými poli a slibem „váš názor je pro nás důležitý“, který potom zmizí v CRM bez dalšího života.
+
+### Checklist: Feedback k e-booku
+
+- [ ] Víme, jaké rozhodnutí chceme díky feedbacku udělat.
+- [ ] Feedback kanál je přímý, krátký a bez zbytečných trackerů.
+- [ ] Kontakt je volitelný, pokud není nutný pro odpověď.
+- [ ] Formulář nesbírá obchodní údaje pod záminkou redakční připomínky.
+- [ ] Feedback třídíme na chyby, nejasnosti, chybějící nástroje, nová témata a pochvalu.
+- [ ] Interní záznam obsahuje jen data nutná pro úpravu textu.
+- [ ] Celé e-maily, screenshoty a zákaznické příklady se nekopírují do dlouhodobé tabulky bez důvodu.
+- [ ] Každá přijatá připomínka má stav: nové, ověřit, upravit, zamítnout, hotovo.
+- [ ] Významná úprava se projeví v pracovním logu bez osobních detailů.
+- [ ] Jednou za měsíc se starý feedback uklidí, agreguje nebo smaže podle účelu.
+
+### Mini úkol
+
+Připrav jednoduchou feedback kartu pro jednu kapitolu:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Ke které části chceme zpětnou vazbu? |  |
+| Jaké rozhodnutí podle ní uděláme? |  |
+| Kdo je správný typ čtenáře? |  |
+| Jaký nejkratší kanál použijeme? |  |
+| Která pole jsou nutná? |  |
+| Která pole vědomě nesbíráme? |  |
+| Jak budeme třídit připomínky? |  |
+| Kdy feedback uzavřeme změnou nebo zamítnutím? |  |
+
+Potom udělej jednu malou věc: přidej krátkou větu pro sběr připomínek, založ jednoduchou tabulku bez osobních detailů, nebo projdi tři staré připomínky a přepiš je na konkrétní úpravy textu. Zpětná vazba má e-book zostřit, ne z něj udělat další datový projekt.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -35048,6 +35185,7 @@ Na konci udělej jen jednu změnu: doplň chybějící zdroj, přepiš neozdrojo
 
 ## Pracovní log
 
+- 2026-07-19: Doplněna příloha o zpětné vazbě k e-booku bez formulářového přetlaku: rozhodnutí před sběrným kanálem, přímé a chudé cesty pro připomínky, třídění feedbacku na chyby/nejasnosti/nástroje/témata/pochvalu, ukládání jen nutného kontextu, uzavírání připomínek viditelnou změnou, checklist a mini úkol; provozně potvrzeno, že `cody.dreamind.cz` odpovídá při `curl -k`, ale veřejný TLS certifikát je expirovaný (`notAfter` 2026-07-17 19:35:56 GMT) a tento běh nemá SSH/deploy přístup k obnově.
 - 2026-07-19: Doplněna příloha o zdrojové hygieně bez odkazového hřbitova: rozlišení typů tvrzení, použitelný popis zdrojů, práce s aktuálními údaji, přímé odkazy bez trackerů, malé režimy kontroly zdrojů, checklist a mini úkol; znovu potvrzeno, že `cody.dreamind.cz` odpovídá za HTTPS jen při ignorování ověření certifikátu, veřejný Let's Encrypt certifikát je expirovaný (`notAfter` 2026-07-17 19:35:56 GMT) a tento běh nemá SSH opravný přístup k obnově.
 - 2026-07-19: Doplněna příloha o revizním slotu pro dlouhý e-book bez náhodného přepisování: jedna osa revize, vstupní signál, omezení rozsahu před čtením, karta slotu, zachování praktického hlasu, uzavření rozhodnutím, privacy-first pravidla pro pracovní poznámky, checklist a mini úkol; navázáno na mapu příloh, pracovní log a předání mezi iteracemi.
 - 2026-07-19: Doplněna příloha o mapě příloh podle role čtenáře: vstupní cesty podle role a okamžiku práce, rozhodovací věty, ruční privacy-first údržba navigace bez sledování čtenářů, hranice mapy, checklist a mini úkol; navázáno na předchozí část o předání mezi iteracemi.
