@@ -977,6 +977,10 @@ Co by nemělo být luxusní zboží:
 
 Privacy-first pricing má říkat: „Za vyšší cenu dostaneš větší provozní schopnosti.“ Nemá říkat: „Za vyšší cenu tě budeme konečně respektovat.“
 
+### Změny cen oznamuj jako produktovou změnu
+
+Zdražení, nový limit nebo přesun funkce mezi plány není jen účetní úprava. Pro zákazníka je to změna produktu, podle které plánuje rozpočet, procesy i důvěru ve službu. Oznam ji proto předem, lidsky a s konkrétním dopadem: koho se týká, od kdy platí, co se stane se stávajícími zákazníky, jaké mají možnosti a kde najdou detailní podmínky. Pokud se změna dotýká dat, exportu, retence nebo podpory, popiš i tuto část. Nejhorší pricing změna není ta dražší. Je to ta, kterou zákazník pochopí až z faktury.
+
 ### Checklist: Pricing a balíčky
 
 - [ ] Každý plán odpovídá konkrétnímu segmentu nebo situaci.
@@ -987,6 +991,7 @@ Privacy-first pricing má říkat: „Za vyšší cenu dostaneš větší provoz
 - [ ] Trial nebo freemium má jasnou cestu k první hodnotě.
 - [ ] Zrušení, export a smazání dat jsou popsané srozumitelně.
 - [ ] Základní privacy a bezpečnost nejsou schované jako drahý doplněk.
+- [ ] Změny cen, limitů nebo plánů mají předem popsaný dopad na stávající zákazníky.
 - [ ] Pricing stránka odpovídá skutečnému produktu a prodejnímu procesu.
 - [ ] Tým jednou měsíčně projde otázky zákazníků k ceně a upraví text nebo balíčky.
 
@@ -34445,6 +34450,7 @@ Potom vyber jednu položku, kterou lze dokončit tento týden bez nového tracke
 
 ## Pracovní log
 
+- 2026-07-19: Doplněna krátká poznámka do pricing kapitoly o oznamování změn cen jako produktové změny, včetně dopadu na stávající zákazníky a checklist položky pro změny cen, limitů nebo plánů.
 - 2026-07-19: Doplněna příloha o marketingovém backlogu bez sledovacího stroje: položky podle rozhodnutí a nejistoty místo kanálového hluku, prioritizace podle učení a datového rizika, agregované nebo kvalitativní signály dopadu, propojení obsahu, webu, sales a produktu, uzavírání položek konkrétním rozhodnutím, checklist a mini úkol.
 - 2026-07-19: Doplněna příloha o provozní pohotovosti bez sdílení tajemství: kritické opravné schopnosti podle vrstev, eskalační mapa použitelná ve stresu, pravidla pro chudou incidentní komunikaci bez secrets a zákaznických payloadů, break-glass přístup s expirací, systémová oprava po incidentu, checklist a mini úkol; navázáno na dnešní zjištění expirovaného TLS certifikátu a nedostupného opravného přístupu.
 - 2026-07-19: Znovu ověřen výpadek `cody.dreamind.cz`: běžný `curl` přes lokální proxy končil jako `000`, přímý veřejný TLS handshake potvrdil expirovaný certifikát s `notAfter` 2026-07-17 19:35:56 GMT a SSH opravný přístup z běhu není dostupný; doplněna příloha o neopravitelném produkčním nálezu bez tajemného ticha: rozlišení diagnózy, opravy a vlastnictví, bezpečná eskalační šablona, omezení nouzových přístupů, dopadové třídění, checklist a mini úkol.
