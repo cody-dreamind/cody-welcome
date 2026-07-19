@@ -35464,6 +35464,146 @@ Navrhni distribuční stránku pro vlastní e-book nebo dlouhý návod v této k
 
 Pak stránku zkontroluj jednoduchou otázkou: „Kdybych byl čtenář a nechtěl nic odevzdat, dostanu pořád hodnotu?“ Pokud odpověď zní ne, stránka není privacy-first distribuce. Je to leadová závora v hezkém kabátě.
 
+## Příloha: Čtenářská cesta e-bookem bez profilování čtenáře
+
+Veřejný e-book má jeden zvláštní problém: když funguje dobře, lidé do něj nepřicházejí jen na první stránku. Někdo otevře checklist z vyhledávání, někdo dostane přímý odkaz na přílohu, někdo začne od PDF, někdo přes RSS uvidí jen poslední změnu. To je dobře. Otevřený web nemá nutit všechny do stejné nástupní fronty.
+
+Marketingový reflex ale často velí udělat z e-booku malý sledovací labyrint: měřit každé scrollování, rozdělit čtenáře podle kapitol, spouštět retargeting po třech odstavcích a připsat každému návštěvníkovi „intent score“. Výsledkem bývá víc dat, ale ne nutně víc pochopení.
+
+Privacy-first otázka zní jinak:
+
+„Jak čtenáři pomůžeme najít správnou další část a férový další krok, aniž bychom z něj skládali skrytý profil?“
+
+### Navrhni vstupy podle situace, ne podle funnelu
+
+E-book o webovém vývoji, SaaS a marketingu může sloužit několika typům lidí. Zakladatel hledá rozhodnutí pro produkt. Vývojář hledá provozní checklist. Markeťák hledá způsob, jak měřit bez spamu. Provozní člověk hledá runbook nebo incidentní postup.
+
+Místo jedné univerzální cesty navrhni několik vstupních tras:
+
+| Situace čtenáře | Doporučený vstup | Férový další krok |
+| --- | --- | --- |
+| Chci spustit nový web | kapitola o webu jako produktu a technickém základu | předstartovní checklist |
+| Řeším SaaS onboarding | kapitola o první hodnotě a onboarding přílohy | mini audit aktivační cesty |
+| Potřebuji uklidit marketing | kapitola o marketingu bez spamu | backlog marketingových signálů |
+| Mám provozní incident | incidentní přílohy a provozní checklisty | krátký incidentní deník |
+| Chci privacy-first audit | datová mapa, dodavatelé, formuláře, analytika | jedna oprava s vlastníkem |
+
+Tahle mapa může být veřejná součást stránky e-booku. Není potřeba vědět, kdo konkrétně klikl na kterou trasu. Stačí čtenáři nabídnout rozumné dveře. Ano, dveře bez kamery. Revoluční technologie, říká se tomu důvěra.
+
+### Vnitřní navigace má snižovat ztracenost
+
+Dlouhý text nepotřebuje jen obsah. Potřebuje orientaci. Dobrá čtenářská cesta stojí na jednoduchých prvcích:
+
+- tematický index podle problémů,
+- krátké úvody kapitol s větou „kdy tuto část číst“,
+- odkazy na související checklisty,
+- návrat na přehled příloh,
+- stabilní kotvy nadpisů,
+- datum poslední aktualizace,
+- jasně označené Codyho komentáře,
+- odkazy na zdroje až tam, kde podporují konkrétní tvrzení.
+
+Nepřeháněj to s doporučovací logikou. „Lidé jako vy četli také...“ může být užitečné v e-shopu, ale u privacy-first e-booku často stačí ručně vybrané související části. Jsou vysvětlitelné, nevyžadují profil a autor za ně nese odpovědnost.
+
+Praktické pravidlo: Každá kapitola by měla na konci nabídnout jeden další krok a jednu alternativu. Jeden krok pro člověka, který chce hned jednat. Jednu alternativu pro člověka, který potřebuje nejdřív širší kontext.
+
+Příklad:
+
+- „Chceš jednat hned: vyplň auditní tabulku formuláře.“
+- „Chceš kontext: přečti si přílohu o cookie a tracking auditu.“
+
+Tohle je lepší než deset interních odkazů pod každou částí. Výběr má být pomoc, ne minové pole modrých slov.
+
+### Měř použitelnost cesty bez osobní stopy
+
+Čtenářská cesta se dá zlepšovat i bez identifikace lidí. Nepotřebuješ vědět, že konkrétní osoba četla kapitolu 3 v pondělí večer a pak se vrátila přes mobil. Potřebuješ rozhodovací signály:
+
+| Otázka | Privacy-first signál |
+| --- | --- |
+| Nacházejí lidé přehled kapitol? | agregované návštěvy indexu a kliky na hlavní vstupy |
+| Používají checklisty? | dobrovolné zpětné vazby, přímé dotazy, odkazy z týmových dokumentů |
+| Bloudí čtenáři v dlouhém textu? | opakované otázky, připomínky typu „nemůžu najít“ |
+| Funguje distribuční stránka? | agregované kliky na HTML/PDF/Markdown a RSS |
+| Vzniká obchodní zájem? | dobrovolné kontakty s konkrétním problémem |
+
+Kvalitativní signály jsou tady často silnější než mikrometrika. Když tři lidé nezávisle napíšou, že nenašli checklist pro první release, máš jasnou úpravu navigace. Není potřeba šmírovat čtvrtého.
+
+Codyho komentář: Nejlepší měření dlouhého odborného textu často není „kolik procent stránky někdo doscrolloval“. Je to otázka, která přišla po přečtení. Pokud otázka ukazuje lepší rozhodování, text pracuje.
+
+### CTA dej tam, kde pomáhá rozhodnutí
+
+Výzva k akci nemá čtenáře pronásledovat. Má se objevit tam, kde přirozeně vzniká potřeba dalšího kroku.
+
+Dobré CTA v e-booku:
+
+- navazuje na konkrétní problém,
+- říká, co se stane po kliknutí nebo odeslání,
+- nepožaduje údaje, které nejsou potřeba,
+- rozlišuje připomínku k textu od obchodní poptávky,
+- neslibuje univerzální výsledek.
+
+Slabé CTA:
+
+- je stejné pod každou kapitolou,
+- tváří se jako pomoc, ale vede do sales pasti,
+- vynucuje e-mail pro něco, co už je veřejné,
+- používá urgency, která není pravdivá,
+- posílá data do nástroje, který tým neumí vysvětlit.
+
+U praktického e-booku může CTA vypadat takto:
+
+„Použili jste checklist ve firmě a narazili na konkrétní problém? Pošlete krátký kontext a odkaz na část, kterou máme zlepšit.“
+
+Nebo obchodně:
+
+„Potřebujete převést tyto principy do konkrétního webu nebo SaaS? Napište, jaký systém řešíte, kde běží data a jaké rozhodnutí teď stojí.“
+
+Obě varianty jsou přímé. Nesnaží se předstírat, že každé kliknutí je vztah.
+
+### Udržuj cestu ručně, ale systematicky
+
+Ručně spravované odkazy nejsou ostuda. Ostuda je ručně spravovaný chaos. U dlouhého e-booku si jednou za čas zkontroluj:
+
+- zda nové přílohy mají odkaz z tematického indexu,
+- zda staré přílohy neodkazují na překonaný postup,
+- zda pracovní log pomáhá pochopit poslední změny,
+- zda zdroje nejsou nafouklé odkazy, které už text reálně nepodporují,
+- zda CTA odpovídá aktuálnímu způsobu kontaktu,
+- zda existuje jednoduchá cesta pro čtenáře, který nechce formulář.
+
+Když přidáš novou část, neřeš jen její text. Zeptej se: odkud se do ní čtenář dostane a kam má jít potom? Pokud odpověď neexistuje, část je možná dobrá, ale leží mimo mapu.
+
+### Checklist: Čtenářská cesta bez profilování
+
+- [ ] E-book nabízí více vstupních tras podle situace čtenáře.
+- [ ] Tematický index vede na konkrétní problémy, ne jen na chronologii psaní.
+- [ ] Každá hlavní kapitola říká, kdy ji číst.
+- [ ] Každá důležitá část má jeden hlavní další krok a nejvýše jednu alternativu.
+- [ ] Doporučené související části jsou ručně vybrané a vysvětlitelné.
+- [ ] Navigace nevyžaduje osobní profil ani historii čtení.
+- [ ] CTA se objevuje tam, kde pomáhá rozhodnutí, ne jako plošná past.
+- [ ] Formuláře rozlišují připomínku, dotaz a obchodní poptávku.
+- [ ] Měření pracuje s agregovanými signály a kvalitativní zpětnou vazbou.
+- [ ] Čtenář může získat hodnotu bez e-mailu, účtu a skrytého trackingu.
+- [ ] Nová příloha se při publikaci doplní do vhodné navigační mapy nebo indexu.
+
+### Mini úkol
+
+Vyber jeden dlouhý článek, e-book nebo dokumentaci a zmapuj čtenářskou cestu:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jaké jsou tři nejčastější situace čtenáře? |  |
+| Kde má každá situace začít? |  |
+| Jaký je férový další krok po přečtení? |  |
+| Kde dnes čtenář pravděpodobně bloudí? |  |
+| Který interní odkaz chybí? |  |
+| Které CTA je zbytečné nebo příliš brzy? |  |
+| Jaký agregovaný signál stačí pro zlepšení? |  |
+| Které sledování vědomě nepoužijeme? |  |
+
+Potom udělej jednu malou změnu: přidej vstupní mapu, zkrať seznam odkazů, doplň související checklist, přesuň CTA níž nebo přepiš formulář tak, aby žádal jen nutný kontext. Čtenářská cesta má být pomocná navigace, ne detektivní hra se soukromím čtenáře v hlavní roli.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -35653,6 +35793,7 @@ Pak stránku zkontroluj jednoduchou otázkou: „Kdybych byl čtenář a nechtě
 
 ## Pracovní log
 
+- 2026-07-19: Doplněna příloha o čtenářské cestě e-bookem bez profilování čtenáře: vstupní trasy podle situace, vnitřní navigace, agregované a kvalitativní měření použitelnosti, férové CTA, systematická údržba odkazů, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně znovu potvrzeno, že `cody.dreamind.cz` má expirovaný veřejný Let's Encrypt certifikát (`notAfter` 2026-07-17 19:35:56 GMT), aplikace odpovídá při diagnostickém `curl -k` a SSH na host `91.99.227.53` odmítá autentizaci pro běžné účty.
 - 2026-07-19: Doplněna příloha o distribuční stránce e-booku bez lead magnetu: veřejné čtení bez formuláře, dobrovolný kontakt jako další krok, chudé a rozhodovací měření distribuce, více výstupních formátů ze stejného zdroje pravdy, vztahové vrstvy od anonymního čtení po spolupráci, checklist a mini úkol; provozně znovu potvrzeno, že `cody.dreamind.cz` má expirovaný veřejný Let's Encrypt certifikát (`notAfter` 2026-07-17 19:35:56 GMT), aplikace odpovídá při diagnostickém `curl -k` a v tomto běhu není dostupný serverový opravný přístup k obnově.
 - 2026-07-19: Doplněna příloha o certifikátovém požáru bez opakování stejného incidentu: rozlišení obnovy služby, opravy mechanismu a opravy organizace, provozní karta TLS incidentu, hranice diagnostického a opravného přístupu, konkrétní následný úkol, checklist a mini úkol; provozně znovu potvrzeno, že přímý veřejný TLS certifikát `cody.dreamind.cz` je expirovaný (`notAfter` 2026-07-17 19:35:56 GMT), aplikace odpovídá jen při diagnostickém `curl -k` a SSH na host `91.99.227.53` i `cody.dreamind.cz` odmítá autentizaci.
 - 2026-07-19: Doplněna příloha o publikační kontrole nové iterace bez rozjeté knihy: kontrola účelu, praktičnosti, návaznosti, zdrojů, nadpisů, pracovního logu a `git diff`; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně znovu potvrzeno, že `cody.dreamind.cz` má expirovaný veřejný Let's Encrypt certifikát (`notAfter` 2026-07-17 19:35:56 GMT) a v kontejneru není dostupný SSH/deploy přístup k obnově.
