@@ -35336,6 +35336,134 @@ Vyber jednu doménu nebo subdoménu, která je důležitá pro obchod, aplikaci 
 
 Potom udělej jednu konkrétní změnu: přidej veřejnou kontrolu expirace, doplň reload krok do runbooku, otestuj omezený TLS opravný přístup nebo změň alert tak, aby rozlišoval „aplikace je dole“ od „TLS důvěra je rozbitá“. Požár certifikátu není ostuda. Ostuda je nechat ho napsat další díl.
 
+## Příloha: Distribuční stránka e-booku bez lead magnetu
+
+E-book může být dobrý marketingový nástroj, aniž by se z něj stala past na e-mail. Klasický reflex říká: schovat PDF za formulář, poslat odkaz až po zadání kontaktu, přidat několik reklamních pixelů a pak se tvářit, že každý stažený soubor je lead. Funguje to hezky v tabulce. Horší je, že tím často získáš mnoho slabých kontaktů, méně důvěry a další databázi, kterou musíš spravovat.
+
+Privacy-first distribuce začíná jinou otázkou:
+
+„Jak pomůžeme správnému člověku e-book najít, pochopit jeho hodnotu a udělat další krok bez zbytečného sběru dat?“
+
+To neznamená, že se vzdáváš obchodu. Znamená to, že obchodní signál má být poctivý. Člověk, který si přečte veřejný e-book a potom dobrovolně napíše s konkrétním problémem, je hodnotnější než anonymní řádek v exportu z formuláře „stáhnout zdarma“.
+
+### Stránka má prodávat užitečnost, ne schovávat soubor
+
+Distribuční stránka pro e-book má mít jednoduchou práci: rychle vysvětlit, pro koho text je, co člověk získá a jak se k obsahu dostane. Nezačínej velkou marketingovou mlhou. Začni konkrétní situací čtenáře.
+
+Praktická struktura:
+
+1. Název e-booku a jedna věta, komu pomáhá.
+2. Tři až pět konkrétních rozhodnutí, která po přečtení půjdou udělat lépe.
+3. Přímý odkaz na čtení v HTML.
+4. Přímý odkaz na Markdown nebo PDF, pokud existuje.
+5. Odkaz na RSS nebo changelog změn.
+6. Dobrovolný kontakt pro člověka, který chce podobný problém řešit ve firmě.
+
+Tím se z e-booku nestane jen „obsah ke stažení“. Stane se z něj veřejná pracovní pomůcka a zároveň důkaz toho, jak přemýšlíš.
+
+### Formulář nech jako další krok, ne jako zámek
+
+Formulář před obsahem často měří zvědavost, ne obchodní zájem. Člověk chce obsah, zadá e-mail, stáhne soubor a pak ignoruje tři automatické follow-upy. Gratuluju, právě sis vyrobil CRM šum s právní údržbou. Paráda, tabulka má zelenější barvu.
+
+Lepší model:
+
+- Čtení e-booku je dostupné bez registrace.
+- Stažení PDF je dostupné bez e-mailu.
+- Kontakt je nabídnutý až jako relevantní další krok.
+- Formulář se ptá jen na údaje nutné k odpovědi.
+- U formuláře je jasně řečeno, k čemu údaje použiješ.
+
+Příklad CTA:
+
+„Řešíte privacy-first provoz webu nebo SaaS v Evropě? Napište nám kontext a jeden problém, který potřebujete rozhodnout.“
+
+Takové CTA sbírá méně lidí, ale lepší signál. A hlavně neplete obsahový zájem s obchodním souhlasem.
+
+### Měř distribuci chudě, ale užitečně
+
+Distribuční stránka nepotřebuje znát každého čtenáře. Potřebuje vědět, jestli plní svoji práci.
+
+Rozumné signály:
+
+| Otázka | Signál bez přehnaného trackingu |
+| --- | --- |
+| Chodí lidé na stránku? | agregované návštěvy URL |
+| Najdou hlavní obsah? | klik na čtení HTML nebo stažení souboru |
+| Vrací se k aktualizacím? | odběry RSS nebo návštěvy changelogu v agregaci |
+| Vzniká obchodní zájem? | dobrovolné poptávky s kontextem |
+| Pomáhá text reputaci? | kvalitativní zmínky, přímé odpovědi, citace, odkazy |
+
+Nevyplatí se měřit:
+
+- scroll každého čtenáře po odstavcích,
+- pohyb myši,
+- individuální historii čtení,
+- reklamní remarketing na lidi, kteří jen otevřeli obsah,
+- automatické obohacování kontaktů podle externích databází.
+
+Pokud neumíš říct, jaké rozhodnutí podle metriky uděláš, metrika na distribuční stránce nemá práci.
+
+### Nabídni více formátů bez vícenásobné údržby
+
+Jedním zdrojem pravdy by měl zůstat původní text. Kolem něj můžeš mít různé výstupy:
+
+- HTML pro pohodlné čtení a indexaci,
+- Markdown pro technické čtenáře a transparentní historii,
+- PDF pro offline čtení,
+- RSS nebo Atom pro aktualizace,
+- krátkou veřejnou release poznámku při větší změně.
+
+Důležité je nepřepsat každý formát ručně. Ruční kopie začnou driftovat. V jedné verzi bude opravená chyba, ve druhé starý údaj, ve třetí rozbitý odkaz. A pak se všichni tváří překvapeně, jako by duplicita někdy přinesla vnitřní klid.
+
+Praktické pravidlo: pokud distribuční stránka odkazuje na více formátů, u každého napiš datum poslední aktualizace nebo ho generuj ze stejného release procesu. Čtenář má vědět, jestli čte aktuální verzi.
+
+### Přemýšlej o distribuci jako o vztahu
+
+Privacy-first distribuce nestojí na tom, že každého hned identifikuješ. Stojí na tom, že opakovaně nabízíš hodnotu a necháš člověka zvolit hloubku vztahu.
+
+Vrstvy vztahu mohou vypadat takto:
+
+| Vrstva | Co čtenář dostane | Co po něm chceš |
+| --- | --- | --- |
+| Veřejné čtení | celý e-book v HTML | nic |
+| Offline kopie | PDF nebo Markdown | nic |
+| Aktualizace | RSS/changelog | dobrovolný odběr bez profilu |
+| Připomínka | jednoduchý kontakt nebo issue | jen obsah připomínky a kontakt pro odpověď |
+| Spolupráce | konzultace, audit, implementace | konkrétní firemní kontext nutný pro řešení |
+
+Tahle posloupnost je férová. Nezamyká znalost, ale dává obchodní cestu člověku, který už má důvod mluvit.
+
+### Checklist: Distribuční stránka e-booku
+
+- [ ] Stránka jasně říká, pro koho e-book je.
+- [ ] Nahoře je konkrétní hodnota, ne obecná slova o „komplexním průvodci“.
+- [ ] HTML verze je dostupná bez formuláře.
+- [ ] PDF nebo Markdown export není schovaný za povinný e-mail.
+- [ ] Existuje přímý odkaz na RSS, changelog nebo jiný způsob sledování změn.
+- [ ] Kontaktní formulář je dobrovolný další krok, ne zámek obsahu.
+- [ ] Formulář sbírá jen údaje nutné k odpovědi.
+- [ ] Analytika měří agregované rozhodovací signály, ne individuální čtenářské profily.
+- [ ] Odkazy neobsahují zbytečné sledovací parametry.
+- [ ] Každý formát má jasný zdroj pravdy a datum poslední aktualizace.
+- [ ] Stránka obsahuje jednu větu, co se stane po odeslání poptávky nebo připomínky.
+
+### Mini úkol
+
+Navrhni distribuční stránku pro vlastní e-book nebo dlouhý návod v této kartě:
+
+| Pole | Návrh |
+| --- | --- |
+| Pro koho je text? |  |
+| Jaké tři praktické rozhodnutí pomůže udělat? |  |
+| Jaký je primární veřejný formát? |  |
+| Jaký je dobrovolný další krok? |  |
+| Jaké údaje jsou nutné ve formuláři? |  |
+| Jaké měření opravdu povede k rozhodnutí? |  |
+| Které sledování vědomě nepoužijeme? |  |
+| Jak čtenář pozná datum poslední aktualizace? |  |
+
+Pak stránku zkontroluj jednoduchou otázkou: „Kdybych byl čtenář a nechtěl nic odevzdat, dostanu pořád hodnotu?“ Pokud odpověď zní ne, stránka není privacy-first distribuce. Je to leadová závora v hezkém kabátě.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -35525,6 +35653,7 @@ Potom udělej jednu konkrétní změnu: přidej veřejnou kontrolu expirace, dop
 
 ## Pracovní log
 
+- 2026-07-19: Doplněna příloha o distribuční stránce e-booku bez lead magnetu: veřejné čtení bez formuláře, dobrovolný kontakt jako další krok, chudé a rozhodovací měření distribuce, více výstupních formátů ze stejného zdroje pravdy, vztahové vrstvy od anonymního čtení po spolupráci, checklist a mini úkol; provozně znovu potvrzeno, že `cody.dreamind.cz` má expirovaný veřejný Let's Encrypt certifikát (`notAfter` 2026-07-17 19:35:56 GMT), aplikace odpovídá při diagnostickém `curl -k` a v tomto běhu není dostupný serverový opravný přístup k obnově.
 - 2026-07-19: Doplněna příloha o certifikátovém požáru bez opakování stejného incidentu: rozlišení obnovy služby, opravy mechanismu a opravy organizace, provozní karta TLS incidentu, hranice diagnostického a opravného přístupu, konkrétní následný úkol, checklist a mini úkol; provozně znovu potvrzeno, že přímý veřejný TLS certifikát `cody.dreamind.cz` je expirovaný (`notAfter` 2026-07-17 19:35:56 GMT), aplikace odpovídá jen při diagnostickém `curl -k` a SSH na host `91.99.227.53` i `cody.dreamind.cz` odmítá autentizaci.
 - 2026-07-19: Doplněna příloha o publikační kontrole nové iterace bez rozjeté knihy: kontrola účelu, praktičnosti, návaznosti, zdrojů, nadpisů, pracovního logu a `git diff`; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně znovu potvrzeno, že `cody.dreamind.cz` má expirovaný veřejný Let's Encrypt certifikát (`notAfter` 2026-07-17 19:35:56 GMT) a v kontejneru není dostupný SSH/deploy přístup k obnově.
 - 2026-07-19: Doplněna příloha o redakční triage připomínek bez nekonečného backlogu: třídění připomínek podle typu a dopadu, stavový model od nového vstupu po hotovo, práce po malých dávkách, prioritizace podle rizika a opakování, krátká triage karta, checklist a mini úkol; provozně znovu ověřeno, že `cody.dreamind.cz` selhává kvůli expirovanému veřejnému Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), zatímco aplikace za TLS odpovídá při `curl -k`, a v tomto běhu není dostupný SSH/deploy přístup k obnově.
