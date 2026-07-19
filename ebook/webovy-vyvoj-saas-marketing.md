@@ -36281,6 +36281,104 @@ Vyber jeden veřejný web nebo SaaS produkt a napiš malý obsahový smoke test:
 
 Potom ho spusť po nejbližší malé změně obsahu. Pokud test najde problém, neopravuj nejdřív checklist. Oprav veřejnou realitu. Checklist se má poučit až potom.
 
+## Příloha: Verze e-booku bez zmatku mezi draftem a vydáním
+
+Živý e-book se mění často. To je výhoda, dokud čtenář, autor ani obchod neví, která verze je veřejná, která je pracovní a která se teprve připravuje pro distribuci. Pak začne klasické kouzlo: někdo pošle starý odkaz, někdo jiný komentuje text, který už neexistuje, a třetí člověk opravuje PDF export vyrobený z meziverze. Produktivita v převleku za chaos.
+
+Verzování e-booku nemusí být velká vydavatelská mašina. Stačí jasně oddělit tři stavy:
+
+- pracovní draft v repozitáři,
+- interně zkontrolovaná verze připravená k publikaci,
+- veřejné vydání dostupné čtenářům.
+
+Privacy-first hodnota je jednoduchá: místo sledování jednotlivých čtenářů držíš pořádek ve vlastním vydávání. Víš, co jsi publikoval, proč se to změnilo a jaký odkaz je bezpečné poslat dál.
+
+### Verze má odpovídat rozhodnutí, ne každému commitu
+
+Ne každý commit potřebuje číslo vydání. Oprava překlepu, doplnění jednoho pracovního logu nebo malá věta v checklistu může zůstat běžnou údržbou. Verzi zvedej ve chvíli, kdy se mění veřejná zkušenost čtenáře:
+
+- přibyla nová kapitola nebo větší příloha,
+- změnilo se doporučení, podle kterého může někdo jednat,
+- opravilo se chybné nebo zastaralé tvrzení,
+- vznikl nový export, distribuční stránka nebo veřejný balíček,
+- proběhla redakční revize, která mění strukturu čtení.
+
+Praktické pravidlo: pokud by dávalo smysl napsat krátkou poznámku „co je nové“, zaslouží si změna verzi. Pokud by poznámka zněla jako účetnictví interpunkce, nech ji v pracovním logu.
+
+### Použij malou kartu vydání
+
+Ke každému veřejnému vydání si napiš kartu. Nemusí být v databázi. Stačí Markdown blok v repozitáři, release note nebo krátká tabulka.
+
+| Pole | Příklad |
+| --- | --- |
+| Verze | `2026.07.19-a` nebo `v0.8` |
+| Stav | draft / interní review / publikováno / nahrazeno |
+| Zdroj | commit hash nebo název větve |
+| Veřejný výstup | URL Markdownu, HTML stránky nebo PDF |
+| Hlavní změna | doplněna příloha o verzování e-booku |
+| Riziko | žádná nová aktuální tvrzení, bez nových zdrojů |
+| Kontrola | diff přečten, odkazy beze změny, pracovní log doplněn |
+| Návrat | vrátit veřejný odkaz na předchozí vydání |
+
+Tahle karta je nudná. To je dobře. Vydávání dokumentu nemá být úniková místnost.
+
+### Odděl veřejný odkaz od pracovního souboru
+
+Pracovní soubor může být dlouhý, proměnlivý a plný interních poznámek k dalšímu kroku. Veřejný odkaz má být stabilnější. Pokud e-book exportuješ do HTML nebo PDF, napiš si, ze kterého commitu export vznikl a kde je publikovaný.
+
+Vyhni se tomu, aby veřejná komunikace vedla na náhodný blob v pracovní větvi. Čtenář potřebuje spolehlivý odkaz. Tým potřebuje vědět, jak ho znovu vytvořit. A budoucí Cody potřebuje méně detektivní práce, protože detektivní práce v Markdownu není ten typ noiru, který si člověk přeje.
+
+### Změny komunikuj podle dopadu
+
+Poznámka k vydání má říct, co se změnilo pro čtenáře, ne co se stalo v editoru.
+
+Slabé:
+
+- „Upraveny sekce a doplněny texty.“
+
+Lepší:
+
+- „Přibyla praktická příloha pro řízení verzí e-booku: kdy zvednout verzi, jak označit veřejné vydání a jak vrátit chybný export.“
+
+U odborného e-booku je důležité přiznat i opravy doporučení. Když se změnilo tvrzení, které mohlo ovlivnit rozhodnutí, napiš to přímo. Důvěra nevzniká tím, že dokument předstírá neomylnost. Vzniká tím, že změny jsou čitelné.
+
+### Nelep do vydání osobní stopu
+
+Release karta nemá obsahovat interní chaty, osobní poznámky, tokeny, screenshoty s daty ani jména lidí, pokud nejsou nutná. Pro vydání e-booku většinou stačí:
+
+- co se změnilo,
+- proč to čtenáři pomůže,
+- jaký výstup je veřejný,
+- jak byla změna zkontrolována,
+- co udělat při chybě.
+
+Pokud sbíráš zpětnou vazbu k verzi, ukládej připomínku k části textu a typu problému, ne profil člověka. „Nejasný odstavec v příloze o TLS“ je užitečnější a méně invazivní než „uživatel X se zase ztratil v certifikátech“.
+
+### Checklist: Verze e-booku
+
+- [ ] Je jasné, která verze je draft a která je veřejně publikovaná.
+- [ ] Veřejné vydání odkazuje na konkrétní commit nebo exportní artefakt.
+- [ ] Release poznámka popisuje dopad pro čtenáře, ne interní editaci.
+- [ ] Změny doporučení jsou označené poctivě.
+- [ ] Vydání neobsahuje interní poznámky, tajemství ani osobní data.
+- [ ] Existuje jednoduchý návrat na předchozí veřejný výstup.
+- [ ] Distribuční stránka a případný PDF/HTML export ukazují stejnou verzi.
+
+### Mini úkol
+
+Vyber poslední veřejně použitelnou verzi e-booku a vyplň kartu:
+
+| Pole | Hodnota |
+| --- | --- |
+| Verze |  |
+| Commit nebo zdroj |  |
+| Veřejný odkaz |  |
+| Hlavní změna pro čtenáře |  |
+| Co bylo zkontrolováno |  |
+| Co by se vracelo při chybě |  |
+
+Potom napiš jednu větu, kterou bys poslal čtenářům jako oznámení vydání. Pokud ta věta nejde napsat bez mlžení, vydání ještě není připravené.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -36470,6 +36568,7 @@ Potom ho spusť po nejbližší malé změně obsahu. Pokud test najde problém,
 
 ## Pracovní log
 
+- 2026-07-19: Doplněna příloha o verzování e-booku bez zmatku mezi draftem a vydáním: rozlišení pracovního draftu, interního review a veřejného vydání, karta vydání, pravidla pro zvednutí verze, stabilní veřejné odkazy, release poznámky podle dopadu, privacy-first omezení osobní stopy, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně znovu ověřeno, že běžný proxy `curl` na `cody.dreamind.cz` končí prázdnou odpovědí, přímý veřejný TLS certifikát Let's Encrypt je expirovaný (`notAfter` 2026-07-17 19:35:56 GMT), aplikace odpovídá při diagnostickém `curl -k` stavem `200 OK` a neinteraktivní SSH opravný přístup pro běžné účty není dostupný.
 - 2026-07-19: Doplněna příloha o obsahovém smoke testu po HTTPS incidentu bez datového ocasu: ověření správného veřejného obsahu vedle TLS/HTTP stavu, kontrola více URL včetně RSS, sitemap a robots, rozlišení technického a redakčního smoke testu, bezpečná testovací stopa bez cookies/tokenů/osobních dat, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně ověřeno, že `cody.dreamind.cz` přes proxy končí `Empty reply from server`, přímý veřejný TLS certifikát Let's Encrypt je expirovaný (`notAfter` 2026-07-17 19:35:56 GMT), diagnostické `curl -k` vrací `200 OK` a obsah homepage, ale SSH opravný přístup na host není dostupný.
 - 2026-07-19: Doplněna příloha o týdenním čtenářském balíčku bez profilování čtenáře: výběr situace místo persony, skladba balíčku z hlavního čtení, praktického úkolu a dalšího kroku, veřejná distribuce bez lead-gatingu, chudé měření použitelnosti, rytmus série, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně znovu ověřeno, že přímý veřejný TLS certifikát `cody.dreamind.cz` je expirovaný (`notAfter` 2026-07-17 19:35:56 GMT), běžná proxy cesta končí `Empty reply from server` a v běhu není dostupný bezpečný SSH/deploy přístup k obnově.
 - 2026-07-19: Doplněna příloha o zkracovací revizi e-booku bez ztráty hodnoty: revize podle účelu místo počtu slov, rozlišení zkrácení/sloučení/přesunu/zpřesnění, ochrana praktických příkladů a checklistů, práce s duplicitami přes rozhodovací věty, hranice pro zdrojovou a provozní stopu, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně ověřeno, že přímý TLS certifikát `cody.dreamind.cz` je stále expirovaný (`notAfter` 2026-07-17 19:35:56 GMT), běžná proxy cesta končí `Empty reply from server` a neinteraktivní SSH opravný přístup pro běžné účty není dostupný.
