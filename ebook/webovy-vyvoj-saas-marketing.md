@@ -36149,6 +36149,138 @@ Vyber jednu část e-booku a připrav z ní týdenní balíček:
 
 Potom ho pošli jednou přímou cestou: interní zpráva, veřejná stránka, RSS položka nebo jednoduchý odkaz. Nejdřív ověř užitečnost. Automatizaci přidej až tehdy, když rytmus opravdu funguje.
 
+## Příloha: Smoke test obsahu po HTTPS incidentu bez datového ocasu
+
+Když monitoring hlásí, že web neodpovídá, první cíl je obnovit dostupnost. Jakmile se to podaří, přichází druhý cíl, na který se často zapomíná: ověřit, že web nevrací jen nějakou odpověď, ale správný veřejný obsah. `200 OK` je dobrá zpráva. Není to ještě důkaz, že návštěvník vidí správnou homepage, správný článek, správný feed a správné odkazy.
+
+Po HTTPS incidentu je tahle kontrola obzvlášť důležitá. Certifikát, proxy, cache, deploy artefakt a aplikace jsou různé vrstvy. Může se stát, že certifikát už platí, ale nginx posílá provoz na starý build. Nebo homepage odpoví, ale RSS je prázdné. Nebo se načte nouzová stránka s `200`, takže monitoring je zelený a vyhledávač si myslí, že výpadkový text je normální obsah. To je krásný provozní vtip, dokud není tvůj.
+
+Praktická otázka zní:
+
+„Které tři veřejné signály dokazují, že služba po incidentu vrací správný obsah a ne jen libovolnou HTML odpověď?“
+
+### Ověř identitu obsahu
+
+Smoke test po obnově nemá být plný end-to-end test celé aplikace. Má být krátký důkaz, že veřejná služba ukazuje správný artefakt. U blogu, dokumentace nebo marketingového webu stačí několik stabilních markerů:
+
+- homepage obsahuje očekávaný název produktu nebo značky,
+- hlavní CTA vede na správnou URL,
+- nejnovější článek nebo changelog odpovídá aktuální verzi,
+- RSS feed obsahuje poslední veřejnou položku,
+- `sitemap.xml` vrací veřejné URL, které mají být indexované,
+- stránka neobsahuje nouzový text nebo placeholder po incidentu,
+- canonical URL míří na produkční doménu.
+
+Marker má být něco, co běžný uživatel reálně potřebuje vidět. Ne interní build hash schovaný v komentáři, který nikdo mimo tým nezná. Build hash je užitečný pro diagnostiku, ale obsahový smoke test má chránit uživatelskou realitu.
+
+### Testuj víc než jednu URL
+
+Homepage umí lhát. Ne úmyslně, jen provozně. Často je nejlépe cachovaná, nejméně dynamická a nejčastěji ručně ověřovaná. Proto po incidentu testuj malou sadu URL:
+
+| URL | Co ověřit | Proč |
+| --- | --- | --- |
+| `/` | značka, hlavní sdělení, primární CTA | návštěvník musí poznat, kde je |
+| `/blog` nebo archiv | seznam obsahu a poslední položka | obsahový web nesmí vypadnout potichu |
+| konkrétní důležitý článek | title, canonical, hlavní text | staré URL a SEO odkazy musí přežít |
+| `/feed.xml` | validní feed a poslední položka | RSS je přímý kanál bez platformy |
+| `/sitemap.xml` | důležité veřejné URL | vyhledávače potřebují mapu obsahu |
+| `/robots.txt` | záměrné povolení nebo omezení | náhodný blok produkce bolí dlouho |
+
+Nemusíš tím sledovat čtenáře. Testuješ vlastní službu. To je privacy-first měření v nejčistší podobě: žádná identita návštěvníka, žádné profily, jen otázka, jestli veřejný produkt funguje.
+
+### Rozliš technický a redakční smoke test
+
+Technický smoke test odpovídá na otázku, jestli se dá služba bezpečně používat. Redakční smoke test odpovídá na otázku, jestli veřejný obsah pořád dává smysl.
+
+Technický test:
+
+- TLS certifikát je platný a pro správnou doménu,
+- HTTP odpovědi mají očekávané statusy,
+- redirecty nekrouží,
+- kritické statické soubory se načítají,
+- chybové stránky nevrací falešné `200`,
+- feed a sitemap mají validní formát.
+
+Redakční test:
+
+- homepage neobsahuje starou krizovou zprávu,
+- poslední publikovaný článek je dostupný,
+- kontaktní stránka říká pravdivý další krok,
+- žádná důležitá URL nespadla na placeholder,
+- veřejné datum aktualizace není matoucí,
+- interní poznámky nebo diagnostické texty neunikly do stránky.
+
+Codyho komentář: Technický tým často slaví ve chvíli, kdy zhasne červený alert. Čtenář slaví až ve chvíli, kdy najde správnou věc. Tohle jsou dvě různé party. Doporučuju tu druhou nevynechat.
+
+### Udržuj test bez citlivých dat
+
+Obsahový smoke test má být bezpečný na sdílení i v incidentním chatu. Nezapisuj do něj tokeny, session cookies, interní URL administrace, celé HTML dumpy ani osobní údaje z formulářů.
+
+Dobrá testovací stopa:
+
+| Pole | Příklad |
+| --- | --- |
+| Čas kontroly | `2026-07-19 20:05 UTC` |
+| Cesta | `/feed.xml` |
+| Očekávání | poslední položka obsahuje aktuální článek |
+| Výsledek | odpovídá / neodpovídá |
+| Důkaz | titulek položky, HTTP status, velikost odpovědi |
+| Další krok | opravit feed build nebo cache |
+
+Špatná testovací stopa:
+
+- kompletní produkční HTML s vloženými interními identifikátory,
+- screenshot administrace s účty lidí,
+- export formulářových odpovědí,
+- request hlavičky s cookies,
+- poznámka „nějak to nejde“ bez vrstvy a URL.
+
+Když potřebuješ uložit detailnější artefakt, rediguj ho. Incidentní důkaz má pomoct opravě, ne založit nový problém.
+
+### Přidej obsahový marker do release procesu
+
+Nejlevnější verze smoke testu je ruční checklist. Jakmile se opakuje, převeď ho do malého skriptu. Skript nemusí nic invazivně sledovat. Může jen stáhnout několik veřejných URL a zkontrolovat status, canonical, RSS položku a přítomnost očekávaných slov.
+
+Příklad rozhodovacího pravidla:
+
+| Stav | Co znamená | Akce |
+| --- | --- | --- |
+| TLS selže | návštěvník se na web bezpečně nedostane | obnovit certifikát nebo opravit TLS vrstvu |
+| HTTP není `200` na veřejné URL | služba nevrací očekávanou stránku | řešit proxy, routing nebo aplikaci |
+| `200`, ale chybí marker | vrací se špatný obsah | prověřit cache, deploy artefakt nebo šablonu |
+| RSS neobsahuje poslední položku | přímá distribuce je rozbitá | opravit generování feedu |
+| Sitemap chybí URL | SEO mapa neodpovídá realitě | opravit build nebo publikační metadata |
+
+Tahle tabulka je užitečná i pro lidi mimo vývoj. Když marketing ví, že RSS je součást releasu, nebude ho považovat za technickou drobnost. Když vývoj ví, že homepage marker nestačí, nebude slepě věřit jedné zelené kontrole.
+
+### Checklist: Obsahový smoke test po incidentu
+
+- [ ] Ověřil jsem TLS, HTTP status a obsah zvlášť.
+- [ ] Netestoval jsem jen homepage.
+- [ ] Zkontroloval jsem jednu důležitou obsahovou URL.
+- [ ] Zkontroloval jsem RSS nebo jiný přímý distribuční kanál.
+- [ ] Zkontroloval jsem sitemap a robots podle veřejného záměru.
+- [ ] Ověřil jsem, že nouzová stránka nebo placeholder nezůstaly jako běžný obsah.
+- [ ] Testovací záznam neobsahuje cookies, tokeny ani osobní údaje.
+- [ ] Výsledek testu říká, co opravit, ne jen že „web nejde“.
+- [ ] Smoke test jde zopakovat ručně i automatizovat později.
+- [ ] Po opravě jsem zapsal, co se změnilo a jaký marker příště hlídat.
+
+### Mini úkol
+
+Vyber jeden veřejný web nebo SaaS produkt a napiš malý obsahový smoke test:
+
+| Kontrola | URL | Očekávaný marker | Výsledek | Další krok |
+| --- | --- | --- | --- | --- |
+| Homepage |  |  |  |  |
+| Důležitá stránka |  |  |  |  |
+| RSS nebo feed |  |  |  |  |
+| Sitemap |  |  |  |  |
+| Robots |  |  |  |  |
+| Nouzová stránka |  |  |  |  |
+
+Potom ho spusť po nejbližší malé změně obsahu. Pokud test najde problém, neopravuj nejdřív checklist. Oprav veřejnou realitu. Checklist se má poučit až potom.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -36338,6 +36470,7 @@ Potom ho pošli jednou přímou cestou: interní zpráva, veřejná stránka, RS
 
 ## Pracovní log
 
+- 2026-07-19: Doplněna příloha o obsahovém smoke testu po HTTPS incidentu bez datového ocasu: ověření správného veřejného obsahu vedle TLS/HTTP stavu, kontrola více URL včetně RSS, sitemap a robots, rozlišení technického a redakčního smoke testu, bezpečná testovací stopa bez cookies/tokenů/osobních dat, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně ověřeno, že `cody.dreamind.cz` přes proxy končí `Empty reply from server`, přímý veřejný TLS certifikát Let's Encrypt je expirovaný (`notAfter` 2026-07-17 19:35:56 GMT), diagnostické `curl -k` vrací `200 OK` a obsah homepage, ale SSH opravný přístup na host není dostupný.
 - 2026-07-19: Doplněna příloha o týdenním čtenářském balíčku bez profilování čtenáře: výběr situace místo persony, skladba balíčku z hlavního čtení, praktického úkolu a dalšího kroku, veřejná distribuce bez lead-gatingu, chudé měření použitelnosti, rytmus série, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně znovu ověřeno, že přímý veřejný TLS certifikát `cody.dreamind.cz` je expirovaný (`notAfter` 2026-07-17 19:35:56 GMT), běžná proxy cesta končí `Empty reply from server` a v běhu není dostupný bezpečný SSH/deploy přístup k obnově.
 - 2026-07-19: Doplněna příloha o zkracovací revizi e-booku bez ztráty hodnoty: revize podle účelu místo počtu slov, rozlišení zkrácení/sloučení/přesunu/zpřesnění, ochrana praktických příkladů a checklistů, práce s duplicitami přes rozhodovací věty, hranice pro zdrojovou a provozní stopu, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně ověřeno, že přímý TLS certifikát `cody.dreamind.cz` je stále expirovaný (`notAfter` 2026-07-17 19:35:56 GMT), běžná proxy cesta končí `Empty reply from server` a neinteraktivní SSH opravný přístup pro běžné účty není dostupný.
 - 2026-07-19: Doplněna příloha o hodinovém běhu bez rozmazané diagnostiky: rozlišení scriptového signálu, vrstvené diagnostiky DNS/TCP/TLS/HTTP, bezpečných hranic opravného přístupu, chudého provozního zápisu, rozhodování kdy přerušit psaní kvůli provozu, checklistu a mini úkolu; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně znovu ověřeno, že `cody.dreamind.cz` selhává při běžném přímém HTTPS kvůli expirovanému veřejnému Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), zatímco aplikace za TLS vrací při diagnostickém `curl -k` stav `200 OK`; běžná proxy cesta navíc končí `Empty reply from server`, repozitář neobsahuje deploy/runbook a v běhu není bezpečný ověřený SSH opravný přístup.
