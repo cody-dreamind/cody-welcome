@@ -33684,6 +33684,154 @@ Vezmi poslední provozní problém a přepiš ho do incidentní karty:
 
 Potom udělej jednu drobnou opravu: vytvoř šablonu incidentního deníku, přidej do monitoringu pole `source`, doplň stop podmínku pro TLS zásahy, nebo nastav pravidlo, že se do incidentního chatu neposílají surové requesty bez redakce. Malý deník dnes, menší chaos příště.
 
+## Příloha: Pozorovaná obnova certifikátů bez slepé víry v automat
+
+Automatická obnova TLS certifikátu je skvělá věc. Přesně do chvíle, kdy tým zjistí, že „automatická“ znamenalo „někdy jsme nainstalovali Certbot a od té doby jsme doufali“. Let’s Encrypt v FAQ popisuje krátkou výchozí platnost certifikátů a doporučuje obnovovat včas; Certbot dokumentace zase ukazuje `certbot renew`, automatické obnovy a `certbot renew --dry-run`. Odkazy jsou ve zdrojích. Produktová lekce je jednoduchá: obnovovací mechanismus není hotový tím, že existuje. Hotový je teprve tehdy, když je pozorovaný, ověřený zvenku a má vlastníka.
+
+Špatná otázka zní: „Máme automatickou obnovu?“
+
+Lepší otázka zní: „Jak poznáme, že poslední obnova proběhla, reverse proxy načetla nový certifikát a veřejný návštěvník ho opravdu vidí?“
+
+### Obnova má tři části
+
+TLS incidenty často vznikají z toho, že tým mluví o „certifikátu“ jako o jedné věci. V provozu jsou ale minimálně tři kroky:
+
+1. Certifikát se úspěšně získá nebo obnoví.
+2. Služba, která ukončuje TLS, nový certifikát načte.
+3. Veřejná cesta z internetu ukazuje nový, důvěryhodný a neexpirovaný certifikát.
+
+Když projde jen první krok, soubor na disku může být nový, ale nginx, Caddy, Traefik nebo load balancer pořád servíruje starý certifikát. Když projde první a druhý krok, lokální server může vypadat zdravě, ale veřejný DNS nebo edge vrstva pořád míří jinam. Když projde jen lokální `curl -k`, neověřil jsi důvěru vůbec. Ano, `-k` je užitečný diagnostický šroubovák. Nechceš s ním ale podepisovat předávací protokol.
+
+Praktická karta obnovy:
+
+| Vrstva | Co ověřit | Příklad důkazu |
+| --- | --- | --- |
+| Renewal mechanismus | job/timer/cron existuje a naposledy běžel | záznam posledního běhu bez secrets |
+| Certifikát na hostu | nový `notAfter`, správný `subject` a SAN | výpis data expirace |
+| TLS služba | proxy načetla nový certifikát bez pádu | reload výsledek nebo stav služby |
+| Veřejný pohled | externí TLS handshake vidí nový certifikát | přímý test bez lokální TLS výjimky |
+| Aplikace | stránka vrací správný status a obsahový marker | `200`, správný title nebo health marker |
+
+### Sleduj poslední úspěch, ne jen další expiraci
+
+Alert na blížící se expiraci je nutný, ale nestačí. Když se obnova pokazí, chceš to vědět hned po selhání, ne až tři dny před koncem platnosti. Proto si u certifikátu drž dvě informace:
+
+- kdy certifikát expiruje,
+- kdy naposledy úspěšně proběhla obnova nebo dry-run.
+
+Rozdíl je důležitý. Expirace říká, kolik času zbývá. Poslední úspěšný běh říká, jestli automat ještě žije. Pokud certifikát expiruje za 55 dní, ale poslední dry-run selhal před měsícem, nemáš klid. Máš tichý dluh, který zatím jen nezačal křičet.
+
+Malý záznam do provozního přehledu:
+
+| Pole | Příklad |
+| --- | --- |
+| Doména | `example.com` |
+| Kde se obnovuje | `web-01`, hosting panel, edge služba |
+| Mechanismus | Certbot timer / cron / managed TLS |
+| Poslední ostrá obnova | `2026-07-18 03:12 UTC` |
+| Poslední dry-run | `2026-07-01 02:00 UTC`, úspěch |
+| Veřejný `notAfter` | `2026-10-16 03:12 UTC` |
+| Kdo vlastní opravu | role, ne jen jedno jméno |
+| Náhradník | role nebo člověk |
+| Stop podmínka | bez DNS/proxy vlastníka neměnit challenge ani záznamy |
+
+### Hook bez ověření je poloviční řešení
+
+Certbot a podobné nástroje umí obnovit certifikát, ale produktový výsledek vznikne až po načtení certifikátu TLS službou. U vlastního serveru proto runbook nemá končit větou „spustit renewal“. Má obsahovat i bezpečný reload a veřejné ověření.
+
+Příklad logiky:
+
+```text
+1. Spustit nebo počkat na renewal.
+2. Pokud renewal něco změnil, reloadnout TLS službu.
+3. Ověřit veřejný certifikát bez `-k`.
+4. Ověřit HTTP status a obsahový marker.
+5. Zapsat výsledek do provozního deníku.
+```
+
+Nejde o to, aby každý tým používal stejný příkaz. Managed hosting, kontejner, Kubernetes ingress, vlastní nginx a CDN budou mít různé mechanismy. Jde o stejnou kontrolní větu: „Nový certifikát je vidět z veřejné cesty a aplikace za ním odpovídá správným obsahem.“
+
+### Alert má ukázat rozbitý článek řetězu
+
+Špatný alert:
+
+```text
+Web down: 000000
+```
+
+Lepší alert:
+
+```text
+TLS renewal chain failed for cody.dreamind.cz
+Viewpoint: direct public check without proxy
+DNS: 91.99.227.53
+TCP 443: ok
+TLS: certificate expired
+HTTP: not tested because TLS verification failed
+Next step: renew public certificate on TLS termination layer and reload proxy
+```
+
+Takový alert pořád neobsahuje tajemství, request payloady ani zákaznická data. Obsahuje ale dost informací, aby první člověk neplýtval časem na aplikaci, když selhala důvěryhodnost TLS. To je přesně privacy-first provozní styl: méně dat, víc smyslu.
+
+### Automat nesmí potřebovat univerzální klíč
+
+Pokud automatická obnova vyžaduje účet, který umí měnit celý server, číst databázi a upravovat DNS pro všechny domény, je to pohodlné, ale přepálené. Opravná schopnost má být úzká:
+
+- obnovit konkrétní certifikáty,
+- reloadnout konkrétní TLS službu,
+- číst bezpečný stav renewal jobu,
+- zapsat výsledek nebo poslat alert,
+- nečíst zákaznickou databázi,
+- neměnit aplikaci,
+- neměnit DNS mimo domluvený challenge mechanismus.
+
+Když používáš DNS challenge, omez token jen na potřebnou zónu a operace. Když používáš HTTP challenge, ověř, že `/.well-known/acme-challenge/` není rozbité redirectem, firewallem nebo middlewarem aplikace. Ať už je mechanismus jakýkoliv, tajemství patří do secret manageru nebo bezpečné správy hostingu, ne do Markdown runbooku. Runbook má říct, kde se oprávnění spravuje a kdo ho může rotovat, ne vypsat klíč jako dárek pro budoucí katastrofu.
+
+### Měsíční kontrola stačí, když je konkrétní
+
+Malý tým nepotřebuje každý týden dvouhodinový certifikační ceremoniál. Stačí měsíční patnáctiminutová kontrola:
+
+1. Otevřít seznam produkčních domén a subdomén.
+2. U každé kritické domény zkontrolovat veřejné datum expirace.
+3. Ověřit poslední úspěšný dry-run nebo managed renewal status.
+4. Ověřit, že alerty chodí správnému kanálu a mají vlastníka.
+5. Vybrat jeden certifikát a projít runbook nanečisto.
+6. Zapsat jednu konkrétní opravu, pokud něco chybí.
+
+Tato kontrola má být nudná. Pokud je pokaždé dramatická, nemáš certifikační kontrolu. Máš seriál.
+
+### Checklist: Pozorovaná obnova certifikátů
+
+- [ ] U každé produkční domény víme, kde se TLS certifikát obnovuje.
+- [ ] Renewal mechanismus má vlastníka a náhradníka.
+- [ ] Sledujeme datum expirace i poslední úspěšný renewal nebo dry-run.
+- [ ] Po obnově se TLS služba reloaduje nebo jinak prokazatelně načte nový certifikát.
+- [ ] Veřejný test ověřuje certifikát bez `-k` a bez lokální proxy, pokud jde o veřejný pohled.
+- [ ] Smoke test po obnově kontroluje i HTTP status a obsahový marker.
+- [ ] Alert rozlišuje DNS, TCP, TLS, HTTP a obsah, pokud to pomáhá opravě.
+- [ ] Automatická obnova nemá zbytečně široký přístup k serveru, DNS ani zákaznickým datům.
+- [ ] Runbook neobsahuje privátní klíče, tokeny ani celé výpisy prostředí.
+- [ ] Měsíční kontrola má jasný výstup: OK, ticket, nebo incident.
+- [ ] Při změně hostingu, DNS, proxy nebo deploye se obnovovací řetěz znovu ověří.
+
+### Mini úkol
+
+Vyber jednu produkční doménu a vyplň pozorovací kartu:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Kde se certifikát obnovuje? |  |
+| Jaký mechanismus obnovu spouští? |  |
+| Kdy naposledy proběhl úspěšný dry-run nebo managed check? |  |
+| Kdo dostane alert při selhání obnovy? |  |
+| Jak se reloaduje TLS služba? |  |
+| Jak ověříme veřejný certifikát bez TLS výjimky? |  |
+| Jaký obsahový marker potvrzuje správný web? |  |
+| Jaká oprávnění má automat nebo opravná role? |  |
+| Co se nesmí zapisovat do logu ani runbooku? |  |
+
+Potom udělej jednu malou změnu: přidej veřejný TLS check, doplň poslední úspěšný dry-run do provozní karty, zkrať oprávnění renewal tokenu, přidej reload hook, nebo uprav alert tak, aby ukázal konkrétní rozbitou vrstvu. Automatická obnova má být jako dobrý úklid: nejlepší je, když se o ní nemluví, protože prokazatelně proběhla.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -33873,6 +34021,7 @@ Potom udělej jednu drobnou opravu: vytvoř šablonu incidentního deníku, při
 
 ## Pracovní log
 
+- 2026-07-19: Doplněna příloha o pozorované obnově certifikátů bez slepé víry v automat: rozdělení obnovy na renewal, reload TLS služby a veřejné ověření, sledování posledního úspěšného běhu vedle expirace, runbook pro reload a smoke test, akční alerty podle rozbité vrstvy, úzká oprávnění automatu, měsíční kontrola, checklist a mini úkol; navázáno na ověřené zdroje Let's Encrypt, Certbot a curl i dnešní diagnostiku expirovaného veřejného TLS certifikátu.
 - 2026-07-19: Doplněna příloha o incidentním deníku bez datového skladiště: rozdíl mezi chatem a deníkem, rozlišení pozorování/interpretace/zásahu, minimální šablona první hodiny, privacy-first pravidla pro logy a screenshoty, předání incidentu, úklid finálního záznamu, checklist a mini úkol; ověřeny a doplněny zdroje Google SRE k incident managementu a NIST SP 800-61 Rev. 3 k incident response.
 - 2026-07-18: Doplněna příloha o SSH opravném přístupu bez slepého host key promptu: karta produkčního hostu, ověření host key mimo incident, bezpečné první připojení, omezené opravné role pro TLS/proxy/backend zásahy, rozdělení diagnostiky a produkčního zásahu v runbooku, checklist a mini úkol; ověřeny a doplněny zdroje OpenBSD man pages k `ssh_config` a `ssh-keygen` a RFC 4255 k SSHFP.
 - 2026-07-18: Doplněna příloha o kontrole odkazů v e-booku bez ručního proklikávání do bezvědomí: rozdělení kontrol na Markdown zdroj, HTML export a veřejnou URL, priorita interních kotvic, zdrojů tvrzení a CTA, stabilní kotvy, privacy-first kontrola externích odkazů bez měřicích redirectů, karta problému, checklist a mini úkol; ověřeny a doplněny zdroje CommonMark, RFC 3986 a W3C Link Checker.
