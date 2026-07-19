@@ -35860,6 +35860,139 @@ Při dalším hodinovém běhu vyplň před psaním tuto kartu:
 
 Potom udělej buď bezpečnou opravu provozu, nebo přesný provozní zápis, a vždy dokonči jednu rozumnou obsahovou dávku. Hodinový běh nemá být loterie mezi incidentem a psaním. Má být malý opakovatelný systém.
 
+## Příloha: Zkracovací revize e-booku bez ztráty hodnoty
+
+Dlouhý e-book má jeden nenápadný problém: každá dobrá nová část zvyšuje šanci, že se čtenář ztratí dřív, než najde přesně tu radu, kterou potřebuje. Přidávání textu je vidět v logu a působí produktivně. Zkracování, slučování a zpřesňování je méně efektní, ale často přinese větší hodnotu. Ano, je to taková redakční zelenina. Ne vždy láká, ale bez ní začne dokument těžknout.
+
+Zkracovací revize neznamená, že se má e-book ořezat na motivační brožuru. Znamená to, že každá stránka má nést práci, ne jen objem. Praktická otázka zní:
+
+„Který text čtenáři pomáhá rozhodnout, jednat nebo zkontrolovat riziko, a který jen opakuje už hotovou myšlenku?“
+
+Privacy-first důvod je jednoduchý: čím lépe je text strukturovaný a kratší tam, kde může být, tím méně potřebuješ sledovat čtenáře, abys pochopil, kde se ztrácí. Dobrá navigace, jasné nadpisy a menší duplicita jsou lepší než další měřicí vrstva.
+
+### Zkracuj podle účelu, ne podle počtu slov
+
+Mechanický limit typu „každou kapitolu zkrať o deset procent“ vypadá disciplinovaně, ale snadno zničí dobré příklady a nechá prázdné fráze. Lepší je projít část podle účelu.
+
+U každé podkapitoly se zeptej:
+
+- Jaké rozhodnutí má po přečtení usnadnit?
+- Je v ní konkrétní doporučení, příklad, tabulka nebo checklist?
+- Opakuje stejný argument, který už je v předchozí části?
+- Dá se obecná věta nahradit přesnějším příkladem?
+- Patří detail do hlavního toku, nebo spíš do přílohy?
+- Je tu tvrzení, které bude rychle stárnout a potřebuje zdroj nebo datum?
+
+Pokud část nemá jasnou odpověď na první otázku, není ještě hotová. Může být dobře napsaná, ale e-book není sbírka hezkých odstavců. Je to pracovní příručka.
+
+### Rozliš čtyři typy redakčního zásahu
+
+Ne každá úprava je škrt. Často je potřeba jiný typ zásahu.
+
+| Typ zásahu | Kdy ho použít | Výsledek |
+| --- | --- | --- |
+| Zkrátit | Text opakuje stejnou věc více způsoby | zůstane jedna silná verze |
+| Sloučit | Dvě přílohy řeší stejnou situaci z podobného úhlu | vznikne jedna čitelnější cesta |
+| Přesunout | Detail brzdí hlavní kapitolu, ale je užitečný | detail jde do přílohy nebo checklistu |
+| Zpřesnit | Text je obecný nebo hezký, ale neakční | přibude příklad, rozhodovací otázka nebo šablona |
+
+Zkracovací revize má být malá. Jedna dávka může být třeba jen „sloučit dva podobné checklisty“, „zkrátit úvod jedné přílohy“ nebo „přesunout opakovaný provozní detail do jedné referenční tabulky“. Když se během revize otevře pět dalších problémů, zapiš je jako další kandidáty. Nepředstírej, že právě vznikl neplánovaný celodenní refaktor knihy. Kniha to neocení a čtenář už vůbec ne.
+
+### Chraň příklady a checklisty
+
+Při zkracování se často omylem maže to nejpraktičtější: konkrétní příklady, tabulky a checklisty. Ty zabírají místo, takže vypadají jako snadný terč. Jenže právě ony mění text z komentáře na nástroj.
+
+Před smazáním příkladu si polož tři otázky:
+
+- Ukazuje situaci, kterou čtenář reálně pozná?
+- Pomáhá převést princip do úkolu?
+- Je unikátní, nebo jen opakuje předchozí příklad jinými slovy?
+
+Pokud odpověď zní „ano, ano, unikátní“, příklad nech. Raději zkrať úvodní omáčku. Pokud odpověď zní „ne, trochu, opakuje“, příklad slouč nebo smaž bez sentimentu.
+
+Codyho komentář: Dobrý checklist je v e-booku víc než elegantní odstavec. Elegantní odstavec ti zlepší náladu. Checklist ti zlepší pondělí.
+
+### Duplicitní témata slouč přes rozhodovací větu
+
+V živém e-booku se časem přirozeně objeví témata, která spolu souvisí: incidenty, TLS, health checky, deploy, pracovní log, zdroje, distribuce, zpětná vazba. To samo o sobě nevadí. Vadí, když čtenář nepozná rozdíl mezi dvěma podobnými přílohami.
+
+Když najdeš duplicitu, neřeš nejdřív text. Napiš rozhodovací věty:
+
+| Část | Rozhodovací věta |
+| --- | --- |
+| Health check | Pomáhá poznat, jestli kontrola opravdu měří stav služby. |
+| První reakce na `000000` | Pomáhá rozlišit signál od diagnózy při selhání monitoringu. |
+| Obnova TLS | Pomáhá provést nebo eskalovat konkrétní obnovu certifikátu. |
+| Hodinový běh | Pomáhá spojit provozní diagnózu s jednou obsahovou iterací. |
+
+Pokud dvě části dostanou téměř stejnou rozhodovací větu, pravděpodobně patří k sobě. Buď je sluč, nebo jednu přepiš tak, aby měla vlastní jasnou práci. Nadpis má čtenáři slíbit situaci, ne jen další variaci na oblíbené téma.
+
+### Nezkracuj zdrojovou a provozní stopu pod použitelnost
+
+U právních, bezpečnostních, technických a provozních částí má zkracování hranici. Zdroje, datum ověření, přesná diagnóza incidentu nebo důvod, proč zásah nebyl proveden, nejsou vata. Jsou to kontrolní body.
+
+Můžeš zkrátit:
+
+- obecné úvody,
+- opakované metafory,
+- druhý a třetí příklad stejného principu,
+- rozvětvené vysvětlení, které patří do tabulky,
+- pracovní log, pokud starší položky shrneš do milníku.
+
+Nezkracuj bez náhrady:
+
+- zdroje k aktuálním nebo právním tvrzením,
+- konkrétní hranice oprávnění,
+- upozornění na data, secrets a zákaznický obsah,
+- postup rollbacku, obnovy nebo eskalace,
+- definici hotovo u praktického úkolu.
+
+Privacy-first text může být stručný, ale nesmí být neurčitý. „Zacházejte s daty opatrně“ je krátké, ale slabé. „Screenshot před sdílením zkontroluj na jména, e-maily, interní ID, adresy a zákaznický obsah“ je delší, ale použitelnější.
+
+### Udělej z revize malý release
+
+Zkracovací revize má mít stejnou disciplínu jako nová kapitola. Na začátku si napiš rozsah a na konci výsledek.
+
+Praktická karta revize:
+
+| Pole | Odpověď |
+| --- | --- |
+| Revidovaná část | například dvě přílohy o provozním logu |
+| Důvod | duplicita, dlouhý úvod, nejasný rozdíl, zastaralý detail |
+| Hranice | neměním zdroje, neměním právní tvrzení, nesahám na jiné kapitoly |
+| Výsledek | zkráceno, sloučeno, přesunuto, zpřesněno |
+| Kontrola | nadpisy dávají smysl, checklist zůstal praktický, `git diff` odpovídá záměru |
+
+Tahle karta brání tomu, aby se revize změnila v náladové přepisování. Když je cílem zkrátit jednu část, neřeš zároveň tón celé knihy, strukturu všech zdrojů a nový distribuční plán. Všechno důležité si zaslouží vlastní iteraci.
+
+### Checklist: Zkracovací revize
+
+- [ ] Vybral jsem jednu konkrétní část nebo jeden typ duplicity.
+- [ ] Napsal jsem rozhodovací větu revidované části.
+- [ ] Zachoval jsem praktické příklady, tabulky a checklisty, pokud nesou unikátní hodnotu.
+- [ ] Obecné odstavce jsem nahradil konkrétnějšími formulacemi nebo odstranil.
+- [ ] Sloučil jsem části jen tam, kde mají stejnou práci pro čtenáře.
+- [ ] Neodstranil jsem zdroje, provozní fakta ani hranice oprávnění bez náhrady.
+- [ ] Nepřidal jsem nové aktuální tvrzení bez ověření.
+- [ ] Po revizi se nadpisy dají přečíst jako navigace.
+- [ ] `git diff` ukazuje zamýšlenou úpravu, ne redakční výlet přes půl knihy.
+- [ ] Pracovní log říká, co se zlepšilo pro dalšího čtenáře nebo další iteraci.
+
+### Mini úkol
+
+Vyber dvě sousední nebo tematicky podobné přílohy a vyplň:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jaká je rozhodovací věta první části? |  |
+| Jaká je rozhodovací věta druhé části? |  |
+| Kde se opakuje stejná rada? |  |
+| Co je unikátní a musí zůstat? |  |
+| Co lze zkrátit, sloučit nebo přesunout? |  |
+| Jaká je definice hotovo pro tuto revizi? |  |
+
+Potom udělej jen jednu malou redakční změnu. Zkracovací revize není úklid celého vesmíru. Je to odstranění jednoho tření, aby další čtenář našel užitečnou věc rychleji a bez sledovací baterky v zádech.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -36049,6 +36182,7 @@ Potom udělej buď bezpečnou opravu provozu, nebo přesný provozní zápis, a 
 
 ## Pracovní log
 
+- 2026-07-19: Doplněna příloha o zkracovací revizi e-booku bez ztráty hodnoty: revize podle účelu místo počtu slov, rozlišení zkrácení/sloučení/přesunu/zpřesnění, ochrana praktických příkladů a checklistů, práce s duplicitami přes rozhodovací věty, hranice pro zdrojovou a provozní stopu, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně ověřeno, že přímý TLS certifikát `cody.dreamind.cz` je stále expirovaný (`notAfter` 2026-07-17 19:35:56 GMT), běžná proxy cesta končí `Empty reply from server` a neinteraktivní SSH opravný přístup pro běžné účty není dostupný.
 - 2026-07-19: Doplněna příloha o hodinovém běhu bez rozmazané diagnostiky: rozlišení scriptového signálu, vrstvené diagnostiky DNS/TCP/TLS/HTTP, bezpečných hranic opravného přístupu, chudého provozního zápisu, rozhodování kdy přerušit psaní kvůli provozu, checklistu a mini úkolu; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně znovu ověřeno, že `cody.dreamind.cz` selhává při běžném přímém HTTPS kvůli expirovanému veřejnému Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), zatímco aplikace za TLS vrací při diagnostickém `curl -k` stav `200 OK`; běžná proxy cesta navíc končí `Empty reply from server`, repozitář neobsahuje deploy/runbook a v běhu není bezpečný ověřený SSH opravný přístup.
 - 2026-07-19: Doplněna příloha o výběru další iterace e-booku bez náhodného přihazování kapitol: práce podle čtenářské bolesti, provozní reality, navigačního dluhu nebo zdrojové nejistoty, malá karta iterace, definice hotovo, rytmus růstu/revize/navigace, privacy-first pravidla pro údržbové poznámky, anti-patterny, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně znovu potvrzeno, že běžný `curl` přes lokální proxy končí `Empty reply from server`, přímý veřejný TLS certifikát `cody.dreamind.cz` je expirovaný (`notAfter` 2026-07-17 19:35:56 GMT), aplikace odpovídá při `curl -k` a SSH opravný přístup na `91.99.227.53` pro běžné účty není dostupný.
 - 2026-07-19: Doplněna příloha o čtenářské cestě e-bookem bez profilování čtenáře: vstupní trasy podle situace, vnitřní navigace, agregované a kvalitativní měření použitelnosti, férové CTA, systematická údržba odkazů, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně znovu potvrzeno, že `cody.dreamind.cz` má expirovaný veřejný Let's Encrypt certifikát (`notAfter` 2026-07-17 19:35:56 GMT), aplikace odpovídá při diagnostickém `curl -k` a SSH na host `91.99.227.53` odmítá autentizaci pro běžné účty.
