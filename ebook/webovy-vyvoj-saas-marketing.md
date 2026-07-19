@@ -33965,6 +33965,150 @@ Vezmi poslední produkční problém, který někdo diagnostikoval, ale neuměl 
 
 Potom udělej jednu změnu: doplň do alertu rozbitou vrstvu, vytvoř eskalační šablonu, urč vlastníka opravného přístupu, nastav expiraci break-glass role, nebo přidej do runbooku větu „kdy přestat diagnostikovat a eskalovat“. Neopravitelný nález nemá skončit tichem. Má skončit bezpečným předáním.
 
+## Příloha: Provozní pohotovost bez sdílení tajemství
+
+Pohotovost u malého webu nebo SaaS produktu často nevypadá jako velké rotační centrum s obrazovkami na zdi. Častěji je to jeden člověk, jeden monitoring, několik účtů a naděje, že se problém nestane v okamžiku, kdy je vlastník domény ve vlaku bez notebooku. Naděje je sympatická lidská vlastnost. Jako provozní strategie je to ale dost měkký materiál.
+
+Privacy-first pohotovost neznamená, že všichni dostanou univerzální klíč od produkce. Znamená to, že tým ví, kdo má jakou opravnou schopnost, jak ji bezpečně použít, jak eskalovat bez úniku citlivých dat a jak po incidentu uklidit dočasné výjimky.
+
+Špatná otázka zní: „Kdo všechno má přístup, aby mohl cokoliv opravit?“
+
+Lepší otázka zní: „Které konkrétní produkční schopnosti musí být dostupné i mimo ideální čas a kdo je umí použít s nejmenším nutným přístupem?“
+
+### Pohotovost je sada schopností, ne seznam lidí
+
+Začni tím, že rozepíšeš kritické schopnosti podle vrstev. Nepiš jen „server“. To je moc široké. Piš věci, které odpovídají reálnému opravování:
+
+| Vrstva | Opravná schopnost | Typický důkaz |
+| --- | --- | --- |
+| Doména a DNS | upravit nebo ověřit kritický záznam | veřejný DNS výpis |
+| TLS | obnovit certifikát a reloadnout proxy | nové `notAfter` z veřejného testu |
+| Aplikace | restartovat nebo rollbacknout release | stav služby a obsahový smoke test |
+| Databáze | ověřit dostupnost a obnovit ze zálohy | bezpečný stav bez dumpu dat |
+| E-mail | ověřit doručování transakčních zpráv | testovací zpráva bez osobních dat |
+| Monitoring | potvrdit nebo umlčet špatný alert | incidentní poznámka s důvodem |
+
+Ke každé schopnosti přidej vlastníka, náhradníka a hranici. Hranice je důležitá: člověk, který umí reloadnout nginx, nemusí mít přístup do databáze. Agent, který umí diagnostikovat TLS, nemusí mít oprávnění měnit DNS. Support, který vidí stav účtu, nemusí vidět produkční logy.
+
+### Eskalační mapa má být použitelná ve stresu
+
+Dobrá eskalační mapa se dá přečíst za minutu. Nemá obsahovat tajemství, privátní klíče ani dlouhé poznámky z interních debat. Má odpovědět na pět věcí:
+
+- Jak poznáme kritický incident?
+- Kdo drží první reakci?
+- Kdo má opravný přístup pro konkrétní vrstvu?
+- Jaký kanál se používá pro bezpečnou komunikaci?
+- Kdy se má práce zastavit a eskalovat výš?
+
+Praktická karta:
+
+| Situace | První vlastník | Náhradník | Bezpečný důkaz | Stop podmínka |
+| --- | --- | --- | --- | --- |
+| Expiruje nebo selhal TLS certifikát | Ops | Tech lead | veřejné datum expirace | bez přístupu k TLS hostu nezkoušet workaround |
+| Aplikace vrací chybu na hlavní cestě | Tech | Ops | status, korelační ID, čas | nekopírovat payloady do chatu |
+| Databáze je nedostupná | Tech lead | Ops | stav služby, ne dump | bez backup runbooku neimprovizovat obnovu |
+| Transakční e-maily nechodí | Ops | Support | testovací adresa, stav provideru | neposílat seznam zákazníků do externího nástroje |
+
+Karta má být v místě, kam se tým dostane i při incidentu. Pokud je uložená jen v systému, který je právě nedostupný, gratuluju: právě jsi vymyslel provozní verzi zamčeného klíče uvnitř auta.
+
+### Tajemství nepatří do incidentního chatu
+
+Incidentní komunikace má být rychlá, ale ne špinavá. Do chatu nepatří:
+
+- tokeny, hesla, privátní klíče ani celé `.env`,
+- zákaznické payloady,
+- celé databázové záznamy,
+- screenshoty s osobními údaji,
+- interní bezpečnostní detaily, které nejsou potřeba pro opravu,
+- panické kopírování logů bez redakce.
+
+Místo toho používej chudé, ale akční informace:
+
+- čas a časové pásmo,
+- služba nebo doména,
+- pozorovaná vrstva selhání,
+- korelační ID nebo krátký bezpečný marker,
+- uživatelský dopad,
+- další krok a vlastník.
+
+Příklad:
+
+```text
+03:00 UTC: cody.dreamind.cz selhává na veřejném TLS ověření.
+Vrstva: TLS, ne DNS ani TCP.
+Důkaz: veřejný certifikát je po datu `notAfter`.
+Dopad: návštěvník nemůže důvěryhodně otevřít HTTPS.
+Další krok: vlastník TLS hostu obnoví certifikát a reloadne proxy.
+```
+
+Tohle je dost konkrétní pro opravu a pořád dost chudé na to, aby z incidentního chatu nevznikl archiv citlivých dat.
+
+### Break-glass přístup musí mít konec
+
+Nouzový přístup má smysl jen tehdy, když je opravdu nouzový. Každá výjimka má mít:
+
+- účel,
+- rozsah,
+- vlastníka,
+- časovou expiraci,
+- auditní stopu,
+- úklid po incidentu.
+
+Příklad dobré formulace:
+
+„Dočasný SSH přístup pro roli Ops pouze na host `web-01`, pouze pro obnovu TLS certifikátu a reload nginx, platnost 24 hodin, po incidentu odebrat a zapsat výsledek.“
+
+Příklad špatné formulace:
+
+„Přidej mu radši root, ať to opraví.“
+
+Ano, druhá věta je kratší. Také je to malý provozní horor v jedné řádce.
+
+### Po incidentu oprav systém, ne jen náladu
+
+Pohotovost se zlepšuje po každém reálném problému. Ne dlouhým moralizováním, ale jednou systémovou změnou:
+
+- alert ukáže rozbitou vrstvu místo obecného `000000`,
+- runbook dostane jasnou stop podmínku,
+- vznikne náhradník pro TLS,
+- obnovovací job začne posílat poslední úspěšný stav,
+- incidentní karta dostane bezpečnou šablonu,
+- dočasný přístup dostane automatickou expiraci,
+- provozní kontakty se přesunou na místo dostupné při výpadku.
+
+Když se po incidentu nezmění nic, tým se vlastně jen naučil, že problém umí přežít. To je slabší výsledek než opravit příčinu dalšího chaosu.
+
+### Checklist: Provozní pohotovost
+
+- [ ] Kritické produkční schopnosti jsou rozepsané podle vrstev, ne schované pod slovem „server“.
+- [ ] Každá schopnost má vlastníka a náhradníka.
+- [ ] Eskalační mapa je dostupná i při výpadku hlavního nástroje.
+- [ ] Incidentní zprávy obsahují dopad, bezpečný důkaz, vrstvu a další krok.
+- [ ] Do chatu se neposílají secrets, zákaznické payloady ani celé výpisy prostředí.
+- [ ] Break-glass přístup má účel, rozsah, vlastníka a expiraci.
+- [ ] Po incidentu se dočasné přístupy uklidí.
+- [ ] Monitoring rozlišuje aspoň DNS, TCP, TLS, HTTP a obsah tam, kde to pomáhá opravě.
+- [ ] Runbook říká, kdy přestat diagnostikovat a eskalovat.
+- [ ] Každý kritický incident končí jednou konkrétní systémovou opravou.
+
+### Mini úkol
+
+Vyber jednu kritickou službu a vyplň pohotovostní kartu:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jaká je služba nebo doména? |  |
+| Jaký je nejhorší běžný výpadek? |  |
+| Kdo drží první reakci? |  |
+| Kdo má opravný přístup pro DNS/TLS/aplikaci/data? |  |
+| Kdo je náhradník? |  |
+| Jaký bezpečný důkaz smí jít do incidentního chatu? |  |
+| Která data se nesmí kopírovat do chatu? |  |
+| Jak se vytvoří a ukončí nouzový přístup? |  |
+| Jaká jedna změna sníží chaos při dalším incidentu? |  |
+
+Potom udělej jednu malou opravu: doplň náhradníka, přepiš alert do vrstvené podoby, vytvoř bezpečnou šablonu incidentní zprávy, nastav expiraci break-glass role, nebo ulož eskalační mapu tam, kde bude dostupná i mimo hlavní aplikaci. Pohotovost nemá být heroický sport. Má být nudně použitelný provozní návyk.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -34154,6 +34298,7 @@ Potom udělej jednu změnu: doplň do alertu rozbitou vrstvu, vytvoř eskalačn�
 
 ## Pracovní log
 
+- 2026-07-19: Doplněna příloha o provozní pohotovosti bez sdílení tajemství: kritické opravné schopnosti podle vrstev, eskalační mapa použitelná ve stresu, pravidla pro chudou incidentní komunikaci bez secrets a zákaznických payloadů, break-glass přístup s expirací, systémová oprava po incidentu, checklist a mini úkol; navázáno na dnešní zjištění expirovaného TLS certifikátu a nedostupného opravného přístupu.
 - 2026-07-19: Znovu ověřen výpadek `cody.dreamind.cz`: běžný `curl` přes lokální proxy končil jako `000`, přímý veřejný TLS handshake potvrdil expirovaný certifikát s `notAfter` 2026-07-17 19:35:56 GMT a SSH opravný přístup z běhu není dostupný; doplněna příloha o neopravitelném produkčním nálezu bez tajemného ticha: rozlišení diagnózy, opravy a vlastnictví, bezpečná eskalační šablona, omezení nouzových přístupů, dopadové třídění, checklist a mini úkol.
 - 2026-07-19: Doplněna příloha o pozorované obnově certifikátů bez slepé víry v automat: rozdělení obnovy na renewal, reload TLS služby a veřejné ověření, sledování posledního úspěšného běhu vedle expirace, runbook pro reload a smoke test, akční alerty podle rozbité vrstvy, úzká oprávnění automatu, měsíční kontrola, checklist a mini úkol; navázáno na ověřené zdroje Let's Encrypt, Certbot a curl i dnešní diagnostiku expirovaného veřejného TLS certifikátu.
 - 2026-07-19: Doplněna příloha o incidentním deníku bez datového skladiště: rozdíl mezi chatem a deníkem, rozlišení pozorování/interpretace/zásahu, minimální šablona první hodiny, privacy-first pravidla pro logy a screenshoty, předání incidentu, úklid finálního záznamu, checklist a mini úkol; ověřeny a doplněny zdroje Google SRE k incident managementu a NIST SP 800-61 Rev. 3 k incident response.
