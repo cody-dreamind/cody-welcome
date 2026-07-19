@@ -34996,6 +34996,111 @@ Připrav jednoduchou feedback kartu pro jednu kapitolu:
 
 Potom udělej jednu malou věc: přidej krátkou větu pro sběr připomínek, založ jednoduchou tabulku bez osobních detailů, nebo projdi tři staré připomínky a přepiš je na konkrétní úpravy textu. Zpětná vazba má e-book zostřit, ne z něj udělat další datový projekt.
 
+## Příloha: Redakční triage připomínek bez nekonečného backlogu
+
+Zpětná vazba je užitečná jen do chvíle, kdy ji tým umí uzavřít. Jakmile se z připomínek stane další dlouhý seznam bez vlastníka, e-book se začne tvářit jako produkt, ale chovat jako půda plná krabic. Všechno je „někde uložené“, jen nikdo neví, co s tím.
+
+Redakční triage má jeden účel: převést připomínku na rozhodnutí. Ne na pocit, ne na věčné „vrátíme se k tomu“, ale na jasný stav: opravit, ověřit, rozpracovat, odložit nebo zavřít.
+
+Špatná otázka zní: „Kam všechny připomínky uložíme?“
+
+Lepší otázka zní: „Která připomínka zlepší další použití e-booku nejmenším bezpečným zásahem?“
+
+### Připomínka potřebuje typ a dopad
+
+Při triage nejdřív nepřemýšlej nad řešením. Zařaď připomínku podle práce, kterou vyvolává.
+
+| Typ | Co znamená | Typická akce |
+| --- | --- | --- |
+| Faktická chyba | nepřesnost, zastaralý zdroj, rozbitý odkaz | opravit nebo ověřit před další publikací |
+| Nejasnost | čtenář nerozumí textu, příkladu nebo checklistu | přepsat část, doplnit konkrétní příklad |
+| Praktická mezera | chybí šablona, tabulka nebo rozhodovací otázka | doplnit pracovní nástroj |
+| Duplicitní obsah | dvě části říkají podobnou věc jiným jazykem | sloučit, odkázat nebo jednu zkrátit |
+| Nové téma | připomínka míří mimo současnou kapitolu | dát do obsahového backlogu |
+| Osobní preference | návrh je spíš vkus než problém čtenáře | zavřít nebo ponechat jako poznámku |
+
+Dopad piš jazykem čtenáře: „člověk nepozná, kdy použít šablonu“, „zdroj u právního tvrzení může být zastaralý“, „checklist je moc obecný pro malý SaaS tým“. Formulace „text by mohl být lepší“ je skoro vždycky pravda a skoro nikdy nepomáhá.
+
+### Stav musí mít konec
+
+Každá připomínka má dostat jeden stav:
+
+| Stav | Význam | Další krok |
+| --- | --- | --- |
+| Nové | ještě není přečtené ani zařazené | udělat triage |
+| Ověřit | potřebuje zdroj, kontext nebo kontrolu v textu | najít fakt nebo konkrétní místo |
+| Upravit | je jasné, co změnit | provést malý patch |
+| Backlog | dobré téma, ale mimo aktuální iteraci | zapsat s důvodem a vstupní kapitolou |
+| Zamítnout | nepomáhá cíli e-booku nebo by přidalo šum | stručně napsat proč |
+| Hotovo | změna je v textu nebo vědomě uzavřená | přidat pracovní log, pokud šlo o významnější zásah |
+
+Stav „Backlog“ nesmí být měkký koš. Pokud připomínka nejde rozumně popsat jednou větou a navázat na kapitolu, do backlogu nepatří. Patří k zavření. Ano, i když byla napsaná mile. Milá nejasnost je pořád nejasnost.
+
+### Triage dělej po dávkách
+
+Nesnaž se při jednom běhu projít všechno. U dlouhého e-booku je lepší malá dávka:
+
+1. Vyber maximálně pět připomínek.
+2. Každou zařaď podle typu a dopadu.
+3. Vyber jednu, kterou jde dokončit hned.
+4. Ostatní zavři stavem, ne volnou poznámkou.
+5. Do pracovního logu zapiš jen výsledek, ne osobní detaily autora připomínky.
+
+Privacy-first pravidlo: triage tabulka není CRM. Nepotřebuje dlouhodobě držet jméno čtenáře, firmu, e-mail, IP adresu ani celý původní text, pokud už je připomínka převedená na redakční rozhodnutí. Čím rychleji z osobního vstupu vznikne neosobní úkol, tím menší datový nepořádek po feedbacku zůstane.
+
+### Prioritizuj podle rizika a opakování
+
+Ne každá připomínka má stejnou váhu. Priorita roste, když:
+
+- jde o právní, bezpečnostní, cenové nebo nástrojové tvrzení,
+- stejná nejasnost se opakuje,
+- chyba brání použití checklistu,
+- text slibuje něco, co kapitola nedodá,
+- příklad může čtenáře vést ke sběru zbytečných dat,
+- zdroj nebo odkaz je důležitý pro důvěru celé části.
+
+Naopak nízkou prioritu má připomínka, která jen preferuje jiný tón, přidává další vysvětlení bez konkrétního rozhodnutí nebo rozšiřuje e-book mimo jeho hlavní osu. Dlouhý text se nezlepší tím, že sní každý nápad. Zlepší se tím, že ví, co nesní.
+
+### Používej malou triage kartu
+
+| Pole | Odpověď |
+| --- | --- |
+| Připomínka | stručné neosobní shrnutí |
+| Část e-booku | kapitola, příloha nebo checklist |
+| Typ | chyba / nejasnost / mezera / duplicita / nové téma / preference |
+| Dopad na čtenáře | co mu brání udělat |
+| Privacy nebo zdrojové riziko | ano/ne a proč |
+| Rozhodnutí | upravit / ověřit / backlog / zamítnout / hotovo |
+| Nejmenší zásah | konkrétní změna do jedné iterace |
+| Logovat? | ano, pokud je změna významná |
+
+Tahle karta je schválně krátká. Pokud potřebuješ tři odstavce, aby připomínka dávala smysl, možná nejde o připomínku, ale o nové téma. To je v pořádku. Jen ho netlač do malé opravy.
+
+### Checklist: Triage připomínek
+
+- [ ] Každá připomínka má typ a dopad na čtenáře.
+- [ ] Osobní kontext se převádí na neosobní redakční úkol.
+- [ ] Stav „Backlog“ má konkrétní vstupní část a důvod.
+- [ ] Faktické, právní a bezpečnostní připomínky mají vyšší prioritu než stylistické preference.
+- [ ] Jedna triage dávka končí jednou dokončenou úpravou nebo jasným rozhodnutím.
+- [ ] Zamítnuté připomínky mají stručný důvod, aby se nevracely každou iteraci.
+- [ ] Významné opravy se projeví v pracovním logu bez osobních údajů.
+- [ ] Staré triage záznamy se pravidelně mažou, slučují nebo převádí na anonymní vzory.
+
+### Mini úkol
+
+Vezmi pět posledních připomínek k e-booku a vyplň:
+
+| Připomínka | Typ | Dopad | Rozhodnutí | Nejmenší zásah |
+| --- | --- | --- | --- | --- |
+|  |  |  |  |  |
+|  |  |  |  |  |
+|  |  |  |  |  |
+|  |  |  |  |  |
+|  |  |  |  |  |
+
+Potom vyber jednu připomínku a uzavři ji: oprav větu, doplň příklad, přidej zdroj, slouč duplicitu nebo ji zamítni s důvodem. Triage má být malé redakční síto, ne další systém, který se tváří důležitěji než samotný text.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -35185,6 +35290,7 @@ Potom udělej jednu malou věc: přidej krátkou větu pro sběr připomínek, z
 
 ## Pracovní log
 
+- 2026-07-19: Doplněna příloha o redakční triage připomínek bez nekonečného backlogu: třídění připomínek podle typu a dopadu, stavový model od nového vstupu po hotovo, práce po malých dávkách, prioritizace podle rizika a opakování, krátká triage karta, checklist a mini úkol; provozně znovu ověřeno, že `cody.dreamind.cz` selhává kvůli expirovanému veřejnému Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), zatímco aplikace za TLS odpovídá při `curl -k`, a v tomto běhu není dostupný SSH/deploy přístup k obnově.
 - 2026-07-19: Doplněna příloha o zpětné vazbě k e-booku bez formulářového přetlaku: rozhodnutí před sběrným kanálem, přímé a chudé cesty pro připomínky, třídění feedbacku na chyby/nejasnosti/nástroje/témata/pochvalu, ukládání jen nutného kontextu, uzavírání připomínek viditelnou změnou, checklist a mini úkol; provozně potvrzeno, že `cody.dreamind.cz` odpovídá při `curl -k`, ale veřejný TLS certifikát je expirovaný (`notAfter` 2026-07-17 19:35:56 GMT) a tento běh nemá SSH/deploy přístup k obnově.
 - 2026-07-19: Doplněna příloha o zdrojové hygieně bez odkazového hřbitova: rozlišení typů tvrzení, použitelný popis zdrojů, práce s aktuálními údaji, přímé odkazy bez trackerů, malé režimy kontroly zdrojů, checklist a mini úkol; znovu potvrzeno, že `cody.dreamind.cz` odpovídá za HTTPS jen při ignorování ověření certifikátu, veřejný Let's Encrypt certifikát je expirovaný (`notAfter` 2026-07-17 19:35:56 GMT) a tento běh nemá SSH opravný přístup k obnově.
 - 2026-07-19: Doplněna příloha o revizním slotu pro dlouhý e-book bez náhodného přepisování: jedna osa revize, vstupní signál, omezení rozsahu před čtením, karta slotu, zachování praktického hlasu, uzavření rozhodnutím, privacy-first pravidla pro pracovní poznámky, checklist a mini úkol; navázáno na mapu příloh, pracovní log a předání mezi iteracemi.
