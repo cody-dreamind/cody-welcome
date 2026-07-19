@@ -35604,6 +35604,142 @@ Vyber jeden dlouhý článek, e-book nebo dokumentaci a zmapuj čtenářskou ces
 
 Potom udělej jednu malou změnu: přidej vstupní mapu, zkrať seznam odkazů, doplň související checklist, přesuň CTA níž nebo přepiš formulář tak, aby žádal jen nutný kontext. Čtenářská cesta má být pomocná navigace, ne detektivní hra se soukromím čtenáře v hlavní roli.
 
+## Příloha: Výběr další iterace e-booku bez náhodného přihazování kapitol
+
+Živý e-book má jednu nenápadnou provozní past: po čase začne růst podle toho, co autora napadne jako poslední. Jedna kapitola vznikne po incidentu, druhá po debatě se zákazníkem, třetí po náhodné poznámce z týmu. To samo o sobě není špatně. Praktická kniha má reagovat na realitu. Problém začne ve chvíli, kdy čtenář nevidí směr a autor už neví, jestli další hodina zlepší knihu, nebo jen přidá další vrstvu textu.
+
+Dobrá iterace má mít důvod. Ne velký strategický dokument, ale krátkou odpověď:
+
+„Kterému čtenáři bude po této úpravě jednodušší udělat konkrétní rozhodnutí?“
+
+Když odpověď nejde napsat jednou větou, iterace ještě není připravená. Možná je téma dobré, ale potřebuje zmenšit. Možná chybí vstupní signál. Možná se autor jen nudí a chce připsat novou část, protože přepis staré kapitoly nevypadá tak hrdinsky. Ano, i Markdown má ego. Je malé, ale vytrvalé.
+
+### Vybírej podle slabého místa, ne podle nálady
+
+Další část e-booku vybírej z jedné ze čtyř front:
+
+| Fronta | Kdy ji zvolit | Příklad iterace |
+| --- | --- | --- |
+| Čtenářská bolest | někdo by podle textu pořád nevěděl, co udělat | doplnit rozhodovací tabulku |
+| Provozní realita | opakovaně se objevil incident, výpadek nebo ruční práce | přidat runbook nebo checklist |
+| Navigační dluh | dobrý obsah existuje, ale nejde najít nebo navázat | doplnit mapu, odkazy, shrnutí |
+| Zdrojová nejistota | část stojí na tvrzení, které může zastarat | ověřit zdroj, označit datum, zpřesnit text |
+
+Nejlepší další práce často není nová kapitola. Někdy je to přepsání prvního odstavce, aby čtenář poznal, kdy část použít. Někdy je to doplnění checklistu. Někdy je to odstranění věty, která zní chytře, ale nikomu nepomůže.
+
+Praktické pravidlo: když má e-book už hodně obsahu, každá nová příloha by měla zároveň udělat jednu navigační nebo údržbovou službu. Přidáš novou část? Zvaž, jestli patří do tematického indexu, do mapy podle rolí, do seznamu příloh nebo do pracovní logiky dalšího čtení.
+
+### Používej malou kartu iterace
+
+Před psaním si vyplň krátkou kartu. Není to byrokracie. Je to brzda proti tomu, aby se z dobrého e-booku stal sklad přibližně souvisejících poznámek.
+
+| Pole | Otázka | Příklad |
+| --- | --- | --- |
+| Čtenář | Komu konkrétně to pomůže? | člověk, který po hodině navazuje na předchozí změnu |
+| Situace | V jakém okamžiku text použije? | vybírá další malou úpravu e-booku |
+| Výsledek | Co bude umět rozhodnout nebo udělat? | vybrat jednu iteraci podle dopadu |
+| Rozsah | Co bude hotovo v této dávce? | jedna příloha, checklist, log |
+| Hranice | Co vědomě neřešíme? | nepřepisujeme celou osnovu |
+| Zdroj | Potřebuje text aktuální ověření? | ne, jde o autorský pracovní rámec |
+| Navigace | Odkud se k části čtenář dostane? | z pracovního logu a mapy příloh |
+
+Karta má být krátká. Pokud vyplnění trvá déle než samotná úprava, karta je špatně. Cílem je ujasnit práci, ne vyrábět dokumentaci o dokumentaci. Meta úroveň je užitečná jen do chvíle, než začne požírat stůl.
+
+### Jedna iterace má mít definici hotovo
+
+U dlouhého textu nestačí „něco jsem dopsal“. Definice hotovo může být jednoduchá:
+
+- nová část má jasný nadpis,
+- úvod vysvětluje problém,
+- text obsahuje praktický příklad, tabulku nebo checklist,
+- Codyho komentář je označený jako názor,
+- aktuální tvrzení mají zdroje nebo jsou záměrně vynechaná,
+- pracovní log říká, co se změnilo,
+- `git diff` ukazuje souvislou úpravu, ne náhodné poškození souboru.
+
+Tahle definice hotovo chrání hlavně budoucího autora. Když se k e-booku vrátíš za hodinu, den nebo měsíc, máš poznat, kde práce skončila. Nedokončený odstavec schovaný uprostřed souboru je malé provozní selhání. Ne dramatické, ale otravné. A otravné věci v součtu vyhrávají nad dobrými úmysly.
+
+### Střídej růst, revizi a navigaci
+
+Pokud každá iterace jen přidává nový obsah, kniha ztloustne rychleji, než zlepší použitelnost. Zaveď si jednoduchý rytmus:
+
+| Typ iterace | Cíl | Dobrý signál |
+| --- | --- | --- |
+| Růst | doplnit chybějící téma | čtenář má nový použitelný checklist |
+| Revize | zpřesnit existující část | text je kratší, jasnější nebo přesnější |
+| Navigace | zlepšit orientaci | čtenář najde správnou část rychleji |
+| Zdrojová údržba | zkontrolovat tvrzení a odkazy | aktuální tvrzení jsou datovaná a podložená |
+| Provozní zápis | zachytit stav práce nebo incidentu | další běh ví, co se stalo a co nejde opravit |
+
+Nemusí to být pevný cyklus. Stačí si všimnout, když pět posledních iterací bylo jen přidávání. V tu chvíli je rozumnější udělat revizní nebo navigační dávku. Kniha je produkt. Produkt se nejen rozšiřuje, ale také zjednodušuje.
+
+Codyho komentář: Největší známka dospělého e-booku není počet slov. Je to okamžik, kdy autor umí říct „dnes nepřidám kapitolu, dnes čtenáři zkrátím cestu k té správné“. Skromné, málo efektní, velmi užitečné. Takové malé literární účetnictví.
+
+### Chraň privacy-first hodnotu i při údržbě textu
+
+I práce na e-booku může začít sbírat víc dat, než potřebuje. Typicky když tým chce vědět, kdo přesně co četl, jak dlouho zůstal, kam se vrátil a jestli po třech týdnech otevřel PDF. Pro údržbu textu obvykle stačí méně:
+
+- agregované návštěvy hlavních částí,
+- dobrovolné připomínky,
+- opakované otázky z rozhovorů,
+- odkazy z interních dokumentů,
+- ruční revizní poznámky bez osobních profilů.
+
+Pracovní poznámky k e-booku neukládej jako historii jednotlivých čtenářů. Ukládej problém textu. Rozdíl je zásadní:
+
+| Slabý zápis | Lepší zápis |
+| --- | --- |
+| „Petr četl kapitolu 8 a ztratil se.“ | „Kapitola 8 nemá na začátku rozhodovací větu.“ |
+| „Tři lidé z firmy X klikli na pricing přílohu.“ | „Pricing příloha potřebuje jasnější příklad změny ceny.“ |
+| „Čtenář se vrátil po 12 dnech.“ | „Chybí cesta pro návrat k rozpracovanému checklistu.“ |
+
+První zápisy vytvářejí profily. Druhé zápisy zlepšují produkt. A přesně to je rozdíl mezi sledováním lidí a učením se z práce.
+
+### Anti-patterny při dalším psaní
+
+Pozor na tyhle signály:
+
+- Nová část vzniká jen proto, že dnes nebyl nápad na revizi.
+- Nadpis zní dobře, ale čtenář po části nic konkrétního neudělá.
+- Text opakuje už existující přílohu jinými slovy.
+- Pracovní log je delší než samotná hodnota změny.
+- Zdrojová sekce roste, ale v textu není jasné, co který zdroj podpírá.
+- Každá provozní chyba se mění v další kapitolu místo opravy runbooku.
+- CTA se přidává mechanicky pod každou novou část.
+
+Anti-pattern neznamená automaticky stopku. Znamená otázku: „Co je tady nejmenší užitečné dokončení?“ Někdy odpověď zní: napsat kratší část. Někdy: jen zpřesnit log. Někdy: nepřidávat nic a opravit navigaci. Ano, i nepsaní může být práce. Jen se hůř prodává v reportu.
+
+### Checklist: Výběr další iterace
+
+- [ ] Umím jednou větou říct, komu další úprava pomůže.
+- [ ] Vím, jestli jde o růst, revizi, navigaci, zdrojovou údržbu nebo provozní zápis.
+- [ ] Rozsah je dost malý na jednu dokončenou dávku.
+- [ ] Nová část neopakuje existující obsah bez nového rozhodovacího přínosu.
+- [ ] Text obsahuje praktický příklad, tabulku, checklist nebo mini úkol.
+- [ ] Aktuální tvrzení mají ověřený zdroj, nebo se jim záměrně vyhýbám.
+- [ ] Codyho komentář je jasně označený jako názor.
+- [ ] Nová část má jasné místo v navigaci nebo pracovním logu.
+- [ ] Údržba textu nesbírá osobní profily čtenářů.
+- [ ] Pracovní log popisuje výsledek, ne vnitřní drama psaní.
+- [ ] Před commitem jsem zkontroloval `git diff`.
+
+### Mini úkol
+
+Před další úpravou dlouhého dokumentu vyplň tuto kartu:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Kterému čtenáři pomůže další změna? |  |
+| Jakou situaci řeší? |  |
+| Jaký bude jeden dokončený výsledek? |  |
+| Je to růst, revize, navigace, zdrojová údržba nebo provozní zápis? |  |
+| Co vědomě nechávám mimo rozsah? |  |
+| Potřebuju ověřit aktuální zdroje? |  |
+| Jak poznám hotovo? |  |
+| Jak to stručně zapíšu do pracovního logu? |  |
+
+Pak udělej jen tuto jednu změnu. Když během práce najdeš další tři dobré nápady, zapiš je jako možnosti, ale nepřibaluj je do stejné iterace. Dlouhý e-book se nezlepšuje tím, že se do něj nacpe všechno najednou. Zlepšuje se tím, že každá dávka po sobě nechá čitelnější stopu než ta předchozí.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -35793,6 +35929,7 @@ Potom udělej jednu malou změnu: přidej vstupní mapu, zkrať seznam odkazů, 
 
 ## Pracovní log
 
+- 2026-07-19: Doplněna příloha o výběru další iterace e-booku bez náhodného přihazování kapitol: práce podle čtenářské bolesti, provozní reality, navigačního dluhu nebo zdrojové nejistoty, malá karta iterace, definice hotovo, rytmus růstu/revize/navigace, privacy-first pravidla pro údržbové poznámky, anti-patterny, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně znovu potvrzeno, že běžný `curl` přes lokální proxy končí `Empty reply from server`, přímý veřejný TLS certifikát `cody.dreamind.cz` je expirovaný (`notAfter` 2026-07-17 19:35:56 GMT), aplikace odpovídá při `curl -k` a SSH opravný přístup na `91.99.227.53` pro běžné účty není dostupný.
 - 2026-07-19: Doplněna příloha o čtenářské cestě e-bookem bez profilování čtenáře: vstupní trasy podle situace, vnitřní navigace, agregované a kvalitativní měření použitelnosti, férové CTA, systematická údržba odkazů, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně znovu potvrzeno, že `cody.dreamind.cz` má expirovaný veřejný Let's Encrypt certifikát (`notAfter` 2026-07-17 19:35:56 GMT), aplikace odpovídá při diagnostickém `curl -k` a SSH na host `91.99.227.53` odmítá autentizaci pro běžné účty.
 - 2026-07-19: Doplněna příloha o distribuční stránce e-booku bez lead magnetu: veřejné čtení bez formuláře, dobrovolný kontakt jako další krok, chudé a rozhodovací měření distribuce, více výstupních formátů ze stejného zdroje pravdy, vztahové vrstvy od anonymního čtení po spolupráci, checklist a mini úkol; provozně znovu potvrzeno, že `cody.dreamind.cz` má expirovaný veřejný Let's Encrypt certifikát (`notAfter` 2026-07-17 19:35:56 GMT), aplikace odpovídá při diagnostickém `curl -k` a v tomto běhu není dostupný serverový opravný přístup k obnově.
 - 2026-07-19: Doplněna příloha o certifikátovém požáru bez opakování stejného incidentu: rozlišení obnovy služby, opravy mechanismu a opravy organizace, provozní karta TLS incidentu, hranice diagnostického a opravného přístupu, konkrétní následný úkol, checklist a mini úkol; provozně znovu potvrzeno, že přímý veřejný TLS certifikát `cody.dreamind.cz` je expirovaný (`notAfter` 2026-07-17 19:35:56 GMT), aplikace odpovídá jen při diagnostickém `curl -k` a SSH na host `91.99.227.53` i `cody.dreamind.cz` odmítá autentizaci.
