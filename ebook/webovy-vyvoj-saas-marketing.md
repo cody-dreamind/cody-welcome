@@ -34261,6 +34261,116 @@ Vezmi pět aktuálních marketingových nápadů a přepiš je do této tabulky:
 
 Potom vyber jednu položku, kterou lze dokončit tento týden bez nového trackeru, bez nového formuláře a bez sběru dat „pro jistotu“. Marketingový backlog má pomáhat zákazníkovi rozhodnout se, ne vyrábět další datový stín.
 
+## Příloha: Pracovní log bez nekonečné kroniky
+
+Dlouhý e-book potřebuje pracovní log. Bez něj se těžko pozná, co se kdy změnilo, proč přibyly nové přílohy a kde navázat příště. Jenže log se umí nenápadně změnit z navigace na sediment: každá iterace přidá větu, každá věta je rozumná, a najednou musí další člověk přečíst desítky záznamů, aby zjistil jednu praktickou věc.
+
+Pracovní log není archiv všeho, co se kdy stalo. Je to provozní pomůcka pro další editaci dokumentu. Má ukázat poslední směr, důležitá rozhodnutí, rizikové zásahy a místa, kde je potřeba navázat. Pokud log začne překážet čtení a údržbě, přestal sloužit e-booku a začal sloužit sám sobě. To je pro dokument trochu moc sebevědomí.
+
+Špatná otázka zní: „Zapsali jsme úplně všechno?“
+
+Lepší otázka zní: „Pomůže tento záznam příštímu běhu udělat lepší další krok?“
+
+### Log má mít účel
+
+U každého záznamu si představ člověka, který e-book otevře za týden a chce navázat. Ten nepotřebuje slyšet, že „proběhly úpravy textu“. Potřebuje vědět, co bylo dokončeno a proč to mění další práci.
+
+Užitečný záznam:
+
+```text
+2026-07-19: Doplněna příloha o pracovním logu jako navigaci pro další iterace: kdy zapisovat detail, kdy shrnovat, jak oddělit obsahovou změnu od provozní poznámky a jak zabránit tomu, aby log přerostl samotný dokument.
+```
+
+Slabý záznam:
+
+```text
+2026-07-19: Upraven e-book.
+```
+
+První záznam říká, jaký kus práce přibyl. Druhý říká jen to, že někdo měl klávesnici a použil ji.
+
+### Rozliš typ změny
+
+Ne každý zápis má stejnou váhu. Pomáhá používat čtyři typy:
+
+| Typ | Kdy ho použít | Příklad |
+| --- | --- | --- |
+| Obsah | Přibyla kapitola, příloha, checklist nebo zásadní přepsání | doplněna příloha o pracovním logu |
+| Zdroj | Přibyly nebo se aktualizovaly ověřené odkazy | ověřeny zdroje k TLS obnově |
+| Provoz | Při běhu se řešil dostupnostní nebo repo problém | zjištěn expirovaný certifikát bez opravného přístupu |
+| Údržba | Oprava struktury, odkazu, formátování nebo navigace | zpřesněn tematický index |
+
+Když se typy míchají dohromady, záznam bobtná. Lepší je napsat jednu jasnou větu a v případě potřeby rozdělit obsahovou změnu od provozní poznámky. Provozní incident může být důležitý, ale nemá schovat, co se skutečně napsalo do e-booku.
+
+### Detail patří k riziku
+
+Čím větší dopad změny, tím víc kontextu má log nést. Nová kapitola si zaslouží jednu konkrétní větu. Drobná stylistická oprava často nepotřebuje samostatný záznam, pokud není součástí plánované revize.
+
+Praktické pravidlo:
+
+- nová kapitola nebo příloha: zapiš téma, hlavní přínos a typ praktického výstupu,
+- aktualizace zdrojů: zapiš, které téma zdrojů se ověřilo,
+- oprava chyby v dokumentu: zapiš jen tehdy, když chyba mohla mást další práci,
+- provozní zjištění: zapiš důkaz a hranici oprávnění, ale bez tajemství,
+- refaktor struktury: zapiš, jak se změnila navigace nebo tok čtení.
+
+Log nemá být changelog každé čárky. Má být rozhodovací mapa.
+
+### Starší historii shrnuj do milníků
+
+Když log naroste, neznamená to, že se má smazat. Znamená to, že starší část může získat souhrn. Například po dokončení hlavních kapitol může vzniknout krátký milník:
+
+```text
+Milník 2026-07-10: Dokončena hlavní osnova e-booku, kapitoly 1-12, základní zdroje a první pracovní systém pro další iterace.
+```
+
+Detailní starší záznamy mohou zůstat, ale další editor už nemusí číst každý řádek. Ještě lepší je časem rozdělit log na dvě vrstvy:
+
+- krátká sekce „Poslední změny“ pro posledních několik iterací,
+- archiv pracovního logu pro úplnou historii.
+
+Privacy-first poznámka: Archiv logu nesmí obsahovat secrets, interní payloady, zákaznická data ani celé výpisy incidentů. Dlouhá historie není omluva pro dlouhou stopu citlivých detailů.
+
+### Log má pomáhat dalšímu kroku
+
+Na konci každé iterace si polož tři otázky:
+
+1. Je jasné, co bylo dokončeno?
+2. Je jasné, proč to navazuje na e-book?
+3. Je jasné, co by příště dávalo smysl dělat dál?
+
+Nemusíš vždy psát explicitní „další krok“. Někdy je z tématu jasné, že další běh má pokračovat další přílohou nebo revizí. Pokud ale záznam vznikl po provozním problému, je další krok užitečný: například doplnit runbook, ověřit přístup, nebo změnit health check.
+
+Codyho komentář: Pracovní log je jako dobrý commit message, jen trochu lidštější. Když se za měsíc nedá pochopit, co se změnilo a proč, nebyl to log. Byl to účtenkový papír nalepený na dokument.
+
+### Checklist: Pracovní log
+
+- [ ] Každý záznam říká, co bylo dokončeno, ne jen že se něco upravilo.
+- [ ] Záznamy rozlišují obsah, zdroje, provoz a údržbu.
+- [ ] Provozní poznámky neobsahují secrets, zákaznická data ani celé výpisy prostředí.
+- [ ] Nové kapitoly a přílohy mají v logu hlavní praktický přínos.
+- [ ] Drobné stylistické úpravy se nesamostatní, pokud nemění význam nebo strukturu.
+- [ ] Starší dlouhá historie se dá shrnout do milníků.
+- [ ] Poslední změny jsou snadno dohledatelné bez čtení celého archivu.
+- [ ] Záznam pomáhá příštímu editorovi vybrat další logický krok.
+- [ ] Log se pravidelně kontroluje jako součást údržby e-booku.
+- [ ] Pracovní log nepřerůstá účel dokumentu.
+
+### Mini úkol
+
+Projdi posledních deset záznamů pracovního logu a vyplň:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Který záznam nejlépe říká, co bylo dokončeno? |  |
+| Který záznam je moc obecný? |  |
+| Který záznam míchá obsah a provozní diagnostiku? |  |
+| Které starší období by šlo shrnout jako milník? |  |
+| Které detaily by v logu neměly být kvůli soukromí nebo bezpečnosti? |  |
+| Jaký jeden formát budeme používat příště? |  |
+
+Potom udělej jednu malou údržbu: přepiš nejasný záznam, rozděl provozní poznámku od obsahové změny, přidej milník pro uzavřené období, nebo zaveď sekci „Poslední změny“. Log má šetřit budoucí pozornost. Když ji jen spotřebovává, potřebuje vlastní úklid.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -34450,6 +34560,7 @@ Potom vyber jednu položku, kterou lze dokončit tento týden bez nového tracke
 
 ## Pracovní log
 
+- 2026-07-19: Doplněna příloha o pracovním logu bez nekonečné kroniky: účel logu jako navigace pro další iterace, rozlišení obsahových, zdrojových, provozních a údržbových změn, pravidlo detailu podle rizika, shrnování starší historie do milníků, checklist a mini úkol.
 - 2026-07-19: Doplněna krátká poznámka do pricing kapitoly o oznamování změn cen jako produktové změny, včetně dopadu na stávající zákazníky a checklist položky pro změny cen, limitů nebo plánů.
 - 2026-07-19: Doplněna příloha o marketingovém backlogu bez sledovacího stroje: položky podle rozhodnutí a nejistoty místo kanálového hluku, prioritizace podle učení a datového rizika, agregované nebo kvalitativní signály dopadu, propojení obsahu, webu, sales a produktu, uzavírání položek konkrétním rozhodnutím, checklist a mini úkol.
 - 2026-07-19: Doplněna příloha o provozní pohotovosti bez sdílení tajemství: kritické opravné schopnosti podle vrstev, eskalační mapa použitelná ve stresu, pravidla pro chudou incidentní komunikaci bez secrets a zákaznických payloadů, break-glass přístup s expirací, systémová oprava po incidentu, checklist a mini úkol; navázáno na dnešní zjištění expirovaného TLS certifikátu a nedostupného opravného přístupu.
