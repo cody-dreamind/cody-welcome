@@ -33832,6 +33832,139 @@ Vyber jednu produkční doménu a vyplň pozorovací kartu:
 
 Potom udělej jednu malou změnu: přidej veřejný TLS check, doplň poslední úspěšný dry-run do provozní karty, zkrať oprávnění renewal tokenu, přidej reload hook, nebo uprav alert tak, aby ukázal konkrétní rozbitou vrstvu. Automatická obnova má být jako dobrý úklid: nejlepší je, když se o ní nemluví, protože prokazatelně proběhla.
 
+## Příloha: Neopravitelný produkční nález bez tajemného ticha
+
+Někdy agent, monitoring nebo člověk ve službě problém přesně diagnostikuje, ale nemá oprávnění ho opravit. To není selhání samo o sobě. Selhání začne ve chvíli, kdy se z toho stane mlha: někdo ví, že produkce má problém, ale nikdo neví, kdo drží další krok, jaký je důkaz, co se nesmí sdílet a kdy má přijít další aktualizace.
+
+Privacy-first provoz nechce univerzální klíč pro každého asistenta ani panické kopírování tajemství do chatu. Chce krátkou a pravdivou eskalaci: co je rozbité, jaký je dopad, co už bylo ověřeno, proč to aktuální role nemůže opravit a jaký minimální opravný přístup nebo člověk je potřeba.
+
+Špatná otázka zní: „Proč to agent prostě neopraví?“
+
+Lepší otázka zní: „Jaký nejmenší další krok bezpečně posune obnovu, aniž bychom rozšířili přístupy víc, než je nutné?“
+
+### Rozliš diagnózu, opravu a vlastnictví
+
+U každého produkčního nálezu si odděl tři věci:
+
+- Diagnóza: co bylo pozorováno a jakým testem.
+- Oprava: jaká změna by pravděpodobně obnovila službu.
+- Vlastnictví: kdo má oprávnění a odpovědnost opravu provést nebo schválit.
+
+Příklad u expirovaného TLS certifikátu:
+
+| Vrstva | Stav | Co z toho plyne |
+| --- | --- | --- |
+| DNS | doména míří na očekávanou veřejnou IP | problém není primárně v DNS |
+| TCP | port 443 odpovídá | server nebo edge vrstva je dosažitelná |
+| TLS | certifikát je po `notAfter` | veřejná důvěra HTTPS selhala |
+| HTTP | netestováno přes důvěryhodné TLS | nemá smysl tvrdit, že web je zdravý |
+| Opravný přístup | aktuální role nemá přístup k certbot/nginx/hostingu | nutná eskalace na vlastníka TLS vrstvy |
+
+Taková tabulka je užitečnější než dlouhý výpis konzole. Ukazuje rozbitou vrstvu i hranici oprávnění. Neobsahuje privátní klíče, tokeny, zákaznická data ani plné prostředí.
+
+### Eskalace má být krátká a akční
+
+Když problém neumíš opravit sám, pošli vlastníkovi jednu zprávu, která nevyžaduje detektivní práci. Nemá to být román, ale ani „web nejde“. Praktická šablona:
+
+```text
+Produkční nález: [doména/služba]
+Dopad: [co vidí uživatel nebo systém]
+Důkaz: [nejkratší bezpečný důkaz]
+Ověřeno: [DNS/TCP/TLS/HTTP/obsah]
+Neúspěšné nebo nedostupné: [např. SSH bez oprávnění, hosting bez přístupu]
+Potřebný další krok: [konkrétní akce a vlastník]
+Další kontrola: [čas]
+```
+
+Příklad:
+
+```text
+Produkční nález: cody.dreamind.cz
+Dopad: veřejné HTTPS ověření selhává kvůli expirovanému certifikátu
+Důkaz: veřejný certifikát má notAfter 2026-07-17 19:35:56 GMT
+Ověřeno: DNS míří na veřejnou IP, TCP 443 odpovídá, TLS certifikát je expirovaný
+Nedostupné: aktuální běh nemá SSH/opravný přístup k TLS hostu
+Potřebný další krok: vlastník hostingu obnoví certifikát a reloadne TLS službu
+Další kontrola: po potvrzení opravy ověřit veřejný TLS handshake bez výjimky
+```
+
+Všimni si dvou věcí: zpráva je konkrétní a zároveň chudá na data. Neobsahuje token, výpis proměnných prostředí, privátní klíč, interní logy ani zbytečné detaily infrastruktury. Říká dost pro opravu, ne dost pro budoucí bezpečnostní bolest hlavy.
+
+### Nevyplňuj mezeru v přístupech chaosem
+
+Když chybí opravný přístup, pokušení je velké: rychle si poslat heslo, přidat široký SSH klíč, otevřít panel všem, nebo dočasně vypnout ověřování, „jen ať to běží“. Právě incident je ale okamžik, kdy se do systému snadno dostane dlouhodobě nebezpečná výjimka.
+
+Bezpečnější postup:
+
+1. Ověř, že problém je opravdu v opravované vrstvě.
+2. Sepiš minimální opravnou schopnost: například obnovit certifikát a reloadnout nginx pro jednu doménu.
+3. Použij existující break-glass postup, pokud existuje.
+4. Pokud musí vzniknout nový přístup, nastav mu účel, rozsah, vlastníka a expiraci.
+5. Po opravě přístup odeber nebo vrať do běžného režimu.
+6. Zapiš úkol na trvalé řešení, aby se stejná nouzová výjimka nestala novým standardem.
+
+Nouzový přístup bez konce je jen budoucí incident s lepším maskováním.
+
+### Kdy stačí informovat a kdy zastavit práci
+
+Ne každý nález vyžaduje okamžité přerušení všeho. Rozliš dopad:
+
+| Dopad | Reakce |
+| --- | --- |
+| Veřejný web je nedůvěryhodný nebo nedostupný | okamžitá eskalace vlastníkovi provozu |
+| Nefunguje část bez obchodního dopadu | ticket s vlastníkem a termínem |
+| Monitoring dává nejasný signál | doplnit diagnostiku, ne restartovat naslepo |
+| Chybí opravný přístup pro kritickou službu | eskalace plus úkol na provozní schopnost |
+| Jde o kosmetický problém bez rizika | backlog, žádná krizová komunikace |
+
+U kritických nálezů má být zpráva rychlá. U méně kritických má být přesná. U všech má být jasné, co se stane dál.
+
+### Po obnově zavři přístupovou mezeru
+
+Jakmile je služba obnovená, neuzavírej incident jen větou „už to jede“. U neřešitelného nálezu je důležitá otázka: proč oprava nebyla dostupná roli, která problém našla?
+
+Možné závěry:
+
+- monitoring má jen informovat, ne opravovat; stačí lepší eskalace,
+- agent má mít omezený diagnostický přístup, ale ne produkční změny,
+- pro konkrétní vrstvu chybí opravná role,
+- runbook existuje, ale není dostupný v incidentu,
+- automatická obnova selhala a nikdo nesledoval poslední úspěch,
+- veřejný health check se díval na špatnou vrstvu.
+
+Každý závěr převeď na jednu konkrétní změnu. Ne pět velkých slibů, jednu hotovou opravu systému.
+
+### Checklist: Neopravitelný nález
+
+- [ ] Nález rozlišuje pozorování, interpretaci a navrženou opravu.
+- [ ] Je jasné, která vrstva selhala: DNS, TCP, TLS, HTTP, obsah, aplikace nebo data.
+- [ ] Důkaz je krátký, bezpečný a bez tajemství.
+- [ ] Je zapsáno, proč aktuální role nemůže problém opravit.
+- [ ] Existuje konkrétní vlastník dalšího kroku.
+- [ ] Eskalace obsahuje dopad, důkaz, ověřené vrstvy a potřebnou akci.
+- [ ] Nouzový přístup má účel, rozsah, vlastníka a expiraci.
+- [ ] Po obnově se přístupová výjimka uklidí.
+- [ ] Incidentní záznam neobsahuje secrets, zákaznické payloady ani celé výpisy prostředí.
+- [ ] Z incidentu vznikne jedna systémová oprava, ne jen povzdech.
+
+### Mini úkol
+
+Vezmi poslední produkční problém, který někdo diagnostikoval, ale neuměl opravit, a vyplň kartu:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Co bylo pozorováno? |  |
+| Jaká vrstva selhala? |  |
+| Jaký byl bezpečný důkaz? |  |
+| Jaký byl uživatelský dopad? |  |
+| Jaká oprava byla pravděpodobně potřeba? |  |
+| Proč ji aktuální role nemohla provést? |  |
+| Kdo měl držet další krok? |  |
+| Jaký přístup by stačil příště místo univerzálního klíče? |  |
+| Co se má po opravě uklidit? |  |
+
+Potom udělej jednu změnu: doplň do alertu rozbitou vrstvu, vytvoř eskalační šablonu, urč vlastníka opravného přístupu, nastav expiraci break-glass role, nebo přidej do runbooku větu „kdy přestat diagnostikovat a eskalovat“. Neopravitelný nález nemá skončit tichem. Má skončit bezpečným předáním.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -34021,6 +34154,7 @@ Potom udělej jednu malou změnu: přidej veřejný TLS check, doplň poslední 
 
 ## Pracovní log
 
+- 2026-07-19: Znovu ověřen výpadek `cody.dreamind.cz`: běžný `curl` přes lokální proxy končil jako `000`, přímý veřejný TLS handshake potvrdil expirovaný certifikát s `notAfter` 2026-07-17 19:35:56 GMT a SSH opravný přístup z běhu není dostupný; doplněna příloha o neopravitelném produkčním nálezu bez tajemného ticha: rozlišení diagnózy, opravy a vlastnictví, bezpečná eskalační šablona, omezení nouzových přístupů, dopadové třídění, checklist a mini úkol.
 - 2026-07-19: Doplněna příloha o pozorované obnově certifikátů bez slepé víry v automat: rozdělení obnovy na renewal, reload TLS služby a veřejné ověření, sledování posledního úspěšného běhu vedle expirace, runbook pro reload a smoke test, akční alerty podle rozbité vrstvy, úzká oprávnění automatu, měsíční kontrola, checklist a mini úkol; navázáno na ověřené zdroje Let's Encrypt, Certbot a curl i dnešní diagnostiku expirovaného veřejného TLS certifikátu.
 - 2026-07-19: Doplněna příloha o incidentním deníku bez datového skladiště: rozdíl mezi chatem a deníkem, rozlišení pozorování/interpretace/zásahu, minimální šablona první hodiny, privacy-first pravidla pro logy a screenshoty, předání incidentu, úklid finálního záznamu, checklist a mini úkol; ověřeny a doplněny zdroje Google SRE k incident managementu a NIST SP 800-61 Rev. 3 k incident response.
 - 2026-07-18: Doplněna příloha o SSH opravném přístupu bez slepého host key promptu: karta produkčního hostu, ověření host key mimo incident, bezpečné první připojení, omezené opravné role pro TLS/proxy/backend zásahy, rozdělení diagnostiky a produkčního zásahu v runbooku, checklist a mini úkol; ověřeny a doplněny zdroje OpenBSD man pages k `ssh_config` a `ssh-keygen` a RFC 4255 k SSHFP.
