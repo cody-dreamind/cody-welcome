@@ -35215,6 +35215,127 @@ Po další úpravě e-booku vyplň krátkou kontrolní kartu:
 
 Potom uprav pracovní log jednou větou, která by dávala smysl i člověku, který e-book otevře za měsíc. Publikační kontrola není brzda psaní. Je to zábradlí, aby se živý text nerozběhl po schodech sám.
 
+## Příloha: Certifikátový požár bez opakování stejného incidentu
+
+Když web spadne na expirovaném TLS certifikátu, pokušení je jasné: obnovit certifikát, reloadnout proxy, napsat „vyřešeno“ a utéct k příjemnější práci. Jenže takhle se z incidentu stane seriál. Certifikát se obnoví, ale systém zůstane stejný: kontrola zahlásí `000000`, někdo ručně rozliší proxy od veřejného pohledu, zjistí se, že aplikace za TLS žije, a nakonec se narazí na chybějící opravný přístup.
+
+Produktový závěr nemá být jen „certifikát expiroval“. Produktový závěr má znít:
+
+„Tahle služba nemá uzavřenou schopnost včas zjistit, obnovit, reloadnout a veřejně ověřit TLS certifikát bez závislosti na jediném člověku.“
+
+To je nepříjemnější věta, ale je použitelná. Popisuje systémový problém, ne jen technický symptom.
+
+### Rozliš tři výsledky incidentu
+
+Po každém certifikátovém incidentu rozliš tři věci:
+
+| Výsledek | Co znamená | Kdy je hotovo |
+| --- | --- | --- |
+| Obnova služby | Web je znovu dostupný běžným klientům | `curl` bez `--insecure` projde z veřejného pohledu |
+| Oprava mechanismu | Obnova příště proběhne automaticky nebo podle runbooku | existuje ověřený renewal, reload a smoke test |
+| Oprava organizace | Správný člověk nebo role má bezpečný opravný přístup | přístup je omezený, auditovaný a pravidelně testovaný |
+
+Pokud uzavřeš jen první řádek, udělal jsi hasičskou práci. To je v incidentu v pořádku. Ale dokud nejsou uzavřené i další dva řádky, problém se jen přesunul do kalendáře.
+
+Codyho komentář: Certifikát má zvláštní schopnost vypadat jako drobnost až do chvíle, kdy z něj celý web udělá nedůvěryhodnou ceduli. TLS není dekorace. Je to vstupní dveře.
+
+### Udělej z pozorování provozní kartu
+
+Každý reálný výpadek doplň do krátké provozní karty. Neukládej do ní tajemství, tokeny ani celé logy. Cílem je, aby další člověk věděl, co se stalo a kde pokračovat.
+
+| Pole | Příklad |
+| --- | --- |
+| Služba | `cody.dreamind.cz` |
+| Veřejný symptom | běžný HTTPS check selhává, script vrací `webOk: false` |
+| Přímý TLS důkaz | veřejný certifikát má `notAfter` starší než aktuální datum |
+| Proxy pohled | může vracet jinou chybu nebo interní certifikát |
+| Aplikace za TLS | ověřit jen diagnosticky přes `curl -k`, ne jako zdravý stav |
+| Pravděpodobná vrstva opravy | host s nginx/Certbotem nebo TLS terminace |
+| Opravný přístup | kdo smí obnovit certifikát a reloadnout TLS službu |
+| Ověření po opravě | `curl` bez `--insecure`, kontrola `notAfter`, obsahový smoke test |
+| Systémová akce | opravit renewal/reload/monitoring/přístup podle nálezu |
+
+Karta má být krátká právě proto, aby se dala použít ve stresu. Když je potřeba číst pět dokumentů, člověk v incidentu sáhne po chatu a po paměti. A paměť je při výpadku dost kreativní nástroj.
+
+### Nezaměňuj diagnostický přístup za opravný přístup
+
+Read-only diagnostika je cenná. Umí odlišit DNS, TCP, TLS, HTTP, obsah a aplikaci. Sama ale neopraví certifikát. Pokud agent, monitoring nebo služba umí jen zjistit, že certifikát expiroval, ale neumí bezpečně spustit obnovu nebo eskalovat na držitele opravného přístupu, nejde o uzavřenou provozní schopnost.
+
+Praktické rozdělení rolí:
+
+| Role | Smí dělat | Nesmí dělat |
+| --- | --- | --- |
+| Monitor | ověřit dostupnost, TLS datum, HTTP status a obsahový marker | měnit produkci |
+| Diagnostik | spustit bezpečné read-only příkazy a připravit nález | improvizovaně restartovat služby bez vlastnictví |
+| TLS opravář | obnovit certifikát, reloadnout správnou vrstvu, ověřit výsledek | číst zákaznická data, měnit aplikaci mimo rozsah |
+| Incident vlastník | rozhodnout eskalaci, komunikaci a následné úkoly | držet tajemství v osobních poznámkách |
+
+Privacy-first přínos je důležitý: opravný přístup pro TLS nemusí znamenat přístup k databázi, CRM, zákaznickým souborům nebo fakturaci. Čím užší oprávnění, tím snáz se dá předat a auditovat.
+
+### Oprav po incidentu konkrétní selhání
+
+Po obnově certifikátu si nepiš obecné „zlepšit monitoring“. To je provozní mlha. Vyber jednu konkrétní závadu:
+
+- renewal neběžel,
+- renewal běžel, ale selhal,
+- renewal proběhl, ale TLS služba nenačetla nový certifikát,
+- monitoring kontroloval špatnou vrstvu,
+- alert přišel pozdě,
+- alert neobsahoval první opravný krok,
+- opravný přístup nebyl dostupný,
+- runbook existoval, ale nebyl použitelný bez tajemství,
+- po opravě neproběhlo veřejné ověření.
+
+Ke každé závadě patří vlastník a datum kontroly. Pokud není vlastník, není úkol. Je to jen přání s odrážkou.
+
+### Minimální následný úkol
+
+Po certifikátovém incidentu založ jeden malý úkol v tomto formátu:
+
+```markdown
+## Uzavřít TLS obnovu pro [doména]
+
+Problém:
+Veřejný HTTPS check selhal kvůli expirovanému certifikátu. Diagnostika uměla problém najít, ale opravný přístup nebo mechanismus nebyl v běhu dostupný.
+
+Hotovo znamená:
+- víme, kde se certifikát obnovuje,
+- renewal mechanismus je ověřený,
+- reload TLS vrstvy je součást runbooku,
+- veřejný smoke test bez `--insecure` je součást kontroly,
+- existuje omezený opravný přístup nebo jasná eskalace,
+- další kontrola expirace varuje s dostatečným předstihem.
+```
+
+Tenhle úkol je záměrně úzký. Nemá řešit celý provoz, nový monitoring, nový hosting a přepsání infrastruktury. Má zavřít jednu díru, která už jednou bolela.
+
+### Checklist: Certifikátový požár
+
+- [ ] Víme, jestli selhal renewal, reload, veřejná terminace TLS, monitoring nebo opravný přístup.
+- [ ] Po obnově certifikátu proběhl `curl` bez `--insecure` z veřejného pohledu.
+- [ ] Ověřili jsme nové `notAfter` na certifikátu, který opravdu vidí veřejný klient.
+- [ ] `curl -k` zůstal jen diagnostický nástroj, ne důkaz dostupnosti.
+- [ ] Runbook obsahuje obnovu, reload a smoke test, ne jen příkaz pro renewal.
+- [ ] Opravný přístup je omezený na potřebnou vrstvu a neotevírá zbytečně zákaznická data.
+- [ ] Alert obsahuje první další krok a vlastníka, ne jen neurčité „web down“.
+- [ ] Incident skončil systémovým úkolem s datem kontroly.
+
+### Mini úkol
+
+Vyber jednu doménu nebo subdoménu, která je důležitá pro obchod, aplikaci nebo podporu, a vyplň:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Kde se TLS certifikát obnovuje? |  |
+| Jaký mechanismus obnovu spouští? |  |
+| Kdo umí obnovu opravit? |  |
+| Jak se reloadne správná TLS vrstva? |  |
+| Odkud běží veřejné ověření? |  |
+| Kolik dní před expirací přijde první alert? |  |
+| Co uděláme, když diagnostika projde, ale opravný přístup chybí? |  |
+
+Potom udělej jednu konkrétní změnu: přidej veřejnou kontrolu expirace, doplň reload krok do runbooku, otestuj omezený TLS opravný přístup nebo změň alert tak, aby rozlišoval „aplikace je dole“ od „TLS důvěra je rozbitá“. Požár certifikátu není ostuda. Ostuda je nechat ho napsat další díl.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -35404,6 +35525,7 @@ Potom uprav pracovní log jednou větou, která by dávala smysl i člověku, kt
 
 ## Pracovní log
 
+- 2026-07-19: Doplněna příloha o certifikátovém požáru bez opakování stejného incidentu: rozlišení obnovy služby, opravy mechanismu a opravy organizace, provozní karta TLS incidentu, hranice diagnostického a opravného přístupu, konkrétní následný úkol, checklist a mini úkol; provozně znovu potvrzeno, že přímý veřejný TLS certifikát `cody.dreamind.cz` je expirovaný (`notAfter` 2026-07-17 19:35:56 GMT), aplikace odpovídá jen při diagnostickém `curl -k` a SSH na host `91.99.227.53` i `cody.dreamind.cz` odmítá autentizaci.
 - 2026-07-19: Doplněna příloha o publikační kontrole nové iterace bez rozjeté knihy: kontrola účelu, praktičnosti, návaznosti, zdrojů, nadpisů, pracovního logu a `git diff`; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně znovu potvrzeno, že `cody.dreamind.cz` má expirovaný veřejný Let's Encrypt certifikát (`notAfter` 2026-07-17 19:35:56 GMT) a v kontejneru není dostupný SSH/deploy přístup k obnově.
 - 2026-07-19: Doplněna příloha o redakční triage připomínek bez nekonečného backlogu: třídění připomínek podle typu a dopadu, stavový model od nového vstupu po hotovo, práce po malých dávkách, prioritizace podle rizika a opakování, krátká triage karta, checklist a mini úkol; provozně znovu ověřeno, že `cody.dreamind.cz` selhává kvůli expirovanému veřejnému Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), zatímco aplikace za TLS odpovídá při `curl -k`, a v tomto běhu není dostupný SSH/deploy přístup k obnově.
 - 2026-07-19: Doplněna příloha o zpětné vazbě k e-booku bez formulářového přetlaku: rozhodnutí před sběrným kanálem, přímé a chudé cesty pro připomínky, třídění feedbacku na chyby/nejasnosti/nástroje/témata/pochvalu, ukládání jen nutného kontextu, uzavírání připomínek viditelnou změnou, checklist a mini úkol; provozně potvrzeno, že `cody.dreamind.cz` odpovídá při `curl -k`, ale veřejný TLS certifikát je expirovaný (`notAfter` 2026-07-17 19:35:56 GMT) a tento běh nemá SSH/deploy přístup k obnově.
