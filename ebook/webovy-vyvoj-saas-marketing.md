@@ -35993,6 +35993,162 @@ Vyber dvě sousední nebo tematicky podobné přílohy a vyplň:
 
 Potom udělej jen jednu malou redakční změnu. Zkracovací revize není úklid celého vesmíru. Je to odstranění jednoho tření, aby další čtenář našel užitečnou věc rychleji a bez sledovací baterky v zádech.
 
+## Příloha: Týdenní čtenářský balíček bez profilování čtenáře
+
+Dlouhý e-book se dá číst dvěma způsoby. Buď jako archiv, do kterého člověk skočí, když ho pálí konkrétní problém. Nebo jako postupný program, který tým zlepšuje po malých dávkách. Druhý režim je užitečný hlavně pro malé firmy: každý týden vyberou jedno téma, přečtou k němu krátký výřez a udělají jeden praktický krok.
+
+Problém je, že mnoho obsahových programů skončí jako minikurz schovaný za formulářem, e-mailovou automatizací a sledováním každého kliknutí. To není nutné. Týdenní balíček může být obyčejná veřejná stránka, RSS položka, interní poznámka nebo přímý odkaz v chatu. Hodnota není v tom, že víš, kdo přesně dočetl třetí odstavec. Hodnota je v tom, že tým udělá lepší rozhodnutí.
+
+Praktická otázka zní:
+
+„Jaký jeden pracovní problém má tento týdenní výřez pomoct vyřešit?“
+
+Když na ni neumíš odpovědět, balíček je jen další distribuce obsahu. Hezká, ale trochu líná.
+
+### Vyber situaci, ne cílovou personu
+
+Persony často svádí k profilování: founder, marketer, CTO, freelancer. To může pomoct při psaní tónu, ale pro týdenní balíček je lepší vybrat situaci. Situace říká, co člověk právě potřebuje udělat.
+
+Příklady situací:
+
+- spouštíme první veřejnou landing page,
+- máme poptávky, ale lidé nechápou pricing,
+- chceme přidat analytiku a nechceme trackerový chaos,
+- web má provozní incident a nevíme, co zapsat,
+- e-book už je dlouhý a potřebuje navigační úklid.
+
+Situace je privacy-first už sama o sobě. Nepotřebuješ vědět, kdo přesně čte. Stačí vědět, že existuje práce, kterou má text podpořit. Balíček pak můžeš publikovat veřejně a čtenář se sám rozhodne, jestli je pro něj.
+
+### Slož balíček ze tří částí
+
+Dobrý týdenní balíček nemá být zmenšený e-book. Má být pracovní výřez. Stačí tři části:
+
+| Část | Účel | Příklad |
+| --- | --- | --- |
+| Hlavní čtení | jedna kapitola nebo příloha | „Analytika s minimem dat“ |
+| Praktický úkol | jeden checklist nebo tabulka | inventura eventů a účelů |
+| Další krok | malá změna v produktu nebo procesu | odebrat dvě nepotřebné události |
+
+Balíček může mít 10 minut čtení a 30 minut práce. Když zabere půl dne, už to není týdenní rytmus. Je to projekt. Projekty jsou v pořádku, ale nemaskuj je jako lehkou obsahovou dávku.
+
+Příklad balíčku pro SaaS tým:
+
+| Pole | Obsah |
+| --- | --- |
+| Téma týdne | Onboarding bez nucené prohlídky |
+| Proč teď | Noví uživatelé zakládají účet, ale nedokončí první pracovní nastavení |
+| Číst | kapitola o první hodnotě, příloha o admin onboardingu, část o prázdných stavech |
+| Udělat | napsat jednu větu první hodnoty a zkrátit první obrazovku nastavení |
+| Neměřit | nesledovat každý pohyb kurzoru a každé otevření tooltipu |
+| Ověřit | počet dokončených prvních nastavení a tři ruční poznámky ze supportu |
+
+Všimni si posledního řádku. Balíček nepředepisuje datový hlad. Předepisuje rozhodovací signál.
+
+### Publikuj ho bez zámku
+
+Lead magnet je lákavý: dej sem e-mail a dostaneš další díl. Jenže u praktického e-booku je často férovější opačný postup: dej obsah veřejně a kontakt nabídni jako dobrovolný další krok.
+
+Možnosti distribuce:
+
+- veřejná stránka „Téma týdne“ s přímými odkazy do e-booku,
+- RSS položka s krátkým úvodem a jedním úkolem,
+- interní týmová zpráva s odkazem na relevantní část,
+- statický Markdown soubor v repozitáři,
+- PDF výřez generovaný ze stejného zdroje pravdy.
+
+Co nedělat automaticky:
+
+- nevynucovat e-mail jen kvůli přístupu k textu,
+- nepřidávat sociální share skripty,
+- nepoužívat přesměrovací odkazy jen pro detailní tracking,
+- neposílat týdenní dávku lidem, kteří čekali něco jiného,
+- nedělat z každého čtenáře položku v nurturing scénáři.
+
+Codyho komentář: Když je obsah dobrý, nemusí stát za dveřmi s formulářem a tvářit se jako klub pro vyvolené. Dej lidem hodnotu. Kdo chce mluvit, ozve se. Kdo nechce, aspoň si neodnese pocit, že mu někdo sahal do kapsy pro e-mail.
+
+### Měř použitelnost chudě
+
+Týdenní balíček potřebuje zpětnou vazbu, ale ne detailní dohled. Měř jen to, co pomáhá rozhodnout, jestli balíček pokračovat, upravit nebo zrušit.
+
+Stačí kombinace:
+
+- počet návštěv veřejné stránky v agregované analytice,
+- počet kliků na hlavní praktický úkol,
+- počet dobrovolných odpovědí nebo připomínek,
+- počet týmů nebo klientů, kteří úkol skutečně použili,
+- ruční poznámka, která otázka se opakuje.
+
+Nepotřebuješ:
+
+- identitu každého čtenáře,
+- scroll depth po odstavcích,
+- session replay,
+- skryté UTM pro interní odkazy,
+- automatické obohacování kontaktu podle firemních databází.
+
+Rozhodovací pravidlo:
+
+| Signál | Rozhodnutí |
+| --- | --- |
+| Lidé čtou, ale nereagují | zlepšit výzvu k jednomu úkolu |
+| Lidé reagují otázkami | doplnit příklad nebo mini šablonu |
+| Nikdo neotevírá | změnit téma, název nebo distribuční místo |
+| Úkol se používá | udělat další balíček ve stejné linii |
+| Balíček generuje support chaos | zkrátit rozsah a zpřesnit hranice |
+
+Tahle měření se dají dělat bez profilování. U malého B2B publika je stejně často užitečnější jedna přesná odpověď než stovka anonymních detailních událostí.
+
+### Drž rytmus a konec
+
+Týdenní balíček má mít konec. Ne každá série musí běžet věčně. Před startem si napiš, jestli jde o čtyři týdny, osm týdnů nebo sezónní sérii k jednomu tématu.
+
+Praktický rytmus:
+
+1. Pondělí: vybrat situaci a publikovat balíček.
+2. Úterý až čtvrtek: sbírat jen dobrovolné reakce a agregované signály.
+3. Pátek: zapsat jednu poznámku, co se lidem hodilo nebo kde se ztratili.
+4. Další pondělí: buď navázat, nebo změnit téma.
+
+Po skončení série udělej malou retrospektivu:
+
+- Které balíčky vedly ke konkrétní práci?
+- Které byly jen zajímavé čtení?
+- Které otázky se opakovaly?
+- Co patří zpět do e-booku jako lepší navigace, příklad nebo checklist?
+- Co už není potřeba posílat znovu?
+
+Balíček není kanál pro nekonečnou připomínku, že existuješ. Je to služba čtenáři. Když dočasně nemáš užitečné téma, neposílej nic. Ticho je taky privacy-first funkce, jen se hůř prodává na poradě.
+
+### Checklist: Týdenní čtenářský balíček
+
+- [ ] Balíček začíná konkrétní situací, ne obecnou personou.
+- [ ] Má jednu pracovní otázku.
+- [ ] Obsahuje hlavní čtení, praktický úkol a další krok.
+- [ ] Je dostupný přes přímý odkaz nebo RSS bez povinného formuláře.
+- [ ] Dobrovolný kontakt je nabídka, ne vstupní brána.
+- [ ] Odkazy jsou čisté a bez zbytečných měřicích parametrů.
+- [ ] Měření sleduje použitelnost balíčku, ne identitu čtenáře.
+- [ ] Série má předem daný rytmus a konec.
+- [ ] Zpětná vazba se vrací do e-booku jako konkrétní úprava.
+- [ ] Pokud téma nepomáhá práci, balíček se neposílá jen kvůli frekvenci.
+
+### Mini úkol
+
+Vyber jednu část e-booku a připrav z ní týdenní balíček:
+
+| Pole | Odpověď |
+| --- | --- |
+| Situace čtenáře |  |
+| Pracovní otázka týdne |  |
+| Hlavní čtení |  |
+| Praktický úkol |  |
+| Další krok |  |
+| Co vědomě neměříme |  |
+| Jaký agregovaný nebo kvalitativní signál stačí |  |
+| Kdy balíček uzavřeme |  |
+
+Potom ho pošli jednou přímou cestou: interní zpráva, veřejná stránka, RSS položka nebo jednoduchý odkaz. Nejdřív ověř užitečnost. Automatizaci přidej až tehdy, když rytmus opravdu funguje.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -36182,6 +36338,7 @@ Potom udělej jen jednu malou redakční změnu. Zkracovací revize není úklid
 
 ## Pracovní log
 
+- 2026-07-19: Doplněna příloha o týdenním čtenářském balíčku bez profilování čtenáře: výběr situace místo persony, skladba balíčku z hlavního čtení, praktického úkolu a dalšího kroku, veřejná distribuce bez lead-gatingu, chudé měření použitelnosti, rytmus série, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně znovu ověřeno, že přímý veřejný TLS certifikát `cody.dreamind.cz` je expirovaný (`notAfter` 2026-07-17 19:35:56 GMT), běžná proxy cesta končí `Empty reply from server` a v běhu není dostupný bezpečný SSH/deploy přístup k obnově.
 - 2026-07-19: Doplněna příloha o zkracovací revizi e-booku bez ztráty hodnoty: revize podle účelu místo počtu slov, rozlišení zkrácení/sloučení/přesunu/zpřesnění, ochrana praktických příkladů a checklistů, práce s duplicitami přes rozhodovací věty, hranice pro zdrojovou a provozní stopu, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně ověřeno, že přímý TLS certifikát `cody.dreamind.cz` je stále expirovaný (`notAfter` 2026-07-17 19:35:56 GMT), běžná proxy cesta končí `Empty reply from server` a neinteraktivní SSH opravný přístup pro běžné účty není dostupný.
 - 2026-07-19: Doplněna příloha o hodinovém běhu bez rozmazané diagnostiky: rozlišení scriptového signálu, vrstvené diagnostiky DNS/TCP/TLS/HTTP, bezpečných hranic opravného přístupu, chudého provozního zápisu, rozhodování kdy přerušit psaní kvůli provozu, checklistu a mini úkolu; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně znovu ověřeno, že `cody.dreamind.cz` selhává při běžném přímém HTTPS kvůli expirovanému veřejnému Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), zatímco aplikace za TLS vrací při diagnostickém `curl -k` stav `200 OK`; běžná proxy cesta navíc končí `Empty reply from server`, repozitář neobsahuje deploy/runbook a v běhu není bezpečný ověřený SSH opravný přístup.
 - 2026-07-19: Doplněna příloha o výběru další iterace e-booku bez náhodného přihazování kapitol: práce podle čtenářské bolesti, provozní reality, navigačního dluhu nebo zdrojové nejistoty, malá karta iterace, definice hotovo, rytmus růstu/revize/navigace, privacy-first pravidla pro údržbové poznámky, anti-patterny, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně znovu potvrzeno, že běžný `curl` přes lokální proxy končí `Empty reply from server`, přímý veřejný TLS certifikát `cody.dreamind.cz` je expirovaný (`notAfter` 2026-07-17 19:35:56 GMT), aplikace odpovídá při `curl -k` a SSH opravný přístup na `91.99.227.53` pro běžné účty není dostupný.
