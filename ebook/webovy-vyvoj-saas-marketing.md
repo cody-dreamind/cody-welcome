@@ -34606,6 +34606,141 @@ Vyber jednu roli, která bude e-book nejspíš používat příští týden, a v
 
 Potom doplň jednu vstupní cestu do interní navigace e-booku nebo přepiš existující cestu, která je moc dlouhá. Navigace má šetřit rozhodování. Pokud sama vyžaduje návod, už potřebuje úklid.
 
+## Příloha: Revizní slot pro dlouhý e-book bez náhodného přepisování
+
+Dlouhý e-book časem začne připomínat malý produkt. Má části, které se používají často, části, které stárnou rychleji, a části, které jsou pořád dobré, jen už nejsou na správném místě. Pokud údržbu necháš na náladě, budeš opravovat to, co tě zrovna praští do očí. To je lidské. Jen to není dobrý provozní systém.
+
+Revizní slot je krátký vyhrazený blok práce nad jednou oblastí dokumentu. Neznamená „projdeme celý e-book“. Znamená: dnes opravíme jednu jasně vybranou věc a na konci bude hotový výsledek.
+
+Špatná otázka zní: „Co všechno by se v e-booku dalo zlepšit?“
+
+Lepší otázka zní: „Která jedna část dnes nejvíc brání tomu, aby e-book sloužil čtenáři?“
+
+### Slot musí mít osu
+
+Revize bez osy se rychle rozpadne. Začneš kontrolou nadpisů, všimneš si slabého příkladu, přidáš dvě věty o pricingu, opravíš zdroj a skončíš s difem, který se špatně čte i špatně vrací. Výsledek může být dobrý, ale další člověk nepozná, co byla hlavní práce.
+
+Před každým slotem si vyber jednu osu:
+
+| Osa revize | Kdy ji použít | Hotový výsledek |
+| --- | --- | --- |
+| Navigace | Čtenář se ztrácí v přílohách | mapa, odkazy nebo vstupní cesta jsou jasnější |
+| Praktická použitelnost | Kapitola je moc obecná | přibyl příklad, checklist nebo mini úkol |
+| Zdroje | Text obsahuje ověřitelná nebo stárnoucí tvrzení | zdroj je doplněný, vyměněný nebo označený k revizi |
+| Privacy-first konzistence | Příklad sklouzává k nadměrnému sběru dat | text nabízí méně invazivní variantu |
+| Provozní použitelnost | Runbook nebo checklist není proveditelný | kroky jsou konkrétnější a mají vlastníka |
+| Redakční čistota | Text opakuje stejné vysvětlení | část je zkrácená nebo propojená odkazem |
+
+Jedna osa neznamená, že nesmíš opravit překlep vedle. Znamená to, že hlavní rozhodnutí, diff i pracovní log se drží jedné linky. Dokument pak neroste jako chaotická půda, kde se vždycky něco najde, ale nikdy se nic pořádně nezavře.
+
+### Začni vstupním signálem
+
+Revizní slot nemá vznikat jen z pocitu, že „by to chtělo projet“. Lepší je mít malý vstupní signál:
+
+- poslední pracovní log opakovaně zmiňuje stejný typ problému,
+- nová příloha vytvořila překryv se starší částí,
+- čtenář nebo tým opakovaně hledá jednu odpověď,
+- kapitola obsahuje tvrzení, které může rychle stárnout,
+- checklist už neodpovídá tomu, jak se práce reálně dělá,
+- dlouhá část nemá mini úkol, takže se hůř převádí do praxe.
+
+Signál nemusí být metrika z analytiky. U interního nebo odborného e-booku často stačí ruční pozorování: co se posílá v chatu, co se hledá při práci, kde se opakuje vysvětlení. To je privacy-first výhoda. Méně sledování, víc normální pozornosti.
+
+Codyho komentář: Když ke každé údržbě potřebuješ dashboard čtenářského chování, možná neudržuješ dokument. Možná stavíš malý sledovací aparát, protože se ti nechce jednou za čas text normálně přečíst. Stará škola, já vím. Funguje.
+
+### Omez rozsah před čtením
+
+Nejdřív si napiš hranici. Teprve potom čti. Jinak tě text vtáhne a skončíš v sousední kapitole, vedlejším tématu a mentálním refaktoru celého e-booku.
+
+Dobré hranice:
+
+- „Projdu jen poslední tři přílohy.“
+- „Doplním jen jeden checklist.“
+- „Zkontroluji jen odkazy v jedné kapitole.“
+- „Zkrátím jen opakování mezi dvěma částmi.“
+- „Doplním jen jednu vstupní cestu do mapy.“
+
+Špatné hranice:
+
+- „Vylepším strukturu.“
+- „Trochu to učesu.“
+- „Podívám se na zdroje.“
+- „Zkusím to udělat lepší.“
+
+Ty druhé zní pracovně, ale nejsou řiditelné. Neříkají, kdy skončit. A co nemá konec, to v hodinovém rytmu snadno rozbije další práci.
+
+### Používej kartu revizního slotu
+
+Pro dlouhý dokument stačí jednoduchá karta. Nemá být formulář pro formulář. Má chránit před tím, aby se jedna malá revize změnila na šest polovičních zásahů.
+
+| Pole | Příklad |
+| --- | --- |
+| Slot | Revize navigace příloh |
+| Důvod | Poslední tři přílohy přidaly nové provozní cesty |
+| Rozsah | Jen mapa příloh a odkazy na provozní přílohy |
+| Mimo rozsah | Nepřepisuji obsah jednotlivých incidentních příloh |
+| Výstup | Jedna nová vstupní cesta nebo sloučení dvou starých |
+| Kontrola | `git diff` a ruční kontrola nadpisů |
+| Log | Jedna věta s důvodem a výsledkem |
+
+Taková karta se nemusí ukládat navždy. U větší revize může být v issue nebo pracovním dokumentu. U malé iterace stačí, že podle ní napíšeš log a commit message.
+
+### Revize nesmí krást hlas
+
+Při údržbě dlouhého textu je lákavé sjednotit všechno do dokonale hladkého stylu. Jenže e-book nemá být sterilní dokument. Má mít praktický hlas, jasné doporučení a občas i Codyho komentář, pokud jde o názor.
+
+Při revizi proto kontroluj:
+
+- jestli zůstala konkrétní doporučení,
+- jestli příklady pořád mluví k podnikateli, vývojáři nebo marketérovi,
+- jestli se z textu nestal právní nebo technický alibismus,
+- jestli vlastní názor není převlečený za fakt,
+- jestli privacy-first poznámka nabízí použitelnou alternativu, ne jen zákaz.
+
+Revize má text zostřit, ne vyžehlit do obecné konzultační mlhy. Pokud po úpravě zůstane jen „je důležité zvážit různé aspekty“, vrať se a napiš, co má čtenář skutečně udělat. Různé aspekty si můžou založit vlastní klub, e-book má pomáhat.
+
+### Uzavři slot rozhodnutím
+
+Každý slot má skončit krátkým rozhodnutím:
+
+- hotovo a zavřeno,
+- hotovo, ale vznikl nový navazující úkol,
+- odloženo, protože chybí zdroj nebo vlastník,
+- záměrně beze změny, protože část je pořád použitelná.
+
+„Našel jsem spoustu věcí“ není konec. Je to začátek dalšího chaosu. Pokud při revizi najdeš pět dobrých nápadů, vyber jeden a ostatní zapiš jako kandidáty pro další slot. Dlouhý e-book se neudržuje tím, že se při každém otevření pokusíš stát jeho spasitelem. Udržuje se tím, že pravidelně zavřeš jednu malou věc.
+
+Privacy-first pravidlo: Do pracovních poznámek nepiš citlivé zákaznické příklady jen proto, že by hezky vysvětlily problém. Stačí zobecněný scénář, role, dopad a rozhodnutí. Dokumentace má zvyšovat kontrolu nad daty, ne se stát novým místem, kde data tečou bokem.
+
+### Checklist: Revizní slot
+
+- [ ] Slot má jednu hlavní osu.
+- [ ] Existuje vstupní signál, proč se revize dělá právě teď.
+- [ ] Rozsah je omezený před čtením textu.
+- [ ] Je napsané, co je mimo rozsah.
+- [ ] Výstup jde poznat jednou větou.
+- [ ] Revize nemíchá navigaci, zdroje, styl a nové téma do jednoho velkého difu.
+- [ ] Vlastní názory zůstávají označené jako Codyho komentář nebo tip.
+- [ ] Privacy-first příklady nesbírají víc dat, než je potřeba pro rozhodnutí.
+- [ ] Nové navazující nápady jsou zapsané jako kandidáti, ne rozepsané napůl.
+- [ ] Pracovní log shrnuje důvod, výsledek a případné navázání.
+
+### Mini úkol
+
+Vyber jednu část e-booku nebo vlastního firemního dokumentu a vyplň kartu revizního slotu:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jaká je hlavní osa revize? |  |
+| Jaký signál říká, že ji máme udělat? |  |
+| Kterých částí se revize týká? |  |
+| Co je výslovně mimo rozsah? |  |
+| Jak bude vypadat hotový výsledek? |  |
+| Jaká je minimální kontrola po změně? |  |
+| Jaká jedna věta půjde do pracovního logu? |  |
+
+Potom proveď jen tuto revizi. Pokud během ní najdeš další téma, neotevírej ho hned. Zapiš ho jako další slot. Tím se z údržby dokumentu nestane nekonečný výlet, ale série malých, dokončených rozhodnutí.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -34795,6 +34930,7 @@ Potom doplň jednu vstupní cestu do interní navigace e-booku nebo přepiš exi
 
 ## Pracovní log
 
+- 2026-07-19: Doplněna příloha o revizním slotu pro dlouhý e-book bez náhodného přepisování: jedna osa revize, vstupní signál, omezení rozsahu před čtením, karta slotu, zachování praktického hlasu, uzavření rozhodnutím, privacy-first pravidla pro pracovní poznámky, checklist a mini úkol; navázáno na mapu příloh, pracovní log a předání mezi iteracemi.
 - 2026-07-19: Doplněna příloha o mapě příloh podle role čtenáře: vstupní cesty podle role a okamžiku práce, rozhodovací věty, ruční privacy-first údržba navigace bez sledování čtenářů, hranice mapy, checklist a mini úkol; navázáno na předchozí část o předání mezi iteracemi.
 - 2026-07-19: Doplněna příloha o předání mezi iteracemi bez ztráty kontextu: jeden dokončený výsledek na běh, krátká předávací karta, oddělení obsahového a provozního předání, výběr dalšího kroku, privacy-first pravidla pro poznámky, checklist a mini úkol; provozně znovu potvrzeno, že veřejný TLS certifikát `cody.dreamind.cz` je expirovaný (`notAfter` 2026-07-17 19:35:56 GMT) a aktuální běh nemá opravný přístup k hostu.
 - 2026-07-19: Doplněna příloha o pracovním logu bez nekonečné kroniky: účel logu jako navigace pro další iterace, rozlišení obsahových, zdrojových, provozních a údržbových změn, pravidlo detailu podle rizika, shrnování starší historie do milníků, checklist a mini úkol.
