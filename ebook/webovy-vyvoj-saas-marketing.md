@@ -35740,6 +35740,126 @@ Před další úpravou dlouhého dokumentu vyplň tuto kartu:
 
 Pak udělej jen tuto jednu změnu. Když během práce najdeš další tři dobré nápady, zapiš je jako možnosti, ale nepřibaluj je do stejné iterace. Dlouhý e-book se nezlepšuje tím, že se do něj nacpe všechno najednou. Zlepšuje se tím, že každá dávka po sobě nechá čitelnější stopu než ta předchozí.
 
+## Příloha: Hodinový běh bez rozmazané diagnostiky
+
+Hodinová práce na živém e-booku má zvláštní režim: není to čisté psaní a není to čistý provozní monitoring. Běh může začít tím, že web neodpovídá, certifikát vypršel, proxy vrací divný stav nebo předchozí iterace nechala v logu rozpracovanou stopu. Pokud se to neuchopí disciplinovaně, hodina uteče v mlze a výsledkem není ani opravený web, ani lepší kniha. To je takový multitaskingový kompromis, který umí zklamat ve všech směrech najednou.
+
+Dobrá otázka na začátku běhu zní:
+
+„Co je nejmenší ověřená provozní diagnóza a nejmenší dokončená obsahová změna, kterou po sobě nechám?“
+
+Ne vždy půjde opravit produkci z aktuálního prostředí. Někdy chybí SSH přístup, host key není předem ověřený, repozitář neobsahuje deploy konfiguraci nebo problém leží na vrstvě mimo dostupná oprávnění. To není výmluva k mlčení. Je to důvod zapsat přesný nález, nechat bezpečnou stopu a pokračovat v jedné dokončené obsahové dávce.
+
+### Odděl signál, diagnózu a zásah
+
+Scriptový výsledek typu `webOk: false` a `httpStatus: 000000` je signál. Není to diagnóza. `000000` může znamenat DNS problém, timeout, TLS chybu, proxy selhání, prázdnou odpověď, odmítnuté spojení nebo chybu samotného kontrolního skriptu. První chyba po ruce není automaticky pravda. Je to začátek vrstveného ověření.
+
+Praktický diagnostický postup:
+
+| Vrstva | Co ověřit | Příklad výsledku |
+| --- | --- | --- |
+| DNS a IP | Kam doména míří | doména ukazuje na očekávaný server |
+| TCP | Jde se připojit na port 443 | spojení projde, nebo timeout |
+| TLS | Je certifikát platný a pro správnou doménu | `notAfter`, issuer, SAN |
+| HTTP přes běžnou cestu | Co vidí standardní klient | status, hlavičky, tělo |
+| HTTP mimo lokální proxy | Co vidí veřejná přímá cesta | rozdíl proti proxy |
+| Aplikace za TLS | Odpoví při diagnostickém obejití validace | jen pro potvrzení vrstvy, ne jako provozní stav |
+| Opravný přístup | Existuje bezpečná cesta k zásahu | ověřený host key, role, runbook |
+
+Tahle tabulka brání zkratkám. Když běžný `curl` selže na certifikátu, ale `curl -k` vrátí `200 OK`, aplikace pravděpodobně běží a problém je TLS obsluha. Když proxy vrací `Empty reply from server`, ale přímý test ukazuje expirovaný certifikát, nesmí se z toho udělat obecné „web nejede“. Přesná věta šetří příští běh.
+
+### Diagnostický zápis má být chudý, ale užitečný
+
+Provozní poznámka v e-booku nebo pracovním logu nemá být plný dump terminálu. Má zachytit rozhodující fakta:
+
+- kdy byl test proveden,
+- jaká cesta byla testovaná,
+- co přesně selhalo,
+- co bylo ověřeno jako funkční,
+- proč nebyl proveden zásah,
+- jaký další krok má smysl.
+
+Příklad dobrého zápisu:
+
+| Pole | Zápis |
+| --- | --- |
+| Signál | `webOk: false`, `httpStatus: 000000` |
+| Přímý TLS test | certifikát pro doménu je expirovaný |
+| Aplikace | při diagnostickém `curl -k` vrací `200 OK` |
+| Dopad | běžní klienti uvidí TLS chybu, i když backend běží |
+| Zásah | z aktuálního běhu není bezpečný opravný SSH/deploy přístup |
+| Další krok | obnovit certifikát, reloadnout TLS terminaci, ověřit běžným `curl` bez `-k` |
+
+To je dost informací pro člověka s přístupem k serveru. Zároveň to neukládá tajemství, privátní klíče, payloady ani interní konfiguraci. Privacy-first provozní log má pomáhat opravě, ne zvětšovat škodu při úniku.
+
+### Kdy přerušit psaní kvůli provozu
+
+Ne každý provozní signál má stejnou prioritu. Hodinový běh by měl nejdřív zkusit bezpečnou opravu, pokud je jasná a dostupná. Ale nemá předstírat zásah tam, kde nemá ověřený přístup nebo kde by musel riskovat naslepo.
+
+Praktické rozhodování:
+
+| Situace | Co dělat |
+| --- | --- |
+| Jasná chyba v repozitáři a dostupný deploy postup | opravit, ověřit, commitnout |
+| Expirovaný certifikát a dostupný ověřený serverový runbook | obnovit, reloadnout, ověřit |
+| Backend spadl a existuje omezený restartovací přístup | restartovat podle runbooku, zapsat výsledek |
+| Problém je mimo dostupný přístup | zapsat diagnózu, informovat podle pravidel, pokračovat v obsahové dávce |
+| Diagnóza je nejasná | zapsat ověřené vrstvy a nepřidávat spekulace jako fakta |
+
+Codyho komentář: Nejhorší druh provozní statečnosti je klikání do produkce jen proto, aby člověk nevypadal bezmocně. Bez ověřeného přístupu a runbooku nejsi hrdina. Jsi jen rychlejší cesta k většímu incidentu.
+
+### Obsahová iterace nesmí být trest za incident
+
+Když běh začne provozním problémem, obsahová práce má tendenci sklouznout do „rychle něco dopíšu, ať je commit“. To je špatný reflex. Lepší je zvolit část, která navazuje na realitu běhu nebo zlepšuje použitelnost e-booku.
+
+Dobré kandidáty po provozním signálu:
+
+- doplnit runbookovou přílohu,
+- zpřesnit pracovní log,
+- přidat checklist pro podobný incident,
+- zlepšit navigaci k provozním kapitolám,
+- zkrátit nebo zpřesnit část, kterou poslední incident odhalil jako nejasnou.
+
+Špatné kandidáty:
+
+- náhodná nová kapitola bez vazby,
+- obecná motivace místo praktického postupu,
+- duplikace už existující přílohy,
+- dlouhý incidentový román bez rozhodnutí,
+- přidání aktuálních právních nebo cenových tvrzení bez ověření.
+
+Hodinový běh má po sobě nechat hotovou dávku. Malou, ale uzavřenou. Pokud provozní oprava není možná, obsahová iterace pořád může být užitečná. Jen nemá zakrýt, že provozní problém zůstává otevřený.
+
+### Checklist: Hodinový běh
+
+- [ ] Přečetl jsem aktuální pracovní instrukce a stav repozitáře.
+- [ ] `webOk: false` jsem bral jako signál, ne hotovou diagnózu.
+- [ ] Ověřil jsem rozdíl mezi proxy cestou a přímou veřejnou cestou, pokud to bylo relevantní.
+- [ ] Rozlišil jsem TLS, HTTP, aplikaci a opravný přístup.
+- [ ] Bez ověřeného opravného přístupu jsem neprováděl produkční zásah naslepo.
+- [ ] Provozní nález je zapsaný jako fakta, ne jako dramatický odhad.
+- [ ] Obsahová iterace má jednoho čtenáře, jednu situaci a jeden dokončený výsledek.
+- [ ] Nepřidal jsem aktuální tvrzení bez zdroje.
+- [ ] Pracovní log říká, co se změnilo a jaký provozní stav byl ověřen.
+- [ ] Před commitem jsem zkontroloval `git diff`.
+
+### Mini úkol
+
+Při dalším hodinovém běhu vyplň před psaním tuto kartu:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jaký byl scriptový signál? |  |
+| Které vrstvy dostupnosti jsem ověřil? |  |
+| Co je přesná provozní diagnóza? |  |
+| Mám bezpečný opravný přístup? |  |
+| Pokud ne, jaký další krok potřebuje vlastník provozu? |  |
+| Jaká jedna obsahová iterace nejlépe navazuje na stav e-booku? |  |
+| Co bude definice hotovo? |  |
+| Jak to zapíšu do pracovního logu jednou větou? |  |
+
+Potom udělej buď bezpečnou opravu provozu, nebo přesný provozní zápis, a vždy dokonči jednu rozumnou obsahovou dávku. Hodinový běh nemá být loterie mezi incidentem a psaním. Má být malý opakovatelný systém.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -35929,6 +36049,7 @@ Pak udělej jen tuto jednu změnu. Když během práce najdeš další tři dobr
 
 ## Pracovní log
 
+- 2026-07-19: Doplněna příloha o hodinovém běhu bez rozmazané diagnostiky: rozlišení scriptového signálu, vrstvené diagnostiky DNS/TCP/TLS/HTTP, bezpečných hranic opravného přístupu, chudého provozního zápisu, rozhodování kdy přerušit psaní kvůli provozu, checklistu a mini úkolu; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně znovu ověřeno, že `cody.dreamind.cz` selhává při běžném přímém HTTPS kvůli expirovanému veřejnému Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), zatímco aplikace za TLS vrací při diagnostickém `curl -k` stav `200 OK`; běžná proxy cesta navíc končí `Empty reply from server`, repozitář neobsahuje deploy/runbook a v běhu není bezpečný ověřený SSH opravný přístup.
 - 2026-07-19: Doplněna příloha o výběru další iterace e-booku bez náhodného přihazování kapitol: práce podle čtenářské bolesti, provozní reality, navigačního dluhu nebo zdrojové nejistoty, malá karta iterace, definice hotovo, rytmus růstu/revize/navigace, privacy-first pravidla pro údržbové poznámky, anti-patterny, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně znovu potvrzeno, že běžný `curl` přes lokální proxy končí `Empty reply from server`, přímý veřejný TLS certifikát `cody.dreamind.cz` je expirovaný (`notAfter` 2026-07-17 19:35:56 GMT), aplikace odpovídá při `curl -k` a SSH opravný přístup na `91.99.227.53` pro běžné účty není dostupný.
 - 2026-07-19: Doplněna příloha o čtenářské cestě e-bookem bez profilování čtenáře: vstupní trasy podle situace, vnitřní navigace, agregované a kvalitativní měření použitelnosti, férové CTA, systematická údržba odkazů, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně znovu potvrzeno, že `cody.dreamind.cz` má expirovaný veřejný Let's Encrypt certifikát (`notAfter` 2026-07-17 19:35:56 GMT), aplikace odpovídá při diagnostickém `curl -k` a SSH na host `91.99.227.53` odmítá autentizaci pro běžné účty.
 - 2026-07-19: Doplněna příloha o distribuční stránce e-booku bez lead magnetu: veřejné čtení bez formuláře, dobrovolný kontakt jako další krok, chudé a rozhodovací měření distribuce, více výstupních formátů ze stejného zdroje pravdy, vztahové vrstvy od anonymního čtení po spolupráci, checklist a mini úkol; provozně znovu potvrzeno, že `cody.dreamind.cz` má expirovaný veřejný Let's Encrypt certifikát (`notAfter` 2026-07-17 19:35:56 GMT), aplikace odpovídá při diagnostickém `curl -k` a v tomto běhu není dostupný serverový opravný přístup k obnově.
