@@ -35101,6 +35101,120 @@ Vezmi pět posledních připomínek k e-booku a vyplň:
 
 Potom vyber jednu připomínku a uzavři ji: oprav větu, doplň příklad, přidej zdroj, slouč duplicitu nebo ji zamítni s důvodem. Triage má být malé redakční síto, ne další systém, který se tváří důležitěji než samotný text.
 
+## Příloha: Publikační kontrola nové iterace bez rozjeté knihy
+
+Živý e-book se zlepšuje po malých dávkách. To je jeho síla i riziko. Když se každou iteraci přidá jedna kapitola, příloha nebo oprava, text roste organicky. Když ale nikdo po změně nezkontroluje návaznosti, zdroje, log a strukturu, začne se z praktické příručky stávat dlouhý dokument, kde jsou dobré části poskládané vedle sebe bez společného rytmu.
+
+Publikační kontrola není velká redakční revize. Je to krátký závěrečný průchod po každé změně, který má odpovědět na jednu otázku:
+
+„Je tahle iterace dokončená tak, aby další běh mohl navázat bez detektivní práce?“
+
+Pokud odpověď není jasné ano, ještě nejsi hotový. Možná chybí pracovní log, možná příloha nemá mini úkol, možná nová část slibuje zdroj, který není ve zdrojích, možná opakuje stejnou šablonu potřetí. To nejsou katastrofy. Jsou to jen drobné dluhy, které se v dlouhém textu násobí rychleji než dobré úmysly.
+
+### Kontroluj výstup, ne jen počet slov
+
+Po každé iteraci si u nové nebo upravené části projdi čtyři vrstvy:
+
+| Vrstva | Otázka | Typická oprava |
+| --- | --- | --- |
+| Účel | Pomáhá část konkrétnímu rozhodnutí nebo kroku? | doplnit větu „kdy to použít“ |
+| Praktičnost | Má čtenář příklad, checklist nebo mini úkol? | přidat pracovní tabulku nebo konkrétní akci |
+| Návaznost | Navazuje část na sousední kapitoly a přílohy? | doplnit kontext nebo omezit duplicitu |
+| Údržba | Je jasné, co se má příště ověřit, logovat nebo revidovat? | doplnit pracovní log, zdroj nebo revizní poznámku |
+
+Tahle kontrola chrání e-book před dvěma opačnými problémy. První je nedopsaná část, která má dobrý úvod, ale žádný použitelný konec. Druhý je přepsaná část, která je sice delší, ale nepomáhá čtenáři udělat lepší rozhodnutí. Délka není hodnota. Hodnota je použitelný krok.
+
+### Každá iterace má mít jednu hlavní změnu
+
+U dlouhého e-booku je lákavé opravovat všechno, co při čtení zasvítí. Jeden odstavec v analytice, jeden checklist v marketingu, tři zdroje, dvě věty v úvodu a novou přílohu k tomu. Výsledek pak vypadá pracovitě, ale hůř se kontroluje.
+
+Lepší pravidlo:
+
+- jedna nová podkapitola,
+- nebo jedna nová příloha,
+- nebo jedna konkrétní revize existující části,
+- nebo jedna technická kontrola kvality textu.
+
+Vedlejší drobnosti oprav jen tehdy, když přímo souvisí s hlavní změnou. Pokud při čtení najdeš další nápad, zapiš ho jako kandidáta pro další běh. E-book nepotřebuje, aby každá iterace zachránila celý svět. Potřebuje, aby po ní byla jedna část opravdu lepší.
+
+Codyho komentář: „Ještě rychle opravím pět dalších věcí“ je věta, po které se často rodí chaos s dobrým úmyslem. V textu i v kódu. Hrdinství si nechme na chvíle, kdy ho opravdu potřebujeme.
+
+### Zdroje a aktuální tvrzení odděl od názoru
+
+Při publikační kontrole si označ každé tvrzení, které by mohlo zestárnout:
+
+- právní povinnost,
+- cena,
+- konkrétní limit nástroje,
+- benchmark,
+- aktuální trend,
+- datum účinnosti,
+- technická specifikace,
+- tvrzení o konkrétním dodavateli.
+
+U takového tvrzení musí být buď zdroj v textu nebo odkaz ve zdrojích, případně jasný časový kontext. Pokud zdroj nemáš, máš tři možnosti: ověřit ho, přepsat tvrzení principově, nebo ho odstranit. Nejhorší varianta je nechat konkrétní tvrzení bez zdroje jen proto, že zní pravděpodobně. Pravděpodobnost není citace, i když se někdy tváří velmi sebevědomě.
+
+Vlastní názor má být poznat. Používej „Codyho komentář“ nebo podobné jasné označení. Čtenář pak ví, kde dostává praktický pohled a kde opíráš text o externí zdroj.
+
+Privacy-first detail: nepřidávej do zdrojů odkazy přes zkracovače, sledovací redirecty nebo zbytečné UTM parametry. Přímý odkaz na původní zdroj je čitelnější, stabilnější a méně datově hladový.
+
+### Struktura se má dát přečíst z nadpisů
+
+Před uzavřením iterace si projdi jen nadpisy nové části. Měly by samy vyprávět logiku textu:
+
+1. Problém.
+2. Praktické rozhodnutí.
+3. Konkrétní postup.
+4. Checklist.
+5. Mini úkol.
+
+Pokud nadpisy zní jako seznam podobných slov, čtenář se v textu hůř orientuje. Pokud každá sekce začíná stejně, text působí jako generátor porad. Stačí malá změna: jeden nadpis podle situace, druhý podle akce, třetí podle rizika.
+
+Dobrá struktura není kosmetika. Je to navigace. U dlouhého e-booku lidé často neskáčou od začátku do konce. Hledají konkrétní problém. Nadpisy jim mají pomoct najít správnou část bez toho, aby museli číst všechno kolem.
+
+### Pracovní log piš jako předání
+
+Pracovní log není kronika pro pocit výkonu. Je to předání dalšímu běhu. Dobrý log řekne:
+
+- co bylo přidáno nebo změněno,
+- jaký typ práce proběhl,
+- jestli byly ověřené nové zdroje,
+- jestli zůstává provozní nebo redakční riziko,
+- proč je iterace uzavřená.
+
+Špatný log zní: „Pokračováno v e-booku.“ To je sice pravda, ale další běh z toho nezjistí nic. Lepší log zní: „Doplněna příloha o publikační kontrole nové iterace: kontrola účelu, praktičnosti, návaznosti, zdrojů, nadpisů a pracovního logu; bez nových aktuálních tvrzení.“
+
+Nezapisuj do logu osobní údaje lidí, kteří dali feedback, interní tajemství ani surové provozní výstupy. Stačí shrnout stav a dopad. Log má pomáhat kontinuitě práce, ne rozšiřovat datovou stopu e-booku.
+
+### Checklist: Publikační kontrola iterace
+
+- [ ] Iterace má jednu hlavní dokončenou změnu.
+- [ ] Nová nebo upravená část má jasný účel pro čtenáře.
+- [ ] Text obsahuje praktický příklad, checklist nebo mini úkol.
+- [ ] Nadpisy dávají smysl i při rychlém skenování.
+- [ ] Aktuální, právní, cenová, nástrojová nebo benchmarková tvrzení mají zdroj nebo byla přepsána principově.
+- [ ] Vlastní názory jsou označené jako Codyho komentář nebo jinak zjevně odlišené.
+- [ ] Nové odkazy jsou přímé, bez zbytečných trackerů a zkracovačů.
+- [ ] Nová část neopakuje stejný obsah z blízkých příloh bez přidané hodnoty.
+- [ ] Pracovní log popisuje změnu tak, aby další iterace mohla navázat.
+- [ ] `git diff` ukazuje jen zamýšlené změny.
+
+### Mini úkol
+
+Po další úpravě e-booku vyplň krátkou kontrolní kartu:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jaká byla jedna hlavní změna? |  |
+| Kterému čtenářskému rozhodnutí pomáhá? |  |
+| Jaký praktický prvek obsahuje? |  |
+| Přidala aktuální nebo ověřitelné tvrzení? |  |
+| Jaké zdroje se doplnily nebo proč nebyly potřeba? |  |
+| Co ukázal `git diff`? |  |
+| Co má další běh vědět? |  |
+
+Potom uprav pracovní log jednou větou, která by dávala smysl i člověku, který e-book otevře za měsíc. Publikační kontrola není brzda psaní. Je to zábradlí, aby se živý text nerozběhl po schodech sám.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -35290,6 +35404,7 @@ Potom vyber jednu připomínku a uzavři ji: oprav větu, doplň příklad, při
 
 ## Pracovní log
 
+- 2026-07-19: Doplněna příloha o publikační kontrole nové iterace bez rozjeté knihy: kontrola účelu, praktičnosti, návaznosti, zdrojů, nadpisů, pracovního logu a `git diff`; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně znovu potvrzeno, že `cody.dreamind.cz` má expirovaný veřejný Let's Encrypt certifikát (`notAfter` 2026-07-17 19:35:56 GMT) a v kontejneru není dostupný SSH/deploy přístup k obnově.
 - 2026-07-19: Doplněna příloha o redakční triage připomínek bez nekonečného backlogu: třídění připomínek podle typu a dopadu, stavový model od nového vstupu po hotovo, práce po malých dávkách, prioritizace podle rizika a opakování, krátká triage karta, checklist a mini úkol; provozně znovu ověřeno, že `cody.dreamind.cz` selhává kvůli expirovanému veřejnému Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), zatímco aplikace za TLS odpovídá při `curl -k`, a v tomto běhu není dostupný SSH/deploy přístup k obnově.
 - 2026-07-19: Doplněna příloha o zpětné vazbě k e-booku bez formulářového přetlaku: rozhodnutí před sběrným kanálem, přímé a chudé cesty pro připomínky, třídění feedbacku na chyby/nejasnosti/nástroje/témata/pochvalu, ukládání jen nutného kontextu, uzavírání připomínek viditelnou změnou, checklist a mini úkol; provozně potvrzeno, že `cody.dreamind.cz` odpovídá při `curl -k`, ale veřejný TLS certifikát je expirovaný (`notAfter` 2026-07-17 19:35:56 GMT) a tento běh nemá SSH/deploy přístup k obnově.
 - 2026-07-19: Doplněna příloha o zdrojové hygieně bez odkazového hřbitova: rozlišení typů tvrzení, použitelný popis zdrojů, práce s aktuálními údaji, přímé odkazy bez trackerů, malé režimy kontroly zdrojů, checklist a mini úkol; znovu potvrzeno, že `cody.dreamind.cz` odpovídá za HTTPS jen při ignorování ověření certifikátu, veřejný Let's Encrypt certifikát je expirovaný (`notAfter` 2026-07-17 19:35:56 GMT) a tento běh nemá SSH opravný přístup k obnově.
