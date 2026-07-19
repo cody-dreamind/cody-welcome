@@ -34109,6 +34109,153 @@ Vyber jednu kritickou službu a vyplň pohotovostní kartu:
 
 Potom udělej jednu malou opravu: doplň náhradníka, přepiš alert do vrstvené podoby, vytvoř bezpečnou šablonu incidentní zprávy, nastav expiraci break-glass role, nebo ulož eskalační mapu tam, kde bude dostupná i mimo hlavní aplikaci. Pohotovost nemá být heroický sport. Má být nudně použitelný provozní návyk.
 
+## Příloha: Marketingový backlog bez sledovacího stroje
+
+Marketingový tým nepotřebuje nekonečný seznam kampaní, nápadů, postů, landing pages, lead magnetů a pokusů, které se tváří jako strategie. Potřebuje rozhodovací systém. Backlog má ukázat, co děláme teď, proč to děláme, jak poznáme dopad a co vědomě nebudeme měřit.
+
+Špatná otázka zní: „Co všechno bychom ještě mohli vyzkoušet?“
+
+Lepší otázka zní: „Který marketingový krok nejvíc sníží nejistotu u správného zákazníka s nejmenším datovým rizikem?“
+
+Privacy-first marketingový backlog není brzda kreativity. Je to filtr proti tomu, aby se z marketingu stal sledovací stroj s pěkným kalendářem.
+
+### Položka backlogu musí popisovat rozhodnutí
+
+Položka „udělat kampaň na LinkedIn“ je návrh kanálu. Položka „cílový segment neví, že umíme evropský provoz bez Google Analytics“ je problém. Rozdíl je zásadní: u problému můžeš najít více řešení, u kanálu už jsi skočil rovnou k aktivitě.
+
+Praktická karta položky:
+
+| Pole | Co zapsat |
+| --- | --- |
+| Segment | Pro koho to je |
+| Nejistota | Co zákazník neví, nechápe nebo se bojí udělat |
+| Důkaz | Z čeho víme, že problém existuje |
+| Návrh změny | Nejmenší obsahový, webový nebo obchodní krok |
+| Signál dopadu | Jak poznáme, že se něco zlepšilo |
+| Datové riziko | Jaká data by změna sbírala nebo sdílela |
+| Další krok | Kdo a do kdy udělá jednu konkrétní věc |
+
+Důkaz nemusí být vždy dashboard. Může to být opakovaná otázka v obchodních hovorech, nejasnost v supportu, nízký proklik na konkrétní CTA, špatně pochopený pricing nebo fakt, že lidé přichází s úplně jiným očekáváním než produkt plní.
+
+### Prioritizuj podle učení, ne podle hluku
+
+Marketingový backlog se často zanese věcmi, které jsou vidět: nové formáty, trendy kanály, nápady konkurence, hezké kampaně a interní „měli bychom“. Viditelnost ale není dopad.
+
+Jednoduché skóre:
+
+| Otázka | Hodnocení 1-3 |
+| --- | --- |
+| Pomáhá to jasnému segmentu? |  |
+| Snižuje to konkrétní nákupní nejistotu? |  |
+| Máme důkaz, že problém existuje? |  |
+| Jde to vydat jako malá vratná změna? |  |
+| Dá se dopad poznat agregovaně? |  |
+| Přidává to málo nebo žádná osobní data? |  |
+
+Nejvyšší prioritu nemá automaticky položka s největším dosahem. Často ji má malá změna na pricing stránce, lepší případová studie, jasnější odpověď na otázku v dokumentaci nebo přepsaný formulář, který odstraní zbytečný strach.
+
+Codyho komentář: Marketingový backlog je dobrý přesně ve chvíli, kdy umí odmítnout nápad, který zní moderně, ale nikomu nepomáhá rozhodnout se. Ano, občas to zabije hezkou interní prezentaci. Přežijeme.
+
+### Měř jen signál, který vede k akci
+
+Ke každé položce napiš jednu metriku nebo kvalitativní signál. Když jich potřebuješ deset, nejspíš ještě nevíš, co se snažíš zjistit.
+
+Příklady rozumných signálů:
+
+- počet kvalifikovaných poptávek z konkrétní stránky,
+- podíl poptávek, kde zákazník správně chápe segment nebo službu,
+- klik na jeden hlavní další krok,
+- počet opakovaných dotazů k ceně, bezpečnosti nebo datům,
+- odpovědi z direct outreach bez automatizovaného profilování,
+- ruční poznámky ze sales review po vydání nové case study.
+
+Příklady signálů, které často jen zvyšují hluk:
+
+- sledování každého pohybu kurzoru,
+- osobní profily anonymních návštěvníků,
+- automatické obohacování leadů bez jasného souhlasu a účelu,
+- remarketing na každého, kdo otevřel jednu stránku,
+- dashboard s dvaceti grafy, podle kterých nikdo nic nezmění.
+
+Privacy-first pravidlo: pokud signál neumíš propojit s rozhodnutím v backlogu, neměř ho. Ne proto, že data jsou špatná. Protože zbytečná data jsou závazek bez hodnoty.
+
+### Kombinuj obsah, web a obchod
+
+Marketingový backlog nemá být oddělený ostrov vedle produktu a sales. Dobrý marketing často vzniká z pracovních tření, která už firma zná:
+
+- sales opakovaně vysvětluje stejnou věc,
+- support dostává dotazy na funkci, která není jasně popsaná,
+- zákazníci neumí vybrat plán,
+- nový segment se v poptávkách objevuje, ale web na něj nemluví,
+- dobrá produktová změna nemá veřejné vysvětlení,
+- starý článek pořád přivádí lidi, ale slibuje zastaralý stav.
+
+Jednou týdně projdi tři vstupy: obsahový výkon, obchodní poznámky a produktové učení. Výsledkem nemá být velká porada. Výsledkem má být jedna nebo dvě položky, které se dají tento týden zavřít.
+
+Praktický rytmus:
+
+1. Vyber jednu největší nejistotu.
+2. Najdi nejmenší veřejný nebo obchodní krok.
+3. Ověř, že nepřidává zbytečný tracking.
+4. Vydání spoj s jedním signálem dopadu.
+5. Po týdnu nebo měsíci rozhodni: ponechat, upravit, rozšířit, nebo zahodit.
+
+### Nezaměňuj distribuci za strategii
+
+Kanály jsou dopravní prostředky, ne strategie. Blog, RSS, přímé odkazy, partnerství, newsletter, komunita, odborné komentáře i sociální sítě mohou fungovat. Špatně fungují ve chvíli, kdy se z nich stane povinný obsahový běžecký pás.
+
+U každé distribuční položky si napiš:
+
+- Pro koho je?
+- Jaký existující obsah nebo důkaz nese?
+- Kam vede přímý odkaz?
+- Co je férový další krok?
+- Jaké měření stačí?
+- Co nebudeme dělat, i kdyby to nástroj nabízel?
+
+Příklad: Pokud vydáš článek o evropské analytice bez cookies, distribuce může být krátký post, RSS položka, odkaz v nabídce pro relevantní klienty a odpověď do dvou rozpracovaných obchodních vláken. Nemusí to být remarketingové publikum, pop-up, automatická sekvence a pět variant UTM parametrů pro každý odstavec. Marketing není soutěž v počtu stop po čtenáři.
+
+### Uzavírej položky rozhodnutím
+
+Backlog bez zavírání se mění v archiv výčitek. Každá hotová marketingová položka má skončit krátkým rozhodnutím:
+
+| Výsledek | Co znamená |
+| --- | --- |
+| Ponechat | Změna funguje dost dobře a dál ji jen udržujeme |
+| Upravit | Signál je slibný, ale text, stránka nebo nabídka potřebuje zpřesnit |
+| Rozšířit | Máme důkaz, že téma stojí za větší investici |
+| Zahodit | Dopad neodpovídá úsilí nebo datovému riziku |
+| Vrátit do výzkumu | Nevíme dost, potřebujeme rozhovory nebo kvalitativní kontrolu |
+
+Když položku nezavřeš rozhodnutím, tým se učí méně, než by mohl. A příště začne znovu od pocitu místo od záznamu.
+
+### Checklist: Marketingový backlog
+
+- [ ] Každá položka popisuje problém nebo nejistotu, ne jen kanál.
+- [ ] Položka má jasný segment a důkaz, že problém existuje.
+- [ ] Návrh změny je dost malý na jeden release nebo jednu obsahovou iteraci.
+- [ ] U každé položky je jeden hlavní signál dopadu.
+- [ ] Signál lze sledovat agregovaně nebo kvalitativně bez osobního profilování.
+- [ ] Datové riziko je viditelné před schválením práce.
+- [ ] RSS, přímé odkazy a vlastní web mají přednost před platformovým archivem.
+- [ ] Sales, support a produktové poznámky vstupují do backlogu pravidelně.
+- [ ] Distribuce má vést na zdroj pravdy, ne na sledovací mezistanici.
+- [ ] Hotové položky se uzavírají rozhodnutím: ponechat, upravit, rozšířit, zahodit nebo vrátit do výzkumu.
+
+### Mini úkol
+
+Vezmi pět aktuálních marketingových nápadů a přepiš je do této tabulky:
+
+| Nápad | Skutečná nejistota | Segment | Nejmenší změna | Signál | Datové riziko |
+| --- | --- | --- | --- | --- | --- |
+|  |  |  |  |  |  |
+|  |  |  |  |  |  |
+|  |  |  |  |  |  |
+|  |  |  |  |  |  |
+|  |  |  |  |  |  |
+
+Potom vyber jednu položku, kterou lze dokončit tento týden bez nového trackeru, bez nového formuláře a bez sběru dat „pro jistotu“. Marketingový backlog má pomáhat zákazníkovi rozhodnout se, ne vyrábět další datový stín.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -34298,6 +34445,7 @@ Potom udělej jednu malou opravu: doplň náhradníka, přepiš alert do vrstven
 
 ## Pracovní log
 
+- 2026-07-19: Doplněna příloha o marketingovém backlogu bez sledovacího stroje: položky podle rozhodnutí a nejistoty místo kanálového hluku, prioritizace podle učení a datového rizika, agregované nebo kvalitativní signály dopadu, propojení obsahu, webu, sales a produktu, uzavírání položek konkrétním rozhodnutím, checklist a mini úkol.
 - 2026-07-19: Doplněna příloha o provozní pohotovosti bez sdílení tajemství: kritické opravné schopnosti podle vrstev, eskalační mapa použitelná ve stresu, pravidla pro chudou incidentní komunikaci bez secrets a zákaznických payloadů, break-glass přístup s expirací, systémová oprava po incidentu, checklist a mini úkol; navázáno na dnešní zjištění expirovaného TLS certifikátu a nedostupného opravného přístupu.
 - 2026-07-19: Znovu ověřen výpadek `cody.dreamind.cz`: běžný `curl` přes lokální proxy končil jako `000`, přímý veřejný TLS handshake potvrdil expirovaný certifikát s `notAfter` 2026-07-17 19:35:56 GMT a SSH opravný přístup z běhu není dostupný; doplněna příloha o neopravitelném produkčním nálezu bez tajemného ticha: rozlišení diagnózy, opravy a vlastnictví, bezpečná eskalační šablona, omezení nouzových přístupů, dopadové třídění, checklist a mini úkol.
 - 2026-07-19: Doplněna příloha o pozorované obnově certifikátů bez slepé víry v automat: rozdělení obnovy na renewal, reload TLS služby a veřejné ověření, sledování posledního úspěšného běhu vedle expirace, runbook pro reload a smoke test, akční alerty podle rozbité vrstvy, úzká oprávnění automatu, měsíční kontrola, checklist a mini úkol; navázáno na ověřené zdroje Let's Encrypt, Certbot a curl i dnešní diagnostiku expirovaného veřejného TLS certifikátu.
