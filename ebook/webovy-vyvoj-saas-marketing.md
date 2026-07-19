@@ -34371,6 +34371,132 @@ Projdi posledních deset záznamů pracovního logu a vyplň:
 
 Potom udělej jednu malou údržbu: přepiš nejasný záznam, rozděl provozní poznámku od obsahové změny, přidej milník pro uzavřené období, nebo zaveď sekci „Poslední změny“. Log má šetřit budoucí pozornost. Když ji jen spotřebovává, potřebuje vlastní úklid.
 
+## Příloha: Předání mezi iteracemi bez ztráty kontextu
+
+Opakovaná práce na webu, SaaS nebo e-booku má zvláštní druh rizika: každý běh může být poctivý, ale celek se přesto začne třepit. Jeden člověk upraví text, druhý řeší výpadek webu, třetí doplní zdroje, čtvrtý v dobré víře otevře další téma. Po týdnu je dokument větší, ale tým neví, co je hotové, co je otevřené a která poznámka byla jen provozní stopa ze včerejšího incidentu.
+
+Předání mezi iteracemi není korporátní formalita. Je to malý most přes zapomínání. Stačí pár vět, ale musí odpovědět na tři otázky: co se změnilo, proč to bylo další logické místo a co má příští běh vědět, aby nezačal od nuly.
+
+Špatná otázka zní: „Máme všechno někde v historii?“
+
+Lepší otázka zní: „Dokáže další běh za dvě minuty poznat, kde navázat a čeho se nedotýkat?“
+
+### Každá iterace má mít jeden dokončený výsledek
+
+Když je času málo, největší past je otevřít moc front najednou. V obsahové práci to vypadá nevinně: začít novou kapitolu, trochu přepsat starší pasáž, přidat zdroje, upravit osnovu a ještě přidat poznámku k provozu. Výsledek může být pracovitý, ale další člověk dostane pět rozdělaných věcí místo jedné hotové.
+
+Dobré předání začíná už při výběru úkolu. Jedna iterace by měla mít větu:
+
+```text
+Dnes dokončím přílohu o předání mezi iteracemi: proč vzniká, jak má vypadat krátká předávací karta, co nezapisovat a jak podle ní vybrat další krok.
+```
+
+Taková věta drží rozsah. Když během práce narazíš na další téma, napiš ho jako kandidáta do backlogu nebo pracovního logu, ale netahej ho násilím do stejné kapitoly. Dokument není hladový. Nemusíš ho krmit vším, co právě běží kolem.
+
+### Předávací karta má být krátká
+
+Předání nemusí být samostatný systém. U malého týmu často stačí krátká karta v pracovním logu, issue, pull requestu nebo poznámce u úkolu.
+
+Použitelná karta:
+
+| Pole | Co vyplnit | Příklad |
+| --- | --- | --- |
+| Dokončeno | Jedna hotová věc | přidána příloha o předání mezi iteracemi |
+| Důvod | Proč to navazuje | předchozí příloha řešila pracovní log, další krok je předání kontextu |
+| Ověření | Jak se poznalo, že změna drží | `git diff`, kontrola nadpisů a pracovního logu |
+| Otevřeno | Co zůstává mimo rozsah | samostatná revize starších log záznamů |
+| Nedotýkat se | Co není součástí změny | zdroje, hlavní osnova, starší incidentní přílohy |
+
+Nejdůležitější jsou poslední dvě pole. „Otevřeno“ chrání před zapomenutím. „Nedotýkat se“ chrání před dobrovolnou destrukcí. U dlouhého Markdown dokumentu je to překvapivě praktické: další editor ví, že nemá přeskupovat celý e-book jen proto, že vidí jednu neuhlazenou větu.
+
+### Odděl obsahové předání od provozního předání
+
+U živého projektu se často míchají dva typy práce:
+
+- obsahová iterace: co přibylo do článku, dokumentace, e-booku nebo webu,
+- provozní iterace: co se zjistilo o dostupnosti, deployi, certifikátu, DNS, buildu nebo monitoringu.
+
+Obě jsou důležité, ale nemají se maskovat jedna za druhou. Když obsahový log říká jen „web má expirovaný certifikát“, další běh neví, co bylo napsáno. Když provozní poznámka schová fakt, že certifikát pořád není opravený, tým může falešně předpokládat, že samotný commit problém vyřešil. Commit do e-booku TLS neobnoví. Šokující odhalení, já vím.
+
+Praktická forma:
+
+```text
+Obsah: Doplněna příloha o předání mezi iteracemi.
+Provoz: Veřejná kontrola webu stále selhává na expirovaném TLS certifikátu; aktuální běh nemá opravný přístup k hostu.
+```
+
+Takový zápis je stručný a poctivý. Neobsahuje tajemství, ale předává rozhodující fakt.
+
+### Příští krok vybírej podle nejmenšího navázání
+
+Předání nemá diktovat budoucnost. Má zmenšit tření. Když další běh otevře dokument, měl by vidět několik přirozených možností:
+
+- pokračovat další přílohou, která navazuje na poslední téma,
+- opravit konkrétní slabé místo z předchozí revize,
+- doplnit chybějící checklist,
+- zkrátit nebo zpřehlednit přerostlou část,
+- ověřit zdroje u tvrzení, která rychle stárnou.
+
+Výběr dalšího kroku má respektovat aktuální stav. Pokud poslední tři iterace řešily incidentní provoz, může dávat smysl přejít zpět k produktu, marketingu nebo čtenářské navigaci. Pokud ale provozní problém pořád trvá a přímo ovlivňuje publikaci, je fér ho v logu ponechat jako otevřený fakt.
+
+Příklad rozhodovací věty:
+
+```text
+Další logický krok: buď zkrátit starší pracovní log do milníků, nebo přidat navigační mapu příloh podle role čtenáře. Neotevírat nové právní téma bez ověřených zdrojů.
+```
+
+Tahle věta nikoho nesvazuje, ale šetří čas.
+
+### Předání nesmí být datový odpad
+
+Privacy-first pravidlo platí i pro interní poznámky. Předání má být chudé na citlivá data a bohaté na rozhodovací kontext.
+
+Do předání nepatří:
+
+- privátní klíče, tokeny, hesla ani části `.env`,
+- celé logy s IP adresami, e-maily nebo payloady,
+- screenshoty administrace bez redakce,
+- interní zákaznické detaily, které nejsou nutné pro další krok,
+- spekulace napsané jako fakt.
+
+Do předání patří:
+
+- přesný výsledek bez zbytečných surových dat,
+- hranice oprávnění,
+- odkaz na bezpečné místo, kde existuje runbook nebo issue,
+- jasné rozlišení mezi pozorováním a interpretací,
+- jedna věta o tom, co je mimo rozsah.
+
+Codyho komentář: Dobré předání není román. Je to čistá startovní čára pro dalšího člověka. Když po něm další běh nemusí hádat, kdo co myslel, vyhrál jsi malou válku proti chaosu. Bez fanfár, ale s méně kávou vypitou ze stresu.
+
+### Checklist: Předání mezi iteracemi
+
+- [ ] Iterace má jeden dokončený výsledek.
+- [ ] Předání říká, proč byl vybraný právě tento krok.
+- [ ] Je oddělená obsahová změna od provozního zjištění.
+- [ ] Zápis obsahuje způsob ověření, například diff, build, lint nebo ruční kontrolu struktury.
+- [ ] Je jasné, co zůstalo otevřené.
+- [ ] Je jasné, čeho se změna úmyslně nedotkla.
+- [ ] Neobsahuje secrets, zákaznická data ani celé surové logy.
+- [ ] Spekulace jsou označené jako spekulace.
+- [ ] Další běh dokáže navázat bez čtení celé historie.
+- [ ] Telegram nebo jiný lidský souhrn odpovídá skutečné změně, ne jen dobrému pocitu.
+
+### Mini úkol
+
+Vezmi poslední dokončenou změnu v projektu a napiš k ní předávací kartu:
+
+| Pole | Odpověď |
+| --- | --- |
+| Dokončeno |  |
+| Důvod |  |
+| Ověření |  |
+| Otevřeno |  |
+| Nedotýkat se |  |
+| Privacy poznámka |  |
+
+Potom podle ní vyber jeden další krok. Pokud neumíš vyplnit „Otevřeno“ nebo „Nedotýkat se“, pravděpodobně je iterace pořád moc rozmazaná. Zmenši ji. Malé ostré předání je lepší než velká mlhavá kronika.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -34560,6 +34686,7 @@ Potom udělej jednu malou údržbu: přepiš nejasný záznam, rozděl provozní
 
 ## Pracovní log
 
+- 2026-07-19: Doplněna příloha o předání mezi iteracemi bez ztráty kontextu: jeden dokončený výsledek na běh, krátká předávací karta, oddělení obsahového a provozního předání, výběr dalšího kroku, privacy-first pravidla pro poznámky, checklist a mini úkol; provozně znovu potvrzeno, že veřejný TLS certifikát `cody.dreamind.cz` je expirovaný (`notAfter` 2026-07-17 19:35:56 GMT) a aktuální běh nemá opravný přístup k hostu.
 - 2026-07-19: Doplněna příloha o pracovním logu bez nekonečné kroniky: účel logu jako navigace pro další iterace, rozlišení obsahových, zdrojových, provozních a údržbových změn, pravidlo detailu podle rizika, shrnování starší historie do milníků, checklist a mini úkol.
 - 2026-07-19: Doplněna krátká poznámka do pricing kapitoly o oznamování změn cen jako produktové změny, včetně dopadu na stávající zákazníky a checklist položky pro změny cen, limitů nebo plánů.
 - 2026-07-19: Doplněna příloha o marketingovém backlogu bez sledovacího stroje: položky podle rozhodnutí a nejistoty místo kanálového hluku, prioritizace podle učení a datového rizika, agregované nebo kvalitativní signály dopadu, propojení obsahu, webu, sales a produktu, uzavírání položek konkrétním rozhodnutím, checklist a mini úkol.
