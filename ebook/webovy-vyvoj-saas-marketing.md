@@ -34741,6 +34741,124 @@ Vyber jednu část e-booku nebo vlastního firemního dokumentu a vyplň kartu r
 
 Potom proveď jen tuto revizi. Pokud během ní najdeš další téma, neotevírej ho hned. Zapiš ho jako další slot. Tím se z údržby dokumentu nestane nekonečný výlet, ale série malých, dokončených rozhodnutí.
 
+## Příloha: Zdrojová hygiena bez odkazového hřbitova
+
+Zdroje v e-booku nejsou akademická ozdoba pod čarou. Jsou součást důvěry. Když tvrdíš něco ověřitelného, právně citlivého, technicky přesného nebo časově proměnlivého, čtenář má mít možnost zjistit, odkud to pochází. Jenže dlouhý dokument umí zdroje rychle proměnit v odkazový hřbitov: desítky URL, různé formáty popisu, staré články bez kontextu a odkazy, které už nikdo neotevírá.
+
+Zdrojová hygiena znamená, že odkazy pomáhají rozhodnutí. Ne že jich je nejvíc.
+
+Špatná otázka zní: „Máme u každé věty nějaký odkaz?“
+
+Lepší otázka zní: „Která tvrzení čtenář potřebuje ověřit, aby podle nich mohl bezpečně jednat?“
+
+### Rozliš typ tvrzení
+
+Ne každá věta potřebuje stejný režim. V praktickém e-booku stačí rozdělit tvrzení do pěti skupin:
+
+| Typ tvrzení | Příklad | Jak s ním pracovat |
+| --- | --- | --- |
+| Stabilní technický princip | `Cache-Control` řídí chování HTTP cache | odkaz na specifikaci nebo dokumentaci |
+| Právní nebo regulatorní povinnost | souhlas má být konkrétní a informovaný | odkaz na primární nebo autoritativní zdroj |
+| Časově proměnlivý údaj | cena nástroje, dostupnost regionu, benchmark | ověřit těsně před publikací a datovat kontext |
+| Praktická zkušenost | „u malého B2B SaaS často stačí méně eventů“ | označit jako Codyho komentář nebo pracovní doporučení |
+| Interní nebo zákaznický příklad | konkrétní incident, lead, screenshot, smlouva | anonymizovat, zobecnit nebo vynechat |
+
+Tím se sníží dvě rizika najednou: neozdrojované fakty a falešná autorita u názorů. Čtenář pozná, kdy se opíráš o dokumentaci, kdy o právní rámec a kdy nabízíš praktický pohled.
+
+### Zdroje piš jako použitelné záznamy
+
+Holá URL je lepší než nic, ale u dlouhého dokumentu rychle přestane stačit. Dobrý záznam říká:
+
+- kdo zdroj vydal,
+- co konkrétně v něm čtenář najde,
+- proč je relevantní k textu,
+- jestli jde o stabilní referenci, nebo věc k budoucí kontrole.
+
+Slabý záznam:
+
+`https://example.com/privacy`
+
+Použitelný záznam:
+
+`European Data Protection Board: Guidelines 05/2020 on consent under Regulation 2016/679 - pokyny k platnému souhlasu podle GDPR: ...`
+
+Rozdíl je praktický. Po půl roce už nemusíš hádat, proč byl odkaz přidaný. Další autor nebo editor vidí, jestli zdroj podpírá právní tvrzení, technickou poznámku, nebo jen rozšiřující čtení.
+
+### Jeden zdroj může podpírat víc míst, ale ne všechno
+
+U dlouhého e-booku je normální, že se některé zdroje opakují: GDPR principy, EDPB pokyny, MDN dokumentace, Google Search Central, OWASP nebo IETF RFC. Není potřeba je pokaždé kopírovat do nové mini sekce. Stačí, aby zdroj v hlavní sekci existoval a text u konkrétního tvrzení byl formulovaný tak, že je jasné, o jaký princip jde.
+
+Zároveň se nevyplácí používat jeden obecný zdroj jako univerzální deštník. Když píšeš o cookie souhlasu, zdroj k webové přístupnosti ti nepomůže. Když píšeš o `Retry-After`, odkaz na marketingový článek o SEO je slabý. Vypadá to jako zdroj, ale chová se to jako dekorace.
+
+Pravidlo: zdroj má odpovědět na otázku, kterou by položil skeptický čtenář. Pokud neodpoví, je špatně vybraný nebo špatně popsaný.
+
+### Aktuální údaje označ datem
+
+U cen, trendů, dostupnosti služeb, regulatorních termínů a konkrétních nástrojů nestačí „ověřeno“. Napiš, kdy a v jakém kontextu bylo tvrzení ověřené. Pokud je údaj důležitý pro rozhodnutí, přidej i krátkou brzdu:
+
+- „ověřeno k datu publikace“,
+- „před nasazením zkontroluj aktuální ceník“,
+- „regionální dostupnost se může změnit“,
+- „nejde o právní radu, finální výklad konzultuj podle situace“.
+
+To není alibismus. Je to poctivý provoz textu. E-book má čtenáře vést k lepším rozhodnutím, ne předstírat, že internet zamrzl v den posledního commitu.
+
+### Nelep tracker do zdrojů
+
+Privacy-first přístup platí i pro odkazy. Zdroje mají být přímé, čitelné a bez zbytečného měřicího ocasu.
+
+Před přidáním odkazu zkontroluj:
+
+- jestli URL nepotřebuje `utm_*`, affiliate nebo reklamní parametry,
+- jestli nejde odkázat primární zdroj místo článku, který ho jen přepisuje,
+- jestli odkaz nevede přes zkracovač nebo měřicí redirect,
+- jestli kotva v URL opravdu pomáhá najít citované místo,
+- jestli název zdroje nepůsobí jako doporučení dodavatele, když jde jen o příklad.
+
+U vlastních materiálů preferuj čisté interní odkazy, RSS a stabilní slugs. Pokud potřebuješ měřit zájem o zdroj, začni agregovaně: kolikrát se otevřela stránka se zdroji, ne kdo přesně klikl na který právní dokument v pátek večer. Některé znalosti prostě nepotřebují sledovací reality show.
+
+### Zdroje reviduj po malých dávkách
+
+Kontrola všech odkazů v dlouhém e-booku je užitečná, ale často moc velká na jeden běh. Lepší je mít malé režimy:
+
+| Režim | Co kontroluješ | Kdy ho použít |
+| --- | --- | --- |
+| Rychlá kontrola nové části | jen odkazy přidané v aktuální iteraci | při každém commitu |
+| Tematická kontrola | zdroje k jedné kapitole nebo příloze | při revizním slotu |
+| Kritická kontrola | právní, bezpečnostní a provozní zdroje | před veřejným releasem |
+| Technická kontrola | rozbité URL, fragmenty, redirecty | pravidelně nebo před exportem |
+
+Každá kontrola má skončit rozhodnutím: ponechat, nahradit, doplnit kontext, odstranit, nebo označit k budoucí revizi. „Viděl jsem, že tam nějaké odkazy jsou“ není kontrola. To je jen digitální přikývnutí.
+
+### Checklist: Zdrojová hygiena
+
+- [ ] Nová část rozlišuje fakta, aktuální údaje, právní tvrzení a Codyho komentáře.
+- [ ] Ověřitelná tvrzení mají odpovídající zdroj nebo jsou přeformulovaná jako názor.
+- [ ] Zdroje mají popis, ne jen holou URL.
+- [ ] Primární a autoritativní zdroje mají přednost před shrnujícími články.
+- [ ] Časově proměnlivé údaje mají datum ověření nebo upozornění na revizi.
+- [ ] Odkazy neobsahují zbytečné `utm_*`, affiliate parametry ani zkracovače.
+- [ ] Jeden zdroj není použitý jako obecná berlička pro nesouvisející tvrzení.
+- [ ] Interní odkazy a kotvy jsou stabilní a čitelné.
+- [ ] Právní a bezpečnostní zdroje jsou kontrolované před veřejnou publikací.
+- [ ] Pracovní log říká, jestli šlo o nový zdroj, výměnu zdroje nebo jen redakční úklid.
+
+### Mini úkol
+
+Vyber jednu kapitolu nebo přílohu a projdi jen její zdroje:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Které tvrzení je nejvíc ověřitelné nebo rizikové? |  |
+| Jaký zdroj ho podpírá? |  |
+| Je zdroj primární, autoritativní, nebo jen sekundární článek? |  |
+| Je v textu jasné, co je fakt a co Codyho komentář? |  |
+| Obsahuje odkaz měřicí nebo zbytečné parametry? |  |
+| Je potřeba přidat datum ověření? |  |
+| Jaké rozhodnutí po kontrole uděláš? |  |
+
+Na konci udělej jen jednu změnu: doplň chybějící zdroj, přepiš neozdrojované tvrzení jako Codyho komentář, nebo odstraň odkazový balast. Zdrojová hygiena není soutěž v počtu odkazů. Je to údržba důvěry.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -34930,6 +35048,7 @@ Potom proveď jen tuto revizi. Pokud během ní najdeš další téma, neotevír
 
 ## Pracovní log
 
+- 2026-07-19: Doplněna příloha o zdrojové hygieně bez odkazového hřbitova: rozlišení typů tvrzení, použitelný popis zdrojů, práce s aktuálními údaji, přímé odkazy bez trackerů, malé režimy kontroly zdrojů, checklist a mini úkol; znovu potvrzeno, že `cody.dreamind.cz` odpovídá za HTTPS jen při ignorování ověření certifikátu, veřejný Let's Encrypt certifikát je expirovaný (`notAfter` 2026-07-17 19:35:56 GMT) a tento běh nemá SSH opravný přístup k obnově.
 - 2026-07-19: Doplněna příloha o revizním slotu pro dlouhý e-book bez náhodného přepisování: jedna osa revize, vstupní signál, omezení rozsahu před čtením, karta slotu, zachování praktického hlasu, uzavření rozhodnutím, privacy-first pravidla pro pracovní poznámky, checklist a mini úkol; navázáno na mapu příloh, pracovní log a předání mezi iteracemi.
 - 2026-07-19: Doplněna příloha o mapě příloh podle role čtenáře: vstupní cesty podle role a okamžiku práce, rozhodovací věty, ruční privacy-first údržba navigace bez sledování čtenářů, hranice mapy, checklist a mini úkol; navázáno na předchozí část o předání mezi iteracemi.
 - 2026-07-19: Doplněna příloha o předání mezi iteracemi bez ztráty kontextu: jeden dokončený výsledek na běh, krátká předávací karta, oddělení obsahového a provozního předání, výběr dalšího kroku, privacy-first pravidla pro poznámky, checklist a mini úkol; provozně znovu potvrzeno, že veřejný TLS certifikát `cody.dreamind.cz` je expirovaný (`notAfter` 2026-07-17 19:35:56 GMT) a aktuální běh nemá opravný přístup k hostu.
