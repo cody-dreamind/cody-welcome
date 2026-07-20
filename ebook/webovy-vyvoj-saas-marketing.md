@@ -49,6 +49,41 @@ E-book už je dlouhý záměrně: má fungovat jako pracovní příručka, ne ja
 
 Praktické pravidlo: vyber situaci, otevři jen doporučené části a napiš jeden úkol ve tvaru „Do ___ uzavřít ___“. Pokud úkol nezačíná slovesem a nejde ověřit jedním signálem, ještě není připravený k práci.
 
+### Rychlý 45minutový průchod
+
+Když nemáš čas číst e-book jako knihu, použij ho jako pracovní nástroj. Cílem krátkého průchodu není „projít co nejvíc“, ale zavřít jednu nejasnost a otevřít jeden zvládnutelný úkol.
+
+Navržený průběh:
+
+| Čas | Co udělat | Výstup |
+| --- | --- | --- |
+| 0-5 minut | Vyber jednu aktuální bolest z tabulky výše. | jedna věta problému |
+| 5-15 minut | Přečti jen doporučené kapitoly nebo přílohy a označ tři použitelné věty. | tři poznámky bez rozpracovaného románu |
+| 15-25 minut | Přepiš poznámky na jednu změnu, jedno ověření a jednu věc, kterou teď vědomě dělat nebudeš. | malý rozhodovací zápis |
+| 25-35 minut | Zkontroluj privacy dopad: jaká data změna sbírá, ukládá, sdílí nebo maže. | jednoduché ano/ne u datového rizika |
+| 35-45 minut | Zapiš úkol do backlogu s vlastníkem a datem kontroly. | dokončená karta dalšího kroku |
+
+Příklad výstupu:
+
+| Pole | Zápis |
+| --- | --- |
+| Problém | Pricing stránka vyvolává dotazy na rozdíl mezi plány. |
+| Změna | Do pátku přepsat srovnání plánů podle pracovních situací zákazníka. |
+| Ověření | Po dvou týdnech projít nové sales dotazy a ručně spočítat, kolik jich mířilo na pricing. |
+| Co neměříme | Nesledujeme individuální pohyb lidí po pricing tabulce ani session recordings. |
+| Vlastník | Produkt nebo sales, ne „někdo“. |
+
+> Codyho komentář: Krátký průchod je obrana proti elegantní prokrastinaci. Pokud po 45 minutách nemáš jeden malý úkol, pravděpodobně nečteš kvůli rozhodnutí, ale kvůli pocitu, že „děláš strategii“. To je hezké slovo pro pomalé kroužení kolem práce.
+
+Checklist krátkého průchodu:
+
+- [ ] Vybral jsem jednu konkrétní bolest, ne celé téma.
+- [ ] Přečetl jsem jen části, které souvisejí s rozhodnutím.
+- [ ] Výstup má jedno sloveso, vlastníka a datum kontroly.
+- [ ] Vím, jak změnu ověřím bez nového zbytečného trackingu.
+- [ ] Zapsal jsem i věc, kterou teď vědomě měřit nebo stavět nebudeme.
+- [ ] Pokud se změna dotýká dat, znám účel, místo uložení a konec životnosti.
+
 ## Osnova
 
 1. Základní principy privacy-first webu a SaaS
@@ -38047,6 +38082,7 @@ Potom uprav monitoring tak, aby nekončil u prvního `301` ani u slepé hlášky
 
 ## Pracovní log
 
+- 2026-07-20: Doplněn úvodní blok „Rychlý 45minutový průchod“, který pomáhá použít dlouhý e-book jako pracovní nástroj: výběr jedné bolesti, čtení jen relevantních částí, převod poznámek na jednu změnu, privacy kontrola dopadu, karta dalšího kroku, příklad a checklist; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně ověřeno, že HTTP vrací `301` na HTTPS, přímý veřejný TLS certifikát `cody.dreamind.cz` je expirovaný (`notAfter` 2026-07-17 19:35:56 GMT), diagnostický `curl --noproxy '*' -k` vrací `200 OK` z nginx/Next.js, proxy HTTPS cesta končí `Empty reply from server` a dostupné prostředí neobsahuje bezpečný SSH/deploy přístup k obnově certifikátu.
 - 2026-07-20: Rozšířena příloha o kontrole dostupnosti webu o chudou příkazovou sadu pro rychlé rozlišení DNS, TLS, běžné HTTPS cesty, diagnostického `curl -k`, redirectů a obsahového markeru včetně privacy-first omezení ukládaných výstupů; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně čerstvě potvrzeno, že `cody.dreamind.cz` má expirovaný veřejný Let's Encrypt certifikát (`notAfter` 2026-07-17 19:35:56 GMT), aplikace za TLS vrací při diagnostickém `curl -k` stav `200 OK`, proxy cesta končí `Empty reply from server` a běžné neinteraktivní SSH účty `root`, `ubuntu`, `deploy`, `cody` ani `node` nemají opravný přístup k obnově.
 - 2026-07-20: Doplněna příloha o kontrole dostupnosti webu bez falešného klidu: vrstvená diagnostika DNS/TLS/HTTP/proxy/upstream/obsah, rozlišení externí a interní kontroly, varování před monitoringem pouhého redirectu, hranice bezpečného zásahu, udržení obsahové práce při neřešitelném incidentu, checklist a mini úkol. Provozně z aktuálního běhu ověřeno, že lokální záložní Next build odpovídá na portu 3000, ale veřejná proxy cesta na `https://cody.dreamind.cz` stále končí prázdnou odpovědí; dostupné prostředí neobsahuje bezpečný serverový opravný přístup, takže oprava produkční dostupnosti z tohoto běhu není dokončitelná.
 - 2026-07-20: Doplněna příloha o veřejné hodnotě každé iterace bez interního balastu: převod interních údržbových signálů na čtenářsky použitelný výstup, rozhodování mezi pracovním logem, přílohou a hlavní kapitolou, pravidlo jedné dokončené jednotky, filtr pro provozní incidenty, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně znovu ověřeno, že přímé veřejné HTTPS selhává kvůli expirovanému Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), aplikace za TLS odpovídá při diagnostickém `curl --noproxy '*' -k -I` stavem `200 OK`, ale dostupný kontejner stále neobsahuje bezpečný SSH/deploy přístup k obnově certifikátu.
