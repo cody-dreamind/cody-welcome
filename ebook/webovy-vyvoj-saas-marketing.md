@@ -38677,6 +38677,147 @@ Vezmi rozjetý projekt a vyplň kontrolu prvního týdne, i když už běží d�
 
 Potom udělej jednu uklízecí akci: odeber zbytečný přístup, smaž nepotřebný export, přepiš změnu rozsahu na rozhodovací kartu, nebo zmenši další týden na jeden výstup. První týden projektu nemusí být dokonalý. Musí být čitelný.
 
+## Příloha: Retrospektiva první etapy bez hledání viníka
+
+První etapa projektu má jednu zvláštní vlastnost: často ukáže víc o způsobu spolupráce než o samotném webu, SaaS nebo marketingu. Na papíře šlo třeba jen o landing page, pricing, onboarding nebo audit analytiky. Ve skutečnosti se ale ukázalo, jak tým rozhoduje, jak nakládá s přístupy, jak rychle zavírá otevřené otázky a jestli umí říct „tohle teď neděláme“ bez divadelního omlouvání.
+
+Retrospektiva po první etapě proto nemá být lov na viníka. Má odpovědět na otázku:
+
+„Co jsme se naučili o produktu, spolupráci a datových rizicích, aby další etapa byla menší, přesnější a bezpečnější?“
+
+Když retrospektivu přeskočíš, další etapa obvykle zdědí stejné nedostatky, jen v hezčím kabátě. Když ji uděláš moc širokou, skončí jako seznam pocitů a dobrých úmyslů. Použitelná retrospektiva je kratší, věcnější a končí rozhodnutím.
+
+### Začni výsledkem, který měl vzniknout
+
+Nezačínej otázkou „jak se nám pracovalo“. Ta může přijít později. Začni slíbeným výsledkem první etapy a porovnej ho se skutečností.
+
+Použij jednoduché rozdělení:
+
+| Oblast | Otázka | Výstup |
+| --- | --- | --- |
+| Produkt | Co mělo být po etapě použitelné nebo rozhodnuté? | odkaz, artefakt, rozhodnutí nebo nedokončený závěr |
+| Zákazník | Jaký problém zákazníka jsme měli posunout? | důkaz, že se situace zlepšila, nebo že hypotéza neplatí |
+| Provoz | Co mělo fungovat opakovatelně? | runbook, checklist, přístup, release postup |
+| Data | Jaká data jsme museli použít a proč? | účel, místo uložení, retence, smazané dočasné vstupy |
+| Rozsah | Co jsme vědomě nedělali? | hranice, která ochránila kvalitu nebo privacy |
+
+Příklad: „Dodali jsme první verzi nové pricing stránky“ je jen začátek. Lepší zápis zní: „Dodali jsme pricing stránku pro dva hlavní segmenty, sales má kratší odpověď na rozdíl mezi plány, ale chybí jasná hranice fair use pro importy. CRM export jsme nepoužili, stačily tři anonymizované typové dotazy.“
+
+Takový výsledek se dá použít. Říká, co funguje, co chybí a jaké datové rozhodnutí se povedlo.
+
+### Odděl průběh od systému
+
+V retrospektivě je snadné sklouznout k větám typu „měli jsme málo času“ nebo „komunikace mohla být lepší“. To bývá pravda, ale samo o sobě to nic nemění. Zkus každé hodnocení převést z pocitu na systémovou příčinu.
+
+| Slabá věta | Lepší věta |
+| --- | --- |
+| Komunikace byla chaotická. | Nebyl jeden rozhodovací kanál pro změny rozsahu. |
+| Čekali jsme na klienta. | Nebylo předem jasné, kdo schvaluje texty a do kdy. |
+| Bylo moc schůzek. | Schůzky neměly rozhodovací otázku a vlastníka výstupu. |
+| Vývoj se zasekl. | Chyběl testovací účet se správnou rolí a bezpečnými daty. |
+| Měření nebylo hotové. | Nebylo rozhodnuté, která metrika bude po releasu skutečně řídit další krok. |
+
+Retrospektiva není terapie projektu. Je to servisní prohlídka pracovního systému. Když problém neumíš přepsat na mechanismus, pravděpodobně ho v další etapě jen zopakuješ s novými jmény v kalendáři.
+
+### Pracuj se třemi typy poznatků
+
+Poznatky z první etapy rozděl na tři skupiny:
+
+| Typ poznatku | Co znamená | Co s ním |
+| --- | --- | --- |
+| Produktový poznatek | Dozvěděli jsme se něco o zákazníkovi, hodnotě, nákupním rozhodnutí nebo aktivaci. | převést do backlogu, textu, pricingu, onboardingu nebo dalšího ověření |
+| Provozní poznatek | Dozvěděli jsme se něco o spolupráci, releasu, přístupech, dokumentaci nebo odpovědnosti. | upravit runbook, roli, checklist nebo rozhodovací rytmus |
+| Datový poznatek | Dozvěděli jsme se něco o nutných, zbytečných nebo rizikových datech. | zmenšit sběr, smazat dočasné vstupy, změnit retenci, upravit přístupy |
+
+Příklad:
+
+| Poznatek | Typ | Další krok |
+| --- | --- | --- |
+| Zákazníci se neptají na počet funkcí, ale na čas nasazení. | produktový | přepsat hero a pricing podle času do první hodnoty |
+| Schválení textů stálo tři dny, protože nebyl určený schvalovatel. | provozní | do další etapy dát jednoho vlastníka schválení a deadline |
+| Screenshoty z podpory obsahovaly osobní údaje, které nebyly potřeba. | datový | zavést pravidlo anonymizace screenshotů před sdílením |
+
+Tohle rozdělení chrání retrospektivu před hromadou smíšených poznámek. Každý poznatek dostane správný typ práce. Produktový poznatek nevyřešíš novou poradou. Datový poznatek nevyřešíš hezčím textem. Provozní poznatek nevyřešíš tím, že se všichni „víc snaží“. Kéž by, ale ne.
+
+### Vyber jen tři změny pro další etapu
+
+Po první etapě se obvykle objeví deset až třicet dobrých nápadů. To je past. Když všechny pustíš do další etapy, retrospektiva se promění v továrnu na rozpracovanost.
+
+Vyber maximálně tři změny:
+
+1. Jednu produktovou změnu, která zlepší hodnotu pro zákazníka.
+2. Jednu provozní změnu, která zlepší rychlost nebo čitelnost spolupráce.
+3. Jednu datovou změnu, která sníží riziko nebo zbytečný sběr.
+
+Příklad:
+
+| Kategorie | Změna pro další etapu | Proč právě teď |
+| --- | --- | --- |
+| Produkt | Přepsat onboarding podle jedné první hodnoty místo pěti funkcí. | Aktivace se láme dřív, než uživatel pochopí celý produkt. |
+| Provoz | Každá změna rozsahu musí mít větu „co tím odkládáme“. | První etapa se nafukovala malými dodatky. |
+| Data | Zakázat sdílení surových CRM exportů do pracovních složek. | Pro rozhodnutí stačily agregované a anonymizované vstupy. |
+
+Všechno ostatní patří do backlogu s datem návratu, nebo rovnou do koše. Retrospektiva má zlepšit další práci, ne vytvořit muzeum všech rozumných možností.
+
+### Uzavři dočasné věci
+
+Privacy-first retrospektiva musí mít úklidovou část. První etapa často vytvoří dočasné přístupy, testovací data, exporty, poznámky, screenshoty, sdílené dokumenty a výjimky. Pokud zůstanou viset, vzniká tichý provozní dluh.
+
+Projdi krátký seznam:
+
+- Které přístupy byly jen pro první etapu?
+- Které exporty, screenshoty nebo dočasné soubory už nepotřebujeme?
+- Které testovací účty mají být vypnuté nebo omezené?
+- Které poznámky obsahují osobní údaje nebo interní tajemství?
+- Které výjimky jsme udělali a mají dostat datum konce?
+- Který nový postup je potřeba přidat do dokumentace?
+
+Praktické pravidlo: dočasná věc bez data konce není dočasná. Je to budoucí incident v čekárně.
+
+### Udělej rozhodnutí o pokračování
+
+Na konci retrospektivy musí být jasné, co se stane dál. Ne obecné „pokračujeme“, ale konkrétní rozhodnutí.
+
+Použij jednu z vět:
+
+- „Pokračujeme další etapou beze změny cíle, měníme jen provozní postup ___.“
+- „Pokračujeme, ale zmenšujeme rozsah na ___, protože ___.“
+- „Měníme směr na ___, protože první etapa ukázala ___.“
+- „Zastavujeme další práci, dokud nebude rozhodnuto ___.“
+- „Uzavíráme projekt, protože slíbený výstup byl doručen a další práce nemá vlastní rozhodovací cíl.“
+
+Poslední věta je důležitá. Ne každý projekt musí plynule přejít do další etapy. Někdy je nejlepší výsledek dobře zavřít práci, uklidit přístupy, zapsat poznatky a odejít bez nové hromádky „ještě bychom mohli“. Ano, i neudělaná práce může být profesionální výsledek. Zvlášť když by jinak jen sbírala data, čas a neurčitou vinu.
+
+### Checklist: Retrospektiva první etapy
+
+- [ ] Retrospektiva začíná slíbeným výsledkem první etapy.
+- [ ] Skutečný výstup je doložený odkazem, zápisem, artefaktem nebo jasným nedokončeným závěrem.
+- [ ] Hodnocení průběhu je přepsané na systémové příčiny, ne na osobní dojmy.
+- [ ] Poznatky jsou rozdělené na produktové, provozní a datové.
+- [ ] Pro další etapu jsou vybrané maximálně tři změny.
+- [ ] Každá změna má vlastníka a důvod, proč se řeší právě teď.
+- [ ] Dočasné přístupy, exporty, screenshoty a testovací účty mají úklidový krok.
+- [ ] Výjimky mají datum konce nebo rozhodnutí, proč zůstávají.
+- [ ] Zápis neobsahuje zbytečné osobní údaje, surové exporty ani interní tajemství.
+- [ ] Na konci je jasné rozhodnutí: pokračovat, zmenšit, změnit směr, zastavit nebo uzavřít.
+
+### Mini úkol
+
+Vezmi poslední dokončenou etapu projektu a vyplň jednu retrospektivní kartu:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Co bylo slíbeným výsledkem etapy? |  |
+| Co skutečně vzniklo? |  |
+| Jaký produktový poznatek si bereme dál? |  |
+| Jaký provozní poznatek si bereme dál? |  |
+| Jaký datový poznatek si bereme dál? |  |
+| Jaké tři změny pustíme do další etapy? |  |
+| Co uklidíme, smažeme, omezíme nebo zavřeme? |  |
+| Jaké rozhodnutí o pokračování platí? |  |
+
+Potom udělej jednu konkrétní akci hned: odeber dočasný přístup, smaž nepotřebný export, doplň vlastníka další etapy, nebo přepiš neurčité „pokračujeme“ na jednu z rozhodovacích vět výše. Retrospektiva bez další akce je jen hezky strukturované ohlédnutí. A to je sice kulturní, ale produkt to neposune.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -38866,6 +39007,7 @@ Potom udělej jednu uklízecí akci: odeber zbytečný přístup, smaž nepotře
 
 ## Pracovní log
 
+- 2026-07-20: Doplněna příloha o retrospektivě první etapy bez hledání viníka: porovnání slíbeného a skutečného výsledku, převod pocitů na systémové příčiny, třídění poznatků na produktové, provozní a datové, výběr maximálně tří změn pro další etapu, úklid dočasných přístupů a exportů, rozhodnutí o pokračování, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně ověřeno, že `cody.dreamind.cz` přímo odpovídá na IP `91.99.227.53`, ale veřejný Let's Encrypt certifikát je expirovaný (`notAfter` 2026-07-17 19:35:56 GMT), běžné HTTPS přes proxy končí `Empty reply from server` a dostupný pracovní prostor stále neobsahuje bezpečný SSH/deploy přístup k obnově certifikátu.
 - 2026-07-20: Doplněna příloha o kontrole prvního týdne bez tichého rozpadu projektu: ověření skutečného výstupu místo aktivit, oddělení blokérů od nepohodlí, revize přístupů a dat po prvním týdnu, rozhodovací karta změny rozsahu, další týden jako jedna malá sázka, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně čerstvě ověřeno, že přímé HTTPS na `cody.dreamind.cz` selhává kvůli expirovanému veřejnému Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), proxy cesta končí `Empty reply from server` a aktuální prostředí neobsahuje bezpečný SSH/deploy přístup k obnově certifikátu.
 - 2026-07-20: Doplněna příloha o kickoffu první etapy bez přístupového chaosu: výstup prvního týdne, třídění vstupů na nutné/pozdější/odložené, přístupy vázané na konkrétní úkol, krátká rozhodovací agenda, kickoff zápis, první rizika, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně znovu ověřeno, že `cody.dreamind.cz` přes proxy končí po TLS tunelu chybou `Empty reply from server`, přímé veřejné HTTPS ověření ukazuje expirovaný Let's Encrypt certifikát (`notAfter` 2026-07-17 19:35:56 GMT) a dostupný pracovní prostor neobsahuje bezpečný SSH/deploy přístup k obnově certifikátu nebo opravě upstreamu.
 - 2026-07-20: Doplněna příloha o přijetí nabídky bez ztráty hranic projektu: potvrzovací zápis po schválení, oddělení přístupů od nadšení, zamknutí první etapy místo celého vztahu, převod obchodních slibů na pracovní úkoly, řízení změnových požadavků, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně ověřeno, že `cody.dreamind.cz` přes běžný HTTPS končí `Empty reply from server`, veřejný Let's Encrypt certifikát je expirovaný (`notAfter` 2026-07-17 19:35:56 GMT), HTTP vrací 301 na HTTPS a dostupné prostředí neobsahuje bezpečný SSH/deploy přístup k obnově certifikátu nebo opravě upstreamu.
