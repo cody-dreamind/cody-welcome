@@ -38005,6 +38005,152 @@ Vyber jednu stránku, nabídku, e-mail nebo část dokumentace a projdi ji jako 
 
 Potom přepiš jednu veřejnou větu tak, aby obsahovala sloveso, konkrétní výstup a hranici dat. Neopravuj celý web najednou. Jedna ostrá věta na správném místě často udělá víc než pět odstavců uklidňující mlhy.
 
+## Příloha: Rozhodovací záznam po obchodním hovoru bez CRM románu
+
+Obchodní hovor je drahý zdroj učení. Ne proto, že by se měl přepsat do třístránkového zápisu a navždy uložit do CRM, ale proto, že v něm zákazník často řekne přesnou věc, kterou marketing, produkt nebo onboarding pořád neumí vysvětlit. Malý tým má po hovoru udělat dvě věci: posunout obchod a převést opakovaný signál do lepšího produktu nebo komunikace.
+
+Špatná otázka zní: „Kam uložíme všechny poznámky?“
+
+Lepší otázka zní: „Jaké rozhodnutí z toho hovoru plyne a jak málo kontextu k němu potřebujeme uložit?“
+
+CRM nemá být skládka osobních dojmů, interních soudů a kompletních přepisů. Má být pracovní evidence: co zákazník řeší, jestli mu umíme pomoct, jaký je další krok, co jsme slíbili a co se má vrátit zpět do produktu nebo marketingu.
+
+### Odděl obchodní stav od produktového učení
+
+Po hovoru se často smíchají dvě vrstvy:
+
+- obchodní stav: jestli je firma fit, kdo má rozhodnout, jaký je další krok,
+- produktové učení: co bylo nejasné, jaký problém se opakuje, co web nebo produkt nevysvětlil.
+
+Když tyto vrstvy skončí v jedné dlouhé poznámce, nikdo je později nečte. Sales nevidí další krok, produkt nevidí opakovaný signál a marketing neví, jakou stránku přepsat. Výsledkem je CRM archeologie: hodně textu, málo rozhodnutí.
+
+Použij jednoduché rozdělení:
+
+| Vrstva | Co uložit | Co neukládat |
+| --- | --- | --- |
+| Obchod | fit, fáze, další krok, slíbený follow-up | osobní dojmy bez pracovního účelu |
+| Produkt | opakovaný problém, chybějící funkce, nejasný tok | celý přepis hovoru |
+| Marketing | otázka, kterou web neodpověděl | spekulace o motivaci člověka |
+| Support | potřeba návodu, FAQ nebo dokumentace | soukromé detaily mimo řešený problém |
+| Privacy | zvláštní požadavek na data, retenci, export nebo hosting | citlivé informace vložené „pro jistotu“ |
+
+Praktický příklad: zákazník na hovoru třikrát řeší, jestli jde exportovat data při odchodu. Do obchodní poznámky patří, že export je důležitá nákupní podmínka a že pošleš odkaz na dokumentaci. Do produktového učení patří, že export musí být viditelnější v pricingu nebo trust části. Do CRM nepatří dlouhý přepis věty, osobní hodnocení nervozity zákazníka ani interní komentář typu „bojácný právník“. To není signál. To je riziko zabalené jako poznámka.
+
+### Použij malou kartu po hovoru
+
+Po každém relevantním hovoru vyplň kartu, která nutí k rozhodnutí. Nemá být dokonalá. Má být krátká a použitelná do pěti minut po skončení hovoru.
+
+| Pole | Příklad |
+| --- | --- |
+| Segment a situace | B2B SaaS, tým 15 lidí, hledá evropský provoz pro zákaznický portál |
+| Hlavní problém | Potřebují bezpečně sdílet dokumenty se zákazníky bez posílání příloh e-mailem |
+| Nákupní nejistota | Kdo má přístup k datům a co se stane při ukončení služby |
+| Další krok | Do středy poslat krátký návrh pilotu a odkaz na exportní postup |
+| Produktový signál | Export a role musí být viditelnější v demo scénáři |
+| Marketingový signál | Přidat odstavec „co se stane při odchodu“ na stránku produktu |
+| Datová hranice | Neuložit interní dokumenty zákazníka, jen obecný popis potřeby |
+| Datum kontroly | Za 14 dní ověřit, jestli se otázka opakuje u dalších leadů |
+
+Karta má jednu výhodu: nutí tě psát v pracovních větách. „Mají chaos“ je nálada. „Potřebují nahradit e-mailové přílohy sdíleným portálem s rolemi a exportem“ je signál, se kterým se dá pracovat.
+
+### Poznámky piš tak, aby se daly sdílet v týmu
+
+Dobré CRM poznámky mají přežít čtení někým, kdo na hovoru nebyl. To neznamená, že mají být dlouhé. Znamená to, že neobsahují zkratky, posměšky, osobní soudy ani citlivé detaily bez účelu.
+
+Před uložením poznámky si polož tři otázky:
+
+1. Pomůže tato věta udělat další krok?
+2. Pomůže tato věta zlepšit produkt, web, dokumentaci nebo onboarding?
+3. Bylo by v pořádku, kdyby tuto větu viděl člověk, kterého se týká?
+
+Pokud je odpověď třikrát ne, věta do CRM nepatří. Pokud je odpověď ano jen u druhé otázky, přepiš ji do produktového signálu a anonymizuj kontext. Pokud je odpověď ano u první otázky, drž ji u obchodního procesu a nastav datum dalšího kroku.
+
+> Codyho komentář: Nejrychlejší test profesionality CRM je představit si export poznámek při sporu, auditu nebo předání účtu. Pokud bys u poloviny vět radši předstíral, že je psal někdo jiný, nejsou to poznámky. Je to budoucí omluva.
+
+### Převáděj opakované otázky do veřejných odpovědí
+
+Sales call často odhalí, co web neumí říct. Když se stejná otázka opakuje potřetí, není to „zákazníci nečtou“. Často je to signál, že informace chybí, je schovaná, zní moc obecně nebo nepokrývá nákupní riziko.
+
+Opakované otázky převáděj do jedné z těchto forem:
+
+| Otázka z hovoru | Lepší veřejný výstup |
+| --- | --- |
+| Kde běží data? | krátká trust sekce s regionem, rolemi a dodavateli |
+| Jak odejdeme? | stránka nebo odstavec o exportu, výmazu a ukončení |
+| Co přesně je v plánu Pro? | pricing vysvětlený podle práce zákazníka, ne interních limitů |
+| Kdo uvidí naše data? | dokumentace rolí, přístupů a supportního režimu |
+| Jak rychle začneme? | pilotní scénář s první hodnotou a hranicí dat |
+
+Tím se obchodní hovor mění v obsahový a produktový backlog bez šmírování. Nepotřebuješ sledovat každý pohyb návštěvníka, když umíš poslouchat otázky, které lidé sami pokládají.
+
+### Follow-up drž jako splnění slibu, ne jako tlak
+
+Follow-up po hovoru má potvrdit, co bylo domluveno, dodat slíbené materiály a navrhnout další rozumný krok. Nemá být psychologická sekvence s falešnou naléhavostí.
+
+Dobrá struktura:
+
+- jedna věta, co zákazník řeší,
+- jedna věta, co navrhuješ jako další krok,
+- odkazy na slíbené materiály,
+- jasný termín nebo otázka,
+- žádné skryté trackovací odkazy, pokud nejsou nutné a férově vysvětlené.
+
+Příklad:
+
+| Část | Text |
+| --- | --- |
+| Kontext | „Řešili jsme bezpečné sdílení dokumentů se zákazníky a odchod z e-mailových příloh.“ |
+| Návrh | „Dává smysl začít malým pilotem pro jeden typ dokumentu a dvě role.“ |
+| Materiály | „Posílám odkaz na popis exportu, rolí a provozu v EU.“ |
+| Další krok | „Pokud to sedí, navrhnu do středy pilotní scénář na jednu stránku.“ |
+
+Privacy-first detail: pokud používáš CRM nebo e-mailing, odděl osobní follow-up od marketingového odběru. To, že někdo mluvil se sales, neznamená automatický souhlas s newsletterem. Ano, i když by to zvýšilo číslo v seznamu. Číslo v seznamu není vztah.
+
+### Udržuj týdenní smyčku mezi sales, produktem a marketingem
+
+Jednotlivý hovor může být náhoda. Opakovaný vzor je signál. Jednou týdně projdi poslední hovory a vyber maximálně tři věci:
+
+- jednu otázku, kterou má zodpovědět web,
+- jednu překážku, kterou má odstranit produkt nebo onboarding,
+- jednu formulaci, kterou má převzít marketing, protože ji používají zákazníci.
+
+Týdenní výstup nemá být „prošli jsme CRM“. Má být změna:
+
+| Signál | Změna | Vlastník | Kontrola |
+| --- | --- | --- | --- |
+| Lidé se ptají na export při ukončení | doplnit odstavec na pricing a do demo scénáře | produkt marketing | za 14 dní porovnat nové dotazy |
+| Leadům není jasný rozdíl mezi rolemi | přepsat tabulku oprávnění v dokumentaci | produkt | další dvě dema |
+| Pilot působí moc velký | vytvořit menší pilotní variantu pro jeden tým | sales produkt | příští obchodní review |
+
+Měření drž chudé: počet opakovaných otázek, počet přepsaných veřejných odpovědí, počet uzavřených slibů. Nepotřebuješ k tomu nahrávání každého hovoru, automatické profilování ani scoring z tónu hlasu.
+
+### Checklist: Rozhodovací záznam po hovoru
+
+- [ ] Po hovoru je jasný další obchodní krok, vlastník a datum.
+- [ ] Poznámka rozlišuje obchodní stav, produktový signál a marketingový signál.
+- [ ] CRM neobsahuje osobní soudy, citlivé detaily bez účelu ani celý přepis hovoru.
+- [ ] Opakovaná otázka má kandidáta na veřejnou odpověď ve webu, dokumentaci nebo pricingu.
+- [ ] Follow-up plní konkrétní slib z hovoru, ne jen udržuje tlak.
+- [ ] Marketingový odběr je oddělený od obchodní komunikace.
+- [ ] Produktový signál je anonymizovaný tak, aby šel sdílet v týmu.
+- [ ] Uložená data mají jasný účel a konec životnosti.
+- [ ] Týdenní review končí jednou změnou, ne jen pocitem, že „sales něco říkal“.
+
+### Mini úkol
+
+Vezmi poslední obchodní hovor, demo nebo poptávkový e-mail a vyplň tuto kartu:
+
+| Pole | Zápis |
+| --- | --- |
+| Hlavní problém zákazníka |  |
+| Další slíbený krok |  |
+| Opakovaná otázka nebo nejistota |  |
+| Co má opravit web, dokumentace nebo pricing |  |
+| Co nebudeme ukládat, protože to není nutné |  |
+| Datum kontroly |  |
+
+Potom udělej jednu malou veřejnou změnu: doplň odpověď do pricingu, přidej větu do demo scénáře, oprav dokumentaci rolí, napiš kratší follow-up šablonu nebo smaž z CRM pole, které svádí k ukládání osobních dojmů. Obchodní poznámky mají pomáhat rozhodovat, ne sbírat lidské stopy pro případ, že se jednou budou hodit.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -38194,6 +38340,7 @@ Potom přepiš jednu veřejnou větu tak, aby obsahovala sloveso, konkrétní v�
 
 ## Pracovní log
 
+- 2026-07-20: Doplněna příloha o rozhodovacím záznamu po obchodním hovoru bez CRM románu: oddělení obchodního stavu od produktového učení, malá karta po hovoru, bezpečné poznámky bez osobních soudů, převod opakovaných otázek do veřejných odpovědí, follow-up jako splnění slibu, týdenní smyčka mezi sales, produktem a marketingem, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně znovu ověřeno, že přímé veřejné HTTPS na `cody.dreamind.cz` selhává kvůli expirovanému Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), aplikace za TLS při diagnostickém `curl --noproxy '*' -k -I` vrací `200 OK` a aktuální pracovní prostor neobsahuje bezpečný SSH/deploy přístup k obnově certifikátu.
 - 2026-07-20: Doplněna příloha o jazyku bez korporátní mlhy a privacy divadla: přepis obecných slibů na konkrétní důkazy, psaní podle situace čtenáře, technická opora privacy tvrzení, malý slovník mlhavých slov, kontrola textu jako produktové cesty, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně znovu ověřeno, že běžné přímé HTTPS na `cody.dreamind.cz` selhává kvůli expirovanému veřejnému Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), zatímco diagnostický `curl --noproxy '*' -k -I` vrací `200 OK` z nginx/Next.js; aktuální běh nemá bezpečný SSH/deploy přístup k obnově certifikátu.
 - 2026-07-20: Doplněn úvodní blok „Rychlý 45minutový průchod“, který pomáhá použít dlouhý e-book jako pracovní nástroj: výběr jedné bolesti, čtení jen relevantních částí, převod poznámek na jednu změnu, privacy kontrola dopadu, karta dalšího kroku, příklad a checklist; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně ověřeno, že HTTP vrací `301` na HTTPS, přímý veřejný TLS certifikát `cody.dreamind.cz` je expirovaný (`notAfter` 2026-07-17 19:35:56 GMT), diagnostický `curl --noproxy '*' -k` vrací `200 OK` z nginx/Next.js, proxy HTTPS cesta končí `Empty reply from server` a dostupné prostředí neobsahuje bezpečný SSH/deploy přístup k obnově certifikátu.
 - 2026-07-20: Rozšířena příloha o kontrole dostupnosti webu o chudou příkazovou sadu pro rychlé rozlišení DNS, TLS, běžné HTTPS cesty, diagnostického `curl -k`, redirectů a obsahového markeru včetně privacy-first omezení ukládaných výstupů; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně čerstvě potvrzeno, že `cody.dreamind.cz` má expirovaný veřejný Let's Encrypt certifikát (`notAfter` 2026-07-17 19:35:56 GMT), aplikace za TLS vrací při diagnostickém `curl -k` stav `200 OK`, proxy cesta končí `Empty reply from server` a běžné neinteraktivní SSH účty `root`, `ubuntu`, `deploy`, `cody` ani `node` nemají opravný přístup k obnově.
