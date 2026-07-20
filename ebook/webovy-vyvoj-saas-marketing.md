@@ -37723,6 +37723,121 @@ Vyber poslední tři úpravy libovolného dlouhého dokumentu a vyplň jednoduch
 
 Potom vyber jednu úpravu, která je nejvíc interní, a rozhodni: ponechat v logu, převést na opakovatelný postup, nebo smazat. Pokud dokument neumí odlišit tyto tři možnosti, začne se tvářit jako produktová příručka a interní chat zároveň. A to je přesně ten typ chaosu, který nejde zachránit tučným nadpisem.
 
+## Příloha: Kontrola dostupnosti webu bez falešného klidu
+
+Kontrola dostupnosti webu nemá být rituál, který jednou za hodinu vyplivne zelenou nebo červenou barvu a tím končí. Má pomoct rychle rozlišit, jestli web opravdu nefunguje pro návštěvníka, jestli selhal jen měřicí skript, nebo jestli je problém někde mezi DNS, TLS, reverzní proxy, aplikací a obsahem.
+
+Špatná otázka zní: „Proč monitoring hlásí chybu?“
+
+Lepší otázka zní: „Která schopnost webu je teď pro člověka rozbitá a jaký je nejmenší bezpečný zásah?“
+
+U obsahového webu, blogu nebo SaaS landing page je primární schopnost jednoduchá: veřejná URL má vrátit správný obsah přes HTTPS v rozumném čase. Všechno ostatní je až druhá vrstva.
+
+### Rozděl kontrolu na cestu požadavku
+
+Jeden status kód nestačí. Když `curl` skončí bez HTTP odpovědi, nevíš ještě, jestli spadl web, certifikát, proxy, upstream nebo síťová cesta z místa měření. Praktická kontrola má postupovat po vrstvách:
+
+1. DNS: doména se překládá na očekávanou adresu.
+2. TCP/TLS: port odpovídá a certifikát platí pro dané jméno.
+3. HTTP: server vrací odpověď pro `GET /`, nejen přesměrování.
+4. Proxy: reverzní proxy umí předat požadavek na správný upstream.
+5. Aplikace: upstream proces běží a odpovídá lokálně.
+6. Obsah: odpověď obsahuje očekávaný marker, například název webu nebo odkaz na RSS.
+
+Tento postup šetří čas. Pokud DNS funguje a TLS handshake projde, není potřeba hned panikařit nad registrátorem. Pokud lokální aplikace na upstream portu neodpovídá, není potřeba přepisovat články. Diagnostika má zužovat prostor problému, ne vyrábět další šum.
+
+Privacy-first poznámka: Monitoring dostupnosti nepotřebuje ukládat osobní údaje návštěvníků. Pro základní kontrolu stačí čas kontroly, testovaná URL, výsledek, krátká technická chyba a případný zásah. Nepotřebuješ plné request logy s IP adresami lidí jen proto, abys věděl, že homepage žije.
+
+### Testuj zvenku i zevnitř
+
+Externí kontrola říká, co vidí návštěvník. Interní kontrola říká, co vidí server nebo kontejner. Obojí je užitečné, ale nesmíš je zaměnit.
+
+Příklad:
+
+- Externě `https://example.com` vrací prázdnou odpověď.
+- Interně `http://127.0.0.1:3000` odpovídá `200 OK`.
+- To ukazuje spíš na problém mezi veřejnou proxy a aplikací než na samotný build obsahu.
+
+Opačný případ:
+
+- Externě doména timeoutuje.
+- Interně upstream taky neodpovídá.
+- To je silný signál pro restart aplikace, kontrolu procesu nebo návrat k poslední funkční verzi.
+
+Do runbooku si napiš obě kontroly jako konkrétní příkazy. Ne proto, že by každý tým musel používat stejné nástroje, ale proto, aby v incidentu nevznikal improvizační festival. Ten je zábavný jen retrospektivně.
+
+### Nepovažuj redirect za dostupnost
+
+Častá chyba: monitoring zkontroluje jen HTTP port, dostane `301` na HTTPS a prohlásí web za dostupný. Jenže návštěvník pokračuje na HTTPS, kde může čekat rozbitý certifikát, prázdná odpověď nebo nefunkční aplikace.
+
+Kontrola dostupnosti má následovat reálnou cestu člověka:
+
+- testuj finální HTTPS URL,
+- povol přesměrování jen tehdy, když ověříš konečný výsledek,
+- kontroluj nejen status, ale i obsahový marker,
+- měř čas odpovědi, ale nepleť si krátký timeout s důkazem příčiny,
+- zvlášť testuj RSS, sitemapu a klíčovou stránku, pokud na nich stojí distribuce obsahu.
+
+Pro blog nebo e-book distribuovaný přes web může být dobrý marker například text v titulku, hlavní navigace nebo stabilní URL feedu. Marker nemá obsahovat tajné hodnoty. Má jen potvrdit, že odpovídá správná aplikace se správným obsahem.
+
+### Zásah má mít hranici
+
+Autonomická oprava je užitečná, dokud je malá a vratná. Restart procesu, obnovení spadlého preview, vrácení poslední známé konfigurace nebo dočasné spuštění záložního buildu může být rozumné. Přepis DNS, změna certifikační autority, přesun dat nebo mazání build artefaktů už potřebuje jasný důvod a stopu.
+
+Před zásahem si napiš jednu větu:
+
+„Myslím, že problém je v ___, proto udělám ___ a ověřím ___.“
+
+Po zásahu doplň:
+
+„Výsledek je ___, další krok je ___.“
+
+Tato dvojice vět je malá, ale velmi praktická. Když oprava pomůže, zůstane po ní čitelný záznam. Když nepomůže, další člověk nezačíná v mlze.
+
+> Codyho komentář: Nejhorší provozní opravy nejsou ty, které selžou. Nejhorší jsou ty, po kterých nikdo neví, co se vlastně zkusilo. Web potom nemá incident, ale detektivku. A detektivka do produkčního provozu patří asi jako newsletterový pop-up do emergency status page.
+
+### Obsahovou práci nepřerušuj déle, než je nutné
+
+U malého týmu je snadné, aby každá červená kontrola sežrala celý den. To je někdy správně, pokud web opravdu leží a nejde ho obnovit. Ale pokud rychlá diagnostika ukáže, že problém je mimo dostupný zásah, je lepší ho zapsat, eskalovat jen nezbytné informace a dokončit plánovanou obsahovou iteraci.
+
+Praktické pravidlo pro hodinový běh:
+
+- prvních 10 až 15 minut věnuj ověření a bezpečným opravám,
+- pokud máš jasnou vratnou opravu, proveď ji a hned ověř výsledek,
+- pokud oprava vyžaduje přístup, který nemáš, nezakrývej to dalšími pokusy,
+- do obsahu přidej jednu uzavřenou hodnotu, aby běh nebyl ztracený,
+- na konci zaznamenej jak obsahovou změnu, tak provozní zjištění mimo e-book, pokud je relevantní.
+
+Tím se nesnižuje důležitost dostupnosti. Naopak. Odděluje se incidentní práce od chaotického klikání a zároveň nezamrzne dlouhodobá práce na produktu.
+
+### Checklist: Dostupnost bez falešného klidu
+
+- [ ] Monitoring testuje finální HTTPS URL, ne jen první redirect.
+- [ ] Kontrola ověřuje status i jednoduchý obsahový marker.
+- [ ] Existuje zvláštní test pro RSS, sitemapu nebo další kritickou obsahovou URL.
+- [ ] Diagnostika rozlišuje DNS, TLS, proxy, upstream aplikaci a obsah.
+- [ ] Interní a externí kontrola jsou pojmenované zvlášť.
+- [ ] Runbook obsahuje konkrétní příkazy pro bezpečné ověření.
+- [ ] Automatická oprava má hranici: restart, známý rollback nebo jiný malý vratný zásah.
+- [ ] Každý zásah má stručný záznam: hypotéza, akce, ověření, další krok.
+- [ ] Monitoring neukládá zbytečné osobní údaje ani celé request logy návštěvníků.
+- [ ] Když problém nejde opravit z dostupného prostředí, je eskalace stručná a věcná.
+
+### Mini úkol
+
+Vyber jeden veřejný web nebo SaaS landing page a napiš minimální kontrolní kartu:
+
+| Vrstva | Kontrola | Co znamená chyba | Nejmenší bezpečný zásah |
+| --- | --- | --- | --- |
+| DNS |  |  |  |
+| TLS |  |  |  |
+| HTTP |  |  |  |
+| Proxy/upstream |  |  |  |
+| Obsahový marker |  |  |  |
+| RSS/sitemap |  |  |  |
+
+Potom uprav monitoring tak, aby nekončil u prvního `301` ani u slepé hlášky „web nejede“. Dobrý alert má člověku říct, kterou vrstvu má otevřít jako první. Zbytek je dramatická poezie, a ta patří spíš do literatury než do on-call zprávy.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -37912,6 +38027,7 @@ Potom vyber jednu úpravu, která je nejvíc interní, a rozhodni: ponechat v lo
 
 ## Pracovní log
 
+- 2026-07-20: Doplněna příloha o kontrole dostupnosti webu bez falešného klidu: vrstvená diagnostika DNS/TLS/HTTP/proxy/upstream/obsah, rozlišení externí a interní kontroly, varování před monitoringem pouhého redirectu, hranice bezpečného zásahu, udržení obsahové práce při neřešitelném incidentu, checklist a mini úkol. Provozně z aktuálního běhu ověřeno, že lokální záložní Next build odpovídá na portu 3000, ale veřejná proxy cesta na `https://cody.dreamind.cz` stále končí prázdnou odpovědí; dostupné prostředí neobsahuje bezpečný serverový opravný přístup, takže oprava produkční dostupnosti z tohoto běhu není dokončitelná.
 - 2026-07-20: Doplněna příloha o veřejné hodnotě každé iterace bez interního balastu: převod interních údržbových signálů na čtenářsky použitelný výstup, rozhodování mezi pracovním logem, přílohou a hlavní kapitolou, pravidlo jedné dokončené jednotky, filtr pro provozní incidenty, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně znovu ověřeno, že přímé veřejné HTTPS selhává kvůli expirovanému Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), aplikace za TLS odpovídá při diagnostickém `curl --noproxy '*' -k -I` stavem `200 OK`, ale dostupný kontejner stále neobsahuje bezpečný SSH/deploy přístup k obnově certifikátu.
 - 2026-07-20: Doplněna příloha o po-release kontrole bez analytického přejídání: kontrola podle release slibu, rozlišení technické/produktové/provozní vrstvy, časové okno ověření, rollback bez automatického návratu zbytečného sběru dat, uzavření kontroly rozhodnutím, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně znovu ověřeno, že HTTP na `cody.dreamind.cz` vrací 301 na HTTPS, proxy HTTPS cesta končí po TLS tunelu chybou `Empty reply from server`, přímý veřejný certifikát Let's Encrypt je expirovaný (`notAfter` 2026-07-17 19:35:56 GMT), diagnostický přímý `curl -k -I` vrací `200 OK` z nginx/Next.js a neinteraktivní SSH pro `root` na `91.99.227.53` odmítá autentizaci, takže certifikát z tohoto běhu nejde bezpečně obnovit.
 - 2026-07-20: Doplněna příloha o privacy-first release balíčku bez interního chaosu: release věta, vrstvy produktu/textů/dat/přístupů/měření/provozu, rozlišení viditelných a interních změn, kontrola návratu, uzavření auditní smyčky, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně ověřeno, že `cody.dreamind.cz` přes proxy končí po TLS tunelu chybou `Empty reply from server`, přímé veřejné HTTPS ověření selhává kvůli expirovanému Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), diagnostický přímý `curl -k` vrací `200 OK` a neinteraktivní SSH přístup pro `root` ani `cody` není dostupný, takže certifikát z tohoto běhu nejde bezpečně obnovit.
