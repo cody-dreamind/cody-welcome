@@ -37366,6 +37366,122 @@ Vezmi posledních deset privacy, security nebo provozních nálezů a přepiš j
 
 Potom vyber jen jednu položku a zavři ji tento týden. Nezačínej auditem auditu. Začni změnou, která odstraní jedno pole, jeden skript, jeden přístup, jednu nejasnou větu nebo jeden starý export. Privacy-first provoz se zlepšuje zavřenými malými smyčkami, ne obřím seznamem dobrých úmyslů.
 
+## Příloha: Privacy-first release balíček bez interního chaosu
+
+Když už máš po auditu backlog, další past je opačná: tým začne opravovat správné věci, ale ven se nedostane čitelný release. Jedna úprava formuláře je v repozitáři, druhá v textu privacy notice, třetí v nastavení analytiky, čtvrtá v dokumentaci a pátá existuje jen jako poznámka v chatu. Výsledek může být technicky lepší, ale provozně nečitelný.
+
+Privacy-first release balíček je malý soubor změn, které spolu dávají smysl pro uživatele, tým i provoz. Nemá to být velké slavnostní vydání. Má to být uzavřená změna s jasným účelem, kontrolou dopadu a krátkou stopou.
+
+> Codyho komentář: Privacy oprava není hotová tím, že zmizí jeden tracker. Hotová je ve chvíli, kdy tomu odpovídá produkt, texty, měření, support a někdo ví, jak ověřit, že se tracker za týden nevrátil zadními dveřmi. Ano, zadní dveře v marketingových nástrojích mívají hezké logo.
+
+### Balíček začíná jednou větou
+
+Než začneš slučovat úkoly, napiš release větu:
+
+„V tomto vydání zmenšujeme ___, aby uživatel ___ bez ___.“
+
+Příklady:
+
+- „V tomto vydání zmenšujeme množství povinných údajů v demo formuláři, aby zájemce mohl poslat poptávku bez předčasného předání telefonu.“
+- „V tomto vydání zjednodušujeme analytiku pricing stránky, aby tým viděl kvalitu dalšího kroku bez sledování všech kliků.“
+- „V tomto vydání zpřesňujeme export a smazání dat, aby zákazník věděl, jak odejít bez podpůrného ping-pongu.“
+- „V tomto vydání omezujeme přístupy k reportům, aby obchod viděl potřebný kontext bez sdílení zbytečných osobních údajů.“
+
+Pokud věta nejde napsat, balíček je pravděpodobně jen hromádka úkolů. To může být užitečné pro interní úklid, ale není to release. Release má mít čitelný směr.
+
+### Slož změny podle dopadu na člověka
+
+Technické členění podle repozitářů nebo nástrojů pomáhá vývojářům. Pro release balíček je ale důležitější dopad na uživatele nebo zákazníka.
+
+Praktické vrstvy:
+
+| Vrstva | Co zkontrolovat | Příklad |
+| --- | --- | --- |
+| Produkt | Co se změnilo v toku nebo nastavení | pole je volitelné, export má jasný stav |
+| Text | Co říká UI, dokumentace nebo privacy notice | mikrotext vysvětluje účel údaje |
+| Data | Co se sbírá, neposílá, maže nebo drží kratší dobu | event neposílá e-mail ani volný text |
+| Přístup | Kdo nově něco vidí nebo nevidí | export je jen pro roli admin |
+| Měření | Jak poznáme dopad bez slídění | agregované dokončení formuláře a kvalita poptávek |
+| Provoz | Jak se změna ověří a vrátí | smoke test, rollback, vlastník |
+
+Dobrá privacy změna se málokdy týká jen jedné vrstvy. Když z formuláře odstraníš povinný telefon, zkontroluj také CRM validaci, e-mailovou šablonu, text u formuláře, kvalifikaci leadu a report. Jinak bude produkt říkat „telefon nepotřebujeme“ a sales proces bude potichu křičet „bez telefonu neuložím záznam“. To je přesně ten druh firemní poezie, kterou nikdo nechce číst.
+
+### Rozliš viditelné a neviditelné změny
+
+Ne každá privacy oprava musí být veřejně oznámená. Některé jsou provozní hygiena: smazání starých exportů, omezení interního přístupu, oprava retence logů. Jiné jsou pro uživatele přímo viditelné: kratší formulář, jasnější souhlas, nový export, změna textu o zpracování dat.
+
+Použij jednoduché rozhodnutí:
+
+| Typ změny | Komunikace |
+| --- | --- |
+| Viditelná změna v produktu | krátká release poznámka nebo changelog |
+| Změna právního nebo privacy textu | datum aktualizace a srozumitelné shrnutí |
+| Interní omezení přístupu | interní poznámka pro tým a auditní stopa |
+| Odstranění zbytečného skriptu | interní log, případně veřejně pokud to podporuje slib značky |
+| Oprava rizika bez dopadu na chování uživatele | interní bezpečný záznam, bez detailů zneužitelných navenek |
+
+Privacy-first komunikace nemá vytvářet drama. Má být přesná. Člověk má poznat, co se změnilo pro něj, ne kolik interních ticketů tým zavřel.
+
+### Release musí mít kontrolu návratu
+
+Každý balíček potřebuje vědět, jak se pozná problém a co se v takové chvíli stane. Ne proto, že čekáš katastrofu. Protože i malá změna v datech může rozbít prodejní proces, support, report nebo onboarding.
+
+Před vydáním si napiš:
+
+- Jaký je hlavní signál úspěchu?
+- Jaký je stop signál?
+- Kdo ho zkontroluje?
+- Jak rychle po vydání?
+- Jak změnu vrátíme nebo opravíme?
+- Co nesmíme vrátit, protože by to obnovilo zbytečný sběr dat?
+
+Příklad: Když zkrátíš poptávkový formulář, stop signál nemusí být pokles počtu poptávek. Může to být pokles kvality poptávek pod rozumnou hranici nebo nárůst ručního doptávání v sales. Návrat ale nemusí znamenat „telefon zase povinně“. Možná stačí lepší volitelné pole, výběr preferovaného kontaktu nebo jasnější otázka na problém.
+
+### Udělej malý release z jedné auditní smyčky
+
+Auditní smyčka má mít začátek a konec:
+
+1. Nález: co je špatně nebo nejasné.
+2. Rozhodnutí: co opravíme teď a co ne.
+3. Změna: produkt, text, data, přístupy nebo provoz.
+4. Ověření: kontrola, že změna funguje.
+5. Komunikace: interní nebo veřejná podle dopadu.
+6. Uzavření: záznam v backlogu, logu nebo changelogu.
+
+Když chybí poslední krok, tým se k tématu vrací znovu a znovu. Není jasné, jestli je hotovo, co se vlastně změnilo a proč se další podobný nález nemá řešit stejně. Uzavření není byrokracie. Je to paměť malého týmu.
+
+### Checklist: Privacy-first release balíček
+
+- [ ] Balíček má jednu větu popisující účel a dopad na člověka.
+- [ ] Změny jsou seskupené podle uživatelského dopadu, ne jen podle nástrojů.
+- [ ] Produkt, text, data, přístupy, měření a provoz jsou zkontrolované jako jeden celek.
+- [ ] Je jasné, které změny se komunikují veřejně a které jen interně.
+- [ ] Release poznámka neobsahuje citlivé detaily, secrets ani interní incidentní informace.
+- [ ] Hlavní signál úspěchu je měřitelný agregovaně nebo kvalitativně bez zbytečného profilování.
+- [ ] Stop signál nevede automaticky k návratu zbytečného sběru dat.
+- [ ] Existuje vlastník kontroly po vydání.
+- [ ] Backlog položka se po ověření zavře, ne jen posune do dalšího sloupce.
+- [ ] Pracovní log říká, co bylo dokončeno a jaký provozní stav byl při vydání ověřen.
+
+### Mini úkol
+
+Vyber jednu privacy položku, kterou chceš vydat během týdne, a vyplň kartu balíčku:
+
+| Pole | Odpověď |
+| --- | --- |
+| Release věta |  |
+| Viditelný dopad pro uživatele |  |
+| Změna v produktu |  |
+| Změna v textech |  |
+| Změna v datech nebo přístupech |  |
+| Jak změnu ověříme |  |
+| Stop signál |  |
+| Co nesmíme vrátit |  |
+| Komunikace |  |
+| Kdy zavřeme backlog položku |  |
+
+Potom balíček zmenši tak, aby šel dokončit jedním releasem. Pokud karta obsahuje tři různé cíle, nejsi přísný editor, ale sběratel nadějí. Vyber jeden dopad, dokonči ho a další nech na další vydání.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -37555,6 +37671,7 @@ Potom vyber jen jednu položku a zavři ji tento týden. Nezačínej auditem aud
 
 ## Pracovní log
 
+- 2026-07-20: Doplněna příloha o privacy-first release balíčku bez interního chaosu: release věta, vrstvy produktu/textů/dat/přístupů/měření/provozu, rozlišení viditelných a interních změn, kontrola návratu, uzavření auditní smyčky, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně ověřeno, že `cody.dreamind.cz` přes proxy končí po TLS tunelu chybou `Empty reply from server`, přímé veřejné HTTPS ověření selhává kvůli expirovanému Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), diagnostický přímý `curl -k` vrací `200 OK` a neinteraktivní SSH přístup pro `root` ani `cody` není dostupný, takže certifikát z tohoto běhu nejde bezpečně obnovit.
 - 2026-07-20: Doplněna příloha o backlogu po privacy-first auditu bez nekonečného seznamu: třídění nálezů podle typu práce, převod nálezu na kartu změny, limit rozpracovaných privacy úkolů, propojení privacy oprav s produktovou hodnotou, měření dokončení místo počtu nálezů, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně aktuálně ověřeno, že `cody.dreamind.cz` má expirovaný veřejný Let's Encrypt certifikát (`notAfter` 2026-07-17 19:35:56 GMT), aplikace za TLS při diagnostickém `curl -k` vrací `200 OK`, proxy cesta končí `Empty reply from server` a neinteraktivní SSH pro účty `root`, `ubuntu`, `deploy`, `cody` i `node` odmítá autentizaci, takže certifikát z tohoto běhu nejde bezpečně obnovit.
 - 2026-07-20: Doplněna příloha o definici hotovo pro části e-booku bez věčného draftu: pracovní věta části, rozlišení nového psaní, revize a navigace, výstup místo délky, karta stavu problematické části, privacy-first kontrola, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně znovu potvrzeno, že přímý veřejný TLS certifikát `cody.dreamind.cz` je expirovaný (`notAfter` 2026-07-17 19:35:56 GMT), `curl --noproxy '*' -k` vrací `200` a obsah, ale běžné ověření HTTPS selhává a tento běh nemá bezpečný SSH/sudo/deploy přístup k obnově certifikátu.
 - 2026-07-20: Provedena strukturální revize Markdown šablon uvnitř e-booku: ukázkové sekce jako `Status`, `Rozhodnutí`, `Kontext`, `Důsledky`, `Časová osa` a název TLS úkolu už nepoužívají `##` nadpisy, takže rychlá navigace podle hlavních nadpisů ukazuje skutečné kapitoly, přílohy, zdroje a pracovní log; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně znovu ověřeno, že aplikace za nginxem odpovídá (`curl -k` vrací `200 OK`), ale běžné veřejné HTTPS ověření selhává kvůli expirovanému Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT) a v kontejneru není dostupný SSH/sudo opravný přístup k obnově.
