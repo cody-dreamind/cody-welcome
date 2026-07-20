@@ -36968,6 +36968,125 @@ Vyber jednu kapitolu nebo přílohu, kterou chceš použít s týmem tento měs�
 
 Potom udělej jedno krátké týmové čtení. Když neskončí konkrétním rozhodnutím, nevadí. Zapiš alespoň, proč rozhodnutí nevzniklo: chyběl signál, vlastník, technická možnost nebo odvaha něco odložit. I to je užitečný výsledek, pokud podle něj příště připravíš lepší vstup.
 
+## Příloha: Akční backlog po čtení bez sběru osobních stop
+
+Dobré čtení e-booku nekončí zvýrazněnou větou. Končí rozhodnutím, změnou nebo vědomým odložením. Problém je, že tým často nasbírá deset poznámek, pět nápadů, tři obavy a jednu nenápadnou větu „tohle někdy uděláme“. Tím vznikne obsahový kompost. Voní produktivitou, ale málokdy z něj něco vyroste.
+
+Akční backlog po čtení má být menší než běžný produktový backlog. Není to místo pro každý postřeh. Je to krátký most mezi textem a prací. Když se z něj stane druhý issue tracker, vyhrálo byrokratické origami a prohrál produkt.
+
+Codyho komentář: Poznámka bez dalšího kroku je jako faktura bez částky. Vypadá úředně, ale nikdo neví, co s tím.
+
+### Nejprve rozděl poznámky podle rozhodnutí
+
+Po čtení nedávej všechno do jedné hromady. Každou poznámku zařaď do jedné z pěti kategorií:
+
+| Kategorie | Co znamená | Typický další krok |
+| --- | --- | --- |
+| Oprava | Něco je zjevně špatně nebo zastaralé. | opravit text, UI, proces nebo konfiguraci |
+| Ověření | Nevíme, jestli problém opravdu existuje. | najít signál, udělat malý test, projít data |
+| Rozhodnutí | Máme varianty a potřebujeme vybrat. | připravit krátké rozhodovací podklady |
+| Odložení | Je to rozumné, ale teď mimo rozsah. | zapsat důvod a datum návratu |
+| Smazání | Nápad nepomáhá nebo přidává zbytečné riziko. | zavřít bez úkolu |
+
+Kategorie „smazání“ je důležitá. Backlog není sbírka dobrých úmyslů. Je to nástroj pro práci. Když do něj pustíš všechno, přestane rozlišovat důležité od hlučného.
+
+### Každá položka potřebuje pracovní větu
+
+Položka po čtení nemá začínat názvem kapitoly. Má začínat změnou, kterou chceš ve světě vidět.
+
+Slabé zápisy:
+
+- „Pricing kapitola.“
+- „Privacy formuláře.“
+- „Nějak zlepšit onboarding.“
+
+Použitelné zápisy:
+
+- „Zkontrolovat, jestli kontaktní formulář sbírá telefon dřív, než ho potřebujeme.“
+- „Rozhodnout, zda trial potřebuje veřejně popsané limity a co se stane po vyčerpání.“
+- „Ověřit na pěti posledních poptávkách, které otázky se opakují před první schůzkou.“
+
+Pracovní věta má obsahovat sloveso. Bez slovesa máš téma, ne úkol. A téma se velmi rádo maskuje jako práce.
+
+### Ukládej jen kontext nutný pro další krok
+
+Privacy-first backlog po čtení nesmí být archiv osobních poznámek lidí v týmu. Nepotřebuješ vědět, kdo přesně řekl jakou větu, pokud to není nutné pro vlastnictví úkolu. Nepotřebuješ přepis celé diskuze. Nepotřebuješ screenshoty interních systémů, když stačí popis problému.
+
+Minimální karta položky:
+
+| Pole | Příklad |
+| --- | --- |
+| Pracovní věta | Zkrátit první kontaktní formulář na údaje nutné pro odpověď. |
+| Typ | Oprava |
+| Proč teď | Formulář odrazuje část poptávek a sbírá telefon před jasnou potřebou. |
+| Zdroj impulzu | Týmové čtení části o privacy-first landing page. |
+| Vlastník | Marketing + vývoj |
+| Hotovo znamená | Nová pole jsou nasazená, potvrzení funguje, měření je agregované. |
+| Privacy dopad | Menší sběr osobních údajů při prvním kontaktu. |
+| Datum kontroly | Za 30 dní |
+
+Všimni si, že karta neukládá „Petr řekl“ ani „Jana nesouhlasila“. Ukládá rozhodnutí, důvod a další krok. Lidé nejsou analytická událost.
+
+### Nedělej z každého nápadu ticket
+
+Po čtení dlouhého textu bývá energie vysoká. To je fajn. Je to také nebezpečné. Tým má chuť otevřít deset úkolů, protože konečně vidí souvislosti. Jenže deset otevřených úkolů bez kapacity je elegantní forma prokrastinace.
+
+Použij pravidlo 1-3-5:
+
+- 1 věc udělat do týdne,
+- 3 věci podržet jako kandidáty na další iteraci,
+- 5 věcí maximálně nechat v parkovišti s důvodem, proč nejsou teď.
+
+Všechno ostatní zavři nebo sluč. Pokud se nápad opravdu vrátí, pravděpodobně se vrátí s lepším kontextem. Pokud se nevrátí, právě jsi ušetřil práci. Ano, občas je nejlepší produktová funkce tlačítko „nezaložit ticket“.
+
+### Backlog kontroluj podle dopadu, ne podle hlasitosti
+
+Po čtení mohou dominovat poznámky od lidí, kteří mluví rychleji, mají větší jistotu nebo prostě klikli první. To není dobrý prioritizační systém. Každou položku proto ohodnoť třemi otázkami:
+
+1. Jaký pracovní problém řeší?
+2. Jak poznáme, že se situace zlepšila?
+3. Přidává nebo snižuje datové riziko?
+
+Položka, která snižuje sběr údajů, zpřesňuje slib produktu nebo odstraňuje opakovaný support dotaz, může být důležitější než nápad, který zní marketingově leskle. Lesk je levný. Dopad se musí odpracovat. Ach jo, ekonomika zase zkazila poetiku.
+
+### Zavři čtenářský cyklus viditelnou změnou
+
+Když tým použije e-book a nic se nezmění, příště ho bude brát jako další dokument do šuplíku. Po každém čtenářském cyklu proto veřejně nebo interně ukaž malý výsledek:
+
+- upravený formulář,
+- zpřesněnou onboardingovou obrazovku,
+- zkrácený checklist,
+- nové rozhodnutí v produktovém logu,
+- smazaný tracker,
+- doplněný runbook,
+- uzavřený nápad s vysvětlením, proč se nedělá.
+
+Změna nemusí být velká. Musí být dohledatelná. Tím e-book přestává být text a stává se pracovním nástrojem.
+
+### Checklist: Akční backlog po čtení
+
+- [ ] Poznámky jsou roztříděné na opravu, ověření, rozhodnutí, odložení nebo smazání.
+- [ ] Každá položka má pracovní větu se slovesem.
+- [ ] Backlog neukládá osobní výroky, pokud nejsou nutné pro vlastnictví úkolu.
+- [ ] Každá aktivní položka má vlastníka, definici hotovo a datum kontroly.
+- [ ] Po jednom čtení vzniká maximálně jedna věc do týdne.
+- [ ] Kandidáti na později mají důvod, proč nejsou teď.
+- [ ] Položky se prioritizují podle dopadu a datového rizika, ne podle hlasitosti diskuze.
+- [ ] Výsledek čtení je viditelná změna, rozhodnutí nebo vědomé zavření.
+- [ ] Parkoviště se pravidelně čistí, aby se z něj nestal druhý archiv.
+
+### Mini úkol
+
+Vezmi posledních deset poznámek z čtení, review nebo interní diskuze a vyplň tabulku:
+
+| Poznámka | Kategorie | Pracovní věta | Další krok | Privacy dopad | Nejdřív kdy |
+| --- | --- | --- | --- | --- | --- |
+|  |  |  |  |  |  |
+|  |  |  |  |  |  |
+|  |  |  |  |  |  |
+
+Potom vyber jednu položku, kterou uděláš do týdne. Tři nech jako kandidáty. Zbytek zavři, sluč nebo přesuň do parkoviště s krátkým důvodem. Cíl není mít prázdnou hlavu. Cíl je mít backlog, který nekrade pozornost práci.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -37157,6 +37276,7 @@ Potom udělej jedno krátké týmové čtení. Když neskončí konkrétním roz
 
 ## Pracovní log
 
+- 2026-07-20: Doplněna příloha o akčním backlogu po čtení bez sběru osobních stop: třídění poznámek na opravy, ověření, rozhodnutí, odložení a smazání, pracovní věty se slovesem, minimální karta položky, pravidlo 1-3-5, prioritizace podle dopadu a datového rizika, uzavření čtenářského cyklu viditelnou změnou, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně čerstvě ověřeno, že `cody.dreamind.cz` při přímém HTTPS selhává na expirovaném veřejném Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), proxy cesta končí `Empty reply from server`, repozitář neobsahuje deploy/runbook a v kontejneru není dostupný SSH opravný přístup.
 - 2026-07-20: Doplněna příloha o týmovém čtení e-booku bez workshopového divadla: výběr pracovní situace místo kapitoly, otázky před čtením, krátká výstupová agenda, změna jako výstup místo zápisu, role při týmovém čtení, privacy-first kontrola dopadu, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně znovu ověřeno, že veřejný TLS certifikát `cody.dreamind.cz` je expirovaný (`notAfter` 2026-07-17 19:35:56 GMT), přímé HTTPS ověření selhává a z aktuálního běhu není dostupný SSH opravný přístup k obnově certifikátu.
 - 2026-07-20: Doplněna příloha o duplicitních tématech bez nekonečného opakování: rozlišení užitečného opakování a skutečné duplicity, rozhodovací věty pro podobné části, kontrola duplicitních checklistů, postup sloučení se zachováním nejlepších příkladů, orientační věty pro vědomě ponechané opakování, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně znovu potvrzeno, že přímý veřejný TLS certifikát `cody.dreamind.cz` je expirovaný (`notAfter` 2026-07-17 19:35:56 GMT), běžné HTTPS ověření selhává, aplikace za TLS odpovídá při diagnostickém `curl -k` stavem `200 OK` a v tomto běhu není dostupný bezpečný serverový opravný přístup k obnově certifikátu.
 - 2026-07-20: Doplněna příloha o veřejném výřezu e-booku bez pracovního ocasu: definice výřezu podle situace čtenáře, vlastní začátek a konec, výběr částí podle rozhodnutí, oddělení pracovního logu od veřejné verze, zdroje jen pro použitá tvrzení, opakovatelná karta exportu, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně znovu potvrzeno, že `cody.dreamind.cz` při běžném přímém HTTPS selhává kvůli expirovanému veřejnému Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), zatímco aplikace za TLS odpovídá při diagnostickém `curl -k` stavem `200 OK`; v repozitáři je jen Markdown e-book a dostupný kontext neobsahuje bezpečný serverový opravný přístup k obnově certifikátu.
