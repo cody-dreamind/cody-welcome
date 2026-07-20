@@ -38959,6 +38959,160 @@ Vezmi spolupráci, která už běží déle než jednu etapu, a vyplň kartu mě
 
 Potom udělej jeden konkrétní krok: napiš měsíční pracovní slib, zavři zbytečný přístup, přesuň rozptýlené úkoly do jednoho backlogu, nebo přepiš neurčitou „průběžnou správu“ na dvě vrstvy: provozní minimum a rozvojovou prioritu. Dlouhodobá spolupráce nezačíná podpisem retaineru. Začíná ve chvíli, kdy každý ví, co se tento měsíc nemá ztratit v mlze.
 
+## Příloha: Ukončení spolupráce bez datového ocasu
+
+Dobrá spolupráce nekončí poslední fakturou. Končí ve chvíli, kdy je jasné, kdo co vlastní, co běží dál, co se smaže, jak se předají přístupy a komu zavolá monitoring, když se něco rozbije. Pokud tenhle konec přeskočíš, vznikne nepříjemný mezistav: projekt je formálně hotový, ale v systémech zůstávají účty, exporty, webhooky, API klíče, staré dokumenty a tichá očekávání.
+
+Privacy-first ukončení spolupráce odpovídá na jednoduchou otázku:
+
+„Jak zavřeme práci tak, aby zákazník neztratil provozní kontrolu a dodavatel dál nedržel data, přístupy nebo odpovědnost, které už nepotřebuje?“
+
+Tohle není rozchodové drama. Je to provozní hygiena. Když ji uděláš dobře, chráníš obě strany: zákazník ví, co má v rukou, dodavatel nenese neurčitý zbytek rizika a další tým nemusí po půl roce luštit, proč má někdo pořád admin práva do analytiky.
+
+### Začni stavem spolupráce, ne pocitem
+
+Ukončení může znamenat několik různých věcí. Každá potřebuje jiný postup.
+
+| Stav | Co znamená | Praktický výstup |
+| --- | --- | --- |
+| Dokončený projekt | Domluvený výstup je hotový a předaný. | předávací balík, revize přístupů, krátká garanční hranice |
+| Pauza | Práce se zastaví, ale může se obnovit. | minimální provozní režim, datum další kontroly, omezení přístupů |
+| Přechod k jinému týmu | Produkt nebo web přebírá interní tým či jiný dodavatel. | technické předání, seznam otevřených rizik, přístupová migrace |
+| Ukončení služby | Produkt, web nebo část provozu se vypíná. | export, archivace, výmaz, redirecty, komunikace uživatelům |
+| Konfliktní konec | Strany se neshodly na rozsahu, kvalitě nebo odpovědnosti. | věcný stav, důkazy bez osobních detailů, jasná hranice další práce |
+
+Nezačínej větou „nějak to předáme“. Začni konkrétním stavem. Jinak budeš míchat předání hotového webu, offboarding dodavatele, výmaz dat a obchodní dohodu do jednoho nepříjemného guláše.
+
+### Udělej předávací balík, který lze otevřít za rok
+
+Předání nemá být zip soubor s názvem `final_final_v3`. Předávací balík má dát dalšímu člověku šanci pochopit, co existuje, kde to běží a co se nesmí přehlédnout.
+
+Minimum:
+
+| Oblast | Co předat |
+| --- | --- |
+| Zdroj pravdy | repozitář, branch, poslední commit, dokumentace, produkční URL |
+| Provoz | hosting, domény, DNS, certifikáty, monitoring, zálohy, deploy postup |
+| Produkt | co je hotovo, co je záměrně mimo rozsah, známé limity |
+| Data | datová mapa, exportní postup, retence, místa s osobními údaji |
+| Přístupy | kdo má jakou roli, co se má odebrat, kdo je nový vlastník |
+| Integrace | API klíče, webhooky, e-mailing, analytika, platební brána, CRM |
+| Otevřené věci | rizika, technický dluh, dočasné výjimky, rozhodnutí čekající na vlastníka |
+
+Dobré pravidlo: pokud by nový člověk musel kvůli základnímu provozu lovit informace v chatu, předávací balík není hotový. Chat může vysvětlit kontext, ale nesmí být jediným místem, kde žije produkční znalost.
+
+### Přístupy zavírej podle účelu
+
+Největší praktické riziko po konci spolupráce nebývá chybějící dokumentace, ale přístupy, které zůstaly zapnuté ze slušnosti, pohodlí nebo zapomnění. Přístup po konci práce musí mít jasný účel. Pokud ho neumíš říct jednou větou, má skončit.
+
+Použij tři kategorie:
+
+| Kategorie | Příklad | Akce |
+| --- | --- | --- |
+| Okamžitě odebrat | administrace produkce, billing, CRM exporty, databáze, analytika s detailními daty | odebrat při předání nebo v domluvený den |
+| Dočasně ponechat | supportní účet pro garanční opravy, read-only monitoring, přístup k issue trackeru | nastavit datum konce a vlastníka kontroly |
+| Převést vlastnictví | doména, hosting, repozitář, e-mailová doména, platební účet | změnit vlastníka, MFA, recovery kontakty a fakturaci |
+
+Příklad: Dodavatel může mít po předání ještě 14 dní read-only přístup k issue trackeru kvůli garančnímu oknu. Nemá ale důvod držet admin přístup k produkční databázi, plný CRM export nebo billing účet. „Kdyby něco“ není bezpečnostní model. Je to přístupová nostalgie.
+
+### Vyčisti exporty, lokální kopie a dočasné soubory
+
+Během projektu často vzniknou exporty, screenshoty, testovací importy, CSV soubory, kopie konfigurací a diagnostické balíčky. Většina z nich má krátkou životnost. Po ukončení spolupráce by neměly zůstat v osobních složkách, stažených souborech ani sdílených discích jen proto, že se na ně zapomnělo.
+
+Praktický postup:
+
+1. Sepiš typy dočasných artefaktů, které během práce vznikly.
+2. Rozděl je na předat, archivovat, smazat a ponechat jen agregovaný výstup.
+3. U citlivých exportů potvrď smazání tam, kde to dává provozně smysl.
+4. V dokumentaci nech odkaz na rozhodnutí nebo finální výsledek, ne na surový export.
+5. Zkontroluj, že lokální `.env`, dumpy, importní soubory a screenshoty nejsou v repozitáři ani ve sdíleném archivu.
+
+Privacy-first pravidlo: pokud export vznikl pro jedno rozhodnutí a rozhodnutí už padlo, export obvykle nemá dál žít. Nech si výsledek, ne surovou stopu.
+
+### Odděl garanci, podporu a další rozvoj
+
+Po předání se často plete několik režimů:
+
+- oprava chyby v předaném výstupu,
+- placená podpora,
+- nový rozvoj,
+- provozní pohotovost,
+- konzultace pro nový tým.
+
+Když je nerozlišíš, každý dotaz vypadá jako „ještě poslední drobnost“. A poslední drobnost má zvláštní schopnost rozmnožit se do malého paralelního projektu.
+
+Použij jednoduchou tabulku:
+
+| Režim | Co do něj patří | Co do něj nepatří |
+| --- | --- | --- |
+| Garanční oprava | chyba proti domluvenému výstupu | nová funkce, nový text, změna strategie |
+| Podpora | vysvětlení provozu, menší údržba, domluvené reakční časy | neomezená dostupnost v chatu |
+| Rozvoj | nová stránka, integrace, experiment, redesign části | oprava rozbitého předání |
+| Konzultace | rozhodnutí, review, doporučení | převzetí produkční odpovědnosti bez přístupu a dohody |
+
+Tím chráníš vztah. Ne proto, že bys chtěl být tvrdý, ale proto, že nejasný konec kazí i dobrou předchozí práci.
+
+### Předání ověř jedním provozním cvičením
+
+Nestačí poslat dokumentaci. Nový vlastník by měl provést jeden malý ověřovací krok.
+
+Příklady:
+
+- nasadit drobnou textovou změnu na testovací nebo produkční prostředí podle runbooku,
+- obnovit jednu testovací zálohu mimo produkci,
+- zkontrolovat DNS a TLS expiraci podle dokumentace,
+- exportovat vlastní data testovacího účtu,
+- odebrat bývalému dodavateli jeden dočasný přístup,
+- projít jeden alert a potvrdit, kdo ho dostane.
+
+Ověření má být malé, ale skutečné. Pokud nový vlastník neumí podle předání udělat ani jeden bezpečný krok, projekt není předaný. Je jen odložený na někoho jiného.
+
+### Zavři veřejné i interní stopy
+
+Ukončení spolupráce může mít dopad i na veřejný web, dokumentaci nebo komunikaci.
+
+Zkontroluj:
+
+- patičky, reference, case studies a loga dodavatelů,
+- kontaktní e-maily a support adresy,
+- status page a incident kontakty,
+- `security.txt`, pokud ukazuje na člověka nebo schránku, která už nebude reagovat,
+- dokumentaci integrací, pokud se mění vlastník nebo endpoint,
+- veřejné changelogy a release notes, pokud slibují podporu, která už neplatí.
+
+Ne každá změna musí být veřejně oznámená. Ale veřejný slib má odpovídat realitě. Pokud web tvrdí, že support běží přes konkrétní adresu, někdo ji musí číst. Pokud privacy notice uvádí dodavatele, který už data nezpracovává, má se upravit. Tichý nesoulad je malý dluh, dokud z něj není zbytečná nedůvěra.
+
+### Checklist: Ukončení spolupráce
+
+- [ ] Je jasné, jestli jde o dokončení projektu, pauzu, přechod k jinému týmu, vypnutí služby nebo konfliktní konec.
+- [ ] Existuje předávací balík se zdrojem pravdy, provozem, daty, přístupy, integracemi a otevřenými riziky.
+- [ ] Přístupy jsou rozdělené na odebrat, dočasně ponechat a převést vlastnictví.
+- [ ] Dočasné přístupy mají datum konce a vlastníka kontroly.
+- [ ] Exporty, lokální kopie, dumpy, screenshoty a importní soubory mají rozhodnutí: předat, archivovat, smazat nebo nahradit agregovaným výstupem.
+- [ ] Je oddělená garance, podpora, další rozvoj a konzultace.
+- [ ] Nový vlastník provedl jeden skutečný provozní krok podle předání.
+- [ ] Monitoring, DNS, TLS, hosting, billing a recovery kontakty mají aktuálního vlastníka.
+- [ ] Veřejné texty, kontakty, reference, status page a bezpečnostní kontakty odpovídají nové realitě.
+- [ ] Zůstává krátký závěrečný zápis: co bylo předáno, co bylo odebráno, co zůstává otevřené a kdo to vlastní.
+
+### Mini úkol
+
+Vyber jednu ukončenou nebo brzy končící spolupráci a vyplň závěrečnou kartu:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jaký typ ukončení řešíme? |  |
+| Kde je zdroj pravdy pro poslední stav? |  |
+| Kdo je nový vlastník provozu, dat a komunikace? |  |
+| Jaké přístupy odebereme hned? |  |
+| Jaké přístupy ponecháme dočasně a do kdy? |  |
+| Jaké exporty, dumpy nebo lokální kopie se smažou? |  |
+| Jaký jeden provozní krok nový vlastník ověří? |  |
+| Co zůstává otevřené jako riziko nebo další práce? |  |
+| Jaký veřejný text, kontakt nebo dokumentaci musíme upravit? |  |
+
+Potom udělej jednu akci ještě dnes: odeber jeden zbytečný přístup, smaž jeden dočasný export, napiš závěrečný předávací zápis, nebo nastav datum konce pro dočasný supportní účet. Ukončení spolupráce není administrativní dozvuk. Je to poslední produktová změna, která rozhoduje, jestli po vás zůstane kontrola, nebo digitální binec s hezkým logem.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -39148,6 +39302,7 @@ Potom udělej jeden konkrétní krok: napiš měsíční pracovní slib, zavři 
 
 ## Pracovní log
 
+- 2026-07-20: Doplněna příloha o ukončení spolupráce bez datového ocasu: rozlišení typů konce spolupráce, předávací balík použitelný i po roce, zavírání přístupů podle účelu, úklid exportů a lokálních kopií, oddělení garance/podpory/rozvoje/konzultace, provozní ověření předání, kontrola veřejných a interních stop, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně aktuálně ověřeno, že `cody.dreamind.cz` na veřejném přímém HTTPS selhává kvůli expirovanému Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), HTTP vrací 301 na HTTPS, aplikace za certifikátem při diagnostickém `curl --noproxy '*' -k -I` vrací `200 OK` a dostupný kontejner nemá bezpečný SSH/deploy přístup k obnově certifikátu.
 - 2026-07-20: Doplněna příloha o přechodu do dlouhodobé spolupráce bez udržovací mlhy: oddělení provozního udržování a rozvoje, měsíční pracovní slib, přístupy podle skutečné práce, jeden backlog a rozhodovací rytmus, měření spolupráce podle výstupů a sníženého rizika, měsíční shrnutí, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně čerstvě ověřeno, že běžné přímé HTTPS na `cody.dreamind.cz` selhává kvůli expirovanému Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), `curl --noproxy '*' -k -I` vrací `200 OK` z nginx/Next.js a aktuální kontejner neobsahuje bezpečný SSH/deploy přístup k obnově certifikátu.
 - 2026-07-20: Doplněna příloha o retrospektivě první etapy bez hledání viníka: porovnání slíbeného a skutečného výsledku, převod pocitů na systémové příčiny, třídění poznatků na produktové, provozní a datové, výběr maximálně tří změn pro další etapu, úklid dočasných přístupů a exportů, rozhodnutí o pokračování, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně ověřeno, že `cody.dreamind.cz` přímo odpovídá na IP `91.99.227.53`, ale veřejný Let's Encrypt certifikát je expirovaný (`notAfter` 2026-07-17 19:35:56 GMT), běžné HTTPS přes proxy končí `Empty reply from server` a dostupný pracovní prostor stále neobsahuje bezpečný SSH/deploy přístup k obnově certifikátu.
 - 2026-07-20: Doplněna příloha o kontrole prvního týdne bez tichého rozpadu projektu: ověření skutečného výstupu místo aktivit, oddělení blokérů od nepohodlí, revize přístupů a dat po prvním týdnu, rozhodovací karta změny rozsahu, další týden jako jedna malá sázka, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně čerstvě ověřeno, že přímé HTTPS na `cody.dreamind.cz` selhává kvůli expirovanému veřejnému Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), proxy cesta končí `Empty reply from server` a aktuální prostředí neobsahuje bezpečný SSH/deploy přístup k obnově certifikátu.
