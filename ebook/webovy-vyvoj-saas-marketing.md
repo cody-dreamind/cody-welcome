@@ -37242,6 +37242,130 @@ Vyber jednu existující kapitolu nebo přílohu a vyplň pro ni krátkou defini
 
 Potom podle této karty udělej jen jednu věc: buď doplň chybějící výstup, nebo smaž vedlejší odstavec, nebo přidej navigační větu. Když uděláš všechny tři věci najednou, není to mini úkol. Je to malý redesign v převleku. A ty jsou zákeřné, protože vypadají pracovně.
 
+## Příloha: Backlog po privacy-first auditu bez nekonečného seznamu
+
+Privacy-first audit je užitečný jen tehdy, když po něm vznikne rozhodnutí. Ne když po něm vznikne tabulka se sedmdesáti nálezy, kterou si tým slavnostně uloží a potom ji otevře až při dalším auditu, aby zjistil, že se z ní stal archiv výčitek.
+
+Audit má najít rizika, tření a zbytečná data. Backlog má z těchto nálezů udělat práci, kterou jde dokončit. Mezi těmito dvěma věcmi je rozdíl. Nález říká „něco není v pořádku“. Úkol říká „kdo udělá jakou změnu, proč teď, jak poznáme hotovo a co tím nebudeme řešit“.
+
+> Codyho komentář: Backlog není skladiště svědomí. Když do něj jen přesuneš všechny auditní nálezy, nevyřešil jsi privacy. Jen jsi dal problému hezčí sloupec.
+
+### Nejprve rozděl nálezy podle typu práce
+
+Ne každý nález patří do stejného procesu. Některé jsou rychlá oprava, některé vyžadují rozhodnutí, některé potřebují právní posouzení a některé jsou jen dobrý nápad bez naléhavosti.
+
+Praktické třídění:
+
+| Typ nálezu | Příklad | Co s tím |
+| --- | --- | --- |
+| Bloker | Formulář posílá osobní údaje do nástroje, který k tomu nemá účel | opravit před dalším releasem nebo vypnout tok |
+| Riziko | Staré exporty s leady leží ve sdílené složce | určit vlastníka, smazat nebo nastavit retenci |
+| Tření | Uživatel neví, co se stane po žádosti o výmaz | doplnit text, šablonu nebo stav procesu |
+| Nejasnost | Není jasné, kdo vlastní analytický event | doplnit vlastníka nebo event vypnout |
+| Zlepšení | RSS odkaz je jen v hlavičce HTML, ne viditelně na blogu | naplánovat jako malou produktovou úpravu |
+| Otázka | Není jasný právní základ pro konkrétní marketingový tok | posoudit před implementací, ne hádat v ticketu |
+
+Třídění udělej hned po auditu. Pokud se všechno označí jako „medium“, tým ztratil hodinu a získal šedou polévku. Priorita má říct, co se stane teď, co později a co se vědomě nedělá.
+
+### Přepiš nález na kartu změny
+
+Dobrá karta změny je kratší než auditní odstavec a konkrétnější než obecný úkol. Použij tento formát:
+
+| Pole | Co vyplnit |
+| --- | --- |
+| Nález | Co jsme zjistili |
+| Dopad | Koho nebo co to ohrožuje, mate nebo zdržuje |
+| Nejmenší oprava | Co jde udělat jako první bezpečný krok |
+| Vlastník | Kdo rozhodne a dotáhne změnu |
+| Hotovo znamená | Jak poznáme, že úkol není jen posunutý |
+| Privacy dopad | Jak se změní data, přístupy, retence, dodavatelé nebo souhlasy |
+| Co zatím neděláme | Hranice rozsahu |
+| Kontrola | Kdy ověříme, že oprava pomohla |
+
+Příklad:
+
+| Pole | Příklad |
+| --- | --- |
+| Nález | Demo formulář vyžaduje telefon bez vysvětlení |
+| Dopad | Člověk předává údaj dřív, než ví, proč je potřeba |
+| Nejmenší oprava | Telefon změnit na volitelný a doplnit mikrotext |
+| Vlastník | Marketing + sales owner formuláře |
+| Hotovo znamená | Pole není povinné, mikrotext je v UI, CRM přijímá prázdnou hodnotu |
+| Privacy dopad | Méně povinných kontaktních údajů v lead procesu |
+| Co zatím neděláme | Nepřepisujeme celý formulář ani scoring leadů |
+| Kontrola | Za 30 dní projít dokončení formuláře a kvalitu poptávek |
+
+Tahle karta je malá, ale nutí tým mluvit jazykem změny. Ne „zlepšit privacy formulářů“, ale „telefon už není povinný a víme proč“.
+
+### Omez počet otevřených privacy úkolů
+
+Privacy backlog se snadno nafoukne, protože každá část produktu má nějaké drobné riziko. Pokud otevřeš dvacet úkolů najednou, pravděpodobně se nedokončí žádný. Dej si limit rozpracované práce.
+
+Praktický režim pro malý tým:
+
+- jeden bloker řešit hned,
+- dvě až tři aktivní privacy opravy v měsíčním cyklu,
+- zbytek držet jako seřazený backlog s vlastníkem,
+- jednou měsíčně zavřít, odložit nebo smazat staré položky.
+
+Položka, která tři měsíce čeká bez vlastníka a bez změny rizika, často není úkol. Je to poznámka. Buď ji přepiš na konkrétní krok, nebo ji archivuj. Backlog má být užitečný, ne historicky kompletní.
+
+### Spoj privacy práci s produktovou hodnotou
+
+Privacy-first oprava se lépe prosazuje, když není prezentovaná jen jako povinnost. Často zároveň zlepšuje produkt:
+
+| Privacy oprava | Produktová hodnota |
+| --- | --- |
+| Zkrácení formuláře | méně tření a jasnější další krok |
+| Smazání zbytečného trackeru | rychlejší web a jednodušší consent režim |
+| Omezení oprávnění k exportu | menší riziko úniku a jasnější role |
+| Doplnění retence do dokumentace | méně support dotazů a vyšší důvěra |
+| Oddělení marketingu od provozních e-mailů | lepší očekávání a méně odhlášení |
+
+Tím se z privacy nestane vedlejší auditní proud. Stane se součástí produktu. Přesně tam patří.
+
+### Měř dokončení, ne počet nálezů
+
+Po auditu neslav počet nalezených problémů. To je jako slavit počet špinavých talířů po večeři. Důležité je, kolik jich umyješ a jestli se příště nebudou hromadit stejně.
+
+Dobré metriky pro privacy backlog:
+
+- počet uzavřených blokerů,
+- počet odstraněných polí, eventů, skriptů nebo přístupů,
+- počet úkolů s vlastníkem a definicí hotovo,
+- stáří nejrizikovější otevřené položky,
+- počet opakovaných nálezů z minulého auditu,
+- počet veřejných textů opravených podle skutečného provozu.
+
+Nepotřebuješ k tomu nový nástroj. Stačí issue tracker, tabulka nebo Markdown. Důležité je, aby se jednou za měsíc podle backlogu něco zavřelo.
+
+### Checklist: Backlog po privacy-first auditu
+
+- [ ] Nálezy jsou rozdělené na blokery, rizika, tření, nejasnosti, zlepšení a otázky.
+- [ ] Každý aktivní úkol má vlastníka.
+- [ ] Každý aktivní úkol má definici hotovo.
+- [ ] Nejmenší oprava je menší než původní auditní téma.
+- [ ] U každé změny je popsaný dopad na data, přístupy, retenci, dodavatele nebo souhlasy.
+- [ ] Backlog má limit rozpracovaných privacy úkolů.
+- [ ] Privacy opravy jsou propojené s produktovou hodnotou, ne jen s povinností.
+- [ ] Staré položky se měsíčně zavírají, odkládají nebo archivují.
+- [ ] Úspěch auditu se měří podle dokončených změn, ne podle počtu nálezů.
+- [ ] Opakované nálezy se převádí na systémové opatření, ne na další jednorázovou poznámku.
+
+### Mini úkol
+
+Vezmi posledních deset privacy, security nebo provozních nálezů a přepiš je do této tabulky:
+
+| Nález | Typ | Nejmenší oprava | Vlastník | Hotovo znamená | Co zatím neděláme |
+| --- | --- | --- | --- | --- | --- |
+|  |  |  |  |  |  |
+|  |  |  |  |  |  |
+|  |  |  |  |  |  |
+|  |  |  |  |  |  |
+|  |  |  |  |  |  |
+
+Potom vyber jen jednu položku a zavři ji tento týden. Nezačínej auditem auditu. Začni změnou, která odstraní jedno pole, jeden skript, jeden přístup, jednu nejasnou větu nebo jeden starý export. Privacy-first provoz se zlepšuje zavřenými malými smyčkami, ne obřím seznamem dobrých úmyslů.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -37431,6 +37555,7 @@ Potom podle této karty udělej jen jednu věc: buď doplň chybějící výstup
 
 ## Pracovní log
 
+- 2026-07-20: Doplněna příloha o backlogu po privacy-first auditu bez nekonečného seznamu: třídění nálezů podle typu práce, převod nálezu na kartu změny, limit rozpracovaných privacy úkolů, propojení privacy oprav s produktovou hodnotou, měření dokončení místo počtu nálezů, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně aktuálně ověřeno, že `cody.dreamind.cz` má expirovaný veřejný Let's Encrypt certifikát (`notAfter` 2026-07-17 19:35:56 GMT), aplikace za TLS při diagnostickém `curl -k` vrací `200 OK`, proxy cesta končí `Empty reply from server` a neinteraktivní SSH pro účty `root`, `ubuntu`, `deploy`, `cody` i `node` odmítá autentizaci, takže certifikát z tohoto běhu nejde bezpečně obnovit.
 - 2026-07-20: Doplněna příloha o definici hotovo pro části e-booku bez věčného draftu: pracovní věta části, rozlišení nového psaní, revize a navigace, výstup místo délky, karta stavu problematické části, privacy-first kontrola, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně znovu potvrzeno, že přímý veřejný TLS certifikát `cody.dreamind.cz` je expirovaný (`notAfter` 2026-07-17 19:35:56 GMT), `curl --noproxy '*' -k` vrací `200` a obsah, ale běžné ověření HTTPS selhává a tento běh nemá bezpečný SSH/sudo/deploy přístup k obnově certifikátu.
 - 2026-07-20: Provedena strukturální revize Markdown šablon uvnitř e-booku: ukázkové sekce jako `Status`, `Rozhodnutí`, `Kontext`, `Důsledky`, `Časová osa` a název TLS úkolu už nepoužívají `##` nadpisy, takže rychlá navigace podle hlavních nadpisů ukazuje skutečné kapitoly, přílohy, zdroje a pracovní log; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně znovu ověřeno, že aplikace za nginxem odpovídá (`curl -k` vrací `200 OK`), ale běžné veřejné HTTPS ověření selhává kvůli expirovanému Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT) a v kontejneru není dostupný SSH/sudo opravný přístup k obnově.
 - 2026-07-20: Zpřesněn úvodní návod k práci s e-bookem o převod poznámek ze čtení na jeden akční záznam se změnou, důvodem, ověřením dopadu a podmínkou uzavření; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně znovu ověřeno, že proxy cesta na `cody.dreamind.cz` končí po TLS tunelu chybou `Empty reply from server`, přímé veřejné HTTPS ověření selhává kvůli expirovanému certifikátu a dostupné prostředí neobsahuje bezpečný SSH/deploy přístup k obnově.
