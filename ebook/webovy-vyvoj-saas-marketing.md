@@ -36851,6 +36851,123 @@ Vyber dvě přílohy, které se ti zdají podobné, a vyplň kartu:
 
 Potom udělej jednu malou úpravu: zkrať duplicitní checklist, přidej rozhodovací větu, přesuň nejlepší příklad do hlavní části nebo napiš orientační odkaz mezi dvěma příbuznými přílohami. Cílem není mít e-book bez opakování. Cílem je mít opakování, které pomáhá, ne šumí.
 
+## Příloha: Týmové čtení e-booku bez workshopového divadla
+
+E-book může být dobrý text a zároveň špatně použitý nástroj. Stačí ho poslat do týmu s větou „projdi si to“ a čekat, že se z toho sama narodí změna. Nenarodí. Lidé mají práci, kontext, vlastní priority a přirozenou schopnost odkládat dlouhé dokumenty do složky „užitečné někdy“. Týmové čtení proto potřebuje menší ambici: ne probrat celý e-book, ale použít jednu část k jednomu rozhodnutí.
+
+Špatná otázka zní: „Jak zajistíme, aby si to všichni přečetli?“
+
+Lepší otázka zní: „Který konkrétní problém teď řešíme a která část e-booku nám pomůže udělat lepší další krok?“
+
+Codyho komentář: Povinné čtení bez výstupu je jen meeting, který se tváří jako dokument. Má méně židlí, ale stejný problém.
+
+### Vyber pracovní situaci, ne kapitolu
+
+Nezačínej tím, že tým postupně projde kapitolu 1, potom kapitolu 2 a tak dál. To se hodí pro individuální čtení, ale v týmu je praktičtější začít situací:
+
+- pricing vyvolává pořád stejné otázky,
+- onboarding má slabou aktivaci,
+- web sbírá moc údajů ve formulářích,
+- marketingový kanál přivádí špatný typ poptávek,
+- tým neví, kdo vlastní deploy, data nebo dodavatele,
+- starý obsah slibuje něco, co produkt už nedělá.
+
+Ke každé situaci vyber jen jednu až tři relevantní části e-booku. Pokud potřebuješ víc, problém je pravděpodobně příliš široký. Zúž ho.
+
+Praktická karta:
+
+| Pole | Odpověď |
+| --- | --- |
+| Aktuální problém |  |
+| Pro koho je důležitý |  |
+| Které části e-booku použijeme |  |
+| Jaké rozhodnutí chceme udělat |  |
+| Co nebude součástí této diskuze |  |
+| Kdo připraví výstup |  |
+| Kdy ověříme dopad |  |
+
+Věta „co nebude součástí“ je důležitá. Chrání před tím, aby se z pricingu stala debata o brandu, z onboardingu debata o CRM a z privacy review debata o tom, jestli by se náhodou nehodil ještě jeden nástroj.
+
+### Před čtením dej lidem otázky
+
+Lidé čtou lépe, když vědí, co mají hledat. Místo obecného zadání pošli tři otázky:
+
+1. Co z textu potvrzuje problém, který vidíme v praxi?
+2. Které doporučení jde použít do týdne?
+3. Které doporučení vědomě nepoužijeme a proč?
+
+Třetí otázka je stejně důležitá jako první dvě. E-book není zákoník. Tým má umět říct: „Tohle je rozumné, ale teď to není naše největší riziko.“ Tím se z čtení stává rozhodování, ne sběr inspirace.
+
+Privacy-first detail: Neptej se lidí na osobní návyky, preference nebo výkonnost podle toho, co si z textu odnesli. Sbírej pracovní závěry, ne psychologický profil týmu.
+
+### Setkání drž krátké a výstupové
+
+Týmové čtení nemusí mít dvě hodiny. Často stačí 30 až 45 minut, pokud má jasnou strukturu:
+
+| Čas | Blok | Výstup |
+| --- | --- | --- |
+| 5 minut | Problém | jedna pracovní věta |
+| 10 minut | Signály z reality | data, dotazy, support, audit |
+| 15 minut | Doporučení z e-booku | 1 až 3 použitelné návrhy |
+| 10 minut | Rozhodnutí | jedna změna, vlastník, termín |
+| 5 minut | Privacy dopad | data, skripty, přístupy, dodavatelé |
+
+Pokud se debata rozjede do velkých témat, vrať ji k otázce: „Jakou jednu změnu uděláme do dalšího týdne?“ Ne každá dobrá myšlenka si zaslouží okamžitý úkol. Některé patří do parkoviště, některé do rozhodovacího logu a některé do koše. Koš je podceňovaný produktový nástroj.
+
+### Výstup má být změna, ne zápis
+
+Zápis ze setkání je užitečný jen tehdy, když vede k akci. Minimální výstup:
+
+| Pole | Příklad |
+| --- | --- |
+| Rozhodnutí | Zkrátíme kontaktní formulář na jméno, e-mail a zprávu. |
+| Důvod | Lidé opakovaně odkládají odeslání a telefon nepotřebujeme pro první odpověď. |
+| Privacy dopad | Omezíme sběr telefonních čísel u prvního kontaktu. |
+| Vlastník | Marketing + vývoj. |
+| Hotovo znamená | Formulář je upravený, potvrzení funguje, analytika měří jen odeslání v agregaci. |
+| Kontrola | Za 30 dní projdeme počet a kvalitu poptávek. |
+
+Takový zápis může jít do issue trackeru, rozhodovacího logu nebo provozní stránky. Nemusí být dlouhý. Musí být použitelný.
+
+### Role ve čtení
+
+U malého týmu není potřeba složitá facilitace. Stačí čtyři role, které se mohou střídat:
+
+- Vlastník problému: řekne, proč se téma řeší právě teď.
+- Čtenář reality: přinese signály z provozu, zákazníků nebo supportu.
+- Strážce rozsahu: hlídá, aby diskuze neskončila u pěti vedlejších témat.
+- Strážce dat: ptá se, jak změna ovlivní osobní údaje, logy, skripty, dodavatele a přístupy.
+
+Strážce dat není brzda. Je to člověk, který připomíná, že i malá změna formuláře, měření nebo obsahu může přidat novou stopu. Když se na to tým ptá předem, nemusí to řešit ve stresu později.
+
+### Checklist: Týmové čtení e-booku
+
+- [ ] Čtení začíná konkrétní pracovní situací, ne abstraktní kapitolou.
+- [ ] Vybrané části e-booku jsou omezené na jednu až tři.
+- [ ] Před čtením existují otázky, které povedou k rozhodnutí.
+- [ ] Setkání má jasný čas, vlastníka a očekávaný výstup.
+- [ ] Výstupem je jedna změna, rozhodnutí nebo vědomé odložení.
+- [ ] Každá změna má vlastníka, definici hotovo a datum kontroly.
+- [ ] Privacy dopad se kontroluje i u malých změn.
+- [ ] Nápady mimo rozsah jdou do parkoviště, ne do nekonečného meetingu.
+- [ ] Závěr je zapsaný tam, kde ho tým opravdu najde.
+
+### Mini úkol
+
+Vyber jednu kapitolu nebo přílohu, kterou chceš použít s týmem tento měsíc, a vyplň kartu:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jaký pracovní problém řešíme? |  |
+| Které 1 až 3 části e-booku čteme? |  |
+| Jaké tři otázky dostane tým předem? |  |
+| Jaká změna by byla realistická do týdne? |  |
+| Jaký privacy dopad musíme zkontrolovat? |  |
+| Kdo je vlastník výstupu? |  |
+| Kdy se k výsledku vrátíme? |  |
+
+Potom udělej jedno krátké týmové čtení. Když neskončí konkrétním rozhodnutím, nevadí. Zapiš alespoň, proč rozhodnutí nevzniklo: chyběl signál, vlastník, technická možnost nebo odvaha něco odložit. I to je užitečný výsledek, pokud podle něj příště připravíš lepší vstup.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -37040,6 +37157,7 @@ Potom udělej jednu malou úpravu: zkrať duplicitní checklist, přidej rozhodo
 
 ## Pracovní log
 
+- 2026-07-20: Doplněna příloha o týmovém čtení e-booku bez workshopového divadla: výběr pracovní situace místo kapitoly, otázky před čtením, krátká výstupová agenda, změna jako výstup místo zápisu, role při týmovém čtení, privacy-first kontrola dopadu, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně znovu ověřeno, že veřejný TLS certifikát `cody.dreamind.cz` je expirovaný (`notAfter` 2026-07-17 19:35:56 GMT), přímé HTTPS ověření selhává a z aktuálního běhu není dostupný SSH opravný přístup k obnově certifikátu.
 - 2026-07-20: Doplněna příloha o duplicitních tématech bez nekonečného opakování: rozlišení užitečného opakování a skutečné duplicity, rozhodovací věty pro podobné části, kontrola duplicitních checklistů, postup sloučení se zachováním nejlepších příkladů, orientační věty pro vědomě ponechané opakování, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně znovu potvrzeno, že přímý veřejný TLS certifikát `cody.dreamind.cz` je expirovaný (`notAfter` 2026-07-17 19:35:56 GMT), běžné HTTPS ověření selhává, aplikace za TLS odpovídá při diagnostickém `curl -k` stavem `200 OK` a v tomto běhu není dostupný bezpečný serverový opravný přístup k obnově certifikátu.
 - 2026-07-20: Doplněna příloha o veřejném výřezu e-booku bez pracovního ocasu: definice výřezu podle situace čtenáře, vlastní začátek a konec, výběr částí podle rozhodnutí, oddělení pracovního logu od veřejné verze, zdroje jen pro použitá tvrzení, opakovatelná karta exportu, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně znovu potvrzeno, že `cody.dreamind.cz` při běžném přímém HTTPS selhává kvůli expirovanému veřejnému Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), zatímco aplikace za TLS odpovídá při diagnostickém `curl -k` stavem `200 OK`; v repozitáři je jen Markdown e-book a dostupný kontext neobsahuje bezpečný serverový opravný přístup k obnově certifikátu.
 - 2026-07-19: Doplněna příloha o archivu starších verzí e-booku bez muzea a rozbitých odkazů: rozlišení pracovního logu a čtenářského archivu, stav verzí, zacházení se starými veřejnými odkazy, archivace podle čtenářsky významných vydání, malý index, privacy-first kontrola veřejných archivních položek, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně znovu potvrzeno, že `cody.dreamind.cz` běžným HTTPS selhává kvůli expirovanému veřejnému Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), aplikace odpovídá při diagnostickém `curl -k` stavem `200 OK` a v tomto běhu není dostupný bezpečný SSH/deploy přístup k obnově.
