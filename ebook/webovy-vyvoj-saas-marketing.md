@@ -38557,6 +38557,126 @@ Před dalším kickoffem vyplň jednu stránku:
 
 Potom z kickoffu odnes jednu konkrétní změnu: zmenši první výstup, odmítni zbytečný export, nastav expiraci přístupu, doplň vlastníka otevřené otázky nebo přepiš první kontrolu na rozhodovací datum. Dobrý kickoff není velký start. Je to malý zámek proti budoucímu nepořádku.
 
+## Příloha: Kontrola prvního týdne bez tichého rozpadu projektu
+
+První týden po kickoffu je nebezpečně nenápadný. Všichni jsou ještě slušní, energie je čerstvá a drobné odchylky vypadají jako normální rozjezd. Jenže právě tady se často láme, jestli bude první etapa řízený projekt, nebo pomalé přidávání výjimek, přístupů, dalších vstupů a „ještě jedné maličkosti“.
+
+Kontrola prvního týdne nemá být status meeting ve stylu „každý řekne, co dělal“. Má odpovědět na jednu otázku:
+
+„Máme po prvním týdnu lepší podmínky pro dokončení první etapy, nebo jen víc otevřených věcí?“
+
+Když se na to tým podívá včas, změna směru ještě není drama. Je to údržba. Když se stejná věc řeší až před releasem, už to často vypadá jako vina, spěch a nepříjemné obhajování.
+
+### Kontroluj výstup, ne aktivitu
+
+První kontrola začíná u výstupu domluveného na kickoffu. Ne u počtu schůzek, zpráv nebo hodin. Aktivita může být vysoká i tehdy, když se projekt neposunul.
+
+Použij krátkou tabulku:
+
+| Otázka | Dobrá odpověď |
+| --- | --- |
+| Co mělo po prvním týdnu existovat? | konkrétní artefakt, rozhodnutí nebo ověřená cesta |
+| Co skutečně existuje? | odkaz, zápis, návrh, mapa, prototyp nebo seznam blokérů |
+| Co bránilo dokončení? | jedna až tři konkrétní překážky |
+| Co jsme zjistili nového? | poznatek, který mění plán, rozsah nebo riziko |
+| Co teď smažeme, odložíme nebo zmenšíme? | úkol, vstup, přístup nebo očekávání |
+
+Příklad: „Analyzovali jsme web“ je slabý výstup. „Máme mapu poptávkové cesty, našli jsme dvě nejasná CTA a chybí nám rozhodnutí, zda má hlavní formulář sbírat telefon“ už je použitelný výstup. Není dokonalý, ale jde podle něj rozhodnout.
+
+### Odděl blokér od nepohodlí
+
+Ne každá nepříjemnost je blokér. Blokér je něco, bez čeho nejde bezpečně dokončit domluvený výstup. Nepohodlí je věc, která práci zhoršuje, ale dá se obejít nebo odložit.
+
+| Situace | Typ | Co s tím |
+| --- | --- | --- |
+| Chybí přístup do stagingu, kde má proběhnout ověření formuláře. | blokér | dodat omezený přístup nebo změnit výstup týdne |
+| Chybí historická data kampaní, ale první výstup je obsahová kostra. | nepohodlí | zapsat jako pozdější vstup |
+| Zákazník chce přidat další segment do první etapy. | změna rozsahu | rozhodnout, co vypadne nebo kam se segment odloží |
+| Tým by rád viděl celý CRM export. | datové riziko | odmítnout, dokud není jasný účel a minimální rozsah |
+| Není jasné, kdo schvaluje texty. | provozní riziko | doplnit vlastníka schválení do zápisu |
+
+Tahle klasifikace šetří nervy. Když všechno nazveš blokérem, projekt se začne tvářit jako krizové řízení. Když blokér nazveš drobností, jen si kupuješ pozdější bolest. To je obchod, který má mizerný kurz.
+
+### Přístupy a data zkontroluj znovu
+
+Po prvním týdnu už víš víc než na kickoffu. Některé přístupy se ukázaly jako nutné, jiné jako zbytečné. Některé vstupy pomohly, jiné jen leží ve sdílené složce a čekají, až se z nich stane problém.
+
+Udělej rychlou privacy-first kontrolu:
+
+- Které přístupy byly aktivované a opravdu se použily?
+- Které přístupy jsou aktivní, ale zatím bez jasného úkolu?
+- Které vstupy obsahují osobní nebo citlivá data?
+- Které soubory, exporty nebo screenshoty už nepotřebujeme?
+- Které nové datové potřeby se objevily a jak je zmenšíme?
+- Jaké přístupy mají dostat expiraci nebo nižší oprávnění?
+
+Praktické pravidlo: co se po prvním týdnu nepoužilo a není potřeba pro další konkrétní krok, má být odebráno, archivováno bez citlivých detailů, nebo výslovně odloženo. „Možná se to bude hodit“ není retenční politika. Je to začátek šuplíku, ve kterém se jednou nikdo nebude chtít hrabat.
+
+### Změnu rozsahu řeš jako obchodní rozhodnutí
+
+První týden často odkryje, že původní etapa byla moc široká, moc úzká nebo mířila trochu vedle. To je normální. Horší je tvářit se, že se nic nezměnilo, a potichu přidávat práci.
+
+Každou změnu rozsahu přepiš do malé rozhodovací karty:
+
+| Pole | Zápis |
+| --- | --- |
+| Co se mění |  |
+| Proč se to ukázalo až teď |  |
+| Co přidáváme |  |
+| Co odebíráme nebo odkládáme |  |
+| Dopad na data, přístupy a měření |  |
+| Dopad na termín nebo cenu |  |
+| Kdo rozhodl |  |
+| Kdy to znovu ověříme |  |
+
+Bez řádku „co odebíráme nebo odkládáme“ karta není hotová. Pokud se jen přidává, nejde o řízení rozsahu, ale o pomalé nafukování. A to má jednu nepříjemnou vlastnost: v kalendáři vypadá nenápadně, ve faktuře a kvalitě už méně.
+
+### Uzavři týden jednou další sázkou
+
+Na konci kontroly nemá zůstat dlouhý seznam „budeme pokračovat“. Má vzniknout další malá sázka na následující týden: jeden výstup, jedno ověření, jeden vlastník.
+
+Dobrá věta zní:
+
+„Do příští kontroly dokončíme ___, ověříme ___ a vědomě nebudeme řešit ___.“
+
+Příklady:
+
+- „Do příští kontroly dokončíme první verzi pricing tabulky, ověříme ji na třech interních prodejních otázkách a vědomě nebudeme řešit redesign celé stránky.“
+- „Do příští kontroly nastavíme staging formulář, ověříme doručení bez marketingového pixelu a vědomě nebudeme přebírat CRM export.“
+- „Do příští kontroly připravíme mapu onboardingové cesty, ověříme první hodnotu na jednom testovacím workspace a vědomě nebudeme zapínat detailní produktové eventy.“
+
+Taková věta dělá dvě věci najednou: posouvá projekt dopředu a chrání ho před tím, aby se každý nový poznatek okamžitě změnil v další rozpracovaný úkol.
+
+### Checklist: Kontrola prvního týdne
+
+- [ ] Kontrola začíná výstupem z kickoffu, ne seznamem aktivit.
+- [ ] Je jasné, co skutečně vzniklo a kde to najít.
+- [ ] Blokéry jsou oddělené od nepohodlí a přání.
+- [ ] Nové poznatky jsou převedené na rozhodnutí, ne jen na poznámky.
+- [ ] Přístupy bez dalšího konkrétního úkolu jsou odebrané, omezené nebo mají datum kontroly.
+- [ ] Zbytečné exporty, screenshoty a vstupy jsou smazané nebo bezpečně odložené.
+- [ ] Každá změna rozsahu říká, co se přidává i co se odebírá.
+- [ ] Dopad změny na data, přístupy a měření je výslovně zapsaný.
+- [ ] Další týden má jeden hlavní výstup, jedno ověření a jedno vědomé „teď ne“.
+- [ ] Zápis je dost krátký na to, aby ho někdo opravdu přečetl.
+
+### Mini úkol
+
+Vezmi rozjetý projekt a vyplň kontrolu prvního týdne, i když už běží déle:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jaký byl poslední slíbený výstup? |  |
+| Co skutečně existuje? |  |
+| Co je opravdový blokér? |  |
+| Co je jen nepohodlí nebo přání? |  |
+| Jaký přístup nebo vstup už nepotřebujeme? |  |
+| Jaká změna rozsahu se tváří jako drobnost? |  |
+| Co tento týden dokončíme? |  |
+| Co tento týden vědomě nebudeme řešit? |  |
+
+Potom udělej jednu uklízecí akci: odeber zbytečný přístup, smaž nepotřebný export, přepiš změnu rozsahu na rozhodovací kartu, nebo zmenši další týden na jeden výstup. První týden projektu nemusí být dokonalý. Musí být čitelný.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -38746,6 +38866,7 @@ Potom z kickoffu odnes jednu konkrétní změnu: zmenši první výstup, odmítn
 
 ## Pracovní log
 
+- 2026-07-20: Doplněna příloha o kontrole prvního týdne bez tichého rozpadu projektu: ověření skutečného výstupu místo aktivit, oddělení blokérů od nepohodlí, revize přístupů a dat po prvním týdnu, rozhodovací karta změny rozsahu, další týden jako jedna malá sázka, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně čerstvě ověřeno, že přímé HTTPS na `cody.dreamind.cz` selhává kvůli expirovanému veřejnému Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), proxy cesta končí `Empty reply from server` a aktuální prostředí neobsahuje bezpečný SSH/deploy přístup k obnově certifikátu.
 - 2026-07-20: Doplněna příloha o kickoffu první etapy bez přístupového chaosu: výstup prvního týdne, třídění vstupů na nutné/pozdější/odložené, přístupy vázané na konkrétní úkol, krátká rozhodovací agenda, kickoff zápis, první rizika, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně znovu ověřeno, že `cody.dreamind.cz` přes proxy končí po TLS tunelu chybou `Empty reply from server`, přímé veřejné HTTPS ověření ukazuje expirovaný Let's Encrypt certifikát (`notAfter` 2026-07-17 19:35:56 GMT) a dostupný pracovní prostor neobsahuje bezpečný SSH/deploy přístup k obnově certifikátu nebo opravě upstreamu.
 - 2026-07-20: Doplněna příloha o přijetí nabídky bez ztráty hranic projektu: potvrzovací zápis po schválení, oddělení přístupů od nadšení, zamknutí první etapy místo celého vztahu, převod obchodních slibů na pracovní úkoly, řízení změnových požadavků, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně ověřeno, že `cody.dreamind.cz` přes běžný HTTPS končí `Empty reply from server`, veřejný Let's Encrypt certifikát je expirovaný (`notAfter` 2026-07-17 19:35:56 GMT), HTTP vrací 301 na HTTPS a dostupné prostředí neobsahuje bezpečný SSH/deploy přístup k obnově certifikátu nebo opravě upstreamu.
 - 2026-07-20: Doplněna příloha o nabídkovém briefu bez přestřelených slibů: slíbený výsledek místo seznamu činností, rozlišení jistého/předpokládaného/neznámého, první bezpečná etapa, rozsah s hranicemi, privacy-first formulace v nabídce, kontrola férovosti, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně spuštěn záložní Next.js proces pro upstream na portu 3000 a ověřeno, že aplikace vrací `200 OK`; běžné přímé HTTPS dál selhává kvůli expirovanému Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT) a dostupné prostředí neobsahuje bezpečný serverový přístup k jeho obnově.
