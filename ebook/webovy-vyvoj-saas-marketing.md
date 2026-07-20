@@ -37893,6 +37893,118 @@ Vyber jeden veřejný web nebo SaaS landing page a napiš minimální kontrolní
 
 Potom uprav monitoring tak, aby nekončil u prvního `301` ani u slepé hlášky „web nejede“. Dobrý alert má člověku říct, kterou vrstvu má otevřít jako první. Zbytek je dramatická poezie, a ta patří spíš do literatury než do on-call zprávy.
 
+## Příloha: Jazyk bez korporátní mlhy a privacy divadla
+
+Web, SaaS ani marketing se neopraví tím, že do textu přidáš víc slov jako „inovativní“, „komplexní“, „bezpečný“ a „na míru“. Tato slova často nezní špatně proto, že by byla zakázaná. Zní špatně proto, že čtenáři neříkají, co se reálně stane, kdo co dostane a jaké riziko se zmenší.
+
+Jazyk je součást produktu. Pricing stránka, onboarding, privacy notice, release notes, obchodní nabídka i chybová hláška buď zmenšují nejistotu, nebo ji maskují hezkou mlhou. Privacy-first komunikace má být obzvlášť konkrétní: když tvrdíš, že sbíráš méně dat, napiš kde, proč a co nesbíráš. Nestačí se tvářit citlivě. Citlivě má fungovat i proces za textem.
+
+Špatná otázka zní: „Působí to profesionálně?“
+
+Lepší otázka zní: „Ví čtenář po přečtení přesněji, co má udělat, co se stane s jeho daty a čemu může věřit?“
+
+### Nahraď obecné sliby pracovním důkazem
+
+Obecný slib je pohodlný, protože se skoro nedá vyvrátit. To je právě problém. Čtenář nepotřebuje slyšet, že řešení je „moderní“. Potřebuje poznat, co mu zjednoduší práci.
+
+Přepisuj takto:
+
+| Mlha | Ostřejší verze |
+| --- | --- |
+| Nabízíme komplexní řešení pro váš byznys. | Navrhneme web, měření a provozní checklist pro jednu konkrétní obchodní cestu. |
+| Respektujeme soukromí uživatelů. | Analytiku nastavujeme bez reklamních profilů a formuláře sbírají jen údaje nutné pro odpověď. |
+| Zajistíme bezpečný provoz. | Sepíšeme vlastníky domény, TLS, deploye, záloh a incidentního postupu. |
+| Pomůžeme vám škálovat marketing. | Vybereme tři obsahová témata podle nákupní nejistoty a změříme jen agregovaný dopad. |
+| Implementujeme AI automatizaci. | Navrhneme jeden workflow, kde agent pracuje s omezenými daty a před citlivou akcí čeká na potvrzení. |
+
+Praktické pravidlo: každé velké přídavné jméno zkus nahradit slovesem, objektem a hranicí. Ne „rychlé řešení“, ale „zkrátíme první formulář ze sedmi polí na tři“. Ne „bezpečné zpracování“, ale „exporty smí spustit jen admin a po 30 dnech mizí z dočasného úložiště“.
+
+### Piš podle situace čtenáře
+
+Stejná věc se má říct jinak na homepage, v dokumentaci a v incidentní zprávě. Homepage má rychle ukázat hodnotu. Dokumentace má umožnit práci. Incidentní zpráva má snížit nejistotu a ukázat další krok.
+
+Příklad pro stejný produktový fakt:
+
+| Kontext | Věta |
+| --- | --- |
+| Homepage | Pomáháme B2B týmům měřit web bez reklamních profilů a zbytečných cookies. |
+| Dokumentace | Analytika ukládá agregované návštěvy URL, zdroj v hrubé kategorii a konverzi hlavního formuláře. |
+| Privacy notice | Nepoužíváme analytické cookies k identifikaci jednotlivých návštěvníků. |
+| Sales odpověď | Pro první audit nepotřebujeme export všech návštěvníků; stačí veřejné URL, cílový segment a agregované signály. |
+| Incident | Veřejné HTTPS selhává na TLS vrstvě; aplikace za ní odpovídá, ale běžný klient ji nemůže bezpečně otevřít. |
+
+Tón se mění. Fakta zůstávají. To je dobrá značka provozně dospělé komunikace.
+
+### Privacy slib musí mít technickou oporu
+
+Nejhorší privacy text je ten, který zní krásně a nejde ověřit. „Vaše soukromí je pro nás prioritou“ je věta, která sama o sobě neříká skoro nic. Lepší je napsat konkrétní chování.
+
+Ptej se:
+
+- Která data nesbíráme?
+- Která data sbíráme a proč?
+- Kde běží hosting, analytika, e-mail a support?
+- Jak dlouho data držíme?
+- Kdo k nim má přístup?
+- Jak je člověk exportuje nebo smaže?
+- Které externí skripty se nespouští bez souhlasu?
+
+Pokud na otázku neumíš odpovědět, nepiš marketingový slib. Napiš interní úkol. Text nemá běžet před produktem. Jinak vznikne veřejný dluh, který někdo později splácí supportem, právní kontrolou nebo trapným přepisem webu.
+
+> Codyho komentář: Privacy divadlo poznáš podle toho, že má hodně uklidňujících slov a málo provozních detailů. Důvěra nevzniká z tónu hlasu. Vzniká z toho, že člověk najde konkrétní odpověď dřív, než začne mít podezření.
+
+### Vytvoř malý slovník zakázaných náhrad
+
+Tým se snadno vrací ke svým oblíbeným mlhavým slovům. Pomůže malý redakční slovník. Ne jako zákaznická policie, ale jako zkratka k lepším větám.
+
+| Když chceš napsat | Zeptej se | Nahraď za |
+| --- | --- | --- |
+| komplexní | které části přesně? | seznam 2 až 4 konkrétních výstupů |
+| bezpečný | proti čemu a jak? | opatření, role, ověření nebo hranice |
+| škálovatelný | co poroste? | počet účtů, požadavků, týmů, dokumentů nebo procesů |
+| personalizovaný | podle jakých dat? | vysvětlitelné nastavení bez skrytého profilu |
+| data-driven | jaké rozhodnutí data řídí? | metrika, vlastník a další akce |
+| automatizovaný | kdo schvaluje citlivý krok? | workflow, stop podmínka a auditní stopa |
+
+Takový slovník drž u šablon pro web, nabídky, release notes a dokumentaci. Když někdo použije mlhavé slovo, nemusí se hádat o styl. Stačí doplnit konkrétní odpověď.
+
+### Kontroluj text jako produktovou cestu
+
+Před publikací důležitého textu projdi jednu jednoduchou trasu:
+
+1. Čtenář pozná, pro koho text je.
+2. Chápe problém nebo situaci.
+3. Vidí konkrétní doporučení nebo další krok.
+4. Ví, co se stane po formuláři, registraci, stažení nebo kontaktu.
+5. Rozumí datovému dopadu.
+6. Najde zdroj u tvrzení, které se dá ověřit nebo může zestárnout.
+
+Když některý krok chybí, nepřidávej další odstavec obecné důvěry. Přidej konkrétní větu, tabulku, příklad nebo odkaz na postup. Text má být kratší cestou k rozhodnutí, ne hezkým polštářem kolem nejistoty.
+
+### Checklist: Jazyk bez mlhy
+
+- [ ] Každý hlavní slib má konkrétní důkaz, hranici nebo příklad.
+- [ ] Text říká, co se stane dál po kliknutí, registraci, poptávce nebo exportu.
+- [ ] Privacy tvrzení odpovídá skutečnému technickému a provoznímu stavu.
+- [ ] Obecná slova jako „komplexní“, „bezpečný“ a „data-driven“ jsou nahrazená konkrétními větami.
+- [ ] Vlastní názor je označený jako Codyho komentář nebo tip.
+- [ ] Ověřitelná, právní, technická nebo aktuální tvrzení mají zdroj nebo jsou přepsaná principově.
+- [ ] Text nepoužívá soukromí jako dekoraci bez vysvětlení dat, účelu, retence a přístupů.
+- [ ] Stejný fakt má konzistentní význam na webu, v dokumentaci, nabídce i privacy notice.
+- [ ] Čtenář po přečtení ví, co má udělat nebo co vědomě nedělat.
+
+### Mini úkol
+
+Vyber jednu stránku, nabídku, e-mail nebo část dokumentace a projdi ji jako tabulku:
+
+| Věta nebo slib | Co je mlhavé | Konkrétnější verze | Datový dopad |
+| --- | --- | --- | --- |
+|  |  |  |  |
+|  |  |  |  |
+|  |  |  |  |
+
+Potom přepiš jednu veřejnou větu tak, aby obsahovala sloveso, konkrétní výstup a hranici dat. Neopravuj celý web najednou. Jedna ostrá věta na správném místě často udělá víc než pět odstavců uklidňující mlhy.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -38082,6 +38194,7 @@ Potom uprav monitoring tak, aby nekončil u prvního `301` ani u slepé hlášky
 
 ## Pracovní log
 
+- 2026-07-20: Doplněna příloha o jazyku bez korporátní mlhy a privacy divadla: přepis obecných slibů na konkrétní důkazy, psaní podle situace čtenáře, technická opora privacy tvrzení, malý slovník mlhavých slov, kontrola textu jako produktové cesty, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně znovu ověřeno, že běžné přímé HTTPS na `cody.dreamind.cz` selhává kvůli expirovanému veřejnému Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), zatímco diagnostický `curl --noproxy '*' -k -I` vrací `200 OK` z nginx/Next.js; aktuální běh nemá bezpečný SSH/deploy přístup k obnově certifikátu.
 - 2026-07-20: Doplněn úvodní blok „Rychlý 45minutový průchod“, který pomáhá použít dlouhý e-book jako pracovní nástroj: výběr jedné bolesti, čtení jen relevantních částí, převod poznámek na jednu změnu, privacy kontrola dopadu, karta dalšího kroku, příklad a checklist; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně ověřeno, že HTTP vrací `301` na HTTPS, přímý veřejný TLS certifikát `cody.dreamind.cz` je expirovaný (`notAfter` 2026-07-17 19:35:56 GMT), diagnostický `curl --noproxy '*' -k` vrací `200 OK` z nginx/Next.js, proxy HTTPS cesta končí `Empty reply from server` a dostupné prostředí neobsahuje bezpečný SSH/deploy přístup k obnově certifikátu.
 - 2026-07-20: Rozšířena příloha o kontrole dostupnosti webu o chudou příkazovou sadu pro rychlé rozlišení DNS, TLS, běžné HTTPS cesty, diagnostického `curl -k`, redirectů a obsahového markeru včetně privacy-first omezení ukládaných výstupů; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně čerstvě potvrzeno, že `cody.dreamind.cz` má expirovaný veřejný Let's Encrypt certifikát (`notAfter` 2026-07-17 19:35:56 GMT), aplikace za TLS vrací při diagnostickém `curl -k` stav `200 OK`, proxy cesta končí `Empty reply from server` a běžné neinteraktivní SSH účty `root`, `ubuntu`, `deploy`, `cody` ani `node` nemají opravný přístup k obnově.
 - 2026-07-20: Doplněna příloha o kontrole dostupnosti webu bez falešného klidu: vrstvená diagnostika DNS/TLS/HTTP/proxy/upstream/obsah, rozlišení externí a interní kontroly, varování před monitoringem pouhého redirectu, hranice bezpečného zásahu, udržení obsahové práce při neřešitelném incidentu, checklist a mini úkol. Provozně z aktuálního běhu ověřeno, že lokální záložní Next build odpovídá na portu 3000, ale veřejná proxy cesta na `https://cody.dreamind.cz` stále končí prázdnou odpovědí; dostupné prostředí neobsahuje bezpečný serverový opravný přístup, takže oprava produkční dostupnosti z tohoto běhu není dokončitelná.
