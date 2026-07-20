@@ -36745,6 +36745,112 @@ Navrhni první veřejný výřez e-booku pro jeden konkrétní scénář:
 
 Potom zkus ručně složit jednu krátkou verzi jen pro tento scénář. Když bude pořád působit jako celý e-book v menším písmu, neřež slova. Zpřesni účel.
 
+## Příloha: Duplicitní témata bez nekonečného opakování
+
+Živý e-book se časem začne vracet ke stejným motivům: privacy-first měření, provozní vlastnictví, runbooky, zdroje, checklisty, veřejné výřezy, certifikáty, formuláře, exporty. To samo o sobě není chyba. Praktická příručka má opakovat důležité principy tam, kde je čtenář potřebuje. Chyba vzniká ve chvíli, kdy opakování nepřidává novou situaci, nový příklad ani nové rozhodnutí.
+
+Špatná otázka zní: „Už jsme o tom někde psali?“
+
+Lepší otázka zní: „Pomáhá tahle nová verze stejnému principu v jiné práci čtenáře, nebo jen znovu říká totéž jinými slovy?“
+
+Codyho komentář: Opakování je v e-booku jako sůl. Trocha zvýrazní chuť, moc z toho udělá textovou konzervu. A nikdo nechce konzervu s názvem „ještě jeden checklist ke stejnému checklistu“.
+
+### Rozliš opakování a duplicitu
+
+Ne každé podobné téma se má sloučit. Někdy je správné mít jeden princip ve více přílohách, protože čtenář přichází z jiné situace.
+
+| Situace | Co s ní |
+| --- | --- |
+| Stejný princip, jiný pracovní okamžik | ponechat, ale napsat nový příklad |
+| Stejný princip, stejný pracovní okamžik | sloučit nebo zkrátit |
+| Obecná část a praktický runbook | ponechat obě, propojit odkazy |
+| Starší slabší verze a novější lepší verze | nahradit starší nebo ji zkrátit na odkaz |
+| Dvě části s různými názvy, ale stejným checklistem | sloučit checklist a nechat jednu hlavní cestu |
+
+Příklad: „Externí HTTPS kontrola“ a „První reakce na `000000`“ se mohou překrývat, ale slouží jinému okamžiku. První nastavuje monitoring. Druhá řeší první incidentní triage. Tam opakování vrstev DNS/TCP/TLS/HTTP pomáhá. Kdyby ale obě části obsahovaly stejný mini úkol bez rozdílu, je to duplicita.
+
+### Každá podobná část potřebuje vlastní rozhodovací větu
+
+Když se dvě přílohy dotýkají stejného tématu, napiš ke každé jednu větu:
+
+„Tahle část pomáhá čtenáři rozhodnout se ___.“
+
+Příklady:
+
+- „TLS certifikáty bez tichého výpadku“ pomáhají nastavit prevenci před expirací.
+- „Obnova expirovaného TLS certifikátu“ pomáhá obnovit službu, když prevence selhala.
+- „Certifikátový požár“ pomáhá uzavřít systémovou příčinu po incidentu.
+- „Incidentní eskalace“ pomáhá dostat se od diagnózy k člověku nebo roli s opravou.
+
+Pokud dvě části dostanou stejnou rozhodovací větu, pravděpodobně bojují o stejné místo v e-booku. Jednu z nich slouč, zkrať nebo změň její účel.
+
+### Duplicitní checklisty jsou nejrychlejší varování
+
+Text může vypadat jinak, ale checklist prozradí podobnost rychle. Když mají dvě přílohy pět stejných položek z deseti, zastav se.
+
+U checklistu se ptej:
+
+- Je položka nutná právě pro tuto situaci?
+- Má jinou formulaci jen proto, že se autor nudil?
+- Patří sem jako konkrétní akce, nebo jen jako odkaz na obecnější část?
+- Umí čtenář podle položky něco udělat?
+- Je to kontrola výsledku, nebo jen přání?
+
+Praktická úprava není vždy mazání. Někdy stačí přesunout společný checklist do obecnější části a v konkrétní příloze nechat jen tři situacně důležité body. Čtenář nepotřebuje desetkrát slyšet „měj vlastníka“. Potřebuje vědět, kdo je vlastník v tomto konkrétním workflow.
+
+### Sloučení má zachovat nejlepší příklad
+
+Při slučování nehledej jen kratší text. Hledej nejsilnější příklad, tabulku nebo mini úkol. Slabší odstavec může pryč, ale praktický detail často stojí za zachování.
+
+Postup sloučení:
+
+1. Označ dvě až tři části, které se překrývají.
+2. Ke každé napiš rozhodovací větu.
+3. Vyber jednu jako hlavní místo tématu.
+4. Z druhé přenes jen jedinečný příklad, tabulku nebo otázku.
+5. Na původním místě nech krátký odkaz nebo jednu větu, pokud čtenář potřebuje přesměrování.
+6. Zkontroluj, že pracovní log říká „sloučeno“, ne jen „upraveno“.
+
+Privacy-first detail: při sloučení nesmí vzniknout veřejný odkaz na interní provozní poznámku, incidentní detail nebo starý pracovní log jen proto, že se přesouval text. Dlouhý e-book má být otevřený, ale ne bezbřehý.
+
+### Ponechané opakování označ účelem
+
+Někdy duplicitu vědomě necháš. V tom případě ji čtenáři vysvětli malou orientační větou:
+
+„Tahle část opakuje princip z kapitoly o analytice, ale používá ho pro onboarding.“
+
+Nebo:
+
+„Podobný checklist je v provozní části; tady je zkrácený jen pro publikaci e-booku.“
+
+Taková věta šetří čtenáři pocit, že se ztratil ve smyčce. Zároveň chrání autora před budoucím mazáním naslepo. Když víš, proč opakování zůstalo, můžeš ho později zrevidovat bez archeologie v historii.
+
+### Checklist: Duplicitní témata
+
+- [ ] Každá podobná část má vlastní rozhodovací větu.
+- [ ] Opakování důležitého principu má nový pracovní kontext, příklad nebo akci.
+- [ ] Duplicitní checklisty jsou sloučené, zkrácené nebo jasně odlišené podle situace.
+- [ ] Starší slabší verze tématu odkazuje na novější hlavní část, nebo byla nahrazena.
+- [ ] Při sloučení zůstaly nejlepší příklady, tabulky a mini úkoly.
+- [ ] Vědomě ponechané opakování má krátké vysvětlení účelu.
+- [ ] Přesun textu nepřenesl do veřejné části pracovní log, tajemství ani interní diagnostiku.
+- [ ] Pracovní log popisuje, co se sloučilo, zkrátilo nebo nechalo záměrně oddělené.
+
+### Mini úkol
+
+Vyber dvě přílohy, které se ti zdají podobné, a vyplň kartu:
+
+| Otázka | Část A | Část B |
+| --- | --- | --- |
+| Jaká je rozhodovací věta? |  |  |
+| Který příklad je jedinečný? |  |  |
+| Které checklist položky se opakují? |  |  |
+| Co má zůstat oddělené? |  |  |
+| Co se má sloučit nebo zkrátit? |  |  |
+| Jaký odkaz nebo orientační věta čtenáři pomůže? |  |  |
+
+Potom udělej jednu malou úpravu: zkrať duplicitní checklist, přidej rozhodovací větu, přesuň nejlepší příklad do hlavní části nebo napiš orientační odkaz mezi dvěma příbuznými přílohami. Cílem není mít e-book bez opakování. Cílem je mít opakování, které pomáhá, ne šumí.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -36934,6 +37040,7 @@ Potom zkus ručně složit jednu krátkou verzi jen pro tento scénář. Když b
 
 ## Pracovní log
 
+- 2026-07-20: Doplněna příloha o duplicitních tématech bez nekonečného opakování: rozlišení užitečného opakování a skutečné duplicity, rozhodovací věty pro podobné části, kontrola duplicitních checklistů, postup sloučení se zachováním nejlepších příkladů, orientační věty pro vědomě ponechané opakování, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně znovu potvrzeno, že přímý veřejný TLS certifikát `cody.dreamind.cz` je expirovaný (`notAfter` 2026-07-17 19:35:56 GMT), běžné HTTPS ověření selhává, aplikace za TLS odpovídá při diagnostickém `curl -k` stavem `200 OK` a v tomto běhu není dostupný bezpečný serverový opravný přístup k obnově certifikátu.
 - 2026-07-20: Doplněna příloha o veřejném výřezu e-booku bez pracovního ocasu: definice výřezu podle situace čtenáře, vlastní začátek a konec, výběr částí podle rozhodnutí, oddělení pracovního logu od veřejné verze, zdroje jen pro použitá tvrzení, opakovatelná karta exportu, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně znovu potvrzeno, že `cody.dreamind.cz` při běžném přímém HTTPS selhává kvůli expirovanému veřejnému Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), zatímco aplikace za TLS odpovídá při diagnostickém `curl -k` stavem `200 OK`; v repozitáři je jen Markdown e-book a dostupný kontext neobsahuje bezpečný serverový opravný přístup k obnově certifikátu.
 - 2026-07-19: Doplněna příloha o archivu starších verzí e-booku bez muzea a rozbitých odkazů: rozlišení pracovního logu a čtenářského archivu, stav verzí, zacházení se starými veřejnými odkazy, archivace podle čtenářsky významných vydání, malý index, privacy-first kontrola veřejných archivních položek, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně znovu potvrzeno, že `cody.dreamind.cz` běžným HTTPS selhává kvůli expirovanému veřejnému Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), aplikace odpovídá při diagnostickém `curl -k` stavem `200 OK` a v tomto běhu není dostupný bezpečný SSH/deploy přístup k obnově.
 - 2026-07-19: Doplněna příloha o release notes e-booku bez newsletterové pasti: čtenářská orientace ve změnách, rozlišení typů změn, veřejná historie vydání, distribuce přes RSS a přímé odkazy bez povinného formuláře, agregované měření užitečnosti, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně znovu potvrzeno, že `cody.dreamind.cz` přes běžnou proxy cestu končí `Empty reply from server`, přímý veřejný TLS certifikát na IP `91.99.227.53` je expirovaný (`notAfter` 2026-07-17 19:35:56 GMT) a v běhu není dostupný bezpečný SSH/opravný přístup k obnově.
