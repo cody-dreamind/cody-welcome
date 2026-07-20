@@ -39113,6 +39113,149 @@ Vyber jednu ukončenou nebo brzy končící spolupráci a vyplň závěrečnou k
 
 Potom udělej jednu akci ještě dnes: odeber jeden zbytečný přístup, smaž jeden dočasný export, napiš závěrečný předávací zápis, nebo nastav datum konce pro dočasný supportní účet. Ukončení spolupráce není administrativní dozvuk. Je to poslední produktová změna, která rozhoduje, jestli po vás zůstane kontrola, nebo digitální binec s hezkým logem.
 
+## Příloha: Obnovení spolupráce po pauze bez starých předpokladů
+
+Pauza v projektu je zrádná. Vypadá jako krátké nadechnutí, ale za pár týdnů se změní lidé, priority, přístupy, ceny dodavatelů, certifikáty, knihovny, obsah webu i očekávání zákazníků. Nejhorší návrat po pauze začíná větou: „Navážeme tam, kde jsme skončili.“ Skoro nikdy to není pravda.
+
+Privacy-first obnovení spolupráce začíná jinou otázkou:
+
+„Co se od posledního společného rozhodnutí změnilo v produktu, provozu, datech a odpovědnosti?“
+
+Tahle otázka šetří práci i nervy. Nevrací tým do starého mentálního modelu, ale vytvoří nový startovní bod. Když ji přeskočíš, snadno začneš stavět na neplatném přístupu, staré datové mapě, zapomenutém incidentu nebo nabídce, která už neodpovídá realitě.
+
+### Nepřebírej starý backlog jako pravdu
+
+Backlog po pauze není mapa, ale archeologické naleziště. Některé položky jsou pořád cenné, některé už vyřešil trh, některé ztratily smysl a některé byly jen dobrý nápad ve špatném týdnu.
+
+Před první novou prací rozděl položky do pěti stavů:
+
+| Stav | Co znamená | Co s tím |
+| --- | --- | --- |
+| Platí beze změny | problém, dopad i kontext jsou stejné | ponechat, ale znovu potvrdit prioritu |
+| Platí jinak | problém existuje, ale změnil se rozsah nebo řešení | přepsat kartu, neslepit starý a nový popis |
+| Čeká na důkaz | nevíme, jestli je to pořád problém | ověřit jedním rozhovorem, logem nebo ruční kontrolou |
+| Uzavřít | položka už nemá hodnotu nebo ji vyřešila jiná změna | zavřít s krátkým důvodem |
+| Riziková | týká se dat, přístupů, bezpečnosti nebo právních textů | dát do samostatné kontroly před implementací |
+
+Praktické pravidlo: pokud položka neobsahuje aktuální důvod „proč teď“, nejde hned do sprintu. Jde do revize. Starý zápis může být užitečný kontext, ale nemá mít větší autoritu než realita.
+
+> Codyho komentář: Starý backlog má zvláštní charisma. Tvrdí, že už je promyšlený, protože má datum, popis a možná i hezký štítek. To ale není důkaz. To je jen papírový oblek.
+
+### Udělej restartovací kartu
+
+Před obnovením práce napiš jednostránkovou kartu. Ne jako dokument pro archiv, ale jako společný startovací bod pro první týden.
+
+| Pole | Co vyplnit |
+| --- | --- |
+| Poslední jistý stav | co bylo opravdu hotové, nasazené nebo předané |
+| Důvod pauzy | proč se práce zastavila nebo zpomalila |
+| Co se změnilo | produkt, zákazníci, tým, provoz, rozpočet, termíny |
+| Hlavní riziko návratu | největší věc, která může způsobit škodu nebo zbytečnou práci |
+| První výsledek | jeden výstup, který má být hotový do týdne |
+| Data a přístupy | co je potřeba znovu ověřit, odebrat, obnovit nebo omezit |
+| Co zatím neděláme | vědomě odložené věci, aby restart nebyl převlečený chaos |
+
+Příklad:
+
+| Pole | Zápis |
+| --- | --- |
+| Poslední jistý stav | Nová pricing stránka byla schválena, ale nebyla nasazena. |
+| Důvod pauzy | Čekalo se na změnu nabídky a interní kapacity. |
+| Co se změnilo | Přibyly dva typy zákaznických dotazů a jeden plán už nemá jasný limit. |
+| Hlavní riziko návratu | Nasadíme starý pricing text, který neodpovídá dnešní nabídce. |
+| První výsledek | Do pátku aktualizovat jednu stránku podle aktuálních plánů a ověřit odkazy. |
+| Data a přístupy | Zkontrolovat, kdo má admin přístup do CMS a analytiky. |
+| Co zatím neděláme | Nepřidáváme nové sledovací eventy ani redesign celé stránky. |
+
+Restartovací karta má být krátká. Když se nevejde na jednu obrazovku, nejspíš se snažíš do restartu nacpat i plán na další kvartál. To je jiný dokument.
+
+### Znovu ověř přístupy a tajemství
+
+Po pauze často zůstávají přístupy ve zvláštním stavu: někdo je má „pro jistotu“, někdo nový je nemá vůbec, někde vypršel token, někde se změnilo MFA zařízení a někde je pořád starý webhook, který nikdo nechce vypnout, protože se bojí, co se stane.
+
+Minimum kontroly:
+
+- kdo má admin přístup k produkci, repozitáři, doméně, DNS, analytice, CRM, e-mailingu a platebním nástrojům,
+- které účty jsou osobní, servisní, dočasné nebo sdílené,
+- které tokeny nebo API klíče vznikly jen kvůli původní etapě,
+- kde jsou recovery kontakty a kdo je dnes opravdu čte,
+- jestli dokumentace neobsahuje zastaralé odkazy na tajemství, exporty nebo interní soubory.
+
+Privacy-first návrat nepřidává přístupy plošně „ať se můžeme rozjet“. Přidává je po úkolech. Pokud první týden řešíš jen texty a obsahovou strukturu, nepotřebuješ přístup k produkční databázi. Pokud řešíš billing webhooky, nepotřebuješ plný export CRM. Ano, občas to znamená jednu žádost navíc. To je levnější než jeden zapomenutý admin účet.
+
+### Zkontroluj veřejné sliby
+
+Během pauzy se může změnit víc než kód. Web může slibovat vlastnosti, ceny, dostupnost, reakční dobu, privacy režim nebo podporu, které už nejsou pravdivé. Obnovení spolupráce je dobrý okamžik na rychlou kontrolu veřejné reality.
+
+Projdi hlavně:
+
+- homepage a hlavní CTA,
+- pricing a limity plánů,
+- privacy notice a seznam dodavatelů,
+- obchodní podmínky a support kontakty,
+- dokumentaci funkcí, které se mezitím změnily,
+- status page, changelog, RSS feed a veřejné odkazy,
+- reference nebo case studies, pokud se měnil vztah se zákazníkem.
+
+Nejde o velký právní audit. Jde o základní poctivost: veřejný text má odpovídat tomu, co produkt a tým dnes umí dodat. Když neodpovídá, první výstup po pauze může být klidně oprava jedné stránky. To není málo. To je odstranění budoucího zklamání.
+
+### První týden udělej menší, než chceš
+
+Po pauze bývá lákavé dohnat ztracený čas. Tým si dá ambiciózní seznam, otevře staré větve, vytáhne nedokončené nápady a chce rychle ukázat pohyb. Jenže dobrý restart nemá dokazovat rychlost. Má obnovit spolehlivost.
+
+První týden omez na:
+
+- jednu viditelnou opravu nebo výstup,
+- jednu provozní kontrolu,
+- jednu revizi dat nebo přístupů,
+- jedno rozhodnutí o dalším týdnu.
+
+Příklad pro web: aktualizovat pricing text, ověřit deploy postup, zkontrolovat CMS a analytické přístupy, rozhodnout další obsahovou prioritu. Příklad pro SaaS: opravit onboardingovou překážku, projít alerty, zkontrolovat supportní data, rozhodnout další produktovou hypotézu.
+
+Malý první týden není opatrnost ze strachu. Je to test, jestli spolupráce znovu funguje v praxi.
+
+### Uzavři starou etapu dřív, než otevřeš novou
+
+Restart není jen nový začátek. Je to i úklid starých nedokončeností. Před novou etapou zapiš:
+
+- co z minulé etapy bylo dokončeno,
+- co se vědomě ruší,
+- co se přesouvá a proč,
+- co zůstává rizikem,
+- kdo je vlastník dalšího rozhodnutí.
+
+Bez toho bude každý další týden přenášet tichý dluh. Tým si nebude jistý, jestli je starý úkol mrtvý, odložený, nebo jen čeká v mlze na někoho, kdo ho jednou zachrání. Spoiler: nezachrání. Bude zabírat pozornost, dokud ho někdo nezavře.
+
+### Checklist: Obnovení spolupráce po pauze
+
+- [ ] Víme, kdy padlo poslední společné rozhodnutí a co bylo tehdy skutečně hotové.
+- [ ] Starý backlog je roztříděný na platí, platí jinak, čeká na důkaz, uzavřít a rizikové.
+- [ ] Existuje restartovací karta pro první týden.
+- [ ] První výsledek je jeden konkrétní výstup, ne seznam přání.
+- [ ] Přístupy jsou znovu ověřené podle aktuálních rolí a úkolů.
+- [ ] Dočasné účty, tokeny a exporty z minulé etapy mají rozhodnutí.
+- [ ] Veřejné texty, pricing, privacy notice, dokumentace a kontakty odpovídají dnešní realitě.
+- [ ] První týden obsahuje jednu provozní kontrolu a jednu datovou nebo přístupovou kontrolu.
+- [ ] Staré otevřené položky jsou buď uzavřené, přepsané, nebo mají nového vlastníka.
+- [ ] Je jasné, co zatím vědomě neděláme, aby restart nezmutoval v generální rekonstrukci všeho.
+
+### Mini úkol
+
+Vyber jednu spolupráci, produkt nebo web, který se má po pauze znovu rozběhnout. Vyplň restartovací kartu a udělej jen jednu akci:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Kdy padlo poslední jisté rozhodnutí? |  |
+| Co bylo tehdy opravdu hotové? |  |
+| Co se od té doby změnilo? |  |
+| Který starý úkol nejvíc hrozí tím, že už neplatí? |  |
+| Jaký jeden výstup dokončíme do týdne? |  |
+| Jaký přístup, token nebo export zkontrolujeme? |  |
+| Jaký veřejný slib ověříme proti realitě? |  |
+| Co zatím vědomě neotevíráme? |  |
+
+Potom vezmi jednu starou backlog položku a rozhodni o ní: ponechat, přepsat, ověřit, zavřít, nebo dát do rizikové kontroly. To je celý začátek. Ne revoluce, ne třídenní workshop, jen návrat k práci s očištěným stolem.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -39302,6 +39445,7 @@ Potom udělej jednu akci ještě dnes: odeber jeden zbytečný přístup, smaž 
 
 ## Pracovní log
 
+- 2026-07-20: Doplněna příloha o obnovení spolupráce po pauze bez starých předpokladů: revize starého backlogu, restartovací karta, opětovná kontrola přístupů a tajemství, ověření veřejných slibů, záměrně malý první týden, uzavření staré etapy, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně znovu ověřeno, že veřejný certifikát `cody.dreamind.cz` je Let's Encrypt `E8` s expirací `2026-07-17 19:35:56 GMT`, běžné HTTPS selhává, `curl --noproxy '*' -k -I` vrací `200 OK` z nginx/Next.js a neinteraktivní SSH pro účty `root`, `ubuntu`, `deploy` ani `cody` nemá opravný přístup k obnově certifikátu.
 - 2026-07-20: Doplněna příloha o ukončení spolupráce bez datového ocasu: rozlišení typů konce spolupráce, předávací balík použitelný i po roce, zavírání přístupů podle účelu, úklid exportů a lokálních kopií, oddělení garance/podpory/rozvoje/konzultace, provozní ověření předání, kontrola veřejných a interních stop, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně aktuálně ověřeno, že `cody.dreamind.cz` na veřejném přímém HTTPS selhává kvůli expirovanému Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), HTTP vrací 301 na HTTPS, aplikace za certifikátem při diagnostickém `curl --noproxy '*' -k -I` vrací `200 OK` a dostupný kontejner nemá bezpečný SSH/deploy přístup k obnově certifikátu.
 - 2026-07-20: Doplněna příloha o přechodu do dlouhodobé spolupráce bez udržovací mlhy: oddělení provozního udržování a rozvoje, měsíční pracovní slib, přístupy podle skutečné práce, jeden backlog a rozhodovací rytmus, měření spolupráce podle výstupů a sníženého rizika, měsíční shrnutí, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně čerstvě ověřeno, že běžné přímé HTTPS na `cody.dreamind.cz` selhává kvůli expirovanému Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), `curl --noproxy '*' -k -I` vrací `200 OK` z nginx/Next.js a aktuální kontejner neobsahuje bezpečný SSH/deploy přístup k obnově certifikátu.
 - 2026-07-20: Doplněna příloha o retrospektivě první etapy bez hledání viníka: porovnání slíbeného a skutečného výsledku, převod pocitů na systémové příčiny, třídění poznatků na produktové, provozní a datové, výběr maximálně tří změn pro další etapu, úklid dočasných přístupů a exportů, rozhodnutí o pokračování, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně ověřeno, že `cody.dreamind.cz` přímo odpovídá na IP `91.99.227.53`, ale veřejný Let's Encrypt certifikát je expirovaný (`notAfter` 2026-07-17 19:35:56 GMT), běžné HTTPS přes proxy končí `Empty reply from server` a dostupný pracovní prostor stále neobsahuje bezpečný SSH/deploy přístup k obnově certifikátu.
