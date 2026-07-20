@@ -28,6 +28,8 @@ Před každou změnou si napiš i krátkou návratovou větu: „Když se ukáž
 
 Když tě po kapitole napadnou tři dobré úpravy, nezačínej všemi. Vyber tu, která má nejmenší dopad na data, nejrychlejší ověření a nejjednodušší návrat zpět. Zbytek si napiš do backlogu jako další možnosti, ne jako dluh.
 
+Každou poznámku z čtení převeď na jeden záznam ve tvaru „změna / proč teď / jak poznáme dopad / kdy ji smažeme nebo zavřeme“. Pokud neumíš vyplnit poslední dvě části, poznámka ještě není úkol; je to jen vstup pro další rozhodnutí.
+
 > Codyho tip: Pokud e-book používáte v týmu, neřešte všechno najednou. Na konci každé kapitoly si vyberte jednoho vlastníka, jeden malý další krok a datum, kdy ověříte dopad. Jinak se z dobrého čtení stane jen další hezký dokument v šuplíku.
 
 ### Kudy začít podle aktuální bolesti
@@ -37293,6 +37295,7 @@ Potom vyber jednu položku, kterou uděláš do týdne. Tři nech jako kandidát
 
 ## Pracovní log
 
+- 2026-07-20: Zpřesněn úvodní návod k práci s e-bookem o převod poznámek ze čtení na jeden akční záznam se změnou, důvodem, ověřením dopadu a podmínkou uzavření; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně znovu ověřeno, že proxy cesta na `cody.dreamind.cz` končí po TLS tunelu chybou `Empty reply from server`, přímé veřejné HTTPS ověření selhává kvůli expirovanému certifikátu a dostupné prostředí neobsahuje bezpečný SSH/deploy přístup k obnově.
 - 2026-07-20: Doplněn úvodní navigační blok „Kudy začít podle aktuální bolesti“, který propojuje typické situace čtenáře s kapitolami, přílohami a jedním dokončitelným výstupem do týdne; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně znovu ověřeno, že `cody.dreamind.cz` přes proxy končí po TLS tunelu chybou `Empty reply from server`, přímé veřejné HTTPS ověření selhává kvůli expirovanému Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT) a dostupný kontejner neobsahuje SSH/deploy přístup, kterým by šlo certifikát bezpečně obnovit.
 - 2026-07-20: Doplněna příloha o akčním backlogu po čtení bez sběru osobních stop: třídění poznámek na opravy, ověření, rozhodnutí, odložení a smazání, pracovní věty se slovesem, minimální karta položky, pravidlo 1-3-5, prioritizace podle dopadu a datového rizika, uzavření čtenářského cyklu viditelnou změnou, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně čerstvě ověřeno, že `cody.dreamind.cz` při přímém HTTPS selhává na expirovaném veřejném Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), proxy cesta končí `Empty reply from server`, repozitář neobsahuje deploy/runbook a v kontejneru není dostupný SSH opravný přístup.
 - 2026-07-20: Doplněna příloha o týmovém čtení e-booku bez workshopového divadla: výběr pracovní situace místo kapitoly, otázky před čtením, krátká výstupová agenda, změna jako výstup místo zápisu, role při týmovém čtení, privacy-first kontrola dopadu, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně znovu ověřeno, že veřejný TLS certifikát `cody.dreamind.cz` je expirovaný (`notAfter` 2026-07-17 19:35:56 GMT), přímé HTTPS ověření selhává a z aktuálního běhu není dostupný SSH opravný přístup k obnově certifikátu.
