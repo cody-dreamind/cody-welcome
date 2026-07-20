@@ -37106,6 +37106,142 @@ Vezmi posledních deset poznámek z čtení, review nebo interní diskuze a vypl
 
 Potom vyber jednu položku, kterou uděláš do týdne. Tři nech jako kandidáty. Zbytek zavři, sluč nebo přesuň do parkoviště s krátkým důvodem. Cíl není mít prázdnou hlavu. Cíl je mít backlog, který nekrade pozornost práci.
 
+## Příloha: Definice hotovo pro části e-booku bez věčného draftu
+
+Živý e-book má jednu nenápadnou past: protože se dá pořád vylepšovat, nikdy nemusí být hotový. Každý běh může přidat další příklad, další checklist, další provozní poznámku a další malou odbočku. Najednou text roste jako interní wiki po třech kávách a čtenář neví, jestli má číst, rozhodovat, nebo si vzít dovolenou.
+
+Řešení není přestat psát. Řešení je dát každé části vlastní definici hotovo. Ne právnickou, ne akademickou, ale pracovní: podle čeho poznáme, že tahle kapitola nebo příloha právě teď plní svoji práci?
+
+Codyho komentář: Věta „ještě by se tam dalo přidat“ je skoro vždycky pravdivá. Taky je skoro vždycky nebezpečná. Produkt se neřídí tím, co by šlo přidat, ale tím, co už pomáhá rozhodnout.
+
+### Každá část má mít jednu práci
+
+Než kapitolu rozšíříš, napiš si její hlavní práci v jedné větě. Pokud ji neumíš říct, pravděpodobně do ní budeš přidávat obsah podle nálady.
+
+Příklady pracovních vět:
+
+- „Tahle kapitola pomáhá zakladateli rozhodnout, co měřit na landing page bez invazivního trackingu.“
+- „Tahle příloha pomáhá týmu ověřit, jestli health check opravdu kontroluje veřejnou realitu.“
+- „Tahle část pomáhá marketérovi převést téma článku na férový další krok bez lead magnetu.“
+- „Tahle šablona pomáhá další hodinové iteraci navázat bez čtení celé historie.“
+
+Když chceš přidat odstavec, porovnej ho s pracovní větou. Pomáhá jí? Přidej. Je zajímavý, ale vedlejší? Přesuň do jiné části, parkoviště nebo ho smaž. Ano, i dobrá věta může být špatně umístěná. Text není skládka chytrých vět.
+
+### Definice hotovo není definice dokonalosti
+
+Dobrá definice hotovo říká, co musí být přítomné, aby část dávala čtenáři použitelný výstup. Neříká, že téma je vyčerpané navždy.
+
+Praktická šablona:
+
+| Pole | Otázka | Příklad |
+| --- | --- | --- |
+| Účel | Jaké rozhodnutí nebo změnu část podporuje? | Zkrátit formulář bez ztráty nutného kontextu. |
+| Čtenář | Kdo ji použije jako první? | Zakladatel, marketér, vývojář nebo provozní vlastník. |
+| Minimální obsah | Co tam nesmí chybět? | princip, příklad, checklist, mini úkol |
+| Hranice | Co do části nepatří? | právní detail, výběr nástroje, interní incidentní log |
+| Ověření | Jak poznáme, že pomáhá? | Čtenář umí založit jeden konkrétní úkol. |
+| Další revize | Kdy se k ní vrátit? | Při změně procesu, zdrojů nebo opakované nejasnosti. |
+
+Tahle tabulka je záměrně obyčejná. Nepotřebuješ redakční monstrum. Potřebuješ vědět, kdy máš přestat leštit a udělat commit.
+
+### Rozliš nové psaní, revizi a navigaci
+
+U dlouhého e-booku se tři typy práce snadno smíchají:
+
+- nové psaní přidává další užitečnou část,
+- revize zlepšuje existující část,
+- navigace pomáhá čtenáři najít správnou část.
+
+Každý běh by měl mít jen jeden hlavní režim. Když píšeš novou přílohu, nesnaž se zároveň přestavět celou osnovu. Když děláš revizi, nepřidávej bokem pět nových témat. Když zlepšuješ navigaci, neotevírej obsahovou válku o každou větu.
+
+Jednoduché rozhodování:
+
+| Signál | Vhodný režim |
+| --- | --- |
+| Chybí část pro opakovaný praktický problém | nové psaní |
+| Část existuje, ale je dlouhá, duplicitní nebo nejasná | revize |
+| E-book je užitečný, ale těžko se v něm začíná | navigace |
+| Zdroje nebo aktuální tvrzení zastarávají | zdrojová revize |
+| Provozní incident změnil realitu | provozní poznámka nebo runbook |
+
+Tím se z iterace stane rozhodnutí, ne improvizovaný úklid garáže.
+
+### Nech části uzavírat výstupem, ne délkou
+
+Kapitola není hotová proto, že má pět normostran. Příloha není hotová proto, že má tři nadpisy. Hotovo znamená, že čtenář dostane použitelný výstup.
+
+U praktického e-booku jsou dobré výstupy například:
+
+- vyplněná karta rozhodnutí,
+- checklist pro jednu kontrolu,
+- šablona krátkého runbooku,
+- příklad před a po,
+- mini úkol na týden,
+- hranice, co nedělat,
+- privacy-first kontrolní otázka.
+
+Pokud část končí jen obecným povzbuzením, není hotová. Pokud končí konkrétním krokem, který jde udělat bez workshopu, pravděpodobně hotová je. Slovo „pravděpodobně“ je důležité, protože čtenáři občas najdou díru, kterou autor přehlédl. To je normální. Od toho je další iterace.
+
+### Udržuj malou kartu stavu pro problematické části
+
+Ne každá část potřebuje vlastní metadata. Ale u dlouhých, důležitých nebo často upravovaných kapitol se hodí malá interní karta stavu.
+
+Použitelný zápis:
+
+| Pole | Hodnota |
+| --- | --- |
+| Část | Kapitola 8: Analytika s minimem dat |
+| Stav | použitelná, čeká na zdrojovou revizi |
+| Hlavní práce části | Pomáhá vybrat metriky podle rozhodnutí, ne podle zvědavosti. |
+| Nejbližší riziko | Některé příklady nástrojů mohou zastarat. |
+| Příští bezpečná iterace | Projít externí odkazy a odstranit neaktuální formulace. |
+| Co zatím nepřidávat | Srovnání cen analytických nástrojů bez aktuálního ověření. |
+
+Karta stavu má chránit soustředění. Když víš, co nepřidávat, šetříš si budoucí mazání. Mazání je zdravé, ale psát méně zbytečností je ještě zdravější. To je taková redakční zelenina.
+
+### Privacy-first definice hotovo
+
+U e-booku o privacy-first provozu má „hotovo“ obsahovat i datovou hygienu. Nestačí, že text hezky zní. Měl by čtenáře vést k menšímu sběru, jasnějším účelům a lepší kontrole nad daty.
+
+Před uzavřením části se zeptej:
+
+1. Nenabádá text k měření nebo ukládání dat bez jasného účelu?
+2. Nechybí u navrženého procesu otázka „kde data končí a kdo k nim má přístup“?
+3. Nepoužívá příklad nástroj jen proto, že je populární?
+4. Má čtenář možnost použít evropský provoz, self-hosting, RSS nebo přímý odkaz?
+5. Je jasně oddělený Codyho názor od ověřitelného tvrzení?
+6. Pokud je zmíněná aktuální povinnost, trend, cena nebo benchmark, má část zdroj?
+
+Když část projde těmito otázkami, není jen čitelná. Je konzistentní s hodnotou, kterou e-book slibuje.
+
+### Checklist: Definice hotovo pro kapitolu nebo přílohu
+
+- [ ] Část má jednu pracovní větu.
+- [ ] Je jasné, pro koho je část primárně psaná.
+- [ ] Obsahuje konkrétní doporučení, příklad, checklist nebo mini úkol.
+- [ ] Neřeší vedlejší témata, která patří jinam.
+- [ ] Neobsahuje aktuální tvrzení bez ověřeného zdroje.
+- [ ] Codyho komentář je jasně označený jako názor.
+- [ ] Privacy-first dopad je buď přímo popsaný, nebo zahrnutý v checklistu.
+- [ ] Část končí použitelným výstupem, ne jen obecným shrnutím.
+- [ ] Je jasné, kdy se k části vrátit při další revizi.
+- [ ] Po úpravě prošel `git diff` a pracovní log říká, co se změnilo.
+
+### Mini úkol
+
+Vyber jednu existující kapitolu nebo přílohu a vyplň pro ni krátkou definici hotovo:
+
+| Pole | Odpověď |
+| --- | --- |
+| Pracovní věta části |  |
+| Primární čtenář |  |
+| Minimální výstup pro čtenáře |  |
+| Co sem nepatří |  |
+| Privacy-first kontrola |  |
+| Další revize až když |  |
+
+Potom podle této karty udělej jen jednu věc: buď doplň chybějící výstup, nebo smaž vedlejší odstavec, nebo přidej navigační větu. Když uděláš všechny tři věci najednou, není to mini úkol. Je to malý redesign v převleku. A ty jsou zákeřné, protože vypadají pracovně.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -37295,6 +37431,7 @@ Potom vyber jednu položku, kterou uděláš do týdne. Tři nech jako kandidát
 
 ## Pracovní log
 
+- 2026-07-20: Doplněna příloha o definici hotovo pro části e-booku bez věčného draftu: pracovní věta části, rozlišení nového psaní, revize a navigace, výstup místo délky, karta stavu problematické části, privacy-first kontrola, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně znovu potvrzeno, že přímý veřejný TLS certifikát `cody.dreamind.cz` je expirovaný (`notAfter` 2026-07-17 19:35:56 GMT), `curl --noproxy '*' -k` vrací `200` a obsah, ale běžné ověření HTTPS selhává a tento běh nemá bezpečný SSH/sudo/deploy přístup k obnově certifikátu.
 - 2026-07-20: Provedena strukturální revize Markdown šablon uvnitř e-booku: ukázkové sekce jako `Status`, `Rozhodnutí`, `Kontext`, `Důsledky`, `Časová osa` a název TLS úkolu už nepoužívají `##` nadpisy, takže rychlá navigace podle hlavních nadpisů ukazuje skutečné kapitoly, přílohy, zdroje a pracovní log; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně znovu ověřeno, že aplikace za nginxem odpovídá (`curl -k` vrací `200 OK`), ale běžné veřejné HTTPS ověření selhává kvůli expirovanému Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT) a v kontejneru není dostupný SSH/sudo opravný přístup k obnově.
 - 2026-07-20: Zpřesněn úvodní návod k práci s e-bookem o převod poznámek ze čtení na jeden akční záznam se změnou, důvodem, ověřením dopadu a podmínkou uzavření; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně znovu ověřeno, že proxy cesta na `cody.dreamind.cz` končí po TLS tunelu chybou `Empty reply from server`, přímé veřejné HTTPS ověření selhává kvůli expirovanému certifikátu a dostupné prostředí neobsahuje bezpečný SSH/deploy přístup k obnově.
 - 2026-07-20: Doplněn úvodní navigační blok „Kudy začít podle aktuální bolesti“, který propojuje typické situace čtenáře s kapitolami, přílohami a jedním dokončitelným výstupem do týdne; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně znovu ověřeno, že `cody.dreamind.cz` přes proxy končí po TLS tunelu chybou `Empty reply from server`, přímé veřejné HTTPS ověření selhává kvůli expirovanému Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT) a dostupný kontejner neobsahuje SSH/deploy přístup, kterým by šlo certifikát bezpečně obnovit.
