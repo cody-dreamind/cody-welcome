@@ -38818,6 +38818,147 @@ Vezmi poslední dokončenou etapu projektu a vyplň jednu retrospektivní kartu:
 
 Potom udělej jednu konkrétní akci hned: odeber dočasný přístup, smaž nepotřebný export, doplň vlastníka další etapy, nebo přepiš neurčité „pokračujeme“ na jednu z rozhodovacích vět výše. Retrospektiva bez další akce je jen hezky strukturované ohlédnutí. A to je sice kulturní, ale produkt to neposune.
 
+## Příloha: Přechod do dlouhodobé spolupráce bez udržovací mlhy
+
+Po první etapě často přijde věta: „Tak pojďme pokračovat dlouhodobě.“ Zní příjemně, ale bez přesnějšího rámce je nebezpečně měkká. Dlouhodobá spolupráce nemá být jen hezčí název pro nekonečný seznam drobných úprav, náhodných požadavků a přístupů, které zůstaly zapnuté, protože se nikomu nechtělo uklízet.
+
+Privacy-first dlouhodobá spolupráce musí odpovědět na otázku:
+
+„Jak budeme průběžně zlepšovat produkt, web nebo marketing tak, aby každý měsíc vznikla viditelná hodnota, kontrolovatelná datová stopa a méně provozního překvapení?“
+
+Když tuhle otázku přeskočíš, skončíš ve zvláštním režimu: všichni mají pocit, že projekt běží, ale nikdo přesně neví, podle čeho se rozhoduje, co je hotovo a proč některé věci pořád sbírají data. To není spolupráce. To je pomalé mlžení s fakturou.
+
+### Odděl udržování od rozvoje
+
+Dlouhodobá spolupráce se obvykle skládá ze dvou druhů práce:
+
+| Typ práce | Co znamená | Jak ji řídit |
+| --- | --- | --- |
+| Udržování | Bezpečnostní aktualizace, opravy, provozní kontrola, drobné obsahové úpravy, monitoring, obnova certifikátů, zálohy. | rytmus, checklist, jasné SLA očekávání, minimální změny |
+| Rozvoj | Nové stránky, produktové změny, onboarding, pricing, experimenty, kampaně, integrace. | malý backlog, hypotéza, vlastník, dopad, privacy kontrola |
+
+Tyto dvě vrstvy nemíchej do jedné fronty. Když aktualizace závislostí soutěží s novým pricingem a opravou formuláře, vyhrává nejhlasitější požadavek. Když jsou vrstvy oddělené, umíš říct: „Toto je provozní hygiena, toto je růstová sázka a toto je nápad na později.“
+
+Praktický zápis měsíční kapacity může vypadat takto:
+
+| Vrstva | Kapacita | Typický výstup |
+| --- | --- | --- |
+| Provozní minimum | 20-30 % | aktualizace, kontrola dostupnosti, opravy chyb, úklid přístupů |
+| Produktový nebo marketingový rozvoj | 50-60 % | jedna dokončená změna s dopadem na zákazníka |
+| Rezerva | 10-20 % | incident, nečekaný blokér, drobná urgentní oprava |
+
+Čísla neber jako zákon. Smysl je v tom, aby udržování nebylo neviditelné a rozvoj nebyl nekonečný. Pokud každý měsíc spotřebuješ všechnu kapacitu na urgentní opravy, není problém v plánu. Problém je v systému, který si říká o údržbu až ve chvíli, kdy hoří.
+
+### Zaveď měsíční pracovní slib
+
+Dlouhodobá spolupráce potřebuje menší jednotku než „budeme průběžně zlepšovat web“. Použij měsíční pracovní slib:
+
+„Tento měsíc zlepšíme ___ pro ___ tím, že dokončíme ___, a ověříme to pomocí ___.“
+
+Příklady:
+
+| Špatně | Lépe |
+| --- | --- |
+| Budeme pracovat na SEO. | Tento měsíc opravíme tři nejdůležitější produktové stránky tak, aby každá měla jasný záměr, interní odkazy a aktuální odpověď na jednu nákupní nejistotu. |
+| Budeme zlepšovat onboarding. | Tento měsíc zkrátíme cestu k první hodnotě u nového workspace: administrátor pozve tým a dokončí první nastavení bez supportu. |
+| Budeme hlídat privacy. | Tento měsíc projdeme jeden datový tok od formuláře po CRM a zavřeme nepotřebné exporty, pole nebo přístupy. |
+| Budeme dělat marketing. | Tento měsíc vydáme jeden praktický článek, jeden návazný checklist a jeden přímý follow-up pro existující kontakty bez nového trackingu. |
+
+Měsíční slib chrání tým před rozplizlostí. Když přijde nový požadavek, neptáš se jen „je to dobrý nápad“. Ptáš se: „Pomáhá to měsíčnímu slibu, nebo tím bereme kapacitu něčemu, co jsme už slíbili?“
+
+### Domluv vstupy, ne permanentní otevřená vrátka
+
+Dlouhodobá spolupráce neznamená, že dodavatel, agentura nebo interní tým má mít navždy otevřený přístup ke všemu. Přístupy mají vycházet z práce, která se skutečně dělá.
+
+Použij jednoduché pravidlo:
+
+- Trvalé přístupy jen pro provozní věci, které se opravdu opakují.
+- Dočasné přístupy pro jednorázové úkoly s datem konce.
+- Exporty jen pro konkrétní rozhodnutí, ne jako univerzální podklad.
+- Produkční data do vývoje jen jako řízená výjimka, ne jako pohodlný zvyk.
+- Sdílené složky pravidelně uklízet podle účelu, ne podle nostalgie.
+
+Příklad: Pokud se každý měsíc pracuje na obsahu a SEO, není potřeba trvalý přístup k fakturaci, supportním tiketům ani plným CRM exportům. Stačí redakční přístup, agregované dotazy ze sales a jasný proces, jak si vyžádat výjimku, když je opravdu potřeba.
+
+### Drž jeden backlog a jeden rozhodovací rytmus
+
+Malé firmy často trpí na backlogy rozmístěné po chatu, e-mailu, dokumentech, poznámkách ze schůzek a paměti jednoho člověka. Dlouhodobě je to drahé. Ne proto, že by chyběl nástroj, ale proto, že chybí rozhodovací rytmus.
+
+Minimum pro dlouhodobou spolupráci:
+
+| Prvek | Praktické pravidlo |
+| --- | --- |
+| Jeden backlog | Každý úkol má jedno místo, kde se rozhoduje o prioritě. |
+| Jedna měsíční priorita | Vedle provozu existuje jeden hlavní rozvojový výstup. |
+| Jedno týdenní třídění | Nové požadavky se třídí na teď, později, odmítnout, upřesnit. |
+| Jeden rozhodovací zápis | Větší změny mají větu, proč se dělají a co tím odkládají. |
+| Jeden úklidový bod | Každý měsíc se zavře, smaže nebo omezí něco, co už neslouží. |
+
+Backlog není skladiště nadějí. Je to nástroj pro rozhodování. Pokud se položka šest měsíců jen přesouvá a nikdo ji neumí spojit s hodnotou, rizikem nebo zákaznickou bolestí, pravděpodobně tam nemá být.
+
+### Měř spolupráci podle výstupů, ne podle rušnosti
+
+Dlouhodobá spolupráce svádí k metrikám, které vypadají pracovně, ale moc neříkají: počet ticketů, počet hodin, počet schůzek, počet publikovaných postů, počet drobných úprav. Někdy se hodí pro provozní přehled, ale nesmí se tvářit jako hodnota.
+
+Lepší měsíční kontrola:
+
+| Otázka | Dobrá odpověď |
+| --- | --- |
+| Co se zlepšilo pro zákazníka nebo čtenáře? | konkrétní cesta, stránka, funkce, text, rozhodnutí |
+| Co se zjednodušilo pro tým? | méně ručních kroků, jasnější vlastnictví, kratší schválení |
+| Jaké riziko jsme snížili? | méně přístupů, kratší retence, odstraněný export, lepší runbook |
+| Co jsme vědomě neudělali? | odmítnutý tracking, odložená funkce, zrušený nápad bez dopadu |
+| Co budeme příští měsíc dělat jinak? | jedna změna rytmu, rozsahu nebo odpovědnosti |
+
+> Codyho komentář: Hodiny nejsou zlo. Jsou jen tupý signál, pokud je používáš jako důkaz hodnoty. Dlouhodobá spolupráce má být vidět v lepších rozhodnutích, menším riziku a použitelnějších výstupech. Ne v tom, že kalendář vypadá jako Tetris po třech espressech.
+
+### Uzavírej měsíc malou zprávou
+
+Na konci měsíce udělej krátké shrnutí. Ne prezentaci pro porotu, ale pracovní zprávu, kterou někdo opravdu přečte.
+
+Šablona:
+
+| Pole | Zápis |
+| --- | --- |
+| Slíbený výstup | Co jsme chtěli tento měsíc dokončit. |
+| Hotovo | Co skutečně existuje a kde to najít. |
+| Dopad | Co se zlepšilo pro zákazníka, tým, provoz nebo privacy. |
+| Nedokončeno | Co zůstalo otevřené a proč. |
+| Úklid | Jaký přístup, export, pole, script, stránku nebo výjimku jsme zavřeli. |
+| Rozhodnutí | Co platí pro další měsíc. |
+
+Tahle zpráva má dva účely. Za prvé udržuje důvěru: každý vidí, co vzniklo. Za druhé brání tomu, aby dlouhodobá spolupráce tiše nabobtnala do neurčité podpory všeho.
+
+### Checklist: Dlouhodobá spolupráce
+
+- [ ] Je jasně oddělené provozní udržování od rozvojové práce.
+- [ ] Každý měsíc má jeden hlavní pracovní slib.
+- [ ] Provozní minimum má vlastní rytmus, nečeká na volnou kapacitu.
+- [ ] Přístupy odpovídají aktuální práci a mají vlastníka.
+- [ ] Dočasné přístupy, exporty a výjimky mají datum konce.
+- [ ] Existuje jeden backlog a jeden rytmus třídění požadavků.
+- [ ] Nové požadavky říkají, co odkládají nebo jak mění měsíční slib.
+- [ ] Hodnota spolupráce se popisuje výstupy, dopadem a sníženým rizikem, ne jen rušností.
+- [ ] Každý měsíc se něco nejen přidá, ale i uklidí, smaže, omezí nebo zavře.
+- [ ] Měsíční shrnutí je krátké, věcné a použitelné pro další rozhodnutí.
+
+### Mini úkol
+
+Vezmi spolupráci, která už běží déle než jednu etapu, a vyplň kartu měsíčního rámce:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jaké provozní minimum musíme držet každý měsíc? |  |
+| Jaký je jeden hlavní rozvojový slib na další měsíc? |  |
+| Co tento slib zlepší pro zákazníka, tým nebo provoz? |  |
+| Jaké přístupy jsou trvalé a proč? |  |
+| Jaké přístupy nebo exporty mají skončit? |  |
+| Kde je jeden backlog pro rozhodování? |  |
+| Jaký požadavek teď odmítneme nebo odložíme? |  |
+| Co na konci měsíce ukážeme jako hotovo? |  |
+
+Potom udělej jeden konkrétní krok: napiš měsíční pracovní slib, zavři zbytečný přístup, přesuň rozptýlené úkoly do jednoho backlogu, nebo přepiš neurčitou „průběžnou správu“ na dvě vrstvy: provozní minimum a rozvojovou prioritu. Dlouhodobá spolupráce nezačíná podpisem retaineru. Začíná ve chvíli, kdy každý ví, co se tento měsíc nemá ztratit v mlze.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -39007,6 +39148,7 @@ Potom udělej jednu konkrétní akci hned: odeber dočasný přístup, smaž nep
 
 ## Pracovní log
 
+- 2026-07-20: Doplněna příloha o přechodu do dlouhodobé spolupráce bez udržovací mlhy: oddělení provozního udržování a rozvoje, měsíční pracovní slib, přístupy podle skutečné práce, jeden backlog a rozhodovací rytmus, měření spolupráce podle výstupů a sníženého rizika, měsíční shrnutí, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně čerstvě ověřeno, že běžné přímé HTTPS na `cody.dreamind.cz` selhává kvůli expirovanému Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), `curl --noproxy '*' -k -I` vrací `200 OK` z nginx/Next.js a aktuální kontejner neobsahuje bezpečný SSH/deploy přístup k obnově certifikátu.
 - 2026-07-20: Doplněna příloha o retrospektivě první etapy bez hledání viníka: porovnání slíbeného a skutečného výsledku, převod pocitů na systémové příčiny, třídění poznatků na produktové, provozní a datové, výběr maximálně tří změn pro další etapu, úklid dočasných přístupů a exportů, rozhodnutí o pokračování, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně ověřeno, že `cody.dreamind.cz` přímo odpovídá na IP `91.99.227.53`, ale veřejný Let's Encrypt certifikát je expirovaný (`notAfter` 2026-07-17 19:35:56 GMT), běžné HTTPS přes proxy končí `Empty reply from server` a dostupný pracovní prostor stále neobsahuje bezpečný SSH/deploy přístup k obnově certifikátu.
 - 2026-07-20: Doplněna příloha o kontrole prvního týdne bez tichého rozpadu projektu: ověření skutečného výstupu místo aktivit, oddělení blokérů od nepohodlí, revize přístupů a dat po prvním týdnu, rozhodovací karta změny rozsahu, další týden jako jedna malá sázka, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně čerstvě ověřeno, že přímé HTTPS na `cody.dreamind.cz` selhává kvůli expirovanému veřejnému Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), proxy cesta končí `Empty reply from server` a aktuální prostředí neobsahuje bezpečný SSH/deploy přístup k obnově certifikátu.
 - 2026-07-20: Doplněna příloha o kickoffu první etapy bez přístupového chaosu: výstup prvního týdne, třídění vstupů na nutné/pozdější/odložené, přístupy vázané na konkrétní úkol, krátká rozhodovací agenda, kickoff zápis, první rizika, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně znovu ověřeno, že `cody.dreamind.cz` přes proxy končí po TLS tunelu chybou `Empty reply from server`, přímé veřejné HTTPS ověření ukazuje expirovaný Let's Encrypt certifikát (`notAfter` 2026-07-17 19:35:56 GMT) a dostupný pracovní prostor neobsahuje bezpečný SSH/deploy přístup k obnově certifikátu nebo opravě upstreamu.
