@@ -36601,6 +36601,150 @@ Vytvoř návrh archivního indexu pro poslední tři veřejně použitelné verz
 
 Potom u každé položky rozhodni, jestli má být veřejná. Pokud nevíš proč by ji čtenář potřeboval, nejspíš stačí pracovní historie v gitu.
 
+## Příloha: Veřejný výřez e-booku bez pracovního ocasu
+
+Živý e-book má přirozenou tendenci růst. Nejdřív vznikne hlavní příručka, potom praktické přílohy, potom provozní poznámky, pak další checklisty a najednou máš dokument, který je skvělý pro autora, ale únavný pro čtenáře. To není selhání. Je to signál, že jeden zdroj pravdy potřebuje víc veřejných výřezů.
+
+Veřejný výřez je menší, záměrně složená verze e-booku pro konkrétní použití: první čtení, audit webu, SaaS onboarding, marketing bez spamu, provozní checklist nebo interní školení týmu. Nejde o kopii celého souboru. Jde o čtenářskou trasu, která vybere relevantní části, zachová zdroje a odstraní pracovní detaily, které by jen přidaly šum.
+
+> Codyho komentář: Dlouhý e-book není problém. Problém je dlouhý e-book bez dveří. Když musí čtenář projít celou chodbu, aby našel jednu hasicí deku, nezažívá hloubku. Zažívá architekturu proti lidem.
+
+### Nejdřív rozhodni, pro koho výřez je
+
+Veřejný výřez nemá začínat otázkou „co všechno tam dáme“. Začni situací čtenáře.
+
+Příklady:
+
+- Zakladatel chce za víkend zkontrolovat privacy-first landing page.
+- SaaS tým připravuje první onboarding a nechce sbírat zbytečná data.
+- Markeťák chce přepsat direct outreach bez spamového reflexu.
+- Provozní člověk řeší HTTPS incident a potřebuje krátký runbook.
+- Obchodní tým chce posílat e-book jako důkaz přístupu Dreamindu.
+
+Každý výřez si napiš jako větu:
+
+„Tento výřez pomáhá ___ udělat ___ bez ___.“
+
+Pokud věta nejde doplnit, výřez je zatím jen náhodný výběr kapitol. Náhodný výběr bývá dobrý pro degustaci sýrů, horší pro odborný dokument.
+
+### Výřez má mít vlastní začátek a konec
+
+Čtenář veřejného výřezu nemusí znát celý pracovní kontext e-booku. Dej mu krátký úvod, který odpoví:
+
+- pro koho verze je,
+- co po přečtení zvládne,
+- co v ní záměrně není,
+- kdy má sáhnout po plné verzi,
+- jak pozná datum a stav vydání.
+
+Stejně důležitý je konec. Každý výřez má skončit konkrétním dalším krokem, ne jen dojmem „a teď si přečti ještě zbytek internetu“. Praktické konce:
+
+- jeden checklist pro tento týden,
+- odkaz na plnou kapitolu,
+- pracovní list k vyplnění,
+- veřejný archiv verzí,
+- přímý kontakt bez formulářové pasti,
+- RSS odkaz pro budoucí aktualizace.
+
+### Vybírej podle rozhodnutí, ne podle oblíbených částí
+
+Autor má často oblíbené pasáže. Čtenář má problém. Výřez vyhrává tehdy, když slouží problému.
+
+U každé zařazené části se ptej:
+
+- Jaké rozhodnutí tahle část podporuje?
+- Patří do první cesty, nebo jen rozšiřuje kontext?
+- Opakuje už něco, co je ve výřezu řečeno lépe jinde?
+- Potřebuje vlastní zdroj, nebo jen odkaz na plnou kapitolu?
+- Je příklad použitelný pro cílovou situaci?
+
+Praktický model:
+
+| Typ výřezu | Co zařadit | Co vynechat |
+| --- | --- | --- |
+| Rychlý audit | principy, checklisty, mini úkoly | dlouhé provozní přílohy |
+| SaaS onboarding | segment, první hodnota, aktivace, data při registraci | SEO migrace a archiv verzí |
+| Marketing | obsah, outreach, partnerství, měření | interní provozní incidenty |
+| Provoz | HTTPS, health check, incident log, runbooky | pricing a obsahový kalendář |
+| Čtenářský digest | shrnutí, odkazy, jeden úkol | pracovní log a diagnostické poznámky |
+
+### Pracovní log není veřejný obsah
+
+Pracovní log je užitečný pro kontinuitu. Ve veřejném výřezu je často přítěž. Obsahuje data běhů, commity, provozní nálezy a informace, které čtenář nepotřebuje k rozhodnutí. Neznamená to, že se má mazat. Znamená to, že se nemá automaticky dostat do exportu.
+
+Místo pracovního logu dej veřejné verzi:
+
+- číslo nebo název vydání,
+- datum vydání,
+- stav verze,
+- krátké release notes,
+- odkaz na aktuální verzi,
+- případně odkaz na archiv starších verzí.
+
+Interní poznámka „během běhu byl znovu ověřen expirovaný certifikát“ patří do pracovního logu. Veřejnému čtenáři stačí, že provozní přílohy byly rozšířené o ověřování HTTPS a obnovu TLS. Detail incidentu neprodává hodnotu textu. Někdy jen rozsvítí kontrolku, že autor zapomněl zavřít dílnu.
+
+### Zdroje drž u tvrzení, ne v nekonečné hromadě
+
+Plná verze může mít dlouhou sekci zdrojů. Výřez by měl mít zdroje, které odpovídají použitým tvrzením. Když z výřezu vyhodíš kapitolu o PWA, nemusíš v něm nést zdroje k manifestu a service workerům. Když necháš právní nebo aktuální doporučení, zdroj musí zůstat.
+
+Praktické pravidlo:
+
+- principové vlastní doporučení označ jako Codyho komentář,
+- právní, technické, standardizační a aktuální tvrzení nech se zdrojem,
+- nepřenášej zdroje k částem, které ve výřezu nejsou,
+- u výřezu napiš datum revize zdrojů,
+- nepoužívej odkazové přesměrování kvůli měření.
+
+Privacy-first publikace má být čitelná i bez sledování. Pokud chceš zjistit, jestli výřez pomohl, použij agregované signály: návštěvy stránky, klik na stažení, přímé odpovědi, zmínky v hovorech nebo počet lidí, kteří si otevřeli navazující checklist. Nepotřebuješ vědět, že konkrétní člověk četl třetí odrážku v 22:14.
+
+### Udělej export opakovatelný
+
+Ručně složený výřez je v pořádku pro první pokus. Jakmile ho používáš veřejně, potřebuje jednoduchý postup, aby příště nevznikla jiná verze jen proto, že měl někdo jinou náladu.
+
+Karta výřezu:
+
+| Pole | Co vyplnit |
+| --- | --- |
+| Název | Pro koho a k čemu výřez je |
+| Zdroj | Cesta k plné Markdown verzi |
+| Zahrnuté části | Nadpisy nebo rozsahy |
+| Vynechané části | Pracovní log, interní provozní poznámky, nerelevantní přílohy |
+| Zdroje | Jen zdroje použitých tvrzení |
+| Datum vydání | Kdy byla verze složená |
+| Stav | Draft, review, aktuální, nahrazená |
+| Další krok | Co má čtenář udělat po přečtení |
+
+Pokud výřez vzniká skriptem, skript má mít seznam zahrnutých nadpisů a kontrolu, že nevytáhl `Pracovní log`. Pokud vzniká ručně, checklist před publikací je povinný. Ano, ruční práce taky potřebuje mantinely. Jinak se jmenuje „doufám, že jsem nic nepokazil“.
+
+### Checklist: Veřejný výřez e-booku
+
+- [ ] Výřez má jednu větu účelu: komu pomáhá, co udělat a bez čeho.
+- [ ] Má vlastní krátký úvod, datum, stav a doporučený další krok.
+- [ ] Obsah je vybraný podle rozhodnutí čtenáře, ne podle oblíbenosti pasáží.
+- [ ] Pracovní log, interní diagnostika a provozní detaily nejsou součástí veřejného exportu.
+- [ ] Zdroje odpovídají jen tvrzením, která ve výřezu zůstala.
+- [ ] Vlastní názory jsou označené jako Codyho komentář nebo podobně jasně.
+- [ ] Veřejná verze neobsahuje osobní údaje, secrets, neveřejné názvy projektů ani trackerové parametry.
+- [ ] Existuje opakovatelná karta nebo postup, jak výřez složit z plné verze.
+- [ ] Starší výřezy mají stav a odkaz na aktuální náhradu.
+- [ ] Užitečnost výřezu se měří agregovaně nebo kvalitativně, ne profilováním čtenářů.
+
+### Mini úkol
+
+Navrhni první veřejný výřez e-booku pro jeden konkrétní scénář:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Pro koho výřez je? |  |
+| Jaké rozhodnutí má čtenář udělat? |  |
+| Které 3 až 5 částí plné verze zařadíme? |  |
+| Co záměrně vynecháme? |  |
+| Které zdroje musí zůstat? |  |
+| Jaký bude další krok po přečtení? |  |
+| Jak poznáme, že výřez pomohl, bez profilování? |  |
+
+Potom zkus ručně složit jednu krátkou verzi jen pro tento scénář. Když bude pořád působit jako celý e-book v menším písmu, neřež slova. Zpřesni účel.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -36790,6 +36934,7 @@ Potom u každé položky rozhodni, jestli má být veřejná. Pokud nevíš pro�
 
 ## Pracovní log
 
+- 2026-07-20: Doplněna příloha o veřejném výřezu e-booku bez pracovního ocasu: definice výřezu podle situace čtenáře, vlastní začátek a konec, výběr částí podle rozhodnutí, oddělení pracovního logu od veřejné verze, zdroje jen pro použitá tvrzení, opakovatelná karta exportu, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně znovu potvrzeno, že `cody.dreamind.cz` při běžném přímém HTTPS selhává kvůli expirovanému veřejnému Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), zatímco aplikace za TLS odpovídá při diagnostickém `curl -k` stavem `200 OK`; v repozitáři je jen Markdown e-book a dostupný kontext neobsahuje bezpečný serverový opravný přístup k obnově certifikátu.
 - 2026-07-19: Doplněna příloha o archivu starších verzí e-booku bez muzea a rozbitých odkazů: rozlišení pracovního logu a čtenářského archivu, stav verzí, zacházení se starými veřejnými odkazy, archivace podle čtenářsky významných vydání, malý index, privacy-first kontrola veřejných archivních položek, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně znovu potvrzeno, že `cody.dreamind.cz` běžným HTTPS selhává kvůli expirovanému veřejnému Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), aplikace odpovídá při diagnostickém `curl -k` stavem `200 OK` a v tomto běhu není dostupný bezpečný SSH/deploy přístup k obnově.
 - 2026-07-19: Doplněna příloha o release notes e-booku bez newsletterové pasti: čtenářská orientace ve změnách, rozlišení typů změn, veřejná historie vydání, distribuce přes RSS a přímé odkazy bez povinného formuláře, agregované měření užitečnosti, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně znovu potvrzeno, že `cody.dreamind.cz` přes běžnou proxy cestu končí `Empty reply from server`, přímý veřejný TLS certifikát na IP `91.99.227.53` je expirovaný (`notAfter` 2026-07-17 19:35:56 GMT) a v běhu není dostupný bezpečný SSH/opravný přístup k obnově.
 - 2026-07-19: Doplněna příloha o verzování e-booku bez zmatku mezi draftem a vydáním: rozlišení pracovního draftu, interního review a veřejného vydání, karta vydání, pravidla pro zvednutí verze, stabilní veřejné odkazy, release poznámky podle dopadu, privacy-first omezení osobní stopy, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně znovu ověřeno, že běžný proxy `curl` na `cody.dreamind.cz` končí prázdnou odpovědí, přímý veřejný TLS certifikát Let's Encrypt je expirovaný (`notAfter` 2026-07-17 19:35:56 GMT), aplikace odpovídá při diagnostickém `curl -k` stavem `200 OK` a neinteraktivní SSH opravný přístup pro běžné účty není dostupný.
