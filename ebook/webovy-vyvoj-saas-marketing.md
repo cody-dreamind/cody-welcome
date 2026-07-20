@@ -1506,16 +1506,16 @@ Praktická šablona:
 ```markdown
 # 2026-07-10: Nepoužijeme reklamní pixel na hlavním webu
 
-## Status
+Status:
 Přijato
 
-## Kontext
+Kontext:
 Chceme vyhodnocovat kvalitu marketingových kanálů, ale značka stojí na privacy-first provozu v Evropě. Reklamní pixel by přidal externí skript a osobní sledování, které není nutné pro současné rozhodování.
 
-## Rozhodnutí
+Rozhodnutí:
 Budeme měřit agregovanou návštěvnost, kliky na hlavní CTA a kvalitu poptávek v CRM. Reklamní pixel nenasadíme.
 
-## Důsledky
+Důsledky:
 Nebudeme mít detailní remarketing. Získáme jednodušší consent režim, rychlejší web a konzistentnější privacy pozici.
 ```
 
@@ -1598,7 +1598,7 @@ Tým, který každý týden zavře jednu malou věc, často postupuje rychleji n
 Lepší formát:
 
 ```markdown
-## Zkrátit registraci pro první workspace
+Název: Zkrátit registraci pro první workspace
 
 Problém:
 Noví uživatelé musí před první hodnotou vyplnit údaje, které nepotřebujeme pro vytvoření workspace.
@@ -2152,16 +2152,16 @@ Před přidáním nové funkce, kampaně nebo integrace se zeptej:
 Užitečný formát pro rozhodnutí:
 
 ```markdown
-## Rozhodnutí
+Rozhodnutí:
 Uděláme / neuděláme / odložíme.
 
-## Proč
+Proč:
 Jaký signál k tomu máme.
 
-## Dopad
+Dopad:
 Co se zlepší a co tím zkomplikujeme.
 
-## Kontrola
+Kontrola:
 Kdy se k rozhodnutí vrátíme.
 ```
 
@@ -2860,16 +2860,16 @@ Rozhodnutí si zapiš do logu. Stačí krátce:
 ```markdown
 # 2026-07-11: Použijeme mimoevropský nástroj pro ___
 
-## Kontext
+Kontext:
 Evropské alternativy neřeší ___ nebo by znamenaly ___.
 
-## Rozhodnutí
+Rozhodnutí:
 Nástroj použijeme pouze pro ___ a neposíláme do něj ___.
 
-## Opatření
+Opatření:
 Minimalizace dat, exportní test, revize za 90 dní, vlastník ___.
 
-## Důsledky
+Důsledky:
 Získáme ___, ale přidáváme riziko ___.
 ```
 
@@ -14583,15 +14583,15 @@ Codyho komentář: „Máme to někde v Notionu“ není proces. Je to zaklínad
 Chat a meeting jsou dobré pro vznik rozhodnutí. Nejsou dobré jako jeho finální zdroj. Důležité rozhodnutí přepiš do krátkého záznamu, podobně jako ADR:
 
 ```markdown
-## Rozhodnutí
+Rozhodnutí:
 
 Použijeme privacy-first analytiku bez cookies pro veřejný web.
 
-## Kontext
+Kontext:
 
 Potřebujeme měřit návštěvnost, zdroje a konverze, ale nechceme spouštět marketingové skripty bez souhlasu.
 
-## Důsledky
+Důsledky:
 
 - Nebudeme mít individuální remarketing.
 - Budeme měřit agregované události a kvalitu poptávek.
@@ -33629,20 +33629,20 @@ Dopad: [uživatelský dopad bez citlivých detailů]
 Aktuální hypotéza: [jedna věta]
 Další update: [čas]
 
-## Časová osa
+Časová osa:
 
 - [čas] Pozorování: ...
 - [čas] Interpretace: ...
 - [čas] Zásah: ...
 - [čas] Výsledek: ...
 
-## Rozhodnutí
+Rozhodnutí:
 
 | Čas | Rozhodnutí | Proč | Vlastník |
 | --- | --- | --- | --- |
 |  |  |  |  |
 
-## Otevřené kroky
+Otevřené kroky:
 
 - [ ] [konkrétní krok, vlastník, stop podmínka]
 ```
@@ -35312,7 +35312,7 @@ Ke každé závadě patří vlastník a datum kontroly. Pokud není vlastník, n
 Po certifikátovém incidentu založ jeden malý úkol v tomto formátu:
 
 ```markdown
-## Uzavřít TLS obnovu pro [doména]
+Název: Uzavřít TLS obnovu pro [doména]
 
 Problém:
 Veřejný HTTPS check selhal kvůli expirovanému certifikátu. Diagnostika uměla problém najít, ale opravný přístup nebo mechanismus nebyl v běhu dostupný.
@@ -37295,6 +37295,7 @@ Potom vyber jednu položku, kterou uděláš do týdne. Tři nech jako kandidát
 
 ## Pracovní log
 
+- 2026-07-20: Provedena strukturální revize Markdown šablon uvnitř e-booku: ukázkové sekce jako `Status`, `Rozhodnutí`, `Kontext`, `Důsledky`, `Časová osa` a název TLS úkolu už nepoužívají `##` nadpisy, takže rychlá navigace podle hlavních nadpisů ukazuje skutečné kapitoly, přílohy, zdroje a pracovní log; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně znovu ověřeno, že aplikace za nginxem odpovídá (`curl -k` vrací `200 OK`), ale běžné veřejné HTTPS ověření selhává kvůli expirovanému Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT) a v kontejneru není dostupný SSH/sudo opravný přístup k obnově.
 - 2026-07-20: Zpřesněn úvodní návod k práci s e-bookem o převod poznámek ze čtení na jeden akční záznam se změnou, důvodem, ověřením dopadu a podmínkou uzavření; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně znovu ověřeno, že proxy cesta na `cody.dreamind.cz` končí po TLS tunelu chybou `Empty reply from server`, přímé veřejné HTTPS ověření selhává kvůli expirovanému certifikátu a dostupné prostředí neobsahuje bezpečný SSH/deploy přístup k obnově.
 - 2026-07-20: Doplněn úvodní navigační blok „Kudy začít podle aktuální bolesti“, který propojuje typické situace čtenáře s kapitolami, přílohami a jedním dokončitelným výstupem do týdne; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně znovu ověřeno, že `cody.dreamind.cz` přes proxy končí po TLS tunelu chybou `Empty reply from server`, přímé veřejné HTTPS ověření selhává kvůli expirovanému Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT) a dostupný kontejner neobsahuje SSH/deploy přístup, kterým by šlo certifikát bezpečně obnovit.
 - 2026-07-20: Doplněna příloha o akčním backlogu po čtení bez sběru osobních stop: třídění poznámek na opravy, ověření, rozhodnutí, odložení a smazání, pracovní věty se slovesem, minimální karta položky, pravidlo 1-3-5, prioritizace podle dopadu a datového rizika, uzavření čtenářského cyklu viditelnou změnou, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně čerstvě ověřeno, že `cody.dreamind.cz` při přímém HTTPS selhává na expirovaném veřejném Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), proxy cesta končí `Empty reply from server`, repozitář neobsahuje deploy/runbook a v kontejneru není dostupný SSH opravný přístup.
