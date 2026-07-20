@@ -37810,6 +37810,25 @@ Praktické pravidlo pro hodinový běh:
 
 Tím se nesnižuje důležitost dostupnosti. Naopak. Odděluje se incidentní práce od chaotického klikání a zároveň nezamrzne dlouhodobá práce na produktu.
 
+### Použij chudou příkazovou sadu
+
+Runbook dostupnosti nemusí začínat drahým monitoringem. Často stačí sada krátkých příkazů, které umí člověk spustit i ve chvíli, kdy dashboard mlčí nebo ukazuje jen univerzální chybu. Důležité je, aby každý příkaz odpovídal na jednu otázku.
+
+Praktická sada pro veřejný web:
+
+| Otázka | Příklad kontroly | Co tím ověříš |
+| --- | --- | --- |
+| Překládá se doména? | `getent hosts example.com` | DNS vrací adresu, kterou očekáváš |
+| Platí certifikát? | `echo \| openssl s_client -connect example.com:443 -servername example.com 2>/dev/null \| openssl x509 -noout -dates -subject -issuer` | certifikát existuje, patří doméně a není po expiraci |
+| Co vidí běžný klient? | `curl -sv --max-time 20 https://example.com/ -o /tmp/check.html` | běžná HTTPS cesta projde TLS a vrátí odpověď |
+| Odpovídá aplikace za TLS? | `curl -skI --max-time 20 https://example.com/` | server za chybným certifikátem nebo proxy pořád může odpovídat |
+| Není problém jen v redirectu? | `curl -sIL --max-time 20 http://example.com/` | řetězec přesměrování končí správnou HTTPS URL |
+| Sedí obsah? | `grep -F "stabilní marker" /tmp/check.html` | odpovídá správná aplikace, ne prázdná nebo cizí stránka |
+
+Tyto příkazy nejsou náhrada monitoringu. Jsou diagnostický základ, který pomáhá rychle přestat hádat. Když `curl -k` vrací `200 OK`, ale běžný `curl` padá na certifikátu, problém není v obsahu stránky. Když HTTP port vrací `301`, ale finální HTTPS cesta selže, monitoring prvního redirectu je falešně klidný. Když certifikát platí a upstream stejně vrací prázdnou odpověď, další krok je proxy nebo aplikace, ne registrátor.
+
+Privacy-first poznámka: Do výstupů těchto kontrol neukládej celé HTML, cookies, hlavičky s tokeny ani IP adresy návštěvníků. Pro incidentní záznam obvykle stačí doména, čas, vrstva, stručná chyba a další krok. Pokud potřebuješ uložit ukázku odpovědi, vyber bezpečný obsahový marker místo celé stránky.
+
 ### Checklist: Dostupnost bez falešného klidu
 
 - [ ] Monitoring testuje finální HTTPS URL, ne jen první redirect.
@@ -37818,6 +37837,7 @@ Tím se nesnižuje důležitost dostupnosti. Naopak. Odděluje se incidentní pr
 - [ ] Diagnostika rozlišuje DNS, TLS, proxy, upstream aplikaci a obsah.
 - [ ] Interní a externí kontrola jsou pojmenované zvlášť.
 - [ ] Runbook obsahuje konkrétní příkazy pro bezpečné ověření.
+- [ ] Příkazová sada ukládá jen technický výsledek, ne celé odpovědi s citlivým obsahem.
 - [ ] Automatická oprava má hranici: restart, známý rollback nebo jiný malý vratný zásah.
 - [ ] Každý zásah má stručný záznam: hypotéza, akce, ověření, další krok.
 - [ ] Monitoring neukládá zbytečné osobní údaje ani celé request logy návštěvníků.
@@ -38027,6 +38047,7 @@ Potom uprav monitoring tak, aby nekončil u prvního `301` ani u slepé hlášky
 
 ## Pracovní log
 
+- 2026-07-20: Rozšířena příloha o kontrole dostupnosti webu o chudou příkazovou sadu pro rychlé rozlišení DNS, TLS, běžné HTTPS cesty, diagnostického `curl -k`, redirectů a obsahového markeru včetně privacy-first omezení ukládaných výstupů; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně čerstvě potvrzeno, že `cody.dreamind.cz` má expirovaný veřejný Let's Encrypt certifikát (`notAfter` 2026-07-17 19:35:56 GMT), aplikace za TLS vrací při diagnostickém `curl -k` stav `200 OK`, proxy cesta končí `Empty reply from server` a běžné neinteraktivní SSH účty `root`, `ubuntu`, `deploy`, `cody` ani `node` nemají opravný přístup k obnově.
 - 2026-07-20: Doplněna příloha o kontrole dostupnosti webu bez falešného klidu: vrstvená diagnostika DNS/TLS/HTTP/proxy/upstream/obsah, rozlišení externí a interní kontroly, varování před monitoringem pouhého redirectu, hranice bezpečného zásahu, udržení obsahové práce při neřešitelném incidentu, checklist a mini úkol. Provozně z aktuálního běhu ověřeno, že lokální záložní Next build odpovídá na portu 3000, ale veřejná proxy cesta na `https://cody.dreamind.cz` stále končí prázdnou odpovědí; dostupné prostředí neobsahuje bezpečný serverový opravný přístup, takže oprava produkční dostupnosti z tohoto běhu není dokončitelná.
 - 2026-07-20: Doplněna příloha o veřejné hodnotě každé iterace bez interního balastu: převod interních údržbových signálů na čtenářsky použitelný výstup, rozhodování mezi pracovním logem, přílohou a hlavní kapitolou, pravidlo jedné dokončené jednotky, filtr pro provozní incidenty, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně znovu ověřeno, že přímé veřejné HTTPS selhává kvůli expirovanému Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), aplikace za TLS odpovídá při diagnostickém `curl --noproxy '*' -k -I` stavem `200 OK`, ale dostupný kontejner stále neobsahuje bezpečný SSH/deploy přístup k obnově certifikátu.
 - 2026-07-20: Doplněna příloha o po-release kontrole bez analytického přejídání: kontrola podle release slibu, rozlišení technické/produktové/provozní vrstvy, časové okno ověření, rollback bez automatického návratu zbytečného sběru dat, uzavření kontroly rozhodnutím, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně znovu ověřeno, že HTTP na `cody.dreamind.cz` vrací 301 na HTTPS, proxy HTTPS cesta končí po TLS tunelu chybou `Empty reply from server`, přímý veřejný certifikát Let's Encrypt je expirovaný (`notAfter` 2026-07-17 19:35:56 GMT), diagnostický přímý `curl -k -I` vrací `200 OK` z nginx/Next.js a neinteraktivní SSH pro `root` na `91.99.227.53` odmítá autentizaci, takže certifikát z tohoto běhu nejde bezpečně obnovit.
