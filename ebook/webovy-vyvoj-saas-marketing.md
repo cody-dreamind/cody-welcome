@@ -38423,6 +38423,140 @@ Vezmi jednu nedávno přijatou nabídku nebo projekt těsně před kickoffem a v
 
 Potom udělej jednu konkrétní opravu: smaž z požadavků zbytečný datový vstup, doplň expiraci přístupu, přepiš obecný slib na úkol, nebo pošli zákazníkovi potvrzení hranic první etapy. Projekt začíná líp, když si umí říct „ano“ bez toho, aby zároveň řekl „všechno“.
 
+## Příloha: Kickoff první etapy bez přístupového chaosu
+
+Kickoff není slavnostní meeting, kde se všichni ujistí, že projekt je důležitý. To už víme, jinak by nabídka nebyla přijatá. Kickoff první etapy má praktičtější práci: převést potvrzený rozsah na první bezpečný týden práce, zkontrolovat vstupy a zabránit tomu, aby se projekt hned na začátku nafoukl přes přístupy, exporty, výjimky a nejasná očekávání.
+
+Špatná otázka zní: „Co všechno si máme předat, ať můžeme začít?“
+
+Lepší otázka zní: „Jaké minimum vstupů a oprávnění potřebujeme k prvnímu ověřitelnému výstupu?“
+
+Kickoff má chránit energii i hranice. Když začne dobře, tým ví, co má udělat tento týden, zákazník ví, co dodat, a nikdo nemusí posílat produkční data jen proto, že v kalendáři svítí hezký název projektu.
+
+### Začni výstupem prvního týdne
+
+První týden nemá dokazovat, že projekt je velký. Má dokázat, že se dá řídit. Proto na kickoffu nepřepisuj celý plán do detailu. Potvrď jeden výstup, který bude existovat do další kontroly.
+
+Příklady:
+
+| Typ projektu | Výstup prvního týdne |
+| --- | --- |
+| Nová produktová stránka | obsahová kostra, jedna cílová skupina, jeden hlavní CTA a seznam chybějících důkazů |
+| SaaS pilot | mapa jedné uživatelské cesty, první hodnota, vstupy pro demo workspace |
+| Marketingová spolupráce | tři témata navázaná na nákupní nejistoty a první distribuční plán bez trackerů |
+| Privacy audit | mapa jedné datové cesty od formuláře po uložení, přístup a retenci |
+| Automatizace procesu | popis současného ručního kroku, rozhodnutí o hranici automatického zápisu a ručního schválení |
+
+Výstup prvního týdne má být malý, ale použitelný. „Seznámit se s projektem“ není výstup. „Sepsat mapu poptávkového toku a označit tři nejasnosti“ už výstup je. Ano, zní to méně slavnostně. Právě proto to funguje.
+
+### Vstupy rozděl na nutné, užitečné a zakázané
+
+Na kickoffu se často objeví věta „pošleme vám pro jistotu i export“. Tady zvedni ruku. Ne kvůli divadlu, ale kvůli odpovědnosti. Každý vstup má mít účel.
+
+Použij jednoduché třídění:
+
+| Kategorie | Co znamená | Příklad |
+| --- | --- | --- |
+| Nutné | bez toho nejde udělat výstup prvního týdne | veřejné URL, anonymizované ukázky dotazů, přístup do stagingu pro konkrétní úkol |
+| Užitečné později | může pomoct v další etapě, ale teď není potřeba | širší obsahový archiv, historické kampaně, detailnější CRM export |
+| Zakázané nebo odložené | citlivé, nadbytečné nebo bez jasného účelu | produkční databáze, osobní poznámky ze sales, neomezený admin účet |
+
+Privacy-first pravidlo: když vstup není nutný pro první výstup, neber ho „pro jistotu“. Zapiš ho jako možné pozdější rozhodnutí. Tím se nebrzdí práce. Tím se brzdí chaos.
+
+### Přístupy dávej až k úkolu
+
+Přístup nemá být uvítací dárek. Má být nástroj ke konkrétní práci. Na kickoffu proto nevytvářej hromadný seznam účtů jen proto, aby se „nic nezdržovalo“. Přístupy přiděluj po vlnách.
+
+| Vlna | Kdy se aktivuje | Příklad |
+| --- | --- | --- |
+| Read-only kontext | před první analýzou | veřejný web, dokumentace, read-only analytika s agregovanými daty |
+| Pracovní přístup | při konkrétním úkolu | CMS role pro editaci jedné sekce, staging deploy, testovací workspace |
+| Produkční zásah | až po schváleném kroku | omezená role pro release, TLS reload nebo konfiguraci formuláře |
+| Dočasný citlivý přístup | jen s expirací a záznamem | jednorázový audit nastavení, omezený export, kontrola integrace |
+
+Každý přístup má mít vlastníka, účel, úroveň oprávnění a datum kontroly. Pokud to neumíš vyplnit, přístup ještě není připravený. „Ať to má celý tým“ je pohodlné, ale není to provozní argument.
+
+### Kickoff agenda má být krátká a rozhodovací
+
+Dobrá agenda se vejde na jednu obrazovku:
+
+| Blok | Otázka | Výstup |
+| --- | --- | --- |
+| Cíl etapy | Co má po první etapě existovat nebo fungovat? | jedna věta výsledku |
+| První týden | Co bude hotovo do další kontroly? | jeden konkrétní výstup |
+| Vstupy | Co je nutné dodat teď a co zatím nechceme? | seznam nutných vstupů a odložených dat |
+| Přístupy | Kdo potřebuje jaké oprávnění a proč? | role, účel, expirace |
+| Komunikace | Kde se řeší rozhodnutí, otázky a blokery? | jeden kanál a rytmus |
+| Kontrola | Kdy rozhodneme pokračovat, změnit nebo zastavit? | datum a kritéria |
+
+Kickoff nemusí trvat hodinu. Pokud je nabídka dobře připravená, často stačí 30 minut a dobrý zápis. Dlouhý kickoff někdy jen zakrývá, že tým neví, jaký je první výstup.
+
+### Rozhodnutí zapisuj hned, ne až po pocitu
+
+Po kickoffu má vzniknout krátký zápis, který jde poslat všem účastníkům. Nepatří do něj všechno, co zaznělo. Patří do něj jen to, co bude řídit práci.
+
+Praktická šablona:
+
+| Pole | Zápis |
+| --- | --- |
+| Výsledek první etapy |  |
+| Výstup do další kontroly |  |
+| Nutné vstupy |  |
+| Vstupy, které zatím nepřebíráme |  |
+| Aktivované přístupy |  |
+| Přístupy čekající na konkrétní úkol |  |
+| Otevřené otázky |  |
+| Datum kontroly |  |
+| Kritérium pokračování nebo změny směru |  |
+
+Otevřené otázky drž omezené. Tři dobré otázky jsou lepší než patnáct položek, které nikdo neuzavře. Každá otázka má mít vlastníka a termín. Jinak to není otázka, ale dekorace zápisu.
+
+### První rizika řeš před prvním releasem
+
+Kickoff je správné místo pro malé preventivní brzdy:
+
+- nemáme správného vlastníka u zákazníka,
+- vstupy obsahují osobní data, která nepotřebujeme,
+- první etapa je pořád moc široká,
+- výstup nejde ověřit bez nového trackingu,
+- přístupová práva jsou širší než úkol,
+- chybí rozhodnutí, co bude mimo rozsah,
+- kontrolní datum je moc daleko.
+
+Nečekej, až se riziko „ukáže v praxi“. Některá rizika se v praxi ukážou jako rozbitý termín, nepříjemný e-mail nebo složka plná zbytečných exportů. Levnější je říct na kickoffu: „Tuhle část zatím nevezmeme, protože pro první výstup není nutná.“
+
+> Codyho komentář: Kickoff, který nepoužije slovo „ne“, často jen převléká scope creep za týmového ducha. Dobré „ne teď“ je služba projektu, ne nedostatek ochoty.
+
+### Checklist: Kickoff první etapy
+
+- [ ] Kickoff potvrzuje jeden výsledek první etapy.
+- [ ] Existuje konkrétní výstup prvního týdne nebo další kontroly.
+- [ ] Vstupy jsou rozdělené na nutné, pozdější a odložené nebo zakázané.
+- [ ] Produkční a citlivé přístupy nejsou rozdávané dopředu bez úkolu.
+- [ ] Každý aktivovaný přístup má účel, vlastníka, rozsah a datum kontroly.
+- [ ] Je jasné, kde se řeší rozhodnutí a kde jen pracovní dotazy.
+- [ ] Otevřené otázky mají vlastníka a termín.
+- [ ] Datová hranice z nabídky zůstává platná i po kickoffu.
+- [ ] První kontrola má kritérium pokračování, zmenšení nebo změny směru.
+- [ ] Zápis neobsahuje zbytečné osobní údaje, interní tajemství ani surové exporty.
+
+### Mini úkol
+
+Před dalším kickoffem vyplň jednu stránku:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Co má být hotovo po první etapě? |  |
+| Co má být hotovo do první kontroly? |  |
+| Jaké vstupy jsou opravdu nutné teď? |  |
+| Které vstupy vědomě nepřebíráme? |  |
+| Jaké přístupy aktivujeme hned a proč? |  |
+| Které přístupy počkají na konkrétní úkol? |  |
+| Jak poznáme, že první týden běží správně? |  |
+| Co by znamenalo změnit směr nebo zmenšit rozsah? |  |
+
+Potom z kickoffu odnes jednu konkrétní změnu: zmenši první výstup, odmítni zbytečný export, nastav expiraci přístupu, doplň vlastníka otevřené otázky nebo přepiš první kontrolu na rozhodovací datum. Dobrý kickoff není velký start. Je to malý zámek proti budoucímu nepořádku.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -38612,6 +38746,7 @@ Potom udělej jednu konkrétní opravu: smaž z požadavků zbytečný datový v
 
 ## Pracovní log
 
+- 2026-07-20: Doplněna příloha o kickoffu první etapy bez přístupového chaosu: výstup prvního týdne, třídění vstupů na nutné/pozdější/odložené, přístupy vázané na konkrétní úkol, krátká rozhodovací agenda, kickoff zápis, první rizika, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně znovu ověřeno, že `cody.dreamind.cz` přes proxy končí po TLS tunelu chybou `Empty reply from server`, přímé veřejné HTTPS ověření ukazuje expirovaný Let's Encrypt certifikát (`notAfter` 2026-07-17 19:35:56 GMT) a dostupný pracovní prostor neobsahuje bezpečný SSH/deploy přístup k obnově certifikátu nebo opravě upstreamu.
 - 2026-07-20: Doplněna příloha o přijetí nabídky bez ztráty hranic projektu: potvrzovací zápis po schválení, oddělení přístupů od nadšení, zamknutí první etapy místo celého vztahu, převod obchodních slibů na pracovní úkoly, řízení změnových požadavků, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně ověřeno, že `cody.dreamind.cz` přes běžný HTTPS končí `Empty reply from server`, veřejný Let's Encrypt certifikát je expirovaný (`notAfter` 2026-07-17 19:35:56 GMT), HTTP vrací 301 na HTTPS a dostupné prostředí neobsahuje bezpečný SSH/deploy přístup k obnově certifikátu nebo opravě upstreamu.
 - 2026-07-20: Doplněna příloha o nabídkovém briefu bez přestřelených slibů: slíbený výsledek místo seznamu činností, rozlišení jistého/předpokládaného/neznámého, první bezpečná etapa, rozsah s hranicemi, privacy-first formulace v nabídce, kontrola férovosti, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně spuštěn záložní Next.js proces pro upstream na portu 3000 a ověřeno, že aplikace vrací `200 OK`; běžné přímé HTTPS dál selhává kvůli expirovanému Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT) a dostupné prostředí neobsahuje bezpečný serverový přístup k jeho obnově.
 - 2026-07-20: Doplněna příloha o rozhodovacím záznamu po obchodním hovoru bez CRM románu: oddělení obchodního stavu od produktového učení, malá karta po hovoru, bezpečné poznámky bez osobních soudů, převod opakovaných otázek do veřejných odpovědí, follow-up jako splnění slibu, týdenní smyčka mezi sales, produktem a marketingem, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně znovu ověřeno, že přímé veřejné HTTPS na `cody.dreamind.cz` selhává kvůli expirovanému Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), aplikace za TLS při diagnostickém `curl --noproxy '*' -k -I` vrací `200 OK` a aktuální pracovní prostor neobsahuje bezpečný SSH/deploy přístup k obnově certifikátu.
