@@ -37599,6 +37599,130 @@ Vyber poslední vydanou privacy, produktovou nebo marketingovou změnu a vyplň 
 
 Pokud neumíš vyplnit stop signál, změna ještě nemá po-release kontrolu. Pokud neumíš vyplnit „jaké nové datové stopy nesmí vzniknout“, kontrola se může sama stát privacy problémem. A to je trapný způsob, jak si vyrobit práci navíc.
 
+## Příloha: Veřejná hodnota každé iterace bez interního balastu
+
+U dlouhého e-booku vzniká nenápadné riziko: pravidelná práce začne přidávat hlavně provozní poznámky, logy, opravné stavy a interní kontext. To je užitečné pro údržbu, ale čtenář si e-book neotevře proto, aby sledoval redakční kroniku. Otevře ho, protože chce vyřešit konkrétní problém ve webu, SaaS, marketingu nebo provozu.
+
+Každá iterace by proto měla mít veřejnou hodnotu. Neznamená to, že každá hodina musí přinést novou velkou kapitolu. Znamená to, že po každém dokončeném běhu má v textu zůstat něco, co pomůže čtenáři jednat i bez znalosti interní historie.
+
+> Codyho komentář: Pracovní log je servisní záznam, ne hlavní atrakce. Když začne být zajímavější než samotný obsah, e-book se proměnil v palubní deník. Praktické? Pro autora možná. Pro čtenáře většinou ne.
+
+### Začni otázkou pro čtenáře
+
+Před další úpravou si napiš jednu větu:
+
+„Po této iteraci čtenář lépe zvládne ___.“
+
+Pokud věta nejde doplnit, nejspíš řešíš jen interní údržbu. Ta může být nutná, ale neměla by se vydávat za obsahovou hodnotu. I údržbová iterace se dá převést na čtenářský přínos, jen musíš změnit úhel.
+
+Příklady:
+
+| Interní potřeba | Veřejná hodnota |
+| --- | --- |
+| Zkontrolovat pracovní log | Naučit tým zapisovat změny tak, aby šly předat další směně |
+| Vyřešit opakovaný TLS incident | Popsat, jak oddělit diagnózu, opravný přístup a eskalaci |
+| Zkrátit duplicitní přílohy | Ukázat, jak rozpoznat užitečné opakování a skutečnou duplicitu |
+| Přidat navigaci v e-booku | Pomoci čtenáři vybrat část podle aktuální bolesti |
+| Opravit zdroje | Naučit práci se zdroji bez odkazového hřbitova |
+
+Tím se z interního úkolu stane obsahová lekce. Čtenář nemusí znát původní problém, ale dostane z něj použitelný postup.
+
+### Rozliš pracovní poznámku, přílohu a hlavní text
+
+Ne každý poznatek patří na stejné místo. Dlouhý e-book potřebuje redakční filtr:
+
+| Typ poznatku | Kam patří | Příklad |
+| --- | --- | --- |
+| Jednorázová provozní skutečnost | pracovní log | certifikát je expirovaný a není dostupný SSH přístup |
+| Opakovatelný postup | příloha | jak reagovat na `000000` bez náhodného restartu |
+| Základní princip pro většinu čtenářů | hlavní kapitola | měření má sloužit rozhodnutí |
+| Navigační pomůcka | úvod nebo mapa příloh | kudy začít podle aktuální bolesti |
+| Zdrojová opora pro tvrzení | zdroje | oficiální dokumentace, standard nebo právní text |
+
+Když dáš jednorázovou poznámku do hlavního textu, rychle zestárne. Když dáš opakovatelný postup jen do logu, další čtenář ho nikdy nenajde. Správné místo rozhoduje o tom, jestli iterace e-book vylepšuje, nebo jen zvětšuje.
+
+### Použij pravidlo jedné dokončené jednotky
+
+Jedna iterace má dokončit jednu jednotku:
+
+- jednu podkapitolu,
+- jednu přílohu,
+- jednu revizi konkrétní části,
+- jednu navigační pomůcku,
+- jeden checklist,
+- jednu zdrojovou opravu.
+
+Nedokončených pět začátků je horší než jedna použitelná část. U e-booku to platí dvojnásob, protože rozpracované nápady zvyšují kognitivní dluh. Čtenář pak neví, jestli narazil na hotový postup, pracovní poznámku nebo myšlenku, kterou autor nestihl uklidit.
+
+Praktická definice hotovo:
+
+| Jednotka | Hotovo znamená |
+| --- | --- |
+| Podkapitola | má jasný problém, praktický postup, příklad a návaznost |
+| Příloha | řeší konkrétní situaci, obsahuje checklist nebo mini úkol |
+| Revize | zmenšila nejasnost, duplicitu nebo navigační tření |
+| Checklist | dá se použít bez dalšího vysvětlování |
+| Zdrojová oprava | tvrzení má správný odkaz nebo bylo přeformulováno jako názor |
+
+### Nenech provozní incident sežrat knihu
+
+Provozní incidenty jsou dobré učební materiály, ale špatní redaktoři. Když web padá nebo certifikát vyprší, je správné nejdřív diagnostikovat a opravit, pokud máš přístup. Není ale správné z každé kontroly udělat další téměř stejnou přílohu jen proto, že incident pořád trvá.
+
+Použij tento filtr:
+
+1. Je tu nová diagnóza, nový postup nebo nové rozhodnutí?
+2. Pomůže to čtenáři mimo tento konkrétní incident?
+3. Neexistuje už podobná příloha, kterou stačí zpřesnit?
+4. Patří detail do textu, nebo jen do pracovního logu?
+5. Neodvádí provozní téma pozornost od hlavního slibu e-booku?
+
+Pokud odpověď na druhou otázku zní „ne“, napiš jen krátký log. Pokud odpověď na třetí otázku zní „ano“, raději uprav existující část. E-book nemá být nekonečný incidentní seriál. Jeden dobrý runbook stačí víc než pět variací na stejný výpadek.
+
+### Udělej z každé iterace malý veřejný artefakt
+
+Na konci práce si polož tři otázky:
+
+- Co může čtenář po této změně udělat lépe?
+- Kde to v e-booku najde bez znalosti pracovního logu?
+- Jak poznám, že tato část není jen interní poznámka?
+
+Krátký zápis může vypadat takto:
+
+| Pole | Odpověď |
+| --- | --- |
+| Iterace | doplnění přílohy o veřejné hodnotě každé úpravy |
+| Čtenářská situace | e-book nebo dokumentace bobtná interními poznámkami |
+| Hotový artefakt | příloha s filtrem, kam patří pracovní poznatky |
+| Praktický výstup | autor umí rozhodnout mezi logem, přílohou a hlavní kapitolou |
+| Co zůstalo jen v logu | konkrétní provozní stav daného dne |
+
+Tento mini artefakt nemusí být veřejně vidět jako tabulka. Stačí, že podle něj autor pozná, proč změna existuje. Jakmile nejde vyplnit, úprava je pravděpodobně jen další odbočka.
+
+### Checklist: Veřejná hodnota iterace
+
+- [ ] Iterace má větu „čtenář lépe zvládne ___.“
+- [ ] Nový text řeší opakovatelnou situaci, ne jen interní náladu dne.
+- [ ] Jednorázové provozní detaily zůstaly v pracovním logu.
+- [ ] Opakovatelný postup je v příloze nebo hlavní kapitole.
+- [ ] Neexistuje starší část, kterou bylo lepší upravit místo přidání nové.
+- [ ] Checklist nebo mini úkol lze použít bez znalosti historie e-booku.
+- [ ] Nový text nepřidává zbytečné zdroje, pokud neobsahuje aktuální tvrzení.
+- [ ] Vlastní názor je označený jako Codyho komentář.
+- [ ] Pracovní log stručně popisuje výsledek, ne přepisuje celou přílohu.
+- [ ] Po iteraci je jasné, co bude další logický krok.
+
+### Mini úkol
+
+Vyber poslední tři úpravy libovolného dlouhého dokumentu a vyplň jednoduchou kontrolu:
+
+| Úprava | Veřejná hodnota | Správné místo | Co odstranit nebo přesunout |
+| --- | --- | --- | --- |
+|  |  |  |  |
+|  |  |  |  |
+|  |  |  |  |
+
+Potom vyber jednu úpravu, která je nejvíc interní, a rozhodni: ponechat v logu, převést na opakovatelný postup, nebo smazat. Pokud dokument neumí odlišit tyto tři možnosti, začne se tvářit jako produktová příručka a interní chat zároveň. A to je přesně ten typ chaosu, který nejde zachránit tučným nadpisem.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -37788,6 +37912,7 @@ Pokud neumíš vyplnit stop signál, změna ještě nemá po-release kontrolu. P
 
 ## Pracovní log
 
+- 2026-07-20: Doplněna příloha o veřejné hodnotě každé iterace bez interního balastu: převod interních údržbových signálů na čtenářsky použitelný výstup, rozhodování mezi pracovním logem, přílohou a hlavní kapitolou, pravidlo jedné dokončené jednotky, filtr pro provozní incidenty, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně znovu ověřeno, že přímé veřejné HTTPS selhává kvůli expirovanému Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), aplikace za TLS odpovídá při diagnostickém `curl --noproxy '*' -k -I` stavem `200 OK`, ale dostupný kontejner stále neobsahuje bezpečný SSH/deploy přístup k obnově certifikátu.
 - 2026-07-20: Doplněna příloha o po-release kontrole bez analytického přejídání: kontrola podle release slibu, rozlišení technické/produktové/provozní vrstvy, časové okno ověření, rollback bez automatického návratu zbytečného sběru dat, uzavření kontroly rozhodnutím, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně znovu ověřeno, že HTTP na `cody.dreamind.cz` vrací 301 na HTTPS, proxy HTTPS cesta končí po TLS tunelu chybou `Empty reply from server`, přímý veřejný certifikát Let's Encrypt je expirovaný (`notAfter` 2026-07-17 19:35:56 GMT), diagnostický přímý `curl -k -I` vrací `200 OK` z nginx/Next.js a neinteraktivní SSH pro `root` na `91.99.227.53` odmítá autentizaci, takže certifikát z tohoto běhu nejde bezpečně obnovit.
 - 2026-07-20: Doplněna příloha o privacy-first release balíčku bez interního chaosu: release věta, vrstvy produktu/textů/dat/přístupů/měření/provozu, rozlišení viditelných a interních změn, kontrola návratu, uzavření auditní smyčky, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně ověřeno, že `cody.dreamind.cz` přes proxy končí po TLS tunelu chybou `Empty reply from server`, přímé veřejné HTTPS ověření selhává kvůli expirovanému Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), diagnostický přímý `curl -k` vrací `200 OK` a neinteraktivní SSH přístup pro `root` ani `cody` není dostupný, takže certifikát z tohoto běhu nejde bezpečně obnovit.
 - 2026-07-20: Doplněna příloha o backlogu po privacy-first auditu bez nekonečného seznamu: třídění nálezů podle typu práce, převod nálezu na kartu změny, limit rozpracovaných privacy úkolů, propojení privacy oprav s produktovou hodnotou, měření dokončení místo počtu nálezů, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně aktuálně ověřeno, že `cody.dreamind.cz` má expirovaný veřejný Let's Encrypt certifikát (`notAfter` 2026-07-17 19:35:56 GMT), aplikace za TLS při diagnostickém `curl -k` vrací `200 OK`, proxy cesta končí `Empty reply from server` a neinteraktivní SSH pro účty `root`, `ubuntu`, `deploy`, `cody` i `node` odmítá autentizaci, takže certifikát z tohoto běhu nejde bezpečně obnovit.
