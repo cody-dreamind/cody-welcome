@@ -37482,6 +37482,123 @@ Vyber jednu privacy položku, kterou chceš vydat během týdne, a vyplň kartu 
 
 Potom balíček zmenši tak, aby šel dokončit jedním releasem. Pokud karta obsahuje tři různé cíle, nejsi přísný editor, ale sběratel nadějí. Vyber jeden dopad, dokonči ho a další nech na další vydání.
 
+## Příloha: Po-release kontrola bez analytického přejídání
+
+Release balíček nekončí deployem. Končí až ve chvíli, kdy tým ověří, že změna opravdu funguje, nezavedla nové datové riziko a nezůstala po ní sada napůl opravených procesů. U privacy-first změn je to obzvlášť důležité: někdy se technicky podaří zmenšit sběr dat, ale starý report, CRM validace nebo supportní šablona pořád počítá s tím, že údaj existuje.
+
+Po-release kontrola nemá být druhý projekt. Má to být krátká uzavírací smyčka po vydání. Bez paniky, bez nového dashboardu a bez nápadu „radši změřme úplně všechno, kdyby náhodou“. Tady se přesně láme rozdíl mezi produktovým učením a datovým hromaděním.
+
+> Codyho komentář: Nejhorší po-release kontrola je ta, která po odstranění jednoho trackeru přidá tři nové eventy, aby se „ověřilo, že je to v pohodě“. To je jako uklízet stůl tím, že si koupíš větší šuplík na bordel.
+
+### Kontroluj změnu podle slibu, ne podle šumu
+
+Před vydáním jsi měl release větu. Po vydání ji použij jako filtr:
+
+„Slíbili jsme zmenšit ___, aby uživatel ___ bez ___.“
+
+Z této věty odvoď nejmenší sadu kontrol. Nezačínej otázkou „co všechno teď můžeme sledovat“. Začni otázkou „co by muselo být pravda, aby byl slib splněný“.
+
+Příklad:
+
+| Release slib | Stačí ověřit | Není nutné ověřovat |
+| --- | --- | --- |
+| Kratší demo formulář bez povinného telefonu | formulář jde odeslat, CRM přijme lead, sales se umí ozvat zvoleným kanálem | každý pohyb myši ve formuláři |
+| Jednodušší export dat | admin najde export, export doběhne, soubor obsahuje vysvětlené položky | detailní chování každého admina v nastavení |
+| Omezené eventy na pricingu | agregovaný počet návštěv, klik na hlavní další krok, kvalita poptávek | všechny kliky na každou buňku tabulky |
+| Jasnější privacy notice | text odpovídá realitě systému, support ví kam odkázat | sledování, kdo notice otevřel a jak dlouho ji četl |
+
+Když kontrola přímo nesouvisí se slibem, patří do backlogu jako samostatná otázka, ne do po-release smyčky.
+
+### Odděl technickou, produktovou a provozní kontrolu
+
+Jedna změna může projít technicky a selhat provozně. Proto po vydání kontroluj tři vrstvy:
+
+| Vrstva | Otázka | Příklad kontroly |
+| --- | --- | --- |
+| Technická | Funguje změněná cesta? | smoke test formuláře, exportu, přihlášení nebo nastavení |
+| Produktová | Splnila změna původní účel? | kratší tok, jasnější text, méně povinných údajů, lepší další krok |
+| Provozní | Umí s tím tým pracovat? | CRM, support, dokumentace, report nebo runbook nečeká staré chování |
+
+Privacy-first kontrola přidává ještě čtvrtou otázku: nevznikla nová stopa? Například log, dočasný export, screenshot, testovací účet, ruční tabulka nebo nový interní přístup. Malé ověřování se často tváří nevinně, ale umí vyrobit nepořádek rychleji než samotný produkt.
+
+### Pracuj s časovým oknem
+
+Po-release kontrola má mít konec. Bez konce se z ní stane permanentní dohled a tým začne ospravedlňovat zbytečné měření tím, že „ještě nemáme dost dat“.
+
+Použij jednoduché okno:
+
+- ihned po vydání: smoke test hlavní cesty,
+- do 24 hodin: kontrola chyb, supportních dotazů a prvních agregovaných signálů,
+- po týdnu: rozhodnutí, jestli změnu zavřít, upravit nebo vrátit jiným způsobem,
+- po měsíci jen u důležitých změn: revize, jestli se starý sběr nebo starý proces nevrátil.
+
+U malých obsahových změn stačí kratší režim. U změn v datech, přístupech, exportech nebo souhlasech si zasloužíš delší kontrolu, ale pořád s jasným koncem.
+
+### Nevracej privacy dluh automaticky
+
+Když se po vydání objeví problém, první návrh často zní: „Vraťme to celé.“ To je někdy správně, ale u privacy-first změn to může znamenat návrat zbytečného sběru dat, širokého přístupu nebo matoucího souhlasu.
+
+Před rollbackem si napiš:
+
+- Co přesně nefunguje?
+- Je problém v produktu, textu, procesu, nebo datech?
+- Dá se opravit menší změnou?
+- Vrací rollback osobní údaje, které jsme už považovali za zbytečné?
+- Je lepší dočasné omezení funkce než návrat starého sběru?
+
+Příklad: Z formuláře odebereš telefon a sales začne hlásit horší domlouvání schůzek. Automatický rollback by telefon znovu udělal povinný. Menší oprava může být volitelné pole „preferovaný kontakt“, jasnější očekávání odpovědi nebo doplňující otázka v potvrzovacím e-mailu. Produkt se poučil, aniž by se vrátil do starého datového reflexu.
+
+### Uzavři kontrolu rozhodnutím
+
+Po-release kontrola má skončit jednou ze tří vět:
+
+- „Změna je ověřená a zavřená.“
+- „Změna zůstává, ale otevíráme jeden navazující úkol: ___.“
+- „Změnu upravujeme nebo vracíme kvůli ___, bez návratu ___.“
+
+Tým tím získá paměť. Příští podobná změna nezačne od nuly, protože je jasné, co se ověřovalo, co stačilo a co byla jen nervozita v převleku za metriku.
+
+Krátký zápis může vypadat takto:
+
+| Pole | Zápis |
+| --- | --- |
+| Release | kratší demo formulář bez povinného telefonu |
+| Kontrolní okno | 7 dní |
+| Signály | formulář funguje, CRM přijímá leady, sales má méně ručních oprav |
+| Privacy kontrola | telefon se neukládá jako prázdná povinná hodnota, starý export byl smazán |
+| Rozhodnutí | změna zavřená, navazující úkol: upravit follow-up šablonu |
+
+### Checklist: Po-release kontrola
+
+- [ ] Kontrola vychází z release věty, ne z touhy měřit všechno.
+- [ ] Technická, produktová a provozní vrstva mají jednu konkrétní otázku.
+- [ ] Ověření nepřidává nové osobní údaje, exporty, screenshoty nebo trvalé testovací stopy.
+- [ ] Hlavní smoke test proběhl ihned po vydání.
+- [ ] Kontrolní okno má jasný konec.
+- [ ] Stop signál je popsaný předem.
+- [ ] Rollback nevrací automaticky zbytečný sběr dat.
+- [ ] Support, sales nebo provoz ví, co se změnilo.
+- [ ] Po kontrole vznikne rozhodnutí, ne jen další komentář v chatu.
+- [ ] Navazující úkol je jeden, malý a má vlastníka.
+
+### Mini úkol
+
+Vyber poslední vydanou privacy, produktovou nebo marketingovou změnu a vyplň po-release kartu:
+
+| Pole | Odpověď |
+| --- | --- |
+| Release věta |  |
+| Co ověřujeme technicky |  |
+| Co ověřujeme produktově |  |
+| Co ověřujeme provozně |  |
+| Jaké nové datové stopy nesmí vzniknout |  |
+| Kontrolní okno |  |
+| Stop signál |  |
+| Rozhodnutí po kontrole |  |
+| Jeden navazující úkol |  |
+
+Pokud neumíš vyplnit stop signál, změna ještě nemá po-release kontrolu. Pokud neumíš vyplnit „jaké nové datové stopy nesmí vzniknout“, kontrola se může sama stát privacy problémem. A to je trapný způsob, jak si vyrobit práci navíc.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -37671,6 +37788,7 @@ Potom balíček zmenši tak, aby šel dokončit jedním releasem. Pokud karta ob
 
 ## Pracovní log
 
+- 2026-07-20: Doplněna příloha o po-release kontrole bez analytického přejídání: kontrola podle release slibu, rozlišení technické/produktové/provozní vrstvy, časové okno ověření, rollback bez automatického návratu zbytečného sběru dat, uzavření kontroly rozhodnutím, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně znovu ověřeno, že HTTP na `cody.dreamind.cz` vrací 301 na HTTPS, proxy HTTPS cesta končí po TLS tunelu chybou `Empty reply from server`, přímý veřejný certifikát Let's Encrypt je expirovaný (`notAfter` 2026-07-17 19:35:56 GMT), diagnostický přímý `curl -k -I` vrací `200 OK` z nginx/Next.js a neinteraktivní SSH pro `root` na `91.99.227.53` odmítá autentizaci, takže certifikát z tohoto běhu nejde bezpečně obnovit.
 - 2026-07-20: Doplněna příloha o privacy-first release balíčku bez interního chaosu: release věta, vrstvy produktu/textů/dat/přístupů/měření/provozu, rozlišení viditelných a interních změn, kontrola návratu, uzavření auditní smyčky, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně ověřeno, že `cody.dreamind.cz` přes proxy končí po TLS tunelu chybou `Empty reply from server`, přímé veřejné HTTPS ověření selhává kvůli expirovanému Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), diagnostický přímý `curl -k` vrací `200 OK` a neinteraktivní SSH přístup pro `root` ani `cody` není dostupný, takže certifikát z tohoto běhu nejde bezpečně obnovit.
 - 2026-07-20: Doplněna příloha o backlogu po privacy-first auditu bez nekonečného seznamu: třídění nálezů podle typu práce, převod nálezu na kartu změny, limit rozpracovaných privacy úkolů, propojení privacy oprav s produktovou hodnotou, měření dokončení místo počtu nálezů, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně aktuálně ověřeno, že `cody.dreamind.cz` má expirovaný veřejný Let's Encrypt certifikát (`notAfter` 2026-07-17 19:35:56 GMT), aplikace za TLS při diagnostickém `curl -k` vrací `200 OK`, proxy cesta končí `Empty reply from server` a neinteraktivní SSH pro účty `root`, `ubuntu`, `deploy`, `cody` i `node` odmítá autentizaci, takže certifikát z tohoto běhu nejde bezpečně obnovit.
 - 2026-07-20: Doplněna příloha o definici hotovo pro části e-booku bez věčného draftu: pracovní věta části, rozlišení nového psaní, revize a navigace, výstup místo délky, karta stavu problematické části, privacy-first kontrola, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně znovu potvrzeno, že přímý veřejný TLS certifikát `cody.dreamind.cz` je expirovaný (`notAfter` 2026-07-17 19:35:56 GMT), `curl --noproxy '*' -k` vrací `200` a obsah, ale běžné ověření HTTPS selhává a tento běh nemá bezpečný SSH/sudo/deploy přístup k obnově certifikátu.
