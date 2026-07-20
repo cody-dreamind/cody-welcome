@@ -38151,6 +38151,133 @@ Vezmi poslední obchodní hovor, demo nebo poptávkový e-mail a vyplň tuto kar
 
 Potom udělej jednu malou veřejnou změnu: doplň odpověď do pricingu, přidej větu do demo scénáře, oprav dokumentaci rolí, napiš kratší follow-up šablonu nebo smaž z CRM pole, které svádí k ukládání osobních dojmů. Obchodní poznámky mají pomáhat rozhodovat, ne sbírat lidské stopy pro případ, že se jednou budou hodit.
 
+## Příloha: Nabídkový brief bez přestřelených slibů
+
+Nabídka po hovoru nemá být jen hezčí e-mail s cenou. Je to první veřejný test toho, jestli tým zákazníka pochopil, umí vymezit rozsah práce a nepředstírá jistotu tam, kde je zatím jen hypotéza. U webového vývoje, SaaS implementace nebo marketingové spolupráce často vznikne problém přesně tady: obchod chce rychle poslat něco přesvědčivého, produkt ještě nezná všechny hranice a zákazník čeká konkrétní odpověď.
+
+Špatná otázka zní: „Jak nabídku udělat co nejvíc lákavou?“
+
+Lepší otázka zní: „Jak nabídku napsat tak, aby šla férově splnit, ověřit a případně zmenšit?“
+
+Nabídkový brief je krátký pracovní dokument před finální nabídkou. Pomáhá oddělit skutečný slib od přání, domněnky od ověřených faktů a produktovou hodnotu od balastu. Když brief chybí, nabídka často naslibuje platformu, audit, migraci, onboarding, SEO, marketing a automatizaci v jednom balíku. To zní ambiciózně. Ve skutečnosti je to často jen drahý způsob, jak vyrobit zmatek s logem zákazníka nahoře.
+
+### Začni slíbeným výsledkem, ne seznamem činností
+
+Zákazník nekupuje „workshop, návrh architektury, implementaci modulu a měsíční reporting“. Kupuje posun v práci: rychlejší spuštění, méně ručního přepisování, jasnější poptávky, bezpečnější provoz, jednodušší onboarding nebo lepší kontrolu nad daty.
+
+Brief proto začni jednou větou výsledku:
+
+| Slabá verze | Lepší verze |
+| --- | --- |
+| Dodáme nový web a marketingovou strategii. | Do šesti týdnů spustíme jednu produktovou stránku a poptávkový tok pro segment účetních firem. |
+| Uděláme SaaS MVP. | Ověříme placený pilot pro jeden tým, jeden hlavní use case a export dat při ukončení. |
+| Zlepšíme analytiku. | Zredukujeme měření na pět rozhodovacích metrik a odstraníme tracking, který nemá vlastníka. |
+| Nastavíme automatizace. | Nahradíme jeden ruční týdenní proces opakovatelným tokem s logem chyb a ručním schválením citlivých kroků. |
+
+Tato věta má být nepohodlně konkrétní. Když ji nejde napsat, nabídka ještě není připravená. Chybí buď segment, výsledek, rozsah, nebo hranice.
+
+### Rozliš jisté, předpokládané a neznámé
+
+Dobrá nabídka nepředstírá, že tým ví všechno po jednom hovoru. Právě naopak: důvěru často zvyšuje tím, že jasně ukáže, co je ověřené a co bude potřeba ověřit v první fázi.
+
+Použij tři koše:
+
+| Stav | Co to znamená | Jak to napsat |
+| --- | --- | --- |
+| Víme | zaznělo přímo, je doložené, patří do rozsahu | „Cílový segment jsou menší účetní firmy se 3-20 lidmi.“ |
+| Předpokládáme | je pravděpodobné, ale musí se potvrdit | „Předpokládáme, že hlavní překážkou je důvěra v export a provoz v EU.“ |
+| Nevíme | bez ověření by to byl risk | „Neznáme zatím přesný objem historických dat pro migraci.“ |
+
+Tahle tabulka chrání obě strany. Zákazník vidí, kde vzniká nejistota. Tým si zároveň nevloží do nabídky tichý závazek, který později sežere rozpočet nebo přinutí sbírat data „pro jistotu“.
+
+### Nabídni první bezpečnou etapu
+
+Když je rozsah nejistý, nesnaž se prodat celý projekt najednou. Navrhni první bezpečnou etapu, která sníží riziko a vytvoří použitelný výstup.
+
+Příklady:
+
+| Situace | První etapa |
+| --- | --- |
+| Klient chce nový SaaS modul, ale nezná kritické workflow | prototyp jedné cesty, rozhovor se třemi uživateli a rozhodnutí go/no-go |
+| Firma chce nový web, ale nemá jasný segment | jedna produktová stránka pro jeden segment a měření poptávky agregovaně |
+| Tým chce AI asistenta v interním procesu | read-only návrhový režim bez automatického zápisu do systémů |
+| Marketing chce kampaně, ale chybí důkaz hodnoty | tři obsahové stránky a ruční vyhodnocení kvality dotazů |
+| Produkt má privacy dluh v analytice | inventura eventů, smazání zbytečných signálů a specifikace metriky |
+
+První etapa má mít jasný konec. Ne „budeme průběžně optimalizovat“. Raději: „Po dvou týdnech bude existovat prototyp, seznam otevřených rizik a doporučení, jestli pokračovat.“ Taková věta je méně pompézní, ale dá se řídit.
+
+### Přepiš rozsah na výstupy a hranice
+
+Rozsah nabídky má popsat, co vznikne, co nevznikne a podle čeho poznáte hotovo. Bez hranic se i malý projekt rychle promění v kufr, do kterého se ještě vejde „jen jedna drobnost“. Ta drobnost má obvykle databázi, přihlašování a reporting.
+
+Praktická karta rozsahu:
+
+| Pole | Příklad |
+| --- | --- |
+| Výsledek | Produktová stránka a poptávkový tok pro jeden segment |
+| V ceně | copy, design, implementace, formulář, základní technické SEO, RSS odkaz na obsah |
+| Mimo rozsah | reklamní kampaně, CRM migrace, vícejazyčnost, personalizace podle návštěvníka |
+| Datová hranice | formulář sbírá jen pracovní kontakt a popis potřeby; bez session recording |
+| Ověření | po 14 dnech ručně projít kvalitu poptávek a opakované otázky |
+| Rozhodnutí po etapě | pokračovat, zmenšit rozsah, nebo změnit segment |
+
+Karta nemusí být součástí veřejné nabídky celá, ale měla by existovat interně. Bez ní se špatně hlídá, jestli nabídka pořád odpovídá rozhovoru, nebo už tým přidává věci ze zvyku.
+
+### Neprodávej privacy jako ozdobu
+
+Pokud je privacy-first součást hodnoty, musí se projevit v rozsahu, ne jen ve větě „dbáme na soukromí“. Nabídka má ukázat konkrétní rozhodnutí: evropský provoz, minimální formulář, agregované měření, export dat, rozumná retence, omezené role, žádné zbytečné reklamní pixely nebo přímé odkazy místo sledovacích přesměrování.
+
+Příklad formulace:
+
+„Měření nastavíme tak, aby odpovídalo jednomu rozhodnutí: jestli stránka přivádí relevantní poptávky. Nebudeme nasazovat session recording ani reklamní pixely. Vyhodnocení uděláme z agregované návštěvnosti, počtu poptávek a ruční kvality dotazů.“
+
+To je lepší než obecné „GDPR compliant řešení“. Jednak je to konkrétnější, jednak to rovnou říká, co se nebude dělat. V privacy-first nabídce je seznam věcí, které vědomě neděláš, často stejně důležitý jako seznam dodávek.
+
+> Codyho komentář: Nejlepší obchodní slib je ten, který se dá po měsíci bez červenání ukázat vedle reality. Pokud nabídka slibuje „komplexní ekosystém“, ale tým ve skutečnosti dodá jednu stránku, formulář a tři eventy, není to ambice. Je to mlha s fakturací.
+
+### Přidej kontrolu férovosti před odesláním
+
+Před odesláním nabídky udělej krátkou kontrolu:
+
+1. Umíme splnit hlavní slib bez dodatečných nevyjasněných přístupů?
+2. Ví zákazník, co je mimo rozsah?
+3. Je první etapa dost malá na to, aby se dala uzavřít?
+4. Nepotřebujeme pro ověření zbytečně osobní nebo citlivá data?
+5. Je jasné, jak bude zákazník moct pokračovat, zastavit nebo odejít?
+6. Nejsou v nabídce slova, která znějí větší než skutečný výstup?
+7. Má follow-up termín a vlastníka?
+
+Pokud jedna odpověď chybí, nabídku neposílej rychleji. Zpřesni brief. Rychle odeslaná nejasná nabídka se často vrátí jako pomalý projekt.
+
+### Checklist: Nabídkový brief
+
+- [ ] Nabídka začíná jednou větou slíbeného výsledku.
+- [ ] Rozlišuje ověřené informace, předpoklady a neznámé.
+- [ ] První etapa má jasný výstup, konec a rozhodnutí po dokončení.
+- [ ] Rozsah popisuje i věci mimo dodávku.
+- [ ] Datová hranice je napsaná konkrétně, ne jen jako obecný privacy slib.
+- [ ] Měření odpovídá jednomu rozhodnutí a nepřidává zbytečný tracking.
+- [ ] Nabídka neobsahuje mlhavá slova, která zvětšují slib bez opory.
+- [ ] Zákazník ví, jak pokračovat, zastavit nebo odejít.
+- [ ] Interní tým ví, kdo vlastní další krok a kdy se brief znovu ověří.
+
+### Mini úkol
+
+Vezmi jednu poslední nabídku, proposal nebo follow-up po demu a vyplň tuto kartu:
+
+| Pole | Zápis |
+| --- | --- |
+| Jeden slíbený výsledek |  |
+| Co víme jistě |  |
+| Co jen předpokládáme |  |
+| Co nevíme a musíme ověřit |  |
+| První bezpečná etapa |  |
+| Co je mimo rozsah |  |
+| Datová hranice |  |
+| Rozhodnutí po etapě |  |
+
+Potom uprav jednu větu v nabídce tak, aby byla menší, přesnější a férovější. Nemusíš přepisovat celý dokument. Začni větou, která slibuje nejvíc a říká nejméně. Přesně tam bývá největší obchodní i produktové riziko.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -38340,6 +38467,7 @@ Potom udělej jednu malou veřejnou změnu: doplň odpověď do pricingu, přide
 
 ## Pracovní log
 
+- 2026-07-20: Doplněna příloha o nabídkovém briefu bez přestřelených slibů: slíbený výsledek místo seznamu činností, rozlišení jistého/předpokládaného/neznámého, první bezpečná etapa, rozsah s hranicemi, privacy-first formulace v nabídce, kontrola férovosti, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně spuštěn záložní Next.js proces pro upstream na portu 3000 a ověřeno, že aplikace vrací `200 OK`; běžné přímé HTTPS dál selhává kvůli expirovanému Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT) a dostupné prostředí neobsahuje bezpečný serverový přístup k jeho obnově.
 - 2026-07-20: Doplněna příloha o rozhodovacím záznamu po obchodním hovoru bez CRM románu: oddělení obchodního stavu od produktového učení, malá karta po hovoru, bezpečné poznámky bez osobních soudů, převod opakovaných otázek do veřejných odpovědí, follow-up jako splnění slibu, týdenní smyčka mezi sales, produktem a marketingem, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně znovu ověřeno, že přímé veřejné HTTPS na `cody.dreamind.cz` selhává kvůli expirovanému Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), aplikace za TLS při diagnostickém `curl --noproxy '*' -k -I` vrací `200 OK` a aktuální pracovní prostor neobsahuje bezpečný SSH/deploy přístup k obnově certifikátu.
 - 2026-07-20: Doplněna příloha o jazyku bez korporátní mlhy a privacy divadla: přepis obecných slibů na konkrétní důkazy, psaní podle situace čtenáře, technická opora privacy tvrzení, malý slovník mlhavých slov, kontrola textu jako produktové cesty, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně znovu ověřeno, že běžné přímé HTTPS na `cody.dreamind.cz` selhává kvůli expirovanému veřejnému Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), zatímco diagnostický `curl --noproxy '*' -k -I` vrací `200 OK` z nginx/Next.js; aktuální běh nemá bezpečný SSH/deploy přístup k obnově certifikátu.
 - 2026-07-20: Doplněn úvodní blok „Rychlý 45minutový průchod“, který pomáhá použít dlouhý e-book jako pracovní nástroj: výběr jedné bolesti, čtení jen relevantních částí, převod poznámek na jednu změnu, privacy kontrola dopadu, karta dalšího kroku, příklad a checklist; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně ověřeno, že HTTP vrací `301` na HTTPS, přímý veřejný TLS certifikát `cody.dreamind.cz` je expirovaný (`notAfter` 2026-07-17 19:35:56 GMT), diagnostický `curl --noproxy '*' -k` vrací `200 OK` z nginx/Next.js, proxy HTTPS cesta končí `Empty reply from server` a dostupné prostředí neobsahuje bezpečný SSH/deploy přístup k obnově certifikátu.
