@@ -30,6 +30,23 @@ Když tě po kapitole napadnou tři dobré úpravy, nezačínej všemi. Vyber tu
 
 > Codyho tip: Pokud e-book používáte v týmu, neřešte všechno najednou. Na konci každé kapitoly si vyberte jednoho vlastníka, jeden malý další krok a datum, kdy ověříte dopad. Jinak se z dobrého čtení stane jen další hezký dokument v šuplíku.
 
+### Kudy začít podle aktuální bolesti
+
+E-book už je dlouhý záměrně: má fungovat jako pracovní příručka, ne jako lineární román. Pokud řešíš konkrétní problém, nezačínej nutně od první strany. Vyber si nejkratší cestu k rozhodnutí, které potřebuješ udělat tento týden.
+
+| Aktuální situace | Začni kapitolou nebo přílohou | Výstup do týdne |
+| --- | --- | --- |
+| Web existuje, ale nepřináší správné poptávky | Kapitoly 2, 3 a 7; příloha o auditu klíčové stránky | jedna opravená stránka s jasnějším CTA a menším datovým třením |
+| SaaS má registrace, ale slabou aktivaci | Kapitoly 5, 8 a 12; příloha o týdenním produktovém review | definovaná první hodnota a jedna odstraněná překážka v onboardingu |
+| Pricing vyvolává dotazy nebo nedůvěru | Kapitola 6; příloha o produktových limitech a fair use | přepsaný jeden plán, limit nebo vysvětlení exportu a zrušení |
+| Marketing vyrábí obsah, ale ne rozhodnutí | Kapitoly 4 a 7; příloha o obsahovém kalendáři | jedna obsahová karta s publikovatelným tématem a férovým dalším krokem |
+| Analytika je plná eventů, ale tým podle ní neřídí | Kapitoly 1 a 8; příloha o specifikaci metriky | jeden smazaný nebo opravený event a jedna metrika s vlastníkem |
+| Tým se bojí provozní změny, protože postup zná jen jeden člověk | Kapitoly 9, 10 a 11; příloha o runbooku | krátký runbook pro deploy, incident nebo obnovu |
+| Privacy slib na webu není propojený s realitou | Kapitoly 1, 8 a 10; příloha o datové mapě a retenci | mapa jedné datové cesty včetně účelu, přístupů a retence |
+| Čtenář e-booku neví, co udělat po přečtení | Závěr a přílohy o akčním backlogu a 30denním plánu | jedna karta úkolu se slovesem, vlastníkem a datem kontroly |
+
+Praktické pravidlo: vyber situaci, otevři jen doporučené části a napiš jeden úkol ve tvaru „Do ___ uzavřít ___“. Pokud úkol nezačíná slovesem a nejde ověřit jedním signálem, ještě není připravený k práci.
+
 ## Osnova
 
 1. Základní principy privacy-first webu a SaaS
@@ -37276,6 +37293,7 @@ Potom vyber jednu položku, kterou uděláš do týdne. Tři nech jako kandidát
 
 ## Pracovní log
 
+- 2026-07-20: Doplněn úvodní navigační blok „Kudy začít podle aktuální bolesti“, který propojuje typické situace čtenáře s kapitolami, přílohami a jedním dokončitelným výstupem do týdne; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně znovu ověřeno, že `cody.dreamind.cz` přes proxy končí po TLS tunelu chybou `Empty reply from server`, přímé veřejné HTTPS ověření selhává kvůli expirovanému Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT) a dostupný kontejner neobsahuje SSH/deploy přístup, kterým by šlo certifikát bezpečně obnovit.
 - 2026-07-20: Doplněna příloha o akčním backlogu po čtení bez sběru osobních stop: třídění poznámek na opravy, ověření, rozhodnutí, odložení a smazání, pracovní věty se slovesem, minimální karta položky, pravidlo 1-3-5, prioritizace podle dopadu a datového rizika, uzavření čtenářského cyklu viditelnou změnou, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně čerstvě ověřeno, že `cody.dreamind.cz` při přímém HTTPS selhává na expirovaném veřejném Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), proxy cesta končí `Empty reply from server`, repozitář neobsahuje deploy/runbook a v kontejneru není dostupný SSH opravný přístup.
 - 2026-07-20: Doplněna příloha o týmovém čtení e-booku bez workshopového divadla: výběr pracovní situace místo kapitoly, otázky před čtením, krátká výstupová agenda, změna jako výstup místo zápisu, role při týmovém čtení, privacy-first kontrola dopadu, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně znovu ověřeno, že veřejný TLS certifikát `cody.dreamind.cz` je expirovaný (`notAfter` 2026-07-17 19:35:56 GMT), přímé HTTPS ověření selhává a z aktuálního běhu není dostupný SSH opravný přístup k obnově certifikátu.
 - 2026-07-20: Doplněna příloha o duplicitních tématech bez nekonečného opakování: rozlišení užitečného opakování a skutečné duplicity, rozhodovací věty pro podobné části, kontrola duplicitních checklistů, postup sloučení se zachováním nejlepších příkladů, orientační věty pro vědomě ponechané opakování, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně znovu potvrzeno, že přímý veřejný TLS certifikát `cody.dreamind.cz` je expirovaný (`notAfter` 2026-07-17 19:35:56 GMT), běžné HTTPS ověření selhává, aplikace za TLS odpovídá při diagnostickém `curl -k` stavem `200 OK` a v tomto běhu není dostupný bezpečný serverový opravný přístup k obnově certifikátu.
