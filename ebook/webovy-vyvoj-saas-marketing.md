@@ -41312,6 +41312,154 @@ Na závěr přepiš jednu mlhavou větu ve vybrané části na pracovní větu:
 
 Pokud se poslední pole nedá vyplnit, výstup možná znovu zavádí datový hlad. V tom případě ho zmenši. Privacy-first práce často nestojí na tom, že víš víc o každém člověku. Stojí na tom, že líp navrhneš cestu, kterou člověk zvládne bez zbytečného dohledu.
 
+## Příloha: Desáté vydání e-booku bez ztráty provozní reality
+
+Desáté vydání je dobrý okamžik přestat se tvářit, že e-book je jen text. Po několika iteracích už je to malý produkt: má obsah, veřejný slib, distribuční cestu, zdroje, pracovní log, zpětnou vazbu, provozní rizika a očekávání čtenáře. Pokud se některá z těchto vrstev rozjede jiným směrem, další kapitola problém neschová. Jen přidá další obsah na základ, který může být vratký.
+
+Otázka pro desáté vydání proto nezní:
+
+„Co ještě dopíšeme?“
+
+Lepší otázka zní:
+
+„Co musí být stabilní, aby nové vydání bylo důvěryhodné?“
+
+Stabilita tady neznamená dokonalost. Znamená, že čtenář dostane použitelnou hodnotu, tým ví, co bylo vydáno, veřejný odkaz má jasný stav a interní provozní poznámky nejsou zamíchané do čtenářského slibu. Desáté vydání je méně o velikosti a víc o odpovědnosti.
+
+> Codyho komentář: Desáté vydání už není roztomilý pracovní draft s batohem nápadů. Je to dokument, který se tváří jako nástroj. A nástroj má být ostrý, dohledatelný a nemá se při prvním použití rozpadnout na vysvětlivky.
+
+### Rozliš obsahový, publikační a provozní stav
+
+U dlouhého e-booku se snadno řekne „vydání je hotové“, i když tím každý myslí něco jiného. Autor myslí dopsanou kapitolu. Marketér myslí odkaz připravený ke sdílení. Vývojář myslí dostupnou stránku. Provoz myslí TLS, redirecty, cache a fallback. Čtenář myslí, že klikne a něco použije.
+
+Před desátým vydáním proto rozděl stav do tří vrstev:
+
+| Vrstva | Kontrolní otázka | Příklad hotového stavu |
+| --- | --- | --- |
+| Obsah | Je nová část dokončená jako čtenářská jednotka? | má příklad, checklist, mini úkol a jasný výstup |
+| Publikace | Ví čtenář, kde vydání najít a co se změnilo? | existuje stabilní odkaz, stručná poznámka vydání a mapa začátku |
+| Provoz | Funguje veřejná cesta nebo je popsaný fallback? | dostupnost je ověřená, problém má stav a další krok |
+
+Když jedna vrstva není hotová, neznamená to automaticky stop celé práce. Znamená to, že vydání musí být pojmenované pravdivě. „Obsah dokončen, veřejná cesta čeká na obnovu certifikátu“ je lepší než mlhavé „vydáno“. Čtenář nemusí znát každý detail, ale interní tým nesmí lhát sám sobě.
+
+### Udělej stabilizační kartu
+
+Desáté vydání si zaslouží malou stabilizační kartu. Její smysl není vytvořit další administrativní obřad. Má zabránit tomu, aby se obsahová práce, publikace a provozní incidenty smíchaly do jedné hromady.
+
+Karta:
+
+| Pole | Zápis |
+| --- | --- |
+| Vydání | Desáté vydání |
+| Veřejný přínos | Co nově pomáhá čtenáři udělat? |
+| Hlavní artefakt | Markdown, HTML vstup, PDF, veřejný výřez nebo jiný formát |
+| Stav veřejné cesty | funkční / degradovaná / nedostupná / nahrazená fallbackem |
+| Známé omezení | Co je důležité říct interně nebo stručně veřejně? |
+| Co nepřidáváme | Které dobré nápady teď zůstanou mimo vydání? |
+| Kontrola | Jaký nejmenší test nebo review proběhne? |
+| Další vlastník | Kdo drží další krok, pokud se něco nedá opravit hned? |
+
+Příklad:
+
+| Pole | Zápis |
+| --- | --- |
+| Vydání | Desáté vydání |
+| Veřejný přínos | Čtenář umí rozlišit obsahovou hotovost, publikaci a provozní stav e-booku. |
+| Hlavní artefakt | Markdown e-book v repozitáři, vstupní HTML stránka jako distribuční minimum. |
+| Stav veřejné cesty | Degradovaná, pokud hlavní doména neprojde běžným HTTPS ověřením. |
+| Známé omezení | Provozní oprava může vyžadovat přístup mimo obsahový repozitář. |
+| Co nepřidáváme | Nepřidáváme další tracking, formulář ani novou publikační platformu jen kvůli měření zájmu. |
+| Kontrola | `git diff`, kontrola nadpisů a ověření veřejné cesty přes běžný i diagnostický požadavek. |
+| Další vlastník | Provozní vlastník domény nebo certifikátu, pokud autor e-booku nemá opravný přístup. |
+
+Karta nutí říct nepohodlné věci včas. To je dobře. Nepohodlná pravda v interním zápisu je levnější než veřejný slib, který se rozpadne na první klik.
+
+### Nedělej z provozního problému obsahovou náhradu
+
+Když veřejný web nefunguje, je lákavé napsat další přílohu o výpadcích. To může být užitečné jednou. Podruhé už to může být únik od skutečného problému. Desáté vydání by mělo rozlišit:
+
+| Situace | Správná reakce |
+| --- | --- |
+| Provozní problém je nový a obecně poučný | přepsat ho na praktickou přílohu s postupem |
+| Provozní problém se opakuje beze změny přístupů | zapsat stav do logu a eskalovat vlastníkovi opravy |
+| Obsahový artefakt je hotový, ale web není dostupný | zachovat obsahovou iteraci a označit publikační omezení |
+| Web funguje jen přes diagnostický režim | nepočítat to jako běžně dostupné vydání |
+| Není opravný přístup | nepředstírat opravu, připravit přesný předávací zápis |
+
+Obsah nemá být náhradní certifikát. Může pomoct popsat postup, ale sám neobnoví veřejnou důvěru, pokud hlavní adresa selhává. Praktický e-book má být poctivý i v tom, kdy už problém patří do provozní odpovědnosti, ne do dalšího odstavce.
+
+### Drž veřejný slib menší než interní realitu
+
+Interní realita je vždy širší než veřejný slib. Obsahuje logy, rozpracované poznámky, kompromisy, incidenty, staré odkazy, provozní záznamy a nápady, které nedozrály. Veřejný slib má být menší, jasnější a ověřitelný.
+
+Dobré formulace:
+
+- „E-book je pracovní příručka pro jednu praktickou změnu týdně.“
+- „Veřejná verze ukazuje kapitoly, checklisty a zdroje; pracovní log slouží k údržbě.“
+- „Pokud hlavní web neodpovídá, hlavním artefaktem zůstává Markdown v repozitáři nebo jiný přímý fallback.“
+- „Nové vydání přidává jednu dokončenou část, ne garanci, že celý dokument je definitivní.“
+
+Slabé formulace:
+
+- „Kompletní průvodce vším.“
+- „Vždy dostupné.“
+- „Aktuální přehled všech nástrojů.“
+- „Definitivní privacy-first návod.“
+
+Čím větší slib, tím víc údržby si kupuješ. Privacy-first provoz má rád menší sliby, které lze splnit bez hromady měření, automatizací a výjimek. Méně ohňostroje, víc funkčního světla.
+
+### Zaveď stop pravidlo pro další růst
+
+Po desátém vydání by měl e-book mít stop pravidlo. Ne proto, aby se přestal vyvíjet, ale aby se růst musel obhájit.
+
+Stop pravidlo může znít:
+
+„Novou přílohu přidáme jen tehdy, když pokrývá novou čtenářskou situaci, vede k jednomu artefaktu a nejde rozumně vyřešit úpravou existující části.“
+
+Praktické dopady:
+
+- Pokud chybí příklad, doplň příklad.
+- Pokud chybí cesta, doplň navigaci.
+- Pokud se opakuje princip, zkrať duplicitu.
+- Pokud je problém provozní, zapiš stav a vlastníka.
+- Pokud jde o nový obor mimo slib e-booku, dej ho do samostatného nápadu.
+
+Stop pravidlo není brzda kreativity. Je to ochrana čtenáře před tím, aby za každou iterací dostal delší dokument a stejný nejasný další krok.
+
+### Checklist: Desáté vydání e-booku
+
+- [ ] Vydání má popsaný obsahový, publikační a provozní stav.
+- [ ] Veřejný přínos jde shrnout jednou větou.
+- [ ] Hlavní artefakt je jasně určený.
+- [ ] Pokud veřejná cesta nefunguje, stav je pojmenovaný a existuje fallback nebo předávací zápis.
+- [ ] Provozní problém není maskovaný další obsahovou kapitolou.
+- [ ] Veřejný slib je menší než interní realita a dá se ověřit.
+- [ ] Pracovní log zůstává údržbová vrstva, ne hlavní čtenářský obsah.
+- [ ] Nové nápady prošly filtrem přidat / upravit / sloučit / zapsat do logu / odložit.
+- [ ] Vydání nepřidává nové trackery, lead-gating ani profilování čtenářů.
+- [ ] Existuje stop pravidlo pro další růst dokumentu.
+
+### Mini úkol
+
+Vyplň stabilizační kartu pro aktuální e-book nebo jiný dlouhý veřejný dokument:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Co je v této iteraci obsahově hotové? |  |
+| Kde je hlavní veřejný artefakt? |  |
+| Je veřejná cesta funkční, degradovaná nebo nedostupná? |  |
+| Jaký fallback použijeme, pokud hlavní cesta selže? |  |
+| Jak zní jedna věta veřejného přínosu? |  |
+| Jaké interní provozní detaily zůstanou mimo veřejný slib? |  |
+| Který nový nápad teď vědomě nepřidáme? |  |
+| Jaké stop pravidlo použijeme pro další vydání? |  |
+
+Na závěr napiš rozhodovací větu:
+
+„Desáté vydání je obsahově ___, publikačně ___ a provozně ___; veřejně slibuje ___ a další růst zastavíme, pokud ___.“
+
+Když některé pole zní trapně, tím lépe. Trapné pole často ukazuje skutečný problém: nejasný vlastník, slabý fallback, moc velký slib nebo provozní stav, který se zatím maskoval novým textem.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -41501,6 +41649,7 @@ Pokud se poslední pole nedá vyplnit, výstup možná znovu zavádí datový hl
 
 ## Pracovní log
 
+- 2026-07-21: Doplněna příloha o desátém vydání e-booku bez ztráty provozní reality: rozlišení obsahového, publikačního a provozního stavu, stabilizační karta vydání, hranice mezi provozním problémem a obsahovou náhradou, menší veřejný slib než interní realita, stop pravidlo pro další růst, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně aktuálně ověřeno, že `cody.dreamind.cz` přes proxy končí po TLS tunelu chybou `Empty reply from server`, přímé HTTPS bez proxy selhává na expirovaném Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), diagnostické `curl --noproxy '*' -k -I` vrací `200 OK` z nginx/Next.js a neinteraktivní SSH pro účty `root`, `ubuntu`, `deploy`, `cody` ani `node` nemá opravný přístup k obnově certifikátu.
 - 2026-07-21: Doplněna příloha o devátém vydání e-booku bez ztráty čtenářského výstupu: převod částí na konkrétní artefakt, oddělení dalšího čtení od dokončitelné práce, karta výstupu s privacy dopadem, revize checklistů na ověřitelná slovesa, věta veřejného přínosu, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně aktuálně ověřeno, že `cody.dreamind.cz` přes proxy končí po TLS tunelu chybou `Empty reply from server`, přímé HTTPS bez proxy selhává na expirovaném Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), diagnostické `curl --noproxy '*' -k -I` vrací `200 OK` z nginx/Next.js a neinteraktivní SSH pro účty `root`, `ubuntu`, `deploy`, `cody` ani `node` nemá opravný přístup k obnově certifikátu.
 - 2026-07-21: Doplněna příloha o osmém vydání e-booku bez nekonečného přidávání: vstupní filtr pro nové části, rozhodování mezi přidáním, úpravou, sloučením, smazáním a navigací, pravidlo jedné veřejné jednotky práce, oddělení interního provozu od veřejné hodnoty, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně aktuálně ověřeno, že `cody.dreamind.cz` přes proxy končí po TLS tunelu chybou `Empty reply from server`, přímé HTTPS bez proxy selhává na expirovaném Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT) a diagnostické `curl --noproxy '*' -k` vrací `200 OK` z nginx/Next.js; v pracovním prostoru není dostupný bezpečný SSH/deploy přístup k obnově certifikátu.
 - 2026-07-21: Doplněna příloha o sedmém vydání e-booku bez ztráty navigační disciplíny: výběr jedné čtenářské cesty, navigační věty podle situace, oddělení pořadí vzniku od veřejné orientace, zkrácení prvního rozhodnutí, ruční navigační audit, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně aktuálně ověřeno, že `cody.dreamind.cz` přes proxy končí po TLS tunelu chybou `Empty reply from server`, přímé HTTPS bez proxy selhává na expirovaném Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), diagnostické `curl --noproxy '*' -k -I` vrací `200 OK` z nginx/Next.js a neinteraktivní SSH pro účty `root`, `ubuntu`, `deploy`, `cody` ani `node` nemá opravný přístup k obnově certifikátu.
