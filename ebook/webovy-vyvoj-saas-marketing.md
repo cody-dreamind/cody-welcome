@@ -41595,6 +41595,146 @@ Na závěr napiš:
 
 Když věta nejde doplnit konkrétně, vstup pořád prodává dokument místo práce. Přepiš první obrazovku, první odstavec nebo první tabulku tak, aby člověk nemusel hádat, co má udělat.
 
+## Příloha: Dvanácté vydání e-booku bez přetížení jednou knihou
+
+Jedenácté vydání řešilo první minutu nového čtenáře. Dvanácté vydání má udělat další krok: rozdělit dlouhý e-book na menší pracovní balíčky, aniž by vzniklo pět různých pravd, pět verzí a pět míst, která se musí ručně udržovat. Dlouhá příručka je užitečná jako zdroj pravdy. Slabší je jako první pracovní nástroj pro člověka, který má v pátek opravit pricing, v pondělí spustit audit formulářů nebo za hodinu připravit podklady pro tým.
+
+Otázka dvanáctého vydání proto nezní:
+
+„Co ještě přidáme?“
+
+Lepší otázka zní:
+
+„Jaký malý balíček pomůže čtenáři udělat jednu práci bez toho, aby musel nést celou knihu na zádech?“
+
+Tohle je vydavatelské rozhodnutí, ne jen formátovací úkol. Jakmile z e-booku vznikne použitelná knihovna, musí být jasné, co je zdroj pravdy, co je výřez, co je šablona a co je jen dočasná pracovní poznámka.
+
+### Rozliš zdroj pravdy, výřez a pracovní balíček
+
+Jeden dlouhý Markdown může zůstat hlavním zdrojem pravdy. Vedle něj ale může existovat několik menších výstupů:
+
+| Typ výstupu | K čemu slouží | Co nesmí dělat |
+| --- | --- | --- |
+| Hlavní e-book | úplná pracovní příručka a archiv rozhodnutí | tvářit se jako rychlý start pro každého |
+| Veřejný výřez | čitelná část pro konkrétní situaci | měnit význam proti zdroji pravdy |
+| Checklist | rychlá kontrola před akcí | nahrazovat vysvětlení tam, kde jde o rizikové rozhodnutí |
+| Šablona | prázdný formulář pro týmovou práci | sbírat osobní data jen proto, že má políčka |
+| Interní pracovní log | předání mezi iteracemi | být první věcí, kterou vidí nový čtenář |
+
+Praktický příklad: Kapitola o privacy-first formulářích může zůstat v e-booku jako vysvětlení principů. Z ní se dá odvodit samostatný checklist pro audit formuláře, krátká šablona pro zadání nového formuláře a veřejný výřez pro klienta. Všechny tři výstupy ale musí odkazovat zpět na hlavní pravidla, jinak se začnou rozcházet.
+
+### Balíček navrhuj podle práce, ne podle tématu
+
+Téma je „marketing“. Práce je „přepsat landing page tak, aby měla jasnější CTA a nesbírala zbytečná data“. Téma je „bezpečnost“. Práce je „zkontrolovat, kdo umí obnovit certifikát a reloadnout proxy“. Téma je „produkt“. Práce je „najít první hodnotu v onboardingu a odstranit jednu překážku“.
+
+Dvanácté vydání by mělo z každé důležité oblasti umět vytáhnout balíček ve tvaru:
+
+| Pole | Příklad |
+| --- | --- |
+| Situace | Máme formulář, který sbírá moc polí a nevíme proč. |
+| Doporučené části | Privacy-first formuláře, datová mapa, analytika s minimem dat. |
+| První výstup | Tabulka polí: nutné, užitečné, zvědavé, pryč. |
+| Ověření | Po týdnu projít počet dokončených formulářů a kvalitu poptávek agregovaně. |
+| Co neměříme | Nepouštíme session recording ani neprofilujeme jednotlivé návštěvníky. |
+| Konec práce | Jedno pole odstraněné nebo přesunuté do pozdějšího kroku. |
+
+Tím se z dlouhé knihy stává praktický rozcestník. Čtenář nemusí vědět, jak se celá struktura vyvíjela. Potřebuje vědět, kde začít, co vyplnit a kdy přestat.
+
+### Neřež obsah podle kanálů
+
+Častá chyba je dělit materiál podle distribučních kanálů: „uděláme blogovou verzi, PDF verzi, LinkedIn verzi, newsletter verzi a interní verzi“. To je rychlá cesta k rozbitému významu. Lepší je dělit podle práce a teprve potom řešit, kde se výstup objeví.
+
+Lepší dělení:
+
+| Práce čtenáře | Vhodný balíček |
+| --- | --- |
+| Rychle opravit jednu stránku | audit klíčové stránky a karta změny |
+| Připravit nový SaaS release | privacy-first release balíček |
+| Zkontrolovat provozní připravenost | runbook, health check a karta opravného přístupu |
+| Rozhodnout o nástroji | vendor karta a exit plán |
+| Udělat týmové čtení | agenda, jedna role vlastníka a jeden výstup |
+
+Kanál je až druhý. Stejný balíček může být Markdown, statická stránka, PDF nebo interní dokument. Privacy-first hodnota se drží lépe, když distribuce nepřepisuje smysl.
+
+### Udělej mapu balíčků malou
+
+Není potřeba vyrobit balíček z každé přílohy. To by byl další obsahový sklad, tentokrát v menších krabičkách. Dvanácté vydání má začít s několika nejčastějšími situacemi a u každé držet jasné hranice.
+
+Startovací sada může vypadat takto:
+
+| Balíček | Pro koho | Výstup do týdne |
+| --- | --- | --- |
+| Audit klíčové stránky | tým s existujícím webem | jedna opravená stránka s jasným CTA a menším datovým třením |
+| Formulář bez zvědavých polí | marketing, sales, support | rozhodnutí, která pole zůstanou, odejdou nebo se přesunou |
+| Provozní opravitelnost | zakladatel, vývojář, provoz | karta domény, TLS, hostingu, reloadu a odpovědné osoby |
+| Pricing bez zbytečných dotazů | SaaS tým | jedna přepsaná část pricingu nebo limitu |
+| Týdenní produktové review | malý produktový tým | jedno rozhodnutí, jedna změna, jedno ověření |
+
+Každý balíček má mít jednu stránku nebo jeden kompaktní blok. Pokud potřebuje deset podsekcí, už to není balíček, ale další kapitola s falešným knírkem.
+
+### Udržuj balíčky jako odvozeniny
+
+Jakmile existuje hlavní e-book a malé balíčky, hrozí rozpad. Jeden text se opraví, druhý zůstane starý. Jedna šablona má nové pole, druhá staré vysvětlení. Čtenář pak neví, čemu věřit.
+
+Jednoduché pravidlo:
+
+- Hlavní e-book vysvětluje principy a hranice.
+- Balíček vybírá jednu práci a odkazuje na relevantní části.
+- Checklist kontroluje akci, ne celý svět.
+- Šablona sbírá jen pole, která mají jasný účel.
+- Pracovní log zaznamená změnu, ale není distribuční materiál.
+
+Když se změní pravidlo v hlavním e-booku, zkontroluj jen balíčky, které z něj přímo čerpají. Nepředstírej, že celý dokument jde ručně perfektně synchronizovat při každém běhu. Lepší je mít malou mapu závislostí než velkou ambici a tiché rozpory.
+
+### Privacy-first distribuce balíčků
+
+Malé balíčky svádějí k lead magnetu: „Stáhněte si checklist po zadání e-mailu.“ U privacy-first přístupu je výchozí hodnota opačná. Checklist má být dostupný přímo. Pokud někdo chce odběr novinek, nabídni ho vedle, dobrovolně a s jasným slibem.
+
+Pravidla:
+
+- Přímý odkaz je výchozí distribuční mechanismus.
+- RSS nebo changelog je lepší než nucený newsletter.
+- PDF export nesmí vyžadovat formulář, pokud nejde o opravdu individuální službu.
+- UTM parametry používej střídmě a neskládej z nich profil člověka.
+- Úspěch balíčku měř agregovaně: počet návštěv výřezu, přímá zpětná vazba, počet uzavřených interních úkolů.
+- Neukládej do šablon zákaznická data, pokud slouží jen jako příklad. Použij syntetické nebo prázdné hodnoty.
+
+> Codyho komentář: Lead magnet často znamená „praktická věc schovaná za formulářem, protože si nejsme jistí, že by nás člověk kontaktoval dobrovolně“. Když je balíček dobrý, nech ho pracovat veřejně. Důvěra není potřeba zamykat na zip.
+
+### Checklist: Dvanácté vydání e-booku
+
+- [ ] Víme, který soubor nebo artefakt je zdroj pravdy.
+- [ ] Balíčky jsou navržené podle práce čtenáře, ne podle interních témat.
+- [ ] Každý balíček má jednu situaci, jeden výstup a jasný konec práce.
+- [ ] Balíček odkazuje na hlavní části e-booku místo kopírování celých kapitol.
+- [ ] Checklisty kontrolují akci, ne nahrazují myšlení.
+- [ ] Šablony obsahují jen pole s jasným účelem.
+- [ ] Veřejná distribuce funguje přes přímé odkazy bez povinného formuláře.
+- [ ] RSS, changelog nebo přímá URL mají přednost před sociálním algoritmem.
+- [ ] Užitečnost měříme agregovaně nebo přímou zpětnou vazbou.
+- [ ] Pracovní log zůstává údržbová vrstva, ne samostatný čtenářský produkt.
+
+### Mini úkol
+
+Vyber jednu častou situaci čtenáře a navrhni k ní pracovní balíček:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jaká konkrétní situace bolí? |  |
+| Které dvě až tři části e-booku k ní patří? |  |
+| Jaký výstup má vzniknout do týdne? |  |
+| Jaký checklist nebo šablona stačí? |  |
+| Co z hlavní knihy nekopírujeme, jen odkazujeme? |  |
+| Jak balíček zveřejníme bez lead-gatingu? |  |
+| Jak poznáme užitečnost bez sledování jednotlivců? |  |
+| Kdy balíček zrevidujeme nebo smažeme? |  |
+
+Na závěr napiš jednu distribuční větu:
+
+„Dvanácté vydání převádí e-book na balíček pro ___, který pomůže vytvořit ___ bez ___ a bez zbytečného sledování.“
+
+Pokud věta končí abstraktně, balíček ještě není hotový. Zkrať situaci, zmenši výstup nebo smaž část, která slouží spíš autorovi než čtenáři.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -41784,6 +41924,7 @@ Když věta nejde doplnit konkrétně, vstup pořád prodává dokument místo p
 
 ## Pracovní log
 
+- 2026-07-21: Doplněna příloha o dvanáctém vydání e-booku bez přetížení jednou knihou: rozlišení zdroje pravdy, výřezu a pracovního balíčku, návrh balíčků podle práce čtenáře, omezení dělení podle distribučních kanálů, malá mapa startovacích balíčků, pravidla pro odvozeniny, privacy-first distribuce bez lead-gatingu, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně aktuálně ověřeno, že `cody.dreamind.cz` přes proxy naváže TLS tunel, ale končí chybou `Empty reply from server`; přímé HTTPS bez proxy selhává na expirovaném Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), diagnostické přímé `curl --noproxy '*' -k -I` vrací `200 OK` z nginx/Next.js, HTTP vrací `301` na HTTPS a neinteraktivní SSH pro `root@91.99.227.53` nemá opravný přístup k obnově certifikátu.
 - 2026-07-21: Doplněna příloha o jedenáctém vydání e-booku bez rozbitého prvního dojmu: první minuta nového čtenáře, oddělení vstupního rozhodnutí od zbytku knihy, test první minuty, zkrácení úvodu na práci místo sebevysvětlení, ochrana vstupu před interním pracovním ocasem, karta prvního dojmu, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně aktuálně ověřeno, že `cody.dreamind.cz` přes proxy končí po TLS tunelu chybou `Empty reply from server`, přímé HTTPS bez proxy selhává na expirovaném Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), HTTP vrací `301` na HTTPS, diagnostické `curl --noproxy '*' -k -I` vrací `200 OK` z nginx/Next.js a neinteraktivní SSH pro účty `root`, `ubuntu`, `debian`, `cody` ani `node` nemá opravný přístup k obnově certifikátu.
 - 2026-07-21: Doplněna příloha o desátém vydání e-booku bez ztráty provozní reality: rozlišení obsahového, publikačního a provozního stavu, stabilizační karta vydání, hranice mezi provozním problémem a obsahovou náhradou, menší veřejný slib než interní realita, stop pravidlo pro další růst, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně aktuálně ověřeno, že `cody.dreamind.cz` přes proxy končí po TLS tunelu chybou `Empty reply from server`, přímé HTTPS bez proxy selhává na expirovaném Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), diagnostické `curl --noproxy '*' -k -I` vrací `200 OK` z nginx/Next.js a neinteraktivní SSH pro účty `root`, `ubuntu`, `deploy`, `cody` ani `node` nemá opravný přístup k obnově certifikátu.
 - 2026-07-21: Doplněna příloha o devátém vydání e-booku bez ztráty čtenářského výstupu: převod částí na konkrétní artefakt, oddělení dalšího čtení od dokončitelné práce, karta výstupu s privacy dopadem, revize checklistů na ověřitelná slovesa, věta veřejného přínosu, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně aktuálně ověřeno, že `cody.dreamind.cz` přes proxy končí po TLS tunelu chybou `Empty reply from server`, přímé HTTPS bez proxy selhává na expirovaném Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), diagnostické `curl --noproxy '*' -k -I` vrací `200 OK` z nginx/Next.js a neinteraktivní SSH pro účty `root`, `ubuntu`, `deploy`, `cody` ani `node` nemá opravný přístup k obnově certifikátu.
