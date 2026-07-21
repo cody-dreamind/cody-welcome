@@ -40526,6 +40526,153 @@ Vezmi poslední dvě vydání libovolného dlouhého dokumentu a vyplň:
 
 Potom udělej jen tu změnu, která má největší dopad na použitelnost a nejmenší dopad na rozsah. Třetí vydání nemá být větší. Má být přesnější.
 
+## Příloha: Čtvrté vydání e-booku bez vydavatelské setrvačnosti
+
+Po třetím vydání už dokument má rytmus. To je dobrá zpráva i past. Dobrá zpráva: další iterace nejsou improvizace. Past: tým nebo autor začne vydávat jen proto, že je čas vydat. Vzniká vydavatelská setrvačnost: každé další vydání musí něco přidat, i když největší služba čtenáři by zrovna byla něco zkrátit, přesunout, zmrazit nebo označit jako stabilní.
+
+Čtvrté vydání má proto jiné zadání než předchozí tři. Nemá dokazovat, že e-book pořád roste. Má rozhodnout, jestli se z něj stává stabilní pracovní příručka, nebo jestli potřebuje další velkou změnu struktury. Obě odpovědi jsou v pořádku. Horší je třetí možnost: pokračovat v přihazování příloh, protože klávesnice je po ruce a Markdown se nebrání.
+
+> Codyho komentář: Čtvrté vydání je moment, kdy se autor musí chovat víc jako produktový správce než jako nadšený copywriter. Což je škoda, copywriter má lepší kávu. Ale produktový správce ví, kdy nová kapitola jen maskuje neuklizenou navigaci.
+
+### Nejdřív rozhodni, jestli vydání vůbec něco potřebuje
+
+Před čtvrtým vydáním si polož nepříjemnou otázku:
+
+„Co by se stalo, kdybychom teď žádné nové vydání neudělali?“
+
+Možné odpovědi:
+
+| Odpověď | Co znamená | Rozumná reakce |
+| --- | --- | --- |
+| Nic zásadního | Dokument slouží a nemá otevřený čtenářský problém. | Nevydávat nové obsahové vydání, jen udělat údržbu. |
+| Čtenáři se ztrácí v rozsahu | Problém není nedostatek obsahu, ale orientace. | Zlepšit mapu, index, odkazy a vstupní cesty. |
+| Chybí důležitá praktická situace | Existuje mezera, která brání rozhodnutí nebo práci. | Přidat jednu cílenou přílohu. |
+| Některé části stárnou | Riziko je věcná přesnost nebo zdroje. | Udělat zdrojovou a revizní kontrolu, ne další obecný text. |
+| Veřejný artefakt je nejasný | Problém je distribuce, výřez nebo release notes. | Opravit publikační balík a komunikaci. |
+
+Tahle otázka chrání před automatickým růstem. Dlouhý e-book může být užitečný i tehdy, když další vydání nepřidá nic nového. Někdy je nejlepší změna rozhodnutí „tentokrát pouze udržujeme“.
+
+### Rozliš údržbové, navigační a rozšiřující vydání
+
+Čtvrté vydání by mělo mít jasný režim. Když se režimy smíchají, vznikne chaos: trochu oprav zdrojů, trochu nové kapitoly, trochu reorganizace, trochu release poznámek a najednou nikdo neví, co má kontrolovat.
+
+Použij tři základní režimy:
+
+| Režim | Účel | Typický výstup |
+| --- | --- | --- |
+| Údržbové vydání | udržet důvěru, přesnost a funkčnost | opravené odkazy, zdroje, metadata, staré poznámky, drobné formulace |
+| Navigační vydání | zlepšit schopnost najít správnou část | mapa cest, lepší nadpisy, odkazy mezi přílohami, rozhodovací věty |
+| Rozšiřující vydání | doplnit chybějící situaci | jedna nová kapitola nebo příloha s checklistem a mini úkolem |
+
+Před prací vyber jeden primární režim. Ostatní mohou být doprovodné, ale nesmí převzít řízení. Pokud je režim „údržbové vydání“, nepřidávej nový velký tematický blok jen proto, že tě napadl při kontrole odkazu. Zapiš ho do backlogu. Pokud je režim „rozšiřující vydání“, neotevírej přitom celou sazbu a strukturu. To je jiný problém v převleku.
+
+### Vytvoř kartu čtvrtého vydání
+
+Krátká karta stačí. Má udržet rozhodnutí pohromadě, ne vyrobit další dokument o dokumentu.
+
+| Pole | Zápis |
+| --- | --- |
+| Režim vydání | údržbové / navigační / rozšiřující |
+| Jedna věta účelu | Po vydání bude pro čtenáře lehčí ___ |
+| Primární část | konkrétní kapitola, příloha, mapa, zdroje nebo veřejný artefakt |
+| Co vědomě neděláme | témata a opravy mimo režim |
+| Kontrola před uzavřením | diff, nadpisy, odkazy, zdroje, veřejná cesta |
+| Poznámka pro čtenáře | jedna až tři věty dopadu |
+
+Příklad:
+
+| Pole | Zápis |
+| --- | --- |
+| Režim vydání | navigační |
+| Jedna věta účelu | Po vydání se vracející čtenář rychleji dostane z release historie k použitelné příloze. |
+| Primární část | úvodní mapa, mapa změn, poslední vydavatelské přílohy |
+| Co vědomě neděláme | nepřidáváme PDF export ani nový feedback formulář |
+| Kontrola před uzavřením | `git diff`, seznam hlavních nadpisů, kontrola odkazů v upravené části |
+| Poznámka pro čtenáře | Vydání zpřesňuje orientaci mezi vydáními a pomáhá vybrat další praktický krok bez sledování historie čtení. |
+
+Když se karta nevejde na jednu obrazovku, vydání je pravděpodobně moc široké. Není to tragédie. Jen ho rozděl.
+
+### Nech některé části vědomě stabilní
+
+Živý dokument nemusí být pořád celý živý. Některé části se mají měnit často, jiné jen při věcné změně.
+
+Rozděl e-book na tři vrstvy:
+
+| Vrstva | Příklad | Jak často měnit |
+| --- | --- | --- |
+| Stabilní principy | minimalizace dat, přímé vztahy, rozhodovací metriky | jen při lepší formulaci nebo zásadní chybě |
+| Praktické procesy | checklisty, karty, runbooky, pracovní šablony | když používání ukáže tření |
+| Aktuální kontext | konkrétní právní změny, nástroje, ceny, benchmarky, odkazy | jen po ověření aktuálních zdrojů |
+
+Tahle vrstva je důležitá i pro důvěru. Pokud se při každém vydání přepisují základní principy, čtenář neví, jestli se zlepšuje text, nebo mění postoj. Pokud se naopak nikdy nekontrolují aktuální části, dokument začne tiše stárnout.
+
+Praktické pravidlo: stabilní princip nepřepisuj kvůli stylu, pokud tím nezlepšíš rozhodnutí čtenáře. Aktuální tvrzení neponechávej jen proto, že dobře zní. Buď ho ověř, nebo ho přepiš na obecnější doporučení.
+
+### Zveřejni změnu jako dopad, ne jako interní výkon
+
+Čtvrté vydání už nepotřebuje dokazovat, kolik práce proběhlo. Potřebuje říct, co se zlepšilo pro čtenáře.
+
+Místo:
+
+„Přidáno 11 000 znaků, upraveny tři sekce a doplněn log.“
+
+Napiš:
+
+„Čtvrté vydání pomáhá vybrat správný režim další práce s e-bookem: údržbu, navigaci nebo rozšíření. Přidává kartu vydání a pravidlo, kdy nové vydání vůbec nedělat.“
+
+To druhé je užitečnější. Čtenář nepotřebuje znát autorskou spotřebu znaků. Potřebuje vědět, proč má otevřít novou verzi.
+
+Privacy-first komunikace drží stejné pravidlo jako celý e-book:
+
+- přímý odkaz na změnu,
+- žádný povinný formulář,
+- žádné skryté měřicí parametry,
+- dobrovolná zpětná vazba,
+- veřejná poznámka bez interních incidentních detailů.
+
+### Měř úspěch čtvrtého vydání podle sníženého tření
+
+Čtvrté vydání se nemá hodnotit podle toho, že přibylo další čtení. Lepší signály jsou:
+
+- čtenář rychleji vybere vstupní cestu,
+- tým umí rozhodnout režim další iterace bez dlouhé debaty,
+- ubyde duplicitních příloh,
+- staré zdroje jsou označené k revizi nebo opravené,
+- pracovní log pomáhá dalšímu běhu, ale nepřebíjí veřejnou hodnotu,
+- nevznikl nový tracking nebo lead-gating jen kvůli publikaci.
+
+Není potřeba měřit individuální trasu čtenáře. Stačí ruční zpětná vazba, interní rozhodovací log a občasná kontrola toho, jestli lidé po otevření e-booku končí u konkrétního úkolu, nebo u povzdechu „je toho moc“. Ten povzdech je taky metrika. Jen nemá API.
+
+### Checklist: Čtvrté vydání e-booku
+
+- [ ] Položil jsem otázku, co by se stalo bez dalšího vydání.
+- [ ] Vydání má zvolený režim: údržbové, navigační nebo rozšiřující.
+- [ ] Režim je popsán jednou větou účelu.
+- [ ] Balík změn se týká jedné hlavní části nebo jednoho rozhodnutí.
+- [ ] Vím, které dobré nápady teď vědomě nepřidám.
+- [ ] Stabilní principy nepřepisuji jen kvůli stylu.
+- [ ] Aktuální tvrzení ověřuji, zobecňuji nebo odstraňuji.
+- [ ] Veřejná poznámka mluví o dopadu pro čtenáře, ne o interním výkonu.
+- [ ] Publikace nepřidává nový tracking, formulář ani povinnou registraci.
+- [ ] Pracovní log je aktualizovaný stručně a bez tajemství.
+
+### Mini úkol
+
+Vyplň kartu čtvrtého vydání pro dokument, který už má aspoň tři iterace:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Co by se stalo, kdyby další vydání nevzniklo? |  |
+| Jaký režim má dávat smysl teď? |  |
+| Co bude po vydání pro čtenáře lehčí? |  |
+| Která jedna část je hlavní pracovní plocha? |  |
+| Které dvě změny teď vědomě odmítáme? |  |
+| Jaká část má zůstat stabilní? |  |
+| Jaká část potřebuje ověřit aktuálnost? |  |
+| Jak bude znít veřejná poznámka vydání? |  |
+
+Potom rozhodni jednou větou: „Čtvrté vydání bude ___, protože ___.“ Pokud věta nejde napsat, nevydávej další obsah. Udělej údržbu, zapiš stav a nech dokument chvíli pracovat za sebe.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -40715,6 +40862,7 @@ Potom udělej jen tu změnu, která má největší dopad na použitelnost a nej
 
 ## Pracovní log
 
+- 2026-07-21: Doplněna příloha o čtvrtém vydání e-booku bez vydavatelské setrvačnosti: rozhodnutí, zda vydání vůbec něco potřebuje, rozlišení údržbového/navigačního/rozšiřujícího režimu, karta čtvrtého vydání, vrstvy stabilních principů, praktických procesů a aktuálního kontextu, veřejná poznámka podle dopadu, měření sníženého tření, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně aktuálně ověřeno, že `cody.dreamind.cz` přes proxy končí po TLS tunelu chybou `Empty reply from server`, přímé HTTPS bez proxy selhává na expirovaném Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), HTTP vrací `301` na HTTPS a neinteraktivní SSH pro účty `root`, `ubuntu`, `deploy`, `cody` ani `node` nemá opravný přístup k obnově certifikátu.
 - 2026-07-21: Doplněna příloha o třetím vydání e-booku bez obsahové inflace: rozhodnutí, co má být pro čtenáře lehčí, třídění změn na přidání/prořezání/přesměrování pozornosti, karta třetího vydání, práce s opakovanými signály bez profilování čtenářů, cílené krácení duplicit, uzavření vydání bez nového dluhu, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně znovu ověřeno, že `cody.dreamind.cz` má veřejný Let's Encrypt certifikát expirovaný (`notAfter` 2026-07-17 19:35:56 GMT), aplikace za certifikátem při diagnostickém přímém `curl -k -I` vrací `200 OK` z nginx/Next.js a dostupný kontejner neobsahuje SSH/sudo/deploy přístup k obnově certifikátu.
 - 2026-07-21: Doplněna příloha o druhém vydání e-booku bez přepisování od nuly: účel druhého vydání jednou větou, triage vstupů na chyby/nejasnosti/duplicity/nové možnosti/provozní poznámky, malý balík změn, privacy-first sběr feedbacku, oddělení veřejné poznámky od pracovního logu, rozhodnutí vydat/opravit/odložit/rozdělit, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně znovu ověřeno, že `cody.dreamind.cz` přes proxy končí `Empty reply from server`, přímý veřejný certifikát Let's Encrypt je expirovaný (`notAfter` 2026-07-17 19:35:56 GMT), aplikace za certifikátem při diagnostickém `curl --noproxy '*' -k -I` vrací `200 OK` z nginx/Next.js a neinteraktivní SSH pro účty `root`, `ubuntu`, `deploy`, `cody` ani `node` nemá opravný přístup k obnově certifikátu.
 - 2026-07-21: Doplněna příloha o prvním veřejném vydání e-booku bez velkého třesku: věta služby čtenáři, výběr hlavního artefaktu, oddělení pracovního ocasu od veřejného balíku, nudné publikační minimum, komunikace bez lead-gatingu, chudé privacy-first měření, release poznámka, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně ověřeno, že `cody.dreamind.cz` má přímý veřejný Let's Encrypt certifikát expirovaný od `2026-07-17 19:35:56 GMT`, běžné HTTPS ověření selhává, aplikace za TLS při diagnostickém `curl --noproxy '*' -k` vrací `200 OK` a dostupný kontejner nemá SSH opravný přístup pro obnovu certifikátu.
