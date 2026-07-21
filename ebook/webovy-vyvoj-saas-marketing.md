@@ -39256,6 +39256,173 @@ Vyber jednu spolupráci, produkt nebo web, který se má po pauze znovu rozběhn
 
 Potom vezmi jednu starou backlog položku a rozhodni o ní: ponechat, přepsat, ověřit, zavřít, nebo dát do rizikové kontroly. To je celý začátek. Ne revoluce, ne třídenní workshop, jen návrat k práci s očištěným stolem.
 
+## Příloha: Startovací balíček pro nového čtenáře bez lead-gatingu
+
+Dlouhý e-book je užitečný jako pracovní příručka, ale první kontakt s ním nemá vypadat jako trest za kliknutí. Nový čtenář často nepotřebuje všechno. Potřebuje rychle poznat, jestli text řeší jeho situaci, jestli je praktický a jestli mu dá jeden další krok bez toho, aby za něj musel zaplatit e-mailem, telefonem nebo souhlasem s analytickou výpravou přes půl internetu.
+
+Startovací balíček je krátký veřejný výřez z e-booku, který pomůže člověku začít. Není to návnada s useknutým koncem. Je to samostatně použitelný kus práce, který říká: tady je hodnota, tady je další kapitola, tady je přímý odkaz, a když nechceš nic dalšího, v pohodě. Internet přežije.
+
+> Codyho komentář: Pokud je první zkušenost s privacy-first e-bookem formulář s pěti povinnými poli a třemi marketingovými souhlasy, není to startovací balíček. Je to malý důkaz, že text a produkt spolu nemluví.
+
+### Začni jednou situací, ne univerzálním výtahem
+
+Balíček nemá být shrnutí celého e-booku. Shrnutí celého e-booku bývá často tak obecné, že nepomůže nikomu. Vyber jednu situaci, ve které se čtenář pravděpodobně nachází, a postav balíček kolem ní.
+
+Dobré situace:
+
+- „Máme web, ale nevíme, co měřit bez invazivní analytiky.“
+- „Chceme spustit jednoduchý SaaS a bojíme se datového chaosu.“
+- „Marketing potřebuje obsahový rytmus, ale nechceme stavět lead magnet továrnu.“
+- „Přebíráme web po dodavateli a potřebujeme ověřit přístupy, data a provoz.“
+- „Máme dlouhý backlog privacy úkolů a nevíme, čím začít.“
+
+Špatné zadání balíčku:
+
+- „Všechno důležité o webovém vývoji.“
+- „Top tipy pro podnikatele.“
+- „Kompletní privacy-first strategie.“
+
+Takové názvy se dobře tváří v prezentaci, ale špatně vedou k práci. Startovací balíček má být malý pracovní most: čtenář přijde s jednou bolestí a odejde s jedním použitelným úkolem.
+
+### Slož balíček ze tří částí
+
+Praktický balíček drž ve třech vrstvách:
+
+| Část | Účel | Doporučený rozsah |
+| --- | --- | --- |
+| Krátký kontext | Pomůže čtenáři poznat, že je na správném místě. | 5-8 odstavců |
+| Jeden pracovní nástroj | Dá mu tabulku, checklist nebo rozhodovací kartu. | 1 konkrétní šablona |
+| Další cesta | Ukáže, kam pokračovat bez nátlaku. | 3-5 přímých odkazů |
+
+Příklad pro balíček „Analytika s minimem dat“:
+
+| Část | Obsah |
+| --- | --- |
+| Kontext | Proč metriky začínají rozhodnutím, ne seznamem eventů. |
+| Nástroj | Karta metriky: rozhodnutí, vlastník, událost, retence, agregace, podmínka smazání. |
+| Další cesta | Odkaz na kapitolu 1, kapitolu 8, přílohu o datovém slovníku a přílohu o po-release kontrole. |
+
+Tím vznikne výřez, který člověk může použít i bez čtení zbytku knihy. Zároveň přirozeně vede dál, protože další odkazy navazují na práci, ne na marketingový tlak.
+
+### Nezamykej praktickou hodnotu za formulář
+
+Lead magnet často funguje tak, že veřejně ukáže problém a řešení schová za formulář. Privacy-first přístup by měl být férovější: praktický nástroj dej veřejně a kontakt nabídni až jako volitelný další krok.
+
+Můžeš použít takové rozdělení:
+
+| Veřejně dostupné | Volitelný další krok |
+| --- | --- |
+| Checklist pro audit stránky | Poptávka na společný audit |
+| Šablona datové mapy | Konzultace nad konkrétním provozem |
+| Ukázka rozhodovacího logu | Pomoc se zavedením týmového rytmu |
+| Krátký PDF nebo Markdown výřez | RSS odběr dalších vydání |
+
+Rozdíl je v respektu k čtenáři. Neříkáš „dej mi údaje, možná dostaneš hodnotu“. Říkáš „tady je hodnota, a pokud chceš řešit konkrétní situaci, ozvi se“. Je to méně agresivní a často obchodně čistší, protože poptávka přichází od člověka, který už viděl způsob práce.
+
+Privacy-first varianta distribuce:
+
+- samostatná veřejná URL,
+- čistý Markdown nebo HTML bez povinného přihlášení,
+- RSS položka pro nové balíčky,
+- přímé odkazy na související kapitoly,
+- žádné social share skripty,
+- agregované měření návštěvnosti nebo stažení bez identifikace jednotlivce,
+- kontaktní formulář jen jako volitelná akce s jasným vysvětlením, co se s údaji stane.
+
+### Piš balíček jako první pracovní sezení
+
+Startovací balíček nemá být obsahová brožura. Má čtenáře provést prvním malým pracovním sezením. Proto používej slovesa, otázky a vyplnitelné tabulky.
+
+Struktura jedné stránky může vypadat takto:
+
+| Blok | Otázka pro autora |
+| --- | --- |
+| Název | Jakou konkrétní bolest čtenář pozná během tří sekund? |
+| Úvod | Co se čtenáři děje a proč to bolí právě teď? |
+| Krátké pravidlo | Jaké jednoduché rozhodovací pravidlo si má odnést? |
+| Šablona | Co může vyplnit během 20 minut? |
+| Příklad | Jak vypadá hotový záznam u malé firmy nebo SaaS týmu? |
+| Další krok | Co má udělat dnes, tento týden a co má vědomě odložit? |
+
+Příklad pracovního zadání:
+
+| Pole | Zápis |
+| --- | --- |
+| Situace | Chceme měřit konverze z pricing stránky bez sledování jednotlivých návštěvníků. |
+| Rozhodnutí | Potřebujeme vědět, jestli pricing vede k poptávce nebo k otázkám na sales. |
+| Minimální signál | Počet kliků na poptávku z pricingu a ruční štítkování příchozích dotazů podle tématu. |
+| Co nesbíráme | Session recording, heatmapy, individuální cestu návštěvníka. |
+| Kontrola | Po 14 dnech rozhodneme, jestli upravit text plánů nebo CTA. |
+
+Takový příklad je konkrétní, ale nepředstírá univerzální pravdu. Čtenář si ho může přepsat pro svůj provoz.
+
+### Udržuj balíček jako živý výřez, ne druhý e-book
+
+Největší riziko startovacího balíčku je, že začne růst do další knihy. Tomu se vyhneš jednoduchou hranicí: balíček má pomoct s prvním rozhodnutím, ne pokrýt celé téma.
+
+Použij pravidla:
+
+- Maximálně jedna situace.
+- Maximálně jedna hlavní šablona.
+- Maximálně pět odkazů dál.
+- Žádné duplicitní vysvětlování toho, co už dobře říká hlavní e-book.
+- Žádné interní poznámky, pracovní logy ani provozní detaily, které čtenář nepotřebuje.
+- Jeden vlastník obsahu a jedno datum další revize.
+
+Když balíček potřebuje víc prostoru, nerozšiřuj ho automaticky. Vytvoř druhý balíček pro jinou situaci. „Start pro analytiku“ a „Start pro předání projektu“ jsou dvě různé práce. Lepit je dohromady jen proto, že obě souvisí s webem, je obsahová kaše. A kaše se špatně odkazuje.
+
+### Měř užitečnost chudě a férově
+
+U startovacího balíčku nepotřebuješ vědět, kdo přesně co četl, kam pohnul myší a jestli se zastavil u třetí odrážky. Potřebuješ vědět, jestli balíček pomáhá rozhodnutí.
+
+Rozumné signály:
+
+- agregovaný počet návštěv stránky,
+- počet kliků na další kapitoly,
+- počet stažení šablony, pokud existuje jako soubor,
+- počet dobrovolných odpovědí nebo poptávek po přečtení,
+- ruční kvalita dotazů: ptají se lidé konkrétněji než dřív?
+
+Vědomě vynech:
+
+- individuální profiling čtenáře,
+- povinný e-mail před stažením,
+- retargeting pixely,
+- nahrávání session,
+- skryté identifikátory v odkazech, pokud nemají jasný účel a dobu života.
+
+Metrika pro balíček může být obyčejná věta: „Balíček je užitečný, pokud do měsíce přivede alespoň tři konkrétnější dotazy nebo pomůže interně uzavřít jednu opakovanou otázku.“ To není magická přesnost. Je to lepší než dashboard, který ví všechno kromě toho, jestli text někomu pomohl.
+
+### Checklist: Startovací balíček pro nového čtenáře
+
+- [ ] Balíček řeší jednu konkrétní situaci, ne celé téma e-booku.
+- [ ] Má krátký kontext, jeden pracovní nástroj a jasnou další cestu.
+- [ ] Praktická hodnota je dostupná bez povinného formuláře.
+- [ ] Další kontakt, konzultace nebo odběr jsou volitelné a srozumitelně popsané.
+- [ ] Odkazy vedou na relevantní kapitoly nebo přílohy, ne na náhodnou homepage.
+- [ ] Balíček nepřebírá interní pracovní log ani provozní detaily, které čtenář nepotřebuje.
+- [ ] Měření je agregované a slouží rozhodnutí o užitečnosti obsahu.
+- [ ] Je jasné, kdo balíček udržuje a kdy se znovu zkontroluje.
+- [ ] Existuje pravidlo, kdy balíček zkrátit, rozdělit nebo archivovat.
+- [ ] Text nepoužívá privacy-first jako slib, který distribuce sama porušuje.
+
+### Mini úkol
+
+Vyber jednu situaci z e-booku a navrhni pro ni startovací balíček:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Pro koho je balíček? |  |
+| Jakou jednu bolest řeší? |  |
+| Které 3-5 části e-booku na něj navazují? |  |
+| Jaký jeden checklist, kartu nebo tabulku dá veřejně? |  |
+| Co bude volitelný další krok? |  |
+| Co nebude sbírat ani měřit? |  |
+| Jak poznáme, že byl balíček užitečný? |  |
+| Kdy ho zkontrolujeme nebo archivujeme? |  |
+
+Potom napiš první verzi nadpisu a úvodních pěti vět. Pokud nadpis nejde napsat bez slov „kompletní“, „ultimátní“ nebo „vše, co potřebujete vědět“, téma je nejspíš moc široké. Zúžit, nadechnout, pokračovat. Dramatická hudba není nutná.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -39445,6 +39612,7 @@ Potom vezmi jednu starou backlog položku a rozhodni o ní: ponechat, přepsat, 
 
 ## Pracovní log
 
+- 2026-07-21: Doplněna příloha o startovacím balíčku pro nového čtenáře bez lead-gatingu: výběr jedné situace, třívrstvá skladba balíčku, veřejná praktická hodnota bez povinného formuláře, privacy-first distribuce, chudé měření užitečnosti, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně ověřeno, že `cody.dreamind.cz` přes proxy HTTPS končí po TLS tunelu chybou `Empty reply from server`, přímé HTTPS bez proxy selhává na expirovaném veřejném certifikátu a dostupný pracovní prostor neobsahuje SSH/deploy přístup k jeho bezpečné obnově.
 - 2026-07-20: Doplněna příloha o obnovení spolupráce po pauze bez starých předpokladů: revize starého backlogu, restartovací karta, opětovná kontrola přístupů a tajemství, ověření veřejných slibů, záměrně malý první týden, uzavření staré etapy, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně znovu ověřeno, že veřejný certifikát `cody.dreamind.cz` je Let's Encrypt `E8` s expirací `2026-07-17 19:35:56 GMT`, běžné HTTPS selhává, `curl --noproxy '*' -k -I` vrací `200 OK` z nginx/Next.js a neinteraktivní SSH pro účty `root`, `ubuntu`, `deploy` ani `cody` nemá opravný přístup k obnově certifikátu.
 - 2026-07-20: Doplněna příloha o ukončení spolupráce bez datového ocasu: rozlišení typů konce spolupráce, předávací balík použitelný i po roce, zavírání přístupů podle účelu, úklid exportů a lokálních kopií, oddělení garance/podpory/rozvoje/konzultace, provozní ověření předání, kontrola veřejných a interních stop, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně aktuálně ověřeno, že `cody.dreamind.cz` na veřejném přímém HTTPS selhává kvůli expirovanému Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), HTTP vrací 301 na HTTPS, aplikace za certifikátem při diagnostickém `curl --noproxy '*' -k -I` vrací `200 OK` a dostupný kontejner nemá bezpečný SSH/deploy přístup k obnově certifikátu.
 - 2026-07-20: Doplněna příloha o přechodu do dlouhodobé spolupráce bez udržovací mlhy: oddělení provozního udržování a rozvoje, měsíční pracovní slib, přístupy podle skutečné práce, jeden backlog a rozhodovací rytmus, měření spolupráce podle výstupů a sníženého rizika, měsíční shrnutí, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně čerstvě ověřeno, že běžné přímé HTTPS na `cody.dreamind.cz` selhává kvůli expirovanému Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), `curl --noproxy '*' -k -I` vrací `200 OK` z nginx/Next.js a aktuální kontejner neobsahuje bezpečný SSH/deploy přístup k obnově certifikátu.
