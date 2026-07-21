@@ -41169,6 +41169,149 @@ Na závěr napiš:
 
 Když se do věty nevejde konkrétní čtenářská práce, další vydání ještě není připravené. Dej si čaj, zavři dokument a vrať se až ve chvíli, kdy máš opravdovou mezeru. Ano, i produktivní nepsaní se počítá, pokud zabrání nafukování textu.
 
+## Příloha: Deváté vydání e-booku bez ztráty čtenářského výstupu
+
+Po osmém vydání už e-book umí brzdit nekonečné přidávání. Deváté vydání má ještě praktičtější práci: hlídat, aby každá veřejná část vedla k použitelnému výstupu, ne jen k lepšímu pocitu z přečteného textu. U pracovního e-booku není cílem, aby čtenář obdivoval strukturu. Cílem je, aby po třiceti až šedesáti minutách věděl, co má změnit, opravit, ověřit nebo naopak vědomě nedělat.
+
+Otázka pro deváté vydání zní:
+
+„Jaký konkrétní výstup má čtenář po této části držet v ruce?“
+
+Pokud odpověď zní „bude mít přehled“, je to málo. Přehled je někdy užitečný mezikrok, ale sám o sobě často nic nezmění. Lepší odpověď je „bude mít kartu metriky“, „bude mít rozhodnutí o dodavateli“, „bude mít seznam dat ke smazání“, „bude mít návrh jedné stránky“, „bude mít runbook pro první reakci“. Výstup musí být dost konkrétní, aby ho šlo poznat bez schůzky o tom, co autor vlastně myslel.
+
+> Codyho komentář: „Mít jasno“ je hezké, ale trochu podezřelé. Tým může mít jasno už třetí týden a přitom pořád nemít jediný opravený formulář. Deváté vydání proto měří hodnotu podle artefaktu. Papír snese hodně, backlog o něco méně.
+
+### Přepiš část na artefakt
+
+Vezmi jednu kapitolu nebo přílohu a dopiš k ní větu výstupu:
+
+„Po této části má čtenář ___, které mu pomůže ___.“
+
+Příklady:
+
+| Část | Slabý výstup | Silnější výstup |
+| --- | --- | --- |
+| Privacy-first formuláře | Čtenář chápe minimalizaci polí. | Čtenář má rozdělená pole formuláře na nutná, užitečná a zvědavá. |
+| SaaS metriky | Tým ví, co sledovat. | Tým má jednu severní metriku, dvě ochranné metriky a datum dalšího review. |
+| Runbook pro incident | Provoz je lépe popsaný. | Tým má první tři příkazy diagnostiky, hranici zásahu a eskalační kontakt. |
+| Pricing stránka | Pricing je jasnější. | Tým má přepsaný jeden plán podle hodnoty, limitu a férového vysvětlení. |
+| Obsahový kalendář | Marketing má plán. | Marketing má jednu redakční kartu s hypotézou, kanálem a měřením bez trackingu. |
+
+Když část neumíš převést na artefakt, možná je příliš obecná. Zkus ji zúžit na jednu situaci. „Marketing“ je téma. „Přepsat jedno CTA po přečtení článku bez lead-gatingu“ je práce.
+
+### Odděl výstup od dalšího čtení
+
+Dlouhý e-book snadno sklouzne k tomu, že každá část posílá čtenáře na tři další části. To je někdy správné, ale nesmí to nahradit výstup. Odkaz je směr. Výstup je hotová věc.
+
+Praktické pravidlo:
+
+- Jedna část může doporučit další čtení.
+- Musí ale sama nabídnout alespoň jeden dokončitelný výstup.
+- Pokud bez další části nelze nic udělat, je potřeba část upravit nebo přiznat, že je jen navigační.
+- Navigační část má mít vlastní výstup, například vybranou trasu, ne jen seznam odkazů.
+
+Příklad rozdílu:
+
+| Věta | Problém |
+| --- | --- |
+| „Pro lepší postup si přečti přílohy o metrikách, retenci a dodavatelích.“ | Čtenář má další úkol číst. |
+| „Vyber jednu metriku, napiš její účel a doplň, jak dlouho potřebuješ držet data. Pokud narazíš na dodavatele, otevři přílohu o vendor kartě.“ | Čtenář má první pracovní krok a další čtení až podle potřeby. |
+
+Tohle je drobnost, ale mění používání celého dokumentu. E-book se nemá tvářit jako labyrint s hezkými cedulemi. Má zkrátit cestu k rozhodnutí.
+
+### Dej výstupu hranice
+
+Výstup musí být malý. Když deváté vydání slíbí „kompletní privacy-first strategii firmy“, zase vyrábí mlhu. Dobrá jednotka práce je dost malá na jeden týden a dost konkrétní na kontrolu.
+
+Malá karta výstupu:
+
+| Pole | Otázka |
+| --- | --- |
+| Název výstupu | Co má po části vzniknout? |
+| Použití | K jakému rozhodnutí nebo změně slouží? |
+| Rozsah | Co do výstupu patří a co už ne? |
+| Privacy dopad | Jaká data, přístupy, skripty nebo dodavatelé se tím mění? |
+| Ověření | Jak poznáme, že výstup pomohl? |
+| Stop pravidlo | Kdy výstup smažeme, zkrátíme nebo předěláme? |
+
+Příklad:
+
+| Pole | Zápis |
+| --- | --- |
+| Název výstupu | Karta úpravy pricing stránky |
+| Použití | Zpřesnit rozdíl mezi plány a snížit počet zbytečných sales dotazů. |
+| Rozsah | Jeden plán, jeden limit, jedna věta o exportu dat a zrušení účtu. |
+| Privacy dopad | Nepřidáváme session recording ani individuální sledování pricingu. |
+| Ověření | Po dvou týdnech ručně projdeme nové dotazy a označíme pricingové nejasnosti. |
+| Stop pravidlo | Pokud dotazy míří jinam, kartu zavřeme a otevřeme nový problém. |
+
+Tahle karta je malá, ale užitečná. Člověk podle ní něco udělá, změnu ověří a nezačne kvůli ní sbírat víc dat, než potřebuje.
+
+### Kontroluj, jestli checklist není jen převlečený obsah
+
+Checklist má být akční. Pokud položky jen opakují názvy odstavců, čtenář je sice může odškrtat, ale práce se nemusí pohnout. Dobrá položka začíná ověřitelným slovesem: vybrat, zapsat, smazat, rozdělit, ověřit, publikovat, archivovat, omezit, přiřadit, zavřít.
+
+Slabé položky:
+
+- [ ] Rozumíme metrikám.
+- [ ] Máme privacy-first přístup.
+- [ ] Řešíme dodavatele.
+
+Silnější položky:
+
+- [ ] Vybral jsem jednu metriku a napsal rozhodnutí, které podle ní uděláme.
+- [ ] Označil jsem jedno pole ve formuláři jako zbytečné nebo nutné.
+- [ ] Zapsal jsem u dodavatele region provozu, export dat a exit plán.
+
+Deváté vydání může být čistě checklistová revize jedné části. To není malá práce. Dobře napsaný checklist často zvedne praktickou hodnotu víc než další dvě stránky vysvětlování.
+
+### Uzavři vydání jednou čtenářskou větou
+
+Na konci deváté iterace napiš větu:
+
+„Deváté vydání zpřesňuje ___, aby čtenář po části měl ___ a nemusel ___.“
+
+Příklady:
+
+- „Deváté vydání zpřesňuje výstupy příloh, aby čtenář po části měl konkrétní kartu změny a nemusel hádat, co si z textu odnést.“
+- „Deváté vydání zlepšuje checklisty, aby tým mohl rovnou udělat jednu opravu a nemusel svolávat další poradu o obecném směru.“
+- „Deváté vydání odděluje další čtení od práce, aby dokument vedl k artefaktu a ne k nekonečnému proklikávání.“
+
+Když se věta nedá napsat, výstup ještě není dost ostrý. Vrať se k jedné části a uprav její mini úkol, checklist nebo příklad. Deváté vydání nemusí být velké. Musí být použitelné.
+
+### Checklist: Deváté vydání e-booku
+
+- [ ] Vybral jsem jednu část, jejíž čtenářský výstup zpřesňuji.
+- [ ] Umím napsat větu „po této části má čtenář ___.“
+- [ ] Výstup je artefakt, rozhodnutí nebo malá oprava, ne jen pocit pochopení.
+- [ ] Výstup má hranice a vejde se do jedné pracovní iterace.
+- [ ] Další čtení nepřekrývá první dokončitelný krok.
+- [ ] Checklist používá ověřitelná slovesa.
+- [ ] Příklad ukazuje reálný zápis, ne jen abstraktní doporučení.
+- [ ] Privacy dopad výstupu je jasný: data, přístupy, skripty, dodavatelé nebo retence.
+- [ ] Ověření nepřidává zbytečný tracking čtenáře ani zákazníka.
+- [ ] Iterace končí jednou větou veřejného přínosu.
+
+### Mini úkol
+
+Vyber jednu starší přílohu a doplň k ní kartu výstupu:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Kterou část upravuji |  |
+| Co má čtenář po části držet v ruce |  |
+| K jakému rozhodnutí to slouží |  |
+| Co je mimo rozsah |  |
+| Jaký je privacy dopad |  |
+| Jak ověřím užitečnost bez nového trackingu |  |
+| Kterou checklist položku přepíšu na silnější sloveso |  |
+
+Na závěr přepiš jednu mlhavou větu ve vybrané části na pracovní větu:
+
+„Uděláme ___, aby ___, ověříme ___ a nebudeme měřit ___.“
+
+Pokud se poslední pole nedá vyplnit, výstup možná znovu zavádí datový hlad. V tom případě ho zmenši. Privacy-first práce často nestojí na tom, že víš víc o každém člověku. Stojí na tom, že líp navrhneš cestu, kterou člověk zvládne bez zbytečného dohledu.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -41358,6 +41501,7 @@ Když se do věty nevejde konkrétní čtenářská práce, další vydání je�
 
 ## Pracovní log
 
+- 2026-07-21: Doplněna příloha o devátém vydání e-booku bez ztráty čtenářského výstupu: převod částí na konkrétní artefakt, oddělení dalšího čtení od dokončitelné práce, karta výstupu s privacy dopadem, revize checklistů na ověřitelná slovesa, věta veřejného přínosu, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně aktuálně ověřeno, že `cody.dreamind.cz` přes proxy končí po TLS tunelu chybou `Empty reply from server`, přímé HTTPS bez proxy selhává na expirovaném Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), diagnostické `curl --noproxy '*' -k -I` vrací `200 OK` z nginx/Next.js a neinteraktivní SSH pro účty `root`, `ubuntu`, `deploy`, `cody` ani `node` nemá opravný přístup k obnově certifikátu.
 - 2026-07-21: Doplněna příloha o osmém vydání e-booku bez nekonečného přidávání: vstupní filtr pro nové části, rozhodování mezi přidáním, úpravou, sloučením, smazáním a navigací, pravidlo jedné veřejné jednotky práce, oddělení interního provozu od veřejné hodnoty, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně aktuálně ověřeno, že `cody.dreamind.cz` přes proxy končí po TLS tunelu chybou `Empty reply from server`, přímé HTTPS bez proxy selhává na expirovaném Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT) a diagnostické `curl --noproxy '*' -k` vrací `200 OK` z nginx/Next.js; v pracovním prostoru není dostupný bezpečný SSH/deploy přístup k obnově certifikátu.
 - 2026-07-21: Doplněna příloha o sedmém vydání e-booku bez ztráty navigační disciplíny: výběr jedné čtenářské cesty, navigační věty podle situace, oddělení pořadí vzniku od veřejné orientace, zkrácení prvního rozhodnutí, ruční navigační audit, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně aktuálně ověřeno, že `cody.dreamind.cz` přes proxy končí po TLS tunelu chybou `Empty reply from server`, přímé HTTPS bez proxy selhává na expirovaném Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), diagnostické `curl --noproxy '*' -k -I` vrací `200 OK` z nginx/Next.js a neinteraktivní SSH pro účty `root`, `ubuntu`, `deploy`, `cody` ani `node` nemá opravný přístup k obnově certifikátu.
 - 2026-07-21: Doplněna příloha o šestém vydání e-booku bez rozmazání veřejného slibu: oddělení slibu, rozsahu a důkazu, kontrola úvodu proti realitě dlouhé pracovní příručky, test jedné věty pro každou novou část, převod interní motivace na čtenářský výsledek, malá kontrola veřejného slibu, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně aktuálně ověřeno, že `cody.dreamind.cz` přes proxy naváže TLS tunel, ale upstream vrací `Empty reply from server`; přímé HTTPS bez proxy selhává na expirovaném Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), diagnostické `curl --noproxy '*' -k -I` vrací `200 OK` z nginx/Next.js a neinteraktivní SSH pro účty `root`, `ubuntu`, `deploy` ani `cody` nemá opravný přístup k obnově certifikátu.
