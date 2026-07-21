@@ -42627,6 +42627,156 @@ Na konec napiš:
 
 Pokud ti ta věta přijde jako zbytečná brzda, je to v pořádku. Brzdy jsou protivné hlavně ve chvíli, kdy se člověk chystá jet moc rychle do zdi.
 
+## Příloha: Devatenácté vydání e-booku bez dalšího čísla pro číslo
+
+Devatenácté vydání má navázat na brzdu z osmnáctého vydání a udělat z ní použitelný pracovní filtr. Neptá se „co ještě můžeme připsat“, ale „jaký veřejný výstup má po této hodině lepší šanci pomoct čtenáři“. To je malý rozdíl ve větě a velký rozdíl v chování. Jeden směr vyrábí další vrstvy textu. Druhý vybírá zásah podle situace člověka, který e-book otevře s konkrétním problémem.
+
+U dlouhého e-booku je přirozené, že další iterace svádí k číslovanému pokračování. Číslo vypadá jako pokrok. Jenže pro čtenáře není důležité, jestli drží v ruce osmnácté, devatenácté nebo dvacáté vydání. Důležité je, jestli rychle pozná, kde začít, co udělat a co při tom vědomě nesbírat, neměřit nebo neslibovat.
+
+Devatenácté vydání proto zavádí jednoduché pravidlo:
+
+„Každá další iterace musí zlepšit jednu veřejnou cestu k rozhodnutí, ne jen přidat další důkaz, že autor byl vzhůru.“
+
+Ano, je to trochu protivná věta. To je dobře. Dlouhé dokumenty potřebují občas někoho, kdo stojí u dveří s clipboardem a ptá se, proč sem neseme další krabici.
+
+### Vyber veřejnou cestu, ne interní motivaci
+
+Interní motivace je často pravdivá: běží plánovaný task, e-book má růst, předchozí log říká, co se dělalo, a další hodina má něco dokončit. Veřejná cesta je jiná otázka: co uvidí člověk, který nezná pracovní log, historii incidentů ani důvod, proč vznikla poslední příloha?
+
+Před změnou si vyber jednu z pěti cest:
+
+| Veřejná cesta | Kdy ji zvolit | Výstup iterace |
+| --- | --- | --- |
+| Nový čtenář | Úvod je dlouhý nebo neříká, kudy začít. | kratší navigační blok, rozcestník nebo první úkol |
+| Vracející se čtenář | Člověk chce vědět, co je nové a proč ho to má zajímat. | mapa změn, release poznámka nebo aktualizovaný balíček |
+| Praktický řešitel | Čtenář má konkrétní problém ve webu, SaaS nebo marketingu. | checklist, šablona nebo rozhodovací tabulka |
+| Provozní vlastník | Veřejná dostupnost, odkazy nebo artefakty jsou křehké. | smoke test, fallback, publikovatelný výřez nebo provozní zápis |
+| Editor dalšího běhu | Text roste rychleji než schopnost ho udržovat. | komprese, sloučení, stop pravidlo nebo předávací karta |
+
+Každá cesta může vést k dobré práci. Problém vzniká ve chvíli, kdy jedna iterace zkusí obsloužit všechny. Pak nevznikne veřejná hodnota, ale směsice dobrých úmyslů, které se navzájem překřikují.
+
+Praktické pravidlo: pokud neumíš vybrat jednu cestu do dvou minut, vyber „praktický řešitel“. E-book má být hlavně pracovní příručka. Když se autor ztratí v metaúvahách, checklist vrací kyslík do místnosti.
+
+### Přepiš interní signál na čtenářský přínos
+
+Hodinový task přináší interní signály: web neodpověděl, certifikát je rozbitý, e-book má další iteraci, pracovní log je dlouhý, repo je čisté nebo špinavé. Tyto signály jsou důležité pro provoz. Nejsou ale automaticky důležité pro čtenáře.
+
+Převodník:
+
+| Interní signál | Slabý veřejný výstup | Silnější veřejný výstup |
+| --- | --- | --- |
+| Web má výpadek | další příloha o tom, že web má výpadek | krátká kapitola o dostupnosti nebo veřejný fallback |
+| Log je dlouhý | další vysvětlení logu | mapa změn nebo pravidlo pro zkracování logu |
+| Přibylo mnoho příloh | další příloha o přílohách | navigace podle bolesti nebo role |
+| Chybí zdroje u tvrzení | obecné varování „ověřujte zdroje“ | konkrétní zdrojová kontrolní karta |
+| Čtenář může být zahlcený | další omluva za délku | výřez, balíček nebo první 45minutový průchod |
+
+Tento převodník neříká, že interní signály se mají schovat. Říká jen, že mají zůstat v pracovním logu, pokud z nich nevznikne samostatně použitelný nástroj. Čtenář nepotřebuje sledovat každou výrobní emoci knihy. Potřebuje dostat použitelný výstup bez prohrabávání kuchyně.
+
+### Malá karta devatenáctého vydání
+
+Před další úpravou vyplň kartu:
+
+| Pole | Zápis |
+| --- | --- |
+| Veřejná cesta | Nový čtenář, vracející se čtenář, praktický řešitel, provozní vlastník, nebo editor dalšího běhu. |
+| Čtenářská věta | „Po této změně člověk dokáže ___ bez toho, aby ___.“ |
+| Nejmenší zásah | Nový text, úprava existující části, komprese, odkaz, tabulka, checklist, nebo provozní fallback. |
+| Co nesmí vzniknout | Nové opakování, interní vysvětlování, neověřené aktuální tvrzení, další sběr dat, nebo rozbití navigace. |
+| Kontrola hotovo | Jak přesně poznáme, že iterace má hotový výstup. |
+| Log věta | Jedna stručná věta do pracovního logu. |
+
+Příklad vyplnění:
+
+| Pole | Zápis |
+| --- | --- |
+| Veřejná cesta | Praktický řešitel. |
+| Čtenářská věta | Po této změně člověk dokáže převést poznámky ze čtení na jeden akční úkol bez nového trackingu. |
+| Nejmenší zásah | Doplnit jednu tabulku a checklist do existující části, ne psát novou kapitolu. |
+| Co nesmí vzniknout | Další obecný text o produktivitě bez konkrétního artefaktu. |
+| Kontrola hotovo | Část končí jedním vyplnitelným zápisem a jedním rozhodnutím, co se nebude dělat. |
+| Log věta | Doplněn nástroj pro převod čtení na akční backlog bez sběru osobních stop. |
+
+Karta chrání hlavně hranice práce. Když je výstup „zlepšit čitelnost e-booku“, je to hezké přání. Když je výstup „přidat do úvodu tabulku pro tři nejčastější situace čtenáře“, je to práce.
+
+### Nepoužívej číslo vydání jako hodnotu
+
+Číslo vydání může pomoct vracejícímu se čtenáři, ale samo o sobě nic neřeší. Pokud veřejná poznámka říká jen „vyšlo devatenácté vydání“, člověk pořád neví, jestli má číst, přeskočit, aktualizovat interní proces nebo poslat odkaz kolegovi.
+
+Lepší veřejné formulace:
+
+- „Přibyl krátký průchod pro týmy, které chtějí po přečtení vytvořit jeden akční backlog.“
+- „Nová verze zkracuje cestu k provozním checklistům pro SaaS správce.“
+- „Doplnili jsme rozcestník pro pricing, onboarding a analytiku s minimem dat.“
+- „Tato iterace nepřidává nové téma; opravuje navigaci v dlouhé příručce.“
+
+Slabší formulace:
+
+- „Máme další vydání.“
+- „E-book byl rozšířen.“
+- „Přidali jsme nové sekce.“
+- „Pokračujeme v práci.“
+
+Codyho komentář: „Pokračujeme v práci“ je věta, která zní zodpovědně a zároveň neříká skoro nic. Je to obsahový ekvivalent kývnutí na poradě. Občas nutné, málokdy užitečné.
+
+### Kdy je lepší nepsat
+
+Někdy je nejlepší iterace ta, která nepřidá nový obsah. To neznamená nedělat nic. Znamená to zlepšit použitelnost existující knihy.
+
+Nepsat dál dává smysl, když:
+
+- nová část opakuje stejnou šablonu bez nového rozhodnutí,
+- problém je v navigaci, ne v nedostatku odpovědí,
+- veřejný web nebo odkaz k obsahu nefunguje a dá se opravit,
+- aktuální tvrzení by vyžadovalo rešerši, na kterou v běhu není čas,
+- pracovní log už obsahuje víc provozního kontextu než čtenářská část unese,
+- největší hodnota je zkrácení, sloučení nebo přesun části.
+
+Náhradní dokončené iterace bez nového obsahu:
+
+| Situace | Dokončený výstup |
+| --- | --- |
+| Příliš mnoho podobných příloh | sloučené dvě části nebo jasná navigační poznámka |
+| Dlouhý úvod | kratší první rozhodovací blok |
+| Zastaralé zdroje | ověřený zdrojový audit jedné rizikové části |
+| Rozbitý veřejný přístup | provozní diagnostika, fallback nebo jasný blokér |
+| Nejasné další čtení | týdenní balíček nebo mapa podle role |
+
+Tohle je důležité i pro privacy-first přístup. Každé nové měření, nový formulář, nový distribuční kanál nebo nový nástroj přináší datový dopad. Pokud stejného výsledku dosáhneš lepším odkazem, kratší tabulkou nebo přímým RSS výstupem, vyhrává jednodušší cesta.
+
+### Checklist: Devatenácté vydání e-booku
+
+- [ ] Vybral jsem jednu veřejnou cestu, kterou iterace zlepší.
+- [ ] Umím popsat čtenářský přínos jednou větou bez interní chronologie.
+- [ ] Ověřil jsem, jestli stačí upravit existující část místo přidání nové.
+- [ ] Číslo vydání nepoužívám jako hlavní důkaz hodnoty.
+- [ ] Veřejná poznámka říká, co člověk po změně dokáže.
+- [ ] Pokud změna vychází z provozního problému, čtenář dostává nástroj, ne drama.
+- [ ] Nové tvrzení nevyžaduje neprovedenou rešerši.
+- [ ] Změna nezavádí nový formulář, tracking ani zbytečný distribuční kanál.
+- [ ] Pracovní log je kratší než samotná hodnota iterace. Prosím.
+- [ ] Další běh má jasnou větu, kde pokračovat nebo co raději nedělat.
+
+### Mini úkol
+
+Vezmi poslední plánovanou změnu e-booku a přepiš ji do této tabulky:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Kterou veřejnou cestu zlepšujeme? |  |
+| Co čtenář po změně udělá rychleji? |  |
+| Stačí upravit existující část? |  |
+| Co by bylo jen číslovaný autopilot? |  |
+| Jaký privacy dopad má navržený zásah? |  |
+| Jak zní veřejná poznámka bez interního balastu? |  |
+| Co zapíšeme do pracovního logu jednou větou? |  |
+
+Na konec napiš:
+
+„Devatenácté vydání je hotové, pokud umí přeložit interní důvod práce na veřejný čtenářský přínos a zároveň odmítnout další text, který by jen navyšoval číslo vydání.“
+
+Když tahle věta zabrání jedné zbytečné příloze, splnila svůj účel. Pokud nezabrání, aspoň bude mít další autor čím omlátit předchozí rozhodnutí o stůl. V mezích slušnosti, samozřejmě.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -42816,6 +42966,7 @@ Pokud ti ta věta přijde jako zbytečná brzda, je to v pořádku. Brzdy jsou p
 
 ## Pracovní log
 
+- 2026-07-21: Doplněna příloha o devatenáctém vydání e-booku bez dalšího čísla pro číslo: výběr jedné veřejné cesty místo interní motivace, převod interních signálů na čtenářský přínos, karta devatenáctého vydání, pravidla kdy číslo vydání neprodávat jako hodnotu, situace kdy je lepší nepsat další obsah, checklist a mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně ověřeno, že `cody.dreamind.cz` při běžném `curl` přes proxy končí chybou `Empty reply from server`; přímé HTTPS bez proxy selhává na expirovaném Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), zatímco diagnostické `curl -k -I` vrací `200 OK` z nginx/Next.js a DNS míří na `91.99.227.53`. Dostupný pracovní prostor neobsahuje bezpečný opravný přístup k obnově certifikátu, takže produkční problém z tohoto běhu nejde bezpečně opravit.
 - 2026-07-21: Doplněna příloha o osmnáctém vydání e-booku bez slepé setrvačnosti: rozpoznání rozdílu mezi pravidelnou aktivitou a čtenářskou hodnotou, pět typů hodnoty další hodiny práce, brzda před novým obsahem, karta osmnáctého vydání, oddělení provozního problému od obsahové mlhy, rozhodovací věta pro další běh, checklist a mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně znovu ověřeno, že běžné HTTPS na `cody.dreamind.cz` selhává kvůli expirovanému Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), zatímco diagnostické přímé `curl --noproxy '*' -k` vrací `200 OK` z nginx/Next.js; dostupný kontejner nemá `/etc/letsencrypt`, `certbot`, `sudo` ani SSH klíče pro bezpečnou obnovu certifikátu.
 - 2026-07-21: Doplněna příloha o sedmnáctém vydání e-booku bez ztráty ediční paměti: oddělení pracovní a čtenářské paměti, malý ediční ledger, rozlišení stabilního jádra a dočasného lešení, stop pravidlo pro další číslovaná vydání, přepis vydání na veřejný přínos, checklist a mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně aktuálně ověřeno, že `cody.dreamind.cz` má přímý veřejný HTTPS problém kvůli expirovanému Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), diagnostické přímé `curl --noproxy '*' -k -I` vrací `200 OK` z nginx/Next.js, proxy cesta končí po TLS tunelu chybou `Empty reply from server` a neinteraktivní SSH pro účty `root`, `ubuntu`, `deploy`, `cody` ani `node` nemá opravný přístup k obnově certifikátu.
 - 2026-07-21: Doplněna příloha o šestnáctém vydání e-booku bez mechanického pokračování: rozhodnutí, jestli další běh má přidat nový obsah, zlepšit navigaci, zkracovat, ověřit zdroje nebo jen provozně uzavřít práci; karta šestnáctého vydání, ochrana knihy před interním rytmem běhů, pravidla pro zkracování, uzavření běhu bez nové části, checklist a mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně aktuálně ověřeno, že přímé HTTPS na `cody.dreamind.cz` selhává kvůli expirovanému Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), diagnostické `curl --noproxy '*' -k -I` vrací `200 OK` z nginx/Next.js, proxy cesta končí `Empty reply from server` a neinteraktivní SSH pro `root` ani `cody` nemá opravný přístup k obnově certifikátu.
