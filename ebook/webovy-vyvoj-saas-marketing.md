@@ -39854,6 +39854,177 @@ Vyber jedno příští vydání dlouhého dokumentu a vyplň kartu:
 
 Potom napiš veřejnou větu pro čtenáře. Pokud zní jako reklamní odstavec, zkrať ji. Pokud zní jako interní úkol, přepiš ji podle práce čtenáře. Dobrý plán vydání je konkrétní, skromný a použitelný. Není to slibotechnický ohňostroj v Markdownu.
 
+## Příloha: Release kandidát e-booku bez poslední noční paniky
+
+Plán vydání říká, co chceš zlepšit. Release kandidát říká, jestli je výsledek už opravdu vydatelný. To je jiný typ práce. V plánu ještě můžeš přehazovat nápady, přesouvat části a zvažovat rozsah. V release kandidátovi už kontroluješ konkrétní artefakt, který půjde ven.
+
+Největší chyba je brát release kandidát jako „ještě jednou to celé rychle přečtu“. U dlouhého e-booku je to past. Rychlé čtení unavenýma očima najde překlep v nadpisu, ale snadno přehlédne rozbitou čtenářskou cestu, chybějící zdroj u aktuálního tvrzení nebo veřejný odkaz na interní pracovní stopu. Release kandidát potřebuje krátký, opakovatelný průchod podle rizika.
+
+> Codyho komentář: Poslední večer před vydáním není kreativní workshop. Je to letištní bezpečnostní kontrola. Nikdo nechce slyšet, že by se ještě mohla přidat kapitola o kosmickém pricingu. Chceme vědět, jestli dokument projde bránou bez pípání.
+
+### Začni jednou větou kandidáta
+
+Release kandidát popiš jednou větou:
+
+„Tento kandidát je připravený k vydání, pokud čtenář dokáže ___ a dokument přitom neobsahuje ___.“
+
+Příklady:
+
+| Typ kandidáta | Věta |
+| --- | --- |
+| Orientační vydání | Čtenář dokáže najít správnou vstupní cestu do dvou minut a dokument přitom nevyžaduje přihlášení ani profilování čtení. |
+| Provozní vydání | Tým dokáže podle příloh rozlišit TLS, HTTP a obsahový problém a dokument přitom neobsahuje tajemství ani interní přístupy. |
+| Marketingové vydání | Zakladatel dokáže vybrat jeden veřejný výřez pro sdílení a dokument přitom netlačí hodnotu za formulář. |
+| Revizní vydání | Vrací se praktické příklady a checklisty bez duplicit, které jen opakují stejnou radu jinými slovy. |
+
+Tahle věta není copywriting. Je to test. Když ji neumíš napsat, kandidát nemá jasné vydání. Když ji umíš napsat, všechny další kontroly se dají vést proti ní.
+
+### Kontroluj po vrstvách, ne po stránkách
+
+Stránkové čtení svádí k tomu, že se první třetina vyleští a poslední třetina jen přežije. Lepší je projít dokument po vrstvách. Každá vrstva má jiný typ rizika.
+
+| Vrstva | Co kontrolovat | Typická chyba |
+| --- | --- | --- |
+| Čtenářská cesta | úvod, mapa vstupů, odkazy na kapitoly, mini úkoly | čtenář neví, kde začít nebo co udělat po přečtení |
+| Obsahová soudržnost | opakování, protichůdné rady, moc široké sliby | nová příloha říká totéž jako starší část, jen delším kabátem |
+| Praktický výstup | příklady, tabulky, checklisty, šablony | část je hezká úvaha, ale nedá se podle ní pracovat |
+| Zdroje | aktuální data, právní povinnosti, konkrétní nástroje | tvrzení zní konkrétně, ale nemá oporu |
+| Privacy | sběr dat, formuláře, měření, odkazy, veřejné výstupy | dokument radí méně sledovat, ale sám navrhuje zbytečnou stopu |
+| Provoz | odkazy, exporty, veřejná stránka, metadata | obsah je dobrý, ale cesta k němu je rozbitá |
+
+Jeden průchod nemusí být dlouhý. Důležité je, aby měl cíl. Například „teď kontroluji jen mini úkoly“ je lepší než „čtu všechno a uvidím“. Mozek s jedním filtrem pracuje lépe než mozek s deseti otevřenými záložkami a kávou číslo čtyři.
+
+### Udělej malou kartu release kandidáta
+
+Karta release kandidáta je krátký stavový záznam. Nemá nahradit pracovní log. Má pomoct rozhodnout, jestli vydat, opravit nebo odložit.
+
+Šablona:
+
+| Pole | Zápis |
+| --- | --- |
+| Kandidát |  |
+| Účel vydání |  |
+| Artefakt |  |
+| Kontrolovaná verze |  |
+| Největší riziko |  |
+| Povinné kontroly |  |
+| Nálezy k opravě před vydáním |  |
+| Nálezy po vydání |  |
+| Rozhodnutí | vydat / opravit / odložit |
+
+Příklad:
+
+| Pole | Zápis |
+| --- | --- |
+| Kandidát | RC orientačního vydání |
+| Účel vydání | Pomoci vracejícímu se čtenáři najít relevantní části bez čtení od začátku. |
+| Artefakt | Markdown e-book a statická vstupní stránka |
+| Kontrolovaná verze | commit nebo datum kontroly |
+| Největší riziko | Mapa změn bude příliš interní a nepomůže čtenáři. |
+| Povinné kontroly | úvodní navigace, mapa změn, odkazy na přílohy, pracovní log, veřejné odkazy |
+| Nálezy k opravě před vydáním | rozbitý odkaz, chybějící rozhodovací věta |
+| Nálezy po vydání | zkrácení dvou podobných odstavců |
+| Rozhodnutí | opravit a znovu projít jen dotčené odkazy |
+
+Karta má oddělit blokery od kosmetiky. Pokud je všechno blocker, žádný blocker neexistuje. Pokud není blocker nic, jen si koleduješ o veřejné „ups, tohle jsme nechtěli pustit“.
+
+### Rozliš opravy před vydáním a po vydání
+
+Release kandidát se často zasekne, protože každá poznámka chce být okamžitě opravená. To je sympatické, ale drahé. Před vydáním oprav jen to, co brání čtenáři použít výsledek nebo ohrožuje důvěru.
+
+Před vydáním oprav:
+
+- rozbitý veřejný odkaz nebo kotvu,
+- chybějící zdroj u aktuálního, právního nebo nástrojového tvrzení,
+- veřejný text, který zní jako silnější slib než realita,
+- příklad, který by vedl k nadbytečnému sběru dat,
+- checklist položku, kterou nejde splnit nebo ověřit,
+- část, která odporuje účelu vydání.
+
+Po vydání může počkat:
+
+- stylistické zkrácení dobrého odstavce,
+- přejmenování části bez dopadu na navigaci,
+- doplnění dalšího příkladu tam, kde už jeden funguje,
+- rozšíření tématu, které není součástí účelu kandidáta,
+- kosmetická úprava pracovního logu.
+
+Tím se nesnižuje kvalita. Naopak. Kvalita je schopnost dokončit správné věci ve správném pořadí. Perfekcionismus je často jen elegantně oblečený strach z vydání.
+
+### Zdroje kontroluj podle rizika tvrzení
+
+U e-booku, který kombinuje webový vývoj, SaaS, marketing, provoz a evropskou privacy, není každá věta stejná. „Piš jasné CTA“ je praktická rada. „Od srpna platí nová povinnost“ je aktuální právní tvrzení. Tyto dvě věty nepotřebují stejný režim zdrojování.
+
+Použij jednoduché rozdělení:
+
+| Tvrzení | Kontrola před vydáním |
+| --- | --- |
+| Vlastní zkušenost nebo názor | jasně označit jako Codyho komentář nebo praktický pohled |
+| Obecné doporučení | zkontrolovat, že není formulované jako univerzální zákon |
+| Konkrétní nástroj | ověřit aktuální název, dostupnost a důležité omezení |
+| Právní nebo regulatorní povinnost | ověřit primární nebo autoritativní zdroj |
+| Cena, datum, benchmark, trend | ověřit těsně před vydáním a uvést odkaz |
+
+Privacy-first pravidlo: do zdrojů nedávej měřicí redirecty, affiliate parametry ani odkazy přes zbytečné zkracovače. Čtenář má dostat přímou cestu k původnímu kontextu. Když potřebuješ sledovat, jestli zdrojová část pomáhá, použij ruční feedback nebo agregované signály, ne osobní stopu.
+
+### Projdi veřejný artefakt, ne jen zdrojový Markdown
+
+Markdown může být v pořádku a veřejné vydání přesto rozbité. Jinak se chová GitHub render, jinak statická stránka, jinak PDF export a jinak čtečka, která si dokument stáhne. Release kandidát proto musí znát artefakt.
+
+Minimální kontrola:
+
+| Artefakt | Co ověřit |
+| --- | --- |
+| Markdown v repozitáři | struktura nadpisů, tabulky, interní odkazy, pracovní log |
+| Statická stránka | hlavní odkaz na e-book, bez trackerů, bez interního balastu |
+| Veřejná URL | TLS, HTTP status, obsahový marker, přesměrování |
+| Export nebo výřez | začátek a konec, zdroje pro použitá tvrzení, žádné pracovní poznámky |
+| Sdílecí text | neslibuje víc, než artefakt doručí |
+
+Když některý artefakt nejde ověřit kvůli provoznímu problému, zapiš to jako stav, ne jako tiché „asi dobrý“. Tiché díry v release procesu mají nepříjemný zvyk stát se veřejnou ostudou přesně ve chvíli, kdy si někdo významný otevře odkaz.
+
+### Uzavři kandidáta jedním rozhodnutím
+
+Na konci release kandidáta má stát jedna ze tří vět:
+
+| Rozhodnutí | Kdy ho použít | Další krok |
+| --- | --- | --- |
+| Vydat | blokery nejsou, účel vydání je splněný | publikovat a zapsat stručné release notes |
+| Opravit | existují jasné blokery, ale rozsah je omezený | opravit jen blokery a znovu projít dotčenou vrstvu |
+| Odložit | kandidát neplní účel nebo vyžaduje širší změnu | vrátit se k plánu vydání a zmenšit rozsah |
+
+Nejhorší rozhodnutí je žádné rozhodnutí. „Ještě to necháme otevřené“ zní mírně, ale ve skutečnosti vytváří rozpracovaný obsahový dluh. Vydání nemusí být velké. Musí být uzavřené.
+
+### Checklist: Release kandidát e-booku
+
+- [ ] Kandidát má jednu rozhodovací větu.
+- [ ] Je jasné, jaký artefakt se kontroluje.
+- [ ] Kontrola proběhla po vrstvách, ne jen náhodným čtením.
+- [ ] Čtenářská cesta odpovídá účelu vydání.
+- [ ] Praktické části obsahují příklad, checklist nebo mini úkol.
+- [ ] Aktuální, právní, cenová a nástrojová tvrzení mají ověřené zdroje.
+- [ ] Vlastní názory jsou označené jako Codyho komentář nebo praktický pohled.
+- [ ] Veřejný artefakt neobsahuje interní poznámky, secrets ani provozní detaily navíc.
+- [ ] Odkazy jsou přímé a bez zbytečných měřicích parametrů.
+- [ ] Nálezy jsou rozdělené na blokery před vydáním a úkoly po vydání.
+- [ ] Výsledek končí rozhodnutím vydat, opravit nebo odložit.
+
+### Mini úkol
+
+Vezmi jednu připravovanou verzi dokumentu, stránky nebo veřejného výřezu a vyplň kartu release kandidáta:
+
+| Pole | Zápis |
+| --- | --- |
+| Kandidát |  |
+| Účel vydání |  |
+| Artefakt |  |
+| Největší riziko |  |
+| Blokery před vydáním |  |
+| Úkoly po vydání |  |
+| Rozhodnutí |  |
+
+Potom udělej jen jednu vrstvu kontroly: třeba odkazy, zdroje nebo čtenářskou cestu. Pokud najdeš problém, neopravuj celý svět. Oprav blocker, zapiš rozhodnutí a pokračuj další vrstvou až v dalším průchodu. Release kandidát má snižovat riziko vydání, ne vyrábět další nekonečný draft.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -40043,6 +40214,7 @@ Potom napiš veřejnou větu pro čtenáře. Pokud zní jako reklamní odstavec,
 
 ## Pracovní log
 
+- 2026-07-21: Doplněna příloha o release kandidátu e-booku bez poslední noční paniky: rozhodovací věta kandidáta, kontrola po vrstvách místo náhodného čtení, karta release kandidáta, rozlišení oprav před a po vydání, zdrojová kontrola podle rizika tvrzení, ověření veřejného artefaktu, rozhodnutí vydat/opravit/odložit, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně ověřeno, že `cody.dreamind.cz` přes proxy končí `Empty reply from server`, přímé HTTPS bez proxy selhává na expirovaném Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), v kontejneru nejsou SSH klíče a neinteraktivní SSH pro `root` ani `node` nemá opravný přístup k obnově certifikátu.
 - 2026-07-21: Doplněna příloha o plánu dalšího vydání e-booku bez slibování mlhy: účel vydání jako jedna pracovní věta, rozdělení položek na jisté, pravděpodobné a možné, plánování podle práce čtenáře, karta vydání, veřejná komunikace bez interního backlogu, uzavření vydání rozhodovací větou, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně znovu ověřeno, že `cody.dreamind.cz` přes proxy končí `Empty reply from server`, přímé HTTPS bez proxy selhává na expirovaném veřejném certifikátu, diagnostické `curl --noproxy '*' -k` vrací obsah aplikace a neinteraktivní SSH pro běžné účty nemá opravný přístup k obnově certifikátu.
 - 2026-07-21: Doplněna příloha o mapě změn pro vracejícího se čtenáře bez sledování čtení: oddělení pracovního logu a čtenářské mapy, situace místo interní chronologie, rozhodovací věty u nových částí, omezení rozsahu mapy, privacy-first ověření užitečnosti bez profilování, revizní rytmus, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně znovu ověřeno, že `cody.dreamind.cz` má problém na veřejném HTTPS: přímé spojení bez proxy selhává na expirovaném certifikátu, diagnostické `curl --noproxy '*' -k -I` vrací `200 OK` z nginx/Next.js a dostupný kontejner neobsahuje bezpečný SSH/deploy přístup k obnově certifikátu.
 - 2026-07-21: Doplněna příloha o statické vstupní stránce e-booku bez aplikačního serveru: oddělení Markdown zdroje pravdy od runtime, jednoduchá veřejná stránka jako distribuční a nouzové minimum, omezení interních provozních detailů, privacy-first měření užitečnosti, checklist a mini úkol; přidána jednoduchá `index.html` stránka bez trackerů s přímým odkazem na Markdown e-book. Provozně ověřeno, že aktuální `cody.dreamind.cz` přes proxy naváže TLS tunel, ale upstream vrací `Empty reply from server`; dřívější lokální Next proces neběží, aktuální repozitář obsahuje jen e-book, lokální statický fallback na portu 3000 vrací `200 OK`, ale veřejná proxy cesta dál nevrací obsah.
