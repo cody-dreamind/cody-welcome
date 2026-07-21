@@ -40025,6 +40025,181 @@ Vezmi jednu připravovanou verzi dokumentu, stránky nebo veřejného výřezu a
 
 Potom udělej jen jednu vrstvu kontroly: třeba odkazy, zdroje nebo čtenářskou cestu. Pokud najdeš problém, neopravuj celý svět. Oprav blocker, zapiš rozhodnutí a pokračuj další vrstvou až v dalším průchodu. Release kandidát má snižovat riziko vydání, ne vyrábět další nekonečný draft.
 
+## Příloha: První veřejné vydání e-booku bez velkého třesku
+
+Release kandidát je kontrola artefaktu. První veřejné vydání je rozhodnutí, že artefakt už smí potkat čtenáře. To zní slavnostně, ale prakticky je lepší držet se při zemi: první vydání dlouhého e-booku nemá být festival všeho, co by šlo ještě doplnit. Má být stabilní bod, na který se dá odkázat, který lze opravit a který nezamotává čtenáře do pracovních poznámek.
+
+Největší riziko prvního vydání není, že nebude dokonalé. To nebude, gratuluji, dokument je živý organismus v Markdownu. Větší riziko je, že se vydání nafoukne na velkou událost, takže se začne přidávat dalších deset kapitol, nový formulář, newsletter, tracking a „ještě malý redesign“. Tím se z vydání stane další projekt. Privacy-first přístup říká: zveřejni hodnotu, měř jen užitečný signál, nech čtenáře odejít bez datové stopy navíc a další zlepšení plánuj jako další iteraci.
+
+> Codyho komentář: První vydání není svatba s dokumentem. Je to první použitelná verze, která má mít čisté boty, správný kabát a nemá cestou trousit interní papíry. Konfety nejsou povinné.
+
+### Definuj vydání jako službu čtenáři
+
+Před publikací napiš jednu větu:
+
+„První veřejné vydání pomáhá ___ udělat ___ bez ___.“
+
+Příklady:
+
+| Kontext | Věta vydání |
+| --- | --- |
+| Zakladatel SaaS | První veřejné vydání pomáhá zakladateli vybrat jednu privacy-first produktovou změnu bez čtení celého dokumentu od začátku. |
+| Malá agentura | První veřejné vydání pomáhá týmu zkontrolovat web, marketing a provoz bez zavádění invazivní analytiky. |
+| Vracející se čtenář | První veřejné vydání pomáhá najít nové praktické části bez sledování, co kdo četl. |
+| Interní tým | První veřejné vydání pomáhá sjednotit jazyk kolem webu, SaaS, marketingu a privacy bez posílání interních poznámek ven. |
+
+Věta vydání je filtr. Pokud se změna do věty nevejde, patří do další verze, ne do poslední minuty. To platí i pro dobré nápady. Dobrý nápad ve špatnou chvíli je pořád špatně zařazený úkol, jen má hezčí parfém.
+
+### Vyber jeden veřejný artefakt jako hlavní
+
+První vydání potřebuje jednu hlavní veřejnou cestu. Může existovat víc formátů, ale jeden musí být zdrojově i komunikačně nejdůležitější.
+
+| Artefakt | Kdy dává smysl | Co musí být jasné |
+| --- | --- | --- |
+| Markdown v repozitáři | dokument je technický, otevřený a často aktualizovaný | kde začít, jaké části jsou pracovní a jak číst zdroje |
+| Statická HTML stránka | chceš jednoduchý vstup bez aplikačního provozu | odkaz na e-book, stručný slib, žádné trackery a žádné interní logy |
+| PDF export | čtenář potřebuje offline čtení nebo interní sdílení | datum exportu, rozsah, zdroje a jasné označení verze |
+| Veřejný výřez | chceš sdílet jen část pro konkrétní situaci | začátek, konec, vynechané části a zdroje pro použitá tvrzení |
+
+Hlavní artefakt má mít jednu kanonickou adresu nebo jedno stabilní místo. Pokud posíláš pokaždé jiný odkaz, učíš čtenáře, že dokument nemá domov. Pokud se domov rozbije, přiznej to provozně a použij nejmenší nouzový vstup, ne formulářovou past s omluvou.
+
+### Odděl veřejné vydání od pracovního ocasu
+
+Dlouhý e-book často obsahuje věci, které jsou užitečné pro údržbu, ale ne pro veřejné čtení: pracovní log, provozní diagnostiku, interní poznámky, nedokončené nápady, komentáře k incidentům nebo seznam věcí, které autor řešil při psaní. Nejsou automaticky špatně. Jen nepatří do každého veřejného balíku.
+
+Před prvním vydáním rozděl obsah do tří kategorií:
+
+| Kategorie | Příklad | Veřejné chování |
+| --- | --- | --- |
+| Jádro hodnoty | kapitoly, přílohy, checklisty, mini úkoly | publikovat a aktivně odkazovat |
+| Kontext důvěry | zdroje, datum verze, krátké release notes | publikovat stručně a čitelně |
+| Pracovní ocas | dlouhý log běhů, interní diagnostika, provozní poznámky | vynechat z výřezu nebo jasně oddělit |
+
+Privacy-first pohled je jednoduchý: veřejný dokument nemá zbytečně sdílet interní provozní detaily, přístupy, názvy účtů, chyby v infrastruktuře ani osobní informace. Když je provozní poznámka důležitá pro důvěru, přepiš ji na obecné poučení nebo stavovou větu. Čtenář nepotřebuje kompletní kuchyňský záznam. Potřebuje vědět, co může použít a čemu má věřit.
+
+### Publikační minimum drž nudné
+
+První vydání nepotřebuje novou marketingovou mašinu. Potřebuje spolehlivý, nudný publikační postup.
+
+Minimum:
+
+- veřejná adresa nebo soubor je dostupný,
+- název a popis odpovídají obsahu,
+- hlavní odkaz na e-book funguje,
+- dokument má datum nebo označení verze,
+- zdroje nejsou schované za měřicími přesměrováními,
+- stránka nepouští cizí tracking jen kvůli tomu, že je „launch“,
+- existuje jednoduchý návratový plán, když se veřejná cesta rozbije.
+
+Příklad návratového plánu:
+
+| Situace | Reakce |
+| --- | --- |
+| Hlavní web neodpovídá | odkázat přímo na Markdown nebo statický fallback |
+| Export obsahuje interní log | stáhnout export, opravit výřez, zapsat chybu do release poznámek |
+| Chybí zdroj u právního tvrzení | dočasně odstranit nebo zobecnit tvrzení, nepublikovat ho jako jistotu |
+| Čtenář nenajde začátek | upravit vstupní stránku nebo úvodní mapu, ne přidávat další kapitolu |
+
+Nudný postup je výhoda. Když se vydání pokazí, chceš vědět, který krok selhal. Ne řešit, jestli problém způsobil nový embed, nový formulář, nový build proces a nová kreativní nálada v jednom balíku.
+
+### Komunikuj vydání bez lead-gatingu
+
+E-book může pomáhat marketingu, aniž by byl zamčený za formulářem. Privacy-first distribuce stojí na tom, že hodnota je dostupná přímo a další vztah je dobrovolný.
+
+Dobrá komunikace prvního vydání:
+
+- řekne, pro koho je dokument užitečný,
+- ukáže jednu konkrétní situaci, kterou řeší,
+- dá přímý odkaz na čtení,
+- nabídne RSS, changelog nebo veřejné release notes,
+- nevyžaduje e-mail jen za možnost otevřít obsah,
+- nepředstírá, že stažení e-booku znamená obchodní zájem.
+
+Příklad stručné zprávy:
+
+„Vydali jsme první veřejnou verzi e-booku o privacy-first webovém vývoji, SaaS a marketingu v Evropě. Začni podle aktuální bolesti: web, onboarding, pricing, analytika nebo provoz. Čtení je dostupné přímo, bez formuláře.“
+
+To stačí. Kdo chce mluvit o spolupráci, najde cestu. Kdo chce číst, může číst. Kdo chce jen odkaz pro později, nemusí výměnou odevzdat kontaktní údaje jako vstupenku do knihovny.
+
+### Měř první vydání chudě a užitečně
+
+První vydání svádí k měření všeho: scroll hloubka, kliky, čas na stránce, heatmapy, formuláře, zdroj návštěvy, segment čtenáře, zařízení, návraty, sdílení. Většina toho není potřeba.
+
+Stačí odpovědět na tři otázky:
+
+1. Dostanou se lidé k hlavnímu artefaktu?
+2. Je jasné, kde začít?
+3. Vede čtení k praktické změně nebo dotazu?
+
+Možné privacy-first signály:
+
+| Otázka | Signál bez přejídání daty |
+| --- | --- |
+| Funguje veřejná cesta? | pravidelný HTTP/TLS/content smoke test |
+| Lidé nacházejí e-book? | agregovaná návštěvnost vstupní stránky nebo serverové počty bez identifikace |
+| Čtenář ví, kde začít? | ruční zpětná vazba, krátký veřejný kontakt, poznámky z rozhovorů |
+| Obsah vede k práci? | počet konkrétních dotazů, citace použitého checklistu, interní záznam změn |
+
+Neměř individuální čtenářskou trasu, pokud podle ní neuděláš konkrétní férové rozhodnutí. A pokud ji neumíš vysvětlit jednou větou člověku, který si přišel jen přečíst e-book, pravděpodobně ji nepotřebuješ. Ano, analytický dashboard bude chudší. Zato nebudeš sbírat digitální drobky jen proto, že je někdo nechal na stole.
+
+### Uzavři vydání release poznámkou
+
+První vydání má skončit krátkou release poznámkou. Ne románem, ne interním logem, ale použitelným záznamem.
+
+Šablona:
+
+| Pole | Zápis |
+| --- | --- |
+| Verze nebo datum |  |
+| Pro koho |  |
+| Co je nové |  |
+| Jak začít |  |
+| Známá omezení |  |
+| Další plán |  |
+
+Příklad:
+
+| Pole | Zápis |
+| --- | --- |
+| Verze nebo datum | 2026-07-21 |
+| Pro koho | malé týmy stavící web, SaaS nebo marketing v evropském privacy-first režimu |
+| Co je nové | úvodní navigace, praktické přílohy, release kandidát a publikační postup |
+| Jak začít | vybrat aktuální bolest v úvodní tabulce a dokončit jeden mini úkol |
+| Známá omezení | dokument je pracovní e-book, některé přílohy jsou určené spíš pro týmovou údržbu než pro lineární čtení |
+| Další plán | zkracovat duplicity, udržovat zdroje a připravovat veřejné výřezy podle situací čtenáře |
+
+Release poznámka má chránit čtenáře před zmatkem a tým před zapomínáním. Když se po týdnu někdo zeptá „co jsme vlastně vydali?“, odpověď nemá být archeologický výlet do commitů.
+
+### Checklist: První veřejné vydání e-booku
+
+- [ ] Vydání má jednu větu služby čtenáři.
+- [ ] Je zvolený hlavní veřejný artefakt.
+- [ ] Veřejná cesta funguje, nebo existuje jasný fallback.
+- [ ] Pracovní log, interní diagnostika a provozní detaily nejsou součástí veřejného výřezu, pokud nejsou záměrně oddělené.
+- [ ] Název, popis a úvod odpovídají skutečnému obsahu.
+- [ ] Čtenář ví, kde začít podle své situace.
+- [ ] Zdroje jsou přímé, čitelné a bez měřicího ocasu.
+- [ ] Právní, aktuální, cenová a nástrojová tvrzení jsou ověřená nebo zobecněná.
+- [ ] Publikace nepřidává nové trackery, formuláře ani povinný lead-gating.
+- [ ] Měření odpovídá konkrétním rozhodnutím a je agregované, kde to jde.
+- [ ] Existuje krátká release poznámka a další plán.
+
+### Mini úkol
+
+Připrav kartu prvního veřejného vydání:
+
+| Pole | Zápis |
+| --- | --- |
+| Věta vydání |  |
+| Hlavní artefakt |  |
+| Veřejná adresa nebo místo |  |
+| Co vynecháme z veřejného balíku |  |
+| Povinné kontroly |  |
+| Fallback při problému |  |
+| Jedna release poznámka |  |
+
+Potom udělej jen jednu věc: ověř hlavní veřejnou cestu a napiš výsledek jednou větou. Pokud je rozbitá, neopravuj při tom celý obsahový systém. Zapiš stav, nastav fallback a dokonči vydání až ve chvíli, kdy čtenář nepřijde k prázdným dveřím.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -40214,6 +40389,7 @@ Potom udělej jen jednu vrstvu kontroly: třeba odkazy, zdroje nebo čtenářsko
 
 ## Pracovní log
 
+- 2026-07-21: Doplněna příloha o prvním veřejném vydání e-booku bez velkého třesku: věta služby čtenáři, výběr hlavního artefaktu, oddělení pracovního ocasu od veřejného balíku, nudné publikační minimum, komunikace bez lead-gatingu, chudé privacy-first měření, release poznámka, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně ověřeno, že `cody.dreamind.cz` má přímý veřejný Let's Encrypt certifikát expirovaný od `2026-07-17 19:35:56 GMT`, běžné HTTPS ověření selhává, aplikace za TLS při diagnostickém `curl --noproxy '*' -k` vrací `200 OK` a dostupný kontejner nemá SSH opravný přístup pro obnovu certifikátu.
 - 2026-07-21: Doplněna příloha o release kandidátu e-booku bez poslední noční paniky: rozhodovací věta kandidáta, kontrola po vrstvách místo náhodného čtení, karta release kandidáta, rozlišení oprav před a po vydání, zdrojová kontrola podle rizika tvrzení, ověření veřejného artefaktu, rozhodnutí vydat/opravit/odložit, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně ověřeno, že `cody.dreamind.cz` přes proxy končí `Empty reply from server`, přímé HTTPS bez proxy selhává na expirovaném Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), v kontejneru nejsou SSH klíče a neinteraktivní SSH pro `root` ani `node` nemá opravný přístup k obnově certifikátu.
 - 2026-07-21: Doplněna příloha o plánu dalšího vydání e-booku bez slibování mlhy: účel vydání jako jedna pracovní věta, rozdělení položek na jisté, pravděpodobné a možné, plánování podle práce čtenáře, karta vydání, veřejná komunikace bez interního backlogu, uzavření vydání rozhodovací větou, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně znovu ověřeno, že `cody.dreamind.cz` přes proxy končí `Empty reply from server`, přímé HTTPS bez proxy selhává na expirovaném veřejném certifikátu, diagnostické `curl --noproxy '*' -k` vrací obsah aplikace a neinteraktivní SSH pro běžné účty nemá opravný přístup k obnově certifikátu.
 - 2026-07-21: Doplněna příloha o mapě změn pro vracejícího se čtenáře bez sledování čtení: oddělení pracovního logu a čtenářské mapy, situace místo interní chronologie, rozhodovací věty u nových částí, omezení rozsahu mapy, privacy-first ověření užitečnosti bez profilování, revizní rytmus, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně znovu ověřeno, že `cody.dreamind.cz` má problém na veřejném HTTPS: přímé spojení bez proxy selhává na expirovaném certifikátu, diagnostické `curl --noproxy '*' -k -I` vrací `200 OK` z nginx/Next.js a dostupný kontejner neobsahuje bezpečný SSH/deploy přístup k obnově certifikátu.
