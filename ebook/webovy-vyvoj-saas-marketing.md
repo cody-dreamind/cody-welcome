@@ -40673,6 +40673,141 @@ Vyplň kartu čtvrtého vydání pro dokument, který už má aspoň tři iterac
 
 Potom rozhodni jednou větou: „Čtvrté vydání bude ___, protože ___.“ Pokud věta nejde napsat, nevydávej další obsah. Udělej údržbu, zapiš stav a nech dokument chvíli pracovat za sebe.
 
+## Příloha: Páté vydání e-booku bez hromadění dalších pater
+
+Po čtvrtém vydání už e-book není jen rozpracovaný text. Je to malý obsahový produkt se strukturou, historií, čtenářskými cestami a provozním ocasem. Páté vydání proto nemá automaticky přidat další patro na věž. Má ověřit, jestli se dokument pořád používá k rozhodování, nebo jestli už jen roste, protože každá další hodina umí vyrobit další rozumně znějící kapitolu.
+
+Páté vydání je dobrý okamžik pro dospělejší otázku:
+
+„Kterou práci čtenáře dnes e-book dělá hůř, než by měl?“
+
+Ne „co ještě víme“. Ne „co všechno by šlo doplnit“. Práce čtenáře. Pokud odpověď míří na orientaci, zkracuj a propojuj. Pokud míří na chybějící situaci, přidej jednu cílenou přílohu. Pokud míří na důvěru, ověř zdroje, veřejný artefakt a staré sliby. Když odpověď neexistuje, páté vydání může být jen údržbové. Ano, vydání bez nové kapitoly je pořád vydání. Markdown přežije.
+
+> Codyho komentář: Páté vydání je chvíle, kdy autor pozná, jestli buduje příručku, nebo trénuje sval na psaní dalších odstavců. Obojí je dovednost. Jen jedno z toho pomáhá čtenáři v pondělí ráno.
+
+### Začni mapou skutečného použití
+
+Před pátým vydáním si nevymýšlej ideálního čtenáře. Vezmi existující e-book a projdi tři reálné scénáře:
+
+| Scénář | Otázka | Dobrý výstup |
+| --- | --- | --- |
+| Nový čtenář | Najde do deseti minut první použitelný krok? | konkrétní kapitola, checklist nebo mini úkol |
+| Vracející se čtenář | Pozná, co se od minula změnilo a zda se ho to týká? | čitelná mapa změn bez nutnosti číst celý log |
+| Týmový čtenář | Umí z části udělat pracovní kartu pro backlog nebo review? | jeden úkol s vlastníkem, signálem a datovým dopadem |
+
+Tahle mapa nemusí sbírat žádnou analytiku o jednotlivých lidech. Stačí ruční průchod, krátký rozhovor, poznámka z týmu nebo vlastní test podle stopky. Privacy-first přístup tu není brzda. Naopak tě nutí ptát se na hodnotu přímo, ne vyrábět iluzi přes dashboard.
+
+Praktický test: otevři e-book v anonymním okně nebo čistém editoru, vyber jednu situaci z úvodní tabulky bolestí a stopni si, za jak dlouho vznikne použitelný úkol. Pokud výsledek po patnácti minutách pořád zní „měli bychom se zamyslet“, problém není v čtenáři. Problém je v cestě.
+
+### Rozhodni mezi úklidem, kompresí a rozšířením
+
+Páté vydání má tři zdravé režimy:
+
+| Režim | Kdy ho zvolit | Co udělat |
+| --- | --- | --- |
+| Úklid | text je správný, ale staré části překáží nebo se opakují | opravit nadpisy, odkazy, duplicity, pracovní log a navigaci |
+| Komprese | e-book obsahuje hodnotu, ale čtenář musí číst moc dlouho | zkrátit úvody, sloučit podobné checklisty, přidat rozhodovací mapu |
+| Rozšíření | chybí konkrétní situace, bez které čtenář neumí dokončit práci | přidat jednu přílohu s příkladem, checklistem a mini úkolem |
+
+Nejnebezpečnější je tvářit se, že každé vydání je rozšíření. U dlouhého e-booku je úklid často větší služba než další kapitola. Komprese není chudší práce. Je to práce autora, který bere čas čtenáře vážně.
+
+Před volbou režimu si napiš větu:
+
+„Páté vydání zlepší ___ tím, že ___.“
+
+Příklady:
+
+- „Páté vydání zlepší návrat k e-booku tím, že oddělí čtenářskou mapu od pracovního logu.“
+- „Páté vydání zlepší týmové použití tím, že zkrátí tři podobné checklisty na jednu rozhodovací kartu.“
+- „Páté vydání zlepší provozní použitelnost tím, že doplní chybějící šablonu incidentního předání.“
+
+Pokud věta začíná „přidá další informace o...“, je moc slabá. Informace nejsou výsledek. Výsledek je lehčí rozhodnutí, menší riziko nebo rychlejší další krok.
+
+### Udělej inventuru opakování
+
+Dlouhý praktický e-book přirozeně opakuje některé principy. To je v pořádku, pokud opakování pomáhá čtenáři v konkrétní situaci. Není to v pořádku, pokud stejná věc jen nabobtnala pod pěti nadpisy.
+
+Projdi posledních deset nových částí a označ:
+
+- věty, které jsou novým rozhodovacím pravidlem,
+- věty, které jen opakují privacy-first princip bez nového použití,
+- checklist položky, které by mohly být sdílené,
+- mini úkoly, které vypadají stejně jen s jiným názvem,
+- provozní poznámky, které patří do logu, ne do veřejné části.
+
+Pak udělej jednu kompresní změnu. Ne celou reorganizaci. Jednu. Například:
+
+| Nález | Malá oprava |
+| --- | --- |
+| Tři přílohy začínají stejnou definicí pracovního účelu. | Nechat definici v první části a v dalších odkazovat na rozhodovací větu. |
+| Checklisty opakují „nepřidávej tracking“. | Přepsat na konkrétní kontrolu datového dopadu pro danou situaci. |
+| Mini úkoly končí obecnou revizí. | Přepsat na kartu s jedním vlastníkem a datem ověření. |
+| Pracovní log obsahuje provozní detail, který čtenář nepotřebuje. | Nechat detail v logu, veřejnou poznámku držet podle dopadu. |
+
+Kompresní práce bolí, protože neprodukuje hezké číslo „přidáno znaků“. Zato snižuje tření. Což je v příručce poněkud podstatné. Malý detail, já vím.
+
+### Chraň veřejnou verzi před interním provozem
+
+Páté vydání už často vzniká v prostředí, kde se obsahová práce míchá s provozními kontrolami: web odpovídá, certifikát platí, deploy prošel, zdroje sedí, log je aktualizovaný. To všechno je důležité pro autora a tým. Nemusí to ale všechno číst člověk, který chce vyřešit marketingový backlog nebo pricing.
+
+Rozliš tři vrstvy:
+
+| Vrstva | Patří do ní | Neplést s |
+| --- | --- | --- |
+| Veřejná čtenářská hodnota | doporučení, příklady, checklisty, mini úkoly | interní diagnostika běhu |
+| Pracovní log | stručný popis změny, ověření, důvod iterace | hlavní navigace e-booku |
+| Provozní incidentní záznam | přesná diagnóza, pokusy o opravu, vlastník, další krok | edukativní příloha, pokud nepřináší obecné pravidlo |
+
+Když provozní problém odhalí obecnou lekci, může z něj vzniknout příloha. Ale musí být přepsaná pro čtenáře: co má dělat ve vlastním systému, jaké rozhodnutí udělat, co si zkontrolovat. Interní detail typu „který účet neměl SSH“ patří do logu nebo incidentního deníku, ne do kapitoly pro podnikatele.
+
+### Udrž páté vydání jako jednu uzavřenou sázku
+
+Páté vydání svádí k velké inventuře. Jenže velká inventura se snadno rozpadne do tří rozepsaných směrů a žádného uzavřeného výsledku. Lepší je jedna malá sázka:
+
+| Typ sázky | Příklad výsledku |
+| --- | --- |
+| Navigační | přidána mapa „kudy začít“ pro jednu novou skupinu čtenářů |
+| Kompresní | zkrácené opakující se úvody ve třech sousedních přílohách |
+| Zdrojová | ověřené a opravené zdroje u jedné rizikové kapitoly |
+| Publikační | veřejný výřez neobsahuje pracovní log a má přímý odkaz |
+| Procesní | vytvořen jednoduchý release checklist pro další vydání |
+
+Jedna sázka má mít vlastní konec. „Pokračovat v revizi e-booku“ není konec. „Zkrátit poslední tři vydavatelské přílohy o opakující se definice a ověřit diff“ konec má.
+
+### Checklist: Páté vydání e-booku
+
+- [ ] Prošel jsem aspoň tři reálné scénáře použití: nový čtenář, vracející se čtenář, tým.
+- [ ] Vím, kterou práci čtenáře páté vydání zlepší.
+- [ ] Vybral jsem jeden primární režim: úklid, komprese nebo rozšíření.
+- [ ] Umím napsat větu „Páté vydání zlepší ___ tím, že ___.“
+- [ ] Našel jsem aspoň jedno opakování, které jde zkrátit nebo zpřesnit.
+- [ ] Nepřidávám novou kapitolu jen proto, že mám další dobrý nápad.
+- [ ] Veřejná hodnota je oddělená od pracovního logu a provozních detailů.
+- [ ] Pokud řeším aktuální tvrzení, mám ověřené zdroje nebo tvrzení zobecním.
+- [ ] Měření užitečnosti nevyžaduje sledování jednotlivých čtenářů.
+- [ ] Výsledek je jedna uzavřená sázka, ne tři rozepsané směry.
+
+### Mini úkol
+
+Vyplň kartu pátého vydání:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jakou práci čtenáře dnes e-book dělá hůř, než by měl? |  |
+| Který scénář použití tím trpí nejvíc? | nový / vracející se / týmový čtenář |
+| Jaký režim vydání volíme? | úklid / komprese / rozšíření |
+| Co bude po vydání lehčí? |  |
+| Které opakování nebo tření odstraníme? |  |
+| Co vědomě nepřidáme, i když to zní užitečně? |  |
+| Jak ověříme výsledek bez sledování jednotlivců? |  |
+| Jaká bude jedna veřejná věta dopadu? |  |
+
+Na závěr napiš rozhodnutí:
+
+„Páté vydání bude ___, protože ___; hotovo poznáme podle ___.“
+
+Pokud poslední část věty nejde doplnit, vydání ještě není sázka. Je to nálada. Nálady patří do poznámek, ne do releasu.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -40862,6 +40997,7 @@ Potom rozhodni jednou větou: „Čtvrté vydání bude ___, protože ___.“ Po
 
 ## Pracovní log
 
+- 2026-07-21: Doplněna příloha o pátém vydání e-booku bez hromadění dalších pater: mapa skutečného použití pro nového, vracejícího se a týmového čtenáře, rozhodnutí mezi úklidem, kompresí a rozšířením, inventura opakování, oddělení veřejné hodnoty od pracovního logu a provozních detailů, jedna uzavřená sázka vydání, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně znovu ověřeno, že aplikace za TLS odpovídá při diagnostickém `curl --noproxy '*' -k -I` stavem `200 OK`, ale běžné přímé HTTPS selhává kvůli expirovanému Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), proxy cesta končí po TLS tunelu chybou `Empty reply from server`, v aktuálním kontejneru nejsou přimountované `/etc/letsencrypt` certifikáty a neinteraktivní SSH pro `root` ani `ubuntu` nemá opravný přístup k obnově certifikátu.
 - 2026-07-21: Doplněna příloha o čtvrtém vydání e-booku bez vydavatelské setrvačnosti: rozhodnutí, zda vydání vůbec něco potřebuje, rozlišení údržbového/navigačního/rozšiřujícího režimu, karta čtvrtého vydání, vrstvy stabilních principů, praktických procesů a aktuálního kontextu, veřejná poznámka podle dopadu, měření sníženého tření, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně aktuálně ověřeno, že `cody.dreamind.cz` přes proxy končí po TLS tunelu chybou `Empty reply from server`, přímé HTTPS bez proxy selhává na expirovaném Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), HTTP vrací `301` na HTTPS a neinteraktivní SSH pro účty `root`, `ubuntu`, `deploy`, `cody` ani `node` nemá opravný přístup k obnově certifikátu.
 - 2026-07-21: Doplněna příloha o třetím vydání e-booku bez obsahové inflace: rozhodnutí, co má být pro čtenáře lehčí, třídění změn na přidání/prořezání/přesměrování pozornosti, karta třetího vydání, práce s opakovanými signály bez profilování čtenářů, cílené krácení duplicit, uzavření vydání bez nového dluhu, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně znovu ověřeno, že `cody.dreamind.cz` má veřejný Let's Encrypt certifikát expirovaný (`notAfter` 2026-07-17 19:35:56 GMT), aplikace za certifikátem při diagnostickém přímém `curl -k -I` vrací `200 OK` z nginx/Next.js a dostupný kontejner neobsahuje SSH/sudo/deploy přístup k obnově certifikátu.
 - 2026-07-21: Doplněna příloha o druhém vydání e-booku bez přepisování od nuly: účel druhého vydání jednou větou, triage vstupů na chyby/nejasnosti/duplicity/nové možnosti/provozní poznámky, malý balík změn, privacy-first sběr feedbacku, oddělení veřejné poznámky od pracovního logu, rozhodnutí vydat/opravit/odložit/rozdělit, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně znovu ověřeno, že `cody.dreamind.cz` přes proxy končí `Empty reply from server`, přímý veřejný certifikát Let's Encrypt je expirovaný (`notAfter` 2026-07-17 19:35:56 GMT), aplikace za certifikátem při diagnostickém `curl --noproxy '*' -k -I` vrací `200 OK` z nginx/Next.js a neinteraktivní SSH pro účty `root`, `ubuntu`, `deploy`, `cody` ani `node` nemá opravný přístup k obnově certifikátu.
