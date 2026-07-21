@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="cs">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Codyho e-book o privacy-first webu, SaaS a marketingu</title>
+    <meta name="description" content="Prakticky cesky e-book o webovem vyvoji, SaaS, marketingu, produktivite a privacy-first provozu v Evrope.">
+    <meta name="robots" content="index,follow">
+    <style>
+      :root {
+        color-scheme: light dark;
+        --bg: #f6f8f7;
+        --text: #17201c;
+        --muted: #596861;
+        --line: #cbd8d1;
+        --accent: #126b57;
+        --panel: #ffffff;
+      }
+
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg: #111816;
+          --text: #edf4f1;
+          --muted: #a9b8b1;
+          --line: #2b3a35;
+          --accent: #79d8be;
+          --panel: #17211e;
+        }
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        background: var(--bg);
+        color: var(--text);
+        font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        line-height: 1.6;
+      }
+
+      main {
+        width: min(860px, calc(100% - 32px));
+        margin: 0 auto;
+        padding: 56px 0;
+      }
+
+      header {
+        border-bottom: 1px solid var(--line);
+        padding-bottom: 28px;
+      }
+
+      h1 {
+        margin: 0 0 16px;
+        font-size: clamp(2rem, 5vw, 4rem);
+        line-height: 1.08;
+      }
+
+      p {
+        margin: 0 0 16px;
+        color: var(--muted);
+        font-size: 1.05rem;
+      }
+
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-top: 28px;
+      }
+
+      a {
+        color: var(--accent);
+      }
+
+      .button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 44px;
+        padding: 0 16px;
+        border: 1px solid var(--accent);
+        border-radius: 8px;
+        color: var(--accent);
+        font-weight: 700;
+        text-decoration: none;
+      }
+
+      .button.primary {
+        background: var(--accent);
+        color: var(--bg);
+      }
+
+      section {
+        padding: 28px 0 0;
+      }
+
+      ul {
+        margin: 0;
+        padding-left: 20px;
+      }
+
+      li + li {
+        margin-top: 8px;
+      }
+
+      .note {
+        margin-top: 28px;
+        padding: 16px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--panel);
+        color: var(--muted);
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <header>
+        <h1>Webovy vyvoj, SaaS a marketing privacy-first v Evrope</h1>
+        <p>Prakticky e-book od Codyho pro male firmy, freelancery a tymy, ktere chteji stavet weby a SaaS produkty tak, aby vydelavaly, daly se udrzovat a zbytecne nesbiraly data o lidech.</p>
+        <div class="actions">
+          <a class="button primary" href="./ebook/webovy-vyvoj-saas-marketing.md">Otevrit Markdown e-book</a>
+          <a class="button" href="https://github.com/cody-dreamind/cody-welcome">Zdrojovy repozitar</a>
+        </div>
+      </header>
+
+      <section>
+        <p>Co najdes uvnitr:</p>
+        <ul>
+          <li>privacy-first principy pro web, SaaS, analytiku a marketing,</li>
+          <li>prakticke checklisty pro spusteni, provoz, sales, obsah a produkt,</li>
+          <li>evropsky pohled na data, dodavatele, pristupy a provozni odpovednost,</li>
+          <li>konkretni sablony, mini ukoly a rozhodovaci karty.</li>
+        </ul>
+      </section>
+
+      <p class="note">Stranka je zamerne jednoducha: zadne trackery, zadne social share skripty, zadna povinna registrace pred ctenim. Kdyz ma byt obsah privacy-first, prvni klik nema delat opak.</p>
+    </main>
+  </body>
+</html>

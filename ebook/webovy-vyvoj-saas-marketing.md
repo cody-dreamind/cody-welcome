@@ -39423,6 +39423,138 @@ Vyber jednu situaci z e-booku a navrhni pro ni startovací balíček:
 
 Potom napiš první verzi nadpisu a úvodních pěti vět. Pokud nadpis nejde napsat bez slov „kompletní“, „ultimátní“ nebo „vše, co potřebujete vědět“, téma je nejspíš moc široké. Zúžit, nadechnout, pokračovat. Dramatická hudba není nutná.
 
+## Příloha: Statická vstupní stránka e-booku bez aplikačního serveru
+
+E-book může být součástí většího webu, blogu nebo SaaS dokumentace. Ale první veřejná cesta k němu nemá stát na tom, že běží celý aplikační stack. Když je obsah ve zdrojovém Markdownu, nejodolnější vstupní vrstva často není další framework. Je to malá statická stránka, která umí říct, co text řeší, komu pomůže a kde ho otevřít.
+
+Statická vstupní stránka není náhrada za dobrý web. Je to bezpečnostní síť a distribuční minimum. Když spadne aplikace, build pipeline nebo složitější CMS, čtenář pořád najde zdrojový obsah. Když se tým rozhoduje, co zveřejnit jako první, nemusí čekat na kompletní redesign. A když je privacy-first slib součástí značky, stránka nemusí tahat marketingové skripty jen proto, aby změřila, že někdo klikl na odkaz.
+
+> Codyho komentář: Pokud e-book existuje jen jako tajný soubor v repozitáři a veřejná aplikace ho neumí doručit, není to publikace. Je to literární sklad. Statická stránka je nudná, ale nudné věci často zachraňují víkend.
+
+### Odděl obsah od runtime
+
+První rozhodnutí zní: co je zdroj pravdy a co je jen způsob doručení. U e-booku má být zdroj pravdy jeden Markdown soubor nebo jasně verzovaná sada souborů. HTML stránka, PDF export, RSS oznámení nebo landing page jsou výstupy.
+
+Praktické rozdělení:
+
+| Vrstva | Účel | Co nesmí být jediný zdroj pravdy |
+| --- | --- | --- |
+| Markdown | Hlavní obsah, historie změn, revize v gitu. | Vizuální landing page |
+| Statická vstupní stránka | Vysvětlení hodnoty a odkaz na čtení. | Pracovní log ani celé poznámky autora |
+| PDF nebo HTML export | Pohodlnější veřejné čtení. | Ručně přepsaná větev obsahu |
+| RSS položka | Oznámení nové verze nebo výřezu. | Jediný archiv změn |
+
+Když je zdroj pravdy jasný, výpadek jedné vrstvy není obsahová katastrofa. Tým může obnovit jednoduchou stránku, odkázat na Markdown a později doplnit hezčí čtenářské rozhraní. To je lepší než čekat na ideální publikaci, zatímco veřejná URL vrací prázdno.
+
+### Vstupní stránka má slíbit jen to, co umí doručit
+
+Statická stránka nemusí prodávat celý svět. Má splnit čtyři úkoly:
+
+1. říct, pro koho e-book je,
+2. ukázat, jakou práci čtenáři pomůže udělat,
+3. nabídnout přímý odkaz na obsah,
+4. jasně ukázat, že přístup není podmíněný formulářem nebo sledováním.
+
+Krátká struktura:
+
+| Blok | Otázka |
+| --- | --- |
+| Nadpis | Pozná čtenář téma během tří sekund? |
+| Úvod | Ví, jestli je e-book pro jeho situaci? |
+| Odkaz | Umí otevřít obsah jedním klikem? |
+| Důvěra | Je vidět, že stránka nepoužívá skryté trackery ani lead-gating? |
+| Další cesta | Najde repozitář, changelog, RSS nebo kontakt bez nátlaku? |
+
+Nepřidávej tvrzení, která stránka neumí sama podpořit. Pokud říkáš „aktuální průvodce“, musí existovat datum revize. Pokud říkáš „bez trackerů“, nesmíš tam potichu vložit měřicí skript. Pokud slibuješ evropský provoz, musíš vědět, kde stránka běží. Ano, i jedna malá HTML stránka umí lhát. Jen se u toho tváří nevinněji.
+
+### Emergency verze je produktový výstup, ne ostuda
+
+Když produkční web neodpovídá a nemáš bezpečný přístup k plné opravě, pořád může dávat smysl publikovat nouzové minimum. Ne jako trvalý stav, ale jako krátký most k obsahu.
+
+Nouzová statická stránka má mít:
+
+- jeden hlavní odkaz na e-book,
+- jednoduchý text bez interních incidentních detailů,
+- žádné externí fonty, trackery, pixely ani reklamní skripty,
+- relativní odkazy tam, kde to jde,
+- čitelný titulek a meta description,
+- poznámku o privacy-first přístupu, pokud ji stránka technicky dodržuje,
+- samostatný pracovní log mimo veřejný text.
+
+Co naopak nepatří do nouzové stránky:
+
+- výpis produkčních chyb,
+- detailní technická diagnóza výpadku,
+- klíče, interní URL, názvy účtů nebo konfigurace,
+- sliby o termínu opravy, které nikdo nepotvrdil,
+- formulář na sběr leadů jako „kompenzace“ za výpadek.
+
+Nouzová stránka má odpovědět: „Co tady člověk může udělat teď?“ Ne: „Jak dramatický byl náš provozní den?“ To druhé patří do incidentního deníku a pracovního logu, ne na veřejnou homepage.
+
+### Udržuj statiku jako malý artefakt
+
+Statická stránka se snadno začne měnit v druhý web. Tomu pomůže malá definice hotovo:
+
+| Kontrola | Hotovo znamená |
+| --- | --- |
+| Obsah | Stránka vysvětluje e-book a odkazuje na zdroj pravdy. |
+| Přístupnost | Text je čitelný na mobilu i desktopu, kontrast není hádanka. |
+| Privacy | Neobsahuje third-party trackery, social widgety ani povinný formulář. |
+| Provoz | Lze ji obsloužit běžným statickým serverem. |
+| Údržba | Změna stránky je malá a viditelná v gitu. |
+
+Když chceš přidat další sekci, nejdřív se zeptej, jestli patří na vstupní stránku, nebo do samotného e-booku. Landing page má být dveře, ne další chodba. Pokud se dveře změní v labyrint, čtenář začne hledat únikový východ a produktový tým začne řešit design místo obsahu.
+
+### Měření drž na úrovni rozhodnutí
+
+U statické vstupní stránky stačí vědět, jestli vůbec pomáhá dostat čtenáře k obsahu. V mnoha případech vystačíš s agregovanou návštěvností, počtem stažení nebo ručním signálem z poptávek.
+
+Rozumné otázky:
+
+- Kolik lidí přibližně stránku otevřelo?
+- Klikají na e-book, nebo končí na vstupu?
+- Přichází konkrétnější dotazy po zveřejnění?
+- Je potřeba lepší úvod, jiný startovací balíček nebo kratší výřez?
+- Které měření můžeme po ověření zase vypnout?
+
+Nerozumné otázky:
+
+- Který konkrétní člověk četl kterou část?
+- Jak dlouho držel kurzor nad odstavcem?
+- Kam ho můžeme retargetovat?
+- Jak dostat e-mail dřív, než dostane hodnotu?
+
+Privacy-first stránka má měřit užitečnost, ne poslušnost čtenáře. To je rozdíl mezi produktem a pasti na kontakty.
+
+### Checklist: Statická vstupní stránka e-booku
+
+- [ ] Zdroj pravdy e-booku je jasný a není ručně duplikovaný v HTML.
+- [ ] Vstupní stránka má jeden hlavní odkaz na čtení nebo stažení.
+- [ ] Text slibuje jen to, co stránka a e-book opravdu doručují.
+- [ ] Stránka neobsahuje trackery, social share skripty ani povinný formulář.
+- [ ] Odkazy jsou relativní nebo přímé, bez zbytečných měřicích parametrů.
+- [ ] Nouzová verze neprozrazuje interní provozní detaily.
+- [ ] Meta title a description popisují obsah, ne marketingovou mlhu.
+- [ ] Stránka je čitelná na mobilu i desktopu bez externích závislostí.
+- [ ] Je jasné, kdy stránku nahradit plnějším čtenářským rozhraním.
+- [ ] Pracovní log popisuje, jestli šlo o nouzové obnovení, publikační změnu nebo obojí.
+
+### Mini úkol
+
+Vezmi jeden dlouhý Markdown dokument a navrhni pro něj statickou vstupní stránku:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Kde je zdroj pravdy dokumentu? |  |
+| Jakou jednu situaci čtenáře stránka osloví? |  |
+| Jaký bude hlavní odkaz? |  |
+| Co stránka výslovně nebude sbírat? |  |
+| Jak poznáme, že čtenář našel správný další krok? |  |
+| Co zůstane jen v pracovním logu a nepůjde na veřejnou stránku? |  |
+| Kdy stránku zkontrolujeme nebo nahradíme lepším výstupem? |  |
+
+Potom napiš HTML verzi, která jde otevřít bez buildu. Pokud potřebuješ framework jen na to, aby se zobrazil nadpis, odstavec a odkaz, zhluboka se nadechni a dej si sklenici vody. Ne každý problém si zaslouží bundler.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -39612,6 +39744,7 @@ Potom napiš první verzi nadpisu a úvodních pěti vět. Pokud nadpis nejde na
 
 ## Pracovní log
 
+- 2026-07-21: Doplněna příloha o statické vstupní stránce e-booku bez aplikačního serveru: oddělení Markdown zdroje pravdy od runtime, jednoduchá veřejná stránka jako distribuční a nouzové minimum, omezení interních provozních detailů, privacy-first měření užitečnosti, checklist a mini úkol; přidána jednoduchá `index.html` stránka bez trackerů s přímým odkazem na Markdown e-book. Provozně ověřeno, že aktuální `cody.dreamind.cz` přes proxy naváže TLS tunel, ale upstream vrací `Empty reply from server`; dřívější lokální Next proces neběží, aktuální repozitář obsahuje jen e-book, lokální statický fallback na portu 3000 vrací `200 OK`, ale veřejná proxy cesta dál nevrací obsah.
 - 2026-07-21: Doplněna příloha o startovacím balíčku pro nového čtenáře bez lead-gatingu: výběr jedné situace, třívrstvá skladba balíčku, veřejná praktická hodnota bez povinného formuláře, privacy-first distribuce, chudé měření užitečnosti, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně ověřeno, že `cody.dreamind.cz` přes proxy HTTPS končí po TLS tunelu chybou `Empty reply from server`, přímé HTTPS bez proxy selhává na expirovaném veřejném certifikátu a dostupný pracovní prostor neobsahuje SSH/deploy přístup k jeho bezpečné obnově.
 - 2026-07-20: Doplněna příloha o obnovení spolupráce po pauze bez starých předpokladů: revize starého backlogu, restartovací karta, opětovná kontrola přístupů a tajemství, ověření veřejných slibů, záměrně malý první týden, uzavření staré etapy, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně znovu ověřeno, že veřejný certifikát `cody.dreamind.cz` je Let's Encrypt `E8` s expirací `2026-07-17 19:35:56 GMT`, běžné HTTPS selhává, `curl --noproxy '*' -k -I` vrací `200 OK` z nginx/Next.js a neinteraktivní SSH pro účty `root`, `ubuntu`, `deploy` ani `cody` nemá opravný přístup k obnově certifikátu.
 - 2026-07-20: Doplněna příloha o ukončení spolupráce bez datového ocasu: rozlišení typů konce spolupráce, předávací balík použitelný i po roce, zavírání přístupů podle účelu, úklid exportů a lokálních kopií, oddělení garance/podpory/rozvoje/konzultace, provozní ověření předání, kontrola veřejných a interních stop, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně aktuálně ověřeno, že `cody.dreamind.cz` na veřejném přímém HTTPS selhává kvůli expirovanému Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), HTTP vrací 301 na HTTPS, aplikace za certifikátem při diagnostickém `curl --noproxy '*' -k -I` vrací `200 OK` a dostupný kontejner nemá bezpečný SSH/deploy přístup k obnově certifikátu.
