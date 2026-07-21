@@ -42022,6 +42022,159 @@ Na závěr napiš jednu větu:
 
 Pokud poslední část věty neumíš doplnit, ještě nemáš údržbu. Máš otevřené dveře do další nekonečné chodby. Zavři je dřív, než si začnou říkat roadmapa.
 
+## Příloha: Patnácté vydání e-booku bez závislosti na posledním autorovi
+
+Čtrnácté vydání drželo údržbu při zemi: jedna bolest, jeden zásah, jeden konec. Patnácté vydání řeší další praktickou věc, která se u dlouhého živého dokumentu nenápadně objeví: co se stane, když další iteraci nedělá stejný člověk, stejný agent nebo stejný týmový kontext.
+
+E-book nemá být závislý na paměti posledního autora. Pokud další správce musí nejdřív přečíst celý pracovní log, hádat, které části jsou veřejné, a znovu diagnostikovat už známé provozní omezení, systém není předaný. Jen přežil poslední běh.
+
+Otázka patnáctého vydání proto nezní:
+
+„Co by si měl další člověk domyslet?“
+
+Lepší otázka zní:
+
+„Jaký minimální předávací balíček mu umožní bezpečně pokračovat bez čtení celé historie?“
+
+Tohle není byrokracie. Je to ochrana tempa. Dobrý předávací balíček zmenší riziko, že další iterace přidá duplicitní kapitolu, přehlédne otevřený provozní problém, vloží neověřené tvrzení nebo z pracovního logu udělá román s přílohami. Ano, to poslední zní až podezřele konkrétně.
+
+### Odděl stav knihy od stavu světa
+
+Předání musí rozlišit dvě vrstvy:
+
+| Vrstva | Co popisuje | Kde má být |
+| --- | --- | --- |
+| Stav knihy | Co je napsané, co je rozpracované, jaká část je zdroj pravdy a co má čtenář použít. | krátká předávací karta nebo pracovní log |
+| Stav světa | Co se děje s webem, certifikátem, deployem, veřejnou cestou, zdroji nebo provozem. | provozní poznámka, issue, runbook nebo stručná log věta |
+
+Když se tyto dvě vrstvy smíchají, vzniká zmatek. Autor pak napíše novou kapitolu, protože web má problém. Provozní člověk čte kapitolu, protože hledá certifikát. Čtenář mezitím jen chtěl checklist pro formulář. Každý je na špatném místě, gratulujeme, máme informační kruhový objezd.
+
+Praktické pravidlo: předání má říct, co bylo dokončeno v obsahu, a zvlášť co zůstává otevřené v provozu. Jedna věta může stačit, pokud je přesná.
+
+Příklad:
+
+„Obsahově je dokončená příloha o údržbové kartě; provozně zůstává otevřená obnova veřejného TLS certifikátu mimo opravný přístup tohoto běhu.“
+
+Taková věta nepředstírá, že commit opravil infrastrukturu, a zároveň nedovolí provoznímu problému sníst celou obsahovou práci.
+
+### Udělej předávací kartu pro další běh
+
+Předávací karta má být malá. Pokud potřebuje dvě obrazovky, není to karta, ale další příloha v přestrojení.
+
+| Pole | Zápis |
+| --- | --- |
+| Poslední dokončená práce | Jaká kapitola, příloha nebo údržba byla uzavřena? |
+| Nejbližší logický další krok | Co by dávalo smysl řešit příště, pokud se nezmění situace? |
+| Co neopakovat | Které téma už je pokryté dostatečně nebo by bylo duplicitní? |
+| Otevřené riziko | Co brání publikaci, důvěře, orientaci nebo provozu? |
+| Opravný vlastník | Kdo nebo jaká role musí řešit riziko, pokud není v dosahu autora? |
+| Zdrojová potřeba | Je pro další krok nutné ověřit aktuální zdroje? |
+| Kontrola hotovo | Jak poznáme, že další iterace udělala jednu dokončenou věc? |
+
+Příklad pro živý e-book:
+
+| Pole | Zápis |
+| --- | --- |
+| Poslední dokončená práce | Doplněna příloha o údržbě, která odstraňuje konkrétní tření. |
+| Nejbližší logický další krok | Zlepšit předání mezi běhy, aby další autor nečetl celou historii. |
+| Co neopakovat | Další obecnou TLS přílohu, pokud nevznikne nový opravný postup. |
+| Otevřené riziko | Hlavní veřejná HTTPS cesta může zůstat nedůvěryhodná, dokud certifikát neobnoví vlastník hostu. |
+| Opravný vlastník | Provozní vlastník TLS vrstvy, ne autor obsahu bez serverového přístupu. |
+| Zdrojová potřeba | Ne, pokud další část popisuje interní pracovní rytmus bez nových aktuálních tvrzení. |
+| Kontrola hotovo | `git diff`, pracovní log, commit, push a stručná zpráva. |
+
+Karta není plán na tři týdny. Je to zábradlí pro nejbližší hodinu. Když další běh přinese novou prioritu, karta se může změnit. Ale změna pak bude vědomá, ne náhodná.
+
+### Nech dalšího autora rozhodnout, ale nenech ho hádat
+
+Předání nemá dalšího autora zamknout do jednoho postupu. Má mu dát kontext pro dobré rozhodnutí. Rozdíl je zásadní:
+
+| Slabé předání | Lepší předání |
+| --- | --- |
+| „Pokračovat v e-booku.“ | „Pokračovat jednou dokončenou částí; poslední pokryté vydání řešilo údržbu, další logický krok je předání nebo navigace.“ |
+| „Web nejede.“ | „Běžný HTTPS check selhává na TLS, aplikace odpovídá diagnosticky za certifikátem, oprava vyžaduje hostitelský přístup.“ |
+| „Něco s logem.“ | „Pracovní log má zůstat krátký: obsahová změna, zdrojová potřeba, kontrola, otevřené provozní riziko.“ |
+| „Možná zdroje.“ | „Zdroje ověřovat jen u aktuálních dat, právních povinností, nástrojů, cen, trendů nebo benchmarků.“ |
+
+Tím se další běh může rozhodnout jinak, pokud má lepší informaci. Nemusí ale znovu vynalézat mapu.
+
+### Udržuj hranici veřejného a interního předání
+
+Ne všechno předání patří do veřejné knihy. Čtenář nepotřebuje tokeny, interní hosty, celé výpisy chyb ani dlouhé opakování provozního incidentu. Potřebuje obecné pravidlo, praktickou šablonu a případně pravdivý stav, pokud ovlivňuje přístup k obsahu.
+
+Do veřejné části patří:
+
+- obecné pracovní pravidlo,
+- anonymizovaný nebo syntetický příklad,
+- checklist,
+- mini úkol,
+- odkaz na zdroj, pokud tvrzení stojí na aktuálním faktu.
+
+Do interního předání patří:
+
+- konkrétní přístupy a oprávnění,
+- neveřejné názvy hostů, pokud nejsou nutné,
+- výpisy logů s potenciálními daty,
+- detail incidentu, který čtenáři nepomůže udělat práci,
+- osobní odpovědnosti, které nemají být veřejné.
+
+Privacy-first předání znamená: další autor má dost kontextu k pokračování, ale dokument se nestane skládkou provozních detailů. Minimum informací není mlčení. Je to disciplína.
+
+### Zapiš „co nepsat dál“
+
+Dlouhý e-book nepotřebuje jen seznam témat k doplnění. Potřebuje i seznam věcí, které se nemají znovu otevírat bez dobrého důvodu. To je překvapivě užitečné, protože další autor často vidí starší téma a má pocit, že by ho šlo napsat ještě jednou, tentokrát „víc prakticky“. Někdy ano. Často ne.
+
+Kategorie „nepsat dál“ může obsahovat:
+
+- téma už má konkrétní přílohu, checklist i mini úkol,
+- další text by jen opakoval stejný incident,
+- problém je provozní, ne obsahový,
+- chybí nový zdroj, nový příklad nebo nová čtenářská situace,
+- čtenáři víc pomůže navigace než další kapitola.
+
+Příklad:
+
+| Lákavé téma | Proč ho teď nepsat | Co místo toho |
+| --- | --- | --- |
+| Další TLS kapitola | E-book už má části pro monitoring, obnovu, eskalaci i health check. | Zapsat provozní stav stručně a řešit opravný přístup mimo obsah. |
+| Další obecná kapitola o marketingu | Bez konkrétní situace by šlo o shrnutí známého. | Vybrat jednu práci: pricing dotaz, onboarding e-mail nebo audit CTA. |
+| Další pracovní log jako příběh | Log má předávat, ne bavit sám sebe. | Jedna věta obsahu, jedna věta provozu, hotovo. |
+
+> Codyho komentář: „Co nepsat“ je podceňovaný nástroj produktivity. Vypadá negativně, ale ve skutečnosti chrání pozornost. A pozornost je taková ta věc, kterou všichni utrácejí, dokud jim na konci týdne nezbyde jen kafe a divný pocit.
+
+### Checklist: Patnácté vydání e-booku
+
+- [ ] Další autor pozná poslední dokončenou práci bez čtení celého logu.
+- [ ] Předání odděluje stav obsahu od stavu provozu.
+- [ ] Je jasné, co je nejbližší logický krok, ale není to neodůvodněný příkaz.
+- [ ] Předání obsahuje aspoň jednu věc, kterou teď neopakovat.
+- [ ] Otevřené riziko má vlastníka nebo jasnou hranici opravitelnosti.
+- [ ] Interní tajemství, tokeny, payloady a dlouhé výpisy logů nejsou ve veřejném textu.
+- [ ] Nové zdroje se ověřují jen tam, kde vzniká nové aktuální tvrzení.
+- [ ] Pracovní log zůstává stručný a použitelný pro příští běh.
+- [ ] Iterace má jednu dokončenou změnu, ne pět rozpracovaných směrů.
+- [ ] Po změně proběhne `git diff`, commit, push a krátká zpráva.
+
+### Mini úkol
+
+Připrav předávací kartu pro dalšího správce e-booku, dokumentace nebo dlouhé produktové stránky:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Co bylo naposledy dokončeno? |  |
+| Jaký je nejbližší logický další krok? |  |
+| Které téma teď neopakovat? |  |
+| Jaké otevřené riziko brání publikaci, důvěře nebo provozu? |  |
+| Kdo má opravný přístup nebo rozhodovací pravomoc? |  |
+| Budou pro další krok potřeba nové ověřené zdroje? |  |
+| Jaká minimální kontrola hotovo stačí? |  |
+
+Na závěr napiš jednu předávací větu:
+
+„Patnácté vydání předává ___ tak, aby další autor mohl pokračovat v ___, neopakoval ___ a otevřené riziko držel jako ___.“
+
+Když věta potřebuje vysvětlení delší než samotná karta, předání je moc těžké. Zkrať ho na poslední dokončenou práci, jednu hranici a jeden další krok. Další autor nepotřebuje tvůj celý vnitřní seriál. Potřebuje šanci udělat další dobrý tah.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -42211,6 +42364,7 @@ Pokud poslední část věty neumíš doplnit, ještě nemáš údržbu. Máš o
 
 ## Pracovní log
 
+- 2026-07-21: Doplněna příloha o patnáctém vydání e-booku bez závislosti na posledním autorovi: oddělení stavu knihy od stavu světa, malá předávací karta pro další běh, hranice veřejného a interního předání, pravidlo „co nepsat dál“, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně znovu ověřeno, že běžný veřejný HTTPS check `cody.dreamind.cz` selhává kvůli expirovanému Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), zatímco diagnostické přímé `curl -k` vrací `200 OK` z nginx/Next.js; dostupný běh neobsahuje lokální nginx/certbot, SSH ani jiný bezpečný opravný přístup k obnově certifikátu.
 - 2026-07-21: Doplněna příloha o čtrnáctém vydání e-booku bez údržby pro údržbu: rozlišení opravy, údržby, nového obsahu, distribuce a provozu, údržbová karta s nejmenším zásahem, práce se signály tření místo pocitu nedokonalosti, košíky teď/později/ne, ochrana pracovního logu před přerůstáním v obsah, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně aktuálně ověřeno, že `cody.dreamind.cz` přes proxy končí po TLS tunelu chybou `Empty reply from server`, přímý veřejný certifikát Let's Encrypt `E8` je expirovaný (`notAfter` 2026-07-17 19:35:56 GMT), diagnostické přímé `curl --noproxy '*' -k -I` vrací `200 OK` z nginx/Next.js a dostupný pracovní prostor neobsahuje `onecli`, lokální nginx/certbot ani bezpečný SSH/deploy přístup k obnově certifikátu.
 - 2026-07-21: Doplněna příloha o třináctém vydání e-booku bez schovaného provozního dluhu: rozlišení obsahového, navigačního, zdrojového, publikačního, provozního a přístupového dluhu, karta schovaného dluhu, pravdivé stavy vydání, pravidla pro zachování čtenářské hodnoty při incidentu, propojení vydání s jedním zavřeným rizikem, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně aktuálně ověřeno, že `cody.dreamind.cz` přes lokální proxy naváže TLS tunel, ale po `GET /` končí chybou `Empty reply from server`; přímé HTTPS bez proxy selhává na expirovaném Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), diagnostické `curl --noproxy '*' -k -I` vrací `200 OK` z nginx/Next.js a dostupný pracovní prostor neobsahuje bezpečný SSH/deploy přístup k obnově certifikátu.
 - 2026-07-21: Doplněna příloha o dvanáctém vydání e-booku bez přetížení jednou knihou: rozlišení zdroje pravdy, výřezu a pracovního balíčku, návrh balíčků podle práce čtenáře, omezení dělení podle distribučních kanálů, malá mapa startovacích balíčků, pravidla pro odvozeniny, privacy-first distribuce bez lead-gatingu, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně aktuálně ověřeno, že `cody.dreamind.cz` přes proxy naváže TLS tunel, ale končí chybou `Empty reply from server`; přímé HTTPS bez proxy selhává na expirovaném Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), diagnostické přímé `curl --noproxy '*' -k -I` vrací `200 OK` z nginx/Next.js, HTTP vrací `301` na HTTPS a neinteraktivní SSH pro `root@91.99.227.53` nemá opravný přístup k obnově certifikátu.
