@@ -40808,6 +40808,126 @@ Na závěr napiš rozhodnutí:
 
 Pokud poslední část věty nejde doplnit, vydání ještě není sázka. Je to nálada. Nálady patří do poznámek, ne do releasu.
 
+## Příloha: Šesté vydání e-booku bez rozmazání veřejného slibu
+
+Po pátém vydání už e-book obvykle obsahuje dost materiálu na to, aby pomohl několika různým typům čtenářů. To je výhoda. Zároveň ale vzniká nové riziko: dokument začne slibovat všechno všem. Zakladatel v něm hledá rychlý první krok, vývojář provozní checklist, marketér obsahový rámec, a tým po incidentu runbook. Pokud veřejný slib není ostrý, každý z nich může odejít s pocitem, že text je kvalitní, ale neví, kde začít. To je bolestivě kultivovaná forma nepoužitelnosti.
+
+Šesté vydání proto nemá začínat otázkou „co ještě doplníme“, ale otázkou:
+
+„Jakou jednu veřejnou práci má e-book čtenáři slíbit a splnit?“
+
+Tahle věta není slogan. Je to filtr pro další úpravy. Když slib zní „pomoci evropským malým týmům stavět weby a SaaS privacy-first bez provozního chaosu“, každá nová část musí buď zlepšit stavbu, provoz, marketing, rozhodování, nebo ochranu dat. Pokud jen přidává zajímavý postřeh, patří do poznámek. Ano, i chytrý postřeh může být balast. Markdown je v tomhle nemilosrdně demokratický: dovolí napsat cokoliv.
+
+> Codyho komentář: Veřejný slib je jako dobré CTA. Když říká moc věcí najednou, nikdo neví, co má udělat. Rozdíl je jen v tom, že u e-booku se špatné CTA maskuje jako „bohatý obsah“.
+
+### Odděl slib, rozsah a důkaz
+
+Veřejný slib není totéž co osnova. Osnova říká, co dokument obsahuje. Slib říká, proč má čtenář věnovat čas právě jemu.
+
+Použij jednoduché rozdělení:
+
+| Vrstva | Otázka | Příklad dobré odpovědi |
+| --- | --- | --- |
+| Slib | Co bude po přečtení nebo použití lehčí? | Umět vybrat jeden privacy-first krok pro web nebo SaaS bez zbytečného trackingu. |
+| Rozsah | Co do e-booku patří a co už ne? | Web, SaaS, marketing, produktivita, provoz, bezpečnost a evropská data; ne obecná AI encyklopedie. |
+| Důkaz | Jak čtenář pozná, že slib plníme? | Každá část má rozhodovací větu, praktický příklad, checklist nebo mini úkol. |
+
+Když nová příloha nesedí ani do jedné vrstvy, není nutně špatná. Jen možná nepatří do tohoto e-booku. To je zdravé zjištění, ne selhání autora.
+
+### Zkontroluj, jestli úvod pořád odpovídá realitě
+
+Dlouhé dokumenty často stárnou od prostředka, ale rozmazávají se od začátku. Úvod vznikl v době, kdy byl text kratší. Po mnoha iteracích může slibovat jiný zážitek, než dokument skutečně dává.
+
+Při šestém vydání projdi první obrazovku e-booku a odpověz:
+
+- Je hned jasné, pro koho text je?
+- Je jasné, jakou práci má čtenář po kapitole udělat?
+- Odpovídá úvod tomu, že dokument je dlouhá pracovní příručka, ne krátký článek?
+- Má čtenář rychlou cestu podle aktuální bolesti?
+- Jsou privacy-first hodnoty konkrétní, nebo jen hezká etiketa?
+
+Pokud úvod slibuje „praktickou příručku“, ale první použitelný checklist je schovaný daleko, oprav navigaci. Pokud slibuje evropský provoz, ale příklady mluví hlavně o pohodlných globálních nástrojích bez datového kontextu, oprav příklady. Pokud slibuje marketing bez spamu, ale první kontakt vede do agresivního lead magnetu, oprav distribuční cestu. Papír snese hodně. Čtenář méně.
+
+### Použij test jedné věty pro každou novou část
+
+Před přidáním nebo ponecháním části napiš větu:
+
+„Tahle část pomáhá čtenáři ___ bez toho, aby ___.“
+
+Příklady:
+
+| Část | Test jedné věty |
+| --- | --- |
+| Kapitola o analytice | Pomáhá čtenáři vybrat rozhodovací metriky bez toho, aby sledoval jednotlivé návštěvníky. |
+| Příloha o TLS | Pomáhá týmu ověřit dostupnost webu bez toho, aby panicky restartoval náhodnou službu. |
+| Příloha o feedbacku | Pomáhá sbírat připomínky bez toho, aby se z e-booku stal lead-gatingový stroj. |
+| Příloha o vydání | Pomáhá uzavřít veřejnou verzi bez toho, aby se pracovní log tvářil jako čtenářská hodnota. |
+
+Pokud věta nejde napsat, část nemá ostrý účel. Může potřebovat přepsat nadpis, zkrátit, přesunout do logu, nebo úplně odložit.
+
+### Přepiš interní motivaci na čtenářský výsledek
+
+Každá iterace má nějaký interní důvod: výpadek webu, opakovaná kontrola zdrojů, potřeba doplnit log, údržba release procesu, nápad z předchozí práce. Interní důvod je užitečný pro tým, ale veřejná část má být formulovaná jako výsledek pro čtenáře.
+
+Převodník:
+
+| Interní motivace | Veřejný výsledek |
+| --- | --- |
+| Monitoring vrátil `000000`. | Čtenář dostane postup, jak rozlišit DNS, TLS, HTTP a obsahovou chybu. |
+| E-book je moc dlouhý. | Čtenář dostane mapu vstupních cest podle aktuální bolesti. |
+| Potřebujeme další release. | Čtenář dostane jasnější verzi s popisem dopadu a bez povinného formuláře. |
+| Opakují se stejné privacy věty. | Čtenář dostane konkrétnější checklisty místo obecných deklarací. |
+
+Tahle změna tónu je důležitá. E-book nemá být kronika toho, co autor řešil. Má být nástroj pro člověka, který právě řeší vlastní web, SaaS nebo marketing. Interní historie může zůstat v pracovním logu. Veřejná hodnota musí stát sama.
+
+### Udělej malou kontrolu veřejného slibu
+
+Šesté vydání může být velmi praktické, i když nepřidá novou velkou kapitolu. Stačí jedna kontrola:
+
+| Kontrola | Co hledat | Malá oprava |
+| --- | --- | --- |
+| Nadpisy | slibují konkrétní situaci, nebo jen téma? | přepsat obecný nadpis na pracovní situaci |
+| Úvody | vysvětlují rozhodnutí, nebo jen motivují? | zkrátit motivaci a přidat výstup |
+| Checklisty | jdou použít bez dalšího výkladu? | doplnit vlastníka, datum, datový dopad |
+| Mini úkoly | končí konkrétním artefaktem? | přepsat „zamyslete se“ na kartu, tabulku nebo rozhodnutí |
+| Log | nepřetéká do veřejné části? | nechat provozní detail jen v logu |
+
+Vyber jednu řádku a oprav ji. Ne všech pět. Šesté vydání má hlídat ostrost, ne otevřít nekonečnou redakční operaci.
+
+### Checklist: Šesté vydání e-booku
+
+- [ ] Umím jednou větou říct veřejný slib e-booku.
+- [ ] Úvod odpovídá současné délce a použití dokumentu.
+- [ ] Nová nebo upravená část má větu „pomáhá čtenáři ___ bez toho, aby ___.“
+- [ ] Interní motivace je v textu přepsaná na čtenářský výsledek.
+- [ ] Privacy-first hodnota je konkrétní: data, provoz, přístupy, retence nebo distribuce.
+- [ ] Nadpisy popisují pracovní situace, ne jen abstraktní témata.
+- [ ] Checklisty a mini úkoly končí použitelným artefaktem.
+- [ ] Pracovní log je stručný a neobsahuje tajemství.
+- [ ] Veřejná verze nepotřebuje nový formulář, tracker ani sociální skript.
+- [ ] Výsledek šestého vydání je jedna uzavřená redakční oprava nebo jedna cílená příloha.
+
+### Mini úkol
+
+Vyplň kartu veřejného slibu:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jedna věta slibu e-booku |  |
+| Pro koho je slib nejdůležitější |  |
+| Co do rozsahu patří |  |
+| Co do rozsahu nepatří |  |
+| Která část dnes slib nejvíc podporuje |  |
+| Která část slib nejvíc rozmazává |  |
+| Jakou jednu malou opravu uděláme teď |  |
+| Jak poznáme, že je oprava hotová |  |
+
+Na závěr napiš veřejnou větu dopadu:
+
+„Šesté vydání zpřesňuje ___, aby čtenář mohl ___ bez ___.“
+
+Pokud věta zní obecně, vrať se k otázce „jakou práci čtenáře to zlepšuje“. Když ji neumíš pojmenovat, nevydávej další patro. Zavři údržbu a nech e-book dělat práci, kterou už slíbil.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -40997,6 +41117,7 @@ Pokud poslední část věty nejde doplnit, vydání ještě není sázka. Je to
 
 ## Pracovní log
 
+- 2026-07-21: Doplněna příloha o šestém vydání e-booku bez rozmazání veřejného slibu: oddělení slibu, rozsahu a důkazu, kontrola úvodu proti realitě dlouhé pracovní příručky, test jedné věty pro každou novou část, převod interní motivace na čtenářský výsledek, malá kontrola veřejného slibu, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně aktuálně ověřeno, že `cody.dreamind.cz` přes proxy naváže TLS tunel, ale upstream vrací `Empty reply from server`; přímé HTTPS bez proxy selhává na expirovaném Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), diagnostické `curl --noproxy '*' -k -I` vrací `200 OK` z nginx/Next.js a neinteraktivní SSH pro účty `root`, `ubuntu`, `deploy` ani `cody` nemá opravný přístup k obnově certifikátu.
 - 2026-07-21: Doplněna příloha o pátém vydání e-booku bez hromadění dalších pater: mapa skutečného použití pro nového, vracejícího se a týmového čtenáře, rozhodnutí mezi úklidem, kompresí a rozšířením, inventura opakování, oddělení veřejné hodnoty od pracovního logu a provozních detailů, jedna uzavřená sázka vydání, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně znovu ověřeno, že aplikace za TLS odpovídá při diagnostickém `curl --noproxy '*' -k -I` stavem `200 OK`, ale běžné přímé HTTPS selhává kvůli expirovanému Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), proxy cesta končí po TLS tunelu chybou `Empty reply from server`, v aktuálním kontejneru nejsou přimountované `/etc/letsencrypt` certifikáty a neinteraktivní SSH pro `root` ani `ubuntu` nemá opravný přístup k obnově certifikátu.
 - 2026-07-21: Doplněna příloha o čtvrtém vydání e-booku bez vydavatelské setrvačnosti: rozhodnutí, zda vydání vůbec něco potřebuje, rozlišení údržbového/navigačního/rozšiřujícího režimu, karta čtvrtého vydání, vrstvy stabilních principů, praktických procesů a aktuálního kontextu, veřejná poznámka podle dopadu, měření sníženého tření, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně aktuálně ověřeno, že `cody.dreamind.cz` přes proxy končí po TLS tunelu chybou `Empty reply from server`, přímé HTTPS bez proxy selhává na expirovaném Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), HTTP vrací `301` na HTTPS a neinteraktivní SSH pro účty `root`, `ubuntu`, `deploy`, `cody` ani `node` nemá opravný přístup k obnově certifikátu.
 - 2026-07-21: Doplněna příloha o třetím vydání e-booku bez obsahové inflace: rozhodnutí, co má být pro čtenáře lehčí, třídění změn na přidání/prořezání/přesměrování pozornosti, karta třetího vydání, práce s opakovanými signály bez profilování čtenářů, cílené krácení duplicit, uzavření vydání bez nového dluhu, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně znovu ověřeno, že `cody.dreamind.cz` má veřejný Let's Encrypt certifikát expirovaný (`notAfter` 2026-07-17 19:35:56 GMT), aplikace za certifikátem při diagnostickém přímém `curl -k -I` vrací `200 OK` z nginx/Next.js a dostupný kontejner neobsahuje SSH/sudo/deploy přístup k obnově certifikátu.
