@@ -40353,6 +40353,179 @@ Připrav kartu druhého vydání pro libovolný dlouhý dokument:
 
 Potom vyber jednu položku z karty a udělej ji. Jen jednu. Druhé vydání má budovat rytmus, ne vyhrát mistrovství světa v přepisování Markdownu.
 
+## Příloha: Třetí vydání e-booku bez obsahové inflace
+
+Třetí vydání je zvláštní moment. První vydání dostalo text ven. Druhé vydání opravilo největší tření. Třetí už snadno sklouzne do režimu „ještě něco přidáme, protože máme rytmus“. To zní produktivně, ale dlouhý praktický e-book se tím může změnit na skládku dobrých nápadů. Čtenář pak nedostane víc hodnoty. Dostane víc možností, kde se ztratit.
+
+Třetí vydání má mít jinou disciplínu než první dvě. Nemá dokazovat, že dokument pořád roste. Má dokázat, že dokument pořád slouží.
+
+> Codyho komentář: Třetí vydání je místo, kde autor musí umět říct „ne“ i vlastním chytrým nápadům. Což je samozřejmě urážlivé, protože moje nápady jsou většinou velmi slušně oblečené. Ale čtenář nepotřebuje šatník. Potřebuje pracovní nástroj.
+
+### Začni otázkou, co má být po třetím vydání lehčí
+
+Nezačínej seznamem nových kapitol. Začni otázkou:
+
+„Co má být pro čtenáře po třetím vydání lehčí než po druhém?“
+
+Možné odpovědi:
+
+- rychleji najít správnou přílohu,
+- převést kapitolu na první úkol,
+- pochopit rozdíl mezi podobnými provozními částmi,
+- ověřit veřejný artefakt bez velkého runbooku,
+- použít e-book v týmu bez facilitovaného workshopu,
+- uzavřít čtení jedním rozhodnutím.
+
+Všimni si, že žádná odpověď nemusí znamenat nový text. Někdy třetí vydání přidá mapu, zkrátí opakování, přejmenuje část, doplní příklad nebo přesune checklist blíž k místu, kde ho čtenář potřebuje. To je pořád hodnotná práce. Jen nevypadá tak dramaticky v počtu znaků.
+
+Špatný cíl třetího vydání:
+
+„Přidáme dalších pět příloh.“
+
+Lepší cíl:
+
+„Po třetím vydání se nový čtenář dostane z úvodní bolesti k prvnímu úkolu do 15 minut.“
+
+První věta měří produkci. Druhá věta měří použitelnost.
+
+### Rozliš přidání, prořezání a přesměrování pozornosti
+
+Každý nápad pro třetí vydání zařaď do jedné ze tří kategorií:
+
+| Typ změny | Co znamená | Kdy ji vybrat |
+| --- | --- | --- |
+| Přidání | Chybí téma, příklad, šablona nebo odpověď. | Čtenář bez toho neumí dokončit práci. |
+| Prořezání | Text opakuje stejnou myšlenku bez nové situace. | Délka brání použití nebo rozhodnutí. |
+| Přesměrování pozornosti | Obsah existuje, ale čtenář ho nenajde ve správný moment. | Stačí mapa, odkaz, rozhodovací věta nebo lepší nadpis. |
+
+Třetí vydání by nemělo být jen přidávací. Pokud v každé iteraci roste jen počet slov, dřív nebo později začneš opravovat problém, který sis vyrobil sám: dokument je sice bohatý, ale prakticky těžký.
+
+Příklad:
+
+| Signál | Špatná reakce | Lepší reakce |
+| --- | --- | --- |
+| Čtenáři se ptají, kde začít. | Přidat novou kapitolu „Jak začít“. | Zlepšit úvodní mapu a dát rozhodovací věty k existujícím cestám. |
+| Tým nechápe rozdíl mezi incidentním logem a pracovním logem. | Napsat další dlouhou přílohu o logování. | Přidat krátké srovnání do obou existujících částí. |
+| Příloha má dobré rady, ale slabý výstup. | Dopsat další odstavce. | Zpřesnit mini úkol a checklist. |
+| V textu je stejný privacy-first princip desetkrát. | Nechat ho, protože je důležitý. | Nechat opakování jen tam, kde mění rozhodnutí čtenáře. |
+
+Tahle tabulka šetří textu sebeúctu. Text má sloužit, ne vítězit na váhu.
+
+### Vytvoř kartu třetího vydání
+
+Než sáhneš do Markdownu, napiš malou kartu:
+
+| Pole | Zápis |
+| --- | --- |
+| Účel třetího vydání | Co bude pro čtenáře lehčí? |
+| Primární typ změny | Přidání / prořezání / přesměrování pozornosti |
+| Pro koho | Nový čtenář / vracející se čtenář / tým / autor další iterace |
+| Nejmenší dokončitelný balík | Jedna konkrétní část, mapa, revize nebo šablona |
+| Co vědomě nepřidáme | Témata, která jsou lákavá, ale mimo účel vydání |
+| Kontrola | Jak ověříme, že změna pomohla a nerozbila strukturu |
+| Veřejná poznámka | Jedna věta pro čtenáře |
+
+Vyplněný příklad:
+
+| Pole | Zápis |
+| --- | --- |
+| Účel třetího vydání | Vracející se čtenář rychle pozná, co se změnilo a co má zkusit. |
+| Primární typ změny | Přesměrování pozornosti |
+| Pro koho | Čtenář, který už e-book otevřel dřív. |
+| Nejmenší dokončitelný balík | Zpřesnit mapu změn a doplnit jednu rozhodovací větu u posledních vydání. |
+| Co vědomě nepřidáme | PDF sazbu, nový nástroj pro komentáře, detailní čtenářskou analytiku. |
+| Kontrola | `git diff`, rychlé projití nadpisů a úvodních navigačních částí. |
+| Veřejná poznámka | Třetí vydání zlepšuje návrat do e-booku bez sledování čtenářské historie. |
+
+Karta není byrokracie. Je to brzda na kreativní únik. Když kartu neumíš vyplnit, pravděpodobně nevíš, jestli pracuješ na vydání, nebo jen uklízíš vlastní nervozitu.
+
+### Používej opakovaný signál, ne jeden hlasitý komentář
+
+Jedna připomínka může být užitečná, ale třetí vydání by nemělo skákat podle každého hlasitého podnětu. Hledej opakující se signály:
+
+- stejná otázka od více lidí,
+- stejné místo, kde tým při použití textu zpomalí,
+- stejný typ úkolu, který se po čtení nedaří zapsat,
+- stejný provozní problém, který se vrací do pracovního logu,
+- stejná část, kterou autor musí při každém běhu znovu vysvětlovat.
+
+Opakovaný signál neznamená automaticky novou kapitolu. Znamená jen, že se vyplatí rozhodnout, jestli pomůže přidání, prořezání nebo přesměrování pozornosti.
+
+Privacy-first sběr signálů může zůstat chudý:
+
+- ruční seznam opakovaných otázek,
+- krátké poznámky po týmovém čtení,
+- dobrovolný e-mail s konkrétním místem v textu,
+- agregované sledování otevření hlavních veřejných odkazů,
+- revizní poznámka autora po dokončené iteraci.
+
+Není potřeba stavět čtenářský profil. Třetí vydání má zlepšovat dokument, ne poznávat člověka víc, než je nutné.
+
+### Zkrať část, která už jednou splnila práci
+
+U dlouhého e-booku je prořezání těžší než psaní. Psaní přidává pocit práce. Krácení přidává použitelnost, ale hůř se chlubí. Přesto je třetí vydání ideální chvíle na první cílený řez.
+
+Postup:
+
+1. Vyber jednu skupinu příloh, ne celý e-book.
+2. U každé části napiš její pracovní větu.
+3. Najdi odstavce, které pracovní větu neopravují, nerozvíjejí ani nepřevádějí na příklad.
+4. Přepiš duplicitu na odkaz nebo jednu rozhodovací větu.
+5. Nech checklist jen tam, kde skutečně pomůže dalšímu kroku.
+
+Příklad rozhodovací věty:
+
+„Pokud řešíš výpadek webu, začni dostupností podle vrstev; pokud řešíš opakovanou prevenci, začni expiračním kalendářem.“
+
+Tahle jedna věta může nahradit tři odstavce, které čtenáři opakují, že TLS je důležitý. Ano, je. Teď mu řekni, kam má jít.
+
+### Uzavři třetí vydání bez přidání nového dluhu
+
+Každé vydání může vytvořit nový dluh: neaktuální mapu, rozbitý odkaz, nekonzistentní nadpis, checklist bez mini úkolu, log bez veřejné poznámky. Třetí vydání má před zavřením projít malou kontrolu:
+
+- Nová část má jasnou pracovní větu.
+- Pokud přibyla příloha, je jasné, proč nestačila existující část.
+- Pokud se něco zkrátilo, nezmizel praktický příklad nebo checklist.
+- Pokud se změnila navigace, nadpisy a odkazy dávají smysl bez znalosti historie.
+- Pracovní log říká, co se změnilo, ale nedělá z interní údržby hlavní obsah.
+- Veřejná poznámka vydání je srozumitelná pro čtenáře, ne jen pro autora.
+- Nebyl přidán nový tracking, povinný formulář nebo čtenářský účet jen kvůli měření.
+
+Třetí vydání je hotové, když umíš říct:
+
+„Toto vydání čtenáři usnadnilo ___ tím, že jsme ___. Vědomě jsme nepřidali ___, protože by to zvětšilo rozsah bez jasného rozhodnutí.“
+
+To je malý produktový uzávěr. A malý produktový uzávěr je pořád lepší než velký neuzavřený nápad s hezkým nadpisem.
+
+### Checklist: Třetí vydání e-booku
+
+- [ ] Třetí vydání má odpověď na otázku, co bude pro čtenáře lehčí.
+- [ ] Každý vstup je zařazený jako přidání, prořezání nebo přesměrování pozornosti.
+- [ ] Balík změn jde dokončit v jednom rozumném pracovním okně.
+- [ ] Nový text vzniká jen tam, kde existující část nestačí.
+- [ ] Alespoň jedna část byla zkontrolována na duplicitu nebo zbytečné opakování.
+- [ ] Navigace, nadpisy nebo rozhodovací věty pomáhají čtenáři najít správnou cestu.
+- [ ] Feedback a signály nevyžadují profilování jednotlivých čtenářů.
+- [ ] Pracovní log je aktualizovaný bez tajemství a interního balastu.
+- [ ] Před uzavřením proběhl `git diff` a rychlá kontrola okolních nadpisů.
+- [ ] Vydání má větu, co vědomě nepřidáváme.
+
+### Mini úkol
+
+Vezmi poslední dvě vydání libovolného dlouhého dokumentu a vyplň:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Co bylo po prvním vydání hlavní tření čtenáře? |  |
+| Co druhé vydání opravilo? |  |
+| Co by mělo být po třetím vydání lehčí? |  |
+| Je potřeba přidat, prořezat, nebo přesměrovat pozornost? |  |
+| Který jeden balík změn jde dokončit teď? |  |
+| Které dva dobré nápady teď vědomě odmítneme? |  |
+| Jak ověříme výsledek bez sledování jednotlivých čtenářů? |  |
+
+Potom udělej jen tu změnu, která má největší dopad na použitelnost a nejmenší dopad na rozsah. Třetí vydání nemá být větší. Má být přesnější.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -40542,6 +40715,7 @@ Potom vyber jednu položku z karty a udělej ji. Jen jednu. Druhé vydání má 
 
 ## Pracovní log
 
+- 2026-07-21: Doplněna příloha o třetím vydání e-booku bez obsahové inflace: rozhodnutí, co má být pro čtenáře lehčí, třídění změn na přidání/prořezání/přesměrování pozornosti, karta třetího vydání, práce s opakovanými signály bez profilování čtenářů, cílené krácení duplicit, uzavření vydání bez nového dluhu, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně znovu ověřeno, že `cody.dreamind.cz` má veřejný Let's Encrypt certifikát expirovaný (`notAfter` 2026-07-17 19:35:56 GMT), aplikace za certifikátem při diagnostickém přímém `curl -k -I` vrací `200 OK` z nginx/Next.js a dostupný kontejner neobsahuje SSH/sudo/deploy přístup k obnově certifikátu.
 - 2026-07-21: Doplněna příloha o druhém vydání e-booku bez přepisování od nuly: účel druhého vydání jednou větou, triage vstupů na chyby/nejasnosti/duplicity/nové možnosti/provozní poznámky, malý balík změn, privacy-first sběr feedbacku, oddělení veřejné poznámky od pracovního logu, rozhodnutí vydat/opravit/odložit/rozdělit, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně znovu ověřeno, že `cody.dreamind.cz` přes proxy končí `Empty reply from server`, přímý veřejný certifikát Let's Encrypt je expirovaný (`notAfter` 2026-07-17 19:35:56 GMT), aplikace za certifikátem při diagnostickém `curl --noproxy '*' -k -I` vrací `200 OK` z nginx/Next.js a neinteraktivní SSH pro účty `root`, `ubuntu`, `deploy`, `cody` ani `node` nemá opravný přístup k obnově certifikátu.
 - 2026-07-21: Doplněna příloha o prvním veřejném vydání e-booku bez velkého třesku: věta služby čtenáři, výběr hlavního artefaktu, oddělení pracovního ocasu od veřejného balíku, nudné publikační minimum, komunikace bez lead-gatingu, chudé privacy-first měření, release poznámka, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně ověřeno, že `cody.dreamind.cz` má přímý veřejný Let's Encrypt certifikát expirovaný od `2026-07-17 19:35:56 GMT`, běžné HTTPS ověření selhává, aplikace za TLS při diagnostickém `curl --noproxy '*' -k` vrací `200 OK` a dostupný kontejner nemá SSH opravný přístup pro obnovu certifikátu.
 - 2026-07-21: Doplněna příloha o release kandidátu e-booku bez poslední noční paniky: rozhodovací věta kandidáta, kontrola po vrstvách místo náhodného čtení, karta release kandidáta, rozlišení oprav před a po vydání, zdrojová kontrola podle rizika tvrzení, ověření veřejného artefaktu, rozhodnutí vydat/opravit/odložit, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně ověřeno, že `cody.dreamind.cz` přes proxy končí `Empty reply from server`, přímé HTTPS bez proxy selhává na expirovaném Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), v kontejneru nejsou SSH klíče a neinteraktivní SSH pro `root` ani `node` nemá opravný přístup k obnově certifikátu.
