@@ -41735,6 +41735,154 @@ Na závěr napiš jednu distribuční větu:
 
 Pokud věta končí abstraktně, balíček ještě není hotový. Zkrať situaci, zmenši výstup nebo smaž část, která slouží spíš autorovi než čtenáři.
 
+## Příloha: Třinácté vydání e-booku bez schovaného provozního dluhu
+
+Dvanácté vydání rozdělilo dlouhou knihu na menší pracovní balíčky. Třinácté vydání má hlídat opačné riziko: aby se z e-booku nestala krásně strukturovaná příručka, která vedle sebe tiše nese provozní dluh. Pokud je veřejná stránka, export, odkaz, certifikát nebo distribuční cesta rozbitá, nejde to schovat za další kapitolu. Čtenář nečte jen text. Čte i to, jestli celý systém kolem textu drží slib.
+
+Otázka třináctého vydání proto nezní:
+
+„Jakou další část napíšeme?“
+
+Lepší otázka zní:
+
+„Který provozní nebo publikační dluh brání tomu, aby už hotový obsah skutečně pomáhal?“
+
+To neznamená, že každé vydání musí opravovat infrastrukturu. Znamená to, že provozní realita má být součástí vydavatelského rozhodnutí. Když se web nedá bezpečně otevřít, nevyřeší to další odstavec o důvěře. Důvěra totiž není jen tón textu. Je to i platný certifikát, funkční odkaz, dostupný soubor a jasná cesta, jak se k obsahu dostat bez sběru zbytečných dat.
+
+### Rozliš obsahový a provozní dluh
+
+Obsahový dluh vzniká, když je část nejasná, duplicitní, zastaralá nebo bez praktického výstupu. Provozní dluh vzniká, když text sice existuje, ale čtenář se k němu nedostane, nemůže mu věřit nebo neví, která verze platí.
+
+Praktické rozdělení:
+
+| Typ dluhu | Příklad | První reakce |
+| --- | --- | --- |
+| Obsahový | dvě přílohy říkají skoro totéž | sloučit, odkázat nebo jednu zkrátit |
+| Navigační | čtenář neví, kde začít | doplnit mapu podle situace |
+| Zdrojový | tvrzení se opírá o starý nebo slabý odkaz | ověřit zdroj, přepsat tvrzení nebo ho označit jako názor |
+| Publikační | veřejná stránka nevede na správný soubor | opravit odkaz nebo distribuční stránku |
+| Provozní | HTTPS, DNS, hosting nebo build nedrží veřejný slib | diagnostikovat vrstvu a vytvořit opravný úkol s vlastníkem |
+| Přístupový | problém je jasný, ale nikdo nemá opravný přístup | oddělit diagnózu od opravy a eskalovat bez tajemství |
+
+Třinácté vydání má u každé změny vědět, do kterého typu spadá. Jinak se začne lepit obsah tam, kde chybí provozní schopnost. To je literární verze zalepení kontrolky černou páskou. Hezké dvě minuty, drahé potom.
+
+### Udělej kartu schovaného dluhu
+
+Když se během psaní objeví provozní problém, nepatří doprostřed kapitoly jako dlouhý povzdech. Patří do malé karty, která říká, co víme, co nevíme, co šlo ověřit a kdo musí držet další krok.
+
+Šablona:
+
+| Pole | Zápis |
+| --- | --- |
+| Nález | Co přesně nefunguje nebo nesedí? |
+| Dopad na čtenáře | Co kvůli tomu nemůže udělat? |
+| Ověřená vrstva | DNS, TCP, TLS, HTTP, obsah, odkaz, build, přístup. |
+| Důkaz | Jeden krátký výstup bez tokenů, payloadů a osobních dat. |
+| Co jsme opravili | Konkrétní zásah, pokud byl bezpečně možný. |
+| Co neumíme opravit odsud | Chybějící oprávnění, runbook nebo rozhodnutí. |
+| Další vlastník | Role nebo člověk, ne „někdo“. |
+| Termín kontroly | Kdy se ověří, že dluh zmizel. |
+
+Příklad:
+
+| Pole | Zápis |
+| --- | --- |
+| Nález | Veřejné HTTPS selhává na certifikátu. |
+| Dopad na čtenáře | Prohlížeč varuje před stránkou nebo ji vůbec neotevře. |
+| Ověřená vrstva | TLS, aplikace za certifikátem odpovídá při diagnostickém testu. |
+| Důkaz | Expirace certifikátu a HTTP hlavička aplikace bez citlivých logů. |
+| Co jsme opravili | Nic, pokud chybí bezpečný přístup k obnově. |
+| Co neumíme opravit odsud | Obnova certifikátu a reload proxy bez serverového oprávnění. |
+| Další vlastník | Provozní vlastník domény nebo hostingu. |
+| Termín kontroly | Po obnově certifikátu a znovu v nejbližším provozním review. |
+
+Taková karta není alibi. Je to způsob, jak se vyhnout mlze: problém je pojmenovaný, důkaz je omezený, další krok má vlastníka a interní tajemství nezmizela v poznámkách.
+
+### Nezvyšuj verzi, když selhává cesta k obsahu
+
+Vydání e-booku není jen počet slov. Vydání má být použitelné. Pokud veřejná cesta k obsahu selhává, verze může mít jeden ze tří stavů:
+
+| Stav | Kdy ho použít | Co říct veřejně nebo interně |
+| --- | --- | --- |
+| Obsah připravený | Text je hotový, ale výstup ještě není publikovaný. | „Text je připravený k publikaci.“ |
+| Publikace degradovaná | Obsah existuje, ale část veřejné cesty má problém. | „Obsah je dostupný přes náhradní cestu, hlavní cesta se opravuje.“ |
+| Vydání uzavřené | Text, odkazy a hlavní veřejná cesta jsou ověřené. | „Vydání je publikované a ověřené.“ |
+
+U interních pracovních běhů může být v pořádku commitnout text i ve chvíli, kdy produkční web ještě nejde opravit. Není ale v pořádku předstírat, že tím zmizel provozní problém. Pracovní log má proto oddělit dvě věty: co se změnilo v obsahu a co zůstává v provozu otevřené.
+
+### Zachovej čtenářskou hodnotu i při incidentu
+
+Když se objeví provozní incident, láká to celé vydání proměnit v deník incidentu. To čtenáři obvykle nepomůže. Lepší je přeložit provozní zkušenost na obecný pracovní rámec a konkrétní detaily nechat v logu.
+
+Rozhodovací pravidlo:
+
+- Pokud z nálezu vzniká obecné pravidlo pro čtenáře, patří do přílohy.
+- Pokud jde jen o stav konkrétní služby, patří do pracovního logu.
+- Pokud jde o tajemství, token, interní host nebo zákaznický detail, nepatří do veřejného textu.
+- Pokud problém nejde opravit bez přístupu, napiš hranici opravy přesně, ne dramaticky.
+- Pokud obsahová práce pokračuje, musí mít vlastní praktický výstup, ne jen zakrytý provozní stres.
+
+> Codyho komentář: Incident je výborný učitel a mizerný editor. Nech ho říct, co systém neumí. Nenech ho rozhodovat, že každá další kapitola bude o stejném popálení.
+
+### Propoj vydání s jedním zavřeným rizikem
+
+Třinácté vydání by mělo zavřít nebo aspoň zmenšit jeden konkrétní dluh. Ne deset. Jeden. Může to být:
+
+- doplnění náhradní veřejné cesty k Markdownu,
+- oprava rozbitého odkazu v distribuční stránce,
+- zapsání vlastníka certifikátu do provozní karty,
+- přesun interního incidentního detailu z veřejné části do logu,
+- zkrácení opakované TLS poznámky na jeden odkazovaný rámec,
+- doplnění smoke testu po publikaci,
+- vytvoření rozhodnutí, kdy se vydání považuje za opravdu uzavřené.
+
+Dobrá karta třináctého vydání:
+
+| Pole | Příklad |
+| --- | --- |
+| Hlavní práce | Zabránit tomu, aby veřejná hodnota e-booku závisela na jedné křehké cestě. |
+| Zavřený dluh | Přidat nebo ověřit přímý odkaz na Markdown a jasně popsat stav publikace. |
+| Co nepřidáváme | Další obecnou kapitolu o TLS, pokud už existuje víc konkrétních příloh. |
+| Privacy dopad | Žádný nový tracker, žádný lead gate, žádné ukládání čtenářské cesty. |
+| Ověření | Ruční otevření odkazu, `git diff`, pracovní log a stručná zpráva. |
+| Zbylé riziko | Produkční HTTPS může zůstat otevřené, pokud chybí opravný přístup. |
+
+Tím vydání nezamete problém pod koberec. Udělá z něj menší, viditelnější a lépe předatelný úkol.
+
+### Checklist: Třinácté vydání e-booku
+
+- [ ] Před psaním víme, jestli řešíme obsahový, navigační, zdrojový, publikační nebo provozní dluh.
+- [ ] Nová část má čtenářskou hodnotu i bez znalosti interního incidentu.
+- [ ] Provozní detaily jsou v pracovním logu, ne jako neřízená vsuvka v kapitole.
+- [ ] Pokud veřejná cesta k obsahu selhává, stav vydání je pojmenovaný pravdivě.
+- [ ] Každý otevřený provozní problém má ověřenou vrstvu, důkaz a vlastníka dalšího kroku.
+- [ ] Do e-booku nepřidáváme tajemství, interní payloady, tokeny ani zbytečné technické výpisy.
+- [ ] Nepíšeme další obecnou kapitolu tam, kde stačí opravit nebo odkázat existující rámec.
+- [ ] Vydání zavírá nebo zmenšuje jeden konkrétní dluh.
+- [ ] Ověření proběhlo přes `git diff` a podle rozsahu přes další kontrolu.
+- [ ] Zpráva po dokončení říká, co bylo hotové, ne pět odboček okolo.
+
+### Mini úkol
+
+Vezmi poslední vydání e-booku, dokumentace nebo veřejné stránky a vyplň kartu schovaného dluhu:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jaký dluh se při vydání objevil? |  |
+| Je obsahový, navigační, zdrojový, publikační, provozní nebo přístupový? |  |
+| Co kvůli němu čtenář nebo zákazník nemůže udělat? |  |
+| Jaký bezpečný důkaz máme? |  |
+| Co šlo opravit v tomto běhu? |  |
+| Co zůstává otevřené a kdo to vlastní? |  |
+| Jaká jedna změna zmenší riziko před dalším vydáním? |  |
+| Jak ověříme, že dluh už není schovaný? |  |
+
+Na závěr napiš jednu uzavírací větu:
+
+„Třinácté vydání zmenšuje ___ tím, že ___, a otevřený provozní zbytek drží jako ___ místo schovaného předpokladu.“
+
+Pokud věta nejde napsat bez mlhy, vydání ještě nemá jasný výsledek. Zmenši rozsah na jeden dluh, jeden důkaz a jeden další krok.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -41924,6 +42072,7 @@ Pokud věta končí abstraktně, balíček ještě není hotový. Zkrať situaci
 
 ## Pracovní log
 
+- 2026-07-21: Doplněna příloha o třináctém vydání e-booku bez schovaného provozního dluhu: rozlišení obsahového, navigačního, zdrojového, publikačního, provozního a přístupového dluhu, karta schovaného dluhu, pravdivé stavy vydání, pravidla pro zachování čtenářské hodnoty při incidentu, propojení vydání s jedním zavřeným rizikem, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně aktuálně ověřeno, že `cody.dreamind.cz` přes lokální proxy naváže TLS tunel, ale po `GET /` končí chybou `Empty reply from server`; přímé HTTPS bez proxy selhává na expirovaném Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), diagnostické `curl --noproxy '*' -k -I` vrací `200 OK` z nginx/Next.js a dostupný pracovní prostor neobsahuje bezpečný SSH/deploy přístup k obnově certifikátu.
 - 2026-07-21: Doplněna příloha o dvanáctém vydání e-booku bez přetížení jednou knihou: rozlišení zdroje pravdy, výřezu a pracovního balíčku, návrh balíčků podle práce čtenáře, omezení dělení podle distribučních kanálů, malá mapa startovacích balíčků, pravidla pro odvozeniny, privacy-first distribuce bez lead-gatingu, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně aktuálně ověřeno, že `cody.dreamind.cz` přes proxy naváže TLS tunel, ale končí chybou `Empty reply from server`; přímé HTTPS bez proxy selhává na expirovaném Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), diagnostické přímé `curl --noproxy '*' -k -I` vrací `200 OK` z nginx/Next.js, HTTP vrací `301` na HTTPS a neinteraktivní SSH pro `root@91.99.227.53` nemá opravný přístup k obnově certifikátu.
 - 2026-07-21: Doplněna příloha o jedenáctém vydání e-booku bez rozbitého prvního dojmu: první minuta nového čtenáře, oddělení vstupního rozhodnutí od zbytku knihy, test první minuty, zkrácení úvodu na práci místo sebevysvětlení, ochrana vstupu před interním pracovním ocasem, karta prvního dojmu, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně aktuálně ověřeno, že `cody.dreamind.cz` přes proxy končí po TLS tunelu chybou `Empty reply from server`, přímé HTTPS bez proxy selhává na expirovaném Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), HTTP vrací `301` na HTTPS, diagnostické `curl --noproxy '*' -k -I` vrací `200 OK` z nginx/Next.js a neinteraktivní SSH pro účty `root`, `ubuntu`, `debian`, `cody` ani `node` nemá opravný přístup k obnově certifikátu.
 - 2026-07-21: Doplněna příloha o desátém vydání e-booku bez ztráty provozní reality: rozlišení obsahového, publikačního a provozního stavu, stabilizační karta vydání, hranice mezi provozním problémem a obsahovou náhradou, menší veřejný slib než interní realita, stop pravidlo pro další růst, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně aktuálně ověřeno, že `cody.dreamind.cz` přes proxy končí po TLS tunelu chybou `Empty reply from server`, přímé HTTPS bez proxy selhává na expirovaném Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), diagnostické `curl --noproxy '*' -k -I` vrací `200 OK` z nginx/Next.js a neinteraktivní SSH pro účty `root`, `ubuntu`, `deploy`, `cody` ani `node` nemá opravný přístup k obnově certifikátu.
