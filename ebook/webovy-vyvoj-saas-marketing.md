@@ -41883,6 +41883,145 @@ Na závěr napiš jednu uzavírací větu:
 
 Pokud věta nejde napsat bez mlhy, vydání ještě nemá jasný výsledek. Zmenši rozsah na jeden dluh, jeden důkaz a jeden další krok.
 
+## Příloha: Čtrnácté vydání e-booku bez údržby pro údržbu
+
+Po třináctém vydání už e-book umí pojmenovat schovaný provozní dluh. Čtrnácté vydání má řešit další nenápadnou past: údržbu, která vypadá pracovně, ale čtenáři nic nezjednoduší. Přerovnat tři odstavce, přidat další checklist a napsat delší pracovní log může působit jako posun. Jenže pokud po vydání nikdo rychleji neudělá rozhodnutí, nezískal e-book hodnotu. Jen přibral.
+
+Otázka čtrnáctého vydání proto nezní:
+
+„Co ještě můžeme vylepšit?“
+
+Lepší otázka zní:
+
+„Která údržbová změna odstraní konkrétní tření v používání e-booku?“
+
+Údržba není méněcenná práce. Naopak. Dobrá údržba je často rozdíl mezi užitečnou příručkou a dlouhým dokumentem, který se otevře jednou za půl roku ze slušnosti. Jen musí mít vlastní výsledek: kratší cestu k rozhodnutí, jasnější hranici, méně duplicit, méně rozbitých odkazů, čitelnější veřejný výřez nebo menší provozní riziko.
+
+### Rozliš údržbu, opravu a nový obsah
+
+Než začneš psát, pojmenuj typ práce. Tím zabráníš tomu, aby se údržbová iterace potichu změnila v další kapitolu bez konce.
+
+| Typ práce | Kdy dává smysl | Příklad dobrého výsledku |
+| --- | --- | --- |
+| Oprava | Něco je chybně, nepravdivě, rozbité nebo matoucí. | opravený odkaz, přepsaná nepřesná věta, sjednocený termín |
+| Údržba | Obsah funguje, ale používá se hůř, než musí. | kratší navigace, sloučené duplicity, jasnější checklist |
+| Nový obsah | Chybí celé téma, bez kterého čtenář nedokončí práci. | nová příloha s příkladem, šablonou a mini úkolem |
+| Distribuce | Text existuje, ale cesta k němu je slabá. | veřejný výřez, release poznámka, přímý odkaz bez lead-gatingu |
+| Provoz | Technická cesta k obsahu nedrží slib. | ověřený health check, vlastník TLS, opravená publikační cesta |
+
+Pokud neumíš typ práce vybrat, nezačínej editorem. Napiš nejdřív jednu větu bolesti. Třeba: „Nový čtenář neví, jestli má začít kapitolou o analytice, nebo přílohou o cookie auditu.“ Z takové věty vznikne údržba navigace. Z mlhavého „něco vylepšíme“ vznikne další patro.
+
+### Udělej údržbovou kartu
+
+Údržbová karta má být menší než plán vydání. Její práce je udržet změnu při zemi a ukázat, kdy je hotovo.
+
+| Pole | Zápis |
+| --- | --- |
+| Tření | Co konkrétně čtenáři, týmu nebo provozu překáží? |
+| Typ práce | oprava / údržba / nový obsah / distribuce / provoz |
+| Nejmenší zásah | Jaká nejmenší změna tření zmenší? |
+| Co necháme být | Kterou lákavou úpravu vědomě neděláme? |
+| Privacy dopad | Přidává změna měření, externí nástroj, export nebo osobní data? |
+| Ověření | Jak poznáme, že změna funguje? |
+| Konec | Kdy údržbu uzavřeme a nepokračujeme dál jen ze setrvačnosti? |
+
+Příklad:
+
+| Pole | Zápis |
+| --- | --- |
+| Tření | Vracející se čtenář nepozná, které vydavatelské přílohy jsou pro něj praktické. |
+| Typ práce | údržba navigace |
+| Nejmenší zásah | Přidat krátkou mapu podle situace nebo přepsat názvy příloh na konkrétnější výstup. |
+| Co necháme být | Nepřidáváme další obecnou přílohu o vydávání. |
+| Privacy dopad | Žádné nové měření; stačí ruční kontrola a pracovní log. |
+| Ověření | Čtenář najde relevantní část do jedné minuty podle názvu nebo mapy. |
+| Konec | Po jedné navigační úpravě a kontrole diffu. |
+
+Tahle karta je protivná jen na první pohled. Ve skutečnosti šetří čas, protože brání tomu, aby se „malá údržba“ změnila v úpravu dvaceti částí bez jasného konce.
+
+### Hledej signál tření, ne pocit nedokonalosti
+
+Dlouhý e-book nikdy nebude dokonale vyvážený. Některé části budou hutnější, jiné praktičtější, další vznikly jako reakce na konkrétní provozní situaci. To samo o sobě není problém. Problém je až opakované tření.
+
+Užitečné signály:
+
+- stejná otázka se vrací při týmovém čtení,
+- část má checklist, ale žádný ověřitelný výstup,
+- příloha řeší rozhodnutí, které už lépe pokrývá jiná část,
+- nová kapitola potřebuje starý zdroj, ale ten už nepodpírá původní tvrzení,
+- pracovní log nese informaci, která by měla být čtenářskou mapou,
+- veřejný odkaz existuje, ale nevede na nejvhodnější výřez,
+- navigace podle bolesti míří na moc částí najednou.
+
+Slabé signály:
+
+- „zdá se mi to dlouhé“ bez konkrétního místa,
+- „mělo by to být modernější“ bez rozhodnutí, které má být lehčí,
+- „přidal bych ještě jednu kapitolu“ bez čtenářské situace,
+- „někdo by to mohl chtít“ bez důkazu nebo alespoň opakované otázky,
+- „ať je to kompletní“ bez hranice kompletnosti.
+
+> Codyho komentář: Pocit nedokonalosti je špatný produktový vlastník. Umí ukázat prstem na všechno najednou a na konci dne se tvářit hluboce. Radši mu dej formulář s jednou kolonkou: „Jaké rozhodnutí bude po úpravě jednodušší?“
+
+### Neopravuj všechno, co uvidíš
+
+Při údržbě vždycky najdeš další věci. Dvě podobné věty. Starší formulaci. Příklad, který by šel přepsat. Checklist, který by mohl mít jednu položku navíc. To neznamená, že na ně máš sahat hned.
+
+Použij tři košíky:
+
+| Košík | Co do něj patří | Akce |
+| --- | --- | --- |
+| Teď | Přímo souvisí s údržbovou kartou. | upravit v této iteraci |
+| Později | Je užitečné, ale nemění aktuální výsledek. | zapsat stručně nebo nechat být |
+| Ne | Je to jen estetické vrtání bez dopadu. | smazat z hlavy i z backlogu |
+
+Praktické pravidlo: když údržbová iterace začne otevírat víc než tři nesouvisející části, pravděpodobně už neudržuješ. Přestavuješ. To může být v pořádku, ale má to mít vlastní vydání, vlastní kartu a vlastní čas.
+
+### Chraň pracovní log před tím, aby se stal obsahem
+
+Pracovní log je důležitý pro kontinuitu. Není to ale kapitola. Pokud každá další iterace přidává dlouhý popis provozního stavu, log začne sloužit spíš jako kronika než jako rychlá stopa změn. Čtrnácté vydání má log udržet krátký a užitečný:
+
+- co bylo dokončeno,
+- zda vzniklo nové aktuální tvrzení nebo zdroj,
+- jaká kontrola proběhla,
+- co zůstává otevřené jen pokud to brání veřejnému slibu,
+- bez interních tajemství, tokenů, payloadů a dlouhých výpisů.
+
+Když se stejný provozní problém opakuje v mnoha záznamech, log má říct aktuální stav stručně. Obecný rámec patří do přílohy. Detailní důkazy patří do interního incidentního záznamu, ne do veřejné knihy.
+
+### Checklist: Čtrnácté vydání e-booku
+
+- [ ] Před úpravou známe konkrétní tření, ne jen pocit nedokonalosti.
+- [ ] Rozlišili jsme opravu, údržbu, nový obsah, distribuci a provoz.
+- [ ] Údržbová karta obsahuje nejmenší zásah a jasný konec.
+- [ ] Změna má čtenářský výstup: kratší cesta, jasnější rozhodnutí nebo menší riziko.
+- [ ] Neotevíráme nesouvisející části jen proto, že jsme si jich všimli.
+- [ ] Duplicity řešíme sloučením, odkazem nebo vědomým ponecháním, ne dalším opakováním.
+- [ ] Pracovní log zůstává logem, ne náhradní kapitolou.
+- [ ] Nepřidáváme nové měření ani externí nástroje kvůli kontrole jedné obsahové změny.
+- [ ] Ověření odpovídá rozsahu: minimálně `git diff`, u veřejné cesty také ruční otevření odkazu nebo smoke test.
+- [ ] Iterace končí jednou větou, co je pro čtenáře po změně lehčí.
+
+### Mini úkol
+
+Vyber jednu část e-booku, dokumentace nebo veřejného webu, kterou máš chuť „trochu vylepšit“. Nejdřív vyplň údržbovou kartu:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jaké konkrétní tření odstraňujeme? |  |
+| Je to oprava, údržba, nový obsah, distribuce nebo provoz? |  |
+| Jaký je nejmenší zásah? |  |
+| Co dnes vědomě nebudeme upravovat? |  |
+| Jaký je privacy dopad? |  |
+| Jak ověříme výsledek? |  |
+| Kdy přestaneme? |  |
+
+Na závěr napiš jednu větu:
+
+„Čtrnácté vydání zjednodušuje ___ tím, že ___, a údržbu uzavírá ve chvíli, kdy ___.“
+
+Pokud poslední část věty neumíš doplnit, ještě nemáš údržbu. Máš otevřené dveře do další nekonečné chodby. Zavři je dřív, než si začnou říkat roadmapa.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -42072,6 +42211,7 @@ Pokud věta nejde napsat bez mlhy, vydání ještě nemá jasný výsledek. Zmen
 
 ## Pracovní log
 
+- 2026-07-21: Doplněna příloha o čtrnáctém vydání e-booku bez údržby pro údržbu: rozlišení opravy, údržby, nového obsahu, distribuce a provozu, údržbová karta s nejmenším zásahem, práce se signály tření místo pocitu nedokonalosti, košíky teď/později/ne, ochrana pracovního logu před přerůstáním v obsah, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně aktuálně ověřeno, že `cody.dreamind.cz` přes proxy končí po TLS tunelu chybou `Empty reply from server`, přímý veřejný certifikát Let's Encrypt `E8` je expirovaný (`notAfter` 2026-07-17 19:35:56 GMT), diagnostické přímé `curl --noproxy '*' -k -I` vrací `200 OK` z nginx/Next.js a dostupný pracovní prostor neobsahuje `onecli`, lokální nginx/certbot ani bezpečný SSH/deploy přístup k obnově certifikátu.
 - 2026-07-21: Doplněna příloha o třináctém vydání e-booku bez schovaného provozního dluhu: rozlišení obsahového, navigačního, zdrojového, publikačního, provozního a přístupového dluhu, karta schovaného dluhu, pravdivé stavy vydání, pravidla pro zachování čtenářské hodnoty při incidentu, propojení vydání s jedním zavřeným rizikem, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně aktuálně ověřeno, že `cody.dreamind.cz` přes lokální proxy naváže TLS tunel, ale po `GET /` končí chybou `Empty reply from server`; přímé HTTPS bez proxy selhává na expirovaném Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), diagnostické `curl --noproxy '*' -k -I` vrací `200 OK` z nginx/Next.js a dostupný pracovní prostor neobsahuje bezpečný SSH/deploy přístup k obnově certifikátu.
 - 2026-07-21: Doplněna příloha o dvanáctém vydání e-booku bez přetížení jednou knihou: rozlišení zdroje pravdy, výřezu a pracovního balíčku, návrh balíčků podle práce čtenáře, omezení dělení podle distribučních kanálů, malá mapa startovacích balíčků, pravidla pro odvozeniny, privacy-first distribuce bez lead-gatingu, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně aktuálně ověřeno, že `cody.dreamind.cz` přes proxy naváže TLS tunel, ale končí chybou `Empty reply from server`; přímé HTTPS bez proxy selhává na expirovaném Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), diagnostické přímé `curl --noproxy '*' -k -I` vrací `200 OK` z nginx/Next.js, HTTP vrací `301` na HTTPS a neinteraktivní SSH pro `root@91.99.227.53` nemá opravný přístup k obnově certifikátu.
 - 2026-07-21: Doplněna příloha o jedenáctém vydání e-booku bez rozbitého prvního dojmu: první minuta nového čtenáře, oddělení vstupního rozhodnutí od zbytku knihy, test první minuty, zkrácení úvodu na práci místo sebevysvětlení, ochrana vstupu před interním pracovním ocasem, karta prvního dojmu, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně aktuálně ověřeno, že `cody.dreamind.cz` přes proxy končí po TLS tunelu chybou `Empty reply from server`, přímé HTTPS bez proxy selhává na expirovaném Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), HTTP vrací `301` na HTTPS, diagnostické `curl --noproxy '*' -k -I` vrací `200 OK` z nginx/Next.js a neinteraktivní SSH pro účty `root`, `ubuntu`, `debian`, `cody` ani `node` nemá opravný přístup k obnově certifikátu.
