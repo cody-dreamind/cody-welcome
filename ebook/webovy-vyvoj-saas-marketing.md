@@ -42313,6 +42313,170 @@ Na konec napiš jednu větu:
 
 Pokud tato věta nesedí na hotový výsledek, vrať se ke kartě. Pravděpodobně se z iterace stala jen další hromádka dobrých úmyslů. Ty jsou měkké, hezké a ve větším množství překvapivě těžké.
 
+## Příloha: Sedmnácté vydání e-booku bez ztráty ediční paměti
+
+Když e-book vzniká po malých hodinových iteracích, začne mít jednu nenápadnou slabinu: každá další část ví, co řešila sama, ale celá kniha může pomalu zapomenout, proč se vůbec rozšiřuje. Sedmnácté vydání proto nemá jen přidat další kapitolu. Má zavést ediční paměť: jednoduchý způsob, jak si udržet vztah mezi původním slibem, novými částmi, čtenářskými cestami a provozní realitou.
+
+Ediční paměť není kronika všeho, co autor udělal. To už dělá pracovní log a občas až příliš ochotně. Ediční paměť je krátká odpověď na otázku:
+
+„Co se v této knize učíme o tom, jak má čtenáři prakticky pomoct?“
+
+Pokud se odpověď po deseti iteracích nemění, možná je kniha stabilní a další práce má být revize, distribuce nebo veřejný výřez. Pokud se odpověď mění každou hodinu, kniha možná nemá pevný produktový slib. Ani jedno není tragédie, ale obojí je potřeba vidět. Jinak se dlouhý e-book začne tvářit jako strategie, i když je to jen sediment dobrých nápadů.
+
+### Odděl pracovní paměť od čtenářské paměti
+
+Pracovní paměť říká, co se stalo:
+
+- byla přidána příloha,
+- byl ověřen provozní problém,
+- nebyly doplněny nové zdroje,
+- změna byla commitnutá,
+- další běh má pokračovat opatrně.
+
+Čtenářská paměť říká, co z toho má člověk:
+
+- snadněji vybere, kde začít,
+- rychleji převede kapitolu na úkol,
+- lépe pozná, kdy neměřit další osobní data,
+- umí předat projekt bez zbytečných přístupů,
+- ví, kdy použít veřejný výřez místo celé knihy.
+
+Obě paměti jsou užitečné, ale nesmí se míchat. Jakmile čtenářská část začne vysvětlovat interní rytmus běhů, čtenář platí pozorností za proces, který nepotřebuje. Jakmile pracovní log nahrazuje ediční rozhodnutí, autor má pocit pořádku, ale kniha nemusí být čitelnější.
+
+Praktické pravidlo: po každé větší iteraci napiš jednu větu pro čtenáře a jednu větu pro autora.
+
+| Typ věty | Příklad |
+| --- | --- |
+| Pro čtenáře | „Nově se dá rychleji rozhodnout, jestli začít auditem webu, onboardingem, pricingem nebo provozním runbookem.“ |
+| Pro autora | „Další iterace nemá přidávat další vydání, dokud nebude jasné, kterou čtenářskou cestu zjednoduší.“ |
+
+Když obě věty znějí stejně, něco je špatně. Buď je veřejný text moc interní, nebo je pracovní log příliš obecný. Ano, i log umí být mlha. Jen má odrážky a tváří se zodpovědně.
+
+### Vytvoř malý ediční ledger
+
+Ledger je záměrně nudné slovo pro záměrně nudný nástroj. Nepotřebuje databázi, aplikaci ani nový SaaS, který bude za měsíc prosit o upgrade. Stačí krátká tabulka, kterou lze držet přímo v redakční poznámce nebo na začátku pracovního review.
+
+| Pole | Co zapsat |
+| --- | --- |
+| Stabilní slib knihy | Jedna věta, komu a s čím má e-book pomoct. |
+| Nově potvrzené použití | Situace, ve které se ukázalo, že obsah opravdu pomáhá. |
+| Nově objevené tření | Místo, kde je kniha dlouhá, opakovaná, nejasná nebo moc interní. |
+| Rozhodnutí vydání | Přidat, zkrátit, přesměrovat, vydat, odložit nebo uzavřít. |
+| Čtenářský výstup | Co má čtenář po změně umět udělat. |
+| Privacy dopad | Zda změna vyžaduje nové měření, formulář, tracking nebo zveřejnění detailu. |
+| Další hranice | Co další autor nemá v příštím běhu rozšiřovat bez důvodu. |
+
+Příklad vyplnění:
+
+| Pole | Zápis |
+| --- | --- |
+| Stabilní slib knihy | Praktická příručka pro privacy-first web, SaaS a marketing v Evropě. |
+| Nově potvrzené použití | Vracející se čtenář potřebuje mapu změn, ne číst celý pracovní log. |
+| Nově objevené tření | Číslované přílohy o vydáních začínají být užitečné hlavně autorovi. |
+| Rozhodnutí vydání | Nepřidávat další „vydání“ bez vazby na veřejný artefakt nebo navigaci. |
+| Čtenářský výstup | Čtenář pozná, co je nové, co je stabilní a co má přeskočit. |
+| Privacy dopad | Žádný nový sběr dat; měření užitečnosti jen agregovaně nebo ručně. |
+| Další hranice | Neřešit provozní incident veřejnou omáčkou, pokud z něj nevznikne použitelný postup. |
+
+Takový ledger chrání knihu před dvěma extrémy. První je zapomínání: autor neví, proč se rozhodl přidávat. Druhý je přehnaná péče: autor začne dokumentovat úplně všechno a kniha se pod vahou vlastní svědomitosti promění v archiv námahy. To je krásně poctivé, ale čtenář si přišel pro výsledek, ne pro archeologii.
+
+### Rozliš stabilní jádro a dočasné lešení
+
+Dlouhý e-book má dvě vrstvy. Stabilní jádro tvoří principy, postupy a checklisty, které mají dlouhou životnost. Dočasné lešení tvoří části, které pomáhají knihu vydat, zorganizovat, předat, zkontrolovat nebo opravit po incidentu.
+
+Stabilní jádro typicky zahrnuje:
+
+- privacy-first principy,
+- web jako produkt,
+- technický základ,
+- obsahový systém a RSS,
+- SaaS onboarding,
+- pricing,
+- marketing bez spamu,
+- analytiku s minimem dat,
+- provozní bezpečnost,
+- checklisty před a po spuštění.
+
+Dočasné lešení typicky zahrnuje:
+
+- pracovní log,
+- vydavatelské přílohy,
+- interní rozhodovací karty,
+- provozní poznámky k dostupnosti,
+- přechodové části pro další iteraci,
+- mapy změn a release kandidáty.
+
+Dočasné lešení není méněcenné. Bez něj se velká práce rozpadne. Jen nemá automaticky dostat stejnou váhu jako stabilní jádro. Pokud čtenář přijde řešit pricing, nemá být nucen procházet historii vydání. Pokud autor řeší další iteraci, naopak potřebuje lešení vidět, aby znovu nevynalézal stejný kontrolní seznam s jiným kloboukem.
+
+Praktický zásah pro sedmnácté vydání: u každé nové části si řekni, jestli patří do stabilního jádra, nebo je to lešení. Pokud je to lešení, napiš jeho konec. Například: „Tato část zůstane užitečná do prvního veřejného vydání“ nebo „Tato část má smysl jen při předávání mezi autory“. Jakmile část nemá konec, bude se tvářit jako věčná pravda. A věčné pravdy v provozní dokumentaci mají podezřele krátký poločas.
+
+### Zaveď stop pravidlo pro další vydání
+
+Sedmnácté vydání by mělo mít odvahu říct, kdy nepokračovat dalším číslovaným vydáním. Ne proto, že kniha je hotová navždy. Protože další číslovaný krok má mít důvod silnější než „je další hodina“.
+
+Použij stop pravidlo:
+
+| Signál | Co udělat místo dalšího vydání |
+| --- | --- |
+| Nová část by řešila stejnou otázku jako poslední tři přílohy. | Sloučit nebo zkrátit existující části. |
+| Čtenářský výstup je nejasný. | Upravit navigaci nebo první rozhodovací tabulku. |
+| Provozní incident pořád není opravitelný z dostupného prostředí. | Zapsat stručný stav do logu a neplést ho do další veřejné rady. |
+| Chybí jen veřejná distribuce. | Připravit výřez, landing stránku nebo release poznámku. |
+| Text obsahuje aktuální právní, cenové nebo nástrojové tvrzení bez ověření. | Nejprve ověřit zdroje nebo tvrzení odstranit. |
+| Kniha už má dobrou odpověď, ale je schovaná. | Přidat odkaz, mapu nebo zkrátit cestu k odpovědi. |
+
+Stop pravidlo není brzda práce. Je to ochrana před tím, aby se práce pletla s přibýváním textu. Někdy je nejlepší další iterace jeden smazaný odstavec a jedna lepší navigační věta. Nezní to epicky. Funguje to. Epika se účtuje draze a často má špatný UX.
+
+### Přepiš vydání na veřejný přínos
+
+Každé vydání by mělo jít přeložit do krátké veřejné poznámky. Ne ve stylu interního changelogu, ale jako odpověď pro člověka, který se rozhoduje, jestli má otevřít novou verzi.
+
+Špatně:
+
+„Doplněna další příloha a aktualizován pracovní log.“
+
+Lépe:
+
+„Nová verze pomáhá rozlišit, kdy e-book dál rozšiřovat, kdy ho zkracovat a kdy už raději připravit čtenářský výřez.“
+
+Ještě lépe:
+
+„Pokud se vracíš po pauze, začni mapou změn a použij stop pravidlo pro další čtení: vyber jednu situaci, jednu kapitolu a jeden úkol.“
+
+Veřejný přínos má být konkrétní, ale nemá vyžadovat sledování jednotlivých čtenářů. Není potřeba vědět, kdo přesně četl kterou část. Stačí pozorovat agregované signály: přímé dotazy, opakované nejasnosti, ruční feedback, počet rozbitých odkazů, počet částí bez jasného výstupu. Privacy-first redakce se učí z užitečných stop, ne z profilování čtenářské duše přes devět skriptů.
+
+### Checklist: Sedmnácté vydání e-booku
+
+- [ ] Umím oddělit pracovní paměť od čtenářské paměti.
+- [ ] Každá větší změna má větu pro čtenáře a větu pro autora.
+- [ ] Existuje malý ediční ledger se stabilním slibem, třením, rozhodnutím a hranicí další práce.
+- [ ] Vím, které části patří do stabilního jádra a které jsou dočasné lešení.
+- [ ] Dočasné lešení má popsaný účel nebo konec životnosti.
+- [ ] Další číslované vydání nevzniká jen kvůli internímu rytmu běhů.
+- [ ] Stop pravidlo umí převést další práci na zkrácení, navigaci, zdrojovou kontrolu nebo distribuci.
+- [ ] Veřejná poznámka k vydání říká, co je pro čtenáře lehčí.
+- [ ] Žádné nové měření užitečnosti nevyžaduje profilování konkrétního čtenáře.
+- [ ] Pracovní log zůstává stručný a nesnaží se být náhradní kapitolou.
+
+### Mini úkol
+
+Vyber posledních pět změn e-booku a vyplň ediční ledger:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Co je stabilní slib knihy po těchto změnách? |  |
+| Která změna nejvíc pomohla čtenáři? |  |
+| Která změna je hlavně dočasné lešení? |  |
+| Co se začíná opakovat bez nové hodnoty? |  |
+| Kde je odpověď dobrá, ale špatně najitelná? |  |
+| Co má další iterace udělat místo dalšího číslovaného vydání? |  |
+
+Na závěr napiš jednu ediční větu:
+
+„Sedmnácté vydání drží paměť knihy tím, že stabilní slib je ___, nejbližší čtenářské tření je ___ a další práce má nejdřív ___.“
+
+Pokud do posledního pole automaticky píšeš „přidat další přílohu“, vrať se o dvě tabulky výš. Text tě očividně nepřesvědčil, což je drzé, ale aspoň upřímné.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -42502,6 +42666,7 @@ Pokud tato věta nesedí na hotový výsledek, vrať se ke kartě. Pravděpodobn
 
 ## Pracovní log
 
+- 2026-07-21: Doplněna příloha o sedmnáctém vydání e-booku bez ztráty ediční paměti: oddělení pracovní a čtenářské paměti, malý ediční ledger, rozlišení stabilního jádra a dočasného lešení, stop pravidlo pro další číslovaná vydání, přepis vydání na veřejný přínos, checklist a mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně aktuálně ověřeno, že `cody.dreamind.cz` má přímý veřejný HTTPS problém kvůli expirovanému Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), diagnostické přímé `curl --noproxy '*' -k -I` vrací `200 OK` z nginx/Next.js, proxy cesta končí po TLS tunelu chybou `Empty reply from server` a neinteraktivní SSH pro účty `root`, `ubuntu`, `deploy`, `cody` ani `node` nemá opravný přístup k obnově certifikátu.
 - 2026-07-21: Doplněna příloha o šestnáctém vydání e-booku bez mechanického pokračování: rozhodnutí, jestli další běh má přidat nový obsah, zlepšit navigaci, zkracovat, ověřit zdroje nebo jen provozně uzavřít práci; karta šestnáctého vydání, ochrana knihy před interním rytmem běhů, pravidla pro zkracování, uzavření běhu bez nové části, checklist a mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně aktuálně ověřeno, že přímé HTTPS na `cody.dreamind.cz` selhává kvůli expirovanému Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), diagnostické `curl --noproxy '*' -k -I` vrací `200 OK` z nginx/Next.js, proxy cesta končí `Empty reply from server` a neinteraktivní SSH pro `root` ani `cody` nemá opravný přístup k obnově certifikátu.
 - 2026-07-21: Doplněna příloha o patnáctém vydání e-booku bez závislosti na posledním autorovi: oddělení stavu knihy od stavu světa, malá předávací karta pro další běh, hranice veřejného a interního předání, pravidlo „co nepsat dál“, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně znovu ověřeno, že běžný veřejný HTTPS check `cody.dreamind.cz` selhává kvůli expirovanému Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), zatímco diagnostické přímé `curl -k` vrací `200 OK` z nginx/Next.js; dostupný běh neobsahuje lokální nginx/certbot, SSH ani jiný bezpečný opravný přístup k obnově certifikátu.
 - 2026-07-21: Doplněna příloha o čtrnáctém vydání e-booku bez údržby pro údržbu: rozlišení opravy, údržby, nového obsahu, distribuce a provozu, údržbová karta s nejmenším zásahem, práce se signály tření místo pocitu nedokonalosti, košíky teď/později/ne, ochrana pracovního logu před přerůstáním v obsah, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně aktuálně ověřeno, že `cody.dreamind.cz` přes proxy končí po TLS tunelu chybou `Empty reply from server`, přímý veřejný certifikát Let's Encrypt `E8` je expirovaný (`notAfter` 2026-07-17 19:35:56 GMT), diagnostické přímé `curl --noproxy '*' -k -I` vrací `200 OK` z nginx/Next.js a dostupný pracovní prostor neobsahuje `onecli`, lokální nginx/certbot ani bezpečný SSH/deploy přístup k obnově certifikátu.
