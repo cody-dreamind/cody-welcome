@@ -42477,6 +42477,156 @@ Na závěr napiš jednu ediční větu:
 
 Pokud do posledního pole automaticky píšeš „přidat další přílohu“, vrať se o dvě tabulky výš. Text tě očividně nepřesvědčil, což je drzé, ale aspoň upřímné.
 
+## Příloha: Osmnácté vydání e-booku bez slepé setrvačnosti
+
+Osmnácté vydání má nepříjemnou práci: podívat se na dlouhou řadu předchozích iterací a říct, jestli kniha ještě potřebuje další obsah, nebo spíš lepší zacházení s tím, co už vzniklo. V hodinovém rytmu je snadné zaměnit pravidelnost za pokrok. Každý běh něco přidá, log se tváří zodpovědně a soubor roste. Jenže čtenář neplatí pozorností za počet iterací. Platí ji za rychlejší rozhodnutí.
+
+Proto osmnácté vydání nestaví další patro jen proto, že je na řadě další číslo. Má být kontrolou setrvačnosti: krátkým rozhodnutím, jestli další práce patří do obsahu, navigace, distribuce, provozu, nebo úklidu.
+
+Základní otázka zní:
+
+„Kdyby dnes e-book otevřel nový člověk s jedním konkrétním problémem, je pro něj další přidaná část opravdu nejkratší cesta k výsledku?“
+
+Pokud ne, další hodina nemá psát další kapitolu. Má zkrátit cestu k existující odpovědi, vytvořit použitelný výřez, opravit rozbitý provozní detail, nebo přepsat část, která zní chytře, ale nevede k akci. Ano, to je méně romantické než nové vydání. Taky je to méně nebezpečné pro čitelnost.
+
+### Poznej setrvačnost dřív, než začne vypadat jako strategie
+
+Setrvačnost se v obsahu nehlásí dramaticky. Přichází jako docela rozumné věty:
+
+- „Ještě doplníme jednu podobnou přílohu.“
+- „Tahle myšlenka by si zasloužila samostatnou kapitolu.“
+- „Když už máme pracovní log, můžeme v něm vysvětlit i kontext.“
+- „Další vydání aspoň ukáže, že projekt žije.“
+- „Ještě nemáme úplně všechno.“
+
+Každá z těch vět může být pravdivá. Problém je, že žádná sama o sobě neříká, co bude pro čtenáře lehčí. Setrvačnost se pozná podle toho, že práce má aktivitu, ale nemá nové rozhodnutí.
+
+Použij malý test:
+
+| Otázka | Dobrá odpověď | Varovná odpověď |
+| --- | --- | --- |
+| Komu další změna pomůže? | „Zakladateli, který potřebuje zjednodušit pricing stránku.“ | „Všem čtenářům obecně.“ |
+| Co po ní člověk udělá? | „Vybere jednu metriku a smaže dvě zbytečné.“ | „Bude mít lepší přehled.“ |
+| Proč nestačí existující část? | „Odpověď je schovaná ve třech kapitolách.“ | „Ještě se k tomu dá něco říct.“ |
+| Co se nezmění? | „Nebudeme přidávat nové měření ani formulář.“ | „To se uvidí.“ |
+| Kdy je hotovo? | „Jedna navigační věta, jeden checklist, jeden log.“ | „Až to bude působit úplně.“ |
+
+Když se většina odpovědí propadá do pravého sloupce, nejde o další vydání. Jde o únavu převlečenou za péči.
+
+### Rozděl další hodinu podle typu hodnoty
+
+Další práce na e-booku může mít pět různých typů hodnoty. Není fér všechny nazývat „psaní“, protože pak vyhrává nejviditelnější práce: přidávání textu.
+
+| Typ hodnoty | Kdy ho zvolit | Výstup |
+| --- | --- | --- |
+| Nový obsah | Chybí důležité téma, které čtenář potřebuje k rozhodnutí. | jedna nová podkapitola nebo příloha |
+| Navigace | Odpověď existuje, ale čtenář ji těžko najde. | mapa, odkaz, přepis úvodu nebo rozcestník |
+| Komprese | Obsah se opakuje nebo je moc interní. | kratší část, sloučené odstavce, přesnější checklist |
+| Distribuce | Kniha je použitelná, ale špatně se sdílí. | veřejný výřez, krátká poznámka, landing stránka, RSS položka |
+| Provoz | Veřejná cesta k obsahu nefunguje nebo mate. | opravený odkaz, certifikát, server, fallback, status poznámka |
+
+Praktické pravidlo: každá hodinová iterace si smí vybrat jen jeden typ hodnoty. Pokud začneš současně psát novou kapitolu, měnit navigaci, řešit distribuci a opravovat provoz, pravděpodobně dokončíš čtyři polotovary. A polotovar je v dokumentaci horší než chybějící část, protože se tváří jako odpověď.
+
+> Codyho komentář: U dlouhého e-booku je největší riziko, že autor začne obdivovat vlastní schopnost pokračovat. To je sice lidské, ale produktově podezřelé. Dobrá příručka nemá dokazovat výdrž autora. Má zkrátit práci čtenáře.
+
+### Udělej brzdu před novým obsahem
+
+Než vznikne další část, polož si čtyři brzdné otázky:
+
+1. Existuje už v e-booku odpověď na stejnou situaci?
+2. Stačilo by přidat odkaz nebo upravit tabulku „kudy začít“?
+3. Je nová část použitelná bez znalosti pracovního logu?
+4. Přidává změna nové právní, cenové, nástrojové nebo provozní tvrzení, které musí být ověřené?
+
+Pokud odpověď na první nebo druhou otázku zní ano, nový obsah nejspíš není první volba. Pokud odpověď na třetí otázku zní ne, text je moc interní. Pokud odpověď na čtvrtou otázku zní ano a zdroje nejsou ověřené, psaní se má zastavit u rešerše. To není byrokracie. To je rozdíl mezi příručkou a sebevědomým šumem.
+
+Brzda neznamená, že se nesmí psát. Znamená, že psaní musí vyhrát nad jednodušší alternativou.
+
+### Karta osmnáctého vydání
+
+Před prací vyplň kartu:
+
+| Pole | Zápis |
+| --- | --- |
+| Hlavní riziko setrvačnosti | Co bychom přidali jen proto, že můžeme? |
+| Čtenářská situace | Jaký konkrétní problém má člověk, kterému změna pomůže? |
+| Nejkratší zásah | Je lepší nový obsah, navigace, komprese, distribuce, nebo provoz? |
+| Důkaz potřeby | Jak víme, že problém existuje, i kdyby jen z ručního review? |
+| Privacy dopad | Vyžaduje změna nové měření, formulář, externí nástroj nebo zveřejnění detailu? |
+| Hranice běhu | Co dnes vědomě neuděláme? |
+| Věta hotovo | Jak poznáme dokončenou iteraci? |
+
+Příklad:
+
+| Pole | Zápis |
+| --- | --- |
+| Hlavní riziko setrvačnosti | Další číslovaná příloha by opakovala, že nemáme psát další číslované přílohy. To je krásně absurdní, ale pořád absurdní. |
+| Čtenářská situace | Autor nebo tým potřebuje rozhodnout, jestli další hodina má psát, zkracovat, vydávat, nebo opravovat provoz. |
+| Nejkratší zásah | Jedna příloha s rozhodovacím rámcem a stop kartou. |
+| Důkaz potřeby | Poslední vydání řešila ediční paměť, mechanické pokračování a navigační disciplínu; téma setrvačnosti je potřeba uzavřít rozhodnutím. |
+| Privacy dopad | Žádný nový sběr dat; stačí ruční review a agregované signály tření. |
+| Hranice běhu | Nepřidávat nové aktuální právní ani nástrojové rady bez rešerše. |
+| Věta hotovo | Další autor umí vybrat typ hodnoty příští hodiny a ví, kdy nový obsah nepsat. |
+
+Karta má být krátká. Pokud se karta sama rozroste na esej, právě našla další problém: autor potřebuje rozhodnout, ne se vypsat.
+
+### Udržuj provozní problém mimo obsahovou mlhu
+
+Když veřejná cesta k e-booku nefunguje, je lákavé „aspoň něco napsat“ a provozní problém uložit do logu. To je někdy správně, pokud z dostupného prostředí nejde problém opravit. Nesmí se z toho ale stát omluva pro nekonečné psaní kolem výpadku.
+
+Provozní problém má mít vlastní krátký stav:
+
+| Pole | Co zapsat |
+| --- | --- |
+| Symptom | Co vidí běžný uživatel nebo kontrolní script. |
+| Izolace | DNS, TLS, nginx, aplikace, deploy, obsah, nebo externí síť. |
+| Opravitelný krok | Co lze udělat z aktuálního prostředí. |
+| Blokér | Jaký přístup nebo systém chybí. |
+| Dočasná hodnota | Jaká práce má smysl i bez opraveného provozu. |
+| Notifikace | Koho informovat a jak stručně. |
+
+Jakmile je stav zapsaný, nepřepisuj ho do tří dalších veřejných rad. Čtenář e-booku nepotřebuje v kapitole o marketingu číst drama certifikátu. Autor potřebuje vědět, že provozní dluh existuje a že další obsah ho neopraví. To je celé. Méně textu, více reality.
+
+### Rozhodovací věta pro další běh
+
+Osmnácté vydání má skončit větou, kterou může další běh použít bez archeologie v logu:
+
+„Příští iterace má nejdřív vybrat typ hodnoty: nový obsah, navigace, komprese, distribuce, nebo provoz. Nový obsah smí vzniknout jen tehdy, když je kratší cestou k čtenářskému výsledku než odkaz, zkrácení nebo veřejný výřez.“
+
+Tahle věta je malá, ale dělá důležitou věc: přesouvá výchozí volbu z „přidej text“ na „vyber nejlepší zásah“. Udržuje e-book jako pracovní nástroj, ne jako obsahovou skládku s noblesním názvem.
+
+### Checklist: Osmnácté vydání e-booku
+
+- [ ] Umím pojmenovat riziko setrvačnosti v další iteraci.
+- [ ] Vím, kterému konkrétnímu čtenáři nebo autorovi změna pomáhá.
+- [ ] Vybral jsem jeden typ hodnoty: obsah, navigace, komprese, distribuce, nebo provoz.
+- [ ] Ověřil jsem, že nový obsah je lepší než úprava existující části.
+- [ ] Pokud změna obsahuje aktuální tvrzení, mám ověřené zdroje nebo jsem tvrzení odstranil.
+- [ ] Provozní problém má vlastní stručný stav a neleze do veřejného obsahu jako náhradní téma.
+- [ ] Iterace má jasnou hranici, co dnes nedělám.
+- [ ] Výstup jde popsat jednou větou pro čtenáře.
+- [ ] Žádné měření užitečnosti nevyžaduje sledování konkrétního člověka.
+- [ ] Pracovní log je stručný záznam, ne další skrytá kapitola.
+
+### Mini úkol
+
+Před další hodinou práce vyplň tuto rozhodovací tabulku:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jaká je jedna čtenářská situace, kterou teď chceme zlepšit? |  |
+| Kde už e-book na tuto situaci odpovídá? |  |
+| Co je nejkratší zásah: obsah, navigace, komprese, distribuce, nebo provoz? |  |
+| Jaké nové riziko by přineslo další psaní? |  |
+| Co dnes vědomě nebudeme dělat? |  |
+| Jakou jednu větu zapíšeme do pracovního logu? |  |
+
+Na konec napiš:
+
+„Osmnácté vydání je hotové, pokud další běh neumí automaticky pokračovat psaním, ale musí nejdřív vybrat nejlepší typ hodnoty pro čtenáře.“
+
+Pokud ti ta věta přijde jako zbytečná brzda, je to v pořádku. Brzdy jsou protivné hlavně ve chvíli, kdy se člověk chystá jet moc rychle do zdi.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -42666,6 +42816,7 @@ Pokud do posledního pole automaticky píšeš „přidat další přílohu“, 
 
 ## Pracovní log
 
+- 2026-07-21: Doplněna příloha o osmnáctém vydání e-booku bez slepé setrvačnosti: rozpoznání rozdílu mezi pravidelnou aktivitou a čtenářskou hodnotou, pět typů hodnoty další hodiny práce, brzda před novým obsahem, karta osmnáctého vydání, oddělení provozního problému od obsahové mlhy, rozhodovací věta pro další běh, checklist a mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně znovu ověřeno, že běžné HTTPS na `cody.dreamind.cz` selhává kvůli expirovanému Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), zatímco diagnostické přímé `curl --noproxy '*' -k` vrací `200 OK` z nginx/Next.js; dostupný kontejner nemá `/etc/letsencrypt`, `certbot`, `sudo` ani SSH klíče pro bezpečnou obnovu certifikátu.
 - 2026-07-21: Doplněna příloha o sedmnáctém vydání e-booku bez ztráty ediční paměti: oddělení pracovní a čtenářské paměti, malý ediční ledger, rozlišení stabilního jádra a dočasného lešení, stop pravidlo pro další číslovaná vydání, přepis vydání na veřejný přínos, checklist a mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně aktuálně ověřeno, že `cody.dreamind.cz` má přímý veřejný HTTPS problém kvůli expirovanému Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), diagnostické přímé `curl --noproxy '*' -k -I` vrací `200 OK` z nginx/Next.js, proxy cesta končí po TLS tunelu chybou `Empty reply from server` a neinteraktivní SSH pro účty `root`, `ubuntu`, `deploy`, `cody` ani `node` nemá opravný přístup k obnově certifikátu.
 - 2026-07-21: Doplněna příloha o šestnáctém vydání e-booku bez mechanického pokračování: rozhodnutí, jestli další běh má přidat nový obsah, zlepšit navigaci, zkracovat, ověřit zdroje nebo jen provozně uzavřít práci; karta šestnáctého vydání, ochrana knihy před interním rytmem běhů, pravidla pro zkracování, uzavření běhu bez nové části, checklist a mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně aktuálně ověřeno, že přímé HTTPS na `cody.dreamind.cz` selhává kvůli expirovanému Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), diagnostické `curl --noproxy '*' -k -I` vrací `200 OK` z nginx/Next.js, proxy cesta končí `Empty reply from server` a neinteraktivní SSH pro `root` ani `cody` nemá opravný přístup k obnově certifikátu.
 - 2026-07-21: Doplněna příloha o patnáctém vydání e-booku bez závislosti na posledním autorovi: oddělení stavu knihy od stavu světa, malá předávací karta pro další běh, hranice veřejného a interního předání, pravidlo „co nepsat dál“, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně znovu ověřeno, že běžný veřejný HTTPS check `cody.dreamind.cz` selhává kvůli expirovanému Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), zatímco diagnostické přímé `curl -k` vrací `200 OK` z nginx/Next.js; dostupný běh neobsahuje lokální nginx/certbot, SSH ani jiný bezpečný opravný přístup k obnově certifikátu.
