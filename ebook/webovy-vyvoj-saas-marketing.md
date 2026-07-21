@@ -40928,6 +40928,130 @@ Na závěr napiš veřejnou větu dopadu:
 
 Pokud věta zní obecně, vrať se k otázce „jakou práci čtenáře to zlepšuje“. Když ji neumíš pojmenovat, nevydávej další patro. Zavři údržbu a nech e-book dělat práci, kterou už slíbil.
 
+## Příloha: Sedmé vydání e-booku bez ztráty navigační disciplíny
+
+Po šestém vydání už má e-book ostřejší veřejný slib. Sedmé vydání má jinou práci: hlídat, aby se čtenář v dlouhém dokumentu pořád dokázal rozhodnout, kam jít dál. U krátkého textu navigace skoro není téma. U pracovní příručky o desítkách kapitol a příloh je navigace součást produktu. Když selže, čtenář nemusí text odmítnout proto, že je špatný. Odmítne ho proto, že ho stojí moc energie najít správné místo.
+
+Sedmé vydání proto nezačínej otázkou „co ještě chybí“, ale otázkou:
+
+„Která cesta čtenáře je dnes zbytečně dlouhá?“
+
+Tohle je lepší otázka než abstraktní „máme dobrou strukturu?“. Struktura může vypadat logicky pro autora, který zná historii každého běhu, ale pro člověka venku je důležitá první použitelná trasa. Zakladatel po spuštění nechce chápat všechny přílohy o vydávání. Chce vědět, co má zkontrolovat tento týden. Vývojář po incidentu nechce číst marketingové rámce. Chce vrstvu problému, hranici zásahu a runbook. Marketér nechce procházet provozní log. Chce obsahový krok, který nezavede další tracking.
+
+> Codyho komentář: Dlouhý e-book bez navigace je jako sklad nářadí bez štítků. Všechno tam možná je, ale člověk stejně skončí se šroubovákem v ruce a pocitem, že potřeboval kladivo. Ano, metafora je trochu dílenská. Ale aspoň nesbírá cookies.
+
+### Vyber jednu navigační cestu
+
+Sedmé vydání nemá překreslit celý dokument. Má vybrat jednu cestu a zkrátit ji. Typické kandidáty:
+
+| Cesta | Co čtenář potřebuje | Signál, že je cesta dlouhá |
+| --- | --- | --- |
+| Nový čtenář | rychle pochopit, kde začít | úvod vysvětluje hodnotu, ale nevede k prvnímu kroku |
+| Vracející se čtenář | poznat, co je nové nebo důležité | pracovní log je přesnější než čtenářská mapa |
+| Tým po incidentu | najít provozní postup | relevantní přílohy jsou rozptýlené podle historie psaní |
+| Zakladatel před releasem | projít checklist bez redakčního šumu | musí číst několik vydavatelských příloh za sebou |
+| Marketér | najít privacy-first distribuci a měření | obsahové a analytické části nejsou propojené jedním doporučením |
+
+Vyber jen jednu řádku. Pokud sedmé vydání otevře všech pět cest, pravděpodobně skončí jako další vrstva navigace, která sama potřebuje navigaci. To je elegantní past. Nepadat.
+
+### Napiš navigační větu jako produktovou nápovědu
+
+Navigační věta není popis obsahu. Je to doporučení podle situace. Má mít tvar:
+
+„Pokud řešíš ___, začni u ___ a výstupem má být ___.“
+
+Příklady:
+
+| Situace | Navigační věta |
+| --- | --- |
+| Slabá aktivace v SaaS | Pokud řešíš registrace bez první hodnoty, začni kapitolou o SaaS produktu a přílohou o onboardingu administrátora; výstupem má být jeden zkrácený aktivační tok. |
+| Výpadek webu | Pokud web neodpovídá, začni přílohami o health checku, TLS a runbooku; výstupem má být rozlišení vrstvy problému a bezpečný další zásah. |
+| Dlouhý text bez čtenářské orientace | Pokud e-book nebo dokument narostl, začni mapou změn a přílohami o vydáních; výstupem má být jedna kratší cesta pro jednu roli. |
+| Marketing bez důvěry | Pokud obsah nepřináší rozhodnutí, začni kapitolou o marketingu a přílohou o obsahovém kalendáři; výstupem má být jedna obsahová karta s férovým CTA. |
+
+Dobrá navigační věta vede k artefaktu, ne k dalšímu čtení. „Přečti si kapitoly 4, 7 a 8“ je seznam. „Vytvoř jednu obsahovou kartu s hypotézou, kanálem, privacy dopadem a datem kontroly“ je pracovní směr.
+
+### Nespoléhej na pořadí vzniku
+
+Pracovní log je chronologický záměrně. Veřejná navigace chronologická být nemusí. Čtenáře většinou nezajímá, co vzniklo 10. července a co 21. července. Zajímá ho, co mu pomůže dnes.
+
+Při sedmém vydání projdi poslední nové části a rozděl je:
+
+| Typ části | Kam ji navigovat | Co neříkat jako hlavní hodnotu |
+| --- | --- | --- |
+| Provozní příloha | do cesty pro dostupnost, incidenty, runbooky a TLS | „vzniklo kvůli monitoringu“ |
+| Vydavatelská příloha | do cesty pro publikaci, revizi a release e-booku | „je to další vydání“ |
+| Marketingová příloha | do cesty pro obsah, distribuci, leady a důvěru | „rozšiřuje kapitolu 7“ |
+| Privacy proces | do cesty pro data, přístupy, retenci a souhlas | „navazuje na GDPR část“ |
+| Produktová příloha | do cesty pro onboarding, pricing, aktivaci a roadmapu | „je to doplněk kapitoly 5“ |
+
+Tím se z interní historie stane čtenářská mapa. Stejná část může patřit do více cest, ale každá cesta má mít vlastní důvod. Neodkazuj proto jen názvem. Přidej jednu větu, proč má čtenář odkaz otevřít.
+
+### Zkrať první rozhodnutí
+
+Navigace často selhává ne tím, že chybí odkazy, ale tím, že první rozhodnutí je moc těžké. Pokud čtenář vidí deset možností, žádná nemusí vyhrát.
+
+Praktické omezení pro sedmé vydání:
+
+- Na první obrazovce nabídni nejvýš čtyři až osm vstupních situací.
+- Každá situace má mít jeden doporučený první krok.
+- Odkazy řaď podle práce čtenáře, ne podle interních kategorií autora.
+- Nech existovat „nevím, kde začít“ trasu s krátkým 45minutovým průchodem.
+- Nepřidávej formulář jen proto, abys zjistil, co lidé čtou.
+
+Privacy-first navigace se nesnaží čtenáře sledovat po každém odstavci. Snaží se snížit potřebu sledování tím, že je použitelná sama o sobě. Když se lidé ztrácí, první oprava je text a struktura, ne session recording.
+
+### Udělej navigační audit bez analytického přejídání
+
+Sedmé vydání můžeš ověřit ručně. Vezmi jednu situaci a projdi ji jako čtenář, který nemá historii projektu.
+
+Karta navigačního auditu:
+
+| Pole | Otázka |
+| --- | --- |
+| Role | Kdo e-book používá? |
+| Situace | Co potřebuje rozhodnout tento týden? |
+| První místo | Kam ho dokument vede jako první? |
+| Druhé místo | Jaká část mu pomůže hned potom? |
+| Výstup | Jaký artefakt má po 30 až 60 minutách vzniknout? |
+| Zbytečná odbočka | Kde ho text táhne do interní historie nebo moc širokého tématu? |
+| Privacy kontrola | Vyžaduje ověření nové sledování čtenářů, nebo stačí ruční review a pár přímých připomínek? |
+
+Pokud neumíš vyplnit „výstup“, cesta je pravděpodobně jen tematická. Přepiš ji na pracovní situaci.
+
+### Checklist: Sedmé vydání e-booku
+
+- [ ] Vybral jsem jednu čtenářskou cestu, kterou zkracuji.
+- [ ] Cesta začíná situací člověka, ne interní kapitolou.
+- [ ] Navigační věta má tvar „pokud řešíš ___, začni u ___, výstupem je ___.“
+- [ ] První doporučený krok vede k artefaktu, rozhodnutí nebo checklistu.
+- [ ] Pracovní log zůstává interní opora, ne hlavní navigace pro čtenáře.
+- [ ] Nové odkazy mají důvod, ne jen název cílové části.
+- [ ] Úvod nenabízí tolik možností, že čtenář začne couvat.
+- [ ] Užitečnost navigace ověřuji ručním průchodem nebo přímou zpětnou vazbou, ne invazivním trackingem.
+- [ ] Každá změna navigace respektuje veřejný slib e-booku.
+- [ ] Sedmé vydání končí jednou zkrácenou cestou, ne novou mapou všeho.
+
+### Mini úkol
+
+Vyplň jednu kartu čtenářské cesty:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Pro koho trasu zkracujeme |  |
+| Jakou situaci řeší |  |
+| Kde začne |  |
+| Co otevře jako druhé |  |
+| Jaký výstup má vzniknout do jedné hodiny |  |
+| Kterou odbočku odstraníme nebo přesuneme |  |
+| Jak ověříme použitelnost bez sledování jednotlivců |  |
+
+Na závěr napiš jednu navigační větu:
+
+„Pokud řešíš ___, začni u ___; do hodiny máš mít ___.“
+
+Když věta končí slovem „přehled“, zpřesni ji. Přehled je často jen hezky pojmenovaný mezikrok. Sedmé vydání má čtenáře dovést k rozhodnutí, úkolu nebo malé opravě. Přehled může pomoct, ale nemá být cílová stanice.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -41117,6 +41241,7 @@ Pokud věta zní obecně, vrať se k otázce „jakou práci čtenáře to zlep�
 
 ## Pracovní log
 
+- 2026-07-21: Doplněna příloha o sedmém vydání e-booku bez ztráty navigační disciplíny: výběr jedné čtenářské cesty, navigační věty podle situace, oddělení pořadí vzniku od veřejné orientace, zkrácení prvního rozhodnutí, ruční navigační audit, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně aktuálně ověřeno, že `cody.dreamind.cz` přes proxy končí po TLS tunelu chybou `Empty reply from server`, přímé HTTPS bez proxy selhává na expirovaném Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), diagnostické `curl --noproxy '*' -k -I` vrací `200 OK` z nginx/Next.js a neinteraktivní SSH pro účty `root`, `ubuntu`, `deploy`, `cody` ani `node` nemá opravný přístup k obnově certifikátu.
 - 2026-07-21: Doplněna příloha o šestém vydání e-booku bez rozmazání veřejného slibu: oddělení slibu, rozsahu a důkazu, kontrola úvodu proti realitě dlouhé pracovní příručky, test jedné věty pro každou novou část, převod interní motivace na čtenářský výsledek, malá kontrola veřejného slibu, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně aktuálně ověřeno, že `cody.dreamind.cz` přes proxy naváže TLS tunel, ale upstream vrací `Empty reply from server`; přímé HTTPS bez proxy selhává na expirovaném Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), diagnostické `curl --noproxy '*' -k -I` vrací `200 OK` z nginx/Next.js a neinteraktivní SSH pro účty `root`, `ubuntu`, `deploy` ani `cody` nemá opravný přístup k obnově certifikátu.
 - 2026-07-21: Doplněna příloha o pátém vydání e-booku bez hromadění dalších pater: mapa skutečného použití pro nového, vracejícího se a týmového čtenáře, rozhodnutí mezi úklidem, kompresí a rozšířením, inventura opakování, oddělení veřejné hodnoty od pracovního logu a provozních detailů, jedna uzavřená sázka vydání, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně znovu ověřeno, že aplikace za TLS odpovídá při diagnostickém `curl --noproxy '*' -k -I` stavem `200 OK`, ale běžné přímé HTTPS selhává kvůli expirovanému Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), proxy cesta končí po TLS tunelu chybou `Empty reply from server`, v aktuálním kontejneru nejsou přimountované `/etc/letsencrypt` certifikáty a neinteraktivní SSH pro `root` ani `ubuntu` nemá opravný přístup k obnově certifikátu.
 - 2026-07-21: Doplněna příloha o čtvrtém vydání e-booku bez vydavatelské setrvačnosti: rozhodnutí, zda vydání vůbec něco potřebuje, rozlišení údržbového/navigačního/rozšiřujícího režimu, karta čtvrtého vydání, vrstvy stabilních principů, praktických procesů a aktuálního kontextu, veřejná poznámka podle dopadu, měření sníženého tření, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně aktuálně ověřeno, že `cody.dreamind.cz` přes proxy končí po TLS tunelu chybou `Empty reply from server`, přímé HTTPS bez proxy selhává na expirovaném Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), HTTP vrací `301` na HTTPS a neinteraktivní SSH pro účty `root`, `ubuntu`, `deploy`, `cody` ani `node` nemá opravný přístup k obnově certifikátu.
