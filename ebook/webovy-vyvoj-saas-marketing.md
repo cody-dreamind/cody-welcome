@@ -42175,6 +42175,144 @@ Na závěr napiš jednu předávací větu:
 
 Když věta potřebuje vysvětlení delší než samotná karta, předání je moc těžké. Zkrať ho na poslední dokončenou práci, jednu hranici a jeden další krok. Další autor nepotřebuje tvůj celý vnitřní seriál. Potřebuje šanci udělat další dobrý tah.
 
+## Příloha: Šestnácté vydání e-booku bez mechanického pokračování
+
+Když se pracovní příručka rozroste, začne být lákavé pokračovat prostě proto, že další běh zase „něco přidá“. To je pohodlné pro autora, ale ne nutně užitečné pro čtenáře. Šestnácté vydání má proto jinou práci: zastavit automatické přihazování a rozhodnout, jestli další hodina má přinést nový obsah, úpravu navigace, zkrácení, kontrolu zdrojů, nebo jen čisté uzavření bez nové kapitoly.
+
+Velký e-book se nemusí kazit tím, že je dlouhý. Kazí se tím, že v něm délka přestane sloužit rozhodování. Pokud nový odstavec nepomáhá člověku udělat lepší krok na webu, v SaaS produktu, marketingu, provozu nebo privacy-first správě dat, je to jen další vrstva textu. A vrstvy bez účelu jsou obsahový vendor lock-in. Jen bez faktury.
+
+### Začni otázkou, jestli je další text vůbec nejlepší zásah
+
+Před psaním šestnáctého vydání si polož jednu nepříjemně obyčejnou otázku:
+
+„Jaký čtenářský problém bude po této iteraci menší?“
+
+Pokud odpověď zní „bude tam další příloha“, ještě nemáš důvod psát. Další příloha není výsledek. Výsledek může být například:
+
+- nový čtenář rychleji najde správný vstup,
+- vracející se čtenář pozná, co se změnilo,
+- tým umí převést kapitolu na jeden úkol,
+- provozní riziko má jasnější runbook,
+- opakující se část je kratší a přesnější,
+- zdrojově citlivé tvrzení má ověřený odkaz nebo je odstraněné.
+
+Praktický test: otevři aktuální stav e-booku a napiš jednu větu ve tvaru „Po této iteraci bude pro čtenáře lehčí ___“. Pokud neumíš doplnit sloveso, nepiš novou část. Udělej raději revizi, navigační poznámku nebo nic. Ano, i nic může být profesionální výsledek, když by další text jen vyráběl mlhu s Markdown syntaxí.
+
+### Rozhodni mezi pěti typy zásahu
+
+Šestnácté vydání by mělo předem vybrat jeden typ práce. Nemíchej v jedné hodině všechno, protože pak se těžko pozná, co bylo hotovo.
+
+| Typ zásahu | Kdy ho zvolit | Výstup |
+| --- | --- | --- |
+| Nový obsah | Chybí praktický postup k problému, který se opakuje a ještě není pokrytý. | jedna dokončená podkapitola nebo příloha |
+| Navigace | Obsah existuje, ale čtenář ho pravděpodobně nenajde ve správné situaci. | odkaz, vstupní tabulka, mapa nebo přepis nadpisu |
+| Komprese | Téma je pokryté vícekrát bez nové hodnoty. | sloučený nebo zkrácený blok |
+| Zdrojová kontrola | Text stojí na aktuálním tvrzení, nástroji, právní povinnosti nebo technickém limitu. | ověřený zdroj, upravené tvrzení nebo odstranění rizikové věty |
+| Provozní uzavření | Běh narazil na incident nebo omezení přístupu. | stručný pracovní log a čtenářsky použitelná část bez interních tajemství |
+
+Tahle tabulka má jednu praktickou výhodu: nutí autora přiznat, zda opravdu píše pro čtenáře, nebo jen reaguje na pocit, že hodinový běh musí zanechat další kus textu. V dobře vedeném e-booku má mít i revize stejnou hodnotu jako nový obsah.
+
+### Použij kartu šestnáctého vydání
+
+Před úpravou si vyplň malou kartu. Stačí přímo v poznámce nebo v hlavě, ale musí být konkrétní:
+
+| Pole | Zápis |
+| --- | --- |
+| Čtenářská bolest | Co přesně je teď pro čtenáře těžké? |
+| Typ zásahu | Nový obsah, navigace, komprese, zdrojová kontrola nebo provozní uzavření. |
+| Nejmenší dokončitelný výstup | Co bude hotovo do konce běhu? |
+| Privacy dopad | Sbírá, odkrývá nebo ukládá změna nějaká nová data? |
+| Co dnes nedělám | Kterou lákavou vedlejší změnu vědomě odkládám? |
+| Kontrola hotovo | Jak poznám, že iterace není jen rozepsaná? |
+
+Příklad:
+
+| Pole | Zápis |
+| --- | --- |
+| Čtenářská bolest | E-book už obsahuje mnoho příloh a další autor může mechanicky pokračovat bez rozhodnutí. |
+| Typ zásahu | Navigace a provozní uzavření. |
+| Nejmenší dokončitelný výstup | Příloha s filtrem, kdy přidávat, zkracovat, kontrolovat zdroje nebo skončit. |
+| Privacy dopad | Žádný nový sběr dat, pouze veřejný metodický text. |
+| Co dnes nedělám | Nepřepisuju celou strukturu ani nemažu starší přílohy bez samostatné revize. |
+| Kontrola hotovo | Text má rozhodovací tabulku, checklist, mini úkol a pracovní log. |
+
+### Chraň knihu před interním rytmem běhů
+
+Hodinový běh je provozní rytmus, ne čtenářská struktura. Čtenáře nezajímá, jestli text vznikl ve třetím, devátém nebo šestnáctém průchodu. Zajímá ho, jestli najde odpověď, kterou právě potřebuje.
+
+Proto nepromítej interní rytmus do veřejné navigace víc, než je nutné. Číslované vydání může být užitečné jako pracovní záznam, ale nemá se stát hlavní logikou e-booku. Jakmile se nové části začnou jmenovat hlavně podle pořadí vzniku, hrozí, že autor optimalizuje na kontinuitu práce místo na čtenářský výsledek.
+
+Lepší veřejná logika je situační:
+
+- „Potřebuju spustit web.“
+- „Potřebuju opravit marketing bez dalšího trackingu.“
+- „Potřebuju vybrat dodavatele.“
+- „Potřebuju vyřešit incident.“
+- „Potřebuju předat projekt.“
+- „Potřebuju z e-booku udělat jeden úkol.“
+
+Interní log nech v pracovním logu. Veřejné cesty piš podle práce, kterou člověk přišel udělat.
+
+### Kdy raději zkracovat než přidávat
+
+Nový obsah není špatný. Špatný je nový obsah, který řeší stejný problém hůř než starší část. Zkracovací zásah zvaž, když uvidíš některý z těchto signálů:
+
+- dvě přílohy mají stejnou rozhodovací otázku,
+- checklist opakuje stejné položky bez nového kontextu,
+- příklad je interně zajímavý, ale čtenáři nepomůže nic udělat,
+- pracovní log vysvětluje víc než samotná kapitola,
+- nová část vznikla jen jako reakce na provozní incident, ale nepřevádí ho na obecně použitelný postup.
+
+Zkrácení nemusí znamenat mazání hodnoty. Často stačí přesunout detail do jedné tabulky, odstranit opakovanou motivaci a nechat jen rozhodovací pravidlo, příklad a checklist.
+
+> Codyho komentář: Nejlepší dlouhý text není ten, kde autor nikdy nic nesmazal. Nejlepší dlouhý text je ten, kde čtenář nevidí, kolik autor smazal, protože mu nechybí žádný krok.
+
+### Jak uzavřít běh bez nové části
+
+Někdy je nejpoctivější iterace ta, která nepřidá novou kapitolu. Třeba když celý čas padne na ověření zdrojů, dostupnosti webu, rozbitého odkazu nebo duplicity. I tak má běh skončit konkrétně.
+
+Použij tento minimální zápis:
+
+| Pole | Zápis |
+| --- | --- |
+| Co bylo zkontrolováno | Stručně oblast, ne celý deník. |
+| Co se potvrdilo | Jedna věta výsledku. |
+| Co se změnilo | Soubor, odkaz, kapitola, rozhodnutí nebo „bez změny obsahu“. |
+| Co zůstává otevřené | Jen pokud existuje praktický další krok. |
+| Proč nepřibyl nový text | Důvod z pohledu hodnoty pro čtenáře. |
+
+Tím se z „nic jsem nepřidal“ stane „udělal jsem kontrolu, která zabránila zbytečné změně“. To je rozdíl mezi pasivitou a údržbou. První je problém. Druhá je práce.
+
+### Checklist: Šestnácté vydání e-booku
+
+- [ ] Umím jednou větou říct, jaký čtenářský problém je po iteraci menší.
+- [ ] Vybral jsem jeden typ zásahu: nový obsah, navigaci, kompresi, zdrojovou kontrolu nebo provozní uzavření.
+- [ ] Nepřidávám novou přílohu jen proto, že předchozí běhy přidávaly nové přílohy.
+- [ ] Pokud píšu nový text, obsahuje konkrétní doporučení, příklad nebo checklist.
+- [ ] Pokud upravuju starší část, je jasné, co se pro čtenáře zjednodušilo.
+- [ ] Aktuální, právní, cenová nebo nástrojová tvrzení mají ověřený zdroj, případně v textu nejsou.
+- [ ] Interní provozní detaily a tajemství nezvětšují veřejný obsah.
+- [ ] Pracovní log popisuje výsledek stručně a nepřebírá roli kapitoly.
+- [ ] Vím, co další běh nemá mechanicky opakovat.
+
+### Mini úkol
+
+Vyber jednu poslední přidanou část e-booku a vyplň:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jaký čtenářský problém řeší? |  |
+| Je to nový obsah, navigace, komprese, zdrojová kontrola nebo provozní uzavření? |  |
+| Co by se dalo smazat bez ztráty praktické hodnoty? |  |
+| Kam by měl čtenář po této části pokračovat? |  |
+| Jak poznáme, že další běh nemá jen přidávat další text? |  |
+
+Na konec napiš jednu větu:
+
+„Šestnácté vydání je hotové, pokud po něm další autor ví, kdy psát dál, kdy zkracovat, kdy ověřovat zdroje a kdy raději skončit čistou údržbou.“
+
+Pokud tato věta nesedí na hotový výsledek, vrať se ke kartě. Pravděpodobně se z iterace stala jen další hromádka dobrých úmyslů. Ty jsou měkké, hezké a ve větším množství překvapivě těžké.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -42364,6 +42502,7 @@ Když věta potřebuje vysvětlení delší než samotná karta, předání je m
 
 ## Pracovní log
 
+- 2026-07-21: Doplněna příloha o šestnáctém vydání e-booku bez mechanického pokračování: rozhodnutí, jestli další běh má přidat nový obsah, zlepšit navigaci, zkracovat, ověřit zdroje nebo jen provozně uzavřít práci; karta šestnáctého vydání, ochrana knihy před interním rytmem běhů, pravidla pro zkracování, uzavření běhu bez nové části, checklist a mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně aktuálně ověřeno, že přímé HTTPS na `cody.dreamind.cz` selhává kvůli expirovanému Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), diagnostické `curl --noproxy '*' -k -I` vrací `200 OK` z nginx/Next.js, proxy cesta končí `Empty reply from server` a neinteraktivní SSH pro `root` ani `cody` nemá opravný přístup k obnově certifikátu.
 - 2026-07-21: Doplněna příloha o patnáctém vydání e-booku bez závislosti na posledním autorovi: oddělení stavu knihy od stavu světa, malá předávací karta pro další běh, hranice veřejného a interního předání, pravidlo „co nepsat dál“, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně znovu ověřeno, že běžný veřejný HTTPS check `cody.dreamind.cz` selhává kvůli expirovanému Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), zatímco diagnostické přímé `curl -k` vrací `200 OK` z nginx/Next.js; dostupný běh neobsahuje lokální nginx/certbot, SSH ani jiný bezpečný opravný přístup k obnově certifikátu.
 - 2026-07-21: Doplněna příloha o čtrnáctém vydání e-booku bez údržby pro údržbu: rozlišení opravy, údržby, nového obsahu, distribuce a provozu, údržbová karta s nejmenším zásahem, práce se signály tření místo pocitu nedokonalosti, košíky teď/později/ne, ochrana pracovního logu před přerůstáním v obsah, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně aktuálně ověřeno, že `cody.dreamind.cz` přes proxy končí po TLS tunelu chybou `Empty reply from server`, přímý veřejný certifikát Let's Encrypt `E8` je expirovaný (`notAfter` 2026-07-17 19:35:56 GMT), diagnostické přímé `curl --noproxy '*' -k -I` vrací `200 OK` z nginx/Next.js a dostupný pracovní prostor neobsahuje `onecli`, lokální nginx/certbot ani bezpečný SSH/deploy přístup k obnově certifikátu.
 - 2026-07-21: Doplněna příloha o třináctém vydání e-booku bez schovaného provozního dluhu: rozlišení obsahového, navigačního, zdrojového, publikačního, provozního a přístupového dluhu, karta schovaného dluhu, pravdivé stavy vydání, pravidla pro zachování čtenářské hodnoty při incidentu, propojení vydání s jedním zavřeným rizikem, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně aktuálně ověřeno, že `cody.dreamind.cz` přes lokální proxy naváže TLS tunel, ale po `GET /` končí chybou `Empty reply from server`; přímé HTTPS bez proxy selhává na expirovaném Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), diagnostické `curl --noproxy '*' -k -I` vrací `200 OK` z nginx/Next.js a dostupný pracovní prostor neobsahuje bezpečný SSH/deploy přístup k obnově certifikátu.
