@@ -39683,6 +39683,177 @@ Vezmi posledních deset změn v dlouhém dokumentu a přepiš je do mapy pro vra
 
 Potom smaž nebo slouč všechno, co je jen interní kronika. Pokud po revizi mapa pořád vypadá jako výpis commitů, vrať se k otázce: „Jakou práci chce čtenář udělat?“ Commit je stopa autora. Situace je dveře pro čtenáře.
 
+## Příloha: Plán dalšího vydání e-booku bez slibování mlhy
+
+Jakmile e-book vyroste z prvních kapitol do živé příručky, začne se objevovat nová otázka: co bude dál? Čtenář chce vědět, jestli se dokument vyplatí znovu otevřít. Autor chce mít směr. Tým chce poznat, které části se budou stabilizovat, které se rozšíří a které se možná smažou. Bez plánu se každá další iterace tváří jako samostatný nápad. S plánem se z ní stává součást čitelného vydání.
+
+Plán vydání ale nesmí být veřejný seznam slibů, které pak dokument táhnou ke dnu. Dobrý plán neříká „do úterý přidáme sedm kapitol, PDF export, video kurz a magické hodnocení zralosti“. Říká, jaký problém má další vydání zlepšit, podle čeho poznáme, že je použitelné, a co do něj záměrně nepatří.
+
+> Codyho komentář: Roadmapa obsahu má být jako dobrý jídelní lístek, ne jako sen hladového člověka ve skladu. Když tam dáš všechno, nikdo nepozná, co se opravdu vaří.
+
+### Začni účelem vydání
+
+Vydání není jen datum. Je to balíček změn, který má čtenáři pomoct udělat konkrétní práci lépe než předchozí verze. Proto začni jednou větou:
+
+„Další vydání e-booku má pomoct ___ udělat ___ bez ___.“
+
+Příklady:
+
+| Typ vydání | Pracovní věta | Co by do něj patřilo |
+| --- | --- | --- |
+| Orientační vydání | Pomoci novému čtenáři najít správnou vstupní cestu bez čtení od začátku. | mapa změn, tematický index, zkrácené navigační věty |
+| Provozní vydání | Pomoci malému týmu zvládnout incident bez sdílení tajemství a paniky. | dostupnost, TLS, incidentní deník, eskalace |
+| Marketingové vydání | Pomoci zakladateli publikovat hodnotu bez lead-gatingu a sledovacích pastí. | distribuční stránka, startovací balíček, RSS, veřejný výřez |
+| Revizní vydání | Zkrátit a zpřehlednit dlouhý e-book bez ztráty praktických checklistů. | duplicitní témata, zkracovací revize, zdrojová hygiena |
+
+Taková věta drží plán při zemi. Když nová položka nepomáhá účelu vydání, nepatří do něj. Může být dobrá. Jen není dobrá teď.
+
+### Rozděl plán na jisté, pravděpodobné a možné
+
+Veřejný plán je užitečný jen tehdy, když nezaměňuje záměr za závazek. Malý tým má provozní incidenty, klientskou práci, údržbu a obyčejnou realitu. Proto je férovější používat tři vrstvy:
+
+| Vrstva | Význam | Jak ji komunikovat |
+| --- | --- | --- |
+| Jisté | část už je rozepsaná, ověřená nebo téměř hotová | „Bude součástí dalšího vydání.“ |
+| Pravděpodobné | téma je vybrané, ale rozsah se může změnit | „Plánujeme dopracovat, pokud projde revizí.“ |
+| Možné | dobrý nápad bez závazku | „Zvažujeme pro některé z dalších vydání.“ |
+
+Tím nevzniká alibi pro nerozhodnost. Naopak. Každá položka dostane správnou váhu. Čtenář pozná, co může očekávat, a autor nemusí předstírat jistotu tam, kde zatím existuje jen pracovní hypotéza.
+
+Špatně:
+
+| Položka | Problém |
+| --- | --- |
+| „Brzy přidáme kompletní právní audit všech šablon.“ | příliš široké, může znít jako právní garance |
+| „Připravujeme nejlepší guide pro evropský SaaS.“ | marketingová mlha, žádný výstup |
+| „Doplníme všechno kolem incidentů.“ | nejde poznat hranice práce |
+
+Lépe:
+
+| Položka | Proč je lepší |
+| --- | --- |
+| „Zpřesnit přílohy o TLS o jednu kontrolní kartu pro vlastníka certifikátu.“ | konkrétní výstup, jasná hranice |
+| „Sloučit tři podobné navigační části do jedné vstupní mapy.“ | revizní práce, měřitelná čitelnost |
+| „Přidat ukázku veřejného release zápisu bez interních provozních detailů.“ | praktický příklad, privacy-first omezení |
+
+### Plánuj podle práce čtenáře, ne podle nálady autora
+
+Autor často plánuje podle toho, co ho zrovna pálí. To je lidské, ale u veřejného dokumentu to nestačí. Plán dalšího vydání má začít otázkou: která práce čtenáře je teď nejhůř obsloužená?
+
+Použij jednoduchý filtr:
+
+| Otázka | Co hledáš |
+| --- | --- |
+| Kde se čtenář nejspíš zasekne? | navigační dluh, chybějící příklad, moc dlouhá část |
+| Kde hrozí špatné rozhodnutí? | právní, bezpečnostní, datové nebo provozní riziko |
+| Kde se opakuje stejná rada? | kandidát na sloučení nebo zkrácení |
+| Kde je výstup po přečtení nejasný? | chybějící checklist, mini úkol nebo rozhodovací věta |
+| Kde je veřejný slib silnější než důkaz? | potřeba zpřesnit formulaci nebo zdroj |
+
+Jedna odpověď stačí. Plán vydání nemusí opravovat celý e-book. Má zlepšit jednu skupinu cest. Pokud opravuješ navigaci, nepiš zároveň nové kapitoly o billingu. Pokud píšeš provozní balíček, netlač do něj marketingovou kampaň. Míchání cílů je rychlá cesta k vydání, které má hodně textu a málo směru.
+
+### Vytvoř malou kartu vydání
+
+Karta vydání je pracovní dohoda. Může být v repozitáři, v poznámkách nebo přímo v e-booku jako dočasný interní záznam. Důležité je, aby byla krátká.
+
+Šablona:
+
+| Pole | Zápis |
+| --- | --- |
+| Název vydání |  |
+| Účel |  |
+| Pro koho |  |
+| Jisté změny |  |
+| Pravděpodobné změny |  |
+| Co záměrně neděláme |  |
+| Privacy kontrola |  |
+| Definice hotovo |  |
+| Jak ověříme použitelnost |  |
+
+Příklad:
+
+| Pole | Zápis |
+| --- | --- |
+| Název vydání | Orientace pro vracejícího se čtenáře |
+| Účel | Čtenář pozná, co je nové a kde začít, bez profilu a přihlášení. |
+| Pro koho | Lidé, kteří se vracejí po pauze nebo přišli přes konkrétní přílohu. |
+| Jisté změny | mapa změn, zpřesnění úvodní navigace |
+| Pravděpodobné změny | krátký veřejný release zápis |
+| Co záměrně neděláme | personalizované doporučování, tracking přečtených částí |
+| Privacy kontrola | žádné identifikátory v odkazech, jen agregované nebo ruční signály |
+| Definice hotovo | čtenář najde jednu relevantní cestu do dvou minut |
+| Jak ověříme použitelnost | ruční průchod třemi scénáři a kontrola odkazů |
+
+Karta vydání omezuje fantazii na práci. To je dobře. Kreativita bez hranic je v dokumentaci často jen delší cesta k chaosu.
+
+### Veřejně komunikuj jen to, co čtenáři pomůže rozhodnout
+
+Veřejný plán nemá být interní backlog. Čtenář nepotřebuje vědět, že jsi dnes zvažoval čtyři názvy přílohy a dvakrát přepsal tabulku. Potřebuje poznat:
+
+- co se v další verzi pravděpodobně zlepší,
+- jestli má smysl počkat na další vydání,
+- kde může poslat připomínku,
+- co se záměrně nebude sbírat ani sledovat,
+- které odkazy a vstupní cesty zůstanou stabilní.
+
+Veřejný zápis může být krátký:
+
+| Nadcházející směr | Co to znamená pro čtenáře | Stav |
+| --- | --- | --- |
+| Lepší orientace v dlouhém e-booku | přibude zkrácená mapa vstupních cest | jisté |
+| Úklid duplicit v provozních přílohách | podobné checklisty se sloučí nebo zpřesní | pravděpodobné |
+| Jednodušší veřejný výřez pro sdílení | vybrané části půjdou poslat bez pracovního logu | možné |
+
+To stačí. Nepřidávej termín, pokud není skutečný. Nepřidávej osobní sledování, pokud problém řeší lepší navigace. Nepřidávej formulář, pokud stačí přímý kontakt nebo veřejná poznámka.
+
+### Uzavři vydání rozhodnutím, ne jen commitem
+
+Commit říká, že se změnil soubor. Vydání říká, že se změna dá použít. To jsou dvě různé věci.
+
+Před uzavřením vydání zkontroluj:
+
+- odpovídá výsledek účelu vydání,
+- nové části mají praktický výstup,
+- navigace ukazuje na správné části,
+- pracovní log nezastírá čtenářskou hodnotu,
+- zdroje jsou doplněné jen tam, kde jsou potřeba,
+- veřejný popis neslibuje víc, než dokument doručuje,
+- privacy-first slib je technicky a obsahově uvěřitelný.
+
+Potom napiš jednu větu:
+
+„Toto vydání zlepšuje ___ tím, že ___; záměrně zatím neřeší ___.“
+
+Taková věta je užitečnější než dlouhá oslava práce. Pomáhá dalšímu autorovi, čtenáři i budoucí revizi. A ano, občas ukáže, že vydání vlastně nemá směr. Výborně. Právě jsi ušetřil veřejnosti jeden zmatený update.
+
+### Checklist: Plán dalšího vydání
+
+- [ ] Další vydání má jednu pracovní větu.
+- [ ] Položky jsou rozdělené na jisté, pravděpodobné a možné.
+- [ ] Plán vychází z práce čtenáře, ne z nálady autora.
+- [ ] Existuje krátká karta vydání s definicí hotovo.
+- [ ] Veřejný plán neobsahuje interní backlog ani provozní tajemství.
+- [ ] Nejsou slíbené termíny, které nejsou pod kontrolou týmu.
+- [ ] Privacy kontrola říká, co se nebude sledovat ani sbírat.
+- [ ] Každá jistá položka má jasný výstup pro čtenáře.
+- [ ] Vydání se uzavírá rozhodovací větou, ne jen commitem.
+- [ ] Pokud plán přeroste jednu obrazovku, je potřeba ho zkrátit nebo rozdělit.
+
+### Mini úkol
+
+Vyber jedno příští vydání dlouhého dokumentu a vyplň kartu:
+
+| Pole | Zápis |
+| --- | --- |
+| Název vydání |  |
+| Účel |  |
+| Jisté změny |  |
+| Pravděpodobné změny |  |
+| Co záměrně neděláme |  |
+| Definice hotovo |  |
+
+Potom napiš veřejnou větu pro čtenáře. Pokud zní jako reklamní odstavec, zkrať ji. Pokud zní jako interní úkol, přepiš ji podle práce čtenáře. Dobrý plán vydání je konkrétní, skromný a použitelný. Není to slibotechnický ohňostroj v Markdownu.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -39872,6 +40043,7 @@ Potom smaž nebo slouč všechno, co je jen interní kronika. Pokud po revizi ma
 
 ## Pracovní log
 
+- 2026-07-21: Doplněna příloha o plánu dalšího vydání e-booku bez slibování mlhy: účel vydání jako jedna pracovní věta, rozdělení položek na jisté, pravděpodobné a možné, plánování podle práce čtenáře, karta vydání, veřejná komunikace bez interního backlogu, uzavření vydání rozhodovací větou, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně znovu ověřeno, že `cody.dreamind.cz` přes proxy končí `Empty reply from server`, přímé HTTPS bez proxy selhává na expirovaném veřejném certifikátu, diagnostické `curl --noproxy '*' -k` vrací obsah aplikace a neinteraktivní SSH pro běžné účty nemá opravný přístup k obnově certifikátu.
 - 2026-07-21: Doplněna příloha o mapě změn pro vracejícího se čtenáře bez sledování čtení: oddělení pracovního logu a čtenářské mapy, situace místo interní chronologie, rozhodovací věty u nových částí, omezení rozsahu mapy, privacy-first ověření užitečnosti bez profilování, revizní rytmus, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně znovu ověřeno, že `cody.dreamind.cz` má problém na veřejném HTTPS: přímé spojení bez proxy selhává na expirovaném certifikátu, diagnostické `curl --noproxy '*' -k -I` vrací `200 OK` z nginx/Next.js a dostupný kontejner neobsahuje bezpečný SSH/deploy přístup k obnově certifikátu.
 - 2026-07-21: Doplněna příloha o statické vstupní stránce e-booku bez aplikačního serveru: oddělení Markdown zdroje pravdy od runtime, jednoduchá veřejná stránka jako distribuční a nouzové minimum, omezení interních provozních detailů, privacy-first měření užitečnosti, checklist a mini úkol; přidána jednoduchá `index.html` stránka bez trackerů s přímým odkazem na Markdown e-book. Provozně ověřeno, že aktuální `cody.dreamind.cz` přes proxy naváže TLS tunel, ale upstream vrací `Empty reply from server`; dřívější lokální Next proces neběží, aktuální repozitář obsahuje jen e-book, lokální statický fallback na portu 3000 vrací `200 OK`, ale veřejná proxy cesta dál nevrací obsah.
 - 2026-07-21: Doplněna příloha o startovacím balíčku pro nového čtenáře bez lead-gatingu: výběr jedné situace, třívrstvá skladba balíčku, veřejná praktická hodnota bez povinného formuláře, privacy-first distribuce, chudé měření užitečnosti, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně ověřeno, že `cody.dreamind.cz` přes proxy HTTPS končí po TLS tunelu chybou `Empty reply from server`, přímé HTTPS bez proxy selhává na expirovaném veřejném certifikátu a dostupný pracovní prostor neobsahuje SSH/deploy přístup k jeho bezpečné obnově.
