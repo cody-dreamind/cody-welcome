@@ -41460,6 +41460,141 @@ Na závěr napiš rozhodovací větu:
 
 Když některé pole zní trapně, tím lépe. Trapné pole často ukazuje skutečný problém: nejasný vlastník, slabý fallback, moc velký slib nebo provozní stav, který se zatím maskoval novým textem.
 
+## Příloha: Jedenácté vydání e-booku bez rozbitého prvního dojmu
+
+Po desátém vydání už e-book umí pojmenovat obsahový, publikační a provozní stav. Jedenácté vydání má řešit něco menšího, ale pro čtenáře viditelnějšího: první dojem. Ne první dojem ve smyslu hezkého hero obrázku, ale první pracovní minutu. Čtenář přijde na odkaz, otevře dokument nebo veřejný výřez a musí rychle pochopit, jestli je na správném místě, kde začít a co si může odnést bez registrace, sledování nebo hledání v interním logu.
+
+Otázka pro jedenácté vydání proto nezní:
+
+„Jak e-book ještě zvětšíme?“
+
+Lepší otázka zní:
+
+„Co musí nový čtenář poznat během první minuty, aby se neztratil?“
+
+První dojem je produktová vrstva obsahu. Když je slabý, nepomůže, že uvnitř dokumentu leží dobré kapitoly. Čtenář se k nim nemusí dostat. Nebo se dostane, ale začne na špatném místě, vezme si moc velký úkol a skončí s pocitem, že privacy-first provoz je další hora administrativy. To by byla škoda. Hory už máme v kalendáři dost.
+
+### Odděl vstupní rozhodnutí od zbytku knihy
+
+Vstup do e-booku nemá vysvětlit všechno. Má pomoct udělat první výběr. Dlouhý dokument potřebuje krátkou vstupní bránu, která čtenáře nerozdrtí možnostmi.
+
+Dobrá vstupní brána odpoví na čtyři otázky:
+
+| Otázka | Dobrá odpověď |
+| --- | --- |
+| Pro koho to je? | Pro malé týmy, freelancery a firmy, které staví web nebo SaaS v evropském privacy-first režimu. |
+| Co tu udělám jako první? | Vyberu jednu aktuální bolest a otevřu doporučené části. |
+| Jaký výstup mám čekat? | Jednu kartu rozhodnutí, checklist nebo malou opravu do týdne. |
+| Co po mně dokument nechce? | Registraci, lead magnet, tracking čtení ani přečtení všeho od začátku. |
+
+Pokud vstupní text místo toho začne historií projektu, interním pracovním logem nebo seznamem všech příloh, čtenář musí nejdřív dělat práci autora. To není fér. Autor má udělat první třídění za něj.
+
+### Použij test první minuty
+
+Jedenácté vydání můžeš ověřit ručně bez nové analytiky. Dej člověku nebo sám sobě jednu minutu a zkus odpovědět:
+
+| Kontrola | Otázka |
+| --- | --- |
+| Signál účelu | Poznám do deseti vteřin, k čemu e-book je? |
+| Signál startu | Vidím jednu doporučenou cestu pro svůj problém? |
+| Signál výstupu | Vím, co mám po krátkém průchodu vytvořit? |
+| Signál důvěry | Je jasné, že obsah nevyžaduje skryté sledování ani povinný formulář? |
+| Signál stavu | Pokud veřejná cesta nefunguje ideálně, je interně jasné, jaký artefakt je hlavní? |
+
+Test první minuty není UX laboratoř. Je to zdravý rozum v tabulce. Pokud se během jedné minuty nedá poznat, kde začít, problém není v nedostatku heatmapy. Problém je v textu, pořadí nebo přebytku voleb.
+
+### Zkrať úvod na práci, ne na sebevysvětlení
+
+Dlouhý e-book svádí autora k tomu, aby na začátku vysvětlil, proč dokument vznikl, jak roste a kolik toho už obsahuje. To může být užitečné interně, ale pro nového čtenáře je důležitější pracovní nabídka.
+
+Slabý úvod:
+
+„Tento e-book postupně vzniká v hodinových iteracích a obsahuje kapitoly o webovém vývoji, SaaS, marketingu, produktivitě a evropském provozu.“
+
+Silnější úvod:
+
+„Vyber jednu aktuální bolest, otevři doporučené části a do týdne vytvoř jednu kartu změny: co opravíš, proč teď, jak ověříš dopad a co nebudeš zbytečně měřit.“
+
+První věta nemusí popsat celý dokument. Má otevřít první akci. Všechno ostatní může být níž: osnova, zdroje, pracovní log, detailní kontext, historie vydání.
+
+### Chraň vstup před interním ocasem
+
+Pracovní log je užitečný pro údržbu, ale pro nového čtenáře je to hluk. Jedenácté vydání by mělo zkontrolovat, jestli veřejný vstup nevede lidi přímo do interní historie. Pokud ano, je potřeba přidat mezivrstvu: čtenářskou mapu, veřejný výřez, krátkou vstupní stránku nebo doporučené trasy podle situace.
+
+Rozlišení:
+
+| Obsah | Patří do prvního dojmu? | Proč |
+| --- | --- | --- |
+| Jedna věta účelu | ano | čtenář ví, jestli je na správném místě |
+| Tabulka „kudy začít podle bolesti“ | ano | pomáhá vybrat nejkratší cestu |
+| Pracovní log posledních běhů | ne | slouží autorovi a provozu |
+| Zdroje | částečně | důležité pro důvěru, ale ne jako první úkol |
+| Provozní omezení hlavní domény | interně ano, veřejně jen pokud ovlivňuje přístup | čtenář potřebuje funkční cestu, ne celý incidentní deník |
+| Mini úkol pro první průchod | ano | mění čtení na práci |
+
+Privacy-first dopad je přímý: když je vstup srozumitelný, nemusíš dohánět nejasnost agresivním měřením. Dobře napsaná cesta snižuje potřebu sledovat každý krok.
+
+### Udělej kartu prvního dojmu
+
+Karta prvního dojmu:
+
+| Pole | Zápis |
+| --- | --- |
+| První věta | Co má člověk pochopit hned? |
+| První volba | Podle čeho si vybere další část? |
+| První výstup | Co má vzniknout po 30 až 60 minutách? |
+| Hlavní artefakt | Kde je aktuální obsah, když veřejná cesta zlobí? |
+| Co schováme níž | Jaký interní kontext nepatří do prvního dojmu? |
+| Privacy slib | Jak vysvětlíme čtení bez lead-gatingu a sledování? |
+| Ověření | Jak ručně poznáme, že vstup funguje? |
+
+Příklad:
+
+| Pole | Zápis |
+| --- | --- |
+| První věta | Praktická příručka pro jednu privacy-first změnu týdně. |
+| První volba | Vyber bolest: web, aktivace, pricing, marketing, analytika, provoz nebo privacy realita. |
+| První výstup | Karta dalšího kroku se změnou, ověřením a věcí, kterou teď měřit nebudeme. |
+| Hlavní artefakt | Markdown e-book v repozitáři nebo statický veřejný výřez. |
+| Co schováme níž | Pracovní log, detailní historie iterací a provozní diagnostika. |
+| Privacy slib | Obsah je dostupný bez formuláře, pixelů a povinné registrace. |
+| Ověření | Ruční průchod první minutou a přímá zpětná vazba od jednoho čtenáře. |
+
+Tahle karta je malá, ale drží dokument při zemi. Nutí autora přemýšlet jako člověk, který přišel něco vyřešit, ne jako člověk, který posledních padesát hodin žil uvnitř souboru.
+
+### Checklist: Jedenácté vydání e-booku
+
+- [ ] Nový čtenář do deseti vteřin pozná účel e-booku.
+- [ ] Úvod nabízí první pracovní volbu, ne jen popis rozsahu.
+- [ ] První doporučený průchod vede ke konkrétnímu výstupu.
+- [ ] Tabulka startu podle bolesti je viditelnější než pracovní historie.
+- [ ] Veřejný vstup nevyžaduje registraci, formulář, pixel ani social embed.
+- [ ] Pracovní log zůstává údržbová vrstva, ne první čtenářská cesta.
+- [ ] Pokud hlavní veřejná cesta selhává, interně je jasný hlavní artefakt nebo fallback.
+- [ ] Zdroje podporují důvěru, ale nepřebírají roli navigace.
+- [ ] Užitečnost vstupu ověřujeme ručně nebo přímou zpětnou vazbou, ne sledováním jednotlivců.
+- [ ] Jedenácté vydání končí jednou opravou prvního dojmu, ne novou sadou slibů.
+
+### Mini úkol
+
+Vyplň kartu prvního dojmu pro e-book, dokumentaci nebo dlouhou landing page:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Co má člověk pochopit během prvních deseti vteřin? |  |
+| Jakou první volbu mu nabízíme? |  |
+| Jaký výstup má mít po 30 až 60 minutách? |  |
+| Co je hlavní artefakt, když veřejná cesta není ideální? |  |
+| Který interní kontext schováme níž nebo mimo veřejnou verzi? |  |
+| Jak zní privacy slib prvního vstupu? |  |
+| Jak ověříme první minutu bez nového trackingu? |  |
+
+Na závěr napiš:
+
+„Jedenácté vydání upravuje první dojem tak, aby čtenář do jedné minuty věděl ___, začal u ___ a skončil s ___.“
+
+Když věta nejde doplnit konkrétně, vstup pořád prodává dokument místo práce. Přepiš první obrazovku, první odstavec nebo první tabulku tak, aby člověk nemusel hádat, co má udělat.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -41649,6 +41784,7 @@ Když některé pole zní trapně, tím lépe. Trapné pole často ukazuje skute
 
 ## Pracovní log
 
+- 2026-07-21: Doplněna příloha o jedenáctém vydání e-booku bez rozbitého prvního dojmu: první minuta nového čtenáře, oddělení vstupního rozhodnutí od zbytku knihy, test první minuty, zkrácení úvodu na práci místo sebevysvětlení, ochrana vstupu před interním pracovním ocasem, karta prvního dojmu, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně aktuálně ověřeno, že `cody.dreamind.cz` přes proxy končí po TLS tunelu chybou `Empty reply from server`, přímé HTTPS bez proxy selhává na expirovaném Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), HTTP vrací `301` na HTTPS, diagnostické `curl --noproxy '*' -k -I` vrací `200 OK` z nginx/Next.js a neinteraktivní SSH pro účty `root`, `ubuntu`, `debian`, `cody` ani `node` nemá opravný přístup k obnově certifikátu.
 - 2026-07-21: Doplněna příloha o desátém vydání e-booku bez ztráty provozní reality: rozlišení obsahového, publikačního a provozního stavu, stabilizační karta vydání, hranice mezi provozním problémem a obsahovou náhradou, menší veřejný slib než interní realita, stop pravidlo pro další růst, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně aktuálně ověřeno, že `cody.dreamind.cz` přes proxy končí po TLS tunelu chybou `Empty reply from server`, přímé HTTPS bez proxy selhává na expirovaném Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), diagnostické `curl --noproxy '*' -k -I` vrací `200 OK` z nginx/Next.js a neinteraktivní SSH pro účty `root`, `ubuntu`, `deploy`, `cody` ani `node` nemá opravný přístup k obnově certifikátu.
 - 2026-07-21: Doplněna příloha o devátém vydání e-booku bez ztráty čtenářského výstupu: převod částí na konkrétní artefakt, oddělení dalšího čtení od dokončitelné práce, karta výstupu s privacy dopadem, revize checklistů na ověřitelná slovesa, věta veřejného přínosu, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně aktuálně ověřeno, že `cody.dreamind.cz` přes proxy končí po TLS tunelu chybou `Empty reply from server`, přímé HTTPS bez proxy selhává na expirovaném Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), diagnostické `curl --noproxy '*' -k -I` vrací `200 OK` z nginx/Next.js a neinteraktivní SSH pro účty `root`, `ubuntu`, `deploy`, `cody` ani `node` nemá opravný přístup k obnově certifikátu.
 - 2026-07-21: Doplněna příloha o osmém vydání e-booku bez nekonečného přidávání: vstupní filtr pro nové části, rozhodování mezi přidáním, úpravou, sloučením, smazáním a navigací, pravidlo jedné veřejné jednotky práce, oddělení interního provozu od veřejné hodnoty, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně aktuálně ověřeno, že `cody.dreamind.cz` přes proxy končí po TLS tunelu chybou `Empty reply from server`, přímé HTTPS bez proxy selhává na expirovaném Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT) a diagnostické `curl --noproxy '*' -k` vrací `200 OK` z nginx/Next.js; v pracovním prostoru není dostupný bezpečný SSH/deploy přístup k obnově certifikátu.
