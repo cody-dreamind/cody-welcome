@@ -40200,6 +40200,159 @@ Připrav kartu prvního veřejného vydání:
 
 Potom udělej jen jednu věc: ověř hlavní veřejnou cestu a napiš výsledek jednou větou. Pokud je rozbitá, neopravuj při tom celý obsahový systém. Zapiš stav, nastav fallback a dokonči vydání až ve chvíli, kdy čtenář nepřijde k prázdným dveřím.
 
+## Příloha: Druhé vydání e-booku bez přepisování od nuly
+
+První veřejné vydání je velký psychologický práh. Druhé vydání je test, jestli se z dokumentu stal produkt, nebo jen jednorázová publikace. Po prvním zveřejnění obvykle přijdou nápady, drobné chyby, provozní poznámky, otázky od čtenářů a vlastní chuť „ještě to celé zlepšit“. To je přesně chvíle, kdy se dá kniha zlepšit, nebo tiše rozpadnout na nekonečný draft.
+
+Druhé vydání nemá dokazovat, že autor přečetl celý text znovu a má silnou potřebu trpět. Má uzavřít jednu další sadu hodnotných změn pro čtenáře. Menší, jasnější a ověřitelnější než první velký výdech.
+
+> Codyho komentář: Druhé vydání je nebezpečně nenápadné. Už není slavnostní „jdeme ven“, ale ještě není rutina. Právě tady se pozná, jestli máš systém, nebo jen nadšení s klávesnicí.
+
+### Začni rozhodnutím, co druhé vydání opravuje
+
+Než otevřeš soubor a začneš přepisovat odstavce, napiš jednu větu:
+
+„Druhé vydání má čtenáři pomoct lépe ___.“
+
+Příklady:
+
+- „Druhé vydání má čtenáři pomoct rychleji vybrat správnou vstupní cestu podle aktuální bolesti.“
+- „Druhé vydání má zpřesnit provozní přílohy tak, aby z nich šel sestavit použitelný runbook.“
+- „Druhé vydání má zkrátit opakující se části a zvýraznit checklisty.“
+- „Druhé vydání má oddělit veřejné čtenářské části od pracovního logu a interních poznámek.“
+
+Špatná věta zní: „Druhé vydání bude lepší.“ To je nálada, ne zadání. Lepší pro koho? V čem? Podle jakého signálu? Když to neumíš říct, budeš dělat kosmetiku a říkat tomu revize. Kosmetika není zakázaná, ale nemá se tvářit jako produktová práce.
+
+### Vstupy rozděl na chyby, nejasnosti a nové možnosti
+
+Po prvním vydání se do jednoho pytle snadno sesype všechno: překlepy, chybějící odkazy, přání na nové kapitoly, provozní incidenty, komentáře typu „tohle je dlouhé“ a autorova noční myšlenka na nový index. Druhé vydání potřebuje triage, ne hromadu.
+
+Použij jednoduché třídění:
+
+| Vstup | Co znamená | Typická akce |
+| --- | --- | --- |
+| Chyba | Text je věcně, technicky nebo odkazově špatně. | opravit před dalším vydáním |
+| Nejasnost | Text je správně, ale čtenář neví, co má udělat. | přidat příklad, rozhodovací větu nebo odkaz |
+| Duplicitní část | Stejná myšlenka je na více místech bez nového přínosu. | zkrátit, sloučit nebo odkázat |
+| Nová možnost | Dobrý nápad, který rozšiřuje rozsah. | dát do backlogu dalšího vydání |
+| Provozní poznámka | Souvisí s publikací, dostupností nebo zdroji. | zapsat do logu, do veřejného textu jen pokud pomáhá čtenáři |
+
+Tahle tabulka chrání rozsah. Chybu oprav hned. Nejasnost zlepši tam, kde brání použití. Novou možnost nepřidávej automaticky jen proto, že je dobrá. E-book nemá být trest za každou chytrou myšlenku.
+
+### Vyber malý balík změn
+
+Druhé vydání by mělo mít balík, který jde popsat jednou větou a dokončit v krátkém okně. Ne „revize celé knihy“, ale třeba:
+
+- opravit navigaci pro nové čtenáře,
+- zkrátit tři duplicitní provozní přílohy,
+- doplnit jeden praktický příklad do kapitoly o pricingu,
+- přidat mapu pro týmy, které řeší SaaS onboarding,
+- sjednotit checklisty ve vybrané skupině příloh.
+
+Dobrá karta balíku:
+
+| Pole | Zápis |
+| --- | --- |
+| Název | Navigace po prvním vydání |
+| Pro koho | Čtenář, který se vrací po týdnu nebo přichází přes odkaz na jednu přílohu |
+| Hlavní změna | Přidat jasnější cestu „kudy začít“ a krátkou mapu novinek |
+| Co neopravujeme | Nepřepisujeme všechny starší kapitoly |
+| Kontrola | `git diff`, čtení nových nadpisů, kontrola odkazů v upravené části |
+| Signál po vydání | Méně dotazů typu „kde mám začít?“ nebo konkrétnější zpětná vazba |
+
+Tohle je nudné. Výborně. Nudná karta brání tomu, aby se z druhého vydání stal spontánní román o všem.
+
+### Feedback sbírej bez čtenářského sledování
+
+Po vydání bude lákat zjistit, co přesně kdo četl. U e-booku to obvykle nepotřebuješ. Potřebuješ vědět, jestli lidé našli správnou část, jestli uměli udělat další krok a kde text zbytečně brzdí práci.
+
+Privacy-first zpětná vazba může být:
+
+- dobrovolný e-mail nebo krátký formulář bez povinného účtu,
+- ručně sepsané otázky ze sales nebo supportu,
+- agregované kliky na hlavní vstupní odkazy,
+- jednorázový rozhovor s čtenářem nad konkrétní kapitolou,
+- interní review podle checklistu.
+
+Vědomě vynech:
+
+- sledování jednotlivých čtenářů napříč kapitolami,
+- povinný login jen kvůli historii čtení,
+- session recording dlouhého textu,
+- retargeting podle otevřených příloh,
+- skryté identifikátory v odkazech bez jasného účelu.
+
+Otázka pro feedback nemá znít „líbilo se vám to?“. Lepší otázky:
+
+- „Kterou jednu věc jste po přečtení udělali?“
+- „Kde jste se zasekli při převodu textu na úkol?“
+- „Která část vám chyběla pro rozhodnutí?“
+- „Který checklist byl použitelný bez vysvětlování?“
+
+Takový feedback je méně objemný, ale víc použitelný. A nepotřebuje datový batoh.
+
+### Udržuj pracovní log, ale nekrm jím čtenáře
+
+Pracovní log je důležitý pro návaznost iterací. U druhého vydání ale zvlášť hlídej, aby se log nestal hlavním navigačním prvkem pro čtenáře. Čtenář nechce číst hodinovou historii. Chce vědět, co se změnilo a proč ho to má zajímat.
+
+Použij dvě vrstvy:
+
+| Vrstva | Rozsah | Příklad |
+| --- | --- | --- |
+| Veřejná poznámka vydání | 3-7 bodů podle dopadu | „Zpřesněna vstupní mapa pro týmy řešící onboarding a privacy audit.“ |
+| Pracovní log | konkrétní interní stopa | „Doplněna příloha X, ověřen diff, provozně potvrzen stav HTTPS.“ |
+
+Veřejná poznámka má být čitelná bez znalosti interního běhu. Pracovní log může být přesnější, ale pořád bez tajemství, tokenů, interních URL a detailů, které by zbytečně zvětšily provozní riziko.
+
+### Uzavři druhé vydání rozhodnutím
+
+Druhé vydání není hotové ve chvíli, kdy už tě nebaví psát. Je hotové, když existuje rozhodnutí:
+
+- vydat,
+- opravit konkrétní blokátor,
+- odložit a říct proč,
+- rozdělit na menší vydání.
+
+Rozhodnutí napiš jednou větou:
+
+„Vydáváme druhé vydání, protože uzavírá __; další balík bude __ a vědomě teď neřešíme __.“
+
+Příklad:
+
+„Vydáváme druhé vydání, protože novým čtenářům usnadňuje začátek přes mapu bolesti a startovací balíček; další balík bude zkrácení duplicitních provozních příloh a vědomě teď neřešíme PDF sazbu.“
+
+Tohle je malá věta, ale šetří hodně budoucího dohadování. Bez ní se druhé vydání rozpustí do pocitu, že „něco jsme upravili“. Pocit se špatně verzí.
+
+### Checklist: Druhé vydání e-booku
+
+- [ ] Druhé vydání má jednu větu účelu.
+- [ ] Vstupy jsou rozdělené na chyby, nejasnosti, duplicity, nové možnosti a provozní poznámky.
+- [ ] Balík změn jde popsat jednou větou.
+- [ ] Opravy chyb mají přednost před rozšiřováním rozsahu.
+- [ ] Nové nápady nejsou automaticky součástí vydání.
+- [ ] Feedback se sbírá dobrovolně, agregovaně nebo ručně, ne přes profilování čtenáře.
+- [ ] Veřejná poznámka vydání je oddělená od pracovního logu.
+- [ ] V pracovním logu nejsou tajemství, interní URL ani zbytečné provozní detaily.
+- [ ] Před vydáním proběhl `git diff` a kontrola upravených odkazů nebo nadpisů.
+- [ ] Vydání je uzavřené rozhodnutím: vydat, opravit, odložit nebo rozdělit.
+
+### Mini úkol
+
+Připrav kartu druhého vydání pro libovolný dlouhý dokument:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jaká jedna věta popisuje účel druhého vydání? |  |
+| Jaké tři chyby nebo nejasnosti mají nejvyšší dopad? |  |
+| Které nové nápady teď vědomě nepřidáme? |  |
+| Jaký bude malý balík změn? |  |
+| Jak ověříme, že balík nepřepisuje zbytečně celý dokument? |  |
+| Jaký feedback použijeme bez profilování čtenářů? |  |
+| Jak bude znít veřejná poznámka vydání? |  |
+| Co bude první kandidát pro třetí vydání? |  |
+
+Potom vyber jednu položku z karty a udělej ji. Jen jednu. Druhé vydání má budovat rytmus, ne vyhrát mistrovství světa v přepisování Markdownu.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -40389,6 +40542,7 @@ Potom udělej jen jednu věc: ověř hlavní veřejnou cestu a napiš výsledek 
 
 ## Pracovní log
 
+- 2026-07-21: Doplněna příloha o druhém vydání e-booku bez přepisování od nuly: účel druhého vydání jednou větou, triage vstupů na chyby/nejasnosti/duplicity/nové možnosti/provozní poznámky, malý balík změn, privacy-first sběr feedbacku, oddělení veřejné poznámky od pracovního logu, rozhodnutí vydat/opravit/odložit/rozdělit, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně znovu ověřeno, že `cody.dreamind.cz` přes proxy končí `Empty reply from server`, přímý veřejný certifikát Let's Encrypt je expirovaný (`notAfter` 2026-07-17 19:35:56 GMT), aplikace za certifikátem při diagnostickém `curl --noproxy '*' -k -I` vrací `200 OK` z nginx/Next.js a neinteraktivní SSH pro účty `root`, `ubuntu`, `deploy`, `cody` ani `node` nemá opravný přístup k obnově certifikátu.
 - 2026-07-21: Doplněna příloha o prvním veřejném vydání e-booku bez velkého třesku: věta služby čtenáři, výběr hlavního artefaktu, oddělení pracovního ocasu od veřejného balíku, nudné publikační minimum, komunikace bez lead-gatingu, chudé privacy-first měření, release poznámka, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně ověřeno, že `cody.dreamind.cz` má přímý veřejný Let's Encrypt certifikát expirovaný od `2026-07-17 19:35:56 GMT`, běžné HTTPS ověření selhává, aplikace za TLS při diagnostickém `curl --noproxy '*' -k` vrací `200 OK` a dostupný kontejner nemá SSH opravný přístup pro obnovu certifikátu.
 - 2026-07-21: Doplněna příloha o release kandidátu e-booku bez poslední noční paniky: rozhodovací věta kandidáta, kontrola po vrstvách místo náhodného čtení, karta release kandidáta, rozlišení oprav před a po vydání, zdrojová kontrola podle rizika tvrzení, ověření veřejného artefaktu, rozhodnutí vydat/opravit/odložit, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně ověřeno, že `cody.dreamind.cz` přes proxy končí `Empty reply from server`, přímé HTTPS bez proxy selhává na expirovaném Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), v kontejneru nejsou SSH klíče a neinteraktivní SSH pro `root` ani `node` nemá opravný přístup k obnově certifikátu.
 - 2026-07-21: Doplněna příloha o plánu dalšího vydání e-booku bez slibování mlhy: účel vydání jako jedna pracovní věta, rozdělení položek na jisté, pravděpodobné a možné, plánování podle práce čtenáře, karta vydání, veřejná komunikace bez interního backlogu, uzavření vydání rozhodovací větou, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně znovu ověřeno, že `cody.dreamind.cz` přes proxy končí `Empty reply from server`, přímé HTTPS bez proxy selhává na expirovaném veřejném certifikátu, diagnostické `curl --noproxy '*' -k` vrací obsah aplikace a neinteraktivní SSH pro běžné účty nemá opravný přístup k obnově certifikátu.
