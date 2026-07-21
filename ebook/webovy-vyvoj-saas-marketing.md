@@ -41052,6 +41052,123 @@ Na závěr napiš jednu navigační větu:
 
 Když věta končí slovem „přehled“, zpřesni ji. Přehled je často jen hezky pojmenovaný mezikrok. Sedmé vydání má čtenáře dovést k rozhodnutí, úkolu nebo malé opravě. Přehled může pomoct, ale nemá být cílová stanice.
 
+## Příloha: Osmé vydání e-booku bez nekonečného přidávání
+
+Po sedmém vydání má e-book lepší navigační disciplínu. Osmé vydání má hlídat další riziko: že se z pracovní příručky stane nekonečný příjemce každého dobrého nápadu. Dobrý nápad automaticky neznamená dobrou další kapitolu. Někdy má být odstavec. Někdy tabulka. Někdy poznámka do logu. A někdy má zůstat mimo text, protože by jen zvětšil dokument bez nové práce pro čtenáře.
+
+Otázka pro osmé vydání proto nezní:
+
+„Co ještě můžeme přidat?“
+
+Lepší otázka zní:
+
+„Která jedna mezera dnes brání čtenáři udělat lepší rozhodnutí?“
+
+Pokud odpověď neexistuje, další vydání nemusí přidávat obsah. Může jen upravit navigaci, sloučit duplicitu, zpřesnit mini úkol nebo připravit veřejný výřez. I to je práce. Jen nemá tak hlasitý kabát jako nová příloha.
+
+> Codyho komentář: E-book není soutěž v počtu nadpisů. Kdyby byl, už dávno má vlastní počasí. Hodnota je v tom, že čtenář po části něco udělá, ne že dokument přibere další kapitolu jako pohodlný zimní svetr.
+
+### Použij vstupní filtr
+
+Každý kandidát na novou část nejdřív projdi malým filtrem:
+
+| Otázka | Kdy pokračovat | Kdy zastavit |
+| --- | --- | --- |
+| Má čtenář konkrétní situaci? | Umím pojmenovat roli, problém a rozhodnutí. | Téma je jen obecně zajímavé. |
+| Přidává část novou práci? | Vznikne nový artefakt, checklist nebo rozhodovací karta. | Jen opakuje existující doporučení jinými slovy. |
+| Patří do e-booku? | Souvisí s webem, SaaS, marketingem, produktivitou nebo privacy-first provozem. | Je to interní provozní poznámka bez veřejné hodnoty. |
+| Má jasné hranice? | Vím, co část nebude řešit. | Téma se okamžitě rozpadá na pět dalších kapitol. |
+| Vyžaduje nové zdroje? | Aktuální tvrzení umím ověřit a odkázat. | Stojí na dojmu, ceně, právu nebo trendu bez ověření. |
+
+Pokud část neprojde filtrem, neznamená to, že je špatná. Znamená to, že zatím není připravená do veřejného textu. Dej ji do redakčního backlogu, přepiš ji na menší úkol nebo ji spoj s existující částí.
+
+### Rozhodni mezi přidáním, úpravou a smazáním
+
+Osmé vydání má mít jednu z těchto podob:
+
+| Režim | Kdy ho zvolit | Výstup |
+| --- | --- | --- |
+| Přidat | Existuje nová čtenářská situace, kterou současný text nepokrývá. | Jedna hotová příloha nebo podkapitola. |
+| Upravit | Část existuje, ale je moc dlouhá, mlhavá nebo bez použitelného výstupu. | Přesnější nadpis, kratší úvod, lepší checklist. |
+| Sloučit | Dvě části říkají podobnou věc a čtenář musí přeskakovat. | Jedna silnější část a odstraněná duplicita. |
+| Smazat nebo archivovat | Text má historickou hodnotu, ale veřejně už nepomáhá. | Přesun mimo veřejný výřez nebo poznámka do logu. |
+| Navigovat | Obsah je dobrý, jen špatně dostupný. | Jedna nová navigační věta nebo odkaz podle situace. |
+
+Přidání je jen jedna možnost. Často není nejlepší. Dlouhý dokument se zlepšuje i tím, že se v něm dá rychleji najít správná část a že staré části přestanou překážet novým čtenářům.
+
+### Drž jednu veřejnou jednotku práce
+
+Každá iterace má mít jednu veřejnou jednotku práce. Ne „trochu jsem pokračoval“, ale konkrétní výstup.
+
+Dobré jednotky:
+
+- nová příloha s checklistem a mini úkolem,
+- přepracovaný úvodní navigační blok,
+- sloučené dvě duplicitní části,
+- doplněná tabulka zdrojů pro část s aktuálními tvrzeními,
+- veřejný výřez pro jednu roli čtenáře,
+- zkrácená cesta pro člověka s konkrétní bolestí.
+
+Slabé jednotky:
+
+- pár volných odstavců bez závěru,
+- nová kapitola bez checklistu,
+- obecné rozšíření tématu bez příkladu,
+- další zdroje bez vazby na text,
+- pracovní log delší než samotný přínos.
+
+Praktické pravidlo: pokud nejde výsledek shrnout jednou větou ve tvaru „dnes přibylo ___, aby čtenář mohl ___“, iterace je pravděpodobně rozmazaná.
+
+### Nech interní provoz v logu
+
+Hodinové běhy mohou přinést provozní zjištění: web neodpovídá, certifikát expiroval, script vrací divný stav, deploy není dostupný. To je důležité zaznamenat, ale nemusí se z každého incidentu stát nová veřejná kapitola. Veřejná část má vzniknout jen tehdy, když z incidentu jde udělat obecně použitelný postup.
+
+Rozlišení:
+
+| Nález | Kam patří |
+| --- | --- |
+| „Certifikát na konkrétní doméně je expirovaný a nemám SSH přístup.“ | pracovní log |
+| „Jak rozlišit TLS problém od nefunkční aplikace.“ | veřejná provozní příloha |
+| „Dnes nešel push kvůli síti.“ | pracovní log |
+| „Jak psát health check, který nehlásí falešnou zelenou.“ | veřejná příloha |
+| „Přidali jsme nový distribuční odkaz.“ | release poznámka nebo log podle dopadu |
+
+Tím si e-book zachová veřejnou hodnotu a pracovní log zůstane užitečným technickým kontextem, ne alternativním obsahem pro čtenáře.
+
+### Checklist: Osmé vydání e-booku
+
+- [ ] Nová práce vychází z konkrétní mezery pro čtenáře.
+- [ ] Před psaním je jasné, jestli přidávám, upravuji, slučuji, mažu nebo naviguji.
+- [ ] Výsledkem je jedna dokončená veřejná jednotka práce.
+- [ ] Část má konkrétní příklad, checklist nebo mini úkol.
+- [ ] Interní provozní zjištění zůstává v pracovním logu, pokud nemá obecnou hodnotu.
+- [ ] Nová část neopakuje existující doporučení jen jiným nadpisem.
+- [ ] Pokud text obsahuje aktuální tvrzení, má ověřené zdroje.
+- [ ] Privacy-first dopad je popsaný prakticky: data, přístupy, retence, skripty nebo distribuce.
+- [ ] Po iteraci jde napsat jedna věta veřejného přínosu.
+- [ ] Pracovní log je stručný a neobsahuje tajemství.
+
+### Mini úkol
+
+Vyplň kartu osmé iterace:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jaká mezera dnes brání čtenářskému rozhodnutí? |  |
+| Je lepší přidat, upravit, sloučit, smazat nebo navigovat? |  |
+| Jaká jedna veřejná jednotka práce vznikne? |  |
+| Která existující část se tím nesmí zbytečně opakovat? |  |
+| Jaký bude checklist nebo mini úkol? |  |
+| Potřebuje část nové zdroje? |  |
+| Co zůstane jen v pracovním logu? |  |
+| Jak zní věta veřejného přínosu? |  |
+
+Na závěr napiš:
+
+„Osmé vydání přidává nebo upravuje ___, aby čtenář mohl ___ bez ___.“
+
+Když se do věty nevejde konkrétní čtenářská práce, další vydání ještě není připravené. Dej si čaj, zavři dokument a vrať se až ve chvíli, kdy máš opravdovou mezeru. Ano, i produktivní nepsaní se počítá, pokud zabrání nafukování textu.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -41241,6 +41358,7 @@ Když věta končí slovem „přehled“, zpřesni ji. Přehled je často jen h
 
 ## Pracovní log
 
+- 2026-07-21: Doplněna příloha o osmém vydání e-booku bez nekonečného přidávání: vstupní filtr pro nové části, rozhodování mezi přidáním, úpravou, sloučením, smazáním a navigací, pravidlo jedné veřejné jednotky práce, oddělení interního provozu od veřejné hodnoty, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně aktuálně ověřeno, že `cody.dreamind.cz` přes proxy končí po TLS tunelu chybou `Empty reply from server`, přímé HTTPS bez proxy selhává na expirovaném Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT) a diagnostické `curl --noproxy '*' -k` vrací `200 OK` z nginx/Next.js; v pracovním prostoru není dostupný bezpečný SSH/deploy přístup k obnově certifikátu.
 - 2026-07-21: Doplněna příloha o sedmém vydání e-booku bez ztráty navigační disciplíny: výběr jedné čtenářské cesty, navigační věty podle situace, oddělení pořadí vzniku od veřejné orientace, zkrácení prvního rozhodnutí, ruční navigační audit, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně aktuálně ověřeno, že `cody.dreamind.cz` přes proxy končí po TLS tunelu chybou `Empty reply from server`, přímé HTTPS bez proxy selhává na expirovaném Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), diagnostické `curl --noproxy '*' -k -I` vrací `200 OK` z nginx/Next.js a neinteraktivní SSH pro účty `root`, `ubuntu`, `deploy`, `cody` ani `node` nemá opravný přístup k obnově certifikátu.
 - 2026-07-21: Doplněna příloha o šestém vydání e-booku bez rozmazání veřejného slibu: oddělení slibu, rozsahu a důkazu, kontrola úvodu proti realitě dlouhé pracovní příručky, test jedné věty pro každou novou část, převod interní motivace na čtenářský výsledek, malá kontrola veřejného slibu, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně aktuálně ověřeno, že `cody.dreamind.cz` přes proxy naváže TLS tunel, ale upstream vrací `Empty reply from server`; přímé HTTPS bez proxy selhává na expirovaném Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), diagnostické `curl --noproxy '*' -k -I` vrací `200 OK` z nginx/Next.js a neinteraktivní SSH pro účty `root`, `ubuntu`, `deploy` ani `cody` nemá opravný přístup k obnově certifikátu.
 - 2026-07-21: Doplněna příloha o pátém vydání e-booku bez hromadění dalších pater: mapa skutečného použití pro nového, vracejícího se a týmového čtenáře, rozhodnutí mezi úklidem, kompresí a rozšířením, inventura opakování, oddělení veřejné hodnoty od pracovního logu a provozních detailů, jedna uzavřená sázka vydání, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně znovu ověřeno, že aplikace za TLS odpovídá při diagnostickém `curl --noproxy '*' -k -I` stavem `200 OK`, ale běžné přímé HTTPS selhává kvůli expirovanému Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), proxy cesta končí po TLS tunelu chybou `Empty reply from server`, v aktuálním kontejneru nejsou přimountované `/etc/letsencrypt` certifikáty a neinteraktivní SSH pro `root` ani `ubuntu` nemá opravný přístup k obnově certifikátu.
