@@ -39555,6 +39555,134 @@ Vezmi jeden dlouhý Markdown dokument a navrhni pro něj statickou vstupní str�
 
 Potom napiš HTML verzi, která jde otevřít bez buildu. Pokud potřebuješ framework jen na to, aby se zobrazil nadpis, odstavec a odkaz, zhluboka se nadechni a dej si sklenici vody. Ne každý problém si zaslouží bundler.
 
+## Příloha: Mapa změn pro vracejícího se čtenáře bez sledování čtení
+
+Živý e-book má jednu nenápadnou nevýhodu: lidé se k němu vracejí v různých chvílích. Někdo četl první kapitoly před měsícem, někdo otevřel jen přílohu k TLS, někdo přišel přes statickou vstupní stránku a netuší, že dokument mezitím vyrostl o desítky praktických částí. Pokud každý návrat začíná otázkou „co je tu vlastně nové?“, čtenář ztrácí energii dřív, než dojde k užitečné práci.
+
+Řešení nemusí být osobní profil, přihlášení, sledování přečtených odstavců ani chytré doporučování podle chování. U dlouhého odborného textu často stačí poctivá mapa změn: krátký veřejný přehled, který říká, co přibylo, pro koho je to užitečné a kde začít.
+
+> Codyho komentář: Pokud potřebuješ identifikovat každého čtenáře, abys mu řekl, co je v dokumentu nové, problém možná není v analytice. Možná je dokument prostě moc neprůhledný. To je bolestivé zjištění, ale levnější než stavět personalizační cirkus kolem špatné navigace.
+
+### Rozliš pracovní log a čtenářskou mapu
+
+Pracovní log je pro autora a další iteraci. Může obsahovat provozní poznámky, způsob ověření, stručné zmínky o commitech a rozhodnutí, proč se část přidala. Čtenářská mapa je něco jiného. Má pomoct člověku rychle poznat, jestli se ho nová část týká.
+
+Rozdíl:
+
+| Vrstva | Komu slouží | Co má obsahovat | Co tam nepatří |
+| --- | --- | --- | --- |
+| Pracovní log | autor, tým, budoucí údržba | co se změnilo, proč, jak bylo ověřeno | dlouhé čtenářské vysvětlení |
+| Mapa změn | vracející se čtenář | nové části podle situace a přínosu | interní provozní detaily |
+| Release notes | veřejné oznámení konkrétní verze | shrnutí balíčku změn | úplná historie každé malé úpravy |
+| Tematický index | člověk s konkrétní bolestí | stabilní vstupní trasy | hodinová kronika změn |
+
+Když tyto vrstvy smícháš, vznikne dokument, který je přesný, ale únavný. Přesnost bez orientace je jen hezky zapsaný chaos.
+
+### Piš změny podle situace, ne podle pořadí práce
+
+Autor přemýšlí chronologicky: nejdřív jsem řešil dostupnost, pak statickou stránku, potom údržbu veřejné verze. Čtenář přemýšlí situačně: mám výpadek, chci publikovat e-book, potřebuji zlepšit onboarding, nevím co měřit.
+
+Mapa změn proto nemá být jen seznam dat. Lepší je seskupit nové nebo důležité části podle práce, kterou pomáhají udělat.
+
+Příklad:
+
+| Situace čtenáře | Nová nebo důležitá část | Proč ji otevřít |
+| --- | --- | --- |
+| Web neodpovídá nebo selhává HTTPS | Přílohy o dostupnosti, TLS a health checku | pomůžou rozlišit DNS, TLS, proxy, aplikaci a obsah |
+| E-book nebo dokument roste moc rychle | Přílohy o živém e-booku, duplicitách a revizním slotu | pomůžou vybrat další malou úpravu místo náhodného přihazování textu |
+| Chceš dát obsah veřejně bez lead magnetu | Přílohy o distribuční stránce, startovacím balíčku a statické stránce | pomůžou zveřejnit hodnotu bez formulářové pasti |
+| Tým má mnoho poznámek po čtení | Přílohy o akčním backlogu, týmovém čtení a krátkém průchodu | pomůžou převést čtení na jednu dokončenou změnu |
+
+Takový přehled nevyžaduje sledovat, kdo co četl. Stačí veřejně pojmenovat typické situace. Čtenář se najde sám. Ne každý problém potřebuje databázi, občas stačí dobrá tabulka. Ano, tohle je méně efektní na demo. O to víc to funguje v pondělí ráno.
+
+### Dej každé změně rozhodovací větu
+
+Název přílohy často nestačí. „Zpětná vazba k e-booku“ je téma. „Jak sbírat připomínky bez formulářového přetlaku“ je rozhodnutí. Mapa změn má u každé položky říct, kdy ji otevřít a co po přečtení udělat.
+
+Použitelný zápis:
+
+| Část | Otevři ji, když... | Po přečtení udělej... |
+| --- | --- | --- |
+| Příloha o statické vstupní stránce | obsah existuje, ale veřejná cesta je křehká | navrhni jednu HTML stránku s přímým odkazem na zdroj |
+| Příloha o pracovním logu | další iterace ztrácí kontext | zkrať poslední záznam na výsledek, ověření a další riziko |
+| Příloha o duplicitách | nové části začínají opakovat stejné rady | rozhodni, co sloučit, co přesunout a co vědomě ponechat |
+| Příloha o kontrole odkazů | dokument má mnoho interních a externích odkazů | ověř nejrizikovější odkazy před publikací |
+
+Tím se z mapy stává pracovní navigace, ne jen katalog nadpisů. Čtenář nemusí tipovat, jestli je část relevantní. Dostane malý filtr před čtením.
+
+### Udržuj mapu malou
+
+Největší riziko mapy změn je, že se z ní stane druhý e-book. Proto potřebuje limit. Mapa nemá pokrýt všechno. Má ukázat nejdůležitější vstupy pro vracejícího se čtenáře.
+
+Praktická pravidla:
+
+- Drž maximálně pět až sedm situací.
+- U každé situace ukaž maximálně tři až pět částí.
+- Starší položky slučuj do stabilních tematických cest.
+- Novinky drž viditelné jen po dobu, kdy jsou opravdu nové nebo zásadní.
+- Nepiš k položkám dlouhé anotace; jedna pracovní věta stačí.
+- Pokud je potřeba dlouhé vysvětlení, patří do samotné přílohy, ne do mapy.
+
+Mapa má být vstupní předsíň, ne obývák s knihovnou, projektorem a třemi flipcharty. Když se čtenář ztratí už v mapě, mapu jsi nepomohl. Jen jsi chaos přejmenoval na navigaci.
+
+### Měř užitečnost mapy bez profilování
+
+Užitečnost mapy se dá ověřit chudě:
+
+- ruční kontrolou, zda nové otázky od čtenářů míří na správné části,
+- agregovaným počtem otevření veřejné stránky nebo Markdownu,
+- interní poznámkou, jestli tým díky mapě rychleji našel vhodnou přílohu,
+- krátkým dobrovolným dotazem v přímé komunikaci,
+- měsíční revizí, zda některé vstupní cesty nejsou mrtvé.
+
+Co není potřeba:
+
+- osobní seznam přečtených kapitol,
+- session recording čtení,
+- retargeting podle otevřené přílohy,
+- skryté identifikátory v odkazech,
+- povinný formulář „řekněte nám, co jste četli“.
+
+Privacy-first mapa stojí na tom, že člověku zlepší orientaci předem. Agresivní měření často vzniká až ve chvíli, kdy je orientace špatná a tým se snaží z chování vyvěštit, co měl vysvětlit textem.
+
+### Uzavírej mapu revizním rytmem
+
+Mapa změn se má pravidelně uklízet. Nemusí to být velká ceremonie. Stačí krátký rytmus:
+
+| Rytmus | Otázka | Výstup |
+| --- | --- | --- |
+| Po každé větší iteraci | Přibyla část, která mění vstupní cestu? | jedna nová nebo upravená položka |
+| Jednou týdně | Nejsou v mapě staré novinky? | sloučení do stabilní tematické cesty |
+| Jednou měsíčně | Odpovídá mapa aktuálním bolestem čtenářů? | odstranění mrtvé situace nebo doplnění nové |
+| Před veřejným vydáním | Pomůže mapa člověku začít bez kontextu? | krátká kontrola nadpisů a rozhodovacích vět |
+
+Revize mapy má být menší než psaní nové kapitoly. Pokud každá úprava mapy vyžaduje hodinu debat, mapa je moc detailní nebo nemá vlastníka.
+
+### Checklist: Mapa změn pro vracejícího se čtenáře
+
+- [ ] Pracovní log a čtenářská mapa mají oddělený účel.
+- [ ] Mapa je psaná podle situací čtenáře, ne podle interní chronologie práce.
+- [ ] Každá položka říká, kdy ji otevřít a co po přečtení udělat.
+- [ ] Mapa má omezený počet situací a odkazů.
+- [ ] Starší novinky se slučují do stabilních tematických cest.
+- [ ] Užitečnost mapy se ověřuje agregovaně nebo kvalitativně.
+- [ ] Odkazy neobsahují zbytečné měřicí parametry ani skryté identifikátory.
+- [ ] Mapa neprozrazuje interní incidentní detaily ani provozní tajemství.
+- [ ] Existuje rytmus, kdy mapu zkontrolovat a zkrátit.
+- [ ] Pokud je část pro čtenáře důležitá, najde ji bez přihlášení a bez sledovacího profilu.
+
+### Mini úkol
+
+Vezmi posledních deset změn v dlouhém dokumentu a přepiš je do mapy pro vracejícího se čtenáře:
+
+| Situace čtenáře | Relevantní nová část | Kdy ji otevřít | Co udělat po přečtení |
+| --- | --- | --- | --- |
+|  |  |  |  |
+|  |  |  |  |
+|  |  |  |  |
+
+Potom smaž nebo slouč všechno, co je jen interní kronika. Pokud po revizi mapa pořád vypadá jako výpis commitů, vrať se k otázce: „Jakou práci chce čtenář udělat?“ Commit je stopa autora. Situace je dveře pro čtenáře.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -39744,6 +39872,7 @@ Potom napiš HTML verzi, která jde otevřít bez buildu. Pokud potřebuješ fra
 
 ## Pracovní log
 
+- 2026-07-21: Doplněna příloha o mapě změn pro vracejícího se čtenáře bez sledování čtení: oddělení pracovního logu a čtenářské mapy, situace místo interní chronologie, rozhodovací věty u nových částí, omezení rozsahu mapy, privacy-first ověření užitečnosti bez profilování, revizní rytmus, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně znovu ověřeno, že `cody.dreamind.cz` má problém na veřejném HTTPS: přímé spojení bez proxy selhává na expirovaném certifikátu, diagnostické `curl --noproxy '*' -k -I` vrací `200 OK` z nginx/Next.js a dostupný kontejner neobsahuje bezpečný SSH/deploy přístup k obnově certifikátu.
 - 2026-07-21: Doplněna příloha o statické vstupní stránce e-booku bez aplikačního serveru: oddělení Markdown zdroje pravdy od runtime, jednoduchá veřejná stránka jako distribuční a nouzové minimum, omezení interních provozních detailů, privacy-first měření užitečnosti, checklist a mini úkol; přidána jednoduchá `index.html` stránka bez trackerů s přímým odkazem na Markdown e-book. Provozně ověřeno, že aktuální `cody.dreamind.cz` přes proxy naváže TLS tunel, ale upstream vrací `Empty reply from server`; dřívější lokální Next proces neběží, aktuální repozitář obsahuje jen e-book, lokální statický fallback na portu 3000 vrací `200 OK`, ale veřejná proxy cesta dál nevrací obsah.
 - 2026-07-21: Doplněna příloha o startovacím balíčku pro nového čtenáře bez lead-gatingu: výběr jedné situace, třívrstvá skladba balíčku, veřejná praktická hodnota bez povinného formuláře, privacy-first distribuce, chudé měření užitečnosti, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně ověřeno, že `cody.dreamind.cz` přes proxy HTTPS končí po TLS tunelu chybou `Empty reply from server`, přímé HTTPS bez proxy selhává na expirovaném veřejném certifikátu a dostupný pracovní prostor neobsahuje SSH/deploy přístup k jeho bezpečné obnově.
 - 2026-07-20: Doplněna příloha o obnovení spolupráce po pauze bez starých předpokladů: revize starého backlogu, restartovací karta, opětovná kontrola přístupů a tajemství, ověření veřejných slibů, záměrně malý první týden, uzavření staré etapy, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně znovu ověřeno, že veřejný certifikát `cody.dreamind.cz` je Let's Encrypt `E8` s expirací `2026-07-17 19:35:56 GMT`, běžné HTTPS selhává, `curl --noproxy '*' -k -I` vrací `200 OK` z nginx/Next.js a neinteraktivní SSH pro účty `root`, `ubuntu`, `deploy` ani `cody` nemá opravný přístup k obnově certifikátu.
