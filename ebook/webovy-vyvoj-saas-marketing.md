@@ -84,6 +84,31 @@ Checklist krátkého průchodu:
 - [ ] Zapsal jsem i věc, kterou teď vědomě měřit nebo stavět nebudeme.
 - [ ] Pokud se změna dotýká dat, znám účel, místo uložení a konec životnosti.
 
+### Rejstřík pracovních nástrojů
+
+Když se nechceš vracet do celé knihy, hledej konkrétní nástroj podle výstupu. V Markdownu stačí použít vyhledávání v prohlížeči nebo editoru a najít přesný název části. Je to méně elegantní než personalizovaný portál, ale výrazně méně hladové po datech. A hladové věci do privacy-first provozu nepouštíme.
+
+| Potřebuješ vytvořit | Hledej v e-booku | Typický výstup |
+| --- | --- | --- |
+| Datovou mapu jedné cesty | „mapa dat“, „retenční mapa“ nebo „záznam o činnostech“ | tabulka účelů, systémů, přístupů a doby držení |
+| Metriku, podle které půjde rozhodnout | „specifikace metriky“, „SaaS metriky“ nebo kapitolu 8 | jedna metrika s vlastníkem, oknem vyhodnocení a stop pravidlem |
+| Bezpečný formulář | „privacy-first formuláře“, „spam ochrana formulářů“ | formulářová karta s nutnými poli a odděleným souhlasem |
+| Provozní jistotu před releasem | kapitolu 11, „runbook“, „healthcheck“ nebo „release kandidát“ | krátký kontrolní postup a jasný blocker seznam |
+| První produktový krok po čtení | „45minutový průchod“, „akční backlog“ nebo „30denní akční plán“ | jeden úkol se slovesem, vlastníkem a datem kontroly |
+| Veřejný výřez pro sdílení | „veřejný výřez“, „startovací balíček“ nebo „release notes“ | samostatně použitelný odkaz bez lead-gatingu |
+| Odpověď na bezpečnostní dotaz zákazníka | „trust center“, „DPA“, „přístupový audit“ nebo kapitolu 10 | věcná odpověď bez marketingové mlhy a bez sdílení interních detailů |
+| Úklid po spolupráci nebo projektu | „offboarding“, „ukončení spolupráce“ nebo „předání projektu“ | předávací a mazací checklist s uzavřením přístupů |
+
+Pravidlo pro práci s rejstříkem: otevři maximálně tři nalezené části, vyber jednu a zapiš výstup. Pokud po deseti minutách pořád skáčeš mezi odkazy, vrať se k tabulce „Kudy začít podle aktuální bolesti“ a zúž problém. E-book není buffet. Teda je, ale bez talíře si stejně odneseš jen chaos.
+
+Mini kontrola po použití rejstříku:
+
+- [ ] Vybral jsem nástroj podle výstupu, ne podle názvu tématu.
+- [ ] Nepotřeboval jsem k orientaci sledovat individuální čtenářskou cestu.
+- [ ] Výstup jde uložit do backlogu, runbooku, dokumentace nebo rozhodovacího logu.
+- [ ] Vím, kterou část jsem vědomě přeskočil.
+- [ ] Pokud se stejný dotaz opakuje, doplním jednu směrovku místo další podobné přílohy.
+
 ## Osnova
 
 1. Základní principy privacy-first webu a SaaS
@@ -43570,6 +43595,7 @@ Pokud věta nejde doplnit, navigační zásah ještě není připravený. Možn�
 
 ## Pracovní log
 
+- 2026-07-22: Doplněn rejstřík pracovních nástrojů na začátku e-booku: rychlé vyhledání datové mapy, specifikace metriky, privacy-first formuláře, provozního releasu, akčního backlogu, veřejného výřezu, bezpečnostní odpovědi a projektového offboardingu podle požadovaného výstupu; přidána mini kontrola, aby orientace nevytvářela nový tracking ani další duplicitní přílohy. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně ověřeno, že `cody.dreamind.cz` přímo míří na `91.99.227.53`, běžné přímé HTTPS selhává na expirovaném Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), diagnostické `curl --noproxy '*' -k` vrací `200 OK` z nginx/Next.js a proxy cesta končí po TLS tunelu chybou `Empty reply from server`; v pracovním prostoru není dostupný SSH/deploy/certbot přístup pro bezpečnou obnovu certifikátu.
 - 2026-07-22: Doplněna příloha o orientační mapě dlouhého e-booku bez čtenářského bloudění: rozlišení kapitoly, přílohy a pracovního nástroje, mapa podle čtenářské bolesti, lokální zkratky pro související části, nadpisy jako směrovky, mapovací karta pro další údržbu, privacy-first ověření orientace bez profilování, checklist a mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně znovu ověřeno, že `cody.dreamind.cz` má veřejný HTTPS problém: běžná cesta přes proxy končí po TLS tunelu chybou `Empty reply from server`, přímé HTTPS bez proxy selhává na expirovaném Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), HTTP vrací `301` na HTTPS a dostupný pracovní prostor neobsahuje SSH/deploy/certbot přístup, kterým by šlo certifikát bezpečně obnovit.
 - 2026-07-22: Doplněna příloha o provozním healthchecku veřejného artefaktu bez falešné zelené: rozdělení kontroly na DNS, transport, HTTP, obsah, artefakt a privacy vrstvu, pravidlo že diagnostické výjimky typu `curl -k` nejsou produkční důkaz, návrh malého healthchecku, triage tabulka selhání, oddělení opravy od informování, healthcheck karta, checklist a mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje; navázáno na existující zdroje k curl, Let's Encrypt, certbotu, HTTP stavům a provozní komunikaci. Provozně znovu ověřeno, že `cody.dreamind.cz` přes lokální proxy po TLS tunelu končí chybou `Empty reply from server`, přímé HTTPS bez proxy selhává na expirovaném Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), zatímco diagnostické přímé `curl --noproxy '*' -k` vrací `200 OK` z nginx/Next.js na IP `91.99.227.53`; dostupný kontejner stále nemá SSH klíče ani bezpečný serverový/deploy přístup k obnově certifikátu.
 - 2026-07-22: Doplněna příloha o první iteraci po stop kartě bez dalšího velkého obalu: jak pokračovat v práci na e-booku bez automatického dalšího číslovaného vydání, pracovní otázka co bude po zásahu lehčí, zásahová karta, pět typů malých zásahů, oddělení pracovního logu od čtenářského obsahu, mini audit po malé iteraci, checklist a mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně znovu ověřeno, že veřejné HTTPS `cody.dreamind.cz` selhává na expirovaném Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), diagnostické přímé `curl --noproxy '*' -k -I` vrací `200 OK` z nginx/Next.js na IP `91.99.227.53`, ale kontejner nemá SSH klíče ani bezpečný deploy/serverový přístup k obnově certifikátu.
