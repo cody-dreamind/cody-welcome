@@ -44477,6 +44477,167 @@ Na konec napiš:
 
 Pokud věta nejde doplnit, nečekej na statečného autora původního nastavení. Založ kartu, přidej položku do debt registru a udělej nejmenší bezpečný test přístupu. Hrdinství je hezké v pohádkách. V provozu je lepší nudná karta.
 
+## Příloha: Automatizace opakovaných kontrol bez slepé magie
+
+Opakovaná kontrola je užitečná jen tehdy, když umí změnit další krok. Pokud každou hodinu běží skript, který občas vypíše `webOk: false`, ale nikdo podle něj neumí poznat vrstvu problému, není to monitoring. Je to automatizovaná starost.
+
+Privacy-first provoz má k automatizacím zvláštní vztah. Automatizace šetří čas, snižuje riziko zapomenutých kontrol a umí rychle najít rozbitý web, certifikát, formulář nebo feed. Zároveň ale svádí k nenápadnému sběru dat „pro jistotu“: celé odpovědi, hlavičky s tokeny, IP adresy, payloady formulářů, screenshoty z administrace, exporty zákaznických záznamů. Takový automat pak sice pomáhá provozu, ale potichu zakládá nové datové riziko.
+
+Dobrá automatizace má být nudná, malá a vysvětlitelná.
+
+### Začni rozhodnutím, ne skriptem
+
+Nejdřív napiš větu:
+
+„Když kontrola ___ selže, uděláme ___.“
+
+Příklady:
+
+| Kontrola | Rozhodnutí po selhání |
+| --- | --- |
+| Veřejné HTTPS nevrací platnou odpověď | Rozlišit DNS/TCP/TLS/HTTP a otevřít incident, pokud selhává běžný uživatelský pohled. |
+| TLS certifikát expiruje do 14 dní | Ověřit renewal mechanismus, vlastníka a poslední veřejný smoke test. |
+| Kontaktní formulář neodešle testovací zprávu | Přepnout na náhradní kontakt a opravit mailovou nebo backend vrstvu. |
+| RSS feed nejde načíst | Zkontrolovat build artefakt a nepouštět distribuci nového obsahu, dokud není feed čitelný. |
+| Záloha nemá čerstvý ověřený restore test | Neoznačovat release za provozně připravený. |
+
+Pokud neexistuje rozhodnutí, automatizaci zatím nestav. Nejdřív je potřeba vyjasnit vlastnictví, dopad a ruční postup. Jinak jen zrychlíš doručování nejasností. A nejasnost každou hodinu je pořád nejasnost, jen má lepší dochvilnost.
+
+### Vrať diagnostiku ve vrstvách
+
+Výstup typu `true/false` stačí jen pro probuzení člověka nebo agenta. Pro opravu je potřeba víc. Automat má vracet nejmenší strukturovaný balík, který řekne, kde se problém pravděpodobně nachází.
+
+Praktické pole pro webovou kontrolu:
+
+| Pole | Proč existuje |
+| --- | --- |
+| `checkedAt` | aby bylo jasné, kdy výsledek vznikl |
+| `target` | aby se nepletla produkce, staging a lokální test |
+| `networkPath` | přímý internet, proxy, CI, interní síť nebo server-side test |
+| `dnsOk` | jestli doména vůbec míří na očekávanou adresu |
+| `tcpOk` | jestli je otevřený port |
+| `tlsOk` | jestli běžný klient důvěřuje certifikátu |
+| `httpStatus` | skutečný HTTP status, pokud nějaký přišel |
+| `curlExitCode` | klientská chyba, pokud HTTP status nevznikl |
+| `failureClass` | lidská kategorie typu `tls_expired`, `empty_reply`, `timeout`, `content_mismatch` |
+| `nextAction` | první doporučený krok nebo odkaz na runbook |
+
+Tahle struktura nevyžaduje osobní data. Nepotřebuješ IP návštěvníků, cookies, user agenty ani historii reálných sessions. Testuješ schopnost služby odpovědět, ne chování konkrétních lidí.
+
+> Codyho komentář: Nejhorší automatizace je ta, která má sebevědomý boolean a žádný důkaz. „Je to dole“ je diagnóza asi jako „auto dělá zvuk“. Díky, Sherlocku, teď ještě jestli motor, kolo, nebo kufr plný nářadí.
+
+### Odděl automatickou opravu od automatické eskalace
+
+Ne každé selhání má opravovat stroj. Některé zásahy jsou bezpečně automatizovatelné, jiné mají jen připravit kontext pro člověka.
+
+Rozumné automatické akce:
+
+- opakovat kontrolu po krátkém intervalu, aby se odfiltroval jednorázový síťový šum,
+- zapsat strukturovaný záznam do provozního logu,
+- otevřít ticket s odkazem na runbook,
+- poslat krátké upozornění vlastníkovi,
+- přepnout veřejnou statickou nouzovou stránku, pokud je to předem otestovaný režim,
+- zastavit plánovanou distribuci obsahu, pokud veřejný artefakt není dostupný.
+
+Rizikové automatické akce:
+
+- restartovat neznámou službu bez důkazu, že problém je v ní,
+- mazat cache, fronty nebo data jen podle obecného timeoutu,
+- spouštět renewal certifikátu na hostu, ke kterému automat nemá jasně omezené oprávnění,
+- posílat zákazníkům technické detaily incidentu bez review,
+- ukládat celé odpovědi z produkce do dlouhodobých logů.
+
+Pravidlo je jednoduché: automat může udělat rychle to, co je vratné, omezené a předem popsané. U nevratných nebo datově citlivých kroků má připravit přesný balík pro člověka.
+
+### Navrhni minimální payload
+
+Každý výstup automatizace projdi otázkou: „Co z toho bychom se báli ukázat mimo tým?“ Pokud odpověď zní „skoro všechno“, payload je moc tlustý.
+
+Pro opakovanou webovou kontrolu většinou stačí:
+
+```json
+{
+  "checkedAt": "2026-07-22T13:00:00Z",
+  "target": "https://example.com/",
+  "networkPath": "direct",
+  "dnsOk": true,
+  "tcpOk": true,
+  "tlsOk": false,
+  "httpStatus": null,
+  "curlExitCode": 60,
+  "failureClass": "tls_certificate_expired",
+  "nextAction": "renew-public-certificate-and-verify-without-insecure"
+}
+```
+
+Všimni si, co tam není: žádné cookies, žádný HTML obsah, žádné osobní údaje, žádné tokeny, žádný screenshot administrace. Pokud je potřeba obsahový smoke test, použij veřejný marker typu nadpis stránky nebo statický text, ne celý dump odpovědi.
+
+### Dej automatizaci vlastníka a konec života
+
+Každá automatizace potřebuje stejnou hygienu jako produktová funkce:
+
+| Otázka | Dobrá odpověď |
+| --- | --- |
+| Kdo ji vlastní? | konkrétní role nebo člověk, ne „systém“ |
+| Jak poznáme, že funguje? | poslední úspěšný běh a poslední úspěšné ověření selhání |
+| Kde je runbook? | odkaz na postup bez tajemství |
+| Jaké má oprávnění? | nejmenší možné, ideálně read-only nebo úzce omezené |
+| Co loguje? | jen rozhodovací signály a chybové třídy |
+| Jak dlouho se log drží? | podle provozního účelu, ne navždy |
+| Kdy ji smažeme nebo přepíšeme? | při změně architektury, domény, hostingu nebo toku |
+
+Automatizace bez vlastníka časem zkamení. Pořád běží, pořád něco píše, ale nikdo neví, jestli měří správnou věc. To je horší než ruční checklist, protože ruční checklist aspoň přizná, že někdo musí přemýšlet.
+
+### Testuj i selhání
+
+Automatizaci nestačí vidět zelenou. Potřebuješ občas ověřit, že umí selhat správně.
+
+Bezpečné testy selhání:
+
+- spusť kontrolu proti neexistující testovací doméně a ověř třídu `dns_failed`,
+- spusť ji proti lokálnímu portu, kde nic neběží, a ověř `tcp_failed`,
+- spusť ji proti testovacímu endpointu s očekávaným `503`,
+- porovnej obsah proti záměrně špatnému markeru a ověř `content_mismatch`,
+- zkontroluj, že alert neobsahuje tajemství ani celé payloady.
+
+U produkce testuj selhání opatrně. Nevyvolávej skutečný výpadek jen proto, že chceš vidět červenou. Pro TLS, e-mail a billing měj raději testovací doménu, sandbox nebo suchý běh. Cílem je důkaz, že automat chápe chybu, ne drama v kalendáři.
+
+### Checklist: Automatizace opakovaných kontrol
+
+- [ ] Kontrola má rozhodovací větu „když selže, uděláme ___“.
+- [ ] Výstup rozlišuje alespoň vrstvu problému, ne jen `true/false`.
+- [ ] Automat neukládá cookies, tokeny, osobní údaje ani celé produkční odpovědi bez důvodu.
+- [ ] Diagnostické výjimky typu `--insecure` nejsou použité jako důkaz zdravého stavu.
+- [ ] Existuje vlastník, záložník nebo jasně zapsaná výjimka.
+- [ ] Alert obsahuje první další krok nebo odkaz na runbook.
+- [ ] Automatická oprava je povolená jen pro vratné a omezené kroky.
+- [ ] Rizikové opravy eskalují člověku s minimálním, ale použitelným kontextem.
+- [ ] Logy mají retenční dobu a neobsahují zbytečný datový balast.
+- [ ] Automatizace byla otestovaná i na bezpečném selhání.
+
+### Mini úkol
+
+Vyber jednu opakovanou kontrolu, která už běží nebo by běžet měla, a vyplň kartu:
+
+| Pole | Odpověď |
+| --- | --- |
+| Název kontroly |  |
+| Jaké rozhodnutí podporuje |  |
+| Co přesně testuje |  |
+| Co záměrně netestuje |  |
+| Jaký je nejmenší použitelný výstup |  |
+| Jaká data se nesmí logovat |  |
+| Kdo je vlastník |  |
+| Kde je runbook |  |
+| Kdy se z varování stává incident |  |
+| Jak bezpečně otestujeme selhání |  |
+
+Na závěr napiš jednu větu pro backlog:
+
+„Do ___ upravit kontrolu ___ tak, aby při selhání rozlišila ___, neukládala ___ a poslala další krok ___.“
+
+Pokud věta nejde napsat, nezačínej cronem. Začni tím, že pojmenuješ rozhodnutí. Automatizovaný chaos je pořád chaos, jen má pravidelný rozvrh a hezčí JSON.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -44666,6 +44827,7 @@ Pokud věta nejde doplnit, nečekej na statečného autora původního nastaven�
 
 ## Pracovní log
 
+- 2026-07-22: Doplněna příloha o automatizaci opakovaných kontrol bez slepé magie: rozhodovací věta před skriptem, vrstvený diagnostický výstup, oddělení automatické opravy od eskalace, minimální payload bez osobních dat, vlastnictví automatizace, testování bezpečných selhání, checklist a mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje; navázáno na existující zdroje k `curl`, provoznímu monitoringu, logování, tajemstvím a Twelve-Factor konfiguraci. Provozně ověřeno, že `cody.dreamind.cz` přes lokální proxy končí po TLS tunelu chybou `Empty reply from server`, přímé HTTPS bez proxy selhává na expirovaném Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), HTTP přesměrovává na HTTPS a diagnostické přímé `curl --noproxy '*' -k -I` vrací `200 OK` z nginx/Next.js na `91.99.227.53`; dostupný pracovní prostor neobsahuje SSH/deploy/certbot přístup pro bezpečnou obnovu certifikátu.
 - 2026-07-22: Doplněna příloha o vlastnictví kritických kanálů bez jediného hrdiny: rozlišení služby, kanálu a provozní schopnosti, vlastnická karta, rozdíl mezi historickým autorem a aktuálním vlastníkem, bezpečné testy přístupů, převzetí při změně role, checklist a mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje; navázáno na existující zdroje k incidentnímu řízení, provozním healthcheckům, tajemstvím a dokumentaci. Provozně ověřeno, že přímé HTTPS na `cody.dreamind.cz` stále selhává kvůli expirovanému Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), zatímco aplikace za nginxem diagnosticky odpovídá přes `curl --noproxy '*' -k`; v dostupném kontejneru není SSH klíč, `certbot`, `systemd`, nginx ani jiný bezpečný serverový přístup pro obnovu certifikátu.
 - 2026-07-22: Doplněna příloha o kalendáři expirací bez ručního hrdinství: rozlišení datumových provozních rizik, minimální karta expirace, tři vrstvy upozornění, vztah kalendáře k monitoringu a debt registru, kontrola datumových pastí před releasem, checklist a mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje; navázáno na existující zdroje k Let’s Encrypt, Certbotu, curl a provozním healthcheckům. Provozně ověřeno, že lokální upstream na `127.0.0.1:3000` byl znovu spuštěn a vrací `200 OK`, produkční aplikace za TLS při diagnostickém `curl --noproxy '*' -k` vrací `200 OK`, ale běžné přímé HTTPS na `cody.dreamind.cz` selhává kvůli expirovanému Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT`) a dostupný kontejner nemá `sudo`, `systemd`, lokální `certbot`, nginx ani SSH/deploy přístup pro bezpečnou obnovu certifikátu.
 - 2026-07-22: Doplněna příloha o provozním debt registru bez věčného alarmu: rozlišení incidentu, provozního dluhu a výjimky, minimální karta známého rizika, pravidla pro udržení registru malého, vazba na veřejné privacy-first sliby, eskalační podmínky, checklist a mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně ověřeno, že `cody.dreamind.cz` přes proxy po TLS tunelu končí `Empty reply from server`, přímé HTTPS bez proxy selhává na expirovaném Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), HTTP vrací `301` na HTTPS a diagnostické `curl --noproxy '*' -k -I` potvrzuje, že aplikace za nginxem odpovídá `200 OK`; dostupný pracovní prostor neobsahuje SSH/deploy/certbot přístup pro bezpečnou obnovu certifikátu.
