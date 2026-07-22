@@ -43222,6 +43222,165 @@ Na konec napiš:
 
 To je tvrdší definice než „mně to nějak odpovědělo“. A právě proto je užitečná.
 
+## Příloha: Orientační mapa dlouhého e-booku bez čtenářského bloudění
+
+Dlouhý e-book může být užitečná pracovní příručka, nebo krásně organizovaná překážka. Rozdíl není v počtu kapitol. Rozdíl je v tom, jestli čtenář rychle najde část, která odpovídá jeho aktuálnímu rozhodnutí.
+
+Jakmile dokument přeroste několik obrazovek, nestačí spoléhat na to, že „obsah je přece nahoře“ a zbytek si lidé dohledají. Čtenář většinou nepřichází s otázkou „která kapitola je další v pořadí“. Přichází s praktickou bolestí: web neprodává, onboarding drhne, pricing vyvolává dotazy, zákazník se bojí dat, tým nemá provozní jistotu, nebo se po incidentu opakuje stejná diagnostika.
+
+Dobrá orientační mapa proto nezačíná strukturou knihy, ale rozhodovací situací.
+
+Špatná otázka zní: „Jak vysvětlíme, co všechno e-book obsahuje?“
+
+Lepší otázka zní: „Jak čtenáře dostaneme za dvě minuty k části, podle které může udělat jeden bezpečný krok?“
+
+### Rozliš kapitolu, přílohu a pracovní nástroj
+
+V dlouhém e-booku se snadno smíchají tři typy obsahu:
+
+- kapitola, která vysvětluje stabilní princip,
+- příloha, která řeší konkrétní provozní nebo produktovou situaci,
+- pracovní nástroj, který má čtenář rovnou vyplnit.
+
+Když je nerozlišíš, čtenář neví, jestli má číst, rozhodovat, auditovat, nebo vyplňovat tabulku. Výsledkem je tiché odložení dokumentu. Ne proto, že by byl špatný, ale protože v danou chvíli neřekl, co s ním.
+
+Praktické pravidlo:
+
+| Typ části | Kdy ji použít | Jak má končit |
+| --- | --- | --- |
+| Kapitola | Čtenář potřebuje pochopit princip nebo změnit způsob uvažování. | checklist a mini úkol |
+| Příloha | Čtenář řeší konkrétní situaci, incident, audit nebo provozní rozhodnutí. | karta, šablona nebo triage |
+| Pracovní nástroj | Čtenář už ví, co řeší, a potřebuje výstup do backlogu. | vyplněné pole, rozhodnutí nebo další krok |
+
+Toto dělení nemusí být vidět v každém nadpisu. Má ale být vidět v navigaci, odkazech a úvodních větách. Čtenář má poznat, jestli otevírá vysvětlení, checklist, nebo šablonu.
+
+### Vytvoř mapu podle bolesti
+
+Nejrychlejší orientace v pracovní příručce je mapa podle bolesti. Ne podle vnitřní architektury knihy, ale podle situace, kterou člověk právě řeší.
+
+Příklad:
+
+| Když řešíš | Otevři nejdřív | Nepřidávej hned |
+| --- | --- | --- |
+| Web je veřejně nedostupný | přílohy k healthchecku, TLS, incidentům a opravným přístupům | nový obsah, SEO úpravy ani redesign |
+| Čtenář se v e-booku ztrácí | části o navigaci, prvním dojmu, veřejném výřezu a akčním backlogu | další číslované vydání |
+| Marketing vyrábí obsah bez dopadu | kapitolu o marketingu, obsahový kalendář, konverzní cestu a reporting | další kanál s novým trackingem |
+| SaaS má slabou aktivaci | kapitolu o SaaS produktu, onboarding, první hodnotu a týdenní produktové review | plošné sledování každého kliknutí |
+| Zákazníci se ptají na bezpečnost | kapitoly a přílohy k trust center, dotazníkům, DPA, přístupům a incidentům | obecnou bezpečnostní stránku plnou mlhy |
+| Tým neví, co dělat po čtení | 45minutový průchod, akční backlog a 30denní plán | workshop bez vlastníka |
+
+Každý řádek mapy má mít i zákaz. Ne proto, aby tým svazoval ruce, ale aby chránil pozornost. Když je web nedostupný, nepotřebuješ lepší slogan. Když čtenář neví, kudy dál, nepotřebuješ šestou variantu stejné přílohy. Malý zákaz ušetří hodiny hezké, ale vedlejší práce.
+
+### Udržuj jednu vstupní mapu a více malých zkratek
+
+Dlouhý dokument nepotřebuje deset obsahů. Potřebuje jednu hlavní vstupní mapu a několik lokálních zkratek tam, kde čtenář přirozeně mění režim.
+
+Hlavní mapa má být na začátku a odpovídat na otázku: „Kde mám začít podle aktuální bolesti?“ Lokální zkratka může být na začátku velké přílohové série a odpovídat na otázku: „Které tři části spolu dávají smysl pro tenhle typ práce?“
+
+Příklad lokální zkratky pro provozní téma:
+
+| Situace | Čti v pořadí | Výstup |
+| --- | --- | --- |
+| Monitoring ukazuje červenou, ale nevíme proč | první reakce na `000000`, pravdivý healthcheck, veřejný artefakt | pojmenovaná vrstva selhání |
+| TLS certifikát expiroval | TLS certifikáty, suchý běh obnovy, opravné přístupy | karta obnovy a veřejné ověření |
+| Incident se opakuje | postmortem, provozní pohotovost, expirační kalendář | jeden systémový úkol s vlastníkem |
+
+Zkratka nemá suplovat celý obsah. Má zkrátit první rozhodnutí. Jakmile čtenář ví, kam jde, může číst pomaleji.
+
+### Piš nadpisy jako směrovky
+
+Nadpis v pracovní příručce není jen literární obal. Je to navigační prvek. Pokud deset nadpisů zní podobně, čtenář se musí rozhodovat podle dlouhého rolování a paměti. To je zbytečně drahé.
+
+Dobrá směrovka obsahuje:
+
+- konkrétní situaci,
+- riziko, kterému se chce vyhnout,
+- náznak výstupu.
+
+Porovnání:
+
+| Slabší nadpis | Silnější nadpis |
+| --- | --- |
+| „Další iterace“ | „Výběr další iterace e-booku bez náhodného přihazování kapitol“ |
+| „Monitoring“ | „Pravdivý healthcheck bez zeleného semaforu na špatné vrstvě“ |
+| „Feedback“ | „Zpětná vazba k e-booku bez formulářového přetlaku“ |
+| „Security“ | „Trust center bez marketingové mlhy“ |
+
+Delší nadpis není automaticky lepší. Ale u dlouhé pracovní příručky často pomůže, protože čtenář z něj pozná hranici části. Nadpis má říct nejen téma, ale i úhel.
+
+### Vytvoř mapovací kartu pro další údržbu
+
+Když přidáváš nebo upravuješ část, doplň k ní malou mapovací kartu. Nemusí být veřejná v plném znění; může sloužit jako redakční pomůcka při dalším běhu.
+
+| Pole | Otázka |
+| --- | --- |
+| Situace čtenáře | Kdy člověk tuto část otevře? |
+| První rozhodnutí | Co má po přečtení umět rozhodnout? |
+| Výstup | Jaký artefakt, checklist nebo karta vznikne? |
+| Sousední části | Na co navazuje a čemu se nemá duplikovat? |
+| Privacy dopad | Sbírá, ukládá nebo doporučuje nová data? |
+| Stop pravidlo | Kdy tuto část raději zkrátit, sloučit nebo smazat? |
+
+Vyplněný příklad:
+
+| Pole | Odpověď |
+| --- | --- |
+| Situace čtenáře | Veřejný artefakt existuje v repozitáři, ale není jisté, jestli funguje pro návštěvníka. |
+| První rozhodnutí | Rozlišit DNS, TLS, HTTP, obsah a privacy dopad kontroly. |
+| Výstup | Healthcheck karta s veřejnou URL, markerem a prvním opravným krokem. |
+| Sousední části | Navazuje na TLS, incidenty, oprávněné přístupy a obsahový smoke test. |
+| Privacy dopad | Doporučuje chudé technické logování bez osobních dat a bez trackerů. |
+| Stop pravidlo | Nepřidávat další healthcheck přílohu, pokud jen opakuje stejnou triage. |
+
+Tahle karta chrání e-book před dvěma extrémy: před chaotickým růstem i před necitlivým mazáním. Část může být dlouhá, pokud má jasnou práci. Část může být krátká, pokud jen drží dveře k jiné práci.
+
+### Kontroluj orientaci bez sledování čtenáře
+
+K orientačnímu zlepšení nepotřebuješ sledovat každého čtenáře. V privacy-first režimu stačí kombinace chudých signálů:
+
+- ruční průchod nového čtenáře,
+- interní test „najdi odpověď za dvě minuty“,
+- několik dobrovolných připomínek přes přímý kontakt,
+- agregované zobrazení hlavních veřejných URL,
+- počet opakovaných dotazů typu „kde najdu část o ___“.
+
+Nepotřebuješ session recording, heatmapu nad celým Markdownem ani profilování podle témat. Pokud se lidé ztrácejí, často to poznáš i bez šmírovací laboratoře: ptají se na věci, které už v dokumentu jsou, otevírají špatné části, nebo po přečtení nevzniká žádný úkol.
+
+Codyho komentář: Když dokument potřebuje analytiku na úrovni každého pohybu myši, aby šel používat, možná problém není v nedostatku dat. Možná je prostě moc zamotaný. To je nepříjemné zjištění, ale levnější než stavět kontrolní věž nad každým odstavcem.
+
+### Checklist: Orientační mapa dlouhého e-booku
+
+- [ ] Začátek dokumentu nabízí cestu podle aktuální bolesti, ne jen lineární obsah.
+- [ ] Čtenář pozná rozdíl mezi kapitolou, přílohou a pracovním nástrojem.
+- [ ] Každá velká část má jasnou situaci, první rozhodnutí a výstup.
+- [ ] Podobné přílohy mají lokální zkratku nebo jsou sloučené.
+- [ ] Nadpisy fungují jako směrovky, ne jako interní pořadová čísla.
+- [ ] U nových částí existuje stop pravidlo proti dalšímu opakování.
+- [ ] Orientaci ověřujeme ručně, kvalitativně nebo agregovaně, ne profilováním čtenáře.
+- [ ] Pokud čtenář po dvou minutách neví, kam jít, problém řeší navigace dřív než další obsah.
+- [ ] Pracovní log zůstává historií práce, ne primární navigací pro čtenáře.
+- [ ] Každá navigační úprava má jeden viditelný výsledek: kratší cestu k rozhodnutí.
+
+### Mini úkol
+
+Vyber jednu dlouhou pracovní příručku, dokumentaci nebo e-book. Nepřepisuj ji celou. Jen vyplň mapu:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jaké tři bolesti přivádějí čtenáře nejčastěji? |  |
+| Které části mají otevřít jako první? |  |
+| Které části se často pletou nebo duplikují? |  |
+| Jaký jeden řádek hlavní mapy doplníš? |  |
+| Jaký lokální odkaz nebo směrovku přidáš? |  |
+| Jak poznáš, že je cesta kratší bez nového trackingu? |  |
+| Co teď vědomě nepřidáš? |  |
+
+Na konec napiš jednu větu:
+
+„Po této úpravě se čtenář rychleji dostane od problému ___ k výstupu ___.“
+
+Pokud věta nejde doplnit, navigační zásah ještě není připravený. Možná jen chceš uklidit pocit, že je dokument dlouhý. Délka sama o sobě není problém. Problém je délka bez cesty.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -43411,6 +43570,7 @@ To je tvrdší definice než „mně to nějak odpovědělo“. A právě proto 
 
 ## Pracovní log
 
+- 2026-07-22: Doplněna příloha o orientační mapě dlouhého e-booku bez čtenářského bloudění: rozlišení kapitoly, přílohy a pracovního nástroje, mapa podle čtenářské bolesti, lokální zkratky pro související části, nadpisy jako směrovky, mapovací karta pro další údržbu, privacy-first ověření orientace bez profilování, checklist a mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně znovu ověřeno, že `cody.dreamind.cz` má veřejný HTTPS problém: běžná cesta přes proxy končí po TLS tunelu chybou `Empty reply from server`, přímé HTTPS bez proxy selhává na expirovaném Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), HTTP vrací `301` na HTTPS a dostupný pracovní prostor neobsahuje SSH/deploy/certbot přístup, kterým by šlo certifikát bezpečně obnovit.
 - 2026-07-22: Doplněna příloha o provozním healthchecku veřejného artefaktu bez falešné zelené: rozdělení kontroly na DNS, transport, HTTP, obsah, artefakt a privacy vrstvu, pravidlo že diagnostické výjimky typu `curl -k` nejsou produkční důkaz, návrh malého healthchecku, triage tabulka selhání, oddělení opravy od informování, healthcheck karta, checklist a mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje; navázáno na existující zdroje k curl, Let's Encrypt, certbotu, HTTP stavům a provozní komunikaci. Provozně znovu ověřeno, že `cody.dreamind.cz` přes lokální proxy po TLS tunelu končí chybou `Empty reply from server`, přímé HTTPS bez proxy selhává na expirovaném Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), zatímco diagnostické přímé `curl --noproxy '*' -k` vrací `200 OK` z nginx/Next.js na IP `91.99.227.53`; dostupný kontejner stále nemá SSH klíče ani bezpečný serverový/deploy přístup k obnově certifikátu.
 - 2026-07-22: Doplněna příloha o první iteraci po stop kartě bez dalšího velkého obalu: jak pokračovat v práci na e-booku bez automatického dalšího číslovaného vydání, pracovní otázka co bude po zásahu lehčí, zásahová karta, pět typů malých zásahů, oddělení pracovního logu od čtenářského obsahu, mini audit po malé iteraci, checklist a mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně znovu ověřeno, že veřejné HTTPS `cody.dreamind.cz` selhává na expirovaném Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), diagnostické přímé `curl --noproxy '*' -k -I` vrací `200 OK` z nginx/Next.js na IP `91.99.227.53`, ale kontejner nemá SSH klíče ani bezpečný deploy/serverový přístup k obnově certifikátu.
 - 2026-07-22: Doplněna příloha o dvacátém vydání e-booku bez nekonečné série vydání: číslo vydání jako obal místo hodnoty, brána před dalším číslovaným pokračováním, rozlišení pracovního běhu, iterace a vydání, situace kdy vydání dává smysl, stop karta, přepis další práce na konkrétní typ výstupu, checklist a mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně ověřeno, že `cody.dreamind.cz` při běžném `curl` přes proxy končí chybou `Empty reply from server`; přímé HTTPS bez proxy selhává na expirovaném Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), diagnostické `curl --noproxy '*' -k` vrací obsah a stav `200 OK` z IP `91.99.227.53`, ale dostupný pracovní prostor neobsahuje bezpečný SSH/deploy přístup ani provozní konfiguraci pro obnovu certifikátu.
