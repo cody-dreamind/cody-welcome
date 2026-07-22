@@ -44031,6 +44031,154 @@ Na konec napiš jednu větu:
 
 Pokud věta nejde doplnit, problém není jen v textu. Problém je ve vlastnictví. A to je dobré zjistit dřív, než zákazník začne porovnávat tvoje sliby přes pět otevřených tabů.
 
+## Příloha: Provozní debt register bez věčného alarmu
+
+Každý tým má provozní dluh. Rozdíl mezi zdravým a nebezpečným týmem není v tom, že jeden žádný dluh nemá. Rozdíl je v tom, jestli známý problém někde leží jako pojmenované riziko, nebo jestli se pokaždé znovu tváří jako překvapení.
+
+Provozní dluh je všechno, co sice dnes nemusí bránit práci, ale zvyšuje pravděpodobnost výpadku, ztráty důvěry, pomalé obnovy nebo chaotického předání. Expirovaný certifikát, ruční deploy bez vlastníka, monitoring kontrolující jen redirect, chybějící exportní runbook nebo nejasná retence logů nejsou jen technické detaily. Jsou to sliby, které systém ještě neumí spolehlivě doručit.
+
+Špatná otázka zní: „Je to už opravené?“
+
+Lepší otázka zní: „Pokud to dnes opravené není, kdo vlastní riziko, jaký je dopad a kdy nejpozději se z toho stane blocker?“
+
+### Rozliš incident, dluh a výjimku
+
+Incident je porucha, která právě dopadá na uživatele nebo důvěru. Má reakci teď, krátkou časovou osu a komunikaci podle dopadu.
+
+Provozní dluh je známá slabina, která může incident způsobit nebo prodloužit. Má vlastníka, prioritu a datum další kontroly.
+
+Výjimka je vědomé rozhodnutí, že dočasně nedodržíš vlastní standard. Má důvod, hranici platnosti a jasné datum konce.
+
+Když tyto tři věci smícháš, tým začne hořet i při běžné údržbě. Když je oddělíš, i nepříjemná věc se dá řídit bez paniky a bez toho, aby se každý další běh změnil v detektivku.
+
+Příklad:
+
+| Situace | Typ | Správný výstup |
+| --- | --- | --- |
+| Web běžně neprojde HTTPS kontrolou kvůli certifikátu. | incident, pokud je veřejný web nedostupný pro běžné uživatele | oprava certifikátu nebo eskalace na člověka s přístupem |
+| Automatická obnova certifikátu není zdokumentovaná. | provozní dluh | karta s vlastníkem, kontrolou timeru a dry-run postupem |
+| Certifikát obnovíme ručně jen u staré subdomény do migrace. | výjimka | datum konce výjimky a rozhodnutí, co se stane při další obnově |
+
+### Zaveď malý debt register
+
+Debt register nemusí být další těžký systém. Pro malý SaaS často stačí jedna tabulka v repozitáři, interní dokumentaci nebo issue trackeru. Důležité je, aby obsahovala jen věci, podle kterých se dá rozhodnout.
+
+Minimální karta:
+
+| Pole | Otázka |
+| --- | --- |
+| Název | Jak problém pojmenujeme jednou větou? |
+| Vrstva | DNS / TLS / deploy / databáze / logy / přístupy / data / support / billing |
+| Dopad | Co se stane zákazníkovi, týmu nebo důvěře, když to selže? |
+| Důkaz | Jak víme, že problém existuje? |
+| Vlastník | Kdo smí rozhodnout o opravě nebo výjimce? |
+| Nejbližší krok | Co je nejmenší další akce? |
+| Deadline | Kdy se dluh musí znovu otevřít nebo opravit? |
+| Stop pravidlo | Kdy se z dluhu stává blocker pro release? |
+| Privacy dopad | Sbírá, drží, sdílí nebo ohrožuje to osobní data? |
+
+Dobrá karta není román. Má říct, jestli se problém opravuje teď, plánuje, vědomě toleruje, nebo se přesouvá do incidentní eskalace.
+
+### Nedělej z registru hřbitov úkolů
+
+Nejhorší debt register je dlouhý seznam věcí, které už nikdo nečte. Vypadá zodpovědně, ale prakticky jen rozkládá vinu na hodně řádků.
+
+Udrž ho malý:
+
+- aktivní provozní dluhy,
+- schválené krátké výjimky,
+- rizika s dopadem na veřejný slib,
+- věci, které blokují bezpečný release,
+- věci, které musí znát člověk přebírající provoz.
+
+Naopak do něj nedávej:
+
+- každý drobný refaktor,
+- nápady na nový obsah,
+- obecné přání „zlepšit monitoring“,
+- historické incidenty bez další akce,
+- položky bez vlastníka.
+
+Jednou měsíčně projdi nejvýše deset položek. Každá musí skončit jedním rozhodnutím: opravit, snížit riziko, prodloužit výjimku s důvodem, eskalovat, nebo smazat.
+
+### Propoj dluh s veřejnými sliby
+
+Privacy-first provoz není jen interní elegance. Pokud veřejně říkáš, že produkt běží v Evropě, že data půjdou exportovat, že podporuješ zrušení účtu, že měříš minimálně nebo že web je dostupný na stabilní adrese, provozní dluh kolem těchto schopností má vyšší prioritu než kosmetický nepořádek.
+
+Praktická priorita:
+
+1. Dluh ohrožuje bezpečnost, osobní data nebo obnovu provozu.
+2. Dluh rozbíjí veřejný slib nebo zákaznickou smlouvu.
+3. Dluh znemožňuje předání provozu jinému člověku.
+4. Dluh opakovaně bere čas při releasech.
+5. Dluh jen štve tým, ale nemá jasný dopad.
+
+Codyho komentář: Bod pět neznamená „nikdy“. Znamená „nepředbíhej certifikát, export, zálohy a přístupy jen proto, že tě štve název souboru“. Estetika kódu je fajn, ale zákazník ji obvykle nevidí, když se mu web ani neotevře.
+
+### Kdy známý dluh eskalovat
+
+Známý problém se nemá donekonečna vracet do pracovního logu jako počasí. Eskaluj ho, když platí alespoň jedna věc:
+
+- běžná uživatelská cesta nefunguje,
+- problém se objevil ve více po sobě jdoucích kontrolách,
+- aktuální tým nemá opravný přístup,
+- chybí vlastník systému, kde se oprava dělá,
+- workaround vyžaduje vypnout bezpečnostní ověření,
+- problém je v rozporu s veřejným slibem,
+- další release by rozšířil dopad.
+
+Eskalace nemusí být drama. Může to být jedna věta správnému člověku: „Tahle služba má známý TLS problém, aplikace za ní odpovídá, ale v aktuálním běhu nemáme serverový přístup k obnově certifikátu; potřebuji vlastníka nebo přístup k opravě.“
+
+Co neposílat: interní logy plné tokenů, seznam účtů, domněnky o viníkovi nebo screenshoty z nástrojů, které zákazník nepotřebuje. Minimum disclosure platí i při provozní panice. Právě tehdy obzvlášť.
+
+### Karta provozního dluhu
+
+Použij tuto kartu pro jeden známý problém:
+
+| Pole | Odpověď |
+| --- | --- |
+| Název dluhu |  |
+| Typ | incident / provozní dluh / výjimka |
+| Vrstva |  |
+| Veřejný dopad |  |
+| Interní dopad |  |
+| Privacy nebo bezpečnostní dopad |  |
+| Poslední ověření | datum, příkaz nebo jiný důkaz |
+| Vlastník |  |
+| Nejmenší další krok |  |
+| Co nejde opravit z aktuálního kontextu |  |
+| Kdy se z toho stává blocker |  |
+| Jaké tvrzení nesmíme veřejně přehánět |  |
+
+### Checklist: Provozní debt register
+
+- [ ] Známé provozní problémy nejsou schované jen v chatu nebo pracovním logu.
+- [ ] Každý významný dluh má vlastníka nebo jasnou eskalaci.
+- [ ] U každé položky je dopad na zákazníka, tým nebo veřejný slib.
+- [ ] Výjimky mají datum konce, ne „až někdy“.
+- [ ] Dluh s privacy nebo bezpečnostním dopadem má vyšší prioritu než kosmetika.
+- [ ] Workaround, který vypíná bezpečnostní kontrolu, není vedený jako oprava.
+- [ ] Měsíční review končí rozhodnutím, ne jen přečtením seznamu.
+- [ ] Staré položky bez akce se mažou, slučují nebo eskalují.
+- [ ] Debt register neobsahuje tajemství, tokeny ani zbytečné interní detaily.
+- [ ] Veřejné sliby se nepřidávají, dokud provozní dluh neříká opak.
+
+### Mini úkol
+
+Vyber jeden známý provozní problém, který se už aspoň jednou vrátil. Vyplň tři řádky:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jaký veřejný nebo zákaznický slib tím může být dotčený? |  |
+| Kdo má oprávnění ho skutečně opravit? |  |
+| Jaký nejmenší krok uděláme do sedmi dnů? |  |
+
+Na závěr napiš stop větu:
+
+„Pokud ___ nebude do ___ opravené nebo vlastněné, další ___ se zastaví.“
+
+Bez takové věty je debt register jen hezčí název pro šuplík. A šuplík je výborný na ponožky, ne na certifikáty, přístupy a zákaznické sliby.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -44220,6 +44368,7 @@ Pokud věta nejde doplnit, problém není jen v textu. Problém je ve vlastnictv
 
 ## Pracovní log
 
+- 2026-07-22: Doplněna příloha o provozním debt registru bez věčného alarmu: rozlišení incidentu, provozního dluhu a výjimky, minimální karta známého rizika, pravidla pro udržení registru malého, vazba na veřejné privacy-first sliby, eskalační podmínky, checklist a mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně ověřeno, že `cody.dreamind.cz` přes proxy po TLS tunelu končí `Empty reply from server`, přímé HTTPS bez proxy selhává na expirovaném Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), HTTP vrací `301` na HTTPS a diagnostické `curl --noproxy '*' -k -I` potvrzuje, že aplikace za nginxem odpovídá `200 OK`; dostupný pracovní prostor neobsahuje SSH/deploy/certbot přístup pro bezpečnou obnovu certifikátu.
 - 2026-07-22: Rozšířena příloha o jedné verzi pravdy podkapitolou „Po incidentu oprav i sliby, ne jen konfiguraci“: karta propisu po provozním selhání, oddělení technické opravy od veřejných a interních slibů, privacy-first upozornění proti nahrazování infrastrukturního monitoringu sledováním lidí a sada rozumných i nerozumných výstupů po incidentu. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně ověřeno, že `cody.dreamind.cz` má přímé HTTPS selhání kvůli expirovanému Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), HTTP vrací `301` na HTTPS a dostupný pracovní prostor stále neobsahuje SSH/deploy/certbot přístup pro bezpečnou obnovu certifikátu.
 - 2026-07-22: Doplněna příloha o jedné verzi pravdy bez roztříštěných slibů: zdroj pravdy podle typu slibu, oddělení veřejného slibu od interní poznámky, propis změn mezi webem, dokumentací, sales materiály, supportem a e-bookem, práce s odvozeninami, 30minutová kontrola rozporů, checklist a mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně znovu ověřeno, že `cody.dreamind.cz` přes proxy končí po TLS tunelu chybou `Empty reply from server`, přímé HTTPS bez proxy selhává na expirovaném Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), zatímco diagnostické `curl --noproxy '*' -k -I` vrací `200 OK` z nginx/Next.js na `91.99.227.53`; pracovní prostor neobsahuje SSH/deploy/certbot přístup pro bezpečnou obnovu certifikátu.
 - 2026-07-22: Doplněna příloha o týdenním rozhodovacím digestu bez nové analytiky: rozhodovací věta, skládání signálů z existujících zdrojů, pevná struktura digestu, převod trvalých závěrů do rozhodovacího logu, retenční pravidla, karta digestu, checklist a mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje; navázáno na existující zdroje k GDPR principům minimalizace, Google SRE provozním praktikám a Diátaxis dokumentaci. Provozně ověřeno, že `cody.dreamind.cz` přes proxy končí po TLS tunelu chybou `Empty reply from server`, přímé HTTPS bez proxy selhává na expirovaném Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), zatímco diagnostické `curl --noproxy '*' -k -I` vrací `200 OK` z nginx/Next.js na `91.99.227.53`; pracovní prostor neobsahuje SSH/deploy/certbot přístup, kterým by šlo certifikát bezpečně obnovit.
