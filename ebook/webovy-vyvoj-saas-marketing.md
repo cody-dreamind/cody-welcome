@@ -45647,6 +45647,135 @@ Na konec napiš větu:
 
 Pokud věta nejde napsat, review ještě neskončilo. Máš poznámky, ne rozhodnutí.
 
+## Příloha: Hodinová iterace při rozbitém provozu bez ztráty směru
+
+Pravidelný pracovní běh má jednu nepříjemnou vlastnost: někdy přijde s jasným obsahovým úkolem, ale hned na začátku najde provozní problém. Web neodpovídá, certifikát je po expiraci, healthcheck vrací `000`, deploy kanál není jasný a původní plán „dopiš další část e-booku“ se najednou tváří jako nedůležitý luxus.
+
+Jenže dobrý provoz není panika převlečená za zodpovědnost. Když automatický běh najde problém, má nejdřív zjistit, zda ho umí bezpečně opravit. Pokud ano, opraví ho, ověří veřejnou cestu a teprve potom pokračuje. Pokud ne, má zanechat přesný stav, nezamlžit čtenářskou práci a neposlat do světa víc interních detailů, než je potřeba.
+
+> Codyho komentář: Nejhorší výsledek není „web má problém“. Nejhorší výsledek je „web má problém, e-book se neposunul, log nabobtnal a další běh zase začne stejným archeologickým výkopem“. To už není incident management, to je předplatné na mlhu.
+
+### Rozděl běh na tři vrstvy
+
+Hodinová iterace s provozním problémem má tři různé vrstvy:
+
+| Vrstva | Cíl | Kdy je hotovo |
+| --- | --- | --- |
+| Diagnostika | zjistit, proč kontrola selhala | existuje konkrétní vrstva selhání: DNS, TLS, HTTP, obsah, deploy nebo přístup |
+| Oprava nebo blokace | rozhodnout, jestli lze zasáhnout bezpečně | web je opravený, nebo je jasně zapsané, co zásahu brání |
+| Obsahová iterace | dokončit jednu užitečnou změnu e-booku | vznikla jedna uzavřená část, revize nebo navigační oprava |
+
+Tyto vrstvy nemíchej do jedné věty typu „řešil jsem web a něco doplnil“. Další člověk z toho nepozná, jestli má navázat na produkční problém, pokračovat v textu, nebo hledat ztracený deploy postup.
+
+### Diagnostiku drž krátkou a vrstvenou
+
+První diagnostika má být dostatečná pro rozhodnutí, ne pro kompletní disertační práci o internetu. U veřejného webu obvykle stačí:
+
+| Kontrola | Otázka | Příklad dobrého zápisu |
+| --- | --- | --- |
+| DNS | kam doména míří | `cody.dreamind.cz -> 91.99.227.53` |
+| TLS | projde běžné ověření certifikátu | certifikát platný/neplatný, datum expirace |
+| HTTP | vrací server odpověď bez výjimky | `200`, `301`, `503`, nebo curl chyba |
+| Obsah | je dostupný očekávaný artefakt | homepage, e-book, RSS nebo marker text |
+| Opravný přístup | existuje bezpečný kanál zásahu | SSH/deploy/certbot dostupný nebo nedostupný |
+
+Jakmile víš, že selhává TLS a nemáš přístup k hostu, nepomůže pět dalších variant stejného `curl`. Pomůže přesný zápis: co je rozbité, jak bylo ověřeno, jaký zásah by byl potřeba a co mu brání.
+
+### Neopravuj naslepo jen proto, že běží čas
+
+Automatický běh má mít odvahu opravit jednoduché věci, ale nemá si vymýšlet oprávnění. Rozdíl je praktický:
+
+- Restart lokálního dev serveru v pracovním prostoru je běžná oprava.
+- Commit textové změny v repozitáři je běžná obsahová práce.
+- Obnova produkčního TLS certifikátu bez přístupu k hostu není „skoro hotovo“. Je to blokovaný zásah.
+- Nasazení přes neznámý kanál jen proto, že existuje Git remote, není oprava. Je to hazard s hezkým názvem.
+
+U rozbitého provozu si napiš jednu opravnou větu:
+
+„Aby byl veřejný web znovu zdravý, je potřeba ___ na vrstvě ___; tento běh to umí/neumí bezpečně provést, protože ___.“
+
+Pokud věta končí „asi“, ještě diagnostika není dost dobrá. Pokud končí „potřebujeme něčí heslo“, nezapisuj heslo do logu. Zapiš potřebnou schopnost, ne tajemství.
+
+### Obsahová iterace má zůstat malá
+
+Když část času sebere provozní problém, nesnaž se to dohnat pěti novými kapitolami. Vyber jednu dokončitelnou změnu:
+
+- doplnit jednu přílohu,
+- zpřesnit jeden checklist,
+- přidat jednu orientační tabulku,
+- opravit jednu opakovanou nejasnost,
+- zapsat jedno poučení z provozního nálezu do obecně použitelného postupu.
+
+Dobrý obsahový výstup nesmí být jen přepis dnešní nehody. Čtenář nepotřebuje interní kroniku. Potřebuje rámec, který použije u vlastního webu, SaaS produktu nebo týmu. Dnešní nález může být inspirace, ale výsledná část má obstát i bez znalosti konkrétního incidentu.
+
+### Odděl veřejnou hodnotu od interního provozu
+
+Do e-booku patří poučení, šablona, checklist nebo rozhodovací karta. Do pracovního logu patří stručný záznam, co se stalo v běhu. Do Telegramu patří jedna věta pro Ondřeje, ne celý incidentní deník.
+
+Praktické rozdělení:
+
+| Místo | Co zapsat | Co tam nepatří |
+| --- | --- | --- |
+| E-book | obecný postup použitelný čtenářem | interní IP detaily, klíče, raw logy |
+| Pracovní log | datum, obsahová změna, provozní stav | dlouhé výpisy příkazů a tajemství |
+| Telegram | stručný výsledek běhu a nutná blokace | kompletní diagnostika, pokud není vyžádaná |
+| Backlog | opravitelný úkol s vlastníkem a ověřením | obecná věta „zlepšit monitoring“ |
+
+Tohle není jen bezpečnostní puntičkářství. Je to i produktivita. Čím méně míst obsahuje neúplné kopie stejného problému, tím menší šance, že tým opraví špatnou věc.
+
+### Karta hodinové iterace
+
+Pro každý běh, kde se potká provozní problém a obsahová práce, stačí malá karta:
+
+| Pole | Zápis |
+| --- | --- |
+| Datum a čas běhu |  |
+| Původní cíl |  |
+| Provozní signál |  |
+| Vrstva selhání | DNS / TLS / HTTP / obsah / deploy / přístup |
+| Opravný pokus | co bylo bezpečně ověřeno nebo provedeno |
+| Blokace | co brání opravě, bez tajemství |
+| Obsahová iterace | jedna dokončená změna e-booku |
+| Ověření | `git diff`, případně lint/build/smoke test |
+| Komunikace | jedna věta o výsledku a případné blokaci |
+| Další nejlepší krok | konkrétní úkol, ne nálada |
+
+Karta nemá žít věčně. Pokud je z ní backlog úkol, přesuň ji do backlogu. Pokud je problém opravený, nech v logu jen shrnutí. Dlouhé provozní opakování v e-booku časem čtenáře naučí přeskakovat přesně ty části, které měly pomáhat.
+
+### Checklist: Hodinová iterace při rozbitém provozu
+
+- [ ] Nejdřív jsem ověřil, zda je problém reálný z veřejné cesty.
+- [ ] Rozlišil jsem DNS, TLS, HTTP, obsah, deploy a přístup.
+- [ ] Pokud šlo problém bezpečně opravit, opravil jsem ho a ověřil běžnou cestu bez výjimky.
+- [ ] Pokud oprava nejde, zapsal jsem přesnou blokaci bez tajemství a bez raw interních logů.
+- [ ] Obsahová část běhu skončila jednou dokončenou změnou, ne pěti rozpracovanými nápady.
+- [ ] Nový text je obecně užitečný pro čtenáře, ne jen interní popis dnešní nehody.
+- [ ] Pracovní log říká, co bylo hotovo, jaký je provozní stav a zda byly potřeba nové zdroje.
+- [ ] Kontrola změn proběhla minimálně přes `git diff`.
+- [ ] Komunikace ven je stručná a neobsahuje tajemství, zákaznická data ani zbytečné provozní detaily.
+- [ ] Další běh bude vědět, jestli navazuje na obsah, opravu, nebo backlogový úkol.
+
+### Mini úkol
+
+Vezmi poslední pravidelný běh, který našel provozní problém, a přepiš ho do této tabulky:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Co měl běh původně udělat? |  |
+| Jaký provozní signál ho přerušil? |  |
+| Na které vrstvě byl problém? |  |
+| Jaký bezpečný opravný krok byl dostupný? |  |
+| Co opravu blokovalo? |  |
+| Jaká jedna obsahová změna přesto vznikla? |  |
+| Jak bylo ověřeno, že změna nerozbila zdrojový soubor? |  |
+| Co má další běh udělat jako první? |  |
+
+Na konec napiš větu:
+
+„Tento běh byl hotový, protože uzavřel ___ a současně nezamlžil ___.“
+
+Pokud neumíš doplnit obě mezery, běh nejspíš smíchal incident, obsah a komunikaci do jedné kaše. Kaše je dobrá k snídani. Do provozu méně.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -45836,6 +45965,7 @@ Pokud věta nejde napsat, review ještě neskončilo. Máš poznámky, ne rozhod
 
 ## Pracovní log
 
+- 2026-07-22: Doplněna příloha o hodinové iteraci při rozbitém provozu bez ztráty směru: rozdělení pravidelného běhu na diagnostiku, opravu nebo blokaci a obsahovou iteraci, krátká vrstvená diagnostika, hranice bezpečné opravy, karta hodinové iterace, oddělení veřejné hodnoty od interního provozu, checklist a mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně ověřeno, že `cody.dreamind.cz` přes proxy po TLS tunelu končí `Empty reply from server`, přímé HTTPS bez proxy selhává kvůli expirovanému veřejnému Let's Encrypt certifikátu `CN=cody.dreamind.cz` od `E8` (`notAfter` 2026-07-17 19:35:56 GMT) a neinteraktivní SSH pro účty `root`, `ubuntu`, `deploy`, `cody` ani `node` nemá opravný přístup, takže certifikát z tohoto běhu nejde bezpečně obnovit.
 - 2026-07-22: Doplněna příloha o měsíčním provozním review webu bez kontrolního divadla: veřejná kontrola DNS/TLS/HTTP/obsahu/privacy vrstvy, třídění výsledků na opravit teď, provozní dluh a vědomě nedělat, kontrola veřejných slibů proti realitě, 45minutový průběh review, karta review, dopad podle snížené nejistoty, checklist a mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje; navázáno na existující zdroje k incidentům, curl, TLS a provozní hygieně. Provozně ověřeno, že `cody.dreamind.cz` přes proxy po TLS tunelu končí `Empty reply from server`, přímé HTTPS bez proxy selhává kvůli expirovanému veřejnému Let's Encrypt certifikátu `CN=cody.dreamind.cz` od `E8` (`notAfter` 2026-07-17 19:35:56 GMT), HTTP vrací `301` na HTTPS a diagnostické přímé HTTPS s `-k` vrací `200 OK` z nginx/Next.js na `91.99.227.53`; v kontejneru nejsou SSH klíče a neinteraktivní SSH pro účty `root`, `ubuntu`, `deploy`, `cody` ani `node` nemá opravný přístup, takže certifikát z tohoto běhu nejde bezpečně obnovit.
 - 2026-07-22: Doplněna příloha o úklidu dočasných oprávnění po provozním zásahu bez nových zadních dveří: rozlišení opravného přístupu a běžné role, krátký seznam povýšení oprávnění, úklid vedlejších stop, test návratu do normálu, nahrazení trvalého admin přístupu úzkou opravnou schopností, checklist a mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje; navázáno na existující zdroje k incidentnímu řízení, tajemstvím, oprávněním a provozním runbookům. Provozně ověřeno, že `cody.dreamind.cz` přímo míří na `91.99.227.53`, veřejný certifikát `CN=cody.dreamind.cz` od Let's Encrypt `E8` expiroval `2026-07-17 19:35:56 GMT`, běžné přímé HTTPS selhává na ověření certifikátu, diagnostické přímé HTTPS s `-k` vrací `200 OK` a obsah, proxy cesta po TLS tunelu končí prázdnou odpovědí a neinteraktivní SSH pro účty `root`, `ubuntu`, `deploy` i `cody` odmítá přístup, takže certifikát z tohoto běhu nejde bezpečně obnovit.
 - 2026-07-22: Doplněna příloha o malém změnovém okně pro provozní opravu bez chaosu: opravná věta, minimální karta okna, oddělení přípravy, zásahu a ověření, chudá komunikace bez interních detailů, rollback a stop pravidla, uzavření smyčky po okně, checklist a mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně ověřeno, že `cody.dreamind.cz` přímo míří na `91.99.227.53`, běžné přímé HTTPS selhává kvůli expirovanému veřejnému Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), diagnostické přímé HTTPS s `-k` vrací `200 OK` z nginx/Next.js, proxy cesta po TLS tunelu končí prázdnou odpovědí a neinteraktivní SSH pro účty `root`, `ubuntu`, `debian`, `node` i `cody` odmítá přístup, takže certifikát z tohoto běhu nejde bezpečně obnovit.
