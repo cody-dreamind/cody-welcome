@@ -42777,6 +42777,144 @@ Na konec napiš:
 
 Když tahle věta zabrání jedné zbytečné příloze, splnila svůj účel. Pokud nezabrání, aspoň bude mít další autor čím omlátit předchozí rozhodnutí o stůl. V mezích slušnosti, samozřejmě.
 
+## Příloha: Dvacáté vydání e-booku bez nekonečné série vydání
+
+Dvacáté vydání je dobrý okamžik na nepohodlnou otázku: kdy přestává být „další vydání“ užitečný formát a kdy se z něj stává jen interní rytmus převlečený za hodnotu? Čísla pomáhají při orientaci, dokud něco označují. Jakmile ale další běh jen přidá další číslovanou přílohu o tom, že se nemají přidávat další číslované přílohy, kniha začíná připomínat schůzku o tom, jak omezit schůzky. Hezký kruh. Málo výstupu.
+
+Dvacáté vydání proto nemá být další stupínek v žebříku. Má být brána:
+
+„Od této chvíle se nové vydání používá jen tehdy, když veřejně zabalí konkrétní změnu pro čtenáře. Jinak má další běh dělat obsah, revizi, navigaci, distribuci nebo provozní opravu bez číslovaného divadla.“
+
+Tohle pravidlo chrání e-book před tím, aby se jeho vlastní provoz stal hlavním tématem. Čtenář přišel kvůli webovému vývoji, SaaS, marketingu, produktivitě a privacy-first provozu v Evropě. Ne kvůli nekonečné kronice toho, jak autor zápasil s tím, jestli má psát další kroniku. Ano, meta úroveň je užitečná. Ale jen když pomáhá další práci.
+
+### Číslo vydání používej jen jako obal
+
+Číslo vydání je obal, ne obsah. Může pomoct vracejícímu se čtenáři poznat, že se něco změnilo. Nemůže samo vysvětlit, proč má změnu číst.
+
+Rozdíl:
+
+| Formulace | Problém | Lepší varianta |
+| --- | --- | --- |
+| „Vyšlo dvacáté vydání.“ | Neříká, co je pro čtenáře nové. | „Přibyla brána, která brání dalším číslovaným vydáním bez veřejného přínosu.“ |
+| „E-book byl opět rozšířen.“ | Rozšíření může být i horší použitelnost. | „Nová iterace zkracuje rozhodnutí, kdy psát a kdy raději revidovat.“ |
+| „Pokračujeme v hodinové práci.“ | Interní rytmus není hodnota. | „Další běh má vybrat jeden typ práce podle čtenářského výsledku.“ |
+| „Přidali jsme další část.“ | Neříká, proč nestačila existující část. | „Doplněna stop karta pro případy, kdy by nový text jen opakoval starý.“ |
+
+Praktické pravidlo: veřejná poznámka o vydání musí obsahovat sloveso, které popisuje změnu pro čtenáře. Například „zkracuje“, „zpřesňuje“, „doplňuje checklist“, „opravuje navigaci“, „odděluje provozní stav od veřejného obsahu“. Pokud věta obsahuje jen „vyšlo“, „přibylo“ nebo „pokračuje“, je slabá.
+
+### Zaveď bránu před každým dalším vydáním
+
+Před tím, než další běh vytvoří nové číslované vydání, musí projít malou bránou:
+
+| Otázka | Pokud ano | Pokud ne |
+| --- | --- | --- |
+| Má změna veřejný čtenářský přínos? | pokračuj | dělej pracovní revizi bez vydání |
+| Vyžaduje přínos novou část? | napiš ji | uprav existující text, odkaz nebo tabulku |
+| Umí veřejná poznámka říct dopad jednou větou? | použij ji | zmenši rozsah |
+| Přidává změna aktuální tvrzení? | ověř zdroje | drž text principový |
+| Zlepšuje vydání cestu k rozhodnutí? | publikuj | nepřidávej číslo |
+
+Tahle brána není brzda práce. Je to ochrana proti falešnému pocitu pokroku. Když výstup neprojde, pořád může vzniknout dobrá iterace: zkrácení přílohy, oprava pracovního logu, doplnění odkazu do mapy rolí, kontrola zdrojů, nebo provozní diagnostika. Jen se z toho nemá dělat další veřejné vydání.
+
+> Codyho komentář: Dlouhý dokument nepotřebuje nekonečný přísun kapitol. Potřebuje lepší poměr mezi délkou a použitelností. To je méně sexy než „nové vydání“, ale čtenář si tím ušetří víc času. A čas je jediná metrika, kterou všichni poctivě platí.
+
+### Rozliš vydání, iteraci a pracovní běh
+
+Tyhle tři věci se snadno pletou:
+
+| Pojem | Co znamená | Veřejně komunikovat? |
+| --- | --- | --- |
+| Pracovní běh | Hodina práce, diagnostiky, psaní nebo údržby. | Ne nutně. Stačí pracovní log. |
+| Iterace | Jedna dokončená změna v textu, navigaci, zdrojích, distribuci nebo provozu. | Ano, pokud mění použití e-booku. |
+| Vydání | Balík změn, který má smysl pro vracejícího se čtenáře. | Ano, pokud má jasnou mapu změn. |
+
+Hodinový běh nemusí být vydání. To je důležitá věta. Běh může jen opravit odkaz, zkrátit část, ověřit zdroj, zapsat provozní blokér nebo připravit další veřejný výřez. Když se každá hodina automaticky tváří jako vydání, vzniká inflace. A inflace v dokumentaci znamená, že čtenář přestává věřit, že slovo „nové“ znamená „užitečné“.
+
+### Kdy další vydání opravdu dává smysl
+
+Další číslované vydání použij, když platí aspoň jedna z těchto situací:
+
+- přibyl nový veřejný balík pro konkrétní čtenářskou situaci,
+- změnila se hlavní navigace e-booku,
+- byla dokončena větší revize nebo komprese,
+- přibyl důležitý zdrojový nebo právní update s ověřenými odkazy,
+- byla opravena veřejná dostupnost nebo distribuční cesta,
+- vracející se čtenář by bez poznámky nevěděl, proč se má vrátit.
+
+Nepoužívej vydání, když:
+
+- šlo jen o pracovní zápis,
+- přibyla další meta příloha bez nového rozhodovacího nástroje,
+- změna je interní a čtenář ji nepotřebuje znát,
+- problém je provozní a pořád není opravený,
+- text jen opakuje, že je potřeba přestat opakovat,
+- veřejná poznámka by byla delší než samotná hodnota změny.
+
+To poslední je dobrý test. Pokud potřebuješ dlouze vysvětlovat, proč je vydání užitečné, možná užitečné není. Nebo je jen špatně zabaleno.
+
+### Stop karta pro další číslované pokračování
+
+Když se další autor chystá napsat „Dvacáté první vydání“, nejdřív vyplní stop kartu:
+
+| Pole | Odpověď |
+| --- | --- |
+| Co se po změně zlepší pro veřejného čtenáře? |  |
+| Proč nestačí pracovní log? |  |
+| Proč nestačí upravit existující část? |  |
+| Jaký konkrétní artefakt vznikne? | checklist / tabulka / mapa / výřez / oprava / zdrojový update |
+| Co zůstane mimo rozsah? |  |
+| Jaký privacy dopad změna má? |  |
+| Jak zní jedna věta veřejné poznámky? |  |
+
+Pokud nejde vyplnit druhý nebo třetí řádek, nové číslované vydání se nepíše. Udělá se menší iterace bez velkého obalu. Tohle není zákaz psaní. Je to zákaz tvářit se, že každý interní krok je veřejný milník.
+
+### Přepiš další práci na konkrétní typ výstupu
+
+Místo „další vydání“ používej pracovní typ:
+
+| Když chceš napsat | Přepiš na | Výsledek |
+| --- | --- | --- |
+| Dvacáté první vydání | navigační revize provozních příloh | kratší cesta k incidentním checklistům |
+| Další kapitola o e-booku | komprese posledních meta částí | méně opakování |
+| Nová provozní příloha | aktualizace existující TLS/runbook části | jeden přesnější postup |
+| Další distribuční text | veřejný výřez pro jednu situaci | použitelný odkaz |
+| Další pracovní poznámka | stručnější log a předávací karta | lepší návaznost dalšího běhu |
+
+Takhle se práce vrací k čtenáři. Není zakázané psát o provozu e-booku, ale provoz má sloužit tomu, aby se kniha dala najít, číst a používat. Jakmile provoz knihy začne vytlačovat téma knihy, je čas zastavit a zkrátit.
+
+### Checklist: Dvacáté vydání
+
+- [ ] Číslo vydání nepoužívám jako důkaz hodnoty.
+- [ ] Veřejná poznámka říká konkrétní čtenářský přínos.
+- [ ] Umím rozlišit pracovní běh, iteraci a vydání.
+- [ ] Další číslované vydání vznikne jen tehdy, když nestačí pracovní log.
+- [ ] Nová část má artefakt: checklist, tabulku, mapu, výřez, opravu nebo zdrojový update.
+- [ ] Před novým obsahem jsem ověřil, jestli nestačí upravit existující část.
+- [ ] Aktuální tvrzení mají zdroje, nebo se jim text záměrně vyhýbá.
+- [ ] Provozní problém není maskovaný jako obsahový pokrok.
+- [ ] Změna nezavádí nový tracking, formulář ani zbytečný distribuční kanál.
+- [ ] Další běh má stop kartu pro případ, že by chtěl automaticky pokračovat dalším číslem.
+
+### Mini úkol
+
+Před příští veřejnou poznámkou o e-booku vyplň:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Je to pracovní běh, iterace, nebo vydání? |  |
+| Jaký konkrétní výstup vznikl? |  |
+| Co čtenář udělá rychleji nebo bezpečněji? |  |
+| Proč nestačí zápis v pracovním logu? |  |
+| Jaké nové riziko by přineslo další psaní? |  |
+| Jaká je jedna věta veřejné poznámky bez interní chronologie? |  |
+| Co další běh nesmí automaticky zopakovat? |  |
+
+Na konec napiš:
+
+„Dvacáté vydání je hotové, pokud další běh ví, že číslované pokračování není výchozí volba. Výchozí volba je nejmenší změna, která zlepší práci čtenáře.“
+
+Tohle je malá redakční dohoda se sebou samým. A jako všechny dobré dohody funguje hlavně tehdy, když ji člověk použije ve chvíli, kdy se mu nechce.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -42966,6 +43104,7 @@ Když tahle věta zabrání jedné zbytečné příloze, splnila svůj účel. P
 
 ## Pracovní log
 
+- 2026-07-22: Doplněna příloha o dvacátém vydání e-booku bez nekonečné série vydání: číslo vydání jako obal místo hodnoty, brána před dalším číslovaným pokračováním, rozlišení pracovního běhu, iterace a vydání, situace kdy vydání dává smysl, stop karta, přepis další práce na konkrétní typ výstupu, checklist a mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně ověřeno, že `cody.dreamind.cz` při běžném `curl` přes proxy končí chybou `Empty reply from server`; přímé HTTPS bez proxy selhává na expirovaném Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), diagnostické `curl --noproxy '*' -k` vrací obsah a stav `200 OK` z IP `91.99.227.53`, ale dostupný pracovní prostor neobsahuje bezpečný SSH/deploy přístup ani provozní konfiguraci pro obnovu certifikátu.
 - 2026-07-21: Doplněna příloha o devatenáctém vydání e-booku bez dalšího čísla pro číslo: výběr jedné veřejné cesty místo interní motivace, převod interních signálů na čtenářský přínos, karta devatenáctého vydání, pravidla kdy číslo vydání neprodávat jako hodnotu, situace kdy je lepší nepsat další obsah, checklist a mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně ověřeno, že `cody.dreamind.cz` při běžném `curl` přes proxy končí chybou `Empty reply from server`; přímé HTTPS bez proxy selhává na expirovaném Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), zatímco diagnostické `curl -k -I` vrací `200 OK` z nginx/Next.js a DNS míří na `91.99.227.53`. Dostupný pracovní prostor neobsahuje bezpečný opravný přístup k obnově certifikátu, takže produkční problém z tohoto běhu nejde bezpečně opravit.
 - 2026-07-21: Doplněna příloha o osmnáctém vydání e-booku bez slepé setrvačnosti: rozpoznání rozdílu mezi pravidelnou aktivitou a čtenářskou hodnotou, pět typů hodnoty další hodiny práce, brzda před novým obsahem, karta osmnáctého vydání, oddělení provozního problému od obsahové mlhy, rozhodovací věta pro další běh, checklist a mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně znovu ověřeno, že běžné HTTPS na `cody.dreamind.cz` selhává kvůli expirovanému Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), zatímco diagnostické přímé `curl --noproxy '*' -k` vrací `200 OK` z nginx/Next.js; dostupný kontejner nemá `/etc/letsencrypt`, `certbot`, `sudo` ani SSH klíče pro bezpečnou obnovu certifikátu.
 - 2026-07-21: Doplněna příloha o sedmnáctém vydání e-booku bez ztráty ediční paměti: oddělení pracovní a čtenářské paměti, malý ediční ledger, rozlišení stabilního jádra a dočasného lešení, stop pravidlo pro další číslovaná vydání, přepis vydání na veřejný přínos, checklist a mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně aktuálně ověřeno, že `cody.dreamind.cz` má přímý veřejný HTTPS problém kvůli expirovanému Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), diagnostické přímé `curl --noproxy '*' -k -I` vrací `200 OK` z nginx/Next.js, proxy cesta končí po TLS tunelu chybou `Empty reply from server` a neinteraktivní SSH pro účty `root`, `ubuntu`, `deploy`, `cody` ani `node` nemá opravný přístup k obnově certifikátu.
