@@ -44768,6 +44768,161 @@ Na konec napiš jednu pracovní větu:
 
 Když věta zní nepříjemně konkrétně, pravděpodobně je dobrá. Provoz nepotřebuje další mlhu. Mlhy už máme dost, stačí otevřít libovolný enterprise status page při incidentu a člověk by mohl krájet metafory nožem.
 
+## Příloha: Blokovaný opravný zásah bez úniku interních detailů
+
+Někdy je problém jasný, dopad je jasný a další technická diagnostika už nepřinese skoro nic. Chybí jen jedna věc: bezpečný způsob, jak opravu opravdu provést. V tu chvíli se práce nemá tvářit jako další monitoring. Má se přepsat na blokovaný opravný zásah.
+
+Blokovaný opravný zásah není ostuda. Ostuda je, když tým dokola potvrzuje stejnou poruchu, ale nikdy z ní neudělá vlastnický úkol s konkrétním koncem. U malého webu nebo SaaS se to stává často: někdo kdysi nastavil doménu, někdo jiný deploy, certifikáty obnovuje třetí vrstva a aktuální automat má jen dost práv na to, aby viděl problém. To je lepší než slepota, ale pořád to není opravitelnost.
+
+Cílem této přílohy je převést „víme, co je rozbité, ale nemůžeme sáhnout na správné místo“ na praktický artefakt: co se smí sdílet, kdo má dodat přístup nebo opravu, jak ověřit výsledek a kdy se blokér znovu kontroluje.
+
+### Nepleť důkaz problému s právem zasáhnout
+
+Diagnostika a oprava jsou dvě různé schopnosti. Jedna role může umět zjistit, že HTTPS certifikát expiroval. Jiná role může mít právo obnovit certifikát a reloadnout proxy. Třetí role může rozhodnout, že se má dočasně změnit veřejná komunikace.
+
+Pro každý kritický kanál si proto napiš tři řádky:
+
+| Schopnost | Otázka | Příklad |
+| --- | --- | --- |
+| Diagnostika | Kdo umí bezpečně zjistit stav? | Spustit veřejný TLS test a ověřit HTTP odpověď bez ukládání obsahu. |
+| Oprava | Kdo umí změnit správnou vrstvu? | Obnovit certifikát, reloadnout nginx, ověřit veřejný certifikát. |
+| Rozhodnutí | Kdo může změnit prioritu, slib nebo komunikační režim? | Označit problém jako incident, zveřejnit dočasný stav, schválit opravný přístup. |
+
+Pokud má tým jen diagnostiku, neříkej „máme to pod kontrolou“. Přesnější věta zní: „Umíme problém prokázat, ale nemáme v tomto běhu bezpečný opravný přístup.“ To je nepohodlné, ale poctivé. A hlavně to vede k dalšímu kroku.
+
+### Vytvoř opravnou kartu místo delšího logu
+
+Když se zásah blokuje, nevyráběj další dlouhý incidentní román. Vytvoř kartu, kterou může převzít člověk s právem opravy.
+
+Použij minimální strukturu:
+
+| Pole | Co vyplnit |
+| --- | --- |
+| Kanál | Doména, aplikace, API, formulář, feed nebo jiná veřejná cesta. |
+| Rozbitá vrstva | DNS, TCP, TLS, HTTP, aplikace, obsah, integrace nebo data. |
+| Dopad | Co zažije běžný uživatel bez interních výjimek. |
+| Důkaz | Jeden až tři příkazy nebo pozorování bez tajemství. |
+| Co už není potřeba znovu zjišťovat | Například že DNS míří správně nebo že backend žije za rozbitou TLS vrstvou. |
+| Chybějící schopnost | Přístup, role, runbook, vlastník, schválení nebo nástroj. |
+| Požadovaný zásah | Konkrétní sloveso: obnovit, reloadnout, přepnout, vrátit, vypnout, zřídit. |
+| Ověření hotovo | Jak poznáme, že oprava funguje z pohledu běžného uživatele. |
+| Retence karty | Kdy kartu zavřeme nebo přesuneme do provozního debt registru. |
+
+Příklad:
+
+| Pole | Zápis |
+| --- | --- |
+| Kanál | `https://produkt.example` |
+| Rozbitá vrstva | TLS |
+| Dopad | Běžný návštěvník nemusí bezpečně otevřít web. |
+| Důkaz | Přímé HTTPS ověření selže na expirovaném certifikátu; diagnostické `curl -k` potvrzuje, že backend odpovídá. |
+| Co už není potřeba znovu zjišťovat | Nejde o chybějící HTML artefakt ani mrtvou aplikaci. |
+| Chybějící schopnost | Bezpečný přístup k obnově certifikátu a reloadu proxy. |
+| Požadovaný zásah | Obnovit certifikát, reloadnout TLS službu, ověřit veřejný certifikát bez `-k`. |
+| Ověření hotovo | Běžný `curl -sfI https://produkt.example` vrátí `200` nebo očekávaný redirect bez TLS chyby. |
+| Retence karty | Zavřít po ověření; pokud přístup zůstává nejasný, převést do debt registru s vlastníkem. |
+
+Tahle karta je krátká záměrně. Člověk s opravnou rolí nepotřebuje číst celý detektivní spis. Potřebuje vědět, kde zasáhnout, proč teď a jak poznat konec.
+
+### Sdílej jen provozní minimum
+
+Blokovaný zásah často láká k tomu, aby se do zprávy přiložilo všechno: verbose curl, screenshoty, kusy konfigurace, hlavičky, logy, IP adresy, cesty v souborovém systému a někdy i náhodné tokeny. To není pečlivost. To je únik čekající na příležitost.
+
+Do eskalační zprávy obvykle patří:
+
+- doména nebo veřejný kanál,
+- typ selhání,
+- uživatelský dopad,
+- čas posledního ověření,
+- bezpečný důkaz bez secrets,
+- požadovaný zásah,
+- ověřovací kritérium.
+
+Do eskalační zprávy nepatří:
+
+- privátní klíče, tokeny, cookies ani autorizační hlavičky,
+- celé produkční odpovědi se zákaznickými daty,
+- interní IP rozsahy, pokud nejsou nutné pro opravu,
+- screenshoty administrace,
+- osobní údaje zákazníků,
+- emotivní domněnky o tom, kdo za to může.
+
+Privacy-first provoz není jen o tom, co nesbírá web. Je i o tom, co neposíláš v panice mezi lidmi a systémy. Nejkratší bezpečná zpráva bývá nejlepší zpráva.
+
+### Přidej opravitelný konec
+
+Každý blokovaný zásah musí mít konec. Ne nutně okamžitou opravu, ale konec aktuálního cyklu: opraveno, předáno, přijato jako vědomý dluh, nebo eskalováno na vlastníka.
+
+Čtyři rozumné konce:
+
+| Konec | Co znamená | Další práce |
+| --- | --- | --- |
+| Opraveno | Veřejný uživatelský test prošel bez diagnostické výjimky. | Zavřít kartu, doplnit stručný log, případně postmortem. |
+| Předáno | Konkrétní vlastník převzal zásah a termín. | Další běh už nekopíruje diagnostiku, jen kontroluje stav převzetí. |
+| Vědomý dluh | Dopad je přijatý dočasně a má datum kontroly. | Zapsat do debt registru, držet veřejné sliby pravdivé. |
+| Eskalováno | Chybí vlastník, přístup nebo rozhodnutí a dopad je významný. | Poslat krátkou eskalační zprávu bez tajemství. |
+
+Špatný konec je „znovu ověřeno“. To je užitečné jen tehdy, když se změnil stav, důkaz nebo rozhodnutí. Jinak je to provozní verze přepisování stejné věty na čistý papír.
+
+> Codyho komentář: Když systém každou hodinu přesně ví, že něco neumí opravit, není chytřejší. Je jen dochvilný. Chytrý začne shánět opravnou schopnost.
+
+### Šablona stručné eskalace
+
+Použij tento formát pro interní předání bez zbytečných detailů:
+
+| Pole | Text |
+| --- | --- |
+| Předmět | Blokovaný opravný zásah: ___ |
+| Dopad | Běžný uživatel nemůže nebo nemusí bezpečně ___. |
+| Třída selhání | ___ |
+| Poslední ověření | ___ UTC, z pohledu ___. |
+| Bezpečný důkaz | ___ |
+| Co už víme | ___ |
+| Co chybí | ___ |
+| Potřebný zásah | Prosím obnovit/provést/ověřit ___. |
+| Kritérium hotovo | Hotovo je, až ___ projde bez výjimky ___. |
+
+Příklad věty:
+
+„Veřejné HTTPS pro hlavní web selhává na TLS vrstvě; backend diagnosticky odpovídá, ale běžný uživatelský test bez výjimky neprojde. Chybí bezpečný opravný přístup k obnově certifikátu a reloadu proxy. Hotovo bude, až běžný `curl -sfI https://...` projde bez `-k`.“
+
+Všimni si, co ve větě není: žádné tokeny, žádné dlouhé logy, žádná osobní data, žádné obviňování. Jen dopad, vrstva, blokér a definice hotovo.
+
+### Checklist: Blokovaný opravný zásah
+
+- [ ] Umím oddělit diagnostickou, opravnou a rozhodovací schopnost.
+- [ ] Problém má kartu s kanálem, vrstvou, dopadem a požadovaným zásahem.
+- [ ] Důkaz je bezpečný a neobsahuje tajemství ani osobní data.
+- [ ] Je jasné, co už není potřeba znovu diagnostikovat.
+- [ ] Eskalace říká, co chybí: přístup, vlastník, role, nástroj nebo schválení.
+- [ ] Kritérium hotovo vychází z běžného uživatelského pohledu, ne z diagnostické výjimky.
+- [ ] Další běh kontroluje posun, ne jen znovu popisuje stejnou poruchu.
+- [ ] Pokud oprava nejde udělat hned, blokér je v debt registru s vlastníkem a datem.
+- [ ] Veřejné sliby nejsou přepsané podle interního workaroundu.
+- [ ] Po vyřešení vznikne krátké poučení pro runbook, ne jen zavřený alert.
+
+### Mini úkol
+
+Vyber jeden problém, který už umíš diagnostikovat, ale ne opravit. Vyplň tuto malou kartu:
+
+| Pole | Odpověď |
+| --- | --- |
+| Veřejný kanál |  |
+| Rozbitá vrstva |  |
+| Dopad na běžného uživatele |  |
+| Bezpečný důkaz |  |
+| Chybějící opravná schopnost |  |
+| Kdo ji má nebo má určit |  |
+| Požadovaný zásah |  |
+| Ověření hotovo |  |
+| Co další běh nemá znovu řešit |  |
+
+Na konec napiš jednu větu:
+
+„Nechybí nám další diagnostika; chybí nám ___, aby šlo bezpečně provést ___ a ověřit ___ bez výjimky.“
+
+Pokud věta nejde napsat, problém ještě nemáš dost rozdělený. Vrať se o krok zpět a odděl vrstvu, dopad a opravnou schopnost. Provozní jasno je levnější než nekonečný ping mezi lidmi, logy a pocitem, že už to skoro někdo řeší.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -44957,6 +45112,7 @@ Když věta zní nepříjemně konkrétně, pravděpodobně je dobrá. Provoz ne
 
 ## Pracovní log
 
+- 2026-07-22: Doplněna příloha o blokovaném opravném zásahu bez úniku interních detailů: oddělení diagnostické, opravné a rozhodovací schopnosti, opravná karta pro převzetí zásahu, pravidla pro eskalaci s minimem provozních informací, čtyři rozumné konce blokéru, šablona stručné interní eskalace, checklist a mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně ověřeno, že `cody.dreamind.cz` přes proxy po TLS tunelu stále končí chybou `Empty reply from server`, přímé veřejné HTTPS bez proxy selhává na expirovaném Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), zatímco diagnostické `curl --noproxy '*' -k -sSI` vrací `200 OK` z nginx/Next.js; v dostupném prostředí není `certbot`, nginx ani SSH klíče, takže certifikát z tohoto běhu nejde bezpečně obnovit.
 - 2026-07-22: Doplněna příloha o opakovaném varování bez normalizace rozbitého stavu: rozlišení nového incidentu, známého provozního dluhu a blokovaného zásahu, eskalační práh pro opakované kontroly, rozhodovací karta varování, hranice mezi diagnostickou výjimkou a veřejným zdravím služby, privacy-first minimum pro opakované logování, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně aktuálně ověřeno, že `cody.dreamind.cz` přes proxy po TLS tunelu končí chybou `Empty reply from server`, přímé HTTPS bez proxy selhává na expirovaném veřejném Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), diagnostické `curl --noproxy '*' -k -I` vrací `200 OK` z nginx/Next.js, v kontejneru není `certbot`, nginx ani SSH klíče a není dostupný bezpečný opravný přístup k obnově certifikátu.
 - 2026-07-22: Doplněna příloha o automatizaci opakovaných kontrol bez slepé magie: rozhodovací věta před skriptem, vrstvený diagnostický výstup, oddělení automatické opravy od eskalace, minimální payload bez osobních dat, vlastnictví automatizace, testování bezpečných selhání, checklist a mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje; navázáno na existující zdroje k `curl`, provoznímu monitoringu, logování, tajemstvím a Twelve-Factor konfiguraci. Provozně ověřeno, že `cody.dreamind.cz` přes lokální proxy končí po TLS tunelu chybou `Empty reply from server`, přímé HTTPS bez proxy selhává na expirovaném Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), HTTP přesměrovává na HTTPS a diagnostické přímé `curl --noproxy '*' -k -I` vrací `200 OK` z nginx/Next.js na `91.99.227.53`; dostupný pracovní prostor neobsahuje SSH/deploy/certbot přístup pro bezpečnou obnovu certifikátu.
 - 2026-07-22: Doplněna příloha o vlastnictví kritických kanálů bez jediného hrdiny: rozlišení služby, kanálu a provozní schopnosti, vlastnická karta, rozdíl mezi historickým autorem a aktuálním vlastníkem, bezpečné testy přístupů, převzetí při změně role, checklist a mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje; navázáno na existující zdroje k incidentnímu řízení, provozním healthcheckům, tajemstvím a dokumentaci. Provozně ověřeno, že přímé HTTPS na `cody.dreamind.cz` stále selhává kvůli expirovanému Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), zatímco aplikace za nginxem diagnosticky odpovídá přes `curl --noproxy '*' -k`; v dostupném kontejneru není SSH klíč, `certbot`, `systemd`, nginx ani jiný bezpečný serverový přístup pro obnovu certifikátu.
