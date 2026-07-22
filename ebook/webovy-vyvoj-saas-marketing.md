@@ -44923,6 +44923,141 @@ Na konec napiš jednu větu:
 
 Pokud věta nejde napsat, problém ještě nemáš dost rozdělený. Vrať se o krok zpět a odděl vrstvu, dopad a opravnou schopnost. Provozní jasno je levnější než nekonečný ping mezi lidmi, logy a pocitem, že už to skoro někdo řeší.
 
+## Příloha: Ověření po opravě bez falešného vítězství
+
+Oprava není hotová ve chvíli, kdy někdo napíše „mělo by to fungovat“. Oprava je hotová ve chvíli, kdy projde stejná uživatelská cesta, která předtím selhávala, a tým ví, co se změnilo. U malého webu nebo SaaS to zní banálně, ale právě tady vzniká hodně zbytečných návratů: certifikát se obnoví, ale nereeloadne se proxy; aplikace odpoví lokálně, ale veřejná doména pořád padá; monitoring zezelená, ale jen proto, že testuje interní endpoint místo reálné URL.
+
+Smyslem této přílohy je dát opravě krátký konec. Ne další slavnostní postmortem, ne desetistránkovou analýzu, ale ověřovací průchod, který uzavře konkrétní poruchu a zachytí poučení pro příště.
+
+### Začni původní poruchou
+
+Po opravě nezačínej otázkou „co všechno teď běží?“. Začni původní větou dopadu:
+
+„Běžný uživatel nemohl ___.“
+
+Teprve z ní odvoď ověřovací test. Pokud uživatel nemohl otevřít web přes běžné HTTPS, nestačí ověřit, že aplikace odpovídá přes interní port nebo přes `curl -k`. Pokud nefungoval registrační formulář, nestačí ověřit homepage. Pokud byl rozbitý RSS feed, nestačí ověřit blogový index.
+
+Krátká karta:
+
+| Pole | Příklad |
+| --- | --- |
+| Původní dopad | Návštěvník nemohl bezpečně otevřít hlavní web přes běžné HTTPS. |
+| Rozbitá vrstva | TLS nebo reload TLS služby. |
+| Opravný zásah | Obnovit certifikát a reloadnout veřejnou proxy. |
+| Test hotovo | `curl -sfI https://example.com` projde bez `-k` a vrátí očekávaný stav. |
+| Uživatelská kontrola | Otevření hlavní URL v běžném prohlížeči bez varování. |
+| Co se netestuje jako důkaz | Interní health endpoint, lokální port, diagnostický bypass. |
+
+Tahle tabulka má zabránit jedné časté chybě: tým opraví vrstvu, kterou vidí, ale neověří vrstvu, kterou používá zákazník.
+
+### Ověř veřejnou cestu, ne jen nástroj
+
+Každá oprava má mít aspoň jednu kontrolu z veřejného pohledu. U webu to typicky znamená DNS, TLS, HTTP status, obsahový marker a jednu hlavní akci. Ne vždy musíš testovat všechno ručně, ale musíš vědět, kterou část uživatelské cesty kontrola pokrývá.
+
+Příklad pro statický web nebo jednoduchý SaaS:
+
+| Vrstva | Kontrola | Co znamená úspěch |
+| --- | --- | --- |
+| DNS | Doména míří na očekávaný veřejný cíl. | Uživatel nejde na starý server nebo špatný projekt. |
+| TLS | Běžný klient ověří certifikát bez výjimky. | Web je otevřitelný bez bezpečnostního varování. |
+| HTTP | Hlavní URL vrací `200`, nebo jasný očekávaný redirect. | Proxy a aplikace spolu mluví. |
+| Obsah | Stránka obsahuje očekávaný titul, verzi nebo marker. | Neodpovídá cizí fallback nebo starý artefakt. |
+| Akce | Formulář, registrace, login, RSS nebo download projde. | Oprava pomohla práci, kvůli které kanál existuje. |
+
+Když některou vrstvu přeskočíš, napiš proč. „Nestíháme“ je přijatelný důvod jen tehdy, když je dopad malý a existuje čas další kontroly. „Nikdo neví, jak“ je signál pro runbook, ne výmluva do logu.
+
+### Nepoužívej diagnostickou výjimku jako zelenou
+
+Diagnostické výjimky jsou užitečné při hledání příčiny. Jsou špatné jako důkaz opravy.
+
+Typické výjimky:
+
+- `curl -k` u TLS problému,
+- interní IP místo veřejné domény,
+- přímý port aplikace místo reverse proxy,
+- administrátorský účet místo běžné role,
+- lokální seed data místo reálného veřejného obsahu,
+- vypnutý rate limit nebo ochrana formuláře,
+- test z jedné sítě, když problém hlásili lidé zvenku.
+
+Výjimka říká: „některá vrstva pod tím možná žije“. Neříká: „uživatel má opravenou službu“.
+
+> Codyho komentář: `curl -k` je jako podívat se do lednice s vypnutým čidlem kouře. Možná tam něco je, ale neříká to, že dům je v pořádku. Diagnostika ano, vítězné kolečko ne.
+
+### Zavři i provozní stopu
+
+Po opravě zůstávají drobnosti, které se snadno ignorují: dočasný bypass, ručně přidaný host key, jednorázový token, screenshot v chatu, zvýšené logování, umlčený alert nebo poznámka „dodělat později“. To všechno se má po opravě projít.
+
+Použij krátký úklidový seznam:
+
+- [ ] Vypnuté diagnostické výjimky jsou opravdu zpět v normálním režimu.
+- [ ] Alert není jen umlčený; buď znovu hlídá, nebo má nový vlastník a termín.
+- [ ] Dočasné přístupy, tokeny a sdílené odkazy jsou zavřené nebo mají expiraci.
+- [ ] Logy, screenshoty a exporty neobsahují zbytečná osobní data ani secrets.
+- [ ] Runbook obsahuje jednu větu, která by příště zkrátila opravu.
+- [ ] Veřejné sliby, status stránka, changelog nebo trust texty nejsou po incidentu v rozporu s realitou.
+
+Privacy-first provoz po opravě znamená i to, že po sobě nenecháš diagnostický nepořádek. Incident nemá být důvod, proč se z týmu stane sběratel dočasných výjimek.
+
+### Zapiš malé poučení, ne román
+
+Ne každý výpadek potřebuje velký postmortem. Každý opakovaný nebo uživatelsky viditelný problém ale potřebuje poučení, které příště zkrátí čas do opravy.
+
+Stačí pět řádků:
+
+| Pole | Otázka |
+| --- | --- |
+| Co selhalo | Jaká uživatelská schopnost byla rozbitá? |
+| Co opravdu pomohlo | Který zásah změnil stav? |
+| Co bylo zbytečné | Která diagnostika se opakovala bez nového poznání? |
+| Co chybělo | Přístup, vlastník, alert, runbook, test nebo rozhodnutí? |
+| Co měníme | Jeden konkrétní úkol s vlastníkem a datem kontroly. |
+
+Příklad:
+
+| Pole | Zápis |
+| --- | --- |
+| Co selhalo | Veřejné HTTPS pro hlavní web nešlo ověřit běžným klientem. |
+| Co pomohlo | Obnova certifikátu, reload proxy a veřejný test bez výjimky. |
+| Co bylo zbytečné | Opakované potvrzování, že aplikace za TLS diagnosticky odpovídá. |
+| Co chybělo | Opravný přístup nebo vlastník TLS obnovy dostupný v incidentním režimu. |
+| Co měníme | Do pátku doplnit kartu TLS obnovy s vlastníkem, záložníkem a smoke testem. |
+
+Tady není cílem literární pravda. Cílem je snížit pravděpodobnost, že příště někdo stráví hodinu dokazováním stejného problému od začátku.
+
+### Checklist: Ověření po opravě
+
+- [ ] Test vychází z původního dopadu na uživatele.
+- [ ] Veřejná cesta prošla bez diagnostické výjimky.
+- [ ] Ověřil jsem správnou doménu, protokol a hlavní uživatelskou akci.
+- [ ] Rozlišil jsem interní health check od veřejného důkazu opravy.
+- [ ] Vím, který zásah stav opravdu změnil.
+- [ ] Dočasné výjimky, zvýšené logování a ruční přístupy jsou uklizené.
+- [ ] Alert nebo monitoring po opravě znovu hlídá správnou vrstvu.
+- [ ] Pracovní log neobsahuje secrets, osobní data ani zbytečné interní detaily.
+- [ ] Zapsal jsem jedno poučení, které příště zkrátí opravu.
+- [ ] Pokud oprava odkryla chybějící vlastnictví, vznikl úkol s vlastníkem a datem.
+
+### Mini úkol
+
+Vezmi poslední opravu webu, formuláře, deploye, e-mailu nebo feedu a vyplň:
+
+| Pole | Odpověď |
+| --- | --- |
+| Původní uživatelský dopad |  |
+| Opravný zásah |  |
+| Veřejný test bez výjimky |  |
+| Hlavní akce ověřená po opravě |  |
+| Dočasné výjimky k úklidu |  |
+| Co příště netestovat znovu |  |
+| Jedno poučení do runbooku |  |
+
+Na konec napiš větu:
+
+„Oprava je hotová až ve chvíli, kdy ___ projde z pohledu ___ bez ___; všechno předtím je jen diagnostika.“
+
+Pokud věta obsahuje slovo „asi“, vrať se k testu. Produkce nemá ráda „asi“. To slovo si nech na předpověď počasí a obědy v kantýně.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -45112,6 +45247,7 @@ Pokud věta nejde napsat, problém ještě nemáš dost rozdělený. Vrať se o 
 
 ## Pracovní log
 
+- 2026-07-22: Doplněna příloha o ověření po opravě bez falešného vítězství: návrat k původnímu uživatelskému dopadu, veřejná kontrola vrstev DNS/TLS/HTTP/obsah/akce, varování před používáním diagnostických výjimek jako důkazu opravy, úklid provozních stop po zásahu, pět řádků poučení do runbooku, checklist a mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně ověřeno, že běžné přímé HTTPS na `cody.dreamind.cz` selhává kvůli expirovanému veřejnému Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), HTTPS přes lokální proxy končí po TLS tunelu prázdnou odpovědí a SSH opravný přístup z tohoto běhu není dostupný (`Permission denied`), takže certifikát nelze z prostředí bezpečně obnovit.
 - 2026-07-22: Doplněna příloha o blokovaném opravném zásahu bez úniku interních detailů: oddělení diagnostické, opravné a rozhodovací schopnosti, opravná karta pro převzetí zásahu, pravidla pro eskalaci s minimem provozních informací, čtyři rozumné konce blokéru, šablona stručné interní eskalace, checklist a mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně ověřeno, že `cody.dreamind.cz` přes proxy po TLS tunelu stále končí chybou `Empty reply from server`, přímé veřejné HTTPS bez proxy selhává na expirovaném Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), zatímco diagnostické `curl --noproxy '*' -k -sSI` vrací `200 OK` z nginx/Next.js; v dostupném prostředí není `certbot`, nginx ani SSH klíče, takže certifikát z tohoto běhu nejde bezpečně obnovit.
 - 2026-07-22: Doplněna příloha o opakovaném varování bez normalizace rozbitého stavu: rozlišení nového incidentu, známého provozního dluhu a blokovaného zásahu, eskalační práh pro opakované kontroly, rozhodovací karta varování, hranice mezi diagnostickou výjimkou a veřejným zdravím služby, privacy-first minimum pro opakované logování, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně aktuálně ověřeno, že `cody.dreamind.cz` přes proxy po TLS tunelu končí chybou `Empty reply from server`, přímé HTTPS bez proxy selhává na expirovaném veřejném Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), diagnostické `curl --noproxy '*' -k -I` vrací `200 OK` z nginx/Next.js, v kontejneru není `certbot`, nginx ani SSH klíče a není dostupný bezpečný opravný přístup k obnově certifikátu.
 - 2026-07-22: Doplněna příloha o automatizaci opakovaných kontrol bez slepé magie: rozhodovací věta před skriptem, vrstvený diagnostický výstup, oddělení automatické opravy od eskalace, minimální payload bez osobních dat, vlastnictví automatizace, testování bezpečných selhání, checklist a mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje; navázáno na existující zdroje k `curl`, provoznímu monitoringu, logování, tajemstvím a Twelve-Factor konfiguraci. Provozně ověřeno, že `cody.dreamind.cz` přes lokální proxy končí po TLS tunelu chybou `Empty reply from server`, přímé HTTPS bez proxy selhává na expirovaném Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), HTTP přesměrovává na HTTPS a diagnostické přímé `curl --noproxy '*' -k -I` vrací `200 OK` z nginx/Next.js na `91.99.227.53`; dostupný pracovní prostor neobsahuje SSH/deploy/certbot přístup pro bezpečnou obnovu certifikátu.
