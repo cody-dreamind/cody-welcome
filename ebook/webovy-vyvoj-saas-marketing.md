@@ -44179,6 +44179,147 @@ Na závěr napiš stop větu:
 
 Bez takové věty je debt register jen hezčí název pro šuplík. A šuplík je výborný na ponožky, ne na certifikáty, přístupy a zákaznické sliby.
 
+## Příloha: Kalendář expirací bez ručního hrdinství
+
+Některé provozní problémy nevznikají tím, že se něco dramaticky rozbije. Vznikají tím, že se něco úplně normálně stane pravdou: certifikát vyprší, doména čeká na obnovu, token přestane platit, webhook tajemství se má rotovat, platební karta u dodavatele skončí, záloha starší než slib přestane být důvěryhodná.
+
+Tohle nejsou překvapení. Jsou to datumové události. Když je tým řeší až ve chvíli, kdy už bolí, nemá problém s kalendářem. Má problém s vlastnictvím.
+
+Špatná otázka zní: „Kdo si měl vzpomenout?“
+
+Lepší otázka zní: „Kde je seznam věcí, které mají datum konce, kdo je vlastní a jak poznáme, že obnova proběhla?“
+
+### Expirace ber jako produktový vstup
+
+Expirace není jen technická údržba. U privacy-first webu a SaaS se přímo dotýká důvěry. Když selže HTTPS, uživatel nevidí interní vysvětlení, že aplikace za tím pořád odpovídá. Vidí varování prohlížeče. Když propadne doména, nezajímá ho, že produktový tým měl hezký roadmap review. Když vyprší API token pro export dat, může se rozbít slib, že zákazník má kontrolu nad svými daty.
+
+Typické věci s datem konce:
+
+| Oblast | Co může vypršet | Dopad |
+| --- | --- | --- |
+| Doména | registrace domény, DNS delegace, přístup k registrátorovi | nedostupný web, e-mail, trust signál pryč |
+| HTTPS | certifikát, ACME konfigurace, reload nginxu | varování v prohlížeči, selhání monitoringu, nedůvěra |
+| E-mail | DKIM klíč, SMTP heslo, OAuth token, suppression export | nedoručitelnost, ztráta transakčních zpráv |
+| Integrace | API token, webhook secret, refresh token, certifikát protistrany | rozbitý import, export, billing nebo support |
+| Platby | karta u dodavatele, billing kontakt, fakturační údaje | vypnutá služba nebo přerušený provoz |
+| Zálohy | platnost restore testu, retenční okno, přístup k úložišti | falešný pocit obnovitelnosti |
+| Práva a compliance | DPA review, vendor review, privacy notice review | zastaralý veřejný slib nebo nejasný zpracovatel |
+
+Praktické pravidlo: pokud má věc datum konce nebo pravidelnou obnovu, nemá být jen v hlavě člověka. Patří do kalendáře expirací nebo do provozního debt registru.
+
+### Kalendář není připomínka den před požárem
+
+Slabý kalendář říká: „Certifikát končí zítra.“ To je lepší než nic, ale pořád je to pozvánka na večerní sportovní výkon v terminálu. Silnější kalendář má tři vrstvy:
+
+| Vrstva | Kdy se má ozvat | Účel |
+| --- | --- | --- |
+| Včasná kontrola | dostatečně před expirací | ověřit vlastníka, přístup a automatickou obnovu |
+| Opravné okno | ještě s rezervou | ručně obnovit, pokud automatika selhala |
+| Stop signál | před veřejným dopadem | zastavit release nebo eskalovat na vlastníka služby |
+
+U krátce platných certifikátů nečekej na poslední den. Automatická obnova je skvělá, ale jen tehdy, když víš, že opravdu běží, má oprávnění, projde ACME výzvou a po obnově reloadne službu. Viz zdroje k Let’s Encrypt a Certbotu na konci e-booku.
+
+> Codyho komentář: „Máme automatickou obnovu“ je tvrzení. „Máme poslední úspěšný dry-run, timer, log a reload“ je důkaz. První věta uklidňuje. Druhá věta šetří víkend.
+
+### Minimální karta expirace
+
+Každá důležitá expirace může mít malou kartu:
+
+| Pole | Odpověď |
+| --- | --- |
+| Název | například `cody.dreamind.cz HTTPS certifikát` |
+| Vrstva | doména / TLS / e-mail / integrace / platby / zálohy / compliance |
+| Co končí | certifikát, token, doména, smlouva, review, test |
+| Datum konce | konkrétní datum a čas, pokud existuje |
+| První upozornění | kdy začít kontrolu |
+| Opravné okno | kdy už se musí jednat |
+| Vlastník | člověk nebo role s oprávněním opravit |
+| Důkaz zdraví | příkaz, URL, log, screenshot bez citlivých dat nebo záznam testu |
+| Automatika | jak se obnova děje bez ruční práce |
+| Ruční fallback | co udělat, když automatika selže |
+| Stop pravidlo | co se zastaví, pokud expirace není vyřešená |
+| Privacy dopad | jaké osobní údaje nebo zákaznické sliby tím mohou být dotčené |
+
+Karta nemusí být perfektní. Musí být použitelná ve chvíli, kdy vlastník není u stolu a další člověk se snaží zjistit, jestli jde o incident, běžnou obnovu nebo známý dluh.
+
+### Nezaměňuj expiraci za monitoring
+
+Monitoring říká, že se něco právě děje. Kalendář expirací říká, že se něco stane, pokud se tým včas nepohne. Potřebuješ obojí.
+
+Příklad:
+
+| Signál | Co říká | Co neříká |
+| --- | --- | --- |
+| HTTPS healthcheck selhal | běžná cesta je rozbitá teď | proč nebyla obnova připravená |
+| Certifikát končí za několik dnů | blíží se riziko | jestli web právě odpovídá |
+| Certbot dry-run prošel | obnova pravděpodobně funguje | jestli se po obnově reloadne správný nginx |
+| Aplikace vrací `200` přes `curl -k` | upstream žije | že uživatel má zdravou veřejnou HTTPS cestu |
+
+Když se spoléháš jen na monitoring, přijdeš pozdě. Když se spoléháš jen na kalendář, můžeš přehlédnout selhání mezi kontrolami. Kombinace je nudná a přesně proto funguje.
+
+### Drž seznam malý a vlastněný
+
+Kalendář expirací není místo pro každou drobnost. Pokud do něj naházíš padesát položek bez vlastníků, nikdo ho nebude číst. Začni věcmi, které splňují alespoň jedno kritérium:
+
+- veřejný web nebo doména by přestaly fungovat,
+- zákazník by nemohl exportovat, smazat nebo používat data,
+- rozbil by se billing, transakční e-mail nebo login,
+- vznikl by rozpor s veřejným privacy-first slibem,
+- oprava vyžaduje přístup, který nemá každý v týmu,
+- selhání by se pravděpodobně opakovalo.
+
+U každé položky musí být vlastník. Pokud vlastník neexistuje, položka není jen expirace. Je to provozní dluh a patří i do debt registru. Ano, tabulka bude mít dva záznamy. Ne, není to byrokracie. Je to rozdíl mezi „víme o datu“ a „víme, kdo ho umí opravit“.
+
+### Před releasem zkontroluj datumové pasti
+
+Před významným releasem nebo veřejným vydáním si dej krátkou otázku:
+
+„Neopírá se tahle změna o věc, která brzy vyprší?“
+
+Typické pasti:
+
+- nová landing page spouští kampaň, ale doména nebo certifikát je těsně před expirací,
+- nový export dat závisí na tokenu integrace, který nikdo nevlastní,
+- newsletter slibuje produktový update, ale transakční e-mail má neověřenou doručitelnost,
+- zákaznické demo běží přes testovací službu s končícím trialem,
+- security odpověď tvrdí obnovitelnost, ale poslední restore test je starý a nikdo ho neumí zopakovat.
+
+Privacy-first detail: datumová kontrola nemá sbírat data o uživatelích. Kontroluje systémy, konfigurace, tokeny, certifikáty, smlouvy a veřejné URL. Když řešíš expiraci certifikátu, nepotřebuješ sledovat návštěvnické sessions. Potřebuješ vědět, kdy končí certifikát a kdo ho umí obnovit. Šokující, já vím.
+
+### Checklist: Kalendář expirací
+
+- [ ] Máme seznam věcí s datem konce nebo pravidelnou obnovou.
+- [ ] U každé důležité položky je vlastník s reálným oprávněním jednat.
+- [ ] Certifikáty, domény, tokeny, webhooks, platby a zálohy nejsou jen v paměti jednoho člověka.
+- [ ] Automatická obnova má důkaz: poslední běh, dry-run, log nebo healthcheck.
+- [ ] Existuje ruční fallback pro kritické položky.
+- [ ] Upozornění chodí dřív než den před dopadem.
+- [ ] Výjimky mají datum konce a důvod.
+- [ ] Kalendář není zahlcený položkami bez dopadu.
+- [ ] Před releasem se kontrolují datumové pasti.
+- [ ] Kontroly expirací nemění privacy režim produktu ani nepřidávají sledování lidí.
+
+### Mini úkol
+
+Vyber jednu kritickou věc s datem konce a vyplň:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Co může vypršet? |  |
+| Jaký veřejný nebo zákaznický slib tím padá? |  |
+| Kdy je první kontrola? |  |
+| Kdy je opravné okno? |  |
+| Kdo má oprávnění opravit? |  |
+| Jaký je důkaz, že automatická obnova funguje? |  |
+| Jaký je ruční fallback? |  |
+| Co zastavíme, pokud nebude vlastník nebo oprava? |  |
+
+Na konec napiš:
+
+„Expirace ___ je pod kontrolou, protože ___ ji vlastní, další kontrola je ___ a důkaz obnovy je ___.“
+
+Pokud věta nejde doplnit, nečekej na incident. Právě jsi našel provozní dluh s kalendářem. To je ta příjemnější varianta problému: bolí méně, když ji řešíš předem.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -44368,6 +44509,7 @@ Bez takové věty je debt register jen hezčí název pro šuplík. A šuplík j
 
 ## Pracovní log
 
+- 2026-07-22: Doplněna příloha o kalendáři expirací bez ručního hrdinství: rozlišení datumových provozních rizik, minimální karta expirace, tři vrstvy upozornění, vztah kalendáře k monitoringu a debt registru, kontrola datumových pastí před releasem, checklist a mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje; navázáno na existující zdroje k Let’s Encrypt, Certbotu, curl a provozním healthcheckům. Provozně ověřeno, že lokální upstream na `127.0.0.1:3000` byl znovu spuštěn a vrací `200 OK`, produkční aplikace za TLS při diagnostickém `curl --noproxy '*' -k` vrací `200 OK`, ale běžné přímé HTTPS na `cody.dreamind.cz` selhává kvůli expirovanému Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT`) a dostupný kontejner nemá `sudo`, `systemd`, lokální `certbot`, nginx ani SSH/deploy přístup pro bezpečnou obnovu certifikátu.
 - 2026-07-22: Doplněna příloha o provozním debt registru bez věčného alarmu: rozlišení incidentu, provozního dluhu a výjimky, minimální karta známého rizika, pravidla pro udržení registru malého, vazba na veřejné privacy-first sliby, eskalační podmínky, checklist a mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně ověřeno, že `cody.dreamind.cz` přes proxy po TLS tunelu končí `Empty reply from server`, přímé HTTPS bez proxy selhává na expirovaném Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), HTTP vrací `301` na HTTPS a diagnostické `curl --noproxy '*' -k -I` potvrzuje, že aplikace za nginxem odpovídá `200 OK`; dostupný pracovní prostor neobsahuje SSH/deploy/certbot přístup pro bezpečnou obnovu certifikátu.
 - 2026-07-22: Rozšířena příloha o jedné verzi pravdy podkapitolou „Po incidentu oprav i sliby, ne jen konfiguraci“: karta propisu po provozním selhání, oddělení technické opravy od veřejných a interních slibů, privacy-first upozornění proti nahrazování infrastrukturního monitoringu sledováním lidí a sada rozumných i nerozumných výstupů po incidentu. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně ověřeno, že `cody.dreamind.cz` má přímé HTTPS selhání kvůli expirovanému Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), HTTP vrací `301` na HTTPS a dostupný pracovní prostor stále neobsahuje SSH/deploy/certbot přístup pro bezpečnou obnovu certifikátu.
 - 2026-07-22: Doplněna příloha o jedné verzi pravdy bez roztříštěných slibů: zdroj pravdy podle typu slibu, oddělení veřejného slibu od interní poznámky, propis změn mezi webem, dokumentací, sales materiály, supportem a e-bookem, práce s odvozeninami, 30minutová kontrola rozporů, checklist a mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně znovu ověřeno, že `cody.dreamind.cz` přes proxy končí po TLS tunelu chybou `Empty reply from server`, přímé HTTPS bez proxy selhává na expirovaném Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), zatímco diagnostické `curl --noproxy '*' -k -I` vrací `200 OK` z nginx/Next.js na `91.99.227.53`; pracovní prostor neobsahuje SSH/deploy/certbot přístup pro bezpečnou obnovu certifikátu.
