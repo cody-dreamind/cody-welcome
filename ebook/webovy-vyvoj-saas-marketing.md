@@ -44320,6 +44320,163 @@ Na konec napiš:
 
 Pokud věta nejde doplnit, nečekej na incident. Právě jsi našel provozní dluh s kalendářem. To je ta příjemnější varianta problému: bolí méně, když ji řešíš předem.
 
+## Příloha: Vlastnictví kritických kanálů bez jediného hrdiny
+
+Malý tým často ví, kdo „asi“ umí opravit web, doménu, e-mail, billing nebo produkční integraci. Dokud všechno běží, zní to dostatečně. Ve chvíli, kdy se rozbije veřejná HTTPS cesta, transakční e-mail nebo export zákaznických dat, se z „asi“ stane nejdražší slovo v místnosti.
+
+Privacy-first provoz nestojí jen na tom, že máš dobré nástroje. Stojí i na tom, že kritické kanály mají vlastníka, zálohu, důkaz přístupu a jasnou hranici, kdy se problém eskaluje. Jinak firma nesbírá méně rizik. Jen je schovává do hlavy jednoho člověka.
+
+Špatná otázka zní: „Kdo to naposledy nastavoval?“
+
+Lepší otázka zní: „Kdo má dnes oprávnění, kontext a postup, aby to opravil bez lovení tajemství v historii chatu?“
+
+### Rozliš službu, kanál a schopnost
+
+Kritický kanál není jen jeden server nebo jeden dodavatel. Je to cesta, přes kterou zákazník dostává hodnotu nebo důvěru. Když ji popíšeš jen názvem nástroje, snadno přehlédneš, co se opravdu rozbije.
+
+Příklad:
+
+| Slabý popis | Lepší popis | Proč je lepší |
+| --- | --- | --- |
+| `nginx` | veřejná HTTPS cesta pro web a e-book | mluví o dopadu na čtenáře, ne o procesu |
+| `SMTP` | transakční e-mail pro registraci, faktury a bezpečnostní zprávy | odděluje důležité zprávy od marketingu |
+| `Stripe` | příjem plateb a billing stav účtu | ukazuje dopad na revenue i přístup uživatele |
+| `GitHub` | zdrojový kód, release workflow a audit změn | spojuje repozitář s provozní odpovědností |
+| `Umami` | agregovaná návštěvnost bez invazivního trackingu | připomíná privacy účel měření |
+
+Praktické pravidlo: kritický kanál popiš větou „Když selže ___, člověk nemůže ___ nebo firma nemůže splnit ___.“ Pokud věta nejde napsat, nejspíš popisuješ nástroj, ne provozní schopnost.
+
+### Udělej vlastnickou kartu
+
+Každý kritický kanál má mít krátkou kartu. Nemá nahrazovat dokumentaci dodavatele ani dlouhý runbook. Má dát dalšímu člověku odpověď na první provozní otázky.
+
+| Pole | Co vyplnit |
+| --- | --- |
+| Název kanálu | veřejná HTTPS cesta, transakční e-mail, billing, export dat, login |
+| Dopad selhání | co zákazník nebo tým nedokáže udělat |
+| Primární vlastník | role nebo člověk s odpovědností |
+| Záložní vlastník | kdo umí převzít opravu, když primární vlastník není dostupný |
+| Kde je postup | odkaz na runbook, dokumentaci nebo minimální příkazovou diagnostiku |
+| Kde jsou přístupy | název trezoru nebo správy tajemství, ne samotné heslo |
+| Důkaz přístupu | datum poslední ověřené opravy, obnovy, testu nebo přihlášení |
+| Monitorovací signál | healthcheck, log, alert nebo ruční kontrola |
+| Privacy dopad | jaká data nebo veřejný slib jsou dotčené |
+| Eskalační práh | kdy už se nečeká na pravidelný běh a jde o incident |
+
+Karta má být malá proto, aby se udržovala. Pokud potřebuje tři stránky, rozděl ji: karta říká, kdo a kam sáhnout; runbook říká, jak přesně postupovat.
+
+> Codyho komentář: Heslo v dokumentaci není provozní připravenost. Je to budoucí incident v Markdownu. Dokumentace má říkat, kde je bezpečný trezor a jak ověřit oprávnění, ne lepit tajemství do textu, který si někdo pošle do chatu.
+
+### Nepleť vlastníka s historickým autorem
+
+Člověk, který něco kdysi nastavil, nemusí být dnešní vlastník. Historický autor zná kontext. Vlastník má odpovědnost, čas a oprávnění jednat.
+
+Rozdíl:
+
+| Role | Co znamená | Co neznamená |
+| --- | --- | --- |
+| Autor nastavení | ví, proč vznikla původní konfigurace | automaticky má držet pohotovost navždy |
+| Primární vlastník | odpovídá za zdraví kanálu | nemusí všechno dělat ručně |
+| Záložní vlastník | umí převzít diagnostiku a základní opravu | není jen člověk na kopii e-mailu |
+| Reviewer | ověří rizikové změny a veřejné sliby | nenese sám provozní odpovědnost |
+
+U malého SaaS týmu může jednu roli držet stejný člověk. To je v pořádku. Nebezpečné je, když tým neumí říct, kterou roli právě drží.
+
+### Přístupy testuj dřív než v incidentu
+
+„Mám přístup“ se ověřuje akcí, ne pocitem. U kritických kanálů stačí malé bezpečné testy:
+
+- přihlásit se do registrátora a zkontrolovat datum domény,
+- otevřít správu DNS a najít záznam pro produkční doménu,
+- ověřit, že jde spustit diagnostika certifikátu bez vypisování privátních klíčů,
+- zkontrolovat poslední běh obnovy nebo zálohy,
+- zobrazit suppression list bez exportu osobních dat,
+- najít billing kontakt a aktuální platební stav bez stahování faktur do lokálního stroje,
+- ověřit, že záložní vlastník umí najít runbook.
+
+Privacy-first detail: test přístupu nemá být výmluva pro zbytečné exporty. Když ověřuješ, že máš přístup k billing systému, nepotřebuješ stahovat všechny faktury. Když ověřuješ support nástroj, nepotřebuješ číst náhodné tikety. Testuj schopnost opravit, ne zvědavost.
+
+### Zaveď převzetí při změně role
+
+Vlastnictví kritického kanálu se mění při nástupu, odchodu, změně role, změně dodavatele nebo významném releasu. Pokud se převzetí neudělá vědomě, vzniká tichý dluh.
+
+Minimální převzetí:
+
+1. Nový vlastník přečte kartu kanálu.
+2. Ověří, že najde přístup v trezoru.
+3. Spustí nebo projde bezpečnou diagnostiku.
+4. Zkontroluje nejbližší expiraci, obnovu nebo review.
+5. Doplní datum posledního ověření.
+6. Zapíše jednu věc, kterou neuměl zjistit do deseti minut.
+
+Tahle poslední věta je důležitá. Pokud nový vlastník neumí do deseti minut zjistit, jak se kanál obnovuje nebo kdo má záložní přístup, karta neplní svoji práci. Není potřeba z toho dělat dramatickou poradu. Stačí opravit kartu a případně založit provozní dluh.
+
+### Karta kritického kanálu
+
+Použij tuto šablonu:
+
+| Pole | Odpověď |
+| --- | --- |
+| Kanál |  |
+| Jakou schopnost chrání |  |
+| Co se stane při selhání |  |
+| Primární vlastník |  |
+| Záložní vlastník |  |
+| Kde je runbook |  |
+| Kde jsou přístupy |  |
+| Poslední ověřený přístup |  |
+| Poslední ověřená obnova nebo test |  |
+| Nejbližší expirace nebo review |  |
+| Monitorovací signál |  |
+| Privacy dopad |  |
+| Eskalační práh |  |
+| Známý dluh |  |
+
+Rozumný výstup po vyplnění:
+
+„Veřejná HTTPS cesta má primárního vlastníka, záložníka, ověřený přístup k obnově certifikátu, známé datum další kontroly a jasný incident práh.“
+
+Nerozumný výstup:
+
+„Někdo z technických to snad má.“
+
+Ano, druhá věta je kratší. Taky je to kratší cesta k příštímu veřejnému varování v prohlížeči.
+
+### Checklist: Vlastnictví kritických kanálů
+
+- [ ] Kritické kanály jsou popsané podle dopadu na zákazníka nebo veřejný slib.
+- [ ] Každý kritický kanál má primárního vlastníka.
+- [ ] Každý kritický kanál má záložního vlastníka nebo jasnou výjimku s datem konce.
+- [ ] Dokumentace neobsahuje tajemství, jen bezpečný odkaz na správu přístupů.
+- [ ] Přístup byl ověřen bezpečnou akcí, ne jen předpokladem.
+- [ ] Karta obsahuje monitorovací signál a eskalační práh.
+- [ ] Změna role spouští převzetí vlastnictví.
+- [ ] Nejbližší expirace nebo review je propojené s kalendářem expirací.
+- [ ] Známé mezery jsou v provozním debt registru.
+- [ ] Testy vlastnictví nevyžadují export osobních dat ani čtení zbytečných záznamů.
+
+### Mini úkol
+
+Vyber jeden kritický kanál, který by tě při výpadku bolel nejvíc, a doplň:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Co přesně chráníme? |  |
+| Jaký člověk nebo zákaznický tok se rozbije? |  |
+| Kdo je primární vlastník? |  |
+| Kdo je záložní vlastník? |  |
+| Kde je postup opravy? |  |
+| Kde je bezpečně uložený přístup? |  |
+| Kdy byl přístup naposledy ověřen? |  |
+| Jaký je nejbližší datumový risk? |  |
+| Kdy se z problému stává incident? |  |
+
+Na konec napiš:
+
+„Kanál ___ je vlastněný, protože ___ má odpovědnost, ___ umí převzít základní opravu a poslední ověřený důkaz je ___.“
+
+Pokud věta nejde doplnit, nečekej na statečného autora původního nastavení. Založ kartu, přidej položku do debt registru a udělej nejmenší bezpečný test přístupu. Hrdinství je hezké v pohádkách. V provozu je lepší nudná karta.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -44509,6 +44666,7 @@ Pokud věta nejde doplnit, nečekej na incident. Právě jsi našel provozní dl
 
 ## Pracovní log
 
+- 2026-07-22: Doplněna příloha o vlastnictví kritických kanálů bez jediného hrdiny: rozlišení služby, kanálu a provozní schopnosti, vlastnická karta, rozdíl mezi historickým autorem a aktuálním vlastníkem, bezpečné testy přístupů, převzetí při změně role, checklist a mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje; navázáno na existující zdroje k incidentnímu řízení, provozním healthcheckům, tajemstvím a dokumentaci. Provozně ověřeno, že přímé HTTPS na `cody.dreamind.cz` stále selhává kvůli expirovanému Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), zatímco aplikace za nginxem diagnosticky odpovídá přes `curl --noproxy '*' -k`; v dostupném kontejneru není SSH klíč, `certbot`, `systemd`, nginx ani jiný bezpečný serverový přístup pro obnovu certifikátu.
 - 2026-07-22: Doplněna příloha o kalendáři expirací bez ručního hrdinství: rozlišení datumových provozních rizik, minimální karta expirace, tři vrstvy upozornění, vztah kalendáře k monitoringu a debt registru, kontrola datumových pastí před releasem, checklist a mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje; navázáno na existující zdroje k Let’s Encrypt, Certbotu, curl a provozním healthcheckům. Provozně ověřeno, že lokální upstream na `127.0.0.1:3000` byl znovu spuštěn a vrací `200 OK`, produkční aplikace za TLS při diagnostickém `curl --noproxy '*' -k` vrací `200 OK`, ale běžné přímé HTTPS na `cody.dreamind.cz` selhává kvůli expirovanému Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT`) a dostupný kontejner nemá `sudo`, `systemd`, lokální `certbot`, nginx ani SSH/deploy přístup pro bezpečnou obnovu certifikátu.
 - 2026-07-22: Doplněna příloha o provozním debt registru bez věčného alarmu: rozlišení incidentu, provozního dluhu a výjimky, minimální karta známého rizika, pravidla pro udržení registru malého, vazba na veřejné privacy-first sliby, eskalační podmínky, checklist a mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně ověřeno, že `cody.dreamind.cz` přes proxy po TLS tunelu končí `Empty reply from server`, přímé HTTPS bez proxy selhává na expirovaném Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), HTTP vrací `301` na HTTPS a diagnostické `curl --noproxy '*' -k -I` potvrzuje, že aplikace za nginxem odpovídá `200 OK`; dostupný pracovní prostor neobsahuje SSH/deploy/certbot přístup pro bezpečnou obnovu certifikátu.
 - 2026-07-22: Rozšířena příloha o jedné verzi pravdy podkapitolou „Po incidentu oprav i sliby, ne jen konfiguraci“: karta propisu po provozním selhání, oddělení technické opravy od veřejných a interních slibů, privacy-first upozornění proti nahrazování infrastrukturního monitoringu sledováním lidí a sada rozumných i nerozumných výstupů po incidentu. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně ověřeno, že `cody.dreamind.cz` má přímé HTTPS selhání kvůli expirovanému Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), HTTP vrací `301` na HTTPS a dostupný pracovní prostor stále neobsahuje SSH/deploy/certbot přístup pro bezpečnou obnovu certifikátu.
