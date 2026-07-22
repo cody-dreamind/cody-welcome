@@ -44638,6 +44638,136 @@ Na závěr napiš jednu větu pro backlog:
 
 Pokud věta nejde napsat, nezačínej cronem. Začni tím, že pojmenuješ rozhodnutí. Automatizovaný chaos je pořád chaos, jen má pravidelný rozvrh a hezčí JSON.
 
+## Příloha: Opakované varování bez normalizace rozbitého stavu
+
+Opakované varování má zvláštní nebezpečí: po pár bězích začne vypadat jako běžná součást provozu. První selhání vyvolá pozornost. Druhé potvrzuje, že problém není náhoda. Páté už snadno skončí větou „to víme“. A přesně tam se provoz potichu láme.
+
+Když kontrola každou hodinu hlásí stejný problém a tým ho neumí opravit v daném prostředí, výstup už nemá být další identická diagnostika. Má vzniknout rozhodnutí: kdo má opravný přístup, jaký je dopad, kdy se problém eskaluje a co se mezitím nesmí vydávat jako zelený stav.
+
+Tohle není výzva k panice. Je to obrana proti tomu, aby se rozbitý veřejný kanál stal normou jen proto, že o něm víme dlouho.
+
+### Rozliš nový incident, známý dluh a blokovaný zásah
+
+Každé opakované varování zařaď do jedné ze tří přihrádek:
+
+| Stav | Co znamená | Typická akce |
+| --- | --- | --- |
+| Nový incident | Selhání se objevilo poprvé nebo změnilo dopad. | Diagnostika, obnova služby, incidentní zápis. |
+| Známý provozní dluh | Problém je pochopený, má vlastníka a existuje plán opravy. | Práce podle debt registru, kontrola termínu a dopadu. |
+| Blokovaný zásah | Diagnóza je jasná, ale chybí bezpečný přístup, oprávnění nebo vlastník. | Eskalace vlastnictví, nikoli další technické kroužení. |
+
+Nejhorší je čtvrtý neoficiální stav: „víme o tom, ale nikde to nežije“. Tam nevzniká ani oprava, ani vědomé riziko. Jen se zvyšuje tolerance k rozbitému slibu.
+
+Praktický příklad: veřejný web neprojde běžným HTTPS ověřením, ale aplikace za certifikátem odpovídá při diagnostickém testu bez ověření certifikátu. Technicky je dobré vědět, že backend není mrtvý. Produktově ale pořád platí, že běžný návštěvník bezpečně nedostane veřejný obsah. To není zelený stav. Je to známý incident nebo blokovaný zásah podle toho, jestli existuje opravný přístup.
+
+### Zaveď eskalační práh
+
+Varování bez eskalačního prahu se časem stane hlukem. U každé kritické kontroly proto napiš, kdy přestává stačit lokální oprava a kdy se musí řešit vlastnictví.
+
+Jednoduchý práh může vypadat takhle:
+
+| Signál | První běh | Druhý běh | Třetí běh nebo 24 hodin |
+| --- | --- | --- | --- |
+| Veřejné HTTPS selže | rozlišit DNS, TCP, TLS a HTTP | ověřit opravný přístup a vlastníka | eskalovat jako blokovaný zásah, pokud oprava není proveditelná |
+| Certifikát expiruje brzy | ověřit renewal mechanismus | provést suchý běh nebo doložit poslední úspěch | otevřít incidentní přípravu, pokud není důkaz obnovy |
+| Formulář neodešle test | přepnout test na známý bezpečný vstup | ověřit e-mail/backend/frontu | zveřejnit náhradní kontakt, pokud zákaznická cesta stojí |
+| RSS feed selže | ověřit build artefakt | zastavit distribuci nové položky | opravit feed nebo přesunout odběr na dočasný přímý odkaz |
+
+Práh nemá trestat tým. Má zabránit tomu, aby se z opakované chyby stala tapeta. Jakmile kontrola selže opakovaně se stejnou třídou, další běh má dokazovat posun: nový vlastník, opravený přístup, jasnější dopad, otevřený úkol nebo vědomé dočasné omezení.
+
+> Codyho komentář: „Pořád to padá stejně“ není stabilita. Je to jen konzistentní problém s dobrou docházkou.
+
+### Zapiš rozhodnutí, ne jen výsledek testu
+
+Pro opakované varování nestačí logovat poslední status. Potřebuješ krátký rozhodovací zápis, který další člověk pochopí za minutu.
+
+Použij kartu:
+
+| Pole | Příklad |
+| --- | --- |
+| Varování | Veřejné HTTPS neprojde běžným ověřením. |
+| První zjištění | 2026-07-22 14:01 UTC. |
+| Aktuální třída | `tls_certificate_expired`. |
+| Dopad na člověka | Běžný návštěvník nemusí bezpečně otevřít web. |
+| Co víme | DNS míří na očekávanou IP, aplikace odpovídá při diagnostickém testu bez ověření TLS. |
+| Co nevíme | Kdo má bezpečný opravný přístup k renewal/reload vrstvě. |
+| Co neděláme | Nevydáváme diagnostický `curl -k` za veřejné zdraví služby. |
+| Další krok | Doložit vlastníka TLS obnovy nebo zřídit omezený opravný přístup. |
+| Eskalační práh | Pokud další běh potvrdí stejný stav bez opravného přístupu, nejde o technickou diagnostiku, ale o vlastnický blokér. |
+
+Tahle karta může být v incident logu, debt registru nebo runbooku. Důležité je, aby se další běh nemusel tvářit, že problém vidí poprvé. Opakovaná práce má navazovat, ne resetovat paměť.
+
+### Nepřepisuj veřejný slib podle diagnostické výjimky
+
+Diagnostická výjimka je užitečný nástroj. Pomáhá zjistit, jestli za rozbitou veřejnou vrstvou ještě žije aplikace, obsah nebo upstream. Nesmí se z ní ale stát náhradní definice dostupnosti.
+
+U webu nebo SaaS rozliš:
+
+- běžný uživatelský pohled: čistý prohlížeč, platný certifikát, bez zvláštních výjimek,
+- provozní diagnostiku: cílené příkazy, vrstvené testy, někdy i dočasné ignorování certifikátu,
+- interní schopnost obnovy: přístup, runbook a právo provést opravný zásah.
+
+Pokud funguje jen druhá vrstva, veřejný slib není splněný. Můžeš pokračovat v obsahové práci, ale nesmíš si namluvit, že kanál je opravený. Privacy-first důvěra stojí i na tom, že interně nelakuješ stav na zeleno.
+
+### Udělej opakování levnější a přesnější
+
+Když se varování opakuje, další běh nemá ukládat víc dat. Má ukládat přesnější rozhodovací minimum.
+
+Stačí:
+
+- čas kontroly,
+- třída selhání,
+- zda se třída změnila,
+- poslední známý důkaz,
+- vlastník nebo blokér vlastnictví,
+- další krok.
+
+Naopak neukládej:
+
+- celé HTML odpovědi,
+- cookies,
+- přístupové hlavičky,
+- screenshoty z administrace,
+- osobní údaje z formulářů,
+- surové logy bez redakce.
+
+Opakovaný incident nesmí být záminka pro datové přejídání. Když nevíš, kdo má přístup k obnově certifikátu, nepomůže ti uložit deset dalších odpovědí z webu. Pomůže ti najít vlastníka.
+
+### Checklist: Opakované varování
+
+- [ ] Umím říct, zda jde o nový incident, známý dluh nebo blokovaný zásah.
+- [ ] Varování má eskalační práh podle počtu opakování nebo času.
+- [ ] Další běh navazuje na předchozí zjištění, nezačíná od nuly.
+- [ ] Diagnostická výjimka není označená jako produkční zdraví.
+- [ ] Existuje karta s dopadem na člověka, ne jen technický status.
+- [ ] Je jasné, kdo má opravný přístup nebo kdo ho musí zřídit.
+- [ ] Pokud oprava nejde provést, vznikl vlastnický úkol, ne jen další log.
+- [ ] Alert neobsahuje tajemství, osobní údaje ani celé produkční odpovědi.
+- [ ] Pracovní log popisuje posun nebo blokér, ne jen kopii stejné chyby.
+- [ ] Veřejný slib webu odpovídá běžnému uživatelskému pohledu.
+
+### Mini úkol
+
+Vyber jedno opakované varování a doplň:
+
+| Pole | Odpověď |
+| --- | --- |
+| Jaké varování se opakuje |  |
+| Kolikrát nebo jak dlouho se opakuje |  |
+| Je to incident, dluh nebo blokovaný zásah |  |
+| Jaký je dopad na běžného uživatele |  |
+| Co už víme jistě |  |
+| Co pořád nevíme |  |
+| Kdo má opravný přístup |  |
+| Kdy se eskaluje |  |
+| Jaký bude další důkaz posunu |  |
+
+Na konec napiš jednu pracovní větu:
+
+„Pokud se ___ zopakuje ještě ___, přestáváme dělat další diagnostiku a řešíme ___, protože dopad na uživatele je ___.“
+
+Když věta zní nepříjemně konkrétně, pravděpodobně je dobrá. Provoz nepotřebuje další mlhu. Mlhy už máme dost, stačí otevřít libovolný enterprise status page při incidentu a člověk by mohl krájet metafory nožem.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -44827,6 +44957,7 @@ Pokud věta nejde napsat, nezačínej cronem. Začni tím, že pojmenuješ rozho
 
 ## Pracovní log
 
+- 2026-07-22: Doplněna příloha o opakovaném varování bez normalizace rozbitého stavu: rozlišení nového incidentu, známého provozního dluhu a blokovaného zásahu, eskalační práh pro opakované kontroly, rozhodovací karta varování, hranice mezi diagnostickou výjimkou a veřejným zdravím služby, privacy-first minimum pro opakované logování, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně aktuálně ověřeno, že `cody.dreamind.cz` přes proxy po TLS tunelu končí chybou `Empty reply from server`, přímé HTTPS bez proxy selhává na expirovaném veřejném Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), diagnostické `curl --noproxy '*' -k -I` vrací `200 OK` z nginx/Next.js, v kontejneru není `certbot`, nginx ani SSH klíče a není dostupný bezpečný opravný přístup k obnově certifikátu.
 - 2026-07-22: Doplněna příloha o automatizaci opakovaných kontrol bez slepé magie: rozhodovací věta před skriptem, vrstvený diagnostický výstup, oddělení automatické opravy od eskalace, minimální payload bez osobních dat, vlastnictví automatizace, testování bezpečných selhání, checklist a mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje; navázáno na existující zdroje k `curl`, provoznímu monitoringu, logování, tajemstvím a Twelve-Factor konfiguraci. Provozně ověřeno, že `cody.dreamind.cz` přes lokální proxy končí po TLS tunelu chybou `Empty reply from server`, přímé HTTPS bez proxy selhává na expirovaném Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), HTTP přesměrovává na HTTPS a diagnostické přímé `curl --noproxy '*' -k -I` vrací `200 OK` z nginx/Next.js na `91.99.227.53`; dostupný pracovní prostor neobsahuje SSH/deploy/certbot přístup pro bezpečnou obnovu certifikátu.
 - 2026-07-22: Doplněna příloha o vlastnictví kritických kanálů bez jediného hrdiny: rozlišení služby, kanálu a provozní schopnosti, vlastnická karta, rozdíl mezi historickým autorem a aktuálním vlastníkem, bezpečné testy přístupů, převzetí při změně role, checklist a mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje; navázáno na existující zdroje k incidentnímu řízení, provozním healthcheckům, tajemstvím a dokumentaci. Provozně ověřeno, že přímé HTTPS na `cody.dreamind.cz` stále selhává kvůli expirovanému Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), zatímco aplikace za nginxem diagnosticky odpovídá přes `curl --noproxy '*' -k`; v dostupném kontejneru není SSH klíč, `certbot`, `systemd`, nginx ani jiný bezpečný serverový přístup pro obnovu certifikátu.
 - 2026-07-22: Doplněna příloha o kalendáři expirací bez ručního hrdinství: rozlišení datumových provozních rizik, minimální karta expirace, tři vrstvy upozornění, vztah kalendáře k monitoringu a debt registru, kontrola datumových pastí před releasem, checklist a mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje; navázáno na existující zdroje k Let’s Encrypt, Certbotu, curl a provozním healthcheckům. Provozně ověřeno, že lokální upstream na `127.0.0.1:3000` byl znovu spuštěn a vrací `200 OK`, produkční aplikace za TLS při diagnostickém `curl --noproxy '*' -k` vrací `200 OK`, ale běžné přímé HTTPS na `cody.dreamind.cz` selhává kvůli expirovanému Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT`) a dostupný kontejner nemá `sudo`, `systemd`, lokální `certbot`, nginx ani SSH/deploy přístup pro bezpečnou obnovu certifikátu.
