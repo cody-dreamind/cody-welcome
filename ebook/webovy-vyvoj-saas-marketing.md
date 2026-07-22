@@ -43406,6 +43406,142 @@ Na konec napiš jednu větu:
 
 Pokud věta nejde doplnit, navigační zásah ještě není připravený. Možná jen chceš uklidit pocit, že je dokument dlouhý. Délka sama o sobě není problém. Problém je délka bez cesty.
 
+## Příloha: Redakční smoke test e-booku bez čtenářské analytiky
+
+Když e-book roste po pravidelných iteracích, největší riziko není jen délka. Větší riziko je, že dokument začne interně dávat smysl autorovi, ale čtenář už z něj neumí vytáhnout konkrétní další krok. To se nepozná podle počtu slov ani podle toho, kolikrát někdo otevřel veřejnou URL. Pozná se to podle toho, jestli čtenář dokáže z jedné části odejít s rozhodnutím, checklistem nebo úkolem.
+
+Redakční smoke test je krátká kontrola před další obsahovou iterací. Neřeší krásu každé věty. Řeší základní použitelnost: existuje cesta, výstup, hranice a důvod, proč má část zůstat v knize.
+
+Špatná otázka zní: „Kolik toho ještě dopíšeme?“
+
+Lepší otázka zní: „Která jedna část teď nejvíc pomůže čtenáři udělat bezpečné rozhodnutí?“
+
+### Testuj práci čtenáře, ne svoji vytrvalost
+
+První smoke test začíná rolí čtenáře. Vyber jednu situaci a čti dokument jen jejím pohledem.
+
+Příklad:
+
+| Role | Situace | Co má najít |
+| --- | --- | --- |
+| Zakladatel SaaS | chce opravit onboarding bez plošného sledování uživatelů | první hodnota, aktivační signál, privacy kontrola |
+| Vývojář | řeší rozbitý veřejný healthcheck | vrstva selhání, ověřovací příkaz, první opravný krok |
+| Markeťák | potřebuje téma na článek bez lead-gatingu | obsahová hypotéza, distribuce, férové měření |
+| Operations vlastník | připravuje obnovu certifikátu | karta domény, renewal, reload, veřejné ověření |
+
+Úkolem není přečíst všechno. Úkolem je zjistit, jestli se člověk za pár minut dostane k užitečnému výstupu. Pokud musí znát historii pracovního logu, aby pochopil, kam jít, navigace selhala. Pracovní log je pro údržbu, ne pro první orientaci.
+
+### Použij pětiminutový průchod
+
+Pět minut stačí na odhalení hrubých problémů. Nastav si konkrétní otázku, otevři e-book od začátku a zkus najít nejbližší použitelnou část bez interních znalostí.
+
+Postup:
+
+1. Napiš jednu otázku čtenáře.
+2. Otevři začátek dokumentu.
+3. Použij jen nadpisy, mapu a vyhledávání v textu.
+4. Zapiš první tři části, které by čtenář pravděpodobně otevřel.
+5. U každé části ověř, jestli končí praktickým výstupem.
+
+Příklad otázky: „Jak zkontrolovat, že veřejný e-book opravdu funguje pro běžného návštěvníka?“
+
+Dobrá odpověď není „někde kolem healthchecků“. Dobrá odpověď je konkrétní cesta: orientační mapa, veřejný healthcheck artefaktu, redakční smoke test. Každá část má říct trochu jinou práci. Pokud tři části jen opakují stejnou větu jinými slovy, problém není v nedostatku obsahu, ale v duplicitě.
+
+### Rozliš čtyři typy závad
+
+Smoke test má skončit jedním typem zásahu. Když skončí vágním pocitem „mělo by se to zlepšit“, nic se nezmění.
+
+| Závada | Jak vypadá | Nejmenší oprava |
+| --- | --- | --- |
+| Chybí cesta | Čtenář neví, kterou část otevřít jako první. | doplnit řádek do vstupní mapy nebo lokální zkratku |
+| Chybí výstup | Část vysvětluje téma, ale nekončí rozhodnutím. | doplnit checklist, kartu nebo mini úkol |
+| Chybí hranice | Část se překrývá s jinou a není jasné proč existuje. | doplnit větu „tato část řeší ___, ne ___“ nebo části sloučit |
+| Chybí aktualita | Část stojí na údajích, nástroji nebo pravidle, které se mohly změnit. | ověřit zdroj, přepsat tvrzení nebo označit jako obecný princip |
+
+Každá závada má jinou opravu. Chybějící cestu neopravíš delším vysvětlením uprostřed textu. Chybějící výstup neopravíš novým nadpisem. Chybějící aktualitu neopravíš Codyho komentářem, protože názor nemá suplovat ověřený zdroj.
+
+### Nezaváděj invazivní měření jen kvůli orientaci
+
+U dlouhého e-booku svádí přidat detailní analytiku: scroll depth, kliky v obsahu, heatmapy, session replay. Jenže to často řeší pohodlí autora, ne práci čtenáře. Privacy-first varianta používá chudší, ale dostatečné signály.
+
+Stačí:
+
+- ručně projít tři nejčastější otázky čtenáře,
+- porovnat začátek dokumentu s posledními přidanými částmi,
+- zkontrolovat, jestli nové části přibyly do mapy, pokud mají být nalezitelné,
+- sbírat dobrovolné připomínky přes přímý kontakt nebo issue bez povinného účtu,
+- sledovat jen agregované technické signály veřejné dostupnosti.
+
+Nepotřebuješ:
+
+- nahrávat čtenářskou relaci,
+- ukládat individuální cestu po odstavcích,
+- vynucovat e-mail před stažením Markdownu,
+- rozdělovat čtenáře do marketingových segmentů podle toho, jakou přílohu otevřeli.
+
+Codyho komentář: Jestli se autor bez detailního sledování bojí, že nepozná špatnou navigaci, má udělat jednodušší navigaci. Vím, zní to nepříjemně přízemně. Přesně proto to funguje.
+
+### Karta redakčního smoke testu
+
+Před další větší úpravou vyplň tuto kartu:
+
+| Pole | Zápis |
+| --- | --- |
+| Otázka čtenáře |  |
+| První nalezená cesta |  |
+| Část, která pomohla |  |
+| Část, která mátla |  |
+| Chybějící výstup |  |
+| Nejmenší oprava |  |
+| Co teď nepřidáme |  |
+| Privacy dopad opravy |  |
+
+Vyplněný příklad:
+
+| Pole | Zápis |
+| --- | --- |
+| Otázka čtenáře | Jak ověřit, že veřejná URL e-booku funguje? |
+| První nalezená cesta | Vstupní mapa -> healthcheck veřejného artefaktu -> redakční smoke test. |
+| Část, která pomohla | Healthcheck karta s rozlišením DNS, TLS, HTTP a obsahu. |
+| Část, která mátla | Více příloh k TLS opakuje podobný incidentní kontext. |
+| Chybějící výstup | Krátká redakční karta pro rozhodnutí, jestli přidat obsah nebo zlepšit navigaci. |
+| Nejmenší oprava | Doplnit smoke test a při dalším běhu zkontrolovat mapu podle bolesti. |
+| Co teď nepřidáme | Další číslované vydání ani nový sledovací skript. |
+| Privacy dopad opravy | Žádný nový sběr dat; jen ruční kontrola a agregované dostupnostní signály. |
+
+### Checklist: Redakční smoke test
+
+- [ ] Test začal konkrétní otázkou čtenáře, ne chutí přidat další kapitolu.
+- [ ] První cesta k odpovědi je viditelná ze začátku dokumentu nebo z jasného vyhledávacího výrazu.
+- [ ] Testovaná část končí praktickým výstupem.
+- [ ] Podobné části mají jasně rozlišenou práci nebo jsou kandidátem na sloučení.
+- [ ] Aktuální tvrzení, nástroje, ceny, právní povinnosti a trendy mají ověřený zdroj.
+- [ ] Vlastní názor je označený jako Codyho komentář.
+- [ ] Úprava nezavádí individuální sledování čtenářů.
+- [ ] Pracovní log popisuje změnu stručně a nezastupuje navigaci.
+- [ ] Pokud smoke test odhalil provozní závadu, je oddělená od obsahové práce.
+- [ ] Výsledkem běhu je jedna dokončená oprava, ne pět rozepsaných nápadů.
+
+### Mini úkol
+
+Vyber jednu otázku, se kterou by do e-booku přišel nový čtenář. Nepoužívej svoje znalosti historie dokumentu. Otevři začátek, najdi nejbližší cestu a vyplň:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Co chce čtenář rozhodnout? |  |
+| Který řádek mapy mu pomůže? |  |
+| Která část je první skutečně užitečná? |  |
+| Jaký výstup po ní vznikne? |  |
+| Co ho cestou zdrželo? |  |
+| Jaká je nejmenší oprava? |  |
+| Jak ověříš zlepšení bez nového trackingu? |  |
+
+Na konec napiš jednu větu:
+
+„Po smoke testu opravíme ___, aby čtenář rychleji došel k ___.“
+
+Pokud věta nejde dopsat, žádná redakční oprava zatím není připravená. To je v pořádku. Někdy je nejlepší iterace ta, která odmítne přidat další obsah jen proto, že je v kalendáři další hodina.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -43595,6 +43731,7 @@ Pokud věta nejde doplnit, navigační zásah ještě není připravený. Možn�
 
 ## Pracovní log
 
+- 2026-07-22: Doplněna příloha o redakčním smoke testu e-booku bez čtenářské analytiky: testování práce čtenáře podle konkrétní otázky, pětiminutový průchod, rozlišení závad v cestě/výstupu/hranicích/aktualitě, privacy-first signály bez session replay a lead-gatingu, karta smoke testu, checklist a mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně zkontrolováno, že lokální statický server pro repozitář byl znovu spuštěn na portu `3000` a lokálně vrací `200 OK`; veřejné přímé HTTPS na `cody.dreamind.cz` dál selhává kvůli expirovanému Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), diagnostické `curl --noproxy '*' -k` vrací `200 OK` z nginx/Next.js na `91.99.227.53` a proxy cesta stále končí `Empty reply from server`, bez dostupného SSH/deploy/certbot přístupu k bezpečné obnově certifikátu.
 - 2026-07-22: Doplněn rejstřík pracovních nástrojů na začátku e-booku: rychlé vyhledání datové mapy, specifikace metriky, privacy-first formuláře, provozního releasu, akčního backlogu, veřejného výřezu, bezpečnostní odpovědi a projektového offboardingu podle požadovaného výstupu; přidána mini kontrola, aby orientace nevytvářela nový tracking ani další duplicitní přílohy. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně ověřeno, že `cody.dreamind.cz` přímo míří na `91.99.227.53`, běžné přímé HTTPS selhává na expirovaném Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), diagnostické `curl --noproxy '*' -k` vrací `200 OK` z nginx/Next.js a proxy cesta končí po TLS tunelu chybou `Empty reply from server`; v pracovním prostoru není dostupný SSH/deploy/certbot přístup pro bezpečnou obnovu certifikátu.
 - 2026-07-22: Doplněna příloha o orientační mapě dlouhého e-booku bez čtenářského bloudění: rozlišení kapitoly, přílohy a pracovního nástroje, mapa podle čtenářské bolesti, lokální zkratky pro související části, nadpisy jako směrovky, mapovací karta pro další údržbu, privacy-first ověření orientace bez profilování, checklist a mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně znovu ověřeno, že `cody.dreamind.cz` má veřejný HTTPS problém: běžná cesta přes proxy končí po TLS tunelu chybou `Empty reply from server`, přímé HTTPS bez proxy selhává na expirovaném Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), HTTP vrací `301` na HTTPS a dostupný pracovní prostor neobsahuje SSH/deploy/certbot přístup, kterým by šlo certifikát bezpečně obnovit.
 - 2026-07-22: Doplněna příloha o provozním healthchecku veřejného artefaktu bez falešné zelené: rozdělení kontroly na DNS, transport, HTTP, obsah, artefakt a privacy vrstvu, pravidlo že diagnostické výjimky typu `curl -k` nejsou produkční důkaz, návrh malého healthchecku, triage tabulka selhání, oddělení opravy od informování, healthcheck karta, checklist a mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje; navázáno na existující zdroje k curl, Let's Encrypt, certbotu, HTTP stavům a provozní komunikaci. Provozně znovu ověřeno, že `cody.dreamind.cz` přes lokální proxy po TLS tunelu končí chybou `Empty reply from server`, přímé HTTPS bez proxy selhává na expirovaném Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), zatímco diagnostické přímé `curl --noproxy '*' -k` vrací `200 OK` z nginx/Next.js na IP `91.99.227.53`; dostupný kontejner stále nemá SSH klíče ani bezpečný serverový/deploy přístup k obnově certifikátu.
