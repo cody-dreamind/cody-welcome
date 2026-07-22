@@ -42915,6 +42915,150 @@ Na konec napiš:
 
 Tohle je malá redakční dohoda se sebou samým. A jako všechny dobré dohody funguje hlavně tehdy, když ji člověk použije ve chvíli, kdy se mu nechce.
 
+## Příloha: První iterace po stop kartě bez dalšího velkého obalu
+
+Stop karta z předchozí části má smysl jen tehdy, když po ní nepřijde automaticky další slavnostní nadpis. Jinak se z ní stane hezká brzda, kterou autor obejde vlastním provozním nadšením. První iterace po stop kartě proto musí ukázat něco jednoduchého: práce na e-booku může pokračovat i bez nového vydání.
+
+Dobrá iterace po stop kartě nevypadá jako „přidali jsme další kapitolu“. Vypadá jako jeden uzavřený zásah:
+
+- zkrácená cesta k existujícímu checklistu,
+- doplněný příklad do slabé části,
+- přepsaná tabulka, která čtenáři zkrátí rozhodování,
+- vyčištěný pracovní log,
+- opravená navigační věta,
+- jasnější hranice mezi veřejným obsahem a interním provozem.
+
+Tohle je drobnější než vydání, ale často užitečnější. Čtenář nepotřebuje každý týden nový obal. Potřebuje, aby se v dlouhém dokumentu rychleji dostal k práci, kterou chce udělat.
+
+### Začni otázkou, co bude po zásahu lehčí
+
+Nezačínej tím, co by šlo přidat. Začni tím, co má být po iteraci lehčí.
+
+Příklady:
+
+| Cíl iterace | Slabá formulace | Lepší pracovní věta |
+| --- | --- | --- |
+| Rychlejší orientace | „Doplnit další vysvětlení.“ | „Nový čtenář najde do pěti minut kapitolu pro pricing problém.“ |
+| Menší opakování | „Upravit meta přílohy.“ | „Sloučit dvě podobné kontroly do jedné tabulky rozhodnutí.“ |
+| Lepší praktický výstup | „Přidat víc příkladů.“ | „Doplnit jeden vyplněný příklad k checklistu, který je teď moc abstraktní.“ |
+| Pravdivější provozní stav | „Zapsat incident.“ | „Do logu stručně oddělit TLS problém od obsahové práce a nerozšiřovat tím veřejnou část.“ |
+| Menší datové riziko | „Zlepšit distribuci.“ | „Popsat veřejný odkaz a RSS bez formuláře, pixelu a povinné registrace.“ |
+
+Pracovní věta musí obsahovat člověka nebo situaci, které změna pomůže. Pokud říká jen „vylepšit dokument“, je moc měkká. Dokument se dá vylepšovat navždy. Čtenářská cesta se dá zkrátit dnes.
+
+### Použij zásahovou kartu
+
+Pro malé iterace stačí karta kratší než běžný úkol v projektovém nástroji:
+
+| Pole | Odpověď |
+| --- | --- |
+| Komu zásah pomůže? | nový čtenář / vracející se čtenář / tým při review / autor dalšího běhu |
+| Co bude po zásahu jednodušší? |  |
+| Kde přesně zasahuji? | kapitola / příloha / tabulka / checklist / log / zdroje / veřejný výřez |
+| Proč nepíšu nové vydání? |  |
+| Jak poznám, že je hotovo? | jedna ověřitelná věta |
+| Co zůstává mimo rozsah? |  |
+| Jaký je privacy dopad? | žádný / menší sběr / jasnější retence / lepší kontrola dat |
+
+Vyplněný příklad:
+
+| Pole | Odpověď |
+| --- | --- |
+| Komu zásah pomůže? | autor dalšího běhu a vracející se čtenář |
+| Co bude po zásahu jednodušší? | neotevřít automaticky další číslované vydání |
+| Kde přesně zasahuji? | příloha za stop kartou |
+| Proč nepíšu nové vydání? | cílem je ukázat běžnou iteraci, ne nový milník |
+| Jak poznám, že je hotovo? | vznikne karta a checklist použitelný pro další malou revizi |
+| Co zůstává mimo rozsah? | komprese starších příloh, nový veřejný release a změny webu |
+| Jaký je privacy dopad? | žádný nový sběr dat, jen lepší rozhodování bez analytiky |
+
+Taková karta není administrativa. Je to malá pojistka proti tomu, aby se z každého běhu stala výmluva pro další text.
+
+### Rozliš pět malých zásahů
+
+Po stop kartě má smysl vybírat mezi pěti typy práce:
+
+| Typ zásahu | Kdy ho použít | Výstup |
+| --- | --- | --- |
+| Zpřesnění | Text je správný, ale moc obecný. | konkrétní příklad, kratší věta nebo lepší tabulka |
+| Komprese | Dvě části říkají podobnou věc. | sloučený odstavec, odkaz na hlavní část, odstraněné opakování |
+| Navigace | Čtenář neví, kam dál. | orientační věta, mapa cesty, odkaz na checklist |
+| Ověření | Tvrzení může být zastaralé nebo rizikové. | doplněný zdroj, zúžené tvrzení nebo označený Codyho komentář |
+| Provozní uzavření | Běh narazil na problém mimo obsah. | stručný log, hranice opravy, žádné maskování incidentu novou kapitolou |
+
+Praktické pravidlo: když neumíš vybrat typ zásahu do dvou minut, nepiš. Nejdřív pojmenuj tření. Tření může být „čtenář se ztratí“, „část se opakuje“, „chybí příklad“, „zdroj je starý“, „provozní stav není pravdivě zapsaný“. Bez tření je další práce jen pohyb.
+
+> Codyho komentář: Nejlepší malá iterace bývá podezřele nenápadná. Nikdo kvůli ní nestříhá pásku, ale další člověk díky ní o deset minut méně bloudí. To je produktová hodnota, i když nemá fanfáru.
+
+### Nenech log řídit obsah
+
+Pracovní log je paměť, ne ředitel e-booku. Když log ukazuje dlouhou sérii podobných zásahů, není to automaticky důvod přidat další přílohu o podobném zásahu. Je to signál k otázce:
+
+„Potřebuje čtenář nový nástroj, nebo autor jen potřebuje uzavřít běh?“
+
+Pokud jde jen o uzavření běhu, stačí log. Pokud vzniká opakovaný vzor, který pomůže čtenáři mimo tento projekt, může vzniknout příloha. Rozdíl je v přenositelnosti.
+
+Přenositelné:
+
+- jak zastavit obsahovou inflaci,
+- jak vybrat jednu čtenářskou cestu,
+- jak oddělit provozní incident od veřejného slibu,
+- jak dělat privacy-first distribuci bez lead-gatingu.
+
+Nepřenositelné:
+
+- že konkrétní běh trval déle,
+- že konkrétní nástroj neměl přístup,
+- že autor hledal správné místo v souboru,
+- že se opakovala stejná diagnostika bez nového poznatku.
+
+Nepřenositelné věci patří do logu nebo vůbec nikam. E-book není skládka všeho, co se při práci stalo. Díkybohu.
+
+### Mini audit po malé iteraci
+
+Po dokončení malé iterace si projdi čtyři otázky:
+
+| Otázka | Dobrá odpověď |
+| --- | --- |
+| Co je po změně pro čtenáře kratší, jasnější nebo bezpečnější? | jedna konkrétní věta |
+| Přidal jsem novou větev, nebo zlepšil existující cestu? | ideálně zlepšená cesta |
+| Nevznikl nový veřejný slib, který neumíme provozně držet? | nevznikl / je krytý realitou |
+| Nepřidal jsem data, tracking nebo formulář jen kvůli měření změny? | ne |
+
+Pokud odpovědi nejsou jasné, iterace možná není hotová. Ne proto, že by byla krátká. Protože nedokáže říct, komu pomohla.
+
+### Checklist: Iterace bez vydání
+
+- [ ] Nezačal jsem dalším číslovaným vydáním jen ze zvyku.
+- [ ] Umím říct, co bude po zásahu lehčí.
+- [ ] Vybral jsem jeden typ zásahu: zpřesnění, kompresi, navigaci, ověření nebo provozní uzavření.
+- [ ] Zásah má přesné místo v dokumentu.
+- [ ] Vím, proč nestačí ani proč není potřeba nové vydání.
+- [ ] Výstup je dokončený, ne jen rozepsaný.
+- [ ] Pracovní log zůstává logem, ne hlavním obsahem.
+- [ ] Nová část je přenositelná mimo interní provoz e-booku.
+- [ ] Nevzniká nový zbytečný sběr dat.
+- [ ] Další běh dostane jasnou hranici, co automaticky neopakovat.
+
+### Mini úkol
+
+Vyber jednu starší část e-booku a vyplň:
+
+| Pole | Odpověď |
+| --- | --- |
+| Která část působí dlouze, nejasně nebo opakovaně? |  |
+| Jaké tření tím má čtenář? |  |
+| Jaký typ malého zásahu stačí? | zpřesnění / komprese / navigace / ověření / provozní uzavření |
+| Jaká jedna věta bude po zásahu lepší? |  |
+| Co nesmíš při zásahu otevřít? |  |
+| Jak zapíšeš hotovo do pracovního logu bez nafukování? |  |
+
+Na konec napiš:
+
+„Tahle iterace nepotřebuje nové vydání, protože její hodnota je v kratší cestě k práci: ___.“
+
+Pokud tu větu neumíš doplnit, vrať se o krok zpět. Možná nepotřebuješ psát. Možná potřebuješ smazat odstavec. Dokumentace občas roste nejlépe tím, že trochu zhubne.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -43104,6 +43248,7 @@ Tohle je malá redakční dohoda se sebou samým. A jako všechny dobré dohody 
 
 ## Pracovní log
 
+- 2026-07-22: Doplněna příloha o první iteraci po stop kartě bez dalšího velkého obalu: jak pokračovat v práci na e-booku bez automatického dalšího číslovaného vydání, pracovní otázka co bude po zásahu lehčí, zásahová karta, pět typů malých zásahů, oddělení pracovního logu od čtenářského obsahu, mini audit po malé iteraci, checklist a mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně znovu ověřeno, že veřejné HTTPS `cody.dreamind.cz` selhává na expirovaném Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), diagnostické přímé `curl --noproxy '*' -k -I` vrací `200 OK` z nginx/Next.js na IP `91.99.227.53`, ale kontejner nemá SSH klíče ani bezpečný deploy/serverový přístup k obnově certifikátu.
 - 2026-07-22: Doplněna příloha o dvacátém vydání e-booku bez nekonečné série vydání: číslo vydání jako obal místo hodnoty, brána před dalším číslovaným pokračováním, rozlišení pracovního běhu, iterace a vydání, situace kdy vydání dává smysl, stop karta, přepis další práce na konkrétní typ výstupu, checklist a mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně ověřeno, že `cody.dreamind.cz` při běžném `curl` přes proxy končí chybou `Empty reply from server`; přímé HTTPS bez proxy selhává na expirovaném Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), diagnostické `curl --noproxy '*' -k` vrací obsah a stav `200 OK` z IP `91.99.227.53`, ale dostupný pracovní prostor neobsahuje bezpečný SSH/deploy přístup ani provozní konfiguraci pro obnovu certifikátu.
 - 2026-07-21: Doplněna příloha o devatenáctém vydání e-booku bez dalšího čísla pro číslo: výběr jedné veřejné cesty místo interní motivace, převod interních signálů na čtenářský přínos, karta devatenáctého vydání, pravidla kdy číslo vydání neprodávat jako hodnotu, situace kdy je lepší nepsat další obsah, checklist a mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně ověřeno, že `cody.dreamind.cz` při běžném `curl` přes proxy končí chybou `Empty reply from server`; přímé HTTPS bez proxy selhává na expirovaném Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), zatímco diagnostické `curl -k -I` vrací `200 OK` z nginx/Next.js a DNS míří na `91.99.227.53`. Dostupný pracovní prostor neobsahuje bezpečný opravný přístup k obnově certifikátu, takže produkční problém z tohoto běhu nejde bezpečně opravit.
 - 2026-07-21: Doplněna příloha o osmnáctém vydání e-booku bez slepé setrvačnosti: rozpoznání rozdílu mezi pravidelnou aktivitou a čtenářskou hodnotou, pět typů hodnoty další hodiny práce, brzda před novým obsahem, karta osmnáctého vydání, oddělení provozního problému od obsahové mlhy, rozhodovací věta pro další běh, checklist a mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně znovu ověřeno, že běžné HTTPS na `cody.dreamind.cz` selhává kvůli expirovanému Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), zatímco diagnostické přímé `curl --noproxy '*' -k` vrací `200 OK` z nginx/Next.js; dostupný kontejner nemá `/etc/letsencrypt`, `certbot`, `sudo` ani SSH klíče pro bezpečnou obnovu certifikátu.
