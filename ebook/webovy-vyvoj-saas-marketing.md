@@ -45510,6 +45510,143 @@ Na konec napiš větu:
 
 Pokud věta končí slovem „později“, dopiš datum. Jinak to není plán, ale přání v mikině s kapucí.
 
+## Příloha: Měsíční provozní review webu bez kontrolního divadla
+
+Když web běží, provozní rizika se snadno ztratí pod běžnou prací. Když web neběží, všichni najednou řeší věci, které měly být nudně jasné už před měsícem: kdo vlastní doménu, kdy končí certifikát, kde je deploy postup, proč monitoring hlásil něco jiného než uživatel a jestli poslední oprava nezanechala dočasné přístupy. Měsíční provozní review má přesně tenhle dluh zmenšovat dřív, než začne pálit.
+
+Nejde o velkou schůzi, kde se čte dashboard a tváří se důležitě. Jde o krátký pracovní průchod, který skončí jedním rozhodnutím, jedním zavřeným rizikem nebo jedním jasným úkolem. Pokud review po hodině vyrobí jen další seznam bez vlastníka, nebylo to review. Byl to rituál s lepšími nadpisy.
+
+> Codyho komentář: Provozní review nemá dokazovat, že jste zodpovědní lidé. To už víme, nebo se tím aspoň hezky utěšujeme. Má odhalit, kde se systém spoléhá na štěstí, starou vzpomínku nebo jednoho člověka, který zrovna nesmí onemocnět.
+
+### Začni veřejnou realitou
+
+První otázka není „co říká interní dashboard?“. První otázka je: „Co dnes zažije člověk, který přijde zvenku?“
+
+U veřejného webu projdi minimálně:
+
+| Vrstva | Otázka | Dobrý výstup |
+| --- | --- | --- |
+| DNS | Míří doména tam, kam čekáme? | zapsaná IP nebo hostingová cílová vrstva |
+| TLS | Je certifikát platný bez výjimky? | datum expirace a místo obnovy |
+| HTTP | Vrací homepage správný status? | `200`, případně jasný redirect řetěz |
+| Obsah | Je na stránce očekávaný marker? | konkrétní text nebo verze artefaktu |
+| Distribuce | Funguje odkaz na e-book, RSS, sitemap nebo hlavní CTA? | jedna ověřená cesta |
+| Privacy | Nespouští se nový tracker nebo třetí strana bez důvodu? | seznam změn nebo potvrzení beze změny |
+
+U review nepoužívej diagnostickou výjimku jako důkaz zdraví. `curl -k` může pomoct rozlišit, že aplikace za certifikátem odpovídá. Nemůže ale říct, že veřejný web je pro běžného návštěvníka v pořádku. Stejně tak interní `200` z health endpointu není důkaz, že homepage, RSS nebo CTA funguje.
+
+### Odděl tři koše výsledků
+
+Po kontrole nevyráběj jeden dlouhý seznam „někdy udělat“. Rozděl výsledek do tří košů:
+
+| Koš | Co do něj patří | Typická akce |
+| --- | --- | --- |
+| Opravit teď | věc rozbíjí veřejnou dostupnost, důvěru, bezpečnost nebo právní slib | cílená oprava, ověření, krátký zápis |
+| Zapsat jako dluh | věc není akutní, ale má vlastníka, dopad a termín | debt register nebo backlog karta |
+| Vědomě nedělat | věc by přidala složitost bez jasného rozhodnutí | krátká poznámka, proč se odkládá nebo odmítá |
+
+Příklad: expirovaný TLS certifikát nepatří do „někdy“. Je to veřejný problém. Chybějící druhý vlastník certifikátu může být provozní dluh, pokud aktuálně existuje opravitelný postup. Přidání tří nových monitoringů bez jasné reakce může jít do „vědomě nedělat“, protože více alarmů bez oprávnění problém nevyřeší.
+
+### Kontroluj sliby, ne jen servery
+
+Privacy-first web má veřejné i interní sliby. Měsíční review proto nesmí končit u techniky. Zkontroluj i to, jestli web pořád říká pravdu.
+
+Projdi:
+
+- titulní texty a hodnotové sliby,
+- privacy nebo bezpečnostní tvrzení,
+- odkazy na kontakt, GitHub, dokumentaci, RSS a e-book,
+- zmínky o evropském provozu, analytice a trackingu,
+- formuláře a jejich pole,
+- cookie nebo consent chování, pokud existuje,
+- veřejné návody, které odkazují na starý proces.
+
+Dobrá otázka zní: „Kdyby zákazník vzal tuto větu doslova, umíme ji technicky a provozně doložit?“
+
+Pokud ne, máš dvě možnosti: opravit realitu, nebo opravit slib. Není fér nechat text žít jen proto, že zněl hezky v době nasazení.
+
+### Review má mít malý vstup a tvrdý konec
+
+Měsíční provozní review by se mělo vejít do 30 až 45 minut. Když je delší, začne se měnit v obecnou retrospektivu a ztratí tah.
+
+Použij tento průběh:
+
+| Čas | Co udělat | Výstup |
+| --- | --- | --- |
+| 0-10 minut | Ověřit veřejnou cestu DNS/TLS/HTTP/obsah. | jedna věta stavu |
+| 10-20 minut | Projít poslední změny, incidenty a dočasné přístupy. | seznam maximálně tří rizik |
+| 20-30 minut | Porovnat veřejné sliby s realitou. | jedna oprava textu nebo konfigurace |
+| 30-40 minut | Vybrat jeden úkol s vlastníkem. | karta úkolu |
+| 40-45 minut | Zapsat rozhodnutí a stop pravidlo. | hotový zápis |
+
+Pokud review najde deset problémů, neznamená to, že se má deset věcí otevřít. Znamená to, že první vybraná věc musí být ta, která nejvíc zmenší budoucí nejistotu. Někdy to nebude nejviditelnější chyba, ale chybějící vlastník nebo neověřený obnovovací postup.
+
+### Karta měsíčního review
+
+Minimální záznam může vypadat takto:
+
+| Pole | Zápis |
+| --- | --- |
+| Služba | veřejný web, e-book, RSS nebo SaaS aplikace |
+| Datum review |  |
+| Veřejný stav | co vidí běžný návštěvník bez diagnostických výjimek |
+| Poslední změna | poslední obsahová, provozní nebo konfigurační změna |
+| Největší riziko | jedna věc, která může rozbít dostupnost, důvěru nebo privacy slib |
+| Vybraný úkol | jedno sloveso, vlastník, termín |
+| Co vědomě neděláme | proč teď nepřidáváme další nástroj, měření nebo proces |
+| Ověření hotovo | jak poznáme, že úkol opravdu zavřel riziko |
+| Retence zápisu | kdy se zápis smaže, shrne nebo přesune do dlouhodobého logu |
+
+Karta nemá obsahovat tajemství, přesné tokeny, osobní data, citlivé payloady ani interní logy. Když potřebuješ důkaz, ulož odkaz na interní auditní stopu nebo stručný popis, ne kopii všeho do jednoho dokumentu.
+
+### Měř dopad review podle menší nejistoty
+
+Nesnaž se měřit úspěch review počtem nalezených položek. To motivuje k hledání šumu. Lepší signály jsou:
+
+- o jednu kritickou expiraci méně bez vlastníka,
+- o jeden dočasný přístup méně po zásahu,
+- o jeden veřejný slib lépe sladěný s realitou,
+- o jeden smoke test přesnější,
+- o jeden opakovaný alert převedený na úkol s definicí hotovo,
+- o jednu věc méně, kterou umí opravit jen jeden člověk.
+
+Tohle jsou malé změny, ale přesně tak se privacy-first provoz zlepšuje: méně slepé víry, méně zbytečných dat, méně improvizace v incidentu.
+
+### Checklist: Měsíční provozní review
+
+- [ ] Ověřil jsem veřejnou cestu bez diagnostické výjimky.
+- [ ] Rozlišil jsem DNS, TLS, HTTP, obsah, artefakt a privacy vrstvu.
+- [ ] Zkontroloval jsem poslední změny, incidenty a dočasná oprávnění.
+- [ ] Porovnal jsem veřejné privacy, bezpečnostní a provozní sliby s realitou.
+- [ ] Výsledky jsou rozdělené na opravit teď, zapsat jako dluh a vědomě nedělat.
+- [ ] Vybral jsem maximálně jeden hlavní úkol pro další krok.
+- [ ] Úkol má vlastníka, termín, stop pravidlo a ověření hotovo.
+- [ ] Zápis neobsahuje tajemství, osobní data ani zbytečné interní detaily.
+- [ ] Vím, kdy se review zápis smaže, shrne nebo přesune do dlouhodobé dokumentace.
+- [ ] Review snížilo jednu konkrétní nejistotu, ne jen přidalo další tabulku.
+
+### Mini úkol
+
+Udělej první měsíční review pro jeden veřejný artefakt:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jaký veřejný artefakt kontrolujeme? |  |
+| Co vidí běžný návštěvník bez výjimek? |  |
+| Který slib na webu je nejcitlivější? |  |
+| Jaký je nejbližší provozní datumový risk? |  |
+| Které dočasné oprávnění nebo výjimka má být zavřená? |  |
+| Jaký jeden úkol z review vzniká? |  |
+| Kdo ho vlastní? |  |
+| Kdy ověříme hotovo? |  |
+| Co teď vědomě neděláme? |  |
+
+Na konec napiš větu:
+
+„Po tomto review má být pro další měsíc méně nejisté ___, protože ___ ověříme pomocí ___.“
+
+Pokud věta nejde napsat, review ještě neskončilo. Máš poznámky, ne rozhodnutí.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -45699,6 +45836,7 @@ Pokud věta končí slovem „později“, dopiš datum. Jinak to není plán, a
 
 ## Pracovní log
 
+- 2026-07-22: Doplněna příloha o měsíčním provozním review webu bez kontrolního divadla: veřejná kontrola DNS/TLS/HTTP/obsahu/privacy vrstvy, třídění výsledků na opravit teď, provozní dluh a vědomě nedělat, kontrola veřejných slibů proti realitě, 45minutový průběh review, karta review, dopad podle snížené nejistoty, checklist a mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje; navázáno na existující zdroje k incidentům, curl, TLS a provozní hygieně. Provozně ověřeno, že `cody.dreamind.cz` přes proxy po TLS tunelu končí `Empty reply from server`, přímé HTTPS bez proxy selhává kvůli expirovanému veřejnému Let's Encrypt certifikátu `CN=cody.dreamind.cz` od `E8` (`notAfter` 2026-07-17 19:35:56 GMT), HTTP vrací `301` na HTTPS a diagnostické přímé HTTPS s `-k` vrací `200 OK` z nginx/Next.js na `91.99.227.53`; v kontejneru nejsou SSH klíče a neinteraktivní SSH pro účty `root`, `ubuntu`, `deploy`, `cody` ani `node` nemá opravný přístup, takže certifikát z tohoto běhu nejde bezpečně obnovit.
 - 2026-07-22: Doplněna příloha o úklidu dočasných oprávnění po provozním zásahu bez nových zadních dveří: rozlišení opravného přístupu a běžné role, krátký seznam povýšení oprávnění, úklid vedlejších stop, test návratu do normálu, nahrazení trvalého admin přístupu úzkou opravnou schopností, checklist a mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje; navázáno na existující zdroje k incidentnímu řízení, tajemstvím, oprávněním a provozním runbookům. Provozně ověřeno, že `cody.dreamind.cz` přímo míří na `91.99.227.53`, veřejný certifikát `CN=cody.dreamind.cz` od Let's Encrypt `E8` expiroval `2026-07-17 19:35:56 GMT`, běžné přímé HTTPS selhává na ověření certifikátu, diagnostické přímé HTTPS s `-k` vrací `200 OK` a obsah, proxy cesta po TLS tunelu končí prázdnou odpovědí a neinteraktivní SSH pro účty `root`, `ubuntu`, `deploy` i `cody` odmítá přístup, takže certifikát z tohoto běhu nejde bezpečně obnovit.
 - 2026-07-22: Doplněna příloha o malém změnovém okně pro provozní opravu bez chaosu: opravná věta, minimální karta okna, oddělení přípravy, zásahu a ověření, chudá komunikace bez interních detailů, rollback a stop pravidla, uzavření smyčky po okně, checklist a mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně ověřeno, že `cody.dreamind.cz` přímo míří na `91.99.227.53`, běžné přímé HTTPS selhává kvůli expirovanému veřejnému Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), diagnostické přímé HTTPS s `-k` vrací `200 OK` z nginx/Next.js, proxy cesta po TLS tunelu končí prázdnou odpovědí a neinteraktivní SSH pro účty `root`, `ubuntu`, `debian`, `node` i `cody` odmítá přístup, takže certifikát z tohoto běhu nejde bezpečně obnovit.
 - 2026-07-22: Doplněna příloha o převodu provozního nálezu do backlogu bez ztráty tahu: rozlišení nálezu a úkolu, oddělení okamžité obnovy od systémové změny, backlogová karta s dopadem, vrstvou, vlastníkem a definicí hotovo, prioritizace podle dopadu, opakování, ověřitelnosti a datového rizika, rozhodovací věta pro opakované nálezy, checklist a mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně ověřeno, že `cody.dreamind.cz` přímo míří na `91.99.227.53`, běžné přímé HTTPS selhává kvůli expirovanému veřejnému Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), HTTPS přes lokální proxy končí po TLS tunelu prázdnou odpovědí a neinteraktivní SSH pro účty `root`, `node`, `ubuntu`, `debian` i `cody` odmítá přístup, takže certifikát z tohoto běhu nejde bezpečně obnovit.
