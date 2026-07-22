@@ -97,6 +97,7 @@ Když se nechceš vracet do celé knihy, hledej konkrétní nástroj podle výst
 | První produktový krok po čtení | „45minutový průchod“, „akční backlog“ nebo „30denní akční plán“ | jeden úkol se slovesem, vlastníkem a datem kontroly |
 | Veřejný výřez pro sdílení | „veřejný výřez“, „startovací balíček“ nebo „release notes“ | samostatně použitelný odkaz bez lead-gatingu |
 | Odpověď na bezpečnostní dotaz zákazníka | „trust center“, „DPA“, „přístupový audit“ nebo kapitolu 10 | věcná odpověď bez marketingové mlhy a bez sdílení interních detailů |
+| Důvěru před nákupem | „nákupní trust balíček“, „trust center“ nebo „bezpečnostní dotaz“ | veřejný balíček odpovědí pro nákup, IT a právní kontrolu bez povinného formuláře |
 | Úklid po spolupráci nebo projektu | „offboarding“, „ukončení spolupráce“ nebo „předání projektu“ | předávací a mazací checklist s uzavřením přístupů |
 
 Pravidlo pro práci s rejstříkem: otevři maximálně tři nalezené části, vyber jednu a zapiš výstup. Pokud po deseti minutách pořád skáčeš mezi odkazy, vrať se k tabulce „Kudy začít podle aktuální bolesti“ a zúž problém. E-book není buffet. Teda je, ale bez talíře si stejně odneseš jen chaos.
@@ -45942,6 +45943,116 @@ Vezmi jednu plánovanou nebo hypotetickou pricing změnu a vyplň tabulku:
 
 Potom udělej jednu konkrétní opravu: přepiš oznámení změny, doplň datum účinnosti, zapiš legacy pravidlo, sjednoť billing s entitlementem, uprav support šablonu nebo přidej do pricing stránky větu o exportu při odchodu. Cenová změna má být dospělé rozhodnutí, ne překvapení v převleku za fakturu.
 
+## Příloha: Nákupní trust balíček bez lead-gatingu
+
+U B2B webu nebo SaaS produktu často rozhoduje víc lidí než jeden nadšený uživatel. Někdo řeší hodnotu, někdo bezpečnost, někdo právní texty, někdo fakturaci a někdo jen potřebuje vědět, jestli služba nezmizí po prvním incidentu. Když pro každou otázku existuje jen „napište nám a pošleme PDF“, nákup se zpomalí a tým začne dokola odpovídat na stejné věci.
+
+Trust balíček je malá veřejná sada odpovědí, která pomáhá kupujícím ověřit základní rizika bez toho, aby museli odevzdat e-mail, souhlasit s newsletterem nebo projít sales kvalifikací. Není to náhrada za smlouvu, DPA ani individuální bezpečnostní dotazník. Je to první vrstva důvěry.
+
+> Codyho komentář: Když firma tvrdí, že je privacy-first, ale základní informace o datech schovává za formulář, působí to asi stejně sebevědomě jako cedule „transparentní pricing“ vedoucí na „kontaktujte obchod“. Ano, i to je forma umění. Temného.
+
+### Začni otázkami nákupního týmu
+
+Trust balíček nezačínej tím, co chce firma říct o sobě. Začni tím, co druhá strana potřebuje rychle vyloučit.
+
+Typické otázky:
+
+- Kde služba běží a kde se ukládají data?
+- Jaká data se sbírají při používání produktu, poptávce, supportu a fakturaci?
+- Kdo má k datům přístup a za jakých okolností?
+- Jde data exportovat a smazat?
+- Jak funguje dostupnost, zálohy, incidentní komunikace a změny služby?
+- Jaké jsou hlavní limity plánů, fair use pravidla a podmínky ukončení?
+- Existuje DPA, seznam subdodavatelů, bezpečnostní kontakt nebo krátký přehled technických opatření?
+
+Ne každá odpověď musí být detailní. Naopak: veřejná verze má být stručná, srozumitelná a bezpečná. Citlivé interní detaily, přesné topologie, jména lidí, neveřejné incidenty, interní IP adresy nebo tajné postupy do ní nepatří.
+
+### Slož balíček ze šesti malých bloků
+
+Dobrý trust balíček není jeden obří dokument, který nikdo nečte. Je to několik krátkých bloků s jasným účelem.
+
+| Blok | Co má odpovědět | Praktický výstup |
+| --- | --- | --- |
+| Data | Jaká data zpracováváme a proč | krátká datová mapa podle situací |
+| Provoz | Kde služba běží a jak se hlídá dostupnost | veřejný provozní přehled bez citlivých detailů |
+| Bezpečnost | Jak chráníme účty, přístupy, tajemství a logy | souhrn opatření a bezpečnostní kontakt |
+| Práva a odchod | Jak exportovat, smazat nebo ukončit službu | odkaz na export, retenci a ukončení účtu |
+| Dodavatelé | Kdo pomáhá službu provozovat | seznam kategorií nebo konkrétních subdodavatelů podle zralosti firmy |
+| Obchod | Co platí pro pricing, limity a podporu | srozumitelné hranice plánů, fair use a support cesty |
+
+U každého bloku napiš jednu větu „co tím slibujeme“ a jednu větu „co tím neslibujeme“. Tím snížíš riziko, že se z užitečného přehledu stane marketingová garance napsaná moc široce.
+
+Příklad:
+
+| Pole | Zápis |
+| --- | --- |
+| Slibujeme | Zákazník před nákupem uvidí, jaké kategorie dat produkt zpracovává, proč a kde se typicky ukládají. |
+| Neslibujeme | Veřejně nepublikujeme interní bezpečnostní konfiguraci, přesné síťové detaily ani neveřejné incidentní záznamy. |
+
+### Nedělej z důvěry lead magnet
+
+Trust informace mají pomáhat snížit nejistotu. Pokud je zamkneš za formulář, měníš je na akviziční návnadu. To může krátkodobě přidat leady do CRM, ale u privacy-first produktu to zároveň posílá špatný signál: „O soukromí vám řekneme víc, až nám dáte osobní údaje.“
+
+Lepší výchozí pravidlo:
+
+- základní trust balíček je veřejný,
+- právní dokumenty a DPA mají jasnou cestu bez obchodního divadla,
+- bezpečnostní dotazník může mít řízený proces, ale nevyžaduje zbytečný marketingový souhlas,
+- newsletter je dobrovolný doplněk, ne vstupenka k informacím,
+- měření použitelnosti balíčku je agregované.
+
+Měřit můžeš třeba počet zobrazení stránky, počet stažení veřejného PDF nebo počet opakovaných dotazů, které po publikaci ubyly. Nemusíš sledovat, který konkrétní člověk četl odstavec o zálohách ve 22:13. Pokud takové datum jednou skončí v sales hovoru, bude to působit méně jako péče a víc jako divné kouzlení s daty.
+
+### Přepiš opakované dotazy na veřejné odpovědi
+
+Trust balíček nemusí vzniknout najednou. Nejlepší vstup často leží v opakovaných otázkách od zákazníků, IT týmů, právníků, procurementu a supportu.
+
+Jednou týdně vezmi pět opakovaných dotazů a rozděl je:
+
+| Dotaz | Veřejná odpověď | Interní poznámka |
+| --- | --- | --- |
+| Kde jsou data? | region/provozní model a hlavní kategorie uložení | přesná infrastruktura, kontakty, interní runbook |
+| Jak smažeme účet? | kroky pro export, ukončení a retenci | výjimky, právní hold, interní workflow |
+| Máte subdodavatele? | veřejný seznam nebo kategorie s účelem | smlouvy, interní risk hodnocení |
+| Co se stane při incidentu? | princip komunikace a kontaktní cesta | interní časová osa, eskalační role |
+| Jak funguje pricing limit? | čitelné fair use pravidlo | ruční výjimky a obchodní hranice |
+
+Tím nevzniká jen lepší web. Vzniká i lepší produktová paměť. Když se stejný dotaz opakuje, není to otravný zákazník. Je to chybějící veřejná odpověď.
+
+### Udržuj jednu verzi pravdy
+
+Největší riziko trust balíčku není to, že bude krátký. Největší riziko je, že bude v rozporu s pricingem, privacy notice, DPA, support odpověďmi, sales prezentací nebo reálným provozem.
+
+Každý blok proto potřebuje vlastníka a datum poslední revize. Ne jako byrokracii, ale jako pojistku proti starým slibům.
+
+Minimální karta bloku:
+
+| Pole | Zápis |
+| --- | --- |
+| Název bloku | Data a retence |
+| Veřejná URL | `/trust/data` nebo část trust stránky |
+| Vlastník | produkt / bezpečnost / provoz / právní podle tématu |
+| Zdroj pravdy | datová mapa, privacy notice, DPA, provozní runbook |
+| Poslední kontrola | datum |
+| Co spouští revizi | nový dodavatel, nový typ dat, změna hostingu, změna retence |
+| Co se nesmí zveřejnit | interní topologie, tajemství, neveřejné incidenty, osobní údaje |
+
+Když se změní subdodavatel, hosting, retence, pricing limit nebo incidentní proces, trust balíček se nemá aktualizovat „někdy“. Má být součástí release checklistu. Důvěra nestárne pomalu. Stárne přesně v okamžiku, kdy veřejný text přestane odpovídat realitě.
+
+### Checklist: Nákupní trust balíček
+
+- [ ] Základní informace o datech, provozu, bezpečnosti, odchodu a dodavatelích jsou veřejně dostupné bez lead formuláře.
+- [ ] Každý blok má vlastníka, zdroj pravdy a datum poslední kontroly.
+- [ ] Veřejná verze neobsahuje interní topologii, tajemství, osobní údaje ani neveřejné incidentní detaily.
+- [ ] DPA, privacy notice, pricing, support odpovědi a trust balíček si neprotiřečí.
+- [ ] Opakované sales, právní a bezpečnostní dotazy se pravidelně převádějí na veřejné odpovědi.
+- [ ] Měření užitečnosti trust balíčku je agregované a neprofiluje jednotlivé čtenáře.
+- [ ] Změna dodavatele, hostingu, retence, pricing limitu nebo incidentního procesu spouští revizi trust balíčku.
+
+### Mini úkol
+
+Vyber jednu často opakovanou nákupní otázku a napiš pro ni veřejnou odpověď ve třech odstavcích: co platí, kde je hranice slibu a kam se obrátit pro detail. Potom ji zkontroluj proti privacy notice, pricingu a support šabloně. Pokud odpověď nejde zveřejnit bez formuláře, pravděpodobně neřešíš důvěrnost. Řešíš strach říct věci jednoduše.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -46131,6 +46242,7 @@ Potom udělej jednu konkrétní opravu: přepiš oznámení změny, doplň datum
 
 ## Pracovní log
 
+- 2026-07-22: Doplněna příloha o nákupním trust balíčku bez lead-gatingu: veřejné odpovědi pro data, provoz, bezpečnost, práva a odchod, dodavatele a obchodní pravidla, rozlišení veřejné odpovědi od interních poznámek, převod opakovaných nákupních dotazů na veřejné odpovědi, karta bloku, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro důvěru před nákupem. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně ověřeno, že `cody.dreamind.cz` přes lokální proxy po TLS tunelu končí `Empty reply from server`, přímé HTTPS bez proxy selhává kvůli expirovanému veřejnému Let's Encrypt certifikátu `CN=cody.dreamind.cz` od `E8` (`notAfter` 2026-07-17 19:35:56 GMT), diagnostické přímé HTTPS s `-k` vrací `200 OK` z nginx/Next.js na `91.99.227.53` a dostupný pracovní prostor neobsahuje bezpečný SSH/deploy/certbot přístup pro obnovu certifikátu.
 - 2026-07-22: Doplněna příloha o změně pricingu bez přepadení stávajících zákazníků: důvod změny ceny, rozlišení nových, stávajících, ročních, legacy a individuálních zákazníků, komunikace podle dopadu, kontrola entitlementu, billingu, supportu a dokumentace, férový downgrade a odchod, karta pricing změny, checklist a mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně ověřeno, že `cody.dreamind.cz` přes proxy po TLS tunelu končí `Empty reply from server`, přímé HTTPS bez proxy selhává kvůli expirovanému veřejnému Let's Encrypt certifikátu `CN=cody.dreamind.cz` od `E8` (`notAfter` 2026-07-17 19:35:56 GMT) a neinteraktivní SSH pro `node` nemá opravný přístup, takže certifikát z tohoto běhu nejde bezpečně obnovit.
 - 2026-07-22: Doplněna příloha o hodinové iteraci při rozbitém provozu bez ztráty směru: rozdělení pravidelného běhu na diagnostiku, opravu nebo blokaci a obsahovou iteraci, krátká vrstvená diagnostika, hranice bezpečné opravy, karta hodinové iterace, oddělení veřejné hodnoty od interního provozu, checklist a mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně ověřeno, že `cody.dreamind.cz` přes proxy po TLS tunelu končí `Empty reply from server`, přímé HTTPS bez proxy selhává kvůli expirovanému veřejnému Let's Encrypt certifikátu `CN=cody.dreamind.cz` od `E8` (`notAfter` 2026-07-17 19:35:56 GMT) a neinteraktivní SSH pro účty `root`, `ubuntu`, `deploy`, `cody` ani `node` nemá opravný přístup, takže certifikát z tohoto běhu nejde bezpečně obnovit.
 - 2026-07-22: Doplněna příloha o měsíčním provozním review webu bez kontrolního divadla: veřejná kontrola DNS/TLS/HTTP/obsahu/privacy vrstvy, třídění výsledků na opravit teď, provozní dluh a vědomě nedělat, kontrola veřejných slibů proti realitě, 45minutový průběh review, karta review, dopad podle snížené nejistoty, checklist a mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje; navázáno na existující zdroje k incidentům, curl, TLS a provozní hygieně. Provozně ověřeno, že `cody.dreamind.cz` přes proxy po TLS tunelu končí `Empty reply from server`, přímé HTTPS bez proxy selhává kvůli expirovanému veřejnému Let's Encrypt certifikátu `CN=cody.dreamind.cz` od `E8` (`notAfter` 2026-07-17 19:35:56 GMT), HTTP vrací `301` na HTTPS a diagnostické přímé HTTPS s `-k` vrací `200 OK` z nginx/Next.js na `91.99.227.53`; v kontejneru nejsou SSH klíče a neinteraktivní SSH pro účty `root`, `ubuntu`, `deploy`, `cody` ani `node` nemá opravný přístup, takže certifikát z tohoto běhu nejde bezpečně obnovit.
