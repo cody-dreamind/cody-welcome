@@ -45225,6 +45225,149 @@ Na konec napiš větu:
 
 Pokud neumíš doplnit vlastníka nebo ověření, nedělej z toho neurčitý úkol. Označ to rovnou jako blokované vlastnictví. Upřímný blokér je lepší než backlogová položka, která se tváří zaměstnaně a nikam nejde.
 
+## Příloha: Změnové okno pro malou provozní opravu bez chaosu
+
+Když je provozní nález konečně připravený k opravě, tým často udělá jednu ze dvou chyb. Buď z drobné opravy vyrobí velké ceremoniální okno, které se odkládá tak dlouho, až z něj je samostatný projekt. Nebo naopak někdo v dobré víře udělá rychlý zásah bez vlastníka, rollbacku a veřejného ověření. První varianta zabíjí tah. Druhá varianta vyrábí pokračování incidentu s lepším názvem.
+
+Malé změnové okno není divadlo. Je to krátký dohodnutý prostor, ve kterém se opraví jedna konkrétní věc, ověří se správná veřejná cesta a zapíše se výsledek. Čím menší tým, tím důležitější je, aby tenhle postup byl krátký, opakovatelný a použitelný i ve stresu.
+
+> Codyho komentář: Změnové okno není omluvenka pro pomalost. Je to zábradlí. Když je oprava malá, má být i okno malé. Když neumíš říct, co přesně se na konci ověří, nemáš změnové okno, ale naději s kalendářem.
+
+### Začni opravnou větou
+
+Před plánováním napiš jednu větu:
+
+„V okně ___ opravíme ___, protože ___; hotovo ověříme pomocí ___ a návrat zpět znamená ___.“
+
+Dobrá opravná věta je konkrétní:
+
+| Slabá formulace | Lepší formulace |
+| --- | --- |
+| Opravíme web. | Obnovíme veřejně důvěryhodný TLS certifikát pro produkční doménu a ověříme běžné HTTPS bez výjimky. |
+| Projedeme monitoring. | Upravíme health check tak, aby rozlišil DNS, TLS a HTTP chybu a v alertu poslal první opravný krok. |
+| Uklidíme přístupy. | Přidáme omezenou roli pro reload proxy bez přístupu k databázi a ověříme ji suchým během. |
+| Zlepšíme deploy. | Zapíšeme jeden opakovatelný deploy krok a po nasazení ověříme správný artefakt veřejným smoke testem. |
+
+Pokud věta obsahuje víc než jednu opravu, rozděl ji. Malé okno má mít jeden hlavní výsledek. Vedlejší úklid může počkat, i když se tváří užitečně.
+
+### Připrav minimum před oknem
+
+Příprava má odstranit nejistoty, které by během zásahu nutily improvizovat. Nemá se z ní stát projektová složka s dvaceti stránkami.
+
+Minimální karta změnového okna:
+
+| Pole | Co vyplnit |
+| --- | --- |
+| Služba | veřejný web, API, billing, e-mail, administrace nebo jiná konkrétní schopnost |
+| Oprava | jedna změna, kterou provedeme |
+| Důvod teď | dopad, riziko nebo opakování nálezu |
+| Vlastník zásahu | člověk nebo role, která změnu provede |
+| Vlastník ověření | ideálně někdo jiný nebo aspoň oddělený krok |
+| Potřebný přístup | přesně jaké oprávnění je potřeba, bez ukládání tajemství do karty |
+| Riziko | co se může rozbít pro uživatele |
+| Rollback | jak se vrátíme do předchozího stavu nebo jak bezpečně zastavíme škodu |
+| Smoke test | veřejná nebo uživatelská cesta, která potvrdí výsledek |
+| Komunikace | kdo musí vědět, že okno probíhá a že skončilo |
+
+Přístup zapisuj jako schopnost, ne jako tajemství. Správně: „role umí reload nginx a spustit renewal“. Špatně: „heslo je v poznámce“. Tajemství v runbooku jsou provozní půjčka s velmi nevýhodným úrokem.
+
+### Odděl přípravu, zásah a ověření
+
+Tři fáze drž odděleně i u malé opravy:
+
+1. Příprava: ověř, že víš, co měníš, odkud běží aktuální stav, jak se dostaneš zpět a jak poznáš úspěch.
+2. Zásah: proveď jen domluvenou změnu. Pokud objevíš další problém, zapiš ho jako nový nález, ale nerozšiřuj okno bez rozhodnutí.
+3. Ověření: testuj stejnou cestou, kterou používá člověk nebo veřejný monitoring. Diagnostická výjimka může pomoct pochopit stav, ale nemá zavřít opravu.
+
+Příklad pro TLS:
+
+| Fáze | Dobrý výstup |
+| --- | --- |
+| Příprava | víme, kde běží certifikát, jak se obnovuje, kdo umí reload proxy a jak ověříme veřejný certifikát |
+| Zásah | obnova nebo výměna certifikátu a reload služby |
+| Ověření | běžný `curl https://domena` projde bez `-k`, obsah odpovídá očekávané stránce a monitoring vidí stejný stav |
+
+Tím se bráníš falešnému vítězství. Backend může běžet, proxy může odpovídat a stránka může být dostupná jen přes výjimku. Uživatel tohle neřeší. Uživatel vidí, jestli služba funguje.
+
+### Komunikuj chudě, ale včas
+
+Privacy-first provoz neznamená mlčet. Znamená sdílet jen to, co příjemce potřebuje pro práci nebo rozhodnutí.
+
+Interní zpráva před oknem může být krátká:
+
+„Dnes 18:30-18:45 opravujeme veřejnou dostupnost produkčního webu na vrstvě HTTPS. Očekávaný dopad: krátké riziko chyb při načtení. Hotovo potvrdíme běžným veřejným HTTPS testem. Pokud se oprava nepovede, vracíme předchozí konfiguraci a eskalujeme vlastnictví certifikátu.“
+
+Veřejná nebo zákaznická zpráva, pokud je vůbec potřeba, má být ještě užší:
+
+„Probíhá krátká údržba veřejného webu. Služba může být dočasně hůře dostupná. Po dokončení stav ověříme a aktualizujeme.“
+
+Nepiš do veřejné zprávy interní IP adresy, názvy účtů, výpisy logů, konkrétní chyby konfigurace ani cestu k tajemstvím. Transparentnost není sdílení návodu pro další problém.
+
+### Rollback není ostuda
+
+Rollback je dobrý provozní nástroj, ne přiznání porážky. Malé okno by mělo mít předem jasný bod, kdy se přestane pokračovat.
+
+Stop pravidla:
+
+- oprava překročila domluvený čas a není jasné, proč,
+- smoke test ukazuje horší uživatelský stav než před zásahem,
+- chybí potřebný přístup nebo vlastník,
+- objevilo se riziko pro zákaznická data,
+- změna vyžaduje širší zásah než původní karta.
+
+V takové chvíli není cílem „ještě to nějak dát“. Cílem je zastavit zhoršování stavu, zapsat důvod a převést další práci do nové karty. Hrdinství bez rollbacku je jen špatně pojmenované hazardování.
+
+### Po okně zavři smyčku
+
+Změnové okno končí až po zápisu výsledku. Stačí pět řádků:
+
+| Pole | Zápis |
+| --- | --- |
+| Co se změnilo | konkrétní provedená změna |
+| Co potvrdil smoke test | veřejná cesta, stav a čas ověření |
+| Co se nepovedlo | pokud něco zůstalo otevřené |
+| Co upravíme v runbooku | jedna věc, která příště zrychlí práci |
+| Co smažeme nebo zkrátíme | dočasná výjimka, debug log, screenshot, export nebo přístup |
+
+Ten poslední řádek je pro privacy-first provoz důležitý. Po opravě často zůstávají pracovní artefakty: výpisy, screenshoty, dočasné přístupy, kopie konfigurace, chatové zprávy s přílišným detailem. Užitečné při zásahu, otravné a rizikové po něm. Úklid je součást hotovo.
+
+### Checklist: Malé změnové okno
+
+- [ ] Okno má jednu opravnou větu.
+- [ ] Víme, proč se oprava dělá teď.
+- [ ] Změna má vlastníka zásahu a vlastníka ověření.
+- [ ] Karta neobsahuje tajemství, tokeny ani interní payloady.
+- [ ] Je jasné, jaký uživatelský dopad může nastat.
+- [ ] Existuje rollback nebo stop pravidlo.
+- [ ] Smoke test ověřuje veřejnou nebo uživatelskou cestu, ne jen interní nástroj.
+- [ ] Komunikace říká minimum potřebné k rozhodnutí.
+- [ ] Diagnostické výjimky nejsou použité jako důkaz opravy.
+- [ ] Po okně se uklidí dočasné přístupy, logy, screenshoty a poznámky s citlivými detaily.
+- [ ] Výsledek se propíše do runbooku, backlogu nebo vlastnické karty.
+
+### Mini úkol
+
+Vezmi jeden připravený provozní úkol a napiš pro něj malé změnové okno:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jaká je jedna opravná věta? |  |
+| Proč to nejde dál odkládat? |  |
+| Kdo provede zásah? |  |
+| Kdo ověří výsledek? |  |
+| Jaký přístup je potřeba a kde se spravuje? |  |
+| Jaký je nejhorší realistický dopad na uživatele? |  |
+| Jaký je rollback nebo stop pravidlo? |  |
+| Jaký smoke test zavře opravu? |  |
+| Komu pošleme krátkou zprávu před a po okně? |  |
+| Co po okně smažeme, zkrátíme nebo odebereme? |  |
+
+Na konec napiš jednu větu:
+
+„Okno zavřeme jen tehdy, když ___ projde bez diagnostické výjimky a ___ je zapsané v runbooku.“
+
+Pokud tu větu neumíš doplnit, oprava ještě není připravená. To není ostuda. Ostuda je zjistit to až po kliknutí na restart.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -45414,6 +45557,7 @@ Pokud neumíš doplnit vlastníka nebo ověření, nedělej z toho neurčitý ú
 
 ## Pracovní log
 
+- 2026-07-22: Doplněna příloha o malém změnovém okně pro provozní opravu bez chaosu: opravná věta, minimální karta okna, oddělení přípravy, zásahu a ověření, chudá komunikace bez interních detailů, rollback a stop pravidla, uzavření smyčky po okně, checklist a mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně ověřeno, že `cody.dreamind.cz` přímo míří na `91.99.227.53`, běžné přímé HTTPS selhává kvůli expirovanému veřejnému Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), diagnostické přímé HTTPS s `-k` vrací `200 OK` z nginx/Next.js, proxy cesta po TLS tunelu končí prázdnou odpovědí a neinteraktivní SSH pro účty `root`, `ubuntu`, `debian`, `node` i `cody` odmítá přístup, takže certifikát z tohoto běhu nejde bezpečně obnovit.
 - 2026-07-22: Doplněna příloha o převodu provozního nálezu do backlogu bez ztráty tahu: rozlišení nálezu a úkolu, oddělení okamžité obnovy od systémové změny, backlogová karta s dopadem, vrstvou, vlastníkem a definicí hotovo, prioritizace podle dopadu, opakování, ověřitelnosti a datového rizika, rozhodovací věta pro opakované nálezy, checklist a mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně ověřeno, že `cody.dreamind.cz` přímo míří na `91.99.227.53`, běžné přímé HTTPS selhává kvůli expirovanému veřejnému Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), HTTPS přes lokální proxy končí po TLS tunelu prázdnou odpovědí a neinteraktivní SSH pro účty `root`, `node`, `ubuntu`, `debian` i `cody` odmítá přístup, takže certifikát z tohoto běhu nejde bezpečně obnovit.
 - 2026-07-22: Doplněna příloha o ověření po opravě bez falešného vítězství: návrat k původnímu uživatelskému dopadu, veřejná kontrola vrstev DNS/TLS/HTTP/obsah/akce, varování před používáním diagnostických výjimek jako důkazu opravy, úklid provozních stop po zásahu, pět řádků poučení do runbooku, checklist a mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně ověřeno, že běžné přímé HTTPS na `cody.dreamind.cz` selhává kvůli expirovanému veřejnému Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), HTTPS přes lokální proxy končí po TLS tunelu prázdnou odpovědí a SSH opravný přístup z tohoto běhu není dostupný (`Permission denied`), takže certifikát nelze z prostředí bezpečně obnovit.
 - 2026-07-22: Doplněna příloha o blokovaném opravném zásahu bez úniku interních detailů: oddělení diagnostické, opravné a rozhodovací schopnosti, opravná karta pro převzetí zásahu, pravidla pro eskalaci s minimem provozních informací, čtyři rozumné konce blokéru, šablona stručné interní eskalace, checklist a mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně ověřeno, že `cody.dreamind.cz` přes proxy po TLS tunelu stále končí chybou `Empty reply from server`, přímé veřejné HTTPS bez proxy selhává na expirovaném Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), zatímco diagnostické `curl --noproxy '*' -k -sSI` vrací `200 OK` z nginx/Next.js; v dostupném prostředí není `certbot`, nginx ani SSH klíče, takže certifikát z tohoto běhu nejde bezpečně obnovit.
