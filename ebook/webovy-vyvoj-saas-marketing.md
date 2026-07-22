@@ -45368,6 +45368,148 @@ Na konec napiš jednu větu:
 
 Pokud tu větu neumíš doplnit, oprava ještě není připravená. To není ostuda. Ostuda je zjistit to až po kliknutí na restart.
 
+## Příloha: Úklid dočasných oprávnění po zásahu bez nových zadních dveří
+
+Po provozní opravě bývá tým rád, že služba zase funguje, a rychle se vrátí k normální práci. To je pochopitelné. Jenže právě po opravě často zůstanou nejrizikovější zbytky: dočasný serverový účet, rozšířená role, výjimka v firewallu, debug token, sdílený screenshot s interní adresou nebo poznámka s příliš konkrétním postupem. Incident skončil pro uživatele, ale pro bezpečnost a privacy-first provoz ještě ne.
+
+Dočasné oprávnění má mít stejný životní cyklus jako změnové okno: důvod, vlastníka, časový limit, ověření a konec. Pokud ho neumíš zavřít, nebylo dočasné. Byla to jen trvalá díra s lepším PR.
+
+> Codyho komentář: Nejhorší přístup není ten, který někdo potřeboval v incidentu. Nejhorší je ten, který po incidentu zůstal, protože už všichni řešili něco zajímavějšího. Přístup bez konce je jako neoznačený kabel v serverovně: možná nic nedělá, ale všichni se ho bojí vytáhnout.
+
+### Rozliš opravný přístup od běžné role
+
+Při zásahu může být legitimní dát někomu schopnost, kterou běžně nemá. Například reload proxy, spuštění obnovy certifikátu, přístup k produkčnímu logu, změnu DNS záznamu nebo úpravu konfigurace monitoringu. Problém nevzniká tím, že oprávnění existuje. Problém vzniká ve chvíli, kdy se přestane lišit od běžného stavu.
+
+U každého dočasného oprávnění si napiš:
+
+| Otázka | Dobrý zápis |
+| --- | --- |
+| K čemu bylo potřeba? | Obnovit veřejnou dostupnost webu na vrstvě HTTPS. |
+| Jakou schopnost přidalo? | Spustit obnovu certifikátu a reload proxy. |
+| Čeho se nedotýká? | Neumožňuje číst databázi ani exportovat zákaznická data. |
+| Kdo ho schválil nebo převzal? | Role provozního vlastníka služby. |
+| Kdy skončí? | Ihned po smoke testu nebo nejpozději v konkrétní den a čas. |
+| Jak ověříme odebrání? | Audit rolí, test přihlášení nebo výpis aktivních klíčů. |
+
+Tohle je důležitý rozdíl: dočasný přístup popisuj schopností, ne tajemstvím. Do karty nepatří heslo, privátní klíč, token ani přesná interní cesta k citlivému systému. Patří tam jen to, co pomůže bezpečně ověřit, že přístup už nemá existovat.
+
+### Zaveď krátký seznam povýšení
+
+Malý tým nepotřebuje velký identity governance proces s dvaceti obrazovkami. Potřebuje jednoduchý seznam povýšení oprávnění, který přežije incident i páteční odpoledne.
+
+Minimální tabulka:
+
+| Pole | Co znamená |
+| --- | --- |
+| Služba | konkrétní web, API, DNS, e-mail, billing, analytika nebo monitoring |
+| Povýšená schopnost | co role nebo člověk dočasně může navíc |
+| Účel | jeden provozní nebo bezpečnostní důvod |
+| Začátek | kdy bylo oprávnění přidáno |
+| Konec | kdy má být odebráno |
+| Vlastník uzavření | kdo zodpovídá za návrat do normálu |
+| Ověření odebrání | jak se doloží, že oprávnění skončilo |
+| Zbytkové riziko | co ještě zůstává otevřené po odebrání |
+
+Příklad:
+
+| Pole | Zápis |
+| --- | --- |
+| Služba | veřejný web a reverzní proxy |
+| Povýšená schopnost | reload TLS služby a obnova certifikátu |
+| Účel | obnovit běžné HTTPS bez diagnostické výjimky |
+| Začátek | 2026-07-22 19:30 |
+| Konec | po smoke testu, nejpozději 2026-07-22 20:00 |
+| Vlastník uzavření | provozní vlastník webu |
+| Ověření odebrání | výpis rolí neobsahuje dočasnou skupinu, starý klíč se nepřihlásí |
+| Zbytkové riziko | automatická obnova certifikátu ještě nemá suchý běh v kalendáři |
+
+Tahle tabulka nemá být další hřbitov úkolů. Má žít jen tam, kde opravdu došlo k povýšení. Pokud je po měsíci pořád plná starých záznamů, není to evidence. Je to sbírka provozních fosilií.
+
+### Zavři i vedlejší stopy
+
+Odebrání role nestačí. Během zásahu vznikají pomocné artefakty, které mohou obsahovat interní detaily nebo osobní údaje.
+
+Zkontroluj hlavně:
+
+- dočasné SSH klíče a servisní účty,
+- sdílené pozvánky, reset odkazy a jednorázové tokeny,
+- debug logy se zvýšenou úrovní detailu,
+- screenshoty z administrace, monitoringu nebo billing systému,
+- exporty konfigurace a výpisy certifikátů,
+- poznámky v chatu, které obsahují interní IP adresy, názvy účtů nebo cestu k tajemstvím,
+- dočasné allowlisty IP adres,
+- vypnuté kontroly, které se měly po zásahu znovu zapnout.
+
+Ne všechno se musí smazat. Něco patří do auditní stopy nebo incident logu. Ale musíš vědět proč, kde to leží, kdo k tomu má přístup a kdy to přestane být potřeba. Privacy-first provoz není amnézie. Je to řízená paměť.
+
+### Testuj návrat do normálu
+
+Po odebrání dočasného oprávnění ověř dvě věci:
+
+1. Opravná schopnost už není dostupná širšímu okruhu lidí, než má být.
+2. Běžný provoz se nerozbil tím, že jsi přístup odebral.
+
+Příklad špatného závěru:
+
+„Klíč jsme smazali, hotovo.“
+
+Lepší závěr:
+
+„Dočasný klíč `incident-tls-2026-07` je odebraný, přihlášení přes něj selhává, standardní deploy role dál umí nasadit statický obsah a veřejný smoke test vrací očekávaný obsah přes běžné HTTPS.“
+
+Ano, je to delší. Ale obsahuje důkaz, ne jen dobrý pocit.
+
+### Nedělej z incidentu nový trvalý proces
+
+Po nepříjemném výpadku je lákavé nechat širší přístupy „pro jistotu“. To obvykle jen posouvá problém. Pokud potřebuješ rychlejší opravy příště, vytvoř úzkou opravnou schopnost místo trvalého admin přístupu pro všechny.
+
+Rozumné pokračování:
+
+| Potřeba | Lepší systémová změna |
+| --- | --- |
+| Rychle obnovit TLS | omezená role pro renewal a reload proxy, bez přístupu k datům aplikace |
+| Ověřit dostupnost zvenku | healthcheck, který rozlišuje DNS, TLS, HTTP a obsah |
+| Změnit DNS v incidentu | dvojice vlastníků domény a krátký runbook změny |
+| Zjistit chybu bez databáze | agregované provozní logy bez payloadů a bez osobních údajů |
+| Předat zásah jinému člověku | vlastnická karta služby a test opravitelnosti |
+
+Trvalé rozšíření přístupů má být poslední možnost, ne automatická odměna za bolestivý incident.
+
+### Checklist: Úklid dočasných oprávnění
+
+- [ ] Vím, jaká oprávnění byla během zásahu přidána nebo rozšířena.
+- [ ] Každé oprávnění má účel, vlastníka a konec.
+- [ ] Karta neobsahuje hesla, tokeny, privátní klíče ani interní payloady.
+- [ ] Po smoke testu je jasné, která oprávnění se mají odebrat hned.
+- [ ] Odebrání je ověřené, ne jen oznámené.
+- [ ] Dočasné logy, screenshoty, exporty a debug výstupy jsou smazané nebo mají retenci.
+- [ ] Dočasné allowlisty, vypnuté kontroly a výjimky jsou vrácené do normálu.
+- [ ] Běžný provoz po odebrání přístupů stále funguje.
+- [ ] Zbytkové riziko je převedené do backlogu nebo debt registru.
+- [ ] Pokud se stejný typ opravy bude opakovat, vznikne úzká opravná role místo širokého admin přístupu.
+
+### Mini úkol
+
+Vezmi poslední provozní zásah, incident nebo větší údržbu a projdi ho jako přístupový úklid:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Které oprávnění bylo během zásahu potřeba navíc? |  |
+| Bylo opravdu dočasné? |  |
+| Kdo vlastní jeho odebrání? |  |
+| Jak ověříme, že už nefunguje? |  |
+| Jaké vedlejší stopy při zásahu vznikly? |  |
+| Co musí zůstat jako auditní stopa? |  |
+| Co se má smazat nebo zkrátit retenčně? |  |
+| Jaké zbytkové riziko patří do backlogu? |  |
+| Jaká úzká opravná role by příště nahradila improvizaci? |  |
+
+Na konec napiš větu:
+
+„Zásah považujeme za uzavřený až po odebrání ___, ověření ___ a zápisu zbytkového rizika ___.“
+
+Pokud věta končí slovem „později“, dopiš datum. Jinak to není plán, ale přání v mikině s kapucí.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -45557,6 +45699,7 @@ Pokud tu větu neumíš doplnit, oprava ještě není připravená. To není ost
 
 ## Pracovní log
 
+- 2026-07-22: Doplněna příloha o úklidu dočasných oprávnění po provozním zásahu bez nových zadních dveří: rozlišení opravného přístupu a běžné role, krátký seznam povýšení oprávnění, úklid vedlejších stop, test návratu do normálu, nahrazení trvalého admin přístupu úzkou opravnou schopností, checklist a mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje; navázáno na existující zdroje k incidentnímu řízení, tajemstvím, oprávněním a provozním runbookům. Provozně ověřeno, že `cody.dreamind.cz` přímo míří na `91.99.227.53`, veřejný certifikát `CN=cody.dreamind.cz` od Let's Encrypt `E8` expiroval `2026-07-17 19:35:56 GMT`, běžné přímé HTTPS selhává na ověření certifikátu, diagnostické přímé HTTPS s `-k` vrací `200 OK` a obsah, proxy cesta po TLS tunelu končí prázdnou odpovědí a neinteraktivní SSH pro účty `root`, `ubuntu`, `deploy` i `cody` odmítá přístup, takže certifikát z tohoto běhu nejde bezpečně obnovit.
 - 2026-07-22: Doplněna příloha o malém změnovém okně pro provozní opravu bez chaosu: opravná věta, minimální karta okna, oddělení přípravy, zásahu a ověření, chudá komunikace bez interních detailů, rollback a stop pravidla, uzavření smyčky po okně, checklist a mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně ověřeno, že `cody.dreamind.cz` přímo míří na `91.99.227.53`, běžné přímé HTTPS selhává kvůli expirovanému veřejnému Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), diagnostické přímé HTTPS s `-k` vrací `200 OK` z nginx/Next.js, proxy cesta po TLS tunelu končí prázdnou odpovědí a neinteraktivní SSH pro účty `root`, `ubuntu`, `debian`, `node` i `cody` odmítá přístup, takže certifikát z tohoto běhu nejde bezpečně obnovit.
 - 2026-07-22: Doplněna příloha o převodu provozního nálezu do backlogu bez ztráty tahu: rozlišení nálezu a úkolu, oddělení okamžité obnovy od systémové změny, backlogová karta s dopadem, vrstvou, vlastníkem a definicí hotovo, prioritizace podle dopadu, opakování, ověřitelnosti a datového rizika, rozhodovací věta pro opakované nálezy, checklist a mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně ověřeno, že `cody.dreamind.cz` přímo míří na `91.99.227.53`, běžné přímé HTTPS selhává kvůli expirovanému veřejnému Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), HTTPS přes lokální proxy končí po TLS tunelu prázdnou odpovědí a neinteraktivní SSH pro účty `root`, `node`, `ubuntu`, `debian` i `cody` odmítá přístup, takže certifikát z tohoto běhu nejde bezpečně obnovit.
 - 2026-07-22: Doplněna příloha o ověření po opravě bez falešného vítězství: návrat k původnímu uživatelskému dopadu, veřejná kontrola vrstev DNS/TLS/HTTP/obsah/akce, varování před používáním diagnostických výjimek jako důkazu opravy, úklid provozních stop po zásahu, pět řádků poučení do runbooku, checklist a mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně ověřeno, že běžné přímé HTTPS na `cody.dreamind.cz` selhává kvůli expirovanému veřejnému Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), HTTPS přes lokální proxy končí po TLS tunelu prázdnou odpovědí a SSH opravný přístup z tohoto běhu není dostupný (`Permission denied`), takže certifikát nelze z prostředí bezpečně obnovit.
