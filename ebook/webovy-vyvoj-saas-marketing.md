@@ -43955,6 +43955,48 @@ Pracovní tabulka:
 
 Když najdeš rozpor, neopravuj jen formulaci. Zjisti, proč vznikl. Možnosti jsou obvykle čtyři: chybí vlastník, chybí propisovací checklist, zdroj pravdy není jasný, nebo se veřejný slib odtrhl od provozní reality.
 
+### Po incidentu oprav i sliby, ne jen konfiguraci
+
+Provozní incident často odhalí víc než jeden technický problém. Když expiroval certifikát, rozbil se redirect, nefungoval export nebo monitoring mlčel, oprava konfigurace je jen první krok. Druhý krok je zkontrolovat, co o stejné schopnosti tvrdí veřejný web, dokumentace, nabídky, trust center a interní runbook.
+
+Příklad: pokud web říká „hlídáme dostupnost veřejných služeb“, ale healthcheck ve skutečnosti nekontroluje platnost HTTPS zvenku, nejde jen o chybu monitoringu. Je to rozpor mezi slibem a provozem. Oprava má proto mít dvě části: technickou prevenci a textovou pravdivost.
+
+Karta propisu po incidentu:
+
+| Pole | Odpověď |
+| --- | --- |
+| Jaký incident nebo selhání jsme řešili? |  |
+| Který veřejný slib se ho dotýká? | dostupnost / EU provoz / export / bezpečnost / support |
+| Kde je zdroj pravdy? |  |
+| Co bylo technicky opraveno? |  |
+| Co bylo doplněno do runbooku nebo monitoringu? |  |
+| Který veřejný text je potřeba zpřesnit? |  |
+| Která interní šablona se musí změnit? | sales / support / onboarding / status update |
+| Co se nesmí tvrdit, dokud prevence není hotová? |  |
+| Kdy zkontrolujeme, že se změna propsala všude? |  |
+
+Privacy-first detail: po incidentu nesbírej víc návštěvnických dat jen proto, že chceš „mít jistotu“. Pokud problém souvisel s TLS, DNS, HTTP odpovědí nebo deployem, potřebuješ lepší technický healthcheck, ne session replay lidí, kteří narazili na chybu. Měř vrstvu, která selhala.
+
+Rozumné výstupy po incidentu:
+
+- nový nebo opravený healthcheck,
+- doplněný vlastník služby,
+- kratší runbook pro ruční obnovu,
+- přesnější veřejný text,
+- upravená support odpověď,
+- záznam v rozhodovacím logu,
+- jedno ověřitelné preventivní opatření s datem kontroly.
+
+Nerozumné výstupy:
+
+- obecné „budeme si na to dávat pozor“,
+- další dashboard bez vlastníka,
+- veřejný slib, který zní lépe než reálná prevence,
+- plošné sledování návštěvníků místo kontroly infrastruktury,
+- rozeslání interních detailů, které zákazník nepotřebuje a útočník by ocenil.
+
+Codyho komentář: Incident je drahý způsob, jak dostat pravdu do kalendáře. Když už tu fakturu zaplatíš, aspoň z ní udělej opravený systém, ne jen dramatický zápis v chatu.
+
 ### Checklist: Jedna verze pravdy
 
 - [ ] Pro pricing, limity, export, výmaz, SLA a privacy sliby existuje zdroj pravdy.
@@ -44178,6 +44220,7 @@ Pokud věta nejde doplnit, problém není jen v textu. Problém je ve vlastnictv
 
 ## Pracovní log
 
+- 2026-07-22: Rozšířena příloha o jedné verzi pravdy podkapitolou „Po incidentu oprav i sliby, ne jen konfiguraci“: karta propisu po provozním selhání, oddělení technické opravy od veřejných a interních slibů, privacy-first upozornění proti nahrazování infrastrukturního monitoringu sledováním lidí a sada rozumných i nerozumných výstupů po incidentu. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně ověřeno, že `cody.dreamind.cz` má přímé HTTPS selhání kvůli expirovanému Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), HTTP vrací `301` na HTTPS a dostupný pracovní prostor stále neobsahuje SSH/deploy/certbot přístup pro bezpečnou obnovu certifikátu.
 - 2026-07-22: Doplněna příloha o jedné verzi pravdy bez roztříštěných slibů: zdroj pravdy podle typu slibu, oddělení veřejného slibu od interní poznámky, propis změn mezi webem, dokumentací, sales materiály, supportem a e-bookem, práce s odvozeninami, 30minutová kontrola rozporů, checklist a mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně znovu ověřeno, že `cody.dreamind.cz` přes proxy končí po TLS tunelu chybou `Empty reply from server`, přímé HTTPS bez proxy selhává na expirovaném Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), zatímco diagnostické `curl --noproxy '*' -k -I` vrací `200 OK` z nginx/Next.js na `91.99.227.53`; pracovní prostor neobsahuje SSH/deploy/certbot přístup pro bezpečnou obnovu certifikátu.
 - 2026-07-22: Doplněna příloha o týdenním rozhodovacím digestu bez nové analytiky: rozhodovací věta, skládání signálů z existujících zdrojů, pevná struktura digestu, převod trvalých závěrů do rozhodovacího logu, retenční pravidla, karta digestu, checklist a mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje; navázáno na existující zdroje k GDPR principům minimalizace, Google SRE provozním praktikám a Diátaxis dokumentaci. Provozně ověřeno, že `cody.dreamind.cz` přes proxy končí po TLS tunelu chybou `Empty reply from server`, přímé HTTPS bez proxy selhává na expirovaném Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), zatímco diagnostické `curl --noproxy '*' -k -I` vrací `200 OK` z nginx/Next.js na `91.99.227.53`; pracovní prostor neobsahuje SSH/deploy/certbot přístup, kterým by šlo certifikát bezpečně obnovit.
 - 2026-07-22: Doplněna příloha o doporučení zákazníků bez referral trackingu: výběr správného okamžiku hodnoty, doporučovací materiály místo importu kontaktů, férové odměny, agregované měření dopadu bez mapování vztahů, karta doporučovací smyčky, checklist a mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně ověřeno, že veřejné přímé HTTPS na `cody.dreamind.cz` dál selhává na expirovaném Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), zatímco diagnostické `curl --noproxy '*' -k` vrací `200 OK` z nginx/Next.js na `91.99.227.53`; SSH pro `root` i `node` odmítá neinteraktivní přístup, takže certifikát z tohoto běhu nejde bezpečně obnovit.
