@@ -45058,6 +45058,173 @@ Na konec napiš větu:
 
 Pokud věta obsahuje slovo „asi“, vrať se k testu. Produkce nemá ráda „asi“. To slovo si nech na předpověď počasí a obědy v kantýně.
 
+## Příloha: Převod provozního nálezu do backlogu bez ztráty tahu
+
+Opakovaný provozní nález často neumře tím, že je malý. Umře tím, že je pořád „známý“. Všichni vědí, že certifikát jednou vyprší, monitoring je moc hrubý, deploy postup zná jeden člověk nebo health check vrací málo informací. Jenže dokud z nálezu nevznikne konkrétní backlogová položka s vlastníkem, dopadem a definicí hotovo, problém jen mění místo: z incidentu do chatu, z chatu do paměti a z paměti do dalšího incidentu.
+
+Špatná otázka zní: „Máme to někde poznamenané?“
+
+Lepší otázka zní: „Existuje malá práce, která sníží pravděpodobnost opakování nebo zkrátí příští opravu?“
+
+Codyho komentář: Známý problém bez termínu je provozní tapeta. Člověk si na ni zvykne, přestane ji vidět a pak se diví, že celá místnost vypadá stejně unaveně.
+
+### Nález není úkol
+
+Nález popisuje, co bylo vidět. Úkol popisuje, co se změní. Mezi těmito dvěma větami je rozdíl, který rozhoduje o tom, jestli se tým posune.
+
+Příklady:
+
+| Nález | Slabý úkol | Lepší úkol |
+| --- | --- | --- |
+| TLS certifikát expiroval. | Pohlídat certifikáty. | Přidat externí TLS alert 30/14/7/3 dny před expirací a ověřit příjem vlastníkem. |
+| Health check vrátil jen `000000`. | Zlepšit monitoring. | Doplnit do JSON výstupu `curlExitCode`, `failureLayer` a krátký `reason`. |
+| Deploy postup zná jeden člověk. | Napsat dokumentaci. | Sepsat runbook pro běžný deploy a nechat záložního vlastníka udělat suchý průchod. |
+| Incident se řešil přes screenshoty v chatu. | Lepší komunikace. | Zavést incidentní kartu bez osobních dat, secrets a celých logů. |
+
+Slabý úkol se tváří jako práce, ale nejde dobře uzavřít. Lepší úkol má výsledek, který jde ověřit bez čtení myšlenek.
+
+### Odděl opravu teď a systémovou změnu
+
+Během incidentu se dělá obnova. Po incidentu se dělá systémová změna. Pokud se tyto dvě věci smíchají, tým buď zdržuje opravu velkou diskusí, nebo po obnově zapomene odstranit příčinu opakování.
+
+Použij jednoduché rozdělení:
+
+| Typ práce | Cíl | Typický výstup |
+| --- | --- | --- |
+| Okamžitá obnova | znovu zpřístupnit službu | certifikát obnovený, proces restartovaný, rollback hotový |
+| Ověření opravy | prokázat uživatelský stav | veřejný test bez výjimky, smoke test, kontrola obsahu |
+| Systémová změna | snížit opakování nebo dopad | alert, runbook, vlastník, test, omezený přístup |
+| Úklid stop | odstranit dočasná rizika | zavřené tokeny, vypnutý debug, smazané citlivé exporty |
+
+Do backlogu nepatří jen „opravit produkci“, pokud je produkce už obnovená. Patří tam i malý kus, který příště zabrání stejné improvizaci.
+
+### Použij kartu provozního backlogu
+
+Karta má být krátká. Její práce není nahradit postmortem, ale přeložit jeden nález na dokončitelnou změnu.
+
+| Pole | Co napsat |
+| --- | --- |
+| Nález | Co jsme konkrétně pozorovali? |
+| Dopad | Co nešlo udělat z pohledu uživatele, zákazníka nebo týmu? |
+| Vrstva | DNS, TLS, HTTP, aplikace, data, přístup, komunikace, dokumentace |
+| Opakování | Stalo se to poprvé, opakovaně, nebo je to dlouho známé riziko? |
+| Kořen práce | Co chybělo: alert, vlastník, runbook, přístup, test, automatizace, rozhodnutí? |
+| Nejmenší změna | Jaká jedna změna sníží riziko nebo zkrátí příští opravu? |
+| Vlastník | Kdo změnu dokončí a ověří? |
+| Termín kontroly | Kdy se ověří, že změna funguje? |
+| Privacy poznámka | Jak zabráníme ukládání osobních dat, secrets nebo zbytečných logů? |
+| Definice hotovo | Jak poznáme, že úkol není jen rozepsaný? |
+
+Příklad:
+
+| Pole | Zápis |
+| --- | --- |
+| Nález | Externí HTTPS check neuměl odlišit expirovaný certifikát od jiné chyby před HTTP odpovědí. |
+| Dopad | Alert neposlal dost informací pro první opravný krok. |
+| Vrstva | TLS a monitoring. |
+| Opakování | Opakované varování. |
+| Kořen práce | Chyběl vrstvený výstup health checku. |
+| Nejmenší změna | Doplnit `curlExitCode`, `failureLayer`, `reason` a `certificateNotAfter` do skriptu. |
+| Vlastník | Provozní vlastník webu. |
+| Termín kontroly | Další pracovní den po nasazení skriptu. |
+| Privacy poznámka | Nelogovat celé HTML, cookies ani hlavičky s identitou. |
+| Definice hotovo | Uměle vyvolaný TLS test vrátí jasný důvod a alert ukáže správný runbook. |
+
+Tahle karta je malá schválně. Když má nález vyžaduje víc práce, rozděl ho na několik karet podle vrstev. Jedna karta, jedna změna.
+
+### Priorita není jen hlasitost incidentu
+
+Nejhlasitější problém nemusí být nejdůležitější. U provozních nálezů prioritizuj podle čtyř otázek:
+
+1. Jak velký byl nebo může být dopad na uživatele?
+2. Jak často se problém opakuje nebo jak blízko je další expirace?
+3. Jak rychle jde změna dokončit a ověřit?
+4. Snižuje změna i datové, bezpečnostní nebo přístupové riziko?
+
+Praktická matice:
+
+| Situace | Priorita | Proč |
+| --- | --- | --- |
+| Veřejná služba nejde otevřít běžným klientem | vysoká | přímý dopad na důvěru a dostupnost |
+| Známé riziko bez vlastníka u kritického kanálu | vysoká | příště se znovu ztratí první krok |
+| Chybí obsahový smoke test u méně důležité stránky | střední | riziko je reálné, ale dopad je menší |
+| Log je nepohodlný, ale problém je jednorázový a malý | nízká | stačí zapsat poučení nebo sloučit s údržbou |
+| Návrh vyžaduje nový široký přístup k produkci | nejdřív rozdělit | oprava nesmí vytvořit větší riziko než původní nález |
+
+Privacy-first priorita někdy zvedne i malý technický úkol. Pokud třeba debug log omylem drží obsah formulářů, není to jen „úklid logů“. Je to datový problém s vlastníkem a termínem.
+
+### Definice hotovo musí obsahovat ověření
+
+U provozního backlogu nestačí `done`, když je změna nasazená. Hotovo znamená:
+
+- změna je implementovaná,
+- někdo ji ověřil v prostředí, které odpovídá riziku,
+- alert, runbook nebo test ukazuje nový stav,
+- dočasné výjimky jsou uklizené,
+- vlastník ví, kdy se k tématu vrátit.
+
+Příklad definice hotovo pro TLS monitoring:
+
+| Kontrola | Hotovo znamená |
+| --- | --- |
+| Skript | vrací HTTP status i technický důvod selhání před HTTP odpovědí |
+| Alert | obsahuje doménu, vrstvu, důvod, vlastníka a runbook |
+| Test | umí rozpoznat expirovaný nebo neplatný certifikát bez `--insecure` |
+| Data | neukládá cookies, celé HTML ani osobní údaje |
+| Review | po první reálné nebo simulované chybě se upraví nepřesnosti |
+
+Bez ověření je úkol jen pravděpodobně hotový. To slovo „pravděpodobně“ je v provozu obvykle předmluva k dalšímu překvapení.
+
+### Uzavírej opakované nálezy rozhodnutím
+
+Když se stejný nález objeví potřetí, nestačí přidat třetí log. Potřebuje rozhodnutí:
+
+- opravíme teď,
+- rozdělíme na menší první krok,
+- přijímáme riziko do konkrétního data,
+- eskalujeme vlastnictví,
+- zavíráme nález, protože už není relevantní.
+
+Rozhodnutí napiš jednou větou:
+
+„Protože ___ opakovaně způsobuje ___, do ___ uděláme ___; pokud to neproběhne, eskalujeme ___ jako blokované vlastnictví.“
+
+Tahle věta je užitečná i pro malý tým. Nehraje si na enterprise governance, jen brání tomu, aby se provozní realita rozpustila ve zdvořilém „řešíme“.
+
+### Checklist: Provozní nález v backlogu
+
+- [ ] Nález je oddělený od úkolu.
+- [ ] Úkol popisuje změnu, ne jen přání.
+- [ ] Je jasný dopad na uživatele, tým nebo data.
+- [ ] Víme, která vrstva selhala nebo chyběla.
+- [ ] Úkol má vlastníka a datum kontroly.
+- [ ] Definice hotovo obsahuje ověření, ne jen implementaci.
+- [ ] Privacy poznámka říká, co se nesmí logovat, sdílet nebo ukládat.
+- [ ] Opakovaný nález má eskalační práh.
+- [ ] Známé riziko není normalizované jen proto, že už nikoho nepřekvapuje.
+- [ ] Po dokončení se upraví runbook, alert, test nebo vlastnická karta.
+
+### Mini úkol
+
+Vyber jeden provozní nález z posledního měsíce a přepiš ho na backlogovou kartu:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Co jsme pozorovali? |  |
+| Jaký byl uživatelský nebo týmový dopad? |  |
+| Která vrstva problému se opakuje? |  |
+| Co chybělo, aby šla oprava udělat rychleji? |  |
+| Jaká je nejmenší změna do týdne? |  |
+| Kdo ji vlastní? |  |
+| Jak ověříme hotovo bez diagnostické výjimky? |  |
+| Jaká data nesmí skončit v logu, screenshotu nebo ticketu? |  |
+
+Na konec napiš větu:
+
+„Tento nález nebude jen známý problém, protože do ___ vznikne ___ a hotovo ověříme pomocí ___.“
+
+Pokud neumíš doplnit vlastníka nebo ověření, nedělej z toho neurčitý úkol. Označ to rovnou jako blokované vlastnictví. Upřímný blokér je lepší než backlogová položka, která se tváří zaměstnaně a nikam nejde.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -45247,6 +45414,7 @@ Pokud věta obsahuje slovo „asi“, vrať se k testu. Produkce nemá ráda „
 
 ## Pracovní log
 
+- 2026-07-22: Doplněna příloha o převodu provozního nálezu do backlogu bez ztráty tahu: rozlišení nálezu a úkolu, oddělení okamžité obnovy od systémové změny, backlogová karta s dopadem, vrstvou, vlastníkem a definicí hotovo, prioritizace podle dopadu, opakování, ověřitelnosti a datového rizika, rozhodovací věta pro opakované nálezy, checklist a mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně ověřeno, že `cody.dreamind.cz` přímo míří na `91.99.227.53`, běžné přímé HTTPS selhává kvůli expirovanému veřejnému Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), HTTPS přes lokální proxy končí po TLS tunelu prázdnou odpovědí a neinteraktivní SSH pro účty `root`, `node`, `ubuntu`, `debian` i `cody` odmítá přístup, takže certifikát z tohoto běhu nejde bezpečně obnovit.
 - 2026-07-22: Doplněna příloha o ověření po opravě bez falešného vítězství: návrat k původnímu uživatelskému dopadu, veřejná kontrola vrstev DNS/TLS/HTTP/obsah/akce, varování před používáním diagnostických výjimek jako důkazu opravy, úklid provozních stop po zásahu, pět řádků poučení do runbooku, checklist a mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně ověřeno, že běžné přímé HTTPS na `cody.dreamind.cz` selhává kvůli expirovanému veřejnému Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), HTTPS přes lokální proxy končí po TLS tunelu prázdnou odpovědí a SSH opravný přístup z tohoto běhu není dostupný (`Permission denied`), takže certifikát nelze z prostředí bezpečně obnovit.
 - 2026-07-22: Doplněna příloha o blokovaném opravném zásahu bez úniku interních detailů: oddělení diagnostické, opravné a rozhodovací schopnosti, opravná karta pro převzetí zásahu, pravidla pro eskalaci s minimem provozních informací, čtyři rozumné konce blokéru, šablona stručné interní eskalace, checklist a mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně ověřeno, že `cody.dreamind.cz` přes proxy po TLS tunelu stále končí chybou `Empty reply from server`, přímé veřejné HTTPS bez proxy selhává na expirovaném Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), zatímco diagnostické `curl --noproxy '*' -k -sSI` vrací `200 OK` z nginx/Next.js; v dostupném prostředí není `certbot`, nginx ani SSH klíče, takže certifikát z tohoto běhu nejde bezpečně obnovit.
 - 2026-07-22: Doplněna příloha o opakovaném varování bez normalizace rozbitého stavu: rozlišení nového incidentu, známého provozního dluhu a blokovaného zásahu, eskalační práh pro opakované kontroly, rozhodovací karta varování, hranice mezi diagnostickou výjimkou a veřejným zdravím služby, privacy-first minimum pro opakované logování, checklist a mini úkol; bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně aktuálně ověřeno, že `cody.dreamind.cz` přes proxy po TLS tunelu končí chybou `Empty reply from server`, přímé HTTPS bez proxy selhává na expirovaném veřejném Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), diagnostické `curl --noproxy '*' -k -I` vrací `200 OK` z nginx/Next.js, v kontejneru není `certbot`, nginx ani SSH klíče a není dostupný bezpečný opravný přístup k obnově certifikátu.
