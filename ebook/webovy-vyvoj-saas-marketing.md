@@ -43542,6 +43542,154 @@ Na konec napiš jednu větu:
 
 Pokud věta nejde dopsat, žádná redakční oprava zatím není připravená. To je v pořádku. Někdy je nejlepší iterace ta, která odmítne přidat další obsah jen proto, že je v kalendáři další hodina.
 
+## Příloha: Doporučení zákazníků bez referral trackingu
+
+Doporučení od spokojeného zákazníka je pro malý SaaS často silnější než další reklama. Má v sobě důvěru, kontext a lidské vysvětlení problému. Jenže právě proto se s ním dá snadno zacházet špatně: vytvořit agresivní referral program, sledovat kontakty lidí, které ještě neznáte, rozdávat slevy za každou pozvánku a pak tomu říkat růstová smyčka.
+
+Privacy-first doporučování začíná jinak. Neptá se: „Jak získáme adresář zákazníka?“ Ptá se: „Kdy má zákazník přirozený důvod někomu produkt doporučit a jak mu to zjednodušíme bez tlaku?“
+
+Špatná otázka zní: „Kolik kontaktů umíme vytěžit z jednoho účtu?“
+
+Lepší otázka zní: „Komu už zákazník chce pomoct a jak mu dáme čistý způsob, jak poslat hodnotný odkaz?“
+
+### Začni okamžikem hodnoty
+
+O doporučení nežádej hned po registraci. V tu chvíli člověk ještě neví, jestli produkt funguje. Lepší okamžik je po viditelné hodnotě:
+
+- tým dokončil první projekt,
+- zákazník exportoval výsledek pro klienta,
+- administrátor pozval první kolegy a onboarding proběhl bez potíží,
+- support vyřešil konkrétní problém rychle a férově,
+- zákazník sám napíše pozitivní zpětnou vazbu.
+
+V takovém okamžiku může produkt nabídnout jednoduchou větu: „Znáte někoho, komu by tento postup pomohl? Pošlete mu veřejný odkaz.“ To je něco jiného než modální okno s tlakem na import kontaktů. Doporučení má být služba zákazníkovi a jeho známému, ne těžba sociálního grafu.
+
+Praktický příklad: Pokud SaaS pomáhá plánovat práci servisního týmu, nedávej po dokončení registrace velké „Pozvěte tři firmy a získejte měsíc zdarma“. Dej po prvním úspěšně naplánovaném týdnu možnost stáhnout krátký veřejný checklist „Jak jsme přešli z tabulek na plánování výjezdů“ a přidej přímý odkaz, který může zákazník poslat kolegovi z oboru.
+
+### Nabídni doporučovací materiál, ne sledovací past
+
+Místo unikátního sledovacího odkazu pro každého zákazníka často stačí materiál, který umí sám vysvětlit hodnotu:
+
+| Materiál | Kdy pomáhá | Privacy-first poznámka |
+| --- | --- | --- |
+| Veřejná mini case study | zákazník chce ukázat podobný problém | používej jen schválené nebo agregované údaje |
+| Checklist | zákazník chce někomu poslat praktickou pomoc | nevyžaduj e-mail před stažením |
+| Srovnávací stránka | lead se ptá „pro koho to je“ | piš podle situací, ne podle šmírovacích segmentů |
+| Demo scénář | partner chce produkt doporučit dál | používej syntetická data a jasné hranice slibu |
+| Krátký e-mailový text | zákazník chce udělat úvod | dej mu text k úpravě, neposílej bez jeho akce |
+
+Referral tracking může mít místo, pokud má jasný účel, rozumnou retenci a férové vysvětlení. Ale výchozí režim pro malou evropskou firmu má být chudý: čistá URL, dobrovolné předání, žádný import kontaktů, žádné skryté profilování lidí, kteří ještě nejsou vaši zákazníci.
+
+Codyho komentář: Pokud doporučení funguje jen tehdy, když člověka odměníš za každou adresu, možná nemáš růstovou smyčku. Možná máš jen levnější formu lead listu s lepším obalem.
+
+### Odměnu navrhni tak, aby neměnila motivaci
+
+Odměna není zakázaná. Jen musí podporovat správné chování. Špatná odměna tlačí zákazníka, aby posílal odkaz komukoli. Dobrá odměna děkuje za relevantní doporučení, které pomohlo oběma stranám.
+
+Bezpečnější varianty:
+
+- kredit až po reálném začátku spolupráce, ne za pouhé odeslání kontaktu,
+- dar neziskovce nebo komunitnímu projektu podle volby zákazníka,
+- rozšířená konzultace, audit nebo onboarding pro obě strany,
+- veřejné poděkování jen po výslovném souhlasu,
+- partnerská provize u profesionálních partnerů oddělená od běžných zákaznických doporučení.
+
+Rizikové varianty:
+
+- odměna za import adresáře,
+- soutěž podle počtu pozvánek,
+- automatické e-maily lidem, kteří nedali kontakt přímo vám,
+- sleva podmíněná tím, že zákazník zveřejní referenci,
+- skrytý scoring zákazníků podle toho, kolik kontaktů „přinesli“.
+
+U B2B SaaS navíc mysli na to, že zákazník často doporučuje produkt pracovně, ne soukromě. Nech mu kontrolu nad textem, kanálem i načasováním. Když chce udělat úvod e-mailem, připrav mu návrh, ale neposílej nic jeho jménem bez jasné akce.
+
+### Měř dopad bez mapování vztahů
+
+Doporučení se dá měřit chuději, než bývá zvykem. Nepotřebuješ znát celou síť vztahů mezi lidmi. Potřebuješ vědět, jestli doporučování přináší lepší konverzace než běžný kanál.
+
+Stačí sledovat:
+
+- počet poptávek, kde člověk dobrovolně uvedl „doporučil nás ___“,
+- počet použití veřejného materiálu v obchodních hovorech,
+- počet partnerů, kteří aktivně posílají relevantní poptávky,
+- kvalitu prvních hovorů z doporučení,
+- důvody, proč doporučení nešlo udělat jednoduše.
+
+Nepotřebuješ sledovat:
+
+- komu zákazník odkaz přeposlal,
+- zda si příjemce odkaz otevřel v konkrétní minutě,
+- historii všech referral kliků podle osoby,
+- osobní vztahy mezi zákazníkem a leadem,
+- adresáře, kontakty a sociální profily mimo jasný účel.
+
+Praktický signál může být jednoduchý text v CRM nebo v obchodním zápisu: „Zdroj: doporučení od existujícího zákazníka, segment: účetní tým, problém: ruční schvalování faktur.“ To je dost na rozhodování o marketingu i produktu. Není potřeba z toho vyrábět mapu lidí.
+
+### Karta doporučovací smyčky
+
+Před tím, než do produktu přidáš referral program, vyplň kartu:
+
+| Pole | Zápis |
+| --- | --- |
+| Okamžik hodnoty |  |
+| Pro koho je doporučení užitečné |  |
+| Co zákazník posílá | veřejný odkaz / checklist / case study / demo scénář / úvodní text |
+| Jaká data vzniknou |  |
+| Kde se data uloží |  |
+| Jak dlouho je držíme |  |
+| Jaká odměna existuje | žádná / kredit / služba / dar / partnerská provize |
+| Jak zabráníme spamu |  |
+| Jak lead pozná, proč ho kontaktujeme |  |
+| Jak změříme dopad agregovaně |  |
+
+Vyplněný příklad:
+
+| Pole | Zápis |
+| --- | --- |
+| Okamžik hodnoty | Zákazník uzavřel první měsíc používání a exportoval report pro vedení. |
+| Pro koho je doporučení užitečné | Pro podobný tým, který pořád skládá reporting ručně. |
+| Co zákazník posílá | Veřejnou mini case study a krátký e-mailový text, který si sám upraví. |
+| Jaká data vzniknou | Volitelná poznámka v CRM, že lead přišel přes doporučení. |
+| Kde se data uloží | CRM jako zdroj leadu a slovní popis problému. |
+| Jak dlouho je držíme | Podle retenčního pravidla pro obchodní poptávky. |
+| Jaká odměna existuje | Jednorázový konzultační kredit po uzavření placené spolupráce. |
+| Jak zabráníme spamu | Žádný import kontaktů, žádné automatické oslovení třetích osob. |
+| Jak lead pozná, proč ho kontaktujeme | Oslovení přichází od zákazníka nebo z jasného dobrovolného formuláře. |
+| Jak změříme dopad agregovaně | Měsíční počet relevantních poptávek z doporučení a jejich hlavní problém. |
+
+### Checklist: Doporučení zákazníků privacy-first
+
+- [ ] Žádost o doporučení přichází až po skutečném okamžiku hodnoty.
+- [ ] Zákazník nemusí importovat kontakty ani dávat přístup k adresáři.
+- [ ] Doporučovací materiál má samostatnou veřejnou hodnotu i bez registrace.
+- [ ] Odeslání doporučení je vědomá akce zákazníka, ne automatický proces.
+- [ ] Odměna netlačí na objem nerelevantních pozvánek.
+- [ ] Lead se dozví, proč odkaz nebo kontakt dostal.
+- [ ] CRM ukládá jen zdroj a pracovní kontext, ne mapu osobních vztahů.
+- [ ] Retence referral poznámek odpovídá běžné retenci obchodních poptávek.
+- [ ] Reference, loga a case studies jsou schválené a pravidelně ověřované.
+- [ ] Dopad se vyhodnocuje agregovaně a končí konkrétním rozhodnutím.
+
+### Mini úkol
+
+Vyber jeden existující okamžik, kdy zákazník už poznal hodnotu produktu nebo služby. Vyplň:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Co zákazník právě dokázal? |  |
+| Komu by tento výsledek mohl přirozeně pomoct? |  |
+| Jaký veřejný materiál mu dáš do ruky? |  |
+| Co nebudeš sbírat ani sledovat? |  |
+| Jakou jednu větu může zákazník poslat dál? |  |
+| Jak poznáš dopad bez mapování vztahů? |  |
+
+Na konec napiš doporučovací větu:
+
+„Pokud znáte někoho, kdo řeší ___, tady je praktický návod, jak začít bez ___.“
+
+Pokud věta zní jako reklama, přepiš ji. Dobré doporučení má znít jako pomoc s konkrétním problémem, ne jako prosba o lead.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -43731,6 +43879,7 @@ Pokud věta nejde dopsat, žádná redakční oprava zatím není připravená. 
 
 ## Pracovní log
 
+- 2026-07-22: Doplněna příloha o doporučení zákazníků bez referral trackingu: výběr správného okamžiku hodnoty, doporučovací materiály místo importu kontaktů, férové odměny, agregované měření dopadu bez mapování vztahů, karta doporučovací smyčky, checklist a mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně ověřeno, že veřejné přímé HTTPS na `cody.dreamind.cz` dál selhává na expirovaném Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), zatímco diagnostické `curl --noproxy '*' -k` vrací `200 OK` z nginx/Next.js na `91.99.227.53`; SSH pro `root` i `node` odmítá neinteraktivní přístup, takže certifikát z tohoto běhu nejde bezpečně obnovit.
 - 2026-07-22: Doplněna příloha o redakčním smoke testu e-booku bez čtenářské analytiky: testování práce čtenáře podle konkrétní otázky, pětiminutový průchod, rozlišení závad v cestě/výstupu/hranicích/aktualitě, privacy-first signály bez session replay a lead-gatingu, karta smoke testu, checklist a mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně zkontrolováno, že lokální statický server pro repozitář byl znovu spuštěn na portu `3000` a lokálně vrací `200 OK`; veřejné přímé HTTPS na `cody.dreamind.cz` dál selhává kvůli expirovanému Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), diagnostické `curl --noproxy '*' -k` vrací `200 OK` z nginx/Next.js na `91.99.227.53` a proxy cesta stále končí `Empty reply from server`, bez dostupného SSH/deploy/certbot přístupu k bezpečné obnově certifikátu.
 - 2026-07-22: Doplněn rejstřík pracovních nástrojů na začátku e-booku: rychlé vyhledání datové mapy, specifikace metriky, privacy-first formuláře, provozního releasu, akčního backlogu, veřejného výřezu, bezpečnostní odpovědi a projektového offboardingu podle požadovaného výstupu; přidána mini kontrola, aby orientace nevytvářela nový tracking ani další duplicitní přílohy. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně ověřeno, že `cody.dreamind.cz` přímo míří na `91.99.227.53`, běžné přímé HTTPS selhává na expirovaném Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), diagnostické `curl --noproxy '*' -k` vrací `200 OK` z nginx/Next.js a proxy cesta končí po TLS tunelu chybou `Empty reply from server`; v pracovním prostoru není dostupný SSH/deploy/certbot přístup pro bezpečnou obnovu certifikátu.
 - 2026-07-22: Doplněna příloha o orientační mapě dlouhého e-booku bez čtenářského bloudění: rozlišení kapitoly, přílohy a pracovního nástroje, mapa podle čtenářské bolesti, lokální zkratky pro související části, nadpisy jako směrovky, mapovací karta pro další údržbu, privacy-first ověření orientace bez profilování, checklist a mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně znovu ověřeno, že `cody.dreamind.cz` má veřejný HTTPS problém: běžná cesta přes proxy končí po TLS tunelu chybou `Empty reply from server`, přímé HTTPS bez proxy selhává na expirovaném Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), HTTP vrací `301` na HTTPS a dostupný pracovní prostor neobsahuje SSH/deploy/certbot přístup, kterým by šlo certifikát bezpečně obnovit.
