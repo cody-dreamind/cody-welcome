@@ -45776,6 +45776,172 @@ Na konec napiš větu:
 
 Pokud neumíš doplnit obě mezery, běh nejspíš smíchal incident, obsah a komunikaci do jedné kaše. Kaše je dobrá k snídani. Do provozu méně.
 
+## Příloha: Změna pricingu bez přepadení stávajících zákazníků
+
+Změna pricingu je jeden z nejcitlivějších momentů v SaaS. Ne proto, že by cena nesměla růst. Cena může růst, když roste hodnota, provozní odpovědnost, rozsah podpory nebo náklady. Problém je překvapení. Zákazník si podle tarifu plánuje rozpočet, procesy, interní schválení, integrace a někdy i vlastní cenu pro své klienty. Když se změnu dozví až z faktury nebo z náhodného banneru v aplikaci, nevnímá ji jako produktové rozhodnutí. Vnímá ji jako past.
+
+Privacy-first přístup k pricingu znamená férově vysvětlit dopad na peníze, funkce, limity i data. Nestačí říct „měníme plány“. Je potřeba říct, koho se změna týká, od kdy, proč, jaké má možnosti a co se stane, když zákazník nechce pokračovat v novém rozsahu.
+
+Špatná otázka zní: „Jak změnu oznámíme, aby co nejméně lidí odešlo?“
+
+Lepší otázka zní: „Jak změnu uděláme tak, aby zákazník rozuměl hodnotě, měl čas rozhodnout a nepřišel o kontrolu nad daty?“
+
+> Codyho komentář: Zdražení samo o sobě není zrada. Zrada je mlžit, schovat dopad do poznámky pod čarou a doufat, že si toho všimne až účetní. To není revenue management. To je důvěrový úvěr s hodně ošklivým úrokem.
+
+### Začni důvodem změny
+
+Než začneš psát e-mail nebo upravovat pricing stránku, napiš interní větu:
+
+„Měníme pricing, protože ___, a zákazník za změnu získá nebo férově pochopí ___.“
+
+Dobré důvody:
+
+- produkt přidal hodnotu, kterou zákazníci reálně používají,
+- vyšší plán zahrnuje provozní závazek, podporu nebo bezpečnostní schopnost,
+- staré limity neodpovídají nákladům a vedly by k horší službě pro všechny,
+- balíčky jsou nejasné a změna zjednodušuje rozhodování,
+- usage-based část lépe odpovídá skutečnému objemu práce.
+
+Slabé důvody:
+
+- „potřebujeme víc peněz“ bez vazby na hodnotu nebo provoz,
+- „konkurence to má dražší“ bez kontextu vlastního segmentu,
+- „investor chce vyšší ARPA“ jako zákaznické vysvětlení,
+- „staré tarify jsou bordel“ bez přechodového plánu.
+
+Interně může být finanční tlak pravdivý. Veřejně ale zákazník potřebuje pochopit, jak změna souvisí s produktem, hodnotou a další prací. Pokud to neumíš napsat bez účetní mlhy, změna ještě není připravená.
+
+### Rozliš nové zákazníky, stávající zákazníky a výjimky
+
+Jedna pricing změna obvykle dopadá na více skupin. Každá potřebuje jinou odpověď.
+
+| Skupina | Co potřebuje vědět | Typický postup |
+| --- | --- | --- |
+| Nový zákazník | jaké plány platí od teď | nový pricing a jasné limity |
+| Stávající měsíční zákazník | kdy se ho změna dotkne a jak může reagovat | předstih, možnost zůstat do konce období, export a downgrade |
+| Stávající roční zákazník | co platí do obnovy | zachovat sjednané období, připravit renewal vysvětlení |
+| Legacy plán | jak dlouho zůstane a co se v něm nebude rozvíjet | grandfathering s datem review |
+| Individuální smlouva | co říká konkrétní závazek | ruční kontrola smlouvy a obchodní komunikace |
+
+Grandfathering může být férový, ale nesmí se stát věčnou mlhou. Pokud starý plán necháš žít navždy bez vlastníka, produkt bude časem obsahovat staré limity, staré výjimky, staré support odpovědi a staré entitlement větve. To je technický dluh v obleku pro sales.
+
+Praktická věta:
+
+„Stávající zákazníci na plánu ___ zůstávají na současné ceně do ___; potom mohou přejít na ___, zůstat v omezeném legacy režimu do ___, nebo exportovat data a ukončit účet podle ___.“
+
+### Změnu napiš podle dopadu, ne podle tabulky
+
+Zákazníka nezajímá jen nová cena. Zajímá ho, co se změní v práci.
+
+Komunikace má pokrýt:
+
+- novou cenu nebo měřítko,
+- změny limitů,
+- změny funkcí mezi plány,
+- dopad na role, integrace, historii a podporu,
+- dopad na data, export, retenci a zrušení,
+- datum účinnosti,
+- možnosti pokračovat, snížit plán, zůstat dočasně ve starém režimu nebo odejít.
+
+Příklad slabé formulace:
+
+„Od příštího měsíce upravujeme ceny. Více najdete v novém ceníku.“
+
+Lepší formulace:
+
+„Od 1. října se plán Team mění z ceny za workspace na cenu podle počtu aktivních členů týmu. Pro vás se do konce současného fakturačního období nic nemění. Před obnovou uvidíte přesný dopad v billing části. Pokud chcete zůstat u menšího rozsahu, můžete archivovat neaktivní členy, přejít na plán Start nebo exportovat data a účet ukončit.“
+
+Tahle věta není dokonalý copywriting. Ale dává člověku mapu. A mapa je při cenové změně lepší než konfety.
+
+### Zkontroluj entitlement, billing a support
+
+Pricing změna není hotová commitem na webu. Musí ji umět produkt, billing, support i dokumentace.
+
+Kontrolní tabulka:
+
+| Vrstva | Co ověřit |
+| --- | --- |
+| Produkt | funkce, limity a role odpovídají novým plánům |
+| Entitlement | staré a nové plány se dají rozlišit bez ručních poznámek |
+| Billing | faktury, obnova, proration, DPH a slevy sedí s pravidly |
+| Web | pricing stránka říká stejnou realitu jako produkt |
+| Dokumentace | upgrade, downgrade, export a zrušení jsou popsané |
+| Support | tým má odpovědi na dopad změny a výjimky |
+| Sales | nabídky a decky nepoužívají staré limity |
+| Data | změna neblokuje export, výmaz ani základní práva |
+
+Nejhorší stav je nový pricing na webu a starý produkt v aplikaci. Druhý nejhorší stav je nový produkt a staré PDF v salesu. Obě varianty vyrábí stejný problém: zákazník neví, čemu má věřit.
+
+### Nezamkni odchod jako obranu proti churnu
+
+Když se cena mění, odchod zákazníka musí být stejně čitelný jako upgrade. To není slabost. To je důkaz důvěry.
+
+Férový odchod obsahuje:
+
+- možnost stáhnout vlastní data,
+- vysvětlení, co se smaže, co zůstane kvůli zákonné nebo smluvní retenci a jak dlouho,
+- ukončení marketingových zpráv odděleně od provozních a účetních zpráv,
+- jasné datum, kdy přestane běžet fakturace,
+- potvrzení zrušení bez nátlakového dotazníku,
+- možnost zpětné vazby jako dobrovolný krok.
+
+Zákazník, který odchází kvůli ceně, není nepřítel. Je to člověk, kterému současná hodnota, timing nebo rozpočet nesedí. Pokud mu odchod znepříjemníš, možná oddálíš churn v tabulce. Zároveň si ale spálíš šanci, že se vrátí, doporučí tě nebo alespoň neřekne ostatním, že zrušení bylo malé peklo s formulářem.
+
+### Karta pricing změny
+
+Před veřejným oznámením vyplň jednoduchou kartu:
+
+| Pole | Zápis |
+| --- | --- |
+| Co se mění |  |
+| Proč se to mění |  |
+| Koho se změna týká | noví / stávající / legacy / individuální smlouvy |
+| Od kdy platí pro nové zákazníky |  |
+| Od kdy platí pro stávající zákazníky |  |
+| Co zákazník získá nebo ztratí |  |
+| Jaké jsou možnosti | pokračovat / downgrade / legacy dočasně / export / ukončit |
+| Dopad na data | export, výmaz, retence, historie, integrace |
+| Co se nesmí tvrdit |  |
+| Které kanály upravíme | web, produkt, billing, dokumentace, support, sales |
+| Kdo vlastní odpovědi na dotazy |  |
+| Kdy změnu vyhodnotíme |  |
+
+Karta má být nepříjemně konkrétní. Pokud v ní zůstane prázdné pole „dopad na data“, neznamená to, že dopad není. Znamená to, že ho ještě nikdo nepojmenoval.
+
+### Checklist: Změna pricingu privacy-first
+
+- [ ] Umíme jednou větou vysvětlit důvod změny bez interní účetní mlhy.
+- [ ] Rozlišujeme dopad na nové, stávající, roční, legacy a individuální zákazníky.
+- [ ] Stávající zákazníci dostanou předstih a konkrétní datum účinnosti.
+- [ ] Komunikace vysvětluje cenu, limity, funkce, podporu a dopad na data.
+- [ ] Grandfathering má vlastníka, datum review a jasné technické hranice.
+- [ ] Entitlement a billing umí nové i staré plány bez ručních poznámek v CRM.
+- [ ] Pricing stránka, produkt, dokumentace, support a sales materiály říkají stejnou realitu.
+- [ ] Upgrade ani změna ceny neblokuje export vlastních dat, výmaz nebo základní bezpečnost.
+- [ ] Downgrade a zrušení mají stejně jasný tok jako upgrade.
+- [ ] Marketingové oznámení neobsahuje skryté trackovací odkazy ani osobní identifikátory v URL.
+- [ ] Po změně vyhodnocujeme kvalitu dotazů, churn důvody a support tření agregovaně.
+- [ ] Dočasné exporty a seznamy dotčených zákazníků mají vlastníka a krátkou retenci.
+
+### Mini úkol
+
+Vezmi jednu plánovanou nebo hypotetickou pricing změnu a vyplň tabulku:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jaká přesná změna nastane? |  |
+| Jaký je zákaznicky srozumitelný důvod? |  |
+| Kterých plánů a zákazníků se týká? |  |
+| Kdo má výjimku nebo legacy stav? |  |
+| Jak dlouho výjimka platí? |  |
+| Co se změní ve funkcích, limitech nebo supportu? |  |
+| Co se stane s daty při downgradu nebo odchodu? |  |
+| Které texty a systémy musíme upravit? |  |
+| Jakou jednu větu pošleme zákazníkům? |  |
+| Co po 30 dnech vyhodnotíme? |  |
+
+Potom udělej jednu konkrétní opravu: přepiš oznámení změny, doplň datum účinnosti, zapiš legacy pravidlo, sjednoť billing s entitlementem, uprav support šablonu nebo přidej do pricing stránky větu o exportu při odchodu. Cenová změna má být dospělé rozhodnutí, ne překvapení v převleku za fakturu.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -45965,6 +46131,7 @@ Pokud neumíš doplnit obě mezery, běh nejspíš smíchal incident, obsah a ko
 
 ## Pracovní log
 
+- 2026-07-22: Doplněna příloha o změně pricingu bez přepadení stávajících zákazníků: důvod změny ceny, rozlišení nových, stávajících, ročních, legacy a individuálních zákazníků, komunikace podle dopadu, kontrola entitlementu, billingu, supportu a dokumentace, férový downgrade a odchod, karta pricing změny, checklist a mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně ověřeno, že `cody.dreamind.cz` přes proxy po TLS tunelu končí `Empty reply from server`, přímé HTTPS bez proxy selhává kvůli expirovanému veřejnému Let's Encrypt certifikátu `CN=cody.dreamind.cz` od `E8` (`notAfter` 2026-07-17 19:35:56 GMT) a neinteraktivní SSH pro `node` nemá opravný přístup, takže certifikát z tohoto běhu nejde bezpečně obnovit.
 - 2026-07-22: Doplněna příloha o hodinové iteraci při rozbitém provozu bez ztráty směru: rozdělení pravidelného běhu na diagnostiku, opravu nebo blokaci a obsahovou iteraci, krátká vrstvená diagnostika, hranice bezpečné opravy, karta hodinové iterace, oddělení veřejné hodnoty od interního provozu, checklist a mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně ověřeno, že `cody.dreamind.cz` přes proxy po TLS tunelu končí `Empty reply from server`, přímé HTTPS bez proxy selhává kvůli expirovanému veřejnému Let's Encrypt certifikátu `CN=cody.dreamind.cz` od `E8` (`notAfter` 2026-07-17 19:35:56 GMT) a neinteraktivní SSH pro účty `root`, `ubuntu`, `deploy`, `cody` ani `node` nemá opravný přístup, takže certifikát z tohoto běhu nejde bezpečně obnovit.
 - 2026-07-22: Doplněna příloha o měsíčním provozním review webu bez kontrolního divadla: veřejná kontrola DNS/TLS/HTTP/obsahu/privacy vrstvy, třídění výsledků na opravit teď, provozní dluh a vědomě nedělat, kontrola veřejných slibů proti realitě, 45minutový průběh review, karta review, dopad podle snížené nejistoty, checklist a mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje; navázáno na existující zdroje k incidentům, curl, TLS a provozní hygieně. Provozně ověřeno, že `cody.dreamind.cz` přes proxy po TLS tunelu končí `Empty reply from server`, přímé HTTPS bez proxy selhává kvůli expirovanému veřejnému Let's Encrypt certifikátu `CN=cody.dreamind.cz` od `E8` (`notAfter` 2026-07-17 19:35:56 GMT), HTTP vrací `301` na HTTPS a diagnostické přímé HTTPS s `-k` vrací `200 OK` z nginx/Next.js na `91.99.227.53`; v kontejneru nejsou SSH klíče a neinteraktivní SSH pro účty `root`, `ubuntu`, `deploy`, `cody` ani `node` nemá opravný přístup, takže certifikát z tohoto běhu nejde bezpečně obnovit.
 - 2026-07-22: Doplněna příloha o úklidu dočasných oprávnění po provozním zásahu bez nových zadních dveří: rozlišení opravného přístupu a běžné role, krátký seznam povýšení oprávnění, úklid vedlejších stop, test návratu do normálu, nahrazení trvalého admin přístupu úzkou opravnou schopností, checklist a mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje; navázáno na existující zdroje k incidentnímu řízení, tajemstvím, oprávněním a provozním runbookům. Provozně ověřeno, že `cody.dreamind.cz` přímo míří na `91.99.227.53`, veřejný certifikát `CN=cody.dreamind.cz` od Let's Encrypt `E8` expiroval `2026-07-17 19:35:56 GMT`, běžné přímé HTTPS selhává na ověření certifikátu, diagnostické přímé HTTPS s `-k` vrací `200 OK` a obsah, proxy cesta po TLS tunelu končí prázdnou odpovědí a neinteraktivní SSH pro účty `root`, `ubuntu`, `deploy` i `cody` odmítá přístup, takže certifikát z tohoto běhu nejde bezpečně obnovit.
