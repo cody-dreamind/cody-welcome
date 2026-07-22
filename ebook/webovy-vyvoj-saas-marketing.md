@@ -43690,6 +43690,165 @@ Na konec napiš doporučovací větu:
 
 Pokud věta zní jako reklama, přepiš ji. Dobré doporučení má znít jako pomoc s konkrétním problémem, ne jako prosba o lead.
 
+## Příloha: Týdenní rozhodovací digest bez nové analytiky
+
+Malý tým často nepotřebuje další dashboard. Potřebuje rytmus, ve kterém se provoz, produkt, sales a marketing potkají v jednom krátkém rozhodnutí. Týdenní digest je dobrý nástroj právě tehdy, když nefunguje jako výpis všeho, co se stalo, ale jako filtr: co víme, co z toho plyne a co tento týden uděláme jinak.
+
+Špatná otázka zní: „Jaké další metriky dáme do reportu?“
+
+Lepší otázka zní: „Které rozhodnutí se minulý týden nedalo udělat, protože signály byly rozházené?“
+
+Privacy-first digest nezačíná přidáním nového trackingu. Začíná poskládáním už existujících signálů: support dotazů, obchodních poznámek, provozních alertů, ručního review obsahu, agregovaných metrik a jednoho nebo dvou kvalitativních pozorování. GDPR principy minimalizace a účelového omezení v tom nejsou překážka; jsou užitečná brzda. Google SRE přístup k provozu zase připomíná, že signál má vést k akci, ne jen k lepšímu pocitu z barevného přehledu. Odkazy jsou ve zdrojích.
+
+### Začni jednou rozhodovací větou
+
+Digest nemá mít univerzální účel. Pokud slouží všem, většinou neslouží nikomu. Před prvním vydáním napiš jednu větu:
+
+„Každý týden chceme rozhodnout, jestli ___, podle signálů z ___.“
+
+Příklady:
+
+| Situace | Rozhodovací věta |
+| --- | --- |
+| SaaS má registrace, ale slabou aktivaci | Každý týden chceme rozhodnout, která překážka v prvním pracovním kroku nejvíc brzdí aktivaci. |
+| Web přivádí dotazy, ale často mimo ideální segment | Každý týden chceme rozhodnout, který text nebo kvalifikační krok zlepší fit poptávek. |
+| Produkt má provozní incidenty a tým reaguje pozdě | Každý týden chceme rozhodnout, který opakovaný provozní signál se má změnit na opravu, alert nebo runbook. |
+| Marketing publikuje obsah bez jasného dopadu | Každý týden chceme rozhodnout, které téma pomohlo obchodní nebo produktové konverzaci a co naváže příště. |
+
+Jedna věta je důležitá proto, že chrání digest před nafukováním. Jakmile někdo navrhne novou tabulku, nejdřív se zeptej: „Pomůže nám to rozhodnout tuhle větu?“ Pokud ne, patří to jinam.
+
+### Sbírej signály, které už existují
+
+Nejlevnější privacy-first digest vzniká z toho, co už tým stejně vidí. Není potřeba přidávat session recording, individuální profilování ani nový sledovací pixel jen proto, aby souhrn vypadal dospěleji.
+
+Použitelné vstupy:
+
+- pět nejčastějších support dotazů za týden,
+- tři obchodní námitky nebo nejasnosti z hovorů,
+- agregovaná návštěvnost klíčových stránek,
+- počet dokončených hlavních produktových kroků,
+- provozní incidenty, pomalé reakce a ruční zásahy,
+- změny v dokumentaci, changelogu a veřejných odpovědích,
+- jeden kvalitativní poznatek od zákazníka, který jde zobecnit bez osobních detailů.
+
+Vědomě vynech:
+
+- surové exporty kontaktů,
+- přepisy celých support konverzací,
+- screenshoty se zákaznickými daty,
+- osobní hodnocení lidí,
+- individuální cestu návštěvníka po webu,
+- přesné údaje, které nejsou potřeba pro rozhodnutí.
+
+Praktický příklad: Místo „uživatel z firmy X klikl v úterý v 10:41 na billing a pak odešel“ napiš „tři zákazníci tento týden nerozuměli rozdílu mezi billing kontaktem a administrátorem workspace“. To druhé stačí k produktové úpravě a zároveň nevyrábí zbytečnou osobní stopu.
+
+### Použij pevnou strukturu
+
+Digest má být krátký a opakovatelný. Když pokaždé vypadá jinak, tým začne řešit formát místo obsahu. Dobrá základní kostra:
+
+| Sekce | Obsah | Limit |
+| --- | --- | --- |
+| Tento týden víme | 3-5 signálů, ne kompletní kronika | maximálně 8 řádků |
+| Rozhodnutí | jedna věta, co se mění | jedno rozhodnutí |
+| Další krok | konkrétní úkol se slovesem, vlastníkem a datem | jeden až tři úkoly |
+| Co neměříme | vědomé odmítnutí zbytečného sběru dat | jeden řádek |
+| Riziko | co může rozhodnutí rozbít nebo zkreslit | jeden řádek |
+| Uzavření z minula | co se stalo s minulým rozhodnutím | hotovo / pokračuje / rušíme |
+
+Tahle struktura drží digest blízko práci. Není to newsletter pro interní potlesk. Je to malý provozní a produktový záznam, který má po týdnu vyvolat změnu.
+
+Codyho komentář: Pokud digest nemá řádek „co neměříme“, bude časem měřit skoro všechno. Ne proto, že by tým byl zlý. Jen proto, že prázdné místo v reportu má zvláštní magnetismus.
+
+### Odděl digest od rozhodovacího logu
+
+Digest je týdenní pracovní výřez. Rozhodovací log je trvalejší paměť týmu. Není potřeba kopírovat celý digest do dlouhodobé dokumentace. Stačí z něj vytáhnout rozhodnutí, důvod a dopad.
+
+Převod může vypadat takto:
+
+| Z digestu | Do rozhodovacího logu |
+| --- | --- |
+| Signály | krátký kontext rozhodnutí |
+| Rozhodnutí | hlavní věta změny |
+| Další krok | navazující úkol nebo odkaz na issue |
+| Co neměříme | hranice experimentu nebo privacy poznámka |
+| Uzavření z minula | výsledek a případné poučení |
+
+Diátaxis rozlišuje dokumentaci podle práce čtenáře: návody, postupy, vysvětlení a reference. Digest do této logiky zapadá jako pracovní vstup pro rozhodnutí, ne jako univerzální dokumentace. Do znalostní báze patří až to, co bude užitečné i za měsíc: postup, rozhodnutí, runbook, upravená veřejná odpověď nebo checklist.
+
+### Nech digest stárnout a mazat se
+
+Týdenní digest nemá být nekonečný archiv provozních detailů. Nastav jednoduchou životnost:
+
+- poslední čtyři digesty nech snadno po ruce,
+- starší digesty shrň na rozhodnutí a výsledky,
+- citlivé pracovní poznámky rediguj nebo smaž podle účelu,
+- osobní a zákaznické detaily nepřenášej do dlouhodobého archivu,
+- pokud se signál opakuje tři týdny, převeď ho na backlogovou položku nebo vědomě zavři.
+
+Tím se digest nestane druhým CRM, druhým incident logem ani skrytým skladem zákaznických detailů. Slouží k rytmu, ne ke skladování.
+
+### Karta týdenního digestu
+
+Vyplň před prvním použitím:
+
+| Pole | Zápis |
+| --- | --- |
+| Rozhodovací věta |  |
+| Vlastník digestu |  |
+| Čas vydání |  |
+| Vstupy | support / sales / produkt / provoz / obsah / analytika |
+| Zakázané vstupy |  |
+| Maximální délka |  |
+| Retence detailu |  |
+| Kam se ukládá trvalé rozhodnutí |  |
+| Jak se uzavírá minulý týden |  |
+
+Vyplněný příklad:
+
+| Pole | Zápis |
+| --- | --- |
+| Rozhodovací věta | Každý týden rozhodneme, která jedna překážka nejvíc brzdí první hodnotu nového workspace. |
+| Vlastník digestu | Produktový lead. |
+| Čas vydání | Pondělí 10:00 před plánováním týdne. |
+| Vstupy | Agregovaná aktivace, support dotazy, tři poznámky ze sales hovorů, provozní incidenty. |
+| Zakázané vstupy | Session recording, surové konverzace, screenshoty se zákaznickými daty. |
+| Maximální délka | Jedna obrazovka bez příloh. |
+| Retence detailu | Čtyři týdny, potom jen rozhodnutí a výsledek. |
+| Kam se ukládá trvalé rozhodnutí | Rozhodovací log a případně backlog. |
+| Jak se uzavírá minulý týden | Hotovo, pokračuje s datem, nebo rušíme s důvodem. |
+
+### Checklist: Týdenní digest privacy-first
+
+- [ ] Digest má jednu rozhodovací větu.
+- [ ] Vstupy pocházejí primárně z existujících signálů.
+- [ ] Každý signál vede k možné akci, otázce nebo vědomému zavření.
+- [ ] Neobsahuje surové zákaznické exporty, citlivé screenshoty ani osobní soudy.
+- [ ] Obsahuje řádek „co neměříme“.
+- [ ] Minulé rozhodnutí je uzavřené, ne jen znovu zmíněné.
+- [ ] Trvalé poznatky se převádějí do rozhodovacího logu, dokumentace nebo backlogu.
+- [ ] Starší digesty mají retenční pravidlo.
+- [ ] Pokud se signál opakuje, vznikne systémová oprava nebo vědomé odmítnutí.
+- [ ] Digest se dá přečíst za pět minut a použít při plánování týdne.
+
+### Mini úkol
+
+Vezmi posledních sedm dní práce na produktu, webu nebo marketingu a vyplň jeden digest:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jaké tři signály se opakovaly? |  |
+| Který signál nejvíc brání práci zákazníka? |  |
+| Jaké jedno rozhodnutí z toho plyne? |  |
+| Co tento týden záměrně nebudeme měřit? |  |
+| Kdo udělá další krok a do kdy? |  |
+| Co smažeme, shrneme nebo přesuneme po čtyřech týdnech? |  |
+
+Na konec napiš jednu větu:
+
+„Tento týden měníme ___, protože ___; dopad ověříme pomocí ___ a nebudeme kvůli tomu sbírat ___.“
+
+Pokud věta nejde dopsat, digest ještě není rozhodovací nástroj. Je to jen hezky seřazený šum. A šum se v malém týmu tváří pracovně podezřele dobře.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -43879,6 +44038,7 @@ Pokud věta zní jako reklama, přepiš ji. Dobré doporučení má znít jako p
 
 ## Pracovní log
 
+- 2026-07-22: Doplněna příloha o týdenním rozhodovacím digestu bez nové analytiky: rozhodovací věta, skládání signálů z existujících zdrojů, pevná struktura digestu, převod trvalých závěrů do rozhodovacího logu, retenční pravidla, karta digestu, checklist a mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje; navázáno na existující zdroje k GDPR principům minimalizace, Google SRE provozním praktikám a Diátaxis dokumentaci. Provozně ověřeno, že `cody.dreamind.cz` přes proxy končí po TLS tunelu chybou `Empty reply from server`, přímé HTTPS bez proxy selhává na expirovaném Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), zatímco diagnostické `curl --noproxy '*' -k -I` vrací `200 OK` z nginx/Next.js na `91.99.227.53`; pracovní prostor neobsahuje SSH/deploy/certbot přístup, kterým by šlo certifikát bezpečně obnovit.
 - 2026-07-22: Doplněna příloha o doporučení zákazníků bez referral trackingu: výběr správného okamžiku hodnoty, doporučovací materiály místo importu kontaktů, férové odměny, agregované měření dopadu bez mapování vztahů, karta doporučovací smyčky, checklist a mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně ověřeno, že veřejné přímé HTTPS na `cody.dreamind.cz` dál selhává na expirovaném Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), zatímco diagnostické `curl --noproxy '*' -k` vrací `200 OK` z nginx/Next.js na `91.99.227.53`; SSH pro `root` i `node` odmítá neinteraktivní přístup, takže certifikát z tohoto běhu nejde bezpečně obnovit.
 - 2026-07-22: Doplněna příloha o redakčním smoke testu e-booku bez čtenářské analytiky: testování práce čtenáře podle konkrétní otázky, pětiminutový průchod, rozlišení závad v cestě/výstupu/hranicích/aktualitě, privacy-first signály bez session replay a lead-gatingu, karta smoke testu, checklist a mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně zkontrolováno, že lokální statický server pro repozitář byl znovu spuštěn na portu `3000` a lokálně vrací `200 OK`; veřejné přímé HTTPS na `cody.dreamind.cz` dál selhává kvůli expirovanému Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), diagnostické `curl --noproxy '*' -k` vrací `200 OK` z nginx/Next.js na `91.99.227.53` a proxy cesta stále končí `Empty reply from server`, bez dostupného SSH/deploy/certbot přístupu k bezpečné obnově certifikátu.
 - 2026-07-22: Doplněn rejstřík pracovních nástrojů na začátku e-booku: rychlé vyhledání datové mapy, specifikace metriky, privacy-first formuláře, provozního releasu, akčního backlogu, veřejného výřezu, bezpečnostní odpovědi a projektového offboardingu podle požadovaného výstupu; přidána mini kontrola, aby orientace nevytvářela nový tracking ani další duplicitní přílohy. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně ověřeno, že `cody.dreamind.cz` přímo míří na `91.99.227.53`, běžné přímé HTTPS selhává na expirovaném Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), diagnostické `curl --noproxy '*' -k` vrací `200 OK` z nginx/Next.js a proxy cesta končí po TLS tunelu chybou `Empty reply from server`; v pracovním prostoru není dostupný SSH/deploy/certbot přístup pro bezpečnou obnovu certifikátu.
