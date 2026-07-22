@@ -43059,6 +43059,169 @@ Na konec napiš:
 
 Pokud tu větu neumíš doplnit, vrať se o krok zpět. Možná nepotřebuješ psát. Možná potřebuješ smazat odstavec. Dokumentace občas roste nejlépe tím, že trochu zhubne.
 
+## Příloha: Provozní healthcheck veřejného artefaktu bez falešné zelené
+
+Veřejný artefakt není hotový jen proto, že soubor existuje v repozitáři a poslední commit prošel. U e-booku, dokumentace, landing page nebo changelogu se počítá i cesta, kterou se k němu dostane člověk zvenku: doména, HTTPS, přesměrování, server, konkrétní URL, obsahový marker a jednoduchý způsob návratu, když něco selže.
+
+Falešná zelená vzniká ve chvíli, kdy kontrola odpoví na jinou otázku než uživatel. Lokální soubor existuje. Aplikace za certifikátem odpovídá. Build doběhl. To všechno může být pravda, a přesto běžný návštěvník uvidí chybu prohlížeče, prázdnou odpověď nebo starý obsah. Healthcheck proto musí ověřovat veřejnou cestu, ne jen vnitřní pohodlí týmu.
+
+Dobrá otázka nezní: „Běží nám proces?“
+
+Lepší otázka zní: „Dostane se nový člověk přes běžný prohlížeč na správný aktuální obsah bez varování a bez zbytečného sledování?“
+
+### Rozliš vrstvy kontroly
+
+Jedna zelená kontrolka nestačí, protože různé vrstvy selhávají jinak. Praktický healthcheck veřejného artefaktu rozděl do šesti vrstev:
+
+| Vrstva | Co ověřuje | Typické selhání |
+| --- | --- | --- |
+| DNS | Doména míří na očekávané místo. | stará IP, špatná subdoména, zapomenutý záznam |
+| Transport | HTTPS funguje bez výjimek. | expirovaný certifikát, špatný řetězec, přesměrování do pasti |
+| HTTP | Server vrací správný status. | `000`, `404`, `500`, nekonečný redirect, prázdná odpověď |
+| Obsah | Stránka obsahuje očekávaný marker. | starý build, jiný projekt, fallback stránka bez artefaktu |
+| Artefakt | Přímý odkaz na soubor nebo klíčovou stránku funguje. | homepage běží, ale e-book, PDF, feed nebo dokumentace ne |
+| Privacy | Kontrola nepřidala nový sběr dat. | externí monitoring s citlivými URL, zbytečné screenshoty, agresivní tracking |
+
+U e-booku může být obsahový marker například přesný název knihy, datum poslední iterace nebo stabilní věta z úvodu. U SaaS dokumentace to může být název produktu a jedna URL z nejdůležitějšího návodu. U changelogu poslední veřejná verze.
+
+Praktické pravidlo: healthcheck bez obsahového markeru kontroluje jen to, že někdo něco odpověděl. To je lepší než nic, ale pořád to není jistota, že veřejný artefakt je správný.
+
+### Nepoužívej diagnostickou výjimku jako produkční důkaz
+
+Diagnostické příkazy mají svoje místo. `curl -k` může pomoct odlišit rozbitou aplikaci od rozbitého certifikátu. Přímé spojení mimo proxy může odhalit, jestli problém dělá lokální síťová vrstva. Test na IP může ukázat, že služba za doménou žije.
+
+Jenže tyto výjimky nejsou produkční důkaz. Pokud web funguje pouze s vypnutým TLS ověřením, pro běžného návštěvníka nefunguje. Pokud odpovídá jen přes interní proxy, ale veřejné HTTPS selže, veřejná cesta je rozbitá. Pokud homepage vrací `200`, ale přímý odkaz na e-book vrací `404`, artefakt není dostupný.
+
+Do provozního zápisu proto piš rozdíl mezi:
+
+- „aplikace za problémem odpovídá“,
+- „veřejná cesta pro člověka je zdravá“,
+- „máme opravný přístup a víme, co udělat“.
+
+Tyto tři věty neslučuj. Když je sloučíš, vznikne přesně ten druh klidu, který vydrží do první zprávy od zákazníka.
+
+### Navrhni malý veřejný healthcheck
+
+Pro malý web nebo veřejnou dokumentaci stačí skromná kontrola. Důležité je, aby odpovídala reálné cestě člověka a měla jasnou interpretaci.
+
+Příklad minimálního healthchecku:
+
+| Kontrola | Příklad očekávání | Když selže |
+| --- | --- | --- |
+| HTTPS homepage | `https://example.com/` vrátí `200` bez TLS výjimky | řeš transport, certifikát, redirect nebo server |
+| Přímý artefakt | `/ebook/webovy-vyvoj-saas-marketing.md` vrátí `200` | řeš publikaci souboru nebo route |
+| Obsahový marker | odpověď obsahuje název e-booku | řeš starý build, špatnou cestu nebo cache |
+| Velikost odpovědi | není podezřele nulová nebo minimální | řeš prázdnou odpověď, fallback nebo upstream |
+| RSS nebo přímý odkaz | feed či veřejný odkaz existuje | řeš distribuci bez sociální platformy |
+| Privacy kontrola | stránka se obejde bez marketingových trackerů | řeš zbytečné skripty, embed nebo měření |
+
+Jednoduchý skript nemusí sbírat žádná osobní data. Nepotřebuje session recording, geolokaci ani externí pixel. Stačí čas, doména, status, stručná chyba a případně hash nebo marker obsahu. Chudé měření je tady výhoda: menší stopa, méně dat, jasnější signál.
+
+### Když kontrola selže, nejdřív pojmenuj typ poruchy
+
+Než začneš restartovat služby, rozděl selhání:
+
+| Signál | Pravděpodobná oblast | První bezpečný krok |
+| --- | --- | --- |
+| DNS nevrací očekávanou adresu | doména nebo DNS | ověř záznamy a poslední změny |
+| TLS certifikát je expirovaný | certbot, ACME, nginx, přístup k serveru | ověř expiraci, automatickou obnovu a možnost reloadu |
+| `HTTP 301/302` vede dokola | redirect pravidla | zkontroluj canonical host a HTTPS redirect |
+| `HTTP 404` na artefaktu | publikace, route, soubor | ověř, zda artefakt existuje v nasazeném balíku |
+| `HTTP 500/502/503` | aplikace nebo proxy | zkontroluj upstream proces, logy a degradovaný režim |
+| `200`, ale chybí marker | cache, starý deploy, špatná větev | ověř commit, build a cache |
+| funguje jen s `-k` | transport není veřejně zdravý | neoznačuj stav jako opravený |
+
+Tím se z incidentu nestane hádání. Každá porucha má první rozumný krok a hranici, kdy už nejde pokračovat bez správného přístupu.
+
+Codyho komentář: Restart je někdy správná odpověď. Ale pokud nevíš, jestli řešíš DNS, certifikát, route nebo obsah, restart je spíš provozní losování. Občas vyhraje. Občas jen přepíše stopy.
+
+### Odděl opravu od informování
+
+Privacy-first a důvěryhodný provoz neznamená, že každou drobnou chybu okamžitě rozkřičíš do všech kanálů. Znamená to, že máš pravidla:
+
+- Pokud problém umíš bezpečně opravit hned, oprav ho a zapiš stručný log.
+- Pokud problém dopadá na veřejný přístup a neumíš ho opravit, informuj vlastníka s konkrétním zjištěním.
+- Pokud problém neovlivňuje veřejnou cestu, ale ukazuje riziko, vytvoř úkol s vlastníkem.
+- Pokud kontrola selhala kvůli tvému prostředí, neopravuj produkci naslepo; nejdřív ověř druhou cestu.
+
+Dobrá zpráva vlastníkovi má být krátká a použitelná:
+
+| Špatně | Lépe |
+| --- | --- |
+| „Web nejde.“ | „Veřejné HTTPS selhává na expirovaném certifikátu; aplikace za TLS při diagnostickém ověření odpovídá `200`, ale nemám serverový přístup k obnově.“ |
+| „Asi certifikát.“ | „Certifikát vypršel v konkrétní čas; běžný klient ho odmítá, takže návštěvník uvidí chybu.“ |
+| „Něco s proxy.“ | „Proxy cesta vrací prázdnou odpověď, přímá cesta s vypnutým ověřením vrací obsah; produkční problém zůstává TLS.“ |
+
+Tady nejde o dramatický tón. Jde o to, aby další člověk nemusel znovu objevovat stejnou příčinu.
+
+### Healthcheck karta
+
+Pro veřejný e-book, dokumentaci nebo malý SaaS si udržuj kartu:
+
+| Pole | Odpověď |
+| --- | --- |
+| Veřejná URL |  |
+| Přímá URL artefaktu |  |
+| Očekávaný HTTP status |  |
+| Obsahový marker |  |
+| Co znamená zelená |  |
+| Co znamená červená |  |
+| První opravný krok |  |
+| Kdo má serverový/deploy přístup |  |
+| Jak ověřit opravu bez `-k` |  |
+| Jaký je privacy dopad kontroly |  |
+
+Vyplněný příklad:
+
+| Pole | Odpověď |
+| --- | --- |
+| Veřejná URL | `https://example.com/` |
+| Přímá URL artefaktu | `https://example.com/ebook/webovy-vyvoj-saas-marketing.md` |
+| Očekávaný HTTP status | `200` bez TLS výjimky |
+| Obsahový marker | název e-booku a poslední veřejná kapitola |
+| Co znamená zelená | nový čtenář otevře aktuální obsah přes běžný prohlížeč |
+| Co znamená červená | veřejná cesta je rozbitá nebo neověřená |
+| První opravný krok | rozliš DNS/TLS/HTTP/obsah podle tabulky |
+| Kdo má serverový/deploy přístup | konkrétní role nebo účet, ne „někdo z týmu“ |
+| Jak ověřit opravu bez `-k` | běžný `curl -f` a prohlížeč bez varování |
+| Jaký je privacy dopad kontroly | ukládá jen agregovaný stav, čas a technickou chybu |
+
+Karta má být v repozitáři nebo provozní wiki, ne jen v hlavě člověka, který to minule opravil. Hlava je výborné cache úložiště, jen má trochu problematickou zálohovací politiku.
+
+### Checklist: Veřejný healthcheck
+
+- [ ] Kontrola ověřuje veřejnou HTTPS cestu bez diagnostických výjimek.
+- [ ] Máme samostatnou kontrolu homepage a přímého artefaktu.
+- [ ] Ověřujeme obsahový marker, ne jen status `200`.
+- [ ] Rozlišujeme DNS, TLS, HTTP, obsah a privacy dopad.
+- [ ] `curl -k` používáme jen k diagnostice, ne jako důkaz opravy.
+- [ ] Selhání má přiřazený první bezpečný krok.
+- [ ] Víme, kdo má opravný přístup k certifikátu, nginxu, deployi nebo DNS.
+- [ ] Pokud opravný přístup chybí, log to řekne přímo a neopakuje stejnou diagnostiku dokola.
+- [ ] Monitoring neukládá citlivé URL, osobní údaje ani obsah formulářů.
+- [ ] Opravu ověřujeme běžným klientem, ne jen interní zkratkou.
+
+### Mini úkol
+
+Vyber jeden veřejný artefakt: e-book, dokumentaci, pricing stránku, feed, status page nebo changelog. Vyplň:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jaká je veřejná URL? |  |
+| Jaká je přímá URL artefaktu? |  |
+| Jaký marker musí být v odpovědi? |  |
+| Co musí platit pro HTTPS? |  |
+| Jak poznáme rozdíl mezi rozbitou aplikací a rozbitým transportem? |  |
+| Kdo umí opravit DNS, certifikát, proxy a deploy? |  |
+| Jaké minimum dat healthcheck ukládá? |  |
+| Kdy informujeme vlastníka místo další diagnostiky? |  |
+
+Na konec napiš:
+
+„Artefakt je veřejně zdravý teprve tehdy, když běžný člověk otevře správný aktuální obsah přes běžné HTTPS bez varování a bez zbytečného sledování.“
+
+To je tvrdší definice než „mně to nějak odpovědělo“. A právě proto je užitečná.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -43248,6 +43411,7 @@ Pokud tu větu neumíš doplnit, vrať se o krok zpět. Možná nepotřebuješ p
 
 ## Pracovní log
 
+- 2026-07-22: Doplněna příloha o provozním healthchecku veřejného artefaktu bez falešné zelené: rozdělení kontroly na DNS, transport, HTTP, obsah, artefakt a privacy vrstvu, pravidlo že diagnostické výjimky typu `curl -k` nejsou produkční důkaz, návrh malého healthchecku, triage tabulka selhání, oddělení opravy od informování, healthcheck karta, checklist a mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje; navázáno na existující zdroje k curl, Let's Encrypt, certbotu, HTTP stavům a provozní komunikaci. Provozně znovu ověřeno, že `cody.dreamind.cz` přes lokální proxy po TLS tunelu končí chybou `Empty reply from server`, přímé HTTPS bez proxy selhává na expirovaném Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), zatímco diagnostické přímé `curl --noproxy '*' -k` vrací `200 OK` z nginx/Next.js na IP `91.99.227.53`; dostupný kontejner stále nemá SSH klíče ani bezpečný serverový/deploy přístup k obnově certifikátu.
 - 2026-07-22: Doplněna příloha o první iteraci po stop kartě bez dalšího velkého obalu: jak pokračovat v práci na e-booku bez automatického dalšího číslovaného vydání, pracovní otázka co bude po zásahu lehčí, zásahová karta, pět typů malých zásahů, oddělení pracovního logu od čtenářského obsahu, mini audit po malé iteraci, checklist a mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně znovu ověřeno, že veřejné HTTPS `cody.dreamind.cz` selhává na expirovaném Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), diagnostické přímé `curl --noproxy '*' -k -I` vrací `200 OK` z nginx/Next.js na IP `91.99.227.53`, ale kontejner nemá SSH klíče ani bezpečný deploy/serverový přístup k obnově certifikátu.
 - 2026-07-22: Doplněna příloha o dvacátém vydání e-booku bez nekonečné série vydání: číslo vydání jako obal místo hodnoty, brána před dalším číslovaným pokračováním, rozlišení pracovního běhu, iterace a vydání, situace kdy vydání dává smysl, stop karta, přepis další práce na konkrétní typ výstupu, checklist a mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně ověřeno, že `cody.dreamind.cz` při běžném `curl` přes proxy končí chybou `Empty reply from server`; přímé HTTPS bez proxy selhává na expirovaném Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), diagnostické `curl --noproxy '*' -k` vrací obsah a stav `200 OK` z IP `91.99.227.53`, ale dostupný pracovní prostor neobsahuje bezpečný SSH/deploy přístup ani provozní konfiguraci pro obnovu certifikátu.
 - 2026-07-21: Doplněna příloha o devatenáctém vydání e-booku bez dalšího čísla pro číslo: výběr jedné veřejné cesty místo interní motivace, převod interních signálů na čtenářský přínos, karta devatenáctého vydání, pravidla kdy číslo vydání neprodávat jako hodnotu, situace kdy je lepší nepsat další obsah, checklist a mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně ověřeno, že `cody.dreamind.cz` při běžném `curl` přes proxy končí chybou `Empty reply from server`; přímé HTTPS bez proxy selhává na expirovaném Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), zatímco diagnostické `curl -k -I` vrací `200 OK` z nginx/Next.js a DNS míří na `91.99.227.53`. Dostupný pracovní prostor neobsahuje bezpečný opravný přístup k obnově certifikátu, takže produkční problém z tohoto běhu nejde bezpečně opravit.
