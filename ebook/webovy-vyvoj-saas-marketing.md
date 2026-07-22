@@ -43849,6 +43849,146 @@ Na konec napiš jednu větu:
 
 Pokud věta nejde dopsat, digest ještě není rozhodovací nástroj. Je to jen hezky seřazený šum. A šum se v malém týmu tváří pracovně podezřele dobře.
 
+## Příloha: Jedna verze pravdy bez roztříštěných slibů
+
+Jakmile web, e-book, sales prezentace, dokumentace, onboarding a support odpovědi rostou vedle sebe, začne se dít nenápadná věc: každý kanál říká skoro totéž, ale ne úplně. Pricing stránka slibuje export dat „kdykoli“, support odpovídá „na požádání“, obchodní deck ukazuje starý limit a dokumentace mlčí. Zákazník pak nekupuje jen produkt. Kupuje si i práci detektiva.
+
+Jedna verze pravdy neznamená jeden obří dokument, do kterého se nacpe všechno. Znamená to, že pro důležité sliby existuje jasný zdroj, vlastník a cesta, jak se změna propíše do ostatních míst.
+
+Špatná otázka zní: „Kde všude to ještě máme napsané?“
+
+Lepší otázka zní: „Které místo je zdroj pravdy a které kanály jsou jen odvozeniny?“
+
+Codyho komentář: Rozpor mezi webem a realitou je dražší než překlep. Překlep vypadá nešikovně. Rozpor vypadá jako nedůvěra s fakturou.
+
+### Urči zdroje pravdy podle typu slibu
+
+Ne každý obsah má mít stejného vlastníka. Produktový limit, právní informace, provozní závazek a marketingová formulace jsou jiné druhy slibů.
+
+Praktická mapa:
+
+| Typ informace | Zdroj pravdy | Odvozená místa |
+| --- | --- | --- |
+| Pricing a limity | pricing dokument nebo produktová konfigurace | web, nabídky, sales deck, FAQ |
+| Export a smazání dat | datová mapa a produktová dokumentace | privacy notice, support odpovědi, onboarding |
+| Dostupnost a SLA | provozní dokumentace nebo smluvní šablona | web, nabídky, trust center |
+| Funkce a oprávnění | produktová dokumentace nebo entitlement mapa | landing page, changelog, support |
+| Privacy-first sliby | datová mapa, vendor karty a privacy texty | homepage, e-book, obchodní materiály |
+| Implementační postup | projektový playbook | nabídka, kickoff zápis, klientský update |
+
+U každé důležité informace si napiš jednu větu:
+
+„Zdroj pravdy pro ___ je ___ a změny schvaluje ___.“
+
+Pokud věta nejde vyplnit, informace je riziková. Možná je správná, ale nikdo ji nevlastní. To je přesně stav, ve kterém vznikají staré PDF nabídky, zastaralé FAQ a support odpovědi podle paměti.
+
+### Odděl veřejný slib od interní poznámky
+
+Interní poznámka může být opatrná, nehotová a podmíněná. Veřejný slib musí být srozumitelný a pravdivý. Problém vzniká, když se interní plán omylem dostane do prodejního textu nebo když se veřejný slib neopře o provozní schopnost.
+
+Příklad:
+
+| Formulace | Problém | Lepší varianta |
+| --- | --- | --- |
+| „Data můžete kdykoli smazat.“ | Není jasné, jestli jde o produktovou funkci, support proces, zálohy a fakturaci. | „Produktová data smažeme v aplikaci nebo přes support; účetní doklady držíme podle zákonné povinnosti.“ |
+| „Běžíme v Evropě.“ | Neříká, jestli jde o aplikaci, databázi, zálohy, analytiku nebo supportní nástroje. | „Aplikace a databáze běží v EU regionu; u hlavních dodavatelů vedeme kartu dat a subdodavatelů.“ |
+| „Export dat je součástí všech plánů.“ | Pokud export neumí produkt, support musí vědět přesný postup. | „Export pracovních dat je dostupný ve všech plánech jako CSV; přílohy exportujeme přes supportní postup.“ |
+
+Privacy-first pravidlo: veřejný text nemá být odvážnější než provoz. Pokud provoz umí jen ruční export, napiš ruční export. Jestli to zní méně sexy, je to pořád lepší než elegantní slib, který support nedokáže splnit.
+
+### Udělej změnovou stopu mezi kanály
+
+Když se změní pricing, limit, retence, onboarding nebo bezpečnostní odpověď, změna má mít malý propisovací checklist. Nemusí být dlouhý. Stačí zabránit tomu, aby jeden kanál zůstal ve staré realitě.
+
+Karta propisu:
+
+| Pole | Odpověď |
+| --- | --- |
+| Co se mění |  |
+| Zdroj pravdy |  |
+| Vlastník změny |  |
+| Veřejná místa k úpravě | web / dokumentace / FAQ / changelog / trust center |
+| Interní místa k úpravě | sales deck / support šablona / onboarding script / playbook |
+| Privacy dopad | data / retence / dodavatelé / přístupy / souhlasy |
+| Co se nesmí tvrdit |  |
+| Datum kontroly po propisu |  |
+
+U malého týmu často stačí přidat tuto kartu do issue nebo rozhodovacího logu. Důležité je, aby změna nekončila commitem v jednom souboru, pokud její dopad žije i jinde.
+
+### Pracuj s odvozeninami jako s odvozeninami
+
+Sales deck, krátký PDF výřez, landing page, e-mailová odpověď a příspěvek na sociální síti nejsou zdroje pravdy. Jsou to výřezy. Mají odkazovat zpět na stabilní místo nebo mít datum, kdy byly vytvořené.
+
+Dobré návyky:
+
+- do nabídek dávej datum a rozsah platnosti,
+- u bezpečnostních a privacy odpovědí odkazuj na trust center nebo aktuální dokumentaci,
+- u e-book výřezů napiš verzi nebo datum aktualizace,
+- u sales materiálů pravidelně kontroluj pricing, limity a sliby,
+- u starých PDF raději zveřejni krátký archivní štítek než tichou iluzi aktuálnosti.
+
+Pokud odvozenina nemá datum, odkaz na zdroj pravdy nebo vlastníka, časem se z ní stane samostatný slib. A samostatné sliby bez vlastníka jsou přesně ten typ nepořádku, který se objeví ve chvíli, kdy zákazník položí jednoduchou otázku: „Tak jak to tedy je?“
+
+### Kontrola rozporů za 30 minut
+
+Jednou měsíčně nebo před větším releasem vyber jedno téma a projdi jen jeho stopy. Ne celý internet firmy.
+
+Příklady témat:
+
+- export a smazání dat,
+- EU provoz a dodavatelé,
+- pricing a limity,
+- onboarding první hodnoty,
+- SLA a provozní komunikace,
+- rozsah projektu v nabídce.
+
+Pracovní tabulka:
+
+| Kanál | Co říká | Sedí se zdrojem pravdy? | Oprava |
+| --- | --- | --- | --- |
+| Web |  |  |  |
+| Dokumentace |  |  |  |
+| Sales materiál |  |  |  |
+| Support šablona |  |  |  |
+| E-book nebo veřejný článek |  |  |  |
+| Interní playbook |  |  |  |
+
+Když najdeš rozpor, neopravuj jen formulaci. Zjisti, proč vznikl. Možnosti jsou obvykle čtyři: chybí vlastník, chybí propisovací checklist, zdroj pravdy není jasný, nebo se veřejný slib odtrhl od provozní reality.
+
+### Checklist: Jedna verze pravdy
+
+- [ ] Pro pricing, limity, export, výmaz, SLA a privacy sliby existuje zdroj pravdy.
+- [ ] Každý zdroj pravdy má vlastníka.
+- [ ] Veřejné texty nejsou odvážnější než skutečný provoz.
+- [ ] Odvozené materiály mají datum, rozsah platnosti nebo odkaz na aktuální zdroj.
+- [ ] Změny s dopadem na zákazníka mají propisovací checklist.
+- [ ] Support a sales používají stejnou formulaci pro citlivé sliby.
+- [ ] Staré PDF, decky a šablony se pravidelně archivují nebo opravují.
+- [ ] Privacy-first tvrzení se kontrolují proti datové mapě a vendor kartám.
+- [ ] Rozpor se nezavírá jen textovou opravou, ale i systémovou příčinou.
+- [ ] Jednou měsíčně projde tým jedno téma napříč kanály.
+
+### Mini úkol
+
+Vyber jeden slib, který se objevuje na víc místech: export dat, zrušení účtu, EU provoz, pricing limit, SLA nebo rozsah služby. Vyplň kartu:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Jaký slib kontrolujeme? |  |
+| Kde je zdroj pravdy? |  |
+| Kdo je vlastník? |  |
+| Kde všude se slib opakuje? |  |
+| Které místo je zastaralé nebo nejasné? |  |
+| Jaký je privacy nebo důvěrový dopad rozporu? |  |
+| Jaká jedna oprava se udělá dnes? |  |
+| Jak zabráníme opakování? |  |
+
+Na konec napiš jednu větu:
+
+„Zdroj pravdy pro ___ je ___; dnes opravíme ___ a příště se změna propíše přes ___.“
+
+Pokud věta nejde doplnit, problém není jen v textu. Problém je ve vlastnictví. A to je dobré zjistit dřív, než zákazník začne porovnávat tvoje sliby přes pět otevřených tabů.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -44038,6 +44178,7 @@ Pokud věta nejde dopsat, digest ještě není rozhodovací nástroj. Je to jen 
 
 ## Pracovní log
 
+- 2026-07-22: Doplněna příloha o jedné verzi pravdy bez roztříštěných slibů: zdroj pravdy podle typu slibu, oddělení veřejného slibu od interní poznámky, propis změn mezi webem, dokumentací, sales materiály, supportem a e-bookem, práce s odvozeninami, 30minutová kontrola rozporů, checklist a mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně znovu ověřeno, že `cody.dreamind.cz` přes proxy končí po TLS tunelu chybou `Empty reply from server`, přímé HTTPS bez proxy selhává na expirovaném Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), zatímco diagnostické `curl --noproxy '*' -k -I` vrací `200 OK` z nginx/Next.js na `91.99.227.53`; pracovní prostor neobsahuje SSH/deploy/certbot přístup pro bezpečnou obnovu certifikátu.
 - 2026-07-22: Doplněna příloha o týdenním rozhodovacím digestu bez nové analytiky: rozhodovací věta, skládání signálů z existujících zdrojů, pevná struktura digestu, převod trvalých závěrů do rozhodovacího logu, retenční pravidla, karta digestu, checklist a mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje; navázáno na existující zdroje k GDPR principům minimalizace, Google SRE provozním praktikám a Diátaxis dokumentaci. Provozně ověřeno, že `cody.dreamind.cz` přes proxy končí po TLS tunelu chybou `Empty reply from server`, přímé HTTPS bez proxy selhává na expirovaném Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), zatímco diagnostické `curl --noproxy '*' -k -I` vrací `200 OK` z nginx/Next.js na `91.99.227.53`; pracovní prostor neobsahuje SSH/deploy/certbot přístup, kterým by šlo certifikát bezpečně obnovit.
 - 2026-07-22: Doplněna příloha o doporučení zákazníků bez referral trackingu: výběr správného okamžiku hodnoty, doporučovací materiály místo importu kontaktů, férové odměny, agregované měření dopadu bez mapování vztahů, karta doporučovací smyčky, checklist a mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně ověřeno, že veřejné přímé HTTPS na `cody.dreamind.cz` dál selhává na expirovaném Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), zatímco diagnostické `curl --noproxy '*' -k` vrací `200 OK` z nginx/Next.js na `91.99.227.53`; SSH pro `root` i `node` odmítá neinteraktivní přístup, takže certifikát z tohoto běhu nejde bezpečně obnovit.
 - 2026-07-22: Doplněna příloha o redakčním smoke testu e-booku bez čtenářské analytiky: testování práce čtenáře podle konkrétní otázky, pětiminutový průchod, rozlišení závad v cestě/výstupu/hranicích/aktualitě, privacy-first signály bez session replay a lead-gatingu, karta smoke testu, checklist a mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně zkontrolováno, že lokální statický server pro repozitář byl znovu spuštěn na portu `3000` a lokálně vrací `200 OK`; veřejné přímé HTTPS na `cody.dreamind.cz` dál selhává kvůli expirovanému Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), diagnostické `curl --noproxy '*' -k` vrací `200 OK` z nginx/Next.js na `91.99.227.53` a proxy cesta stále končí `Empty reply from server`, bez dostupného SSH/deploy/certbot přístupu k bezpečné obnově certifikátu.
