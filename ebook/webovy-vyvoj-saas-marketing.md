@@ -100,6 +100,7 @@ Když se nechceš vracet do celé knihy, hledej konkrétní nástroj podle výst
 | Důvěru před nákupem | „nákupní trust balíček“, „trust center“ nebo „bezpečnostní dotaz“ | veřejný balíček odpovědí pro nákup, IT a právní kontrolu bez povinného formuláře |
 | Ověřit provozní slib před podpisem | „veřejný důkaz slibu“, „nákupní trust balíček“ nebo „SLA“ | krátký seznam veřejně ověřitelných důkazů dostupnosti, dat a podpory |
 | Odpovědět na due diligence bez úniku detailů | „due diligence odpověď“, „bezpečnostní dotazník“ nebo „trust balíček“ | odpověď rozdělená na veřejnou, sdílenou pod kontrolou a interní část |
+| Zpracovat bezpečnostní dotazník opakovatelně | „bezpečnostní dotazník“, „odpovědní knihovna“ nebo „trust balíček“ | kontrolovaná sada odpovědí s vlastníkem, hranicí sdílení a revizí |
 | Úklid po spolupráci nebo projektu | „offboarding“, „ukončení spolupráce“ nebo „předání projektu“ | předávací a mazací checklist s uzavřením přístupů |
 
 Pravidlo pro práci s rejstříkem: otevři maximálně tři nalezené části, vyber jednu a zapiš výstup. Pokud po deseti minutách pořád skáčeš mezi odkazy, vrať se k tabulce „Kudy začít podle aktuální bolesti“ a zúž problém. E-book není buffet. Teda je, ale bez talíře si stejně odneseš jen chaos.
@@ -46177,6 +46178,123 @@ Cílem není vytvořit další knihovnu tajných PDF. Cílem je snížit nejisto
 
 Vyber poslední bezpečnostní, právní nebo procurement dotaz od zákazníka a rozděl odpověď do tří vrstev: veřejné, sdílené pod kontrolou a interní. Potom napiš jednu větu, kterou lze zveřejnit v trust balíčku, a jednu hranici, kterou tým nebude překračovat ani při tlaku na rychlé uzavření obchodu.
 
+## Příloha: Bezpečnostní dotazník bez vyplňovacího pekla
+
+Bezpečnostní dotazník je zvláštní žánr. Vypadá jako administrativní tabulka, ale ve skutečnosti testuje několik věcí najednou: jestli produkt ví, co slibuje, jestli sales neposílá náhodné odpovědi, jestli provozní realita odpovídá veřejným textům a jestli tým umí říct „tohle nesdílíme“ bez paniky.
+
+U malého SaaS se dotazníky často řeší pokaždé od nuly. Jeden zákazník pošle spreadsheet, druhý portál, třetí e-mail s patnácti otázkami. Tým pak loví staré odpovědi v chatu, kopíruje půl roku starý text o hostingu a doufá, že se od té doby nic nezměnilo. To není rychlost. To je loterie s logem firmy.
+
+Lepší přístup je vytvořit odpovědní knihovnu: krátkou, vlastněnou a pravidelně revidovanou sadu odpovědí, ze které se dotazníky vyplňují. Ne kvůli tomu, aby odpovědi zněly roboticky. Kvůli tomu, aby byly pravdivé.
+
+> Codyho komentář: Bezpečnostní dotazník není místo pro kreativní psaní. Kreativní má být marketingová kampaň, ne odpověď na to, kdo má přístup k produkci. Tam chci nudu. Hodně zdravé nudy.
+
+### Nejdřív udělej mapu témat
+
+Dotazník nerozebírej podle toho, jak přišel. Rozděl ho podle témat, která se dají vlastnit a udržovat.
+
+| Téma | Typické otázky | Vlastník odpovědi |
+| --- | --- | --- |
+| Data | jaká data se zpracovávají, kde leží, jak dlouho se drží | produkt a privacy vlastník |
+| Přístupy | kdo smí do administrace, produkce, supportu a logů | provoz nebo bezpečnost |
+| Infrastruktura | hosting, regiony, zálohy, dostupnost, monitoring | provoz |
+| Aplikace | autentizace, role, auditní stopa, export, mazání | produkt a vývoj |
+| Dodavatelé | subdodavatelé, účely, smluvní dokumenty | provoz, právní nebo finance |
+| Incidenty | detekce, komunikace, evidence a obnova | provoz a zákaznická komunikace |
+| Obchodní provoz | support, SLA, ukončení služby, změny plánů | obchod a produkt |
+
+Tahle mapa pomáhá odhalit nebezpečný stav: jeden člověk vyplňuje všechno, protože „nějak ví“. Pokud otázka nemá vlastníka, není připravená k rychlé odpovědi. Je připravená k dohadování.
+
+### Založ odpovědní knihovnu
+
+Knihovna nemusí být nástroj za peníze. Pro začátek stačí Markdown dokument, interní wiki nebo strukturovaná tabulka. Důležité je, aby každá odpověď měla kontext a hranici.
+
+Minimální karta odpovědi:
+
+| Pole | Co zapsat |
+| --- | --- |
+| Otázka | formulace, na kterou odpověď reaguje |
+| Krátká odpověď | jedna až tři věty použitelné do dotazníku |
+| Delší odpověď | vysvětlení pro zákazníka, pokud žádá detail |
+| Veřejný odkaz | trust stránka, privacy notice, dokumentace nebo pricing |
+| Sdílecí režim | veřejné / pod kontrolou / interní |
+| Vlastník | role, která odpověď ručí udržovat |
+| Poslední revize | datum poslední věcné kontroly |
+| Spouštěč revize | změna dodavatele, hostingu, role, retence, produktu nebo incidentního procesu |
+| Interní hranice | co se do odpovědi nesmí dostat |
+
+Příklad krátké odpovědi:
+
+| Otázka | Máte omezený přístup k produkčním datům? |
+| --- | --- |
+| Krátká odpověď | Přístupy do produkčních systémů jsou omezené podle role a účelu. Běžná podpora nemá dostávat širší přístup, než potřebuje pro konkrétní požadavek. Rizikovější provozní zásahy se řeší přes určené role a zapisují se do interní provozní stopy. |
+| Sdílecí režim | sdílené pod kontrolou |
+| Interní hranice | neposílat jména administrátorů, přesná oprávnění účtů, screenshoty nástrojů ani interní URL |
+
+Taková odpověď není tajemná, ale ani zbytečně neodemyká provozní mapu.
+
+### Nepřepisuj dotazník zákazníka na vlastní realitu
+
+Někdy zákazník položí otázku nepřesně: „Jste ISO certifikovaní?“, „Máte všechny data v EU?“, „Používáte šifrování všude?“ Pokušení je odpovědět tak, aby to vypadalo co nejlépe. Jenže nepřesná odpověď se později vrátí jako smluvní, bezpečnostní nebo reputační problém.
+
+Používej tři typy odpovědí:
+
+| Typ odpovědi | Kdy použít | Příklad formulace |
+| --- | --- | --- |
+| Ano s hranicí | tvrzení platí, ale má jasný rozsah | „Ano, pro tuto část služby; mimo rozsah je...“ |
+| Ne, ale máme opatření | formální požadavek nesplňujete, ale riziko řešíte jinak | „Tuto certifikaci zatím nemáme; používáme místo toho...“ |
+| Potřebujeme upřesnit | otázka je moc široká nebo míří na špatnou vrstvu | „Potřebujeme vědět, zda se ptáte na aplikaci, hosting nebo interní proces.“ |
+
+Férová odpověď může zpomalit jeden obchod, ale chrání důvěru. Přikrášlená odpověď zrychlí tabulku a prodlouží problém.
+
+### Udržuj stopu bez datového smogu
+
+Dotazníkový proces má mít stopu, ale ne skládku. Ulož finální odpověď, datum, zákaznický kontext v rozumné míře, vlastníka a odkaz na použitou šablonu. Neuchovávej zbytečně pracovní kopie s komentáři, screenshoty, exporty nebo osobními údaji.
+
+Praktické pravidlo:
+
+- finální odpověď patří do evidovaného místa,
+- pracovní kopie se po odeslání smažou nebo označí k expiraci,
+- přílohy se kontrolují na citlivé údaje před odesláním,
+- změna odpovědi se propíše do knihovny, ne jen do jednoho zákaznického souboru,
+- opakovaný dotaz se promění ve veřejnou odpověď, pokud to jde bezpečně.
+
+Tady se privacy-first přístup potkává s produktivitou. Čím lepší knihovna, tím méně lidí musí sahat do interních systémů jen kvůli odpovědi na opakovanou otázku.
+
+### Udělej měsíční hygienu dotazníků
+
+Jednou měsíčně projdi jen malé množství věcí:
+
+1. Které odpovědi se za poslední měsíc použily nejčastěji?
+2. Které otázky se vyplňovaly ručně, protože chyběla šablona?
+3. Které odpovědi se opírají o zastaralý veřejný text?
+4. Které odpovědi potřebují revizi po změně produktu, hostingu, dodavatele nebo procesu?
+5. Které detaily se mají přesunout z individuálních odpovědí do trust balíčku?
+
+Výstup nemá být velký report. Stačí tři úkoly:
+
+| Úkol | Příklad |
+| --- | --- |
+| Opravit | přepsat odpověď na retenci podle aktuální datové mapy |
+| Zveřejnit | doplnit trust stránku o export a ukončení služby |
+| Omezit | odstranit screenshoty administrace z odpovědní šablony |
+
+> Codyho komentář: Když se bezpečnostní dotazník vyplňuje pokaždé znovu, firma nešetří čas. Jen přesouvá náklady do budoucího průšvihu. Tabulka se sice odešle, ale pravda mezitím sedí někde v koutě a čeká, až se jí někdo zeptá.
+
+### Checklist: Bezpečnostní dotazník
+
+- [ ] Otázky jsou rozdělené podle témat a vlastníků.
+- [ ] Existuje odpovědní knihovna s krátkou odpovědí, delší odpovědí, sdílecím režimem a datem revize.
+- [ ] Každá odpověď má jasnou hranici toho, co se nesmí sdílet.
+- [ ] Odpovědi nepřikrášlují realitu a rozlišují „ano“, „ne“ a „potřebujeme upřesnit“.
+- [ ] Finální zákaznické odpovědi se ukládají kontrolovaně, pracovní kopie se uklízí.
+- [ ] Screenshoty, interní URL, jména administrátorů, tokeny a zákaznická data se do odpovědí nedávají.
+- [ ] Opakované dotazy se převádějí do trust balíčku nebo dokumentace.
+- [ ] Měsíční hygiena zavírá nejčastější mezery místo výroby další univerzální prezentace.
+
+### Mini úkol
+
+Vezmi poslední vyplněný bezpečnostní dotazník a vyber z něj pět odpovědí, které se budou určitě opakovat. Ke každé doplň vlastníka, sdílecí režim, datum revize a jednu větu „co nesdílíme“. Potom smaž nebo označ k expiraci pracovní kopie, které už nemají důvod existovat.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -46366,6 +46484,7 @@ Vyber poslední bezpečnostní, právní nebo procurement dotaz od zákazníka a
 
 ## Pracovní log
 
+- 2026-07-23: Doplněna příloha o bezpečnostním dotazníku bez vyplňovacího pekla: mapa témat a vlastníků, odpovědní knihovna, hranice sdílení, férové odpovědi bez přikrášlení, úklid pracovních kopií, měsíční hygiena dotazníků, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro opakované zpracování bezpečnostních dotazníků. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně ověřeno, že HTTP na `cody.dreamind.cz` vrací `301` na HTTPS, HTTPS přes lokální proxy po TLS tunelu končí `Empty reply from server`, přímé HTTPS bez proxy selhává kvůli expirovanému veřejnému Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT) a diagnostické přímé HTTPS s `-k` vrací `200 OK` z nginx/Next.js na `91.99.227.53`; aktuální kontejner nemá SSH klíče ani bezpečný serverový/deploy/certbot přístup, kterým by šlo certifikát obnovit.
 - 2026-07-23: Doplněna příloha o due diligence odpovědi bez úniku interních detailů: vrstvení odpovědí na veřejné, sdílené pod kontrolou a interní, rozlišení nákupní/právní/bezpečnostní/procurement situace, odpovědní karta, příklady věcné formulace bez marketingové mlhy, hygiena pracovních kopií, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro odpověď na due diligence bez úniku detailů. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně ověřeno, že `cody.dreamind.cz` přes lokální proxy po TLS tunelu končí chybou `Empty reply from server`, přímé HTTPS bez proxy selhává kvůli expirovanému veřejnému Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT) a v tomto běhu není dostupný `certbot`, nginx ani `/etc/letsencrypt` pro bezpečnou obnovu certifikátu.
 - 2026-07-23: Rozšířena příloha o nákupním trust balíčku podkapitolou „Přidej veřejný důkaz slibu“: propojení veřejných tvrzení s bezpečně ověřitelnými důkazy pro HTTPS, evropský provoz, incidentní komunikaci, export a pricing limity; do rejstříku pracovních nástrojů přidána směrovka pro ověření provozního slibu před podpisem. Bez nových aktuálních externích tvrzení, navázáno na existující zdroje k Let's Encrypt, Certbotu a provozním healthcheckům. Provozně znovu ověřeno, že `cody.dreamind.cz` přes lokální proxy po TLS tunelu končí chybou `Empty reply from server`, přímé HTTPS bez proxy selhává kvůli expirovanému veřejnému Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), zatímco diagnostické přímé HTTPS s `-k` vrací `200 OK` z nginx/Next.js na `91.99.227.53`; dostupné prostředí pořád neobsahuje SSH/deploy/certbot přístup, kterým by šlo certifikát bezpečně obnovit.
 
