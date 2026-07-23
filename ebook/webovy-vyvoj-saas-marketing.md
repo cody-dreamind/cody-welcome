@@ -101,6 +101,7 @@ Když se nechceš vracet do celé knihy, hledej konkrétní nástroj podle výst
 | Ověřit provozní slib před podpisem | „veřejný důkaz slibu“, „nákupní trust balíček“ nebo „SLA“ | krátký seznam veřejně ověřitelných důkazů dostupnosti, dat a podpory |
 | Odpovědět na due diligence bez úniku detailů | „due diligence odpověď“, „bezpečnostní dotazník“ nebo „trust balíček“ | odpověď rozdělená na veřejnou, sdílenou pod kontrolou a interní část |
 | Zpracovat bezpečnostní dotazník opakovatelně | „bezpečnostní dotazník“, „odpovědní knihovna“ nebo „trust balíček“ | kontrolovaná sada odpovědí s vlastníkem, hranicí sdílení a revizí |
+| Udržet trust odpovědi aktuální po změně produktu | „údržba odpovědní knihovny“, „změna produktu“ nebo „staré sliby“ | revizní sada odpovědí napojená na release, dodavatele, retenci a veřejné texty |
 | Úklid po spolupráci nebo projektu | „offboarding“, „ukončení spolupráce“ nebo „předání projektu“ | předávací a mazací checklist s uzavřením přístupů |
 
 Pravidlo pro práci s rejstříkem: otevři maximálně tři nalezené části, vyber jednu a zapiš výstup. Pokud po deseti minutách pořád skáčeš mezi odkazy, vrať se k tabulce „Kudy začít podle aktuální bolesti“ a zúž problém. E-book není buffet. Teda je, ale bez talíře si stejně odneseš jen chaos.
@@ -46295,6 +46296,112 @@ Výstup nemá být velký report. Stačí tři úkoly:
 
 Vezmi poslední vyplněný bezpečnostní dotazník a vyber z něj pět odpovědí, které se budou určitě opakovat. Ke každé doplň vlastníka, sdílecí režim, datum revize a jednu větu „co nesdílíme“. Potom smaž nebo označ k expiraci pracovní kopie, které už nemají důvod existovat.
 
+## Příloha: Údržba odpovědní knihovny po změně produktu bez starých slibů
+
+Odpovědní knihovna je užitečná jen tehdy, když odpovídá skutečnému produktu. Jakmile se změní hosting, subdodavatel, retenční pravidlo, role v aplikaci, export dat, pricing limit nebo incidentní proces, stará odpověď se může změnit z pomůcky na riziko. Navenek pořád vypadá profesionálně. Uvnitř už ale slibuje něco, co tým nedělá.
+
+To je nebezpečnější než prázdná odpověď. Prázdné místo si někdo všimne. Starý slib se často kopíruje dál, dokud ho neobjeví zákazník, právník nebo bezpečnostní kontrola v nejhorší možný moment. Klasika: nejdřív tabulka, potom pot.
+
+> Codyho komentář: Trust materiály nestárnou jako víno. Stárnou jako mléko v kancelářské lednici. Ze začátku vypadají nevinně, ale jednou je někdo otevře při nákupním hovoru.
+
+### Připoj odpovědi k release změnám
+
+Každá změna produktu nemusí spouštět právní revizi. Ale každá změna, která mění veřejný slib, musí spustit kontrolu odpovědí. Prakticky stačí přidat do release checklistu malou otázku:
+
+„Mění tato změna něco, co tvrdíme v trust balíčku, privacy notice, DPA, bezpečnostních dotaznících, support šablonách nebo pricingu?“
+
+Pokud je odpověď ano nebo nevím, release má dostat revizní položku.
+
+Typické spouštěče:
+
+| Změna | Co zkontrolovat v knihovně |
+| --- | --- |
+| nový subdodavatel nebo nástroj | účel, kategorie dat, region, role správce/zpracovatele, veřejný seznam dodavatelů |
+| změna hostingu nebo regionu | provozní odpovědi, data residency texty, DPA přílohy, trust stránku |
+| nová role nebo oprávnění | odpovědi k přístupům, admin dokumentaci, support postupy |
+| nový export nebo mazání dat | odpovědi k odchodu, retenci, právům uživatelů a zákaznickému offboardingu |
+| změna logování nebo analytiky | odpovědi k observabilitě, privacy notice, retenční mapu |
+| nový pricing limit nebo fair use | pricing stránku, support šablony, procurement odpovědi |
+| změna incidentního procesu | bezpečnostní kontakt, status komunikaci, due diligence odpovědi |
+
+Tahle tabulka nemá brzdit vývoj. Má zabránit tomu, aby produkt běžel jedním směrem a veřejné odpovědi druhým.
+
+### Použij revizní sadu místo ručního hledání
+
+Když se změní něco důležitého, nehledej naslepo ve všech dokumentech. Udržuj malou revizní sadu: seznam míst, kde se stejný slib obvykle opakuje.
+
+Minimální revizní sada:
+
+| Oblast | Kde hledat |
+| --- | --- |
+| veřejný web | trust stránka, privacy notice, pricing, dokumentace, changelog |
+| sales a nákup | šablony odpovědí, decky, procurement FAQ, zákaznické přílohy |
+| právní vrstva | DPA, seznam subdodavatelů, retenční pravidla, smluvní dodatky |
+| support | makra odpovědí, interní poznámky, postup ukončení služby |
+| produkt | onboarding texty, nastavení soukromí, export, role, auditní stopa |
+| provoz | runbooky, status page, incident šablony, health check popisy |
+
+U každé změny vyber jen relevantní řádky. Pokud měníš pricing limit, nepotřebuješ číst celý incidentní runbook. Pokud měníš subdodavatele, pricing tabulka tě nejspíš nezachrání.
+
+### Zaveď stav odpovědi
+
+Odpověď v knihovně nemá být jen text. Má mít stav. Bez stavu tým neví, jestli ji může použít do zákaznického dotazníku, nebo jestli je to historický artefakt z doby, kdy produkt měl polovinu funkcí a dvojnásobek optimismu.
+
+Použij čtyři jednoduché stavy:
+
+| Stav | Význam | Co s tím |
+| --- | --- | --- |
+| Aktuální | odpověď odpovídá produktu a veřejným textům | lze použít |
+| K revizi | změna produktu ji možná ovlivnila | nepoužívat bez kontroly vlastníka |
+| Nahrazeno | existuje novější odpověď | ponechat jen odkaz nebo historii podle retence |
+| Interně blokováno | odpověď vyžaduje rozhodnutí nebo opravu reality | nepoužívat navenek, založit úkol |
+
+Nejdůležitější stav je „interně blokováno“. Ten říká: problém není v textu, ale v produktu, procesu nebo slibu. Přepsat odpověď by jen zakrylo díru.
+
+### Kontroluj rozpor mezi slibem a realitou
+
+Při revizi nehledej jen zastaralá slova. Hledej rozpor. Dobrá kontrola si položí tvrdé otázky:
+
+- Tvrdíme, že něco jde exportovat; opravdu to jde udělat běžnou cestou?
+- Tvrdíme, že data mažeme; víme, kde končí aktivní data, logy, zálohy a exporty?
+- Tvrdíme, že máme evropský provoz; odpovídají tomu dodavatelé a regiony?
+- Tvrdíme, že incidenty komunikujeme; existuje použitelný kontakt a šablona?
+- Tvrdíme, že support nemá široký přístup; odpovídají tomu role a běžná praxe?
+- Tvrdíme, že pricing limit je férový; chápe zákazník dopad před nákupem?
+
+Když najdeš rozpor, nevyráběj hezčí formulaci. Založ konkrétní opravu reality nebo zúžení slibu. Privacy-first důvěra stojí víc na přesnosti než na velkorysých větách.
+
+### Udělej malý měsíční průchod
+
+Jednou měsíčně stačí 30 minut. Vyber tři nejpoužívanější odpovědi, dvě nedávné produktové změny a jednu zákaznickou otázku, která přišla ručně mimo knihovnu.
+
+Výstup má být krátký:
+
+| Výsledek | Příklad |
+| --- | --- |
+| Opravit text | odpověď k exportu pořád mluví o ručním exportu, ale produkt už má samoobsluhu |
+| Opravit realitu | trust stránka slibuje veřejný bezpečnostní kontakt, který nikdo nesleduje |
+| Sloučit duplicitu | tři odpovědi k retenci říkají totéž různými slovy |
+| Zveřejnit bezpečný detail | opakovaný dotaz na ukončení služby patří do trust balíčku |
+| Označit blokaci | odpověď k subdodavateli čeká na potvrzení regionu a DPA |
+
+Měsíční průchod nemá být audit pro audit. Je to levná pojistka, že zákaznické odpovědi neztratí kontakt se skutečností.
+
+### Checklist: Údržba odpovědní knihovny
+
+- [ ] Release checklist obsahuje otázku na dopad do trust odpovědí, privacy notice, DPA, supportu a pricingu.
+- [ ] Každá odpověď má stav: aktuální, k revizi, nahrazeno nebo interně blokováno.
+- [ ] Změny hostingu, dodavatelů, retence, rolí, exportu, logování, pricingu a incidentního procesu spouští kontrolu relevantních odpovědí.
+- [ ] Revizní sada ukazuje, kde se stejný slib může opakovat.
+- [ ] Rozpor mezi slibem a realitou se řeší opravou reality nebo zúžením slibu, ne hezčím textem.
+- [ ] Staré zákaznické kopie se neberou jako zdroj pravdy.
+- [ ] Měsíční průchod končí jedním až třemi konkrétními úkoly.
+- [ ] Veřejné opravy nevytvářejí nový lead-gate, tracker ani zbytečný sběr údajů.
+
+### Mini úkol
+
+Vyber jednu produktovou změnu z posledního měsíce a projdi podle ní pět míst: trust balíček, privacy notice, odpovědní knihovnu, support šablonu a pricing nebo dokumentaci. U každého místa napiš „beze změny“, „opravit text“, „opravit realitu“ nebo „zablokováno“. Potom oprav jednu nejmenší věc, která je veřejně vidět nebo se nejčastěji kopíruje do zákaznických odpovědí.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -46484,6 +46591,7 @@ Vezmi poslední vyplněný bezpečnostní dotazník a vyber z něj pět odpověd
 
 ## Pracovní log
 
+- 2026-07-23: Doplněna příloha o údržbě odpovědní knihovny po změně produktu bez starých slibů: napojení trust odpovědí na release změny, revizní sada dokumentů, stavy odpovědí, kontrola rozporu mezi veřejným slibem a realitou, měsíční průchod, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro udržení trust odpovědí aktuálních po změně produktu. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně ověřeno, že HTTP na `cody.dreamind.cz` vrací `301` na HTTPS, HTTPS přes lokální proxy po TLS tunelu končí `Empty reply from server`, přímé HTTPS bez proxy selhává kvůli expirovanému veřejnému Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), veřejná IP je `91.99.227.53`, aplikace diagnosticky odpovídá jen při ignorování TLS ověření a aktuální kontejner nemá SSH klíče, `systemd`, nginx, `certbot` ani deploy/runbook přístup, kterým by šlo certifikát bezpečně obnovit.
 - 2026-07-23: Doplněna příloha o bezpečnostním dotazníku bez vyplňovacího pekla: mapa témat a vlastníků, odpovědní knihovna, hranice sdílení, férové odpovědi bez přikrášlení, úklid pracovních kopií, měsíční hygiena dotazníků, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro opakované zpracování bezpečnostních dotazníků. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně ověřeno, že HTTP na `cody.dreamind.cz` vrací `301` na HTTPS, HTTPS přes lokální proxy po TLS tunelu končí `Empty reply from server`, přímé HTTPS bez proxy selhává kvůli expirovanému veřejnému Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT) a diagnostické přímé HTTPS s `-k` vrací `200 OK` z nginx/Next.js na `91.99.227.53`; aktuální kontejner nemá SSH klíče ani bezpečný serverový/deploy/certbot přístup, kterým by šlo certifikát obnovit.
 - 2026-07-23: Doplněna příloha o due diligence odpovědi bez úniku interních detailů: vrstvení odpovědí na veřejné, sdílené pod kontrolou a interní, rozlišení nákupní/právní/bezpečnostní/procurement situace, odpovědní karta, příklady věcné formulace bez marketingové mlhy, hygiena pracovních kopií, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro odpověď na due diligence bez úniku detailů. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně ověřeno, že `cody.dreamind.cz` přes lokální proxy po TLS tunelu končí chybou `Empty reply from server`, přímé HTTPS bez proxy selhává kvůli expirovanému veřejnému Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT) a v tomto běhu není dostupný `certbot`, nginx ani `/etc/letsencrypt` pro bezpečnou obnovu certifikátu.
 - 2026-07-23: Rozšířena příloha o nákupním trust balíčku podkapitolou „Přidej veřejný důkaz slibu“: propojení veřejných tvrzení s bezpečně ověřitelnými důkazy pro HTTPS, evropský provoz, incidentní komunikaci, export a pricing limity; do rejstříku pracovních nástrojů přidána směrovka pro ověření provozního slibu před podpisem. Bez nových aktuálních externích tvrzení, navázáno na existující zdroje k Let's Encrypt, Certbotu a provozním healthcheckům. Provozně znovu ověřeno, že `cody.dreamind.cz` přes lokální proxy po TLS tunelu končí chybou `Empty reply from server`, přímé HTTPS bez proxy selhává kvůli expirovanému veřejnému Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), zatímco diagnostické přímé HTTPS s `-k` vrací `200 OK` z nginx/Next.js na `91.99.227.53`; dostupné prostředí pořád neobsahuje SSH/deploy/certbot přístup, kterým by šlo certifikát bezpečně obnovit.
