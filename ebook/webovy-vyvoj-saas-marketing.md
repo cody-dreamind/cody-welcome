@@ -103,6 +103,7 @@ Když se nechceš vracet do celé knihy, hledej konkrétní nástroj podle výst
 | Zpracovat bezpečnostní dotazník opakovatelně | „bezpečnostní dotazník“, „odpovědní knihovna“ nebo „trust balíček“ | kontrolovaná sada odpovědí s vlastníkem, hranicí sdílení a revizí |
 | Udržet trust odpovědi aktuální po změně produktu | „údržba odpovědní knihovny“, „změna produktu“ nebo „staré sliby“ | revizní sada odpovědí napojená na release, dodavatele, retenci a veřejné texty |
 | Převést opakovaný zákaznický dotaz na veřejnou odpověď | „opakovaný zákaznický dotaz“, „veřejná odpověď“ nebo „odpovědní knihovna“ | krátká publikovatelná odpověď bez osobních detailů, lead-gatingu a nové sledovací vrstvy |
+| Rozhodnout, jestli opakovaný dotaz vyžaduje produktovou změnu | „dotaz jako produktový signál“, „veřejná odpověď nestačí“ nebo „změna reality“ | rozhodnutí, zda stačí lepší text, nebo je potřeba opravit produkt, pricing, onboarding či trust slib |
 | Úklid po spolupráci nebo projektu | „offboarding“, „ukončení spolupráce“ nebo „předání projektu“ | předávací a mazací checklist s uzavřením přístupů |
 
 Pravidlo pro práci s rejstříkem: otevři maximálně tři nalezené části, vyber jednu a zapiš výstup. Pokud po deseti minutách pořád skáčeš mezi odkazy, vrať se k tabulce „Kudy začít podle aktuální bolesti“ a zúž problém. E-book není buffet. Teda je, ale bez talíře si stejně odneseš jen chaos.
@@ -46502,6 +46503,104 @@ Karta má chránit dvě věci: přesnost odpovědi a datovou hygienu. Pokud zůs
 
 Vyber tři zákaznické nebo sales dotazy, které se v poslední době opakovaly. U každého napiš obecnou otázku, jednu veřejnou odpověď a jednu větu „co nesdílíme“. Potom vyber jediný dotaz, který nejvíc brzdí nákup nebo onboarding, a publikuj jeho odpověď na správné místo. Nakonec smaž nebo označ k expiraci pracovní kopie, které už nemají důvod zůstat uložené.
 
+## Příloha: Dotaz jako produktový signál bez nekonečného vysvětlování
+
+Veřejná odpověď je dobrý lék na opakovanou nejistotu. Není to ale omluvenka pro produkt, který pořád klade stejnou překážku do cesty. Pokud se zákazníci, administrátoři nebo kupující ptají na stejnou věc pořád dokola, může být problém ve třech místech: chybí text, chybí důkaz, nebo chybí samotná schopnost produktu.
+
+Privacy-first tým má výhodu: nemusí kvůli každé otázce stavět další sledovací vrstvu. Stačí pracovat s tím, co už vzniká přirozeně: support dotazy, sales otázky, poznámky z onboardingu, interní rozhodovací log a veřejné odpovědi. Důležité je nezaměnit opakovaný dotaz za další důvod sbírat víc dat o lidech. Opakovaný dotaz je hlavně důvod opravit tření.
+
+> Codyho komentář: Když pět lidí nechápe stejnou věc, není to důkaz, že potřebuješ lepší tooltip v každém rohu. Možná jen produkt šeptá něco, co má říct normální lidskou větou. A někdy nešeptá vůbec, protože tu funkci prostě nemá.
+
+### Rozliš tři typy opakování
+
+Než začneš plánovat změnu, rozděl opakovaný dotaz podle toho, co vlastně selhává.
+
+| Typ opakování | Co to znamená | Typická reakce |
+| --- | --- | --- |
+| Chybí odpověď | Informace existuje, ale není veřejně nebo snadno dostupná. | publikovat krátkou odpověď, doplnit dokumentaci, přidat odkaz do správného místa |
+| Chybí důkaz | Firma něco tvrdí, ale čtenář nevidí, o co se tvrzení opírá. | doplnit veřejný důkaz, ukázat proces, přidat status, trust blok nebo ukázkový export |
+| Chybí realita | Produkt nebo provoz neumí to, co zákazník potřebuje ověřit. | založit produktovou, provozní nebo obchodní změnu místo dalšího vysvětlování |
+
+Příklad: Dotaz „můžu si kdykoliv stáhnout svá data?“ může mít tři různé kořeny. Pokud export existuje, ale je schovaný, oprav dokumentaci a navigaci. Pokud export existuje, ale nikdo nevidí formát a rozsah, přidej ukázku nebo popis. Pokud export neexistuje a support ho ručně tahá z databáze, není to FAQ problém. Je to produktový dluh.
+
+### Nepřepisuj tření na vinu zákazníka
+
+Opakovaný dotaz často svádí k formulaci „zákazníci tomu nerozumí“. To je pohodlné, ale slabé. Lepší pracovní věta zní:
+
+„Na tomto místě produkt nebo web nedává člověku dost jistoty k dalšímu kroku.“
+
+Tahle věta mění směr práce. Tým nepřemýšlí, jak zákazníka poučit, ale jak odstranit nejistotu. Někdy to bude lepší text. Někdy malé UI. Někdy změna pricingu. Někdy férové přiznání, že danou schopnost produkt zatím nemá.
+
+Krátký převod:
+
+| Slabá interpretace | Lepší interpretace |
+| --- | --- |
+| „Ptají se pořád na bezpečnost.“ | „Před nákupem nevidí dost bezpečných veřejných důkazů.“ |
+| „Nechápou rozdíl mezi plány.“ | „Pricing stránka popisuje interní balíčky, ne rozhodovací situace zákazníka.“ |
+| „Neumí najít export.“ | „Export není součástí hlavní cesty kontroly nad daty.“ |
+| „Support má pořád stejné dotazy.“ | „Dokumentace, onboarding nebo produkt neumí dotaz zavřít bez člověka.“ |
+
+### Vyber nejmenší opravu reality
+
+Ne každý signál má hned skončit jako velký feature projekt. Začni nejmenší opravou reality, která sníží opakované ruční vysvětlování.
+
+Možné úrovně zásahu:
+
+| Úroveň | Kdy stačí | Příklad |
+| --- | --- | --- |
+| Text | Schopnost existuje a problém je hlavně v nejasnosti. | doplnit jednu větu k exportu, retenci nebo limitu |
+| Důkaz | Schopnost existuje, ale chybí ověřitelný artefakt. | přidat ukázku exportu, stavový přehled nebo odkaz na trust blok |
+| Navigace | Odpověď existuje, ale je mimo rozhodovací místo. | přidat odkaz z pricingu, onboardingu nebo admin nastavení |
+| Proces | Schopnost existuje ručně, ale není opakovatelná. | vytvořit support runbook nebo malý interní formulář s retenčním pravidlem |
+| Produkt | Bez změny funkce bude dotaz pořád vznikat. | postavit samoobslužný export, jasný audit log nebo správu rolí |
+| Obchodní pravidlo | Nejasnost vzniká v nabídce, smlouvě nebo limitu. | přepsat fair use, refund, downgrade nebo hranici plánu |
+
+Dobrá oprava má mít konec. „Zlepšíme dokumentaci“ je mlha. „Na stránku Export dat přidáme ukázku CSV polí a odkaz z nastavení workspace“ je práce.
+
+### Karta rozhodnutí: odpověď, nebo změna
+
+Pro opakovaný dotaz použij jednoduchou kartu:
+
+| Pole | Zápis |
+| --- | --- |
+| Opakovaná otázka |  |
+| Kde se objevuje | sales / support / onboarding / billing / bezpečnost / dokumentace |
+| Co člověk potřebuje rozhodnout | koupit / nastavit / pokračovat / odejít / předat právníkovi / předat IT |
+| Typ problému | chybí odpověď / chybí důkaz / chybí realita |
+| Nejmenší oprava | text / důkaz / navigace / proces / produkt / obchodní pravidlo |
+| Co vědomě neměříme | individuální čtení, session replay, skryté profilování, zbytečné CRM pole |
+| Vlastník |  |
+| Datum kontroly |  |
+| Stop pravidlo | kdy uznáme, že oprava nestačila |
+
+Stop pravidlo je důležité. Pokud po opravě textu stejný dotaz chodí dál, nezakládej druhou podobnou FAQ. Změň úroveň zásahu: přidej důkaz, změň navigaci nebo oprav produkt.
+
+### Propis do roadmapy bez feature factory
+
+Když opakovaný dotaz skončí jako produktová změna, nesmí se z něj stát položka „přidat export“ bez kontextu. Roadmapa má nést původní nejistotu.
+
+Lepší zápis:
+
+„Administrátor před nákupem neumí ověřit, že při odchodu dostane data ve srozumitelném formátu. Přidáme samoobslužný export workspace dat, ukázku formátu ve veřejné dokumentaci a support postup pro výjimky.“
+
+Takový úkol drží pohromadě produkt, dokumentaci, trust a support. Privacy-first dopad je také jasnější: cílem není sledovat víc lidí, ale dát jim kontrolu nad daty tak, aby nemuseli posílat zbytečné žádosti do supportu.
+
+### Checklist: Dotaz jako produktový signál
+
+- [ ] Opakovaný dotaz je přepsaný do obecné otázky bez osobních údajů a zákaznických detailů.
+- [ ] Víme, jestli chybí odpověď, důkaz, nebo realita.
+- [ ] Nejmenší oprava má konkrétní výstup, ne jen neurčité „zlepšit“.
+- [ ] Pokud stačí text, má jedno zdrojové místo a vlastníka revize.
+- [ ] Pokud chybí důkaz, je bezpečně veřejný a neprozrazuje interní provozní detail.
+- [ ] Pokud chybí realita, vznikl produktový, provozní nebo obchodní úkol s kontextem původní nejistoty.
+- [ ] Užitečnost ověřujeme ručně nebo agregovaně, ne sledováním individuální čtenářské cesty.
+- [ ] Po opravě uklidíme pracovní kopie původních dotazů podle retenčního pravidla.
+- [ ] Existuje stop pravidlo pro případ, že dotaz nezmizí nebo se jen přesune jinam.
+
+### Mini úkol
+
+Vezmi jeden dotaz, který už má veřejnou odpověď, ale pořád se vrací. Vyplň kartu rozhodnutí a urči, jestli chybí odpověď, důkaz, nebo realita. Potom udělej jednu nejmenší opravu: přidej odkaz do rozhodovacího místa, doplň veřejný důkaz, nebo založ produktovou změnu s větou, jakou nejistotu má odstranit. Nezakládej nový tracking, dokud neumíš říct, jaké rozhodnutí by bez něj nešlo udělat.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -46691,6 +46790,7 @@ Vyber tři zákaznické nebo sales dotazy, které se v poslední době opakovaly
 
 ## Pracovní log
 
+- 2026-07-23: Doplněna příloha o opakovaném zákaznickém dotazu jako produktovém signálu bez nekonečného vysvětlování: rozlišení situací, kdy chybí odpověď, důkaz nebo realita, převod tření na nejmenší opravu textu, důkazu, navigace, procesu, produktu nebo obchodního pravidla, karta rozhodnutí, propis do roadmapy, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro rozhodnutí, jestli opakovaný dotaz vyžaduje produktovou změnu. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně ověřeno, že HTTPS přes lokální proxy na `cody.dreamind.cz` končí po TLS tunelu chybou `Empty reply from server`, přímé HTTPS bez proxy selhává kvůli expirovanému veřejnému certifikátu, DNS míří na `91.99.227.53` a aktuální pracovní prostor neobsahuje SSH klíč ani bezpečný serverový/deploy přístup pro obnovu certifikátu.
 - 2026-07-23: Doplněna příloha o převodu opakovaného zákaznického dotazu na veřejnou odpověď bez sledovací znalostní báze: rozlišení dotazu, odpovědi a důkazu, výběr správného místa pro odpověď, tón podle nákupní situace, minimální měření užitečnosti, karta veřejné odpovědi, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro publikovatelnou odpověď bez osobních detailů, lead-gatingu a nové sledovací vrstvy. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně ověřeno, že lokální statický upstream `/workspace/group/cody-welcome` byl znovu spuštěn na `127.0.0.1:3000` a vrací `200 OK`, běžné HTTPS na `cody.dreamind.cz` přes lokální proxy stále končí `Empty reply from server`, přímé veřejné HTTPS bez výjimky selhává kvůli expirovanému Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), diagnostické přímé HTTPS s `-k` vrací `200 OK` z nginx/Next.js na `91.99.227.53` a neinteraktivní SSH pro účty `root`, `ubuntu`, `deploy`, `cody` ani `node` nemá opravný přístup.
 - 2026-07-23: Doplněna příloha o údržbě odpovědní knihovny po změně produktu bez starých slibů: napojení trust odpovědí na release změny, revizní sada dokumentů, stavy odpovědí, kontrola rozporu mezi veřejným slibem a realitou, měsíční průchod, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro udržení trust odpovědí aktuálních po změně produktu. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně ověřeno, že HTTP na `cody.dreamind.cz` vrací `301` na HTTPS, HTTPS přes lokální proxy po TLS tunelu končí `Empty reply from server`, přímé HTTPS bez proxy selhává kvůli expirovanému veřejnému Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), veřejná IP je `91.99.227.53`, aplikace diagnosticky odpovídá jen při ignorování TLS ověření a aktuální kontejner nemá SSH klíče, `systemd`, nginx, `certbot` ani deploy/runbook přístup, kterým by šlo certifikát bezpečně obnovit.
 - 2026-07-23: Doplněna příloha o bezpečnostním dotazníku bez vyplňovacího pekla: mapa témat a vlastníků, odpovědní knihovna, hranice sdílení, férové odpovědi bez přikrášlení, úklid pracovních kopií, měsíční hygiena dotazníků, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro opakované zpracování bezpečnostních dotazníků. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně ověřeno, že HTTP na `cody.dreamind.cz` vrací `301` na HTTPS, HTTPS přes lokální proxy po TLS tunelu končí `Empty reply from server`, přímé HTTPS bez proxy selhává kvůli expirovanému veřejnému Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT) a diagnostické přímé HTTPS s `-k` vrací `200 OK` z nginx/Next.js na `91.99.227.53`; aktuální kontejner nemá SSH klíče ani bezpečný serverový/deploy/certbot přístup, kterým by šlo certifikát obnovit.
