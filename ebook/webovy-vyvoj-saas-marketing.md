@@ -112,6 +112,7 @@ Když se nechceš vracet do celé knihy, hledej konkrétní nástroj podle výst
 | Ověřit dopad po obsahovém sloučení | „kontrola po sloučení“, „14denní kontrola“ nebo „staré URL po sloučení“ | krátké rozhodnutí, jestli sloučení zavřít, opravit, dočasně zvýraznit archivní poznámku nebo otevřít produktový problém |
 | Uklidit staré redirecty po sloučení | „redirect po sloučení“, „retenční kontrola URL“ nebo „konec přesměrování“ | rozhodnutí, které staré URL ponechat, zkrátit, nahradit archivní stránkou nebo bezpečně ukončit |
 | Ukončit starou URL bez falešné stránky | „404 410 archiv“, „ukončená URL“ nebo „konec staré stránky“ | rozhodnutí, zda stará URL vrátí 404, 410, archivní vysvětlení nebo zůstane dočasně přesměrovaná |
+| Uklidit stopy po ukončené URL | „stopy po ukončené URL“, „mrtvé cesty“ nebo „vyhledávání po smazání“ | seznam šablon, navigací, interního vyhledávání, support odpovědí a měření, které nesmí starou URL dál živit |
 | Úklid po spolupráci nebo projektu | „offboarding“, „ukončení spolupráce“ nebo „předání projektu“ | předávací a mazací checklist s uzavřením přístupů |
 
 Pravidlo pro práci s rejstříkem: otevři maximálně tři nalezené části, vyber jednu a zapiš výstup. Pokud po deseti minutách pořád skáčeš mezi odkazy, vrať se k tabulce „Kudy začít podle aktuální bolesti“ a zúž problém. E-book není buffet. Teda je, ale bez talíře si stejně odneseš jen chaos.
@@ -47640,6 +47641,120 @@ Jiný příklad:
 
 Vyber jednu starou URL, která už nemá být běžnou čtenářskou cestou. Vyplň kartu ukončené URL a rozhodni mezi čtyřmi výstupy: konkrétní redirect, archivní vysvětlení, `404` nebo `410`. Potom zkontroluj `curl -I`, sitemap a jeden interní odkaz. Pokud máš chuť všechno přesměrovat na homepage, dej si vodu a vrať se k otázce, co člověk na té URL opravdu hledal.
 
+## Příloha: Stopy po ukončené URL bez mrtvých cest
+
+Správný HTTP status je jen půlka práce. Když stará URL začne vracet redirect, archiv, `404` nebo `410`, tým má příjemný pocit, že je hotovo. Jenže stará cesta může dál žít v interním vyhledávání, support šabloně, produktovém tooltipu, starém PDF, RSS položce, onboarding e-mailu nebo v ručně posílaném odkazu od sales. Výsledkem je zvláštní provozní rozpor: stránka je technicky pryč, ale organizace ji pořád doporučuje.
+
+Po ukončení URL si proto polož druhou otázku:
+
+„Která místa pořád učí lidi, nástroje nebo tým používat starou cestu?“
+
+Tato příloha není o velkém SEO auditu. Je o krátkém úklidu stop po konkrétním rozhodnutí, aby web zůstal pravdivý a aby se starý obsah nevracel v jiné masce.
+
+### Rozliš veřejné, interní a automatické stopy
+
+Stará URL může přežívat ve třech vrstvách.
+
+| Vrstva | Typické místo | Co zkontrolovat |
+| --- | --- | --- |
+| Veřejná cesta | navigace, články, dokumentace, sitemap, RSS, changelog, landing page | vede člověka na aktuální odpověď? |
+| Interní práce | support makra, sales šablony, onboarding checklist, interní wiki, produktové poznámky | neposílá tým starý odkaz zákazníkům? |
+| Automatizace | redirect mapa, crawler, uptime check, monitor obsahu, testovací fixture, importní skript | nebere starou URL jako platný stav? |
+
+Veřejné stopy opravuj jako první, protože ovlivňují čtenáře přímo. Interní stopy řeš hned potom, protože umí starý problém znovu publikovat. Automatické stopy zavírej nakonec, ale nevynechávej je. Test, který pořád očekává starou URL, bude příští měsíc přesvědčivě hlásit falešný problém. A falešné problémy mají nepříjemný talent sníst skutečnou práci.
+
+### Udělej malou stopovací kartu
+
+Na jednu ukončenou URL nepotřebuješ složitý auditní nástroj. Stačí karta, která projde místa, kde se stará cesta mohla usadit.
+
+| Pole | Zápis |
+| --- | --- |
+| Ukončená URL |  |
+| Nový výstup | redirect / archiv / `404` / `410` |
+| Veřejné odkazy | stránky, menu, dokumentace, RSS, sitemap |
+| Interní odkazy | support, sales, onboarding, wiki, šablony odpovědí |
+| Automatizace | smoke testy, monitoring, crawly, fixture, redirect pravidla |
+| Textový slib | kde se starý obsah pořád zmiňuje jako platný |
+| Měřicí dopad | co se sleduje agregovaně a kdy se měření vypne |
+| Vlastník kontroly | kdo kartu zavře |
+
+Karta má být krátká. Pokud se rozroste na dvacet řádků, pravděpodobně neřešíš jednu URL, ale celý obsahový systém. To je legitimní problém, jen patří do samostatné inventury.
+
+### Nezapomeň na interní vyhledávání
+
+Interní vyhledávání na webu, v dokumentaci nebo ve znalostní bázi často drží staré stránky déle než navigace. Člověk neklikne v menu, ale napíše starý pojem do hledání a dostane archivní výsledek bez kontextu. Pokud má výsledek stále vysokou váhu, web se tváří, že ukončený obsah je doporučená odpověď.
+
+Po ukončení URL zkontroluj:
+
+- jestli interní hledání vrací starou stránku,
+- jestli snippet neobsahuje neplatný slib,
+- jestli archivní výsledek jasně říká, že jde o starší obsah,
+- jestli existuje lepší cílová stránka pro stejný dotaz,
+- jestli má hledání ruční synonymum nebo váhu, která starý obsah uměle zvýhodňuje.
+
+Privacy-first detail: Nepotřebuješ ukládat osobní historii hledání, abys to ověřil. Vezmi tři až pět známých dotazů souvisejících se starou stránkou a ručně zkontroluj výsledky. Pokud používáš agregovaný log hledaných frází, drž ho krátce, bez identifikátorů a jen pro rozhodnutí, co opravit.
+
+### Oprav šablony, které mluví za tým
+
+Nejzrádnější stopy nejsou vždy ve webovém kódu. Jsou v textech, které tým používá rychle a opakovaně:
+
+- support makro „jak exportovat data“,
+- sales follow-up po demu,
+- onboarding e-mail pro nový účet,
+- odpověď v bezpečnostním dotazníku,
+- interní checklist před předáním projektu,
+- starý odkaz v kalendářové pozvánce nebo veřejném PDF.
+
+Tady nestačí říct „web už je opravený“. Pokud support dál posílá starou URL, čtenář narazí na ukončený obsah a důvěra padá na support, ne na HTTP status. Po každém větším ukončení stránky proto napiš jednu větu pro tým:
+
+„Starý odkaz ___ už neposílejte; pro ___ používejte ___, protože ___.“
+
+Je to malé oznámení, ale šetří hodně následného vysvětlování. Bez něj se starý odkaz bude vracet jako nepříjemný interní folklor.
+
+### Měření ukonči stejně vědomě jako stránku
+
+Když URL končí, často po ní zůstane i měření: event, dashboard filtr, upozornění na obsahový marker, cíl v analytice nebo ruční report. Pokud už stránka nemá být běžnou cestou, měření musí mít nový účel.
+
+Rozliš tři možnosti:
+
+| Měřicí stopa | Co udělat |
+| --- | --- |
+| Krátké ověření po změně | ponechat na omezené okno a zapsat datum vypnutí |
+| Provozní alert na chybný stav | upravit očekávaný status a cílovou URL |
+| Starý obsahový dashboard | archivovat nebo smazat, aby netlačil tým k práci na neexistující stránce |
+
+Typická chyba: tým nechá v dashboardu konverzní cíl pro starou landing page a o měsíc později řeší „propad výkonu“. Jenže stránka mezitím záměrně skončila. Dashboard bez kontextu není paměť firmy. Je to jen tabulka, která neumí číst release notes.
+
+### Příklad
+
+| Pole | Zápis |
+| --- | --- |
+| Ukončená URL | `/lp/stary-audit-webu` |
+| Nový výstup | `301` na `/sluzby/audit-webu`, kontrola za 45 dní |
+| Veřejné odkazy | odstranit ze sitemap, opravit dva články, vyjmout z patičky starého PDF |
+| Interní odkazy | přepsat sales follow-up a support makro pro dotazy na audit |
+| Automatizace | upravit smoke test, aby neočekával `200` na staré landing page |
+| Textový slib | starý text sliboval dodání „do 24 hodin“, nový balíček má individuální termín |
+| Měřicí dopad | 45 dní sledovat jen agregovaný počet požadavků na starou URL |
+| Vlastník kontroly | marketing zavře kartu po kontrole redirectu a šablon |
+
+Výsledek není jen technický redirect. Výsledek je to, že žádná běžná cesta už starý slib neposílá novému člověku.
+
+### Checklist: Stopy po ukončené URL
+
+- [ ] Stará URL má zvolený pravdivý výstup: redirect, archiv, `404` nebo `410`.
+- [ ] Sitemap, RSS, navigace a důležité interní odkazy nepropagují ukončenou cestu.
+- [ ] Interní vyhledávání nevrací starý obsah jako nejlepší aktuální odpověď.
+- [ ] Support, sales a onboarding šablony používají novou cílovou URL nebo jasné vysvětlení.
+- [ ] Automatické testy a monitoring očekávají nový stav, ne historickou realitu.
+- [ ] Staré dashboardy, eventy nebo cíle mají nový účel, datum vypnutí nebo jsou odstraněné.
+- [ ] Kontrola používá agregované signály bez identifikace jednotlivých návštěvníků.
+- [ ] Tým ví jednou větou, jaký odkaz už neposílat a čím ho nahradit.
+
+### Mini úkol
+
+Vezmi jednu URL, kterou jste nedávno ukončili nebo sloučili. Najdi tři místa, kde by mohla dál přežívat: jedno veřejné, jedno interní a jedno automatické. Oprav alespoň jedno z nich hned. U zbylých dvou napiš vlastníka a datum kontroly. Pokud nenajdeš žádnou stopu, ověř aspoň interní vyhledávání a jednu support nebo sales šablonu. Staré odkazy se málokdy ozvou samy; jen tiše čekají na nejhorší možný moment.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -47833,6 +47948,7 @@ Vyber jednu starou URL, která už nemá být běžnou čtenářskou cestou. Vyp
 
 ## Pracovní log
 
+- 2026-07-23: Doplněna příloha o stopách po ukončené URL bez mrtvých cest: rozlišení veřejných, interních a automatických stop, stopovací karta, kontrola interního vyhledávání, oprava support/sales/onboarding šablon, vědomé ukončení starého měření, praktický příklad, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro úklid stop po ukončené URL. Bez nových aktuálních externích tvrzení, navázáno na existující zdroje k HTTP statusům, sitemap, odkazovým kontrolám a privacy-first měření; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
 - 2026-07-23: Doplněna příloha o ukončené URL bez falešné 200 stránky: rozhodování mezi konkrétním redirectem, archivní stránkou, `404` a `410`, varování před soft 404 a přesměrováním na homepage, karta ukončené URL, dva praktické příklady, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro ukončení staré URL. Ověřeny a doplněny zdroje MDN k `404`/`410` a Google Crawling Infrastructure k dopadu HTTP statusů; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
 - 2026-07-23: Doplněna příloha o retenčním úklidu redirectů po obsahovém sloučení bez nekonečné pavučiny: rozlišení ochranných redirectů, interních cest, archivního obsahu a šumu, nastavení retenčního okna, narovnání redirect řetězců, kontrola bez osobních logů, rozhodovací karta, praktický příklad, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro úklid starých redirectů po sloučení. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
 - 2026-07-23: Doplněna příloha o kontrole po obsahovém sloučení bez falešného klidu: nastavení kontrolního data už při sloučení, ověřování proti původnímu důvodu změny, chudé signály bez sledování lidí, čtyři možné konce kontroly, karta kontroly, praktický příklad, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro ověření dopadu po sloučení. Bez nových aktuálních externích tvrzení, navázáno na existující zdroje k redirectům, sitemap a recrawlu; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
