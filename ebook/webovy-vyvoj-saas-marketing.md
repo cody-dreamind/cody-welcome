@@ -113,6 +113,7 @@ Když se nechceš vracet do celé knihy, hledej konkrétní nástroj podle výst
 | Uklidit staré redirecty po sloučení | „redirect po sloučení“, „retenční kontrola URL“ nebo „konec přesměrování“ | rozhodnutí, které staré URL ponechat, zkrátit, nahradit archivní stránkou nebo bezpečně ukončit |
 | Ukončit starou URL bez falešné stránky | „404 410 archiv“, „ukončená URL“ nebo „konec staré stránky“ | rozhodnutí, zda stará URL vrátí 404, 410, archivní vysvětlení nebo zůstane dočasně přesměrovaná |
 | Uklidit stopy po ukončené URL | „stopy po ukončené URL“, „mrtvé cesty“ nebo „vyhledávání po smazání“ | seznam šablon, navigací, interního vyhledávání, support odpovědí a měření, které nesmí starou URL dál živit |
+| Aktualizovat indexační soubory po úklidu obsahu | „sitemap robots po úklidu“, „indexační inventář“ nebo „robots po smazání“ | krátká kontrola, že sitemap a robots odpovídají aktuálním veřejným cestám bez blokování a starých URL |
 | Úklid po spolupráci nebo projektu | „offboarding“, „ukončení spolupráce“ nebo „předání projektu“ | předávací a mazací checklist s uzavřením přístupů |
 
 Pravidlo pro práci s rejstříkem: otevři maximálně tři nalezené části, vyber jednu a zapiš výstup. Pokud po deseti minutách pořád skáčeš mezi odkazy, vrať se k tabulce „Kudy začít podle aktuální bolesti“ a zúž problém. E-book není buffet. Teda je, ale bez talíře si stejně odneseš jen chaos.
@@ -47755,6 +47756,132 @@ Výsledek není jen technický redirect. Výsledek je to, že žádná běžná 
 
 Vezmi jednu URL, kterou jste nedávno ukončili nebo sloučili. Najdi tři místa, kde by mohla dál přežívat: jedno veřejné, jedno interní a jedno automatické. Oprav alespoň jedno z nich hned. U zbylých dvou napiš vlastníka a datum kontroly. Pokud nenajdeš žádnou stopu, ověř aspoň interní vyhledávání a jednu support nebo sales šablonu. Staré odkazy se málokdy ozvou samy; jen tiše čekají na nejhorší možný moment.
 
+## Příloha: Sitemap a robots po obsahovém úklidu bez indexačního nepořádku
+
+Po sloučení, archivaci nebo ukončení URL nestačí opravit samotnou stránku. Web může dál vyprávět starý příběh přes `sitemap.xml`, `robots.txt`, RSS, canonical tagy nebo automaticky generovaný seznam veřejných cest. Tohle je nenápadná vrstva. Není vidět v hero sekci, nikdo ji nekomentuje v design review a přesto dokáže udržet starý obsah při životě déle než špatný interní odkaz.
+
+Dobrá otázka po obsahovém úklidu zní:
+
+„Ukazují naše indexační a distribuční soubory na to, co opravdu chceme veřejně nabízet jako aktuální odpověď?“
+
+Sitemap není kouzelný ovladač indexace. Je to spíš inventář preferovaných veřejných URL. `robots.txt` zase není bezpečnostní zámek; je to instrukce pro crawlery, ne ochrana citlivých dat. Přesto obě věci výrazně ovlivňují provozní čitelnost webu. Když v nich necháš staré URL, tým bude mít uklizeno v CMS, ale ne v distribuční vrstvě. To je jako zavřít sklad a nechat na dveřích ceduli „výdej tady“.
+
+### Rozliš sitemap, robots a reálný přístup
+
+Nejdřív si srovnej, co která vrstva smí říkat.
+
+| Vrstva | Co má dělat | Co nemá suplovat |
+| --- | --- | --- |
+| Sitemap | ukazovat kanonické veřejné URL, které chceš nabízet vyhledávačům | nahrazovat interní navigaci nebo skrývat špatné redirecty |
+| Robots.txt | říkat crawlerům, co nemají procházet, a kde najdou sitemap | chránit neveřejná data, preview URL nebo administraci |
+| HTTP status | říkat pravdivý stav konkrétní URL | maskovat starý obsah úspěšným `200` |
+| Canonical | potvrdit preferovanou variantu stránky | opravovat chaos ve více rozdílných stránkách |
+| RSS/Atom | distribuovat aktuální veřejné položky pro čtenáře | sloužit jako archiv všeho, co kdy vyšlo |
+
+Privacy-first dopad je jednoduchý: když je distribuční vrstva pravdivá, nepotřebuješ později kompenzovat chaos agresivnějším měřením. Místo sledování jednotlivých návštěvníků, kteří bloudí starými cestami, opravíš cestu samotnou.
+
+### Udělej indexační inventář jen pro dotčený výřez
+
+Po každém obsahovém úklidu si neotvírej celý web, pokud nemusíš. Vezmi jen dotčený výřez: starou URL, novou URL, případné archivní vysvětlení, související kategorii a jeden až tři nejbližší interní odkazy.
+
+Krátký inventář:
+
+| Kontrola | Otázka | Výstup |
+| --- | --- | --- |
+| Stará URL v sitemap | Je tam ještě URL, kterou jsme sloučili nebo ukončili? | odstranit, pokud nemá být kanonická |
+| Nová URL v sitemap | Je cílová stránka uvedená jako preferovaná veřejná URL? | doplnit nebo opravit generování |
+| Robots | Neblokujeme omylem novou cílovou sekci? | upravit pravidlo nebo výjimku |
+| Canonical | Ukazuje cílová stránka sama na sebe nebo správnou kanonickou variantu? | opravit metadata |
+| RSS/Atom | Nevychází stará položka jako aktuální doporučení? | ponechat jen s archivním kontextem, nebo odstranit z feedu podle účelu |
+| Interní hledání | Nevrací starý obsah jako nejlepší výsledek? | snížit váhu, doplnit synonymum, opravit index |
+
+Tento inventář má trvat minuty, ne půl dne. Pokud z něj vznikne velký projekt, napiš samostatnou kartu pro technický SEO úklid. Jedna ukončená URL nemá být záminka k tomu, aby se tým propadl do historického bahna všech starých slugů.
+
+### Nepleť zákaz crawlování s ukončením obsahu
+
+Častá chyba po smazání stránky je dát starou cestu do `robots.txt` a tím ji „vyřešit“. Jenže blokování crawlování neříká, co se s obsahem stalo. Pokud stará URL vrací špatný status, má redirect na homepage nebo zůstává v sitemap, `robots.txt` problém spíš zakryje než opraví.
+
+Rozhoduj takhle:
+
+| Situace | Lepší krok |
+| --- | --- |
+| Stránka má novou konkrétní náhradu | redirect na cílovou URL a nová URL v sitemap |
+| Stránka trvale skončila | `410` nebo poctivý archiv podle kontextu |
+| Stránka nikdy neměla být veřejná | opravit přístupová pravidla, odstranit odkazy a prověřit únik |
+| Crawler zatěžuje technickou cestu | použít `robots.txt` opatrně, ale ne jako náhradu auth |
+| Preview nebo interní obsah se objevil ve veřejných souborech | odstranit ze sitemap/feedu a chránit přístupem |
+
+`robots.txt` používej pro řízení procházení, ne pro uklízení rozbité obsahové reality. Citlivý obsah nikdy neschovávej jen tím, že ho zakážeš crawlerům. Pokud k němu někdo zná URL, pořád může být dostupný.
+
+### Zkontroluj generátor, ne jen výsledný soubor
+
+U statického webu může být sitemap ručně generovaná při buildu. U CMS ji často skládá plugin. U SaaS dokumentace ji může vyrábět skript z rout, frontmatteru nebo databáze. Po obsahovém úklidu proto nestačí jednou opravit výsledný `sitemap.xml`, pokud ho příští build znovu přepíše starou realitou.
+
+Najdi zdroj pravdy:
+
+- seznam rout v aplikaci,
+- kolekci publikovaných článků,
+- frontmatter pole typu `draft`, `noindex`, `canonical` nebo `archived`,
+- redirect mapu,
+- CMS stav publikace,
+- ruční výjimky v SEO pluginu,
+- build skript pro sitemap a RSS.
+
+Praktické pravidlo: pokud změna nepřežije další build, není hotová. Je to jen dočasná oprava vygenerovaného artefaktu. Dočasné opravy občas zachrání den, ale nesmí se tvářit jako systémové řešení.
+
+### Karta indexačního úklidu
+
+Použij jednu kartu pro malou skupinu URL po jednom rozhodnutí.
+
+| Pole | Zápis |
+| --- | --- |
+| Rozhodnutí | sloučení / archivace / smazání / přejmenování |
+| Dotčené staré URL |  |
+| Cílové nebo nové URL |  |
+| Sitemap stav | staré odstraněny, nové doplněny, generátor opraven |
+| Robots stav | bez omylu blokujícího cílový obsah |
+| Canonical stav | cílové stránky ukazují na správnou kanonickou URL |
+| RSS/Atom stav | feed nepropaguje starou odpověď jako aktuální |
+| Ověření | `curl -I`, kontrola sitemap, ruční otevření nové cesty |
+| Vypnutí dočasného měření | datum nebo podmínka |
+| Vlastník |  |
+
+Karta je užitečná i pro malé týmy. Ne proto, že by každý úklid potřeboval slavnostní ceremoniál, ale protože za tři týdny už nikdo nebude vědět, proč stará URL zmizela ze sitemap a proč se nevrací.
+
+### Příklad
+
+| Pole | Zápis |
+| --- | --- |
+| Rozhodnutí | sloučení dvou článků o exportu dat |
+| Dotčené staré URL | `/blog/export-csv`, `/blog/export-dat-stary-postup` |
+| Cílové nebo nové URL | `/docs/export-dat` |
+| Sitemap stav | staré články odstraněny, cílová dokumentace zůstává kanonická |
+| Robots stav | `/docs/` není blokované |
+| Canonical stav | cílová stránka ukazuje na `/docs/export-dat` |
+| RSS/Atom stav | nový článek se neposílá znovu; changelog obsahuje krátkou poznámku o aktualizaci dokumentace |
+| Ověření | `curl -I` na staré URL vrací redirect, sitemap neobsahuje staré URL, dokumentace se otevře bez přihlášení |
+| Vypnutí dočasného měření | po 30 dnech vypnout agregovanou kontrolu požadavků na staré URL |
+| Vlastník | obsah + technický správce webu |
+
+Výsledek je malý, ale důležitý: vyhledávače, feedy, interní odkazy a tým ukazují stejným směrem.
+
+### Checklist: Sitemap a robots po úklidu obsahu
+
+- [ ] Stará ukončená nebo sloučená URL už není v sitemap jako kanonická stránka.
+- [ ] Nová cílová URL v sitemap je, pokud má být veřejně indexovaná.
+- [ ] `robots.txt` neblokuje omylem novou cílovou sekci.
+- [ ] `robots.txt` nepoužíváme jako ochranu neveřejného nebo citlivého obsahu.
+- [ ] Canonical tagy odpovídají finálním URL, ne starým variantám.
+- [ ] RSS nebo Atom feed nevrací starý obsah jako aktuální doporučení.
+- [ ] Generátor sitemap/RSS je opravený, aby další build nevrátil starý stav.
+- [ ] Ověření používá technické a agregované signály, ne profilování návštěvníků.
+- [ ] Dočasné měření starých URL má datum vypnutí.
+- [ ] Rozhodnutí je zapsané v kartě nebo migračním logu.
+
+### Mini úkol
+
+Vyber jednu URL, kterou jste v poslední době sloučili, archivovali nebo smazali. Otevři sitemap, robots a cílovou stránku. Zkontroluj tři věci: stará URL není v sitemap, nová URL není omylem blokovaná a canonical ukazuje na finální adresu. Pokud něco nevíš ověřit automaticky, udělej ruční kontrolu a zapiš, kde je zdroj pravdy pro příští build. Jedna opravená indexační stopa je lepší než nový dashboard, který jen hezky počítá starý nepořádek.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -47948,6 +48075,7 @@ Vezmi jednu URL, kterou jste nedávno ukončili nebo sloučili. Najdi tři míst
 
 ## Pracovní log
 
+- 2026-07-23: Doplněna příloha o sitemap a robots po obsahovém úklidu bez indexačního nepořádku: rozlišení sitemap, robots, HTTP statusu, canonical a RSS, malý indexační inventář, varování před používáním `robots.txt` jako náhrady ukončení obsahu nebo ochrany dat, kontrola generátoru sitemap/RSS, karta indexačního úklidu, praktický příklad, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro aktualizaci indexačních souborů po úklidu obsahu. Bez nových aktuálních externích tvrzení, navázáno na existující zdroje k sitemap, robots, HTTP statusům a privacy-first měření; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
 - 2026-07-23: Doplněna příloha o stopách po ukončené URL bez mrtvých cest: rozlišení veřejných, interních a automatických stop, stopovací karta, kontrola interního vyhledávání, oprava support/sales/onboarding šablon, vědomé ukončení starého měření, praktický příklad, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro úklid stop po ukončené URL. Bez nových aktuálních externích tvrzení, navázáno na existující zdroje k HTTP statusům, sitemap, odkazovým kontrolám a privacy-first měření; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
 - 2026-07-23: Doplněna příloha o ukončené URL bez falešné 200 stránky: rozhodování mezi konkrétním redirectem, archivní stránkou, `404` a `410`, varování před soft 404 a přesměrováním na homepage, karta ukončené URL, dva praktické příklady, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro ukončení staré URL. Ověřeny a doplněny zdroje MDN k `404`/`410` a Google Crawling Infrastructure k dopadu HTTP statusů; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
 - 2026-07-23: Doplněna příloha o retenčním úklidu redirectů po obsahovém sloučení bez nekonečné pavučiny: rozlišení ochranných redirectů, interních cest, archivního obsahu a šumu, nastavení retenčního okna, narovnání redirect řetězců, kontrola bez osobních logů, rozhodovací karta, praktický příklad, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro úklid starých redirectů po sloučení. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
