@@ -111,6 +111,7 @@ Když se nechceš vracet do celé knihy, hledej konkrétní nástroj podle výst
 | Opravit navigaci po obsahovém sloučení | „navazující odkazy“, „CTA po sloučení“ nebo „obsahová cesta“ | seznam míst, kde se po sloučení musí opravit odkazy, výzvy k akci, metadata a interní šablony |
 | Ověřit dopad po obsahovém sloučení | „kontrola po sloučení“, „14denní kontrola“ nebo „staré URL po sloučení“ | krátké rozhodnutí, jestli sloučení zavřít, opravit, dočasně zvýraznit archivní poznámku nebo otevřít produktový problém |
 | Uklidit staré redirecty po sloučení | „redirect po sloučení“, „retenční kontrola URL“ nebo „konec přesměrování“ | rozhodnutí, které staré URL ponechat, zkrátit, nahradit archivní stránkou nebo bezpečně ukončit |
+| Ukončit starou URL bez falešné stránky | „404 410 archiv“, „ukončená URL“ nebo „konec staré stránky“ | rozhodnutí, zda stará URL vrátí 404, 410, archivní vysvětlení nebo zůstane dočasně přesměrovaná |
 | Úklid po spolupráci nebo projektu | „offboarding“, „ukončení spolupráce“ nebo „předání projektu“ | předávací a mazací checklist s uzavřením přístupů |
 
 Pravidlo pro práci s rejstříkem: otevři maximálně tři nalezené části, vyber jednu a zapiš výstup. Pokud po deseti minutách pořád skáčeš mezi odkazy, vrať se k tabulce „Kudy začít podle aktuální bolesti“ a zúž problém. E-book není buffet. Teda je, ale bez talíře si stejně odneseš jen chaos.
@@ -47523,6 +47524,122 @@ Pokud starou URL odstraníš, nedělej z toho tichý noční trik. Zapiš změnu
 
 Vyber tři staré redirecty z posledního obsahového sloučení. U každého napiš jednu větu: koho chrání, na co vede a kdy ho znovu zkontroluješ. Potom oprav jeden interní odkaz, který pořád používá starou URL, a zkontroluj, že nejdůležitější stará cesta vede přímo na aktuální stránku. Pokud u některého redirectu neumíš říct, koho chrání, označ ho jako kandidáta na ukončení. To je malý úklid, ne historický román URL adres.
 
+## Příloha: Ukončená URL bez falešné 200 stránky
+
+Když se stará stránka po sloučení, archivaci nebo smazání opravdu přestane používat, čeká tým poslední nepříjemné rozhodnutí: co má URL vracet dál. Tady se často udělá tichý kompromis. Stránka už neexistuje, ale server vrací `200 OK` s obecnou větou „obsah byl přesunut“, nebo ještě hůř homepage. Vypadá to jemněji než chyba. Ve skutečnosti to mate čtenáře, vyhledávače i interní kontrolu.
+
+Dobrá ukončená URL odpovídá na jednoduchou otázku:
+
+„Má člověk dostat novou konkrétní cestu, jasné vysvětlení zániku, nebo poctivý signál, že zdroj už není dostupný?“
+
+MDN u `404 Not Found` rozlišuje, že server požadovaný zdroj nenašel, ale neříká tím, jestli je stav dočasný nebo trvalý. Pro trvale odstraněný zdroj dává smysl `410 Gone`. Google ve své dokumentaci k HTTP stavům popisuje, že `4xx` odpovědi u už existujících URL vedou časem k odstranění z indexu a že obsah těla odpovědi u těchto stavů nepoužívá jako obsah pro indexaci. Prakticky: status není kosmetika. Je to součást pravdivosti webu.
+
+### Rozliš čtyři konce URL
+
+Ne každá stará URL si zaslouží stejný konec.
+
+| Situace | Doporučený výstup | Proč |
+| --- | --- | --- |
+| Obsah má jasnou novou náhradu | `301` nebo `308` na konkrétní cílovou URL | čtenář hledá stejnou odpověď jinde |
+| Obsah skončil, ale existuje užitečný kontext | archivní stránka se správným statusem podle účelu | člověk pochopí, co se změnilo a kam dál |
+| Obsah trvale zmizel a náhrada není | `410 Gone` | říká, že zdroj je záměrně pryč |
+| URL nikdy neexistovala nebo jde o překlep | `404 Not Found` | poctivý signál, že tu nic není |
+
+Největší chyba je přesměrovat všechno na homepage. Čtenář se dostane na funkční stránku, ale ztratí kontext. Vyhledávač dostane slabý signál. Tým si v monitoringu odškrtne `200`, ale problém jen schoval pod koberec. Koberec sice vypadá uklizeně, ale pořád pod ním křupe obsahový písek.
+
+### Archivní stránka není odpadkový koš
+
+Archivní stránka dává smysl, když starý obsah má pořád vysvětlující hodnotu, ale už nemá být běžnou odpovědí.
+
+Použij ji například když:
+
+- končí veřejná dokumentace staré verze produktu,
+- starý pricing plán už nejde koupit, ale stávající zákazníci se na něj ptají,
+- článek popisoval historický postup a nový postup je jinde,
+- partner nebo zákazník má ještě veřejný odkaz, který nechceš náhle useknout,
+- právní nebo trust text se změnil a je potřeba srozumitelně vysvětlit přechod.
+
+Archivní stránka má mít krátký text:
+
+| Pole | Co napsat |
+| --- | --- |
+| Co se stalo | „Tato stránka popisovala starý postup pro export dat.“ |
+| Od kdy neplatí | datum nebo verze produktu |
+| Kam pokračovat | jedna konkrétní aktuální URL |
+| Co nedělat | nepoužívat starý návod, starý formulář nebo starý plán |
+| Vlastník | kdo rozhodl a kdy se archiv znovu zkontroluje |
+
+Archiv není výmluva pro držení všeho navždy. Pokud už nikdo nepotřebuje kontext a existuje jasná náhrada, archiv zavři. Pokud náhrada neexistuje a stránka je pryč, použij poctivý `404` nebo `410`.
+
+### Nepoužívej soft 404
+
+Soft 404 je situace, kdy stránka vypadá jako chyba nebo prázdná náhrada, ale server vrací úspěšný status. Prakticky to znamená, že web říká dvě různé věci najednou:
+
+- člověku: „tady nic není“,
+- serverem: „všechno je v pořádku“.
+
+To je špatné i produktově. Monitoring, odkazové kontroly a SEO nástroje pak nerozliší skutečně funkční obsah od vycpávky. Pokud stránka nemá aktuální hodnotu, nesnaž se ji zachránit statusem `200`. Buď přesměruj na konkrétní náhradu, nebo vrať správný chybový status s lidským textem.
+
+Privacy-first detail: soft 404 často svádí k dalšímu měření. Tým chce zjistit, kdo na starou stránku chodí, a přidá skript, UTM nebo zkracovač. Lepší je opravit status a použít krátkou agregovanou kontrolu počtu požadavků na starou URL. Nepotřebuješ identitu lidí, kteří přišli pozdě. Potřebuješ rozhodnutí, zda starou cestu ještě někde živíš.
+
+### Karta ukončené URL
+
+Použij jednu krátkou kartu na URL nebo skupinu opravdu podobných URL.
+
+| Pole | Zápis |
+| --- | --- |
+| Stará URL |  |
+| Původní účel |  |
+| Důvod ukončení | obsah sloučen / zastaral / produkt skončil / chyba / test |
+| Existuje aktuální náhrada? | ano/ne + URL |
+| Zvolený výstup | redirect / archiv / `404` / `410` |
+| Co upravit okolo | sitemap, interní odkazy, RSS, dokumentace, support šablony |
+| Jak ověřit | `curl -I`, odkazová kontrola, krátký agregovaný signál |
+| Datum další kontroly |  |
+
+Karta má zabránit debatě typu „nechme to ještě chvíli“. Chvíle bez data je jen pomalé navždy.
+
+### Příklad
+
+| Pole | Zápis |
+| --- | --- |
+| Stará URL | `/blog/export-dat-stary-postup` |
+| Původní účel | vysvětlit ruční export před novou samoobslužnou funkcí |
+| Důvod ukončení | postup už je neplatný a mate support |
+| Existuje aktuální náhrada? | ano, `/docs/export-dat` |
+| Zvolený výstup | `301` na aktuální dokumentaci po dobu jednoho nákupního cyklu |
+| Co upravit okolo | starý článek odstranit ze sitemap, opravit support makro, doplnit poznámku v release notes |
+| Jak ověřit | `curl -I` vrací redirect na cílovou URL, support neposílá starý odkaz |
+| Datum další kontroly | za 60 dní rozhodnout, jestli redirect ponechat nebo změnit na archiv/410 |
+
+Jiný příklad:
+
+| Pole | Zápis |
+| --- | --- |
+| Stará URL | `/lp/akce-2025` |
+| Původní účel | jednorázová registrační stránka k uzavřené akci |
+| Důvod ukončení | akce proběhla, nabídka už neplatí |
+| Existuje aktuální náhrada? | ne |
+| Zvolený výstup | `410 Gone` s krátkou větou a odkazem na obecný přehled akcí |
+| Co upravit okolo | odstranit z interních šablon a starých CTA |
+| Jak ověřit | status je `410`, stránka není v sitemap, nevede na ni aktivní navigace |
+| Datum další kontroly | žádné, uzavřeno po ověření |
+
+### Checklist: Ukončená URL
+
+- [ ] Víme, jestli stará URL má konkrétní aktuální náhradu.
+- [ ] Nepřesměrováváme staré URL plošně na homepage.
+- [ ] Nepoužíváme `200 OK` pro stránku, která ve skutečnosti říká „obsah není dostupný“.
+- [ ] `404`, `410`, redirect nebo archivní stránka odpovídá skutečnému stavu obsahu.
+- [ ] Sitemap, RSS, interní odkazy a šablony neudržují ukončenou URL při životě.
+- [ ] Archivní stránka má jasné datum, kontext a další cestu.
+- [ ] Kontrola dopadu používá agregované signály bez identifikace návštěvníků.
+- [ ] Rozhodnutí je zapsané v kartě nebo migračním logu.
+
+### Mini úkol
+
+Vyber jednu starou URL, která už nemá být běžnou čtenářskou cestou. Vyplň kartu ukončené URL a rozhodni mezi čtyřmi výstupy: konkrétní redirect, archivní vysvětlení, `404` nebo `410`. Potom zkontroluj `curl -I`, sitemap a jeden interní odkaz. Pokud máš chuť všechno přesměrovat na homepage, dej si vodu a vrať se k otázce, co člověk na té URL opravdu hledal.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -47678,6 +47795,9 @@ Vyber tři staré redirecty z posledního obsahového sloučení. U každého na
 - Google Search Central: Site moves and migrations - doporučení pro přesuny webu se změnou URL, server-side permanentní redirecty a omezení redirect řetězců: https://developers.google.com/search/docs/crawling-indexing/site-move-with-url-changes
 - Google Search Central: Redirects and Google Search - rozlišení trvalých a dočasných redirectů a jejich vliv na kanonickou URL ve vyhledávání: https://developers.google.com/search/docs/crawling-indexing/301-redirects
 - MDN Web Docs: Redirections in HTTP - vysvětlení principu HTTP přesměrování, rozdílu mezi trvalými a dočasnými redirecty a typických použití při změně URL: https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Redirections
+- MDN Web Docs: 404 Not Found - význam stavu, kdy server nemůže najít požadovaný zdroj, a rozdíl proti trvale odstraněnému zdroji se stavem `410 Gone`: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/404
+- MDN Web Docs: 410 Gone - význam stavu pro zdroj, který už na serveru není dostupný a jeho nedostupnost má být považována za trvalou: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/410
+- Google Crawling Infrastructure: How HTTP status codes affect Google's crawlers - aktuální přehled zacházení Google crawlerů s `2xx`, `3xx`, `4xx` a `5xx` odpověďmi včetně `404`, `410` a soft 404 situací: https://developers.google.com/crawling/docs/troubleshooting/http-status-codes
 - Google Search Central: Build and submit a sitemap - tvorba a odesílání sitemap: https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap
 - Google Search Central: Ask Google to recrawl your URLs - možnosti požádat o nové procházení změněných URL a upozornění, že recrawl může trvat dny až týdny: https://developers.google.com/search/docs/crawling-indexing/ask-google-to-recrawl
 - Google Search Central: Robots.txt Introduction and Guide - použití a limity robots.txt: https://developers.google.com/search/docs/crawling-indexing/robots/intro
@@ -47713,6 +47833,7 @@ Vyber tři staré redirecty z posledního obsahového sloučení. U každého na
 
 ## Pracovní log
 
+- 2026-07-23: Doplněna příloha o ukončené URL bez falešné 200 stránky: rozhodování mezi konkrétním redirectem, archivní stránkou, `404` a `410`, varování před soft 404 a přesměrováním na homepage, karta ukončené URL, dva praktické příklady, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro ukončení staré URL. Ověřeny a doplněny zdroje MDN k `404`/`410` a Google Crawling Infrastructure k dopadu HTTP statusů; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
 - 2026-07-23: Doplněna příloha o retenčním úklidu redirectů po obsahovém sloučení bez nekonečné pavučiny: rozlišení ochranných redirectů, interních cest, archivního obsahu a šumu, nastavení retenčního okna, narovnání redirect řetězců, kontrola bez osobních logů, rozhodovací karta, praktický příklad, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro úklid starých redirectů po sloučení. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
 - 2026-07-23: Doplněna příloha o kontrole po obsahovém sloučení bez falešného klidu: nastavení kontrolního data už při sloučení, ověřování proti původnímu důvodu změny, chudé signály bez sledování lidí, čtyři možné konce kontroly, karta kontroly, praktický příklad, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro ověření dopadu po sloučení. Bez nových aktuálních externích tvrzení, navázáno na existující zdroje k redirectům, sitemap a recrawlu; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
 - 2026-07-23: Doplněna příloha o navazujících odkazech po obsahovém sloučení bez mrtvé cesty: kontrola aktivních cest po sloučení, oprava CTA podle nové role stránky, úklid parametrů a zkracovačů, revize interních šablon, malý odkazový smoke test, karta navazujících odkazů, příklad, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro opravu navigace po obsahovém sloučení. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
