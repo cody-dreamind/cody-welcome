@@ -120,6 +120,7 @@ Když se nechceš vracet do celé knihy, hledej konkrétní nástroj podle výst
 | Zrevidovat dodavatele po změně podmínek | „revize dodavatele“, „změna podmínek“ nebo „vendor karta“ | rozhodnutí ponechat, omezit, vyjednat, nahradit nebo ukončit dodavatele bez panického přepisu provozu |
 | Řízeně odejít od dodavatele | „odchod od dodavatele“, „vendor exit“ nebo „migrační balík“ | migrační balík s exportem, ověřením, přepnutím, smazáním dat a uzavřením přístupů |
 | Ověřit, že po odchodu nezůstaly stínové kopie | „stínové kopie“, „po vendor exitu“ nebo „mrtvé integrace“ | zavírací kontrola exportů, účtů, automatizací, dokumentace a veřejných slibů |
+| Udržet dodavatelský registr aktuální v běžném provozu | „dodavatelský registr“, „klidová revize“ nebo „vendor hygiene“ | malý pravidelný průchod nástroji, účely, daty, přístupy, vlastníky a dalšími kontrolami bez plošného auditu |
 
 Pravidlo pro práci s rejstříkem: otevři maximálně tři nalezené části, vyber jednu a zapiš výstup. Pokud po deseti minutách pořád skáčeš mezi odkazy, vrať se k tabulce „Kudy začít podle aktuální bolesti“ a zúž problém. E-book není buffet. Teda je, ale bez talíře si stejně odneseš jen chaos.
 
@@ -48530,6 +48531,137 @@ Tohle je dostatečně konkrétní na řízení práce a zároveň neprozrazuje o
 
 Vyber jeden vendor exit, který tým považuje za hotový. Projdi jen pět míst: exporty, přístupy, integrace, dokumentaci a veřejné texty. Najdi jednu stínovou kopii nebo mrtvou integraci a zavři ji tento týden. Pokud nic nenajdeš, zapiš zavírací záznam s datem kontroly. I potvrzené „nic nezůstalo“ má hodnotu, protože příští audit nezačne detektivkou.
 
+## Příloha: Dodavatelský registr v klidovém provozu bez nekonečného auditu
+
+Dodavatelský registr není seznam log v Notionu, který se jednou vyplní při nákupu a pak statečně stárne. V privacy-first provozu je to pracovní mapa: jaké nástroje drží data, proč existují, kdo je vlastní, jak se z nich odchází a kdy se znovu kontrolují. Pokud mapa není živá, tým začne rozhodovat podle paměti. A paměť je skvělá na vtipy z minulého sprintu, horší na retenci osobních údajů.
+
+Klidový provoz je období, kdy se nic dramatického neděje: dodavatel neposlal nové podmínky, neprobíhá migrace, není incident a nikdo neodchází přes víkend pryč. Právě tehdy má krátká revize největší hodnotu. Nehoří, takže můžeš uklidit malé nejasnosti dřív, než z nich bude drahý projekt.
+
+> Codyho komentář: Nejlepší dodavatelský audit je ten, který je tak malý, že ho tým opravdu udělá. Když z něj uděláš dvacetišestisloupcovou tabulku s právnickým tónem a povinným workshopem, vyhraje tabulka a prohraje realita. Gratuluju, máš compliance tapetu.
+
+### Rozliš registr, audit a nákupní rozhodnutí
+
+Registr má odpovědět na otázku: „Co používáme a co to znamená pro data?“ Audit má ověřit, jestli odpovědi pořád sedí. Nákupní rozhodnutí má říct, jestli nový nástroj pustit do provozu. Když tyto tři věci smícháš, vznikne dokument, který nikdo neotevře, protože je současně moc obecný pro rozhodnutí a moc dlouhý pro běžnou údržbu.
+
+Pro klidovou revizi stačí u každého důležitého dodavatele držet minimální kartu:
+
+| Pole | Co má být jasné |
+| --- | --- |
+| Účel | jakou práci nástroj umožňuje a proč nejde jen o zvyk |
+| Data | jaké kategorie dat v něm jsou, bez kopírování konkrétních záznamů |
+| Role | správce, zpracovatel, subdodavatel nebo jen technická služba bez osobních dat |
+| Region a provoz | kde se data zpracovávají a kdo k nim může mít provozní přístup |
+| Vlastník | člověk nebo role, která umí rozhodnout o změně |
+| Přístupy | kdo má admin, export, billing a integrační oprávnění |
+| Retence | kdy data končí nebo kdy se znovu kontroluje důvod držení |
+| Exit | jak data exportovat, co vypnout a co by se rozbilo při odchodu |
+| Další kontrola | datum další malé revize, ne neurčité „někdy“ |
+
+Tohle není náhrada za právní dokumentaci. Je to provozní mapa, podle které se dá rozhodovat bez lovení ve starých e-mailech.
+
+### Udělej revizi po třech otázkách
+
+Klidová revize má být krátká. Nezačínej od všech smluv a všech podprocesorů. Začni třemi otázkami, které odhalí většinu nepořádku:
+
+- Používáme nástroj pořád ke stejnému účelu?
+- Drží nástroj pořád jen data, která k tomuto účelu potřebuje?
+- Má nástroj pořád správného vlastníka, přístupy a datum další kontroly?
+
+Pokud na všechny tři otázky odpovíš ano, registr jen potvrď a pokračuj dál. Pokud narazíš na nejasnost, nezakládej hned velký audit. Přepiš ji na malou akci:
+
+| Nález | Malá akce |
+| --- | --- |
+| nikdo neví, proč nástroj ještě platíme | přiřadit vlastníka a rozhodnout ponechat, omezit nebo ukončit |
+| účel se změnil, ale karta zůstala stará | přepsat účel a zkontrolovat data, texty a přístupy |
+| v nástroji jsou exporty bez data konce | nastavit výmaz nebo archiv s účelem a retencí |
+| admin má pět lidí „pro jistotu“ | odebrat zbytečné role a nechat nouzový postup v runbooku |
+| nástroj je uvedený v privacy notice jinak než v realitě | opravit veřejný text nebo provoz, podle toho, kde je chyba |
+| exit plán je prázdný | doplnit první praktický krok: export, vypnutí integrace nebo kontakt na support |
+
+Revize má končit rozhodnutím, ne dojmem. „Vypadá to v pohodě“ není stav. Lepší je „ponecháno beze změny, další kontrola 2026-10-23“ nebo „omezit exportní roli do pátku“.
+
+### Prioritizuj podle datového dopadu
+
+Není potřeba procházet všechny dodavatele stejně hluboko. Nástroj na veřejné ikony a nástroj na support tickety nemají stejný dopad. Klidová revize má šetřit čas a současně chránit místa, kde by chyba bolela.
+
+Použij jednoduché rozdělení:
+
+| Vrstva | Příklady | Rytmus kontroly |
+| --- | --- | --- |
+| Vysoký dopad | identita, databáze, billing, support, CRM, analytika s osobními daty, produkční logging | měsíčně nebo po každé větší změně |
+| Střední dopad | e-mailing, dokumentace s interním obsahem, projektové řízení, produktové integrace | kvartálně |
+| Nízký dopad | veřejné assety, čistě statické nástroje, jednorázové utilitky bez dat | půlročně nebo při obnově platby |
+
+Rytmus ber jako výchozí provozní pravidlo, ne jako zákon vytesaný do mramoru. Když se změní účel, data, přístup, cena, vlastník nebo region, nástroj se vrací do rychlé revize hned. Když se nic nemění a dopad je nízký, nepotřebuješ předstírat, že kontrola favicon generátoru je bezpečnostní operace století.
+
+### Kontroluj i nástroje bez faktury
+
+Dodavatelský registr se často rozbije na věcech, které účetnictví nevidí: bezplatný plán, open-source SaaS instance, jednorázový exportér, testovací workspace, rozšíření v prohlížeči, starý formulářový backend nebo skript vložený do webu před třemi lety.
+
+Při klidové revizi si proto projdi čtyři zdroje reality:
+
+- faktury a předplatná,
+- produkční konfiguraci a proměnné prostředí,
+- webové skripty, DNS záznamy, embedy a webhooky,
+- týmové dokumenty, support šablony a onboarding návody.
+
+Nemusíš z toho dělat digitální archeologii. Stačí pokaždé vzít jeden výřez. Jeden měsíc billing a produkční proměnné, další měsíc webové skripty, další měsíc support a dokumentaci. Lepší je malý opakovaný průchod než velký každoroční šok.
+
+### Neukládej do registru víc dat, než potřebuješ
+
+Registr má chránit data, ne vytvářet další sklad citlivých informací. Nepatří do něj celé smlouvy, screenshoty admin panelů s osobními údaji, seznamy zákaznických ticketů ani hodnoty tokenů. Patří do něj odkaz na místo, kde se schválená dokumentace bezpečně drží, a provozní shrnutí pro rozhodování.
+
+Dobrá karta říká:
+
+- „Support systém drží kontaktní údaje a obsah ticketů, vlastník je support lead, export má jen admin role, retence aktivních ticketů se kontroluje kvartálně.“
+
+Špatná karta říká:
+
+- „Tady je screenshot posledních ticketů, seznam všech zákazníků, API klíč a export pro jistotu.“
+
+Pokud registr sám začne obsahovat osobní data, vytvořil sis nový systém, který potřebuje vlastní účel, přístupy, retenci a úklid. To je elegantní způsob, jak si z jednoduchého problému vyrobit druhý problém v kravatě.
+
+### Zaveď malý revizní rituál
+
+Praktický rytmus pro malý tým:
+
+| Kdy | Co udělat | Výstup |
+| --- | --- | --- |
+| každý měsíc | projít 3 až 5 dodavatelů s vysokým dopadem | potvrzené karty nebo malé úkoly |
+| každý kvartál | projít střední dopad a výjimky | zavřené nejasnosti, přístupy a staré exporty |
+| při obnově platby | zkontrolovat účel, využití, data a exit | ponechat, omezit, vyjednat, nahradit nebo ukončit |
+| po personální změně | ověřit admin, billing, export a integrační role | odebrané přístupy a aktualizovaný vlastník |
+| po změně produktu | zkontrolovat, jestli se změnila data nebo veřejné sliby | aktualizovaná karta, privacy notice nebo trust odpověď |
+
+Revizní schůzka nemusí mít hodinu. Patnáct minut stačí, pokud každý záznam končí jednou z pěti akcí: potvrdit, opravit, omezit, ukončit, eskalovat.
+
+### Příklad: Klidová revize tří nástrojů
+
+| Nástroj | Nález | Rozhodnutí |
+| --- | --- | --- |
+| Support systém | účel sedí, ale exportní právo mají i dvě staré role | odebrat exportní právo do pátku, další kontrola za měsíc |
+| Newsletter nástroj | tým ho nepoužil čtyři měsíce, ale stále drží staré seznamy | rozhodnout o archivaci nebo výmazu seznamů, před dalším rozesláním přepsat účel odběru |
+| Monitoring uptime | drží jen technické agregované signály, vlastník sedí, exit popsaný | potvrzeno beze změny, další kontrola při obnově platby |
+
+Všimni si, že výstupem nejsou tři dlouhé reporty. Výstupem jsou dvě malé opravy a jedno vědomé potvrzení. Přesně tak má klidová revize fungovat.
+
+### Checklist: Dodavatelský registr v klidovém provozu
+
+- [ ] Máme minimální kartu pro nástroje s vysokým a středním datovým dopadem.
+- [ ] U každého důležitého dodavatele známe účel, data, vlastníka, přístupy, retenci a exit.
+- [ ] Registr neobsahuje tokeny, zákaznické payloady ani zbytečné screenshoty osobních dat.
+- [ ] Revizi prioritizujeme podle datového dopadu, ne podle hlasitosti dodavatele.
+- [ ] Kontrolujeme i bezplatné, testovací a historické nástroje mimo faktury.
+- [ ] Každý nález končí akcí: potvrdit, opravit, omezit, ukončit nebo eskalovat.
+- [ ] Veřejné texty, trust odpovědi a privacy notice odpovídají registru.
+- [ ] Staré exporty a přístupy mají vlastníka, účel a datum konce.
+- [ ] Po personální nebo produktové změně se dotčené karty zkontrolují mimo běžný rytmus.
+- [ ] Další kontrolní datum je konkrétní, ne „někdy příště“.
+
+### Mini úkol
+
+Vyber tři dodavatele, které tým používá každý týden. U každého doplň jen pět polí: účel, data, vlastník, přístupy a další kontrola. Pokud se někde zasekneš, nezakládej velký audit. Zapiš jeden malý úkol, který nejasnost zavře: odebrat exportní roli, najít vlastníka, potvrdit retenci, opravit privacy notice nebo rozhodnout, jestli nástroj ještě vůbec potřebujete.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -48723,6 +48855,7 @@ Vyber jeden vendor exit, který tým považuje za hotový. Projdi jen pět míst
 
 ## Pracovní log
 
+- 2026-07-23: Doplněna příloha o dodavatelském registru v klidovém provozu bez nekonečného auditu: rozdíl mezi registrem, auditem a nákupním rozhodnutím, minimální vendor karta, tříotázková revize, prioritizace podle datového dopadu, kontrola bezplatných a historických nástrojů mimo faktury, omezení citlivých dat v registru, malý měsíční a kvartální revizní rituál, praktický příklad, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro průběžnou vendor hygiene. Bez nových aktuálních externích tvrzení, navázáno na existující zdroje k GDPR, dodavatelům, přístupům, retenci a vendor exitu; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
 - 2026-07-23: Doplněna příloha o kontrole po vendor exitu bez stínových kopií: zavírací okno po přepnutí, kontrola exportů, přístupů, integrací, dokumentace a veřejných slibů, rozlišení archivu od zapomenuté kopie, ověření nového pracovního návyku týmu, zavírací záznam, příklad zavření starého helpdesku, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro ověření stínových kopií a mrtvých integrací po odchodu od dodavatele. Bez nových aktuálních externích tvrzení, navázáno na existující zdroje k GDPR, retenci, přístupům, zpracovatelům a vendor exitu; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
 - 2026-07-23: Doplněna příloha o odchodu od dodavatele bez datového ocasu: migrační balík, export jen dat s novým účelem, částečné smoke testy, vypnutí starých vstupů, doložení výmazu bez zbytečných interních úniků, aktualizace privacy notice, trust přehledu, datové mapy a runbooků, praktický příklad odchodu od analytického nástroje, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro řízený vendor exit. Bez nových aktuálních externích tvrzení, navázáno na existující zdroje k GDPR, zpracovatelům, exportu, retenci a vendor lock-inu; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
 - 2026-07-23: Doplněna příloha o revizi dodavatele po změně podmínek bez panického přepisu: rozlišení změny ceny, dat, regionu, funkcí, provozu a vlastnictví, návrat k vendor kartě, pořadí akcí ponechat/omezit/vyjednat/nahradit/ukončit, kontrola veřejných privacy-first slibů, rozhodovací zápis, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro revizi dodavatele po změně podmínek. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
