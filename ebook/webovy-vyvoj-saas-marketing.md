@@ -109,6 +109,7 @@ Když se nechceš vracet do celé knihy, hledej konkrétní nástroj podle výst
 | Vybrat další redakční opravu po inventuře | „redakční priorita“, „po inventuře“ nebo „tabulkový hřbitov“ | jedna prioritní oprava veřejného obsahu se stavem, vlastníkem, termínem a ověřením dopadu |
 | Sloučit podobné stránky bez ztráty odkazů | „sloučení obsahových duplicit“, „jedna cílová stránka“ nebo „migrační karta“ | rozhodnutí, která URL přežije, co se přesune, co se přesměruje a co se nechá jen jako archivní stopa |
 | Opravit navigaci po obsahovém sloučení | „navazující odkazy“, „CTA po sloučení“ nebo „obsahová cesta“ | seznam míst, kde se po sloučení musí opravit odkazy, výzvy k akci, metadata a interní šablony |
+| Ověřit dopad po obsahovém sloučení | „kontrola po sloučení“, „14denní kontrola“ nebo „staré URL po sloučení“ | krátké rozhodnutí, jestli sloučení zavřít, opravit, dočasně zvýraznit archivní poznámku nebo otevřít produktový problém |
 | Úklid po spolupráci nebo projektu | „offboarding“, „ukončení spolupráce“ nebo „předání projektu“ | předávací a mazací checklist s uzavřením přístupů |
 
 Pravidlo pro práci s rejstříkem: otevři maximálně tři nalezené části, vyber jednu a zapiš výstup. Pokud po deseti minutách pořád skáčeš mezi odkazy, vrať se k tabulce „Kudy začít podle aktuální bolesti“ a zúž problém. E-book není buffet. Teda je, ale bez talíře si stejně odneseš jen chaos.
@@ -47260,6 +47261,135 @@ Výsledek je malý, ale cenný: člověk dostane stejnou odpověď z pricingu, d
 
 Vezmi poslední sloučené téma a vyber tři aktivní cesty: jednu veřejnou, jednu interní šablonu a jednu nákupní nebo supportní odpověď. Oprav odkazy tak, aby vedly přímo na cílovou stránku, a napiš jeden řádek, co nekontroluješ teď. Potom udělej smoke test staré URL, nové URL a jednoho CTA. Pokud tě začne lákat kompletní audit všech historických odkazů, zastav se. Tohle je hodinová iterace, ne archeologická expedice s fakturací po metrech.
 
+## Příloha: Kontrola po obsahovém sloučení bez falešného klidu
+
+Sloučení duplicit a oprava odkazů jsou změny, které vypadají hotově v den publikace. Jenže skutečná otázka zní až o pár dní později:
+
+„Přestala stará odpověď vytvářet zmatek, nebo jsme jen přesunuli chaos na hezčí URL?“
+
+Kontrola po sloučení nemá být analytická kampaň. Má být krátký návrat k původní nejistotě: proč jsme stránky slučovali, jaký signál měl zmizet nebo zeslábnout a co uděláme, když nezmizel.
+
+> Codyho komentář: Nejhorší druh obsahového úklidu je ten, který si tým odškrtne, ale zákazník dál dostává tři verze pravdy. To není hotovo. To je jen text s novou fasádou.
+
+### Nastav kontrolu už při sloučení
+
+Kontrolu neplánuj až ve chvíli, kdy si někdo vzpomene. Napiš ji do migrační karty hned při sloučení. Stačí jeden řádek:
+
+| Pole | Příklad |
+| --- | --- |
+| Kontrolní datum | 14 dní po publikaci |
+| Původní problém | lidé se ptali, jestli jde exportovat data před zrušením účtu |
+| Očekávaný signál | méně support dotazů na stejnou věc, méně posílání starého PDF |
+| Kde ověříme | support makra, sales odpovědi, agregované požadavky na staré URL, pricing FAQ |
+| Stop pravidlo | pokud dotazy pokračují, nestačí text - opravit onboarding nebo produktový tok |
+
+Čtrnáct dní není magické číslo. U hodně navštěvované stránky stačí týden. U B2B nákupní odpovědi s pomalým cyklem může dávat smysl měsíc. Důležité je mít datum a rozhodnutí, ne čekat na „až bude čas“. Ten člověk má špatnou docházku.
+
+### Ověřuj proti původnímu důvodu, ne proti pocitu
+
+Po sloučení se snadno měří to, co je po ruce: návštěvy nové stránky, počet redirectů, pozice ve vyhledávání, kliky na CTA. Některé signály se hodí, ale nejsou automaticky odpověď na původní problém.
+
+Použij jednoduché párování:
+
+| Původní důvod sloučení | Lepší kontrolní signál | Slabý kontrolní signál |
+| --- | --- | --- |
+| Support posílal různé odpovědi | tři poslední odpovědi na téma vedou na stejný zdroj pravdy | nová stránka má víc návštěv |
+| Pricing FAQ a dokumentace si odporovaly | pricing, dokumentace a trust balíček mají stejný slib | redirect ze staré FAQ funguje |
+| Starý blog přitahoval neaktuální dotazy | nové dotazy odkazují na aktuální situaci, ne na starý článek | starý článek je archivovaný |
+| Lidé nenašli postup v produktu | onboarding nebo dokumentace vede na správný krok | článek je přepsaný hezčím tónem |
+| Duplicitní URL mátly vyhledávání | sitemap a interní odkazy ukazují na cílovou URL, staré URL nemají aktivní cestu | cílová URL má správný titulek |
+
+Praktické pravidlo: pokud se původní problém odehrával v supportu, kontroluj support. Pokud v nákupu, kontroluj nákupní cestu. Pokud v dokumentaci, kontroluj dokumentační cestu. Dashboard je pomocník, ne věštec.
+
+### Použij chudé signály místo sledování lidí
+
+Privacy-first kontrola dopadu nepotřebuje rekonstruovat individuální cestu čtenáře. Nepotřebuje vědět, že konkrétní člověk přišel ze starého článku, třikrát klikl na pricing a potom napsal supportu. Potřebuje vědět, jestli se opakovaná nejistota zmenšila.
+
+Vhodné chudé signály:
+
+| Signál | Jak ho použít |
+| --- | --- |
+| Ruční review support dotazů | projdi posledních 5 až 10 dotazů na stejné téma a zapiš, jestli odpověď už existuje |
+| Agregovaný počet požadavků na staré URL | sleduj trend bez identifikátorů lidí a s krátkou retencí |
+| Kontrola nejposílanějších šablon | otevři makra, sales odpovědi a onboarding e-maily |
+| Interní dotaz na tým | zeptej se sales/supportu, kterou odpověď teď posílají |
+| Kontrola veřejné cesty | projdi homepage, pricing, dokumentaci a trust stránku jako nový člověk |
+| Search a sitemap kontrola | ověř, že veřejné indexační signály ukazují na cílovou URL |
+
+Nevhodné zkratky:
+
+- zapnout session recording jen kvůli jedné obsahové opravě,
+- přidat personalizované doporučování, protože rozcestník nebyl napsaný dobře,
+- rozeslat starou URL přes měřicí redirect, aby bylo vidět, kdo ji ještě používá,
+- ukládat celé query stringy se zákaznickými identifikátory do sdíleného reportu,
+- hodnotit výsledek jen podle návštěvnosti nové stránky.
+
+Když potřebuješ pracovat se serverovými logy, drž je agregované a krátkodobé. Pro kontrolu sloučení obvykle stačí počet požadavků na staré URL podle dne a výsledného statusu. Nepotřebuješ IP adresy v pracovním dokumentu, user agenty v prezentaci ani screenshoty s interními ID.
+
+### Rozhodni jedním ze čtyř konců
+
+Kontrola po sloučení má skončit rozhodnutím. Bez rozhodnutí je to jen další review, které si říká „proces“, aby nevypadalo jako odkládání.
+
+| Výsledek kontroly | Rozhodnutí |
+| --- | --- |
+| Aktivní cesty vedou správně a staré dotazy slábnou | zavřít sloučení, ponechat běžnou údržbu |
+| Jedna důležitá cesta pořád vede špatně | opravit odkaz, šablonu nebo CTA hned |
+| Stará URL je pořád silně používaná | dočasně zvýraznit archivní poznámku, zkontrolovat redirect a opravit zdroj návštěv |
+| Dotazy pokračují i po dobré odpovědi | nejde jen o obsah, otevřít produktový, onboardingový nebo pricing problém |
+
+Poslední řádek je nejdůležitější. Někdy lidé neposílají dotazy proto, že odpověď chybí. Posílají je proto, že realita je nejasná, produktový tok je matoucí nebo obchodní pravidlo působí podezřele. V takové chvíli další článek nepomůže. Pomůže změnit produkt, pricing, onboarding nebo support proces.
+
+### Karta kontroly po sloučení
+
+| Pole | Zápis |
+| --- | --- |
+| Téma sloučení |  |
+| Cílová URL |  |
+| Kontrolní datum |  |
+| Původní důvod sloučení |  |
+| Očekávaný signál |  |
+| Co jsme ověřili | support / sales / dokumentace / pricing / trust / sitemap / staré URL |
+| Chudý důkaz |  |
+| Co se zlepšilo |  |
+| Co se nezlepšilo |  |
+| Privacy kontrola | žádné nové trackery, žádné osobní údaje v reportu, krátká retence logů |
+| Rozhodnutí | zavřít / opravit cestu / zvýraznit archiv / otevřít produktový problém |
+| Vlastník dalšího kroku |  |
+
+### Příklad
+
+| Pole | Příklad |
+| --- | --- |
+| Téma sloučení | Export dat při zrušení účtu |
+| Cílová URL | `/docs/export-dat` |
+| Kontrolní datum | 2026-08-06 |
+| Původní důvod sloučení | pricing FAQ, trust stránka a support makro popisovaly export jinak |
+| Očekávaný signál | tým posílá jednu odpověď a nové dotazy se ptají na detail, ne na samotnou existenci exportu |
+| Co jsme ověřili | 6 support odpovědí, 2 sales šablony, pricing FAQ, starou URL a sitemap |
+| Chudý důkaz | stará URL má jen jednotky požadavků denně, všechny nové šablony vedou na cílovou URL |
+| Co se zlepšilo | support už neposílá staré PDF |
+| Co se nezlepšilo | lidé se pořád ptají, kdy export dorazí |
+| Privacy kontrola | do review nešly IP adresy, e-maily ani celé URL s parametry |
+| Rozhodnutí | otevřít produktový problém: v UI ukázat stav exportu a očekávaný čas dokončení |
+| Vlastník dalšího kroku | produkt |
+
+Tady je vidět rozdíl mezi obsahovým a produktovým problémem. Sloučení opravilo rozpor v odpovědích, ale odhalilo chybějící stav v produktu. To je dobrý výsledek. Ne proto, že je všechno hotové, ale protože tým přestal léčit textem něco, co má být ve funkci.
+
+### Checklist: Kontrola po obsahovém sloučení
+
+- [ ] Kontrolní datum bylo nastavené už při sloučení.
+- [ ] Kontrolujeme původní důvod změny, ne jen návštěvnost nové stránky.
+- [ ] Ověřili jsme aspoň jednu veřejnou cestu a jednu interní šablonu.
+- [ ] Staré URL, sitemap, RSS nebo changelog nevrací člověka k neaktuální odpovědi.
+- [ ] Dopad hodnotíme chudými signály bez sledování individuálních cest.
+- [ ] Do pracovního zápisu neukládáme IP adresy, e-maily, tokeny ani citlivé query parametry.
+- [ ] Výsledek končí rozhodnutím: zavřít, opravit cestu, zvýraznit archiv nebo otevřít produktový problém.
+- [ ] Pokud dotazy pokračují, zvažujeme změnu reality, ne jen další vysvětlující odstavec.
+
+### Mini úkol
+
+Vyber jedno sloučení staré aspoň týden. Vyplň kartu kontroly po sloučení v pěti řádcích: původní důvod, očekávaný signál, co ověříš, chudý důkaz a rozhodnutí. Otevři jednu veřejnou cestu, jednu interní šablonu a agregovaný signál staré URL, pokud ho máš. Na konci nepiš „budeme sledovat“. Napiš „zavíráme“, „opravujeme odkaz“, „zvýrazňujeme archiv“ nebo „otevíráme produktový problém“. To je rozdíl mezi údržbou a věčným převalováním stejné otázky po stole.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -47450,6 +47580,7 @@ Vezmi poslední sloučené téma a vyber tři aktivní cesty: jednu veřejnou, j
 
 ## Pracovní log
 
+- 2026-07-23: Doplněna příloha o kontrole po obsahovém sloučení bez falešného klidu: nastavení kontrolního data už při sloučení, ověřování proti původnímu důvodu změny, chudé signály bez sledování lidí, čtyři možné konce kontroly, karta kontroly, praktický příklad, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro ověření dopadu po sloučení. Bez nových aktuálních externích tvrzení, navázáno na existující zdroje k redirectům, sitemap a recrawlu; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
 - 2026-07-23: Doplněna příloha o navazujících odkazech po obsahovém sloučení bez mrtvé cesty: kontrola aktivních cest po sloučení, oprava CTA podle nové role stránky, úklid parametrů a zkracovačů, revize interních šablon, malý odkazový smoke test, karta navazujících odkazů, příklad, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro opravu navigace po obsahovém sloučení. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
 - 2026-07-23: Doplněna příloha o sloučení obsahových duplicit bez ztráty odkazů: rozlišení podobného tématu, skutečné duplicity a historie, výběr přeživší URL podle důvěry, migrační karta, oprava okolních cest, jasné archivní poznámky, praktický příklad, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro sloučení podobných stránek bez ztráty odkazů. Ověřeny a doplněny zdroje Google Search Central k canonical URL/redirectům a MDN k HTTP přesměrování; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
 - 2026-07-23: Doplněna příloha o redakční prioritě po obsahové inventuře bez tabulkového hřbitova: třídění nálezů podle rizika, jednoduché skóre dopadu, rizika nepravdy a náročnosti, karta redakční priority, kontrola místa vzniku otázky, chudé ověření dopadu, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro výběr další redakční opravy po inventuře. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
