@@ -98,6 +98,7 @@ Když se nechceš vracet do celé knihy, hledej konkrétní nástroj podle výst
 | Veřejný výřez pro sdílení | „veřejný výřez“, „startovací balíček“ nebo „release notes“ | samostatně použitelný odkaz bez lead-gatingu |
 | Odpověď na bezpečnostní dotaz zákazníka | „trust center“, „DPA“, „přístupový audit“ nebo kapitolu 10 | věcná odpověď bez marketingové mlhy a bez sdílení interních detailů |
 | Důvěru před nákupem | „nákupní trust balíček“, „trust center“ nebo „bezpečnostní dotaz“ | veřejný balíček odpovědí pro nákup, IT a právní kontrolu bez povinného formuláře |
+| Ověřit provozní slib před podpisem | „veřejný důkaz slibu“, „nákupní trust balíček“ nebo „SLA“ | krátký seznam veřejně ověřitelných důkazů dostupnosti, dat a podpory |
 | Úklid po spolupráci nebo projektu | „offboarding“, „ukončení spolupráce“ nebo „předání projektu“ | předávací a mazací checklist s uzavřením přístupů |
 
 Pravidlo pro práci s rejstříkem: otevři maximálně tři nalezené části, vyber jednu a zapiš výstup. Pokud po deseti minutách pořád skáčeš mezi odkazy, vrať se k tabulce „Kudy začít podle aktuální bolesti“ a zúž problém. E-book není buffet. Teda je, ale bez talíře si stejně odneseš jen chaos.
@@ -46039,10 +46040,37 @@ Minimální karta bloku:
 
 Když se změní subdodavatel, hosting, retence, pricing limit nebo incidentní proces, trust balíček se nemá aktualizovat „někdy“. Má být součástí release checklistu. Důvěra nestárne pomalu. Stárne přesně v okamžiku, kdy veřejný text přestane odpovídat realitě.
 
+### Přidej veřejný důkaz slibu
+
+Nákupní trust balíček nesmí být jen sada pěkných vět. Kupující potřebuje poznat, jestli slib existuje i v provozu. To neznamená zveřejnit interní runbook, přesné IP adresy nebo screenshoty z monitoringu. Znamená to dát ven bezpečný důkaz, který si druhá strana může ověřit bez dalšího formuláře.
+
+U každého důležitého slibu si polož tři otázky:
+
+- Co tvrdíme veřejně?
+- Jaký veřejný signál to podporuje?
+- Jaký interní důkaz máme připravený pro řízené due diligence?
+
+Praktická tabulka:
+
+| Slib | Veřejný důkaz | Interní důkaz pro kontrolovaný proces |
+| --- | --- | --- |
+| Web a aplikace běží přes HTTPS | běžná URL funguje bez TLS varování, certifikát není před expirací | záznam obnovy certifikátu, test obnovy a reloadu služby |
+| Data zpracováváme v evropském provozním modelu | veřejný popis regionů, dodavatelů a účelů | vendor karty, DPA, smluvní přílohy a mapa datových toků |
+| Incidenty komunikujeme věcně | veřejný bezpečnostní kontakt nebo status stránka | incident runbook, role, eskalační pravidla a šablony komunikace |
+| Zákazník může odejít s daty | popsaný export, ukončení účtu a retenční pravidla | interní postup výmazu, kontrola záloh a výjimek z retence |
+| Pricing limity jsou férové | čitelný fair use text a dopad limitů | entitlement matice, billing pravidla a support odpovědi |
+
+Veřejný důkaz nemusí být složitý. U TLS stačí, že standardní prohlížeč a běžný `curl` bez diagnostických výjimek projdou. U datové rezidence stačí srozumitelný popis, kde leží hlavní vrstvy služby a kdo je k čemu používán. U incidentů stačí jasně říct, jakým kanálem se komunikuje a co se typicky sděluje.
+
+Naopak špatný důkaz je takový, který funguje jen interně, vyžaduje ruční vysvětlení od salesu nebo z něj unikají citlivé provozní detaily. Pokud musí kupující nejdřív poslat e-mail, aby zjistil, zda služba má zdravý TLS certifikát, není to důvěra. Je to únik běžné provozní hygieny do obchodního procesu.
+
+> Codyho komentář: Trust balíček má být jako dobře uklizená předsíň. Nemusíš hostovi ukazovat kotelnu, ale když se dveře nedají otevřít, těžko bude věřit slibu o promyšleném provozu.
+
 ### Checklist: Nákupní trust balíček
 
 - [ ] Základní informace o datech, provozu, bezpečnosti, odchodu a dodavatelích jsou veřejně dostupné bez lead formuláře.
 - [ ] Každý blok má vlastníka, zdroj pravdy a datum poslední kontroly.
+- [ ] Každý klíčový provozní slib má alespoň jeden veřejně ověřitelný důkaz.
 - [ ] Veřejná verze neobsahuje interní topologii, tajemství, osobní údaje ani neveřejné incidentní detaily.
 - [ ] DPA, privacy notice, pricing, support odpovědi a trust balíček si neprotiřečí.
 - [ ] Opakované sales, právní a bezpečnostní dotazy se pravidelně převádějí na veřejné odpovědi.
@@ -46241,6 +46269,8 @@ Vyber jednu často opakovanou nákupní otázku a napiš pro ni veřejnou odpov�
 - Nielsen Norman Group: Onboarding Tutorials vs. Contextual Help - rozdíl mezi úvodními tutoriály a kontextovou pomocí: https://www.nngroup.com/articles/onboarding-tutorials/
 
 ## Pracovní log
+
+- 2026-07-23: Rozšířena příloha o nákupním trust balíčku podkapitolou „Přidej veřejný důkaz slibu“: propojení veřejných tvrzení s bezpečně ověřitelnými důkazy pro HTTPS, evropský provoz, incidentní komunikaci, export a pricing limity; do rejstříku pracovních nástrojů přidána směrovka pro ověření provozního slibu před podpisem. Bez nových aktuálních externích tvrzení, navázáno na existující zdroje k Let's Encrypt, Certbotu a provozním healthcheckům. Provozně znovu ověřeno, že `cody.dreamind.cz` přes lokální proxy po TLS tunelu končí chybou `Empty reply from server`, přímé HTTPS bez proxy selhává kvůli expirovanému veřejnému Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), zatímco diagnostické přímé HTTPS s `-k` vrací `200 OK` z nginx/Next.js na `91.99.227.53`; dostupné prostředí pořád neobsahuje SSH/deploy/certbot přístup, kterým by šlo certifikát bezpečně obnovit.
 
 - 2026-07-22: Doplněna příloha o nákupním trust balíčku bez lead-gatingu: veřejné odpovědi pro data, provoz, bezpečnost, práva a odchod, dodavatele a obchodní pravidla, rozlišení veřejné odpovědi od interních poznámek, převod opakovaných nákupních dotazů na veřejné odpovědi, karta bloku, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro důvěru před nákupem. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně ověřeno, že `cody.dreamind.cz` přes lokální proxy po TLS tunelu končí `Empty reply from server`, přímé HTTPS bez proxy selhává kvůli expirovanému veřejnému Let's Encrypt certifikátu `CN=cody.dreamind.cz` od `E8` (`notAfter` 2026-07-17 19:35:56 GMT), diagnostické přímé HTTPS s `-k` vrací `200 OK` z nginx/Next.js na `91.99.227.53` a dostupný pracovní prostor neobsahuje bezpečný SSH/deploy/certbot přístup pro obnovu certifikátu.
 - 2026-07-22: Doplněna příloha o změně pricingu bez přepadení stávajících zákazníků: důvod změny ceny, rozlišení nových, stávajících, ročních, legacy a individuálních zákazníků, komunikace podle dopadu, kontrola entitlementu, billingu, supportu a dokumentace, férový downgrade a odchod, karta pricing změny, checklist a mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně ověřeno, že `cody.dreamind.cz` přes proxy po TLS tunelu končí `Empty reply from server`, přímé HTTPS bez proxy selhává kvůli expirovanému veřejnému Let's Encrypt certifikátu `CN=cody.dreamind.cz` od `E8` (`notAfter` 2026-07-17 19:35:56 GMT) a neinteraktivní SSH pro `node` nemá opravný přístup, takže certifikát z tohoto běhu nejde bezpečně obnovit.
