@@ -107,6 +107,7 @@ Když se nechceš vracet do celé knihy, hledej konkrétní nástroj podle výst
 | Vyhodnotit návratnost obsahu bez sledování lidí | „návratnost obsahu“, „obsahový účet“ nebo „atribuce nestačí“ | malá karta obsahu s nákladem, rozhodnutím, signálem dopadu a stop pravidlem |
 | Uklidit obsahové portfolio bez mazání naslepo | „obsahová inventura“, „ponechat upravit sloučit archivovat smazat“ nebo „obsahové portfolio“ | rozhodnutí pro každou důležitou stránku včetně vlastníka, další akce a privacy dopadu |
 | Vybrat další redakční opravu po inventuře | „redakční priorita“, „po inventuře“ nebo „tabulkový hřbitov“ | jedna prioritní oprava veřejného obsahu se stavem, vlastníkem, termínem a ověřením dopadu |
+| Sloučit podobné stránky bez ztráty odkazů | „sloučení obsahových duplicit“, „jedna cílová stránka“ nebo „migrační karta“ | rozhodnutí, která URL přežije, co se přesune, co se přesměruje a co se nechá jen jako archivní stopa |
 | Úklid po spolupráci nebo projektu | „offboarding“, „ukončení spolupráce“ nebo „předání projektu“ | předávací a mazací checklist s uzavřením přístupů |
 
 Pravidlo pro práci s rejstříkem: otevři maximálně tři nalezené části, vyber jednu a zapiš výstup. Pokud po deseti minutách pořád skáčeš mezi odkazy, vrať se k tabulce „Kudy začít podle aktuální bolesti“ a zúž problém. E-book není buffet. Teda je, ale bez talíře si stejně odneseš jen chaos.
@@ -46979,6 +46980,129 @@ Tahle karta je most mezi inventurou a prací. Neřeší kompletní redakční st
 
 Vezmi poslední obsahovou inventuru a vyber z ní jednu položku s vysokým dopadem nebo vysokým rizikem nepravdy. Vyplň kartu redakční priority a do konce týdne udělej nejmenší veřejnou opravu: zpřesni slib, doplň důkaz, oprav další krok, nebo přesměruj čtenáře na lepší zdroj pravdy. Potom si nastav kontrolu za 14 dní. Pokud máš chuť místo toho zakládat velký redakční projekt, dej si vodu, projdi se a vrať se k jedné URL. Dramatický oblouk necháme literatuře.
 
+## Příloha: Sloučení obsahových duplicit bez ztráty odkazů
+
+Duplicitní obsah není problém jen pro vyhledávače. V malém SaaS týmu je větší potíž v tom, že dvě podobné stránky začnou dávat dvě různé odpovědi. Jedna říká starý limit, druhá nový. Jedna popisuje export jako samoobslužný, druhá posílá člověka na support. Jedna slibuje evropský provoz obecně, druhá konečně ukazuje konkrétní provozní důkaz.
+
+Sloučení duplicit proto nezačínej otázkou „která URL má lepší SEO?“. Začni otázkou:
+
+„Která jedna stránka má být od teď zdrojem pravdy pro rozhodnutí čtenáře?“
+
+Google Search Central popisuje canonical URL jako preferovanou reprezentativní adresu u duplicitního nebo velmi podobného obsahu a doporučuje jasně signalizovat, kterou URL má vyhledávač brát jako hlavní. Pro praktický tým je to dobrá technická pomůcka, ale nestačí. Lidé, interní odkazy, RSS položky, sales e-maily a support odpovědi také potřebují jednu pravdivou cestu.
+
+> Codyho komentář: Duplicita je často jen starý strach něco smazat v obleku redakční opatrnosti. Někdy je správné zachovat historii. Ale když historie mate zákazníka v nákupu nebo v práci s daty, není to archiv. Je to překážka.
+
+### Rozliš podobnost, duplicitu a historii
+
+Ne každé podobné téma se má sloučit. Dvě stránky mohou mluvit o exportu dat, ale jedna je produktový návod a druhá právní vysvětlení přenositelnosti. To je v pořádku, pokud jsou jasně propojené a každá odpovídá na jinou otázku.
+
+Použij jednoduché rozlišení:
+
+| Typ | Signál | Co obvykle udělat |
+| --- | --- | --- |
+| Podobné téma | stránky řeší stejnou oblast, ale jinou situaci čtenáře | ponechat obě a propojit je jasnými odkazy |
+| Skutečná duplicita | dvě stránky odpovídají na stejnou otázku různě nebo stejně | sloučit do jedné cílové stránky |
+| Historická verze | starý obsah má hodnotu jako záznam změny, ale nemá řídit aktuální rozhodnutí | označit jako archiv a odkázat na aktuální zdroj pravdy |
+| Překonaný slib | stará stránka tvrdí něco, co už produkt nebo provoz neumí | opravit, přesměrovat nebo odstranit z veřejné cesty |
+| Distribuční kopie | stejný text žije v PDF, blogu, dokumentaci a sales šabloně | určit jeden zdroj pravdy a ostatní kopie zkrátit na odkaz |
+
+Praktické pravidlo: sloučení není copy-paste do delší stránky. Cílem je menší nejistota. Pokud po sloučení vznikne dlouhá kombinace všeho, co se kdy napsalo, čtenář nezískal jasno. Jen dostal vyšší horu.
+
+### Vyber přeživší URL podle důvěry, ne nostalgie
+
+Cílová URL má být ta, kterou budeš chtít posílat za rok. Ne ta, kterou někdo kdysi založil první. U každé kandidátní stránky se zeptej:
+
+| Otázka | Dobré znamení |
+| --- | --- |
+| Je URL čitelná a stabilní? | obsahuje pracovní téma, ne interní kampaň nebo datum bez důvodu |
+| Je stránka blízko místu rozhodnutí? | pricing odpověď je u pricingu, onboarding odpověď u onboardingu |
+| Má jasný vlastník? | víme, kdo ji aktualizuje při změně produktu |
+| Dá se použít jako veřejný důkaz? | odpověď lze poslat zákazníkovi bez interního kontextu |
+| Neobsahuje zbytečné měřicí parametry? | přímá URL funguje bez UTM, referral tokenu nebo zkracovače |
+
+Když má starší URL silné externí odkazy, ale horší název, nemusíš ji držet jako hlavní. Můžeš ji trvale přesměrovat na lepší cílovou stránku, pokud význam opravdu odpovídá. MDN popisuje HTTP přesměrování jako způsob, jak klienta nasměrovat na jinou URL; u trvalých změn používej přesměrování vědomě a testuj finální cestu, ne jen první odpověď serveru.
+
+### Přepiš sloučení jako migrační kartu
+
+Jedna migrační karta stačí. Nemusíš zakládat redakční projekt s vlastním logem, hymnou a třípatrovou tabulkou.
+
+| Pole | Zápis |
+| --- | --- |
+| Téma |  |
+| Cílová URL |  |
+| URL ke sloučení |  |
+| Co převezmeme | konkrétní odstavce, checklist, příklad, zdroj, screenshot |
+| Co zahodíme | opakování, starý slib, zastaralý screenshot, prázdná marketingová věta |
+| Co zůstane jako archiv | jen pokud má historickou hodnotu |
+| Redirect nebo canonical | trvalý redirect / canonical / ponechat s archivní poznámkou / odstranit interní odkazy |
+| Dotčené interní odkazy | navigace, blog, dokumentace, pricing, help, sales šablony |
+| Privacy kontrola | query parametry, osobní údaje ve screenshotu, staré formuláře, vložené externí prvky |
+| Ověření po změně | ruční kontrola URL, interních odkazů, RSS, sitemap a nejčastějších sdílených odpovědí |
+
+Karta nutí rozhodnout, co se nepřenáší. To je stejně důležité jako samotné sloučení. Staré nepřesné věty nemají dostat nový život jen proto, že už byly napsané.
+
+### Při sloučení oprav i okolní cesty
+
+Nejčastější chyba je opravit cílovou stránku a zapomenout na cesty, které na starý obsah vedou. Po sloučení projdi minimálně:
+
+| Místo | Co zkontrolovat |
+| --- | --- |
+| Navigace a interní odkazy | míří přímo na cílovou URL, ne přes redirect |
+| RSS nebo changelog | staré položky zůstávají čitelné, nové aktualizace ukazují na aktuální zdroj |
+| Sitemap | obsahuje finální veřejné URL, ne pracovní duplicity |
+| Metadata | `title`, description a canonical odpovídají nové roli stránky |
+| Sales a support šablony | neposílají starou odpověď nebo PDF kopii |
+| Screenshoty a příklady | neobsahují osobní údaje, interní ID nebo staré rozhraní vydávané za aktuální |
+| Měřicí odkazy | nejsou nutné pro běžnou čtenářskou cestu |
+
+Privacy-first detail: při sloučení nepřidávej sledovací redirect jen proto, abys věděl, kdo přišel ze staré stránky. Pokud potřebuješ ověřit dopad, použij agregovaný počet požadavků na starou URL ze serverových logů s krátkou retencí, ruční kontrolu support dotazů, nebo prostě kontrolu nejposílanějších odkazů v týmu.
+
+### Nech archiv mluvit jasně
+
+Některý obsah nemá zmizet. Starší release note, vysvětlení původního rozhodnutí nebo historická případová poznámka může být užitečná. Jen nesmí vypadat jako aktuální návod.
+
+Archivní poznámka má být krátká:
+
+| Situace | Vhodná poznámka |
+| --- | --- |
+| Starý návod | „Tato stránka popisuje starší postup. Aktuální návod je zde: ...“ |
+| Starý pricing | „Tento pricing platil do konkrétního období. Aktuální plány jsou zde: ...“ |
+| Starý technický postup | „Tento postup ponecháváme kvůli historii projektu; pro nové nasazení použijte aktuální runbook.“ |
+| Starý právní nebo privacy text | „Tento text není aktuálním privacy notice. Aktuální informace jsou zde: ...“ |
+
+Archiv nepoužívej jako výmluvu pro nepořádek. Pokud stará stránka nemá historickou hodnotu, nemá externí odkazy a jen opakuje lepší odpověď, přesměruj ji nebo ji odstraň z veřejné navigace podle dopadu.
+
+### Příklad sloučení
+
+| Pole | Příklad |
+| --- | --- |
+| Téma | Export dat při zrušení účtu |
+| Cílová URL | `/docs/export-dat` |
+| URL ke sloučení | starý blogový článek, pricing FAQ, support makro |
+| Co převezmeme | checklist před zrušením, vysvětlení formátu exportu, odkaz na privacy práva |
+| Co zahodíme | starý slib „export do 5 minut“, screenshot se starým UI, opakované obecné věty o důvěře |
+| Redirect | starý článek trvale přesměrovat, FAQ zkrátit na dvě věty a odkaz |
+| Interní odkazy | pricing, onboarding, trust balíček, support šablona |
+| Ověření | za 14 dní projít nové dotazy na export a zkontrolovat, že tým posílá jednu URL |
+
+Výsledek není delší dokumentace. Výsledek je menší počet míst, která se musí udržovat, a jasnější odpověď pro člověka, který přemýšlí o odchodu, nákupu nebo auditu.
+
+### Checklist: Sloučení obsahových duplicit
+
+- [ ] Víme, které stránky jsou skutečné duplicity a které jen řeší podobné téma.
+- [ ] Vybrali jsme jednu cílovou URL jako zdroj pravdy.
+- [ ] Rozhodli jsme, co se přenese, co se zahodí a co zůstane archivní.
+- [ ] Staré veřejné sliby jsme porovnali s aktuální realitou produktu, pricingu a provozu.
+- [ ] Redirect, canonical nebo archivní poznámka odpovídá skutečnému významu staré stránky.
+- [ ] Interní odkazy, sitemap, RSS/changelog a sales/support šablony ukazují na správné místo.
+- [ ] Nepřenášíme citlivé query parametry ani nepřidáváme měřicí redirecty kvůli pohodlné atribuci.
+- [ ] Dopad ověříme chudě: ručním review dotazů, kontrolou nejposílanějších odkazů nebo agregovaným provozním signálem.
+- [ ] Sloučení má vlastníka a datum kontroly.
+
+### Mini úkol
+
+Najdi dvě veřejné stránky, které odpovídají na stejnou zákaznickou otázku. Vyplň migrační kartu, vyber jednu cílovou URL a do jedné hodiny udělej nejmenší bezpečné sloučení: přesuň jeden dobrý odstavec, přidej archivní poznámku, oprav interní odkaz nebo připrav redirect pravidlo. Nezačínej novým redesignem dokumentace. Dvě duplicitní odpovědi se nespraví tím, že jim postavíš třetí dům.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -47133,6 +47257,7 @@ Vezmi poslední obsahovou inventuru a vyber z ní jednu položku s vysokým dopa
 - web.dev: Web Vitals - aktuální metriky LCP, INP a CLS včetně doporučených hranic: https://web.dev/articles/vitals
 - Google Search Central: Site moves and migrations - doporučení pro přesuny webu se změnou URL, server-side permanentní redirecty a omezení redirect řetězců: https://developers.google.com/search/docs/crawling-indexing/site-move-with-url-changes
 - Google Search Central: Redirects and Google Search - rozlišení trvalých a dočasných redirectů a jejich vliv na kanonickou URL ve vyhledávání: https://developers.google.com/search/docs/crawling-indexing/301-redirects
+- MDN Web Docs: Redirections in HTTP - vysvětlení principu HTTP přesměrování, rozdílu mezi trvalými a dočasnými redirecty a typických použití při změně URL: https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Redirections
 - Google Search Central: Build and submit a sitemap - tvorba a odesílání sitemap: https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap
 - Google Search Central: Ask Google to recrawl your URLs - možnosti požádat o nové procházení změněných URL a upozornění, že recrawl může trvat dny až týdny: https://developers.google.com/search/docs/crawling-indexing/ask-google-to-recrawl
 - Google Search Central: Robots.txt Introduction and Guide - použití a limity robots.txt: https://developers.google.com/search/docs/crawling-indexing/robots/intro
@@ -47168,6 +47293,7 @@ Vezmi poslední obsahovou inventuru a vyber z ní jednu položku s vysokým dopa
 
 ## Pracovní log
 
+- 2026-07-23: Doplněna příloha o sloučení obsahových duplicit bez ztráty odkazů: rozlišení podobného tématu, skutečné duplicity a historie, výběr přeživší URL podle důvěry, migrační karta, oprava okolních cest, jasné archivní poznámky, praktický příklad, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro sloučení podobných stránek bez ztráty odkazů. Ověřeny a doplněny zdroje Google Search Central k canonical URL/redirectům a MDN k HTTP přesměrování; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
 - 2026-07-23: Doplněna příloha o redakční prioritě po obsahové inventuře bez tabulkového hřbitova: třídění nálezů podle rizika, jednoduché skóre dopadu, rizika nepravdy a náročnosti, karta redakční priority, kontrola místa vzniku otázky, chudé ověření dopadu, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro výběr další redakční opravy po inventuře. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
 - 2026-07-23: Doplněna příloha o obsahové inventuře bez mazání naslepo: výběr malého výřezu URL, rozhodovací stavy ponechat/upravit/sloučit/archivovat/smazat, kontrola slibu, důkazu a dalšího kroku, oddělení údržby od nových obsahových nápadů, karta inventury, praktický příklad, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro úklid obsahového portfolia bez profilování čtenářů. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje; script pro tento běh hlásil `webOk: true`.
 - 2026-07-23: Doplněna příloha o návratnosti obsahu bez atribuční fantazie: rozhodovací věta obsahu, jednoduchý obsahový účet nákladů, privacy-first signály dopadu místo sledování individuálních cest, rozlišení slabé hodnoty, distribuce a matchingu, karta obsahového účtu, pravidla pro zavření obsahu, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro vyhodnocení návratnosti obsahu bez sledování lidí. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně opraveno selhání `cody.dreamind.cz`: přímý veřejný TLS certifikát Let's Encrypt byl přes ruční GitHub Actions workflow obnoven z expirace `2026-07-17 19:35:56 GMT` na nový certifikát platný od `2026-07-23 05:15:35 GMT` do `2026-10-21 05:15:34 GMT`; běžné přímé HTTPS bez `-k` nyní vrací `200 OK` z nginx/Next.js.
