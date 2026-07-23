@@ -121,6 +121,7 @@ Když se nechceš vracet do celé knihy, hledej konkrétní nástroj podle výst
 | Řízeně odejít od dodavatele | „odchod od dodavatele“, „vendor exit“ nebo „migrační balík“ | migrační balík s exportem, ověřením, přepnutím, smazáním dat a uzavřením přístupů |
 | Ověřit, že po odchodu nezůstaly stínové kopie | „stínové kopie“, „po vendor exitu“ nebo „mrtvé integrace“ | zavírací kontrola exportů, účtů, automatizací, dokumentace a veřejných slibů |
 | Udržet dodavatelský registr aktuální v běžném provozu | „dodavatelský registr“, „klidová revize“ nebo „vendor hygiene“ | malý pravidelný průchod nástroji, účely, daty, přístupy, vlastníky a dalšími kontrolami bez plošného auditu |
+| Schválit dočasný nástroj bez trvalého datového stínu | „dočasný nástroj“, „jednorázové schválení“ nebo „stínový dodavatel“ | časově omezená karta zkoušky s účelem, hranicí dat, vlastníkem, datem vypnutí a zavírací kontrolou |
 
 Pravidlo pro práci s rejstříkem: otevři maximálně tři nalezené části, vyber jednu a zapiš výstup. Pokud po deseti minutách pořád skáčeš mezi odkazy, vrať se k tabulce „Kudy začít podle aktuální bolesti“ a zúž problém. E-book není buffet. Teda je, ale bez talíře si stejně odneseš jen chaos.
 
@@ -48662,6 +48663,128 @@ Všimni si, že výstupem nejsou tři dlouhé reporty. Výstupem jsou dvě malé
 
 Vyber tři dodavatele, které tým používá každý týden. U každého doplň jen pět polí: účel, data, vlastník, přístupy a další kontrola. Pokud se někde zasekneš, nezakládej velký audit. Zapiš jeden malý úkol, který nejasnost zavře: odebrat exportní roli, najít vlastníka, potvrdit retenci, opravit privacy notice nebo rozhodnout, jestli nástroj ještě vůbec potřebujete.
 
+## Příloha: Dočasný nástroj bez trvalého datového stínu
+
+Malé týmy často nepřidávají dodavatele slavnostním nákupním procesem. Přidávají je větou: „Na tohle si jen rychle vezmeme nějaký nástroj.“ Někdy je to v pořádku. Jednorázová migrace, kontrola odkazů, graf pro interní workshop nebo krátký export do klientské tabulky nemusí spouštět třídenní výběrové řízení.
+
+Problém začíná ve chvíli, kdy se z „jen rychle“ stane tichá součást provozu. Účet zůstane aktivní, export zůstane uložený, automatizace běží dál, billing se obnoví a nikdo neví, kdo nástroj vlastně schválil. Stínový dodavatel nevzniká z jedné špatné volby. Vzniká z dobré volby, která nikdy nedostala konec.
+
+> Codyho komentář: Dočasný nástroj není hřích. Hřích je dočasný nástroj bez data vypnutí. To je jako nechat v kanceláři otevřené okno a doufat, že počasí má compliance program.
+
+### Rozliš zkoušku, pomocný nástroj a nového dodavatele
+
+Ne každé použití nástroje má stejný dopad. Před schválením si ho zařaď do jedné ze tří kategorií:
+
+| Typ | Co to znamená | Minimální výstup |
+| --- | --- | --- |
+| jednorázová zkouška | nástroj se použije jednou, bez automatizace a bez opakovaného přístupu k datům | časově omezená karta, datum smazání dat a vypnutí účtu |
+| pomocný pracovní nástroj | tým ho používá opakovaně, ale není součástí produkční cesty | vlastník, datová hranice, revize za 30 až 60 dní |
+| nový dodavatel | nástroj drží zákaznická data, běží v provozu nebo ovlivňuje hlavní produktovou cestu | běžná vendor karta, smluvní a bezpečnostní kontrola podle dopadu |
+
+Tato hranice šetří čas. Jednorázovou zkoušku nechceš dusit enterprise divadlem. Nového dodavatele naopak nechceš schovat za slovem „pilot“, když už přes něj tečou reálná zákaznická data.
+
+### Dej zkoušce jednu větu účelu
+
+Dočasný nástroj má mít větu, kterou pochopí i člověk mimo tým:
+
+- „Použijeme nástroj X jednorázově k převodu veřejného CSV seznamu partnerů do čistší struktury pro import do webu.“
+- „Použijeme nástroj Y na kontrolu interních Markdown odkazů bez nahrávání zákaznických dat.“
+- „Použijeme nástroj Z pro návrh tří variant mikrocopy v onboarding obrazovce bez vložení produkčních exportů.“
+
+Špatná věta zní:
+
+- „Vyzkoušíme si to, protože by se to mohlo hodit.“
+
+Když neumíš napsat účel, neumíš určit hranici dat. A když neumíš určit hranici dat, neumíš poznat, kdy je zkouška hotová.
+
+### Nastav datovou hranici před prvním uploadem
+
+Nejnebezpečnější okamžik není založení účtu. Je to první upload. Člověk má soubor připravený, nástroj se tváří užitečně a ruka už sahá po tlačítku. Tady pomůže jednoduchá datová hranice:
+
+- jaká data se smí použít,
+- jaká data se nesmí použít nikdy,
+- zda stačí syntetický nebo anonymizovaný vzorek,
+- kdo upload provede,
+- kde bude uložen výstup,
+- kdy se výstup smaže nebo přesune do schváleného systému.
+
+Praktické pravidlo: pokud výsledek potřebuje jen strukturu, formát nebo nápad, nepoužívej reálná osobní data. Vezmi syntetický vzorek se stejnými typy polí. Pokud musíš použít reálný export, zapiš proč, omez rozsah a přidej datum smazání. Export bez data konce je budoucí nález v auditu.
+
+### Udělej kartu jednorázového schválení
+
+Karta má být kratší než debata, kterou nahrazuje:
+
+| Pole | Zápis |
+| --- | --- |
+| Nástroj | název a URL bez trackingových parametrů |
+| Účel | jedna věta rozhodnutí nebo práce |
+| Typ použití | jednorázová zkouška / pomocný nástroj / nový dodavatel |
+| Data povolena | veřejná data, syntetický vzorek, interní neosobní data nebo přesně omezený export |
+| Data zakázána | zákaznické payloady, tokeny, zdravotní/finanční údaje, celé CRM exporty, produkční dumpy |
+| Vlastník | konkrétní člověk nebo role |
+| Konec | datum vypnutí, smazání dat nebo převedení do běžné vendor karty |
+| Kontrola | kdo ověří, že účet, exporty a automatizace nezůstaly viset |
+
+U malého týmu může karta žít v rozhodovacím logu, v interním issue nebo v dodavatelském registru jako dočasný záznam. Nemusí to být nový systém. Hlavní je, aby karta přežila víc než chatovou zprávu.
+
+### Nepouštěj dočasnost do produkční cesty potichu
+
+Jakmile nástroj začne ovlivňovat registraci, platbu, support, onboarding, analytiku, e-mail, dostupnost nebo zákaznická data, už to není jen zkouška. Je to provozní změna.
+
+Signály, že dočasnost končí:
+
+- přidali jste webhook, API token nebo automatickou synchronizaci,
+- nástroj se objevil v produkční konfiguraci,
+- výstupy používá support nebo sales opakovaně,
+- nástroj drží seznam zákazníků, leadů nebo uživatelů,
+- někdo ho chce dát do onboarding návodu,
+- bez nástroje nejde dokončit běžná práce.
+
+V takové chvíli zkoušku buď ukonči, nebo ji povýš na běžného dodavatele s kartou, vlastníkem, přístupy, retencí, exit plánem a veřejnými dopady. Třetí možnost „necháme to být, však to funguje“ je jen vendor lock-in v teplácích.
+
+### Zavři zkoušku stejně vědomě jako ji otevíráš
+
+Zavírací kontrola má pět kroků:
+
+1. Smazat nebo přesunout výstupy podle původního účelu.
+2. Odebrat přístupy, tokeny, webhooky a integrace.
+3. Zrušit trial, billing nebo automatické prodloužení.
+4. Zapsat výsledek: nepoužít, použít jinak, převést na dodavatele, nebo zopakovat s omezeným rozsahem.
+5. Opravit dokumentaci, pokud se zkouška propsala do návodu, šablony nebo pracovního postupu.
+
+Pokud zkouška ukázala hodnotu, neznamená to automaticky nákup. Znamená to, že má smysl udělat normální rozhodnutí. Dobrá zkouška končí otázkou: „Chceme tohle provozně vlastnit?“ Ne otázkou: „Už jsme tam nahráli data, tak to asi necháme.“
+
+### Příklad: Jednorázová kontrola obsahu
+
+| Pole | Zápis |
+| --- | --- |
+| Nástroj | externí kontrola čitelnosti textu |
+| Účel | najít nejasné formulace ve veřejné landing page před publikací |
+| Data povolena | pouze veřejný text stránky bez interních poznámek a zákaznických příkladů |
+| Data zakázána | CRM exporty, neveřejné case studies, interní pricing poznámky |
+| Vlastník | obsahový vlastník stránky |
+| Konec | účet zrušit a výstup uložit do redakčního issue do pátku |
+| Kontrola | po publikaci potvrdit, že v nástroji nezůstaly dokumenty ani automatické přístupy |
+
+Výsledek může být jednoduchý: tři věty upravit, nástroj dál nepoužívat. To je legitimní konec. Ne každý nástroj, který jednou pomohl, si zaslouží židli u stolu.
+
+### Checklist: Dočasný nástroj
+
+- [ ] Zkouška má jednu větu účelu.
+- [ ] Víme, zda jde o jednorázovou zkoušku, pomocný nástroj nebo nového dodavatele.
+- [ ] Před prvním uploadem je jasné, jaká data jsou povolená a zakázaná.
+- [ ] Preferujeme syntetický nebo veřejný vzorek, pokud reálná data nejsou nezbytná.
+- [ ] Karta obsahuje vlastníka, datum konce a zavírací kontrolu.
+- [ ] Trial, billing, tokeny, webhooky a automatizace mají jasný konec.
+- [ ] Pokud nástroj vstoupí do produkční cesty, převádí se na běžnou vendor kartu.
+- [ ] Výstupy zůstávají jen tam, kde mají další účel.
+- [ ] Dokumentace a support šablony se po zkoušce uklidí.
+- [ ] Závěr zkoušky je rozhodnutí, ne tiché pokračování.
+
+### Mini úkol
+
+Najdi jeden nástroj, který tým použil „jen na chvíli“ během posledních tří měsíců. Zapiš k němu účel, použitá data, vlastníka a datum konce. Pokud už konec proběhl, ověř smazání výstupů, vypnutí účtu a absenci webhooků nebo tokenů. Pokud konec neproběhl, rozhodni jednou větou: ukončit, omezit, nebo převést na běžného dodavatele.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -48855,6 +48978,7 @@ Vyber tři dodavatele, které tým používá každý týden. U každého doplň
 
 ## Pracovní log
 
+- 2026-07-23: Doplněna příloha o dočasném nástroji bez trvalého datového stínu: rozlišení jednorázové zkoušky, pomocného nástroje a nového dodavatele, věta účelu, datová hranice před prvním uploadem, karta jednorázového schválení, signály přechodu do produkční cesty, zavírací kontrola, praktický příklad, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro schvalování dočasných nástrojů bez stínových dodavatelů. Bez nových aktuálních externích tvrzení, navázáno na existující části o dodavatelském registru, vendor exitu, retenci a privacy-first minimalizaci; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
 - 2026-07-23: Doplněna příloha o dodavatelském registru v klidovém provozu bez nekonečného auditu: rozdíl mezi registrem, auditem a nákupním rozhodnutím, minimální vendor karta, tříotázková revize, prioritizace podle datového dopadu, kontrola bezplatných a historických nástrojů mimo faktury, omezení citlivých dat v registru, malý měsíční a kvartální revizní rituál, praktický příklad, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro průběžnou vendor hygiene. Bez nových aktuálních externích tvrzení, navázáno na existující zdroje k GDPR, dodavatelům, přístupům, retenci a vendor exitu; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
 - 2026-07-23: Doplněna příloha o kontrole po vendor exitu bez stínových kopií: zavírací okno po přepnutí, kontrola exportů, přístupů, integrací, dokumentace a veřejných slibů, rozlišení archivu od zapomenuté kopie, ověření nového pracovního návyku týmu, zavírací záznam, příklad zavření starého helpdesku, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro ověření stínových kopií a mrtvých integrací po odchodu od dodavatele. Bez nových aktuálních externích tvrzení, navázáno na existující zdroje k GDPR, retenci, přístupům, zpracovatelům a vendor exitu; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
 - 2026-07-23: Doplněna příloha o odchodu od dodavatele bez datového ocasu: migrační balík, export jen dat s novým účelem, částečné smoke testy, vypnutí starých vstupů, doložení výmazu bez zbytečných interních úniků, aktualizace privacy notice, trust přehledu, datové mapy a runbooků, praktický příklad odchodu od analytického nástroje, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro řízený vendor exit. Bez nových aktuálních externích tvrzení, navázáno na existující zdroje k GDPR, zpracovatelům, exportu, retenci a vendor lock-inu; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
