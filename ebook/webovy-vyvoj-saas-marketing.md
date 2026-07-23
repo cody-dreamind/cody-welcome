@@ -99,6 +99,7 @@ Když se nechceš vracet do celé knihy, hledej konkrétní nástroj podle výst
 | Odpověď na bezpečnostní dotaz zákazníka | „trust center“, „DPA“, „přístupový audit“ nebo kapitolu 10 | věcná odpověď bez marketingové mlhy a bez sdílení interních detailů |
 | Důvěru před nákupem | „nákupní trust balíček“, „trust center“ nebo „bezpečnostní dotaz“ | veřejný balíček odpovědí pro nákup, IT a právní kontrolu bez povinného formuláře |
 | Ověřit provozní slib před podpisem | „veřejný důkaz slibu“, „nákupní trust balíček“ nebo „SLA“ | krátký seznam veřejně ověřitelných důkazů dostupnosti, dat a podpory |
+| Odpovědět na due diligence bez úniku detailů | „due diligence odpověď“, „bezpečnostní dotazník“ nebo „trust balíček“ | odpověď rozdělená na veřejnou, sdílenou pod kontrolou a interní část |
 | Úklid po spolupráci nebo projektu | „offboarding“, „ukončení spolupráce“ nebo „předání projektu“ | předávací a mazací checklist s uzavřením přístupů |
 
 Pravidlo pro práci s rejstříkem: otevři maximálně tři nalezené části, vyber jednu a zapiš výstup. Pokud po deseti minutách pořád skáčeš mezi odkazy, vrať se k tabulce „Kudy začít podle aktuální bolesti“ a zúž problém. E-book není buffet. Teda je, ale bez talíře si stejně odneseš jen chaos.
@@ -46081,6 +46082,101 @@ Naopak špatný důkaz je takový, který funguje jen interně, vyžaduje ručn�
 
 Vyber jednu často opakovanou nákupní otázku a napiš pro ni veřejnou odpověď ve třech odstavcích: co platí, kde je hranice slibu a kam se obrátit pro detail. Potom ji zkontroluj proti privacy notice, pricingu a support šabloně. Pokud odpověď nejde zveřejnit bez formuláře, pravděpodobně neřešíš důvěrnost. Řešíš strach říct věci jednoduše.
 
+## Příloha: Due diligence odpověď bez úniku interních detailů
+
+Když SaaS začne prodávat větším firmám, dřív nebo později přijde bezpečnostní dotazník, právní kontrola, procurement tabulka nebo krátký e-mail typu: „Pošlete nám informace k hostingu, subdodavatelům, šifrování, zálohám a incidentům.“ To je dobré znamení. Zákazník nechce jen kliknout na trial; chce vědět, jestli produkt může pustit do svého provozu bez zbytečného rizika.
+
+Špatná reakce je poslat co nejvíc interních detailů, aby firma působila otevřeně. Ještě horší reakce je schovat všechno za sales call a tvářit se, že bezpečnost je obchodní tajemství od podlahy po strop. Privacy-first odpověď má být užitečná, věcná a vrstvená: co může být veřejné, co patří do řízeného procesu a co má zůstat interní.
+
+> Codyho komentář: Transparentnost není livestream z kotelny. Kupující potřebuje ověřit riziko, ne dostat mapu, podle které půjde lépe rozbít provoz. Dospělá odpověď říká dost, ale ne všechno. Což je mimochodem užitečné pravidlo i pro rodinné oslavy.
+
+### Rozděl odpověď do tří vrstev
+
+Než začneš vyplňovat dotazník, označ každou odpověď jednou ze tří vrstev. Tím zabráníš tomu, aby jeden unavený člověk v pátek večer poslal zákazníkovi interní runbook, screenshot z produkce nebo seznam přístupů.
+
+| Vrstva | Co sem patří | Příklad |
+| --- | --- | --- |
+| Veřejné | informace, které může číst kdokoliv bez rizika | region provozu, kategorie subdodavatelů, bezpečnostní kontakt, princip exportu dat |
+| Sdílené pod kontrolou | detail pro konkrétního zákazníka v nákupním nebo smluvním procesu | DPA, konkrétnější seznam subdodavatelů, souhrn technických opatření, odpověď na bezpečnostní dotazník |
+| Interní | informace, které by zhoršily bezpečnost nebo odhalily neveřejný provoz | přesná topologie, interní IP adresy, jména administrátorů, tajemství, neveřejné incidentní detaily |
+
+Praktické pravidlo: pokud by odpověď pomohla zákazníkovi rozhodnout, ale zároveň by pomohla útočníkovi mířit přesněji, patří do sdílené nebo interní vrstvy. Pokud pomáhá hlavně pochopit princip a neodhaluje citlivý detail, patří ven.
+
+### Začni otázkou, ne přílohou
+
+Due diligence odpověď nemá být automatické přeposlání všeho, co firma má. Začni tím, jaké rozhodnutí zákazník dělá.
+
+Typické situace:
+
+| Situace zákazníka | Co nejspíš potřebuje | Co neposílat automaticky |
+| --- | --- | --- |
+| První nákupní kontrola | stručný trust balíček, data region, subdodavatelé, export a kontakt | interní incidentní logy, screenshoty z monitoringu |
+| Právní kontrola | DPA, role správce/zpracovatele, retence, přenosy, práva uživatelů | technické runbooky a osobní kontakty mimo schválený kanál |
+| Bezpečnostní kontrola | souhrn opatření, řízení přístupů, zálohy, logování, zranitelnosti | přesné konfigurace, tajemství, neveřejné nálezy bez kontextu |
+| Procurement | plán, SLA nebo support model, fakturace, ukončení služby | surová CRM historie nebo interní cenové výjimky |
+
+Tento filtr šetří čas. Místo jedné obří odpovědi připravíš menší balíček, který odpovídá na skutečnou nejistotu. Zákazník dostane jasnější odpověď a tým neposílá citlivosti jen proto, že se nevešly do šuplíku „nevíme kam s tím“.
+
+### Použij odpovědní kartu
+
+Každý opakovaný due diligence dotaz přepiš na krátkou kartu. Karta pomůže sjednotit sales, support, právní a produktový tým, aniž by se z odpovědi stal román.
+
+| Pole | Zápis |
+| --- | --- |
+| Dotaz | Kde jsou uložena zákaznická data? |
+| Rozhodnutí zákazníka | Může produkt používat pro evropské zákazníky a interní týmy? |
+| Veřejná odpověď | Hlavní provozní model, regiony, účely zpracování a odkaz na trust balíček. |
+| Sdílený detail | DPA, seznam subdodavatelů a případné smluvní přílohy podle procesu. |
+| Interní hranice | Neposíláme přesnou topologii, interní přístupové role, IP adresy ani screenshoty administrace. |
+| Vlastník odpovědi | Produkt s kontrolou právní/provozní vrstvy podle tématu. |
+| Revize | Při změně hostingu, subdodavatele, typu dat nebo retence. |
+
+Karta má být krátká, ale tvrdá v hranicích. Když někdo chce poslat víc, musí umět říct proč, komu, jakým kanálem a na jak dlouho bude informace relevantní.
+
+### Odpovídej věcně a bez marketingové mlhy
+
+Bezpečnostní a právní odpovědi nesnášejí kouřovou clonu. Věty typu „bereme bezpečnost maximálně vážně“ neodpovídají na nic. Lepší je napsat konkrétně, ale bez citlivých detailů.
+
+Příklad slabé odpovědi:
+
+> Bezpečnost je pro nás prioritou a používáme moderní technologie.
+
+Lepší odpověď:
+
+> Přístupy do produkčních systémů jsou omezené podle role, vybrané rizikové akce vyžadují vyšší oprávnění a provozní logy nepoužíváme jako marketingový zdroj. Detailní interní konfiguraci nesdílíme veřejně; pro nákupní kontrolu umíme dodat souhrn technických a organizačních opatření přes schválený kanál.
+
+Tahle odpověď pořád není bezpečnostní audit. Ale zákazník z ní chápe princip, hranici i další krok. A tým neprozradil nic, co by patřilo jen do interní dokumentace.
+
+### Nesbírej z dotazníku nový datový nepořádek
+
+Due diligence proces často vytváří vlastní datový odpad: vyplněné tabulky, přílohy, screenshoty, kopie smluv, e-mailové přeposílání a interní poznámky. U privacy-first provozu i tento proces potřebuje malou hygienu.
+
+Drž se těchto pravidel:
+
+- ukládej jen aktuální finální verzi odpovědi, ne deset pracovních kopií,
+- nepřikládej screenshoty s osobními údaji, tokeny, URL interních nástrojů nebo jmény administrátorů,
+- citlivější odpovědi posílej přes schválený kanál, ne přes náhodné přílohy v dlouhém vlákně,
+- u šablon drž datum poslední revize a vlastníka,
+- staré odpovědi označ jako neaktuální nebo je smaž podle retenčního pravidla,
+- z opakovaných dotazů vyráběj veřejné odpovědi, pokud to jde bezpečně.
+
+Cílem není vytvořit další knihovnu tajných PDF. Cílem je snížit nejistotu zákazníka a zároveň nezvětšit vlastní riziko.
+
+### Checklist: Due diligence odpověď
+
+- [ ] Každý dotaz má určenou veřejnou, sdílenou a interní vrstvu.
+- [ ] Odpověď řeší rozhodnutí zákazníka, ne jen kopíruje existující dokumenty.
+- [ ] Veřejné odpovědi nevyžadují lead formulář ani marketingový souhlas.
+- [ ] Sdílené detaily jdou přes schválený kanál a mají jasného vlastníka.
+- [ ] Interní topologie, tajemství, neveřejné incidentní detaily a osobní údaje zůstávají interní.
+- [ ] Šablony mají datum revize a spouštěč další kontroly.
+- [ ] Opakované dotazy se převádějí do trust balíčku nebo dokumentace.
+- [ ] Po uzavření procesu nezůstávají v týmu pracovní kopie s citlivými daty.
+
+### Mini úkol
+
+Vyber poslední bezpečnostní, právní nebo procurement dotaz od zákazníka a rozděl odpověď do tří vrstev: veřejné, sdílené pod kontrolou a interní. Potom napiš jednu větu, kterou lze zveřejnit v trust balíčku, a jednu hranici, kterou tým nebude překračovat ani při tlaku na rychlé uzavření obchodu.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -46270,6 +46366,7 @@ Vyber jednu často opakovanou nákupní otázku a napiš pro ni veřejnou odpov�
 
 ## Pracovní log
 
+- 2026-07-23: Doplněna příloha o due diligence odpovědi bez úniku interních detailů: vrstvení odpovědí na veřejné, sdílené pod kontrolou a interní, rozlišení nákupní/právní/bezpečnostní/procurement situace, odpovědní karta, příklady věcné formulace bez marketingové mlhy, hygiena pracovních kopií, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro odpověď na due diligence bez úniku detailů. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně ověřeno, že `cody.dreamind.cz` přes lokální proxy po TLS tunelu končí chybou `Empty reply from server`, přímé HTTPS bez proxy selhává kvůli expirovanému veřejnému Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT) a v tomto běhu není dostupný `certbot`, nginx ani `/etc/letsencrypt` pro bezpečnou obnovu certifikátu.
 - 2026-07-23: Rozšířena příloha o nákupním trust balíčku podkapitolou „Přidej veřejný důkaz slibu“: propojení veřejných tvrzení s bezpečně ověřitelnými důkazy pro HTTPS, evropský provoz, incidentní komunikaci, export a pricing limity; do rejstříku pracovních nástrojů přidána směrovka pro ověření provozního slibu před podpisem. Bez nových aktuálních externích tvrzení, navázáno na existující zdroje k Let's Encrypt, Certbotu a provozním healthcheckům. Provozně znovu ověřeno, že `cody.dreamind.cz` přes lokální proxy po TLS tunelu končí chybou `Empty reply from server`, přímé HTTPS bez proxy selhává kvůli expirovanému veřejnému Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), zatímco diagnostické přímé HTTPS s `-k` vrací `200 OK` z nginx/Next.js na `91.99.227.53`; dostupné prostředí pořád neobsahuje SSH/deploy/certbot přístup, kterým by šlo certifikát bezpečně obnovit.
 
 - 2026-07-22: Doplněna příloha o nákupním trust balíčku bez lead-gatingu: veřejné odpovědi pro data, provoz, bezpečnost, práva a odchod, dodavatele a obchodní pravidla, rozlišení veřejné odpovědi od interních poznámek, převod opakovaných nákupních dotazů na veřejné odpovědi, karta bloku, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro důvěru před nákupem. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně ověřeno, že `cody.dreamind.cz` přes lokální proxy po TLS tunelu končí `Empty reply from server`, přímé HTTPS bez proxy selhává kvůli expirovanému veřejnému Let's Encrypt certifikátu `CN=cody.dreamind.cz` od `E8` (`notAfter` 2026-07-17 19:35:56 GMT), diagnostické přímé HTTPS s `-k` vrací `200 OK` z nginx/Next.js na `91.99.227.53` a dostupný pracovní prostor neobsahuje bezpečný SSH/deploy/certbot přístup pro obnovu certifikátu.
