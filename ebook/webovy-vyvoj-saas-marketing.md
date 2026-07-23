@@ -115,6 +115,7 @@ Když se nechceš vracet do celé knihy, hledej konkrétní nástroj podle výst
 | Uklidit stopy po ukončené URL | „stopy po ukončené URL“, „mrtvé cesty“ nebo „vyhledávání po smazání“ | seznam šablon, navigací, interního vyhledávání, support odpovědí a měření, které nesmí starou URL dál živit |
 | Aktualizovat indexační soubory po úklidu obsahu | „sitemap robots po úklidu“, „indexační inventář“ nebo „robots po smazání“ | krátká kontrola, že sitemap a robots odpovídají aktuálním veřejným cestám bez blokování a starých URL |
 | Uklidit RSS a veřejné distribuční stopy po změně obsahu | „RSS po úklidu“, „feed po sloučení“ nebo „veřejná distribuce obsahu“ | rozhodnutí, co se znovu publikuje, co zůstane archivní a co se ve feedu nemá tvářit jako novinka |
+| Udržet archivní obsah užitečný bez starých slibů | „archivní obsah“, „staré sliby“ nebo „archivní poznámka“ | karta archivní stránky s jasným stavem, doporučenou aktuální cestou, revizí a minimem měření |
 | Úklid po spolupráci nebo projektu | „offboarding“, „ukončení spolupráce“ nebo „předání projektu“ | předávací a mazací checklist s uzavřením přístupů |
 
 Pravidlo pro práci s rejstříkem: otevři maximálně tři nalezené části, vyber jednu a zapiš výstup. Pokud po deseti minutách pořád skáčeš mezi odkazy, vrať se k tabulce „Kudy začít podle aktuální bolesti“ a zúž problém. E-book není buffet. Teda je, ale bez talíře si stejně odneseš jen chaos.
@@ -47991,6 +47992,146 @@ Tahle karta vypadá jako drobnost, ale šetří dvě typické chyby: znovupublik
 
 Otevři jeden RSS nebo Atom feed svého webu a najdi poslední obsahovou změnu, která nebyla úplně novým článkem. Rozhodni, jestli měla být ve feedu jako novinka, aktualizace, release poznámka nebo vůbec. Potom ověř jednu konkrétní věc: stabilní identitu položky, datum publikace, cílovou URL nebo absenci zbytečných tracking parametrů. Pokud feed nemáte, zapiš první malý úkol: veřejný feed pro blog, changelog nebo e-book bez povinného newsletteru.
 
+## Příloha: Archivní obsah bez zapomenutých slibů
+
+Archiv není odpadkový koš s hezčí cedulkou. Je to veřejná stopa rozhodnutí, dokumentace, článků, nabídek nebo návodů, které už nemají být hlavní doporučenou cestou, ale pořád mohou pomoct čtenáři pochopit kontext. Pokud archiv jen necháš žít vlastním životem, časem začne prodávat staré balíčky, slibovat staré bezpečnostní postupy nebo vodit lidi do neexistujících funkcí.
+
+Dobrá archivní otázka zní:
+
+„Když člověk tuto stránku najde z vyhledávání, RSS čtečky, starého odkazu nebo zákaznického vlákna, pozná do deseti sekund, co je aktuální a co je historie?“
+
+Privacy-first provoz má archiv radši než nekonečné mazání, ale jen když je archiv poctivý. Stránka může zůstat dostupná kvůli transparentnosti, zpětným odkazům nebo starším zákazníkům. Nesmí ale potichu sbírat další leady, lákat na neplatné sliby nebo vytvářet dojem, že staré doporučení pořád platí.
+
+### Rozliš archiv, dokumentaci a aktivní prodej
+
+Největší škoda vzniká, když starý obsah vypadá stejně jako aktuální obsah. Čtenář pak nemá signál, jestli se má řídit návodem, kliknout na CTA, nebo jen chápat historický kontext.
+
+Použij tři stavy:
+
+| Stav stránky | Co znamená | Co má čtenář vidět |
+| --- | --- | --- |
+| Aktivní | doporučená aktuální cesta | běžné CTA, aktuální metadata, místo v navigaci |
+| Archivní | historická nebo zastaralá stopa | jasná archivní poznámka, datum poslední platnosti, odkaz na aktuální cestu |
+| Ukončená | obsah už nemá veřejnou hodnotu nebo by mátl | `404`, `410`, konkrétní redirect nebo krátké vysvětlení podle situace |
+
+Archivní stránka nemá být schovaná tak, aby ji nikdo nenašel, pokud na ni pořád vedou rozumné odkazy. Má být označená tak, aby nikdo nepřečetl starý slib jako aktuální závazek. To je rozdíl mezi transparentností a digitální půdou plnou krabic.
+
+### Dej archivní poznámku nad první rozhodnutí
+
+Archivní upozornění patří před první CTA, formulář, technický postup nebo doporučení. Pokud je až na konci článku, čtenář už může mít v hlavě špatné rozhodnutí.
+
+Dobrá archivní poznámka obsahuje:
+
+- stav stránky,
+- datum nebo událost, od které už obsah není aktuální,
+- krátký důvod,
+- aktuální doporučenou cestu,
+- informaci, jestli starý obsah zůstává kvůli historii, kompatibilitě nebo zákaznickému kontextu.
+
+Příklad:
+
+> Tento návod je archivní. Platí pro starší export do CSV používaný před zavedením jednotné stránky exportu dat. Aktuální postup najdeš v dokumentaci k exportu dat. Tuto stránku necháváme dostupnou jen kvůli starším odkazům a historickému kontextu.
+
+Tohle je nudná věta. Výborně. Archivní věta nemá vyhrát copywriterskou soutěž, má zabránit špatnému použití starého obsahu.
+
+### Sundej prodejní a sběrné prvky
+
+Když stránka přestane být aktivní, často na ní zůstanou staré prvky: formulář na demo, lead magnet, banner na starý plán, tlačítko k neexistujícímu trialu, embed z cizí služby nebo měření kampaně, která dávno skončila. To je přesně ten moment, kdy archiv začne dělat škodu.
+
+U archivní stránky zkontroluj:
+
+- zda CTA vede na aktuální alternativu, ne na starý flow,
+- zda formuláře opravdu ještě potřebuješ,
+- zda stránka nesbírá marketingové souhlasy pro neaktuální nabídku,
+- zda embed nebo externí skript není zbytečný jen kvůli historické ukázce,
+- zda metadata neprodávají starý slib ve výsledcích vyhledávání,
+- zda interní vyhledávání označí stránku jako archivní.
+
+Pokud chceš nechat starý formulář kvůli legacy zákazníkům, napiš komu slouží. Například „pro zákazníky se smlouvou před dubnem 2026“. Bez té věty bude formulář vypadat jako otevřená nabídka pro všechny.
+
+### Udrž jednu aktuální cestu
+
+Archivní obsah má ukazovat ven z historie. Ne do dalších tří archivů. Po větším úklidu si zapiš jednu aktuální cílovou stránku, kterou chceš lidem doporučit. Může to být dokumentace, pricing, changelog, trust centrum, support odpověď nebo nová kapitola e-booku.
+
+Praktické pravidlo:
+
+- archivní článek může odkazovat na jednu hlavní aktuální cestu,
+- vedlejší odkazy drž jen tam, kde pomáhají pochopit historii,
+- CTA přepiš podle dnešní akce, ne podle starého kampanového cíle,
+- interní šablony a support odpovědi oprav tak, aby neposílaly lidi zpět do archivu,
+- pokud aktuální cesta neexistuje, archivní stránka odhalila produktový dluh, ne obsahový problém.
+
+> Codyho komentář: Archiv bez aktuální cesty je jako cedule „tady kdysi býval most“. Historicky zajímavé, prakticky mokré boty.
+
+### Měř jen údržbový signál
+
+Archivní stránka většinou nepotřebuje bohatou analytiku. Potřebuješ vědět, jestli pořád plní užitečnou roli, nebo jestli jen mate lidi.
+
+Chudé signály stačí:
+
+- agregovaná návštěvnost archivní stránky,
+- počet support dotazů, které vznikly po jejím přečtení,
+- počet starých interních odkazů, které na ni pořád vedou,
+- počet prokliků na aktuální doporučenou cestu v agregaci,
+- ruční poznámka z review, že stránka je stále potřebná nebo připravená k ukončení.
+
+Naopak nepotřebuješ session replay, individuální tokeny v archivních odkazech ani profilování lidí, kteří čtou starý obsah. Pokud archiv funguje jen díky tomu, že sleduješ každého čtenáře, problém není v analytice. Problém je v nejasném textu.
+
+### Karta archivní stránky
+
+Použij ji při archivaci článku, dokumentační stránky, starého pricingu, release poznámky, právního vysvětlení nebo kampaně.
+
+| Pole | Zápis |
+| --- | --- |
+| URL |  |
+| Původní role | článek / dokumentace / pricing / kampaň / trust odpověď |
+| Nový stav | archivní / ukončená / redirect / aktivní po úpravě |
+| Proč archivujeme |  |
+| Od kdy není aktuální | datum, verze produktu nebo obchodní změna |
+| Aktuální cesta | jedna hlavní URL nebo kontakt |
+| Co odstranit | formulář / CTA / embed / tracking / metadata / interní odkazy |
+| Co zachovat | historický kontext / legacy postup / veřejný důkaz změny |
+| Měření | agregovaný údržbový signál nebo žádné |
+| Další review | datum nebo podmínka ukončení |
+| Vlastník | obsah / produkt / support / právní / provoz |
+
+Karta je malá záměrně. Archivní rozhodnutí se nemá proměnit v archeologickou expedici s projektovým manažerem a slavnostní helmou.
+
+### Příklad
+
+| Pole | Zápis |
+| --- | --- |
+| URL | `/blog/pruvodce-starou-registraci` |
+| Původní role | návod k registraci před novým onboardingem |
+| Nový stav | archivní |
+| Proč archivujeme | onboarding je nahrazen pozvánkami a workspace průvodcem |
+| Od kdy není aktuální | od releasu onboardingu 2.0 |
+| Aktuální cesta | `/docs/onboarding-workspace` |
+| Co odstranit | staré CTA na trial, starý screenshot formuláře, UTM odkazy |
+| Co zachovat | vysvětlení pro zákazníky, kteří návod dostali ve starších e-mailech |
+| Měření | agregovaný počet návštěv a support dotazů na starý onboarding |
+| Další review | za 60 dní, nebo po poklesu support dotazů na nulu |
+| Vlastník | produktová dokumentace + support |
+
+Výsledek není jen uklizená stránka. Support ví, kam lidi posílat. Marketing neměří starou kampaň jako živou. Produkt vidí, jestli nový onboarding skutečně nahradil starý postup. A nikdo nemusí lovit pravdu v deset měsíců starém článku.
+
+### Checklist: Archivní obsah
+
+- [ ] Stránka má jasný stav: aktivní, archivní nebo ukončená.
+- [ ] Archivní poznámka je před prvním CTA, formulářem nebo doporučením.
+- [ ] Čtenář vidí, od kdy a proč obsah není aktuální.
+- [ ] Existuje jedna hlavní aktuální cesta.
+- [ ] Staré formuláře, kampaně, embedy a CTA jsou odstraněné nebo přepsané.
+- [ ] Metadata, title a description neprodávají starý slib jako aktuální nabídku.
+- [ ] Interní vyhledávání a navigace umí archivní stav ukázat.
+- [ ] Support, sales a onboarding šablony neposílají lidi na archiv jako hlavní cestu.
+- [ ] Měření je agregované a slouží jen údržbě nebo rozhodnutí o ukončení.
+- [ ] Je zapsané datum další revize nebo podmínka úplného ukončení.
+
+### Mini úkol
+
+Vyber jednu starou stránku, která pořád existuje kvůli odkazům, historii nebo legacy zákazníkům. Neřeš celý archiv. Otevři stránku jako nový čtenář a zapiš tři věci: poznám, že je archivní; vím, kam jít teď; stránka po mně nechce neaktuální akci. Potom oprav jednu nejbližší věc: archivní poznámku, CTA, formulář, metadata nebo interní odkaz. Pokud nevíš, zda stránku zachovat, vyplň kartu archivní stránky a dej jí review za 30 až 60 dní.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -48184,6 +48325,7 @@ Otevři jeden RSS nebo Atom feed svého webu a najdi poslední obsahovou změnu,
 
 ## Pracovní log
 
+- 2026-07-23: Doplněna příloha o archivním obsahu bez zapomenutých slibů: rozlišení aktivní, archivní a ukončené stránky, archivní poznámka před prvním rozhodnutím, úklid starých CTA/formulářů/embedů/metadat, jedna aktuální cesta z archivu, chudé údržbové měření, karta archivní stránky, praktický příklad, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro udržení archivního obsahu užitečného bez starých slibů. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
 - 2026-07-23: Doplněna příloha o RSS po obsahovém úklidu bez falešných novinek: rozlišení nové publikace, aktualizace, archivace a tichého úklidu, stabilní identita položek ve feedu, omezení trackingových parametrů, karta feed úklidu, praktický příklad, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro úklid RSS a veřejných distribučních stop po změně obsahu. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
 - 2026-07-23: Doplněna příloha o sitemap a robots po obsahovém úklidu bez indexačního nepořádku: rozlišení sitemap, robots, HTTP statusu, canonical a RSS, malý indexační inventář, varování před používáním `robots.txt` jako náhrady ukončení obsahu nebo ochrany dat, kontrola generátoru sitemap/RSS, karta indexačního úklidu, praktický příklad, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro aktualizaci indexačních souborů po úklidu obsahu. Bez nových aktuálních externích tvrzení, navázáno na existující zdroje k sitemap, robots, HTTP statusům a privacy-first měření; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
 - 2026-07-23: Doplněna příloha o stopách po ukončené URL bez mrtvých cest: rozlišení veřejných, interních a automatických stop, stopovací karta, kontrola interního vyhledávání, oprava support/sales/onboarding šablon, vědomé ukončení starého měření, praktický příklad, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro úklid stop po ukončené URL. Bez nových aktuálních externích tvrzení, navázáno na existující zdroje k HTTP statusům, sitemap, odkazovým kontrolám a privacy-first měření; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
