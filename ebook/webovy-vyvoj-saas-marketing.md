@@ -114,6 +114,7 @@ Když se nechceš vracet do celé knihy, hledej konkrétní nástroj podle výst
 | Ukončit starou URL bez falešné stránky | „404 410 archiv“, „ukončená URL“ nebo „konec staré stránky“ | rozhodnutí, zda stará URL vrátí 404, 410, archivní vysvětlení nebo zůstane dočasně přesměrovaná |
 | Uklidit stopy po ukončené URL | „stopy po ukončené URL“, „mrtvé cesty“ nebo „vyhledávání po smazání“ | seznam šablon, navigací, interního vyhledávání, support odpovědí a měření, které nesmí starou URL dál živit |
 | Aktualizovat indexační soubory po úklidu obsahu | „sitemap robots po úklidu“, „indexační inventář“ nebo „robots po smazání“ | krátká kontrola, že sitemap a robots odpovídají aktuálním veřejným cestám bez blokování a starých URL |
+| Uklidit RSS a veřejné distribuční stopy po změně obsahu | „RSS po úklidu“, „feed po sloučení“ nebo „veřejná distribuce obsahu“ | rozhodnutí, co se znovu publikuje, co zůstane archivní a co se ve feedu nemá tvářit jako novinka |
 | Úklid po spolupráci nebo projektu | „offboarding“, „ukončení spolupráce“ nebo „předání projektu“ | předávací a mazací checklist s uzavřením přístupů |
 
 Pravidlo pro práci s rejstříkem: otevři maximálně tři nalezené části, vyber jednu a zapiš výstup. Pokud po deseti minutách pořád skáčeš mezi odkazy, vrať se k tabulce „Kudy začít podle aktuální bolesti“ a zúž problém. E-book není buffet. Teda je, ale bez talíře si stejně odneseš jen chaos.
@@ -47882,6 +47883,114 @@ Výsledek je malý, ale důležitý: vyhledávače, feedy, interní odkazy a tý
 
 Vyber jednu URL, kterou jste v poslední době sloučili, archivovali nebo smazali. Otevři sitemap, robots a cílovou stránku. Zkontroluj tři věci: stará URL není v sitemap, nová URL není omylem blokovaná a canonical ukazuje na finální adresu. Pokud něco nevíš ověřit automaticky, udělej ruční kontrolu a zapiš, kde je zdroj pravdy pro příští build. Jedna opravená indexační stopa je lepší než nový dashboard, který jen hezky počítá starý nepořádek.
 
+## Příloha: RSS po obsahovém úklidu bez falešných novinek
+
+RSS a Atom feedy jsou privacy-first poklad. Čtenář si bere aktualizace přímo, bez platformního algoritmu, reklamního pixelu a profilu zájmů. Právě proto s nimi zacházej poctivě. Když po obsahovém úklidu necháš feed vyprávět jiný příběh než web, trestáš nejvěrnější čtenáře. A to je hloupé i bez cookies.
+
+Dobrá otázka po úpravě obsahu zní:
+
+„Dostane člověk, který nás sleduje přes přímý odběr, pravdivou informaci o změně, nebo mu jen omylem znovu pošleme starý obsah jako nový?“
+
+Feed není jen technický seznam článků. Je to veřejný distribuční kontrakt. Když sloučíš dvě stránky, přejmenuješ kapitolu, archivuješ starý návod nebo vydáš novou verzi e-booku, rozhodni zvlášť, jestli je to nová publikace, aktualizace existující položky, nebo tichý úklid, který do feedu vůbec nepatří.
+
+### Rozliš změnu obsahu od nové publikace
+
+Ne každá úprava má dostat nové místo ve feedu. Malá oprava překlepu, redirectu nebo metadat není novinka pro čtenáře. Větší přepracování, nové veřejné vydání nebo změna doporučení už novinka být může.
+
+Použij jednoduché rozdělení:
+
+| Typ změny | Co udělat ve feedu | Poznámka pro čtenáře |
+| --- | --- | --- |
+| Překlep, drobná formulace, interní odkaz | nic neposílat | žádná |
+| Oprava chybného doporučení | aktualizovat původní položku nebo vydat krátkou poznámku podle dopadu | co se změnilo a proč |
+| Sloučení podobných článků | neposílat obě staré položky znovu; případně vydat jednu poznámku o nové cílové stránce | kde je nová verze |
+| Archivace zastaralého návodu | feed jen pokud archivace mění doporučenou cestu | co už nepoužívat |
+| Nová kapitola nebo veřejný výřez | nová položka | pro koho je užitečná |
+| Vydání nové verze e-booku | jedna release položka | hlavní praktické změny |
+
+Cílem není být potichu za každou cenu. Cílem je neplést čtenáře a neinflačnit vlastní distribuci. Když každá kosmetická úprava vypadá jako nový článek, lidé se naučí feed ignorovat.
+
+### Zachovej stabilní identitu položek
+
+U feedů bývá největší nepořádek v identitě položek. Pokud se při každém buildu změní `guid`, `id`, datum publikace nebo canonical odkaz, čtečky můžou starý obsah zobrazit znovu. Není to drama na úrovni výpadku plateb, ale je to drobná ztráta důvěry.
+
+Praktické pravidlo:
+
+- `published` nebo původní datum nech jako historii vydání.
+- `updated` použij pro významnou aktualizaci.
+- stabilní URL drž jako hlavní identitu položky.
+- po přejmenování slugů ověř, že staré položky nevybuchnou jako nové.
+- u archivních položek napiš jasně, že jde o archiv, ne aktuální doporučení.
+
+Pokud feed generuje CMS nebo statický build, kontroluj zdroj pravdy, ne jen výsledný XML soubor. Ruční oprava feedu, kterou další build přepíše, je jen krátká přestávka v chaosu.
+
+### Nezatahuj do feedu trackingový aparát
+
+RSS nepotřebuje UTM parametry v každém odkazu, přesměrovací zkracovače ani unikátní tokeny pro každého odběratele. Pokud chceš měřit užitečnost, stačí chudé signály:
+
+- počet požadavků na feed v agregaci,
+- počet návštěv cílové URL z agregovaného zdroje `rss`, pokud to měříš bez identifikace člověka,
+- ruční odpovědi a přímé reakce čtenářů,
+- počet navazujících dotazů na téma,
+- interní rozhodnutí, které obsah vyvolal.
+
+Naopak si odpusť individuální odběratelské tokeny, skryté redirect řetězce a profilování toho, kdo čte kterou kapitolu. Feed je dobrý právě proto, že čtenář nemusí prosit o povolení a ty nemusíš vědět všechno.
+
+> Codyho komentář: RSS je stará technologie v tom nejlepším smyslu. Dělá jednu věc, čitelně a bez tanečků. Když do něj nacpeš marketingový špehovací batoh, nejsi moderní. Jen jsi vzal čistý nástroj a oblepil ho izolepou.
+
+### Karta feed úklidu
+
+Použij ji po větším obsahovém zásahu, migraci blogu, vydání nové verze e-booku nebo změně veřejné dokumentace.
+
+| Pole | Zápis |
+| --- | --- |
+| Změna obsahu | sloučení / archivace / nová verze / oprava doporučení |
+| Dotčené URL |  |
+| Má jít do feedu? | ano / ne / jen release poznámka |
+| Identita položky | stabilní `guid` nebo canonical URL |
+| Datum publikace | původní nebo nové podle typu změny |
+| Datum aktualizace | použít jen u významné aktualizace |
+| Text pro čtenáře | jedna věta bez marketingové mlhy |
+| Tracking | žádné osobní tokeny, maximálně agregovaný zdroj |
+| Ověření | otevření feedu, kontrola čtečkou, kontrola cílové URL |
+| Vlastník |  |
+
+Tahle karta vypadá jako drobnost, ale šetří dvě typické chyby: znovupublikování starých věcí jako nových a tiché zmizení důležité aktualizace bez jakéhokoliv veřejného signálu.
+
+### Příklad
+
+| Pole | Zápis |
+| --- | --- |
+| Změna obsahu | sloučení tří starších návodů k exportu dat do jedné dokumentační stránky |
+| Dotčené URL | `/blog/export-csv`, `/blog/export-json`, `/docs/export-stary` |
+| Má jít do feedu? | ano, jedna krátká release poznámka |
+| Identita položky | nová poznámka `/changelog/export-dat-jedna-stranka` |
+| Datum publikace | dnešní datum poznámky |
+| Datum aktualizace | cílová dokumentace má aktualizované datum, staré články ne |
+| Text pro čtenáře | „Návody k exportu dat jsou sloučené do jedné aktuální stránky.“ |
+| Tracking | bez tokenů, jen agregovaný počet návštěv changelogu |
+| Ověření | feed obsahuje jednu poznámku, staré články se netváří jako nové, redirecty míří na dokumentaci |
+| Vlastník | obsah + produktová dokumentace |
+
+Čtenář dostane užitečnou informaci, ale ne tři falešné novinky. Tým zároveň ví, proč feed ukazuje právě release poznámku a ne celý interní úklid.
+
+### Checklist: RSS po obsahovém úklidu
+
+- [ ] Rozhodl jsem, jestli je změna nová publikace, aktualizace, archivace nebo tichý úklid.
+- [ ] Staré sloučené položky se ve feedu neobjeví znovu jen kvůli změně buildu.
+- [ ] Stabilní identita položky se nemění při každé úpravě metadat.
+- [ ] Významná aktualizace má jasnou větu pro čtenáře.
+- [ ] Archivní obsah je označený jako archiv, ne jako aktuální doporučení.
+- [ ] Feed odkazy neobsahují osobní tokeny ani zbytečné trackingové parametry.
+- [ ] Pokud měřím dopad, používám agregovaný signál a mám důvod, proč ho potřebuji.
+- [ ] Ověřil jsem feed po buildu, ne jen zdrojový Markdown nebo CMS formulář.
+- [ ] RSS/Atom odpovídá sitemap, canonical URL a veřejné navigaci.
+- [ ] Vím, kdo feed po větších obsahových změnách kontroluje.
+
+### Mini úkol
+
+Otevři jeden RSS nebo Atom feed svého webu a najdi poslední obsahovou změnu, která nebyla úplně novým článkem. Rozhodni, jestli měla být ve feedu jako novinka, aktualizace, release poznámka nebo vůbec. Potom ověř jednu konkrétní věc: stabilní identitu položky, datum publikace, cílovou URL nebo absenci zbytečných tracking parametrů. Pokud feed nemáte, zapiš první malý úkol: veřejný feed pro blog, changelog nebo e-book bez povinného newsletteru.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -48075,6 +48184,7 @@ Vyber jednu URL, kterou jste v poslední době sloučili, archivovali nebo smaza
 
 ## Pracovní log
 
+- 2026-07-23: Doplněna příloha o RSS po obsahovém úklidu bez falešných novinek: rozlišení nové publikace, aktualizace, archivace a tichého úklidu, stabilní identita položek ve feedu, omezení trackingových parametrů, karta feed úklidu, praktický příklad, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro úklid RSS a veřejných distribučních stop po změně obsahu. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
 - 2026-07-23: Doplněna příloha o sitemap a robots po obsahovém úklidu bez indexačního nepořádku: rozlišení sitemap, robots, HTTP statusu, canonical a RSS, malý indexační inventář, varování před používáním `robots.txt` jako náhrady ukončení obsahu nebo ochrany dat, kontrola generátoru sitemap/RSS, karta indexačního úklidu, praktický příklad, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro aktualizaci indexačních souborů po úklidu obsahu. Bez nových aktuálních externích tvrzení, navázáno na existující zdroje k sitemap, robots, HTTP statusům a privacy-first měření; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
 - 2026-07-23: Doplněna příloha o stopách po ukončené URL bez mrtvých cest: rozlišení veřejných, interních a automatických stop, stopovací karta, kontrola interního vyhledávání, oprava support/sales/onboarding šablon, vědomé ukončení starého měření, praktický příklad, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro úklid stop po ukončené URL. Bez nových aktuálních externích tvrzení, navázáno na existující zdroje k HTTP statusům, sitemap, odkazovým kontrolám a privacy-first měření; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
 - 2026-07-23: Doplněna příloha o ukončené URL bez falešné 200 stránky: rozhodování mezi konkrétním redirectem, archivní stránkou, `404` a `410`, varování před soft 404 a přesměrováním na homepage, karta ukončené URL, dva praktické příklady, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro ukončení staré URL. Ověřeny a doplněny zdroje MDN k `404`/`410` a Google Crawling Infrastructure k dopadu HTTP statusů; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
