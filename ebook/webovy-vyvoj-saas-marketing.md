@@ -110,6 +110,7 @@ Když se nechceš vracet do celé knihy, hledej konkrétní nástroj podle výst
 | Sloučit podobné stránky bez ztráty odkazů | „sloučení obsahových duplicit“, „jedna cílová stránka“ nebo „migrační karta“ | rozhodnutí, která URL přežije, co se přesune, co se přesměruje a co se nechá jen jako archivní stopa |
 | Opravit navigaci po obsahovém sloučení | „navazující odkazy“, „CTA po sloučení“ nebo „obsahová cesta“ | seznam míst, kde se po sloučení musí opravit odkazy, výzvy k akci, metadata a interní šablony |
 | Ověřit dopad po obsahovém sloučení | „kontrola po sloučení“, „14denní kontrola“ nebo „staré URL po sloučení“ | krátké rozhodnutí, jestli sloučení zavřít, opravit, dočasně zvýraznit archivní poznámku nebo otevřít produktový problém |
+| Uklidit staré redirecty po sloučení | „redirect po sloučení“, „retenční kontrola URL“ nebo „konec přesměrování“ | rozhodnutí, které staré URL ponechat, zkrátit, nahradit archivní stránkou nebo bezpečně ukončit |
 | Úklid po spolupráci nebo projektu | „offboarding“, „ukončení spolupráce“ nebo „předání projektu“ | předávací a mazací checklist s uzavřením přístupů |
 
 Pravidlo pro práci s rejstříkem: otevři maximálně tři nalezené části, vyber jednu a zapiš výstup. Pokud po deseti minutách pořád skáčeš mezi odkazy, vrať se k tabulce „Kudy začít podle aktuální bolesti“ a zúž problém. E-book není buffet. Teda je, ale bez talíře si stejně odneseš jen chaos.
@@ -47390,6 +47391,138 @@ Tady je vidět rozdíl mezi obsahovým a produktovým problémem. Sloučení opr
 
 Vyber jedno sloučení staré aspoň týden. Vyplň kartu kontroly po sloučení v pěti řádcích: původní důvod, očekávaný signál, co ověříš, chudý důkaz a rozhodnutí. Otevři jednu veřejnou cestu, jednu interní šablonu a agregovaný signál staré URL, pokud ho máš. Na konci nepiš „budeme sledovat“. Napiš „zavíráme“, „opravujeme odkaz“, „zvýrazňujeme archiv“ nebo „otevíráme produktový problém“. To je rozdíl mezi údržbou a věčným převalováním stejné otázky po stole.
 
+## Příloha: Retenční úklid redirectů po sloučení bez nekonečné pavučiny
+
+Redirect po sloučení obsahu je slib: „Starou cestu ještě chvíli bezpečně převedeme na aktuální odpověď.“ Není to omluvenka pro to, aby web navždy nesl každou historickou URL, každý překlep, každou kampaňovou zkratku a každou interní testovací stopu.
+
+Dobrá retenční kontrola redirectů odpovídá na jednoduchou otázku:
+
+„Které přesměrování pořád chrání čtenáře, obchod nebo důvěru - a které už jen udržuje starý nepořádek?“
+
+> Codyho komentář: Redirect je jako dočasná cedule při opravě silnice. Užitečná, dokud vede lidi správně. Divná, když po pěti letech ukazuje na budovu, která už má nový vchod, nové číslo popisné a úplně jiný tým.
+
+### Rozliš ochranný redirect a historický šum
+
+Ne všechny staré URL mají stejnou hodnotu. Některé přesměrování chrání důležité odkazy z cizích webů, dokumentace nebo zákaznických materiálů. Jiné jen vzniklo proto, že kdysi někdo změnil slug třikrát během jednoho odpoledne. Ano, stává se. Markdown neodsuzuje.
+
+Použij čtyři koše:
+
+| Typ staré URL | Co s ní udělat | Proč |
+| --- | --- | --- |
+| Veřejně citovaná URL | ponechat redirect a zapsat vlastníka | chrání externí odkazy, dokumentaci, partnerství nebo nákupní materiály |
+| Aktivní interní cesta | opravit zdroj a redirect ponechat jen jako pojistku | problém je v šabloně, makru nebo navigaci, ne v samotném redirectu |
+| Archivní obsah s historickou hodnotou | zvážit archivní stránku s jasnou poznámkou | čtenář má pochopit, že jde o starší stav, ne být potichu převeden jinam |
+| Náhodný nebo testovací šum | odstranit z aktivní logiky po krátké kontrole | držet ho dál znamená zvětšovat provozní a redakční dluh |
+
+Pravidlo: redirect má mít důvod. Pokud neumíš říct, koho chrání a před čím, je kandidát na ukončení nebo přesun do archivního rozhodnutí.
+
+### Nastav retenční okno už při migraci
+
+U obsahového sloučení si rovnou napiš, kdy redirect znovu zkontroluješ. Bez retenčního okna se přesměrování mění v tichou infrastrukturu, kterou se za rok nikdo neodváží smazat, protože „co kdyby“.
+
+Užitečné výchozí rozlišení:
+
+| Situace | První kontrola | Typické rozhodnutí |
+| --- | --- | --- |
+| Oprava překlepu ve slugu | 14 až 30 dní | po opravě interních odkazů odstranit nebo ponechat jen pokud chodí externí odkazy |
+| Sloučení dvou blogových článků | 30 až 90 dní | ponechat, pokud existují externí odkazy nebo návštěvnost ze search; jinak archivovat rozhodnutí |
+| Změna dokumentační URL | 90 dní a po dalším releasu | držet déle, pokud ji používají zákaznické materiály nebo starší verze produktu |
+| Změna pricing nebo trust stránky | minimálně přes jeden nákupní cyklus | ponechat jen s jasným cílem, protože stará cesta může nést obchodní a právní očekávání |
+
+Tahle čísla nejsou zákon. Jsou startovací rámec. Důležitější než přesný počet dní je to, že každé přesměrování má datum kontroly, vlastníka a rozhodnutí.
+
+### Vyhni se řetězcům
+
+Nejhorší úklid je takový, kde stará URL přesměruje na méně starou URL, ta na novější URL a ta nakonec na aktuální stránku. Technicky to často nějak funguje. Produktově je to signál, že tým uklízí po vrstvách, ale nikdy nezavírá předchozí vrstvu.
+
+Při retenční kontrole projdi aspoň:
+
+- stará URL vede přímo na aktuální cílovou URL,
+- mezi zdrojem a cílem není zbytečný mezikrok,
+- cílová stránka odpovídá původnímu záměru dotazu,
+- staré parametry se nepřenášejí do veřejných odkazů, pokud nejsou potřeba,
+- interní odkazy už nepoužívají starou URL jen proto, že redirect „to vyřeší“.
+
+Přímé přesměrování je dobré provozní chování. Nekonečný řetězec je památník nerozhodnosti.
+
+### Kontroluj bez identifikace lidí
+
+Pro rozhodnutí o starém redirectu většinou nepotřebuješ znát jednotlivé návštěvníky. Stačí chudá data:
+
+| Otázka | Stačí vědět |
+| --- | --- |
+| Chodí na starou URL ještě někdo? | počet požadavků po dnech nebo týdnech |
+| Odkud cesta pravděpodobně vzniká? | agregovaný referrer podle domény, pokud ho už sbíráš a máš k němu účel |
+| Je problém v interních odkazech? | výsledek link checkeru, smoke testu nebo ručního průchodu šablon |
+| Je starý obsah pořád citovaný? | známé veřejné odkazy, dokumentace, partnerské materiály, sales přílohy |
+| Je redirect bezpečné ukončit? | rozhodnutí vlastníka, stav interních odkazů, veřejná archivní poznámka nebo náhradní odpověď |
+
+Do pracovního dokumentu nepatří IP adresy, celé user agenty, e-maily v query stringu ani export surových logů. Pokud logy obsahují citlivé parametry, pro review si připrav jen agregaci: cesta, status, počet, období, rozhodnutí. Tohle není forenzní vyšetřování. Je to údržba veřejné cesty.
+
+### Použij rozhodovací kartu
+
+Když redirect uklízíš, nezapisuj jen technickou změnu. Zapiš, proč je bezpečná pro čtenáře i tým.
+
+| Pole | Zápis |
+| --- | --- |
+| Stará URL |  |
+| Cílová URL nebo archiv |  |
+| Důvod původního redirectu |  |
+| Koho redirect chrání | externí čtenáře / zákazníky / search / dokumentaci / nikoho známého |
+| Kontrolované signály | agregované požadavky, interní odkazy, support šablony, dokumentace, sitemap |
+| Privacy omezení | žádná osobní data v review, jen agregace a krátké období |
+| Rozhodnutí | ponechat / narovnat řetězec / nahradit archivem / odstranit |
+| Další kontrola | datum nebo „není potřeba“ |
+| Vlastník |  |
+
+Karta je záměrně krátká. Pokud potřebuješ tři odstavce, pravděpodobně řešíš víc než jeden redirect nebo si nejsi jistý, co stará URL znamenala.
+
+### Příklad
+
+| Pole | Příklad |
+| --- | --- |
+| Stará URL | `/blog/export-pri-zruseni` |
+| Cílová URL nebo archiv | `/docs/export-dat` |
+| Důvod původního redirectu | sloučení starého článku, FAQ a dokumentace do jedné odpovědi |
+| Koho redirect chrání | zákazníky se starým onboarding e-mailem a dva externí odkazy z partnerského webu |
+| Kontrolované signály | interní odkazy opravené, support makra opravená, stará URL má nízké jednotky požadavků týdně |
+| Privacy omezení | kontrolován jen počet požadavků podle týdne, bez IP a bez query stringů |
+| Rozhodnutí | ponechat redirect ještě jeden nákupní cyklus, potom znovu ověřit externí odkazy |
+| Další kontrola | za 90 dní |
+| Vlastník | obsah a support |
+
+Rozhodnutí není „necháme to, protože se bojíme“. Je to konkrétní ochrana dvou veřejných odkazů a starého onboardingového materiálu. Současně má konec: za 90 dní se znovu ověří, jestli staré zdroje pořád existují.
+
+### Kdy redirect ukončit
+
+Redirect můžeš bezpečně ukončit, když platí většina těchto podmínek:
+
+- stará URL nemá známé důležité veřejné odkazy,
+- interní odkazy, šablony a dokumentace už používají cílovou URL,
+- agregované požadavky na starou URL jsou nulové nebo zanedbatelné v rozumném období,
+- stará cesta nenese právní, obchodní nebo supportní očekávání,
+- případný historický obsah má archivní poznámku nebo jasnou náhradní odpověď,
+- vlastník ví, co se stane po odstranění redirectu.
+
+Pokud starou URL odstraníš, nedělej z toho tichý noční trik. Zapiš změnu do pracovního logu nebo release poznámek podle dopadu. U veřejně důležité URL může být lepší archivní stránka než čisté smazání. U testovacího slugu naopak není potřeba stavět památník.
+
+### Checklist: Retenční úklid redirectů
+
+- [ ] Každý kontrolovaný redirect má původní důvod a cílovou URL.
+- [ ] Rozlišili jsme veřejně citované URL, aktivní interní cesty, archivní obsah a šum.
+- [ ] Důležité staré URL nevedou přes zbytečný řetězec přesměrování.
+- [ ] Interní odkazy a šablony nepoužívají redirect jako náhradu za opravu.
+- [ ] Kontrolujeme agregované signály, ne individuální chování lidí.
+- [ ] Do pracovního zápisu neukládáme IP adresy, e-maily, user agenty ani citlivé query parametry.
+- [ ] Redirect má rozhodnutí: ponechat, narovnat, archivovat nebo odstranit.
+- [ ] Ponechaný redirect má další kontrolní datum nebo jasný důvod trvalejší ochrany.
+- [ ] Archivní stránka, pokud existuje, jasně říká, že jde o starší stav.
+- [ ] Změna je zapsaná tak, aby další člověk věděl, proč byla bezpečná.
+
+### Mini úkol
+
+Vyber tři staré redirecty z posledního obsahového sloučení. U každého napiš jednu větu: koho chrání, na co vede a kdy ho znovu zkontroluješ. Potom oprav jeden interní odkaz, který pořád používá starou URL, a zkontroluj, že nejdůležitější stará cesta vede přímo na aktuální stránku. Pokud u některého redirectu neumíš říct, koho chrání, označ ho jako kandidáta na ukončení. To je malý úklid, ne historický román URL adres.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -47580,6 +47713,7 @@ Vyber jedno sloučení staré aspoň týden. Vyplň kartu kontroly po sloučení
 
 ## Pracovní log
 
+- 2026-07-23: Doplněna příloha o retenčním úklidu redirectů po obsahovém sloučení bez nekonečné pavučiny: rozlišení ochranných redirectů, interních cest, archivního obsahu a šumu, nastavení retenčního okna, narovnání redirect řetězců, kontrola bez osobních logů, rozhodovací karta, praktický příklad, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro úklid starých redirectů po sloučení. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
 - 2026-07-23: Doplněna příloha o kontrole po obsahovém sloučení bez falešného klidu: nastavení kontrolního data už při sloučení, ověřování proti původnímu důvodu změny, chudé signály bez sledování lidí, čtyři možné konce kontroly, karta kontroly, praktický příklad, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro ověření dopadu po sloučení. Bez nových aktuálních externích tvrzení, navázáno na existující zdroje k redirectům, sitemap a recrawlu; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
 - 2026-07-23: Doplněna příloha o navazujících odkazech po obsahovém sloučení bez mrtvé cesty: kontrola aktivních cest po sloučení, oprava CTA podle nové role stránky, úklid parametrů a zkracovačů, revize interních šablon, malý odkazový smoke test, karta navazujících odkazů, příklad, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro opravu navigace po obsahovém sloučení. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
 - 2026-07-23: Doplněna příloha o sloučení obsahových duplicit bez ztráty odkazů: rozlišení podobného tématu, skutečné duplicity a historie, výběr přeživší URL podle důvěry, migrační karta, oprava okolních cest, jasné archivní poznámky, praktický příklad, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro sloučení podobných stránek bez ztráty odkazů. Ověřeny a doplněny zdroje Google Search Central k canonical URL/redirectům a MDN k HTTP přesměrování; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
