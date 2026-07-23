@@ -119,6 +119,7 @@ Když se nechceš vracet do celé knihy, hledej konkrétní nástroj podle výst
 | Úklid po spolupráci nebo projektu | „offboarding“, „ukončení spolupráce“ nebo „předání projektu“ | předávací a mazací checklist s uzavřením přístupů |
 | Zrevidovat dodavatele po změně podmínek | „revize dodavatele“, „změna podmínek“ nebo „vendor karta“ | rozhodnutí ponechat, omezit, vyjednat, nahradit nebo ukončit dodavatele bez panického přepisu provozu |
 | Řízeně odejít od dodavatele | „odchod od dodavatele“, „vendor exit“ nebo „migrační balík“ | migrační balík s exportem, ověřením, přepnutím, smazáním dat a uzavřením přístupů |
+| Ověřit, že po odchodu nezůstaly stínové kopie | „stínové kopie“, „po vendor exitu“ nebo „mrtvé integrace“ | zavírací kontrola exportů, účtů, automatizací, dokumentace a veřejných slibů |
 
 Pravidlo pro práci s rejstříkem: otevři maximálně tři nalezené části, vyber jednu a zapiš výstup. Pokud po deseti minutách pořád skáčeš mezi odkazy, vrať se k tabulce „Kudy začít podle aktuální bolesti“ a zúž problém. E-book není buffet. Teda je, ale bez talíře si stejně odneseš jen chaos.
 
@@ -48406,6 +48407,129 @@ Tohle není jen technická migrace. Je to snížení datové plochy, oprava slib
 
 Vyber jednoho dodavatele, kterého už tým „skoro nepoužívá“. Neřeš všechny nástroje. Vyplň migrační balík jen pro něj: účel, data, integrace, účty, export, retenci, výmaz a veřejné texty. Potom udělej jednu konkrétní zavírací akci tento týden: odeber starý skript z webu, vypni webhook, zruš API klíč, smaž dočasný export, požádej o výmaz workspace nebo aktualizuj privacy notice. Pokud se ukáže, že nástroj ještě něco kritického dělá, není to selhání. Je to dobrý nález před tím, než by ses tvářil, že je odchod hotový.
 
+## Příloha: Kontrola po vendor exitu bez stínových kopií
+
+Odchod od dodavatele nekončí ve chvíli, kdy nový nástroj funguje a stará faktura přestane chodit. To je příjemný milník, ale ne konec. Skutečný konec nastane až ve chvíli, kdy tým ví, že ve starém nástroji nezůstala data bez účelu, automatizace už na něj nesahají, dokumentace neposílá lidi zpět a veřejné texty nepopisují realitu, která dávno neplatí.
+
+Stínová kopie je cokoliv, co po migraci dál drží data, přístupy nebo rozhodovací autoritu mimo nový provozní model. Může to být export v osobním disku, starý dashboard v záložkách, webhook v zapomenuté integraci, API token v CI, CSV poslané e-mailem, přístup bývalého dodavatele nebo support šablona, která lidem pořád radí starý postup.
+
+> Codyho komentář: Nejzrádnější zbytky po vendor exitu nejsou ty dramatické. Jsou to ty nudné: „jen pro jistotu“ export, „dočasný“ token a „historický“ dashboard. Privacy-first provoz se láme přesně na těchto malých věcech, protože malé věci mají zvláštní talent přežít všechny velké projekty.
+
+### Zaveď zavírací okno
+
+Po každém vendor exitu si naplánuj krátké zavírací okno. Nemá to být druhá migrace. Stačí 30 až 60 minut, ideálně 7 až 30 dní po přepnutí, kdy už je vidět, jestli někdo starý nástroj opravdu potřebuje.
+
+Zavírací okno má odpovědět na pět otázek:
+
+- Běží hlavní práce bez starého dodavatele?
+- Vznikly během migrace dočasné exporty, kopie nebo ruční tabulky?
+- Zůstaly někde účty, tokeny, webhooky, embedy nebo automatizace?
+- Ukazuje dokumentace, support a veřejný web na nový stav?
+- Existuje důvod držet jakákoliv data ve starém nástroji dál?
+
+Pokud odpověď na poslední otázku zní „pro jistotu“, přepiš ji. Správná odpověď má mít účel, vlastníka a konec životnosti. Bez toho je to jen datový suvenýr.
+
+### Projdi pět míst, kde zbytky přežívají
+
+Po migraci nekontroluj jen starý účet dodavatele. Zbytky se často schovají v okolí.
+
+| Místo | Co hledat | Zavírací akce |
+| --- | --- | --- |
+| Exporty | CSV, ZIP, PDF, screenshoty, ruční tabulky | smazat, archivovat s účelem, nebo přesunout do schváleného systému |
+| Přístupy | uživatelé, role, servisní účty, API tokeny | odebrat, revokovat, rotovat, zapsat výjimku |
+| Integrace | webhooky, embedy, SSO, CI proměnné, scheduled joby | vypnout staré vstupy a zkontrolovat logy bez citlivých payloadů |
+| Dokumentace | runbooky, support odpovědi, onboarding, sales materiály | přepsat staré návody a odstranit mrtvé odkazy |
+| Veřejné sliby | privacy notice, trust center, pricing, FAQ, DPA přílohy | sladit texty s novou realitou a revizním datem |
+
+Praktické pravidlo: pokud po vendor exitu existuje stará věc, která není v nové datové mapě, je podezřelá. Buď ji doplň s účelem a retencí, nebo ji zavři. Neexistuje třetí stav „všichni o tom přece víme“. Týmová telepatie pořád není compliance nástroj, škoda.
+
+### Rozliš archiv od zapomenuté kopie
+
+Ne každá stará data musí zmizet okamžitě. Někdy existuje účetní, smluvní, bezpečnostní nebo auditní důvod držet část záznamů. Rozdíl je v tom, jestli mají pravidlo.
+
+Archiv má:
+
+- jasný účel,
+- omezený rozsah,
+- vlastníka,
+- místo uložení,
+- přístupová pravidla,
+- datum další revize nebo výmazu.
+
+Zapomenutá kopie má:
+
+- neurčitý důvod,
+- nejasné umístění,
+- osobní vlastnictví typu „má to někdo v disku“,
+- širší přístup, než je potřeba,
+- žádné datum konce.
+
+U privacy-first provozu není cílem mazat vše bez rozmyslu. Cílem je, aby žádná kopie nepřežívala jen díky setrvačnosti. Když data držíš, musíš vědět proč. Když nevíš proč, máš další krok.
+
+### Zkontroluj nový návyk týmu
+
+Vendor exit často selže měkce: technicky je hotový, ale lidé dál pracují starým způsobem. Odkaz na starý dashboard je v záložkách, export se pořád posílá v pondělí ráno, support hledá odpověď ve staré šabloně a sales má prezentaci s původním názvem nástroje.
+
+Proto si udělej krátkou behaviorální kontrolu:
+
+- Který tým naposledy otevřel starý nástroj?
+- Kdo pořád používá export z migrace?
+- Který interní odkaz vede na staré místo?
+- Který zákaznický dotaz odhalil starý postup?
+- Který report se dál připravuje podle původní logiky?
+
+Nemusíš sledovat individuální chování lidí po interních systémech. Stačí se zeptat vlastníků workflow, projít nejpoužívanější dokumenty a zkontrolovat několik posledních support nebo sales odpovědí. Chudá kontrola je tady lepší než nový monitoring zaměstnanců. Ten by byl hodně zvláštní způsob, jak dokazovat privacy-first kulturu.
+
+### Udělej zavírací záznam
+
+Na konci kontroly zapiš krátký záznam. Ne kvůli byrokracii, ale kvůli dalšímu člověku, který se za půl roku zeptá: „Proč ten nástroj ještě někde vidím?“
+
+| Pole | Co zapsat |
+| --- | --- |
+| Dodavatel | název starého nástroje a vlastník exitu |
+| Datum přepnutí | kdy se přestalo používat staré produkční workflow |
+| Kontrolovaná místa | exporty, účty, integrace, dokumentace, veřejné texty |
+| Nalezené zbytky | konkrétní položky bez citlivých detailů |
+| Rozhodnutí | smazat, archivovat, revokovat, přepsat, ponechat dočasně |
+| Retence | co zůstává, proč, kde a do kdy |
+| Důkaz zavření | potvrzení výmazu, revokace tokenu, odkaz na aktualizovaný runbook |
+| Další kontrola | datum jen pokud něco zůstává otevřené |
+
+Záznam neplň screenshoty zákaznických dat ani plnými exporty. Důkaz má dokazovat provedení akce, ne kopírovat problém do dalšího dokumentu.
+
+### Příklad: Zavření starého helpdesku
+
+| Pole | Zápis |
+| --- | --- |
+| Dodavatel | původní helpdesk pro support ticketing |
+| Datum přepnutí | nový support běží od 1. července |
+| Exporty | export otevřených ticketů importován, dočasné CSV smazáno po kontrole |
+| Účty | odebrány role supportu, ponechán jen admin pro 14denní retenční kontrolu |
+| Integrace | vypnutý kontaktní formulářový webhook, stará e-mailová routa přesměrována na nový systém |
+| Dokumentace | přepsaná support šablona a interní návod eskalace |
+| Veřejné texty | privacy notice aktualizovaná o nový support systém |
+| Zbytek | staré uzavřené tickety drženy 90 dní kvůli reklamačnímu kontextu, potom výmaz |
+| Zavření | po 90 dnech ověřit výmaz a zrušit poslední admin účet |
+
+Tohle je dostatečně konkrétní na řízení práce a zároveň neprozrazuje obsah ticketů. Přesně tak má zavírací záznam vypadat: rozhodnutí, stav, konec. Ne román z interních dat.
+
+### Checklist: Kontrola po vendor exitu
+
+- [ ] Máme naplánované zavírací okno po přepnutí.
+- [ ] Hlavní workflow běží bez starého dodavatele.
+- [ ] Dočasné exporty, CSV, ZIPy, screenshoty a ruční tabulky mají rozhodnutí: smazat, archivovat s účelem, nebo přesunout.
+- [ ] Staré účty, role, servisní účty a API tokeny jsou odebrané nebo mají dočasnou výjimku s datem konce.
+- [ ] Webhooky, embedy, SSO, CI proměnné a scheduled joby už nesahají na starý nástroj.
+- [ ] Support, sales, onboarding a provozní dokumentace neodkazují na starý postup.
+- [ ] Privacy notice, trust přehled, DPA přílohy a veřejné FAQ odpovídají novému stavu.
+- [ ] Data ponechaná kvůli retenci mají účel, umístění, vlastníka, omezený přístup a datum revize.
+- [ ] Zákaznické ani interní citlivé payloady nekopírujeme do zavíracího záznamu.
+- [ ] Pokud něco zůstává otevřené, má to vlastníka a další kontrolní datum.
+
+### Mini úkol
+
+Vyber jeden vendor exit, který tým považuje za hotový. Projdi jen pět míst: exporty, přístupy, integrace, dokumentaci a veřejné texty. Najdi jednu stínovou kopii nebo mrtvou integraci a zavři ji tento týden. Pokud nic nenajdeš, zapiš zavírací záznam s datem kontroly. I potvrzené „nic nezůstalo“ má hodnotu, protože příští audit nezačne detektivkou.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -48599,6 +48723,7 @@ Vyber jednoho dodavatele, kterého už tým „skoro nepoužívá“. Neřeš v�
 
 ## Pracovní log
 
+- 2026-07-23: Doplněna příloha o kontrole po vendor exitu bez stínových kopií: zavírací okno po přepnutí, kontrola exportů, přístupů, integrací, dokumentace a veřejných slibů, rozlišení archivu od zapomenuté kopie, ověření nového pracovního návyku týmu, zavírací záznam, příklad zavření starého helpdesku, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro ověření stínových kopií a mrtvých integrací po odchodu od dodavatele. Bez nových aktuálních externích tvrzení, navázáno na existující zdroje k GDPR, retenci, přístupům, zpracovatelům a vendor exitu; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
 - 2026-07-23: Doplněna příloha o odchodu od dodavatele bez datového ocasu: migrační balík, export jen dat s novým účelem, částečné smoke testy, vypnutí starých vstupů, doložení výmazu bez zbytečných interních úniků, aktualizace privacy notice, trust přehledu, datové mapy a runbooků, praktický příklad odchodu od analytického nástroje, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro řízený vendor exit. Bez nových aktuálních externích tvrzení, navázáno na existující zdroje k GDPR, zpracovatelům, exportu, retenci a vendor lock-inu; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
 - 2026-07-23: Doplněna příloha o revizi dodavatele po změně podmínek bez panického přepisu: rozlišení změny ceny, dat, regionu, funkcí, provozu a vlastnictví, návrat k vendor kartě, pořadí akcí ponechat/omezit/vyjednat/nahradit/ukončit, kontrola veřejných privacy-first slibů, rozhodovací zápis, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro revizi dodavatele po změně podmínek. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
 - 2026-07-23: Doplněna příloha o archivním obsahu bez zapomenutých slibů: rozlišení aktivní, archivní a ukončené stránky, archivní poznámka před prvním rozhodnutím, úklid starých CTA/formulářů/embedů/metadat, jedna aktuální cesta z archivu, chudé údržbové měření, karta archivní stránky, praktický příklad, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro udržení archivního obsahu užitečného bez starých slibů. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
