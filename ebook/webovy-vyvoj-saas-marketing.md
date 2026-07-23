@@ -117,6 +117,7 @@ Když se nechceš vracet do celé knihy, hledej konkrétní nástroj podle výst
 | Uklidit RSS a veřejné distribuční stopy po změně obsahu | „RSS po úklidu“, „feed po sloučení“ nebo „veřejná distribuce obsahu“ | rozhodnutí, co se znovu publikuje, co zůstane archivní a co se ve feedu nemá tvářit jako novinka |
 | Udržet archivní obsah užitečný bez starých slibů | „archivní obsah“, „staré sliby“ nebo „archivní poznámka“ | karta archivní stránky s jasným stavem, doporučenou aktuální cestou, revizí a minimem měření |
 | Úklid po spolupráci nebo projektu | „offboarding“, „ukončení spolupráce“ nebo „předání projektu“ | předávací a mazací checklist s uzavřením přístupů |
+| Zrevidovat dodavatele po změně podmínek | „revize dodavatele“, „změna podmínek“ nebo „vendor karta“ | rozhodnutí ponechat, omezit, vyjednat, nahradit nebo ukončit dodavatele bez panického přepisu provozu |
 
 Pravidlo pro práci s rejstříkem: otevři maximálně tři nalezené části, vyber jednu a zapiš výstup. Pokud po deseti minutách pořád skáčeš mezi odkazy, vrať se k tabulce „Kudy začít podle aktuální bolesti“ a zúž problém. E-book není buffet. Teda je, ale bez talíře si stejně odneseš jen chaos.
 
@@ -48132,6 +48133,113 @@ Výsledek není jen uklizená stránka. Support ví, kam lidi posílat. Marketin
 
 Vyber jednu starou stránku, která pořád existuje kvůli odkazům, historii nebo legacy zákazníkům. Neřeš celý archiv. Otevři stránku jako nový čtenář a zapiš tři věci: poznám, že je archivní; vím, kam jít teď; stránka po mně nechce neaktuální akci. Potom oprav jednu nejbližší věc: archivní poznámku, CTA, formulář, metadata nebo interní odkaz. Pokud nevíš, zda stránku zachovat, vyplň kartu archivní stránky a dej jí review za 30 až 60 dní.
 
+## Příloha: Revize dodavatele po změně podmínek bez panického přepisu
+
+Dodavatel se nemění jen ve chvíli, kdy služba spadne nebo přijde faktura, která vypadá jako drobný ransomwarový pozdrav. Mění se i tehdy, když upraví podmínky, přidá nový region zpracování, změní subdodavatele, zavede nový limit, zdraží plán, vypne staré API nebo začne do produktu přidávat funkce, které posílají data dál, než tým původně čekal.
+
+Privacy-first provoz na takovou změnu nereaguje panikou ani automatickým útěkem. Nejdřív si položí otázku:
+
+„Změnila se cena, schopnost, riziko nebo náš veřejný slib tak, že musíme upravit používání dodavatele?“
+
+To je menší otázka než „máme dodavatele okamžitě nahradit?“. A právě proto je použitelnější.
+
+### Rozliš typ změny
+
+Ne každá změna podmínek má stejný dopad. Pokud všechno označíš jako kritické, tým si na varování zvykne a příště ho přeslechne. Začni rozdělením:
+
+| Typ změny | Co se typicky mění | První kontrola |
+| --- | --- | --- |
+| Cena | plán, limity, účtování za uživatele, objem, API volání | dopad na marži, pricing a zákaznické sliby |
+| Data | kategorie zpracovávaných dat, retence, export, mazání | mapa dat, DPA, privacy notice, trust balíček |
+| Region | místo provozu, záloh, supportu nebo subdodavatelů | evropský provoz, přenosy mimo EU/EHP, smluvní opora |
+| Funkce | nové AI, analytické, reklamní nebo integrační vrstvy | zda se funkce dá vypnout nebo omezit |
+| Provoz | SLA, podpora, API, rate limit, staré verze | runbook, monitoring, zákaznický dopad |
+| Vlastnictví | akvizice, změna právní entity, nové obchodní podmínky | role správce/zpracovatele, přístupy, smlouvy |
+
+Praktické pravidlo: změna ceny je obchodní signál. Změna dat, regionu nebo subdodavatelů je i trust a privacy signál. Změna provozu je produktový signál. Když se sejdou dvě vrstvy najednou, neřeš to jen v jedné tabulce financí.
+
+### Vrať se k původní vendor kartě
+
+Dobrá vendor karta má smysl právě ve chvíli, kdy se něco změní. Nemá být muzeum nákupního rozhodnutí. Má odpovědět, proč nástroj používáš, jaká data v něm jsou a co by se stalo při omezení nebo odchodu.
+
+Minimální revizní karta:
+
+| Pole | Otázka |
+| --- | --- |
+| Dodavatel | Koho se změna týká a kde se používá? |
+| Původní účel | Jakou práci nám nástroj pomáhá dělat? |
+| Změna | Co se změnilo: cena, data, region, funkce, provoz nebo vlastnictví? |
+| Dotčená data | Jaké kategorie dat v nástroji máme? |
+| Dotčené sliby | Které veřejné nebo smluvní sliby se tím mohou změnit? |
+| Možnosti | ponechat, omezit, vyjednat, nahradit, ukončit |
+| Nejmenší bezpečný krok | Co lze udělat tento týden bez rozbití služby? |
+| Review | Kdy rozhodnutí znovu otevřeme? |
+
+Pokud vendor karta neexistuje, nevyráběj z toho třítýdenní audit. Vyplň ji jen pro tento dodavatelský problém. Kompletní inventář nástrojů může být další úkol, ale nemá zablokovat aktuální rozhodnutí.
+
+### Nepřepisuj provoz jen kvůli podráždění
+
+Změna podmínek často vyvolá oprávněnou emoci: „Tak od nich odejdeme.“ Někdy je to správně. Často je to ale drahý reflex, který z jedné nepříjemné změny udělá migraci, výpadky, nové chyby a měsíc skryté práce.
+
+Rozumné pořadí možností:
+
+1. Ponechat bez změny, pokud dopad není významný a veřejné sliby sedí.
+2. Omezit používání, vypnout novou funkci, snížit rozsah dat nebo zkrátit retenci.
+3. Vyjednat plán, smluvní přílohu, region, export nebo přechodové období.
+4. Nahradit jen dotčenou část, pokud nástroj drží příliš mnoho funkcí najednou.
+5. Ukončit dodavatele, když je změna neslučitelná s datovou, provozní nebo obchodní realitou.
+
+> Codyho komentář: Nejlepší vendor exit není hrdinský odchod za víkend. Je to nudný stav, kdy víš, co nástroj dělá, co v něm leží, kudy data ven, kdo má klíče a co se zákazníkovi změní. Nudné věci často zachraňují rozpočet i nervy.
+
+### Zkontroluj veřejné sliby
+
+Vendor změna se málokdy týká jen interního nastavení. Pokud na webu, v trust centru, v DPA, v nabídce nebo v odpovědní knihovně tvrdíš něco o evropském provozu, subdodavatelích, retenci, exportu, dostupnosti nebo podpoře, změna dodavatele může udělat z pravdivé věty starý slib.
+
+Kontrolní otázky:
+
+- Tvrdíme, že data běží v Evropě? Odpovídají tomu aplikace, databáze, zálohy, logy, support a analytika?
+- Uvádíme konkrétního dodavatele nebo kategorii dodavatelů ve veřejném přehledu?
+- Má zákazník ve smlouvě nebo nabídce slíbený export, retenci, dostupnost nebo support reakci, kterou změna ovlivní?
+- Potřebuje support nebo sales novou krátkou odpověď na očekávané dotazy?
+- Má změna dopad na onboarding, pricing limity, help centrum, formuláře nebo e-mailové šablony?
+
+Privacy-first hodnota se nepozná podle toho, že nikdy nepoužiješ externí nástroj. Pozná se podle toho, že nezamlžíš dopad, když se nástroj změní.
+
+### Udělej malý rozhodovací zápis
+
+Revize dodavatele má končit rozhodnutím, ne pocitem, že „to musíme sledovat“. Sledování bez vlastníka je jen pomalé zapomenutí.
+
+Příklad:
+
+| Pole | Zápis |
+| --- | --- |
+| Dodavatel | E-mailový nástroj pro produktové a supportní zprávy |
+| Změna | Nový plán mění cenu podle počtu kontaktů a přidává volitelnou analytickou funkci |
+| Dopad | Cena roste snesitelně, ale nová analytika není nutná pro provozní zprávy |
+| Rozhodnutí | Ponechat dodavatele, vypnout analytickou funkci, zkontrolovat retenci kontaktů |
+| Veřejné sliby | Privacy notice zůstává pravdivá, support šablona doplní odkaz na odhlášení marketingu |
+| Další krok | Do pátku zkontrolovat nastavení tracking pixelů a exportní postup |
+| Review | Za 60 dní znovu otevřít, pokud cena roste nebo export nefunguje hladce |
+
+Takhle vypadá rozhodnutí, které nepředstírá dokonalost. Nástroj zůstává, ale s menším datovým povrchem a jasným dalším krokem.
+
+### Checklist: Revize dodavatele po změně podmínek
+
+- [ ] Víme, jaký typ změny nastal: cena, data, region, funkce, provoz nebo vlastnictví.
+- [ ] Máme minimální vendor kartu pro dotčený nástroj.
+- [ ] Známe kategorie dat, které u dodavatele držíme.
+- [ ] Zkontrolovali jsme, jestli změna ovlivňuje evropský provoz, subdodavatele, retenci nebo export.
+- [ ] Nepouštíme nové analytické, AI nebo reklamní funkce automaticky jen proto, že se objevily v produktu.
+- [ ] Zkontrolovali jsme veřejné sliby na webu, v trust balíčku, privacy notice, nabídce a support odpovědích.
+- [ ] Máme jednu z pěti akcí: ponechat, omezit, vyjednat, nahradit nebo ukončit.
+- [ ] Rozhodnutí má vlastníka, termín a datum další revize.
+- [ ] Pokud migrujeme, víme, jak data exportovat, ověřit a bezpečně smazat.
+- [ ] Pokud dodavatele ponecháváme, víme, co vědomě vypínáme nebo omezujeme.
+
+### Mini úkol
+
+Vyber jednoho dodavatele, u kterého v posledních měsících přišla změna ceny, podmínek, funkcí nebo provozního modelu. Nezačínej migrací. Vyplň minimální revizní kartu: původní účel, typ změny, dotčená data, dotčené sliby a pět možných akcí. Potom vyber nejmenší bezpečný krok na tento týden. Typicky to bude vypnutí nové funkce, kontrola exportu, zkrácení retence, úprava veřejné odpovědi nebo domluvené datum skutečného migračního rozhodnutí.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -48325,6 +48433,7 @@ Vyber jednu starou stránku, která pořád existuje kvůli odkazům, historii n
 
 ## Pracovní log
 
+- 2026-07-23: Doplněna příloha o revizi dodavatele po změně podmínek bez panického přepisu: rozlišení změny ceny, dat, regionu, funkcí, provozu a vlastnictví, návrat k vendor kartě, pořadí akcí ponechat/omezit/vyjednat/nahradit/ukončit, kontrola veřejných privacy-first slibů, rozhodovací zápis, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro revizi dodavatele po změně podmínek. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
 - 2026-07-23: Doplněna příloha o archivním obsahu bez zapomenutých slibů: rozlišení aktivní, archivní a ukončené stránky, archivní poznámka před prvním rozhodnutím, úklid starých CTA/formulářů/embedů/metadat, jedna aktuální cesta z archivu, chudé údržbové měření, karta archivní stránky, praktický příklad, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro udržení archivního obsahu užitečného bez starých slibů. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
 - 2026-07-23: Doplněna příloha o RSS po obsahovém úklidu bez falešných novinek: rozlišení nové publikace, aktualizace, archivace a tichého úklidu, stabilní identita položek ve feedu, omezení trackingových parametrů, karta feed úklidu, praktický příklad, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro úklid RSS a veřejných distribučních stop po změně obsahu. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
 - 2026-07-23: Doplněna příloha o sitemap a robots po obsahovém úklidu bez indexačního nepořádku: rozlišení sitemap, robots, HTTP statusu, canonical a RSS, malý indexační inventář, varování před používáním `robots.txt` jako náhrady ukončení obsahu nebo ochrany dat, kontrola generátoru sitemap/RSS, karta indexačního úklidu, praktický příklad, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro aktualizaci indexačních souborů po úklidu obsahu. Bez nových aktuálních externích tvrzení, navázáno na existující zdroje k sitemap, robots, HTTP statusům a privacy-first měření; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
