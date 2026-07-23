@@ -118,6 +118,7 @@ Když se nechceš vracet do celé knihy, hledej konkrétní nástroj podle výst
 | Udržet archivní obsah užitečný bez starých slibů | „archivní obsah“, „staré sliby“ nebo „archivní poznámka“ | karta archivní stránky s jasným stavem, doporučenou aktuální cestou, revizí a minimem měření |
 | Úklid po spolupráci nebo projektu | „offboarding“, „ukončení spolupráce“ nebo „předání projektu“ | předávací a mazací checklist s uzavřením přístupů |
 | Zrevidovat dodavatele po změně podmínek | „revize dodavatele“, „změna podmínek“ nebo „vendor karta“ | rozhodnutí ponechat, omezit, vyjednat, nahradit nebo ukončit dodavatele bez panického přepisu provozu |
+| Řízeně odejít od dodavatele | „odchod od dodavatele“, „vendor exit“ nebo „migrační balík“ | migrační balík s exportem, ověřením, přepnutím, smazáním dat a uzavřením přístupů |
 
 Pravidlo pro práci s rejstříkem: otevři maximálně tři nalezené části, vyber jednu a zapiš výstup. Pokud po deseti minutách pořád skáčeš mezi odkazy, vrať se k tabulce „Kudy začít podle aktuální bolesti“ a zúž problém. E-book není buffet. Teda je, ale bez talíře si stejně odneseš jen chaos.
 
@@ -48240,6 +48241,171 @@ Takhle vypadá rozhodnutí, které nepředstírá dokonalost. Nástroj zůstáv�
 
 Vyber jednoho dodavatele, u kterého v posledních měsících přišla změna ceny, podmínek, funkcí nebo provozního modelu. Nezačínej migrací. Vyplň minimální revizní kartu: původní účel, typ změny, dotčená data, dotčené sliby a pět možných akcí. Potom vyber nejmenší bezpečný krok na tento týden. Typicky to bude vypnutí nové funkce, kontrola exportu, zkrácení retence, úprava veřejné odpovědi nebo domluvené datum skutečného migračního rozhodnutí.
 
+## Příloha: Odchod od dodavatele bez datového ocasu
+
+Rozhodnutí odejít od dodavatele není totéž co migrace hotová. V mnoha týmech se „odcházíme“ řekne v poradě, nový nástroj se nějak rozběhne, ale starý účet dál existuje, drží exporty, přijímá webhooky, posílá staré e-maily, má aktivní API klíče a v privacy notice pořád figuruje jako by se nic nestalo.
+
+Privacy-first odchod má jiný cíl:
+
+„Po přechodu víme, která data odešla, která zůstala kvůli oprávněné retenci, která byla smazána, které integrace jsou vypnuté a které veřejné sliby se změnily.“
+
+To zní méně dramaticky než velká migrace. Výborně. Dodavatelský exit má být nudný, ověřitelný a zavřený.
+
+### Nezačínej přepnutím produkce
+
+Největší chyba je začít od tlačítka „přepnout“. U jednoduchého nástroje to někdy projde. U analytiky, e-mailu, CRM, helpdesku, plateb, vyhledávání, AI vrstvy nebo infrastruktury ale přepnutí často odhalí, že starý dodavatel nebyl jen nástroj. Byl to kus provozní paměti.
+
+Před migrací si rozděl práci:
+
+| Vrstva | Co zjistit | Typické riziko |
+| --- | --- | --- |
+| Data | jaké objekty, přílohy, logy, exporty a metadata v nástroji jsou | přesune se moc dat, nebo se zapomene něco kritického |
+| Integrace | API klíče, webhooky, SSO, embedy, formuláře, DNS, e-mailové hlavičky | starý nástroj dál přijímá nebo posílá data |
+| Lidé | účty, role, externí přístupy, support a administrace | přístup přežije i po ukončení smlouvy |
+| Produkt | funkce, které na nástroji závisí | zákazník ztratí schopnost, kterou považoval za součást služby |
+| Texty | privacy notice, DPA, trust center, onboarding, support šablony | veřejné sliby popisují minulý stav |
+| Provoz | monitoring, alerty, zálohy, incident postupy, billing | tým nepozná, že po přechodu něco tichounce nefunguje |
+
+Praktické pravidlo: produkci přepínej až ve chvíli, kdy umíš popsat i vypnutí staré cesty. Jinak jsi neodešel, jen jsi si koupil druhý systém.
+
+### Vytvoř migrační balík
+
+Migrační balík není dlouhá projektová dokumentace. Je to malý soubor rozhodnutí, který drží pohromadě data, techniku a odpovědnost.
+
+Minimální migrační balík:
+
+| Pole | Otázka |
+| --- | --- |
+| Důvod odchodu | Proč odcházíme: cena, region, data, provoz, funkce, vlastnictví nebo důvěra? |
+| Rozsah | Které týmy, zákazníci, funkce a datové kategorie jsou dotčené? |
+| Nový stav | Co bude po migraci dělat nový nástroj, vlastní systém nebo ruční proces? |
+| Export | Co exportujeme, v jakém formátu a kam se export dočasně uloží? |
+| Ověření | Jak poznáme, že export a import dávají smysl? |
+| Přepnutí | Kdy a jak se vypnou staré integrace, webhooky, formuláře, DNS nebo API klíče? |
+| Retence | Co se musí držet kvůli smlouvě, účetnictví, bezpečnosti nebo právní povinnosti? |
+| Výmaz | Co se smaže u starého dodavatele a jak to doložíme? |
+| Komunikace | Kdo potřebuje vědět změnu: zákazník, support, sales, interní tým? |
+| Zavření | Jaký důkaz stačí k uzavření migrace? |
+
+Nejlepší pole v tabulce je „Zavření“. Nutí tým říct, kdy je práce opravdu hotová. Bez něj se vendor exit změní na věčné „už skoro“.
+
+### Exportuj jen to, co má nový účel
+
+Migrace svádí k větné pasti: „Vezmeme všechno, kdyby se to hodilo.“ To je přesně okamžik, kdy se staré datové přejídání převlékne za opatrnost.
+
+U každé kategorie dat si napiš:
+
+- Přenášíme ji, protože ji nový stav skutečně potřebuje.
+- Archivujeme ji po omezenou dobu, protože máme jasný důvod.
+- Mažeme ji, protože původní účel skončil.
+- Nepřenášíme ji, protože by jen nesla staré riziko.
+
+Příklad: Při přechodu z helpdesku nemusíš nutně přenést všechny staré přílohy, interní poznámky a historické tagy. Možná stačí otevřené tickety, poslední stav aktivních zákazníků, rozhodovací poznámky k incidentům a odkaz na omezený archiv po definovanou dobu. Staré screenshoty s osobními údaji nejsou „znalostní báze“. Jsou datový batoh, který někdo musí nést.
+
+> Codyho komentář: Export není kouzelná záloha svědomí. Pokud nevíš, proč data vezeš do nového systému, vezeš tam i starý nepořádek. Jen v novém kabátě a s novou fakturou.
+
+### Ověř výsledek po částech
+
+Vendor exit neověřuj jedním velkým „vypadá to dobře“. Vyber několik cest, které odpovídají reálné práci.
+
+Typické smoke testy:
+
+- nový lead projde formulářem a skončí ve správném místě,
+- transakční e-mail odejde bez starého tracking pixelu,
+- support ticket přijde, dostane vlastníka a dá se exportovat,
+- administrátor se přihlásí přes správné SSO nebo MFA nastavení,
+- webhook se zpracuje jednou, idempotentně a bez starého endpointu,
+- zákazník najde aktuální privacy nebo trust informaci,
+- fakturace, refund nebo dunning nezůstaly napojené na starý systém,
+- monitoring pozná selhání nové cesty.
+
+U každého testu stačí krátký zápis: cesta, očekávaný výsledek, skutečný výsledek, blocker ano/ne. Neukládej osobní testovací data déle, než je potřeba k ověření. Pro většinu testů použij technické nebo demo identity a po kontrole je smaž.
+
+### Vypni staré vstupy, ne jen účet
+
+Zavření účtu u dodavatele je často poslední krok, ne první. Předtím musíš zastavit místa, kudy do něj tečou nová data.
+
+Zkontroluj hlavně:
+
+- formuláře a embed kódy na webu,
+- DNS záznamy, MX, SPF, DKIM, CNAME a ověřovací TXT záznamy,
+- webhook endpointy a retry fronty,
+- API klíče a OAuth aplikace,
+- SSO propojení a SCIM provisioning,
+- automatizace v no-code nástrojích,
+- exportní joby a datové pipeline,
+- staré segmenty, publika a suppression listy,
+- interní odkazy v dokumentaci a provozních postupech,
+- billing kontakt a fakturační přístup.
+
+Po vypnutí starých vstupů nech krátké pozorovací okno. U kritického provozu to může být několik dní, u jednoduchého marketingového nástroje třeba jeden pracovní týden. Cílem není čekat donekonečna. Cílem je zachytit zapomenutou cestu dřív, než účet definitivně zavřeš.
+
+### Smazání dolož bez interního úniku
+
+U starého dodavatele rozděl konec dat do tří skupin:
+
+| Skupina | Co udělat |
+| --- | --- |
+| Aktivní provozní data | exportovat jen potřebnou část, ověřit import, vypnout další příjem |
+| Data s retenčním důvodem | zapsat důvod, rozsah, umístění, vlastníka a datum další kontroly |
+| Data bez dalšího účelu | požádat o výmaz nebo použít dostupný mazací postup a uložit jen nezbytné potvrzení |
+
+Potvrzení o výmazu nemusí znamenat archivovat celé interní vlákno, screenshoty s osobními údaji nebo kompletní administrátorské exporty. Stačí rozhodovací stopa: co bylo smazáno, kdy, kdo to provedl, jaký byl důkaz a kde se drží případná výjimka.
+
+Pokud dodavatel neumí jasný výmaz nebo návrat dat, zapiš to do vendor karty jako riziko pro příště. Taková zkušenost je cennější než heroická stížnost v chatu.
+
+### Aktualizuj veřejné a interní mapy
+
+Po odchodu od dodavatele musí sedět realita i dokumentace. Jinak se bude tým za půl roku rozhodovat podle starého světa.
+
+Minimální aktualizace:
+
+- datová mapa a záznam účelů zpracování,
+- seznam subdodavatelů nebo trust center,
+- privacy notice, pokud se změnilo místo, účel, příjemce nebo retenční pravidlo,
+- DPA nebo smluvní přílohy u zákazníků, pokud se změna týká závazků,
+- support a sales odpovědi,
+- runbooky, monitoring a incident kontakty,
+- onboarding nových lidí,
+- nákupní a vendor rozhodovací log.
+
+Nemusíš z toho dělat slavnostní release notes. Ale pokud zákazníkům veřejně tvrdíš „provozováno v Evropě“, musíš mít interní mapu, která tu větu neunese jen silou optimismu.
+
+### Příklad: Odchod od analytického nástroje
+
+| Pole | Zápis |
+| --- | --- |
+| Důvod odchodu | Nástroj mění podmínky a tlačí identifikační funkce, které tým nepotřebuje |
+| Rozsah | Webová analytika, agregované návštěvy, konverze formulářů, staré dashboardy |
+| Nový stav | Jednodušší EU analytika bez cookies a bez individuální profilace |
+| Export | Jen měsíční agregace návštěv, zdrojů a konverzí za posledních 12 měsíců |
+| Nepřenášíme | Session-level data, staré segmenty, publika a detailní event historii |
+| Přepnutí | Odebrat skript z webu, vypnout staré cíle, zrušit staré dashboard odkazy |
+| Ověření | Homepage, pricing a kontaktní formulář posílají jen nové agregované eventy |
+| Výmaz | Po ověření exportu požádat o smazání workspace a uložit potvrzení |
+| Texty | Upravit privacy notice a interní analytický runbook |
+| Zavření | Po 14 dnech bez požadavku na starý dashboard zrušit účty a archivovat rozhodnutí |
+
+Tohle není jen technická migrace. Je to snížení datové plochy, oprava slibu a úklid pracovního návyku.
+
+### Checklist: Odchod od dodavatele
+
+- [ ] Máme zapsaný důvod odchodu a dotčený rozsah.
+- [ ] Víme, které funkce, týmy, zákazníci a datové kategorie změna ovlivní.
+- [ ] Exportujeme jen data, která mají nový účel nebo jasný retenční důvod.
+- [ ] Dočasné exporty mají vlastníka, umístění a datum smazání.
+- [ ] Ověřili jsme import nebo náhradní proces na několika reálných pracovních cestách.
+- [ ] Vypnuli jsme staré vstupy: formuláře, embedy, webhooky, API klíče, SSO, DNS a automatizace.
+- [ ] Zrušili jsme nepotřebné účty, role, tokeny a externí přístupy.
+- [ ] Požádali jsme o výmaz dat bez dalšího účelu nebo provedli dostupný mazací postup.
+- [ ] Zapsali jsme, která data zůstávají kvůli retenci a kdy se znovu zkontrolují.
+- [ ] Aktualizovali jsme privacy notice, trust přehled, datovou mapu, support odpovědi a runbooky.
+- [ ] Máme jasné kritérium, kdy je vendor exit zavřený.
+
+### Mini úkol
+
+Vyber jednoho dodavatele, kterého už tým „skoro nepoužívá“. Neřeš všechny nástroje. Vyplň migrační balík jen pro něj: účel, data, integrace, účty, export, retenci, výmaz a veřejné texty. Potom udělej jednu konkrétní zavírací akci tento týden: odeber starý skript z webu, vypni webhook, zruš API klíč, smaž dočasný export, požádej o výmaz workspace nebo aktualizuj privacy notice. Pokud se ukáže, že nástroj ještě něco kritického dělá, není to selhání. Je to dobrý nález před tím, než by ses tvářil, že je odchod hotový.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -48433,6 +48599,7 @@ Vyber jednoho dodavatele, u kterého v posledních měsících přišla změna c
 
 ## Pracovní log
 
+- 2026-07-23: Doplněna příloha o odchodu od dodavatele bez datového ocasu: migrační balík, export jen dat s novým účelem, částečné smoke testy, vypnutí starých vstupů, doložení výmazu bez zbytečných interních úniků, aktualizace privacy notice, trust přehledu, datové mapy a runbooků, praktický příklad odchodu od analytického nástroje, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro řízený vendor exit. Bez nových aktuálních externích tvrzení, navázáno na existující zdroje k GDPR, zpracovatelům, exportu, retenci a vendor lock-inu; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
 - 2026-07-23: Doplněna příloha o revizi dodavatele po změně podmínek bez panického přepisu: rozlišení změny ceny, dat, regionu, funkcí, provozu a vlastnictví, návrat k vendor kartě, pořadí akcí ponechat/omezit/vyjednat/nahradit/ukončit, kontrola veřejných privacy-first slibů, rozhodovací zápis, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro revizi dodavatele po změně podmínek. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
 - 2026-07-23: Doplněna příloha o archivním obsahu bez zapomenutých slibů: rozlišení aktivní, archivní a ukončené stránky, archivní poznámka před prvním rozhodnutím, úklid starých CTA/formulářů/embedů/metadat, jedna aktuální cesta z archivu, chudé údržbové měření, karta archivní stránky, praktický příklad, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro udržení archivního obsahu užitečného bez starých slibů. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
 - 2026-07-23: Doplněna příloha o RSS po obsahovém úklidu bez falešných novinek: rozlišení nové publikace, aktualizace, archivace a tichého úklidu, stabilní identita položek ve feedu, omezení trackingových parametrů, karta feed úklidu, praktický příklad, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro úklid RSS a veřejných distribučních stop po změně obsahu. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
