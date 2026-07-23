@@ -106,6 +106,7 @@ Když se nechceš vracet do celé knihy, hledej konkrétní nástroj podle výst
 | Rozhodnout, jestli opakovaný dotaz vyžaduje produktovou změnu | „dotaz jako produktový signál“, „veřejná odpověď nestačí“ nebo „změna reality“ | rozhodnutí, zda stačí lepší text, nebo je potřeba opravit produkt, pricing, onboarding či trust slib |
 | Vyhodnotit návratnost obsahu bez sledování lidí | „návratnost obsahu“, „obsahový účet“ nebo „atribuce nestačí“ | malá karta obsahu s nákladem, rozhodnutím, signálem dopadu a stop pravidlem |
 | Uklidit obsahové portfolio bez mazání naslepo | „obsahová inventura“, „ponechat upravit sloučit archivovat smazat“ nebo „obsahové portfolio“ | rozhodnutí pro každou důležitou stránku včetně vlastníka, další akce a privacy dopadu |
+| Vybrat další redakční opravu po inventuře | „redakční priorita“, „po inventuře“ nebo „tabulkový hřbitov“ | jedna prioritní oprava veřejného obsahu se stavem, vlastníkem, termínem a ověřením dopadu |
 | Úklid po spolupráci nebo projektu | „offboarding“, „ukončení spolupráce“ nebo „předání projektu“ | předávací a mazací checklist s uzavřením přístupů |
 
 Pravidlo pro práci s rejstříkem: otevři maximálně tři nalezené části, vyber jednu a zapiš výstup. Pokud po deseti minutách pořád skáčeš mezi odkazy, vrať se k tabulce „Kudy začít podle aktuální bolesti“ a zúž problém. E-book není buffet. Teda je, ale bez talíře si stejně odneseš jen chaos.
@@ -46849,6 +46850,135 @@ Všimni si, že výstup není „napsat nový článek o exportu“. Výstup je 
 
 Vyber pět URL, které nejčastěji posíláš v sales, supportu nebo onboardingu. Ke každé vyplň kartu obsahové inventury a nastav jeden stav. Potom udělej jednu nejmenší akci: oprav jeden nepřesný slib, slouč dvě duplicitní odpovědi, archivuj starý návod, nebo přidej odkaz z místa, kde otázka skutečně vzniká. Pokud po hodině zůstane jen tabulka bez změny, inventura se změnila v kancelářskou jógu. Protáhla záda, ale webu nepomohla.
 
+## Příloha: Redakční priorita po inventuře bez tabulkového hřbitova
+
+Obsahová inventura je užitečná jen tehdy, když po ní následuje jedna konkrétní změna. Jinak vznikne tabulka s desítkami URL, barvami, komentáři a pocitem kontroly. Web se ale nezmění, zákazník pořád čte starý slib a tým má jen další místo, kam se bojí podívat.
+
+Po inventuře proto nepokračuj otázkou „co všechno jsme našli?“. Pokračuj otázkou:
+
+„Která jedna oprava veřejného obsahu sníží největší nejistotu zákazníka nebo největší provozní riziko tento týden?“
+
+Tahle otázka drží práci malou. Neřeší ideální redakční systém pro příští rok. Řeší nejbližší změnu, která má viditelný dopad a dá se dokončit bez nového sběru osobních dat.
+
+> Codyho komentář: Audit bez opravy je jako sprint review bez releasu. Všichni si hezky popovídají, tabulka přibere pár kilo a realita čeká u dveří s výrazem „tak co jako“.
+
+### Rozděl nálezy podle typu rizika
+
+Ne všechny obsahové nálezy jsou stejně důležité. Překlep v blogu, starý screenshot a nepřesný privacy slib nemají stejnou váhu. Po inventuře si nálezy rozděl do pěti košů:
+
+| Koš | Co do něj patří | Proč je důležitý |
+| --- | --- | --- |
+| Nepravdivý slib | starý pricing, limit, dostupnost funkce, datový tok nebo provozní tvrzení | může vést ke špatnému nákupnímu rozhodnutí |
+| Chybějící důkaz | tvrzení bez ukázky, dokumentace, zdroje pravdy nebo veřejného postupu | snižuje důvěru a zvyšuje počet dotazů |
+| Rozbitý další krok | CTA, odkaz, formulář, export nebo návod nevede k výsledku | kazí konverzi i podporu |
+| Duplicitní odpověď | více stránek říká podobnou věc různě | vytváří rozpory a redakční dluh |
+| Nízká hodnota | obsah existuje, ale neuzavírá žádné rozhodnutí | zabírá údržbovou kapacitu |
+
+Začni prvními třemi koši. Nepravdivý slib, chybějící důkaz a rozbitý další krok bolí zákazníka přímo. Nízkou hodnotu a duplicity řeš také, ale nesmí odsunout opravy, které mění rozhodování lidí teď.
+
+### Použij jednoduché skóre, ne falešnou přesnost
+
+Nemusíš počítat prioritizační model s vahami na dvě desetinná místa. Stačí každému nálezu dát tři hrubé značky:
+
+| Otázka | Nízké | Střední | Vysoké |
+| --- | --- | --- | --- |
+| Dopad na rozhodnutí | kosmetika | pomáhá pochopení | mění nákup, odchod, důvěru nebo aktivaci |
+| Riziko nepravdy | drobná nepřesnost | může zmást část čtenářů | veřejný slib neodpovídá realitě |
+| Náročnost opravy | do 30 minut | do půl dne | víc týmů nebo produktová změna |
+
+První priorita je obvykle nález s vysokým dopadem nebo vysokým rizikem nepravdy a nízkou až střední náročností opravy. Když je nález závažný, ale oprava je velká, rozděl ji na dvě vrstvy: krátké veřejné zpřesnění teď a větší produktovou nebo dokumentační změnu do backlogu.
+
+Příklad:
+
+| Nález | Rychlá oprava | Větší úkol |
+| --- | --- | --- |
+| Stránka slibuje „export kdykoliv“, ale export má omezení pro archivované účty | doplnit férovou poznámku k omezení a cestu přes support | upravit exportní funkci nebo samoobslužný postup |
+| Pricing ukazuje starý limit členů týmu | opravit tabulku a FAQ | doplnit kontrolu pricing textů do release checklistu |
+| Trust odpověď říká „EU provoz“, ale neodkazuje na konkrétní místo v dokumentaci | přidat odkaz na veřejné vysvětlení provozu | sjednotit trust balíček a sales odpovědi |
+| Starý článek má dobrý checklist, ale opakuje novější přílohu | přidat odkaz na novější část | sloučit text při příští redakční údržbě |
+
+### Vyber jednu změnu ve tvaru redakční opravy
+
+Dobrá redakční priorita není „zlepšit obsah“. Je to konkrétní oprava veřejné reality.
+
+Zapiš ji takto:
+
+| Pole | Zápis |
+| --- | --- |
+| Oprava |  |
+| Proč teď |  |
+| Dotčené URL |  |
+| Zdroj pravdy | produkt / pricing / dokumentace / support / právní text / provozní runbook |
+| Typ rizika | nepravdivý slib / chybějící důkaz / rozbitý další krok / duplicita / nízká hodnota |
+| Nejmenší dokončitelný výstup |  |
+| Co dnes vědomě neděláme | nový článek / redesign / nový tracking / velkou migraci obsahu |
+| Vlastník |  |
+| Termín kontroly |  |
+
+Všimni si pole „Co dnes vědomě neděláme“. Je důležité. Inventura často láká k velkým změnám: předělat navigaci, přepsat celý blog, spustit nový helpdesk, přidat personalizaci. To všechno může být někdy správně, ale první redakční priorita má být malá a vratná.
+
+### Zkontroluj místo, kde otázka vzniká
+
+Oprava stránky nestačí, pokud se k ní člověk nedostane ve chvíli, kdy ji potřebuje. Po výběru priority najdi místo vzniku otázky.
+
+| Otázka vzniká v | Typická oprava |
+| --- | --- |
+| Pricing stránce | přidat vysvětlení limitu přímo k plánu, ne do vzdáleného článku |
+| Onboardingu | dát odkaz do kroku, kde člověk váhá, ne jen do dokumentace |
+| Sales follow-upu | nahradit ruční odstavec stabilní veřejnou odpovědí |
+| Support odpovědi | přidat odkaz na návod a krátkou větu, co se po něm stane |
+| Trust balíčku | propojit odpověď s důkazem, ne jen s obecným privacy textem |
+| Starém článku | přidat směrovku na aktuální zdroj pravdy nebo archivní poznámku |
+
+Privacy-first princip je jednoduchý: lepší veřejný odkaz ve správném místě je často silnější než nový sledovací systém. Když lidé pořád pokládají stejný dotaz, možná nepotřebuješ víc analytiky. Možná potřebuješ dát odpověď tam, kde se rozhodují.
+
+### Ověř dopad chudě
+
+Po opravě nastav malé ověření. Neměř všechno. Stačí jeden signál:
+
+| Typ opravy | Chudé ověření |
+| --- | --- |
+| Opravený pricing nebo limit | po dvou týdnech ručně projít nové dotazy k danému limitu |
+| Doplněný veřejný důkaz | sledovat, jestli sales/support posílá méně ručních vysvětlení |
+| Opravený onboarding odkaz | agregovaně zkontrolovat dokončení příslušného kroku nebo poznámky z onboardingu |
+| Sloučené duplicity | ověřit, že interní odkazy a nejposílanější odpovědi míří na jednu verzi pravdy |
+| Archivovaný starý návod | zkontrolovat, že hlavní cesta nevede na historický obsah |
+
+Dopad může být i kvalitativní: méně dohadů v týmu, kratší odpověď zákazníkovi, jasnější další krok. Privacy-first provoz nemusí všechno převádět na detailní event. Někdy stačí rozhodovací záznam a datum kontroly.
+
+### Karta redakční priority
+
+Použij jednu kartu na týden:
+
+| Pole | Příklad zápisu |
+| --- | --- |
+| Priorita týdne | Opravit vysvětlení exportu dat v dokumentaci a pricing FAQ. |
+| Proč teď | Dotaz na odchod a export se opakuje v sales i supportu. |
+| Dotčené URL | dokumentace exportu, pricing FAQ, trust balíček |
+| Zdroj pravdy | produktový export, support runbook, aktuální limity plánu |
+| Nejmenší výstup | doplnit rozsah exportu, ukázku polí bez dat zákazníků a odkaz z pricing FAQ |
+| Vědomě neděláme | nepřidáváme session replay, nepíšeme nový obecný článek, nepředěláváme celý help |
+| Ověření | za 14 dní projít ručně dotazy k exportu a odkazy poslané sales týmem |
+| Stav po kontrole | ponechat / upravit znovu / převést na produktový úkol / zavřít |
+
+Tahle karta je most mezi inventurou a prací. Neřeší kompletní redakční strategii. Říká: „Tento týden opravujeme toto, protože to zlepší konkrétní rozhodnutí.“
+
+### Checklist: Redakční priorita po inventuře
+
+- [ ] Inventura skončila alespoň jednou vybranou opravou, ne jen tabulkou.
+- [ ] Priorita je vybraná podle dopadu na rozhodnutí, rizika nepravdy a náročnosti opravy.
+- [ ] U závažných nálezů máme rychlé zpřesnění teď a větší úkol zvlášť.
+- [ ] Oprava má dotčené URL, zdroj pravdy, vlastníka a datum kontroly.
+- [ ] Víme, kde otázka vzniká, a odkaz nebo vysvětlení doplníme právě tam.
+- [ ] Nepřidáváme nový tracking jen proto, abychom dokázali hodnotu opravy.
+- [ ] Dopad ověříme jedním chudým signálem nebo ručním review.
+- [ ] Duplicity a staré návody směřují k jedné verzi pravdy.
+- [ ] Po kontrole rozhodneme: ponechat, upravit znovu, převést na produktový úkol, nebo zavřít.
+
+### Mini úkol
+
+Vezmi poslední obsahovou inventuru a vyber z ní jednu položku s vysokým dopadem nebo vysokým rizikem nepravdy. Vyplň kartu redakční priority a do konce týdne udělej nejmenší veřejnou opravu: zpřesni slib, doplň důkaz, oprav další krok, nebo přesměruj čtenáře na lepší zdroj pravdy. Potom si nastav kontrolu za 14 dní. Pokud máš chuť místo toho zakládat velký redakční projekt, dej si vodu, projdi se a vrať se k jedné URL. Dramatický oblouk necháme literatuře.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -47038,6 +47168,7 @@ Vyber pět URL, které nejčastěji posíláš v sales, supportu nebo onboarding
 
 ## Pracovní log
 
+- 2026-07-23: Doplněna příloha o redakční prioritě po obsahové inventuře bez tabulkového hřbitova: třídění nálezů podle rizika, jednoduché skóre dopadu, rizika nepravdy a náročnosti, karta redakční priority, kontrola místa vzniku otázky, chudé ověření dopadu, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro výběr další redakční opravy po inventuře. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
 - 2026-07-23: Doplněna příloha o obsahové inventuře bez mazání naslepo: výběr malého výřezu URL, rozhodovací stavy ponechat/upravit/sloučit/archivovat/smazat, kontrola slibu, důkazu a dalšího kroku, oddělení údržby od nových obsahových nápadů, karta inventury, praktický příklad, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro úklid obsahového portfolia bez profilování čtenářů. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje; script pro tento běh hlásil `webOk: true`.
 - 2026-07-23: Doplněna příloha o návratnosti obsahu bez atribuční fantazie: rozhodovací věta obsahu, jednoduchý obsahový účet nákladů, privacy-first signály dopadu místo sledování individuálních cest, rozlišení slabé hodnoty, distribuce a matchingu, karta obsahového účtu, pravidla pro zavření obsahu, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro vyhodnocení návratnosti obsahu bez sledování lidí. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně opraveno selhání `cody.dreamind.cz`: přímý veřejný TLS certifikát Let's Encrypt byl přes ruční GitHub Actions workflow obnoven z expirace `2026-07-17 19:35:56 GMT` na nový certifikát platný od `2026-07-23 05:15:35 GMT` do `2026-10-21 05:15:34 GMT`; běžné přímé HTTPS bez `-k` nyní vrací `200 OK` z nginx/Next.js.
 - 2026-07-23: Doplněna příloha o opakovaném zákaznickém dotazu jako produktovém signálu bez nekonečného vysvětlování: rozlišení situací, kdy chybí odpověď, důkaz nebo realita, převod tření na nejmenší opravu textu, důkazu, navigace, procesu, produktu nebo obchodního pravidla, karta rozhodnutí, propis do roadmapy, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro rozhodnutí, jestli opakovaný dotaz vyžaduje produktovou změnu. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně ověřeno, že HTTPS přes lokální proxy na `cody.dreamind.cz` končí po TLS tunelu chybou `Empty reply from server`, přímé HTTPS bez proxy selhává kvůli expirovanému veřejnému certifikátu, DNS míří na `91.99.227.53` a aktuální pracovní prostor neobsahuje SSH klíč ani bezpečný serverový/deploy přístup pro obnovu certifikátu.
