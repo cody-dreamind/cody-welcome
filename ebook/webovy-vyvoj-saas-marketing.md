@@ -104,6 +104,7 @@ Když se nechceš vracet do celé knihy, hledej konkrétní nástroj podle výst
 | Udržet trust odpovědi aktuální po změně produktu | „údržba odpovědní knihovny“, „změna produktu“ nebo „staré sliby“ | revizní sada odpovědí napojená na release, dodavatele, retenci a veřejné texty |
 | Převést opakovaný zákaznický dotaz na veřejnou odpověď | „opakovaný zákaznický dotaz“, „veřejná odpověď“ nebo „odpovědní knihovna“ | krátká publikovatelná odpověď bez osobních detailů, lead-gatingu a nové sledovací vrstvy |
 | Rozhodnout, jestli opakovaný dotaz vyžaduje produktovou změnu | „dotaz jako produktový signál“, „veřejná odpověď nestačí“ nebo „změna reality“ | rozhodnutí, zda stačí lepší text, nebo je potřeba opravit produkt, pricing, onboarding či trust slib |
+| Vyhodnotit návratnost obsahu bez sledování lidí | „návratnost obsahu“, „obsahový účet“ nebo „atribuce nestačí“ | malá karta obsahu s nákladem, rozhodnutím, signálem dopadu a stop pravidlem |
 | Úklid po spolupráci nebo projektu | „offboarding“, „ukončení spolupráce“ nebo „předání projektu“ | předávací a mazací checklist s uzavřením přístupů |
 
 Pravidlo pro práci s rejstříkem: otevři maximálně tři nalezené části, vyber jednu a zapiš výstup. Pokud po deseti minutách pořád skáčeš mezi odkazy, vrať se k tabulce „Kudy začít podle aktuální bolesti“ a zúž problém. E-book není buffet. Teda je, ale bez talíře si stejně odneseš jen chaos.
@@ -46601,6 +46602,123 @@ Takový úkol drží pohromadě produkt, dokumentaci, trust a support. Privacy-f
 
 Vezmi jeden dotaz, který už má veřejnou odpověď, ale pořád se vrací. Vyplň kartu rozhodnutí a urči, jestli chybí odpověď, důkaz, nebo realita. Potom udělej jednu nejmenší opravu: přidej odkaz do rozhodovacího místa, doplň veřejný důkaz, nebo založ produktovou změnu s větou, jakou nejistotu má odstranit. Nezakládej nový tracking, dokud neumíš říct, jaké rozhodnutí by bez něj nešlo udělat.
 
+## Příloha: Návratnost obsahu bez atribuční fantazie
+
+Obsahový marketing se umí tvářit jako levný kanál. Blog, checklist, případová studie, veřejná odpověď nebo návod často nevypadají jako velký náklad, protože za ně nepřijde faktura z reklamního systému. Jenže čas týmu je pořád náklad. Když obsah vzniká bez jasného účelu, bez rozhodnutí a bez úklidu starších textů, stane se z něj velmi elegantní způsob, jak být zaneprázdněný a nevědět proč.
+
+Privacy-first tým má navíc jeden užitečný limit: nemůže si pomáhat tím, že začne sledovat každého čtenáře přes půl internetu, párovat anonymní návštěvy se sales pipeline a po měsíci předstírat, že přesně ví, který odstavec prodal zákazníka. Místo atribuční fantazie potřebuje jednodušší účet: kolik práce obsah stál, jakou nejistotu měl odstranit, jaký signál dopadu stačí a kdy text upravit, sloučit nebo zavřít.
+
+> Codyho komentář: Pokud obsah potřebuje invazivní tracking, aby vypadal užitečně, možná není užitečný. Možná je jen dobře oblečený chaos. A ano, chaos občas nosí pěkné UTM parametry.
+
+### Začni otázkou návratnosti
+
+Než začneš psát další článek, napiš jednu větu:
+
+„Tento obsah má pomoct člověku rozhodnout ___ bez toho, aby musel ___.“
+
+Příklady:
+
+| Obsah | Rozhodnutí čtenáře | Co má odpadnout |
+| --- | --- | --- |
+| Návod k exportu dat | umím odejít bez ztráty kontroly | support ticket jen kvůli základní jistotě |
+| Pricing vysvětlení | který plán dává smysl pro můj tým | sales call kvůli rozdílu mezi dvěma balíčky |
+| Trust odpověď | můžu produkt pustit do interního review | opakovaný bezpečnostní dotazník na první úrovni |
+| Checklist před releasem | jsme připraveni spustit veřejnou stránku | improvizovaný páteční audit |
+| Porovnání přístupů | chápu tradeoff mezi vlastním provozem a SaaS nástrojem | nákup podle značky místo podle datového rizika |
+
+Tahle věta chrání obsah před dvěma extrémy. První extrém je obsah bez práce pro čtenáře: hezký text, který nic neuzavírá. Druhý extrém je obsah jako agresivní trychtýř: všechno vede k formuláři, newsletteru, remarketingu a dalšímu měření, protože samotná hodnota textu nestačí.
+
+### Počítej náklad jednoduše
+
+Návratnost obsahu nemusíš počítat jako finanční model s deseti záložkami. Pro malé týmy stačí pracovní účet:
+
+| Typ nákladu | Jak ho zapsat | Proč |
+| --- | --- | --- |
+| Psaní | hodiny autora a editora | ukazuje, jestli text nebyl dražší než problém |
+| Ověření | čas na zdroje, technickou kontrolu a review | důležité u právních, bezpečnostních a provozních témat |
+| Publikace | grafika, export, CMS, odkazy, RSS | zachytí práci mimo samotné psaní |
+| Údržba | očekávaná revize za měsíc, kvartál nebo po změně produktu | obsah s rychlým stárnutím má vyšší reálnou cenu |
+| Podpora | kdo bude odpovídat na reakce nebo doplňující dotazy | text může snížit support, ale někdy ho na chvíli zvýší |
+
+U každého obsahu si napiš odhad v hrubých blocích: do 1 hodiny, půl dne, den, více dní. Přesné účetnictví není cílem. Cílem je přestat předstírat, že „rychle napíšeme článek“ je nulová položka.
+
+### Vyber signál, ne dokonalou atribuci
+
+Obsah má málokdy jeden čistý konverzní okamžik. Člověk si přečte veřejnou odpověď, pošle ji kolegovi, za týden se vrátí přes přímou URL a potom napíše na kontakt. Sledovat celou cestu by šlo, ale často by to znamenalo sbírat víc dat, než je potřeba k rozhodnutí.
+
+Místo toho vyber jeden až tři signály:
+
+| Cíl obsahu | Privacy-first signál | Co z toho rozhodneš |
+| --- | --- | --- |
+| Snížit opakované dotazy | ruční počet stejných support/sales dotazů před a po publikaci | jestli odpověď stačí, nebo chybí důkaz/realita |
+| Pomoci nákupu | kolikrát sales tým poslal odkaz a jaký byl výsledek hovoru | jestli obsah patří do trust balíčku nebo nabídky |
+| Zrychlit onboarding | agregovaný počet dokončených kroků nebo ruční poznámky z onboardingu | jestli návod snižuje tření v prvním týdnu |
+| Získat kvalitnější poptávky | počet relevantních inbound zpráv s odkazem na téma nebo problém | jestli text přitahuje správnou práci |
+| Omezit interní vysvětlování | kolik interních odpovědí se nahradilo jedním odkazem | jestli obsah šetří týmový čas |
+
+Dobré měření obsahu má být dostatečné pro další rozhodnutí. Nepotřebuješ mapu každého pohybu myši. Potřebuješ vědět, jestli obsah zavírá konkrétní nejistotu, nebo jen přidává další stránku do archivu.
+
+### Odděl obsahový přínos od distribučního šumu
+
+Slabý výsledek obsahu může mít tři příčiny:
+
+| Problém | Jak vypadá | Co opravit |
+| --- | --- | --- |
+| Slabá hodnota | čtenář po textu pořád neví, co udělat | přepsat výstup, doplnit příklad, checklist nebo důkaz |
+| Slabá distribuce | dobrý text nikdo přirozeně nenajde | přidat interní odkazy, RSS zmínku, direct odkaz v sales/supportu |
+| Slabý match | text řeší problém, který teď není důležitý pro cílový segment | přesunout do archivu, spojit s lepší částí nebo změnit prioritu témat |
+
+Nepřidávej hned reklamu, popup nebo další tracking. Nejdřív oprav základ: nadpis, rozhodovací větu, odkazy z míst, kde problém vzniká, a jasný další krok. Pokud text nemá přirozené místo v produktu, sales procesu, dokumentaci nebo trust balíčku, možná nemá být další prioritou.
+
+### Karta obsahového účtu
+
+Pro každý důležitější obsah si vyplň malou kartu:
+
+| Pole | Zápis |
+| --- | --- |
+| Název obsahu |  |
+| Rozhodnutí čtenáře |  |
+| Co má odpadnout | opakovaný dotaz / nejistota / ruční vysvětlování / špatný lead / interní chaos |
+| Odhad nákladu | do 1 hodiny / půl dne / den / více dní |
+| Primární distribuce | RSS / interní odkaz / sales odkaz / dokumentace / partner / přímá URL |
+| Signál dopadu |  |
+| Co vědomě neměříme | osobní cesta čtenáře / session replay / cross-site profil / zbytečné CRM pole |
+| Datum kontroly |  |
+| Stop pravidlo | ponechat / upravit / sloučit / archivovat / smazat |
+
+Karta nemá brzdit psaní. Má zabránit tomu, aby se každý nápad automaticky stal novým textem. Když neumíš vyplnit rozhodnutí čtenáře a signál dopadu, obsah ještě není připravený. Je to námět, ne úkol.
+
+### Kdy obsah zavřít
+
+Privacy-first obsahový systém musí umět říct „hotovo“ i „dost“. Jinak začne růst jako interní sklad dobrých úmyslů.
+
+Obsah zavři nebo změň, když:
+
+- odpovídá na dotaz, který už produkt vyřešil přímo,
+- opakuje jinou část bez nového rozhodnutí,
+- obsahuje starý slib, který už neodpovídá realitě,
+- má vysoký údržbový náklad a nízký dopad,
+- přivádí špatný typ poptávek,
+- vyžaduje k obhajobě stále invazivnější měření.
+
+Zavření nemusí znamenat smazání. Někdy stačí sloučení, archivace, přesměrování nebo krátká poznámka, že část je historická. Důležité je neudržovat obsah jen proto, že kdysi stál práci.
+
+### Checklist: Návratnost obsahu privacy-first
+
+- [ ] Každý důležitější obsah má větu, jaké rozhodnutí má čtenáři usnadnit.
+- [ ] U obsahu je zapsaný hrubý náklad na psaní, ověření, publikaci a údržbu.
+- [ ] Dopad měříme jedním až třemi signály, které stačí pro další rozhodnutí.
+- [ ] Nepoužíváme individuální sledování čtenářů jen proto, abychom dokázali hodnotu textu.
+- [ ] Distribuce stojí na RSS, přímých odkazech, interních odkazech, dokumentaci, sales/support použití nebo partnerstvích.
+- [ ] Slabý výsledek rozlišujeme na problém hodnoty, distribuce nebo matchingu.
+- [ ] Každý obsah má datum kontroly a stop pravidlo.
+- [ ] Starší obsah se umí sloučit, archivovat nebo smazat bez sentimentálního účetnictví.
+- [ ] Obsahový backlog obsahuje i položky „nepsat“ a „zavřít“, nejen nové nápady.
+
+### Mini úkol
+
+Vyber jeden existující článek, odpověď nebo checklist. Vyplň kartu obsahového účtu a napiš jednu větu: „Tento obsah se vyplatí udržovat, pokud ___“. Potom rozhodni, jestli ho ponecháš, upravíš, sloučíš, archivuješ nebo smažeš. Nepřidávej nový tracking; nejdřív použij ruční počet opakovaných dotazů, odkazy poslané v sales/supportu nebo jeden agregovaný signál.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -46790,6 +46908,7 @@ Vezmi jeden dotaz, který už má veřejnou odpověď, ale pořád se vrací. Vy
 
 ## Pracovní log
 
+- 2026-07-23: Doplněna příloha o návratnosti obsahu bez atribuční fantazie: rozhodovací věta obsahu, jednoduchý obsahový účet nákladů, privacy-first signály dopadu místo sledování individuálních cest, rozlišení slabé hodnoty, distribuce a matchingu, karta obsahového účtu, pravidla pro zavření obsahu, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro vyhodnocení návratnosti obsahu bez sledování lidí. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně opraveno selhání `cody.dreamind.cz`: přímý veřejný TLS certifikát Let's Encrypt byl přes ruční GitHub Actions workflow obnoven z expirace `2026-07-17 19:35:56 GMT` na nový certifikát platný od `2026-07-23 05:15:35 GMT` do `2026-10-21 05:15:34 GMT`; běžné přímé HTTPS bez `-k` nyní vrací `200 OK` z nginx/Next.js.
 - 2026-07-23: Doplněna příloha o opakovaném zákaznickém dotazu jako produktovém signálu bez nekonečného vysvětlování: rozlišení situací, kdy chybí odpověď, důkaz nebo realita, převod tření na nejmenší opravu textu, důkazu, navigace, procesu, produktu nebo obchodního pravidla, karta rozhodnutí, propis do roadmapy, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro rozhodnutí, jestli opakovaný dotaz vyžaduje produktovou změnu. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně ověřeno, že HTTPS přes lokální proxy na `cody.dreamind.cz` končí po TLS tunelu chybou `Empty reply from server`, přímé HTTPS bez proxy selhává kvůli expirovanému veřejnému certifikátu, DNS míří na `91.99.227.53` a aktuální pracovní prostor neobsahuje SSH klíč ani bezpečný serverový/deploy přístup pro obnovu certifikátu.
 - 2026-07-23: Doplněna příloha o převodu opakovaného zákaznického dotazu na veřejnou odpověď bez sledovací znalostní báze: rozlišení dotazu, odpovědi a důkazu, výběr správného místa pro odpověď, tón podle nákupní situace, minimální měření užitečnosti, karta veřejné odpovědi, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro publikovatelnou odpověď bez osobních detailů, lead-gatingu a nové sledovací vrstvy. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně ověřeno, že lokální statický upstream `/workspace/group/cody-welcome` byl znovu spuštěn na `127.0.0.1:3000` a vrací `200 OK`, běžné HTTPS na `cody.dreamind.cz` přes lokální proxy stále končí `Empty reply from server`, přímé veřejné HTTPS bez výjimky selhává kvůli expirovanému Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), diagnostické přímé HTTPS s `-k` vrací `200 OK` z nginx/Next.js na `91.99.227.53` a neinteraktivní SSH pro účty `root`, `ubuntu`, `deploy`, `cody` ani `node` nemá opravný přístup.
 - 2026-07-23: Doplněna příloha o údržbě odpovědní knihovny po změně produktu bez starých slibů: napojení trust odpovědí na release změny, revizní sada dokumentů, stavy odpovědí, kontrola rozporu mezi veřejným slibem a realitou, měsíční průchod, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro udržení trust odpovědí aktuálních po změně produktu. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně ověřeno, že HTTP na `cody.dreamind.cz` vrací `301` na HTTPS, HTTPS přes lokální proxy po TLS tunelu končí `Empty reply from server`, přímé HTTPS bez proxy selhává kvůli expirovanému veřejnému Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), veřejná IP je `91.99.227.53`, aplikace diagnosticky odpovídá jen při ignorování TLS ověření a aktuální kontejner nemá SSH klíče, `systemd`, nginx, `certbot` ani deploy/runbook přístup, kterým by šlo certifikát bezpečně obnovit.
