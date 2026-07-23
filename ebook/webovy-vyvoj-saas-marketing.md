@@ -122,6 +122,7 @@ Když se nechceš vracet do celé knihy, hledej konkrétní nástroj podle výst
 | Ověřit, že po odchodu nezůstaly stínové kopie | „stínové kopie“, „po vendor exitu“ nebo „mrtvé integrace“ | zavírací kontrola exportů, účtů, automatizací, dokumentace a veřejných slibů |
 | Udržet dodavatelský registr aktuální v běžném provozu | „dodavatelský registr“, „klidová revize“ nebo „vendor hygiene“ | malý pravidelný průchod nástroji, účely, daty, přístupy, vlastníky a dalšími kontrolami bez plošného auditu |
 | Schválit dočasný nástroj bez trvalého datového stínu | „dočasný nástroj“, „jednorázové schválení“ nebo „stínový dodavatel“ | časově omezená karta zkoušky s účelem, hranicí dat, vlastníkem, datem vypnutí a zavírací kontrolou |
+| Předat export externí pomoci bez ztráty kontroly | „jednorázový export“, „externí pomoc“ nebo „kontrolovaná kopie“ | exportní balíček s účelem, datovým ořezem, pravidlem přenosu, datem návratu nebo smazání a zavírací kontrolou |
 
 Pravidlo pro práci s rejstříkem: otevři maximálně tři nalezené části, vyber jednu a zapiš výstup. Pokud po deseti minutách pořád skáčeš mezi odkazy, vrať se k tabulce „Kudy začít podle aktuální bolesti“ a zúž problém. E-book není buffet. Teda je, ale bez talíře si stejně odneseš jen chaos.
 
@@ -48785,6 +48786,136 @@ Výsledek může být jednoduchý: tři věty upravit, nástroj dál nepoužíva
 
 Najdi jeden nástroj, který tým použil „jen na chvíli“ během posledních tří měsíců. Zapiš k němu účel, použitá data, vlastníka a datum konce. Pokud už konec proběhl, ověř smazání výstupů, vypnutí účtu a absenci webhooků nebo tokenů. Pokud konec neproběhl, rozhodni jednou větou: ukončit, omezit, nebo převést na běžného dodavatele.
 
+## Příloha: Jednorázový export pro externí pomoc bez ztráty kontroly
+
+Dočasný nástroj často začíná účtem. Jednorázová externí pomoc často začíná souborem. „Pošli mi export, já se na to podívám.“ Může jít o audit obsahu, kontrolu SEO, přepis onboarding textů, migraci fakturačních dat, technickou diagnostiku, právní revizi nebo rychlou konzultaci.
+
+Samotný export není problém. Problém je export bez hranice: příliš široký soubor, odeslaný nejasným kanálem, uložený v cizím pracovním prostoru, kopírovaný do dalších nástrojů a po dokončení práce ponechaný jako tichá záloha. V privacy-first provozu není export „menší verze systému“. Je to samostatný datový artefakt s vlastním účelem, vlastníkem a koncem životnosti.
+
+> Codyho komentář: Export je jako šroubovák půjčený sousedovi. Když víš komu, proč a kdy se vrátí, dobrý. Když za rok zjistíš, že s ním někdo rozebírá cizí auto, proces trochu ztratil eleganci.
+
+### Neexportuj systém, exportuj otázku
+
+Nejdřív napiš, jakou otázku má externí pomoc zodpovědět:
+
+- „Které veřejné články mají nejasné CTA a duplicitní doporučení?“
+- „Která pole v importním CSV brání bezpečné migraci?“
+- „Které fakturační stavy potřebujeme převést do nové struktury?“
+- „Které onboarding obrazovky používají nejasný jazyk pro role a přístupy?“
+
+Teprve potom řeš data. Když otázka míří na veřejné texty, nepotřebuješ CRM export. Když otázka míří na strukturu importu, často stačí schéma, hlavičky sloupců a syntetické řádky. Když otázka míří na fakturaci, možná nepotřebuješ jména lidí, interní poznámky ani kompletní historii všech zákazníků.
+
+Špatné zadání zní:
+
+- „Posílám všechno, vyber si.“
+
+Dobré zadání zní:
+
+- „Posílám omezený vzorek 20 anonymizovaných řádků a popis polí. Cílem je potvrdit mapování do nového systému, ne analyzovat zákaznické chování.“
+
+### Ořež data před přenosem, ne až po něm
+
+Datový ořez se nedělá v hlavě. Udělej ho před vytvořením souboru:
+
+| Otázka | Praktické rozhodnutí |
+| --- | --- |
+| Jaký je účel exportu? | jedna věta práce nebo rozhodnutí |
+| Jaká pole jsou nutná? | jen pole, bez kterých nejde otázku zodpovědět |
+| Co musí pryč? | tokeny, interní poznámky, osobní detaily, celé zprávy, nepotřebné historie |
+| Stačí syntetická data? | pokud ano, nevytvářej reálný export |
+| Kolik řádků stačí? | nejmenší vzorek, který pokryje relevantní varianty |
+| Kdo export vytvoří? | člověk s oprávněním a znalostí účelu |
+| Kde vznikne pracovní kopie? | schválené úložiště, ne osobní plocha nebo chat |
+
+U textových auditů často stačí veřejná URL nebo Markdown výřez bez interních komentářů. U technických auditů stačí log s korelačními ID a odstraněnými payloady. U migrací stačí nejmenší sada reprezentativních variant: aktivní zákazník, zrušený zákazník, neuhrazená faktura, roční platba, sleva, ruční výjimka.
+
+Pravidlo: pokud export obsahuje víc dat než člověk potřebuje k odpovědi, není „kompletní“. Je jen líný. A lenost je v datech drahá.
+
+### Zvol přenos podle citlivosti, ne podle pohodlí
+
+Ne každý export patří do e-mailu nebo chatu. Přenos si vyber podle dopadu:
+
+| Citlivost | Příklady | Přenos |
+| --- | --- | --- |
+| veřejné | publikované stránky, veřejné ceníky, veřejná dokumentace | přímý odkaz nebo veřejný repozitář |
+| interní neosobní | schéma, anonymizovaný vzorek, checklist, technická konfigurace bez tajemství | omezený sdílený prostor s vlastníkem |
+| osobní nebo zákaznická data | omezené exporty nutné pro migraci, billing nebo support analýzu | schválený zabezpečený kanál, jasná doba přístupu, bez dalších kopií |
+| tajemství a produkční přístupy | tokeny, hesla, privátní klíče, session data | neposílat jako export; řešit přes správu tajemství a úzký dočasný přístup |
+
+Pokud externí pomoc potřebuje „jen nahlédnout“, dej raději dočasný omezený přístup než posílat plný export. Pokud potřebuje pracovat offline, definuj přesně rozsah a konec. Pokud žádá o celý dump „pro jistotu“, vrať se k otázce. Jistota bez účelu je hezký název pro budoucí incident.
+
+### Přidej exportní průvodku
+
+Každý jednorázový export má mít malou průvodku. Ne právní román. Stačí tabulka, kterou pochopí i člověk, který se ke kopii dostane později:
+
+| Pole | Zápis |
+| --- | --- |
+| Název exportu | krátký název bez osobních detailů |
+| Účel | jedna věta otázky nebo práce |
+| Rozsah | zdrojový systém, pole, období, počet řádků nebo výřez |
+| Ořez | co bylo odstraněno, anonymizováno nebo nahrazeno synteticky |
+| Příjemce | firma, role nebo konkrétní kontakt podle dohody |
+| Přenos | použitý kanál a datum předání |
+| Uložení | kde smí být pracovní kopie |
+| Konec | datum vrácení, smazání, archivace nebo převodu do schváleného systému |
+| Kontrola | kdo ověří konec a jaký důkaz stačí |
+
+Průvodka chrání obě strany. Externí pomoc ví, s čím smí pracovat. Interní tým ví, co vlastně odešlo. A za měsíc nemusí nikdo detektivně rekonstruovat, jestli soubor `final_export_v3_REAL.xlsx` byla produkční bomba, nebo jen upravená šablona. Ano, název souboru taky počítám jako komedii provozu.
+
+### Odděl pracovní výstup od datové kopie
+
+Po dokončení práce nepotřebuješ držet všechno. Typicky chceš zachovat:
+
+- doporučení,
+- mapování,
+- rozhodnutí,
+- seznam oprav,
+- výsledek kontroly,
+- migrační protokol,
+- potvrzení, co se stalo s exportem.
+
+Naopak často nepotřebuješ držet:
+
+- původní export,
+- meziverze se stejnými daty,
+- screenshoty tabulek,
+- lokální kopie v počítačích,
+- pracovní soubory v nástroji externisty,
+- chatové přílohy s daty.
+
+Výstup z práce převeď do interního issue, rozhodovacího logu, runbooku nebo dokumentace. Datovou kopii zavři podle průvodky. Pokud ji musíš držet kvůli doložení migrace nebo účetnímu důvodu, napiš proč, kde a do kdy. „Možná se bude hodit“ není retenční pravidlo. Je to začátek sklepa.
+
+### Příklad: SEO audit bez CRM exportu
+
+| Pole | Zápis |
+| --- | --- |
+| Účel | ověřit, jestli pět veřejných landing pages jasně vysvětluje nabídku, důkaz a další krok |
+| Data | veřejné URL a export titulků/meta descriptions z webu |
+| Zakázáno | CRM leady, individuální návštěvnické cesty, session recordings, interní sales poznámky |
+| Přenos | přímé URL a jeden Markdown soubor v omezeném sdíleném prostoru |
+| Výstup | seznam doporučených úprav podle URL |
+| Konec | po převodu úprav do redakčního issue smazat pracovní Markdown a zavřít sdílení |
+| Kontrola | obsahový vlastník potvrdí, že externí přístup byl odebrán |
+
+Tady není potřeba dokonalá atribuce ani export všech poptávek. Cílem je lepší veřejná stránka. Tak pracuj s veřejnou stránkou.
+
+### Checklist: Jednorázový export pro externí pomoc
+
+- [ ] Export začíná otázkou, ne zvykem „pošli všechno“.
+- [ ] Před vytvořením souboru je jasný účel, rozsah a příjemce.
+- [ ] Pole a řádky jsou ořezané na nejmenší použitelný vzorek.
+- [ ] Syntetická nebo veřejná data mají přednost před reálnými osobními údaji.
+- [ ] Export neobsahuje tokeny, hesla, session data, interní poznámky ani celé produkční dumpy.
+- [ ] Přenosový kanál odpovídá citlivosti dat.
+- [ ] Export má průvodku s datem konce a kontrolou.
+- [ ] Výstup práce je oddělený od původní datové kopie.
+- [ ] Po dokončení jsou pracovní kopie, sdílení a přílohy uklizené.
+- [ ] Pokud se stejný export opakuje, vzniká proces nebo omezený přístup, ne další ruční kopie.
+
+### Mini úkol
+
+Najdi poslední export, který odešel mimo hlavní tým: obsahový audit, migrace, billing kontrola, support analýza nebo technická diagnostika. Dopiš k němu účel, rozsah, příjemce, místo uložení a datum konce. Pokud neumíš vyplnit datum konce, nehledej složitý compliance rámec. Zavři nejdřív jednu věc: odebrat sdílení, smazat pracovní kopii, převést výstup do issue, nebo zapsat, proč se export ještě musí držet.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -48978,6 +49109,7 @@ Najdi jeden nástroj, který tým použil „jen na chvíli“ během posledníc
 
 ## Pracovní log
 
+- 2026-07-23: Doplněna příloha o jednorázovém exportu pro externí pomoc bez ztráty kontroly: práce od konkrétní otázky místo posílání celého systému, datový ořez před přenosem, výběr kanálu podle citlivosti, exportní průvodka, oddělení pracovního výstupu od datové kopie, praktický příklad SEO auditu, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro kontrolované předání exportu externí pomoci. Bez nových aktuálních externích tvrzení, navázáno na existující části o dočasných nástrojích, dodavatelském registru, retenci, přístupech a privacy-first minimalizaci; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
 - 2026-07-23: Doplněna příloha o dočasném nástroji bez trvalého datového stínu: rozlišení jednorázové zkoušky, pomocného nástroje a nového dodavatele, věta účelu, datová hranice před prvním uploadem, karta jednorázového schválení, signály přechodu do produkční cesty, zavírací kontrola, praktický příklad, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro schvalování dočasných nástrojů bez stínových dodavatelů. Bez nových aktuálních externích tvrzení, navázáno na existující části o dodavatelském registru, vendor exitu, retenci a privacy-first minimalizaci; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
 - 2026-07-23: Doplněna příloha o dodavatelském registru v klidovém provozu bez nekonečného auditu: rozdíl mezi registrem, auditem a nákupním rozhodnutím, minimální vendor karta, tříotázková revize, prioritizace podle datového dopadu, kontrola bezplatných a historických nástrojů mimo faktury, omezení citlivých dat v registru, malý měsíční a kvartální revizní rituál, praktický příklad, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro průběžnou vendor hygiene. Bez nových aktuálních externích tvrzení, navázáno na existující zdroje k GDPR, dodavatelům, přístupům, retenci a vendor exitu; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
 - 2026-07-23: Doplněna příloha o kontrole po vendor exitu bez stínových kopií: zavírací okno po přepnutí, kontrola exportů, přístupů, integrací, dokumentace a veřejných slibů, rozlišení archivu od zapomenuté kopie, ověření nového pracovního návyku týmu, zavírací záznam, příklad zavření starého helpdesku, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro ověření stínových kopií a mrtvých integrací po odchodu od dodavatele. Bez nových aktuálních externích tvrzení, navázáno na existující zdroje k GDPR, retenci, přístupům, zpracovatelům a vendor exitu; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
