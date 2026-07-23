@@ -108,6 +108,7 @@ Když se nechceš vracet do celé knihy, hledej konkrétní nástroj podle výst
 | Uklidit obsahové portfolio bez mazání naslepo | „obsahová inventura“, „ponechat upravit sloučit archivovat smazat“ nebo „obsahové portfolio“ | rozhodnutí pro každou důležitou stránku včetně vlastníka, další akce a privacy dopadu |
 | Vybrat další redakční opravu po inventuře | „redakční priorita“, „po inventuře“ nebo „tabulkový hřbitov“ | jedna prioritní oprava veřejného obsahu se stavem, vlastníkem, termínem a ověřením dopadu |
 | Sloučit podobné stránky bez ztráty odkazů | „sloučení obsahových duplicit“, „jedna cílová stránka“ nebo „migrační karta“ | rozhodnutí, která URL přežije, co se přesune, co se přesměruje a co se nechá jen jako archivní stopa |
+| Opravit navigaci po obsahovém sloučení | „navazující odkazy“, „CTA po sloučení“ nebo „obsahová cesta“ | seznam míst, kde se po sloučení musí opravit odkazy, výzvy k akci, metadata a interní šablony |
 | Úklid po spolupráci nebo projektu | „offboarding“, „ukončení spolupráce“ nebo „předání projektu“ | předávací a mazací checklist s uzavřením přístupů |
 
 Pravidlo pro práci s rejstříkem: otevři maximálně tři nalezené části, vyber jednu a zapiš výstup. Pokud po deseti minutách pořád skáčeš mezi odkazy, vrať se k tabulce „Kudy začít podle aktuální bolesti“ a zúž problém. E-book není buffet. Teda je, ale bez talíře si stejně odneseš jen chaos.
@@ -47103,6 +47104,162 @@ Výsledek není delší dokumentace. Výsledek je menší počet míst, která s
 
 Najdi dvě veřejné stránky, které odpovídají na stejnou zákaznickou otázku. Vyplň migrační kartu, vyber jednu cílovou URL a do jedné hodiny udělej nejmenší bezpečné sloučení: přesuň jeden dobrý odstavec, přidej archivní poznámku, oprav interní odkaz nebo připrav redirect pravidlo. Nezačínej novým redesignem dokumentace. Dvě duplicitní odpovědi se nespraví tím, že jim postavíš třetí dům.
 
+## Příloha: Navazující odkazy po obsahovém sloučení bez mrtvé cesty
+
+Sloučit duplicitní stránky je dobrý krok. Ale čtenář nechodí po webu podle redakční karty. Přijde z navigace, starého článku, pricingu, dokumentace, sales e-mailu, RSS čtečky, uložené záložky nebo odkazu v interní poznámce. Pokud opravíš jen cílovou stránku a necháš kolem ní staré cesty, obsahový úklid se rozpadne v nejbližším support dotazu.
+
+Po sloučení si proto neptej jen:
+
+„Funguje nová URL?“
+
+Lepší otázka zní:
+
+„Dostane se člověk ze všech důležitých míst ke správné odpovědi bez zbytečného přesměrování, sledování a starého slibu?“
+
+> Codyho komentář: Obsahové sloučení bez opravy cest je jako uklidit kuchyň a nechat špinavé nádobí v chodbě. Technicky jsi něco udělal. Prakticky o to někdo zakopne.
+
+### Začni cestami, ne seznamem URL
+
+Nejdřív si napiš, odkud lidé a tým na téma typicky přicházejí. U SaaS a B2B webu to bývá méně míst, než se zdá.
+
+| Cesta | Typická otázka | Co po sloučení zkontrolovat |
+| --- | --- | --- |
+| Hlavní navigace | „Kam mám kliknout, když chci cenu, demo nebo dokumentaci?“ | položka míří přímo na cílovou stránku |
+| Pricing | „Co přesně dostanu a co se stane při změně plánu?“ | FAQ neukazuje na starý limit nebo starý formulář |
+| Dokumentace | „Jak to udělám v produktu?“ | návod odkazuje na aktuální postup, ne archivní vysvětlení |
+| Blog | „Proč bych tomu měl věřit?“ | starší článek má aktualizační poznámku nebo odkaz na zdroj pravdy |
+| Trust balíček | „Kde jsou data, kdo k nim má přístup a jak odejdu?“ | odpověď je stejná jako v privacy a support materiálech |
+| Sales a support šablony | „Co posíláme člověku po dotazu?“ | tým neposílá PDF nebo starou URL jen ze zvyku |
+| RSS a changelog | „Co se změnilo a kde je aktuální stav?“ | nová položka vede na cílovou stránku a staré položky nejsou matoucí |
+
+Praktické pravidlo: kontroluj nejdřív místa, kde vzniká rozhodnutí nebo nejistota. Ne každá historická zmínka potřebuje opravu hned. Ale každý aktivní prodejní, onboardingový, supportní nebo trust odkaz má být pravdivý.
+
+### Oprav CTA podle nové role stránky
+
+Sloučená stránka často změní účel. Původní blog mohl vysvětlovat problém, stará dokumentace mohla řešit postup a pricing FAQ mohlo odbavovat nákupní obavu. Po sloučení musí stránka jasně říct, jaký další krok dává smysl.
+
+Použij jednoduché rozlišení:
+
+| Nová role stránky | Dobré CTA | Špatné CTA |
+| --- | --- | --- |
+| Nákupní vysvětlení | porovnat plán, otevřít trust balíček, zeptat se na konkrétní limit | obecné „kontaktujte nás“ bez kontextu |
+| Produktový návod | provést krok v aplikaci, stáhnout export, nastavit integraci | přejít na blogový článek o filozofii |
+| Trust odpověď | otevřít DPA, privacy notice, seznam subdodavatelů nebo exportní postup | vyplnit lead formulář kvůli základní odpovědi |
+| Archivní poznámka | přejít na aktuální zdroj pravdy | pokračovat ve starém postupu |
+| Obsahový rozcestník | vybrat situaci čtenáře | sledovat personalizovanou doporučovací vrstvu |
+
+Privacy-first detail: nepoužívej personalizované CTA jen proto, že po sloučení nevíš, kam člověk patří. Pokud existují tři typické situace, napiš je veřejně jako tři odkazy. Přímé rozhodnutí čtenáře je často čistší než chytré hádání podle stopy v prohlížeči.
+
+### Vyčisti parametry a zkracovače
+
+Při opravě odkazů je lákavé nechat staré UTM, referral parametry a zkracovače, protože „aspoň budeme vědět, odkud to přišlo“. Jenže interní navigace, dokumentace a trust odpovědi nemají být permanentní měřicí labyrint.
+
+Zkontroluj u každého důležitého odkazu:
+
+| Prvek | Otázka |
+| --- | --- |
+| Query parametry | jsou nutné pro funkci, nebo jen pro starou kampaň? |
+| Zkracovač | přidává hodnotu, nebo jen skrývá cílovou URL? |
+| Redirect řetězec | vede odkaz přes více mezikroků, které mohou spadnout nebo logovat navíc? |
+| Fragment | míří kotva na existující část stránky? |
+| Jazyková verze | vede český text na českou odpověď a anglický text na anglickou odpověď? |
+| Referrer politika | neodhaluje cesta zbytečně citlivé query parametry třetím stranám? |
+
+Když potřebuješ dopad sloučení ověřit, stačí chudý signál: ruční kontrola nejposílanějších odkazů, agregovaný počet požadavků na staré URL, počet nových support dotazů k tématu, nebo krátké interní review šablon. Není nutné sledovat každého čtenáře od prvního kliknutí po poslední povzdech.
+
+### Projdi interní šablony a opakované odpovědi
+
+Veřejná stránka může být opravená, ale tým dál posílá starý odkaz, protože ho má uložený v makru, CRM poznámce, onboarding checklistu nebo starém návrhu nabídky. To je častější než rozbitý canonical. A bolí to víc, protože zákazník dostane starou odpověď od člověka, kterému věří.
+
+Minimální kontrola po sloučení:
+
+| Místo | Co hledat | Co udělat |
+| --- | --- | --- |
+| Support makra | staré URL, staré limity, starý exportní postup | nahradit cílovou URL a přepsat jednu větu dopadu |
+| Sales šablony | starý PDF odkaz, neaktuální pricing, obecný trust slib | zkrátit odpověď a odkázat na veřejný zdroj pravdy |
+| Onboarding checklist | kroky vedoucí na odstraněnou stránku | přepojit na nový návod nebo rozcestník |
+| Interní runbook | poznámky, které odporují veřejné odpovědi | doplnit datum změny a vlastníka |
+| Automatické e-maily | odkazy na starý blog nebo help článek | opravit odkaz a zkontrolovat text kolem něj |
+
+Nesnaž se najít úplně všechno během jedné hodiny. Vyber šablony s nejvyšším dopadem: ty, které chodí novým zákazníkům, lidem před nákupem, administrátorům a komukoli, kdo řeší data, platbu, export nebo zrušení účtu.
+
+### Udělej malý odkazový smoke test
+
+Po sloučení a opravě hlavních cest si nepiš velký audit. Udělej smoke test. Cílem je zjistit, zda se člověk dostane k aktuální odpovědi a zda se stará odpověď už nevrací do běžné cesty.
+
+| Kontrola | Jak ji udělat |
+| --- | --- |
+| Cílová stránka | otevři ji přímo a ověř název, hlavní odpověď, CTA a datumovou poznámku |
+| Stará URL | ověř redirect, canonical nebo archivní poznámku podle migrační karty |
+| Navigace | projdi cestu z homepage nebo hlavní dokumentace bez ručního dopisování URL |
+| Pricing nebo trust stránka | ověř, že důležitý nákupní odkaz nemíří na starou odpověď |
+| RSS/changelog | nová změna má jasný odkaz a staré položky nevypadají jako aktuální návod |
+| Support/sales šablona | pošli si náhled nebo otevři makro a zkontroluj jeden odkaz |
+| Bezpečnost a privacy | žádný nový externí embed, tracker, zbytečný query parametr nebo osobní údaj ve screenshotu |
+
+Smoke test má skončit rozhodnutím:
+
+| Výsledek | Rozhodnutí |
+| --- | --- |
+| Vše důležité vede správně | zavřít změnu a nastavit kontrolu za 14 dní |
+| Jedna aktivní cesta vede špatně | opravit hned, pokud je malá |
+| Více cest je rozbitých | založit redakční úkol s vlastníkem a rozsahem |
+| Stará odpověď je pořád často používaná | dočasně přidat výraznější archivní poznámku nebo redirect |
+| Chybí zdroj pravdy | nespravovat odkazy, nejdřív určit zdroj pravdy |
+
+### Karta navazujících odkazů
+
+| Pole | Zápis |
+| --- | --- |
+| Téma sloučení |  |
+| Cílová URL |  |
+| Nejrizikovější aktivní cesta | pricing / dokumentace / support / sales / onboarding / trust |
+| Opravené veřejné odkazy |  |
+| Opravené interní šablony |  |
+| CTA po sloučení |  |
+| Co zůstává jako archiv |  |
+| Co vědomě nekontrolujeme teď |  |
+| Privacy kontrola | query parametry, zkracovače, referrer, screenshoty, externí prvky |
+| Smoke test | přímá URL, stará URL, navigace, šablona, RSS/changelog |
+| Kontrola za 14 dní | signál a vlastník |
+
+Pole „co vědomě nekontrolujeme teď“ je důležité. Chrání malý tým před nekonečným hrabáním v historii. Ne každý starý odkaz je stejně důležitý. Prioritu mají cesty, které ovlivňují nákup, práci v produktu, bezpečnost, práva lidí a odchod.
+
+### Příklad
+
+| Pole | Příklad |
+| --- | --- |
+| Téma sloučení | Export dat při zrušení účtu |
+| Cílová URL | `/docs/export-dat` |
+| Nejrizikovější aktivní cesta | pricing FAQ a support makro pro zrušení účtu |
+| Opravené veřejné odkazy | pricing FAQ, trust balíček, onboarding stránka administrátora |
+| Opravené interní šablony | support makro „zrušení účtu“, sales odpověď k odchodu |
+| CTA po sloučení | „Stáhnout export“ a „Přečíst retenční pravidla“ |
+| Co zůstává jako archiv | starý release note s poznámkou, že exportní postup je aktualizovaný |
+| Co vědomě nekontrolujeme teď | staré interní meeting poznámky a jednorázové kampaně starší než rok |
+| Privacy kontrola | odstraněn starý UTM odkaz, screenshot bez interního ID workspace |
+| Smoke test | starý blog redirectuje, pricing vede přímo, support makro obsahuje novou URL |
+| Kontrola za 14 dní | projít nové dotazy na export a ověřit, že tým posílá jednu odpověď |
+
+Výsledek je malý, ale cenný: člověk dostane stejnou odpověď z pricingu, dokumentace i supportu. To je důvěra bez konfety a bez nové analytické vrstvy.
+
+### Checklist: Navazující odkazy po obsahovém sloučení
+
+- [ ] Víme, jaké aktivní cesty vedly na starý obsah.
+- [ ] Opravili jsme nejdůležitější veřejné odkazy, ne jen cílovou stránku.
+- [ ] CTA na sloučené stránce odpovídá nové roli stránky.
+- [ ] Interní šablony, support makra a sales odpovědi neposílají starou URL.
+- [ ] Nepoužíváme zbytečné UTM, zkracovače ani redirect řetězce pro běžné čtenářské cesty.
+- [ ] Archivní obsah je jasně označený a odkazuje na aktuální zdroj pravdy.
+- [ ] Smoke test pokryl cílovou URL, starou URL, navigaci, šablonu a RSS nebo changelog.
+- [ ] Dopad ověřujeme chudě, bez profilování čtenářů.
+- [ ] Změna má vlastníka a datum kontroly.
+- [ ] Víme, které staré stopy teď vědomě nekontrolujeme.
+
+### Mini úkol
+
+Vezmi poslední sloučené téma a vyber tři aktivní cesty: jednu veřejnou, jednu interní šablonu a jednu nákupní nebo supportní odpověď. Oprav odkazy tak, aby vedly přímo na cílovou stránku, a napiš jeden řádek, co nekontroluješ teď. Potom udělej smoke test staré URL, nové URL a jednoho CTA. Pokud tě začne lákat kompletní audit všech historických odkazů, zastav se. Tohle je hodinová iterace, ne archeologická expedice s fakturací po metrech.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -47293,6 +47450,7 @@ Najdi dvě veřejné stránky, které odpovídají na stejnou zákaznickou otáz
 
 ## Pracovní log
 
+- 2026-07-23: Doplněna příloha o navazujících odkazech po obsahovém sloučení bez mrtvé cesty: kontrola aktivních cest po sloučení, oprava CTA podle nové role stránky, úklid parametrů a zkracovačů, revize interních šablon, malý odkazový smoke test, karta navazujících odkazů, příklad, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro opravu navigace po obsahovém sloučení. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
 - 2026-07-23: Doplněna příloha o sloučení obsahových duplicit bez ztráty odkazů: rozlišení podobného tématu, skutečné duplicity a historie, výběr přeživší URL podle důvěry, migrační karta, oprava okolních cest, jasné archivní poznámky, praktický příklad, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro sloučení podobných stránek bez ztráty odkazů. Ověřeny a doplněny zdroje Google Search Central k canonical URL/redirectům a MDN k HTTP přesměrování; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
 - 2026-07-23: Doplněna příloha o redakční prioritě po obsahové inventuře bez tabulkového hřbitova: třídění nálezů podle rizika, jednoduché skóre dopadu, rizika nepravdy a náročnosti, karta redakční priority, kontrola místa vzniku otázky, chudé ověření dopadu, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro výběr další redakční opravy po inventuře. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
 - 2026-07-23: Doplněna příloha o obsahové inventuře bez mazání naslepo: výběr malého výřezu URL, rozhodovací stavy ponechat/upravit/sloučit/archivovat/smazat, kontrola slibu, důkazu a dalšího kroku, oddělení údržby od nových obsahových nápadů, karta inventury, praktický příklad, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro úklid obsahového portfolia bez profilování čtenářů. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje; script pro tento běh hlásil `webOk: true`.
