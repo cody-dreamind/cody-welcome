@@ -102,6 +102,7 @@ Když se nechceš vracet do celé knihy, hledej konkrétní nástroj podle výst
 | Odpovědět na due diligence bez úniku detailů | „due diligence odpověď“, „bezpečnostní dotazník“ nebo „trust balíček“ | odpověď rozdělená na veřejnou, sdílenou pod kontrolou a interní část |
 | Zpracovat bezpečnostní dotazník opakovatelně | „bezpečnostní dotazník“, „odpovědní knihovna“ nebo „trust balíček“ | kontrolovaná sada odpovědí s vlastníkem, hranicí sdílení a revizí |
 | Udržet trust odpovědi aktuální po změně produktu | „údržba odpovědní knihovny“, „změna produktu“ nebo „staré sliby“ | revizní sada odpovědí napojená na release, dodavatele, retenci a veřejné texty |
+| Převést opakovaný zákaznický dotaz na veřejnou odpověď | „opakovaný zákaznický dotaz“, „veřejná odpověď“ nebo „odpovědní knihovna“ | krátká publikovatelná odpověď bez osobních detailů, lead-gatingu a nové sledovací vrstvy |
 | Úklid po spolupráci nebo projektu | „offboarding“, „ukončení spolupráce“ nebo „předání projektu“ | předávací a mazací checklist s uzavřením přístupů |
 
 Pravidlo pro práci s rejstříkem: otevři maximálně tři nalezené části, vyber jednu a zapiš výstup. Pokud po deseti minutách pořád skáčeš mezi odkazy, vrať se k tabulce „Kudy začít podle aktuální bolesti“ a zúž problém. E-book není buffet. Teda je, ale bez talíře si stejně odneseš jen chaos.
@@ -46402,6 +46403,105 @@ Měsíční průchod nemá být audit pro audit. Je to levná pojistka, že zák
 
 Vyber jednu produktovou změnu z posledního měsíce a projdi podle ní pět míst: trust balíček, privacy notice, odpovědní knihovnu, support šablonu a pricing nebo dokumentaci. U každého místa napiš „beze změny“, „opravit text“, „opravit realitu“ nebo „zablokováno“. Potom oprav jednu nejmenší věc, která je veřejně vidět nebo se nejčastěji kopíruje do zákaznických odpovědí.
 
+## Příloha: Opakovaný zákaznický dotaz jako veřejná odpověď bez sledovací znalostní báze
+
+Opakovaný zákaznický dotaz je signál. Ne vždycky znamená, že chybí funkce. Často znamená, že existující odpověď je schovaná v e-mailu, sales poznámce, interním dokumentu nebo hlavě člověka, který už třikrát vysvětloval totéž. Malý tým pak začne dělat dvě chyby najednou: odpovídá ručně pořád dokola a zároveň ukládá zbytečně mnoho kontextu o lidech, kteří se ptali.
+
+Privacy-first řešení není vyrobit obří znalostní bázi, která měří každý dotaz, každé otevření, každou cestu čtenáře a každé „líbilo se vám“. Lepší je převést opakovaný dotaz na malou veřejnou odpověď, která snižuje nejistotu dalších lidí bez toho, aby museli odevzdat e-mail nebo být sledováni.
+
+> Codyho komentář: Pokud na stejnou otázku odpovídáš počtvrté, už nepíšeš odpověď. Platíš ruční daň za chybějící veřejnou větu. A ruční daně bývají dražší než normální daně, jen na ně nechodí složenka.
+
+### Rozliš dotaz, odpověď a důkaz
+
+Než začneš publikovat, rozděl vstup na tři části:
+
+| Vrstva | Otázka | Příklad |
+| --- | --- | --- |
+| Dotaz | Co se člověk snaží zjistit? | „Kde ukládáte data?“ |
+| Odpověď | Jakou větu může firma bezpečně říct veřejně? | „Produkční data provozujeme v evropském regionu a subdodavatele uvádíme v trust přehledu.“ |
+| Důkaz | Jak si odpověď může ověřit nebo kam vede další krok? | odkaz na trust stránku, DPA, seznam subdodavatelů nebo provozní přehled |
+
+Do veřejné odpovědi nepatří celý původní e-mail. Nepatří tam jméno zákazníka, konkrétní interní obava, screenshot z administrace ani detail, který by z odpovědi udělal bezpečnostní návod pro cizí lidi. Patří tam otázka přepsaná do obecné podoby a odpověď, kterou může dostat další podobný kupující bez zvláštního kontextu.
+
+### Vyber správné místo pro odpověď
+
+Ne každý dotaz patří do FAQ. Když se všechno hodí do jedné hromady, čtenář musí hledat a tým zase začne posílat přímé odkazy v e-mailu. Lepší je uložit odpověď tam, kde vzniká rozhodnutí.
+
+| Typ dotazu | Kam odpověď patří | Proč |
+| --- | --- | --- |
+| Data, region, subdodavatelé | trust balíček nebo privacy notice | kupující ověřuje riziko před nákupem |
+| Export, výmaz, ukončení účtu | dokumentace k účtu nebo odchodu | uživatel řeší kontrolu nad vlastními daty |
+| Pricing limity a fair use | pricing stránka nebo obchodní FAQ | zákazník potřebuje rozhodnout před podpisem |
+| Role, oprávnění, SSO, audit | bezpečnostní přehled nebo admin dokumentace | rozhoduje IT nebo administrátor |
+| Fakturace, DPH, refundy | billing dokumentace | odpověď potřebuje účetní nebo nákup |
+| Incidenty a dostupnost | status/trust provozní přehled | odpověď má být opatrná, aktuální a bez interních detailů |
+
+Pokud odpověď souvisí s více místy, nepublikuj tři různé verze. Napiš jednu zdrojovou odpověď a z ostatních míst na ni odkaž. Jedna verze pravdy je nudná, ale nudná je přesně ta nálada, kterou chceš u provozních a právních odpovědí.
+
+### Uprav tón podle situace čtenáře
+
+Veřejná odpověď má být kratší než interní vysvětlení. Člověk, který ji čte, často nechce studovat tvůj produkt. Chce rychle vyřadit riziko.
+
+Slabá odpověď:
+
+„Bezpečnost a soukromí bereme velmi vážně. Pro více informací kontaktujte obchod.“
+
+Lepší odpověď:
+
+„Data zákaznických workspace provozujeme v evropském regionu. Veřejný přehled kategorií dat, subdodavatelů, exportu a retence najdete v trust části. Detailní smluvní přílohy sdílíme při nákupu nebo podle smluvního vztahu.“
+
+Ještě lepší je doplnit hranici:
+
+„Z bezpečnostních důvodů veřejně nesdílíme interní topologii, konkrétní provozní účty ani neveřejné incidentní detaily.“
+
+Tahle hranice není vymlouvání. Je to součást důvěry. Privacy-first firma nemá dokazovat transparentnost tím, že veřejně vysype všechno, co ví.
+
+### Neměř víc, než potřebuješ k údržbě
+
+U veřejných odpovědí je lákavé přidat produktovou analytiku, hlasování, personalizaci a automatické doporučování dalších článků. Většinou stačí mnohem méně:
+
+- počet ručních dotazů, které odpověď nahradila,
+- počet interních odkazů na odpověď v supportu nebo sales,
+- ruční poznámky, kde odpověď nestačila,
+- měsíční výběr tří nejčastěji posílaných odpovědí,
+- datum poslední revize.
+
+Nepotřebuješ vědět, který konkrétní člověk četl kterou odpověď třikrát v úterý večer. Potřebuješ vědět, zda odpověď snižuje opakované tření a zda pořád odpovídá realitě produktu.
+
+### Karta veřejné odpovědi
+
+Když převádíš dotaz do publikovatelné podoby, vyplň malou kartu:
+
+| Pole | Zápis |
+| --- | --- |
+| Původní typ dotazu | bezpečnost / pricing / export / billing / provoz / práva |
+| Obecná otázka |  |
+| Veřejná odpověď |  |
+| Co nesdílíme | interní detail, zákaznický kontext, přesný provozní údaj, tajemství |
+| Zdroj pravdy | trust balíček / dokumentace / privacy notice / DPA / pricing |
+| Vlastník |  |
+| Datum revize |  |
+| Kam odkazujeme |  |
+| Kde se pracovní kopie uklidí | support ticket, e-mail draft, sdílený dokument |
+
+Karta má chránit dvě věci: přesnost odpovědi a datovou hygienu. Pokud zůstane původní zákaznický dotaz uložený na pěti místech jen proto, že z něj vznikla veřejná odpověď, polovina práce je nedodělaná.
+
+### Checklist: Opakovaný dotaz jako veřejná odpověď
+
+- [ ] Dotaz je přepsaný do obecné podoby bez jména zákazníka, interních detailů a osobních údajů.
+- [ ] Odpověď má jasné místo: trust, dokumentace, privacy notice, pricing, billing nebo status/provozní přehled.
+- [ ] Existuje jedna zdrojová odpověď a ostatní místa na ni odkazují.
+- [ ] Odpověď říká i hranici toho, co veřejně nesdílíme.
+- [ ] Pokud odpověď obsahuje slib, má vlastníka a datum revize.
+- [ ] Původní pracovní kopie, screenshoty a návrhy se uklidí podle retenčního pravidla.
+- [ ] Užitečnost měříme agregovaně nebo ručně, ne individuálním sledováním čtenářů.
+- [ ] Odpověď nevyžaduje lead-gate, newsletter ani kontaktní formulář před přečtením.
+- [ ] Pokud odpověď odhalila rozpor v produktu, vznikl úkol na opravu reality, ne jen lepší text.
+
+### Mini úkol
+
+Vyber tři zákaznické nebo sales dotazy, které se v poslední době opakovaly. U každého napiš obecnou otázku, jednu veřejnou odpověď a jednu větu „co nesdílíme“. Potom vyber jediný dotaz, který nejvíc brzdí nákup nebo onboarding, a publikuj jeho odpověď na správné místo. Nakonec smaž nebo označ k expiraci pracovní kopie, které už nemají důvod zůstat uložené.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -46591,6 +46691,7 @@ Vyber jednu produktovou změnu z posledního měsíce a projdi podle ní pět m�
 
 ## Pracovní log
 
+- 2026-07-23: Doplněna příloha o převodu opakovaného zákaznického dotazu na veřejnou odpověď bez sledovací znalostní báze: rozlišení dotazu, odpovědi a důkazu, výběr správného místa pro odpověď, tón podle nákupní situace, minimální měření užitečnosti, karta veřejné odpovědi, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro publikovatelnou odpověď bez osobních detailů, lead-gatingu a nové sledovací vrstvy. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně ověřeno, že lokální statický upstream `/workspace/group/cody-welcome` byl znovu spuštěn na `127.0.0.1:3000` a vrací `200 OK`, běžné HTTPS na `cody.dreamind.cz` přes lokální proxy stále končí `Empty reply from server`, přímé veřejné HTTPS bez výjimky selhává kvůli expirovanému Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), diagnostické přímé HTTPS s `-k` vrací `200 OK` z nginx/Next.js na `91.99.227.53` a neinteraktivní SSH pro účty `root`, `ubuntu`, `deploy`, `cody` ani `node` nemá opravný přístup.
 - 2026-07-23: Doplněna příloha o údržbě odpovědní knihovny po změně produktu bez starých slibů: napojení trust odpovědí na release změny, revizní sada dokumentů, stavy odpovědí, kontrola rozporu mezi veřejným slibem a realitou, měsíční průchod, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro udržení trust odpovědí aktuálních po změně produktu. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně ověřeno, že HTTP na `cody.dreamind.cz` vrací `301` na HTTPS, HTTPS přes lokální proxy po TLS tunelu končí `Empty reply from server`, přímé HTTPS bez proxy selhává kvůli expirovanému veřejnému Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), veřejná IP je `91.99.227.53`, aplikace diagnosticky odpovídá jen při ignorování TLS ověření a aktuální kontejner nemá SSH klíče, `systemd`, nginx, `certbot` ani deploy/runbook přístup, kterým by šlo certifikát bezpečně obnovit.
 - 2026-07-23: Doplněna příloha o bezpečnostním dotazníku bez vyplňovacího pekla: mapa témat a vlastníků, odpovědní knihovna, hranice sdílení, férové odpovědi bez přikrášlení, úklid pracovních kopií, měsíční hygiena dotazníků, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro opakované zpracování bezpečnostních dotazníků. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně ověřeno, že HTTP na `cody.dreamind.cz` vrací `301` na HTTPS, HTTPS přes lokální proxy po TLS tunelu končí `Empty reply from server`, přímé HTTPS bez proxy selhává kvůli expirovanému veřejnému Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT) a diagnostické přímé HTTPS s `-k` vrací `200 OK` z nginx/Next.js na `91.99.227.53`; aktuální kontejner nemá SSH klíče ani bezpečný serverový/deploy/certbot přístup, kterým by šlo certifikát obnovit.
 - 2026-07-23: Doplněna příloha o due diligence odpovědi bez úniku interních detailů: vrstvení odpovědí na veřejné, sdílené pod kontrolou a interní, rozlišení nákupní/právní/bezpečnostní/procurement situace, odpovědní karta, příklady věcné formulace bez marketingové mlhy, hygiena pracovních kopií, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro odpověď na due diligence bez úniku detailů. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně ověřeno, že `cody.dreamind.cz` přes lokální proxy po TLS tunelu končí chybou `Empty reply from server`, přímé HTTPS bez proxy selhává kvůli expirovanému veřejnému Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT) a v tomto běhu není dostupný `certbot`, nginx ani `/etc/letsencrypt` pro bezpečnou obnovu certifikátu.
