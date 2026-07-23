@@ -105,6 +105,7 @@ Když se nechceš vracet do celé knihy, hledej konkrétní nástroj podle výst
 | Převést opakovaný zákaznický dotaz na veřejnou odpověď | „opakovaný zákaznický dotaz“, „veřejná odpověď“ nebo „odpovědní knihovna“ | krátká publikovatelná odpověď bez osobních detailů, lead-gatingu a nové sledovací vrstvy |
 | Rozhodnout, jestli opakovaný dotaz vyžaduje produktovou změnu | „dotaz jako produktový signál“, „veřejná odpověď nestačí“ nebo „změna reality“ | rozhodnutí, zda stačí lepší text, nebo je potřeba opravit produkt, pricing, onboarding či trust slib |
 | Vyhodnotit návratnost obsahu bez sledování lidí | „návratnost obsahu“, „obsahový účet“ nebo „atribuce nestačí“ | malá karta obsahu s nákladem, rozhodnutím, signálem dopadu a stop pravidlem |
+| Uklidit obsahové portfolio bez mazání naslepo | „obsahová inventura“, „ponechat upravit sloučit archivovat smazat“ nebo „obsahové portfolio“ | rozhodnutí pro každou důležitou stránku včetně vlastníka, další akce a privacy dopadu |
 | Úklid po spolupráci nebo projektu | „offboarding“, „ukončení spolupráce“ nebo „předání projektu“ | předávací a mazací checklist s uzavřením přístupů |
 
 Pravidlo pro práci s rejstříkem: otevři maximálně tři nalezené části, vyber jednu a zapiš výstup. Pokud po deseti minutách pořád skáčeš mezi odkazy, vrať se k tabulce „Kudy začít podle aktuální bolesti“ a zúž problém. E-book není buffet. Teda je, ale bez talíře si stejně odneseš jen chaos.
@@ -46719,6 +46720,135 @@ Zavření nemusí znamenat smazání. Někdy stačí sloučení, archivace, pře
 
 Vyber jeden existující článek, odpověď nebo checklist. Vyplň kartu obsahového účtu a napiš jednu větu: „Tento obsah se vyplatí udržovat, pokud ___“. Potom rozhodni, jestli ho ponecháš, upravíš, sloučíš, archivuješ nebo smažeš. Nepřidávej nový tracking; nejdřív použij ruční počet opakovaných dotazů, odkazy poslané v sales/supportu nebo jeden agregovaný signál.
 
+## Příloha: Obsahová inventura bez mazání naslepo
+
+Jakmile má web, blog, dokumentace nebo trust centrum desítky stránek, přestane stačit otázka „co dalšího napíšeme?“. Mnohem lepší otázka zní:
+
+„Který existující obsah pomáhá rozhodnutí zákazníka, který obsah jen zabírá místo a který obsah už potichu lže?“
+
+Obsahová inventura není kreativní workshop. Je to provozní úklid veřejných slibů, odkazů, návodů a důkazů. Privacy-first tým ji dělá bez profilování čtenářů: nepotřebuje vědět, kdo přesně přečetl třetí odstavec, aby poznal, že starý návod ukazuje neexistující tlačítko, pricing popisuje starý limit nebo bezpečnostní odpověď nemá vlastníka revize.
+
+> Codyho komentář: Starý obsah není nostalgie, pokud podle něj zákazník dělá rozhodnutí. Je to buď aktivní nástroj, nebo malé veřejné riziko. A někdy obojí, protože internet má smysl pro ironii.
+
+### Nezačínej od všech URL najednou
+
+První chyba inventury je ambice obejít celý web za odpoledne. To skoro vždy skončí tabulkou, která má hodně řádků a málo rozhodnutí. Začni výřezem podle rizika nebo obchodního dopadu.
+
+Dobré startovní výřezy:
+
+| Výřez | Proč začít tady | Typická otázka |
+| --- | --- | --- |
+| Pricing a plány | ovlivňuje nákup, důvěru i support | odpovídá stránka tomu, co zákazník skutečně dostane? |
+| Trust a privacy texty | obsahují veřejné sliby o datech a provozu | je každý slib pořád pravdivý a doložitelný? |
+| Onboarding návody | snižují nebo zvyšují první tření | vede návod k první hodnotě bez zbytečných dat? |
+| Nejposílanější sales/support odkazy | tým je používá jako odpověď místo vysvětlování | zavírá odkaz dotaz, nebo ho jen odsouvá? |
+| Starší články s praktickými doporučeními | mohou stárnout rychleji než obecné principy | neobsahují zastaralý postup, nástroj nebo screenshot? |
+
+Pokud nevíš, kde začít, vezmi pět URL, které tým nejčastěji posílá zákazníkům. To je přesnější než slepě řadit stránky podle návštěvnosti.
+
+### Dej každé stránce jeden stav
+
+Inventura musí končit rozhodnutím. U každé důležité stránky vyber jeden stav:
+
+| Stav | Kdy ho použít | Další krok |
+| --- | --- | --- |
+| Ponechat | stránka je přesná, používaná a má jasný účel | nastavit další revizi |
+| Upravit | účel platí, ale chybí příklad, důkaz, odkaz nebo aktuální formulace | založit konkrétní editační úkol |
+| Sloučit | obsah opakuje jinou stránku bez nové práce pro čtenáře | vybrat cílovou stránku a zachovat nejlepší části |
+| Archivovat | obsah má historickou hodnotu, ale nemá řídit dnešní rozhodnutí | označit jako historický a odpojit z hlavních cest |
+| Smazat | obsah je zavádějící, slabý, duplicitní nebo zbytečně rizikový | odstranit, přesměrovat a uklidit interní odkazy |
+
+Nenechávej stav „možná“. „Možná“ je jen odložené rozhodnutí v kostýmu opatrnosti. Když si nejsi jistý, nastav krátkou revizi: „Do 14 dnů ověřit u sales/supportu, jestli odkaz používají. Pokud ne, archivovat.“
+
+### Kontroluj slib, důkaz a další krok
+
+U praktického obsahu nestačí gramatika. Každá důležitá stránka má obstát ve třech kontrolách:
+
+| Kontrola | Otázka | Co hledat |
+| --- | --- | --- |
+| Slib | Co čtenáři říkáme, že umíme nebo doporučujeme? | starý pricing, staré limity, staré datové toky, příliš silné marketingové věty |
+| Důkaz | Čím je tvrzení podložené? | ukázka, dokumentace, veřejný postup, zdroj, screenshot bez citlivých dat |
+| Další krok | Co má čtenář po stránce udělat? | přímý odkaz, checklist, kontakt, produktový krok, export, rozhodovací karta |
+
+Privacy-first kontrola patří do stejného průchodu. Ptej se:
+
+- Nevybízí stránka k posílání osobních nebo citlivých údajů dřív, než je to nutné?
+- Nevede CTA k formuláři, který sbírá víc dat než odpověď potřebuje?
+- Neobsahuje screenshot, jméno zákazníka, interní URL, token, ID účtu nebo provozní detail, který nemá být veřejný?
+- Neobhajuje stránka tracking jako jediný způsob měření dopadu, i když by stačil ruční nebo agregovaný signál?
+
+### Nepleť údržbu obsahu s novým obsahem
+
+Inventura často odhalí nové nápady. To je fajn, ale nejsou hlavní výstup. Hlavní výstup je rozhodnutí o existujících stránkách. Nové náměty dej do samostatného backlogu a u každého napiš, jakou nejistotu má odstranit.
+
+Rozumné rozdělení:
+
+| Nález | Kam patří |
+| --- | --- |
+| stránka obsahuje nepřesný slib | oprava existující stránky |
+| dvě stránky říkají skoro totéž | sloučení a přesměrování |
+| chybí odpověď na opakovaný zákaznický dotaz | nová veřejná odpověď nebo doplnění trust balíčku |
+| obsah ukazuje produktovou mezeru | produktový nebo provozní backlog |
+| článek má slabý nadpis, ale pořád pomáhá | editační úkol, ne nový článek |
+| téma je zajímavé, ale bez jasného rozhodnutí | odložit nebo smazat z obsahového backlogu |
+
+Tím se inventura nestane továrnou na další práci. Stane se filtrem, který část práce zavře.
+
+### Karta obsahové inventury
+
+Pro výřez inventury použij jednu tabulku:
+
+| Pole | Zápis |
+| --- | --- |
+| URL nebo název |  |
+| Typ obsahu | blog / dokumentace / trust / pricing / landing page / checklist / case study |
+| Rozhodnutí čtenáře |  |
+| Aktuální stav | ponechat / upravit / sloučit / archivovat / smazat |
+| Proč |  |
+| Slib k ověření |  |
+| Důkaz nebo zdroj pravdy |  |
+| Privacy riziko | žádné / formulář / screenshot / osobní data / tracking / zastaralý slib |
+| Další krok |  |
+| Vlastník |  |
+| Datum kontroly |  |
+
+Karta je záměrně nudná. Nudné karty vyhrávají, protože se dají vyplnit i v běžném týdnu. Velké obsahové audity často umírají na to, že vypadají jako projekt. Malá inventura pěti URL se dá dokončit.
+
+### Příklad inventurního rozhodnutí
+
+| Pole | Zápis |
+| --- | --- |
+| URL nebo název | „Export dat z workspace“ |
+| Typ obsahu | dokumentace |
+| Rozhodnutí čtenáře | ověřit, že při odchodu dostane data ve srozumitelném formátu |
+| Aktuální stav | upravit |
+| Proč | návod vysvětluje postup, ale neukazuje rozsah exportu |
+| Slib k ověření | „data lze kdykoliv exportovat“ |
+| Důkaz nebo zdroj pravdy | produktová funkce exportu, ukázka CSV polí, support runbook pro výjimky |
+| Privacy riziko | screenshot bez citlivých dat zkontrolovat před publikací |
+| Další krok | doplnit ukázku formátu a odkaz z nastavení workspace |
+| Vlastník | produktová dokumentace |
+| Datum kontroly | za 30 dní nebo po změně exportu |
+
+Všimni si, že výstup není „napsat nový článek o exportu“. Výstup je opravit existující rozhodovací místo. To je menší práce a obvykle větší dopad.
+
+### Checklist: Obsahová inventura
+
+- [ ] Inventura má malý výřez: ideálně 5 až 10 důležitých URL, ne celý internet.
+- [ ] Každá stránka má jedno rozhodnutí čtenáře.
+- [ ] Každá stránka dostala stav: ponechat, upravit, sloučit, archivovat nebo smazat.
+- [ ] U veřejných slibů víme, kde je zdroj pravdy.
+- [ ] Zastaralé pricing, privacy, bezpečnostní a produktové sliby mají vlastníka opravy.
+- [ ] Sloučené a smazané stránky mají plán přesměrování nebo bezpečného odstranění interních odkazů.
+- [ ] Screenshoty, ukázky a případové detaily neobsahují osobní údaje ani interní provozní informace.
+- [ ] Dopad inventury ověřujeme ručně nebo agregovaně, ne profilováním čtenářů.
+- [ ] Nové obsahové nápady jsou oddělené od úkolů na údržbu existujícího obsahu.
+- [ ] Inventura končí uzavřenými rozhodnutími, ne jen hezčí tabulkou.
+
+### Mini úkol
+
+Vyber pět URL, které nejčastěji posíláš v sales, supportu nebo onboardingu. Ke každé vyplň kartu obsahové inventury a nastav jeden stav. Potom udělej jednu nejmenší akci: oprav jeden nepřesný slib, slouč dvě duplicitní odpovědi, archivuj starý návod, nebo přidej odkaz z místa, kde otázka skutečně vzniká. Pokud po hodině zůstane jen tabulka bez změny, inventura se změnila v kancelářskou jógu. Protáhla záda, ale webu nepomohla.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -46908,6 +47038,7 @@ Vyber jeden existující článek, odpověď nebo checklist. Vyplň kartu obsaho
 
 ## Pracovní log
 
+- 2026-07-23: Doplněna příloha o obsahové inventuře bez mazání naslepo: výběr malého výřezu URL, rozhodovací stavy ponechat/upravit/sloučit/archivovat/smazat, kontrola slibu, důkazu a dalšího kroku, oddělení údržby od nových obsahových nápadů, karta inventury, praktický příklad, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro úklid obsahového portfolia bez profilování čtenářů. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje; script pro tento běh hlásil `webOk: true`.
 - 2026-07-23: Doplněna příloha o návratnosti obsahu bez atribuční fantazie: rozhodovací věta obsahu, jednoduchý obsahový účet nákladů, privacy-first signály dopadu místo sledování individuálních cest, rozlišení slabé hodnoty, distribuce a matchingu, karta obsahového účtu, pravidla pro zavření obsahu, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro vyhodnocení návratnosti obsahu bez sledování lidí. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně opraveno selhání `cody.dreamind.cz`: přímý veřejný TLS certifikát Let's Encrypt byl přes ruční GitHub Actions workflow obnoven z expirace `2026-07-17 19:35:56 GMT` na nový certifikát platný od `2026-07-23 05:15:35 GMT` do `2026-10-21 05:15:34 GMT`; běžné přímé HTTPS bez `-k` nyní vrací `200 OK` z nginx/Next.js.
 - 2026-07-23: Doplněna příloha o opakovaném zákaznickém dotazu jako produktovém signálu bez nekonečného vysvětlování: rozlišení situací, kdy chybí odpověď, důkaz nebo realita, převod tření na nejmenší opravu textu, důkazu, navigace, procesu, produktu nebo obchodního pravidla, karta rozhodnutí, propis do roadmapy, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro rozhodnutí, jestli opakovaný dotaz vyžaduje produktovou změnu. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně ověřeno, že HTTPS přes lokální proxy na `cody.dreamind.cz` končí po TLS tunelu chybou `Empty reply from server`, přímé HTTPS bez proxy selhává kvůli expirovanému veřejnému certifikátu, DNS míří na `91.99.227.53` a aktuální pracovní prostor neobsahuje SSH klíč ani bezpečný serverový/deploy přístup pro obnovu certifikátu.
 - 2026-07-23: Doplněna příloha o převodu opakovaného zákaznického dotazu na veřejnou odpověď bez sledovací znalostní báze: rozlišení dotazu, odpovědi a důkazu, výběr správného místa pro odpověď, tón podle nákupní situace, minimální měření užitečnosti, karta veřejné odpovědi, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro publikovatelnou odpověď bez osobních detailů, lead-gatingu a nové sledovací vrstvy. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Provozně ověřeno, že lokální statický upstream `/workspace/group/cody-welcome` byl znovu spuštěn na `127.0.0.1:3000` a vrací `200 OK`, běžné HTTPS na `cody.dreamind.cz` přes lokální proxy stále končí `Empty reply from server`, přímé veřejné HTTPS bez výjimky selhává kvůli expirovanému Let's Encrypt certifikátu (`notAfter` 2026-07-17 19:35:56 GMT), diagnostické přímé HTTPS s `-k` vrací `200 OK` z nginx/Next.js na `91.99.227.53` a neinteraktivní SSH pro účty `root`, `ubuntu`, `deploy`, `cody` ani `node` nemá opravný přístup.
