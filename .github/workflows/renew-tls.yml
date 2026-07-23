@@ -1,0 +1,39 @@
+name: Renew TLS Certificate
+
+on:
+  workflow_dispatch:
+
+jobs:
+  renew-tls:
+    name: Renew cody.dreamind.cz certificate
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Renew via SSH
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.DEPLOY_HOST }}
+          username: ${{ secrets.DEPLOY_USER }}
+          key: ${{ secrets.DEPLOY_SSH_KEY }}
+          script: |
+            set -euo pipefail
+
+            echo "Certificate before renewal:"
+            sudo openssl x509 \
+              -in /etc/letsencrypt/live/cody.dreamind.cz/fullchain.pem \
+              -noout -subject -issuer -dates || true
+
+            sudo certbot renew \
+              --cert-name cody.dreamind.cz \
+              --force-renewal \
+              --non-interactive \
+              --deploy-hook "systemctl reload nginx"
+
+            sudo nginx -t
+            sudo systemctl reload nginx || sudo nginx -s reload
+
+            echo "Certificate served locally after renewal:"
+            echo | openssl s_client \
+              -connect 127.0.0.1:443 \
+              -servername cody.dreamind.cz 2>/dev/null \
+              | openssl x509 -noout -subject -issuer -dates
