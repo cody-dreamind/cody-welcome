@@ -138,6 +138,7 @@ Když se nechceš vracet do celé knihy, hledej konkrétní nástroj podle výst
 | Připravit odchod nebo dlouhou nepřítomnost vlastníka schopnosti | „odchod vlastníka“, „ztráta vlastníka“ nebo „předávací okno“ | předávací okno s minimem nových přístupů, rozhodnutím co zastavit, co předat a co ověřit před odchodem |
 | Ukotvit nového vlastníka po převzetí schopnosti | „nový vlastník schopnosti“, „prvních 30 dní“ nebo „převzetí odpovědnosti“ | 30denní převzetí s prvním rozhodnutím, kontrolou přístupů, opravou runbooku a jasným stop seznamem |
 | Udělat první změnu po převzetí schopnosti | „první změna po převzetí“, „změnová karta“ nebo „nový vlastník mění pravidla“ | malá změna s jasným účelem, dopadem na data, review hranicí, návratem zpět a zavíracím rozhodnutím |
+| Vyhodnotit první změnu po převzetí schopnosti | „vyhodnocení první změny“, „změnový review“ nebo „první změna hotovo“ | krátké review dopadu, datové stopy, přístupů, dokumentace a dalšího kroku po první změně |
 
 Pravidlo pro práci s rejstříkem: otevři maximálně tři nalezené části, vyber jednu a zapiš výstup. Pokud po deseti minutách pořád skáčeš mezi odkazy, vrať se k tabulce „Kudy začít podle aktuální bolesti“ a zúž problém. E-book není buffet. Teda je, ale bez talíře si stejně odneseš jen chaos.
 
@@ -50937,6 +50938,132 @@ Výsledek: odpověď se ponechala, ale přibyla stop věta: „Pokud zákazník 
 
 Vyber jednu převzatou schopnost a napiš první změnovou kartu. Změna musí jít udělat bez nového dodavatele, bez produkčního exportu a bez změny veřejného privacy slibu. Na konec doplň větu: „Tuhle změnu vrátíme, pokud ___.“ Pokud neumíš větu doplnit konkrétně, změna ještě není dost malá.
 
+## Příloha: Vyhodnocení první změny po převzetí schopnosti bez měření ega
+
+První změna po převzetí schopnosti není hotová ve chvíli, kdy se objeví v produkci, dokumentaci nebo support šabloně. Hotová je až ve chvíli, kdy tým ví, co změna skutečně posunula, jaké nové stopy vytvořila a co se má stát dál.
+
+Nový vlastník po první změně často cítí tlak dokázat, že se věci hýbou. To je pochopitelné. Jenže u privacy-first provozu není cílem vyrobit pohyb. Cílem je snížit nejistotu, odstranit konkrétní tření a nezavést přitom další datový nebo přístupový dluh.
+
+Vyhodnocení první změny má být krátké, věcné a trochu protivné. Má se ptát: pomohlo to, nebo jsme jen přidali další vrstvu práce?
+
+> Codyho komentář: Úspěšná první změna není ta, u které všichni řeknou „hezké“. Úspěšná je ta, po které je jasnější provozní realita. Pokud změna zní lépe v interním statusu než v rukou zákazníka nebo supportu, ještě bych nesahal po dortu. Maximálně po suchém checklistu, což je méně slavnostní, ale méně lepivé.
+
+### Vrať se k původní změnové kartě
+
+Začni tím, co bylo napsané před změnou. Ne tím, co si tým po týdnu pamatuje. Paměť má ráda vítězné příběhy a občas elegantně vynechá datový dopad, nové výjimky nebo ruční kroky.
+
+Krátké review otevři těmito otázkami:
+
+- Jaká byla původní změna jednou větou?
+- Jaké tření, riziko nebo nejasnost měla odstranit?
+- Které místo bylo dotčené: text, runbook, role, proces, formulář, automatizace nebo veřejný slib?
+- Jaký chudý signál měl ukázat dopad?
+- Jaká byla návratová věta?
+- Kdo měl změnu vidět, pokud zasahovala billing, bezpečnost, práva uživatelů nebo privacy slib?
+
+Pokud na tyto otázky nejde odpovědět bez lovení v chatu, první zlepšení není další změna. První zlepšení je opravit způsob zápisu.
+
+### Odděl dopad od aktivity
+
+Vyhodnocení první změny nemá být seznam toho, co se udělalo. Má říct, co se díky tomu stalo jednodušší, jasnější nebo bezpečnější.
+
+| Aktivita | Slabé vyhodnocení | Lepší vyhodnocení |
+| --- | --- | --- |
+| Přepsali jsme support šablonu. | Šablona je aktualizovaná. | Support už u dvou billing dotazů oddělil zrušení plánu od žádosti o výmaz dat. |
+| Opravili jsme runbook. | Runbook má novou větu. | Člověk mimo původní tým prošel krok obnovy bez zastavení na nejasném pojmu. |
+| Zúžili jsme externí přístup. | Role je bezpečnější. | Externí účet už neumí exportovat zákaznická data a potřebná diagnostika pořád funguje. |
+| Doplnili jsme veřejnou odpověď. | Text je jasnější. | Sales ji poslal bez interního dovysvětlení a odpověď neslibuje novou garanci. |
+
+Dobré vyhodnocení má klidně jen tři věty. Musí ale spojit změnu s původním problémem.
+
+### Zkontroluj novou datovou a přístupovou stopu
+
+I malá změna může potichu vytvořit novou stopu. Ne vždy v databázi. Často v exportu, dokumentu, sdíleném odkazu, novém vlastníkovi šablony, automatizaci nebo ručním postupu.
+
+Po první změně projdi pět kontrol:
+
+1. Vznikl nový sběr, export, kopie nebo sdílení dat?
+2. Přibyl nový člověk, role, token, servisní účet nebo právo na export?
+3. Zůstala někde dočasná pracovní kopie po review nebo testu?
+4. Změnila se retence, datová lokalita, subdodavatel nebo veřejný slib?
+5. Je nové pravidlo zapsané v místě, kde ho další člověk opravdu najde?
+
+Pokud je odpověď na první čtyři otázky ano, změna možná pořád dává smysl. Jen už není „malá textová oprava“. Potřebuje doplnit do datové mapy, přístupového review, vendor karty, privacy notice nebo změnového logu podle toho, čeho se dotkla.
+
+### Rozhodni, co se stane dál
+
+Vyhodnocení nesmí končit větou „uvidíme“. To je sice lidské, ale jako provozní stav je to mokrá krabice. Další krok má být jeden z pěti stavů:
+
+| Stav | Použij ho, když | Další krok |
+| --- | --- | --- |
+| zavřít | změna splnila účel a nepřidala nové riziko | zapsat do běžného zdroje pravdy a nastavit další standardní review |
+| doladit | účel platí, ale jedna formulace, role nebo krok pořád mate | udělat jednu malou navazující opravu se stejnou kartou |
+| vrátit | změna nepomohla nebo slibuje víc než realita | obnovit předchozí stav a zapsat proč |
+| eskalovat | změna odkryla větší problém produktu, dat, billingu nebo trust slibu | otevřít samostatnou rozhodovací kartu mimo režim první změny |
+| zúžit | změna funguje, ale část rozsahu je zbytečná nebo riziková | ponechat jen část, která má důkaz užitečnosti |
+
+Praktické pravidlo: pokud vyhodnocení otevře tři nové nápady, neznamená to, že má nový vlastník hned pokračovat třemi změnami. Znamená to, že jedna první změna vytvořila vstupy do backlogu. Vyber maximálně jeden navazující krok a zbytek vědomě odlož.
+
+### Aktualizuj zdroj pravdy, ne jen poznámku
+
+Po první změně se často aktualizuje interní zápis, ale zapomene se na místo, ze kterého tým skutečně pracuje. Výsledek: review vypadá hotově, ale další člověk stejně použije starou šablonu nebo starý runbook.
+
+Zkontroluj tato místa:
+
+- veřejná nápověda, pokud se změnila odpověď zákazníkovi,
+- trust center nebo odpovědní knihovna, pokud se změnila bezpečnostní nebo privacy formulace,
+- runbook, pokud se změnil provozní krok,
+- přístupový registr, pokud se měnila role nebo token,
+- datová mapa nebo retenční karta, pokud se změnila cesta dat,
+- sales a support šablony, pokud se změnila komunikace,
+- rozhodovací log, pokud změna narovnala starý slib nebo otevřela větší problém.
+
+Jedna věta do správného zdroje pravdy je lepší než pět zpráv v chatu. Chat je dobrý na koordinaci, mizerný na budoucí důkaz. Ano, i když má hezké vyhledávání. Hezké vyhledávání není dokumentace, jen rychlejší archeologie.
+
+### Příklad: Vyhodnocení první změny v trust odpovědích
+
+Nový vlastník trust odpovědí přepsal šablonu k otázce, kde běží zákaznická data. Původní problém: sales odpovídal příliš obecně a zákazníkům nebylo jasné, co je veřejný slib, co je technická realita a co už vyžaduje individuální smluvní kontrolu.
+
+Původní změnová karta říkala:
+
+| Pole | Zápis |
+| --- | --- |
+| Změna | oddělit veřejnou odpověď o evropském provozu od interních detailů infrastruktury |
+| Důvod | snížit opakované dovysvětlování bez sdílení interních detailů |
+| Datový dopad | žádný nový sběr ani export |
+| Přístupový dopad | bez nové role |
+| Ověření | dvě použití v sales odpovědi a kontrola privacy vlastníkem |
+| Návrat zpět | vrátit starou šablonu, pokud nová odpověď vyvolá víc právních dotazů nebo slibuje neověřitelnou garanci |
+
+Vyhodnocení po dvou týdnech:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Pomohlo to původnímu problému? | Ano, dvě odpovědi odešly bez interního dovysvětlení. |
+| Vznikla nová datová stopa? | Ne, pracovalo se jen s existující veřejnou odpovědí a interní šablonou. |
+| Vznikl nový přístup? | Ne. |
+| Změnil se veřejný slib? | Ne, šablona jen oddělila veřejnou a interní vrstvu odpovědi. |
+| Co dál? | Zavřít změnu a doplnit větu do odpovědní knihovny. |
+
+Zavírací věta: „Změnu ponecháváme, protože sales umí odpovědět na evropský provoz bez interních detailů a bez nového slibu; další revize proběhne při změně dodavatele, regionu nebo privacy notice.“
+
+### Checklist: Vyhodnocení první změny po převzetí schopnosti
+
+- [ ] Review začíná původní změnovou kartou, ne dojmem z poslední porady.
+- [ ] Je jasné, jaký problém měla změna odstranit.
+- [ ] Dopad je popsaný jako výsledek, ne jako seznam aktivit.
+- [ ] Ověření používá chudý signál bez individuálního sledování lidí.
+- [ ] Je zkontrolovaná nová datová stopa: sběr, export, kopie, sdílení, retence a datová lokalita.
+- [ ] Je zkontrolovaná nová přístupová stopa: role, tokeny, servisní účty, exportní oprávnění a dočasné sdílení.
+- [ ] Pokud změna upravila veřejný slib, proběhlo odpovídající review.
+- [ ] Správný zdroj pravdy je aktualizovaný, ne jen chat nebo poznámka z porady.
+- [ ] Další stav je jeden z pěti: zavřít, doladit, vrátit, eskalovat nebo zúžit.
+- [ ] Nový vlastník si neotevřel tři další změny jen proto, že první změna prošla.
+
+### Mini úkol
+
+Vezmi poslední změnu, kterou nový vlastník udělal v převzaté schopnosti. Napiš pět řádků: původní problém, chudý signál dopadu, datová stopa, přístupová stopa a další stav. Pokud některý řádek neumíš vyplnit, nezakládej další změnu. Nejdřív zavři tu první. Backlog počká. On je na čekání přímo konstruovaný.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -51130,6 +51257,7 @@ Vyber jednu převzatou schopnost a napiš první změnovou kartu. Změna musí j
 
 ## Pracovní log
 
+- 2026-07-24: Doplněna příloha o vyhodnocení první změny po převzetí schopnosti bez měření ega: návrat k původní změnové kartě, oddělení dopadu od aktivity, kontrola nové datové a přístupové stopy, rozhodnutí o dalším stavu, aktualizace zdroje pravdy, příklad trust odpovědí, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro vyhodnocení první změny po převzetí. Bez nových aktuálních externích tvrzení, navázáno na části o první změně po převzetí, trust odpovědích, přístupech, datové mapě a privacy-first minimalizaci; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
 - 2026-07-24: Doplněna příloha o první změně po převzetí schopnosti bez rozbití důvěry: výběr malé vratné změny, změnová karta, rozlišení opravy textu od změny slibu, chudé ověření dopadu, zavření rozhodnutím, příklad billing odpovědí, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro první změnu po převzetí. Bez nových aktuálních externích tvrzení, navázáno na části o prvních 30 dnech nového vlastníka, runboocích, trust odpovědích, billing šablonách, přístupech a privacy-first minimalizaci; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
 - 2026-07-24: Doplněna příloha o prvních 30 dnech nového vlastníka schopnosti bez tichého rozpadu: 30denní režim převzetí, první malé rozhodnutí místo velkého projektu, karta prvního měsíce, kontrola přístupů po prvním použití, oprava runbooku podle reálných nejasností, uzavření převzetí rozhodnutím, příklad nového vlastníka trust odpovědí, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro ukotvení nového vlastníka po převzetí. Bez nových aktuálních externích tvrzení, navázáno na části o odchodu vlastníka, rotaci schopnosti, trust odpovědích, přístupech a privacy-first minimalizaci; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
 - 2026-07-24: Doplněna příloha o odchodu vlastníka interní schopnosti bez panického předání: předávací okno, rozhodnutí co předat/zúžit/zastavit/eskalovat, předání rozhodovacích hran místo historie, převod přístupů jako malý release, ověření převzetí jedním reálným krokem, příklad odchodu vlastníka billing pravidel, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro odchod nebo dlouhou nepřítomnost vlastníka schopnosti. Bez nových aktuálních externích tvrzení, navázáno na existující části o rotaci vlastníka, capability kartách, přístupech, runboocích a privacy-first minimalizaci; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
