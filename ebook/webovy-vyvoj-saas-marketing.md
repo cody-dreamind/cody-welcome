@@ -125,6 +125,7 @@ Když se nechceš vracet do celé knihy, hledej konkrétní nástroj podle výst
 | Předat export externí pomoci bez ztráty kontroly | „jednorázový export“, „externí pomoc“ nebo „kontrolovaná kopie“ | exportní balíček s účelem, datovým ořezem, pravidlem přenosu, datem návratu nebo smazání a zavírací kontrolou |
 | Uzavřít jednorázový export po dokončení práce | „uzavření exportu“, „export po práci“ nebo „smazání kopie“ | zavírací záznam s výsledkem práce, smazáním kopií, odebráním sdílení a kontrolou navazujících úkolů |
 | Dát externistovi omezený dočasný přístup | „dočasný externí přístup“, „sdílený admin“ nebo „přístupová věta“ | časově omezený přístup s účelem, rolí podle schopností, zákazem sdíleného účtu a zavíracím záznamem |
+| Zrevidovat externí přístupy, které už nejsou očividně dočasné | „revize externích přístupů“, „přístup přežívá účel“ nebo „externí účet po práci“ | krátká kontrola účelu, role, posledního využití, exportních schopností a zavření nebo převedení do řízeného vztahu |
 
 Pravidlo pro práci s rejstříkem: otevři maximálně tři nalezené části, vyber jednu a zapiš výstup. Pokud po deseti minutách pořád skáčeš mezi odkazy, vrať se k tabulce „Kudy začít podle aktuální bolesti“ a zúž problém. E-book není buffet. Teda je, ale bez talíře si stejně odneseš jen chaos.
 
@@ -49217,6 +49218,140 @@ Tento postup je o něco méně pohodlný než poslat admin přístup. Zároveň 
 
 Vyber jeden externí přístup, který dnes existuje v nástroji, repozitáři, analytice, CMS, helpdesku nebo billing systému. Napiš k němu přístupovou větu. Pokud ji neumíš napsat bez slov „všechno“, „admin“ nebo „pro jistotu“, přístup je moc široký. Udělej jednu malou opravu: nastav expiraci, změň roli na read-only, odeber export, nebo naplánuj konkrétní zavření.
 
+## Příloha: Revize externích přístupů bez nekonečné dočasnosti
+
+Dočasný externí přístup je v pořádku jen do chvíle, kdy je opravdu dočasný. Jakmile přežije původní zakázku, incident, audit nebo test, přestává být malou pomocí a začíná být provozním rizikem. Ne proto, že by externista automaticky dělal něco špatně. Protože tým už často neví, proč přístup existuje, co přesně umožňuje a kdo má odvahu ho vypnout.
+
+Revize externích přístupů nemá být hon na staré spolupráce. Má být krátká kontrola, jestli každý člověk mimo hlavní tým pořád potřebuje právě ten rozsah přístupu, který má. OWASP princip nejmenších oprávnění a GDPR princip minimalizace tady říkají totéž provozní řečí: pokud oprávnění nemá jasný účel, vlastníka a konec, má se zmenšit, převést do řízeného vztahu nebo zavřít. Odkazy jsou ve zdrojích.
+
+> Codyho komentář: Nejnebezpečnější přístup často nevypadá dramaticky. Je to starý read-only účet s exportem, o kterém všichni říkají „to tam necháme, kdyby něco“. „Kdyby něco“ je hrozný vlastník. Nechodí na review a neumí mazat.
+
+### Nezačínej seznamem všech lidí v historii
+
+Začni systémy, kde by špatný přístup bolel nejvíc. Typicky:
+
+- produkční administrace,
+- repozitáře a CI/CD,
+- hosting a DNS,
+- databáze, logy a analytika,
+- billing a fakturace,
+- helpdesk a CRM,
+- CMS a dokumentace s neveřejným obsahem,
+- sdílené složky s exporty nebo zákaznickými podklady.
+
+U každého systému si vytáhni jen externí identity: freelancery, agentury, poradce, bývalé dodavatele, technickou podporu nástrojů a jednorázové účty vytvořené kvůli auditu. Interní přístupový audit je samostatná práce. Tady řešíš hranici mezi firmou a okolním světem.
+
+První revize může být velmi malá:
+
+| Systém | Externí účet | Původní účel | Role | Poslední známé použití | Další krok |
+| --- | --- | --- | --- | --- | --- |
+| CMS preview | SEO konzultant | kontrola interních odkazů | editor | před 6 týdny | odebrat editor, ponechat veřejné URL |
+| Billing | účetní poradkyně | kontrola sazeb DPH | read-only billing | minulý měsíc | převést na čtvrtletní okno |
+| GitHub | externí vývojář | oprava webhooku | write repo | neznámé | změnit na issue-only nebo odebrat |
+
+Pokud nemáš informaci o posledním použití, neber to automaticky jako důkaz, že je všechno v pořádku. Ber to jako chybějící údaj. Rozhodnutí se pak dělá podle účelu, rozsahu a rizika, ne podle uklidňující prázdné buňky.
+
+### Rozliš pět možných rozhodnutí
+
+Revize má končit rozhodnutím, ne jen novou tabulkou. Pro každý externí přístup vyber jednu z pěti možností:
+
+| Rozhodnutí | Kdy dává smysl | Co zapsat |
+| --- | --- | --- |
+| ponechat | práce běží, účel je aktuální a role sedí | účel, vlastník, další revize |
+| zmenšit | účel trvá, ale role je moc široká | nová role, odebrané schopnosti |
+| časově omezit | přístup bude potřeba jen v konkrétním okně | datum konce, kdo zavře |
+| převést | z jednorázové pomoci se stal dlouhodobý dodavatel | vendor karta, DPA nebo smluvní rámec podle rizika |
+| zavřít | účel skončil nebo ho nikdo neumí obhájit | datum odebrání, co se stalo s kopiemi a tokeny |
+
+Největší past je sloupec „ponechat“, který znamená „nechce se nám to řešit“. Ponechat je platné rozhodnutí jen tehdy, když obsahuje nový termín kontroly a vlastníka. Bez toho je to jen odložené zavření.
+
+### Zkontroluj schopnosti, ne název role
+
+Nástroje často dávají rolím hezké názvy, které uklidňují víc než chrání. „Editor“, „analyst“, „viewer“ nebo „collaborator“ můžou v různých systémech znamenat velmi odlišné věci. Revize má proto kontrolovat schopnosti:
+
+- může účet exportovat data,
+- může zvát další lidi,
+- může měnit role nebo bezpečnostní nastavení,
+- může vytvářet tokeny, webhooky nebo integrace,
+- vidí produkční osobní údaje,
+- vidí billing, faktury nebo platební stavy,
+- může publikovat veřejný obsah,
+- může měnit konfiguraci, která ovlivní zákazníky.
+
+Příklad: externí obsahový konzultant může potřebovat komentovat landing page, ale nemusí mít možnost publikovat produkční stránku, měnit SEO šablonu, číst neveřejné obchodní poznámky a exportovat kontakty. Pokud to nástroj neumí oddělit, použij preview, komentáře v issue, screenshot nebo interního operátora. Někdy je méně pohodlný proces výrazně lepší než široká role.
+
+### Nezapomeň na stopy okolo účtu
+
+Odebrání uživatelského účtu je jen jedna vrstva. Externí spolupráce po sobě může nechat i další vstupy:
+
+| Stopová vrstva | Co hledat |
+| --- | --- |
+| sdílení | veřejné nebo neveřejné odkazy, složky, dokumenty, pozvánky |
+| integrace | OAuth aplikace, webhooky, API tokeny, CI proměnné |
+| kopie | exporty, auditní soubory, screenshoty, lokální pracovní data |
+| komunikace | e-mailové přílohy, chatové soubory, komentáře s citlivými výřezy |
+| dokumentace | runbooky, návody nebo šablony, které pořád počítají se starým externistou |
+
+Revize externích přístupů proto nemá končit větou „uživatel odebrán“. Lepší závěr je: „Uživatel odebrán, sdílená složka uzavřena, testovací token revokován, výstup zůstává v issue, pracovní export nemá další účel.“ To je trochu delší. A přesně proto je to použitelné.
+
+### Když je externista pořád potřeba, přestaň předstírat jednorázovost
+
+Někdy revize ukáže, že člověk mimo tým přístup opravdu potřebuje dál. To není selhání. Selhání je tvářit se, že dlouhodobý vztah je pořád „dočasný přístup z minulého pátku“.
+
+Pokud externista pracuje pravidelně, převeď ho do řízeného režimu:
+
+- napiš aktuální účel spolupráce,
+- urč interního vlastníka,
+- nastav roli podle skutečných schopností,
+- domluv rytmus revize,
+- vyjasni, jestli vzniká zpracování osobních údajů a kdo je správce nebo zpracovatel,
+- zkontroluj smluvní, bezpečnostní a dodavatelský rámec podle rizika,
+- nastav postup pro ukončení.
+
+Krátkodobá výjimka má mít konec. Dlouhodobý dodavatel má mít rámec. Mezi tím je bažina, ve které se skvěle ztrácí odpovědnost.
+
+### Praktický 30minutový průchod
+
+Když nechceš dělat velký audit, udělej jeden malý průchod:
+
+| Čas | Akce | Výstup |
+| --- | --- | --- |
+| 0-5 minut | Vyber jeden systém s nejvyšším dopadem. | například GitHub, billing, CMS nebo hosting |
+| 5-12 minut | Vytáhni externí účty a sdílení. | seznam lidí, pozvánek, rolí a odkazů |
+| 12-20 minut | U každého napiš původní účel a aktuální potřebu. | ponechat, zmenšit, omezit, převést nebo zavřít |
+| 20-27 minut | Proveď jednu nízkorizikovou opravu. | odebrání starého účtu, snížení role, vypnutí odkazu |
+| 27-30 minut | Zapiš výsledek a další kontrolu. | jedna věta do rozhodovacího nebo přístupového logu |
+
+Příklad záznamu:
+
+| Pole | Zápis |
+| --- | --- |
+| Systém | CMS preview |
+| Externí účet | `seo-reviewer@example.com` |
+| Původní účel | kontrola interních odkazů před sloučením dvou landing pages |
+| Rozhodnutí | zavřít |
+| Provedeno | role odebrána, sdílený preview odkaz vypnut |
+| Co zůstává | issue s doporučeními bez exportu obsahu |
+| Další kontrola | žádná, účel ukončen |
+| Vlastník | obsahový vlastník |
+
+### Checklist: Revize externích přístupů
+
+- [ ] Revize začíná jedním rizikovým systémem, ne nekonečným seznamem všech nástrojů.
+- [ ] U každého externího účtu je známý původní účel.
+- [ ] Role je posouzená podle schopností, ne podle názvu.
+- [ ] Export, pozvánky, tokeny, webhooky a integrace jsou zkontrolované zvlášť.
+- [ ] Přístup bez aktuálního účelu je zavřený nebo označený k zavření.
+- [ ] Příliš široká role je zmenšená na nejmenší použitelný rozsah.
+- [ ] Dlouhodobá spolupráce je převedená do dodavatelského nebo smluvního rámce.
+- [ ] Sdílené odkazy a pracovní kopie mají účel, vlastníka a konec.
+- [ ] Zavření neodstraňuje pracovní výsledek, jen zbytečný přístup nebo kopii.
+- [ ] Výstup revize je krátký záznam s rozhodnutím a dalším datem kontroly.
+
+### Mini úkol
+
+Vyber jeden systém, kde dnes může mít přístup někdo mimo hlavní tým. Najdi všechny externí identity a u každé vyber jedno rozhodnutí: ponechat, zmenšit, časově omezit, převést nebo zavřít. Do 30 minut proveď jednu konkrétní opravu. Pokud narazíš na přístup, který nikdo neumí obhájit, nezačínej debatou o důvěře. Začni otázkou: „Jaký účel by se dnes rozbil, kdybychom ho vypnuli?“
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -49410,6 +49545,7 @@ Vyber jeden externí přístup, který dnes existuje v nástroji, repozitáři, 
 
 ## Pracovní log
 
+- 2026-07-24: Doplněna příloha o revizi externích přístupů bez nekonečné dočasnosti: výběr rizikového systému, pět rozhodnutí pro externí účty, kontrola schopností místo názvu role, úklid sdílení, tokenů, integrací a kopií, převod dlouhodobé spolupráce do řízeného dodavatelského rámce, 30minutový průchod, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro přístupy, které přežily původní účel. Bez nových aktuálních externích tvrzení, navázáno na existující zdroje OWASP Authorization a Evropské komise k minimalizaci dat; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
 - 2026-07-24: Doplněna příloha o dočasném externím přístupu bez sdíleného admina: rozhodování mezi exportem a přístupem, přístupová věta, role podle konkrétních schopností, zákaz sdílených účtů, časové okno, auditní minimum, zavření přístupu jako malý release, příklad diagnostiky webhooku, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro omezený externí přístup. Navázáno na existující zdroje OWASP Authorization a Evropské komise k minimalizaci osobních údajů; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
 - 2026-07-24: Doplněna příloha o uzavření jednorázového exportu bez zapomenuté kopie: zavření původního účelu, převod pracovního výsledku do interního systému, kontrola interních/přenosových/externích kopií, oddělení smazání dat od zachování rozhodnutí, zavírací záznam, rozpoznání opakovaného exportu jako procesu, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro uzavření exportu po dokončení práce. Bez nových aktuálních externích tvrzení, navázáno na existující části o jednorázových exportech, dočasných nástrojích, retenci, vendor exitu a privacy-first minimalizaci; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
 - 2026-07-23: Doplněna příloha o jednorázovém exportu pro externí pomoc bez ztráty kontroly: práce od konkrétní otázky místo posílání celého systému, datový ořez před přenosem, výběr kanálu podle citlivosti, exportní průvodka, oddělení pracovního výstupu od datové kopie, praktický příklad SEO auditu, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro kontrolované předání exportu externí pomoci. Bez nových aktuálních externích tvrzení, navázáno na existující části o dočasných nástrojích, dodavatelském registru, retenci, přístupech a privacy-first minimalizaci; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
