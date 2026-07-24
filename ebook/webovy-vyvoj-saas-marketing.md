@@ -143,6 +143,7 @@ Když se nechceš vracet do celé knihy, hledej konkrétní nástroj podle výst
 | Zjednodušit nebo ukončit rutinu po několika cyklech | „retence rutiny“, „rutina po třech cyklech“ nebo „procesní sediment“ | rozhodnutí ponechat, zúžit, sloučit, automatizovat opatrně nebo zrušit opakovanou práci |
 | Automatizovat rutinu bez skrytého dozoru | „automatizace rutiny“, „automatizační karta“ nebo „vypínač automatizace“ | malý automatizační návrh s účelem, vstupy, výstupem, vlastníkem, logy, ručním rozhodnutím a datem revize |
 | Vyhodnotit automatizaci po prvních bězích | „review automatizace“, „automatizace po spuštění“ nebo „autopilot“ | rozhodnutí ponechat, zúžit, přepsat, vrátit do ruční rutiny nebo vypnout automatizaci podle nálezů, šumu a datové stopy |
+| Vypnout automatizaci bez zapomenutého běhu | „vypnutí automatizace“, „ukončený autopilot“ nebo „automatizace končí“ | vypínací karta s posledním během, revokací tokenů, úklidem výstupů, náhradním postupem a kontrolou veřejných slibů |
 
 Pravidlo pro práci s rejstříkem: otevři maximálně tři nalezené části, vyber jednu a zapiš výstup. Pokud po deseti minutách pořád skáčeš mezi odkazy, vrať se k tabulce „Kudy začít podle aktuální bolesti“ a zúž problém. E-book není buffet. Teda je, ale bez talíře si stejně odneseš jen chaos.
 
@@ -51614,6 +51615,154 @@ Výsledek není „automatizace funguje“. Přesnější výsledek zní: „Aut
 
 Vyber jednu automatizaci, která už běžela alespoň třikrát. Vyplň tabulku: počet běhů, počet užitečných nálezů, počet falešných poplachů, nová datová stopa, ruční dvojitá práce, rozhodnutí. Na konec napiš jednu větu: „Automatizaci teď ___, protože ___.“ Pokud věta nejde napsat, automatizace ještě není pod kontrolou. A to je přesně důvod ji revidovat dřív, než jí dáš další token.
 
+## Příloha: Vypnutí automatizace bez zapomenutého autopilota
+
+Vypnutí automatizace není jen smazání cronu, vypnutí workflow nebo komentář „už nepoužívat“. Automatizace po sobě mívá tokeny, logy, notifikace, dokumentaci, očekávání týmu a někdy i veřejný slib. Pokud ji vypneš jen technicky, může zůstat v provozu jako tichý předpoklad: lidé si myslí, že kontrola pořád běží, ale realita už dávno stojí jinde.
+
+Privacy-first vypnutí má stejnou logiku jako dobrý release: víš, co se mění, proč se to mění, kdo to ověřil a co se musí uklidit. Rozdíl je jen v tom, že výsledkem není nová funkce, ale menší datová stopa, méně šumu a méně skrytých míst, kde „něco samo běží“.
+
+> Codyho komentář: Nejlepší automatizace někdy skončí tím, že ji vypneš. To není technická prohra. To je provozní dospělost. Software, který už nemá důvod existovat, si nezaslouží pomník v CI.
+
+### Ber vypnutí jako malý release
+
+Ukončení automatizace se dotýká provozu, takže potřebuje krátké release myšlení. Ne proto, aby kolem něj vznikla velká porada. Proto, aby nikdo nebyl překvapený a aby po něm nezůstaly falešné jistoty.
+
+Před vypnutím si napiš:
+
+- proč automatizace končí,
+- jaký poslední stav ověřila,
+- od kdy už neběží,
+- kdo přebírá původní rozhodovací vstup,
+- jaký ruční nebo jiný postup ji nahrazuje,
+- které tokeny, role, exporty a logy se uklidí,
+- kde se musí upravit dokumentace nebo veřejný text.
+
+Nejhorší varianta je „vypnuli jsme to, protože to spamovalo“. Lepší věta zní: „Vypínáme týdenní kontrolu trust odpovědí, protože po zúžení pravidel tři běhy nepřinesly žádný nález a kontrola se přesouvá do release checklistu pro změny s datovým dopadem.“
+
+Taková věta má důvod, hranici i náhradu.
+
+### Udělej vypínací kartu
+
+Vypínací karta má být kratší než původní automatizační karta, ale musí zavřít celý životní cyklus. Nestačí říct, že automatizace skončila. Musí být jasné, co se stalo s jejími vstupy, výstupy a očekáváním.
+
+Minimální karta:
+
+| Pole | Otázka | Příklad |
+| --- | --- | --- |
+| Automatizace | Co přesně vypínáme? | týdenní kontrolu starých trust odpovědí |
+| Důvod konce | Proč už nemá běžet? | výstup je pokrytý release checklistem a poslední tři běhy byly bez nálezu |
+| Poslední běh | Kdy naposledy proběhla a s jakým výsledkem? | 2026-07-24, bez nálezu, bez chyby |
+| Náhrada | Co původní riziko pokrývá dál? | kontrola při změně exportu, retence, subdodavatele nebo billing textu |
+| Přístupy | Jaké tokeny, role nebo webhooky se ruší? | revokovat read-only token k repozitáři odpovědí |
+| Výstupy | Co se stane s logy, reporty a starými položkami? | ponechat agregovaný souhrn 30 dní, smazat pracovní export |
+| Dokumentace | Kde se mění popis procesu? | runbook trust odpovědí a onboarding vlastníka |
+| Veřejné sliby | Slíbili jsme někde pravidelnou kontrolu? | ne veřejně; interní cadence se mění z týdenní na release-triggered |
+| Kontrola po vypnutí | Kdy ověříme, že nic neběží bokem? | za 14 dní projít plánovače, tokeny a notifikace |
+
+Karta je důležitá hlavně u automatizací, které čtou data nebo mají přístup do více systémů. U malého skriptu v repozitáři může působit přehnaně. Jenže přesně malé skripty nejčastěji zůstanou zapomenuté, protože nikomu nestály za pořádné zavření.
+
+### Revokuj přístupy, ne jen vypni plánovač
+
+Když vypneš scheduled task, ale necháš žít token, automatizace sice neběží, ale riziko zůstává. Token může použít někdo jiný, může být zkopírovaný v konfiguraci, může zůstat v CI secretu nebo v osobním účtu člověka, který už na procesu nepracuje.
+
+Po vypnutí zkontroluj:
+
+- CI/CD secrets,
+- webhooky v napojených systémech,
+- API tokeny a jejich expiry,
+- service účty,
+- role v repozitáři nebo dokumentačním nástroji,
+- notifikační kanály a integrační aplikace,
+- lokální `.env` soubory a onboardingové návody.
+
+Praktické pravidlo: přístup, který existoval jen kvůli ukončené automatizaci, nemá přežít ukončenou automatizaci. Pokud ho chceš ponechat, potřebuje nový účel, vlastníka a revizní datum. Jinak je to jen přístupová fosilie.
+
+### Uklid výstupy a logy
+
+Automatizace často vytváří drobné výstupy: souhrny, upozornění, pracovní CSV, issue, drafty odpovědí, dočasné seznamy, screenshoty nebo logy. Po vypnutí rozhodni, co z nich má zůstat.
+
+Rozliš:
+
+| Typ stopy | Typické rozhodnutí |
+| --- | --- |
+| agregovaný provozní souhrn | ponechat krátce podle retenčního pravidla |
+| jednotlivé nálezy, které vedly k opravě | odkázat z rozhodovacího logu nebo zavřené issue |
+| pracovní exporty | smazat po převzetí výsledku do zdroje pravdy |
+| chybové logy | zkrátit retenci a ověřit, že neobsahují citlivý obsah |
+| notifikační historie | ponechat jen pokud slouží auditnímu účelu |
+| duplicitní reporty | zrušit nebo sloučit s existujícím review |
+
+Neuchovávej data jen proto, že vznikla automaticky. Automatický původ není důvod k automatické retenci. Pokud výstup nepodporuje rozhodnutí, auditní stopu nebo provozní učení, pravděpodobně má skončit.
+
+### Vrať lidem jasný pracovní návyk
+
+Automatizace často nahradí drobný lidský návyk: někdo přestal ručně kontrolovat metadata, odkazy, odpovědi nebo stavy, protože to hlídal skript. Po vypnutí musí být jasné, co se děje místo něj.
+
+Náhrada nemusí být stejně častá. Může být spouštěná událostí:
+
+- při release změně,
+- při přidání nového dodavatele,
+- při změně privacy notice,
+- při změně pricingu,
+- při bezpečnostním dotazu zákazníka,
+- při kvartálním provozním review.
+
+Důležité je, aby tým věděl, kdy se kontrola znovu otevře. Vypnutí bez náhrady je v pořádku jen tehdy, když původní riziko opravdu zmizelo nebo ho vědomě přijímáš. I to se dá napsat: „Riziko už nepokrýváme samostatnou kontrolou, protože funkce byla ukončena a veřejný text smazán.“
+
+### Zkontroluj veřejné a interní sliby
+
+Některé automatizace podporují sliby: „kontrolujeme dostupnost“, „pravidelně revidujeme subdodavatele“, „odpovědi aktualizujeme po změnách produktu“. Když se automatizace vypne, nemusí to automaticky znamenat změnu slibu. Ale musíš ověřit, jestli slib pořád odpovídá realitě.
+
+Projdi:
+
+- trust center,
+- privacy notice,
+- security stránku,
+- onboardingové texty,
+- sales a support šablony,
+- interní runbooky,
+- release checklisty,
+- odpovědní knihovnu pro dotazníky.
+
+Pokud text slibuje průběžnou kontrolu a automatizace byla jediný mechanismus, máš dvě možnosti: nahradit mechanismus jiným postupem, nebo upravit text. Třetí možnost, tedy nechat slib vypadat dobře a realitu nechat vyvanout, patří do kategorie „prosím ne“.
+
+### Příklad: Vypnutí dostupnostního ping monitoru
+
+Malý tým měl jednoduchý ping monitor pro veřejnou landing page. Každých pět minut kontroloval HTTP stav a posílal upozornění do obecného kanálu. Po čase se ukázalo, že monitor hlásí šum při krátkých síťových výpadcích, ale skutečný provozní dohled mezitím převzal jiný healthcheck, který kontroluje i obsahový marker a TLS stav.
+
+Vypínací karta:
+
+| Pole | Rozhodnutí |
+| --- | --- |
+| Automatizace | starý pětiminutový ping monitor landing page |
+| Důvod konce | duplicitní signál, vysoký šum, lepší healthcheck už pokrývá HTTP, TLS i obsah |
+| Poslední běh | poslední den bez potvrzeného incidentu, dva falešné poplachy |
+| Náhrada | nový healthcheck s méně častou notifikací a jasným vlastníkem |
+| Přístupy | zrušit webhook do obecného kanálu a token plánovače |
+| Výstupy | ponechat měsíční incident souhrn, smazat staré detailní logy po retenčním okně |
+| Dokumentace | upravit provozní runbook a onboarding nového vývojáře |
+| Veřejné sliby | status stránka neuvádí konkrétní frekvenci starého monitoru, není nutná veřejná změna |
+| Kontrola po vypnutí | za 14 dní ověřit, že starý webhook neposílá zprávy a token je revokovaný |
+
+Tým tím nezhoršil provoz. Naopak odstranil duplicitní šum a snížil počet míst, která mají přístup do notifikační infrastruktury. Dobrý konec automatizace je takový, po kterém je systém menší a srozumitelnější.
+
+### Checklist: Vypnutí automatizace
+
+- [ ] Víme, proč automatizace končí a jaké původní riziko řešila.
+- [ ] Máme poslední stav nebo poslední běh, podle kterého ji zavíráme.
+- [ ] Existuje náhrada, nebo je vědomě zapsané, že původní riziko zaniklo.
+- [ ] Vypnutí je zapsané jako malý release nebo rozhodnutí, ne jen technická poznámka.
+- [ ] Plánovače, workflow, webhooky a integrační pravidla jsou vypnuté.
+- [ ] Tokeny, role a service účty bez dalšího účelu jsou revokované.
+- [ ] Logy, exporty a notifikační historie mají jasnou retenci nebo jsou uklizené.
+- [ ] Dokumentace, runbooky a onboarding nepopisují automatizaci, která už neběží.
+- [ ] Veřejné trust a privacy sliby pořád odpovídají skutečnému provozu.
+- [ ] Za 14 až 30 dní proběhne krátká kontrola, že ukončený autopilot znovu neožil bokem.
+
+### Mini úkol
+
+Vyber jednu automatizaci, kterou tým ignoruje, vypnul napůl nebo už nedokáže vysvětlit jednou větou. Vyplň vypínací kartu a rozhodni: vypnout hned, zúžit a revidovat, nebo převést do ruční rutiny. Pokud ji ponecháš, napiš konkrétní důvod a datum další kontroly. Pokud ji vypneš, začni tokeny a dokumentací. Právě tam se zapomenutý autopilot drží nejraději.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -51807,6 +51956,7 @@ Vyber jednu automatizaci, která už běžela alespoň třikrát. Vyplň tabulku
 
 ## Pracovní log
 
+- 2026-07-24: Doplněna příloha o vypnutí automatizace bez zapomenutého autopilota: vypnutí jako malý release, vypínací karta, revokace tokenů a přístupů, úklid výstupů a logů, návrat jasného pracovního návyku, kontrola veřejných a interních slibů, příklad dostupnostního monitoru, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro ukončení automatizace. Bez nových aktuálních externích tvrzení, navázáno na části o review automatizace, automatizační kartě, retenci rutiny, logování, přístupech a privacy-first minimalizaci; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
 - 2026-07-24: Doplněna příloha o review automatizace po prvních bězích bez autopilota: návrat k původní automatizační kartě, oddělení technického běhu od dopadu, kontrola reálné datové stopy a chybových logů, zúžení pravidel před rozšiřováním vstupů, rozhodnutí ponechat/zúžit/přepsat/vrátit do ruční rutiny/vypnout, příklad kontroly trust odpovědí, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro vyhodnocení automatizace po spuštění. Bez nových aktuálních externích tvrzení, navázáno na části o automatizaci rutiny, retenci rutiny, logování, přístupech, trust odpovědích a privacy-first minimalizaci; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
 - 2026-07-24: Doplněna příloha o automatizaci rutiny bez skrytého dozoru: rozlišení automatizace rozhodovacího vstupu a odpovědnosti, automatizační karta, omezení vstupů a tokenů, návrh selhání jako běžného provozního stavu, měření automatizace podle snížené nejistoty, příklad kontroly trust odpovědí, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro automatizaci rutiny. Bez nových aktuálních externích tvrzení, navázáno na části o retenci rutiny, běžných rutinách, trust odpovědích, přístupech, logování a privacy-first minimalizaci; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
 - 2026-07-24: Doplněna příloha o retenci rutiny bez procesního sedimentu: revize rutiny po několika cyklech, hodnocení výstupů místo odškrtávání, rozhodnutí ponechat/zúžit/sloučit/automatizovat opatrně/zrušit, opatrnost před automatizací z nudy, úklid stop po zrušené rutině, příklad měsíční kontroly support šablon, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro zjednodušení nebo ukončení rutiny po několika cyklech. Bez nových aktuálních externích tvrzení, navázáno na části o převodu první změny do běžné rutiny, přístupových hranicích, datové retenci a privacy-first minimalizaci; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
