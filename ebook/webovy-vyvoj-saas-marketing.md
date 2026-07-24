@@ -131,6 +131,7 @@ Když se nechceš vracet do celé knihy, hledej konkrétní nástroj podle výst
 | Ověřit převzetí práce po externistovi | „kontrola převzetí“, „předání nestačí“ nebo „test převzetí“ | krátká zkouška, že interní tým umí výsledek provozovat, změnit, vrátit a zavřít zbytečné přístupy |
 | Stabilizovat převzatou práci po externistovi | „stabilizace po převzetí“, „první týden po externistovi“ nebo „garance po převzetí“ | krátký režim prvního týdne, vlastník, provozní signály, úklid garančního přístupu a převod výsledku do běžné rutiny |
 | Udržet převzatou práci dlouhodobě bez návratu závislosti | „dlouhodobá údržba po převzetí“, „měsíční revize převzaté práce“ nebo „interní vlastnictví“ | měsíční údržbová karta, jasný vlastník, běžný revizní rytmus a rozhodnutí, kdy se má znovu zapojit externí pomoc |
+| Znovu zapojit externí pomoc bez ztráty vlastnictví | „re-eskalace externí pomoci“, „návrat externisty“ nebo „externí pomoc znovu“ | re-entry brief s důvodem, hranicí práce, omezeným přístupem, předávacím výstupem a novým zavíracím kritériem |
 
 Pravidlo pro práci s rejstříkem: otevři maximálně tři nalezené části, vyber jednu a zapiš výstup. Pokud po deseti minutách pořád skáčeš mezi odkazy, vrať se k tabulce „Kudy začít podle aktuální bolesti“ a zúž problém. E-book není buffet. Teda je, ale bez talíře si stejně odneseš jen chaos.
 
@@ -50008,6 +50009,137 @@ Při první měsíční kontrole tým zjistí, že marketing chce nový promo k�
 
 Vyber jednu práci převzatou od externisty, která už není v garanci. Napiš k ní vlastnickou kartu na jednu obrazovku a přiřaď ji k existující rutině: billing review, obsahový audit, vendor hygiene, přístupový audit nebo produktové review. Na konci napiš jednu větu: „Znovu zapojíme externí pomoc pouze když ___.“ Pokud tu větu neumíš doplnit, převzetí ještě není hotové.
 
+## Příloha: Re-eskalace externí pomoci bez ztráty vlastnictví
+
+Dlouhodobá údržba má držet převzatou práci uvnitř týmu. To ale neznamená, že externí pomoc už nikdy nesmí přijít zpátky. Někdy se změní rozsah, dodavatel, bezpečnostní požadavek, zákaznická situace nebo interní kapacita. Tvrdohlavé „zvládneme to sami“ pak není soběstačnost, ale drahý způsob výroby rizika.
+
+Re-eskalace je řízený návrat externí pomoci k převzatému výsledku. Není to návrat staré závislosti, otevřený admin přístup ani věta „radši to celé udělej znovu“. Je to krátká pracovní smyčka: popsat, proč interní režim nestačí, co se má vyřešit, jaká data a přístupy jsou nutné, co se musí předat zpět a kdy se pomoc zase zavře.
+
+> Codyho komentář: Znovu zavolat externistu není ostuda. Ostuda je dělat tajně měsíc kolem části, které nikdo nerozumí, a pak poslat export celé databáze člověku, který měl původně jen odpovědět na jednu otázku. To není spolupráce. To je drahý kouřový efekt.
+
+### Poznej rozdíl mezi mezerou schopnosti a pohodlností
+
+Než otevřeš externí pomoc, napiš jednu větu, proč interní vlastník nestačí. Věta musí být konkrétní. „Nemáme čas“ je často pravda, ale sama o sobě nestačí. Může znamenat dočasnou kapacitní díru, špatně nastavenou prioritu, nedostatečné předání nebo skutečně specializovaný problém.
+
+Použij jednoduché rozlišení:
+
+| Důvod návratu | Co to znamená | Jak reagovat |
+| --- | --- | --- |
+| znalostní mezera | tým neví, jak bezpečně rozhodnout nebo provést změnu | krátká konzultace, párové provedení nebo doplnění runbooku |
+| kapacitní mezera | tým ví co dělat, ale teď nemá ruce | omezené zadání s interním review a jasným předáním |
+| změna rozsahu | původní výsledek má novou roli nebo nový dopad | otevřít backlog, datovou mapu a případně dodavatelský rámec |
+| provozní incident | výsledek přestal fungovat a interní zásah by zvyšoval škodu | malý opravný režim s incident logem a minimem přístupů |
+| špatné převzetí | tým nikdy reálně neuměl výsledek provozovat | neopakovat stejné předání; nejdřív opravit vlastnictví a test převzetí |
+| pohodlnost | externista je rychlejší, ale interní tým by to zvládl | neeskalovat automaticky; udělat interní cvičení nebo malou údržbu |
+
+Cílem není trestat tým za to, že něco neumí. Cílem je neplést si pomoc s únikem z vlastnictví. Pokud se stejný typ re-eskalace opakuje třikrát, problém není externista. Problém je, že karta vlastnictví lže nebo výsledek ve skutečnosti patří do řízeného dodavatelského režimu.
+
+### Napiš re-entry brief
+
+Re-entry brief je krátké zadání pro návrat externí pomoci. Má být menší než původní projektové zadání a přesnější než zpráva „prosím koukni na to“.
+
+Minimální struktura:
+
+| Pole | Otázka |
+| --- | --- |
+| Převzatý výsledek | k čemu se externí pomoc vrací |
+| Důvod návratu | proč interní režim nestačí právě teď |
+| Požadovaný výstup | jaký konkrétní výsledek má vzniknout |
+| Hranice práce | co se výslovně nemá měnit |
+| Datová hranice | jaká data se nesmí exportovat, sdílet nebo ukládat mimo hlavní systém |
+| Přístupová hranice | jaké role, tokeny nebo účty jsou dočasně nutné |
+| Interní vlastník | kdo rozhoduje a přebírá výsledek zpět |
+| Předávací výstup | co musí po práci zůstat v dokumentaci, runbooku nebo backlogu |
+| Zavírací kritérium | podle čeho se externí pomoc znovu ukončí |
+
+Re-entry brief piš do vlastního systému, ne do soukromého chatu jako jediného místa pravdy. Chat je dobrý na domluvu, špatný na dlouhodobou provozní paměť. Když se výsledek dotýká dat, přístupů, pricingu, supportu nebo veřejných trust slibů, brief musí být dohledatelný i za měsíc.
+
+### Dej přístup až po hranici práce
+
+Nejhorší re-eskalace začíná větou: „Tady máš zase admina, vyřeš to.“ Tím se obvykle vrátí přesně ta závislost, kterou tým předtím pracně zavřel.
+
+Postupuj opačně:
+
+1. Nejdřív napiš požadovaný výstup.
+2. Pak popiš nejmenší datový výřez nebo systémovou schopnost, která k němu stačí.
+3. Teprve potom otevři přístup, export nebo společné pracovní okno.
+4. Nastav datum zavření už při otevření.
+5. Po skončení ověř, že výstup je převzatý, ne jen hotový.
+
+Někdy je místo přístupu lepší jednorázový export. Jindy je místo exportu lepší sdílená obrazovka, párový zásah nebo interní spuštění příkazu podle instrukce. Privacy-first otázka nezní „co je nejrychlejší“, ale „co dává dost schopnosti s nejmenším datovým a přístupovým stínem“.
+
+### Udrž interního vlastníka u práce
+
+Externí pomoc nemá z interního vlastníka udělat diváka. Pokud se vlastník odpojí, předání bude znovu slabé a další re-eskalace přijde rychleji.
+
+Praktické pravidlo:
+
+- externista vysvětluje rozhodnutí, která mění budoucí provoz,
+- interní vlastník potvrzuje hranice a prioritizaci,
+- interní člověk provede aspoň jeden malý krok nebo kontrolu,
+- výsledek se zapíše do existující vlastnické karty,
+- otevřená mezera skončí v backlogu, ne v hlavě externisty.
+
+U menší práce stačí krátká asynchronní předávka. U rizikovější práce použij párové okno: externista provede nebo navrhne zásah, interní vlastník sleduje důvod, dopad, test návratu a datovou hranici. Není cílem stát někomu za zády. Cílem je, aby po zásahu nezůstala nová černá skříňka.
+
+### Zavři re-eskalaci novým důkazem převzetí
+
+Re-eskalace nekončí tím, že externista napíše „hotovo“. Končí tím, že interní tým umí výsledek dál držet.
+
+Zavírací důkaz může být jednoduchý:
+
+| Typ práce | Důkaz převzetí |
+| --- | --- |
+| konzultace | doplněné rozhodnutí, upravená vlastnická karta a jeden další krok |
+| oprava | ověřený smoke test, rollback poznámka a zavřené dočasné přístupy |
+| změna konfigurace | zapsaná hodnota, důvod změny, místo další revize a kontrola veřejného slibu |
+| nová automatizace | runbook, vlastník, testovací scénář a pravidlo vypnutí |
+| datový zásah | doložené smazání nebo návrat exportu, aktualizovaná retenční poznámka a kontrola kopií |
+| produktová změna | backlog vazba, support odpověď, dokumentace a signál dopadu bez nového sledování jednotlivců |
+
+Pokud zavírací důkaz nevznikne, pomoc možná vyřešila akutní bolest, ale zhoršila provozní paměť. To je častý důvod, proč se externí návraty tváří jako série malých laskavostí a ve skutečnosti drží produkt jako rukojmí.
+
+### Příklad: Návrat specialisty k převzatému onboardingu
+
+Tým před měsícem převzal onboarding po externím produktovém specialistovi. První týden byl stabilní, dokumentace existuje a měsíční review mělo jasného vlastníka. Pak se změnil pricing: nový plán má jiný limit týmových pozvánek a support začal dostávat dotazy, proč některé pozvánky nejdou dokončit.
+
+Špatná reakce:
+
+„Pošleme specialistovi přístup do analytiky, CRM i administrace, ať se podívá, kde lidé padají.“
+
+Lepší re-entry brief:
+
+| Pole | Zápis |
+| --- | --- |
+| Převzatý výsledek | onboarding pro týmové pozvánky |
+| Důvod návratu | změna pricing limitu vytvořila nový stav, který původní onboarding neřešil |
+| Požadovaný výstup | návrh jedné obrazovky a support odpovědi pro limit pozvánek |
+| Hranice práce | nemění se pricing model ani billing logika |
+| Datová hranice | žádný export CRM, stačí agregovaný počet dotazů a anonymizované ukázky textu |
+| Přístupová hranice | bez přístupu do produkce; návrh nad screenshotem a interním popisem toku |
+| Interní vlastník | produktový vlastník onboardingu |
+| Předávací výstup | aktualizovaná onboarding karta, support šablona a kontrolní scénář |
+| Zavírací kritérium | interní vlastník projde test pozvánky pro nový plán a zavře support šablonu starého vysvětlení |
+
+Výsledek není jen opravená obrazovka. Výsledek je aktualizovaná vlastnická karta: onboarding už má nový signál potíže, nové pravidlo supportu a jasnou hranici, kdy se změna pricingu musí propsat do produktu. Externí pomoc tím zmenšila závislost, ne ji obnovila.
+
+### Checklist: Re-eskalace externí pomoci
+
+- [ ] Umím jednou větou říct, proč interní režim nestačí právě teď.
+- [ ] Rozlišil jsem znalostní mezeru, kapacitní mezeru, změnu rozsahu, incident, špatné převzetí a pohodlnost.
+- [ ] Existuje re-entry brief s výstupem, hranicí práce, datovou hranicí a zavíracím kritériem.
+- [ ] Externí přístup nebo export je odvozený od práce, ne otevřený ze zvyku.
+- [ ] Interní vlastník zůstává u rozhodnutí a přebírá výsledek zpět.
+- [ ] Výsledek se zapisuje do vlastnické karty, runbooku, support šablony nebo backlogu.
+- [ ] Dočasné role, tokeny, sdílené odkazy a exporty mají datum zavření.
+- [ ] Po zásahu existuje důkaz převzetí, ne jen zpráva „hotovo“.
+- [ ] Opakovaná re-eskalace stejného typu vede k revizi vlastnictví nebo dodavatelského režimu.
+- [ ] Re-eskalace nepřidala nové sledování jednotlivců jen proto, aby se rychleji našla chyba.
+
+### Mini úkol
+
+Vyber jednu převzatou práci, u které by tým pravděpodobně znovu volal externí pomoc: onboarding, billing, SEO migraci, analytiku, trust odpovědi, automatizaci nebo integraci. Napiš re-entry brief na jednu obrazovku. Na konec doplň dvě věty: „Externí pomoc otevřeme pouze pro ___.“ a „Zavřeno bude, až interně ověříme ___.“ Pokud druhá věta nejde napsat konkrétně, ještě nemáš zadání. Máš jen úzkost s fakturou.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -50201,6 +50333,7 @@ Vyber jednu práci převzatou od externisty, která už není v garanci. Napiš 
 
 ## Pracovní log
 
+- 2026-07-24: Doplněna příloha o re-eskalaci externí pomoci bez ztráty vlastnictví: rozlišení znalostní a kapacitní mezery, změny rozsahu, incidentu, špatného převzetí a pohodlnosti, re-entry brief, přístupová a datová hranice, udržení interního vlastníka u práce, důkaz převzetí po zásahu, příklad návratu specialisty k onboardingu, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro řízené znovuzapojení externí pomoci. Bez nových aktuálních externích tvrzení, navázáno na existující části o dlouhodobé údržbě po převzetí, dočasných přístupech, jednorázových exportech a dodavatelském režimu; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
 - 2026-07-24: Doplněna příloha o dlouhodobé údržbě po převzetí bez návratu závislosti: vlastnická karta převzatého výsledku, napojení na měsíční nebo kvartální rutinu, rozhodovací možnosti po kontrole, spouštěče revize, malé cvičení interní schopnosti, rozlišení údržby, změny a nového projektu, příklad checkoutu, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro dlouhodobé interní vlastnictví převzaté práce. Bez nových aktuálních externích tvrzení, navázáno na existující části o stabilizaci po převzetí, dodavatelském režimu, přístupech, provozních návodech a privacy-first údržbě; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
 - 2026-07-24: Doplněna příloha o stabilizaci po převzetí externí práce bez věčného dozoru: režim prvního týdne, připojení převzatého výsledku k existujícím rutinám, stabilizační signály bez sledování jednotlivců, řízené zavření garančního období, příklad billing integrace, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro stabilizaci práce po externistovi. Bez nových aktuálních externích tvrzení, navázáno na existující části o předání know-how, kontrole převzetí, přístupech, retenci, runboocích a privacy-first měření; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
 - 2026-07-24: Doplněna příloha o kontrole převzetí po externistovi bez slepé víry: výběr jedné ověřované schopnosti, karta testu převzetí, kontrola návratu a vypnutí, rytmus zavření přístupů po důkazu, praktický příklad SEO migrace, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro ověření převzetí práce po externistovi. Bez nových aktuálních externích tvrzení, navázáno na existující zdroje k minimalizaci dat, přístupům, zpracovatelům, dokumentaci a provozní kontrole; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
