@@ -144,6 +144,7 @@ Když se nechceš vracet do celé knihy, hledej konkrétní nástroj podle výst
 | Automatizovat rutinu bez skrytého dozoru | „automatizace rutiny“, „automatizační karta“ nebo „vypínač automatizace“ | malý automatizační návrh s účelem, vstupy, výstupem, vlastníkem, logy, ručním rozhodnutím a datem revize |
 | Vyhodnotit automatizaci po prvních bězích | „review automatizace“, „automatizace po spuštění“ nebo „autopilot“ | rozhodnutí ponechat, zúžit, přepsat, vrátit do ruční rutiny nebo vypnout automatizaci podle nálezů, šumu a datové stopy |
 | Vypnout automatizaci bez zapomenutého běhu | „vypnutí automatizace“, „ukončený autopilot“ nebo „automatizace končí“ | vypínací karta s posledním během, revokací tokenů, úklidem výstupů, náhradním postupem a kontrolou veřejných slibů |
+| Ověřit náhradní ruční proces po vypnutí automatizace | „ruční proces po vypnutí“, „náhradní rutina“ nebo „kontrola po vypnutí automatizace“ | krátká ověřovací karta, že tým umí původní riziko pokrýt bez starého skriptu, nových exportů a skryté odpovědnosti |
 
 Pravidlo pro práci s rejstříkem: otevři maximálně tři nalezené části, vyber jednu a zapiš výstup. Pokud po deseti minutách pořád skáčeš mezi odkazy, vrať se k tabulce „Kudy začít podle aktuální bolesti“ a zúž problém. E-book není buffet. Teda je, ale bez talíře si stejně odneseš jen chaos.
 
@@ -51763,6 +51764,127 @@ Tým tím nezhoršil provoz. Naopak odstranil duplicitní šum a snížil počet
 
 Vyber jednu automatizaci, kterou tým ignoruje, vypnul napůl nebo už nedokáže vysvětlit jednou větou. Vyplň vypínací kartu a rozhodni: vypnout hned, zúžit a revidovat, nebo převést do ruční rutiny. Pokud ji ponecháš, napiš konkrétní důvod a datum další kontroly. Pokud ji vypneš, začni tokeny a dokumentací. Právě tam se zapomenutý autopilot drží nejraději.
 
+## Příloha: Ruční proces po vypnutí automatizace bez návratu chaosu
+
+Když automatizaci vypneš, práce tím nekončí. Jen se původní riziko přesune jinam: do release checklistu, měsíční rutiny, vlastnické karty, support postupu nebo rozhodovacího logu. Pokud náhradní ruční proces neověříš, může vzniknout zvláštní mezistav. Starý skript už neběží, tým si pořád myslí, že je něco hlídané, a nová rutina existuje jen jako věta v dokumentaci.
+
+Privacy-first smysl ruční náhrady není „dělat všechno ručně navždy“. Smysl je zachovat kontrolu nad rozhodnutím, aniž by se znovu přidal zbytečný token, export, vendor nebo plošné logování. Ruční proces má být menší než vypnutá automatizace, ne její pomalejší kopie.
+
+> Codyho komentář: Vypnout špatnou automatizaci a nahradit ji nejasným „někdo se na to občas podívá“ je jen pomalý způsob, jak znovu vyrobit incident. Ruční proces nemusí být luxusní. Musí být viditelný, vlastněný a ověřený jedním reálným průchodem.
+
+### Začni původním rizikem, ne starým skriptem
+
+Náhradní proces se nemá opisovat podle toho, co dělal starý skript. Má vycházet z otázky, jaké riziko nebo rozhodnutí má tým dál pokrýt.
+
+Před návrhem ruční náhrady napiš:
+
+- jaké riziko automatizace původně hlídala,
+- jestli riziko pořád existuje,
+- kdy se riziko typicky mění,
+- kdo má právo rozhodnout o změně,
+- jaký nejmenší vstup stačí k ověření,
+- kde má vzniknout výstup,
+- kdy proces skončí nebo se znovu zautomatizuje.
+
+Příklad: starý týdenní skript kontroloval všechny trust odpovědi. Původní riziko ale nebylo „mít každý pátek report“. Riziko bylo, že po změně exportu, retence, subdodavatele nebo billing pravidla zůstane veřejná odpověď zastaralá. Ruční náhrada tedy nemusí být páteční kontrola celé knihovny. Stačí release-triggered kontrola jen u změn s datovým dopadem.
+
+### Udělej ověřovací kartu ruční náhrady
+
+Ruční proces po vypnutí automatizace musí mít první ověření. Ne velký audit. Jeden průchod, který ukáže, že tým ví, kdy se proces spustí, co kontroluje a co z něj vypadne.
+
+Karta může vypadat takto:
+
+| Pole | Otázka | Příklad |
+| --- | --- | --- |
+| Původní automatizace | Co bylo vypnuté? | týdenní skript na kontrolu trust odpovědí |
+| Původní riziko | Co pořád potřebujeme hlídat? | zastaralé odpovědi po změně datové cesty |
+| Spouštěč ruční kontroly | Kdy se proces otevře? | release mění export, retenci, subdodavatele, role nebo billing text |
+| Vlastník | Kdo rozhodne, jestli je odpověď pořád pravdivá? | vlastník trust obsahu |
+| Vstupy | Co se smí použít? | release poznámka, dotčené odpovědi, vendor karta; ne CRM historie |
+| Výstup | Co vznikne? | rozhodnutí ponechat, upravit, archivovat nebo eskalovat odpověď |
+| Datová hranice | Co se nesmí kopírovat ani logovat? | zákaznické dotazy, smlouvy, surové support konverzace |
+| První test | Na čem proces ověříme? | příští release s dopadem na export |
+| Konec nebo revize | Kdy proces přehodnotíme? | po třech releasech nebo při opakované ruční chybě |
+
+Karta pomáhá hlavně tím, že ruční práce není závislá na paměti jednoho člověka. Když vlastník odejde, karta řekne, co je potřeba udělat. Když proces začne bolet, karta ukáže, co přesně se má zúžit nebo znovu automatizovat.
+
+### Proveď první průchod do týdne
+
+Ruční náhrada bez prvního průchodu je jen přání. Po vypnutí automatizace si naplánuj krátké ověření v nejbližší reálné situaci. Pokud žádná reálná situace nepřijde, použij malý cvičný scénář s neprodukčními daty.
+
+První průchod má ověřit:
+
+- že spouštěč někdo pozná,
+- že vlastník ví, co má otevřít,
+- že vstupy jsou dostupné bez nového exportu,
+- že výstup je zapsaný na správném místě,
+- že proces nezpůsobí nové sdílení dat,
+- že je jasné, kdy se proces zavře.
+
+Nesnaž se při prvním průchodu optimalizovat každý detail. Hledej hlavně slepá místa: kdo čekal na koho, kde chyběl odkaz, kde se musela vytáhnout data navíc, kde výstup skončil v chatu místo ve zdroji pravdy.
+
+### Nepřidávej nový datový stín jen proto, že je proces ruční
+
+Ruční procesy mají nenápadnou slabinu: lidé si často pomáhají exportem do tabulky, screenshotem, přeposlaným e-mailem nebo kopií citlivé poznámky, protože „je to jen jednou“. Jenže po vypnutí automatizace se ruční náhrada může opakovat. A opakované „jen jednou“ je proces bez pravidel.
+
+Zakázané zkratky:
+
+- kopírovat celé zákaznické dotazy do obecné tabulky,
+- ukládat screenshoty administrace do sdíleného disku bez retence,
+- přeposílat interní odpovědi do osobního e-mailu kvůli pohodlí,
+- používat starý token vypnuté automatizace pro ruční kontrolu,
+- vytvářet novou tabulku bez vlastníka a data smazání,
+- nahrazovat automatický šum ručním reportem, který nikdo nečte.
+
+Lepší je zapsat jen rozhodnutí a odkaz na zdroj pravdy. Pokud musí vzniknout dočasný export, dostane účel, vlastníka, datum smazání a zavírací kontrolu. Ano, i když je to „jen malý CSV“. Malé CSV umí překvapivě dlouho žít.
+
+### Rozliš dočasnou ruční náhradu a nový standard
+
+Ruční náhrada po vypnutí automatizace může mít tři stavy:
+
+| Stav | Kdy dává smysl | Co hlídat |
+| --- | --- | --- |
+| dočasná pojistka | automatizace se vypnula kvůli chybě, ale riziko je pořád živé | krátké okno, jasný vlastník, žádné nové trvalé exporty |
+| nový standard | riziko se objevuje jen při konkrétní události a ruční kontrola stačí | napojení na release, onboarding nebo měsíční review |
+| kandidát na novou automatizaci | ruční proces se opakuje často a má jasný mechanický vstup | automatizační karta, menší rozsah než starý skript, lidské rozhodnutí zachované |
+
+Nejhorší je čtvrtý stav, který se do tabulky nevešel, protože by kazil náladu: „ruční proces existuje jako mlhavá dohoda“. Ten stav zavři rychle. Buď ho zapiš, zruš, nebo převeď na nový návrh.
+
+### Příklad: Trust odpovědi po vypnutí týdenní kontroly
+
+Tým vypnul automatickou týdenní kontrolu trust odpovědí, protože poslední tři běhy nepřinesly nález a pravidla vytvářela falešné poplachy. Riziko ale nezmizelo: po změně exportu dat může zůstat v odpovědní knihovně starý text.
+
+Náhradní ruční proces:
+
+| Pole | Rozhodnutí |
+| --- | --- |
+| Spouštěč | release mění export, retenci, subdodavatele, role nebo billing pravidla |
+| Vlastník | vlastník trust obsahu, reviewer z produktu při datovém dopadu |
+| Vstupy | release poznámka, dotčená odpověď, vendor karta nebo datová mapa |
+| Zakázáno | číst CRM historii, kopírovat zákaznické dotazy, používat starý bot token |
+| Výstup | odpověď ponechána, upravena, archivována nebo eskalována do právního review |
+| První test | nejbližší release exportu do CSV |
+| Revize | po třech releasech zhodnotit, jestli se kontrola dělá správně a bez zbytečných kopií |
+
+Při prvním průchodu tým zjistí, že release checklist sice obsahuje „zkontrolovat dokumentaci“, ale neříká konkrétně trust odpovědi. Oprava je malá: do release checklistu přibude položka „Pokud změna ovlivňuje export, retenci, subdodavatele, role nebo billing, otevři trust odpovědi podle ruční karty.“ Nevznikl nový export, nová integrace ani nový report. Jen přesnější spouštěč.
+
+### Checklist: Ruční proces po vypnutí automatizace
+
+- [ ] Víme, jaké původní riziko automatizace hlídala.
+- [ ] Riziko je buď zaniklé, vědomě přijaté, nebo pokryté náhradním procesem.
+- [ ] Ruční proces má spouštěč, vlastníka, povolené vstupy a jasný výstup.
+- [ ] První ověřovací průchod proběhne do týdne nebo při nejbližší relevantní události.
+- [ ] Proces nepoužívá staré tokeny, role ani exporty vypnuté automatizace.
+- [ ] Ruční náhrada nevytváří novou tabulku, screenshoty nebo kopie bez retence.
+- [ ] Výstup se zapisuje do zdroje pravdy, ne pouze do chatu.
+- [ ] Dokumentace a checklisty říkají, kdy se proces spouští.
+- [ ] Po několika průchodech je jasné, zda má proces zůstat ruční, zrušit se, nebo se znovu opatrně automatizovat.
+- [ ] Tým ví, že vypnutá automatizace už neběží. Falešná jistota je horší než žádná jistota.
+
+### Mini úkol
+
+Vyber jednu automatizaci, kterou jste nedávno vypnuli nebo chcete vypnout. Napiš původní riziko jednou větou a vyplň ověřovací kartu ruční náhrady. Pak udělej první průchod na reálném nebo cvičném scénáři a zapiš jen tři věci: co fungovalo, kde vzniklo tření a jestli přibyla nová datová stopa. Pokud přibyla, nejdřív ji zmenši. Až potom přemýšlej o další automatizaci.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -51956,6 +52078,7 @@ Vyber jednu automatizaci, kterou tým ignoruje, vypnul napůl nebo už nedokáž
 
 ## Pracovní log
 
+- 2026-07-24: Doplněna příloha o ručním procesu po vypnutí automatizace bez návratu chaosu: návrat k původnímu riziku místo opisování starého skriptu, ověřovací karta ruční náhrady, první průchod do týdne, ochrana před novým datovým stínem, rozlišení dočasné pojistky, nového standardu a kandidáta na novou automatizaci, příklad trust odpovědí, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro ověření náhradního ručního procesu po vypnutí automatizace. Bez nových aktuálních externích tvrzení, navázáno na části o vypnutí automatizace, review automatizace, retenci rutiny, release checklistech, trust odpovědích a privacy-first minimalizaci; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
 - 2026-07-24: Doplněna příloha o vypnutí automatizace bez zapomenutého autopilota: vypnutí jako malý release, vypínací karta, revokace tokenů a přístupů, úklid výstupů a logů, návrat jasného pracovního návyku, kontrola veřejných a interních slibů, příklad dostupnostního monitoru, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro ukončení automatizace. Bez nových aktuálních externích tvrzení, navázáno na části o review automatizace, automatizační kartě, retenci rutiny, logování, přístupech a privacy-first minimalizaci; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
 - 2026-07-24: Doplněna příloha o review automatizace po prvních bězích bez autopilota: návrat k původní automatizační kartě, oddělení technického běhu od dopadu, kontrola reálné datové stopy a chybových logů, zúžení pravidel před rozšiřováním vstupů, rozhodnutí ponechat/zúžit/přepsat/vrátit do ruční rutiny/vypnout, příklad kontroly trust odpovědí, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro vyhodnocení automatizace po spuštění. Bez nových aktuálních externích tvrzení, navázáno na části o automatizaci rutiny, retenci rutiny, logování, přístupech, trust odpovědích a privacy-first minimalizaci; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
 - 2026-07-24: Doplněna příloha o automatizaci rutiny bez skrytého dozoru: rozlišení automatizace rozhodovacího vstupu a odpovědnosti, automatizační karta, omezení vstupů a tokenů, návrh selhání jako běžného provozního stavu, měření automatizace podle snížené nejistoty, příklad kontroly trust odpovědí, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro automatizaci rutiny. Bez nových aktuálních externích tvrzení, navázáno na části o retenci rutiny, běžných rutinách, trust odpovědích, přístupech, logování a privacy-first minimalizaci; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
