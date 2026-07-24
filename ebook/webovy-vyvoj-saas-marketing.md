@@ -127,6 +127,7 @@ Když se nechceš vracet do celé knihy, hledej konkrétní nástroj podle výst
 | Dát externistovi omezený dočasný přístup | „dočasný externí přístup“, „sdílený admin“ nebo „přístupová věta“ | časově omezený přístup s účelem, rolí podle schopností, zákazem sdíleného účtu a zavíracím záznamem |
 | Zrevidovat externí přístupy, které už nejsou očividně dočasné | „revize externích přístupů“, „přístup přežívá účel“ nebo „externí účet po práci“ | krátká kontrola účelu, role, posledního využití, exportních schopností a zavření nebo převedení do řízeného vztahu |
 | Převést pravidelnou externí spolupráci do řízeného dodavatelského režimu | „externista jako dodavatel“, „převod spolupráce“ nebo „dodavatelský režim“ | vendor karta, role, datové hranice, revizní rytmus, smluvní rámec a exit plán pro dlouhodobou práci |
+| Předat know-how od externisty zpět do týmu | „předání know-how“, „dodavatel bez černé skříňky“ nebo „pracovní stopa“ | předávací balík s rozhodnutími, runbooky, otevřenými riziky, datovými hranicemi a ověřením, že tým umí udělat další krok |
 
 Pravidlo pro práci s rejstříkem: otevři maximálně tři nalezené části, vyber jednu a zapiš výstup. Pokud po deseti minutách pořád skáčeš mezi odkazy, vrať se k tabulce „Kudy začít podle aktuální bolesti“ a zúž problém. E-book není buffet. Teda je, ale bez talíře si stejně odneseš jen chaos.
 
@@ -49496,6 +49497,141 @@ Výsledek není pomalejší práce. Je to práce, která přežije dovolenou, zm
 
 Najdi jednu externí spolupráci, která už trvá déle než původní plán. Napiš k ní vendor kartu v deseti polích z této přílohy. Potom udělej jednu opravu: zmenši roli, doplň vlastníka, zapiš datovou hranici, stanov další revizi, nebo vytvoř exit plán. Pokud se při vyplňování zasekneš na větě „to ví jen jeden člověk“, právě jsi našel první věc k opravě.
 
+## Příloha: Předání know-how od externisty bez černé skříňky
+
+Převést externistu do řízeného dodavatelského režimu je dobrý krok. Nestačí ale sám o sobě. Pokud po třech měsících spolupráce ví dodavatel víc o billing integraci, SEO migraci, deploy procesu nebo marketingových automatizacích než interní tým, vzniká jiný typ rizika: produkt funguje, ale znalost leží mimo firmu.
+
+To není argument proti externistům. Dobrá externí pomoc umí zrychlit práci, dodat specializaci a ušetřit tým od slepých uliček. Jen nesmí vytvořit černou skříňku, kterou nikdo neumí zkontrolovat, obnovit ani bezpečně vypnout.
+
+Privacy-first provoz potřebuje nejen omezené přístupy, ale i předatelné znalosti. Když tým neví, kde jsou data, jak funguje integrace, jak se provádí rollback nebo proč se zvolil konkrétní nástroj, nemá skutečnou kontrolu nad daty. Má jen fakturu a naději. To je křehká kombinace.
+
+> Codyho komentář: Externista nemá být lidský vendor lock-in v mikině. Pokud výsledek nejde pochopit, provozovat a po rozumném předání převzít, nekupuješ si pomoc. Pronajímáš si část vlastního produktu.
+
+### Předání začíná už při zadání
+
+Nejhorší předání vzniká na konci, když se někdo zeptá: „Můžeš nám ještě rychle sepsat, jak to funguje?“ V tu chvíli už se často dohání měsíce rozhodnutí, kontextu a výjimek. Lepší je říct požadavek na předání už v zadání.
+
+Do zadání externí práce přidej malou větu:
+
+> „Součástí výstupu je krátké předání: co bylo změněno, proč, kde jsou provozní hranice, jak ověřit správné fungování, jak změnu vrátit a co zůstává otevřené.“
+
+Tahle věta funguje pro vývoj, obsah, SEO, analytiku i provozní konzultace. Nevyžaduje román. Vyžaduje, aby práce nekončila jen „hotovo“, ale také „tady je stopa, podle které tým pokračuje“.
+
+### Rozliš výstup, rozhodnutí a návod
+
+Předávací balík má pokrývat tři různé věci:
+
+| Vrstva | Co obsahuje | Příklad |
+| --- | --- | --- |
+| Výstup | co bylo dodáno nebo změněno | pull request, redirect mapa, upravená kampaň, nový report |
+| Rozhodnutí | proč se zvolila tahle cesta | proč se nesbírá konkrétní event, proč zůstává stará URL, proč je role read-only |
+| Návod | jak tým výsledek provozuje | deploy krok, smoke test, revize metriky, postup rollbacku |
+
+Když chybí výstup, práce není hotová. Když chybí rozhodnutí, tým za měsíc neví, proč se věc udělala. Když chybí návod, tým neumí výsledek bezpečně udržet. Potřebuješ všechny tři vrstvy, ale každou stručně.
+
+Praktický příklad: SEO konzultant navrhne sloučení pěti starých článků. Výstup je cílová URL, seznam přesunutých částí a redirect mapa. Rozhodnutí je, proč přežije jedna konkrétní URL a proč dvě staré stránky dostanou archivní poznámku místo přesměrování. Návod je kontrola po 14 dnech: projít sitemap, interní odkazy, RSS, support šablony a agregovaný signál z vyhledávání bez sledování jednotlivých čtenářů.
+
+### Udělej předávací balík malý a povinný
+
+Předání nesmí být velká složka, kterou nikdo nečte. Pro většinu malé externí práce stačí jedna stránka nebo jedno issue s pevnou strukturou.
+
+| Pole | Co vyplnit |
+| --- | --- |
+| Pracovní věta | co se změnilo a pro jaký účel |
+| Dotčená místa | repo, nástroje, URL, kampaně, dokumentace, automatizace |
+| Data | jaká data se čtou, zapisují, exportují nebo nově nesbírají |
+| Přístupy | jaké účty, role, tokeny nebo sdílení byly použity |
+| Rozhodnutí | nejdůležitější důvody a odmítnuté varianty |
+| Ověření | jak poznat, že výstup funguje |
+| Návrat | jak výstup vypnout, vrátit nebo obejít |
+| Otevřené riziko | co zůstává nevyřešené a kdo to vlastní |
+| Další revize | kdy se k výstupu vrátit |
+| Úklid | co se má smazat, revokovat nebo archivovat |
+
+Tuhle kartu neplň citlivými payloady, hesly, tokeny ani osobními detaily zákazníků. Pokud je potřeba odkázat na citlivý důkaz, napiš jen kontrolovaný odkaz do interního systému a úroveň přístupu. Předávací karta má zlepšit orientaci, ne vyrábět další kopii dat.
+
+### Chtěj ukázku, ne jen dokument
+
+Dokumentace je důležitá, ale někdy lže už tím, že vypadá hotově. Skutečné předání ověříš tím, že interní člověk podle něj udělá jeden malý krok.
+
+Příklady ověření:
+
+- produktový vlastník podle runbooku zkontroluje billing webhook v testovacím prostředí,
+- obsahový vlastník podle předání upraví jednu stránku a ověří metadata,
+- vývojář podle poznámek spustí test, najde log a vysvětlí chybovou hlášku,
+- marketér podle kampaně pozná, které UTM parametry mají zůstat a které se nesbírají,
+- support podle nové odpovědi vyřeší jeden dotaz bez posílání interních detailů.
+
+Pokud interní člověk narazí hned na první nejasnost, není to ostuda. Je to přesně důvod, proč předání testovat ještě v době, kdy je externista dostupný a kontext čerstvý.
+
+### Předej i hranice, ne jen postup
+
+Dobré know-how neříká jen „jak“. Říká i „kam už nechodit“. U privacy-first provozu je to zásadní, protože mnoho rizik vzniká z dobře míněného obcházení procesu.
+
+Předání má obsahovat hranice:
+
+- která data se nesmí exportovat,
+- které logy neobsahují payloady a které už jsou citlivé,
+- kdo smí schválit produkční změnu,
+- jaký nástroj je jen dočasný,
+- kdy se má zastavit práce a otevřít právní, bezpečnostní nebo produktová otázka,
+- které veřejné sliby nesmí změna porušit.
+
+Příklad hranice:
+
+> „Při ladění billing chyb se pracuje s korelačním ID, technickým stavem webhooku a testovacím payloadem. Produkční fakturační údaje zákazníka se neposílají do externího chatu ani do issue. Pokud je potřeba ověřit konkrétní účet, interní operátor udělá kontrolu ve fakturačním nástroji a předá jen nezbytný technický závěr.“
+
+Tohle je méně pohodlné než poslat screenshot celého účtu. A právě proto je to dobrý provozní návyk.
+
+### Napoj předání na ukončení nebo revizi přístupu
+
+Předávací balík má být spojený s přístupovým cyklem. Když se práce dokončí, zkontroluj:
+
+1. Co interní tým převzal.
+2. Co dodavatel ještě potřebuje držet kvůli garanci nebo dalšímu kroku.
+3. Co se dá hned odebrat.
+4. Jaké exporty nebo pracovní kopie mají být smazané.
+5. Jestli se z jednorázové práce nestává pravidelná spolupráce.
+
+Pokud tým neumí výsledek převzít, neprodlužuj automaticky široký přístup. Zmenši ho na přesný garanční účel a otevři úkol „doplnit předání“. Přístup nemá suplovat chybějící dokumentaci.
+
+### Příklad: Předání billing integrace
+
+Externí vývojář dokončil úpravu platebních webhooků. Místo obecného „je to v PR“ předá malý balík:
+
+| Pole | Zápis |
+| --- | --- |
+| Pracovní věta | webhooky teď rozlišují zaplacenou, nezaplacenou a spornou fakturu bez ukládání celého payloadu |
+| Dotčená místa | billing service, testovací webhook endpoint, runbook fakturace |
+| Data | ukládá se interní ID faktury, stav a čas; produkční payload se neloguje |
+| Přístupy | externí repo role zůstává do review, read-only log přístup končí po ověření |
+| Rozhodnutí | neukládá se celý webhook kvůli minimalizaci dat a nižšímu riziku v logách |
+| Ověření | testovací platba, simulace failed payment, kontrola redigovaného logu |
+| Návrat | feature flag vypnout, vrátit předchozí handler, ponechat frontu bez mazání |
+| Otevřené riziko | chybí měsíční kontrola sporných plateb, vlastník billing ops |
+| Další revize | po prvním billing cyklu |
+| Úklid | revokovat dočasný read-only log přístup a smazat testovací export |
+
+Takový balík je krátký, ale dává týmu kontrolu. Neprozrazuje zbytečná data, nepřepisuje celou historii a zároveň umožní další změnu bez hádání.
+
+### Checklist: Předání know-how od externisty
+
+- [ ] Požadavek na předání byl součástí zadání, ne až dodatečná prosba.
+- [ ] Předání obsahuje výstup, rozhodnutí a návod.
+- [ ] Je jasné, jaká data byla použita a která data se záměrně nepoužila.
+- [ ] Přístupy, tokeny, sdílení a exporty jsou uvedené podle účelu.
+- [ ] Interní člověk podle předání provedl jeden skutečný ověřovací krok.
+- [ ] Předání obsahuje hranice: co se nesmí exportovat, sdílet nebo měnit bez schválení.
+- [ ] Otevřená rizika mají vlastníka a další datum kontroly.
+- [ ] Garanční přístup je časově a účelově omezený.
+- [ ] Pracovní výstup zůstává v interním systému, ne jen u externisty.
+- [ ] Předávací karta neobsahuje tajemství, tokeny ani zbytečné osobní údaje.
+- [ ] Po převzetí je jasné, co se má odebrat, smazat nebo archivovat.
+
+### Mini úkol
+
+Vyber jednu externí práci z posledních tří měsíců. Napiš k ní předávací kartu podle deseti polí výše a požádej interního vlastníka, aby podle ní udělal jeden malý ověřovací krok: spustil test, upravil stránku, našel log, zkontroloval redirect nebo vysvětlil rollback. Pokud to bez externisty nejde, neber to jako selhání člověka. Ber to jako přesně nalezenou mezeru v provozu a zavři ji dřív, než se z ní stane drahá závislost.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -49689,6 +49825,7 @@ Najdi jednu externí spolupráci, která už trvá déle než původní plán. N
 
 ## Pracovní log
 
+- 2026-07-24: Doplněna příloha o předání know-how od externisty bez černé skříňky: požadavek na předání už v zadání, rozlišení výstupu, rozhodnutí a návodu, malá předávací karta, ověření interním krokem, předání provozních a datových hranic, napojení na revizi přístupů, praktický příklad billing integrace, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro předání know-how zpět do týmu. Bez nových aktuálních externích tvrzení, navázáno na existující zdroje k minimalizaci dat, zpracovatelskému rámci, přístupům a provozní dokumentaci; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
 - 2026-07-24: Doplněna příloha o převodu externisty na řízeného dodavatele bez přístupové šedi: signály, kdy už dočasný přístup nestačí, malá vendor karta, oddělení pracovního výstupu od provozních schopností, datová hranice před výběrem nástrojů, převod přístupů jako malý release, příklad měsíční podpory billing integrací, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro dlouhodobou externí spolupráci. Bez nových aktuálních externích tvrzení, navázáno na existující zdroje OWASP Authorization, GDPR minimalizaci a zpracovatelský rámec; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
 - 2026-07-24: Doplněna příloha o revizi externích přístupů bez nekonečné dočasnosti: výběr rizikového systému, pět rozhodnutí pro externí účty, kontrola schopností místo názvu role, úklid sdílení, tokenů, integrací a kopií, převod dlouhodobé spolupráce do řízeného dodavatelského rámce, 30minutový průchod, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro přístupy, které přežily původní účel. Bez nových aktuálních externích tvrzení, navázáno na existující zdroje OWASP Authorization a Evropské komise k minimalizaci dat; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
 - 2026-07-24: Doplněna příloha o dočasném externím přístupu bez sdíleného admina: rozhodování mezi exportem a přístupem, přístupová věta, role podle konkrétních schopností, zákaz sdílených účtů, časové okno, auditní minimum, zavření přístupu jako malý release, příklad diagnostiky webhooku, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro omezený externí přístup. Navázáno na existující zdroje OWASP Authorization a Evropské komise k minimalizaci osobních údajů; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
