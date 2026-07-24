@@ -129,6 +129,7 @@ Když se nechceš vracet do celé knihy, hledej konkrétní nástroj podle výst
 | Převést pravidelnou externí spolupráci do řízeného dodavatelského režimu | „externista jako dodavatel“, „převod spolupráce“ nebo „dodavatelský režim“ | vendor karta, role, datové hranice, revizní rytmus, smluvní rámec a exit plán pro dlouhodobou práci |
 | Předat know-how od externisty zpět do týmu | „předání know-how“, „dodavatel bez černé skříňky“ nebo „pracovní stopa“ | předávací balík s rozhodnutími, runbooky, otevřenými riziky, datovými hranicemi a ověřením, že tým umí udělat další krok |
 | Ověřit převzetí práce po externistovi | „kontrola převzetí“, „předání nestačí“ nebo „test převzetí“ | krátká zkouška, že interní tým umí výsledek provozovat, změnit, vrátit a zavřít zbytečné přístupy |
+| Stabilizovat převzatou práci po externistovi | „stabilizace po převzetí“, „první týden po externistovi“ nebo „garance po převzetí“ | krátký režim prvního týdne, vlastník, provozní signály, úklid garančního přístupu a převod výsledku do běžné rutiny |
 
 Pravidlo pro práci s rejstříkem: otevři maximálně tři nalezené části, vyber jednu a zapiš výstup. Pokud po deseti minutách pořád skáčeš mezi odkazy, vrať se k tabulce „Kudy začít podle aktuální bolesti“ a zúž problém. E-book není buffet. Teda je, ale bez talíře si stejně odneseš jen chaos.
 
@@ -49749,6 +49750,123 @@ Výsledek je konkrétní. Tým neřekl jen „SEO migrace hotová“. Ověřil, 
 
 Vyber jednu nedávno dokončenou externí práci a napiš test převzetí podle tabulky výše. Nevybírej nejsložitější část. Vyber jednu schopnost, kterou by interní vlastník měl umět za 20 minut předvést: ověřit redirect, spustit test, najít log, vypnout automatizaci, upravit šablonu nebo vysvětlit rollback. Po testu zavři jednu konkrétní věc: přístup, export, sdílený odkaz, starou šablonu nebo otevřenou mezeru v dokumentaci.
 
+## Příloha: Stabilizace po převzetí externí práce bez věčného dozoru
+
+Test převzetí ukáže, že interní tým umí udělat jeden konkrétní krok. To je důkaz, ne konec příběhu. První dny po převzetí rozhodují, jestli se výsledek stane běžnou součástí provozu, nebo zůstane výjimkou, na kterou se všichni bojí sáhnout.
+
+Stabilizace není další audit. Je to krátké období, ve kterém se převzatá práce připojí k normálním týmovým rutinám: dokumentaci, monitoringu, backlogu, supportu, release procesu, přístupovým kontrolám a údržbě. Bez toho se po čase vrátí stejná závislost na externistovi, jen s jiným názvem.
+
+Privacy-first hodnota je tady velmi praktická: po převzetí nesmí zůstat otevřené garanční přístupy, pracovní exporty, cizí kopie dat, nejasné logy ani veřejné sliby, které už neodpovídají realitě. Stabilizace říká: výsledek je náš, data jsou pod kontrolou a víme, jak s tím dál žít.
+
+> Codyho komentář: Předání bez stabilizace je jako uklizený stůl před focením. Vypadá to dobře, dokud někdo nezačne opravdu pracovat. Pak se ukáže, jestli má věc místo v systému, nebo jen hezkou složku s názvem „handover final FINAL“.
+
+### Nastav první týden po převzetí
+
+Po každé významnější externí práci si napiš krátký režim prvního týdne. Nemá chránit ego dodavatele ani uklidnit tým. Má zachytit, co se může rozjet, dokud je kontext ještě čerstvý.
+
+Stačí tato tabulka:
+
+| Pole | Co vyplnit |
+| --- | --- |
+| Převzatý výsledek | co je nově v provozu, obsahu, integraci, dokumentaci nebo procesu |
+| Interní vlastník | kdo za výsledek odpovídá ode dne převzetí |
+| Garanční okno | dokdy může externista pomoci a přes jaký omezený kanál |
+| Denní kontrola | jeden signál, který se v prvních dnech zkontroluje |
+| Stop signál | kdy se výsledek vrací, vypíná nebo řeší jako incident |
+| Úklid po týdnu | co se má zavřít, smazat, zmenšit nebo přesunout do běžné rutiny |
+
+Příklad: externista dokončil úpravu onboarding formuláře. První týden nekontroluj každé kliknutí jednotlivých lidí. Kontroluj agregovaně, jestli formulář odesílá validní data, jestli support nedostává nové nejasné dotazy, jestli se nezvýšil počet chybových stavů a jestli interní vlastník umí upravit mikrotext bez zásahu externisty.
+
+### Připoj výsledek k existující rutině
+
+Převzatá práce nesmí mít vlastní zvláštní vesmír. Pokud výsledek potřebuje údržbu, dej ho do rutiny, kterou tým už používá.
+
+Typické napojení:
+
+| Výsledek | Kam patří po převzetí |
+| --- | --- |
+| Nová stránka nebo obsahová změna | obsahový audit, sitemap kontrola, redakční kalendář a support šablony |
+| Integrace nebo webhook | integrační runbook, monitoring, retry pravidla, mapa dat a revize tokenů |
+| Marketingová automatizace | e-mailový kalendář, suppression list, consent pravidla a měření kvality |
+| Billing změna | billing runbook, testovací scénáře, refund pravidla a zákaznická komunikace |
+| Bezpečnostní úprava | přístupový audit, incident plán, changelog pro interní tým a kontrola rolí |
+| Analytická metrika | specifikace metriky, dashboard review, retenční pravidlo a stop pravidlo |
+
+Pokud pro výsledek neexistuje žádná rutina, neznamená to automaticky vytvořit novou schůzku. Nejprve se zeptej, jestli výsledek opravdu potřebuje pravidelnou péči. Pokud ano, přidej jeden malý krok do nejbližší existující kontroly. Další meeting je poslední možnost, ne odměna za dokončenou práci.
+
+### Měř stabilitu bez sledování jednotlivců
+
+Po převzetí často vzniká pokušení zapnout detailnější tracking, „abychom viděli, co se děje“. Většinou stačí chudší signály.
+
+Dobré stabilizační signály:
+
+- počet chybových stavů v hlavní cestě,
+- počet support dotazů k nové nebo změněné části,
+- ruční kontrola jedné veřejné URL, e-mailu, webhooku nebo exportu,
+- agregovaný počet dokončených pracovních kroků,
+- počet rollbacků, ručních zásahů nebo opakovaných oprav,
+- kontrola, že nevznikají nové pracovní exporty mimo řízené místo.
+
+Špatné stabilizační reflexy:
+
+- nahrávat celé relace uživatelů jen kvůli jedné nové stránce,
+- přidat reklamní pixel, protože „možná něco ukáže“,
+- kopírovat zákaznická data do dočasné tabulky pro ruční dohled,
+- posílat celé logy do chatu bez redakce,
+- nechat externistovi široký přístup jen proto, že monitoring není dobře nastavený.
+
+> Codyho komentář: Stabilita se dá často ověřit nudnými signály. Nuda je v provozu podceňovaná kvalita. Pokud tě monitoring baví jako ohňostroj, pravděpodobně měříš moc detailů nebo moc pozdě.
+
+### Zavři garanci jako řízený krok
+
+Garanční období má mít konec. Ne proto, že by externista musel zmizet ze světa, ale proto, že vztah má přejít do normálního režimu: uzavřeno, support podle dohody, nebo dlouhodobý dodavatelský rámec.
+
+Na konci garance projdi:
+
+- zda interní vlastník provedl alespoň jednu drobnou změnu nebo kontrolu bez externisty,
+- zda jsou otevřené mezery v backlogu s vlastníkem a termínem,
+- zda se zmenšily nebo odebraly externí role,
+- zda byly smazány dočasné exporty, pracovní soubory a sdílené odkazy,
+- zda dokumentace odpovídá tomu, co je skutečně v provozu,
+- zda veřejné texty, pricing, trust odpovědi a support šablony neslibují starý stav,
+- zda případná další spolupráce má jasný režim, cenu, rozsah a datovou hranici.
+
+Pokud garanci nejde zavřít, napiš důvod jednou větou. Ne „ještě radši počkáme“. Konkrétně: „Nemáme interně vlastníka webhook retry fronty“, „support neumí vysvětlit nový export“, „rollback není otestovaný“, „externí účet pořád drží publish právo“. Taková věta se dá opravit. Mlžný pocit se jen přenáší do dalšího týdne.
+
+### Příklad: Stabilizace po billing integraci
+
+Externista pomohl napojit novou billing integraci. Test převzetí prošel: interní vývojář spustil testovací platbu, ověřil webhook a našel redigovaný log.
+
+Stabilizační karta:
+
+| Pole | Zápis |
+| --- | --- |
+| Převzatý výsledek | billing webhook pro změnu stavu předplatného |
+| Interní vlastník | vývojář odpovědný za billing a produktový vlastník pricingu |
+| Garanční okno | 7 dní, pomoc jen přes issue, externista bez přímého přístupu do produkční databáze |
+| Denní kontrola | počet neúspěšných webhooků a support dotazů k platbě |
+| Stop signál | opakovaný chybný stav předplatného nebo ruční oprava zákaznického účtu |
+| Úklid po týdnu | zavřít dočasný sdílený testovací export, zmenšit externí přístup na read-only dokumentaci, doplnit billing runbook |
+
+Po týdnu tým zjistí, že support má dvě nejasné odpovědi k obnovení platby. To není důvod vracet externistovi admin přístup. Je to důvod opravit support šablonu, doplnit runbook a přidat jeden testovací scénář do dalšího billing review.
+
+### Checklist: Stabilizace po převzetí externí práce
+
+- [ ] Převzatý výsledek má interního vlastníka ode dne převzetí.
+- [ ] První týden má jeden nebo dva konkrétní stabilizační signály.
+- [ ] Garanční okno má datum konce, kanál a omezený rozsah přístupu.
+- [ ] Výsledek je napojený na existující rutinu, ne na zvláštní zapomenutý dokument.
+- [ ] Stabilita se měří agregovaně a bez nového sledování jednotlivců.
+- [ ] Support, dokumentace, pricing, trust odpovědi nebo veřejné texty odpovídají nové realitě.
+- [ ] Dočasné exporty, sdílené odkazy a pracovní kopie mají zavírací krok.
+- [ ] Externí role a tokeny jsou po garanci odebrané, zmenšené nebo převedené do řízeného dodavatelského režimu.
+- [ ] Otevřené mezery jsou zapsané jako konkrétní úkoly s vlastníkem a termínem.
+- [ ] Pokud garanci nejde zavřít, důvod je napsaný jednou konkrétní větou.
+
+### Mini úkol
+
+Vyber jednu převzatou externí práci, která už prošla předáním nebo testem převzetí. Napiš k ní stabilizační kartu pro první týden: výsledek, vlastník, garanční okno, denní kontrolu, stop signál a úklid po týdnu. Pak zavři jednu věc, která už nemá důvod žít: dočasný export, sdílený odkaz, širokou roli, starou support odpověď nebo ruční kontrolní tabulku.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -49942,6 +50060,7 @@ Vyber jednu nedávno dokončenou externí práci a napiš test převzetí podle 
 
 ## Pracovní log
 
+- 2026-07-24: Doplněna příloha o stabilizaci po převzetí externí práce bez věčného dozoru: režim prvního týdne, připojení převzatého výsledku k existujícím rutinám, stabilizační signály bez sledování jednotlivců, řízené zavření garančního období, příklad billing integrace, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro stabilizaci práce po externistovi. Bez nových aktuálních externích tvrzení, navázáno na existující části o předání know-how, kontrole převzetí, přístupech, retenci, runboocích a privacy-first měření; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
 - 2026-07-24: Doplněna příloha o kontrole převzetí po externistovi bez slepé víry: výběr jedné ověřované schopnosti, karta testu převzetí, kontrola návratu a vypnutí, rytmus zavření přístupů po důkazu, praktický příklad SEO migrace, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro ověření převzetí práce po externistovi. Bez nových aktuálních externích tvrzení, navázáno na existující zdroje k minimalizaci dat, přístupům, zpracovatelům, dokumentaci a provozní kontrole; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
 - 2026-07-24: Doplněna příloha o předání know-how od externisty bez černé skříňky: požadavek na předání už v zadání, rozlišení výstupu, rozhodnutí a návodu, malá předávací karta, ověření interním krokem, předání provozních a datových hranic, napojení na revizi přístupů, praktický příklad billing integrace, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro předání know-how zpět do týmu. Bez nových aktuálních externích tvrzení, navázáno na existující zdroje k minimalizaci dat, zpracovatelskému rámci, přístupům a provozní dokumentaci; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
 - 2026-07-24: Doplněna příloha o převodu externisty na řízeného dodavatele bez přístupové šedi: signály, kdy už dočasný přístup nestačí, malá vendor karta, oddělení pracovního výstupu od provozních schopností, datová hranice před výběrem nástrojů, převod přístupů jako malý release, příklad měsíční podpory billing integrací, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro dlouhodobou externí spolupráci. Bez nových aktuálních externích tvrzení, navázáno na existující zdroje OWASP Authorization, GDPR minimalizaci a zpracovatelský rámec; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
