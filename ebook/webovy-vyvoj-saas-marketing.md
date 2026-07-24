@@ -130,6 +130,7 @@ Když se nechceš vracet do celé knihy, hledej konkrétní nástroj podle výst
 | Předat know-how od externisty zpět do týmu | „předání know-how“, „dodavatel bez černé skříňky“ nebo „pracovní stopa“ | předávací balík s rozhodnutími, runbooky, otevřenými riziky, datovými hranicemi a ověřením, že tým umí udělat další krok |
 | Ověřit převzetí práce po externistovi | „kontrola převzetí“, „předání nestačí“ nebo „test převzetí“ | krátká zkouška, že interní tým umí výsledek provozovat, změnit, vrátit a zavřít zbytečné přístupy |
 | Stabilizovat převzatou práci po externistovi | „stabilizace po převzetí“, „první týden po externistovi“ nebo „garance po převzetí“ | krátký režim prvního týdne, vlastník, provozní signály, úklid garančního přístupu a převod výsledku do běžné rutiny |
+| Udržet převzatou práci dlouhodobě bez návratu závislosti | „dlouhodobá údržba po převzetí“, „měsíční revize převzaté práce“ nebo „interní vlastnictví“ | měsíční údržbová karta, jasný vlastník, běžný revizní rytmus a rozhodnutí, kdy se má znovu zapojit externí pomoc |
 
 Pravidlo pro práci s rejstříkem: otevři maximálně tři nalezené části, vyber jednu a zapiš výstup. Pokud po deseti minutách pořád skáčeš mezi odkazy, vrať se k tabulce „Kudy začít podle aktuální bolesti“ a zúž problém. E-book není buffet. Teda je, ale bez talíře si stejně odneseš jen chaos.
 
@@ -49867,6 +49868,146 @@ Po týdnu tým zjistí, že support má dvě nejasné odpovědi k obnovení plat
 
 Vyber jednu převzatou externí práci, která už prošla předáním nebo testem převzetí. Napiš k ní stabilizační kartu pro první týden: výsledek, vlastník, garanční okno, denní kontrolu, stop signál a úklid po týdnu. Pak zavři jednu věc, která už nemá důvod žít: dočasný export, sdílený odkaz, širokou roli, starou support odpověď nebo ruční kontrolní tabulku.
 
+## Příloha: Dlouhodobá údržba po převzetí bez návratu závislosti
+
+Stabilizace po převzetí řeší první dny. Dlouhodobá údržba řeší nudnější, ale důležitější otázku: kdo se o výsledek postará za měsíc, až původní kontext vychladne a externista už nebude přirozeně po ruce.
+
+Převzatá práce se často rozpadne ne proto, že by byla špatně udělaná, ale protože nemá místo v běžném provozu. Dokumentace existuje, test převzetí proběhl, přístup se zavřel, všichni si oddechli. Pak se změní pricing, dodavatel, API, obsah, formulář, interní proces nebo zákulisní automatizace a najednou nikdo neví, jestli se převzatého výsledku smí dotknout.
+
+Dlouhodobá údržba není retainer v převleku. Je to interní režim vlastnictví: víme, kdo rozhoduje, kdo změnu provede, jak poznáme problém, kdy výsledek zrevidujeme a kdy je fér znovu zavolat externí pomoc.
+
+> Codyho komentář: Největší riziko po úspěšném převzetí je tichý respekt. Všichni se výsledku bojí, protože „to dělal někdo zvenku“. To není úcta k práci. To je slabý provozní design v košili s límečkem.
+
+### Přepiš převzatý výsledek na vlastnickou kartu
+
+Po garanci vytvoř krátkou vlastnickou kartu. Nepiš historii projektu ani celé předání. Piš jen to, co bude potřeba při další změně.
+
+| Pole | Co má říct |
+| --- | --- |
+| Výsledek | co přesně tým převzal |
+| Vlastník rozhodnutí | kdo rozhoduje, jestli se věc mění, vypíná nebo eskaluje |
+| Vlastník provozu | kdo umí udělat běžnou kontrolu nebo drobnou úpravu |
+| Běžná rutina | kde se výsledek pravidelně kontroluje |
+| Signál potíže | co ukáže, že výsledek přestal fungovat nebo ztratil účel |
+| Externí hranice | kdy má smysl znovu zapojit externistu nebo dodavatele |
+| Datová hranice | jaká data se při údržbě nesmí kopírovat, sdílet nebo znovu sbírat |
+| Poslední revize | kdy se karta naposledy ověřila proti realitě |
+
+Karta má být krátká právě proto, aby přežila. Pokud se nevejde na jednu obrazovku, tým ji nebude používat při běžné práci. A pokud ji nepoužije při běžné práci, je to jen památník minulého projektu.
+
+### Dej údržbu do kalendáře, ne do svědomí
+
+Slabá věta zní: „Budeme to hlídat.“ Silnější věta zní: „Každý první pátek v měsíci projdeme tři převzaté výsledky podle vlastnické karty.“
+
+Nemusí jít o novou schůzku. Často stačí přidat pětiminutový bod do rutiny, která už existuje:
+
+- měsíční produktové review,
+- přístupový audit,
+- obsahový audit,
+- billing review,
+- vendor hygiene,
+- release retro,
+- support review,
+- bezpečnostní nebo provozní kontrola.
+
+Důležité je, aby kontrola končila rozhodnutím. Ne „zkontrolováno“, ale jedna z možností:
+
+| Rozhodnutí | Kdy ho použít |
+| --- | --- |
+| ponechat | výsledek funguje, účel trvá a datová hranice sedí |
+| upravit | drobná změna je interně zvládnutelná |
+| naplánovat | úprava je větší a patří do backlogu |
+| zmenšit | výsledek je užitečný, ale sbírá, zpřístupňuje nebo udržuje moc věcí |
+| archivovat | výsledek už nemá aktivní účel, ale je potřeba zachovat kontext |
+| vypnout | výsledek ztratil účel a jeho další provoz vytváří víc rizika než hodnoty |
+| eskalovat externě | změna přesahuje interní schopnost nebo smluvní hranici |
+
+Taková tabulka je praktičtější než pocit, že „někdo by se na to měl podívat“. Někdo je nejdražší člen týmu, protože nikdy nepřijde.
+
+### Hlídej změny okolo výsledku
+
+Převzatá práce se nemusí změnit sama, aby začala být riziková. Často se změní její okolí.
+
+Typické spouštěče revize:
+
+- změna dodavatele, API, ceníku nebo obchodních podmínek,
+- změna formuláře, onboardingu, pricingu nebo zákaznické cesty,
+- změna rolí, přístupů nebo interní odpovědnosti,
+- nový typ zákaznických dat nebo nový export,
+- nové support dotazy k části, která už měla být jasná,
+- incident, rollback nebo ruční zásah,
+- přesun dokumentace, repozitáře, CMS nebo automatizace,
+- veřejný slib na webu, který už neodpovídá technické realitě.
+
+Privacy-first kontrola je jednoduchá: když se kolem převzatého výsledku mění data, přístupy nebo veřejné sliby, otevři vlastnickou kartu. Ne až při ročním auditu. Tehdy už je spousta stop stará, matná a překvapivě kreativní.
+
+### Udržuj interní schopnost jedním malým cvičením
+
+Jednou za čas si vyber jeden převzatý výsledek a nech interního vlastníka udělat drobný provozní krok:
+
+- upravit jednu větu v dokumentaci,
+- ověřit jednu URL, redirect nebo feed položku,
+- projít jeden webhook retry scénář,
+- obnovit testovací export bez produkčních dat,
+- zkontrolovat jednu roli nebo token,
+- vysvětlit rollback v pěti větách,
+- zavřít starou support šablonu,
+- doplnit jeden chybějící signál do runbooku.
+
+Tohle není zkoušení lidí. Je to zkoušení systému. Pokud drobný krok nejde udělat bez paniky, karta neříká pravdu nebo vlastník nemá skutečnou schopnost výsledek držet.
+
+Měř cvičení chudě: proběhlo/neproběhlo, našli jsme mezeru/nenašli jsme mezeru, vznikl jeden konkrétní úkol/nevznikl. Nepotřebuješ sledovat čas jednotlivých lidí, obrazovky ani detailní pracovní stopu. Stačí vědět, zda tým umí výsledek provozovat.
+
+### Rozliš údržbu, změnu a nový projekt
+
+Ne každá následná práce je údržba. Když všechno nazveš údržbou, schováš rozhodování o rozsahu. Když všechno nazveš novým projektem, zbytečně zpomalíš malé opravy.
+
+Praktické rozlišení:
+
+| Typ práce | Příklad | Jak s tím zacházet |
+| --- | --- | --- |
+| Údržba | aktualizace textu, revize tokenu, ověření logu, drobná oprava odkazu | provést v běžné rutině a zapsat stručnou stopu |
+| Změna | nový stav v onboardingu, jiný billing scénář, úprava datového toku | otevřít backlog položku s privacy dopadem a testem návratu |
+| Nový projekt | nový dodavatel, nová integrace, nový exportní režim, zásadní změna role dat | vrátit se k vendor kartě, datové mapě, smluvním hranicím a release procesu |
+
+Toto rozlišení chrání před oběma extrémy: neřešit nic a tvářit se, že „to nějak běží“, nebo naopak tahat externistu ke každému drobnému pohybu. Dobrý převzatý výsledek má být interně měnitelný v běžných mezích a externě eskalovatelný jen tam, kde to dává smysl.
+
+### Příklad: Měsíční údržba převzatého checkoutu
+
+Tým převzal checkout po externím specialistovi. První týden byl stabilní, support dotazy k platbě klesly a externí přístup byl odebraný.
+
+Měsíční vlastnická karta:
+
+| Pole | Zápis |
+| --- | --- |
+| Výsledek | checkout a billing webhooks pro změnu plánu |
+| Vlastník rozhodnutí | produktový vlastník monetizace |
+| Vlastník provozu | interní vývojář pro billing |
+| Běžná rutina | měsíční billing review |
+| Signál potíže | ruční opravy účtu, neúspěšné webhooky, nejasné support dotazy |
+| Externí hranice | nový platební scénář, změna poskytovatele nebo nejasný bezpečnostní dopad |
+| Datová hranice | žádné exporty platebních nebo zákaznických dat do externích tabulek |
+| Poslední revize | 2026-07-24 |
+
+Při první měsíční kontrole tým zjistí, že marketing chce nový promo kód pro partnera. To není obyčejná údržba. Je to změna checkoutu, pricing slibu a pravděpodobně i support odpovědí. Výsledek: otevřít backlog položku, zapsat privacy dopad, určit testovací scénář a rozhodnout, zda stačí interní změna, nebo je potřeba konzultace s původním specialistou.
+
+### Checklist: Dlouhodobá údržba po převzetí
+
+- [ ] Převzatý výsledek má krátkou vlastnickou kartu.
+- [ ] Je jasné, kdo rozhoduje a kdo umí udělat běžnou provozní kontrolu.
+- [ ] Výsledek je napojený na existující měsíční nebo kvartální rutinu.
+- [ ] Kontrola končí rozhodnutím: ponechat, upravit, naplánovat, zmenšit, archivovat, vypnout nebo eskalovat.
+- [ ] Změny okolí výsledku spouští revizi karty.
+- [ ] Interní vlastník občas provede malý praktický krok, ne jen přečte dokumentaci.
+- [ ] Údržba, změna a nový projekt jsou odlišené podle dopadu.
+- [ ] Externí pomoc má jasnou hranici a nevrací široký přístup jen ze zvyku.
+- [ ] Při údržbě nevznikají nové neřízené exporty, pracovní kopie ani tracking jednotlivců.
+- [ ] Veřejné sliby, support šablony a trust odpovědi se kontrolují spolu s technickým stavem.
+
+### Mini úkol
+
+Vyber jednu práci převzatou od externisty, která už není v garanci. Napiš k ní vlastnickou kartu na jednu obrazovku a přiřaď ji k existující rutině: billing review, obsahový audit, vendor hygiene, přístupový audit nebo produktové review. Na konci napiš jednu větu: „Znovu zapojíme externí pomoc pouze když ___.“ Pokud tu větu neumíš doplnit, převzetí ještě není hotové.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -50060,6 +50201,7 @@ Vyber jednu převzatou externí práci, která už prošla předáním nebo test
 
 ## Pracovní log
 
+- 2026-07-24: Doplněna příloha o dlouhodobé údržbě po převzetí bez návratu závislosti: vlastnická karta převzatého výsledku, napojení na měsíční nebo kvartální rutinu, rozhodovací možnosti po kontrole, spouštěče revize, malé cvičení interní schopnosti, rozlišení údržby, změny a nového projektu, příklad checkoutu, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro dlouhodobé interní vlastnictví převzaté práce. Bez nových aktuálních externích tvrzení, navázáno na existující části o stabilizaci po převzetí, dodavatelském režimu, přístupech, provozních návodech a privacy-first údržbě; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
 - 2026-07-24: Doplněna příloha o stabilizaci po převzetí externí práce bez věčného dozoru: režim prvního týdne, připojení převzatého výsledku k existujícím rutinám, stabilizační signály bez sledování jednotlivců, řízené zavření garančního období, příklad billing integrace, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro stabilizaci práce po externistovi. Bez nových aktuálních externích tvrzení, navázáno na existující části o předání know-how, kontrole převzetí, přístupech, retenci, runboocích a privacy-first měření; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
 - 2026-07-24: Doplněna příloha o kontrole převzetí po externistovi bez slepé víry: výběr jedné ověřované schopnosti, karta testu převzetí, kontrola návratu a vypnutí, rytmus zavření přístupů po důkazu, praktický příklad SEO migrace, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro ověření převzetí práce po externistovi. Bez nových aktuálních externích tvrzení, navázáno na existující zdroje k minimalizaci dat, přístupům, zpracovatelům, dokumentaci a provozní kontrole; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
 - 2026-07-24: Doplněna příloha o předání know-how od externisty bez černé skříňky: požadavek na předání už v zadání, rozlišení výstupu, rozhodnutí a návodu, malá předávací karta, ověření interním krokem, předání provozních a datových hranic, napojení na revizi přístupů, praktický příklad billing integrace, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro předání know-how zpět do týmu. Bez nových aktuálních externích tvrzení, navázáno na existující zdroje k minimalizaci dat, zpracovatelskému rámci, přístupům a provozní dokumentaci; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
