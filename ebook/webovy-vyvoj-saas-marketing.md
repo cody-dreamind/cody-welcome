@@ -134,6 +134,7 @@ Když se nechceš vracet do celé knihy, hledej konkrétní nástroj podle výst
 | Znovu zapojit externí pomoc bez ztráty vlastnictví | „re-eskalace externí pomoci“, „návrat externisty“ nebo „externí pomoc znovu“ | re-entry brief s důvodem, hranicí práce, omezeným přístupem, předávacím výstupem a novým zavíracím kritériem |
 | Rozhodnout po opakované re-eskalaci, co změnit systémově | „opakovaná re-eskalace“, „externí pomoc se vrací“ nebo „strukturální rozhodnutí“ | rozhodovací karta, zda posílit interní schopnost, převést práci do dodavatelského režimu, zjednodušit produkt nebo ukončit daný závazek |
 | Posílit interní schopnost po opakované re-eskalaci | „interní schopnost“, „školení po externistovi“ nebo „capability karta“ | plán učení přes konkrétní práci, cvičení, runbook, hranice eskalace a důkaz samostatného zvládnutí |
+| Rozdělit interní schopnost mezi více lidí | „rotace vlastníka“, „zastupitelnost“ nebo „schopnost není hrdina“ | rotační karta se stálým vlastníkem kvality, druhým člověkem, cvičením, přístupovým limitem a stop pravidlem |
 
 Pravidlo pro práci s rejstříkem: otevři maximálně tři nalezené části, vyber jednu a zapiš výstup. Pokud po deseti minutách pořád skáčeš mezi odkazy, vrať se k tabulce „Kudy začít podle aktuální bolesti“ a zúž problém. E-book není buffet. Teda je, ale bez talíře si stejně odneseš jen chaos.
 
@@ -50402,6 +50403,138 @@ Výsledek: externista pomohl sestavit checklist a jednou zkontroloval cvičný s
 
 Vyber jednu oblast, kde jste po opakované re-eskalaci řekli „tohle se musíme naučit“. Přepiš ji na capability kartu. Zvlášť doplň větu „Tým je samostatný, až ___.“ a větu „Externí pomoc znovu voláme pouze když ___.“ Pokud první věta popisuje absolvované školení místo provedené práce, karta ještě není hotová. Je jen slušně oblečená prezentace.
 
+## Příloha: Rotace vlastníka interní schopnosti bez rozmazané odpovědnosti
+
+Když se tým konečně naučí důležitou práci dělat interně, přichází další past: schopnost se přilepí na jednoho šikovného člověka. V dokumentaci je sice napsané „tým umí“, ale v praxi všichni čekají, až se vrátí jedna konkrétní osoba. To je lepší než úplná závislost na externistovi, ale pořád je to křehké.
+
+Rotace vlastníka neznamená, že každý musí umět všechno stejně dobře. Znamená to, že schopnost má jasného stálého vlastníka kvality, aspoň jednoho praktického zástupce a malé cvičení, které pravidelně ověřuje, že práce nežije jen v hlavě jednoho člověka.
+
+> Codyho komentář: „Máme to zdokumentované“ je krásná věta, dokud člověk s dokumentací neleží doma a deploy okno nekouká na tým jako faktura po svátcích. Schopnost se ověřuje tím, že ji někdo další bezpečně použije.
+
+### Nerozmazávej odpovědnost
+
+Nejhorší verze rotace je věta: „Teď za to odpovídáme všichni.“ V malém týmu to často znamená, že za kvalitu pravidel neodpovídá nikdo, zatímco za chybu může první člověk, který byl zrovna online.
+
+Odděl proto dvě role:
+
+| Role | Co drží | Co nedělá |
+| --- | --- | --- |
+| Vlastník kvality | pravidla, runbook, hranice rizika, revizi po změně | nemusí osobně dělat každý běžný případ |
+| Provozní zástupce | umí provést běžný scénář podle checklistu a ověřit výsledek | nemění pravidla bez review |
+
+Tím nevzniká byrokracie. Vzniká obyčejná pojistka: někdo hlídá směr a někdo další umí bezpečně udělat práci, když hlavní člověk není k dispozici.
+
+### Vyber schopnosti, které stojí za zastupitelnost
+
+Rotovat každou drobnost je zbytečné. Začni tam, kde výpadek jednoho člověka blokuje zákazníka, peníze, bezpečnost, provoz nebo veřejný slib.
+
+Typičtí kandidáti:
+
+- změna pricing limitu nebo billing nastavení,
+- publikace bezpečnostní nebo trust odpovědi,
+- obnova služby podle runbooku,
+- revize dodavatelského přístupu,
+- uzavření jednorázového exportu,
+- aktualizace privacy notice po produktové změně,
+- release kritické opravy,
+- vyhodnocení zákaznického incidentu.
+
+Naopak nezačínej u práce, která je vzácná, vysoce riziková a pořád vyžaduje seniorní nebo externí review. Tam nejdřív stačí jasná eskalační hranice a dobrý re-entry brief.
+
+### Udělej rotační kartu
+
+Rotační karta má být kratší než runbook. Její účel není znovu popsat celý postup, ale říct, jak se schopnost udržuje mezi lidmi.
+
+| Pole | Zápis |
+| --- | --- |
+| Schopnost | konkrétní práce, kterou má tým zvládnout |
+| Stálý vlastník kvality | člověk, který drží pravidla a schvaluje změny hranic |
+| Provozní zástupce | člověk, který umí běžný scénář provést |
+| Minimální scénář | nejmenší bezpečná práce, na které se zastupitelnost ověří |
+| Datová hranice | která data, exporty, logy nebo přístupy se při cvičení nesmí použít |
+| Přístupová hranice | jaká role stačí a co by už bylo zbytečné povýšení |
+| Ověření výsledku | jak poznáme, že práce dopadla správně |
+| Frekvence | kdy se cvičení nebo reálná rotace opakuje |
+| Stop pravidlo | kdy rotaci zastavit a vrátit se k review |
+
+Dobrá rotační karta nevyrábí novou schůzku pro radost z kalendáře. Použij ji u práce, která se stejně děje: měsíční billing review, release checklist, revize přístupů, kontrola trust odpovědí nebo provozní cvičení.
+
+### Cvič na malém scénáři
+
+Zastupitelnost se nemá ověřovat poprvé při incidentu. Vyber scénář, který je malý, vratný a nevyžaduje zbytečný přístup k produkčním datům.
+
+Příklady dobrých cvičení:
+
+| Schopnost | Malý scénář | Privacy-first omezení |
+| --- | --- | --- |
+| Billing review | změnit limit demo plánu ve stagingu a ověřit support text | žádný export fakturačních údajů |
+| Trust odpověď | aktualizovat veřejnou odpověď po změně subdodavatele v testovací větvi dokumentace | nesdílet interní vendor poznámky |
+| Obnova služby | projít suchý běh restartu fronty mimo produkční zásah | žádné kopírování payloadů z produkčních logů |
+| Revize přístupů | zkontrolovat jeden externí účet a navrhnout rozhodnutí | neukládat osobní historii práce mimo přístupový záznam |
+| Exportní proces | uzavřít fiktivní exportní průvodku podle checklistu | nepoužít reálný zákaznický soubor |
+
+Po cvičení oprav jen to, co skutečně překáželo. Pokud z jedné zkoušky vznikne deset nových pravidel, tým příště pravidla obejde. Stačí zpřesnit krok, který byl nejasný, chybějící ověření nebo příliš široké oprávnění.
+
+### Nezvyšuj přístupy jen kvůli komfortu
+
+Rotace často svádí k nejrychlejšímu řešení: dát druhému člověku stejný admin přístup jako hlavnímu vlastníkovi. To je pohodlné, ale privacy-first provoz tím ztrácí přesně tu výhodu, kvůli které přístupy řeší: omezený dopad chyby.
+
+Před přidáním oprávnění si polož tři otázky:
+
+- Jaký nejmenší běžný scénář má zástupce zvládnout?
+- Jaká nejnižší role k tomu stačí?
+- Co zůstává mimo jeho oprávnění a musí jít přes review?
+
+Pokud nástroj jemné role neumí, zapiš to jako provozní dluh nebo vendor riziko. Ne jako tiché „zatím všichni admin“. Dočasné povýšení může být v pořádku, ale má mít účel, časové okno, záznam a zavření.
+
+### Střídej práci, ne chaos
+
+Rotace nemusí znamenat, že se vlastník mění každý týden. U kritických schopností často stačí praktičtější rytmus:
+
+1. Vlastník kvality drží pravidla stabilně.
+2. Zástupce jednou za čas provede malý běžný scénář.
+3. Vlastník udělá review výstupu a opraví runbook.
+4. Po dvou až třech úspěšných průchodech se může vybrat další zástupce nebo rozšířit scénář.
+
+Tím se znalost šíří bez toho, aby tým předstíral plochou odpovědnost. Zároveň se ukáže, jestli je runbook opravdu použitelný pro někoho, kdo ho nepsal.
+
+### Příklad: Zastupitelnost pro trust odpovědi
+
+Malý SaaS tým měl jednu osobu, která uměla odpovídat na bezpečnostní a privacy dotazy před nákupem. Po vytvoření odpovědní knihovny to vypadalo hotově, ale každý složitější dotaz stejně končil u stejného člověka.
+
+Rotační karta:
+
+| Pole | Zápis |
+| --- | --- |
+| Schopnost | aktualizovat běžnou trust odpověď po malé produktové změně |
+| Stálý vlastník kvality | product lead pro trust a privacy |
+| Provozní zástupce | customer success člověk, který řeší nákupní dotazy |
+| Minimální scénář | upravit odpověď na otázku „kde běží data“ po změně formulace ve veřejném trust přehledu |
+| Datová hranice | nepoužívat interní incidentní poznámky, neveřejné smlouvy ani zákaznické příklady |
+| Přístupová hranice | editace návrhu v dokumentaci, publikace až po review |
+| Ověření výsledku | odpověď sedí s veřejným trust přehledem, privacy notice a seznamem dodavatelů |
+| Frekvence | jednou měsíčně nebo při první malé trust změně |
+| Stop pravidlo | pokud odpověď mění právní slib, datovou lokalitu, subdodavatele nebo retenci, jde zpět vlastníkovi a případně právnímu review |
+
+Výsledek: zástupce nezískal širší přístup k interním materiálům. Naučil se rozpoznat běžnou úpravu, připravit návrh, zkontrolovat veřejné zdroje pravdy a předat rizikovou změnu zpět. To je zastupitelnost, ne divadelní převzetí trůnu.
+
+### Checklist: Rotace vlastníka interní schopnosti
+
+- [ ] Vybral jsem schopnost, jejíž výpadek reálně blokuje zákazníka, provoz, peníze, bezpečnost nebo veřejný slib.
+- [ ] Rozlišil jsem stálého vlastníka kvality a provozního zástupce.
+- [ ] Rotační karta má minimální scénář, datovou hranici, přístupovou hranici a stop pravidlo.
+- [ ] Zástupce dostal nejnižší potřebnou roli, ne automaticky admin přístup.
+- [ ] Cvičení používá demo, staging, veřejné nebo agregované údaje místo produkčního exportu.
+- [ ] Po cvičení se opraví runbook nebo checklist podle skutečného problému.
+- [ ] Rizikové změny pořád míří na review, ne na hrdinskou improvizaci.
+- [ ] Rotace je napojená na existující rutinu, aby nepřidávala další samostatné kolečko práce.
+- [ ] Důkazem zastupitelnosti je provedený scénář, ne jen přečtená dokumentace.
+- [ ] Pokud se zástupnost nedaří, řeším příčinu: složitý produkt, slabý runbook, chybějící role nebo špatně zvolenou schopnost.
+
+### Mini úkol
+
+Vyber jednu interní schopnost, kterou dnes umí hlavně jeden člověk. Napiš rotační kartu a domluv nejmenší scénář, který může do týdne provést druhý člověk bez nového produkčního exportu a bez plošného admin přístupu. Na konec doplň větu: „Rotaci zastavíme a vrátíme k review, pokud ___.“ Pokud tu větu neumíš vyplnit, ještě nevíš, kde končí bezpečné učení a začíná riziková improvizace.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -50595,6 +50728,7 @@ Vyber jednu oblast, kde jste po opakované re-eskalaci řekli „tohle se musím
 
 ## Pracovní log
 
+- 2026-07-24: Doplněna příloha o rotaci vlastníka interní schopnosti bez rozmazané odpovědnosti: rozlišení stálého vlastníka kvality a provozního zástupce, výběr schopností vhodných pro zastupitelnost, rotační karta, malé cvičení bez produkčních exportů, přístupová omezení, praktický rytmus rotace, příklad zastupitelnosti pro trust odpovědi, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro rozdělení interní schopnosti mezi více lidí. Bez nových aktuálních externích tvrzení, navázáno na existující části o capability kartách, převzetí práce, přístupech, odpovědní knihovně a privacy-first minimalizaci; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
 - 2026-07-24: Doplněna příloha o interní schopnosti po opakované re-eskalaci bez školícího divadla: převod systémového rozhodnutí na konkrétní capability kartu, učení přes práci místo prezentací, rozlišení schopnosti/rutiny/odpovědnosti, eskalační hranice, chudé důkazy samostatnosti, příklad interního billing review, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro posílení interní schopnosti po opakované externí pomoci. Bez nových aktuálních externích tvrzení, navázáno na existující části o re-eskalaci, převzetí práce, přístupech, dodavatelském režimu a privacy-first minimalizaci; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
 - 2026-07-24: Doplněna příloha o opakované re-eskalaci externí pomoci bez návratu do mlhy: rozlišení opakované pomoci jako systémového signálu, hledání vzoru bez osobního obviňování, čtyři možné odpovědi po třetím návratu, rozhodovací karta, kontrola produktových slibů, chudé provozní měření změny, příklad billing výjimek, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro strukturální rozhodnutí po opakované re-eskalaci. Bez nových aktuálních externích tvrzení, navázáno na existující části o re-entry briefu, dlouhodobé údržbě, dodavatelském režimu, přístupových hranicích a privacy-first minimalizaci; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
 - 2026-07-24: Doplněna příloha o re-eskalaci externí pomoci bez ztráty vlastnictví: rozlišení znalostní a kapacitní mezery, změny rozsahu, incidentu, špatného převzetí a pohodlnosti, re-entry brief, přístupová a datová hranice, udržení interního vlastníka u práce, důkaz převzetí po zásahu, příklad návratu specialisty k onboardingu, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro řízené znovuzapojení externí pomoci. Bez nových aktuálních externích tvrzení, navázáno na existující části o dlouhodobé údržbě po převzetí, dočasných přístupech, jednorázových exportech a dodavatelském režimu; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
