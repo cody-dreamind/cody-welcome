@@ -136,6 +136,7 @@ Když se nechceš vracet do celé knihy, hledej konkrétní nástroj podle výst
 | Posílit interní schopnost po opakované re-eskalaci | „interní schopnost“, „školení po externistovi“ nebo „capability karta“ | plán učení přes konkrétní práci, cvičení, runbook, hranice eskalace a důkaz samostatného zvládnutí |
 | Rozdělit interní schopnost mezi více lidí | „rotace vlastníka“, „zastupitelnost“ nebo „schopnost není hrdina“ | rotační karta se stálým vlastníkem kvality, druhým člověkem, cvičením, přístupovým limitem a stop pravidlem |
 | Připravit odchod nebo dlouhou nepřítomnost vlastníka schopnosti | „odchod vlastníka“, „ztráta vlastníka“ nebo „předávací okno“ | předávací okno s minimem nových přístupů, rozhodnutím co zastavit, co předat a co ověřit před odchodem |
+| Ukotvit nového vlastníka po převzetí schopnosti | „nový vlastník schopnosti“, „prvních 30 dní“ nebo „převzetí odpovědnosti“ | 30denní převzetí s prvním rozhodnutím, kontrolou přístupů, opravou runbooku a jasným stop seznamem |
 
 Pravidlo pro práci s rejstříkem: otevři maximálně tři nalezené části, vyber jednu a zapiš výstup. Pokud po deseti minutách pořád skáčeš mezi odkazy, vrať se k tabulce „Kudy začít podle aktuální bolesti“ a zúž problém. E-book není buffet. Teda je, ale bez talíře si stejně odneseš jen chaos.
 
@@ -50663,6 +50664,144 @@ Výsledek není dokonalá znalost všech historických výjimek. Výsledek je be
 
 Vyber jednu schopnost, která dnes stojí na konkrétním člověku. Napiš předávací okno na jednu stránku: co předat, co zúžit, co zastavit, kdo je nový vlastník kvality a jaký malý krok ověří převzetí. Přidej větu „Kvůli předání nesmíme vytvořit nový export, nový admin přístup ani nový nezdokumentovaný token pro ___.“ Pokud se do té věty nevejde konkrétní riziko, ještě nevíš, kde by předání mohlo poškodit privacy-first provoz.
 
+## Příloha: Prvních 30 dní nového vlastníka schopnosti bez tichého rozpadu
+
+Předání je začátek, ne konec. Nový vlastník může mít dokumentaci, přístupy, runbook i ochotného předchůdce na jedné závěrečné schůzce. Přesto se schopnost často rozpadne až později: první nejasný dotaz, první drobná výjimka, první změna produktu, první dodavatelský e-mail, první zákaznický tlak na „rychlé řešení“.
+
+Prvních 30 dní nového vlastníka má proto fungovat jako řízené převzetí odpovědnosti. Cílem není dokázat, že nový člověk všechno ví. Cílem je rychle odhalit místa, kde se dokumentace tváří hotově, ale rozhodování pořád závisí na paměti někoho jiného.
+
+> Codyho komentář: Nový vlastník nepotřebuje iniciační rituál v podobě přístupu ke všemu. Potřebuje první bezpečné rozhodnutí, dobrou brzdu a právo říct „tohle ještě nemáme převzaté“ bez toho, aby z něj tým dělal brzdiče pokroku.
+
+### Nastav 30denní převzetí jako malý režim
+
+Nový vlastník má mít první měsíc jasnější hranice než běžný provoz. Ne proto, že by mu tým nevěřil, ale protože schopnost se ověřuje v reálných situacích.
+
+Rozděl převzetí na tři kroky:
+
+| Období | Cíl | Výstup |
+| --- | --- | --- |
+| den 1 až 7 | ověřit základní přístup, dokumentaci a běžný scénář | první průchod runbookem a seznam nejasností |
+| den 8 až 20 | udělat první malé rozhodnutí v převzaté oblasti | rozhodovací zápis s dopadem na data, zákazníka nebo provoz |
+| den 21 až 30 | opravit systém podle toho, co se ukázalo | aktualizovaný runbook, přístupová hranice a stop seznam |
+
+Pokud se během prvního týdne ukáže, že nový vlastník neumí bez pomoci najít zdroj pravdy, běžný postup nebo správné ověření výsledku, není to selhání člověka. Je to nález v systému. Zapiš ho a oprav.
+
+### Začni prvním rozhodnutím, ne velkým projektem
+
+Převzetí odpovědnosti se nejlépe ověří malým rozhodnutím. Ne školením, ne schůzkou, ne tím, že nový vlastník přečte staré vlákno. Vyber situaci, která má skutečný dopad, ale nízké riziko.
+
+Dobré první rozhodnutí může být:
+
+- schválit drobnou úpravu support šablony,
+- zavřít jeden dočasný přístup po dokončené práci,
+- aktualizovat jednu odpověď v trust knihovně podle veřejného zdroje pravdy,
+- odmítnout zbytečný export dat pro interní analýzu,
+- přesunout opakovaný dotaz do produktového backlogu,
+- upravit jeden runbookový krok po suchém běhu,
+- označit jednu práci jako dočasně zastavenou, dokud nebude review.
+
+Špatné první rozhodnutí je takové, které vyžaduje nový široký admin přístup, produkční export, změnu právního slibu, zásah do billing logiky nebo veřejné oznámení bez kontroly. To není onboarding vlastníka. To je hazard v košili.
+
+### Udělej kartu prvního měsíce
+
+Karta prvního měsíce má být krátká. Slouží jako praktický mantinel mezi „převzal jsem“ a „všechno už je normální provoz“.
+
+| Pole | Zápis |
+| --- | --- |
+| Schopnost | co nový vlastník přebírá |
+| Zdroj pravdy | kde je runbook, rozhodovací log, datová mapa nebo veřejný slib |
+| První bezpečný scénář | jaká malá práce ověří samostatnost |
+| První zakázaný scénář | co se prvních 30 dní nedělá bez review |
+| Datová hranice | jaká data, exporty, logy nebo přílohy se nesmí používat |
+| Přístupová hranice | jaká nejnižší role stačí pro běžný scénář |
+| Kontrolní člověk | kdo udělá review prvního rozhodnutí |
+| Den kontroly | kdy se převzetí uzavře, prodlouží nebo zúží |
+| Oprava systému | co se musí změnit v dokumentaci, přístupech nebo procesu |
+
+Tahle karta nemá být další dokument pro dokument. Má zabránit dvěma typickým chybám: nový vlastník potichu čeká na původního člověka, nebo se naopak tváří samostatně a improvizuje tam, kde ještě nezná hrany.
+
+### Zkontroluj přístupy po prvním použití
+
+Přístupová kontrola před převzetím často nestačí. Teprve první skutečný scénář ukáže, jestli role sedí.
+
+Po prvním použití si polož otázky:
+
+- Stačila nejnižší přidělená role?
+- Musel někdo dočasně otevřít admin přístup?
+- Chyběla pouze schopnost číst stav, nebo opravdu právo měnit konfiguraci?
+- Neobjevil se osobní token, starý sdílený účet nebo zapomenutá integrace?
+- Nevznikl nový export jen proto, že systém nemá dobrý přehled?
+- Zůstala auditní stopa srozumitelná i bez osobních detailů?
+
+Pokud role nestačila, neopravuj to reflexem „dejme vyšší“. Nejdřív zjisti, jestli chybí oprávnění, UI, dokumentace, servisní účet, nebo jen odvaha říct, že daný scénář patří do review.
+
+### Oprav runbook podle nejasností, ne podle ega
+
+Nový vlastník uvidí v dokumentaci díry, které původní autor neviděl, protože si je doplňoval z hlavy. To je cenné. Chraň ten moment před větou „to je přece jasné“.
+
+Po prvním průchodu oprav hlavně:
+
+- chybějící předpoklady,
+- nejasné názvy systémů,
+- kroky bez ověření výsledku,
+- místa, kde se má zastavit a eskalovat,
+- odkazy na staré vlastníky,
+- příklady, které používají příliš citlivá nebo historická data,
+- veřejné texty, které neodpovídají aktuální realitě.
+
+Runbook po převzetí nemá být delší za každou cenu. Má být použitelnější pro dalšího člověka. Někdy stačí jedna věta: „Pokud změna zasahuje retenci, datovou lokalitu nebo subdodavatele, nepokračuj bez review.“
+
+### Zavři převzetí rozhodnutím
+
+Na konci 30 dní udělej krátké rozhodnutí. Ne retrospektivu na půl dne. Stačí jedna karta:
+
+| Stav | Kdy ho použít | Další krok |
+| --- | --- | --- |
+| převzato | nový vlastník udělal běžný scénář a opravil drobné nejasnosti | přejít do běžné rutiny |
+| převzato se zúžením | běžný scénář funguje, ale rizikové změny potřebují review | zapsat stop seznam a datum další kontroly |
+| prodloužit převzetí | chybí přístup, runbook, znalost nebo ověření | vybrat další malý scénář a konkrétní opravu |
+| eskalovat systémově | schopnost je příliš složitá nebo křehká pro jednoho vlastníka | zjednodušit produkt, změnit nástroj, doplnit roli nebo zapojit dodavatele |
+| zastavit část práce | převzatá oblast obsahuje rizikový proces bez jasné hodnoty | dočasně vypnout, archivovat nebo převést na nový projekt |
+
+Tím se z převzetí nestane mlhavé „nějak to běží“. Tým ví, co je hotové, co zůstává pod dohledem a co se nesmí tlačit přes koleno.
+
+### Příklad: Nový vlastník trust odpovědí
+
+Po odchodu původního product leada převzal trust odpovědi customer success lead. Dokumentace existovala, ale nebylo jasné, které odpovědi může upravit samostatně a které mění slib vůči zákazníkovi.
+
+Karta prvního měsíce:
+
+| Pole | Zápis |
+| --- | --- |
+| Schopnost | správa běžných trust odpovědí před nákupem |
+| Zdroj pravdy | veřejný trust přehled, privacy notice, vendor registr, odpovědní knihovna |
+| První bezpečný scénář | upravit odpověď na otázku, zda lze získat export dat po ukončení účtu |
+| První zakázaný scénář | změna odpovědi k datové rezidenci, retenci nebo subdodavatelům bez review |
+| Datová hranice | nepoužívat zákaznické smlouvy, interní incidentní poznámky ani konkrétní support případy |
+| Přístupová hranice | editace návrhu odpovědi, publikace přes review |
+| Kontrolní člověk | nový vlastník privacy a bezpečnosti |
+| Den kontroly | třicátý den nebo po prvních třech odpovědích |
+| Oprava systému | doplnit stop větu ke každé odpovědi, která se dotýká datové lokality nebo retence |
+
+První rozhodnutí nebylo velké. Nový vlastník přepsal odpověď k exportu dat tak, aby odkazovala na veřejnou nápovědu a nepřidávala nový slib v e-mailu. Review našlo jednu díru: odpovědní knihovna neuměla jasně říct, kdy export souvisí s právem na přenositelnost a kdy jde jen o produktový export. Místo hledání viníka se doplnila stop věta a odkaz na interní postup.
+
+### Checklist: Prvních 30 dní nového vlastníka schopnosti
+
+- [ ] Nový vlastník ví, kterou konkrétní schopnost přebírá.
+- [ ] Existuje karta prvního měsíce se zdrojem pravdy, bezpečným scénářem a zakázaným scénářem.
+- [ ] První rozhodnutí je malé, skutečné a ověřitelné.
+- [ ] Převzetí nevyžaduje nový produkční export ani plošný admin přístup.
+- [ ] Po prvním použití proběhla kontrola rolí, tokenů, servisních účtů a auditní stopy.
+- [ ] Runbook byl opraven podle nejasností, které nový vlastník skutečně potkal.
+- [ ] Veřejné texty, support šablony a trust odpovědi neukazují na starého vlastníka ani starý slib.
+- [ ] Rizikové scénáře mají stop pravidlo a kontrolního člověka.
+- [ ] Na konci 30 dní je jasně rozhodnuto: převzato, převzato se zúžením, prodloužit, eskalovat nebo zastavit.
+- [ ] Další kontrola je napojená na běžnou rutinu, ne na hrdinskou paměť týmu.
+
+### Mini úkol
+
+Vyber jednu schopnost, která byla nedávno předaná nebo brzy předaná bude. Napiš kartu prvního měsíce a vyber jedno malé rozhodnutí, které nový vlastník udělá bez produkčního exportu a bez nového admin přístupu. Na konec doplň větu: „Prvních 30 dní považujeme za hotové, až ___.“ Pokud tam napíšeš „až si nový vlastník všechno přečte“, vrať se zpátky. Čtení je vstup, ne důkaz převzetí.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -50856,6 +50995,7 @@ Vyber jednu schopnost, která dnes stojí na konkrétním člověku. Napiš pře
 
 ## Pracovní log
 
+- 2026-07-24: Doplněna příloha o prvních 30 dnech nového vlastníka schopnosti bez tichého rozpadu: 30denní režim převzetí, první malé rozhodnutí místo velkého projektu, karta prvního měsíce, kontrola přístupů po prvním použití, oprava runbooku podle reálných nejasností, uzavření převzetí rozhodnutím, příklad nového vlastníka trust odpovědí, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro ukotvení nového vlastníka po převzetí. Bez nových aktuálních externích tvrzení, navázáno na části o odchodu vlastníka, rotaci schopnosti, trust odpovědích, přístupech a privacy-first minimalizaci; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
 - 2026-07-24: Doplněna příloha o odchodu vlastníka interní schopnosti bez panického předání: předávací okno, rozhodnutí co předat/zúžit/zastavit/eskalovat, předání rozhodovacích hran místo historie, převod přístupů jako malý release, ověření převzetí jedním reálným krokem, příklad odchodu vlastníka billing pravidel, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro odchod nebo dlouhou nepřítomnost vlastníka schopnosti. Bez nových aktuálních externích tvrzení, navázáno na existující části o rotaci vlastníka, capability kartách, přístupech, runboocích a privacy-first minimalizaci; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
 - 2026-07-24: Doplněna příloha o rotaci vlastníka interní schopnosti bez rozmazané odpovědnosti: rozlišení stálého vlastníka kvality a provozního zástupce, výběr schopností vhodných pro zastupitelnost, rotační karta, malé cvičení bez produkčních exportů, přístupová omezení, praktický rytmus rotace, příklad zastupitelnosti pro trust odpovědi, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro rozdělení interní schopnosti mezi více lidí. Bez nových aktuálních externích tvrzení, navázáno na existující části o capability kartách, převzetí práce, přístupech, odpovědní knihovně a privacy-first minimalizaci; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
 - 2026-07-24: Doplněna příloha o interní schopnosti po opakované re-eskalaci bez školícího divadla: převod systémového rozhodnutí na konkrétní capability kartu, učení přes práci místo prezentací, rozlišení schopnosti/rutiny/odpovědnosti, eskalační hranice, chudé důkazy samostatnosti, příklad interního billing review, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro posílení interní schopnosti po opakované externí pomoci. Bez nových aktuálních externích tvrzení, navázáno na existující části o re-eskalaci, převzetí práce, přístupech, dodavatelském režimu a privacy-first minimalizaci; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
