@@ -126,6 +126,7 @@ Když se nechceš vracet do celé knihy, hledej konkrétní nástroj podle výst
 | Uzavřít jednorázový export po dokončení práce | „uzavření exportu“, „export po práci“ nebo „smazání kopie“ | zavírací záznam s výsledkem práce, smazáním kopií, odebráním sdílení a kontrolou navazujících úkolů |
 | Dát externistovi omezený dočasný přístup | „dočasný externí přístup“, „sdílený admin“ nebo „přístupová věta“ | časově omezený přístup s účelem, rolí podle schopností, zákazem sdíleného účtu a zavíracím záznamem |
 | Zrevidovat externí přístupy, které už nejsou očividně dočasné | „revize externích přístupů“, „přístup přežívá účel“ nebo „externí účet po práci“ | krátká kontrola účelu, role, posledního využití, exportních schopností a zavření nebo převedení do řízeného vztahu |
+| Převést pravidelnou externí spolupráci do řízeného dodavatelského režimu | „externista jako dodavatel“, „převod spolupráce“ nebo „dodavatelský režim“ | vendor karta, role, datové hranice, revizní rytmus, smluvní rámec a exit plán pro dlouhodobou práci |
 
 Pravidlo pro práci s rejstříkem: otevři maximálně tři nalezené části, vyber jednu a zapiš výstup. Pokud po deseti minutách pořád skáčeš mezi odkazy, vrať se k tabulce „Kudy začít podle aktuální bolesti“ a zúž problém. E-book není buffet. Teda je, ale bez talíře si stejně odneseš jen chaos.
 
@@ -49352,6 +49353,149 @@ Příklad záznamu:
 
 Vyber jeden systém, kde dnes může mít přístup někdo mimo hlavní tým. Najdi všechny externí identity a u každé vyber jedno rozhodnutí: ponechat, zmenšit, časově omezit, převést nebo zavřít. Do 30 minut proveď jednu konkrétní opravu. Pokud narazíš na přístup, který nikdo neumí obhájit, nezačínej debatou o důvěře. Začni otázkou: „Jaký účel by se dnes rozbil, kdybychom ho vypnuli?“
 
+## Příloha: Externista jako dodavatel bez přístupové šedi
+
+Předchozí příloha řešila revizi externích přístupů. Jedno z možných rozhodnutí bylo „převést“. Tahle část rozebírá, co to prakticky znamená.
+
+Když externista pomůže jednorázově, stačí omezený přístup, jasný účel a zavírací kontrola. Když ale stejný člověk nebo agentura pracuje opakovaně, přestává jít o výjimku. Je to dodavatelský vztah. A dodavatelský vztah potřebuje rámec: kdo ho vlastní, jaká data vidí, jaké schopnosti má, jak se kontroluje a jak se jednou ukončí.
+
+Nejde o byrokracii pro radost z tabulek. Jde o to, aby dlouhodobá spolupráce nebyla schovaná pod starou pozvánkou do nástroje. GDPR princip minimalizace, pravidla pro zpracovatele a OWASP princip nejmenších oprávnění tady míří na stejný provozní výsledek: externí člověk má mít jen takový přístup a taková data, která odpovídají aktuální práci. Odkazy jsou ve zdrojích.
+
+> Codyho komentář: „Oni nám s tím občas pomáhají“ není přístupová politika. Je to věta, která zní nevinně přesně do chvíle, kdy někdo odejde, změní roli, uloží export na špatné místo nebo se po roce nikdo nepamatuje, proč má pořád přístup do produkce.
+
+### Poznej okamžik převodu
+
+Dočasný externí přístup se má převést do řízeného režimu, když se objeví některý z těchto signálů:
+
+- spolupráce se opakuje déle než původní časové okno,
+- externista má pravidelný přístup k zákaznickým, billing, supportním nebo provozním datům,
+- jeho práce ovlivňuje produkční chování produktu, webu nebo marketingových toků,
+- vytváří nebo spravuje integrace, tokeny, webhooky, CI proměnné nebo DNS záznamy,
+- dostává exporty, které se už netváří jako jednorázová pomoc,
+- komunikuje se zákazníky nebo vidí jejich neveřejný kontext,
+- interní tým ho bere jako součást provozu, ale přístupově pořád vypadá jako návštěva.
+
+Jedno pravidlo stačí: jakmile by vypnutí přístupu bez domluvy rozbilo běžnou práci, už nejde o dočasný přístup. Potřebuješ dodavatelský režim.
+
+Praktický záznam může začít jednou větou:
+
+> „Externí vývojář `payments-helper@example.com` se převádí z incidentní pomoci na měsíční podporu billing integrací; interní vlastník je produktový lead, přístup bude omezený na testovací billing konfiguraci, read-only produkční logy bez payloadů a issue tracker.“
+
+Tahle věta hned ukáže, jestli mluvíš o člověku, účelu, datech, systému a vlastníkovi. Když v ní něco chybí, bude to chybět i v provozu.
+
+### Vytvoř malou vendor kartu
+
+Nemusíš hned stavět velký procurement proces. Pro malý SaaS nebo webový tým stačí vendor karta, která se dá přečíst za dvě minuty a použít při revizi.
+
+| Pole | Co vyplnit |
+| --- | --- |
+| Dodavatel nebo externista | jméno firmy nebo člověka, pracovní e-mail, hlavní kontakt |
+| Účel spolupráce | konkrétní práce, ne obecné „pomoc s webem“ |
+| Interní vlastník | osoba, která umí přístup obhájit nebo zavřít |
+| Systémy | nástroje, repo, hosting, CMS, CRM, analytika, dokumentace |
+| Data | typy dat, ke kterým má přístup; osobní údaje odděl zvlášť |
+| Schopnosti | čtení, zápis, publikace, export, pozvánky, konfigurace, tokeny |
+| Právní nebo smluvní rámec | objednávka, NDA, DPA, zpracovatelský vztah podle rizika |
+| Region a provoz | kde dodavatel nebo jeho nástroje typicky pracují s daty |
+| Revize | datum další kontroly a důvod kontroly |
+| Exit plán | jak odebrat přístupy, vrátit výstupy, smazat kopie a předat know-how |
+
+Karta nemá obsahovat hesla, tokeny, neveřejné payloady ani celé smlouvy. Má ukazovat, kde pravda leží a kdo ji hlídá. Citlivé dokumenty patří do řízeného úložiště s přístupy, ne do Markdown poznámky vedle checklistu.
+
+### Odděl pracovní výstup od provozních schopností
+
+Dlouhodobý externista často potřebuje vytvářet hodnotu, ne vlastnit infrastrukturu. Rozdíl je důležitý.
+
+Příklady:
+
+| Práce | Typický výstup | Schopnost, kterou nemusí mít automaticky |
+| --- | --- | --- |
+| SEO konzultace | seznam priorit, návrh redirectů, úpravy metadat | produkční publikace bez review |
+| Vývoj billing integrace | pull request, testy, runbook, návrh monitoringu | admin role v platební bráně |
+| Obsahová spolupráce | návrh článku, korektura, komentáře v CMS | export kontaktů z CRM |
+| Bezpečnostní review | nálezy, důkazy v bezpečném rozsahu, doporučení | trvalý přístup do logů |
+| Marketingová správa | kampaně, UTM pravidla, měsíční souhrn | čtení individuálních produktových eventů |
+
+Když externista potřebuje něco změnit v produkci, nastav kontrolovaný proces: návrh, interní review, provedení přes oprávněnou roli, zápis výsledku. Přímý produkční zápis může být oprávněný, ale musí být výslovně zdůvodněný. Jinak se z něj stane pohodlná díra v odpovědnosti.
+
+### Nastav datové hranice před nástroji
+
+Dodavatelský režim začíná datovou hranicí, ne seznamem aplikací. Nejdřív si napiš:
+
+- jaké typy dat externista potřebuje,
+- proč je potřebuje,
+- jestli stačí agregace, redakce, screenshot, testovací scénář nebo veřejný obsah,
+- jestli se data ukládají do jeho nástrojů,
+- jak dlouho je může držet,
+- jak doloží výmaz nebo vrácení kopií,
+- co nesmí nikdy dostat.
+
+Příklad datové hranice:
+
+> „Obsahová agentura může vidět veřejný web, preview článků a anonymizované agregované dotazy ze Search Console exportu. Nesmí dostat CRM kontakty, individuální chování návštěvníků, support vlákna ani interní obchodní poznámky.“
+
+Taková věta je praktická, protože chrání tým před pozdějším „pošli mi radši celý export, ať to mám jednodušší“. Jednodušší pro dodavatele neznamená bezpečnější pro produkt.
+
+### Vyřeš přístupy jako produktovou změnu
+
+Převod externisty na dodavatele se má chovat jako malý release:
+
+1. Sepiš aktuální účel a vendor kartu.
+2. Zkontroluj, zda existuje smluvní nebo právní rámec pro typ práce a dat.
+3. Vytvoř nebo uprav účty pod vlastní identitou dodavatele.
+4. Nastav role podle schopností, ne podle staré historie.
+5. Zakaž sdílené admin účty a osobní obcházení procesu.
+6. Přesuň pracovní výstupy do interního systému.
+7. Zapiš datum další revize.
+8. Doplň exit plán před tím, než ho budeš potřebovat.
+
+Nejhorší varianta je přidávat další a další oprávnění ke starému účtu, protože „už tam je“. Starý účet není vztah. Je to technický zbytek vztahu. Vztah má mít vlastníka, pravidla a konec.
+
+### Příklad: Z externího vývojáře se stává měsíční podpora
+
+Malý SaaS tým přizval externího vývojáře kvůli chybě v exportu faktur. Původně měl přístup na 48 hodin do repozitáře a redigovaných logů. Po třech měsících se ukazuje, že pomáhá pravidelně: jednou měsíčně řeší billing integrace, drobné bugy a release kontrolu platebních webhooků.
+
+Špatný postup:
+
+- ponechat starý write přístup bez revize,
+- posílat mu produkční logy podle potřeby,
+- řešit faktury přes osobní e-mail,
+- nemít jasné ukončení spolupráce,
+- doufat, že „je to přece náš člověk“.
+
+Lepší převod:
+
+| Oblast | Rozhodnutí |
+| --- | --- |
+| Účel | měsíční technická podpora billing integrací a webhooků |
+| Vlastník | produktový lead |
+| Repo | přístup jen do relevantního repozitáře, branch protection, review před mergem |
+| Logy | read-only přístup jen k redigovaným technickým chybám bez zákaznických payloadů |
+| Billing nástroj | bez admin role; testovací prostředí a interní operátor pro změny produkční konfigurace |
+| Výstupy | PR, testovací případ, krátký runbook nebo update existující dokumentace |
+| Revize | měsíčně první dva měsíce, potom kvartálně |
+| Exit | odebrat repo přístup, revokovat tokeny, zkontrolovat sdílené odkazy, předat otevřené úkoly |
+
+Výsledek není pomalejší práce. Je to práce, která přežije dovolenou, změnu člověka i bezpečnostní dotaz zákazníka.
+
+### Checklist: Převod externisty na dodavatele
+
+- [ ] Je jasné, proč už nejde o jednorázový nebo dočasný přístup.
+- [ ] Spolupráce má jednu větu účelu a interního vlastníka.
+- [ ] Existuje vendor karta bez tajemství a zbytečných osobních údajů.
+- [ ] Role odpovídají konkrétním schopnostem, ne pohodlí nebo historii.
+- [ ] Produkční zápis, exporty, tokeny, pozvánky a integrace jsou řešené výslovně.
+- [ ] Datová hranice říká, co dodavatel smí a nesmí dostat.
+- [ ] Pokud dodavatel zpracovává osobní údaje, je zkontrolovaný odpovídající smluvní rámec.
+- [ ] Pracovní výstupy zůstávají v interním systému, ne jen u dodavatele.
+- [ ] Je nastavené datum další revize.
+- [ ] Exit plán existuje před ukončením spolupráce.
+- [ ] Veřejné privacy-first sliby odpovídají realitě dodavatelského provozu.
+
+### Mini úkol
+
+Najdi jednu externí spolupráci, která už trvá déle než původní plán. Napiš k ní vendor kartu v deseti polích z této přílohy. Potom udělej jednu opravu: zmenši roli, doplň vlastníka, zapiš datovou hranici, stanov další revizi, nebo vytvoř exit plán. Pokud se při vyplňování zasekneš na větě „to ví jen jeden člověk“, právě jsi našel první věc k opravě.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -49545,6 +49689,7 @@ Vyber jeden systém, kde dnes může mít přístup někdo mimo hlavní tým. Na
 
 ## Pracovní log
 
+- 2026-07-24: Doplněna příloha o převodu externisty na řízeného dodavatele bez přístupové šedi: signály, kdy už dočasný přístup nestačí, malá vendor karta, oddělení pracovního výstupu od provozních schopností, datová hranice před výběrem nástrojů, převod přístupů jako malý release, příklad měsíční podpory billing integrací, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro dlouhodobou externí spolupráci. Bez nových aktuálních externích tvrzení, navázáno na existující zdroje OWASP Authorization, GDPR minimalizaci a zpracovatelský rámec; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
 - 2026-07-24: Doplněna příloha o revizi externích přístupů bez nekonečné dočasnosti: výběr rizikového systému, pět rozhodnutí pro externí účty, kontrola schopností místo názvu role, úklid sdílení, tokenů, integrací a kopií, převod dlouhodobé spolupráce do řízeného dodavatelského rámce, 30minutový průchod, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro přístupy, které přežily původní účel. Bez nových aktuálních externích tvrzení, navázáno na existující zdroje OWASP Authorization a Evropské komise k minimalizaci dat; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
 - 2026-07-24: Doplněna příloha o dočasném externím přístupu bez sdíleného admina: rozhodování mezi exportem a přístupem, přístupová věta, role podle konkrétních schopností, zákaz sdílených účtů, časové okno, auditní minimum, zavření přístupu jako malý release, příklad diagnostiky webhooku, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro omezený externí přístup. Navázáno na existující zdroje OWASP Authorization a Evropské komise k minimalizaci osobních údajů; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
 - 2026-07-24: Doplněna příloha o uzavření jednorázového exportu bez zapomenuté kopie: zavření původního účelu, převod pracovního výsledku do interního systému, kontrola interních/přenosových/externích kopií, oddělení smazání dat od zachování rozhodnutí, zavírací záznam, rozpoznání opakovaného exportu jako procesu, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro uzavření exportu po dokončení práce. Bez nových aktuálních externích tvrzení, navázáno na existující části o jednorázových exportech, dočasných nástrojích, retenci, vendor exitu a privacy-first minimalizaci; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
