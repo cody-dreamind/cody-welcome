@@ -128,6 +128,7 @@ Když se nechceš vracet do celé knihy, hledej konkrétní nástroj podle výst
 | Zrevidovat externí přístupy, které už nejsou očividně dočasné | „revize externích přístupů“, „přístup přežívá účel“ nebo „externí účet po práci“ | krátká kontrola účelu, role, posledního využití, exportních schopností a zavření nebo převedení do řízeného vztahu |
 | Převést pravidelnou externí spolupráci do řízeného dodavatelského režimu | „externista jako dodavatel“, „převod spolupráce“ nebo „dodavatelský režim“ | vendor karta, role, datové hranice, revizní rytmus, smluvní rámec a exit plán pro dlouhodobou práci |
 | Předat know-how od externisty zpět do týmu | „předání know-how“, „dodavatel bez černé skříňky“ nebo „pracovní stopa“ | předávací balík s rozhodnutími, runbooky, otevřenými riziky, datovými hranicemi a ověřením, že tým umí udělat další krok |
+| Ověřit převzetí práce po externistovi | „kontrola převzetí“, „předání nestačí“ nebo „test převzetí“ | krátká zkouška, že interní tým umí výsledek provozovat, změnit, vrátit a zavřít zbytečné přístupy |
 
 Pravidlo pro práci s rejstříkem: otevři maximálně tři nalezené části, vyber jednu a zapiš výstup. Pokud po deseti minutách pořád skáčeš mezi odkazy, vrať se k tabulce „Kudy začít podle aktuální bolesti“ a zúž problém. E-book není buffet. Teda je, ale bez talíře si stejně odneseš jen chaos.
 
@@ -49632,6 +49633,122 @@ Takový balík je krátký, ale dává týmu kontrolu. Neprozrazuje zbytečná d
 
 Vyber jednu externí práci z posledních tří měsíců. Napiš k ní předávací kartu podle deseti polí výše a požádej interního vlastníka, aby podle ní udělal jeden malý ověřovací krok: spustil test, upravil stránku, našel log, zkontroloval redirect nebo vysvětlil rollback. Pokud to bez externisty nejde, neber to jako selhání člověka. Ber to jako přesně nalezenou mezeru v provozu a zavři ji dřív, než se z ní stane drahá závislost.
 
+## Příloha: Kontrola převzetí po externistovi bez slepé víry
+
+Předání know-how je nutný krok, ale samo o sobě ještě nedokazuje převzetí. Dokument může vypadat dobře, issue může být zavřené, předávací call může proběhnout bez dramatu, a přesto tým za měsíc zjistí, že neumí změnu nasadit, ověřit, vrátit nebo vysvětlit zákazníkovi.
+
+Proto potřebuješ krátkou kontrolu převzetí. Ne audit na půl dne. Ne slavnostní schůzku s prezentací. Jednu praktickou zkoušku, která ukáže, jestli výsledek skutečně přešel zpět do týmu.
+
+Privacy-first hodnota je tady jednoduchá: kontrola převzetí má potvrdit, že tým drží kontrolu nad daty, přístupy, dokumentací a provozním rozhodnutím. Pokud výsledek funguje jen dokud má externista široký přístup a pamatuje si kontext, není převzatý. Je pouze odložený problém s hezkým názvem.
+
+> Codyho komentář: „Máme dokumentaci“ je dobrý začátek. „Náš člověk podle ní bezpečně udělal další krok“ je teprve důkaz. Papír snese všechno, produkce už je méně tolerantní komik.
+
+### Vyber jednu schopnost k ověření
+
+Kontrola převzetí nesmí začít obecnou otázkou „rozumíme tomu?“. Lidé často odpoví ano, protože nechtějí brzdit. Lepší je ověřit jednu konkrétní schopnost.
+
+Vyber schopnost podle typu práce:
+
+| Typ externí práce | Co ověřit |
+| --- | --- |
+| Vývojová změna | interní vývojář spustí test, vysvětlí hlavní rozhodnutí a provede malou bezpečnou úpravu |
+| Provozní oprava | interní vlastník najde healthcheck, log bez citlivého payloadu a rollback postup |
+| SEO nebo obsahová migrace | obsahový vlastník zkontroluje cílovou URL, redirect, sitemap, interní odkaz a archivní poznámku |
+| Marketingová automatizace | marketér spustí testovací scénář bez produkčních kontaktů a ověří, jak se tok vypíná |
+| Analytické nastavení | produktový člověk popíše rozhodnutí, které metrika podporuje, a najde stop pravidlo pro její ukončení |
+| Billing nebo integrace | interní vlastník ověří testovací případ, redigované logy, retry chování a hranici dat |
+
+Jedna schopnost stačí. Smyslem není zkoušet všechno, ale najít první místo, kde se předání láme. Pokud se nezlomí, máš důkaz. Pokud se zlomí, máš opravitelnou mezeru.
+
+### Použij test převzetí
+
+Test převzetí je malý pracovní scénář. Má mít jasný začátek, konec a pozorovatele. Nemá vyžadovat produkční data, sdílený admin účet ani improvizované exporty.
+
+Dobrá karta testu:
+
+| Pole | Co vyplnit |
+| --- | --- |
+| Výsledek k převzetí | co externista dodal nebo změnil |
+| Interní vlastník | kdo má výsledek po převzetí provozovat |
+| Testovaná schopnost | co přesně vlastník udělá |
+| Bezpečné prostředí | test, staging, preview, redigovaný log nebo veřejná URL |
+| Povolená data | jaká data se při testu smí použít |
+| Zakázaná data | co se nesmí exportovat, kopírovat ani posílat do chatu |
+| Kritérium úspěchu | jak poznáš, že převzetí prošlo |
+| Zjištěná mezera | co nešlo udělat bez externisty |
+| Oprava | dokumentace, role, runbook, test, úklid dat nebo další předání |
+| Uzavření | co se po testu zavírá, maže, omezuje nebo plánuje |
+
+Test převzetí piš do stejného místa, kde tým vede práci: issue, rozhodovací log, runbook nebo projektovou dokumentaci. Nedělej z něj další bokem položený dokument. Bokem položené dokumenty mají zvláštní talent stát se archeologií.
+
+### Ověř i návrat a vypnutí
+
+Mnoho týmů kontroluje jen to, jestli nová věc funguje. To je málo. U externí práce potřebuješ vědět také to, jak se věc vypíná, omezuje nebo vrací.
+
+Při kontrole se zeptej:
+
+- Umíme změnu vrátit bez externisty?
+- Víme, který feature flag, konfigurace, redirect, automatizace nebo job změnu ovládá?
+- Víme, co se stane s daty, která už změna vytvořila?
+- Umíme vypnout externí integraci bez rozbití hlavní cesty?
+- Víme, který veřejný slib, help text nebo support odpověď by se musely aktualizovat?
+- Máme bezpečnou cestu, jak o problému mluvit bez úniku interních detailů?
+
+Příklad: externí konzultant nastavil automatizaci pro odesílání onboarding e-mailů. Převzetí neznamená jen poslat testovací e-mail. Znamená také vědět, kde se tok vypíná, jak se odhlásí uživatel, které šablony jsou transakční a které marketingové, kde je suppression list, jak dlouho se drží diagnostické logy a kdo schvaluje změnu textu.
+
+### Zavři zbytečný přístup až po důkazu
+
+Přístup externisty neodebírej chaoticky před převzetím, pokud by tím tým ztratil možnost dokončit předání. Ale stejně tak ho nenechávej otevřený jen proto, že předání „asi proběhlo“.
+
+Praktický rytmus:
+
+1. Externista dodá výstup a předávací kartu.
+2. Interní vlastník provede test převzetí.
+3. Zjištěné mezery se opraví nebo zapíšou s vlastníkem a termínem.
+4. Garanční přístup se zmenší na přesný účel.
+5. Dočasné role, exporty, sdílené odkazy a pracovní kopie se zavřou.
+6. Revize dodavatelské nebo externí spolupráce dostane další datum.
+
+Pokud test převzetí selže, neznamená to automaticky prodloužit široký přístup. Znamená to zmenšit ho na nejmenší rozsah, který je potřeba k opravě konkrétní mezery. Rozdíl je podstatný: široký přístup řeší pocit jistoty, omezený přístup řeší práci.
+
+### Příklad: Převzetí SEO migrace
+
+Externí SEO specialista pomohl sloučit staré články a upravit redirecty. Předal mapu URL, rozhodnutí o přeživší stránce, seznam archivních poznámek a doporučenou kontrolu po 14 dnech.
+
+Kontrola převzetí:
+
+| Pole | Zápis |
+| --- | --- |
+| Výsledek | sloučení pěti článků do jedné aktuální stránky a redirect mapa |
+| Interní vlastník | obsahový lead |
+| Testovaná schopnost | podle předání ověřit jednu starou URL, jednu cílovou URL, sitemap a jeden interní odkaz |
+| Bezpečné prostředí | veřejný web, statický export sitemap, interní dokumentace |
+| Povolená data | URL, HTTP statusy, agregované signály z vyhledávání |
+| Zakázaná data | individuální čtenářské cesty, session recordings, osobní dotazy z CRM bez redakce |
+| Kritérium úspěchu | vlastník umí vysvětlit, proč přežila cílová URL a co se bude kontrolovat za 14 dní |
+| Zjištěná mezera | jedna support šablona pořád odkazuje na starý článek |
+| Oprava | aktualizovat support šablonu a přidat ji do checklistu pro další sloučení |
+| Uzavření | externí přístup do CMS zmenšen na komentáře, žádný produkční publish |
+
+Výsledek je konkrétní. Tým neřekl jen „SEO migrace hotová“. Ověřil, že umí pokračovat bez externisty a bez nového sledování čtenářů.
+
+### Checklist: Kontrola převzetí po externistovi
+
+- [ ] Převzetí ověřuje jednu konkrétní schopnost, ne obecné porozumění.
+- [ ] Test převzetí má interního vlastníka a jasné kritérium úspěchu.
+- [ ] Ověření probíhá v bezpečném prostředí bez zbytečných produkčních dat.
+- [ ] Je jasné, jaká data se při testu smí a nesmí použít.
+- [ ] Interní člověk provedl skutečný krok, ne jen přečetl dokumentaci.
+- [ ] Součástí kontroly je návrat, vypnutí nebo omezení změny.
+- [ ] Zjištěné mezery mají vlastníka, termín a nejmenší opravu.
+- [ ] Externí přístup je po důkazu převzetí zmenšený, zavřený nebo jasně časově omezený.
+- [ ] Pracovní kopie, exporty a sdílené odkazy jsou zkontrolované.
+- [ ] Veřejné texty, support šablony a trust odpovědi odpovídají převzaté realitě.
+
+### Mini úkol
+
+Vyber jednu nedávno dokončenou externí práci a napiš test převzetí podle tabulky výše. Nevybírej nejsložitější část. Vyber jednu schopnost, kterou by interní vlastník měl umět za 20 minut předvést: ověřit redirect, spustit test, najít log, vypnout automatizaci, upravit šablonu nebo vysvětlit rollback. Po testu zavři jednu konkrétní věc: přístup, export, sdílený odkaz, starou šablonu nebo otevřenou mezeru v dokumentaci.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -49825,6 +49942,7 @@ Vyber jednu externí práci z posledních tří měsíců. Napiš k ní předáv
 
 ## Pracovní log
 
+- 2026-07-24: Doplněna příloha o kontrole převzetí po externistovi bez slepé víry: výběr jedné ověřované schopnosti, karta testu převzetí, kontrola návratu a vypnutí, rytmus zavření přístupů po důkazu, praktický příklad SEO migrace, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro ověření převzetí práce po externistovi. Bez nových aktuálních externích tvrzení, navázáno na existující zdroje k minimalizaci dat, přístupům, zpracovatelům, dokumentaci a provozní kontrole; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
 - 2026-07-24: Doplněna příloha o předání know-how od externisty bez černé skříňky: požadavek na předání už v zadání, rozlišení výstupu, rozhodnutí a návodu, malá předávací karta, ověření interním krokem, předání provozních a datových hranic, napojení na revizi přístupů, praktický příklad billing integrace, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro předání know-how zpět do týmu. Bez nových aktuálních externích tvrzení, navázáno na existující zdroje k minimalizaci dat, zpracovatelskému rámci, přístupům a provozní dokumentaci; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
 - 2026-07-24: Doplněna příloha o převodu externisty na řízeného dodavatele bez přístupové šedi: signály, kdy už dočasný přístup nestačí, malá vendor karta, oddělení pracovního výstupu od provozních schopností, datová hranice před výběrem nástrojů, převod přístupů jako malý release, příklad měsíční podpory billing integrací, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro dlouhodobou externí spolupráci. Bez nových aktuálních externích tvrzení, navázáno na existující zdroje OWASP Authorization, GDPR minimalizaci a zpracovatelský rámec; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
 - 2026-07-24: Doplněna příloha o revizi externích přístupů bez nekonečné dočasnosti: výběr rizikového systému, pět rozhodnutí pro externí účty, kontrola schopností místo názvu role, úklid sdílení, tokenů, integrací a kopií, převod dlouhodobé spolupráce do řízeného dodavatelského rámce, 30minutový průchod, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro přístupy, které přežily původní účel. Bez nových aktuálních externích tvrzení, navázáno na existující zdroje OWASP Authorization a Evropské komise k minimalizaci dat; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
