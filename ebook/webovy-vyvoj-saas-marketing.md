@@ -124,6 +124,7 @@ Když se nechceš vracet do celé knihy, hledej konkrétní nástroj podle výst
 | Schválit dočasný nástroj bez trvalého datového stínu | „dočasný nástroj“, „jednorázové schválení“ nebo „stínový dodavatel“ | časově omezená karta zkoušky s účelem, hranicí dat, vlastníkem, datem vypnutí a zavírací kontrolou |
 | Předat export externí pomoci bez ztráty kontroly | „jednorázový export“, „externí pomoc“ nebo „kontrolovaná kopie“ | exportní balíček s účelem, datovým ořezem, pravidlem přenosu, datem návratu nebo smazání a zavírací kontrolou |
 | Uzavřít jednorázový export po dokončení práce | „uzavření exportu“, „export po práci“ nebo „smazání kopie“ | zavírací záznam s výsledkem práce, smazáním kopií, odebráním sdílení a kontrolou navazujících úkolů |
+| Dát externistovi omezený dočasný přístup | „dočasný externí přístup“, „sdílený admin“ nebo „přístupová věta“ | časově omezený přístup s účelem, rolí podle schopností, zákazem sdíleného účtu a zavíracím záznamem |
 
 Pravidlo pro práci s rejstříkem: otevři maximálně tři nalezené části, vyber jednu a zapiš výstup. Pokud po deseti minutách pořád skáčeš mezi odkazy, vrať se k tabulce „Kudy začít podle aktuální bolesti“ a zúž problém. E-book není buffet. Teda je, ale bez talíře si stejně odneseš jen chaos.
 
@@ -49061,6 +49062,161 @@ Opakování je signál, že tým potřebuje menší a bezpečnější cestu, ne 
 
 Vyber jeden export z posledních 30 dní a udělej k němu zavírací záznam o osmi polích: export, výsledek práce, převod výstupu, kopie, sdílení, externí potvrzení, výjimka, vlastník. Pokud nemáš jistotu, kde kopie je, nezačínej velkým auditem. Zavři nejbližší konkrétní věc: odeber sdílený odkaz, převeď výstup do issue, nebo pošli stručnou žádost o potvrzení smazání pracovní kopie.
 
+## Příloha: Dočasný externí přístup bez sdíleného admina
+
+Někdy je omezený přístup bezpečnější než export. Externí specialista potřebuje zkontrolovat konfiguraci, reprodukovat chybu, projít anonymizovaný workspace nebo navrhnout opravu v nástroji, kde samotný export nedává smysl. To ale není důvod poslat sdílené admin heslo, přidat člověka do celého účtu nebo mu nechat přístup navždy, protože „se možná ještě ozve“.
+
+Dočasný přístup je dobrý nástroj, když má jasný účel, rozsah, časový limit a zavření. Bez těchto čtyř věcí je to jen pomalejší únik kontroly. Privacy-first přístup neznamená, že s nikým nikdy nespolupracuješ. Znamená, že spolupráce má hranice viditelné dřív, než se otevře první obrazovka s daty.
+
+OWASP Authorization Cheat Sheet doporučuje princip nejmenších oprávnění, deny-by-default přístup a průběžné kontroly oprávnění. Evropská komise u principu minimalizace připomíná, že se mají sbírat a zpracovávat jen údaje potřebné pro konkrétní účel. Přeloženo do externí pomoci: nedávej přístup k systému. Dej přístup ke konkrétní práci. Odkazy jsou ve zdrojích.
+
+> Codyho komentář: Sdílený admin účet je jako univerzální fix na produktovou disciplínu. Chvíli vypadá pohodlně, pak už nikdo neví, kdo co udělal, proč to viděl a jestli to ještě někde běží.
+
+### Rozhodni, zda má vyhrát přístup nebo export
+
+Nejdřív si vyber cestu podle práce, ne podle pohodlí:
+
+| Situace | Lepší cesta |
+| --- | --- |
+| kontrola veřejných stránek, copywritingu nebo SEO struktury | seznam URL, screenshoty bez osobních údajů, veřejný preview odkaz |
+| analýza chyby v konkrétním účtu | redigovaný log, reprodukční scénář, případně dočasný omezený přístup |
+| právní nebo bezpečnostní review dokumentu | ořezaný dokument bez zákaznických payloadů |
+| konfigurace integrace nebo webhooku | dočasná role jen pro danou integraci |
+| migrace nebo import dat | testovací workspace se vzorkem a importním protokolem |
+| opakovaný provozní support | pojmenovaná externí role, schválené scope, pravidelná revize |
+
+Export je vhodný, když stačí statický výřez a můžeš ho dobře ořezat. Přístup je vhodný, když externista potřebuje vidět stav, který se špatně přenáší: nastavení, historii kroků, chybový tok, oprávnění nebo vazbu mezi obrazovkami. Ani jedna cesta není automaticky bezpečná. Bez účelu a zavření umí být špatné obě.
+
+### Napiš přístupovou větu
+
+Před pozvánkou napiš jednu větu:
+
+> „Dáváme [komu/roli] dočasný přístup k [konkrétní části] kvůli [účel] do [datum/čas], bez oprávnění k [co nesmí].“
+
+Příklady:
+
+- „Dáváme externímu vývojáři dočasný přístup k testovacímu webhook workspace kvůli diagnostice retry chování do pátku 18:00, bez přístupu k produkčním zákaznickým datům.“
+- „Dáváme účetní poradkyni read-only přístup k billing reportu za Q2 kvůli kontrole sazeb, bez přístupu k produktové aktivitě uživatelů.“
+- „Dáváme SEO konzultantovi přístup k preview prostředí veřejných landing pages kvůli kontrole interních odkazů, bez přístupu do CMS administrace a bez analytických identifikátorů.“
+
+Slabá věta poznáš podle toho, že by podle ní šlo otevřít skoro cokoliv:
+
+| Slabé zadání | Lepší zadání |
+| --- | --- |
+| „Potřebuje se mrknout do adminu.“ | „Potřebuje vidět konfiguraci jednoho webhooku a posledních deset redigovaných pokusů.“ |
+| „Pomůže nám s analytikou.“ | „Potřebuje agregovaný měsíční report konverzí bez user-level událostí.“ |
+| „Bude řešit fakturaci.“ | „Potřebuje read-only pohled na faktury a stavy plateb, ne produktová data.“ |
+
+### Vyber roli podle schopností, ne podle názvu
+
+Role „externista“, „konzultant“ nebo „agentura“ nic neříká. Důležitější je seznam schopností:
+
+| Schopnost | Otázka |
+| --- | --- |
+| čtení | Jaké záznamy může vidět? |
+| zápis | Co může změnit a kdo to schvaluje? |
+| export | Může data stáhnout mimo systém? |
+| sdílení | Může pozvat další lidi nebo vytvořit veřejný odkaz? |
+| integrace | Může připojit aplikaci, token nebo webhook? |
+| billing | Může vidět faktury, platby nebo měnit plán? |
+| identita | Může měnit uživatele, role nebo bezpečnostní nastavení? |
+
+Když systém neumí vytvořit dost úzkou roli, nepředstírej, že problém vyřeší poznámka v chatu. Zvol jinou cestu: testovací prostředí, anonymizovaný vzorek, sdílenou obrazovku bez předání účtu, nebo interního člověka jako operátora podle instrukcí externisty.
+
+Praktické pravidlo: pokud by externista omylem klikl na nejhorší viditelné tlačítko, dopad má být přijatelný. Když není, role je moc široká.
+
+### Nepoužívej sdílený účet
+
+Sdílený účet kazí tři věci najednou:
+
+- nejde spolehlivě poznat, kdo akci provedl,
+- nejde bezpečně odebrat přístup jednomu člověku bez změny pro všechny,
+- často obchází MFA, role, audit a offboarding.
+
+Pokud externista potřebuje přístup, má mít vlastní identitu. Ideálně s MFA, časovým omezením, pojmenovanou rolí a jasným vlastníkem na straně týmu. Pokud nástroj neumí samostatné identity ani omezení oprávnění, je to signál do vendor registru, ne detail k ignorování.
+
+U malých týmů se dá začít jednoduše:
+
+- žádné posílání hesel,
+- žádné sdílené inboxy jako univerzální login,
+- žádné „dočasné“ admin účty bez data vypnutí,
+- žádné přidávání externistů do produkčních systémů jen kvůli tomu, že testovací prostředí chybí.
+
+### Nastav časové okno a auditní minimum
+
+Dočasný přístup má mít konec předem. Ne proto, že lidem nevěříš, ale proto, že proces bez konce vždycky časem zhrubne.
+
+Minimální nastavení:
+
+| Pole | Příklad |
+| --- | --- |
+| účel | diagnostika webhook retry v testovacím workspace |
+| systém | `billing-preview`, ne celý produkční účet |
+| role | read-only konfigurace integrace plus redigovaný log |
+| začátek | 2026-07-24 10:00 |
+| konec | 2026-07-25 18:00 |
+| zakázané akce | export, změna billing údajů, pozvánky, napojení nové aplikace |
+| vlastník | interní člověk, který přístup otevřel i zavře |
+| důkaz zavření | screenshot nastavení, auditní řádek nebo krátký záznam |
+
+Auditní minimum nemá být sklad osobních údajů. Stačí vědět, kdo přístup schválil, jaký měl rozsah, kdy byl odebrán a jestli vznikl navazující úkol. Detailní aktivita uživatele patří jen tam, kde má bezpečnostní nebo provozní účel a přiměřenou retenci.
+
+### Zavři přístup jako malý release
+
+Odebrání přístupu není úklid „někdy potom“. Je to součást dokončení práce. Zavření udělej ve stejný den, kdy externí pomoc předá výstup, nebo podle předem domluvené expirace.
+
+Zavírací postup:
+
+1. Převeď výsledek do interního systému práce.
+2. Odeber uživateli roli nebo deaktivuj účet.
+3. Zruš sdílené odkazy a pozvánky.
+4. Revokuj tokeny, webhooky nebo OAuth aplikace vytvořené kvůli práci.
+5. Zkontroluj, zda nevznikl export nebo pracovní kopie.
+6. Zapiš jednu větu výsledku a jednu větu zavření.
+
+Příklad zavírací věty:
+
+> „Externí přístup `seo-reviewer@example.com` do preview CMS odebrán 2026-07-24, výstup převeden do issue `CONTENT-88`, žádné exporty ani nové integrace nezůstávají.“
+
+Pokud přístup nejde odebrat bez dopadu na jiné lidi, není to drobný administrativní problém. Je to signál, že tým používá špatný model identity.
+
+### Příklad: Diagnostika webhooku
+
+Tým řeší opakované selhání platebního webhooku. Externí vývojář nabízí pomoc. Špatná zkratka je přidat ho jako admina do produkčního billing nástroje a poslat mu odkaz na logy.
+
+Lepší postup:
+
+| Krok | Rozhodnutí |
+| --- | --- |
+| účel | zjistit, proč retry končí duplicitní interní chybou |
+| prostředí | testovací workspace s napodobeným stavem faktury |
+| data | syntetická faktura, redigované hlavičky, bez osobních údajů zákazníka |
+| role | read-only konfigurace webhooku plus možnost spustit testovací doručení |
+| zákaz | žádný export produkčních logů, žádné změny platebního nastavení |
+| čas | přístup na 24 hodin |
+| výstup | návrh opravy idempotence a kontrolní případ pro CI |
+| zavření | účet deaktivován, testovací token revokován, úkol vytvořen v backlogu |
+
+Tento postup je o něco méně pohodlný než poslat admin přístup. Zároveň ale zanechá lepší stopu, menší datový dopad a použitelný interní výsledek. A hlavně: když se stejný problém vrátí za měsíc, tým nemusí znovu improvizovat.
+
+### Checklist: Dočasný externí přístup
+
+- [ ] Je jasné, proč nestačí veřejný odkaz, ořezaný export nebo redigovaný screenshot.
+- [ ] Přístupová věta popisuje účel, rozsah, konec a zakázané akce.
+- [ ] Externista má vlastní identitu, ne sdílený účet.
+- [ ] Role je vybraná podle konkrétních schopností, ne podle názvu.
+- [ ] Přístup neobsahuje produkční osobní údaje, pokud nejsou nezbytné pro účel.
+- [ ] Export, pozvánky, integrace a změny konfigurace jsou výslovně povolené nebo zakázané.
+- [ ] Přístup má časové okno a interního vlastníka.
+- [ ] MFA nebo odpovídající ochrana účtu je zapnutá podle rizika.
+- [ ] Výstup práce se převádí do interního systému, ne zůstává jen u externisty.
+- [ ] Odebrání přístupu, tokenů, sdílených odkazů a dočasných kopií je součástí dokončení.
+- [ ] Záznam o zavření neobsahuje tajemství ani zbytečné osobní údaje.
+
+### Mini úkol
+
+Vyber jeden externí přístup, který dnes existuje v nástroji, repozitáři, analytice, CMS, helpdesku nebo billing systému. Napiš k němu přístupovou větu. Pokud ji neumíš napsat bez slov „všechno“, „admin“ nebo „pro jistotu“, přístup je moc široký. Udělej jednu malou opravu: nastav expiraci, změň roli na read-only, odeber export, nebo naplánuj konkrétní zavření.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -49254,6 +49410,7 @@ Vyber jeden export z posledních 30 dní a udělej k němu zavírací záznam o 
 
 ## Pracovní log
 
+- 2026-07-24: Doplněna příloha o dočasném externím přístupu bez sdíleného admina: rozhodování mezi exportem a přístupem, přístupová věta, role podle konkrétních schopností, zákaz sdílených účtů, časové okno, auditní minimum, zavření přístupu jako malý release, příklad diagnostiky webhooku, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro omezený externí přístup. Navázáno na existující zdroje OWASP Authorization a Evropské komise k minimalizaci osobních údajů; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
 - 2026-07-24: Doplněna příloha o uzavření jednorázového exportu bez zapomenuté kopie: zavření původního účelu, převod pracovního výsledku do interního systému, kontrola interních/přenosových/externích kopií, oddělení smazání dat od zachování rozhodnutí, zavírací záznam, rozpoznání opakovaného exportu jako procesu, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro uzavření exportu po dokončení práce. Bez nových aktuálních externích tvrzení, navázáno na existující části o jednorázových exportech, dočasných nástrojích, retenci, vendor exitu a privacy-first minimalizaci; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
 - 2026-07-23: Doplněna příloha o jednorázovém exportu pro externí pomoc bez ztráty kontroly: práce od konkrétní otázky místo posílání celého systému, datový ořez před přenosem, výběr kanálu podle citlivosti, exportní průvodka, oddělení pracovního výstupu od datové kopie, praktický příklad SEO auditu, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro kontrolované předání exportu externí pomoci. Bez nových aktuálních externích tvrzení, navázáno na existující části o dočasných nástrojích, dodavatelském registru, retenci, přístupech a privacy-first minimalizaci; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
 - 2026-07-23: Doplněna příloha o dočasném nástroji bez trvalého datového stínu: rozlišení jednorázové zkoušky, pomocného nástroje a nového dodavatele, věta účelu, datová hranice před prvním uploadem, karta jednorázového schválení, signály přechodu do produkční cesty, zavírací kontrola, praktický příklad, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro schvalování dočasných nástrojů bez stínových dodavatelů. Bez nových aktuálních externích tvrzení, navázáno na existující části o dodavatelském registru, vendor exitu, retenci a privacy-first minimalizaci; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
