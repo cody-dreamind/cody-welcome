@@ -135,6 +135,7 @@ Když se nechceš vracet do celé knihy, hledej konkrétní nástroj podle výst
 | Rozhodnout po opakované re-eskalaci, co změnit systémově | „opakovaná re-eskalace“, „externí pomoc se vrací“ nebo „strukturální rozhodnutí“ | rozhodovací karta, zda posílit interní schopnost, převést práci do dodavatelského režimu, zjednodušit produkt nebo ukončit daný závazek |
 | Posílit interní schopnost po opakované re-eskalaci | „interní schopnost“, „školení po externistovi“ nebo „capability karta“ | plán učení přes konkrétní práci, cvičení, runbook, hranice eskalace a důkaz samostatného zvládnutí |
 | Rozdělit interní schopnost mezi více lidí | „rotace vlastníka“, „zastupitelnost“ nebo „schopnost není hrdina“ | rotační karta se stálým vlastníkem kvality, druhým člověkem, cvičením, přístupovým limitem a stop pravidlem |
+| Připravit odchod nebo dlouhou nepřítomnost vlastníka schopnosti | „odchod vlastníka“, „ztráta vlastníka“ nebo „předávací okno“ | předávací okno s minimem nových přístupů, rozhodnutím co zastavit, co předat a co ověřit před odchodem |
 
 Pravidlo pro práci s rejstříkem: otevři maximálně tři nalezené části, vyber jednu a zapiš výstup. Pokud po deseti minutách pořád skáčeš mezi odkazy, vrať se k tabulce „Kudy začít podle aktuální bolesti“ a zúž problém. E-book není buffet. Teda je, ale bez talíře si stejně odneseš jen chaos.
 
@@ -50535,6 +50536,133 @@ Výsledek: zástupce nezískal širší přístup k interním materiálům. Nau�
 
 Vyber jednu interní schopnost, kterou dnes umí hlavně jeden člověk. Napiš rotační kartu a domluv nejmenší scénář, který může do týdne provést druhý člověk bez nového produkčního exportu a bez plošného admin přístupu. Na konec doplň větu: „Rotaci zastavíme a vrátíme k review, pokud ___.“ Pokud tu větu neumíš vyplnit, ještě nevíš, kde končí bezpečné učení a začíná riziková improvizace.
 
+## Příloha: Odchod vlastníka interní schopnosti bez panického předání
+
+Rotace pomáhá, dokud je vlastník kvality pořád nablízku. Jenže lidé mění role, odcházejí, mají dovolenou, nemoc, rodičovskou, nebo prostě potřebují nebýt permanentní záloha pro každý zvláštní případ. Privacy-first provoz se nepozná podle toho, že nikdo nikdy neodejde. Pozná se podle toho, že odchod jednoho člověka nezpůsobí tiché rozdání adminů, kopírování produkčních dat a zoufalé lovení znalostí ve starých chatech.
+
+Odchod vlastníka interní schopnosti není jen HR událost. Je to provozní změna. Má dopad na přístupy, veřejné sliby, zákaznickou podporu, dokumentaci, dodavatele, interní rutiny a schopnost týmu udělat další bezpečný krok bez osobního výkladu.
+
+> Codyho komentář: Nejhorší předání je „kdyby něco, napište mi“. To není předání. To je jen vzdálený support v mikině s nápisem „snad to nebude hořet“.
+
+### Začni předávacím oknem
+
+Nečekej na poslední den. Jakmile víš, že vlastník důležité schopnosti odchází, mění roli nebo bude déle nedostupný, otevři krátké předávací okno. Jeho účel není zachránit celou historii týmu. Účel je rozhodnout, které práce musí tým zvládnout bez původního člověka v prvních 30 až 60 dnech.
+
+Předávací okno má mít pět výstupů:
+
+| Výstup | Otázka |
+| --- | --- |
+| seznam kritických schopností | Co se bez vlastníka může zaseknout nebo pokazit? |
+| nový vlastník kvality | Kdo drží pravidla po odchodu? |
+| provozní zástupce | Kdo umí udělat běžný scénář podle runbooku? |
+| stop seznam | Co dočasně neděláme, dokud nemáme jistotu? |
+| zavírací kontrola | Jak ověříme, že přístupy, data a veřejné sliby sedí po změně? |
+
+Dobré předávací okno je krátké a konkrétní. Pokud z něj vznikne desetidílný vzdělávací seriál, pravděpodobně se snažíš dohnat roky neviditelného dluhu najednou. Lepší je vybrat tři nejrizikovější schopnosti a u každé udělat použitelný přenos.
+
+### Rozliš co předat, zastavit a eskalovat
+
+Ne všechno se má převádět. Některé práce je lepší dočasně zastavit, zúžit nebo poslat na externí review, než předstírat, že je tým zvládne za dva dny školení.
+
+Použij jednoduché dělení:
+
+| Rozhodnutí | Kdy ho použít | Příklad |
+| --- | --- | --- |
+| Předat | práce je opakovaná, popsatelná a má jasné ověření | měsíční revize trust odpovědí |
+| Zúžit | práce je užitečná, ale riziková v plném rozsahu | support smí připravit návrh, publikace jde přes review |
+| Zastavit | práce není nutná pro aktuální provoz a má vysoké riziko chyby | experimentální změna billing pravidel |
+| Eskalovat | práce je vzácná, složitá nebo právně/provozně citlivá | změna datové rezidence nebo retenčního slibu |
+| Automatizovat později | ruční práce je opakovaná, ale teď není čas ji dobře předělat | ruční kontrola starých externích přístupů |
+
+Toto rozhodnutí zapiš. Ne do soukromé poznámky odcházejícího člověka, ale do místa, kde tým drží rozhodovací log nebo provozní dokumentaci.
+
+### Nepředávej historii, předávej rozhodovací hrany
+
+Předávání často sklouzne k dlouhému vyprávění: proč se kdysi vybral nástroj, kdo co chtěl, proč je integrace trochu divná a která výjimka se řešila na jaře. Kontext je užitečný, ale nový vlastník hlavně potřebuje vědět, kde jsou hrany rozhodování.
+
+U každé schopnosti doplň:
+
+- kdy je běžná změna bezpečná,
+- kdy se musí zastavit a vyžádat review,
+- která data se nesmí kopírovat do podpory, chatu, AI nástroje nebo externího exportu,
+- které veřejné texty se musí aktualizovat, když se schopnost změní,
+- které zákaznické situace jsou citlivé a nepatří do improvizace,
+- jak vypadá správně dokončený zásah.
+
+Příklad: U trust odpovědí není nejdůležitější seznam všech minulých zákaznických dotazů. Důležitější je vědět, že běžnou formulaci může tým upravit podle veřejného trust přehledu, ale změna subdodavatele, datové lokality, retence nebo právního slibu jde vždy přes vlastníka kvality a případně právní review.
+
+### Přístupy měň jako release
+
+Odchod vlastníka je přesně ten moment, kdy týmy často udělají největší datový nepořádek: rychle přidají admina, zapomenou zavřít staré tokeny, nechají osobní účty v integracích a zkopírují „pro jistotu“ export na sdílený disk.
+
+Změnu přístupů udělej jako malý release:
+
+| Krok | Kontrola |
+| --- | --- |
+| před změnou | kdo má dnes přístup, proč a přes jaké role |
+| převod | kdo dostane nejnižší potřebnou roli a na jaký účel |
+| dočasné výjimky | kdy končí a kdo je zavře |
+| servisní vazby | jestli něco neběží pod osobním účtem odcházejícího člověka |
+| tokeny a klíče | co se rotuje, ruší nebo převádí na servisní účet |
+| dokumentace | kde je zapsaný nový vlastník a nový revizní rytmus |
+| po změně | test, že nový vlastník umí udělat běžný scénář |
+
+Privacy-first pravidlo je jednoduché: nový vlastník má dostat schopnost dělat práci, ne historický batoh všech oprávnění původního člověka.
+
+### Ověř předání jedním reálným krokem
+
+Předání není hotové schůzkou. Je hotové, když nový vlastník nebo zástupce provede malý reálný krok a někdo ověří výsledek.
+
+Dobré ověřovací kroky:
+
+- aktualizovat jednu interní odpověď v odpovědní knihovně,
+- projít jeden runbook nanečisto a doplnit chybějící ověření,
+- uzavřít jeden starý dočasný přístup,
+- připravit jednu release kontrolu pro převzatou oblast,
+- zkontrolovat jeden veřejný slib proti aktuálnímu stavu produktu,
+- opravit jednu šablonu support odpovědi tak, aby neodkazovala na odcházejícího člověka.
+
+Nevybírej krok, který vyžaduje nový produkční export nebo plošný admin přístup. Cílem je ověřit přenos schopnosti, ne vyrobit vedlejší bezpečnostní problém.
+
+### Příklad: Odchází vlastník billing pravidel
+
+Malý SaaS tým měl jednoho člověka, který rozuměl billing pravidlům, limitům plánů, výjimkám pro pilotní zákazníky a webhookům z platební brány. Před odchodem bylo lákavé natočit dlouhý walkthrough a dát druhému člověku plný přístup „pro jistotu“.
+
+Lepší předávací karta:
+
+| Pole | Zápis |
+| --- | --- |
+| Schopnost | správa běžných billing limitů a odpovědí na pricing výjimky |
+| Nový vlastník kvality | product owner pro monetizaci |
+| Provozní zástupce | support lead pro běžné dotazy |
+| Předat | změna textu limitu, kontrola entitlementu, uzavření výjimky po konci pilotu |
+| Zúžit | support připraví návrh odpovědi, ale nemění billing konfiguraci |
+| Zastavit | nové ruční slevové výjimky bez rozhodnutí produktu |
+| Eskalovat | změna platebního webhooku, refund pravidel nebo fakturační integrace |
+| Datová hranice | žádné exporty fakturačních údajů do tabulek pro předání |
+| Přístupová hranice | support vidí stav plánu, ne platební metody a fakturační historii mimo nutný rozsah |
+| Ověření | nový vlastník upraví jednu testovací billing výjimku ve stagingu a aktualizuje support šablonu |
+| Zavření | staré osobní tokeny zrušeny, integrace běží pod servisní identitou, dokumentace ukazuje nového vlastníka |
+
+Výsledek není dokonalá znalost všech historických výjimek. Výsledek je bezpečná schopnost řešit běžný provoz a jasně poznat, kdy se má práce zastavit.
+
+### Checklist: Odchod vlastníka interní schopnosti
+
+- [ ] Vybral jsem kritické schopnosti, které se nesmí ztratit s jedním člověkem.
+- [ ] U každé schopnosti je nový vlastník kvality nebo jasná eskalační cesta.
+- [ ] Rozhodl jsem, co se předává, zúží, dočasně zastaví nebo eskaluje.
+- [ ] Předání popisuje rozhodovací hrany, ne jen historii a osobní triky.
+- [ ] Přístupy se převádějí podle nejmenší potřebné role.
+- [ ] Osobní účty, tokeny, automatizace a integrace původního vlastníka jsou zkontrolované.
+- [ ] Předání nevyžaduje nový produkční export jen kvůli školení.
+- [ ] Nový vlastník provedl jeden malý reálný nebo stagingový krok.
+- [ ] Veřejné texty, trust odpovědi, support šablony a runbooky ukazují nového vlastníka nebo nový postup.
+- [ ] Existuje stop seznam pro práce, které tým dočasně nedělá bez review.
+
+### Mini úkol
+
+Vyber jednu schopnost, která dnes stojí na konkrétním člověku. Napiš předávací okno na jednu stránku: co předat, co zúžit, co zastavit, kdo je nový vlastník kvality a jaký malý krok ověří převzetí. Přidej větu „Kvůli předání nesmíme vytvořit nový export, nový admin přístup ani nový nezdokumentovaný token pro ___.“ Pokud se do té věty nevejde konkrétní riziko, ještě nevíš, kde by předání mohlo poškodit privacy-first provoz.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -50728,6 +50856,7 @@ Vyber jednu interní schopnost, kterou dnes umí hlavně jeden člověk. Napiš 
 
 ## Pracovní log
 
+- 2026-07-24: Doplněna příloha o odchodu vlastníka interní schopnosti bez panického předání: předávací okno, rozhodnutí co předat/zúžit/zastavit/eskalovat, předání rozhodovacích hran místo historie, převod přístupů jako malý release, ověření převzetí jedním reálným krokem, příklad odchodu vlastníka billing pravidel, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro odchod nebo dlouhou nepřítomnost vlastníka schopnosti. Bez nových aktuálních externích tvrzení, navázáno na existující části o rotaci vlastníka, capability kartách, přístupech, runboocích a privacy-first minimalizaci; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
 - 2026-07-24: Doplněna příloha o rotaci vlastníka interní schopnosti bez rozmazané odpovědnosti: rozlišení stálého vlastníka kvality a provozního zástupce, výběr schopností vhodných pro zastupitelnost, rotační karta, malé cvičení bez produkčních exportů, přístupová omezení, praktický rytmus rotace, příklad zastupitelnosti pro trust odpovědi, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro rozdělení interní schopnosti mezi více lidí. Bez nových aktuálních externích tvrzení, navázáno na existující části o capability kartách, převzetí práce, přístupech, odpovědní knihovně a privacy-first minimalizaci; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
 - 2026-07-24: Doplněna příloha o interní schopnosti po opakované re-eskalaci bez školícího divadla: převod systémového rozhodnutí na konkrétní capability kartu, učení přes práci místo prezentací, rozlišení schopnosti/rutiny/odpovědnosti, eskalační hranice, chudé důkazy samostatnosti, příklad interního billing review, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro posílení interní schopnosti po opakované externí pomoci. Bez nových aktuálních externích tvrzení, navázáno na existující části o re-eskalaci, převzetí práce, přístupech, dodavatelském režimu a privacy-first minimalizaci; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
 - 2026-07-24: Doplněna příloha o opakované re-eskalaci externí pomoci bez návratu do mlhy: rozlišení opakované pomoci jako systémového signálu, hledání vzoru bez osobního obviňování, čtyři možné odpovědi po třetím návratu, rozhodovací karta, kontrola produktových slibů, chudé provozní měření změny, příklad billing výjimek, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro strukturální rozhodnutí po opakované re-eskalaci. Bez nových aktuálních externích tvrzení, navázáno na existující části o re-entry briefu, dlouhodobé údržbě, dodavatelském režimu, přístupových hranicích a privacy-first minimalizaci; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
