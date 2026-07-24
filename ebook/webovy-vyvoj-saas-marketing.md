@@ -141,6 +141,7 @@ Když se nechceš vracet do celé knihy, hledej konkrétní nástroj podle výst
 | Vyhodnotit první změnu po převzetí schopnosti | „vyhodnocení první změny“, „změnový review“ nebo „první změna hotovo“ | krátké review dopadu, datové stopy, přístupů, dokumentace a dalšího kroku po první změně |
 | Převést první úspěšnou změnu do běžné rutiny | „běžná rutina po první změně“, „standardní režim“ nebo „z prvního úspěchu rutina“ | rutina se spouštěčem, vlastníkem, hranicí dat, přístupovou hranicí, revizí a stop pravidlem |
 | Zjednodušit nebo ukončit rutinu po několika cyklech | „retence rutiny“, „rutina po třech cyklech“ nebo „procesní sediment“ | rozhodnutí ponechat, zúžit, sloučit, automatizovat opatrně nebo zrušit opakovanou práci |
+| Automatizovat rutinu bez skrytého dozoru | „automatizace rutiny“, „automatizační karta“ nebo „vypínač automatizace“ | malý automatizační návrh s účelem, vstupy, výstupem, vlastníkem, logy, ručním rozhodnutím a datem revize |
 
 Pravidlo pro práci s rejstříkem: otevři maximálně tři nalezené části, vyber jednu a zapiš výstup. Pokud po deseti minutách pořád skáčeš mezi odkazy, vrať se k tabulce „Kudy začít podle aktuální bolesti“ a zúž problém. E-book není buffet. Teda je, ale bez talíře si stejně odneseš jen chaos.
 
@@ -51339,6 +51340,159 @@ Výsledek nebyl „pokračujeme jako dřív“. Tým zrušil měsíční export 
 
 Vyber jednu rutinu, která běží alespoň tři cykly. Sečti poslední výstupy a napiš jedno rozhodnutí: ponechat, zúžit, sloučit, automatizovat opatrně nebo zrušit. Na konec doplň větu: „Tuhle rutinu znovu otevřeme, pokud ___.“ Pokud věta nejde napsat, rutina pravděpodobně nemá jasnou hranici. A to je přesně důvod ji revidovat.
 
+## Příloha: Automatizace rutiny bez skrytého dozoru
+
+Automatizace je dobrý sluha ve chvíli, kdy už přesně víš, co se má opakovaně kontrolovat, jaký výstup vzniká a kdo podle něj rozhoduje. Je špatný pán ve chvíli, kdy jen převlékne nejasný proces do skriptu, webhooku nebo AI asistenta a přidá mu nové přístupy, logy, tokeny a výjimky.
+
+Privacy-first automatizace nezačíná otázkou „čím to zautomatizujeme?“. Začíná otázkou: „Jaký ruční úsudek chceme ušetřit a jaký ruční úsudek musí zůstat člověku?“
+
+Pokud tuto hranici neumíš napsat jednou větou, automatizaci zatím nestav. Ne proto, že by automatizace byla zlo. Protože nejasná automatizace je jen rychlejší nepořádek s hezčím logem.
+
+> Codyho komentář: Automatizace má trochu talent tvářit se jako pokrok i tehdy, když jen schová odpovědnost pod koberec. Když něco běží samo, tým snadno přestane vědět, proč to běží. A pak už nejsi majitel procesu, ale jeho domovník.
+
+### Automatizuj rozhodovací vstup, ne odpovědnost
+
+Nejbezpečnější automatizace připraví podklad, upozorní na odchylku nebo zkontroluje jednoduché pravidlo. Rozhodnutí nechá člověku, hlavně tam, kde se mění data, přístupy, zákaznická komunikace nebo veřejný slib.
+
+Dobré kandidáty na automatizaci:
+
+- kontrola, že veřejná stránka vrací očekávaný HTTP stav,
+- upozornění na chybějícího vlastníka dokumentu,
+- nalezení starého odkazu v šablonách,
+- připomenutí revize dodavatele podle data ve vendor kartě,
+- kontrola, že nová stránka má title, meta description, canonical a RSS odkazy,
+- porovnání seznamu aktivních integrací s dodavatelským registrem,
+- upozornění, že rutina neměla tři cykly žádný výstup.
+
+Rizikovější kandidáty nech člověku:
+
+- automatické mazání zákaznických dat bez předchozího rozhodnutí,
+- automatické zavírání účtů nebo přístupů bez ověření dopadu,
+- automatické odpovědi na právní nebo bezpečnostní dotazy,
+- automatické přesouvání leadů mezi obchodními stavy podle skrytého skóre,
+- automatické publikování privacy nebo trust tvrzení,
+- automatické posílání exportů mimo vlastní systém.
+
+Pravidlo: automatizace může říct „tady je problém“. Nemá potichu změnit realitu tam, kde by změna překvapila zákazníka, tým nebo audit.
+
+### Napiš automatizační kartu
+
+Každá automatizace, i malý skript, má mít vlastní kartu. Ne velkou dokumentaci. Jen dost informací, aby ji za tři měsíce někdo uměl vypnout, opravit nebo zrušit bez archeologického výzkumu.
+
+Minimální karta:
+
+| Pole | Otázka | Příklad |
+| --- | --- | --- |
+| Účel | Jaké rozhodnutí nebo riziko automatizace podporuje? | upozornit na staré trust odpovědi bez review |
+| Spouštěč | Kdy běží? | každý pátek v 8:00 nebo při změně souboru s odpověďmi |
+| Vstupy | Co čte? | jen veřejné Markdown soubory a interní seznam vlastníků |
+| Výstup | Co vytvoří? | jednu položku v review seznamu, ne nový export |
+| Vlastník | Kdo odpovídá za smysl automatizace? | produktový vlastník trust obsahu |
+| Rozhodnutí člověka | Co automatizace nesmí udělat sama? | nesmí upravit veřejnou odpověď ani poslat zákazníkovi zprávu |
+| Data a logy | Jaká stopa vzniká a jak dlouho žije? | agregovaný běhový log na 30 dní, bez obsahu odpovědí |
+| Vypínač | Jak se automatizace zastaví? | vypnutí plánované úlohy a smazání tokenu |
+| Revize | Kdy ověříme, jestli má dál běžet? | po třech pátečních bězích bez nálezu |
+
+Bez karty automatizace snadno skončí jako „někde něco běží“. To je technicky romantické, provozně trochu peklo.
+
+### Omez vstupy dřív než tokeny
+
+Nejčastější privacy chyba u automatizace není samotný skript. Je to rozsah dat, který mu dáš k dispozici, protože je to pohodlné.
+
+Před prvním během omez:
+
+- systémy, do kterých automatizace vůbec vidí,
+- konkrétní složky, tabulky, endpointy nebo typy záznamů,
+- rozsah práv tokenu,
+- délku života tokenu,
+- místo, kam se ukládá výstup,
+- obsah logů,
+- počet lidí, kteří výstup uvidí.
+
+Když automatizace kontroluje veřejný obsah, nemá potřebovat CRM. Když kontroluje revizní data dokumentů, nemá potřebovat produkční databázi. Když hlídá dostupnost stránky, nemá ukládat IP adresy návštěvníků. Zní to nudně, ale přesně tahle nuda chrání provoz před zbytečným vysavačem dat.
+
+Praktická věta:
+
+„Automatizace smí číst pouze ___, vytváří pouze ___ a její výstup používá ___ k rozhodnutí ___.“
+
+Pokud do věty potřebuješ napsat „pro jistotu všechno“, vrať se o krok zpět.
+
+### Navrhni selhání jako běžný stav
+
+Automatizace někdy selže. API vrátí chybu, token expiruje, stránka změní strukturu, dodavatel změní limit, skript doběhne napůl. To není mimořádná událost. To je normální provoz.
+
+Proto si předem napiš:
+
+- co se stane, když automatizace neběží,
+- kdo dostane upozornění,
+- jak poznáš falešný poplach,
+- jak dlouho může být kontrola vypnutá,
+- co se nesmí stát automaticky při chybě,
+- kde je poslední ruční postup.
+
+U privacy-first provozu je důležité hlavně poslední omezení: chyba automatizace nesmí vést k většímu sběru dat „pro jistotu“. Když healthcheck selže, neopravuj to tím, že začneš ukládat celé odpovědi, hlavičky, tokeny nebo osobní obsah požadavků. Nejprve zúž otázku, kterou potřebuješ zodpovědět.
+
+### Měř automatizaci podle snížené nejistoty
+
+Automatizace není dobrá proto, že běží. Je dobrá tehdy, když sníží nejistotu, zkrátí reakci nebo odstraní mechanickou práci bez růstu datové stopy.
+
+Po několika bězích si odpověz:
+
+| Otázka | Dobré znamení | Varování |
+| --- | --- | --- |
+| Přinesla rozhodnutí? | našla konkrétní nález, zavřela kontrolu nebo potvrdila stav | posílá pravidelný šum bez akce |
+| Ušetřila ruční práci? | nahradila mechanické hledání, ne úsudek | tým stejně všechno znovu kontroluje ručně |
+| Zmenšila riziko? | odhalila problém dřív než zákazník nebo audit | jen přidala další dashboard |
+| Udržela datovou hranici? | čte minimum a loguje minimum | časem přibývají další oprávnění |
+| Má vlastníka? | někdo umí říct, proč běží | nikdo si není jistý, kdo ji vypne |
+
+Pokud automatizace posílá upozornění, která lidé ignorují, není to automatizace. Je to generátor pocitu viny. Buď zúž signál, změň frekvenci, nebo ji vypni.
+
+### Příklad: Automatická kontrola trust odpovědí
+
+Tým má odpovědní knihovnu pro bezpečnostní a privacy dotazy zákazníků. Po několika měsících zjistí, že ruční měsíční kontrola všech odpovědí je příliš široká. Většina položek se nemění, ale občas po release zůstane stará odpověď u exportu dat, retence nebo subdodavatelů.
+
+Špatné řešení: napojit AI asistenta na celou interní dokumentaci, CRM a support historii, aby „sám poznal zastaralé odpovědi“.
+
+Lepší řešení: malá automatizace čte jen veřejnou a interně schválenou knihovnu odpovědí, seznam release poznámek a metadata `last_reviewed`. Jednou týdně vytvoří seznam odpovědí, které splňují aspoň jednu podmínku:
+
+- souvisí se změněnou funkcí,
+- mají review starší než domluvené okno,
+- odkazují na dodavatele nebo datovou cestu, která se změnila,
+- nemají vlastníka.
+
+Automatizace sama nepřepisuje text. Jen vytvoří review položky.
+
+Karta:
+
+| Pole | Rozhodnutí |
+| --- | --- |
+| Účel | najít odpovědi, které mohou být zastaralé po release |
+| Vstupy | odpovědní knihovna, release poznámky, seznam dodavatelů bez zákaznických dat |
+| Výstup | review seznam s odkazem na odpověď a důvodem kontroly |
+| Zakázáno | automaticky měnit veřejný text, posílat zákazníkům odpovědi, číst CRM poznámky |
+| Log | počet zkontrolovaných položek, počet nálezů, chyba běhu; bez obsahu zákaznických dotazů |
+| Revize | po třech týdnech zhodnotit poměr nálezů a šumu |
+
+Po třech týdnech tým zjistí, že automatizace našla dvě skutečně zastaralé odpovědi a pět falešných poplachů kvůli příliš širokému slovu „export“. Zúží pravidlo na konkrétní typy exportu a ponechá člověku rozhodnutí, jestli text opravdu změnit. To je dobrá automatizace: menší, přesnější a pořád pod kontrolou.
+
+### Checklist: Automatizace rutiny
+
+- [ ] Automatizujeme jen rutinu, která má stále jasný účel.
+- [ ] Automatizace připravuje vstup nebo upozornění, nepřebírá citlivé rozhodnutí.
+- [ ] Existuje automatizační karta s účelem, spouštěčem, vstupy, výstupem, vlastníkem, logy, vypínačem a revizí.
+- [ ] Vstupy jsou omezené před prvním tokenem nebo integrací.
+- [ ] Token má nejmenší praktické oprávnění a známý konec životnosti.
+- [ ] Logy neobsahují osobní údaje, tajemství, celé odpovědi ani zbytečné exporty.
+- [ ] Selhání automatizace má ruční postup a nesmí spustit větší sběr dat.
+- [ ] Upozornění má vlastníka a jasnou akci; šum se zúží nebo vypne.
+- [ ] Po několika bězích hodnotíme rozhodnutí, nálezy, úsporu práce a datovou stopu.
+- [ ] Automatizace má datum revize a praktický vypínač. Ano, i když je „jen malá“.
+
+### Mini úkol
+
+Vyber jednu rutinu, kterou chceš automatizovat. Neotevírej ještě editor ani integrační nástroj. Nejdřív napiš automatizační kartu v devíti polích: účel, spouštěč, vstupy, výstup, vlastník, lidské rozhodnutí, data a logy, vypínač, revize. Pokud neumíš vyplnit vstupy nebo vypínač, automatizace není připravená. To není brzda. To je prevence malého provozního rizika s API tokenem.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -51532,6 +51686,7 @@ Vyber jednu rutinu, která běží alespoň tři cykly. Sečti poslední výstup
 
 ## Pracovní log
 
+- 2026-07-24: Doplněna příloha o automatizaci rutiny bez skrytého dozoru: rozlišení automatizace rozhodovacího vstupu a odpovědnosti, automatizační karta, omezení vstupů a tokenů, návrh selhání jako běžného provozního stavu, měření automatizace podle snížené nejistoty, příklad kontroly trust odpovědí, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro automatizaci rutiny. Bez nových aktuálních externích tvrzení, navázáno na části o retenci rutiny, běžných rutinách, trust odpovědích, přístupech, logování a privacy-first minimalizaci; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
 - 2026-07-24: Doplněna příloha o retenci rutiny bez procesního sedimentu: revize rutiny po několika cyklech, hodnocení výstupů místo odškrtávání, rozhodnutí ponechat/zúžit/sloučit/automatizovat opatrně/zrušit, opatrnost před automatizací z nudy, úklid stop po zrušené rutině, příklad měsíční kontroly support šablon, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro zjednodušení nebo ukončení rutiny po několika cyklech. Bez nových aktuálních externích tvrzení, navázáno na části o převodu první změny do běžné rutiny, přístupových hranicích, datové retenci a privacy-first minimalizaci; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
 - 2026-07-24: Doplněna příloha o převodu první změny do běžné rutiny bez růstu neviditelné práce: rozhodnutí, kdy úspěšnou první změnu opravdu opakovat, rutinní karta, úklid dočasných pojistek, rozhodovací výstupy rutiny, řízené stárnutí rutiny, příklad trust odpovědí, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro běžnou rutinu po první změně. Bez nových aktuálních externích tvrzení, navázáno na části o vyhodnocení první změny, trust odpovědích, přístupech, datových hranicích a privacy-first minimalizaci; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
 - 2026-07-24: Doplněna příloha o vyhodnocení první změny po převzetí schopnosti bez měření ega: návrat k původní změnové kartě, oddělení dopadu od aktivity, kontrola nové datové a přístupové stopy, rozhodnutí o dalším stavu, aktualizace zdroje pravdy, příklad trust odpovědí, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro vyhodnocení první změny po převzetí. Bez nových aktuálních externích tvrzení, navázáno na části o první změně po převzetí, trust odpovědích, přístupech, datové mapě a privacy-first minimalizaci; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
