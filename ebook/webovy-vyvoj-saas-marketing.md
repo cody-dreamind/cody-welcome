@@ -133,6 +133,7 @@ Když se nechceš vracet do celé knihy, hledej konkrétní nástroj podle výst
 | Udržet převzatou práci dlouhodobě bez návratu závislosti | „dlouhodobá údržba po převzetí“, „měsíční revize převzaté práce“ nebo „interní vlastnictví“ | měsíční údržbová karta, jasný vlastník, běžný revizní rytmus a rozhodnutí, kdy se má znovu zapojit externí pomoc |
 | Znovu zapojit externí pomoc bez ztráty vlastnictví | „re-eskalace externí pomoci“, „návrat externisty“ nebo „externí pomoc znovu“ | re-entry brief s důvodem, hranicí práce, omezeným přístupem, předávacím výstupem a novým zavíracím kritériem |
 | Rozhodnout po opakované re-eskalaci, co změnit systémově | „opakovaná re-eskalace“, „externí pomoc se vrací“ nebo „strukturální rozhodnutí“ | rozhodovací karta, zda posílit interní schopnost, převést práci do dodavatelského režimu, zjednodušit produkt nebo ukončit daný závazek |
+| Posílit interní schopnost po opakované re-eskalaci | „interní schopnost“, „školení po externistovi“ nebo „capability karta“ | plán učení přes konkrétní práci, cvičení, runbook, hranice eskalace a důkaz samostatného zvládnutí |
 
 Pravidlo pro práci s rejstříkem: otevři maximálně tři nalezené části, vyber jednu a zapiš výstup. Pokud po deseti minutách pořád skáčeš mezi odkazy, vrať se k tabulce „Kudy začít podle aktuální bolesti“ a zúž problém. E-book není buffet. Teda je, ale bez talíře si stejně odneseš jen chaos.
 
@@ -50262,6 +50263,145 @@ Výsledek: tým zruší dvě staré typy výjimek pro nové smlouvy, přepíše 
 
 Najdi jednu oblast, kde se externí pomoc za poslední období vrátila víc než jednou: billing, onboarding, analytiku, SEO, bezpečnostní odpovědi, integrace nebo obsah. Napiš rozhodovací kartu po třetím návratu. Vyber jednu hlavní odpověď a doplň stop pravidlo ve tvaru: „Pokud se do ___ stane ___, změníme režim na ___.“ Bez stop pravidla máš jen další pokus s lepším názvem.
 
+## Příloha: Interní schopnost po opakované re-eskalaci bez školícího divadla
+
+Když po opakované re-eskalaci vybereš odpověď „posílit interní schopnost“, nestačí objednat školení, založit wiki stránku a doufat, že příště už to tým nějak zvládne. Interní schopnost není znalost uložená v dokumentu. Je to opakovatelná práce, kterou konkrétní člověk nebo tým umí provést bez otevření zbytečných přístupů, bez exportu celého systému a bez volání stejné externí pomoci kvůli první nejistotě.
+
+Cílem není udělat ze všech specialisty na všechno. Cílem je dostat jednu důležitou schopnost na úroveň, kdy tým umí poznat běžný případ, provést bezpečnou změnu, ověřit výsledek, vrátit se zpět a včas rozpoznat hranici, za kterou externí pomoc smysl dává.
+
+> Codyho komentář: Školení bez následné práce je firemní verze nákupu běžeckých bot v lednu. Pocit výborný, dopad záleží na tom, jestli v nich někdo skutečně běžel.
+
+### Začni schopností, ne tématem
+
+Špatné zadání zní: „Musíme se naučit billing.“ To je moc široké. Lepší zadání je: „Produktový tým musí umět bezpečně změnit limit plánu, otestovat webhook dopad a přepsat support odpověď bez externího zásahu.“
+
+Schopnost popiš jako pracovní větu:
+
+| Pole | Otázka |
+| --- | --- |
+| Situace | kdy schopnost potřebujeme |
+| Akce | co má tým umět udělat |
+| Hranice | co tým dělat nemá |
+| Ověření | jak poznáme, že výsledek funguje |
+| Privacy dopad | jaká data, přístupy, exporty nebo logy se při práci objeví |
+| Eskalační hranice | kdy se má znovu volat externí pomoc |
+
+Příklad pracovní věty: „Support a produkt umí samostatně vyhodnotit běžný dotaz na změnu tarifu, ověřit ho proti veřejnému pricingu a existujícím výjimkám, upravit odpověď v knihovně a otevřít technickou změnu jen tehdy, když se mění fakturační logika.“
+
+To už je schopnost. Má pracovní situaci, hranici i dopad na data.
+
+### Udělej capability kartu
+
+Capability karta je malý provozní dokument. Není to kurz, není to certifikát, není to dvouhodinová nahrávka hovoru s externistou. Je to dohoda, co má tým umět, kdo za to ručí a jak se pozná, že schopnost přešla z externí pomoci do běžné práce.
+
+Minimální karta:
+
+| Pole | Zápis |
+| --- | --- |
+| Název schopnosti | konkrétní pracovní schopnost, ne obecné téma |
+| Proč teď | jaký opakovaný vzor nebo riziko ji vyvolal |
+| Vlastník | kdo drží kvalitu schopnosti |
+| Praktický postup | odkaz na runbook, checklist nebo rozhodovací strom |
+| Cvičný scénář | jeden bezpečný úkol na demo nebo staging datech |
+| Běžný scénář | první reálná změna, kterou tým provede s dohledem nebo review |
+| Hranice | co pořád patří externistovi, dodavateli nebo seniornímu review |
+| Datová pravidla | která data se nesmí exportovat, kopírovat ani posílat do pomocných nástrojů |
+| Důkaz samostatnosti | co se musí stát bez externího zásahu |
+| Revize | kdy kartu zkontrolujeme nebo smažeme |
+
+Karta musí být krátká. Pokud schopnost nejde popsat na jednu až dvě obrazovky, pravděpodobně se pokoušíš jednou kartou nahradit celý týmový playbook.
+
+### Uč přes práci, ne přes prezentaci
+
+Nejúčinnější převod schopnosti má tři kroky:
+
+1. Externista ukáže postup na bezpečném scénáři a nahlas vysvětlí rozhodnutí.
+2. Interní člověk provede podobný scénář s externistou jako recenzentem.
+3. Interní člověk provede první běžný případ bez externího zásahu a výsledek se ověří podle předem daného checklistu.
+
+Tento rytmus chrání před dvěma iluzemi. První iluze je „viděl jsem to, takže to umím“. Druhá je „máme dokumentaci, takže je to předané“. U provozních schopností je důkazem až provedená práce. Ideálně malá, vratná a bez produkčních dat navíc.
+
+U privacy-first SaaS si zvlášť hlídej, aby cvičný scénář nebyl kopie produkce. Lepší je vytvořit demo nebo staging data podle konkrétní situace. Pokud výjimečně pracuješ s reálnými daty, musí být jasné proč, kdo k nim má přístup, jak dlouho existuje kopie a kdy se smaže. Bez téhle věty se z učení stává datový nepořádek s lepším názvem.
+
+### Rozliš schopnost, rutinu a odpovědnost
+
+Tým může schopnost technicky zvládnout, ale pořád nemusí být jasné, kdo ji má držet. Proto odděl tři věci:
+
+| Vrstva | Co znamená | Typická chyba |
+| --- | --- | --- |
+| Schopnost | umíme bezpečně provést práci | znalost zůstane u jednoho člověka |
+| Rutina | práce má rytmus, checklist a místo v běžném provozu | udělá se jednou a pak zmizí |
+| Odpovědnost | existuje vlastník kvality a změn pravidel | všichni „o tom ví“, nikdo nerozhoduje |
+
+Když chybí schopnost, pomůže cvičení. Když chybí rutina, pomůže kalendář, review nebo release checklist. Když chybí odpovědnost, pomůže jméno vlastníka a hranice rozhodování. Míchat tyhle tři problémy dohromady je rychlá cesta k dalšímu „radši zavoláme externistu“.
+
+### Nastav hranici nové eskalace
+
+Posílení interní schopnosti neznamená zákaz externí pomoci. Znamená to, že externí pomoc má nový, přesnější vstup. Interní tým musí umět poznat, kdy jde o běžný případ a kdy už se mění riziko.
+
+Dobré eskalační hranice:
+
+- změna se dotýká produkčních dat ve větším rozsahu,
+- výsledek může ovlivnit fakturaci, právní slib nebo bezpečnostní kontrolu,
+- chybí testovací scénář pro dopad na zákazníka,
+- je potřeba nová integrace, nový dodavatel nebo nový typ exportu,
+- tým narazil na případ, který runbook výslovně neřeší,
+- změna by vyžadovala trvalé rozšíření oprávnění.
+
+Špatná eskalační hranice: „Když si nejsme jistí.“ Nejistota je normální. Nejdřív ji přepiš na otázku. Pokud otázka míří na chybějící rozhodnutí nebo zvýšené riziko, eskaluj. Pokud míří na běžný krok v runbooku, použij interní postup.
+
+### Měř schopnost chudými důkazy
+
+Nepotřebuješ dashboard školení, sledování práce lidí ani časové záznamy po minutách. Potřebuješ několik důkazů, že schopnost existuje v provozu:
+
+| Důkaz | Co ukazuje |
+| --- | --- |
+| první samostatně provedená změna | tým umí schopnost použít mimo cvičení |
+| opravený runbook po reálném případu | učení se propsalo do systému |
+| zavřený dočasný přístup externisty | závislost se skutečně zmenšila |
+| méně ručních výjimek nebo support ping-pongu | schopnost zlepšila práci, ne jen náladu |
+| jasně popsaná eskalační hranice | externí pomoc se vrací jen na správné problémy |
+
+Po dvou běžných cyklech si polož jednoduchou otázku: „Udělali jsme další podobnou práci bez stejné re-eskalace?“ Pokud ano, schopnost pravděpodobně roste. Pokud ne, nepiš další školení. Vrať se k rozhodovací kartě a zvaž, jestli problém nebyl ve složitosti produktu, slabém vlastnictví nebo v tom, že práce měla být od začátku řízený dodavatelský režim.
+
+### Příklad: Interní billing review po třech návratech
+
+Po třech návratech externího billing specialisty se tým rozhodl neposílat každou malou změnu ven. Nechtěl ale interně převzít celou billing architekturu. Vybral konkrétní schopnost: běžné review změny tarifu a její dopad na support, webhooky a veřejný pricing.
+
+Capability karta:
+
+| Pole | Zápis |
+| --- | --- |
+| Název schopnosti | běžné billing review změny tarifu |
+| Proč teď | tři opakované re-eskalace kvůli enterprise výjimkám |
+| Vlastník | produktový vlastník monetizace |
+| Praktický postup | checklist změny tarifu: pricing text, konfigurace, webhook scénář, support odpověď, rollback |
+| Cvičný scénář | změna limitu na demo plánu ve stagingu |
+| Běžný scénář | první drobná změna limitu bez externí konfigurace |
+| Hranice | nové platební metody, daňové změny a zásah do fakturačního poskytovatele pořád vyžadují externí nebo právní review |
+| Datová pravidla | žádné exporty fakturačních údajů; test pouze na demo zákazníkovi a agregovaném seznamu typů výjimek |
+| Důkaz samostatnosti | interní tým provede další změnu limitu, aktualizuje support text a projde smoke test |
+| Revize | po dvou dalších billing změnách |
+
+Výsledek: externista pomohl sestavit checklist a jednou zkontroloval cvičný scénář. Tým pak provedl běžnou změnu sám, nezvětšil přístupy a upravil support odpověď. Nešlo o vítězství nezávislosti za každou cenu. Šlo o přesnější rozdělení práce: běžné změny uvnitř, rizikové změny s jasným review.
+
+### Checklist: Interní schopnost po opakované re-eskalaci
+
+- [ ] Popis schopnosti začíná konkrétní pracovní situací, ne širokým tématem.
+- [ ] Existuje capability karta s vlastníkem, hranicí, cvičným scénářem a důkazem samostatnosti.
+- [ ] Převod schopnosti proběhne přes ukázku, interní provedení s review a první samostatný běžný případ.
+- [ ] Cvičení nepoužívá produkční data, pokud k tomu není jasný a časově omezený důvod.
+- [ ] Runbook obsahuje běžný postup, rollback nebo návrat a eskalační hranici.
+- [ ] Dočasné přístupy externisty se zavírají po důkazu převzetí, ne až „někdy“.
+- [ ] Schopnost má napojení na rutinu: release checklist, měsíční review, support proces nebo rozhodovací log.
+- [ ] Měření schopnosti používá chudé provozní důkazy, ne sledování jednotlivých pracovníků.
+- [ ] Pokud se stejný typ re-eskalace vrátí, karta se opraví nebo se změní režim práce.
+- [ ] Veřejné sliby, pricing, dokumentace a trust odpovědi odpovídají nové interní schopnosti.
+
+### Mini úkol
+
+Vyber jednu oblast, kde jste po opakované re-eskalaci řekli „tohle se musíme naučit“. Přepiš ji na capability kartu. Zvlášť doplň větu „Tým je samostatný, až ___.“ a větu „Externí pomoc znovu voláme pouze když ___.“ Pokud první věta popisuje absolvované školení místo provedené práce, karta ještě není hotová. Je jen slušně oblečená prezentace.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -50455,6 +50595,7 @@ Najdi jednu oblast, kde se externí pomoc za poslední období vrátila víc ne�
 
 ## Pracovní log
 
+- 2026-07-24: Doplněna příloha o interní schopnosti po opakované re-eskalaci bez školícího divadla: převod systémového rozhodnutí na konkrétní capability kartu, učení přes práci místo prezentací, rozlišení schopnosti/rutiny/odpovědnosti, eskalační hranice, chudé důkazy samostatnosti, příklad interního billing review, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro posílení interní schopnosti po opakované externí pomoci. Bez nových aktuálních externích tvrzení, navázáno na existující části o re-eskalaci, převzetí práce, přístupech, dodavatelském režimu a privacy-first minimalizaci; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
 - 2026-07-24: Doplněna příloha o opakované re-eskalaci externí pomoci bez návratu do mlhy: rozlišení opakované pomoci jako systémového signálu, hledání vzoru bez osobního obviňování, čtyři možné odpovědi po třetím návratu, rozhodovací karta, kontrola produktových slibů, chudé provozní měření změny, příklad billing výjimek, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro strukturální rozhodnutí po opakované re-eskalaci. Bez nových aktuálních externích tvrzení, navázáno na existující části o re-entry briefu, dlouhodobé údržbě, dodavatelském režimu, přístupových hranicích a privacy-first minimalizaci; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
 - 2026-07-24: Doplněna příloha o re-eskalaci externí pomoci bez ztráty vlastnictví: rozlišení znalostní a kapacitní mezery, změny rozsahu, incidentu, špatného převzetí a pohodlnosti, re-entry brief, přístupová a datová hranice, udržení interního vlastníka u práce, důkaz převzetí po zásahu, příklad návratu specialisty k onboardingu, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro řízené znovuzapojení externí pomoci. Bez nových aktuálních externích tvrzení, navázáno na existující části o dlouhodobé údržbě po převzetí, dočasných přístupech, jednorázových exportech a dodavatelském režimu; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
 - 2026-07-24: Doplněna příloha o dlouhodobé údržbě po převzetí bez návratu závislosti: vlastnická karta převzatého výsledku, napojení na měsíční nebo kvartální rutinu, rozhodovací možnosti po kontrole, spouštěče revize, malé cvičení interní schopnosti, rozlišení údržby, změny a nového projektu, příklad checkoutu, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro dlouhodobé interní vlastnictví převzaté práce. Bez nových aktuálních externích tvrzení, navázáno na existující části o stabilizaci po převzetí, dodavatelském režimu, přístupech, provozních návodech a privacy-first údržbě; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
