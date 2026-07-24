@@ -132,6 +132,7 @@ Když se nechceš vracet do celé knihy, hledej konkrétní nástroj podle výst
 | Stabilizovat převzatou práci po externistovi | „stabilizace po převzetí“, „první týden po externistovi“ nebo „garance po převzetí“ | krátký režim prvního týdne, vlastník, provozní signály, úklid garančního přístupu a převod výsledku do běžné rutiny |
 | Udržet převzatou práci dlouhodobě bez návratu závislosti | „dlouhodobá údržba po převzetí“, „měsíční revize převzaté práce“ nebo „interní vlastnictví“ | měsíční údržbová karta, jasný vlastník, běžný revizní rytmus a rozhodnutí, kdy se má znovu zapojit externí pomoc |
 | Znovu zapojit externí pomoc bez ztráty vlastnictví | „re-eskalace externí pomoci“, „návrat externisty“ nebo „externí pomoc znovu“ | re-entry brief s důvodem, hranicí práce, omezeným přístupem, předávacím výstupem a novým zavíracím kritériem |
+| Rozhodnout po opakované re-eskalaci, co změnit systémově | „opakovaná re-eskalace“, „externí pomoc se vrací“ nebo „strukturální rozhodnutí“ | rozhodovací karta, zda posílit interní schopnost, převést práci do dodavatelského režimu, zjednodušit produkt nebo ukončit daný závazek |
 
 Pravidlo pro práci s rejstříkem: otevři maximálně tři nalezené části, vyber jednu a zapiš výstup. Pokud po deseti minutách pořád skáčeš mezi odkazy, vrať se k tabulce „Kudy začít podle aktuální bolesti“ a zúž problém. E-book není buffet. Teda je, ale bez talíře si stejně odneseš jen chaos.
 
@@ -50140,6 +50141,127 @@ Výsledek není jen opravená obrazovka. Výsledek je aktualizovaná vlastnická
 
 Vyber jednu převzatou práci, u které by tým pravděpodobně znovu volal externí pomoc: onboarding, billing, SEO migraci, analytiku, trust odpovědi, automatizaci nebo integraci. Napiš re-entry brief na jednu obrazovku. Na konec doplň dvě věty: „Externí pomoc otevřeme pouze pro ___.“ a „Zavřeno bude, až interně ověříme ___.“ Pokud druhá věta nejde napsat konkrétně, ještě nemáš zadání. Máš jen úzkost s fakturou.
 
+## Příloha: Opakovaná re-eskalace externí pomoci bez návratu do mlhy
+
+Jedna re-eskalace je normální. Druhá může být pořád rozumná. Třetí už je signál, že se tým nevrací jen pro pomoc, ale pro chybějící systémové rozhodnutí. Buď je výsledek složitější, než jste si mysleli, interní vlastnictví je slabé, dokumentace lže, produkt má moc ostrých hran, nebo se z jednorázové podpory potichu stal dodavatelský vztah.
+
+Opakovanou re-eskalaci neřeš větou „příště to zvládneme líp“. To je hezké přání, ale špatný provozní mechanismus. Potřebuješ rozhodnout, jestli práci přesunout do interní rutiny, řízeného dodavatelského režimu, produktového zjednodušení, nebo ji férově ukončit.
+
+> Codyho komentář: Když se externí pomoc vrací ke stejné věci pořád dokola, problém není faktura. Problém je, že někde mezi produktem, procesem a vlastnictvím vznikla malá lež. A malé lži v provozu mají rády složené úročení.
+
+### Nehledej viníka, hledej vzor
+
+Začni krátkým pohledem na poslední re-eskalace stejného typu. Nezkoumej osobní výkon lidí ani nevyráběj soudní spis z chatů. Stačí zachytit vzor:
+
+| Otázka | Proč na ní záleží |
+| --- | --- |
+| Proč jsme externí pomoc znovu otevřeli? | oddělí skutečnou schopnostní mezeru od pohodlnosti |
+| Co externista udělal, co interně nešlo udělat? | ukáže, jestli chybí znalost, přístup, čas, nástroj nebo rozhodnutí |
+| Jaká data nebo oprávnění jsme museli znovu otevřít? | odhalí bezpečnostní a privacy opakování |
+| Co po zásahu zůstalo uvnitř týmu? | změří, jestli pomoc zmenšila závislost |
+| Co se opakuje v supportu, dokumentaci nebo produktu? | ukáže, zda je chyba v procesu, nebo v samotném návrhu |
+
+Vzor zapiš jednou větou. Například: „Každá změna billing limitu vyžaduje externí zásah, protože interní tým neumí bezpečně upravit webhook scénáře a support texty zároveň.“ To už není pocit. To je rozhodovací materiál.
+
+### Rozliš čtyři systémové odpovědi
+
+Opakovaná re-eskalace má obvykle jednu ze čtyř odpovědí. Špatně je vybrat všechny najednou a nazvat to „zlepšením procesu“. Správně je vybrat jednu hlavní odpověď a zavřít ji konkrétním důkazem.
+
+| Odpověď | Kdy dává smysl | Důkaz, že je hotovo |
+| --- | --- | --- |
+| Posílit interní schopnost | práce je častá, důležitá a měla by zůstat uvnitř týmu | interní člověk provede další běžnou změnu podle runbooku |
+| Převést na řízeného dodavatele | práce je specializovaná, opakovaná a není strategické ji držet celou interně | existuje vendor karta, jasné role, datové hranice, revizní rytmus a exit plán |
+| Zjednodušit produkt nebo proces | re-eskalace vzniká kvůli zbytečné složitosti, výjimkám nebo ručním obchvatům | zmizí aspoň jedna varianta, ruční krok, výjimka nebo duplicitní místo pravdy |
+| Ukončit závazek | práce chrání starý slib, starý segment nebo funkci, která už neodpovídá hodnotě produktu | veřejný i interní text říká, co končí, kdy to končí a jaká je náhradní cesta |
+
+V privacy-first provozu má tahle volba ještě jednu vrstvu: každá odpověď musí zmenšit nebo aspoň stabilizovat datový a přístupový stín. Pokud „řešení“ přidá nový export, nový sdílený účet, nový tracking nebo nový trvalý přístup bez vlastníka, nejde o systémovou odpověď. Je to jen dražší verze stejného problému.
+
+### Udělej rozhodovací kartu po třetím návratu
+
+Nastav si pravidlo: po třetí re-eskalaci stejného typu vznikne rozhodovací karta. Ne proto, že číslo tři je magické, ale protože opakování už má cenu. Tým zaplatil časem, pozorností, přerušováním práce a často i znovuotevřením přístupů.
+
+Minimální karta:
+
+| Pole | Zápis |
+| --- | --- |
+| Opakovaný vzor | co se vrací |
+| Dopad | jak škodí zákazníkovi, týmu, bezpečnosti, datům nebo revenue |
+| Současná reakce | co děláme pokaždé znovu |
+| Kořenová mezera | znalost, kapacita, produktová složitost, dodavatelský vztah, starý závazek |
+| Vybraná odpověď | interní schopnost, dodavatel, zjednodušení, ukončení |
+| Datový dopad | jak se změní data, přístupy, exporty, logy a veřejné sliby |
+| Vlastník | kdo rozhoduje, ne kdo „to nějak zařídí“ |
+| Termín kontroly | kdy ověříme, že se vzor zmenšil |
+| Stop pravidlo | kdy uznáme, že vybraná odpověď nefunguje |
+
+Karta má být krátká. Pokud potřebuješ čtyři stránky, pravděpodobně popisuješ celý projekt, ne rozhodnutí. Rozhodovací karta má týmu pomoct vybrat další režim práce, ne nahradit zadání.
+
+### Neopravuj proces, když je rozbitý produktový slib
+
+Někdy se tým pokouší vylepšit předání, runbooky a přístupová pravidla, ale skutečný problém je produktový: slibujete příliš mnoho variant, příliš mnoho výjimek nebo příliš individuální provoz pro každý zákaznický segment.
+
+Varovné signály:
+
+- každá nová smlouva přidává speciální konfiguraci,
+- support musí znát neveřejné výjimky podle zákazníka,
+- pricing slib nejde vysvětlit bez interní tabulky,
+- onboarding obsahuje větve, které nikdo neumí otestovat,
+- externista se vrací hlavně proto, aby si vzpomněl, proč se něco kdysi udělalo,
+- zákazníkům se slibuje ruční péče, ale tým ji nepočítá do provozních nákladů.
+
+Tady nepomůže jen lepší dokumentace. Dokumentace rozbitého slibu je pořád rozbitý slib, jen s obsahem. Zvaž zjednodušení plánu, zrušení výjimky, sjednocení toku nebo veřejné přepsání nabídky. Ano, je to nepříjemné. Ale stabilní produkt se nedá provozovat jako sbírka soukromých poznámek.
+
+### Zavři opakování měřením změny, ne sledováním lidí
+
+Po systémové odpovědi měř jen to, co ověřuje změnu vzoru. Nepotřebuješ sledovat jednotlivé pracovníky, nahrávat obrazovky ani profilovat zákazníky. Stačí malé provozní signály:
+
+| Změna | Chudý signál |
+| --- | --- |
+| interní schopnost | interní člověk provedl další běžnou změnu bez externího zásahu |
+| dodavatelský režim | práce má jasné zadání, revizi, hranici dat a zavření přístupů |
+| produktové zjednodušení | klesl počet výjimek, ručních kroků nebo support dotazů k danému tématu |
+| ukončení závazku | starý slib zmizel z webu, dokumentace, sales šablon a support odpovědí |
+| privacy úklid | ubyl jeden export, sdílený odkaz, trvalý token nebo zbytečná role |
+
+Vyhodnocení udělej po jednom až dvou běžných cyklech práce. U měsíční rutiny to může být za měsíc nebo dva. U incidentního režimu dřív. Hlavní je neměřit jen počet hodin externisty. Ten říká, kolik stála pomoc. Neříká, jestli závislost klesá.
+
+### Příklad: Billing výjimky se pořád vrací
+
+Tým třikrát za čtvrtletí znovu volal externího billing specialistu. Pokaždé šlo o „malou změnu“ u enterprise zákazníka: speciální limit, ruční sleva, jiný datum fakturace. Externista měl vždy dočasný přístup, ale po každé změně vznikla nová support výjimka a interní tým si nebyl jistý, jak ji bezpečně otestovat.
+
+Rozhodovací karta:
+
+| Pole | Zápis |
+| --- | --- |
+| Opakovaný vzor | billing výjimky pro enterprise zákazníky vyžadují externí zásah |
+| Dopad | pomalé změny, riziko chyb ve fakturaci, opakované otevírání přístupu, nejasné support odpovědi |
+| Současná reakce | externista upraví konfiguraci a pošle stručné „hotovo“ |
+| Kořenová mezera | produktová složitost a chybějící interní testovací scénář |
+| Vybraná odpověď | zjednodušit pricing výjimky a posílit interní schopnost pro běžný billing review |
+| Datový dopad | žádné exporty fakturačních dat; práce nad interním testovacím scénářem a agregovaným seznamem typů výjimek |
+| Vlastník | produktový vlastník monetizace |
+| Termín kontroly | po příštích dvou billing změnách |
+| Stop pravidlo | pokud další změna opět vyžádá externí zásah, převést billing podporu do řízeného dodavatelského režimu |
+
+Výsledek: tým zruší dvě staré typy výjimek pro nové smlouvy, přepíše sales šablonu, doplní support odpověď, vytvoří jeden testovací scénář pro změnu plánu a nechá externistu naposledy projít nový postup. Externí pomoc se nepředstírá jako selhání týmu. Použije se jako kontrola přechodu do jednoduššího režimu.
+
+### Checklist: Opakovaná re-eskalace externí pomoci
+
+- [ ] Umím popsat opakovaný vzor jednou větou.
+- [ ] Neřeším osobní vinu, ale mezeru v systému, produktu nebo vlastnictví.
+- [ ] Vím, co externí pomoc dělá opakovaně a proč to interně nejde.
+- [ ] Zkontroloval jsem, jaká data, exporty, role nebo tokeny se pokaždé znovu otevírají.
+- [ ] Vybral jsem jednu hlavní odpověď: interní schopnost, dodavatelský režim, produktové zjednodušení nebo ukončení závazku.
+- [ ] Rozhodnutí má vlastníka, termín kontroly a stop pravidlo.
+- [ ] Výsledek zmenšuje nebo stabilizuje datový a přístupový stín.
+- [ ] Veřejné sliby, pricing texty, support šablony a interní dokumentace se upraví spolu s technickou změnou.
+- [ ] Dopad ověřuji chudými provozními signály, ne sledováním jednotlivých lidí.
+- [ ] Pokud se vzor vrátí, nepřidávám další záplatu bez nového rozhodnutí.
+
+### Mini úkol
+
+Najdi jednu oblast, kde se externí pomoc za poslední období vrátila víc než jednou: billing, onboarding, analytiku, SEO, bezpečnostní odpovědi, integrace nebo obsah. Napiš rozhodovací kartu po třetím návratu. Vyber jednu hlavní odpověď a doplň stop pravidlo ve tvaru: „Pokud se do ___ stane ___, změníme režim na ___.“ Bez stop pravidla máš jen další pokus s lepším názvem.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -50333,6 +50455,7 @@ Vyber jednu převzatou práci, u které by tým pravděpodobně znovu volal exte
 
 ## Pracovní log
 
+- 2026-07-24: Doplněna příloha o opakované re-eskalaci externí pomoci bez návratu do mlhy: rozlišení opakované pomoci jako systémového signálu, hledání vzoru bez osobního obviňování, čtyři možné odpovědi po třetím návratu, rozhodovací karta, kontrola produktových slibů, chudé provozní měření změny, příklad billing výjimek, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro strukturální rozhodnutí po opakované re-eskalaci. Bez nových aktuálních externích tvrzení, navázáno na existující části o re-entry briefu, dlouhodobé údržbě, dodavatelském režimu, přístupových hranicích a privacy-first minimalizaci; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
 - 2026-07-24: Doplněna příloha o re-eskalaci externí pomoci bez ztráty vlastnictví: rozlišení znalostní a kapacitní mezery, změny rozsahu, incidentu, špatného převzetí a pohodlnosti, re-entry brief, přístupová a datová hranice, udržení interního vlastníka u práce, důkaz převzetí po zásahu, příklad návratu specialisty k onboardingu, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro řízené znovuzapojení externí pomoci. Bez nových aktuálních externích tvrzení, navázáno na existující části o dlouhodobé údržbě po převzetí, dočasných přístupech, jednorázových exportech a dodavatelském režimu; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
 - 2026-07-24: Doplněna příloha o dlouhodobé údržbě po převzetí bez návratu závislosti: vlastnická karta převzatého výsledku, napojení na měsíční nebo kvartální rutinu, rozhodovací možnosti po kontrole, spouštěče revize, malé cvičení interní schopnosti, rozlišení údržby, změny a nového projektu, příklad checkoutu, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro dlouhodobé interní vlastnictví převzaté práce. Bez nových aktuálních externích tvrzení, navázáno na existující části o stabilizaci po převzetí, dodavatelském režimu, přístupech, provozních návodech a privacy-first údržbě; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
 - 2026-07-24: Doplněna příloha o stabilizaci po převzetí externí práce bez věčného dozoru: režim prvního týdne, připojení převzatého výsledku k existujícím rutinám, stabilizační signály bez sledování jednotlivců, řízené zavření garančního období, příklad billing integrace, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro stabilizaci práce po externistovi. Bez nových aktuálních externích tvrzení, navázáno na existující části o předání know-how, kontrole převzetí, přístupech, retenci, runboocích a privacy-first měření; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
