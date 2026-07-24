@@ -139,6 +139,7 @@ Když se nechceš vracet do celé knihy, hledej konkrétní nástroj podle výst
 | Ukotvit nového vlastníka po převzetí schopnosti | „nový vlastník schopnosti“, „prvních 30 dní“ nebo „převzetí odpovědnosti“ | 30denní převzetí s prvním rozhodnutím, kontrolou přístupů, opravou runbooku a jasným stop seznamem |
 | Udělat první změnu po převzetí schopnosti | „první změna po převzetí“, „změnová karta“ nebo „nový vlastník mění pravidla“ | malá změna s jasným účelem, dopadem na data, review hranicí, návratem zpět a zavíracím rozhodnutím |
 | Vyhodnotit první změnu po převzetí schopnosti | „vyhodnocení první změny“, „změnový review“ nebo „první změna hotovo“ | krátké review dopadu, datové stopy, přístupů, dokumentace a dalšího kroku po první změně |
+| Převést první úspěšnou změnu do běžné rutiny | „běžná rutina po první změně“, „standardní režim“ nebo „z prvního úspěchu rutina“ | rutina se spouštěčem, vlastníkem, hranicí dat, přístupovou hranicí, revizí a stop pravidlem |
 
 Pravidlo pro práci s rejstříkem: otevři maximálně tři nalezené části, vyber jednu a zapiš výstup. Pokud po deseti minutách pořád skáčeš mezi odkazy, vrať se k tabulce „Kudy začít podle aktuální bolesti“ a zúž problém. E-book není buffet. Teda je, ale bez talíře si stejně odneseš jen chaos.
 
@@ -51064,6 +51065,147 @@ Zavírací věta: „Změnu ponecháváme, protože sales umí odpovědět na ev
 
 Vezmi poslední změnu, kterou nový vlastník udělal v převzaté schopnosti. Napiš pět řádků: původní problém, chudý signál dopadu, datová stopa, přístupová stopa a další stav. Pokud některý řádek neumíš vyplnit, nezakládej další změnu. Nejdřív zavři tu první. Backlog počká. On je na čekání přímo konstruovaný.
 
+## Příloha: Převod první změny do běžné rutiny bez růstu neviditelné práce
+
+Když první změna po převzetí schopnosti dopadne dobře, tým má přirozené pokušení říct: „Funguje to, tak to tak dělejme dál.“ Jenže to je přesně místo, kde vzniká neviditelná práce. Něco už není experiment, ale ještě to nemá jasný rytmus, vlastníka, hranici dat ani pravidlo, kdy to skončí.
+
+Běžná rutina není opakovaná improvizace. Je to malý provozní režim, který říká, kdy se věc spustí, kdo ji udělá, jak hluboko smí sáhnout do dat, kdy se má zastavit a kde se po ní ukládá výsledek.
+
+> Codyho komentář: Úspěšná první změna je jako prototyp. Když ji začneš používat každý týden bez pojmenování, právě jsi vynalezl proces. Bohužel ten nejhorší typ procesu: existuje, ale nikdo se k němu veřejně nepřiznal.
+
+### Rozhodni, jestli změna patří do rutiny
+
+Ne každá povedená změna se má opakovat. Některé byly jednorázová oprava, jiné odkryly větší projekt a další se mají rovnou zavřít. Do rutiny patří jen změna, která má opakovatelný spouštěč a přiměřenou hodnotu.
+
+Polož si pět otázek:
+
+- Bude se stejná situace vracet?
+- Pomůže opakovaný postup snížit riziko nebo zrychlit rozhodnutí?
+- Dá se rutina udělat bez nového plošného sběru dat?
+- Dá se rutina provést bez širokého admin přístupu?
+- Má rutina jasný okamžik, kdy se nemá spustit a má se eskalovat?
+
+Pokud odpověď na první dvě otázky zní ne, nejde o rutinu. Je to uzavřená změna nebo poznámka do dokumentace. Pokud odpověď na třetí nebo čtvrtou otázku zní ne, rutina je možná příliš drahá na to, aby byla běžná. A pokud neumíš vyplnit pátou otázku, rutina se ti časem rozleze do šedé zóny.
+
+Příklady změn vhodných pro rutinu:
+
+- měsíční kontrola trust odpovědí po produktových releasích,
+- krátké review externích přístupů po dokončení podpůrné práce,
+- pravidelná kontrola support šablon, které se dotýkají výmazu, exportu nebo retence,
+- provozní smoke test po změně kritické nápovědy nebo runbooku,
+- kvartální kontrola, jestli dočasná výjimka pořád má účel.
+
+Příklady změn, které do rutiny nepatří:
+
+- jednorázové narovnání starého slibu,
+- oprava konkrétního incidentního textu,
+- migrace dodavatele,
+- změna datové lokality,
+- plošné přenastavení rolí,
+- výjimka schválená pro jeden zákaznický případ.
+
+### Napiš rutinní kartu
+
+Rutinní karta má být kratší než procesní dokument. Její úkol je zabránit tomu, aby se opakovaná práce schovala do hlavy jednoho člověka nebo do historie chatu.
+
+| Pole | Zápis |
+| --- | --- |
+| Název rutiny | lidský název podle práce, ne podle interní zkratky |
+| Spouštěč | kdy se rutina spouští: čas, release, zákaznický dotaz, změna dodavatele nebo revize přístupu |
+| Vlastník | kdo odpovídá za kvalitu výsledku |
+| Provádí | kdo rutinu typicky udělá, pokud to není stejný člověk |
+| Vstupy | jaké dokumenty, signály nebo systémy se kontrolují |
+| Datová hranice | co se nesmí exportovat, kopírovat, ukládat ani sdílet |
+| Přístupová hranice | jaké role stačí a kdy je potřeba eskalace |
+| Výstup | kam se zapisuje rozhodnutí, oprava nebo zavírací věta |
+| Stop pravidlo | kdy rutinu nespouštět dál a otevřít samostatné rozhodnutí |
+| Revize rutiny | kdy se ověří, jestli rutina pořád dává smysl |
+
+Dobrá rutinní karta nemá ambici pokrýt celý vesmír. Má pokrýt běžný případ a jasně pojmenovat hranici, za kterou už běžný případ končí.
+
+### Vrať dočasné pojistky zpátky
+
+První změna po převzetí často používá víc pojistek než běžný provoz: extra review, kontrolní člověk navíc, dočasná kopie dokumentu, ruční ověření nebo omezené testovací okno. To je v pořádku. Problém nastane, když všechny pojistky zůstanou navždy, jen proto, že je nikdo nezavřel.
+
+Po převodu do rutiny zkontroluj:
+
+- které dočasné review zůstává a proč,
+- které dočasné sdílení se má zavřít,
+- jestli testovací kopie dokumentu nebo exportu pořád existuje,
+- zda nový vlastník nepotřebuje širší roli jen kvůli jedné části práce,
+- jestli se ruční ověření nestalo permanentním skrytým úkolem bez hodnoty.
+
+Privacy-first provoz neznamená mít co nejvíc kontrol. Znamená mít správné kontroly na správném místě. Kontrola, kterou nikdo nečte a která vyžaduje další exporty, je jen dražší šum.
+
+### Udrž rutinu napojenou na rozhodnutí
+
+Rutina nemá být kalendářová položka, která se odškrtne pro dobrý pocit. Musí končit rozhodnutím nebo potvrzením, že není třeba nic měnit.
+
+Pět možných výstupů rutiny:
+
+| Výstup | Kdy ho použít | Zápis |
+| --- | --- | --- |
+| beze změny | kontrola nenašla rozpor ani nové riziko | jedna věta s datem a vlastníkem |
+| drobná oprava | stačí upravit text, odkaz, stav nebo poznámku | změnová věta a místo opravy |
+| přístupový úklid | role, sdílení nebo token přežily původní účel | kdo zavře co a do kdy |
+| datový úklid | existuje zbytečná kopie, export nebo stará retence | kde data končí a jak se ověří smazání |
+| eskalace | rutina našla změnu slibu, dodavatele, retence nebo produktu | samostatná rozhodovací karta |
+
+Tím se rutina drží při zemi. Nevede k většímu dashboardu, ale k jasnějšímu provozu.
+
+### Nech rutinu zestárnout pod kontrolou
+
+I dobrá rutina může po čase ztratit smysl. Produkt se změní, zákaznické dotazy zmizí, systém se zjednoduší nebo se práce přesune jinam. Rutina bez revize se pak stane provozním prachem: nikdo ji nechce, ale nikdo ji nechce smazat první.
+
+Nastav revizní rytmus podle rizika:
+
+- rutiny kolem práv uživatelů, retence, bezpečnosti a billing slibů kontroluj častěji,
+- rutiny kolem interní dokumentace a nápovědy stačí kontrolovat po větší změně produktu,
+- rutiny kolem dočasných přístupů musí mít datum zavření hned od začátku,
+- rutiny bez výstupu za poslední dvě nebo tři kontroly zvaž zúžit nebo zrušit.
+
+Stop věta může znít: „Rutinu zrušíme nebo zúžíme, pokud dvě po sobě jdoucí kontroly nepřinesou žádné rozhodnutí a související produktový proces se mezitím nezměnil.“
+
+To není lenost. To je hygiena. Procesy mají taky retenci.
+
+### Příklad: Trust odpovědi po první úspěšné změně
+
+Nový vlastník trust odpovědí úspěšně přepsal šablonu k evropskému provozu. Vyhodnocení ukázalo, že sales dokáže odpovědět bez interních detailů a bez nového slibu. Tým se rozhodl převést změnu do běžné rutiny, protože podobné odpovědi se vracejí po každém větším releasu a po každé změně dodavatele.
+
+Rutinní karta:
+
+| Pole | Zápis |
+| --- | --- |
+| Název rutiny | kontrola trust odpovědí po změně produktu nebo dodavatele |
+| Spouštěč | release měnící datový tok, region, subdodavatele, export, retenci nebo bezpečnostní formulaci |
+| Vlastník | vlastník privacy a bezpečnostních odpovědí |
+| Provádí | nový vlastník odpovědní knihovny |
+| Vstupy | release poznámka, datová mapa, vendor karta, veřejná nápověda a sales šablony |
+| Datová hranice | nepoužívat zákaznické smlouvy, interní incidentní detaily ani produkční exporty |
+| Přístupová hranice | read-only dokumentace; publikace přes běžné review |
+| Výstup | jedna věta v odpovědní knihovně: beze změny, opraveno, nebo eskalováno |
+| Stop pravidlo | pokud změna zavádí nový slib, region nebo subdodavatele, nejde o rutinní opravu |
+| Revize rutiny | kvartálně nebo po třech po sobě jdoucích kontrolách bez nálezu |
+
+První běžné použití rutiny dopadlo skromně: release nezměnil datový tok, ale veřejná nápověda pořád odkazovala na starý název exportní funkce. Výstup nebyla nová strategie, jen drobná oprava odkazu a zavírací věta v odpovědní knihovně. Přesně tak má běžná rutina vypadat. Nudná, dohledatelná a bez nového datového ocasu.
+
+### Checklist: Převod první změny do běžné rutiny
+
+- [ ] Vyhodnocení první změny jasně říká, že změna má opakovatelnou hodnotu.
+- [ ] Rutina má konkrétní spouštěč, ne jen pocit „občas se na to podíváme“.
+- [ ] Je jasný vlastník kvality a člověk, který rutinu typicky provádí.
+- [ ] Datová hranice říká, co se nesmí exportovat, kopírovat, ukládat ani sdílet.
+- [ ] Přístupová hranice říká, jaká role stačí a kdy je potřeba eskalace.
+- [ ] Dočasné review, sdílení, exporty a testovací kopie z první změny jsou zavřené nebo výslovně ponechané.
+- [ ] Rutina končí rozhodnutím: beze změny, drobná oprava, přístupový úklid, datový úklid nebo eskalace.
+- [ ] Výsledek se zapisuje do zdroje pravdy, ne jen do chatu.
+- [ ] Existuje stop pravidlo pro situace, které už nejsou běžný provoz.
+- [ ] Rutina má revizní datum a možnost zrušení.
+
+### Mini úkol
+
+Vyber jednu první změnu, kterou tým nedávno ponechal. Napiš rutinní kartu s těmito pěti poli: spouštěč, vlastník, datová hranice, výstup a stop pravidlo. Pak doplň větu: „Tahle rutina přestane existovat, pokud ___.“ Pokud tě napadne, že by rutina měla žít navždy, dej si kávu a zkus to znovu. I dobré procesy potřebují konec.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -51257,6 +51399,7 @@ Vezmi poslední změnu, kterou nový vlastník udělal v převzaté schopnosti. 
 
 ## Pracovní log
 
+- 2026-07-24: Doplněna příloha o převodu první změny do běžné rutiny bez růstu neviditelné práce: rozhodnutí, kdy úspěšnou první změnu opravdu opakovat, rutinní karta, úklid dočasných pojistek, rozhodovací výstupy rutiny, řízené stárnutí rutiny, příklad trust odpovědí, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro běžnou rutinu po první změně. Bez nových aktuálních externích tvrzení, navázáno na části o vyhodnocení první změny, trust odpovědích, přístupech, datových hranicích a privacy-first minimalizaci; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
 - 2026-07-24: Doplněna příloha o vyhodnocení první změny po převzetí schopnosti bez měření ega: návrat k původní změnové kartě, oddělení dopadu od aktivity, kontrola nové datové a přístupové stopy, rozhodnutí o dalším stavu, aktualizace zdroje pravdy, příklad trust odpovědí, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro vyhodnocení první změny po převzetí. Bez nových aktuálních externích tvrzení, navázáno na části o první změně po převzetí, trust odpovědích, přístupech, datové mapě a privacy-first minimalizaci; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
 - 2026-07-24: Doplněna příloha o první změně po převzetí schopnosti bez rozbití důvěry: výběr malé vratné změny, změnová karta, rozlišení opravy textu od změny slibu, chudé ověření dopadu, zavření rozhodnutím, příklad billing odpovědí, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro první změnu po převzetí. Bez nových aktuálních externích tvrzení, navázáno na části o prvních 30 dnech nového vlastníka, runboocích, trust odpovědích, billing šablonách, přístupech a privacy-first minimalizaci; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
 - 2026-07-24: Doplněna příloha o prvních 30 dnech nového vlastníka schopnosti bez tichého rozpadu: 30denní režim převzetí, první malé rozhodnutí místo velkého projektu, karta prvního měsíce, kontrola přístupů po prvním použití, oprava runbooku podle reálných nejasností, uzavření převzetí rozhodnutím, příklad nového vlastníka trust odpovědí, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro ukotvení nového vlastníka po převzetí. Bez nových aktuálních externích tvrzení, navázáno na části o odchodu vlastníka, rotaci schopnosti, trust odpovědích, přístupech a privacy-first minimalizaci; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
