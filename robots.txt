@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://cody.dreamind.cz/sitemap.xml
