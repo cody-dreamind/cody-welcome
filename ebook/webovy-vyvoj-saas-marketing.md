@@ -154,6 +154,7 @@ Když se nechceš vracet do celé knihy, hledej konkrétní nástroj podle výst
 | Zvládnout změnu vstupu automatizace bez rozšíření dat | „změna vstupu automatizace“, „API se změnilo“ nebo „nový zdroj dat pro automatizaci“ | vstupní migrační karta s účelem, mapováním polí, datovým ořezem, testem výstupu, revokací starého vstupu a zavíracím rozhodnutím |
 | Ověřit změněný vstup automatizace po prvních bězích | „kontrola po změně vstupu“, „nový payload v provozu“ nebo „vstupní drift“ | kontrolní karta prvních běhů, porovnání výstupů, kontrola nepovolených polí, úklid starých logů a rozhodnutí ponechat, zúžit, vrátit nebo vypnout |
 | Změnit výstup automatizace bez nového informačního hluku | „změna výstupu automatizace“, „jiný report“ nebo „výstup automatizace“ | výstupní změnová karta s příjemcem, rozhodnutím, minimem polí, retenčním pravidlem a kontrolou, že report pořád vede k práci |
+| Ověřit změněný výstup automatizace po prvních bězích | „kontrola po změně výstupu“, „nový report v provozu“ nebo „výstupní smog“ | kontrola prvních výstupů podle rozhodnutí, šumu, publika, retence a datové stopy s jasným verdiktem ponechat, zúžit, rozdělit, vrátit nebo vypnout |
 
 Pravidlo pro práci s rejstříkem: otevři maximálně tři nalezené části, vyber jednu a zapiš výstup. Pokud po deseti minutách pořád skáčeš mezi odkazy, vrať se k tabulce „Kudy začít podle aktuální bolesti“ a zúž problém. E-book není buffet. Teda je, ale bez talíře si stejně odneseš jen chaos.
 
@@ -53044,6 +53045,141 @@ Výsledek je méně efektní než dashboard s barevnými křivkami. Je ale použ
 
 Vyber jednu automatizaci, jejíž výstup někdo za poslední měsíc chtěl „jen trochu rozšířit“. Napiš původní výstup do jedné věty a nový požadavek do druhé. Pak vyplň čtyři pole: kdo výstup čte, jaké rozhodnutí podle něj udělá, která pole jsou nutná a kde výstup po odeslání žije. Nakonec vezmi tři poslední běhy a ručně zkus nový formát. Pokud najdeš pole, které pomáhá jen zvědavosti, vyhoď ho. Pokud nový výstup nemá vlastníka rozhodnutí, změnu nespouštěj.
 
+## Příloha: Kontrola po změně výstupu automatizace bez dalšího smogu
+
+Změněný výstup automatizace se často tváří úspěšně hned po prvním běhu. Zpráva dorazila, tabulka má nové sloupce, ticket se založil, digest vypadá bohatší a nikdo nekřičí. To ale není důkaz, že změna pomohla. Je to jen důkaz, že něco dorazilo na správné nebo aspoň nějaké místo.
+
+Kontrola po změně výstupu má zjistit pět věcí: jestli nový výstup vede ke konkrétnímu rozhodnutí, jestli nepřidal šum, jestli ho čte správné publikum, jestli nezvětšil datovou stopu a jestli starý výstup nezůstal běžet vedle něj jako zapomenutý dvojník.
+
+> Codyho komentář: Automatizace často neumí říct „posílám zbytečnost“. Umí jen poslušně doručit další zprávu. Proto musí mít kontrola výstupu trochu protivný tón. Ne „líbí se nám nový report?“, ale „udělal podle něj někdo něco, co stálo za ta data?“
+
+### Vrať se k výstupní kartě
+
+Začni původní výstupní změnovou kartou, ne dojmem z prvních zpráv. Pokud karta neexistuje, dodělej ji zpětně z reality. Není to ideální, ale pořád lepší než hodnotit výstup podle toho, že „vypadá přehledněji“.
+
+Kontrolní karta po prvních bězích:
+
+| Pole | Co vyplnit |
+| --- | --- |
+| Původní slib | jaké rozhodnutí měl nový výstup umožnit |
+| Skutečný příjemce | kdo výstup opravdu dostal nebo viděl |
+| Skutečné rozhodnutí | co se podle výstupu udělalo, odložilo, opravilo nebo zavřelo |
+| Šum | kolik položek nikdo nepoužil, nepochopil nebo musel ručně filtrovat |
+| Datová stopa | která pole, odkazy, přílohy nebo logy vznikly navíc |
+| Starý výstup | jestli ještě běží původní zpráva, export, dashboard nebo ticket komentář |
+| Verdikt | ponechat, zúžit, rozdělit, vrátit, vypnout nebo znovu navrhnout |
+
+Dobrá kontrola nemá dokazovat, že předchozí změna byla chytrá. Má pomoct rychle přiznat, co v provozu funguje jinak než v představě.
+
+### Porovnej první výstupy s reálnou akcí
+
+U prvních tří až pěti běhů si nečti jen obsah výstupu. Sleduj, co se stalo potom. Výstup, který nikdo nepoužije, není automatizace práce. Je to automatizace hluku.
+
+Jednoduché porovnání:
+
+| Běh | Výstup říkal | Kdo reagoval | Co se změnilo | Co bylo zbytečné |
+| --- | --- | --- | --- | --- |
+| 1 | jedna věta hlavního signálu | role nebo nikdo | ticket, úprava, eskalace, zavření | pole, odstavec, příloha, duplicita |
+| 2 | jedna věta hlavního signálu | role nebo nikdo | ticket, úprava, eskalace, zavření | pole, odstavec, příloha, duplicita |
+| 3 | jedna věta hlavního signálu | role nebo nikdo | ticket, úprava, eskalace, zavření | pole, odstavec, příloha, duplicita |
+
+Pokud výstup vede jen k otázkám „co s tím máme dělat?“, chybí rozhodovací rámec. Pokud vede k ručnímu přepisování do jiného formátu, chybí správný tvar. Pokud vede k přeposílání dál, pravděpodobně sedí špatné publikum nebo příliš široký detail.
+
+### Počítej šum jako provozní náklad
+
+Šum není jen otravná zpráva v chatu. Šum stojí pozornost, vytváří falešnou důležitost a zvyšuje šanci, že tým začne ignorovat i dobré signály.
+
+U změněného výstupu hledej hlavně tyto typy šumu:
+
+- Položky bez vlastníka, které nikdo nemůže zavřít.
+- Pole, která jen vysvětlují historii, ale nepomáhají rozhodnutí.
+- Duplicity mezi e-mailem, chatem, ticketem a dashboardem.
+- Agregace, která vypadá autoritativně, ale není dost přesná pro akci.
+- Detailní výpisy tam, kde stačí počet, stav a odkaz.
+- Automatické priority, kterým tým stejně nevěří a ručně je přepisuje.
+
+Praktické pravidlo: když příjemce musí u každého běhu nejdřív ručně odmazat polovinu výstupu, výstup není bohatý. Je neučesaný. A neučesaná automatizace většinou čas jen přesune z tvorby reportu do jeho luštění.
+
+### Zkontroluj publikum po skutečném doručení
+
+Původní karta může říkat, že výstup dostává produktový vlastník. V realitě se ale zpráva pošle do týmového kanálu, e-mail se automaticky přepošle na sdílenou adresu, ticket je viditelný externistovi nebo dashboard otevře sales tým bez kontextu. To není detail. To je změna datové hranice.
+
+Zeptej se u každého místa doručení:
+
+- Vidí výstup jen lidé, kteří podle něj mají jednat?
+- Dostali noví příjemci vysvětlení, jak výstup používat a jak ho nepoužívat?
+- Neobsahuje zpráva interní poznámky, osobní údaje, zákaznické detaily nebo obchodní informace, které nové publikum nepotřebuje?
+- Nepřesunul se detail z řízeného systému do chatu nebo e-mailu jen kvůli pohodlí?
+- Má výstup jasný odkaz na zdroj pravdy, aby se nekopíroval jako samostatný archiv?
+
+Když se publikum rozšířilo bez rozhodnutí, nejdřív zuž doručení. Až potom řeš hezčí formát.
+
+### Ověř retenci a staré výstupy
+
+Změna výstupu často vytvoří souběh. Starý report běží dál, nový digest se tváří jako náhrada, dashboard pořád ukazuje původní sloupce a někdo má v e-mailu pravidlo, které kopíruje obojí do složky „pro jistotu“. Tady vzniká datový sediment.
+
+Kontrola po prvních bězích musí projít:
+
+- plánovač nebo job, který posílal starý výstup,
+- chatové kanály a e-mailové aliasy, kam chodí nový i starý formát,
+- projektový nástroj, kde se mohou zakládat duplicitní komentáře,
+- dočasné soubory, CSV exporty a přílohy,
+- logy, které mohou obsahovat finální zprávu nebo celý payload,
+- dokumentaci, ve které může být pořád popsaný starý pracovní návyk.
+
+Retenční větu uprav podle reality, ne podle původního přání. Pokud nový výstup začal žít v místě s delší historií nebo širším publikem, má to být explicitní rozhodnutí. Jinak zkrať obsah, přesuň detail zpět do řízeného systému nebo výstup po uzavření úkolu maž.
+
+### Rozhodni stav změny výstupu
+
+Kontrola má skončit verdiktem. Ne poznámkou „vypadá to dobře“. Verdikt musí říct, co se stane s automatizací dál.
+
+Možnosti:
+
+| Verdikt | Kdy dává smysl |
+| --- | --- |
+| Ponechat | výstup vede k rozhodnutí, šum je nízký, publikum i retence sedí |
+| Zúžit | výstup pomáhá, ale obsahuje zbytečná pole, dlouhé texty nebo příliš široký detail |
+| Rozdělit | jeden výstup míchá urgentní alert, týdenní review a dlouhodobý trend |
+| Vrátit | nový formát zhoršil akci nebo rozšířil data bez přínosu |
+| Vypnout | výstup nikdo nepoužívá nebo vyrábí víc rizika než práce |
+| Znovu navrhnout | původní rozhodnutí bylo nejasné a formát se nedá férově vyhodnotit |
+
+Rozdělení je častější, než se zdá. Jeden výstup nemá obsloužit všechno. Urgentní stav patří do alertu s prvním krokem, týdenní rozhodnutí do pracovního review a historický trend do agregovaného přehledu. Když to nacpeš do jedné zprávy, vznikne textový sendvič, který nikdo nechce jíst a všichni se tváří, že ho někdo jiný dojí.
+
+### Příklad: Nový marketingový report po dvou týdnech
+
+Tým spustil nový týdenní report pro marketingový backlog. Výstup obsahuje URL, typ stránky, stáří, poslední veřejnou změnu, agregovaný počet poptávek za měsíc, kvalitativní signál ze sales bez jmen a navrženou akci.
+
+Po dvou týdnech kontrola ukáže:
+
+- První report vedl k úpravě pricing FAQ.
+- Druhý report vedl ke sloučení dvou podobných článků.
+- Pole „poslední veřejná změna“ pomohlo rozhodnout, jestli stránku upravit nebo archivovat.
+- Pole „typ stránky“ nikdo nepoužil, protože typ je zřejmý z URL.
+- Kvalitativní signál ze sales byl užitečný, ale jedna poznámka byla příliš blízko konkrétnímu zákaznickému dotazu.
+- Report začal někdo ručně kopírovat do týmového chatu, i když měl zůstat v projektovém nástroji.
+
+Verdikt: ponechat report, zúžit pole „typ stránky“, zpřísnit pravidlo pro sales signál na agregovanou nebo anonymizovanou pracovní formulaci, zakázat kopírování celého výstupu do chatu a posílat tam jen jednu větu: „Tento týden je k rozhodnutí jedna obsahová karta v projektovém nástroji.“
+
+To je dobrá iterace. Ne proto, že report byl perfektní. Protože se zlepšil bez toho, aby tým přidal další sledování lidí.
+
+### Checklist: Kontrola po změně výstupu automatizace
+
+- [ ] Kontrola začíná původní výstupní kartou a pracovním rozhodnutím.
+- [ ] První tři až pět výstupů je porovnaných s tím, co se skutečně stalo.
+- [ ] Je jasné, kdo na výstup reagoval a kdo ho jen pasivně viděl.
+- [ ] Šum je pojmenovaný jako konkrétní pole, odstavec, duplicita nebo nejasná priorita.
+- [ ] Výstup neobsahuje payloady, osobní údaje, tajemství ani interní poznámky, které příjemce nepotřebuje.
+- [ ] Změna publika po skutečném doručení je zkontrolovaná.
+- [ ] Starý výstup, starý report, staré e-mailové pravidlo nebo starý dashboard nezůstaly běžet bez účelu.
+- [ ] Retenční věta odpovídá místu, kde výstup opravdu žije.
+- [ ] Dokumentace popisuje nový pracovní návyk, ne jen technický formát.
+- [ ] Kontrola končí verdiktem: ponechat, zúžit, rozdělit, vrátit, vypnout nebo znovu navrhnout.
+
+### Mini úkol
+
+Najdi jednu automatizaci, která za poslední měsíc změnila zprávu, report, ticket, dashboard nebo export. Vezmi poslední tři výstupy a ke každému napiš: kdo ho viděl, kdo podle něj něco udělal, co bylo zbytečné a kde výstup zůstal uložený. Pak vyber jedno pole nebo jeden kanál, který jde zúžit ještě tento týden. Pokud se ukáže, že podle výstupu nikdo nerozhoduje, nezkrášluj ho. Vypni ho nebo ho navrhni znovu od pracovní otázky.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -53237,6 +53373,7 @@ Vyber jednu automatizaci, jejíž výstup někdo za poslední měsíc chtěl „
 
 ## Pracovní log
 
+- 2026-07-25: Doplněna příloha o kontrole po změně výstupu automatizace bez dalšího smogu: návrat k výstupní kartě, porovnání prvních výstupů s reálnou akcí, počítání šumu jako provozního nákladu, kontrola skutečného publika po doručení, retence a staré souběžné výstupy, verdikty ponechat/zúžit/rozdělit/vrátit/vypnout/znovu navrhnout, příklad marketingového reportu, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro ověření změněného výstupu automatizace po prvních bězích. Bez nových aktuálních externích tvrzení, navázáno na části o změně výstupu automatizace, kontrole po změně vstupu, provozním driftu, retenci výstupů, marketingovém backlogu a privacy-first minimalizaci; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
 - 2026-07-25: Doplněna příloha o změně výstupu automatizace bez informačního smogu: výstup odvozený od konkrétního příjemce a rozhodnutí, výstupní změnová karta, ořez polí a payloadů, kontrola změny publika, ruční test na třech příkladech, retence chatových, e-mailových, ticketových a exportních výstupů, příklad marketingového backlog reportu, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro změnu výstupu automatizace. Bez nových aktuálních externích tvrzení, navázáno na části o kontrole po změně vstupu automatizace, provozním driftu, logování, marketingovém backlogu a privacy-first minimalizaci; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
 - 2026-07-25: Doplněna příloha o kontrole po změně vstupu automatizace bez rozšířeného stínu: návrat k migrační kartě, ruční porovnání prvních běhů, hledání vstupního driftu, kontrola logů, front, chybových notifikací a dočasných souborů, zavírací rozhodnutí ponechat/zúžit/vrátit/vypnout, příklad nového payloadu u release kontroly, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro ověření změněného vstupu automatizace po prvních bězích. Bez nových aktuálních externích tvrzení, navázáno na části o změně vstupu automatizace, provozním driftu, logování, revokaci tokenů a privacy-first minimalizaci; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
 - 2026-07-25: Doplněna příloha o změně vstupu automatizace bez tichého rozšíření dat: vstupní migrační karta, mapování polí místo celých objektů, test výstupu proti původní pracovní otázce, řízený souběh starého a nového vstupu, zavírací datové rozhodnutí, příklad migrace release kontroly do nového projektového nástroje, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro změnu vstupu automatizace. Bez nových aktuálních externích tvrzení, navázáno na části o stabilizaci automatizace po změně vlastníka, provozní kartě, logování, přístupech, revokaci tokenů a privacy-first minimalizaci; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
