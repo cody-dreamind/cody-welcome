@@ -155,6 +155,7 @@ Když se nechceš vracet do celé knihy, hledej konkrétní nástroj podle výst
 | Ověřit změněný vstup automatizace po prvních bězích | „kontrola po změně vstupu“, „nový payload v provozu“ nebo „vstupní drift“ | kontrolní karta prvních běhů, porovnání výstupů, kontrola nepovolených polí, úklid starých logů a rozhodnutí ponechat, zúžit, vrátit nebo vypnout |
 | Změnit výstup automatizace bez nového informačního hluku | „změna výstupu automatizace“, „jiný report“ nebo „výstup automatizace“ | výstupní změnová karta s příjemcem, rozhodnutím, minimem polí, retenčním pravidlem a kontrolou, že report pořád vede k práci |
 | Ověřit změněný výstup automatizace po prvních bězích | „kontrola po změně výstupu“, „nový report v provozu“ nebo „výstupní smog“ | kontrola prvních výstupů podle rozhodnutí, šumu, publika, retence a datové stopy s jasným verdiktem ponechat, zúžit, rozdělit, vrátit nebo vypnout |
+| Změnit frekvenci automatizace bez tichého sledování navíc | „změna frekvence automatizace“, „častější běh“ nebo „řidší automatizace“ | frekvenční změnová karta s důvodem, rizikovým oknem, limitem dat, nákladem šumu a návratem zpět |
 
 Pravidlo pro práci s rejstříkem: otevři maximálně tři nalezené části, vyber jednu a zapiš výstup. Pokud po deseti minutách pořád skáčeš mezi odkazy, vrať se k tabulce „Kudy začít podle aktuální bolesti“ a zúž problém. E-book není buffet. Teda je, ale bez talíře si stejně odneseš jen chaos.
 
@@ -53180,6 +53181,128 @@ To je dobrá iterace. Ne proto, že report byl perfektní. Protože se zlepšil 
 
 Najdi jednu automatizaci, která za poslední měsíc změnila zprávu, report, ticket, dashboard nebo export. Vezmi poslední tři výstupy a ke každému napiš: kdo ho viděl, kdo podle něj něco udělal, co bylo zbytečné a kde výstup zůstal uložený. Pak vyber jedno pole nebo jeden kanál, který jde zúžit ještě tento týden. Pokud se ukáže, že podle výstupu nikdo nerozhoduje, nezkrášluj ho. Vypni ho nebo ho navrhni znovu od pracovní otázky.
 
+## Příloha: Změna frekvence automatizace bez tichého sledování navíc
+
+Změna frekvence automatizace vypadá nenápadně. Cron běžel jednou denně, teď poběží každou hodinu. Kontrola chodila v pondělí, teď přijde po každém releasu. Digest byl měsíční, nově bude týdenní. Technicky je to často jeden řádek konfigurace. Produktově a privacy-first je to ale změna provozního slibu, datové stopy i pozornosti týmu.
+
+Častější běh může být správný, když zkracuje rizikové okno nebo pomáhá rychleji zavřít drahý problém. Řidší běh může být správný, když automatizace vyrábí šum, ukládá zbytečné výstupy nebo se používá jen jako rituál. Špatný důvod je „pro jistotu“. Ta věta obvykle znamená, že tým neumí pojmenovat rozhodnutí, které má automatizace chránit.
+
+> Codyho komentář: Frekvence není detail plánovače. Je to odpověď na otázku, jak rychle opravdu potřebujeme vědět, že se něco změnilo. Když tu otázku přeskočíš, skončíš s hodinovým reportem na problém, který se rozhoduje jednou měsíčně. Krásná dochvilnost, slabá práce.
+
+### Začni rizikovým oknem
+
+Před změnou frekvence napiš, jak dlouho smí problém bezpečně zůstat neviditelný. Tomu říkej rizikové okno. U dostupnosti veřejného formuláře to může být hodina. U zastaralé support šablony to může být týden. U kvartální revize dodavatele to nemá být každodenní ping jen proto, že plánovač umí vstávat dřív než lidi.
+
+Praktická tabulka:
+
+| Automatizace | Co chrání | Přijatelná neviditelnost | Navržená frekvence | Proč ne častěji |
+| --- | --- | --- | --- | --- |
+| dostupnost poptávkového formuláře | ztrátu leadů a důvěry | desítky minut až hodina | každých 15-60 minut podle provozu | častější kontrola nepřidá rozhodnutí, jen šum |
+| revize trust odpovědí | staré sliby před nákupem | týden až měsíc | týdně nebo po změně produktu | denní běh by kontroloval stejnou realitu |
+| kontrola starých exportů | zapomenuté kopie dat | dny až týden | týdně | hodinový běh nezrychlí smazání bez vlastníka |
+| obsahový digest | výběr redakční priority | týden | týdně | denní report by rozbil rytmus rozhodování |
+
+Pokud neumíš vyplnit sloupec „co chrání“, frekvenci zatím neměň. Nejdřív oprav pracovní větu automatizace.
+
+### Udělej frekvenční změnovou kartu
+
+Změna frekvence má mít vlastní kartu stejně jako změna vstupu nebo výstupu. Stačí malá, ale musí oddělit důvod od dojmu.
+
+| Pole | Co vyplnit |
+| --- | --- |
+| Původní frekvence | jak často automatizace běžela a kdy |
+| Nová frekvence | jak často má běžet po změně |
+| Důvod změny | jaké riziko, rozhodnutí nebo šum tím řešíme |
+| Rizikové okno | jak dlouho smí problém čekat bez zásahu |
+| Vstupy | co se při každém běhu čte |
+| Výstupy | co se při každém běhu ukládá nebo posílá |
+| Šumový limit | kolik falešných nebo nepoužitých výstupů je ještě přijatelné |
+| Návrat zpět | kdy se frekvence vrátí, zúží nebo automatizace vypne |
+| Kontrola po změně | po kolika bězích se změna vyhodnotí |
+
+Důležitý je hlavně návrat zpět. Častější frekvence se ráda stane novým normálem, i když vznikla jen jako dočasná pojistka po incidentu. Bez data kontroly se z pojistky stane trvalý datový návyk.
+
+### Častější běh neznamená širší data
+
+Když automatizace běží častěji, vzniká víc záznamů i při stejném vstupu. To se snadno přehlédne. Dvacet čtyři krátkých stavových řádků denně může být pořád rozumné. Dvacet čtyři payloadů s detaily zákazníků denně už je úplně jiný sport, a ne ten olympijský.
+
+Před zrychlením frekvence proto zkontroluj:
+
+- Jestli každý běh opravdu potřebuje číst stejný rozsah dat.
+- Jestli log ukládá jen stav, čas a krátkou chybu, nebo celý vstup a výstup.
+- Jestli se notifikace neposílají do širšího publika, než je potřeba.
+- Jestli častější běh nevytváří více exportů, příloh nebo duplicitních ticketů.
+- Jestli se starší běhy agregují nebo mažou podle jasné retence.
+- Jestli má automatizace ochranu proti opakovanému posílání stejné zprávy.
+
+Privacy-first pravidlo: zrychlení běhu má nejdřív zúžit uložený detail. Pokud chceš kontrolovat častěji, ukládej méně. Výjimky musí mít vlastní důvod a datum kontroly.
+
+### Řidší běh není selhání
+
+Někdy je nejlepší změna frekvence směrem dolů. Automatizace může být užitečná, ale moc hlasitá. Když každý den připomíná věc, kterou tým rozhoduje jednou týdně, neurychluje práci. Jen učí lidi ignorovat výstup.
+
+Řidší běh dává smysl, když:
+
+- výstup často nevede k žádné akci,
+- problém má přirozený týdenní nebo měsíční rytmus,
+- častý běh vytváří opakované falešné poplachy,
+- tým stejně čeká na pravidelné review,
+- datová stopa roste rychleji než užitek,
+- automatizace nahrazuje chybějící vlastnictví místo skutečné potřeby.
+
+Zpomalení ale nesmí být tiché vypnutí odpovědnosti. Když snížíš frekvenci, napiš, co se stane mezi běhy. Například urgentní incidenty dál chytá samostatný healthcheck, zatímco týdenní digest řeší jen trend a backlog.
+
+### Odděl trigger od plánu
+
+Ne každá automatizace má běžet podle času. Někdy je lepší spouštěč událostí: po releasu, po změně dodavatele, po úpravě pricingu, po změně formuláře, po uzavření incidentu nebo před veřejným vydáním. Časový plán je dobrý sluha, ale mizerný způsob, jak předstírat kontext.
+
+Příklady:
+
+| Místo pevného plánu | Lepší spouštěč |
+| --- | --- |
+| denní kontrola všech trust odpovědí | kontrola po změně produktu, dodavatele nebo veřejného privacy slibu |
+| hodinová kontrola všech obsahových URL | smoke test po publikaci a týdenní kontrola klíčových cest |
+| měsíční ruční export do reportu | report po uzavření rozhodovacího období |
+| pravidelný ping externistovi | re-eskalace jen při překročení jasné hranice interní schopnosti |
+
+Trigger by měl být navázaný na pracovní změnu, ne na nervozitu. Pokud se bojíš, že se něco rozbije kdykoli, možná potřebuješ healthcheck, test, SLO nebo jednodušší provozní slib. Ne další univerzální digest.
+
+### Příklad: Dostupnostní kontrola po stabilizaci webu
+
+Tým měl po incidentu kontrolu veřejného webu každých pět minut. Během incidentu to dávalo smysl: zkracovalo rizikové okno a pomáhalo ověřit návrat služby. Po dvou týdnech stabilního provozu ale pořád vznikalo mnoho stavových řádků a občasné síťové zakolísání posílalo zbytečné notifikace.
+
+Frekvenční karta ukáže:
+
+| Pole | Zápis |
+| --- | --- |
+| Původní frekvence | každých 5 minut |
+| Nová frekvence | každých 30 minut pro běžný stav, každých 5 minut jen v dočasném incidentním režimu |
+| Důvod změny | snížit šum a logy po stabilizaci |
+| Rizikové okno | běžný veřejný výpadek má být viditelný do 30 minut |
+| Vstupy | jen veřejná URL bez cookies a bez uživatelských účtů |
+| Výstupy | čas, HTTP stav, krátká chyba, bez payloadu a bez screenshotů |
+| Návrat zpět | po incidentu na 24 hodin zrychlit, pak automaticky vrátit |
+| Kontrola | po týdnu porovnat počet skutečných zásahů a falešných upozornění |
+
+Výsledek není méně odpovědný monitoring. Je to monitoring, který odpovídá provoznímu riziku a nevyrábí datový prach jen proto, že umí běžet pořád.
+
+### Checklist: Změna frekvence automatizace
+
+- [ ] Je napsané, jaké rozhodnutí nebo riziko frekvence chrání.
+- [ ] Rizikové okno je pojmenované lidsky, ne jen jako cron výraz.
+- [ ] Nová frekvence nečte širší vstupy než původní automatizace.
+- [ ] Častější běh ukládá méně detailu nebo má jasný důvod, proč ne.
+- [ ] Výstupy mají šumový limit a známého příjemce.
+- [ ] Retence odpovídá počtu nových běhů.
+- [ ] Existuje návrat zpět, zúžení nebo vypnutí po kontrolním okně.
+- [ ] Je jasné, co se děje mezi běhy, pokud se frekvence snižuje.
+- [ ] Trigger je zvážený vedle pevného časového plánu.
+- [ ] Kontrola po změně skončí verdiktem, ne jen pocitem, že „to chodí“.
+
+### Mini úkol
+
+Vyber jednu automatizaci, u které někdo navrhl častější nebo řidší běh. Napiš jednu větu, co automatizace chrání, a druhou větu, jak dlouho smí problém zůstat neviditelný. Potom vyplň frekvenční změnovou kartu a najdi jednu datovou stopu, která by po změně rostla rychleji než užitek. Pokud frekvenci zvyšuješ, zkrať uložený detail nebo nastav kratší retenci. Pokud frekvenci snižuješ, napiš, co dál chytá urgentní stav. Bez toho je změna frekvence jen přesun nervozity do plánovače.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -53373,6 +53496,7 @@ Najdi jednu automatizaci, která za poslední měsíc změnila zprávu, report, 
 
 ## Pracovní log
 
+- 2026-07-25: Doplněna příloha o změně frekvence automatizace bez tichého sledování navíc: rizikové okno, frekvenční změnová karta, pravidlo že častější běh nemá znamenat širší data, zpomalení jako legitimní omezení šumu, rozdíl mezi časovým plánem a pracovním triggerem, příklad dostupnostní kontroly po stabilizaci webu, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro změnu frekvence automatizace. Bez nových aktuálních externích tvrzení, navázáno na části o změně výstupu, provozním driftu, plánovaných úlohách, healthchecku, retenci výstupů a privacy-first minimalizaci; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
 - 2026-07-25: Doplněna příloha o kontrole po změně výstupu automatizace bez dalšího smogu: návrat k výstupní kartě, porovnání prvních výstupů s reálnou akcí, počítání šumu jako provozního nákladu, kontrola skutečného publika po doručení, retence a staré souběžné výstupy, verdikty ponechat/zúžit/rozdělit/vrátit/vypnout/znovu navrhnout, příklad marketingového reportu, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro ověření změněného výstupu automatizace po prvních bězích. Bez nových aktuálních externích tvrzení, navázáno na části o změně výstupu automatizace, kontrole po změně vstupu, provozním driftu, retenci výstupů, marketingovém backlogu a privacy-first minimalizaci; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
 - 2026-07-25: Doplněna příloha o změně výstupu automatizace bez informačního smogu: výstup odvozený od konkrétního příjemce a rozhodnutí, výstupní změnová karta, ořez polí a payloadů, kontrola změny publika, ruční test na třech příkladech, retence chatových, e-mailových, ticketových a exportních výstupů, příklad marketingového backlog reportu, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro změnu výstupu automatizace. Bez nových aktuálních externích tvrzení, navázáno na části o kontrole po změně vstupu automatizace, provozním driftu, logování, marketingovém backlogu a privacy-first minimalizaci; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
 - 2026-07-25: Doplněna příloha o kontrole po změně vstupu automatizace bez rozšířeného stínu: návrat k migrační kartě, ruční porovnání prvních běhů, hledání vstupního driftu, kontrola logů, front, chybových notifikací a dočasných souborů, zavírací rozhodnutí ponechat/zúžit/vrátit/vypnout, příklad nového payloadu u release kontroly, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro ověření změněného vstupu automatizace po prvních bězích. Bez nových aktuálních externích tvrzení, navázáno na části o změně vstupu automatizace, provozním driftu, logování, revokaci tokenů a privacy-first minimalizaci; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
