@@ -168,6 +168,7 @@ Když se nechceš vracet do celé knihy, hledej konkrétní nástroj podle výst
 | Zapsat rozhodnutí o automatizaci bez auditního divadla | „rozhodovací záznam automatizace“, „proč automatizace běží“ nebo „automatizační ADR“ | krátký záznam důvodu, hranice dat, pravomoci, vlastníka, návratu zpět a data další kontroly bez opisování celé historie |
 | Převést automatizační rozhodnutí do runbooku | „runbook automatizace“, „provozní postup automatizace“ nebo „když automatizace selže“ | krátký provozní postup pro běžný běh, chybu, ruční náhradu, vypnutí, eskalaci a úklid stop |
 | Ověřit runbook automatizace cvičným průchodem | „cvičný průchod runbookem“, „suchý test automatizace“ nebo „runbook pod stresem“ | krátká zkouška, že nový vlastník zvládne běžný běh, poruchu, ruční režim a úklid bez autora skriptu |
+| Opravit runbook po cvičném průchodu bez nového chaosu | „oprava runbooku“, „nálezy ze suchého testu“ nebo „runbook po cvičení“ | malý opravný balík, který z nálezů udělá jasné kroky, úklid starých pokynů a nové datum ověření |
 
 Pravidlo pro práci s rejstříkem: otevři maximálně tři nalezené části, vyber jednu a zapiš výstup. Pokud po deseti minutách pořád skáčeš mezi odkazy, vrať se k tabulce „Kudy začít podle aktuální bolesti“ a zúž problém. E-book není buffet. Teda je, ale bez talíře si stejně odneseš jen chaos.
 
@@ -54806,6 +54807,125 @@ Tento test nezjistil, jestli je celý web dokonale odolný. Zjistil něco užite
 
 Vyber jednu automatizaci s existujícím runbookem a naplánuj třicetiminutový suchý průchod. Připrav tři testovací situace, urč člověka mimo autora automatizace a napiš kartu průchodu se šesti poli: automatizace, testované situace, verdikt, nálezy, datová stopa a další krok. Po testu oprav jen jednu největší mezeru v runbooku a nastav datum dalšího ověření.
 
+## Příloha: Oprava runbooku po cvičném průchodu bez nového chaosu
+
+Suchý průchod runbookem má smysl jen tehdy, když po něm opravdu opravíš postup. Jinak z něj vznikne další pěkná poznámka, která umírá někde mezi chatem, issue trackerem a dobrou vůlí. Oprava runbooku ale není pozvánka k přepsání celého provozu. Je to malý balík změn, který odstraní konkrétní mezery nalezené při testu a znovu ukáže, že tým podle postupu zvládne udělat další bezpečný krok.
+
+Největší chyba po cvičení je začít debatou „co všechno by se dalo zlepšit“. To je nekonečný výtah do sklepa. Lepší je otevřít kartu průchodu, vybrat největší mezeru, opravit ji, uklidit starý pokyn a nastavit nové ověření. Runbook není literární dílo. Je to nástroj, který má ve stresu zkrátit cestu k rozhodnutí.
+
+> Codyho komentář: Po testu runbooku nehledej dokonalost. Hledej jednu věc, kvůli které by člověk v provozu udělal špatný nebo zbytečně široký zásah. Tu oprav první. Zbytek může počkat v backlogu, kam právem patří.
+
+### Přepiš nálezy na opravné položky
+
+Nález ze cvičení často začíná jako poznámka, ne jako práce. „Není jasné, kde je log“ ještě není opravná položka. Opravná položka zní: „Do runbooku doplnit přesný odkaz na poslední běh, filtr podle jobu a příklad správného výsledku bez kopírování celého logu.“
+
+Při převodu používej jednoduchou tabulku:
+
+| Nález z průchodu | Opravná položka | Hotovo znamená |
+| --- | --- | --- |
+| Krok je moc obecný. | Doplnit konkrétní příkaz, obrazovku nebo kontrolní otázku. | Nový vlastník ví, co otevřít a jak poznat výsledek. |
+| Chybí hranice zásahu. | Přidat rozdělení na read-only, vratný, rizikový a zakázaný krok. | Člověk neeskaluje zbytečně, ale ani nehraje admina bez mandátu. |
+| Ruční režim je neurčitý. | Přidat krátkou ruční šablonu a časový limit použití. | Tým umí práci udržet omezeně v chodu bez automatizace. |
+| Datová stopa testu je nejasná. | Doplnit, co se ukládá, kde, na jak dlouho a kdo to smaže. | Po opravě nezůstanou testovací exporty, kopie payloadů ani celé logy. |
+| Runbook odkazuje na starý systém. | Nahradit odkaz a zkontrolovat navazující dokumentaci. | V postupu nezůstane dvojí pravda. |
+
+Opravné položky piš jako změny v dokumentu, ne jako výčitky lidem. „Doplnit přesný marker“ je použitelné. „Tým musí být pozornější“ je věta, která se tváří manažersky a přitom neopraví vůbec nic.
+
+### Zúž opravu na jeden balík
+
+Po dobrém cvičení obvykle najdeš víc mezer než jednu. To neznamená, že máš otevřít velký refaktor runbooku. Vezmi opravy, které spolu přímo souvisejí, a udělej z nich jeden balík.
+
+Rozumný balík může být:
+
+| Balík | Co obsahuje | Co už neobsahuje |
+| --- | --- | --- |
+| Vyjasnění běžného běhu | přesný stav úspěchu, místo kontroly, zápis „bez zásahu“ | změnu frekvence automatizace |
+| Oprava poruchového kroku | rozlišení chyby vstupu, oprávnění a externí služby | nový monitoring všech závislostí |
+| Zpřesnění ručního režimu | ruční šablonu, vlastníka, časový limit | přepis celé automatizace |
+| Úklid datové stopy | retenční pravidlo pro testovací výstupy a logy | plošný audit všech systémů |
+
+Jeden balík má mít jednoho vlastníka a jedno ověření. Pokud oprava potřebuje tři týmy, dvě nové integrace a schvalovací tour de kancelář, už to není oprava runbooku. Je to provozní projekt a zaslouží si vlastní rozhodovací záznam.
+
+### Uprav kroky podle reality, ne podle přání
+
+Runbook musí popisovat to, co člověk opravdu může udělat. Ne to, co by bylo hezké, kdyby měl ideální oprávnění, ideální dashboard a deset minut klidu.
+
+Při opravě každého kroku zkontroluj čtyři otázky:
+
+| Otázka | Proč na ní záleží |
+| --- | --- |
+| Má člověk k tomuto kroku běžně oprávnění? | Runbook nesmí tiše předpokládat sdílený admin účet. |
+| Jde výsledek ověřit bez čtení citlivých dat? | Když stačí status, neotevírej celé zákaznické zprávy. |
+| Je krok vratný nebo jasně eskalovaný? | Provozní stres nemá být zkratka k nevratné změně. |
+| Je formulace konkrétní? | „Zkontroluj systém“ není krok. „Otevři poslední běh a ověř stav `success`“ už ano. |
+
+Pokud realita říká, že nový vlastník nemá oprávnění k restartu jobu, nezapisuj restart jako běžný krok. Zapiš read-only ověření, hranici eskalace a ruční náhradu. Privacy-first provoz není jen o datech zákazníků. Je i o tom, že pravomoci nejsou širší než práce, kterou má člověk bezpečně dělat.
+
+### Ukliď staré pokyny a souběžné pravdy
+
+Opravený runbook je nebezpečný, pokud vedle něj zůstane starý návod v wiki, pinned zprávě, issue šabloně nebo komentáři u plánované úlohy. Lidé ve stresu sáhnou po tom, co najdou první. Vyhledávač v dokumentaci neumí poznat, který návod je čerstvý a který je jen historická fosilie s lepším SEO.
+
+Po opravě projdi minimálně:
+
+- hlavní runbook,
+- odkazy z rozhodovacího záznamu automatizace,
+- interní wiki nebo docs stránku,
+- šablony incidentů a support odpovědí,
+- komentář u plánované úlohy nebo CI jobu,
+- pinned zprávy v interním chatu, pokud existují,
+- backlog položku, která cvičný průchod spustila.
+
+U každého místa udělej jednu ze tří akcí: aktualizovat, přesměrovat na nový runbook, nebo smazat. Pokud starý text musí zůstat kvůli historii, označ ho jako archiv a doplň odkaz na aktuální postup. Historie je dobrá pro učení, ne pro provozní rozhodování v pátek večer.
+
+### Aktualizuj datum ověření a další trigger
+
+Oprava bez nového data ověření je jen textová kosmetika. Po změně nastav dvě věci: datum posledního ověření a trigger další kontroly.
+
+Příklad:
+
+| Pole | Zápis |
+| --- | --- |
+| Poslední ověření | 2026-07-25, suchý průchod po opravě kroku s obsahovým markerem. |
+| Další kontrola | Při změně kontrolovaného markeru, přesunu monitoringu nebo nejpozději za 60 dní. |
+| Stop pravidlo | Pokud runbook dvakrát po sobě nevede k rozhodnutí do 10 minut, vrátit ho k přepsání. |
+| Vlastník | Vlastník pracovního výsledku, ne jen autor skriptu. |
+
+Revize podle kalendáře je užitečná, ale nestačí. Runbook se nejčastěji rozbije změnou systému, oprávnění, vstupu nebo výstupu automatizace. Proto k datu přidej i pracovní trigger. Když se změní to, na čem runbook stojí, kontrola se má spustit hned, ne až při příští kvartální meditaci nad dokumentací.
+
+### Příklad: Oprava runbooku dostupnostní kontroly
+
+Při suchém testu dostupnostní kontroly se ukázalo, že nový vlastník neví, co přesně znamená „zkontroluj obsahový marker“. Runbook popisoval dobrý záměr, ale ne konkrétní ověření.
+
+Opravný balík:
+
+| Část | Změna |
+| --- | --- |
+| Nález | Krok „zkontroluj obsahový marker“ je neověřitelný bez znalosti autora. |
+| Oprava | Doplnit přesný text markeru, příkaz vracející jen HTTP status a výsledek hledání markeru, a příklad očekávaného výstupu. |
+| Datová hranice | Nepřidávat ukládání celého HTML, screenshotů ani response body do dlouhodobého logu. |
+| Úklid | Smazat testovací payload, aktualizovat pinned odkaz v interním chatu a zavřít backlog položku z cvičení. |
+| Ověření | Druhý člověk projde běžný stav a připravenou poruchu do 10 minut bez dotazu na autora. |
+| Další trigger | Změna homepage markeru, změna monitorovacího skriptu nebo nový typ incidentu. |
+
+Výsledek není velkolepý. A právě proto je dobrý. Jeden nejasný krok se změnil na ověřitelný postup, datová stopa se nerozšířila a tým ví, kdy se k runbooku vrátit.
+
+### Checklist: Oprava runbooku po cvičném průchodu
+
+- [ ] Každý nález je přepsaný na konkrétní opravnou položku.
+- [ ] Oprava má jeden malý balík, vlastníka a ověření.
+- [ ] Kroky odpovídají skutečným oprávněním lidí, kteří runbook používají.
+- [ ] Výsledek lze ověřit bez čtení nebo ukládání zbytečných osobních údajů.
+- [ ] Staré pokyny v dokumentaci, chatu, šablonách a jobech jsou aktualizované, přesměrované nebo označené jako archiv.
+- [ ] Runbook rozlišuje běžný stav, poruchu, ruční režim a hranici eskalace.
+- [ ] Dočasné testovací výstupy, payloady a exporty mají jasné smazání.
+- [ ] Po opravě je nastavené datum posledního ověření a trigger další kontroly.
+- [ ] Pokud oprava mění pravomoc automatizace, vznikne samostatná karta pravomoci.
+- [ ] Pokud oprava odhalí produktový problém, nejde se tvářit, že ho vyřeší delší runbook.
+
+### Mini úkol
+
+Vezmi poslední kartu cvičného průchodu runbookem a vyber jeden nález, který by v provozu způsobil špatné rozhodnutí nebo zbytečný zásah do dat. Přepiš ho na opravnou položku, uprav příslušný krok runbooku, ukliď jednu starou souběžnou stopu a nastav nové datum ověření. Pokud oprava nejde udělat do třiceti minut, zúž ji na nejmenší krok, který zabrání konkrétní chybě.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -54998,6 +55118,8 @@ Vyber jednu automatizaci s existujícím runbookem a naplánuj třicetiminutový
 - Nielsen Norman Group: Onboarding Tutorials vs. Contextual Help - rozdíl mezi úvodními tutoriály a kontextovou pomocí: https://www.nngroup.com/articles/onboarding-tutorials/
 
 ## Pracovní log
+
+- 2026-07-25: Doplněna příloha o opravě runbooku po cvičném průchodu bez nového chaosu: převod nálezů na opravné položky, zúžení opravy na jeden balík, kontrola reálných oprávnění a datové hranice, úklid starých souběžných pokynů, nové datum ověření, příklad dostupnostní kontroly, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro opravu runbooku po suchém testu. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
 - 2026-07-25: Doplněna příloha o cvičném průchodu runbookem automatizace bez provozního divadla: tři testované situace, příprava bez produkčního rizika, sledování rozhodnutí místo výkonu člověka, malá karta průchodu, příklad suchého testu dostupnostní kontroly, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro ověření runbooku cvičným průchodem. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
