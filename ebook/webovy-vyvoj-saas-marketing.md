@@ -147,6 +147,7 @@ Když se nechceš vracet do celé knihy, hledej konkrétní nástroj podle výst
 | Ověřit náhradní ruční proces po vypnutí automatizace | „ruční proces po vypnutí“, „náhradní rutina“ nebo „kontrola po vypnutí automatizace“ | krátká ověřovací karta, že tým umí původní riziko pokrýt bez starého skriptu, nových exportů a skryté odpovědnosti |
 | Znovu spustit automatizaci po ruční náhradě | „znovuspuštění automatizace“, „automatizace po ručním procesu“ nebo „restart automatizace“ | restartovací karta s menším rozsahem, jasným spouštěčem, ručním rozhodnutím, omezenými logy a datem dalšího review |
 | Ověřit restartovanou automatizaci po pilotu | „kontrola po restartu automatizace“, „pilot automatizace hotovo“ nebo „restartovaný skript“ | rozhodnutí, zda automatizace po pilotu zůstane, zúží se, vrátí ručně, nebo se znovu vypne bez starých tokenů a datového šumu |
+| Převést úspěšný pilot automatizace do běžného provozu | „standardní provoz automatizace“, „automatizace po pilotu“ nebo „rutina ze skriptu“ | provozní karta automatizace s vlastníkem, revizním rytmem, limitem dat, stop pravidlem a plánem úklidu |
 
 Pravidlo pro práci s rejstříkem: otevři maximálně tři nalezené části, vyber jednu a zapiš výstup. Pokud po deseti minutách pořád skáčeš mezi odkazy, vrať se k tabulce „Kudy začít podle aktuální bolesti“ a zúž problém. E-book není buffet. Teda je, ale bez talíře si stejně odneseš jen chaos.
 
@@ -52137,6 +52138,125 @@ To je zdravý závěr: nástroj zůstává, ale menší a přesnější. Ne prot
 
 Vyber jednu automatizaci, která byla nedávno restartovaná nebo běží v pilotu. Vezmi poslední tři běhy a vyplň pilotní tabulku: správný spouštěč, užitečný výstup, falešný nález, datová stopa, rozhodnutí vlastníka. Pak napiš jeden stav automatizace. Jen jeden. Pokud se přistihneš u věty „ještě to necháme nějak běžet“, dopiš konec pilotu a stop pravidlo. Automatizace bez konce není provozní zralost. Je to jen proces, který si našel pohodlné místo k přezimování.
 
+## Příloha: Standardní provoz automatizace po pilotu bez tichého rozšíření
+
+Když pilot automatizace dopadne dobře, přichází nenápadně riziková chvíle. Tým si oddechne, skript běží, výstupy pomáhají a nikdo nechce znovu otevírat procesní papíry. Jenže právě v tom okamžiku se pilot často promění v trvalou infrastrukturu bez vlastníka, bez revize a bez jasné hranice dat. Včera to byl opatrný experiment. Dnes je to „něco, co prostě běží“. Gratuluji, právě jsme vyrobili malou černou skříňku s kalendářem.
+
+Standardní provoz neznamená, že automatizaci dovolíš růst. Znamená to, že jí dáš pevný rámec: kdy běží, co smí číst, kam zapisuje, kdo rozhoduje podle výstupu, kdy se kontroluje a jak se vypne. Dobrý pilot má být začátek rutiny, ne začátek neviditelné závislosti.
+
+### Převeď pilot na provozní kartu
+
+Nejdřív vezmi rozhodnutí po pilotu a přepiš ho do provozní karty. Ta nemá být dlouhá. Má být tak konkrétní, aby nový člověk v týmu poznal, jestli automatizace běží správně, aniž by musel číst historii všech commitů, chatů a povzdechů.
+
+Minimální provozní karta:
+
+| Pole | Co vyplnit |
+| --- | --- |
+| Účel | Jaké rozhodnutí nebo pracovní riziko automatizace podporuje. |
+| Spouštěč | Kdy se spustí a kdy se spustit nesmí. |
+| Povolené vstupy | Konkrétní systémy, pole, štítky nebo veřejné zdroje, které smí číst. |
+| Zakázané vstupy | Data, která nesmí číst ani kvůli pohodlí. |
+| Výstup | Kam zapisuje a jak má vypadat použitelný výstup. |
+| Vlastník | Člověk nebo role, která odpovídá za rozhodnutí podle výstupu. |
+| Provozní signály | Co znamená zdravý běh, šum, chyba a datové riziko. |
+| Revize | Kdy se karta znovu otevře. |
+| Stop pravidlo | Kdy se automatizace zúží, vypne nebo vrátí ručně. |
+
+Provozní karta není dokumentace pro auditní divadlo. Je to brzda proti tomu, aby se malý užitečný skript stal neřízeným procesem. Pokud karta nejde vyplnit jednou obrazovkou, automatizace možná dělá moc věcí najednou.
+
+### Zafixuj rozsah po pilotu
+
+Úspěšný pilot často spustí chuť přidat „ještě jedno pole“, „ještě jeden zdroj“ a „ještě jednu notifikaci“. Většina těchto nápadů vypadá nevinně. Dohromady ale zvednou datovou stopu, počet falešných signálů a závislost týmu na nástroji.
+
+Po pilotu si napiš zamykací větu:
+
+> Automatizace odteď běží jen pro ___, čte jen ___, zapisuje jen ___ a člověk rozhoduje ___.
+
+Příklad: „Automatizace odteď běží jen pro release karty se štítkem `data-impact` a kategorií `export`, `retence`, `subdodavatel` nebo `billing`, čte jen release kartu a odpovědní knihovnu, zapisuje jen úkol do backlogu a vlastník rozhoduje, zda se trust odpověď upraví, ponechá nebo eskaluje.“
+
+Tato věta je důležitější než hezký název workflow. Dá se z ní odvodit oprávnění, logování, test i důvod vypnutí. Když někdo později navrhne rozšíření, nehádejte se o pocit. Porovnejte návrh se zamykací větou a udělejte novou změnovou kartu.
+
+### Nastav revizní rytmus podle rizika
+
+Automatizace nemusí mít stejnou revizi jako celý produkt. Rytmus nastav podle dopadu:
+
+| Riziko | Příklad | Revize |
+| --- | --- | --- |
+| Nízké | připomínka ručního obsahu bez čtení zákaznických dat | po 10 bězích nebo kvartálně |
+| Střední | úkoly podle release změn, billing textů nebo support šablon | po 5 bězích nebo měsíčně |
+| Vysoké | přístup k zákaznickým datům, bezpečnostním signálům, exportům nebo právním žádostem | po každém zásadním běhu a pravidelně s vlastníkem dat |
+
+Revize nemá být schůzka o tom, zda „jsme spokojení“. Má odpovědět na čtyři otázky:
+
+- Přinesla automatizace rozhodnutí, které by jinak zůstalo nejasné?
+- Zůstaly vstupy a logy v povoleném rozsahu?
+- Kolik šumu vytvořila a co s tím uděláme?
+- Má pořád smysl běžet, nebo se její práce změnila v běžný produktový proces?
+
+Pokud revize nemá vlastníka, není to revize. Je to kalendářová dekorace.
+
+### Odděl provozní chybu od produktové změny
+
+Když automatizace po pilotu začne selhávat, neskákej hned do kódu. Nejdřív rozliš typ problému:
+
+| Problém | Co znamená | Správná reakce |
+| --- | --- | --- |
+| Skript spadl | technická chyba běhu | opravit, otestovat a zapsat dopad |
+| Chybí vstup | změnil se proces, štítky nebo zdroj pravdy | aktualizovat provozní kartu a odpovědnost |
+| Výstup nikdo nepoužívá | automatizace nemá pracovní hodnotu | zúžit, přepsat nebo vypnout |
+| Výstup je moc častý | spouštěč je široký | zpřísnit pravidla před přidáním dalších filtrů |
+| Výstup vyžaduje citlivější data | změnil se účel | zastavit rozšíření a udělat nové rozhodnutí o datech |
+
+Nejhorší oprava je přidat další oprávnění jen proto, aby se skript „konečně dozvěděl všechno“. Automatizace nepotřebuje vědět všechno. Potřebuje vědět jen tolik, aby správný člověk mohl udělat správné rozhodnutí.
+
+### Udrž ruční návrat jako normální možnost
+
+I standardní automatizace má mít ruční náhradní postup. Ne kvůli dramatickému incidentu, ale kvůli běžnému provozu: expirovaný token, změna API, chybné štítky, přechod dodavatele, nový typ práce, dovolená vlastníka.
+
+Ruční návrat popiš třemi větami:
+
+1. Jak poznáme, že automatizace dočasně nepokrývá svůj účel.
+2. Kdo a odkud vezme minimální vstup pro ruční průchod.
+3. Jak se po ručním průchodu rozhodne, jestli automatizaci opravit, zúžit nebo vypnout.
+
+Tím chráníš tým před dvěma extrémy: slepě věřit rozbitému skriptu, nebo kvůli jedné chybě zahodit užitečnou rutinu. Ruční návrat je normální provozní schopnost. Ne selhání hrdosti. Hrdost je mimochodem špatný monitorovací nástroj.
+
+### Příklad: Trust automatizace po úspěšném pilotu
+
+Po pilotu zůstala automatizace, která z release karet vytváří úkoly pro review trust odpovědí. Pilot ukázal dvě užitečná upozornění, jeden falešný signál a žádné překročení datové hranice. Tým ji tedy převádí do běžného provozu.
+
+Provozní rozhodnutí:
+
+| Pole | Rozhodnutí |
+| --- | --- |
+| Účel | Zachytit release změny, které mohou změnit veřejné trust odpovědi. |
+| Spouštěč | Release karta se štítkem `data-impact` a kategorií `export`, `retence`, `subdodavatel` nebo `billing`. |
+| Povolené vstupy | Release karta, datová mapa, odpovědní knihovna. |
+| Zakázané vstupy | CRM, support historie, zákaznické smlouvy, interní incidentní deníky. |
+| Výstup | Jeden backlog úkol s odkazem na dotčenou odpověď a návrhem rozhodnutí. |
+| Vlastník | Vlastník trust odpovědí, ne autor skriptu. |
+| Revize | Po pěti relevantních bězích nebo při prvním datovém překročení. |
+| Stop pravidlo | Dva falešné úkoly za sebou bez opravitelného důvodu znamenají návrat ke zúžení spouštěče. |
+
+Všimni si drobnosti: automatizace pořád nic sama nepřepisuje. Připravuje práci, odkazuje na zdroj pravdy a člověk zavírá rozhodnutí. To není méně moderní. To je jen dospělý vztah ke stroji.
+
+### Checklist: Standardní provoz automatizace
+
+- [ ] Pilot skončil konkrétním rozhodnutím, ne tichým pokračováním.
+- [ ] Existuje provozní karta s účelem, spouštěčem, vstupy, výstupem, vlastníkem a revizí.
+- [ ] Rozsah automatizace je po pilotu zafixovaný jednou zamykací větou.
+- [ ] Nové rozšíření vstupů nebo oprávnění vyžaduje novou změnovou kartu.
+- [ ] Logy obsahují jen provozní minimum potřebné k obnově a kontrole.
+- [ ] Výstupy končí ve zdroji pravdy nebo backlogu, ne jen v chatu.
+- [ ] Vlastník rozhodnutí je jiný pojem než autor skriptu.
+- [ ] Revizní rytmus odpovídá datovému a provoznímu riziku.
+- [ ] Existuje ruční náhradní postup pro běžný výpadek automatizace.
+- [ ] Stop pravidlo říká, kdy se automatizace zúží, vrátí ručně nebo vypne.
+
+### Mini úkol
+
+Vyber jednu automatizaci, která přežila pilot nebo první kontrolu. Napiš její provozní kartu na jednu stránku a přidej zamykací větu: kdy běží, co čte, kam zapisuje a kdo rozhoduje. Potom najdi jedno oprávnění, vstup nebo log, který v běžném provozu nepotřebuje. Smaž ho z návrhu dřív, než si na něj tým zvykne. Nejlevnější datový úklid je ten, který nikdy nevznikne.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -52330,6 +52450,7 @@ Vyber jednu automatizaci, která byla nedávno restartovaná nebo běží v pilo
 
 ## Pracovní log
 
+- 2026-07-25: Doplněna příloha o standardním provozu automatizace po pilotu bez tichého rozšíření: provozní karta, zamykací věta rozsahu, revizní rytmus podle rizika, rozlišení provozní chyby od produktové změny, ruční návrat, příklad trust automatizace, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro převod úspěšného pilotu automatizace do běžného provozu. Bez nových aktuálních externích tvrzení, navázáno na části o kontrole po restartu automatizace, znovuspuštění automatizace, retenci rutiny, přístupech, logování, trust odpovědích a privacy-first minimalizaci; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
 - 2026-07-24: Doplněna příloha o kontrole po restartu automatizace bez druhého autopilota: návrat k pilotnímu slibu, rozlišení technického úspěchu a pracovní hodnoty, počítání šumu bez sledování lidí, rozhodnutí ponechat/zúžit/přepsat/vrátit ručně/vypnout, kontrola starých i nových přístupů, příklad restartované kontroly trust odpovědí, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro ověření restartované automatizace po pilotu. Bez nových aktuálních externích tvrzení, navázáno na části o znovuspuštění automatizace, ruční náhradě, review automatizace, přístupech, logování, trust odpovědích a privacy-first minimalizaci; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
 - 2026-07-24: Doplněna příloha o znovuspuštění automatizace bez návratu starého problému: restart po ověřené ruční náhradě, zúžení původního rozsahu, restartovací karta, zachování člověka u rozhodnutí, čistá revize tokenů, pilotní režim, stop pravidla, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro restart automatizace po ručním procesu. Bez nových aktuálních externích tvrzení, navázáno na části o vypnutí automatizace, ruční náhradě, review automatizace, trust odpovědích, přístupech, logování a privacy-first minimalizaci; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
 - 2026-07-24: Doplněna příloha o ručním procesu po vypnutí automatizace bez návratu chaosu: návrat k původnímu riziku místo opisování starého skriptu, ověřovací karta ruční náhrady, první průchod do týdne, ochrana před novým datovým stínem, rozlišení dočasné pojistky, nového standardu a kandidáta na novou automatizaci, příklad trust odpovědí, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro ověření náhradního ručního procesu po vypnutí automatizace. Bez nových aktuálních externích tvrzení, navázáno na části o vypnutí automatizace, review automatizace, retenci rutiny, release checklistech, trust odpovědích a privacy-first minimalizaci; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
