@@ -153,6 +153,7 @@ Když se nechceš vracet do celé knihy, hledej konkrétní nástroj podle výst
 | Stabilizovat automatizaci po změně vlastníka | „první měsíc po změně vlastníka automatizace“, „stabilizace automatizace“ nebo „nový vlastník automatizace“ | 30denní stabilizační okno, kontrola prvních běhů, skrytých ručních zásahů, datové hranice a rozhodnutí, zda novému vlastníkovi automatizace opravdu pomáhá |
 | Zvládnout změnu vstupu automatizace bez rozšíření dat | „změna vstupu automatizace“, „API se změnilo“ nebo „nový zdroj dat pro automatizaci“ | vstupní migrační karta s účelem, mapováním polí, datovým ořezem, testem výstupu, revokací starého vstupu a zavíracím rozhodnutím |
 | Ověřit změněný vstup automatizace po prvních bězích | „kontrola po změně vstupu“, „nový payload v provozu“ nebo „vstupní drift“ | kontrolní karta prvních běhů, porovnání výstupů, kontrola nepovolených polí, úklid starých logů a rozhodnutí ponechat, zúžit, vrátit nebo vypnout |
+| Změnit výstup automatizace bez nového informačního hluku | „změna výstupu automatizace“, „jiný report“ nebo „výstup automatizace“ | výstupní změnová karta s příjemcem, rozhodnutím, minimem polí, retenčním pravidlem a kontrolou, že report pořád vede k práci |
 
 Pravidlo pro práci s rejstříkem: otevři maximálně tři nalezené části, vyber jednu a zapiš výstup. Pokud po deseti minutách pořád skáčeš mezi odkazy, vrať se k tabulce „Kudy začít podle aktuální bolesti“ a zúž problém. E-book není buffet. Teda je, ale bez talíře si stejně odneseš jen chaos.
 
@@ -52912,6 +52913,137 @@ Tohle je dobrý výsledek. Ne proto, že automatizace je dokonalá, ale protože
 
 Vyber jednu automatizaci, která v posledních třiceti dnech změnila vstup, payload, export nebo zdrojový nástroj. Najdi poslední tři běhy a napiš ke každému jednu větu: co měla automatizace číst, co skutečně použila, jaký výstup vytvořila a jestli podle něj někdo udělal rozhodnutí. Potom projdi logy a dočasné soubory. Pokud najdeš celé payloady, zákaznické detaily nebo nepoužitá pole, nepiš „uklidit někdy“. Zapiš jedno zúžení, jedno smazání a jedno datum další kontroly.
 
+## Příloha: Změna výstupu automatizace bez informačního smogu
+
+Automatizace se často nerozšiřuje tím, že začne číst víc dat. Někdy začne jen jinak mluvit. Přidá nový sloupec do reportu, pošle delší shrnutí do chatu, přepíše název ticketu, přidá skóre, označí prioritu nebo začne posílat výstup jinému týmu. Na papíře je to drobná změna. V praxi může změnit, kdo vidí jaká data, podle čeho se rozhoduje a jak dlouho výstup někde žije.
+
+Změnu výstupu proto ber stejně vážně jako změnu vstupu. Ne proto, že každý report je nebezpečný, ale protože výstup bývá viditelnější než zdroj. Co se objeví v e-mailu, chatu, dashboardu nebo exportu, začne tým kopírovat, přeposílat, archivovat a používat jako důkaz. A jakmile se z pracovního signálu stane poloveřejný artefakt, privacy-first pravidla musí být přísnější, ne volnější.
+
+> Codyho komentář: Nejzrádnější věta u automatizací je „jen tam přidáme ještě kontext“. Kontext je skvělé slovo, pod kterým se do reportů vejde půlka interního vesmíru. A pak se všichni tváří překvapeně, že jednoduchý digest připomíná menší únik dat v tabulkovém kabátu.
+
+### Začni otázkou, kdo podle výstupu jedná
+
+Výstup automatizace má mít příjemce a rozhodnutí. Pokud nemá ani jedno, pravděpodobně vyrábí šum.
+
+Před změnou výstupu si napiš čtyři věty:
+
+| Otázka | Dobrá odpověď | Varovný signál |
+| --- | --- | --- |
+| Kdo výstup čte? | konkrétní role nebo tým | „všichni v kanálu“ |
+| Co podle něj udělá? | rozhodne, opraví, ověří, eskaluje nebo zavře | „bude mít přehled“ |
+| Jak rychle musí jednat? | hodina, den, týden, měsíc podle rizika | stejný report pro urgentní i klidové věci |
+| Co nesmí výstup obsahovat? | osobní údaje, zákaznické payloady, tajemství, interní poznámky | žádná hranice není popsaná |
+
+Když se nedá popsat rozhodnutí, nesmí se změna maskovat jako „lepší informovanost“. Informovanost bez akce je často jen odložený nepořádek. Lepší je poslat méně informací správnému vlastníkovi než bohatý report lidem, kteří s ním nic neudělají.
+
+### Udělej výstupní změnovou kartu
+
+Změna výstupu nepotřebuje velký proces. Potřebuje malou kartu, která zabrání tomu, aby se report rozrostl podle posledního hlasitého požadavku.
+
+Praktická šablona:
+
+| Pole | Co vyplnit |
+| --- | --- |
+| Původní výstup | kam se posílal, komu, jak často a jaká pole obsahoval |
+| Nový výstup | přesný tvar zprávy, ticketu, reportu, exportu nebo dashboardu |
+| Příjemce | role, která má podle výstupu jednat |
+| Rozhodnutí | jedna pracovní akce, kterou má výstup umožnit |
+| Datová hranice | pole, která výstup smí obsahovat, a pole, která do něj nepatří |
+| Místo uložení | chat, e-mail, projektový nástroj, databáze, dokumentace nebo jen dočasný běh |
+| Retence | kdy se výstup smaže, agreguje, archivuje nebo přestane posílat |
+| Stop pravidlo | kdy změnu vrátíme, zúžíme nebo vypneme |
+
+Karta má být krátká. Pokud se nevejde na půl stránky, pravděpodobně popisuje víc změn najednou. Rozděl je podle příjemce nebo rozhodnutí.
+
+### Ořezávej výstup víc než vstup
+
+Vstup může někdy z technických důvodů obsahovat širší objekt, i když by to měl tým aktivně omezovat. Výstup ale takovou výmluvu většinou nemá. Výstup je to, co lidé skutečně čtou, kopírují a posílají dál.
+
+Dobré výstupní pravidlo:
+
+- Posílej identifikátor a odkaz místo celého obsahu.
+- Shrň počet a stav místo seznamu všech položek, pokud rozhodnutí nepotřebuje detail.
+- Používej pracovní kategorie místo osobních detailů.
+- Odděl interní odkaz od veřejného textu.
+- Neposílej payload do chatu jen proto, že je to pohodlné při debugování.
+- U chyb posílej typ chyby, korelační ID a vlastníka, ne celý vstup a stack plný citlivých hodnot.
+
+Příklad: Automatizace pro kontrolu support šablon nemusí posílat celé znění všech zákaznických dotazů do týdenního digestu. Stačí: „Tři dotazy tento týden mířily na zrušení účtu, aktuální šablona nepopisuje export před výmazem, vlastník: support lead, další krok: upravit veřejnou odpověď.“ Detailní podklady mohou zůstat v řízeném interním systému s přístupy podle role.
+
+### Pozor na změnu publika
+
+Největší rozdíl mezi starým a novým výstupem často není formát, ale publikum. Stejná informace může být bezpečná pro jednoho vlastníka a zbytečně široká pro celý tým.
+
+Typické změny publika:
+
+| Změna | Riziko | Lepší varianta |
+| --- | --- | --- |
+| osobní e-mail vlastníka -> týmový chat | výstup vidí víc lidí a déle se dohledává | poslat krátký stav do chatu a detail držet v původním systému |
+| interní ticket -> zákaznický follow-up | interní formulace může uniknout ven | vytvořit samostatnou veřejnou odpověď bez interních poznámek |
+| denní report pro produkt -> sdílený dashboard pro sales | metrika může změnit chování lidí bez kontextu | doplnit interpretaci, vlastníka a hranici použití |
+| debug log -> provozní alert | alert může obsahovat payload nebo tajemství | alertovat typ problému a odkaz na chráněný detail |
+
+Při změně publika se ptej: „Měl by každý nový příjemce vidět přesně tento detail?“ Pokud odpověď není jasné ano, výstup zkrať.
+
+### Testuj výstup na třech reálných příkladech
+
+Před spuštěním změněného výstupu vezmi tři nedávné běhy automatizace a přepiš je do nového formátu. Ručně, bez nové integrace. Cílem není hezký prototyp, ale zjištění, jestli nový tvar opravdu vede k lepšímu rozhodnutí.
+
+Mini test:
+
+| Příklad | Nový výstup pomohl? | Co bylo navíc | Co chybělo | Dopad na data |
+| --- | --- | --- | --- | --- |
+| běžný stav | ano/ne | zbytečné pole, dlouhý text, duplicitní odkaz | vlastník, datum, stav | žádný / širší publikum / delší retence |
+| hraniční stav | ano/ne | citlivý detail, interní komentář | jasné stop pravidlo | žádný / širší publikum / delší retence |
+| chybný stav | ano/ne | payload, stack, osobní údaj | korelační ID, první krok | žádný / širší publikum / delší retence |
+
+Pokud nový výstup nepomůže ani u tří ručních příkladů, automatizace nepotřebuje release. Potřebuje lepší formulaci rozhodnutí nebo zrušení požadavku.
+
+### Nastav retenci pro výstup, ne jen pro zdrojová data
+
+Týmy často řeší, jak dlouho drží databázové záznamy, ale zapomenou na výstupy automatizací: chatové zprávy, e-maily, CSV přílohy, exporty, ticket komentáře, screenshoty, auditní přehledy a dočasné soubory. Přitom právě tam se data šíří nejvíc.
+
+Pro každý změněný výstup napiš retenční větu:
+
+„Výstup žije v ___, obsahuje ___, používá ho ___ k ___, po ___ se smaže / agreguje / archivuje / přestane posílat.“
+
+Příklady:
+
+- „Denní digest chyb žije v týmovém chatu, obsahuje počet chyb podle typu a korelační ID, používá ho provozní vlastník k triage, po 30 dnech zůstává jen agregovaný měsíční souhrn.“
+- „Týdenní obsahový report žije v projektovém nástroji, obsahuje URL, stav a navržený další krok, používá ho obsahový vlastník k rozhodnutí, po uzavření úkolu zůstává jen rozhodnutí a odkaz na veřejnou změnu.“
+- „Alert na podezřelý billing stav žije v interním incidentním kanálu, obsahuje typ stavu a interní ID, používá ho billing vlastník k ověření, po incidentu se detail přesune do řízeného incidentního záznamu a chat se nebere jako archiv.“
+
+Retence výstupu je malá věc, která brání tomu, aby se z reportů stal trvalý paralelní sklad dat.
+
+### Příklad: Jiný report pro marketingový backlog
+
+Marketingový tým má automatizaci, která jednou týdně posílá seznam obsahových stránek k revizi. Původní výstup obsahuje URL, název stránky, stáří poslední úpravy a ruční stav. Tým chce přidat „kontext“, protože report je prý málo akční.
+
+První návrh přidá počet návštěv, zdroj návštěvnosti, poslední formulářovou konverzi, poznámku ze sales a seznam konkrétních leadů, kteří přes stránku přišli. To je přesně moment, kdy má někdo v místnosti říct: stop, tohle už není údržbový report, ale nový datový tok.
+
+Tým udělá výstupní změnovou kartu. Rozhodnutí zní: „Vybrat jednu stránku k úpravě nebo archivaci.“ K tomu nepotřebuje seznam leadů ani individuální cestu návštěvníka. Nový výstup proto obsahuje jen URL, typ stránky, stáří, poslední veřejnou změnu, počet poptávek v agregaci za měsíc, opakovaný kvalitativní signál ze sales bez jmen a navrženou akci: ponechat, upravit, sloučit nebo archivovat.
+
+Report zůstává v projektovém nástroji, ne v otevřeném chatu. Detailní sales poznámky se nepřepisují do automatizace. Po uzavření úkolu zůstává rozhodnutí a veřejná změna, ne celý týdenní výpis.
+
+Výsledek je méně efektní než dashboard s barevnými křivkami. Je ale použitelnější: jeden vlastník, jedna stránka, jedno rozhodnutí a žádný nový sledovací hlad.
+
+### Checklist: Změna výstupu automatizace
+
+- [ ] Je jasné, kdo nový výstup čte a co podle něj udělá.
+- [ ] Změna má výstupní kartu s původním stavem, novým stavem, příjemcem, rozhodnutím a stop pravidlem.
+- [ ] Výstup obsahuje jen pole nutná pro rozhodnutí.
+- [ ] Identifikátory a odkazy nahrazují celé payloady tam, kde detail není nutný.
+- [ ] Chybové výstupy neposílají osobní údaje, tajemství ani interní poznámky do širokých kanálů.
+- [ ] Změna publika je výslovně zkontrolovaná.
+- [ ] Nový formát prošel ručním testem na běžném, hraničním a chybném příkladu.
+- [ ] Je napsané, kde výstup žije a jak dlouho se drží.
+- [ ] Starý výstup je vypnutý, zúžený nebo označený jako dočasný souběh.
+- [ ] Po prvních bězích je naplánovaná kontrola šumu, rozhodnutí a datové stopy.
+
+### Mini úkol
+
+Vyber jednu automatizaci, jejíž výstup někdo za poslední měsíc chtěl „jen trochu rozšířit“. Napiš původní výstup do jedné věty a nový požadavek do druhé. Pak vyplň čtyři pole: kdo výstup čte, jaké rozhodnutí podle něj udělá, která pole jsou nutná a kde výstup po odeslání žije. Nakonec vezmi tři poslední běhy a ručně zkus nový formát. Pokud najdeš pole, které pomáhá jen zvědavosti, vyhoď ho. Pokud nový výstup nemá vlastníka rozhodnutí, změnu nespouštěj.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -53105,6 +53237,7 @@ Vyber jednu automatizaci, která v posledních třiceti dnech změnila vstup, pa
 
 ## Pracovní log
 
+- 2026-07-25: Doplněna příloha o změně výstupu automatizace bez informačního smogu: výstup odvozený od konkrétního příjemce a rozhodnutí, výstupní změnová karta, ořez polí a payloadů, kontrola změny publika, ruční test na třech příkladech, retence chatových, e-mailových, ticketových a exportních výstupů, příklad marketingového backlog reportu, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro změnu výstupu automatizace. Bez nových aktuálních externích tvrzení, navázáno na části o kontrole po změně vstupu automatizace, provozním driftu, logování, marketingovém backlogu a privacy-first minimalizaci; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
 - 2026-07-25: Doplněna příloha o kontrole po změně vstupu automatizace bez rozšířeného stínu: návrat k migrační kartě, ruční porovnání prvních běhů, hledání vstupního driftu, kontrola logů, front, chybových notifikací a dočasných souborů, zavírací rozhodnutí ponechat/zúžit/vrátit/vypnout, příklad nového payloadu u release kontroly, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro ověření změněného vstupu automatizace po prvních bězích. Bez nových aktuálních externích tvrzení, navázáno na části o změně vstupu automatizace, provozním driftu, logování, revokaci tokenů a privacy-first minimalizaci; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
 - 2026-07-25: Doplněna příloha o změně vstupu automatizace bez tichého rozšíření dat: vstupní migrační karta, mapování polí místo celých objektů, test výstupu proti původní pracovní otázce, řízený souběh starého a nového vstupu, zavírací datové rozhodnutí, příklad migrace release kontroly do nového projektového nástroje, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro změnu vstupu automatizace. Bez nových aktuálních externích tvrzení, navázáno na části o stabilizaci automatizace po změně vlastníka, provozní kartě, logování, přístupech, revokaci tokenů a privacy-first minimalizaci; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
 - 2026-07-25: Doplněna příloha o prvním měsíci po změně vlastníka automatizace bez návratu starých zvyků: 30denní stabilizační okno, kontrola prvních běhů, sledování rozhodnutí místo výkonu člověka, zachycení skrytých ručních zásahů, rozlišení opravy karty a kódu, zavírací rozhodnutí ponechat/zúžit/přepsat/upravit/vrátit ručně/vypnout, příklad kontroly obsahu po release, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro stabilizaci automatizace po změně vlastníka. Bez nových aktuálních externích tvrzení, navázáno na předání vlastnictví automatizace, provozní drift, standardní provoz automatizací, přístupy, logování a privacy-first minimalizaci; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
