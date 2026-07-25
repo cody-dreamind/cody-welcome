@@ -156,6 +156,7 @@ Když se nechceš vracet do celé knihy, hledej konkrétní nástroj podle výst
 | Změnit výstup automatizace bez nového informačního hluku | „změna výstupu automatizace“, „jiný report“ nebo „výstup automatizace“ | výstupní změnová karta s příjemcem, rozhodnutím, minimem polí, retenčním pravidlem a kontrolou, že report pořád vede k práci |
 | Ověřit změněný výstup automatizace po prvních bězích | „kontrola po změně výstupu“, „nový report v provozu“ nebo „výstupní smog“ | kontrola prvních výstupů podle rozhodnutí, šumu, publika, retence a datové stopy s jasným verdiktem ponechat, zúžit, rozdělit, vrátit nebo vypnout |
 | Změnit frekvenci automatizace bez tichého sledování navíc | „změna frekvence automatizace“, „častější běh“ nebo „řidší automatizace“ | frekvenční změnová karta s důvodem, rizikovým oknem, limitem dat, nákladem šumu a návratem zpět |
+| Ověřit změněnou frekvenci automatizace po kontrolním okně | „kontrola po změně frekvence“, „nový rytmus automatizace“ nebo „frekvence hotovo“ | rozhodnutí, jestli nový rytmus ponechat, zúžit, vrátit, spouštět událostí nebo vypnout podle zásahů, šumu, retence a důvěry lidí |
 
 Pravidlo pro práci s rejstříkem: otevři maximálně tři nalezené části, vyber jednu a zapiš výstup. Pokud po deseti minutách pořád skáčeš mezi odkazy, vrať se k tabulce „Kudy začít podle aktuální bolesti“ a zúž problém. E-book není buffet. Teda je, ale bez talíře si stejně odneseš jen chaos.
 
@@ -53303,6 +53304,121 @@ Výsledek není méně odpovědný monitoring. Je to monitoring, který odpovíd
 
 Vyber jednu automatizaci, u které někdo navrhl častější nebo řidší běh. Napiš jednu větu, co automatizace chrání, a druhou větu, jak dlouho smí problém zůstat neviditelný. Potom vyplň frekvenční změnovou kartu a najdi jednu datovou stopu, která by po změně rostla rychleji než užitek. Pokud frekvenci zvyšuješ, zkrať uložený detail nebo nastav kratší retenci. Pokud frekvenci snižuješ, napiš, co dál chytá urgentní stav. Bez toho je změna frekvence jen přesun nervozity do plánovače.
 
+## Příloha: Kontrola po změně frekvence automatizace bez nového rytmu naslepo
+
+Změna frekvence automatizace není hotová ve chvíli, kdy cron doběhne podle nového plánu. Hotová je až ve chvíli, kdy tým ví, jestli nový rytmus skutečně zkrátil rizikové okno, snížil šum, ubral datovou stopu nebo pomohl rychleji rozhodovat. Bez kontroly se z frekvenční změny stane jen další tichý provozní zvyk.
+
+Kontrola má být krátká a konkrétní. Nehodnotí se, jestli automatizace „chodí“. To je technické minimum. Hodnotí se, jestli běhy vedly k práci, kterou lidé opravdu potřebovali, a jestli náklady nového rytmu nepřerostly původní problém.
+
+> Codyho komentář: Automatizace, která po změně frekvence spolehlivě vyrábí nepoužité zprávy, není stabilní systém. Je to velmi dochvilný šumostroj. Vypadá zodpovědně, dokud se někdo nezeptá, kdo podle toho naposledy něco udělal.
+
+### Vrať se k frekvenční kartě
+
+Kontrolu začni původní frekvenční změnovou kartou. Pokud karta neexistuje, nejdřív ji zpětně doplň z dostupných rozhodnutí. Bez ní bude review jen hádání, protože nebude jasné, co měla změna zlepšit.
+
+Zkontroluj hlavně tato pole:
+
+| Pole | Otázka při kontrole |
+| --- | --- |
+| Důvod změny | řešila změna skutečný problém, nebo jen pocit nejistoty? |
+| Rizikové okno | zkrátilo se nebo prodloužilo tak, jak bylo domluveno? |
+| Šumový limit | kolik výstupů nevedlo k žádné akci? |
+| Vstupy | čte automatizace pořád stejný nebo menší rozsah dat? |
+| Výstupy | ukládá se víc řádků, zpráv, screenshotů, ticketů nebo exportů? |
+| Návrat zpět | nastala podmínka pro návrat, zúžení, trigger nebo vypnutí? |
+
+Nehledej dokonalou přesnost. Stačí zjistit, jestli se změna chová podle původního slibu. Pokud původní slib nejde ověřit, příště neměň frekvenci bez kontrolního okna.
+
+### Spočítej běhy podle zásahů, ne podle počtu
+
+Po kontrolním okně si vezmi první várku běhů a rozděl je podle výsledku. U malé automatizace to zvládneš ručně za pár minut. U větší stačí vzorek nebo agregace bez osobních detailů.
+
+Praktická tabulka:
+
+| Typ běhu | Co znamená | Co s tím |
+| --- | --- | --- |
+| skutečný zásah | výstup vedl k opravě, rozhodnutí nebo vědomému odložení | ponechat jako důkaz užitečnosti |
+| potvrzení klidu | výstup nevyvolal akci, ale měl jasný provozní účel | ponechat jen pokud je rizikové okno krátké |
+| falešný poplach | výstup vypadal naléhavě, ale problém nebyl reálný | zúžit pravidlo, změnit prahovou hodnotu nebo zpomalit |
+| duplicitní zpráva | stejný stav dorazil opakovaně bez nové informace | deduplikovat nebo posílat digest |
+| nepoužitý výstup | nikdo podle něj nic neudělal ani ho nepotřeboval | zrušit, zpomalit nebo převést na ruční review |
+
+Důležité je sledovat vztah mezi četností a rozhodnutím. Pokud častější běh přinesl jeden užitečný zásah a padesát zbytečných zpráv, možná není problém frekvence, ale špatný trigger nebo příliš široká podmínka upozornění.
+
+### Zkontroluj datovou stopu nového rytmu
+
+Změna frekvence často znásobí provozní stopu bez změny kódu. Stejný log, stejný report nebo stejný export se prostě ukládá častěji. To je privacy-first detail, který se tváří jako technická banalita a potom bobtná v úložišti.
+
+Projdi čtyři místa:
+
+- Logy: ukládají pořád jen stav, čas, krátkou chybu a korelační ID?
+- Notifikace: neobsahují osobní údaje, celé payloady nebo zbytečně široký kontext?
+- Tickety a komentáře: nevznikají duplicitní záznamy, které budou žít déle než původní automatizace?
+- Exporty a přílohy: nevyrábí častější běh více souborů, screenshotů nebo CSV kopií?
+
+Pokud se frekvence zvýšila, retence má být znovu přepočítaná. Denní běh s retencí 90 dní znamená 90 záznamů. Pětiminutový běh se stejnou retencí znamená přes 25 000 záznamů. To už není stejná stopa, jen jiný cron výraz.
+
+### Ověř důvěru lidí ve výstup
+
+Automatizace může být technicky správná a prakticky ignorovaná. Po změně frekvence se proto neptej jen systému. Zeptej se i lidí, kteří mají podle výstupu jednat.
+
+Stačí tři otázky:
+
+1. Který výstup z nového rytmu ti pomohl udělat rozhodnutí?
+2. Který výstup jsi ignoroval, protože nepřinesl novou informaci?
+3. Co by se muselo změnit, aby bylo jasné, kdy máš jednat?
+
+Nedělej z toho průzkum spokojenosti. Cílem není měřit náladu týmu. Cílem je zjistit, jestli nový rytmus podporuje práci, nebo jen trénuje lidi v ignorování upozornění.
+
+### Rozhodni další stav frekvence
+
+Kontrola musí skončit verdiktem. Ne větou „zatím sledujeme“. Sledování bez rozhodnutí je jen odklad s lepším slovníkem.
+
+Možné verdikty:
+
+| Verdikt | Kdy dává smysl |
+| --- | --- |
+| ponechat | nový rytmus vedl k užitečným zásahům a šum je pod limitem |
+| zúžit | frekvence je správná, ale vstupy, výstupy nebo publikum jsou moc široké |
+| vrátit | dočasné zrychlení splnilo účel nebo zpomalení vytvořilo moc dlouhé rizikové okno |
+| změnit na trigger | časový plán je horší než spuštění po releasu, incidentu nebo jiné pracovní události |
+| rozdělit | urgentní stav potřebuje rychlý healthcheck, zatímco rozhodovací přehled stačí jako digest |
+| vypnout | automatizace nevede k práci a původní riziko je pokryté jinak |
+
+Každý verdikt doplň jednou větou o datové stopě. Například: „Ponecháváme půlhodinovou kontrolu, ale zkracujeme retenci stavových logů na 14 dní a posíláme jen změnu stavu, ne každý úspěšný běh.“
+
+### Příklad: Kontrola frekvence dostupnostního monitoru
+
+Tým po incidentu přešel z pětiminutového dostupnostního monitoru na půlhodinový běh v běžném režimu a pětiminutový režim nechal jen pro 24 hodin po incidentu. Po týdnu udělal kontrolu.
+
+| Kontrolní pole | Zjištění |
+| --- | --- |
+| Skutečné zásahy | žádný výpadek, jeden opravený falešný poplach kvůli krátkému síťovému timeoutu |
+| Potvrzení klidu | půlhodinový rytmus stačil pro běžný veřejný web |
+| Šum | počet notifikací klesl, ale úspěšné běhy se pořád zapisovaly zbytečně detailně |
+| Datová stopa | stavové logy neobsahovaly osobní údaje, ale retence zůstala nastavená pro starý denní režim |
+| Důvěra lidí | tým reagoval na změnu stavu, ne na opakované úspěšné běhy |
+| Verdikt | ponechat půlhodinový rytmus, posílat jen změny stavu, zkrátit retenci detailních logů a přidat automatický návrat po incidentním režimu |
+
+Výstupem není velký report. Stačí krátké rozhodnutí a úprava provozní karty. Důležité je, že nový rytmus už není jen dojem, ale ověřený provozní režim.
+
+### Checklist: Kontrola po změně frekvence automatizace
+
+- [ ] Kontrola se vrací k původní frekvenční změnové kartě.
+- [ ] Je jasné, kolik běhů vedlo ke skutečnému zásahu nebo rozhodnutí.
+- [ ] Falešné poplachy, duplicity a nepoužité výstupy jsou pojmenované jako náklad.
+- [ ] Datová stopa je znovu přepočítaná podle nové frekvence.
+- [ ] Retence logů, notifikací, ticketů a exportů odpovídá novému počtu běhů.
+- [ ] Příjemci potvrdili, kdy podle výstupu opravdu jednají.
+- [ ] Časový plán je porovnaný s možností triggeru podle pracovní události.
+- [ ] Verdikt je jeden z: ponechat, zúžit, vrátit, změnit na trigger, rozdělit nebo vypnout.
+- [ ] Provozní karta automatizace je aktualizovaná podle verdiktu.
+- [ ] Dočasné incidentní nebo pilotní nastavení má jasný návrat do běžného režimu.
+
+### Mini úkol
+
+Vyber jednu automatizaci, u které se v poslední době změnila frekvence. Vezmi prvních deset až třicet běhů po změně a ručně je rozděl na skutečný zásah, potvrzení klidu, falešný poplach, duplicitu nebo nepoužitý výstup. Potom napiš jeden verdikt a jednu větu o datové stopě. Pokud neumíš najít žádný běh, podle kterého někdo jednal, neobhajuj frekvenci tím, že „aspoň máme přehled“. Přehled bez rozhodnutí je tapeta. Hezká možná, ale pořád tapeta.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -53496,6 +53612,7 @@ Vyber jednu automatizaci, u které někdo navrhl častější nebo řidší běh
 
 ## Pracovní log
 
+- 2026-07-25: Doplněna příloha o kontrole po změně frekvence automatizace bez nového rytmu naslepo: návrat k frekvenční kartě, třídění běhů podle skutečných zásahů, potvrzení klidu, falešných poplachů, duplicit a nepoužitých výstupů, přepočet datové stopy podle nové frekvence, ověření důvěry lidí ve výstup, verdikty ponechat/zúžit/vrátit/změnit na trigger/rozdělit/vypnout, příklad dostupnostního monitoru, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro ověření změněné frekvence automatizace po kontrolním okně. Bez nových aktuálních externích tvrzení, navázáno na část o změně frekvence automatizace, provozní drift, retenci výstupů, notifikace, healthcheck a privacy-first minimalizaci; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
 - 2026-07-25: Doplněna příloha o změně frekvence automatizace bez tichého sledování navíc: rizikové okno, frekvenční změnová karta, pravidlo že častější běh nemá znamenat širší data, zpomalení jako legitimní omezení šumu, rozdíl mezi časovým plánem a pracovním triggerem, příklad dostupnostní kontroly po stabilizaci webu, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro změnu frekvence automatizace. Bez nových aktuálních externích tvrzení, navázáno na části o změně výstupu, provozním driftu, plánovaných úlohách, healthchecku, retenci výstupů a privacy-first minimalizaci; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
 - 2026-07-25: Doplněna příloha o kontrole po změně výstupu automatizace bez dalšího smogu: návrat k výstupní kartě, porovnání prvních výstupů s reálnou akcí, počítání šumu jako provozního nákladu, kontrola skutečného publika po doručení, retence a staré souběžné výstupy, verdikty ponechat/zúžit/rozdělit/vrátit/vypnout/znovu navrhnout, příklad marketingového reportu, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro ověření změněného výstupu automatizace po prvních bězích. Bez nových aktuálních externích tvrzení, navázáno na části o změně výstupu automatizace, kontrole po změně vstupu, provozním driftu, retenci výstupů, marketingovém backlogu a privacy-first minimalizaci; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
 - 2026-07-25: Doplněna příloha o změně výstupu automatizace bez informačního smogu: výstup odvozený od konkrétního příjemce a rozhodnutí, výstupní změnová karta, ořez polí a payloadů, kontrola změny publika, ruční test na třech příkladech, retence chatových, e-mailových, ticketových a exportních výstupů, příklad marketingového backlog reportu, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro změnu výstupu automatizace. Bez nových aktuálních externích tvrzení, navázáno na části o kontrole po změně vstupu automatizace, provozním driftu, logování, marketingovém backlogu a privacy-first minimalizaci; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
