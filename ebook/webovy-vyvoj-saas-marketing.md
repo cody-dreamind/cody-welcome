@@ -162,6 +162,7 @@ Když se nechceš vracet do celé knihy, hledej konkrétní nástroj podle výst
 | Řídit výjimky z automatizace bez skrytého obcházení pravidel | „výjimky automatizace“, „ruční override“ nebo „automatizace neplatí“ | výjimková karta s důvodem, vlastníkem, datovou hranicí, časovým koncem a rozhodnutím, zda změnit pravidlo, nebo výjimku zavřít |
 | Vyhodnotit opakované výjimky z automatizace bez džungle pravidel | „opakované výjimky“, „výjimkový review“ nebo „pravidlo se láme“ | review opakovaných výjimek, které rozhodne mezi úpravou pravidla, zúžením automatizace, produktovou změnou a vypnutím |
 | Upravit pravidlo automatizace po výjimkovém review | „změna pravidla automatizace“, „pravidlo po review“ nebo „nová logika“ | změnová karta pravidla s testovací sadou, hranicí dat, pilotem, úklidem starých výjimek a datem další kontroly |
+| Ověřit změněné pravidlo automatizace po pilotu | „kontrola po změně pravidla“, „nové pravidlo hotovo“ nebo „pravidlový pilot“ | kontrola prvních běhů změněného pravidla podle výjimek, chyb, datové hranice, starých stop a rozhodnutí ponechat, zúžit, vrátit nebo vypnout |
 
 Pravidlo pro práci s rejstříkem: otevři maximálně tři nalezené části, vyber jednu a zapiš výstup. Pokud po deseti minutách pořád skáčeš mezi odkazy, vrať se k tabulce „Kudy začít podle aktuální bolesti“ a zúž problém. E-book není buffet. Teda je, ale bez talíře si stejně odneseš jen chaos.
 
@@ -54069,6 +54070,165 @@ Dobrý výsledek není nulový počet výjimek. Dobrý výsledek je menší poč
 
 Vezmi poslední rozhodovací kartu review opakovaných výjimek a napiš k ní změnovou větu „nově / protože / pořád nesmí“. Pak vyber pět příkladů do testovací sady: dvě staré výjimky, dva běžné správné průchody a jeden případ, který automatizace nesmí rozhodnout sama. Nakonec najdi jednu starou dočasnou stopu po výjimkách a zavři ji dřív, než začneš přidávat další logiku.
 
+## Příloha: Kontrola po změně pravidla automatizace bez falešného vítězství
+
+Změněné pravidlo automatizace po pilotu nesmí projít jen proto, že „už to nepadá“ nebo že se ozvalo méně lidí. Pilot má ukázat, jestli nové pravidlo opravdu řeší původní opakované výjimky, drží stejnou datovou hranici a nezavedlo novou tichou práci pro člověka, který po něm uklízí.
+
+Kontrola po změně pravidla je malá provozní brzda. Nezdržuje vývoj kvůli pocitu bezpečí, ale chrání tým před tím, aby si spletl méně viditelný problém s vyřešeným problémem. Automatizace může po úpravě vypadat klidně, protože přestala posílat upozornění. To ještě neznamená, že rozhoduje správně.
+
+> Codyho komentář: Nejzrádnější automatizace není ta, která hlasitě selže. Nejzrádnější je ta, která vypadá dospěle, ale jen přesunula práci do ručních oprav, do supportu nebo do budoucího incidentu. Tiché „všechno dobrý“ je v provozu podezřelá věta.
+
+### Vrať se k původnímu review
+
+Nezačínej novým dojmem. Otevři rozhodovací kartu, která změnu pravidla spustila, a zkontroluj původní důvod:
+
+- jaký vzor opakovaných výjimek jsme řešili,
+- které příčiny jsme chtěli odstranit,
+- co automatizace pořád nesměla dělat,
+- jaké stop signály jsme si nastavili,
+- kdy měl pilot skončit,
+- jaká datová hranice byla schválená.
+
+Pak napiš jednu kontrolní větu:
+
+„Pilot změněného pravidla měl ukázat, jestli ___, aniž by automatizace ___.“
+
+Příklady:
+
+| Slabá kontrolní věta | Lepší kontrolní věta |
+| --- | --- |
+| Zjistíme, jestli nový support triage funguje. | Pilot měl ukázat, jestli nové pravidlo sníží ruční přepisy access/reporting dotazů, aniž by automatizace zavírala nebo podceňovala bezpečnostní incidenty. |
+| Mrkneme, jestli billing reminder neposílá blbosti. | Pilot měl ukázat, jestli nové pravidlo u účtů s platební domluvou vytvoří návrh pro vlastníka, aniž by samo měnilo splatnost nebo posílalo individuální omluvy. |
+| Ověříme alerty. | Pilot měl ukázat, jestli nové pravidlo potlačí plánované dry-runy, aniž by schovalo produkční chyby mimo explicitní okno údržby. |
+
+Bez této věty kontrola snadno sklouzne k pocitu. A pocit je u automatizace dobrý sluha jen ve chvíli, kdy říká „něco tu smrdí, otevři log“. Jako metrika je líný.
+
+### Porovnej staré výjimky s novým chováním
+
+Změněné pravidlo má být měřené proti konkrétním starým výjimkám, ne proti celkovému počtu běhů. Pokud automatizace běžela stokrát a jen třikrát narazila na původní typ problému, procento úspěšnosti může vypadat krásně a přitom neříkat nic o tom, proč se pravidlo měnilo.
+
+Použij malou kontrolní tabulku:
+
+| Typ případu | Kolik v pilotu nastalo | Co nové pravidlo udělalo | Co udělal člověk | Verdikt |
+| --- | --- | --- | --- | --- |
+| původní výjimka |  |  |  | vyřešeno / ruční oprava / horší |
+| běžný správný průchod |  |  |  | zachováno / rozbito |
+| hraniční případ |  |  |  | předáno člověku / rozhodnuto moc odvážně |
+| zakázaný případ |  |  |  | respektováno / blocker |
+
+U původních výjimek sleduj hlavně rozdíl mezi „automatizace navrhla správně“ a „člověk to stejně musel vědět a opravit“. Druhá možnost může být pořád užitečná, pokud automatizace zrychlila práci bez rozšíření dat. Ale není to důkaz hotového pravidla. Je to důkaz, že pravidlo pomáhá jako asistent, ne jako provozní rozhodčí.
+
+### Hledej nové chyby na okraji pravidla
+
+Každá změna pravidla posouvá hranici. Tím může opravit starou chybu a vytvořit novou. Proto se neptej jen „zmizely staré výjimky?“. Ptej se taky:
+
+- Přibyly nové ruční přepisy jiné kategorie?
+- Začalo pravidlo posílat víc případů člověku bez jasného důvodu?
+- Přestalo zachytávat hraniční situace, které dřív raději předávalo?
+- Změnil se jazyk výstupu tak, že lidé nerozumí důvodu návrhu?
+- Vznikla nová závislost na jednom člověku, který „ví, kdy to ignorovat“?
+- Začaly se chyby řešit mimo systém, například v chatu nebo soukromých poznámkách?
+
+Nejhorší nový okraj je ten, který nevypadá jako chyba automatizace. Support musí víc vysvětlovat zákazníkům. Sales si vytvoří vlastní obcházení. Produkt přestane důvěřovat reportu. Tým přidá tichý sloupec do tabulky, aby si pamatoval kontext, který automatizace zahodila. Všechny tyto signály patří do kontroly.
+
+### Zkontroluj datovou hranici proti realitě
+
+Datová hranice z karty pravidla je slib. Kontrola po pilotu ověřuje, jestli slib přežil kontakt s provozem.
+
+Projdi:
+
+- vstupy, které automatizace skutečně četla,
+- logy, které skutečně vznikly,
+- výstupy, které skutečně odešly,
+- dočasné soubory, exporty a screenshoty,
+- přístupy lidí, kteří pilot kontrolovali,
+- chybové notifikace a debug režimy,
+- retenci starých i nových stop.
+
+Praktický test: najdi jeden konkrétní běh pilotu a popiš jeho cestu od vstupu k výstupu bez toho, abys musel otevírat osobní data, která nebyla pro rozhodnutí nutná. Pokud to nejde, změněné pravidlo možná funguje, ale jeho provozní stopa je širší, než tým schválil.
+
+Privacy-first verdikt může být:
+
+| Stav | Co znamená | Další krok |
+| --- | --- | --- |
+| hranice drží | pravidlo používá schválené vstupy, logy i výstupy | pokračovat k rozhodnutí o provozu |
+| hranice se rozšířila omylem | vznikly širší logy, exporty nebo publikum bez rozhodnutí | uklidit a opakovat kontrolu |
+| hranice se musí rozšířit záměrně | bez nových dat pravidlo neřeší původní problém | otevřít samostatnou změnu vstupu, výstupu nebo pravomoci |
+| hranice je nepřijatelná | pravidlo potřebuje moc citlivý kontext pro malý přínos | vrátit, zúžit nebo vypnout |
+
+### Ukliď staré i pilotní stopy
+
+Kontrola není hotová, dokud po pilotu nezůstane jen to, co patří do běžného provozu. Pilotní stopa je užitečná během ověření, ale po něm rychle stárne a často obsahuje přesně ten dočasný kontext, který tým nechce držet déle.
+
+Zkontroluj a zavři:
+
+- pilotní testovací sadu, pokud obsahuje ořezané nebo citlivé příklady,
+- dočasné porovnávací logy starého a nového pravidla,
+- extra debug notifikace,
+- ruční tracking v tabulce,
+- chatové instrukce pro pilot,
+- staré whitelisty a blacklisty,
+- starou verzi pravidla v dokumentaci,
+- otevřené výjimkové karty bez nového stavu.
+
+Čisté ukončení pilotu má jednu větu:
+
+„Po pilotu necháváme ___, mažeme nebo zavíráme ___ a další kontrola bude ___.“
+
+Tohle je drobnost, která odděluje řízený provoz od hromady dobrých úmyslů. A dobré úmysly bez úklidu jsou v systému jen pomalu kvasící backlog.
+
+### Rozhodni stav změněného pravidla
+
+Na konci kontroly nepiš jen shrnutí. Napiš rozhodnutí. Možné stavy:
+
+| Rozhodnutí | Kdy dává smysl | Co udělat |
+| --- | --- | --- |
+| ponechat | původní výjimky klesly, běžné průchody drží, datová hranice se nerozšířila | převést pravidlo do běžné provozní karty |
+| ponechat jako návrh | pravidlo pomáhá člověku, ale není dost jisté pro zápis nebo akci | nechat návrhový režim a neprodávat ho jako automatické řešení |
+| zúžit | funguje jen pro část případů | vymezit povolený rozsah a zbytek vrátit člověku |
+| vrátit | pravidlo rozbilo běžné průchody nebo přidalo horší chyby | obnovit předchozí chování a zachovat poznatky z pilotu |
+| otevřít produktovou změnu | automatizace jen obchází nejasnost v produktu, pricingu, dokumentaci nebo procesu | zavřít pilot a vytvořit produktový úkol |
+| vypnout | přínos je menší než šum, riziko nebo datová stopa | ukončit pravidlo, uklidit stopy a popsat ruční náhradu |
+
+Dobré rozhodnutí má také anti-závazek: co teď nebudeme dělat. Například „nepřidáváme další vstupní pole“, „nezvyšujeme pravomoc na automatický zápis“ nebo „nebudeme držet pilotní porovnávací logy déle než kontrolní okno“. Bez anti-závazku se z kontroly snadno stane pozvánka k dalšímu přifukování systému.
+
+### Příklad: Kontrola support triage po pilotu
+
+Tým upravil pravidlo support triage, aby oddělilo access/reporting dotazy od skutečných bezpečnostních incidentů. Pilot běžel deset pracovních dní v návrhovém režimu.
+
+Kontrolní karta:
+
+| Pole | Zápis |
+| --- | --- |
+| Kontrolní věta | Pilot měl ukázat, jestli nové pravidlo sníží ruční přepisy access/reporting dotazů, aniž by automatizace zavírala nebo podceňovala bezpečnostní incidenty. |
+| Původní výjimky | 7 starých přepisů za předchozí okno; hlavní příčina byla dvojí význam slova security. |
+| Pilotní výsledek | 5 z 6 podobných případů navrženo správně, 1 hraniční případ předán člověku. |
+| Běžné průchody | Incidentní tikety zůstaly bez automatického zavření; dva návrhy měly horší vysvětlení důvodu. |
+| Datová hranice | Bez nových polí, bez ukládání celých zpráv mimo support systém; dočasný porovnávací export bude smazán po kontrole. |
+| Nový okraj | Account owner chtěl přidat zákaznický segment do pravidla, ale pilot neprokázal nutnost. |
+| Rozhodnutí | Ponechat jako návrhový režim pro access/reporting dotazy, nepřidávat segment, opravit vysvětlení návrhu, další kontrola za měsíc. |
+| Anti-závazek | Nezvyšovat pravomoc na automatický zápis štítku u bezpečnostních témat. |
+| Úklid | Smazat porovnávací export, zavřít staré výjimkové karty, aktualizovat support runbook. |
+
+Tohle není dramatický triumf automatizace. Je to lepší výsledek: méně ručních přepisů, jasnější pravidlo, žádné širší sbírání dat a bezpečnostní případy pořád mimo automatické zavírání.
+
+### Checklist: Kontrola po změně pravidla automatizace
+
+- [ ] Kontrola začíná původní rozhodovací kartou review, ne dojmem z pilotu.
+- [ ] Existuje jedna věta, co měl pilot prokázat a co automatizace pořád nesměla dělat.
+- [ ] Staré výjimky jsou porovnané s novým chováním, ne schované v celkovém počtu úspěšných běhů.
+- [ ] Běžné správné průchody se po změně pravidla nerozbily.
+- [ ] Hraniční a zakázané případy jsou zkontrolované ručně.
+- [ ] Lidské opravy, přepisy a obcházení jsou brané jako signál, ne jako trapná poznámka pod čarou.
+- [ ] Datová hranice odpovídá schválené kartě pravidla.
+- [ ] Pilotní exporty, debug logy, tabulky, chatové pokyny a staré výjimky jsou uklizené.
+- [ ] Výsledek má rozhodnutí: ponechat, ponechat jako návrh, zúžit, vrátit, otevřít produktovou změnu nebo vypnout.
+- [ ] Rozhodnutí obsahuje anti-závazek, co teď automatizace nedostane navíc.
+
+### Mini úkol
+
+Vezmi jednu automatizaci, u které se nedávno měnilo pravidlo, a napiš kontrolní větu „pilot měl ukázat, jestli ___, aniž by automatizace ___“. Pak vyber tři staré výjimky a tři běžné správné průchody a porovnej je s novým chováním. Nakonec napiš jedno rozhodnutí a jednu věc, kterou teď vědomě nepřidáš: nové pole, širší log, automatický zápis, nové publikum nebo delší retenci.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -54261,6 +54421,8 @@ Vezmi poslední rozhodovací kartu review opakovaných výjimek a napiš k ní z
 - Nielsen Norman Group: Onboarding Tutorials vs. Contextual Help - rozdíl mezi úvodními tutoriály a kontextovou pomocí: https://www.nngroup.com/articles/onboarding-tutorials/
 
 ## Pracovní log
+
+- 2026-07-25: Doplněna příloha o kontrole po změně pravidla automatizace bez falešného vítězství: návrat k původnímu review, kontrolní věta pilotu, porovnání starých výjimek s novým chováním, hledání nových okrajových chyb, ověření datové hranice, úklid pilotních stop, rozhodnutí ponechat / ponechat jako návrh / zúžit / vrátit / otevřít produktovou změnu / vypnout, příklad support triage, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro ověření změněného pravidla automatizace po pilotu. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
 - 2026-07-25: Doplněna příloha o změně pravidla automatizace po výjimkovém review bez nové černé skříňky: změnová věta „nově / protože / pořád nesmí“, kontrola datové hranice, malá testovací sada z výjimek, pilot oddělený od pravomoci, úklid starých whitelistů/exportů/pokynů, příklad support triage, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro úpravu pravidla automatizace po review. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
