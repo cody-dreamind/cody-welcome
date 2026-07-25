@@ -163,6 +163,7 @@ Když se nechceš vracet do celé knihy, hledej konkrétní nástroj podle výst
 | Vyhodnotit opakované výjimky z automatizace bez džungle pravidel | „opakované výjimky“, „výjimkový review“ nebo „pravidlo se láme“ | review opakovaných výjimek, které rozhodne mezi úpravou pravidla, zúžením automatizace, produktovou změnou a vypnutím |
 | Upravit pravidlo automatizace po výjimkovém review | „změna pravidla automatizace“, „pravidlo po review“ nebo „nová logika“ | změnová karta pravidla s testovací sadou, hranicí dat, pilotem, úklidem starých výjimek a datem další kontroly |
 | Ověřit změněné pravidlo automatizace po pilotu | „kontrola po změně pravidla“, „nové pravidlo hotovo“ nebo „pravidlový pilot“ | kontrola prvních běhů změněného pravidla podle výjimek, chyb, datové hranice, starých stop a rozhodnutí ponechat, zúžit, vrátit nebo vypnout |
+| Uklidit staré pravidlo po ověřené změně automatizace | „úklid starého pravidla“, „dvojí pravda“ nebo „staré pravidlo končí“ | zavírací karta starého pravidla s úklidem kódu, dokumentace, výjimek, metrik, přístupů a veřejných slibů |
 
 Pravidlo pro práci s rejstříkem: otevři maximálně tři nalezené části, vyber jednu a zapiš výstup. Pokud po deseti minutách pořád skáčeš mezi odkazy, vrať se k tabulce „Kudy začít podle aktuální bolesti“ a zúž problém. E-book není buffet. Teda je, ale bez talíře si stejně odneseš jen chaos.
 
@@ -54229,6 +54230,131 @@ Tohle není dramatický triumf automatizace. Je to lepší výsledek: méně ru�
 
 Vezmi jednu automatizaci, u které se nedávno měnilo pravidlo, a napiš kontrolní větu „pilot měl ukázat, jestli ___, aniž by automatizace ___“. Pak vyber tři staré výjimky a tři běžné správné průchody a porovnej je s novým chováním. Nakonec napiš jedno rozhodnutí a jednu věc, kterou teď vědomě nepřidáš: nové pole, širší log, automatický zápis, nové publikum nebo delší retenci.
 
+## Příloha: Úklid starého pravidla automatizace bez dvojí pravdy
+
+Když nové pravidlo po pilotu projde kontrolou, práce nekončí. Začíná nudnější, ale důležitá část: uklidit staré pravidlo tak, aby v systému nezůstaly dvě pravdy. Jedna v produkční logice, druhá v runbooku, třetí v chatovém pokynu a čtvrtá v hlavě člověka, který „ví, jak to bylo dřív“.
+
+Dvojí pravda je nebezpečná hlavně proto, že nevypadá jako incident. Automatizace běží, dashboard svítí, lidé si zvykli. Jenže support pořád používá starou šablonu, sales má uložený starý výklad, výjimková tabulka drží původní whitelist a nový vlastník automatizace neví, která část je historická památka a která platí. To není dokumentace. To je mapa bludiště.
+
+> Codyho komentář: Staré pravidlo po úspěšném pilotu nesmí dostat důchod v podobě „necháme to tu pro jistotu“. Jistota je záloha a rollback plán. Starý kód, starý pokyn a starý dashboard jsou spíš nalepený lístek na dveřích, které už vedou jinam.
+
+### Začni zavírací větou starého pravidla
+
+Před úklidem napiš jednu větu:
+
+„Staré pravidlo ___ končí, protože nové pravidlo ___, a ponecháváme jen ___.“
+
+Příklady:
+
+| Slabá věta | Lepší věta |
+| --- | --- |
+| Starý support triage už asi nepotřebujeme. | Staré support triage pravidlo pro slovo `security` končí, protože nové pravidlo odděluje incidenty od access/reporting dotazů, a ponecháváme jen ruční eskalaci hraničních bezpečnostních případů. |
+| Smažeme staré billing výjimky. | Starý whitelist billing reminderu končí, protože nové pravidlo předává účty s platební domluvou vlastníkovi, a ponecháváme jen dočasné výjimky s datem konce. |
+| Přestaneme používat starý alert. | Staré potlačení release dry-runů končí, protože nové pravidlo rozpozná explicitní maintenance okno, a ponecháváme jen ruční stop tlačítko pro incidentní zásah. |
+
+Zavírací věta není poezie pro dokumentaci. Je to test, jestli tým rozumí tomu, co přesně mizí a co zůstává. Pokud věta zní neurčitě, úklid bude neurčitý taky.
+
+### Rozliš rollback od staré paralelní cesty
+
+Privacy-first provoz nepotřebuje mazat minulost z paměti. Potřebuje vědět, co je aktivní, co je archivní a co je nouzový návrat. Rollback plán je řízená pojistka. Stará paralelní cesta je neřízený chaos.
+
+Použij jednoduché třídění:
+
+| Věc | Stav po úklidu | Poznámka |
+| --- | --- | --- |
+| stará verze pravidla v kódu | odstranit nebo označit jako vypnutou podle release procesu | nesmí se spustit omylem vedle nové |
+| testovací sada starých výjimek | ponechat jen anonymizované nebo syntetické příklady | slouží regresním testům, ne provoznímu logování |
+| rollback postup | ponechat v runbooku s jasným spouštěčem | musí říkat, kdy ho použít a kdo rozhoduje |
+| starý chatový pokyn | smazat nebo nahradit odkazem na aktuální kartu | chat není zdroj pravdy |
+| starý dashboard | archivovat nebo upravit | nemá ukazovat metriky, podle kterých se už nerozhoduje |
+| staré výjimkové karty | zavřít, převést nebo dát datum review | otevřená výjimka bez účelu je dluh |
+
+Rollback má být krátký, pojmenovaný a časově omezený. Pokud ho potřebuješ držet měsíce, nejde o rollback. Jde o druhý provozní režim, který si zaslouží vlastní kartu, vlastníka a datovou hranici.
+
+### Projdi všechny nosiče starého pravidla
+
+Staré pravidlo málokdy žije jen v jednom souboru. Často přežívá v drobných místech, která při samotném pilotu nikdo neřešil.
+
+Zkontroluj:
+
+- produkční logiku, plánovače, feature flagy a konfigurační hodnoty,
+- testy a testovací fixture,
+- runbooky, interní wiki, support šablony a onboarding nových lidí,
+- výjimkové tabulky, whitelisty, blacklisty a ruční override seznamy,
+- dashboardy, reporty, alerty a názvy metrik,
+- přístupy lidí, kteří byli potřeba jen kvůli starému režimu,
+- zákaznické texty, trust odpovědi, help centrum a veřejné sliby,
+- staré exporty nebo debug logy vzniklé během změny.
+
+U každé položky napiš jeden stav: odstranit, aktualizovat, archivovat, ponechat jako rollback, převést do testu nebo otevřít samostatný úkol. „Nechat být“ není stav. To je jen budoucí překvapení v pracovní době někoho jiného.
+
+### Udrž testy, ne starou datovou stopu
+
+Po změně pravidla má smysl zachovat poučení ze starých výjimek. Nemá smysl držet živé osobní nebo provozně citlivé kopie jen proto, že kdysi pomohly při pilotu.
+
+Dobrá praxe:
+
+- z původních výjimek udělej ořezané regresní příklady,
+- odstraň jména, e-maily, celé zprávy, screenshoty a identifikátory účtů, pokud nejsou nutné,
+- u hraničních případů ponech očekávané rozhodnutí a důvod, ne celý kontext člověka,
+- testy popiš podle pravidla, ne podle zákazníka,
+- dočasné exporty smaž nebo zavři podle retenčního pravidla,
+- pokud nejde příklad bezpečně anonymizovat, ponech jen slovní popis scénáře.
+
+Testovací sada má chránit chování systému, ne konzervovat cizí data v technickém šuplíku.
+
+### Aktualizuj jazyk týmu
+
+Změna pravidla se často pokazí na slovech. Kód už dělá novou věc, ale tým pořád používá starý název. Pak se těžko pozná, jestli někdo mluví o historické výjimce, nové kategorii nebo ručním override.
+
+Po úklidu si sjednoť:
+
+| Starý jazyk | Nový jazyk | Proč |
+| --- | --- | --- |
+| security tiket | bezpečnostní incident / access-reporting dotaz | jedno slovo zakrývalo dvě práce |
+| VIP výjimka | platební domluva s vlastníkem | výjimka už není status člověka, ale konkrétní proces |
+| potlačený alert | plánovaný dry-run v maintenance okně | výstup říká důvod, ne jen ticho |
+| ruční oprava | potvrzení hraničního případu | člověk není neviditelná oprava automatu |
+
+Jazyk patří do runbooku, šablon, názvů metrik a krátkého oznámení týmu. Ne proto, aby všichni povinně četli další dokument. Proto, aby za měsíc nikdo nemusel hádat, jestli staré slovo ještě znamená starý proces.
+
+### Příklad: Úklid po změně support triage
+
+Nové support triage pravidlo oddělilo access/reporting dotazy od skutečných bezpečnostních incidentů. Kontrola po pilotu rozhodla ponechat návrhový režim pro access/reporting a nezvyšovat pravomoc u bezpečnostních témat.
+
+Zavírací karta:
+
+| Pole | Zápis |
+| --- | --- |
+| Zavírací věta | Staré pravidlo pro slovo `security` končí, protože nové pravidlo odděluje incidenty od access/reporting dotazů, a ponecháváme jen ruční eskalaci hraničních bezpečnostních případů. |
+| Aktivní logika | nový návrhový režim pro access/reporting dotazy |
+| Co odstraňujeme | starý chatový návod, starý whitelist výrazů, dashboard „security keyword hits“ |
+| Co převádíme do testů | 3 ořezané příklady starých výjimek a 2 skutečné incidentní scénáře bez osobních detailů |
+| Rollback | pouze návrat na ruční triage všech security dotazů, schvaluje support owner |
+| Dokumentace | aktualizovat support runbook, trust odpovědní knihovnu a onboarding nového support člověka |
+| Přístupy | odebrat dočasný přístup k pilotní porovnávací tabulce |
+| Retence | smazat dočasný export po uzavření kontroly |
+| Kontrola | za měsíc ověřit, zda se ve šablonách a dashboardech nevrátil starý pojem |
+
+Výsledek není „máme nové pravidlo“. Výsledek je „existuje jen jedno pravidlo, tým mu rozumí a stará datová stopa nezůstala viset v koutě“.
+
+### Checklist: Úklid starého pravidla automatizace
+
+- [ ] Staré pravidlo má zavírací větu: co končí, proč a co zůstává.
+- [ ] Rollback je oddělený od staré paralelní cesty.
+- [ ] Starý kód, konfigurace, flagy, plánovače a ruční override seznamy jsou odstraněné, vypnuté nebo jasně označené.
+- [ ] Dokumentace, runbooky, support šablony, trust odpovědi a onboarding odpovídají novému režimu.
+- [ ] Dashboardy, reporty, alerty a názvy metrik už nepopisují staré chování jako aktivní realitu.
+- [ ] Testovací sada zachovává poučení ze starých výjimek bez zbytečných osobních nebo citlivých detailů.
+- [ ] Dočasné exporty, debug logy, pilotní tabulky a sdílení jsou smazané nebo uzavřené podle retenčního pravidla.
+- [ ] Přístupy lidí potřebné jen pro starý režim nebo pilot jsou odebrané.
+- [ ] Tým používá nový jazyk pravidla a ví, co znamená hraniční případ.
+- [ ] Úklid má kontrolní datum, kdy se ověří, že se staré pravidlo nevrátilo zadními dveřmi.
+
+### Mini úkol
+
+Vyber jedno změněné pravidlo automatizace, které už prošlo pilotní kontrolou. Napiš zavírací větu starého pravidla. Pak projdi pět míst, kde mohlo staré pravidlo přežít: kód nebo konfiguraci, runbook, šablonu, dashboard a výjimkovou tabulku. U každého napiš jeden stav: odstranit, aktualizovat, archivovat, ponechat jako rollback nebo převést do testu. Nakonec smaž nebo zavři jednu pilotní stopu, kterou už k rozhodování nepotřebuješ.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -54421,6 +54547,8 @@ Vezmi jednu automatizaci, u které se nedávno měnilo pravidlo, a napiš kontro
 - Nielsen Norman Group: Onboarding Tutorials vs. Contextual Help - rozdíl mezi úvodními tutoriály a kontextovou pomocí: https://www.nngroup.com/articles/onboarding-tutorials/
 
 ## Pracovní log
+
+- 2026-07-25: Doplněna příloha o úklidu starého pravidla automatizace bez dvojí pravdy: zavírací věta starého pravidla, rozlišení rollbacku od staré paralelní cesty, kontrola nosičů starého pravidla v kódu, dokumentaci, šablonách, dashboardech, výjimkách a přístupech, převod starých výjimek do ořezaných regresních testů, sjednocení jazyka týmu, příklad support triage, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro úklid starého pravidla po ověřené změně automatizace. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
 - 2026-07-25: Doplněna příloha o kontrole po změně pravidla automatizace bez falešného vítězství: návrat k původnímu review, kontrolní věta pilotu, porovnání starých výjimek s novým chováním, hledání nových okrajových chyb, ověření datové hranice, úklid pilotních stop, rozhodnutí ponechat / ponechat jako návrh / zúžit / vrátit / otevřít produktovou změnu / vypnout, příklad support triage, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro ověření změněného pravidla automatizace po pilotu. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
