@@ -164,6 +164,7 @@ Když se nechceš vracet do celé knihy, hledej konkrétní nástroj podle výst
 | Upravit pravidlo automatizace po výjimkovém review | „změna pravidla automatizace“, „pravidlo po review“ nebo „nová logika“ | změnová karta pravidla s testovací sadou, hranicí dat, pilotem, úklidem starých výjimek a datem další kontroly |
 | Ověřit změněné pravidlo automatizace po pilotu | „kontrola po změně pravidla“, „nové pravidlo hotovo“ nebo „pravidlový pilot“ | kontrola prvních běhů změněného pravidla podle výjimek, chyb, datové hranice, starých stop a rozhodnutí ponechat, zúžit, vrátit nebo vypnout |
 | Uklidit staré pravidlo po ověřené změně automatizace | „úklid starého pravidla“, „dvojí pravda“ nebo „staré pravidlo končí“ | zavírací karta starého pravidla s úklidem kódu, dokumentace, výjimek, metrik, přístupů a veřejných slibů |
+| Přenést poučení z automatizace bez procesu navíc | „poučení z automatizace“, „učení po úklidu“ nebo „automatizace naučila tým“ | učící karta, která převede zjištění do produktu, dokumentace, runbooku nebo rozhodnutí bez nové poradní vrstvy a sledování lidí |
 
 Pravidlo pro práci s rejstříkem: otevři maximálně tři nalezené části, vyber jednu a zapiš výstup. Pokud po deseti minutách pořád skáčeš mezi odkazy, vrať se k tabulce „Kudy začít podle aktuální bolesti“ a zúž problém. E-book není buffet. Teda je, ale bez talíře si stejně odneseš jen chaos.
 
@@ -54355,6 +54356,128 @@ Výsledek není „máme nové pravidlo“. Výsledek je „existuje jen jedno p
 
 Vyber jedno změněné pravidlo automatizace, které už prošlo pilotní kontrolou. Napiš zavírací větu starého pravidla. Pak projdi pět míst, kde mohlo staré pravidlo přežít: kód nebo konfiguraci, runbook, šablonu, dashboard a výjimkovou tabulku. U každého napiš jeden stav: odstranit, aktualizovat, archivovat, ponechat jako rollback nebo převést do testu. Nakonec smaž nebo zavři jednu pilotní stopu, kterou už k rozhodování nepotřebuješ.
 
+## Příloha: Poučení z automatizace bez procesu navíc
+
+Po úklidu starého pravidla je lákavé říct „hotovo“ a jít dál. Technicky to může být pravda. Produktově často ne. Automatizace totiž během provozu ukáže něco důležitějšího než jen to, jestli skript běží: kde má produkt nejasné pojmy, kde dokumentace nutí lidi hádat, kde proces spoléhá na tiché hrdinství a kde tým sbírá data jen proto, že si nevěří v rozhodnutí.
+
+Poučení z automatizace ale nesmí automaticky vytvořit další meeting, další dashboard a další povinnou tabulku. Cílem je převést jednu věc, kterou se tým naučil, do místa, kde skutečně sníží práci nebo riziko.
+
+> Codyho komentář: Nejhorší výsledek dobré automatizace je nový rituál, který kontroluje automatizaci, která kontroluje proces, který vznikl proto, že se nikomu nechtělo opravit produkt. To už není produktivita. To je procesní karaoke.
+
+### Začni učící větou
+
+Po zavření změny napiš jednu větu:
+
+„Automatizace nás naučila, že ___, proto měníme ___ a nebudeme přidávat ___.“
+
+Příklady:
+
+| Slabá věta | Lepší věta |
+| --- | --- |
+| Support triage je lepší. | Automatizace nás naučila, že slovo `security` v supportu míchá incidenty a přístupové dotazy, proto měníme slovník kategorií a nebudeme přidávat zákaznický segment do pravidla. |
+| Billing reminder má méně výjimek. | Automatizace nás naučila, že většina výjimek vzniká kvůli nejasné platební domluvě, proto přidáváme stav „domluva s vlastníkem“ a nebudeme držet trvalý VIP whitelist. |
+| Report už nikoho neruší. | Automatizace nás naučila, že denní report vedl k práci jen při změně stavu, proto přecházíme na událostní oznámení a nebudeme posílat prázdné souhrny. |
+
+Dobrá učící věta má tři části: poznatek, změnu a hranici. Bez hranice se poučení změní v pozvánku přidat další data, další podmínku nebo další kontrolu „pro jistotu“.
+
+### Rozliš typ poučení
+
+Ne každé poučení patří do kódu. Některé patří do textu, některé do produktu a některé do stop seznamu. Pokud všechno končí jako nová automatizační podmínka, systém bude časem křehký a nečitelný.
+
+Použij jednoduché třídění:
+
+| Typ poučení | Signál | Kam ho převést |
+| --- | --- | --- |
+| produktové | lidé opakovaně obcházejí stejný krok nebo nerozumí stejnému stavu | úprava produktu, formuláře, stavu nebo toku |
+| jazykové | stejné slovo znamená pro různé týmy různé věci | slovník, help text, support šablona, trust odpověď |
+| provozní | automatizace běží správně, ale tým neví, kdo rozhoduje při hraně | runbook, role, eskalační věta, stop pravidlo |
+| datové | pravidlo funguje jen díky poli, které původně nemělo být nutné | přehodnocení účelu dat, ořez vstupu, zrušení pole nebo produktová oprava |
+| obchodní | výjimky ukazují opakovaný nesoulad mezi slibem a realitou | pricing, nabídka, onboarding, veřejné vysvětlení nebo sales kvalifikace |
+| zbytečné | poučení nic nemění na rozhodnutí ani riziku | zavřít bez nové práce a smazat dočasné stopy |
+
+Třídění má být rychlé. Pokud po deseti minutách nevíš, kam poučení patří, napiš ho jako otázku do nejbližšího produktového review a nepřidávej zatím novou automatizační logiku.
+
+### Poučení není důkaz pro větší sběr dat
+
+Častá past: automatizace se zlepšila, protože tým našel jeden užitečný signál, a hned někoho napadne přidat dalších deset. „Když pomohl stav faktury, pomůže i segment, velikost firmy, historie komunikace a poslední aktivita.“ Takhle se z provozní pomůcky stane sledovací stroj s hezkým názvem.
+
+Před rozšířením dat si polož pět otázek:
+
+- Jaké rozhodnutí bez nového pole opravdu neuděláme?
+- Nestačí opravit text, formulář, stav nebo proces?
+- Umí člověk rozhodnout hraniční případy bez nového trvalého sběru?
+- Jak dlouho by nové pole žilo a kdo ho smaže?
+- Co se stane, když se pole ukáže jako neužitečné nebo zavádějící?
+
+Pokud odpověď zní „možná se to bude hodit“, pole nepřidávej. Možná je dobré slovo pro poznámku, ne pro datový model.
+
+### Převáděj poučení do jednoho místa pravdy
+
+Každé poučení má skončit na jednom hlavním místě. Ne v pěti dokumentech, třech chatech a jedné tabulce, kterou nikdo neotevře.
+
+Vyber primární místo:
+
+| Poučení vede k | Primární místo pravdy | Vedlejší úpravy |
+| --- | --- | --- |
+| nové produktové pravidlo | produktový backlog nebo specifikace stavu | testy, release notes, help text |
+| změna provozního rozhodování | runbook | role, alert text, checklist |
+| změna jazyka pro zákazníky | veřejná dokumentace nebo trust odpověď | support šablona, sales karta |
+| zrušení zbytečného signálu | datová mapa nebo analytická specifikace | dashboard, retence, exporty |
+| obchodní nesoulad | pricing nebo nabídka | kvalifikační otázky, onboarding |
+
+Vedlejší úpravy jsou důležité, ale nesmí se tvářit jako další zdroje pravdy. Mají odkazovat na hlavní místo nebo z něj vycházet.
+
+### Udělej malou učící kartu
+
+Stačí krátký zápis:
+
+| Pole | Co vyplnit |
+| --- | --- |
+| Učící věta | Co automatizace ukázala, co měníme a co nepřidáváme. |
+| Důkaz | Jaký opakovaný signál to ukázal: výjimky, ruční opravy, nejasné dotazy, tiché obcházení. |
+| Primární změna | Produkt, dokumentace, runbook, pricing, datová mapa nebo rozhodnutí nic neměnit. |
+| Datová hranice | Co se nesmí začít sbírat, držet déle nebo sdílet šířeji. |
+| Úklid | Jaké pilotní tabulky, debug logy, dočasné přístupy nebo staré pokyny se zavřou. |
+| Kontrola | Kdy ověříme, že poučení snížilo práci nebo riziko. |
+| Stop pravidlo | Kdy se změna zruší, pokud jen přidala šum. |
+
+Učící karta není nová dokumentační disciplína. Je to malý most mezi „automatizace běžela“ a „produkt se z toho opravdu zlepšil“.
+
+### Příklad: Co tým zjistil ze support triage
+
+Po změně support triage tým uklidil staré pravidlo pro slovo `security`. Při úklidu se ukázalo, že největší problém nebyl algoritmus. Problém byl jazyk: zákazníci, support i sales používali stejné slovo pro bezpečnostní incident, dotaz na přístupy, auditní report a trust materiály.
+
+Učící karta:
+
+| Pole | Zápis |
+| --- | --- |
+| Učící věta | Automatizace nás naučila, že `security` není jedna support kategorie, proto měníme zákaznický a interní slovník a nebudeme přidávat segment zákazníka do triage pravidla. |
+| Důkaz | Opakované ruční přepisy access/reporting dotazů, hraniční incidentní případy ponechané člověku, staré support šablony s jedním širokým pojmem. |
+| Primární změna | Rozdělit support kategorie na bezpečnostní incident, přístupový dotaz, auditní materiál a reporting. |
+| Datová hranice | Nepřidávat zákaznický segment ani historii komunikace do pravidla. |
+| Úklid | Smazat pilotní porovnávací export, zavřít starý whitelist slov, aktualizovat support šablony a trust odpověď. |
+| Kontrola | Za měsíc projít jen agregovaný počet ručních přepisů a tři ukázkové hraniční případy bez osobních detailů. |
+| Stop pravidlo | Pokud nové kategorie zvyšují počet chybných předání nebo nutí support psát delší poznámky, vrátit část kategorizace člověku a opravit texty. |
+
+Výsledek není chytřejší automat. Výsledek je jasnější produktový jazyk, méně výjimek a žádné nové pole, které by do support triage tahalo další zákaznický kontext.
+
+### Checklist: Poučení z automatizace
+
+- [ ] Po úklidu existuje jedna učící věta: co jsme zjistili, co měníme a co nepřidáváme.
+- [ ] Poučení je zatříděné jako produktové, jazykové, provozní, datové, obchodní nebo zbytečné.
+- [ ] Nová automatizační podmínka není výchozí odpověď na každý poznatek.
+- [ ] Primární místo pravdy je jasné: backlog, specifikace, runbook, dokumentace, trust odpověď, pricing nebo datová mapa.
+- [ ] Vedlejší šablony, dashboardy a texty odkazují na hlavní místo, místo aby vytvářely další verzi pravdy.
+- [ ] Poučení nepřidává nové osobní údaje, delší retenci ani širší přístupy bez jasného rozhodnutí.
+- [ ] Dočasné exporty, debug logy, pilotní tabulky a staré chatové pokyny jsou zavřené.
+- [ ] Kontrola dopadu sleduje změnu práce nebo rizika, ne zvědavost na jednotlivé lidi.
+- [ ] Existuje stop pravidlo pro případ, že poučení přidá šum místo užitku.
+- [ ] Tým ví, kterou věc po této automatizaci vědomě dělat nebude.
+
+### Mini úkol
+
+Vezmi jednu automatizaci, kterou jste nedávno změnili nebo uklidili. Napiš učící větu „automatizace nás naučila, že ___, proto měníme ___ a nebudeme přidávat ___“. Pak vyber jedno primární místo pravdy, kam poučení patří. Nakonec smaž jednu dočasnou stopu z pilotu nebo napiš stop pravidlo pro novou změnu.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -54547,6 +54670,8 @@ Vyber jedno změněné pravidlo automatizace, které už prošlo pilotní kontro
 - Nielsen Norman Group: Onboarding Tutorials vs. Contextual Help - rozdíl mezi úvodními tutoriály a kontextovou pomocí: https://www.nngroup.com/articles/onboarding-tutorials/
 
 ## Pracovní log
+
+- 2026-07-25: Doplněna příloha o poučení z automatizace bez procesu navíc: učící věta po úklidu pravidla, třídění poučení na produktové, jazykové, provozní, datové, obchodní a zbytečné, ochrana před rozšiřováním sběru dat, převod poznatku do jednoho místa pravdy, učící karta, příklad support triage, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro přenos poučení z automatizace bez nové poradní vrstvy. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
 - 2026-07-25: Doplněna příloha o úklidu starého pravidla automatizace bez dvojí pravdy: zavírací věta starého pravidla, rozlišení rollbacku od staré paralelní cesty, kontrola nosičů starého pravidla v kódu, dokumentaci, šablonách, dashboardech, výjimkách a přístupech, převod starých výjimek do ořezaných regresních testů, sjednocení jazyka týmu, příklad support triage, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro úklid starého pravidla po ověřené změně automatizace. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
