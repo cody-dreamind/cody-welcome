@@ -148,6 +148,7 @@ Když se nechceš vracet do celé knihy, hledej konkrétní nástroj podle výst
 | Znovu spustit automatizaci po ruční náhradě | „znovuspuštění automatizace“, „automatizace po ručním procesu“ nebo „restart automatizace“ | restartovací karta s menším rozsahem, jasným spouštěčem, ručním rozhodnutím, omezenými logy a datem dalšího review |
 | Ověřit restartovanou automatizaci po pilotu | „kontrola po restartu automatizace“, „pilot automatizace hotovo“ nebo „restartovaný skript“ | rozhodnutí, zda automatizace po pilotu zůstane, zúží se, vrátí ručně, nebo se znovu vypne bez starých tokenů a datového šumu |
 | Převést úspěšný pilot automatizace do běžného provozu | „standardní provoz automatizace“, „automatizace po pilotu“ nebo „rutina ze skriptu“ | provozní karta automatizace s vlastníkem, revizním rytmem, limitem dat, stop pravidlem a plánem úklidu |
+| Udržet běžící automatizaci zdravou bez tichého driftu | „provozní drift automatizace“, „údržba běžící automatizace“ nebo „automatizace stárne“ | malá drift kontrola spouštěčů, vstupů, výstupů, logů, vlastníka a ručního postupu |
 
 Pravidlo pro práci s rejstříkem: otevři maximálně tři nalezené části, vyber jednu a zapiš výstup. Pokud po deseti minutách pořád skáčeš mezi odkazy, vrať se k tabulce „Kudy začít podle aktuální bolesti“ a zúž problém. E-book není buffet. Teda je, ale bez talíře si stejně odneseš jen chaos.
 
@@ -52257,6 +52258,144 @@ Všimni si drobnosti: automatizace pořád nic sama nepřepisuje. Připravuje pr
 
 Vyber jednu automatizaci, která přežila pilot nebo první kontrolu. Napiš její provozní kartu na jednu stránku a přidej zamykací větu: kdy běží, co čte, kam zapisuje a kdo rozhoduje. Potom najdi jedno oprávnění, vstup nebo log, který v běžném provozu nepotřebuje. Smaž ho z návrhu dřív, než si na něj tým zvykne. Nejlevnější datový úklid je ten, který nikdy nevznikne.
 
+## Příloha: Provozní drift automatizace bez pomalého odplutí
+
+Automatizace v běžném provozu většinou nezestárne najednou. Neprobudíš se v pondělí s dramatickým nápisem „tento skript už neodpovídá realitě“. Stane se něco méně divadelního a tím nebezpečnějšího: přibude nový štítek, změní se šablona release karty, někdo přesměruje výstup do jiného kanálu, token dostane širší roli, logy začnou obsahovat víc detailů a vlastník se mezitím přesune na jinou práci.
+
+To je provozní drift. Automatizace pořád běží zeleně, ale už nepokrývá přesně tu práci, kvůli které vznikla. V privacy-first provozu je drift nepříjemný dvojnásob: nejen že snižuje užitečnost výstupu, ale často nenápadně rozšiřuje datovou stopu. A nenápadné rozšíření je přesně ten typ problému, který se špatně vysvětluje zákazníkovi, auditorovi i vlastnímu budoucímu já.
+
+### Kontroluj drift podle rozdílu, ne podle pocitu
+
+Nezačínej otázkou „funguje to?“. Ta je moc hrubá. Automatizace může technicky fungovat a pracovní realitě už stejně neodpovídat. Lepší otázka zní: „Co se změnilo od poslední provozní karty?“
+
+Porovnej šest oblastí:
+
+| Oblast | Drift otázka |
+| --- | --- |
+| Spouštěč | Spouští se automatizace pořád jen v situaci, pro kterou byla schválená? |
+| Vstupy | Čte jen stejné systémy, pole, štítky a soubory jako při poslední revizi? |
+| Výstup | Končí výstup na stejném místě a používá ho pořád stejný vlastník rozhodnutí? |
+| Oprávnění | Nezískal token, účet nebo integrace širší přístup kvůli jiné práci? |
+| Logy | Neobsahují debug detaily, osobní údaje, exporty nebo části obsahu, které nepotřebujeme držet? |
+| Ruční postup | Umí tým pořád projít stejnou práci ručně, když automatizace vypadne? |
+
+Když najdeš rozdíl, ještě to automaticky neznamená incident. Znamená to, že automatizace potřebuje nové rozhodnutí: ponechat změnu, zúžit ji, vrátit se k původnímu stavu, nebo automatizaci vypnout.
+
+### Nastav malé drift okno
+
+Drift kontrola nemá být půldenní audit. Má být krátké okno, které se dá udělat i v malém týmu bez korporátního bubnování na procesní gong. Stačí 20 až 30 minut u automatizací, které už jsou v běžném provozu.
+
+Praktický průchod:
+
+| Čas | Co udělat | Výstup |
+| --- | --- | --- |
+| 0-5 minut | Otevři poslední provozní kartu a poslední tři výstupy automatizace. | jasný původní slib a realita posledních běhů |
+| 5-10 minut | Porovnej spouštěče a vstupy. | seznam rozdílů nebo potvrzení beze změny |
+| 10-15 minut | Zkontroluj výstup a vlastníka rozhodnutí. | víme, jestli někdo podle výstupu opravdu rozhoduje |
+| 15-20 minut | Projdi oprávnění, logy a dočasné kopie. | datový rozdíl oproti kartě |
+| 20-30 minut | Napiš jedno rozhodnutí. | ponechat, opravit, zúžit, vrátit ručně nebo vypnout |
+
+Drift okno ukonči i tehdy, když najdeš víc problémů. Neotevírej během něj nový refaktor, nový nástroj ani velkou debatu o architektuře. Cílem je rozhodnutí o současném provozu, ne dobrodružná výprava do všeho, co by šlo jednou zlepšit.
+
+### Rozliš drift užitečnosti a drift dat
+
+Ne každý drift má stejnou váhu. Některý jen snižuje hodnotu automatizace, jiný mění datové riziko.
+
+Drift užitečnosti vypadá třeba takto:
+
+- výstup chodí do kanálu, který tým přestal sledovat,
+- spouštěč je moc široký a vytváří šum,
+- vlastník rozhodnutí neví, co má s výstupem udělat,
+- automatizace dál hlídá proces, který už byl zjednodušený v produktu.
+
+Drift dat je vážnější:
+
+- automatizace začala číst nový zdroj bez aktualizované karty,
+- logy obsahují celé vstupy místo minimálního provozního souhrnu,
+- token dostal širší roli kvůli pohodlí,
+- výstupy se kopírují do nástroje, který nemá stejnou datovou hranici,
+- do ruční kontroly se začaly přidávat exporty zákaznických dat „pro jistotu“.
+
+U driftu užitečnosti může stačit zúžit pravidla nebo změnit místo výstupu. U driftu dat se nejdřív zastaví rozšíření a až potom se rozhoduje, jestli má nový rozsah vůbec smysl. Pořadí je důležité. Nejdřív brzda, potom chytré věty.
+
+### Používej drift záznam místo dlouhého reportu
+
+Každá kontrola má skončit malým záznamem. Ne proto, aby vznikl další dokument pro dokument. Proto, aby bylo za měsíc jasné, proč automatizace pořád běží nebo proč se zúžila.
+
+Krátká šablona:
+
+| Pole | Zápis |
+| --- | --- |
+| Automatizace | Název a odkaz na provozní kartu. |
+| Poslední kontrola | Datum a vlastník kontroly. |
+| Změna od karty | Spouštěč, vstup, výstup, oprávnění, logy nebo ruční postup. |
+| Dopad | Užitečnost, datové riziko, provozní šum nebo žádná změna. |
+| Rozhodnutí | Ponechat, zúžit, opravit, vrátit ručně nebo vypnout. |
+| Další kontrola | Kdy nebo po jaké události se záznam otevře znovu. |
+
+Příklad dobrého záznamu:
+
+| Pole | Zápis |
+| --- | --- |
+| Automatizace | Kontrola trust odpovědí po release kartách. |
+| Poslední kontrola | 2026-07-25, vlastník trust odpovědí. |
+| Změna od karty | Přibyl štítek `ai-feature`, který automatizace zatím ignoruje. Logy stále obsahují jen ID karty a stav běhu. |
+| Dopad | Užitečnost mírně klesla, datové riziko beze změny. |
+| Rozhodnutí | Nerozšiřovat automaticky. Připravit změnovou kartu, zda `ai-feature` patří do schváleného rozsahu. |
+| Další kontrola | Po první release kartě s `ai-feature` a dopadem na data. |
+
+Tohle je dost. Krátké, rozhodovací, dohledatelné. Žádné eseje o tom, jak se tým cítí ke skriptu. Skript žádné city nemá, i když by si některé build logy zasloužily terapii.
+
+### Nepouštěj drift kontrolu do sledování lidí
+
+Je lákavé měřit údržbu automatizace podle toho, kdo reagoval rychle, kdo úkol ignoroval a kdo kolikrát klikl na výstup. Tím se z provozní hygieny rychle stane interní dozor. Privacy-first tým nepotřebuje sledovat jednotlivce, aby poznal, jestli automatizace pomáhá.
+
+Stačí chudé signály:
+
+- počet relevantních běhů za kontrolní období,
+- počet falešných výstupů,
+- počet výstupů, které skončily rozhodnutím,
+- počet výstupů, které zůstaly bez vlastníka,
+- počet změn ve vstupech, výstupech nebo oprávněních,
+- jeden stručný důvod, proč se automatizace ponechává nebo mění.
+
+Tyto signály říkají dost o procesu, ale zbytečně nehodnotí konkrétní lidi. Když tým potřebuje řešit odpovědnost, řeš ji v rolích, pracovním rytmu a definici vlastnictví. Ne v tiché tabulce reakčních časů.
+
+### Příklad: Dostupnostní kontrola po třech týdnech
+
+Tým má automatizaci, která jednou za hodinu kontroluje veřejnou dostupnost webu a probudí člověka jen při chybě. Původní karta říká: číst jen veřejnou URL, uložit HTTP status, čas kontroly a krátkou chybu, žádné cookies, žádné session identifikátory, žádné profilování návštěvníků.
+
+Po třech týdnech drift kontrola ukáže, že někdo do debug výstupu přidal celý response body, aby se lépe hledaly chyby v obsahu. Technicky to pomohlo jednou. Provozně to ale mění datovou stopu: z krátkého dostupnostního signálu se stává pravidelné ukládání veřejného obsahu, které nikdo nechtěl dlouhodobě držet.
+
+Rozhodnutí:
+
+| Oblast | Rozhodnutí |
+| --- | --- |
+| Užitečnost | Kontrola dostupnosti zůstává, protože chrání veřejný slib webu. |
+| Data | Response body se z logu odstraní. Zůstane jen status, chyba a krátký obsahový marker bez kompletní stránky. |
+| Vlastník | Provozní vlastník schválí změnu logování a aktualizuje kartu. |
+| Ruční postup | Při chybě se obsah ověří ručně přes přímý požadavek, ne trvalým sběrem celé odpovědi. |
+| Další kontrola | Po dalších deseti bězích nebo při první změně monitorovaných URL. |
+
+Tohle je přesně typ driftu, který stojí za rychlou opravu. Ne proto, že by někdo udělal strašný zločin proti civilizaci. Protože malý užitečný debug se umí potichu proměnit v trvalý sběr. A trvalý sběr má mít důvod, vlastníka a konec.
+
+### Checklist: Provozní drift automatizace
+
+- [ ] Máme poslední provozní kartu automatizace.
+- [ ] Porovnali jsme aktuální spouštěč s původním schváleným spouštěčem.
+- [ ] Vstupy automatizace odpovídají povoleným systémům, polím a štítkům.
+- [ ] Výstup končí na schváleném místě a má vlastníka rozhodnutí.
+- [ ] Oprávnění tokenů, účtů a integrací se nerozšířila kvůli jiné práci.
+- [ ] Logy obsahují jen provozní minimum a neukládají celé vstupy pro pohodlí.
+- [ ] Ruční náhradní postup je pořád proveditelný.
+- [ ] Rozlišili jsme drift užitečnosti a drift dat.
+- [ ] Kontrola neměří individuální chování lidí.
+- [ ] Výsledkem je jedno rozhodnutí: ponechat, zúžit, opravit, vrátit ručně nebo vypnout.
+
+### Mini úkol
+
+Vyber jednu automatizaci, která už není v pilotu a běží aspoň několik týdnů. Otevři její provozní kartu a poslední tři výstupy. Najdi jeden rozdíl mezi kartou a realitou: spouštěč, vstup, výstup, oprávnění, log nebo ruční postup. Pokud žádný rozdíl nenajdeš, napiš záznam „beze změny“ a další kontrolu. Pokud rozdíl najdeš, zavři ho jedním rozhodnutím. Ne pěti návrhy. Jedním. Drift se neporáží obřím procesem, ale pravidelným malým návratem k realitě.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -52450,6 +52589,7 @@ Vyber jednu automatizaci, která přežila pilot nebo první kontrolu. Napiš je
 
 ## Pracovní log
 
+- 2026-07-25: Doplněna příloha o provozním driftu automatizace bez pomalého odplutí: kontrola rozdílu proti provozní kartě, malé drift okno, rozlišení driftu užitečnosti a driftu dat, krátký drift záznam, chudé signály bez sledování lidí, příklad dostupnostní kontroly, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro údržbu běžící automatizace. Bez nových aktuálních externích tvrzení, navázáno na standardní provoz automatizace po pilotu, review automatizací, logování, přístupy a privacy-first minimalizaci; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
 - 2026-07-25: Doplněna příloha o standardním provozu automatizace po pilotu bez tichého rozšíření: provozní karta, zamykací věta rozsahu, revizní rytmus podle rizika, rozlišení provozní chyby od produktové změny, ruční návrat, příklad trust automatizace, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro převod úspěšného pilotu automatizace do běžného provozu. Bez nových aktuálních externích tvrzení, navázáno na části o kontrole po restartu automatizace, znovuspuštění automatizace, retenci rutiny, přístupech, logování, trust odpovědích a privacy-first minimalizaci; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
 - 2026-07-24: Doplněna příloha o kontrole po restartu automatizace bez druhého autopilota: návrat k pilotnímu slibu, rozlišení technického úspěchu a pracovní hodnoty, počítání šumu bez sledování lidí, rozhodnutí ponechat/zúžit/přepsat/vrátit ručně/vypnout, kontrola starých i nových přístupů, příklad restartované kontroly trust odpovědí, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro ověření restartované automatizace po pilotu. Bez nových aktuálních externích tvrzení, navázáno na části o znovuspuštění automatizace, ruční náhradě, review automatizace, přístupech, logování, trust odpovědích a privacy-first minimalizaci; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
 - 2026-07-24: Doplněna příloha o znovuspuštění automatizace bez návratu starého problému: restart po ověřené ruční náhradě, zúžení původního rozsahu, restartovací karta, zachování člověka u rozhodnutí, čistá revize tokenů, pilotní režim, stop pravidla, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro restart automatizace po ručním procesu. Bez nových aktuálních externích tvrzení, navázáno na části o vypnutí automatizace, ruční náhradě, review automatizace, trust odpovědích, přístupech, logování a privacy-first minimalizaci; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
