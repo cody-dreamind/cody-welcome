@@ -165,6 +165,7 @@ Když se nechceš vracet do celé knihy, hledej konkrétní nástroj podle výst
 | Ověřit změněné pravidlo automatizace po pilotu | „kontrola po změně pravidla“, „nové pravidlo hotovo“ nebo „pravidlový pilot“ | kontrola prvních běhů změněného pravidla podle výjimek, chyb, datové hranice, starých stop a rozhodnutí ponechat, zúžit, vrátit nebo vypnout |
 | Uklidit staré pravidlo po ověřené změně automatizace | „úklid starého pravidla“, „dvojí pravda“ nebo „staré pravidlo končí“ | zavírací karta starého pravidla s úklidem kódu, dokumentace, výjimek, metrik, přístupů a veřejných slibů |
 | Přenést poučení z automatizace bez procesu navíc | „poučení z automatizace“, „učení po úklidu“ nebo „automatizace naučila tým“ | učící karta, která převede zjištění do produktu, dokumentace, runbooku nebo rozhodnutí bez nové poradní vrstvy a sledování lidí |
+| Zapsat rozhodnutí o automatizaci bez auditního divadla | „rozhodovací záznam automatizace“, „proč automatizace běží“ nebo „automatizační ADR“ | krátký záznam důvodu, hranice dat, pravomoci, vlastníka, návratu zpět a data další kontroly bez opisování celé historie |
 
 Pravidlo pro práci s rejstříkem: otevři maximálně tři nalezené části, vyber jednu a zapiš výstup. Pokud po deseti minutách pořád skáčeš mezi odkazy, vrať se k tabulce „Kudy začít podle aktuální bolesti“ a zúž problém. E-book není buffet. Teda je, ale bez talíře si stejně odneseš jen chaos.
 
@@ -54478,6 +54479,118 @@ Výsledek není chytřejší automat. Výsledek je jasnější produktový jazyk
 
 Vezmi jednu automatizaci, kterou jste nedávno změnili nebo uklidili. Napiš učící větu „automatizace nás naučila, že ___, proto měníme ___ a nebudeme přidávat ___“. Pak vyber jedno primární místo pravdy, kam poučení patří. Nakonec smaž jednu dočasnou stopu z pilotu nebo napiš stop pravidlo pro novou změnu.
 
+## Příloha: Rozhodovací záznam automatizace bez auditního divadla
+
+Když automatizace projde pilotem, změnou pravidla, úklidem starého režimu a poučením, má tým tendenci zanechat po sobě buď příliš málo, nebo příliš mnoho. Příliš málo znamená: „nějaký skript to dělá, zeptej se toho člověka“. Příliš mnoho znamená: dokument o dvanácti stranách, který nikdo neotevře, protože vypadá jako žádost o stavební povolení na tlačítko.
+
+Rozhodovací záznam automatizace má být kratší než runbook a konkrétnější než chatové vlákno. Neříká, jak přesně skript funguje řádek po řádku. Říká, proč vůbec smí existovat, jakou má datovou hranici, kdo ji vlastní, jak se pozná problém a kdy se má znovu otevřít.
+
+> Codyho komentář: Dobrá automatizace potřebuje paměť. Ne sentimentální album screenshotů z pilotu, ale střízlivou větu „proč tohle běží“. Bez ní se z užitečné pomůcky časem stane tajemný rituál, který se všichni bojí vypnout.
+
+### Zapisuj rozhodnutí, ne historii ladění
+
+Rozhodovací záznam není deník vývoje. Nepatří do něj každý bug, každá varianta promptu, každý neúspěšný regulární výraz ani všechny screenshoty z testování. To patří do issue, commitu, runbooku nebo dočasné pracovní poznámky.
+
+Do záznamu patří jen to, co budoucí člověk potřebuje vědět, aby mohl automatizaci bezpečně ponechat, zúžit, opravit nebo vypnout:
+
+| Otázka | Proč je důležitá |
+| --- | --- |
+| Jaké rozhodnutí nebo riziko automatizace pokrývá? | Brání automatizaci bez účelu. |
+| Jaká data smí číst a jaká nesmí? | Chrání minimalizaci dat i důvěru lidí. |
+| Jakou má pravomoc? | Odděluje návrh, upozornění a přímou akci. |
+| Kdo vlastní pracovní výsledek? | Zabraňuje osiřelému skriptu bez odpovědnosti. |
+| Jak se vypne nebo vrátí ručně? | Dělá z vypnutí běžný provozní krok, ne incident. |
+| Kdy se záznam znovu otevře? | Udržuje rozhodnutí živé bez zbytečného meetingu. |
+
+Pokud záznam neumí odpovědět na těchto šest otázek, automatizace možná běží technicky správně, ale provozně je to pořád mlha.
+
+### Použij automatizační ADR
+
+U architektury se často používá krátký decision record: kontext, rozhodnutí, důsledky. U automatizace přidej ještě datovou hranici a hranici pravomoci. Šablona může být malá:
+
+| Pole | Co napsat |
+| --- | --- |
+| Název | Jedna věta bez interní přezdívky: co automatizace dělá. |
+| Stav | návrh, pilot, běží, zúženo, ruční režim, vypnuto nebo archivováno. |
+| Pracovní důvod | Jaké rozhodnutí, riziko nebo opakovanou práci pokrývá. |
+| Datová hranice | Vstupy, zakázaná pole, retence logů a pravidlo pro exporty. |
+| Pravomoc | Jen návrh, upozornění, příprava akce, nebo přímý zápis. |
+| Vlastník | Člověk nebo role, která vlastní výsledek, ne jen kód. |
+| Ruční náhrada | Jak tým udělá práci bez automatizace. |
+| Kontrolní spouštěč | Co záznam znovu otevře: změna vstupu, šum, chyba, nový dodavatel, incident, změna slibu. |
+| Poslední rozhodnutí | Ponechat, zúžit, rozšířit jen s novým rozhodnutím, vrátit ručně, nebo vypnout. |
+
+Název „ADR“ není povinný. Pokud tým nesnáší zkratky, říkej tomu „rozhodnutí o automatizaci“. Důležité je, aby záznam měl stabilní místo a nebyl schovaný v osobním disku člověka, který zrovna odjel na dovolenou.
+
+### Chraň záznam před dokumentačním tukem
+
+Rozhodovací záznam se pokazí ve chvíli, kdy začne suplovat všechno ostatní. Pokud v něm roste technický postup, patří do runbooku. Pokud v něm roste seznam testů, patří do testovací sady. Pokud v něm roste právní popis zpracování, patří do datové mapy nebo záznamu o činnostech. Pokud v něm roste detail obchodní výjimky, patří do pricingu, smlouvy nebo support šablony.
+
+Jednoduché pravidlo:
+
+| Pokud přidáváš | Dej to raději sem |
+| --- | --- |
+| přesný postup obnovy po chybě | runbook |
+| seznam polí a účelů zpracování | datová mapa |
+| technické hrany integrace | dokumentace integrace |
+| očekávané chování pravidla | testovací sada |
+| zákaznické vysvětlení | veřejná dokumentace nebo trust odpověď |
+| opakovanou obchodní výjimku | pricing, nabídka nebo sales karta |
+
+Rozhodovací záznam může na tyto věci odkazovat. Nemá je všechny spolknout. Dokument, který se snaží být vším, se brzy stane ničím. A ještě bude mít tabulku obsahu, protože utrpení si rádo obléká kravatu.
+
+### Udělej záznam čitelný i po změně vlastníka
+
+Test dobrého záznamu je jednoduchý: nový vlastník automatizace ho otevře a do deseti minut chápe, proč automatizace běží, čeho se nesmí dotknout a kdy má zvednout ruku. Nepotřebuje znát celé historické drama pilotu.
+
+Pomáhá používat věty místo nálepek:
+
+| Slabý zápis | Lepší zápis |
+| --- | --- |
+| Scope: support. | Automatizace smí číst jen kategorii ticketu, předmět a poslední interní stav, ne celé vlákno ani přílohy. |
+| Owner: DevOps. | Výsledek triage vlastní support lead; technické běhy spravuje vývoj. |
+| Logs: 30 days. | Log drží ID běhu, typ rozhodnutí a chybový stav po 30 dní; neukládá text zákaznické zprávy. |
+| Rollback: manual. | Při vypnutí support přepne frontu na ruční třídění podle šablony v runbooku a automatizace přestane zapisovat stav ticketu. |
+
+Čitelnost je bezpečnostní vlastnost. Když lidé nerozumí hranici automatizace, začnou ji obcházet, rozšiřovat nebo se jí bát. Všechny tři varianty jsou dražší než pět dobrých vět.
+
+### Příklad: Rozhodnutí o automatizaci trust odpovědí
+
+Tým používá automatizaci, která připravuje návrhy odpovědí na opakované bezpečnostní dotazy. Po pilotu ji nechal v režimu návrhu, protože přímé odesílání by mohlo poslat zastaralý nebo příliš konkrétní detail.
+
+Rozhodovací záznam:
+
+| Pole | Zápis |
+| --- | --- |
+| Název | Návrhy odpovědí na opakované bezpečnostní dotazy. |
+| Stav | Běží v režimu návrhu, bez automatického odesílání. |
+| Pracovní důvod | Zkrátit opakované hledání veřejných trust odpovědí a snížit riziko nekonzistentní odpovědi zákazníkům. |
+| Datová hranice | Automatizace smí číst typ dotazu, interní kategorii a schválenou odpovědní knihovnu; nesmí číst přílohy, neveřejné smlouvy ani celé zákaznické vlákno. |
+| Pravomoc | Připraví návrh odpovědi pro člověka. Neodesílá, nemění trust center a nezavírá ticket. |
+| Vlastník | Support lead vlastní odpověď; bezpečnostní vlastník schvaluje knihovnu; vývoj spravuje běh skriptu. |
+| Ruční náhrada | Support vyhledá odpověď v trust knihovně a použije ruční šablonu s odkazem na veřejný zdroj. |
+| Kontrolní spouštěč | Nová trust odpověď, změna dodavatele, bezpečnostní incident, více než tři ruční přepisy týdně nebo žádost o přímé odesílání. |
+| Poslední rozhodnutí | Ponechat jako návrh; přímé odesílání by vyžadovalo nový pilot a samostatné rozhodnutí o pravomoci. |
+
+Takový záznam není krásná literatura. Je to provozní pojistka. A přesně to má být.
+
+### Checklist: Rozhodovací záznam automatizace
+
+- [ ] Automatizace má jeden krátký rozhodovací záznam na stabilním místě.
+- [ ] Záznam popisuje pracovní důvod, ne jen technický název skriptu.
+- [ ] Datová hranice říká, co automatizace smí číst, ukládat a sdílet.
+- [ ] Zakázaná pole jsou pojmenovaná stejně jasně jako povolená pole.
+- [ ] Pravomoc je rozlišená na návrh, upozornění, přípravu akce nebo přímý zápis.
+- [ ] Vlastník výsledku je jiný pojem než správce kódu a oba jsou dohledatelní.
+- [ ] Ruční náhrada existuje a jde ji spustit bez lovení starého chatu.
+- [ ] Kontrolní spouštěče jsou konkrétní: změna vstupu, šum, chyba, dodavatel, incident nebo změna slibu.
+- [ ] Záznam odkazuje na runbook, datovou mapu, testy nebo trust odpovědi, ale neopisuje je celé.
+- [ ] Poslední rozhodnutí říká, co je povolené dál a co už vyžaduje nové rozhodnutí.
+
+### Mini úkol
+
+Vyber jednu automatizaci, která už běží déle než dva týdny. Napiš pro ni rozhodovací záznam do devíti polí: název, stav, pracovní důvod, datová hranice, pravomoc, vlastník, ruční náhrada, kontrolní spouštěč a poslední rozhodnutí. Pak z něj smaž všechno, co patří do runbooku, datové mapy nebo testů. Nakonec doplň jednu větu, co automatizace výslovně dělat nesmí bez nového rozhodnutí.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -54670,6 +54783,8 @@ Vezmi jednu automatizaci, kterou jste nedávno změnili nebo uklidili. Napiš u�
 - Nielsen Norman Group: Onboarding Tutorials vs. Contextual Help - rozdíl mezi úvodními tutoriály a kontextovou pomocí: https://www.nngroup.com/articles/onboarding-tutorials/
 
 ## Pracovní log
+
+- 2026-07-25: Doplněna příloha o rozhodovacím záznamu automatizace bez auditního divadla: rozdíl mezi historií ladění a rozhodnutím, šablona automatizačního ADR, ochrana před dokumentačním tukem, čitelnost po změně vlastníka, příklad trust odpovědí, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro zapsání důvodu, datové hranice, pravomoci, vlastníka a ruční náhrady automatizace. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
 - 2026-07-25: Doplněna příloha o poučení z automatizace bez procesu navíc: učící věta po úklidu pravidla, třídění poučení na produktové, jazykové, provozní, datové, obchodní a zbytečné, ochrana před rozšiřováním sběru dat, převod poznatku do jednoho místa pravdy, učící karta, příklad support triage, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro přenos poučení z automatizace bez nové poradní vrstvy. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
