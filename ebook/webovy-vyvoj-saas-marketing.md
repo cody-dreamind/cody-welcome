@@ -159,6 +159,7 @@ Když se nechceš vracet do celé knihy, hledej konkrétní nástroj podle výst
 | Ověřit změněnou frekvenci automatizace po kontrolním okně | „kontrola po změně frekvence“, „nový rytmus automatizace“ nebo „frekvence hotovo“ | rozhodnutí, jestli nový rytmus ponechat, zúžit, vrátit, spouštět událostí nebo vypnout podle zásahů, šumu, retence a důvěry lidí |
 | Změnit pravomoc automatizace bez tichého autopilota | „pravomoc automatizace“, „automatický zásah“ nebo „návrh vs akce“ | karta pravomoci s úrovní zásahu, lidským schválením, rollbackem, auditní stopou, kill switchem a prvním kontrolním oknem |
 | Ověřit změněnou pravomoc automatizace po pilotu | „kontrola po změně pravomoci“, „automatický zásah v provozu“ nebo „pravomoc hotovo“ | kontrola prvních zásahů podle skutečného dopadu, lidských oprav, rollbacku, auditní stopy a rozhodnutí ponechat, zúžit, vrátit na návrhy nebo vypnout |
+| Řídit výjimky z automatizace bez skrytého obcházení pravidel | „výjimky automatizace“, „ruční override“ nebo „automatizace neplatí“ | výjimková karta s důvodem, vlastníkem, datovou hranicí, časovým koncem a rozhodnutím, zda změnit pravidlo, nebo výjimku zavřít |
 
 Pravidlo pro práci s rejstříkem: otevři maximálně tři nalezené části, vyber jednu a zapiš výstup. Pokud po deseti minutách pořád skáčeš mezi odkazy, vrať se k tabulce „Kudy začít podle aktuální bolesti“ a zúž problém. E-book není buffet. Teda je, ale bez talíře si stejně odneseš jen chaos.
 
@@ -53715,6 +53716,129 @@ Výsledek není plná automatická komunikace. A to je správně. Automatizace p
 
 Vyber jednu automatizaci, která už přešla od návrhu k přímé akci. Najdi prvních deset zásahů po změně pravomoci a rozděl je na ponechat, zúžit, vrátit na návrh, zastavit nebo přepsat pravidlo. Potom ověř jeden rollback a jednu auditní stopu. Pokud neumíš během deseti minut říct, co automatizace změnila a jak to vrátit, sniž její pravomoc zpět na návrhový režim. Automatizace má nejdřív prokázat spolehlivost v malém, teprve pak dostat větší klíče.
 
+## Příloha: Výjimky z automatizace bez skrytého obcházení pravidel
+
+Každá užitečná automatizace dřív nebo později narazí na případ, který se nevejde do pravidel. To samo o sobě není selhání. Selhání začne ve chvíli, kdy tým začne výjimky řešit potichu: ručním přepsáním stavu, obejitím schvalování, jednorázovým exportem, novým filtrem v kódu nebo větou „tohle teď neřeš, je to jen speciální případ“.
+
+Výjimka může být produktové učení. Může ukázat chybějící segment, špatně popsaný zákaznický stav, přehnaně tvrdé pravidlo nebo rizikovou hranici, kterou automatizace nemá překračovat. Aby to ale byla užitečná informace a ne provozní šum, musí mít vlastníka, důvod, konec a datovou hranici.
+
+> Codyho komentář: Výjimka bez zápisu je dluh s falešným knírkem. Vypadá nenápadně, ale za měsíc už nikdo neví, proč automatizace jednou platí a jednou ne. A pak se tomu začne říkat „business context“, což je elegantní název pro bordel v pravidlech.
+
+### Rozliš typ výjimky
+
+Ne každá výjimka znamená, že se má změnit automatizace. Nejdřív ji pojmenuj podle důvodu.
+
+| Typ výjimky | Co znamená | Typický další krok |
+| --- | --- | --- |
+| datová výjimka | automatizace nemá vstup, který potřebuje, nebo by musela číst citlivější data | zúžit případ, doplnit bezpečný vstup nebo nechat rozhodnutí člověku |
+| pravidlová výjimka | pravidlo je moc tvrdé, moc měkké nebo nepočítá s běžným scénářem | upravit pravidlo a znovu projít pilotní kontrolu |
+| vztahová výjimka | výsledek zasáhne zákazníka, partnera, smlouvu nebo veřejný slib | ponechat lidské potvrzení a zapsat kontext do odpovědní knihovny |
+| provozní výjimka | systém je dočasně v nestandardním stavu, například migrace nebo incident | nastavit časový konec a po návratu do normálu výjimku zavřít |
+| produktová výjimka | automatizace odhalila stav, který produkt neumí dobře vyjádřit | otevřít produktový úkol, ne přidávat další skrytý bypass |
+| bezpečnostní výjimka | automatizace by musela rozšířit oprávnění, měnit přístupy nebo mazat data | zastavit přímou akci a vyžádat silnější review |
+
+Praktické pravidlo: pokud výjimka vyžaduje širší data, širší zápis nebo širší publikum, není to drobná provozní úprava. Je to změna rozsahu. Patří do stejné disciplíny jako změna vstupu, výstupu nebo pravomoci automatizace.
+
+### Udělej výjimkovou kartu
+
+Výjimková karta má být krátká. Cílem není založit nový proces, ale zabránit tomu, aby se z jednoho ručního zásahu stal tichý druhý provozní režim.
+
+| Pole | Co zapsat |
+| --- | --- |
+| Automatizace | název automatizace a vlastník |
+| Spouštěč výjimky | co přesně se stalo nebo co pravidlo neumí vyhodnotit |
+| Typ výjimky | datová, pravidlová, vztahová, provozní, produktová nebo bezpečnostní |
+| Ruční zásah | co člověk udělal jinak než automatizace |
+| Datová hranice | jestli přibyl nový vstup, výstup, log, export, příjemce nebo oprávnění |
+| Konec platnosti | datum, počet případů nebo událost, kdy se výjimka znovu posoudí |
+| Rozhodnutí | zavřít jako jednorázové, změnit pravidlo, vrátit na návrhy, zúžit automatizaci nebo otevřít produktový úkol |
+
+Dobrá výjimková karta může mít šest řádků. Špatná má třicet screenshotů, tři vlákna v chatu a žádnou větu, podle které jde rozhodnout. Pokud je potřeba dlouhé vysvětlení, pravděpodobně nejde jen o výjimku. Je to nejasné pravidlo nebo nejasné vlastnictví.
+
+### Chraň ruční override před rozšířením dat
+
+Ruční override často začíná nevinně: člověk potřebuje opravit stav, doplnit kontext nebo zastavit automatické odeslání. Riziko je v tom, že se kvůli pohodlí přidá admin pohled, export všech kandidátů, širší logování nebo přístup do systému, který původní automatizace vůbec nepotřebovala.
+
+Před každým ručním override si polož pět otázek:
+
+- Musí člověk vidět celý původní payload, nebo stačí výřez pro rozhodnutí?
+- Musí override zapisovat přímo do produkčního systému, nebo stačí změnit stav kandidáta?
+- Musí být výjimka viditelná všem, nebo jen vlastníkovi automatizace a dotčenému týmu?
+- Musí záznam obsahovat osobní údaje, nebo stačí ID případu a důvod?
+- Má override vlastní konec, nebo vytváří nový trvalý přístup?
+
+Privacy-first override je co nejužší. Umožní člověku převzít odpovědnost, ale nerozsvítí kvůli jednomu případu celý datový sklad.
+
+### Nepřepisuj pravidlo podle každé výjimky
+
+Jedna výjimka je signál. Dvě podobné výjimky jsou vzor. Deset výjimek už je pravděpodobně špatně navržené pravidlo, špatně popsaný produktový stav nebo automatizace s příliš velkou pravomocí.
+
+Použij jednoduché rozlišení:
+
+| Počet a povaha výjimek | Co udělat |
+| --- | --- |
+| jednorázová, jasně vysvětlená | zapsat, zavřít, neměnit pravidlo |
+| opakuje se stejný typ vstupu | upravit mapování nebo přidat bezpečný stav |
+| opakuje se stejný typ lidské opravy | změnit pravidlo nebo vrátit na návrhy |
+| výjimky se týkají vztahu, práv, peněz nebo veřejných slibů | ponechat člověka u potvrzení |
+| výjimky vznikají po každé změně produktu | napojit automatizaci na release review |
+| nikdo neumí vysvětlit, proč výjimka existuje | výjimku ukončit a obnovit běžné pravidlo |
+
+Nedělej z automatizace sbírku speciálních podmínek. Každá další výjimka zvyšuje náklad na pochopení, testování, audit i předání vlastnictví. Někdy je lepší automatizaci zúžit a nechat zbytek jako dobře popsaný ruční krok.
+
+### Zavírej výjimky jako malé rozhodnutí
+
+Výjimka bez uzavření se časem promění v nový standard, jen bez názvu. Proto musí mít konec. Uzavření může být jednoduché:
+
+| Verdikt | Význam |
+| --- | --- |
+| jednorázově zavřeno | případ byl výjimečný a pravidlo se nemění |
+| pravidlo upraveno | výjimka odhalila běžný scénář a automatizace se mění |
+| rozsah zúžen | automatizace měla moc širokou pravomoc nebo data |
+| ponecháno člověku | rozhodnutí vyžaduje vztahový, právní nebo obchodní kontext |
+| otevřen produktový úkol | problém není v automatizaci, ale v produktu nebo procesu |
+| vypnuto | výjimky jsou častější než hodnota automatizace |
+
+Zavírací věta může znít:
+
+„Výjimku pro zákaznické bezpečnostní dotazy s vlastním DPA ponecháváme jako lidsky potvrzovaný krok, protože vyžaduje kontrolu vztahu a smluvního kontextu. Automatizace smí dál připravit draft a připojit schválené veřejné odkazy, ale nesmí sama označit odpověď jako finální.“
+
+Taková věta chrání tým před dvěma chybami najednou: před slepým rozšířením automatizace i před návratem k chaosu.
+
+### Příklad: Billing reminder s VIP výjimkou
+
+Tým měl automatizaci, která posílala interní upozornění na neuhrazené faktury a po pěti dnech připravila návrh e-mailu zákazníkovi. Sales chtěl přidat výjimku: u několika strategických zákazníků se reminder neměl připravovat automaticky, protože platby řešil přímo account owner.
+
+Špatné řešení by bylo přidat do skriptu pevný seznam „VIP zákazníků“ a dát automatizaci širší přístup do CRM. Rychlé, pohodlné, a přesně ten typ zkratky, který za půl roku nikdo nechce vysvětlovat.
+
+Lepší řešení:
+
+| Oblast | Rozhodnutí |
+| --- | --- |
+| Typ výjimky | vztahová a pravidlová |
+| Ruční zásah | account owner potvrdí, zda se má připravit běžný reminder |
+| Datová hranice | automatizace nečte celý CRM profil, jen billing stav a příznak „vyžaduje lidské potvrzení“ |
+| Konec platnosti | kontrola po prvních deseti výjimkách nebo po jednom měsíci |
+| Verdikt po kontrole | ponechat lidské potvrzení pro zákazníky se smluvní výjimkou, ostatní reminder dál připravovat automaticky |
+
+Výsledkem není luxusní automatizace pro všechny možné situace. Výsledkem je čitelná hranice: systém připravuje práci, člověk drží vztahový kontext a datový rozsah neroste jen kvůli pohodlí.
+
+### Checklist: Výjimky z automatizace
+
+- [ ] Každá výjimka má vlastníka a krátký důvod.
+- [ ] Výjimka je zařazená jako datová, pravidlová, vztahová, provozní, produktová nebo bezpečnostní.
+- [ ] Ruční override nepřidává širší data, exporty, logy, příjemce ani oprávnění bez samostatného rozhodnutí.
+- [ ] Výjimka má časový konec, počet případů nebo jinou jasnou podmínku revize.
+- [ ] Opakované výjimky se nelepí donekonečna do podmínek, ale vedou k rozhodnutí o pravidle, produktu nebo rozsahu.
+- [ ] Výjimky u práv lidí, peněz, zákaznického vztahu a veřejných slibů zůstávají pod lidským potvrzením.
+- [ ] Uzavření výjimky má verdikt: zavřít, upravit pravidlo, zúžit rozsah, ponechat člověku, otevřít produktový úkol nebo vypnout.
+- [ ] Výjimkový záznam neobsahuje celé payloady, citlivé přílohy ani osobní poznámky bez účelu.
+- [ ] Po uzavření výjimky jsou aktualizované karta automatizace, runbook nebo odpovědní knihovna, pokud se změnil skutečný provoz.
+
+### Mini úkol
+
+Najdi jednu automatizaci, u které tým v posledních týdnech udělal ruční zásah mimo běžné pravidlo. Zapiš výjimkovou kartu v sedmi řádcích: automatizace, spouštěč, typ, ruční zásah, datová hranice, konec platnosti a rozhodnutí. Potom si polož nepříjemnou otázku: je to opravdu výjimka, nebo jen pravidlo, které se bojíme pojmenovat? Pokud je to druhá možnost, nelep další podmínku do skriptu. Otevři změnu pravidla nebo zúžení automatizace.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -53908,6 +54032,7 @@ Vyber jednu automatizaci, která už přešla od návrhu k přímé akci. Najdi 
 
 ## Pracovní log
 
+- 2026-07-25: Doplněna příloha o výjimkách z automatizace bez skrytého obcházení pravidel: rozlišení datových, pravidlových, vztahových, provozních, produktových a bezpečnostních výjimek, výjimková karta, ochrana ručního override před rozšířením dat, pravidlo nepsat novou podmínku podle každého speciálního případu, zavírací verdikty, příklad billing reminderu s VIP výjimkou, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro řízení výjimek automatizace. Bez nových aktuálních externích tvrzení, navázáno na části o změně pravomoci automatizace, kontrole po pilotu, ručním override, přístupové hygieně, auditní stopě a privacy-first minimalizaci; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
 - 2026-07-25: Doplněna příloha o kontrole po změně pravomoci automatizace bez slepé důvěry: návrat ke kartě pravomoci, ruční průchod prvních zásahů podle dopadu, lidské opravy jako signál kvality, praktické ověření rollbacku, auditní stopa a retence, verdikty ponechat/zúžit/vrátit na návrhy/rozdělit/vypnout, příklad automatického zavírání bezpečnostních dotazů, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro ověření změněné pravomoci automatizace po pilotu. Bez nových aktuálních externích tvrzení, navázáno na část o změně pravomoci automatizace, provozní kartu, auditní stopu, přístupovou hygienu, trust odpovědi a privacy-first minimalizaci; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
 - 2026-07-25: Doplněna příloha o změně pravomoci automatizace bez tichého autopilota: rozlišení úrovní pozoruje/doporučuje/připravuje/zapisuje/komunikuje/zasahuje/maže, karta pravomoci, návrhový režim před přímou akcí, omezení zápisu, čitelné označení automatických akcí, rozdíl mezi provozním zásahem a produktovým rozhodnutím, příklad trust odpovědí, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro změnu pravomoci automatizace. Bez nových aktuálních externích tvrzení, navázáno na části o změnách vstupu, výstupu a frekvence automatizace, trust odpovědích, přístupové hygieně, auditní stopě a privacy-first minimalizaci; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
 - 2026-07-25: Doplněna příloha o kontrole po změně frekvence automatizace bez nového rytmu naslepo: návrat k frekvenční kartě, třídění běhů podle skutečných zásahů, potvrzení klidu, falešných poplachů, duplicit a nepoužitých výstupů, přepočet datové stopy podle nové frekvence, ověření důvěry lidí ve výstup, verdikty ponechat/zúžit/vrátit/změnit na trigger/rozdělit/vypnout, příklad dostupnostního monitoru, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro ověření změněné frekvence automatizace po kontrolním okně. Bez nových aktuálních externích tvrzení, navázáno na část o změně frekvence automatizace, provozní drift, retenci výstupů, notifikace, healthcheck a privacy-first minimalizaci; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
