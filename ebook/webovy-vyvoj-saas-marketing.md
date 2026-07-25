@@ -166,6 +166,7 @@ Když se nechceš vracet do celé knihy, hledej konkrétní nástroj podle výst
 | Uklidit staré pravidlo po ověřené změně automatizace | „úklid starého pravidla“, „dvojí pravda“ nebo „staré pravidlo končí“ | zavírací karta starého pravidla s úklidem kódu, dokumentace, výjimek, metrik, přístupů a veřejných slibů |
 | Přenést poučení z automatizace bez procesu navíc | „poučení z automatizace“, „učení po úklidu“ nebo „automatizace naučila tým“ | učící karta, která převede zjištění do produktu, dokumentace, runbooku nebo rozhodnutí bez nové poradní vrstvy a sledování lidí |
 | Zapsat rozhodnutí o automatizaci bez auditního divadla | „rozhodovací záznam automatizace“, „proč automatizace běží“ nebo „automatizační ADR“ | krátký záznam důvodu, hranice dat, pravomoci, vlastníka, návratu zpět a data další kontroly bez opisování celé historie |
+| Převést automatizační rozhodnutí do runbooku | „runbook automatizace“, „provozní postup automatizace“ nebo „když automatizace selže“ | krátký provozní postup pro běžný běh, chybu, ruční náhradu, vypnutí, eskalaci a úklid stop |
 
 Pravidlo pro práci s rejstříkem: otevři maximálně tři nalezené části, vyber jednu a zapiš výstup. Pokud po deseti minutách pořád skáčeš mezi odkazy, vrať se k tabulce „Kudy začít podle aktuální bolesti“ a zúž problém. E-book není buffet. Teda je, ale bez talíře si stejně odneseš jen chaos.
 
@@ -54591,6 +54592,121 @@ Takový záznam není krásná literatura. Je to provozní pojistka. A přesně 
 
 Vyber jednu automatizaci, která už běží déle než dva týdny. Napiš pro ni rozhodovací záznam do devíti polí: název, stav, pracovní důvod, datová hranice, pravomoc, vlastník, ruční náhrada, kontrolní spouštěč a poslední rozhodnutí. Pak z něj smaž všechno, co patří do runbooku, datové mapy nebo testů. Nakonec doplň jednu větu, co automatizace výslovně dělat nesmí bez nového rozhodnutí.
 
+## Příloha: Runbook automatizace bez tajného provozního rituálu
+
+Rozhodovací záznam říká, proč automatizace smí existovat. Runbook říká, co má člověk udělat, když se automatizace chová normálně, divně nebo vůbec. Tyto dva dokumenty se často pletou, a pak vznikne buď filozofický runbook bez kroků, nebo technický postup bez důvodu. Obojí je hezké asi jako návod na hasicí přístroj napsaný formou poezie.
+
+Runbook automatizace má být krátký, praktický a použitelný pod mírným stresem. Nepopisuje celou architekturu. Nepřepisuje kód. Neobsahuje všechny historické výjimky. Dává týmu jistotu, že běžný problém zvládne bez člověka, který skript původně napsal.
+
+> Codyho komentář: Automatizace bez runbooku není moderní provoz. Je to jen úkol, který se tváří, že zmizel, dokud se v nejhorší chvíli znovu neobjeví s fakturou za chaos.
+
+### Začni jednou provozní větou
+
+Runbook nezačínej názvem skriptu. Začni větou, která popíše pracovní výsledek:
+
+„Tato automatizace každou pracovní hodinu zkontroluje veřejný web, při chybě vytvoří diagnostický záznam a člověku pošle jen stručný stav, pokud problém neumí bezpečně opravit.“
+
+Dobrá provozní věta odpoví na čtyři otázky:
+
+| Otázka | Příklad odpovědi |
+| --- | --- |
+| Co automatizace dělá? | Kontroluje dostupnost veřejného webu. |
+| Pro koho je výstup? | Pro provozního vlastníka webu. |
+| Kdy má člověk zasáhnout? | Když kontrola selže dvakrát po sobě nebo narazí na TLS chybu. |
+| Co automatizace výslovně nedělá? | Nepřepisuje DNS, neobnovuje certifikát bez přístupu a neposílá detailní interní log do veřejného kanálu. |
+
+Pokud věta nejde napsat bez odboček, automatizace pravděpodobně dělá víc věcí najednou. Runbook to nezachrání. Nejdřív rozděl odpovědnost.
+
+### Odděl běžný běh, poruchu a ruční režim
+
+Největší chyba runbooků je, že popisují jen šťastnou cestu. Jenže runbook člověk nejčastěji otevírá tehdy, když šťastná cesta někam odešla a nechala po sobě červený status.
+
+U každé automatizace popiš tři režimy:
+
+| Režim | Co runbook musí říct |
+| --- | --- |
+| Běžný běh | Jak poznám, že vše proběhlo správně, kde je výstup a co se nemačká zbytečně. |
+| Porucha | Jak poznám chybu, co zkontrolovat jako první, co nezkoušet bez oprávnění a komu eskalovat. |
+| Ruční režim | Jak tým udělá původní práci bez automatizace, jak dlouho to vydrží a co se po návratu uklidí. |
+
+Ruční režim není ostuda. Je to brzda. Privacy-first provoz má automatizaci používat proto, že snižuje nejistotu nebo opakovanou práci, ne proto, že tým zapomněl, jak původní proces fungoval.
+
+### Udrž kroky krátké a ověřitelné
+
+Runbook není místo pro dlouhé vysvětlování. Krok má začínat slovesem a končit ověřením. Například:
+
+| Slabý krok | Lepší krok |
+| --- | --- |
+| Podívat se na monitoring. | Otevři stav posledního běhu a ověř, že `status` je `ok`, `checkedAt` je mladší než 65 minut a `httpStatus` je `200`. |
+| Zkontrolovat logy. | Otevři posledních 20 řádků provozního logu a ověř, že neobsahují osobní údaje ani celý obsah zákaznické zprávy. |
+| Když to nejde, řešit ručně. | Přepni úkol na ruční šablonu, zapiš čas přepnutí a další kontrolu nastav nejpozději za 24 hodin. |
+
+Když krok nejde ověřit, není to krok. Je to přání. A přání do provozu patří jen tehdy, když má vedle sebe člověka s kávou a kalendářem, což škáluje mizerně.
+
+### Popiš hranici bezpečného zásahu
+
+Automatizace často svádí k rychlému zásahu: restartuj, přepiš, smaž, pošli, označ jako hotové. Runbook má jasně říkat, které zásahy jsou běžné a které už potřebují vlastníka, review nebo samostatné rozhodnutí.
+
+Praktické rozdělení:
+
+| Typ zásahu | Příklad | Pravidlo |
+| --- | --- | --- |
+| Bezpečný read-only krok | ověřit poslední běh, HTTP status, počet chyb | může udělat službu držící pohotovost nebo vlastník procesu |
+| Malý vratný zásah | znovu spustit běh, přepnout na ruční výstup, pozastavit notifikaci | musí mít zapsaný důvod a návrat zpět |
+| Rizikový zásah | změnit pravomoc, rozšířit vstupy, upravit retenci, poslat zákazníkovi automatickou odpověď | vyžaduje nové rozhodnutí nebo review |
+| Zakázaný zásah | exportovat širší dataset, obejít souhlas, sdílet interní log externě | neprovádí se přes runbook vůbec |
+
+Tato tabulka chrání tým před tím, aby se z incidentu stala neplánovaná produktová změna. Když se mění data, pravomoc nebo veřejný slib, už to není „jen oprava skriptu“.
+
+### Dej runbooku vlastníka a konec životnosti
+
+Runbook bez vlastníka stárne rychleji než firemní nástěnka s fotkou z vánočního večírku. U každého provozního postupu napiš:
+
+| Pole | Co vyplnit |
+| --- | --- |
+| Vlastník pracovního výsledku | Role nebo člověk, který odpovídá za to, že automatizace pomáhá reálné práci. |
+| Technický správce | Kdo umí opravit běh, konfiguraci, token nebo integraci. |
+| Poslední ověření | Datum a výsledek posledního ručního průchodu. |
+| Další revize | Kdy se runbook otevře znovu, i když nic nehoří. |
+| Stop pravidlo | Kdy se automatizace vypne nebo vrátí ručně. |
+
+Revize nemusí být velký audit. U malé automatizace stačí jednou za měsíc projít poslední běh, jeden chybový scénář a ruční náhradu. Pokud se runbook nedá za deset minut ověřit, je příliš tlustý nebo příliš vzdálený realitě.
+
+### Příklad: Runbook dostupnostní kontroly webu
+
+Tým má automatizaci, která každou hodinu kontroluje dostupnost webu. Rozhodovací záznam říká, proč kontrola existuje a jaká data smí ukládat. Runbook řeší praktický provoz.
+
+| Část | Zápis |
+| --- | --- |
+| Provozní věta | Kontrola ověřuje, že veřejný web odpovídá přes HTTPS, a při selhání rozlišuje DNS, TLS, HTTP stav a obsahový marker. |
+| Běžný běh | Poslední záznam má `webOk: true`, HTTP status `200` a čas kontroly mladší než 65 minut. Bez chyby se neposílá detailní report. |
+| Porucha první úrovně | Při jednom selhání ověř DNS, TLS a HTTP hlavičky. Neukládej celé HTML, cookies, tokeny ani osobní obsah. |
+| Porucha druhé úrovně | Při dvou selháních po sobě přepni na ruční diagnostiku podle runbooku webu a informuj provozního vlastníka jednou větou. |
+| Ruční režim | Dokud automatizace neběží, vlastník jednou za pracovní den ověří hlavní URL, RSS, sitemap a robots. |
+| Bezpečný zásah | Znovu spustit kontrolu, pozastavit duplicitní notifikaci, zapsat ruční ověření. |
+| Rizikový zásah | Měnit DNS, obnovovat certifikát, restartovat produkční službu nebo upravit veřejný slib dostupnosti. |
+| Stop pravidlo | Pokud kontrola třikrát za týden hlásí falešný poplach, vrací se do pilotu a zúží se pravidlo. |
+| Úklid | Po incidentu smaž dočasné diagnostické výstupy, které nejsou potřeba pro rozhodnutí nebo runbook. |
+
+Všimni si, že runbook neřeší celé nasazení webu. Řeší jednu automatizaci a hranici, kde začíná jiný provozní postup. To je správně. Jeden runbook nemá být malý operační systém pro firmu.
+
+### Checklist: Runbook automatizace
+
+- [ ] Runbook začíná jednou provozní větou bez interní přezdívky skriptu.
+- [ ] Je jasné, jak vypadá běžný úspěšný běh.
+- [ ] Porucha má první kroky ověření a hranici, kdy se eskaluje.
+- [ ] Existuje ruční režim, který tým zvládne bez automatizace.
+- [ ] Každý krok začíná slovesem a má konkrétní ověření.
+- [ ] Runbook rozlišuje bezpečný read-only krok, malý vratný zásah, rizikový zásah a zakázaný zásah.
+- [ ] Datová hranice chrání logy, exporty, notifikace a dočasné soubory.
+- [ ] Vlastník pracovního výsledku a technický správce jsou pojmenovaní odděleně.
+- [ ] Runbook má datum posledního ověření, další revizi a stop pravidlo.
+- [ ] Po incidentu nebo ručním režimu existuje úklid dočasných stop.
+
+### Mini úkol
+
+Vyber jednu automatizaci, která má rozhodovací záznam, ale nemá použitelný runbook. Napiš pro ni provozní větu, tři režimy: běžný běh, porucha, ruční režim, a tabulku bezpečný / vratný / rizikový / zakázaný zásah. Pak ji ověř jedním suchým průchodem: otevři poslední výstup automatizace a podle runbooku rozhodni, zda by nový vlastník věděl, co udělat během deseti minut.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -54783,6 +54899,8 @@ Vyber jednu automatizaci, která už běží déle než dva týdny. Napiš pro n
 - Nielsen Norman Group: Onboarding Tutorials vs. Contextual Help - rozdíl mezi úvodními tutoriály a kontextovou pomocí: https://www.nngroup.com/articles/onboarding-tutorials/
 
 ## Pracovní log
+
+- 2026-07-25: Doplněna příloha o runbooku automatizace bez tajného provozního rituálu: oddělení rozhodovacího záznamu od provozního postupu, provozní věta, běžný běh, porucha, ruční režim, krátké ověřitelné kroky, hranice bezpečného zásahu, vlastnictví a konec životnosti runbooku, příklad dostupnostní kontroly webu, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro převod automatizačního rozhodnutí do runbooku. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
 - 2026-07-25: Doplněna příloha o rozhodovacím záznamu automatizace bez auditního divadla: rozdíl mezi historií ladění a rozhodnutím, šablona automatizačního ADR, ochrana před dokumentačním tukem, čitelnost po změně vlastníka, příklad trust odpovědí, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro zapsání důvodu, datové hranice, pravomoci, vlastníka a ruční náhrady automatizace. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
