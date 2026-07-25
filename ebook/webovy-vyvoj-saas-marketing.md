@@ -167,6 +167,7 @@ Když se nechceš vracet do celé knihy, hledej konkrétní nástroj podle výst
 | Přenést poučení z automatizace bez procesu navíc | „poučení z automatizace“, „učení po úklidu“ nebo „automatizace naučila tým“ | učící karta, která převede zjištění do produktu, dokumentace, runbooku nebo rozhodnutí bez nové poradní vrstvy a sledování lidí |
 | Zapsat rozhodnutí o automatizaci bez auditního divadla | „rozhodovací záznam automatizace“, „proč automatizace běží“ nebo „automatizační ADR“ | krátký záznam důvodu, hranice dat, pravomoci, vlastníka, návratu zpět a data další kontroly bez opisování celé historie |
 | Převést automatizační rozhodnutí do runbooku | „runbook automatizace“, „provozní postup automatizace“ nebo „když automatizace selže“ | krátký provozní postup pro běžný běh, chybu, ruční náhradu, vypnutí, eskalaci a úklid stop |
+| Ověřit runbook automatizace cvičným průchodem | „cvičný průchod runbookem“, „suchý test automatizace“ nebo „runbook pod stresem“ | krátká zkouška, že nový vlastník zvládne běžný běh, poruchu, ruční režim a úklid bez autora skriptu |
 
 Pravidlo pro práci s rejstříkem: otevři maximálně tři nalezené části, vyber jednu a zapiš výstup. Pokud po deseti minutách pořád skáčeš mezi odkazy, vrať se k tabulce „Kudy začít podle aktuální bolesti“ a zúž problém. E-book není buffet. Teda je, ale bez talíře si stejně odneseš jen chaos.
 
@@ -54707,6 +54708,104 @@ Všimni si, že runbook neřeší celé nasazení webu. Řeší jednu automatiza
 
 Vyber jednu automatizaci, která má rozhodovací záznam, ale nemá použitelný runbook. Napiš pro ni provozní větu, tři režimy: běžný běh, porucha, ruční režim, a tabulku bezpečný / vratný / rizikový / zakázaný zásah. Pak ji ověř jedním suchým průchodem: otevři poslední výstup automatizace a podle runbooku rozhodni, zda by nový vlastník věděl, co udělat během deseti minut.
 
+## Příloha: Cvičný průchod runbookem automatizace bez provozního divadla
+
+Runbook je užitečný až ve chvíli, kdy podle něj někdo opravdu projde práci. Ne autor automatizace. Ne člověk, který ví, kde je tajný skript. Ideálně někdo, kdo má dost kontextu na bezpečný zásah, ale nemá v hlavě všechny historické důvody. Jinak testuješ paměť původního autora, ne kvalitu provozního postupu.
+
+Cvičný průchod není velký incident drill. U malé automatizace stačí třicet až čtyřicet minut. Cílem není všechno pokazit jako ve filmovém katastrofickém cvičení. Cílem je zjistit, jestli runbook vede člověka k jednomu správnému rozhodnutí bez zbytečného sběru dat, bez eskalace každé drobnosti a bez hrdinského pátrání ve starých konverzacích.
+
+> Codyho komentář: Runbook, který nikdo nezkusil, je podobný záložnímu padáku koupenému v akci. Možná funguje. Jen bych podle něj nerad plánoval přistání.
+
+### Testuj tři pracovní situace
+
+Nesnaž se testovat všechny okrajové kombinace. Pro první průchod vyber tři situace, které pokryjí největší provozní riziko:
+
+| Situace | Co ověřit | Typický výstup |
+| --- | --- | --- |
+| Běžný běh | Nový vlastník pozná, že automatizace proběhla správně a že nemá nic zbytečně dělat. | zapsané „bez zásahu“ a potvrzená datová hranice |
+| Předvídatelná porucha | Nový vlastník podle runbooku rozliší chybu vstupu, výstupu, oprávnění nebo externí služby. | rozhodnutí opravit, přepnout ručně, eskalovat nebo počkat |
+| Ruční režim | Tým umí původní práci udělat bez automatizace po omezenou dobu. | ruční šablona, vlastník další kontroly a datum návratu |
+
+Tři situace stačí, protože testují chování, ne kompletní vesmír. Pokud runbook selže už u nich, nepotřebuješ složitější simulaci. Potřebuješ kratší kroky, lepší ověření a jasnější hranici zásahu.
+
+### Připrav cvičení bez produkčního rizika
+
+Cvičný průchod nesmí vyrábět nová rizika jen proto, že zkoušíš jejich zvládání. Před testem si připrav bezpečný vstup, omezené výstupy a jasnou větu, co se nesmí stát.
+
+Praktická příprava:
+
+| Oblast | Příprava |
+| --- | --- |
+| Vstup | Použij poslední běh, anonymizovaný záznam nebo ručně připravený testovací payload bez osobních údajů. |
+| Oprávnění | Testující člověk má jen práva potřebná pro read-only ověření a případný malý vratný zásah. |
+| Komunikace | Předem označ, že jde o cvičení, aby z testu nevznikl skutečný incident nebo panická notifikace. |
+| Výstupy | Neukládej celé logy, HTML odpovědi, zákaznické texty ani tokeny. Stačí rozhodovací záznam a nalezené mezery. |
+| Stop pravidlo | Když test začne vyžadovat produkční změnu, zastav ho a převeď nález do běžného backlogu. |
+
+Pokud cvičení potřebuje produkční data, napiš nejdřív důvod. Ne „protože jsou realistická“, ale „bez tohoto pole neumíme ověřit rozhodnutí X“. Ve většině případů stačí zkrácený záznam, syntetický příklad nebo poslední agregovaný stav.
+
+### Sleduj rozhodnutí, ne výkon člověka
+
+Test runbooku není zkouška zaměstnance. Nehodnotíš, jestli někdo „umí provoz“. Hodnotíš, jestli dokument dovede člověka k bezpečnému dalšímu kroku.
+
+Během průchodu zapisuj jen čtyři věci:
+
+| Co zapisovat | Příklad |
+| --- | --- |
+| Kde se člověk zastavil | „Není jasné, jestli druhé selhání znamená druhé po sobě, nebo druhé za den.“ |
+| Který krok byl neověřitelný | „Krok říká zkontroluj logy, ale neříká kde a jak poznat relevantní záznam.“ |
+| Jaké oprávnění chybělo nebo bylo příliš široké | „Pro restart běhu stačí scope `job:run`, není potřeba admin účtu.“ |
+| Jaké datum nebo stav se má po testu změnit | „Doplnit ruční režim a ověřit znovu do příštího pátku.“ |
+
+Nezapisuj osobní poznámky typu „Petr nevěděl“. Zapiš „Runbook neukazuje, kde najít poslední běh“. To je rozdíl mezi učením systému a firemní kronikou trapných momentů.
+
+### Udělej malý záznam o průchodu
+
+Po cvičení nevyráběj desetistránkový report. Stačí krátká karta, kterou jde zavřít:
+
+| Pole | Co napsat |
+| --- | --- |
+| Automatizace | Název pracovního výsledku, ne jen technický název jobu. |
+| Testované situace | Běžný běh, porucha, ruční režim nebo jejich konkrétní varianta. |
+| Verdikt | Použitelný, použitelný s opravou, vrátit k přepsání, nebo automatizaci dočasně zastavit. |
+| Nálezy | Maximálně pět konkrétních mezer. |
+| Datová stopa testu | Jaké vstupy a výstupy vznikly a kdy se smažou. |
+| Další krok | Jedna oprava, vlastník a datum dalšího ověření. |
+
+Verdikt „použitelný s opravou“ je nejčastější a je v pořádku. Znamená, že runbook žije. Horší je tiché „asi dobrý“, které nikdo neověřil a které se za tři měsíce rozpadne na první změně API.
+
+### Příklad: Suchý test dostupnostní kontroly
+
+Tým má automatizaci, která kontroluje veřejný web a při selhání rozlišuje DNS, TLS, HTTP stav a obsahový marker. Nový vlastník má podle runbooku projít tři situace bez zásahu do produkce.
+
+| Krok | Průchod |
+| --- | --- |
+| Běžný běh | Testující otevře poslední stav, ověří `webOk: true`, `httpStatus: 200` a čas kontroly mladší než 65 minut. Zapíše, že není potřeba zásah ani notifikace. |
+| Porucha | Dostane připravený testovací záznam s TLS chybou. Runbook ho vede k ověření certifikátu a k hranici, že bez serverového přístupu se certifikát neobnovuje. |
+| Ruční režim | Podle ruční šablony ověří hlavní URL, RSS, sitemap a robots bez ukládání celého obsahu stránek. |
+| Nález | Runbook říká „zkontroluj obsahový marker“, ale neuvádí přesný text markeru. |
+| Oprava | Doplnit přesný marker a příkaz, který vrací jen status a první výskyt markeru, ne celé HTML. |
+| Úklid | Smazat testovací payload po uzavření opravy a ponechat jen verdikt průchodu. |
+
+Tento test nezjistil, jestli je celý web dokonale odolný. Zjistil něco užitečnějšího: nový vlastník zvládne běžný stav, rozumnou poruchu a ruční náhradu bez toho, aby rozšířil data nebo se pokusil opravit věc, na kterou nemá oprávnění.
+
+### Checklist: Cvičný průchod runbookem automatizace
+
+- [ ] Test vede někdo jiný než autor automatizace nebo runbooku.
+- [ ] Průchod má tři situace: běžný běh, předvídatelnou poruchu a ruční režim.
+- [ ] Vstupy testu neobsahují zbytečné osobní údaje, tokeny ani celé zákaznické zprávy.
+- [ ] Je předem jasné, že jde o cvičení, ne skutečný incident.
+- [ ] Testující má jen oprávnění potřebná k ověření a malému vratnému zásahu.
+- [ ] Zapisují se mezery v runbooku, ne hodnocení člověka.
+- [ ] Každý nález má vlastníka, jednu opravu a datum dalšího ověření.
+- [ ] Datová stopa testu má retenční pravidlo a po uzavření se uklidí.
+- [ ] Pokud průchod vyžaduje produkční změnu, test se zastaví a nález jde do backlogu.
+- [ ] Runbook po opravě dostane nové datum posledního ověření.
+
+### Mini úkol
+
+Vyber jednu automatizaci s existujícím runbookem a naplánuj třicetiminutový suchý průchod. Připrav tři testovací situace, urč člověka mimo autora automatizace a napiš kartu průchodu se šesti poli: automatizace, testované situace, verdikt, nálezy, datová stopa a další krok. Po testu oprav jen jednu největší mezeru v runbooku a nastav datum dalšího ověření.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -54899,6 +54998,8 @@ Vyber jednu automatizaci, která má rozhodovací záznam, ale nemá použiteln�
 - Nielsen Norman Group: Onboarding Tutorials vs. Contextual Help - rozdíl mezi úvodními tutoriály a kontextovou pomocí: https://www.nngroup.com/articles/onboarding-tutorials/
 
 ## Pracovní log
+
+- 2026-07-25: Doplněna příloha o cvičném průchodu runbookem automatizace bez provozního divadla: tři testované situace, příprava bez produkčního rizika, sledování rozhodnutí místo výkonu člověka, malá karta průchodu, příklad suchého testu dostupnostní kontroly, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro ověření runbooku cvičným průchodem. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
 - 2026-07-25: Doplněna příloha o runbooku automatizace bez tajného provozního rituálu: oddělení rozhodovacího záznamu od provozního postupu, provozní věta, běžný běh, porucha, ruční režim, krátké ověřitelné kroky, hranice bezpečného zásahu, vlastnictví a konec životnosti runbooku, příklad dostupnostní kontroly webu, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro převod automatizačního rozhodnutí do runbooku. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
