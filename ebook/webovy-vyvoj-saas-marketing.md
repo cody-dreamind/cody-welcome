@@ -149,6 +149,7 @@ Když se nechceš vracet do celé knihy, hledej konkrétní nástroj podle výst
 | Ověřit restartovanou automatizaci po pilotu | „kontrola po restartu automatizace“, „pilot automatizace hotovo“ nebo „restartovaný skript“ | rozhodnutí, zda automatizace po pilotu zůstane, zúží se, vrátí ručně, nebo se znovu vypne bez starých tokenů a datového šumu |
 | Převést úspěšný pilot automatizace do běžného provozu | „standardní provoz automatizace“, „automatizace po pilotu“ nebo „rutina ze skriptu“ | provozní karta automatizace s vlastníkem, revizním rytmem, limitem dat, stop pravidlem a plánem úklidu |
 | Udržet běžící automatizaci zdravou bez tichého driftu | „provozní drift automatizace“, „údržba běžící automatizace“ nebo „automatizace stárne“ | malá drift kontrola spouštěčů, vstupů, výstupů, logů, vlastníka a ručního postupu |
+| Předat vlastnictví automatizace bez osiřelého skriptu | „změna vlastníka automatizace“, „osiřelý skript“ nebo „předání automatizace“ | předávací karta, ověření ručního postupu, kontrola tokenů, logů, výstupů a rozhodnutí, zda automatizace dál patří do provozu |
 
 Pravidlo pro práci s rejstříkem: otevři maximálně tři nalezené části, vyber jednu a zapiš výstup. Pokud po deseti minutách pořád skáčeš mezi odkazy, vrať se k tabulce „Kudy začít podle aktuální bolesti“ a zúž problém. E-book není buffet. Teda je, ale bez talíře si stejně odneseš jen chaos.
 
@@ -52396,6 +52397,152 @@ Tohle je přesně typ driftu, který stojí za rychlou opravu. Ne proto, že by 
 
 Vyber jednu automatizaci, která už není v pilotu a běží aspoň několik týdnů. Otevři její provozní kartu a poslední tři výstupy. Najdi jeden rozdíl mezi kartou a realitou: spouštěč, vstup, výstup, oprávnění, log nebo ruční postup. Pokud žádný rozdíl nenajdeš, napiš záznam „beze změny“ a další kontrolu. Pokud rozdíl najdeš, zavři ho jedním rozhodnutím. Ne pěti návrhy. Jedním. Drift se neporáží obřím procesem, ale pravidelným malým návratem k realitě.
 
+## Příloha: Změna vlastníka automatizace bez osiřelého skriptu
+
+Automatizace se často nerozbije kvůli špatnému kódu. Rozbije se proto, že člověk, který věděl proč existuje, přestane být u práce. Odejde z týmu, přejde na jiný projekt, předá agendu, nebo se z „tohle jen hlídám bokem“ stane trvalá odpovědnost, kterou nikdo výslovně nepřevzal.
+
+Osiřelý skript je zrádný právě tím, že může dál běžet. Posílá výstupy, zapisuje do tabulek, drží tokeny, čte systémy a tváří se jako normální součást provozu. Jen už není jasné, kdo podle něj rozhoduje, kdo umí poznat špatný výstup, kdo ho vypne při incidentu a kdo vysvětlí, proč má pořád přístup k datům.
+
+Privacy-first tým musí vlastnictví automatizace brát stejně vážně jako vlastnictví domény, produkčního deploye nebo zákaznického exportu. Automatizace bez vlastníka není efektivita. Je to malý provozní dluh s přístupem do systémů. Úžasná kombinace, děkujeme pěkně.
+
+### Spouštěč předání nastav dřív než při odchodu
+
+Předání automatizace se nemá řešit až ve chvíli, kdy někdo balí poslední pátek notebook. Každá provozní automatizace má mít spouštěče, které otevřou předávací kontrolu.
+
+Typické spouštěče:
+
+- mění se vlastník procesu, který automatizace podporuje,
+- mění se tým, kanál nebo nástroj, kam automatizace zapisuje,
+- autor skriptu už není běžně dostupný pro opravy,
+- automatizace získává nové oprávnění nebo nový datový vstup,
+- výstupy automatizace začal používat jiný tým,
+- ruční náhradní postup se od poslední karty změnil,
+- automatizace běží déle než jedno revizní období bez explicitního potvrzení vlastníka.
+
+Praktické pravidlo: když se mění člověk odpovědný za rozhodnutí, otevři předání automatizace i tehdy, když se nemění žádný řádek kódu. Kód může být stejný, ale odpovědnost už stejná není.
+
+### Odděl technického správce od vlastníka rozhodnutí
+
+U malých týmů se tyto role často slévají. Jeden člověk skript napsal, ví kde běží, drží token, čte výstupy a rozhoduje, co se stane dál. To může být v pilotu přijatelné. V běžném provozu je to ale křehké.
+
+Rozliš alespoň čtyři role:
+
+| Role | Co vlastní | Co nevlastní |
+| --- | --- | --- |
+| Vlastník rozhodnutí | účel automatizace, výklad výstupu, rozhodnutí ponechat nebo změnit | nemusí umět opravit kód |
+| Technický správce | běh, deploy, logy, chyby, obnovu služby | nerozhoduje sám o rozšíření dat |
+| Vlastník datové hranice | povolené vstupy, výstupy, retenci, přístupy | není automaticky autorem workflow |
+| Náhradník | minimální ruční postup a nouzový kontakt | nemá trvale dostat všechna produkční oprávnění |
+
+V jednom člověku může sedět víc rolí, ale karta je musí pojmenovat. Rozdíl mezi „Franta to ví“ a „vlastník rozhodnutí je produkt, technický správce je provoz, datovou hranici schvaluje security“ není byrokracie. Je to rozdíl mezi provozem a ústní pověstí.
+
+> Codyho komentář: Nejhorší typ automatizace není ta, která spadne. Nejhorší je ta, která běží dost dobře na to, aby si jí nikdo nevšímal, a dost špatně na to, aby pomalu ohýbala rozhodování.
+
+### Udělej předávací kartu automatizace
+
+Předávací karta má být krátká. Její účel není dokumentovat celý skript, ale umožnit novému vlastníkovi převzít odpovědnost bez hádání.
+
+Minimální karta:
+
+| Pole | Zápis |
+| --- | --- |
+| Automatizace | Název, odkaz na repo nebo runbook a místo, kde běží. |
+| Pracovní účel | Jedna věta: jaké riziko, rutinu nebo rozhodnutí automatizace podporuje. |
+| Spouštěč | Kdy běží a kdo smí spouštěč změnit. |
+| Vstupy | Systémy, pole, štítky nebo soubory, které čte. |
+| Výstupy | Kam zapisuje, komu posílá signál a kde vzniká rozhodnutí. |
+| Oprávnění | Účty, role, tokeny nebo integrace bez tajných hodnot. |
+| Logy a retence | Co se loguje, kde, jak dlouho a co se nesmí logovat. |
+| Ruční postup | Jak se stejná práce udělá jednou ručně, když automatizace stojí. |
+| Stop pravidlo | Kdy se automatizace zúží, vypne nebo vrátí do ručního režimu. |
+| Nový vlastník | Jméno nebo role vlastníka rozhodnutí a datum převzetí. |
+
+Do karty nepatří hesla, tokeny, privátní klíče ani exporty dat. Patří tam cesta k bezpečnému místu, kde se oprávnění spravují, a pravidlo, kdo je smí změnit. Předávací dokument není trezor. Je to mapa.
+
+### Ověř převzetí jedním skutečným během
+
+Předání není hotové podpisem v dokumentu. Je hotové ve chvíli, kdy nový vlastník umí projít reálný výstup a udělat správné rozhodnutí.
+
+Dobrá zkouška převzetí:
+
+1. Nový vlastník otevře poslední provozní kartu.
+2. Technický správce ukáže poslední úspěšný a poslední chybový nebo prázdný běh.
+3. Nový vlastník vysvětlí, co výstup znamená a co by udělal při třech běžných stavech.
+4. Tým projde ruční náhradní postup bez použití produkčních exportů navíc.
+5. Zkontrolují se oprávnění, logy a místo výstupu.
+6. V kartě se zapíše rozhodnutí: převzato, převzato s opravou, nebo nepřevzato a dočasně vráceno ručně.
+
+Tahle zkouška má být malá. Nevyžaduje velký testovací projekt. Stačí jeden reálný běh nebo jeden bezpečně simulovaný scénář. Cílem je zjistit, jestli automatizace pořád slouží rozhodnutí, ne jestli nový vlastník umí obdivovat YAML.
+
+### Přístup měň jako součást předání, ne jako dozvuk
+
+Při změně vlastníka často zůstane největší nepořádek v přístupech. Starý token běží dál, osobní účet má pořád práva, nový vlastník dostane z pohodlí širší roli a náhradník se přidá „pro jistotu“. Tak vzniká přístupový kompost.
+
+Při předání projdi čtyři otázky:
+
+| Otázka | Dobré rozhodnutí |
+| --- | --- |
+| Je účet automatizace oddělený od osobního účtu? | Pokud ne, naplánuj převod na řízený servisní nebo integrační účet. |
+| Má nový vlastník jen schopnosti potřebné k rozhodnutí? | Nedávej mu technická oprávnění jen proto, že má číst výstup. |
+| Má technický správce jen schopnosti potřebné k provozu? | Nemá získat obsahová nebo zákaznická data mimo účel automatizace. |
+| Existují staré tokeny, webhooky nebo sdílení? | Revokuj nebo omez vše, co už neslouží nové kartě. |
+
+Přístupová změna má mít krátké okno a kontrolu po prvním použití. Nečekej měsíc, jestli se něco pokazí. Po prvním běhu ověř, že automatizace běží pod správným účtem, logy neobsahují víc než dřív a výstup končí tam, kde ho nový vlastník opravdu používá.
+
+### Rozhodni, jestli automatizace vůbec přežije nové vlastnictví
+
+Předání není povinnost zachovat automatizaci. Někdy právě změna vlastníka ukáže, že automatizace už nemá dobrý důvod. Starý vlastník si ji držel, protože znal kontext, toleroval šum a ručně opravoval okraje. Nový vlastník by tím jen zdědil neviditelnou práci.
+
+Použij pět rozhodnutí:
+
+| Rozhodnutí | Kdy dává smysl |
+| --- | --- |
+| Ponechat | Účel je jasný, výstupy vedou k rozhodnutí a datová hranice sedí. |
+| Ponechat se zúžením | Automatizace pomáhá, ale čte nebo loguje víc, než nový provoz potřebuje. |
+| Přepsat kartu | Realita se změnila, ale nový rozsah je pořád obhajitelný a schválený. |
+| Vrátit ručně | Automatizace je příliš křehká, šumová nebo nesrozumitelná pro nové vlastnictví. |
+| Vypnout | Účel zmizel, rozhodnutí se už podle výstupu nedělá, nebo datové riziko převyšuje užitek. |
+
+Vypnutí není prohra. Je to normální výsledek dobré údržby. Když automatizace přežije jen proto, že „už tu je“, začíná fungovat jako interní legenda. A legendy jsou fajn u táboráku, horší v provozu s tokeny.
+
+### Příklad: Předání kontroly obsahu po release
+
+Malý SaaS tým má automatizaci, která po každém release projde změněné produktové karty a připraví seznam veřejných textů, které možná potřebují aktualizaci: changelog, pricing poznámky, trust odpovědi a dokumentaci k datům. Původně ji spravoval produktový člověk, který zároveň psal většinu veřejných textů.
+
+Po změně týmu přebírá obsah nový vlastník. Automatizace technicky funguje, ale nový vlastník neví, proč některé návrhy chodí do kanálu `release-review` a jiné do backlogu. Navíc token pořád patří původnímu osobnímu účtu.
+
+Předání dopadne takto:
+
+| Oblast | Rozhodnutí |
+| --- | --- |
+| Účel | Automatizace zůstává: po release má snížit riziko starých veřejných slibů. |
+| Výstup | Všechny návrhy půjdou do jedné fronty `content-review`; kanál zůstane jen pro upozornění na blocker. |
+| Vlastník rozhodnutí | Nový content vlastník rozhoduje, co se upraví, archivuje nebo odmítne. |
+| Technický správce | Provoz drží běh a chybové stavy, neobsahová rozhodnutí. |
+| Oprávnění | Osobní token se nahradí integračním účtem s čtením release karet a zápisem pouze do review fronty. |
+| Logy | Log zůstane jen u ID release karty, času běhu, stavu a počtu návrhů. |
+| Ruční postup | Při výpadku se projdou poslední release karty podle checklistu v runbooku. |
+| Další kontrola | Po třech release nebo po první změně zdrojů, které automatizace čte. |
+
+Výsledek není „automatizace předána, hodně štěstí“. Výsledek je nová odpovědnost, menší přístupová stopa, jednodušší výstup a jasný ruční postup. Přesně ten nudný druh změny, který šetří budoucí nervy.
+
+### Checklist: Změna vlastníka automatizace
+
+- [ ] Změna vlastníka procesu otevřela předávací kontrolu automatizace.
+- [ ] Je jasně rozlišený vlastník rozhodnutí, technický správce, vlastník datové hranice a náhradník.
+- [ ] Existuje krátká předávací karta s účelem, spouštěčem, vstupy, výstupy, oprávněními, logy, ručním postupem a stop pravidlem.
+- [ ] Karta neobsahuje secrets, tokeny ani zákaznické exporty.
+- [ ] Nový vlastník prošel jeden skutečný nebo bezpečně simulovaný běh.
+- [ ] Nový vlastník umí vysvětlit běžný výstup, chybný výstup a prázdný výstup.
+- [ ] Staré osobní tokeny, webhooky a sdílení byly zkontrolované, omezené nebo revokované.
+- [ ] Nový vlastník nedostal technická oprávnění, která nepotřebuje pro rozhodnutí.
+- [ ] Technický správce nezískal zbytečný přístup k obsahovým nebo zákaznickým datům.
+- [ ] Výsledkem předání je rozhodnutí: ponechat, zúžit, přepsat kartu, vrátit ručně nebo vypnout.
+
+### Mini úkol
+
+Vyber jednu automatizaci, kterou napsal nebo dlouho hlídal konkrétní člověk. Napiš její předávací kartu a označ tři role: kdo rozhoduje podle výstupu, kdo umí opravit běh a kdo hlídá datovou hranici. Potom ověř poslední běh a najdi jeden přístup, log nebo výstup, který by při změně vlastníka neměl automaticky přežít. Pokud nic takového nenajdeš, zapiš aspoň datum další kontroly. Osiřelý skript se nepozná podle toho, že spadl. Pozná se podle toho, že všichni doufají, že ho vlastní někdo jiný.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -52589,6 +52736,7 @@ Vyber jednu automatizaci, která už není v pilotu a běží aspoň několik t�
 
 ## Pracovní log
 
+- 2026-07-25: Doplněna příloha o změně vlastníka automatizace bez osiřelého skriptu: spouštěče předávací kontroly, rozlišení vlastníka rozhodnutí, technického správce, vlastníka datové hranice a náhradníka, předávací karta automatizace, ověření převzetí jedním během, přístupový úklid, rozhodnutí ponechat/zúžit/přepsat/vrátit ručně/vypnout, příklad kontroly obsahu po release, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro předání vlastnictví automatizace. Bez nových aktuálních externích tvrzení, navázáno na provozní drift automatizace, standardní provoz automatizací, přístupovou hygienu, logování a privacy-first minimalizaci; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
 - 2026-07-25: Doplněna příloha o provozním driftu automatizace bez pomalého odplutí: kontrola rozdílu proti provozní kartě, malé drift okno, rozlišení driftu užitečnosti a driftu dat, krátký drift záznam, chudé signály bez sledování lidí, příklad dostupnostní kontroly, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro údržbu běžící automatizace. Bez nových aktuálních externích tvrzení, navázáno na standardní provoz automatizace po pilotu, review automatizací, logování, přístupy a privacy-first minimalizaci; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
 - 2026-07-25: Doplněna příloha o standardním provozu automatizace po pilotu bez tichého rozšíření: provozní karta, zamykací věta rozsahu, revizní rytmus podle rizika, rozlišení provozní chyby od produktové změny, ruční návrat, příklad trust automatizace, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro převod úspěšného pilotu automatizace do běžného provozu. Bez nových aktuálních externích tvrzení, navázáno na části o kontrole po restartu automatizace, znovuspuštění automatizace, retenci rutiny, přístupech, logování, trust odpovědích a privacy-first minimalizaci; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
 - 2026-07-24: Doplněna příloha o kontrole po restartu automatizace bez druhého autopilota: návrat k pilotnímu slibu, rozlišení technického úspěchu a pracovní hodnoty, počítání šumu bez sledování lidí, rozhodnutí ponechat/zúžit/přepsat/vrátit ručně/vypnout, kontrola starých i nových přístupů, příklad restartované kontroly trust odpovědí, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro ověření restartované automatizace po pilotu. Bez nových aktuálních externích tvrzení, navázáno na části o znovuspuštění automatizace, ruční náhradě, review automatizace, přístupech, logování, trust odpovědích a privacy-first minimalizaci; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
