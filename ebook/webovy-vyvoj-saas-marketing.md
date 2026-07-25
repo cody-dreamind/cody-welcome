@@ -169,6 +169,7 @@ Když se nechceš vracet do celé knihy, hledej konkrétní nástroj podle výst
 | Převést automatizační rozhodnutí do runbooku | „runbook automatizace“, „provozní postup automatizace“ nebo „když automatizace selže“ | krátký provozní postup pro běžný běh, chybu, ruční náhradu, vypnutí, eskalaci a úklid stop |
 | Ověřit runbook automatizace cvičným průchodem | „cvičný průchod runbookem“, „suchý test automatizace“ nebo „runbook pod stresem“ | krátká zkouška, že nový vlastník zvládne běžný běh, poruchu, ruční režim a úklid bez autora skriptu |
 | Opravit runbook po cvičném průchodu bez nového chaosu | „oprava runbooku“, „nálezy ze suchého testu“ nebo „runbook po cvičení“ | malý opravný balík, který z nálezů udělá jasné kroky, úklid starých pokynů a nové datum ověření |
+| Archivovat runbook po zániku automatizace bez mrtvého návodu | „archivace runbooku“, „runbook končí“ nebo „mrtvý postup“ | zavírací karta, která označí poslední platnou verzi, náhradní cestu, úklid odkazů, přístupů, testů a veřejných slibů |
 
 Pravidlo pro práci s rejstříkem: otevři maximálně tři nalezené části, vyber jednu a zapiš výstup. Pokud po deseti minutách pořád skáčeš mezi odkazy, vrať se k tabulce „Kudy začít podle aktuální bolesti“ a zúž problém. E-book není buffet. Teda je, ale bez talíře si stejně odneseš jen chaos.
 
@@ -54926,6 +54927,136 @@ Výsledek není velkolepý. A právě proto je dobrý. Jeden nejasný krok se zm
 
 Vezmi poslední kartu cvičného průchodu runbookem a vyber jeden nález, který by v provozu způsobil špatné rozhodnutí nebo zbytečný zásah do dat. Přepiš ho na opravnou položku, uprav příslušný krok runbooku, ukliď jednu starou souběžnou stopu a nastav nové datum ověření. Pokud oprava nejde udělat do třiceti minut, zúž ji na nejmenší krok, který zabrání konkrétní chybě.
 
+## Příloha: Archivace runbooku po zániku automatizace bez mrtvého návodu
+
+Runbook nemá žít déle než práce, kterou pomáhá bezpečně dělat. Jakmile automatizace skončí, změní se systém, zruší se integrace nebo se postup přesune do jiné rutiny, starý runbook se musí zavřít stejně poctivě jako přístup nebo token. Jinak se z něj stane mrtvý návod: vypadá důvěryhodně, má pěkné odrážky, ale při skutečném použití zavede člověka do staré reality.
+
+Archivace runbooku není mazací hysterie. Některé staré postupy mají historickou hodnotu: vysvětlují, proč se kdysi něco dělalo, jaké riziko se řešilo a co se z toho tým naučil. Jen nesmí zůstat na stejném místě jako aktuální provozní pokyn. V dokumentaci musí být na první pohled jasné, jestli text říká „udělej tohle teď“, nebo „takhle jsme to dělali dřív“.
+
+> Codyho komentář: Nejhorší runbook není ten, který chybí. Nejhorší je ten, který je starý, ale tváří se aktuálně. Chybějící postup aspoň vyvolá otázku. Mrtvý postup vyvolá sebevědomý omyl. To je dražší varianta chaosu, jen má lepší typografii.
+
+### Poznej, že runbook dosloužil
+
+Runbook se nearchivuje jen při slavnostním vypnutí automatizace. Často doslouží nenápadně: část práce převezme nový nástroj, ruční náhrada se stane běžným procesem, monitoring změní vstup, nebo původní incidentní scénář už neexistuje.
+
+Typické signály:
+
+| Signál | Co zkontrolovat |
+| --- | --- |
+| Automatizace je vypnutá nebo nahrazená. | Jestli runbook pořád nepopisuje běh, restart nebo rollback starého skriptu. |
+| Změnil se vlastník procesu. | Jestli nový vlastník opravdu používá tento postup, nebo už má jinou rutinu. |
+| Změnil se vstup, výstup nebo pravomoc automatizace. | Jestli staré kroky nevedou k širšímu sběru dat, než je dnes potřeba. |
+| Suchý test dvakrát skončil dotazem na autora. | Jestli je levnější runbook opravit, nebo ho zavřít a nahradit menším postupem. |
+| Postup odkazuje na zrušený systém, token, dashboard nebo kanál. | Jestli nejde o archivní dokument, který omylem zůstal v provozní navigaci. |
+| Veřejný slib se změnil. | Jestli runbook nepředpokládá starou dostupnost, podporu, export nebo retenční režim. |
+
+Rozhodnutí má být věcné: ponechat, opravit, nahradit, archivovat nebo smazat. „Nechat to pro jistotu“ není stav. To je jen měkké jméno pro dokumentační skládku.
+
+### Udělej zavírací kartu
+
+Runbook zavírej malým záznamem. Nemusí to být nový proces ani schvalovací ceremoniál. Stačí karta, která vysvětlí, proč už postup není aktuální, co ho nahradilo a jaké stopy se musí uklidit.
+
+Šablona:
+
+| Pole | Zápis |
+| --- | --- |
+| Runbook | Název a odkaz na zavíraný postup. |
+| Důvod konce | Automatizace vypnutá, systém nahrazený, riziko už neexistuje, nebo postup přešel do jiné rutiny. |
+| Poslední platná verze | Datum a krátký popis posledního použití nebo ověření. |
+| Náhradní cesta | Nový runbook, ruční postup, incidentní eskalace, nebo vědomé rozhodnutí, že náhrada není potřeba. |
+| Datový dopad | Jaké logy, exporty, testovací výstupy, tokeny a přístupy se uklidí. |
+| Veřejný dopad | Jestli se musí upravit status page, help stránka, trust odpověď, onboarding nebo obchodní slib. |
+| Kdo zavírá | Vlastník pracovního výsledku, ne autor původního textu. |
+| Kontrola po zavření | Datum nebo trigger, kdy se ověří, že starý postup nikdo dál nepoužívá. |
+
+Zavírací karta je důležitá hlavně proto, že odděluje archivaci od tichého smazání. Když se někdo za půl roku ptá, proč starý postup zmizel, nechce archeologii v chatu. Chce krátkou odpověď.
+
+### Označ archiv tak, aby nešel splést s aktuálním postupem
+
+Pokud runbook zůstává kvůli historii, musí být označený jako archiv přímo nahoře, ne drobnou poznámkou dole. Člověk ve stresu často nečte celý dokument. Čte první obrazovku, hledá příkaz a doufá, že ho nic nekousne. Tak mu tam nedávej past.
+
+První blok archivního runbooku může vypadat takto:
+
+| Pole | Příklad textu |
+| --- | --- |
+| Stav | Archiv: tento postup se od 2026-07-25 nepoužívá pro běžný provoz. |
+| Proč | Původní automatizace byla vypnutá a nahrazená ruční kontrolou v měsíční provozní rutině. |
+| Aktuální cesta | Pro běžnou kontrolu použij runbook „Měsíční provozní review webu“. |
+| Zakázané použití | Nepoužívej staré příkazy k restartu, starý token ani starý dashboard. |
+| Kontakt | Vlastník aktuální rutiny nebo provozní eskalace. |
+
+Archivní štítek musí být součástí dokumentu, názvu nebo obou. Nestačí přesunout soubor do složky `archive`, pokud na něj pořád vedou odkazy z aktuálních šablon. Cesta v URL není komunikační strategie. Je to jen cesta v URL.
+
+### Ukliď nosiče starého postupu
+
+Runbook obvykle nežije jen v jednom souboru. Je citovaný v issues, chatu, onboarding dokumentaci, CI komentářích, release šablonách, incidentních záznamech a někdy i ve veřejných odpovědích zákazníkům. Když zavřeš jen hlavní dokument, starý postup se vrátí přes vedlejší dveře.
+
+Projdi minimálně:
+
+- aktuální runbook index nebo wiki navigaci,
+- odkazy v automatizačním rozhodovacím záznamu,
+- plánované úlohy, CI joby a komentáře u skriptů,
+- incidentní a support šablony,
+- onboarding nového vlastníka,
+- pinned zprávy nebo interní kanály s provozními pokyny,
+- trust odpovědi, help centrum a veřejné provozní sliby,
+- backlog položky odkazující na původní postup.
+
+U každého místa použij jednu akci: aktualizovat na nový postup, označit jako archiv, nebo odstranit odkaz. Pokud starý odkaz ponecháš jako historický, doplň větu, že nejde o aktuální návod. Historie má vést k pochopení, ne k omylem spuštěnému rollbacku.
+
+### Zavři přístupy, testy a datovou stopu
+
+Archivace runbooku není jen práce s textem. Pokud runbook popisoval automatizaci, často kolem něj zůstaly technické stopy: tokeny, service účty, testovací payloady, dočasné dashboardy, exporty, log filtry, alerty nebo sample data. To všechno může dál žít, i když dokument už je v archivu.
+
+Zavírací kontrola:
+
+| Oblast | Co ověřit |
+| --- | --- |
+| Přístupy | Staré service účty, tokeny a role jsou revokované nebo převedené na nového vlastníka. |
+| Testy | Testy starého pravidla jsou smazané, nebo zúžené na užitečnou regresní kontrolu nového postupu. |
+| Logy | Dočasné ladicí logy a celé payloady mají retenční konec. |
+| Exporty | CSV, screenshoty a ruční kopie z testu jsou smazané nebo přesunuté do řízeného archivu. |
+| Alerty | Staré alerty nejsou aktivní, pokud už nevedou k platné akci. |
+| Dokumentace | Veřejné i interní texty nepředstírají starou schopnost produktu. |
+
+Privacy-first pointa je jednoduchá: když práce skončila, nemá po ní zůstat širší přístup jen proto, že „by se mohl hodit“. Hodit se může i šroubovák v zásuvce. Token s přístupem k produkčním datům není šroubovák.
+
+### Příklad: Archivace runbooku po vypnutí dostupnostní automatizace
+
+Tým měl runbook pro automatickou dostupnostní kontrolu webu. Automatizace dřív hlídala status, marker obsahu a posílala stručný report. Po několika měsících se ale monitoring přesunul do jiné provozní rutiny a starý skript byl vypnutý.
+
+Zavírací karta:
+
+| Pole | Zápis |
+| --- | --- |
+| Runbook | „Runbook dostupnostní kontroly webu“ |
+| Důvod konce | Starý skript už neběží; kontrola je součástí měsíčního provozního review a incidentní eskalace. |
+| Poslední platná verze | 2026-07-25, poslední ověřená verze před vypnutím skriptu. |
+| Náhradní cesta | Běžný stav řeší měsíční review, incident řeší provozní runbook pro dostupnost. |
+| Datový dopad | Smazat testovací výstupy, zrušit starý token, ponechat jen agregovaný záznam posledních ověření. |
+| Veřejný dopad | Zkontrolovat, že help ani trust text neslibuje konkrétní starý způsob monitoringu. |
+| Úklid odkazů | Aktualizovat wiki index, pinned provozní zprávu a komentář u plánované úlohy. |
+| Kontrola po zavření | Za 30 dní ověřit, že nikdo neodkazuje na starý postup v nových incidentech. |
+
+Výsledek: starý runbook zůstal v archivu jako kontext, ale už nemůže být použit jako aktuální návod. Přístupy se zavřely, starý token zmizel a tým má jasnou náhradní cestu.
+
+### Checklist: Archivace runbooku
+
+- [ ] Je jasné, proč runbook končí: vypnutí, nahrazení, změna systému, změna vlastníka nebo konec rizika.
+- [ ] Existuje zavírací karta s poslední platnou verzí a náhradní cestou.
+- [ ] Archivní stav je vidět hned nahoře v dokumentu nebo přímo v názvu.
+- [ ] Aktuální navigace, wiki index, šablony a pinned odkazy nevedou na starý postup jako na platný návod.
+- [ ] Staré service účty, tokeny, role a oprávnění jsou revokované nebo převedené podle nové reality.
+- [ ] Dočasné logy, payloady, exporty a testovací soubory mají smazání nebo řízený archiv.
+- [ ] Staré alerty a joby neběží, pokud už nevedou k platné akci.
+- [ ] Veřejné texty, trust odpovědi a help stránky neslibují schopnost, která už neexistuje.
+- [ ] Nový nebo náhradní postup má vlastníka a jasnou hranici zásahu.
+- [ ] Po zavření je nastavená kontrola, že se starý runbook nevrací do provozu přes staré odkazy.
+
+### Mini úkol
+
+Najdi jeden runbook, který popisuje postup kolem automatizace, integrace nebo provozní rutiny, kterou už tým nepoužívá v původní podobě. Napiš zavírací kartu, označ dokument jako archiv nebo ho nahraď aktuální cestou, ukliď jeden starý odkaz a ověř, jestli kolem postupu nezůstal token, export, alert nebo testovací výstup bez vlastníka. Pokud najdeš víc mrtvých návodů, nezakládej velkou čistku. Zavři jeden a zbytek dej do backlogu podle rizika.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -55118,6 +55249,8 @@ Vezmi poslední kartu cvičného průchodu runbookem a vyber jeden nález, kter�
 - Nielsen Norman Group: Onboarding Tutorials vs. Contextual Help - rozdíl mezi úvodními tutoriály a kontextovou pomocí: https://www.nngroup.com/articles/onboarding-tutorials/
 
 ## Pracovní log
+
+- 2026-07-25: Doplněna příloha o archivaci runbooku po zániku automatizace bez mrtvého návodu: signály, že runbook dosloužil, zavírací karta, jasné označení archivu, úklid nosičů starého postupu, zavření přístupů, testů a datové stopy, příklad dostupnostní automatizace, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro archivaci runbooku po zániku automatizace. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
 - 2026-07-25: Doplněna příloha o opravě runbooku po cvičném průchodu bez nového chaosu: převod nálezů na opravné položky, zúžení opravy na jeden balík, kontrola reálných oprávnění a datové hranice, úklid starých souběžných pokynů, nové datum ověření, příklad dostupnostní kontroly, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro opravu runbooku po suchém testu. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
