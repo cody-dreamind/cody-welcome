@@ -157,6 +157,7 @@ Když se nechceš vracet do celé knihy, hledej konkrétní nástroj podle výst
 | Ověřit změněný výstup automatizace po prvních bězích | „kontrola po změně výstupu“, „nový report v provozu“ nebo „výstupní smog“ | kontrola prvních výstupů podle rozhodnutí, šumu, publika, retence a datové stopy s jasným verdiktem ponechat, zúžit, rozdělit, vrátit nebo vypnout |
 | Změnit frekvenci automatizace bez tichého sledování navíc | „změna frekvence automatizace“, „častější běh“ nebo „řidší automatizace“ | frekvenční změnová karta s důvodem, rizikovým oknem, limitem dat, nákladem šumu a návratem zpět |
 | Ověřit změněnou frekvenci automatizace po kontrolním okně | „kontrola po změně frekvence“, „nový rytmus automatizace“ nebo „frekvence hotovo“ | rozhodnutí, jestli nový rytmus ponechat, zúžit, vrátit, spouštět událostí nebo vypnout podle zásahů, šumu, retence a důvěry lidí |
+| Změnit pravomoc automatizace bez tichého autopilota | „pravomoc automatizace“, „automatický zásah“ nebo „návrh vs akce“ | karta pravomoci s úrovní zásahu, lidským schválením, rollbackem, auditní stopou, kill switchem a prvním kontrolním oknem |
 
 Pravidlo pro práci s rejstříkem: otevři maximálně tři nalezené části, vyber jednu a zapiš výstup. Pokud po deseti minutách pořád skáčeš mezi odkazy, vrať se k tabulce „Kudy začít podle aktuální bolesti“ a zúž problém. E-book není buffet. Teda je, ale bez talíře si stejně odneseš jen chaos.
 
@@ -53419,6 +53420,157 @@ Výstupem není velký report. Stačí krátké rozhodnutí a úprava provozní 
 
 Vyber jednu automatizaci, u které se v poslední době změnila frekvence. Vezmi prvních deset až třicet běhů po změně a ručně je rozděl na skutečný zásah, potvrzení klidu, falešný poplach, duplicitu nebo nepoužitý výstup. Potom napiš jeden verdikt a jednu větu o datové stopě. Pokud neumíš najít žádný běh, podle kterého někdo jednal, neobhajuj frekvenci tím, že „aspoň máme přehled“. Přehled bez rozhodnutí je tapeta. Hezká možná, ale pořád tapeta.
 
+## Příloha: Změna pravomoci automatizace bez tichého autopilota
+
+Nejnebezpečnější změna automatizace často nevypadá jako velký release. Skript nejdřív jen posílal upozornění. Pak začal zakládat tickety. Pak upravoval stav úkolu. Pak automaticky psal zákazníkovi. A jednoho dne si tým uvědomí, že automatizace už nedodává podklad pro rozhodnutí, ale sama rozhoduje. Nikdo se u toho nezastavil, protože každá jednotlivá změna vypadala malá.
+
+Privacy-first provoz má být obzvlášť opatrný ve chvíli, kdy automatizace přechází od čtení k zápisu, od návrhu k odeslání, od interního výstupu k zákaznické komunikaci nebo od jedné vratné akce k zásahu, který mění data, peníze, přístup či veřejný slib.
+
+> Codyho komentář: Automatizace není dospělá jen proto, že běží bez člověka. Někdy je to naopak jasný důkaz, že jí nikdo nechce dělat rodiče.
+
+### Pojmenuj úroveň pravomoci
+
+Nejdřív si přestaň říkat „automatizace“. To slovo je moc široké. Rozliš, co systém opravdu smí dělat.
+
+Praktické úrovně:
+
+| Úroveň | Co automatizace dělá | Typické riziko |
+| --- | --- | --- |
+| pozoruje | čte stav a vytvoří interní signál | široké čtení dat, zbytečné logy |
+| doporučuje | navrhne další krok, ale nic nemění | falešná autorita doporučení |
+| připravuje | vytvoří návrh ticketu, e-mailu, změny nebo konfigurace | návrh se schválí mechanicky bez čtení |
+| zapisuje | mění interní stav, štítek, prioritu nebo dokumentaci | neviditelná změna pracovního kontextu |
+| komunikuje | posílá zprávu zákazníkovi, dodavateli nebo veřejnému kanálu | únik detailů, špatný tón, starý slib |
+| zasahuje do provozu | restartuje službu, vypíná funkci, mění pravidlo nebo přístup | škoda z rychlé opravy bez kontextu |
+| maže nebo omezuje | ruší data, přístupy, tokeny, obsah nebo účty | nevratnost, dopad na zákazníka, auditní stopa |
+
+Změna mezi těmito úrovněmi je změna pravomoci. Ne jen úprava skriptu. Jakmile automatizace přechází do vyšší úrovně, potřebuje vlastní rozhodnutí, kontrolní okno a hranici návratu.
+
+### Udělej kartu pravomoci
+
+Když automatizace získává novou schopnost, napiš krátkou kartu. Nemá to být román pro právní oddělení. Má to být pracovní brzda proti větě „ono to vlastně už umí“.
+
+| Pole | Otázka |
+| --- | --- |
+| Původní pravomoc | Co automatizace směla dělat doteď? |
+| Nová pravomoc | Co nově smí změnit, odeslat, smazat nebo spustit? |
+| Důvod | Jaké rozhodnutí nebo riziko tím zkracujeme? |
+| Dotčená data | Jaká data automatizace čte a jaká nově zapisuje? |
+| Dotčený člověk | Kdo pocítí dopad, když se automatizace splete? |
+| Lidské schválení | Které kroky musí člověk potvrdit a podle čeho? |
+| Návrat zpět | Jak se akce vrátí, zastaví nebo opraví? |
+| Auditní stopa | Co uložíme jako důkaz bez ukládání zbytečných payloadů? |
+| Kill switch | Kdo a jak automatizaci okamžitě vypne? |
+| Kontrolní okno | Po kolika bězích rozhodneme ponechat, zúžit nebo vrátit? |
+
+Pravidlo: pokud neumíš vyplnit návrat zpět, nezačínej automatickým zásahem. Začni návrhem pro člověka. Produktivita, která neumí couvnout, je jen rychlejší cesta k ručnímu úklidu.
+
+### Začni režimem návrhu, ne přímou akcí
+
+Nejlepší mezistupeň je často „automatizace připraví návrh a člověk ho schválí“. Tým tím ověří, jestli pravidla dávají smysl na reálných příkladech, aniž by hned měnil produkční stav.
+
+Použitelné mezikroky:
+
+- místo odeslání e-mailu vytvořit draft,
+- místo smazání dat vytvořit seznam kandidátů k výmazu,
+- místo změny pricing textu vytvořit pull request nebo komentář,
+- místo restartu služby otevřít incidentní kartu s doporučeným krokem,
+- místo vypnutí účtu označit rizikový stav a požádat vlastníka o potvrzení,
+- místo veřejné publikace aktualizovat interní návrh release notes.
+
+Návrhový režim má mít konec. Po třech, pěti nebo deseti případech si sedni k výsledkům a spočítej, kolik návrhů člověk přijal beze změny, kolik upravil a kolik zahodil. Když většina návrhů potřebovala lidskou opravu, automatizace ještě není připravená na vyšší pravomoc. To není ostuda. Ostuda je nechat ji posílat špatné věci rychleji.
+
+### Omez zápis víc než čtení
+
+U privacy-first automatizace se často mluví o tom, co systém čte. Při změně pravomoci je stejně důležité, kam smí zapisovat.
+
+Zápis rozděl podle dosahu:
+
+| Zápis | Doporučená hranice |
+| --- | --- |
+| interní štítek nebo stav | povolit jen pro přesně vybrané objekty a stavy |
+| interní komentář | bez osobních detailů, payloadů a tónu, který vypadá jako lidské rozhodnutí |
+| ticket nebo úkol | jasně označit automatický původ a další lidský krok |
+| e-mail nebo zpráva | začít draftem, ne automatickým odesláním |
+| veřejný obsah | vyžadovat review člověkem a zachovat historii změny |
+| provozní zásah | povolit jen pro malé vratné akce s alarmem a ručním návratem |
+| mazání nebo revokace | vyžadovat silnější potvrzení, exportní okno nebo dvoukrokový proces |
+
+Technické oprávnění má odpovídat nejmenší akci, ne nejpohodlnějšímu API scope. Když automatizace potřebuje změnit štítek u release karty, nemá dostat možnost číst celé CRM nebo mazat projekty. Ano, občas to znamená víc práce s rolemi. Překvapivě pořád méně práce než vysvětlovat, proč malý skript přepsal velký kus provozu.
+
+### Označ automatickou akci čitelně
+
+Když automatizace něco změní, člověk to musí poznat. Ne kvůli viníkovi, ale kvůli provozní orientaci.
+
+Dobrá stopa obsahuje:
+
+- co se změnilo,
+- kdy se to změnilo,
+- která automatizace změnu provedla,
+- podle kterého pravidla nebo běhu,
+- kdo je vlastník rozhodnutí,
+- jak se změna vrátí nebo eskaluje.
+
+Špatná stopa obsahuje celý payload, osobní údaje, screenshoty bez potřeby nebo neurčitý komentář „updated by system“. To je jako cedule „něco se stalo“. Krásné. Úplně k ničemu.
+
+### Rozliš provozní zásah a produktové rozhodnutí
+
+Automatizace může rychle opravit technický stav, ale nemá potichu měnit produktovou politiku. Rozdíl je důležitý.
+
+Příklady, kde automatický zásah může dávat smysl:
+
+- přepnout do předem připraveného statického fallbacku,
+- obnovit cache podle známého pravidla,
+- dočasně zastavit opakované odesílání duplicitní notifikace,
+- založit incidentní kartu po potvrzeném selhání.
+
+Příklady, kde má člověk zůstat v rozhodnutí:
+
+- poslat zákazníkovi vysvětlení incidentu,
+- změnit veřejný trust slib,
+- upravit retenční pravidlo,
+- vypnout účet nebo zrušit přístup mimo jasně definovaný bezpečnostní proces,
+- odpovědět na právní, billing nebo bezpečnostní dotaz,
+- publikovat marketingové tvrzení podle čerstvého trendu.
+
+Praktická hranice: automatizace může připravit důkaz, návrh a bezpečný první krok. Pokud akce mění vztah se zákazníkem, práva lidí, peníze nebo veřejný závazek, člověk má aspoň potvrdit směr.
+
+### Příklad: Trust odpovědi z návrhu na automatické odeslání
+
+Tým má automatizaci, která jednou týdně projde nové otázky v bezpečnostních dotaznících a navrhne odpovědi z interní knihovny trust odpovědí. Po několika dobrých týdnech vznikne nápad posílat běžné odpovědi rovnou zákazníkům.
+
+Privacy-first postup:
+
+| Pole | Rozhodnutí |
+| --- | --- |
+| Původní pravomoc | připravit interní návrh odpovědi |
+| Navržená pravomoc | automaticky odeslat odpověď na otázky označené jako nízké riziko |
+| Dotčená data | text dotazu, vybraná odpověď, jméno zákaznické organizace, stav schválení |
+| Hranice | neposílat odpovědi k incidentům, subdodavatelům, smlouvám, retenci, přenosům dat ani individuálním požadavkům |
+| Lidské schválení | první měsíc musí člověk potvrdit každý draft |
+| Auditní stopa | uložit ID otázky, verzi odpovědi, schvalujícího člověka a čas, ne celý zákaznický dokument |
+| Kill switch | vypnutí odesílání přes konfigurační přepínač, návrhový režim zůstává |
+| Verdikt po pilotu | ponechat draft režim pro všechny externí odpovědi, automaticky pouze zakládat interní úkoly |
+
+Výsledek je možná méně oslnivý než plný autopilot, ale lepší: automatizace pořád šetří čas, nepřebírá důvěrovou komunikaci a nezvyšuje riziko, že zákazník dostane přesnou, rychlou a naprosto špatně kontextovanou odpověď.
+
+### Checklist: Změna pravomoci automatizace
+
+- [ ] Je pojmenovaná původní a nová úroveň pravomoci.
+- [ ] Změna pravomoci má vlastní rozhodnutí, ne jen technický commit.
+- [ ] Je jasné, co automatizace nově zapisuje, odesílá, maže nebo spouští.
+- [ ] Nové oprávnění je omezené na nejmenší potřebnou akci.
+- [ ] První fáze používá návrh, draft nebo simulaci, pokud je dopad nevratný nebo zákaznicky viditelný.
+- [ ] Automatické akce jsou čitelně označené a dohledatelné bez ukládání zbytečných payloadů.
+- [ ] Existuje rollback, ruční náhradní postup a kill switch.
+- [ ] Akce, které mění zákaznický vztah, práva lidí, peníze nebo veřejný slib, mají lidské potvrzení.
+- [ ] Kontrolní okno končí verdiktem ponechat, zúžit, vrátit na návrhy nebo vypnout.
+- [ ] Provozní karta automatizace je po změně pravomoci aktualizovaná.
+
+### Mini úkol
+
+Vyber jednu automatizaci, která dnes jen upozorňuje, ale někdo u ní navrhuje automatický zásah. Napiš její původní úroveň pravomoci a navrženou novou úroveň. Potom vyplň tři řádky: co nově změní, koho se chyba dotkne a jak se zásah vrátí zpět. Pokud třetí řádek neumíš napsat konkrétně, nespouštěj autopilota. Udělej nejdřív návrhový režim a projdi prvních pět případů ručně. Automatizace má být kolega s jasnou pracovní smlouvou, ne tajný nájemník s klíčem od sklepa.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -53612,6 +53764,7 @@ Vyber jednu automatizaci, u které se v poslední době změnila frekvence. Vezm
 
 ## Pracovní log
 
+- 2026-07-25: Doplněna příloha o změně pravomoci automatizace bez tichého autopilota: rozlišení úrovní pozoruje/doporučuje/připravuje/zapisuje/komunikuje/zasahuje/maže, karta pravomoci, návrhový režim před přímou akcí, omezení zápisu, čitelné označení automatických akcí, rozdíl mezi provozním zásahem a produktovým rozhodnutím, příklad trust odpovědí, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro změnu pravomoci automatizace. Bez nových aktuálních externích tvrzení, navázáno na části o změnách vstupu, výstupu a frekvence automatizace, trust odpovědích, přístupové hygieně, auditní stopě a privacy-first minimalizaci; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
 - 2026-07-25: Doplněna příloha o kontrole po změně frekvence automatizace bez nového rytmu naslepo: návrat k frekvenční kartě, třídění běhů podle skutečných zásahů, potvrzení klidu, falešných poplachů, duplicit a nepoužitých výstupů, přepočet datové stopy podle nové frekvence, ověření důvěry lidí ve výstup, verdikty ponechat/zúžit/vrátit/změnit na trigger/rozdělit/vypnout, příklad dostupnostního monitoru, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro ověření změněné frekvence automatizace po kontrolním okně. Bez nových aktuálních externích tvrzení, navázáno na část o změně frekvence automatizace, provozní drift, retenci výstupů, notifikace, healthcheck a privacy-first minimalizaci; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
 - 2026-07-25: Doplněna příloha o změně frekvence automatizace bez tichého sledování navíc: rizikové okno, frekvenční změnová karta, pravidlo že častější běh nemá znamenat širší data, zpomalení jako legitimní omezení šumu, rozdíl mezi časovým plánem a pracovním triggerem, příklad dostupnostní kontroly po stabilizaci webu, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro změnu frekvence automatizace. Bez nových aktuálních externích tvrzení, navázáno na části o změně výstupu, provozním driftu, plánovaných úlohách, healthchecku, retenci výstupů a privacy-first minimalizaci; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
 - 2026-07-25: Doplněna příloha o kontrole po změně výstupu automatizace bez dalšího smogu: návrat k výstupní kartě, porovnání prvních výstupů s reálnou akcí, počítání šumu jako provozního nákladu, kontrola skutečného publika po doručení, retence a staré souběžné výstupy, verdikty ponechat/zúžit/rozdělit/vrátit/vypnout/znovu navrhnout, příklad marketingového reportu, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro ověření změněného výstupu automatizace po prvních bězích. Bez nových aktuálních externích tvrzení, navázáno na části o změně výstupu automatizace, kontrole po změně vstupu, provozním driftu, retenci výstupů, marketingovém backlogu a privacy-first minimalizaci; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
