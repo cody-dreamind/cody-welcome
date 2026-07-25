@@ -151,6 +151,7 @@ Když se nechceš vracet do celé knihy, hledej konkrétní nástroj podle výst
 | Udržet běžící automatizaci zdravou bez tichého driftu | „provozní drift automatizace“, „údržba běžící automatizace“ nebo „automatizace stárne“ | malá drift kontrola spouštěčů, vstupů, výstupů, logů, vlastníka a ručního postupu |
 | Předat vlastnictví automatizace bez osiřelého skriptu | „změna vlastníka automatizace“, „osiřelý skript“ nebo „předání automatizace“ | předávací karta, ověření ručního postupu, kontrola tokenů, logů, výstupů a rozhodnutí, zda automatizace dál patří do provozu |
 | Stabilizovat automatizaci po změně vlastníka | „první měsíc po změně vlastníka automatizace“, „stabilizace automatizace“ nebo „nový vlastník automatizace“ | 30denní stabilizační okno, kontrola prvních běhů, skrytých ručních zásahů, datové hranice a rozhodnutí, zda novému vlastníkovi automatizace opravdu pomáhá |
+| Zvládnout změnu vstupu automatizace bez rozšíření dat | „změna vstupu automatizace“, „API se změnilo“ nebo „nový zdroj dat pro automatizaci“ | vstupní migrační karta s účelem, mapováním polí, datovým ořezem, testem výstupu, revokací starého vstupu a zavíracím rozhodnutím |
 
 Pravidlo pro práci s rejstříkem: otevři maximálně tři nalezené části, vyber jednu a zapiš výstup. Pokud po deseti minutách pořád skáčeš mezi odkazy, vrať se k tabulce „Kudy začít podle aktuální bolesti“ a zúž problém. E-book není buffet. Teda je, ale bez talíře si stejně odneseš jen chaos.
 
@@ -52667,6 +52668,133 @@ Zavírací rozhodnutí: automatizace zůstává, ale zúží se spouštěč a up
 
 Vyber jednu automatizaci, která v poslední době změnila vlastníka nebo ji začal používat jiný tým. Zapiš stabilizační kartu na příští tři běhy: co má automatizace podpořit, co nesmí číst, jaký ruční zásah budeš počítat jako signál a jaké rozhodnutí uděláš na konci okna. Pak projdi poslední výstup a najdi jednu věc, kterou by nový vlastník neměl řešit hlavou. Buď ji přepiš do karty, zúž spouštěč, nebo ji označ jako důvod automatizaci vrátit ručně. Jestli závěr zní „nějak to pořešíme“, přepiš ho. „Nějak“ je špatný vlastník skoro všeho.
 
+## Příloha: Změna vstupu automatizace bez tichého rozšíření dat
+
+Automatizace se často nerozbije tím, že přestane běžet. Rozbije se tím, že začne číst trochu jiný vstup. API přidá nové pole, export změní sloupce, webhook začne posílat bohatší payload, CRM přejmenuje stav, nebo tým nahradí ruční tabulku novým nástrojem. Technicky může všechno projít. Pro privacy-first provoz je ale zásadní otázka: změnil se jen formát, nebo i datový rozsah?
+
+Změnu vstupu ber jako malou migraci, ne jako rychlou opravu parseru. Každý nový vstup totiž může potichu přinést osobní údaje, interní poznámky, texty zákazníků, identifikátory lidí, přesnější časové stopy nebo metadata, která původní automatizace nepotřebovala. Pokud to jen „napojíš, ať to zase běží“, vyrábíš datový stín bez rozhodnutí.
+
+> Codyho komentář: Nejzrádnější věta u automatizací zní „payload je skoro stejný“. Skoro stejný payload umí obsahovat úplně nový problém. Jako když si objednáš kafe a dostaneš k němu účetnictví kavárny.
+
+### Začni vstupní migrační kartou
+
+Před úpravou skriptu si napiš kartu. Nemusí být dlouhá. Musí ale oddělit provozní potřebu od datové chuti.
+
+| Pole | Otázka | Příklad |
+| --- | --- | --- |
+| Původní vstup | Z čeho automatizace četla doteď? | release štítky a název úkolu v repozitáři |
+| Nový vstup | Z čeho má číst nově? | webhook z projektového nástroje |
+| Důvod změny | Jaké rozhodnutí bez nového vstupu nejde udělat? | poznat, jestli release mění veřejné trust texty |
+| Povolená pole | Která pole opravdu potřebujeme? | ID úkolu, název, štítky, odkaz, stav |
+| Zakázaná pole | Co automatizace nesmí číst, ukládat ani posílat dál? | komentáře, osobní poznámky, přílohy, historie změn |
+| Retence | Jak dlouho držíme mezivýstup nebo log? | jen výsledek běhu, bez payloadu |
+| Návrat zpět | Jak se vrátíme ke starému vstupu nebo ručnímu postupu? | vypnout webhook, použít ruční release checklist |
+
+Karta má jednu nepříjemnou výhodu: nutí tým říct, proč nový vstup potřebuje. Pokud odpověď zní „protože tam je víc dat“, není to důvod. Důvod je až rozhodnutí, které bez těch dat nejde udělat.
+
+### Mapuj pole, ne celé objekty
+
+Nejčastější chyba je poslat do automatizace celý objekt a pak v kódu použít jen pár polí. Vypadá to pohodlně, ale provozně tím rozšiřuješ hranici zpracování. I nepoužitá data prošla systémem, mohou skončit v logu, chybové zprávě, frontě nebo debug výstupu.
+
+Udělej malou mapovací tabulku:
+
+| Nové pole | Potřebujeme? | Kam jde dál? | Poznámka |
+| --- | --- | --- | --- |
+| `task.id` | ano | výstupní odkaz | bez osobních údajů |
+| `task.title` | ano | název kontrolního úkolu | zkontrolovat, že neobsahuje zákaznický text |
+| `task.labels` | ano | rozhodnutí, zda spustit review | povolené jen vybrané štítky |
+| `task.comments` | ne | nikam | nečíst, nelogovat, neposílat do promptu |
+| `task.assignee.email` | ne | nikam | pro rozhodnutí není potřeba |
+
+Pravidlo: automatizace má dostat ořezaný vstup co nejdřív. Ideálně hned na hranici integrace, ne až v páté funkci. Když později někdo zapne debug log nebo přidá chybový report, nebude mít po ruce data, která tam nikdy neměla být.
+
+### Otestuj výstup proti staré pracovní otázce
+
+Po změně vstupu nesmí být první otázka „prošlo to technicky?“. To je jen základ. Důležitější je, jestli nový vstup pořád odpovídá na stejnou pracovní otázku.
+
+Příklad pracovní otázky:
+
+„Má tento release dopad na veřejné trust odpovědi, které musí content vlastník zkontrolovat?“
+
+Po změně vstupu zkontroluj:
+
+- Vytváří automatizace stejný typ rozhodnutí jako dřív?
+- Neobjevují se výstupy kvůli polím, která nejsou součástí původního účelu?
+- Nevyžaduje nový výstup čtení komentářů, zákaznických tiketů nebo interních poznámek?
+- Nezvýšil se počet falešných nálezů tak, že tým začne výstupy ignorovat?
+- Umí vlastník vysvětlit výstup bez přístupu k celému payloadu?
+
+Dobrá migrace vstupu může skončit i zúžením. Například nový webhook posílá třicet polí, ale automatizace si z nich nechá čtyři. To není promarněná příležitost. To je disciplína.
+
+### Nech starý vstup dožít jen řízeně
+
+Při přepojování zdrojů vzniká krátké období, kdy běží starý i nový vstup. To je užitečné pro porovnání, ale nebezpečné pro datový nepořádek. Dva zdroje často znamenají dvojí logy, dvojí tokeny, dvojí chybové notifikace a dvojí místo, kde může zůstat stará kopie.
+
+Nastav souběh jako experiment:
+
+| Prvek | Rozumné pravidlo |
+| --- | --- |
+| Délka souběhu | pevně daný počet běhů nebo dnů |
+| Porovnání | porovnat výstupy, ne ukládat celé payloady |
+| Logy | logovat jen stav, počet záznamů, chybu a odkaz na výstup |
+| Tokeny | starý token revokovat hned po zavíracím rozhodnutí |
+| Dokumentace | kartu aktualizovat ve stejném commitu nebo změnovém záznamu |
+
+Souběh bez konce je jen migrace, která se bojí říct pravdu. A staré integrační tokeny mají zvláštní talent přežívat déle než některé firemní strategie.
+
+### Zavři změnu vstupu datovým rozhodnutím
+
+Na konci změny nezapisuj jen „upraven parser“. To je technický detail. Zapiš, co se stalo s datovou hranicí.
+
+Možná rozhodnutí:
+
+| Stav | Kdy dává smysl | Co udělat |
+| --- | --- | --- |
+| Ponechat nový vstup | Nový vstup odpovídá účelu a používá jen povolená pole. | aktualizovat kartu, revokovat starý vstup, nastavit další revizi |
+| Zúžit nový vstup | Automatizace je užitečná, ale čte víc než potřebuje. | ořezat payload, vypnout pole, upravit mapování nebo proxy vrstvu |
+| Vrátit starý vstup | Nový zdroj přidává šum nebo zbytečná data. | obnovit starý postup a zaznamenat důvod odmítnutí |
+| Vrátit ručně | Ani starý, ani nový vstup nepodporuje dobré rozhodnutí. | zapsat ruční náhradu a nové datum revize |
+| Vypnout | Původní rozhodnutí už není platné. | uzavřít automatizaci podle vypínací karty |
+
+Zavírací věta může vypadat takto:
+
+„Automatizace po migraci čte pouze ID úkolu, název, štítky, stav a odkaz. Nečte komentáře, přílohy, assignee e-mail ani historii změn. Starý webhook byl revokován 2026-07-25, staré testovací logy byly smazány a další kontrola proběhne po třech release.“
+
+To je výrazně užitečnější než „hotovo“. Hotovo totiž může znamenat cokoli. V provozu je „cokoli“ drahé slovo.
+
+### Příklad: Nový projektový nástroj pro release kontrolu
+
+Tým přesune release úkoly z repozitáře do projektového nástroje. Automatizace dřív četla štítky z issue a podle nich vytvářela review úkol pro trust odpovědi. Nový nástroj nabízí webhook s celým úkolem včetně komentářů, příloh, vlastníků, zákaznických odkazů a interních poznámek.
+
+Místo rychlého napojení tým udělá vstupní migraci:
+
+| Rozhodnutí | Výsledek |
+| --- | --- |
+| Pracovní otázka zůstává stejná. | Kontrolujeme jen, zda release mění veřejné trust texty. |
+| Povolená pole jsou omezená. | Čte se ID, název, stav, štítky a veřejný odkaz na úkol. |
+| Komentáře a přílohy se nečtou. | Pokud je potřeba kontext, vlastník ho doplní ručně do review úkolu. |
+| Souběh trvá tři release. | Porovnávají se jen výsledné review úkoly, ne celé payloady. |
+| Starý webhook má datum vypnutí. | Revokace proběhne po třetím shodném výstupu. |
+
+Po třech release automatizace zůstává, ale nový vstup se zúží přes integrační mezivrstvu. Výstup je stejný jako dřív, logy jsou chudé a nový nástroj se nestal záminkou pro čtení komentářů. Přesně tak má vypadat nudná, užitečná migrace. Nudná je v provozu často kompliment.
+
+### Checklist: Změna vstupu automatizace
+
+- [ ] Změna vstupu má vlastní migrační kartu, ne jen technický úkol.
+- [ ] Je jasné, jaké rozhodnutí má nový vstup podporovat.
+- [ ] Povolená a zakázaná pole jsou pojmenovaná před úpravou kódu.
+- [ ] Automatizace nečte celý objekt, pokud potřebuje jen několik polí.
+- [ ] Komentáře, přílohy, interní poznámky a osobní identifikátory jsou výslovně odmítnuté, pokud nejsou nutné.
+- [ ] Test porovnává pracovní výstup, ne ukládání celého payloadu.
+- [ ] Souběh starého a nového vstupu má pevný konec.
+- [ ] Staré tokeny, webhooky, fronty a testovací logy mají zavírací krok.
+- [ ] Provozní karta obsahuje nové mapování polí a datovou hranici.
+- [ ] Na konci existuje rozhodnutí: ponechat, zúžit, vrátit starý vstup, vrátit ručně nebo vypnout.
+
+### Mini úkol
+
+Vyber jednu automatizaci, která čte webhook, export, API odpověď nebo pravidelný soubor. Napiš pět polí, která opravdu potřebuje, a pět polí, která by neměla číst ani „pro jistotu“. Potom najdi místo, kde se vstup poprvé zpracovává, a zapiš, kde by měl vzniknout datový ořez. Pokud je odpověď „až později v kódu“, označ to jako riziko. Privacy-first automatizace nemá být skromná až po večeři. Má jíst jen to, co si objednala.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -52860,6 +52988,7 @@ Vyber jednu automatizaci, která v poslední době změnila vlastníka nebo ji z
 
 ## Pracovní log
 
+- 2026-07-25: Doplněna příloha o změně vstupu automatizace bez tichého rozšíření dat: vstupní migrační karta, mapování polí místo celých objektů, test výstupu proti původní pracovní otázce, řízený souběh starého a nového vstupu, zavírací datové rozhodnutí, příklad migrace release kontroly do nového projektového nástroje, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro změnu vstupu automatizace. Bez nových aktuálních externích tvrzení, navázáno na části o stabilizaci automatizace po změně vlastníka, provozní kartě, logování, přístupech, revokaci tokenů a privacy-first minimalizaci; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
 - 2026-07-25: Doplněna příloha o prvním měsíci po změně vlastníka automatizace bez návratu starých zvyků: 30denní stabilizační okno, kontrola prvních běhů, sledování rozhodnutí místo výkonu člověka, zachycení skrytých ručních zásahů, rozlišení opravy karty a kódu, zavírací rozhodnutí ponechat/zúžit/přepsat/upravit/vrátit ručně/vypnout, příklad kontroly obsahu po release, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro stabilizaci automatizace po změně vlastníka. Bez nových aktuálních externích tvrzení, navázáno na předání vlastnictví automatizace, provozní drift, standardní provoz automatizací, přístupy, logování a privacy-first minimalizaci; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
 - 2026-07-25: Doplněna příloha o změně vlastníka automatizace bez osiřelého skriptu: spouštěče předávací kontroly, rozlišení vlastníka rozhodnutí, technického správce, vlastníka datové hranice a náhradníka, předávací karta automatizace, ověření převzetí jedním během, přístupový úklid, rozhodnutí ponechat/zúžit/přepsat/vrátit ručně/vypnout, příklad kontroly obsahu po release, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro předání vlastnictví automatizace. Bez nových aktuálních externích tvrzení, navázáno na provozní drift automatizace, standardní provoz automatizací, přístupovou hygienu, logování a privacy-first minimalizaci; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
 - 2026-07-25: Doplněna příloha o provozním driftu automatizace bez pomalého odplutí: kontrola rozdílu proti provozní kartě, malé drift okno, rozlišení driftu užitečnosti a driftu dat, krátký drift záznam, chudé signály bez sledování lidí, příklad dostupnostní kontroly, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro údržbu běžící automatizace. Bez nových aktuálních externích tvrzení, navázáno na standardní provoz automatizace po pilotu, review automatizací, logování, přístupy a privacy-first minimalizaci; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
