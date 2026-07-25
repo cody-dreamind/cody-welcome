@@ -161,6 +161,7 @@ Když se nechceš vracet do celé knihy, hledej konkrétní nástroj podle výst
 | Ověřit změněnou pravomoc automatizace po pilotu | „kontrola po změně pravomoci“, „automatický zásah v provozu“ nebo „pravomoc hotovo“ | kontrola prvních zásahů podle skutečného dopadu, lidských oprav, rollbacku, auditní stopy a rozhodnutí ponechat, zúžit, vrátit na návrhy nebo vypnout |
 | Řídit výjimky z automatizace bez skrytého obcházení pravidel | „výjimky automatizace“, „ruční override“ nebo „automatizace neplatí“ | výjimková karta s důvodem, vlastníkem, datovou hranicí, časovým koncem a rozhodnutím, zda změnit pravidlo, nebo výjimku zavřít |
 | Vyhodnotit opakované výjimky z automatizace bez džungle pravidel | „opakované výjimky“, „výjimkový review“ nebo „pravidlo se láme“ | review opakovaných výjimek, které rozhodne mezi úpravou pravidla, zúžením automatizace, produktovou změnou a vypnutím |
+| Upravit pravidlo automatizace po výjimkovém review | „změna pravidla automatizace“, „pravidlo po review“ nebo „nová logika“ | změnová karta pravidla s testovací sadou, hranicí dat, pilotem, úklidem starých výjimek a datem další kontroly |
 
 Pravidlo pro práci s rejstříkem: otevři maximálně tři nalezené části, vyber jednu a zapiš výstup. Pokud po deseti minutách pořád skáčeš mezi odkazy, vrať se k tabulce „Kudy začít podle aktuální bolesti“ a zúž problém. E-book není buffet. Teda je, ale bez talíře si stejně odneseš jen chaos.
 
@@ -53948,6 +53949,126 @@ Výsledek není chytřejší klasifikátor za každou cenu. Výsledek je čiteln
 
 Vyber jednu automatizaci, u které už existují alespoň tři výjimkové karty nebo tři zapamatované ruční zásahy. Nepiš hned nové pravidlo. Udělej 30minutové review: seskup výjimky podle příčiny, napiš jednu větu „kdyby systém fungoval správně, člověk by nemusel ___“, rozhodni mezi úpravou pravidla, zúžením automatizace, produktovým úkolem a vypnutím. Nakonec smaž nebo zavři jednu starou dočasnou stopu, která po výjimkách zůstala.
 
+## Příloha: Změna pravidla automatizace po review bez nové černé skříňky
+
+Review opakovaných výjimek je užitečné jen tehdy, když z něj vznikne čitelná změna. Ne „něco jsme upravili ve skriptu“, ale malé rozhodnutí: jaké pravidlo se změnilo, proč, jaká data používá, co už nesmí dělat a kdy zkontrolujeme, jestli se tím realita opravdu zlepšila.
+
+Největší riziko po review není špatný kód. Největší riziko je nenápadné rozšíření systému. Přidá se nové pole, nový log, nový export, nová výjimka pro tři důležité zákazníky, nové publikum reportu a nové právo pro člověka, který „to jen občas opraví“. Všechno zvlášť vypadá malé. Dohromady z toho vznikne automatizace, kterou už nikdo neumí popsat bez archeologického průzkumu commitů.
+
+> Codyho komentář: Automatizace má mít pravidla jako dopravní značka, ne jako výklad snu. Když ji po změně neumíš vysvětlit jednou větou, ještě nejsi hotový. Jen jsi přesunul nejasnost z porady do produkce.
+
+### Začni změnovou větou pravidla
+
+Před editací kódu nebo nastavení napiš jednu větu:
+
+„Automatizace nově ___, protože výjimkové review ukázalo ___, a pořád nesmí ___.“
+
+Příklady:
+
+| Slabá věta | Lepší věta |
+| --- | --- |
+| Upravíme triage logiku pro support. | Support triage nově oddělí access/reporting dotazy od bezpečnostních incidentů, protože zákazníci používali slovo security pro dvě různé práce, a pořád nesmí automaticky zavřít tiket ani logovat celé zprávy. |
+| Přidáme VIP výjimku do billing reminderu. | Billing reminder nově u účtů s aktivní platební domluvou vytvoří návrh pro account ownera, protože automatické upozornění opakovaně kolidovalo se smluvním kontextem, a pořád nesmí sám měnit splatnost nebo posílat individuální omluvu. |
+| Zpřesníme alerty po releasu. | Release alert nově ignoruje první dva plánované testovací běhy označené release id, protože review ukázalo falešné poplachy z dry-runů, a pořád nesmí potlačit produkční chyby bez explicitního okna údržby. |
+
+Tato věta patří do změnové karty, pull requestu, runbooku nebo provozní dokumentace. Když se nevejde do jedné srozumitelné věty, změna je pravděpodobně moc široká.
+
+### Zachovej stejnou nebo menší datovou hranici
+
+Úprava pravidla nesmí automaticky znamenat širší sběr dat. Pokud nové pravidlo potřebuje další pole, příjemce, export, log nebo oprávnění, nejde jen o změnu pravidla. Jde i o změnu vstupu, výstupu nebo pravomoci automatizace a musí projít samostatnou kontrolou.
+
+Před změnou pravidla vyplň krátkou datovou kontrolu:
+
+| Otázka | Dobrá odpověď |
+| --- | --- |
+| Přidáváme nové vstupní pole? | Ne, používáme existující stav účtu a typ tiketu. |
+| Přidáváme nový výstup nebo publikum? | Ne, výstup zůstává ve stejném interním kanálu pro vlastníka. |
+| Prodlužujeme retenci logů? | Ne, kontrola používá agregovaný počet přepsaných kategorií za kontrolní okno. |
+| Přidáváme možnost zápisu? | Ne, automatizace dál jen navrhuje štítek. |
+| Vzniká dočasný export? | Ne, testovací sada je ručně sestavená z anonymizovaných nebo syntetických příkladů. |
+
+Pokud je odpověď „ano“, změnu nezakazuj automaticky. Jen ji pojmenuj. Privacy-first provoz není zákaz nástrojů. Je to odmítnutí tichého přibírání dat bez rozhodnutí.
+
+### Udělej testovací sadu z výjimek, ne z celého světa
+
+Po review máš konkrétní materiál: výjimky. Nepotřebuješ hned velký dataset ani plošné logování. Stačí malá testovací sada, která pokrývá známé typy chyb a několik běžných případů, které se nesmí rozbít.
+
+Testovací sada může mít tento tvar:
+
+| Typ příkladu | Kolik stačí | Poznámka |
+| --- | --- | --- |
+| typická stará výjimka | 3-5 | případ, který dřív vyžadoval ruční zásah |
+| běžný správný průchod | 3-5 | případ, který automatizace už uměla správně |
+| hraniční případ | 1-3 | případ, kde má automatizace raději navrhnout člověka než rozhodnout sama |
+| zakázaný případ | 1-2 | situace, kterou automatizace nesmí udělat ani po změně |
+
+U každého příkladu drž jen nutné minimum. Pokud testuješ třídění supportu, často nepotřebuješ celé původní zprávy, screenshoty, jména, e-maily ani historii účtu. Stačí ořezaný text, kategorie, očekávaný výstup a poznámka, proč je případ rizikový.
+
+### Pilotuj pravidlo odděleně od pravomoci
+
+Když měníš pravidlo, nemusíš zároveň měnit pravomoc automatizace. To je důležité. Nová logika může první týden běžet jen jako návrh, i když stará verze už něco zapisovala automaticky. Pilot nemá dokazovat, že automatizace je chytrá. Má ukázat, že nová logika je pochopitelná, méně výjimková a nezvětšuje datový stín.
+
+Použitelný pilot:
+
+| Fáze | Co automatizace smí | Co kontroluje člověk |
+| --- | --- | --- |
+| stínový běh | spočítat nový výsledek vedle starého bez zápisu | rozdíly u známých výjimek |
+| návrhový běh | navrhnout výsledek vlastníkovi | správnost, šum a hraniční případy |
+| omezený zápis | zapsat jen nízkorizikové případy | zásahy, rollback a auditní stopu |
+| běžný režim | běžet podle nové provozní karty | další výjimkové okno a úklid |
+
+Pokud pilot odhalí víc výjimek, než vyřeší, není to ostuda. Je to levnější zjištění než tichý produkční autopilot.
+
+### Ukliď staré výjimky jako součást změny
+
+Změna pravidla není hotová ve chvíli, kdy projdou testy. Je hotová ve chvíli, kdy starý režim přestane přežívat v postranních cestách.
+
+Po změně zkontroluj:
+
+- staré whitelisty a blacklisty,
+- dočasné exporty vytvořené pro review,
+- ruční pokyny v chatu nebo dokumentaci,
+- otevřené výjimkové karty bez nového rozhodnutí,
+- staré alerty, které popisují předchozí chování,
+- dashboardy a reporty, které ukazují už neplatnou kategorii,
+- přístupy lidí, kteří byli potřeba jen pro dočasný override.
+
+Neuklizená výjimka je horší než chybějící výjimka. Chybějící výjimka vyvolá otázku. Neuklizená výjimka vyvolá falešnou jistotu.
+
+### Příklad: Úprava pravidla pro support triage
+
+Po review support triage tým zjistil, že „security“ v zákaznických tiketech znamená dvě různé věci: skutečný bezpečnostní incident a žádost o auditní export, role nebo report pro nákupní kontrolu.
+
+Změnová karta:
+
+| Pole | Zápis |
+| --- | --- |
+| Změnová věta | Support triage nově oddělí access/reporting dotazy od bezpečnostních incidentů, protože review ukázalo opakované ruční přepisy, a pořád nesmí automaticky zavřít tiket ani logovat celé zprávy. |
+| Datová hranice | žádná nová pole, žádné ukládání celých zpráv mimo existující support systém |
+| Testovací sada | 4 staré výjimky, 4 správně zařazené incidenty, 2 hraniční příklady pro lidské potvrzení |
+| Pilot | týden návrhového režimu, bez automatického zápisu štítku u bezpečnostních témat |
+| Stop signál | víc než dvě chybně navržené bezpečnostní kategorie nebo nutnost logovat širší text |
+| Úklid | odstranit dočasný chatový návod, zavřít staré výjimkové karty, upravit support runbook |
+| Další kontrola | po deseti pracovních dnech zkontrolovat ruční přepisy a tři konkrétní příklady |
+
+Dobrý výsledek není nulový počet výjimek. Dobrý výsledek je menší počet zbytečných ručních přepisů, jasnější jazyk pro tým a bezpečnostní případy, které se pořád neposílají do automatického zavírání.
+
+### Checklist: Změna pravidla automatizace po review
+
+- [ ] Změna má jednu srozumitelnou větu ve tvaru „nově / protože / pořád nesmí“.
+- [ ] Datová hranice je stejná nebo menší; širší vstup, výstup, log, export nebo oprávnění je označené jako samostatná změna.
+- [ ] Testovací sada vychází z konkrétních výjimek a běžných správných průchodů.
+- [ ] Testy obsahují i zakázané nebo hraniční případy, kde má automatizace raději předat práci člověku.
+- [ ] Pilot odděluje změnu pravidla od změny pravomoci.
+- [ ] Stop signál říká, kdy změnu vrátit, zúžit nebo nechat jen jako návrh.
+- [ ] Staré whitelisty, exporty, chatové pokyny, alerty, dashboardy a přístupy jsou uklizené.
+- [ ] Provozní karta, runbook a dokumentace popisují nový skutečný režim.
+- [ ] Další kontrolní okno má datum nebo počet běhů.
+
+### Mini úkol
+
+Vezmi poslední rozhodovací kartu review opakovaných výjimek a napiš k ní změnovou větu „nově / protože / pořád nesmí“. Pak vyber pět příkladů do testovací sady: dvě staré výjimky, dva běžné správné průchody a jeden případ, který automatizace nesmí rozhodnout sama. Nakonec najdi jednu starou dočasnou stopu po výjimkách a zavři ji dřív, než začneš přidávat další logiku.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -54140,6 +54261,8 @@ Vyber jednu automatizaci, u které už existují alespoň tři výjimkové karty
 - Nielsen Norman Group: Onboarding Tutorials vs. Contextual Help - rozdíl mezi úvodními tutoriály a kontextovou pomocí: https://www.nngroup.com/articles/onboarding-tutorials/
 
 ## Pracovní log
+
+- 2026-07-25: Doplněna příloha o změně pravidla automatizace po výjimkovém review bez nové černé skříňky: změnová věta „nově / protože / pořád nesmí“, kontrola datové hranice, malá testovací sada z výjimek, pilot oddělený od pravomoci, úklid starých whitelistů/exportů/pokynů, příklad support triage, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro úpravu pravidla automatizace po review. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
 - 2026-07-25: Doplněna příloha o review opakovaných výjimek automatizace bez džungle pravidel: spouštěče review podle vzoru výjimek, seskupení příčin, rozlišení opravy pravidla od produktové změny, rozhodovací karta review, úklid starých whitelistů, exportů, chatových pokynů a přístupů, příklad support triage, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro vyhodnocení opakovaných výjimek. Bez nových aktuálních externích tvrzení, navázáno na část o výjimkách automatizace, změně pravomoci, provozní kartě, runbooku, přístupové hygieně a privacy-first minimalizaci; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
 - 2026-07-25: Doplněna příloha o výjimkách z automatizace bez skrytého obcházení pravidel: rozlišení datových, pravidlových, vztahových, provozních, produktových a bezpečnostních výjimek, výjimková karta, ochrana ručního override před rozšířením dat, pravidlo nepsat novou podmínku podle každého speciálního případu, zavírací verdikty, příklad billing reminderu s VIP výjimkou, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro řízení výjimek automatizace. Bez nových aktuálních externích tvrzení, navázáno na části o změně pravomoci automatizace, kontrole po pilotu, ručním override, přístupové hygieně, auditní stopě a privacy-first minimalizaci; script pro tento běh hlásil `webOk: true` a HTTP status `200`.
