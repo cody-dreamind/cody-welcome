@@ -178,6 +178,7 @@ Když se nechceš vracet do celé knihy, hledej konkrétní nástroj podle výst
 | Ověřit dokumentační změnu po lekci bez falešné jistoty | „kontrola dokumentace po lekci“, „dokumentační změna funguje“ nebo „souběžná pravda v dokumentaci“ | krátká kontrola, že nový text pomáhá ve skutečné práci, neunikly do něj interní detaily a staré odpovědi už neřídí rozhodnutí |
 | Udržet dokumentaci živou po ověřené změně | „údržba dokumentace“, „živá dokumentace“ nebo „dokumentace po kontrole“ | malý udržovací rytmus s vlastníkem, triggerem, archivací starých částí a kontrolou, že dokumentace dál řídí práci |
 | Zjednodušit dokumentaci, která už práci neřídí | „retence dokumentace“, „dokumentace stárne“ nebo „zbytečná dokumentace“ | zavírací karta, která rozhodne ponechat, zúžit, sloučit, archivovat nebo smazat text bez ztráty důležitého poučení |
+| Sloučit podobnou dokumentaci bez ztráty kontextu | „sloučení dokumentace“, „cílová pravda“ nebo „dokumentační merge“ | merge karta s cílovou stránkou, zachovanými důkazy, opravenými odkazy, hranicí sdílení a kontrolou po sloučení |
 
 Pravidlo pro práci s rejstříkem: otevři maximálně tři nalezené části, vyber jednu a zapiš výstup. Pokud po deseti minutách pořád skáčeš mezi odkazy, vrať se k tabulce „Kudy začít podle aktuální bolesti“ a zúž problém. E-book není buffet. Teda je, ale bez talíře si stejně odneseš jen chaos.
 
@@ -56089,6 +56090,138 @@ Výsledek: kratší veřejný návod, interní poznámka k rozhodnutí a smazan�
 
 Vyber jednu část dokumentace, na kterou tým už několik týdnů nesáhl, ale pořád se objevuje ve vyhledávání, šablonách nebo interních odkazech. Vyplň zavírací kartu a rozhodni její stav. Pokud ji ponecháš, doplň vlastníka, trigger a privacy hranici. Pokud ji zúžíš nebo sloučíš, oprav aspoň jeden aktivní odkaz. Pokud ji archivuješ nebo smažeš, ověř jedno místo, odkud by se starý postup mohl vrátit.
 
+## Příloha: Sloučení dokumentace bez ztráty důkazů a odkazů
+
+Sloučení dokumentace vypadá jako redakční práce, ale u webu a SaaS je to často provozní změna. Když spojíš dvě podobné stránky špatně, tým nezíská jedno místo pravdy. Získá jednu novou stránku, dvě staré mentální mapy, rozbité odkazy a několik lidí, kteří pořád posílají původní šablonu. Krásná sbírka drobných omylů, které se pak tváří jako firemní kultura.
+
+Cílem sloučení není vyrobit nejdelší a nejúplnější dokument. Cílem je vytvořit jednu použitelnou cílovou pravdu, která pomáhá udělat práci, zachová důležité důkazy a smaže nebo archivuje části, které už jen udržují starý postup při životě.
+
+> Codyho komentář: Dokumentační merge není literární festival. Pokud po něm člověk neví rychleji co udělat, jen jsme přesunuli zmatek do hezčího nadpisu.
+
+### Začni cílovou větou
+
+Než začneš přenášet odstavce, napiš jednu větu, kterou má výsledná stránka řídit. Bez ní budeš spojovat text podle toho, co je napsané nejhezčeji, ne podle toho, co má pomoct práci.
+
+Dobrá cílová věta:
+
+| Situace | Cílová věta |
+| --- | --- |
+| Dva návody pro onboarding administrátora | Nový administrátor má bezpečně pozvat první lidi a nezačít importem celého datasetu. |
+| Veřejné FAQ a interní support makro o exportu dat | Zákazník má vědět, jak export získá, zatímco support má znát ověřovací a retenční kroky. |
+| Starý runbook a nová incidentová lekce | Nový vlastník má umět poznat incident, spustit ruční postup a uklidit datovou stopu. |
+| Pricing poznámky v sales dokumentu a na webu | Zákazník má pochopit rozdíl plánů bez hovoru, sales má používat stejný jazyk. |
+
+Pokud máš dvě různé cílové věty, neslučuj všechno na jednu stránku. Pravděpodobně potřebuješ veřejný návod a interní provozní poznámku, nebo hlavní stránku a krátký rozhodovací záznam. Jedna stránka pravdy neznamená jedna stránka pro všechna publika.
+
+### Vyber cílovou stránku podle budoucí práce
+
+Nech přežít tu stránku, která má nejlepší šanci řídit budoucí práci. Historie, délka a počet odkazů jsou signály, ne automatické rozhodnutí.
+
+Při výběru cílové stránky se ptej:
+
+- Kterou URL nebo cestu už lidé přirozeně hledají?
+- Který dokument je blíž skutečnému workflow?
+- Který text má vlastníka, který ho dokáže udržet?
+- Která stránka má bezpečnější hranici sdílení?
+- Která verze obsahuje aktuální veřejný slib?
+- Která verze jde opravit bez odhalení interních detailů?
+
+Praktické pravidlo: pokud je veřejná stránka stará, ale má stabilní odkazy, často ji ponech jako cílovou URL a přepiš obsah. Pokud je interní dokument přesnější, nepřelévej ho celý ven. Vytáhni pravidlo, důkazy a bezpečné kroky; provozní detaily nech uvnitř.
+
+### Udělej merge kartu
+
+Sloučení bez karty svádí k tomu, že se zachová všechno „pro jistotu“. Karta nutí rozhodnout, co je pravda, co je důkaz a co je jen starý sediment.
+
+Minimální merge karta:
+
+| Pole | Co zapsat |
+| --- | --- |
+| Cílová pravda | Jedna věta, jakou práci má výsledný text řídit. |
+| Cílová stránka | URL, soubor nebo dokument, který přežije jako hlavní místo. |
+| Sloučené zdroje | Stránky, šablony, makra, runbooky nebo poznámky, ze kterých se bere obsah. |
+| Zachovat | Pravidla, příklady, důkazy, rozhodnutí a odkazy, které dál pomáhají. |
+| Nepřenášet | Osobní údaje, interní URL, screenshoty s daty, staré ceny, neplatné sliby, debug výpisy. |
+| Archivovat | Co má zůstat jen jako historická stopa a kde. |
+| Přesměrovat/opravit | Staré odkazy, navigace, help centrum, RSS, changelog, onboarding, support makra. |
+| Ověřit | Jak poznáme, že lidé používají cílovou stránku a ne starou pravdu. |
+
+Tahle karta má být kratší než výsledná stránka. Pokud karta začne růst do románu, sloučení má příliš velký rozsah. Rozděl ho na dvě změny: nejdřív sjednoť pravidlo, potom uklízej historické poznámky.
+
+### Zachovej důkazy, ne celý příběh
+
+Při sloučení bývá největší strach z toho, že se ztratí kontext. Oprávněně. Starý dokument často obsahuje důležité „proč“, které novějšímu textu chybí. Jenže kontext není totéž co kompletní archeologie.
+
+Zachovej:
+
+- rozhodnutí, které pořád omezuje dnešní práci,
+- důkaz, proč existuje bezpečnostní nebo privacy hranice,
+- příklad, podle kterého člověk pozná správné chování,
+- datum nebo verzi, od které pravidlo platí,
+- odkaz na aktuální zdroj pravdy.
+
+Nezachovávej:
+
+- jména lidí, kteří tehdy něco pokazili nebo ručně opravovali,
+- konkrétní zákaznické údaje,
+- screenshoty adminu se skutečnými daty,
+- staré exportní soubory nebo cesty k nim,
+- debaty, které už nemění dnešní rozhodnutí,
+- interní workaround, který by čtenář mohl začít znovu používat.
+
+Když potřebuješ vysvětlit původ pravidla, napiš jednu větu: „Toto pravidlo vzniklo po změně importního toku, aby administrátor nezačínal nahráním celého datasetu před ověřením první hodnoty.“ To stačí. Nemusíš přibalit celé drama z původního Slack vlákna. Dokumentace má řídit práci, ne dělat muzeum napětí.
+
+### Oprav odkazy jako součást sloučení
+
+Sloučení je hotové až po úklidu cest. V privacy-first provozu to platí dvojnásob: staré odkazy mohou dál vést k textům, které doporučují zbytečný sběr dat, starý export nebo neplatný veřejný slib.
+
+Kontroluj tyto nosiče:
+
+- navigace v dokumentaci a help centru,
+- interní vyhledávání a názvy souborů,
+- support makra a uložené odpovědi,
+- sales FAQ, nabídkové šablony a onboarding podklady,
+- produktové prázdné stavy, tooltipy a e-maily,
+- changelog, release notes, RSS a veřejné odkazy z webu,
+- runbooky, alert popisy, issue šablony a rozhodovací logy.
+
+Nemusíš opravit celý internet. Potřebuješ opravit místa, která reálně řídí další práci. Pokud stará URL zůstává kvůli externím odkazům, dej na ni krátkou archivní poznámku nebo přesměrování na cílovou stránku. Nenechávej ji vypadat jako paralelní aktuální návod.
+
+### Příklad: Sloučení exportní dokumentace
+
+SaaS tým má tři texty o exportu dat: veřejné FAQ, interní support makro a starou poznámku z migrace. Veřejné FAQ říká jen „kontaktujte podporu“. Support makro obsahuje ověření identity, exportní formát a ruční kontrolu. Stará poznámka z migrace obsahuje užitečné poučení, ale taky staré odkazy na dočasné úložiště.
+
+Merge karta:
+
+| Pole | Zápis |
+| --- | --- |
+| Cílová pravda | Zákazník má vědět, jak o export požádat, co dostane a jak dlouho dočasný export existuje. |
+| Cílová stránka | Veřejné FAQ „Export dat“. |
+| Sloučené zdroje | Veřejné FAQ, support makro, migrační poznámka. |
+| Zachovat | Popis formátu, ověření oprávnění, retenční lhůta dočasného exportu, kontakt na podporu. |
+| Nepřenášet | Interní ticket ID, staré úložiště, jména zákazníků, ruční debug kroky. |
+| Archivovat | Migrační poznámku jako interní lekci se stavem „neaktuální postup“. |
+| Přesměrovat/opravit | Support makro, onboarding admina, trust FAQ, sales odpověď na due diligence. |
+| Ověřit | Při příštích třech exportních dotazech support pošle veřejné FAQ a interní makro použije jen pro ověření. |
+
+Výsledek: zákazník dostane jasnější veřejnou odpověď, support má interní postup s omezeným publikem a stará migrační stopa už neukazuje na dočasné technické řešení. Tým zachoval důkaz i pracovní pravidlo, ale nezveřejnil víc detailů, než je potřeba.
+
+### Checklist: Sloučení dokumentace
+
+- [ ] Napsal jsem jednu cílovou větu, jakou práci má výsledná stránka řídit.
+- [ ] Vybral jsem cílovou stránku podle budoucí práce, ne podle sentimentu.
+- [ ] Rozlišil jsem veřejnou, sdílenou a interní vrstvu.
+- [ ] Zachoval jsem pravidla, důkazy a příklady, které dál pomáhají rozhodování.
+- [ ] Nepřenesl jsem osobní údaje, interní URL, screenshoty s daty, staré ceny ani neplatné sliby.
+- [ ] Staré dokumenty jsou přesměrované, archivované nebo smazané tak, aby nepůsobily jako aktuální postup.
+- [ ] Opravil jsem aspoň nejdůležitější odkazy, šablony, makra a onboardingové cesty.
+- [ ] Výsledná stránka má vlastníka, trigger revize a privacy hranici.
+- [ ] Sloučení nezvětšilo rozsah sbíraných nebo sdílených dat.
+- [ ] Existuje krátká kontrola po sloučení, která ověří, že stará pravda už neřídí práci.
+
+### Mini úkol
+
+Najdi dvě podobné dokumentační stránky, které odpovídají na stejnou otázku jiným jazykem. Napiš merge kartu a vyber jednu cílovou stránku. Přenes jen jednu až tři části, které opravdu pomáhají práci: pravidlo, příklad nebo důkaz. Potom oprav jeden aktivní odkaz a jednu šablonu, která by jinak dál posílala lidi na starý text. Na konec napiš kontrolní větu: „Za dva týdny ověříme, že ___ už používá ___ místo ___.“
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -56281,6 +56414,8 @@ Vyber jednu část dokumentace, na kterou tým už několik týdnů nesáhl, ale
 - Nielsen Norman Group: Onboarding Tutorials vs. Contextual Help - rozdíl mezi úvodními tutoriály a kontextovou pomocí: https://www.nngroup.com/articles/onboarding-tutorials/
 
 ## Pracovní log
+
+- 2026-07-26: Doplněna příloha o sloučení dokumentace bez ztráty důkazů a odkazů: cílová věta, výběr cílové stránky podle budoucí práce, merge karta, zachování důkazů bez přenosu interní historie, úklid odkazů a šablon, příklad exportní dokumentace, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro dokumentační merge. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
 - 2026-07-26: Doplněna příloha o retenci dokumentace bez věčného skladování textů: rozlišení hodnoty textů podle dnešní práce, pět stavů ponechat/zúžit/sloučit/archivovat/smazat, zavírací karta dokumentu, zúžení starého textu, sloučení jako změna navigace, čitelně mrtvý archiv, příklad úklidu staré onboardingové dokumentace, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro zjednodušení dokumentace, která už práci neřídí. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
