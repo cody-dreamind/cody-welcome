@@ -179,6 +179,7 @@ Když se nechceš vracet do celé knihy, hledej konkrétní nástroj podle výst
 | Udržet dokumentaci živou po ověřené změně | „údržba dokumentace“, „živá dokumentace“ nebo „dokumentace po kontrole“ | malý udržovací rytmus s vlastníkem, triggerem, archivací starých částí a kontrolou, že dokumentace dál řídí práci |
 | Zjednodušit dokumentaci, která už práci neřídí | „retence dokumentace“, „dokumentace stárne“ nebo „zbytečná dokumentace“ | zavírací karta, která rozhodne ponechat, zúžit, sloučit, archivovat nebo smazat text bez ztráty důležitého poučení |
 | Sloučit podobnou dokumentaci bez ztráty kontextu | „sloučení dokumentace“, „cílová pravda“ nebo „dokumentační merge“ | merge karta s cílovou stránkou, zachovanými důkazy, opravenými odkazy, hranicí sdílení a kontrolou po sloučení |
+| Ověřit dokumentační merge po prvním používání | „kontrola po sloučení dokumentace“, „merge review“ nebo „stará pravda po sloučení“ | krátké ověření, že cílová stránka řídí práci, staré odkazy mlčí a nevznikla širší datová ani publikační stopa |
 
 Pravidlo pro práci s rejstříkem: otevři maximálně tři nalezené části, vyber jednu a zapiš výstup. Pokud po deseti minutách pořád skáčeš mezi odkazy, vrať se k tabulce „Kudy začít podle aktuální bolesti“ a zúž problém. E-book není buffet. Teda je, ale bez talíře si stejně odneseš jen chaos.
 
@@ -56222,6 +56223,144 @@ Výsledek: zákazník dostane jasnější veřejnou odpověď, support má inter
 
 Najdi dvě podobné dokumentační stránky, které odpovídají na stejnou otázku jiným jazykem. Napiš merge kartu a vyber jednu cílovou stránku. Přenes jen jednu až tři části, které opravdu pomáhají práci: pravidlo, příklad nebo důkaz. Potom oprav jeden aktivní odkaz a jednu šablonu, která by jinak dál posílala lidi na starý text. Na konec napiš kontrolní větu: „Za dva týdny ověříme, že ___ už používá ___ místo ___.“
 
+## Příloha: Kontrola po sloučení dokumentace bez návratu staré pravdy
+
+Sloučení dokumentace není hotové v den, kdy se uloží nová stránka. Hotové je až ve chvíli, kdy podle ní někdo opravdu udělá práci a staré texty přestanou řídit rozhodování. Jinak má tým jen hezčí cílovou stránku a k ní neviditelný přívěs starých odkazů, maker, screenshotů a zvyků. To je zmatek v čisté košili.
+
+Cílem kontroly po sloučení není trestat autora merge. Cílem je ověřit, že nová cílová pravda obstála v běžném provozu: člověk ji najde, pochopí, použije a nepřenese si vedle ní starý postup bokem.
+
+> Codyho komentář: Nejlepší dokumentační merge je nudný. Lidé ho používají, nikdo se neptá „která verze platí“ a staré odkazy už nemají dramatickou kariéru.
+
+### Vrať se k merge kartě
+
+Kontrola začíná původní merge kartou. Bez ní budeš hodnotit dojem z nové stránky, ne slib, kvůli kterému sloučení vzniklo.
+
+Projdi hlavně tato pole:
+
+- cílová pravda,
+- cílová stránka,
+- sloučené zdroje,
+- nepřenesené části,
+- opravené nebo přesměrované odkazy,
+- ověření zapsané při sloučení.
+
+Ke každému poli si napiš stav jednou větou. Nepotřebuješ velký audit. Potřebuješ zjistit, jestli se změna chová tak, jak měla.
+
+Příklad kontrolní věty:
+
+| Pole | Kontrolní zápis |
+| --- | --- |
+| Cílová pravda | Support při exportním dotazu posílá veřejné FAQ a interní makro používá jen pro ověření oprávnění. |
+| Cílová stránka | Veřejné FAQ je dostupné z help centra i trust stránky. |
+| Staré zdroje | Stará migrační poznámka je archivovaná a označená jako neaktuální postup. |
+| Riziko | V jednom sales dokumentu zůstal starý odkaz na původní interní poznámku. |
+
+Když se nedá dohledat původní merge karta, nepanikař. Udělej ji zpětně z výsledku: co mělo být cílovou pravdou, které zdroje se slučovaly, kde mohly zůstat staré odkazy a kdo podle výsledku pracuje.
+
+### Ověř jeden reálný pracovní průchod
+
+Nejrychlejší test dokumentace je obyčejná práce. Vyber jednu situaci, kterou měla nová stránka zlepšit, a projdi ji s člověkem, který ji skutečně používá. Nech ho najít odpověď, udělat krok nebo připravit odpověď zákazníkovi podle nové stránky.
+
+Sleduj:
+
+- našel cílovou stránku bez znalosti přesné URL?
+- pochopil, že stará stránka už není aktuální?
+- chyběl mu důkaz, příklad nebo hranice sdílení?
+- musel si pomoct starou šablonou, chatem nebo soukromou poznámkou?
+- vznikl nový export, screenshot nebo kopie jen kvůli nejasnosti v dokumentaci?
+
+Tohle jde udělat za dvacet minut. Není potřeba nahrávat obrazovku, profilovat čtenáře ani zavádět nový analytický nástroj. Stačí pozorování, tři poznámky a jedno rozhodnutí.
+
+Privacy-first pravidlo: při průchodu nepoužívej reálná zákaznická data, pokud to není nezbytné. Pro support odpovědi, onboarding a provozní návody často stačí anonymizovaný příklad nebo prázdný testovací účet.
+
+### Najdi starou pravdu v aktivních nosičích
+
+Starý dokument se často nevrací přes URL. Vrací se přes návyk. Někdo má uložené makro, někdo používá starý screenshot, někde zůstal odkaz v onboardingovém e-mailu a někdo má v záložkách interní poznámku. Dokumentace pak papírově vypadá uklizeně, ale provoz dál jede podle minulosti.
+
+Projdi nejmenší realistický okruh:
+
+- navigaci dokumentace a interní vyhledávání,
+- support makra a uložené odpovědi,
+- sales šablony, nabídky a due diligence odpovědi,
+- onboardingové e-maily, produktové tooltipy a prázdné stavy,
+- runbooky, issue šablony a checklisty,
+- RSS, changelog, sitemap nebo veřejné release poznámky, pokud se sloučení dotklo veřejného obsahu.
+
+U každého nálezu rozhodni:
+
+| Nález | Co s ním |
+| --- | --- |
+| Starý odkaz na cílově stejnou odpověď | Přesměrovat nebo opravit na cílovou stránku. |
+| Staré makro s platnou interní částí | Rozdělit: veřejnou odpověď posílat ven, interní kroky nechat v řízené vrstvě. |
+| Starý screenshot s daty | Smazat nebo nahradit anonymizovanou ukázkou. |
+| Starý veřejný slib | Opravit text, nebo otevřít produktový problém, pokud slib nejde splnit. |
+| Historická poznámka s důležitým důkazem | Archivovat s jasným stavem a odkazem na aktuální pravdu. |
+
+Codyho praktické pravidlo: oprav nejdřív nosiče, které lidé používají při práci pod tlakem. Při incidentu, obchodním hovoru nebo support frontě nikdo nebude filozofovat nad informační architekturou. Klikne na první známý odkaz.
+
+### Zkontroluj, že merge nerozšířil publikum
+
+Při sloučení se snadno stane drobná nepříjemnost: interní detail se dostane do veřejné stránky, sdílený dokument začne být dostupný širší skupině, nebo se starý export připojí jako „užitečná příloha“. To není redakční chyba. To je privacy problém.
+
+Po sloučení ověř:
+
+- kdo může číst cílovou stránku,
+- zda se nezměnila práva k přílohám,
+- jestli odkazy nevedou na interní systémy,
+- zda příklady neobsahují osobní údaje nebo zákaznické kontexty,
+- jestli veřejná verze neprozrazuje provozní detail, který patří jen do interního runbooku,
+- zda archiv staré stránky není indexovaný nebo sdílený jako aktuální návod.
+
+Pokud se publikum rozšířilo, neřeš to kosmetikou. Rozděl obsah na dvě vrstvy: veřejnou odpověď a interní provozní doplněk. U veřejné části ponech to, co člověk potřebuje pro rozhodnutí. U interní části nech ověřovací kroky, přístupové hranice a provozní poznámky.
+
+### Rozhodni stav po kontrole
+
+Kontrola má končit verdiktem, ne neurčitým „ještě to sledujeme“. Použij jeden z těchto stavů:
+
+| Verdikt | Kdy ho použít | Další krok |
+| --- | --- | --- |
+| Zavřít | Cílová stránka řídí práci a staré nosiče jsou uklizené. | Zapsat datum kontroly a další trigger revize. |
+| Opravit odkazy | Obsah je správný, ale lidé pořád narážejí na staré cesty. | Opravit aktivní odkazy, makra a navigaci. |
+| Zúžit cílovou stránku | Stránka je moc dlouhá nebo míchá publika. | Oddělit veřejnou a interní vrstvu. |
+| Vrátit část kontextu | Sloučení odstranilo důkaz nebo pravidlo, které lidem chybí. | Doplnit krátký důkaz, příklad nebo rozhodovací větu. |
+| Otevřít produktový problém | Dokumentace se snaží vysvětlit problém, který má opravit produkt. | Zapsat backlogovou kartu a v dokumentaci přiznat současný stav. |
+| Znovu sloučit | Po kontrole existují dvě platné pravdy. | Udělat menší merge se stejnou cílovou větou. |
+
+Verdikt napiš krátce. Důležitější než krásný zápis je to, aby další člověk věděl, jestli se má řídit cílovou stránkou a co už nemá používat.
+
+### Příklad: Kontrola exportní dokumentace po sloučení
+
+Tým před dvěma týdny sloučil veřejné FAQ o exportu dat, interní support makro a starou migrační poznámku. Cílem bylo, aby zákazník dostal jasnou veřejnou odpověď a support nepoužíval starý ruční postup.
+
+Kontrola:
+
+| Oblast | Zjištění |
+| --- | --- |
+| Pracovní průchod | Support podle nového FAQ připravil odpověď za pět minut a nemusel dohledávat starý ticket. |
+| Staré odkazy | V jedné nabídkové šabloně zůstal odkaz na starou migrační poznámku. |
+| Publikum | Veřejné FAQ neobsahuje interní úložiště ani zákaznické příklady. |
+| Chybějící kontext | Supportu chyběla jedna věta, kdy požadovat silnější ověření oprávnění. |
+| Datová stopa | Nevznikl nový export ani screenshot, test proběhl na anonymizovaném příkladu. |
+
+Verdikt: Opravit odkazy a vrátit část kontextu. Nabídková šablona se přepíše na veřejné FAQ, interní makro dostane jednu rozhodovací větu k silnějšímu ověření a stará migrační poznámka zůstane archivovaná. Po dalším exportním dotazu se karta zavře, pokud support nepoužije starý postup.
+
+### Checklist: Kontrola po sloučení dokumentace
+
+- [ ] Vrátil jsem se k původní merge kartě nebo ji zpětně doplnil.
+- [ ] Ověřil jsem jeden reálný pracovní průchod podle cílové stránky.
+- [ ] Zkontroloval jsem aktivní nosiče staré pravdy: odkazy, makra, šablony, onboarding, runbooky nebo veřejné distribuční stopy.
+- [ ] Staré dokumenty jsou archivované, přesměrované, smazané nebo jasně označené jako neaktuální.
+- [ ] Sloučení nerozšířilo publikum interních detailů.
+- [ ] Příklady, screenshoty a přílohy neobsahují osobní údaje ani zákaznické kontexty navíc.
+- [ ] Cílová stránka má vlastníka a trigger další revize.
+- [ ] Kontrola skončila jasným verdiktem.
+- [ ] Pokud dokumentace zakrývá produktový problém, vznikla backlogová karta místo dalšího vysvětlování.
+- [ ] Napsal jsem jednu větu, podle které další člověk pozná, co už je aktuální pravda.
+
+### Mini úkol
+
+Vezmi poslední dokumentační sloučení a projdi ho za dvacet minut. Najdi jeden člověčí průchod, jeden aktivní starý odkaz nebo šablonu a jednu privacy hranici. Potom napiš verdikt: zavřít, opravit odkazy, zúžit stránku, vrátit část kontextu, otevřít produktový problém nebo znovu sloučit. Pokud najdeš starou pravdu v aktivním nosiči, oprav právě ten jeden nosič jako první. To je malá práce s velkým hygienickým účinkem, což je přesně ten typ nudy, který šetří budoucí nervy.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -56414,6 +56553,8 @@ Najdi dvě podobné dokumentační stránky, které odpovídají na stejnou otá
 - Nielsen Norman Group: Onboarding Tutorials vs. Contextual Help - rozdíl mezi úvodními tutoriály a kontextovou pomocí: https://www.nngroup.com/articles/onboarding-tutorials/
 
 ## Pracovní log
+
+- 2026-07-26: Doplněna příloha o kontrole po sloučení dokumentace bez návratu staré pravdy: návrat k merge kartě, ověření jednoho reálného pracovního průchodu, hledání staré pravdy v aktivních nosičích, kontrola publika a privacy hranice, verdikty po kontrole, příklad exportní dokumentace, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro ověření dokumentačního merge po prvním používání. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
 - 2026-07-26: Doplněna příloha o sloučení dokumentace bez ztráty důkazů a odkazů: cílová věta, výběr cílové stránky podle budoucí práce, merge karta, zachování důkazů bez přenosu interní historie, úklid odkazů a šablon, příklad exportní dokumentace, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro dokumentační merge. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
