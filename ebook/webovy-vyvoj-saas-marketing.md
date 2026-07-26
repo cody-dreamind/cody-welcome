@@ -185,6 +185,7 @@ Když se nechceš vracet do celé knihy, hledej konkrétní nástroj podle výst
 | Zkontrolovat změnu publika dokumentace po prvním použití | „kontrola publika dokumentace“, „publikum po publikaci“ nebo „veřejná dokumentace po změně“ | kontrolní karta, která ověří čtenáře, citlivé detaily, odkazy, sdílení, indexaci a dopad bez sledování lidí |
 | Stáhnout nebo zúžit veřejnou dokumentaci bez ztráty důvěry | „stažení veřejné dokumentace“, „zúžení veřejného slibu“ nebo „veřejný text končí“ | stahovací karta s důvodem, náhradní odpovědí, opravou odkazů, archivem a kontrolou starých slibů |
 | Uklidit šablony po stažení dokumentace bez návratu starého slibu | „šablony po stažení dokumentace“, „starý slib v makru“ nebo „support šablony po změně“ | krátký úklid maker, obchodních textů, onboardingových zpráv, automatických odpovědí a interních snippetů po změně veřejné pravdy |
+| Ověřit první odpovědi po změně šablon bez návratu starého slibu | „kontrola odpovědí po změně šablon“, „první odpovědi po stažení“ nebo „makro v provozu“ | kontrola několika skutečných odpovědí, navazujících dotazů, starých odkazů, automatizací a datové hranice po úpravě šablon |
 
 Pravidlo pro práci s rejstříkem: otevři maximálně tři nalezené části, vyber jednu a zapiš výstup. Pokud po deseti minutách pořád skáčeš mezi odkazy, vrať se k tabulce „Kudy začít podle aktuální bolesti“ a zúž problém. E-book není buffet. Teda je, ale bez talíře si stejně odneseš jen chaos.
 
@@ -57162,6 +57163,126 @@ Výsledek: support nepůsobí, že opravuje zákazníka za vlastní nepořádek,
 
 Vyber jednu staženou nebo zúženou dokumentaci a najdi tři místa, kde se její text mohl propsat do opakované odpovědi. Za dvacet minut oprav jen nejrizikovější šablonu: přepiš aktuální pravdu, odkaz, další krok a hranici sdílení. Potom starou šablonu smaž nebo jasně označ jako neplatnou. Pokud ji necháš vedle nové „pro jistotu“, právě jsi vytvořil dvě pravdy. A dvě pravdy jsou v supportu většinou jen pomalý způsob, jak vyrobit třetí problém.
 
+## Příloha: Kontrola odpovědí po změně šablon bez návratu starého slibu
+
+Přepsaná šablona ještě není ověřená šablona. Vypadá dobře v dokumentu, ale skutečný test přijde až ve chvíli, kdy ji použije support, sales, onboarding nebo automatizace v normálním pracovním provozu. Tam se ukáže, jestli text opravdu vede člověka správně, jestli tým nesahá po starém makru a jestli se kvůli novému bezpečnějšímu znění nezačaly posílat další ruční dovysvětlovací e-maily plné detailů, které měly zůstat interní.
+
+Cílem kontroly není špehovat jednotlivé zákazníky ani vyrábět performance skóre pro support. Cílem je zjistit, jestli změna veřejné pravdy přežila první kontakt s realitou.
+
+> Codyho komentář: Šablony se často hodnotí podle toho, jestli se hezky čtou v editoru. Jenže šablona není báseň na lednici. Je to provozní nástroj. Když po ní zákazník pošle tři navazující dotazy, nástroj možná není poetický, ale hlavně není hotový.
+
+### Nastav malé kontrolní okno
+
+Kontrolu naplánuj hned při změně šablony. Bez toho se na ni tým vrátí až ve chvíli, kdy někdo najde rozpor v zákaznickém vlákně. To už je pozdě a nepříjemně dramatické.
+
+Stačí jednoduché okno:
+
+| Typ šablony | Kdy kontrolovat | Minimum vzorku |
+| --- | --- | --- |
+| Bezpečnost, export, výmaz, billing spor nebo SLA | po 3-5 použitích nebo do 14 dnů | několik posledních odpovědí ručně |
+| Sales follow-up a procurement odpovědi | po prvních 2-3 použitích | odeslané odpovědi plus navazující dotazy |
+| Onboarding a produktové zprávy | po jedné krátké vlně nových uživatelů | odpovědi, odhlášení, support dotazy a interní poznámky |
+| Automatická potvrzení formulářů | po prvním týdnu | doručitelnost, chybové odpovědi, ruční zásahy |
+| Interní snippety a issue šablony | při prvním použití v práci | zda vedly ke správnému úkolu nebo rozhodnutí |
+
+Kontrolní okno musí mít vlastníka. Ne „support se podívá“, ale „Jana v pátek projde posledních pět odpovědí k exportu“. Vlastník nekontroluje lidi. Kontroluje systém, který jim dal text do ruky.
+
+### Čti celé vlákno, ne jen odeslanou větu
+
+Samotná odpověď může vypadat čistě a přesto nefungovat. Proto kontroluj i kontext před a po ní.
+
+Ptej se:
+
+- Jaký dotaz člověk skutečně položil?
+- Odpovídá šablona na jeho pracovní situaci, nebo jen recituje interní politiku?
+- Poslal člověk navazující dotaz, protože mu chyběl další krok?
+- Neopakoval support starou URL, starý název funkce nebo starý slib v ručně dopsané větě?
+- Nevznikla kvůli opatrnějšímu textu nová nejasnost, kterou lidé obcházejí neformálně?
+
+Praktický příklad: zákazník se ptá, jak získá export dat před zrušením účtu. Nová šablona správně říká, že export se ověřuje podle role a že dočasný soubor má omezenou dostupnost. Jenže support k tomu ručně dopíše „většinou je hotovo do hodiny“, protože to tak bývalo ve starém návodu. Kontrola neoznačí člověka za problém. Označí starý zvyk, který potřebuje lepší nápovědu v šabloně.
+
+### Hledej čtyři typy selhání
+
+Po změně šablony se nejčastěji vrací čtyři typy problému. Když je pojmenuješ předem, kontrola je rychlejší a méně subjektivní.
+
+| Selhání | Jak vypadá | Typická oprava |
+| --- | --- | --- |
+| Stará pravda | Odpověď obsahuje starou URL, termín, cenu, funkci, SLA nebo bezpečnostní detail. | Smazat starý nosič, opravit snippet, přidat varování do šablony. |
+| Prázdná opatrnost | Text nic neslibuje, ale člověku nedá použitelný další krok. | Doplnit konkrétní bezpečný postup a odpovědného kanál. |
+| Přesdílení | Odpověď vysvětluje interní systémy, názvy jobů, bucketů, ruční výjimky nebo detaily incidentu. | Ořezat provozní detail a ponechat jen dopad, dostupnost a další krok. |
+| Obcházení | Tým šablonu nepoužívá, protože je moc dlouhá, nepřesná nebo schovaná. | Zkrátit, dát ji jako výchozí, odstranit staré oblíbené makro. |
+
+Dobrá kontrola nehledá dokonalý text. Hledá opakovatelnost. Pokud tři lidé použijí šablonu třemi odlišnými způsoby, problém není v jejich kreativitě. Problém je v tom, že šablona nevede dostatečně pevně.
+
+### Odděl opravu textu od opravy reality
+
+Někdy kontrola ukáže, že šablona je v pořádku, ale produkt nebo provoz ne. To je nepříjemné, ale užitečné.
+
+Rozlišuj:
+
+| Nález | Co znamená |
+| --- | --- |
+| Lidé nerozumí dalšímu kroku. | Text pravděpodobně potřebuje přepsat. |
+| Lidé se ptají na stejný chybějící detail. | Veřejná dokumentace nebo produktové UI možná neříká dost. |
+| Support musí ručně ověřovat něco, co by mělo být v produktu. | Nejde jen o šablonu, ale o produktovou mezeru. |
+| Sales slibuje výjimku, kterou support neumí bezpečně splnit. | Je potřeba obchodní pravidlo, ne další makro. |
+| Automatizace posílá správný text špatnému publiku. | Problém je routing nebo trigger, ne formulace. |
+
+Privacy-first pointa: neřeš nejasnost tím, že začneš sbírat více osobních dat „pro jistotu“. Nejdřív oprav text, proces nebo produktový stav. Další data přidej až tehdy, když umíš říct, jaké rozhodnutí bez nich nejde udělat.
+
+### Udělej krátký kontrolní záznam
+
+Z kontroly nemá vzniknout report na deset stran. Stačí karta, která se dá najít za půl roku.
+
+Šablona kontrolního záznamu:
+
+| Pole | Zápis |
+| --- | --- |
+| Změněná šablona | Název makra, automatizace nebo sales textu. |
+| Důvod změny | Jaká veřejná dokumentace, slib nebo postup se změnil. |
+| Kontrolovaný vzorek | Kolik odpovědí, z jakého období a z jakých kanálů. |
+| Nálezy | Stará pravda, prázdná opatrnost, přesdílení, obcházení nebo bez nálezu. |
+| Oprava | Co se upravilo v textu, odkazu, automatizaci, routingu nebo dokumentaci. |
+| Co dál neměříme | Jaké detailní sledování lidí jsme vědomě nepřidali. |
+| Verdikt | Zavřít, opravit a znovu ověřit, předat do produktu, předat do sales pravidla, nebo vypnout. |
+
+Tahle karta je užitečnější než anonymní poznámka „makro vypadá OK“. Říká, co bylo skutečně zkontrolované a kde končí odpovědnost této iterace.
+
+### Příklad: Exportní makro po dvou týdnech
+
+Tým přepsal support makro po stažení starého veřejného návodu k exportu dat. Po dvou týdnech prošel posledních šest odpovědí k exportu.
+
+Kontrolní záznam:
+
+| Pole | Zápis |
+| --- | --- |
+| Změněná šablona | Support makro „Žádost o export workspace“. |
+| Důvod změny | Starý veřejný návod byl stažen a nahrazen stručným FAQ. |
+| Kontrolovaný vzorek | 6 odpovědí za posledních 14 dní, support inbox a jeden sales forward. |
+| Nález 1 | Ve dvou odpovědích support ručně dopsal starý odhad času. |
+| Nález 2 | Jeden sales forward obsahoval staré PDF v příloze. |
+| Oprava | Makro doplněno o bezpečnou větu k očekávanému dalšímu kroku, staré PDF odebráno ze sales šablony, starý odhad času označen jako nepoužívat. |
+| Co dál neměříme | Nepřidáváme sledování otevření odpovědi ani profilování zákazníka podle citlivosti dotazu. |
+| Verdikt | Opravit a znovu ověřit za dalších 14 dní na třech odpovědích. |
+
+Výsledek není „všechno hotovo“. Výsledek je přesnější: hlavní šablona funguje, ale starý obchodní materiál ještě vracel neplatný slib. To je přesně důvod, proč se kontroluje provoz, ne jen Markdown.
+
+### Checklist: Kontrola odpovědí po změně šablon
+
+- [ ] Kontrolní okno bylo určeno už při změně šablony.
+- [ ] Vzorek obsahuje skutečné odpovědi, ne jen text šablony v editoru.
+- [ ] Kontrola čte i dotaz před odpovědí a navazující reakci po ní.
+- [ ] Hledal jsem starou pravdu, prázdnou opatrnost, přesdílení a obcházení.
+- [ ] Staré URL, PDF, oblíbená makra a automatizace nejsou pořád aktivní jako pohodlná zkratka.
+- [ ] Ručně dopsané věty nevracejí starý slib, který veřejná dokumentace stáhla.
+- [ ] Oprava rozlišuje textový problém od produktové, obchodní nebo routingové mezery.
+- [ ] Nepřidal jsem nové sledování lidí jen proto, abych ověřil čitelnost odpovědi.
+- [ ] Existuje krátký kontrolní záznam s verdiktem a případným dalším ověřením.
+
+### Mini úkol
+
+Vezmi jednu šablonu, kterou jste nedávno upravili po změně veřejné dokumentace. Najdi tři poslední skutečná použití a u každého označ jednu věc: „funguje“, „vrací starý slib“, „je moc prázdná“, „sdílí moc detailů“ nebo „tým ji obchází“. Potom oprav jen jednu nejčastější příčinu. Neinstaluj k tomu nový tracking. Když potřebuješ vědět, jestli odpověď mate lidi, často stačí přečíst, na co se ptali hned potom. Ano, revoluční metoda: otevřít oči.
+
 ## Zdroje
 
 - IETF RFC 9110: HTTP Semantics - význam HTTP přesměrování a stavů včetně `410 Gone` pro zdroje, které už nejsou dostupné: https://www.rfc-editor.org/rfc/rfc9110.html
@@ -57355,6 +57476,8 @@ Vyber jednu staženou nebo zúženou dokumentaci a najdi tři místa, kde se jej
 - Nielsen Norman Group: Onboarding Tutorials vs. Contextual Help - rozdíl mezi úvodními tutoriály a kontextovou pomocí: https://www.nngroup.com/articles/onboarding-tutorials/
 
 ## Pracovní log
+
+- 2026-07-26: Doplněna příloha o kontrole odpovědí po změně šablon bez návratu starého slibu: malé kontrolní okno, čtení celého zákaznického vlákna, čtyři typy selhání šablon, rozlišení textové opravy od produktové nebo obchodní mezery, kontrolní záznam, příklad exportního makra po dvou týdnech, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro ověření prvních odpovědí po úpravě support, sales, onboardingových a automatických šablon. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
 - 2026-07-26: Doplněna příloha o šablonách po stažení dokumentace bez návratu starého slibu: mapa nosičů starých odpovědí, prioritizace podle dopadu, přepis šablony podle nové pravdy, zvláštní kontrola automatizací, revize po prvních použitích, příklad starého exportního support makra, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro úklid support, sales, onboardingových a automatických šablon po změně veřejné dokumentace. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
