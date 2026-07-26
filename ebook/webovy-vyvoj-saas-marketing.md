@@ -180,6 +180,7 @@ Když se nechceš vracet do celé knihy, hledej konkrétní nástroj podle výst
 | Zjednodušit dokumentaci, která už práci neřídí | „retence dokumentace“, „dokumentace stárne“ nebo „zbytečná dokumentace“ | zavírací karta, která rozhodne ponechat, zúžit, sloučit, archivovat nebo smazat text bez ztráty důležitého poučení |
 | Sloučit podobnou dokumentaci bez ztráty kontextu | „sloučení dokumentace“, „cílová pravda“ nebo „dokumentační merge“ | merge karta s cílovou stránkou, zachovanými důkazy, opravenými odkazy, hranicí sdílení a kontrolou po sloučení |
 | Ověřit dokumentační merge po prvním používání | „kontrola po sloučení dokumentace“, „merge review“ nebo „stará pravda po sloučení“ | krátké ověření, že cílová stránka řídí práci, staré odkazy mlčí a nevznikla širší datová ani publikační stopa |
+| Předat vlastnictví sloučené dokumentace bez osiřelé pravdy | „předání sloučené dokumentace“, „nový vlastník dokumentace“ nebo „dokumentace po merge“ | předávací karta s vlastníkem, záskokem, revizním triggerem, přístupovou hranicí a prvním malým úkolem po převzetí |
 
 Pravidlo pro práci s rejstříkem: otevři maximálně tři nalezené části, vyber jednu a zapiš výstup. Pokud po deseti minutách pořád skáčeš mezi odkazy, vrať se k tabulce „Kudy začít podle aktuální bolesti“ a zúž problém. E-book není buffet. Teda je, ale bez talíře si stejně odneseš jen chaos.
 
@@ -56361,6 +56362,161 @@ Verdikt: Opravit odkazy a vrátit část kontextu. Nabídková šablona se přep
 
 Vezmi poslední dokumentační sloučení a projdi ho za dvacet minut. Najdi jeden člověčí průchod, jeden aktivní starý odkaz nebo šablonu a jednu privacy hranici. Potom napiš verdikt: zavřít, opravit odkazy, zúžit stránku, vrátit část kontextu, otevřít produktový problém nebo znovu sloučit. Pokud najdeš starou pravdu v aktivním nosiči, oprav právě ten jeden nosič jako první. To je malá práce s velkým hygienickým účinkem, což je přesně ten typ nudy, který šetří budoucí nervy.
 
+## Příloha: Předání sloučené dokumentace bez osiřelé pravdy
+
+Po sloučení dokumentace přichází nenápadný okamžik, kdy se tým může tvářit, že je hotovo. Staré stránky jsou archivované, cílový text existuje, odkazy jsou opravené a první kontrola nenašla velký průšvih. Jenže dokumentace bez vlastníka se začne kazit hned při další změně produktu, dodavatele, formuláře, SLA nebo zákaznické otázky.
+
+Předání vlastnictví není slavnostní akt s fanfárami. Je to krátká dohoda, kdo se o novou cílovou pravdu stará, kdy ji má znovu otevřít a co do ní nesmí přibýt ani ve jménu „užitečného kontextu“. Bez toho se z čerstvě uklizené stránky stane další archiv budoucího nepořádku. Gratuluju, právě jsme vynalezli recyklaci chaosu.
+
+Cílem této přílohy je převést sloučenou dokumentaci do běžného režimu tak, aby měla jasného vlastníka, záskok, trigger revize, přístupovou hranici a první malý úkol po převzetí.
+
+> Codyho komentář: Dokumentace nepotřebuje hrdinu, který si všechno pamatuje. Potřebuje člověka, který ví, kdy ji otevřít, co v ní změnit a kdy říct „tohle už je produktový problém, ne další odstavec“.
+
+### Urči vlastníka podle rozhodnutí, ne podle autora textu
+
+Autor sloučení nemusí být nejlepší dlouhodobý vlastník. Člověk, který text napsal, často rozumí historii. Vlastník má ale rozumět budoucí práci, kterou dokumentace řídí.
+
+Vyber vlastníka podle toho, kdo podle stránky dělá rozhodnutí:
+
+| Typ dokumentace | Přirozený vlastník | Proč |
+| --- | --- | --- |
+| Veřejné FAQ k exportu nebo zrušení účtu | Produkt nebo customer success | Vlastník zná zákaznický dopad a hranice slibu. |
+| Interní runbook pro incident | Provoz nebo tech lead | Vlastník řeší skutečné postupy pod tlakem. |
+| Trust odpovědi pro nákupní kontrolu | Bezpečnost, ops nebo člověk odpovědný za dodavatele | Vlastník hlídá fakta, přístupy a sdílení. |
+| Onboardingová dokumentace | Tým, který nového člověka uvádí do práce | Vlastník vidí, kde text pomáhá a kde jen překáží. |
+| Marketingová metodika | Marketing nebo produktový marketing | Vlastník pozná, kdy text přestane odpovídat realitě nabídky. |
+
+Pokud se o vlastnictví hlásí „všichni“, nemá ho nikdo. Zapiš jedno jméno nebo roli, která může rozhodnout o úpravě, archivaci nebo přesunu textu. Ostatní mohou dávat podněty. Vlastník zavírá smyčku.
+
+### Přidej záskok bez sdíleného admin účtu
+
+Dokumentace nesmí stát na jednom člověku, který je zrovna na dovolené, nemocný nebo po třech letech od projektu mentálně o dvě firmy dál. Ke každé důležité cílové stránce přidej záskok.
+
+Záskok nemusí znát celou historii. Musí umět:
+
+- najít cílovou stránku,
+- pochopit její pracovní účel,
+- ověřit poslední platný stav,
+- udělat malou opravu nebo otevřít navazující úkol,
+- poznat, kdy nesmí rozšířit publikum ani datový rozsah.
+
+Záskok není důvod rozdávat široká oprávnění. Pokud stránka žije ve veřejné dokumentaci, interní wiki nebo repozitáři, nastav přístupy podle práce. Člověk, který má jen navrhnout opravu, často nepotřebuje právo měnit produkční help centrum přímo. Pull request, review nebo komentář v řízeném systému je nudnější. A nudnější je tady kompliment.
+
+### Napiš předávací kartu
+
+Předávací karta má být kratší než samotná dokumentace. Její účel není zopakovat obsah, ale říct, jak se o stránku starat.
+
+Použij tento formát:
+
+| Pole | Co vyplnit |
+| --- | --- |
+| Cílová stránka | Kde je jedno místo pravdy. |
+| Pracovní účel | Jakou práci nebo rozhodnutí stránka řídí. |
+| Vlastník | Kdo může rozhodnout o změně, zúžení, sloučení nebo archivaci. |
+| Záskok | Kdo zvládne malou opravu nebo otevřít úkol. |
+| Revizní trigger | Jaká událost stránku znovu otevře. |
+| Privacy hranice | Co do stránky nepatří ani jako příklad. |
+| Přístupová hranice | Kdo smí číst, navrhovat a publikovat změny. |
+| Staré zdroje | Co bylo archivováno, přesměrováno nebo smazáno. |
+| První kontrola | Kdy a jak se ověří, že nový vlastník stránku opravdu používá. |
+
+Příklad:
+
+| Pole | Zápis |
+| --- | --- |
+| Cílová stránka | Veřejné FAQ: Export dat a zrušení účtu. |
+| Pracovní účel | Zákazník pochopí možnosti exportu a support ví, kdy ověřit oprávnění. |
+| Vlastník | Customer success lead. |
+| Záskok | Produktový manažer odpovědný za account settings. |
+| Revizní trigger | Změna exportního formátu, nové retenční pravidlo, opakovaný support dotaz nebo změna billing procesu. |
+| Privacy hranice | Žádné konkrétní zákaznické příklady, interní URL, screenshoty adminu ani výpisy databázových polí. |
+| Přístupová hranice | Veřejný text přes PR nebo review, interní makro jen pro support. |
+| Staré zdroje | Migrační poznámka archivovaná, staré makro nahrazené, nabídka upravená. |
+| První kontrola | Po dvou dalších exportních dotazech ověřit, že support použil nové FAQ a nevytvořil bokem nový návod. |
+
+Tahle karta se dá uložit do rozhodovacího logu, issue, wiki nebo přímo pod dokumentaci jako interní komentář. Důležité je, aby ji našel člověk, který bude stránku měnit příště.
+
+### Napoj revizi na změny, které dokumentaci kazí
+
+Kalendářová revize má své místo, ale sama nestačí. Dokumentace často zestárne ne proto, že uběhly tři měsíce, ale protože se změnil produkt, cena, dodavatel, formulář, role, export, integrační oprávnění nebo veřejný slib.
+
+Dobré revizní triggery:
+
+- změna produktové funkce, kterou dokumentace vysvětluje,
+- změna datového toku, retence, exportu nebo mazání,
+- nový dodavatel nebo změna subdodavatele,
+- změna pricingu, trialu, fakturace nebo SLA,
+- opakovaný support nebo sales dotaz na stejnou věc,
+- incident nebo provozní lekce, která mění postup,
+- změna přístupových rolí nebo onboardingového procesu,
+- veřejný text, který začal slibovat něco jiného než interní postup.
+
+Ke každému triggeru napiš nejmenší reakci. Například: „Při změně exportního formátu zkontrolovat veřejné FAQ, interní support makro a onboardingový tooltip.“ To je mnohem lepší než obecné „udržovat dokumentaci aktuální“. To umí říct každý. Problém je, že potom nikdo neví, co přesně otevřít.
+
+### Odděl drobné opravy od změny pravdy
+
+Nový vlastník musí vědět, co může změnit hned a co už vyžaduje rozhodnutí. Jinak bude každá čárka čekat na poradu, nebo naopak někdo potichu přepíše důležitý slib.
+
+Rozděl změny takto:
+
+| Typ změny | Příklad | Režim |
+| --- | --- | --- |
+| Drobnost | Překlep, jasnější věta, oprava odkazu na stejný obsah. | Vlastník opraví přímo nebo přes lehké review. |
+| Upřesnění | Doplnění hranice, kdy použít veřejný text a kdy interní postup. | Krátké review s člověkem, kterého se práce týká. |
+| Změna pravdy | Nový exportní formát, jiná retenční doba, jiný bezpečnostní slib. | Rozhodovací karta nebo produktový úkol před přepisem. |
+| Změna publika | Přesun interní části do veřejné dokumentace nebo naopak. | Privacy kontrola a schválení vlastníkem odpovědnosti. |
+| Archivace | Text už neřídí práci. | Zavírací záznam, úklid odkazů a jasný stav archivu. |
+
+Toto rozlišení šetří čas i nervy. Drobné opravy se nezaseknou, ale důležité sliby se nepřepíšou jako vedlejší efekt „rychlé úpravy textu“.
+
+### Předej první malý úkol
+
+Předání je skutečné až ve chvíli, kdy nový vlastník udělá první malý krok. Nemusí to být velká revize. Naopak je lepší malá akce, která ověří, že člověk ví, kde dokumentace žije a jak se mění.
+
+Vhodné první úkoly:
+
+- opravit jeden starý odkaz v šabloně,
+- doplnit jednu revizní větu k triggeru,
+- zkontrolovat jeden support dotaz proti nové stránce,
+- ověřit přístup záskoku,
+- odstranit jednu přílohu, která nemá být sdílená,
+- přepsat jednu mlhavou větu na konkrétní pravidlo.
+
+První úkol má mít jasný konec. „Projít dokumentaci“ je moc široké. „Ověřit, že support makro Export dat odkazuje na veřejné FAQ a ne na starou migrační poznámku“ je práce.
+
+### Příklad: Předání exportní dokumentace po merge
+
+Tým sloučil tři exportní dokumenty do jednoho veřejného FAQ a interního support makra. Kontrola po sloučení ukázala, že nový text funguje, ale chyběl jasný vlastník.
+
+Předávací rozhodnutí:
+
+| Oblast | Stav |
+| --- | --- |
+| Vlastník | Customer success lead vlastní veřejné FAQ i support makro. |
+| Záskok | Produktový manažer account settings ověří dopad produktových změn. |
+| Trigger | Každá změna exportního formátu, retence, oprávnění nebo opakovaný dotaz na smazání dat. |
+| Privacy hranice | Ve veřejném FAQ nesmí být interní workflow, screenshot adminu ani konkrétní zákaznický scénář. |
+| První úkol | Opravit jednu nabídku, která stále odkazuje na starou migrační poznámku. |
+
+Výsledek: dokumentace už není jen sloučená. Má provozní režim. Další změna exportu neskončí tím, že někdo přidá čtvrtý podobný dokument, protože „nechtěl sahat do toho starého“.
+
+### Checklist: Předání sloučené dokumentace
+
+- [ ] Cílová stránka má jednoho vlastníka, který může rozhodnout o změně, zúžení, sloučení nebo archivaci.
+- [ ] Vlastník byl vybraný podle budoucí práce, ne automaticky podle autora posledního textu.
+- [ ] Existuje záskok, který najde stránku, rozumí účelu a zvládne malou opravu.
+- [ ] Přístupy odpovídají práci: čtení, návrh, review a publikace nejsou zbytečně smíchané.
+- [ ] Předávací karta obsahuje pracovní účel, revizní trigger, privacy hranici a přístupovou hranici.
+- [ ] Je jasné, které staré zdroje byly archivované, přesměrované nebo smazané.
+- [ ] Revize je navázaná na změny produktu, dat, dodavatelů, pricingu, supportu nebo veřejných slibů.
+- [ ] Drobné opravy jsou oddělené od změn pravdy a změn publika.
+- [ ] Nový vlastník má první malý úkol po převzetí.
+- [ ] Předání nevytvořilo nový dokumentační proces bez skutečné pracovní hodnoty.
+
+### Mini úkol
+
+Vyber jednu sloučenou dokumentační stránku, která má po kontrole zůstat v provozu. Za patnáct minut doplň předávací kartu: vlastník, záskok, revizní trigger, privacy hranice, přístupová hranice a první malý úkol. Potom první úkol rovnou udělej nebo ho zapiš jako konkrétní kartu se slovesem. Pokud neumíš určit vlastníka, napiš místo toho rozhodovací větu: „Dokud nemá ___ vlastníka, nesmí se používat jako jediná pravda pro ___.“
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -56553,6 +56709,8 @@ Vezmi poslední dokumentační sloučení a projdi ho za dvacet minut. Najdi jed
 - Nielsen Norman Group: Onboarding Tutorials vs. Contextual Help - rozdíl mezi úvodními tutoriály a kontextovou pomocí: https://www.nngroup.com/articles/onboarding-tutorials/
 
 ## Pracovní log
+
+- 2026-07-26: Doplněna příloha o předání sloučené dokumentace bez osiřelé pravdy: výběr vlastníka podle budoucí práce, záskok bez sdílených admin přístupů, předávací karta, revizní triggery navázané na změny, rozlišení drobných oprav a změny pravdy, první malý úkol po převzetí, příklad exportní dokumentace, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro předání dokumentace po merge. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
 - 2026-07-26: Doplněna příloha o kontrole po sloučení dokumentace bez návratu staré pravdy: návrat k merge kartě, ověření jednoho reálného pracovního průchodu, hledání staré pravdy v aktivních nosičích, kontrola publika a privacy hranice, verdikty po kontrole, příklad exportní dokumentace, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro ověření dokumentačního merge po prvním používání. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
