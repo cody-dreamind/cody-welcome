@@ -187,6 +187,7 @@ Když se nechceš vracet do celé knihy, hledej konkrétní nástroj podle výst
 | Uklidit šablony po stažení dokumentace bez návratu starého slibu | „šablony po stažení dokumentace“, „starý slib v makru“ nebo „support šablony po změně“ | krátký úklid maker, obchodních textů, onboardingových zpráv, automatických odpovědí a interních snippetů po změně veřejné pravdy |
 | Ověřit první odpovědi po změně šablon bez návratu starého slibu | „kontrola odpovědí po změně šablon“, „první odpovědi po stažení“ nebo „makro v provozu“ | kontrola několika skutečných odpovědí, navazujících dotazů, starých odkazů, automatizací a datové hranice po úpravě šablon |
 | Opravit šablony po první kontrole bez nekonečného ladění | „druhá oprava šablon“, „nález z odpovědí“ nebo „šablona po kontrole“ | malý opravný průchod, který řeší příčinu nálezu, uklidí staré nosiče a rozhodne, jestli je šablona zavřená |
+| Uzavřít opravenou šablonu do běžného provozu | „uzavření šablony“, „šablona hotovo“ nebo „běžný režim odpovědi“ | zavírací karta, která potvrzuje vlastníka, zdroj pravdy, stop pravidlo, úklid starých nosičů a další revizní trigger |
 
 Pravidlo pro práci s rejstříkem: otevři maximálně tři nalezené části, vyber jednu a zapiš výstup. Pokud po deseti minutách pořád skáčeš mezi odkazy, vrať se k tabulce „Kudy začít podle aktuální bolesti“ a zúž problém. E-book není buffet. Teda je, ale bez talíře si stejně odneseš jen chaos.
 
@@ -57417,6 +57418,141 @@ Tahle oprava nevyřešila celý exportní proces. Vyřešila jednu příčinu š
 
 Vezmi jednu šablonu, která po první kontrole pořád zlobí. Napiš jeden konkrétní nález, jednu pravděpodobnou příčinu a jednu opravu. Potom najdi starý nosič, který se v nálezu objevil: makro, PDF, prezentaci, CRM poznámku, interní FAQ nebo automatický draft. Uprav právě tenhle nosič a nastav kontrolu na další tři skutečné odpovědi. Pokud ani potom odpověď nebude fungovat, přestaň honit slovíčka a otevři problém v produktu nebo provozu.
 
+## Příloha: Uzavření opravené šablony do běžného provozu bez návratu staré pravdy
+
+Po druhé opravě šablony přichází nenápadná, ale důležitá práce: zavřít změnu. Ne dramaticky. Ne poradou s pěti lidmi a třemi verzemi dokumentu. Stačí jasně říct, že tahle šablona je teď běžný provozní stav, kdo za ni odpovídá, kde je zdroj pravdy a co se stane, když se znovu objeví starý slib.
+
+Bez uzavření vzniká podivné mezidobí. Nová odpověď už existuje, staré texty možná zmizely, ale tým pořád neví, jestli má šablonu používat jako hotovou, nebo ji brát jako rozpracovaný návrh. V takovém prostoru se staré formulace vrací rychleji než faktura na špatnou e-mailovou adresu.
+
+### Rozliš hotovo od už to snad nikdo neřeší
+
+Šablona není hotová tím, že ji někdo přepsal. Hotová je ve chvíli, kdy splňuje čtyři podmínky:
+
+| Podmínka | Co musí být pravda |
+| --- | --- |
+| Zdroj pravdy | tým ví, kde je aktuální verze a odkud se kopíruje |
+| Praktické použití | šablona fungovala v několika skutečných odpovědích bez návratu starého slibu |
+| Úklid nosičů | staré makro, PDF, automatický draft nebo interní snippet už nejsou nejrychlejší cestou |
+| Další trigger | je jasné, jaká budoucí změna šablonu znovu otevře |
+
+Slabý zápis zní: „Exportní makro upraveno.“ Použitelný zápis zní: „Exportní makro je od 2026-07-26 běžný stav. Zdroj pravdy je support knowledge base, staré PDF je odstraněné ze sales šablony, další revize se otevře při změně exportního procesu, retence nebo právního textu.“
+
+Privacy-first poznámka: hotovo neznamená, že začneš sledovat každého supportistu, jak často šablonu používá. Stačí provozní dohoda, malý kontrolní vzorek a signál z navazujících dotazů. Lidé nejsou analytický materiál jen proto, že mají přístup k makru.
+
+### Napiš zavírací kartu
+
+Zavírací karta má být kratší než samotná debata, která k ní vedla. Ideálně se vejde do jednoho záznamu v rozhodovacím logu nebo do poznámky u šablony.
+
+| Pole | Co vyplnit |
+| --- | --- |
+| Šablona | název odpovědi, makra, snippetů nebo automatického draftu |
+| Důvod změny | jaký starý slib, nejasnost nebo únik detailů se opravoval |
+| Aktuální zdroj pravdy | odkaz nebo místo, odkud se bere platná verze |
+| Vlastník | role nebo konkrétní člověk, který hlídá budoucí změny |
+| Úklid hotový | jaké staré nosiče byly odstraněny nebo označeny jako neplatné |
+| Kontrola hotová | jaký malý vzorek ukázal, že šablona funguje |
+| Revizní trigger | co musí nastat, aby se šablona znovu otevřela |
+| Stop pravidlo | kdy se další problém nepíše do šablony, ale do produktu, provozu nebo právní vrstvy |
+
+Nejčastější chyba je vynechat vlastníka. Bez vlastníka se šablona časem promění v drobnou archeologickou lokalitu. Každý vidí nějakou starou vrstvu, nikdo neví, která je platná, a někdo nakonec napíše zákazníkovi větu, kterou produkt už neumí splnit.
+
+### Připoj revizi k události, ne k neurčitému pocitu
+
+Šablona nemá být věčně otevřená. Zároveň se nemá tvářit, že se už nikdy nezmění. Nejlepší je napojit revizi na konkrétní události, které opravdu mění pravdu odpovědi.
+
+Rozumné revizní triggery:
+
+- změna produktu, která mění postup popsaný v šabloně,
+- změna veřejné dokumentace, pricingu, DPA, privacy notice nebo obchodních podmínek,
+- nový dodavatel nebo změna datového toku,
+- incident nebo postmortem, který ukáže nepravdivý slib,
+- opakovaný zákaznický dotaz, který se nedá vyřešit lepší formulací,
+- změna role, která šablonu používá: support, sales, onboarding nebo customer success.
+
+Slabý trigger je „pravidelně zkontrolovat“. To zní rozumně, ale často to skončí tím, že kontrola buď neproběhne, nebo proběhne bez konkrétní otázky. Lepší trigger zní: „Otevřít při změně exportního procesu nebo při třech opakovaných dotazech na stejný nejasný krok.“
+
+> Codyho komentář: Kalendářová revize je někdy potřeba, ale často je to jen elegantní způsob, jak si slíbit budoucí vinu. Událostní trigger je fér: když se změní realita, mění se text. Když se realita nemění a nejsou nálezy, nech text pracovat.
+
+### Uzavři staré cesty k odpovědi
+
+Před zavřením šablony projdi místa, odkud se odpověď může pořád vracet. Nehledej celý internet. Hledej praktické zkratky, které tým skutečně používá.
+
+| Místo | Kontrolní otázka |
+| --- | --- |
+| Support makra | Je stará odpověď smazaná, přejmenovaná nebo jasně označená jako neplatná? |
+| Sales materiály | Neobsahuje starý slib prezentace, PDF, follow-up nebo CRM šablona? |
+| Onboarding | Nedostává nový zákazník starý postup v uvítacím e-mailu nebo checklistu? |
+| Automatizace | Nepřipojuje skript, AI draft nebo notifikace starý text jako přílohu nebo odkaz? |
+| Interní wiki | Odkazuje aktivní návod na správný zdroj pravdy? |
+| Veřejný web | Nežije stará odpověď přes archiv, sitemap, RSS, interní vyhledávání nebo redirect? |
+
+Když starou cestu nemůžeš hned odstranit, napiš k ní viditelný stav: neplatné, nahrazeno, archiv, nepoužívat v odpovědích zákazníkům. Tichý archiv bez statusu je jen starý slib v kostýmu dokumentace.
+
+### Nastav běžný režim používání
+
+Uzavřená šablona má být jednoduchá na použití. Člověk ve spěchu nesmí luštit, jestli má vzít veřejnou, interní nebo řízeně sdílenou verzi.
+
+Použij tři vrstvy:
+
+| Vrstva | K čemu slouží | Příklad |
+| --- | --- | --- |
+| Veřejná odpověď | text bezpečný pro FAQ, web nebo běžný support | „Export dat lze spustit z nastavení workspace. Po odeslání žádosti dostanete další krok.“ |
+| Řízeně sdílená odpověď | detail pro zákazníka v konkrétním vztahu, typicky po ověření kontextu | „U vašeho plánu je dostupný export projektů a uživatelů; billing dokumenty řeší samostatná fakturační cesta.“ |
+| Interní poznámka | rozhodovací pravidlo pro tým, ne text pro zákazníka | „Neposílat staré PDF. Pokud chce zákazník garantovaný termín, otevřít produktový úkol nebo eskalovat podle SLA pravidla.“ |
+
+Tři vrstvy chrání důvěru i rychlost. Veřejná odpověď je klidná a čitelná. Řízeně sdílená odpověď dovolí konkrétnost bez úniku interních detailů. Interní poznámka drží tým pohromadě bez toho, aby se provozní omezení omylem dostalo ven.
+
+### Měř jen návrat problému
+
+Po uzavření šablony neměř všechno. Měř jen signál, který by změnu znovu otevřel.
+
+Praktické signály:
+
+- zákazník položí stejný navazující dotaz, který měla šablona vyřešit,
+- tým ručně dopíše starou formulaci,
+- někdo připojí starý odkaz nebo přílohu,
+- automatický draft použije neplatnou větu,
+- šablona se začne používat v situaci, pro kterou nebyla určená,
+- odpověď vyvolá žádost o výjimku, kterou neumí pokrýt produkt.
+
+Stačí malý ruční přehled za kontrolní období nebo zápis při incidentu. Nepotřebuješ individuální skóre lidí, session replay supportního nástroje ani metriky typu „čas strávený ve šabloně“. Když měření nevede k jasnému rozhodnutí, nejspíš jen vyrábí další šum.
+
+### Příklad: Uzavření exportní šablony
+
+Po stažení starého exportního návodu tým upravil support makro, sales follow-up a veřejné FAQ. Druhá kontrola ukázala, že další tři support odpovědi už neposílaly starý časový slib a dva obchodní follow-upy nepřiložily staré PDF. Jeden zákazník se ale ptal na garantovaný termín exportu.
+
+Zavírací karta:
+
+| Pole | Zápis |
+| --- | --- |
+| Šablona | Export dat: běžná support odpověď a sales follow-up. |
+| Důvod změny | Starý návod sliboval pevný čas exportu, který produkt neuměl vždy splnit. |
+| Aktuální zdroj pravdy | Veřejné FAQ k exportu dat a support makro `export-data-current`. |
+| Vlastník | Support lead; produkt je vlastník viditelného stavu exportní žádosti. |
+| Úklid hotový | Staré PDF odebrané ze sales šablony, interní wiki odkazuje na FAQ, automatický draft nepřipojuje přílohu. |
+| Kontrola hotová | 3 support odpovědi a 2 sales follow-upy bez návratu starého slibu. |
+| Revizní trigger | Změna exportního procesu, retence exportů nebo 3 nové dotazy na garantovaný termín. |
+| Stop pravidlo | Pokud se vrátí dotazy na garantovaný termín, nepsat další makro; otevřít produktový úkol pro stav exportní žádosti. |
+
+Výsledek: šablona je zavřená, stará pravda nemá pohodlnou cestu zpět a tým ví, kdy se má téma znovu otevřít. Jeden navazující dotaz na garantovaný termín není důvod přepsat celý support. Je to signál pro produktovou schopnost, pokud se začne opakovat.
+
+### Checklist: Uzavření opravené šablony
+
+- [ ] Je jasné, která šablona se zavírá a proč se původně měnila.
+- [ ] Existuje jeden aktuální zdroj pravdy.
+- [ ] Vlastník ví, že odpovídá za budoucí změny šablony.
+- [ ] Staré nosiče odpovědi byly odstraněny, archivovány nebo viditelně označeny jako neplatné.
+- [ ] Automatizace, AI drafty a notifikace nepoužívají starý text.
+- [ ] Veřejná, řízeně sdílená a interní vrstva jsou oddělené.
+- [ ] Kontrola hotovo vychází z malého vzorku skutečných použití, ne z pocitu.
+- [ ] Revizní trigger je konkrétní událost nebo opakovaný nález.
+- [ ] Stop pravidlo říká, kdy další problém patří do produktu, provozu nebo právní vrstvy.
+- [ ] Nepřibylo nové sledování jednotlivců kvůli hlídání šablony.
+
+### Mini úkol
+
+Vezmi jednu šablonu, kterou jste po druhé opravě považovali za hotovou. Napiš zavírací kartu s osmi poli: šablona, důvod změny, zdroj pravdy, vlastník, úklid hotový, kontrola hotová, revizní trigger a stop pravidlo. Potom najdi jednu starou cestu, která by odpověď mohla vrátit zpět: makro, PDF, automatický draft, onboarding e-mail nebo interní wiki. Zavři ji nebo ji označ jako neplatnou. Pokud neumíš určit vlastníka, šablona ještě není hotová. Je jen odložená na později v hezčím kabátě.
+
 ## Zdroje
 
 - IETF RFC 9110: HTTP Semantics - význam HTTP přesměrování a stavů včetně `410 Gone` pro zdroje, které už nejsou dostupné: https://www.rfc-editor.org/rfc/rfc9110.html
@@ -57610,6 +57746,8 @@ Vezmi jednu šablonu, která po první kontrole pořád zlobí. Napiš jeden kon
 - Nielsen Norman Group: Onboarding Tutorials vs. Contextual Help - rozdíl mezi úvodními tutoriály a kontextovou pomocí: https://www.nngroup.com/articles/onboarding-tutorials/
 
 ## Pracovní log
+
+- 2026-07-26: Doplněna příloha o uzavření opravené šablony do běžného provozu bez návratu staré pravdy: rozdíl mezi hotovo a neurčitým dořešením, zavírací karta, revizní triggery, úklid starých cest k odpovědi, vrstvy veřejné, řízeně sdílené a interní odpovědi, chudé měření návratu problému, příklad exportní šablony, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro uzavření opravené šablony. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
 - 2026-07-26: Doplněna příloha o druhé opravě šablon po první kontrole bez nekonečného ladění: práce s konkrétním nálezem, rozlišení typů opravy, opravný balík, úklid starých nosičů, malé kontrolní okno, verdikty po opravě, příklad exportního makra, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro opravu šablon po prvních reálných odpovědích. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
