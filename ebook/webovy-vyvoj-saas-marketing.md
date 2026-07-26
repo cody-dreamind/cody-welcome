@@ -182,6 +182,7 @@ Když se nechceš vracet do celé knihy, hledej konkrétní nástroj podle výst
 | Ověřit dokumentační merge po prvním používání | „kontrola po sloučení dokumentace“, „merge review“ nebo „stará pravda po sloučení“ | krátké ověření, že cílová stránka řídí práci, staré odkazy mlčí a nevznikla širší datová ani publikační stopa |
 | Předat vlastnictví sloučené dokumentace bez osiřelé pravdy | „předání sloučené dokumentace“, „nový vlastník dokumentace“ nebo „dokumentace po merge“ | předávací karta s vlastníkem, záskokem, revizním triggerem, přístupovou hranicí a prvním malým úkolem po převzetí |
 | Změnit publikum dokumentace bez nechtěného zveřejnění | „změna publika dokumentace“, „veřejná interní sdílená vrstva“ nebo „publikum dokumentace“ | publikační karta, která určí co je veřejné, řízeně sdílené, interní nebo neveřejné a jak se uklidí odkazy, příklady a přístupy |
+| Zkontrolovat změnu publika dokumentace po prvním použití | „kontrola publika dokumentace“, „publikum po publikaci“ nebo „veřejná dokumentace po změně“ | kontrolní karta, která ověří čtenáře, citlivé detaily, odkazy, sdílení, indexaci a dopad bez sledování lidí |
 
 Pravidlo pro práci s rejstříkem: otevři maximálně tři nalezené části, vyber jednu a zapiš výstup. Pokud po deseti minutách pořád skáčeš mezi odkazy, vrať se k tabulce „Kudy začít podle aktuální bolesti“ a zúž problém. E-book není buffet. Teda je, ale bez talíře si stejně odneseš jen chaos.
 
@@ -56661,6 +56662,147 @@ Výsledek: zákazník dostane jasnější odpověď bez formuláře navíc. Supp
 
 Vyber jednu interní dokumentační stránku, kterou tým často přepisuje do e-mailů, sales odpovědí nebo support maker. Za dvacet minut vyplň publikační kartu a rozhodni, zda z ní vznikne veřejná odpověď, řízeně sdílený dokument, interní makro nebo nic. Nepřesouvej celý text. Přenes jen jednu otázku a napiš k ní dvě verze: veřejnou odpověď pro čtenáře a interní poznámku pro tým. Potom zkontroluj, že veřejná verze neobsahuje interní URL, konkrétní zákaznické údaje, screenshoty administrace ani zbytečné bezpečnostní detaily.
 
+## Příloha: Kontrola publika dokumentace po změně bez tichého úniku
+
+Změna publika dokumentace nekončí publikací, přesunem do sdíleného prostoru nebo úpravou oprávnění. Končí až ve chvíli, kdy tým ověří, že nový text používají správní lidé, staré cesty nevedou do špatné vrstvy a nikde nezůstala kopie s detailem, který měl zůstat interní. Jinak je to jen elegantně provedené „snad dobrý“.
+
+Kontrola po změně publika je malá provozní brzda. Nemá z každé publikace dělat právní drama. Má chytit tři běžné chyby: text je moc obecný pro čtenáře, moc konkrétní pro nové publikum, nebo se vedle něj dál používá stará verze s jiným slibem.
+
+> Codyho komentář: Největší riziko veřejné dokumentace často není jedna špatná věta. Je to druhá skoro stejná stránka, která tvrdí něco trochu jiného. Dvě pravdy jsou dobré v poezii. V provozu jsou to drahé lístky do supportního cirkusu.
+
+### Vrať se k publikační kartě
+
+Kontrolu nezačínej otázkou „líbí se nám nová stránka?“. Začni původní publikační kartou. Ta měla říct, proč se publikum měnilo, kdo má podle textu jednat, co zůstává interní a kdy se změna ověří.
+
+Při kontrole si odpověz:
+
+- Změna opravdu pomohla pracovnímu důvodu, kvůli kterému vznikla?
+- Používá text publikum, pro které byl určený?
+- Nevznikla nová nejasnost, kterou teď support nebo sales vysvětluje ručně?
+- Zůstaly interní detaily interní?
+- Nezůstala aktivní stará verze s jinou informací?
+- Je jasné, kdo může text dál měnit?
+
+Pokud publikační karta chybí, udělej krátkou zpětnou verzi. Ne proto, aby se někdo tvářil, že proces proběhl dokonale. Proto, aby kontrola měla pevný bod. Bez něj tým často hodnotí jen pocit a poslední komentář v chatu.
+
+### Ověř jeden skutečný pracovní průchod
+
+Dokumentace existuje kvůli práci. Vezmi proto jednu reálnou situaci a projdi ji od začátku do konce. Ne pět hypotetických scénářů, ne hodinový audit všeho. Jednu situaci, která odpovídá novému publiku.
+
+Příklady:
+
+| Změna publika | Pracovní průchod |
+| --- | --- |
+| Interní support návod se částečně změnil na veřejné FAQ. | Nový zákazník chce zjistit, jak získá export dat před zrušením účtu. |
+| Interní bezpečnostní odpovědi se rozdělily na veřejné trust centrum a řízený balíček. | Nákupní tým zákazníka hledá základní informace bez posílání dotazníku. |
+| Veřejný návod se stáhl do interní dokumentace, protože popisoval staré chování. | Support odpovídá člověku, který našel starý odkaz v e-mailu. |
+| Interní onboardingový postup se sdílí s externím partnerem. | Partner potřebuje udělat první úkol bez přístupu k interní wiki. |
+
+Při průchodu sleduj tři věci: čtenář chápe další krok, tým nemusí doplňovat chybějící kontext ručně a dokumentace neprozrazuje nic, co k danému kroku nepotřebuje. Pokud se jedna z těchto věcí rozpadne, nejde o stylistickou poznámku. Je to produktová chyba v informačním rozhraní.
+
+### Hledej citlivé detaily v nové vrstvě
+
+Po změně publika projdi text jako člověk, který ho vidí bez interního kontextu. Interní tým má nebezpečnou schopnost nevidět vlastní zkratky, názvy systémů, screenshoty a provozní drobnosti. Jsou pro něj normální. Pro veřejnost nebo partnera mohou být matoucí, zneužitelné nebo jen zbytečně svazující.
+
+Zkontroluj hlavně:
+
+- interní URL, názvy nástrojů, bucketů, jobů, front a admin panelů,
+- screenshoty s reálnými zákazníky, e-maily, tokeny, rolemi nebo interní navigací,
+- přesné bezpečnostní postupy, které čtenář nepotřebuje k rozhodnutí,
+- historické incidentní poznámky bez kontextu a schválení,
+- jména lidí tam, kde stačí role,
+- staré limity, ceny, SLA nebo retenční sliby,
+- formulace typu „vždy“, „nikdy“ a „garantujeme“, které neodpovídají provozní realitě,
+- odkazy na dokumenty s širším publikem, než bylo zamýšleno.
+
+Nejde o to všechno zneviditelnit. Dobrá veřejná dokumentace má být konkrétní. Rozdíl je v otázce: pomáhá tento detail čtenáři udělat bezpečný další krok, nebo jen ukazuje vnitřnosti systému? Pokud platí druhá možnost, dej detail do interní vrstvy nebo ho přepiš na ověřitelný slib.
+
+### Zkontroluj cesty k textu
+
+Publikum dokumentace neurčuje jen samotná stránka. Určují ho i odkazy, indexace, sdílení, exporty, šablony a zvyky týmu. Když veřejnou stránku stáhneš zpět do interní vrstvy, ale necháš ji v e-mailovém makru, staré publikum se vrátí zadními dveřmi. A zadní dveře jsou pořád dveře, jen s horším popisem v incident logu.
+
+Kontrolní místa:
+
+| Místo | Co ověřit |
+| --- | --- |
+| Navigace a interní odkazy | Odkazy vedou na správnou vrstvu a nepřeskakují řízené sdílení. |
+| Sitemap a vyhledávání | Veřejná URL je indexovatelná jen tehdy, když má být veřejná. Stažený text se netváří jako aktuální výsledek. |
+| Support a sales šablony | Makra používají novou formulaci a neposílají staré interní detaily. |
+| Sdílené odkazy | Dočasné odkazy mají vlastníka, účel a konec platnosti. |
+| Exporty a PDF | Staré balíčky nekolují jako „aktuální dokumentace“. |
+| Produktové UI | Odkaz v aplikaci odpovídá tomu, kdo ho vidí a co může udělat. |
+| Rozhodovací log a runbooky | Interní odkazy zůstávají interní a veřejné odkazy nevedou na provozní postupy. |
+
+U řízeně sdílené dokumentace je důležité zapsat i konec sdílení. Věta „poslali jsme odkaz zákazníkovi“ nestačí. Lepší věta je: „Sdílený trust balíček pro nákupní kontrolu platí do ___, obsahuje ___, neobsahuje ___ a po uzavření obchodu se přístup ___“. Ano, je to delší. Taky je to méně naivní.
+
+### Rozhodni podle nálezu, ne podle ega autora
+
+Kontrola má skončit verdiktem. Ne seznamem dojmů. Autor textu může mít pocit, že stránka je jasná. Support může mít pocit, že pořád něco chybí. Sales může chtít víc detailů, protože „zákazníci se ptají“. Privacy-first rozhodnutí potřebuje oddělit užitečnost od pohodlí.
+
+Použij jednoduché verdikty:
+
+| Verdikt | Kdy ho použít | Další krok |
+| --- | --- | --- |
+| Ponechat | Text používá správné publikum, pomáhá práci a neunikl interní detail. | Zapsat datum kontroly a další trigger. |
+| Zúžit | Text je užitečný, ale publikum je moc široké nebo detail moc hluboký. | Přepsat část, omezit sdílení nebo rozdělit vrstvy. |
+| Rozdělit | Jedna stránka se snaží sloužit veřejnosti, partnerovi i týmu najednou. | Vytvořit veřejnou odpověď, řízený balíček a interní postup. |
+| Vrátit interně | Veřejná nebo sdílená verze zvyšuje riziko víc než hodnotu. | Stáhnout odkazy, opravit šablony a připravit bezpečnější veřejnou formulaci. |
+| Opravit realitu | Dokumentace odhalila, že produkt, proces nebo slib jsou nejasné. | Otevřít produktovou nebo provozní kartu, ne lakovat text. |
+| Archivovat | Text už neřídí práci a nový stav je jinde. | Označit archiv, uklidit odkazy a zabránit dalšímu použití jako aktuální pravdy. |
+
+Nejzdravější verdikt bývá někdy „opravit realitu“. Pokud zákazník potřebuje veřejnou odpověď na export dat a tým ji neumí napsat bez pěti interních výjimek, problém možná není v dokumentaci. Problém je v produktu, rolích, datech nebo provozním slibu.
+
+### Měř dopad bez sledování čtenářů
+
+Kontrola po změně publika nepotřebuje session replay, heatmapu ani sledování jednotlivých návštěvníků. Potřebuje vědět, jestli dokumentace snížila tření a nezvýšila riziko.
+
+Stačí malé signály:
+
+- ruční počet opakovaných dotazů na stejné téma za dva týdny,
+- tři poslední support nebo sales konverzace k danému tématu,
+- jedno interní review, zda nová formulace odpovídá produktu,
+- kontrola, zda veřejné vyhledávání nenajde interní detail,
+- seznam opravených šablon a odkazů,
+- rozhodnutí vlastníka, jestli text zůstává ve stejném publiku.
+
+Nesbírej navíc identitu čtenáře, přesný pohyb po stránce ani marketingový profil jen proto, že dokumentace dostala nové publikum. U dokumentace často stačí velmi nudné měření: méně ručních vysvětlení, méně rozporů, méně starých odkazů a jasnější další krok.
+
+### Příklad: Kontrola veřejného FAQ k exportu dat
+
+Tým zveřejnil část interního support návodu jako FAQ k exportu dat před zrušením účtu. Po dvou týdnech udělá kontrolu.
+
+Kontrolní karta:
+
+| Pole | Zápis |
+| --- | --- |
+| Původní důvod | Snížit opakované dotazy, kdo může export vyžádat a jak dlouho je soubor dostupný. |
+| Průchod | Admin zákazníka hledá před zrušením účtu odpověď na export dat. |
+| Co fungovalo | Veřejný text vysvětluje oprávnění, omezenou životnost exportu a kontakt na podporu. |
+| Co drhlo | Jedno staré support makro pořád posílá interní formulaci s názvem exportního jobu. |
+| Citlivé detaily | Ve veřejném FAQ nejsou interní URL ani screenshoty. |
+| Cesty k textu | Pricing FAQ a account settings odkazují správně, staré makro se musí opravit. |
+| Dopad | Za dva týdny přišly dva doplňující dotazy místo obvyklých pěti; číslo je orientační, ne dashboardová pravda. |
+| Verdikt | Ponechat veřejné FAQ, opravit support makro a za měsíc zkontrolovat po další změně exportu. |
+
+Výsledek: tým nezavádí nové sledování FAQ. Opraví jednu starou šablonu, nechá veřejnou odpověď žít a zapíše trigger: každá změna exportu nebo retence musí zkontrolovat i tuto stránku.
+
+### Checklist: Kontrola publika dokumentace po změně
+
+- [ ] Vrátil jsem se k původní publikační kartě nebo jsem doplnil její krátkou zpětnou verzi.
+- [ ] Ověřil jsem jeden skutečný pracovní průchod pro nové publikum.
+- [ ] Čtenář podle textu chápe další krok bez zbytečného kontaktování týmu.
+- [ ] Text neobsahuje interní URL, názvy systémů, screenshoty nebo provozní detaily, které nové publikum nepotřebuje.
+- [ ] Staré stránky, makra, šablony, exporty a odkazy netvrdí jinou pravdu.
+- [ ] Oprávnění, sdílené odkazy, sitemap a vyhledávání odpovídají zamýšlenému publiku.
+- [ ] Řízeně sdílený dokument má účel, vlastníka a konec sdílení.
+- [ ] Dopad se ověřuje chudými signály bez sledování jednotlivých čtenářů.
+- [ ] Kontrola skončila verdiktem: ponechat, zúžit, rozdělit, vrátit interně, opravit realitu nebo archivovat.
+- [ ] Další revize je navázaná na konkrétní trigger, ne na neurčité „někdy“.
+
+### Mini úkol
+
+Vyber jednu stránku, která v poslední době změnila publikum: interní text se stal veřejným, veřejný text se stáhl interně, nebo se dokument začal řízeně sdílet se zákazníky. Za dvacet minut projdi jednu reálnou situaci čtenáře a vyplň kontrolní kartu: původní důvod, průchod, co fungovalo, co drhlo, citlivé detaily, cesty k textu, dopad a verdikt. Pokud najdeš starou šablonu nebo odkaz, neopravuj deset věcí najednou. Zavři první nejrizikovější stopu a zapiš trigger pro další revizi.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -56853,6 +56995,8 @@ Vyber jednu interní dokumentační stránku, kterou tým často přepisuje do e
 - Nielsen Norman Group: Onboarding Tutorials vs. Contextual Help - rozdíl mezi úvodními tutoriály a kontextovou pomocí: https://www.nngroup.com/articles/onboarding-tutorials/
 
 ## Pracovní log
+
+- 2026-07-26: Doplněna příloha o kontrole publika dokumentace po změně bez tichého úniku: návrat k publikační kartě, ověření jednoho skutečného pracovního průchodu, hledání citlivých detailů v nové vrstvě, kontrola odkazů, sdílení, indexace a šablon, verdikty po kontrole, chudé měření dopadu bez sledování čtenářů, příklad veřejného FAQ k exportu dat, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro kontrolu změny publika dokumentace po prvním použití. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
 - 2026-07-26: Doplněna příloha o změně publika dokumentace bez nechtěného zveřejnění: rozlišení veřejné, řízeně sdílené, interní a neveřejné vrstvy, publikační karta, přepis interního textu pro nové publikum, kontrola odkazů, indexace a přístupů, chudé měření dopadu bez sledování čtenářů, příklad převodu interního exportního návodu do veřejného FAQ, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro změnu publika dokumentace. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
