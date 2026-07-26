@@ -172,6 +172,7 @@ Když se nechceš vracet do celé knihy, hledej konkrétní nástroj podle výst
 | Archivovat runbook po zániku automatizace bez mrtvého návodu | „archivace runbooku“, „runbook končí“ nebo „mrtvý postup“ | zavírací karta, která označí poslední platnou verzi, náhradní cestu, úklid odkazů, přístupů, testů a veřejných slibů |
 | Ověřit archivaci runbooku po zavření bez návratu starého postupu | „kontrola po archivaci“, „starý runbook se vrací“ nebo „post-archive review“ | krátká kontrola odkazů, incidentů, přístupů, alertů a nových rozhodnutí, která potvrdí, že archivovaný návod už neřídí provoz |
 | Převést archivovaný runbook na použitelné poučení | „učení z archivovaného runbooku“, „provozní lekce“ nebo „runbook jako lekce“ | jedna učící karta, která zachová důležité rozhodnutí, opraví aktuální postup a smaže zbytečné stopy bez zakládání nového procesu |
+| Převést provozní lekci do backlogu bez poradní inflace | „lekce do backlogu“, „provozní lekce jako úkol“ nebo „učící karta pokračuje“ | jedna backlogová karta s důvodem, privacy hranicí, vlastníkem, ověřením a rozhodnutím kdy úkol zavřít |
 
 Pravidlo pro práci s rejstříkem: otevři maximálně tři nalezené části, vyber jednu a zapiš výstup. Pokud po deseti minutách pořád skáčeš mezi odkazy, vrať se k tabulce „Kudy začít podle aktuální bolesti“ a zúž problém. E-book není buffet. Teda je, ale bez talíře si stejně odneseš jen chaos.
 
@@ -55298,6 +55299,135 @@ Výsledek: starý runbook zůstává archivem, ale jeho nejlepší poučení ži
 
 Vyber jeden archivovaný runbook, který už prošel kontrolou po zavření. Najdi jednu lekci, která může zlepšit aktuální práci, a zapiš ji do malé učící karty. Potom uprav jedno konkrétní místo pravdy: aktuální runbook, alert, onboarding checklist, vypínací kartu nebo trust odpověď. Staré citlivé ukázky nepřenášej. Pokud lekce nevede k žádné dnešní úpravě, nech ji v archivu a práci zavři.
 
+## Příloha: Přenos provozní lekce do backlogu bez poradní inflace
+
+Učící karta je dobrý mezikrok, ale sama o sobě ještě nemění produkt ani provoz. Pokud zůstane jen jako poznámka v archivu, tým má pocit, že se poučil, ale příští release může udělat stejnou chybu znovu. Další logický krok je převést lekci do backlogu tak, aby z ní vznikla jedna konkrétní změna, ne další poradní okruh.
+
+Tahle příloha řeší přesně ten okamžik: máme použitelnou provozní lekci a potřebujeme rozhodnout, jestli z ní bude oprava, experiment, změna dokumentace, úklid datové stopy, nebo žádná akce. Cíl není vyrábět víc úkolů. Cíl je zabránit tomu, aby dobré poučení skončilo jako hezká věta bez vlastníka.
+
+> Codyho komentář: Backlog není hřbitov moudrých vět. Pokud tam lekce vstoupí, musí dostat sloveso, hranici a datum kontroly. Jinak z ní bude jen voňavý štítek na starém problému.
+
+### Začni změnovou větou
+
+Nejdřív přepiš lekci do věty, která říká, co se má změnit v práci. Ne „co jsme zjistili“, ale „co odteď uděláme jinak“.
+
+Použij tento tvar:
+
+| Pole | Otázka |
+| --- | --- |
+| Při jaké situaci | Kdy se lekce uplatní? Incident, release, onboarding, nákup nástroje, změna automatizace, odpověď zákazníkovi? |
+| Uděláme co | Jaký konkrétní krok se změní? Přidáme kontrolu, smažeme pole, zúžíme alert, upravíme šablonu, doplníme runbook? |
+| Protože | Jaké riziko tím snižujeme nebo jakou práci tím zjednodušíme? |
+| Co neděláme | Jaké širší téma teď vědomě neotevíráme? |
+
+Příklady:
+
+| Slabé | Lepší |
+| --- | --- |
+| „Alerty byly moc hlučné.“ | „Při změně alertu kontrolujeme, zda výstup vede k jedné první akci a neposílá zbytečný detail mimo monitoring.“ |
+| „Musíme líp předávat runbooky.“ | „Před změnou vlastníka runbooku nový vlastník projde jeden cvičný běh a opraví nejasné kroky.“ |
+| „Exporty se špatně uklízí.“ | „Každý jednorázový export má datum uzavření, vlastníka smazání a místo, kde se potvrdí konec sdílení.“ |
+
+Změnová věta je filtr. Pokud ji neumíš napsat, lekce ještě není připravená pro backlog. Vrať ji do učící karty a zúž ji.
+
+### Rozliš opravu, experiment, rozhodnutí a zavření
+
+Ne každá lekce má skončit jako vývojový úkol. Backlog pro privacy-first provoz má umět rozlišit čtyři typy pokračování:
+
+| Typ pokračování | Kdy použít | Příklad |
+| --- | --- | --- |
+| Oprava | Víš, co je špatně, a změna je malá. | Alert posílá příliš mnoho detailů do sdíleného kanálu. |
+| Experiment | Nevíš, jestli nová forma pomůže, ale jde ji bezpečně zkusit. | Zkrátit týdenní report na tři rozhodovací signály a po dvou týdnech vyhodnotit šum. |
+| Rozhodnutí | Chybí dohoda o hranici práce, dat nebo pravomoci. | Má automatizace jen navrhovat odpověď, nebo ji po schválení i poslat? |
+| Zavření | Lekce už nemá dnešní dopad. | Starý problém zmizel s ukončeným dodavatelem a nezůstala datová stopa. |
+
+Tahle volba je důležitější než název ticketu. Oprava potřebuje jasnou definici hotovo. Experiment potřebuje kontrolní okno. Rozhodnutí potřebuje vlastníka a kontext. Zavření potřebuje krátkou větu, proč se nic nedělá. Bez toho se backlog začne tvářit jako skladiště neurčitých dobrých úmyslů.
+
+### Udělej backlogovou kartu, ne zápis z porady
+
+Karta má být dost konkrétní, aby ji šlo vzít do práce bez dalšího vysvětlovacího rituálu. Nepiš celý příběh archivovaného runbooku. Piš to, co potřebuje člověk, který má udělat další krok.
+
+Minimální karta:
+
+| Pole | Co vyplnit |
+| --- | --- |
+| Název | Sloveso a objekt: „Zúžit dostupnostní alert“, „Doplnit zavírací krok exportu“, „Ověřit nový runbook cvičným průchodem“. |
+| Původ lekce | Odkaz nebo název učící karty, ne celý archiv. |
+| Změnová věta | Jedna věta z předchozí části. |
+| Typ pokračování | Oprava, experiment, rozhodnutí nebo zavření. |
+| Vlastník | Konkrétní role nebo člověk, který může změnu uzavřít. |
+| Privacy hranice | Jaká data se nesmí nově sbírat, kam se nesmí posílat detail, jaký přístup se nesmí rozšířit. |
+| Ověření | Jak poznáme, že změna pomohla nebo že ji máme zavřít. |
+| Stop pravidlo | Kdy kartu smažeme, vrátíme nebo zúžíme. |
+
+Backlogová karta není místo pro interní citlivé ukázky. Pokud původní lekce vznikla z incidentu, exportu, zákaznického screenshotu nebo logu, karta má obsahovat jen rozhodovací minimum. Detail patří do omezeného systému podle role, ne do obecného produktového backlogu.
+
+### Připoj privacy hranici hned, ne až při review
+
+Provozní lekce často svádí k většímu dohledu: více logů, více screenshotů, více reportů, delší retence, širší přístup pro jistotu. Někdy je potřeba zlepšit pozorovatelnost, ale privacy-first přístup začíná otázkou, jak to udělat s menší stopou.
+
+U každé karty se zeptej:
+
+- Dá se problém ověřit agregovaným signálem místo individuální stopy?
+- Stačí stav, čas, komponenta a odkaz na omezený detail místo celého payloadu?
+- Potřebuje změna nový export, nebo lze pracovat v původním systému?
+- Musí mít nový vlastník širší roli, nebo stačí dočasné oprávnění?
+- Je potřeba ukládat výstup navždy, nebo jen do kontroly po změně?
+- Mění se veřejný slib, trust odpověď, help stránka nebo interní runbook?
+
+Praktické pravidlo: pokud lekce vznikla kvůli chaosu, neřeš chaos plošným sběrem dat. Nejdřív oprav rozhodovací krok, vlastnictví a místo pravdy. Teprve potom přidávej nový signál, a jen pokud bez něj nejde rozhodnout.
+
+### Dej kartě malé kontrolní okno
+
+Lekce převedená do backlogu potřebuje konec. Jinak z ní bude věčný úkol s nízkou prioritou, který každý respektuje a nikdo nedělá.
+
+Kontrolní okno nastav podle typu:
+
+| Typ | Kontrolní okno | Verdikt |
+| --- | --- | --- |
+| Oprava | Po dokončení a po prvním reálném použití. | Ponechat, doplnit drobnou opravu, nebo vrátit. |
+| Experiment | Po předem daném počtu běhů nebo týdnech. | Ponechat, zúžit, ukončit, nebo převést do rutiny. |
+| Rozhodnutí | Na nejbližším rozhodovacím review. | Schváleno, odloženo s důvodem, nebo zrušeno. |
+| Zavření | Ihned po zapsání důvodu. | Bez akce, bez dalšího sledování. |
+
+Karta se má zavřít rozhodnutím, ne pocitem. Dobré rozhodnutí může znít i „nic neměníme“. To je v pořádku, pokud víš proč a nevzniká tím tichá datová stopa nebo provozní riziko.
+
+### Příklad: Lekce z hlučného dostupnostního alertu
+
+Učící karta říká: „Alert má vést k první bezpečné akci, ne posílat technický výpis bez rozhodovacího kontextu.“
+
+Backlogová karta:
+
+| Pole | Zápis |
+| --- | --- |
+| Název | Zúžit dostupnostní alert na rozhodovací minimum. |
+| Původ lekce | Učící karta ze starého dostupnostního runbooku. |
+| Změnová věta | Při změně dostupnostního alertu posíláme stav, čas, URL, první ověření a odkaz na aktuální runbook, ne celý response body. |
+| Typ pokračování | Oprava. |
+| Vlastník | Provozní vlastník dostupnostní kontroly. |
+| Privacy hranice | Do sdíleného kanálu nejdou payloady, cookies, hlavičky s identifikátory ani interní screenshoty. Detail zůstává v omezeném monitoringu. |
+| Ověření | První další alert umožní člověku udělat bezpečné ověření bez hledání starého runbooku. |
+| Stop pravidlo | Pokud po dvou reálných alertech stále chybí první akce nebo vzniká šum, karta se vrací jako úprava šablony alertu. |
+
+Hotovo není „alert vypadá kratší“. Hotovo je, že kratší alert vede k lepšímu prvnímu kroku a současně neposílá zbytečné detaily mimo správné místo.
+
+### Checklist: Přenos provozní lekce do backlogu
+
+- [ ] Lekce je přepsaná do změnové věty ve tvaru „při ___ uděláme ___, protože ___“.
+- [ ] Rozlišil jsem, jestli jde o opravu, experiment, rozhodnutí nebo zavření.
+- [ ] Karta má název se slovesem a konkrétním objektem.
+- [ ] Původ lekce odkazuje na učící kartu, ne kopii celého archivu.
+- [ ] Je jasný vlastník, který může úkol uzavřít.
+- [ ] Privacy hranice říká, jaká data, exporty, přístupy nebo veřejné detaily se nesmí rozšířit.
+- [ ] Ověření je navázané na práci nebo rozhodnutí, ne na vanity metriku.
+- [ ] Karta má stop pravidlo nebo kontrolní okno.
+- [ ] Citlivé ukázky, payloady, screenshoty, tokeny a osobní poznámky zůstaly mimo obecný backlog.
+- [ ] Pokud lekce nevede k dnešní změně, je vědomě zavřená.
+
+### Mini úkol
+
+Vezmi jednu učící kartu z archivovaného runbooku a přepiš ji na jednu backlogovou kartu. Nejdřív napiš změnovou větu, potom vyber typ pokračování: oprava, experiment, rozhodnutí nebo zavření. Přidej privacy hranici a kontrolní okno. Pokud karta potřebuje víc než jednu změnu, rozděl ji a dnes nech jen tu nejmenší, která sníží konkrétní riziko.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -55490,6 +55620,8 @@ Vyber jeden archivovaný runbook, který už prošel kontrolou po zavření. Naj
 - Nielsen Norman Group: Onboarding Tutorials vs. Contextual Help - rozdíl mezi úvodními tutoriály a kontextovou pomocí: https://www.nngroup.com/articles/onboarding-tutorials/
 
 ## Pracovní log
+
+- 2026-07-26: Doplněna příloha o přenosu provozní lekce do backlogu bez poradní inflace: změnová věta, rozlišení opravy, experimentu, rozhodnutí a zavření, minimální backlogová karta, privacy hranice už při zadání, malé kontrolní okno, příklad hlučného dostupnostního alertu, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro převod provozní lekce na backlogovou kartu. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
 - 2026-07-26: Doplněna příloha o učení z archivovaného runbooku bez nového procesu: rozlišení použitelné lekce od historické zajímavosti, malá učící karta, přenos poznatku do jednoho místa pravdy, brzdy proti novému procesu, oprava současného postupu místo minulosti, příklad starého dostupnostního runbooku, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro převod archivovaného runbooku na použitelné poučení. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
