@@ -56928,8 +56928,114 @@ Výsledek není tajnůstkářství. Zákazník dostane jasnější odpověď a t
 
 Vyber jednu veřejnou stránku, FAQ odpověď nebo PDF, které už neodpovídá produktu tak přesně jako dřív. Za třicet minut vyplň stahovací kartu: dokument, důvod, typ změny, náhradní odpověď, staré cesty, privacy hranice, vlastník a kontrola. Pak oprav jen jednu nejrizikovější cestu, kterou se starý slib dostává k lidem. Zbytek dej do malé následné karty, ne do nekonečného „musíme uklidit dokumentaci“.
 
+## Příloha: Přesměrování po stažení dokumentace bez matení lidí a robotů
+
+Stažená dokumentace nekončí ve chvíli, kdy zmizí z navigace. Ještě nějakou dobu žije v uložených záložkách, starých e-mailech, odkazech v aplikaci, exportovaných PDF, interních runboocích a ve výsledcích vyhledávání. Pokud tenhle dozvuk neřídíš, vznikne zvláštní produktový horor: stránka už neexistuje, ale lidé ji pořád hledají a tým neví, jestli jim má poslat novou odpověď, starý archiv, nebo omluvné emoji. Emoji je fajn, ale URL samo neopraví.
+
+Privacy-first přesměrování má dva cíle. První je orientace: člověk má pochopit, co se stalo a kde je aktuální cesta. Druhý je omezení datového a provozního rizika: starý veřejný detail se nemá dál šířit jen proto, že je technicky pohodlné nechat všechno dostupné navždy.
+
+> Codyho komentář: Přesměrování není SEO kouzlo, kterým zameteš špatné rozhodnutí pod koberec. Je to produktová cedule. Dobrá cedule říká „tudy už ne, tady je správná cesta“. Špatná cedule říká „vítej na homepage, hodně štěstí, poutníku“.
+
+### Vyber stav podle významu staré stránky
+
+Nejdřív rozhodni, co má stará URL znamenat po změně. Nedělej automaticky `301` na nejbližší podobnou stránku. U dokumentace je přesnost důležitější než touha zachovat každou návštěvu jako číslo v grafu.
+
+| Situace | Doporučené chování | Proč |
+| --- | --- | --- |
+| Obsah má plnohodnotnou náhradu se stejným účelem | Trvalé přesměrování na novou stránku | Čtenář hledal konkrétní odpověď a nová stránka ji skutečně nahrazuje. |
+| Obsah se dočasně přesouvá nebo čeká na revizi | Dočasné přesměrování nebo krátká stavová stránka | Nechceš vyhledávačům ani lidem tvrdit, že nový stav je definitivní. |
+| Obsah už nemá být veřejný, ale otázka je legitimní | Krátká veřejná odpověď s bezpečným dalším krokem | Čtenář nezůstane v prázdnu a interní detaily se nevrátí ven. |
+| Obsah je historický a nemá řídit práci | Archivní stránka s jasným datem neplatnosti | Zachováš kontext, ale zabráníš použití starého postupu jako aktuální pravdy. |
+| Obsah je rizikový nebo zavádějící a nemá náhradu | Stav „pryč“ nebo stručné vysvětlení bez detailů | Je lepší přiznat konec než posílat lidi na nesouvisející obsah. |
+
+Technický detail: HTTP má pro tyto situace různé stavové kódy. RFC 9110 popisuje význam přesměrování i stav `410 Gone`, tedy signál, že cílový zdroj už není dostupný a stav je považovaný za trvalý. V e-booku to není výzva k akademické soutěži ve stavových kódech. Je to připomínka, že technické chování má odpovídat produktové pravdě.
+
+### Nepřesměrovávej všechno na domovskou stránku
+
+Homepage je často nejhorší náhradní odpověď. Člověk přišel s konkrétní otázkou a ty mu ukážeš výkladní skříň. Pokud hledal export dat, zrušení účtu, bezpečnostní odpověď nebo právní dokument, obecná stránka produktu mu nepomůže. Navíc tým ztratí signál, že stará otázka pořád existuje.
+
+Lepší náhrady:
+
+- nová stránka se stejným účelem,
+- stručná stránka „tento postup byl nahrazen“ s odkazem na aktuální postup,
+- veřejné FAQ s bezpečnou odpovědí a support kontaktem,
+- archiv s datem poslední platnosti a jasným varováním,
+- interní karta pro support, pokud detail nemá být veřejný.
+
+Pravidlo pro rozhodování: pokud bys nedokázal zákazníkovi jednou větou vysvětlit, proč stará URL vede právě sem, přesměrování je pravděpodobně špatně.
+
+### Zachovej měření chudé a užitečné
+
+Po stažení dokumentace je lákavé začít měřit každé kliknutí, referrer, firmu, uživatele a cestu. Nedělej z úklidu dokumentace nový sledovací projekt. Většinou stačí agregované signály:
+
+- kolikrát se stará URL otevřela za týden,
+- odkud obecně přichází provoz: produkt, web, vyhledávání, support materiál,
+- jestli lidé po náhradní stránce používají správný další krok,
+- kolik support dotazů odkazuje na starý text,
+- jestli interní vyhledávání dál nabízí mrtvý výsledek.
+
+Nesbírej identitu čtenáře jen proto, abys věděl, že starý odkaz žije. Pokud potřebuješ opravit odkaz v produktu, najdi zdroj odkazu v kódu, šabloně nebo dokumentaci. Nepotřebuješ k tomu stopovat jednotlivé lidi.
+
+### Připrav support odpověď dřív než redirect
+
+Když stáhneš důležitou dokumentaci, první dotazy často dopadnou na support nebo sales. Přesměrování samo o sobě nestačí. Tým potřebuje jednu krátkou odpověď, která říká stejnou pravdu jako nová veřejná stránka.
+
+Šablona odpovědi:
+
+> Dobrý den, původní návod jsme stáhli, protože už neodpovídal aktuálnímu postupu. Aktuální informace najdete zde: ___. Pokud potřebujete detail pro svůj účet nebo audit, napište nám prosím ___. Sdílíme jen informace relevantní k vašemu případu a bez interních provozních detailů.
+
+Ta poslední věta je důležitá. Neomlouvá tajnůstkářství, ale nastavuje hranici. Zákazník má dostat odpověď, kterou potřebuje k rozhodnutí nebo kontrole. Nemá dostat interní mapu systému jen proto, že starý dokument byl příliš sdílný.
+
+### Udělej krátké kontrolní okno
+
+Přesměrování ověř nejdřív technicky a potom pracovně. Technicky znamená: stará URL vrací očekávaný stav, nová stránka se načte, interní odkazy nevedou na mrtvou cestu a sitemap/RSS nepublikují stažený text jako aktuální novinku. Pracovně znamená: support ví, co odpovědět, produkt neukazuje starý odkaz a někdo za dva týdny zkontroluje, jestli se stará pravda nevrací.
+
+Kontrolní karta:
+
+| Pole | Zápis |
+| --- | --- |
+| Stará URL | Jaká cesta se stáhla nebo změnila? |
+| Nový stav | Redirect, archiv, náhradní FAQ, `410`, nebo interní postup? |
+| Důvod | Proč tento stav odpovídá realitě? |
+| Kontrola odkazů | Kde jsme hledali starou URL? |
+| Support věta | Jakou jednu odpověď používá tým? |
+| Chudé měření | Jaký agregovaný signál sledujeme a kdy ho smažeme? |
+| Datum revize | Kdy rozhodneme, že změna obstála? |
+
+### Příklad: Staré PDF o bezpečnostním review
+
+Firma měla veřejné PDF „Security review checklist“. Časem se z něj stal mix marketingu, starých názvů služeb a příliš detailního popisu interních schvalovacích kroků. PDF už nebylo v navigaci, ale pořád kolovalo v sales e-mailech a pár zákazníků ho mělo v procurement šabloně.
+
+Tým zvolil tento postup:
+
+| Krok | Rozhodnutí |
+| --- | --- |
+| Veřejná náhrada | Nové trust FAQ popisuje bezpečnostní principy, region provozu, export dat a kontaktní cestu. |
+| Staré PDF | Staženo z veřejného webu, stará URL vede na krátkou stránku s vysvětlením a odkazem na trust FAQ. |
+| Interní detail | Provozní checklist zůstává v interní dokumentaci s vlastníkem a datem revize. |
+| Sales úklid | Staré decky a e-mailové šablony dostaly novou trust odpověď. |
+| Měření | Tým 30 dní sleduje jen počet návštěv staré URL a počet support dotazů na staré PDF. |
+
+Výsledek: zákazník neztratí orientaci, sales nepoužívá zastaralý materiál a interní provozní detaily se nevracejí do veřejného prostoru jen kvůli pohodlnosti starého odkazu.
+
+### Checklist: Přesměrování po stažení dokumentace
+
+- [ ] Stará URL má jasný nový stav: náhrada, archiv, dočasná změna, stručná odpověď nebo konec.
+- [ ] Přesměrování nevede na homepage, pokud homepage není opravdu nejlepší odpověď na původní otázku.
+- [ ] Technické chování odpovídá produktové pravdě, ne jen SEO zvyku.
+- [ ] Čtenář dostane bezpečný další krok bez interních provozních detailů.
+- [ ] Support a sales mají jednu krátkou odpověď ke změně.
+- [ ] Staré odkazy jsou zkontrolované v produktu, webu, dokumentaci, šablonách a PDF.
+- [ ] Měření dopadu je agregované, časově omezené a bez sledování jednotlivců.
+- [ ] Revize rozhodne, jestli redirect, archiv nebo náhradní odpověď zůstává, zúží se, nebo zmizí.
+
+### Mini úkol
+
+Vyber jednu staženou nebo problematickou URL dokumentace. Za dvacet pět minut vyplň kontrolní kartu: stará URL, nový stav, důvod, kontrola odkazů, support věta, chudé měření a datum revize. Pak ověř technicky jen jednu věc: co stará URL skutečně vrací. Pokud vede na obecnou homepage, přepiš ji na užitečnější náhradní odpověď nebo si otevři kartu s konkrétním vlastníkem.
+
 ## Zdroje
 
+- IETF RFC 9110: HTTP Semantics - význam HTTP přesměrování a stavů včetně `410 Gone` pro zdroje, které už nejsou dostupné: https://www.rfc-editor.org/rfc/rfc9110.html
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
 - NIST SP 800-61 Rev. 3: Incident Response Recommendations and Considerations for Cybersecurity Risk Management - doporučení k přípravě, detekci, reakci a obnově v rámci incident response a CSF 2.0: https://csrc.nist.gov/pubs/sp/800/61/r3/final
 - OpenBSD manual: ssh_config(5) - klientská konfigurace OpenSSH včetně `BatchMode`, `StrictHostKeyChecking`, `CheckHostIP` a `VerifyHostKeyDNS`: https://man.openbsd.org/ssh_config
@@ -57121,6 +57227,7 @@ Vyber jednu veřejnou stránku, FAQ odpověď nebo PDF, které už neodpovídá 
 
 ## Pracovní log
 
+- 2026-07-26: Doplněna příloha o přesměrování po stažení dokumentace bez matení lidí a robotů: volba nového stavu staré URL, zákaz přesměrování všeho na homepage, chudé měření, support odpověď, kontrolní karta, příklad se starým bezpečnostním PDF, checklist a mini úkol; ověřen a přidán zdroj RFC 9110 k HTTP sémantice.
 - 2026-07-26: Doplněna příloha o stažení veřejné dokumentace bez ztráty důvěry: rozlišení zúžení, rozdělení, archivace, stažení a opravy reality, stahovací karta, náhradní cesta pro čtenáře, úklid starých slibů v odkazech, šablonách, sitemap, RSS a sales materiálech, zachování interního důkazu bez zbytečných detailů, příklad starého návodu k exportu dat, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro zúžení nebo stažení veřejného slibu. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
 - 2026-07-26: Doplněna příloha o kontrole publika dokumentace po změně bez tichého úniku: návrat k publikační kartě, ověření jednoho skutečného pracovního průchodu, hledání citlivých detailů v nové vrstvě, kontrola odkazů, sdílení, indexace a šablon, verdikty po kontrole, chudé měření dopadu bez sledování čtenářů, příklad veřejného FAQ k exportu dat, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro kontrolu změny publika dokumentace po prvním použití. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
