@@ -186,6 +186,7 @@ Když se nechceš vracet do celé knihy, hledej konkrétní nástroj podle výst
 | Stáhnout nebo zúžit veřejnou dokumentaci bez ztráty důvěry | „stažení veřejné dokumentace“, „zúžení veřejného slibu“ nebo „veřejný text končí“ | stahovací karta s důvodem, náhradní odpovědí, opravou odkazů, archivem a kontrolou starých slibů |
 | Uklidit šablony po stažení dokumentace bez návratu starého slibu | „šablony po stažení dokumentace“, „starý slib v makru“ nebo „support šablony po změně“ | krátký úklid maker, obchodních textů, onboardingových zpráv, automatických odpovědí a interních snippetů po změně veřejné pravdy |
 | Ověřit první odpovědi po změně šablon bez návratu starého slibu | „kontrola odpovědí po změně šablon“, „první odpovědi po stažení“ nebo „makro v provozu“ | kontrola několika skutečných odpovědí, navazujících dotazů, starých odkazů, automatizací a datové hranice po úpravě šablon |
+| Opravit šablony po první kontrole bez nekonečného ladění | „druhá oprava šablon“, „nález z odpovědí“ nebo „šablona po kontrole“ | malý opravný průchod, který řeší příčinu nálezu, uklidí staré nosiče a rozhodne, jestli je šablona zavřená |
 
 Pravidlo pro práci s rejstříkem: otevři maximálně tři nalezené části, vyber jednu a zapiš výstup. Pokud po deseti minutách pořád skáčeš mezi odkazy, vrať se k tabulce „Kudy začít podle aktuální bolesti“ a zúž problém. E-book není buffet. Teda je, ale bez talíře si stejně odneseš jen chaos.
 
@@ -57283,6 +57284,139 @@ Výsledek není „všechno hotovo“. Výsledek je přesnější: hlavní šabl
 
 Vezmi jednu šablonu, kterou jste nedávno upravili po změně veřejné dokumentace. Najdi tři poslední skutečná použití a u každého označ jednu věc: „funguje“, „vrací starý slib“, „je moc prázdná“, „sdílí moc detailů“ nebo „tým ji obchází“. Potom oprav jen jednu nejčastější příčinu. Neinstaluj k tomu nový tracking. Když potřebuješ vědět, jestli odpověď mate lidi, často stačí přečíst, na co se ptali hned potom. Ano, revoluční metoda: otevřít oči.
 
+## Příloha: Druhá oprava šablon po první kontrole bez nekonečného ladění
+
+První kontrola odpovědí po změně šablon málokdy řekne jen „hotovo“. Častěji ukáže drobný návrat starého slibu, prázdnou opatrnost, příliš široké sdílení detailů nebo obcházení nové šablony. To není selhání. Selhání je tvářit se, že zjištění automaticky znamená další dlouhý projekt.
+
+Druhá oprava má být krátká, konkrétní a uzavíratelná. Jejím cílem není napsat dokonalou odpověď pro všechny budoucí situace. Cílem je odstranit nejčastější příčinu, kvůli které lidé po změně šablony pořád sahají po staré pravdě nebo po ruční improvizaci.
+
+### Začni jedním nálezem, ne pocitem
+
+Po první kontrole odpovědí si nepiš „šablona není dobrá“. To je mlha v kancelářské košili. Napiš přesný nález:
+
+| Slabý zápis | Použitelný zápis |
+| --- | --- |
+| Lidé to pořád vysvětlují špatně. | Ve 2 ze 6 odpovědí se vrátil starý termín exportu. |
+| Šablona je moc suchá. | Ve 3 odpovědích zákazník položil navazující otázku, co má udělat dál. |
+| Sales používá něco jiného. | Jeden obchodní follow-up poslal staré PDF místo nového FAQ. |
+| Automatizace mate lidi. | Automatický draft použil novou šablonu, ale připojil starý interní odkaz. |
+
+Dobrý nález má tři vlastnosti: víš, kde vznikl, víš, jak se projevil, a víš, co by se mělo stát příště. Pokud některá část chybí, ještě neopravuj text. Nejdřív si doplň kontext ze skutečného vlákna nebo z místa, kde člověk šablonu použil.
+
+Privacy-first poznámka: pro druhou opravu nepotřebuješ stahovat celý support archiv ani profilovat zákazníky podle témat. Stačí malý vzorek skutečných odpovědí, ruční štítky a rozhodnutí, které pole nebo přílohy se do opravy vůbec nemají přenášet.
+
+### Rozliš pět druhů opravy
+
+Ne každý nález patří do stejného místa. Když všechno opravíš jen přepisem šablony, vyrobíš dlouhý text, který se bude hůř používat. Druhá oprava má nejdřív určit typ zásahu.
+
+| Nález | Pravděpodobná oprava | Co nesmíš přidat automaticky |
+| --- | --- | --- |
+| Starý slib se vrací v odpovědi | upravit šablonu a smazat starý nosič | nový tracking používání šablony po lidech |
+| Odpověď je příliš prázdná | doplnit další krok nebo rozhodovací hranici | právnický odstavec pro každou variantu |
+| Odpověď sdílí moc detailů | rozdělit veřejnou a řízeně sdílenou vrstvu | zákaz odpovídat bez jasné náhradní cesty |
+| Tým šablonu obchází | opravit dostupnost, název nebo spouštěč šablony | interní kontrolní rituál bez vlastnictví |
+| Zákazník pořád nechápe realitu | opravit produkt, pricing, dokumentaci nebo onboarding | další text, který maskuje skutečný problém |
+
+Praktické pravidlo: pokud se stejná věta dopisuje ručně, patří nejspíš do šablony. Pokud se ručně dopisuje výjimka, patří do rozhodovacího pravidla. Pokud se ručně dopisuje omluva za stav produktu, patří problém do backlogu, ne do dalšího makra.
+
+> Codyho komentář: Šablona není kouzelný koberec přes díru v produktu. Když zákazník pořád nerozumí tomu, co se stane s jeho daty po zrušení účtu, může být špatně text. Ale může být taky špatně samotný produktový stav, export, billing nebo retence. Text má pravdu vysvětlit, ne zakrýt.
+
+### Udělej opravný průchod v jednom balíku
+
+Druhá oprava nemá být série drobných neviditelných změn, které se za týden nedají dohledat. Udělej jeden malý opravný balík:
+
+| Pole | Co vyplnit |
+| --- | --- |
+| Původní změna | jaká šablona nebo dokumentace se měnila |
+| Kontrolní nález | co se ukázalo v prvních odpovědích |
+| Příčina | proč se to stalo: text, dostupnost, starý nosič, automatizace, realita produktu |
+| Oprava | jedna změna, kterou uděláš teď |
+| Úklid | které staré odkazy, přílohy, makra nebo interní poznámky zmizí |
+| Ověření | kdy a na jak malém vzorku zkontroluješ, že oprava pomohla |
+| Stop pravidlo | kdy přestaneš šablonu ladit a otevřeš produktový nebo procesní problém |
+
+Tenhle balík může být klidně jeden odstavec v rozhodovacím logu. Důležité je, aby po něm další člověk pochopil, proč byla druhá oprava udělaná a proč se nerozjela nekonečná debata o slovíčkách.
+
+### Ukliď starý nosič, který vyhrává pohodlím
+
+Když se stará odpověď vrací, často není problém v nové šabloně. Problém je, že stará odpověď je pořád nejrychlejší cesta. Je v oblíbeném makru, připnutém chatu, starém PDF, CRM poznámce, interním onboarding dokumentu nebo v automatickém draftu.
+
+Při druhé opravě projdi hlavně místa, kam tým sahá ve spěchu:
+
+- support makra a uložené odpovědi,
+- sales šablony a follow-up e-maily,
+- onboarding checklisty,
+- interní FAQ,
+- automatické drafty a notifikace,
+- staré PDF nebo prezentace,
+- odkazy v CRM, ticketingu a knowledge base,
+- veřejné FAQ, pokud na něj šablona odkazuje.
+
+Nemusíš uklízet všechno na světě. Ale musíš uklidit nosič, který se v nálezu skutečně objevil. Pokud kontrola ukázala staré PDF v obchodním follow-upu, neopravuj jen support makro. Oprav obchodní materiál, jinak se starý slib vrátí přes vedlejší dveře.
+
+### Dej opravě jedno kontrolní okno
+
+Druhá oprava má mít konec. Bez konce vznikne zvláštní režim, kdy tým každých pár dní mění věty podle posledního ticketu. To není učení. To je nervozita zapsaná do dokumentace.
+
+Nastav malé kontrolní okno podle objemu provozu:
+
+| Provoz | Rozumné kontrolní okno |
+| --- | --- |
+| Málo dotazů | po dalších 3 až 5 skutečných odpovědích |
+| Střední objem | po 14 dnech nebo 10 odpovědích |
+| Hodně dotazů | po jednom týdnu na malém ručním vzorku |
+| Kritické téma | po prvních 3 odpovědích a ještě jednou po uzavření nálezu |
+
+Sleduj jen to, co pomůže rozhodnout: vrátil se starý slib, položil zákazník stejný navazující dotaz, musel tým odpověď ručně přepisovat, objevila se citlivá informace navíc. Nepotřebuješ skóre spokojenosti, heatmapu dokumentace ani individuální čtenářskou historii. Potřebuješ vědět, jestli oprava skutečně změnila práci.
+
+### Rozhodni, kdy přestat ladit text
+
+Po druhé opravě si dej jasný verdikt:
+
+| Verdikt | Kdy ho použít | Další krok |
+| --- | --- | --- |
+| Zavřít | šablona se používá správně a nevrací starý slib | označit jako běžný stav |
+| Zúžit | šablona funguje jen pro část situací | rozdělit spouštěče nebo přidat hranici použití |
+| Opravit realitu | lidé pořád vysvětlují produktovou mezeru | otevřít produktový, billing nebo provozní úkol |
+| Omezit sdílení | odpovědi dávají ven moc interních detailů | rozdělit veřejnou a řízeně sdílenou verzi |
+| Vypnout | šablona škodí nebo vede k falešným odpovědím | odstranit ji a nahradit ručním postupem s vlastníkem |
+
+Nejnebezpečnější verdikt je nevyřčený verdikt. Když nikdo neřekne, jestli je šablona hotová, tým si vytvoří vlastní pravidla. Jeden člověk ji používá, druhý ji ignoruje, třetí ji po každé odpovědi přepisuje. Výsledek: místo jedné pravdy máš pět drobných pravd a každá vypadá skoro správně.
+
+### Příklad: Druhá oprava exportního makra
+
+Tým stáhl starý návod k exportu dat a nahradil ho veřejným FAQ. Support makro bylo přepsané. První kontrola po dvou týdnech ukázala, že hlavní odpověď funguje, ale ve dvou vláknech support ručně doplnil starý odhad času a jeden obchodní follow-up poslal staré PDF.
+
+Opravný balík:
+
+| Pole | Zápis |
+| --- | --- |
+| Původní změna | Stažení starého exportního návodu a přechod na veřejné FAQ. |
+| Kontrolní nález | Starý časový slib se vrátil ve 2 support odpovědích, staré PDF odešlo v 1 sales follow-upu. |
+| Příčina | Nové makro říká co platí, ale neříká, jak zákazník pozná další krok. Sales šablona měla pořád přílohu. |
+| Oprava | Do support makra přidat jednu větu: „Po odeslání žádosti dostanete potvrzení s dalším krokem; přesný čas závisí na typu exportu.“ |
+| Úklid | Odebrat staré PDF ze sales šablony a označit původní přílohu jako nepoužívat. |
+| Ověření | Zkontrolovat další 3 odpovědi na exportní dotaz a 2 sales follow-upy. |
+| Stop pravidlo | Pokud se dotaz na čas pořád vrací, otevřít produktový úkol pro viditelný stav exportní žádosti. |
+
+Tahle oprava nevyřešila celý exportní proces. Vyřešila jednu příčinu špatné odpovědi a zároveň nastavila hranici: pokud text nestačí, další práce už není copywriting, ale produkt.
+
+### Checklist: Druhá oprava šablon
+
+- [ ] Druhá oprava vychází z konkrétního nálezu, ne z obecného pocitu.
+- [ ] Nález říká, kde vznikl, jak se projevil a co má být příště jinak.
+- [ ] Rozlišil jsem textovou chybu, starý nosič, problém dostupnosti šablony a problém reality produktu.
+- [ ] Oprava mění jednu hlavní příčinu, ne celý support proces.
+- [ ] Uklidil jsem starý nosič, který se v nálezu skutečně objevil.
+- [ ] Nepřidal jsem nové sledování jednotlivců kvůli ověření šablony.
+- [ ] Existuje malé kontrolní okno po opravě.
+- [ ] Je jasné stop pravidlo, kdy přestat ladit text a otevřít produktový nebo provozní úkol.
+- [ ] Verdikt po druhé opravě bude „zavřít“, „zúžit“, „opravit realitu“, „omezit sdílení“ nebo „vypnout“.
+
+### Mini úkol
+
+Vezmi jednu šablonu, která po první kontrole pořád zlobí. Napiš jeden konkrétní nález, jednu pravděpodobnou příčinu a jednu opravu. Potom najdi starý nosič, který se v nálezu objevil: makro, PDF, prezentaci, CRM poznámku, interní FAQ nebo automatický draft. Uprav právě tenhle nosič a nastav kontrolu na další tři skutečné odpovědi. Pokud ani potom odpověď nebude fungovat, přestaň honit slovíčka a otevři problém v produktu nebo provozu.
+
 ## Zdroje
 
 - IETF RFC 9110: HTTP Semantics - význam HTTP přesměrování a stavů včetně `410 Gone` pro zdroje, které už nejsou dostupné: https://www.rfc-editor.org/rfc/rfc9110.html
@@ -57476,6 +57610,8 @@ Vezmi jednu šablonu, kterou jste nedávno upravili po změně veřejné dokumen
 - Nielsen Norman Group: Onboarding Tutorials vs. Contextual Help - rozdíl mezi úvodními tutoriály a kontextovou pomocí: https://www.nngroup.com/articles/onboarding-tutorials/
 
 ## Pracovní log
+
+- 2026-07-26: Doplněna příloha o druhé opravě šablon po první kontrole bez nekonečného ladění: práce s konkrétním nálezem, rozlišení typů opravy, opravný balík, úklid starých nosičů, malé kontrolní okno, verdikty po opravě, příklad exportního makra, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro opravu šablon po prvních reálných odpovědích. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
 - 2026-07-26: Doplněna příloha o kontrole odpovědí po změně šablon bez návratu starého slibu: malé kontrolní okno, čtení celého zákaznického vlákna, čtyři typy selhání šablon, rozlišení textové opravy od produktové nebo obchodní mezery, kontrolní záznam, příklad exportního makra po dvou týdnech, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro ověření prvních odpovědí po úpravě support, sales, onboardingových a automatických šablon. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
