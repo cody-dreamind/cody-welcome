@@ -181,6 +181,7 @@ Když se nechceš vracet do celé knihy, hledej konkrétní nástroj podle výst
 | Sloučit podobnou dokumentaci bez ztráty kontextu | „sloučení dokumentace“, „cílová pravda“ nebo „dokumentační merge“ | merge karta s cílovou stránkou, zachovanými důkazy, opravenými odkazy, hranicí sdílení a kontrolou po sloučení |
 | Ověřit dokumentační merge po prvním používání | „kontrola po sloučení dokumentace“, „merge review“ nebo „stará pravda po sloučení“ | krátké ověření, že cílová stránka řídí práci, staré odkazy mlčí a nevznikla širší datová ani publikační stopa |
 | Předat vlastnictví sloučené dokumentace bez osiřelé pravdy | „předání sloučené dokumentace“, „nový vlastník dokumentace“ nebo „dokumentace po merge“ | předávací karta s vlastníkem, záskokem, revizním triggerem, přístupovou hranicí a prvním malým úkolem po převzetí |
+| Změnit publikum dokumentace bez nechtěného zveřejnění | „změna publika dokumentace“, „veřejná interní sdílená vrstva“ nebo „publikum dokumentace“ | publikační karta, která určí co je veřejné, řízeně sdílené, interní nebo neveřejné a jak se uklidí odkazy, příklady a přístupy |
 
 Pravidlo pro práci s rejstříkem: otevři maximálně tři nalezené části, vyber jednu a zapiš výstup. Pokud po deseti minutách pořád skáčeš mezi odkazy, vrať se k tabulce „Kudy začít podle aktuální bolesti“ a zúž problém. E-book není buffet. Teda je, ale bez talíře si stejně odneseš jen chaos.
 
@@ -56517,6 +56518,149 @@ Výsledek: dokumentace už není jen sloučená. Má provozní režim. Další z
 
 Vyber jednu sloučenou dokumentační stránku, která má po kontrole zůstat v provozu. Za patnáct minut doplň předávací kartu: vlastník, záskok, revizní trigger, privacy hranice, přístupová hranice a první malý úkol. Potom první úkol rovnou udělej nebo ho zapiš jako konkrétní kartu se slovesem. Pokud neumíš určit vlastníka, napiš místo toho rozhodovací větu: „Dokud nemá ___ vlastníka, nesmí se používat jako jediná pravda pro ___.“
 
+## Příloha: Změna publika dokumentace bez nechtěného zveřejnění
+
+Dokumentace nemá jen obsah. Má i publikum. Stejná věta může být bezpečná v interním runbooku, opatrná v řízeně sdíleném bezpečnostním balíčku a úplně nevhodná ve veřejné nápovědě. Když tým mění publikum dokumentace, nemění jen místo, kde text leží. Mění, kdo ho může číst, citovat, indexovat, exportovat, screenshotovat a poslat dál.
+
+Typický problém vzniká nevinně. Support chce zrychlit odpovědi, sales chce méně opakovaných dotazů, produkt chce transparentnější dokumentaci a někdo navrhne: „Dejme interní FAQ veřejně.“ Někdy je to správně. Jindy se tím ven dostanou interní názvy systémů, zákaznické scénáře, přesné limity bezpečnostních kontrol, screenshoty administrace nebo staré sliby, které už tým neumí garantovat. To není transparentnost. To je únik s hezčím nadpisem.
+
+Cílem této přílohy je převést změnu publika dokumentace na malou řízenou práci: rozhodnout, co bude veřejné, co řízeně sdílené, co interní a co se nemá sdílet vůbec.
+
+> Codyho komentář: Veřejná dokumentace je produktové rozhraní. Interní dokumentace je pracovní nástroj. Když je smícháš bez rozmyslu, dostaneš text, který je zároveň moc obecný pro tým a moc konkrétní pro svět. To je vzácný druh neefektivity, gratuluju.
+
+### Začni otázkou, kdo má podle textu jednat
+
+Publikum neurčuj podle toho, komu by text „mohl být užitečný“. To je cesta k nekonečnému sdílení. Začni otázkou, kdo má podle dokumentace udělat konkrétní práci.
+
+Rozděl publikum takto:
+
+| Publikum | Kdy dává smysl | Co do něj nepatří |
+| --- | --- | --- |
+| Veřejné | Zákazník, partner nebo návštěvník potřebuje pochopit slib, postup nebo možnost bez kontaktování týmu. | Interní workflow, neveřejné URL, konkrétní zákaznické příklady, bezpečnostní detaily zneužitelné k útoku. |
+| Řízeně sdílené | Potenciální zákazník, auditor nebo partner potřebuje hlubší odpověď v nákupním nebo smluvním procesu. | Volně indexovatelný detail, který patří jen do interního provozu. |
+| Interní | Tým podle textu řeší práci, incident, support, onboarding nebo release. | Marketingové sliby, které nikdo neověřil pro veřejné použití. |
+| Neveřejné | Text obsahuje citlivou historii, osobní údaje, interní incidentní detaily nebo staré pracovní poznámky. | Cokoliv, co se vydává za aktuální návod. |
+
+Jedna stránka může mít více vrstev, ale každá vrstva musí mít jasnou hranici. Veřejné FAQ může říct, že export dat je dostupný přes účet a support pomůže s výjimečnými případy. Interní makro může popsat, jak support ověří oprávnění. Provozní runbook může mít přesný postup obnovy. Tyto vrstvy spolu souvisí, ale nemají být jedna rozlitá stránka.
+
+### Udělej publikační kartu
+
+Před přesunem textu vyplň krátkou kartu. Zabere méně času než pozdější vysvětlování, proč se ve veřejné nápovědě objevil screenshot interní administrace. A ano, tohle je přesně ten typ věty, která vzniká z bolesti.
+
+Použij tento formát:
+
+| Pole | Co vyplnit |
+| --- | --- |
+| Původní místo | Kde text žije teď. |
+| Nové publikum | Veřejné, řízeně sdílené, interní nebo neveřejné. |
+| Pracovní důvod | Jakou konkrétní opakovanou práci změna zlepší. |
+| Čtenář | Kdo má podle textu jednat nebo se rozhodnout. |
+| Co zůstane interní | Detaily, které se nesmí přesunout. |
+| Co se přepíše | Pasáže, které potřebují lidský jazyk, méně detailu nebo nový kontext. |
+| Vlastník schválení | Kdo může potvrdit, že změna publika odpovídá realitě. |
+| Odkazy a šablony | Kde se po změně musí upravit navazující odkazy. |
+| Kontrola po publikaci | Kdy se ověří, že nové publikum opravdu pomohlo a nic citlivého neuteklo. |
+
+Největší hodnota karty je pole „co zůstane interní“. Bez něj lidé při editaci často škrtají náhodně: vyhodí užitečné vysvětlení a nechají detail, který ven nepatří. Privacy-first úprava není mlžení. Je to přesné rozlišení mezi tím, co člověk potřebuje vědět, a tím, co by jen rozšiřovalo stopu.
+
+### Přepiš text pro nové publikum
+
+Změna publika není copy-paste. Interní text obvykle mluví zkratkami, počítá se znalostí systému a obsahuje pracovní detaily. Veřejný text má mluvit podle situace čtenáře, ne podle interní architektury.
+
+Při přepisu si projdi čtyři filtry:
+
+- Nahraď interní názvy systémů popisem práce, kterou dělají.
+- Odstraň konkrétní zákaznické příklady, pokud k nim není jasný důvod a oprávnění.
+- Přepiš přesné bezpečnostní nebo provozní detaily na ověřitelný slib bez návodu ke zneužití.
+- Doplň hranici: kdy má čtenář použít dokumentaci a kdy kontaktovat tým.
+
+Příklad přepisu:
+
+| Interní formulace | Veřejná formulace |
+| --- | --- |
+| „Když webhook z billing adminu spadne třikrát, zkontroluj retry frontu v panelu X a ručně přepni stav.“ | „Pokud se stav platby neaktualizuje, kontaktujte podporu. Stav ověříme podle platebního záznamu a nebudeme po vás chtít údaje z platební karty.“ |
+| „Export běží přes job `account_export_full` a dočasný ZIP se drží v interním bucketu.“ | „Export připravíme jako dočasný soubor dostupný oprávněnému uživateli. Po dokončení práce má soubor omezenou životnost.“ |
+| „Enterprise zákazníkům posíláme trust odpovědi z makra `security-dpa-v3`.“ | „Pro nákupní nebo bezpečnostní kontrolu poskytujeme řízený trust balíček s informacemi o provozu, datech a dodavatelích.“ |
+
+Takový přepis neoslabuje transparentnost. Naopak ji čistí od detailů, které čtenáři nepomáhají rozhodnout se a týmu zvyšují riziko.
+
+### Zkontroluj odkazy, indexaci a přístupy
+
+Jakmile se změní publikum, změň i nosiče. Nestačí přesunout stránku z interní wiki do veřejné dokumentace nebo opačně. Musíš projít cesty, kterými se k ní lidé a systémy dostanou.
+
+Zkontroluj hlavně:
+
+- navigaci a interní odkazy,
+- support makra a sales šablony,
+- onboardingové checklisty,
+- veřejné FAQ, trust center a nápovědu,
+- sitemap, pokud se přidala nová veřejná URL,
+- oprávnění v dokumentačním nástroji,
+- sdílené odkazy vytvořené „jen na chvíli“,
+- exportované PDF nebo balíčky posílané zákazníkům,
+- staré odkazy v issues, runboocích a rozhodovacím logu.
+
+Privacy-first detail: řízeně sdílený dokument nemá být veřejná stránka jen proto, že je technicky jednodušší poslat odkaz. Pokud má být přístup omezený, zvol prostředek, který omezení opravdu umí, a zapiš, kdy se sdílení ukončí.
+
+### Rozhodni, co po změně měřit
+
+Změna publika má mít pracovní dopad. Může snížit počet opakovaných support dotazů, zrychlit sales odpovědi, zlepšit onboarding nebo odstranit nejistotu zákazníka před nákupem. Nemusí kvůli tomu vzniknout nová sledovací vrstva.
+
+Vhodné chudé signály:
+
+- počet opakovaných dotazů na stejné téma za dva týdny,
+- ruční poznámka supportu, zda nový veřejný text stačil,
+- počet použití nové šablony v řízeném procesu,
+- jedno review nákupního dotazu, kde se ověří, zda trust balíček odpověděl bez dalšího exportu,
+- kontrola, že se interní detail neobjevil ve veřejném vyhledávání nebo v indexovatelném textu.
+
+Nevhodné výchozí reflexy:
+
+- nahrávat čtení dokumentace po jednotlivých uživatelích,
+- přidat session replay na nápovědu,
+- sledovat každý scroll v trust centru,
+- posílat dokumentaci přes marketingový formulář jen kvůli sběru leadů,
+- ukládat do CRM citlivé poznámky z bezpečnostní kontroly, které nikdo nepotřebuje pro další krok.
+
+Měř rozhodnutí, ne zvědavost. To pravidlo je nudné, opakovatelné a docela účinné. Tedy podezřele dobrá kombinace.
+
+### Příklad: Interní exportní návod do veřejného FAQ
+
+Tým má interní návod pro export dat a zrušení účtu. Support ho používá často, protože zákazníci se ptají, co před zrušením dostanou a kdo může export vyžádat. Produkt navrhne část návodu zveřejnit.
+
+Publikační karta:
+
+| Pole | Zápis |
+| --- | --- |
+| Původní místo | Interní support makro: Export a zrušení workspace. |
+| Nové publikum | Veřejné FAQ plus interní makro pro ověření oprávnění. |
+| Pracovní důvod | Snížit opakované dotazy před zrušením a dát zákazníkovi jasný další krok. |
+| Čtenář | Admin zákaznického účtu a support tým. |
+| Co zůstane interní | Přesný postup kontroly oprávnění, interní názvy systémů, historické incidentní poznámky. |
+| Co se přepíše | Technické kroky na lidský popis možností exportu, omezení a podpory. |
+| Vlastník schválení | Customer success lead a vlastník account settings. |
+| Odkazy a šablony | Pricing FAQ, support makro, onboarding admina, trust odpověď k retenci. |
+| Kontrola po publikaci | Po dvou týdnech projít pět posledních exportních dotazů a ověřit, zda veřejné FAQ stačilo. |
+
+Výsledek: zákazník dostane jasnější odpověď bez formuláře navíc. Support si nechá interní postup pro ověření. Tým nepublikuje zbytečné detaily a zároveň se nemusí tvářit tajemně u věcí, které zákazník oprávněně potřebuje vědět.
+
+### Checklist: Změna publika dokumentace
+
+- [ ] Vím, kdo má podle dokumentace jednat nebo se rozhodnout.
+- [ ] Text je rozdělený na veřejnou, řízeně sdílenou, interní a neveřejnou vrstvu.
+- [ ] Publikační karta obsahuje původní místo, nové publikum, pracovní důvod a čtenáře.
+- [ ] Je explicitně zapsané, co zůstane interní.
+- [ ] Interní zkratky, názvy systémů a citlivé provozní detaily jsou přepsané nebo odstraněné.
+- [ ] Veřejný text obsahuje jasnou hranici, kdy má čtenář kontaktovat tým.
+- [ ] Odkazy, šablony, přístupy a případná indexace odpovídají novému publiku.
+- [ ] Řízeně sdílený dokument není omylem veřejná stránka.
+- [ ] Dopad se ověřuje chudými signály bez sledování jednotlivých čtenářů.
+- [ ] Po kontrole existuje verdikt: ponechat, zúžit, vrátit interně, rozdělit vrstvy, opravit odkazy nebo archivovat.
+
+### Mini úkol
+
+Vyber jednu interní dokumentační stránku, kterou tým často přepisuje do e-mailů, sales odpovědí nebo support maker. Za dvacet minut vyplň publikační kartu a rozhodni, zda z ní vznikne veřejná odpověď, řízeně sdílený dokument, interní makro nebo nic. Nepřesouvej celý text. Přenes jen jednu otázku a napiš k ní dvě verze: veřejnou odpověď pro čtenáře a interní poznámku pro tým. Potom zkontroluj, že veřejná verze neobsahuje interní URL, konkrétní zákaznické údaje, screenshoty administrace ani zbytečné bezpečnostní detaily.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -56709,6 +56853,8 @@ Vyber jednu sloučenou dokumentační stránku, která má po kontrole zůstat v
 - Nielsen Norman Group: Onboarding Tutorials vs. Contextual Help - rozdíl mezi úvodními tutoriály a kontextovou pomocí: https://www.nngroup.com/articles/onboarding-tutorials/
 
 ## Pracovní log
+
+- 2026-07-26: Doplněna příloha o změně publika dokumentace bez nechtěného zveřejnění: rozlišení veřejné, řízeně sdílené, interní a neveřejné vrstvy, publikační karta, přepis interního textu pro nové publikum, kontrola odkazů, indexace a přístupů, chudé měření dopadu bez sledování čtenářů, příklad převodu interního exportního návodu do veřejného FAQ, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro změnu publika dokumentace. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
 - 2026-07-26: Doplněna příloha o předání sloučené dokumentace bez osiřelé pravdy: výběr vlastníka podle budoucí práce, záskok bez sdílených admin přístupů, předávací karta, revizní triggery navázané na změny, rozlišení drobných oprav a změny pravdy, první malý úkol po převzetí, příklad exportní dokumentace, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro předání dokumentace po merge. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
