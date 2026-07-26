@@ -174,6 +174,7 @@ Když se nechceš vracet do celé knihy, hledej konkrétní nástroj podle výst
 | Převést archivovaný runbook na použitelné poučení | „učení z archivovaného runbooku“, „provozní lekce“ nebo „runbook jako lekce“ | jedna učící karta, která zachová důležité rozhodnutí, opraví aktuální postup a smaže zbytečné stopy bez zakládání nového procesu |
 | Převést provozní lekci do backlogu bez poradní inflace | „lekce do backlogu“, „provozní lekce jako úkol“ nebo „učící karta pokračuje“ | jedna backlogová karta s důvodem, privacy hranicí, vlastníkem, ověřením a rozhodnutím kdy úkol zavřít |
 | Uzavřít backlogovou kartu z provozní lekce bez falešného hotovo | „uzavření lekce“, „backlogová karta hotovo“ nebo „lekce zavřená“ | zavírací review se skutečným dopadem, uklizenými datovými stopami a rozhodnutím, zda změna končí, pokračuje nebo přechází do rutiny |
+| Převést uzavřenou lekci do dokumentace bez úniku detailů | „lekce do dokumentace“, „dokumentační změna po lekci“ nebo „veřejná lekce“ | rozhodnutí, co patří do veřejné dokumentace, interního runbooku, changelogu nebo nikam |
 
 Pravidlo pro práci s rejstříkem: otevři maximálně tři nalezené části, vyber jednu a zapiš výstup. Pokud po deseti minutách pořád skáčeš mezi odkazy, vrať se k tabulce „Kudy začít podle aktuální bolesti“ a zúž problém. E-book není buffet. Teda je, ale bez talíře si stejně odneseš jen chaos.
 
@@ -55543,6 +55544,165 @@ Dobré zavření tady neoslavuje kratší alert. Potvrzuje, že člověk ví, co
 
 Vyber jednu backlogovou kartu, která vznikla z provozní lekce a tváří se jako hotová. Najdi původní změnovou větu, ověř jeden reálný nebo cvičný průchod a napiš pět řádků zavíracího záznamu. Zvlášť zkontroluj dočasné exporty, screenshoty, logy a přístupy. Pokud změna opravdu funguje, zavři ji. Pokud ne, otevři jen jednu menší navazující kartu.
 
+## Příloha: Převod uzavřené lekce do dokumentace bez úniku detailů
+
+Uzavřená provozní lekce často svádí k tomu, aby se „někam zdokumentovala“. To zní rozumně, dokud z toho nevznikne veřejná stránka plná interních detailů, supportní odpověď s citlivým kontextem nebo runbook, který opakuje starý incident tak podrobně, že ho za půl roku někdo použije jako návod ke špatnému postupu.
+
+Dokumentace po lekci má mít jeden cíl: pomoct dalšímu člověku udělat lepší krok bez toho, aby musel číst historii chyb, interní chaty, logy, payloady nebo osobní poznámky. Pokud lekce nejde převést do kratšího a bezpečnějšího návodu, možná ještě není lekcí. Možná je to jen čerstvá vzpomínka s přilepeným štítkem „knowledge base“.
+
+> Codyho komentář: Dobrá dokumentace není skládka paměti firmy. Je to filtr. Nechá venku emoce, nahodilé detaily a data, která už nemají účel. Dovnitř pustí jen rozhodnutí, pravidlo, hranici a další bezpečný krok.
+
+### Začni otázkou, kdo má po lekci udělat lepší práci
+
+Neptej se nejdřív, kam text uložit. Ptej se, komu má pomoct.
+
+Typické cílové publikum:
+
+| Publikum | Co potřebuje | Kam lekce obvykle patří |
+| --- | --- | --- |
+| Zákazník nebo veřejný čtenář | Vědět, co produkt umí, jak se chová a kde jsou hranice slibu. | Help stránka, veřejná dokumentace, changelog nebo trust centrum. |
+| Support | Odpovědět konzistentně bez opisování interní historie. | Odpovědní knihovna, support playbook nebo interní FAQ. |
+| Vývoj nebo provoz | Zopakovat bezpečný postup při změně, chybě nebo releasu. | Runbook, ADR, release checklist nebo technická dokumentace. |
+| Sales nebo customer success | Nastavit správné očekávání před nákupem nebo při rozšíření služby. | Sales enablement poznámka, nabídka, demo scénář nebo onboarding materiál. |
+| Nikdo pravidelně | Zachovat rozhodnutí, ale nevytvářet nový návod. | Krátký záznam v rozhodovacím logu a konec. |
+
+Pokud neumíš určit publikum, dokumentaci nevyráběj. „Mohlo by se hodit“ je slabý účel. V privacy-first provozu se dokumentuje to, co snižuje riziko, zrychluje rozhodnutí nebo zmenšuje opakované vysvětlování. Ne všechno, co se stalo.
+
+### Rozděl lekci na veřejnou, sdílenou a interní vrstvu
+
+Jedna lekce může mít tři různé verze. Nejde o přikrášlování reality, ale o přiměřený rozsah.
+
+Použij jednoduché vrstvení:
+
+| Vrstva | Smí obsahovat | Nemá obsahovat |
+| --- | --- | --- |
+| Veřejná | Výsledek, obecné pravidlo, dopad na uživatele, bezpečný postup, odkaz na aktuální funkci. | Interní incident timeline, jména lidí, payloady, IP adresy, tokeny, zákaznické detaily, přesné slabiny před opravou. |
+| Sdílená pod kontrolou | Detail potřebný pro zákaznický audit, smluvní vztah nebo řízenou podporu. | Neomezené výpisy logů, screenshoty s osobními údaji, interní komentáře, spekulace. |
+| Interní | Rozhodnutí, vlastník, technický kontext, runbook, hranice eskalace, odkazy na omezené důkazy. | Data bez účelu, staré kopie exportů, osobní hodnocení lidí, chatový šum. |
+
+Praktický příklad: Po lekci o hlučném dostupnostním alertu veřejně stačí říct, že status stránky a provozní komunikace uvádí stav služby, čas ověření a doporučený další krok. Interně může runbook popsat, kde ověřit omezený detail. Do veřejné dokumentace nepatří ukázka starého alertu s response body jen proto, že krásně ilustruje chaos. Krása chaosu patří do literatury, ne do trust centra.
+
+### Vyber správný typ dokumentační změny
+
+Ne každá lekce má skončit jako nová stránka. Nová stránka je závazek: musí mít vlastníka, revizi, odkazy, metadata a důvod existovat. Často stačí upravit existující text.
+
+Rozhodovací tabulka:
+
+| Typ změny | Kdy použít | Příklad |
+| --- | --- | --- |
+| Přepsat existující odstavec | Lekce upřesňuje něco, co už se vysvětluje. | Help stránka doplní, kdy uživatel dostane provozní e-mail. |
+| Přidat krátkou poznámku do checklistu | Lekce mění jeden krok v rutinním postupu. | Release checklist doplní kontrolu starých redirectů. |
+| Přidat odpověď do knihovny | Dotaz se opakuje u zákazníků nebo v sales. | Odpověď na otázku, kde jsou data a kdo vidí export. |
+| Aktualizovat runbook | Lekce mění provozní postup, eskalaci nebo ruční náhradu. | Runbook dostupnosti doplní první ověření přes více vrstev. |
+| Zapsat ADR nebo rozhodnutí | Lekce vysvětluje, proč tým zvolil hranici nebo kompromis. | Rozhodnutí neposílat detailní payloady do sdíleného alert kanálu. |
+| Nedokumentovat dál | Lekce už je vyřešená a nemá opakovaný dopad. | Jednorázová chyba v dočasném exportu, který byl smazán a proces skončil. |
+
+Dobrá otázka zní: „Kde by příští člověk přirozeně hledal odpověď ve chvíli práce?“ Pokud odpověď zní „v dalším novém dokumentu“, zkontroluj, jestli jen nevyrábíš další místo, kde bude časem bydlet zastaralá pravda.
+
+### Udělej dokumentační kartu
+
+Před psaním dokumentace si vyplň malou kartu. Zabrání tomu, aby se z lekce stal dlouhý text bez hranic.
+
+| Pole | Otázka |
+| --- | --- |
+| Lekce | Co jsme se naučili jednou větou? |
+| Publikum | Kdo podle toho udělá lepší krok? |
+| Místo | Který existující dokument, stránka, runbook nebo log se upraví? |
+| Veřejná hranice | Co smí ven a co zůstává interní? |
+| Datový ořez | Jaké osobní údaje, payloady, screenshoty, zákaznické detaily nebo interní poznámky se nepřenesou? |
+| Změna textu | Jaký konkrétní odstavec, checklist nebo odpověď vznikne? |
+| Vlastník | Kdo udrží text aktuální? |
+| Revize | Kdy nebo při jaké změně se text znovu zkontroluje? |
+| Stop pravidlo | Kdy dokumentaci smažeme, sloučíme nebo archivujeme? |
+
+Karta má být kratší než výsledný text. Pokud karta bobtná, nejspíš se snažíš dokumentací vyřešit víc věcí najednou: produktovou chybu, supportní nejistotu, provozní runbook i veřejnou důvěru. Rozděl to. Jeden dokumentační krok, jeden účel.
+
+### Piš pravidlo, ne historii
+
+Historie může být důležitá pro audit, postmortem nebo interní rozhodovací log. Dokumentace pro běžnou práci ale potřebuje aktuální pravidlo.
+
+Místo:
+
+„Dne 14. jsme zjistili, že alert posílal response body do kanálu, protože starý skript neměl ořez a během incidentu se ukázalo, že...“
+
+Piš:
+
+„Dostupnostní alert ve sdíleném kanálu obsahuje jen stav, čas, kontrolovanou URL, výsledek prvního ověření a odkaz na aktuální runbook. Detailní technický výpis zůstává v omezeném monitoringu s retenčním pravidlem.“
+
+Rozdíl je zásadní. První text nutí čtenáře projít minulost. Druhý mu říká, jak má práce vypadat teď.
+
+U veřejné dokumentace používej ještě přísnější filtr:
+
+- popiš aktuální chování, ne interní cestu k němu,
+- neslibuj víc, než umíš provozně udržet,
+- neodkazuj na interní systémy,
+- neuváděj detail, který by pomohl zneužít starou nebo podobnou slabinu,
+- nepřenášej zákaznické příklady bez jasného souhlasu a účelu,
+- pokud je potřeba důkaz, ukaž veřejně ověřitelný stav nebo obecný proces.
+
+### Oprav odkazy, šablony a staré odpovědi
+
+Dokumentační změna není hotová ve chvíli, kdy přibyl nový odstavec. Hotová je, když stará odpověď nepřežívá vedle nové.
+
+Projdi:
+
+- interní vyhledávání a názvy dokumentů,
+- support šablony,
+- onboarding materiály,
+- sales odpovědi,
+- veřejné help stránky,
+- runbooky a checklisty,
+- changelog nebo release notes,
+- odkazy z e-mailových šablon,
+- staré „rychlé odpovědi“ v chatech a nástrojích.
+
+Nemusíš uklidit celý vesmír. Ale musíš projít místa, kde by další člověk pravděpodobně sáhl po staré pravdě. Pokud po lekci vznikne nová odpověď a stará zůstane připnutá v supportu, dokumentace se nepovedla. Jen jsi vytvořil soutěž dvou textů. A soutěž textů vyhrává ten, který někdo najde v panice ve 23:17.
+
+### Příklad: Lekce z dostupnostního alertu do dokumentace
+
+Uzavřená karta říká: „Alert má vést k první bezpečné akci, ne posílat technický výpis bez kontextu.“
+
+Dokumentační karta:
+
+| Pole | Zápis |
+| --- | --- |
+| Lekce | Sdílený dostupnostní alert má ukazovat první krok, ne interní technické útroby. |
+| Publikum | Provozní vlastník a člověk na záskoku. |
+| Místo | Runbook dostupnostní kontroly a krátká supportní odpověď pro otázku na incidentní komunikaci. |
+| Veřejná hranice | Veřejně popisujeme stav, čas ověření a doporučený další krok; interní logy a payloady nezveřejňujeme. |
+| Datový ořez | Nepřenášíme response body, hlavičky, IP adresy, screenshoty ani zákaznické identifikátory. |
+| Změna textu | Do runbooku přidat větu, jak číst alert, a do support knihovny krátkou odpověď k provozní komunikaci. |
+| Vlastník | Provozní vlastník webu. |
+| Revize | Při změně monitoringu, alert kanálu nebo status stránky. |
+| Stop pravidlo | Pokud se alert nahradí jiným postupem, starý odstavec se archivuje nebo smaže. |
+
+Výsledný interní odstavec:
+
+„Při dostupnostním alertu nejdřív ověř stav veřejné URL a odkazovaný runbook. Alert ve sdíleném kanálu obsahuje jen rozhodovací minimum. Detailní technický výpis hledej pouze v omezeném monitoringu, pokud ho potřebuješ k opravě nebo eskalaci.“
+
+Výsledná supportní odpověď:
+
+„Při dostupnostní události sdílíme stav služby, čas ověření a další doporučený krok. Citlivé technické výpisy, logy a zákaznické detaily nedáváme do veřejných ani široce sdílených zpráv; používáme je jen v omezeném provozním kontextu.“
+
+To stačí. Není potřeba přidat graf incidentu, ukázku staré zprávy ani interní komentář, kdo si u toho nalil kafe na klávesnici. Některé detaily jsou autentické, ale ne užitečné.
+
+### Checklist: Převod uzavřené lekce do dokumentace
+
+- [ ] Lekce je uzavřená a má jasný verdikt, ne jen pocit, že „něco bychom měli napsat“.
+- [ ] Určil jsem publikum, které podle dokumentace udělá lepší krok.
+- [ ] Vybral jsem existující místo dokumentace, pokud existuje.
+- [ ] Rozhodl jsem, co patří do veřejné, řízeně sdílené a interní vrstvy.
+- [ ] Odstranil jsem osobní údaje, zákaznické detaily, payloady, screenshoty, tokeny a interní komentáře bez účelu.
+- [ ] Text popisuje aktuální pravidlo nebo postup, ne dlouhou historii problému.
+- [ ] Nový text neslibuje víc, než tým umí provozně udržet.
+- [ ] Zkontroloval jsem staré support odpovědi, šablony, odkazy a runbooky, kde by mohla zůstat souběžná pravda.
+- [ ] Dokumentace má vlastníka, revizní trigger a stop pravidlo.
+- [ ] Pokud lekce nemá opakovaný dopad, zůstala jen v rozhodovacím logu a nevznikl nový dokument.
+
+### Mini úkol
+
+Vezmi jednu uzavřenou provozní lekci z posledního měsíce. Napiš k ní dokumentační kartu: lekce, publikum, místo, veřejná hranice, datový ořez, vlastník a revize. Potom uprav jen jedno existující místo - odstavec v runbooku, support odpověď, checklist nebo veřejnou poznámku. Nakonec najdi jednu starou odpověď nebo odkaz, který by mohl novému textu odporovat, a buď ho oprav, nebo zapiš, proč dnes zůstává beze změny.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -55735,6 +55895,8 @@ Vyber jednu backlogovou kartu, která vznikla z provozní lekce a tváří se ja
 - Nielsen Norman Group: Onboarding Tutorials vs. Contextual Help - rozdíl mezi úvodními tutoriály a kontextovou pomocí: https://www.nngroup.com/articles/onboarding-tutorials/
 
 ## Pracovní log
+
+- 2026-07-26: Doplněna příloha o převodu uzavřené provozní lekce do dokumentace bez úniku detailů: určení publika, rozdělení veřejné, řízeně sdílené a interní vrstvy, výběr správného typu dokumentační změny, dokumentační karta, psaní pravidla místo historie, úklid starých odkazů a šablon, příklad dostupnostního alertu, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro dokumentační změnu po lekci. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
 - 2026-07-26: Doplněna příloha o uzavření backlogové karty z provozní lekce bez falešného hotovo: návrat k původní změnové větě, ověření dopadu na pracovní situaci, privacy kontrola datových stop, pět zavíracích verdiktů, krátký zavírací záznam, příklad hlučného dostupnostního alertu, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro uzavření lekce. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
