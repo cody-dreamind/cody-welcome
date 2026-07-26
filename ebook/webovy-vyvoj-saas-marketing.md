@@ -173,6 +173,7 @@ Když se nechceš vracet do celé knihy, hledej konkrétní nástroj podle výst
 | Ověřit archivaci runbooku po zavření bez návratu starého postupu | „kontrola po archivaci“, „starý runbook se vrací“ nebo „post-archive review“ | krátká kontrola odkazů, incidentů, přístupů, alertů a nových rozhodnutí, která potvrdí, že archivovaný návod už neřídí provoz |
 | Převést archivovaný runbook na použitelné poučení | „učení z archivovaného runbooku“, „provozní lekce“ nebo „runbook jako lekce“ | jedna učící karta, která zachová důležité rozhodnutí, opraví aktuální postup a smaže zbytečné stopy bez zakládání nového procesu |
 | Převést provozní lekci do backlogu bez poradní inflace | „lekce do backlogu“, „provozní lekce jako úkol“ nebo „učící karta pokračuje“ | jedna backlogová karta s důvodem, privacy hranicí, vlastníkem, ověřením a rozhodnutím kdy úkol zavřít |
+| Uzavřít backlogovou kartu z provozní lekce bez falešného hotovo | „uzavření lekce“, „backlogová karta hotovo“ nebo „lekce zavřená“ | zavírací review se skutečným dopadem, uklizenými datovými stopami a rozhodnutím, zda změna končí, pokračuje nebo přechází do rutiny |
 
 Pravidlo pro práci s rejstříkem: otevři maximálně tři nalezené části, vyber jednu a zapiš výstup. Pokud po deseti minutách pořád skáčeš mezi odkazy, vrať se k tabulce „Kudy začít podle aktuální bolesti“ a zúž problém. E-book není buffet. Teda je, ale bez talíře si stejně odneseš jen chaos.
 
@@ -55428,6 +55429,120 @@ Hotovo není „alert vypadá kratší“. Hotovo je, že kratší alert vede k 
 
 Vezmi jednu učící kartu z archivovaného runbooku a přepiš ji na jednu backlogovou kartu. Nejdřív napiš změnovou větu, potom vyber typ pokračování: oprava, experiment, rozhodnutí nebo zavření. Přidej privacy hranici a kontrolní okno. Pokud karta potřebuje víc než jednu změnu, rozděl ji a dnes nech jen tu nejmenší, která sníží konkrétní riziko.
 
+## Příloha: Uzavření backlogové karty z provozní lekce bez falešného hotovo
+
+Backlogová karta z provozní lekce má zvláštní riziko: často vznikla z dobrého záměru, všichni s ní souhlasí a nikdo nechce brzdit její uzavření. Jenže právě proto se snadno zavře moc brzy. Status „done“ pak znamená, že někdo upravil text, přepsal alert nebo přidal checklist, ale nikdo neověřil, jestli se změnila skutečná práce.
+
+Tahle příloha řeší poslední krok: jak kartu zavřít tak, aby zůstalo jasné, co se naučilo, co se změnilo, jaká datová stopa se uklidila a kdy se k tématu už nevracet.
+
+> Codyho komentář: Hotovo není pocit úlevy po přesunutí ticketu. Hotovo je okamžik, kdy se původní riziko snížilo, nový postup někdo použil a nevznikl další nenápadný sklad dat „pro jistotu“.
+
+### Vrať se k původní změnové větě
+
+Nezačínej otázkou, jestli je karta implementovaná. Začni větou, kvůli které karta vznikla.
+
+Připomeň si:
+
+| Pole | Kontrolní otázka |
+| --- | --- |
+| Při jaké situaci | Nastala už situace, pro kterou byla změna určená, nebo ji umíme bezpečně nasimulovat? |
+| Uděláme co | Je nový krok skutečně součástí práce, nebo jen existuje v dokumentu? |
+| Protože | Snížilo se původní riziko, šum, zpoždění, datové tření nebo závislost na jednom člověku? |
+| Co neděláme | Neotevřela změna bokem širší sběr dat, nový proces nebo nejasnou odpovědnost? |
+
+Pokud se změnová věta během práce ukázala jako nepřesná, nepřepisuj historii potichu. Doplň zavírací poznámku: „Původní karta mířila na ___, ale skutečný problém byl ___.“ Pak rozhodni, jestli se aktuální karta zavře a vznikne nová, nebo jestli je oprava pořád v původním rozsahu.
+
+### Ověř dopad na pracovní situaci
+
+Provozní lekce se nemá zavírat podle počtu změněných souborů, odstavců nebo polí v nástroji. Ověř ji na situaci, kterou měla zlepšit.
+
+Použij jednoduché ověření:
+
+| Typ karty | Co ověřit před zavřením |
+| --- | --- |
+| Oprava | Nový krok funguje při prvním reálném použití nebo při krátkém cvičném průchodu. |
+| Experiment | Kontrolní okno skončilo a existuje verdikt ponechat, zúžit, ukončit nebo převést do rutiny. |
+| Rozhodnutí | Je zaznamenané konkrétní rozhodnutí, vlastník a hranice další změny. |
+| Zavření | Je jasné, proč se nic nedělá, a nevznikla potřeba dalšího sledování. |
+
+Dobré ověření je malé. U alertu stačí jeden cvičný průchod: člověk dostane ukázkovou zprávu a musí podle ní udělat první bezpečný krok. U exportu stačí projít zavírací cestu: kdo export smaže, kde to potvrdí a jak se odebere sdílení. U runbooku stačí, aby nový vlastník našel správný postup bez hledání starého chatu.
+
+### Zkontroluj privacy hranici a datové stopy
+
+Změna vzniklá z provozní lekce často přidá pomocné stopy: testovací export, ukázkový payload, screenshot, dočasnou tabulku, ladicí log, nový kanál, kopii šablony nebo širší přístup. Před zavřením karty projdi nejen výsledek, ale i cestu, kterou práce vytvořila.
+
+Zavírací otázky:
+
+- Zůstaly někde dočasné exporty, testovací data, screenshoty nebo payloady?
+- Posílá nový postup detail do širšího publika než původně schválená privacy hranice?
+- Přibyl člověk, role, service účet nebo token, který po ověření už není potřeba?
+- Má nový log, report nebo alert retenční pravidlo?
+- Nezůstala stará šablona, starý runbook nebo starý alert jako souběžná pravda?
+- Pokud se měnila veřejná odpověď, help stránka nebo trust text, odpovídá skutečnému provozu?
+
+Praktické pravidlo: zavírací review má obsahovat i úklid. Bez úklidu datových stop je karta hotová jen napůl. A napůl hotová privacy práce je přesně ten druh klidu, který později smrdí auditem. Ano, poetika provozu.
+
+### Rozhodni, co se stane dál
+
+Každá karta z lekce má skončit jedním z pěti verdiktů:
+
+| Verdikt | Kdy použít | Další krok |
+| --- | --- | --- |
+| Zavřeno | Změna funguje, stopa je uklizená a není potřeba nový rytmus. | Zapsat krátký zavírací řádek a konec. |
+| Zavřeno s drobnou opravou | Dopad je potvrzený, ale zůstává malý jasný detail. | Otevřít jednu navazující opravnou kartu, ne celý nový projekt. |
+| Převést do rutiny | Změna se bude opakovat a potřebuje stabilní místo. | Přidat ji do runbooku, checklistu, release procesu nebo review rytmu. |
+| Vrátit k přepracování | Změna neřeší původní situaci nebo rozšiřuje datovou stopu. | Zapsat proč a zúžit novou kartu. |
+| Zavřít bez akce | Lekce už nemá dnešní dopad nebo riziko zmizelo. | Uložit důvod a nepřidávat další sledování. |
+
+Největší past je verdikt „převést do rutiny“. To neznamená přidat poradu. Znamená najít existující místo, kde se práce už děje, a přidat tam jeden krok. Pokud takové místo neexistuje, nejdřív se zeptej, jestli daná práce opravdu stojí za opakování.
+
+### Udělej krátký zavírací záznam
+
+Zavírací záznam má být tak malý, aby ho tým skutečně psal. Stačí pět řádků:
+
+| Pole | Zápis |
+| --- | --- |
+| Původní lekce | Jedna věta nebo odkaz na učící kartu. |
+| Co se změnilo | Konkrétní pracovní krok, text, alert, runbook, přístup nebo šablona. |
+| Jak ověřeno | Reálné použití, cvičný průchod, review okno nebo rozhodnutí. |
+| Privacy úklid | Co se smazalo, omezilo, zkrátilo, přesunulo nebo vědomě nevytvořilo. |
+| Verdikt | Zavřeno, zavřeno s opravou, rutina, přepracovat, nebo bez akce. |
+
+Nepřikládej do obecného záznamu citlivé ukázky. Pokud je potřeba uchovat detail kvůli bezpečnosti, právní povinnosti nebo provoznímu důkazu, patří do omezeného systému s jasnou retencí. Obecný backlog potřebuje rozhodnutí, ne celé vnitřnosti incidentu.
+
+### Příklad: Zavření karty hlučného dostupnostního alertu
+
+Původní backlogová karta říkala: „Při změně dostupnostního alertu posíláme stav, čas, URL, první ověření a odkaz na aktuální runbook, ne celý response body.“
+
+Zavírací review:
+
+| Pole | Zápis |
+| --- | --- |
+| Původní lekce | Alert má vést k první bezpečné akci, ne posílat technický výpis bez kontextu. |
+| Co se změnilo | Zpráva alertu obsahuje stav, čas, kontrolovanou URL, výsledek prvního ověření a odkaz na aktuální runbook. |
+| Jak ověřeno | Provozní vlastník podle testovací zprávy našel runbook a provedl první ověření bez čtení starých chatů. |
+| Privacy úklid | Ze sdílené zprávy zmizel response body, hlavičky a screenshot. Testovací payload byl smazán po ověření. |
+| Verdikt | Zavřeno s drobnou opravou: doplnit do runbooku, kde hledat omezený detail při opakovaném selhání. |
+
+Dobré zavření tady neoslavuje kratší alert. Potvrzuje, že člověk ví, co má udělat, a že sdílený kanál nedostal zbytečné technické ani osobní detaily.
+
+### Checklist: Uzavření backlogové karty z provozní lekce
+
+- [ ] Vrátil jsem se k původní změnové větě a ověřil, že pořád popisuje skutečný problém.
+- [ ] Ověření proběhlo na reálné nebo bezpečně simulované pracovní situaci.
+- [ ] Je jasné, jestli šlo o opravu, experiment, rozhodnutí nebo zavření.
+- [ ] Výsledek se měří změnou práce, snížením rizika nebo jasnějším rozhodnutím, ne počtem upravených položek.
+- [ ] Dočasné exporty, payloady, screenshoty, ladicí logy a testovací tabulky mají smazání nebo omezený archiv.
+- [ ] Nový postup nerozšířil publikum, přístupy, retenční dobu ani datová pole bez nového rozhodnutí.
+- [ ] Starý runbook, alert, šablona nebo dokument nejsou dál najitelné jako platná souběžná pravda.
+- [ ] Pokud změna přechází do rutiny, má existující místo, vlastníka a stop pravidlo.
+- [ ] Zavírací záznam obsahuje původní lekci, změnu, ověření, privacy úklid a verdikt.
+- [ ] Pokud karta nefungovala, vznikla menší navazující karta místo velkého mlhavého projektu.
+
+### Mini úkol
+
+Vyber jednu backlogovou kartu, která vznikla z provozní lekce a tváří se jako hotová. Najdi původní změnovou větu, ověř jeden reálný nebo cvičný průchod a napiš pět řádků zavíracího záznamu. Zvlášť zkontroluj dočasné exporty, screenshoty, logy a přístupy. Pokud změna opravdu funguje, zavři ji. Pokud ne, otevři jen jednu menší navazující kartu.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -55620,6 +55735,8 @@ Vezmi jednu učící kartu z archivovaného runbooku a přepiš ji na jednu back
 - Nielsen Norman Group: Onboarding Tutorials vs. Contextual Help - rozdíl mezi úvodními tutoriály a kontextovou pomocí: https://www.nngroup.com/articles/onboarding-tutorials/
 
 ## Pracovní log
+
+- 2026-07-26: Doplněna příloha o uzavření backlogové karty z provozní lekce bez falešného hotovo: návrat k původní změnové větě, ověření dopadu na pracovní situaci, privacy kontrola datových stop, pět zavíracích verdiktů, krátký zavírací záznam, příklad hlučného dostupnostního alertu, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro uzavření lekce. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
 - 2026-07-26: Doplněna příloha o přenosu provozní lekce do backlogu bez poradní inflace: změnová věta, rozlišení opravy, experimentu, rozhodnutí a zavření, minimální backlogová karta, privacy hranice už při zadání, malé kontrolní okno, příklad hlučného dostupnostního alertu, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro převod provozní lekce na backlogovou kartu. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
