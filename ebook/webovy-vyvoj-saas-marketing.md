@@ -190,6 +190,7 @@ Když se nechceš vracet do celé knihy, hledej konkrétní nástroj podle výst
 | Uzavřít opravenou šablonu do běžného provozu | „uzavření šablony“, „šablona hotovo“ nebo „běžný režim odpovědi“ | zavírací karta, která potvrzuje vlastníka, zdroj pravdy, stop pravidlo, úklid starých nosičů a další revizní trigger |
 | Ověřit šablonu po měsíci běžného provozu bez sledování lidí | „měsíční kontrola šablony“, „šablona po uzavření“ nebo „provozní návrat problému“ | lehké review návratu starého problému, nových výjimek, podpůrné dokumentace, automatických draftů a rozhodnutí, zda šablonu nechat být |
 | Převést návrat šablonového problému do produktové opravy | „produktová oprava po návratu“, „šablona nestačí“ nebo „změnit realitu“ | malá produktová karta, která z opakovaného dotazu udělá opravu stavu, textu, procesu nebo obchodního slibu bez profilování zákazníků |
+| Ověřit produktovou opravu po nasazení bez nového dohledu | „kontrola produktové opravy“, „oprava po nasazení“ nebo „změna reality hotovo“ | krátké review, zda oprava snížila nejistotu, nezaložila novou datovou stopu a může se zavřít nebo zúžit |
 
 Pravidlo pro práci s rejstříkem: otevři maximálně tři nalezené části, vyber jednu a zapiš výstup. Pokud po deseti minutách pořád skáčeš mezi odkazy, vrať se k tabulce „Kudy začít podle aktuální bolesti“ a zúž problém. E-book není buffet. Teda je, ale bez talíře si stejně odneseš jen chaos.
 
@@ -57801,6 +57802,133 @@ Po změně tým upravil support šablonu: už nevysvětlovala celý proces, ale 
 
 Vezmi jeden dotaz, který se vrátil i po opravě šablony. Napiš návratovou větu „Lidé se opakovaně ptají na ___, protože v ___ nevidí / nechápou / nemohou udělat ___.“ Potom ho zařaď do koše text, proces, produkt nebo obchodní slib. Vyplň produktovou kartu jen z anonymizovaných signálů a navrhni nejmenší změnu reality. Pokud jediná navržená změna zní „přepsat šablonu“, vrať se o krok zpět. Pravděpodobně ještě nevidíš místo, kde problém vzniká.
 
+## Příloha: Kontrola produktové opravy po nasazení bez nového dohledu
+
+Produktová oprava po návratu šablonového problému není hotová v okamžiku, kdy se změna dostane do produkce. Hotová je až tehdy, když tým ví, jestli snížila původní nejistotu, nevytvořila novou a nezanechala po sobě zbytečnou datovou stopu. Jinak jen vyměníš starou supportní větu za novou produktovou dekoraci.
+
+Kontrola po nasazení má být malá. Není to nový výzkumný program, audit všech zákaznických interakcí ani výmluva pro zavedení detailního sledování obrazovek. Stačí se vrátit k původní produktové kartě a ověřit, jestli se změnila práce člověka.
+
+Dobrá kontrolní otázka zní:
+
+„Potřebuje člověk po opravě pořád stejnou ruční odpověď, nebo mu produkt, dokumentace, pricing či proces dávají dost jasný další krok?“
+
+Pokud odpověď neznáš, nepotřebuješ hned víc dat. Nejdřív potřebuješ menší a přesnější kontrolní okno.
+
+### Vrať se k původnímu slibu opravy
+
+Začni tím, co bylo v kartě napsané před nasazením. Ne tím, jak se tým po release cítí.
+
+Z původní karty vytáhni čtyři věci:
+
+| Pole | Co ověřit |
+| --- | --- |
+| Návrat problému | Jaký dotaz nebo nejistota se měla zmenšit? |
+| Nejmenší změna | Co přesně se změnilo v produktu, procesu, pricingu nebo slibu? |
+| Ověření | Jaký malý signál měl ukázat dopad? |
+| Stop pravidlo | Kdy změnu zavřít, zúžit, vrátit nebo otevřít větší rozhodnutí? |
+
+Bez návratu k původní kartě začne review měřit všechno, co je po ruce. To je rychlá cesta k dashboardu, který vypadá chytře a rozhoduje mizerně. Kontrola má být věrná původnímu problému.
+
+### Nastav krátké okno, ne nekonečné čekání
+
+Produktové opravy po supportním návratu většinou nepotřebují čtvrtletní analýzu. Potřebují krátké okno, ve kterém se ukáže, jestli se původní dotaz ještě vrací stejným způsobem.
+
+Praktické okno:
+
+- 7 až 14 dní u frekventované funkce,
+- 3 až 5 nových případů u méně časté situace,
+- jeden obchodní cyklus u věcí, které se řeší jen v sales nebo due diligence,
+- první tři použití nového interního procesu, pokud oprava nebyla v UI.
+
+Do okna patří jen signály související s původní otázkou. Pokud se při kontrole objeví jiné téma, zapiš ho bokem jako nový vstup. Nemíchej ho do verdiktu. Jinak se každé review stane otevřenou poradou o všem, což je elegantní způsob, jak nikdy nic nezavřít.
+
+### Sbírej signály podle rozhodnutí
+
+Kontrola má vést k verdiktu, ne k pocitu, že „ještě něco zjistíme“. Vybírej jen signály, které umí změnit rozhodnutí.
+
+Užitečné signály:
+
+- počet návratů původního dotazu v anonymizované podobě,
+- typ nového navazujícího dotazu,
+- ruční zásahy supportu nebo sales, které opravu obcházejí,
+- místa, kde dokumentace, šablona a produkt říkají různou věc,
+- konkrétní interní překážka, kvůli které tým novou cestu nepoužívá.
+
+Neužitečné signály pro tento typ kontroly:
+
+- individuální clickstream konkrétních zákazníků,
+- nahrávky obrazovky jen kvůli zvědavosti,
+- export celých ticketů do produktového nástroje,
+- profilování zákazníků podle toho, kdo se ptal,
+- nové marketingové segmenty z supportních dotazů.
+
+Když rozhodnutí zvládneš udělat z anonymizované věty a malého počtu návratů, nech osobní detail tam, kde vznikl. Produktový backlog není skladiště zákaznických vláken.
+
+### Zkontroluj i datový ocas opravy
+
+Produktová oprava může potichu rozšířit sběr dat. Přidáš stav exportu, a najednou se do logu ukládá název exportu. Přidáš roli v pozvánce, a najednou support vidí víc členů workspace, než potřebuje. Přidáš pricing vysvětlení, a někdo k tomu přilepí sledování každého otevření tooltipu.
+
+Po nasazení projdi datový ocas:
+
+| Vrstva | Kontrolní otázka |
+| --- | --- |
+| UI | Ukazuje změna jen informace, které člověk potřebuje pro rozhodnutí? |
+| Logy | Nezačala se ukládat citlivější hodnota než před změnou? |
+| Analytika | Nepřibyl event, který neslouží konkrétnímu rozhodnutí? |
+| Support | Nedostal tým širší přístup jen proto, že se změnila odpověď? |
+| Dokumentace | Neobsahuje nová odpověď interní detail, který nemá být veřejný? |
+| Retence | Víme, kdy dočasné kontrolní poznámky smažeme nebo zavřeme? |
+
+Tohle je část, kde privacy-first přístup šetří práci. Když změnu zavřeš s malou datovou stopou, nemusíš za měsíc uklízet nový nepořádek, který vznikl „jen pro jistotu“.
+
+### Dej jeden z pěti verdiktů
+
+Review musí skončit větou, kterou lze použít v backlogu nebo pracovním logu. Ne „vypadá to dobře“. Ne „budeme sledovat“. Jedna z pěti možností:
+
+| Verdikt | Kdy ho použít | Další krok |
+| --- | --- | --- |
+| Zavřít | původní dotaz se nevrací nebo se vrací výrazně méně a nevznikla nová nejistota | uzavřít kartu, nechat běžnou údržbu |
+| Zúžit | oprava pomohla jen části situací | upravit text, stav nebo proces v přesně vymezeném rozsahu |
+| Opravit vedlejší škodu | původní problém ustoupil, ale vznikla nová nejasnost nebo datová stopa | otevřít malou opravnou kartu s privacy hranicí |
+| Vrátit | změna nepomohla a zhoršila práci nebo důvěru | rollback nebo návrat k předchozí cestě s poznámkou proč |
+| Otevřít větší rozhodnutí | problém není v popisku ani malém stavu, ale v pricingu, SLA, procesu nebo produktu | připravit rozhodovací kartu pro produkt, obchod nebo provoz |
+
+Codyho komentář: „Budeme sledovat“ je často jen „nechci rozhodnout“. Pokud nemáš datum, vlastníka a otázku, kterou sledování zodpoví, není to kontrola. Je to mlha v hezkém kabátu.
+
+### Příklad: Stav exportu po nasazení
+
+Tým přidal k exportu čtyři stavy: přijato, zpracovává se, připraveno a chyba. Cílem bylo snížit opakovaný dotaz „kdy export přijde“.
+
+Kontrolní karta po 14 dnech:
+
+| Pole | Zápis |
+| --- | --- |
+| Původní nejistota | Lidé nevěděli, jestli se export zpracovává, nebo se zasekl. |
+| Změna | Produkt ukazuje stav exportu a krátkou větu s dalším krokem. |
+| Kontrolní okno | 14 dní po nasazení. |
+| Signál | 1 anonymizovaný návrat dotazu na termín exportu místo 5 za předchozí měsíc; 2 nové dotazy na to, co znamená stav chyba. |
+| Datový ocas | Do logů se nepřidal obsah exportu, jen technický stav a korelační ID. Kontrolní poznámky jsou agregované. |
+| Verdikt | Zúžit: původní problém ustoupil, ale stav chyba potřebuje jasnější text a support odkaz. |
+| Další krok | Upravit text u chyby a doplnit krátkou support šablonu bez kopírování zákaznických exportů do backlogu. |
+
+Tady není potřeba nový funnel ani behaviorální profil. Tým ví, že změna pomohla hlavnímu problému, a zároveň vidí jednu přesnou okrajovou opravu. To je zdravý výsledek review.
+
+### Checklist: Kontrola produktové opravy po nasazení
+
+- [ ] Vrátil jsem se k původní produktové kartě, ne k pocitu po releasu.
+- [ ] Kontrolní okno je krátké a předem ohraničené.
+- [ ] Sleduji jen signály, které mohou změnit verdikt.
+- [ ] Nepřenáším do review celé zákaznické konverzace, osobní údaje ani citlivé přílohy.
+- [ ] Zkontroloval jsem datový ocas v UI, logování, analytice, supportu, dokumentaci a retenci.
+- [ ] Verdikt je jedna z možností: zavřít, zúžit, opravit vedlejší škodu, vrátit nebo otevřít větší rozhodnutí.
+- [ ] Pokud vznikl nový dotaz, oddělil jsem ho od hodnocení původní opravy.
+- [ ] Do pracovního logu nebo backlogu se dostala rozhodovací věta, ne celý příběh.
+- [ ] Pokud je oprava zavřená, nevznikl nový trvalý proces jen pro dobrý pocit.
+
+### Mini úkol
+
+Vyber jednu nedávnou produktovou opravu, která vznikla z opakovaného supportního, sales nebo onboardingového dotazu. Napiš původní nejistotu jednou větou, nastav kontrolní okno a vyber nejvýš tři signály, které rozhodnou o výsledku. Potom projdi datový ocas: UI, logy, analytiku, support, dokumentaci a retenci. Nakonec napiš jeden verdikt. Pokud verdikt zní „budeme dál sledovat“, přepiš ho tak, aby měl datum, vlastníka a otázku. Bez toho je to jen odložené rozhodnutí s lepším parfémem.
+
 ## Zdroje
 
 - IETF RFC 9110: HTTP Semantics - význam HTTP přesměrování a stavů včetně `410 Gone` pro zdroje, které už nejsou dostupné: https://www.rfc-editor.org/rfc/rfc9110.html
@@ -57994,6 +58122,8 @@ Vezmi jeden dotaz, který se vrátil i po opravě šablony. Napiš návratovou v
 - Nielsen Norman Group: Onboarding Tutorials vs. Contextual Help - rozdíl mezi úvodními tutoriály a kontextovou pomocí: https://www.nngroup.com/articles/onboarding-tutorials/
 
 ## Pracovní log
+
+- 2026-07-26: Doplněna příloha o kontrole produktové opravy po nasazení bez nového dohledu: návrat k původní kartě, krátké kontrolní okno, výběr rozhodovacích signálů, kontrola datového ocasu v UI/logování/analytice/supportu/dokumentaci/retenci, pět jasných verdiktů, příklad stavu exportu po nasazení, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro ověření produktové opravy po release. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
 - 2026-07-26: Doplněna příloha o produktové opravě po návratu šablonového problému bez profilování zákazníků: návratová věta, rozlišení textu, procesu, produktu a obchodního slibu, chudá důkazní sada, produktová karta, výběr nejmenší změny reality, aktualizace šablon po skutečné změně, příklad exportní nejistoty, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro převod opakovaného šablonového problému do produktové opravy. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
