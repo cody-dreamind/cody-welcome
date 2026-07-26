@@ -191,6 +191,7 @@ Když se nechceš vracet do celé knihy, hledej konkrétní nástroj podle výst
 | Ověřit šablonu po měsíci běžného provozu bez sledování lidí | „měsíční kontrola šablony“, „šablona po uzavření“ nebo „provozní návrat problému“ | lehké review návratu starého problému, nových výjimek, podpůrné dokumentace, automatických draftů a rozhodnutí, zda šablonu nechat být |
 | Převést návrat šablonového problému do produktové opravy | „produktová oprava po návratu“, „šablona nestačí“ nebo „změnit realitu“ | malá produktová karta, která z opakovaného dotazu udělá opravu stavu, textu, procesu nebo obchodního slibu bez profilování zákazníků |
 | Ověřit produktovou opravu po nasazení bez nového dohledu | „kontrola produktové opravy“, „oprava po nasazení“ nebo „změna reality hotovo“ | krátké review, zda oprava snížila nejistotu, nezaložila novou datovou stopu a může se zavřít nebo zúžit |
+| Převést ověřenou produktovou opravu do běžného provozu | „produktová oprava do rutiny“, „oprava zavřená“ nebo „běžný provoz po opravě“ | zavírací karta, která určí vlastníka, dokumentaci, metriky, šablony, datové limity a další revizní trigger bez nového dohledu |
 
 Pravidlo pro práci s rejstříkem: otevři maximálně tři nalezené části, vyber jednu a zapiš výstup. Pokud po deseti minutách pořád skáčeš mezi odkazy, vrať se k tabulce „Kudy začít podle aktuální bolesti“ a zúž problém. E-book není buffet. Teda je, ale bez talíře si stejně odneseš jen chaos.
 
@@ -57929,6 +57930,148 @@ Tady není potřeba nový funnel ani behaviorální profil. Tým ví, že změna
 
 Vyber jednu nedávnou produktovou opravu, která vznikla z opakovaného supportního, sales nebo onboardingového dotazu. Napiš původní nejistotu jednou větou, nastav kontrolní okno a vyber nejvýš tři signály, které rozhodnou o výsledku. Potom projdi datový ocas: UI, logy, analytiku, support, dokumentaci a retenci. Nakonec napiš jeden verdikt. Pokud verdikt zní „budeme dál sledovat“, přepiš ho tak, aby měl datum, vlastníka a otázku. Bez toho je to jen odložené rozhodnutí s lepším parfémem.
 
+## Příloha: Převod ověřené produktové opravy do běžného provozu bez nového dohledu
+
+Když kontrola produktové opravy dopadne dobře, tým má tendenci udělat jednu ze dvou chyb. Buď změnu oslaví a nechá kolem ní ležet staré šablony, dočasné metriky a kontrolní poznámky. Nebo ji naopak povýší na nový trvalý proces, protože „když to pomohlo, budeme to raději hlídat pořád“. Ani jedno není běžný provoz. První varianta vrací starou nejistotu zadními dveřmi, druhá vyrábí dohled tam, kde stačí vlastnictví.
+
+Ověřená oprava má přejít do normálního pracovního režimu. To znamená: jeden vlastník ví, že změna existuje, dokumentace ukazuje aktuální pravdu, staré nosiče mlčí, dočasné kontroly se zavřou a další revize se spustí jen při konkrétní změně nebo návratu problému.
+
+Dobrá zavírací otázka zní:
+
+„Co musí zůstat v běžném provozu, aby oprava dál fungovala, a co můžeme po ověření bezpečně vypnout, smazat nebo přestat dělat?“
+
+Bez této otázky se i malá produktová oprava promění v další vrstvičku procesního prachu. A prach v provozu má nepříjemnou vlastnost: jednou se tváří jako jistota, podruhé jako bug.
+
+### Rozliš výsledek, rutinu a odpad
+
+Po úspěšné kontrole si změnu rozděl do tří skupin:
+
+| Skupina | Co sem patří | Co s tím |
+| --- | --- | --- |
+| Výsledek | samotná oprava v produktu, procesu, pricingu nebo veřejném slibu | ponechat jako aktuální pravdu |
+| Rutina | nutná údržba, vlastnictví, běžná dokumentace, revizní trigger | převést do existujícího rytmu |
+| Odpad | dočasné kontrolní tabulky, staré šablony, duplicitní poznámky, testovací eventy | zavřít, archivovat nebo smazat podle účelu |
+
+Tohle rozdělení je jednoduché, ale dost týmů ho přeskočí. Pak se po půl roce nikdo neptá „je exportní stav jasný?“, ale všichni se diví, proč existují tři tabulky o exportních dotazech a žádná není pravda. Úspěšná oprava nepotřebuje muzeum ověřování. Potřebuje jeden jasný domov.
+
+### Udělej zavírací kartu opravy
+
+Zavírací karta nemá dokazovat, že tým pracoval. Má zabránit tomu, aby se oprava po měsíci rozpadla nebo sledovala víc, než musí.
+
+Použij krátkou tabulku:
+
+| Pole | Otázka |
+| --- | --- |
+| Oprava | Co se změnilo a kde je aktuální pravda? |
+| Verdikt review | Proč opravu zavíráme, zúžili jsme ji, nebo převádíme do rutiny? |
+| Vlastník | Kdo hlídá, že oprava zůstává pravdivá při dalších změnách? |
+| Dokumentace | Který veřejný nebo interní text se stal zdrojem pravdy? |
+| Šablony | Které support, sales, onboardingové nebo automatické odpovědi se upravily nebo vypnuly? |
+| Měření | Jaké dočasné signály končí a jaký chudý signál zůstává v běžném režimu, pokud vůbec nějaký? |
+| Datový úklid | Co se smaže, agreguje, archivuje nebo přestane exportovat? |
+| Trigger další revize | Jaká konkrétní změna nebo návrat problému kartu znovu otevře? |
+
+Karta má být tak krátká, aby ji šlo přečíst při další podobné změně. Pokud potřebuješ dvě stránky, pravděpodobně do ní opisuješ historii místo rozhodnutí.
+
+### Přesuň údržbu do existujícího rytmu
+
+Běžný provoz neznamená nový meeting. Pokud oprava potřebuje údržbu, napoj ji na rytmus, který už existuje:
+
+- release checklist,
+- měsíční produktové review,
+- revize dokumentace,
+- support knowledge base údržba,
+- pricing review,
+- bezpečnostní nebo datová revize,
+- onboardingový průchod nového člověka.
+
+Příklad: stav exportu po nasazení už nepotřebuje samostatný čtrnáctidenní monitoring. Potřebuje, aby se při každé změně exportního procesu zkontroloval text stavů, support šablona a logování. To patří do release checklistu nebo runbooku exportů. Samostatná tabulka „exportní dotazy po opravě“ může skončit.
+
+Privacy-first pravidlo: pokud běžný rytmus vyžaduje osobní údaje, znovu se zeptej proč. Většinou stačí agregovaný signál typu „dotaz se vrátil / nevrátil“ a odkaz na zdroj pravdy, ne kopie zákaznických vláken.
+
+### Ukliď staré nosiče pravdy
+
+Převod do provozu selže, když staré odpovědi zůstanou dostupné v místech, kde je tým používá pod tlakem. Starý text v makru, starý screenshot v onboardingu nebo starý pricing odstavec dokáže přežít déle než rozumné rozhodnutí. Ano, dokumentace má paměť. Občas až moc.
+
+Projdi aspoň tyto nosiče:
+
+| Nosič | Kontrola |
+| --- | --- |
+| Produkt | UI text, prázdné stavy, chybové hlášky, tooltipy a potvrzení |
+| Dokumentace | veřejné návody, interní runbooky, trust texty, changelog |
+| Šablony | support makra, sales follow-upy, onboarding e-maily, automatické drafty |
+| Měření | dočasné eventy, kontrolní tabulky, dashboard dlaždice, ruční exporty |
+| Přístupy | dočasné pohledy supportu, exportní oprávnění, sdílené složky |
+| Backlog | staré úkoly, duplicitní návrhy, poznámky bez dalšího rozhodnutí |
+
+Úklid neznamená mazat všechno. Některé rozhodnutí má zůstat v interním logu. Ale starý nosič nesmí dál řídit práci. Rozdíl mezi archivem a aktivním návodem musí být vidět.
+
+### Zkrať měření na provozní minimum
+
+Po ověření opravy často zůstane dočasné měření. To dává smysl během kontrolního okna, ale po zavření má skončit nebo se zúžit.
+
+Rozhodni:
+
+| Dočasné měření | Po zavření |
+| --- | --- |
+| ruční počítání návratů dotazu každý týden | skončit, další kontrolu spustit jen při návratu problému |
+| speciální event pro kliknutí na nový tooltip | smazat, pokud už nerozhoduje o změně |
+| dashboard dlaždice pro opravu | odstranit nebo sloučit do existující metriky |
+| kontrolní export ticketů | zrušit a smazat podle retenčního pravidla |
+| anonymizovaná poznámka o výsledku | ponechat v rozhodovacím logu |
+
+Měření má přežít jen tehdy, když dál vede ke konkrétnímu rozhodnutí. „Může se hodit“ není rozhodnutí. To je věta, kterou data používají, když se chtějí nastěhovat natrvalo.
+
+### Nastav trigger další revize
+
+Uzavřená oprava nemá být zapomenutá. Má mít jasný spouštěč, kdy se k ní vrátit. Trigger je lepší než kalendářové hlídání všeho, protože reaguje na skutečnou změnu.
+
+Dobré triggery:
+
+- změní se proces, kterého se oprava týká,
+- pricing nebo veřejný slib použije novou formulaci,
+- support zaznamená návrat stejného dotazu,
+- vznikne nový automatický draft nebo šablona kolem stejného tématu,
+- změní se datová hranice, logování nebo role s přístupem,
+- nový vlastník převezme oblast, která opravu drží při životě.
+
+Špatný trigger je „někdy se na to podíváme“. Někdy není datum. Někdy nemá vlastníka. Někdy je jen měkký koberec, pod který se zametají nedořešené věci.
+
+### Příklad: Exportní stav přechází do provozu
+
+Kontrola po nasazení ukázala, že nový stav exportu snížil dotazy na termín z pěti anonymizovaných návratů za měsíc na jeden za čtrnáct dní. Zároveň vznikly dva dotazy na význam stavu chyba. Tým upravil text chyby a support odkaz. Po druhé malé kontrole už se dotaz nevrátil.
+
+Zavírací karta:
+
+| Pole | Zápis |
+| --- | --- |
+| Oprava | Export ukazuje stavy přijato, zpracovává se, připraveno a chyba. Zdroj pravdy je produktový text a krátký interní runbook exportů. |
+| Verdikt review | Zavřít: původní nejistota ustoupila a stav chyba má opravený text. |
+| Vlastník | Produktový vlastník exportů. |
+| Dokumentace | Veřejný návod k exportu a interní runbook exportní fronty. |
+| Šablony | Staré makro „kdy export přijde“ vypnuté; nové makro odkazuje na stav exportu a postup při chybě. |
+| Měření | Končí ruční čtrnáctidenní počítání dotazů; zůstává jen běžný support štítek „export nejistota“ bez osobních detailů v produktovém reportu. |
+| Datový úklid | Kontrolní poznámky zůstávají agregované, dočasný export ticketů se maže, logy neobsahují obsah exportu. |
+| Trigger další revize | Změna exportní fronty, nové SLA tvrzení, návrat stejného dotazu nebo změna support šablony. |
+
+Tady je podstatné, že produktová oprava nezaložila nový věčný dohled. Zůstala jako lepší produktová realita, napojená na běžné změny. Přesně tak má vypadat provoz, který si pamatuje poučení, ale nenosí na zádech každý starý kontrolní batoh.
+
+### Checklist: Převod ověřené produktové opravy do běžného provozu
+
+- [ ] Mám jasný verdikt z kontroly po nasazení.
+- [ ] Vím, co je výsledek, co rutina a co odpad po opravě.
+- [ ] Existuje krátká zavírací karta s vlastníkem a zdrojem pravdy.
+- [ ] Údržba opravy je napojená na existující rytmus, ne na nový trvalý meeting.
+- [ ] Staré šablony, dokumentace, automatické drafty a backlogové poznámky už nešíří původní pravdu.
+- [ ] Dočasné měření skončilo nebo se zúžilo na signál, který dál rozhoduje.
+- [ ] Kontrolní exporty, poznámky a přístupy mají jasný datový úklid.
+- [ ] Další revize má konkrétní trigger, ne neurčité „někdy“.
+- [ ] Po zavření nevznikl nový dohled nad lidmi jen proto, že oprava fungovala.
+
+### Mini úkol
+
+Vyber jednu produktovou opravu, která po kontrole dopadla dobře. Rozděl její zbytky do tří sloupců: výsledek, rutina a odpad. Potom vyplň zavírací kartu v osmi řádcích a označ jednu věc, kterou dnes vypneš, smažeš nebo přesuneš do archivu. Pokud po zavření neumíš říct, kdo je vlastník a co spustí další revizi, oprava ještě není v běžném provozu. Je jen odložená na hezčí den.
+
 ## Zdroje
 
 - IETF RFC 9110: HTTP Semantics - význam HTTP přesměrování a stavů včetně `410 Gone` pro zdroje, které už nejsou dostupné: https://www.rfc-editor.org/rfc/rfc9110.html
@@ -58122,6 +58265,8 @@ Vyber jednu nedávnou produktovou opravu, která vznikla z opakovaného supportn
 - Nielsen Norman Group: Onboarding Tutorials vs. Contextual Help - rozdíl mezi úvodními tutoriály a kontextovou pomocí: https://www.nngroup.com/articles/onboarding-tutorials/
 
 ## Pracovní log
+
+- 2026-07-26: Doplněna příloha o převodu ověřené produktové opravy do běžného provozu bez nového dohledu: rozlišení výsledku, rutiny a odpadu po opravě, zavírací karta s vlastníkem a zdrojem pravdy, napojení údržby na existující rytmus, úklid starých nosičů pravdy, zúžení dočasného měření, trigger další revize, příklad exportního stavu, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro zavření ověřené produktové opravy. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
 - 2026-07-26: Doplněna příloha o kontrole produktové opravy po nasazení bez nového dohledu: návrat k původní kartě, krátké kontrolní okno, výběr rozhodovacích signálů, kontrola datového ocasu v UI/logování/analytice/supportu/dokumentaci/retenci, pět jasných verdiktů, příklad stavu exportu po nasazení, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro ověření produktové opravy po release. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
