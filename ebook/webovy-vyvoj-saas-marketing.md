@@ -171,6 +171,7 @@ Když se nechceš vracet do celé knihy, hledej konkrétní nástroj podle výst
 | Opravit runbook po cvičném průchodu bez nového chaosu | „oprava runbooku“, „nálezy ze suchého testu“ nebo „runbook po cvičení“ | malý opravný balík, který z nálezů udělá jasné kroky, úklid starých pokynů a nové datum ověření |
 | Archivovat runbook po zániku automatizace bez mrtvého návodu | „archivace runbooku“, „runbook končí“ nebo „mrtvý postup“ | zavírací karta, která označí poslední platnou verzi, náhradní cestu, úklid odkazů, přístupů, testů a veřejných slibů |
 | Ověřit archivaci runbooku po zavření bez návratu starého postupu | „kontrola po archivaci“, „starý runbook se vrací“ nebo „post-archive review“ | krátká kontrola odkazů, incidentů, přístupů, alertů a nových rozhodnutí, která potvrdí, že archivovaný návod už neřídí provoz |
+| Převést archivovaný runbook na použitelné poučení | „učení z archivovaného runbooku“, „provozní lekce“ nebo „runbook jako lekce“ | jedna učící karta, která zachová důležité rozhodnutí, opraví aktuální postup a smaže zbytečné stopy bez zakládání nového procesu |
 
 Pravidlo pro práci s rejstříkem: otevři maximálně tři nalezené části, vyber jednu a zapiš výstup. Pokud po deseti minutách pořád skáčeš mezi odkazy, vrať se k tabulce „Kudy začít podle aktuální bolesti“ a zúž problém. E-book není buffet. Teda je, ale bez talíře si stejně odneseš jen chaos.
 
@@ -55174,6 +55175,129 @@ Tohle není velká práce, ale je přesně ten typ provozní hygieny, který dr�
 
 Vezmi jeden runbook archivovaný v posledním měsíci a udělej třicetiminutovou kontrolu po zavření. Začni z reálného vstupu: poslední incident, alert, wiki index nebo onboarding checklist. Ověř, jestli se dostaneš na aktuální postup, jestli po staré automatizaci nezůstal datový ocas a jestli někdo starý návod nepoužil jako platný. Na konci napiš jeden verdikt a maximálně tři malé opravy.
 
+## Příloha: Učení z archivovaného runbooku bez nového procesu
+
+Když runbook doslouží a kontrola po archivaci dopadne dobře, láká to k jednoduchému závěru: hotovo, zavřít, jdeme dál. To je často správně. Jenže někdy starý runbook obsahuje užitečnou lekci, která by neměla zmizet společně se starým postupem. Ne celý návod, ne historický román, ale jedno rozhodnutí, jeden princip nebo jedna chyba, kterou nechceš opakovat.
+
+Tahle příloha není výzva k tomu, aby každý archivovaný dokument dostal vlastní retrospektivu. To by byl krásný způsob, jak z úklidu udělat novou vrstvu práce. Cílem je vytěžit z archivovaného runbooku jen to, co zlepší aktuální provoz, produktovou dokumentaci nebo budoucí rozhodování.
+
+> Codyho komentář: Archivovaný runbook nemá být muzeum starých příkazů. Má být buď bezpečně zavřený, nebo z něj má zůstat jedna použitelná lekce. Všechno mezi tím je dokumentační kompost, který sice vypadá organicky, ale lidem pod nohama spíš klouže.
+
+### Rozliš lekci od historické zajímavosti
+
+Ne všechno, co je pravdivé, stojí za přenos do aktuální dokumentace. Učení z archivovaného runbooku začni jednoduchým filtrem:
+
+| Otázka | Pokud ano | Pokud ne |
+| --- | --- | --- |
+| Ovlivní poznatek dnešní postup? | Přepiš ho do aktuálního runbooku, checklistu nebo rozhodovací karty. | Nech ho jen v archivu, pokud už nemá provozní dopad. |
+| Pomůže poznatek novému vlastníkovi vyhnout se chybě? | Přidej krátkou varovnou větu nebo testovací krok. | Neskladuj historické vysvětlení pro každý starý detail. |
+| Mění poznatek hranici dat, přístupů nebo automatické pravomoci? | Oprav aktuální datovou nebo přístupovou hranici. | Nezakládej novou privacy poznámku jen kvůli pocitu úplnosti. |
+| Opakuje se stejný typ chyby v dalších postupech? | Udělej jednu systémovou opravu šablony nebo review otázky. | Nevyhlašuj velkou iniciativu kvůli jedné uzavřené epizodě. |
+
+Praktické pravidlo: z jednoho archivovaného runbooku vytěž maximálně jednu hlavní lekci. Pokud jich vidíš pět, pravděpodobně nemáš lekce, ale nezpracovaný provozní dluh.
+
+### Udělej malou učící kartu
+
+Učící karta má být kratší než původní runbook. Pokud je delší, něco se pokazilo. Její úkol je přenést smysl, ne obnovit starý postup.
+
+Použij tento tvar:
+
+| Pole | Co vyplnit |
+| --- | --- |
+| Původní postup | Název archivovaného runbooku a datum archivace. |
+| Co jsme se naučili | Jedna věta bez obviňování lidí. |
+| Kam se lekce přenáší | Aktuální runbook, checklist, onboarding, šablona alertu, test nebo produktové rozhodnutí. |
+| Co se nepřenáší | Staré příkazy, tokeny, screenshoty, kompletní payloady, osobní poznámky a historické workaroundy. |
+| Privacy dopad | Zda lekce snižuje sběr dat, omezuje přístup, zkracuje retenci nebo brání novému exportu. |
+| Hotovo kdy | Konkrétní úprava je provedena a starý dokument zůstává jen jako archivní kontext. |
+
+Příklad dobré věty:
+
+| Slabé | Lepší |
+| --- | --- |
+| „Starý monitor byl zmatený a nikdo nevěděl co s tím.“ | „Dostupnostní alert musí obsahovat první bezpečné ověření a odkaz na aktuální runbook, ne jen chybový stav.“ |
+| „Příště musíme líp uklízet.“ | „Vypnutí automatizace končí až revokací tokenu, smazáním dočasných výstupů a kontrolou veřejných slibů.“ |
+| „Bylo moc logů.“ | „Diagnostický režim nesmí po pilotu zůstat zapnutý bez účelu, vlastníka a data vypnutí.“ |
+
+### Přenes lekci do jednoho místa pravdy
+
+Nejhorší výsledek učení je další dokument, který nikdo nepoužije. Lekci přenes tam, kde člověk reálně pracuje:
+
+| Typ lekce | Kam ji dát |
+| --- | --- |
+| První krok byl nejasný | Začátek aktuálního runbooku nebo alert text. |
+| Chyběla hranice zásahu | Sekce oprávnění, eskalace nebo stop pravidlo v aktuálním postupu. |
+| Zůstala datová stopa | Retenční checklist, vypínací karta nebo datová mapa. |
+| Nový vlastník nevěděl proč postup existuje | Krátká provozní věta v runbooku nebo onboarding checklistu. |
+| Automatizace měla příliš širokou pravomoc | Karta pravomoci automatizace a test pilotu. |
+| Veřejný slib byl silnější než realita | Trust odpověď, help stránka nebo release checklist. |
+
+Když nevíš, kam lekci dát, pravděpodobně ještě není dost konkrétní. Přepiš ji do tvaru „při ___ udělej ___, protože ___“. Teprve potom hledej místo.
+
+### Nezakládej proces pro každou lekci
+
+Učení z archivu se může snadno nafouknout. Najednou vznikne pravidelné review všech archivů, tabulka lekcí, meeting o provozní moudrosti a dashboard pokroku. Gratuluji, zrušil jsi jeden starý proces a vypěstoval nový.
+
+Drž se těchto brzd:
+
+- Učící kartu dělej jen u runbooků, které řešily důležitý provozní, datový, bezpečnostní nebo zákaznický dopad.
+- Jedna karta má vést k jedné úpravě, ne k seznamu přání.
+- Pokud lekce nevede ke změně aktuálního postupu, nech ji v archivu.
+- Pokud se stejná lekce opakuje potřetí, neopisuj ji znovu. Oprav šablonu, nákupní pravidlo, release checklist nebo způsob přidělování vlastníků.
+- Staré citlivé ukázky nepřenášej „pro kontext“. Přenes rozhodnutí, ne data.
+
+Privacy-first dopad je tu velmi konkrétní: historická vysvětlení často obsahují víc detailů, než je potřeba pro budoucí práci. Zákaznické příklady, payloady, screenshoty, tokenové názvy, interní incidentní poznámky a osobní komentáře mají zůstat mimo učící kartu, pokud nejsou nezbytné. A většinou nejsou.
+
+### Oprav současný postup, ne minulost
+
+Archivovaný runbook už nemá být hezčí. Má být bezpečně uzavřený. Energii dej do míst, která dnes ovlivňují práci.
+
+Malý přenos lekce může vypadat takto:
+
+| Nález z archivu | Aktuální oprava |
+| --- | --- |
+| Starý postup začínal restartem služby bez ověření dopadu. | Nový runbook začíná kontrolou uživatelské cesty a rozsahu problému. |
+| Automatizace posílala celý response body do chatu. | Nový alert posílá jen stav, URL, čas a odkaz na detail v omezeném monitoringu. |
+| Při vypnutí se zapomnělo na service účet. | Vypínací checklist má samostatný bod pro účty, tokeny a plánované úlohy. |
+| Help stránka slibovala starou frekvenci kontroly. | Release checklist obsahuje kontrolu veřejných slibů při změně monitoringu. |
+| Nový vlastník neznal důvod původního postupu. | Onboarding má jednu provozní větu s účelem automatizace a hranicí zásahu. |
+
+Tohle je dost. Učení nemusí mít vlastní ceremonii. Musí změnit práci, která se stane příště.
+
+### Příklad: Lekce ze starého dostupnostního runbooku
+
+Tým archivoval starý runbook dostupnostní automatizace. Kontrola po archivaci ukázala, že se starý postup už nepoužívá, ale zůstala důležitá lekce: dřívější alert měl příliš mnoho detailů a zároveň neříkal, co má člověk udělat jako první.
+
+Učící karta:
+
+| Pole | Zápis |
+| --- | --- |
+| Původní postup | Runbook staré dostupnostní automatizace, archivován 2026-07-25. |
+| Co jsme se naučili | Alert má vést k první bezpečné akci, ne posílat technický výpis bez rozhodovacího kontextu. |
+| Kam se lekce přenáší | Aktuální runbook dostupnosti a šablona alertu. |
+| Co se nepřenáší | Staré response body, screenshoty chyb, názvy tokenů a historické příkazy. |
+| Privacy dopad | Alert obsahuje méně dat a detail je dostupný jen v monitoringu podle role. |
+| Hotovo kdy | Šablona alertu obsahuje stav, čas, URL, první ověření a odkaz na aktuální runbook. |
+
+Výsledek: starý runbook zůstává archivem, ale jeho nejlepší poučení žije v aktuální práci. Tým nezaložil novou schůzku, nepřenášel citlivé ukázky a přesto snížil riziko příštího incidentního zmatku.
+
+### Checklist: Učení z archivovaného runbooku
+
+- [ ] Vybírám jen runbook, který měl skutečný provozní, datový, bezpečnostní nebo zákaznický dopad.
+- [ ] Z archivu beru maximálně jednu hlavní lekci.
+- [ ] Lekce je zapsaná jako změna budoucí práce, ne jako popis minulého chaosu.
+- [ ] Vím, kam se lekce přenese: aktuální runbook, checklist, onboarding, alert, test, trust odpověď nebo rozhodovací karta.
+- [ ] Nepřenáším staré příkazy, screenshoty, payloady, tokeny ani osobní poznámky bez jasného účelu.
+- [ ] Privacy dopad je pojmenovaný: méně dat, menší přístup, kratší retence, méně exportů nebo jasnější hranice pravomoci.
+- [ ] Učící karta vede k jedné konkrétní úpravě.
+- [ ] Pokud se stejná lekce opakuje, opravuji šablonu nebo systémové pravidlo, ne další dokument.
+- [ ] Archivovaný runbook zůstává označený jako archiv a nevrací se přes lekci do běžného provozu.
+- [ ] Po přenosu lekce je stará stopa uklizená nebo má vlastníka a datum kontroly.
+
+### Mini úkol
+
+Vyber jeden archivovaný runbook, který už prošel kontrolou po zavření. Najdi jednu lekci, která může zlepšit aktuální práci, a zapiš ji do malé učící karty. Potom uprav jedno konkrétní místo pravdy: aktuální runbook, alert, onboarding checklist, vypínací kartu nebo trust odpověď. Staré citlivé ukázky nepřenášej. Pokud lekce nevede k žádné dnešní úpravě, nech ji v archivu a práci zavři.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -55366,6 +55490,8 @@ Vezmi jeden runbook archivovaný v posledním měsíci a udělej třicetiminutov
 - Nielsen Norman Group: Onboarding Tutorials vs. Contextual Help - rozdíl mezi úvodními tutoriály a kontextovou pomocí: https://www.nngroup.com/articles/onboarding-tutorials/
 
 ## Pracovní log
+
+- 2026-07-26: Doplněna příloha o učení z archivovaného runbooku bez nového procesu: rozlišení použitelné lekce od historické zajímavosti, malá učící karta, přenos poznatku do jednoho místa pravdy, brzdy proti novému procesu, oprava současného postupu místo minulosti, příklad starého dostupnostního runbooku, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro převod archivovaného runbooku na použitelné poučení. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
 - 2026-07-26: Doplněna příloha o kontrole po archivaci runbooku bez návratu starého postupu: kontrolní okno po zavření, místa kde se starý postup vrací přes incidenty, alerty, wiki, onboarding, kód a veřejné odpovědi, ověření náhradní cesty, datový ocas po staré automatizaci, verdikty kontroly, příklad dostupnostního runbooku, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro post-archive review. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
