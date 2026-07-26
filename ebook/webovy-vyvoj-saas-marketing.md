@@ -183,6 +183,7 @@ Když se nechceš vracet do celé knihy, hledej konkrétní nástroj podle výst
 | Předat vlastnictví sloučené dokumentace bez osiřelé pravdy | „předání sloučené dokumentace“, „nový vlastník dokumentace“ nebo „dokumentace po merge“ | předávací karta s vlastníkem, záskokem, revizním triggerem, přístupovou hranicí a prvním malým úkolem po převzetí |
 | Změnit publikum dokumentace bez nechtěného zveřejnění | „změna publika dokumentace“, „veřejná interní sdílená vrstva“ nebo „publikum dokumentace“ | publikační karta, která určí co je veřejné, řízeně sdílené, interní nebo neveřejné a jak se uklidí odkazy, příklady a přístupy |
 | Zkontrolovat změnu publika dokumentace po prvním použití | „kontrola publika dokumentace“, „publikum po publikaci“ nebo „veřejná dokumentace po změně“ | kontrolní karta, která ověří čtenáře, citlivé detaily, odkazy, sdílení, indexaci a dopad bez sledování lidí |
+| Stáhnout nebo zúžit veřejnou dokumentaci bez ztráty důvěry | „stažení veřejné dokumentace“, „zúžení veřejného slibu“ nebo „veřejný text končí“ | stahovací karta s důvodem, náhradní odpovědí, opravou odkazů, archivem a kontrolou starých slibů |
 
 Pravidlo pro práci s rejstříkem: otevři maximálně tři nalezené části, vyber jednu a zapiš výstup. Pokud po deseti minutách pořád skáčeš mezi odkazy, vrať se k tabulce „Kudy začít podle aktuální bolesti“ a zúž problém. E-book není buffet. Teda je, ale bez talíře si stejně odneseš jen chaos.
 
@@ -56803,6 +56804,130 @@ Výsledek: tým nezavádí nové sledování FAQ. Opraví jednu starou šablonu,
 
 Vyber jednu stránku, která v poslední době změnila publikum: interní text se stal veřejným, veřejný text se stáhl interně, nebo se dokument začal řízeně sdílet se zákazníky. Za dvacet minut projdi jednu reálnou situaci čtenáře a vyplň kontrolní kartu: původní důvod, průchod, co fungovalo, co drhlo, citlivé detaily, cesty k textu, dopad a verdikt. Pokud najdeš starou šablonu nebo odkaz, neopravuj deset věcí najednou. Zavři první nejrizikovější stopu a zapiš trigger pro další revizi.
 
+## Příloha: Stažení veřejné dokumentace bez ztráty důvěry
+
+Někdy je správné veřejnou dokumentaci rozšířit. Jindy je stejně správné ji stáhnout, zúžit nebo převést do řízeně sdílené vrstvy. Produkt se změnil, starý postup přestal platit, veřejná stránka slibuje víc než provoz unese, nebo se z návodu stal detailní plán interních procesů. Privacy-first provoz musí umět říct: „Tuhle informaci už takhle veřejně nedržíme.“
+
+Stažení dokumentace ale není mazací panika. Když stránku prostě smažeš a necháš po ní rozbité odkazy, ztratíš důvěru i signály pro tým. Dobré stažení zachová orientaci čtenáře, zavře starý slib, neprozradí interní detaily a dá týmu jeden aktuální bod pravdy.
+
+> Codyho komentář: Veřejná dokumentace není tetování. Když přestane odpovídat realitě, může pryč. Jen ji nestahuj stylem „404 a modlitba“. To není strategie, to je úklid pod koberec s HTTP kódem.
+
+### Poznej rozdíl mezi stažením, zúžením a archivem
+
+Ne každá problematická stránka má skončit smazáním. Nejdřív určete, co se vlastně mění: pravda, publikum, detail, nebo jen forma.
+
+Použij jednoduché rozlišení:
+
+| Stav | Kdy dává smysl | Výsledek |
+| --- | --- | --- |
+| Zúžit | Veřejný text je užitečný, ale obsahuje moc detailů, interní názvy nebo příliš široký slib. | Stránka zůstává veřejná, jen se přepíše na bezpečnější a přesnější odpověď. |
+| Rozdělit | Jedna stránka slouží zákazníkům, nákupu, supportu i internímu týmu najednou. | Vznikne veřejná odpověď, řízeně sdílený balíček a interní postup. |
+| Archivovat | Text je historicky užitečný, ale nesmí řídit současnou práci. | Stránka dostane jasný archivní stav, datum a odkaz na aktuální cestu. |
+| Stáhnout | Text už je zavádějící, rizikový nebo zbytečně odhaluje provoz. | Veřejné cesty se uklidí a místo stránky zůstane krátká náhradní odpověď nebo správný stav. |
+| Opravit realitu | Dokumentace odhalila, že problém není v textu, ale v produktu nebo provozu. | Neřeší se kosmetika textu; otevře se produktová nebo provozní karta. |
+
+Praktické pravidlo: když by stažení stránky jen zakrylo nevyřešený produktový problém, nejdřív pojmenuj problém. Stažení dokumentace je oprava informační vrstvy, ne kouzelný prášek na rozbité sliby.
+
+### Napiš stahovací kartu
+
+Stažení veřejné dokumentace musí mít krátký důvod. Ne kvůli auditu pro audit. Kvůli tomu, aby za tři měsíce někdo stránku nevytáhl zpátky s větou „vždyť to tam bývalo“.
+
+Minimální karta:
+
+| Pole | Otázka |
+| --- | --- |
+| Dokument | Která stránka, FAQ položka, PDF, šablona nebo veřejný balíček se mění? |
+| Důvod | Proč už původní veřejná podoba neodpovídá realitě nebo správnému publiku? |
+| Typ změny | Zúžit, rozdělit, archivovat, stáhnout nebo otevřít produktovou opravu? |
+| Náhradní odpověď | Co má člověk vidět místo starého textu? |
+| Staré cesty | Kde všude na text vedou odkazy, makra, navigace, sitemap, RSS, PDF nebo obchodní materiály? |
+| Privacy hranice | Jaký detail už nemá být veřejný nebo sdílený? |
+| Vlastník | Kdo odpovídá za nový stav, odkazy a první kontrolu? |
+| Kontrola | Kdy ověříme, že starý slib dál necirkuluje? |
+
+Karta má být krátká. Pokud se rozroste na dvě stránky, pravděpodobně neřešíš stažení dokumentace, ale změnu produktu, smluvního slibu nebo provozního procesu. To je v pořádku, jen to pojmenuj správně.
+
+### Dej čtenáři náhradní cestu
+
+Nejhorší verze stažení je tiché zmizení. Člověk měl otázku, našel odkaz a najednou narazí na prázdno. Privacy-first přístup neznamená, že se tváříme tajemně. Znamená to, že ukazujeme přesně tolik, kolik je pro další bezpečný krok potřeba.
+
+Náhradní cesta může být:
+
+- krátké veřejné vysvětlení, že postup se změnil a aktuální cesta je jinde,
+- archivní poznámka s datem poslední platnosti,
+- přesměrování na novější stránku, pokud je význam opravdu stejný,
+- řízeně sdílený balíček pro zákazníky, kteří detail potřebují při nákupu nebo auditu,
+- support kontakt s jasným popisem, jaké informace člověk dostane a jaká data k tomu musí poslat.
+
+Nepoužívej falešné přesměrování na obecnou homepage jen proto, aby „nebyla chyba“. Pokud někdo hledá pravidla exportu dat a skončí na úvodní stránce produktu, není to pomoc. Je to jen elegantní ztracení člověka.
+
+### Ukliď staré sliby, ne jen jednu URL
+
+Veřejná dokumentace málokdy žije sama. Má odkazy v produktu, obchodních prezentacích, support makrech, starších PDF, zákaznických e-mailech, interních provozních návodech, rozhodovacích záznamech a někdy i v cizích záložkách. Stažení jedné stránky bez úklidu nosičů vytvoří dvě pravdy: stránka je pryč, ale slib dál obíhá.
+
+Kontrolní místa:
+
+| Místo | Co udělat |
+| --- | --- |
+| Produktové UI | Odkazy v aplikaci veď na aktuální odpověď podle role uživatele. |
+| Webová navigace | Odstraň položky, které starý text dál prezentují jako živou dokumentaci. |
+| Sitemap a RSS | Stažený text se nemá tvářit jako nový nebo aktuální veřejný obsah. |
+| Support makra | Přepiš odpovědi, které starý slib posílají zákazníkům. |
+| Sales materiály | Zkontroluj decky, PDF a trust balíčky, které mohou kolovat mimo web. |
+| Interní dokumentace | Udrž interní důvod změny, ale neodkazuj na mrtvý veřejný text jako na pravdu. |
+| Vyhledávání | Veřejné i interní vyhledávání má vracet správnou aktuální cestu. |
+
+Začni jedním nejrizikovějším místem. Pokud jde o bezpečnostní, datový nebo právně citlivý slib, nejdřív oprav veřejné cesty a support šablony. U méně rizikových textů může stačit postupný úklid v příštím obsahovém review.
+
+### Zachovej důkaz rozhodnutí bez zbytečných detailů
+
+Stažení dokumentace nemá vymazat paměť týmu. Má vymazat veřejnou nebo sdílenou stopu, která už nemá existovat. Interně si nech stručný záznam: co se změnilo, proč, kdy, kdo rozhodl a kde je nová pravda.
+
+Dobrá interní poznámka neobsahuje:
+
+- jména zákazníků, pokud stačí typ situace,
+- celé staré bezpečnostní postupy,
+- screenshoty s osobními údaji,
+- interní incidentní historii, která k rozhodnutí není nutná,
+- dlouhou debatu, kdo měl text opravit dřív.
+
+Stačí provozní stopa: „Veřejné FAQ k exportu bylo 2026-07-26 zúženo, protože starý text popisoval interní job a příliš přesný retenční detail. Aktuální veřejná odpověď je ___. Interní postup je ___. První kontrola odkazů proběhne ___.“
+
+### Příklad: Stažení starého návodu k exportu dat
+
+Tým měl veřejný návod „Jak přesně probíhá export dat při ukončení účtu“. Původně měl snížit support dotazy. Postupně ale začal obsahovat interní názvy jobů, přesné provozní časy, ruční výjimky a odkaz na starý support formulář.
+
+Stahovací karta:
+
+| Pole | Zápis |
+| --- | --- |
+| Dokument | Veřejný návod k exportu dat při ukončení účtu. |
+| Důvod | Text je moc detailní, část postupu už neplatí a obsahuje interní názvy procesů. |
+| Typ změny | Zúžit veřejnou odpověď a přesunout provozní postup do interní dokumentace. |
+| Náhradní odpověď | Veřejné FAQ popíše kdo může export vyžádat, jaký je výsledek, omezenou dostupnost souboru a kontakt na podporu. |
+| Staré cesty | Account settings, pricing FAQ, dvě support makra, jeden starý PDF trust balíček. |
+| Privacy hranice | Neuvádět interní job, přesné názvy úložišť ani ruční výjimky. |
+| Vlastník | Support lead pro makra, produkt pro text v aplikaci. |
+| Kontrola | Za 14 dní projít nové exportní dotazy a vyhledat starou URL v repozitáři a dokumentaci. |
+
+Výsledek není tajnůstkářství. Zákazník dostane jasnější odpověď a tým přestane veřejně slibovat provozní detaily, které se mohou změnit. Interní tým má pořád návod, jen už ho neposílá do světa jako produktovou pravdu.
+
+### Checklist: Stažení veřejné dokumentace
+
+- [ ] Rozhodl jsem, jestli dokumentaci zúžit, rozdělit, archivovat, stáhnout nebo otevřít produktovou opravu.
+- [ ] Napsal jsem krátký důvod změny a novou aktuální pravdu.
+- [ ] Čtenář má náhradní cestu, ne jen prázdnou chybu nebo obecnou homepage.
+- [ ] Veřejný text neobsahuje interní názvy systémů, detailní provozní postupy ani staré sliby.
+- [ ] Opravil jsem nejrizikovější odkazy v produktu, webu, supportu a sales materiálech.
+- [ ] Sitemap, RSS, interní vyhledávání a veřejné vyhledávání neprezentují stažený text jako aktuální.
+- [ ] Interní záznam vysvětluje rozhodnutí bez zbytečných osobních nebo bezpečnostních detailů.
+- [ ] Řízeně sdílené náhradní materiály mají účel, vlastníka a konec sdílení.
+- [ ] První kontrola je navázaná na datum nebo konkrétní trigger.
+
+### Mini úkol
+
+Vyber jednu veřejnou stránku, FAQ odpověď nebo PDF, které už neodpovídá produktu tak přesně jako dřív. Za třicet minut vyplň stahovací kartu: dokument, důvod, typ změny, náhradní odpověď, staré cesty, privacy hranice, vlastník a kontrola. Pak oprav jen jednu nejrizikovější cestu, kterou se starý slib dostává k lidem. Zbytek dej do malé následné karty, ne do nekonečného „musíme uklidit dokumentaci“.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -56995,6 +57120,8 @@ Vyber jednu stránku, která v poslední době změnila publikum: interní text 
 - Nielsen Norman Group: Onboarding Tutorials vs. Contextual Help - rozdíl mezi úvodními tutoriály a kontextovou pomocí: https://www.nngroup.com/articles/onboarding-tutorials/
 
 ## Pracovní log
+
+- 2026-07-26: Doplněna příloha o stažení veřejné dokumentace bez ztráty důvěry: rozlišení zúžení, rozdělení, archivace, stažení a opravy reality, stahovací karta, náhradní cesta pro čtenáře, úklid starých slibů v odkazech, šablonách, sitemap, RSS a sales materiálech, zachování interního důkazu bez zbytečných detailů, příklad starého návodu k exportu dat, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro zúžení nebo stažení veřejného slibu. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
 - 2026-07-26: Doplněna příloha o kontrole publika dokumentace po změně bez tichého úniku: návrat k publikační kartě, ověření jednoho skutečného pracovního průchodu, hledání citlivých detailů v nové vrstvě, kontrola odkazů, sdílení, indexace a šablon, verdikty po kontrole, chudé měření dopadu bez sledování čtenářů, příklad veřejného FAQ k exportu dat, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro kontrolu změny publika dokumentace po prvním použití. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
