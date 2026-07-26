@@ -176,6 +176,7 @@ Když se nechceš vracet do celé knihy, hledej konkrétní nástroj podle výst
 | Uzavřít backlogovou kartu z provozní lekce bez falešného hotovo | „uzavření lekce“, „backlogová karta hotovo“ nebo „lekce zavřená“ | zavírací review se skutečným dopadem, uklizenými datovými stopami a rozhodnutím, zda změna končí, pokračuje nebo přechází do rutiny |
 | Převést uzavřenou lekci do dokumentace bez úniku detailů | „lekce do dokumentace“, „dokumentační změna po lekci“ nebo „veřejná lekce“ | rozhodnutí, co patří do veřejné dokumentace, interního runbooku, changelogu nebo nikam |
 | Ověřit dokumentační změnu po lekci bez falešné jistoty | „kontrola dokumentace po lekci“, „dokumentační změna funguje“ nebo „souběžná pravda v dokumentaci“ | krátká kontrola, že nový text pomáhá ve skutečné práci, neunikly do něj interní detaily a staré odpovědi už neřídí rozhodnutí |
+| Udržet dokumentaci živou po ověřené změně | „údržba dokumentace“, „živá dokumentace“ nebo „dokumentace po kontrole“ | malý udržovací rytmus s vlastníkem, triggerem, archivací starých částí a kontrolou, že dokumentace dál řídí práci |
 
 Pravidlo pro práci s rejstříkem: otevři maximálně tři nalezené části, vyber jednu a zapiš výstup. Pokud po deseti minutách pořád skáčeš mezi odkazy, vrať se k tabulce „Kudy začít podle aktuální bolesti“ a zúž problém. E-book není buffet. Teda je, ale bez talíře si stejně odneseš jen chaos.
 
@@ -55837,6 +55838,129 @@ Výsledek není velký. A to je dobře. Jedna stará věta zmizela, jeden text z
 
 Vyber jednu dokumentační změnu, která vznikla z provozní lekce. Najdi její původní kartu nebo si ji dopiš v sedmi řádcích. Potom nech jednoho člověka projít konkrétní pracovní scénář podle nového textu: support odpověď, runbookový krok, checklist před releasem nebo veřejnou help stránku. Zapiš, co dokázal udělat bez starého chatu a co ho zmátlo. Nakonec oprav jednu starou souběžnou odpověď nebo zapiš jeden malý navazující úkol.
 
+## Příloha: Údržba dokumentace po ověřené změně bez nového papírování
+
+Když dokumentační změna projde kontrolou, svádí to k pocitu, že je hotovo navždy. Jenže dokumentace nestárne podle kalendáře. Stárne ve chvíli, kdy se změní produkt, dodavatel, podpora, právní hranice, automatizace, pricing nebo způsob práce týmu. Proto nepotřebuje další velký proces. Potřebuje malý udržovací rytmus navázaný na skutečné změny.
+
+Dobrá údržba dokumentace neznamená, že někdo každý měsíc čte všechno od začátku. Znamená, že tým ví, které texty řídí práci, kdo za ně ručí a jaký signál spustí revizi. V privacy-first provozu je to důležité dvojnásob: starý návod může nejen mást, ale také udržovat zbytečné přístupy, staré exporty, moc široké sdílení nebo veřejný slib, který už neodpovídá realitě.
+
+> Codyho komentář: Dokumentace bez vlastníka je jako sdílený šroubovák v kanceláři. Všichni tvrdí, že existuje, ale když ho fakt potřebuješ, najdeš jen prázdné místo a lístek „někdy doplnit“.
+
+### Vyber dokumentaci, která opravdu řídí práci
+
+Neudržuj všechno stejně. Některé texty jsou jen orientační, jiné přímo ovlivňují zákazníka, bezpečnost nebo provoz. Údržbový rytmus začni u dokumentů, které mají reálný dopad na rozhodnutí.
+
+Rozděl dokumentaci do čtyř vrstev:
+
+| Vrstva | Příklad | Údržbové pravidlo |
+| --- | --- | --- |
+| Kritická provozní | incident runbook, obnovovací postup, přístupový checklist | revize při každé související změně a krátký periodický průchod |
+| Zákaznicky viditelná | help stránka, trust odpověď, pricing vysvětlení, status text | revize při změně produktu, podmínek, dodavatele nebo veřejného slibu |
+| Týmová pracovní | support makro, sales FAQ, onboarding role | revize při opakovaném dotazu, změně odpovědnosti nebo nálezu souběžné pravdy |
+| Archivní a učící | staré postmortemy, uzavřené ADR, historické poznámky | jasné označení archivu, bez aktivních odkazů z pracovních toků |
+
+Praktické pravidlo: pokud podle textu někdo může poslat odpověď zákazníkovi, změnit přístup, spustit skript, upravit data nebo slíbit vlastnost produktu, text patří do udržované vrstvy. Pokud jen vysvětluje historický kontext, patří spíš do archivu.
+
+### Přidej vlastnictví bez hrdinského režimu
+
+Vlastník dokumentace není člověk, který má všechno vědět zpaměti. Je to člověk, který hlídá, že text má správné místo, správné publikum a správný další trigger. Když vlastník odejde, změní roli nebo přestane danou oblast dělat, vlastnictví se musí převést stejně jako přístup nebo runbook.
+
+Minimální karta vlastnictví:
+
+| Pole | Co zapsat |
+| --- | --- |
+| Dokument | Název a odkaz na jedno místo pravdy. |
+| Pracovní účel | Jaké rozhodnutí nebo akci dokument podporuje. |
+| Vlastník | Role nebo člověk odpovědný za stav, ne za každé slovo. |
+| Záskok | Kdo zvládne text ověřit, když vlastník není k dispozici. |
+| Revizní trigger | Jaká změna musí spustit kontrolu. |
+| Privacy hranice | Co do dokumentu nepatří ani při dobré snaze být konkrétní. |
+| Stop pravidlo | Kdy text sloučit, archivovat nebo smazat. |
+
+U malého týmu stačí tato karta v hlavičce dokumentu, v interní wiki nebo v jednoduché tabulce. Nepotřebuješ nový nástroj. Potřebuješ, aby při releasu, incidentu nebo změně dodavatele někdo věděl, kam sáhnout.
+
+### Napoj revizi na změny, ne na kalendářové svědomí
+
+Kalendářová revize má smysl jen pro kritické texty. Většina dokumentace se má kontrolovat při konkrétní změně. Jinak tým tráví čas čtením stránek, které nikdo nepoužil, a přehlédne stránku, která právě začala škodit.
+
+Dobré revizní triggery:
+
+- změna produktu, která mění uživatelský krok,
+- změna dodavatele, regionu, retence nebo datového toku,
+- incident nebo provozní lekce,
+- opakovaný support nebo sales dotaz,
+- změna ceny, plánu, SLA nebo veřejného slibu,
+- změna role, přístupů nebo odpovědnosti v týmu,
+- vypnutí automatizace, přesun runbooku nebo archivace starého procesu.
+
+K jednomu triggeru přiřaď nejvýš několik dokumentů. Pokud release checklist spouští revizi padesáti stránek, nikdo ji poctivě neudělá. Lepší je malá vazba: „měníme billing webhook, zkontroluj billing runbook, support makro k platbám a stránku o fakturaci“.
+
+### Archivuj aktivně, ne sentimentálně
+
+Starý dokument nemusí zmizet. Musí přestat řídit práci, pokud už není pravdivý. Archivace je produktová hygiena, ne mazání historie.
+
+U archivovaného textu zkontroluj:
+
+| Otázka | Bezpečná odpověď |
+| --- | --- |
+| Je jasné, že text není aktuální postup? | Nadpis nebo úvod říká „Archivováno“ a datum poslední platnosti. |
+| Existuje aktuální náhrada? | Dokument odkazuje na jedno současné místo pravdy, pokud existuje. |
+| Nevede na něj aktivní workflow? | Není v šablonách, navigaci, onboardingu, support makrech ani alert zprávách. |
+| Neobsahuje zbytečně citlivé detaily? | Archiv má stejnou nebo přísnější privacy hranici než aktivní dokumentace. |
+| Víme, kdy archiv smažeme? | Má stop pravidlo nebo důvod dlouhodobého ponechání. |
+
+Nejčastější chyba je měkká archivace: text se přesune do složky „old“, ale odkazy zůstanou všude. To není archiv. To je starý postup v převleku.
+
+### Měř užitečnost dokumentace chudě
+
+Dokumentaci nemusíš měřit pomocí detailního sledování čtenářů. V interní práci často stačí sledovat, jestli text snižuje šum a zrychluje rozhodnutí.
+
+Použitelné signály bez profilování:
+
+- počet opakovaných support dotazů na stejnou věc za týden nebo měsíc,
+- počet incidentů nebo eskalací, kde dokumentace chyběla nebo mátla,
+- počet starých šablon opravených po změně,
+- krátký záznam z jednoho pracovního průchodu,
+- ruční poznámka „dokument pomohl / nepomohl / chyběl“ u uzavřené karty,
+- kontrola, jestli nové odpovědi zákazníkům odpovídají aktuálnímu veřejnému slibu.
+
+Nepotřebuješ session recording nad help centrem, heatmapu interní wiki ani detailní profil lidí, kteří klikli na runbook. Pokud dokumentace opravdu řídí práci, její užitečnost poznáš na menším počtu nejasných dotazů, menším počtu ručních výjimek a rychlejším uzavření konkrétních karet.
+
+### Příklad: Údržba trust odpovědí po změně dodavatele
+
+Tým přesune část e-mailové infrastruktury k novému evropskému dodavateli. Změna je technicky hotová a první support odpověď po lekci už prošla kontrolou. Teď je potřeba zabránit tomu, aby staré informace dál žily v obchodních a trust materiálech.
+
+Údržbová karta:
+
+| Pole | Zápis |
+| --- | --- |
+| Dokumenty | Veřejná trust stránka, interní sales FAQ, DPA příloha k subdodavatelům, support makro k doručitelnosti. |
+| Pracovní účel | Odpovědět zákazníkovi, kde se e-mailová data zpracovávají a jaké typy zpráv posíláme. |
+| Vlastník | Ops/produkt podle toho, kdo drží dodavatelský registr. |
+| Trigger | Změna dodavatele, regionu, retenčního pravidla, typu e-mailu nebo veřejného trust slibu. |
+| Privacy hranice | Neuvádět interní routing, konkrétní konfiguraci, neveřejné incidenty ani testovací adresy. |
+| Archivace | Staré sales FAQ označit jako archivované a odstranit z odpovědní knihovny. |
+| Ověření | Po dvou týdnech ručně projít tři nové zákaznické odpovědi a jednu sales odpověď. |
+
+Výsledek není „všechna dokumentace zkontrolována“. Výsledek je praktičtější: žádný aktivní text už netvrdí starého dodavatele, veřejné tvrzení odpovídá realitě a interní detaily zůstaly v řízeném provozním místě.
+
+### Checklist: Údržba dokumentace po ověřené změně
+
+- [ ] Rozlišil jsem kritickou, zákaznicky viditelnou, týmovou a archivní dokumentaci.
+- [ ] Vybral jsem jen texty, které opravdu řídí práci nebo veřejný slib.
+- [ ] Každý udržovaný text má vlastníka, záskok a jedno místo pravdy.
+- [ ] Revize je navázaná na konkrétní změny, ne jen na neurčité „někdy zkontrolovat“.
+- [ ] U každého textu je jasná privacy hranice: co do něj nepatří ani jako příklad.
+- [ ] Archivované texty jsou viditelně označené a neřídí aktivní workflow.
+- [ ] Staré odkazy, šablony, makra, onboarding a alerty nevracejí tým ke starému postupu.
+- [ ] Užitečnost dokumentace měřím chudými pracovními signály, ne sledováním jednotlivých čtenářů.
+- [ ] Dokumentace neslibuje víc, než produkt, provoz a smlouvy skutečně unesou.
+- [ ] Existuje stop pravidlo pro sloučení, archivaci nebo smazání textu.
+
+### Mini úkol
+
+Vyber jednu dokumentační změnu, která už prošla kontrolou. Napiš k ní údržbovou kartu: dokument, pracovní účel, vlastník, záskok, trigger, privacy hranice a stop pravidlo. Potom najdi tři místa, kde by stará verze mohla dál řídit práci - support makro, sales FAQ, onboarding, runbook, alert nebo veřejnou stránku. Jedno místo oprav hned, jedno označ k opravě s vlastníkem a jedno vědomě nech beze změny jen tehdy, když umíš napsat proč.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -56029,6 +56153,8 @@ Vyber jednu dokumentační změnu, která vznikla z provozní lekce. Najdi její
 - Nielsen Norman Group: Onboarding Tutorials vs. Contextual Help - rozdíl mezi úvodními tutoriály a kontextovou pomocí: https://www.nngroup.com/articles/onboarding-tutorials/
 
 ## Pracovní log
+
+- 2026-07-26: Doplněna příloha o údržbě dokumentace po ověřené změně bez nového papírování: rozlišení dokumentace podle pracovního dopadu, vlastnická karta, revize navázaná na změny místo kalendářového svědomí, aktivní archivace, chudé měření užitečnosti bez profilování čtenářů, příklad trust odpovědí po změně dodavatele, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro živou údržbu dokumentace. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
 - 2026-07-26: Doplněna příloha o kontrole dokumentační změny po lekci bez falešné jistoty: návrat k dokumentační kartě, ověření jednoho pracovního průchodu, hledání souběžné pravdy, privacy kontrola po publikaci, pět verdiktů kontroly, příklad support odpovědi po lekci z alertu, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro ověření dokumentační změny po lekci. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
