@@ -175,6 +175,7 @@ Když se nechceš vracet do celé knihy, hledej konkrétní nástroj podle výst
 | Převést provozní lekci do backlogu bez poradní inflace | „lekce do backlogu“, „provozní lekce jako úkol“ nebo „učící karta pokračuje“ | jedna backlogová karta s důvodem, privacy hranicí, vlastníkem, ověřením a rozhodnutím kdy úkol zavřít |
 | Uzavřít backlogovou kartu z provozní lekce bez falešného hotovo | „uzavření lekce“, „backlogová karta hotovo“ nebo „lekce zavřená“ | zavírací review se skutečným dopadem, uklizenými datovými stopami a rozhodnutím, zda změna končí, pokračuje nebo přechází do rutiny |
 | Převést uzavřenou lekci do dokumentace bez úniku detailů | „lekce do dokumentace“, „dokumentační změna po lekci“ nebo „veřejná lekce“ | rozhodnutí, co patří do veřejné dokumentace, interního runbooku, changelogu nebo nikam |
+| Ověřit dokumentační změnu po lekci bez falešné jistoty | „kontrola dokumentace po lekci“, „dokumentační změna funguje“ nebo „souběžná pravda v dokumentaci“ | krátká kontrola, že nový text pomáhá ve skutečné práci, neunikly do něj interní detaily a staré odpovědi už neřídí rozhodnutí |
 
 Pravidlo pro práci s rejstříkem: otevři maximálně tři nalezené části, vyber jednu a zapiš výstup. Pokud po deseti minutách pořád skáčeš mezi odkazy, vrať se k tabulce „Kudy začít podle aktuální bolesti“ a zúž problém. E-book není buffet. Teda je, ale bez talíře si stejně odneseš jen chaos.
 
@@ -55703,6 +55704,139 @@ To stačí. Není potřeba přidat graf incidentu, ukázku staré zprávy ani in
 
 Vezmi jednu uzavřenou provozní lekci z posledního měsíce. Napiš k ní dokumentační kartu: lekce, publikum, místo, veřejná hranice, datový ořez, vlastník a revize. Potom uprav jen jedno existující místo - odstavec v runbooku, support odpověď, checklist nebo veřejnou poznámku. Nakonec najdi jednu starou odpověď nebo odkaz, který by mohl novému textu odporovat, a buď ho oprav, nebo zapiš, proč dnes zůstává beze změny.
 
+## Příloha: Kontrola dokumentační změny po lekci bez falešné jistoty
+
+Dokumentace po provozní lekci není hotová tím, že se text objeví v repozitáři, wiki nebo help centru. Hotová je až ve chvíli, kdy další člověk podle ní udělá lepší krok, než by udělal podle staré paměti týmu. To se bez kontroly nepozná.
+
+Kontrola dokumentační změny má být malá. Nejde o redakční festival, ale o ověření tří věcí: text je použitelný v reálné práci, neunikly do něj interní nebo zákaznické detaily a vedle něj nepřežívá starší opačná odpověď. Pokud kontrola najde problém, neotevírej novou dokumentační kampaň. Oprav nejmenší místo, které blokuje správné rozhodnutí.
+
+> Codyho komentář: Nejhorší dokumentace není ta, která chybí. Horší je ta, která vypadá aktuálně, ale v kritické chvíli pošle člověka ke starému postupu. To je knowledge base s falešným knírem.
+
+### Vrať se k původní dokumentační kartě
+
+Kontrolu nezačínej čtením celé dokumentace. Začni kartou, podle které změna vznikla.
+
+Znovu si polož otázky:
+
+| Pole | Kontrolní otázka |
+| --- | --- |
+| Lekce | Je pořád jasné, jaké rozhodnutí nebo pravidlo jsme chtěli zachovat? |
+| Publikum | Víme, kdo má text použít při práci? |
+| Místo | Je text opravdu tam, kde by ho člověk hledal? |
+| Veřejná hranice | Zůstalo venku jen to, co smí být veřejné nebo široce sdílené? |
+| Datový ořez | Nepřenesli jsme payloady, screenshoty, zákaznické detaily nebo osobní poznámky bez účelu? |
+| Revize | Je jasné, kdy se text znovu zkontroluje? |
+| Stop pravidlo | Víme, kdy dokumentaci smazat, sloučit nebo archivovat? |
+
+Pokud karta neexistuje, dopiš ji zpětně jen v minimálním rozsahu. Ne proto, aby ses vrátil v čase a vypadal metodicky. Proto, aby kontrola měla měřítko. Bez měřítka se z review stane debata o vkusu, délce vět a tom, jestli je slovo „proces“ už moc procesní. Spoiler: často je.
+
+### Ověř jeden pracovní průchod
+
+Dokumentaci testuj na situaci, ve které má pomoct. Nestačí přečíst text a říct „dává smysl“. Smysl v klidu u stolu je levná měna.
+
+Vyber jeden krátký scénář:
+
+| Typ dokumentace | Testovací průchod |
+| --- | --- |
+| Runbook | Člověk na záskoku podle něj najde první bezpečný krok a ví, kde zastavit. |
+| Support odpověď | Support napíše zákazníkovi odpověď bez interních detailů a bez slibu navíc. |
+| Veřejná help stránka | Nový uživatel pochopí aktuální chování funkce a další krok bez kontaktování podpory. |
+| Sales nebo trust odpověď | Obchodník odpoví na běžný dotaz konzistentně s veřejným slibem a DPA hranicí. |
+| Checklist | Vlastník releasu projde krok a ví, co je blocker, co je poznámka a co se nemá měřit. |
+
+Průchod má trvat jednotky minut. Pokud k ověření potřebuješ půldenní workshop, testuješ moc velký kus dokumentace. Zmenši scénář.
+
+Dobrá kontrolní věta:
+
+„Podle nového textu dokáže ___ v situaci ___ udělat ___ bez čtení starého chatu, interního incidentu nebo exportu dat.“
+
+Když větu neumíš vyplnit, dokumentace možná neřeší práci. Jen dobře zní.
+
+### Hledej souběžnou pravdu
+
+Po lekci často vznikne nový správný text, ale stará odpověď zůstane žít vedle něj. V praxi pak vyhraje text, který je kratší, viditelnější nebo starším lidem víc sedí v ruce. Správnost sama o sobě nevyhrává.
+
+Projdi nejpravděpodobnější nosiče staré pravdy:
+
+- připnuté support šablony,
+- interní FAQ,
+- onboarding checklisty,
+- runbooky,
+- sales poznámky,
+- veřejné help stránky,
+- changelogové odkazy,
+- staré odpovědi v CRM,
+- komentáře v issue nebo PR šablonách,
+- monitoring nebo alert zprávy, které pořád odkazují jinam.
+
+Nepotřebuješ najít každou historickou zmínku. Potřebuješ najít místa, která mohou skutečně řídit další rozhodnutí. Starý postmortem v archivu může zůstat archivem, pokud je jasně označený. Starý text v support makru je problém, protože se jedním klikem může poslat zákazníkovi.
+
+### Zkontroluj privacy hranici po publikaci
+
+Dokumentační změna může být věcně správná a přesto privacy špatná. Typická chyba: do textu se při snaze „být konkrétní“ dostanou interní screenshoty, ID zákazníků, přesné payloady, názvy neveřejných systémů, IP adresy nebo historické slabiny, které už nemají být široce sdílené.
+
+Udělej rychlý privacy průchod:
+
+| Otázka | Co hledat |
+| --- | --- |
+| Obsahuje text osobní údaje? | Jména, e-maily, telefon, adresy, IP adresy, účty, identifikátory. |
+| Obsahuje zákaznické nebo obchodní detaily? | Název zákazníka, smluvní podmínky, výši platby, interní stav účtu. |
+| Obsahuje technický detail, který není nutný? | Payloady, response body, hlavičky, stack trace, interní URL, přesné názvy tajných integrací. |
+| Přenáší screenshoty nebo exporty? | Zkontroluj rozmazání, ořez, účel, místo uložení a plán smazání. |
+| Rozšířil se okruh příjemců? | Veřejná stránka, širší wiki, sdílený kanál nebo e-mailová šablona mají jiné publikum než interní log. |
+| Má text retenci nebo revizi? | Bez revize se dnešní bezpečný detail může stát zítřejším zastaralým rizikem. |
+
+Privacy kontrola není výmluva pro mlžení. Cílem je říct dost na správnou práci a málo na zbytečný únik. Když potřebuješ detail pro omezený provozní zásah, odkaž na místo s řízeným přístupem a retenčním pravidlem. Nedávej detail do široké dokumentace jen proto, že se pohodlně kopíruje.
+
+### Rozhodni stav dokumentace
+
+Kontrola musí skončit verdiktem. Jinak se z ní stane další otevřená poznámka.
+
+Použij jeden z pěti stavů:
+
+| Stav | Kdy použít | Další krok |
+| --- | --- | --- |
+| Ponechat | Text pomohl v pracovním průchodu, privacy hranice sedí a staré odpovědi nejsou rizikové. | Zavřít kontrolu a ponechat revizní trigger. |
+| Ponechat s drobnou opravou | Text funguje, ale jedna formulace, odkaz nebo šablona mate. | Opravit hned a zapsat krátký výsledek. |
+| Zúžit | Text obsahuje moc detailu, širší publikum nebo příliš obecný závazek. | Ořezat veřejnou nebo sdílenou vrstvu, detail přesunout do řízeného místa. |
+| Sloučit | Nový text duplikuje existující stránku nebo runbook. | Přesunout nejlepší část do jednoho zdroje pravdy a starý odkaz opravit. |
+| Vrátit do backlogu | Dokumentace neřeší práci, protože chybí produktová, provozní nebo smluvní změna. | Otevřít jednu menší kartu s vlastníkem a dokumentaci zatím nepředstírat jako řešení. |
+
+Verdikt piš krátce. Neobhajuj celý proces. Stačí, aby další člověk viděl, co bylo ověřeno, co se změnilo a kdy se k textu vrátit.
+
+### Příklad: Kontrola support odpovědi po lekci z alertu
+
+Původní lekce říká: „Dostupnostní alert má vést k první bezpečné akci, ne posílat technický výpis bez kontextu.“
+
+Dokumentační změna upravila runbook a supportní odpověď. Po týdnu proběhne malá kontrola.
+
+| Pole | Zápis |
+| --- | --- |
+| Pracovní průchod | Support podle nové odpovědi vysvětlil zákazníkovi, jak komunikujeme dostupnostní události, bez logů a interních detailů. |
+| Co pomohlo | Odpověď jasně oddělila veřejný stav, čas ověření a doporučený další krok od interní diagnostiky. |
+| Co mátlo | Staré support makro pořád obsahovalo větu „pošleme detailní technický výpis“, což už není pravda. |
+| Privacy kontrola | Nový text neobsahuje payloady, IP adresy, screenshoty ani jména zákazníků. Interní runbook odkazuje na omezený monitoring místo kopírování logů. |
+| Verdikt | Ponechat s drobnou opravou: staré makro smazat a do odpovědní knihovny doplnit revizi při změně status stránky. |
+
+Výsledek není velký. A to je dobře. Jedna stará věta zmizela, jeden text zůstal použitelný a tým má jasnější hranici mezi veřejnou komunikací a interní diagnostikou.
+
+### Checklist: Kontrola dokumentační změny po lekci
+
+- [ ] Vrátil jsem se k původní dokumentační kartě nebo jsem ji zpětně doplnil v minimálním rozsahu.
+- [ ] Ověřil jsem dokumentaci na jednom konkrétním pracovním průchodu.
+- [ ] Test ukázal, kdo podle textu udělá jaký bezpečnější nebo rychlejší krok.
+- [ ] Zkontroloval jsem nejpravděpodobnější místa, kde může přežívat stará souběžná pravda.
+- [ ] Staré support šablony, runbooky, FAQ, sales poznámky nebo odkazy už novému textu neodporují, nebo mají jasný opravný úkol.
+- [ ] Text neobsahuje osobní údaje, zákaznické detaily, payloady, screenshoty, interní URL ani technické výpisy bez účelu.
+- [ ] Veřejná, řízeně sdílená a interní vrstva odpovídají publiku a riziku.
+- [ ] Dokumentace neslibuje víc, než tým umí provozně držet.
+- [ ] Kontrola skončila verdiktem: ponechat, ponechat s drobnou opravou, zúžit, sloučit nebo vrátit do backlogu.
+- [ ] Revizní trigger a stop pravidlo zůstaly viditelné.
+
+### Mini úkol
+
+Vyber jednu dokumentační změnu, která vznikla z provozní lekce. Najdi její původní kartu nebo si ji dopiš v sedmi řádcích. Potom nech jednoho člověka projít konkrétní pracovní scénář podle nového textu: support odpověď, runbookový krok, checklist před releasem nebo veřejnou help stránku. Zapiš, co dokázal udělat bez starého chatu a co ho zmátlo. Nakonec oprav jednu starou souběžnou odpověď nebo zapiš jeden malý navazující úkol.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -55895,6 +56029,8 @@ Vezmi jednu uzavřenou provozní lekci z posledního měsíce. Napiš k ní doku
 - Nielsen Norman Group: Onboarding Tutorials vs. Contextual Help - rozdíl mezi úvodními tutoriály a kontextovou pomocí: https://www.nngroup.com/articles/onboarding-tutorials/
 
 ## Pracovní log
+
+- 2026-07-26: Doplněna příloha o kontrole dokumentační změny po lekci bez falešné jistoty: návrat k dokumentační kartě, ověření jednoho pracovního průchodu, hledání souběžné pravdy, privacy kontrola po publikaci, pět verdiktů kontroly, příklad support odpovědi po lekci z alertu, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro ověření dokumentační změny po lekci. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
 - 2026-07-26: Doplněna příloha o převodu uzavřené provozní lekce do dokumentace bez úniku detailů: určení publika, rozdělení veřejné, řízeně sdílené a interní vrstvy, výběr správného typu dokumentační změny, dokumentační karta, psaní pravidla místo historie, úklid starých odkazů a šablon, příklad dostupnostního alertu, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro dokumentační změnu po lekci. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
