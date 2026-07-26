@@ -177,6 +177,7 @@ Když se nechceš vracet do celé knihy, hledej konkrétní nástroj podle výst
 | Převést uzavřenou lekci do dokumentace bez úniku detailů | „lekce do dokumentace“, „dokumentační změna po lekci“ nebo „veřejná lekce“ | rozhodnutí, co patří do veřejné dokumentace, interního runbooku, changelogu nebo nikam |
 | Ověřit dokumentační změnu po lekci bez falešné jistoty | „kontrola dokumentace po lekci“, „dokumentační změna funguje“ nebo „souběžná pravda v dokumentaci“ | krátká kontrola, že nový text pomáhá ve skutečné práci, neunikly do něj interní detaily a staré odpovědi už neřídí rozhodnutí |
 | Udržet dokumentaci živou po ověřené změně | „údržba dokumentace“, „živá dokumentace“ nebo „dokumentace po kontrole“ | malý udržovací rytmus s vlastníkem, triggerem, archivací starých částí a kontrolou, že dokumentace dál řídí práci |
+| Zjednodušit dokumentaci, která už práci neřídí | „retence dokumentace“, „dokumentace stárne“ nebo „zbytečná dokumentace“ | zavírací karta, která rozhodne ponechat, zúžit, sloučit, archivovat nebo smazat text bez ztráty důležitého poučení |
 
 Pravidlo pro práci s rejstříkem: otevři maximálně tři nalezené části, vyber jednu a zapiš výstup. Pokud po deseti minutách pořád skáčeš mezi odkazy, vrať se k tabulce „Kudy začít podle aktuální bolesti“ a zúž problém. E-book není buffet. Teda je, ale bez talíře si stejně odneseš jen chaos.
 
@@ -55961,6 +55962,133 @@ Výsledek není „všechna dokumentace zkontrolována“. Výsledek je praktič
 
 Vyber jednu dokumentační změnu, která už prošla kontrolou. Napiš k ní údržbovou kartu: dokument, pracovní účel, vlastník, záskok, trigger, privacy hranice a stop pravidlo. Potom najdi tři místa, kde by stará verze mohla dál řídit práci - support makro, sales FAQ, onboarding, runbook, alert nebo veřejnou stránku. Jedno místo oprav hned, jedno označ k opravě s vlastníkem a jedno vědomě nech beze změny jen tehdy, když umíš napsat proč.
 
+## Příloha: Retence dokumentace bez věčného skladování textů
+
+Živá dokumentace potřebuje údržbu, ale taky konec. Pokud každý návod, FAQ, šablona, checklist a historická poznámka zůstane navždy aktivní, tým se časem přestane ptát „co je pravda?“ a začne se ptát „která z pěti pravd platí dnes?“. To je drahé. V supportu to vyrábí ruční vysvětlování, v sales opatrné mlžení, ve vývoji obcházení runbooků a v privacy-first provozu hlavně riziko, že starý text pořád navádí k širším datům, starým exportům nebo zbytečným přístupům.
+
+Retence dokumentace není právnické kouzlo. Je to pracovní rozhodnutí: které texty mají dál řídit práci, které mají zůstat jako historická stopa a které už jen zabírají místo v hlavě týmu. Cílem není mazat historii kvůli čistému dojmu. Cílem je, aby současné rozhodování mělo jedno aktuální místo pravdy.
+
+> Codyho komentář: Dokumentační skládka vypadá z dálky jako znalostní báze. Zblízka je to jen místo, kde staré screenshoty šeptají novým lidem špatné rady. Velmi produktivní horor, jen bez popcornu.
+
+### Rozliš hodnotu textu podle dnešní práce
+
+Nejdřív se neptej, jestli je text „hezký“ nebo jestli na něm někdo kdysi strávil hodně času. Ptej se, co dnes umožňuje. Dokumentace má hodnotu tehdy, když pomáhá člověku udělat konkrétní práci, odpovědět zákazníkovi, bezpečně změnit systém nebo pochopit rozhodnutí, které pořád ovlivňuje produkt.
+
+Použij pět stavů:
+
+| Stav | Kdy dává smysl | Co udělat |
+| --- | --- | --- |
+| Ponechat | Text je aktuální a někdo podle něj pravidelně pracuje. | Udržuj vlastníka, trigger a další kontrolu. |
+| Zúžit | Text má užitečné jádro, ale moc rozsahu, historie nebo interních detailů. | Nech jen části, které podporují dnešní rozhodnutí. |
+| Sloučit | Existují dvě nebo více podobných pravd. | Vyber jednu cílovou stránku a přesuň nejlepší části. |
+| Archivovat | Text má historickou nebo učící hodnotu, ale nemá řídit práci. | Označ archiv, přidej datum a odkaz na aktuální cestu. |
+| Smazat | Text nepomáhá, mate, obsahuje zbytečné detaily nebo drží starý proces při životě. | Odstraň ho a ukliď odkazy, šablony i navigaci. |
+
+Praktické pravidlo: pokud text nemá dnešní pracovní účel, vlastníka ani jasné publikum, nezačínej jeho revizí. Začni rozhodnutím, zda má vůbec zůstat.
+
+### Udělej zavírací kartu dokumentu
+
+U každého většího úklidu se hodí krátká karta. Chrání tým před dvěma extrémy: impulzivním mazáním užitečných lekcí a sentimentálním skladováním všeho, co kdysi mělo smysl.
+
+Minimální karta:
+
+| Pole | Co zapsat |
+| --- | --- |
+| Dokument | Název, odkaz a kde se používá. |
+| Původní účel | Proč vznikl a jakou práci měl řídit. |
+| Dnešní stav | Ponechat, zúžit, sloučit, archivovat nebo smazat. |
+| Důvod | Co se změnilo v produktu, týmu, dodavateli, podpoře nebo veřejném slibu. |
+| Co zachovat | Jedna až tři věci, které mají dál hodnotu. |
+| Co nesmí zůstat | Osobní údaje, staré exporty, interní URL, zastaralé přístupy, neplatné sliby nebo screenshoty. |
+| Úklid stop | Odkazy, navigace, support šablony, sales FAQ, onboarding, runbooky, alerty. |
+| Ověření | Jak poznáme, že starý text už neřídí práci. |
+
+Tahle karta má být krátká. Pokud potřebuješ půl hodiny dokazovat, že dokument má existovat, pravděpodobně neřídí práci tak silně, jak si tým přeje.
+
+### Zúžení je často lepší než mazání
+
+Starý text bývá směs tří věcí: aktuální pravidlo, historický kontext a provozní prach. Mazat všechno může být škoda. Nechat všechno je horší. Zúžení znamená vyndat živé pravidlo a zbytek buď archivovat, nebo zahodit.
+
+Příklad zúžení:
+
+| Původní část | Rozhodnutí |
+| --- | --- |
+| Starý popis dodavatele | smazat nebo přesunout do archivní poznámky |
+| Obecné pravidlo, jak hodnotit dodavatele | ponechat v aktuálním vendor checklistu |
+| Screenshot starého adminu | smazat |
+| Poučení z incidentu | převést do učící karty nebo runbooku |
+| Interní debugging výpis | smazat, pokud nemá aktivní forenzní nebo právní důvod |
+
+Zúžený text má být kratší, konkrétnější a méně nebezpečný. Pokud po revizi dokument naroste o dalších pět odstavců, pravděpodobně neuklízíš. Jen přesouváš nepořádek do hezčí krabice.
+
+### Sloučení řeš jako změnu navigace
+
+Když sloučíš dvě stránky, nevznikne hotovo uložením nového textu. Hotovo vznikne až ve chvíli, kdy lidé přestanou chodit na starou pravdu.
+
+Po sloučení zkontroluj:
+
+- interní odkazy z dokumentace, wiki a issue šablon,
+- support makra a odpovědní knihovnu,
+- sales podklady a onboarding nových lidí,
+- veřejné odkazy z webu, changelogu, RSS nebo help centra,
+- případné redirecty nebo archivní poznámky,
+- vyhledávání v dokumentaci a názvy souborů,
+- staré zmínky v runbookových textech, alert zprávách a automatizacích.
+
+Privacy-first detail: sloučení nesmí omylem posunout interní detaily do veřejné vrstvy. Když spojuješ veřejný návod s interní lekcí, nejdřív odděl publika. Veřejná verze má obsahovat pravidlo a praktický krok. Interní verze může obsahovat provozní kontext, ale pořád bez zbytečných osobních dat a bez tajemství.
+
+### Archiv musí být čitelně mrtvý
+
+Archivovaný dokument může být užitečný pro učení, audit rozhodnutí nebo pochopení historické změny. Nesmí ale vypadat jako současný postup.
+
+Archivní hlavička:
+
+| Pole | Příklad |
+| --- | --- |
+| Stav | Archivováno - nepoužívat jako aktuální postup |
+| Platilo do | 2026-07-26 |
+| Nahrazuje ho | Odkaz na aktuální runbook nebo help stránku |
+| Proč zůstává | Zachovává rozhodnutí z migrace dodavatele |
+| Smazat/revidovat | Při dalším vendor review nebo po uzavření souvisejícího projektu |
+
+Pokud archiv neobsahuje důležité poučení, neslouží jako důkaz rozhodnutí a nikdo ho nepotřebuje pro práci, smaž ho. Historie nemusí být nekonečný sklad. Git repozitář nebo uzavřený rozhodovací log často stačí jako stopa, aniž by starý návod zůstal ve veřejné nebo pracovní navigaci.
+
+### Příklad: Úklid staré onboardingové dokumentace
+
+Tým změnil onboarding administrátora. Dřív nový zákazník dostal dlouhý návod s importem dat, nastavením rolí, pozvánkami a analytickými tipy. Nový produktový tok import odkládá až po první hodnotě a role nastavuje postupně.
+
+Zavírací karta:
+
+| Pole | Zápis |
+| --- | --- |
+| Dokument | „První nastavení workspace“ v interní i veřejné dokumentaci. |
+| Původní účel | Projít administrátora kompletním nastavením před prvním použitím. |
+| Dnešní stav | Zúžit a sloučit s novým návodem „Pozvat první tým bez zbytečných přístupů“. |
+| Důvod | Produkt už nevyžaduje plný import ani všechny role v prvním průchodu. |
+| Co zachovat | Vysvětlení rolí, bezpečná pozvánka, exportní varování. |
+| Co nesmí zůstat | Staré screenshoty, doporučení importovat celý dataset hned, interní poznámky ze supportu. |
+| Úklid stop | Opravit help centrum, onboarding e-mail, sales FAQ, support makro a interní checklist prvního týdne. |
+| Ověření | Při příštích třech onboardingových průchodech support nepošle starý návod a zákazník dostane jen aktuální odkaz. |
+
+Výsledek: kratší veřejný návod, interní poznámka k rozhodnutí a smazané staré screenshoty. Tým neztratil poučení, ale přestal novým zákazníkům doporučovat starý, datově těžší postup.
+
+### Checklist: Retence dokumentace
+
+- [ ] U každého kontrolovaného textu znám dnešní pracovní účel.
+- [ ] Rozhodnutí není jen „nechat“, ale ponechat, zúžit, sloučit, archivovat nebo smazat.
+- [ ] Text bez vlastníka, publika a triggeru nejdřív zpochybňuji, ne automaticky přepisuji.
+- [ ] Ze starého textu zachovávám jen části, které dál pomáhají práci nebo učení.
+- [ ] Sloučení zahrnuje úklid odkazů, šablon, navigace, vyhledávání a automatizací.
+- [ ] Archiv je viditelně označený jako neaktuální a odkazuje na současné místo pravdy.
+- [ ] Z veřejné vrstvy neunikly interní detaily, zákaznické příklady, screenshoty ani provozní výpisy.
+- [ ] Smazání dokumentu má ověření, že starý text už neřídí práci.
+- [ ] Úklid dokumentace snižuje počet souběžných pravd, ne jen mění jejich názvy.
+- [ ] Po úklidu zůstává jasné, kde se má příště změna dokumentovat.
+
+### Mini úkol
+
+Vyber jednu část dokumentace, na kterou tým už několik týdnů nesáhl, ale pořád se objevuje ve vyhledávání, šablonách nebo interních odkazech. Vyplň zavírací kartu a rozhodni její stav. Pokud ji ponecháš, doplň vlastníka, trigger a privacy hranici. Pokud ji zúžíš nebo sloučíš, oprav aspoň jeden aktivní odkaz. Pokud ji archivuješ nebo smažeš, ověř jedno místo, odkud by se starý postup mohl vrátit.
+
 ## Zdroje
 
 - Google SRE Book: Managing Incidents - role, komunikace, živý incidentní dokument, předání a praktiky pro řízení produkčních incidentů: https://sre.google/sre-book/managing-incidents/
@@ -56153,6 +56281,8 @@ Vyber jednu dokumentační změnu, která už prošla kontrolou. Napiš k ní ú
 - Nielsen Norman Group: Onboarding Tutorials vs. Contextual Help - rozdíl mezi úvodními tutoriály a kontextovou pomocí: https://www.nngroup.com/articles/onboarding-tutorials/
 
 ## Pracovní log
+
+- 2026-07-26: Doplněna příloha o retenci dokumentace bez věčného skladování textů: rozlišení hodnoty textů podle dnešní práce, pět stavů ponechat/zúžit/sloučit/archivovat/smazat, zavírací karta dokumentu, zúžení starého textu, sloučení jako změna navigace, čitelně mrtvý archiv, příklad úklidu staré onboardingové dokumentace, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro zjednodušení dokumentace, která už práci neřídí. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
 - 2026-07-26: Doplněna příloha o údržbě dokumentace po ověřené změně bez nového papírování: rozlišení dokumentace podle pracovního dopadu, vlastnická karta, revize navázaná na změny místo kalendářového svědomí, aktivní archivace, chudé měření užitečnosti bez profilování čtenářů, příklad trust odpovědí po změně dodavatele, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro živou údržbu dokumentace. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
