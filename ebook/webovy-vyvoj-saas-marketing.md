@@ -184,6 +184,7 @@ Když se nechceš vracet do celé knihy, hledej konkrétní nástroj podle výst
 | Změnit publikum dokumentace bez nechtěného zveřejnění | „změna publika dokumentace“, „veřejná interní sdílená vrstva“ nebo „publikum dokumentace“ | publikační karta, která určí co je veřejné, řízeně sdílené, interní nebo neveřejné a jak se uklidí odkazy, příklady a přístupy |
 | Zkontrolovat změnu publika dokumentace po prvním použití | „kontrola publika dokumentace“, „publikum po publikaci“ nebo „veřejná dokumentace po změně“ | kontrolní karta, která ověří čtenáře, citlivé detaily, odkazy, sdílení, indexaci a dopad bez sledování lidí |
 | Stáhnout nebo zúžit veřejnou dokumentaci bez ztráty důvěry | „stažení veřejné dokumentace“, „zúžení veřejného slibu“ nebo „veřejný text končí“ | stahovací karta s důvodem, náhradní odpovědí, opravou odkazů, archivem a kontrolou starých slibů |
+| Uklidit šablony po stažení dokumentace bez návratu starého slibu | „šablony po stažení dokumentace“, „starý slib v makru“ nebo „support šablony po změně“ | krátký úklid maker, obchodních textů, onboardingových zpráv, automatických odpovědí a interních snippetů po změně veřejné pravdy |
 
 Pravidlo pro práci s rejstříkem: otevři maximálně tři nalezené části, vyber jednu a zapiš výstup. Pokud po deseti minutách pořád skáčeš mezi odkazy, vrať se k tabulce „Kudy začít podle aktuální bolesti“ a zúž problém. E-book není buffet. Teda je, ale bez talíře si stejně odneseš jen chaos.
 
@@ -57033,6 +57034,134 @@ Výsledek: zákazník neztratí orientaci, sales nepoužívá zastaralý materi�
 
 Vyber jednu staženou nebo problematickou URL dokumentace. Za dvacet pět minut vyplň kontrolní kartu: stará URL, nový stav, důvod, kontrola odkazů, support věta, chudé měření a datum revize. Pak ověř technicky jen jednu věc: co stará URL skutečně vrací. Pokud vede na obecnou homepage, přepiš ji na užitečnější náhradní odpověď nebo si otevři kartu s konkrétním vlastníkem.
 
+## Příloha: Šablony po stažení dokumentace bez návratu starého slibu
+
+Když stáhneš, zúžíš nebo přesměruješ veřejnou dokumentaci, práce ještě nekončí. Starý slib často dál žije v support makrech, sales e-mailech, onboardingových zprávách, prezentacích, interních snippetech, knowledge base odpovědích a automatických notifikacích. Veřejná stránka už říká jednu pravdu, ale tým z pohodlí posílá druhou. To je přesně ten typ provozního nepořádku, který se tváří drobně, dokud zákazník nepřiloží dvě odpovědi vedle sebe a nezačne se ptát, které z nich má věřit.
+
+Privacy-first úklid šablon má jednoduchý cíl: aby se změna veřejné dokumentace promítla do opakovaných odpovědí, aniž by tým začal sdílet víc detailů, než je nutné. Nejde o literární korekturu. Jde o zavření staré distribuční vrstvy.
+
+> Codyho komentář: Nejodolnější obsah ve firmě není homepage. Je to staré support makro, které někdo napsal v pátek večer, fungovalo „docela dobře“ a od té doby přežilo tři redesigny, dva pricingy a jednu změnu produktu. Makra mají lepší retenci než některé databáze, což je vtipné jen do první stížnosti.
+
+### Začni nosiči, ne větami
+
+Nejdřív najdi místa, kde se starý text mohl propsat. Když začneš přepisovat jednotlivé věty bez mapy nosičů, snadno opravíš viditelnou stránku a necháš starou odpověď v automatizaci.
+
+Typická místa:
+
+| Nosič | Co hledat | Riziko |
+| --- | --- | --- |
+| Support makra | Odpovědi na export, výmaz, bezpečnost, billing a limity | Support pošle starý slib jako aktuální instrukci. |
+| Sales šablony | Follow-up e-maily, procurement odpovědi, trust balíčky | Obchod slíbí detail, který produkt nebo provoz už nedrží. |
+| Onboarding zprávy | První e-maily, checklisty, in-app tipy | Nový zákazník dostane neplatný postup hned na začátku vztahu. |
+| Automatické odpovědi | Potvrzení formulářů, bot odpovědi, routing zprávy | Systém opakuje starý text bez člověka v cestě. |
+| Interní snippety | Krátké copy bloky v dokumentaci, issue šablonách a CRM | Tým opraví hlavní text, ale kopíruje starý fragment dál. |
+| PDF a decky | Exportované nabídky, bezpečnostní přílohy, staré prezentace | Zákazník drží soubor mimo web, kde už ho nejde jednoduše opravit. |
+
+Praktický postup: vezmi hlavní frázi ze stažené dokumentace a vyhledej ji v repozitáři, helpdesku, CRM šablonách a sdílených dokumentech. Pak hledej i starou URL, název stránky a dvě typické věty, které se z textu často kopírovaly. Jedno hledání podle URL nestačí. Lidé nekopírují jen odkazy. Kopírují sliby.
+
+### Rozděl šablony podle dopadu
+
+Ne každá šablona potřebuje stejnou rychlost opravy. Nejdřív oprav místa, která mohou změnit očekávání zákazníka, právní výklad, bezpečnostní hranici nebo práci supportu.
+
+Použij jednoduchý semafor:
+
+| Priorita | Kdy sem patří | Akce |
+| --- | --- | --- |
+| Dnes | Šablona slibuje neplatný export, výmaz, SLA, cenu, bezpečnostní detail nebo dostupnost funkce. | Přepsat, stáhnout nebo dočasně vypnout. |
+| Tento týden | Šablona je nepřesná, ale nevede k přímému riziku nebo závazku. | Opravit s vlastníkem a krátkým review. |
+| Při příští revizi | Šablona odkazuje na starý styl, archivní text nebo nepodstatný příklad. | Zařadit do běžného obsahového úklidu. |
+| Smazat | Šablona už nemá jasný účel ani vlastníka. | Odstranit a zapsat, čím je nahrazená. |
+
+Tento semafor chrání tým před dvěma chybami: panickým přepisem všeho a líným „to nevadí, to je jen šablona“. U citlivých dat a zákaznických závazků vadí i šablona. Právě proto, že se používá opakovaně.
+
+### Přepiš odpověď podle nové pravdy
+
+Dobrá šablona po stažení dokumentace nemá schovávat změnu. Má stručně vysvětlit aktuální stav, dát bezpečný další krok a neotvírat interní detaily, které byly důvodem stažení.
+
+Praktická struktura:
+
+| Část | Co má říct |
+| --- | --- |
+| Stav | Původní veřejný materiál už není aktuální nebo byl nahrazen. |
+| Aktuální odpověď | Co platí teď, lidsky a bez interního žargonu. |
+| Další krok | Kam má člověk jít nebo co má poslat, pokud potřebuje detail pro svůj účet. |
+| Hranice | Jaké informace nesdílíme veřejně a proč, bez obranného tónu. |
+| Vlastník | Kdo šablonu udržuje a kdy se má znovu zkontrolovat. |
+
+Příklad nové support odpovědi:
+
+```text
+Dobrý den,
+
+původní veřejný návod k exportu dat jsme nahradili stručnějším postupem, protože stará verze už neodpovídala aktuálnímu produktu. Aktuální informace najdete zde: ___.
+
+Pokud potřebujete export pro konkrétní workspace, napište nám prosím název workspace a roli, se kterou žádost posíláte. Ověříme oprávnění a pošleme další krok. Interní provozní detaily exportu veřejně nesdílíme, ale výsledek, dostupnost souboru a pravidla smazání popisujeme v aktuální odpovědi.
+```
+
+Všimni si dvou věcí. Šablona neříká „z bezpečnostních důvodů vám nic neřekneme“, protože to zní jako dveře zabouchnuté do nosu. Zároveň nevrací interní názvy jobů, bucketů, front ani ručních výjimek. Člověk dostane použitelný další krok, tým si nechá provozní hranici.
+
+### Zkontroluj automatizace zvlášť
+
+Automatické odpovědi jsou nebezpečně pohodlné. Když jsou správně, šetří čas. Když zestárnou, šíří starou pravdu rychleji než člověk. Proto je po stažení dokumentace kontroluj odděleně od ručních šablon.
+
+Ptej se:
+
+- Posílá formulář potvrzení s odkazem na starý dokument?
+- Odesílá onboarding sekvence staré PDF nebo starý checklist?
+- Vkládá chatbot nebo interní asistent starý snippet do odpovědi?
+- Přidává CRM automatizace zastaralý follow-up do obchodu?
+- Obsahuje helpdesk auto-reply slib, který už veřejná dokumentace stáhla?
+- Má automatizace vlastníka, který se o změně dozví?
+
+Privacy-first pravidlo: pokud automatizace pracuje s citlivým dotazem, nemá odpovídat víc jen proto, že chce být užitečná. U exportů, výmazů, bezpečnostních dotazů, billing sporů a incidentů je lepší krátká potvrzovací odpověď a předání člověku než dlouhý automatický text s příliš širokým slibem.
+
+### Zaveď krátkou revizi po prvních odpovědích
+
+Po přepsání šablon není potřeba zakládat nový procesní chrám. Stačí malá kontrola po prvních několika použitích:
+
+| Otázka | Co ověřit |
+| --- | --- |
+| Používá tým novou šablonu? | Staré makro není viditelné jako výchozí ani oblíbené. |
+| Rozumí zákazník odpovědi? | Nepřibývají dotazy typu „tak jak to tedy je?“. |
+| Neposíláme moc detailů? | Odpověď neobsahuje interní názvy systémů, přesné provozní časy nebo citlivé cesty. |
+| Není odpověď moc prázdná? | Člověk má jasný další krok a ví, kde najde aktuální veřejnou verzi. |
+| Nežije stará pravda jinde? | Sales, onboarding a automatizace nepoužívají starý text. |
+
+Měř chudě: počet použití šablony, počet navazujících dotazů a ruční poznámky supportu. Nepotřebuješ sledovat jednotlivého čtenáře napříč webem, aby sis všiml, že šablona mate lidi. Stačí poslouchat, co se vrací do inboxu.
+
+### Příklad: Starý exportní text v support makru
+
+Tým stáhl veřejný detailní návod k exportu dat. Veřejná stránka už byla opravená, redirect fungoval a trust FAQ obsahovalo bezpečnější odpověď. Jenže support pořád používal staré makro, které zákazníkům slibovalo přesný čas vygenerování exportu, starou URL a interní název jobu.
+
+Úklidová karta:
+
+| Pole | Zápis |
+| --- | --- |
+| Spouštěč | Stažení veřejného návodu k exportu dat. |
+| Nalezené šablony | Support makro, onboarding e-mail po zrušení trialu, sales trust follow-up. |
+| Kritická oprava | Support makro přepsat dnes, protože odpovídá na aktivní zákaznické žádosti. |
+| Nová pravda | Export lze vyžádat přes account settings nebo support, oprávnění se ověřuje podle role, dočasný soubor má omezenou dostupnost. |
+| Co nesdílet | Interní název jobu, přesné názvy úložišť, ruční výjimky a staré provozní časy. |
+| Kontrola | Za 14 dní projít pět posledních exportních odpovědí a počet navazujících dotazů. |
+
+Výsledek: support nepůsobí, že opravuje zákazníka za vlastní nepořádek, sales neslibuje starý postup a veřejné FAQ zůstává hlavní pravdou. Žádná poezie. Jen uklizený provoz.
+
+### Checklist: Šablony po stažení dokumentace
+
+- [ ] Vyhledal jsem starou URL, název dokumentu a typické kopírované věty.
+- [ ] Zkontroloval jsem support makra, sales šablony, onboarding, automatické odpovědi, PDF a interní snippety.
+- [ ] Šablony jsou rozdělené podle dopadu: dnes, tento týden, při revizi, smazat.
+- [ ] Kritické šablony už neslibují neplatný export, výmaz, cenu, SLA, dostupnost funkce ani bezpečnostní detail.
+- [ ] Nová odpověď říká aktuální pravdu, další krok a hranici sdílení.
+- [ ] Automatizace s citlivými dotazy raději předává člověku, než aby sdílela moc detailů.
+- [ ] Staré makro není ponechané jako snadno dostupná výchozí odpověď.
+- [ ] Revize po prvních použitích sleduje jen užitečné signály bez profilování lidí.
+- [ ] Vlastník šablony ví, kdy ji znovu zkontrolovat.
+
+### Mini úkol
+
+Vyber jednu staženou nebo zúženou dokumentaci a najdi tři místa, kde se její text mohl propsat do opakované odpovědi. Za dvacet minut oprav jen nejrizikovější šablonu: přepiš aktuální pravdu, odkaz, další krok a hranici sdílení. Potom starou šablonu smaž nebo jasně označ jako neplatnou. Pokud ji necháš vedle nové „pro jistotu“, právě jsi vytvořil dvě pravdy. A dvě pravdy jsou v supportu většinou jen pomalý způsob, jak vyrobit třetí problém.
+
 ## Zdroje
 
 - IETF RFC 9110: HTTP Semantics - význam HTTP přesměrování a stavů včetně `410 Gone` pro zdroje, které už nejsou dostupné: https://www.rfc-editor.org/rfc/rfc9110.html
@@ -57226,6 +57355,8 @@ Vyber jednu staženou nebo problematickou URL dokumentace. Za dvacet pět minut 
 - Nielsen Norman Group: Onboarding Tutorials vs. Contextual Help - rozdíl mezi úvodními tutoriály a kontextovou pomocí: https://www.nngroup.com/articles/onboarding-tutorials/
 
 ## Pracovní log
+
+- 2026-07-26: Doplněna příloha o šablonách po stažení dokumentace bez návratu starého slibu: mapa nosičů starých odpovědí, prioritizace podle dopadu, přepis šablony podle nové pravdy, zvláštní kontrola automatizací, revize po prvních použitích, příklad starého exportního support makra, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro úklid support, sales, onboardingových a automatických šablon po změně veřejné dokumentace. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
 - 2026-07-26: Doplněna příloha o přesměrování po stažení dokumentace bez matení lidí a robotů: volba nového stavu staré URL, zákaz přesměrování všeho na homepage, chudé měření, support odpověď, kontrolní karta, příklad se starým bezpečnostním PDF, checklist a mini úkol; ověřen a přidán zdroj RFC 9110 k HTTP sémantice.
 - 2026-07-26: Doplněna příloha o stažení veřejné dokumentace bez ztráty důvěry: rozlišení zúžení, rozdělení, archivace, stažení a opravy reality, stahovací karta, náhradní cesta pro čtenáře, úklid starých slibů v odkazech, šablonách, sitemap, RSS a sales materiálech, zachování interního důkazu bez zbytečných detailů, příklad starého návodu k exportu dat, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro zúžení nebo stažení veřejného slibu. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
