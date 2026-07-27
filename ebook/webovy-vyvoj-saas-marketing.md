@@ -196,6 +196,7 @@ Když se nechceš vracet do celé knihy, hledej konkrétní nástroj podle výst
 | Zjednodušit produktovou opravu po měsíční kontrole | „zjednodušení opravy“, „procesní nános po opravě“ nebo „oprava funguje ale bobtná“ | redukční karta, která ponechá hodnotu opravy, vypne zbytečné měření, sloučí šablony, odebere přístupy a nastaví jasné stop pravidlo |
 | Uzavřít zjednodušenou produktovou opravu bez nového procesu | „uzavření zjednodušené opravy“, „redukovaná oprava hotovo“ nebo „stop pravidlo po zjednodušení“ | zavírací review, které potvrdí odstraněný nános, funkční minimální signál a konec mimořádných kontrol |
 | Přenést poučení z uzavřené opravy do produktových pravidel | „poučení z opravy“, „produktové pravidlo“ nebo „oprava naučila tým“ | jedna principová věta, která z uzavřené opravy zlepší budoucí zadávání, review, onboarding nebo dokumentaci bez nového procesu |
+| Převést produktové pravidlo do zadání bez byrokracie | „pravidlo v zadání“, „review otázka“ nebo „produktové pravidlo v praxi“ | malá úprava šablony zadání, akceptačních kritérií nebo review checklistu, která pravidlo dostane do běžné práce bez nového procesu |
 
 Pravidlo pro práci s rejstříkem: otevři maximálně tři nalezené části, vyber jednu a zapiš výstup. Pokud po deseti minutách pořád skáčeš mezi odkazy, vrať se k tabulce „Kudy začít podle aktuální bolesti“ a zúž problém. E-book není buffet. Teda je, ale bez talíře si stejně odneseš jen chaos.
 
@@ -58579,6 +58580,141 @@ To je užitečné poučení. Je krátké, přenositelné a nevyžaduje nový das
 
 Vyber jednu nedávno uzavřenou produktovou opravu a napiš jednu principovou větu, která by zabránila podobné chybě v budoucnu. Připoj ji na jedno existující místo práce: zadání, review checklist, dokumentaci, onboarding nebo rozhodovací log. Potom smaž, archivuj nebo označ jako neaktivní jeden starý materiál, ze kterého už pravidlo vzniklo. Pokud po deseti minutách vznikají tři nové dokumenty, zastav se. To není učení, to je dokumentační inflace s lepším názvem.
 
+## Příloha: Produktové pravidlo v zadání bez byrokratického batohu
+
+Produktové pravidlo má smysl teprve ve chvíli, kdy ovlivní další práci. Dokud žije jen v retrospektivě, lessons learned dokumentu nebo hezkém odstavci v e-booku, je to spíš přání. Skutečné pravidlo se projeví v zadání, review, testu, dokumentaci nebo rozhodnutí, které někdo příště opravdu udělá.
+
+Špatná otázka zní: „Kam založíme nové pravidlo?“
+
+Lepší otázka zní: „Kde by se příště podobná chyba objevila nejdřív a jak tam pravidlo nenápadně dostaneme?“
+
+Cílem není přidat další proces. Cílem je upravit místo, kterým už práce přirozeně prochází. Když tým píše produktové karty, uprav kartu. Když každá změna prochází design review, přidej jednu kontrolní otázku. Když vývojáři pracují z issue šablony, doplň jedno pole. Pokud vytvoříš nový dokument, který nikdo neotevře, pravidlo je formálně uložené a prakticky mrtvé. Gratuluju, vznikl malý památníček dobrého úmyslu.
+
+### Vyber existující bránu práce
+
+Produktové pravidlo patří tam, kde se rozhoduje o tvaru změny. Nejčastější místa:
+
+| Místo | Kdy ho použít | Příklad úpravy |
+| --- | --- | --- |
+| Produktová karta | Tým popisuje problém, výsledek a rozsah před implementací. | Přidat otázku k dlouhým akcím, exportu, rolím nebo datové stopě. |
+| Akceptační kritéria | Změna má jasné podmínky hotovo. | Doplnit očekávaný stav, chybový stav nebo datový limit. |
+| Design review checklist | Riziko vzniká ve flow, UI textu nebo formuláři. | Přidat kontrolu prázdného stavu, vysvětlení oprávnění nebo zrušení akce. |
+| Code review šablona | Riziko je technické nebo provozní. | Přidat otázku na logy, retenci, oprávnění nebo migraci. |
+| QA scénář | Chyba se objevila až při používání. | Přidat jeden test hlavní cesty a jeden test okrajového stavu. |
+| Dokumentace | Pravidlo mění, co slibujeme zákazníkovi nebo internímu týmu. | Upravit zdroj pravdy a odkázat z ostatních míst. |
+| Onboarding nového člověka | Pravidlo je důležité pro opakovanou schopnost týmu. | Přidat krátké cvičení na reálném příkladu. |
+
+Nevybírej místo podle toho, kde se pravidlo nejlépe vyjímá. Vyber místo, kde jeho absence příště způsobí chybu. Pokud se chyba stala při návrhu zadání, nepřidávej jen odstavec do dokumentace. Pokud se stala při releasu, nepřidávej jen větu do produktové strategie. Pravidlo má sedět na cestě práce, ne vedle ní.
+
+### Přepiš pravidlo na jednu pracovní otázku
+
+Principová věta je dobrá pro pochopení. Pro běžnou práci je ale často lepší otázka. Otázka donutí tým zastavit se u rozhodnutí, ne jen odsouhlasit obecnou pravdu.
+
+Příklady převodu:
+
+| Princip | Pracovní otázka |
+| --- | --- |
+| Dlouhé akce potřebují srozumitelný stav. | Vidí uživatel u této dlouhé akce čekání, průběh, dokončení a chybu? |
+| Export nesmí být rukojmí zákaznického účtu. | Umí uživatel získat svá data i při downgrade nebo odchodu podle popsaných pravidel? |
+| Formulář sbírá jen data pro další krok. | Které pole je nutné pro vyřízení této akce a které je jen naše zvědavost? |
+| Support šablona nesmí slibovat víc než produkt umí. | Odpovídá tato věta skutečnému chování produktu, pricingu a dokumentace? |
+| Automatizace nesmí rozhodovat potichu. | Je jasné, jestli automatizace jen navrhuje, nebo sama provádí akci? |
+
+Dobrá pracovní otázka má tři vlastnosti:
+
+- jde položit během běžného review,
+- odpověď ovlivní konkrétní zadání nebo test,
+- nepotřebuje nový dashboard, meeting ani export dat.
+
+Pokud otázka zní jako auditní dotazník na půl dne, je moc široká. Zkrať ji. Pravidlo má být třecí bod, ne závora přes celou silnici.
+
+### Přidej pravidlo v nejmenším možném tvaru
+
+Nejčastější chyba po dobré lekci je přestřelit reakci. Tým zažije problém, lekce bolí a najednou vzniká velký nový proces. Jenže většina pravidel má začít menší úpravou:
+
+- jedno nové pole v issue šabloně,
+- jedna otázka v review checklistu,
+- jeden testovací scénář,
+- jeden řádek v akceptačních kritériích,
+- jedna poznámka v produktové šabloně,
+- jeden odkaz na zdroj pravdy místo kopírování celého textu.
+
+Příklad minimalistické úpravy produktové karty:
+
+| Pole | Před úpravou | Po úpravě |
+| --- | --- | --- |
+| Výsledek pro uživatele | Co má uživatel získat? | Co má uživatel získat a jak pozná stav, pokud výsledek nevznikne hned? |
+| Data | Jaká data změna používá? | Jaká data změna používá, jak dlouho je drží a která data vědomě nesbírá? |
+| Hotovo | Kdy je změna hotová? | Kdy je změna hotová v úspěchu, chybě, zrušení a návratu zpět? |
+
+Tři upravené věty mohou mít větší dopad než nový procesní dokument. Hlavně pokud jsou ve formuláři, který tým opravdu používá. Ano, nudná šablona opět porazila ambiciózní workshop. Stává se.
+
+### Ověř pravidlo na první reálné změně
+
+Pravidlo není hotové v okamžiku, kdy ho zapíšeš. Hotové je až po první reálné změně, kde pomohlo nebo selhalo.
+
+Po první práci s novou otázkou si napiš krátké review:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Kde se pravidlo použilo? |  |
+| Změnilo zadání, test, UI text nebo dokumentaci? |  |
+| Bylo srozumitelné bez vysvětlování autora? |  |
+| Zachytilo skutečné riziko, nebo jen přidalo šum? |  |
+| Muselo se kvůli němu sbírat nové osobní nebo provozní detailní údaje? |  |
+| Co upravíme: otázku, místo použití, nebo nic? |  |
+
+Privacy-first kontrola je důležitá i tady. Pravidlo nemá vytvářet nový sběr dat jen proto, že tým chce mít „důkaz“. Pokud otázka vede k tomu, že se začnou kopírovat zákaznické tickety, screenshoty, logy nebo exporty do další tabulky, pravidlo potřebuje datovou dietu. Stačí výsledek rozhodnutí, ne celá forenzní výstava.
+
+### Zavři starou cestu k pravidlu
+
+Jakmile pravidlo žije v běžném zadání, zavři původní nosiče, které už nejsou potřeba:
+
+- starý lessons learned dokument označ jako archiv,
+- v retrospektivě nech odkaz na nové místo práce,
+- smaž dočasný checklist, pokud ho nahradila šablona,
+- odstraň kopie zákaznických detailů, které už nemají účel,
+- v rozhodovacím logu nech jen důvod a odkaz na aktuální pravidlo.
+
+Tím chráníš čitelnost i data. Učení nemá znamenat, že firma drží každý starý podklad navždy. Pokud se z podkladu stalo pravidlo, původní materiál často splnil účel. Co musí zůstat kvůli právu, bezpečnosti nebo účetnictví, nech podle retenčního pravidla. Co je jen procesní suvenýr, ukliď.
+
+### Příklad: Stav dlouhé akce v produktové kartě
+
+Tým už dřív uzavřel opravu exportního stavu a přenesl z ní produktové pravidlo:
+
+„Každá dlouhá asynchronní akce má viditelný stav: přijato, zpracovává se, hotovo, chyba.“
+
+Teď pravidlo převádí do zadání:
+
+| Krok | Zápis |
+| --- | --- |
+| Existující brána práce | Produktová karta pro nové funkce a design review. |
+| Pracovní otázka | „Má tato dlouhá akce stav pro čekání, průběh, dokončení a chybu, který pochopí uživatel bez supportu?“ |
+| Nejmenší úprava | Do šablony produktové karty přidat pole „Stavy dlouhé akce“. |
+| Akceptační kritérium | Uživatel vidí stav akce, umí ji znovu otevřít a při chybě dostane další bezpečný krok bez interních detailů. |
+| QA scénář | Spustit export, ověřit čekání, dokončení, chybu a návrat po refreshi stránky. |
+| Co nesbíráme | Nezakládáme individuální sledování všech exportních průchodů. Stačí agregovaný počet chyb a support štítek návratu problému. |
+| Co zavíráme | Starý dočasný export checklist a pilotní tabulku s ručními poznámkami. |
+
+Výsledek: pravidlo se příště objeví v zadání dřív, než někdo navrhne obrazovku bez stavů. Nevznikl nový meeting, nový dashboard ani nová role. Jen lepší otázka na správném místě. Přesně takhle má vypadat zdravé učení týmu.
+
+### Checklist: Produktové pravidlo v zadání
+
+- [ ] Vybral jsem existující bránu práce, kterou tým opravdu používá.
+- [ ] Pravidlo jsem přepsal na jednu pracovní otázku.
+- [ ] Otázka vede ke konkrétnímu zadání, testu, UI textu nebo dokumentaci.
+- [ ] Úprava je menší než nový proces.
+- [ ] Pravidlo je napojené na zdroj pravdy, ne kopírované do pěti míst.
+- [ ] První reálné použití pravidla má krátké review.
+- [ ] Review nevyžaduje nový sběr osobních dat ani kopírování zákaznických detailů.
+- [ ] Starý lessons learned, dočasný checklist nebo pilotní materiál má archiv, smazání nebo jasnou retenci.
+- [ ] Pokud pravidlo nepomohlo, upravím otázku nebo místo použití, nebudu jen přidávat další text.
+- [ ] Tým ví, kdy pravidlo revidovat a kdy ho zjednodušit.
+
+### Mini úkol
+
+Vezmi jedno produktové pravidlo z poslední opravy a najdi místo, kudy příště projde podobná změna: issue šablona, produktová karta, design review, QA scénář nebo dokumentace. Přepiš pravidlo na jednu otázku a vlož ji jen tam. Potom vyber jeden starý materiál k archivaci nebo smazání. Pokud kvůli pravidlu vznikají tři nové artefakty, vrať se o krok zpět. Pravidlo má zlepšit práci, ne rozmnožit papírování s lepším brandingem.
+
 ## Zdroje
 
 - IETF RFC 9110: HTTP Semantics - význam HTTP přesměrování a stavů včetně `410 Gone` pro zdroje, které už nejsou dostupné: https://www.rfc-editor.org/rfc/rfc9110.html
@@ -58772,6 +58908,8 @@ Vyber jednu nedávno uzavřenou produktovou opravu a napiš jednu principovou v�
 - Nielsen Norman Group: Onboarding Tutorials vs. Contextual Help - rozdíl mezi úvodními tutoriály a kontextovou pomocí: https://www.nngroup.com/articles/onboarding-tutorials/
 
 ## Pracovní log
+
+- 2026-07-27: Doplněna příloha o převodu produktového pravidla do zadání bez byrokratického batohu: výběr existující brány práce, přepis pravidla na jednu pracovní otázku, nejmenší možná úprava šablony nebo review, ověření pravidla na první reálné změně, úklid starých lessons learned materiálů, příklad stavu dlouhé akce, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro produktové pravidlo v zadání. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
 - 2026-07-27: Doplněna příloha o přenesení poučení z uzavřené produktové opravy do produktových pravidel bez nového procesu: rozlišení lekce, pravidla, checklist položky, dokumentace a nového procesu, principová věta, napojení na existující místo práce, úklid starých materiálů, příklad exportního stavu, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro poučení z uzavřené opravy. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
