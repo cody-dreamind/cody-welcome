@@ -207,6 +207,7 @@ Když se nechceš vracet do celé knihy, hledej konkrétní nástroj podle výst
 | Převést obnovené pravidlo do běžné práce | „obnovené pravidlo v provozu“, „pravidlo po pilotu“ nebo „trvalé pravidlo bez procesu“ | provozní karta pravidla s místem použití, vlastníkem, revizním triggerem, retencí stop a stop pravidlem |
 | Zkontrolovat obnovené pravidlo po několika použitích | „pravidlo po několika použitích“, „běžné použití pravidla“ nebo „pravidlo se usadilo“ | lehké review skutečných použití, výjimek, nákladu, datové stopy a verdiktu ponechat, zúžit, přesunout, automatizovat opatrně nebo ukončit |
 | Automatizovat produktové pravidlo opatrně | „automatizace produktového pravidla“, „pravidlo jako kontrola“ nebo „mechanické pravidlo“ | automatizační karta, která převede opakovanou kontrolu do malé pomůcky s ručním rozhodnutím, omezenými vstupy, logy a vypínačem |
+| Ověřit automatizované produktové pravidlo po pilotu | „kontrola automatizace pravidla“, „automatizované pravidlo po pilotu“ nebo „automatická kontrola hotovo“ | pilotní review upozornění, oprav, výjimek, šumu, datové stopy a rozhodnutí ponechat, ztišit, zúžit, přesunout, vrátit ručně nebo vypnout |
 
 Pravidlo pro práci s rejstříkem: otevři maximálně tři nalezené části, vyber jednu a zapiš výstup. Pokud po deseti minutách pořád skáčeš mezi odkazy, vrať se k tabulce „Kudy začít podle aktuální bolesti“ a zúž problém. E-book není buffet. Teda je, ale bez talíře si stejně odneseš jen chaos.
 
@@ -60029,6 +60030,196 @@ Výsledek: pravidlo se nestalo policistou. Stalo se malou zábranou proti zapome
 
 Vyber jedno produktové pravidlo, které se v posledních týdnech opakovalo mechanicky. Do třiceti minut napiš automatizační kartu: pravidlo, mechanická část, vstupy, výstup, výjimka, logy, vypínač a pilot. Pokud neumíš vyplnit vstupy bez osobních dat nebo celých pracovních vláken, automatizaci zatím nestav. Zkrať pravidlo v šabloně a vrať se k němu po dalších třech použitích.
 
+## Příloha: Kontrola automatizovaného produktového pravidla po pilotu bez skrytého dohledu
+
+Automatizace produktového pravidla není hotová nasazením. Hotová je až ve chvíli, kdy tým ví, jestli skutečně pomohla práci, nezaložila nový datový sklad a nepřevlékla starou nejistotu za tvrdou kontrolu.
+
+Špatná otázka zní: „Běží to bez chyby?“
+
+Lepší otázka zní: „Vedla automatizace k lepším rozhodnutím s menší datovou stopou, nebo jen přidala další hluk?“
+
+Pilot automatizace má být krátký a nepompézní. Nechceš měsíční auditní epopej. Chceš vědět, jestli upozornění opravují skutečné mezery, jestli lidé rozumí výjimkám a jestli se kontrola nezačala chovat jako tichý hodnoticí systém. Jakmile automatizace začne měřit lidi víc než práci, je čas zatáhnout ruční brzdu. Ideálně dřív, než si někdo udělá dashboard poslušnosti a začne tomu říkat „kultura kvality“.
+
+### Vrať se k pilotní kartě
+
+Review nezačínej otevřením logů. Začni původní pilotní kartou:
+
+| Pole | Co ověřit |
+| --- | --- |
+| Pravidlo | Pořád podporuje stejnou pracovní otázku, nebo se význam posunul? |
+| Mechanická část | Opravdu kontrolujeme jen ověřitelnou část bez úsudku? |
+| Vstupy | Čte automatizace jen data, která byla schválená v pilotu? |
+| Výstup | Chodí upozornění na místo, kde jde hned jednat? |
+| Výjimka | Umí člověk pravidlo vědomě obejít s krátkým důvodem? |
+| Logy | Ukládá se jen to, co je potřeba pro rozhodnutí o pilotu? |
+| Vypínač | Je pořád jasné, jak kontrolu ztišit nebo vypnout? |
+| Review | Nastalo plánované kontrolní okno, nebo jen neurčitý pocit, že „už to běží“? |
+
+Pokud se během pilotu změnil rozsah vstupů, publikum upozornění nebo způsob blokace, neber to jako drobnou technickou úpravu. Je to změna pravidla. Zapiš ji a posuzuj pilot podle nové reality, ne podle původní hezké věty.
+
+Praktická kontrolní věta: „Nasadili jsme ___, aby ___, při čtení pouze ___, s výstupem ___ a revizí po ___.“ Když větu neumíš vyplnit bez lovení v historii chatu, automatizace už má slabou dokumentaci.
+
+### Sečti skutečná upozornění, ne pocit pořádkumilovnosti
+
+Pilot nehodnoť podle dojmu. Vezmi malý vzorek skutečných výstupů. Často stačí prvních pět až deset upozornění, první release nebo první měsíc provozu.
+
+U každého upozornění napiš jednu řádku:
+
+| Pole | Otázka | Příklad |
+| --- | --- | --- |
+| Upozornění | Co automatizace našla? | Chybí retenční věta u exportu. |
+| Dopad | Co by se stalo bez upozornění? | Dočasný soubor by neměl jasný konec životnosti. |
+| Akce | Co tým udělal? | Doplnil retenční větu do produktové karty. |
+| Výjimka | Byla potřeba lidská výjimka? | Ano, jeden interní export dočasný soubor nevytvářel. |
+| Šum | Bylo upozornění zbytečné? | Jednou ano, spouštěč byl moc široký. |
+| Data | Četla nebo uložila kontrola víc, než měla? | Ne, jen štítek a tři metadata karty. |
+
+Nepotřebuješ sledovat, kdo upozornění „způsobil“. Potřebuješ vědět, jestli upozornění vedlo k lepší práci. To je jiný typ otázky a výrazně zdravější datový hlad.
+
+Dobré pilotní review klidně vypadá takto:
+
+| Signál | Výsledek |
+| --- | --- |
+| Upozornění | 8 celkem |
+| Užitečná upozornění | 5 vedlo k doplnění chybějícího údaje |
+| Výjimky | 2 byly oprávněné a krátce zdokumentované |
+| Šum | 1 upozornění vzniklo kvůli příliš širokému štítku |
+| Datová stopa | Agregovaný součet a odkazy na karty, žádné zákaznické údaje |
+| Verdikt | Zúžit spouštěč a ponechat jako varování |
+
+Tohle je dost. Pilot není doktorát z provozní sociologie. Pokud ti někdo navrhne přidat další sledování, aby se lépe vyhodnotilo, jestli automatizace nepřidala zbytečné sledování, udělej krátkou pauzu. A pak to nedělej.
+
+### Odděl opravu práce od disciplíny lidí
+
+Automatizované pravidlo snadno sklouzne do měření lidí. Stačí změnit otázku z „která šablona má mezeru?“ na „kdo zapomíná vyplňovat pole?“ a už jsi v jiném produktu.
+
+Zdravé otázky:
+
+- Který spouštěč je moc široký?
+- Které pole není v šabloně srozumitelné?
+- Které upozornění nepřichází ve správném místě práce?
+- Která výjimka ukazuje, že pravidlo má být přesnější?
+- Která oprava snížila budoucí nejistotu?
+
+Rizikové otázky:
+
+- Kdo pravidlo nejčastěji porušuje?
+- Kdo má nejhorší skóre vyplňování?
+- Který tým potřebuje dohled?
+- Kolik minut trvalo člověku upozornění opravit?
+- Jak upozornění propojit s výkonovým hodnocením?
+
+V privacy-first provozu automatizace nesmí tiše změnit účel dat. Metadata produktové karty slouží k lepšímu zadání, review a provozu. Ne k osobnímu hodnocení. Pokud tým opravdu potřebuje řešit kvalitu práce člověka, patří to do lidského vedení, ne do produktového skriptu s nenápadným exportem.
+
+### Zkontroluj šum a falešnou autoritu
+
+Automatizace má hlas, i když je malá. Upozornění v CI, šabloně nebo review často působí autoritativněji než poznámka člověka. Proto ověř dvě věci: kolik šumu vytváří a jestli se lidé nebojí použít výjimku.
+
+Typické příznaky šumu:
+
+- upozornění se opakuje u případů, které pravidlo nemělo řešit,
+- lidé doplňují formální věty bez reálného obsahu,
+- výjimky se nepíšou, protože se automatizace tváří jako zákaz,
+- kontrola posílá report lidem, kteří nemohou nic opravit,
+- upozornění se zavírá bez změny práce a bez rozhodnutí.
+
+Typické příznaky falešné autority:
+
+- „Skript to pustil“ nahrazuje lidské review,
+- „Skript to zastavil“ nahrazuje vysvětlení rizika,
+- pravidlo blokuje výjimku, která je věcně správná,
+- lidé přepisují produktovou realitu tak, aby prošla kontrolou,
+- kontrola získává další oprávnění jen proto, že „někdy by se to mohlo hodit“.
+
+Náprava nemusí být dramatická. Často stačí změnit blokaci na varování, přesunout upozornění do správného místa, zúžit štítek, přepsat mikrotext nebo přidat jasnou výjimkovou větu.
+
+### Rozhodni jedním verdiktem
+
+Po pilotu nepiš neurčité „pokračujeme a budeme sledovat“. To je provozní šum v obleku. Vyber jeden verdikt a rovnou z něj udělej akci.
+
+| Verdikt | Kdy ho použít | Akce |
+| --- | --- | --- |
+| Ponechat | většina upozornění vedla k opravě a šum je nízký | převést kontrolu do běžné rutiny a nastavit revizní trigger |
+| Ztišit | kontrola pomáhá, ale je moc hlasitá | snížit frekvenci, publikum nebo úroveň z blokace na varování |
+| Zúžit | problém je reálný, ale spouštěč je moc široký | upravit podmínky, smazat staré zbytečné výstupy a zopakovat krátké okno |
+| Přesunout | upozornění je správné, ale chodí mimo práci | vložit kontrolu do šablony, CI, preview, release checklistu nebo review |
+| Vrátit ručně | pravidlo vyžaduje úsudek a výjimky jsou časté | vypnout skript, ponechat otázku v checklistu a zachovat poučení |
+| Vypnout | upozornění nevedla k rozhodnutí nebo čtou moc dat | vypnout kontrolu, revokovat tokeny, uklidit logy a zavřít pravidlo |
+
+Zavírací záznam má být krátký:
+
+| Pole | Zápis |
+| --- | --- |
+| Co jsme ověřili | Automatizované varování na chybějící retenční větu u exportů. |
+| Co se stalo | 7 upozornění, 4 opravy, 2 oprávněné výjimky, 1 zbytečný šum. |
+| Datová stopa | Jen metadata karet a měsíční součet upozornění. |
+| Verdikt | Zúžit na exporty s dočasným souborem pro uživatele. |
+| Úklid | Smazat zbytečné reporty z pilotu a upravit šablonu štítku. |
+| Další trigger | Revize při změně exportního toku nebo po třech nových výjimkách. |
+
+Takový zápis je dostatečně konkrétní pro budoucího člověka a pořád dost krátký na to, aby ho někdo skutečně napsal. Což je u dokumentace drobný, ale překvapivě důležitý detail.
+
+### Ukliď staré výstupy a oprávnění
+
+Pilot často vytvoří dočasné věci: testovací report, experimentální label, přístupový token, logovací tabulku, Slack kanál, poznámku v šabloně, ruční export pro vyhodnocení. Když pilot skončí, tyhle stopy nesmí zůstat jako nový normál.
+
+Uklid po pilotu:
+
+- smaž dočasné exporty, které už neslouží k rozhodnutí,
+- zkrať nebo anonymizuj pilotní logy podle původního retenčního pravidla,
+- odeber tokeny a oprávnění, která byla potřeba jen pro pilot,
+- oprav šablony, aby neobsahovaly starou instrukci vedle nové,
+- zavři testovací reporty a upozornění, která už nikdo nemá číst,
+- zapiš jediný zdroj pravdy pro aktuální stav automatizace.
+
+Nejčastější chyba je nechat pilotní měření běžet „pro jistotu“. Jistota se takhle nevyrábí. Jen vzniká další sklad dat, který za tři měsíce nikdo neumí vysvětlit. Pokud výstup nepotřebuješ pro další rozhodnutí, ukliď ho.
+
+### Příklad: Retenční kontrola exportu po pilotu
+
+Situace: Minulý měsíc tým spustil varování u produktových karet označených jako `export`. Kontrola upozorňovala, když karta neměla vyplněné pole `doba_dostupnosti_exportu`.
+
+Pilotní review:
+
+| Signál | Zjištění |
+| --- | --- |
+| Upozornění | 9 upozornění za měsíc |
+| Opravy | 5 karet doplnilo retenční větu |
+| Výjimky | 2 výjimky byly oprávněné, protože export neukládal dočasný soubor |
+| Šum | 2 upozornění vznikla u interních CSV exportů pro jednorázovou migraci |
+| Falešná autorita | Jeden reviewer napsal „skript to pustil“, i když retenční věta byla formálně vyplněná špatně |
+| Datová stopa | Kontrola četla jen štítek karty a tři metadata; pilotní report obsahoval odkazy na karty |
+| Verdikt | Zúžit spouštěč a přidat review otázku pro obsah retenční věty |
+
+Rozhodnutí:
+
+| Oblast | Akce |
+| --- | --- |
+| Spouštěč | Kontrolovat jen exporty, které vytvářejí dočasný soubor dostupný uživateli. |
+| Úroveň | Ponechat varování, neblokovat release. |
+| Lidský úsudek | Do review šablony přidat otázku: „Je retenční věta konkrétní a odpovídá skutečnému toku?“ |
+| Logy | Nechat měsíční agregát, smazat pilotní tabulku s odkazy po uzavření review. |
+| Výjimky | U interních migračních exportů vyžadovat krátkou větu a datum smazání importního balíku. |
+| Další trigger | Vrátit se k pravidlu při změně exportního mechanismu nebo po třech výjimkách v jednom měsíci. |
+
+Výsledek: automatizace zůstala malá. Mechanická kontrola hlídá přítomnost retenčního pole, člověk pořád hodnotí smysl textu a pilotní report nezůstal v systému jako věčný přívěsek. To je nudné. Výborně. Nudná provozní pravidla jsou často ta nejlepší.
+
+### Checklist: Kontrola automatizovaného produktového pravidla po pilotu
+
+- [ ] Vrátil jsem se k původní pilotní kartě a ověřil pravidlo, vstupy, výstup, výjimku, logy, vypínač a review okno.
+- [ ] Vyhodnotil jsem skutečná upozornění, ne jen pocit, že automatizace „něco hlídá“.
+- [ ] U každého upozornění vím, zda vedlo k opravě, výjimce, šumu nebo žádné práci.
+- [ ] Nehodnotím lidi podle upozornění ani nevytvářím osobní skóre dodržování pravidla.
+- [ ] Zkontroloval jsem, zda automatizace nečte nebo neukládá víc dat, než bylo domluveno.
+- [ ] Ověřil jsem, že výjimka je možná, srozumitelná a vlastněná člověkem.
+- [ ] Zkontroloval jsem šum, falešnou autoritu a místo, kam upozornění chodí.
+- [ ] Rozhodl jsem jedním verdiktem: ponechat, ztišit, zúžit, přesunout, vrátit ručně nebo vypnout.
+- [ ] Uklidil jsem pilotní exporty, logy, tokeny, reporty a duplicitní instrukce.
+- [ ] Zapsal jsem další revizní trigger navázaný na změnu produktu, dat nebo výjimek.
+
+### Mini úkol
+
+Vyber jednu automatizovanou kontrolu, která už poslala aspoň pět upozornění nebo běží měsíc. Do třiceti minut napiš pilotní review: původní účel, počet upozornění, kolik vedlo k opravě, kolik bylo výjimek, kolik byl šum, jaká vznikla datová stopa a jeden verdikt. Pokud je verdikt „ponechat“, nastav revizní trigger a smaž pilotní výstupy. Pokud je verdikt „zúžit“, uprav spouštěč ještě dnes. Pokud neumíš vysvětlit, proč kontrola čte konkrétní data, vypni ji nebo ji vrať na ruční otázku v checklistu.
+
 ## Zdroje
 
 - IETF RFC 9110: HTTP Semantics - význam HTTP přesměrování a stavů včetně `410 Gone` pro zdroje, které už nejsou dostupné: https://www.rfc-editor.org/rfc/rfc9110.html
@@ -60222,6 +60413,8 @@ Vyber jedno produktové pravidlo, které se v posledních týdnech opakovalo mec
 - Nielsen Norman Group: Onboarding Tutorials vs. Contextual Help - rozdíl mezi úvodními tutoriály a kontextovou pomocí: https://www.nngroup.com/articles/onboarding-tutorials/
 
 ## Pracovní log
+
+- 2026-07-27: Doplněna příloha o kontrole automatizovaného produktového pravidla po pilotu bez skrytého dohledu: návrat k pilotní kartě, vyhodnocení skutečných upozornění, oddělení opravy práce od disciplíny lidí, kontrola šumu a falešné autority, šest provozních verdiktů, úklid pilotních výstupů a oprávnění, příklad retenční kontroly exportu, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro ověření automatizovaného produktového pravidla po pilotu. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
 - 2026-07-27: Doplněna příloha o automatizaci produktového pravidla bez slepého vynucování: rozlišení mechanické části pravidla od lidského úsudku, automatizační karta, úrovně tip/varování/blokace, práce s výjimkou, omezení vstupů a logů, napojení kontroly na existující místo práce, pilotní verdikty, příklad kontroly retence u exportu, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro opatrnou automatizaci produktového pravidla. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
