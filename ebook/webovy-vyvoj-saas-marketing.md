@@ -194,6 +194,7 @@ Když se nechceš vracet do celé knihy, hledej konkrétní nástroj podle výst
 | Převést ověřenou produktovou opravu do běžného provozu | „produktová oprava do rutiny“, „oprava zavřená“ nebo „běžný provoz po opravě“ | zavírací karta, která určí vlastníka, dokumentaci, metriky, šablony, datové limity a další revizní trigger bez nového dohledu |
 | Zkontrolovat produktovou opravu po měsíci běžného provozu | „měsíční kontrola produktové opravy“, „oprava v provozu“ nebo „návrat problému po opravě“ | lehké review, zda oprava pořád řeší původní nejistotu, nevznikl kolem ní nový procesní odpad a není potřeba ji zjednodušit |
 | Zjednodušit produktovou opravu po měsíční kontrole | „zjednodušení opravy“, „procesní nános po opravě“ nebo „oprava funguje ale bobtná“ | redukční karta, která ponechá hodnotu opravy, vypne zbytečné měření, sloučí šablony, odebere přístupy a nastaví jasné stop pravidlo |
+| Uzavřít zjednodušenou produktovou opravu bez nového procesu | „uzavření zjednodušené opravy“, „redukovaná oprava hotovo“ nebo „stop pravidlo po zjednodušení“ | zavírací review, které potvrdí odstraněný nános, funkční minimální signál a konec mimořádných kontrol |
 
 Pravidlo pro práci s rejstříkem: otevři maximálně tři nalezené části, vyber jednu a zapiš výstup. Pokud po deseti minutách pořád skáčeš mezi odkazy, vrať se k tabulce „Kudy začít podle aktuální bolesti“ a zúž problém. E-book není buffet. Teda je, ale bez talíře si stejně odneseš jen chaos.
 
@@ -58340,6 +58341,128 @@ Výsledek není dramatický. Právě proto je dobrý. Produktová hodnota zůsta
 
 Vyber jednu opravu, která po měsíci funguje, ale zanechala kolem sebe zbytečnou údržbu. Vyplň redukční kartu v sedmi řádcích a vyber jednu položku, kterou dnes zrušíš, sloučíš nebo přesuneš do archivu. Nepřidávej nové měření. Pokud máš strach, že se problém vrátí, napiš jeden hrubý signál návratu a trigger revize. Pokud potřebuješ tři signály a dvě nové tabulky, pravděpodobně nezjednodušuješ. Jen dáváš procesu nový kabát.
 
+## Příloha: Uzavření zjednodušené produktové opravy bez nového procesu
+
+Zjednodušení opravy je hotové až ve chvíli, kdy tým ví tři věci: původní hodnota zůstala, nános opravdu zmizel a mimořádný dohled už se nevrací zadními dveřmi. Nestačí smazat tabulku a říct „vyřešeno“. To je úklid plochy, ne uzavření práce.
+
+Dobré uzavření zjednodušené opravy má být krátké. Jeho cílem není znovu otevřít produktovou debatu, jestli oprava byla správná. To už se rozhodlo dřív. Cílem je potvrdit, že redukce nepoškodila uživatele, že stop pravidlo funguje a že žádný člověk v týmu dál nenese tichou povinnost něco ručně hlídat.
+
+Základní věta:
+
+„Oprava zůstává v běžném provozu, zjednodušení je zavřené a další kontrola se spustí jen při ___.“
+
+Pokud za prázdné místo neumíš doplnit konkrétní trigger, uzavření ještě není hotové. Máš jen pocit, že už by bylo fajn o tom nemluvit. To je lidské. Jen to nepatří do provozního režimu.
+
+### Vrať se ke stop pravidlu
+
+Stop pravidlo ze zjednodušení není ozdoba posledního odstavce. Je to test, jestli tým umí přestat. Otevři redukční kartu a zkontroluj:
+
+| Otázka | Dobrá odpověď |
+| --- | --- |
+| Co mělo zůstat? | Jedna produktová, textová nebo procesní hodnota. |
+| Co mělo skončit? | Konkrétní tabulka, event, šablona, export, přístup nebo kontrola. |
+| Jak poznáme návrat problému? | Hrubý signál z existující práce. |
+| Kdo zavírá úklid? | Jeden vlastník, ne neurčitý tým. |
+| Kdy se k tématu vracíme? | Jen při triggeru, změně produktu nebo jasném návratu původní nejistoty. |
+
+Když je odpověď „budeme to občas sledovat“, stop pravidlo neprošlo. „Občas“ je krásné slovo pro práci, která nemá vlastníka, rytmus ani konec.
+
+### Ověř, že nános opravdu zmizel
+
+Uzavření má projít místa, kde se starý nános rád schová:
+
+- dashboardy a uložené pohledy,
+- support a sales šablony,
+- interní dokumentace a rozhodovací logy,
+- backlogové úkoly a opakované připomínky,
+- sdílené složky, exporty a tabulky,
+- dočasné role, přístupy a oprávnění,
+- automatizace, které posílaly pilotní reporty,
+- meetingové agendy, které vznikly jen kvůli původní nejistotě.
+
+Nejde o hon na každý historický záznam. Starý rozhodovací záznam může zůstat jako stopa, proč se změna udělala. Problém je aktivní nosič, který dál říká lidem, co mají dělat, nebo dál sbírá data, i když už pro to není rozhodovací účel.
+
+Praktické pravidlo: archiv je v pořádku, pokud je označený jako archiv a nikdo podle něj neřídí dnešní práci. Aktivní šablona, dashboard nebo checklist archiv není, i kdyby měl v názvu „legacy“. Hezký štítek starý slib nezneškodní.
+
+### Zkontroluj, že minimální signál stačí
+
+Po zjednodušení má zůstat jen signál návratu problému. Ten nemá dokazovat všechno. Má včas upozornit, že se původní nejistota možná vrátila.
+
+Dobrá zavírací kontrola se ptá:
+
+- Je signál napojený na existující práci, například support štítek, release checklist nebo dokumentační trigger?
+- Nevyžaduje nový export osobních dat?
+- Má jasnou hranici, kdy už stojí za reakci?
+- Ví vlastník, co udělá, když se signál objeví?
+- Umí tým signál ignorovat, když se neobjeví?
+
+Poslední otázka je důležitá. Privacy-first provoz není jen o tom, co nesbíráš. Je i o schopnosti nevyrábět úzkostné kontrolní mechanismy. Když signál mlčí, nemá se kolem něj každý měsíc tančit s tabulkou.
+
+### Zavři mimořádné kontroly
+
+Mimořádná kontrola je užitečná po incidentu, pilotu, větší opravě nebo nejisté změně. Jenže když přežije moc dlouho, stane se z ní nový proces. Uzavření zjednodušené opravy proto musí říct, co končí.
+
+Příklady zavíracích vět:
+
+- „Pilotní měření končí, další kontrola jen při opakovaném support štítku.“
+- „Týdenní ruční review se ruší, změna dokumentace se bude hlídat v běžném release checklistu.“
+- „Dočasný přístup supportu k exportní frontě končí, výjimka půjde přes standardní přístupový proces.“
+- „Speciální makro se maže, platí jedna veřejná odpověď a interní poznámka pro výjimky.“
+- „Backlogové návrhy ze staré nejistoty jsou zavřené nebo přepsané na nové samostatné problémy.“
+
+Tady se hodí být nemilosrdně konkrétní. „Snížíme režim kontroly“ zní elegantně, ale nikdo podle toho nic nevypne. „Rušíme pondělní exportní tabulku a mažeme automatický report“ je už práce.
+
+### Udělej krátké zavírací review
+
+Zavírací review má být malý záznam, ne další kapitola interní dokumentace. Použij tuto strukturu:
+
+| Pole | Zápis |
+| --- | --- |
+| Oprava | Jaká původní nejistota se řešila. |
+| Co zůstává | Hodnota, která dál běží v produktu, textu nebo procesu. |
+| Co bylo odstraněno | Konkrétní nános, který skončil. |
+| Minimální signál | Jak poznáme návrat problému. |
+| Co se dál nedělá | Mimořádné kontroly, exporty, dashboardy nebo ruční kontroly, které končí. |
+| Trigger návratu | Kdy se téma znovu otevře. |
+| Vlastník běžného režimu | Kdo drží zdroj pravdy, ne kdo kdysi hasil problém. |
+
+Záznam má být krátký i proto, aby ho někdo opravdu přečetl. Pokud potřebuje tři obrazovky, pravděpodobně znovu vysvětluje celou historii opravy. Tu nech v rozhodovacím logu. Zavírací review má říct, co platí odteď.
+
+### Příklad: Uzavření zjednodušeného exportního stavu
+
+Exportní stav v produktu po měsíci fungoval. Tým předchozí iterací smazal pilotní tabulku dotazů, sloučil dvě support šablony a odebral dočasný pohled na exportní frontu. Teď potřebuje uzavřít zjednodušení, aby se z kontroly nestal nový zvyk.
+
+Zavírací review:
+
+| Pole | Zápis |
+| --- | --- |
+| Oprava | Uživatelé dřív nevěděli, jestli je export přijatý, zpracovává se, připravený nebo skončil chybou. |
+| Co zůstává | Stav exportu v produktu a veřejný návod k exportu. |
+| Co bylo odstraněno | Pilotní tabulka dotazů, druhá support šablona, dočasný support pohled na exportní frontu. |
+| Minimální signál | Support štítek `export nejistota` při opakovaném návratu stejného dotazu. |
+| Co se dál nedělá | Žádný měsíční export ticketů, žádná samostatná exportní porada, žádný zvláštní dashboard. |
+| Trigger návratu | Opakovaný štítek v jednom kontrolním okně nebo změna exportní fronty v release plánu. |
+| Vlastník běžného režimu | Produktový vlastník exportu; support drží jen aktuální šablonu. |
+
+Výsledek: oprava zůstává, nános končí a tým ví, kdy se k tématu vrátit. To je nejlepší druh produktového klidu: není založený na ignorování rizika, ale na jasné hranici práce.
+
+### Checklist: Uzavření zjednodušené produktové opravy
+
+- [ ] Vrátil jsem se ke stop pravidlu z redukční karty.
+- [ ] Vím, co z původní opravy zůstává jako hodnota.
+- [ ] Ověřil jsem, že konkrétní nános opravdu skončil, sloučil se nebo odešel do archivu.
+- [ ] Aktivní šablony, dashboardy, checklisty a automatizace nešíří starý režim.
+- [ ] Dočasné přístupy a exporty jsou zavřené nebo mají běžný schvalovací režim.
+- [ ] Minimální signál návratu problému nepřidává nové osobní sledování.
+- [ ] Je jasné, co se dál nedělá.
+- [ ] Trigger návratu je konkrétní a navázaný na existující práci.
+- [ ] Zavírací review má vlastníka běžného režimu.
+- [ ] Pokud se téma znovu otevře, bude to nový důvod, ne setrvačnost staré kontroly.
+
+### Mini úkol
+
+Vezmi jednu opravu, kterou jste nedávno zjednodušili. Napiš sedmiřádkové zavírací review: oprava, co zůstává, co bylo odstraněno, minimální signál, co se dál nedělá, trigger návratu a vlastník běžného režimu. Potom najdi jednu aktivní stopu, která by mohla starý proces vrátit: kalendářovou připomínku, automatický report, šablonu, dashboard nebo backlogový úkol. Zavři ji dnes. Pokud žádnou stopu nenajdeš, napiš do review větu „mimořádné kontroly končí“ a nech opravu žít běžným provozem. Ano, i proces občas potřebuje prostě odejít z místnosti.
+
 ## Zdroje
 
 - IETF RFC 9110: HTTP Semantics - význam HTTP přesměrování a stavů včetně `410 Gone` pro zdroje, které už nejsou dostupné: https://www.rfc-editor.org/rfc/rfc9110.html
@@ -58533,6 +58656,8 @@ Vyber jednu opravu, která po měsíci funguje, ale zanechala kolem sebe zbyteč
 - Nielsen Norman Group: Onboarding Tutorials vs. Contextual Help - rozdíl mezi úvodními tutoriály a kontextovou pomocí: https://www.nngroup.com/articles/onboarding-tutorials/
 
 ## Pracovní log
+
+- 2026-07-27: Doplněna příloha o uzavření zjednodušené produktové opravy bez nového procesu: návrat ke stop pravidlu, ověření odstraněného nánosu, kontrola minimálního signálu, zavření mimořádných kontrol, krátké zavírací review, příklad exportního stavu, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro uzavření zjednodušené opravy. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
 - 2026-07-27: Doplněna příloha o zjednodušení produktové opravy po měsíční kontrole bez ztráty hodnoty: redukční karta, oddělení hodnoty opravy od dočasné pojistky, pořadí bezpečného úklidu, chudý signál návratu problému, úklid nánosu jako malý release, stop pravidlo, příklad exportního stavu, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro zjednodušení opravy po měsíční kontrole. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
