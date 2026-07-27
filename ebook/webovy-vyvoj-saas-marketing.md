@@ -60220,6 +60220,165 @@ Výsledek: automatizace zůstala malá. Mechanická kontrola hlídá přítomnos
 
 Vyber jednu automatizovanou kontrolu, která už poslala aspoň pět upozornění nebo běží měsíc. Do třiceti minut napiš pilotní review: původní účel, počet upozornění, kolik vedlo k opravě, kolik bylo výjimek, kolik byl šum, jaká vznikla datová stopa a jeden verdikt. Pokud je verdikt „ponechat“, nastav revizní trigger a smaž pilotní výstupy. Pokud je verdikt „zúžit“, uprav spouštěč ještě dnes. Pokud neumíš vysvětlit, proč kontrola čte konkrétní data, vypni ji nebo ji vrať na ruční otázku v checklistu.
 
+## Příloha: Úklid starého pravidla po ověřené změně automatizace bez dvojí pravdy
+
+Když pilot automatizace dopadne dobře a pravidlo se upraví, práce nekončí novou verzí skriptu. Končí až ve chvíli, kdy staré pravidlo přestane řídit produkt, dokumentaci, měření, šablony i lidské návyky.
+
+Špatná otázka zní: „Máme novou kontrolu?“
+
+Lepší otázka zní: „Kde všude ještě staré pravidlo rozhoduje, i když už mu nevěříme?“
+
+Dvojí pravda je v malém týmu zákeřná. Jedna šablona říká, že export musí mít retenční větu u každého CSV. Nová automatizace hlídá jen exporty dostupné uživateli. Starý checklist pořád blokuje interní migrace. Support makro slibuje něco trochu jiného. A po měsíci nikdo neví, která věta je autoritativní. To není bezpečnost. To je provozní mlha s hezkým logem.
+
+### Staré pravidlo končí až po úklidu
+
+Nové pravidlo může být správné a staré pravidlo může dál škodit. Typicky zůstane v místech, která se při release snadno přehlédnou:
+
+- stará položka v review checklistu,
+- komentář v kódu nebo validaci,
+- zastaralý CI job,
+- support nebo sales šablona,
+- interní onboarding dokument,
+- dashboard, který pořád počítá starou metriku,
+- výjimkový seznam vytvořený pro starou verzi pravidla,
+- přístupový token používaný jen původní kontrolou,
+- veřejný text, který slibuje starý režim.
+
+Úklid starého pravidla proto ber jako malý release. Ne jako kosmetiku. Změnil se způsob rozhodování a to musí být vidět ve všech místech, kde lidé nebo automatizace rozhodnutí opakují.
+
+Praktická věta pro začátek: „Staré pravidlo ___ končí, protože pilot nové verze ukázal ___; od teď platí ___ a staré nosiče uklidíme do ___.“
+
+Pokud větu neumíš napsat, možná ještě nemáš rozhodnutí. Možná máš jen novou kontrolu vedle starého zvyku. A to je skvělý způsob, jak si vyrobit práci navíc a tvářit se u toho strategicky.
+
+### Udělej zavírací kartu starého pravidla
+
+Zavírací karta není román. Má zachytit, proč staré pravidlo končí, co ho nahrazuje a kde musí zmizet jeho stopy.
+
+| Pole | Otázka |
+| --- | --- |
+| Staré pravidlo | Jak přesně zněla stará pracovní pravda? |
+| Důvod konce | Co se změnilo v produktu, datech, riziku nebo praxi? |
+| Nové pravidlo | Jak zní náhrada v jedné větě? |
+| Důkaz | Jaký pilot, review nebo provozní signál změnu podpořil? |
+| Nosiče | Kde všude je staré pravidlo zapsané nebo vynucované? |
+| Datová stopa | Jaké logy, exporty, metriky nebo tokeny po starém pravidle zůstaly? |
+| Veřejný slib | Dotýká se změna dokumentace, pricingu, trust centra nebo podpory? |
+| Zavření | Kdo uklidí stopy a kdy se ověří, že stará pravda zmizela? |
+
+Dobrá zavírací karta chrání budoucí tým před archeologií. Člověk za půl roku nemusí hledat deset diskusí, proč už stará blokace neplatí. Vidí rozhodnutí, náhradu a hranici úklidu.
+
+### Ukliď nosiče pravidla v bezpečném pořadí
+
+Úklid nedělej náhodně podle toho, co první vyskočí ve vyhledávání. Začni místy, která mohou blokovat práci nebo měnit chování produktu, a až potom uklízej texty.
+
+Navržené pořadí:
+
+1. Vynucení v produktu nebo CI: validace, blokace, automatické kontroly, povinná pole.
+2. Šablony práce: zadání, review checklisty, release checklisty, support makra.
+3. Metriky a reporty: staré počítání, pilotní tabulky, dashboardy, upozornění.
+4. Přístupy a tokeny: oprávnění, která staré pravidlo potřebovalo, ale nové už ne.
+5. Dokumentace: interní runbooky, onboarding, technická dokumentace, veřejné nápovědy.
+6. Archivy a poučení: jediný stručný záznam, proč staré pravidlo skončilo.
+
+Toto pořadí má jednoduchý důvod: nejdřív zastav dopad, potom ukliď orientaci. Když nejdřív přepíšeš dokumentaci, ale starý CI job pořád blokuje release, tým se naučí dokumentaci nevěřit. To je drahá lekce, jen není vidět na faktuře.
+
+### Zkontroluj kód, metriky, výjimky a přístupy
+
+Staré pravidlo často drží pohromadě čtyři technické stopy:
+
+| Stopa | Co hledat | Co udělat |
+| --- | --- | --- |
+| Kód | validace, feature flag, podmínka, test, cron, CI job | smazat, upravit nebo jasně označit jako historickou podporu |
+| Metriky | starý event, dashboard, export, alert, měsíční součet | ukončit měření nebo ho přemapovat na nové rozhodnutí |
+| Výjimky | seznam ručních override, povolené staré případy, dočasné odklady | zavřít, převést nebo znovu schválit podle nového pravidla |
+| Přístupy | tokeny, role, integrační oprávnění, sdílené složky | odebrat vše, co sloužilo jen staré kontrole |
+
+Privacy-first úklid se pozná podle toho, že nové pravidlo nesebere starému jen název. Sebere mu i datovou stopu. Pokud staré reporty dál běží, tokeny dál čtou systém a pilotní exporty dál leží ve sdílené složce, pravidlo ve skutečnosti neskončilo. Jen přestalo být vidět na poradě.
+
+Kontrolní věta: „Po starém pravidle nezůstává žádný běžící sběr dat, žádné aktivní oprávnění a žádná šablona, která by člověka vedla k původnímu rozhodnutí.“
+
+### Oprav veřejné sliby a podpůrné texty
+
+Některá pravidla nejsou jen interní. Dotýkají se toho, co firma slibuje lidem venku: jak dlouho drží exporty, jak funguje zrušení účtu, co umí role, kdy chodí notifikace, jak se vyhodnocuje usage limit nebo co znamená „bez trackingu“.
+
+Při změně pravidla zkontroluj:
+
+- produktovou dokumentaci,
+- veřejné FAQ,
+- trust centrum,
+- pricing a limity plánů,
+- onboardingové e-maily,
+- support makra,
+- obchodní odpovědi a bezpečnostní dotazníky,
+- interní šablony pro odpovědi zákazníkům.
+
+Neznamená to zveřejnit interní provozní detail. Znamená to odstranit starý slib nebo ho přepsat tak, aby odpovídal aktuální realitě. Veřejný text má být přesný, ale střídmý. Když změna zúžila sběr dat, klidně to řekni. Když jen přepsala interní kontrolu, stačí opravit nápovědu a support odpověď.
+
+> Codyho komentář: Nejhorší privacy text je ten, který byl kdysi pravdivý. Lidé mu pořád věří, tým ho pořád cituje a produkt už dávno funguje jinak. Starý slib není nostalgie. Je to riziko v kostýmu důvěry.
+
+### Nech jednu stopu pro budoucí učení
+
+Úklid neznamená vymazat historii tak důkladně, že se tým za půl roku vrátí ke stejné chybě. Nech jednu krátkou archivní stopu:
+
+| Pole | Příklad |
+| --- | --- |
+| Co skončilo | Povinná retenční věta u všech exportů označených jako `export`. |
+| Proč | Pilot ukázal, že pravidlo vytvářelo šum u interních migračních exportů. |
+| Náhrada | Retenční věta je povinná jen u exportů, které vytvářejí dočasný soubor dostupný uživateli. |
+| Co jsme uklidili | CI podmínka, review checklist, pilotní report, starý support snippet. |
+| Co zůstává | Jedna review otázka k obsahu retenční věty a agregovaný měsíční součet upozornění. |
+| Kdy se vrátit | Při změně exportního mechanismu nebo po třech výjimkách v jednom měsíci. |
+
+Tohle stačí. Nepotřebuješ zachovat každé upozornění, každý komentář a každou pilotní tabulku. Uchovej důvod rozhodnutí, ne provozní sediment kolem něj.
+
+### Příklad: Staré retenční pravidlo po automatizaci
+
+Situace: Tým měl staré pravidlo „každý export musí mít retenční větu“. Po pilotu automatizace se ukázalo, že pravidlo dává smysl jen pro exporty, které vytvoří dočasný soubor dostupný uživateli. Interní migrační exporty potřebují jiné zacházení: datum smazání importního balíku a vlastníka migrace.
+
+Zavírací karta:
+
+| Pole | Zápis |
+| --- | --- |
+| Staré pravidlo | Každá karta se štítkem `export` musí mít pole `doba_dostupnosti_exportu`. |
+| Důvod konce | Pravidlo míchalo uživatelské exporty a interní migrační balíky. |
+| Nové pravidlo | Retenční věta je povinná jen u exportů, které vytvářejí uživateli dostupný dočasný soubor. |
+| Důkaz | Pilot: 9 upozornění, 5 oprav, 2 oprávněné výjimky, 2 šumové případy. |
+| Nosiče | CI kontrola, release checklist, šablona produktové karty, support snippet, pilotní report. |
+| Datová stopa | Pilotní tabulka s odkazy na karty a starý měsíční report upozornění. |
+| Veřejný slib | Produktová nápověda k exportům zůstává pravdivá, support snippet potřebuje zúžit. |
+| Zavření | Produktový vlastník uklidí šablony a reporty do pátku; technický vlastník upraví CI kontrolu. |
+
+Úklid:
+
+| Oblast | Akce |
+| --- | --- |
+| CI | Upravit kontrolu na podmínku `export_user_file = true`. |
+| Šablona | Přidat zvláštní pole pro interní migrační balík: vlastník, datum smazání, účel. |
+| Checklist | Smazat starou univerzální položku a nahradit ji jednou otázkou podle typu exportu. |
+| Support | Přepsat snippet tak, aby mluvil jen o uživatelských exportech. |
+| Reporty | Smazat pilotní tabulku s odkazy, ponechat jen agregovaný závěr v rozhodovacím logu. |
+| Přístupy | Odebrat pilotní token, který četl všechny produktové karty se štítkem `export`. |
+| Archiv | Nechat jednu větu o důvodu změny v historii pravidel. |
+
+Výsledek: nové pravidlo je přesnější, staré pravidlo už nikde tiše neblokuje práci a tým má zachované poučení bez toho, aby držel zbytečné pilotní výstupy.
+
+### Checklist: Úklid starého pravidla po ověřené změně automatizace
+
+- [ ] Napsal jsem zavírací větu starého pravidla: co končí, proč, co platí nově a do kdy se uklidí stopy.
+- [ ] Mám zavírací kartu se starým pravidlem, důvodem konce, náhradou, důkazem, nosiči, datovou stopou a vlastníkem úklidu.
+- [ ] Zkontroloval jsem místa, která pravidlo vynucují: produkt, kód, CI, validace, cron, testy a feature flagy.
+- [ ] Uklidil jsem pracovní šablony, checklisty, support makra a onboardingové texty.
+- [ ] Ukončil jsem staré metriky, alerty, reporty a pilotní exporty, které už neslouží k rozhodnutí.
+- [ ] Odebral jsem tokeny, role a sdílení, která byla potřeba jen pro starou kontrolu.
+- [ ] Zkontroloval jsem veřejné sliby v dokumentaci, trust centru, pricingu a obchodních odpovědích.
+- [ ] Zavřel jsem staré výjimky nebo je převedl podle nového pravidla.
+- [ ] Nechal jsem jednu krátkou archivní stopu s důvodem změny a triggerem budoucí revize.
+- [ ] Ověřil jsem, že staré pravidlo už nemá žádné místo, kde by mohlo rozhodovat vedle nové pravdy.
+
+### Mini úkol
+
+Vyber jedno pravidlo, které bylo v posledním měsíci změněné po pilotu automatizace. Do třiceti minut najdi pět nosičů staré pravdy: kód nebo validaci, pracovní šablonu, metriku nebo report, přístup nebo token a veřejný nebo podpůrný text. U každého napiš verdikt: smazat, upravit, archivovat nebo ponechat s důvodem. Pokud najdeš běžící starý sběr dat, ukonči ho jako první. Pokud nejde bezpečně určit vlastník, otevři jednu zavírací kartu místo dalšího volného seznamu.
+
 ## Zdroje
 
 - IETF RFC 9110: HTTP Semantics - význam HTTP přesměrování a stavů včetně `410 Gone` pro zdroje, které už nejsou dostupné: https://www.rfc-editor.org/rfc/rfc9110.html
@@ -60413,6 +60572,8 @@ Vyber jednu automatizovanou kontrolu, která už poslala aspoň pět upozorněn�
 - Nielsen Norman Group: Onboarding Tutorials vs. Contextual Help - rozdíl mezi úvodními tutoriály a kontextovou pomocí: https://www.nngroup.com/articles/onboarding-tutorials/
 
 ## Pracovní log
+
+- 2026-07-27: Doplněna příloha o úklidu starého pravidla po ověřené změně automatizace bez dvojí pravdy: zavírací karta starého pravidla, bezpečné pořadí úklidu nosičů, kontrola kódu, metrik, výjimek a přístupů, oprava veřejných slibů a podpůrných textů, zachování jedné archivní stopy, příklad starého retenčního pravidla po automatizaci, checklist a mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
 - 2026-07-27: Doplněna příloha o kontrole automatizovaného produktového pravidla po pilotu bez skrytého dohledu: návrat k pilotní kartě, vyhodnocení skutečných upozornění, oddělení opravy práce od disciplíny lidí, kontrola šumu a falešné autority, šest provozních verdiktů, úklid pilotních výstupů a oprávnění, příklad retenční kontroly exportu, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro ověření automatizovaného produktového pravidla po pilotu. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
