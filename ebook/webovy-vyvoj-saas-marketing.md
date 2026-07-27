@@ -210,6 +210,7 @@ Když se nechceš vracet do celé knihy, hledej konkrétní nástroj podle výst
 | Ověřit automatizované produktové pravidlo po pilotu | „kontrola automatizace pravidla“, „automatizované pravidlo po pilotu“ nebo „automatická kontrola hotovo“ | pilotní review upozornění, oprav, výjimek, šumu, datové stopy a rozhodnutí ponechat, ztišit, zúžit, přesunout, vrátit ručně nebo vypnout |
 | Zapsat rozhodnutí o automatizovaném produktovém pravidle | „rozhodovací záznam pravidla“, „proč kontrola běží“ nebo „automatizační ADR pravidla“ | krátký záznam účelu, rozsahu, datové hranice, pravomoci, vlastníka, revize a vypnutí bez opisování celé historie pilotu |
 | Revidovat automatizační ADR po změně produktu | „ADR po změně produktu“, „pravidlo po nové funkci“ nebo „automatizační rozhodnutí stárne“ | krátká revize, která ověří, zda účel, rozsah, vstupy, pravomoc, výjimky a vypnutí automatizovaného pravidla pořád odpovídají realitě produktu |
+| Převést revizi ADR do změny automatizace | „změna po revizi ADR“, „revize nestačí“ nebo „upravit automatizaci“ | malý změnový balík, který z revize udělá konkrétní úpravu pravidla, testů, textů, datové hranice a úklidu bez rozšíření dohledu |
 
 Pravidlo pro práci s rejstříkem: otevři maximálně tři nalezené části, vyber jednu a zapiš výstup. Pokud po deseti minutách pořád skáčeš mezi odkazy, vrať se k tabulce „Kudy začít podle aktuální bolesti“ a zúž problém. E-book není buffet. Teda je, ale bez talíře si stejně odneseš jen chaos.
 
@@ -60819,6 +60820,169 @@ Výsledek: nový export nespadl slepě do starého pravidla, ale tým nepustil d
 
 Vyber jednu automatizaci, které se od posledního rozhodovacího záznamu změnil produktový kontext. Do třiceti minut napiš revizní kartu: změna produktu, dotčené pravidlo, dopad na účel, dopad na data, dopad na pravomoc, výjimky, rozhodnutí, úklid a další kontrola. Pokud zjistíš, že automatizace potřebuje víc dat, napiš nejdřív zakázané vstupy a teprve potom povolené minimum.
 
+## Příloha: Převod revize ADR do změny automatizace bez rozšíření dohledu
+
+Revize automatizačního ADR je užitečná jen tehdy, když z ní vznikne konkrétní změna. Jinak je to další hezký záznam, který dává týmu pocit kontroly, ale starý skript dál běží podle starého světa. Po revizi proto potřebuješ malý změnový balík: co upravit, co otestovat, co přepsat, co smazat a kde zastavit rozšiřování dat.
+
+Špatná otázka zní: „Co všechno musíme změnit, aby automatizace pokryla novou situaci?“
+
+Lepší otázka zní: „Jaká nejmenší změna udrží původní rozhodnutí pravdivé i po změně produktu?“
+
+Rozdíl je zásadní. První otázka vede ke sběru dalších polí, delším alertům a novému pseudoauditu. Druhá drží automatizaci jako pracovní pomůcku, ne jako rostoucí dohledový aparát.
+
+### Rozděl verdikt revize na čtyři typy práce
+
+Po revizi ADR nepiš jeden velký úkol „upravit automatizaci“. Je příliš široký a schová do sebe datové i produktové rozhodnutí. Rozděl výsledek na čtyři menší vrstvy:
+
+| Vrstva | Co se v ní mění | Typický výstup |
+| --- | --- | --- |
+| Pravidlo | podmínky, výjimky, rozsah a stop signály | nová nebo upravená věta pravidla |
+| Technické provedení | skript, validace, CI kontrola, bot komentář nebo webhook | malý patch a testovací sada |
+| Datová hranice | povolené vstupy, zakázané vstupy, logy, retence a přístupy | aktualizovaná datová karta |
+| Místo pravdy | ADR, šablona, runbook, support text, veřejný slib | opravené odkazy a texty |
+
+Každá vrstva má mít vlastní hotovo. Když upravíš skript, ale nezměníš šablonu, lidé budou dál vyrábět starý vstup. Když změníš ADR, ale neuklidíš testovací logy, zůstane po změně datový ocas. Když opravíš veřejný text bez reálné podpory v produktu, děláš si důvěru na dluh.
+
+### Napiš změnovou větu před úpravou kódu
+
+Změnová věta drží rozsah. Má být tak krátká, aby šla přečíst v review bez hledání kontextu.
+
+Šablona:
+
+| Pole | Zápis |
+| --- | --- |
+| Měníme | Jedna konkrétní část pravidla nebo automatizace. |
+| Protože | Signál z revize ADR, ne obecný pocit zlepšování. |
+| Neměníme | Explicitní hranice rozsahu. |
+| Data navíc | Ano/ne; pokud ano, proč nestačí současné minimum. |
+| První ověření | Jak poznáme, že změna funguje bez nového sledování lidí. |
+| Návrat zpět | Jak se vrátíme k předchozímu chování nebo ručnímu režimu. |
+
+Příklad dobré věty:
+
+| Pole | Zápis |
+| --- | --- |
+| Měníme | Kontrola retenční věty nově rozpozná typ exportu `auditni_balicek`. |
+| Protože | Produkt přidal auditní balíček s jiným účelem a staré pravidlo ho neumí odlišit. |
+| Neměníme | Kontrola nečte obsah exportu, jména zákazníků ani přílohy. |
+| Data navíc | Ne; stačí typ exportu, existence retenční věty a stav schválení. |
+| První ověření | Po pěti kartách ověřit počet opravených varování a počet oprávněných výjimek. |
+| Návrat zpět | Vypnout větev pro auditní balíček a vrátit ji do ruční kontroly v šabloně exportu. |
+
+> Codyho komentář: „Ještě přidáme jeden detail pro jistotu“ je věta, která umí z malé kontroly udělat tichý monitorovací systém. Pokud detail nemění rozhodnutí, nepatří do vstupu ani do logu. Patří maximálně do koše s nálepkou „zvědavost“.
+
+### Uprav nejdřív pravidlo, potom skript
+
+Když začneš technickou změnou, snadno začneš ohýbat produktové rozhodnutí podle toho, co se dobře implementuje. Po revizi ADR postupuj opačně:
+
+1. Přepiš pravidlo lidskou řečí.
+2. Uprav příklady platných a neplatných vstupů.
+3. Označ zakázané vstupy a zakázané výstupy.
+4. Teprve potom uprav automatizaci.
+5. Nakonec zkontroluj, že testy chrání pravidlo, ne interní implementační detail.
+
+Pravidlo může znít třeba:
+
+`Každý dočasný export zákaznických dat musí mít účel, příjemce a datum konce životnosti; automatická kontrola smí ověřit existenci těchto polí, ale nesmí číst obsah exportu.`
+
+Tohle je lepší než technická formulace `CI kontroluje required fields`, protože říká i to, co automatizace dělat nesmí. Privacy-first pravidlo bez zákazu je často jen pozvánka k pozdějšímu rozšiřování.
+
+### Udělej testovací sadu z rozhodnutí, ne z náhody
+
+Testy u automatizovaného pravidla nemusí být velké. Musí ale krýt rozhodovací hranice. Minimální sada:
+
+| Scénář | Očekávání |
+| --- | --- |
+| Platný běžný export | kontrola projde |
+| Běžný export bez retenční věty | kontrola varuje nebo blokuje podle pravomoci |
+| Platný nový typ práce | kontrola se chová podle pilotního rozhodnutí |
+| Nový typ s chybějící hranicí dat | kontrola varuje bez čtení citlivého obsahu |
+| Zakázané pole ve vstupu | kontrola selže nebo pole ignoruje a zaloguje jen technický důvod |
+| Oprávněná výjimka | kontrola vyžaduje důvod, vlastníka a konec výjimky |
+| Vypnutý režim | existuje ruční náhradní cesta bez skrytého běhu |
+
+Testovací data nesmí být kopie produkce. Vytvoř malé syntetické příklady podle pracovních situací: `bez_retence`, `auditni_balicek_validni`, `auditni_balicek_bez_prijemce`, `vyjimka_s_koncem`. Název scénáře má říkat, jaké rozhodnutí se ověřuje. Ne kdo ho způsobil.
+
+### Omez výstup změněné automatizace
+
+Po změně pravidla bývá pokušení přidat výmluvnější alert. To je někdy užitečné, ale výstup musí zůstat pracovní a chudý na data. Dobré upozornění říká:
+
+- co je potřeba opravit,
+- kde to vlastník najde,
+- proč pravidlo existuje,
+- jak požádat o výjimku,
+- kdy se výstup smaže nebo přestane být relevantní.
+
+Špatné upozornění přidává:
+
+- jména lidí, kteří chybu udělali,
+- celé zákaznické názvy bez potřeby,
+- obsah exportu nebo přílohy,
+- historii předchozích porušení,
+- interní bezpečnostní detaily,
+- veřejně nesdílitelný kontext.
+
+Praktická věta pro bot komentář:
+
+`Chybí retenční věta pro dočasný export. Doplň účel, příjemce a datum smazání, nebo otevři časově omezenou výjimku v šabloně exportu. Kontrola nečte obsah exportu.`
+
+To stačí. Člověk ví, co má udělat. Tým ví, proč kontrola existuje. A automatizace si nehraje na vyšetřovací spis.
+
+### Změnu nasaď s pilotním oknem
+
+I malá změna pravidla potřebuje kontrolní okno. Ne proto, že by každá automatizace byla drama. Protože pravidla často selhávají na šumu, výjimkách a nečekaném používání.
+
+Pilotní okno nastav předem:
+
+| Pole | Doporučení |
+| --- | --- |
+| Délka | počet prvních použití nebo krátké časové okno, podle toho co nastane dřív |
+| Pravomoc | tip nebo varování, pokud se mění nový typ práce; blokace až po ověření |
+| Signály | počet oprávněných varování, falešných varování, výjimek a ručních oprav |
+| Data | jen agregovaný počet a odkaz na pracovní kartu s běžnými oprávněními |
+| Stop pravidlo | kdy se změna vrátí ručně, zúží nebo vypne |
+| Úklid | kdy se smažou pilotní výstupy, dočasné exporty a staré testovací záznamy |
+
+Pokud změna po pilotu vyžaduje osobní přehled toho, kdo pravidlo porušuje, pravděpodobně jsi nenavrhl dobrou automatizaci. Produktové pravidlo má zlepšovat práci, ne dělat z týmu tabulku poslušnosti.
+
+### Příklad: Revize našla nové pole v exportní šabloně
+
+Situace: Revize ADR ukázala, že exportní šablona dostala pole `externi_prijemce`. Původní automatizace kontrolovala jen `retence_do` a `ucel`. Tým chce zabránit odesílání exportů bez jasného příjemce, ale nechce do kontrolního skriptu přidat obsah exportu ani konkrétní osobní údaje.
+
+Změnový balík:
+
+| Vrstva | Změna |
+| --- | --- |
+| Pravidlo | Dočasný export musí mít účel, konec životnosti a typ příjemce. |
+| Technické provedení | Kontrola ověřuje existenci pole `externi_prijemce_typ`, ne jméno člověka ani obsah exportu. |
+| Datová hranice | Povolené vstupy: typ exportu, účel, retenční datum, typ příjemce, stav výjimky. Zakázané vstupy: obsah souboru, e-mail příjemce, seznam osob v exportu. |
+| Místo pravdy | ADR, exportní šablona a runbook dostanou stejnou větu o tom, že kontrola nečte obsah exportu. |
+| Pilot | První čtyři týdny jen varování u nového pole, blokace zůstává jen u chybějící retence. |
+| Úklid | Po pilotu smazat dočasné výpisy varování a zavřít staré výjimky bez příjemce. |
+
+Bot komentář po změně:
+
+`Export má retenční datum, ale chybí typ příjemce. Doplň interní tým, zákazník, zpracovatel nebo jiný schválený typ. Kontrola nepotřebuje a nečte jméno příjemce ani obsah exportu.`
+
+Výsledek: automatizace chrání nové rozhodnutí, ale nepřibrala zbytečná data. Review má jasné testy, pilot má konec a tým ví, kde je hranice. To je přesně ten nudný typ kvality, který šetří budoucí nervy.
+
+### Checklist: Převod revize ADR do změny automatizace
+
+- [ ] Výsledek revize jsem rozdělil na pravidlo, technické provedení, datovou hranici a místo pravdy.
+- [ ] Před úpravou skriptu existuje krátká změnová věta s důvodem, hranicí rozsahu a návratem zpět.
+- [ ] Pravidlo lidskou řečí říká i to, co automatizace výslovně nesmí číst, ukládat nebo posílat.
+- [ ] Testovací sada pokrývá platný stav, chybu, nový typ práce, zakázané vstupy, výjimku a vypnutý režim.
+- [ ] Testovací data jsou syntetická a popisují situace, ne skutečné osoby nebo zákazníky.
+- [ ] Výstup automatizace říká, co opravit, proč a kde, ale nepřidává osobní ani zákaznické detaily bez potřeby.
+- [ ] Pilotní okno má délku, pravomoc, signály, stop pravidlo a úklid.
+- [ ] Nová automatizace nepřebírá staré výjimky bez nového důvodu.
+- [ ] ADR, šablona, runbook, datová mapa a bot text po změně říkají stejnou cílovou pravdu.
+- [ ] Po pilotu je jasné rozhodnutí: ponechat, zúžit, blokovat, vrátit ručně nebo vypnout.
+
+### Mini úkol
+
+Vezmi jednu revizní kartu automatizačního ADR a přepiš ji na změnový balík. Do třiceti minut vyplň čtyři vrstvy: pravidlo, technické provedení, datová hranice a místo pravdy. Potom napiš jednu změnovou větu ve tvaru `měníme / protože / neměníme / data navíc / první ověření / návrat zpět`. Pokud v poli `data navíc` vyjde ano, zastav se a navrhni nejdřív variantu bez nových dat.
+
 ## Zdroje
 
 - IETF RFC 9110: HTTP Semantics - význam HTTP přesměrování a stavů včetně `410 Gone` pro zdroje, které už nejsou dostupné: https://www.rfc-editor.org/rfc/rfc9110.html
@@ -61012,6 +61176,8 @@ Vyber jednu automatizaci, které se od posledního rozhodovacího záznamu změn
 - Nielsen Norman Group: Onboarding Tutorials vs. Contextual Help - rozdíl mezi úvodními tutoriály a kontextovou pomocí: https://www.nngroup.com/articles/onboarding-tutorials/
 
 ## Pracovní log
+
+- 2026-07-27: Doplněna příloha o převodu revize ADR do změny automatizace bez rozšíření dohledu: rozdělení výsledku revize na pravidlo, technické provedení, datovou hranici a místo pravdy, změnová věta před úpravou skriptu, postup úprav od pravidla k testům, omezení výstupu automatizace, pilotní okno, příklad nového pole v exportní šabloně, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro změnu po revizi ADR. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
 - 2026-07-27: Doplněna příloha o revizi automatizačního ADR po změně produktu bez starého pravidla: spouštěče revize při změně reality produktu, kontrola účelu, rozsahu, vstupů, pravomoci, výjimek a vypnutí, ochrana před tichým rozšířením dat, sladění ADR s runbookem, datovou mapou, šablonami a veřejnými texty, revizní karta, příklad nového typu exportu, checklist a mini úkol; do rejstříku pracovních nástrojů přidána nová směrovka pro ADR po změně produktu. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
