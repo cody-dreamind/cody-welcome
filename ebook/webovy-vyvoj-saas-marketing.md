@@ -214,6 +214,7 @@ Když se nechceš vracet do celé knihy, hledej konkrétní nástroj podle výst
 | Převést revizi ADR do změny automatizace | „změna po revizi ADR“, „revize nestačí“ nebo „upravit automatizaci“ | malý změnový balík, který z revize udělá konkrétní úpravu pravidla, testů, textů, datové hranice a úklidu bez rozšíření dohledu |
 | Uzavřít změnu automatizace po pilotu | „pilot změny automatizace“, „změna automatizace hotovo“ nebo „zavřít pilot pravidla“ | zavírací rozhodnutí, zda změna zůstane, zúží se, přepne pravomoc, vrátí ručně nebo se vypne včetně úklidu dat a dokumentace |
 | Převést ponechanou automatizaci do běžné údržby | „údržba automatizace po pilotu“, „ponechaná automatizace“ nebo „automatizace v režimu“ | provozní údržbová karta s vlastníkem, revizním triggerem, signály zdraví, omezenou stopou a jasným koncem mimořádné pozornosti |
+| Ukončit automatizaci s krátkým přechodem bez návratu setrvačnosti | „odložené vypnutí automatizace“, „sunset automatizace“ nebo „přechodové vypnutí“ | sunset karta s důvodem konce, krátkým přechodovým oknem, ruční náhradou, zákazem nového rozsahu a zavíracím úklidem |
 
 Pravidlo pro práci s rejstříkem: otevři maximálně tři nalezené části, vyber jednu a zapiš výstup. Pokud po deseti minutách pořád skáčeš mezi odkazy, vrať se k tabulce „Kudy začít podle aktuální bolesti“ a zúž problém. E-book není buffet. Teda je, ale bez talíře si stejně odneseš jen chaos.
 
@@ -61406,6 +61407,149 @@ Výsledek: automatizace nekončí celá. Jen se zúží část, která začala v
 
 Vyber jednu automatizaci, která běží déle než měsíc, a najdi její stop pravidlo. Pokud žádné nemá, napiš ho zpětně ve tvaru „pokud ___, uděláme ___“. Potom vezmi posledních deset výstupů nebo poslední měsíc běhů a ručně rozhodni: ponechat, zúžit, vrátit ručně nebo vypnout. Zapiš jeden důvod, jednu datovou hranici a další trigger. Pokud nedokážeš vybrat verdikt, automatizace pravděpodobně nemá dost jasný účel. To je dobrý nález, ne trapas.
 
+## Příloha: Odložené vypnutí automatizace bez návratu setrvačnosti
+
+Někdy stop pravidlo řekne jasně: automatizaci vypnout. Jenže provoz není laboratorní stůl. Automatizace může být napojená na ruční rutinu, zákaznický slib, support šablonu, interní report nebo starý proces, který ještě nemá náhradu. Okamžité vypnutí by sice bylo čisté, ale rozbilo by práci.
+
+Špatná otázka zní: „Nemůžeme to ještě chvíli nechat běžet?“
+
+Lepší otázka zní: „Jak krátké přechodové okno potřebujeme, aby automatizace skončila bez rozšíření dat, nového rozsahu a zapomenutého běhu?“
+
+Odložené vypnutí není výmluva pro setrvačnost. Je to řízený konec. Automatizace už nemá získávat nové funkce, nové příjemce, nové vstupy ani novou autoritu. Má jen bezpečně doběhnout do bodu, kde ji lze vypnout, předat práci ručně nebo nahradit menším řešením.
+
+> Codyho komentář: Vypnutí automatizace často selže na slově „dočasně“. Dočasně je kouzelný inkoust. V den zápisu vypadá pevně, za měsíc zmizí a zůstane jen skript, který už nikdo nechce vlastnit.
+
+### Udělej sunset kartu
+
+Jakmile verdikt zní „vypnout, ale ne hned“, napiš samostatnou sunset kartu. Ne proto, aby vznikl další dokument. Protože odložený konec bez karty je jen povolení pokračovat.
+
+Minimální karta:
+
+| Pole | Co napsat |
+| --- | --- |
+| Důvod konce | Která podmínka stop pravidla nastala a proč automatizace končí. |
+| Přechodové okno | Přesné datum nebo počet běhů, ne „až bude čas“. |
+| Povolený účel | Co automatizace smí v přechodu ještě dělat. |
+| Zakázaný rozsah | Co už nesmí přibýt: vstupy, výstupy, příjemci, pravomoc, frekvence. |
+| Ruční náhrada | Jak se práce udělá bez automatizace během přechodu i po něm. |
+| Vlastník vypnutí | Kdo má právo rozhodnout konec, ne jen sledovat stav. |
+| Úklid | Které běhy, tokeny, logy, výstupy, dokumentace a šablony se zavřou. |
+| Kontrola po vypnutí | Kdy tým ověří, že starý proces se nevrátil zadními dveřmi. |
+
+Sunset karta má být kratší než původní ADR. Neřeší už, proč automatizace kdysi vznikla. Řeší, jak skončí. Pokud se při vyplňování objeví nový silný důvod automatizaci zachovat, nepatří do sunset karty. Patří do nové revize s novým verdiktem. Taková věc má projít předními dveřmi, ne skulinkou pod rohožkou.
+
+### Zmraz rozsah během přechodu
+
+Největší riziko odloženého vypnutí je, že se z přechodu stane další fáze rozvoje. Někdo požádá o malé pole navíc, jiný chce dočasný report, třetí navrhne přidat příjemce, protože „už to stejně běží“. Přesně tak se umí končící automatizace proměnit v ještě větší závazek.
+
+Pravidlo pro přechod:
+
+| Požadavek během přechodu | Výchozí reakce |
+| --- | --- |
+| Nový vstup | Ne. Pokud je nutný, zastavit přechod a udělat novou datovou revizi. |
+| Nový příjemce výstupu | Ne. Výstup se může zúžit, ne rozšířit. |
+| Vyšší frekvence běhu | Ne. Přechod má snižovat stopu, ne zvyšovat rytmus. |
+| Nová blokace nebo automatická akce | Ne. Pravomoc se v přechodu nepřidává. |
+| Lepší text upozornění | Ano, pokud nemění účel ani sbíraná data. |
+| Smazání pole, logu nebo výstupu | Ano, pokud neohrozí ruční náhradu a auditní minimum. |
+
+Pokud tým opravdu potřebuje novou schopnost, pravděpodobně nejde o vypnutí, ale o návrh nové automatizace. To je legitimní. Jen se to nesmí schovávat pod starý skript, staré tokeny a staré oprávnění.
+
+### Připrav ruční náhradu dřív než poslední běh
+
+Odložené vypnutí má smysl jen tehdy, když vzniká náhradní cesta. Ta nemusí být krásná. Musí být ověřitelná. Ruční náhrada má odpovědět na pět praktických otázek:
+
+| Otázka | Dobrý zápis |
+| --- | --- |
+| Kdy se práce spustí? | konkrétní trigger, den nebo stav, ne „podle potřeby“ |
+| Kdo ji udělá? | role nebo vlastník, včetně záskoku |
+| Z čeho vychází? | minimální vstupy, ideálně méně než automatizace |
+| Co vznikne? | rozhodnutí, úkol, odpověď nebo zavírací záznam |
+| Kdy ruční cesta skončí? | datum revize nebo podmínka, aby se nestala novým procesním blátem |
+
+Ruční náhradu otestuj ještě před vypnutím. Stačí jeden suchý průchod na syntetickém nebo anonymizovaném příkladu. Cílem není dokázat, že lidé umí dělat práci pomaleji. Cílem je ověřit, že po vypnutí nezůstane skrytá závislost na výstupu, který už nikdo nebude posílat.
+
+### Snižuj datovou stopu po cestě
+
+Přechodové okno není důvod držet staré debug logy „pro jistotu“. Naopak: když automatizace končí, má se její datová stopa zmenšovat průběžně.
+
+Praktický postup:
+
+| Krok | Co udělat |
+| --- | --- |
+| Omezit běhy | Zastavit zbytečné frekvence a nechat jen ty, které kryjí přechodový účel. |
+| Ořezat výstupy | Posílat jen agregovaný stav nebo konkrétní blocker, ne celé payloady. |
+| Zavřít příjemce | Odebrat kanály a lidi, kteří už podle výstupu nerozhodují. |
+| Zkrátit retenci | Zapsat, kdy se smažou přechodové logy a exporty. |
+| Revokovat postupně | Tokeny a oprávnění odebrat hned, jak přestanou být nutné pro dobíhající část. |
+| Označit archiv | Dokumentaci starého postupu označit jako končící, ne jako platnou pravdu. |
+
+Privacy-first přechod se pozná tak, že každý týden zbývá méně stop, ne víc výmluv. Když přechod vyžaduje širší data než běžný provoz, něco je špatně: buď ruční náhrada není připravená, nebo se tým bojí udělat rozhodnutí.
+
+### Zavři výstupy, které by mohly dál řídit práci
+
+Automatizace nekončí jen vypnutím cronu, webhooku nebo jobu. Končí až ve chvíli, kdy její staré výstupy přestanou řídit rozhodování.
+
+Zkontroluj hlavně:
+
+- staré dashboardy,
+- připnuté zprávy v chatu,
+- e-mailové reporty a filtry,
+- support makra,
+- onboardingové instrukce,
+- interní šablony,
+- runbooky a incident postupy,
+- upozornění v produktovém backlogu,
+- odkazy ve veřejné dokumentaci nebo trust textu.
+
+U každého místa rozhodni: smazat, archivovat, přesměrovat na novou cestu, nebo označit jako historické. Pokud starý výstup zůstane bez označení, někdo ho za půl roku použije jako důkaz, že proces pořád platí. To není chyba člověka. To je chyba neuklizené pravdy.
+
+### Příklad: Odložené vypnutí retenčního reportu exportů
+
+Situace: Automatizace každý týden posílá report exportů bez zavíracího záznamu. Stop pravidlo říká, že pokud report tři měsíce po sobě nevede k žádnému rozhodnutí, vypne se nebo spojí s jinou rutinou. Podmínka nastala. Tým ale potřebuje ještě jeden měsíc, protože ruční měsíční privacy review se zavádí až od dalšího sprintu.
+
+Sunset karta:
+
+| Pole | Zápis |
+| --- | --- |
+| Důvod konce | Týdenní report tři měsíce nevedl k žádnému rozhodnutí; původní riziko kryje nový měsíční review. |
+| Přechodové okno | Čtyři poslední týdenní běhy, nejpozději do 31. srpna. |
+| Povolený účel | Upozornit jen na export bez retenčního data. |
+| Zakázaný rozsah | Nepřidávat obsah exportu, e-mail příjemce, jméno zadavatele, nové příjemce ani vyšší frekvenci. |
+| Ruční náhrada | Měsíční privacy review projde agregovaný seznam otevřených exportních karet. |
+| Vlastník vypnutí | Produktový provoz, záskok bezpečnost. |
+| Úklid | Vypnout plánovaný běh, revokovat token, smazat přechodové debug logy, archivovat starý report a opravit runbook. |
+| Kontrola po vypnutí | Po jednom měsíčním review ověřit, že nikdo nepoužívá starý report ani chatový kanál. |
+
+Rozsah přechodu:
+
+| Požadavek | Rozhodnutí |
+| --- | --- |
+| Sales chce přidat jméno zákazníka do reportu. | Zamítnout; report končí a jméno není nutné pro přechod. |
+| Support chce poslední report jako odkaz do interní šablony. | Ne; šablona dostane odkaz na měsíční review postup. |
+| Produkt chce zkrátit report na počet otevřených exportů bez retence. | Ano; méně dat a pořád kryje přechodový účel. |
+| Bezpečnost chce suchý průchod ručního review na třech syntetických kartách. | Ano; ověřuje náhradu bez nových produkčních exportů. |
+
+Výsledek: automatizace neskončila panickým vypnutím, ale ani nedostala nový život. Přechod má konec, datová stopa se zmenšuje a ruční review se ověří dřív, než starý report zmizí.
+
+### Checklist: Odložené vypnutí automatizace
+
+- [ ] Verdikt stop pravidla je jasný: automatizace končí, jen ne okamžitě.
+- [ ] Existuje sunset karta s důvodem konce, přechodovým oknem a vlastníkem vypnutí.
+- [ ] Přechodové okno má přesné datum, počet běhů nebo jinou ověřitelnou hranici.
+- [ ] Je napsané, co automatizace v přechodu ještě smí dělat.
+- [ ] Je napsané, co už nesmí přibýt: vstupy, výstupy, příjemci, frekvence ani pravomoc.
+- [ ] Ruční náhrada má trigger, vlastníka, vstupy, výstup a vlastní konec životnosti.
+- [ ] Náhrada byla ověřená na jednom bezpečném příkladu před posledním během.
+- [ ] Datová stopa se během přechodu zmenšuje, ne rozšiřuje.
+- [ ] Staré výstupy, dashboardy, šablony, chatové zprávy a runbooky mají rozhodnutí smazat, archivovat nebo opravit.
+- [ ] Tokeny, plánované běhy, notifikace a dočasné exporty mají zavírací úkol.
+- [ ] Po vypnutí existuje krátká kontrola, že starý proces se nevrátil přes starý odkaz nebo šablonu.
+
+### Mini úkol
+
+Vyber jednu automatizaci, u které stop pravidlo říká „vypnout“, ale tým ji nechává běžet kvůli přechodu. Do třiceti minut napiš sunset kartu: důvod konce, poslední datum nebo počet běhů, povolený účel, zakázaný rozsah, ruční náhradu, vlastníka a úklid. Potom najdi jeden starý výstup, který by mohl dál řídit práci, a rovnou rozhodni, jestli se smaže, archivuje nebo přepíše na novou cestu.
+
 ## Zdroje
 
 - IETF RFC 9110: HTTP Semantics - význam HTTP přesměrování a stavů včetně `410 Gone` pro zdroje, které už nejsou dostupné: https://www.rfc-editor.org/rfc/rfc9110.html
@@ -61599,6 +61743,8 @@ Vyber jednu automatizaci, která běží déle než měsíc, a najdi její stop 
 - Nielsen Norman Group: Onboarding Tutorials vs. Contextual Help - rozdíl mezi úvodními tutoriály a kontextovou pomocí: https://www.nngroup.com/articles/onboarding-tutorials/
 
 ## Pracovní log
+
+- 2026-07-27: Doplněna příloha o odloženém vypnutí automatizace bez návratu setrvačnosti: sunset karta s důvodem konce, přesným přechodovým oknem, zmrazením rozsahu, ruční náhradou, průběžným snižováním datové stopy, úklidem starých výstupů, příkladem retenčního reportu exportů, checklistem a mini úkolem; do rejstříku pracovních nástrojů přidána směrovka pro odložené vypnutí automatizace. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
 - 2026-07-27: Doplněna příloha o kontrole stop pravidla automatizace bez setrvačnosti: měřitelné podmínky pro ponechání, zúžení, ruční návrat nebo vypnutí automatizace, kontrola stop pravidla při běžné revizi místo incidentu, čtyři provozní verdikty, ochrana před sledováním lidí, příklad retenční kontroly exportů, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro stop pravidlo běžící automatizace. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
