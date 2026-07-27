@@ -205,6 +205,7 @@ Když se nechceš vracet do celé knihy, hledej konkrétní nástroj podle výst
 | Znovu otevřít archivované pravidlo bez panického návratu procesu | „návrat archivovaného pravidla“, „archiv se vrací“ nebo „staré pravidlo znovu“ | re-entry karta s novým signálem, kontrolou dnešní náhrady, nejmenším zásahem a rozhodnutím, zda obnovit pravidlo, upravit produkt nebo archiv nechat zavřený |
 | Ověřit návrat archivovaného pravidla po pilotu | „pilot návratu pravidla“, „kontrola re-entry“ nebo „obnovené pravidlo hotovo“ | pilotní review, které rozhodne, zda se pravidlo zavře, zúží, přesune, promění v produktovou opravu nebo opravdu zůstane aktivní |
 | Převést obnovené pravidlo do běžné práce | „obnovené pravidlo v provozu“, „pravidlo po pilotu“ nebo „trvalé pravidlo bez procesu“ | provozní karta pravidla s místem použití, vlastníkem, revizním triggerem, retencí stop a stop pravidlem |
+| Zkontrolovat obnovené pravidlo po několika použitích | „pravidlo po několika použitích“, „běžné použití pravidla“ nebo „pravidlo se usadilo“ | lehké review skutečných použití, výjimek, nákladu, datové stopy a verdiktu ponechat, zúžit, přesunout, automatizovat opatrně nebo ukončit |
 
 Pravidlo pro práci s rejstříkem: otevři maximálně tři nalezené části, vyber jednu a zapiš výstup. Pokud po deseti minutách pořád skáčeš mezi odkazy, vrať se k tabulce „Kudy začít podle aktuální bolesti“ a zúž problém. E-book není buffet. Teda je, ale bez talíře si stejně odneseš jen chaos.
 
@@ -59695,6 +59696,159 @@ Výsledek: pravidlo zůstalo živé, ale nevrátilo se jako samostatný proces. 
 
 Vyber jedno pravidlo, které po pilotu zůstalo aktivní. Do třiceti minut mu napiš provozní kartu a najdi jeho jedno místo pravdy. Potom smaž nebo označ jako archiv všechny staré kopie: pilotní checklist, komentáře v ticketech, duplicitní wiki odstavce a osobní poznámky, které by mohly vrátit starou verzi pravidla. Na konci musí zůstat jedna aktuální otázka na místě, kde se opravdu rozhoduje.
 
+## Příloha: Kontrola obnoveného pravidla po několika použitích bez procesního nánosu
+
+Obnovené pravidlo po pilotu může vypadat zdravě, protože se dobře čte v šabloně. Skutečný test ale přijde až po několika běžných použitích: když ho použije někdo jiný než autor, když se práce zrychlí, když přijde výjimka a když tým zjistí, kolik pravidlo stojí času. Teprve tehdy se ukáže, jestli pravidlo opravdu chrání kvalitu, nebo jen přidalo další řádek do dokumentace.
+
+Špatná otázka zní: „Dodržují všichni nové pravidlo?“
+
+Lepší otázka zní: „Pomohlo pravidlo po několika použitích udělat lepší rozhodnutí za přiměřenou cenu?“
+
+Privacy-first kontrola pravidla nemá sledovat disciplínu lidí. Má ověřit, zda pravidlo pořád řeší původní problém, nezakládá novou datovou stopu a nebrání rychlé práci tam, kde už by stačila lepší šablona, komponenta nebo produktová oprava.
+
+### Vezmi malý vzorek skutečných použití
+
+Nečekej na velký audit. Stačí tři až pět použití pravidla v běžné práci. Ideální vzorek obsahuje:
+
+- jedno hladké použití, kde pravidlo jen potvrdilo správný směr,
+- jedno použití, kde pravidlo změnilo zadání nebo review,
+- jednu výjimku, nejasnost nebo obejití pravidla,
+- jedno použití člověkem, který pravidlo nepsal,
+- jeden případ, kde pravidlo nebylo potřeba, i když se formálně spustilo.
+
+Ke každému případu si zapiš jen pracovní výsledek. Nepotřebuješ exportovat celé tickety, support vlákna, chaty ani osobní poznámky. Stačí odkaz na místo práce, krátký popis rozhodnutí a verdikt, zda pravidlo pomohlo.
+
+Malá kontrolní tabulka:
+
+| Použití | Co se řešilo | Jak pravidlo pomohlo | Co stálo navíc | Datová stopa | Verdikt |
+| --- | --- | --- | --- | --- | --- |
+| 1 | dlouhý export dat | doplněn stav a retence do UI textu | 10 minut review | řádek v kartě | ponechat |
+| 2 | hromadný import | pravidlo bylo moc obecné | dopisování komentářů | žádná nová data | zúžit |
+| 3 | jednorázová interní akce | pravidlo se spustilo zbytečně | 15 minut čekání | poznámka v review | omezit trigger |
+
+Codyho komentář: Pokud kontrola pravidla potřebuje víc důkazů než samotná práce, pravidlo už možná nevychovává kvalitu. Možná jen pořizuje fotografie vlastního papírování. To je drahá forma sebevědomí.
+
+### Odděl účinek od poslušnosti
+
+Dodržení pravidla samo o sobě není výsledek. Výsledek je lepší rozhodnutí, méně nejasností, menší riziko, čistší datová stopa nebo rychlejší předání práce. Proto se při kontrole neptej, kdo zaškrtl políčko, ale co se díky pravidlu změnilo.
+
+Užitečné otázky:
+
+- Zabránilo pravidlo opakování původního problému?
+- Změnilo zadání dřív, než se chyba dostala do releasu?
+- Pomohlo novému člověku pochopit hranici bez výkladu autora?
+- Zmenšilo potřebu support vysvětlování, ručních oprav nebo dodatečných výjimek?
+- Udrželo data, logy, exporty a přístupy v menším rozsahu?
+
+Varovné signály:
+
+- pravidlo se sice vyplňuje, ale nikdo podle něj nemění rozhodnutí,
+- lidé ho obcházejí, protože je příliš široké nebo mimo místo práce,
+- vznikají nové tabulky jen kvůli důkazu, že pravidlo existuje,
+- pravidlo kryje chybu produktu, kterou by šlo opravit přímo,
+- kontrolní stopa pravidla obsahuje víc osobních detailů než původní práce.
+
+Pokud vidíš hlavně poslušnost bez účinku, nešroubuj pravidlo silněji. Nejprve ho zkrať, přesuň nebo nahraď konkrétní úpravou produktu.
+
+### Spočítej náklad pravidla bez přesného účetnictví
+
+Pravidlo může být správné, ale příliš drahé. Nemusíš dělat hodinový timesheet pro každého člověka. Stačí hrubě popsat, co pravidlo přidalo do práce:
+
+- kolik kroků navíc vzniklo,
+- jestli prodloužilo review,
+- jestli vyžadovalo nové oprávnění nebo nový přístup,
+- jestli přidalo nový dokument, log nebo export,
+- jestli vytvořilo další místo, které se musí udržovat,
+- jestli kvůli němu někdo čeká na konkrétního vlastníka.
+
+Náklad pravidla se dá zapsat jednou větou:
+
+| Typ nákladu | Příklad zápisu |
+| --- | --- |
+| Čas | Přidává přibližně 10 minut do review dlouhé akce. |
+| Tření | Nutí produkt a podporu sladit jednu větu o stavu akce. |
+| Dokumentace | Aktualizuje se jen šablona produktové karty, žádná nová stránka. |
+| Data | Nevzniká nová analytika, jen kontrolní řádek v kartě. |
+| Přístupy | Nevyžaduje nový admin přístup ani export produkčních dat. |
+
+Rozumné pravidlo může mít náklad. Nesmí ho ale schovávat. Když tým ví, co pravidlo stojí, dokáže rozhodnout, jestli jeho ochranná hodnota pořád dává smysl.
+
+### Zkontroluj výjimky jako produktový signál
+
+Jedna výjimka neznamená selhání pravidla. Opakovaná výjimka už je zpráva. Může říkat, že pravidlo je moc široké, že šablona leží na špatném místě, že produkt neřeší běžnou situaci, nebo že lidé potřebují jiný typ rozhodovací opory.
+
+Rozděl výjimky jednoduše:
+
+| Typ výjimky | Co pravděpodobně znamená | Další krok |
+| --- | --- | --- |
+| Oprávněná výjimka | pravidlo chrání hlavní případ, ale jeden okrajový scénář je jiný | doplnit krátkou hranici použití |
+| Opakovaná stejná výjimka | pravidlo neodpovídá realitě práce | zúžit nebo přepsat pravidlo |
+| Výjimka kvůli rychlosti | pravidlo je mimo hlavní tok práce | přesunout do šablony, komponenty nebo review otázky |
+| Výjimka kvůli datům | pravidlo vyžaduje moc detailů | ořezat kontrolní stopu |
+| Výjimka kvůli produktu | pravidlo nahrazuje chybějící stav, text nebo funkci | otevřít produktovou opravu |
+
+Privacy-first hodnota je tady praktická: výjimky nemají sloužit k detailnímu sledování chování lidí. Slouží k opravě systému. Jakmile začneš z výjimek dělat personální statistiku, utekl ti cíl a nechal na stole tabulku. Není to dobrý obchod.
+
+### Rozhodni jedním provozním verdiktem
+
+Po několika použitích musí kontrola skončit rozhodnutím. Ne další neurčitou větou „budeme sledovat“. Ta často znamená jen to, že nikdo nechce pravidlo ani opravit, ani zrušit.
+
+Použij jeden z verdiktů:
+
+| Verdikt | Kdy ho použít | Co udělat |
+| --- | --- | --- |
+| Ponechat | pravidlo opakovaně mění rozhodnutí a náklad je přiměřený | nechat jedno místo pravdy a další revizi jen při triggeru |
+| Zúžit | pravidlo pomáhá jen u části případů | zpřesnit spouštěč a odstranit zbytečné použití |
+| Přesunout | pravidlo je správné, ale leží mimo práci | vložit do šablony, komponentového checklistu, runbooku nebo support makra |
+| Automatizovat opatrně | pravidlo je mechanické a opakované | navrhnout malou automatizaci bez širších dat a s ručním rozhodnutím |
+| Opravit produkt | pravidlo opakovaně nahrazuje chybějící stav, text nebo funkci | otevřít produktovou kartu a pravidlo držet jen jako dočasnou pojistku |
+| Ukončit | pravidlo nepřináší rozhodnutí nebo už nemá riziko | archivovat důvod konce a uklidit jeho nosiče |
+
+U každého verdiktu napiš jednu zavírací větu: „Po ___ použitích pravidlo ___, protože ___. Další trigger je ___.“ Krátké, čitelné, bez předstírání vědecké přesnosti.
+
+### Příklad: Pravidlo pro dlouhé akce po měsíci používání
+
+Situace: Pravidlo „U dlouhé akce popiš stav, rušení a konec dočasných dat“ je měsíc v šabloně produktové karty. Tým ho použil u exportu, importu a hromadné změny položek.
+
+Kontrolní vzorek:
+
+| Použití | Výsledek |
+| --- | --- |
+| Export | Pravidlo pomohlo doplnit jasný stav „připravujeme / hotovo / selhalo“ a větu o expiraci souboru. |
+| Import | Pravidlo bylo užitečné pro chybový stav, ale část o rušení se nehodila. |
+| Hromadná změna | Pravidlo odhalilo, že produkt neumí dobře ukázat průběh akce. |
+| Nový vlastník | Otázku pochopil bez vysvětlení, ale nevěděl, kde najít retenční standard pro dočasné soubory. |
+
+Verdikt:
+
+| Pole | Zápis |
+| --- | --- |
+| Rozhodnutí | Zúžit a přesunout část pravidla. |
+| Proč | Stav a retence pomáhají vždy, rušení jen u akcí, které uživatel opravdu může zastavit. |
+| Úprava | V produktové kartě zůstane otázka na stav a retenci; rušení se přesune jako podmíněná otázka. |
+| Produktová karta | Otevřít malou opravu průběhového stavu u hromadných změn. |
+| Datová stopa | Bez nové analytiky; stačí odkaz na tři produktové karty a zavírací věta. |
+| Další trigger | Třetí nová dlouhá akce mimo šablonu nebo další zákaznický dotaz na průběh. |
+
+Výsledek: pravidlo zůstalo užitečné, ale ztratilo přebytečnou část. Místo aby tým zpřísnil kontrolu, opravil spouštěč a otevřel jednu produktovou změnu. Tak má pravidlo pracovat: chvíli chrání, pak ukáže, co má být jednodušší.
+
+### Checklist: Kontrola obnoveného pravidla po několika použitích
+
+- [ ] Zkontroloval jsem tři až pět skutečných použití pravidla.
+- [ ] Neexportoval jsem celé tickety, chaty, support vlákna ani osobní poznámky bez jasného účelu.
+- [ ] Rozlišil jsem účinek pravidla od pouhého zaškrtnutí políčka.
+- [ ] Popsal jsem náklad pravidla: čas, tření, dokumentaci, data a přístupy.
+- [ ] Výjimky jsem četl jako signál systému, ne jako osobní selhání.
+- [ ] Ověřil jsem, že pravidlo nezaložilo nové sledování lidí nebo zákazníků.
+- [ ] Zkontroloval jsem, jestli pravidlo nenahrazuje produktovou opravu.
+- [ ] Vybral jsem jeden verdikt: ponechat, zúžit, přesunout, automatizovat opatrně, opravit produkt nebo ukončit.
+- [ ] Uklidil jsem staré kopie pravidla, pokud se verdikt dotkl jeho znění nebo místa použití.
+- [ ] Další kontrola je navázaná na trigger, ne na neurčité „budeme sledovat“.
+
+### Mini úkol
+
+Vyber jedno obnovené pravidlo, které už se použilo aspoň třikrát. Do dvaceti minut napiš kontrolu ve formátu: tři použití, jedna výjimka, jeden náklad, jedna datová stopa, jeden verdikt. Pokud verdikt zní „ponechat“, smaž zbytečné kontrolní poznámky. Pokud zní „zúžit“ nebo „přesunout“, uprav jedno místo pravdy ještě dnes. Pokud zní „opravit produkt“, otevři jednu malou produktovou kartu a pravidlo označ jako dočasnou pojistku.
+
 ## Zdroje
 
 - IETF RFC 9110: HTTP Semantics - význam HTTP přesměrování a stavů včetně `410 Gone` pro zdroje, které už nejsou dostupné: https://www.rfc-editor.org/rfc/rfc9110.html
@@ -59888,6 +60042,8 @@ Vyber jedno pravidlo, které po pilotu zůstalo aktivní. Do třiceti minut mu n
 - Nielsen Norman Group: Onboarding Tutorials vs. Contextual Help - rozdíl mezi úvodními tutoriály a kontextovou pomocí: https://www.nngroup.com/articles/onboarding-tutorials/
 
 ## Pracovní log
+
+- 2026-07-27: Doplněna příloha o kontrole obnoveného pravidla po několika použitích bez procesního nánosu: malý vzorek skutečných použití, oddělení účinku od poslušnosti, hrubý výpočet nákladu pravidla, čtení výjimek jako produktového signálu, provozní verdikty, příklad pravidla pro dlouhé akce po měsíci, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro pravidlo po několika použitích. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
 - 2026-07-27: Doplněna příloha o převodu obnoveného pravidla do běžné práce bez nového procesu: provozní karta pravidla, jedno místo pravdy, minimální kontrolní stopa, revizní triggery navázané na změnu, příklad pravidla pro dlouhé akce v produktové šabloně, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro pravidlo po pilotu. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
