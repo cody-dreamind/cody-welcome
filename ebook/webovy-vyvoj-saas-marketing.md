@@ -203,6 +203,7 @@ Když se nechceš vracet do celé knihy, hledej konkrétní nástroj podle výst
 | Zrušit nebo sloučit zastaralé produktové pravidlo | „zastaralé pravidlo“, „pravidlo končí“ nebo „sloučení pravidel“ | rozhodnutí, které staré pravidlo odebrat, sloučit, archivovat nebo nahradit bez ztráty původního poučení |
 | Archivovat zrušené produktové pravidlo bez návratu staré pravdy | „archiv pravidla“, „zrušené pravidlo“ nebo „stará pravda“ | archivní záznam s důvodem konce, aktuální náhradou, datovým úklidem, odkazovým úklidem a hranicí návratu pravidla |
 | Znovu otevřít archivované pravidlo bez panického návratu procesu | „návrat archivovaného pravidla“, „archiv se vrací“ nebo „staré pravidlo znovu“ | re-entry karta s novým signálem, kontrolou dnešní náhrady, nejmenším zásahem a rozhodnutím, zda obnovit pravidlo, upravit produkt nebo archiv nechat zavřený |
+| Ověřit návrat archivovaného pravidla po pilotu | „pilot návratu pravidla“, „kontrola re-entry“ nebo „obnovené pravidlo hotovo“ | pilotní review, které rozhodne, zda se pravidlo zavře, zúží, přesune, promění v produktovou opravu nebo opravdu zůstane aktivní |
 
 Pravidlo pro práci s rejstříkem: otevři maximálně tři nalezené části, vyber jednu a zapiš výstup. Pokud po deseti minutách pořád skáčeš mezi odkazy, vrať se k tabulce „Kudy začít podle aktuální bolesti“ a zúž problém. E-book není buffet. Teda je, ale bez talíře si stejně odneseš jen chaos.
 
@@ -59447,6 +59448,126 @@ Výsledek: tým nevrátil starý široký checklist. Opravil místo, kde se uká
 
 Najdi jeden archivní záznam, který se v poslední době někdo pokusil vytáhnout zpět do práce. Do dvaceti minut napiš re-entry kartu: nový signál, dnešní zdroj pravdy, selhání náhrady, nejmenší zásah a verdikt. Pokud nemáš konkrétní nový signál, pravidlo neobnovuj. Místo toho doplň archivní záznam tak, aby příště lépe vysvětloval, proč pravidlo zůstává zavřené.
 
+## Příloha: Ověření návratu archivovaného pravidla po pilotu bez starého procesu
+
+Když se archivované pravidlo vrátí, nemá automaticky dostat trvalý stůl, židli a vlastní meeting. Návrat má být pilot. To znamená: jasný důvod, úzké použití, krátké kontrolní okno a dopředu popsaný způsob, jak pravidlo znovu zavřít.
+
+Špatná otázka zní: „Fungovalo pravidlo po návratu?“
+
+Lepší otázka zní: „Vyřešil pilot konkrétní riziko s menším nákladem, menší datovou stopou a menší procesní váhou než jiné řešení?“
+
+Pilot návratu pravidla je užitečný jen tehdy, když tým po krátkém období opravdu rozhodne. Jinak se z něj stane neformální obnova starého procesu. A neformální procesy jsou nejdražší: nikdo je nevlastní, všichni je obcházejí a data kolem nich zůstávají ležet déle, než kdo zamýšlel.
+
+### Nastav pilot předem
+
+Obnovené pravidlo má mít pilotní kartu ještě před prvním použitím. Pokud ji tým neumí napsat, pravidlo nejspíš nemá dost jasný důvod k návratu.
+
+| Pole | Co vyplnit |
+| --- | --- |
+| Důvod návratu | Jaký nový signál pravidlo vrací do práce. |
+| Rozsah pilotu | Které typy změn, šablon, zákaznických situací nebo releaseů pravidlo pokrývá. |
+| Místo použití | Kde se pravidlo objeví: zadání, review, runbook, support šablona, produktová karta. |
+| Co výslovně nepokrývá | Hranice, aby se pilot nerozlil do celého týmu. |
+| Ověřovaný výsledek | Jaká nejistota má po pilotu zmizet. |
+| Datová hranice | Jaké nové údaje se nesmí začít sbírat jen kvůli kontrole pravidla. |
+| Kontrolní okno | Po kolika použitích nebo po jaké době proběhne review. |
+| Stop pravidlo | Co musí být pravda, aby se pravidlo znovu zavřelo. |
+
+Dobrá pilotní karta je nepohodlně konkrétní. „Budeme víc hlídat dlouhé akce“ nestačí. „U tří dalších dlouhých akcí mimo exportní komponentu ověříme, zda nová otázka v produktové kartě odhalí chybějící stav a retenci dočasných dat“ už je použitelné.
+
+### Sleduj dopad práce, ne disciplínu lidí
+
+Pilot pravidla nemá měřit, kdo zapomněl zaškrtnout políčko. Má ukázat, jestli se díky pravidlu zlepšila práce.
+
+Užitečné signály:
+
+- méně dodatečných dotazů na stejnou nejasnost,
+- méně ručních oprav po review,
+- kratší cesta od nálezu k rozhodnutí,
+- jasnější veřejný text nebo support odpověď,
+- méně dočasných exportů a ručních dohledávání,
+- rychlejší zavření produktové karty bez nových otevřených rizik.
+
+Podezřelé signály:
+
+- počet vyplněných políček v checklistu,
+- pocit, že „teď jsme opatrnější“,
+- víc interních komentářů bez změny produktu,
+- nová tabulka, kterou nikdo mimo autora nečte,
+- ruční sledování jednotlivých lidí, zákazníků nebo session kvůli důkazu účinnosti.
+
+Codyho komentář: Když pilot pravidla potřebuje vlastní dashboard, pravděpodobně už se nepilotuje pravidlo, ale nový proces. A nový proces má být podezřelý, dokud neprokáže, že šetří víc práce, než vytváří.
+
+### Udělej review po skutečném použití
+
+Review neplánuj po libovolném datu, pokud se pravidlo mezitím nepoužilo. Potřebuješ pracovní vzorek. U malého týmu často stačí dvě až pět reálných použití, podle rizika a četnosti dané práce.
+
+Review karta:
+
+| Otázka | Dobrá odpověď |
+| --- | --- |
+| Kde se pravidlo použilo? | Konkrétní změny, stránky, support odpovědi nebo produktové karty. |
+| Jaký problém odhalilo? | Jeden nebo více nálezů, které by bez pravidla pravděpodobně prošly. |
+| Co se díky němu změnilo? | Opravený stav, text, datová hranice, přístup, šablona nebo rozhodnutí. |
+| Co stálo navíc? | Čas, review tření, dokumentace, ruční kontroly, nové logy nebo exporty. |
+| Jaká data vznikla? | Nové poznámky, screenshoty, reporty, logy nebo pracovní soubory a jejich retence. |
+| Kdo pravidlo pochopil bez autora? | Důkaz, že pravidlo není závislé na jednom člověku. |
+| Co lze zúžit? | Rozsah, formulace, místo použití, metrika nebo kontrolní frekvence. |
+| Jaký je verdikt? | Zavřít, zúžit, přesunout, přepsat, nahradit produktovou opravou, nebo ponechat aktivní. |
+
+Nejdůležitější řádek je „co stálo navíc“. Pravidlo může odhalit skutečné riziko a stejně nebýt dobrým dlouhodobým řešením. Pokud stojí hodně pozornosti, vrať se k produktu nebo šabloně a zkus problém odstranit blíž místu vzniku.
+
+### Rozhodni bez nostalgie
+
+Po pilotu existuje šest zdravých verdiktů:
+
+| Verdikt | Kdy ho zvolit | Další krok |
+| --- | --- | --- |
+| Znovu zavřít | Signál se nepotvrdil nebo zásah už není potřeba. | Doplnit archivní poznámku a odstranit pilotní instrukci z aktivní práce. |
+| Zúžit pravidlo | Pravidlo pomohlo jen v jedné konkrétní situaci. | Nechat ho pouze v dané šabloně, komponentě nebo runbooku. |
+| Přesunout pravidlo | Správná otázka byla na špatném místě. | Přemístit ji blíž k rozhodnutí, kde vzniká riziko. |
+| Přepsat pravidlo | Tým chápal účel, ale formulace vedla k šumu. | Nahradit obecnou větu konkrétní otázkou, příkladem a stop hranicí. |
+| Otevřít produktovou opravu | Pravidlo opakovaně kompenzuje slabinu produktu. | Založit kartu změny reality a pravidlo ponechat jen jako dočasnou pojistku. |
+| Ponechat aktivní | Riziko je opakované, dopad jasný a náklad malý. | Zapsat vlastníka, revizní trigger a retenci kontrolních stop. |
+
+Nejhorší verdikt je žádný verdikt. Pilot bez rozhodnutí nenápadně vytvoří pravidlo, které nikdo neschválil, nikdo neudržuje a nikdo se ho neodváží smazat.
+
+### Příklad: Dlouhé akce po dvou releasech
+
+Situace: Tým na dva release dočasně vrátil otázku „Je to dlouhá akce mimo existující komponentu?“ do produktové karty. Cílem bylo zjistit, jestli nová hromadná změna a podobné funkce potřebují samostatné pravidlo pro stav, rušení a retenci dočasných dat.
+
+Pilotní review:
+
+| Otázka | Zápis |
+| --- | --- |
+| Kde se pravidlo použilo? | U hromadné změny položek a u importu štítků. |
+| Jaký problém odhalilo? | U importu štítků chyběla viditelná informace, kdy se dočasný soubor smaže. |
+| Co se díky němu změnilo? | Produktová karta dostala povinný řádek „stav a konec dočasných dat“ pro dlouhé akce mimo export. |
+| Co stálo navíc? | Asi deset minut v produktovém review, žádný nový dashboard ani nová událost. |
+| Jaká data vznikla? | Dvě interní poznámky v kartách releaseů, bez screenshotů zákaznických dat. |
+| Kdo pravidlo pochopil bez autora? | Nový vlastník importu ho použil podle šablony bez vysvětlování. |
+| Co lze zúžit? | Pravidlo nemusí být v obecném review, stačí v šabloně pro dlouhé akce. |
+| Verdikt | Zúžit a přesunout do šablony produktové karty pro dlouhé akce; pilotní checklist odstranit. |
+
+Výsledek: staré široké pravidlo se nevrátilo. Jeho užitečná část se usadila v konkrétní šabloně, kde vzniká riziko. Tým zároveň nezavedl nové sledování lidí ani další analytickou vrstvu.
+
+### Checklist: Ověření návratu archivovaného pravidla
+
+- [ ] Pravidlo mělo pilotní rozsah, ne neomezený návrat.
+- [ ] Review proběhlo po reálném použití, ne jen po datu v kalendáři.
+- [ ] Hodnotil jsem dopad na práci, ne poslušnost při vyplňování checklistu.
+- [ ] Zkontroloval jsem náklad pravidla: čas, tření, dokumentaci, logy, exporty a přístupy.
+- [ ] Nevzniklo nové měření jednotlivých lidí, zákazníků nebo session kvůli důkazu účinnosti.
+- [ ] Pokud pravidlo pomohlo, zúžil jsem ho na místo, kde opravdu rozhoduje.
+- [ ] Pokud pravidlo jen maskovalo slabinu produktu, otevřel jsem produktovou opravu.
+- [ ] Pilotní poznámky mají retenci nebo jasné místo v dokumentaci.
+- [ ] Starý archivní záznam byl doplněn o výsledek návratu.
+- [ ] Po review existuje jeden verdikt a žádná dvojí pravda.
+
+### Mini úkol
+
+Vezmi jedno pravidlo, které se nedávno vrátilo z archivu nebo z „lessons learned“ poznámek. Napiš mu pilotní review v osmi řádcích: kde se použilo, co odhalilo, co změnilo, co stálo navíc, jaká data vznikla, kdo ho pochopil bez autora, co lze zúžit a jaký je verdikt. Pokud neumíš doložit skutečné použití, pravidlo zatím nevracej do běžného provozu.
+
 ## Zdroje
 
 - IETF RFC 9110: HTTP Semantics - význam HTTP přesměrování a stavů včetně `410 Gone` pro zdroje, které už nejsou dostupné: https://www.rfc-editor.org/rfc/rfc9110.html
@@ -59640,6 +59761,8 @@ Najdi jeden archivní záznam, který se v poslední době někdo pokusil vytáh
 - Nielsen Norman Group: Onboarding Tutorials vs. Contextual Help - rozdíl mezi úvodními tutoriály a kontextovou pomocí: https://www.nngroup.com/articles/onboarding-tutorials/
 
 ## Pracovní log
+
+- 2026-07-27: Doplněna příloha o ověření návratu archivovaného pravidla po pilotu bez starého procesu: pilotní karta návratu, měření dopadu práce místo disciplíny lidí, review po skutečném použití, šest verdiktů, příklad dlouhé akce po dvou releasech, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro kontrolu re-entry pilotu. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
 - 2026-07-27: Doplněna příloha o návratu archivovaného pravidla bez panického obnovení procesu: rozlišení nového signálu od starého strachu, re-entry karta, kontrola dnešní náhrady, pět verdiktů, příklad návratu pravidla pro dlouhé akce, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro znovuotevření archivovaného pravidla. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
