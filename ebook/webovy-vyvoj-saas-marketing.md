@@ -211,6 +211,7 @@ Když se nechceš vracet do celé knihy, hledej konkrétní nástroj podle výst
 | Zapsat rozhodnutí o automatizovaném produktovém pravidle | „rozhodovací záznam pravidla“, „proč kontrola běží“ nebo „automatizační ADR pravidla“ | krátký záznam účelu, rozsahu, datové hranice, pravomoci, vlastníka, revize a vypnutí bez opisování celé historie pilotu |
 | Revidovat automatizační ADR po změně produktu | „ADR po změně produktu“, „pravidlo po nové funkci“ nebo „automatizační rozhodnutí stárne“ | krátká revize, která ověří, zda účel, rozsah, vstupy, pravomoc, výjimky a vypnutí automatizovaného pravidla pořád odpovídají realitě produktu |
 | Převést revizi ADR do změny automatizace | „změna po revizi ADR“, „revize nestačí“ nebo „upravit automatizaci“ | malý změnový balík, který z revize udělá konkrétní úpravu pravidla, testů, textů, datové hranice a úklidu bez rozšíření dohledu |
+| Uzavřít změnu automatizace po pilotu | „pilot změny automatizace“, „změna automatizace hotovo“ nebo „zavřít pilot pravidla“ | zavírací rozhodnutí, zda změna zůstane, zúží se, přepne pravomoc, vrátí ručně nebo se vypne včetně úklidu dat a dokumentace |
 
 Pravidlo pro práci s rejstříkem: otevři maximálně tři nalezené části, vyber jednu a zapiš výstup. Pokud po deseti minutách pořád skáčeš mezi odkazy, vrať se k tabulce „Kudy začít podle aktuální bolesti“ a zúž problém. E-book není buffet. Teda je, ale bez talíře si stejně odneseš jen chaos.
 
@@ -60983,6 +60984,159 @@ Výsledek: automatizace chrání nové rozhodnutí, ale nepřibrala zbytečná d
 
 Vezmi jednu revizní kartu automatizačního ADR a přepiš ji na změnový balík. Do třiceti minut vyplň čtyři vrstvy: pravidlo, technické provedení, datová hranice a místo pravdy. Potom napiš jednu změnovou větu ve tvaru `měníme / protože / neměníme / data navíc / první ověření / návrat zpět`. Pokud v poli `data navíc` vyjde ano, zastav se a navrhni nejdřív variantu bez nových dat.
 
+## Příloha: Uzavření změny automatizace po pilotu bez automatického vítězství
+
+Pilot změněné automatizace není hotový ve chvíli, kdy skript párkrát doběhne zeleně. Hotový je až tehdy, když tým rozhodne, co se změnou dál, uklidí pilotní stopy a přepíše místo pravdy tak, aby se příští člověk nemusel ptát autora skriptu, co tím básník chtěl.
+
+Špatná otázka zní: „Prošlo to, můžeme to nechat běžet?“
+
+Lepší otázka zní: „Pomohla změna skutečné práci dost na to, aby si zasloužila běžný provoz?“
+
+Rozdíl je praktický. První otázka oslavuje technický běh. Druhá se ptá na hodnotu, šum, datovou stopu a vlastnictví. Automatizace, která projde testy, ale přidá týmu další hluk, není hotová. Je jen přesnější způsob, jak se vyrušovat.
+
+### Vrať se k pilotnímu slibu
+
+Na začátku pilotu měla existovat změnová věta: co měníme, proč, co neměníme, jaká data používáme, jak ověříme dopad a jak se vrátíme zpět. Při uzavření začni právě tam. Ne v logu běhů, ne v debatě nad jedním zvláštním případem, ne v pocitu, že „už to asi funguje“.
+
+Zavírací karta může být malá:
+
+| Pole | Otázka |
+| --- | --- |
+| Původní slib | Jakou práci měla změna zlepšit? |
+| Skutečný dopad | Co se v práci opravdu změnilo? |
+| Šum | Kolik upozornění nebo výjimek nepomohlo k rozhodnutí? |
+| Datová hranice | Zůstaly vstupy, výstupy a logy ve slíbeném minimu? |
+| Lidský zásah | Kde člověk musel opravovat automatizaci místo práce? |
+| Dokumentace | Které místo pravdy je po pilotu aktuální? |
+| Verdikt | Co se stane se změnou od teď? |
+
+Když nedokážeš vyplnit `skutečný dopad`, pilot ještě nic nedokázal. Nevadí. V takovém případě je poctivější prodloužit pilot s menším rozsahem nebo se vrátit k ručnímu postupu, než z toho udělat tichou povinnost pro všechny.
+
+### Rozhodni podle práce, ne podle zelených běhů
+
+Zelený běh říká, že automatizace technicky prošla. Neříká, že pomohla produktu, supportu, bezpečnosti nebo zákazníkovi. Při uzavření proto použij provozní verdikt, ne náladu.
+
+| Verdikt | Kdy ho použít | Co udělat |
+| --- | --- | --- |
+| Ponechat | změna opravila skutečné tření, šum je nízký a datová hranice drží | převést do běžného provozu a nastavit revizní trigger |
+| Zúžit | funguje jen pro část situací nebo dává moc výjimek | omezit rozsah, snížit pravomoc a upravit testy |
+| Přepnout pravomoc | pravidlo je správné, ale tým potřebuje silnější nebo slabší zásah | změnit tip, varování nebo blokaci s novým kontrolním oknem |
+| Vrátit ručně | automatizace neumí spolehlivě rozlišit situace bez dalších dat | vypnout běh a nechat pravidlo v checklistu nebo review |
+| Přepsat | problém je reálný, ale pravidlo míří vedle | upravit pravidlo před další technickou změnou |
+| Vypnout | změna nepomohla, přidala hluk nebo rozšířila datovou stopu | vypnout, uklidit výstupy a zapsat poučení |
+
+> Codyho komentář: „Automatizace už běží, tak ji necháme“ je pohodlná věta. Taky je to způsob, jak vyrábět provozní sediment. Běžící věc bez rozhodnutí není kvalita. Je to jen zvyk s cronem.
+
+### Udělej zavírací balík
+
+Po verdiktu připrav malý balík změn. Nemusí to být velký release, ale musí uzavřít všechny vrstvy, kterých se pilot dotkl.
+
+| Vrstva | Co zavřít |
+| --- | --- |
+| Pravidlo | finální formulace, výjimky, stop pravidlo a hranice pravomoci |
+| Skript nebo kontrola | konfigurace, testy, alerty, fallback a odstranění pilotních větví |
+| Data | vstupy, výstupy, logy, retence, přístupy a dočasné exporty |
+| Dokumentace | ADR, runbook, šablona, support odpověď a případný veřejný text |
+| Backlog | další opravy, které pilot otevřel, ale do uzavření nepatří |
+
+Zavírací balík má jednu důležitou vlastnost: oddělí hotovo od později. Pokud pilot ukázal tři nové nápady, nezabaluj je do stejného kroku. Zapiš je jako samostatné karty. Jinak se z pilotu stane tunel, na jehož konci čeká další pilot. Krásné pro milovníky tabulek, horší pro všechny ostatní.
+
+### Přepnutí pravomoci dělej jako vlastní změnu
+
+Nejcitlivější část uzavření bývá pravomoc. Tip, varování a blokace nejsou jen intenzita stejné věci. Jsou to různé produktové režimy.
+
+| Přepnutí | Riziko | Bezpečný postup |
+| --- | --- | --- |
+| Tip na varování | víc hluku v běžné práci | nejdřív zkontroluj falešná upozornění a jasnost textu |
+| Varování na blokaci | zastavení práce při chybě pravidla | povol jen pro jasné případy s ověřeným fallbackem |
+| Blokace na varování | menší ochrana proti riziku | napiš, kdo přebírá ruční kontrolu a dokdy |
+| Automatický zásah na návrh | ztráta rychlosti, ale víc kontroly | zachovej ruční rozhodnutí a smaž nepotřebné akční tokeny |
+| Návrh na automatický zásah | největší riziko tichého autopilota | vyžaduj rollback, auditní stopu, limit rozsahu a krátké kontrolní okno |
+
+U privacy-first provozu platí jednoduché pravidlo: čím větší pravomoc automatizace má, tím menší má mít rozsah dat a tím jasnější musí být vypínač. Automatizace, která může jednat sama, nesmí zároveň nenápadně rozšiřovat vstupy „pro lepší kontext“.
+
+### Ukliď datovou stopu pilotu
+
+Pilot často vytvoří dočasné věci: výpisy varování, ruční exporty, ladicí logy, testovací artefakty, dočasné výjimky, sdílené odkazy nebo poznámky v pracovních kanálech. Pokud je neuklidíš, pilot sice skončí, ale data zůstanou žít vlastním životem.
+
+Úklid proveď podle účelu:
+
+| Stopa | Co udělat |
+| --- | --- |
+| Pilotní logy | ponechat jen agregovaný výsledek nebo krátký technický důkaz podle retenčního pravidla |
+| Dočasné exporty | smazat, nebo přesunout do řízeného archivu s účelem a koncem životnosti |
+| Výjimky | zavřít staré výjimky, znovu schválit jen ty, které pořád mají důvod |
+| Testovací data | ponechat syntetickou testovací sadu, odstranit dočasné kopie a ladicí soubory |
+| Přístupy | odebrat pilotní tokeny, role a sdílení, které už nejsou nutné |
+| Upozornění | zrušit pilotní kanály, štítky nebo notifikace, které by dál rušily tým |
+
+Neukládej celý pilot „pro jistotu“. Ulož rozhodnutí, malý důkaz a poučení. To stačí pro budoucí audit i pro příštího vlastníka. Zbytek je datová nostalgia, a ta fakt nevypadá líp, když má hezkou složku.
+
+### Přepiš místa pravdy
+
+Po uzavření musí být jasné, podle čeho se tým řídí od zítřka. Zkontroluj hlavně:
+
+- automatizační ADR,
+- runbook běžného běhu,
+- šablonu nebo formulář, který pravidlo kontroluje,
+- testovací scénáře,
+- support nebo sales odpovědi,
+- veřejné trust texty, pokud pravidlo podporuje veřejný slib,
+- backlog položky, které vznikly z pilotu.
+
+Do každého místa nepiš celou historii. Stačí cílová věta:
+
+`Kontrola dočasných exportů od 2026-07-27 varuje při chybějícím typu příjemce a blokuje jen chybějící retenční datum; nečte obsah exportu ani identitu příjemce. Další revize se spustí při změně exportní šablony nebo po třech oprávněných výjimkách za měsíc.`
+
+Tahle věta dává provozní pravdu, datovou hranici i revizní trigger. Nepotřebuje k tomu román o tom, jak se tým tři týdny přel o název pole.
+
+### Příklad: Retenční kontrola po pilotu
+
+Situace: Tým čtyři týdny pilotoval změnu kontroly dočasných exportů. Nově se kontroloval typ příjemce exportu. Kontrola měla jen varovat, ne blokovat.
+
+Výsledky pilotu:
+
+| Signál | Zjištění |
+| --- | --- |
+| Oprávněná varování | 7 exportních karet nemělo typ příjemce |
+| Falešná varování | 1 šablona používala starý název pole |
+| Výjimky | 2 oprávněné výjimky pro starší zákaznický proces |
+| Datová hranice | kontrola nečetla obsah exportu ani e-mail příjemce |
+| Ruční zásah | vlastník dvakrát doplnil mapování staré šablony |
+| Dopad práce | support přestal ručně doptávat příjemce u nových exportů |
+
+Verdikt: ponechat změnu, ale zúžit blokaci. Kontrola bude dál varovat na chybějící typ příjemce. Blokace zůstane jen pro chybějící retenční datum, protože příjemce má ještě legitimní přechodné výjimky.
+
+Zavírací balík:
+
+| Vrstva | Uzavření |
+| --- | --- |
+| Pravidlo | Export musí mít účel, retenční datum a typ příjemce; chybějící retence blokuje, chybějící příjemce varuje. |
+| Skript | Odstranit pilotní debug výpis, doplnit test pro starý název pole, ponechat syntetické scénáře. |
+| Data | Smazat pilotní seznam varování, ponechat agregovaný počet v zavírací kartě. |
+| Dokumentace | Aktualizovat ADR, exportní šablonu a runbook jednou cílovou větou. |
+| Backlog | Samostatně otevřít úkol na sjednocení starých exportních šablon. |
+| Další revize | Spustit při změně exportní šablony nebo při více než třech výjimkách za měsíc. |
+
+Výsledek: změna zůstává užitečná, ale nepředstírá dokonalost. Tým nezískal nový sledovací systém, jen lepší kontrolu jedné pracovní hranice.
+
+### Checklist: Uzavření změny automatizace po pilotu
+
+- [ ] Vrátil jsem se k původní změnové větě a pilotnímu slibu.
+- [ ] Zapsal jsem skutečný dopad na práci, ne jen počet úspěšných běhů.
+- [ ] Spočítal jsem užitečná upozornění, falešná upozornění, výjimky a ruční opravy.
+- [ ] Ověřil jsem, že vstupy, výstupy a logy nepřekročily slíbenou datovou hranici.
+- [ ] Vybral jsem jasný verdikt: ponechat, zúžit, přepnout pravomoc, vrátit ručně, přepsat nebo vypnout.
+- [ ] Pokud se mění pravomoc, má změna vlastní důvod, rollback a krátké kontrolní okno.
+- [ ] Uklidil jsem pilotní logy, exporty, výjimky, testovací artefakty, tokeny a notifikační kanály.
+- [ ] Aktualizoval jsem ADR, runbook, šablony, testy a podpůrné texty na jednu cílovou pravdu.
+- [ ] Nové nápady z pilotu jsou samostatné backlog karty, ne přilepený rozsah.
+- [ ] Další revize je navázaná na změnu kontextu nebo návrat problému, ne na neurčitý pocit svědomí.
+
+### Mini úkol
+
+Vyber jednu pilotní změnu automatizace a do třiceti minut ji uzavři jednou kartou. Vyplň: původní slib, skutečný dopad, šum, datová hranice, lidský zásah, verdikt, úklid a další revize. Pokud verdikt zní „ponechat“, napiš zároveň jednu cílovou větu do ADR nebo runbooku. Pokud verdikt zní „vypnout“, smaž nebo naplánuj smazání pilotních výstupů dřív, než se z nich stane další zdroj pravdy.
+
 ## Zdroje
 
 - IETF RFC 9110: HTTP Semantics - význam HTTP přesměrování a stavů včetně `410 Gone` pro zdroje, které už nejsou dostupné: https://www.rfc-editor.org/rfc/rfc9110.html
@@ -61176,6 +61330,8 @@ Vezmi jednu revizní kartu automatizačního ADR a přepiš ji na změnový bal�
 - Nielsen Norman Group: Onboarding Tutorials vs. Contextual Help - rozdíl mezi úvodními tutoriály a kontextovou pomocí: https://www.nngroup.com/articles/onboarding-tutorials/
 
 ## Pracovní log
+
+- 2026-07-27: Doplněna příloha o uzavření změny automatizace po pilotu bez automatického vítězství: návrat k pilotnímu slibu, rozhodování podle dopadu práce místo zelených běhů, zavírací balík pro pravidlo, skript, data, dokumentaci a backlog, opatrné přepínání pravomoci automatizace, úklid pilotní datové stopy, aktualizace míst pravdy, příklad retenční kontroly po pilotu, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro zavření pilotu změněné automatizace. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
 - 2026-07-27: Doplněna příloha o převodu revize ADR do změny automatizace bez rozšíření dohledu: rozdělení výsledku revize na pravidlo, technické provedení, datovou hranici a místo pravdy, změnová věta před úpravou skriptu, postup úprav od pravidla k testům, omezení výstupu automatizace, pilotní okno, příklad nového pole v exportní šabloně, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro změnu po revizi ADR. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
