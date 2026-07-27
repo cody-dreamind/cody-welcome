@@ -149,6 +149,7 @@ Když se nechceš vracet do celé knihy, hledej konkrétní nástroj podle výst
 | Ověřit restartovanou automatizaci po pilotu | „kontrola po restartu automatizace“, „pilot automatizace hotovo“ nebo „restartovaný skript“ | rozhodnutí, zda automatizace po pilotu zůstane, zúží se, vrátí ručně, nebo se znovu vypne bez starých tokenů a datového šumu |
 | Převést úspěšný pilot automatizace do běžného provozu | „standardní provoz automatizace“, „automatizace po pilotu“ nebo „rutina ze skriptu“ | provozní karta automatizace s vlastníkem, revizním rytmem, limitem dat, stop pravidlem a plánem úklidu |
 | Udržet běžící automatizaci zdravou bez tichého driftu | „provozní drift automatizace“, „údržba běžící automatizace“ nebo „automatizace stárne“ | malá drift kontrola spouštěčů, vstupů, výstupů, logů, vlastníka a ručního postupu |
+| Ověřit stop pravidlo běžící automatizace bez setrvačnosti | „stop pravidlo automatizace“, „automatizace běží ze zvyku“ nebo „vypnutí bez dramatu“ | krátká kontrola, zda automatizace pořád splňuje podmínky pro běh, zúžení, ruční návrat nebo vypnutí |
 | Předat vlastnictví automatizace bez osiřelého skriptu | „změna vlastníka automatizace“, „osiřelý skript“ nebo „předání automatizace“ | předávací karta, ověření ručního postupu, kontrola tokenů, logů, výstupů a rozhodnutí, zda automatizace dál patří do provozu |
 | Stabilizovat automatizaci po změně vlastníka | „první měsíc po změně vlastníka automatizace“, „stabilizace automatizace“ nebo „nový vlastník automatizace“ | 30denní stabilizační okno, kontrola prvních běhů, skrytých ručních zásahů, datové hranice a rozhodnutí, zda novému vlastníkovi automatizace opravdu pomáhá |
 | Zvládnout změnu vstupu automatizace bez rozšíření dat | „změna vstupu automatizace“, „API se změnilo“ nebo „nový zdroj dat pro automatizaci“ | vstupní migrační karta s účelem, mapováním polí, datovým ořezem, testem výstupu, revokací starého vstupu a zavíracím rozhodnutím |
@@ -61284,6 +61285,127 @@ Výsledek: automatizace zůstává v provozu, ale nesnaží se být malým polic
 
 Vyber jednu automatizaci, která po pilotu zůstala běžet, a do třiceti minut jí napiš provozní údržbovou kartu. Vyplň účel, vlastníka, vstupy, výstupy, pravomoc, signály zdraví, revizní trigger a stop pravidlo. Potom smaž nebo naplánuj smazání jedné pilotní stopy, která už nevede k rozhodnutí. Pokud žádnou pilotní stopu nenajdeš, zkontroluj aspoň, jestli výstup automatizace pořád neukládá víc detailů, než tým skutečně používá.
 
+## Příloha: Kontrola stop pravidla automatizace bez setrvačnosti
+
+Stop pravidlo je slib, že automatizace nemusí žít věčně. V pilotu se píše docela snadno: když bude moc šumu, vypneme ji; když začne číst víc dat, zúžíme ji; když se původní problém nevrátí, vrátíme práci ručně. V běžném provozu se ale stop pravidlo často promění v ozdobu karty. Automatizace běží, výstupy chodí, nikdo se nezlobí, takže se pravidlo neotevře.
+
+Špatná otázka zní: „Pořád to nějak funguje?“
+
+Lepší otázka zní: „Nastala některá podmínka, kvůli které jsme si slíbili automatizaci zúžit, vrátit ručně nebo vypnout?“
+
+Privacy-first provoz potřebuje stop pravidlo kontrolovat stejně normálně jako poslední běh. Ne proto, že automatizace je podezřelá. Protože každá běžící automatizace drží oprávnění, vyrábí výstupy, ukládá stopy a tvaruje rozhodování týmu. Když její konec není reálná možnost, z nástroje se stává provozní návyk. A provozní návyk s tokenem je přesně ten typ pohodlí, který si zaslouží pravidelnou otázku.
+
+### Přepiš stop pravidlo na měřitelné podmínky
+
+Stop pravidlo typu „vypneme, když přestane dávat smysl“ je hezké, ale v provozu skoro nepoužitelné. Nikdo nechce být ten člověk, který oznámí, že věc „přestala dávat smysl“, když pořád posílá zelené zprávy.
+
+Lepší pravidlo má konkrétní podmínky:
+
+| Slabé pravidlo | Použitelnější pravidlo |
+| --- | --- |
+| Vypneme, když bude moc šumu. | Pokud falešná upozornění dva měsíce po sobě převýší užitečná, kontrola se vrací do ručního review. |
+| Zúžíme, když bude číst moc dat. | Pokud automatizace začne potřebovat nové pole mimo schválenou kartu, běh se pozastaví do datového review. |
+| Vrátíme ručně, když už nebude potřeba. | Pokud za tři revizní období nevznikne žádné rozhodnutí podle výstupu, automatizace se vypne nebo spojí s jinou rutinou. |
+| Opravíme, když ji lidé ignorují. | Pokud více než polovina výstupů skončí bez akce nebo vědomého odmítnutí, zúží se spouštěč nebo příjemce. |
+
+Stop pravidlo nemusí být matematicky dokonalé. Má být dost konkrétní, aby se podle něj dalo rozhodnout bez hádání o pocitu. V malém týmu často stačí ruční počítání posledních deseti výstupů. Přesnost na dvě desetinná místa tu nikomu nezachrání firmu.
+
+### Kontroluj stop pravidlo při revizi, ne až při incidentu
+
+Stop pravidlo se má otevřít ve chvíli, kdy je klid. Při incidentu už tým řeší dostupnost, zákazníka, oprávnění nebo chybný výstup. To není dobrý čas rozhodovat, jestli automatizace dlouhodobě patří do provozu.
+
+Praktický rytmus:
+
+| Okamžik | Co zkontrolovat |
+| --- | --- |
+| Měsíční nebo kvartální údržba | poslední výstupy, šum, výjimky, ruční zásahy a datová stopa |
+| Změna vstupu nebo výstupu | jestli stop pravidlo pořád sedí na nový tvar práce |
+| Změna vlastníka | jestli nový vlastník umí pravidlo použít bez autora skriptu |
+| Třetí podobná výjimka | jestli výjimky neříkají, že pravidlo je špatně navržené |
+| Nulový dopad po delší době | jestli automatizace pořád chrání reálné riziko, nebo jen posílá uklidňující tapetu |
+
+Když kontrola nenajde problém, napiš krátké „ponechat beze změny“ a další trigger. Nezakládej nový dashboard jen proto, abys dokázal, že stop pravidlo existuje. Stop pravidlo je brzda, ne fitness náramek pro skript.
+
+### Použij čtyři verdikty
+
+Kontrola stop pravidla nemá končit mlhou. Povolené verdikty drž krátké:
+
+| Verdikt | Kdy ho použít | Co následuje |
+| --- | --- | --- |
+| Ponechat | automatizace pořád vede k rozhodnutí a drží datovou hranici | zapsat další trigger nebo revizní období |
+| Zúžit | pomáhá, ale má moc široký spouštěč, vstup, výstup, příjemce nebo frekvenci | upravit kartu, runbook a testovací scénář |
+| Vrátit ručně | automatizace je užitečná jen občas nebo vyžaduje moc lidských oprav | popsat ruční postup a vypnout nebo pozastavit běh |
+| Vypnout | účel zmizel, výstupy se nepoužívají, riziko převýšilo užitek nebo vznikla lepší náhrada | zastavit běhy, uklidit tokeny, výstupy, dokumentaci a veřejné sliby |
+
+Nechybí tu „ještě uvidíme“? Nechybí. To není verdikt, to je odložené rozhodnutí v kabátě trpělivosti. Pokud opravdu potřebuješ další data, napiš přesně jaká, odkud, bez čeho se obejdeš a kdy rozhodneš. Jinak automatizace dál běží jen proto, že nikdo nechtěl být nepříjemně konkrétní.
+
+### Zkontroluj, jestli stop pravidlo nemotivuje ke sledování lidí
+
+Některá stop pravidla jsou na první pohled rozumná, ale potichu vedou ke sledování jednotlivců. Například:
+
+- vypnout, když konkrétní člověk nereaguje včas,
+- zúžit, když tým ignoruje výstupy,
+- eskalovat, když někdo opakovaně dělá chybu,
+- měřit přínos podle rychlosti jednotlivých reakcí.
+
+Tohle může rychle sklouznout do interního dohledu. Lepší je sledovat stav práce:
+
+| Rizikové měření | Privacy-first náhrada |
+| --- | --- |
+| kdo ignoroval upozornění | kolik výstupů zůstalo bez rozhodnutí |
+| kdo udělal chybu | jaký typ situace pravidlo nezvládlo |
+| kdo reaguje pomalu | jak dlouho výstup čeká ve stavu bez vlastníka |
+| který člověk má nejvíc výjimek | jaké výjimky se opakují a co říkají o pravidle |
+
+Cílem stop pravidla není hodnotit lidi. Cílem je rozhodnout, jestli automatizace pořád pomáhá práci. Pokud k tomu potřebuješ detailní profil chování jednotlivců, pravděpodobně kontroluješ špatnou věc.
+
+### Příklad: Stop pravidlo pro retenční kontrolu exportů
+
+Situace: Automatizace kontroluje dočasné exporty. Blokuje export bez retenčního data a varuje u chybějícího typu příjemce. V běžném režimu běží tři měsíce.
+
+Původní stop pravidlo:
+
+`Pokud falešná varování dva měsíce po sobě převýší užitečná, kontrola typu příjemce se vrací na ruční review. Pokud automatizace začne potřebovat obsah exportu nebo e-mail příjemce, běh se pozastaví do datového review.`
+
+Kontrola po třech měsících:
+
+| Signál | Zjištění | Dopad |
+| --- | --- | --- |
+| Užitečná varování | 5 za poslední měsíc | pořád pomáhají doplnit nejasný typ příjemce |
+| Falešná varování | 9 za poslední měsíc, 8 předchozí měsíc | stop pravidlo pro šum nastalo |
+| Výjimky | 1 opakovaná výjimka pro starý enterprise proces | není důvod rozšířit sběr dat |
+| Datová hranice | automatizace pořád nečte obsah exportu ani identitu příjemce | datová hranice drží |
+| Použití výstupu | varování u starých typů příjemce se často ručně zavírají | spouštěč je moc široký |
+
+Verdikt:
+
+| Oblast | Rozhodnutí |
+| --- | --- |
+| Typ příjemce | Vrátit kontrolu starých šablon na ruční review, automaticky varovat jen u nových exportních karet. |
+| Retenční datum | Blokaci ponechat beze změny. |
+| Datová hranice | Nepřidávat obsah exportu ani e-mail příjemce. |
+| Úklid | Smazat dočasný seznam falešných varování po zapsání agregovaného výsledku. |
+| Další kontrola | Po dalších dvou měsících nebo při změně exportní šablony. |
+
+Výsledek: automatizace nekončí celá. Jen se zúží část, která začala vyrábět šum. Tým nemusel přidat další data, další dohled ani další schůzku s názvem „retence sync“. Krása nudné údržby.
+
+### Checklist: Kontrola stop pravidla automatizace
+
+- [ ] Stop pravidlo je napsané jako konkrétní podmínka, ne jako pocit.
+- [ ] Kontrola proběhla v klidu, ne až během incidentu.
+- [ ] Prošel jsem poslední výstupy, šum, výjimky, ruční zásahy a datovou stopu.
+- [ ] Rozhodnutí sleduje stav práce, ne výkon jednotlivých lidí.
+- [ ] Zkontroloval jsem, jestli automatizace pořád vede k reálnému rozhodnutí.
+- [ ] Ověřil jsem, že nevznikla potřeba nových vstupů, logů nebo širších oprávnění.
+- [ ] Vybral jsem jeden verdikt: ponechat, zúžit, vrátit ručně nebo vypnout.
+- [ ] Pokud verdikt zní zúžit, upravím kartu, runbook a testovací scénář.
+- [ ] Pokud verdikt zní vrátit ručně nebo vypnout, existuje úklid běhů, tokenů, výstupů a dokumentace.
+- [ ] Další kontrola má trigger nebo datum, ne neurčité „někdy“.
+
+### Mini úkol
+
+Vyber jednu automatizaci, která běží déle než měsíc, a najdi její stop pravidlo. Pokud žádné nemá, napiš ho zpětně ve tvaru „pokud ___, uděláme ___“. Potom vezmi posledních deset výstupů nebo poslední měsíc běhů a ručně rozhodni: ponechat, zúžit, vrátit ručně nebo vypnout. Zapiš jeden důvod, jednu datovou hranici a další trigger. Pokud nedokážeš vybrat verdikt, automatizace pravděpodobně nemá dost jasný účel. To je dobrý nález, ne trapas.
+
 ## Zdroje
 
 - IETF RFC 9110: HTTP Semantics - význam HTTP přesměrování a stavů včetně `410 Gone` pro zdroje, které už nejsou dostupné: https://www.rfc-editor.org/rfc/rfc9110.html
@@ -61477,6 +61599,8 @@ Vyber jednu automatizaci, která po pilotu zůstala běžet, a do třiceti minut
 - Nielsen Norman Group: Onboarding Tutorials vs. Contextual Help - rozdíl mezi úvodními tutoriály a kontextovou pomocí: https://www.nngroup.com/articles/onboarding-tutorials/
 
 ## Pracovní log
+
+- 2026-07-27: Doplněna příloha o kontrole stop pravidla automatizace bez setrvačnosti: měřitelné podmínky pro ponechání, zúžení, ruční návrat nebo vypnutí automatizace, kontrola stop pravidla při běžné revizi místo incidentu, čtyři provozní verdikty, ochrana před sledováním lidí, příklad retenční kontroly exportů, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro stop pravidlo běžící automatizace. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
 - 2026-07-27: Doplněna příloha o údržbě ponechané automatizace po pilotu bez věčného sledování: převod pilotu na provozní údržbovou kartu, agregované signály zdraví místo dohledu nad lidmi, revizní triggery podle změny reality, ukončení mimořádné pilotní pozornosti, ruční náhradní cesta, kill switch, příklad retenční kontroly exportů v běžném režimu, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro ponechanou automatizaci v údržbě. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
