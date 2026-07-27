@@ -212,6 +212,7 @@ Když se nechceš vracet do celé knihy, hledej konkrétní nástroj podle výst
 | Revidovat automatizační ADR po změně produktu | „ADR po změně produktu“, „pravidlo po nové funkci“ nebo „automatizační rozhodnutí stárne“ | krátká revize, která ověří, zda účel, rozsah, vstupy, pravomoc, výjimky a vypnutí automatizovaného pravidla pořád odpovídají realitě produktu |
 | Převést revizi ADR do změny automatizace | „změna po revizi ADR“, „revize nestačí“ nebo „upravit automatizaci“ | malý změnový balík, který z revize udělá konkrétní úpravu pravidla, testů, textů, datové hranice a úklidu bez rozšíření dohledu |
 | Uzavřít změnu automatizace po pilotu | „pilot změny automatizace“, „změna automatizace hotovo“ nebo „zavřít pilot pravidla“ | zavírací rozhodnutí, zda změna zůstane, zúží se, přepne pravomoc, vrátí ručně nebo se vypne včetně úklidu dat a dokumentace |
+| Převést ponechanou automatizaci do běžné údržby | „údržba automatizace po pilotu“, „ponechaná automatizace“ nebo „automatizace v režimu“ | provozní údržbová karta s vlastníkem, revizním triggerem, signály zdraví, omezenou stopou a jasným koncem mimořádné pozornosti |
 
 Pravidlo pro práci s rejstříkem: otevři maximálně tři nalezené části, vyber jednu a zapiš výstup. Pokud po deseti minutách pořád skáčeš mezi odkazy, vrať se k tabulce „Kudy začít podle aktuální bolesti“ a zúž problém. E-book není buffet. Teda je, ale bez talíře si stejně odneseš jen chaos.
 
@@ -61137,6 +61138,152 @@ Výsledek: změna zůstává užitečná, ale nepředstírá dokonalost. Tým ne
 
 Vyber jednu pilotní změnu automatizace a do třiceti minut ji uzavři jednou kartou. Vyplň: původní slib, skutečný dopad, šum, datová hranice, lidský zásah, verdikt, úklid a další revize. Pokud verdikt zní „ponechat“, napiš zároveň jednu cílovou větu do ADR nebo runbooku. Pokud verdikt zní „vypnout“, smaž nebo naplánuj smazání pilotních výstupů dřív, než se z nich stane další zdroj pravdy.
 
+## Příloha: Údržba ponechané automatizace po pilotu bez věčného sledování
+
+Když pilot automatizace skončí verdiktem „ponechat“, práce nekončí. Jen se mění režim. Automatizace už nemá být zajímavý projekt, který každý sleduje v pilotním kanálu, ale obyčejná provozní pomůcka s vlastníkem, hranicí dat a jasným důvodem existence.
+
+Špatná otázka zní: „Jak zajistíme, aby se na ni nezapomnělo?“
+
+Lepší otázka zní: „Jak poznáme, že automatizace pořád pomáhá, aniž bychom kvůli ní sledovali víc práce než předtím?“
+
+Privacy-first údržba automatizace není další dashboard o dashboardu. Je to malý rytmus, který chrání tři věci: užitečnost, datovou hranici a možnost automatizaci klidně vypnout. Pokud jeden z těchto bodů zmizí, automatizace se pomalu mění z pomůcky na zvyk. A zvyk je v provozu nebezpečný hlavně tím, že se tváří jako zkušenost.
+
+### Přepiš pilot na provozní údržbovou kartu
+
+Zavírací balík pilotu říká, co se stalo. Provozní karta říká, jak se s automatizací pracuje odteď. Nemá opisovat celou historii, ale musí dát novému vlastníkovi dost informací, aby věděl, kdy nechat věc běžet, kdy ji zúžit a kdy ji vypnout.
+
+Minimální karta:
+
+| Pole | Co napsat |
+| --- | --- |
+| Účel | Jakou konkrétní práci automatizace chrání nebo zrychluje. |
+| Vlastník | Kdo rozhoduje o změně pravidla, pravomoci a vypnutí. |
+| Místo běhu | Kde automatizace běží a kde člověk vidí výsledek. |
+| Vstupy | Jaká data čte a která data výslovně nečte. |
+| Výstupy | Co posílá, komu a s jakou retencí. |
+| Pravomoc | Tip, varování, blokace, návrh akce nebo automatický zásah. |
+| Signály zdraví | Podle čeho se pozná, že pořád pomáhá. |
+| Revizní trigger | Co spustí kontrolu mimo běžný rytmus. |
+| Stop pravidlo | Kdy se automatizace zúží, vrátí ručně nebo vypne. |
+
+Karta má být krátká. Pokud se do ní nevejde účel jednou větou, automatizace pravděpodobně dělá víc než jednu věc. V takovém případě ji rozděl aspoň mentálně: jedna část chrání riziko, druhá šetří práci, třetí vyrábí report. Každá část může mít jiný důvod i jiný konec životnosti.
+
+### Nastav signály zdraví místo plošného dohledu
+
+Udržovat automatizaci neznamená měřit každého člověka, kterého se dotkne. Potřebuješ jen tolik signálů, aby šlo rozhodnout, jestli automatizace pořád plní účel.
+
+Dobré signály:
+
+| Signál | Co říká | Privacy-first poznámka |
+| --- | --- | --- |
+| Počet užitečných zásahů | Automatizace řeší skutečný problém. | Stačí agregace za období, ne seznam lidí. |
+| Počet falešných zásahů | Pravidlo obtěžuje nebo nerozumí realitě. | Ukládej typ situace, ne osobní detaily. |
+| Počet ručních override | Lidé potřebují výjimky. | Výjimka má důvod a konec, ne trvalý profil týmu. |
+| Čas do opravy | Výstup vede k akci, nebo jen hnije. | Sleduj stav úkolu, ne rychlost jednotlivce. |
+| Změny vstupních dat | Automatizace možná čte jinou realitu než dřív. | Kontroluj schéma a účel polí, ne obsah záznamů. |
+| Návrat starého problému | Původní bolest se vrací. | Pracuj se vzorkem případů a rozhodnutím, ne s plošným sledováním. |
+
+Naopak pozor na metriky typu „kdo ignoroval upozornění“, „kdo nejčastěji dělá chyby“ nebo „který tým má nejhorší skóre“. Pokud automatizace začne měřit lidi místo práce, změnila produktovou funkci v interní dohled. To je přesně ten moment, kdy má zaznít: zastavit, zúžit, přepsat.
+
+### Revizi spouštěj změnou reality, ne pocitem viny
+
+Automatizace nepotřebuje každý týden poradní slavnost. Potřebuje jasné triggery, které říkají, že se změnil kontext.
+
+Typické spouštěče revize:
+
+| Trigger | Proč na něm záleží |
+| --- | --- |
+| Změna formuláře, šablony nebo datového modelu | Automatizace může číst staré pole nebo přehlédnout nové riziko. |
+| Změna pravomoci | Tip, varování, blokace a automatický zásah mají jiné riziko. |
+| Nový typ zákazníka nebo workspace | Pravidlo může být příliš úzké nebo příliš tvrdé. |
+| Více výjimek za období | Realita se opakovaně nevejde do pravidla. |
+| Nárůst falešných upozornění | Automatizace vyrábí šum a oslabuje důvěru. |
+| Změna veřejného slibu | Trust text, dokumentace nebo smlouva mohou říkat něco jiného než kontrola. |
+| Odchod vlastníka | Nikdo nesmí vlastnit automatizaci jen v hlavě. |
+
+Vedle triggerů může existovat lehká periodická kontrola, třeba měsíční nebo kvartální. Ale její cíl není dokazovat, že tým je pečlivý. Cíl je položit čtyři věty: pořád řešíme stejný problém, pořád čteme stejná data, pořád má výstup příjemce, pořád víme, jak to vypnout.
+
+### Ukonči mimořádnou pozornost
+
+Po pilotu bývá kolem automatizace zvýšený provozní ruch: zvláštní kanál, dočasný dashboard, detailní logy, ruční export vyhodnocení, krátká denní kontrola. To může být v pilotu fér. V běžném provozu je to často už jen další forma nepořádku.
+
+Při převodu do údržby zruš nebo zúž:
+
+- pilotní komunikační kanál,
+- dočasné denní reporty,
+- ladicí výpisy,
+- zvláštní štítky pro každý zásah,
+- ruční exporty výsledků,
+- nadbytečné role a tokeny,
+- přechodné výjimky bez nového důvodu.
+
+Nech jen to, co vede k rozhodnutí. Pokud nikdo za poslední měsíc neotevřel detailní report a žádné stop pravidlo na něm nestojí, report pravděpodobně nepotřebuješ. Gratuluju, objevil jsi digitální prach. Vysaj ho, ideálně bez nového nástroje na vysávání.
+
+### Zachovej ruční cestu a vypínač
+
+Běžící automatizace nesmí být jediný způsob, jak udělat práci. I když funguje dobře, potřebuje ruční postup pro poruchu, výjimku nebo změnu kontextu. Ruční cesta nemusí být pohodlná, ale musí být známá.
+
+Zapiš:
+
+| Situace | Co má být jasné |
+| --- | --- |
+| Automatizace neběží | Kdo to pozná, jak se práce dočasně udělá ručně a kde je stav. |
+| Automatizace blokuje chybně | Kdo může blokaci obejít, s jakým důvodem a dokdy. |
+| Automatizace posílá šum | Kdo ji může ztišit, zúžit nebo vrátit na tip. |
+| Automatizace čte nové pole | Kdo schvaluje datovou hranici před pokračováním. |
+| Vlastník není dostupný | Kdo má záskok a jaké má limity. |
+| Automatizace se vypíná | Jak se zruší běhy, tokeny, výstupy, dokumentace a veřejné sliby. |
+
+Kill switch bez runbooku je jen hezké tlačítko pro odvážné. Runbook bez kill switche je zase uklidňující text pro chvíli, kdy už je pozdě. Potřebuješ obojí.
+
+### Příklad: Retenční kontrola exportů v běžném režimu
+
+Situace: Tým po pilotu ponechal automatizaci, která kontroluje dočasné exporty. Blokuje export bez retenčního data a varuje u chybějícího typu příjemce. Kontrola nečte obsah exportu ani identitu příjemce.
+
+Provozní karta:
+
+| Pole | Zápis |
+| --- | --- |
+| Účel | Zabránit dočasným exportům bez jasného konce životnosti a příjemcového typu. |
+| Vlastník | Produktový provoz; bezpečnost schvaluje změnu datové hranice nebo blokace. |
+| Místo běhu | Kontrola exportní karty před odesláním a noční agregovaný report výjimek. |
+| Vstupy | Účel exportu, retenční datum, typ příjemce, stav výjimky; ne obsah exportu ani e-mail příjemce. |
+| Výstupy | Blokace u chybějící retence, varování u chybějícího typu příjemce, agregovaný počet výjimek měsíčně. |
+| Pravomoc | Blokace jen u chybějící retence, varování u příjemce. |
+| Signály zdraví | Užitečná varování, falešná varování, výjimky, staré exporty bez zavření. |
+| Revizní trigger | Změna exportní šablony, více než tři výjimky měsíčně nebo změna veřejného trust textu. |
+| Stop pravidlo | Pokud falešná varování dva měsíce po sobě převýší užitečná, kontrola se vrací na ruční review. |
+
+Mimořádná pozornost po pilotu:
+
+| Pilotní stopa | Rozhodnutí |
+| --- | --- |
+| Denní ladicí výpis | Smazat. |
+| Pilotní seznam všech varování | Smazat po zapsání agregovaného výsledku. |
+| Dočasný kanál | Zavřít a odkázat na runbook. |
+| Testovací sada | Ponechat jen syntetické scénáře. |
+| Výjimky z pilotu | Znovu schválit dvě, ostatní zavřít. |
+
+Výsledek: automatizace zůstává v provozu, ale nesnaží se být malým policejním oddělením. Chrání jednu hranici, má vlastníka, ví, kdy se znovu otevře, a neukládá detailní historii lidí jen proto, že umí poslat report.
+
+### Checklist: Údržba ponechané automatizace po pilotu
+
+- [ ] Pilotní zavírací karta je převedená na krátkou provozní údržbovou kartu.
+- [ ] Účel automatizace je napsaný jednou pracovní větou.
+- [ ] Existuje vlastník pravidla, pravomoci, datové hranice a vypnutí.
+- [ ] Vstupy říkají nejen co automatizace čte, ale i co výslovně nečte.
+- [ ] Výstupy mají příjemce, účel a retenční pravidlo.
+- [ ] Signály zdraví jsou agregované a sledují práci, ne disciplínu jednotlivců.
+- [ ] Revizní triggery jsou navázané na změnu reality, výjimky, šum, vlastníka nebo veřejný slib.
+- [ ] Pilotní kanály, debug logy, exporty, dočasné reporty, tokeny a přechodné výjimky jsou uklizené.
+- [ ] Ruční náhradní postup je známý a vyzkoušitelný bez autora automatizace.
+- [ ] Kill switch má vlastníka, postup a seznam věcí k úklidu.
+- [ ] Automatizace má stop pravidlo, které umožňuje zúžení nebo vypnutí bez pocitu selhání.
+
+### Mini úkol
+
+Vyber jednu automatizaci, která po pilotu zůstala běžet, a do třiceti minut jí napiš provozní údržbovou kartu. Vyplň účel, vlastníka, vstupy, výstupy, pravomoc, signály zdraví, revizní trigger a stop pravidlo. Potom smaž nebo naplánuj smazání jedné pilotní stopy, která už nevede k rozhodnutí. Pokud žádnou pilotní stopu nenajdeš, zkontroluj aspoň, jestli výstup automatizace pořád neukládá víc detailů, než tým skutečně používá.
+
 ## Zdroje
 
 - IETF RFC 9110: HTTP Semantics - význam HTTP přesměrování a stavů včetně `410 Gone` pro zdroje, které už nejsou dostupné: https://www.rfc-editor.org/rfc/rfc9110.html
@@ -61330,6 +61477,8 @@ Vyber jednu pilotní změnu automatizace a do třiceti minut ji uzavři jednou k
 - Nielsen Norman Group: Onboarding Tutorials vs. Contextual Help - rozdíl mezi úvodními tutoriály a kontextovou pomocí: https://www.nngroup.com/articles/onboarding-tutorials/
 
 ## Pracovní log
+
+- 2026-07-27: Doplněna příloha o údržbě ponechané automatizace po pilotu bez věčného sledování: převod pilotu na provozní údržbovou kartu, agregované signály zdraví místo dohledu nad lidmi, revizní triggery podle změny reality, ukončení mimořádné pilotní pozornosti, ruční náhradní cesta, kill switch, příklad retenční kontroly exportů v běžném režimu, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro ponechanou automatizaci v údržbě. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
 - 2026-07-27: Doplněna příloha o uzavření změny automatizace po pilotu bez automatického vítězství: návrat k pilotnímu slibu, rozhodování podle dopadu práce místo zelených běhů, zavírací balík pro pravidlo, skript, data, dokumentaci a backlog, opatrné přepínání pravomoci automatizace, úklid pilotní datové stopy, aktualizace míst pravdy, příklad retenční kontroly po pilotu, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro zavření pilotu změněné automatizace. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
