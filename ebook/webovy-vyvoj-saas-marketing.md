@@ -204,6 +204,7 @@ Když se nechceš vracet do celé knihy, hledej konkrétní nástroj podle výst
 | Archivovat zrušené produktové pravidlo bez návratu staré pravdy | „archiv pravidla“, „zrušené pravidlo“ nebo „stará pravda“ | archivní záznam s důvodem konce, aktuální náhradou, datovým úklidem, odkazovým úklidem a hranicí návratu pravidla |
 | Znovu otevřít archivované pravidlo bez panického návratu procesu | „návrat archivovaného pravidla“, „archiv se vrací“ nebo „staré pravidlo znovu“ | re-entry karta s novým signálem, kontrolou dnešní náhrady, nejmenším zásahem a rozhodnutím, zda obnovit pravidlo, upravit produkt nebo archiv nechat zavřený |
 | Ověřit návrat archivovaného pravidla po pilotu | „pilot návratu pravidla“, „kontrola re-entry“ nebo „obnovené pravidlo hotovo“ | pilotní review, které rozhodne, zda se pravidlo zavře, zúží, přesune, promění v produktovou opravu nebo opravdu zůstane aktivní |
+| Převést obnovené pravidlo do běžné práce | „obnovené pravidlo v provozu“, „pravidlo po pilotu“ nebo „trvalé pravidlo bez procesu“ | provozní karta pravidla s místem použití, vlastníkem, revizním triggerem, retencí stop a stop pravidlem |
 
 Pravidlo pro práci s rejstříkem: otevři maximálně tři nalezené části, vyber jednu a zapiš výstup. Pokud po deseti minutách pořád skáčeš mezi odkazy, vrať se k tabulce „Kudy začít podle aktuální bolesti“ a zúž problém. E-book není buffet. Teda je, ale bez talíře si stejně odneseš jen chaos.
 
@@ -59568,6 +59569,132 @@ Výsledek: staré široké pravidlo se nevrátilo. Jeho užitečná část se us
 
 Vezmi jedno pravidlo, které se nedávno vrátilo z archivu nebo z „lessons learned“ poznámek. Napiš mu pilotní review v osmi řádcích: kde se použilo, co odhalilo, co změnilo, co stálo navíc, jaká data vznikla, kdo ho pochopil bez autora, co lze zúžit a jaký je verdikt. Pokud neumíš doložit skutečné použití, pravidlo zatím nevracej do běžného provozu.
 
+## Příloha: Převod obnoveného pravidla do běžné práce bez nového procesu
+
+Když pilot návratu pravidla dopadne dobře, pořád ještě není hotovo. Obnovené pravidlo se musí usadit v běžné práci tak, aby pomáhalo rozhodovat, ale nezačalo kolem sebe stavět další schůzky, tabulky, kontrolní rituály a drobné pocity viny. To je ten moment, kdy se dobré pravidlo buď stane užitečnou součástí systému, nebo pomalu nabobtná v proces, který všichni trpí a nikdo nevypíná.
+
+Špatná otázka zní: „Kam všude to pravidlo přidáme, aby se na něj nezapomnělo?“
+
+Lepší otázka zní: „Kde pravidlo skutečně mění rozhodnutí a jak ho tam udržíme v nejmenším možném tvaru?“
+
+Pravidlo po pilotu má být jako dobrý bezpečnostní pás: je tam, kde je potřeba, jde použít bez školení a nepořizuje si vlastní týdenní status meeting. Díky, stačilo.
+
+### Zapiš provozní kartu pravidla
+
+Před trvalým zařazením napiš krátkou provozní kartu. Ne proto, aby vznikl další dokument, ale aby bylo jasné, co pravidlo dělá a kdy skončí.
+
+| Pole | Co vyplnit |
+| --- | --- |
+| Název pravidla | Krátká pracovní věta, kterou člověk pochopí v kontextu úkolu. |
+| Důvod existence | Jaké riziko nebo opakovanou nejistotu pravidlo řeší. |
+| Místo použití | Konkrétní šablona, review otázka, runbook, support makro nebo produktová karta. |
+| Vlastník | Role, která pravidlo udržuje, ne jméno člověka navždy vytesané do kamene. |
+| Kdy se spouští | Typ změny, dotazu, release nebo rozhodnutí, u kterého se pravidlo použije. |
+| Co nesbíráme | Data, screenshoty, exporty nebo metriky, které kvůli pravidlu nevzniknou. |
+| Kontrolní stopa | Jaký minimální záznam stačí jako důkaz použití. |
+| Revizní trigger | Co pravidlo znovu otevře: změna produktu, incident, opakovaný dotaz, nový dodavatel, změna práva nebo tři zbytečná použití. |
+| Stop pravidlo | Kdy se pravidlo zúží, sloučí, archivuje nebo smaže. |
+
+Praktické pravidlo: pokud karta pravidla potřebuje víc než deset řádků, pravděpodobně popisuje proces, ne pravidlo. Rozděl ji, zkrať ji nebo se vrať k otázce, jestli nemá být řešení přímo v produktu.
+
+### Vlož pravidlo do jednoho místa pravdy
+
+Obnovené pravidlo nemá žít zároveň v checklistu, wiki, staré retrospektivě, komentáři v ticketu, support makru a soukromém dokumentu autora. To je recept na dvojí pravdu. Vyber jedno místo, kde se pravidlo přirozeně používá.
+
+Dobrá místa:
+
+- šablona produktové karty, pokud pravidlo mění zadání,
+- review checklist, pokud pravidlo chrání před opakovanou chybou při schvalování,
+- runbook, pokud pravidlo řídí provozní zásah,
+- support nebo sales šablona, pokud pravidlo mění odpověď zákazníkovi,
+- veřejná dokumentace, pokud pravidlo opravuje slib nebo očekávání uživatele.
+
+Slabá místa:
+
+- obecná stránka „lessons learned“, kterou nikdo neotevírá při práci,
+- separátní kontrolní tabulka bez návaznosti na konkrétní změnu,
+- osobní poznámky vlastníka,
+- nový meeting jen kvůli tomu, že pravidlo existuje,
+- komentář v jednom starém ticketu, který se tváří jako trvalá instrukce.
+
+Codyho komentář: Nejlepší pravidlo je často jedna otázka na správném místě. Nejhorší pravidlo je dobrá věta rozházená na pěti místech. Pak už neřídí práci, jen zvyšuje šanci, že někdo použije starou verzi.
+
+### Udrž jen minimální kontrolní stopu
+
+Pravidlo potřebuje důkaz, že funguje, ale ne dohled nad lidmi. U privacy-first provozu je rozdíl mezi „víme, že se rozhodnutí stalo“ a „sbíráme detailní stopu každého, kdo se rozhodování dotkl“ zásadní.
+
+Stačí typicky:
+
+- zaškrtnutý řádek v produktové kartě,
+- krátká věta v release poznámce,
+- odkaz na změněnou šablonu,
+- datum poslední revize pravidla,
+- rozhodnutí „ponechat / zúžit / smazat“ po triggeru,
+- agregovaný počet nalezených problémů za období, pokud opravdu vede k rozhodnutí.
+
+Často není potřeba:
+
+- exportovat celé support vlákno kvůli internímu důkazu,
+- držet screenshoty se zákaznickými daty,
+- ukládat jména lidí, kteří pravidlo použili nebo nepoužili,
+- vytvářet samostatný dashboard pravidla,
+- prodlužovat retenci logů jen proto, že se pravidlo vrátilo.
+
+Pokud pravidlo potřebuje citlivější důkaz, napiš k němu retenční větu: „Kontrolní poznámky držíme ___ dní, potom zůstane jen rozhodnutí a odkaz na aktuální zdroj pravdy.“ Bez konce životnosti se i malá kontrolní stopa umí změnit ve sklad starých detailů.
+
+### Napoj revizi na změnu, ne na kalendářovou úzkost
+
+Každé pravidlo má stárnout. Produkt se změní, tým se naučí novou schopnost, dodavatel zmizí, právní rámec se zpřesní nebo původní problém přestane existovat. Proto potřebuje revizní trigger, ale nemusí kvůli tomu dostat vlastní měsíční meeting.
+
+Použitelné triggery:
+
+- změna části produktu, které se pravidlo týká,
+- třetí výjimka z pravidla během krátkého období,
+- opakovaný zákaznický dotaz, který pravidlo mělo vyřešit,
+- incident nebo near-miss spojený s danou oblastí,
+- změna dodavatele, datové cesty nebo retence,
+- první použití pravidla novým vlastníkem bez autora,
+- kontrola, při které pravidlo nepřineslo žádné rozhodnutí.
+
+Kalendářová revize dává smysl jen u pravidel s vyšším rizikem nebo nízkou četností použití. I tam má být malá: otevřít kartu, ověřit jeden skutečný pracovní příklad, rozhodnout. Žádná prezentace, žádné rituální kolečko, žádné „pro jistotu to necháme ještě čtvrtletí“. To je věta, která umí pohřbít hodně času.
+
+### Příklad: Pravidlo pro dlouhé akce se usazuje v šabloně
+
+Situace: Pilot návratu pravidla ukázal, že otázka na stav a konec dočasných dat pomáhá u dlouhých produktových akcí. Tým nechce vracet starý široký checklist, ale potřebuje zachovat užitečnou část.
+
+Provozní karta:
+
+| Pole | Zápis |
+| --- | --- |
+| Název pravidla | U dlouhé akce popiš stav, rušení a konec dočasných dat. |
+| Důvod existence | Uživatel nesmí hádat, jestli akce běží, selhala nebo po sobě nechává dočasné soubory. |
+| Místo použití | Šablona produktové karty pro dlouhé akce. |
+| Vlastník | Produktový vlastník dané oblasti, kontrola při běžném review. |
+| Kdy se spouští | Import, export, hromadná změna nebo jiná akce, která neběží okamžitě. |
+| Co nesbíráme | Nesledujeme individuální čekání uživatelů ani nevytváříme session recording pro důkaz problému. |
+| Kontrolní stopa | Jeden řádek v produktové kartě a odkaz na finální UI nebo dokumentaci. |
+| Revizní trigger | Třetí výjimka, nová dlouhá akce mimo šablonu nebo zákaznický dotaz na nejasný stav. |
+| Stop pravidlo | Pokud se stav a retence stanou součástí sdílené komponenty, pravidlo se přesune z karet do komponentového checklistu. |
+
+Výsledek: pravidlo zůstalo živé, ale nevrátilo se jako samostatný proces. Tým ho používá přes existující šablonu, kontroluje ho v běžném review a nesbírá novou osobní stopu.
+
+### Checklist: Převod obnoveného pravidla do běžné práce
+
+- [ ] Pravidlo má provozní kartu s důvodem, místem použití, vlastníkem a stop pravidlem.
+- [ ] Je vložené do jednoho místa pravdy, ne rozházené do několika dokumentů.
+- [ ] Pravidlo mění konkrétní rozhodnutí, ne jen připomíná obecnou opatrnost.
+- [ ] Kontrolní stopa je minimální a má jasnou retenci.
+- [ ] Kvůli pravidlu nevzniká nové sledování lidí, zákazníků nebo session.
+- [ ] Revize je navázaná na změnu, výjimku, incident nebo skutečné použití.
+- [ ] Staré pilotní instrukce a archivní odkazy jsou uklizené.
+- [ ] Veřejné texty, support šablony a interní dokumentace ukazují na stejnou aktuální pravdu.
+- [ ] Pokud pravidlo začne často nahrazovat produktovou opravu, vznikne karta změny reality.
+- [ ] Pokud pravidlo tři použití po sobě nepřinese rozhodnutí, zúží se nebo smaže.
+
+### Mini úkol
+
+Vyber jedno pravidlo, které po pilotu zůstalo aktivní. Do třiceti minut mu napiš provozní kartu a najdi jeho jedno místo pravdy. Potom smaž nebo označ jako archiv všechny staré kopie: pilotní checklist, komentáře v ticketech, duplicitní wiki odstavce a osobní poznámky, které by mohly vrátit starou verzi pravidla. Na konci musí zůstat jedna aktuální otázka na místě, kde se opravdu rozhoduje.
+
 ## Zdroje
 
 - IETF RFC 9110: HTTP Semantics - význam HTTP přesměrování a stavů včetně `410 Gone` pro zdroje, které už nejsou dostupné: https://www.rfc-editor.org/rfc/rfc9110.html
@@ -59761,6 +59888,8 @@ Vezmi jedno pravidlo, které se nedávno vrátilo z archivu nebo z „lessons le
 - Nielsen Norman Group: Onboarding Tutorials vs. Contextual Help - rozdíl mezi úvodními tutoriály a kontextovou pomocí: https://www.nngroup.com/articles/onboarding-tutorials/
 
 ## Pracovní log
+
+- 2026-07-27: Doplněna příloha o převodu obnoveného pravidla do běžné práce bez nového procesu: provozní karta pravidla, jedno místo pravdy, minimální kontrolní stopa, revizní triggery navázané na změnu, příklad pravidla pro dlouhé akce v produktové šabloně, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro pravidlo po pilotu. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
 - 2026-07-27: Doplněna příloha o ověření návratu archivovaného pravidla po pilotu bez starého procesu: pilotní karta návratu, měření dopadu práce místo disciplíny lidí, review po skutečném použití, šest verdiktů, příklad dlouhé akce po dvou releasech, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro kontrolu re-entry pilotu. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
