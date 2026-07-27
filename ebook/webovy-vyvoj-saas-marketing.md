@@ -195,6 +195,7 @@ Když se nechceš vracet do celé knihy, hledej konkrétní nástroj podle výst
 | Zkontrolovat produktovou opravu po měsíci běžného provozu | „měsíční kontrola produktové opravy“, „oprava v provozu“ nebo „návrat problému po opravě“ | lehké review, zda oprava pořád řeší původní nejistotu, nevznikl kolem ní nový procesní odpad a není potřeba ji zjednodušit |
 | Zjednodušit produktovou opravu po měsíční kontrole | „zjednodušení opravy“, „procesní nános po opravě“ nebo „oprava funguje ale bobtná“ | redukční karta, která ponechá hodnotu opravy, vypne zbytečné měření, sloučí šablony, odebere přístupy a nastaví jasné stop pravidlo |
 | Uzavřít zjednodušenou produktovou opravu bez nového procesu | „uzavření zjednodušené opravy“, „redukovaná oprava hotovo“ nebo „stop pravidlo po zjednodušení“ | zavírací review, které potvrdí odstraněný nános, funkční minimální signál a konec mimořádných kontrol |
+| Přenést poučení z uzavřené opravy do produktových pravidel | „poučení z opravy“, „produktové pravidlo“ nebo „oprava naučila tým“ | jedna principová věta, která z uzavřené opravy zlepší budoucí zadávání, review, onboarding nebo dokumentaci bez nového procesu |
 
 Pravidlo pro práci s rejstříkem: otevři maximálně tři nalezené části, vyber jednu a zapiš výstup. Pokud po deseti minutách pořád skáčeš mezi odkazy, vrať se k tabulce „Kudy začít podle aktuální bolesti“ a zúž problém. E-book není buffet. Teda je, ale bez talíře si stejně odneseš jen chaos.
 
@@ -58463,6 +58464,121 @@ Výsledek: oprava zůstává, nános končí a tým ví, kdy se k tématu vráti
 
 Vezmi jednu opravu, kterou jste nedávno zjednodušili. Napiš sedmiřádkové zavírací review: oprava, co zůstává, co bylo odstraněno, minimální signál, co se dál nedělá, trigger návratu a vlastník běžného režimu. Potom najdi jednu aktivní stopu, která by mohla starý proces vrátit: kalendářovou připomínku, automatický report, šablonu, dashboard nebo backlogový úkol. Zavři ji dnes. Pokud žádnou stopu nenajdeš, napiš do review větu „mimořádné kontroly končí“ a nech opravu žít běžným provozem. Ano, i proces občas potřebuje prostě odejít z místnosti.
 
+## Příloha: Přenesení poučení z uzavřené opravy do produktových pravidel bez nového procesu
+
+Uzavřená produktová oprava má ještě jednu možnou hodnotu: může naučit tým, jak podobnou chybu příště nevyrábět. To ale neznamená, že po každé opravě vznikne nový proces, další šablona a pravidelná kontrola „pro jistotu“. Tak se z učení stává provozní nános s lepší pověstí.
+
+Dobré poučení z opravy je krátké, použitelné a navázané na místo, kde tým stejně rozhoduje. Nezakládá novou poradní vrstvu. Nepřidává další měření lidí. Nepíše dramatický interní román o tom, kdo co nepochopil. Vezme jednu věc, kterou oprava odhalila, a přepíše ji do pravidla pro budoucí práci.
+
+Základní věta:
+
+„Příště u podobné změny vždy ověříme ___ ještě před release, protože uzavřená oprava ukázala ___.“
+
+Pokud věta nejde doplnit jedním konkrétním ověřením, poučení ještě není připravené. Je to jen pocit. Pocity patří do retrospektivy, ale produktové pravidlo musí říct, co se příště udělá jinak.
+
+### Rozliš lekci, pravidlo a nový proces
+
+Ne každé poučení má stejnou váhu. Před zápisem si vyber, co vlastně vzniká:
+
+| Typ výstupu | Kdy stačí | Příklad |
+| --- | --- | --- |
+| Lekce | Chceš zachovat kontext pro budoucího vlastníka. | „U exportu nestačí hláška po dokončení; lidé potřebují vidět i mezistav.“ |
+| Produktové pravidlo | Stejný typ chyby se může vrátit v další funkci. | „Každá delší asynchronní akce musí mít viditelný stav a chybovou větu.“ |
+| Checklist položka | Pravidlo se dá ověřit při běžném review. | „Má změna stav pro čekání, úspěch, chybu a zrušení?“ |
+| Dokumentační úprava | Poučení potřebuje znát zákazník nebo support. | „Veřejný návod ukazuje, co se děje během zpracování exportu.“ |
+| Nový proces | Jen když selhání ohrožuje opakovaně provoz, bezpečnost nebo právní závazek. | „Každá změna exportu prochází krátkým datovým review.“ |
+
+Většina oprav nepotřebuje nový proces. Potřebuje lepší zadání, jednu review otázku nebo úpravu dokumentace. To je dobrá zpráva. Proces je dlouhodobý provozní závazek, takže ho zakládej jen tehdy, když menší pravidlo nestačí.
+
+### Vytáhni jednu principovou větu
+
+Otevři zavírací review opravy a najdi odpověď na otázku:
+
+„Co jsme před opravou nevěděli nebo podcenili?“
+
+Potom ji přepiš do principové věty. Nepopisuj celou historii. Princip má být použitelný za měsíc i člověkem, který u opravy nebyl.
+
+Příklady:
+
+- „U dlouhých operací neukazujeme jen výsledek, ale i průběžný stav.“
+- „Support šablona nesmí slibovat víc než produkt skutečně ukazuje.“
+- „Dočasné měření má při založení i datum vypnutí.“
+- „Veřejná dokumentace musí mít jedno místo pravdy pro každý obchodní nebo bezpečnostní slib.“
+- „Exportní schopnost je samostatné oprávnění, ne vedlejší efekt admin role.“
+
+Dobrá principová věta nemá trestat minulost. Má zjednodušit příští rozhodnutí. Když ji tým použije v zadání nebo review, měla by snížit nejistotu dřív, než se z ní stane zákaznický dotaz.
+
+### Připoj pravidlo k existujícímu místu práce
+
+Poučení se snadno ztratí, když skončí v samostatném dokumentu „Lessons learned“. Ten název obvykle znamená „sem odkládáme věci, které už nikdy neuvidíme“. Lepší je připojit pravidlo tam, kde tým stejně pracuje.
+
+Vyber jedno místo:
+
+- produktová šablona zadání,
+- design review checklist,
+- release checklist,
+- support nebo sales zdroj pravdy,
+- onboarding nového vlastníka oblasti,
+- veřejná dokumentace,
+- testovací scénář,
+- rozhodovací log k oblasti.
+
+Pravidlo nepřidávej všude. Jedno dobré místo je lepší než pět kopií, které se za dva měsíce začnou rozcházet. Pokud pravidlo potřebuje být vidět na více místech, dej na ostatní místa odkaz na zdroj pravdy, ne novou ruční kopii.
+
+Privacy-first kontrola: pokud poučení vzniklo z ticketů, hovorů, logů nebo exportů, nepřenášej do pravidla osobní detaily. Stačí pracovní vzor. „Tři zákazníci z finančního segmentu se ptali na export“ může být v interním review užitečné. Do obecného pravidla patří spíš „u exportu ukazujeme stav a limit čekání“.
+
+### Rozhodni, co se už dál neučí
+
+Učení má mít konec. Jinak se z něj stane nekonečná interní přednáška pokaždé, když někdo otevře podobné téma.
+
+Po zápisu pravidla si napiš:
+
+- které staré poznámky už není potřeba číst,
+- který dočasný dokument se archivuje,
+- která schůzka nebo kontrola končí,
+- které otázky se přesouvají do běžného review,
+- které osobní nebo zákaznické detaily se z pracovních materiálů odstraní.
+
+Tohle je důležité hlavně u privacy-first provozu. Poučení nemá být omluva pro držení starých ticketů, screenshotů, exportů nebo chatových výřezů „kdyby se to někdy hodilo“. Pokud z nich vzniklo pravidlo, původní surový materiál často ztratil rozhodovací účel. Nech si jen to, co potřebuješ kvůli právu, účetnictví, bezpečnosti nebo jasně definované provozní retenci.
+
+### Příklad: Exportní stav jako produktové pravidlo
+
+Tým uzavřel zjednodušenou opravu exportního stavu. Původní problém byl, že uživatelé nevěděli, jestli export běží, čeká, skončil chybou nebo je připravený. Po opravě zůstal stav v produktu a veřejný návod. Pilotní tabulky, dočasný support pohled a zvláštní kontrola skončily.
+
+Teď z opravy vznikne pravidlo:
+
+| Pole | Zápis |
+| --- | --- |
+| Poučení | Uživatelé nepotřebují detailní frontu, ale potřebují rozumět stavu dlouhé akce. |
+| Produktové pravidlo | Každá dlouhá asynchronní akce má viditelný stav: přijato, zpracovává se, hotovo, chyba. |
+| Místo zápisu | Produktová šablona zadání a review otázka pro delší operace. |
+| Co nepřenášíme | Konkrétní zákaznické tickety, interní screenshoty fronty, pilotní exportní tabulku. |
+| Co končí | Samostatné exportní lessons learned poznámky a zvláštní review exportních ticketů. |
+| Kdy se pravidlo reviduje | Při změně exportní fronty nebo při návratu opakovaného support štítku. |
+
+Z toho vznikne jedna review otázka:
+
+„Má tato dlouhá akce stav pro čekání, průběh, dokončení a chybu, který pochopí uživatel bez kontaktování supportu?“
+
+To je užitečné poučení. Je krátké, přenositelné a nevyžaduje nový dashboard. Krásně nudné. Přesně tak to má být.
+
+### Checklist: Poučení z uzavřené produktové opravy
+
+- [ ] Oprava je skutečně uzavřená, ne jen unaveně odložená.
+- [ ] Vybral jsem jedno poučení, ne celý seznam historických bolestí.
+- [ ] Poučení je přepsané do principové věty pro budoucí práci.
+- [ ] Rozhodl jsem, jestli stačí lekce, pravidlo, checklist položka, dokumentace nebo výjimečně nový proces.
+- [ ] Pravidlo je napojené na existující místo práce.
+- [ ] Nevznikla druhá kopie stejné pravdy v pěti dokumentech.
+- [ ] Do poučení jsem nepřenesl osobní detaily, zákaznické payloady ani interní screenshoty bez důvodu.
+- [ ] Staré pracovní materiály mají jasný archiv, smazání nebo retenční pravidlo.
+- [ ] Je napsané, co se po přenosu poučení dál nedělá.
+- [ ] Pravidlo má trigger revize, ne pravidelný rituál bez rozhodnutí.
+
+### Mini úkol
+
+Vyber jednu nedávno uzavřenou produktovou opravu a napiš jednu principovou větu, která by zabránila podobné chybě v budoucnu. Připoj ji na jedno existující místo práce: zadání, review checklist, dokumentaci, onboarding nebo rozhodovací log. Potom smaž, archivuj nebo označ jako neaktivní jeden starý materiál, ze kterého už pravidlo vzniklo. Pokud po deseti minutách vznikají tři nové dokumenty, zastav se. To není učení, to je dokumentační inflace s lepším názvem.
+
 ## Zdroje
 
 - IETF RFC 9110: HTTP Semantics - význam HTTP přesměrování a stavů včetně `410 Gone` pro zdroje, které už nejsou dostupné: https://www.rfc-editor.org/rfc/rfc9110.html
@@ -58656,6 +58772,8 @@ Vezmi jednu opravu, kterou jste nedávno zjednodušili. Napiš sedmiřádkové z
 - Nielsen Norman Group: Onboarding Tutorials vs. Contextual Help - rozdíl mezi úvodními tutoriály a kontextovou pomocí: https://www.nngroup.com/articles/onboarding-tutorials/
 
 ## Pracovní log
+
+- 2026-07-27: Doplněna příloha o přenesení poučení z uzavřené produktové opravy do produktových pravidel bez nového procesu: rozlišení lekce, pravidla, checklist položky, dokumentace a nového procesu, principová věta, napojení na existující místo práce, úklid starých materiálů, příklad exportního stavu, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro poučení z uzavřené opravy. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
 - 2026-07-27: Doplněna příloha o uzavření zjednodušené produktové opravy bez nového procesu: návrat ke stop pravidlu, ověření odstraněného nánosu, kontrola minimálního signálu, zavření mimořádných kontrol, krátké zavírací review, příklad exportního stavu, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro uzavření zjednodušené opravy. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
