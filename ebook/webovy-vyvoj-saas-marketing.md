@@ -200,6 +200,7 @@ Když se nechceš vracet do celé knihy, hledej konkrétní nástroj podle výst
 | Ověřit produktové pravidlo po prvním použití | „kontrola pravidla“, „první použití pravidla“ nebo „pravidlo pomohlo“ | krátké review jedné reálné změny, které rozhodne, zda pravidlo ponechat, zúžit, přesunout, přepsat nebo zrušit |
 | Upravit produktové pravidlo po první kontrole | „úprava pravidla“, „pravidlo po kontrole“ nebo „pravidlo se ladí“ | malý změnový balík, který z verdiktu udělá přesnější otázku, lepší místo použití nebo uklizené zrušení bez další procesní vrstvy |
 | Uzavřít upravené produktové pravidlo po kontrolním okně | „uzavření pravidla“, „pravidlo po úpravě“ nebo „kontrolní okno hotovo“ | krátké zavírací rozhodnutí, zda pravidlo zůstává, zúží se, přesune, sloučí nebo skončí bez nové procesní vrstvy |
+| Zrušit nebo sloučit zastaralé produktové pravidlo | „zastaralé pravidlo“, „pravidlo končí“ nebo „sloučení pravidel“ | rozhodnutí, které staré pravidlo odebrat, sloučit, archivovat nebo nahradit bez ztráty původního poučení |
 
 Pravidlo pro práci s rejstříkem: otevři maximálně tři nalezené části, vyber jednu a zapiš výstup. Pokud po deseti minutách pořád skáčeš mezi odkazy, vrať se k tabulce „Kudy začít podle aktuální bolesti“ a zúž problém. E-book není buffet. Teda je, ale bez talíře si stejně odneseš jen chaos.
 
@@ -59095,6 +59096,122 @@ Výsledek: pravidlo zůstalo tam, kde mění rozhodnutí, ale nevláčí za sebo
 
 Vyber jedno upravené produktové pravidlo, které už mělo kontrolní okno. Do deseti minut napiš zavírací kartu: původní důvod úpravy, ověřenou reálnou změnu, datovou stopu kontroly, verdikt, úklid a trigger další revize. Potom zavři dočasné úkoly a nech v aktivní práci jen aktuální pravidlo. Pokud z kontroly vznikly tři nové procesy, něco se zvrtlo; ponech jeden užitečný výstup a zbytek převeď na samostatná rozhodnutí nebo smaž.
 
+## Příloha: Zrušení nebo sloučení zastaralého produktového pravidla bez ztráty poučení
+
+Produktové pravidlo má pomáhat rozhodovat. Jakmile už nerozhoduje, musí se změnit, sloučit nebo skončit. Jinak se z něj stane interní pověra: všichni vědí, že „by se to mělo kontrolovat“, ale nikdo už neumí říct proč. To není řízení kvality. To je muzeum opatrnosti s topením zdarma.
+
+Špatná otázka zní: „Je to pravidlo pořád pravdivé?“
+
+Lepší otázka zní: „Které dnešní rozhodnutí toto pravidlo zlepšuje a kde přesně se to děje?“
+
+Pokud neumíš odpovědět konkrétní změnou, šablonou, review krokem nebo produktovou kartou, pravidlo pravděpodobně už jen zabírá místo. A místo v hlavě týmu je dražší než místo v dokumentu.
+
+### Poznej čtyři důvody zániku pravidla
+
+Pravidlo nemusí končit proto, že bylo špatné. Často splnilo práci, pro kterou vzniklo. To je zdravý konec, ne selhání.
+
+| Důvod | Jak vypadá v praxi | Typické rozhodnutí |
+| --- | --- | --- |
+| Produkt se změnil | Pravidlo řeší starý tok, starý datový typ nebo starý stav UI. | Zrušit nebo přepsat podle nové reality. |
+| Pravidlo pohltila rutina | Otázka už je zabudovaná v šabloně, testu, komponentě nebo runbooku. | Sloučit a odebrat samostatnou zmínku. |
+| Pravidlo se překrývá | Dvě položky kontrolují stejné rozhodnutí jinými slovy. | Sloučit do jedné otázky. |
+| Pravidlo vyrábí šum | Lidé ho odškrtávají, ale nemění návrh, rozsah ani datovou hranici. | Zrušit s krátkým důvodem. |
+
+Nejhorší stav je „ponechat pro jistotu“. Jistota bez konkrétního rozhodnutí je jen dražší úzkost. Privacy-first tým nemá sbírat ani data, ani pravidla bez účelu.
+
+### Udělej kartu konce pravidla
+
+Než pravidlo smažeš, napiš malou kartu. Ne kvůli byrokracii, ale kvůli tomu, aby se původní poučení neztratilo a stará pravda se nevrátila v horší podobě.
+
+| Pole | Příklad |
+| --- | --- |
+| Pravidlo | U dlouhé akce vždy popsat čekání, průběh, dokončení, chybu a retenci pracovních dat. |
+| Původní důvod | Exportní funkce dřív neměly jasný stav a nechávaly dočasné soubory bez konce životnosti. |
+| Co se změnilo | Stav dlouhé akce je součástí produktové karty a exportní komponenta má vlastní výchozí vzor. |
+| Dnešní riziko | Samostatné pravidlo se opakuje vedle komponentové dokumentace a lidé řeší stejnou věc dvakrát. |
+| Verdikt | Sloučit do komponentového checklistu a odebrat samostatnou položku z obecného review. |
+| Úklid | Upravit šablonu zadání, odstranit starý checklist bod, zavřít dočasný odkaz v dokumentaci. |
+| Zachované poučení | Dlouhá akce musí mít viditelný stav a konec pracovních dat. |
+
+Karta má být krátká. Pokud potřebuješ tři stránky vysvětlení, pravděpodobně neřešíš konec pravidla, ale nedořešený produktový problém.
+
+### Rozliš zrušení, sloučení, archivaci a nahrazení
+
+Ne každé staré pravidlo se má smazat stejným způsobem. Vyber akci podle toho, jakou práci pravidlo dnes dělá.
+
+| Akce | Kdy ji použít | Co zůstane |
+| --- | --- | --- |
+| Zrušit | Pravidlo už nemění žádné rozhodnutí a nemá jedinečné poučení. | Krátký záznam v rozhodovacím logu, pokud bylo veřejně nebo týmově významné. |
+| Sloučit | Poučení je platné, ale už existuje lepší místo. | Jedna přesnější formulace v cílové šabloně nebo checklistu. |
+| Archivovat | Pravidlo souvisí se starým produktem, incidentem nebo rozhodnutím, ke kterému se může tým vracet. | Označený archivní zápis bez aktivního použití. |
+| Nahradit | Pravidlo řeší správný problém, ale dnešní realita vyžaduje jinou otázku. | Nové pravidlo s jasným stop pravidlem a úklidem staré verze. |
+
+Zrušení bez úklidu nestačí. Pokud stará věta zůstane v šabloně, onboardingovém dokumentu, support makru nebo review checklistu, pravidlo bude dál fungovat jako ozvěna starého rozhodnutí: nenápadně, opakovaně a škodlivě.
+
+### Ukliď nosiče pravidla
+
+Pravidlo obvykle nežije na jednom místě. Má otisky v dokumentaci, šablonách, akceptačních kritériích, pull request checklistu, support odpovědích, onboardingových materiálech a někdy i ve jménech analytických eventů.
+
+Pro úklid použij jednoduchou tabulku:
+
+| Nosič | Otázka | Akce |
+| --- | --- | --- |
+| Produktová šablona | Je tu stará otázka nebo odkaz na staré pravidlo? | Odebrat, sloučit nebo nahradit. |
+| Review checklist | Nutí kontrolovat něco, co už řeší komponenta nebo test? | Zúžit na rozhodovací výjimky. |
+| Dokumentace | Tvrdí starý postup jako aktivní pravdu? | Označit jako archiv nebo přepsat. |
+| Support makro | Slibuje chování, které už platí jinak? | Upravit podle aktuálního produktu. |
+| Metriky a eventy | Měří se kvůli starému pravidlu něco, co už není potřeba? | Vypnout, agregovat nebo nastavit retenci. |
+| Přístupy a exporty | Zůstaly kvůli pravidlu dočasné kontrolní přístupy? | Odebrat a zapsat zavření. |
+
+Privacy-first detail: zánik pravidla je dobrý okamžik vypnout měření, které vzniklo jen jako dočasná pojistka. Pokud už pravidlo neověřuješ, nepotřebuješ dál držet detailní logy, exporty nebo screenshoty „pro kdyby náhodou“. Kdyby náhodou je špatný správce dat.
+
+### Nech jednu větu poučení
+
+Když pravidlo rušíš nebo slučuješ, zachovej jednu principovou větu, pokud má budoucí hodnotu. Ne celou historii. Ne hromadu screenshotů. Jednu větu.
+
+Příklady:
+
+- Dlouhá akce musí mít viditelný stav a konec dočasných pracovních dat.
+- Veřejný slib musí mít jeden zdroj pravdy a vlastníka.
+- Dočasný export musí mít účel, příjemce, datum smazání a zavírací kontrolu.
+- Automatizace nesmí přejít z návrhu na akci bez jasné pravomoci a vypínače.
+
+Taková věta se dá vložit do zadání, review nebo runbooku. Pokud z ní musíš dělat nové pravidlo, přidej rovnou i stop hranici: kdy ji zrušíš, sloučíš nebo přesuneš.
+
+### Příklad: Sloučení pravidla pro dlouhé akce
+
+Situace: Tým měl obecné produktové pravidlo pro dlouhé akce. Postupně ale vznikla exportní komponenta, která už v základním návrhu řeší průběh, stav chyby, retry, informaci pro uživatele a smazání dočasného souboru. Obecné pravidlo se dál objevovalo v produktovém review a lidé ho odškrtávali i u změn, kterých se dlouhé akce netýkaly.
+
+Karta konce pravidla:
+
+| Pole | Zápis |
+| --- | --- |
+| Pravidlo | U každé dlouhé akce popsat stavy a retenci pracovních dat. |
+| Původní důvod | Předchozí exporty byly nejasné a držely dočasná data déle, než bylo nutné. |
+| Co se změnilo | Exportní komponenta a šablona exportní změny už otázku obsahují konkrétněji. |
+| Verdikt | Sloučit do exportní šablony, v obecném review ponechat jen otázku na nové typy dlouhých akcí. |
+| Úklid | Odebrán duplicitní bod z obecného checklistu, starý odkaz v dokumentaci označen jako archivní, dočasný kontrolní event se vypíná po doběhnutí posledního review. |
+| Zachované poučení | Nový typ dlouhé akce musí před implementací popsat stav pro uživatele a konec pracovních dat. |
+
+Výsledek: tým nepřišel o poučení, ale přestal ho cpát do každé změny. Pravidlo se přesunulo tam, kde opravdu mění rozhodnutí. To je přesně ten druh úklidu, který není sexy, a právě proto funguje.
+
+### Checklist: Zrušení nebo sloučení zastaralého pravidla
+
+- [ ] Umím říct, které dnešní rozhodnutí pravidlo zlepšuje.
+- [ ] Pokud neumím, mám návrh na zrušení, sloučení, archivaci nebo nahrazení.
+- [ ] Vím, proč pravidlo vzniklo a zda je původní riziko pořád živé.
+- [ ] Zkontroloval jsem šablony, checklisty, dokumentaci, support makra a automatizace.
+- [ ] Nevzniknou dvě souběžné pravdy po tom, co pravidlo přesunu nebo sloučím.
+- [ ] Dočasné metriky, eventy, exporty, screenshoty nebo kontrolní přístupy mají jasný konec.
+- [ ] Zachované poučení má podobu jedné věty, ne historického románu.
+- [ ] Pokud pravidlo nahrazuji, nová verze má stop hranici.
+- [ ] Archivní záznam je jasně označený jako neaktivní.
+- [ ] Výsledek jde vysvětlit týmu bez znalosti původního incidentu nebo opravy.
+
+### Mini úkol
+
+Vyber jedno pravidlo, které tým pořád odškrtává, ale už podle něj málokdy mění práci. Do patnácti minut napiš kartu konce: původní důvod, dnešní realitu, verdikt, nosiče k úklidu a jednu zachovanou větu poučení. Potom uprav jedno aktivní místo, kde pravidlo žije. Pokud při tom najdeš další tři podobné relikvie, zapiš je do backlogu jako samostatné úklidy. Dnes zavři jednu.
+
 ## Zdroje
 
 - IETF RFC 9110: HTTP Semantics - význam HTTP přesměrování a stavů včetně `410 Gone` pro zdroje, které už nejsou dostupné: https://www.rfc-editor.org/rfc/rfc9110.html
@@ -59288,6 +59405,8 @@ Vyber jedno upravené produktové pravidlo, které už mělo kontrolní okno. Do
 - Nielsen Norman Group: Onboarding Tutorials vs. Contextual Help - rozdíl mezi úvodními tutoriály a kontextovou pomocí: https://www.nngroup.com/articles/onboarding-tutorials/
 
 ## Pracovní log
+
+- 2026-07-27: Doplněna příloha o zrušení nebo sloučení zastaralého produktového pravidla bez ztráty poučení: důvody zániku pravidla, karta konce pravidla, rozlišení zrušení/sloučení/archivace/nahrazení, úklid nosičů pravidla, zachování jedné principové věty, příklad sloučení pravidla pro dlouhé akce, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro práci se zastaralým pravidlem. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
 - 2026-07-27: Doplněna příloha o uzavření upraveného produktového pravidla po kontrolním okně bez rituálu: návrat k původnímu důvodu úpravy, ověření jedné reálné změny, verdikty ponechat/zúžit/přesunout/sloučit/ukončit, úklid kontrolního okna, trigger další revize, příklad pravidla pro dlouhou akci, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro uzavření pravidla po úpravě. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
