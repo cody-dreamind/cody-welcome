@@ -201,6 +201,7 @@ Když se nechceš vracet do celé knihy, hledej konkrétní nástroj podle výst
 | Upravit produktové pravidlo po první kontrole | „úprava pravidla“, „pravidlo po kontrole“ nebo „pravidlo se ladí“ | malý změnový balík, který z verdiktu udělá přesnější otázku, lepší místo použití nebo uklizené zrušení bez další procesní vrstvy |
 | Uzavřít upravené produktové pravidlo po kontrolním okně | „uzavření pravidla“, „pravidlo po úpravě“ nebo „kontrolní okno hotovo“ | krátké zavírací rozhodnutí, zda pravidlo zůstává, zúží se, přesune, sloučí nebo skončí bez nové procesní vrstvy |
 | Zrušit nebo sloučit zastaralé produktové pravidlo | „zastaralé pravidlo“, „pravidlo končí“ nebo „sloučení pravidel“ | rozhodnutí, které staré pravidlo odebrat, sloučit, archivovat nebo nahradit bez ztráty původního poučení |
+| Archivovat zrušené produktové pravidlo bez návratu staré pravdy | „archiv pravidla“, „zrušené pravidlo“ nebo „stará pravda“ | archivní záznam s důvodem konce, aktuální náhradou, datovým úklidem, odkazovým úklidem a hranicí návratu pravidla |
 
 Pravidlo pro práci s rejstříkem: otevři maximálně tři nalezené části, vyber jednu a zapiš výstup. Pokud po deseti minutách pořád skáčeš mezi odkazy, vrať se k tabulce „Kudy začít podle aktuální bolesti“ a zúž problém. E-book není buffet. Teda je, ale bez talíře si stejně odneseš jen chaos.
 
@@ -59212,6 +59213,119 @@ Výsledek: tým nepřišel o poučení, ale přestal ho cpát do každé změny.
 
 Vyber jedno pravidlo, které tým pořád odškrtává, ale už podle něj málokdy mění práci. Do patnácti minut napiš kartu konce: původní důvod, dnešní realitu, verdikt, nosiče k úklidu a jednu zachovanou větu poučení. Potom uprav jedno aktivní místo, kde pravidlo žije. Pokud při tom najdeš další tři podobné relikvie, zapiš je do backlogu jako samostatné úklidy. Dnes zavři jednu.
 
+## Příloha: Archivace zrušeného produktového pravidla bez návratu staré pravdy
+
+Zrušené pravidlo nemá zmizet tak, že po něm zůstane chaos. Má zmizet tak, že tým ví, proč skončilo, kde je dnešní pravda a kdy by se k tématu mělo znovu sáhnout. Archiv není skládka starých checklistů. Archiv je malá brzda proti tomu, aby se za tři měsíce někdo zeptal „a proč jsme vlastně přestali kontrolovat tohle?“ a tým z paniky obnovil starý proces i s jeho datovým smogem.
+
+Špatná otázka zní: „Máme si staré pravidlo někam uložit?“
+
+Lepší otázka zní: „Co musí budoucí člověk pochopit za dvě minuty, aby starou pravdu zbytečně nevrátil do provozu?“
+
+Archivace je užitečná hlavně u pravidel, která vznikla po incidentu, zákaznické nejistotě, drahé opravě nebo privacy riziku. U drobných pravidel stačí krátký záznam v rozhodovacím logu. Ne každý úklid potřebuje památník. Některé věci si zaslouží jen hezké tiché sbohem a smazaný odkaz.
+
+### Archivuj jen pravidla s budoucí hodnotou
+
+Než založíš archivní záznam, rozhodni, jestli má pravidlo vůbec hodnotu po svém konci.
+
+| Situace | Archivovat? | Proč |
+| --- | --- | --- |
+| Pravidlo vzniklo po incidentu nebo bolestivé opravě | Ano | Budoucí tým potřebuje vědět, proč se riziko řešilo a co ho dnes kryje. |
+| Pravidlo bylo veřejně slíbené zákazníkům nebo sales týmu | Ano | Je potřeba uhlídat staré sliby, makra a obchodní texty. |
+| Pravidlo chránilo datovou hranici, retenci nebo přístupy | Ano | Zánik pravidla je spojený s úklidem datové stopy. |
+| Pravidlo jen duplikovalo jiný checklist bod | Spíš ne | Stačí upravit cílové místo a zapsat krátký merge důvod. |
+| Pravidlo nikdy nikdo nepoužil k rozhodnutí | Spíš ne | Archiv by jen konzervoval šum, který se měl dávno vyhodit. |
+
+Codyho komentář: Archivovat všechno je jen pomalejší forma neuklízení. Privacy-first tým má mít odvahu říct: „Tahle věc už nenese poučení, mažeme.“ Dokumentace není archeologický park pro naše starší nejistoty.
+
+### Napiš archivní záznam jako směrovku
+
+Archivní zápis má být kratší než původní pravidlo. Jeho práce není znovu vysvětlit celou historii, ale ukázat tři věci: proč pravidlo skončilo, kde je dnešní náhrada a co se nesmí omylem obnovit.
+
+Použij tabulku:
+
+| Pole | Co vyplnit |
+| --- | --- |
+| Název pravidla | Původní aktivní formulace nebo její krátký popis. |
+| Stav | Zrušeno, sloučeno, archivováno nebo nahrazeno. |
+| Datum a vlastník | Kdy se pravidlo zavřelo a kdo ručí za aktuální náhradu. |
+| Původní důvod | Jedna věta, proč pravidlo vzniklo. |
+| Důvod konce | Co se změnilo v produktu, procesu, komponentě nebo riziku. |
+| Dnešní zdroj pravdy | Odkaz nebo název šablony, komponenty, runbooku nebo checklistu, kde téma žije teď. |
+| Datový úklid | Jaké dočasné logy, eventy, exporty, screenshoty, přístupy nebo reporty se zavřely. |
+| Staré nosiče | Které odkazy, makra, onboardingové texty nebo šablony byly upravené. |
+| Hranice návratu | Jaká konkrétní změna by ospravedlnila nové pravidlo nebo obnovu kontroly. |
+
+Hranice návratu je důležitá. Bez ní se staré pravidlo může vrátit při první nejistotě. S ní tým ví, že návrat má spouštěč, ne náladu.
+
+### Odděl archiv od aktivní dokumentace
+
+Nejčastější chyba je nechat archivní pravidlo ve stejné stránce jako aktivní checklist. Pak se jednoho dne zkopíruje do nového zadání a všichni se tváří, že to byl záměr. Nebyl. Byl to copy-paste v tmavé uličce dokumentace.
+
+Praktické rozdělení:
+
+| Místo | Co tam patří | Co tam nepatří |
+| --- | --- | --- |
+| Aktivní šablona | Aktuální otázka, která mění práci. | Historie, proč otázka dřív vypadala jinak. |
+| Rozhodovací log | Krátké rozhodnutí o konci pravidla. | Celý starý checklist. |
+| Archiv | Stav, důvod konce, náhrada a hranice návratu. | Aktivní instrukce bez označení archivního stavu. |
+| Runbook nebo komponentová dokumentace | Dnešní postup, pokud pravidlo přešlo do rutiny. | Dva konkurenční postupy pro stejnou situaci. |
+
+Archivní zápis nahoře viditelně označ: „Neaktivní pravidlo. Nepoužívat v nových zadáních.“ Zní to školácky, ale funguje to. Nejasná dokumentace se tváří chytře jen do chvíle, než ji někdo použije v pátek odpoledne.
+
+### Ukliď odkazy a automatické návraty
+
+Zrušené pravidlo se často vrací přes nosiče, které nikdo nepovažuje za dokumentaci: šablony úkolů, checklist v pull requestu, onboardingový návod, support makro, automaticky generovaný report, interní vyhledávání, starý link v wiki nebo poznámka v produktu.
+
+Před zavřením archivu projdi:
+
+- aktivní šablony zadání a akceptačních kritérií,
+- review checklisty a release checklisty,
+- onboarding nové role,
+- support a sales makra,
+- interní vyhledávání a tagy v dokumentaci,
+- automatizace, které staré pravidlo připomínají,
+- analytické eventy, reporty a alerty vzniklé kvůli kontrole pravidla,
+- přístupy nebo exporty používané jen pro mimořádné ověřování.
+
+Privacy-first detail: pokud po pravidle zůstala dočasná měření, jejich konec musí být součástí archivace. Jinak sice zrušíš proces, ale necháš běžet jeho oči. To není úklid, to je jen tichý dozor s horší dokumentací.
+
+### Příklad: Archiv pravidla pro dlouhé akce
+
+Situace: Tým sloučil obecné pravidlo pro dlouhé akce do exportní komponenty. Pravidlo už nemá být aktivní v obecném produktovém review, ale původní lekce je důležitá, protože vznikla po nejasných exportech a příliš dlouhé retenci dočasných souborů.
+
+Archivní záznam:
+
+| Pole | Zápis |
+| --- | --- |
+| Název pravidla | U každé dlouhé akce popsat stavy a retenci pracovních dat. |
+| Stav | Sloučeno a archivováno jako neaktivní pravidlo. |
+| Datum a vlastník | 2026-07-27, produktový vlastník exportů. |
+| Původní důvod | Exporty dřív neříkaly uživateli, co se děje, a dočasné soubory neměly jasný konec životnosti. |
+| Důvod konce | Exportní komponenta a šablona exportní změny už otázku řeší konkrétněji. |
+| Dnešní zdroj pravdy | Komponentová dokumentace exportu a produktová karta pro nový typ dlouhé akce. |
+| Datový úklid | Dočasný kontrolní event se vypíná po posledním review, staré screenshoty bez účelu se mažou. |
+| Staré nosiče | Obecný review checklist upraven, onboardingový odkaz přesměrován na exportní komponentu, support makro přepsané. |
+| Hranice návratu | Nové pravidlo vznikne jen tehdy, když produkt přidá další typ dlouhé akce mimo exportní komponentu nebo se opakuje nejistota kolem retence pracovních dat. |
+
+Výsledek: tým ví, proč stará kontrola existovala, ale nepoužívá ji na každou změnu. Dnešní zdroj pravdy je konkrétnější a staré měření nezůstává běžet jen proto, že se kdysi hodilo.
+
+### Checklist: Archivace zrušeného pravidla
+
+- [ ] Rozhodl jsem, že pravidlo má po konci budoucí hodnotu.
+- [ ] Archivní záznam je kratší než původní aktivní pravidlo.
+- [ ] Stav je viditelně označený jako neaktivní.
+- [ ] Dnešní zdroj pravdy je jasný a dostupný.
+- [ ] Aktivní šablony, checklisty, makra a onboardingové texty neobsahují starou formulaci.
+- [ ] Dočasné eventy, reporty, screenshoty, exporty a přístupy mají zavírací akci.
+- [ ] Archiv neobsahuje osobní údaje, zákaznické detaily ani interní citlivosti bez účelu.
+- [ ] Hranice návratu pravidla je konkrétní, ne pocitová.
+- [ ] Tým umí za dvě minuty pochopit, proč pravidlo skončilo.
+- [ ] Staré pravidlo nejde omylem použít jako aktivní instrukce.
+
+### Mini úkol
+
+Vezmi jedno pravidlo, které jste právě zrušili, sloučili nebo nahradili. Do patnácti minut napiš archivní záznam s pěti poli: stav, důvod konce, dnešní zdroj pravdy, datový úklid a hranice návratu. Potom otevři jedno místo, kde se staré pravidlo může samo vrátit, třeba šablonu úkolu nebo support makro, a oprav ho hned. Archiv bez úklidu je jen hezčí jméno pro zapomenutý problém.
+
 ## Zdroje
 
 - IETF RFC 9110: HTTP Semantics - význam HTTP přesměrování a stavů včetně `410 Gone` pro zdroje, které už nejsou dostupné: https://www.rfc-editor.org/rfc/rfc9110.html
@@ -59405,6 +59519,8 @@ Vyber jedno pravidlo, které tým pořád odškrtává, ale už podle něj málo
 - Nielsen Norman Group: Onboarding Tutorials vs. Contextual Help - rozdíl mezi úvodními tutoriály a kontextovou pomocí: https://www.nngroup.com/articles/onboarding-tutorials/
 
 ## Pracovní log
+
+- 2026-07-27: Doplněna příloha o archivaci zrušeného produktového pravidla bez návratu staré pravdy: rozhodování, kdy archivovat, archivní záznam jako směrovka, oddělení archivu od aktivní dokumentace, úklid odkazů a automatických návratů, příklad pravidla pro dlouhé akce, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro archiv zrušeného pravidla. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
 - 2026-07-27: Doplněna příloha o zrušení nebo sloučení zastaralého produktového pravidla bez ztráty poučení: důvody zániku pravidla, karta konce pravidla, rozlišení zrušení/sloučení/archivace/nahrazení, úklid nosičů pravidla, zachování jedné principové věty, příklad sloučení pravidla pro dlouhé akce, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro práci se zastaralým pravidlem. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
