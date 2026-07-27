@@ -197,6 +197,7 @@ Když se nechceš vracet do celé knihy, hledej konkrétní nástroj podle výst
 | Uzavřít zjednodušenou produktovou opravu bez nového procesu | „uzavření zjednodušené opravy“, „redukovaná oprava hotovo“ nebo „stop pravidlo po zjednodušení“ | zavírací review, které potvrdí odstraněný nános, funkční minimální signál a konec mimořádných kontrol |
 | Přenést poučení z uzavřené opravy do produktových pravidel | „poučení z opravy“, „produktové pravidlo“ nebo „oprava naučila tým“ | jedna principová věta, která z uzavřené opravy zlepší budoucí zadávání, review, onboarding nebo dokumentaci bez nového procesu |
 | Převést produktové pravidlo do zadání bez byrokracie | „pravidlo v zadání“, „review otázka“ nebo „produktové pravidlo v praxi“ | malá úprava šablony zadání, akceptačních kritérií nebo review checklistu, která pravidlo dostane do běžné práce bez nového procesu |
+| Ověřit produktové pravidlo po prvním použití | „kontrola pravidla“, „první použití pravidla“ nebo „pravidlo pomohlo“ | krátké review jedné reálné změny, které rozhodne, zda pravidlo ponechat, zúžit, přesunout, přepsat nebo zrušit |
 
 Pravidlo pro práci s rejstříkem: otevři maximálně tři nalezené části, vyber jednu a zapiš výstup. Pokud po deseti minutách pořád skáčeš mezi odkazy, vrať se k tabulce „Kudy začít podle aktuální bolesti“ a zúž problém. E-book není buffet. Teda je, ale bez talíře si stejně odneseš jen chaos.
 
@@ -58715,6 +58716,133 @@ Výsledek: pravidlo se příště objeví v zadání dřív, než někdo navrhne
 
 Vezmi jedno produktové pravidlo z poslední opravy a najdi místo, kudy příště projde podobná změna: issue šablona, produktová karta, design review, QA scénář nebo dokumentace. Přepiš pravidlo na jednu otázku a vlož ji jen tam. Potom vyber jeden starý materiál k archivaci nebo smazání. Pokud kvůli pravidlu vznikají tři nové artefakty, vrať se o krok zpět. Pravidlo má zlepšit práci, ne rozmnožit papírování s lepším brandingem.
 
+## Příloha: Kontrola produktového pravidla po prvním použití bez procesního divadla
+
+Produktové pravidlo se má ověřit na první skutečné práci, ne na pocitu z toho, že v šabloně přibyla hezká otázka. Pokud se pravidlo nepoužije v reálném zadání, review, testu nebo dokumentaci, pořád nevíš, jestli pomáhá. Víš jen, že umíš editovat šablony. To je užitečná dovednost, ale slabý důkaz změny chování týmu.
+
+Špatná otázka zní: „Máme pravidlo zapsané?“
+
+Lepší otázka zní: „Změnilo pravidlo první další rozhodnutí k lepšímu?“
+
+Cílem kontroly není hledat viníka, autora pravidla ani dokonalý proces. Cílem je zjistit, jestli nová otázka zachytila riziko dřív, než se z něj stal další support ticket, regresní chyba nebo mlhavý slib zákazníkovi.
+
+### Vrať se k původní lekci
+
+Začni tím, proč pravidlo vzniklo. Vezmi jednu původní větu, ne celý retrospektivní román:
+
+| Původní lekce | Pravidlo v práci | Co má první použití ukázat |
+| --- | --- | --- |
+| Dlouhá akce bez stavu vedla k nejistotě uživatele. | Produktová karta se ptá na čekání, průběh, hotovo a chybu. | Nová dlouhá akce má stav popsaný už v zadání. |
+| Support šablona slíbila víc než produkt uměl. | Review šablony se ptá na shodu s produktem, pricingem a dokumentací. | Nová odpověď neobsahuje starý obchodní slib. |
+| Exportní pravidla nebyla jasná při downgrade. | Akceptační kritéria se ptají na export před odchodem. | Změna účtu neblokuje legitimní získání dat. |
+| Automatizace provedla zásah potichu. | Zadání automatizace se ptá na pravomoc a lidské schválení. | Je jasné, kdy systém navrhuje a kdy koná. |
+
+Bez návratu k původní lekci se kontrola rychle zvrhne v obecné hodnocení šablony. To je lákavé, protože se dá komentovat donekonečna. Ale první review má být úzké: pomohlo pravidlo proti tomu riziku, kvůli kterému vzniklo?
+
+### Ověř jednu reálnou změnu
+
+Nevybírej ideální demo. Vyber první normální změnu, která pravidlem prošla. Může být malá. Důležité je, že měla skutečný kontext, skutečného vlastníka a skutečný výstup.
+
+Kontrolní karta:
+
+| Pole | Zápis |
+| --- | --- |
+| Pravidlo | Jedna pracovní otázka nebo checklist položka. |
+| První změna | Issue, produktová karta, review, test nebo dokumentace, kde se pravidlo použilo. |
+| Původní riziko | Jaký problém mělo pravidlo zachytit. |
+| Skutečný dopad | Co se v zadání, UI, testu, textu nebo provozu změnilo. |
+| Datová stopa | Jaké nové údaje se kvůli pravidlu začaly sbírat, kopírovat nebo držet. |
+| Verdikt | Ponechat, zúžit, přesunout, přepsat nebo zrušit. |
+
+Drž kartu krátkou. Pokud pro vyhodnocení jedné otázky potřebuješ exportovat historii všech issue, support ticketů a review komentářů, pravidlo už možná začalo žít vlastním životem. Privacy-first kontrola má fungovat i pro procesy: sbírej výsledek rozhodnutí, ne kompletní stopu lidí.
+
+### Hledej změnu rozhodnutí, ne pocit kontroly
+
+Dobré pravidlo se pozná podle toho, že změní práci předem. Typické důkazy:
+
+- do zadání přibyl chybový stav, který by jinak chyběl,
+- akceptační kritéria obsahují návrat zpět nebo export,
+- UI text přestal slibovat neexistující chování,
+- QA scénář přidal jeden skutečně rizikový okrajový stav,
+- dokumentace byla upravena dřív než support začal odpovídat po staru,
+- tým se rozhodl funkci zúžit, protože datová stopa by byla nepřiměřená.
+
+Slabé důkazy:
+
+- někdo zaškrtl nové pole bez změny zadání,
+- review komentář jen zopakoval pravidlo jinými slovy,
+- vznikl nový dashboard, ale nikdo podle něj nerozhodl,
+- pravidlo se použilo až po dokončení práce jako zpětné zdůvodnění,
+- kontrola vyžadovala kopírování osobních detailů do další tabulky.
+
+> Codyho komentář: Pocit kontroly je mazaný. Vypadá jako kvalita, ale často je to jen další vrstva únavy. Pokud pravidlo nemění rozhodnutí, jen se tváří důležitě ve formuláři.
+
+### Zkontroluj srozumitelnost bez autora
+
+Pravidlo musí přežít i bez člověka, který ho napsal. U první změny se zeptej:
+
+- Pochopil vlastník změny otázku bez doplňujícího výkladu?
+- Věděl, jak má vypadat dobrá odpověď?
+- Uměl poznat, kdy pravidlo neplatí?
+- Bylo jasné, kde je zdroj pravdy?
+- Nevedlo pravidlo k obrannému psaní dlouhých odpovědí pro jistotu?
+
+Pokud je pravidlo srozumitelné jen autorovi, není to pravidlo. Je to interní narážka v pracovním formuláři. Přepiš ho jazykem běžné práce: „Co má uživatel vidět při chybě?“ je lepší než „Zohlednit stavovou transparentnost asynchronního procesu“. Druhá věta má sako, ale první věta něco udělá.
+
+### Rozhodni jedním verdiktem
+
+Po první kontrole nedělej nekonečný seznam doporučení. Dej jeden verdikt:
+
+| Verdikt | Kdy ho zvolit | Další krok |
+| --- | --- | --- |
+| Ponechat | Pravidlo zachytilo riziko a nezvětšilo datovou stopu. | Nechat ho v běžné práci a další kontrolu navázat jen na změnu kontextu. |
+| Zúžit | Pravidlo pomohlo, ale je moc široké nebo vede k dlouhým odpovědím. | Přepsat otázku na konkrétnější situaci. |
+| Přesunout | Pravidlo je správné, ale objevilo se pozdě nebo na špatném místě. | Dát ho blíž k zadání, review, testu nebo dokumentaci, kde rozhodnutí vzniká. |
+| Přepsat | Tým otázku nechápe nebo odpovídá formálně. | Přepsat ji do běžné řeči a doplnit jeden dobrý příklad. |
+| Zrušit | Pravidlo nepomohlo, dubluje jinou kontrolu nebo přidává šum. | Odebrat ho a v logu nechat krátké vysvětlení. |
+
+Nejzdravější verdikt je často „zúžit“. Pravidlo může být dobré a přesto příliš široké. To není selhání. Selhání je nechat špatně padnoucí pravidlo v provozu jen proto, že už jednou vzniklo.
+
+### Příklad: Stav dlouhé akce po první produktové kartě
+
+Tým přidal do produktové karty otázku:
+
+„Má tato dlouhá akce stav pro čekání, průběh, dokončení a chybu, který pochopí uživatel bez supportu?“
+
+První změna je import zákaznického seznamu.
+
+| Pole | Zápis |
+| --- | --- |
+| Původní riziko | Uživatel neví, jestli dlouhá akce běží, skončila nebo se rozbila. |
+| Skutečný dopad | Zadání doplnilo obrazovku průběhu importu, stav po refreshi a chybovou hlášku s dalším bezpečným krokem. |
+| Co se změnilo v testu | QA scénář ověřuje nahrání souboru, čekání, úspěch, chybu validace a návrat po zavření okna. |
+| Datová stopa | Import ukládá jen stav dávky, počet řádků a agregovaný typ chyby; neukládá celý původní soubor do analytiky. |
+| Slabina pravidla | Otázka neříká, kdy se má dočasný importní soubor smazat. |
+| Verdikt | Zúžit a doplnit do stejného pole větu o retenci dočasných souborů. |
+
+Výsledná otázka:
+
+„Má tato dlouhá akce stav pro čekání, průběh, dokončení a chybu a je jasné, kdy se smažou dočasná pracovní data?“
+
+To je dobrá oprava pravidla. Nevznikl nový proces, jen přesnější otázka. A hlavně: poučení se dostalo do dalšího produktu dřív, než se problém zopakoval.
+
+### Checklist: Kontrola produktového pravidla po prvním použití
+
+- [ ] Vrátil jsem se k původní lekci, kvůli které pravidlo vzniklo.
+- [ ] Vybral jsem první reálnou změnu, ne umělé demo.
+- [ ] Zapsal jsem, co pravidlo změnilo v zadání, UI, testu, dokumentaci nebo provozu.
+- [ ] Rozlišil jsem skutečný dopad od pouhého zaškrtnutí políčka.
+- [ ] Ověřil jsem, že pravidlo je srozumitelné i bez autora.
+- [ ] Zkontroloval jsem, jestli pravidlo nezaložilo nový zbytečný sběr dat, screenshotů, ticketů nebo logů.
+- [ ] Dal jsem jeden verdikt: ponechat, zúžit, přesunout, přepsat nebo zrušit.
+- [ ] Pokud pravidlo zůstává, má jasné místo práce a zdroj pravdy.
+- [ ] Pokud pravidlo končí, uklidil jsem ho ze šablon a nechal krátký důvod v rozhodovacím logu.
+- [ ] Další kontrola je navázaná na změnu kontextu, ne na nekonečný rituál.
+
+### Mini úkol
+
+Vyber jedno produktové pravidlo, které už prošlo první reálnou změnou. Do deseti minut vyplň kontrolní kartu: původní lekce, první změna, skutečný dopad, datová stopa a verdikt. Pokud neumíš napsat konkrétní dopad, pravidlo zatím nepomohlo; zúž ho, přesuň nebo zruš. Pokud kvůli kontrole potřebuješ další export osobních detailů, vrať se k rozhodnutí, které chceš ověřit. Proces, který prokazuje kvalitu tím, že sbírá další data o lidech, si říká o vlastní audit. A ten si fakt nikdo dobrovolně nepřeje.
+
 ## Zdroje
 
 - IETF RFC 9110: HTTP Semantics - význam HTTP přesměrování a stavů včetně `410 Gone` pro zdroje, které už nejsou dostupné: https://www.rfc-editor.org/rfc/rfc9110.html
@@ -58908,6 +59036,8 @@ Vezmi jedno produktové pravidlo z poslední opravy a najdi místo, kudy příš
 - Nielsen Norman Group: Onboarding Tutorials vs. Contextual Help - rozdíl mezi úvodními tutoriály a kontextovou pomocí: https://www.nngroup.com/articles/onboarding-tutorials/
 
 ## Pracovní log
+
+- 2026-07-27: Doplněna příloha o kontrole produktového pravidla po prvním použití bez procesního divadla: návrat k původní lekci, ověření jedné reálné změny, rozlišení skutečného dopadu od zaškrtnutého políčka, srozumitelnost pravidla bez autora, verdikty ponechat/zúžit/přesunout/přepsat/zrušit, příklad stavu dlouhé akce po první produktové kartě, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro ověření produktového pravidla. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
 - 2026-07-27: Doplněna příloha o převodu produktového pravidla do zadání bez byrokratického batohu: výběr existující brány práce, přepis pravidla na jednu pracovní otázku, nejmenší možná úprava šablony nebo review, ověření pravidla na první reálné změně, úklid starých lessons learned materiálů, příklad stavu dlouhé akce, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro produktové pravidlo v zadání. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
