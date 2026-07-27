@@ -202,6 +202,7 @@ Když se nechceš vracet do celé knihy, hledej konkrétní nástroj podle výst
 | Uzavřít upravené produktové pravidlo po kontrolním okně | „uzavření pravidla“, „pravidlo po úpravě“ nebo „kontrolní okno hotovo“ | krátké zavírací rozhodnutí, zda pravidlo zůstává, zúží se, přesune, sloučí nebo skončí bez nové procesní vrstvy |
 | Zrušit nebo sloučit zastaralé produktové pravidlo | „zastaralé pravidlo“, „pravidlo končí“ nebo „sloučení pravidel“ | rozhodnutí, které staré pravidlo odebrat, sloučit, archivovat nebo nahradit bez ztráty původního poučení |
 | Archivovat zrušené produktové pravidlo bez návratu staré pravdy | „archiv pravidla“, „zrušené pravidlo“ nebo „stará pravda“ | archivní záznam s důvodem konce, aktuální náhradou, datovým úklidem, odkazovým úklidem a hranicí návratu pravidla |
+| Znovu otevřít archivované pravidlo bez panického návratu procesu | „návrat archivovaného pravidla“, „archiv se vrací“ nebo „staré pravidlo znovu“ | re-entry karta s novým signálem, kontrolou dnešní náhrady, nejmenším zásahem a rozhodnutím, zda obnovit pravidlo, upravit produkt nebo archiv nechat zavřený |
 
 Pravidlo pro práci s rejstříkem: otevři maximálně tři nalezené části, vyber jednu a zapiš výstup. Pokud po deseti minutách pořád skáčeš mezi odkazy, vrať se k tabulce „Kudy začít podle aktuální bolesti“ a zúž problém. E-book není buffet. Teda je, ale bez talíře si stejně odneseš jen chaos.
 
@@ -59326,6 +59327,126 @@ Výsledek: tým ví, proč stará kontrola existovala, ale nepoužívá ji na ka
 
 Vezmi jedno pravidlo, které jste právě zrušili, sloučili nebo nahradili. Do patnácti minut napiš archivní záznam s pěti poli: stav, důvod konce, dnešní zdroj pravdy, datový úklid a hranice návratu. Potom otevři jedno místo, kde se staré pravidlo může samo vrátit, třeba šablonu úkolu nebo support makro, a oprav ho hned. Archiv bez úklidu je jen hezčí jméno pro zapomenutý problém.
 
+## Příloha: Návrat archivovaného pravidla bez panického obnovení procesu
+
+Archivované pravidlo se občas vrátí do konverzace. To samo o sobě není problém. Problém je, když tým vidí jeden nový signál a okamžitě obnoví celý starý proces, staré checklisty, staré metriky a starou nejistotu. Archiv nemá být betonový hrob. Má být kontrolované místo, odkud jde vzít poučení, porovnat ho s dnešní realitou a rozhodnout, jestli se opravdu změnila situace.
+
+Špatná otázka zní: „Máme pravidlo vrátit?“
+
+Lepší otázka zní: „Co se změnilo proti době, kdy jsme pravidlo archivovali, a jaký nejmenší zásah dnes pokryje nové riziko?“
+
+Návrat archivovaného pravidla ber jako malý produktový incident v dokumentaci. Nejdřív zjisti, co se stalo. Potom zkontroluj, jestli dnešní náhrada selhala. A až pak rozhoduj, jestli je potřeba pravidlo obnovit, přepsat, přesunout do konkrétnějšího místa, nebo archiv jen doplnit o novou poznámku.
+
+### Začni novým signálem, ne starým strachem
+
+Pravidlo se nemá vracet kvůli větě „tohle už jsme jednou řešili“. Má se vracet kvůli konkrétnímu signálu z práce.
+
+Užitečné signály:
+
+- zákazník znovu nerozumí stavu dlouhé akce,
+- support opakovaně ručně vysvětluje stejnou věc,
+- release obešel dnešní zdroj pravdy,
+- dočasná data zůstala déle, než měla,
+- nová funkce vytvořila podobné riziko mimo původní komponentu,
+- tým neumí najít aktuální náhradu archivovaného pravidla,
+- veřejný slib a interní postup se začaly rozcházet.
+
+Slabé signály:
+
+- někdo si na staré pravidlo vzpomněl při review,
+- nový člověk se zeptal, proč pravidlo zmizelo,
+- auditní tabulka vypadá prázdněji než dřív,
+- tým má pocit, že „by se mělo něco kontrolovat“,
+- jeden edge case se vyřešil ručně a už se neopakoval.
+
+Codyho komentář: Strach je dobrý alarm, ale mizerný produktový manažer. Když se staré pravidlo vrací jen proto, že nám chybí pocit kontroly, nejspíš nepotřebujeme pravidlo. Potřebujeme lepší vysvětlení dnešního stavu.
+
+### Udělej re-entry kartu
+
+Než obnovíš pravidlo, napiš krátkou kartu návratu. Stačí jedna tabulka. Její práce je zpomalit paniku a donutit tým rozlišit staré poučení od nového rizika.
+
+| Pole | Co vyplnit |
+| --- | --- |
+| Archivované pravidlo | Název nebo krátká formulace původního pravidla. |
+| Dnešní signál | Co konkrétně se stalo teď, ne co se stalo kdysi. |
+| Dotčená práce | Který produktový tok, šablona, runbook, zákaznická situace nebo veřejný slib je zasažený. |
+| Dnešní zdroj pravdy | Kde má být téma řešené po archivaci pravidla. |
+| Selhání náhrady | Jestli náhrada chyběla, byla nesrozumitelná, nebyla použitá, nebo nestačila pro nový kontext. |
+| Datový dopad | Jaká data se kvůli problému sbírala, držela, sdílela nebo musela ručně dohledávat. |
+| Nejmenší zásah | Jedna změna, která může problém pokrýt bez obnovy celého procesu. |
+| Kontrolní okno | Kdy ověříme, jestli zásah stačil. |
+| Verdikt | Archiv ponechat, doplnit archiv, opravit náhradu, obnovit zúžené pravidlo, nebo otevřít produktovou opravu. |
+
+Re-entry karta má být krátká. Pokud z ní vznikne dvoustránkový rozbor, tým pravděpodobně nemá problém s pravidlem, ale s nejasným vlastnictvím tématu.
+
+### Zkontroluj dnešní náhradu dřív než archiv
+
+Archivované pravidlo obvykle skončilo proto, že se jeho poučení přesunulo jinam: do komponenty, šablony, runbooku, review otázky nebo produktového chování. První kontrola proto nemá být „vrátit pravidlo“, ale „proč dnešní náhrada nezafungovala“.
+
+Typické nálezy:
+
+| Nález | Pravděpodobná oprava |
+| --- | --- |
+| Náhrada existuje, ale tým ji nenašel | Opravit odkazy, názvy, interní vyhledávání nebo onboarding. |
+| Náhrada existuje, ale je moc obecná | Přidat konkrétní otázku, příklad nebo stop hranici. |
+| Náhrada funguje pro starý produkt, ale ne pro novou funkci | Rozšířit konkrétní komponentu nebo založit novou produktovou kartu. |
+| Náhrada je v dokumentaci, ale ne v pracovním toku | Přesunout otázku do šablony zadání, review nebo release checklistu. |
+| Náhrada vyžaduje ruční dohled nad lidmi | Zúžit ji na agregovaný signál nebo provozní kontrolu bez profilování. |
+| Náhrada je správná, ale obchodní text slibuje něco jiného | Opravit veřejný text nebo sales makro, ne obnovovat interní pravidlo. |
+
+Privacy-first důsledek: návrat pravidla nesmí být zkratka k návratu starého sledování. Pokud problém pokryje lepší text, jasnější stav v produktu nebo přesnější šablona, nedělej z toho analytický projekt.
+
+### Rozhodni mezi pěti verdikty
+
+Po re-entry kartě dej jeden verdikt. Bez verdiktu se archivované pravidlo začne neformálně používat a vznikne dvojí pravda: oficiálně neaktivní, prakticky straší v review.
+
+| Verdikt | Kdy ho použít | Co udělat |
+| --- | --- | --- |
+| Archiv zůstává zavřený | Signál byl jednorázový nebo vysvětlitelný bez systémové změny. | Do archivu přidej krátkou poznámku jen pokud pomůže budoucímu čtenáři. |
+| Doplnit archiv | Chyběla hranice návratu nebo vysvětlení dnešní náhrady. | Uprav archivní záznam, ale neobnovuj aktivní checklist. |
+| Opravit dnešní náhradu | Náhrada má správné místo, ale špatný text, odkaz nebo příklad. | Udělej malou změnu v aktivní šabloně, runbooku nebo komponentě. |
+| Obnovit zúžené pravidlo | Riziko se opakuje a dnešní náhrada ho neumí pokrýt. | Vrať pravidlo jen do konkrétního pracovního místa se stop pravidlem. |
+| Otevřít produktovou opravu | Problém je v realitě produktu, ne v dokumentaci. | Založ produktovou kartu s dopadem na uživatele, data a měření. |
+
+Nejzdravější verdikt často není „obnovit pravidlo“, ale „opravit náhradu“. Staré pravidlo bývá široké, protože vzniklo ve stresu. Nová oprava může být úzká, protože už víš víc.
+
+### Příklad: Stav dlouhé akce se vrací
+
+Situace: Archivované pravidlo říkalo, že každá dlouhá akce musí popsat stav a retenci pracovních dat. Pravidlo bylo sloučené do exportní komponenty. O měsíc později vzniká nová funkce pro hromadnou změnu položek mimo exportní komponentu. Support dostává dva dotazy, jestli akce doběhla a co se stane s dočasným souborem.
+
+Re-entry karta:
+
+| Pole | Zápis |
+| --- | --- |
+| Archivované pravidlo | U každé dlouhé akce popsat stavy a retenci pracovních dat. |
+| Dnešní signál | Dva support dotazy k nové hromadné změně mimo exportní komponentu. |
+| Dotčená práce | Produktová karta hromadné změny, support makro, dokumentace dlouhých akcí. |
+| Dnešní zdroj pravdy | Exportní komponenta a produktová karta pro nový typ dlouhé akce. |
+| Selhání náhrady | Náhrada byla příliš svázaná s exportem a nepokrývala nový typ dlouhé akce. |
+| Datový dopad | Dočasný vstupní soubor má jasný účel, ale v produktu není viditelný konec jeho životnosti. |
+| Nejmenší zásah | Přidat do šablony produktové karty otázku „Je to dlouhá akce mimo existující komponentu?“ a doplnit stav v UI hromadné změny. |
+| Kontrolní okno | Po dvou dalších releasech zkontrolovat nové dlouhé akce a support dotazy. |
+| Verdikt | Opravit dnešní náhradu, neobnovovat obecné pravidlo do všech review. |
+
+Výsledek: tým nevrátil starý široký checklist. Opravil místo, kde se ukázala mezera, a nechal archiv jako zdroj poučení. Dočasná data dostala viditelný konec bez nového plošného sledování lidí.
+
+### Checklist: Návrat archivovaného pravidla
+
+- [ ] Mám konkrétní nový signál, ne jen vzpomínku na staré riziko.
+- [ ] Vím, kde dnes téma mělo být pokryté po archivaci pravidla.
+- [ ] Rozlišil jsem selhání dokumentace, pracovního toku, produktu a obchodního slibu.
+- [ ] Neobnovuji staré metriky, eventy, exporty nebo přístupy automaticky.
+- [ ] Nejmenší zásah je menší než návrat celého původního procesu.
+- [ ] Pokud se pravidlo vrací, vrací se jen do konkrétního místa práce.
+- [ ] Obnovené nebo upravené pravidlo má stop hranici.
+- [ ] Archivní záznam zůstává jasně označený jako archiv, ne aktivní instrukce.
+- [ ] Veřejné texty a support makra odpovídají dnešní pravdě.
+- [ ] Po kontrolním okně bude jasný verdikt: ponechat, zúžit, přesunout, opravit produkt nebo znovu zavřít.
+
+### Mini úkol
+
+Najdi jeden archivní záznam, který se v poslední době někdo pokusil vytáhnout zpět do práce. Do dvaceti minut napiš re-entry kartu: nový signál, dnešní zdroj pravdy, selhání náhrady, nejmenší zásah a verdikt. Pokud nemáš konkrétní nový signál, pravidlo neobnovuj. Místo toho doplň archivní záznam tak, aby příště lépe vysvětloval, proč pravidlo zůstává zavřené.
+
 ## Zdroje
 
 - IETF RFC 9110: HTTP Semantics - význam HTTP přesměrování a stavů včetně `410 Gone` pro zdroje, které už nejsou dostupné: https://www.rfc-editor.org/rfc/rfc9110.html
@@ -59519,6 +59640,8 @@ Vezmi jedno pravidlo, které jste právě zrušili, sloučili nebo nahradili. Do
 - Nielsen Norman Group: Onboarding Tutorials vs. Contextual Help - rozdíl mezi úvodními tutoriály a kontextovou pomocí: https://www.nngroup.com/articles/onboarding-tutorials/
 
 ## Pracovní log
+
+- 2026-07-27: Doplněna příloha o návratu archivovaného pravidla bez panického obnovení procesu: rozlišení nového signálu od starého strachu, re-entry karta, kontrola dnešní náhrady, pět verdiktů, příklad návratu pravidla pro dlouhé akce, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro znovuotevření archivovaného pravidla. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
 - 2026-07-27: Doplněna příloha o archivaci zrušeného produktového pravidla bez návratu staré pravdy: rozhodování, kdy archivovat, archivní záznam jako směrovka, oddělení archivu od aktivní dokumentace, úklid odkazů a automatických návratů, příklad pravidla pro dlouhé akce, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro archiv zrušeného pravidla. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
