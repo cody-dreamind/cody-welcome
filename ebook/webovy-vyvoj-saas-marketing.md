@@ -60379,6 +60379,155 @@ Výsledek: nové pravidlo je přesnější, staré pravidlo už nikde tiše nebl
 
 Vyber jedno pravidlo, které bylo v posledním měsíci změněné po pilotu automatizace. Do třiceti minut najdi pět nosičů staré pravdy: kód nebo validaci, pracovní šablonu, metriku nebo report, přístup nebo token a veřejný nebo podpůrný text. U každého napiš verdikt: smazat, upravit, archivovat nebo ponechat s důvodem. Pokud najdeš běžící starý sběr dat, ukonči ho jako první. Pokud nejde bezpečně určit vlastník, otevři jednu zavírací kartu místo dalšího volného seznamu.
 
+## Příloha: Přenos poučení z automatizace bez procesu navíc
+
+Automatizace, která prošla pilotem, zanechá víc než jen fungující skript nebo kontrolu. Zanechá poznání: které pravidlo bylo nejasné, kde vznikal šum, jaká data se ve skutečnosti používají, které výjimky jsou oprávněné a kde tým spoléhal na ruční paměť.
+
+Špatná otázka zní: „Sepíšeme k tomu nový proces?“
+
+Lepší otázka zní: „Co jsme se naučili a kam to vložíme, aby to příště zlepšilo práci bez další vrstvy schvalování?“
+
+Poučení z automatizace má skončit v produktu, dokumentaci, šabloně, runbooku nebo rozhodovacím logu. Nemá automaticky zakládat další meeting, další tabulku a další povinný report. Když každý dobrý nález porodí nový proces, tým začne automatizaci vnímat jako zdroj administrativy. A pak ji bude obcházet, i když technicky funguje.
+
+### Vytáhni poučení z konkrétní změny práce
+
+Začni otázkou, co se díky automatizaci změnilo v reálné práci. Ne co ukázal dashboard, ale co lidé nebo systém dělají jinak.
+
+Typická poučení:
+
+- pravidlo bylo napsané moc široce,
+- vstupní data byla zbytečně bohatá,
+- výjimky ukázaly legitimní variantu práce,
+- šum vznikal ve špatném místě workflow,
+- tým neměl jasného vlastníka rozhodnutí,
+- veřejný text sliboval jednodušší svět než produkt,
+- ruční kontrola držela pohromadě znalost, která měla být v šabloně,
+- automatizace upozornila na starý datový sběr bez současného účelu.
+
+Každé poučení napiš jako pracovní větu:
+
+„Zjistili jsme, že ___, proto od teď ___ v ___.“
+
+Příklad: „Zjistili jsme, že retenční kontrola exportů nemá číst interní migrační balíky, proto od teď rozlišujeme uživatelský export a interní migraci přímo v produktové šabloně.“
+
+Pokud věta končí slovy „budeme na to myslet“, ještě nemáš poučení. Máš přání. Přání je hezké, ale v běžném provozu má podobnou životnost jako poznámka na kraji tabule.
+
+### Rozhodni, kam poučení patří
+
+Poučení patří tam, kde příště vznikne stejné rozhodnutí. Ne tam, kde se nejlépe vyjímá.
+
+| Typ poučení | Kam ho vložit | Co nevytvářet |
+| --- | --- | --- |
+| Pravidlo bylo nejasné | šablona zadání, review checklist nebo akceptační kritéria | samostatný proces pro „kontrolu jasnosti“ |
+| Šum vznikal kvůli špatnému vstupu | produktová karta, datový slovník nebo validační pravidlo | nový dashboard šumových případů |
+| Výjimka byla oprávněná | popis podporované varianty nebo rozhodovací strom | trvalý seznam výjimek bez vlastníka |
+| Chyběl vlastník | provozní karta schopnosti nebo runbook | pravidelný meeting jen kvůli vlastnictví |
+| Veřejný slib byl nepřesný | nápověda, trust text, support makro nebo pricing vysvětlení | interní vysvětlení, které zákazník nikdy neuvidí |
+| Data byla příliš široká | integrační kontrakt, event specifikace nebo oprávnění | nová kontrola nadbytečných dat bez jejich odebrání |
+| Ruční zásah byl nutný moc často | produktová oprava nebo zjednodušení pravidla | větší eskalační matice |
+
+Pravidlo: nejdřív oprav místo vzniku, potom dokumentuj. Dokumentace má zachytit novou pravdu. Nemá suplovat produkt, který pořád nutí lidi dělat stejnou chybu.
+
+### Udělej učící kartu
+
+Učící karta je malý záznam, který převede poznatek na jedno rozhodnutí. Nepatří do ní kompletní historie pilotu, výpis upozornění ani osobní rozbor toho, kdo co přehlédl. Patří do ní důvod, změna a místo, kde se změna projeví.
+
+| Pole | Otázka |
+| --- | --- |
+| Spouštěč | Jaká automatizace, pilot nebo review poučení odkryly? |
+| Poznatek | Co přesně jsme se naučili o práci, datech nebo pravidle? |
+| Dopad | Jaký problém vznikal, když jsme to nevěděli? |
+| Změna | Co od teď upravíme v produktu, dokumentaci, šabloně nebo runbooku? |
+| Privacy hranice | Sbíráme, ukládáme nebo sdílíme po změně méně dat, stejně dat, nebo víc dat? |
+| Vlastník | Kdo změnu zapíše do správného místa pravdy? |
+| Zavření | Jak poznáme, že poučení už je přeneseno a karta může skončit? |
+
+Dobrý zápis: „Pilot kontroly exportů ukázal, že dvě oprávněné výjimky nebyly výjimky, ale chybějící typ práce. Do produktové šablony přidáváme rozlišení `uživatelský export` / `interní migrační balík`; automatizace dál čte jen první typ. Karta se zavře po úpravě šablony, CI kontroly a support snippetu.“
+
+Špatný zápis: „Zlepšit exporty.“ To je fráze do prezentace, ne do provozu.
+
+### Přenes poučení bez sledování lidí
+
+Automatizace často láká k tomu, aby tým začal sledovat chování jednotlivců: kdo kolikrát ignoroval upozornění, kdo udělal výjimku, kdo vyplnil šablonu pozdě. Většinou to není potřeba. Cílem je zlepšit systém práce, ne vyrábět žebříček poslušnosti.
+
+Privacy-first přenos poučení dodržuje tři pravidla:
+
+1. Zachovej agregovaný nebo věcný signál, ne osobní výkonový záznam.
+2. Ukládej jen důvod změny a výsledek, ne kompletní pilotní historii.
+3. Oprav pravidlo, šablonu nebo produkt dřív, než začneš přidávat dohled.
+
+Příklad: místo „Petr třikrát obešel retenční kontrolu“ napiš „Kontrola nerozlišovala interní migrační balík; doplňujeme typ exportu a rušíme osobní seznam override“. Pokud potřebuješ řešit opakované obcházení pravidel, řeš ho jako problém vlastnictví nebo srozumitelnosti, ne jako výchozí analytiku lidí.
+
+> Codyho komentář: Jakmile poučení z automatizace začne vypadat jako docházkový systém pro práci s checklistem, ztratilo pointu. Chytrý provoz snižuje počet míst, kde člověk může udělat chybu. Nezvyšuje počet míst, kde ho za chybu pozorujeme.
+
+### Vyber nejmenší trvalou změnu
+
+Ne každé poučení si zaslouží nový nástroj. Často stačí malá úprava v existujícím místě:
+
+- jedna otázka v review checklistu,
+- jedno pole v produktové kartě,
+- jeden odstavec v runbooku,
+- jedna validační hláška,
+- jedna poznámka v datovém slovníku,
+- jedna oprava support makra,
+- jedno odstranění starého eventu nebo reportu.
+
+Před každou změnou si polož tři otázky:
+
+| Otázka | Dobrý signál |
+| --- | --- |
+| Kde příště vznikne stejné rozhodnutí? | Změnu umíme vložit přímo tam. |
+| Co můžeme odstranit místo přidání další kontroly? | Starý report, pole, token nebo krok zmizí. |
+| Jak poznáme, že změna stačí? | Existuje první reálné použití nebo krátké review bez nového měření lidí. |
+
+Když nedokážeš určit nejmenší trvalou změnu, dej poučení do rozhodovacího logu jako otevřený signál, ne jako okamžitý proces. Lepší je přiznat „zatím nevíme“, než vyrobit povinnost, kterou za dva týdny nikdo nechápe.
+
+### Příklad: Automatizace naučila tým opravit šablonu
+
+Situace: Automatizace kontroluje, jestli produktové karty pro nové exporty obsahují retenční informaci. Pilot ukázal šest upozornění. Čtyři vedla k opravě, dvě byla oprávněná výjimka u interních migračních balíků. Staré pravidlo už bylo uklizeno, ale poučení ještě není přenesené do běžné práce.
+
+Učící karta:
+
+| Pole | Zápis |
+| --- | --- |
+| Spouštěč | Pilot automatizované retenční kontroly exportů. |
+| Poznatek | Tým potřebuje rozlišit uživatelský export a interní migrační balík už při zadání práce. |
+| Dopad | Bez rozlišení automatizace upozorňuje na legitimní interní práci a tým ručně vysvětluje výjimky. |
+| Změna | Do produktové šablony přidat pole `typ_exportu` s hodnotami `uživatelský_export` a `interní_migrace`. |
+| Privacy hranice | Automatizace dál čte jen typ exportu a stav retenční věty; nečte obsah exportu ani jména zákazníků. |
+| Vlastník | Produktový vlastník šablony. |
+| Zavření | První dvě nové exportní karty použijí pole bez ručního dovysvětlení; starý výjimkový seznam se smaže. |
+
+Nejmenší trvalá změna:
+
+| Místo | Úprava |
+| --- | --- |
+| Produktová šablona | Přidat povinné pole `typ_exportu`. |
+| Review checklist | Nahradit obecnou otázku „má export retenci?“ otázkou podle typu exportu. |
+| Automatizace | Číst jen `typ_exportu` a existenci retenční věty u uživatelského exportu. |
+| Support snippet | Mluvit jen o uživatelských exportech dostupných zákazníkovi. |
+| Rozhodovací log | Nechat jednu větu, proč se rozlišují dva typy exportu. |
+| Úklid | Smazat pilotní seznam výjimek a pilotní report s odkazy na konkrétní karty. |
+
+Výsledek: poučení nezůstalo v hlavě autora automatizace. Přesunulo se do místa, kde vzniká nová práce. Tým nepřidal kontrolní meeting, ale zúžil šablonu, automatizaci a veřejnou odpověď. To je přesně ten druh nudné provozní elegance, která se neprodává na konferenci, ale šetří středy odpoledne.
+
+### Checklist: Přenos poučení z automatizace
+
+- [ ] Napsal jsem pracovní větu „Zjistili jsme, že ___, proto od teď ___ v ___.“
+- [ ] Rozlišil jsem poznatek o pravidle, datech, výjimce, vlastnictví, veřejném slibu a technickém vynucení.
+- [ ] Vybral jsem místo, kde příště vznikne stejné rozhodnutí.
+- [ ] Přenesl jsem poučení do existující šablony, runbooku, dokumentace, produktu nebo rozhodovacího logu.
+- [ ] Nepřidal jsem nový meeting, dashboard ani report, pokud nebyly nutné k rozhodnutí.
+- [ ] Omezil jsem pilotní data a smazal výstupy, které už nejsou potřeba.
+- [ ] Nepoužil jsem poučení k hodnocení lidí, pokud problém šel opravit v systému práce.
+- [ ] Zkontroloval jsem, zda změna nesbírá víc dat než původní stav.
+- [ ] Určil jsem vlastníka přenosu a zavírací kritérium.
+- [ ] Zapsal jsem jen jednu trvalou stopu, která pomůže budoucímu týmu pochopit důvod změny.
+
+### Mini úkol
+
+Vyber jednu automatizaci, která už prošla pilotem nebo kontrolním oknem. Do třiceti minut napiš učící kartu: spouštěč, poznatek, dopad, změna, privacy hranice, vlastník a zavření. Potom vyber jedno místo, kam poučení opravdu patří: šablonu, runbook, dokumentaci, produkt nebo rozhodovací log. Pokud je jediným výsledkem nový report, vrať se o krok zpět a najdi změnu, která odstraní příčinu šumu nebo nejistoty.
+
 ## Zdroje
 
 - IETF RFC 9110: HTTP Semantics - význam HTTP přesměrování a stavů včetně `410 Gone` pro zdroje, které už nejsou dostupné: https://www.rfc-editor.org/rfc/rfc9110.html
@@ -60572,6 +60721,8 @@ Vyber jedno pravidlo, které bylo v posledním měsíci změněné po pilotu aut
 - Nielsen Norman Group: Onboarding Tutorials vs. Contextual Help - rozdíl mezi úvodními tutoriály a kontextovou pomocí: https://www.nngroup.com/articles/onboarding-tutorials/
 
 ## Pracovní log
+
+- 2026-07-27: Doplněna příloha o přenosu poučení z automatizace bez procesu navíc: převod poznatků z pilotu do produktu, šablon, runbooku, dokumentace nebo rozhodovacího logu, učící karta, privacy-first omezení osobního dohledu, výběr nejmenší trvalé změny, příklad retenční kontroly exportů, checklist a mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
 - 2026-07-27: Doplněna příloha o úklidu starého pravidla po ověřené změně automatizace bez dvojí pravdy: zavírací karta starého pravidla, bezpečné pořadí úklidu nosičů, kontrola kódu, metrik, výjimek a přístupů, oprava veřejných slibů a podpůrných textů, zachování jedné archivní stopy, příklad starého retenčního pravidla po automatizaci, checklist a mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
