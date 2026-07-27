@@ -208,6 +208,7 @@ Když se nechceš vracet do celé knihy, hledej konkrétní nástroj podle výst
 | Zkontrolovat obnovené pravidlo po několika použitích | „pravidlo po několika použitích“, „běžné použití pravidla“ nebo „pravidlo se usadilo“ | lehké review skutečných použití, výjimek, nákladu, datové stopy a verdiktu ponechat, zúžit, přesunout, automatizovat opatrně nebo ukončit |
 | Automatizovat produktové pravidlo opatrně | „automatizace produktového pravidla“, „pravidlo jako kontrola“ nebo „mechanické pravidlo“ | automatizační karta, která převede opakovanou kontrolu do malé pomůcky s ručním rozhodnutím, omezenými vstupy, logy a vypínačem |
 | Ověřit automatizované produktové pravidlo po pilotu | „kontrola automatizace pravidla“, „automatizované pravidlo po pilotu“ nebo „automatická kontrola hotovo“ | pilotní review upozornění, oprav, výjimek, šumu, datové stopy a rozhodnutí ponechat, ztišit, zúžit, přesunout, vrátit ručně nebo vypnout |
+| Zapsat rozhodnutí o automatizovaném produktovém pravidle | „rozhodovací záznam pravidla“, „proč kontrola běží“ nebo „automatizační ADR pravidla“ | krátký záznam účelu, rozsahu, datové hranice, pravomoci, vlastníka, revize a vypnutí bez opisování celé historie pilotu |
 
 Pravidlo pro práci s rejstříkem: otevři maximálně tři nalezené části, vyber jednu a zapiš výstup. Pokud po deseti minutách pořád skáčeš mezi odkazy, vrať se k tabulce „Kudy začít podle aktuální bolesti“ a zúž problém. E-book není buffet. Teda je, ale bez talíře si stejně odneseš jen chaos.
 
@@ -60528,6 +60529,163 @@ Výsledek: poučení nezůstalo v hlavě autora automatizace. Přesunulo se do m
 
 Vyber jednu automatizaci, která už prošla pilotem nebo kontrolním oknem. Do třiceti minut napiš učící kartu: spouštěč, poznatek, dopad, změna, privacy hranice, vlastník a zavření. Potom vyber jedno místo, kam poučení opravdu patří: šablonu, runbook, dokumentaci, produkt nebo rozhodovací log. Pokud je jediným výsledkem nový report, vrať se o krok zpět a najdi změnu, která odstraní příčinu šumu nebo nejistoty.
 
+## Příloha: Rozhodovací záznam automatizovaného produktového pravidla bez auditního divadla
+
+Když automatizované produktové pravidlo projde pilotem, tým má tendenci udělat dvě chyby. Buď nechá kontrolu běžet jen proto, že už existuje, nebo kolem ní vystaví velký schvalovací chrám. Ani jedno není dobrý provoz. Automatizace potřebuje krátký rozhodovací záznam: proč běží, kde platí, jakou má pravomoc, jaká data čte, kdo ji vlastní a kdy se má znovu zpochybnit.
+
+Špatná otázka zní: „Máme k tomu dost dokumentace?“
+
+Lepší otázka zní: „Umí nový vlastník za deset minut pochopit, proč kontrola existuje, co nesmí dělat a kdy ji vypnout?“
+
+Rozhodovací záznam není auditní román. Je to provozní paměť, která chrání tým před dvojí pravdou: pravidlo v šabloně říká jedno, automatizace v CI druhé a support ve veřejném textu třetí. Čím kratší záznam je, tím větší šance, že ho někdo při změně pravidla opravdu přečte.
+
+### Zapiš důvod, ne historii
+
+Začni jednou větou, která vysvětlí rozhodnutí v čase:
+
+„Kontrola ___ běží, protože ___; platí jen pro ___; člověk rozhoduje ___; vypínáme ji, když ___.“
+
+Příklad: „Kontrola retenční věty u uživatelských exportů běží, protože nové exporty dřív vznikaly bez jasného konce životnosti dat; platí jen pro produktové karty s typem `uživatelský_export`; člověk rozhoduje výjimky; vypínáme ji, když pravidlo převezme validační logika produktu nebo přestane existovat daný typ exportu.“
+
+Do záznamu nepatří:
+
+- kompletní seznam pilotních upozornění,
+- jména lidí, kteří něco opravovali,
+- kopie starých diskusí,
+- screenshoty interních karet,
+- přesvědčovací text pro budoucí spor,
+- metriky, podle kterých už se nebude rozhodovat.
+
+Do záznamu patří jen důvod, hranice a další revize. Všechno ostatní je archivní gravitace. Chvíli to vypadá seriózně, pak to začne tahat tým dolů.
+
+### Použij malý automatizační ADR
+
+Pro automatizované produktové pravidlo stačí lehký rozhodovací záznam. Může žít vedle běžných ADR, v runbooku automatizace, v produktové dokumentaci nebo v repozitáři u skriptu. Důležité je jedno místo pravdy.
+
+| Pole | Co zapsat |
+| --- | --- |
+| Rozhodnutí | Jedna věta, co automatizace dělá a proč zůstává v provozu. |
+| Rozsah | Kde pravidlo platí a kde výslovně neplatí. |
+| Vstupy | Jaká pole, soubory, události nebo metadatové signály automatizace čte. |
+| Nevstupy | Co automatizace číst nesmí, i kdyby to technicky šlo. |
+| Pravomoc | Zda jen radí, varuje, blokuje, vytváří návrh nebo provádí akci. |
+| Lidské rozhodnutí | Kdo může výjimku schválit a kde se výjimka zapíše. |
+| Privacy hranice | Jak kontrola omezuje data, logy, přístupy a retenční dobu výstupů. |
+| Vlastník | Kdo odpovídá za pravidlo, skript a místo pravdy. |
+| Návrat zpět | Jak automatizaci vypnout nebo vrátit do ruční kontroly. |
+| Další revize | Jaká změna nebo datum spustí kontrolu záznamu. |
+
+Pokud záznam vyžaduje dvacet polí, nepopisuje rozhodnutí. Popisuje úzkost. Zkrať ho na to, co budoucí vlastník potřebuje pro změnu, incident nebo vypnutí.
+
+### Odděl pravidlo, skript a důkaz
+
+Automatizace má tři vrstvy, které se často pletou:
+
+| Vrstva | Otázka | Typický nosič |
+| --- | --- | --- |
+| Produktové pravidlo | Jakou práci chceme chránit? | šablona zadání, akceptační kritéria, produktová dokumentace |
+| Automatizační provedení | Jak kontrola technicky pozná problém? | skript, CI job, validace, bot komentář |
+| Důkaz rozhodnutí | Proč tato kontrola existuje a kde jsou její hranice? | rozhodovací záznam, runbook, krátké ADR |
+
+Když se změní produktové pravidlo, skript se může změnit taky. Když se změní skript, pravidlo nemusí být automaticky jiné. A když se smaže pilotní report, rozhodnutí může zůstat platné. To je důvod, proč se záznam píše odděleně: ne jako kopie kódu, ale jako vysvětlení vztahu mezi prací, daty a pravomocí.
+
+Praktická kontrolní věta:
+
+„Kdybychom zítra přepsali skript v jiném nástroji, zůstal by tento záznam pořád srozumitelný?“
+
+Pokud ne, je v něm moc implementačních detailů a málo rozhodnutí.
+
+### Zapiš hranici dat velmi konkrétně
+
+Privacy-first záznam musí říct, co automatizace nečte. Ne kvůli kráse, ale kvůli budoucím změnám. Největší riziko automatizací není první verze. Riziko je nenápadné rozšíření: „Přidáme ještě zákaznické ID, ať to lépe dohledáme.“ „Přidáme obsah exportu, ať víme, jestli je citlivý.“ „Přidáme autora karty, ať víme, kdo to dělá špatně.“ A najednou má jednoduchá kontrola datový batoh.
+
+Dobrá privacy hranice:
+
+| Otázka | Příklad odpovědi |
+| --- | --- |
+| Jaký je minimální vstup? | `typ_exportu`, existence retenční věty, stav karty. |
+| Co je zakázaný vstup? | obsah exportovaných dat, jména zákazníků, osobní hodnocení autora karty. |
+| Jak dlouho držíme výstupy? | jen do zavření pull requestu nebo nejdéle do dalšího review pravidla. |
+| Kdo výstupy vidí? | lidé pracující na dané změně a vlastník pravidla. |
+| Co se agreguje? | počet upozornění a typ verdiktu, bez osobního žebříčku. |
+| Kdy mažeme pilotní stopu? | po převodu rozhodnutí do záznamu a úklidu starých výjimek. |
+
+> Codyho komentář: „Automatizace čte jen metadata“ je dobrý začátek, ale slabý slib. Napiš, která metadata. Jinak se z „jen“ stane časem kouzelné slovo pro skoro všechno.
+
+### Nastav revizi podle změny kontextu
+
+Kalendářová revize je užitečná, ale slabá. Automatizované pravidlo se má znovu otevřít hlavně tehdy, když se změní kontext práce.
+
+Revizi spusť, když:
+
+- se změní produktové pravidlo, které automatizace hlídá,
+- přibude nový typ dat, exportu, integrace nebo zákaznického scénáře,
+- kontrola začne blokovat oprávněnou práci,
+- lidé začnou výjimky zapisovat bokem,
+- automatizace generuje šum, který nikdo nečte,
+- vlastník pravidla odchází nebo mění roli,
+- veřejný slib se přepíše jinak než interní pravidlo,
+- z kontroly se má stát automatická akce s vyšší pravomocí.
+
+Do záznamu napiš i stop pravidlo:
+
+„Automatizaci vypneme nebo vrátíme do ruční kontroly, pokud během ___ vzniknou ___ oprávněné výjimky, ___ falešných blokací nebo žádné rozhodnutí, které by kontrola skutečně zlepšila.“
+
+Stop pravidlo není pesimismus. Je to pojistka proti provozní setrvačnosti. Kontrola, která už nepomáhá rozhodování, nemá zůstat jen proto, že kdysi vyřešila reálný problém.
+
+### Příklad: ADR pro retenční kontrolu exportů
+
+Situace: Tým po pilotu ponechal automatizovanou kontrolu produktových karet pro uživatelské exporty. Kontrola ověřuje, zda karta obsahuje retenční větu. Poučení už bylo přeneseno do šablony, staré pravidlo bylo uklizeno a zbývá zapsat rozhodnutí tak, aby budoucí vlastník věděl, proč kontrola existuje.
+
+Krátký rozhodovací záznam:
+
+| Pole | Zápis |
+| --- | --- |
+| Rozhodnutí | Necháváme automatizovanou kontrolu retenční věty u produktových karet typu `uživatelský_export`. |
+| Důvod | Exporty vytvářejí dočasné datové kopie; bez retenční věty tým opakovaně nedořešil konec životnosti dat. |
+| Rozsah | Platí jen pro uživatelské exporty dostupné zákazníkovi. Neplatí pro interní migrační balíky. |
+| Vstupy | `typ_exportu`, přítomnost retenční věty, stav karty nebo pull requestu. |
+| Nevstupy | Obsah exportu, zákaznická data, jména autorů, obchodní hodnoty zákazníka. |
+| Pravomoc | Kontrola blokuje merge jen při chybějící retenční větě u uživatelského exportu. |
+| Výjimka | Výjimku může schválit vlastník datové mapy; zapisuje se do produktové karty s datem revize. |
+| Privacy hranice | Výstup kontroly obsahuje jen identifikátor karty a chybějící pole; pilotní výstupy se mažou po převodu rozhodnutí do záznamu, provozní výstupy mizí po zavření změny. |
+| Vlastník | Produktový vlastník exportů a technický vlastník CI kontroly. |
+| Návrat zpět | Při šumu se kontrola přepne na varování; při změně šablony se skript upraví nebo vypne. |
+| Další revize | Při přidání nového typu exportu, změně šablony, třech oprávněných výjimkách za měsíc nebo změně vlastníka. |
+
+Zkrácená rozhodovací věta:
+
+„Kontrola retenční věty u uživatelských exportů běží, protože export vytváří dočasnou kopii dat a každá kopie potřebuje konec životnosti; kontrola čte jen typ exportu a existenci retenční věty, blokuje jen chybějící větu u zákaznického exportu a po změně typů exportu se znovu otevře.“
+
+Co se nezapisuje:
+
+| Nepatří do záznamu | Proč |
+| --- | --- |
+| Jména lidí, kteří v pilotu dostali upozornění | Nepomáhá budoucímu rozhodnutí a zbytečně osobní stopa. |
+| Celý seznam starých výjimek | Po přenosu poučení má být smazaný nebo archivovaný jen jako agregovaný závěr. |
+| Screenshoty produktových karet | Rychle zastarají a mohou nést interní detaily. |
+| Přesný výpis CI logu | Patří do provozního běhu, ne do rozhodnutí. |
+| Obecná věta „kvůli GDPR“ | Nevysvětluje konkrétní produktový důvod ani datovou hranici. |
+
+Výsledek: budoucí změna exportů nezačíná archeologií v komentářích a starých reportech. Tým ví, že kontrola chrání konec životnosti dočasných datových kopií, ne disciplínu autorů karet. To je malý rozdíl v textu a velký rozdíl v provozní kultuře.
+
+### Checklist: Rozhodovací záznam automatizovaného produktového pravidla
+
+- [ ] Napsal jsem jednu rozhodovací větu ve tvaru „kontrola běží, protože ___; platí pro ___; člověk rozhoduje ___; vypínáme ji, když ___.“
+- [ ] Oddělil jsem produktové pravidlo, technické provedení a důkaz rozhodnutí.
+- [ ] Popsal jsem rozsah i explicitní ne-rozsah.
+- [ ] Vypsal jsem minimální vstupy a zakázané vstupy.
+- [ ] Určil jsem pravomoc automatizace: tip, varování, blokace, návrh nebo akce.
+- [ ] Popsal jsem, kdo schvaluje výjimku a kde se výjimka ukládá.
+- [ ] Zapsal jsem vlastníka pravidla i vlastníka technického provedení.
+- [ ] Nastavil jsem revizní trigger podle změny kontextu, ne jen podle kalendáře.
+- [ ] Přidal jsem návrat zpět: zúžit, ztišit, vrátit ručně nebo vypnout.
+- [ ] Neuložil jsem do záznamu osobní výkonové stopy, pilotní surová data ani interní screenshoty.
+
+### Mini úkol
+
+Vyber jedno automatizované produktové pravidlo, které už zůstalo po pilotu v provozu. Do třiceti minut napiš krátký záznam s poli rozhodnutí, důvod, rozsah, vstupy, nevstupy, pravomoc, lidské rozhodnutí, privacy hranice, vlastník, návrat zpět a další revize. Potom smaž nebo označ k úklidu všechno, co z pilotu už nemá rozhodovací hodnotu: staré výpisy upozornění, osobní seznamy, dočasné exporty a duplicitní vysvětlení v dokumentaci.
+
 ## Zdroje
 
 - IETF RFC 9110: HTTP Semantics - význam HTTP přesměrování a stavů včetně `410 Gone` pro zdroje, které už nejsou dostupné: https://www.rfc-editor.org/rfc/rfc9110.html
@@ -60721,6 +60879,8 @@ Vyber jednu automatizaci, která už prošla pilotem nebo kontrolním oknem. Do 
 - Nielsen Norman Group: Onboarding Tutorials vs. Contextual Help - rozdíl mezi úvodními tutoriály a kontextovou pomocí: https://www.nngroup.com/articles/onboarding-tutorials/
 
 ## Pracovní log
+
+- 2026-07-27: Doplněna příloha o rozhodovacím záznamu automatizovaného produktového pravidla bez auditního divadla: krátký automatizační ADR, oddělení produktového pravidla, skriptu a důkazu rozhodnutí, konkrétní datová hranice, revizní triggery podle změny kontextu, příklad retenční kontroly exportů, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro zapsání rozhodnutí o automatizovaném produktovém pravidle. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
 - 2026-07-27: Doplněna příloha o přenosu poučení z automatizace bez procesu navíc: převod poznatků z pilotu do produktu, šablon, runbooku, dokumentace nebo rozhodovacího logu, učící karta, privacy-first omezení osobního dohledu, výběr nejmenší trvalé změny, příklad retenční kontroly exportů, checklist a mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
