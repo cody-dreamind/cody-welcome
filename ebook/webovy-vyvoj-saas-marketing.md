@@ -206,6 +206,7 @@ Když se nechceš vracet do celé knihy, hledej konkrétní nástroj podle výst
 | Ověřit návrat archivovaného pravidla po pilotu | „pilot návratu pravidla“, „kontrola re-entry“ nebo „obnovené pravidlo hotovo“ | pilotní review, které rozhodne, zda se pravidlo zavře, zúží, přesune, promění v produktovou opravu nebo opravdu zůstane aktivní |
 | Převést obnovené pravidlo do běžné práce | „obnovené pravidlo v provozu“, „pravidlo po pilotu“ nebo „trvalé pravidlo bez procesu“ | provozní karta pravidla s místem použití, vlastníkem, revizním triggerem, retencí stop a stop pravidlem |
 | Zkontrolovat obnovené pravidlo po několika použitích | „pravidlo po několika použitích“, „běžné použití pravidla“ nebo „pravidlo se usadilo“ | lehké review skutečných použití, výjimek, nákladu, datové stopy a verdiktu ponechat, zúžit, přesunout, automatizovat opatrně nebo ukončit |
+| Automatizovat produktové pravidlo opatrně | „automatizace produktového pravidla“, „pravidlo jako kontrola“ nebo „mechanické pravidlo“ | automatizační karta, která převede opakovanou kontrolu do malé pomůcky s ručním rozhodnutím, omezenými vstupy, logy a vypínačem |
 
 Pravidlo pro práci s rejstříkem: otevři maximálně tři nalezené části, vyber jednu a zapiš výstup. Pokud po deseti minutách pořád skáčeš mezi odkazy, vrať se k tabulce „Kudy začít podle aktuální bolesti“ a zúž problém. E-book není buffet. Teda je, ale bez talíře si stejně odneseš jen chaos.
 
@@ -59849,6 +59850,185 @@ Výsledek: pravidlo zůstalo užitečné, ale ztratilo přebytečnou část. Mí
 
 Vyber jedno obnovené pravidlo, které už se použilo aspoň třikrát. Do dvaceti minut napiš kontrolu ve formátu: tři použití, jedna výjimka, jeden náklad, jedna datová stopa, jeden verdikt. Pokud verdikt zní „ponechat“, smaž zbytečné kontrolní poznámky. Pokud zní „zúžit“ nebo „přesunout“, uprav jedno místo pravdy ještě dnes. Pokud zní „opravit produkt“, otevři jednu malou produktovou kartu a pravidlo označ jako dočasnou pojistku.
 
+## Příloha: Automatizace produktového pravidla bez slepého vynucování
+
+Když se produktové pravidlo po několika použitích ukáže jako užitečné a zároveň mechanické, začne svádět k automatizaci. To je dobrý signál, ale ne automatický pokyn k nasazení dalšího dohledu. Některá pravidla mají zůstat lidskou otázkou v review. Některá patří do šablony. Některá se dají převést do malé kontroly, která upozorní na chybějící údaj, ne rozhodne za tým.
+
+Špatná otázka zní: „Můžeme to vynutit automaticky?“
+
+Lepší otázka zní: „Kterou část pravidla lze ověřit mechanicky bez nových dat, falešné autority a blokování dobrých výjimek?“
+
+Automatizace produktového pravidla má pomáhat práci, ne sbírat důkazy o poslušnosti. Pokud se z ní stane skrytý hodnoticí systém lidí, recenzentů nebo zákazníků, privacy-first hodnota už odjela jinam a na stole zůstal jen nástroj s příliš velkým egem.
+
+### Automatizuj jen mechanickou část
+
+Ne každé pravidlo je vhodné pro skript, validaci nebo checklist v nástroji. Dobrá kandidátní část má jasný vstup, jednoznačný stav a malý dopad při omylu.
+
+Příklady vhodných kontrol:
+
+- produktová karta pro dlouhou akci nemá vyplněnou větu o stavu,
+- dokumentace s veřejným slibem nemá datum poslední věcné revize,
+- formulářová specifikace obsahuje nové povinné pole bez uvedeného účelu,
+- exportní funkce nemá popsanou retenci dočasného souboru,
+- nová integrační karta neobsahuje vlastníka ani exit poznámku.
+
+Příklady nevhodných automatizací:
+
+- skript hodnotí, jestli je obchodní follow-up „dost empatický“,
+- automat blokuje release podle neurčitého textového pravidla,
+- kontrola porovnává lidi mezi sebou podle počtu výjimek,
+- nástroj vyžaduje export celých ticketů, aby mohl rozhodnout,
+- pravidlo se tváří jako bezpečnostní garance, ale jen hledá jedno klíčové slovo.
+
+Praktické pravidlo: automatizuj přítomnost, formát, konzistenci nebo chybějící vazbu. Neautomatizuj úsudek, obchodní kontext a výjimku, která vyžaduje odpovědnost člověka.
+
+### Napiš automatizační kartu
+
+Před implementací malé kontroly napiš krátkou kartu. Nemá obhajovat nástroj. Má ukázat, proč stačí menší zásah.
+
+| Pole | Otázka | Příklad zápisu |
+| --- | --- | --- |
+| Pravidlo | Kterou pracovní otázku automatizace podporuje? | Má dlouhá akce popsaný stav, konec dočasných dat a možnost rušení? |
+| Mechanická část | Co lze ověřit bez úsudku? | Karta obsahuje pole `stav`, `retence` a volitelné `zruseni`. |
+| Vstupy | Jaká data kontrola čte? | Jen metadata produktové karty, ne komentáře, chaty ani zákaznická vlákna. |
+| Výstup | Co kontrola udělá? | Přidá upozornění do review, release sama neblokuje. |
+| Vlastník | Kdo rozhoduje o výjimce? | Produktový vlastník změny. |
+| Logy | Co se ukládá a jak dlouho? | Agregovaný počet upozornění za měsíc, bez jmen lidí. |
+| Vypínač | Jak kontrolu rychle ztišíme? | Konfigurační flag a ruční review otázka jako náhrada. |
+| Review | Kdy zjistíme, jestli pomáhá? | Po prvních pěti upozorněních nebo po měsíci. |
+
+Tahle karta zabrání časté chybě: tým začne s malým nápadem a skončí u kontrolního systému, který čte víc dat než původní problém potřeboval. Ano, automatizace je pracovitá. Ale bez hranic umí být pracovitá špatným směrem.
+
+### Nech člověku rozhodnutí a výjimku
+
+Automatizace pravidla má ideálně tři úrovně:
+
+| Úroveň | Co dělá | Kdy se hodí |
+| --- | --- | --- |
+| Tip | upozorní na možnou mezeru | pravidlo je nové nebo má hodně kontextu |
+| Varování | vyžádá krátké vysvětlení | opakovaná chyba má dopad na důvěru, data nebo provoz |
+| Blokace | zastaví pokračování do opravy | pouze u jasného a nízce sporného rizika |
+
+Začni tipem nebo varováním. Blokaci používej opatrně a jen tam, kde je pravidlo opravdu jednoznačné: chybějící povinný účel datového pole, chybějící vlastník produkční integrace, chybějící datum expirace dočasného exportu. Jakmile výjimka vyžaduje kontext, patří k člověku.
+
+Dobrá výjimka má být krátká:
+
+| Pole | Zápis |
+| --- | --- |
+| Proč výjimka | Tato dlouhá akce nemá rušení, protože po spuštění mění účetní období a částečné zrušení by poškodilo konzistenci. |
+| Kdo rozhodl | Produktový vlastník změny. |
+| Do kdy platí | Jen pro tuto funkci; při další podobné akci se pravidlo znovu vyhodnotí. |
+| Datová stopa | Jedna věta v produktové kartě, bez další analytiky. |
+
+Výjimka není selhání automatizace. Je to bezpečnostní ventil. Bez něj začne tým buď ohýbat práci podle nástroje, nebo nástroj obcházet mimo dokumentaci. Ani jedna varianta není slavný triumf dospělé organizace.
+
+### Omez vstupy, logy a upozornění
+
+Privacy-first automatizace začíná datovým ořezem. Kontrola má číst jen to, co opravdu potřebuje pro upozornění.
+
+Nečti:
+
+- celé zákaznické konverzace,
+- osobní hodnocení lidí,
+- soukromé poznámky,
+- kompletní historii ticketu, pokud stačí aktuální metadata,
+- obsah exportů, když stačí vědět, že export vzniká.
+
+Neukládej:
+
+- seznam lidí, kteří pravidlo „porušili“,
+- kopie citlivých vstupů,
+- dlouhé logy s osobními údaji,
+- permanentní historii každého upozornění,
+- detailní časové profily práce.
+
+Stačí často velmi málo: počet upozornění, typ chybějícího pole, odkaz na upravenou šablonu a rozhodnutí po kontrolním okně. Pokud výstup automatizace nevede k práci, smaž ho. Dashboard, podle kterého nikdo nerozhoduje, není observabilita. Je to tapeta.
+
+### Připoj automatizaci k existujícímu místu práce
+
+Nejlepší automatizace produktového pravidla se objeví tam, kde člověk už pracuje:
+
+- validace povinného pole v šabloně zadání,
+- komentář v pull requestu,
+- kontrola v redakčním preview,
+- upozornění v release checklistu,
+- malý test v CI,
+- šablonová otázka v support makru,
+- kontrola při generování veřejné dokumentace.
+
+Nevytvářej nový portál jen proto, aby měl pravidlo důstojné místo. Pokud se kvůli malé kontrole musí člověk přihlásit do dalšího nástroje, pravděpodobně jsi automatizoval administrativu, ne práci.
+
+Připojení k existujícímu místu má ještě jednu výhodu: výstup zůstává ve správném kontextu. Upozornění u produktové karty říká „tady chybí stav“. Samostatný report po týdnu říká „někde možná něco chybělo“. První věta vede k opravě. Druhá vede k poradě. Rozdíl je značný.
+
+### Ověř automatizaci jako pilot, ne jako nový zákon
+
+I malá kontrola potřebuje kontrolní okno. Nastav ho předem:
+
+- první měsíc provozu,
+- prvních pět až deset upozornění,
+- první release, který pravidlo použije,
+- první výjimka,
+- první případ, kdy upozornění nikdo neumí využít.
+
+Po pilotu rozhodni jedním verdiktem:
+
+| Verdikt | Kdy ho použít | Co udělat |
+| --- | --- | --- |
+| Ponechat | upozornění vedla k opravám a náklad byl malý | přesunout do běžné rutiny s triggerem revize |
+| Ztišit | kontrola je užitečná, ale moc hlasitá | snížit frekvenci, přesnost nebo publikum |
+| Zúžit | kontrola se spouští v příliš mnoha případech | upravit spouštěč a smazat staré výstupy |
+| Přesunout | upozornění chodí mimo práci | vložit kontrolu do šablony, CI, preview nebo review místa |
+| Vrátit ručně | pravidlo vyžaduje příliš mnoho úsudku | ponechat otázku v checklistu a vypnout skript |
+| Vypnout | kontrola nepřinesla rozhodnutí | zavřít automatizaci, revokovat tokeny a uklidit logy |
+
+Zavírací věta může znít: „Po sedmi upozorněních kontrola třikrát opravila chybějící retenci exportu, dvakrát byla zbytečná a dvakrát odhalila nejasnou šablonu. Zúžíme spouštěč na veřejné exporty a ztišíme report na měsíční agregát.“
+
+### Příklad: Kontrola retence u exportu
+
+Situace: Tým má produktové pravidlo „Každý uživatelský export musí mít popsaný stav, dobu dostupnosti a způsob smazání dočasného souboru.“ Po několika použitích se ukázalo, že část pravidla je mechanická: produktová karta buď má pole `doba_dostupnosti_exportu`, nebo ho nemá.
+
+Automatizační karta:
+
+| Pole | Zápis |
+| --- | --- |
+| Mechanická kontrola | U změn označených jako `export` zkontrolovat vyplněné pole `doba_dostupnosti_exportu`. |
+| Vstup | Metadata produktové karty, žádný obsah exportu ani zákaznická data. |
+| Výstup | Varování v review: „Doplň dobu dostupnosti exportu nebo napiš výjimku.“ |
+| Blokace | Ne, první měsíc jen varování. |
+| Výjimka | Jedna věta v kartě, schvaluje produktový vlastník. |
+| Log | Měsíční součet varování a výjimek bez jmen lidí. |
+| Review | Po pěti varováních nebo po první zbytečné blokaci. |
+
+Pilot po měsíci:
+
+| Signál | Výsledek |
+| --- | --- |
+| Varování | 6 upozornění, z toho 4 vedla k doplnění retence. |
+| Zbytečný šum | 1 upozornění u interního exportu bez uživatelského souboru. |
+| Výjimky | 1 oprávněná výjimka pro okamžité stažení bez dočasného uložení. |
+| Datová stopa | Jen agregovaný počet upozornění a odkazy na karty, bez zákaznických dat. |
+| Verdikt | Zúžit spouštěč na exporty, které vytvářejí dočasný soubor pro uživatele. |
+
+Výsledek: pravidlo se nestalo policistou. Stalo se malou zábranou proti zapomenuté retenční větě. A když narazilo na zbytečný šum, tým zúžil spouštěč místo toho, aby začal posílat více upozornění. Takhle má automatizace vypadat: méně dramatu, méně dat, lepší práce.
+
+### Checklist: Automatizace produktového pravidla
+
+- [ ] Automatizuji jen mechanickou část pravidla, ne celý úsudek.
+- [ ] Vstupy kontroly jsou omezené na metadata nebo šablonová pole, která opravdu potřebuje.
+- [ ] Automatizace nečte zákaznické konverzace, osobní poznámky ani obsah exportů bez jasného důvodu.
+- [ ] Výstup je tip, varování nebo blokace podle rizika a jednoznačnosti pravidla.
+- [ ] Výjimka je možná, krátká, vlastněná a časově nebo kontextově omezená.
+- [ ] Logy jsou agregované a mají retenční pravidlo.
+- [ ] Upozornění se objevuje v místě práce, ne v novém samostatném reportu.
+- [ ] Existuje vypínač nebo jednoduchý návrat k ruční otázce.
+- [ ] Pilot má předem dané kontrolní okno.
+- [ ] Po pilotu padne verdikt: ponechat, ztišit, zúžit, přesunout, vrátit ručně nebo vypnout.
+- [ ] Po změně jsou uklizené staré výstupy, tokeny, šablony a duplicitní instrukce.
+
+### Mini úkol
+
+Vyber jedno produktové pravidlo, které se v posledních týdnech opakovalo mechanicky. Do třiceti minut napiš automatizační kartu: pravidlo, mechanická část, vstupy, výstup, výjimka, logy, vypínač a pilot. Pokud neumíš vyplnit vstupy bez osobních dat nebo celých pracovních vláken, automatizaci zatím nestav. Zkrať pravidlo v šabloně a vrať se k němu po dalších třech použitích.
+
 ## Zdroje
 
 - IETF RFC 9110: HTTP Semantics - význam HTTP přesměrování a stavů včetně `410 Gone` pro zdroje, které už nejsou dostupné: https://www.rfc-editor.org/rfc/rfc9110.html
@@ -60042,6 +60222,8 @@ Vyber jedno obnovené pravidlo, které už se použilo aspoň třikrát. Do dvac
 - Nielsen Norman Group: Onboarding Tutorials vs. Contextual Help - rozdíl mezi úvodními tutoriály a kontextovou pomocí: https://www.nngroup.com/articles/onboarding-tutorials/
 
 ## Pracovní log
+
+- 2026-07-27: Doplněna příloha o automatizaci produktového pravidla bez slepého vynucování: rozlišení mechanické části pravidla od lidského úsudku, automatizační karta, úrovně tip/varování/blokace, práce s výjimkou, omezení vstupů a logů, napojení kontroly na existující místo práce, pilotní verdikty, příklad kontroly retence u exportu, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro opatrnou automatizaci produktového pravidla. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
 - 2026-07-27: Doplněna příloha o kontrole obnoveného pravidla po několika použitích bez procesního nánosu: malý vzorek skutečných použití, oddělení účinku od poslušnosti, hrubý výpočet nákladu pravidla, čtení výjimek jako produktového signálu, provozní verdikty, příklad pravidla pro dlouhé akce po měsíci, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro pravidlo po několika použitích. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
