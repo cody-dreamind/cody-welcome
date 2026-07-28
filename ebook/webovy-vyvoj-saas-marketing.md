@@ -143,6 +143,7 @@ Když se nechceš vracet do celé knihy, hledej konkrétní nástroj podle výst
 | Zjednodušit nebo ukončit rutinu po několika cyklech | „retence rutiny“, „rutina po třech cyklech“ nebo „procesní sediment“ | rozhodnutí ponechat, zúžit, sloučit, automatizovat opatrně nebo zrušit opakovanou práci |
 | Vybrat správnou fázi práce s automatizací | „životní cyklus automatizace“, „mapa automatizace“ nebo „kde začít s automatizací“ | rozhodnutí, kterou automatizační kartu otevřít podle aktuálního stavu, rizika a datové hranice |
 | Udržet mapu automatizací aktuální bez inventáře pro inventář | „revize mapy automatizací“, „automatizační portfolio“ nebo „měsíční mapa automatizací“ | krátká kontrola seznamu automatizací podle stavu, vlastníka, datové hranice a dalšího rozhodnutí |
+| Vybrat jednu automatizaci k opravě po revizi mapy | „triage automatizací“, „po revizi mapy“ nebo „automatizační fronta“ | prioritní karta s jedním otevřeným rozhodnutím, limitem práce a vědomě odloženým zbytkem |
 | Automatizovat rutinu bez skrytého dozoru | „automatizace rutiny“, „automatizační karta“ nebo „vypínač automatizace“ | malý automatizační návrh s účelem, vstupy, výstupem, vlastníkem, logy, ručním rozhodnutím a datem revize |
 | Vyhodnotit automatizaci po prvních bězích | „review automatizace“, „automatizace po spuštění“ nebo „autopilot“ | rozhodnutí ponechat, zúžit, přepsat, vrátit do ruční rutiny nebo vypnout automatizaci podle nálezů, šumu a datové stopy |
 | Vypnout automatizaci bez zapomenutého běhu | „vypnutí automatizace“, „ukončený autopilot“ nebo „automatizace končí“ | vypínací karta s posledním během, revokací tokenů, úklidem výstupů, náhradním postupem a kontrolou veřejných slibů |
@@ -62224,6 +62225,115 @@ Výsledek revize není „máme pět automatizací“. To tým věděl. Výslede
 
 Sepiš do jedné tabulky všechny automatizace, které se v posledních třiceti dnech dotkly zákaznických dat, interních úkolů, obchodních kontaktů, provozních alertů nebo veřejného obsahu. U každé vyplň jen stav, účel, vlastníka, vstupy, výstup a datovou hranici. Potom vyber jednu položku s největší kombinací dat, pravomoci a nejasnosti a otevři pro ni nejbližší kartu z mapy životního cyklu. Zbytek nech jako mapu, ne jako panický backlog.
 
+## Příloha: Triage automatizací po revizi mapy bez panického backlogu
+
+Revize mapy automatizací obvykle neskončí jedním krásným závěrem. Skončí seznamem nálezů: tady chybí vlastník, tady se změnil vstup, tady report nikdo nečte, tady pilot běží o měsíc déle, než měl, a tady někdo navrhuje přidat další pole, protože „když už to běží“. Pokud z toho uděláš dvacet úkolů najednou, nezískáš lepší provoz. Získáš frontu, která bude strašit tým a brzy přestane znamenat cokoli.
+
+Triage po revizi mapy má vybrat jednu automatizaci k nejbližší práci, zbytek vědomě podržet v mapě a nezvětšit datovou stopu jen proto, že audit našel hodně věcí. Jinak řečeno: mapa našla mlhu, triage z ní udělá první krok. Ne celou katedrálu. Jsme ve firmě, ne v nekonečné stavebnici procesních ozdob.
+
+> Codyho komentář: Nejhorší výstup revize není „našli jsme problém“. Nejhorší výstup je „našli jsme deset problémů, otevřeli deset úkolů a za měsíc nikdo neví, který byl důležitý“. Backlog bez priority je jen elegantně formátovaný šum.
+
+### Vezmi nálezy jako frontu rozhodnutí, ne jako seznam úkolů
+
+Každý nález z mapy nejdřív přepiš na rozhodnutí. Ne „opravit report“. Raději: „rozhodnout, zda týdenní marketing report zúžit na měsíční redakční review, nebo vypnout“. Ne „doplnit vlastníka“. Raději: „rozhodnout, kdo podle výstupu billing webhooku jedná a kdo smí schválit změnu jeho datového kontraktu“.
+
+Přepis nálezu:
+
+| Nález z mapy | Lepší rozhodovací věta |
+| --- | --- |
+| Pilot běží po termínu. | Rozhodnout, zda pilot uzavřít, zúžit, převést do provozu nebo vypnout. |
+| Report nikdo nečte. | Rozhodnout, zda výstup pořád vede k práci, nebo má skončit. |
+| Přibyl nový vstup. | Rozhodnout, zda nový vstup má jasný účel, retenci a menší alternativu. |
+| Vlastník odešel. | Rozhodnout, kdo přebírá schopnost, nebo zda automatizace končí. |
+| Automatická akce má výjimky. | Rozhodnout, zda je problém v pravidle, produktu, datech nebo pravomoci automatizace. |
+
+Tahle formulace chrání tým před falešným hotovo. Úkol „opravit report“ může skončit hezčím reportem, který pořád nikdo nepoužije. Rozhodnutí o hodnotě reportu může skončit vypnutím. To je často lepší produktivita než další sloupec.
+
+### Seřaď podle dopadu, ne podle hlasitosti
+
+Po revizi vyber první položku podle čtyř vah:
+
+| Váha | Otázka |
+| --- | --- |
+| Data | Čte nebo posílá automatizace osobní, zákaznická, obchodní nebo bezpečnostní data? |
+| Pravomoc | Mění automatizace stav, blokuje práci, posílá zprávy nebo jen navrhuje? |
+| Nejasnost | Chybí vlastník, účel, stop pravidlo nebo poslední známý stav? |
+| Čerstvost | Změnil se vstup, výstup, tým, produkt nebo dodavatel nedávno? |
+
+Praktické skóre nemusí být matematika. Dej každé váze hodnotu nízká / střední / vysoká a začni položkou, která má nejvíc vysokých hodnot. Pokud dvě položky vypadají podobně, vyber tu s širšími daty nebo automatickou akcí. Pokud ani to nerozhodne, vyber tu, u které umíš nejrychleji uzavřít malé rozhodnutí.
+
+Nenech vyhrát položku jen proto, že nejvíc obtěžuje v chatu. Hlučný report bez osobních dat může být menší riziko než tichý webhook, který bez vlastníka posílá zákaznická pole do dalšího systému. Privacy-first triage se ptá, kde může tým ztratit kontrolu nad daty, ne kde je nejvíc notifikačního nepohodlí.
+
+### Otevři jednu kartu a zbytek zamkni do mapy
+
+Vybraná automatizace dostane pracovní kartu. Ostatní nálezy zůstanou v mapě s datem další kontroly nebo stručným stavem „odloženo po triage“. To není ignorování. To je řízení rozsahu.
+
+Minimální triage karta:
+
+| Pole | Zápis |
+| --- | --- |
+| Automatizace | Název z mapy, ne nový poetický název. |
+| Nález | Jedna věta z revize mapy. |
+| Rozhodnutí k uzavření | Co přesně má být po této iteraci jasné. |
+| Proč teď | Data, pravomoc, nejasnost nebo čerstvá změna. |
+| Nejbližší příloha | Drift, stop pravidlo, změna vstupu, změna výstupu, předání, pilotní review nebo vypnutí. |
+| Limit práce | Co se v této iteraci nebude měnit. |
+| Datová brzda | Jaké nové čtení, logování, přenos nebo publikum je zakázané bez nové karty. |
+| Výstup | Verdikt, malá oprava, vypnutí, předání nebo nový pilot. |
+
+Pole „limit práce“ je důležité. Pokud triage otevře změnu výstupu, neřeš zároveň změnu frekvence, pravomoci a nový dashboard. Pokud řešíš předání vlastníka, nepřidávej nové scopy tokenu „když už jsme u toho“. Takhle vzniká přesně ten druh nepořádku, který měla revize najít.
+
+### Poznej, kdy stačí textová oprava místo technické změny
+
+Ne každý nález z automatizační mapy vyžaduje úpravu skriptu. Někdy stačí přepsat místo pravdy, opravit šablonu, změnit vlastnictví nebo zavřít starý slib.
+
+Rychlé rozlišení:
+
+| Nález | Často stačí |
+| --- | --- |
+| Lidé nevědí, co výstup znamená. | Přepsat popis v místě práce a dodat příklad rozhodnutí. |
+| Výstup chodí špatnému publiku. | Omezit příjemce nebo přesunout výstup do existujícího review. |
+| Automatizace má starého vlastníka. | Předávací karta, ověření ručního postupu a kontrola tokenů. |
+| Automatizace hlídá pravidlo, které už produkt vynucuje. | Stop pravidlo nebo odložené vypnutí. |
+| Automatizace často naráží na výjimky. | Review výjimek a oprava pravidla, ne širší sběr dat. |
+
+Technická změna je správná až ve chvíli, kdy je jasné, jaké rozhodnutí má podpořit. Jinak jen přepisuješ mlhu do kódu. A mlha v kódu je dražší než mlha v poznámce, protože se tváří spolehlivěji.
+
+### Příklad: Pět nálezů, jedna práce
+
+Měsíční mapa automatizací našla pět věcí:
+
+| Automatizace | Nález | Váhy |
+| --- | --- | --- |
+| AI návrh support odpovědi | pilot skončil před třemi týdny | vysoká data, střední pravomoc, vysoká nejasnost |
+| Týdenní marketing report | nikdo podle něj nejedná | nízká data, nízká pravomoc, střední nejasnost |
+| Billing webhook | nový plán přidal jedno pole | střední data, vysoká pravomoc, střední čerstvost |
+| Link checker | vlastník odešel | nízká data, nízká pravomoc, vysoká nejasnost |
+| Retenční kontrola exportů | výstupy skoro nevznikají | střední data, nízká pravomoc, střední nejasnost |
+
+Tým vybere AI návrh support odpovědi, protože čte citlivější kontext a pilot po termínu je nejméně obhajitelný stav. Triage karta říká: uzavřít pilotní review, nerozšiřovat vstupy, nepřidávat automatické odesílání odpovědí, zkontrolovat jen posledních několik návrhů bez kopírování celých ticketů do nové tabulky.
+
+Billing webhook dostane poznámku „otevřít po support pilotu, pokud do té doby nedojde k chybě v produkci“. Marketing report se odloží k vypnutí při nejbližším obsahovém review. Link checker čeká na předání. Retenční kontrola čeká na stop pravidlo v příští provozní revizi.
+
+Výsledek není dokonalý pořádek. Výsledek je první uzavřené riziko a mapa, která pořád drží zbytek. To je pro malý tým výrazně lepší než hrdinský sprint přes všechno, po kterém zůstane pět rozdělaných polovin.
+
+### Checklist: Triage automatizací po revizi mapy
+
+- [ ] Každý nález z mapy je přepsaný na rozhodovací větu.
+- [ ] První položka byla vybraná podle dat, pravomoci, nejasnosti a čerstvé změny.
+- [ ] Hlučný, ale nízkorizikový výstup nepředběhl tichou automatizaci s větším datovým dopadem.
+- [ ] Vybraná automatizace má jednu triage kartu a jasnou nejbližší přílohu.
+- [ ] Ostatní nálezy zůstaly v mapě se stavem, ne v panickém backlogu.
+- [ ] Triage karta obsahuje limit práce a datovou brzdu.
+- [ ] Během triage se nepřidaly nové vstupy, logy, příjemci ani širší oprávnění.
+- [ ] Technická změna se otevře až po pojmenování rozhodnutí.
+- [ ] Pokud stačí textová, vlastnická nebo dokumentační oprava, nemění se skript.
+- [ ] Výstupem iterace je verdikt nebo malá uzavřená práce, ne seznam dalších nápadů.
+
+### Mini úkol
+
+Vezmi poslední mapu automatizací a vyber maximálně pět nálezů. Každý přepiš na rozhodovací větu a ohodnoť jen slovy nízká / střední / vysoká u dat, pravomoci a nejasnosti. Vyber jednu položku pro nejbližší práci, napiš pro ni triage kartu a u ostatních doplň stav „odloženo po triage“ nebo datum další kontroly. Pokud během toho chceš přidat nový vstup nebo širší oprávnění, zastav se a otevři samostatnou změnovou kartu. Přesně tady bývá nenápadný začátek datového nepořádku.
+
 ## Zdroje
 
 - IETF RFC 9110: HTTP Semantics - význam HTTP přesměrování a stavů včetně `410 Gone` pro zdroje, které už nejsou dostupné: https://www.rfc-editor.org/rfc/rfc9110.html
@@ -62417,6 +62527,8 @@ Sepiš do jedné tabulky všechny automatizace, které se v posledních třiceti
 - Nielsen Norman Group: Onboarding Tutorials vs. Contextual Help - rozdíl mezi úvodními tutoriály a kontextovou pomocí: https://www.nngroup.com/articles/onboarding-tutorials/
 
 ## Pracovní log
+
+- 2026-07-28: Doplněna příloha o triage automatizací po revizi mapy bez panického backlogu: přepis nálezů na rozhodovací věty, prioritizace podle dat, pravomoci, nejasnosti a čerstvé změny, triage karta s limitem práce a datovou brzdou, rozlišení textové, vlastnické a technické opravy, příklad pěti nálezů po měsíční mapě, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro výběr jedné automatizace k opravě po revizi mapy. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
 - 2026-07-28: Doplněna příloha o revizi mapy automatizací bez inventáře pro inventář: krátký automatizační seznam napříč skripty, joby, webhooky, produktovými pravidly, asistenty a nástroji bez kódu, osm polí pro měsíční mapu, kontrola změn proti poslednímu stavu, prioritizace podle dat, pravomoci a nejasného vlastníka, příklad měsíční mapy pěti automatizací, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro udržení automatizačního portfolia. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
