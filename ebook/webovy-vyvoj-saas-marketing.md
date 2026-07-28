@@ -146,6 +146,7 @@ Když se nechceš vracet do celé knihy, hledej konkrétní nástroj podle výst
 | Vybrat jednu automatizaci k opravě po revizi mapy | „triage automatizací“, „po revizi mapy“ nebo „automatizační fronta“ | prioritní karta s jedním otevřeným rozhodnutím, limitem práce a vědomě odloženým zbytkem |
 | Naplánovat jednu opravu automatizace po triage | „plán opravy automatizace“, „repair brief“ nebo „oprava po triage“ | malý opravný brief s cílem, hranicí dat, pořadím práce, kontrolním oknem a vědomě zamčeným rozsahem |
 | Provést jednu opravu automatizace bez rozšíření rozsahu | „provedení opravy automatizace“, „oprava podle briefu“ nebo „repair pilot“ | malý realizační průchod, který mění jen slíbenou vrstvu, chrání datovou hranici a končí ověřeným verdiktem |
+| Zkontrolovat opravu automatizace po pilotu | „kontrola opravy automatizace“, „oprava po pilotu“ nebo „repair review“ | krátké review, které ověří původní nález, datovou hranici, šum, ruční zásahy, úklid stop a rozhodne ponechat, zúžit, vrátit nebo zavřít |
 | Automatizovat rutinu bez skrytého dozoru | „automatizace rutiny“, „automatizační karta“ nebo „vypínač automatizace“ | malý automatizační návrh s účelem, vstupy, výstupem, vlastníkem, logy, ručním rozhodnutím a datem revize |
 | Vyhodnotit automatizaci po prvních bězích | „review automatizace“, „automatizace po spuštění“ nebo „autopilot“ | rozhodnutí ponechat, zúžit, přepsat, vrátit do ruční rutiny nebo vypnout automatizaci podle nálezů, šumu a datové stopy |
 | Vypnout automatizaci bez zapomenutého běhu | „vypnutí automatizace“, „ukončený autopilot“ nebo „automatizace končí“ | vypínací karta s posledním během, revokací tokenů, úklidem výstupů, náhradním postupem a kontrolou veřejných slibů |
@@ -62604,6 +62605,113 @@ Výsledek není „report je hezčí“. Výsledek je „report zobrazuje méně
 
 Vezmi opravný brief z předchozí přílohy a napiš k němu realizační větu. Potom vyber jednu vrstvu, kterou opravdu změníš jako první: účel, vstup, zpracování, výstup, pravomoc nebo provoz. Ke změně doplň tři kontrolní příklady a jednu větu, jak uklidíš dočasné ladicí stopy. Pokud při přípravě zjistíš, že potřebuješ nová data, nové příjemce nebo vyšší pravomoc automatizace, nepokračuj v tichosti. Otevři novou změnovou kartu. Tohle není byrokracie, to je ochrana před tím, aby se malá oprava proměnila v nenápadný nový systém.
 
+## Příloha: Kontrola opravy automatizace po pilotu bez falešného hotovo
+
+Pilot opravy má skončit rozhodnutím. Ne pocitem, že „už to asi běží“, ne tichým přechodem do běžného provozu a už vůbec ne tím, že se původní problém přestane zmiňovat, protože tým má mezitím jiné starosti. Automatizace, která po opravě nebyla zkontrolovaná, je jen stará nejistota v novém kabátě.
+
+Kontrola po pilotu má porovnat tři věci: původní nález z triage, opravný brief a skutečné chování po několika bězích. Když tyto tři vrstvy nesedí, není hotovo. Možná je oprava užitečná, možná je potřeba ji zúžit, možná odhalila nový problém. Ale bez krátkého review nevíš, jestli jsi vyřešil příčinu, nebo jen přesunul šum z jednoho reportu do druhého.
+
+> Codyho komentář: „Nasazeno“ je technický stav. „Hotovo“ je pracovní verdikt. Mezi nimi je prostor, kde se rodí většina malých provozních lží. Ne dramatických, jen takových těch pohodlných: report chodí, nikdo nekřičí, takže asi dobrý. Přesně tady se hodí pět řádků review.
+
+### Vrať se k původnímu nálezu
+
+Začni u otázky, proč oprava vůbec vznikla. Ne u commitu, ne u nového výstupu, ne u toho, kolik času práce zabrala. Původní nález je kotva.
+
+Krátké porovnání:
+
+| Otázka | Co hledat | Příklad u retenčního reportu |
+| --- | --- | --- |
+| Jaký byl původní problém? | šum, moc dat, chybějící vlastník, špatná pravomoc, rozbitý výstup | Report posílal celý seznam exportů místo výjimek bez vlastníka. |
+| Co sliboval opravný brief? | jedna věta změny a limit rozsahu | Zúžit výstup na exporty bez vlastníka nebo s neaktivním vlastníkem. |
+| Co se po pilotu skutečně stalo? | běhy, výjimky, ruční opravy, vrácené dotazy | Dva běhy ukázaly jen tři výjimky; jedna byla falešná kvůli starému vlastníkovi. |
+| Co se nesmělo stát? | rozšíření dat, příjemců, pravomoci nebo retence | Nepřibyly nové osobní detaily ani nový příjemce reportu. |
+
+Pokud původní nález nejde najít, zastav se. To neznamená, že oprava byla zbytečná, ale znamená to, že týmu chybí rozhodovací stopa. V takovém případě napiš dodatečnou krátkou rekonstrukci: „Opravovali jsme pravděpodobně ___, protože ___, a po pilotu ověřujeme ___.“ Není to ideální, ale je to lepší než tvrdit, že si všichni pamatují totéž. Nepamatují. Mozek je skvělý interpret, ale mizerný archiv.
+
+### Ověř dopad bez rozšiřování měření
+
+Review opravy nemá být záminka k novému monitoringu. Stačí malý důkaz z pilotního okna: několik běhů, několik výstupů, několik ručních zásahů nebo jedna kontrola datové stopy. Důkaz má odpovědět na rozhodnutí, ne vyrobit novou observability výkladní skříň.
+
+Použij čtyři signály:
+
+| Signál | Dobrá otázka | Špatný reflex |
+| --- | --- | --- |
+| Správnost | Zachytila oprava případy, kvůli kterým vznikla? | Přidáme všechna pole, ať víme víc. |
+| Šum | Ubyly výstupy, které nikdo neměl řešit? | Pošleme report více lidem, ať to někdo zachytí. |
+| Ruční zásahy | Musel člověk opravovat automatizaci stejně často jako předtím? | Budeme sledovat, kdo jak rychle reaguje. |
+| Datová stopa | Zůstala data menší nebo stejně omezená než před opravou? | Necháme debug log ještě měsíc pro jistotu. |
+
+U privacy-first provozu je důležité říct i to, co záměrně neověřuješ. Například: nesledujeme, kdo report otevřel, jak dlouho ho četl ani kolikrát klikl na odkaz. Stačí vědět, jestli report vedl k opravě výjimky a jestli k tomu nepotřeboval zbytečné osobní detaily.
+
+### Zkontroluj datovou stopu pilotu
+
+Pilot často vytvoří dočasné stopy: ukázkové exporty, ladicí logy, screenshoty, testovací výstupy, pracovní tabulky, dočasné přístupy, kopie payloadů nebo poznámky v chatu. Kontrola po pilotu musí rozhodnout, co s nimi. Jinak se z „dočasně“ stane nové tiché úložiště.
+
+Úklidová karta:
+
+| Stopa | Rozhodnutí | Příklad |
+| --- | --- | --- |
+| Dočasné logy | smazat, zkrátit retenci nebo převést do běžných logů | Debug pole s názvem souboru se smaže po review. |
+| Testovací výstupy | odstranit nebo označit jako neplatné | Starý příklad plného reportu se odebere z dokumentace. |
+| Pracovní exporty | smazat po kontrole nebo anonymizovat | CSV z pilotu se smaže, ponechá se jen počet výjimek. |
+| Přístupy | odebrat nebo potvrdit jako běžnou roli | Dočasný přístup k reportu se odebere člověku, který jen ladil šablonu. |
+| Šablony a runbooky | přepsat podle platné reality | Runbook už nepopisuje starý kompletní report. |
+
+Pokud se některá stopa má ponechat, napiš proč, kde je uložená, kdo ji vlastní a kdy se znovu kontroluje. Věta „pro jistotu“ nestačí. Pro jistotu se drží hasicí přístroj, ne kopie dat bez účelu.
+
+### Rozhodni jedním z pěti verdiktů
+
+Po pilotu opravy nepoužívej neurčité stavy jako „sledovat“, „nechat doběhnout“ nebo „zatím OK“. Jsou lákavé, protože nevypadají jako konflikt. Ve skutečnosti jen odkládají odpovědnost.
+
+Použij jeden z těchto verdiktů:
+
+| Verdikt | Kdy ho použít | Co musí následovat |
+| --- | --- | --- |
+| Ponechat | oprava řeší původní nález, šum klesl a datová hranice drží | převést do běžné údržby a nastavit další revizní trigger |
+| Zúžit | oprava pomáhá, ale pořád sbírá, posílá nebo drží víc, než je nutné | otevřít malou zúžovací kartu s jedním limitem |
+| Vrátit ručně | automatizace je po opravě křehká nebo dražší než ruční postup | obnovit ruční cestu, vypnout běh a uklidit výstupy |
+| Otevřít novou kartu | pilot odhalil jiný problém než původní nález | zavřít tuto opravu a nový problém popsat zvlášť |
+| Vypnout | původní potřeba už neexistuje nebo oprava zhoršila důvěru | spustit vypínací postup, odebrat tokeny a opravit dokumentaci |
+
+Nejčastější dobrý výsledek není „automatizace zůstává navždy“. Dobrý výsledek je, že tým ví, proč zůstává, v jakém rozsahu, s jakou datovou hranicí a kdy se znovu otevře otázka, jestli ji pořád potřebuje.
+
+### Příklad: Kontrola opravy retenčního reportu
+
+Pilot zúženého retenčního reportu běžel dva týdny. Původní problém byl informační šum a zbytečné osobní detaily v týdenním seznamu všech exportů. Opravný brief slíbil výstup jen pro exporty bez vlastníka nebo s neaktivním vlastníkem.
+
+Review karta:
+
+| Pole | Zápis |
+| --- | --- |
+| Původní nález | Report posílal moc dat a nevedl k jasné práci. |
+| Slib opravy | Zobrazit jen výjimky, u kterých chybí odpovědný vlastník. |
+| Pilotní okno | dva týdenní běhy |
+| Správnost | Zachyceny tři skutečné výjimky, jedna falešná kvůli staré mapě vlastníků. |
+| Šum | Výstup klesl z dlouhého seznamu na několik řádků k řešení. |
+| Datová stopa | Report už neobsahuje názvy souborů ani osobní detail exportéra. |
+| Ruční zásah | Jednou bylo potřeba opravit vlastníka v mapě, ne měnit report. |
+| Úklid | Dočasný debug výstup smazán, starý příklad reportu odstraněn z runbooku. |
+| Verdikt | Ponechat, ale doplnit měsíční kontrolu mapy vlastníků. |
+
+Tady není potřeba stavět další dashboard. Stačí přepsat runbook, potvrdit vlastníka reportu, zapsat revizní trigger a zavřít pilot. Jedna drobná navazující práce vznikla právem: mapa vlastníků byla skutečný zdroj jedné falešné výjimky. To je nová malá karta, ne důkaz, že se má report zase rozšířit na všechno.
+
+### Checklist: Kontrola opravy automatizace po pilotu
+
+- [ ] Review se vrací k původnímu nálezu, ne jen k technickému commitu.
+- [ ] Opravný brief a skutečné chování po pilotu jsou porovnané vedle sebe.
+- [ ] Dopad je ověřený malým důkazem z pilotního okna, ne novým plošným monitoringem.
+- [ ] Je zapsané, co se záměrně neměřilo kvůli ochraně soukromí.
+- [ ] Datová hranice opravy drží i po ladění a pilotních výstupech.
+- [ ] Dočasné logy, exporty, screenshoty, tabulky a přístupy mají rozhodnutí.
+- [ ] Staré šablony, runbooky a ukázkové výstupy už nepopisují neplatnou realitu.
+- [ ] Falešné výjimky jsou rozlišené od skutečného produktového nebo provozního problému.
+- [ ] Verdikt je jeden z pěti: ponechat, zúžit, vrátit ručně, otevřít novou kartu nebo vypnout.
+- [ ] Pokud oprava zůstává, má běžného vlastníka a další revizní trigger.
+
+### Mini úkol
+
+Vezmi jednu nedávnou opravu automatizace a napiš pět řádků review: původní nález, slib opravy, pilotní důkaz, datová stopa a verdikt. Potom projdi dočasné stopy pilotu a u každé napiš „smazat“, „ponechat s důvodem“ nebo „převést do běžné dokumentace“. Pokud vyjde verdikt „zatím sledovat“, přepiš ho. Buď opravě věříš v jasném rozsahu, nebo potřebuje další malé rozhodnutí. Mlžný mezistav není strategie, jen odložené uklízení.
+
 ## Zdroje
 
 - IETF RFC 9110: HTTP Semantics - význam HTTP přesměrování a stavů včetně `410 Gone` pro zdroje, které už nejsou dostupné: https://www.rfc-editor.org/rfc/rfc9110.html
@@ -62797,6 +62905,8 @@ Vezmi opravný brief z předchozí přílohy a napiš k němu realizační větu
 - Nielsen Norman Group: Onboarding Tutorials vs. Contextual Help - rozdíl mezi úvodními tutoriály a kontextovou pomocí: https://www.nngroup.com/articles/onboarding-tutorials/
 
 ## Pracovní log
+
+- 2026-07-28: Doplněna příloha o kontrole opravy automatizace po pilotu bez falešného hotovo: porovnání původního nálezu, opravného briefu a skutečného chování po pilotu, ověření dopadu bez nového plošného monitoringu, úklid dočasných datových stop, pět jasných verdiktů po pilotu, příklad kontroly zúženého retenčního reportu, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro repair review. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
 - 2026-07-28: Doplněna příloha o provedení jedné opravy automatizace bez rozšíření rozsahu: realizační věta před změnou, práce po vrstvách účel/vstup/zpracování/výstup/pravomoc/provoz, ochrana datové hranice při ladění, malý kontrolní průchod před nasazením, pilot opravy, příklad zúžení retenčního reportu, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro provedení opravy podle briefu. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
