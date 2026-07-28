@@ -142,6 +142,7 @@ Když se nechceš vracet do celé knihy, hledej konkrétní nástroj podle výst
 | Převést první úspěšnou změnu do běžné rutiny | „běžná rutina po první změně“, „standardní režim“ nebo „z prvního úspěchu rutina“ | rutina se spouštěčem, vlastníkem, hranicí dat, přístupovou hranicí, revizí a stop pravidlem |
 | Zjednodušit nebo ukončit rutinu po několika cyklech | „retence rutiny“, „rutina po třech cyklech“ nebo „procesní sediment“ | rozhodnutí ponechat, zúžit, sloučit, automatizovat opatrně nebo zrušit opakovanou práci |
 | Vybrat správnou fázi práce s automatizací | „životní cyklus automatizace“, „mapa automatizace“ nebo „kde začít s automatizací“ | rozhodnutí, kterou automatizační kartu otevřít podle aktuálního stavu, rizika a datové hranice |
+| Udržet mapu automatizací aktuální bez inventáře pro inventář | „revize mapy automatizací“, „automatizační portfolio“ nebo „měsíční mapa automatizací“ | krátká kontrola seznamu automatizací podle stavu, vlastníka, datové hranice a dalšího rozhodnutí |
 | Automatizovat rutinu bez skrytého dozoru | „automatizace rutiny“, „automatizační karta“ nebo „vypínač automatizace“ | malý automatizační návrh s účelem, vstupy, výstupem, vlastníkem, logy, ručním rozhodnutím a datem revize |
 | Vyhodnotit automatizaci po prvních bězích | „review automatizace“, „automatizace po spuštění“ nebo „autopilot“ | rozhodnutí ponechat, zúžit, přepsat, vrátit do ruční rutiny nebo vypnout automatizaci podle nálezů, šumu a datové stopy |
 | Vypnout automatizaci bez zapomenutého běhu | „vypnutí automatizace“, „ukončený autopilot“ nebo „automatizace končí“ | vypínací karta s posledním během, revokací tokenů, úklidem výstupů, náhradním postupem a kontrolou veřejných slibů |
@@ -62115,6 +62116,114 @@ Stejný skript. Tři různé stavy. Tři různé správné otázky. Když to tý
 
 Vyber jednu automatizaci z vlastního provozu nebo backlogu. Neřeš kód. Napiš jen její aktuální stav, důvod otevření, datovou hranici a další kontrolu. Potom podle tabulky vyber jednu nejbližší přílohu e-booku. Pokud vybereš víc než jednu, vrať se o krok zpět a napiš, které rozhodnutí je teď nejdůležitější. Automatizace se dobře řídí po malých rozhodnutích. Velké mapy jsou užitečné jen tehdy, když tě dovedou k prvnímu kroku.
 
+## Příloha: Revize mapy automatizací bez inventáře pro inventář
+
+Mapa životního cyklu pomáhá u jedné automatizace. Jenže po pár měsících už tým obvykle nemá jednu automatizaci. Má skript na report, pravidlo ve formuláři, plánovaný job, interního asistenta, kontrolu exportů, upozornění v chatu, několik webhooků a dva zapomenuté experimenty, které „asi pořád někde běží“. V tu chvíli nestačí umět vybrat správnou přílohu. Je potřeba udržet přehled o celém malém automatizačním portfoliu.
+
+Tahle příloha není výzva k velkému auditu. Je to lehká pravidelná kontrola, která má odhalit tři věci: co běží bez vlastníka, co sbírá nebo posílá víc dat než dřív a co už nepomáhá rozhodování. Pokud revize končí desetistránkovým zápisem, něco se utrhlo ze řetězu. Cílem je zavřít několik malých otázek, ne vyrábět památník procesní odpovědnosti.
+
+> Codyho komentář: Automatizace bez mapy se v malém týmu pozná jednoduše: všichni vědí, že „něco nám to posílá“, ale nikdo neví, kdo to vypne, když to začne lhát. To není automatizace. To je pomalu běžící dluh v převleku za produktivitu.
+
+### Udělej krátký automatizační seznam
+
+Začni seznamem, ne architekturou. Do první verze nepiš každou knihovnu, každou funkci ani každý řádek kódu. Zapiš jen automatizované pracovní schopnosti, které něco čtou, rozhodují, posílají, plánují, mění stav nebo připravují úkol člověku.
+
+Praktické kategorie:
+
+| Kategorie | Příklady | Proč patří do mapy |
+| --- | --- | --- |
+| Scheduled job | retenční kontrola, týdenní report, úklid starých draftů | běží bez přímé lidské akce |
+| Webhook nebo integrace | billing webhook, CRM synchronizace, incidentní alert | přenáší data mezi systémy |
+| Produktové pravidlo | blokace exportu bez retence, kontrola povinného vlastníka | ovlivňuje práci uživatele |
+| Interní asistent | návrh odpovědi, třídění ticketů, příprava úkolu | může číst citlivý kontext |
+| Notifikace | upozornění do chatu, bezpečnostní e-mail, digest | šíří informaci dalším lidem |
+| Kontrolní skript | link checker, health check, test certifikátu | vytváří provozní důvěru nebo falešný klid |
+
+Do mapy nepatří jen kód. Patří tam i automatizace v nástrojích bez repozitáře: pravidlo v helpdesku, automatický štítek v CRM, plánovaný export v analytice, workflow v účetním systému. Právě ty se ztrácejí nejrychleji, protože nemají pull request, review ani viditelný deploy.
+
+### Použij osm polí, víc až při problému
+
+Měsíční nebo kvartální mapa má být malá. Stačí osm polí:
+
+| Pole | Otázka |
+| --- | --- |
+| Název | Jak tomu tým opravdu říká? |
+| Stav | návrh / pilot / provoz / drift / změna / vypnutí / ruční náhrada / restart |
+| Účel | Jaké rozhodnutí nebo práci to podporuje? |
+| Vlastník | Kdo podle výstupu jedná nebo rozhoduje? |
+| Vstupy | Jaká data nebo systémy automatizace čte? |
+| Výstup | Kam výsledek posílá nebo jaký stav mění? |
+| Datová hranice | Co nesmí číst, ukládat, posílat nebo logovat? |
+| Další rozhodnutí | ponechat / zúžit / opravit / předat / vypnout / otevřít kartu |
+
+Nevyplňuj pole jako smlouvu na pět let. Stačí pracovní jazyk: „čte ID exportu, vlastníka a retenční datum; neposílá obsah exportu; výstupem je úkol vlastníkovi“. To je použitelnější než obecná věta „zpracovává metadata v souladu s interní politikou“. Taková věta možná vypadá dospěle, ale při incidentu se podle ní nedá udělat nic.
+
+Pokud u automatizace neumíš vyplnit vlastníka nebo účel, neznamená to hned vypnout. Znamená to otevřít rozhodnutí. Automatizace může být pořád užitečná, jen osiřela. Ale osiřelá užitečná věc je pořád provozní riziko.
+
+### Kontroluj změny proti poslední mapě
+
+Revize mapy není sběr pocitů. Porovnej aktuální stav s posledním záznamem a hledej konkrétní rozdíly.
+
+Pět užitečných otázek:
+
+- Přibyl automatizaci nový vstup, pole, scope, webhook nebo export?
+- Změnil se příjemce výstupu nebo se výstup posílá širšímu publiku?
+- Přestal někdo podle výstupu jednat?
+- Změnil se vlastník, ale nezměnily se tokeny, oprávnění nebo runbook?
+- Objevují se opakované ruční zásahy, které znamenají drift, výjimku nebo špatné pravidlo?
+
+Když najdeš rozdíl, neřeš ho přímo v mapě. Mapa má ukázat, kterou kartu otevřít. Nový vstup patří do změny vstupu. Širší výstup patří do změny výstupu. Chybějící reakce patří do driftu nebo stop pravidla. Změna vlastníka patří do předání automatizace. Opakované ruční obcházení patří do review výjimek. Mapa je rozcestník, ne dílna.
+
+### Seřaď riziko podle dat a pravomoci
+
+Když má tým deset automatizací a hodinu času, nevyhrává nejhlasitější skript. Vyhrává největší kombinace datového dopadu, pravomoci a nejasnosti.
+
+Rychlé pořadí kontroly:
+
+| Nejprve kontroluj | Proč |
+| --- | --- |
+| Automatizace s širokým čtením dat | chyba znamená větší datovou stopu |
+| Automatizace s automatickou akcí | chyba mění stav bez člověka |
+| Automatizace s externím přenosem | data opouštějí primární systém |
+| Automatizace bez vlastníka | nikdo nehlídá hodnotu ani vypnutí |
+| Automatizace v pilotu po termínu | dočasná výjimka se může změnit v trvalý provoz |
+| Automatizace s častými výjimkami | pravidlo možná neodpovídá realitě |
+
+Nízkorizikové pomůcky mohou počkat. Link checker bez osobních dat je obvykle menší riziko než interní asistent, který čte supportní kontext a připravuje odpovědi. Report se souhrnným počtem otevřených úkolů je menší riziko než integrace, která posílá zákaznická pole do dalšího systému.
+
+Pravidlo pro privacy-first revizi: když se rozhoduješ mezi dvěma položkami, začni tou, která má širší data, širší oprávnění nebo méně zřejmého vlastníka. Produktivita je příjemná. Ztracená kontrola nad daty je dražší sport.
+
+### Příklad: Měsíční mapa pěti automatizací
+
+Malý SaaS tým si jednou měsíčně projde pět automatizací:
+
+| Automatizace | Stav | Nález | Další rozhodnutí |
+| --- | --- | --- | --- |
+| Retenční kontrola exportů | provoz | výstupy vznikají jen výjimečně, produkt už vyžaduje retenční datum | otevřít stop pravidlo |
+| Billing webhook | provoz | nový typ plánu přidal pole, které se posílá dál | otevřít změnu vstupu a výstupu |
+| Týdenní marketing report | drift | chodí do chatu, ale nikdo podle něj nic nezavírá | zúžit nebo vypnout |
+| AI návrh support odpovědi | pilot | pilotní okno skončilo před dvěma týdny | udělat pilotní review |
+| Link checker veřejného webu | provoz | vlastník odešel z týmu | předat vlastnictví a ověřit runbook |
+
+Výsledek revize není „máme pět automatizací“. To tým věděl. Výsledek je pět konkrétních rozhodnutí, z toho dvě mohou být malé úkoly, dvě krátká review a jedno předání. Mapa tím splnila práci: z mlhy udělala frontu rozhodnutí podle rizika.
+
+### Checklist: Revize mapy automatizací
+
+- [ ] Mapa obsahuje pracovní automatizace, ne jen skripty v repozitáři.
+- [ ] Každá položka má stav, účel, vlastníka, vstupy, výstup a datovou hranici.
+- [ ] Automatizace v externích nástrojích nejsou mimo seznam jen proto, že nemají kód.
+- [ ] U každé položky je jasné další rozhodnutí: ponechat, zúžit, opravit, předat, vypnout nebo otevřít konkrétní kartu.
+- [ ] Revize hledá změny proti poslední mapě, ne jen znovu opisuje starý stav.
+- [ ] Položky s širšími daty, automatickou akcí nebo externím přenosem se kontrolují dřív.
+- [ ] Piloty po termínu se převádějí na review, ne na tichý provoz.
+- [ ] Automatizace bez vlastníka se nepovažuje za zdravou jen proto, že technicky běží.
+- [ ] Mapa neslouží k rozšíření trackingu práce lidí.
+- [ ] Výstupem revize je malý seznam rozhodnutí, ne nová trvalá poradní vrstva.
+
+### Mini úkol
+
+Sepiš do jedné tabulky všechny automatizace, které se v posledních třiceti dnech dotkly zákaznických dat, interních úkolů, obchodních kontaktů, provozních alertů nebo veřejného obsahu. U každé vyplň jen stav, účel, vlastníka, vstupy, výstup a datovou hranici. Potom vyber jednu položku s největší kombinací dat, pravomoci a nejasnosti a otevři pro ni nejbližší kartu z mapy životního cyklu. Zbytek nech jako mapu, ne jako panický backlog.
+
 ## Zdroje
 
 - IETF RFC 9110: HTTP Semantics - význam HTTP přesměrování a stavů včetně `410 Gone` pro zdroje, které už nejsou dostupné: https://www.rfc-editor.org/rfc/rfc9110.html
@@ -62308,6 +62417,8 @@ Vyber jednu automatizaci z vlastního provozu nebo backlogu. Neřeš kód. Napi�
 - Nielsen Norman Group: Onboarding Tutorials vs. Contextual Help - rozdíl mezi úvodními tutoriály a kontextovou pomocí: https://www.nngroup.com/articles/onboarding-tutorials/
 
 ## Pracovní log
+
+- 2026-07-28: Doplněna příloha o revizi mapy automatizací bez inventáře pro inventář: krátký automatizační seznam napříč skripty, joby, webhooky, produktovými pravidly, asistenty a nástroji bez kódu, osm polí pro měsíční mapu, kontrola změn proti poslednímu stavu, prioritizace podle dat, pravomoci a nejasného vlastníka, příklad měsíční mapy pěti automatizací, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro udržení automatizačního portfolia. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
 - 2026-07-28: Doplněna příloha o mapě životního cyklu automatizace bez bloudění mezi přílohami: rychlá orientace podle stavu návrh/pilot/provoz/drift/změna/vypnutí/ruční náhrada/restart, rozlišení čtyř druhů rozhodnutí, datová brzda před technickým rozšiřováním, univerzální karta automatizace, příklad jednoho skriptu ve třech stavech, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro výběr správné fáze práce s automatizací. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
