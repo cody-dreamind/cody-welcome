@@ -146,6 +146,7 @@ Když se nechceš vracet do celé knihy, hledej konkrétní nástroj podle výst
 | Vypnout automatizaci bez zapomenutého běhu | „vypnutí automatizace“, „ukončený autopilot“ nebo „automatizace končí“ | vypínací karta s posledním během, revokací tokenů, úklidem výstupů, náhradním postupem a kontrolou veřejných slibů |
 | Ověřit náhradní ruční proces po vypnutí automatizace | „ruční proces po vypnutí“, „náhradní rutina“ nebo „kontrola po vypnutí automatizace“ | krátká ověřovací karta, že tým umí původní riziko pokrýt bez starého skriptu, nových exportů a skryté odpovědnosti |
 | Zkontrolovat odložené vypnutí po sunset okně | „kontrola sunsetu“, „sunset hotovo“ nebo „po odloženém vypnutí“ | zavírací kontrola, že poslední běh opravdu skončil, staré výstupy už neřídí práci a náhradní cesta má vlastníka |
+| Posoudit žádost na návrat vypnuté automatizace | „re-entry gate“, „návrat vypnuté automatizace“ nebo „automatizace zpátky po sunsetu“ | krátké rozhodnutí, zda jde o nový signál, staré pohodlí, špatnou ruční náhradu nebo nutnost restartovací karty |
 | Znovu spustit automatizaci po ruční náhradě | „znovuspuštění automatizace“, „automatizace po ručním procesu“ nebo „restart automatizace“ | restartovací karta s menším rozsahem, jasným spouštěčem, ručním rozhodnutím, omezenými logy a datem dalšího review |
 | Ověřit restartovanou automatizaci po pilotu | „kontrola po restartu automatizace“, „pilot automatizace hotovo“ nebo „restartovaný skript“ | rozhodnutí, zda automatizace po pilotu zůstane, zúží se, vrátí ručně, nebo se znovu vypne bez starých tokenů a datového šumu |
 | Převést úspěšný pilot automatizace do běžného provozu | „standardní provoz automatizace“, „automatizace po pilotu“ nebo „rutina ze skriptu“ | provozní karta automatizace s vlastníkem, revizním rytmem, limitem dat, stop pravidlem a plánem úklidu |
@@ -61694,6 +61695,121 @@ Verdikt: hotovo s drobnou opravou. Automatizace je vypnutá, datová stopa se ne
 
 Vezmi jednu automatizaci, která měla odložené vypnutí, a porovnej sunset kartu se skutečností. Najdi poslední běh, jeden starý výstup, jeden přístup a jednu náhradní cestu. Ke každému napiš stav: zavřeno, opravit, nebo pokračuje s důvodem. Na konci dej jeden verdikt sunsetu. Bez verdiktu vypnutí ještě není hotové.
 
+## Příloha: Re-entry gate pro vypnutou automatizaci bez panického návratu
+
+Po sunsetu se občas ozve věta: „Neměli bychom tu automatizaci vrátit?“ Někdy je to dobrý signál. Ruční náhrada může ukázat, že se práce opakuje, že tým zbytečně kopíruje stejný údaj, nebo že malé upozornění sníží riziko. Jindy je to jen stesk po starém reportu, který sice hučel, ale nikdo podle něj nerozhodoval.
+
+Špatná otázka zní: „Chybí nám stará automatizace?“
+
+Lepší otázka zní: „Jaký nový důkaz máme po vypnutí a jaké rozhodnutí z něj vyplývá?“
+
+Re-entry gate je krátká brzda mezi „někdo to chce zpátky“ a „zapnuli jsme starý job“. Není to nová velká procedura. Je to jedna stránka, která rozliší čtyři situace: nový signál, špatnou ruční náhradu, staré pohodlí a skutečný kandidát na restartovací kartu.
+
+> Codyho komentář: Když se automatizace vrací bez re-entry gate, většinou se nevrací ponaučení. Vrací se setrvačnost s hezčím názvem. A setrvačnost je výborná v jedné věci: umí tvářit se jako produktivita.
+
+### Rozliš signál od nostalgie
+
+Žádost na návrat vypnuté automatizace má vždycky znít konkrétně. „Chybí nám to“ je pocit. „Za poslední měsíc jsme třikrát ručně hledali stejný stav a dvakrát jsme zpozdili rozhodnutí“ je signál.
+
+Rychlé třídění:
+
+| Věta v týmu | Co pravděpodobně znamená | Další krok |
+| --- | --- | --- |
+| „Bez reportu nevíme, co se děje.“ | Chybí zdroj pravdy nebo vlastník ruční náhrady. | Opravit ruční proces, ne hned automatizovat. |
+| „Každý týden ručně děláme stejný výběr.“ | Možný kandidát na malou automatizaci. | Sepsat důkaz a připravit restartovací kartu. |
+| „Dřív to bylo pohodlnější.“ | Nostalgie po starém toku. | Zeptat se, jaké rozhodnutí starý výstup podporoval. |
+| „Teď ukládáme víc dat ručně než dřív skript.“ | Privacy riziko ruční náhrady. | Zúžit ruční proces nebo navrhnout menší automatizaci. |
+| „Nikdo neví, kdy ruční kontrolu spustit.“ | Chybí trigger. | Nejprve napsat trigger a ověřit jeden průchod. |
+| „Potřebujeme zpět starý token.“ | Riziko návratu starého rozsahu. | Zastavit a udělat přístupovou revizi. |
+
+Re-entry gate nemá dokazovat, že automatizace je špatná. Má jen zabránit tomu, aby se rozhodovalo podle nálady. Pokud je důkaz dobrý, gate pomůže restart zúžit. Pokud důkaz chybí, gate ušetří tým před návratem nástroje, který by zase běžel ze zvyku.
+
+### Udělej krátkou re-entry kartu
+
+Re-entry karta je předstupeň restartovací karty. Neřeší ještě implementaci, tokeny ani přesný payload. Řeší, zda má vůbec smysl otevřít návrh na restart.
+
+Minimální karta:
+
+| Pole | Co napsat |
+| --- | --- |
+| Co bylo vypnuté | Název automatizace, reportu, jobu nebo pravidla. |
+| Proč to skončilo | Verdikt ze sunsetu nebo poslední známý důvod vypnutí. |
+| Co se změnilo | Nový signál, změna práce, chyba ruční náhrady nebo návrat staré potřeby. |
+| Důkaz | Konkrétní počet případů, příklad nebo pracovní dopad bez osobního dohledu. |
+| Dnešní ruční cesta | Jak se práce dělá teď a kde bolí. |
+| Datový dopad ruční cesty | Zda ruční náhrada sbírá, kopíruje nebo sdílí víc dat než je nutné. |
+| Možný verdikt | Opravit ruční proces, nechat vypnuté, otevřít restart, nebo znovu vyhodnotit po dalším cyklu. |
+| Konec rozhodování | Datum nebo událost, kdy se karta zavře. |
+
+Karta má být krátká právě proto, aby šla použít v běžném provozu. Pokud z ní vznikne studie, tým pravděpodobně neřeší návrat automatizace, ale nejasný proces. V tom případě nezačínej nástrojem. Začni pojmenováním práce.
+
+### Nech starý kód mimo první rozhodnutí
+
+Pokušení otevřít starý skript je velké. Vždyť tam všechno je, jen to zapnout. Jenže starý kód umí nenápadně podsouvat staré odpovědi: stejné vstupy, stejné výstupy, stejnou frekvenci, stejné logy a stejná oprávnění.
+
+První re-entry rozhodnutí dělej bez čtení implementace. Stačí zavírací karta, ruční průchody a dnešní práce. Kód otevři až ve chvíli, kdy karta říká „otevřít restart“. Pak můžeš starý skript použít jako zdroj technických detailů, ne jako produktové zadání.
+
+Praktické pravidlo:
+
+- nejdřív popiš dnešní potřebu,
+- potom napiš nejmenší výstup,
+- potom urč hranici dat,
+- potom zvaž, jestli automatizace vůbec pomůže,
+- až potom se dívej, co lze znovu použít.
+
+Tím chráníš tým před starým rozsahem. Kód je velmi přesvědčivý dokument, i když je zastaralý. Umí působit jako pravda jen proto, že existuje.
+
+### Vyber jeden ze čtyř verdiktů
+
+Re-entry gate má skončit rozhodnutím, ne dalším „probereme“. Použij čtyři verdikty:
+
+| Verdikt | Kdy dává smysl | Co udělat |
+| --- | --- | --- |
+| Nechat vypnuté | Není nový důkaz, jen obecný pocit nebo zvyk. | Zavřít kartu a případně doplnit důvod do dokumentace. |
+| Opravit ruční proces | Problém je v triggeru, vlastníkovi nebo šabloně ruční náhrady. | Zlepšit ruční cestu a nastavit nové ověřovací okno. |
+| Otevřít restart | Existuje opakovaný signál, jasný výstup a možnost menší datové stopy. | Připravit restartovací kartu podle starší přílohy o znovuspuštění. |
+| Změnit produkt nebo pravidlo | Automatizace by jen lepila špatný stav produktu, textu nebo procesu. | Vytvořit produktovou opravu místo návratu skriptu. |
+
+Verdikt „otevřít restart“ není schválení implementace. Je to souhlas vytvořit konkrétní restartovací návrh. Ten musí znovu projít rozsahem, oprávněními, výstupem, pilotem a stop pravidlem. Brzda má dvě fáze záměrně: nejdřív se rozhoduje, jestli má smysl o návratu mluvit; až potom jak přesně se má vrátit.
+
+### Příklad: Starý retenční report chce zpátky do chatu
+
+Situace: Týdenní retenční report exportů byl po sunsetu vypnutý. Měsíční privacy review běží ručně. Po dvou měsících support navrhne vrátit starý chatový report, protože „se v tom líp orientovalo“.
+
+Re-entry karta:
+
+| Pole | Zápis |
+| --- | --- |
+| Co bylo vypnuté | Týdenní chatový report exportů bez retenčního data. |
+| Proč to skončilo | Tři měsíce nevedl k rozhodnutí a posílal příliš široký výstup. |
+| Co se změnilo | Support dvakrát hledal stav konkrétní exportní karty mimo měsíční review. |
+| Důkaz | Dva support dotazy; žádný z nich nevyžadoval celý týdenní report. |
+| Dnešní ruční cesta | Vlastník exportu dohledá stav v exportní kartě a odpoví supportu. |
+| Datový dopad ruční cesty | Nevzniká nový export, ale chybí jasná šablona odpovědi pro support. |
+| Možný verdikt | Opravit ruční proces, nevracet starý report. |
+| Konec rozhodování | Po doplnění support šablony zkontrolovat další dva podobné dotazy. |
+
+Rozhodnutí: neotevírat restart. Problém není chybějící automatizace, ale slabá ruční odpověď pro support. Oprava je menší: doplnit support šablonu, kde je zdroj pravdy, kdo je vlastník exportu a jak se ptát bez kopírování zákaznických detailů do chatu.
+
+Kdy by verdikt byl jiný? Kdyby se ukázalo, že ruční review pravidelně pozdě zachytává exportní karty bez retenčního data a že malé upozornění může vytvořit úkol bez obsahu exportu. Pak nejde o návrat starého reportu. Jde o kandidáta na novou, užší automatizaci.
+
+### Checklist: Re-entry gate pro vypnutou automatizaci
+
+- [ ] Žádost na návrat automatizace je zapsaná konkrétní větou, ne jen pocitem.
+- [ ] Víme, proč byla automatizace původně vypnutá.
+- [ ] Existuje nový důkaz z ručního období nebo změny práce.
+- [ ] Důkaz nevyžaduje sledování jednotlivých lidí ani nové osobní metriky.
+- [ ] Ruční náhrada je popsaná včetně triggeru, vlastníka a bolesti.
+- [ ] Je zkontrolované, zda ruční náhrada nevytváří větší datovou stopu než původní stav.
+- [ ] Starý kód nebyl použitý jako produktové zadání.
+- [ ] Verdikt je jeden ze čtyř: nechat vypnuté, opravit ruční proces, otevřít restart, změnit produkt nebo pravidlo.
+- [ ] Pokud verdikt zní otevřít restart, vznikne samostatná restartovací karta s menším rozsahem.
+- [ ] Pokud verdikt zní opravit ruční proces, má oprava vlastní ověřovací okno.
+
+### Mini úkol
+
+Vezmi jednu vypnutou automatizaci, kterou by někdo rád vrátil. Napiš re-entry kartu: co bylo vypnuté, proč to skončilo, co se změnilo, jaký je důkaz, jak dnes funguje ruční cesta a jaký má datový dopad. Potom vyber jeden verdikt. Pokud neumíš napsat důkaz bez věty „máme pocit“, nech automatizaci vypnutou a nejdřív oprav ruční pozorování práce.
+
 ## Zdroje
 
 - IETF RFC 9110: HTTP Semantics - význam HTTP přesměrování a stavů včetně `410 Gone` pro zdroje, které už nejsou dostupné: https://www.rfc-editor.org/rfc/rfc9110.html
@@ -61887,6 +62003,8 @@ Vezmi jednu automatizaci, která měla odložené vypnutí, a porovnej sunset ka
 - Nielsen Norman Group: Onboarding Tutorials vs. Contextual Help - rozdíl mezi úvodními tutoriály a kontextovou pomocí: https://www.nngroup.com/articles/onboarding-tutorials/
 
 ## Pracovní log
+
+- 2026-07-28: Doplněna příloha o re-entry gate pro vypnutou automatizaci bez panického návratu: rozlišení nového signálu od nostalgie po starém reportu, krátká re-entry karta, pravidlo nebrat starý kód jako produktové zadání, čtyři verdikty před restartem, příklad odmítnutí návratu starého retenčního reportu do chatu, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro posouzení žádosti na návrat vypnuté automatizace. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
 - 2026-07-28: Doplněna příloha o kontrole po odloženém vypnutí automatizace bez návratu staré pravdy: porovnání sunset karty se skutečností, zavírací karta sunsetu, ověření starých výstupů a oprávnění, kontrola skrytých návratů staré automatizace, závěrečné verdikty, příklad kontroly retenčního reportu exportů, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro kontrolu sunsetu po odloženém vypnutí. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
