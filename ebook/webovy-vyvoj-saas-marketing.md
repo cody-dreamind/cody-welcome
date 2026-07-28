@@ -153,6 +153,7 @@ Když se nechceš vracet do celé knihy, hledej konkrétní nástroj podle výst
 | Převést post-close nález zpět do mapy automatizací | „post-close nález“, „nález do mapy“ nebo „oprava po běžném cyklu našla problém“ | rozhodnutí, jestli nález patří do mapy, runbooku, nové opravné karty, nebo se má zavřít bez další práce |
 | Otevřít opravnou kartu z post-close nálezu bez recyklace pilotu | „opravná karta z nálezu“, „post-close karta“ nebo „nová oprava po review“ | nová karta s jedním důvodem, zúženým rozsahem, datovou hranicí, vlastníkem, kontrolním oknem a stop pravidlem |
 | Převést opravnou kartu do backlogu bez ztráty hranic | „opravná karta do backlogu“, „backlog po post-close nálezu“ nebo „oprava čeká na práci“ | backlogový úkol, který nese důvod, datovou hranici, stop pravidlo a kontrolní okno bez nafouknutí do projektu |
+| Otevřít backlogovou opravu k realizaci bez rozmazání zadání | „backlogová oprava do práce“, „otevření opravy“ nebo „sprint opravy“ | realizační karta, která před prací potvrdí důvod, hranice, aktuálnost nálezu, test, úklid a stop pravidlo |
 | Automatizovat rutinu bez skrytého dozoru | „automatizace rutiny“, „automatizační karta“ nebo „vypínač automatizace“ | malý automatizační návrh s účelem, vstupy, výstupem, vlastníkem, logy, ručním rozhodnutím a datem revize |
 | Vyhodnotit automatizaci po prvních bězích | „review automatizace“, „automatizace po spuštění“ nebo „autopilot“ | rozhodnutí ponechat, zúžit, přepsat, vrátit do ruční rutiny nebo vypnout automatizaci podle nálezů, šumu a datové stopy |
 | Vypnout automatizaci bez zapomenutého běhu | „vypnutí automatizace“, „ukončený autopilot“ nebo „automatizace končí“ | vypínací karta s posledním během, revokací tokenů, úklidem výstupů, náhradním postupem a kontrolou veřejných slibů |
@@ -63428,6 +63429,129 @@ Tady backlog neztratil rozhodnutí. Jen přiznal, že práce čeká. To je fér.
 
 Vezmi jednu opravnou kartu z post-close nálezu a přepiš ji na backlogovou položku. Napiš název se slovesem, jedno „proč teď“, rozsah, mimo rozsah, datovou hranici a definici hotovo. Potom zkus kartu předat někomu, kdo nečetl původní pilot. Pokud by musel hledat kontext ve starém chatu nebo exportu, karta ještě není připravená. Doplň hranice přímo do ní a staré nosiče nech spát.
 
+## Příloha: Otevření backlogové opravy k realizaci bez rozmazání zadání
+
+Backlogová oprava se může tvářit připraveně celé týdny. Má název, vlastníka, prioritu, možná i krásné štítky. Jenže ve chvíli, kdy se opravdu bere do práce, často začne tichá eroze: někdo doplní „ještě malý refaktor“, někdo chce širší report, někdo navrhne nový dashboard, protože „když už v tom budeme“. A původní oprava se rozteče do projektu, který znovu sbírá víc dat, než potřebuje.
+
+Otevření backlogové opravy proto není administrativní klik na stav „in progress“. Je to krátká kontrola, že práce pořád řeší stejný nález, má stejné hranice a lze ji dokončit bez návratu pilotního chaosu.
+
+> Codyho komentář: Backlog umí být časová kapsle. Jen občas v ní neleží rozhodnutí, ale starý sendvič. Před prací zkontroluj, co vlastně otevíráš.
+
+### Ověř, že nález pořád existuje
+
+Než začneš implementovat opravu, ověř, že původní problém stále platí. Ne kvůli byrokracii, ale kvůli tomu, že backlog stárne. Automatizace se mezitím mohla změnit, ruční náhrada mohla problém vyřešit, nebo už daný výstup nikdo nepoužívá.
+
+Stačí krátký reality check:
+
+| Otázka | Co hledáš |
+| --- | --- |
+| Kdy byl nález zapsán? | jestli karta nestojí na realitě staré několik cyklů |
+| Co se od té doby změnilo? | release, změna vstupu, změna vlastníka, vypnutí části procesu |
+| Kdo problém dnes cítí? | konkrétní vlastník práce, ne abstraktní „tým“ |
+| Jaký je nejmenší důkaz? | jeden běh, jedna ukázka výstupu, jedna kontrola mapy |
+| Co se stane, když opravu neuděláme? | provozní riziko, ruční náklad nebo rozhodnutí odložit bez práce |
+
+Pokud nález už neexistuje, kartu nezachraňuj jen proto, že je v plánu. Zavři ji s důvodem a případně aktualizuj mapu automatizací. Hotová práce není jen merge. Někdy je to férové „už není potřeba“.
+
+### Udělej realizační kartu v šesti větách
+
+Před implementací přepiš backlogový úkol do krátké realizační karty. Nemá opisovat celou historii. Má potvrdit, co přesně se teď udělá a co se nesmí cestou přibrat.
+
+Použij šest vět:
+
+| Věta | Příklad |
+| --- | --- |
+| Otevíráme, protože | retenční report pořád nevidí portálové exporty a vlastník kvůli tomu dělá ruční kontrolu |
+| Změníme jen | metadata exportů ve výstupu reportu: ID, typ, vznik, expiraci a vlastníka |
+| Nezměníme | obsah exportů, příjemce reportu, frekvenci běhu ani staré pilotní logy |
+| Ověříme přes | dva běžné týdenní běhy a rozhodnutí vlastníka, zda report nahradil ruční seznam |
+| Uklidíme | dočasné kontrolní poznámky, starý ruční seznam a odkaz na pilotní výstup |
+| Zastavíme, pokud | výstup nepomůže k úklidu nebo by vyžadoval čtení obsahu exportů |
+
+Tohle je malé, ale velmi užitečné. Vývojář ví, co měnit. Produkt ví, co očekávat. Provoz ví, co ověřit. A privacy hranice neleží někde v archeologii starých komentářů.
+
+### Chraň implementaci před rozsahem navíc
+
+Oprava z backlogu je obzvlášť náchylná k dobrým nápadům. Často už kolem ní existuje kontext, takže se zdá levné přidat další pole, další příjemce nebo další kontrolu. Jenže každé „když už“ má provozní cenu.
+
+Při práci použij tři brány:
+
+| Brána | Kontrolní otázka | Verdikt |
+| --- | --- | --- |
+| Datová | Přidává návrh nové osobní, zákaznické nebo provozně citlivé údaje? | pokud ano, vrať do rozhodnutí |
+| Publikum | Uvidí výstup někdo nový? | pokud ano, potřebuje vlastní důvod |
+| Pravomoc | Mění automatizace jen návrh, nebo už dělá zásah? | pokud se zvyšuje pravomoc, otevři novou kartu |
+
+Praktické pravidlo: když návrh nepatří do původní realizační karty, napiš ho jako samostatný nález do mapy nebo backlogu. Nelep ho do aktuální opravy. Rozsah navíc se tváří jako efektivita, ale často jen zametá nové rozhodnutí pod starou práci.
+
+### Definuj test podle rozhodnutí, ne podle kódu
+
+U opravy automatizace nestačí ověřit, že skript doběhl, job nespadl nebo endpoint vrátil úspěch. To jsou technické signály. Potřebuješ ověřit i pracovní rozhodnutí: zda výstup vede k akci a nepřináší nový datový nepořádek.
+
+Testovací sada má mít tři vrstvy:
+
+| Vrstva | Co ověřuje |
+| --- | --- |
+| Technická | změna běží bez chyby a nebourá staré očekávané výstupy |
+| Datová | výstup obsahuje jen povolená pole, má správné publikum a rozumnou retenci |
+| Pracovní | vlastník podle výstupu umí udělat rozhodnutí, kvůli kterému oprava vznikla |
+
+Příklad: u retenčního reportu nestačí test, že nové pole `portal_export_id` existuje. Potřebuješ také ověřit, že report neobsahuje obsah exportu, že ho pořád vidí jen vlastník retenční mapy a že po dvou bězích někdo skutečně uzavřel nebo naplánoval úklid.
+
+### Připrav zavření už před začátkem
+
+Když se oprava otevírá, rovnou napiš, jak se zavře. Je to drobnost, která výrazně snižuje riziko nekonečných „ještě sledujme“ období.
+
+Zavírací plán má obsahovat:
+
+- kdy proběhne první kontrola,
+- kdo dá verdikt,
+- které dočasné poznámky, exporty nebo logy se smažou,
+- kam se přepíše nová pravda,
+- co se stane, když oprava nepomůže.
+
+Nejlepší zavírací plán je nudný. Třeba:
+
+| Pole | Zápis |
+| --- | --- |
+| Kontrola | po dvou běžných týdenních bězích |
+| Verdikt | vlastník retenční mapy rozhodne ponechat, zúžit, vrátit ručně nebo vypnout |
+| Dokumentace | aktualizovat runbook reportu a mapu automatizací |
+| Úklid | smazat ruční seznam a pilotní kontrolní poznámky |
+| Stop | pokud výstup nevede k úklidu exportů, report se vrátí na původní stav a otevře se produktový problém retence |
+
+Když takový plán chybí, oprava se snadno promění v další provozní vrstvu. A provozní vrstvy bez konce jsou drahé, i když začaly jako nevinná tabulka.
+
+### Příklad: Backlogová oprava jde do sprintu
+
+Tým bere do sprintu kartu „Přidat metadata portálových exportů do retenčního reportu“. Před začátkem práce ji otevře takto:
+
+| Pole | Zápis |
+| --- | --- |
+| Stav před prací | Nález stále platí; poslední týdenní ruční kontrola našla portálové exporty mimo report. |
+| Realizační změna | Přidat do reportu jen metadata portálových exportů: ID, typ, vytvoření, expiraci a vlastníka. |
+| Neotevírat | Obsah exportů, nové příjemce, denní frekvenci, dashboard ani automatický výmaz. |
+| Test | Jeden technický test generování reportu, jedna kontrola povolených polí a dva běžné týdenní běhy. |
+| Úklid | Po kontrole smazat ruční seznam a doplnit runbook. |
+| Verdikt | Ponechat, zúžit, vrátit ručně nebo vypnout podle toho, zda report opravdu nahrazuje ruční kontrolu. |
+
+Taková karta je připravená k práci. Ne proto, že je dlouhá. Protože brání třem nejčastějším únikům: rozšíření dat, rozšíření publika a rozšíření procesu.
+
+### Checklist: Otevření backlogové opravy k realizaci
+
+- [ ] Ověřil jsem, že původní nález pořád existuje.
+- [ ] Zapsal jsem, co se od vzniku karty změnilo.
+- [ ] Realizační karta má důvod, změnu, mimo rozsah, ověření, úklid a stop pravidlo.
+- [ ] Nové nápady mimo rozsah jsem oddělil do samostatných nálezů.
+- [ ] Datová hranice, publikum a pravomoc se nezvětšily bez nového rozhodnutí.
+- [ ] Test ověřuje technickou, datovou i pracovní vrstvu.
+- [ ] Zavírací plán existuje už před začátkem implementace.
+- [ ] Po dokončení bude aktualizovaná mapa automatizací, runbook nebo rozhodovací záznam.
+
+### Mini úkol
+
+Vyber jednu backlogovou opravu, která čeká na práci déle než jeden plánovací cyklus. Než ji označíš jako „in progress“, napiš šest vět realizační karty: otevíráme protože, změníme jen, nezměníme, ověříme přes, uklidíme, zastavíme pokud. Potom zkus přidat jeden lákavý nápad navíc a vědomě ho odmítni nebo přepiš do samostatného nálezu. Pokud to nejde, karta nemá hranice a potřebuje zpátky do rozhodnutí, ne do sprintu.
+
 ## Zdroje
 
 - IETF RFC 9110: HTTP Semantics - význam HTTP přesměrování a stavů včetně `410 Gone` pro zdroje, které už nejsou dostupné: https://www.rfc-editor.org/rfc/rfc9110.html
@@ -63621,6 +63745,8 @@ Vezmi jednu opravnou kartu z post-close nálezu a přepiš ji na backlogovou pol
 - Nielsen Norman Group: Onboarding Tutorials vs. Contextual Help - rozdíl mezi úvodními tutoriály a kontextovou pomocí: https://www.nngroup.com/articles/onboarding-tutorials/
 
 ## Pracovní log
+
+- 2026-07-28: Doplněna příloha o otevření backlogové opravy k realizaci bez rozmazání zadání: ověření, že původní nález pořád existuje, šestivětá realizační karta, ochrana implementace před rozsahem navíc, test podle technické, datové a pracovní vrstvy, zavírací plán už před začátkem, příklad sprintové opravy retenčního reportu, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro otevření backlogové opravy. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
 - 2026-07-28: Doplněna příloha o převodu opravné karty z post-close nálezu do backlogu bez ztráty hranic: přepis karty na úkol se slovesem, zachování důvodu, rozsahu, mimo rozsah, datové hranice a stop pravidla, rozdělení práce na rozhodnutí, implementaci a kontrolu, ochrana privacy hranic při prioritizaci, příklad odložené opravy čekající na sprint, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro backlog po post-close nálezu. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
