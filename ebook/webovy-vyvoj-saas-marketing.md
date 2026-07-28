@@ -61927,6 +61927,30 @@ Restartovací karta:
 
 Rozdíl proti starému stavu je zásadní: automatizace neříká všem všechno. Připraví malý úkol konkrétnímu vlastníkovi a nečte obsah exportu. Pokud pilot ukáže, že úkoly pomáhají, teprve potom se rozhoduje o běžném režimu.
 
+### Navazuj na kontrolu po restartu, ne na setrvačnost
+
+Restartovací karta nekončí spuštěním pilotu. Končí až rozhodnutím po pilotu. Tady se často láme rozdíl mezi zdravou automatizací a návratem starého autopilota: tým má pocit, že když už se podařilo restartovat menší běh, může ho nechat tiše žít. Nemůže. Teda může, stejně jako můžeš nechat v kuchyni kapající kohoutek a říkat tomu vodní feature.
+
+Po pilotním okně udělej krátké navázání:
+
+| Otázka | Co hledat | Další krok |
+| --- | --- | --- |
+| Ověřil pilot původní důkaz? | Automatizace skutečně řešila problém z ručního období. | Přejít na kontrolu po restartu a sepsat verdikt. |
+| Byl rozsah pořád menší než starý běh? | Nevrátily se staré vstupy, chatové reporty, tokeny ani široké logy. | Pokud se něco vrátilo, nejdřív zúžit a uklidit. |
+| Vedl výstup k práci? | Úkol měl vlastníka, jasné rozhodnutí a uzavření. | Pokud ne, upravit výstup nebo vrátit ruční proces. |
+| Zůstala datová hranice čistá? | Čtená pole, logy a výstupy odpovídají restartovací kartě. | Při překročení vypnout pilot a udělat datový úklid. |
+| Má další provoz vlastníka? | Není to „skript od vývojáře“, ale rutina s provozní odpovědností. | Pokud ano, převést do provozní karty; pokud ne, nenechat běžet. |
+
+Praktické pořadí po restartu:
+
+1. Vezmi restartovací kartu a pilotní výstupy.
+2. Použij přílohu „Kontrola po restartu automatizace bez druhého autopilota“ jako tvrdé review.
+3. Vyber jeden verdikt: ponechat, zúžit, přepsat, vrátit ručně nebo vypnout.
+4. Pokud verdikt zní ponechat, teprve potom použij přílohu „Standardní provoz automatizace po pilotu bez tichého rozšíření“.
+5. Pokud verdikt zní zúžit nebo přepsat, otevři novou malou změnovou kartu místo tichého ladění za běhu.
+
+Tím se z restartu nestane obnova staré pravdy. Stane se z něj ověřená změna práce s jasným koncem, dalším krokem a datovým úklidem.
+
 ### Checklist: Znovuspuštění automatizace po ruční náhradě
 
 - [ ] Existuje re-entry karta s verdiktem otevřít restart.
@@ -62137,6 +62161,8 @@ Vyber jednu automatizaci, u které re-entry gate dovolila otevřít restart. Nap
 - Nielsen Norman Group: Onboarding Tutorials vs. Contextual Help - rozdíl mezi úvodními tutoriály a kontextovou pomocí: https://www.nngroup.com/articles/onboarding-tutorials/
 
 ## Pracovní log
+
+- 2026-07-28: Vylepšena příloha o znovuspuštění automatizace po ruční náhradě o navazující podkapitolu, která po pilotu vede čtenáře ke kontrole po restartu, k jasnému verdiktu a případnému převodu do běžného provozu bez návratu starých tokenů, reportů a širokých logů. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
 - 2026-07-28: Doplněna příloha o znovuspuštění automatizace po ruční náhradě bez návratu starého rozsahu: restartovací karta navazující na re-entry gate, zúžení původního rozsahu, pilotní režim, opětovná kontrola přístupů a tokenů, přesun výstupu do místa práce, příklad menší retenční kontroly exportů, checklist a mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
