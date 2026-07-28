@@ -147,6 +147,7 @@ Když se nechceš vracet do celé knihy, hledej konkrétní nástroj podle výst
 | Naplánovat jednu opravu automatizace po triage | „plán opravy automatizace“, „repair brief“ nebo „oprava po triage“ | malý opravný brief s cílem, hranicí dat, pořadím práce, kontrolním oknem a vědomě zamčeným rozsahem |
 | Provést jednu opravu automatizace bez rozšíření rozsahu | „provedení opravy automatizace“, „oprava podle briefu“ nebo „repair pilot“ | malý realizační průchod, který mění jen slíbenou vrstvu, chrání datovou hranici a končí ověřeným verdiktem |
 | Zkontrolovat opravu automatizace po pilotu | „kontrola opravy automatizace“, „oprava po pilotu“ nebo „repair review“ | krátké review, které ověří původní nález, datovou hranici, šum, ruční zásahy, úklid stop a rozhodne ponechat, zúžit, vrátit nebo zavřít |
+| Zúžit opravu automatizace po review | „zúžení opravy automatizace“, „oprava pomáhá ale moc sbírá“ nebo „repair narrowing“ | malá zúžovací karta, která ponechá užitečný výsledek opravy, ale omezí vstupy, výstupy, pravomoc, příjemce, retenci nebo frekvenci |
 | Automatizovat rutinu bez skrytého dozoru | „automatizace rutiny“, „automatizační karta“ nebo „vypínač automatizace“ | malý automatizační návrh s účelem, vstupy, výstupem, vlastníkem, logy, ručním rozhodnutím a datem revize |
 | Vyhodnotit automatizaci po prvních bězích | „review automatizace“, „automatizace po spuštění“ nebo „autopilot“ | rozhodnutí ponechat, zúžit, přepsat, vrátit do ruční rutiny nebo vypnout automatizaci podle nálezů, šumu a datové stopy |
 | Vypnout automatizaci bez zapomenutého běhu | „vypnutí automatizace“, „ukončený autopilot“ nebo „automatizace končí“ | vypínací karta s posledním během, revokací tokenů, úklidem výstupů, náhradním postupem a kontrolou veřejných slibů |
@@ -62712,6 +62713,119 @@ Tady není potřeba stavět další dashboard. Stačí přepsat runbook, potvrdi
 
 Vezmi jednu nedávnou opravu automatizace a napiš pět řádků review: původní nález, slib opravy, pilotní důkaz, datová stopa a verdikt. Potom projdi dočasné stopy pilotu a u každé napiš „smazat“, „ponechat s důvodem“ nebo „převést do běžné dokumentace“. Pokud vyjde verdikt „zatím sledovat“, přepiš ho. Buď opravě věříš v jasném rozsahu, nebo potřebuje další malé rozhodnutí. Mlžný mezistav není strategie, jen odložené uklízení.
 
+## Příloha: Zúžení opravy automatizace po review bez druhého projektu
+
+Verdikt „zúžit“ je dobrá zpráva, pokud ho tým bere vážně. Znamená, že oprava po pilotu nejspíš řeší původní problém, ale pořád je v ní něco širšího, než musí být: moc vstupních polí, moc příjemců, moc častý běh, moc dlouhá retence, moc silná pravomoc nebo moc hlučný výstup. To není selhání. Selhání je nechat takovou opravu běžet jen proto, že už „aspoň pomáhá“.
+
+Zúžení má být malý navazující zásah, ne nový projekt. Vychází z review, má jednu osu a končí dalším jasným verdiktem. Pokud se při zúžení začne měnit účel automatizace, přidávat nová data nebo rozšiřovat publikum výstupu, už to není zúžení. Je to nová změna a zaslouží si vlastní brief.
+
+> Codyho komentář: Zúžení je produktová disciplína v montérkách. Není tak slavné jako nová funkce, ale často udělá víc pro důvěru: méně dat, méně šumu, méně lidí v kopii, méně „jen pro jistotu“. To je velmi dospělý druh nudy.
+
+### Vyber jednu osu zúžení
+
+Začni tím, že z review vybereš jeden konkrétní přebytek. Ne všechny najednou. Pokud oprava po pilotu ukázala tři slabiny, otevři tři možné zúžovací karty, ale do práce vezmi jen jednu. Jinak se z malé hygieny stane další přepis automatizace.
+
+Typické osy:
+
+| Osa | Otázka | Příklad zúžení |
+| --- | --- | --- |
+| Vstup | Která data automatizace čte, ale nepotřebuje k rozhodnutí? | Nečíst název exportovaného souboru, stačí typ exportu a retenční stav. |
+| Výstup | Které pole nebo řádek příjemce nevede k práci? | Posílat jen výjimky, ne celý kontrolní seznam úspěšných případů. |
+| Příjemci | Kdo výstup opravdu používá k rozhodnutí? | Report zůstane vlastníkovi procesu, support dostane jen měsíční shrnutí nálezů. |
+| Frekvence | Jak často výstup skutečně mění práci? | Denní běh nahradit týdenním, pokud se opravy dělají v týdenním review. |
+| Retence | Jak dlouho má pilotní nebo provozní stopa smysl? | Ladicí výstupy držet 7 dní, agregovaný počet výjimek 90 dní. |
+| Pravomoc | Co má automatizace navrhovat a co smí udělat sama? | Automatizace vytvoří návrh úkolu, ale nezavírá export ani neposílá výzvu zákazníkovi. |
+
+Dobrá zúžovací věta zní: „Po review zúžíme ___, protože ___, a poznáme to podle ___.“ Pokud věta místo zúžení popisuje novou ambici, vrať se o krok zpět. Není ostuda přiznat, že se objevila nová potřeba. Ostuda je tvářit se, že nová potřeba je jen drobná údržba.
+
+### Napiš malou zúžovací kartu
+
+Zúžovací karta má být kratší než původní opravný brief. Už víš, že oprava nějak pomáhá. Teď potřebuješ omezit přebytek a ověřit, že užitečný efekt zůstane.
+
+Karta:
+
+| Pole | Co zapsat |
+| --- | --- |
+| Verdikt z review | proč nevychází „ponechat“ ani „vypnout“ |
+| Jedna osa zúžení | vstup, výstup, příjemci, frekvence, retence nebo pravomoc |
+| Co zůstává stejné | účel opravy, vlastník, původní rozhodovací otázka |
+| Co se omezuje | konkrétní pole, příjemce, běh, oprávnění nebo stopa |
+| Jak ověříme dopad | jeden nebo dva běhy, jedna ruční kontrola, jedno provozní review |
+| Co záměrně neměříme | individuální reakce lidí, otevření reportu, pohyb po dokumentu nebo jiné sledování mimo účel |
+| Kdy kartu zavřeme | datum nebo počet běhů, po kterém padne verdikt |
+
+Příklad zúžovací věty:
+
+`Po review retenčního reportu zúžíme výstup na tři pole: typ exportu, stav vlastníka a termín retence. Účel zůstává stejný: najít exporty bez jasného vlastníka. Po dvou týdenních bězích rozhodneme, jestli zúžení ponechat, vrátit jedno pole nebo report vypnout.`
+
+Tato karta je užitečná právě tím, že nemluví o přepisování celé automatizace. Chrání původní výsledek a bere z něj jen přebytečný nános.
+
+### Chraň užitečný signál před ořezáním na kost
+
+Zúžení není závod v tom, kdo smaže nejvíc polí. Některá data jsou nutná, aby automatizace vůbec pomáhala. Privacy-first neznamená slepě odstranit všechno, ale umět vysvětlit každý ponechaný údaj. Když po ořezu nikdo nepozná, co má udělat, zúžení selhalo.
+
+Před změnou si rozděl pole nebo kroky do tří skupin:
+
+| Skupina | Význam | Co s tím |
+| --- | --- | --- |
+| Nutné pro rozhodnutí | bez toho nejde udělat další krok | ponechat a popsat účel |
+| Užitečné pro pohodlí | zrychluje práci, ale není nezbytné | ponechat jen při jasném přínosu nebo nahradit agregací |
+| Zvědavé nebo historické | existuje ze zvyku, ladění nebo strachu | odstranit, zkrátit retenci nebo přesunout mimo běžný výstup |
+
+Praktická kontrola: dej nový výstup člověku, který má podle něj pracovat, a zeptej se jen na jednu věc: „Dokážeš podle toho udělat další krok bez otevírání surových dat?“ Pokud ne, možná chybí jedno nutné pole. Pokud ano a výstup je kratší, zúžení má smysl.
+
+### Zúžení nasaď jako krátké kontrolní okno
+
+Zúžení by nemělo žít měsíce v režimu „uvidíme“. Nastav krátké kontrolní okno a předem řekni, jaké verdikty jsou možné.
+
+Použitelné verdikty:
+
+| Verdikt | Kdy ho použít | Další krok |
+| --- | --- | --- |
+| Ponechat zúžení | výstup pořád vede k práci a datová stopa je menší | přepsat runbook a běžnou údržbovou kartu |
+| Vrátit jedno pole | zúžení odebralo údaj nutný pro rozhodnutí | vrátit jen konkrétní pole s účelem a retencí |
+| Zúžit jinou osu | zúžení pomohlo, ale největší přebytek je jinde | otevřít novou malou zúžovací kartu |
+| Vrátit ručně | automatizace po zúžení ztratila smysl nebo je křehká | vypnout běh a obnovit ruční postup |
+| Vypnout | původní problém už nestojí za automatizaci | spustit vypínací checklist a uklidit tokeny, výstupy i dokumentaci |
+
+Kontrolní okno může být malé: dva běhy reportu, jedna uzávěrka, jeden supportní cyklus, jedna týdenní porada. Čas má odpovídat rytmu práce, ne přání mít víc dat. Když tým dělá rozhodnutí jednou týdně, denní signály často jen vyrábějí informační smog.
+
+### Příklad: Zúžení retenčního reportu po review
+
+Review opravy ukázalo, že retenční report už neposílá celý seznam exportů, ale pořád obsahuje názvy souborů a e-mail člověka, který export vytvořil. Většina příjemců podle těchto údajů nepracuje. Pro rozhodnutí stačí typ exportu, stav vlastníka a termín kontroly.
+
+Zúžovací karta:
+
+| Pole | Zápis |
+| --- | --- |
+| Verdikt z review | Oprava pomáhá, ale výstup pořád nese zbytečné identifikační detaily. |
+| Osa zúžení | Výstup a retence ladicích stop. |
+| Co zůstává | Týdenní kontrola exportů bez vlastníka nebo s neaktivním vlastníkem. |
+| Co se omezuje | Odebrat název souboru a e-mail exportéra; ponechat typ exportu, stav vlastníka a termín retence. |
+| Ověření | Dva týdenní běhy a ruční kontrola, zda vlastník procesu dokáže otevřít navazující úkol bez surového exportu. |
+| Co neměříme | Neověřujeme otevření reportu podle jednotlivých lidí ani rychlost reakce konkrétní osoby. |
+| Úklid | Smazat pilotní ukázky starého výstupu a upravit screenshot v runbooku. |
+| Zavírací verdikt | Ponechat zúžení, pokud dvě kontroly nevyžádají vrácení identifikačního pole. |
+
+Výsledek není „máme méně dat, tak jsme dobří“. Výsledek je přesnější: report dál plní rozhodovací účel a zároveň přestal posílat detaily, které k práci nepotřeboval. To je přesně ten typ malé změny, který z privacy-first hodnoty dělá provozní návyk.
+
+### Checklist: Zúžení opravy automatizace po review
+
+- [ ] Zúžení vychází z konkrétního review, ne z obecného pocitu.
+- [ ] Vybraná je jedna osa: vstup, výstup, příjemci, frekvence, retence nebo pravomoc.
+- [ ] Účel opravy zůstává stejný; pokud se mění účel, vzniká nová změnová karta.
+- [ ] Je jasné, co zůstává stejné a co se omezuje.
+- [ ] Ponechaná data mají vysvětlený pracovní účel.
+- [ ] Ořez neodstranil údaj nutný k rozhodnutí.
+- [ ] Kontrolní okno je krátké a odpovídá rytmu práce.
+- [ ] Je zapsané, co se kvůli soukromí záměrně neměří.
+- [ ] Dočasné výstupy, screenshoty, ladicí logy a staré příklady mají úklidové rozhodnutí.
+- [ ] Po zúžení existuje jeden z jasných verdiktů: ponechat, vrátit jedno pole, zúžit jinou osu, vrátit ručně nebo vypnout.
+
+### Mini úkol
+
+Najdi jednu automatizaci, která po opravě pomáhá, ale pořád působí zbytečně široce. Napiš jednu zúžovací větu a vyber pouze jednu osu omezení. Potom udělej malou kartu se třemi řádky: co ponechat, co odebrat, jak ověřit, že výsledek pořád vede k práci. Pokud zjistíš, že bez odebraného údaje tým neumí rozhodnout, neber to jako prohru. Vrať jen ten konkrétní údaj s jasným účelem, retencí a vlastníkem. Privacy-first provoz není magie mazání; je to schopnost vědět, proč něco opravdu držíš.
+
 ## Zdroje
 
 - IETF RFC 9110: HTTP Semantics - význam HTTP přesměrování a stavů včetně `410 Gone` pro zdroje, které už nejsou dostupné: https://www.rfc-editor.org/rfc/rfc9110.html
@@ -62905,6 +63019,8 @@ Vezmi jednu nedávnou opravu automatizace a napiš pět řádků review: původn
 - Nielsen Norman Group: Onboarding Tutorials vs. Contextual Help - rozdíl mezi úvodními tutoriály a kontextovou pomocí: https://www.nngroup.com/articles/onboarding-tutorials/
 
 ## Pracovní log
+
+- 2026-07-28: Doplněna příloha o zúžení opravy automatizace po review bez druhého projektu: výběr jedné osy zúžení po verdiktu „zúžit“, malá zúžovací karta, ochrana užitečného signálu před přílišným ořezem, krátké kontrolní okno, pět jasných verdiktů po zúžení, příklad retenčního reportu, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro repair narrowing. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
 - 2026-07-28: Doplněna příloha o kontrole opravy automatizace po pilotu bez falešného hotovo: porovnání původního nálezu, opravného briefu a skutečného chování po pilotu, ověření dopadu bez nového plošného monitoringu, úklid dočasných datových stop, pět jasných verdiktů po pilotu, příklad kontroly zúženého retenčního reportu, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro repair review. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
