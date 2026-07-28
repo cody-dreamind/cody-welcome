@@ -62901,6 +62901,33 @@ Použitelné režimy:
 
 Vyhni se automatickému „kontrolujeme každý týden“, pokud podle toho nikdo neudělá rozhodnutí. Častá kontrola bez rozhodnutí je jen tracking vlastní nervozity.
 
+### Naplánuj první kontrolu po uzavření
+
+Uzavřená oprava si zaslouží ještě jednu malou kontrolu v běžném provozu. Ne proto, aby se pilot tvářil jako delší pilot, ale aby tým ověřil, že se nové pravidlo opravdu usadilo tam, kde se pracuje. První kontrola po uzavření má být krátká a má mít předem daný konec.
+
+Dobrá kontrola se ptá na čtyři věci:
+
+| Otázka | Co hledat |
+| --- | --- |
+| Vede výstup pořád k práci? | Vznikl z reportu, upozornění nebo návrhu skutečný úkol, rozhodnutí nebo zavření výjimky? |
+| Nevrátila se pilotní stopa? | Nechodí výstup znovu do starého kanálu, starému příjemci nebo do dočasné tabulky? |
+| Neobešel někdo zúžení ručně? | Nevznikly bokem exporty, screenshoty nebo ruční dotazy na pole, která oprava odstranila? |
+| Sedí stop pravidlo? | Je jasné, kdy opravu ponechat, znovu zúžit, vrátit ručně nebo vypnout? |
+
+Kontrolní okno může být jeden běh, jeden týden nebo jedna reálná pracovní situace. Delší období dává smysl jen tehdy, když se daná automatizace používá zřídka. Pokud automatizace běží denně, nepotřebuješ měsíc čekat na zjištění, že report nikdo neotevřel.
+
+Záznam drž úsporný:
+
+| Pole | Zápis |
+| --- | --- |
+| Datum kontroly | kdy proběhla první běžná kontrola po uzavření |
+| Kontrolovaný výstup | jeden běh, jeden report, jedna výjimka nebo jedna ruční náhrada |
+| Verdikt | ponechat v běžném režimu, opravit runbook, zúžit další osu, vrátit ručně nebo vypnout |
+| Nález | jen konkrétní rozdíl proti zavírací kartě |
+| Úklid | co se po kontrole smaže, zavře nebo přepíše |
+
+Nejlepší výsledek první kontroly je klidné „ponechat a smazat kontrolní poznámky“. To zní nudně, což je dobře. Cílem není dokázat, že automatizace je slavná. Cílem je potvrdit, že se po opravě nestal nový zdroj šumu, přístupu nebo datového stínu.
+
 ### Příklad: Zúžený retenční report jde do běžného režimu
 
 Retenční report po review prošel zúžením. Už neposílá názvy souborů ani e-maily exportérů, jen typ exportu, stav vlastníka a termín retence. Dva týdenní běhy ukázaly, že vlastník procesu podle výstupu dokáže otevřít navazující úkol bez surových dat.
@@ -62930,11 +62957,13 @@ Výsledek: oprava už není projekt. Je to malá provozní schopnost s jasným �
 - [ ] Retence běhových logů a agregovaných signálů je zapsaná.
 - [ ] Běžný vlastník ví, kdy má automatizaci znovu otevřít.
 - [ ] Nezůstala ruční dvojkontrola jen proto, že existovala během pilotu.
+- [ ] První kontrola po uzavření má jasné okno, otázku a konečný verdikt.
+- [ ] Kontrola po uzavření nehledá nové osobní signály ani nevrací pilotní monitoring.
 - [ ] Backlogová karta je zavřená nebo převedená na nový konkrétní nález.
 
 ### Mini úkol
 
-Vezmi jednu opravu automatizace, která už prošla zúžením nebo podobnou kontrolou. Napiš zavírací větu ve tvaru: „Ponecháváme ___, rušíme ___, další review nastane při ___.“ Potom projdi runbook, poslední report a příjemce výstupu. Najdi jednu pilotní stopu, která už nemá řídit práci, a zavři ji. Pokud žádnou nenajdeš, zapiš aspoň trigger dalšího review. I uklizený konec potřebuje být dohledatelný, jinak se z něj stane další neviditelný zvyk.
+Vezmi jednu opravu automatizace, která už prošla zúžením nebo podobnou kontrolou. Napiš zavírací větu ve tvaru: „Ponecháváme ___, rušíme ___, další review nastane při ___.“ Potom projdi runbook, poslední report a příjemce výstupu. Najdi jednu pilotní stopu, která už nemá řídit práci, a zavři ji. Nakonec naplánuj první kontrolu po uzavření: jeden výstup, jedna otázka, jeden možný verdikt. Pokud žádnou pilotní stopu nenajdeš, zapiš aspoň trigger dalšího review. I uklizený konec potřebuje být dohledatelný, jinak se z něj stane další neviditelný zvyk.
 
 ## Zdroje
 
@@ -63129,6 +63158,8 @@ Vezmi jednu opravu automatizace, která už prošla zúžením nebo podobnou kon
 - Nielsen Norman Group: Onboarding Tutorials vs. Contextual Help - rozdíl mezi úvodními tutoriály a kontextovou pomocí: https://www.nngroup.com/articles/onboarding-tutorials/
 
 ## Pracovní log
+
+- 2026-07-28: Vylepšena příloha o uzavření zúžené opravy automatizace o první kontrolu po uzavření: krátké ověření, zda výstup pořád vede k práci, nevrátily se pilotní stopy, nevzniklo ruční obcházení zúžení a stop pravidlo pořád sedí; doplněn úsporný záznam kontroly, dvě checklist položky a rozšířený mini úkol. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
 - 2026-07-28: Doplněna příloha o uzavření zúžené opravy automatizace do běžného provozu bez věčného pilotu: zavírací rozhodnutí, přepis runbooku na současnou pravdu, úklid pilotních stop, nastavení běžné údržby bez mimořádného dozoru, příklad zúženého retenčního reportu, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro standardní režim opravy. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
