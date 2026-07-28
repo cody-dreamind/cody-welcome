@@ -144,6 +144,7 @@ Když se nechceš vracet do celé knihy, hledej konkrétní nástroj podle výst
 | Vybrat správnou fázi práce s automatizací | „životní cyklus automatizace“, „mapa automatizace“ nebo „kde začít s automatizací“ | rozhodnutí, kterou automatizační kartu otevřít podle aktuálního stavu, rizika a datové hranice |
 | Udržet mapu automatizací aktuální bez inventáře pro inventář | „revize mapy automatizací“, „automatizační portfolio“ nebo „měsíční mapa automatizací“ | krátká kontrola seznamu automatizací podle stavu, vlastníka, datové hranice a dalšího rozhodnutí |
 | Vybrat jednu automatizaci k opravě po revizi mapy | „triage automatizací“, „po revizi mapy“ nebo „automatizační fronta“ | prioritní karta s jedním otevřeným rozhodnutím, limitem práce a vědomě odloženým zbytkem |
+| Naplánovat jednu opravu automatizace po triage | „plán opravy automatizace“, „repair brief“ nebo „oprava po triage“ | malý opravný brief s cílem, hranicí dat, pořadím práce, kontrolním oknem a vědomě zamčeným rozsahem |
 | Automatizovat rutinu bez skrytého dozoru | „automatizace rutiny“, „automatizační karta“ nebo „vypínač automatizace“ | malý automatizační návrh s účelem, vstupy, výstupem, vlastníkem, logy, ručním rozhodnutím a datem revize |
 | Vyhodnotit automatizaci po prvních bězích | „review automatizace“, „automatizace po spuštění“ nebo „autopilot“ | rozhodnutí ponechat, zúžit, přepsat, vrátit do ruční rutiny nebo vypnout automatizaci podle nálezů, šumu a datové stopy |
 | Vypnout automatizaci bez zapomenutého běhu | „vypnutí automatizace“, „ukončený autopilot“ nebo „automatizace končí“ | vypínací karta s posledním během, revokací tokenů, úklidem výstupů, náhradním postupem a kontrolou veřejných slibů |
@@ -62334,6 +62335,149 @@ Výsledek není dokonalý pořádek. Výsledek je první uzavřené riziko a map
 
 Vezmi poslední mapu automatizací a vyber maximálně pět nálezů. Každý přepiš na rozhodovací větu a ohodnoť jen slovy nízká / střední / vysoká u dat, pravomoci a nejasnosti. Vyber jednu položku pro nejbližší práci, napiš pro ni triage kartu a u ostatních doplň stav „odloženo po triage“ nebo datum další kontroly. Pokud během toho chceš přidat nový vstup nebo širší oprávnění, zastav se a otevři samostatnou změnovou kartu. Přesně tady bývá nenápadný začátek datového nepořádku.
 
+## Příloha: Plán jedné opravy automatizace po triage bez nového projektu
+
+Triage vybrala jednu automatizaci. To je dobrý začátek, ale ještě to není plán práce. Mezi větou „tahle položka je nejrizikovější“ a skutečnou opravou se dá snadno ztratit kontrola nad rozsahem: někdo chce rovnou přepsat skript, někdo přidat další logy, někdo udělat nový dashboard a někdo otevře starou debatu o tom, jestli automatizace vůbec měla vzniknout. Všichni mohou mít částečně pravdu. Jenže jedna iterace neunese všechny pravdy najednou.
+
+Plán opravy po triage má převést vybraný nález na malý opravný brief. Ne na technický epos, ne na refaktor celé integrační vrstvy a ne na audit všech automatizací. Jedna automatizace, jeden důvod, jedna hranice dat, jeden očekávaný výstup a jedno kontrolní okno. To je dost práce na kvalitní hodinový nebo týdenní průchod.
+
+> Codyho komentář: Triage bez opravného briefu je jako najít únik vody a začít kreslit novou koupelnu. Možná by byla krásná. Teď ale potřebuješ vědět, který ventil zavřít, kdo to ověří a proč při tom nerozebírat půl domu.
+
+### Nepřepisuj triage kartu na epický úkol
+
+Triage karta říká, proč je položka první na řadě. Opravný brief říká, co přesně se s ní udělá teď. Pokud z triage rovnou vznikne obecný úkol „opravit automatizaci“, tým ztratí výhodu, kterou si právě vydobyl: zúžený problém.
+
+Špatné zadání:
+
+| Zadání | Problém |
+| --- | --- |
+| Opravit AI návrh support odpovědí. | Neříká, jestli jde o data, kvalitu, výstup, pravomoc nebo vypnutí. |
+| Vylepšit retenční report. | Může skončit hezčím reportem bez lepšího rozhodování. |
+| Zrevidovat billing webhook. | Bez hranice práce se z toho může stát integrační audit. |
+| Přepsat notifikace. | Míchá obsah, publikum, frekvenci, pravidla a technické provedení. |
+
+Lepší zadání:
+
+| Opravná věta | Proč funguje |
+| --- | --- |
+| Uzavřít pilot AI návrhu support odpovědí a rozhodnout, zda zůstane jen jako návrh v ticketu, nebo se vypne. | Má výstup, rozsah i hranici pravomoci. |
+| Zúžit retenční report na výjimky bez vlastníka a po dvou bězích rozhodnout, zda má dál existovat. | Opravuje rozhodovací hodnotu, ne vzhled. |
+| Ověřit nové pole v billing webhooku, zakázat jeho další přenos bez účelu a doplnit datový kontrakt. | Řeší konkrétní změnu vstupu a výstupu. |
+| Přesunout provozní notifikaci z týmového chatu do měsíčního review a zkontrolovat, jestli podle ní někdo zavře úkol. | Snižuje šum i publikum výstupu. |
+
+Opravná věta má začínat slovesem a končit rozhodnutím. Když končí slovy „a uvidíme“, ještě není hotová. Uvidíme je dobré počasí pro experiment, ale špatný vlastník provozu.
+
+### Rozliš typ opravy před technickým návrhem
+
+Stejný nález může vyžadovat různý druh práce. Proto před návrhem řešení napiš, jaký typ opravy vlastně děláš.
+
+| Typ opravy | Kdy se hodí | Typický výstup |
+| --- | --- | --- |
+| Oprava účelu | výstup existuje, ale není jasné, jaké rozhodnutí podporuje | přepsaná rozhodovací věta nebo vypnutí |
+| Oprava datové hranice | automatizace čte, ukládá nebo posílá víc než potřebuje | zúžený vstup, kratší retence, menší publikum |
+| Oprava pravidla | výjimky ukazují, že logika neodpovídá realitě práce | upravené pravidlo a testovací příklady |
+| Oprava výstupu | výsledek chodí špatným lidem, špatně často nebo ve špatném formátu | menší report, jiné místo práce, jasnější akce |
+| Oprava vlastnictví | nikdo podle výstupu nerozhoduje nebo vlastník odešel | předávací karta, nový vlastník, kontrola přístupů |
+| Oprava kódu | pravidlo je jasné, ale provedení je chybné, křehké nebo neúplné | malý patch, testovací sada, kontrolní okno |
+| Oprava dokumentace | tým neví, co automatizace znamená nebo jak ji vypnout | aktualizovaný runbook, ADR nebo místo pravdy |
+
+Technická oprava je jen jeden řádek v tabulce. Často není první. Pokud automatizace posílá špatný report, možná nepotřebuje nový kód, ale jasnější rozhodnutí, komu má výstup sloužit. Pokud automatizace čte moc dat, první práce je datová hranice, ne ladění výkonu. Pokud nikdo není vlastník, přepis skriptu jen vyrábí rychlejší osiřelou věc. To je sice technicky uspokojivé, ale provozně líné.
+
+### Napiš malý opravný brief
+
+Opravný brief má být tak krátký, aby ho tým použil, a tak konkrétní, aby podle něj šlo práci zavřít.
+
+Minimální brief:
+
+| Pole | Zápis |
+| --- | --- |
+| Automatizace | Název z mapy. |
+| Triage důvod | Proč je to první položka. |
+| Typ opravy | účel / data / pravidlo / výstup / vlastnictví / kód / dokumentace |
+| Opravná věta | Co přesně se má uzavřít. |
+| Datová hranice | Co se nesmí nově číst, ukládat, posílat nebo logovat. |
+| Limit rozsahu | Co se v této iteraci výslovně nemění. |
+| Kontrolní okno | Datum, počet běhů nebo situace, kdy se vyhodnotí dopad. |
+| Důkaz hotovo | Jak poznáme, že oprava nezůstala jen dobrým úmyslem. |
+| Návrat zpět | Jak se vrátíme, pokud oprava nepomůže nebo zvýší riziko. |
+
+Pole „limit rozsahu“ piš tvrdě. Ne „nebudeme dělat nic zbytečného“, protože to by řekl i člověk, který právě zakládá pátý dashboard. Napiš konkrétně: „nepřidáváme nové vstupy“, „neměníme frekvenci“, „nezvyšujeme pravomoc nad návrh“, „nerozšiřujeme publikum reportu“, „neotevíráme redesign celé integrace“.
+
+Privacy-first brief má také obsahovat negativní rozhodnutí. Nejen co se udělá, ale co se teď vědomě neudělá. Právě negativní rozhodnutí často chrání data víc než pozitivní úkol.
+
+### Opravuj v pořadí: pravda, hranice, provedení, úklid
+
+U automatizace je lákavé začít v kódu, protože kód je vidět v diffu. Jenže privacy-first oprava má bezpečnější pořadí:
+
+1. Místo pravdy: rozhodovací věta, pravidlo, ADR nebo runbook říká, co má automatizace dělat.
+2. Datová hranice: vstupy, výstupy, logy, příjemci, retence a oprávnění odpovídají účelu.
+3. Technické provedení: skript, workflow, webhook, pravidlo v nástroji nebo notifikace se upraví podle prvních dvou bodů.
+4. Test nebo kontrolní průchod: ověří se běžný případ, výjimka a bezpečné selhání.
+5. Úklid starých stop: staré reporty, tokeny, výjimky, dokumentace a šablony se nenechají dál řídit práci.
+6. Kontrolní okno: po prvních bězích se rozhodne ponechat, zúžit, vrátit ručně nebo vypnout.
+
+Když přeskočíš první dva body, kód může být správně napsaný pro špatné pravidlo. Když přeskočíš úklid, starý výstup bude dál žít vedle nového a tým si vybere ten, který je hlasitější. A hlasitější výstup nebývá automaticky pravdivější. Jen má lepší reproduktor.
+
+### Drž opravu mimo nový dohled nad lidmi
+
+Nález z automatizace často svádí k tomu, že tým začne sledovat chování lidí: kdo nereagoval, kdo klikl, kdo ignoroval upozornění, kdo kolikrát obešel pravidlo. Opatrně. U malého týmu obvykle stačí měřit práci, ne člověka.
+
+Lepší signály:
+
+- počet výstupů, které vedly k uzavřenému rozhodnutí,
+- počet falešných upozornění v kontrolním okně,
+- počet výjimek rozdělených podle typu problému,
+- ruční čas potřebný na ověření výstupu,
+- počet případů, kdy automatizace zabránila neúplnému nebo rizikovému kroku,
+- počet navazujících produktových oprav, které sníží potřebu automatizace.
+
+Horší signály:
+
+- žebříček lidí podle rychlosti reakce,
+- detailní sledování čtení interních reportů,
+- ukládání celých zákaznických ticketů pro ladění, když stačí anonymizovaný příklad,
+- rozšiřování AI asistenta na širší kontext jen kvůli lepšímu pocitu z odpovědi,
+- trvalé debug logy obsahující data, která už po opravě nikdo nepotřebuje.
+
+Oprava automatizace má zlepšit práci a snížit riziko. Nemá ti nenápadně zavést interní sledovací systém. Ten se tváří produktivně jen do chvíle, než začne měnit důvěru v týmu.
+
+### Příklad: Opravný brief po triage support asistenta
+
+Triage vybrala AI návrh support odpovědi. Důvod: pilot skončil před třemi týdny, asistent čte citlivý supportní kontext a zatím není jasné, jestli návrhy opravdu zrychlují řešení bez zvyšování datové stopy.
+
+Opravný brief:
+
+| Pole | Zápis |
+| --- | --- |
+| Automatizace | AI návrh support odpovědi |
+| Triage důvod | vysoká data, pilot po termínu, nejasný verdikt |
+| Typ opravy | účel, datová hranice, výstup |
+| Opravná věta | Uzavřít pilot a rozhodnout, zda asistent zůstane jen jako návrh v ticketu, zúží se na jeden typ dotazu, nebo se vypne. |
+| Datová hranice | Nekopírovat celé tickety do nové tabulky, nečíst billing ani interní poznámky, neukládat návrhy déle než pilotní review potřebuje. |
+| Limit rozsahu | Nepřidáváme automatické odesílání, nové kanály, širší prompt kontext ani měření jednotlivých agentů. |
+| Kontrolní okno | posledních 20 návrhů nebo nejvýše jeden týden, podle toho co nastane dřív |
+| Důkaz hotovo | verdikt ponechat zúženě, upravit, vrátit ručně nebo vypnout je zapsaný v ADR a runbooku |
+| Návrat zpět | vypnout návrhy a ponechat ruční šablonu odpovědi pro jeden ověřený typ dotazu |
+
+Tým potom nekontroluje všechny supportní konverzace. Vezme malý vzorek návrhů, ověří, jestli návrh vedl k použitelné odpovědi, jestli obsahoval zbytečné citlivé detaily a jestli člověk musel návrh zásadně přepisovat. Výstupem není „AI je dobrá“ nebo „AI je špatná“. Výstupem je konkrétní verdikt pro konkrétní automatizaci v konkrétním rozsahu. Ano, je to méně dramatické. Přesně proto se podle toho dá řídit provoz.
+
+### Checklist: Plán jedné opravy automatizace po triage
+
+- [ ] Triage karta byla převedená na jednu opravnou větu.
+- [ ] Je jasné, zda jde o opravu účelu, datové hranice, pravidla, výstupu, vlastnictví, kódu nebo dokumentace.
+- [ ] Brief obsahuje datovou hranici a konkrétní zákaz nového sběru, logování, přenosu nebo publika.
+- [ ] Limit rozsahu říká, co se v této iteraci nebude měnit.
+- [ ] Místo pravdy se opravuje dřív než technické provedení.
+- [ ] Oprava má kontrolní okno a důkaz hotovo.
+- [ ] Test nebo kontrolní průchod obsahuje běžný případ, výjimku a bezpečné selhání.
+- [ ] Staré výstupy, tokeny, výjimky a dokumentace se uklidí, pokud už nemají řídit práci.
+- [ ] Oprava nezavádí nový dohled nad lidmi.
+- [ ] Po kontrolním okně existuje verdikt ponechat, zúžit, vrátit ručně nebo vypnout.
+
+### Mini úkol
+
+Vezmi jednu triage kartu automatizace a napiš k ní opravný brief. Vyplň hlavně opravnou větu, typ opravy, datovou hranici, limit rozsahu a kontrolní okno. Potom zkus jednou větou říct, co se po opravě nesmí stát: například „report nesmí získat nové příjemce“, „asistent nesmí číst interní poznámky“ nebo „skript nesmí začít měnit stav bez člověka“. Pokud tu větu neumíš napsat, oprava ještě není dost zúžená.
+
 ## Zdroje
 
 - IETF RFC 9110: HTTP Semantics - význam HTTP přesměrování a stavů včetně `410 Gone` pro zdroje, které už nejsou dostupné: https://www.rfc-editor.org/rfc/rfc9110.html
@@ -62527,6 +62671,8 @@ Vezmi poslední mapu automatizací a vyber maximálně pět nálezů. Každý p�
 - Nielsen Norman Group: Onboarding Tutorials vs. Contextual Help - rozdíl mezi úvodními tutoriály a kontextovou pomocí: https://www.nngroup.com/articles/onboarding-tutorials/
 
 ## Pracovní log
+
+- 2026-07-28: Doplněna příloha o plánu jedné opravy automatizace po triage bez nového projektu: převod triage karty na opravnou větu, rozlišení opravy účelu, datové hranice, pravidla, výstupu, vlastnictví, kódu a dokumentace, malý opravný brief s limitem rozsahu, doporučené pořadí pravda, hranice, provedení, úklid, ochrana před novým dohledem nad lidmi, příklad support asistenta, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro plán opravy automatizace po triage. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
 - 2026-07-28: Doplněna příloha o triage automatizací po revizi mapy bez panického backlogu: přepis nálezů na rozhodovací věty, prioritizace podle dat, pravomoci, nejasnosti a čerstvé změny, triage karta s limitem práce a datovou brzdou, rozlišení textové, vlastnické a technické opravy, příklad pěti nálezů po měsíční mapě, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro výběr jedné automatizace k opravě po revizi mapy. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
