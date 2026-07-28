@@ -154,6 +154,7 @@ Když se nechceš vracet do celé knihy, hledej konkrétní nástroj podle výst
 | Otevřít opravnou kartu z post-close nálezu bez recyklace pilotu | „opravná karta z nálezu“, „post-close karta“ nebo „nová oprava po review“ | nová karta s jedním důvodem, zúženým rozsahem, datovou hranicí, vlastníkem, kontrolním oknem a stop pravidlem |
 | Převést opravnou kartu do backlogu bez ztráty hranic | „opravná karta do backlogu“, „backlog po post-close nálezu“ nebo „oprava čeká na práci“ | backlogový úkol, který nese důvod, datovou hranici, stop pravidlo a kontrolní okno bez nafouknutí do projektu |
 | Otevřít backlogovou opravu k realizaci bez rozmazání zadání | „backlogová oprava do práce“, „otevření opravy“ nebo „sprint opravy“ | realizační karta, která před prací potvrdí důvod, hranice, aktuálnost nálezu, test, úklid a stop pravidlo |
+| Zkontrolovat implementovanou opravu před mergem | „review implementované opravy“, „před merge“ nebo „oprava před sloučením“ | review karta, která porovná hotovou změnu s realizační kartou, datovou hranicí, testem, dokumentací a zavíracím plánem |
 | Automatizovat rutinu bez skrytého dozoru | „automatizace rutiny“, „automatizační karta“ nebo „vypínač automatizace“ | malý automatizační návrh s účelem, vstupy, výstupem, vlastníkem, logy, ručním rozhodnutím a datem revize |
 | Vyhodnotit automatizaci po prvních bězích | „review automatizace“, „automatizace po spuštění“ nebo „autopilot“ | rozhodnutí ponechat, zúžit, přepsat, vrátit do ruční rutiny nebo vypnout automatizaci podle nálezů, šumu a datové stopy |
 | Vypnout automatizaci bez zapomenutého běhu | „vypnutí automatizace“, „ukončený autopilot“ nebo „automatizace končí“ | vypínací karta s posledním během, revokací tokenů, úklidem výstupů, náhradním postupem a kontrolou veřejných slibů |
@@ -63552,6 +63553,125 @@ Taková karta je připravená k práci. Ne proto, že je dlouhá. Protože brán
 
 Vyber jednu backlogovou opravu, která čeká na práci déle než jeden plánovací cyklus. Než ji označíš jako „in progress“, napiš šest vět realizační karty: otevíráme protože, změníme jen, nezměníme, ověříme přes, uklidíme, zastavíme pokud. Potom zkus přidat jeden lákavý nápad navíc a vědomě ho odmítni nebo přepiš do samostatného nálezu. Pokud to nejde, karta nemá hranice a potřebuje zpátky do rozhodnutí, ne do sprintu.
 
+## Příloha: Review implementované opravy před mergem bez falešné jistoty
+
+Implementovaná backlogová oprava často vypadá hotově ve chvíli, kdy projdou testy a někdo napíše „LGTM“. Jenže u privacy-first provozu je technická správnost jen jedna část výsledku. Stejně důležité je, jestli změna opravdu řeší původní nález, nepřibrala nová data, neposlala výstup novému publiku a nezaložila další provozní rutinu bez konce.
+
+Review před mergem proto nemá být jen kontrola stylu kódu nebo textu. Je to krátké porovnání hotové změny s realizační kartou. Pokud se karta a realita rozcházejí, není to automaticky průšvih. Je to signál, že se má před sloučením udělat nové rozhodnutí místo tichého rozšíření rozsahu.
+
+> Codyho komentář: Zelený build je skvělý. Jen neumí poznat, že jsi omylem poslal report dalším třem lidem, přidal citlivější pole a zapomněl smazat pilotní export. Build je tester, ne svědomí.
+
+### Začni realizační kartou, ne diffem
+
+První otázka review nemá být „co se změnilo v kódu?“, ale „co jsme slíbili změnit?“. Diff je detail provedení. Realizační karta je měřítko, podle kterého poznáš, jestli se oprava neroztekla.
+
+Před čtením změn si otevři šest vět z předchozí přílohy:
+
+| Věta | Co při review ověřit |
+| --- | --- |
+| Otevíráme, protože | zda hotová změna pořád míří na původní nález |
+| Změníme jen | zda diff mění jen slíbenou vrstvu |
+| Nezměníme | zda se mimo rozsah neobjevil „malý bonus“ |
+| Ověříme přes | zda existuje technický, datový a pracovní test |
+| Uklidíme | zda jsou dočasné stopy opravdu připravené k odstranění |
+| Zastavíme, pokud | zda má změna pořád jasný stop signál |
+
+Když realizační karta chybí, review začni jejím zpětným doplněním. Bez ní budeš hodnotit dojem. A dojem je v provozu užitečný asi jako poznámka „nějak to vypadá líp“ v incident logu.
+
+### Udělej pětibodovou review kartu
+
+Review karta má být kratší než původní úkol. Její účel je zachytit rozhodnutí před mergem, ne psát druhou dokumentaci.
+
+Použij pět bodů:
+
+| Bod | Otázka | Verdikt |
+| --- | --- | --- |
+| Shoda s důvodem | Řeší změna původní nález, kvůli kterému vznikla? | ano / ne / částečně |
+| Datová hranice | Přibylo pole, log, export, identifikátor nebo delší retence? | beze změny / schválit / vrátit |
+| Publikum | Uvidí výstup stejný člověk nebo systém jako předtím? | beze změny / nové rozhodnutí |
+| Pravomoc | Zůstává automatizace u stejné úrovně zásahu? | beze změny / nové rozhodnutí |
+| Zavření | Víme, co se po mergi ověří a uklidí? | připraveno / doplnit |
+
+Tahle karta je záměrně malá. Pokud se nedá vyplnit během několika minut, změna je pravděpodobně širší než původní oprava a potřebuje zpátky do rozhodnutí.
+
+### Odděl technické námitky od produktových změn
+
+V review se snadno smíchají tři různé věci: chyba v implementaci, lepší technické řešení a nový produktový požadavek. Všechny mohou být důležité, ale nemají stejný režim.
+
+Praktické rozlišení:
+
+| Typ nálezu | Příklad | Co s tím |
+| --- | --- | --- |
+| Chyba | report padá pro export bez expirace | opravit před mergem |
+| Technické zjednodušení | stejný výpočet je na dvou místech | opravit, pokud je to malé a drží rozsah |
+| Datové rozšíření | přidat e-mail vlastníka exportu pro pohodlí | nové rozhodnutí, protože mění datovou hranici |
+| Nové publikum | posílat report i support leadovi | nové rozhodnutí, protože mění příjemce |
+| Nová pravomoc | report má po expiraci export rovnou smazat | nová karta, protože mění úroveň zásahu |
+
+Dobré review nezabíjí nápady. Jen je odmítá pašovat do cizí opravy. Pokud je nápad dobrý, přežije i jako samostatný nález se svým důvodem, limitem a stop pravidlem.
+
+### Ověř datovou stopu prakticky
+
+U privacy-first opravy nestačí tvrdit, že „data nepřibyla“. Ověř to v místech, kde změna skutečně zanechává stopu.
+
+Projdi minimálně:
+
+- vstupní payload nebo query,
+- transformaci a interní mezivýstupy,
+- finální výstup pro člověka nebo systém,
+- logy, debug výpisy a chybové hlášky,
+- dočasné soubory, exporty, cache nebo tabulky,
+- dokumentaci a screenshoty přiložené k úkolu.
+
+Častá chyba: kód správně omezuje finální report, ale debug log během pilotu ukládá plný objekt. To je pořád datová stopa. Jestli ji nikdo nepotřebuje pro rozhodnutí, nemá v opravě co dělat.
+
+### Připrav merge verdikt
+
+Na konci review napiš jeden z pěti verdiktů. Bez verdiktu se review mění na komentářovou polévku, ze které si každý vytáhne něco jiného.
+
+| Verdikt | Kdy ho použít | Další krok |
+| --- | --- | --- |
+| Sloučit | změna odpovídá kartě, testy sedí, zavření je připravené | merge a naplánovat kontrolní okno |
+| Sloučit po drobné opravě | chybí malá věc bez dopadu na hranice | opravit, znovu rychle zkontrolovat, sloučit |
+| Vrátit k úpravě | oprava neřeší původní nález nebo má technickou chybu | upravit v rámci stejné karty |
+| Zastavit a rozhodnout | změna rozšiřuje data, publikum nebo pravomoc | otevřít nové rozhodnutí před další prací |
+| Zavřít bez merge | nález už neplatí nebo oprava nepřináší hodnotu | uzavřít kartu s důvodem a uklidit rozpracované stopy |
+
+Nejzdravější tým umí použít i poslední verdikt. Někdy je nejlepší merge ten, který se nestane, protože realita se změnila dřív než pull request.
+
+### Příklad: Metadata exportů před sloučením
+
+Tým dokončil opravu retenčního reportu. Původní karta říkala: přidat jen metadata portálových exportů, ne obsah exportů, ne nové příjemce a ne denní frekvenci.
+
+Review karta může vypadat takto:
+
+| Bod | Zápis |
+| --- | --- |
+| Shoda s důvodem | Report nově zahrnuje portálové exporty, které předtím vlastník dohledával ručně. |
+| Datová hranice | Přibyla povolená metadata: ID, typ, vytvoření, expirace, vlastník. Nepřibyl obsah exportu ani e-mail zákazníka. |
+| Publikum | Příjemce zůstává vlastník retenční mapy. Žádný nový kanál. |
+| Pravomoc | Report pouze ukazuje položky k rozhodnutí. Nic nemaže automaticky. |
+| Test | Prošel test generování, kontrola povolených polí a ruční kontrola jednoho vzorku výstupu. |
+| Úklid | Po dvou běžných týdenních bězích se smaže dočasný ruční seznam a doplní runbook. |
+| Verdikt | Sloučit po doplnění jedné věty do runbooku: report nesmí obsahovat obsah exportů. |
+
+Tady review nevymýšlí nový projekt. Jen chrání původní opravu před tím, aby se z ní stal nový datový aparát.
+
+### Checklist: Review implementované opravy před mergem
+
+- [ ] Review začalo realizační kartou, ne jen diffem.
+- [ ] Ověřil jsem, že změna řeší původní nález.
+- [ ] Zkontroloval jsem, že mimo rozsah nepřibyla nová data, příjemce, frekvence ani pravomoc.
+- [ ] Technické námitky jsem oddělil od nových produktových požadavků.
+- [ ] Datovou stopu jsem prošel ve vstupu, výstupu, logách, cache, exportech a dokumentaci.
+- [ ] Test má technickou, datovou i pracovní vrstvu.
+- [ ] Je jasné, co se po mergi ověří a co se uklidí.
+- [ ] Verdikt je jeden z pěti: sloučit, sloučit po drobné opravě, vrátit k úpravě, zastavit a rozhodnout, zavřít bez merge.
+
+### Mini úkol
+
+Vezmi jednu hotovou opravu, která čeká na review. Nečti hned diff. Nejdřív si napiš původní realizační kartu nebo ji zpětně rekonstruuj v šesti větách. Potom vyplň pětibodovou review kartu: shoda s důvodem, datová hranice, publikum, pravomoc a zavření. Pokud najdeš návrh, který rozšiřuje data, příjemce nebo automatický zásah, neřeš ho komentářem „to je asi v pohodě“. Přepiš ho na samostatné rozhodnutí, nebo ho z aktuální opravy vyndej.
+
 ## Zdroje
 
 - IETF RFC 9110: HTTP Semantics - význam HTTP přesměrování a stavů včetně `410 Gone` pro zdroje, které už nejsou dostupné: https://www.rfc-editor.org/rfc/rfc9110.html
@@ -63745,6 +63865,8 @@ Vyber jednu backlogovou opravu, která čeká na práci déle než jeden plánov
 - Nielsen Norman Group: Onboarding Tutorials vs. Contextual Help - rozdíl mezi úvodními tutoriály a kontextovou pomocí: https://www.nngroup.com/articles/onboarding-tutorials/
 
 ## Pracovní log
+
+- 2026-07-28: Doplněna příloha o review implementované backlogové opravy před mergem bez falešné jistoty: návrat k realizační kartě před čtením diffu, pětibodová review karta, oddělení technických námitek od nových produktových požadavků, praktická kontrola datové stopy ve vstupech, výstupech, logách a dokumentaci, pět merge verdiktů, příklad retenčního reportu, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro kontrolu implementované opravy před sloučením. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
 - 2026-07-28: Doplněna příloha o otevření backlogové opravy k realizaci bez rozmazání zadání: ověření, že původní nález pořád existuje, šestivětá realizační karta, ochrana implementace před rozsahem navíc, test podle technické, datové a pracovní vrstvy, zavírací plán už před začátkem, příklad sprintové opravy retenčního reportu, checklist a mini úkol; do rejstříku pracovních nástrojů přidána směrovka pro otevření backlogové opravy. Bez nových aktuálních externích tvrzení, tedy bez potřeby doplňovat nové zdroje. Script pro tento běh předal `webOk: true` a `httpStatus: 200`, takže nebyla potřeba opravovat dostupnost webu.
 
